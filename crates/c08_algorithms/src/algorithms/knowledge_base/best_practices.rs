@@ -1,6 +1,8 @@
 //! # 算法最佳实践模块
+//! # algorithm module
 //!
 //! 本模块提供算法实现和使用的最佳实践。
+//! This module provides algorithm and 。
 use serde::{Deserialize, Serialize};
 
 /// 最佳实践
@@ -15,10 +17,12 @@ pub struct BestPractices {
 }
 
 /// 最佳实践分析器
+/// analyze
 pub struct BestPracticesAnalyzer;
 
 impl BestPracticesAnalyzer {
     /// 分析排序算法的最佳实践
+    /// analyze sorting algorithm
     pub fn analyze_sorting_best_practices(algorithm_name: &str) -> BestPractices {
         match algorithm_name {
             "QuickSort" => BestPractices {

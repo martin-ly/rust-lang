@@ -1,9 +1,12 @@
 //! # 搜索算法模块
+//! # searching algorithm module
 //!
 //! 本模块实现了各种搜索算法。
+//! this module searching algorithm 。
 use serde::{Deserialize, Serialize};
 
 /// 搜索算法类型
+/// searching algorithm type
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum SearchingAlgorithm {
     LinearSearch,
@@ -13,6 +16,7 @@ pub enum SearchingAlgorithm {
 }
 
 /// 搜索结果
+/// result
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SearchResult {
     pub found: bool,
@@ -22,10 +26,12 @@ pub struct SearchResult {
 }
 
 /// 搜索算法实现
+/// searching algorithm
 pub struct SearchingAlgorithms;
 
 impl SearchingAlgorithms {
     /// 线性搜索
+    /// linear search
     pub fn linear_search<T: PartialEq>(arr: &[T], target: &T) -> SearchResult {
         let start = std::time::Instant::now();
         let mut comparisons = 0;
@@ -51,6 +57,7 @@ impl SearchingAlgorithms {
     }
 
     /// 二分搜索
+    /// binary search
     pub fn binary_search<T: Ord>(arr: &[T], target: &T) -> SearchResult {
         let start = std::time::Instant::now();
         let mut comparisons = 0;

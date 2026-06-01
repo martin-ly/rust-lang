@@ -2,20 +2,15 @@
 #![allow(clippy::redundant_pattern_matching)]
 #![allow(clippy::collapsible_if)]
 //!
-//! 本模块包含使用 Loom 进行的全面并发测试，确保并发代码的正确性。
-//! This module contains comprehensive concurrency tests using Loom to ensure correctness of concurrent code.
-//!
-//! 在 Windows 上使用 4MB 栈以避免 loom 状态空间探索导致的栈溢出。
-//! Uses 4MB stack on Windows to avoid stack overflow from loom's state space exploration.
-//!
 //! Windows 上 loom 状态空间探索易导致栈溢出，全部 loom 测试在 Windows 上默认忽略。
-//! Run with `cargo test -p c05_threads --test loom_comprehensive -- --ignored` to run them.
+//! Windows on loom state space stack overflow ，all loom in Windows on 。
 use loom::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
 use loom::sync::{Arc, Condvar, Mutex};
 use loom::thread;
 use std::sync::mpsc;
 
 /// 在较大栈上运行 loom 模型，避免 Windows 上栈溢出
+/// in stack on Run loom ， Windows on stack overflow
 fn loom_model<F, R>(f: F) -> R
 where
     F: FnOnce() -> R + Send + 'static,
@@ -30,7 +25,6 @@ where
         .unwrap()
 }
 
-/// 测试基本的原子操作 / Test basic atomic operations
 #[test]
 #[cfg_attr(target_os = "windows", ignore = "loom stack overflow on Windows")]
 fn test_atomic_operations() {
@@ -85,6 +79,7 @@ fn test_atomic_boolean() {
 }
 
 /// 测试互斥锁 / Test mutex
+/// mutex / Test mutex
 #[test]
 #[cfg_attr(target_os = "windows", ignore = "loom stack overflow on Windows")]
 fn test_mutex() {
@@ -235,6 +230,7 @@ fn test_rwlock() {
 
 /// 测试屏障 / Test barrier
 /// 在 Windows 上 loom Barrier 状态空间探索易导致栈溢出，暂时忽略
+/// in Windows on loom Barrier state space stack overflow ，temporary
 #[test]
 #[cfg_attr(
     target_os = "windows",
@@ -305,7 +301,6 @@ fn test_semaphore() {
     });
 }
 
-/// 测试复杂的并发场景 / Test complex concurrency scenario
 #[test]
 #[cfg_attr(target_os = "windows", ignore = "loom stack overflow on Windows")]
 fn test_complex_concurrency() {
@@ -493,6 +488,7 @@ fn test_timeout() {
 }
 
 /// 辅助函数：黑盒 / Helper function: black box
+/// 辅助function：黑盒 / Helper function: black box
 fn black_box<T>(x: T) -> T {
     x
 }

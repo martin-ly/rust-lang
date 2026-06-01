@@ -1,6 +1,7 @@
 //! 设计模式模块错误路径测试套件 / Design Patterns Module Error Paths Test Suite
 
 /// 测试错误输入情况
+/// situation
 #[test]
 fn test_error_inputs() {
     // 测试无效模式名称
@@ -13,6 +14,7 @@ fn test_error_inputs() {
 }
 
 /// 测试错误状态情况
+/// state situation
 #[test]
 fn test_error_states() {
     // 测试模式不存在的情况
@@ -25,6 +27,7 @@ fn test_error_states() {
 }
 
 /// 测试异常情况
+/// situation
 #[test]
 fn test_exception_cases() {
     // 测试模式状态异常
@@ -37,6 +40,7 @@ fn test_exception_cases() {
 }
 
 /// 测试资源耗尽情况
+/// situation
 #[test]
 fn test_resource_exhaustion() {
     // 测试大量模式实例（模拟）
@@ -52,6 +56,7 @@ fn test_resource_exhaustion() {
 }
 
 /// 测试并发安全
+/// concurrency
 #[test]
 fn test_concurrent_safety() {
     use std::sync::{Arc, Mutex};

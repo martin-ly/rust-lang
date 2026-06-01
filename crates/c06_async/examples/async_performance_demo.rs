@@ -1,15 +1,23 @@
 //! 异步性能优化演示
-//!
+//! async performance optimization demonstration
 //! 本示例展示了异步编程中的各种性能优化技术：
+//! this example async in performance optimization technique ：
 //! - 内存优化和零拷贝
+//! - memory optimization and
 //! - 并发控制和资源管理
+//! - concurrency and
 //! - 批量处理优化
+//! - optimization
+//! - 批量Handleoptimization
 //! - 缓存策略
+//! - strategy
+//! - 缓存strategy
 //! - 异步I/O优化
+//! - async I/Ooptimization
 //! - 性能监控和指标
-//!
+//! - performance and indicator
 //! 运行方式：
-//! ```bash
+//! Run way ：
 //! cargo run --example async_performance_demo
 //! ```
 use anyhow::Result;

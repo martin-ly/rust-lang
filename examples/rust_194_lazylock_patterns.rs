@@ -1,6 +1,3 @@
-//! Rust 1.94 `LazyLock` 和 `LazyCell` 深度示例
-//!
-//! 本文件演示 Rust 1.94 新增的延迟初始化 API 在生产场景中的应用。
 
 use std::cell::LazyCell;
 use std::sync::LazyLock;
@@ -9,6 +6,7 @@ use std::time::Instant;
 // ==================== 全局配置示例 ====================
 
 /// 全局应用配置（延迟初始化）
+/// global application （）
 static APP_CONFIG: LazyLock<AppConfig> = LazyLock::new(|| {
     println!("[INIT] 加载应用配置...");
     AppConfig::from_env()
@@ -35,13 +33,16 @@ impl AppConfig {
 }
 
 /// ✅ Rust 1.94: 使用 get() 进行热路径优化
-///
+/// ✅ Rust 1.94: get() optimization
+/// ✅ Rust 1.94: Use get() 进行热路径optimization
 /// 如果配置已初始化，直接返回；不会触发初始化
+/// if ，；
 pub fn get_config_fast() -> Option<&'static AppConfig> {
     LazyLock::get(&APP_CONFIG)
 }
 
 /// 标准访问方式（可能触发初始化）
+/// standard way （may ）
 pub fn get_config() -> &'static AppConfig {
     &APP_CONFIG
 }
@@ -78,6 +79,7 @@ impl ConnectionPool {
 }
 
 /// 性能关键路径：使用 Rust 1.94 get() 优化
+/// performance key ： Rust 1.94 get() optimization
 pub fn execute_query_optimized(query: &str) -> Result<String, String> {
     // 热路径：检查是否已初始化（无锁）
     if let Some(pool) = LazyLock::get(&CONNECTION_POOL) {
@@ -96,6 +98,7 @@ pub fn execute_query_optimized(query: &str) -> Result<String, String> {
 // ==================== 单线程缓存示例 ====================
 
 /// 单线程延迟初始化缓存
+/// thread
 pub struct LocalCache {
     data: LazyCell<Vec<u8>>,
     access_count: usize,
@@ -113,16 +116,20 @@ impl LocalCache {
     }
 
     /// ✅ Rust 1.94: get() - 安全读取，不触发初始化
+    /// ✅ Rust 1.94: get() - ，
+    /// ✅ Rust 1.94: get() - 安全Read，不触发Initialize
     pub fn peek(&self) -> Option<&[u8]> {
         LazyCell::get(&self.data).map(|v| v.as_slice())
     }
 
     /// 读取或触发初始化
+    /// or
     pub fn get(&self) -> &[u8] {
         &*self.data
     }
 
     /// ✅ Rust 1.94: force_mut() - 强制初始化并获取可变引用
+    /// ✅ Rust 1.94: force_mut() - and reference
     pub fn update(&mut self, new_data: Vec<u8>) {
         println!("[UPDATE] 替换缓存数据");
         let cache = LazyCell::force_mut(&mut self.data);
@@ -141,6 +148,8 @@ impl LocalCache {
 // ==================== 多阶段配置示例 ====================
 
 /// 阶段 1: 编译期配置
+/// stage 1:
+/// stage 1: 编译期Configure
 static COMPILE_CONFIG: LazyLock<ConfigMap> = LazyLock::new(|| {
     let mut map = ConfigMap::new();
     map.insert("app.name", "MyApplication");
@@ -149,6 +158,7 @@ static COMPILE_CONFIG: LazyLock<ConfigMap> = LazyLock::new(|| {
 });
 
 /// 阶段 2: 运行时配置
+/// stage 2: runtime
 static RUNTIME_CONFIG: LazyLock<ConfigMap> = LazyLock::new(|| {
     let mut map = ConfigMap::new();
 
@@ -184,6 +194,7 @@ impl ConfigMap {
 }
 
 /// 高效配置查找（优先运行时，回退编译期）
+/// efficient （runtime ，）
 pub fn lookup_config(key: &str) -> Option<&'static str> {
     // 先检查运行时配置（热路径）
     if let Some(cfg) = LazyLock::get(&RUNTIME_CONFIG).and_then(|m| m.get(key)) {

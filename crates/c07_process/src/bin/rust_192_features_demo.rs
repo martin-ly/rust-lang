@@ -1,6 +1,8 @@
 //! Rust 1.92.0 新特性演示程序
+//! Rust 1.92.0 feature demonstration program
 //!
 //! 这个程序展示了如何在 c07_process 项目中使用最新的 Rust 1.92.0 特性
+//! program in c07_process project in Rust 1.92.0 feature
 use c07_process::rust_192_features::{
     calculate_process_pool_size, check_process_states, compare_process_lists,
     demonstrate_rust_192_process_features, ProcessInfo, ProcessQueue, ProcessResourceAllocator,

@@ -1,61 +1,94 @@
 //! 算法综合演示程序
-//!
+//! algorithm synthesize demonstration program
 //! 本示例展示 C08 算法模块的各种算法和数据结构的使用。
-//!
+//! this example C08 algorithm module algorithm and data structure 。
 //! ## 📐 知识结构
-//!
+//! ## 📐 structure
+//! ## 📐 知识structure
 //! ### 核心概念
-//!
+//! ### core concept
 //! - **排序算法**: 将数据按特定顺序排列的算法
+//! - **sorting algorithm **: will order arrangement algorithm
 //!   - **属性**: 时间复杂度、空间复杂度、稳定性
+//!   - **attribute **: time complexity 、space complexity 、
+//!   - **attribute**: time complexity、space complexity、稳定性
 //!   - **关系**: 与数据结构、搜索算法相关
-//!
+//!   - ****: and data structure 、searching algorithm
 //! - **搜索算法**: 在数据集中查找特定元素的算法
+//! - **searching algorithm **: in in element algorithm
 //!   - **属性**: 时间复杂度、空间复杂度、前提条件
+//!   - **attribute **: time complexity 、space complexity 、prerequisite condition
 //!   - **关系**: 与排序算法、数据结构相关
-//!
+//!   - ****: and sorting algorithm 、data structure
 //! - **图算法**: 处理图数据结构的算法
+//! - **graph algorithm **: data structure algorithm
 //!   - **属性**: BFS、DFS、最短路径
+//!   - **attribute **: BFS、DFS、
+//!   - **attribute**: BFS、DFS、最短路径
 //!   - **关系**: 与数据结构、动态规划相关
-//!
+//!   - ****: and data structure 、dynamic programming
 //! ### 思维导图
-//!
-//! ```text
+//! ###
 //! 算法综合演示
-//! │
+//! algorithm synthesize demonstration
 //! ├── 排序算法
+//! ├── sorting algorithm
 //! │   ├── 快速排序
+//! │ ├── quick sort
 //! │   ├── 归并排序
+//! │ ├── merge sort
 //! │   └── 堆排序
+//! │ └── heap sort
 //! ├── 搜索算法
+//! ├── searching algorithm
 //! │   ├── 二分搜索
+//! │ ├── binary search
 //! │   ├── 线性搜索
+//! │ ├── linear search
 //! │   └── 插值搜索
+//! │ └── interpolation search
 //! ├── 图算法
-//! │   ├── BFS
+//! ├── graph algorithm
 //! │   └── DFS
 //! ├── 动态规划
+//! ├── dynamic programming
 //! │   ├── 斐波那契
-//! │   ├── LCS
+//! │ ├──
 //! │   └── 0-1 背包
+//! │ └── 0-1
+//! │ └── 0-1 背包
+//! │ └── 0-1
 //! └── 数据结构
+//! └── data structure
 //!     ├── 栈
+//!     ├── stack
 //!     ├── 队列
+//!     ├──
 //!     └── 二叉搜索树
-//! ```
-//!
+//!     └── tree
+//!     └── 二叉Searchtree
 //! ### 概念矩阵
-//!
+//! ### concept
 //! | 算法类型 | 时间复杂度 | 空间复杂度 | 稳定性 | 适用场景 |
-//! |---------|-----------|-----------|--------|---------|
+//! | algorithm type | time complexity | space complexity | | scenario |
+//! | algorithmtype | time complexity | space complexity | 稳定性 | 适用scenario |
 //! | 快速排序 | O(n log n) | O(log n) | 否 | 通用排序 |
+//! | quick sort | O(n log n) | O(log n) | | ordering |
+//! | quick sort | O(n log n) | O(log n) | 否 | 通用ordering |
 //! | 归并排序 | O(n log n) | O(n) | 是 | 需要稳定性 |
+//! | merge sort | O(n log n) | O(n) | | |
 //! | 堆排序 | O(n log n) | O(1) | 否 | 内存受限 |
+//! | heap sort | O(n log n) | O(1) | | memory |
 //! | 二分搜索 | O(log n) | O(1) | - | 已排序数组 |
+//! | binary search | O(log n) | O(1) | - | ordering |
+//! | binary search | O(log n) | O(1) | - | 已orderingarray |
 //! | 线性搜索 | O(n) | O(1) | - | 未排序数组 |
+//! | linear search | O(n) | O(1) | - | ordering |
+//! | linear search | O(n) | O(1) | - | 未orderingarray |
 use std::collections::HashMap;
 
 /// 排序算法演示
+/// sorting algorithm demonstration
 fn sorting_demo() {
     println!("📊 排序算法演示");
     println!("================");
@@ -82,6 +115,7 @@ fn sorting_demo() {
 }
 
 /// 搜索算法演示
+/// searching algorithm demonstration
 fn searching_demo() {
     println!("🔍 搜索算法演示");
     println!("================");
@@ -108,6 +142,7 @@ fn searching_demo() {
 }
 
 /// 图算法演示
+/// graph algorithm demonstration
 fn graph_demo() {
     println!("🕸️  图算法演示");
     println!("================");
@@ -129,6 +164,7 @@ fn graph_demo() {
 }
 
 /// 动态规划演示
+/// dynamic programming demonstration
 fn dynamic_programming_demo() {
     println!("💡 动态规划演示");
     println!("================");
@@ -151,6 +187,7 @@ fn dynamic_programming_demo() {
 }
 
 /// 数据结构演示
+/// data structure demonstration
 fn data_structures_demo() {
     println!("📦 数据结构演示");
     println!("================");

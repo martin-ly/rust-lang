@@ -1,30 +1,31 @@
 //! Embassy 异步嵌入式框架 —— Async/Await on Bare Metal
-//!
 //! # 概述
-//!
-//! [Embassy](https://embassy.dev/) 是一个用于嵌入式系统的异步运行时，
+//! #
 //! 允许在 **bare-metal** 环境中使用 `async`/`await` 编写固件。
-//!
+//! in **bare-metal** environment in `async`/`await` firmware 。
 //! # 核心特性
-//!
+//! # core feature
 //! | 特性 | 说明 |
-//! |------|------|
+//! | feature | explain |
 //! | **Async Executor** | 单线程协作式调度器，零开销抽象 |
-//! | **Time Driver** | 硬件定时器驱动的 `Timer` 和 `Ticker` |
+//! | **Async Executor** | thread ，overhead |
 //! | **HAL 抽象** | 跨芯片的统一异步外设接口 |
-//! | **USB/TCP/WiFi** | 全栈异步网络协议 |
+//! | **HAL ** | async outside |
 //! | **Stable Rust** | MSRV 1.75，无需 nightly |
-//!
 //! # 架构对比
-//!
+//! # architecture to
 //! | 模式 | 代码风格 | 调度方式 | 适用场景 |
-//! |------|---------|---------|---------|
+//! | | | way | scenario |
 //! | 裸机轮询 | 超级循环 + 状态机 | 手动 | 极简设备 |
+//! | | circulation + state machine | | |
+//! | 裸机Poll | 超级circulation + state machine | 手动 | 极简设备 |
 //! | RTIC | 基于硬件任务 | 优先级抢占 | 硬实时 |
+//! | RTIC | hardware task | | |
+//! | RTIC | Based onhardwaretask | 优先级抢占 | 硬实时 |
 //! | **Embassy** | `async`/`await` | 协作式 + 中断唤醒 | 复杂协议栈 |
-//!
+//! | **Embassy** | `async`/`await` | + in | complex stack |
 //! # 参考
-//! - [Embassy Book](https://embassy.dev/book/)
+//! # reference
 //! - [ embassy-rs GitHub](https://github.com/embassy-rs/embassy)
 
 // =========================================================================
@@ -33,10 +34,9 @@
 
 /// # Embassy Executor
 ///
-/// Embassy 的核心是单线程 executor，它运行在中断上下文之外的主循环中。
 /// 所有 `async` 任务共享一个调用栈，通过 `Waker` 机制在中断事件发生时恢复执行。
-///
-/// ## 与 Tokio 的差异
+/// all `async` task stack ， `Waker` mechanism in in 。
+/// ## and Tokio 差异
 // | 维度 | Tokio (用户态) | Embassy (裸机) |
 // |------|---------------|---------------|
 // | 线程模型 | 多线程线程池 | 单线程 + 中断 |
@@ -49,6 +49,7 @@ pub struct EmbassyExecutorConcept;
 
 impl EmbassyExecutorConcept {
     /// Executor 初始化概念（真实硬件代码）
+    /// Executor concept （real hardware ）
     pub fn executor_init_concept() -> &'static str {
         r#"
 // main.rs (真实 Embassy 程序)
@@ -93,6 +94,7 @@ async fn sensor_task(adc: ADC) {
     }
 
     /// 任务 spawning 概念
+    /// task spawning concept
     pub fn task_spawning_concept() -> &'static str {
         r#"
 Embassy 任务系统:
@@ -119,18 +121,16 @@ Embassy 任务系统:
 // =========================================================================
 
 /// # Embassy HAL 抽象
-///
-/// Embassy 为多种芯片提供了统一的异步 HAL：
 // - `embassy-stm32` — STM32 全系列
 // - `embassy-nrf` — Nordic nRF52/nRF53/nRF91
 // - `embassy-rp` — Raspberry Pi RP2040/RP2350
 // - `embassy-esp` — Espressif ESP32
 ///
-/// 所有外设操作都是 `async fn`，等待硬件中断完成。
 pub struct EmbassyHalConcept;
 
 impl EmbassyHalConcept {
     /// GPIO 异步操作概念
+    /// GPIO async concept
     pub fn async_gpio_concept() -> &'static str {
         r#"
 // 异步 GPIO (Embassy HAL)
@@ -160,6 +160,7 @@ async fn pwm_breathe(pwm: SimplePwm<'static, TIM2>) {
     }
 
     /// 异步 UART 概念
+    /// async UART concept
     pub fn async_uart_concept() -> &'static str {
         r#"
 // 异步 UART (非阻塞 + 中断驱动)
@@ -179,6 +180,7 @@ async fn uart_echo(uart: Uart<'static, USART1>) {
     }
 
     /// 异步 SPI + DMA 概念
+    /// async SPI + DMA concept
     pub fn async_spi_dma_concept() -> &'static str {
         r#"
 // 异步 SPI + DMA (零 CPU 拷贝)
@@ -201,6 +203,7 @@ async fn spi_transfer_dma(
 // =========================================================================
 
 /// # Embassy-Net — 裸机 TCP/IP 栈
+/// # Embassy-Net — 裸机 TCP/IP stack
 // Embassy 提供了完整的 `no_std` 网络协议栈：
 // - `embassy-net` — TCP/IP 栈（基于 smoltcp）
 // - `embassy-usb` — USB CDC-ECM/RNDIS 以太网
@@ -210,6 +213,8 @@ pub struct EmbassyNetConcept;
 
 impl EmbassyNetConcept {
     /// TCP 客户端概念
+    /// TCP concept
+    /// TCP 客户端concept
     pub fn tcp_client_concept() -> &'static str {
         r#"
 // Embassy TCP 客户端
@@ -241,6 +246,7 @@ async fn http_get(
     }
 
     /// HTTP 服务器概念 (embassy-net + picoserve)
+    /// HTTP 服务器concept (embassy-net + picoserve)
     pub fn http_server_concept() -> &'static str {
         r#"
 // 嵌入式 HTTP 服务器 (picoserve + embassy)
@@ -293,6 +299,7 @@ pub struct EmbassyTimeConcept;
 
 impl EmbassyTimeConcept {
     /// 定时器模式对比
+    /// to
     pub fn timer_patterns() -> &'static str {
         r#"
 // 1. 单次延迟
@@ -317,7 +324,7 @@ Timer::at(deadline).await;
 "#
     }
 
-    /// 与 RTOS tick 的差异
+    /// and RTOS tick 差异
     pub fn vs_rtos_tick() -> &'static str {
         r#"
 Embassy Time vs RTOS Tick:
@@ -368,9 +375,8 @@ Embassy vs RTIC 对比:
 // 6. 项目集成检查清单
 // =========================================================================
 
-/// # 在本项目中使用 Embassy 的检查清单
-///
 /// 当需要添加真实硬件示例时，按此清单执行。
+/// when real hardware example ，this 。
 pub struct EmbassyIntegrationChecklist;
 
 impl EmbassyIntegrationChecklist {
@@ -393,9 +399,8 @@ impl EmbassyIntegrationChecklist {
 // =========================================================================
 
 /// # Embassy 任务模型
-///
+/// # Embassy task
 /// Embassy 使用 `#[embassy_executor::task]` 属性定义异步任务：
-/// `ignore
 /// #[embassy_executor::task]
 /// async fn blink_led(mut led: Output<'static, PIN>) {
 ///     loop {
@@ -404,12 +409,12 @@ impl EmbassyIntegrationChecklist {
 ///         led.set_low();
 ///         Timer::after(Duration::from_millis(300)).await;
 ///     }
-/// }
 /// `
 pub struct EmbassyTaskModel;
 
 impl EmbassyTaskModel {
     /// 任务创建概念说明
+    /// task concept explain
     pub fn task_spawn_concept() -> &'static str {
         r#"
 // main.rs
@@ -433,6 +438,7 @@ async fn main(spawner: Spawner) {
     }
 
     /// 任务间通信：Channel
+    /// task ：Channel
     pub fn channel_concept() -> &'static str {
         r#"
 // 静态 Channel（无堆分配）
@@ -459,7 +465,7 @@ async fn processing_task() {
 "#
     }
 
-    /// Embassy 与 RTIC 的对比决策
+    /// Embassy and RTIC to比决策
     pub fn embassy_vs_rtic() -> &'static str {
         r#"
 Embassy vs RTIC 决策树：
@@ -489,16 +495,15 @@ Embassy vs RTIC 决策树：
 // =========================================================================
 
 /// # Embassy 网络生态
-///
-/// Embassy 提供了完整的异步网络协议栈：
-///
+/// # Embassy network ecosystem
 /// | 协议层 | Crate | 说明 |
-/// |--------|-------|------|
-/// | TCP/IP | embassy-net | 基于 smoltcp 的异步 TCP/UDP |
+/// | | Crate | explain |
+/// | 协议层 | Crate | explain |
 /// | DHCP | embassy-net | 内置 DHCP 客户端 |
 /// | DNS | embassy-net | 内置 DNS 解析 |
 /// | HTTP | reqwless | 嵌入式 HTTP 客户端 |
 /// | MQTT | rust-mqtt | 异步 MQTT 客户端 |
+/// | MQTT | rust-mqtt | async MQTT 客户端 |
 /// | BLE | nrf-softdevice / trouble | 蓝牙低功耗 |
 pub struct EmbassyNetworking;
 

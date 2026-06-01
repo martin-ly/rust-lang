@@ -1,10 +1,16 @@
 //! # 算法执行模式
+//! # algorithm
 //!
 //! 本模块定义了算法的不同执行模式，充分利用 Rust 1.90 的特性：
+//! this module definition algorithm ， Rust 1.90 feature ：
 //! - 同步执行：传统的单线程执行
+//! - synchronous ：thread
 //! - 异步执行：基于 tokio 的异步执行
+//! - async ： tokio async
 //! - 并行执行：基于 rayon 的多线程并行执行
+//! - parallelism ： rayon thread parallelism
 //! - 分布式执行：跨节点的分布式计算
+//! - distribution ：node distribution
 pub mod async_exec;
 pub mod distributed;
 pub mod parallel;
@@ -21,6 +27,7 @@ use std::future::Future;
 use std::pin::Pin;
 
 /// 算法执行结果
+/// algorithm result
 #[derive(Debug, Clone)]
 pub struct ExecutionResult<T> {
     pub result: T,
@@ -30,11 +37,13 @@ pub struct ExecutionResult<T> {
 }
 
 /// 同步算法特征
+/// synchronous algorithm
 pub trait SyncAlgorithm<T, R> {
     fn execute(&self, input: T) -> Result<R, Box<dyn std::error::Error + Send + Sync>>;
 }
 
 /// 异步算法特征
+/// async algorithm
 pub trait AsyncAlgorithm<T, R>: Send + Sync {
     fn execute(
         &self,
@@ -45,6 +54,7 @@ pub trait AsyncAlgorithm<T, R>: Send + Sync {
 }
 
 /// 并行算法特征
+/// parallel algorithm
 pub trait ParallelAlgorithm<T, R> {
     fn execute(&self, input: T) -> Result<R, Box<dyn std::error::Error + Send + Sync>>;
     fn execute_with_threads(
@@ -55,6 +65,7 @@ pub trait ParallelAlgorithm<T, R> {
 }
 
 /// 分布式算法特征
+/// distributed algorithm
 pub trait DistributedAlgorithm<T, R> {
     fn execute(
         &self,
@@ -64,10 +75,12 @@ pub trait DistributedAlgorithm<T, R> {
 }
 
 /// 算法执行器
+/// algorithm
 pub struct AlgorithmExecutor;
 
 impl AlgorithmExecutor {
     /// 执行同步算法
+    /// synchronous algorithm
     pub fn execute_sync<A, T, R>(
         algorithm: A,
         input: T,
@@ -90,6 +103,7 @@ impl AlgorithmExecutor {
     }
 
     /// 执行异步算法
+    /// async algorithm
     pub async fn execute_async<A, T, R>(
         algorithm: A,
         input: T,
@@ -113,6 +127,7 @@ impl AlgorithmExecutor {
     }
 
     /// 执行并行算法
+    /// parallel algorithm
     pub fn execute_parallel<A, T, R>(
         algorithm: A,
         input: T,
@@ -135,6 +150,7 @@ impl AlgorithmExecutor {
     }
 
     /// 执行分布式算法
+    /// distributed algorithm
     pub fn execute_distributed<A, T, R>(
         algorithm: A,
         input: T,

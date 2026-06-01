@@ -2,15 +2,18 @@
 
 use libfuzzer_sys::fuzz_target;
 
-/// 模糊测试算法 crate 的输入解析边界条件
-/// 目标: 确保解析任意输入不会 panic、越界或产生未定义行为
-///
 /// # 检测范围
+/// # scope
+/// # 检测range
 /// - 数值解析边界 (i64, u128, f64)
+/// - edge (i64, u128, f64)
 /// - 字节序列处理
+/// - sequence
 /// - UTF-8 字符串转换
-///
+/// - UTF-8 conversion
+/// - UTF-8 字符串conversion
 /// # 参考实践
+/// # reference
 /// - Google OSS-Fuzz 最佳实践
 /// - Cloudflare Rust 模糊测试经验
 fuzz_target!(|data: &[u8]| {

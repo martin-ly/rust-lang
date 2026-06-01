@@ -6,8 +6,10 @@ use std::pin::Pin;
 use std::task::{Context, Poll};
 
 /// Rust 1.89 异步控制流新特性
+/// Rust 1.89 async stream feature
 pub mod async_control_flow_features {
     /// 异步控制流演示
+    /// async stream demonstration
     pub async fn demonstrate_async_control_flow() {
         println!("Rust 1.89 异步控制流新特性演示");
 
@@ -21,6 +23,8 @@ pub mod async_control_flow_features {
     }
 
     /// 改进的异步函数
+    /// async function
+    /// 改进asyncfunction
     async fn async_function_189() -> i32 {
         // 模拟异步操作
         tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
@@ -28,6 +32,7 @@ pub mod async_control_flow_features {
     }
 
     /// 异步控制流示例
+    /// async stream example
     async fn async_control_flow_example() -> i32 {
         let mut result = 0;
 
@@ -45,10 +50,12 @@ pub mod async_control_flow_features {
 }
 
 /// Rust 1.89 异步迭代器新特性
+/// Rust 1.89 async feature
 pub mod async_iterators_189 {
     use super::*;
 
     /// 异步迭代器结构
+    /// async structure
     pub struct AsyncRange {
         _start: i32, // 添加下划线前缀表示暂时未使用
         end: i32,
@@ -80,6 +87,7 @@ pub mod async_iterators_189 {
     }
 
     /// 异步迭代器演示
+    /// async demonstration
     pub async fn demonstrate_async_iterators() {
         println!("Rust 1.89 异步迭代器新特性演示");
 
@@ -90,8 +98,10 @@ pub mod async_iterators_189 {
 }
 
 /// Rust 1.89 异步错误处理新特性
+/// Rust 1.89 async error handling feature
 pub mod async_error_handling_189 {
     /// 异步错误处理演示
+    /// async Error handling demonstration
     pub async fn demonstrate_async_error_handling() -> Result<i32, String> {
         println!("Rust 1.89 异步错误处理新特性演示");
 
@@ -101,6 +111,7 @@ pub mod async_error_handling_189 {
     }
 
     /// 带错误的异步操作
+    /// async
     async fn async_operation_with_error() -> Result<i32, String> {
         // 模拟异步操作
         tokio::time::sleep(tokio::time::Duration::from_millis(50)).await;
@@ -111,10 +122,10 @@ pub mod async_error_handling_189 {
 }
 
 /// 异步控制流执行器 (Rust 1.89增强版)
+/// async stream (Rust 1.89)
 pub struct AsyncControlFlowExecutor189;
 
 impl AsyncControlFlowExecutor189 {
-    /// 异步if-else控制流
     pub async fn async_if_else<F, G, T>(&self, condition: bool, if_branch: F, else_branch: G) -> T
     where
         F: Future<Output = T>,
@@ -128,6 +139,7 @@ impl AsyncControlFlowExecutor189 {
     }
 
     /// 异步循环控制流
+    /// async circulation stream
     pub async fn async_loop<F, T>(
         &self,
         mut condition: F,
@@ -147,6 +159,7 @@ impl AsyncControlFlowExecutor189 {
     }
 
     /// 异步for循环控制流
+    /// async forcirculation stream
     pub async fn async_for<T, F, Fut>(&self, items: Vec<T>, processor: F) -> Vec<T>
     where
         T: Clone,

@@ -827,7 +827,7 @@ CMD ["taskset", "-c", "0-3", "/app"]
 
 ## 13. 与其他运行时的对比
 
-| 特性     | Glommio         | Tokio         | Smol        | async-std     |
+| 特性     | Glommio         | Tokio         | Smol        | async-std [已归档]     |
 | :--- | :--- | :--- | :--- | :--- || 架构     | Thread-per-core | Work-stealing | 单/多线程   | Work-stealing |
 | 平台     | Linux only      | 跨平台        | 跨平台      | 跨平台        |
 | 延迟     | <100μs          | ~200μs        | ~150μs      | ~250μs        |
@@ -840,7 +840,7 @@ CMD ["taskset", "-c", "0-3", "/app"]
 - **Glommio**: 极致性能，Linux 环境
 - **Tokio**: 通用场景，生态丰富
 - **Smol**: 轻量级，嵌入式
-- **async-std**: 标准库风格
+- **async-std [已归档]**: 标准库风格
 
 ---
 

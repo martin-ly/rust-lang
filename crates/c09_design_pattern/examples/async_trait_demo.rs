@@ -1,25 +1,22 @@
 //! 异步 Trait 演示
-//!
+//! async Trait demonstration
 //! ## 📐 知识结构
-//!
+//! ## 📐 structure
+//! ## 📐 知识structure
 //! ### 核心概念
-//!
-//! - **异步 Trait**: 在 Trait 中定义异步方法的模式
-//!   - **属性**: async fn in traits、异步方法、Trait实现
-//!   - **关系**: 与异步编程、Trait系统相关
-//!
+//! ### core concept
 //! ### 思维导图
-//!
-//! ```text
+//! ###
 //! 异步 Trait 演示
-//! │
+//! async Trait demonstration
 //! ├── Trait 定义
-//! │   └── async fn
 //! ├── Trait 实现
 //! │   └── 异步方法实现
+//! │ └── async method
 //! └── 使用
+//! └──
 //!     └── 异步调用
-//! ```
+//!     └── async
 use c09_design_pattern::concurrency::asynchronous::native_async_trait::{EchoProcessor, run_demo};
 
 fn block_on<F: core::future::Future>(mut fut: F) -> F::Output {

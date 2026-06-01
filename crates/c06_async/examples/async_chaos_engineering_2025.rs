@@ -9,8 +9,11 @@ use tracing::{error, info, warn};
 //use std::sync::atomic::{AtomicUsize, AtomicBool, Ordering};
 
 /// 2025年异步混沌工程演示
+/// 2025async demonstration
 /// 展示最新的异步混沌工程编程模式和最佳实践
+/// async and
 /// 1. 异步混沌实验管理器
+/// 1. async
 #[derive(Debug, Clone)]
 pub struct AsyncChaosExperimentManager {
     experiments: Arc<RwLock<HashMap<String, ChaosExperiment>>>,
@@ -394,6 +397,7 @@ impl AsyncChaosExperimentManager {
 }
 
 /// 2. 异步故障注入器
+/// 2. async
 #[derive(Debug, Clone)]
 pub struct AsyncFaultInjector {
     injectors: Arc<RwLock<HashMap<String, FaultInjector>>>,
@@ -576,6 +580,7 @@ impl AsyncFaultInjector {
 }
 
 /// 3. 异步恢复测试器
+/// 3. async
 #[allow(dead_code)]
 #[derive(Debug, Clone)]
 pub struct AsyncRecoveryTester {

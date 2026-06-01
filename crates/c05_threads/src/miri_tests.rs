@@ -1,10 +1,9 @@
 //! Miri 测试模块 - 并发和线程安全验证
-//!
-//! 本模块包含用于 Miri 测试的并发代码示例，验证线程安全性。
+//! Miri module - concurrency and thread-safe
 //! 注意: Miri 可以检测数据竞争和内存序问题
-//!
+//! : Miri can and memory problem
 //! 运行方式:
-//!   cargo miri test miri_tests
+//! Run way :
 //!   MIRIFLAGS="-Zmiri-tree-borrows -Zmiri-disable-isolation" cargo miri test miri_tests
 
 use std::sync::atomic::{AtomicI32, Ordering};
@@ -14,8 +13,12 @@ use std::thread;
 // ==================== 原子操作测试 ====================
 
 /// 测试目的: 验证基本原子操作
+/// objective : this atomic operation
 /// 测试场景: 使用不同 Ordering 进行原子读写
+/// scenario : Ordering
+/// Test forscenario: Use不同 Ordering 进行原子读写
 /// 预期结果: 应该正确完成所有操作
+/// result : should all
 #[test]
 fn test_atomic_basic() {
     let atomic = AtomicI32::new(0);
@@ -29,8 +32,10 @@ fn test_atomic_basic() {
 }
 
 /// 测试目的: 验证原子交换和比较交换
+/// objective : exchange and exchange
 /// 测试场景: 使用 swap 和 compare_exchange
 /// 预期结果: 应该正确完成交换操作
+/// result : should exchange
 #[test]
 fn test_atomic_swap_cas() {
     let atomic = AtomicI32::new(10);
@@ -52,8 +57,12 @@ fn test_atomic_swap_cas() {
 // ==================== Arc 和 Mutex 测试 ====================
 
 /// 测试目的: 验证 Arc 共享所有权
+/// objective : Arc ownership
+/// Test forobjective: Verify Arc 共享ownership
 /// 测试场景: 克隆 Arc 并验证引用计数
+/// scenario : Arc and reference counting
 /// 预期结果: 应该正确共享数据
+/// result : should
 #[test]
 fn test_arc_shared() {
     let arc = Arc::new(42);
@@ -64,9 +73,10 @@ fn test_arc_shared() {
     assert_eq!(Arc::strong_count(&arc), 2);
 }
 
-/// 测试目的: 验证 Arc<Mutex<T>> 线程安全共享
 /// 测试场景: 多线程通过 Mutex 修改共享数据
+/// scenario : thread Mutex
 /// 预期结果: 应该正确累加计数器
+/// result : should
 #[test]
 fn test_arc_mutex_threaded() {
     let data = Arc::new(Mutex::new(0));
@@ -97,8 +107,11 @@ thread_local! {
 }
 
 /// 测试目的: 验证线程本地存储
+/// objective : thread-local storage
 /// 测试场景: 在不同位置访问线程本地变量
+/// scenario : in position thread this variable
 /// 预期结果: 应该正确存储和读取值
+/// result : should and
 #[test]
 fn test_thread_local() {
     COUNTER.with(|c| {
@@ -114,9 +127,8 @@ fn test_thread_local() {
 
 use std::cell::UnsafeCell;
 
-/// 测试目的: 验证 UnsafeCell 基本使用
-/// 测试场景: 通过 UnsafeCell 进行内部可变性
 /// 预期结果: 应该正确读写值
+/// result : should
 #[test]
 fn test_unsafe_cell() {
     let cell = UnsafeCell::new(42);
@@ -129,9 +141,10 @@ fn test_unsafe_cell() {
 
 // ==================== Send 和 Sync 测试 ====================
 
-/// 测试目的: 验证 Send 类型跨线程传递
 /// 测试场景: 将 Vec 移动到另一个线程
+/// scenario : will Vec to thread
 /// 预期结果: 应该正确传递并返回
+/// result : should and
 #[test]
 fn test_send_trait() {
     let data = vec![1, 2, 3];
@@ -145,9 +158,10 @@ fn test_send_trait() {
     assert_eq!(result, vec![1, 2, 3]);
 }
 
-/// 测试目的: 验证 Sync 类型跨线程共享引用
 /// 测试场景: 多线程共享对静态数组的引用
+/// scenario : thread to reference
 /// 预期结果: 应该正确读取数据
+/// result : should
 #[test]
 fn test_sync_trait() {
     let data: &'static [i32] = &[1, 2, 3, 4, 5];
@@ -168,9 +182,9 @@ fn test_sync_trait() {
 
 // ==================== 内存序测试 ====================
 
-/// 测试目的: 验证 Release-Acquire 语义
+/// Test forobjective: Verify Release-Acquire 语义
 /// 测试场景: 一个线程写入数据后设置标志，另一个线程读取标志后读取数据
-/// 预期结果: Acquire 应该能看到 Release 之前的写入
+/// scenario : thread after mark ，thread mark after
 #[test]
 fn test_release_acquire() {
     let ready = Arc::new(AtomicI32::new(0));
@@ -197,9 +211,8 @@ fn test_release_acquire() {
     handle.join().unwrap();
 }
 
-/// 测试目的: 验证 SeqCst 全序性
-/// 测试场景: 两个线程使用 SeqCst 进行同步
 /// 预期结果: 应该建立全局顺序
+/// result : should global order
 #[test]
 fn test_seqcst() {
     let flag1 = Arc::new(AtomicI32::new(0));
@@ -223,9 +236,10 @@ fn test_seqcst() {
 
 use std::sync::Barrier;
 
-/// 测试目的: 验证 Barrier 同步
 /// 测试场景: 多个线程在屏障处等待
+/// scenario : thread in barrier etc.
 /// 预期结果: 所有线程应该同步通过屏障
+/// result : all thread should synchronous barrier
 #[test]
 fn test_barrier() {
     let barrier = Arc::new(Barrier::new(3));
@@ -249,9 +263,10 @@ fn test_barrier() {
 
 use std::sync::Condvar;
 
-/// 测试目的: 验证 Condvar 通知
 /// 测试场景: 一个线程等待条件，另一个线程通知
+/// scenario : thread etc. condition ，thread
 /// 预期结果: 应该正确同步状态
+/// result : should synchronous state
 #[test]
 fn test_condvar() {
     let pair = Arc::new((Mutex::new(false), Condvar::new()));
@@ -278,9 +293,10 @@ fn test_condvar() {
 
 use std::sync::RwLock;
 
-/// 测试目的: 验证 RwLock 读写锁
 /// 测试场景: 多个读锁同时持有，写锁独占
+/// scenario : lock ，lock
 /// 预期结果: 应该正确管理并发访问
+/// result : should concurrency
 #[test]
 fn test_rwlock() {
     let lock = RwLock::new(5);
@@ -304,6 +320,7 @@ fn test_rwlock() {
 use std::sync::atomic::AtomicBool;
 
 /// 自旋锁实现
+/// spinlock
 struct SpinLock<T> {
     locked: AtomicBool,
     data: UnsafeCell<T>,
@@ -338,6 +355,7 @@ impl<T> SpinLock<T> {
 }
 
 /// 自旋锁守卫
+/// spinlock
 struct SpinLockGuard<'a, T> {
     lock: &'a SpinLock<T>,
 }
@@ -362,8 +380,11 @@ impl<'a, T> std::ops::DerefMut for SpinLockGuard<'a, T> {
 }
 
 /// 测试目的: 验证自旋锁实现
+/// objective : spinlock
 /// 测试场景: 多线程使用自旋锁累加计数器
+/// scenario : thread spinlock
 /// 预期结果: 应该正确同步访问
+/// result : should synchronous
 #[test]
 fn test_spinlock() {
     let lock = Arc::new(SpinLock::new(0));
@@ -388,8 +409,11 @@ fn test_spinlock() {
 // ==================== Miri 会检测的错误（标记为 ignore） ====================
 
 /// 测试目的: 验证数据竞争检测
+/// objective :
 /// 测试场景: 两个线程无保护地访问同一静态变量
+/// scenario : thread variable
 /// 预期结果: Miri 应该检测到 UB
+/// result : Miri should to UB
 #[test]
 #[ignore = "This test should fail with data race"]
 fn test_data_race() {
@@ -413,9 +437,8 @@ fn test_data_race() {
     }
 }
 
-/// 测试目的: 验证 UnsafeCell 与 Mutex 的安全使用
-/// 测试场景: 使用 Mutex 包裹 UnsafeCell
 /// 预期结果: 应该正确同步访问
+/// result : should synchronous
 #[test]
 fn test_unsafe_cell_with_mutex() {
     // 使用 Mutex 包裹 UnsafeCell 来提供线程安全

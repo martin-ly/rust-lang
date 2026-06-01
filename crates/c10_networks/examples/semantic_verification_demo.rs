@@ -1,6 +1,6 @@
 //! 语义验证演示示例
-//!
-//! 本示例展示了如何使用C10 Networks的语义验证框架来验证网络协议的正确性。
+//! demonstration example
+//! 语义Verifydemonstration example
 use c10_networks::semantics::formal_spec::{
     HttpFormalSpec, HttpMethod, HttpRuleAction, HttpStatusCode, HttpVersion, TcpEvent,
     TcpFormalSpec,
@@ -12,6 +12,7 @@ use c10_networks::semantics::*;
 use std::collections::HashMap;
 
 /// 演示TCP协议语义验证
+/// demonstration TCP
 async fn demo_tcp_semantic_verification() -> Result<(), Box<dyn std::error::Error>> {
     println!("=== TCP协议语义验证演示 ===");
 
@@ -109,6 +110,7 @@ async fn demo_tcp_semantic_verification() -> Result<(), Box<dyn std::error::Erro
 }
 
 /// 演示HTTP协议语义验证
+/// demonstration HTTP
 async fn demo_http_semantic_verification() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== HTTP协议语义验证演示 ===");
 
@@ -186,6 +188,8 @@ async fn demo_http_semantic_verification() -> Result<(), Box<dyn std::error::Err
 }
 
 /// 演示模型检查
+/// demonstration
+/// Demonstration of模型Check
 async fn demo_model_checking() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== 模型检查演示 ===");
 
@@ -285,6 +289,7 @@ async fn demo_model_checking() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 /// 演示TLA+模型检查
+/// demonstration TLA+
 async fn demo_tla_model_checking() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== TLA+模型检查演示 ===");
 
@@ -335,6 +340,7 @@ async fn demo_tla_model_checking() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 /// 演示属性检查器
+/// demonstration attribute
 async fn demo_property_checker() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== 属性检查器演示 ===");
 

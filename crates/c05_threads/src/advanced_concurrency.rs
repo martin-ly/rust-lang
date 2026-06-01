@@ -1,10 +1,13 @@
 //! 高级并发编程模块
-//!
-//! 本模块提供Rust 2025版本的高级并发编程特性，包括：
+//! concurrency module
 //! - 高性能线程池实现
+//! - performance thread pool
 //! - 工作窃取调度算法
+//! - algorithm
 //! - 无锁数据结构
+//! - lock-free data structure
 //! - 并发性能优化技术
+//! - concurrency performance optimization technique
 use std::cell::UnsafeCell;
 use std::collections::VecDeque;
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -17,6 +20,7 @@ use std::time::Duration;
 // ============================================================================
 
 /// 高性能线程池，支持工作窃取调度
+/// performance thread pool ，
 pub struct HighPerformanceThreadPool {
     workers: Vec<Worker>,
     sender: Option<crossbeam_channel::Sender<Box<dyn FnOnce() + Send + 'static>>>,
@@ -25,6 +29,7 @@ pub struct HighPerformanceThreadPool {
 
 impl HighPerformanceThreadPool {
     /// 创建新的高性能线程池
+    /// performance thread pool
     pub fn new(size: usize) -> Self {
         assert!(size > 0);
 
@@ -45,6 +50,7 @@ impl HighPerformanceThreadPool {
     }
 
     /// 执行任务
+    /// task
     pub fn execute<F>(&self, f: F)
     where
         F: FnOnce() + Send + 'static,
@@ -55,6 +61,7 @@ impl HighPerformanceThreadPool {
     }
 
     /// 并行执行多个任务
+    /// parallelism task
     pub fn execute_batch<T>(&self, tasks: Vec<Box<dyn FnOnce() -> T + Send>>) -> Vec<T>
     where
         T: Send + 'static,
@@ -75,6 +82,7 @@ impl HighPerformanceThreadPool {
     }
 
     /// 获取线程池统计信息
+    /// thread pool
     pub fn stats(&self) -> ThreadPoolStats {
         self.global_queue.get_stats()
     }
@@ -95,6 +103,7 @@ impl Drop for HighPerformanceThreadPool {
 }
 
 /// 工作线程
+/// worker thread
 struct Worker {
     _id: usize,
     thread: Option<thread::JoinHandle<()>>,
@@ -152,6 +161,7 @@ impl Worker {
 // ============================================================================
 
 /// 全局任务队列
+/// global task
 struct GlobalTaskQueue {
     tasks: Mutex<VecDeque<Box<dyn FnOnce() + Send + 'static>>>,
     stats: Mutex<QueueStats>,
@@ -198,6 +208,7 @@ impl GlobalTaskQueue {
 }
 
 /// 本地任务队列
+/// this task
 struct LocalTaskQueue {
     tasks: VecDeque<Box<dyn FnOnce() + Send + 'static>>,
 }
@@ -228,6 +239,7 @@ impl LocalTaskQueue {
 // ============================================================================
 
 /// 无锁环形缓冲区
+/// lock-free ring buffer
 pub struct LockFreeRingBuffer<T> {
     buffer: UnsafeCell<Vec<T>>,
     head: AtomicUsize,
@@ -237,6 +249,7 @@ pub struct LockFreeRingBuffer<T> {
 
 impl<T: Default + Clone> LockFreeRingBuffer<T> {
     /// 创建新的无锁环形缓冲区
+    /// lock-free ring buffer
     pub fn new(size: usize) -> Self {
         // 使用 size+1 的内部容量以支持“可存放 size 个元素”的语义
         let capacity = size + 1;
@@ -254,6 +267,7 @@ impl<T: Default + Clone> LockFreeRingBuffer<T> {
     }
 
     /// 尝试推送元素
+    /// element
     pub fn try_push(&self, item: T) -> Result<(), T> {
         let tail = self.tail.load(Ordering::Relaxed);
         let next_tail = (tail + 1) % self.size;
@@ -272,6 +286,7 @@ impl<T: Default + Clone> LockFreeRingBuffer<T> {
     }
 
     /// 尝试弹出元素
+    /// element
     pub fn try_pop(&self) -> Option<T> {
         let head = self.head.load(Ordering::Relaxed);
 
@@ -296,6 +311,7 @@ impl<T: Default + Clone> LockFreeRingBuffer<T> {
     }
 
     /// 检查是否为空
+    /// as
     pub fn is_empty(&self) -> bool {
         self.head.load(Ordering::Relaxed) == self.tail.load(Ordering::Relaxed)
     }
@@ -308,6 +324,7 @@ impl<T: Default + Clone> LockFreeRingBuffer<T> {
 }
 
 /// 无锁栈
+/// lock-free stack
 pub struct LockFreeStack<T> {
     head: AtomicUsize,
     nodes: UnsafeCell<Vec<StackNode<T>>>,
@@ -321,6 +338,7 @@ struct StackNode<T> {
 
 impl<T> LockFreeStack<T> {
     /// 创建新的无锁栈
+    /// lock-free stack
     pub fn new(capacity: usize) -> Self {
         let mut nodes = Vec::with_capacity(capacity);
         for i in 0..capacity {
@@ -338,6 +356,8 @@ impl<T> LockFreeStack<T> {
     }
 
     /// 推送元素
+    /// element
+    /// 推送element
     pub fn push(&self, item: T) -> Result<(), T> {
         let node_idx = self.allocate_node()?;
 
@@ -368,6 +388,8 @@ impl<T> LockFreeStack<T> {
     }
 
     /// 弹出元素
+    /// element
+    /// 弹出element
     pub fn pop(&self) -> Option<T> {
         loop {
             let current_head = self.head.load(Ordering::Acquire);
@@ -448,6 +470,7 @@ impl<T> LockFreeStack<T> {
 // ============================================================================
 
 /// 并发归约算法
+/// concurrency algorithm
 pub fn parallel_reduce<T, F>(data: &[T], num_threads: usize, identity: T, op: F) -> T
 where
     T: Send + Sync + Clone + 'static,
@@ -492,6 +515,7 @@ where
 }
 
 /// 并发映射算法
+/// concurrency algorithm
 pub fn parallel_map<T, U, F>(data: &[T], num_threads: usize, f: F) -> Vec<U>
 where
     T: Send + Sync + Clone + 'static,

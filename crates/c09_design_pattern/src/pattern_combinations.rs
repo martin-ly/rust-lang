@@ -1,7 +1,10 @@
 //! 组合模式工程案例
+//! combination
 //!
 //! 本模块展示了如何组合多个设计模式来解决复杂的工程问题。
+//! This module demonstrates combination design complex problem 。
 //! 这些案例展示了模式之间的协作和组合使用。
+//! 's and combination 。
 use std::collections::HashMap;
 use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::{Arc, Mutex};
@@ -13,6 +16,7 @@ use std::time::{Duration, Instant};
 // ============================================================================
 
 /// HTTP 请求
+/// HTTP
 #[derive(Debug, Clone)]
 pub struct HttpRequest {
     pub method: String,
@@ -22,6 +26,7 @@ pub struct HttpRequest {
 }
 
 /// HTTP 响应
+/// HTTP
 #[derive(Debug, Clone)]
 pub struct HttpResponse {
     pub status_code: u16,
@@ -35,6 +40,7 @@ pub trait RoutingStrategy: Send + Sync {
 }
 
 /// 精确匹配路由策略
+/// strategy
 pub struct ExactMatchRouting {
     routes: HashMap<String, String>,
 }
@@ -62,6 +68,7 @@ impl RoutingStrategy for ExactMatchRouting {
 }
 
 /// 前缀匹配路由策略
+/// before strategy
 pub struct PrefixMatchRouting {
     prefixes: Vec<(String, String)>,
 }
@@ -93,6 +100,7 @@ impl RoutingStrategy for PrefixMatchRouting {
 }
 
 /// HTTP 请求构建器（Builder 模式）
+/// HTTP builder （Builder ）
 pub struct HttpRequestBuilder {
     method: Option<String>,
     path: Option<String>,
@@ -147,6 +155,7 @@ impl HttpRequestBuilder {
 }
 
 /// 断路器状态
+/// state
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum CircuitState {
     Closed,   // 正常
@@ -276,6 +285,7 @@ impl Service for PostService {
 }
 
 /// Web 服务器外观（Facade 模式）
+/// Web server facade （Facade ）
 /// 组合了 Builder、Strategy 和 Circuit Breaker 模式
 pub struct WebServerFacade {
     routing_strategy: Box<dyn RoutingStrategy>,
@@ -313,6 +323,7 @@ impl WebServerFacade {
     }
 
     /// 处理 HTTP 请求（Facade 模式简化接口）
+    /// HTTP （Facade ）
     pub fn handle_request(&self, request: HttpRequest) -> Result<HttpResponse, String> {
         self.request_count.fetch_add(1, Ordering::Relaxed);
 
@@ -367,6 +378,7 @@ pub struct ServerStats {
 // ============================================================================
 
 /// 游戏事件（Observer 模式）
+/// （Observer ）
 #[derive(Debug, Clone)]
 pub enum GameEvent {
     PlayerInput { input: String, timestamp: Instant },
@@ -375,11 +387,13 @@ pub enum GameEvent {
 }
 
 /// 观察者 trait
+/// observer trait
 pub trait EventObserver: Send {
     fn on_event(&mut self, event: &GameEvent);
 }
 
 /// 事件总线（Observer 模式）
+/// line （Observer ）
 pub struct EventBus {
     observers: Vec<Box<dyn EventObserver>>,
 }
@@ -415,6 +429,7 @@ pub trait GameCommand: Send + Sync {
 }
 
 /// 移动命令
+/// command
 pub struct MoveCommand {
     direction: String,
 }
@@ -441,6 +456,7 @@ impl GameCommand for MoveCommand {
 }
 
 /// 攻击命令
+/// command
 pub struct AttackCommand;
 
 impl GameCommand for AttackCommand {
@@ -456,6 +472,7 @@ impl GameCommand for AttackCommand {
 }
 
 /// 游戏上下文
+/// on under
 pub struct GameContext {
     pub player_position: i32,
     pub enemy_health: u32,
@@ -477,6 +494,7 @@ impl GameContext {
 }
 
 /// 命令映射器（Command 模式）
+/// command （Command ）
 pub struct CommandMapper {
     commands: HashMap<String, Box<dyn GameCommand>>,
 }
@@ -530,6 +548,7 @@ impl CommandMapper {
 }
 
 /// AI 状态（State 模式）
+/// AI state （State ）
 pub trait AiState: Send {
     fn enter(&mut self, context: &mut GameContext);
     fn update(&mut self, context: &mut GameContext) -> Option<Box<dyn AiState>>;
@@ -538,6 +557,7 @@ pub trait AiState: Send {
 }
 
 /// 巡逻状态
+/// state
 pub struct PatrolState {
     patrol_count: u32,
 }
@@ -581,6 +601,7 @@ impl AiState for PatrolState {
 }
 
 /// 追逐状态
+/// state
 pub struct ChaseState {
     chase_count: u32,
 }
@@ -626,6 +647,7 @@ impl AiState for ChaseState {
 }
 
 /// 逃跑状态
+/// state
 pub struct FleeState;
 
 impl Default for FleeState {
@@ -666,6 +688,7 @@ impl AiState for FleeState {
 }
 
 /// AI 状态管理器（State 模式）
+/// AI state （State ）
 pub struct AiStateManager {
     current_state: Option<Box<dyn AiState>>,
 }
@@ -702,6 +725,7 @@ impl AiStateManager {
 }
 
 /// 日志观察者
+/// observer
 pub struct LoggingObserver {
     logs: Vec<String>,
 }

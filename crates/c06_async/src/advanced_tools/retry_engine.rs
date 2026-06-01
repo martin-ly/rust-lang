@@ -1,11 +1,17 @@
 //! 智能重试引擎
 //!
 //! 提供高级重试机制：
+//! mechanism ：
 //! - 多种重试策略（指数退避、线性退避、固定间隔）
+//! - strategy （index 、line 、）
 //! - 智能错误分类
+//! - classification
 //! - 断路器集成
+//! -
 //! - 重试监控和统计
+//! - and
 //! - 自定义重试条件
+//! - definition condition
 use anyhow::Result;
 use futures::Future;
 use serde::{Deserialize, Serialize};
@@ -14,23 +20,28 @@ use std::time::{Duration, Instant};
 use tokio::time::{sleep, timeout};
 
 /// 重试策略
+/// strategy
 #[derive(Debug, Clone)]
 pub enum RetryStrategy {
     /// 固定间隔重试
     Fixed(Duration),
     /// 线性退避重试
+    /// line
     Linear(Duration, Duration), // (初始间隔, 最大间隔)
     /// 指数退避重试
+    /// index
     Exponential(Duration, f64, Duration), // (初始间隔, 倍数, 最大间隔)
                                           // 注意：Custom 变体被移除，因为 dyn Trait 无法实现 Debug 和 Clone
 }
 
 /// 退避策略 trait
+/// strategy trait
 pub trait RetryBackoff {
     fn get_delay(&self, attempt: u32) -> Duration;
 }
 
 /// 固定退避策略
+/// strategy
 pub struct FixedBackoff {
     delay: Duration,
 }
@@ -48,6 +59,7 @@ impl RetryBackoff for FixedBackoff {
 }
 
 /// 线性退避策略
+/// line strategy
 pub struct LinearBackoff {
     initial_delay: Duration,
     max_delay: Duration,
@@ -72,6 +84,7 @@ impl RetryBackoff for LinearBackoff {
 }
 
 /// 指数退避策略
+/// index strategy
 pub struct ExponentialBackoff {
     initial_delay: Duration,
     multiplier: f64,
@@ -97,14 +110,17 @@ impl RetryBackoff for ExponentialBackoff {
 }
 
 /// 重试条件
+/// condition
 #[derive(Debug, Clone, Default)]
 pub enum RetryCondition {
     /// 总是重试
     #[default]
     Always,
     /// 根据错误类型重试
+    /// according to error type
     OnErrorType(Vec<String>),
     /// 根据错误消息重试
+    /// according to
     OnErrorMessage(String),
 }
 
@@ -147,6 +163,7 @@ pub struct RetryStats {
 }
 
 /// 重试结果
+/// result
 #[derive(Debug)]
 pub struct RetryResult<T> {
     pub result: Result<T>,
@@ -171,6 +188,7 @@ impl RetryEngine {
     }
 
     /// 执行带重试的异步操作
+    /// async
     pub async fn execute<F, Fut, T>(&self, mut operation: F) -> RetryResult<T>
     where
         F: FnMut() -> Fut,
@@ -338,12 +356,14 @@ impl RetryEngine {
 }
 
 /// 重试引擎构建器
+/// builder
 pub struct RetryEngineBuilder {
     config: RetryConfig,
 }
 
 impl RetryEngineBuilder {
     /// 创建新的构建器
+    /// builder
     pub fn new() -> Self {
         Self {
             config: RetryConfig::default(),
@@ -351,24 +371,28 @@ impl RetryEngineBuilder {
     }
 
     /// 设置最大重试次数
+    /// maximum
     pub fn max_attempts(mut self, max_attempts: u32) -> Self {
         self.config.max_attempts = max_attempts;
         self
     }
 
     /// 设置重试策略
+    /// strategy
     pub fn strategy(mut self, strategy: RetryStrategy) -> Self {
         self.config.strategy = strategy;
         self
     }
 
     /// 设置重试条件
+    /// condition
     pub fn condition(mut self, condition: RetryCondition) -> Self {
         self.config.condition = condition;
         self
     }
 
     /// 设置超时时间
+    /// time
     pub fn timeout(mut self, timeout: Duration) -> Self {
         self.config.timeout = Some(timeout);
         self
@@ -393,6 +417,7 @@ impl Default for RetryEngineBuilder {
 }
 
 /// 便捷宏用于快速创建重试操作
+/// fast
 #[macro_export]
 macro_rules! retry {
     ($engine:expr, $operation:expr) => {{ $engine.execute(|| async { $operation }).await }};

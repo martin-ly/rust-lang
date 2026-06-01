@@ -1,3 +1,7 @@
+> **内容分级**: [综述级]
+>
+> **本节关键术语**: 借用 (Borrowing) · 引用 (Reference) · 可变引用 (&mut T) · 不可变引用 (&T) · 悬垂引用 (Dangling Reference) — [完整对照表](../00_meta/terminology_glossary.md)
+
 # Borrowing（借用）
 
 > **受众**: [初学者]

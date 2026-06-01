@@ -1,8 +1,10 @@
 //! C04 - 高级泛型模式
-//!
+//! C04 - generic
 //! 本模块演示 GAT、类型族、HList 等高级泛型特性
+//! this module demonstration GAT、type 、HList etc. generic feature
 
 /// 泛型关联类型演示
+/// generic associated type demonstration
 #[allow(dead_code)]
 pub trait LendingIterator {
     type Item<'a>
@@ -13,6 +15,7 @@ pub trait LendingIterator {
 }
 
 /// 窗口迭代器 (GAT 典型用例)
+/// (GAT )
 pub struct WindowIter<'a, T> {
     #[allow(dead_code)]
     slice: &'a [T],
@@ -44,6 +47,7 @@ impl<'a, T> LendingIterator for WindowIter<'a, T> {
 }
 
 /// HList - 异构列表
+/// HList -
 #[derive(Debug)]
 pub struct HNil;
 
@@ -51,18 +55,23 @@ pub struct HNil;
 #[derive(Debug)]
 pub struct HCons<H, T> {
     /// 头部元素
+    /// element
+    /// 头部element
     pub head: H,
     /// 尾部列表
     pub tail: T,
 }
 
 /// HList trait - 标记 trait 用于类型约束
+/// HList trait - mark trait type
 #[allow(dead_code)]
 pub trait HList {}
 impl HList for HNil {}
 impl<H, T: HList> HList for HCons<H, T> {}
 
 /// HList 长度计算
+/// HList
+/// HList 长度Calculate
 pub trait HListLength {
     const LEN: usize;
 }
@@ -76,6 +85,8 @@ impl<H, T: HListLength> HListLength for HCons<H, T> {
 }
 
 /// 获取 HList 长度
+/// HList
+/// Get HList 长度
 pub const fn hlist_len<H, T>() -> usize
 where
     HCons<H, T>: HListLength,

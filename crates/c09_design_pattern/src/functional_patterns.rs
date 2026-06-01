@@ -1,11 +1,16 @@
 //! # 函数式编程模式
+//! # functional
 //!
 //! Rust 支持多种函数式编程模式，包括高阶函数、闭包组合、
+//! Rust functional ，function 、combination 、
 //! 迭代器适配器链、Monoid 概念等。
+//! adapter 、Monoid concept etc. 。
 
 /// 高阶函数模式
+/// function
 ///
 /// 接受函数作为参数或返回函数的函数。
+/// function as parameter or function function 。
 pub struct HigherOrderFunctions;
 
 impl HigherOrderFunctions {
@@ -22,23 +27,28 @@ impl HigherOrderFunctions {
     }
 
     /// 函数组合: (f ∘ g)(x) = f(g(x))
+    /// function combination : (f ∘ g)(x) = f(g(x))
     pub fn compose<A, B, C>(f: impl Fn(B) -> C, g: impl Fn(A) -> B) -> impl Fn(A) -> C {
         move |x| f(g(x))
     }
 
     /// 部分应用（currying 概念）
+    /// part application （currying concept ）
     pub fn add_n(n: i32) -> impl Fn(i32) -> i32 {
         move |x| x + n
     }
 }
 
 /// 迭代器适配器链模式
+/// adapter
 ///
 /// 通过链式调用构建惰性计算管道。
+/// pipe 。
 pub struct IteratorPipeline;
 
 impl IteratorPipeline {
     /// 数据处理管道示例
+    /// pipe example
     pub fn process_numbers(numbers: &[i32]) -> Vec<i32> {
         numbers
             .iter()
@@ -49,11 +59,13 @@ impl IteratorPipeline {
     }
 
     /// 分组聚合
+    /// grouping aggregation
     pub fn group_by_parity(numbers: &[i32]) -> (Vec<i32>, Vec<i32>) {
         numbers.iter().copied().partition(|n| n % 2 == 0)
     }
 
     /// 滑动窗口分析
+    /// analyze
     pub fn sliding_average(numbers: &[i32], window: usize) -> Vec<f64> {
         numbers
             .windows(window)
@@ -63,9 +75,12 @@ impl IteratorPipeline {
 }
 
 /// Monoid 模式概念
+/// Monoid concept
 ///
 /// Monoid 是带有结合律二元运算和单位元的代数结构。
+/// Monoid and structure 。
 /// Rust 中通过 trait 表达。
+/// Rust in trait express 。
 pub trait Monoid {
     /// 单位元
     fn identity() -> Self;
@@ -93,6 +108,7 @@ impl Monoid for String {
 }
 
 /// 使用 Monoid 进行泛化折叠
+/// Monoid
 pub fn fold_monoid<T: Monoid>(items: impl Iterator<Item = T>) -> T {
     items.fold(T::identity(), |acc, item| acc.combine(item))
 }
@@ -100,15 +116,18 @@ pub fn fold_monoid<T: Monoid>(items: impl Iterator<Item = T>) -> T {
 /// Option/Result 组合子模式
 ///
 /// 函数式错误处理的核心技巧。
+/// functional error handling core tip 。
 pub struct Combinators;
 
 impl Combinators {
     /// 链式 Option 处理
+    /// Option
     pub fn chain_options(x: Option<i32>) -> Option<i32> {
         x.map(|n| n * 2).filter(|&n| n > 10).or(Some(0))
     }
 
     /// Result 转换与收集
+    /// Result conversion and
     pub fn parse_numbers(strings: &[&str]) -> Result<Vec<i32>, String> {
         strings
             .iter()
@@ -117,6 +136,7 @@ impl Combinators {
     }
 
     /// 早期返回模式（使用 ? 运算符）
+    /// （? ）
     pub fn validate_and_compute(a: Option<i32>, b: Option<i32>) -> Option<i32> {
         let x = a?;
         let y = b?;

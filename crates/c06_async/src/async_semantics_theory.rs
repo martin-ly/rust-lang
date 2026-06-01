@@ -3,41 +3,55 @@
 //! # 概述 (Overview)
 //!
 //! 本模块提供 Rust 异步编程的形式化语义理论基础，包括：
+//! This module provides Rust async theory foundation ，：
 //! - 异步计算的形式化定义
+//! - async definition
 //! - 异步与同步的等价关系证明
+//! - async and synchronous etc.
 //! - 控制流与执行流的语义模型
+//! - stream and stream
 //! - 基于范畴论的异步抽象
+//! - async
 //!
 //! # 理论基础 (Theoretical Foundations)
 //!
 //! ## 1. 异步计算的形式化定义
+//! ## 1. async definition
 //!
 //! ### 1.1 状态机模型 (State Machine Model)
 //!
 //! Future 可以形式化为一个状态机 M = (S, s₀, δ, F)，其中：
+//! Future can as state machine M = (S, s₀, δ, F)，its in ：
 //! - S: 状态集合
+//! - S: state set
 //! - s₀: 初始状态
+//! - s₀: initial state
 //! - δ: 状态转换函数 `δ: S × Context → Poll<T> × S`
 //! - F: 终止状态集合
+//! - F: terminal state set
 //!
 //! ```text
 //! Poll<T> = Ready(T) | Pending
 //!
 //! 状态转换规则：
+//! state conversion rule ：
 //! ────────────────────────────────────────
 //! (s, cx) ⊢ δ(s, cx) = (Pending, s')
 //! ────────────────────────────────────────
 //!     s 转换到 s', 等待重新轮询
+//!     s conversion to s', etc.
 //!
 //! ────────────────────────────────────────
 //! (s, cx) ⊢ δ(s, cx) = (Ready(v), sₓ)
 //! ────────────────────────────────────────
 //!     s 转换到终止状态 sₓ, 产生值 v
+//!     s conversion to terminal state sₓ, v
 //! ```
 //!
 //! ### 1.2 Monad 结构 (Monadic Structure)
 //!
 //! Future 形成一个 Monad，满足：
+//! Future Monad，：
 //!
 //! ```text
 //! return : T → Future<T>
@@ -46,56 +60,76 @@
 //! Monad 法则：
 //! 1. 左单位元: return(a) >>= f ≡ f(a)
 //! 2. 右单位元: m >>= return ≡ m
+//! 2. : m >>= return ≡ m
 //! 3. 结合律:   (m >>= f) >>= g ≡ m >>= (λx. f(x) >>= g)
 //! ```
 //!
 //! ## 2. 异步与同步的等价关系
+//! ## 2. async and synchronous etc.
 //!
 //! ### 2.1 计算等价性定理
+//! ### 2.1 etc. theorem
 //!
 //! **定理**: 对于任意计算 C，存在同步实现 Cₛ 和异步实现 Cₐ，
+//! **theorem **: to C，in synchronous Cₛ and async Cₐ，
 //! 使得它们在语义上等价（忽略执行时序）。
+//! in on etc. （）。
 //!
 //! **证明**:
+//! ****:
 //! ```text
 //! 给定同步计算: Cₛ : T
+//! synchronous : Cₛ : T
 //! 构造异步计算: Cₐ : Future<T> = async { Cₛ }
 //!
 //! 反之，给定异步计算: Cₐ : Future<T>
+//! 's ，async : Cₐ : Future<T>
 //! 构造同步计算: Cₛ : T = block_on(Cₐ)
+//! synchronous : Cₛ : T = block_on(Cₐ)
 //!
 //! 语义等价性: ⟦Cₛ⟧ = ⟦block_on(Cₐ)⟧
+//! etc. : ⟦Cₛ⟧ = ⟦block_on(Cₐ)⟧
 //! ```
 //!
 //! ### 2.2 CPS 变换 (Continuation-Passing Style)
 //!
 //! 异步函数可以通过 CPS 变换与同步函数建立对应关系：
+//! async function can CPS transformation and synchronous function to ：
 //!
 //! ```text
 //! 同步函数:  f : A → B
+//! synchronous function : f : A → B
 //! CPS 变换:  f_cps : A → (B → R) → R
 //! 异步版本:  f_async : A → Future<B>
 //!
 //! 等价关系:
+//! etc. :
 //! ⟦f_async(a).await⟧ ≅ ⟦f(a)⟧
 //! ```
 //!
 //! ## 3. 控制流与执行流的形式化
+//! ## 3. stream and stream
 //!
 //! ### 3.1 控制流图 (Control Flow Graph)
 //!
 //! ```text
 //! CFG = (V, E, entry, exit)
 //! - V: 基本块集合
+//! - V: this set
 //! - E ⊆ V × V: 控制流边
+//! - E ⊆ V × V: stream edge
 //! - entry, exit ∈ V: 入口和出口节点
+//! - entry, exit ∈ V: and node
 //!
 //! 对于异步函数:
+//! to async function :
 //! - 每个 .await 点分割基本块
+//! -.await point this
 //! - 引入挂起点 (suspension points)
 //! ```
 //!
 //! ### 3.2 执行流语义
+//! ### 3.2 stream
 //!
 //! ```text
 //! 执行配置: Conf = (State, Continuation)
@@ -115,20 +149,27 @@
 //! ## 4. 范畴论视角 (Category Theory Perspective)
 //!
 //! ### 4.1 异步范畴
+//! ### 4.1 async
 //!
 //! ```text
 //! 定义范畴 Async:
+//! definition Async:
 //! - 对象: Rust 类型
+//! - to : Rust type
 //! - 态射: A → B 是类型为 impl Fn(A) → Future<B> 的函数
+//! - : A → B type as impl Fn(A) → Future<B> function
 //! - 复合: (f ∘ g)(x) = async { f(g(x).await).await }
 //! - 单位态射: id(x) = async { x }
 //! ```
 //!
 //! ### 4.2 自然变换
+//! ### 4.2 transformation
 //!
 //! ```text
 //! block_on 是从 Async 到 Sync 的自然变换
+//! block_on from Async to Sync transformation
 //! async { } 是从 Sync 到 Async 的自然变换
+//! async { } from Sync to Async transformation
 //! ```
 //!
 //! # 代码示例 (Code Examples)
@@ -138,10 +179,13 @@ use std::task::{Context, Poll};
 use std::time::Duration;
 
 /// # 示例 1: 状态机的显式实现
+/// # example 1: state machine
 ///
 /// 展示 Future 的状态机本质
+/// Future state machine essence
 ///
 /// ## 状态转换图
+/// ## state conversion
 ///
 /// ```text
 ///     Start
@@ -156,19 +200,24 @@ pub mod state_machine_example {
     use super::*;
 
     /// 显式状态枚举
+    /// state enum
     #[derive(Debug)]
     pub enum TaskState {
         /// 初始状态
+        /// initial state
         Start,
         /// 等待中，记录已轮询次数
+        /// etc. in ，
         Waiting(u32),
         /// 完成
         Complete,
     }
 
     /// 手写的 Future 状态机
+    /// Future state machine
     ///
     /// ## 形式化表示
+    /// ## represent
     ///
     /// ```text
     /// S = {Start, Waiting(n), Complete}
@@ -186,9 +235,12 @@ pub mod state_machine_example {
 
     impl ExplicitStateMachine {
         /// 创建新的状态机
+        /// state machine
         ///
         /// # 参数
+        /// # parameter
         /// - `max_polls`: 最大轮询次数（模拟异步等待）
+        /// - `max_polls`: maximum （async etc. ）
         pub fn new(max_polls: u32) -> Self {
             Self {
                 state: TaskState::Start,
@@ -235,6 +287,7 @@ pub mod state_machine_example {
     }
 
     /// 演示状态机执行
+    /// demonstration state machine
     pub async fn demo() {
         println!("\n=== 状态机示例 ===");
         let result = ExplicitStateMachine::new(3).await;
@@ -243,15 +296,19 @@ pub mod state_machine_example {
 }
 
 /// # 示例 2: 异步与同步的等价性
+/// # example 2: async and synchronous etc.
 ///
 /// 展示同一计算的同步和异步实现，证明它们的语义等价性
+/// synchronous and async ，etc.
 pub mod sync_async_equivalence {
     use super::*;
     use tokio::time::sleep;
 
     /// 同步实现: 斐波那契数列
+    /// synchronous :
     ///
     /// ## 形式化定义
+    /// ## definition
     /// ```text
     /// fib : ℕ → ℕ
     /// fib(0) = 0
@@ -267,8 +324,10 @@ pub mod sync_async_equivalence {
     }
 
     /// 异步实现: 斐波那契数列
+    /// async :
     ///
     /// ## 形式化定义
+    /// ## definition
     /// ```text
     /// fib_async : ℕ → Future<ℕ>
     /// fib_async(n) = async {
@@ -280,8 +339,10 @@ pub mod sync_async_equivalence {
     /// ```
     ///
     /// ## 等价性证明
+    /// ## etc.
     /// ```text
     /// 对于所有 n: ℕ,
+    /// to all n: ℕ,
     /// ⟦fibonacci_sync(n)⟧ = ⟦block_on(fibonacci_async(n))⟧
     /// ```
     pub fn fibonacci_async(n: u64) -> Pin<Box<dyn Future<Output = u64> + Send>> {
@@ -302,6 +363,7 @@ pub mod sync_async_equivalence {
     }
 
     /// 验证等价性
+    /// etc.
     pub async fn verify_equivalence() {
         println!("\n=== 同步/异步等价性验证 ===");
 
@@ -326,6 +388,7 @@ pub mod sync_async_equivalence {
 }
 
 /// # 示例 3: CPS 变换
+/// # example 3: CPS transformation
 ///
 /// 展示 Continuation-Passing Style 与异步编程的关系
 pub mod cps_transformation {
@@ -347,6 +410,7 @@ pub mod cps_transformation {
     /// ```
     ///
     /// ## 变换规则
+    /// ## transformation rule
     /// ```text
     /// ⟦e⟧_direct = v
     /// ⟦e⟧_cps = λk. k(v)
@@ -368,6 +432,7 @@ pub mod cps_transformation {
     /// ```
     ///
     /// ## 与 CPS 的关系
+    /// ## and CPS
     /// ```text
     /// f_async(x).await ≈ f_cps(x, λv. v)
     /// ```
@@ -378,6 +443,7 @@ pub mod cps_transformation {
     }
 
     /// 演示三种风格的等价性
+    /// demonstration etc.
     pub async fn demonstrate_equivalence() {
         println!("\n=== CPS 变换示例 ===");
 
@@ -403,12 +469,15 @@ pub mod cps_transformation {
 }
 
 /// # 示例 4: 控制流分析
+/// # example 4: control flow analysis
 ///
 /// 分析 .await 点如何影响控制流
+/// analyze.await point impact stream
 pub mod control_flow_analysis {
     use super::*;
 
     /// 标记控制流的基本块
+    /// mark stream this
     #[derive(Debug, Clone, Copy)]
     pub enum BasicBlock {
         Entry,
@@ -421,8 +490,10 @@ pub mod control_flow_analysis {
     }
 
     /// 带标记的异步函数
+    /// mark async function
     ///
     /// ## 控制流图 (CFG)
+    /// ## stream (CFG)
     ///
     /// ```text
     /// Entry
@@ -431,13 +502,16 @@ pub mod control_flow_analysis {
     ///   ↓
     /// AwaitPoint1 (等待 sleep)
     ///   ↓ [挂起/恢复]
+    ///   ↓ [/]
     /// Block2 (执行 y = 2)
     ///   ↓
     /// AwaitPoint2 (等待 sleep)
     ///   ↓ [挂起/恢复]
+    ///   ↓ [/]
     /// Block3 (计算 x + y)
     ///   ↓
     /// Exit (返回 3)
+    /// Exit ( 3)
     /// ```
     pub async fn annotated_async_function() -> i32 {
         println!("  {:?}", BasicBlock::Entry);
@@ -464,6 +538,7 @@ pub mod control_flow_analysis {
     }
 
     /// 演示控制流
+    /// demonstration stream
     pub async fn demo() {
         println!("\n=== 控制流分析示例 ===");
         let result = annotated_async_function().await;
@@ -472,17 +547,21 @@ pub mod control_flow_analysis {
 }
 
 /// # 示例 5: Monad 法则验证
+/// # example 5: Monad
 ///
 /// 验证 Future 满足 Monad 法则
+/// Future Monad
 pub mod monad_laws {
     use super::*;
 
     /// 辅助函数: 将值包装成 Future (return/pure)
+    /// function : will Future (return/pure)
     async fn pure<T>(value: T) -> T {
         value
     }
 
     /// 辅助函数: bind 操作（通过 .await 实现）
+    /// function : bind （.await ）
     async fn bind<T, U, F, Fut>(future: F, f: fn(T) -> Fut) -> U
     where
         F: Future<Output = T>,
@@ -493,6 +572,7 @@ pub mod monad_laws {
     }
 
     /// 测试函数
+    /// function
     async fn inc(x: i32) -> i32 {
         x + 1
     }
@@ -502,8 +582,10 @@ pub mod monad_laws {
     }
 
     /// 验证 Monad 法则
+    /// Monad
     ///
     /// ## 法则 1: 左单位元 (Left Identity)
+    /// ## 1: (Left Identity)
     /// ```text
     /// return(a) >>= f ≡ f(a)
     /// ```
@@ -567,6 +649,7 @@ pub mod monad_laws {
     }
 
     /// 运行所有验证
+    /// Run all
     pub async fn verify_all() {
         verify_left_identity().await;
         verify_right_identity().await;
@@ -576,6 +659,7 @@ pub mod monad_laws {
 }
 
 /// # 综合示例: 运行所有演示
+/// # synthesize example : Run all demonstrations
 pub async fn run_all_examples() {
     println!("╔══════════════════════════════════════════════════════════╗");
     println!("║       Rust 异步语义理论 - 形式化分析与证明               ║");

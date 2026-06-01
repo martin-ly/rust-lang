@@ -1,12 +1,11 @@
 //! Rust 1.95.0 `core::hint::cold_path` 专题示例
-//!
-//! `core::hint::cold_path()` 是 Rust 1.95.0 稳定化的分支预测提示，
+//! Rust 1.95.0 `core::hint::cold_path` 专题Example of
 //! 告诉编译器"当前代码路径很少执行"，辅助优化指令布局和分支预测。
-//!
+//! "when before "，optimization layout and branch prediction 。
 //! 权威来源: https://releases.rs/docs/1.95.0/
-//!
+//! 权威source: https://releases.rs/docs/1.95.0/
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example cold_path_demo -p c02_type_system
 //! ```
 
@@ -16,6 +15,7 @@ use std::hint::cold_path;
 // ==================== 示例 1: 基础用法 — 错误处理冷路径 ====================
 
 /// 使用 `cold_path()` 标注错误处理分支
+/// `cold_path()` error handling
 fn parse_number(input: &str) -> Result<i32, &'static str> {
     match input.parse::<i32>() {
         Ok(n) => Ok(n),
@@ -44,7 +44,6 @@ fn demo_basic_cold_path() {
 
 // ==================== 示例 2: 缓存查找 — 命中 vs 未命中 ====================
 
-/// 使用 `cold_path()` 优化缓存查找的冷路径
 struct Cache {
     data: HashMap<u64, String>,
 }
@@ -96,6 +95,7 @@ fn demo_cache_lookup() {
 // ==================== 示例 3: 限流/熔断器的冷路径 ====================
 
 /// 限流器: 正常请求为热路径，限流触发为冷路径
+/// stream : as ，stream as
 struct RateLimiter {
     requests: u32,
     max_requests: u32,
@@ -145,7 +145,6 @@ fn demo_rate_limiter() {
 
 // ==================== 示例 4: 与 #[cold] 函数的对比 ====================
 
-/// `#[cold]` 属性标记整个函数为冷路径
 #[cold]
 fn handle_critical_error() {
     eprintln!("[CRITICAL] 系统级错误发生，启动恢复流程...");
@@ -153,6 +152,7 @@ fn handle_critical_error() {
 }
 
 /// `cold_path()` 在分支内部标注
+/// `cold_path()` in inside
 fn process_request(req: Option<&str>) -> &str {
     if let Some(r) = req {
         // 热路径
@@ -182,6 +182,7 @@ fn demo_cold_attribute_vs_hint() {
 // ==================== 示例 5: 循环中的罕见条件 ====================
 
 /// 在循环中标注罕见条件分支
+/// in circulation in condition
 fn demo_loop_rare_condition() {
     println!("\n--- cold_path: 循环中的罕见条件 ---");
 
@@ -204,6 +205,7 @@ fn demo_loop_rare_condition() {
 // ==================== 示例 6: 配置解析 — 默认值 vs 自定义值 ====================
 
 /// 配置查找: 使用默认值是热路径，自定义值是冷路径
+/// : ，definition
 fn demo_config_lookup() {
     println!("\n--- cold_path: 配置解析优化 ---");
 

@@ -1,12 +1,15 @@
 //! 算法优化示例
-//!
+//! algorithm optimization example
 //! 本示例展示算法优化的技巧和方法：
+//! this example algorithm optimization tip and method ：
 //! - 空间换时间
+//! - space time
 //! - 时间换空间
+//! - time space
 //! - 算法改进
-//!
+//! - algorithm
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example algorithm_optimization_demo
 //! ```
 use std::collections::HashMap;
@@ -70,6 +73,7 @@ fn main() {
 }
 
 /// 递归版本的斐波那契（O(2^n)）
+/// this （O(2^n)）
 fn fibonacci_recursive(n: usize) -> u64 {
     if n <= 1 {
         n as u64
@@ -79,6 +83,7 @@ fn fibonacci_recursive(n: usize) -> u64 {
 }
 
 /// 优化的动态规划版本（O(n)）
+/// optimization dynamic programming this （O(n)）
 fn fibonacci_dp_optimized(n: usize) -> u64 {
     if n <= 1 {
         return n as u64;
@@ -94,6 +99,7 @@ fn fibonacci_dp_optimized(n: usize) -> u64 {
 }
 
 /// 线性搜索
+/// linear search
 fn linear_search_opt(arr: &[i32], target: i32) -> Option<usize> {
     arr.iter().position(|&x| x == target)
 }

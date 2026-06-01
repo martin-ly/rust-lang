@@ -1,16 +1,25 @@
 //! 异步监控和诊断工具演示
-//!
+//! async and tool demonstration
 //! 本示例展示了异步应用的监控和诊断功能：
+//! this example async application and functionality ：
 //! - 性能指标收集
+//! - performance indicator
 //! - 内存使用监控
+//! - memory
 //! - 任务执行追踪
+//! - task
 //! - 错误率统计
+//! -
 //! - 延迟分布分析
+//! - distribution analyze
+//! - 延迟distributionanalysis
 //! - 健康检查
+//! - health check
 //! - 告警机制
-//!
+//! - mechanism
+//! - 告警mechanism
 //! 运行方式：
-//! ```bash
+//! Run way ：
 //! cargo run --example async_monitoring_demo
 //! ```
 use anyhow::Result;
@@ -22,6 +31,7 @@ use tokio::sync::{Mutex, Notify};
 use tokio::time::{interval, sleep};
 
 /// 性能指标
+/// performance indicator
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PerformanceMetrics {
     pub timestamp: SystemTime,
@@ -36,6 +46,7 @@ pub struct PerformanceMetrics {
 }
 
 /// 任务执行信息
+/// task
 #[derive(Debug, Clone)]
 pub struct TaskExecutionInfo {
     pub task_id: String,
@@ -56,6 +67,7 @@ pub enum TaskStatus {
 }
 
 /// 延迟分布桶
+/// distribution
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LatencyBucket {
     pub range: (Duration, Duration), // (min, max)
@@ -64,6 +76,7 @@ pub struct LatencyBucket {
 }
 
 /// 健康检查结果
+/// health check result
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct HealthCheckResult {
     pub component: String,
@@ -81,6 +94,7 @@ pub enum HealthStatus {
 }
 
 /// 异步监控器
+/// async
 pub struct AsyncMonitor {
     metrics: Arc<Mutex<VecDeque<PerformanceMetrics>>>,
     task_executions: Arc<Mutex<HashMap<String, TaskExecutionInfo>>>,
@@ -158,6 +172,7 @@ impl AsyncMonitor {
     }
 
     /// 记录任务开始
+    /// task
     pub async fn record_task_start(&self, task_id: String, task_name: String) {
         let task_info = TaskExecutionInfo {
             task_id: task_id.clone(),
@@ -174,6 +189,7 @@ impl AsyncMonitor {
     }
 
     /// 记录任务完成
+    /// task
     pub async fn record_task_complete(&self, task_id: &str, success: bool, error: Option<String>) {
         let mut executions = self.task_executions.lock().await;
         if let Some(task_info) = executions.get_mut(task_id) {
@@ -199,6 +215,7 @@ impl AsyncMonitor {
     }
 
     /// 执行健康检查
+    /// health check
     pub async fn perform_health_check(&self, component: &str) -> HealthCheckResult {
         let start = Instant::now();
 
@@ -275,12 +292,14 @@ impl AsyncMonitor {
     }
 
     /// 获取性能指标
+    /// performance indicator
     pub async fn get_metrics(&self) -> Vec<PerformanceMetrics> {
         let metrics = self.metrics.lock().await;
         metrics.iter().cloned().collect()
     }
 
     /// 获取任务执行统计
+    /// task
     pub async fn get_task_stats(&self) -> TaskStats {
         let executions = self.task_executions.lock().await;
 
@@ -313,12 +332,15 @@ impl AsyncMonitor {
     }
 
     /// 获取延迟分布
+    /// distribution
+    /// Get延迟distribution
     pub async fn get_latency_distribution(&self) -> Vec<LatencyBucket> {
         let distribution = self.latency_distribution.lock().await;
         distribution.clone()
     }
 
     /// 获取健康检查结果
+    /// health check result
     pub async fn get_health_status(&self) -> HashMap<String, HealthCheckResult> {
         let health_checks = self.health_checks.lock().await;
         health_checks.clone()

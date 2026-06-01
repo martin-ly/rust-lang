@@ -1,8 +1,11 @@
 //! Miri 测试模块 - 异步代码内存安全验证
+//! Miri module - async memory safety
 //!
 //! 本模块包含用于 Miri 测试的异步代码示例，验证 Future 和 Pin 的安全性。
+//! This module contains Miri async example ， Future and Pin 。
 //!
 //! 运行方式:
+//! Run way :
 //!   cargo miri test miri_tests
 //!   MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test miri_tests
 
@@ -15,6 +18,7 @@ use std::cell::RefCell;
 // ==================== 基本 Future 测试 ====================
 
 /// 一个简单的 Future，返回一个值
+/// simple Future，
 struct SimpleFuture<T>(Option<T>);
 
 impl<T> Future for SimpleFuture<T> {
@@ -30,8 +34,11 @@ impl<T> Future for SimpleFuture<T> {
 }
 
 /// 测试目的: 验证简单 Future
+/// objective : simple Future
 /// 测试场景: 创建一个简单 Future 并轮询
+/// scenario : simple Future and
 /// 预期结果: 应该返回 Ready 和值
+/// result : should Ready and
 #[test]
 fn test_simple_future() {
     let mut future = SimpleFuture(Some(42));
@@ -51,6 +58,7 @@ fn test_simple_future() {
 use std::marker::PhantomPinned;
 
 /// 自引用结构体
+/// reference struct
 struct SelfReferencing {
     data: String,
     ptr: *const String,
@@ -81,8 +89,11 @@ impl SelfReferencing {
 }
 
 /// 测试目的: 验证 Pin 保证自引用安全
+/// objective : Pin reference
 /// 测试场景: 创建自引用结构并通过 Pin 访问
+/// scenario : reference structure and Pin
 /// 预期结果: 应该能够安全访问自引用数据
+/// result : should can reference
 #[test]
 fn test_pin_self_referential() {
     let data = SelfReferencing::new(String::from("Hello, Miri!"));
@@ -94,8 +105,11 @@ fn test_pin_self_referential() {
 // ==================== 异步块和闭包 ====================
 
 /// 测试目的: 验证异步块捕获变量
+/// objective : async variable
 /// 测试场景: 异步块捕获外部变量
+/// scenario : async outside variable
 /// 预期结果: 应该正确捕获并计算
+/// result : should and
 #[test]
 fn test_async_block_capture() {
     let x = 42;
@@ -106,8 +120,11 @@ fn test_async_block_capture() {
 }
 
 /// 测试目的: 验证异步块捕获引用
+/// objective : async reference
 /// 测试场景: 异步块通过 RefCell 修改外部状态
+/// scenario : async RefCell outside state
 /// 预期结果: 应该正确修改外部状态
+/// result : should outside state
 #[test]
 fn test_async_block_ref_capture() {
     let x = RefCell::new(0);
@@ -123,6 +140,7 @@ fn test_async_block_ref_capture() {
 // ==================== Stream-like 结构 ====================
 
 /// 简单的 Stream 实现
+/// simple Stream
 struct CountStream {
     count: usize,
     max: usize,
@@ -147,8 +165,11 @@ impl CountStream {
 }
 
 /// 测试目的: 验证 Stream-like 轮询
+/// objective : Stream-like
 /// 测试场景: 创建计数 Stream 并轮询所有值
+/// scenario : Stream and all
 /// 预期结果: 应该按顺序产生值
+/// result : should order
 #[test]
 fn test_stream_poll() {
     let mut stream = CountStream::new(3);
@@ -204,8 +225,11 @@ where
 }
 
 /// 测试目的: 验证 Future 组合子
+/// objective : Future combination
 /// 测试场景: 创建 MapFuture 并执行
+/// scenario : MapFuture and
 /// 预期结果: 应该应用映射函数并返回结果
+/// result : should application function and result
 #[test]
 fn test_future_combinator() {
     let fut = MapFuture {
@@ -220,6 +244,7 @@ fn test_future_combinator() {
 // ==================== 异步互斥锁 ====================
 
 /// 简单的异步互斥锁（基于 RefCell）
+/// simple async mutex （ RefCell）
 struct AsyncMutex<T> {
     data: RefCell<T>,
 }
@@ -237,8 +262,11 @@ impl<T> AsyncMutex<T> {
 }
 
 /// 测试目的: 验证异步互斥锁
+/// objective : async mutex
 /// 测试场景: 获取锁并修改数据
+/// scenario : lock and
 /// 预期结果: 应该正确修改数据
+/// result : should
 #[test]
 fn test_async_mutex() {
     let mutex = AsyncMutex::new(0);
@@ -254,11 +282,13 @@ fn test_async_mutex() {
 // ==================== 上下文和 Waker ====================
 
 /// 创建一个虚拟的 Waker
+/// Waker
 fn dummy_waker() -> Waker {
     std::task::Waker::noop().clone()
 }
 
 /// 简单的执行器，轮询 Future 到完成
+/// simple ， Future to
 fn block_on<F>(future: F) -> F::Output
 where
     F: Future,
@@ -282,6 +312,7 @@ where
 // ==================== 内存安全边界测试 ====================
 
 /// Pin 投影结构
+/// Pin structure
 struct PinnedData {
     data: String,
     ptr_to_data: *const String,
@@ -300,19 +331,24 @@ impl PinnedData {
     }
 
     /// 安全地获取数据引用
+    /// reference
     fn data(self: Pin<&Self>) -> &str {
         &self.get_ref().data
     }
 
     /// 通过指针获取数据（unsafe）
+    /// pointer （unsafe）
     unsafe fn data_via_ptr(&self) -> &str {
         unsafe { &*self.ptr_to_data }
     }
 }
 
 /// 测试目的: 验证 Pin 投影
+/// objective : Pin
 /// 测试场景: 创建 PinnedData 并访问数据
+/// scenario : PinnedData and
 /// 预期结果: 应该能够安全访问数据
+/// result : should can
 #[test]
 fn test_pinned_projection() {
     let data = PinnedData::new(String::from("Pinned"));
@@ -324,8 +360,11 @@ fn test_pinned_projection() {
 }
 
 /// 测试目的: 验证 Pin<Box<T>> 保证堆分配
+/// objective : Pin<Box<T>> heap
 /// 测试场景: 创建 Box::pin 并访问数据
+/// scenario : Box::pin and
 /// 预期结果: 数据应该正确固定在堆上
+/// result : should in heap on
 #[test]
 fn test_pin_box_heap() {
     let data = [0u8; 1024];
@@ -336,6 +375,7 @@ fn test_pin_box_heap() {
 }
 
 /// Future 状态机
+/// Future state machine
 enum StateMachine {
     Start,
     Processing { _value: i32 },
@@ -343,6 +383,7 @@ enum StateMachine {
 }
 
 /// 状态机 Future
+/// state machine Future
 struct StateMachineFuture {
     state: StateMachine,
 }
@@ -366,8 +407,11 @@ impl Future for StateMachineFuture {
 }
 
 /// 测试目的: 验证 Future 状态机转换
+/// objective : Future state machine conversion
 /// 测试场景: 创建状态机 Future 并执行
+/// scenario : state machine Future and
 /// 预期结果: 应该经过所有状态并返回结果
+/// result : should all state and result
 #[test]
 fn test_state_machine_future() {
     let fut = StateMachineFuture {
@@ -380,8 +424,11 @@ fn test_state_machine_future() {
 // ==================== Miri 特定测试 ====================
 
 /// 测试目的: 验证 Unpin 边界
+/// objective : Unpin edge
 /// 测试场景: 检查类型的 Unpin 实现
+/// scenario : type Unpin
 /// 预期结果: 应该正确识别 Unpin 类型
+/// result : should Unpin type
 #[test]
 fn test_unpin_boundaries() {
     // String 是 Unpin
@@ -394,8 +441,11 @@ fn test_unpin_boundaries() {
 }
 
 /// 测试目的: 验证 Pin 堆语义
+/// objective : Pin heap
 /// 测试场景: 创建 Pin<Box<T>> 并观察地址
+/// scenario : Pin<Box<T>> and
 /// 预期结果: 数据不应该移动
+/// result : should
 #[test]
 fn test_pin_heap_semantics() {
     let _ptr: *const i32;
@@ -412,8 +462,11 @@ fn test_pin_heap_semantics() {
 // ==================== 应该被 Miri 检测的错误（标记为 ignore） ====================
 
 /// 测试目的: 演示不安全的 Pin 投影
+/// objective : demonstration Pin
 /// 测试场景: 移动包含自引用的结构体
+/// scenario : reference struct
 /// 预期结果: Miri 应该检测到 UB
+/// result : Miri should to UB
 #[test]
 #[ignore = "This test demonstrates unsafe Pin usage"]
 fn test_unsafe_pin_projection() {
@@ -437,8 +490,11 @@ fn test_unsafe_pin_projection() {
 }
 
 /// 测试目的: 验证错误的 Pin::new_unchecked 使用
+/// objective : Pin::new_unchecked
 /// 测试场景: 对栈上数据使用 Pin::new_unchecked
+/// scenario : to stack on Pin::new_unchecked
 /// 预期结果: Miri 应该检测到 UB
+/// result : Miri should to UB
 #[test]
 #[ignore = "This test should fail with UB"]
 fn test_pin_new_unchecked_ub() {

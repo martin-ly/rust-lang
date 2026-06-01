@@ -1,4 +1,5 @@
 //! Segment Tree（线段树）：点更新、区间和查询，O(log n)
+//! Segment Tree（segment tree ）：point 、interval and ，O(log n)
 #[derive(Clone, Debug)]
 pub struct SegmentTree {
     n: usize,

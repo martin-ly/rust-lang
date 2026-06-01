@@ -1,8 +1,9 @@
 #![allow(clippy::type_complexity)]
 
 //! 微基准测试：迭代器管道与锁策略对比
-//!
+//! benchmark ：pipe and lock strategy to
 //! 本文件提供可运行的基准测试，对比不同实现的性能特征。
+//! this Run benchmark ，to performance 。
 use criterion::{Criterion, criterion_group, criterion_main};
 use futures::executor::block_on;
 use std::hint::black_box;

@@ -1,10 +1,15 @@
 //! 进程管理演示程序
-//!
+//! process demonstration program
 //! 本示例展示如何使用 C07 进程管理模块进行：
+//! this example C07 process module ：
 //! - 进程创建和管理
+//! - process and
 //! - 进程配置
+//! - process
 //! - 进程状态监控
+//! - process state
 //! - 进程组管理
+//! - process
 use c07_process::prelude::*;
 use c07_process::{ProcessGroupManager, SystemResources};
 use std::collections::HashMap;

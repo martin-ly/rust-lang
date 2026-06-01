@@ -1,3 +1,5 @@
+> ⚠️ **代码示例待扩充**: 本节目前缺少可编译的 Rust 代码示例。欢迎提交 PR 补充！
+>
 # Game Development & ECS Architecture（游戏开发与 ECS 架构）
 
 > **受众**: [进阶]

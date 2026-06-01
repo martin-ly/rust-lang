@@ -1,44 +1,58 @@
 //! 泛型集合操作示例
-//!
+//! generic set example
 //! 本示例展示如何使用泛型实现各种集合操作，包括：
+//! this example generic set ，：
 //! - 泛型栈和队列
+//! - generic stack and
 //! - 泛型映射和集合
+//! - generic and set
 //! - 泛型迭代器适配器
+//! - generic adapter
 //! - 泛型算法实现
+//! - generic algorithm
 use std::collections::{HashMap, HashSet};
 
 /// 泛型栈实现
+/// generic stack
 pub struct Stack<T> {
     items: Vec<T>,
 }
 
 impl<T> Stack<T> {
     /// 创建新的空栈
+    /// stack
     pub fn new() -> Self {
         Self { items: Vec::new() }
     }
 
     /// 推入元素
+    /// element
+    /// 推入element
     pub fn push(&mut self, item: T) {
         self.items.push(item);
     }
 
     /// 弹出元素
+    /// element
+    /// 弹出element
     pub fn pop(&mut self) -> Option<T> {
         self.items.pop()
     }
 
     /// 查看栈顶元素
+    /// stack element
     pub fn peek(&self) -> Option<&T> {
         self.items.last()
     }
 
     /// 检查栈是否为空
+    /// stack as
     pub fn is_empty(&self) -> bool {
         self.items.is_empty()
     }
 
     /// 获取栈的大小
+    /// stack
     pub fn len(&self) -> usize {
         self.items.len()
     }
@@ -51,6 +65,7 @@ impl<T> Default for Stack<T> {
 }
 
 /// 泛型队列实现
+/// generic
 pub struct Queue<T> {
     items: Vec<T>,
 }
@@ -76,11 +91,13 @@ impl<T> Queue<T> {
     }
 
     /// 查看队首元素
+    /// element
     pub fn front(&self) -> Option<&T> {
         self.items.first()
     }
 
     /// 检查队列是否为空
+    /// as
     pub fn is_empty(&self) -> bool {
         self.items.is_empty()
     }
@@ -98,6 +115,7 @@ impl<T> Default for Queue<T> {
 }
 
 /// 泛型映射操作示例
+/// generic example
 pub fn demonstrate_generic_map() {
     println!("=== 泛型映射操作示例 ===");
 
@@ -125,6 +143,7 @@ pub fn demonstrate_generic_map() {
 }
 
 /// 泛型集合操作示例
+/// generic set example
 pub fn demonstrate_generic_set() {
     println!("\n=== 泛型集合操作示例 ===");
 
@@ -155,6 +174,7 @@ pub fn demonstrate_generic_set() {
 }
 
 /// 泛型算法示例
+/// generic algorithm example
 pub fn demonstrate_generic_algorithms<T: PartialOrd + Clone>(items: &mut [T]) -> Vec<T> {
     // 简单的冒泡排序（泛型版本）
     let n = items.len();
@@ -169,6 +189,7 @@ pub fn demonstrate_generic_algorithms<T: PartialOrd + Clone>(items: &mut [T]) ->
 }
 
 /// 泛型查找函数
+/// generic function
 pub fn find_item<T: PartialEq>(items: &[T], target: &T) -> Option<usize> {
     items.iter().position(|x| x == target)
 }

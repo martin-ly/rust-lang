@@ -1,14 +1,21 @@
 //! LeetCode 栈类算法（结合 Rust 1.91 特性）
+//! LeetCode stack algorithm （ Rust 1.91 feature ）
 //!
 //! 本模块实现经典的栈类 LeetCode 题目，充分利用 Rust 1.91 的新特性。
+//! this module stack LeetCode ， Rust 1.91 feature 。
 //!
 //! ## Rust 1.91 特性应用
+//! ## Rust 1.91 feature application
 //!
 //! - **JIT 优化**: 栈操作性能提升 10-15%
+//! - **JIT optimization **: stack performance 10-15%
 //! - **内存优化**: 使用 Vec 作为栈，高效内存管理
+//! - **memory optimization **: Vec as stack ，efficient memory
 //! - **新的稳定 API**: 改进的集合操作
+//! - ** API**: set
 //!
 //! ## 包含的经典题目
+//! ##
 //!
 //! - 20. Valid Parentheses（有效的括号）
 //! - 150. Evaluate Reverse Polish Notation（逆波兰表达式求值）
@@ -24,16 +31,25 @@ use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 /// 150. Evaluate Reverse Polish Notation（逆波兰表达式求值）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给你一个字符串数组 `tokens`，表示一个根据 **逆波兰表示法** 表示的算术表达式。
+/// `tokens`，represent according to **represent ** represent express 。
 /// 请你计算该表达式。返回一个表示表达式值的整数。
+/// this express 。represent express 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 栈操作性能提升
+/// - **JIT optimization **: stack performance
 /// - **内存优化**: 使用 Vec 作为栈
+/// - **memory optimization **: Vec as stack
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(n)
+/// - space complexity : O(n)
 pub fn eval_rpn(tokens: Vec<String>) -> i32 {
     let mut stack = Vec::new();
 
@@ -71,15 +87,23 @@ pub fn eval_rpn(tokens: Vec<String>) -> i32 {
 /// 155. Min Stack（最小栈）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 设计一个支持 `push`，`pop`，`top` 操作，并能在常数时间内检索到最小元素的栈。
+/// design `push`，`pop`，`top` ，and in time inside to minimum element stack 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 栈操作性能提升
+/// - **JIT optimization **: stack performance
 /// - **内存优化**: 使用两个 Vec 分别存储元素和最小值
+/// - **memory optimization **: Vec element and minimum
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(1) 所有操作
+/// - time complexity : O(1) all
 /// - 空间复杂度: O(n)
+/// - space complexity : O(n)
 pub struct MinStack {
     stack: Vec<i32>,
     min_stack: Vec<i32>,
@@ -87,6 +111,7 @@ pub struct MinStack {
 
 impl MinStack {
     /// 创建新的最小栈
+    /// minimum stack
     pub fn new() -> Self {
         Self {
             stack: Vec::new(),
@@ -95,6 +120,7 @@ impl MinStack {
     }
 
     /// 将元素 x 推入栈
+    /// will element x stack
     pub fn push(&mut self, val: i32) {
         self.stack.push(val);
 
@@ -105,6 +131,7 @@ impl MinStack {
     }
 
     /// 删除栈顶元素
+    /// stack element
     pub fn pop(&mut self) {
         if let Some(val) = self.stack.pop()
             && let Some(&min_val) = self.min_stack.last()
@@ -115,11 +142,13 @@ impl MinStack {
     }
 
     /// 获取栈顶元素
+    /// stack element
     pub fn top(&self) -> i32 {
         *self.stack.last().unwrap()
     }
 
     /// 检索栈中的最小元素
+    /// stack in minimum element
     pub fn get_min(&self) -> i32 {
         *self.min_stack.last().unwrap()
     }
@@ -134,16 +163,25 @@ impl Default for MinStack {
 /// 496. Next Greater Element I（下一个更大元素 I）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// `nums1` 中数字 `x` 的 **下一个更大元素** 是指 `x` 在 `nums2` 中对应位置 **右侧** 的 **第一个** 比 `x` 大的元素。
+/// `nums1` in `x` **under element ** `x` in `nums2` in to position **** **first ** `x` element 。
 /// 给你两个 **没有重复元素** 的数组 `nums1` 和 `nums2`，下标从 `0` 开始计数，其中 `nums1` 是 `nums2` 的子集。
+/// **element ** `nums1` and `nums2`，under from `0` ，its in `nums1` `nums2` subset 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 单调栈操作性能提升
+/// - **JIT optimization **: stack performance
 /// - **内存优化**: 使用 HashMap 和栈
+/// - **memory optimization **: HashMap and stack
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n + m)
+/// - time complexity : O(n + m)
 /// - 空间复杂度: O(n)
+/// - space complexity : O(n)
 pub fn next_greater_element(nums1: Vec<i32>, nums2: Vec<i32>) -> Vec<i32> {
     use std::collections::HashMap;
 
@@ -171,15 +209,23 @@ pub fn next_greater_element(nums1: Vec<i32>, nums2: Vec<i32>) -> Vec<i32> {
 /// 503. Next Greater Element II（下一个更大元素 II）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给定一个循环数组 `nums`（`nums[nums.length - 1]` 的下一个元素是 `nums[0]`），返回 `nums` 中每个元素的 **下一个更大元素**。
+/// circulation `nums`（`nums[nums.length - 1]` under element `nums[0]`）， `nums` in element **under element **。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 单调栈操作性能提升
+/// - **JIT optimization **: stack performance
 /// - **内存优化**: 使用栈和数组
+/// - **memory optimization **: stack and
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(n)
+/// - space complexity : O(n)
 pub fn next_greater_elements(nums: Vec<i32>) -> Vec<i32> {
     let n = nums.len();
     let mut result = vec![-1; n];
@@ -209,16 +255,25 @@ pub fn next_greater_elements(nums: Vec<i32>) -> Vec<i32> {
 /// 739. Daily Temperatures（每日温度）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给定一个整数数组 `temperatures`，表示每天的温度，返回一个数组 `answer`，其中 `answer[i]` 是指对于第 `i` 天，
+/// `temperatures`，represent ， `answer`，its in `answer[i]` to `i` ，
 /// 下一个更高温度出现在几天后。如果气温在这之后都不会升高，请在该位置用 `0` 来代替。
+/// under present after 。if in 's after ，in this position `0` 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 单调栈操作性能提升
+/// - **JIT optimization **: stack performance
 /// - **内存优化**: 使用栈存储索引
+/// - **memory optimization **: stack
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(n)
+/// - space complexity : O(n)
 pub fn daily_temperatures(temperatures: Vec<i32>) -> Vec<i32> {
     let n = temperatures.len();
     let mut result = vec![0; n];
@@ -243,15 +298,23 @@ pub fn daily_temperatures(temperatures: Vec<i32>) -> Vec<i32> {
 /// 844. Backspace String Compare（比较含退格的字符串）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给定 `s` 和 `t` 两个字符串，当它们分别被输入到空白的文本编辑器后，如果两者相等，返回 `true`。`#` 代表退格字符。
+/// `s` and `t` ，when is to this after ，if etc. ， `true`。`#` 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 栈操作性能提升
+/// - **JIT optimization **: stack performance
 /// - **内存优化**: 使用栈模拟文本编辑器
+/// - **memory optimization **: stack this
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n + m)
+/// - time complexity : O(n + m)
 /// - 空间复杂度: O(n + m)
+/// - space complexity : O(n + m)
 pub fn backspace_compare(s: String, t: String) -> bool {
     fn process_string(input: String) -> Vec<char> {
         let mut stack = Vec::new();
@@ -274,6 +337,7 @@ pub fn backspace_compare(s: String, t: String) -> bool {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有栈类问题
+/// all stack problem
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

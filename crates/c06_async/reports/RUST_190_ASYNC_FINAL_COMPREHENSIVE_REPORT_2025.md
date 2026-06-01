@@ -171,7 +171,7 @@ trait AsyncProcessor {
  param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- ' ----------|
 | **Tokio** | 15ms | 12MB | 100,000 req/s | 0.5ms | 企业级应用 |
 | **Smol** | 2ms | 3MB | 80,000 req/s | 0.8ms | 轻量级应用 |
-| **async-std** | 8ms | 8MB | 75,000 req/s | 1.0ms | 标准库兼容 |
+| **async-std [已归档]** | 8ms | 8MB | 75,000 req/s | 1.0ms | 标准库兼容 |
 
 ### 3.2 实际性能测试数据
 

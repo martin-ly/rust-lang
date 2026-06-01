@@ -1,19 +1,23 @@
-//! Rust 1.91 WebAssembly 特性演示示例 (历史版本)
-//!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//!
+//! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features_demo.rs`
-//!
-//! 本示例展示了 Rust 1.91 在 WebAssembly 场景中的应用，包括：
-//!
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features_demo.rs`
 //! 1. const 上下文增强（WASM 配置计算）
-//! 2. 新的稳定 API（WASM 数据处理）
+//! 1. const on under （WASM ）
+//! 2. 新稳定 API（WASM 数据Handle）
 //! 3. JIT 编译器优化（WASM 性能提升）
+//! 3. JIT optimization （WASM performance ）
 //! 4. 内存分配器优化（WASM 内存优化）
+//! 4. allocator optimization （WASM memory optimization ）
 //! 5. WASM 编译优化（类型检查器优化）
+//! 5. WASM optimization （type optimization ）
 //! 6. wasm-bindgen 集成优化
+//! 6. wasm-bindgen 集成optimization
 //! 7. WASM 二进制大小优化
+//! 7. WASM optimization
+//! 7. WASM 二进制大小optimization
 //! 8. WASM 运行时性能优化
+//! 8. WASM runtime performance optimization
 use c12_wasm::rust_191_features::*;
 
 fn main() {
@@ -47,6 +51,7 @@ fn main() {
 }
 
 /// 演示 const 上下文增强
+/// demonstration const on under
 fn demo_const_context() {
     println!("1. Const 上下文增强（WASM 配置计算）");
     println!("   Rust 1.91: 可以在 const 上下文中创建对非静态常量的引用\n");
@@ -56,6 +61,8 @@ fn demo_const_context() {
 }
 
 /// 演示新的稳定 API
+/// demonstration API
+/// Demonstration of新稳定 API
 fn demo_new_apis() {
     println!("\n2. 新的稳定 API（WASM 数据处理）");
     println!("   Rust 1.91: BufRead::skip_while, ControlFlow 改进\n");
@@ -89,6 +96,8 @@ fn demo_new_apis() {
 }
 
 /// 演示 JIT 编译器优化
+/// demonstration JIT optimization
+/// Demonstration of JIT 编译器optimization
 fn demo_jit_optimizations() {
     println!("\n3. JIT 编译器优化（WASM 性能提升）");
     println!("   Rust 1.91: 迭代器操作性能提升 10-25%\n");
@@ -97,6 +106,7 @@ fn demo_jit_optimizations() {
 }
 
 /// 演示内存分配器优化
+/// demonstration allocator optimization
 fn demo_memory_optimizations() {
     println!("\n4. 内存分配器优化（WASM 内存优化）");
     println!("   Rust 1.91: 小对象分配性能提升 25-30%\n");
@@ -105,6 +115,8 @@ fn demo_memory_optimizations() {
 }
 
 /// 演示 WASM 编译优化
+/// demonstration WASM optimization
+/// Demonstration of WASM 编译optimization
 fn demo_compilation_optimizations() {
     println!("\n5. WASM 编译优化（类型检查器优化）");
     println!("   Rust 1.91: 编译时间减少 10-20%\n");
@@ -113,6 +125,8 @@ fn demo_compilation_optimizations() {
 }
 
 /// 演示 wasm-bindgen 集成优化
+/// demonstration wasm-bindgen optimization
+/// Demonstration of wasm-bindgen 集成optimization
 fn demo_wasm_bindgen_optimizations() {
     println!("\n6. wasm-bindgen 集成优化");
     println!("   Rust 1.91: 使用 const 上下文优化配置\n");
@@ -121,6 +135,8 @@ fn demo_wasm_bindgen_optimizations() {
 }
 
 /// 演示 WASM 二进制大小优化
+/// demonstration WASM optimization
+/// Demonstration of WASM 二进制大小optimization
 fn demo_binary_size_optimizations() {
     println!("\n7. WASM 二进制大小优化");
     println!("   Rust 1.91: 代码生成更紧凑，二进制大小减少约 5-10%\n");
@@ -129,6 +145,7 @@ fn demo_binary_size_optimizations() {
 }
 
 /// 演示 WASM 运行时性能优化
+/// demonstration WASM runtime performance optimization
 fn demo_runtime_optimizations() {
     println!("\n8. WASM 运行时性能优化");
     println!("   Rust 1.91: JIT 优化和内存分配优化提升运行时性能\n");

@@ -1,7 +1,10 @@
 //! 增强的错误处理系统
+//! error handling system
 //!
 //! 这个模块提供了增强的错误处理功能，包括错误恢复、
+//! module error handling functionality ，error recovery 、
 //! 错误链追踪、错误分类等 Rust 1.90 新特性
+//! 、classification etc. Rust 1.90 feature
 #[cfg(test)]
 use crate::error::ProcessError;
 use serde::{Deserialize, Serialize};
@@ -41,6 +44,7 @@ pub struct EnhancedErrorEntry {
 }
 
 /// 错误类型
+/// error type
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum ErrorType {
@@ -61,6 +65,7 @@ pub enum ErrorType {
 }
 
 /// 错误严重程度
+/// degree
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum ErrorSeverity {
@@ -72,6 +77,7 @@ pub enum ErrorSeverity {
 }
 
 /// 错误恢复器
+/// error recovery
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 pub struct ErrorRecovery {
@@ -82,6 +88,7 @@ pub struct ErrorRecovery {
 }
 
 /// 错误分类器
+/// classification
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 pub struct ErrorClassifier {
@@ -109,6 +116,7 @@ pub struct ErrorNotifier {
 }
 
 /// 恢复策略
+/// strategy
 #[cfg(feature = "async")]
 #[derive(Clone)]
 #[allow(dead_code)]
@@ -154,6 +162,7 @@ pub struct RecoveryAttempt {
 }
 
 /// 分类规则
+/// classification rule
 #[cfg(feature = "async")]
 #[derive(Debug, Clone)]
 #[allow(dead_code)]
@@ -167,6 +176,7 @@ pub struct ClassificationRule {
 }
 
 /// 错误分类
+/// classification
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[allow(dead_code)]
@@ -194,6 +204,7 @@ pub struct ErrorChain {
 }
 
 /// 通知通道
+/// channel
 #[cfg(feature = "async")]
 #[derive(Debug, Clone)]
 #[allow(dead_code)]
@@ -221,6 +232,7 @@ pub enum NotificationChannel {
 }
 
 /// 通知规则
+/// rule
 #[cfg(feature = "async")]
 #[derive(Debug, Clone)]
 #[allow(dead_code)]
@@ -233,6 +245,7 @@ pub struct NotificationRule {
 }
 
 /// 通知条件
+/// condition
 #[cfg(feature = "async")]
 #[derive(Debug, Clone)]
 #[allow(dead_code)]
@@ -273,6 +286,7 @@ pub struct ErrorManagerConfig {
 }
 
 /// 恢复结果
+/// result
 #[cfg(feature = "async")]
 #[derive(Debug, Clone)]
 pub enum RecoveryResult {
@@ -389,6 +403,7 @@ impl EnhancedErrorManager {
     }
 
     /// 尝试错误恢复（使用 Rust 1.90 改进的模式匹配）
+    /// error recovery （ Rust 1.90 ）
     pub async fn attempt_recovery(&self, error_entry: &EnhancedErrorEntry) -> RecoveryResult {
         let strategies = self
             .error_recovery
@@ -481,6 +496,7 @@ impl EnhancedErrorManager {
     }
 
     /// 生成错误ID
+    /// ID
     fn generate_error_id(&self) -> String {
         format!(
             "ERR_{}",
@@ -492,6 +508,7 @@ impl EnhancedErrorManager {
     }
 
     /// 分类错误类型
+    /// classification error type
     fn classify_error_type(&self, error: &dyn StdError) -> ErrorType {
         let msg = error.to_string().to_lowercase();
         if msg.contains("process") {
@@ -512,6 +529,7 @@ impl EnhancedErrorManager {
     }
 
     /// 分类错误严重程度
+    /// classification degree
     fn classify_error_severity(
         &self,
         _error: &dyn StdError,
@@ -529,6 +547,7 @@ impl EnhancedErrorManager {
     }
 
     /// 捕获堆栈跟踪
+    /// heap stack
     fn capture_stack_trace(&self) -> Option<String> {
         // 这里应该实现实际的堆栈跟踪捕获
         // 为了演示，返回一个模拟的堆栈跟踪
@@ -536,6 +555,7 @@ impl EnhancedErrorManager {
     }
 
     /// 执行恢复策略
+    /// strategy
     #[allow(unused_variables)]
     async fn execute_recovery_strategy(
         &self,
@@ -616,6 +636,7 @@ impl EnhancedErrorManager {
     }
 
     /// 记录恢复失败（使用 Rust 1.90 改进的错误处理）
+    /// （ Rust 1.90 error handling ）
     async fn log_recovery_failure(&self, error_id: &str, error: &str, duration: Duration) {
         // 使用 Rust 1.90 改进的字符串处理和错误记录
         let failure_info = format!(
@@ -635,6 +656,7 @@ impl EnhancedErrorManager {
     }
 
     /// 智能错误恢复（使用 Rust 1.90 异步闭包）
+    /// error recovery （ Rust 1.90 async ）
     pub async fn smart_recovery<F, Fut>(
         &self,
         error_entry: &EnhancedErrorEntry,
@@ -681,6 +703,7 @@ impl EnhancedErrorManager {
     }
 
     /// 批量错误恢复（使用 Rust 1.90 改进的迭代器）
+    /// error recovery （ Rust 1.90 ）
     pub async fn batch_recovery(
         &self,
         error_entries: Vec<EnhancedErrorEntry>,
@@ -727,6 +750,7 @@ impl EnhancedErrorManager {
     }
 
     /// 智能错误链追踪（使用 Rust 1.90 改进的模式匹配）
+    /// （ Rust 1.90 ）
     pub async fn trace_error_chain(&self, root_error_id: &str) -> Option<ErrorChain> {
         let chains = self.error_chain_tracker.error_chains.lock().await;
 
@@ -742,6 +766,7 @@ impl EnhancedErrorManager {
     }
 
     /// 分析错误链模式（使用 Rust 1.90 改进的迭代器）
+    /// analyze （ Rust 1.90 ）
     pub async fn analyze_error_patterns(&self) -> ErrorPatternAnalysis {
         let history = self.error_history.read().await;
 
@@ -785,6 +810,7 @@ impl EnhancedErrorManager {
     }
 
     /// 预测性错误检测（使用 Rust 1.90 智能模式匹配）
+    /// forecast （ Rust 1.90 ）
     pub async fn predict_errors(&self) -> Vec<ErrorPrediction> {
         let history = self.error_history.read().await;
         let mut predictions = Vec::new();
@@ -851,6 +877,7 @@ impl EnhancedErrorManager {
     }
 
     /// 后台清理循环
+    /// after circulation
     #[allow(unused_variables)]
     async fn background_cleanup_loop(
         error_history: Arc<TokioRwLock<Vec<EnhancedErrorEntry>>>,
@@ -894,6 +921,7 @@ pub struct ErrorStatistics {
 }
 
 /// 错误模式分析结果
+/// analyze result
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ErrorPatternAnalysis {
@@ -905,6 +933,7 @@ pub struct ErrorPatternAnalysis {
 }
 
 /// 错误预测
+/// forecast
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ErrorPrediction {

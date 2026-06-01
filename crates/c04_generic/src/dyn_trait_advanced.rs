@@ -1,14 +1,15 @@
 #![allow(clippy::doc_lazy_continuation)]
 
 //! Dyn Trait 高级用法
-//!
-//! 本模块深入探讨 `dyn Trait` 对象的高级特性，包括：
+//! Dyn Trait
 //! - Dyn Upcasting Coercion ( trait 对象向上转换 )
+//! - Dyn Upcasting Coercion ( trait to象向onconversion )
 //! - Object-Safe 扩展规则
+//! - Object-Safe 扩展rule
 //! - 自定义接收者类型 (Custom Receiver Types)
-//! - 与 Rust 2024 Edition 的协同
-//!
+//! - and Rust 2024 Edition 协同
 //! 注意: 部分特性需要 nightly Rust 或特定版本。
+//! : part feature nightly Rust or this 。
 
 use std::{any::Any, fmt::Debug};
 
@@ -16,13 +17,16 @@ use std::{any::Any, fmt::Debug};
 // 1. Dyn Upcasting Coercion
 // =============================================================================
 
-/// Dyn Upcasting 允许将 `dyn SubTrait` 转换为 `dyn SuperTrait`。
-///
 /// 这在 Rust 1.86 (2025) 中已稳定化。
-///
+/// in Rust 1.86 (2025) in 。
+/// 这in Rust 1.86 (2025) in已稳定化。
+/// in Rust 1.86 (2025) in。
 /// # 示例场景
+/// # example scenario
 /// 当你持有一个 `dyn Display + Debug` 对象，但只需要 `dyn Display` 时，
+/// when `dyn Display + Debug` to ，but `dyn Display` ，
 /// 可以直接进行 trait 对象向上转换，无需重新包装。
+/// can trait to on conversion ，。
 pub trait Animal: Debug {
     fn speak(&self);
 }
@@ -59,8 +63,7 @@ impl Canine for Dog {
 }
 
 /// 演示 Dyn Upcasting Coercion
-///
-/// `&dyn Canine` → `&dyn Mammal` → `&dyn Animal` 的自动转换
+/// `&dyn Canine` → `&dyn Mammal` → `&dyn Animal` 自动conversion
 pub fn demo_dyn_upcasting() {
     println!("=== Dyn Upcasting Coercion 演示 ===");
 
@@ -86,7 +89,6 @@ pub fn demo_dyn_upcasting() {
     println!();
 }
 
-/// Upcasting 在函数参数中的使用
 pub fn feed_animal(animal: &dyn Animal) {
     println!("Feeding: {:?}", animal);
     animal.speak();
@@ -111,28 +113,21 @@ pub fn demo_upcasting_in_api() {
 // =============================================================================
 
 /// Object-Safe Trait 判定规则
-///
-/// 一个 trait 是 object-safe 的，当且仅当满足以下所有条件：
-///
-/// 1. 所有关联类型都有明确的边界（或在 trait 对象中被擦除）
-/// 2. 没有要求 `Self: Sized` 的方法（除非有默认实现且不被 trait 对象调用）
-/// 3. 没有静态方法（没有 `self` 参数的方法）
+/// Object-Safe Trait 判定rule
+/// 3. 没有静态method（没有 `self` parametermethod）
 /// 4. 泛型方法的类型参数必须被具体化（不能保留未绑定的泛型）
-///
-/// Rust 2024 Edition 放宽了部分限制，允许更多 trait 成为 object-safe。
+/// 4. generic method type parameter must is volume （cannot generic ）
 /// ✅ Object-Safe 示例
 pub trait Drawable: Debug {
     fn draw(&self);
     fn bounds(&self) -> (i32, i32, i32, i32);
 }
 
-/// ❌ 非 Object-Safe 示例 (使用了 Self: Sized)
 pub trait Constructor: Sized {
     fn new() -> Self;
     //  ^^^ 返回 Self，要求 Sized，因此不能作为 dyn Constructor
 }
 
-/// ✅ 混合策略: 将 Sized 方法移到独立的 super trait
 pub trait Constructible {
     fn instance_name(&self) -> &str;
 }
@@ -151,17 +146,12 @@ fn use_constructible(c: &dyn Constructible) {
 // 3. 自定义接收者类型 (Custom Receiver Types)
 // =============================================================================
 
-/// Rust 2024 Edition 及后续版本增强了自定义接收者类型的支持。
-/// 除了常见的 `&self`、`&mut self`、`self`、`Box<Self>`，
-/// 还可以使用 `Rc<Self>`、`Arc<Self>` 等智能指针作为方法接收者。
 use std::rc::Rc;
 use std::sync::Arc;
 
 pub trait SharedResource: Debug {
-    /// 使用 `Rc<Self>` 作为接收者
     fn shared_operation(self: Rc<Self>);
 
-    /// 使用 `Arc<Self>` 作为接收者（用于跨线程场景）
     fn atomic_operation(self: Arc<Self>);
 }
 
@@ -212,7 +202,9 @@ pub fn demo_custom_receivers() {
 // =============================================================================
 
 /// `dyn Any` 允许在运行时进行类型识别和向下转换。
+/// `dyn Any` in runtime type and under conversion 。
 /// 这是实现插件系统、事件总线等模式的基础。
+/// system 、line etc. foundation 。
 pub trait Plugin: Any + Debug {
     fn name(&self) -> &str;
     fn as_any(&self) -> &dyn Any;
@@ -269,6 +261,7 @@ impl PluginManager {
     }
 
     /// 获取特定类型的插件引用
+    /// type reference
     pub fn get_plugin<T: Plugin>(&self) -> Option<&T> {
         self.plugins
             .iter()
@@ -307,18 +300,15 @@ pub fn demo_dyn_any() {
 // 5. Rust 2024 Edition 的 Dyn Trait 改进
 // =============================================================================
 
-/// Rust 2024 Edition 中与 trait 对象相关的重要改进：
-///
 /// 1. **隐式 `dyn` 弃用**: `Box<Trait>` 语法被移除，必须使用 `Box<dyn Trait>`
+/// 1. ** `dyn` **: `Box<Trait>` is ，must `Box<dyn Trait>`
 ///    (本项目 edition = "2024"，已强制使用显式 dyn)
-///
+///    (this project edition = "2024"， dyn)
+///    (thisproject edition = "2024"，已强制Use显式 dyn)
 /// 2. **`impl Trait` 在更多位置**: 函数指针、关联类型等位置支持 `impl Trait`
-///
+/// 2. **`impl Trait` in position **: function pointer 、associated type etc. position `impl Trait`
 /// 3. **RPITIT 稳定化**: Return Position Impl Trait In Traits (Rust 1.75+)
-///    使得 trait 方法可以返回 `impl Iterator` 等，减少不必要的 dyn 使用
-///
-/// 4. **Async Fn In Traits 稳定**: 减少手写的 `Pin<Box<dyn Future>>`
-/// 演示 Rust 2024 风格: 显式 dyn 和清晰的 trait 对象边界
+/// 4. **Async Fn In Traits 稳定**: 减少手写 `Pin<Box<dyn Future>>`
 pub trait Processor {
     type Input;
     type Output: Debug;
@@ -327,11 +317,13 @@ pub trait Processor {
 }
 
 /// 使用 trait 对象实现动态分发
+/// trait to
+/// Use trait to象Implementation ofdynamic dispatch
 pub struct DynamicPipeline {
     processors: Vec<Box<dyn DynProcessor>>,
 }
 
-/// Object-safe 版本的 Processor trait
+/// Object-safe 版this Processor trait
 pub trait DynProcessor: Debug {
     fn process_dyn(&self, input: &dyn Any) -> Box<dyn Any>;
     fn type_name(&self) -> &'static str;
@@ -369,12 +361,12 @@ impl DynamicPipeline {
 // 6. 实用工具函数
 // =============================================================================
 
-/// 检查两个 trait 对象是否指向同一对象
 pub fn same_object<T: ?Sized>(a: &T, b: &T) -> bool {
     std::ptr::eq(a as *const T as *const (), b as *const T as *const ())
 }
 
 /// 安全的向下转换包装
+/// under conversion
 pub fn try_downcast_ref<T: Any>(obj: &dyn Any) -> Option<&T> {
     obj.downcast_ref::<T>()
 }

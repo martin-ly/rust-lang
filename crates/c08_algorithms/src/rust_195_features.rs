@@ -1,12 +1,18 @@
 //! Rust 1.95 特性 —— 算法场景
+//! Rust 1.95 feature —— algorithm scenario
 //!
 //! # 概述
+//! #
 //!
 //! Rust 1.95 为算法设计带来的增强：
+//! Rust 1.95 as algorithm design ：
 //! - **`core::range::RangeInclusive`** — 闭区间算法、区间树
 //! - **`if let` guards** — 搜索与排序中的条件匹配
+//! - **`if let` guards** — and ordering in condition
 //! - **`Atomic*::update`** — 并发算法的无锁计数器
+//! - **`Atomic*::update`** — concurrency algorithm lock-free
 //! - **`cold_path`** — 分支预测不友好的路径标记
+//! - **`cold_path`** — branch prediction mark
 
 use std::sync::atomic::{AtomicUsize, Ordering};
 
@@ -15,12 +21,15 @@ use std::sync::atomic::{AtomicUsize, Ordering};
 // ============================================================================
 
 /// # 区间算法增强
+/// # interval algorithm
 ///
 /// `core::range::RangeInclusive` 提供了统一闭区间类型，适用于区间覆盖、调度等算法。
+/// `core::range::RangeInclusive` interval type ，interval 、etc. algorithm 。
 pub struct RangeAlgorithmExamples;
 
 impl RangeAlgorithmExamples {
     /// 判断两个闭区间是否重叠
+    /// interval
     pub fn ranges_overlap(
         a: core::range::RangeInclusive<i32>,
         b: core::range::RangeInclusive<i32>,
@@ -29,6 +38,7 @@ impl RangeAlgorithmExamples {
     }
 
     /// 合并重叠区间（简化版：假设输入已排序）
+    /// and interval （：hypothesize ordering ）
     pub fn merge_overlapping(
         ranges: &[core::range::RangeInclusive<i32>],
     ) -> Vec<core::range::RangeInclusive<i32>> {
@@ -49,6 +59,7 @@ impl RangeAlgorithmExamples {
     }
 
     /// 检查点是否在任意区间内（区间覆盖查询）
+    /// point in interval inside （interval ）
     pub fn point_in_any(point: i32, ranges: &[core::range::RangeInclusive<i32>]) -> bool {
         ranges.iter().any(|r| r.start <= point && point <= r.last)
     }
@@ -59,12 +70,15 @@ impl RangeAlgorithmExamples {
 // ============================================================================
 
 /// # 条件搜索模式
+/// # condition
 ///
 /// `if let` guards 在搜索和过滤算法中提供更精确的控制流。
+/// `if let` guards in and algorithm in stream 。
 pub struct SearchAlgorithmExamples;
 
 impl SearchAlgorithmExamples {
     /// 查找第一个满足复合条件的元素
+    /// first condition element
     pub fn find_first_valid<T>(items: &[&str], min: T) -> Option<T>
     where
         T: std::str::FromStr + PartialOrd,
@@ -76,6 +90,7 @@ impl SearchAlgorithmExamples {
     }
 
     /// 二分搜索变体：查找满足谓词的边界
+    /// binary search volume ：edge
     pub fn partition_point_with_guard<T>(arr: &[T], predicate: impl Fn(&T) -> bool) -> usize {
         arr.iter().position(|x| !predicate(x)).unwrap_or(arr.len())
     }
@@ -86,17 +101,21 @@ impl SearchAlgorithmExamples {
 // ============================================================================
 
 /// # 并发算法中的原子操作
+/// # concurrency algorithm in atomic operation
 ///
 /// 并行算法的统计和协调。
+/// parallel algorithm and 。
 pub struct ConcurrentAlgorithmExamples;
 
 impl ConcurrentAlgorithmExamples {
     /// 比较计数器（用于并行算法的步数统计）
+    /// （parallel algorithm ）
     pub fn increment_step_counter(counter: &AtomicUsize) -> usize {
         counter.update(Ordering::Relaxed, Ordering::Relaxed, |old| old + 1)
     }
 
     /// 尝试获取工作单元（用于 work-stealing 算法）
+    /// unit of work （ work-stealing algorithm ）
     pub fn try_acquire_work_unit(counter: &AtomicUsize) -> Result<usize, usize> {
         counter.try_update(Ordering::Acquire, Ordering::Relaxed, |remaining| {
             if remaining > 0 {
@@ -113,12 +132,15 @@ impl ConcurrentAlgorithmExamples {
 // ============================================================================
 
 /// # 算法边界路径优化
+/// # algorithm edge optimization
 ///
 /// 算法中很少触发的边界情况。
+/// algorithm in edge situation 。
 pub struct AlgorithmColdPathExamples;
 
 impl AlgorithmColdPathExamples {
     /// 数组访问：越界为冷路径
+    /// ：as
     pub fn safe_get<T: Clone>(arr: &[T], index: usize) -> Option<T> {
         if index < arr.len() {
             Some(arr[index].clone())
@@ -129,6 +151,7 @@ impl AlgorithmColdPathExamples {
     }
 
     /// 除法：除零为冷路径
+    /// ：as
     pub fn safe_divide(a: i32, b: i32) -> Option<i32> {
         if b != 0 {
             Some(a / b)
@@ -150,14 +173,19 @@ impl AlgorithmColdPathExamples {
 /// # `cfg_select!` 宏
 ///
 /// `cfg_select!` 是 Rust 1.95.0 稳定的编译时条件选择宏。
+/// `cfg_select!` Rust 1.95.0 compile-time condition 。
 /// 在算法优化中，可用于编译期选择平台相关的缓存行大小，
+/// in algorithm optimization in ，platform cache line ，
 /// 指导伪共享 (false sharing) 避免策略。
+/// false sharing (false sharing) strategy 。
 pub struct CfgSelectAlgorithmExamples;
 
 impl CfgSelectAlgorithmExamples {
     /// 平台相关的缓存行大小 (bytes)
+    /// platform cache line (bytes)
     ///
     /// 用于对齐并发数据结构以避免伪共享。
+    /// to concurrency data structure false sharing 。
     pub const CACHE_LINE_SIZE: usize = cfg_select! {
         any(target_arch = "x86_64", target_arch = "aarch64") => { 64 }
         target_arch = "powerpc64" => { 128 }
@@ -170,9 +198,11 @@ impl CfgSelectAlgorithmExamples {
 // ============================================================================
 
 /// # 集合可变引用插入 API
+/// # set reference API
 ///
 /// Rust 1.95.0 为 Vec, VecDeque, LinkedList 稳定了一组新方法，
 /// 允许在插入元素后直接获取其可变引用，避免了二次查找。
+/// in element after its reference ，。
 use std::collections::{LinkedList, VecDeque};
 
 pub struct PushMutExamples;
@@ -395,7 +425,9 @@ impl RealRust195Features {
     /// `gen` block: 合并 K 个已排序序列（K-way merge）
     ///
     /// 使用 `gen` block 将传统的手动状态机（维护 K 个 Peekable 迭代器）
+    /// `gen` block will state machine （ K Peekable ）
     /// 简化为直观的命令式循环。
+    /// as imperative circulation 。
     pub fn gen_merge_sorted(sequences: Vec<Vec<i32>>) -> impl Iterator<Item = i32> {
         gen move {
             let mut iters: Vec<_> = sequences
@@ -426,9 +458,11 @@ impl RealRust195Features {
     }
 
     /// `gen` block: 已排序序列去重
+    /// `gen` block: ordering sequence
     ///
     /// 等价于 `SequenceDeduplicator` 的手动 Iterator 实现，
     /// 但 `gen` block 的源码更直观。
+    /// but `gen` block 。
     pub fn gen_dedup_sorted(data: Vec<i32>) -> impl Iterator<Item = i32> {
         gen move {
             let mut iter = data.into_iter().peekable();
@@ -443,8 +477,10 @@ impl RealRust195Features {
     }
 
     /// `gen` block: 滑动窗口求和
+    /// `gen` block: and
     ///
     /// 返回输入数组中每个大小为 `window_size` 的连续窗口的和。
+    /// in as `window_size` and 。
     pub fn gen_window_sum(data: Vec<i32>, window_size: usize) -> impl Iterator<Item = i32> {
         gen move {
             if window_size == 0 || data.len() < window_size {

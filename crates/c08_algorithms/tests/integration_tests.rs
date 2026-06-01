@@ -1,6 +1,7 @@
 //! # 综合测试套件
-//!
+//! # synthesize
 //! 本文件包含对整个算法库的综合测试，验证各个模块之间的集成和协作。
+//! this to algorithm library synthesize ，module 's and 。
 use c08_algorithms::algorithms::rust_2025_features::*;
 use c08_algorithms::algorithms::sorting::SyncSortingAlgorithm;
 use c08_algorithms::algorithms::sorting::async_exec::{AsyncMergeSort, AsyncQuickSort};
@@ -12,6 +13,7 @@ use std::future::Future;
 use std::pin::Pin;
 
 /// 测试排序算法的正确性
+/// sorting algorithm
 #[test]
 fn test_sorting_algorithms_correctness() {
     let test_data = vec![64, 34, 25, 12, 22, 11, 90, 5, 77, 30];
@@ -29,6 +31,7 @@ fn test_sorting_algorithms_correctness() {
 }
 
 /// 测试搜索算法的正确性
+/// searching algorithm
 #[test]
 fn test_searching_algorithms_correctness() {
     // 注意：搜索算法模块结构需要进一步检查
@@ -37,6 +40,7 @@ fn test_searching_algorithms_correctness() {
 }
 
 /// 测试字符串算法的正确性
+/// string algorithm
 #[test]
 fn test_string_algorithms_correctness() {
     let text = "hello world hello rust";
@@ -52,6 +56,7 @@ fn test_string_algorithms_correctness() {
 }
 
 /// 测试Rust 2025新特性模块
+/// Rust 2025feature module
 #[test]
 fn test_rust_2025_features() {
     // 测试生成器算法
@@ -77,6 +82,7 @@ fn test_rust_2025_features() {
 }
 
 /// 测试异步算法的正确性
+/// async algorithm
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_async_algorithms_correctness() {
@@ -95,6 +101,7 @@ async fn test_async_algorithms_correctness() {
 }
 
 /// 测试并行算法的正确性
+/// parallel algorithm
 #[test]
 fn test_parallel_algorithms_correctness() {
     let test_data = vec![64, 34, 25, 12, 22, 11, 90, 5, 77, 30];
@@ -112,6 +119,7 @@ fn test_parallel_algorithms_correctness() {
 }
 
 /// 测试异步闭包算法
+/// async algorithm
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_async_closure_algorithms() {
@@ -125,6 +133,7 @@ async fn test_async_closure_algorithms() {
 }
 
 /// 测试异步迭代器算法
+/// async algorithm
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_async_iterator_algorithms() {
@@ -139,6 +148,7 @@ async fn test_async_iterator_algorithms() {
 }
 
 /// 测试性能优化算法
+/// performance optimization algorithm
 #[test]
 fn test_performance_optimized_algorithms() {
     let a = vec![1.0, 2.0, 3.0, 4.0];
@@ -150,6 +160,7 @@ fn test_performance_optimized_algorithms() {
 }
 
 /// 测试组合生成器
+/// combination
 #[test]
 fn test_combinations_generator() {
     let items = vec!['a', 'b', 'c'];
@@ -173,6 +184,7 @@ fn test_prime_generator() {
 }
 
 /// 测试算法复杂度分析
+/// algorithm complex analyze
 #[test]
 fn test_algorithm_complexity_analysis() {
     let quick_sorter = QuickSort;
@@ -187,6 +199,7 @@ fn test_algorithm_complexity_analysis() {
 }
 
 /// 测试错误处理
+/// error handling
 #[test]
 fn test_error_handling() {
     // 测试空数组排序
@@ -205,6 +218,7 @@ fn test_error_handling() {
 }
 
 /// 测试边界条件
+/// boundary condition
 #[test]
 fn test_edge_cases() {
     // 测试已排序数组
@@ -225,6 +239,7 @@ fn test_edge_cases() {
 }
 
 /// 测试大数据集性能
+/// performance
 #[test]
 #[cfg_attr(miri, ignore)]
 fn test_large_dataset_performance() {
@@ -254,6 +269,7 @@ fn test_large_dataset_performance() {
 }
 
 /// 测试内存使用
+/// memory
 #[test]
 fn test_memory_usage() {
     // 测试内存池优化
@@ -264,6 +280,7 @@ fn test_memory_usage() {
 }
 
 /// 测试并发安全性
+/// concurrency
 #[test]
 fn test_concurrency_safety() {
     use std::sync::Arc;
@@ -293,6 +310,7 @@ fn test_concurrency_safety() {
 }
 
 /// 测试算法一致性
+/// algorithm consistency
 #[test]
 fn test_algorithm_consistency() {
     let test_data = vec![64, 34, 25, 12, 22, 11, 90, 5, 77, 30];
@@ -306,6 +324,7 @@ fn test_algorithm_consistency() {
 }
 
 /// 测试算法稳定性
+/// algorithm
 #[test]
 fn test_algorithm_stability() {
     // 测试稳定排序算法（归并排序）
@@ -320,6 +339,7 @@ fn test_algorithm_stability() {
 }
 
 /// 测试算法可扩展性
+/// algorithm
 #[test]
 #[cfg_attr(miri, ignore)]
 fn test_algorithm_scalability() {
@@ -336,6 +356,7 @@ fn test_algorithm_scalability() {
 }
 
 /// 测试算法鲁棒性
+/// algorithm
 #[test]
 fn test_algorithm_robustness() {
     // 测试各种异常输入

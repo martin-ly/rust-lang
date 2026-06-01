@@ -1,12 +1,20 @@
 //! 异步任务管理器
+//! async task
 //!
 //! 提供高级任务管理功能：
+//! task functionality ：
 //! - 任务优先级队列
+//! - task
 //! - 任务依赖管理
+//! - task dependency management
 //! - 任务生命周期管理
+//! - task lifetime
 //! - 任务监控和统计
+//! - task and
 //! - 任务失败重试
+//! - task
 //! - 任务取消和超时
+//! - task and
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
 use std::cmp::Ordering;
@@ -18,6 +26,7 @@ use tokio::time::sleep;
 use uuid::Uuid;
 
 /// 任务优先级
+/// task
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
 pub enum TaskPriority {
     Low = 1,
@@ -27,6 +36,7 @@ pub enum TaskPriority {
 }
 
 /// 任务状态
+/// task state
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum TaskStatus {
     Pending,
@@ -38,6 +48,7 @@ pub enum TaskStatus {
 }
 
 /// 任务信息
+/// task
 #[allow(dead_code)]
 #[derive(Debug, Clone)]
 pub struct TaskInfo {
@@ -56,6 +67,7 @@ pub struct TaskInfo {
 }
 
 /// 任务队列项
+/// task
 #[derive(Debug)]
 #[allow(dead_code)]
 struct TaskQueueItem {
@@ -89,12 +101,14 @@ impl Ord for TaskQueueItem {
 }
 
 /// 任务执行器 trait
+/// task trait
 #[async_trait::async_trait]
 pub trait TaskExecutor: Send + Sync {
     async fn execute(&self, task_id: Uuid, input: serde_json::Value) -> Result<serde_json::Value>;
 }
 
 /// 任务统计信息
+/// task
 #[derive(Debug, Default, Clone)]
 #[allow(dead_code)]
 pub struct TaskStats {
@@ -110,6 +124,7 @@ pub struct TaskStats {
 }
 
 /// 异步任务管理器
+/// async task
 #[allow(dead_code)]
 #[derive(Clone)]
 pub struct TaskManager {
@@ -125,6 +140,7 @@ pub struct TaskManager {
 
 impl TaskManager {
     /// 创建新的任务管理器
+    /// task
     pub fn new(executor: Arc<dyn TaskExecutor>, max_concurrent_tasks: usize) -> Self {
         let (tx, _rx) = mpsc::unbounded_channel();
 
@@ -158,6 +174,7 @@ impl TaskManager {
     }
 
     /// 提交新任务
+    /// task
     pub async fn submit_task(
         &self,
         name: String,
@@ -205,6 +222,7 @@ impl TaskManager {
     }
 
     /// 取消任务
+    /// task
     pub async fn cancel_task(&self, task_id: Uuid) -> Result<()> {
         // 更新任务状态
         {
@@ -234,17 +252,20 @@ impl TaskManager {
     }
 
     /// 获取任务信息
+    /// task
     pub async fn get_task(&self, task_id: Uuid) -> Option<TaskInfo> {
         let tasks = self.tasks.read().await;
         tasks.get(&task_id).cloned()
     }
 
     /// 获取任务统计信息
+    /// task
     pub async fn get_stats(&self) -> TaskStats {
         self.stats.lock().await.clone()
     }
 
     /// 等待任务完成
+    /// etc. task
     pub async fn wait_for_task(
         &self,
         task_id: Uuid,
@@ -277,6 +298,7 @@ impl TaskManager {
     }
 
     /// 关闭任务管理器
+    /// task
     pub async fn shutdown(&self) -> Result<()> {
         self.shutdown_notify.notify_waiters();
 
@@ -488,6 +510,7 @@ impl TaskManager {
 }
 
 /// 用于任务处理的任务管理器克隆
+/// task task
 #[allow(dead_code)]
 #[derive(Clone)]
 struct TaskManagerClone {
@@ -650,6 +673,7 @@ impl TaskManagerClone {
 }
 
 /// 简单的任务执行器实现示例
+/// simple task example
 #[allow(dead_code)]
 #[derive(Clone)]
 pub struct SimpleTaskExecutor {

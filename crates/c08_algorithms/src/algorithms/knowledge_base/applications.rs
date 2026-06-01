@@ -1,9 +1,12 @@
 //! # 算法应用模块
+//! # algorithm application module
 //!
 //! 本模块提供算法的应用场景和实际案例。
+//! This module provides algorithm application scenario and actual 。
 use serde::{Deserialize, Serialize};
 
 /// 应用知识
+/// application
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ApplicationKnowledge {
     pub domain: String,
@@ -15,10 +18,12 @@ pub struct ApplicationKnowledge {
 }
 
 /// 应用分析器
+/// application analyze
 pub struct ApplicationAnalyzer;
 
 impl ApplicationAnalyzer {
     /// 分析排序算法的应用场景
+    /// analyze sorting algorithm application scenario
     pub fn analyze_sorting_applications(algorithm_name: &str) -> Vec<ApplicationKnowledge> {
         match algorithm_name {
             "QuickSort" => vec![

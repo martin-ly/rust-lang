@@ -1,6 +1,5 @@
 //! Rust 1.92.0 性能基准测试
-//!
-//! 本文件提供了 Rust 1.92.0 新特性的性能基准测试
+//! Rust 1.92.0 Performance benchmark
 use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
 use std::hint::black_box;
 use std::num::NonZeroUsize;

@@ -1,38 +1,60 @@
 //! 性能优化演示程序
-//!
+//! performance optimization demonstration program
 //! 本示例展示如何使用 C07 进程管理模块的性能优化功能，
+//! this example C07 process module performance optimization functionality ，
 //! 包括内存优化、CPU优化、I/O优化和性能监控。
-//!
+//! memory optimization 、CPUoptimization 、I/Ooptimization and performance 。
 //! ## 📐 知识结构
-//!
+//! ## 📐 structure
+//! ## 📐 知识structure
 //! ### 核心概念
-//!
+//! ### core concept
 //! - **性能优化**: 通过监控和调整提升系统性能的过程
+//! - **performance optimization **: and system performance
 //!   - **属性**: 内存优化、CPU优化、I/O优化、自动优化
+//!   - **attribute **: memory optimization 、CPUoptimization 、I/Ooptimization 、optimization
+//!   - **attribute**: memoryoptimization、CPUoptimization、I/Ooptimization、自动optimization
 //!   - **关系**: 与进程管理、性能监控相关
-//!
+//!   - ****: and process 、performance
 //! - **性能监控**: 实时监控系统资源使用情况
+//! - **performance **: system situation
 //!   - **属性**: 内存监控、CPU监控、I/O监控、缓存监控
+//!   - **attribute **: memory 、CPU、I/O、
 //!   - **关系**: 与性能优化、资源管理相关
-//!
+//!   - ****: and performance optimization 、
+//!   - **关系**: andperformanceoptimization、资源管理相关
 //! ### 思维导图
-//!
-//! ```text
+//! ###
 //! 性能优化演示
-//! │
+//! performance optimization demonstration
 //! ├── 内存优化
+//! ├── memory optimization
 //! │   ├── 内存监控
+//! │ ├── memory
 //! │   └── 内存优化规则
+//! │ └── memory optimization rule
 //! ├── CPU 优化
+//! ├── CPU optimization
 //! │   ├── CPU 监控
+//! │ ├── CPU
+//! │ ├── CPU 监控
+//! │ ├── CPU
 //! │   └── CPU 优化规则
+//! │ └── CPU optimization rule
 //! ├── I/O 优化
+//! ├── I/O optimization
 //! │   ├── I/O 监控
+//! │ ├── I/O
+//! │ ├── I/O 监控
+//! │ ├── I/O
 //! │   └── I/O 优化规则
+//! │ └── I/O optimization rule
 //! └── 性能监控
+//! └── performance
 //!     ├── 实时监控
+//!     ├──
 //!     └── 历史数据
-//! ```
+//!     └──
 #[cfg(feature = "async")]
 use c07_process::performance::enhanced::*;
 use std::time::Duration;

@@ -1,9 +1,9 @@
 //! Rust 1.93.0 泛型 特性模块
+//! Rust 1.93.0 generic feature module
 #![allow(clippy::incompatible_msrv)]
 
 use std::mem::MaybeUninit;
 
-/// 泛型函数：使用 `MaybeUninit` 初始化固定长度数组并返回
 pub fn init_generic_array<T: Copy, const N: usize>(values: [T; N]) -> [T; N] {
     let mut buf = [MaybeUninit::uninit(); N];
     for (i, &v) in values.iter().enumerate() {
@@ -14,11 +14,13 @@ pub fn init_generic_array<T: Copy, const N: usize>(values: [T; N]) -> [T; N] {
 }
 
 /// 泛型函数：尝试将切片转为定长数组引用
+/// generic function ：will as reference
 pub fn try_as_array<T, const N: usize>(slice: &[T]) -> Option<&[T; N]> {
     slice.as_array::<N>()
 }
 
 /// 泛型函数：使用 `Vec::into_raw_parts` 展示泛型内存布局
+/// generic function ： `Vec::into_raw_parts` generic memory layout
 pub fn vec_layout_inspection<T>(v: Vec<T>) -> (usize, usize, usize) {
     let (ptr, len, cap) = v.into_raw_parts();
     let layout = (ptr as usize, len, cap);

@@ -80,6 +80,7 @@ mod tests {
 // === GATs 借用视图版本（避免数据多次克隆） ===
 
 /// 带借用生命周期的观察者（使用 GATs）
+/// borrowing lifetime observer （ GATs）
 pub trait ObserverRef<T: ?Sized> {
     type Ref<'a>
     where
@@ -92,6 +93,7 @@ pub trait ObserverRef<T: ?Sized> {
 //
 
 /// 借用视图主题（示例固定观察者/元素类型），通知时仅借用数据
+/// borrowing （example observer /element type ），borrowing
 pub struct BorrowingSubjectString {
     observers: Vec<BorrowingObserver>,
 }
@@ -121,6 +123,7 @@ impl BorrowingSubjectString {
 }
 
 /// 具体观察者（借用数据，不进行克隆）
+/// volume observer （borrowing ，）
 pub struct BorrowingObserver;
 
 impl ObserverRef<String> for BorrowingObserver {

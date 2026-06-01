@@ -1,13 +1,17 @@
 //! Rust 186.0 新特性实现模块 —— c08_algorithms
 //!
 //! 本模块展示了 Rust 186.0 (2025-04-03) 的关键语言特性和工具链改进。
+//! This module demonstrates Rust 186.0 (2025-04-03) key feature and toolchain 。
 //!
 //! - `trait_upcasting`: Trait 对象向上转换（dyn Trait + Trait -> dyn Trait）
 //! - `target_feature_safe`: 安全函数上的 `#[target_feature]`
 //!
 //! # 版本信息
+//! # this
 //! - Rust 版本: 186.0
+//! - Rust this : 186.0
 //! - 稳定日期: 2025-04-03
+//! - date : 2025-04-03
 //! - Edition: 2024
 
 // ============================================================================
@@ -15,13 +19,18 @@
 // ============================================================================
 
 /// # Trait 对象向上转换
+/// # Trait to on conversion
 ///
 /// Rust 1.86.0 稳定了 trait 对象的向上转换（upcasting）：
+/// Rust 1.86.0 trait to on conversion （upcasting）：
 /// 可以将 `dyn SubTrait` 转换为 `dyn SuperTrait`。
 ///
 /// ## 使用场景
+/// ## scenario
 /// - 抽象层解耦：在运行时根据具体类型降级到更通用的 trait 对象
+/// - ：in runtime according to volume type to trait to
 /// - 插件系统：将特定插件接口转换为通用接口
+/// - system ：will conversion as
 pub trait Animal {
     fn name(&self) -> &'static str;
 }
@@ -62,19 +71,26 @@ mod tests {
 /// # 安全函数的 `#[target_feature]`
 ///
 /// Rust 1.86.0 允许在安全函数上使用 ``#[target_feature]``，
+/// Rust 1.86.0 in function on ``#[target_feature]``，
 /// 前提是调用者通过 `is_x86_feature_detected!` 等宏确保目标平台支持该特性。
+/// prerequisite `is_x86_feature_detected!` etc. goal platform this feature 。
 ///
 /// ## 之前限制
+/// ## 's before
 /// 1.86 之前，``#[target_feature]`` 只能用于 `unsafe fn`，
 /// 因为调用未启用对应特性的函数是 UB。
+/// because to feature function UB。
 ///
 /// ## 现在
+/// ## present
 /// 安全函数 + ``#[target_feature]`` 组合允许，但调用点必须在 `unsafe` 块中。
+/// function + ``#[target_feature]`` combination ，but point must in `unsafe` in 。
 ///
 /// # Safety
 ///
 /// 调用者必须通过 `is_x86_feature_detected!("sse2")` 等方式
 /// 确保目标平台支持 SSE2 特性，否则调用此函数是未定义行为。
+/// goal platform SSE2 feature ，this function definition as 。
 #[cfg(target_arch = "x86_64")]
 #[target_feature(enable = "sse2")]
 pub fn safe_simd_add(a: [f64; 2], b: [f64; 2]) -> [f64; 2] {

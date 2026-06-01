@@ -1,19 +1,14 @@
 //! 无锁队列实现 (Michael-Scott Queue)
-//!
-//! 使用原子操作实现的无锁先进先出（FIFO）队列结构。
-//!
 //! ## 核心算法
-//!
-//! Michael-Scott Queue 是经典的无锁队列算法，使用带有哨兵节点的
-//! 链表结构，通过 CAS 操作实现线程安全的 enqueue 和 dequeue。
-//!
+//! ## core algorithm
+//! 链表structure，Via CAS 操作Implementation ofthread-safe enqueue and dequeue。
 //! ## 内存安全
-//!
-//! 使用 `crossbeam_epoch` 进行安全的内存回收。
+//! ## memory safety
 use std::ptr;
 use std::sync::atomic::{AtomicPtr, Ordering};
 
 /// 队列节点
+/// node
 struct Node<T> {
     data: Option<T>,
     next: AtomicPtr<Node<T>>,
@@ -36,11 +31,9 @@ impl<T> Node<T> {
 }
 
 /// 无锁队列 (Michael-Scott Queue)
-///
-/// 线程安全的无锁 FIFO 队列实现。
-///
+/// thread-safelock-free FIFO 队列Implementation of。
 /// # 示例
-///
+/// # example
 /// ```
 /// use c05_threads::lockfree::lockfree_queue::LockFreeQueue;
 ///
@@ -61,6 +54,7 @@ unsafe impl<T: Send> Sync for LockFreeQueue<T> {}
 
 impl<T> LockFreeQueue<T> {
     /// 创建新的无锁队列
+    /// lock-free queue
     pub fn new() -> Self {
         let sentinel = Box::into_raw(Box::new(Node::sentinel()));
         Self {
@@ -70,6 +64,7 @@ impl<T> LockFreeQueue<T> {
     }
 
     /// 将元素加入队列尾部
+    /// will element
     pub fn enqueue(&self, data: T) {
         let new_node = Box::into_raw(Box::new(Node::new(data)));
 
@@ -114,8 +109,8 @@ impl<T> LockFreeQueue<T> {
     }
 
     /// 从队列头部移除元素
-    ///
-    /// 返回 `None` 如果队列为空。
+    /// from element
+    /// Return `None` if队列as空。
     pub fn dequeue(&self) -> Option<T> {
         loop {
             let head = self.head.load(Ordering::Acquire);
@@ -152,6 +147,7 @@ impl<T> LockFreeQueue<T> {
     }
 
     /// 检查队列是否为空
+    /// as
     pub fn is_empty(&self) -> bool {
         let head = self.head.load(Ordering::Acquire);
         let tail = self.tail.load(Ordering::Acquire);
@@ -211,7 +207,7 @@ mod tests {
     }
 
     /// 注意：此并发测试未实现内存回收机制（Hazard Pointers / EBR）。
-    /// 在 Miri 下运行会报告数据竞争。作为概念演示，生产环境应使用 crossbeam-epoch。
+    /// ：this concurrency memory mechanism （Hazard Pointers / EBR）。
     #[test]
     #[ignore = "概念演示：未实现内存回收，Miri 会报告数据竞争"]
     fn test_concurrent_enqueue() {
@@ -239,7 +235,7 @@ mod tests {
     }
 
     /// 注意：此并发测试未实现内存回收机制。
-    /// 在 Miri 下运行会报告数据竞争。作为概念演示，生产环境应使用 crossbeam-epoch。
+    /// ：this concurrency memory mechanism 。
     #[test]
     #[ignore = "概念演示：未实现内存回收，Miri 会报告数据竞争"]
     fn test_concurrent_mixed_operations() {

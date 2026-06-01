@@ -1,18 +1,23 @@
 //! Rust 1.96.0 嵌入式相关稳定特性实现模块
-//!
-//! 本模块展示了 Rust 1.96.0+ 在嵌入式和 bare-metal 编程方面的关键增强，
+//! Rust 1.96.0 feature module
 //! 所有公共 API 均使用 `core` 类型，保持 `no_std` 兼容性：
-//! - `core::range::Range` / `core::range::RangeInclusive` — `no_std` 友好的范围类型
-//! - `core::mem::ManuallyDrop` — 硬件寄存器标签模式（避免误触发 Drop）
+//! all API `core` type ， `no_std` ：
+//! 所有公共 API 均Use `core` type，保持 `no_std` 兼容性：
+//! all API Use `core` type， `no_std` ：
 //! - `core::assert_matches!` — 嵌入式状态机测试
-//!
 //! # 版本信息
+//! # this
 //! - Rust 版本: 1.96.0+ / nightly 1.98
+//! - Rust 版this: 1.96.0+ / nightly 1.98
 //! - 稳定日期: 2026-05-28
-//! - Edition: 2024
-//!
+//! - date : 2026-05-28
+//! - 稳定date: 2026-05-28
+//! - date: 2026-05-28
 //! # 安全说明
+//! # explain
+//! # 安全explain
 //! 本模块**完全禁止 unsafe 代码**，所有示例均在 safe Rust 中实现。
+//! this module ** unsafe **，all example in safe Rust in 。
 
 #![forbid(unsafe_code)]
 
@@ -21,20 +26,26 @@
 // ============================================================================
 
 /// 内存区域描述符，使用 `core::range::Range` 表示半开地址区间。
-///
+/// memory area describe ， `core::range::Range` represent interval 。
 /// `core::range::Range` 实现 `Copy`，可以在中断上下文之间自由传递，
+/// `core::range::Range` `Copy`，can in in on under 's ，
 /// 无需担心所有权或生命周期问题。
+/// ownership or lifetime problem 。
+/// 无需担心ownershiporlifetimeproblem。
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct MemoryRegion {
     /// 区域名称（静态字符串，no_std 安全）
+    /// area （，no_std ）
     pub name: &'static str,
-    /// 地址范围 `[start, end)`，使用 `core::range::Range` 的公共字段
+    /// 地址range `[start, end)`，Use `core::range::Range` 公共field
     pub range: core::range::Range<usize>,
     /// 访问权限标志
+    /// mark
     pub flags: RegionFlags,
 }
 
 /// 区域访问权限标志。
+/// area mark 。
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct RegionFlags {
     pub readable: bool,
@@ -42,15 +53,15 @@ pub struct RegionFlags {
     pub executable: bool,
 }
 
-/// 内存映射表，使用 `core::range::Range` 描述连续的硬件寄存器块。
 pub struct MemoryMap {
     regions: [MemoryRegion; 4],
 }
 
 impl MemoryMap {
     /// 构造一个典型的嵌入式系统内存映射示例。
-    ///
+    /// system memory mapping example 。
     /// 使用 `core::range::Range { start, end }` 直接构造地址范围。
+    /// Use `core::range::Range { start, end }` 直接构造地址range。
     pub const fn example_map() -> Self {
         Self {
             regions: [
@@ -107,6 +118,7 @@ impl MemoryMap {
     }
 
     /// 查找包含给定地址的内存区域。
+    /// memory area 。
     pub fn region_containing(&self, addr: usize) -> Option<&MemoryRegion> {
         self.regions
             .iter()
@@ -114,11 +126,13 @@ impl MemoryMap {
     }
 
     /// 返回所有区域。
+    /// all area 。
     pub const fn regions(&self) -> &[MemoryRegion; 4] {
         &self.regions
     }
 
     /// 计算所有区域的总字节数。
+    /// all area 。
     pub fn total_size(&self) -> usize {
         let mut sum = 0usize;
         let mut i = 0;
@@ -131,6 +145,7 @@ impl MemoryMap {
 }
 
 /// 寄存器块迭代器，使用 `core::range::Range` 步进遍历寄存器偏移。
+/// ， `core::range::Range` 。
 pub struct RegisterBlockIter {
     offset_range: core::range::Range<usize>,
     step: usize,
@@ -138,6 +153,7 @@ pub struct RegisterBlockIter {
 
 impl RegisterBlockIter {
     /// 创建一个新的寄存器块迭代器。
+    /// 。
     pub const fn new(start_offset: usize, end_offset: usize, step: usize) -> Self {
         Self {
             offset_range: core::range::Range {
@@ -149,6 +165,7 @@ impl RegisterBlockIter {
     }
 
     /// 获取下一个寄存器偏移（若仍在范围内）。
+    /// under （in scope inside ）。
     pub fn next_offset(&mut self) -> Option<usize> {
         if self.offset_range.start < self.offset_range.end {
             let current = self.offset_range.start;
@@ -164,21 +181,19 @@ impl RegisterBlockIter {
 // 2. ManuallyDrop 模式 — 硬件寄存器标签，避免 Drop 副作用
 // ============================================================================
 
-/// 使用 `core::mem::ManuallyDrop` 包装硬件寄存器值，防止编译器自动插入 Drop 调用。
-///
 /// 在嵌入式系统中，某些值代表外设寄存器状态或 DMA 描述符，
-/// 运行 `Drop` 可能触发不期望的硬件操作（如自动清零）。
-/// `ManuallyDrop` 确保值的析构被显式控制。
+/// in system in ，outside state or DMA describe ，
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct HardwareRegisterTag<T: Copy> {
-    /// 寄存器原始值，使用 `ManuallyDrop` 抑制自动析构。
     pub raw: core::mem::ManuallyDrop<T>,
     /// 寄存器地址偏移（用于调试/日志）
+    /// （/）
     pub offset: u16,
 }
 
 impl<T: Copy> HardwareRegisterTag<T> {
     /// 从原始值构造寄存器标签（无 Drop 副作用）。
+    /// from （ Drop role ）。
     pub const fn new(raw: T, offset: u16) -> Self {
         Self {
             raw: core::mem::ManuallyDrop::new(raw),
@@ -186,7 +201,6 @@ impl<T: Copy> HardwareRegisterTag<T> {
         }
     }
 
-    /// 安全地读取包装值（`ManuallyDrop` 在 T: Copy 时自身也 Copy）。
     pub fn value(&self) -> T {
         // ManuallyDrop<T> 在 T: Copy 时实现 Copy，可直接复制后解构
         let copied = self.raw;
@@ -195,12 +209,15 @@ impl<T: Copy> HardwareRegisterTag<T> {
 }
 
 /// DMA 描述符标签示例。
-///
+/// DMA describe example 。
 /// DMA 描述符通常包含物理地址和控制字，
+/// DMA describe and ，
 /// 我们绝不希望在作用域结束时自动释放这些资源。
+/// in role domain 。
 pub type DmaDescriptorTag = HardwareRegisterTag<u32>;
 
 /// GPIO 状态标签示例。
+/// GPIO state example 。
 pub type GpioStatusTag = HardwareRegisterTag<u16>;
 
 // ============================================================================
@@ -208,9 +225,10 @@ pub type GpioStatusTag = HardwareRegisterTag<u16>;
 // ============================================================================
 
 /// 嵌入式设备状态机。
-///
+/// state machine 。
+/// 嵌入式设备state machine。
 /// 典型的低功耗设备状态转换：
-/// `Boot -> Init -> Idle -> (Active | Sleep) -> Error`
+/// state conversion ：
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum DeviceState {
     Boot,
@@ -222,6 +240,7 @@ pub enum DeviceState {
 }
 
 /// 唤醒源。
+/// 。
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum WakeSource {
     Timer,
@@ -231,9 +250,12 @@ pub enum WakeSource {
 }
 
 /// 使用 `core::assert_matches!` 验证状态机转换。
-///
+/// `core::assert_matches!` state machine conversion 。
 /// 相比 `assert!(matches!(...))`，失败时打印 `Debug` 表示，
+/// `assert!(matches!(...))`， `Debug` represent ，
+/// 相比 `assert!(matches!(...))`，失败时Print `Debug` represent，
 /// 在资源受限的嵌入式调试环境中尤为宝贵。
+/// in environment in as 。
 pub fn verify_state_transition(
     old_state: DeviceState,
     new_state: DeviceState,
@@ -278,6 +300,7 @@ pub fn verify_state_transition(
 // ============================================================================
 
 /// 运行 Rust 1.96 嵌入式特性演示
+/// Run Rust 1.96 feature demonstration
 #[cfg(not(target_arch = "arm"))]
 pub fn demonstrate_rust_196_features() {
     use core::assert_matches;
@@ -324,6 +347,7 @@ pub fn demonstrate_rust_196_features() {
 }
 
 /// 获取特性信息
+/// feature
 pub fn get_rust_196_embedded_info() -> &'static str {
     "Rust 1.96.0 嵌入式特性:\n- core::range::Range { start, end } — no_std 友好的内存范围\n- \
      core::range::RangeInclusive { start, last } — 包含性寄存器范围\n- core::mem::ManuallyDrop — \

@@ -1,40 +1,45 @@
-//! WebAssembly 支持模块
-//!
-//! 本模块展示了 Rust 1.90 中的 WebAssembly 支持特性，包括：
 //! - WASM 基础类型和操作
+//! - WASM foundation type and
 //! - 内存管理
+//! - memory
 //! - 函数导出和导入
+//! - function and
 //! - 性能优化
-//! - 与 JavaScript 的互操作
-//!
+//! - performance optimization
 //! # 文件信息
+//! #
 //! - 文件: wasm_support.rs
 //! - 创建日期: 2025-01-27
+//! - date : 2025-01-27
 //! - 版本: 1.0
-//! - Rust版本: 1.90.0
-//! - Edition: 2024
+//! - this : 1.0
+//! - 版this: 1.0
 use std::collections::HashMap;
 use std::sync::Mutex;
 
 // ==================== 1. WASM 基础类型和操作 ====================
 
 /// WASM 基础数据类型
-///
-/// 展示了 WebAssembly 中的基础数据类型
+/// WASM foundation type
 #[derive(Debug, Clone, PartialEq)]
 pub enum WasmType {
     /// 32位整数
+    /// 32
     I32(i32),
     /// 64位整数
+    /// 64
     I64(i64),
     /// 32位浮点数
+    /// 32point
     F32(f32),
     /// 64位浮点数
+    /// 64point
     F64(f64),
 }
 
 impl WasmType {
     /// 转换为 i32
+    /// conversion as i32
     pub fn to_i32(&self) -> i32 {
         match self {
             WasmType::I32(val) => *val,
@@ -45,6 +50,7 @@ impl WasmType {
     }
 
     /// 转换为 f64
+    /// conversion as f64
     pub fn to_f64(&self) -> f64 {
         match self {
             WasmType::I32(val) => *val as f64,
@@ -55,6 +61,7 @@ impl WasmType {
     }
 
     /// 类型转换
+    /// type conversion
     pub fn convert_to(&self, target_type: WasmTypeKind) -> WasmType {
         match target_type {
             WasmTypeKind::I32 => WasmType::I32(self.to_i32()),
@@ -66,6 +73,7 @@ impl WasmType {
 }
 
 /// WASM 类型种类
+/// WASM type
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub enum WasmTypeKind {
     I32,
@@ -75,6 +83,7 @@ pub enum WasmTypeKind {
 }
 
 /// WASM 基础操作
+/// WASM foundation
 pub struct WasmOperations;
 
 impl WasmOperations {
@@ -166,20 +175,24 @@ impl WasmOperations {
 // ==================== 2. WASM 内存管理 ====================
 
 /// WASM 内存管理器
-///
-/// 展示了 WebAssembly 中的内存管理特性
+/// WASM memory
 pub struct WasmMemoryManager {
     /// 线性内存
+    /// line memory
     memory: Vec<u8>,
     /// 内存大小（以页为单位，每页64KB）
+    /// memory （as ，64KB）
     pages: u32,
     /// 最大内存页数
+    /// maximum memory
     max_pages: u32,
     /// 内存使用统计
+    /// memory
     usage_stats: Mutex<MemoryUsageStats>,
 }
 
 /// 内存使用统计
+/// memory
 #[derive(Debug, Default)]
 pub struct MemoryUsageStats {
     pub allocated_bytes: usize,
@@ -190,6 +203,7 @@ pub struct MemoryUsageStats {
 
 impl WasmMemoryManager {
     /// 创建新的内存管理器
+    /// memory
     pub fn new(initial_pages: u32, max_pages: u32) -> Self {
         let page_size = 64 * 1024; // 64KB per page
         let memory_size = initial_pages as usize * page_size;
@@ -203,6 +217,7 @@ impl WasmMemoryManager {
     }
 
     /// 分配内存
+    /// memory
     pub fn allocate(&self, size: usize) -> Option<usize> {
         let mut stats = self.usage_stats.lock().expect("使用统计锁定失败");
 
@@ -218,6 +233,7 @@ impl WasmMemoryManager {
     }
 
     /// 释放内存
+    /// memory
     pub fn deallocate(&self, _offset: usize, _size: usize) {
         let mut stats = self.usage_stats.lock().expect("使用统计锁定失败");
         stats.total_deallocations += 1;
@@ -244,16 +260,20 @@ impl WasmMemoryManager {
     }
 
     /// 获取内存使用统计
+    /// memory
     pub fn get_usage_stats(&self) -> MemoryUsageStats {
         self.usage_stats.lock().expect("使用统计锁定失败").clone()
     }
 
     /// 获取当前内存页数
+    /// when before memory
     pub fn get_pages(&self) -> u32 {
         self.pages
     }
 
     /// 扩展内存
+    /// memory
+    /// 扩展memory
     pub fn grow_memory(&mut self, additional_pages: u32) -> Result<u32, String> {
         if self.pages + additional_pages > self.max_pages {
             return Err("Cannot grow memory beyond maximum pages".to_string());
@@ -283,14 +303,15 @@ impl Clone for MemoryUsageStats {
 // ==================== 3. WASM 函数导出和导入 ====================
 
 /// WASM 函数导出器
-///
-/// 展示了 WebAssembly 中的函数导出机制
+/// WASM function
 pub struct WasmFunctionExporter {
     /// 导出的函数表
+    /// function
     functions: HashMap<String, WasmFunction>,
 }
 
 /// WASM 函数定义
+/// WASM function definition
 pub struct WasmFunction {
     pub name: String,
     pub parameters: Vec<WasmTypeKind>,
@@ -300,6 +321,7 @@ pub struct WasmFunction {
 
 impl WasmFunctionExporter {
     /// 创建新的函数导出器
+    /// function
     pub fn new() -> Self {
         Self {
             functions: HashMap::new(),
@@ -307,6 +329,7 @@ impl WasmFunctionExporter {
     }
 
     /// 导出函数
+    /// function
     pub fn export_function<F>(&mut self, name: String, func: F) -> Result<(), String>
     where
         F: Fn(Vec<WasmType>) -> Result<WasmType, String> + Send + Sync + 'static,
@@ -327,6 +350,7 @@ impl WasmFunctionExporter {
     }
 
     /// 调用导出的函数
+    /// function
     pub fn call_function(&self, name: &str, args: Vec<WasmType>) -> Result<WasmType, String> {
         let func = self
             .functions
@@ -337,6 +361,7 @@ impl WasmFunctionExporter {
     }
 
     /// 获取所有导出的函数名
+    /// all function
     pub fn get_exported_functions(&self) -> Vec<String> {
         self.functions.keys().cloned().collect()
     }
@@ -351,14 +376,15 @@ impl Default for WasmFunctionExporter {
 // ==================== 4. WASM 性能优化 ====================
 
 /// WASM 性能优化器
-///
-/// 展示了 WebAssembly 中的性能优化技术
+/// WASM performance optimizer
 pub struct WasmPerformanceOptimizer {
     /// 优化统计
+    /// optimization
     stats: Mutex<OptimizationStats>,
 }
 
 /// 优化统计
+/// optimization
 #[derive(Debug, Default)]
 pub struct OptimizationStats {
     pub function_calls: u64,
@@ -369,6 +395,7 @@ pub struct OptimizationStats {
 
 impl WasmPerformanceOptimizer {
     /// 创建新的性能优化器
+    /// performance optimizer
     pub fn new() -> Self {
         Self {
             stats: Mutex::new(OptimizationStats::default()),
@@ -376,6 +403,7 @@ impl WasmPerformanceOptimizer {
     }
 
     /// 优化函数调用
+    /// optimization function
     pub fn optimize_function_call<F, R>(&self, func: F, args: Vec<WasmType>) -> Result<R, String>
     where
         F: Fn(Vec<WasmType>) -> Result<R, String>,
@@ -391,6 +419,7 @@ impl WasmPerformanceOptimizer {
     }
 
     /// 优化参数
+    /// optimization parameter
     fn optimize_arguments(&self, args: Vec<WasmType>) -> Vec<WasmType> {
         let mut stats = self.stats.lock().expect("统计信息锁定失败");
         stats.type_conversions += 1;
@@ -406,6 +435,7 @@ impl WasmPerformanceOptimizer {
     }
 
     /// 优化内存访问
+    /// optimization memory
     pub fn optimize_memory_access(&self, offset: usize, size: usize) -> (usize, usize) {
         let mut stats = self.stats.lock().expect("统计信息锁定失败");
         stats.memory_accesses += 1;
@@ -419,6 +449,7 @@ impl WasmPerformanceOptimizer {
     }
 
     /// 获取优化统计
+    /// optimization
     pub fn get_stats(&self) -> OptimizationStats {
         self.stats.lock().expect("统计信息锁定失败").clone()
     }
@@ -443,16 +474,13 @@ impl Clone for OptimizationStats {
 
 // ==================== 5. 与 JavaScript 的互操作 ====================
 
-/// JavaScript 互操作接口
-///
-/// 展示了 Rust 与 JavaScript 的互操作特性
 pub struct JsInterop {
     /// 回调函数注册表
+    /// function
     callbacks: Mutex<HashMap<String, Box<dyn Fn(String) -> String + Send + Sync>>>,
 }
 
 impl JsInterop {
-    /// 创建新的 JavaScript 互操作接口
     pub fn new() -> Self {
         Self {
             callbacks: Mutex::new(HashMap::new()),
@@ -460,6 +488,7 @@ impl JsInterop {
     }
 
     /// 注册回调函数
+    /// function
     pub fn register_callback<F>(&self, name: String, callback: F) -> Result<(), String>
     where
         F: Fn(String) -> String + Send + Sync + 'static,
@@ -473,13 +502,11 @@ impl JsInterop {
         Ok(())
     }
 
-    /// 调用 JavaScript 函数（模拟）
     pub fn call_js_function(&self, name: &str, args: &str) -> String {
         // 在实际WASM环境中，这里会调用真实的JavaScript函数
         format!("JS_FUNCTION_CALL: {}({})", name, args)
     }
 
-    /// 处理来自 JavaScript 的调用
     pub fn handle_js_call(&self, name: &str, data: String) -> String {
         let callbacks = self.callbacks.lock().expect("回调锁定失败");
         if let Some(callback) = callbacks.get(name) {
@@ -490,6 +517,7 @@ impl JsInterop {
     }
 
     /// 获取所有注册的回调
+    /// all
     pub fn get_registered_callbacks(&self) -> Vec<String> {
         let callbacks = self.callbacks.lock().expect("回调锁定失败");
         callbacks.keys().cloned().collect()
@@ -505,6 +533,8 @@ impl Default for JsInterop {
 // ==================== 演示函数 ====================
 
 /// 演示所有 WASM 特性
+/// demonstration all WASM feature
+/// Demonstration of所有 WASM feature
 pub fn demonstrate_wasm_features() {
     println!("=== WebAssembly 特性演示 ===\n");
 

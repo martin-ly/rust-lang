@@ -1,4 +1,5 @@
 //! 内存池实现
+//! memory pool
 use crate::error::{NetworkError, NetworkResult};
 use bytes::Bytes;
 use std::collections::VecDeque;
@@ -6,6 +7,7 @@ use std::sync::{Arc, Mutex};
 use std::time::{Duration, Instant};
 
 /// 内存池统计信息
+/// memory pool
 #[derive(Debug, Clone, Default)]
 pub struct PoolStats {
     pub total_allocations: u64,
@@ -20,6 +22,7 @@ pub struct PoolStats {
 }
 
 /// 内存块
+/// memory
 struct MemoryBlock {
     data: Vec<u8>,
     size: usize,
@@ -67,6 +70,7 @@ impl MemoryBlock {
 }
 
 /// 内存池
+/// memory pool
 #[allow(dead_code)]
 pub struct MemoryPool {
     blocks: Arc<Mutex<VecDeque<MemoryBlock>>>,
@@ -78,6 +82,7 @@ pub struct MemoryPool {
 
 impl MemoryPool {
     /// 创建新的内存池
+    /// memory pool
     pub fn new(pool_size: usize) -> Self {
         let block_size = 1024; // 与测试用例“只有1个块”的预期一致
         let max_blocks = pool_size / block_size;
@@ -104,6 +109,7 @@ impl MemoryPool {
     }
 
     /// 分配内存
+    /// memory
     pub fn allocate(&self, size: usize) -> NetworkResult<PooledBytes> {
         if size > self.block_size {
             return Err(NetworkError::Other(format!(
@@ -156,6 +162,7 @@ impl MemoryPool {
     }
 
     /// 清理内存池
+    /// memory pool
     pub async fn cleanup(&self) -> NetworkResult<()> {
         let mut blocks = self
             .blocks
@@ -180,6 +187,7 @@ impl MemoryPool {
     }
 
     /// 垃圾回收
+    /// 垃圾Reclaim
     pub async fn gc(&self) -> NetworkResult<()> {
         let mut blocks = self
             .blocks
@@ -210,12 +218,14 @@ impl MemoryPool {
     }
 
     /// 获取内存池使用率
+    /// memory pool
     pub fn utilization(&self) -> f64 {
         let stats = self.stats.lock().expect("memory pool stats mutex poisoned");
         stats.used_size as f64 / stats.pool_size as f64
     }
 
     /// 检查内存池是否已满
+    /// memory pool
     pub fn is_full(&self) -> bool {
         let stats = self.stats.lock().expect("memory pool stats mutex poisoned");
         stats.current_allocations >= self.max_blocks as u64
@@ -270,6 +280,7 @@ impl PooledBytes {
     }
 
     /// 检查是否为空
+    /// as
     pub const fn is_empty(&self) -> bool {
         self.size == 0
     }
@@ -288,6 +299,7 @@ impl PooledBytes {
     }
 
     /// 复制到切片
+    /// to
     pub fn copy_to_slice(&self, dst: &mut [u8]) {
         let blocks = self
             .blocks
@@ -324,6 +336,7 @@ impl Drop for PooledBytes {
 }
 
 /// 内存池管理器
+/// memory pool
 pub struct MemoryPoolManager {
     pools: std::collections::HashMap<String, Arc<MemoryPool>>,
     default_pool_size: usize,
@@ -331,6 +344,7 @@ pub struct MemoryPoolManager {
 
 impl MemoryPoolManager {
     /// 创建新的内存池管理器
+    /// memory pool
     pub fn new(default_pool_size: usize) -> Self {
         Self {
             pools: std::collections::HashMap::new(),
@@ -339,6 +353,7 @@ impl MemoryPoolManager {
     }
 
     /// 创建内存池
+    /// memory pool
     pub fn create_pool(&mut self, name: String, size: Option<usize>) -> Arc<MemoryPool> {
         let pool_size = size.unwrap_or(self.default_pool_size);
         let pool = Arc::new(MemoryPool::new(pool_size));
@@ -347,21 +362,27 @@ impl MemoryPoolManager {
     }
 
     /// 获取内存池
+    /// memory pool
     pub fn get_pool(&self, name: &str) -> Option<Arc<MemoryPool>> {
         self.pools.get(name).cloned()
     }
 
     /// 获取默认内存池
+    /// memory pool
+    /// Get默认memory pool
     pub fn get_default_pool(&self) -> Option<Arc<MemoryPool>> {
         self.pools.get("default").cloned()
     }
 
     /// 移除内存池
+    /// memory pool
+    /// 移除memory pool
     pub fn remove_pool(&mut self, name: &str) -> Option<Arc<MemoryPool>> {
         self.pools.remove(name)
     }
 
     /// 获取所有内存池的统计信息
+    /// all memory pool
     pub fn get_all_stats(&self) -> std::collections::HashMap<String, PoolStats> {
         self.pools
             .iter()
@@ -370,6 +391,8 @@ impl MemoryPoolManager {
     }
 
     /// 清理所有内存池
+    /// all memory pool
+    /// Clean up所有memory pool
     pub async fn cleanup_all(&self) -> NetworkResult<()> {
         for pool in self.pools.values() {
             pool.cleanup().await?;
@@ -378,6 +401,7 @@ impl MemoryPoolManager {
     }
 
     /// 对所有内存池执行垃圾回收
+    /// to all memory pool
     pub async fn gc_all(&self) -> NetworkResult<()> {
         for pool in self.pools.values() {
             pool.gc().await?;

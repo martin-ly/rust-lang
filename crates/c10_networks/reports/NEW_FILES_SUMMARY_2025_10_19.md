@@ -133,7 +133,7 @@
 ### 2. 技术对比分析
 
 - ✅ 协议对比: TCP/UDP/QUIC/HTTP/WebSocket等
-- ✅ 运行时对比: Tokio/async-std/smol等
+- ✅ 运行时对比: Tokio/smol等
 - ✅ 序列化对比: JSON/Protobuf/Bincode等
 - ✅ TLS对比: rustls/native-tls/openssl等
 

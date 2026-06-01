@@ -1,3 +1,7 @@
+> **内容分级**: [综述级]
+>
+> **本节关键术语**: 集合 (Collection) · 向量 (Vec) · 哈希映射 (HashMap) · 哈希集合 (HashSet) · 二叉堆 (BinaryHeap) — [完整对照表](../00_meta/terminology_glossary.md)
+
 # 集合类型：Rust 标准库的数据结构谱系
 
 > **受众**: [初学者]

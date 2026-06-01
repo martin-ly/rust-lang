@@ -24,11 +24,13 @@ impl NetDiagnostics {
     }
 
     /// DNS 解析自检
+    /// DNS
     pub fn check_dns(&self, host: &str) -> bool {
         (host, 0).to_socket_addrs().is_ok()
     }
 
     /// TCP 连通性检测（带超时）
+    /// TCP （）
     pub fn check_tcp_connect(&self, addr: &str, timeout_ms: u64) -> ConnectivityReport {
         let start = std::time::Instant::now();
         let dns_ok = addr.to_socket_addrs().is_ok();
@@ -54,6 +56,7 @@ impl NetDiagnostics {
     }
 
     /// 统一错误建议（示例）
+    /// （example ）
     pub fn suggest(&self, err: &NetworkError) -> &'static str {
         match err {
             NetworkError::Timeout(_) => "检查目标服务可达性与超时时间，考虑重试与退避策略",
@@ -64,6 +67,8 @@ impl NetDiagnostics {
     }
 
     /// 异步 TCP 连通性检测（Tokio）
+    /// async TCP （Tokio）
+    /// async TCP 连通性检测（Tokio）
     pub async fn tcp_connect_async(&self, addr: &str, timeout_ms: u64) -> ConnectivityReport {
         let start = std::time::Instant::now();
         let dns_ok = addr.to_socket_addrs().is_ok();
@@ -85,6 +90,7 @@ impl NetDiagnostics {
     }
 
     /// 扫描指定端口集合，返回开放端口（异步）
+    /// set ，（async ）
     pub async fn scan_tcp_ports(&self, host: &str, ports: &[u16], timeout_ms: u64) -> Vec<u16> {
         let mut open = Vec::new();
         for &p in ports {
@@ -102,6 +108,7 @@ impl NetDiagnostics {
     }
 
     /// 代理环境变量探测（HTTP(S)_PROXY）
+    /// environment variable （HTTP (S)_PROXY）
     pub fn detect_proxy_env(&self) -> std::collections::HashMap<String, String> {
         let mut m = std::collections::HashMap::new();
         for k in [
@@ -121,13 +128,14 @@ impl NetDiagnostics {
         m
     }
 
-    /// 使用 tracing 输出错误与建议
     pub fn trace_with_suggestion(&self, err: &NetworkError) {
         let tip = self.suggest(err);
         tracing::error!(error = %err, suggestion = %tip, "network error");
     }
 
     /// 初始化 tracing（幂等）
+    /// tracing（etc. ）
+    /// Initialize tracing（幂etc.）
     pub fn init_tracing_default(&self) {
         static ONCE: std::sync::Once = std::sync::Once::new();
         ONCE.call_once(|| {
@@ -136,6 +144,7 @@ impl NetDiagnostics {
     }
 
     /// 简单的带指数退避的重试器（异步）
+    /// simple index （async ）
     pub async fn retry_with_backoff<T, F, Fut>(
         &self,
         attempts: usize,

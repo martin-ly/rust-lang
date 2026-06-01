@@ -1,4 +1,5 @@
 //! 搜索算法：同步 / Rayon并行 / Tokio异步
+//! searching algorithm ：synchronous / Rayonparallelism / Tokioasync
 use anyhow::Result;
 use rayon::prelude::*;
 use std::collections::{HashMap, VecDeque};
@@ -9,6 +10,7 @@ use std::hash::Hash;
 // =========================
 
 /// 同步线性搜索，返回首次匹配的索引
+/// synchronous linear search ，
 pub fn linear_search_sync<T>(data: &[T], target: &T) -> Option<usize>
 where
     T: PartialEq,
@@ -17,6 +19,7 @@ where
 }
 
 /// 同步二分搜索（要求已排序）
+/// synchronous binary search （ordering ）
 pub fn binary_search_sync<T>(data: &[T], target: &T) -> Result<Option<usize>>
 where
     T: Ord,
@@ -25,6 +28,7 @@ where
 }
 
 /// 并行搜索：在未排序数据中查找目标元素的索引
+/// parallelism ：in ordering in goal element
 pub fn parallel_search<T>(data: &[T], target: &T) -> Option<usize>
 where
     T: PartialEq + Sync,
@@ -36,6 +40,7 @@ where
 }
 
 /// 异步线性搜索（spawn_blocking 包裹）
+/// async linear search （spawn_blocking ）
 pub async fn linear_search_async<T>(data: Vec<T>, target: T) -> Result<Option<usize>>
 where
     T: PartialEq + Send + 'static,
@@ -44,6 +49,7 @@ where
 }
 
 /// 异步二分搜索（spawn_blocking 包裹，要求已排序）
+/// async binary search （spawn_blocking ，ordering ）
 pub async fn binary_search_async<T>(data: Vec<T>, target: T) -> Result<Option<usize>>
 where
     T: Ord + Send + 'static,
@@ -56,6 +62,7 @@ where
 // =========================
 
 /// 同步 DFS：判断从 start 是否可达 target
+/// synchronous DFS：from start target
 pub fn dfs_sync<T>(graph: &HashMap<T, Vec<T>>, start: &T, target: &T) -> bool
 where
     T: Eq + Hash + Clone,
@@ -81,6 +88,7 @@ where
 }
 
 /// 同步 BFS：返回从 start 到 target 的层数（若不可达则 None）
+/// synchronous BFS：from start to target （ None）
 pub fn bfs_sync<T>(graph: &HashMap<T, Vec<T>>, start: &T, target: &T) -> Option<usize>
 where
     T: Eq + Hash + Clone,
@@ -125,6 +133,7 @@ where
 // =========================
 
 /// 指数搜索：在有序切片中查找 target，先指数扩展边界再二分
+/// exponential search ：in in target，index edge
 pub fn exponential_search_sync<T: Ord>(data: &[T], target: &T) -> Option<usize> {
     if data.is_empty() {
         return None;
@@ -152,6 +161,7 @@ pub async fn exponential_search_async<T: Ord + Send + 'static>(
 }
 
 /// 三分搜索：对单峰实值函数在闭区间 [mut l, mut r] 上找近似极值（最大值）
+/// ternary search ：to function in interval [mut l, mut r] on （maximum ）
 pub fn ternary_search_max<F>(mut l: f64, mut r: f64, f: F, iters: usize) -> f64
 where
     F: Fn(f64) -> f64,
@@ -184,6 +194,7 @@ where
 // =========================
 
 /// 插值查找：适用于近似均匀分布的有序数组
+/// ：distribution
 pub fn interpolation_search_sync(data: &[i64], target: i64) -> Option<usize> {
     if data.is_empty() {
         return None;
@@ -216,6 +227,7 @@ pub async fn interpolation_search_async(data: Vec<i64>, target: i64) -> Result<O
 }
 
 /// 跳跃搜索：步长为 sqrt(n)，在块中线性查找
+/// jump search ：as sqrt(n)，in in line
 pub fn jump_search_sync<T: Ord>(data: &[T], target: &T) -> Option<usize> {
     let n = data.len();
     if n == 0 {

@@ -1,6 +1,5 @@
 //! # 设计模式测试
-//!
-//! 测试 ecosystem_examples 中的设计模式实现
+//! # design
 #[cfg(test)]
 mod tests {
     use c12_wasm::ecosystem_examples::design_patterns::*;

@@ -18,7 +18,7 @@ c06_async/
 │   ├── streams/                        # Stream相关模块
 │   ├── await/                          # await相关模块
 │   ├── actix/                          # Actix相关模块
-│   ├── async_std/                      # async-std相关模块
+│   ├── async_std/                      # async-std [已归档]相关模块
 │   ├── smol/                           # smol相关模块
 │   ├── utils/                          # 工具模块
 │   └── bin/                            # 二进制示例
@@ -43,7 +43,7 @@ c06_async/
 #### 2. 异步运行时支持
 
 - **tokio**: 生产级高性能运行时
-- **async-std**: 标准库风格API
+- **async-std [已归档]**: 标准库风格API
 - **smol**: 轻量级可组合运行时
 - **自定义运行时**: 集成框架实现
 
@@ -188,7 +188,7 @@ pub struct AsyncConcurrencyController {
 
 ### 运行时对比分析
 
-| 特性维度 | tokio | async-std | smol | std |
+| 特性维度 | tokio | async-std [已归档] | smol | std |
  param($match) $match.Value -replace '[-:]+', ' --- ' ------- param($match) $match.Value -replace '[-:]+', ' --- ' ------ param($match) $match.Value -replace '[-:]+', ' --- '
 | **设计理念** | 高性能生产级 | 易用性优先 | 轻量级可组合 | 基础支持 |
 | **代码量** | 大型 | 中等 | 极简(~1500行) | 最小 |

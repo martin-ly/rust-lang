@@ -1,15 +1,15 @@
 //! Mutex 同步模块
-//!
-//! 本模块演示Rust中Mutex的使用，包括：
-//! - 基本Mutex使用
+//! Mutex synchronous module
 //! - 多线程共享状态
+//! - thread state
 //! - 死锁预防
+//! - lock
 //! - 性能优化技巧
+//! - performance optimization tip
 use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::Duration;
 
-/// 基本Mutex使用示例
 pub fn basic_mutex_usage() {
     println!("🔒 基本Mutex使用示例");
 
@@ -37,6 +37,8 @@ pub fn basic_mutex_usage() {
 }
 
 /// 共享复杂数据结构
+/// complex data structure
+/// 共享complexdata structure
 pub fn shared_complex_data() {
     println!("🔒 共享复杂数据结构示例");
 
@@ -88,6 +90,7 @@ pub fn shared_complex_data() {
 }
 
 /// 死锁预防示例
+/// lock example
 pub fn deadlock_prevention() {
     println!("🔒 死锁预防示例");
 
@@ -125,7 +128,6 @@ pub fn deadlock_prevention() {
     println!("  死锁预防成功！");
 }
 
-/// 使用try_lock避免阻塞
 pub fn try_lock_example() {
     println!("🔒 try_lock示例");
 
@@ -154,7 +156,6 @@ pub fn try_lock_example() {
     println!("  最终值: {}", *data.lock().expect("Data 锁被 poisoned"));
 }
 
-/// 条件变量与Mutex结合使用
 pub fn mutex_with_condition() {
     println!("🔒 Mutex与条件变量结合示例");
 
@@ -189,6 +190,7 @@ pub fn mutex_with_condition() {
 }
 
 /// 性能优化：减少锁的持有时间
+/// performance optimization ：lock time
 pub fn lock_optimization() {
     println!("🔒 锁优化示例");
 
@@ -234,7 +236,6 @@ pub fn lock_optimization() {
     good_handle.join().expect("Good handle 线程执行失败");
 }
 
-/// 自定义Mutex包装器
 pub fn custom_mutex_wrapper() {
     println!("🔒 自定义Mutex包装器示例");
 

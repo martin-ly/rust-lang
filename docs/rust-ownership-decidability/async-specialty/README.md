@@ -22,7 +22,7 @@
 │  ├── Tokio官方文档深度解读                                         │
 │  ├── Rust Async Book                                              │
 │  ├── Embassy Embedded Runtime                                     │
-│  └── async-std / smol 生态对比                                    │
+│  └── async-std [已归档] / smol 生态对比                                    │
 │                                                                  │
 │  🎨 惯用法 (Idioms)                                               │
 │  ├── Future组合与链式调用                                          │
@@ -141,9 +141,9 @@ async-specialty/
 [dependencies]
 tokio = { version = "1", features = ["full"] }
 
-// 2. 轻量级 - async-std
+// 2. 轻量级 - async-std [已归档]
 [dependencies]
-async-std = "1.12"
+async-std [已归档] = "1.12"
 
 // 3. 嵌入式 - Embassy
 [dependencies]

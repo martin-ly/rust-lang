@@ -37,6 +37,7 @@ impl ServiceInstance {
 }
 
 /// 服务注册中心
+/// service registration center
 struct ServiceRegistry {
     services: Arc<RwLock<HashMap<String, Vec<ServiceInstance>>>>,
 }
@@ -74,6 +75,7 @@ impl ServiceRegistry {
 }
 
 /// 负载均衡器
+/// load balancer
 struct LoadBalancer {
     strategy: LoadBalancingStrategy,
 }
@@ -139,6 +141,7 @@ impl CircuitBreaker {
     }
 
     /// 执行操作，应用熔断逻辑
+    /// ，application
     async fn call<F, Fut, T>(&self, operation: F) -> Result<T, anyhow::Error>
     where
         F: FnOnce() -> Fut,
@@ -159,6 +162,7 @@ impl CircuitBreaker {
     }
 
     /// 检查是否可以执行操作
+    /// can
     fn can_execute(&self) -> bool {
         let state = self.state.load(Ordering::Relaxed);
         match state {
@@ -178,6 +182,7 @@ impl CircuitBreaker {
     }
 
     /// 更新熔断器状态
+    /// state
     fn update_state<T>(&self, result: &Result<T, anyhow::Error>) {
         match result {
             Ok(_) => {
@@ -209,6 +214,7 @@ impl CircuitBreaker {
 }
 
 /// 模拟微服务调用
+/// microservice
 async fn simulate_service_call(service_name: &str, instance: &ServiceInstance) -> Result<String> {
     // 模拟网络延迟
     let delay = Duration::from_millis(rand::random::<u64>() % 200 + 50);
@@ -227,6 +233,7 @@ async fn simulate_service_call(service_name: &str, instance: &ServiceInstance) -
 }
 
 /// 服务发现和负载均衡测试
+/// service discovery and
 async fn test_service_discovery_and_lb() {
     println!("🚀 服务发现和负载均衡测试");
     println!("{}", "=".repeat(50));

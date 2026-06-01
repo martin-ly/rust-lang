@@ -1,6 +1,6 @@
-//! WebAssembly模块集成测试套件 / WebAssembly Module Integration Test Suite
 
 /// 测试WASM模块集成
+/// WASM module
 #[test]
 fn test_wasm_module_integration() {
     // 模拟WASM模块加载
@@ -9,6 +9,7 @@ fn test_wasm_module_integration() {
 }
 
 /// 测试WASM函数调用集成
+/// WASM function
 #[test]
 fn test_wasm_function_call_integration() {
     // 模拟WASM函数调用
@@ -20,6 +21,7 @@ fn test_wasm_function_call_integration() {
 }
 
 /// 测试WASM内存集成
+/// WASM memory
 #[test]
 fn test_wasm_memory_integration() {
     // 模拟WASM内存操作
@@ -28,6 +30,7 @@ fn test_wasm_memory_integration() {
 }
 
 /// 测试WASM导入导出集成
+/// WASM
 #[test]
 fn test_wasm_import_export_integration() {
     // 模拟WASM导入导出
@@ -39,6 +42,7 @@ fn test_wasm_import_export_integration() {
 }
 
 /// 测试WASI集成
+/// WASI
 #[test]
 fn test_wasi_integration() {
     // 模拟WASI功能
@@ -48,7 +52,6 @@ fn test_wasi_integration() {
     assert!(!args.is_empty());
 }
 
-/// 测试WASM与Rust互操作集成
 #[test]
 fn test_wasm_rust_interop_integration() {
     // 模拟WASM与Rust互操作

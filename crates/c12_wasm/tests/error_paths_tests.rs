@@ -3,6 +3,7 @@ use c12_wasm::rust_191_features::wasm_std_new_apis;
 use c12_wasm::{basic_examples, error_examples};
 
 /// 测试错误输入情况
+/// situation
 #[test]
 #[ignore] // 部分环境栈溢出
 fn test_error_inputs() {
@@ -18,6 +19,7 @@ fn test_error_inputs() {
 }
 
 /// 测试错误状态情况
+/// state situation
 #[test]
 #[ignore] // 部分环境栈溢出
 fn test_error_states() {
@@ -29,6 +31,7 @@ fn test_error_states() {
 }
 
 /// 测试异常情况
+/// situation
 #[test]
 #[ignore] // 部分环境栈溢出
 fn test_exception_cases() {
@@ -38,6 +41,7 @@ fn test_exception_cases() {
 }
 
 /// 测试资源耗尽情况
+/// situation
 #[test]
 #[ignore] // 部分环境栈溢出
 fn test_resource_exhaustion() {
@@ -46,6 +50,7 @@ fn test_resource_exhaustion() {
 }
 
 /// 测试并发安全
+/// concurrency
 #[test]
 #[ignore] // 部分环境栈溢出
 fn test_concurrent_safety() {

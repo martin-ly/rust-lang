@@ -1,10 +1,9 @@
 //! # Rust 1.90 新特性测试 (历史版本)
-//!
+//! # Rust 1.90 feature (this )
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//!
+//! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新测试请参考 `rust_192_comprehensive_tests.rs`
-//!
-//! 测试 Rust 1.90 引入的新特性
+//! Test for Rust 1.90 引入新feature
 use c12_wasm::ecosystem_examples::rust_190_features::*;
 
 // ============================================================================

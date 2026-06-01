@@ -1,29 +1,29 @@
 //! WASI 目标迁移指南 —— 从 wasm32-wasi 到 wasm32-wasip1/p2
-//!
 //! # ⚠️ 重要通知
-//!
+//! # ⚠️ important
 //! `wasm32-wasi` 目标已于 **Rust 1.84.0（2025年1月）** 从 Rust 中移除。
+//! `wasm32-wasi` goal **Rust 1.84.0（20251）** from Rust in 。
 //! 本项目已升级至 `wasm32-wasip1`（WASI Preview 1）和 `wasm32-wasip2`（WASI Preview 2）。
-//!
 //! # WASI 演化时间线
-//!
-//! ```text
+//! # WASI time line
+//! # WASI 演化timeline
 //! 2019: wasm32-wasi (Preview 0) — 基本系统调用
 //! 2023: wasm32-wasip1 (Preview 1) — 稳定版，模块级接口
+//! 2023: wasm32-wasip1 (Preview 1) — ，module
 //! 2024: wasm32-wasip2 (Preview 2) — 组件模型 (Component Model)
 //! 2025+: WASI 0.3 — 原生异步支持 (WASIp3)
-//! ```
-//!
+//! 2025+: WASI 0.3 — async (WASI p3)
 //! # 目标三元组对照
-//!
+//! # goal to
 //! | 旧目标 | 新目标 | 状态 | 说明 |
-//! |--------|--------|------|------|
+//! | goal | goal | state | explain |
+//! | 旧goal | 新goal | state | explain |
 //! | `wasm32-wasi` | ❌ 已移除 | N/A | 2025年1月后不可用 |
-//! | `wasm32-wasip1` | ✅ Tier 2 | 稳定 | 与旧 wasm32-wasi 兼容 |
+//! | `wasm32-wasi` | ❌ | N/A | 20251after |
 //! | `wasm32-wasip2` | ⚠️ Tier 3 | 实验性 | 支持组件模型 |
-//!
+//! | `wasm32-wasip2` | ⚠️ Tier 3 | | |
 //! # 参考
-//! - [WASI Preview 2 Proposal](https://github.com/WebAssembly/WASI/tree/main/wasip2)
+//! # reference
 //! - [Component Model](https://component-model.bytecodealliance.org/)
 //! - [wasmtime WASI 文档](https://docs.wasmtime.dev/stability-wasi-proposal-support.html)
 
@@ -32,29 +32,24 @@
 // =========================================================================
 
 /// # WASI Preview 1 基础
-///
-/// WASI Preview 1 提供 POSIX-like 的系统调用接口：
 /// - 文件系统操作 (`path_open`, `fd_read`, `fd_write`)
 /// - 时钟 (`clock_time_get`)
 /// - 随机数 (`random_get`)
 /// - 环境变量/命令行参数
-///
+/// - environment variable /command parameter
 /// ## 编译命令
-/// ```bash
-/// rustup target add wasm32-wasip1
+/// ## command
+/// ## 编译command
 /// cargo build --target wasm32-wasip1
 /// ```
 ///
 /// ## 运行
-/// ```bash
+/// ## Run
 /// wasmtime target/wasm32-wasip1/debug/my_app.wasm
 /// ```
 pub struct Wasip1Basics;
 
 impl Wasip1Basics {
-    /// WASI Preview 1 的文件系统操作示例
-    ///
-    /// 在 wasip1 中，标准库的 `std::fs` 模块通过 WASI 系统调用实现。
     pub fn file_io_example() -> &'static str {
         r#"
 // 编译: cargo build --target wasm32-wasip1
@@ -74,11 +69,14 @@ fn main() {
     }
 
     /// Capabilities 安全模型
-    ///
     /// WASI 基于 capability-based security：
     /// - 程序默认**无任何权限**
+    /// - program ****
     /// - 必须通过预打开目录（preopened directories）显式授权
+    /// - must （preopened directories）
     /// - 文件路径基于目录文件描述符（dirfd + path）
+    /// - file descriptor （dirfd + path）
+    /// - 文件路径Based on目录file descriptor（dirfd + path）
     pub fn capability_security() -> &'static str {
         r#"
 WASI Capability-Based Security:
@@ -97,10 +95,8 @@ WASI Capability-Based Security:
 "#
     }
 
-    /// 与旧 wasm32-wasi 的差异
-    ///
-    /// 从应用开发者角度，wasip1 与旧 wasi **几乎完全兼容**。
     /// 主要变化是目标名称和工具链更新。
+    /// main goal and toolchain 。
     pub fn migration_from_old_wasi() -> &'static str {
         r#"
 迁移步骤 (wasm32-wasi → wasm32-wasip1):
@@ -133,30 +129,26 @@ WASI Capability-Based Security:
 // 2. WASI Preview 2 (wasip2) — 组件模型
 // =========================================================================
 
-/// # WASI Preview 2 与组件模型
-///
-/// WASI Preview 2 引入了 **WebAssembly Component Model**，
-/// 允许将多个 WASM 模块组合为**组件（Component）**，
 /// 并通过 **WIT (Wasm Interface Types)** 定义接口。
-///
 /// ## 核心概念
-///
+/// ## core concept
 /// | 概念 | 说明 |
-/// |------|------|
+/// | concept | explain |
 /// | **Component** | 高阶 WASM 单元，可导入/导出接口 |
+/// | **Component** | WASM ，/ |
 /// | **WIT** | 接口定义语言（类似 IDL） |
-/// | **World** | 组件的完整接口集合 |
-/// | **Interface** | 命名空间化的函数/类型集合 |
-///
+/// | **WIT** | definition （similar to IDL） |
 /// ## 编译命令
-/// ```bash
-/// rustup target add wasm32-wasip2
+/// ## command
+/// ## 编译command
 /// cargo build --target wasm32-wasip2
 /// ```
 pub struct Wasip2ComponentModel;
 
 impl Wasip2ComponentModel {
     /// WIT 接口示例
+    /// WIT example
+    /// WIT 接口Example of
     pub fn wit_example() -> &'static str {
         r#"
 // example.wit
@@ -174,6 +166,8 @@ world calculator-world {
     }
 
     /// 组件组合概念
+    /// combination concept
+    /// 组件combinationconcept
     pub fn component_composition() -> &'static str {
         r#"
 组件组合 (Component Composition):
@@ -190,7 +184,6 @@ world calculator-world {
 "#
     }
 
-    /// 与 wasip1 的关键差异
     pub fn differences_from_wasip1() -> &'static str {
         r#"
 wasip1 vs wasip2:
@@ -212,16 +205,21 @@ wasip1 vs wasip2:
 // =========================================================================
 
 /// # WASI 工具链指南
-///
+/// # WASI toolchain
 /// ## 必需工具
+/// ## tool
+/// ## 必需tool
+/// ## tool
 /// - `wasmtime` — WASM/WASI 运行时（推荐）
+/// - `wasmtime` — WASM/WASI runtime（推荐）
 /// - `wasm-tools` — 组件模型工具链
+/// - `wasm-tools` — toolchain
+/// - `wasm-tools` — 组件模型toolchain
 /// - `wit-bindgen` — WIT 绑定生成器
+/// - `wit-bindgen` — WIT 绑定generator
 /// - `cargo-component` — 组件模型 Cargo 插件
-///
 /// ## 安装
-/// ```bash
-/// cargo install wasmtime-cli
+/// ##
 /// cargo install wasm-tools
 /// cargo install cargo-component
 /// ```
@@ -229,6 +227,8 @@ pub struct WasiToolchain;
 
 impl WasiToolchain {
     /// wasmtime 常用命令
+    /// wasmtime command
+    /// wasmtime 常用command
     pub fn wasmtime_commands() -> &'static str {
         r#"
 wasmtime 常用命令:
@@ -248,6 +248,7 @@ wasmtime run --profile=guest-profile.json my_app.wasm
     }
 
     /// cargo-component 工作流
+    /// cargo-component 工作stream
     pub fn cargo_component_workflow() -> &'static str {
         r#"
 cargo-component 工作流:
@@ -279,9 +280,8 @@ cargo-component 工作流:
 // 4. 迁移检查清单
 // =========================================================================
 
-/// # 从 wasm32-wasi 迁移的检查清单
-///
 /// 逐项确认迁移完成度。
+/// 。
 pub struct MigrationChecklist;
 
 impl MigrationChecklist {
@@ -326,8 +326,11 @@ browser      | ❌     | ❌     | ⚠️       | 需 polyfill
 // =========================================================================
 
 /// 完整 WASI 应用示例（概念性，需在 wasip1 目标下编译）
+/// complete WASI application example （concept ，in wasip1 goal under ）
 pub mod examples {
     /// HTTP 客户端（使用 wasi-http 提案）
+    /// HTTP （ wasi-http ）
+    /// HTTP 客户端（Use wasi-http 提案）
     pub fn wasi_http_client_concept() -> &'static str {
         r#"
 // wasi-http 提案允许 WASM 模块发起 HTTP 请求
@@ -345,6 +348,8 @@ fn fetch_url(url: &str) -> Result<Vec<u8>, Error> {
     }
 
     /// CLI 工具（文件批处理）
+    /// CLI tool （）
+    /// CLI tool（文件批Handle）
     pub fn cli_batch_processor_concept() -> &'static str {
         r#"
 // 编译为 wasip1，通过 wasmtime 运行

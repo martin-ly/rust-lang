@@ -1,20 +1,18 @@
-//! HTTP/3 与 QUIC 基础
-//!
 //! ## HTTP/3 vs HTTP/2 差异
-//!
 //! | 特性 | HTTP/2 | HTTP/3 |
-//! |------|--------|--------|
 //! | 传输层 | TCP + TLS | QUIC (基于 UDP) |
 //! | 连接建立 | TCP 握手 + TLS 握手 (2-3 RTT) | QUIC 握手 (0-1 RTT) |
+//! | | TCP + TLS (2-3 RTT) | QUIC (0-1 RTT) |
 //! | 队头阻塞 | TCP 层队头阻塞影响所有流 | QUIC 流独立，单流丢包不影响他流 |
+//! | | TCP impact all stream | QUIC stream ，stream impact stream |
 //! | 连接迁移 | 四元组变化需重连 | 连接 ID 标识，支持 IP/端口变化 |
+//! | | | ID ， IP / |
 //! | 拥塞控制 | 内核 TCP 实现 | 用户态 QUIC 实现 |
-//!
-//! QUIC 将 TCP 的可靠传输、TLS 的安全性、HTTP/2 的多流复用整合到用户态 UDP 中。
-//!
+//! | | kernel TCP | QUIC |
+//! | 拥塞控制 | kernel TCP Implementation of | 用户态 QUIC Implementation of |
 //! # 权威来源
-//! - [RFC 9000: QUIC](https://www.rfc-editor.org/rfc/rfc9000.html)
-//! - [RFC 9114: HTTP/3](https://www.rfc-editor.org/rfc/rfc9114.html)
+//! # Source
+//! # 权威source
 //! - [quinn.rs](https://quinn.rs/)
 
 #[cfg(feature = "quic")]
@@ -23,16 +21,20 @@ pub mod quic_impl {
     use std::net::SocketAddr;
 
     /// 创建最小 QUIC 服务器
-    ///
+    /// minimum QUIC
+    /// Createminimum QUIC 服务器
     /// # 注意
-    ///
+    /// #
     /// 真实部署需要提供有效的 TLS 证书。
+    /// real effective TLS certificate 。
     pub fn create_quic_server(_bind_addr: SocketAddr) -> Result<Endpoint, String> {
         // quinn 需要 TLS 配置，此处为概念演示
         Err("QUIC server requires TLS certificate configuration".to_string())
     }
 
     /// 创建最小 QUIC 客户端
+    /// minimum QUIC
+    /// Createminimum QUIC 客户端
     pub fn create_quic_client() -> Result<Endpoint, String> {
         let endpoint = Endpoint::client("0.0.0.0:0".parse().map_err(|e| format!("{}", e))?)
             .map_err(|e| format!("{}", e))?;
@@ -40,6 +42,7 @@ pub mod quic_impl {
     }
 
     /// 接受连接并读取数据的示例骨架
+    /// and example
     pub async fn handle_incoming(endpoint: Endpoint) -> Result<String, String> {
         if let Some(incoming) = endpoint.accept().await {
             let connection = incoming.await.map_err(|e| format!("{}", e))?;
@@ -52,9 +55,13 @@ pub mod quic_impl {
     }
 
     /// 0-RTT 会话恢复概念
-    ///
+    /// 0-RTT concept
+    /// 0-RTT 会话Resumeconcept
     /// QUIC 基于 TLS 1.3 支持 0-RTT：在已有会话票据时，
+    /// QUIC TLS 1.3 0-RTT：in ，
+    /// QUIC Based on TLS 1.3 Supports 0-RTT：in已有会话票据时，
     /// 首个数据包即可携带应用数据，无需等待握手完成。
+    /// application ，etc. 。
     pub fn zero_rtt_concept() -> &'static str {
         "0-RTT 流程:\n\
          1. 首次连接: 1-RTT 握手，服务端发送会话票据 (NST)\n\
@@ -68,9 +75,9 @@ pub mod quic_impl {
     }
 
     /// 连接迁移概念
-    ///
+    /// concept
     /// QUIC 使用连接 ID 而非四元组标识连接，因此客户端 IP/端口
-    /// 变化不会导致连接中断（WiFi ↔ 蜂窝网络切换）。
+    /// QUIC ID while ，therefore IP /
     pub fn connection_migration_concept() -> &'static str {
         "连接迁移流程:\n\
          1. 客户端 IP/端口变化 (如 WiFi → 4G)\n\
@@ -84,6 +91,7 @@ pub mod quic_impl {
     }
 
     /// QUIC 流多路复用说明
+    /// QUIC stream explain
     pub fn stream_multiplexing() -> &'static str {
         "| 特性 | TCP + HTTP/2 | QUIC |\n\
          |------|-------------|------|\n\
@@ -114,6 +122,7 @@ HTTP/3 关键设计：
     }
 
     /// QUIC Echo 服务器骨架
+    /// QUIC Echo
     pub fn quic_echo_server_skeleton() -> &'static str {
         r#"
 // 基于 quinn 的 QUIC echo 服务器骨架
@@ -151,9 +160,11 @@ async fn run_server(addr: &str) -> Result<(), Box<dyn std::error::Error>> {
 
 #[cfg(not(feature = "quic"))]
 pub mod quic_stub {
-    //! QUIC feature 未启用时的占位实现。
+    //! QUIC feature 未启用时占位Implementation of。
 
     /// QUIC 服务器概念
+    /// QUIC concept
+    /// QUIC 服务器concept
     pub fn quic_server_concept(bind_addr: &str) {
         println!(
             "[stub] QUIC server would bind to {} (enable 'quic' feature for real implementation)",
@@ -162,6 +173,8 @@ pub mod quic_stub {
     }
 
     /// QUIC 客户端概念
+    /// QUIC concept
+    /// QUIC 客户端concept
     pub fn quic_client_concept(server_addr: &str) {
         println!(
             "[stub] QUIC client would connect to {} (enable 'quic' feature for real implementation)",
@@ -170,6 +183,8 @@ pub mod quic_stub {
     }
 
     /// HTTP/3 差异说明
+    /// HTTP/3 explain
+    /// HTTP/3 差异explain
     pub fn print_http3_differences() {
         println!(
             r#"
@@ -184,16 +199,19 @@ HTTP/3 与 HTTP/2 的主要差异:
     }
 
     /// 0-RTT 概念占位
+    /// 0-RTT concept
     pub fn zero_rtt_concept() -> &'static str {
         "0-RTT requires 'quic' feature and TLS configuration"
     }
 
     /// 连接迁移概念占位
+    /// concept
     pub fn connection_migration_concept() -> &'static str {
         "Connection migration requires 'quic' feature"
     }
 
     /// 流多路复用占位
+    /// stream
     pub fn stream_multiplexing() -> &'static str {
         "Stream multiplexing requires 'quic' feature"
     }

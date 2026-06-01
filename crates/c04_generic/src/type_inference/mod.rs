@@ -668,6 +668,8 @@ mod tests {
     }
 
     /// `gen` block 重构：编译器自动生成 Iterator 状态机
+    /// `gen` block ： Iterator state machine
+    /// `gen` block 重构：编译器自动Generate Iterator state machine
     #[test]
     fn test_gen_number_iterator() {
         let gen_iter = gen move {

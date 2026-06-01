@@ -1,36 +1,43 @@
 //! Rust 1.89 整数类型系统完整实现（修复版）
-//!
-//! 本模块提供了 Rust 1.89 版本中整数类型的完整实现，包括：
+//! Rust 1.89 type system complete （）
 //! - 所有整数类型的详细定义和特性
-//! - Rust 1.89 新特性的应用
+//! - all type definition and feature
+//! - Rust 1.89 新featureapplication
 //! - 类型安全的最佳实践
+//! - type
 //! - 性能优化技巧
+//! - performance optimization tip
 //! - 完整的示例和测试用例
-//!
+//! - complete example and
 //! # 文件信息
+//! #
 //! - 文件: enhanced_integer_fixed.rs
 //! - 创建日期: 2025-01-27
+//! - date : 2025-01-27
 //! - 版本: 1.0
-//! - Rust版本: 1.89.0
+//! - this : 1.0
+//! - 版this: 1.0
 //! - 作者: Rust 类型系统项目组
+//! - : Rust type system project
 // NonZero 类型现在在各自的模块中导入
 
 /// Rust 1.89 整数类型系统
-///
-/// 本模块实现了 Rust 1.89 版本中所有整数类型的完整功能，
+/// Rust 1.89 type system
+/// Rust 1.89 整数typesystem
 /// 包括类型安全、性能优化、错误处理等最佳实践。
+/// type 、performance optimization 、error handling etc. 。
 pub mod integer_types {
 
     /// 有符号整数类型定义
-    ///
-    /// Rust 提供了多种有符号整数类型，每种类型都有其特定的用途和性能特征。
-    /// 在 Rust 1.89 中，整数类型系统得到了进一步优化，提供了更好的类型推断和性能。
+    /// symbol type definition
     pub mod signed_integers {
 
         /// 8位有符号整数操作
-        ///
+        /// 8symbol
         /// i8 类型用于表示 -128 到 127 范围内的整数。
+        /// i8 type represent -128 to 127 scope inside 。
         /// 常用于字节处理、小范围数值计算等场景。
+        /// 、scope etc. scenario 。
         pub fn i8_operations() {
             // 基本操作
             let a: i8 = 100;
@@ -62,9 +69,9 @@ pub mod integer_types {
         }
 
         /// 32位有符号整数操作（默认整数类型）
-        ///
-        /// i32 是 Rust 的默认整数类型，用于表示 -2,147,483,648 到 2,147,483,647 范围内的整数。
+        /// 32symbol （type ）
         /// 在大多数情况下，这是最常用的整数类型。
+        /// in situation under ，type 。
         pub fn i32_operations() {
             let a: i32 = 1_000_000;
             let b: i32 = 500_000;
@@ -103,8 +110,9 @@ pub mod integer_types {
         }
 
         /// 64位有符号整数操作
-        ///
+        /// 64symbol
         /// i64 类型用于表示大范围的整数，常用于时间戳、大数计算等场景。
+        /// i64 type represent scope ，time 、etc. scenario 。
         pub fn i64_operations() {
             let a: i64 = 1_000_000_000_000;
             let b: i64 = 500_000_000_000;
@@ -129,9 +137,9 @@ pub mod integer_types {
         }
 
         /// 128位有符号整数操作
-        ///
+        /// 128symbol
         /// i128 类型用于表示极大范围的整数，常用于加密、大数计算等场景。
-        /// 在 Rust 1.89 中，i128 的性能得到了进一步优化。
+        /// i128 type represent scope ，、etc. scenario 。
         pub fn i128_operations() {
             let a: i128 = 170_141_183_460_469_231_731_687_303_715_884_105_727;
             let b: i128 = 85_070_591_730_234_615_865_843_651_857_942_052_863;
@@ -155,15 +163,17 @@ pub mod integer_types {
     }
 
     /// 无符号整数类型定义
-    ///
+    /// symbol type definition
     /// 无符号整数类型只能表示非负值，但提供了更大的正数范围。
-    /// 在 Rust 1.89 中，无符号整数类型在内存布局和性能方面得到了优化。
+    /// symbol type represent ，but scope 。
     pub mod unsigned_integers {
 
         /// 8位无符号整数操作
-        ///
+        /// 8symbol
         /// u8 类型用于表示 0 到 255 范围内的整数。
+        /// u8 type represent 0 to 255 scope inside 。
         /// 常用于字节处理、颜色值、ASCII码等场景。
+        /// 、、ASCIIetc. scenario 。
         pub fn u8_operations() {
             let a: u8 = 200;
             let b: u8 = 55;
@@ -191,9 +201,11 @@ pub mod integer_types {
         }
 
         /// 32位无符号整数操作
-        ///
+        /// 32symbol
         /// u32 类型用于表示 0 到 4,294,967,295 范围内的整数。
+        /// u32 type represent 0 to 4,294,967,295 scope inside 。
         /// 是默认的无符号整数类型，常用于计数、ID等场景。
+        /// symbol type ，、IDetc. scenario 。
         pub fn u32_operations() {
             let a: u32 = 2_000_000_000;
             let b: u32 = 1_000_000_000;
@@ -218,8 +230,9 @@ pub mod integer_types {
         }
 
         /// 64位无符号整数操作
-        ///
+        /// 64symbol
         /// u64 类型用于表示大范围的无符号整数，常用于时间戳、大数计数等场景。
+        /// u64 type represent scope symbol ，time 、etc. scenario 。
         pub fn u64_operations() {
             let a: u64 = 9_000_000_000_000_000_000;
             let b: u64 = 4_500_000_000_000_000_000;
@@ -244,9 +257,9 @@ pub mod integer_types {
         }
 
         /// 128位无符号整数操作
-        ///
+        /// 128symbol
         /// u128 类型用于表示极大范围的无符号整数，常用于加密、大数计算等场景。
-        /// 在 Rust 1.89 中，u128 的性能得到了进一步优化。
+        /// u128 type represent scope symbol ，、etc. scenario 。
         pub fn u128_operations() {
             let a: u128 = 340_282_366_920_938_463_463_374_607_431_768_211_455;
             let b: u128 = 170_141_183_460_469_231_731_687_303_715_884_105_727;
@@ -269,9 +282,9 @@ pub mod integer_types {
         }
 
         /// 平台相关无符号整数操作
-        ///
-        /// usize 类型的大小取决于目标平台（32位或64位）。
+        /// platform symbol
         /// 常用于数组长度、内存地址、索引等场景。
+        /// 、memory 、etc. scenario 。
         pub fn usize_operations() {
             let a: usize = 1_000_000;
             let b: usize = 500_000;
@@ -298,9 +311,9 @@ pub mod integer_types {
     }
 
     /// 非零整数类型
-    ///
-    /// Rust 1.89 提供了非零整数类型，这些类型在编译时保证不为零，
+    /// type
     /// 可以用于优化内存布局和提供更安全的API。
+    /// can optimization memory layout and API。
     pub mod non_zero_integers {
         use std::num::{
             NonZeroI8, NonZeroI16, NonZeroI32, NonZeroI64, NonZeroI128, NonZeroIsize, NonZeroU8,
@@ -308,6 +321,7 @@ pub mod integer_types {
         };
 
         /// 非零有符号整数操作
+        /// symbol
         pub fn non_zero_signed_operations() {
             // 创建非零整数
             let non_zero_i8 = NonZeroI8::new(100).expect("创建NonZeroI8失败");
@@ -332,6 +346,7 @@ pub mod integer_types {
         }
 
         /// 非零无符号整数操作
+        /// symbol
         pub fn non_zero_unsigned_operations() {
             // 创建非零整数
             let non_zero_u8 = NonZeroU8::new(200).expect("创建NonZeroU8失败");
@@ -359,18 +374,27 @@ pub mod integer_types {
     }
 
     /// 整数类型转换
-    ///
+    /// type conversion
+    /// 整数typeconversion
     /// 本模块提供了安全的整数类型转换功能，包括：
+    /// This module provides type conversion functionality ，：
     /// - 显式类型转换
-    /// - 安全转换（使用 TryFrom trait）
+    /// - type conversion
+    /// - 显式typeconversion
     /// - 溢出检查
+    /// -
+    /// - 溢出Check
     /// - 类型推断
+    /// - type infer
     pub mod type_conversion {
 
         /// 显式类型转换
-        ///
+        /// type conversion
+        /// 显式typeconversion
         /// 使用 `as` 关键字进行显式类型转换。
+        /// `as` key type conversion 。
         /// 注意：这种转换可能会导致数据丢失或溢出。
+        /// ：conversion may or 。
         pub fn explicit_conversion() {
             let i32_value: i32 = 1_000_000;
 
@@ -390,9 +414,8 @@ pub mod integer_types {
         }
 
         /// 安全类型转换
-        ///
-        /// 使用 `TryFrom` trait 进行安全的类型转换，
-        /// 转换失败时返回错误而不是panic。
+        /// type conversion
+        /// 安全typeconversion
         pub fn safe_conversion() {
             let i32_value: i32 = 1_000_000;
 
@@ -418,9 +441,9 @@ pub mod integer_types {
         }
 
         /// 类型推断
-        ///
-        /// Rust 1.89 提供了更好的类型推断功能，
+        /// type infer
         /// 编译器可以根据上下文自动推断整数类型。
+        /// can according to on under infer type 。
         pub fn type_inference() {
             // 类型推断示例
             let a = 42; // 推断为 i32
@@ -437,15 +460,17 @@ pub mod integer_types {
     }
 
     /// 整数溢出处理
-    ///
+    /// source
     /// 本模块提供了处理整数溢出的各种方法，
+    /// This module provides method ，
     /// 包括检查溢出、安全运算等。
+    /// 、etc. 。
     pub mod overflow_handling {
 
         /// 溢出检查
-        ///
+        /// 溢出Check
         /// 使用 `checked_*` 方法进行溢出检查。
-        /// 这些方法在溢出时返回 None，而不是panic。
+        /// `checked_*` method 。
         pub fn overflow_checking() {
             let a: i8 = 100;
             let b: i8 = 50;
@@ -471,9 +496,11 @@ pub mod integer_types {
         }
 
         /// 饱和运算
-        ///
+        /// and
         /// 使用 `saturating_*` 方法进行饱和运算。
+        /// `saturating_*` method and 。
         /// 这些方法在溢出时返回边界值，而不是环绕。
+        /// method in edge ，while 。
         pub fn saturating_operations() {
             let a: i8 = 100;
             let b: i8 = 50;
@@ -493,9 +520,8 @@ pub mod integer_types {
         }
 
         /// 环绕运算
-        ///
         /// 使用 `wrapping_*` 方法进行环绕运算。
-        /// 这些方法在溢出时进行环绕，而不是panic。
+        /// `wrapping_*` method 。
         pub fn wrapping_operations() {
             let a: i8 = 100;
             let b: i8 = 50;
@@ -516,9 +542,11 @@ pub mod integer_types {
     }
 
     /// 整数格式化
-    ///
+    /// 整数Format
     /// 本模块提供了各种整数格式化功能，
+    /// This module provides functionality ，
     /// 包括不同进制、对齐、填充等。
+    /// 、to 、etc. 。
     pub mod formatting {
 
         /// 不同进制格式化
@@ -538,6 +566,7 @@ pub mod integer_types {
         }
 
         /// 对齐和填充
+        /// to and
         pub fn alignment_and_padding() {
             let value: i32 = 42;
 
@@ -564,13 +593,18 @@ pub mod integer_types {
 }
 
 /// 整数类型性能测试
-///
+/// type performance test
+/// 整数typeperformance test
 /// 本模块提供了各种整数类型的性能测试，
+/// This module provides type performance test ，
 /// 帮助开发者选择最适合的整数类型。
+/// type 。
 pub mod performance_tests {
     use std::time::Instant;
 
     /// 算术运算性能测试
+    /// performance test
+    /// 算术运算performance test
     pub fn arithmetic_performance_test() {
         const ITERATIONS: usize = 1_000_000;
 
@@ -616,6 +650,7 @@ pub mod performance_tests {
     }
 
     /// 内存使用测试
+    /// memory
     pub fn memory_usage_test() {
         println!("整数类型内存使用:");
         println!("  i8: {} 字节", std::mem::size_of::<i8>());
@@ -634,9 +669,10 @@ pub mod performance_tests {
 }
 
 /// 主函数：演示所有整数类型功能
-///
-/// 本函数演示了 Rust 1.89 中所有整数类型的功能，
+/// Main function ：demonstration all type functionality
+/// Main function：Demonstration of所有整数typefunctionality
 /// 包括基本操作、类型转换、溢出处理、格式化等。
+/// this 、type conversion 、source 、etc. 。
 pub fn demonstrate_all_integer_types() {
     println!("=== Rust 1.89 整数类型系统演示 ===\n");
 
@@ -709,6 +745,7 @@ pub fn demonstrate_all_integer_types() {
 }
 
 /// 简化的整数操作函数（保持向后兼容）
+/// function （after ）
 #[allow(unused)]
 pub fn interger_operation() {
     // 调用新的演示函数

@@ -1,11 +1,16 @@
 //! LeetCode 树状数组类算法（结合 Rust 1.92 特性）
+//! LeetCode Fenwick tree algorithm （ Rust 1.92 feature ）
 //!
 //! 本模块实现经典的树状数组类 LeetCode 题目，充分利用 Rust 1.92 的新特性。
+//! this module Fenwick tree LeetCode ， Rust 1.92 feature 。
 //!
 //! ## Rust 1.92 特性应用
+//! ## Rust 1.92 feature application
 //!
 //! 1. **性能优化**: 使用树状数组进行前缀和查询和更新
+//! 1. **performance optimization **: Fenwick tree before and and
 //! 2. **内存优化**: 高效的树状数组实现
+//! 2. **memory optimization **: efficient Fenwick tree
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 
 // ==================== 数据结构定义 ====================
@@ -52,6 +57,7 @@ impl BinaryIndexedTree {
 }
 
 /// 307. Range Sum Query - Mutable（区域和检索 - 数组可修改）- 树状数组版本
+/// 307. Range Sum Query - Mutable（area and - ）- Fenwick tree this
 pub struct NumArrayBIT {
     bit: BinaryIndexedTree,
     nums: Vec<i32>,
@@ -80,6 +86,7 @@ impl NumArrayBIT {
 }
 
 /// 315. Count of Smaller Numbers After Self（计算右侧小于当前元素的个数）- 树状数组版本
+/// 315. Count of Smaller Numbers After Self（when before element ）- Fenwick tree this
 pub fn count_smaller_bit(nums: Vec<i32>) -> Vec<i32> {
     // 离散化
     let mut sorted = nums.clone();
@@ -99,6 +106,7 @@ pub fn count_smaller_bit(nums: Vec<i32>) -> Vec<i32> {
 }
 
 /// 327. Count of Range Sum（区间和的个数）- 树状数组版本
+/// 327. Count of Range Sum（interval and ）- Fenwick tree this
 pub fn count_range_sum_bit(nums: Vec<i32>, lower: i32, upper: i32) -> i32 {
     let n = nums.len();
     let mut prefix_sum = vec![0i64; n + 1];
@@ -147,6 +155,7 @@ pub fn count_range_sum_bit(nums: Vec<i32>, lower: i32, upper: i32) -> i32 {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有树状数组类问题
+/// all Fenwick tree problem
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

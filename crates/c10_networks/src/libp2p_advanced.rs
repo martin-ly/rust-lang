@@ -1,29 +1,28 @@
 #![forbid(unsafe_code)]
 
 //! libp2p 深度集成 —— 点对点网络协议栈
-//!
+//! libp2p —— point to point network protocol stack
+//! libp2p 深度集成 —— pointtopointnetwork protocolstack
 //! # 概述
-//!
-//! libp2p 是一个模块化、可扩展的点对点（P2P）网络框架，
-//! 由 Protocol Labs 开发，是 IPFS、Filecoin 等项目的基础网络层。
-//!
+//! #
 //! # 核心模块
-//!
+//! # core module
 //! | 模块 | 功能 | 协议实现 |
-//! |------|------|---------|
-//! | Transport | 底层传输 | TCP, QUIC, WebSocket, WebRTC |
+//! | module | functionality | |
+//! | module | functionality | 协议Implementation of |
 //! | Noise | 加密握手 | Noise XX/IK 握手 |
 //! | TLS | 备选加密 | TLS 1.3 + libp2p 扩展 |
+//! | TLS | | TLS 1.3 + libp2p |
+//! | TLS | 备选Encrypt | TLS 1.3 + libp2p 扩展 |
 //! | Yamux | 流多路复用 | Yamux / Mplex |
 //! | Kademlia | DHT 路由 | Kademlia DHT |
-//! | GossipSub | 消息发布订阅 | GossipSub v1.1 |
 //! | Identify | 节点身份交换 | libp2p-identify |
 //! | Ping | 连接保活 | libp2p-ping |
-//!
 //! # 依赖
+//! #
 //! 当前工作区已配置 `libp2p = { version = "0.54.1", features = [...] }`
-//!
 //! # 参考
+//! # reference
 //! - [libp2p 官方文档](https://docs.rs/libp2p)
 //! - [libp2p 规范](https://github.com/libp2p/specs)
 
@@ -32,14 +31,16 @@
 // =========================================================================
 
 /// # libp2p 节点身份
-///
-/// 每个 libp2p 节点由 `PeerId` 唯一标识，它是节点公钥的哈希。
+/// # libp2p node
 /// 支持 Ed25519、Secp256k1、RSA 等多种密钥类型。
+/// Ed25519、Secp256k1、RSA etc. type 。
+/// Supports Ed25519、Secp256k1、RSA etc.多种密钥type。
 pub mod identity {
     use libp2p::identity::Keypair;
     use libp2p::PeerId;
 
     /// 生成新的节点身份
+    /// node
     pub fn generate_identity() -> (Keypair, PeerId) {
         let keypair = Keypair::generate_ed25519();
         let peer_id = PeerId::from(keypair.public());
@@ -47,11 +48,13 @@ pub mod identity {
     }
 
     /// 从已有密钥恢复身份
+    /// from
     pub fn peer_id_from_public_key(public_key: &libp2p::identity::PublicKey) -> PeerId {
         PeerId::from(public_key.clone())
     }
 
     /// 序列化密钥对（用于持久化）
+    /// sequence to （）
     pub fn serialize_keypair(keypair: &Keypair) -> Vec<u8> {
         keypair
             .to_protobuf_encoding()
@@ -59,6 +62,7 @@ pub mod identity {
     }
 
     /// 反序列化密钥对
+    /// sequence to
     pub fn deserialize_keypair(bytes: &[u8]) -> Result<Keypair, String> {
         Keypair::from_protobuf_encoding(bytes).map_err(|e| e.to_string())
     }
@@ -69,18 +73,18 @@ pub mod identity {
 // =========================================================================
 
 /// # Swarm 构建器
-///
-/// `Swarm` 是 libp2p 的核心结构，管理所有网络活动：
+/// # Swarm builder
 /// - 监听传入连接
+/// -
 /// - 拨号远程节点
-/// - 运行协议行为（behaviour）
+/// - node
+/// - Run协议行as（behaviour）
 pub mod swarm_builder {
     use libp2p::{noise, tcp, yamux, Swarm, SwarmBuilder};
     use std::time::Duration;
 
     /// 构建基础 TCP + Noise + Yamux Swarm
-    ///
-    /// 这是最常见的 libp2p 网络配置。
+    /// 构建basis TCP + Noise + Yamux Swarm
     pub fn build_tcp_swarm<B>(
         keypair: &libp2p::identity::Keypair,
         behaviour: B,
@@ -105,11 +109,11 @@ pub mod swarm_builder {
     }
 
     /// 构建内存传输 Swarm（测试用）
-    ///
+    /// memory transmission Swarm（）
     /// # 注意
-    /// libp2p 0.54.1 中 `MemoryTransport` 需经过 upgrade + authenticate + multiplex
-    /// 才能满足 `Transport<Output = (PeerId, Muxer)>` 约束。教学代码中推荐使用
+    /// #
     /// `build_tcp_swarm` 配合回环地址 (`/ip4/127.0.0.1/tcp/0`) 进行本地测试。
+    /// `build_tcp_swarm` loopback address (`/ip4/127.0.0.1/tcp/0`) this 。
     pub fn build_memory_swarm<B>(
         _keypair: &libp2p::identity::Keypair,
         _behaviour: B,
@@ -130,8 +134,7 @@ pub mod swarm_builder {
 // =========================================================================
 
 /// # Kademlia 分布式哈希表
-///
-/// Kademlia 是 libp2p 的核心路由协议，提供：
+/// # Kademlia distribution
 /// - 节点发现（Peer Discovery）
 /// - 内容路由（Content Routing）
 /// - 记录存储（Record Store）
@@ -143,7 +146,7 @@ pub mod dht {
     };
     use libp2p::{Multiaddr, StreamProtocol};
 
-    /// 创建 Kademlia 行为
+    /// Create Kademlia 行as
     pub fn create_kademlia_behaviour(
         local_peer_id: libp2p::PeerId,
     ) -> KademliaBehaviour<MemoryStore> {
@@ -152,7 +155,7 @@ pub mod dht {
         KademliaBehaviour::with_config(local_peer_id, store, config)
     }
 
-    /// 处理 Kademlia 事件的概念框架
+    /// Handle Kademlia 事件conceptframework
     pub fn handle_kademlia_event(event: KademliaEvent) {
         match event {
             KademliaEvent::OutboundQueryProgressed { result, .. } => match result {
@@ -188,6 +191,7 @@ pub mod dht {
 
     impl BootstrapConfig {
         /// IPFS 公共引导节点（概念性）
+        /// IP FS node （concept ）
         pub fn ipfs_defaults() -> Self {
             Self { peers: vec![] }
         }
@@ -198,10 +202,6 @@ pub mod dht {
 // 4. GossipSub 发布订阅
 // =========================================================================
 
-/// # GossipSub 消息网络
-///
-/// GossipSub 是 libp2p 的可扩展发布订阅协议，
-/// 结合了 mesh 网络（用于低延迟）和 gossip 传播（用于可靠性）。
 pub mod pubsub {
     use libp2p::gossipsub::{
         Behaviour as GossipsubBehaviour, Config as GossipsubConfig, Event as GossipsubEvent,
@@ -209,7 +209,6 @@ pub mod pubsub {
     };
     use libp2p::identity::Keypair;
 
-    /// 创建 GossipSub 行为
     pub fn create_gossipsub_behaviour(keypair: &Keypair) -> Result<GossipsubBehaviour, String> {
         let message_authenticity = MessageAuthenticity::Signed(keypair.clone());
         let config = GossipsubConfig::default();
@@ -218,15 +217,10 @@ pub mod pubsub {
             .map_err(|e| format!("gossipsub init: {}", e))
     }
 
-    /// 创建带验证策略的 GossipSub
-    ///
-    /// libp2p 0.54.1 中 `GossipsubConfig` 默认即为 `ValidationMode::Strict`，
-    /// 如需自定义需使用 `ConfigBuilder`。
     pub fn create_validated_gossipsub(keypair: &Keypair) -> Result<GossipsubBehaviour, String> {
         create_gossipsub_behaviour(keypair)
     }
 
-    /// 处理 GossipSub 事件
     pub fn handle_gossipsub_event(event: GossipsubEvent) {
         match event {
             GossipsubEvent::Message {
@@ -262,13 +256,11 @@ pub mod pubsub {
 // =========================================================================
 
 /// # 组合 Behaviour
-///
-/// 实际 libp2p 节点通常组合多个协议行为。
-/// 使用 `libp2p::swarm::NetworkBehaviour` derive macro 组合。
 use libp2p::swarm::NetworkBehaviour;
 use libp2p::{gossipsub, identify, kad, ping};
 
 /// 完整的 P2P 节点行为
+/// complete P2P node as
 #[derive(NetworkBehaviour)]
 pub struct FullNodeBehaviour {
     pub kademlia: kad::Behaviour<kad::store::MemoryStore>,
@@ -312,14 +304,15 @@ impl FullNodeBehaviour {
 // =========================================================================
 
 /// # NAT 穿透策略
-///
+/// # NAT strategy
+/// # NAT 穿透strategy
 /// libp2p 提供多种 NAT 穿透机制：
-/// - **AutoNAT**: 自动检测节点是否可被公网访问
-/// - **DCUtR (Direct Connection Upgrade through Relay)**: 通过中继建立直连
-/// - **UPnP/NAT-PMP**: 自动端口映射
+/// libp2p NAT mechanism ：
 /// - **Circuit Relay v2**: 中继转发
+/// - **Circuit Relay v2**: in继转发
 pub mod nat_traversal {
     /// NAT 类型枚举
+    /// NAT type enum
     #[derive(Debug, Clone, Copy, PartialEq)]
     pub enum NatType {
         Public,         // 公网 IP
@@ -331,6 +324,7 @@ pub mod nat_traversal {
     }
 
     /// 穿透策略决策树
+    /// strategy tree
     pub fn select_traversal_strategy(nat_type: NatType, has_relay: bool) -> &'static str {
         match (nat_type, has_relay) {
             (NatType::Public, _) => "直接监听公网地址",
@@ -349,40 +343,39 @@ pub mod nat_traversal {
 // =========================================================================
 
 /// # Relay 中继协议（Circuit Relay v2）
-///
-/// 当两个节点均位于 NAT 后方且无法直接建立连接时，可通过 publicly reachable 的
+/// # Relay in继协议（Circuit Relay v2）
 /// **Relay 节点**转发流量，实现 NAT 穿透。
-///
+/// **Relay node **flow rate ， NAT 。
+/// **Relay node**转发flow rate，Implementation of NAT 穿透。
 /// ## 核心概念
+/// ## core concept
 /// - **Reservation**: 客户端向 Relay Server 申请预留一个中继槽位，使得其他节点
-///   可以通过该 Relay 与自己建立 circuit。
-/// - **Circuit**: 经过 Relay 转发的虚拟连接。Relay Server 负责将来自源节点的数据
+/// - **Reservation**: Relay Server in ，its node
 ///   转发给目标节点。
-///
+///   goal node 。
+///   转发给goalnode。
 /// ## 角色划分
+/// ##
 /// - `Relay Server`: 接受 reservation、转发 circuit 流量。
-/// - `Relay Client`: 申请 reservation 并监听通过 Relay 到达的连接，
+/// - `Relay Server`: Accept reservation、转发 circuit flow rate。
 ///   或主动通过 Relay 拨号其他节点。
-///
-/// ## 与 DCUtR 的协作
-/// Relay 通常是 DCUtR 的前置步骤：先通过 Relay 建立 relayed 连接，
-/// 再尝试升级为直连（hole punching）。
+///   or Relay its node 。
+/// 再尝试升级as直连（hole punching）。
+/// as（hole punching）。
 pub mod relay {
     use libp2p::relay::{Behaviour as RelayBehaviour, Config as RelayConfig, Event as RelayEvent};
 
-    /// 创建 Relay Server 行为（使用默认配置）
-    ///
-    /// 默认配置包含针对 reservation 和 circuit 的速率限制，
+    /// Create Relay Server 行as（Use默认Configure）
     /// 适合大多数公开中继节点的场景。
+    /// in node scenario 。
     pub fn create_relay_behaviour(local_peer_id: libp2p::PeerId) -> RelayBehaviour {
         let config = RelayConfig::default();
         RelayBehaviour::new(local_peer_id, config)
     }
 
-    /// 处理 Relay 事件的概念框架
-    ///
-    /// 实际生产环境中应将这些事件接入 tracing/metrics 系统，
+    /// Handle Relay 事件conceptframework
     /// 而非直接打印到标准输出。
+    /// while to standard output 。
     pub fn handle_relay_event(event: RelayEvent) {
         match event {
             RelayEvent::ReservationReqAccepted {
@@ -425,20 +418,15 @@ pub mod relay {
         }
     }
 
-    /// 概念：将 Relay 集成到组合 Behaviour
-    ///
-    /// 在实际项目中，可通过 `#[derive(NetworkBehaviour)]` 将 `relay::Behaviour`
+    /// concept：will Relay 集成tocombination Behaviour
     /// 与其他协议行为组合在一起：
-    ///
-    /// ```ignore
+    /// rather than as combination in ：
     /// #[derive(libp2p::swarm::NetworkBehaviour)]
     /// pub struct RelayEnabledBehaviour {
     ///     pub relay: libp2p::relay::Behaviour,
     ///     pub identify: libp2p::identify::Behaviour,
     ///     pub ping: libp2p::ping::Behaviour,
     ///     // ... 其他 behaviour
-    /// }
-    /// ```
     pub struct RelayIntegrationConcept;
 }
 
@@ -446,37 +434,30 @@ pub mod relay {
 // 8. AutoNAT
 // =========================================================================
 
-/// # AutoNAT 自动 NAT 检测
-///
-/// AutoNAT 让节点能够自动探测自身是否处于公网可访问状态，
 /// 无需手动配置或依赖外部 STUN 服务。
-///
+/// or outside STUN 。
 /// ## 工作原理
-/// 1. 节点向已连接的 peers（或指定的 probe servers）发送 dial-back 请求。
+/// ##
 /// 2. 对方尝试回连本节点公布的监听地址。
+/// 2. to this node 。
 /// 3. 根据回连结果，节点状态在 `Public`、`Private`、`Unknown` 之间切换。
-///
+/// 3. according to result ，node state in `Public`、`Private`、`Unknown` 's switching 。
 /// ## 应用场景
-/// - 动态决定是否需要寻找 Relay 节点（`Private` 时启用 Relay Client）。
-/// - 为 DCUtR 决策提供依据（`Public` 或 `FullCone` 时更容易打洞成功）。
+/// ## application scenario
 /// - 在监控面板中展示节点的网络可达性。
+/// - in surface in node network 。
 pub mod autonat {
     use libp2p::autonat::{
         Behaviour as AutonatBehaviour, Config as AutonatConfig, Event as AutonatEvent, NatStatus,
     };
 
-    /// 创建 AutoNAT 行为（使用默认配置）
-    ///
-    /// 默认配置下，AutoNAT 会在启动 15 秒后发起首次探测，
     /// 并在状态变化时通过事件通知调用方。
+    /// and in state 。
     pub fn create_autonat_behaviour(local_peer_id: libp2p::PeerId) -> AutonatBehaviour {
         let config = AutonatConfig::default();
         AutonatBehaviour::new(local_peer_id, config)
     }
 
-    /// 处理 AutoNAT 事件
-    ///
-    /// `StatusChanged` 是最关键的事件，直接决定节点的 NAT 策略。
     pub fn handle_autonat_event(event: AutonatEvent) {
         match event {
             AutonatEvent::StatusChanged { old, new } => {
@@ -502,14 +483,10 @@ pub mod autonat {
         }
     }
 
-    /// 概念：在 `SwarmBuilder` 中使用 AutoNAT
-    ///
     /// ```ignore
     /// let behaviour = FullNodeBehaviour {
     ///     autonat: autonat::create_autonat_behaviour(local_peer_id),
     ///     // ... 其他 behaviour
-    /// };
-    /// let swarm = swarm_builder::build_tcp_swarm(&keypair, behaviour).unwrap();
     /// ```
     pub struct AutonatIntegrationConcept;
 }
@@ -520,32 +497,25 @@ pub mod autonat {
 
 /// # DCUtR (Direct Connection Upgrade through Relay)
 ///
-/// DCUtR 协议用于将已有的 relayed 连接升级为直连（hole punching）。
-/// 当两个节点通过 Relay 初次握手后，双方同时向对方已观察到的地址发起拨号，
 /// 利用 NAT 的端口映射机制尝试“打洞”，从而建立一条不经过中继的直接路径。
-///
+/// NAT mechanism “”，thereby in 。
 /// ## 前提条件
-/// 1. 双方已通过 Relay 建立连接（至少一方持有有效的 reservation）。
+/// ## prerequisite condition
+/// 1. 双方已Via Relay 建立Connect（至少一方持有effective reservation）。
 /// 2. 至少有一方能够发起出站连接（或双方均为锥形 NAT）。
+/// 2. can （or as NAT ）。
 /// 3. 已启用 `identify` 协议，以便交换 observed addresses。
-///
-/// ## 与 Relay 的协同
-/// DCUtR 本身不建立连接，而是依赖 Relay 提供的初始连接通道。
-/// 成功升级后，应用层应优先使用新的直连，并可选择关闭 relayed 连接。
+/// 3. 已启用 `identify` 协议，以便exchange observed addresses。
+/// ## and Relay 协同
 pub mod dcutr {
     use libp2p::dcutr::{Behaviour as DcutrBehaviour, Event as DcutrEvent};
 
-    /// 创建 DCUtR 行为
-    ///
-    /// DCUtR 行为维护已知的直连与 relayed 连接映射，
     /// 并在适当时机自动发起 hole punching 尝试。
+    /// and in when hole punching 。
     pub fn create_dcutr_behaviour(local_peer_id: libp2p::PeerId) -> DcutrBehaviour {
         DcutrBehaviour::new(local_peer_id)
     }
 
-    /// 处理 DCUtR 事件
-    ///
-    /// 成功升级后，`ConnectionId` 可用于在 `Swarm` 事件循环中识别新直连。
     pub fn handle_dcutr_event(event: DcutrEvent) {
         match event.result {
             Ok(connection_id) => {
@@ -560,9 +530,6 @@ pub mod dcutr {
         }
     }
 
-    /// 概念：DCUtR 与 Relay 协同工作的组合 Behaviour
-    ///
-    /// ```ignore
     /// #[derive(libp2p::swarm::NetworkBehaviour)]
     /// pub struct HolePunchBehaviour {
     ///     pub relay: libp2p::relay::Behaviour,
@@ -571,10 +538,8 @@ pub mod dcutr {
     /// }
     ///
     /// // 1. 通过 Relay 发现对方并建立 relayed 连接
+    /// // 1. Relay to and relayed
     /// // 2. identify 交换 observed addresses
-    /// // 3. DCUtR 自动触发 hole punching
-    /// // 4. 成功后 Swarm 产生 ConnectionEstablished 事件（新直连）
-    /// ```
     pub struct DcutrIntegrationConcept;
 }
 
@@ -583,28 +548,32 @@ pub mod dcutr {
 // =========================================================================
 
 /// # libp2p 应用模式
-///
-/// 展示了 libp2p 在不同场景下的架构模式。
+/// # libp2p application
 pub mod patterns {
     /// 模式 1：去中心化消息应用
+    /// 1：center application
     pub struct DecentralizedChat {
         pub topic: String,
         pub relay_peers: Vec<String>,
     }
 
     /// 模式 2：内容分发网络（CDN）
+    /// 2：CDN （CDN）
+    /// 模式 2：CDN（CDN）
     pub struct P2pCdn {
         pub content_hash: String,
         pub replication_factor: usize,
     }
 
     /// 模式 3：区块链网络
+    /// 3：network
     pub struct BlockchainNetwork {
         pub genesis_peers: Vec<String>,
         pub consensus_topic: String,
     }
 
     /// 模式 4：IoT 设备网络
+    /// 4：IoT network
     pub struct IotMesh {
         pub device_type: String,
         pub heartbeat_interval: std::time::Duration,
@@ -619,7 +588,6 @@ pub mod patterns {
 mod tests {
     use super::*;
 
-    /// 测试生成节点身份，并验证 PeerId 与公钥一致
     #[test]
     fn test_generate_identity() {
         let (keypair, peer_id) = identity::generate_identity();
@@ -627,6 +595,7 @@ mod tests {
     }
 
     /// 测试密钥对的序列化与反序列化往返
+    /// to sequence and sequence
     #[test]
     fn test_keypair_serialization() {
         let (keypair, _) = identity::generate_identity();
@@ -639,7 +608,6 @@ mod tests {
         );
     }
 
-    /// 测试从公钥恢复 PeerId
     #[test]
     fn test_peer_id_from_public_key() {
         let (keypair, peer_id) = identity::generate_identity();
@@ -647,14 +615,12 @@ mod tests {
         assert_eq!(peer_id, recovered);
     }
 
-    /// 测试创建 Kademlia 行为不 panic
     #[test]
     fn test_create_kademlia_behaviour() {
         let (_, peer_id) = identity::generate_identity();
         let _behaviour = dht::create_kademlia_behaviour(peer_id);
     }
 
-    /// 测试创建 GossipSub 行为成功
     #[test]
     fn test_create_gossipsub_behaviour() {
         let (keypair, _) = identity::generate_identity();
@@ -663,6 +629,7 @@ mod tests {
     }
 
     /// 测试 NAT 穿透策略在不同 NAT 类型组合下的输出
+    /// NAT strategy in NAT type combination under
     #[test]
     fn test_select_traversal_strategy_all_combinations() {
         use nat_traversal::NatType;
@@ -728,7 +695,6 @@ mod tests {
         );
     }
 
-    /// 测试 NatType 的所有变体均可在 match 中被完整覆盖
     #[test]
     fn test_nat_type_coverage() {
         let variants = [
@@ -748,7 +714,6 @@ mod tests {
         }
     }
 
-    /// 测试 build_memory_swarm 返回预期的错误信息
     #[test]
     fn test_build_memory_swarm_returns_err() {
         let (keypair, _) = identity::generate_identity();
@@ -767,6 +732,7 @@ mod tests {
     }
 
     /// 测试 build_tcp_swarm 能成功构建 Swarm
+    /// Test for build_tcp_swarm 能成功构建 Swarm
     #[test]
     fn test_build_tcp_swarm() {
         let (keypair, peer_id) = identity::generate_identity();
@@ -775,7 +741,6 @@ mod tests {
         assert!(result.is_ok());
     }
 
-    /// 测试 FullNodeBehaviour 能成功初始化
     #[test]
     fn test_full_node_behaviour_new() {
         let (keypair, peer_id) = identity::generate_identity();
@@ -783,21 +748,18 @@ mod tests {
         assert!(behaviour.is_ok());
     }
 
-    /// 测试创建 Relay 行为不 panic
     #[test]
     fn test_create_relay_behaviour() {
         let (_, peer_id) = identity::generate_identity();
         let _behaviour = relay::create_relay_behaviour(peer_id);
     }
 
-    /// 测试创建 AutoNAT 行为不 panic
     #[test]
     fn test_create_autonat_behaviour() {
         let (_, peer_id) = identity::generate_identity();
         let _behaviour = autonat::create_autonat_behaviour(peer_id);
     }
 
-    /// 测试创建 DCUtR 行为不 panic
     #[test]
     fn test_create_dcutr_behaviour() {
         let (_, peer_id) = identity::generate_identity();

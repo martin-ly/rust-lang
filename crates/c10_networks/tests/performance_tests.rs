@@ -1,7 +1,7 @@
 //! 性能测试模块
-//!
-//! 本模块包含了 c10_networks 库的性能测试，
+//! performance test module
 //! 确保各个模块的性能指标符合预期。
+//! module performance indicator 。
 use bytes::Bytes;
 use c10_networks::error::NetworkError;
 use c10_networks::packet::{Packet, PacketBuilder, PacketStats, PacketType};
@@ -10,6 +10,7 @@ use c10_networks::protocol::websocket::{WebSocketFrame, WebSocketHandshakeReques
 use std::time::Instant;
 
 /// 测试数据包创建性能
+/// performance
 #[test]
 fn test_packet_creation_performance() {
     const ITERATIONS: usize = 10000;
@@ -35,6 +36,7 @@ fn test_packet_creation_performance() {
 }
 
 /// 测试数据包构建器性能
+/// builder performance
 #[test]
 fn test_packet_builder_performance() {
     const ITERATIONS: usize = 10000;
@@ -62,6 +64,7 @@ fn test_packet_builder_performance() {
 }
 
 /// 测试数据包统计性能
+/// performance
 #[test]
 fn test_packet_stats_performance() {
     const ITERATIONS: usize = 10000;
@@ -87,6 +90,7 @@ fn test_packet_stats_performance() {
 }
 
 /// 测试HTTP请求创建性能
+/// HTTP performance
 #[test]
 fn test_http_request_creation_performance() {
     const ITERATIONS: usize = 10000;
@@ -116,6 +120,7 @@ fn test_http_request_creation_performance() {
 }
 
 /// 测试HTTP响应创建性能
+/// HTTP performance
 #[test]
 fn test_http_response_creation_performance() {
     const ITERATIONS: usize = 10000;
@@ -143,7 +148,6 @@ fn test_http_response_creation_performance() {
     );
 }
 
-/// 测试WebSocket帧创建性能
 #[test]
 fn test_websocket_frame_creation_performance() {
     const ITERATIONS: usize = 10000;
@@ -167,7 +171,6 @@ fn test_websocket_frame_creation_performance() {
     );
 }
 
-/// 测试WebSocket握手请求性能
 #[test]
 #[ignore] // 性能测试在部分环境可能超时
 fn test_websocket_handshake_performance() {
@@ -196,6 +199,7 @@ fn test_websocket_handshake_performance() {
 }
 
 /// 测试数据包序列化性能
+/// sequence performance
 #[test]
 fn test_packet_serialization_performance() {
     const ITERATIONS: usize = 1000;
@@ -220,6 +224,7 @@ fn test_packet_serialization_performance() {
 }
 
 /// 测试数据包反序列化性能
+/// sequence performance
 #[test]
 fn test_packet_deserialization_performance() {
     const ITERATIONS: usize = 1000;
@@ -245,6 +250,7 @@ fn test_packet_deserialization_performance() {
 }
 
 /// 测试内存分配性能
+/// memory performance
 #[test]
 fn test_memory_allocation_performance() {
     const ITERATIONS: usize = 10000;
@@ -268,6 +274,7 @@ fn test_memory_allocation_performance() {
 }
 
 /// 测试并发数据包处理性能
+/// concurrency performance
 #[test]
 fn test_concurrent_packet_processing_performance() {
     use std::sync::Arc;
@@ -324,6 +331,7 @@ fn test_concurrent_packet_processing_performance() {
 }
 
 /// 测试大数据包处理性能
+/// performance
 #[test]
 fn test_large_packet_performance() {
     const ITERATIONS: usize = 1000;
@@ -356,6 +364,7 @@ fn test_large_packet_performance() {
 }
 
 /// 测试数据包过滤器性能
+/// performance
 #[test]
 fn test_packet_filter_performance() {
     const ITERATIONS: usize = 10000;
@@ -394,6 +403,7 @@ fn test_packet_filter_performance() {
 }
 
 /// 测试错误处理性能
+/// error handling performance
 #[test]
 fn test_error_handling_performance() {
     const ITERATIONS: usize = 10000;
@@ -420,6 +430,7 @@ fn test_error_handling_performance() {
 }
 
 /// 测试数据包类型比较性能
+/// type performance
 #[test]
 fn test_packet_type_comparison_performance() {
     const ITERATIONS: usize = 10000;
@@ -459,6 +470,7 @@ fn test_packet_type_comparison_performance() {
 }
 
 /// 性能基准测试套件
+/// Performance benchmark
 #[test]
 #[ignore] // 综合性能测试在部分环境可能超时
 fn test_performance_benchmark_suite() {

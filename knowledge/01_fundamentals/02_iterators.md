@@ -2,9 +2,9 @@
 
 > **相关概念**: [迭代器](../../concept/02_intermediate/15_iterator_patterns.md)
 > **Bloom 层级**: 理解
-> **版本**: Rust 1.96.0 (`array_windows`) / 1.80.0 (`Peekable::next_if`)
+> **版本**: Rust 1.94.0 (`array_windows`) / 1.80.0 (`Peekable::next_if`)
 > **特性**: `array_windows`, `Peekable::next_if`
-> **权威来源**: [Rust 官方文档 — Iterator trait](https://doc.rust-lang.org/std/iter/trait.Iterator.html), [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/), [Rust 1.80 Release Notes](https://releases.rs/docs/1.80.0/)
+> **权威来源**: [Rust 官方文档 — Iterator trait](https://doc.rust-lang.org/std/iter/trait.Iterator.html), [Rust 1.94 Release Notes](https://releases.rs/docs/1.94.0/), [Rust 1.80 Release Notes](https://releases.rs/docs/1.80.0/)
 > **权威来源对齐变更日志**: 2026-05-19 新增 array_windows 与 next_if 的来源标注、Iterator  trait 形式化语义引用 [来源: Authority Source Sprint Batch 8]
 
 ## 📑 目录
@@ -64,7 +64,7 @@
 
 ### 1. array_windows - 滑动窗口迭代
 
-`array_windows` 是 Rust 1.96 引入的新方法 [来源: Rust 1.96 Release Notes / 2026; RFC 关于数组窗口迭代的设计决策; 核心语义: 在数组/切片上以固定大小的窗口进行迭代，返回 `[[T; N]]` 类型的窗口，编译期确定窗口大小 `N`]，用于在数组/切片上以固定大小的窗口进行迭代。
+`array_windows` 是 Rust 1.94 引入的新方法 [来源: Rust 1.94 Release Notes / 2025; RFC 关于数组窗口迭代的设计决策; 核心语义: 在数组/切片上以固定大小的窗口进行迭代，返回 `[[T; N]]` 类型的窗口，编译期确定窗口大小 `N`]，用于在数组/切片上以固定大小的窗口进行迭代。
 
 #### 1.1 基础用法
 >
@@ -362,7 +362,7 @@ fn parse_args(input: &str) -> Vec<String> {
 ---
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0 (`array_windows`) / 1.80.0 (`Peekable::next_if`)
+**对应 Rust 版本**: 1.94.0 (`array_windows`) / 1.80.0 (`Peekable::next_if`)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

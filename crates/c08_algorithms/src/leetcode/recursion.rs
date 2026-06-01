@@ -1,11 +1,16 @@
 //! LeetCode 递归类算法（结合 Rust 1.92 特性）
+//! LeetCode categorization algorithm （ Rust 1.92 feature ）
 //!
 //! 本模块实现经典的递归类 LeetCode 题目，充分利用 Rust 1.92 的新特性。
+//! this module categorization LeetCode ， Rust 1.92 feature 。
 //!
 //! ## Rust 1.92 特性应用
+//! ## Rust 1.92 feature application
 //!
 //! 1. **性能优化**: 尾递归优化
+//! 1. **performance optimization **: optimization
 //! 2. **内存优化**: 递归栈优化
+//! 2. **memory optimization **: stack optimization
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 
 // ==================== 数据结构定义 ====================
@@ -25,6 +30,7 @@ impl ListNode {
 // ==================== 经典题目实现 ====================
 
 /// 21. Merge Two Sorted Lists（合并两个有序链表）- 递归版本
+/// 21. Merge Two Sorted Lists（and ）- this
 pub fn merge_two_lists_recursive(
     list1: Option<Box<ListNode>>,
     list2: Option<Box<ListNode>>,
@@ -45,6 +51,7 @@ pub fn merge_two_lists_recursive(
 }
 
 /// 24. Swap Nodes in Pairs（两两交换链表中的节点）
+/// 24. Swap Nodes in Pairs（exchange in node ）
 pub fn swap_pairs(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
     if head.is_none() || head.as_ref().unwrap().next.is_none() {
         return head;
@@ -61,6 +68,7 @@ pub fn swap_pairs(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
 }
 
 /// 50. Pow(x, n) - 递归版本
+/// 50. Pow(x, n) - this
 pub fn my_pow_recursive(x: f64, n: i32) -> f64 {
     if n == 0 {
         return 1.0;
@@ -95,6 +103,7 @@ pub fn reverse_list_recursive(head: Option<Box<ListNode>>) -> Option<Box<ListNod
 }
 
 /// 509. Fibonacci Number（斐波那契数）- 递归版本
+/// 509. Fibonacci Number（）- this
 pub fn fib_recursive(n: i32) -> i32 {
     if n < 2 {
         return n;
@@ -105,6 +114,7 @@ pub fn fib_recursive(n: i32) -> i32 {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有递归类问题
+/// all categorization problem
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

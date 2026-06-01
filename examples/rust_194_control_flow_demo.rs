@@ -1,6 +1,3 @@
-//! Rust 1.94 ControlFlow 完整示例
-//!
-//! ControlFlow<B, C> 用于在迭代器中实现提前终止控制
 
 #![allow(dead_code)]
 
@@ -11,6 +8,7 @@ use std::ops::ControlFlow;
 // =============================================================================
 
 /// 在迭代中查找第一个满足条件的元素
+/// in in first condition element
 fn find_first<T>(items: &[T], predicate: impl Fn(&T) -> bool) -> Option<&T> {
     items
         .iter()
@@ -25,6 +23,7 @@ fn find_first<T>(items: &[T], predicate: impl Fn(&T) -> bool) -> Option<&T> {
 }
 
 /// 验证所有元素
+/// all element
 fn validate_all<T>(items: &[T], validator: impl Fn(&T) -> bool) -> bool {
     matches!(
         items.iter().try_for_each(|item| {
@@ -58,7 +57,6 @@ enum ValidationError {
     UnderAge(u32),
 }
 
-/// 使用 ControlFlow 构建验证管道
 fn validate_registration(data: &UserRegistration) -> ControlFlow<ValidationError, ()> {
     // 验证用户名
     if data.username.len() < 3 {
@@ -130,6 +128,8 @@ enum ProcessingError {
 }
 
 /// 数据处理管道
+/// pipe
+/// 数据Handlepipe
 fn process_data_pipeline(
     items: &[DataItem],
     threshold: f64,
@@ -165,6 +165,7 @@ fn process_data_pipeline(
 // =============================================================================
 
 /// 使用 try_fold 进行提前终止
+/// try_fold before
 fn sum_until_limit(numbers: &[i32], limit: i32) -> ControlFlow<i32, i32> {
     numbers.iter().try_fold(0, |acc, &n| {
         let new_sum = acc + n;
@@ -177,6 +178,7 @@ fn sum_until_limit(numbers: &[i32], limit: i32) -> ControlFlow<i32, i32> {
 }
 
 /// 查找并转换
+/// and conversion
 fn find_and_transform<T, U>(
     items: &[T],
     predicate: impl Fn(&T) -> bool,
@@ -213,6 +215,7 @@ enum StateError {
 }
 
 /// 状态转换
+/// state conversion
 fn transition_state(current: State, event: &str) -> ControlFlow<StateError, State> {
     match (current.clone(), event) {
         (State::Idle, "start") => ControlFlow::Continue(State::Processing(0)),

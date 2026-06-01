@@ -1,35 +1,39 @@
 //! Rust 188.0 新特性实现模块 —— c03_control_fn
-//!
-//! 本模块展示了 Rust 188.0 (2025-06-26) 的关键语言特性和工具链改进。
-//!
+//! Rust 188.0 feature module —— c03_control_fn
 //! - `let_chains`: Let Chains 在 2024 Edition 中稳定
-//!
+//! - `let_chains`: Let Chains in 2024 Edition in稳定
 //! # 版本信息
+//! # this
 //! - Rust 版本: 188.0
+//! - Rust this : 188.0
+//! - Rust 版this: 188.0
 //! - 稳定日期: 2025-06-26
-//! - Edition: 2024
+//! - date : 2025-06-26
+//! - 稳定date: 2025-06-26
+//! - date: 2025-06-26
 
 // ============================================================================
 // 1. Let Chains 在 2024 Edition 中稳定
 // ============================================================================
 
 /// # Let Chains 稳定化
-///
-/// Rust 1.88.0 在 2024 Edition 中稳定了 let chains，
-/// 允许在 `if` 和 `while` 条件中将 `let` 模式与布尔表达式混合使用。
-///
 /// ## 语法
-/// `if let Some(x) = opt && x > 0 { ... }`
-///
+/// ##
 /// ## 之前
+/// ## 's before
 /// 需要使用嵌套 `if let` 或 `match`。
-///
+/// `if let` or `match`。
 /// ## 现在
+/// ## present
 /// 可以直接链式组合多个 let 条件和布尔条件。
-///
+/// can combination let condition and condition 。
 /// ## 限制
+/// ##
 /// - 仅在 Edition 2024 中可用
+/// - in Edition 2024 in
+/// - 仅in Edition 2024 in可用
 /// - 不支持 `||`（或）与 `let` 混合（因语义复杂）
+/// - `||`（or ）and `let` （because complex ）
 pub fn process_option_chain(opt: Option<i32>) -> Option<i32> {
     if let Some(x) = opt && x > 0 && x < 100 {
         Some(x * 2)

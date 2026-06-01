@@ -1,10 +1,16 @@
 //! 多线程性能基准测试模块
-//!
+//! thread Performance benchmark module
+//! 多threadperformancebenchmarkmodule
 //! 本模块提供全面的多线程性能测试，包括：
+//! This module provides surface thread performance test ，：
 //! - 线程池性能对比
+//! - thread pool performance to
 //! - 无锁数据结构性能测试
+//! - lock-free data structure performance test
 //! - 并发算法性能基准
+//! - concurrency algorithm performance
 //! - 内存分配性能测试
+//! - memory performance test
 use rayon::prelude::*;
 use std::sync::{Arc, Mutex};
 use std::thread;
@@ -23,6 +29,7 @@ use super::advanced_concurrency::{
 // ============================================================================
 
 /// 性能测试配置
+/// performance test
 #[derive(Debug, Clone)]
 pub struct BenchmarkConfig {
     pub data_size: usize,
@@ -43,6 +50,7 @@ impl Default for BenchmarkConfig {
 }
 
 /// 性能测试结果
+/// performance test result
 #[derive(Debug, Clone)]
 pub struct BenchmarkResult {
     pub name: String,
@@ -59,6 +67,7 @@ pub struct BenchmarkResult {
 // ============================================================================
 
 /// 线程池性能对比测试
+/// thread pool performance to
 pub fn benchmark_thread_pools(config: &BenchmarkConfig) -> Vec<BenchmarkResult> {
     let mut results = Vec::new();
 
@@ -83,6 +92,7 @@ pub fn benchmark_thread_pools(config: &BenchmarkConfig) -> Vec<BenchmarkResult> 
 }
 
 /// 标准线程池性能测试
+/// standard thread pool performance test
 fn benchmark_standard_thread_pool(
     data: &[i32],
     thread_count: usize,
@@ -124,6 +134,8 @@ fn benchmark_standard_thread_pool(
 }
 
 /// 高性能线程池性能测试
+/// performance thread pool performance test
+/// 高performancethread poolperformance test
 fn benchmark_high_performance_thread_pool(
     data: &[i32],
     thread_count: usize,
@@ -165,7 +177,6 @@ fn benchmark_high_performance_thread_pool(
     }
 }
 
-/// Rayon线程池性能测试
 fn benchmark_rayon_thread_pool(
     data: &[i32],
     thread_count: usize,
@@ -217,6 +228,7 @@ fn benchmark_rayon_thread_pool(
 // ============================================================================
 
 /// 使用标准线程处理数据
+/// standard thread
 fn process_data_standard_threads(data: &[i32], thread_count: usize) -> Vec<i32> {
     let chunk_size = data.len().div_ceil(thread_count);
     let data = Arc::new(data.to_vec());
@@ -255,6 +267,7 @@ fn process_data_standard_threads(data: &[i32], thread_count: usize) -> Vec<i32> 
 }
 
 /// 使用高性能线程池处理数据
+/// performance thread pool
 fn process_data_high_performance_thread_pool(
     pool: &HighPerformanceThreadPool,
     data: &[i32],
@@ -287,7 +300,6 @@ fn process_data_high_performance_thread_pool(
     results
 }
 
-/// 使用Rayon处理数据
 fn process_data_rayon(data: &[i32]) -> Vec<i32> {
     data.par_iter().map(|&x| x * 2 + 1).collect()
 }
@@ -297,6 +309,7 @@ fn process_data_rayon(data: &[i32]) -> Vec<i32> {
 // ============================================================================
 
 /// 无锁数据结构性能测试
+/// lock-free data structure performance test
 pub fn benchmark_lock_free_structures(config: &BenchmarkConfig) -> Vec<BenchmarkResult> {
     let mut results = Vec::new();
 
@@ -316,6 +329,7 @@ pub fn benchmark_lock_free_structures(config: &BenchmarkConfig) -> Vec<Benchmark
 }
 
 /// 无锁环形缓冲区性能测试
+/// lock-free ring buffer performance test
 fn benchmark_lock_free_ring_buffer(config: &BenchmarkConfig) -> BenchmarkResult {
     let mut times = Vec::new();
     let buffer = LockFreeRingBuffer::new(config.data_size);
@@ -360,6 +374,7 @@ fn benchmark_lock_free_ring_buffer(config: &BenchmarkConfig) -> BenchmarkResult 
 }
 
 /// 无锁栈性能测试
+/// lock-free stack performance test
 fn benchmark_lock_free_stack(config: &BenchmarkConfig) -> BenchmarkResult {
     let mut times = Vec::new();
     let stack = LockFreeStack::new(config.data_size);
@@ -403,7 +418,6 @@ fn benchmark_lock_free_stack(config: &BenchmarkConfig) -> BenchmarkResult {
     }
 }
 
-/// Mutex保护的数据结构性能测试
 fn benchmark_mutex_structures(config: &BenchmarkConfig) -> BenchmarkResult {
     let mut times = Vec::new();
     let data = Arc::new(Mutex::new(Vec::new()));
@@ -452,6 +466,7 @@ fn benchmark_mutex_structures(config: &BenchmarkConfig) -> BenchmarkResult {
 // ============================================================================
 
 /// 并发算法性能测试
+/// concurrency algorithm performance test
 pub fn benchmark_concurrent_algorithms(config: &BenchmarkConfig) -> Vec<BenchmarkResult> {
     let mut results = Vec::new();
     let data: Vec<i32> = (0..config.data_size as i32).collect();
@@ -474,6 +489,7 @@ pub fn benchmark_concurrent_algorithms(config: &BenchmarkConfig) -> Vec<Benchmar
 }
 
 /// 并发归约性能测试
+/// concurrency performance test
 fn benchmark_parallel_reduce(
     data: &[i32],
     thread_count: usize,
@@ -515,6 +531,7 @@ fn benchmark_parallel_reduce(
 }
 
 /// 并发映射性能测试
+/// concurrency performance test
 fn benchmark_parallel_map(
     data: &[i32],
     thread_count: usize,
@@ -555,7 +572,6 @@ fn benchmark_parallel_map(
     }
 }
 
-/// Rayon并行算法性能测试
 fn benchmark_rayon_algorithms(
     data: &[i32],
     thread_count: usize,
@@ -607,6 +623,7 @@ fn benchmark_rayon_algorithms(
 // ============================================================================
 
 /// 生成性能测试报告
+/// performance test
 pub fn generate_performance_report(results: &[BenchmarkResult]) -> String {
     let mut report = String::new();
     report.push_str("# 多线程性能测试报告\n\n");

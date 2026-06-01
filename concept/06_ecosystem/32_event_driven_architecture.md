@@ -1,3 +1,5 @@
+> **内容分级**: [专家级]
+
 # 事件驱动架构 (Event-Driven Architecture)
 >
 > **受众**: [进阶]

@@ -1,26 +1,35 @@
 //! 性能优化技巧演示模块
-//!
-//! 本模块演示了 Rust 1.90 中的各种性能优化技巧，包括：
+//! performance optimization tip demonstration module
 //! - 内存布局优化
+//! - memory layout optimization
 //! - 零成本抽象
+//! - cost
 //! - 内联优化
+//! - inside optimization
 //! - 分支预测优化
+//! - branch prediction optimization
 //! - 缓存友好的数据结构
+//! - cache-friendly data structure
 //! - SIMD 优化
+//! - SIMD optimization
 //! - 编译时优化
+//! - compile-time optimization
 use std::arch::x86_64::*;
 use std::mem;
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::time::Instant;
 
 /// 内存布局优化演示
+/// memory layout optimization demonstration
 pub mod memory_layout {
     use super::*;
 
     /// 缓存行大小（通常为 64 字节）
+    /// cache line （as 64 ）
     const CACHE_LINE_SIZE: usize = 64;
 
     /// 缓存友好的数据结构
+    /// cache-friendly data structure
     #[repr(align(64))]
     #[derive(Debug)]
     pub struct CacheAlignedData {
@@ -39,12 +48,14 @@ pub mod memory_layout {
         }
 
         /// 原子操作，避免伪共享
+        /// atomic operation ，false sharing
         pub fn increment(&self) -> usize {
             self.counter.fetch_add(1, Ordering::Relaxed)
         }
     }
 
     /// 结构体字段重排序优化
+    /// struct field ordering optimization
     #[derive(Debug, Clone)]
     pub struct OptimizedStruct {
         // 将经常一起访问的字段放在一起
@@ -68,6 +79,7 @@ pub mod memory_layout {
     }
 
     /// 演示内存布局优化的性能差异
+    /// demonstration memory layout optimization performance
     pub fn demonstrate_memory_layout_optimization() {
         println!("=== 内存布局优化演示 ===");
 
@@ -92,10 +104,12 @@ pub mod memory_layout {
 }
 
 /// 零成本抽象演示
+/// cost demonstration
 pub mod zero_cost_abstractions {
     use super::*;
 
     /// 零成本抽象：编译时计算
+    /// cost ：compile-time
     pub const fn compile_time_fibonacci(n: u32) -> u32 {
         match n {
             0 => 0,
@@ -105,6 +119,7 @@ pub mod zero_cost_abstractions {
     }
 
     /// 零成本抽象：泛型特化
+    /// cost ：generic
     pub trait Processor<T> {
         fn process(&self, data: T) -> T;
     }
@@ -138,6 +153,7 @@ pub mod zero_cost_abstractions {
     }
 
     /// 零成本抽象：编译时类型检查
+    /// cost ：compile-time type
     pub struct TypeId<T> {
         _phantom: std::marker::PhantomData<T>,
     }
@@ -159,6 +175,7 @@ pub mod zero_cost_abstractions {
     }
 
     /// 演示零成本抽象
+    /// demonstration cost
     pub fn demonstrate_zero_cost_abstractions() {
         println!("=== 零成本抽象演示 ===");
 
@@ -188,16 +205,19 @@ pub mod zero_cost_abstractions {
 }
 
 /// 内联优化演示
+/// inside optimization demonstration
 pub mod inlining_optimization {
     use super::*;
 
     /// 内联函数
+    /// inside function
     #[inline(always)]
     pub fn fast_add(a: u32, b: u32) -> u32 {
         a.wrapping_add(b)
     }
 
     /// 条件内联
+    /// condition inside
     #[inline]
     pub fn conditional_multiply(x: u32, factor: u32) -> u32 {
         if factor == 0 {
@@ -210,6 +230,8 @@ pub mod inlining_optimization {
     }
 
     /// 热路径优化
+    /// optimization
+    /// 热路径optimization
     pub struct HotPathOptimizer {
         cache: Vec<u32>,
     }
@@ -222,12 +244,15 @@ pub mod inlining_optimization {
         }
 
         /// 热路径：频繁调用的函数
+        /// ：function
+        /// 热路径：频繁Callfunction
         #[inline(always)]
         pub fn hot_path_lookup(&self, index: usize) -> Option<u32> {
             self.cache.get(index).copied()
         }
 
         /// 冷路径：不经常调用的函数
+        /// ：function
         pub fn cold_path_operation(&mut self, index: usize, value: u32) {
             if index < self.cache.len() {
                 self.cache[index] = value;
@@ -236,6 +261,7 @@ pub mod inlining_optimization {
     }
 
     /// 演示内联优化
+    /// demonstration inside optimization
     pub fn demonstrate_inlining_optimization() {
         println!("=== 内联优化演示 ===");
 
@@ -258,10 +284,12 @@ pub mod inlining_optimization {
 }
 
 /// 分支预测优化演示
+/// branch prediction optimization demonstration
 pub mod branch_prediction {
     use super::*;
 
     /// 分支预测友好的代码
+    /// branch prediction
     pub fn branch_friendly_sum(data: &[u32]) -> u32 {
         let mut sum = 0;
         for &value in data {
@@ -272,6 +300,7 @@ pub mod branch_prediction {
     }
 
     /// 分支预测不友好的代码
+    /// branch prediction
     pub fn branch_unfriendly_sum(data: &[u32]) -> u32 {
         let mut sum = 0;
         for &value in data {
@@ -288,6 +317,7 @@ pub mod branch_prediction {
     }
 
     /// 使用查找表优化分支
+    /// optimization
     pub struct LookupTable {
         table: [u32; 256],
     }
@@ -314,6 +344,7 @@ pub mod branch_prediction {
     }
 
     /// 演示分支预测优化
+    /// demonstration branch prediction optimization
     pub fn demonstrate_branch_prediction() {
         println!("=== 分支预测优化演示 ===");
 
@@ -343,18 +374,24 @@ pub mod branch_prediction {
 }
 
 /// SIMD 优化演示
+/// SIMD optimization demonstration
 pub mod simd_optimization {
     use super::*;
 
     /// SIMD 向量加法（需要 x86_64 支持）
-    ///
-    /// # Safety
+    /// SIMD （ x86_64 ）
+    /// SIMD 向量加法（Requires x86_64 Supports）
     ///
     /// 调用者必须确保：
+    /// must ：
     /// - CPU 支持 SSE 指令集
-    /// - 所有切片长度至少为 4，且 `result.len() >= min(a.len(), b.len())`
+    /// - CPU SSE
+    /// - CPU Supports SSE 指令集
+    /// - 所有切片长度至少as 4，and `result.len() >= min(a.len(), b.len())`
     /// - 所有指针都是有效的、对齐的，且指向已初始化的内存
+    /// - all pointer effective 、to ，and memory
     /// - 不会发生数据竞争
+    /// -
     #[cfg(target_arch = "x86_64")]
     pub unsafe fn simd_add_vectors(a: &[f32], b: &[f32], result: &mut [f32]) {
         let len = a.len().min(b.len()).min(result.len());
@@ -379,6 +416,7 @@ pub mod simd_optimization {
     }
 
     /// 标量向量加法（对比用）
+    /// （to ）
     pub fn scalar_add_vectors(a: &[f32], b: &[f32], result: &mut [f32]) {
         let len = a.len().min(b.len()).min(result.len());
         for i in 0..len {
@@ -387,6 +425,7 @@ pub mod simd_optimization {
     }
 
     /// 演示 SIMD 优化
+    /// demonstration SIMD optimization
     pub fn demonstrate_simd_optimization() {
         println!("=== SIMD 优化演示 ===");
 
@@ -429,18 +468,22 @@ pub mod simd_optimization {
 }
 
 /// 编译时优化演示
+/// compile-time optimization demonstration
 pub mod compile_time_optimization {
 
     /// 编译时常量
+    /// compile-time constant
     pub const MAX_BUFFER_SIZE: usize = 1024;
     pub const ALIGNMENT: usize = 64;
 
     /// 编译时计算
+    /// compile-time
     pub const fn calculate_offset(index: usize) -> usize {
         index * ALIGNMENT
     }
 
     /// 条件编译优化
+    /// condition optimization
     #[cfg(target_arch = "x86_64")]
     pub fn optimized_function() -> &'static str {
         "x86_64 优化版本"
@@ -452,6 +495,7 @@ pub mod compile_time_optimization {
     }
 
     /// 编译时类型检查
+    /// compile-time type
     pub struct CompileTimeChecker<T> {
         _phantom: std::marker::PhantomData<T>,
     }
@@ -473,6 +517,7 @@ pub mod compile_time_optimization {
     }
 
     /// 演示编译时优化
+    /// demonstration compile-time optimization
     pub fn demonstrate_compile_time_optimization() {
         println!("=== 编译时优化演示 ===");
 
@@ -490,10 +535,12 @@ pub mod compile_time_optimization {
 }
 
 /// 性能分析工具
+/// performance analyze tool
 pub mod profiling_tools {
     use std::time::Instant;
 
     /// 性能计时器
+    /// performance
     pub struct PerformanceTimer {
         start_time: Instant,
         name: String,
@@ -520,6 +567,7 @@ pub mod profiling_tools {
     }
 
     /// 内存使用统计
+    /// memory
     #[derive(Default)]
     pub struct MemoryStats {
         pub allocated: usize,
@@ -542,6 +590,7 @@ pub mod profiling_tools {
     }
 
     /// 演示性能分析工具
+    /// demonstration performance analyze tool
     pub fn demonstrate_profiling_tools() {
         println!("=== 性能分析工具演示 ===");
 
@@ -561,6 +610,8 @@ pub mod profiling_tools {
 }
 
 /// 主演示函数
+/// demonstration function
+/// 主demonstration function
 pub fn demonstrate_performance_optimization() {
     println!("🚀 Rust 1.90 性能优化技巧演示");
     println!("=====================================");

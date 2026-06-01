@@ -1,50 +1,53 @@
 //! # Glommio 异步运行时综合示例 2025
-//!
-//! 本示例展示了 Glommio 高性能异步运行时的核心特性和最佳实践。
-//!
-//! Glommio 是由 DataDog 开发的基于 io_uring 的异步运行时，
-//! 专为 Linux 平台的极致性能设计。
-//!
+//! # Glommio async runtime synthesize example 2025
 //! ## 📐 知识结构
-//!
+//! ## 📐 structure
+//! ## 📐 知识structure
 //! ### 核心概念
-//!
-//! - **Glommio**: 基于 io_uring 的高性能异步运行时
+//! ### core concept
+//! - **Glommio**: Based on io_uring 高performanceasyncruntime
 //!   - **属性**: Thread-per-core、io_uring、NUMA感知、零拷贝
-//!   - **关系**: 与异步运行时、高性能I/O、Linux系统编程相关
-//!
+//!   - **attribute**: Thread-per-core、io_uring、NUMA感知、零拷贝
 //! ### 思维导图
-//!
-//! ```text
+//! ###
 //! Glommio 演示
-//! │
 //! ├── Thread-per-core 架构
 //! │   └── 每个核心一个线程
-//! ├── io_uring I/O
+//! │ └── core thread
 //! │   └── 高性能异步I/O
+//! │ └── performance async I/O
 //! ├── NUMA 感知
-//! │   └── 多socket优化
+//! ├── NUMA
+//! │ └── 多socketoptimization
 //! ├── CPU 亲和性
+//! ├── CPU and
+//! ├── CPU 亲and性
 //! │   └── CPU绑定
+//! │ └── CPU
+//! │ └── CPU绑定
+//! │ └── CPU
 //! └── 跨执行器通信
-//!     └── Channel Mesh
-//! ```
+//! └──
 //!
 //! ## 核心特性
-//!
+//! ## core feature
 //! 1. **Thread-per-core 架构** - 每个 CPU 核心一个线程
-//! 2. **基于 io_uring** - 利用 Linux 5.1+ 的高性能 I/O
+//! 1. **Thread-per-core architecture ** - CPU core thread
+//! 2. **Based on io_uring** - 利用 Linux 5.1+ 高performance I/O
 //! 3. **NUMA 感知** - 优化多 socket 系统
+//! 3. **NUMA ** - optimization socket system
 //! 4. **零拷贝 I/O** - 最小化数据复制
+//! 4. ** I/O** - minimum
 //! 5. **CPU 亲和性** - 精确控制任务调度
-//!
+//! 5. **CPU and ** - task
 //! ## 运行要求
-//!
+//! ## Run
+//! ## Run要求
+//! ## Run
 //! - Linux 5.1+ (需要 io_uring 支持)
-//! - Rust 1.92.0+
 //!
 //! ## 运行示例
-//!
+//! ## Run example
 //! ```bash
 //! cargo run --example glommio_comprehensive_2025
 //! ```

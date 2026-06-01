@@ -1,9 +1,10 @@
 //! 递归宏实现示例
+//! example
 
 /// 计数宏 - 递归计算参数个数
-///
+/// - parameter
 /// # 示例
-///
+/// # example
 /// ```
 /// # use c11_macro_system::count;
 /// assert_eq!(count!(), 0);
@@ -20,9 +21,9 @@ macro_rules! count {
 }
 
 /// 查找最大值宏
-///
+/// maximum
 /// # 示例
-///
+/// # example
 /// ```
 /// # use c11_macro_system::max;
 /// assert_eq!(max!(1, 2, 3), 3);

@@ -1,19 +1,12 @@
-//! # Rust 1.96.0 特性 — 泛型与特质系统
-//!
-//! Rust 1.96.0 为泛型编程带来的核心稳定特性：
-//!
-//! - **`LazyLock::from(value)` / `LazyCell::from(value)`**: 从值直接构造惰性容器
 //! - **`core::range`**: 泛型边界场景下直接构造范围类型
-//! - **`assert_matches!`**: 泛型枚举的模式匹配断言
+//! - **`core::range`**: generic edge scenario under scope type
 
 use std::{cell::LazyCell, sync::LazyLock};
 
 // ==================== LazyLock / LazyCell::from 在泛型中的应用 ====================
 
 /// 泛型惰性容器构造
-///
-/// `LazyLock::from(value)` 和 `LazyCell::from(value)` 允许从 `T` 直接构造
-/// `LazyLock<T>` / `LazyCell<T>`，无需提供闭包。
+/// generic
 pub fn create_generic_lazy_lock<T>(value: T) -> LazyLock<T>
 where
     T: Send + Sync,
@@ -22,17 +15,18 @@ where
 }
 
 /// 泛型惰性单元格构造
+/// generic
 pub fn create_generic_lazy_cell<T>(value: T) -> LazyCell<T> {
     LazyCell::from(value)
 }
 
-/// 在泛型上下文中使用 LazyLock 缓存计算结果
 pub struct GenericLazyCache<T> {
     cache: LazyLock<T>,
 }
 
 impl<T: Send + Sync> GenericLazyCache<T> {
     /// 从已计算的值创建缓存
+    /// from
     pub fn from_value(value: T) -> Self {
         Self {
             cache: LazyLock::from(value),
@@ -48,8 +42,7 @@ impl<T: Send + Sync> GenericLazyCache<T> {
 // ==================== core::range 与泛型边界 ====================
 
 /// 泛型范围过滤
-///
-/// 使用 `core::range::Range` 在泛型函数中定义可复用的索引边界。
+/// generic scope
 pub fn generic_filter_by_range<T>(items: &[T], range: core::range::Range<usize>) -> Vec<&T> {
     let core::range::Range { start, end } = range;
     items
@@ -60,6 +53,7 @@ pub fn generic_filter_by_range<T>(items: &[T], range: core::range::Range<usize>)
 }
 
 /// 泛型包含边界范围切片
+/// generic edge scope
 pub fn generic_slice_inclusive<T>(items: &[T], bounds: core::range::RangeInclusive<usize>) -> &[T] {
     let core::range::RangeInclusive { start, last } = bounds;
     let len = items.len();
@@ -69,6 +63,7 @@ pub fn generic_slice_inclusive<T>(items: &[T], bounds: core::range::RangeInclusi
 }
 
 /// 泛型起始范围收集
+/// generic scope
 pub fn generic_collect_from<T: Clone>(items: &[T], from: core::range::RangeFrom<usize>) -> Vec<T> {
     let core::range::RangeFrom { start } = from;
     items.iter().skip(start).cloned().collect()
@@ -77,6 +72,7 @@ pub fn generic_collect_from<T: Clone>(items: &[T], from: core::range::RangeFrom<
 // ==================== assert_matches! 与泛型枚举 ====================
 
 /// 泛型状态枚举
+/// generic state enum
 #[derive(Debug, Clone, PartialEq)]
 pub enum State<T, E> {
     Idle,
@@ -86,6 +82,7 @@ pub enum State<T, E> {
 }
 
 /// 状态机转换
+/// state machine conversion
 pub fn state_machine_transition<T, E>(current: State<T, E>, input: T) -> State<T, E>
 where
     T: Clone,
@@ -101,6 +98,7 @@ where
 // ==================== 演示函数 ====================
 
 /// 演示 Rust 1.96 泛型特性
+/// demonstration Rust 1.96 generic feature
 pub fn demonstrate_rust_196_features() {
     println!("\n========================================");
     println!("   Rust 1.96.0 泛型特性演示");
@@ -133,6 +131,7 @@ pub fn demonstrate_rust_196_features() {
 }
 
 /// 获取特性信息
+/// feature
 pub fn get_rust_196_generic_info() -> String {
     "Rust 1.96.0 泛型特性:\n\
      - LazyLock::from(value) / LazyCell::from(value) 直接构造\n\

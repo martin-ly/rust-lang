@@ -1,18 +1,18 @@
 //! GAT（泛型关联类型）示例
+//! GAT（generic associated type ）example
 #![allow(clippy::bool_assert_comparison)]
 #![allow(clippy::type_complexity)]
 //!
-//! 本示例展示GAT（Generic Associated Types）的使用：
 //! - GAT的基本语法
+//! - GATthis
 //! - 借用迭代器（Lending Iterator）
 //! - 实际应用场景
-//!
+//! - actual application scenario
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example generic_gat_demo
 //! ```
 
-/// 使用GAT的迭代器trait
 trait LendingIterator {
     type Item<'a>
     where
@@ -22,6 +22,7 @@ trait LendingIterator {
 }
 
 /// 窗口迭代器
+/// 窗口iterator
 struct WindowsIterator<T> {
     data: Vec<T>,
     window_size: usize,
@@ -56,7 +57,6 @@ impl<T> LendingIterator for WindowsIterator<T> {
     }
 }
 
-/// 使用GAT的容器trait
 trait Container {
     type Item<'a>
     where

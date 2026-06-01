@@ -79,7 +79,7 @@
 2. **[多维矩阵对比分析](theory/MULTI_DIMENSIONAL_COMPARISON_MATRIX.md)** ⭐⭐⭐⭐⭐
    - 协议全面对比 (TCP/UDP/QUIC/HTTP/WebSocket...)
    - 并发模型对比 (OS线程/async/Actor/CSP)
-   - 异步运行时对比 (Tokio/async-std/smol...)
+   - 异步运行时对比 (Tokio/smol...)
    - 序列化格式对比 (JSON/Protobuf/Bincode...)
    - 包含性能基准测试代码
 

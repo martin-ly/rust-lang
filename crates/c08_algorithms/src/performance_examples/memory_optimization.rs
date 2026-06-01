@@ -1,7 +1,9 @@
 //! 内存优化实践示例
+//! memory optimization example
 use std::collections::VecDeque;
 
 /// 简单对象池实现
+/// simple to
 pub struct ObjectPool<T> {
     objects: VecDeque<T>,
     factory: Box<dyn Fn() -> T>,
@@ -28,6 +30,7 @@ impl<T> ObjectPool<T> {
 }
 
 /// 零拷贝缓冲区
+/// buffering
 pub struct ZeroCopyBuffer {
     data: Vec<u8>,
     read_pos: usize,

@@ -1,18 +1,12 @@
-//! # Rust 1.96.0 特性 — 控制流与函数
-//!
-//! Rust 1.96.0 为控制流和函数编程带来的核心稳定特性：
-//!
+//! # Rust 1.96.0 feature — 控制streamandfunction
 //! - **`std::assert_matches`**: `assert_matches!` 宏用于在测试中断言模式匹配
-//! - **`core::range`**: `Range` / `RangeInclusive` / `RangeFrom` / `RangeToInclusive`
 //!   类型字段公开，支持直接构造和重用
-//! - **never type (`!`) 强制转换**: 发散表达式在控制流中强制转换为任意目标类型
+//!   type field ，and
 
 // ==================== assert_matches! 在控制流测试中的应用 ====================
 
 /// 使用 assert_matches! 测试控制流结果
-///
-/// `assert_matches!(expr, pattern)` 是 Rust 1.96.0 引入的标准断言宏，
-/// 支持可选的 `if guard`，但不支持 `=> { block }` 语法。
+/// assert_matches! stream result
 pub fn classify_status(code: u16) -> Result<&'static str, &'static str> {
     match code {
         200..=299 => Ok("success"),
@@ -24,6 +18,7 @@ pub fn classify_status(code: u16) -> Result<&'static str, &'static str> {
 }
 
 /// 使用 assert_matches! 测试 Option 控制流
+/// Use assert_matches! Test for Option 控制stream
 pub fn maybe_process(input: Option<i32>) -> Option<i32> {
     if let Some(n) = input {
         if n > 0 { Some(n * 2) } else { None }
@@ -34,9 +29,6 @@ pub fn maybe_process(input: Option<i32>) -> Option<i32> {
 
 // ==================== core::range 在循环边界中的应用 ====================
 
-/// 使用 core::range::Range 实现可复用的循环边界
-///
-/// `core::range::Range` 实现了 `Copy`，可以在多次循环中重复使用。
 pub fn sum_in_range(items: &[i32], bounds: core::range::Range<usize>) -> i32 {
     let core::range::Range { start, end } = bounds;
     let mut sum = 0;
@@ -48,7 +40,6 @@ pub fn sum_in_range(items: &[i32], bounds: core::range::Range<usize>) -> i32 {
     sum
 }
 
-/// 使用 core::range::RangeInclusive 实现包含边界的循环
 pub fn product_in_range(items: &[i32], bounds: core::range::RangeInclusive<usize>) -> i32 {
     let core::range::RangeInclusive { start, last } = bounds;
     let mut product = 1;
@@ -60,15 +51,11 @@ pub fn product_in_range(items: &[i32], bounds: core::range::RangeInclusive<usize
     product
 }
 
-/// 使用 core::range::RangeFrom 实现从起始位置到末尾的遍历
 pub fn collect_from(items: &[i32], from: core::range::RangeFrom<usize>) -> Vec<i32> {
     let core::range::RangeFrom { start } = from;
     items.iter().skip(start).copied().collect()
 }
 
-/// 使用 core::range::RangeToInclusive 实现范围上限检查
-///
-/// 注意：`RangeToInclusive` 不实现 `IntoIterator`，但可直接用于边界判断。
 pub fn is_within_inclusive_limit(
     index: usize,
     limit: core::range::RangeToInclusive<usize>,
@@ -79,11 +66,10 @@ pub fn is_within_inclusive_limit(
 
 // ==================== never type 在控制流中的强制转换 ====================
 
-/// never type 强制转换在控制流中的应用
-///
-/// 发散表达式（如 `panic!`、`return`、`break`、`continue`）的类型为 `!`，
 /// `!` 可强制转换为任何类型。在控制流中，包含发散分支的表达式
+/// `!` conversion as type 。in stream in ，express
 /// 可与正常分支统一为同一类型。
+/// and as type 。
 pub fn fetch_or_timeout(timeout: bool) -> (i32, String) {
     if timeout {
         abort_request() // `!` 强制转换为 `(i32, String)`
@@ -93,13 +79,13 @@ pub fn fetch_or_timeout(timeout: bool) -> (i32, String) {
 }
 
 /// 必然发散的控制流分支
+/// stream
 fn abort_request() -> ! {
     panic!("request timed out")
 }
 
 /// 在 match 控制流中利用发散分支统一返回类型
-///
-/// 当某个 match arm 发散时，`!` 自动强制转换为该 match 表达式的目标类型。
+/// in match stream in type
 pub fn unify_with_diverge(opt: Option<i32>) -> i32 {
     match opt {
         Some(v) => v,
@@ -107,9 +93,6 @@ pub fn unify_with_diverge(opt: Option<i32>) -> i32 {
     }
 }
 
-/// 在 if-else 控制流中混合正常值与发散分支
-///
-/// `break` 的类型为 `!`，可强制转换为与循环体匹配的任何类型。
 pub fn find_first_positive(values: &[i32]) -> Option<i32> {
     let mut result = None;
     for &v in values {
@@ -124,6 +107,8 @@ pub fn find_first_positive(values: &[i32]) -> Option<i32> {
 // ==================== 演示函数 ====================
 
 /// 演示 Rust 1.96 控制流特性
+/// demonstration Rust 1.96 stream feature
+/// Demonstration of Rust 1.96 控制streamfeature
 pub fn demonstrate_rust_196_features() {
     println!("\n========================================");
     println!("   Rust 1.96.0 控制流特性演示");
@@ -167,6 +152,7 @@ pub fn demonstrate_rust_196_features() {
 }
 
 /// 获取 Rust 1.96 特性信息
+/// Rust 1.96 feature
 pub fn get_rust_196_info() -> String {
     "Rust 1.96.0 控制流特性:\n- assert_matches! 宏用于模式匹配断言\n- core::range \
      类型字段公开，支持直接构造\n- never type (!) 强制转换统一发散分支与正常分支类型"

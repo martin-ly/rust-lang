@@ -1,50 +1,43 @@
 #![allow(clippy::type_complexity)]
 #![allow(clippy::empty_line_after_doc_comments)]
-//! # Rust 异步编程终极理论与实践指南 2025
-//!
-//! Ultimate Rust Async Programming: Theory and Practice Guide 2025
 //!
 //! ## 📚 本示例全面涵盖
-//!
-//! ### 🎯 一、理论基础与形式化 (Theoretical Foundations)
-//! - Actor 模型的数学形式化定义
-//! - Reactor 模型的事件驱动理论
+//! ## 📚 this example surface
+//! - Reactor 模型event-driventheory
 //! - CSP 模型的进程代数表示
-//! - Future 状态机的形式化证明
-//!
-//! ### 🏗️ 二、设计模式与惯用法 (Design Patterns)
+//! - CSP process represent
 //! - 创建型模式: Factory, Builder, Singleton
 //! - 结构型模式: Adapter, Facade, Proxy
-//! - 行为型模式: Observer, Strategy, Chain of Responsibility
-//!
+//! - 行as型模式: Observer, Strategy, Chain of Responsibility
 //! ### ⚡ 三、Tokio 1.41+ 最新特性 (Tokio Latest Features)
-//! - JoinSet 增强
+//! ### ⚡ 三、Tokio 1.41+ 最新feature (Tokio Latest Features)
 //! - 任务本地存储
+//! - task this
 //! - 协作式调度
-//! - Runtime Metrics
-//!
+//! -
 //! ### 🌟 四、Smol 2.0+ 最新特性 (Smol Latest Features)
+//! ### 🌟 四、Smol 2.0+ 最新feature (Smol Latest Features)
 //! - 轻量级 Executor
 //! - Async-io 集成
 //! - 跨平台支持
-//!
+//! - platform
 //! ### 🔧 五、生产级架构模式 (Production Patterns)
 //! - Circuit Breaker (熔断器)
 //! - Rate Limiter (限流器)
 //! - Retry Policy (重试策略)
 //! - Health Check (健康检查)
 //! - Graceful Shutdown (优雅关闭)
-//!
+//! - Graceful Shutdown (优雅Close)
 //! ## 运行方式
-//! ```bash
+//! ## Run way
 //! cargo run --example ultimate_async_theory_practice_2025 --features="full"
 //! ```
 //!
 //! ## 版本信息
-//! - Rust: 1.90+
-//! - Tokio: 1.41+
+//! ## this
 //! - Smol: 2.0+
 //! - 日期: 2025-10-04
+//! - date : 2025-10-04
 use std::collections::HashMap;
 use std::sync::Arc;
 use std::time::{Duration, Instant};
@@ -57,62 +50,65 @@ use tokio::time::sleep;
 // ============================================================================
 
 /// # 理论模块: Actor 模型形式化
-///
+/// # theory module : Actor
+/// # theorymodule: Actor 模型形式化
 /// ## 数学定义
-/// ```text
-/// Actor = (State, Mailbox, Behavior)
+/// ## definition
+/// ## 数学definition
 /// 其中:
+/// its in :
 ///   State: 内部状态 S
+///   State: inside state S
 ///   Mailbox: 消息队列 Queue<Message>
-///   Behavior: 行为函数 B: (S, Message) → (S', Actions)
-///   
+///   Behavior: 行asfunction B: (S, Message) → (S', Actions)
 /// 消息传递语义:
-///   send(actor, msg) ⟹ mailbox.enqueue(msg)
-///   receive() ⟹ mailbox.dequeue() → process(msg)
+/// :
 /// ```
 ///
 /// ## 不变量 (Invariants)
+/// ## 不variable (Invariants)
 /// 1. 消息顺序性: 同一发送者的消息按发送顺序处理
+/// 1. order : order
 /// 2. 至多一次处理: 每条消息最多被处理一次
+/// 2. : at most is
 /// 3. 位置透明: Actor 可以在本地或远程
+/// 3. position : Actor can in this or
 mod theory_actor_model {
     use super::*;
 
-    /// Actor 消息 trait - 定义消息必须满足的约束
-    ///
     /// ## 类型约束
+    /// ## type
     /// - `Send`: 消息可以在线程间安全传递
-    /// - `'static`: 消息的生命周期独立于 Actor
+    /// - `Send`: can in thread
     pub trait Message: Send + 'static {
         /// 响应类型 - 消息处理后的返回值类型
+        /// type - after return value type
+        /// 响应type - 消息Handleafterreturn valuetype
         type Response: Send + 'static;
     }
 
-    /// Actor trait - 定义 Actor 必须实现的行为
-    ///
     /// ## 生命周期钩子
+    /// ## lifetime
     /// - `started`: Actor 启动时调用
-    /// - `handle`: 处理消息的核心方法
     /// - `stopped`: Actor 停止时调用
-    ///
     /// ## 数学语义
-    /// ```text
-    /// ∀ actor: Actor, msg: Message
+    /// ##
     /// handle(actor, msg) → (new_state, response)
-    /// 其中 new_state 替换 actor 的当前状态
-    /// ```
+    /// itsin new_state 替换 actor whenbeforestate
     #[async_trait::async_trait]
     pub trait Actor: Send + Sized + 'static {
         type Message: Message;
 
-        /// 处理消息 - Actor 的核心行为
-        ///
         /// # 参数
+        /// # parameter
         /// - `msg`: 接收到的消息
+        /// - `msg`: to
         /// - `ctx`: Actor 上下文,包含地址和控制信息
-        ///
+        /// - `ctx`: Actor on under,and
         /// # 返回
+        /// #
         /// 消息的响应结果
+        /// result
         async fn handle(
             &mut self,
             msg: Self::Message,
@@ -120,18 +116,25 @@ mod theory_actor_model {
         ) -> <Self::Message as Message>::Response;
 
         /// Actor 启动钩子
+        /// Actor
         async fn started(&mut self, _ctx: &mut ActorContext<Self>) {}
 
         /// Actor 停止钩子
+        /// Actor
         async fn stopped(&mut self, _ctx: &mut ActorContext<Self>) {}
     }
 
     /// Actor 上下文 - 提供 Actor 运行时信息
-    ///
+    /// Actor on under - Actor runtime
     /// ## 功能
+    /// ## functionality
     /// - 持有 Actor 地址用于自我引用
+    /// - Actor reference
     /// - 提供生命周期管理
+    /// - lifetime
     /// - 支持 Actor 间通信
+    /// - Actor
+    /// - Supports Actor 间通信
     #[allow(dead_code)]
     pub struct ActorContext<A: Actor> {
         pub addr: Option<ActorAddress<A>>,
@@ -139,6 +142,7 @@ mod theory_actor_model {
     }
 
     /// Actor 统计信息 - 用于监控和调试
+    /// Actor - and
     #[allow(dead_code)]
     #[derive(Debug, Clone, Default)]
     pub struct ActorStatistics {
@@ -148,13 +152,12 @@ mod theory_actor_model {
     }
 
     /// Actor 地址 - 用于向 Actor 发送消息
-    ///
+    /// Actor - Actor
     /// ## 设计模式: Proxy Pattern
-    /// ActorAddress 是 Actor 的代理,封装了消息传递的细节
-    ///
     /// ## 线程安全
+    /// ## thread-safe
     /// - `Clone`: 可以在多个线程间共享
-    /// - 内部使用 `mpsc::UnboundedSender` 保证线程安全
+    /// - `Clone`: can in thread
     #[allow(dead_code)]
     pub struct ActorAddress<A: Actor> {
         tx: mpsc::UnboundedSender<ActorEnvelope<A>>,
@@ -177,9 +180,10 @@ mod theory_actor_model {
     }
 
     /// 消息信封 - 封装消息和响应通道
-    ///
+    /// - and channel
     /// ## 设计模式: Command Pattern
     /// 将消息和响应封装为一个对象,支持延迟执行
+    /// will and as to,
     struct ActorEnvelope<A: Actor> {
         msg: A::Message,
         respond_to: oneshot::Sender<<A::Message as Message>::Response>,
@@ -188,10 +192,9 @@ mod theory_actor_model {
     #[allow(dead_code)]
     impl<A: Actor> ActorAddress<A> {
         /// 发送消息并等待响应 (同步语义)
-        ///
+        /// and etc. (synchronous )
         /// ## 语义
-        /// ```text
-        /// send(msg) = do
+        /// ##
         ///   envelope ← create_envelope(msg)
         ///   mailbox ← enqueue(envelope)
         ///   response ← await(envelope.response_channel)
@@ -199,8 +202,13 @@ mod theory_actor_model {
         /// ```
         ///
         /// # 错误处理
+        /// # error handling
         /// - Actor 已停止: 返回 "Actor 已停止"
+        /// - Actor : "Actor "
+        /// - Actor 已Stop: Return "Actor 已Stop"
         /// - Actor 未响应: 返回 "Actor 未响应"
+        /// - Actor : "Actor "
+        /// - Actor 未响应: Return "Actor 未响应"
         pub async fn send(
             &self,
             msg: A::Message,
@@ -217,12 +225,11 @@ mod theory_actor_model {
         }
 
         /// 发送消息不等待响应 (异步语义 - Fire and Forget)
-        ///
+        /// etc. (async - Fire and Forget)
         /// ## 语义
-        /// ```text
-        /// do_send(msg) = enqueue(mailbox, msg); return ()
+        /// ##
         /// 无等待,无响应,适用于通知类消息
-        /// ```
+        /// wait-free,,
         pub fn do_send(&self, msg: A::Message) {
             let (tx, _) = oneshot::channel();
             let envelope = ActorEnvelope {
@@ -234,23 +241,32 @@ mod theory_actor_model {
     }
 
     /// Actor 系统 - 管理 Actor 生命周期
-    ///
+    /// Actor system - Actor lifetime
+    /// Actor system - 管理 Actor lifetime
     /// ## 设计模式: Factory Pattern
     /// 负责创建和启动 Actor
+    /// and Actor
     pub struct ActorSystem;
 
     impl ActorSystem {
         /// 启动一个 Actor
-        ///
+        /// Actor
         /// ## 实现细节
+        /// ##
+        /// ## Implementation of细节
         /// 1. 创建无界消息通道
+        /// 1. message channel
         /// 2. 生成 Actor 任务
+        /// 2. Actor task
         /// 3. 进入消息循环
+        /// 3. circulation
+        /// 3. 进入消息circulation
         /// 4. 调用生命周期钩子
-        ///
+        /// 4. lifetime
         /// ## 并发模型
-        /// 每个 Actor 在独立的 tokio task 中运行,
+        /// ## concurrency
         /// 通过消息传递实现并发安全
+        /// concurrency
         pub fn spawn<A: Actor>(mut actor: A) -> ActorAddress<A> {
             let (tx, mut rx) = mpsc::unbounded_channel::<ActorEnvelope<A>>();
 
@@ -293,12 +309,18 @@ mod theory_actor_model {
     // ========================================================================
 
     /// 账户消息枚举 - 定义账户支持的所有操作
-    ///
+    /// enum - definition all
     /// ## 消息类型
+    /// ## type
+    /// ## 消息type
+    /// ## type
     /// - `Deposit`: 存款操作
+    /// - `Deposit`:
     /// - `Withdraw`: 取款操作
-    /// - `GetBalance`: 查询余额
+    /// - `Withdraw`:
     /// - `Transfer`: 转账操作 (演示 Actor 间通信)
+    /// - `Transfer`: (demonstration Actor )
+    /// - `Transfer`: 转账操作 (Demonstration of Actor 间通信)
     #[derive(Debug)]
     pub enum AccountMessage {
         Deposit(u64),
@@ -314,11 +336,13 @@ mod theory_actor_model {
         type Response = Result<u64, String>;
     }
 
-    /// 银行账户 Actor - 封装账户状态和行为
-    ///
     /// ## 不变量
+    /// ## variable
+    /// ## 不variable
     /// - balance ≥ 0 (余额非负)
+    /// - balance ≥ 0 ()
     /// - 所有操作原子性执行
+    /// - all
     pub struct BankAccount {
         balance: u64,
         name: String,
@@ -423,6 +447,8 @@ mod theory_actor_model {
     }
 
     /// Actor 模式演示函数
+    /// Actor demonstration function
+    /// Actor 模式demonstration function
     pub async fn demo() {
         println!(
             "\n#![allow(clippy::type_complexity)]\\
@@ -502,58 +528,73 @@ mod theory_actor_model {
 // ============================================================================
 
 /// # 理论模块: Reactor 模式形式化
-///
+/// # theory module : Reactor
+/// # theorymodule: Reactor 模式形式化
 /// ## 数学定义
-/// ```text
-/// Reactor = (EventQueue, HandlerRegistry, EventLoop)
+/// ## definition
+/// ## 数学definition
 /// 其中:
-///   EventQueue: 事件队列 Queue<Event>
-///   HandlerRegistry: 处理器注册表 Map<EventType, Handler>
-///   EventLoop: 事件循环 loop { dispatch(dequeue(EventQueue)) }
-///   
+/// its in :
 /// 事件分发语义:
-///   event ← dequeue(EventQueue)
-///   handler ← HandlerRegistry[event.type]
+/// :
 ///   handler.handle(event)
 /// ```
 ///
 /// ## Reactor 模式优势
+/// ## Reactor strength
+/// ## Reactor 模式strength
 /// 1. 解耦: 事件生成与处理分离
+/// 1. : and
 /// 2. 扩展性: 动态注册新的事件处理器
+/// 2. :
 /// 3. 性能: 单线程处理多个 I/O 源
+/// 3. performance : thread I/O
 mod theory_reactor_pattern {
     use super::*;
 
     /// 事件类型枚举 - 定义系统支持的事件类型
-    ///
+    /// type enum - definition system type
     /// ## 设计考虑
+    /// ## design
     /// - 可扩展: 支持自定义事件类型
+    /// - : definition type
     /// - 类型安全: 使用 enum 而非字符串
+    /// - type : enum while
     #[allow(dead_code)]
     #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
     pub enum EventType {
         /// 读事件 - 有数据可读
+        /// -
         Read,
         /// 写事件 - 可以写入数据
+        /// - can
         Write,
         /// 定时器事件 - 定时器触发
+        /// -
         Timer,
         /// 连接事件 - 新连接到达
+        /// - to
         Connect,
         /// 断开事件 - 连接断开
+        /// -
         Disconnect,
         /// 自定义事件 - 用户定义的事件
+        /// definition - definition
         Custom(u32),
     }
 
     /// 事件结构 - 封装事件的所有信息
-    ///
+    /// structure - all
     /// ## 字段说明
+    /// ## field explain
     /// - `source_id`: 事件源标识符 (如 socket fd)
     /// - `event_type`: 事件类型
+    /// - `event_type`: 事件type
     /// - `data`: 事件数据 payload
     /// - `timestamp`: 事件产生时间戳
+    /// - `timestamp`: time
     /// - `priority`: 事件优先级 (0-255, 越大越优先)
+    /// - `priority`: (0-255, )
     #[allow(dead_code)]
     #[derive(Debug, Clone)]
     pub struct Event {
@@ -566,6 +607,7 @@ mod theory_reactor_pattern {
 
     impl Event {
         /// 创建新事件的构建器
+        /// builder
         pub fn new(source_id: u64, event_type: EventType) -> Self {
             Self {
                 source_id,
@@ -590,54 +632,60 @@ mod theory_reactor_pattern {
     }
 
     /// 事件处理器 trait - 定义如何处理事件
-    ///
+    /// trait - definition
     /// ## 设计模式: Strategy Pattern
     /// 不同的事件可以有不同的处理策略
+    /// can strategy
     #[async_trait::async_trait]
     #[allow(dead_code)]
     pub trait EventHandler: Send + Sync {
         /// 处理事件
-        ///
         /// # 参数
-        /// - `event`: 要处理的事件
-        ///
+        /// # parameter
         /// # 返回
+        /// #
         /// - `Ok(())`: 处理成功
+        /// - `Ok(())`:
         /// - `Err(e)`: 处理失败,包含错误信息
+        /// - `Err(e)`:,error message
         async fn handle(&self, event: Event) -> Result<(), Box<dyn std::error::Error>>;
 
         /// 处理器名称 - 用于日志和调试
+        /// - and
         fn name(&self) -> &str {
             "UnnamedHandler"
         }
 
         /// 处理器优先级 - 当多个处理器匹配时使用
+        /// - when
         fn priority(&self) -> u8 {
             128
         }
     }
 
-    /// Reactor 核心 - 事件驱动的核心引擎
-    ///
     /// ## 线程安全
+    /// ## thread-safe
     /// 所有字段都使用 Arc<Mutex<>> 包装,支持多线程访问
-    ///
+    /// all field Arc<Mutex<>>,thread
     /// ## 性能考虑
-    /// - 事件队列使用 Vec 而非 VecDeque,批量处理
-    /// - 处理器注册表使用 HashMap,O(1) 查找
+    /// ## performance
     #[allow(dead_code)]
     pub struct Reactor {
         /// 处理器注册表: (source_id, event_type) → Handler
         handlers: Arc<Mutex<HashMap<(u64, EventType), Arc<dyn EventHandler>>>>,
         /// 事件队列: 待处理的事件
+        /// :
         event_queue: Arc<Mutex<Vec<Event>>>,
         /// 运行标志: 控制事件循环的启停
+        /// Run mark : circulation
         running: Arc<RwLock<bool>>,
         /// 统计信息: 用于监控和调试
+        /// : and
         stats: Arc<Mutex<ReactorStats>>,
     }
 
     /// Reactor 统计信息
+    /// Reactor
     #[derive(Debug, Clone, Default)]
     struct ReactorStats {
         events_processed: u64,
@@ -647,7 +695,6 @@ mod theory_reactor_pattern {
     }
 
     impl Reactor {
-        /// 创建新的 Reactor 实例
         pub fn new() -> Self {
             Self {
                 handlers: Arc::new(Mutex::new(HashMap::new())),
@@ -658,17 +705,18 @@ mod theory_reactor_pattern {
         }
 
         /// 注册事件处理器
-        ///
         /// ## 语义
-        /// ```text
-        /// register(source_id, event_type, handler) =
+        /// ##
         ///   HandlerRegistry[(source_id, event_type)] ← handler
         /// ```
         ///
         /// # 参数
+        /// # parameter
         /// - `source_id`: 事件源 ID
         /// - `event_type`: 事件类型
+        /// - `event_type`: 事件type
         /// - `handler`: 处理器实现
+        /// - `handler`:
         pub async fn register(
             &self,
             source_id: u64,
@@ -688,9 +736,11 @@ mod theory_reactor_pattern {
         }
 
         /// 提交事件到队列
-        ///
+        /// to
         /// ## 性能优化
+        /// ## performance optimization
         /// 批量提交事件以减少锁竞争
+        /// lock
         pub async fn submit_event(&self, event: Event) {
             let mut queue = self.event_queue.lock().await;
             queue.push(event);
@@ -708,11 +758,9 @@ mod theory_reactor_pattern {
             stats.events_pending = queue.len() as u64;
         }
 
-        /// 启动事件循环 - Reactor 的心跳
-        ///
         /// ## 事件循环算法
-        /// ```text
-        /// while running do
+        /// ## circulation algorithm
+        /// ## 事件circulationalgorithm
         ///   events ← dequeue_all(EventQueue)
         ///   sort_by_priority(events)
         ///   for each event in events do
@@ -805,6 +853,7 @@ mod theory_reactor_pattern {
         }
 
         /// 停止事件循环
+        /// circulation
         pub async fn stop(&self) {
             let mut running = self.running.write().await;
             *running = false;
@@ -826,6 +875,7 @@ mod theory_reactor_pattern {
     // ========================================================================
 
     /// 连接处理器 - 处理新连接事件
+    /// -
     struct ConnectionHandler {
         name: String,
     }
@@ -849,6 +899,7 @@ mod theory_reactor_pattern {
     }
 
     /// 数据处理器 - 处理读写事件
+    /// -
     struct DataHandler {
         name: String,
         processed: Arc<Mutex<usize>>,
@@ -880,6 +931,7 @@ mod theory_reactor_pattern {
     }
 
     /// 定时器处理器 - 处理定时器事件
+    /// -
     struct TimerHandler;
 
     #[async_trait::async_trait]
@@ -895,6 +947,8 @@ mod theory_reactor_pattern {
     }
 
     /// Reactor 模式演示函数
+    /// Reactor demonstration function
+    /// Reactor 模式demonstration function
     pub async fn demo() {
         println!("\n╔════════════════════════════════════════════════════════╗");
         println!("║                                                        ║");
@@ -1013,20 +1067,30 @@ mod theory_reactor_pattern {
 // ============================================================================
 
 /// # 理论模块: CSP 模式形式化
-///
+/// # theory module : CSP
+/// # theorymodule: CSP 模式形式化
 /// ## 数学定义 (Hoare 1978)
-/// ```text
+/// ## definition (Hoare 1978)
+/// ## 数学definition (Hoare 1978)
 /// P ::= STOP                    // 停止进程
+/// P ::= STOP // process
 ///     | SKIP                    // 空进程
+///     | SKIP // process
+///     | SKIP // 空process
 ///     | a → P                   // 前缀 (事件 a 后执行 P)
+///     | a → P // before ( a after P)
 ///     | P □ Q                   // 外部选择
+///     | P □ Q // outside
 ///     | P ⊓ Q                   // 内部选择
+///     | P ⊓ Q // inside
 ///     | P ||| Q                 // 交错并行
+///     | P ||| Q // parallelism
+///     | P ||| Q // 交错parallelism
 ///     | P || Q                  // 接口并行
+///     | P || Q // parallelism
+///     | P || Q // 接口parallelism
 ///     | P ; Q                   // 顺序组合
-///     
-/// Rust 中的 CSP:
-///   Channel = (Sender<T>, Receiver<T>)
+///     | P; Q // order combination
 ///   send(c, v) ≡ c → SKIP
 ///   recv(c) ≡ ?c → SKIP
 /// ```
@@ -1034,29 +1098,36 @@ mod theory_reactor_pattern {
 /// ## CSP vs Actor vs Reactor
 ///
 /// | 特性 | CSP | Actor | Reactor |
-/// |------|-----|-------|---------|
 /// | 通信 | Channel | Message | Event |
 /// | 耦合 | 低 | 低 | 中 |
+/// | | | | in |
 /// | 同步 | 支持同步/异步 | 异步 | 异步 |
+/// | synchronous | synchronous /async | async | async |
 /// | 选择 | select! | - | - |
 /// | 适用 | Pipeline | 并发实体 | I/O 密集 |
+/// | | Pipeline | concurrency volume | I/O |
 mod theory_csp_pattern {
     use super::*;
     use tokio::sync::broadcast;
 
     /// CSP 示例 1: 生产者-消费者模式
-    ///
+    /// CSP example 1: -
     /// ## 形式化描述
-    /// ```text
-    /// Producer = produce → send!ch → Producer
+    /// ## describe
+    /// ## 形式化describe
     /// Consumer = recv?ch → consume → Consumer
     /// System = Producer ||| Consumer
     /// ```
     ///
     /// ## 特点
+    /// ## point
+    /// ## 特point
     /// - 解耦: 生产者和消费者独立
+    /// - : and
     /// - 背压: 通道容量限制生产速度
+    /// - backpressure : channel
     /// - 并发: 多个生产者/消费者
+    /// - concurrency : /
     pub async fn producer_consumer_demo() {
         println!("\n╔════════════════════════════════════════════════════════╗");
         println!("║                                                        ║");
@@ -1126,19 +1197,25 @@ mod theory_csp_pattern {
     }
 
     /// CSP 示例 2: Pipeline 模式
-    ///
+    /// CSP Example of 2: Pipeline 模式
     /// ## 形式化描述
-    /// ```text
-    /// Stage1 = generate → send!ch1 → Stage1
+    /// ## describe
+    /// ## 形式化describe
     /// Stage2 = recv?ch1 → process → send!ch2 → Stage2
     /// Stage3 = recv?ch2 → aggregate → Stage3
     /// Pipeline = Stage1 ||| Stage2 ||| Stage3
     /// ```
     ///
     /// ## 应用场景
+    /// ## application scenario
     /// - 数据处理流水线
+    /// - pipeline
+    /// - 数据Handlepipeline
     /// - 编译器 (词法→语法→语义→代码生成)
+    /// - (→→→)
     /// - 图像处理 (读取→滤镜→编码→保存)
+    /// - (→→→)
+    /// - 图像Handle (Read→滤镜→Encode→保存)
     pub async fn pipeline_demo() {
         println!("\n╔════════════════════════════════════════════════════════╗");
         println!("║                                                        ║");
@@ -1203,19 +1280,21 @@ mod theory_csp_pattern {
     }
 
     /// CSP 示例 3: Fan-out/Fan-in 模式
-    ///
+    /// CSP Example of 3: Fan-out/Fan-in 模式
     /// ## 形式化描述
-    /// ```text
-    /// Distributor = recv?input → (send!worker1 || ... || send!workerN)
+    /// ## describe
+    /// ## 形式化describe
     /// Worker_i = recv?work → process → send!result
     /// Collector = (recv?result1 || ... || recv?resultN) → aggregate
     /// System = Distributor ||| Worker1 ||| ... ||| WorkerN ||| Collector
     /// ```
     ///
     /// ## 应用场景
+    /// ## application scenario
     /// - 并行任务处理
+    /// - parallelism task
     /// - 分布式计算
-    /// - MapReduce
+    /// - distribution
     pub async fn fan_out_in_demo() {
         println!("\n╔════════════════════════════════════════════════════════╗");
         println!("║                                                        ║");
@@ -1290,12 +1369,13 @@ mod theory_csp_pattern {
     }
 
     /// CSP 示例 4: Select 模式 (多路复用)
-    ///
+    /// CSP example 4: Select ()
+    /// CSP Example of 4: Select 模式 (多路复用)
     /// ## 形式化描述
-    /// ```text
-    /// Select = (ch1?x → P) □ (ch2?y → Q) □ (ch3?z → R)
+    /// ## describe
+    /// ## 形式化describe
     /// 含义: 从多个通道中选择第一个可用的
-    /// ```
+    /// : from channel in first
     pub async fn select_demo() {
         println!("\n╔════════════════════════════════════════════════════════╗");
         println!("║                                                        ║");
@@ -1376,23 +1456,34 @@ mod async_design_patterns {
     // ------------------------------------------------------------------------
 
     /// # 设计模式: Builder 构建器模式
-    ///
+    /// # design : Builder builder
     /// ## 意图
+    /// ## intention
     /// 将复杂对象的构建与表示分离,使用相同的构建过程可以创建不同的表示
-    ///
+    /// will complex to and represent,can represent
     /// ## 适用场景
+    /// ## scenario
+    /// ## 适用scenario
     /// - 对象有多个可选参数
+    /// - to parameter
     /// - 构建过程需要逐步进行
+    /// -
     /// - 需要创建不同表示的对象
+    /// - represent to
     pub mod builder_pattern {
         use super::*;
 
         /// HTTP 客户端构建器 - 演示 Builder 模式
-        ///
+        /// HTTP builder - demonstration Builder
+        /// HTTP 客户端builder - Demonstration of Builder 模式
         /// ## 优势
+        /// ## strength
         /// - 流畅接口 (Fluent Interface)
         /// - 可选参数清晰
+        /// - parameter clear
+        /// - 可选parameterclear
         /// - 类型安全
+        /// - type
         #[derive(Debug, Clone)]
         pub struct HttpClientBuilder {
             timeout: Option<Duration>,
@@ -1414,12 +1505,15 @@ mod async_design_patterns {
             }
 
             /// 设置超时时间
+            /// time
+            /// Set超时time
             pub fn timeout(mut self, timeout: Duration) -> Self {
                 self.timeout = Some(timeout);
                 self
             }
 
             /// 设置最大连接数
+            /// maximum
             pub fn max_connections(mut self, max: usize) -> Self {
                 self.max_connections = max;
                 self
@@ -1444,6 +1538,7 @@ mod async_design_patterns {
             }
 
             /// 构建最终对象
+            /// ultimately to
             pub fn build(self) -> HttpClient {
                 HttpClient {
                     timeout: self.timeout.unwrap_or(Duration::from_secs(30)),
@@ -1457,7 +1552,6 @@ mod async_design_patterns {
             }
         }
 
-        /// HTTP 客户端 - 最终构建的对象
         #[allow(dead_code)]
         #[derive(Debug)]
         pub struct HttpClient {
@@ -1506,18 +1600,25 @@ mod async_design_patterns {
     }
 
     /// # 设计模式: Factory 工厂模式
-    ///
+    /// # design : Factory factory
     /// ## 意图
+    /// ## intention
     /// 定义创建对象的接口,但让子类决定实例化哪个类
-    ///
+    /// definition to,but
     /// ## 适用场景
+    /// ## scenario
+    /// ## 适用scenario
     /// - 创建过程复杂
+    /// - complex
     /// - 需要根据条件创建不同对象
+    /// - according to condition to
     /// - 隐藏对象创建细节
+    /// - hide to
     pub mod factory_pattern {
         use super::*;
 
         /// 连接接口 - 所有连接类型的统一接口
+        /// - all type
         #[async_trait::async_trait]
         pub trait Connection: Send + Sync {
             async fn connect(&self) -> Result<(), String>;
@@ -1527,6 +1628,7 @@ mod async_design_patterns {
         }
 
         /// TCP 连接实现
+        /// TCP
         #[allow(dead_code)]
         struct TcpConnection {
             host: String,
@@ -1556,7 +1658,6 @@ mod async_design_patterns {
             }
         }
 
-        /// WebSocket 连接实现
         #[allow(dead_code)]
         struct WebSocketConnection {
             url: String,
@@ -1586,15 +1687,17 @@ mod async_design_patterns {
         }
 
         /// 连接工厂 - 根据类型创建不同的连接
+        /// factory - according to type
         #[allow(dead_code)]
         pub struct ConnectionFactory;
 
         impl ConnectionFactory {
             /// 创建连接
-            ///
             /// # 参数
+            /// # parameter
             /// - `conn_type`: 连接类型 ("tcp", "websocket", "http")
             /// - `address`: 连接地址
+            /// - `address`:
             pub fn create(conn_type: &str, address: &str) -> Result<Box<dyn Connection>, String> {
                 match conn_type.to_lowercase().as_str() {
                     "tcp" => {
@@ -1647,17 +1750,23 @@ mod async_design_patterns {
     // ------------------------------------------------------------------------
 
     /// # 设计模式: Adapter 适配器模式
-    ///
+    /// # design : Adapter adapter
     /// ## 意图
+    /// ## intention
     /// 将一个类的接口转换成客户希望的另一个接口
-    ///
+    /// will conversion
     /// ## 适用场景
+    /// ## scenario
+    /// ## 适用scenario
     /// - 使用已有的类,但接口不符合需求
+    /// -,but
     /// - 创建可复用的类与不兼容的类协同工作
+    /// - and
     pub mod adapter_pattern {
         use super::*;
 
         /// 新的缓存接口 - 我们期望的接口
+        /// -
         #[async_trait::async_trait]
         pub trait Cache: Send + Sync {
             async fn get(&self, key: &str) -> Option<String>;
@@ -1666,6 +1775,7 @@ mod async_design_patterns {
         }
 
         /// 旧的存储系统 - 已有的实现,但接口不兼容
+        /// system -,but
         #[allow(dead_code)]
         struct LegacyStorage {
             data: Arc<Mutex<HashMap<String, String>>>,
@@ -1696,6 +1806,7 @@ mod async_design_patterns {
         }
 
         /// 适配器 - 将旧接口适配到新接口
+        /// adapter - will to
         #[allow(dead_code)]
         pub struct StorageAdapter {
             legacy: LegacyStorage,
@@ -1756,18 +1867,25 @@ mod async_design_patterns {
     // ------------------------------------------------------------------------
 
     /// # 设计模式: Strategy 策略模式
-    ///
+    /// # design : Strategy strategy
     /// ## 意图
+    /// ## intention
     /// 定义算法族,分别封装,让它们可以互相替换
-    ///
+    /// definition algorithm,,can
     /// ## 适用场景
+    /// ## scenario
+    /// ## 适用scenario
     /// - 需要在运行时选择算法
+    /// - in runtime algorithm
     /// - 有多个相关的类仅行为不同
+    /// - as
     /// - 需要不同的算法变体
+    /// - algorithm volume
     pub mod strategy_pattern {
         use super::*;
 
         /// 压缩策略接口
+        /// strategy
         #[async_trait::async_trait]
         pub trait CompressionStrategy: Send + Sync {
             async fn compress(&self, data: &[u8]) -> Vec<u8>;
@@ -1775,6 +1893,8 @@ mod async_design_patterns {
         }
 
         /// 无压缩策略
+        /// strategy
+        /// 无Compressstrategy
         #[allow(dead_code)]
         struct NoCompression;
 
@@ -1791,6 +1911,7 @@ mod async_design_patterns {
         }
 
         /// 快速压缩策略
+        /// fast strategy
         #[allow(dead_code)]
         struct FastCompression;
 
@@ -1813,6 +1934,8 @@ mod async_design_patterns {
         }
 
         /// 最优压缩策略
+        /// strategy
+        /// 最优Compressstrategy
         #[allow(dead_code)]
         struct BestCompression;
 
@@ -1835,6 +1958,7 @@ mod async_design_patterns {
         }
 
         /// 文件处理器 - 使用策略模式
+        /// - strategy
         #[allow(dead_code)]
         pub struct FileProcessor {
             strategy: Arc<dyn CompressionStrategy>,
@@ -1846,6 +1970,7 @@ mod async_design_patterns {
             }
 
             /// 运行时切换策略
+            /// runtime switching strategy
             pub fn set_strategy(&mut self, strategy: Arc<dyn CompressionStrategy>) {
                 println!("  🔄 切换压缩策略: {}", strategy.name());
                 self.strategy = strategy;
@@ -1888,19 +2013,27 @@ mod async_design_patterns {
     }
 
     /// # 设计模式: Observer 观察者模式
-    ///
+    /// # design : Observer observer
     /// ## 意图
+    /// ## intention
     /// 定义对象间的一对多依赖,当一个对象状态改变时,所有依赖者都得到通知
-    ///
+    /// definition to to,when to state,all to
     /// ## 适用场景
+    /// ## scenario
+    /// ## 适用scenario
     /// - 一个对象的改变需要同时改变其他对象
+    /// - to its to
     /// - 不知道有多少对象需要改变
+    /// - to
     /// - 事件系统,发布-订阅系统
+    /// - system,publish-subscribe system
+    /// - 事件system,publish-subscribesystem
     #[allow(dead_code)]
     pub mod observer_pattern {
         use super::*;
 
         /// 事件类型
+        /// type
         #[derive(Debug, Clone)]
         pub enum Event {
             UserLogin(String),
@@ -1909,6 +2042,7 @@ mod async_design_patterns {
         }
 
         /// 观察者接口
+        /// observer
         #[async_trait::async_trait]
         pub trait Observer: Send + Sync {
             async fn update(&self, event: &Event);
@@ -1916,6 +2050,8 @@ mod async_design_patterns {
         }
 
         /// 日志观察者
+        /// observer
+        /// 日志observer
         #[allow(dead_code)]
         struct LogObserver {
             name: String,
@@ -1933,6 +2069,8 @@ mod async_design_patterns {
         }
 
         /// 邮件观察者
+        /// observer
+        /// 邮件observer
         #[allow(dead_code)]
         struct EmailObserver {
             name: String,
@@ -1951,6 +2089,8 @@ mod async_design_patterns {
         }
 
         /// 主题 (被观察者)
+        /// (is observer )
+        /// 主题 (isobserver)
         pub struct Subject {
             observers: Arc<Mutex<Vec<Arc<dyn Observer>>>>,
         }
@@ -1963,6 +2103,7 @@ mod async_design_patterns {
             }
 
             /// 注册观察者
+            /// observer
             pub async fn attach(&self, observer: Arc<dyn Observer>) {
                 let mut observers = self.observers.lock().await;
                 println!("  ➕ 注册观察者: {}", observer.name());
@@ -1970,6 +2111,8 @@ mod async_design_patterns {
             }
 
             /// 移除观察者
+            /// observer
+            /// 移除observer
             pub async fn detach(&self, name: &str) {
                 let mut observers = self.observers.lock().await;
                 observers.retain(|o| o.name() != name);
@@ -1977,6 +2120,7 @@ mod async_design_patterns {
             }
 
             /// 通知所有观察者
+            /// all observer
             pub async fn notify(&self, event: Event) {
                 println!("\n  🔔 通知事件: {:?}", event);
                 let observers = self.observers.lock().await;
@@ -2033,6 +2177,7 @@ mod async_design_patterns {
     }
 
     /// 运行所有设计模式演示
+    /// Run all design demonstration
     pub async fn demo_all() {
         println!("\n╔════════════════════════════════════════════════════════╗");
         println!("║                                                        ║");

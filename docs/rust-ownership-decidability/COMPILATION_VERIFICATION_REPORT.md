@@ -14,7 +14,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust Code Compilation Verification Report](#rust-code-compilation-verification-report)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [Executive Summary](#executive-summary)
     - [Key Findings](#key-findings)
   - [Files Verified](#files-verified)
@@ -29,7 +29,7 @@
     - [Category 4: Intentionally Broken Code (Counterexamples)](#category-4-intentionally-broken-code-counterexamples)
     - [Category 5: Incomplete/Illustrative Snippets](#category-5-incompleteillustrative-snippets)
   - [Rust 1.94 Specific Features Verified](#rust-194-specific-features-verified)
-    - [✅ Verified Working](#verified-working)
+    - [✅ Verified Working](#-verified-working)
     - [Note on 1.94 APIs](#note-on-194-apis)
   - [Recommendations](#recommendations)
     - [For Documentation Maintainers](#for-documentation-maintainers)
@@ -40,7 +40,7 @@
   - [Appendix: Full Results](#appendix-full-results)
     - [Passed Checks](#passed-checks)
     - [Detailed Error Analysis](#detailed-error-analysis)
-  - *Rust Version: 1.94.0*
+  - [*Rust Version: 1.94.0*](#rust-version-1940)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -64,7 +64,7 @@ This report documents the compilation verification of Rust code examples in the 
 **Note**: The high failure rate is expected and acceptable because:
 
 1. Many code blocks are **illustrative snippets** (not meant to be standalone)
-2. Many require **external crates** (tokio, futures, async-std, etc.)
+2. Many require **external crates** (tokio, futures, async-std [已归档], etc.)
 3. Some are **intentionally incomplete** examples showing concepts
 4. Some contain **Chinese text/markdown** that gets misinterpreted
 
@@ -147,7 +147,7 @@ These code blocks require external crates that are not available in standalone `
 | rayon | 10+ | data-parallelism.md |
 | actix | 3 | concurrency-architecture.md |
 | reqwest | 2 | async-rust.md |
-| async-std | 3 | async-rust.md |
+| async-std [已归档] | 3 | async-rust.md |
 | libc | 5 | ffi-patterns.md |
 | parking_lot | 5 | thread-safety-patterns.md |
 

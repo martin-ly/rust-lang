@@ -1,13 +1,17 @@
 //! # 字符串算法模块
+//! # string algorithm module
 //!
 //! 本模块实现了各种字符串算法。
+//! this module string algorithm 。
 //use serde::{Serialize, Deserialize};
 
 /// 字符串算法实现
+/// string algorithm
 pub struct StringAlgorithms;
 
 impl StringAlgorithms {
     /// KMP 字符串匹配
+    /// KMP
     pub fn kmp_search(text: &str, pattern: &str) -> Option<usize> {
         let text_bytes = text.as_bytes();
         let pattern_bytes = pattern.as_bytes();
@@ -60,6 +64,7 @@ impl StringAlgorithms {
     }
 
     /// Rabin-Karp 字符串匹配
+    /// Rabin-Karp
     pub fn rabin_karp_search(text: &str, pattern: &str) -> Option<usize> {
         let text_bytes = text.as_bytes();
         let pattern_bytes = pattern.as_bytes();

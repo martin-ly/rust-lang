@@ -1,11 +1,15 @@
 //! C03 控制流与函数模块性能基准测试（增强版）
-//!
+//! C03 stream and function module Performance benchmark （）
+//! C03 控制streamandfunctionmoduleperformancebenchmark（增强版）
 //! 测试闭包、控制流分支、模式匹配等核心语言特性的性能表现。
+//! 、stream 、etc. core feature performance 。
 
 use criterion::{Criterion, criterion_group, criterion_main};
 
 /// 基准测试：函数组合链性能
+/// benchmark ：function combination performance
 /// 验证函数式编程风格在高频调用下的开销
+/// functional in under overhead
 fn bench_function_composition(c: &mut Criterion) {
     use c03_control_fn::compose_functions;
 
@@ -30,6 +34,7 @@ fn bench_function_composition(c: &mut Criterion) {
 }
 
 /// 基准测试：分支预测友好 vs 不友好的代码
+/// benchmark ：branch prediction vs
 fn bench_branch_prediction(c: &mut Criterion) {
     use c03_control_fn::branch_predictor_friendly;
 
@@ -58,6 +63,8 @@ fn bench_branch_prediction(c: &mut Criterion) {
 }
 
 /// 基准测试：无分支计算
+/// benchmark ：
+/// benchmark：无分支Calculate
 fn bench_branchless_computation(c: &mut Criterion) {
     use c03_control_fn::branchless_computation;
 
@@ -72,6 +79,8 @@ fn bench_branchless_computation(c: &mut Criterion) {
 }
 
 /// 基准测试：向量化的循环 vs 普通循环
+/// benchmark ：vectorization circulation vs circulation
+/// benchmark：vectorizationcirculation vs 普通circulation
 fn bench_vectorizable_loop(c: &mut Criterion) {
     use c03_control_fn::vectorizable_loop;
 
@@ -86,6 +95,7 @@ fn bench_vectorizable_loop(c: &mut Criterion) {
 }
 
 /// 基准测试：状态机解析器
+/// benchmark ：state machine
 fn bench_state_machine_parser(c: &mut Criterion) {
     use c03_control_fn::StateMachineParser;
 
@@ -107,6 +117,7 @@ fn bench_state_machine_parser(c: &mut Criterion) {
 }
 
 /// 基准测试：条件执行优化
+/// benchmark ：condition optimization
 fn bench_conditional_execute(c: &mut Criterion) {
     use c03_control_fn::conditional_execute;
 

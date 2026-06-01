@@ -1,40 +1,56 @@
 //! # Rust 1.89 特性示例 (历史版本)
+//! # Rust 1.89 feature example (this )
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//! ⚠️ **this ** - this as reference
 //!
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //!
 //! ## 版本历史说明
+//! ## this explain
 //!
 //! 本文件展示 Rust 1.89 版本的特性，当前项目已升级到 Rust 1.92.0。
+//! this Rust 1.89 this feature ，when before project to Rust 1.92.0。
 //!
 //! ### Rust 1.92.0 主要改进
+//! ### Rust 1.92.0 main
 //!
 //! - **MaybeUninit 改进**: 更安全的对象池和单例模式实现
+//! - **MaybeUninit **: to and singleton
 //! - **关联项多边界**: 更灵活的设计模式 Trait 定义
+//! - **edge **: design Trait definition
 //! - **Location::file_as_c_str**: 更好的错误定位和调试信息
+//! - **Location::file_as_c_str**: and
 //!
 //! ### 迁移建议
+//! ###
 //!
 //! 1. 更新 Cargo.toml: `rust-version = "1.92"`
 //! 2. 参考 `rust_192_features.rs` 了解最新特性
+//! 2. reference `rust_192_features.rs` feature
 //! 3. 查看 `docs/RUST_192_DESIGN_PATTERN_IMPROVEMENTS.md` 了解完整改进
 //!
 //! 参考:
+//! reference :
 //! - [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/)
 //! - [历史版本: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 //!
 //! ---
 //!
 //! # Rust 1.89 新特性演示模块
+//! # Rust 1.89 feature demonstration module
 //!
 //! 本模块展示了如何在设计模式中充分利用 Rust 1.89 的新特性
+//! This module demonstrates in design in Rust 1.89 feature
 use std::cell::Cell;
 use std::ptr;
 use std::sync::OnceLock;
 
 /// 演示 Cell::update 方法的使用
+/// demonstration Cell::update method
 /// 这是 Rust 1.89 中新增的原子更新方法
+/// Rust 1.89 in method
 pub struct CellUpdateDemo {
     counter: Cell<i32>,
     data: Cell<Option<String>>,
@@ -55,6 +71,7 @@ impl CellUpdateDemo {
     }
 
     /// 使用 Cell::update 进行原子更新
+    /// Cell::update
     pub fn increment_counter(&self) -> i32 {
         self.counter.update(|current| {
             println!("当前计数器值: {}", current);
@@ -64,23 +81,28 @@ impl CellUpdateDemo {
     }
 
     /// 设置数据（使用传统方法，因为 String 不实现 Copy）
+    /// （method ，because String Copy）
     pub fn set_data(&self, value: String) {
         self.data.set(Some(value));
     }
 
     /// 获取当前计数器值
+    /// when before
     pub fn get_counter(&self) -> i32 {
         self.counter.get()
     }
 
     /// 获取当前数据
+    /// when before
     pub fn get_data(&self) -> Option<String> {
         self.data.take()
     }
 }
 
 /// 演示裸指针 Default 实现的使用
+/// demonstration pointer Default
 /// 这是 Rust 1.89 中新增的特性，简化了指针的初始化
+/// Rust 1.89 in feature ，pointer
 pub struct PointerDefaultDemo {
     raw_ptr: *const i32,
     id: u32,
@@ -95,12 +117,14 @@ impl PointerDefaultDemo {
     }
 
     /// 设置指针值
+    /// pointer
     pub fn set_pointer(&mut self, value: i32) {
         let boxed_value = Box::new(value);
         self.raw_ptr = Box::into_raw(boxed_value);
     }
 
     /// 获取指针值（如果有效）
+    /// pointer （if effective ）
     pub fn get_pointer(&self) -> Option<i32> {
         if self.raw_ptr.is_null() {
             None
@@ -110,6 +134,7 @@ impl PointerDefaultDemo {
     }
 
     /// 获取 ID
+    /// ID
     pub fn get_id(&self) -> u32 {
         self.id
     }
@@ -126,7 +151,9 @@ impl Drop for PointerDefaultDemo {
 }
 
 /// 演示数组转换优化的使用
+/// demonstration conversion optimization
 /// 这是 Rust 1.89 中改进的数组与 Vec 之间的转换
+/// Rust 1.89 in and Vec 's conversion
 pub struct ArrayConversionDemo {
     data: Vec<i32>,
 }
@@ -143,6 +170,7 @@ impl ArrayConversionDemo {
     }
 
     /// 从固定大小数组创建
+    /// from
     pub fn from_array<const N: usize>(array: [i32; N]) -> Self {
         Self {
             // 使用 Rust 1.89 的数组转换优化
@@ -151,11 +179,13 @@ impl ArrayConversionDemo {
     }
 
     /// 转换为 `Box<[T]>`
+    /// conversion as `Box<[T]>`
     pub fn to_boxed_slice(&self) -> Box<[i32]> {
         self.data.clone().into_boxed_slice()
     }
 
     /// 从 `Box<[T]>` 转换回 Vec
+    /// from `Box<[T]>` conversion Vec
     pub fn from_boxed_slice(boxed: Box<[i32]>) -> Self {
         Self {
             data: boxed.into_vec(),
@@ -168,13 +198,16 @@ impl ArrayConversionDemo {
     }
 
     /// 添加元素
+    /// element
     pub fn push(&mut self, value: i32) {
         self.data.push(value);
     }
 }
 
 /// 演示 OnceLock 的高级用法
+/// demonstration OnceLock
 /// 结合 Rust 1.89 的新特性使用
+/// Rust 1.89 feature
 pub struct AdvancedSingleton<T> {
     instance: OnceLock<T>,
     metadata: Cell<Option<String>>,
@@ -195,6 +228,7 @@ impl<T> AdvancedSingleton<T> {
     }
 
     /// 获取或初始化实例，同时设置元数据
+    /// or ，
     pub fn get_or_init<F>(&self, initializer: F) -> &T
     where
         F: FnOnce() -> T,
@@ -203,6 +237,7 @@ impl<T> AdvancedSingleton<T> {
     }
 
     /// 设置元数据（使用传统方法，因为 String 不实现 Copy）
+    /// （method ，because String Copy）
     pub fn set_metadata(&self, metadata: String) {
         self.metadata.set(Some(metadata));
     }
@@ -219,6 +254,7 @@ impl<T> AdvancedSingleton<T> {
 }
 
 /// 演示网络套接字增强特性
+/// demonstration network socket feature
 /// 使用 AsFd/AsHandle/AsSocket 等新特性
 #[cfg(unix)]
 pub struct SocketDemo {
@@ -233,6 +269,7 @@ impl SocketDemo {
     }
 
     /// 演示 AsFd 的使用
+    /// demonstration AsFd
     pub fn demonstrate_as_fd(&self) {
         // 在实际应用中，这里会使用 std::os::unix::io::AsFd
         println!("演示 AsFd 特性（仅在 Unix 系统上可用）");
@@ -257,6 +294,7 @@ impl SocketDemo {
     }
 
     /// 演示 AsHandle 的使用
+    /// demonstration AsHandle
     pub fn demonstrate_as_handle(&self) {
         // 在实际应用中，这里会使用 std::os::windows::io::AsHandle
         println!("演示 AsHandle 特性（仅在 Windows 系统上可用）");
@@ -278,6 +316,7 @@ impl SocketDemo {
 }
 
 /// 综合演示函数
+/// synthesize demonstration function
 pub fn demonstrate_rust_189_features() {
     println!("=== Rust 1.89 新特性演示 ===");
 

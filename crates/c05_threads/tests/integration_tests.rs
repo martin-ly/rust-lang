@@ -6,6 +6,7 @@ use std::sync::{Arc, Mutex};
 use std::thread;
 
 /// 测试线程创建集成
+/// thread
 #[test]
 fn test_thread_creation_integration() {
     let handle = thread::spawn(|| "Hello from thread");
@@ -15,6 +16,7 @@ fn test_thread_creation_integration() {
 }
 
 /// 测试线程间通信集成
+/// thread
 #[test]
 fn test_thread_communication_integration() {
     let shared = Arc::new(Mutex::new(0));
@@ -30,6 +32,7 @@ fn test_thread_communication_integration() {
 }
 
 /// 测试多线程协作集成
+/// thread
 #[test]
 fn test_multithreaded_cooperation_integration() {
     let shared = Arc::new(Mutex::new(0));
@@ -52,6 +55,7 @@ fn test_multithreaded_cooperation_integration() {
 }
 
 /// 测试线程同步集成
+/// thread synchronization
 #[test]
 fn test_thread_synchronization_integration() {
     use std::sync::Barrier;
@@ -75,6 +79,7 @@ fn test_thread_synchronization_integration() {
 }
 
 /// 测试原子操作集成
+/// atomic operation
 #[test]
 fn test_atomic_operations_integration() {
     use std::sync::atomic::{AtomicUsize, Ordering};
@@ -98,6 +103,7 @@ fn test_atomic_operations_integration() {
 }
 
 /// 测试线程本地存储集成
+/// thread-local storage
 #[test]
 fn test_thread_local_storage_integration() {
     use std::cell::RefCell;

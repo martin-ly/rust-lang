@@ -1,14 +1,15 @@
 //! Rust 1.92.0 控制流特性演示示例
-//!
-//! 本示例展示了 Rust 1.92.0 在控制流和函数场景中的新特性应用：
-//! - #[track_caller] 在控制流场景中的改进
-//! - 更严格的 Never 类型 Lint
-//! - Location API 在错误报告中的增强
+//! Rust 1.92.0 stream feature demonstration example
+//! Rust 1.92.0 控制streamfeaturedemonstration example
+//! - 更严格 Never type Lint
+//! - Location API in错误报告in增强
 //! - 改进的控制流分析
+//! - control flow analysis
+//! - 改进control flow analysis
 //! - 优化的错误处理和上下文捕获
-//!
+//! - optimization error handling and on under
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example rust_192_features_demo
 //! ```
 use c03_control_fn::rust_192_features::{
@@ -184,6 +185,7 @@ fn demonstrate_parallel_control_flow() {
 }
 
 /// 演示控制流分析器
+/// demonstration control flow analysis
 fn demonstrate_control_flow_analyzer() {
     println!("\n📈 场景 1: 控制流分析器");
     println!("{}", "-".repeat(60));
@@ -216,6 +218,8 @@ fn demonstrate_control_flow_analyzer() {
 }
 
 /// 演示控制流优化器
+/// demonstration stream optimizer
+/// Demonstration of控制streamoptimizer
 fn demonstrate_control_flow_optimizer() {
     println!("\n⚡ 场景 2: 控制流优化器");
     println!("{}", "-".repeat(60));
@@ -248,6 +252,7 @@ fn demonstrate_control_flow_optimizer() {
 }
 
 /// 演示错误处理和位置追踪
+/// demonstration error handling and position
 fn demonstrate_error_handling_with_location() {
     println!("\n🔍 场景 3: 错误处理和位置追踪");
     println!("{}", "-".repeat(60));
@@ -278,6 +283,7 @@ fn demonstrate_error_handling_with_location() {
 }
 
 /// 演示 Never 类型使用
+/// demonstration Never type
 fn demonstrate_never_type_usage() {
     println!("\n♾️  场景 4: Never 类型应用");
     println!("{}", "-".repeat(60));
@@ -296,6 +302,7 @@ fn demonstrate_never_type_usage() {
 }
 
 /// 演示复杂控制流组合
+/// demonstration complex stream combination
 fn demonstrate_complex_control_flow() {
     println!("\n🎭 场景 5: 复杂控制流组合");
     println!("{}", "-".repeat(60));
@@ -333,6 +340,8 @@ fn demonstrate_complex_control_flow() {
 }
 
 /// 演示高级模式匹配
+/// demonstration
+/// Demonstration of高级模式匹配
 fn demonstrate_advanced_pattern_matching() {
     println!("\n🎭 场景 6: 高级模式匹配");
     println!("{}", "-".repeat(60));
@@ -376,6 +385,7 @@ fn demonstrate_advanced_pattern_matching() {
 }
 
 /// 演示控制流组合器
+/// demonstration stream combination
 fn demonstrate_control_flow_combinator() {
     println!("\n🔗 场景 7: 控制流组合器");
     println!("{}", "-".repeat(60));
@@ -413,6 +423,7 @@ fn demonstrate_control_flow_combinator() {
 }
 
 /// 演示性能分析
+/// demonstration performance analyze
 fn demonstrate_performance_profiling() {
     println!("\n⚡ 场景 8: 性能分析");
     println!("{}", "-".repeat(60));
@@ -453,6 +464,7 @@ fn demonstrate_performance_profiling() {
 }
 
 /// 演示控制流验证
+/// demonstration stream
 fn demonstrate_control_flow_validation() {
     println!("\n✅ 场景 9: 控制流验证");
     println!("{}", "-".repeat(60));
@@ -489,6 +501,8 @@ fn demonstrate_control_flow_validation() {
 }
 
 /// 演示控制流状态机
+/// demonstration stream state machine
+/// Demonstration of控制streamstate machine
 fn demonstrate_state_machine() {
     println!("\n🔄 场景 10: 控制流状态机");
     println!("{}", "-".repeat(60));
@@ -528,6 +542,7 @@ fn demonstrate_state_machine() {
 }
 
 /// 演示迭代器控制流扩展
+/// demonstration stream
 fn demonstrate_iterator_control_flow() {
     println!("\n🔄 场景 11: 迭代器控制流扩展");
     println!("{}", "-".repeat(60));
@@ -576,6 +591,7 @@ fn demonstrate_iterator_control_flow() {
 }
 
 /// 演示控制流可视化
+/// demonstration stream
 fn demonstrate_visualization() {
     println!("\n📊 场景 12: 控制流可视化");
     println!("{}", "-".repeat(60));

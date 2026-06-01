@@ -5,6 +5,7 @@ use std::sync::{Arc, Mutex};
 use std::thread;
 
 /// 测试线程数量边界情况
+/// thread quantity edge situation
 #[test]
 fn test_thread_count_boundaries() {
     // 测试零线程
@@ -32,6 +33,7 @@ fn test_thread_count_boundaries() {
 }
 
 /// 测试并发度边界情况
+/// concurrency edge situation
 #[test]
 fn test_concurrency_boundaries() {
     // 测试低并发度
@@ -48,6 +50,7 @@ fn test_concurrency_boundaries() {
 }
 
 /// 测试资源限制边界情况
+/// edge situation
 #[test]
 fn test_resource_limit_boundaries() {
     // 测试资源限制边界值
@@ -79,6 +82,7 @@ fn test_error_paths() {
 }
 
 /// 测试边界值组合
+/// edge combination
 #[test]
 fn test_boundary_value_combinations() {
     // 测试最小值和最大值
@@ -94,6 +98,7 @@ fn test_boundary_value_combinations() {
 }
 
 /// 测试资源耗尽情况
+/// situation
 #[test]
 fn test_resource_exhaustion() {
     // 测试大量线程创建（模拟）
@@ -114,6 +119,7 @@ fn test_resource_exhaustion() {
 }
 
 /// 测试并发安全
+/// concurrency
 #[test]
 fn test_concurrent_safety() {
     // 测试共享状态

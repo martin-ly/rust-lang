@@ -1,59 +1,54 @@
-//! # Rust 1.96.0 特性 — WebAssembly 模块
-//!
-//! 本模块展示 Rust 1.96.0 中与 WebAssembly 相关的稳定特性：
-//! - **WASM 链接器行为变更**: 移除 `--allow-undefined` 默认传递
-//! - `core::range::Range` — no_std 友好的可复用范围类型
+//! - **WASM 链接器行as变更**: 移除 `--allow-undefined` 默认传递
+//! - **WASM as**: `--allow-undefined`
+//! - `core::range::Range` — no_std 友好可复用rangetype
 //! - `assert_matches!` — WASM 状态机测试断言
-//! - `From<T> for LazyLock<T, F>` — WASM 运行时配置懒加载
-//!
 //! # 版本信息
+//! # this
 //! - Rust 版本: 1.96.0+ stable
+//! - Rust 版this: 1.96.0+ stable
 //! - 稳定日期: 2026-05-28
-//! - Edition: 2024
+//! - date : 2026-05-28
+//! - 稳定date: 2026-05-28
+//! - date: 2026-05-28
 
 // ============================================================================
 // 1. WebAssembly 链接器行为变更 (1.96 Breaking Change)
 // ============================================================================
 
 /// # Rust 1.96 WASM 链接器变更
-///
-/// Rust 1.96 移除了 WebAssembly 目标上 `--allow-undefined` 链接器标志的默认传递。
-///
+/// # Rust 1.96 WASM
 /// ## 影响
+/// ## impact
 /// - 未定义符号现在会导致**链接错误**（与原生平台行为一致）
+/// - definition symbol present ****（and platform as ）
 /// - 需要显式使用 `#[link(wasm_import_module = "...")]` 导入外部符号
-/// - 修复了历史上 `--allow-undefined` 导致的静默故障问题
-///
+/// - `#[link(wasm_import_module = "...")]` outside symbol
 /// ## 迁移指南
-/// ```text
+/// ##
 /// # 1.96 之前（默认允许未定义符号）
-/// rustc --target wasm32-unknown-unknown main.rs
-/// # 链接成功，未定义符号自动转为 wasm import
-///
+/// # 1.96 's before （definition symbol ）
 /// # 1.96 之后（默认拒绝未定义符号）
-/// rustc --target wasm32-unknown-unknown main.rs
+/// # 1.96 's after （definition symbol ）
+/// # 1.96 'safter（默认拒绝未definitionsymbol）
 /// # 链接错误: undefined symbol
-///
 /// # 解决方案 A: 显式声明外部导入
-/// #[link(wasm_import_module = "env")]
-/// extern "C" { fn external_func(); }
+/// # solution A: outside
 ///
 /// # 解决方案 B: 显式传递链接器参数（不推荐用于生产）
-/// RUSTFLAGS="-Clink-arg=--allow-undefined" cargo build --target wasm32-unknown-unknown
-/// ```
+/// # solution B: parameter （）
 ///
 /// **官方公告**: <https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/>
 pub struct WasmLinkerChanges;
 
 impl WasmLinkerChanges {
     /// 返回变更摘要
+    /// summary
     pub fn get_summary() -> &'static str {
         "Rust 1.96: WebAssembly targets no longer pass --allow-undefined to the linker. Undefined \
          symbols now cause linker errors. Use #[link(wasm_import_module = \"...\")] for explicit \
          imports."
     }
 
-    /// 检查目标是否为受影响的 WASM 目标
     pub fn is_affected_target(target: &str) -> bool {
         matches!(
             target,
@@ -66,14 +61,15 @@ impl WasmLinkerChanges {
 // 2. core::range::Range 在 WASM 中的应用 (1.96.0 stable, no_std 友好)
 // ============================================================================
 
-/// # `core::range::Range` 在 WASM 内存管理中的应用
-///
 /// `core::range` 完全定义在 `core` 中，无需 `std` 或 `alloc`，
+/// `core::range` 完全definitionin `core` in，无需 `std` or `alloc`，
 /// 非常适合 `wasm32-unknown-unknown` 等 no_std 目标。
+/// 非常适合 `wasm32-unknown-unknown` etc. no_std goal。
 pub struct WasmCoreRangeExamples;
 
 impl WasmCoreRangeExamples {
     /// WASM 线性内存页范围检查（每页 64KB）
+    /// WASM line memory scope （ 64KB）
     pub fn memory_page_range(pages: usize) -> &'static str {
         use core::range::Range;
 
@@ -96,6 +92,7 @@ impl WasmCoreRangeExamples {
     }
 
     /// WASM 表索引范围验证
+    /// WASM scope
     pub fn is_valid_table_index(idx: u32, table_size: u32) -> bool {
         use core::range::Range;
         let valid: Range<u32> = Range {
@@ -106,6 +103,7 @@ impl WasmCoreRangeExamples {
     }
 
     /// 数据段偏移范围检查
+    /// scope
     pub fn data_segment_in_range(offset: usize, segment_size: usize, memory_limit: usize) -> bool {
         use core::range::Range;
         let max_offset = memory_limit.saturating_sub(segment_size);
@@ -124,6 +122,7 @@ impl WasmCoreRangeExamples {
 use std::assert_matches;
 
 /// WASM 模块加载状态
+/// WASM module state
 #[derive(Debug, PartialEq)]
 pub enum WasmLoadState {
     Idle,
@@ -133,20 +132,22 @@ pub enum WasmLoadState {
     Failed { error: &'static str },
 }
 
-/// # `assert_matches!` 在 WASM 状态机测试中的应用
-///
 /// `assert_matches!` 允许对复杂枚举状态进行模式匹配断言，
+/// `assert_matches!` to complex enum state ，
 /// 在 WASM 运行时状态机测试中非常有用。
+/// in WASM runtime state machine in useful 。
 pub struct WasmAssertMatchesExamples;
 
 impl WasmAssertMatchesExamples {
     /// 验证模块是否成功加载
+    /// module
     pub fn verify_loaded(state: &WasmLoadState) -> bool {
         assert_matches!(state, WasmLoadState::Instantiated { .. });
         true
     }
 
     /// 验证编译后模块大小
+    /// after module
     pub fn verify_compiled_size(state: &WasmLoadState, expected_min: usize) -> bool {
         assert_matches!(state, WasmLoadState::Compiled { module_size } if *module_size >= expected_min);
         true
@@ -165,20 +166,20 @@ impl WasmAssertMatchesExamples {
 
 use std::sync::LazyLock;
 
-/// # `LazyLock::from` 在 WASM 运行时配置中的应用
-///
-/// WASM 运行时的全局配置可以通过 `LazyLock::from(value)` 直接构造，
 /// 无需显式闭包。
+/// 。
 pub struct WasmLazyLockExamples;
 
 impl WasmLazyLockExamples {
     /// WASM 运行时默认内存限制（页数）
+    /// WASM runtime memory （）
     pub fn default_memory_limit() -> &'static LazyLock<u32> {
         static LIMIT: LazyLock<u32> = LazyLock::new(|| 256);
         &LIMIT
     }
 
     /// WASM 特性标志
+    /// WASM feature mark
     pub fn feature_flags() -> &'static LazyLock<Vec<&'static str>> {
         static FLAGS: LazyLock<Vec<&'static str>> =
             LazyLock::new(|| vec!["bulk-memory", "simd128", "mutable-global"]);

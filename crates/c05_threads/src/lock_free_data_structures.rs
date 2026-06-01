@@ -1,10 +1,7 @@
 #![forbid(unsafe_code)]
 
 //! 无锁数据结构概念解析
-//!
-//! 本模块以概念形式讲解 Treiber Stack 和 Michael-Scott Queue 的核心思想。
-//! 由于本仓库禁止 unsafe 代码，这里使用 `Mutex<Vec<T>>` 与 `Mutex<VecDeque<T>>`
-//! 模拟无锁结构的语义，并详细解释真实 lock-free 实现中的 ABA 问题与内存序。
+//! lock-free data structure concept
 
 use std::collections::VecDeque;
 use std::sync::Mutex;
@@ -14,12 +11,14 @@ use std::sync::Mutex;
 // ============================================================================
 
 /// 内存序（Memory Ordering）概念深度解析
-///
+/// memory （Memory Ordering）concept
 /// 无锁编程的核心在于正确使用原子操作的内存序，以平衡性能与正确性。
+/// lock-free core in atomic operation memory ，performance and 。
 pub struct MemoryOrderingConcept;
 
 impl MemoryOrderingConcept {
     /// 内存序总览
+    /// memory
     pub fn overview() -> &'static str {
         r#"=== 内存序（Memory Ordering）===
         
@@ -38,7 +37,7 @@ impl MemoryOrderingConcept {
 "#
     }
 
-    /// Relaxed 与 Acquire-Release 对比
+    /// Relaxed and Acquire-Release to比
     pub fn relaxed_vs_acq_rel() -> &'static str {
         r#"=== Relaxed vs Acquire/Release ===
 
@@ -65,10 +64,12 @@ SeqCst:
 // ============================================================================
 
 /// ABA 问题及其解决方案概念
+/// ABA problem and its solution concept
 pub struct AbaProblemConcept;
 
 impl AbaProblemConcept {
     /// ABA 问题描述
+    /// ABA problem describe
     pub fn explanation() -> &'static str {
         r#"=== ABA 问题 ===
 
@@ -96,6 +97,7 @@ impl AbaProblemConcept {
     }
 
     /// 为什么 ABA 在无锁结构中特别危险
+    /// as ABA in lock-free structure in
     pub fn why_dangerous() -> &'static str {
         r#"=== 为什么 ABA 特别危险 ===
 
@@ -119,37 +121,40 @@ impl AbaProblemConcept {
 // ============================================================================
 
 /// 概念性 Treiber 栈
-///
-/// 真实实现使用 `AtomicPtr<Node<T>>` 作为 head，通过 CAS 循环完成 push/pop。
-/// 这里使用 `Mutex<Vec<T>>` 模拟相同的 LIFO 语义。
+/// concept Treiber stack
+/// 这里Use `Mutex<Vec<T>>` 模拟相同 LIFO 语义。
+/// Use `Mutex<Vec<T>>` LIFO 。
 pub struct TreiberStack<T> {
     inner: Mutex<Vec<T>>,
 }
 
 impl<T> TreiberStack<T> {
     /// 创建空栈
+    /// stack
     pub fn new() -> Self {
         Self {
             inner: Mutex::new(Vec::new()),
         }
     }
 
-    /// 压栈（模拟 lock-free push 的语义）
+    /// 压stack（模拟 lock-free push 语义）
     pub fn push(&self, value: T) {
         self.inner.lock().expect("锁不应被 poison").push(value);
     }
 
-    /// 出栈（模拟 lock-free pop 的语义）
+    /// 出stack（模拟 lock-free pop 语义）
     pub fn pop(&self) -> Option<T> {
         self.inner.lock().expect("锁不应被 poison").pop()
     }
 
     /// 是否为空
+    /// as
     pub fn is_empty(&self) -> bool {
         self.inner.lock().expect("锁不应被 poison").is_empty()
     }
 
     /// 当前长度
+    /// when before
     pub fn len(&self) -> usize {
         self.inner.lock().expect("锁不应被 poison").len()
     }
@@ -162,10 +167,13 @@ impl<T> Default for TreiberStack<T> {
 }
 
 /// 真实 Treiber Stack 实现差异说明
+/// real Treiber Stack explain
+/// real Treiber Stack Implementation of差异explain
 pub struct TreiberStackRealImpl;
 
 impl TreiberStackRealImpl {
     /// 真实实现与模拟实现的差异
+    /// real and
     pub fn differences() -> &'static str {
         r#"=== 真实 Treiber Stack 实现差异 ===
 
@@ -213,9 +221,6 @@ pop() -> Option<T>:
 // ============================================================================
 
 /// 概念性 Michael-Scott 队列
-///
-/// 真实实现使用两个 `AtomicPtr<Node<T>>` 分别表示 head（出队端）和 tail（入队端）。
-/// 这里使用 `Mutex<VecDeque<T>>` 模拟相同的 FIFO 语义。
 pub struct MichaelScottQueue<T> {
     inner: Mutex<VecDeque<T>>,
 }
@@ -228,22 +233,24 @@ impl<T> MichaelScottQueue<T> {
         }
     }
 
-    /// 入队（模拟 lock-free enqueue 的语义）
+    /// 入队（模拟 lock-free enqueue 语义）
     pub fn enqueue(&self, value: T) {
         self.inner.lock().expect("锁不应被 poison").push_back(value);
     }
 
-    /// 出队（模拟 lock-free dequeue 的语义）
+    /// 出队（模拟 lock-free dequeue 语义）
     pub fn dequeue(&self) -> Option<T> {
         self.inner.lock().expect("锁不应被 poison").pop_front()
     }
 
     /// 是否为空
+    /// as
     pub fn is_empty(&self) -> bool {
         self.inner.lock().expect("锁不应被 poison").is_empty()
     }
 
     /// 当前长度
+    /// when before
     pub fn len(&self) -> usize {
         self.inner.lock().expect("锁不应被 poison").len()
     }
@@ -256,10 +263,12 @@ impl<T> Default for MichaelScottQueue<T> {
 }
 
 /// 真实 Michael-Scott Queue 实现差异说明
+/// real Michael-Scott Queue Implementation of差异explain
 pub struct MichaelScottQueueRealImpl;
 
 impl MichaelScottQueueRealImpl {
     /// 真实实现与模拟实现的差异
+    /// real and
     pub fn differences() -> &'static str {
         r#"=== 真实 Michael-Scott Queue 实现差异 ===
 

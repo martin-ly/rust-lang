@@ -12,7 +12,7 @@
 ## 📑 目录
 
 - [Rust 知识体系内容重构总体规划](#rust-知识体系内容重构总体规划)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [一、内容标准模板（Concept Document Standard Template）](#一内容标准模板concept-document-standard-template)
     - [模块 1: 概念定义（Concept Definition）](#模块-1-概念定义concept-definition)
     - [模块 2: 属性清单（Property Inventory）](#模块-2-属性清单property-inventory)
@@ -43,7 +43,7 @@
     - [交付 3: `unsafe_rust.md` 重构](#交付-3-unsafe_rustmd-重构)
   - [五、风险与应对](#五风险与应对)
   - [六、立即行动项（Next Steps）](#六立即行动项next-steps)
-  - **状态**: 待确认
+  - [**状态**: 待确认](#状态-待确认)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -210,7 +210,7 @@ graph TD
 
 | 优先级 | 文档路径 | 当前行数 | 目标行数 | 核心增补内容 | 表征要求 |
 |--------|----------|----------|----------|--------------|----------|
-| P0 | `03_advanced/async/async_await.md` | 42 | 650+ | Future状态机、Pin/Unpin、Waker、运行时对比(tokio/async-std/smol)、spawn与JoinHandle、取消语义 | 状态图+决策树 |
+| P0 | `03_advanced/async/async_await.md` | 42 | 650+ | Future状态机、Pin/Unpin、Waker、运行时对比(Tokio/smol)、spawn与JoinHandle、取消语义 | 状态图+决策树 |
 | P0 | `03_advanced/concurrency/threads.md` | 48 | 550+ | Send/Sync形式化定义、数据竞争模型、scoped threads (1.63)、thread-local、park/unpark | 矩阵+依赖图 |
 | P0 | `03_advanced/unsafe/unsafe_rust.md` | ~? | 600+ | 不变量契约、裸指针语义、 Miri验证、unsafe guidelines、SAFETY注释规范 | 决策树+反例集 |
 | P0 | `03_advanced/async/async_closure.md` | ~? | 400+ | async move闭包捕获、Fn/FnMut/FnOnce与async的交叉、spawn中的闭包 | 对比矩阵 |
@@ -317,7 +317,7 @@ graph TD
 - 仅 42 行，3 个代码片段
 - 缺少 Future 状态机解释（这是 async Rust 的核心机制）
 - 缺少 Pin/Unpin（自引用类型的关键支撑）
-- 缺少运行时对比（Tokio vs async-std vs smol vs embassy）
+- 缺少运行时对比（Tokio vs async-std [已归档] vs smol vs embassy）
 - 缺少取消语义与 Task 生命周期
 
 **目标结构**（650+ 行，10 模块）：

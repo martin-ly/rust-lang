@@ -1,46 +1,67 @@
 //! 跨模块集成演示程序
-//!
+//! module demonstration program
 //! ## 📐 知识结构
-//!
+//! ## 📐 structure
+//! ## 📐 知识structure
 //! ### 核心概念
-//!
+//! ### core concept
 //! - **模块集成**: 将多个模块组合使用以实现复杂功能
+//! - **module **: will module combination complex functionality
 //!   - **属性**: 模块化、可组合、可扩展
+//!   - **attribute **: module 、combination 、
 //!   - **关系**: 与所有模块相关
-//!
+//!   - ****: and all module
 //! ### 思维导图
-//!
-//! ```text
+//! ###
 //! 跨模块集成
-//! │
+//! module
 //! ├── 基础模块 (C01-C03)
+//! ├── foundation module (C01-C03)
 //! │   ├── 所有权系统
+//! │ ├── ownership system
 //! │   └── 类型系统
+//! │ └── type system
 //! ├── 并发模块 (C05-C06)
+//! ├── concurrency module (C05-C06)
 //! │   ├── 线程管理
+//! │ ├── thread
 //! │   └── 异步编程
+//! │ └── async
 //! ├── 系统模块 (C07, C10)
+//! ├── system module (C07, C10)
 //! │   ├── 进程管理
+//! │ ├── process
 //! │   └── 网络编程
+//! │ └── network programming
 //! └── 应用模块 (C08, C09)
+//! └── application module (C08, C09)
 //!     ├── 算法数据结构
+//!     ├── algorithm data structure
 //!     └── 设计模式
-//! ```
-//!
+//!     └── design
 //! 本示例展示如何将多个模块（C01-C12）的功能整合在一起，
-//! 构建一个完整的 Rust 应用程序。
+//! this example will module （C01-C12）functionality integration in ，
+//! 构建一个complete Rust applicationprogram。
 use std::time::Duration;
 
 /// 跨模块集成演示
-///
+/// module demonstration
 /// 本演示整合了以下模块：
+/// this demonstration integration under module ：
 /// - C01: 所有权和借用
+/// - C01: ownership and borrowing
 /// - C02: 类型系统
+/// - C02: type system
 /// - C05: 线程和并发
+/// - C05: thread and concurrency
 /// - C06: 异步编程
+/// - C06: async
 /// - C07: 进程管理
+/// - C07: process
 /// - C08: 算法和数据结构
+/// - C08: algorithm and data structure
 /// - C10: 网络编程
+/// - C10: network programming
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("🚀 Rust 跨模块集成演示");
@@ -81,6 +102,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 /// C01: 演示所有权和借用
+/// C01: demonstration ownership and borrowing
 fn demonstrate_ownership() {
     use std::sync::Arc;
 
@@ -93,6 +115,7 @@ fn demonstrate_ownership() {
 }
 
 /// C02: 演示类型系统
+/// C02: demonstration type system
 fn demonstrate_type_system() {
     // 泛型函数
     fn find_max<T: Ord>(items: &[T]) -> Option<&T> {
@@ -121,6 +144,7 @@ fn demonstrate_type_system() {
 }
 
 /// C05: 演示线程和并发
+/// C05: demonstration thread and concurrency
 async fn demonstrate_threading() {
     use std::sync::Arc;
     use std::sync::atomic::{AtomicUsize, Ordering};
@@ -147,6 +171,7 @@ async fn demonstrate_threading() {
 }
 
 /// C06: 演示异步编程
+/// C06: demonstration async
 async fn demonstrate_async() {
     use tokio::time::{Instant, sleep};
 
@@ -172,6 +197,7 @@ async fn demonstrate_async() {
 }
 
 /// C08: 演示算法和数据结构
+/// C08: demonstration algorithm and data structure
 fn demonstrate_algorithms() {
     // 快速排序
     fn quicksort<T: Ord + Clone>(arr: &[T]) -> Vec<T> {
@@ -230,6 +256,7 @@ fn demonstrate_algorithms() {
 }
 
 /// 综合应用：任务处理系统
+/// synthesize application ：task system
 async fn demonstrate_integrated_system() -> Result<(), Box<dyn std::error::Error>> {
     use std::sync::Arc;
     use tokio::sync::Mutex;

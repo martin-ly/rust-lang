@@ -1,12 +1,15 @@
 //! 泛型和边界测试
-//!
-//! 测试Rust的泛型系统和类型边界：
+//! generic and edge
 //! - 基本泛型
+//! - this generic
+//! - 基thisgeneric
 //! - 泛型约束
-//! - where子句
+//! - generic
 //! - 生命周期边界
+//! - lifetime edge
 
 /// 测试基本泛型函数
+/// this generic function
 #[test]
 fn test_basic_generic_function() {
     fn identity<T>(x: T) -> T {
@@ -19,6 +22,7 @@ fn test_basic_generic_function() {
 }
 
 /// 测试泛型结构体
+/// generic struct
 #[test]
 fn test_generic_struct() {
     struct Point<T> {
@@ -45,6 +49,7 @@ fn test_generic_struct() {
 }
 
 /// 测试多泛型参数
+/// generic parameter
 #[test]
 fn test_multiple_generic_params() {
     struct Pair<T, U> {
@@ -62,6 +67,7 @@ fn test_multiple_generic_params() {
 }
 
 /// 测试泛型枚举
+/// generic enum
 #[test]
 fn test_generic_enum() {
     enum Result<T, E> {
@@ -79,6 +85,7 @@ fn test_generic_enum() {
 }
 
 /// 测试泛型边界（Trait Bounds）
+/// generic edge （Trait Bounds）
 #[test]
 fn test_trait_bounds() {
     use std::fmt::Display;
@@ -92,6 +99,7 @@ fn test_trait_bounds() {
 }
 
 /// 测试多重边界
+/// edge
 #[test]
 fn test_multiple_bounds() {
     use std::fmt::Debug;
@@ -108,7 +116,6 @@ fn test_multiple_bounds() {
     compare_and_print(1, 2);
 }
 
-/// 测试where子句
 #[test]
 fn test_where_clause() {
     fn some_function<T, U>(t: T, u: U) -> i32
@@ -126,6 +133,7 @@ fn test_where_clause() {
 }
 
 /// 测试默认泛型类型
+/// generic type
 #[test]
 fn test_default_generic_type() {
     trait Add<Rhs = Self> {
@@ -158,6 +166,7 @@ fn test_default_generic_type() {
 }
 
 /// 测试泛型方法
+/// generic method
 #[test]
 fn test_generic_methods() {
     struct Container<T> {
@@ -186,6 +195,7 @@ fn test_generic_methods() {
 }
 
 /// 测试常量泛型
+/// constant generic
 #[test]
 fn test_const_generics() {
     struct Array<T, const N: usize> {
@@ -210,6 +220,7 @@ fn test_const_generics() {
 }
 
 /// 测试泛型与生命周期结合
+/// generic and lifetime
 #[test]
 fn test_generic_with_lifetimes() {
     struct Ref<'a, T: 'a> {
@@ -232,6 +243,7 @@ fn test_generic_with_lifetimes() {
 }
 
 /// 测试关联类型的泛型实现
+/// associated type generic
 #[test]
 fn test_associated_types_with_generics() {
     trait Container {

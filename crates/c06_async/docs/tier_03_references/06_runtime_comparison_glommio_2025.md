@@ -1,8 +1,10 @@
-# Rust 异步运行时深度对比 2025: Glommio vs Tokio vs Smol vs async-std
+> ⚠️ **归档说明**: async-std [已归档] 已于 2025年3月停止维护。本文档中 async-std [已归档] 相关内容仅作历史参考，新项目请使用 Tokio 或 smol。
+>
+# Rust 异步运行时深度对比 2025: Glommio vs Tokio vs Smol
 
 ## 目录
 
-- [Rust 异步运行时深度对比 2025: Glommio vs Tokio vs Smol vs async-std](#rust-异步运行时深度对比-2025-glommio-vs-tokio-vs-smol-vs-async-std)
+- [Rust 异步运行时深度对比 2025: Glommio vs Tokio vs Smol](#rust-异步运行时深度对比-2025-glommio-vs-tokio-vs-smol-vs-async-std [已归档])
   - [目录](#目录)
   - [📐 知识结构](#-知识结构)
     - [概念定义](#概念定义)
@@ -16,7 +18,7 @@
     - [2.1 Glommio: Thread-per-core](#21-glommio-thread-per-core)
     - [2.2 Tokio: Work-stealing](#22-tokio-work-stealing)
     - [2.3 Smol: 轻量级多模式](#23-smol-轻量级多模式)
-    - [2.4 async-std: 标准库风格](#24-async-std-标准库风格)
+    - [2.4 async-std [已归档]: 标准库风格](#24-async-std [已归档]-标准库风格)
   - [3. 性能基准测试](#3-性能基准测试)
     - [3.1 延迟对比](#31-延迟对比)
     - [3.2 吞吐量对比](#32-吞吐量对比)
@@ -31,7 +33,7 @@
     - [7.1 Glommio 适用场景](#71-glommio-适用场景)
     - [7.2 Tokio 适用场景](#72-tokio-适用场景)
     - [7.3 Smol 适用场景](#73-smol-适用场景)
-    - [7.4 async-std 适用场景](#74-async-std-适用场景)
+    - [7.4 async-std [已归档] 适用场景](#74-async-std [已归档]-适用场景)
   - [8. 代码对比](#8-代码对比)
     - [8.1 基础示例](#81-基础示例)
     - [8.2 并发任务](#82-并发任务)
@@ -55,11 +57,11 @@
 
 **异步运行时深度对比 (Async Runtime Deep Comparison)**:
 
-- **定义**: Rust 异步运行时深度对比，包括 Glommio、Tokio、Smol、async-std
+- **定义**: Rust 异步运行时深度对比，包括 Glommio、Tokio、Smol、async-std [已归档]
 - **类型**: 对比分析文档
 - **范畴**: 异步编程、运行时对比
 - **版本**: Rust 1.92.0+, 2025
-- **相关概念**: 异步运行时、Glommio、Tokio、Smol、async-std、性能对比
+- **相关概念**: 异步运行时、Glommio、Tokio、Smol、async-std [已归档]、性能对比
 
 ### 属性特征
 
@@ -111,7 +113,7 @@
 
 ### 1.1 运行时特性对比
 
-| 特性 | Glommio | Tokio  | Smol | async-std |
+| 特性 | Glommio | Tokio  | Smol | async-std [已归档] |
 | :--- | :--- | :--- | :--- | :--- |
 | **架构模型**     | Thread-per-core | Work-stealing   | 单线程/多线程  | Work-stealing   |
 | **平台支持**     | Linux only      | 跨平台          | 跨平台         | 跨平台          |
@@ -147,7 +149,7 @@
     │                                       │
     │                                       └──> Smol (轻量级)
     │
-    ├─ 追求简单易用? ──Yes──> async-std ✅ (标准库风格)
+    ├─ 追求简单易用? ──Yes──> async-std [已归档] ✅ (标准库风格)
     │
     └─ 嵌入式/资源受限? ──Yes──> Smol ✅ (最小占用)
 ```
@@ -245,11 +247,11 @@
 - ✅ 小内存占用
 - ⚠️ 性能中等
 
-### 2.4 async-std: 标准库风格
+### 2.4 async-std [已归档]: 标准库风格
 
 ```text
 ┌──────────────────────────────────────────┐
-│          async-std 架构                  │
+│          async-std [已归档] 架构                  │
 ├──────────────────────────────────────────┤
 │  与标准库 API 相似的接口                   │
 │  ┌──────────────────┐                    │
@@ -282,7 +284,7 @@
 | :--- | :--- | :--- | :--- | :--- || **Glommio**   | 80μs  | 95μs  | 120μs | 200μs |
 | **Tokio**     | 180μs | 250μs | 400μs | 600μs |
 | **Smol**      | 140μs | 200μs | 350μs | 500μs |
-| **async-std** | 220μs | 320μs | 500μs | 800μs |
+| **async-std [已归档]** | 220μs | 320μs | 500μs | 800μs |
 
 **结论**: Glommio 在所有延迟指标上都具有显著优势。
 
@@ -292,7 +294,7 @@
 | :--- | :--- | :--- | :--- || **Glommio**   | 2,150,000    | 8,500         | 15,000,000  |
 | **Tokio**     | 1,280,000    | 6,200         | 10,000,000  |
 | **Smol**      | 1,450,000    | 6,800         | 12,000,000  |
-| **async-std** | 1,050,000    | 5,500         | 8,000,000   |
+| **async-std [已归档]** | 1,050,000    | 5,500         | 8,000,000   |
 
 **结论**: Glommio 吞吐量领先 70%+。
 
@@ -302,7 +304,7 @@
 | :--- | :--- | :--- | :--- || **Glommio**   | 2KB        | 5MB            | 205MB           |
 | **Tokio**     | 5KB        | 10MB           | 510MB           |
 | **Smol**      | 3KB        | 3MB            | 303MB           |
-| **async-std** | 6KB        | 12MB           | 612MB           |
+| **async-std [已归档]** | 6KB        | 12MB           | 612MB           |
 
 **结论**: Glommio 和 Smol 在内存效率上表现最佳。
 
@@ -312,7 +314,7 @@
 | :--- | :--- | :--- | :--- || **Glommio**   | 98%        | 0.1%            | 1,000         |
 | **Tokio**     | 92%        | 2.5%            | 50,000        |
 | **Smol**      | 94%        | 1.8%            | 30,000        |
-| **async-std** | 88%        | 3.2%            | 60,000        |
+| **async-std [已归档]** | 88%        | 3.2%            | 60,000        |
 
 **结论**: Glommio 的 CPU 效率最高，上下文切换最少。
 
@@ -328,7 +330,7 @@
 | :--- | :--- | :--- | :--- || **Glommio**   | 8,500         | 3,200         | 7,800       |
 | **Tokio**     | 6,200         | 2,100         | 5,500       |
 | **Smol**      | 6,800         | 2,400         | 6,000       |
-| **async-std** | 5,500         | 1,800         | 4,800       |
+| **async-std [已归档]** | 5,500         | 1,800         | 4,800       |
 
 ### 4.2 网络 I/O
 
@@ -338,13 +340,13 @@
 | :--- | :--- | :--- | :--- || **Glommio**   | 2,150,000      | 95            | 17.2        |
 | **Tokio**     | 1,280,000      | 250           | 10.2        |
 | **Smol**      | 1,450,000      | 200           | 11.6        |
-| **async-std** | 1,050,000      | 320           | 8.4         |
+| **async-std [已归档]** | 1,050,000      | 320           | 8.4         |
 
 ---
 
 ## 5. 并发模型对比
 
-| 特性             | Glommio      | Tokio    | Smol     | async-std |
+| 特性             | Glommio      | Tokio    | Smol     | async-std [已归档] |
 | :--- | :--- | :--- | :--- | :--- || **任务创建开销** | 极低         | 低       | 低       | 中        |
 | **任务调度**     | 固定核心     | 动态窃取 | 简单队列 | 动态调度  |
 | **负载均衡**     | 手动         | 自动     | 手动     | 自动      |
@@ -357,14 +359,14 @@
 
 ## 6. 生态系统对比
 
-| 库/框架         | Glommio   | Tokio             | Smol           | async-std          |
+| 库/框架         | Glommio   | Tokio             | Smol           | async-std [已归档]          |
 | :--- | :--- | :--- | :--- | :--- || **HTTP 客户端** | ⚠️ 有限   | ✅ reqwest, hyper | ✅ surf, isahc | ✅ surf            |
 | **HTTP 服务器** | ⚠️ 自定义 | ✅ axum, warp     | ✅ tide        | ✅ tide            |
 | **数据库**      | ❌ 少     | ✅ sqlx, diesel   | ⚠️ 有限        | ✅ sqlx            |
 | **gRPC**        | ❌ 无     | ✅ tonic          | ❌ 无          | ❌ 无              |
 | **消息队列**    | ⚠️ 有限   | ✅ lapin, rdkafka | ⚠️ 有限        | ⚠️ 有限            |
 | **Redis**       | ⚠️ 可集成 | ✅ redis-rs       | ✅ redis-rs    | ✅ redis-rs        |
-| **测试框架**    | ⚠️ 基本   | ✅ tokio::test    | ⚠️ 基本        | ✅ async-std::test |
+| **测试框架**    | ⚠️ 基本   | ✅ tokio::test    | ⚠️ 基本        | ✅ async-std [已归档]::test |
 
 **结论**: Tokio 生态系统最成熟，Glommio 生态较小但正在增长。
 
@@ -453,7 +455,7 @@
 - 极高性能要求
 - 企业级应用
 
-### 7.4 async-std 适用场景
+### 7.4 async-std [已归档] 适用场景
 
 ✅ **最适合**:
 
@@ -514,7 +516,7 @@ fn main() {
 }
 ```
 
-**async-std**:
+**async-std [已归档]**:
 
 ```rust
 #[async_std::main]
@@ -608,14 +610,14 @@ async fn main() {
    │      ／        ／
    │    ／        ／      ● Smol
    │  ／        ／      ／
-   │／        ／      ／     ● async-std
+   │／        ／      ／     ● async-std [已归档]
    └────────────────────────────────> 时间
    0天      1周     1月    3月
 ```
 
 **学习时间估计**:
 
-- **async-std**: 1-2周 (如果熟悉标准库)
+- **async-std [已归档]**: 1-2周 (如果熟悉标准库)
 - **Smol**: 1-2周 (简单易懂)
 - **Tokio**: 2-4周 (生态丰富但需要时间)
 - **Glommio**: 4-8周 (需要理解 thread-per-core 模型)
@@ -624,7 +626,7 @@ async fn main() {
 
 ## 10. 生产环境考量
 
-| 考量因素     | Glommio  | Tokio      | Smol     | async-std |
+| 考量因素     | Glommio  | Tokio      | Smol     | async-std [已归档] |
 | :--- | :--- | :--- | :--- | :--- || **稳定性**   | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐  |
 | **可维护性** | ⭐⭐⭐   | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐  |
 | **监控工具** | ⭐⭐⭐   | ⭐⭐⭐⭐⭐ | ⭐⭐⭐   | ⭐⭐⭐    |
@@ -724,7 +726,7 @@ async fn main() {
 | :--- | :--- || **Glommio**   | • 更好的跨平台支持 (io_uring for Windows?)<br>• 增强的生态系统<br>• 更多企业采用 |
 | **Tokio**     | • 继续主导地位<br>• 更多优化<br>• 更好的 async trait 支持                        |
 | **Smol**      | • 保持轻量级定位<br>• 嵌入式场景增长<br>• 与 Tokio 互操作改进                    |
-| **async-std** | • 逐步减少新特性<br>• 维护现有用户<br>• 可能被其他运行时替代                     |
+| **async-std [已归档]** | • 逐步减少新特性<br>• 维护现有用户<br>• 可能被其他运行时替代                     |
 
 ---
 
@@ -758,7 +760,7 @@ async fn main() {
 └─────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────┐
-│ 选择 async-std 如果:                        │
+│ 选择 async-std [已归档] 如果:                        │
 │ ✅ 从同步代码迁移                          │
 │ ✅ 学习异步编程                            │
 │ ✅ 需要标准库风格 API                      │
@@ -771,7 +773,7 @@ async fn main() {
 1. **新项目**: 优先考虑 **Tokio** (最安全的选择)
 2. **高性能项目**: 评估 **Glommio** (Linux 专用)
 3. **轻量级项目**: 考虑 **Smol** (小内存占用)
-4. **学习项目**: 使用 **async-std** (易于理解)
+4. **学习项目**: 使用 **async-std [已归档]** (易于理解)
 
 ---
 
@@ -784,7 +786,7 @@ async fn main() {
 - [Glommio 官方文档](https://docs.rs/glommio)
 - [Tokio 官方文档](https://docs.rs/tokio)
 - [Smol 官方文档](https://docs.rs/smol)
-- [async-std 官方文档](https://docs.rs/async-std)
+- [async-std [已归档] 官方文档](<https://docs.rs/async-std> [已归档])
 
 ---
 

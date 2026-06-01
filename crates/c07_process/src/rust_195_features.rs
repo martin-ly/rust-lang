@@ -1,12 +1,18 @@
 //! Rust 1.95 特性 —— 进程管理场景
+//! Rust 1.95 feature —— process scenario
 //!
 //! # 概述
+//! #
 //!
 //! Rust 1.95 在进程管理和系统编程方面的增强：
+//! Rust 1.95 in process and system surface ：
 //! - **`Atomic*::update`/`try_update`** — 进程间共享计数器（如信号量）
+//! - **`Atomic*::update`/`try_update`** — process （semaphore ）
 //! - **`core::hint::cold_path`** — fork/spawn 失败路径优化
 //! - **`if let` guards** — 进程状态转换条件匹配
+//! - **`if let` guards** — process state conversion condition
 //! - **`cfg_select!`** — 跨平台进程创建标志
+//! - **`cfg_select!`** — platform process mark
 
 use std::sync::atomic::{AtomicI32, AtomicUsize, Ordering};
 
@@ -15,22 +21,27 @@ use std::sync::atomic::{AtomicI32, AtomicUsize, Ordering};
 // ============================================================================
 
 /// # 进程间原子操作
+/// # process atomic operation
 ///
 /// 在多进程环境中（如通过共享内存），原子操作是协调的基础。
+/// in process environment in （shared memory ），atomic operation foundation 。
 pub struct ProcessAtomicExamples;
 
 impl ProcessAtomicExamples {
     /// 子进程计数器递增（用于进程池管理）
+    /// process （process ）
     pub fn fork_child_counter(counter: &AtomicUsize) -> usize {
         counter.update(Ordering::SeqCst, Ordering::Relaxed, |old| old + 1)
     }
 
     /// 子进程计数器递减
+    /// process
     pub fn reap_child_counter(counter: &AtomicUsize) -> usize {
         counter.update(Ordering::SeqCst, Ordering::Relaxed, |old| old.saturating_sub(1))
     }
 
     /// 信号量 P 操作（尝试获取资源）
+    /// semaphore P （）
     pub fn semaphore_try_acquire(sem: &AtomicI32) -> Result<i32, i32> {
         sem.try_update(Ordering::Acquire, Ordering::Relaxed, |value| {
             if value > 0 {
@@ -42,11 +53,13 @@ impl ProcessAtomicExamples {
     }
 
     /// 信号量 V 操作（释放资源）
+    /// semaphore V （）
     pub fn semaphore_release(sem: &AtomicI32) -> i32 {
         sem.update(Ordering::Release, Ordering::Relaxed, |value| value + 1)
     }
 
     /// 共享内存引用计数（用于 mmap 区域生命周期）
+    /// shared memory reference counting （ mmap area lifetime ）
     pub fn shm_ref_count_increment(counter: &AtomicUsize) -> usize {
         counter.update(Ordering::SeqCst, Ordering::SeqCst, |old| old + 1)
     }
@@ -57,12 +70,15 @@ impl ProcessAtomicExamples {
 // ============================================================================
 
 /// # 进程创建错误路径优化
+/// # process optimization
 ///
 /// fork/spawn 失败在正常运行中应该是极少数情况。
+/// fork/spawn in Run in should situation 。
 pub struct ProcessColdPathExamples;
 
 impl ProcessColdPathExamples {
     /// 处理 spawn 结果：失败路径为冷
+    /// spawn result ：as
     pub fn handle_spawn_result<T>(result: Result<T, std::io::Error>) -> Option<T> {
         match result {
             Ok(handle) => Some(handle),
@@ -74,6 +90,7 @@ impl ProcessColdPathExamples {
     }
 
     /// 处理 waitpid 结果：异常子进程状态为冷
+    /// waitpid result ：process state as
     pub fn handle_wait_status(status: std::process::ExitStatus) -> Result<(), &'static str> {
         if status.success() {
             Ok(())
@@ -89,12 +106,15 @@ impl ProcessColdPathExamples {
 // ============================================================================
 
 /// # 进程生命周期状态机
+/// # process lifetime state machine
 ///
 /// 使用 `if let` guards 处理进程状态转换。
+/// `if let` guards process state conversion 。
 pub struct ProcessStateMachineExamples;
 
 impl ProcessStateMachineExamples {
     /// 进程池状态转换
+    /// process state conversion
     pub fn pool_state_transition(
         current: &str,
         event: &str,
@@ -111,6 +131,7 @@ impl ProcessStateMachineExamples {
     }
 
     /// 信号处理：仅对特定状态转发信号
+    /// ：to state
     pub fn route_signal(pid: Option<u32>, signal: i32, running: bool) -> bool {
         matches!((pid, signal), (Some(_), sig) if sig > 0 && running)
     }
@@ -121,12 +142,15 @@ impl ProcessStateMachineExamples {
 // ============================================================================
 
 /// # 跨平台进程管理抽象
+/// # platform process
 ///
 /// `cfg_select!` 提供了进程创建和管理相关的平台差异抽象。
+/// `cfg_select!` process and platform 。
 pub struct ProcessCfgSelectExamples;
 
 impl ProcessCfgSelectExamples {
     /// 进程栈大小推荐值（平台特定）
+    /// process stack （platform ）
     pub const DEFAULT_STACK_SIZE: usize = cfg_select! {
         target_os = "linux" => 8 * 1024 * 1024,     // 8 MB
         target_os = "macos" => 8 * 1024 * 1024,     // 8 MB
@@ -135,6 +159,7 @@ impl ProcessCfgSelectExamples {
     };
 
     /// 最大进程数软限制推荐值
+    /// maximum process
     pub const MAX_PROCESSES_RECOMMENDED: usize = cfg_select! {
         target_os = "linux" => 32768,
         target_os = "macos" => 2666,
@@ -143,6 +168,7 @@ impl ProcessCfgSelectExamples {
     };
 
     /// 是否支持 fork()
+    /// fork()
     pub const HAS_FORK: bool = cfg_select! {
         target_family = "unix" => true,
         target_family = "windows" => false,

@@ -1,27 +1,26 @@
 //! QEMU 仿真演示
-//!
+//! QEMU demonstration
+//! QEMU 仿真Demonstration of
 //! 本示例展示如何在 QEMU 中运行 bare-metal Rust 程序。
-//!
+//! this example in QEMU in Run bare-metal Rust program 。
 //! ## 环境准备
-//!
-//! ```bash
+//! ## environment
 //! # 安装 QEMU（ARM 版本）
-//! # Ubuntu: sudo apt install qemu-system-arm
-//! # macOS: brew install qemu
+//! # QEMU（ARM this ）
+//! # 安装 QEMU（ARM 版this）
 //! # Windows: 从 QEMU 官网下载安装包
-//!
+//! # Windows: from QEMU under
 //! # 安装目标平台
-//! rustup target add thumbv7m-none-eabi
-//! ```
+//! # goal platform
+//! # 安装goalplatform
 //!
 //! ## 编译和运行
-//!
-//! ```bash
+//! ## and Run
 //! # 编译示例（以 STM32F103 为例）
-//! cargo build --example qemu_demo --target thumbv7m-none-eabi --features c13_embedded/embedded
-//!
+//! # example （ STM32F103 as ）
+//! # 编译Example of（以 STM32F103 as例）
 //! # 使用 QEMU 运行
-//! qemu-system-arm -cpu cortex-m3 -machine stm32-f103c8 -nographic -kernel target/thumbv7m-none-eabi/debug/examples/qemu_demo
+//! # QEMU Run
 //! ```
 
 #![cfg_attr(target_arch = "arm", no_std)]
@@ -33,7 +32,6 @@ use panic_halt as _;
 #[cfg(target_arch = "arm")]
 use cortex_m_rt::entry;
 
-/// Host 目标下的说明
 #[cfg(not(target_arch = "arm"))]
 fn main() {
     println!("=== QEMU 演示 ===");
@@ -54,7 +52,7 @@ fn main() {
     println!("注意: 实际运行需要正确的链接脚本和启动代码 (cortex-m-rt 自动处理)。");
 }
 
-/// ARM 目标下的 QEMU 入口
+/// ARM goalunder QEMU 入口
 #[cfg(target_arch = "arm")]
 #[entry]
 fn main() -> ! {

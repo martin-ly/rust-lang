@@ -1,7 +1,5 @@
-//! 简易同步 watch 通道：广播最新值的单生产者-多消费者模型（最小子集）。
 //! 用法：
-//! ```ignore
-//! use c05_threads::message_passing::watch;
+//! ：
 //! let (tx, rx) = watch::channel(0u32);
 //! tx.send(1);
 //! assert_eq!(*rx.borrow(), 1);
@@ -101,14 +99,12 @@ impl<T: Clone> Receiver<T> {
         guard.closed
     }
 
-    /// 返回当前值并将 last_seen 更新为最新版本
     pub fn borrow_and_update(&self, last_seen: &mut u64) -> T {
         let guard = self.inner.state.lock().unwrap();
         *last_seen = guard.version;
         guard.value.clone()
     }
 
-    /// 检查自 last_seen 以来是否有更新（不改变 last_seen）
     pub fn has_changed(&self, last_seen: u64) -> bool {
         let guard = self.inner.state.lock().unwrap();
         guard.version != last_seen

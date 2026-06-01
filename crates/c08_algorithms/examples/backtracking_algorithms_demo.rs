@@ -1,12 +1,17 @@
 //! 回溯算法示例
-//!
+//! backtracking algorithm example
 //! 本示例展示C08算法模块的回溯算法：
+//! this example C08algorithm module backtracking algorithm ：
 //! - N皇后问题
+//! - Nafter problem
+//! - N皇afterproblem
 //! - 全排列
+//! - arrangement
+//! - 全arrangement
 //! - 子集生成
-//!
+//! - subset
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example backtracking_algorithms_demo
 //! ```
 fn main() {
@@ -50,6 +55,8 @@ fn main() {
 }
 
 /// N皇后问题
+/// Nafter problem
+/// N皇afterproblem
 fn n_queens(n: usize) -> Vec<Vec<usize>> {
     let mut solutions = Vec::new();
     let mut board = vec![0; n];
@@ -84,6 +91,7 @@ fn n_queens(n: usize) -> Vec<Vec<usize>> {
 }
 
 /// 生成全排列
+/// arrangement
 fn generate_permutations(nums: &[i32]) -> Vec<Vec<i32>> {
     if nums.is_empty() {
         return vec![vec![]];
@@ -104,6 +112,7 @@ fn generate_permutations(nums: &[i32]) -> Vec<Vec<i32>> {
 }
 
 /// 生成所有子集
+/// all subset
 fn generate_subsets(nums: &[i32]) -> Vec<Vec<i32>> {
     let mut result = vec![vec![]];
 

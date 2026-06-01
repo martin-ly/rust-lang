@@ -1,28 +1,30 @@
-//! gRPC 服务器示例
-//!
 //! ## 📐 知识结构
-//!
+//! ## 📐 structure
+//! ## 📐 知识structure
 //! ### 核心概念
-//!
-//! - **gRPC**: 高性能、跨语言的RPC框架
+//! ### core concept
 //!   - **属性**: Protocol Buffers、HTTP/2、流式传输、跨语言
 //!   - **关系**: 与RPC、微服务、网络编程相关
+//!   - ****: and RPC、microservice 、network programming
 #![allow(clippy::default_constructed_unit_structs)]
 
 //! ### 思维导图
-//!
-//! ```text
-//! gRPC 服务器演示
-//! │
+//! ###
 //! ├── 服务定义
-//! │   └── Protocol Buffers
+//! ├── definition
+//! ├── 服务definition
 //! ├── 服务实现
-//! │   └── Trait实现
+//! ├──
+//! ├── 服务Implementation of
 //! ├── 服务器启动
-//! │   └── Tonic服务器
+//! ├──
+//! ├── 服务器Start
+//! ├── Start
 //! └── 请求处理
+//! └──
+//! └── 请求Handle
 //!     └── 异步处理
-//! ```
+//!     └── async
 use c10_networks::hello::{HelloReply, HelloRequest};
 use tonic::{Request, Response, Status};
 

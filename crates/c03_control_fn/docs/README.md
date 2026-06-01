@@ -338,7 +338,7 @@ cargo doc --open --package c03_control_fn
 **异步编程**：
 
 - [tokio](https://docs.rs/tokio/) - 异步运行时
-- [async-std](https://docs.rs/async-std/) - 异步标准库
+- [smol](https://docs.rs/smol/) - 轻量异步运行时
 
 ## 🤝 贡献与反馈
 
@@ -407,6 +407,7 @@ _最后更新：2025年1月_
 _文档版本：v2.0_
 _Rust 版本：1.93.0+_
 _维护团队：Rust 学习社区_
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

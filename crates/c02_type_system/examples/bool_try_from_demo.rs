@@ -1,12 +1,7 @@
-//! Rust 1.95.0 `bool: TryFrom<{integer}>` 专题示例
-//!
-//! Rust 1.95.0 稳定化了 `bool: TryFrom<{integer}>`，
-//! 允许安全地将整数转换为 `bool`（仅 0 → false，1 → true，其他值返回 Err）。
-//!
 //! 权威来源: https://releases.rs/docs/1.95.0/
-//!
+//! 权威source: https://releases.rs/docs/1.95.0/
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example bool_try_from_demo -p c02_type_system
 //! ```
 
@@ -43,7 +38,6 @@ fn demo_basic_try_from() {
 
 // ==================== 示例 2: FFI 边界 — C 布尔值转换 ====================
 
-/// 从 C API 接收整数标志并安全转换为 bool
 fn demo_ffi_boolean() {
     println!("\n--- FFI: C 整数标志安全转换 ---");
 
@@ -78,6 +72,7 @@ fn demo_ffi_boolean() {
 // ==================== 示例 3: 数据库 / 配置文件解析 ====================
 
 /// 从数据库或配置文件中读取整数字段并验证
+/// from database or in field and
 fn demo_config_parsing() {
     println!("\n--- 配置解析: 数据库/JSON 整数字段 ---");
 
@@ -127,6 +122,7 @@ fn demo_config_parsing() {
 // ==================== 示例 4: 网络协议 — 二进制标志位 ====================
 
 /// 解析网络协议中的标志字节
+/// network protocol in mark
 fn demo_network_protocol() {
     println!("\n--- 网络协议: 二进制标志解析 ---");
 
@@ -157,6 +153,7 @@ fn demo_network_protocol() {
 // ==================== 示例 5: 与 as bool / != 0 的对比 ====================
 
 /// 对比安全转换与危险转换
+/// to conversion and conversion
 fn demo_comparison() {
     println!("\n--- 安全 vs 危险转换对比 ---");
 
@@ -185,7 +182,6 @@ fn demo_comparison() {
 
 // ==================== 示例 6: 泛型函数中的使用 ====================
 
-/// 泛型地处理整数到 bool 的转换
 fn demo_generic_conversion() {
     println!("\n--- 泛型: 整数到 bool 的通用解析 ---");
 

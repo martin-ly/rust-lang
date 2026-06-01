@@ -1,23 +1,24 @@
 //! Rust 1.97 特性跟踪模块 —— 过程宏
+//! Rust 1.97 feature module ——
 #![allow(clippy::incompatible_msrv, dead_code)]
 
 /// # Rust 1.97 特性演示
-///
-/// 展示 `std::iter::repeat_n` 和 `Option::is_none_or` 在过程宏中的应用。
+/// # Rust 1.97 feature demonstration
 pub struct Rust197Features;
 
 impl Rust197Features {
-    /// 使用 `repeat_n` 生成重复的派生属性
     pub fn repeat_derives(trait_name: &str, count: usize) -> Vec<String> {
         std::iter::repeat_n(format!("#[derive({})]", trait_name), count).collect()
     }
 
     /// 使用 `Option::is_none_or` 验证可选宏属性
+    /// `Option::is_none_or` attribute
     pub fn is_valid_attribute(attr: Option<&str>) -> bool {
         attr.is_none_or(|a| !a.is_empty())
     }
 
     /// 组合两者检查宏输入
+    /// combination
     pub fn check_macro_input(input: Option<&str>, expected_len: usize) -> Vec<String> {
         match input {
             Some(a) if !a.is_empty() => std::iter::repeat_n(a.to_string(), expected_len).collect(),

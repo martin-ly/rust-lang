@@ -1,13 +1,17 @@
 //! # 优化算法模块
+//! # optimization algorithm module
 //!
 //! 本模块实现了各种优化算法。
+//! this module optimization algorithm 。
 //use serde::{Serialize, Deserialize};
 
 /// 优化算法实现
+/// optimization algorithm
 pub struct OptimizationAlgorithms;
 
 impl OptimizationAlgorithms {
     /// 梯度下降
+    /// gradient descent
     pub fn gradient_descent(
         initial_x: f64,
         learning_rate: f64,
@@ -31,6 +35,7 @@ impl OptimizationAlgorithms {
     }
 
     /// 计算梯度（示例函数：f(x) = x^2）
+    /// gradient （example function ：f(x) = x^2）
     fn compute_gradient(x: f64) -> f64 {
         2.0 * x
     }
@@ -73,6 +78,7 @@ impl OptimizationAlgorithms {
     }
 
     /// 成本函数（示例：f(x) = x^2）
+    /// cost function （example ：f(x) = x^2）
     fn cost_function(x: f64) -> f64 {
         x * x
     }

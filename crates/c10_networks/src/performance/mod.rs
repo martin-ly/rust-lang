@@ -1,7 +1,8 @@
 //! 性能优化模块
-//!
-//! 本模块提供了基于 Rust 1.92.0 的性能优化功能，
+//! performance optimization module
 //! 包括内存池、零拷贝优化、缓存管理等。
+//! memory pool 、optimization 、etc. 。
+//! 包括memory pool、零拷贝optimization、缓存管理etc.。
 pub mod cache;
 pub mod memory_pool;
 pub mod metrics;
@@ -16,6 +17,7 @@ use std::sync::Arc;
 use std::time::{Duration, Instant};
 
 /// 性能配置
+/// performance
 #[derive(Debug, Clone)]
 pub struct PerformanceConfig {
     pub memory_pool_size: usize,
@@ -38,6 +40,7 @@ impl Default for PerformanceConfig {
 }
 
 /// 性能管理器
+/// performance
 #[allow(unused)]
 pub struct PerformanceManager {
     config: PerformanceConfig,
@@ -49,6 +52,7 @@ pub struct PerformanceManager {
 
 impl PerformanceManager {
     /// 创建新的性能管理器
+    /// performance
     pub fn new(config: PerformanceConfig) -> Self {
         let memory_pool = Arc::new(MemoryPool::new(config.memory_pool_size));
         let cache = Arc::new(Cache::new(config.cache_size));
@@ -64,6 +68,7 @@ impl PerformanceManager {
     }
 
     /// 获取内存池
+    /// memory pool
     pub fn memory_pool(&self) -> Arc<MemoryPool> {
         self.memory_pool.clone()
     }
@@ -74,11 +79,13 @@ impl PerformanceManager {
     }
 
     /// 获取指标收集器
+    /// indicator
     pub fn metrics(&self) -> Arc<MetricsCollector> {
         self.metrics.clone()
     }
 
     /// 获取性能统计信息
+    /// performance
     pub fn get_stats(&self) -> PerformanceStats {
         PerformanceStats {
             uptime: self.created_at.elapsed(),
@@ -89,6 +96,7 @@ impl PerformanceManager {
     }
 
     /// 清理资源
+    /// Clean up资源
     pub async fn cleanup(&self) -> NetworkResult<()> {
         // 清理内存池
         self.memory_pool.cleanup().await?;
@@ -103,6 +111,7 @@ impl PerformanceManager {
     }
 
     /// 优化性能
+    /// optimization performance
     pub async fn optimize(&self) -> NetworkResult<()> {
         // 执行垃圾回收
         self.memory_pool.gc().await?;
@@ -118,6 +127,7 @@ impl PerformanceManager {
 }
 
 /// 性能统计信息
+/// performance
 #[derive(Debug, Clone)]
 pub struct PerformanceStats {
     pub uptime: Duration,
@@ -127,6 +137,7 @@ pub struct PerformanceStats {
 }
 
 /// 零拷贝缓冲区
+/// buffering
 pub struct ZeroCopyBuffer {
     data: PooledBytes,
     offset: usize,
@@ -135,6 +146,7 @@ pub struct ZeroCopyBuffer {
 
 impl ZeroCopyBuffer {
     /// 创建新的零拷贝缓冲区
+    /// buffering
     pub fn new(pool: Arc<MemoryPool>, size: usize) -> NetworkResult<Self> {
         let data = pool.allocate(size)?;
         Ok(Self {
@@ -176,11 +188,13 @@ impl ZeroCopyBuffer {
     }
 
     /// 获取当前长度
+    /// when before
     pub fn len(&self) -> usize {
         self.length
     }
 
     /// 检查是否为空
+    /// as
     pub fn is_empty(&self) -> bool {
         self.length == 0
     }
@@ -206,6 +220,7 @@ impl<T> BatchProcessor<T> {
     }
 
     /// 添加项目到批次
+    /// project to
     pub fn add(&mut self, item: T) -> Option<Vec<T>> {
         self.items.push(item);
 
@@ -223,22 +238,26 @@ impl<T> BatchProcessor<T> {
     }
 
     /// 检查是否应该刷新
+    /// should
     fn should_flush(&self) -> bool {
         self.last_flush.elapsed() >= self.timeout
     }
 
     /// 获取当前批次大小
+    /// when before
     pub fn current_size(&self) -> usize {
         self.items.len()
     }
 
     /// 检查批次是否为空
+    /// as
     pub fn is_empty(&self) -> bool {
         self.items.is_empty()
     }
 }
 
 /// 性能监控器
+/// performance
 pub struct PerformanceMonitor {
     metrics: Arc<MetricsCollector>,
     start_time: Instant,
@@ -247,6 +266,7 @@ pub struct PerformanceMonitor {
 
 impl PerformanceMonitor {
     /// 创建新的性能监控器
+    /// performance
     pub fn new(metrics: Arc<MetricsCollector>) -> Self {
         Self {
             metrics,
@@ -261,11 +281,14 @@ impl PerformanceMonitor {
     }
 
     /// 记录内存使用
+    /// memory
     pub fn record_memory_usage(&self, bytes: usize) {
         self.metrics.record_memory_usage(bytes);
     }
 
     /// 记录网络 I/O
+    /// network I/O
+    /// 记录network I/O
     pub fn record_network_io(&self, bytes: usize, is_read: bool) {
         self.metrics.record_network_io(bytes, is_read);
     }
@@ -276,6 +299,7 @@ impl PerformanceMonitor {
     }
 
     /// 获取性能报告
+    /// performance
     pub fn get_report(&self) -> PerformanceReport {
         let metrics = self.metrics.get_metrics();
         let uptime = self.start_time.elapsed();
@@ -306,6 +330,7 @@ impl PerformanceMonitor {
     }
 
     /// 计算效率
+    /// efficiency
     fn calculate_efficiency(&self, metrics: &PerformanceMetrics) -> EfficiencyStats {
         let total_operations = metrics.total_operations as f64;
         let success_rate = if total_operations > 0.0 {
@@ -322,6 +347,7 @@ impl PerformanceMonitor {
     }
 
     /// 计算内存效率
+    /// memory efficiency
     fn calculate_memory_efficiency(&self, metrics: &PerformanceMetrics) -> f64 {
         if metrics.peak_memory_usage > 0 {
             metrics.current_memory_usage as f64 / metrics.peak_memory_usage as f64
@@ -348,6 +374,7 @@ impl OperationTimer {
     }
 
     /// 完成操作并记录时间
+    /// and time
     pub fn finish(self) {
         let duration = self.start_time.elapsed();
         self.metrics
@@ -364,6 +391,7 @@ impl Drop for OperationTimer {
 }
 
 /// 性能报告
+/// performance
 #[derive(Debug, Clone)]
 pub struct PerformanceReport {
     pub uptime: Duration,
@@ -382,6 +410,7 @@ pub struct ThroughputStats {
 }
 
 /// 效率统计
+/// efficiency
 #[derive(Debug, Clone)]
 pub struct EfficiencyStats {
     pub success_rate: f64,

@@ -1,14 +1,24 @@
 //! 高级异步工具库
+//! async tool library
 //!
 //! 本模块提供了生产环境中常用的高级异步工具和实用程序：
+//! This module provides environment in async tool and program ：
 //! - 异步任务管理器
+//! - async task
 //! - 智能重试机制
+//! - mechanism
 //! - 异步批处理器
+//! - async
 //! - 异步限流器
+//! - async stream
 //! - 异步缓存管理器
+//! - async
 //! - 异步事件总线
+//! - async line
 //! - 异步健康检查器
+//! - async health check
 //! - 异步配置管理器
+//! - async
 pub mod batch_processor;
 pub mod retry_engine;
 pub mod task_manager;

@@ -1,19 +1,15 @@
 //! # 字符串操作示例
-//!
-//! 展示如何在 Rust WASM 和 JavaScript 之间传递字符串
-//!
+//! # example
 //! ## 运行方式
-//!
+//! ## Run way
 //! ```bash
 //! # 使用 wasm-pack 构建
-//! wasm-pack build --target web
-//!
+//! # wasm-pack
+//! # Use wasm-pack 构建
 //! # 在 HTML 中使用
+//! # in HTML in
 //! # 创建 index.html 并运行本地服务器
-//! ```
-//!
-//! ## JavaScript 使用示例
-//!
+//! # index.html and Run this
 //! ```javascript
 //! import init, { greet, reverse, to_uppercase } from './pkg/c12_wasm.js';
 //!
@@ -26,11 +22,12 @@
 use wasm_bindgen::prelude::*;
 
 /// 问候函数
-///
+/// function
+/// 问候function
 /// # 参数
-/// - `name`: 要问候的名字
-///
+/// # parameter
 /// # 返回值
+/// # return value
 /// 返回格式化的问候字符串
 #[wasm_bindgen]
 pub fn greet(name: &str) -> String {
@@ -38,15 +35,16 @@ pub fn greet(name: &str) -> String {
 }
 
 /// 反转字符串
-///
 /// # 参数
+/// # parameter
 /// - `s`: 要反转的字符串
-///
+/// - `s`:
 /// # 返回值
+/// # return value
 /// 返回反转后的字符串
-///
+/// after
 /// # 示例
-/// ```
+/// # example
 /// use c12_wasm::string_examples::reverse_string;
 /// assert_eq!(reverse_string("hello"), "olleh");
 /// ```
@@ -56,42 +54,49 @@ pub fn reverse(s: &str) -> String {
 }
 
 /// 转换为大写
-///
+/// conversion as
 /// # 参数
+/// # parameter
 /// - `s`: 要转换的字符串
-///
+/// - `s`: conversion
 /// # 返回值
+/// # return value
 /// 返回转换为大写的字符串
+/// conversion as
 #[wasm_bindgen]
 pub fn to_uppercase(s: &str) -> String {
     s.to_uppercase()
 }
 
 /// 转换为小写
+/// conversion as
 #[wasm_bindgen]
 pub fn to_lowercase(s: &str) -> String {
     s.to_lowercase()
 }
 
 /// 统计单词数
-///
 /// # 参数
+/// # parameter
 /// - `s`: 要分析的字符串
-///
+/// - `s`: analyze
 /// # 返回值
+/// # return value
 /// 返回单词数量
+/// quantity
 #[wasm_bindgen]
 pub fn count_words(s: &str) -> usize {
     s.split_whitespace().count()
 }
 
 /// 检查是否为回文
-///
+/// as
 /// # 参数
+/// # parameter
 /// - `s`: 要检查的字符串
-///
+/// - `s`:
 /// # 返回值
-/// 如果是回文返回 true，否则返回 false
+/// # return value
 #[wasm_bindgen]
 pub fn is_palindrome(s: &str) -> bool {
     let s_lower: String = s

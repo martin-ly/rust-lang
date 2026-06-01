@@ -1,31 +1,33 @@
 //! RTIC 框架 —— 实时中断驱动并发 (Real-Time Interrupt-driven Concurrency)
-//!
+//! RTIC framework —— 实时in断driverconcurrency (Real-Time Interrupt-driven Concurrency)
 //! # 概述
-//!
-//! [RTIC](https://rtic.rs/) (以前叫 Real-Time For the Masses) 是一个用于
-//! ARM Cortex-M 微控制器的并发框架，利用 NVIC 硬件优先级实现**零成本**
+//! #
 //! 任务调度和资源共享。
-//!
+//! task and 。
 //! # 核心特性
-//!
+//! # core feature
 //! | 特性 | 说明 |
-//! |------|------|
+//! | feature | explain |
 //! | **零成本抽象** | 无运行时开销，直接映射到硬件中断 |
+//! | **cost ** | runtime overhead ，to hardware in |
 //! | **基于优先级** | 利用 NVIC 抢占实现硬实时 |
+//! | **** | NVIC |
+//! | **Based on优先级** | 利用 NVIC 抢占Implementation of硬实时 |
 //! | **资源模型** | 编译期保证无数据竞争 |
+//! | **** | |
 //! | **任务调度** | 软件任务 + 硬件任务统一模型 |
-//! | **延迟保证** | 可计算的 WCET (Worst Case Execution Time) |
-//!
+//! | **task ** | software task + hardware task |
+//! | **延迟Guarantee** | 可Calculate WCET (Worst Case Execution Time) |
 //! # 设计哲学
-//!
-//! RTIC 的核心洞察：**Cortex-M NVIC 已经是一个完美的实时调度器**。
-//! RTIC 只需将软件任务映射到 NVIC 优先级，即可获得：
+//! # design
 //! - 硬件级抢占
+//! - hardware
 //! - 零上下文切换开销（Tail-chaining）
+//! - on under switching overhead （Tail-chaining）
 //! - 确定性延迟
-//!
+//! -
 //! # 参考
-//! - [RTIC Book](https://rtic.rs/2/book/en/)
+//! # reference
 //! - [RTIC GitHub](https://github.com/rtic-rs/rtic)
 
 // =========================================================================
@@ -33,6 +35,7 @@
 // =========================================================================
 
 /// # RTIC 应用骨架
+/// # RTIC application
 // RTIC 使用 `#[rtic::app]` 属性宏定义整个嵌入式应用：
 // - `device` — PAC (Peripheral Access Crate)
 // - `dispatchers` — 用于软件任务的闲置中断向量
@@ -123,6 +126,7 @@ RTIC 应用结构解析:
 // =========================================================================
 
 /// # RTIC 资源模型
+/// # RTIC
 // RTIC 的资源模型是**零成本互斥**的核心：
 // - 高优先级任务自动抢占低优先级任务
 // - 低优先级任务访问共享资源时，RTIC 自动生成**基于优先级的临界区**
@@ -158,6 +162,7 @@ RTIC 锁机制 (Priority Ceiling Protocol):
     }
 
     /// 资源使用示例
+    /// example
     pub fn resource_example() -> &'static str {
         r#"
 // 共享资源定义
@@ -198,6 +203,7 @@ fn process_data(cx: process_data::Context) {
 // =========================================================================
 
 /// # RTIC 软件任务
+/// # RTIC software task
 // 软件任务不绑定到硬件中断，而是由 `spawn`/`schedule` 触发，
 // 通过 `dispatchers` 中指定的闲置中断向量进行调度。
 pub struct RticSoftwareTasks;
@@ -367,6 +373,8 @@ RTIC + Embassy 组合架构:
 // =========================================================================
 
 /// # RTIC 实时性分析
+/// # RTIC analyze
+/// # RTIC 实时性analysis
 // RTIC 提供了静态分析工具，可计算：
 // - 任务响应时间
 // - 上下文切换开销

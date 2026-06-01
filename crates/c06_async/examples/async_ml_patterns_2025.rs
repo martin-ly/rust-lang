@@ -9,8 +9,11 @@ use tracing::{error, info};
 //use std::sync::atomic::{AtomicUsize, AtomicU64, Ordering};
 
 /// 2025年异步机器学习模式演示
+/// 2025async machine learning demonstration
 /// 展示最新的异步机器学习编程模式和最佳实践
+/// async machine learning and
 /// 1. 异步模型训练管理器
+/// 1. async
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TrainingConfig {
     pub model_name: String,
@@ -279,6 +282,7 @@ impl AsyncModelTrainer {
 }
 
 /// 2. 异步模型推理服务
+/// 2. async reason
 #[allow(dead_code)]
 #[derive(Debug, Clone)]
 pub struct AsyncInferenceService {
@@ -431,6 +435,7 @@ impl AsyncInferenceService {
 }
 
 /// 3. 异步数据处理管道
+/// 3. async pipe
 #[derive(Debug, Clone)]
 pub struct AsyncDataPipeline {
     stages: Arc<RwLock<Vec<PipelineStage>>>,

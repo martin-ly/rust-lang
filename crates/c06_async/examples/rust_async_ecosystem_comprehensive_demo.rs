@@ -1,7 +1,7 @@
 //! Rust 异步生态系统全面演示
-//!
-//! 本示例展示了 std、tokio、smol 等异步运行时的 [历史: async-std 已停止维护]
+//! Rust async ecosystem system surface demonstration
 //! 特性使用、概念定义、属性联系、区别场景、示例组合等
+//! feature 、concept definition 、attribute 、scenario 、example combination etc.
 use anyhow::Result;
 use futures::future::{join_all, try_join_all};
 use serde::{Deserialize, Serialize};
@@ -13,8 +13,9 @@ use tokio::task;
 use tokio::time::sleep;
 
 /// 异步运行时特性演示器
-///
+/// async runtime feature demonstration
 /// 展示不同异步运行时的核心特性和使用方式
+/// async runtime core feature and way
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AsyncRuntimeDemo {
     pub runtime_name: String,
@@ -32,10 +33,10 @@ pub struct PerformanceMetrics {
 }
 
 /// 1. std 标准库异步支持演示
+/// 1. std standard library async demonstration
 pub struct StdAsyncDemo;
 
 impl StdAsyncDemo {
-    /// 演示std的Future trait基础支持
     pub async fn demonstrate_future_trait() -> Result<String> {
         println!("🔍 std Future trait 演示:");
 
@@ -50,7 +51,6 @@ impl StdAsyncDemo {
         Ok(result)
     }
 
-    /// 演示std的async/await语法支持
     pub async fn demonstrate_async_await() -> Result<()> {
         println!("🔍 std async/await 语法演示:");
 
@@ -64,6 +64,7 @@ impl StdAsyncDemo {
     }
 
     /// 演示std的基础并发原语
+    /// demonstration stdfoundation concurrency
     pub async fn demonstrate_concurrency_primitives() -> Result<()> {
         println!("🔍 std 并发原语演示:");
 
@@ -90,10 +91,10 @@ impl StdAsyncDemo {
 }
 
 /// 2. Tokio 高性能异步运行时演示
+/// 2. Tokio performance async runtime demonstration
 pub struct TokioAsyncDemo;
 
 impl TokioAsyncDemo {
-    /// 演示Tokio的高性能多线程运行时
     pub async fn demonstrate_multithreaded_runtime() -> Result<()> {
         println!("🔍 Tokio 多线程运行时演示:");
 
@@ -118,7 +119,6 @@ impl TokioAsyncDemo {
         Ok(())
     }
 
-    /// 演示Tokio的异步I/O操作
     pub async fn demonstrate_async_io() -> Result<()> {
         println!("🔍 Tokio 异步I/O演示:");
 
@@ -134,7 +134,6 @@ impl TokioAsyncDemo {
         Ok(())
     }
 
-    /// 演示Tokio的定时器功能
     pub async fn demonstrate_timers() -> Result<()> {
         println!("🔍 Tokio 定时器演示:");
 
@@ -166,10 +165,10 @@ impl TokioAsyncDemo {
 }
 
 /// 3. async-std 标准库风格API演示 [历史参考]
+/// 3. async-std standard library APIdemonstration [reference ]
 pub struct AsyncStdDemo;
 
 impl AsyncStdDemo {
-    /// 演示async-std的标准库风格API [历史参考]
     pub async fn demonstrate_std_like_api() -> Result<()> {
         println!("🔍 async-std 标准库风格API演示 [历史参考]:");
 
@@ -185,7 +184,6 @@ impl AsyncStdDemo {
         Ok(())
     }
 
-    /// 演示async-std的易用性 [历史参考]
     pub async fn demonstrate_ease_of_use() -> Result<()> {
         println!("🔍 async-std 易用性演示 [历史参考]:");
 
@@ -203,7 +201,6 @@ impl AsyncStdDemo {
         Ok(())
     }
 
-    /// 演示async-std的快速编译特性 [历史参考]
     pub async fn demonstrate_fast_compilation() -> Result<()> {
         println!("🔍 async-std 快速编译演示 [历史参考]:");
 
@@ -232,10 +229,10 @@ impl AsyncStdDemo {
 }
 
 /// 4. smol 轻量级异步运行时演示
+/// 4. smol async runtime demonstration
 pub struct SmolAsyncDemo;
 
 impl SmolAsyncDemo {
-    /// 演示smol的轻量级设计
     pub async fn demonstrate_lightweight_design() -> Result<()> {
         println!("🔍 smol 轻量级设计演示:");
 
@@ -256,7 +253,6 @@ impl SmolAsyncDemo {
         Ok(())
     }
 
-    /// 演示smol的快速启动
     pub async fn demonstrate_fast_startup() -> Result<()> {
         println!("🔍 smol 快速启动演示:");
 
@@ -274,7 +270,6 @@ impl SmolAsyncDemo {
         Ok(())
     }
 
-    /// 演示smol的兼容性
     pub async fn demonstrate_compatibility() -> Result<()> {
         println!("🔍 smol 兼容性演示:");
 
@@ -297,6 +292,7 @@ impl SmolAsyncDemo {
 }
 
 /// 5. 异步运行时集成框架演示
+/// 5. async runtime framework demonstration
 #[allow(unused)]
 pub struct AsyncIntegrationFramework {
     shared_state: Arc<RwLock<HashMap<String, String>>>,
@@ -312,6 +308,7 @@ impl AsyncIntegrationFramework {
     }
 
     /// 演示运行时适配器模式
+    /// demonstration runtime adapter
     pub async fn demonstrate_runtime_adapter_pattern(&self) -> Result<()> {
         println!("🔧 运行时适配器模式演示:");
 
@@ -326,6 +323,7 @@ impl AsyncIntegrationFramework {
     }
 
     /// 演示任务组合模式
+    /// demonstration task combination
     pub async fn demonstrate_task_composition_pattern(&self) -> Result<()> {
         println!("🔧 任务组合模式演示:");
 
@@ -344,6 +342,7 @@ impl AsyncIntegrationFramework {
     }
 
     /// 演示异步同步转换模式
+    /// demonstration async synchronous conversion
     pub async fn demonstrate_async_sync_conversion(&self) -> Result<()> {
         println!("🔧 异步同步转换模式演示:");
 
@@ -363,6 +362,7 @@ impl AsyncIntegrationFramework {
     }
 
     /// 演示聚合组合设计模式
+    /// demonstration aggregation combination design
     pub async fn demonstrate_aggregation_composition(&self) -> Result<()> {
         println!("🔧 聚合组合设计模式演示:");
 
@@ -442,6 +442,8 @@ impl AsyncIntegrationFramework {
 }
 
 /// 数据源结构
+/// structure
+/// 数据源structure
 #[allow(unused)]
 #[derive(Debug)]
 pub struct DataSource {
@@ -464,11 +466,13 @@ impl DataSource {
 }
 
 /// 异步运行时性能对比演示
+/// async runtime performance to demonstration
 #[allow(unused)]
 pub struct AsyncPerformanceComparison;
 
 impl AsyncPerformanceComparison {
     /// 演示不同运行时的性能特征
+    /// demonstration runtime performance
     pub async fn demonstrate_performance_characteristics() -> Result<()> {
         println!("📊 异步运行时性能对比演示:");
 
@@ -541,6 +545,8 @@ impl AsyncPerformanceComparison {
 }
 
 /// 主演示函数
+/// demonstration function
+/// 主demonstration function
 #[tokio::main]
 async fn main() -> Result<()> {
     println!("🚀 Rust 异步生态系统全面演示");

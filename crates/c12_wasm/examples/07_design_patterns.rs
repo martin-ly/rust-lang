@@ -1,8 +1,7 @@
 //! # 设计模式示例
-//!
-//! 展示如何在 WASM 中实现常见的设计模式
-//!
+//! # design example
 //! ## 包含的设计模式
+//! ## design
 //! - 工厂模式 (Factory Pattern)
 //! - 建造者模式 (Builder Pattern)
 //! - 单例模式 (Singleton Pattern)
@@ -16,8 +15,10 @@ use wasm_bindgen::prelude::*;
 // ============================================================================
 
 /// 渲染器工厂
-///
+/// factory
+/// 渲染器factory
 /// 根据类型创建不同的渲染器实例
+/// according to type
 #[wasm_bindgen]
 #[derive(Default)]
 pub struct RendererFactory;
@@ -30,12 +31,11 @@ impl RendererFactory {
     }
 
     /// 渲染 HTML
-    ///
+    /// HTML
     /// # 参数
-    /// - `content`: 要渲染的内容
-    ///
+    /// # parameter
     /// # 返回值
-    /// 返回 HTML 格式的字符串
+    /// # return value
     #[wasm_bindgen(js_name = "renderHtml")]
     pub fn render_html(&self, content: &str) -> String {
         format!("<div>{}</div>", content)
@@ -48,6 +48,7 @@ impl RendererFactory {
     }
 
     /// 渲染纯文本
+    /// this
     #[wasm_bindgen(js_name = "renderText")]
     pub fn render_text(&self, content: &str) -> String {
         content.to_string()
@@ -59,6 +60,7 @@ impl RendererFactory {
 // ============================================================================
 
 /// HTTP 配置
+/// HTTP
 #[wasm_bindgen]
 pub struct HttpConfig {
     timeout: u32,
@@ -70,6 +72,8 @@ pub struct HttpConfig {
 #[wasm_bindgen]
 impl HttpConfig {
     /// 获取超时时间
+    /// time
+    /// Get超时time
     #[wasm_bindgen(getter)]
     pub fn timeout(&self) -> u32 {
         self.timeout
@@ -82,12 +86,14 @@ impl HttpConfig {
     }
 
     /// 获取 URL
+    /// URL
     #[wasm_bindgen(getter)]
     pub fn url(&self) -> String {
         self.url.clone()
     }
 
     /// 获取配置描述
+    /// describe
     #[wasm_bindgen(js_name = "describe")]
     pub fn describe(&self) -> String {
         format!(
@@ -101,11 +107,11 @@ impl HttpConfig {
 }
 
 /// HTTP 配置建造者
-///
+/// HTTP
 /// 使用建造者模式逐步构建配置对象
-///
+/// to
 /// # 示例
-/// ```javascript
+/// # example
 /// const config = new HttpConfigBuilder()
 ///     .url('https://api.example.com')
 ///     .timeout(5000)
@@ -136,12 +142,14 @@ impl HttpConfigBuilder {
     }
 
     /// 设置 URL
+    /// URL
     pub fn url(mut self, url: String) -> Self {
         self.url = Some(url);
         self
     }
 
     /// 设置超时时间（毫秒）
+    /// time （）
     pub fn timeout(mut self, timeout: u32) -> Self {
         self.timeout = Some(timeout);
         self
@@ -154,6 +162,7 @@ impl HttpConfigBuilder {
     }
 
     /// 添加 HTTP 头
+    /// HTTP
     #[wasm_bindgen(js_name = "addHeader")]
     pub fn add_header(mut self, header: String) -> Self {
         self.headers.push(header);
@@ -161,6 +170,7 @@ impl HttpConfigBuilder {
     }
 
     /// 构建配置对象
+    /// to
     pub fn build(self) -> Result<HttpConfig, JsValue> {
         let url = self
             .url
@@ -180,8 +190,7 @@ impl HttpConfigBuilder {
 // ============================================================================
 
 /// 应用配置单例
-///
-/// 使用 OnceLock 实现线程安全的单例模式
+/// application singleton
 static APP_CONFIG: OnceLock<AppConfig> = OnceLock::new();
 
 struct AppConfig {
@@ -190,13 +199,17 @@ struct AppConfig {
 }
 
 /// 初始化应用配置
-///
+/// application
 /// # 参数
+/// # parameter
 /// - `name`: 应用名称
+/// - `name`: application
 /// - `version`: 应用版本
-///
+/// - `version`: application this
 /// # 返回值
+/// # return value
 /// 如果已经初始化过，返回 Err
+/// if ， Err
 #[wasm_bindgen(js_name = "initAppConfig")]
 pub fn init_app_config(name: String, version: String) -> Result<(), JsValue> {
     APP_CONFIG
@@ -206,6 +219,7 @@ pub fn init_app_config(name: String, version: String) -> Result<(), JsValue> {
 }
 
 /// 获取应用名称
+/// application
 #[wasm_bindgen(js_name = "getAppName")]
 pub fn get_app_name() -> Result<String, JsValue> {
     APP_CONFIG
@@ -215,6 +229,7 @@ pub fn get_app_name() -> Result<String, JsValue> {
 }
 
 /// 获取应用版本
+/// application this
 #[wasm_bindgen(js_name = "getAppVersion")]
 pub fn get_app_version() -> Result<String, JsValue> {
     APP_CONFIG
@@ -228,6 +243,7 @@ pub fn get_app_version() -> Result<String, JsValue> {
 // ============================================================================
 
 /// 排序策略
+/// ordering strategy
 #[wasm_bindgen]
 #[derive(Default)]
 pub struct Sorter;
@@ -240,6 +256,7 @@ impl Sorter {
     }
 
     /// 冒泡排序
+    /// bubble sort
     #[wasm_bindgen(js_name = "bubbleSort")]
     pub fn bubble_sort(&self, mut arr: Vec<i32>) -> Vec<i32> {
         let len = arr.len();
@@ -254,6 +271,7 @@ impl Sorter {
     }
 
     /// 快速排序
+    /// quick sort
     #[wasm_bindgen(js_name = "quickSort")]
     pub fn quick_sort(&self, arr: Vec<i32>) -> Vec<i32> {
         if arr.len() <= 1 {
@@ -266,6 +284,7 @@ impl Sorter {
     }
 
     /// 选择排序
+    /// selection sort
     #[wasm_bindgen(js_name = "selectionSort")]
     pub fn selection_sort(&self, mut arr: Vec<i32>) -> Vec<i32> {
         let len = arr.len();
@@ -310,8 +329,8 @@ impl Sorter {
 // ============================================================================
 
 /// 事件发射器
-///
 /// 简单的观察者模式实现
+/// simple observer
 #[wasm_bindgen]
 #[derive(Default)]
 pub struct EventEmitter {
@@ -328,18 +347,16 @@ impl EventEmitter {
     }
 
     /// 添加监听器
-    ///
     /// # 参数
-    /// - `callback`: JavaScript 回调函数
+    /// # parameter
     #[wasm_bindgen(js_name = "addListener")]
     pub fn add_listener(&mut self, callback: js_sys::Function) {
         self.listeners.push(callback);
     }
 
     /// 触发事件
-    ///
     /// # 参数
-    /// - `data`: 要传递给监听器的数据
+    /// # parameter
     pub fn emit(&self, data: &str) {
         let this = JsValue::null();
         let arg = JsValue::from_str(data);
@@ -350,12 +367,15 @@ impl EventEmitter {
     }
 
     /// 获取监听器数量
+    /// quantity
+    /// Get监听器quantity
     #[wasm_bindgen(js_name = "listenerCount")]
     pub fn listener_count(&self) -> usize {
         self.listeners.len()
     }
 
     /// 清除所有监听器
+    /// all
     #[wasm_bindgen(js_name = "clearListeners")]
     pub fn clear_listeners(&mut self) {
         self.listeners.clear();

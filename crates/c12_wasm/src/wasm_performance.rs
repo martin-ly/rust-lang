@@ -1,19 +1,20 @@
 #![forbid(unsafe_code)]
 
-//! WebAssembly 性能优化概念解析
-//!
 //! 本模块涵盖 WASM 二进制体积优化、启动时间优化、JS/WASM 边界开销分析，
-//! 以及 wasm-bindgen 与 wasm-pack 构建选项的对比。
+//! this module WASM volume optimization 、time optimization 、JS/WASM edge overhead analyze ，
+//! and wasm-bindgen and wasm-pack 构建选项to比。
 
 // ============================================================================
 // 1. BinarySizeOptimization — WASM 二进制体积优化
 // ============================================================================
 
 /// WASM 二进制体积优化策略
+/// WASM volume optimization strategy
 pub struct BinarySizeOptimization;
 
 impl BinarySizeOptimization {
     /// 优化策略总览
+    /// optimization strategy
     pub fn overview() -> &'static str {
         r#"=== WASM 二进制体积优化策略 ===
 
@@ -108,10 +109,12 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 // ============================================================================
 
 /// 启动时间优化策略
+/// time optimization strategy
 pub struct StartupTimeOptimization;
 
 impl StartupTimeOptimization {
     /// 启动时间优化总览
+    /// time optimization
     pub fn overview() -> &'static str {
         r#"=== WASM 启动时间优化 ===
 
@@ -136,6 +139,7 @@ impl StartupTimeOptimization {
     }
 
     /// 减少 JS 胶水代码
+    /// JS
     pub fn reduce_js_glue() -> &'static str {
         r#"=== 减少 JS 胶水代码 ===
 
@@ -161,6 +165,7 @@ JS 胶水代码体积来源：
     }
 
     /// 延迟初始化
+    /// 延迟Initialize
     pub fn lazy_initialization() -> &'static str {
         r#"=== 延迟初始化 ===
 
@@ -197,10 +202,12 @@ async function getWasmModule() {
 // ============================================================================
 
 /// JS ↔ WASM 边界调用开销分析
+/// JS ↔ WASM edge overhead analyze
 pub struct JsWasmBoundaryOverhead;
 
 impl JsWasmBoundaryOverhead {
     /// 边界调用开销总览
+    /// edge overhead
     pub fn overview() -> &'static str {
         r#"=== JS ↔ WASM 边界调用开销 ===
 
@@ -227,6 +234,7 @@ impl JsWasmBoundaryOverhead {
     }
 
     /// 调用类型对比
+    /// type to
     pub fn call_types() -> &'static str {
         r#"=== 调用类型开销对比 ===
 
@@ -245,6 +253,8 @@ impl JsWasmBoundaryOverhead {
     }
 
     /// 缓解策略
+    /// strategy
+    /// 缓解strategy
     pub fn mitigation() -> &'static str {
         r#"=== 缓解边界开销的策略 ===
 
@@ -272,6 +282,7 @@ impl JsWasmBoundaryOverhead {
 // ============================================================================
 
 /// wasm-bindgen vs wasm-pack 构建选项对比
+/// wasm-bindgen vs wasm-pack 构建选项to比
 pub struct BuildToolComparison;
 
 impl BuildToolComparison {
@@ -296,6 +307,7 @@ wasm-bindgen 是底层绑定生成工具，直接控制输出：
     }
 
     /// wasm-pack 构建选项
+    /// wasm-pack
     pub fn wasm_pack_options() -> &'static str {
         r#"=== wasm-pack 构建选项 ===
 
@@ -322,6 +334,8 @@ wasm-pack 是面向生态的高级构建工具，封装了 wasm-bindgen 和 wasm
     }
 
     /// 对比总结
+    /// to summary
+    /// to比summary
     pub fn comparison() -> &'static str {
         r#"=== wasm-bindgen vs wasm-pack 对比 ===
 

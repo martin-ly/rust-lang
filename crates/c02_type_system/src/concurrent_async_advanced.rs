@@ -1,14 +1,21 @@
 //! 并发和异步高级特性演示模块
-//!
-//! 本模块演示了 Rust 1.90 中的各种并发和异步高级特性，包括：
+//! concurrency and async feature demonstration module
 //! - 高级异步编程模式
+//! - async
 //! - 并发数据结构和算法
+//! - concurrency data structure and algorithm
 //! - 异步流处理
+//! - async stream
 //! - 工作窃取调度器
+//! -
 //! - 异步锁和同步原语
+//! - async lock and synchronous
 //! - 并发安全的数据结构
+//! - concurrency data structure
 //! - 异步错误处理
+//! - async error handling
 //! - 性能监控和调优
+//! - performance and
 
 #![allow(clippy::type_complexity)]
 
@@ -27,10 +34,12 @@ use tokio::task::JoinHandle;
 use tokio::time::{interval, sleep, timeout};
 
 /// 高级异步编程模式
+/// async
 pub mod async_patterns {
     use super::*;
 
     /// 异步状态机
+    /// async state machine
     #[derive(Debug)]
     pub enum AsyncState {
         Idle,
@@ -40,6 +49,7 @@ pub mod async_patterns {
     }
 
     /// 异步状态机管理器
+    /// async state machine
     pub struct AsyncStateMachine {
         state: Arc<AsyncMutex<AsyncState>>,
         state_changes: broadcast::Sender<AsyncState>,
@@ -105,6 +115,7 @@ pub mod async_patterns {
     }
 
     /// 异步重试机制
+    /// async mechanism
     pub struct AsyncRetry {
         max_attempts: usize,
         base_delay: Duration,
@@ -160,6 +171,7 @@ pub mod async_patterns {
     }
 
     /// 异步超时包装器
+    /// async
     pub struct AsyncTimeout<T> {
         future: T,
         timeout_duration: Duration,
@@ -191,6 +203,7 @@ pub mod async_patterns {
     }
 
     /// 异步批处理处理器
+    /// async
     pub struct AsyncBatchProcessor<T> {
         batch_size: usize,
         flush_interval: Duration,
@@ -279,10 +292,12 @@ pub mod async_patterns {
 }
 
 /// 并发数据结构和算法
+/// concurrency data structure and algorithm
 pub mod concurrent_data_structures {
     use super::*;
 
     /// 无锁环形缓冲区
+    /// lock-free ring buffer
     pub struct LockFreeRingBuffer<T> {
         buffer: Vec<AtomicPtr<T>>,
         head: AtomicUsize,
@@ -374,6 +389,7 @@ pub mod concurrent_data_structures {
     }
 
     /// 并发哈希表
+    /// concurrency
     #[derive(Clone)]
     pub struct ConcurrentHashMap<K, V> {
         shards: Vec<Arc<RwLock<HashMap<K, V>>>>,
@@ -491,10 +507,12 @@ pub mod concurrent_data_structures {
 }
 
 /// 异步流处理
+/// async stream
 pub mod async_streams {
     use super::*;
 
     /// 异步流处理器
+    /// async stream
     pub struct AsyncStreamProcessor<T, R> {
         buffer_size: usize,
         concurrency: usize,
@@ -565,6 +583,7 @@ pub mod async_streams {
     }
 
     /// 异步管道
+    /// async pipe
     pub struct AsyncPipeline<T> {
         stages: Vec<
             Arc<
@@ -619,6 +638,7 @@ pub mod async_streams {
     }
 
     /// 异步窗口聚合器
+    /// async aggregation
     pub struct AsyncWindowAggregator<T, R> {
         window_size: Duration,
         windows: Arc<AsyncMutex<HashMap<u64, Vec<T>>>>,
@@ -829,10 +849,12 @@ pub mod work_stealing_scheduler {
 }
 
 /// 异步锁和同步原语
+/// async lock and synchronous
 pub mod async_sync_primitives {
     use super::*;
 
     /// 异步读写锁包装器
+    /// async rwlock
     pub struct AsyncRwLockWrapper<T> {
         inner: AsyncRwLock<T>,
     }
@@ -862,6 +884,7 @@ pub mod async_sync_primitives {
     }
 
     /// 异步条件变量
+    /// async condition variable
     pub struct AsyncConditionVariable {
         inner: Arc<(AsyncMutex<bool>, Condvar)>,
     }
@@ -907,6 +930,7 @@ pub mod async_sync_primitives {
     }
 
     /// 异步屏障
+    /// async barrier
     pub struct AsyncBarrierWrapper {
         inner: AsyncBarrier,
     }
@@ -924,6 +948,7 @@ pub mod async_sync_primitives {
     }
 
     /// 异步信号量包装器
+    /// async semaphore
     pub struct AsyncSemaphoreWrapper {
         inner: Semaphore,
     }
@@ -950,10 +975,12 @@ pub mod async_sync_primitives {
 }
 
 /// 并发安全的数据结构
+/// concurrency data structure
 pub mod concurrent_safe_structures {
     use super::*;
 
     /// 并发安全的栈
+    /// concurrency stack
     pub struct ConcurrentStack<T> {
         data: Arc<Mutex<Vec<T>>>,
     }
@@ -1001,6 +1028,7 @@ pub mod concurrent_safe_structures {
     }
 
     /// 并发安全的队列
+    /// concurrency
     pub struct ConcurrentQueue<T> {
         data: Arc<Mutex<VecDeque<T>>>,
     }
@@ -1048,6 +1076,7 @@ pub mod concurrent_safe_structures {
     }
 
     /// 并发安全的双端队列
+    /// concurrency
     pub struct ConcurrentDeque<T> {
         data: Arc<Mutex<VecDeque<T>>>,
     }
@@ -1106,10 +1135,12 @@ pub mod concurrent_safe_structures {
 }
 
 /// 异步错误处理
+/// async error handling
 pub mod async_error_handling {
     use super::*;
 
     /// 异步错误恢复器
+    /// async error recovery
     pub struct AsyncErrorRecovery<T> {
         max_retries: usize,
         retry_delay: Duration,
@@ -1181,6 +1212,7 @@ pub mod async_error_handling {
     }
 
     /// 异步错误聚合器
+    /// async aggregation
     pub struct AsyncErrorAggregator {
         errors: Arc<AsyncMutex<Vec<String>>>,
         max_errors: usize,
@@ -1221,10 +1253,12 @@ pub mod async_error_handling {
 }
 
 /// 性能监控和调优
+/// performance and
 pub mod performance_monitoring {
     use super::*;
 
     /// 异步性能监控器
+    /// async performance
     pub struct AsyncPerformanceMonitor {
         metrics: Arc<AsyncMutex<HashMap<String, f64>>>,
         start_time: Instant,
@@ -1271,6 +1305,7 @@ pub mod performance_monitoring {
     }
 
     /// 异步任务性能分析器
+    /// async task performance analyze
     #[derive(Clone)]
     pub struct AsyncTaskProfiler {
         task_times: Arc<AsyncMutex<HashMap<String, Vec<Duration>>>>,
@@ -1369,6 +1404,8 @@ pub mod performance_monitoring {
 }
 
 /// 主演示函数
+/// demonstration function
+/// 主demonstration function
 pub async fn demonstrate_concurrent_async_advanced() {
     println!("🚀 Rust 1.90 并发和异步高级特性演示");
     println!("=====================================");

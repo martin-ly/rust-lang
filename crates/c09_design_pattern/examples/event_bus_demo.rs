@@ -1,26 +1,34 @@
 //! Event Bus Demo
 //!
 //! ## 📐 知识结构
-//!
+//! ## 📐 structure
+//! ## 📐 知识structure
 //! ### 核心概念
-//!
-//! - **事件总线 (Event Bus)**: 发布-订阅模式的实现，用于解耦事件发布者和订阅者
+//! ### core concept
 //!   - **属性**: 事件发布、事件订阅、异步处理、背压处理
+//!   - **attribute **: 、、async 、backpressure
 //!   - **关系**: 与观察者模式、发布-订阅模式相关
-//!
+//!   - ****: and observer 、publish-subscribe
 //! ### 思维导图
-//!
-//! ```text
+//! ###
 //! 事件总线演示
-//! │
+//! line demonstration
 //! ├── 事件发布
+//! ├──
+//! ├── 事件Publish
 //! │   └── 发布事件
+//! │ └──
 //! ├── 事件订阅
+//! ├──
+//! ├── 事件Subscribe
 //! │   └── 订阅事件
+//! │ └──
 //! ├── 异步处理
+//! ├── async
 //! │   └── 异步执行
+//! │ └── async
 //! └── 背压处理
-//!     ├── DropOldest
+//! └── backpressure
 //!     ├── Block
 //!     └── Batch
 //! ```

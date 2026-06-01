@@ -1,44 +1,59 @@
 //! 类型系统验证工具模块
-//!
-//! 本模块展示了 Rust 1.90 中的类型系统验证特性，包括：
+//! type system tool module
 //! - 类型约束验证
+//! - type
 //! - 生命周期验证
+//! - lifetime
 //! - 泛型类型验证
+//! - generic type
 //! - 类型转换验证
+//! - type conversion
 //! - 类型安全检查
+//! - type
 //! - 类型推断验证
-//!
+//! - type infer
 //! # 文件信息
+//! #
 //! - 文件: type_system_validator.rs
 //! - 创建日期: 2025-01-27
+//! - date : 2025-01-27
 //! - 版本: 1.0
-//! - Rust版本: 1.90.0
-//! - Edition: 2024
+//! - this : 1.0
+//! - 版this: 1.0
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 
 // ==================== 1. 类型系统基础 ====================
 
 /// 类型表示
+/// type represent
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Type {
     /// 基础类型
+    /// foundation type
     Primitive(PrimitiveType),
     /// 复合类型
+    /// type
     Composite(CompositeType),
     /// 泛型类型
+    /// generic type
     Generic(GenericType),
     /// 函数类型
+    /// function type
     Function(FunctionType),
     /// 引用类型
+    /// reference type
     Reference(ReferenceType),
     /// 生命周期类型
+    /// lifetime type
     Lifetime(LifetimeType),
     /// 未知类型
+    /// type
     Unknown,
 }
 
 /// 基础类型
+/// foundation type
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum PrimitiveType {
     I8,
@@ -62,23 +77,29 @@ pub enum PrimitiveType {
 }
 
 /// 复合类型
+/// type
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum CompositeType {
     /// 元组类型
+    /// type
     Tuple(Vec<Type>),
     /// 数组类型
+    /// type
     Array {
         element: Box<Type>,
         size: Option<usize>,
     },
     /// 切片类型
+    /// type
     Slice(Box<Type>),
     /// 结构体类型
+    /// struct type
     Struct {
         name: String,
         fields: HashMap<String, Type>,
     },
     /// 枚举类型
+    /// enum type
     Enum {
         name: String,
         variants: HashMap<String, Vec<Type>>,
@@ -86,6 +107,7 @@ pub enum CompositeType {
 }
 
 /// 泛型类型
+/// generic type
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct GenericType {
     pub name: String,
@@ -94,6 +116,7 @@ pub struct GenericType {
 }
 
 /// 函数类型
+/// function type
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct FunctionType {
     pub parameters: Vec<Type>,
@@ -102,6 +125,7 @@ pub struct FunctionType {
 }
 
 /// 引用类型
+/// reference type
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ReferenceType {
     pub lifetime: Option<LifetimeType>,
@@ -110,6 +134,7 @@ pub struct ReferenceType {
 }
 
 /// 生命周期类型
+/// lifetime type
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct LifetimeType {
     pub name: String,
@@ -117,54 +142,69 @@ pub struct LifetimeType {
 }
 
 /// 类型约束
+/// type
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum TypeConstraint {
     /// Trait 约束
     Trait(String),
     /// 生命周期约束
+    /// lifetime
     Lifetime(LifetimeConstraint),
     /// 类型相等约束
+    /// type etc.
     Equality(Type, Type),
     /// 类型包含约束
+    /// type
     Subtype(Type, Type),
 }
 
 /// 生命周期约束
+/// lifetime
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum LifetimeConstraint {
     /// 生命周期包含
+    /// lifetime
     Outlives(LifetimeType, LifetimeType),
     /// 生命周期相等
+    /// lifetime etc.
     Equals(LifetimeType, LifetimeType),
 }
 
 // ==================== 2. 类型验证器 ====================
 
 /// 类型验证器
+/// type
 pub struct TypeValidator {
     /// 类型环境
+    /// type environment
     type_env: Arc<Mutex<TypeEnvironment>>,
     /// 验证规则
+    /// rule
     validation_rules: Vec<ValidationRule>,
     /// 验证统计
     stats: Arc<Mutex<ValidationStats>>,
 }
 
 /// 类型环境
+/// type environment
 #[allow(dead_code)]
 #[derive(Debug, Default)]
 pub struct TypeEnvironment {
     /// 类型定义
+    /// type definition
     type_definitions: HashMap<String, Type>,
     /// 变量类型
+    /// variable type
     variable_types: HashMap<String, Type>,
     /// 生命周期定义
+    /// lifetime definition
     lifetime_definitions: HashMap<String, LifetimeType>,
     /// 约束
     constraints: Vec<TypeConstraint>,
 }
 
 /// 验证规则
+/// rule
 #[allow(dead_code)]
 pub struct ValidationRule {
     pub name: String,
@@ -173,6 +213,7 @@ pub struct ValidationRule {
 }
 
 /// 验证结果
+/// result
 #[derive(Debug, Clone)]
 #[allow(dead_code)]
 pub struct ValidationResult {
@@ -183,6 +224,7 @@ pub struct ValidationResult {
 }
 
 /// 验证严重程度
+/// degree
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 #[allow(dead_code)]
 pub enum ValidationSeverity {
@@ -214,6 +256,8 @@ impl TypeValidator {
     }
 
     /// 添加验证规则
+    /// rule
+    /// 添加Verifyrule
     pub fn add_validation_rule<F>(&mut self, name: String, description: String, validator: F)
     where
         F: Fn(&Type, &TypeEnvironment) -> ValidationResult + Send + Sync + 'static,
@@ -226,6 +270,7 @@ impl TypeValidator {
     }
 
     /// 验证类型
+    /// type
     pub fn validate_type(&self, type_: &Type) -> Vec<ValidationResult> {
         let env = self.type_env.lock().expect("类型环境锁定失败");
         let mut results = Vec::new();
@@ -260,6 +305,7 @@ impl TypeValidator {
     }
 
     /// 验证类型兼容性
+    /// type
     #[allow(unused_variables)]
     pub fn validate_compatibility(&self, from: &Type, to: &Type) -> ValidationResult {
         let env = self.type_env.lock().expect("类型环境锁定失败");
@@ -298,6 +344,7 @@ impl TypeValidator {
     }
 
     /// 验证生命周期
+    /// lifetime
     #[allow(unused_variables)]
     pub fn validate_lifetime(&self, lifetime: &LifetimeType) -> ValidationResult {
         let env = self.type_env.lock().expect("类型环境锁定失败");
@@ -342,6 +389,7 @@ impl TypeValidator {
     }
 
     /// 验证泛型类型
+    /// generic type
     pub fn validate_generic_type(&self, generic: &GenericType) -> ValidationResult {
         let env = self.type_env.lock().expect("类型环境锁定失败");
 
@@ -397,18 +445,24 @@ impl TypeValidator {
     }
 
     /// 添加类型定义
+    /// type definition
+    /// 添加typedefinition
     pub fn add_type_definition(&self, name: String, type_: Type) {
         let mut env = self.type_env.lock().expect("类型环境锁定失败");
         env.type_definitions.insert(name, type_);
     }
 
     /// 添加变量类型
+    /// variable type
+    /// 添加variabletype
     pub fn add_variable_type(&self, name: String, type_: Type) {
         let mut env = self.type_env.lock().expect("类型环境锁定失败");
         env.variable_types.insert(name, type_);
     }
 
     /// 添加生命周期定义
+    /// lifetime definition
+    /// 添加lifetimedefinition
     pub fn add_lifetime_definition(&self, name: String, lifetime: LifetimeType) {
         let mut env = self.type_env.lock().expect("类型环境锁定失败");
         env.lifetime_definitions.insert(name, lifetime);
@@ -420,6 +474,7 @@ impl TypeValidator {
     }
 
     /// 类型相等检查
+    /// type etc.
     fn types_equal(&self, a: &Type, b: &Type) -> bool {
         match (a, b) {
             (Type::Primitive(pa), Type::Primitive(pb)) => pa == pb,
@@ -433,6 +488,7 @@ impl TypeValidator {
     }
 
     /// 子类型检查
+    /// type
     fn is_subtype(&self, from: &Type, to: &Type) -> bool {
         // 简化实现，实际中需要更复杂的子类型关系
         matches!(
@@ -451,6 +507,7 @@ impl TypeValidator {
     }
 
     /// 验证生命周期约束
+    /// lifetime
     fn validate_lifetime_constraint(
         &self,
         constraint: &LifetimeConstraint,
@@ -475,6 +532,7 @@ impl TypeValidator {
     }
 
     /// 获取类型名称
+    /// type
     fn get_type_name(&self, type_: &Type) -> String {
         match type_ {
             Type::Primitive(p) => format!("Primitive({:?})", p),
@@ -488,6 +546,7 @@ impl TypeValidator {
     }
 
     /// 格式化类型
+    /// type
     fn format_type(&self, type_: &Type) -> String {
         match type_ {
             Type::Primitive(p) => format!("{:?}", p),
@@ -551,14 +610,18 @@ impl Clone for ValidationStats {
 // ==================== 3. 类型推断器 ====================
 
 /// 类型推断器
+/// type infer
 pub struct TypeInferencer {
     /// 类型环境
+    /// type environment
     type_env: Arc<Mutex<TypeEnvironment>>,
     /// 推断统计
+    /// infer
     stats: Arc<Mutex<InferenceStats>>,
 }
 
 /// 推断统计
+/// infer
 #[derive(Debug, Default)]
 pub struct InferenceStats {
     pub total_inferences: u64,
@@ -576,6 +639,7 @@ impl TypeInferencer {
     }
 
     /// 推断表达式类型
+    /// infer express type
     pub fn infer_expression_type(&self, expression: &Expression) -> Result<Type, String> {
         match expression {
             Expression::Literal(lit) => Ok(self.infer_literal_type(lit)),
@@ -600,6 +664,7 @@ impl TypeInferencer {
     }
 
     /// 推断字面量类型
+    /// infer surface type
     fn infer_literal_type(&self, literal: &Literal) -> Type {
         match literal {
             Literal::Integer(_) => Type::Primitive(PrimitiveType::I32),
@@ -611,6 +676,7 @@ impl TypeInferencer {
     }
 
     /// 推断变量类型
+    /// infer variable type
     fn infer_variable_type(&self, name: &str) -> Result<Type, String> {
         let env = self.type_env.lock().expect("类型环境锁定失败");
         env.variable_types
@@ -620,6 +686,7 @@ impl TypeInferencer {
     }
 
     /// 推断二元操作类型
+    /// infer type
     fn infer_binary_operation_type(
         &self,
         left: &Expression,
@@ -653,6 +720,7 @@ impl TypeInferencer {
     }
 
     /// 推断一元操作类型
+    /// infer type
     fn infer_unary_operation_type(
         &self,
         operator: &UnaryOperator,
@@ -679,6 +747,7 @@ impl TypeInferencer {
     }
 
     /// 推断函数调用类型
+    /// infer function type
     fn infer_function_call_type(
         &self,
         name: &str,
@@ -723,6 +792,7 @@ impl TypeInferencer {
     }
 
     /// 推断 if 表达式类型
+    /// infer if express type
     fn infer_if_expression_type(
         &self,
         condition: &Expression,
@@ -745,6 +815,7 @@ impl TypeInferencer {
     }
 
     /// 推断算术类型
+    /// infer type
     fn infer_arithmetic_type(&self, left: &Type, right: &Type) -> Result<Type, String> {
         match (left, right) {
             (Type::Primitive(PrimitiveType::I32), Type::Primitive(PrimitiveType::I32)) => {
@@ -764,6 +835,7 @@ impl TypeInferencer {
     }
 
     /// 检查类型兼容性
+    /// type
     fn types_compatible(&self, from: &Type, to: &Type) -> bool {
         if from == to {
             return true;
@@ -783,6 +855,7 @@ impl TypeInferencer {
     }
 
     /// 检查是否为数值类型
+    /// as type
     fn is_numeric_type(&self, type_: &Type) -> bool {
         matches!(
             type_,
@@ -791,18 +864,23 @@ impl TypeInferencer {
     }
 
     /// 添加类型定义
+    /// type definition
+    /// 添加typedefinition
     pub fn add_type_definition(&self, name: String, type_: Type) {
         let mut env = self.type_env.lock().expect("类型环境锁定失败");
         env.type_definitions.insert(name, type_);
     }
 
     /// 添加变量类型
+    /// variable type
+    /// 添加variabletype
     pub fn add_variable_type(&self, name: String, type_: Type) {
         let mut env = self.type_env.lock().expect("类型环境锁定失败");
         env.variable_types.insert(name, type_);
     }
 
     /// 获取推断统计
+    /// infer
     pub fn get_stats(&self) -> InferenceStats {
         self.stats.lock().expect("统计信息锁定失败").clone()
     }
@@ -828,6 +906,7 @@ impl Clone for InferenceStats {
 // ==================== 4. 表达式和操作符 ====================
 
 /// 表达式
+/// express
 #[derive(Debug, Clone)]
 pub enum Expression {
     Literal(Literal),
@@ -853,6 +932,7 @@ pub enum Expression {
 }
 
 /// 字面量
+/// surface
 #[derive(Debug, Clone)]
 pub enum Literal {
     Integer(i64),
@@ -889,6 +969,7 @@ pub enum UnaryOperator {
 // ==================== 演示函数 ====================
 
 /// 演示所有类型系统验证特性
+/// demonstration all type system feature
 #[allow(unused_variables)]
 pub fn demonstrate_type_system_validation() {
     println!("=== 类型系统验证演示 ===\n");

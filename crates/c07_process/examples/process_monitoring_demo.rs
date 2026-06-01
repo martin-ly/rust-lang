@@ -1,12 +1,15 @@
 //! 进程监控示例
-//!
+//! process example
 //! 本示例展示如何使用C07进程管理模块进行进程监控：
+//! this example C07process module process ：
 //! - 进程状态监控
+//! - process state
 //! - 资源使用监控
+//! -
 //! - 进程信息查询
-//!
+//! - process
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example process_monitoring_demo
 //! ```
 use c07_process::prelude::*;

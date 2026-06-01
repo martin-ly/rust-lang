@@ -1,13 +1,20 @@
 //! # 算法库核心模块
+//! # algorithm library core module
 //!
 //! 本模块按照主题分类组织算法，每个主题包含同步、异步、多线程、分布式四个版本。
+//! this module classification organize algorithm ，synchronous 、async 、thread 、distribution this 。
 //! 充分利用 Rust 1.90 的新特性，提供高性能、类型安全的算法实现。
+//! Rust 1.90 feature ，performance 、type algorithm 。
 //!
 //! ## 核心特性
+//! ## core feature
 //!
 //! - **形式化验证**: 包含循环不变量、霍尔逻辑、正确性证明
+//! - ****: circulation variable 、、
 //! - **复杂度分析**: 主定理、摊还分析、渐进分析
+//! - **complex analyze **: theorem 、analyze 、analyze
 //! - **多种实现**: 同步、并行、异步、分布式
+//! - ****: synchronous 、parallelism 、async 、distribution
 //! - **Rust 1.90**: GATs、Async Traits、常量泛型
 pub mod backtracking;
 pub mod combinatorics;

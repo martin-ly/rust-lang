@@ -1,12 +1,15 @@
 //! 算法对比示例
-//!
+//! algorithm to example
 //! 本示例展示相同问题的不同算法实现和性能对比：
+//! this example problem algorithm and performance to ：
 //! - 排序算法对比
+//! - sorting algorithm to
 //! - 搜索算法对比
+//! - searching algorithm to
 //! - 算法选择指南
-//!
+//! - algorithm
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example algorithm_comparison_demo
 //! ```
 use std::time::Instant;
@@ -70,6 +73,7 @@ fn main() {
 }
 
 /// 冒泡排序（O(n²)）
+/// bubble sort （O(n²)）
 fn bubble_sort(arr: &mut [i32]) {
     let n = arr.len();
     for i in 0..n {
@@ -82,6 +86,7 @@ fn bubble_sort(arr: &mut [i32]) {
 }
 
 /// 线性搜索（O(n)）
+/// linear search （O(n)）
 fn linear_search(arr: &[i32], target: i32) -> Option<usize> {
     for (i, &value) in arr.iter().enumerate() {
         if value == target {
@@ -92,6 +97,7 @@ fn linear_search(arr: &[i32], target: i32) -> Option<usize> {
 }
 
 /// 二分搜索（O(log n)）
+/// binary search （O(log n)）
 fn binary_search_simple(arr: &[i32], target: i32) -> Option<usize> {
     let mut left = 0;
     let mut right = arr.len();

@@ -1,30 +1,33 @@
 //! Rust 1.90 特性演示模块 (历史版本)
-//!
+//! Rust 1.90 feature demonstration module (this )
+//! Rust 1.90 featuredemonstration module (历史版this)
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//!
+//! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
-//!
-//! 本模块展示 Rust 1.90 版本的新特性和改进，包括：
-//! - 返回位置 impl Trait (RPITIT) 的改进
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
+//! - Returnposition impl Trait (RPITIT) 改进
 //! - 异步泛型函数的支持
+//! - async generic function
 //! - 共享状态的不同锁策略对比
+//! - state lock strategy to
 use std::{
     sync::{Arc, Mutex, RwLock},
     thread,
 };
 
 /// 数据结构体，用于演示迭代器管道
+/// data structure volume ，demonstration pipe
 pub struct Data<T> {
     items: Vec<T>,
 }
 
 impl<T> Data<T> {
-    /// 创建新的 Data 实例
     pub fn new(items: Vec<T>) -> Self {
         Self { items }
     }
 
     /// 返回迭代器管道，演示 RPITIT 特性
+    /// pipe ，demonstration RPITIT feature
     pub fn pipeline(&self) -> impl Iterator<Item = T> + '_
     where
         T: Clone,
@@ -41,6 +44,7 @@ impl<T> Data<T> {
 }
 
 /// 装箱版本的迭代器管道，用于性能对比
+/// this pipe ，performance to
 pub fn boxed_pipeline<T>(items: &[T]) -> Box<dyn Iterator<Item = T> + '_>
 where
     T: Clone,
@@ -49,10 +53,12 @@ where
 }
 
 /// 共享状态演示模块
+/// state demonstration module
+/// 共享statedemonstration module
 pub mod shared_state_demo {
     use super::*;
 
-    /// 使用 Mutex 的计数器演示
+    /// Use Mutex 计数器Demonstration of
     pub fn mutex_counter(thread_count: usize, iterations: usize) -> i32 {
         let counter = Arc::new(Mutex::new(0));
         let handles: Vec<_> = (0..thread_count)
@@ -67,6 +73,7 @@ pub mod shared_state_demo {
     }
 
     /// 生成计数器线程
+    /// thread
     fn spawn_counter_thread(counter: Arc<Mutex<i32>>, iterations: usize) -> thread::JoinHandle<()> {
         thread::spawn(move || {
             for _ in 0..iterations {
@@ -76,7 +83,6 @@ pub mod shared_state_demo {
         })
     }
 
-    /// 使用 RwLock 的累加器演示（读多写少场景）
     pub fn rwlock_accumulate(readers: usize, writers: usize, iterations: usize) -> i32 {
         let data = Arc::new(RwLock::new(0));
         let mut handles = Vec::new();
@@ -99,6 +105,7 @@ pub mod shared_state_demo {
     }
 
     /// 生成读取线程
+    /// thread
     fn spawn_reader_thread(data: Arc<RwLock<i32>>, iterations: usize) -> thread::JoinHandle<()> {
         thread::spawn(move || {
             for _ in 0..iterations {
@@ -109,6 +116,7 @@ pub mod shared_state_demo {
     }
 
     /// 生成写入线程
+    /// thread
     fn spawn_writer_thread(data: Arc<RwLock<i32>>, iterations: usize) -> thread::JoinHandle<()> {
         thread::spawn(move || {
             for _ in 0..iterations {
@@ -120,6 +128,7 @@ pub mod shared_state_demo {
 }
 
 /// 异步泛型函数演示
+/// async generic function demonstration
 pub async fn async_add_generic<T>(a: T, b: T) -> T
 where
     T: std::ops::Add<Output = T> + Copy,

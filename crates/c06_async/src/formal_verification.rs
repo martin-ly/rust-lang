@@ -3,6 +3,7 @@
 //! # 概述 (Overview)
 //!
 //! 本模块提供异步编程的形式化验证技术，包括：
+//! This module provides async technique ，：
 //! - 不变式证明 (Invariant Proofs)
 //! - 活性证明 (Liveness Proofs)
 //! - 安全性证明 (Safety Proofs)
@@ -10,6 +11,7 @@
 //! - 死锁检测 (Deadlock Detection)
 //!
 //! # 理论基础
+//! # theory foundation
 //!
 //! ## 1. Hoare 逻辑 (Hoare Logic)
 //!
@@ -17,36 +19,44 @@
 //! {P} C {Q}
 //!
 //! 其中:
+//! its in :
 //! - P: 前置条件 (Precondition)
 //! - C: 命令/程序 (Command/Program)
 //! - Q: 后置条件 (Postcondition)
 //!
 //! 推理规则:
+//! reason rule :
 //!
 //! 1. 空命令:
+//! 1. command :
 //!    ─────────────
 //!    {P} skip {P}
 //!
 //! 2. 赋值:
+//! 2. :
 //!    ────────────────────────────
 //!    {P[E/x]} x := E {P}
 //!
 //! 3. 顺序组合:
+//! 3. order combination :
 //!    {P} C1 {Q}    {Q} C2 {R}
 //!    ──────────────────────────
 //!    {P} C1; C2 {R}
 //!
 //! 4. 条件:
+//! 4. condition :
 //!    {P ∧ B} C1 {Q}    {P ∧ ¬B} C2 {Q}
 //!    ─────────────────────────────────
 //!    {P} if B then C1 else C2 {Q}
 //!
 //! 5. 循环:
+//! 5. circulation :
 //!    {I ∧ B} C {I}
 //!    ───────────────────────────
 //!    {I} while B do C {I ∧ ¬B}
 //!
 //!    其中 I 是循环不变式
+//!    its in I circulation
 //! ```
 //!
 //! ## 2. 时序逻辑 (Temporal Logic)
@@ -55,31 +65,46 @@
 //!
 //! ```text
 //! 算子:
+//! :
 //! - □P (Always): P 在所有未来状态都成立
+//! - □P (Always): P in all future state
 //! - ◇P (Eventually): P 在某个未来状态成立
+//! - ◇P (Eventually): P in future state
 //! - ○P (Next): P 在下一个状态成立
+//! - ○P (Next): P in under state
 //! - P U Q (Until): P 一直成立直到 Q 成立
+//! - P U Q (Until): P to Q
 //!
 //! 性质:
+//! :
 //! - 安全性 (Safety): □¬Bad (永远不会到达坏状态)
+//! - (Safety): □¬Bad (to state )
 //! - 活性 (Liveness): □◇Good (无限次到达好状态)
+//! - (Liveness): □◇Good (to state )
 //! ```
 //!
 //! ## 3. 并发验证
+//! ## 3. concurrency
 //!
 //! ```text
 //! 并发程序 P || Q 的验证:
+//! concurrency program P || Q :
 //!
 //! 1. 不干扰原则 (Non-interference):
 //!    如果 {P} C {Q}，则 C 不修改 P 和 Q 中的共享变量
+//!    if {P} C {Q}， C P and Q in variable
 //!
 //! 2. 资源不变式 (Resource Invariant):
 //!    对于共享资源 R，定义不变式 I(R)
+//!    to R，definition I(R)
 //!    每个访问 R 的线程必须维护 I(R)
+//!    R thread must I(R)
 //!
 //! 3. 所有权 (Ownership):
 //!    每个资源有唯一所有者
+//!    all
 //!    访问资源需要获取所有权
+//!    ownership
 //! ```
 use std::sync::Arc;
 use std::time::Duration;
@@ -87,16 +112,21 @@ use tokio::sync::Mutex;
 use tokio::time::sleep;
 
 /// # 示例 1: 不变式验证
+/// # example 1:
 ///
 /// 验证程序在执行过程中保持特定不变式
+/// program in in
 pub mod invariant_verification {
     use super::*;
 
     /// 银行账户 - 演示不变式维护
+    /// - demonstration
     ///
     /// ## 不变式
+    /// ##
     /// ```text
     /// I: balance ≥ 0  (账户余额始终非负)
+    /// I: balance ≥ 0 ()
     /// ```
     pub struct BankAccount {
         balance: Arc<Mutex<i64>>,
@@ -106,11 +136,13 @@ pub mod invariant_verification {
         /// 创建账户
         ///
         /// ## 前置条件
+        /// ## before condition
         /// ```text
         /// P: initial_balance ≥ 0
         /// ```
         ///
         /// ## 后置条件
+        /// ## after condition
         /// ```text
         /// Q: balance = initial_balance ∧ balance ≥ 0
         /// ```
@@ -124,6 +156,7 @@ pub mod invariant_verification {
         /// 存款操作
         ///
         /// ## Hoare 三元组
+        /// ## Hoare
         /// ```text
         /// {balance = old_balance ∧ amount > 0}
         ///   deposit(amount)
@@ -152,6 +185,7 @@ pub mod invariant_verification {
         /// 取款操作
         ///
         /// ## Hoare 三元组
+        /// ## Hoare
         /// ```text
         /// {balance = old_balance ∧ amount > 0 ∧ amount ≤ old_balance}
         ///   withdraw(amount)
@@ -193,8 +227,10 @@ pub mod invariant_verification {
     }
 
     /// 演示并发转账的不变式维护
+    /// demonstration concurrency
     ///
     /// ## 全局不变式
+    /// ## global
     /// ```text
     /// I: sum(all_balances) = constant
     /// ```
@@ -249,21 +285,28 @@ pub mod invariant_verification {
 }
 
 /// # 示例 2: 终止性证明
+/// # example 2:
 ///
 /// 使用度量函数证明程序终止
+/// function program
 pub mod termination_proofs {
     use super::*;
 
     /// 证明异步循环的终止性
+    /// async circulation
     ///
     /// ## 度量函数 (Ranking Function)
     /// ```text
     /// φ(n) = n
     ///
     /// 性质:
+    /// :
     /// 1. φ(n) ≥ 0  (非负)
+    /// 1. φ(n) ≥ 0 ()
     /// 2. 每次迭代 φ 严格递减
+    /// 2. φ
     /// 3. φ = 0 时循环终止
+    /// 3. φ = 0 circulation
     /// ```
     pub async fn countdown_with_proof(mut n: u64) {
         println!("\n=== 终止性证明: 倒计时 ===");
@@ -285,8 +328,10 @@ pub mod termination_proofs {
     }
 
     /// 更复杂的终止性证明：二分查找
+    /// complex ：
     ///
     /// ## 度量函数
+    /// ## function
     /// ```text
     /// φ(left, right) = right - left
     /// ```
@@ -327,16 +372,20 @@ pub mod termination_proofs {
 }
 
 /// # 示例 3: 死锁检测
+/// # example 3: lock
 ///
 /// 检测和预防死锁
+/// and lock
 pub mod deadlock_detection {
     use super::*;
 
     /// 资源分配图
     ///
     /// 用于死锁检测的数据结构
+    /// lock data structure
     pub struct ResourceGraph {
         /// 资源 -> 等待该资源的任务
+        /// -> etc. this task
         resource_holders: Arc<Mutex<std::collections::HashMap<String, String>>>,
     }
 
@@ -381,6 +430,7 @@ pub mod deadlock_detection {
     }
 
     /// 演示死锁场景
+    /// demonstration lock scenario
     pub async fn demo_deadlock_scenario() {
         println!("\n=== 死锁检测演示 ===");
 
@@ -441,6 +491,7 @@ pub mod deadlock_detection {
 }
 
 /// # 综合示例: 运行所有验证
+/// # synthesize example : Run all
 pub async fn run_all_verifications() {
     println!("╔══════════════════════════════════════════════════════════╗");
     println!("║       形式化验证与证明                                   ║");

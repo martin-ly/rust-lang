@@ -1,32 +1,35 @@
 //! Rust 1.91 网络编程特性实现模块（历史版本）
-//!
+//! Rust 1.91 network programming feature module （this ）
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//!
+//! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
-//!
-//! 本模块展示了 Rust 1.91 在网络编程场景中的应用，包括：
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! - const 上下文增强（网络配置计算）
+//! - const on under （network ）
 //! - 新的稳定 API（网络数据处理）
+//! - API（network ）
 //! - JIT 编译器优化（网络性能提升）
+//! - JIT optimization （network performance ）
 //! - 内存分配器优化（网络缓冲区优化）
+//! - allocator optimization （network buffering optimization ）
 //! - 异步迭代器改进（异步网络处理性能提升）
-//!
+//! - async （async network performance ）
 //! # 文件信息
+//! #
 //! - 文件: rust_191_features.rs
 //! - 创建日期: 2025-01-27
+//! - date : 2025-01-27
 //! - 版本: 1.0
-//! - Rust版本: 1.91.0
-//! - Edition: 2024
+//! - this : 1.0
+//! - 版this: 1.0
 use std::io::{BufRead, BufReader, Cursor};
 use std::ops::ControlFlow;
 
 // ==================== 1. const 上下文增强在网络配置中的应用 ====================
 
-/// Rust 1.91 const 上下文增强在网络配置中的应用
 pub mod const_network_config {
     /// 网络配置系统
-    ///
-    /// 使用 Rust 1.91 的 const 上下文增强进行编译时配置计算
+    /// network system
     pub struct NetworkConfigSystem;
 
     impl NetworkConfigSystem {
@@ -56,8 +59,9 @@ pub mod const_network_config {
     }
 
     /// 协议配置
-    ///
+    /// 协议Configure
     /// 使用 const 上下文计算协议配置
+    /// const on under
     pub struct ProtocolConfig;
 
     impl ProtocolConfig {
@@ -81,13 +85,10 @@ pub mod const_network_config {
 
 // ==================== 2. 新的稳定 API 在网络编程中的应用 ====================
 
-/// Rust 1.91 新的稳定 API 在网络编程中的应用
+/// Rust 1.91 新稳定 API innetwork programminginapplication
 pub mod network_new_apis {
     use super::*;
 
-    /// 使用 BufRead::skip_while 解析网络消息
-    ///
-    /// Rust 1.91 新增：跳过满足条件的字节
     pub fn parse_network_message<R: BufRead>(
         reader: &mut R,
     ) -> Result<Vec<String>, std::io::Error> {
@@ -112,9 +113,6 @@ pub mod network_new_apis {
         Ok(lines)
     }
 
-    /// 使用改进的 ControlFlow 进行网络连接验证
-    ///
-    /// Rust 1.91 改进了 ControlFlow，可以携带更详细的错误信息
     pub fn validate_network_connection(
         current_connections: usize,
         max_connections: usize,
@@ -129,7 +127,6 @@ pub mod network_new_apis {
         }
     }
 
-    /// 使用 ControlFlow 进行网络资源检查
     pub fn check_network_resources(
         bandwidth_mbps: f64,
         max_bandwidth_mbps: f64,
@@ -156,13 +153,12 @@ pub mod network_new_apis {
 
 // ==================== 3. JIT 编译器优化在网络编程中的应用 ====================
 
-/// Rust 1.91 JIT 编译器优化在网络编程中的应用
-///
-/// Rust 1.91 对迭代器操作进行了优化，网络性能提升 10-25%
+/// Rust 1.91 JIT 编译器optimizationinnetwork programminginapplication
 pub mod network_jit_optimizations {
     /// 处理网络数据包
-    ///
+    /// network
     /// Rust 1.91 JIT 优化：迭代器链式操作性能提升约 15-25%
+    /// Rust 1.91 JIT optimization ：performance 15-25%
     pub fn process_network_packets(packets: &[Vec<u8>]) -> Vec<Vec<u8>> {
         packets
             .iter()
@@ -173,8 +169,9 @@ pub mod network_jit_optimizations {
     }
 
     /// 计算网络统计信息
-    ///
+    /// network
     /// Rust 1.91 JIT 优化：简单求和操作性能提升约 10-15%
+    /// Rust 1.91 JIT optimization ：simple and performance 10-15%
     pub fn calculate_network_stats(packet_sizes: &[usize]) -> (usize, usize, usize) {
         let sum: usize = packet_sizes.iter().sum();
         let count = packet_sizes.len();
@@ -184,8 +181,9 @@ pub mod network_jit_optimizations {
     }
 
     /// 过滤和转换网络数据
-    ///
+    /// and conversion network
     /// Rust 1.91 JIT 优化：复杂链式操作性能提升约 20-25%
+    /// Rust 1.91 JIT optimization ：complex performance 20-25%
     pub fn filter_and_transform_network_data(data: &[u8]) -> Vec<u8> {
         data.iter()
             .filter(|&&b| b > 0)
@@ -195,6 +193,7 @@ pub mod network_jit_optimizations {
     }
 
     /// 性能演示
+    /// performance demonstration
     pub fn demonstrate_network_performance() {
         println!("\n=== 网络编程 JIT 优化演示 ===");
 
@@ -214,13 +213,11 @@ pub mod network_jit_optimizations {
 
 // ==================== 4. 内存分配器优化在网络缓冲区中的应用 ====================
 
-/// Rust 1.91 内存分配器优化在网络缓冲区中的应用
-///
-/// Rust 1.91 改进了内存分配器，小对象分配性能提升 25-30%
 pub mod network_memory_optimizations {
     /// 创建小对象用于网络缓冲区
-    ///
+    /// to network buffering
     /// Rust 1.91 优化：小对象（< 32 bytes）分配性能提升约 25-30%
+    /// Rust 1.91 optimization ：to （< 32 bytes）performance 25-30%
     pub fn create_small_network_buffers() -> Vec<Vec<u8>> {
         let mut buffers = Vec::new();
         // Rust 1.91 优化：频繁的小对象分配更加高效
@@ -231,8 +228,7 @@ pub mod network_memory_optimizations {
     }
 
     /// 处理网络数据
-    ///
-    /// Rust 1.91 优化：在频繁的小对象分配场景下性能提升
+    /// network
     pub fn process_network_data(data: &str) -> Vec<String> {
         data.lines()
             .filter_map(|line| {
@@ -246,6 +242,7 @@ pub mod network_memory_optimizations {
     }
 
     /// 内存优化演示
+    /// memory optimization demonstration
     pub fn demonstrate_memory_optimizations() {
         println!("\n=== 网络缓冲区内存优化演示 ===");
 
@@ -260,15 +257,13 @@ pub mod network_memory_optimizations {
 
 // ==================== 5. 异步迭代器改进在异步网络处理中的应用 ====================
 
-/// Rust 1.91 异步迭代器改进在异步网络处理中的应用
-///
-/// Rust 1.91 对异步迭代器进行了优化，性能提升约 15-20%
 pub mod network_async_improvements {
     use futures::stream::{self, Stream, StreamExt};
 
     /// 异步处理网络数据流
-    ///
+    /// async network stream
     /// Rust 1.91 优化：异步迭代器性能提升约 15-20%
+    /// Rust 1.91 optimization ：async performance 15-20%
     pub async fn process_async_network_stream<S>(stream: S) -> Vec<Vec<u8>>
     where
         S: Stream<Item = Vec<u8>> + Send,
@@ -285,6 +280,7 @@ pub mod network_async_improvements {
     }
 
     /// 异步网络处理性能演示
+    /// async network performance demonstration
     pub async fn demonstrate_async_improvements() {
         println!("\n=== 异步网络处理改进演示 ===");
 
@@ -306,18 +302,17 @@ pub mod network_async_improvements {
 
 // ==================== 6. 标准库新 API 在网络编程中的应用 ====================
 
-/// Rust 1.91 标准库新 API 在网络编程中的应用
 pub mod network_std_new_apis {
     /// str::split_ascii_whitespace 示例
-    ///
     /// Rust 1.91 新增：仅处理 ASCII 空白字符，性能更好
+    /// Rust 1.91 ： ASCII ，performance
     pub fn parse_network_headers(text: &str) -> Vec<&str> {
         text.split_ascii_whitespace().collect()
     }
 
     /// Vec::try_reserve_exact 示例
-    ///
     /// Rust 1.91 新增：尝试精确分配容量，可能失败
+    /// Rust 1.91 ：，may
     pub fn allocate_network_buffer(
         size: usize,
     ) -> Result<Vec<u8>, std::collections::TryReserveError> {
@@ -327,6 +322,7 @@ pub mod network_std_new_apis {
     }
 
     /// 标准库新 API 演示
+    /// standard library API demonstration
     pub fn demonstrate_std_new_apis() {
         println!("\n=== 标准库新 API 演示 ===");
 
@@ -352,14 +348,13 @@ pub mod network_std_new_apis {
 // ==================== 7. 综合应用示例 ====================
 
 /// Rust 1.91 综合应用示例模块
-///
-/// 结合多个 Rust 1.91 特性的实际网络编程场景
+/// Rust 1.91 synthesize application example module
+/// 结合多个 Rust 1.91 featureactualnetwork programmingscenario
 pub mod comprehensive_network_examples {
     use super::*;
 
     /// 综合网络管理系统
-    ///
-    /// 使用 const 上下文增强和新的 API
+    /// synthesize network system
     pub struct ComprehensiveNetworkSystem;
 
     impl ComprehensiveNetworkSystem {
@@ -382,8 +377,9 @@ pub mod comprehensive_network_examples {
     }
 
     /// 高性能网络数据处理管道
-    ///
+    /// performance network pipe
     /// 利用 JIT 优化和内存分配改进
+    /// JIT optimization and memory
     pub fn process_network_data_pipeline(data: &[Vec<u8>]) -> Vec<u8> {
         // Rust 1.91 JIT 优化：链式迭代器性能提升约 20-25%
         data.iter()
@@ -395,8 +391,9 @@ pub mod comprehensive_network_examples {
     }
 
     /// 配置文件解析示例
-    ///
+    /// example
     /// 使用新的 API 解析网络配置
+    /// API network
     pub fn parse_network_config(config_text: &str) -> Vec<String> {
         let mut cursor = Cursor::new(config_text.as_bytes());
         let mut reader = BufReader::new(&mut cursor);
@@ -426,6 +423,7 @@ pub mod comprehensive_network_examples {
 // ==================== 公开 API ====================
 
 /// Rust 1.91 网络编程特性演示入口
+/// Rust 1.91 network programming feature demonstration
 pub fn demonstrate_rust_191_network_features() {
     println!("========================================");
     println!("Rust 1.91 网络编程特性演示");

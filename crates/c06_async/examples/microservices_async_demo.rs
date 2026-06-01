@@ -1,17 +1,26 @@
 //! 微服务架构异步演示
-//!
+//! microservice architecture async demonstration
 //! 本示例展示了基于异步编程的微服务架构：
+//! this example async microservice architecture ：
 //! - 服务发现和注册
+//! - service discovery and
 //! - 负载均衡
+//! -
 //! - 服务间通信
+//! -
 //! - 熔断器模式
+//! -
 //! - 分布式追踪
+//! - distribution
 //! - 配置管理
+//! -
 //! - 健康检查
+//! - health check
 //! - 优雅关闭
-//!
+//! -
+//! - 优雅Close
 //! 运行方式：
-//! ```bash
+//! Run way ：
 //! cargo run --example microservices_async_demo
 //! ```
 use anyhow::Result;
@@ -45,6 +54,7 @@ pub enum ServiceStatus {
 }
 
 /// 服务注册中心
+/// service registration center
 pub struct ServiceRegistry {
     services: Arc<RwLock<HashMap<String, Vec<ServiceInstance>>>>,
     heartbeat_interval: Duration,
@@ -171,6 +181,7 @@ impl ServiceRegistry {
 }
 
 /// 负载均衡器
+/// load balancer
 pub struct LoadBalancer {
     registry: Arc<ServiceRegistry>,
     strategy: LoadBalancingStrategy,
@@ -286,6 +297,7 @@ impl CircuitBreaker {
 }
 
 /// 分布式追踪
+/// distribution
 pub struct DistributedTracer {
     traces: Arc<Mutex<Vec<Trace>>>,
 }
@@ -405,6 +417,7 @@ impl DistributedTracer {
 }
 
 /// 微服务
+/// microservice
 pub struct Microservice {
     pub name: String,
     pub instance_id: String,
@@ -527,6 +540,7 @@ impl Microservice {
 }
 
 /// 微服务客户端
+/// microservice
 pub struct MicroserviceClient {
     #[allow(dead_code)]
     registry: Arc<ServiceRegistry>,

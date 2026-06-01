@@ -1,11 +1,9 @@
-//! Rust 1.93.0 并发与线程 特性模块
 #![allow(clippy::incompatible_msrv)]
 
 use std::mem::MaybeUninit;
 use std::sync::Arc;
 use std::thread;
 
-/// 线程安全的 `MaybeUninit` 缓冲区初始化（每个线程写自己的槽位）
 pub fn thread_safe_buffer_init() -> [i32; 4] {
     let mut buf = [MaybeUninit::uninit(); 4];
 
@@ -36,6 +34,7 @@ pub fn thread_safe_buffer_init() -> [i32; 4] {
 }
 
 /// 使用 `String::into_raw_parts` 跨线程传递所有权（通过重建）
+/// `String::into_raw_parts` thread ownership （）
 pub fn string_cross_thread(s: String) -> String {
     let (ptr, len, cap) = s.into_raw_parts();
     let ptr = ptr as usize;
@@ -50,6 +49,8 @@ pub fn string_cross_thread(s: String) -> String {
 }
 
 /// 使用 `Arc<Vec<T>>` 结合 `into_raw_parts` 演示共享内存布局
+/// `Arc<Vec<T>>` `into_raw_parts` demonstration shared memory layout
+/// Use `Arc<Vec<T>>` 结合 `into_raw_parts` Demonstration ofshared memorylayout
 pub fn shared_vec_layout<T: Send + 'static>(v: Vec<T>) -> (usize, usize, usize) {
     let (ptr, len, cap) = v.into_raw_parts();
     let meta = (ptr as usize, len, cap);

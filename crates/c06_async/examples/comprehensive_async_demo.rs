@@ -1,15 +1,18 @@
 //! 异步编程综合演示示例
-//!
-//! 本示例展示了 Rust 异步编程的各个方面：
+//! async synthesize demonstration example
 //! - Future 状态机
+//! - Future state machine
 //! - async/await 用法
 //! - Stream 流处理
+//! - Stream stream
 //! - 并发控制
+//! - concurrency
 //! - 错误处理
+//! - error handling
 //! - 性能优化
-//!
+//! - performance optimization
 //! 运行方式：
-//! ```bash
+//! Run way ：
 //! cargo run --example comprehensive_async_demo
 //! ```
 use anyhow::{Context, Result};
@@ -20,6 +23,7 @@ use tokio::sync::{Mutex, Notify, RwLock, Semaphore};
 use tokio::time::{sleep, timeout};
 
 /// 演示基本的异步函数和并发执行
+/// demonstration this async function and concurrency
 #[tokio::main]
 async fn main() -> Result<()> {
     println!("🚀 Rust 异步编程综合演示");
@@ -54,6 +58,7 @@ async fn main() -> Result<()> {
 }
 
 /// 1. 基本异步函数演示
+/// 1. this async function demonstration
 #[allow(dead_code)]
 async fn demo_basic_async() -> Result<()> {
     println!("  基本异步函数调用...");
@@ -88,6 +93,7 @@ async fn demo_basic_async() -> Result<()> {
 }
 
 /// 2. Future 组合子演示
+/// 2. Future combination demonstration
 #[allow(dead_code)]
 async fn demo_future_combinators() -> Result<()> {
     println!("  Future 组合子操作...");
@@ -124,6 +130,7 @@ async fn demo_future_combinators() -> Result<()> {
 }
 
 /// 3. Stream 流处理演示
+/// 3. Stream stream demonstration
 #[allow(dead_code)]
 async fn demo_stream_processing() -> Result<()> {
     println!("  Stream 流处理操作...");
@@ -168,6 +175,7 @@ async fn demo_stream_processing() -> Result<()> {
 }
 
 /// 4. 并发控制演示
+/// 4. concurrency demonstration
 #[allow(dead_code)]
 async fn demo_concurrency_control() -> Result<()> {
     println!("  并发控制原语演示...");
@@ -211,7 +219,6 @@ async fn demo_mutex() -> Result<()> {
     Ok(())
 }
 
-/// RwLock 演示
 #[allow(dead_code)]
 async fn demo_rwlock() -> Result<()> {
     let data = Arc::new(RwLock::new(vec![1, 2, 3]));
@@ -298,6 +305,7 @@ async fn demo_notify() -> Result<()> {
 }
 
 /// 5. 错误处理演示
+/// 5. Error handling demonstration
 async fn demo_error_handling() -> Result<()> {
     println!("  错误处理策略演示...");
 
@@ -324,6 +332,7 @@ async fn demo_error_handling() -> Result<()> {
 }
 
 /// 重试操作演示
+/// demonstration
 async fn retry_operation(max_attempts: u32) -> Result<String> {
     let mut attempts = 0;
     loop {
@@ -340,18 +349,22 @@ async fn retry_operation(max_attempts: u32) -> Result<String> {
 }
 
 /// 慢速操作演示
+/// demonstration
+/// 慢速操作Demonstration of
 async fn slow_operation() -> String {
     sleep(Duration::from_millis(100)).await;
     "慢速操作完成".to_string()
 }
 
 /// 错误转换演示
+/// error conversion demonstration
 async fn error_transformation() -> Result<String, anyhow::Error> {
     let result = risky_operation().await.context("执行风险操作失败")?;
     Ok(result)
 }
 
 /// 6. 性能优化演示
+/// 6. performance optimization demonstration
 async fn demo_performance_optimization() -> Result<()> {
     println!("  性能优化技术演示...");
 
@@ -398,12 +411,15 @@ async fn demo_performance_optimization() -> Result<()> {
 // 辅助函数
 
 /// 模拟异步任务
+/// async task
+/// 模拟asynctask
 async fn async_task(name: &str, delay_ms: u64) -> String {
     sleep(Duration::from_millis(delay_ms)).await;
     format!("{}完成", name)
 }
 
 /// 模拟风险操作（可能失败）
+/// risk （may ）
 async fn risky_operation() -> Result<String, anyhow::Error> {
     // 模拟 30% 的失败率
     if rand::random::<f32>() < 0.3 {
@@ -414,12 +430,14 @@ async fn risky_operation() -> Result<String, anyhow::Error> {
 }
 
 /// 模拟处理单个项目
+/// project
 async fn process_item(item: i32) -> i32 {
     sleep(Duration::from_millis(10)).await;
     item * 2
 }
 
 /// 模拟数据库操作
+/// database
 async fn simulate_database_operation(id: i32) -> String {
     sleep(Duration::from_millis(50)).await;
     format!("数据库操作 {} 完成", id)

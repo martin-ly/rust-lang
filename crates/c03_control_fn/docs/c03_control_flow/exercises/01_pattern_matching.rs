@@ -1,10 +1,11 @@
 //! C03 控制流练习 - 模式匹配
-//! 
+//! C03 stream -
 //! 运行: cargo test --package c03_control_flow -- exercises::pattern_matching
 
 #[cfg(test)]
 mod tests {
     /// 练习 1: 解构结构体
+    /// 1: struct
     struct Point {
         x: i32,
         y: i32,
@@ -30,6 +31,7 @@ mod tests {
     }
 
     /// 练习 2: if let 简化模式
+    /// 2: if let
     enum Message {
         Text(String),
         Number(i32),
@@ -54,6 +56,8 @@ mod tests {
     }
 
     /// 练习 3: while let 循环
+    /// 3: while let circulation
+    /// 练习 3: while let circulation
     fn process_items<T>(items: &mut Vec<T>) -> Vec<T> {
         let mut processed = Vec::new();
         while let Some(item) = items.pop() {
@@ -71,6 +75,7 @@ mod tests {
     }
 
     /// 练习 4: 守卫子句
+    /// 4:
     fn describe_number(n: i32) -> &'static str {
         match n {
             n if n < 0 => "negative",
@@ -89,6 +94,7 @@ mod tests {
     }
 
     /// 练习 5: @ 绑定
+    /// 5: @
     fn analyze_range(range: (i32, i32)) -> String {
         match range {
             (start, end) @ (0..=10, 0..=10) => {

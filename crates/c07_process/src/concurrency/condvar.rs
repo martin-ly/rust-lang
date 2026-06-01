@@ -8,6 +8,7 @@ use std::sync::{Arc, Condvar, MutexGuard};
 use std::time::{Duration, Instant};
 
 /// 进程安全的条件变量
+/// process condition variable
 #[allow(dead_code)]
 pub struct ProcessCondVar {
     name: String,
@@ -26,6 +27,7 @@ struct CondVarStats {
 
 impl ProcessCondVar {
     /// 创建新的条件变量
+    /// condition variable
     pub fn new(name: &str, config: SyncConfig) -> Self {
         Self {
             name: name.to_string(),
@@ -41,6 +43,7 @@ impl ProcessCondVar {
     }
 
     /// 等待条件满足
+    /// etc. condition
     pub fn wait<'a, T>(&self, guard: MutexGuard<'a, T>) -> SyncResult<MutexGuard<'a, T>> {
         let start = Instant::now();
 
@@ -62,6 +65,7 @@ impl ProcessCondVar {
     }
 
     /// 带超时的等待
+    /// etc.
     pub fn wait_timeout<'a, T>(
         &self,
         guard: MutexGuard<'a, T>,
@@ -87,12 +91,14 @@ impl ProcessCondVar {
     }
 
     /// 通知一个等待者
+    /// etc.
     pub fn notify_one(&self) {
         self.stats.notify_count.fetch_add(1, Ordering::Relaxed);
         self.inner.notify_one();
     }
 
     /// 通知所有等待者
+    /// all etc.
     pub fn notify_all(&self) {
         self.stats.notify_count.fetch_add(1, Ordering::Relaxed);
         self.inner.notify_all();

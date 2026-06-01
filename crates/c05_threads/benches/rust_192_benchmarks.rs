@@ -1,13 +1,10 @@
 //! Rust 1.92.0 线程特性性能基准测试套件
-//!
-//! 本模块提供 Rust 1.92.0 新特性的性能基准测试，包括：
-//! - rotate_right 在线程池管理中的性能
-//! - NonZero::div_ceil 的计算性能
-//! - MaybeUninit 在并发编程中的性能
+//! Rust 1.92.0 thread feature Performance benchmark
+//! This module provides Rust 1.92.0 新featureperformancebenchmark，包括：
 //! - 线程池管理器的性能
-//!
+//! - thread pool performance
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo bench --bench rust_192_benchmarks
 //! ```
 use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
@@ -21,7 +18,6 @@ use c05_threads::archive::rust_192_features::{
     ThreadSafeUninitBuffer, ThreadSchedulingConfig, ThreadTask,
 };
 
-/// 基准测试 rotate_right 在线程池任务队列中的性能
 fn bench_rotate_right_performance(c: &mut Criterion) {
     let mut group = c.benchmark_group("rotate_right_performance");
     group.throughput(Throughput::Elements(1));
@@ -51,7 +47,6 @@ fn bench_rotate_right_performance(c: &mut Criterion) {
     group.finish();
 }
 
-/// 基准测试 NonZero::div_ceil 的计算性能
 fn bench_div_ceil_performance(c: &mut Criterion) {
     let mut group = c.benchmark_group("div_ceil_performance");
     group.throughput(Throughput::Elements(1));
@@ -83,6 +78,7 @@ fn bench_div_ceil_performance(c: &mut Criterion) {
 }
 
 /// 基准测试线程资源分配器的性能
+/// benchmark thread performance
 fn bench_resource_allocator_performance(c: &mut Criterion) {
     let mut group = c.benchmark_group("resource_allocator_performance");
 
@@ -108,6 +104,7 @@ fn bench_resource_allocator_performance(c: &mut Criterion) {
 }
 
 /// 基准测试线程调度配置的性能
+/// benchmark thread scheduling performance
 fn bench_scheduling_config_performance(c: &mut Criterion) {
     let mut group = c.benchmark_group("scheduling_config_performance");
 
@@ -131,6 +128,7 @@ fn bench_scheduling_config_performance(c: &mut Criterion) {
 }
 
 /// 基准测试线程池管理器的性能
+/// benchmark thread pool performance
 fn bench_thread_pool_manager_performance(c: &mut Criterion) {
     let mut group = c.benchmark_group("thread_pool_manager_performance");
     group.throughput(Throughput::Elements(1));
@@ -171,6 +169,7 @@ fn bench_thread_pool_manager_performance(c: &mut Criterion) {
 }
 
 /// 基准测试线程池管理器的并发性能
+/// benchmark thread pool concurrency performance
 fn bench_concurrent_manager_operations(c: &mut Criterion) {
     let mut group = c.benchmark_group("concurrent_manager_operations");
     group.throughput(Throughput::Elements(1));
@@ -220,7 +219,6 @@ fn bench_concurrent_manager_operations(c: &mut Criterion) {
     group.finish();
 }
 
-/// 基准测试 MaybeUninit 缓冲区的性能
 fn bench_maybe_uninit_buffer_performance(c: &mut Criterion) {
     let mut group = c.benchmark_group("maybe_uninit_buffer_performance");
 
@@ -258,6 +256,7 @@ fn bench_maybe_uninit_buffer_performance(c: &mut Criterion) {
 }
 
 /// 综合性能基准测试：完整的线程池处理流程
+/// synthesize Performance benchmark ：complete thread pool process
 fn bench_complete_workflow_performance(c: &mut Criterion) {
     let mut group = c.benchmark_group("complete_workflow_performance");
     group.throughput(Throughput::Elements(1));

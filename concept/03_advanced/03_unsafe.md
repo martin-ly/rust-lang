@@ -1,3 +1,5 @@
+> **内容分级**: [专家级]
+
 # Unsafe Rust
 
 > **受众**: [专家]
@@ -2811,3 +2813,16 @@ assert!(!raw.is_null());  // alloc 返回的指针保证 non-null
 > 3. **dangling 指针在特定条件下 valid** — 只要偏移计算不越界，dangling pointer 的算术运算仍合法
 >
 > 这为 Miri 的严格检查、 unsafe 代码指南和形式化验证工具（如 RustBelt）提供了统一基础。[来源: [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/)] · [来源: [Rust Reference — Pointer Validity](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)]
+
+---
+
+## 导航：下一步去哪？
+
+> **自检**：你当前掌握的核心概念是否已能独立应用？
+
+| 选择 | 条件 | 目标 |
+|:---|:---|:---|
+| 🔙 巩固基础 | 仍有模糊概念 | 回到 [L2 对应主题](../02_intermediate/) 或 [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) |
+| 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](./README.md) 选择其他主题 |
+| 🎓 进入 L4 形式化 | 想理解"为什么"的数学证明 | [L4 形式化](../04_formal/README.md) |
+| 🏗️ 进入 L6 生态 | 想掌握生产工具链 | [L6 生态](../06_ecosystem/README.md) |

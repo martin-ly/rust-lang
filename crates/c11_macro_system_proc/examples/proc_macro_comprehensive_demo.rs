@@ -1,7 +1,6 @@
 //! Proc-Macro 综合演示
-//!
 //! 运行方式：
-//!   cargo run --example proc_macro_comprehensive_demo -p c11_macro_system_proc
+//! Run way ：
 
 use c11_macro_system_proc::{AutoClone, Builder, conditional, debug_print, serializable, timed};
 

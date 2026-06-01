@@ -1,21 +1,27 @@
 //! 聚类算法实现
+//! algorithm
 //!
 //! 本模块提供了常用的聚类算法，包括：
+//! This module provides algorithm ，：
 //! - K-means 聚类
 //! - DBSCAN 聚类
 use super::*;
 use std::collections::HashMap;
 
 /// K-means 聚类算法
+/// K-means algorithm
 #[derive(Debug, Clone)]
 pub struct KMeans {
     /// 聚类数量
+    /// quantity
     k: usize,
     /// 最大迭代次数
+    /// maximum
     max_iterations: usize,
     /// 收敛阈值
     tolerance: f64,
     /// 聚类中心
+    /// center
     centroids: Option<Dataset>,
     /// 是否已训练
     is_fitted: bool,
@@ -23,6 +29,7 @@ pub struct KMeans {
 
 impl KMeans {
     /// 创建新的 K-means 实例
+    /// K-means
     pub fn new(k: usize) -> Self {
         Self {
             k,
@@ -34,6 +41,7 @@ impl KMeans {
     }
 
     /// 设置最大迭代次数
+    /// maximum
     pub fn with_max_iterations(mut self, max_iterations: usize) -> Self {
         self.max_iterations = max_iterations;
         self
@@ -46,6 +54,7 @@ impl KMeans {
     }
 
     /// 初始化聚类中心
+    /// center
     fn initialize_centroids(&self, data: &Dataset) -> MLResult<Dataset> {
         if data.is_empty() {
             return Err(MLError::InvalidInput("数据集为空".to_string()));
@@ -71,6 +80,7 @@ impl KMeans {
     }
 
     /// 计算点到聚类中心的距离
+    /// point to center
     fn euclidean_distance(&self, point1: &DataPoint, point2: &DataPoint) -> f64 {
         point1
             .iter()
@@ -81,6 +91,7 @@ impl KMeans {
     }
 
     /// 分配样本到最近的聚类中心
+    /// this to center
     fn assign_clusters(&self, data: &Dataset, centroids: &Dataset) -> Labels {
         data.iter()
             .map(|point| {
@@ -96,6 +107,7 @@ impl KMeans {
     }
 
     /// 更新聚类中心
+    /// center
     fn update_centroids(&self, data: &Dataset, labels: &Labels) -> MLResult<Dataset> {
         let n_features = data[0].len();
         let mut new_centroids = vec![vec![0.0; n_features]; self.k];
@@ -133,6 +145,7 @@ impl KMeans {
     }
 
     /// 计算惯性（簇内平方和）
+    /// （inside and ）
     pub fn inertia(&self, data: &Dataset) -> MLResult<f64> {
         if !self.is_fitted {
             return Err(MLError::ModelNotTrained);
@@ -198,12 +211,15 @@ impl UnsupervisedLearning for KMeans {
 }
 
 /// DBSCAN 聚类算法
+/// DBSCAN algorithm
 #[derive(Debug, Clone)]
 #[allow(clippy::upper_case_acronyms)]
 pub struct DBSCAN {
     /// 邻域半径
+    /// domain
     eps: f64,
     /// 最小样本数
+    /// minimum this
     min_samples: usize,
     /// 是否已训练
     is_fitted: bool,
@@ -211,6 +227,7 @@ pub struct DBSCAN {
 
 impl DBSCAN {
     /// 创建新的 DBSCAN 实例
+    /// DBSCAN
     pub fn new(eps: f64, min_samples: usize) -> Self {
         Self {
             eps,
@@ -230,6 +247,7 @@ impl DBSCAN {
     }
 
     /// 找到点的邻域
+    /// to point domain
     fn range_query(&self, data: &Dataset, point_idx: usize) -> Vec<usize> {
         let point = &data[point_idx];
         data.iter()
@@ -324,10 +342,12 @@ impl DBSCAN {
 }
 
 /// 聚类评估指标
+/// indicator
 pub struct ClusteringMetrics;
 
 impl ClusteringMetrics {
     /// 计算轮廓系数
+    /// coefficient
     pub fn silhouette_score(data: &Dataset, labels: &Labels) -> MLResult<f64> {
         if data.len() != labels.len() {
             return Err(MLError::DimensionMismatch {

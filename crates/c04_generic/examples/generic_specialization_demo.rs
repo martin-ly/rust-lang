@@ -1,25 +1,21 @@
 //! 泛型特化模拟示例
-//!
-//! 本示例展示如何在Rust中模拟泛型特化（使用trait和newtype模式）：
-//! - 使用trait实现特化
-//! - 使用newtype模式实现特化
+//! generic example
 //! - 实际应用场景
-//!
-//! 注意：Rust稳定版目前不支持真正的泛型特化（specialization）
+//! - actual application scenario
 //! 本示例展示如何使用现有特性模拟特化效果
-//!
+//! this example feature effect
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example generic_specialization_demo
 //! ```
 use std::fmt::Display;
 
 /// 序列化trait
+/// sequence trait
 trait Serialize {
     fn serialize(&self) -> String;
 }
 
-/// 使用newtype模式为i32提供特化实现
 struct IntValue(i32);
 
 impl Display for IntValue {
@@ -34,27 +30,24 @@ impl Serialize for IntValue {
     }
 }
 
-/// 通用实现 - 为所有实现Display的类型提供默认实现
-/// 注意：这里只为部分类型实现，避免与IntValue冲突
 impl Serialize for String {
     fn serialize(&self) -> String {
         format!("String(\"{}\")", self)
     }
 }
 
-/// 使用trait实现特化模式
 trait OptimizedSerialize {
     fn optimized_serialize(&self) -> String;
 }
 
 /// 通用实现
+/// 通用Implementation of
 impl<T: Display> OptimizedSerialize for T {
     fn optimized_serialize(&self) -> String {
         format!("Generic: {}", self)
     }
 }
 
-/// 为i32提供优化实现（通过扩展trait）
 trait IntSerialize: OptimizedSerialize {
     fn int_serialize(&self) -> String;
 }
@@ -66,12 +59,14 @@ impl IntSerialize for i32 {
 }
 
 /// 使用类型标记实现特化
+/// type mark
 #[allow(dead_code)]
 trait Converter<T> {
     fn convert(&self) -> T;
 }
 
 /// i32到f64的转换器
+/// i32to f64conversion
 #[allow(dead_code)]
 struct IntToFloat;
 

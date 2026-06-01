@@ -1,32 +1,43 @@
 //! 高级模式匹配模块
-//!
-//! 本模块展示了 Rust 1.90 中的高级模式匹配特性，包括：
+//! module
 //! - 复杂枚举模式匹配
+//! - complex enum
 //! - 守卫条件
+//! - condition
+//! - 守卫condition
 //! - 解构模式
+//! -
 //! - 嵌套模式
+//! -
 //! - 动态模式匹配
+//! -
 //! - 模式匹配优化
-//!
+//! - optimization
+//! - 模式匹配optimization
 //! # 文件信息
+//! #
 //! - 文件: advanced_pattern_matching.rs
 //! - 创建日期: 2025-01-27
+//! - date : 2025-01-27
 //! - 版本: 1.0
-//! - Rust版本: 1.90.0
-//! - Edition: 2024
+//! - this : 1.0
+//! - 版this: 1.0
 use std::collections::HashMap;
 use std::fmt;
 
 // ==================== 1. 复杂枚举模式匹配 ====================
 
 /// 复杂表达式枚举
-///
+/// complex express enum
 /// 展示了复杂的枚举模式匹配
+/// complex enum
 #[derive(Debug, Clone, PartialEq)]
 pub enum ComplexExpression {
     /// 字面量
+    /// surface
     Literal(LiteralValue),
     /// 变量
+    /// variable
     Variable(String),
     /// 二元运算
     BinaryOp {
@@ -40,11 +51,13 @@ pub enum ComplexExpression {
         operand: Box<ComplexExpression>,
     },
     /// 函数调用
+    /// function
     FunctionCall {
         name: String,
         arguments: Vec<ComplexExpression>,
     },
     /// 条件表达式
+    /// condition express
     Conditional {
         condition: Box<ComplexExpression>,
         true_branch: Box<ComplexExpression>,
@@ -56,6 +69,7 @@ pub enum ComplexExpression {
         index: Box<ComplexExpression>,
     },
     /// 对象访问
+    /// to
     ObjectAccess {
         object: Box<ComplexExpression>,
         field: String,
@@ -63,6 +77,7 @@ pub enum ComplexExpression {
 }
 
 /// 字面量值
+/// surface
 #[derive(Debug, Clone, PartialEq)]
 pub enum LiteralValue {
     Integer(i64),
@@ -187,6 +202,7 @@ impl fmt::Display for UnaryOperator {
 }
 
 /// 表达式求值器
+/// express
 pub struct ExpressionEvaluator {
     variables: HashMap<String, LiteralValue>,
 }
@@ -365,8 +381,8 @@ impl Default for ExpressionEvaluator {
 // ==================== 2. 动态模式匹配 ====================
 
 /// 动态模式匹配器
-///
 /// 展示了运行时动态模式匹配
+/// runtime
 pub struct DynamicPatternMatcher {
     patterns: Vec<DynamicPattern>,
 }
@@ -399,6 +415,7 @@ impl DynamicPatternMatcher {
     }
 
     /// 匹配并处理表达式
+    /// and express
     pub fn match_and_handle(&self, expr: &ComplexExpression) -> Result<LiteralValue, String> {
         for pattern in &self.patterns {
             if (pattern.matcher)(expr) {
@@ -409,6 +426,7 @@ impl DynamicPatternMatcher {
     }
 
     /// 获取所有模式名称
+    /// all
     pub fn get_pattern_names(&self) -> Vec<String> {
         self.patterns.iter().map(|p| p.name.clone()).collect()
     }
@@ -423,14 +441,16 @@ impl Default for DynamicPatternMatcher {
 // ==================== 3. 模式匹配优化 ====================
 
 /// 模式匹配优化器
-///
+/// optimizer
 /// 展示了模式匹配的性能优化技术
+/// performance optimization technique
 pub struct PatternMatchingOptimizer {
     cache: HashMap<String, LiteralValue>,
     optimization_stats: OptimizationStats,
 }
 
 /// 优化统计
+/// optimization
 #[derive(Debug, Default)]
 pub struct OptimizationStats {
     pub cache_hits: u64,
@@ -448,6 +468,7 @@ impl PatternMatchingOptimizer {
     }
 
     /// 优化的表达式求值
+    /// optimization express
     pub fn evaluate_optimized(&mut self, expr: &ComplexExpression) -> Result<LiteralValue, String> {
         // 生成缓存键
         let cache_key = self.generate_cache_key(expr);
@@ -480,6 +501,7 @@ impl PatternMatchingOptimizer {
     }
 
     /// 优化表达式
+    /// optimization express
     fn optimize_expression(&self, expr: &ComplexExpression) -> ComplexExpression {
         match expr {
             // 常量折叠优化
@@ -548,6 +570,7 @@ impl PatternMatchingOptimizer {
     }
 
     /// 常量折叠
+    /// constant folding
     fn fold_constants(
         &self,
         a: &LiteralValue,
@@ -586,6 +609,8 @@ impl PatternMatchingOptimizer {
     }
 
     /// 一元常量折叠
+    /// constant folding
+    /// 一元constant folding
     fn fold_unary_constant(
         &self,
         op: &UnaryOperator,
@@ -600,6 +625,7 @@ impl PatternMatchingOptimizer {
     }
 
     /// 获取优化统计
+    /// optimization
     pub fn get_stats(&self) -> &OptimizationStats {
         &self.optimization_stats
     }
@@ -619,18 +645,25 @@ impl Default for PatternMatchingOptimizer {
 // ==================== 4. 嵌套模式匹配 ====================
 
 /// 嵌套数据结构
+/// data structure
+/// 嵌套data structure
 #[derive(Debug, Clone, PartialEq)]
 pub enum NestedData {
     /// 叶子节点
+    /// node
     Leaf(String),
     /// 分支节点
+    /// node
     Branch {
         name: String,
         children: Vec<NestedData>,
     },
     /// 数组节点
+    /// node
     Array(Vec<NestedData>),
     /// 对象节点
+    /// to node
+    /// to象node
     Object(HashMap<String, NestedData>),
 }
 
@@ -639,6 +672,7 @@ pub struct NestedPatternMatcher;
 
 impl NestedPatternMatcher {
     /// 深度优先搜索
+    /// depth-first search
     pub fn find_by_name<'a>(&self, data: &'a NestedData, target_name: &str) -> Vec<&'a NestedData> {
         let mut results = Vec::new();
         self.find_by_name_recursive(data, target_name, &mut results);
@@ -681,6 +715,8 @@ impl NestedPatternMatcher {
     }
 
     /// 模式匹配转换
+    /// conversion
+    /// 模式匹配conversion
     #[allow(dead_code)]
     #[allow(unused_variables)]
     pub fn transform<F>(&self, data: &NestedData, transformer: F) -> NestedData
@@ -720,6 +756,7 @@ impl NestedPatternMatcher {
     }
 
     /// 条件过滤
+    /// condition
     pub fn filter<F>(&self, data: &NestedData, predicate: F) -> Option<NestedData>
     where
         F: Fn(&NestedData) -> bool + Clone,
@@ -767,6 +804,8 @@ impl NestedPatternMatcher {
 // ==================== 演示函数 ====================
 
 /// 演示所有高级模式匹配特性
+/// demonstration all feature
+/// Demonstration of所有高级模式匹配feature
 pub fn demonstrate_advanced_pattern_matching() {
     println!("=== 高级模式匹配演示 ===\n");
 

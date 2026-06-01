@@ -1,8 +1,10 @@
 //! 运行时性能分析实践示例
+//! runtime performance analyze example
 use std::collections::HashMap;
 use std::time::{Duration, Instant};
 
 /// 简单性能分析器
+/// simple performance analyze
 pub struct SimpleProfiler {
     measurements: HashMap<String, Vec<Duration>>,
 }
@@ -21,6 +23,7 @@ impl SimpleProfiler {
     }
 
     /// 测量函数执行时间
+    /// function time
     pub fn measure<F, T>(&mut self, name: &str, f: F) -> T
     where
         F: FnOnce() -> T,
@@ -38,6 +41,7 @@ impl SimpleProfiler {
     }
 
     /// 获取平均执行时间
+    /// time
     pub fn get_average_time(&self, name: &str) -> Option<Duration> {
         self.measurements.get(name).map(|durations| {
             let total: Duration = durations.iter().sum();
@@ -46,6 +50,7 @@ impl SimpleProfiler {
     }
 
     /// 生成简单报告
+    /// simple
     pub fn generate_report(&self) -> String {
         let mut report = String::from("=== 性能分析报告 ===\n");
 
@@ -71,6 +76,7 @@ impl SimpleProfiler {
 }
 
 /// 内存使用监控器（简化版）
+/// memory （）
 pub struct MemoryMonitor {
     initial_usage: Option<usize>,
 }
@@ -94,11 +100,13 @@ impl MemoryMonitor {
     }
 
     /// 获取当前内存使用（模拟）
+    /// when before memory （）
     pub fn get_current_usage(&self) -> Option<usize> {
         Some(1024 * 1024) // 模拟1MB
     }
 
     /// 计算内存增长
+    /// memory
     pub fn calculate_growth(&self) -> Option<usize> {
         if let Some(initial) = self.initial_usage {
             self.get_current_usage().map(|current| current - initial)
@@ -109,6 +117,7 @@ impl MemoryMonitor {
 }
 
 /// 性能指标收集器
+/// performance indicator
 pub struct MetricsCollector {
     metrics: HashMap<String, f64>,
     counters: HashMap<String, u64>,
@@ -129,6 +138,7 @@ impl MetricsCollector {
     }
 
     /// 记录指标
+    /// indicator
     pub fn record_metric(&mut self, name: &str, value: f64) {
         self.metrics.insert(name.to_string(), value);
     }
@@ -139,6 +149,7 @@ impl MetricsCollector {
     }
 
     /// 获取指标
+    /// indicator
     pub fn get_metric(&self, name: &str) -> Option<f64> {
         self.metrics.get(name).copied()
     }

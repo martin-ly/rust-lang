@@ -16,7 +16,7 @@
     - [2.1 基础异步进程](#21-基础异步进程)
     - [2.2 高级异步特性](#22-高级异步特性)
     - [2.3 性能优化策略](#23-性能优化策略)
-  - [3. Async-Std 进程管理](#3-async-std-进程管理)
+  - [3. Async-Std \[已归档\] 进程管理](#3-async-std-已归档-进程管理)
     - [3.1 标准库风格](#31-标准库风格)
     - [3.2 与 Tokio 对比](#32-与-tokio-对比)
     - [3.3 迁移策略](#33-迁移策略)
@@ -49,7 +49,7 @@
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **std::process**       | 标准库     | 同步、基础功能 | 简单进程管理 | 中等 | 低       |
 | **tokio::process**     | 异步运行时 | 高性能异步     | 高并发场景   | 高   | 中等     |
-| **async-std::process** | 异步标准库 | 标准库风格     | 异步进程管理 | 中等 | 低       |
+| **async-std [已归档]::process** | 异步标准库 | 标准库风格     | 异步进程管理 | 中等 | 低       |
 | **duct**               | 进程组合   | 管道语法       | 复杂命令组合 | 中等 | 低       |
 | **subprocess**         | 高级控制   | 功能丰富       | 企业级应用   | 高   | 高       |
 
@@ -407,7 +407,7 @@ impl HighPerformanceTokioPool {
 }
 ```
 
-## 3. Async-Std 进程管理
+## 3. Async-Std [已归档] 进程管理
 
 ### 3.1 标准库风格
 
@@ -446,7 +446,7 @@ async fn basic_async_std_process() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
-// Async-Std 进程管理器
+// Async-Std [已归档] 进程管理器
 pub struct AsyncStdProcessManager {
     processes: std::sync::Arc<async_std::sync::Mutex<Vec<AsyncStdProcess>>>,
     max_concurrent: usize,
@@ -1476,7 +1476,7 @@ impl ProcessLibraryBenchmark {
 
         // 测试 Async-Std
         results.push(self.benchmark_library(
-            "async-std::process",
+            "async-std [已归档]::process",
             "async_spawn",
             || {
                 async_std::task::block_on(async {
@@ -1749,7 +1749,7 @@ pub struct ProcessConfig {
 
 1. **std::process**：基础、同步、跨平台
 2. **tokio::process**：高性能、异步、企业级
-3. **async-std::process**：标准库风格、异步、易用
+3. **async-std [已归档]::process**：标准库风格、异步、易用
 4. **duct**：管道组合、语法简洁、功能强大
 5. **subprocess**：高级控制、跨平台、安全增强
 
@@ -1757,7 +1757,7 @@ pub struct ProcessConfig {
 
 - **简单场景**：使用 `std::process`
 - **高性能需求**：选择 `tokio::process`
-- **标准库风格**：使用 `async-std::process`
+- **标准库风格 (历史参考: async-std [已归档]) [已归档]::process`
 - **管道组合**：选择 `duct`
 - **企业级应用**：使用 `subprocess`
 
@@ -1766,7 +1766,7 @@ pub struct ProcessConfig {
 | 库名               | 启动时间 | 内存使用 | CPU 效率 | 并发能力 |
 | :--- | :--- | :--- | :--- | :--- || std::process       | 快       | 低       | 高       | 低       |
 | tokio::process     | 中等     | 中等     | 高       | 高       |
-| async-std::process | 中等     | 中等     | 中等     | 中等     |
+| async-std [已归档]::process | 中等     | 中等     | 中等     | 中等     |
 | duct               | 快       | 低       | 高       | 低       |
 | subprocess         | 慢       | 高       | 中等     | 中等     |
 

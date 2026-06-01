@@ -1,20 +1,18 @@
 //! # GUI 生态演示 —— egui 即时模式计算器
-//!
+//! # GUI ecosystem demonstration —— egui
 //! 本示例使用 [egui](https://github.com/emilk/egui) 和 [eframe](https://docs.rs/eframe)
-//! 构建一个跨平台的即时模式 GUI 计算器，展示 Rust GUI 开发的核心概念。
-//!
 //! ## 运行
-//!
+//! ## Run
 //! ```bash
 //! cargo run -p c08_algorithms --example gui_calculator_demo
 //! ```
 //!
-//! [来源: egui GitHub / egui.rs](https://egui.rs/)
 
 use eframe::{App, Frame, NativeOptions};
 use egui::{CentralPanel, TextStyle, Ui, Vec2};
 
 /// 计算器应用状态
+/// application state
 #[derive(Default)]
 struct CalculatorApp {
     display: String,
@@ -61,6 +59,7 @@ impl CalculatorApp {
     }
 
     /// 计算结果
+    /// result
     fn calculate(&mut self) {
         if self.current_input.is_empty() || self.operator.is_none() {
             return;
@@ -90,6 +89,7 @@ impl CalculatorApp {
     }
 
     /// 清除所有状态
+    /// all state
     fn clear(&mut self) {
         self.display = "0".to_string();
         self.current_input.clear();
@@ -231,6 +231,7 @@ impl App for CalculatorApp {
 }
 
 /// 格式化计算结果，去除多余的小数位
+/// result ，
 fn format_result(value: f64) -> String {
     if value.fract() == 0.0 {
         format!("{:.0}", value)

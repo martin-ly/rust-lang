@@ -1,6 +1,7 @@
 //! 组合模式工程案例集成测试
-//!
+//! combination
 //! 测试多个设计模式组合使用的正确性、性能和并发安全性
+//! design combination 、performance and concurrency
 use c09_design_pattern::pattern_combinations::*;
 use std::sync::Arc;
 use std::thread;

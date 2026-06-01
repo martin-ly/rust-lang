@@ -2,32 +2,27 @@
 #![no_main]
 
 //! RTIC 实时中断驱动 LED 闪烁示例 (STM32F4)
-//!
-//! 使用 RTIC 框架在 STM32F4 上实现硬件定时器中断驱动的 LED 闪烁。
-//! 这是 `rtic_framework.rs` 中概念代码的真实硬件版本。
-//!
+//! RTIC in driver LED example (STM32F4)
+//! RTIC 实时in断driver LED 闪烁Example of (STM32F4)
 //! # 硬件要求
+//! # hardware
 //! - STM32F4 Discovery (STM32F407VG) 或 Nucleo-F446RE
 //! - 板载 LED 连接在 PC13 (Discovery) 或 PA5 (Nucleo)
-//!
+//! - 板载 LED Connectin PC13 (Discovery) or PA5 (Nucleo)
 //! # 编译
-//! ```bash
-//! cargo build --release
+//! #
 //! ```
 //!
 //! # 烧录 (probe-rs)
-//! ```bash
-//! cargo run --release
 //! ```
 
 use panic_halt as _;
 use rtic::app;
 
 /// RTIC 应用定义
-///
+/// RTIC application definition
 /// `device` 指定 PAC (Peripheral Access Crate)
 /// `peripherals = true` 允许在 init 中访问外设
-/// `dispatchers` 列出用于软件任务的空闲中断向量
 #[app(device = stm32f4xx_hal::pac, peripherals = true, dispatchers = [TIM3])]
 mod app {
     use stm32f4xx_hal::gpio::{GpioExt, OutputPin};
@@ -36,21 +31,26 @@ mod app {
     use stm32f4xx_hal::timer::{CounterUs, SysEvent, SysTimerExt};
 
     /// 共享资源（可被多个任务访问，RTIC 自动实现互斥）
+    /// （is task ，RTIC ）
     #[shared]
     struct Shared {
         // 当前暂无共享资源
     }
 
     /// 本地资源（绑定到特定任务，无需互斥）
+    /// this （to task ，）
     #[local]
     struct Local {
         /// LED 引脚
+        /// LED
         led: stm32f4xx_hal::gpio::Pin<'C', 13>,
         /// 系统定时器（用于软件任务调度）
+        /// system （software task ）
         timer: CounterUs<pac::TIM3>,
     }
 
     /// 初始化函数 —— 在系统启动时执行一次
+    /// function —— in system
     #[init]
     fn init(cx: init::Context) -> (Shared, Local) {
         // 获取外设访问权
@@ -77,8 +77,9 @@ mod app {
     }
 
     /// 空闲循环 —— 当没有更高优先级任务时执行
-    ///
+    /// circulation —— when task
     /// RTIC 推荐在 idle 中进入低功耗模式 (WFI)。
+    /// RTIC in idle in (WFI)。
     #[idle]
     fn idle(_cx: idle::Context) -> ! {
         loop {
@@ -88,8 +89,8 @@ mod app {
     }
 
     /// 软件任务 —— 由 TIM3 中断触发，执行 LED 闪烁
-    ///
-    /// RTIC 的软件任务通过 NVIC 中断调度，具有确定的优先级和延迟。
+    /// software task —— TIM3 in ， LED
+    /// softwaretask —— 由 TIM3 in断触发，Execute LED 闪烁
     #[task(binds = TIM3, local = [led, timer])]
     fn tick(cx: tick::Context) {
         let led = cx.local.led;

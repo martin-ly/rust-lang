@@ -1,18 +1,19 @@
 //! Rust 1.94.0 网络编程特性实现模块
-//!
-//! 本模块展示了 Rust 1.94.0 真实特性在网络编程场景中的应用，包括：
+//! Rust 1.94.0 network programming feature module
 //! - array_windows - 切片数组窗口迭代器（用于协议解析）
-//! - LazyCell/LazyLock 新方法 - get(), get_mut(), force_mut()
+//! - array_windows - （）
 //! - 数学常量 - EULER_GAMMA, GOLDEN_RATIO (f32/f64)
+//! - 数学constant - EULER_GAMMA, GOLDEN_RATIO (f32/f64)
 //! - Peekable 新方法 - next_if_map(), next_if_map_mut()
-//! - char 到 usize 转换 - `TryFrom<char>` for usize
-//!
+//! - Peekable 新method - next_if_map(), next_if_map_mut()
 //! # 文件信息
+//! #
 //! - 文件: rust_194_features.rs
 //! - 创建日期: 2026-03-06
+//! - date : 2026-03-06
 //! - 版本: 1.0
-//! - Rust版本: 1.94.0
-//! - Edition: 2024
+//! - this : 1.0
+//! - 版this: 1.0
 use std::collections::HashMap;
 use std::sync::atomic::AtomicU64;
 use std::sync::{LazyLock, Mutex};
@@ -21,21 +22,23 @@ use std::time::Duration;
 // ==================== 1. array_windows - 协议解析优化 ====================
 
 /// # 1. array_windows - 协议解析优化
-///
-/// Rust 1.94.0 的 `array_windows` 方法在网络协议解析中非常有用，
+/// # 1. array_windows - optimization
+/// # 1. array_windows - 协议Parseoptimization
 /// 特别是需要检测固定字节序列的场景，如协议魔数、帧边界等。
+/// sequence scenario ，、edge etc. 。
 /// HTTP/2 协议魔数检测器
-///
-/// 使用 array_windows 检测 HTTP/2 连接前导码 (PRI * HTTP/2.0\r\n\r\nSM\r\n\r\n)
+/// HTTP/2
 pub struct Http2PreambleDetector;
 
 impl Http2PreambleDetector {
     /// HTTP/2 连接前导码
+    /// HTTP/2 before
     const PREAMBLE: [u8; 24] = *b"PRI * HTTP/2.0\r\n\r\nSM\r\n\r\n";
 
     /// 使用 array_windows 检测前导码
-    ///
+    /// array_windows before
     /// Rust 1.96.0: array_windows 用于滑动窗口匹配
+    /// Rust 1.96.0: array_windows
     pub fn detect_preamble(data: &[u8]) -> Option<usize> {
         let preamble_len = Self::PREAMBLE.len();
 
@@ -54,6 +57,7 @@ impl Http2PreambleDetector {
     }
 
     /// 快速检测前导码（前24字节匹配检查）
+    /// fast before （before 24）
     pub fn is_valid_preamble_start(data: &[u8]) -> bool {
         if data.len() < 24 {
             return false;
@@ -63,8 +67,9 @@ impl Http2PreambleDetector {
 }
 
 /// 帧边界检测器
-///
+/// edge
 /// 使用 array_windows 检测帧起始定界符
+/// array_windows
 pub struct FrameBoundaryDetector;
 
 impl FrameBoundaryDetector {
@@ -75,8 +80,10 @@ impl FrameBoundaryDetector {
     const FED: [u8; 4] = [0x7F, 0x7F, 0x7F, 0x7F];
 
     /// 查找所有帧边界位置
-    ///
+    /// all edge position
     /// Rust 1.94.0: 使用 array_windows<4> 检测4字节定界符
+    /// Rust 1.94.0: array_windows<4> 4
+    /// Rust 1.94.0: Use array_windows<4> 检测4字节定界符
     pub fn find_frame_boundaries(data: &[u8]) -> Vec<(usize, BoundaryType)> {
         let mut boundaries = Vec::new();
 
@@ -92,6 +99,7 @@ impl FrameBoundaryDetector {
     }
 
     /// 提取所有完整帧
+    /// all complete
     pub fn extract_frames(data: &[u8]) -> Vec<&[u8]> {
         let boundaries = Self::find_frame_boundaries(data);
         let mut frames = Vec::new();
@@ -113,6 +121,7 @@ impl FrameBoundaryDetector {
 }
 
 /// 边界类型
+/// edge type
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum BoundaryType {
     Start,
@@ -120,14 +129,14 @@ pub enum BoundaryType {
 }
 
 /// 协议序列号验证器
-///
-/// 使用 array_windows 检测序列号是否连续
+/// sequence
 pub struct SequenceValidator;
 
 impl SequenceValidator {
     /// 验证 TCP 序列号是否连续（无丢包）
-    ///
+    /// TCP sequence （）
     /// Rust 1.96.0: array_windows<2> 用于检查相邻序列号
+    /// Rust 1.96.0: array_windows<2> sequence
     pub fn validate_tcp_sequence(seq_numbers: &[u32]) -> bool {
         if seq_numbers.len() < 2 {
             return true;
@@ -141,6 +150,7 @@ impl SequenceValidator {
     }
 
     /// 检测序列号跳跃
+    /// sequence
     pub fn detect_sequence_gaps(seq_numbers: &[u32]) -> Vec<(usize, u32, u32)> {
         let mut gaps = Vec::new();
 
@@ -157,8 +167,9 @@ impl SequenceValidator {
 }
 
 /// 数据包分片重组器
-///
+/// sharding
 /// 使用 array_windows 验证分片连续性
+/// array_windows sharding
 pub struct PacketReassembler {
     fragments: HashMap<u16, Vec<u8>>,
     expected_count: Option<u16>,
@@ -174,6 +185,8 @@ impl PacketReassembler {
     }
 
     /// 添加分片
+    /// sharding
+    /// 添加fragmentation
     pub fn add_fragment(&mut self, offset: u16, data: Vec<u8>, is_last: bool) {
         self.fragments.insert(offset, data);
         if is_last {
@@ -182,8 +195,9 @@ impl PacketReassembler {
     }
 
     /// 检查分片是否连续
-    ///
+    /// sharding
     /// Rust 1.96.0: array_windows 用于验证分片偏移连续性
+    /// Rust 1.96.0: array_windows sharding
     pub fn is_continuous(&self) -> bool {
         if self.fragments.len() < 2 {
             return true;
@@ -231,15 +245,15 @@ impl Default for PacketReassembler {
 
 // ==================== 2. LazyLock 新方法 - 网络配置管理 ====================
 
-/// # 2. LazyLock 新方法 - 网络配置管理
-///
-/// Rust 1.94.0 的 LazyLock 新方法 get(), get_mut(), force_mut() 可以用于
 /// 实现延迟初始化的网络配置，并支持运行时更新。
+/// network ，and runtime 。
 /// 全局网络配置
+/// global network
 static NETWORK_CONFIG: LazyLock<Mutex<NetworkConfig>> =
     LazyLock::new(|| Mutex::new(NetworkConfig::default()));
 
 /// 网络配置结构
+/// network structure
 #[derive(Debug, Clone)]
 pub struct NetworkConfig {
     timeout: Duration,
@@ -263,11 +277,15 @@ impl Default for NetworkConfig {
 
 impl NetworkConfig {
     /// 获取超时时间
+    /// time
+    /// Get超时time
     pub fn timeout(&self) -> Duration {
         self.timeout
     }
 
     /// 设置超时时间
+    /// time
+    /// Set超时time
     pub fn set_timeout(&mut self, timeout: Duration) {
         self.timeout = timeout;
     }
@@ -284,8 +302,7 @@ impl NetworkConfig {
 }
 
 /// 获取网络配置的只读引用
-///
-/// Rust 1.94.0: 演示 LazyLock 的使用模式
+/// network reference
 pub fn get_network_config<F, R>(f: F) -> R
 where
     F: FnOnce(&NetworkConfig) -> R,
@@ -295,8 +312,7 @@ where
 }
 
 /// 修改网络配置
-///
-/// Rust 1.94.0: 使用 LazyLock 配合 Mutex 实现可变访问
+/// network
 pub fn update_network_config<F>(f: F)
 where
     F: FnOnce(&mut NetworkConfig),
@@ -326,6 +342,7 @@ pub struct ConnectionPoolSettings {
 
 impl ConnectionPoolSettings {
     /// 获取最大连接数
+    /// maximum
     pub fn max_connections(&self) -> usize {
         self.max_connections
     }
@@ -337,16 +354,16 @@ impl ConnectionPoolSettings {
 }
 
 /// 获取连接池设置
-///
-/// Rust 1.94.0: 使用 LazyLock::get() 模式
 pub fn get_pool_settings() -> &'static ConnectionPoolSettings {
     &CONNECTION_POOL_CONFIG
 }
 
 /// 协议处理器函数类型别名
+/// function type
 type ProtocolHandlerFn = Box<dyn Fn(&[u8]) -> Vec<u8> + Send>;
 
 /// 协议处理器注册表类型别名
+/// type
 type ProtocolHandlerRegistry = HashMap<String, ProtocolHandlerFn>;
 
 /// 延迟初始化的协议处理器注册表
@@ -381,12 +398,14 @@ pub fn handle_protocol(name: &str, data: &[u8]) -> Option<Vec<u8>> {
 // ==================== 3. 数学常量 - 网络算法优化 ====================
 
 /// # 3. 数学常量 - 网络算法优化
-///
-/// Rust 1.94.0 添加的数学常量可用于网络算法优化，
+/// # 3. constant - network algorithm optimization
+/// # 3. 数学constant - networkalgorithmoptimization
 /// 如黄金分割搜索用于负载均衡、欧拉常数用于概率计算等。
+/// 、etc. 。
 /// 基于黄金分割的负载均衡器
-///
-/// 使用 GOLDEN_RATIO 实现平滑的权重分配
+/// load balancer
+/// Based on黄金分割load balancer
+/// Use GOLDEN_RATIO Implementation of平滑权重Allocate
 pub struct GoldenRatioLoadBalancer {
     servers: Vec<ServerWeight>,
     #[allow(dead_code)]
@@ -404,6 +423,7 @@ struct ServerWeight {
 
 impl GoldenRatioLoadBalancer {
     /// 创建新的负载均衡器
+    /// load balancer
     pub fn new() -> Self {
         Self {
             servers: Vec::new(),
@@ -424,8 +444,9 @@ impl GoldenRatioLoadBalancer {
     }
 
     /// 选择服务器（基于黄金分割的散列）
-    ///
+    /// （）
     /// 使用黄金比例的分数部分实现均匀分布
+    /// part distribution
     pub fn select_server(&self, client_id: u64) -> Option<&str> {
         if self.servers.is_empty() {
             return None;
@@ -453,8 +474,10 @@ impl Default for GoldenRatioLoadBalancer {
 }
 
 /// 基于欧拉常数的退避算法
-///
+/// algorithm
+/// Based on欧拉常数退避algorithm
 /// 使用 EULER_GAMMA 调整指数退避曲线
+/// EULER_GAMMA index line
 pub struct EulerBackoff {
     base_delay: Duration,
     max_delay: Duration,
@@ -472,8 +495,9 @@ impl EulerBackoff {
     }
 
     /// 计算下一次退避时间
-    ///
+    /// under time
     /// 使用欧拉常数平滑指数增长曲线
+    /// index line
     pub fn next_backoff(&mut self) -> Duration {
         self.attempts += 1;
 
@@ -494,20 +518,23 @@ impl EulerBackoff {
     }
 
     /// 获取当前尝试次数
+    /// when before
     pub fn attempts(&self) -> u32 {
         self.attempts
     }
 }
 
 /// 黄金分割搜索用于网络参数优化
-///
+/// network parameter optimization
 /// 使用 GOLDEN_RATIO 优化网络缓冲区大小
+/// GOLDEN_RATIO optimization network buffering
 pub struct NetworkParameterOptimizer;
 
 impl NetworkParameterOptimizer {
     /// 使用黄金分割搜索找到最优缓冲区大小
-    ///
+    /// to buffering
     /// 目标：在给定范围内找到使吞吐量最大的缓冲区大小
+    /// goal ：in scope inside to maximum buffering
     pub fn optimize_buffer_size<F>(min_size: usize, max_size: usize, measure: F) -> usize
     where
         F: Fn(usize) -> f64,
@@ -536,8 +563,9 @@ impl NetworkParameterOptimizer {
     }
 
     /// 估算最优并发连接数
-    ///
+    /// concurrency
     /// 基于黄金比例的系统资源分配
+    /// system
     pub fn estimate_optimal_connections(total_capacity: usize) -> usize {
         let phi = std::f64::consts::GOLDEN_RATIO;
         (total_capacity as f64 / phi).ceil() as usize
@@ -547,12 +575,14 @@ impl NetworkParameterOptimizer {
 // ==================== 4. Peekable 新方法 - 协议流解析 ====================
 
 /// # 4. Peekable 新方法 - 协议流解析
-///
-/// Rust 1.94.0 的 Peekable 新方法 next_if_map() 和 next_if_map_mut()
+/// # 4. Peekable method - stream
+/// Rust 1.94.0 Peekable 新method next_if_map() and next_if_map_mut()
 /// 在协议流解析中非常有用，可以简化条件解析逻辑。
+/// in stream in useful ，can condition 。
 /// HTTP 请求行解析器
-///
+/// HTTP
 /// 使用 Peekable 新方法简化解析逻辑
+/// Peekable method
 pub struct HttpRequestLineParser<'a> {
     chars: std::iter::Peekable<std::str::Chars<'a>>,
 }
@@ -566,8 +596,9 @@ impl<'a> HttpRequestLineParser<'a> {
     }
 
     /// 解析方法
-    ///
+    /// method
     /// Rust 1.94.0: 使用 next_if() 简化方法解析
+    /// Rust 1.94.0: next_if() method
     fn parse_method(&mut self) -> Option<String> {
         let mut method = String::new();
 
@@ -588,8 +619,9 @@ impl<'a> HttpRequestLineParser<'a> {
     }
 
     /// 解析路径
-    ///
     /// Rust 1.94.0: 使用 next_if() 简化路径解析
+    /// Rust 1.94.0: next_if()
+    /// Rust 1.94.0: Use next_if() 简化路径Parse
     fn parse_path(&mut self) -> Option<String> {
         let mut path = String::new();
 
@@ -604,6 +636,8 @@ impl<'a> HttpRequestLineParser<'a> {
     }
 
     /// 解析 HTTP 版本
+    /// HTTP this
+    /// Parse HTTP 版this
     fn parse_version(&mut self) -> Option<String> {
         let mut version = String::new();
 
@@ -623,6 +657,7 @@ impl<'a> HttpRequestLineParser<'a> {
     }
 
     /// 解析完整的请求行
+    /// complete
     pub fn parse(&mut self) -> Option<(String, String, String)> {
         let method = self.parse_method()?;
         self.skip_whitespace();
@@ -634,9 +669,8 @@ impl<'a> HttpRequestLineParser<'a> {
     }
 }
 
-/// 基于 Peekable 的 TLV (Type-Length-Value) 解析器
-///
 /// Rust 1.94.0: 使用 next_if_map() 简化 TLV 解析
+/// Rust 1.94.0: Use next_if_map() 简化 TLV Parse
 pub struct TlvParser<'a> {
     data: std::iter::Peekable<std::slice::Iter<'a, u8>>,
 }
@@ -650,6 +684,7 @@ pub struct TlvRecord {
 
 impl<'a> TlvParser<'a> {
     /// 创建新的 TLV 解析器
+    /// TLV
     pub fn new(data: &'a [u8]) -> Self {
         Self {
             data: data.iter().peekable(),
@@ -662,6 +697,7 @@ impl<'a> TlvParser<'a> {
     }
 
     /// 读取两个字节（大端序）
+    /// （）
     fn read_u16(&mut self) -> Option<u16> {
         let high = self.read_byte()?;
         let low = self.read_byte()?;
@@ -669,8 +705,7 @@ impl<'a> TlvParser<'a> {
     }
 
     /// 解析单个 TLV 记录
-    ///
-    /// Rust 1.94.0: 使用 next_if_map() 可以简化特定条件下的解析
+    /// TLV
     pub fn parse_record(&mut self) -> Option<TlvRecord> {
         let tag = self.read_byte()?;
         let length = self.read_u16()?;
@@ -684,6 +719,7 @@ impl<'a> TlvParser<'a> {
     }
 
     /// 解析所有记录
+    /// all
     pub fn parse_all(&mut self) -> Vec<TlvRecord> {
         let mut records = Vec::new();
         while let Some(record) = self.parse_record() {
@@ -696,15 +732,17 @@ impl<'a> TlvParser<'a> {
 // ==================== 5. char 到 usize 转换 - 协议编码 ====================
 
 /// # 5. char 到 usize 转换 - 协议编码
-///
-/// Rust 1.94.0 的 `TryFrom<char>` for usize 可用于协议编码和地址解析。
+/// # 5. char to usize conversion -
+/// # 5. char to usize conversion - 协议Encode
 /// 十六进制编码器/解码器
-///
+/// /
 /// 使用 char 到 usize 转换进行十六进制处理
+/// char to usize conversion
 pub struct HexCodec;
 
 impl HexCodec {
     /// 将十六进制字符转换为数值
+    /// will conversion as
     fn hex_char_to_value(c: char) -> Option<u8> {
         match c {
             '0'..='9' => Some(c as u8 - b'0'),
@@ -729,6 +767,7 @@ impl HexCodec {
     }
 
     /// 编码为十六进制字符串
+    /// as
     pub fn encode(data: &[u8]) -> String {
         const HEX_CHARS: &[u8] = b"0123456789abcdef";
         let mut result = String::with_capacity(data.len() * 2);
@@ -743,8 +782,9 @@ impl HexCodec {
 }
 
 /// MAC 地址解析器
-///
+/// MAC address
 /// 使用 char 转换解析 MAC 地址
+/// char conversion MAC address
 pub struct MacAddressParser;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -752,8 +792,6 @@ pub struct MacAddress(pub [u8; 6]);
 
 impl MacAddressParser {
     /// 解析 MAC 地址字符串（格式：xx:xx:xx:xx:xx:xx 或 xx-xx-xx-xx-xx-xx）
-    ///
-    /// Rust 1.94.0: 使用 `TryFrom<char>` for usize 进行字符解析
     pub fn parse(mac_str: &str) -> Option<MacAddress> {
         // 支持冒号或连字符分隔符
         let parts: Vec<&str> = mac_str.split([':', '-']).collect();
@@ -792,6 +830,7 @@ impl MacAddressParser {
     }
 
     /// 将十六进制字符转换为数值
+    /// will conversion as
     fn hex_char_to_value(c: char) -> Option<u8> {
         match c {
             '0'..='9' => Some(c as u8 - b'0'),
@@ -802,6 +841,7 @@ impl MacAddressParser {
     }
 
     /// 格式化 MAC 地址
+    /// MAC address
     pub fn format(mac: &MacAddress) -> String {
         let hex = HexCodec::encode(&mac.0);
         let mut result = String::with_capacity(17);
@@ -820,6 +860,7 @@ impl MacAddressParser {
 // ==================== 6. 综合应用示例 ====================
 
 /// 演示 Rust 1.94.0 网络编程特性
+/// demonstration Rust 1.94.0 network programming feature
 pub fn demonstrate_rust_194_network_features() {
     println!("\n=== Rust 1.94.0 网络编程特性演示 ===\n");
 
@@ -911,6 +952,7 @@ pub fn demonstrate_rust_194_network_features() {
 }
 
 /// 获取 Rust 1.94.0 网络编程特性信息
+/// Rust 1.94.0 network programming feature
 pub fn get_rust_194_network_info() -> String {
     "Rust 1.94.0 网络编程特性:\n\
         - array_windows - 协议解析优化\n\
@@ -926,6 +968,7 @@ pub fn get_rust_194_network_info() -> String {
 use std::ops::ControlFlow;
 
 /// 搜索二维数组，找到目标时提前退出
+/// ，to goal before
 pub fn search_in_matrix(matrix: &[Vec<i32>], target: i32) -> ControlFlow<(usize, usize), ()> {
     for (i, row) in matrix.iter().enumerate() {
         for (j, &val) in row.iter().enumerate() {
@@ -938,6 +981,8 @@ pub fn search_in_matrix(matrix: &[Vec<i32>], target: i32) -> ControlFlow<(usize,
 }
 
 /// 数据验证管道
+/// pipe
+/// 数据Verifypipe
 pub fn validate_data(data: &str) -> ControlFlow<String, ()> {
     if data.is_empty() {
         return ControlFlow::Break("数据不能为空".to_string());
@@ -1128,9 +1173,10 @@ mod tests {
     // ==================== 边界测试和反例测试 ====================
 
     /// 测试畸形帧处理
-    /// 
     /// 验证帧边界检测器能正确处理畸形或不完整的帧数据
+    /// edge or complete
     /// 预期行为：正确处理只有起始或结束定界符、重叠定界符等畸形情况
+    /// as ：or 、etc. situation
     #[test]
     fn test_frame_boundary_detector_malformed() {
         // 测试只有起始定界符，没有结束定界符
@@ -1185,9 +1231,7 @@ mod tests {
     }
 
     /// 测试部分数据检测
-    /// 
-    /// 验证 HTTP/2 前导码检测器能正确处理部分或不完整的前导码
-    /// 预期行为：返回 None 对于不完整数据，不 panic
+    /// part
     #[test]
     fn test_http2_preamble_detector_partial() {
         // 测试空数据
@@ -1245,9 +1289,8 @@ mod tests {
     }
 
     /// 测试配置过载保护
-    /// 
-    /// 验证网络配置能处理极端值而不 panic 或导致未定义行为
     /// 预期行为：正确处理极大超时、重试次数等边界值
+    /// as ：、etc. edge
     #[test]
     fn test_network_config_overload() {
         // 测试极大超时值
@@ -1291,9 +1334,11 @@ mod tests {
     }
 
     /// 测试嵌套 TLV 解析
-    /// 
+    /// TLV
     /// 验证 TLV 解析器能正确处理嵌套结构和边界情况
+    /// TLV structure and edge situation
     /// 预期行为：正确解析嵌套 TLV，处理长度不匹配等错误情况
+    /// as ： TLV，etc. situation
     #[test]
     fn test_tlv_parser_nested() {
         // 测试嵌套 TLV 结构

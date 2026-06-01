@@ -1,7 +1,8 @@
 //! 协议测试模块
-//!
-//! 本模块包含了 c10_networks 库的协议测试，
+//! module
+//! 协议Test formodule
 //! 确保各种网络协议的正确实现和互操作性。
+//! network protocol and 。
 use bytes::Bytes;
 use c10_networks::packet::{Packet, PacketType};
 use c10_networks::protocol::http::{HttpMethod, HttpStatusCode, HttpVersion};
@@ -13,6 +14,7 @@ use c10_networks::socket::{utils, TcpConfig, UdpConfig};
 use std::time::Duration;
 
 /// 测试HTTP协议实现
+/// HTTP
 #[test]
 #[ignore] // 协议实现测试在部分环境可能失败
 fn test_http_protocol_implementation() {
@@ -52,6 +54,7 @@ fn test_http_protocol_implementation() {
 }
 
 /// 测试HTTP方法枚举
+/// HTTP method enum
 #[test]
 fn test_http_methods() {
     let methods = vec![
@@ -79,6 +82,7 @@ fn test_http_methods() {
 }
 
 /// 测试HTTP状态码
+/// HTTP state
 #[test]
 fn test_http_status_codes() {
     let status_codes = vec![
@@ -102,6 +106,7 @@ fn test_http_status_codes() {
 }
 
 /// 测试HTTP版本
+/// HTTP this
 #[test]
 fn test_http_versions() {
     let versions = vec![
@@ -122,7 +127,6 @@ fn test_http_versions() {
     }
 }
 
-/// 测试WebSocket协议实现
 #[test]
 fn test_websocket_protocol_implementation() {
     // 测试WebSocket帧创建
@@ -152,7 +156,6 @@ fn test_websocket_protocol_implementation() {
     assert!(pong_frame.fin);
 }
 
-/// 测试WebSocket握手请求
 #[test]
 fn test_websocket_handshake_request() {
     let mut request = WebSocketHandshakeRequest::new("/chat");
@@ -173,7 +176,6 @@ fn test_websocket_handshake_request() {
     assert!(request_str.contains("Origin: https://example.com"));
 }
 
-/// 测试WebSocket操作码
 #[test]
 fn test_websocket_opcodes() {
     let opcodes = vec![
@@ -204,6 +206,7 @@ fn test_websocket_opcodes() {
 }
 
 /// 测试TCP协议实现
+/// TCP
 #[test]
 fn test_tcp_protocol_implementation() {
     // 测试TCP连接配置
@@ -239,6 +242,7 @@ fn test_tcp_protocol_implementation() {
 }
 
 /// 测试TCP状态机
+/// TCP state machine
 #[test]
 fn test_tcp_state_machine() {
     let config = TcpConnectionConfig::default();
@@ -254,6 +258,7 @@ fn test_tcp_state_machine() {
 }
 
 /// 测试TCP拥塞控制
+/// TCP
 #[test]
 fn test_tcp_congestion_control() {
     let config = TcpConnectionConfig::default();
@@ -273,6 +278,7 @@ fn test_tcp_congestion_control() {
 }
 
 /// 测试套接字配置
+/// socket
 #[test]
 fn test_socket_configurations() {
     // 测试TCP套接字配置
@@ -337,6 +343,7 @@ fn test_protocol_packets() {
 }
 
 /// 测试协议错误处理
+/// error handling
 #[test]
 fn test_protocol_error_handling() {
     // 测试HTTP协议错误
@@ -397,6 +404,7 @@ fn test_protocol_compatibility() {
 }
 
 /// 测试协议性能
+/// performance
 #[test]
 fn test_protocol_performance() {
     const ITERATIONS: usize = 1000;
@@ -438,6 +446,7 @@ fn test_protocol_performance() {
 }
 
 /// 测试协议边界条件
+/// boundary condition
 #[test]
 fn test_protocol_boundary_conditions() {
     // 测试空HTTP请求

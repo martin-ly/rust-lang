@@ -2,6 +2,7 @@
 // 包含零成本抽象增强、内存布局优化、编译时计算增强等特性
 
 /// 零成本抽象增强示例
+/// cost example
 #[inline(always)]
 pub fn fast_add(a: i32, b: i32) -> i32 {
     a + b
@@ -22,6 +23,7 @@ pub fn fast_divide(a: i32, b: i32) -> Option<i32> {
 }
 
 /// 内存布局优化示例
+/// memory layout optimization example
 #[repr(C)]
 pub struct DefaultLayout {
     pub a: u8,
@@ -90,6 +92,7 @@ impl CacheLineAligned {
 }
 
 /// 编译时计算增强示例
+/// compile-time example
 pub const FACTORIAL_10: u64 = {
     let mut result = 1;
     let mut i = 1;
@@ -115,11 +118,13 @@ pub const PRIME_17: bool = {
 };
 
 /// 编译时矩阵大小计算
+/// compile-time
 pub const fn calculate_matrix_size<const ROWS: usize, const COLS: usize>() -> usize {
     ROWS * COLS
 }
 
 /// 编译时类型级编程示例
+/// compile-time type example
 pub struct TypeLevelNumber<const N: usize>;
 
 impl<const N: usize> TypeLevelNumber<N> {
@@ -136,10 +141,12 @@ impl<const N: usize> TypeLevelNumber<N> {
 }
 
 /// 控制流优化示例
+/// stream optimization example
 pub struct ControlFlowOptimizer;
 
 impl ControlFlowOptimizer {
     /// 分支预测友好的处理
+    /// branch prediction
     pub fn branch_prediction_friendly_process(data: &[i32]) -> Vec<i32> {
         let mut result = Vec::new();
 
@@ -156,6 +163,7 @@ impl ControlFlowOptimizer {
     }
 
     /// 无分支控制流
+    /// stream
     pub fn branchless_process(data: &[i32]) -> Vec<i32> {
         data.iter()
             .map(|&x| {
@@ -168,6 +176,7 @@ impl ControlFlowOptimizer {
     }
 
     /// 无分支最大值
+    /// maximum
     pub fn branchless_max(a: i32, b: i32) -> i32 {
         // 使用位运算避免分支: max(a,b) = a - k*(a-b), 其中 k = ((a-b)>>31) & 1
         let diff = a - b;
@@ -176,12 +185,14 @@ impl ControlFlowOptimizer {
     }
 
     /// 无分支绝对值
+    /// to
     pub fn branchless_abs(x: i32) -> i32 {
         let mask = x >> 31;
         (x ^ mask) - mask
     }
 
     /// 向量化友好的处理
+    /// vectorization
     pub fn vectorization_friendly_process(data: &[f64]) -> Vec<f64> {
         data.iter()
             .map(|&x| {
@@ -193,6 +204,7 @@ impl ControlFlowOptimizer {
 }
 
 /// 内联优化示例
+/// inside optimization example
 #[inline(always)]
 pub fn hot_path_function(x: i32) -> i32 {
     x * x + x + 1
@@ -208,10 +220,13 @@ pub fn warm_path_function(x: i32) -> i32 {
 }
 
 /// 内存管理优化示例
+/// memory optimization example
 pub struct MemoryOptimizer;
 
 impl MemoryOptimizer {
     /// 预分配内存
+    /// memory
+    /// 预Allocatememory
     pub fn preallocate_vector(capacity: usize) -> Vec<i32> {
         let mut vec = Vec::with_capacity(capacity);
         vec.extend(0..capacity as i32);
@@ -224,6 +239,7 @@ impl MemoryOptimizer {
     }
 
     /// 内存池管理
+    /// memory pool
     pub fn create_memory_pool(size: usize) -> Vec<Vec<u8>> {
         let mut pool = Vec::with_capacity(size);
         for i in 0..size {
@@ -234,10 +250,12 @@ impl MemoryOptimizer {
 }
 
 /// 链接时优化 (LTO) 示例
+/// link-time optimization (LTO) example
 pub struct LinkTimeOptimizer;
 
 impl LinkTimeOptimizer {
     /// 跨模块优化友好的函数
+    /// module optimization function
     #[inline(never)]
     pub fn cross_module_function(x: i32) -> i32 {
         // 这个函数可以在链接时被其他模块优化
@@ -245,6 +263,7 @@ impl LinkTimeOptimizer {
     }
 
     /// 内联候选函数
+    /// inside function
     #[inline(always)]
     pub fn inline_candidate(x: i32) -> i32 {
         x + 1
@@ -252,6 +271,7 @@ impl LinkTimeOptimizer {
 }
 
 /// 性能监控示例
+/// performance example
 pub struct PerformanceMonitor {
     start_time: std::time::Instant,
 }

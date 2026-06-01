@@ -1,26 +1,24 @@
 //! Rust 187.0 新特性实现模块 —— c04_generic
-//!
-//! 本模块展示了 Rust 187.0 (2025-05-15) 的关键语言特性和工具链改进。
-//!
-//! - `use_in_traits`: trait 中 RPIT 的 `use<...>` precise capturing
-//!
+//! Rust 187.0 feature module —— c04_generic
 //! # 版本信息
+//! # this
 //! - Rust 版本: 187.0
+//! - Rust this : 187.0
+//! - Rust 版this: 187.0
 //! - 稳定日期: 2025-05-15
-//! - Edition: 2024
+//! - date : 2025-05-15
+//! - 稳定date: 2025-05-15
+//! - date: 2025-05-15
 
 // ============================================================================
 // 1. trait 中 RPIT 的 `use<...>` precise capturing
 // ============================================================================
 
-/// # Trait 中的 `use<...>` Precise Capturing
-///
-/// Rust 1.87.0 将 `use<...>` precise capturing 扩展到 trait 定义中，
-/// 允许在 trait 方法的返回类型中精确控制生命周期捕获。
-///
+/// Rust 1.87.0 will `use<...>` precise capturing 扩展to trait definitionin，
 /// ## 背景
-/// 在 2024 Edition 中，`impl Trait` 的隐式生命周期捕获规则更严格。
+/// ## background
 /// `use<'a>` 语法允许显式声明需要捕获哪些生命周期。
+/// `use<'a>` lifetime 。
 pub trait Parser<'a> {
     fn parse(&self, input: &'a str) -> impl Iterator<Item = &'a str> + use<'a, Self>;
 }

@@ -10,8 +10,11 @@ use tracing::{error, info};
 // use sha2::{Sha256, Digest}; // 注释掉，因为sha2依赖未安装
 
 /// 2025年异步区块链模式演示
+/// 2025async demonstration
 /// 展示最新的区块链异步编程模式和最佳实践
+/// async and
 /// 1. 异步区块链网络
+/// 1. async network
 #[derive(Debug, Clone)]
 pub struct AsyncBlockchainNetwork {
     nodes: Arc<RwLock<HashMap<String, BlockchainNode>>>,
@@ -257,6 +260,7 @@ pub struct BlockchainInfo {
 }
 
 /// 2. 异步智能合约执行器
+/// 2. async
 #[allow(dead_code)]
 #[derive(Debug, Clone)]
 pub struct AsyncSmartContractExecutor {
@@ -454,6 +458,7 @@ impl AsyncSmartContractExecutor {
 }
 
 /// 3. 异步去中心化应用（DApp）管理器
+/// 3. async center application （DApp）
 #[derive(Debug, Clone)]
 pub struct AsyncDAppManager {
     dapps: Arc<RwLock<HashMap<String, DApp>>>,

@@ -344,7 +344,7 @@ cargo deny check                     # 许可证检查
 
 - [Async Book](https://rust-lang.github.io/async-book/)
 - [Tokio Tutorial](https://tokio.rs/tokio/tutorial)
-- [Async-Std Documentation](https://docs.rs/async-std/)
+- [Async-Std Documentation [已归档]](https://docs.rs/async-std/)
 
 ### 开源贡献
 

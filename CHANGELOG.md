@@ -1,6 +1,45 @@
 # 更新日志 (Changelog)
 
-> **最后更新**: 2026-06-01
+> **最后更新**: 2026-06-02
+
+---
+
+## [2.5.2] - 2026-06-02 — P0 重复合并与 L6 代码示例标记
+
+### 🗑️ P0 重复合并
+
+- **`docs/RUST_SAFETY_CRITICAL_ECOSYSTEM/` → `knowledge/04_expert/safety_critical/`**:
+  - 原 docs 目录整体迁移至 `archive/deprecated/`
+  - 唯一 unique 文件 `10_rust_194_195_features_deep_dive.md` 已复制到 `knowledge/.../01_mind_maps/03_rust_194_195_features_deep_dive.md`
+  - 更新 6 处跨目录引用链接
+- **`docs/content/` 重复清理**:
+  - 删除与 `knowledge/06_ecosystem/` 重复的 8 个文件（Axum/Tokio/SQLx/Sea-ORM/K8s/async-closures/generic-const-exprs/rust-1.95-preview）
+  - 保留 unique 内容：academic/（Tree Borrows、Coq）、representations/、scenarios/
+  - 更新 `docs/content/README.md` 目录结构和待办状态
+  - 更新 `docs/00_meta/00_documentation_division_of_labor.md` 中 `docs/content/` 的定位描述
+
+### 📝 L6-L7 代码示例标记
+
+- **21 个 L6 concept 文件**添加 `⚠️ 代码示例待扩充` 标记：
+  - 涵盖领域：game_ecs、WASI、cargo_script、WebAssembly、安全实践、CLI 开发、DevOps、微服务、OS 内核、密码学、编译器内部、量子计算、数据科学等
+  - 这些文件当前 **0 个可编译 Rust 代码块**，欢迎社区补充 PR
+
+### 🔗 死链修复
+
+- 修复删除重复文件后产生的 **8 处新死链**
+- 修复 `docs/rust-ownership-decidability/MASTER_INDEX_AUTO.md` 中 async-std 文件名空格问题
+- `kb_auditor.py`: **0 死链** / 258 文件 ✅
+
+### 🌐 L1 关键术语提示
+
+- 5 个 L1 核心概念文件顶部新增「本节关键术语」快速对照：
+  - `01_ownership.md`、`02_borrowing.md`、`03_lifetimes.md`、`04_type_system.md`、`08_collections.md`
+  - 链接至 `terminology_glossary.md` 完整对照表
+
+### 🔧 验证
+
+- `kb_auditor.py`: 死链 **0**，定理链 1,305，代码块 2,600
+- `version_fact_check.py`: 版本错误 **0** / 285 文件
 
 ---
 
@@ -25,7 +64,7 @@
 ### 📑 INDEX.md 索引修复
 
 - **1.96/1.97 表格互换修复**: `knowledge/INDEX.md` 中两个版本特性表格内容完全颠倒，现已正确归类
-- **1.96 表格**: 7 项 stable 特性（assert_matches!、core::range、LazyLock From<T>、NonZero Step、expr→cfg、ManuallyDrop 常量模式、Never tuple coercion）
+- **1.96 表格**: 7 项 stable 特性（assert_matches!、core::range、`LazyLock From<T>`、NonZero Step、expr→cfg、ManuallyDrop 常量模式、Never tuple coercion）
 - **1.97 表格**: 5 项预览特性（AFIDT、VecDeque::truncate_front、RefCell::try_map、int_format_into、cargo script）
 - **移除重复表头**: 1.96 表格中重复的 Markdown 表头已清理
 
@@ -49,6 +88,42 @@
   - `module_complete_examples.rs`: 移除未使用 `Command` 导入，添加未调用函数调用
   - `rust_194_control_flow_demo.rs`: 移除 u16 冗余上界比较 (`<= 65535`)
 - **4 个外部依赖文件** 已添加运行说明注释（cargo script / tokio）
+
+### 🔧 版本事实与文档索引修复
+
+- **`array_windows` 版本修正**: `knowledge/INDEX.md`、`knowledge/01_fundamentals/02_iterators.md` 中错误标记为 Rust 1.96 → 修正为 **1.94**
+- **`LazyLock::get()` 补充**: `docs/06_toolchain/06_19_rust_1_96_features.md` 新增 `LazyLock`/`LazyCell` 访问器 (`get`, `get_mut`, `force_mut`) 章节；`knowledge/INDEX.md` 1.96 表格同步补充
+- **`docs/README.md` 计数修正**: 6 个子目录文件数统计更新（`01_learning` 7→10, `02_reference` 31→38, `03_practice` 2→17, `05_guides` 30→36, `06_toolchain` 21→17, `07_project` 14→16）
+- **`docs/03_practice/README.md` 补链接**: 新增 `03_cross_module_practical_projects_2025_10_25.md` 导航
+
+### 🧹 Phase 1 技术债务清理
+
+- **async-std 全局清理**: ~160 文件、~570 处引用全面处理
+  - 活跃推荐全部移除/替换为 Tokio/smol
+  - 历史文档统一添加 `[已归档]` 标记或弃用横幅
+  - `crates/c06_async/src/` 运行时列表从 `std/tokio/async-std/smol` → `std/tokio/smol`
+  - `crates/c06_async/docs/`, `crates/c10_networks/docs/` 运行时对比文档全面更新
+  - `docs/`, `knowledge/`, `concept/` 中交叉引用统一修正
+  - `async_runtime_examples.rs` / `async_runtime_examples_fixed.rs` 保留为历史参考（已加说明）
+  - `book/` HTML 为生成产物，待重新生成
+- **WASI 目标更新**: `wasm32-wasi` → `wasm32-wasip1` 迁移已确认完成，残余引用均为历史归档文档，无需修改
+- **async-trait 文档修复**: 分析确认所有 `dyn Trait` 源码用法需保留至 AFIDT 稳定 (1.97+)；已修复 8 处静态分发场景的错误 `#[async_trait]` 使用（c10_networks README、axum deep dive、async closures 示例、c08/c04 设计模式文档等）
+- **Rust 1.96 特性补全**: `LazyLock::get()`/`get_mut()`/`force_mut()` 访问器方法补入 `docs/06_toolchain/06_19_rust_1_96_features.md` 和 `knowledge/INDEX.md`
+- **array_windows 版本勘误**: 1.96 → 1.94（INDEX.md、02_iterators.md 共 5 处）
+- **book/ HTML 重新生成**: `mdbook build` 完成，同步了所有源文件修复
+- **历史损坏文本修复**: 修复了 concept/ 中 6 处之前的自动替换损坏（`Tokio（async-std 已于...）` 等）
+- **L3 导航分岔口**: 20 个 L3 活跃文件末尾统一添加"导航：下一步去哪？"分岔口，链接 L2/L4/L6/MVP 路径
+- **L4/L7 形式化声明补全**: `23_programming_language_foundations.md`、`22_std_autodiff_preview.md` 补充声明头部
+- **全概念层内容分级标签**: concept/ 全部 232 个活跃概念文件统一标注 `[综述级]`/`[实验级]`/`[专家级]`（116/31/85）
+- **CONTRIBUTING.md 创建**: 新贡献者指南，含 30 分钟入门路径、验证清单、文档规范
+
+### 🔧 编译与测试验证
+
+- `cargo check --workspace`: ✅ 通过
+- `cargo test --workspace`: ✅ 全部通过
+- `cargo clippy --workspace`: ✅ 零 lint
+- `kb_auditor.py`: 死链 **0**，定理链 1,305
+- `version_fact_check.py`: **0** 错误 / 3,878 文件
 
 ---
 

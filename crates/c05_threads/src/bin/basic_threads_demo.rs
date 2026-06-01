@@ -1,10 +1,13 @@
 //! 基础线程功能演示程序
-//!
-//! 本程序展示Rust中基础线程功能的使用，包括：
+//! foundation thread functionality demonstration program
 //! - 线程创建和管理
+//! - thread and
 //! - 线程池使用
+//! - thread pool
 //! - 线程间通信
+//! - thread
 //! - 线程同步
+//! - thread synchronization
 use c05_threads::threads::creation::*;
 use c05_threads::threads::thread_pool::*;
 use std::thread;
@@ -65,6 +68,7 @@ fn main() {
 }
 
 /// 线程池演示
+/// thread pool demonstration
 fn thread_pool_demo() {
     println!("🔧 线程池演示");
 

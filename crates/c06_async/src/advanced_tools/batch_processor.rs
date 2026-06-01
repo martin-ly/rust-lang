@@ -1,11 +1,18 @@
 //! 异步批处理器
+//! async
 //!
 //! 提供高效的批处理功能：
+//! efficient functionality ：
 //! - 智能批处理策略
+//! - strategy
 //! - 背压控制
+//! - backpressure
 //! - 批量操作优化
+//! - optimization
 //! - 错误处理和重试
+//! - error handling and
 //! - 性能监控
+//! - performance
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
 use std::collections::VecDeque;
@@ -16,15 +23,20 @@ use tokio::time::{interval, sleep, timeout};
 use uuid::Uuid;
 
 /// 批处理策略
+/// strategy
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum BatchStrategy {
     /// 按数量批处理
+    /// quantity
     ByCount(usize),
     /// 按时间批处理
+    /// time
     ByTime(Duration),
     /// 按大小批处理（字节数）
+    /// （）
     BySize(usize),
     /// 混合策略
+    /// strategy
     Hybrid {
         max_count: usize,
         max_time: Duration,
@@ -81,6 +93,7 @@ impl<T> BatchItem<T> {
 }
 
 /// 批处理结果
+/// result
 #[derive(Debug)]
 pub struct BatchResult<T> {
     pub batch_id: Uuid,
@@ -105,12 +118,14 @@ pub struct BatchStats {
 }
 
 /// 批处理器 trait
+/// trait
 #[async_trait::async_trait]
 pub trait BatchProcessor<T>: Send + Sync {
     async fn process_batch(&self, items: Vec<BatchItem<T>>) -> Result<Vec<BatchItem<T>>>;
 }
 
 /// 异步批处理器
+/// async
 pub struct AsyncBatchProcessor<T, P> {
     processor: Arc<P>,
     config: BatchConfig,
@@ -169,6 +184,7 @@ where
     }
 
     /// 添加项目到批处理队列
+    /// project to
     pub async fn add_item(&self, item: BatchItem<T>) -> Result<()> {
         let queue_size = {
             let mut queue = self.queue.lock().await;
@@ -384,6 +400,7 @@ where
 }
 
 /// 简单的批处理器实现示例
+/// simple example
 pub struct SimpleBatchProcessor<T> {
     name: String,
     _phantom: std::marker::PhantomData<T>,
@@ -421,6 +438,7 @@ where
 }
 
 /// 批处理器构建器
+/// builder
 pub struct BatchProcessorBuilder<T, P> {
     processor: Option<P>,
     config: BatchConfig,

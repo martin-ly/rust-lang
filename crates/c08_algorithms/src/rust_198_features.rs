@@ -1,20 +1,27 @@
 //! Rust 1.98 Nightly 前瞻 —— 生成器块与算法
+//! Rust 1.98 Nightly before —— and algorithm
 #![allow(clippy::incompatible_msrv)]
 
 /// # Rust 1.98 Nightly 算法前瞻
 ///
 /// 本模块展示 nightly 1.98 中 `gen { yield ... }` 块在算法场景的应用：
+/// This module demonstrates nightly 1.98 in `gen { yield... }` in algorithm scenario application ：
 /// - 惰性序列生成（斐波那契、素数筛）
+/// - sequence （、）
 /// - 树/图的遍历生成器
+/// - tree /
 /// - 流式数据管道
+/// - stream pipe
 ///
 /// **⚠️ 需要 nightly Rust + `#![feature(gen_blocks, yield_expr)]`**
 pub struct Rust198AlgorithmFeatures;
 
 impl Rust198AlgorithmFeatures {
     /// 使用 gen 块生成惰性斐波那契序列
+    /// gen sequence
     ///
     /// 对比 `std::iter::from_fn`，`gen` 块语法更直观，无需显式闭包包装。
+    /// to `std::iter::from_fn`，`gen` ，。
     pub fn fibonacci() -> impl Iterator<Item = u64> {
         gen {
             let (mut a, mut b) = (0, 1);
@@ -26,9 +33,12 @@ impl Rust198AlgorithmFeatures {
     }
 
     /// 使用 gen 块实现埃拉托斯特尼筛法（惰性素数序列）
+    /// gen （sequence ）
     ///
     /// 每次 `yield` 产生一个素数，然后筛去其倍数。算法惰性执行，
+    /// `yield` ，then its 。algorithm ，
     /// 只计算被请求的素数数量。
+    /// is quantity 。
     pub fn primes() -> impl Iterator<Item = u64> {
         gen {
             let mut sieve = vec![true; 1_000_000];
@@ -46,8 +56,10 @@ impl Rust198AlgorithmFeatures {
     }
 
     /// 使用 gen 块生成二叉树的前序遍历序列
+    /// gen binary tree before sequence
     ///
     /// 利用显式栈在 gen 块中惰性 yield 节点值，无需一次性构造完整 Vec。
+    /// stack in gen in yield node ，complete Vec。
     pub fn preorder_traversal<T: Clone>(tree: Option<Box<TreeNode<T>>>) -> impl Iterator<Item = T> {
         gen move {
             let mut stack = Vec::new();
@@ -67,8 +79,10 @@ impl Rust198AlgorithmFeatures {
     }
 
     /// 使用 gen 块实现滑动窗口最大值（流式算法）
+    /// gen maximum （stream algorithm ）
     ///
     /// 接收一个数据流，维护大小为 `k` 的窗口，每次 yield 当前窗口最大值。
+    /// stream ，as `k` ， yield when before maximum 。
     pub fn sliding_window_max(stream: Vec<i32>, k: usize) -> impl Iterator<Item = i32> {
         gen move {
             let n = stream.len();
@@ -104,18 +118,23 @@ impl Rust198AlgorithmFeatures {
 }
 
 /// 二叉树节点定义（用于遍历算法）
+/// binary tree node definition （algorithm ）
 #[derive(Debug, Clone)]
 pub struct TreeNode<T> {
     /// 节点值
+    /// node
     pub val: T,
     /// 左子树
+    /// tree
     pub left: Option<Box<TreeNode<T>>>,
     /// 右子树
+    /// tree
     pub right: Option<Box<TreeNode<T>>>,
 }
 
 impl<T> TreeNode<T> {
     /// 创建新的叶子节点
+    /// node
     pub fn new(val: T) -> Self {
         Self {
             val,
@@ -125,12 +144,14 @@ impl<T> TreeNode<T> {
     }
 
     /// 添加左子节点
+    /// node
     pub fn left(mut self, node: TreeNode<T>) -> Self {
         self.left = Some(Box::new(node));
         self
     }
 
     /// 添加右子节点
+    /// node
     pub fn right(mut self, node: TreeNode<T>) -> Self {
         self.right = Some(Box::new(node));
         self

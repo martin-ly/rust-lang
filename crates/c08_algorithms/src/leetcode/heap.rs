@@ -1,14 +1,21 @@
 //! LeetCode 堆类算法（结合 Rust 1.91 特性）
+//! LeetCode heap algorithm （ Rust 1.91 feature ）
 //!
 //! 本模块实现经典的堆类 LeetCode 题目，充分利用 Rust 1.91 的新特性。
+//! this module heap LeetCode ， Rust 1.91 feature 。
 //!
 //! ## Rust 1.91 特性应用
+//! ## Rust 1.91 feature application
 //!
 //! - **JIT 优化**: 堆操作性能提升 10-15%
+//! - **JIT optimization **: heap performance 10-15%
 //! - **内存优化**: 使用 BinaryHeap 高效管理优先级
+//! - **memory optimization **: BinaryHeap efficient
 //! - **迭代器优化**: 堆操作中的迭代器性能提升
+//! - **optimization **: heap in performance
 //!
 //! ## 包含的经典题目
+//! ##
 //!
 //! - 215. Kth Largest Element in an Array（数组中的第K个最大元素）
 //! - 347. Top K Frequent Elements（前 K 个高频元素）
@@ -18,22 +25,32 @@
 //! - 703. Kth Largest Element in a Stream（数据流中的第 K 大元素）
 //! - 973. K Closest Points to Origin（最接近原点的 K 个点）
 //! - 1046. Last Stone Weight（最后一块石头的重量）
+//! - 1046. Last Stone Weight（finally ）
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 use std::collections::{BinaryHeap, HashMap};
 
 /// 215. Kth Largest Element in an Array（数组中的第K个最大元素）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给定整数数组 `nums` 和整数 `k`，请返回数组中第 `k` 个最大的元素。
+/// `nums` and `k`，in `k` maximum element 。
 /// 请注意，你需要找的是数组排序后的第 `k` 个最大的元素，而不是第 `k` 个不同的元素。
+/// ，ordering after `k` maximum element ，while `k` element 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 堆操作性能提升 10-15%
+/// - **JIT optimization **: heap performance 10-15%
 /// - **内存优化**: 使用最小堆，O(k) 空间复杂度
+/// - **memory optimization **: minimum heap ，O(k) space complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n log k)
+/// - time complexity : O(n log k)
 /// - 空间复杂度: O(k)
+/// - space complexity : O(k)
 pub fn find_kth_largest(nums: Vec<i32>, k: i32) -> i32 {
     let k = k as usize;
 
@@ -62,15 +79,23 @@ pub fn find_kth_largest(nums: Vec<i32>, k: i32) -> i32 {
 /// 347. Top K Frequent Elements（前 K 个高频元素）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给你一个整数数组 `nums` 和一个整数 `k`，请你返回其中出现频率前 `k` 高的元素。你可以按 **任意顺序** 返回答案。
+/// `nums` and `k`，its in before `k` element 。can **order ** answer 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 堆操作性能提升
+/// - **JIT optimization **: heap performance
 /// - **内存优化**: 使用最小堆和 HashMap，O(n) 空间复杂度
+/// - **memory optimization **: minimum heap and HashMap，O(n) space complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n log k)
+/// - time complexity : O(n log k)
 /// - 空间复杂度: O(n)
+/// - space complexity : O(n)
 pub fn top_k_frequent(nums: Vec<i32>, k: i32) -> Vec<i32> {
     let k = k as usize;
 
@@ -102,15 +127,23 @@ pub fn top_k_frequent(nums: Vec<i32>, k: i32) -> Vec<i32> {
 /// 451. Sort Characters By Frequency（根据字符出现频率排序）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给定一个字符串 `s`，根据字符出现的 **频率** 进行降序排序。
+/// `s`，according to **** ordering 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 堆操作性能提升
+/// - **JIT optimization **: heap performance
 /// - **内存优化**: 使用最大堆，O(n) 空间复杂度
+/// - **memory optimization **: maximum heap ，O(n) space complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n log n)
+/// - time complexity : O(n log n)
 /// - 空间复杂度: O(n)
+/// - space complexity : O(n)
 pub fn frequency_sort(s: String) -> String {
     // 统计字符频率
     let mut freq_map: HashMap<char, i32> = HashMap::new();
@@ -138,16 +171,25 @@ pub fn frequency_sort(s: String) -> String {
 /// 692. Top K Frequent Words（前K个高频单词）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给定一个单词列表 `words` 和一个整数 `k`，返回前 `k` 个出现次数最多的单词。
+/// `words` and `k`，before `k` at most 。
 /// 返回的答案应该按单词出现频率由高到低排序。如果不同的单词有相同出现频率，按字典序排序。
+/// answer should to ordering 。if ，ordering 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 堆操作性能提升
+/// - **JIT optimization **: heap performance
 /// - **内存优化**: 使用最小堆，O(n) 空间复杂度
+/// - **memory optimization **: minimum heap ，O(n) space complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n log k)
+/// - time complexity : O(n log k)
 /// - 空间复杂度: O(n)
+/// - space complexity : O(n)
 pub fn top_k_frequent_words(words: Vec<String>, k: i32) -> Vec<String> {
     let k = k as usize;
 
@@ -171,15 +213,23 @@ pub fn top_k_frequent_words(words: Vec<String>, k: i32) -> Vec<String> {
 /// 703. Kth Largest Element in a Stream（数据流中的第 K 大元素）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 设计一个找到数据流中第 `k` 大元素的类（class）。注意是排序后的第 `k` 大元素，不是第 `k` 个不同的元素。
+/// design to stream in `k` element （class）。ordering after `k` element ， `k` element 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 堆操作性能提升
+/// - **JIT optimization **: heap performance
 /// - **内存优化**: 使用最小堆，O(k) 空间复杂度
+/// - **memory optimization **: minimum heap ，O(k) space complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - add 操作时间复杂度: O(log k)
+/// - add time complexity : O(log k)
 /// - 空间复杂度: O(k)
+/// - space complexity : O(k)
 pub struct KthLargest {
     k: usize,
     heap: BinaryHeap<std::cmp::Reverse<i32>>, // 最小堆存储 k 个最大元素
@@ -223,15 +273,23 @@ impl KthLargest {
 /// 973. K Closest Points to Origin（最接近原点的 K 个点）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给定一个数组 `points`，其中 `points[i] = [xi, yi]` 表示 X-Y 平面上的一个点，并且是一个整数数组，返回离原点 `(0, 0)` 最近的 `k` 个点。
+/// `points`，its in `points[i] = [xi, yi]` represent X-Y surface on point ，and and ，origin `(0, 0)` `k` point 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 堆操作性能提升
+/// - **JIT optimization **: heap performance
 /// - **内存优化**: 使用最大堆，O(k) 空间复杂度
+/// - **memory optimization **: maximum heap ，O(k) space complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n log k)
+/// - time complexity : O(n log k)
 /// - 空间复杂度: O(k)
+/// - space complexity : O(k)
 pub fn k_closest(points: Vec<Vec<i32>>, k: i32) -> Vec<Vec<i32>> {
     let k = k as usize;
 
@@ -275,20 +333,32 @@ pub fn k_closest(points: Vec<Vec<i32>>, k: i32) -> Vec<Vec<i32>> {
 }
 
 /// 1046. Last Stone Weight（最后一块石头的重量）
+/// 1046. Last Stone Weight（finally ）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 有一堆石头，每块石头的重量都是正整数。每一回合，从中选出两块 **最重的** 石头，然后将它们一起粉碎。
+/// heap ，。，from in **** ，then will 。
 /// 假设石头的重量分别为 `x` 和 `y`，且 `x <= y`。那么粉碎的可能结果如下：
+/// hypothesize as `x` and `y`，and `x <= y`。may result under ：
 /// - 如果 `x == y`，那么两块石头都会被完全粉碎；
+/// - if `x == y`，is ；
 /// - 如果 `x != y`，那么重量为 `x` 的石头将会完全粉碎，而重量为 `y` 的石头新重量为 `y-x`。
+/// - if `x!= y`，as `x` will ，while as `y` as `y-x`。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 堆操作性能提升
+/// - **JIT optimization **: heap performance
 /// - **内存优化**: 使用最大堆，O(n) 空间复杂度
+/// - **memory optimization **: maximum heap ，O(n) space complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n log n)
+/// - time complexity : O(n log n)
 /// - 空间复杂度: O(n)
+/// - space complexity : O(n)
 pub fn last_stone_weight(stones: Vec<i32>) -> i32 {
     // Rust 1.91 JIT 优化：使用最大堆
     let mut heap: BinaryHeap<i32> = stones.into_iter().collect();
@@ -308,6 +378,7 @@ pub fn last_stone_weight(stones: Vec<i32>) -> i32 {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有堆类问题
+/// all heap problem
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

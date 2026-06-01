@@ -1,7 +1,5 @@
 //! 综合异步生态系统演示
-//!
-//! 本示例展示了Rust异步编程生态系统中各个库的全面使用，
-//! 包括：std、tokio、smol 等库的特性、概念、关系和使用场景。[历史: async-std 已停止维护]
+//! synthesize async ecosystem system demonstration
 use anyhow::Result;
 #[allow(unused_imports)]
 use c06_async::{
@@ -20,6 +18,7 @@ use c06_async::{
 //use tokio::time::Duration;
 
 /// 异步生态系统全面演示
+/// async ecosystem system surface demonstration
 #[tokio::main]
 async fn main() -> Result<()> {
     println!("🚀 Rust 异步生态系统全面演示");
@@ -87,6 +86,7 @@ async fn main() -> Result<()> {
 }
 
 /// 性能对比演示
+/// performance to demonstration
 async fn performance_comparison_demo() -> Result<()> {
     println!("📊 异步运行时性能对比演示:");
 
@@ -118,7 +118,7 @@ async fn performance_comparison_demo() -> Result<()> {
 
     // 运行时比较
     println!("\n  运行时特性比较:");
-    if let Some(comparison) = analyzer.compare_runtimes("tokio", "async-std") {
+    if let Some(comparison) = analyzer.compare_runtimes("tokio", "async-std [已归档]") {
         println!("    Tokio vs Async-std:");
         println!("      性能优势: {}", comparison.performance_winner);
         println!("      生态系统优势: {}", comparison.ecosystem_winner);
@@ -136,6 +136,7 @@ async fn performance_comparison_demo() -> Result<()> {
 }
 
 /// 实际应用场景演示
+/// actual application scenario demonstration
 async fn real_world_scenarios_demo() -> Result<()> {
     println!("🎯 实际应用场景演示:");
 
@@ -163,6 +164,7 @@ async fn real_world_scenarios_demo() -> Result<()> {
 }
 
 /// Web服务器场景演示
+/// Web scenario demonstration
 async fn web_server_scenario() -> Result<()> {
     println!("    🌐 Web服务器场景:");
     println!("      特点: 高并发、低延迟、稳定可靠");
@@ -182,6 +184,7 @@ async fn web_server_scenario() -> Result<()> {
 }
 
 /// CLI工具场景演示
+/// CLItool scenario demonstration
 async fn cli_tool_scenario() -> Result<()> {
     println!("    🛠️ CLI工具场景:");
     println!("      特点: 快速启动、简单易用、资源占用少");
@@ -201,6 +204,7 @@ async fn cli_tool_scenario() -> Result<()> {
 }
 
 /// 嵌入式系统场景演示
+/// system scenario demonstration
 async fn embedded_system_scenario() -> Result<()> {
     println!("    🔧 嵌入式系统场景:");
     println!("      特点: 资源受限、低功耗、实时性要求");
@@ -219,6 +223,7 @@ async fn embedded_system_scenario() -> Result<()> {
 }
 
 /// 微服务架构场景演示
+/// microservice architecture scenario demonstration
 async fn microservice_scenario() -> Result<()> {
     println!("    🏗️ 微服务架构场景:");
     println!("      特点: 分布式、高可用、可扩展");
@@ -237,6 +242,7 @@ async fn microservice_scenario() -> Result<()> {
 }
 
 /// 数据处理管道场景演示
+/// pipe scenario demonstration
 async fn data_processing_pipeline_scenario() -> Result<()> {
     println!("    📊 数据处理管道场景:");
     println!("      特点: 多阶段处理、数据转换、错误处理");
@@ -263,6 +269,7 @@ async fn data_processing_pipeline_scenario() -> Result<()> {
 }
 
 /// 异步生态系统最佳实践总结
+/// async ecosystem system summary
 #[allow(unused)]
 fn print_best_practices() {
     println!("\n📚 异步生态系统最佳实践:");

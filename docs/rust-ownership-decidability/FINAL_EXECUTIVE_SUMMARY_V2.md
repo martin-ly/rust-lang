@@ -8,50 +8,49 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权系统可判定性 - 最终执行摘要 (V2)](#rust-所有权系统可判定性---最终执行摘要-v2)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [Final Executive Summary - Comprehensive Edition](#final-executive-summary---comprehensive-edition)
-  - [🎯 核心成就](#核心成就)
+  - [🎯 核心成就](#-核心成就)
     - [1. 理论完整性](#1-理论完整性)
     - [2. 文档覆盖度](#2-文档覆盖度)
     - [3. 知识层次结构](#3-知识层次结构)
-  - [📚 核心知识资产](#核心知识资产)
+  - [📚 核心知识资产](#-核心知识资产)
     - [五大核心理论文档](#五大核心理论文档)
     - [三大入门路径](#三大入门路径)
-  - [🔬 形式化证明资产](#形式化证明资产)
+  - [🔬 形式化证明资产](#-形式化证明资产)
     - [核心定理 (全部完成)](#核心定理-全部完成)
     - [Rust 1.94 特性形式化](#rust-194-特性形式化)
-  - [📊 案例研究矩阵](#案例研究矩阵)
+  - [📊 案例研究矩阵](#-案例研究矩阵)
     - [生产级 Crate 分析 (137 个文件)](#生产级-crate-分析-137-个文件)
-  - [🛠️ 验证工具链](#验证工具链)
-  - [🎓 学习资源统计](#学习资源统计)
+  - [🛠️ 验证工具链](#️-验证工具链)
+  - [🎓 学习资源统计](#-学习资源统计)
     - [文档深度分布](#文档深度分布)
     - [内容类型分布](#内容类型分布)
-  - [🔗 关键索引导航](#关键索引导航)
+  - [🔗 关键索引导航](#-关键索引导航)
     - [主入口点](#主入口点)
     - [理论导航](#理论导航)
     - [实践导航](#实践导航)
-  - [✅ 质量保证清单](#质量保证清单)
+  - [✅ 质量保证清单](#-质量保证清单)
     - [内容质量](#内容质量)
     - [形式化质量](#形式化质量)
     - [引用质量](#引用质量)
-  - [🚀 快速开始指南](#快速开始指南)
+  - [🚀 快速开始指南](#-快速开始指南)
     - [5 分钟了解项目](#5-分钟了解项目)
     - [30 分钟建立框架](#30-分钟建立框架)
     - [深入形式化证明](#深入形式化证明)
-  - [📈 项目演进](#项目演进)
+  - [📈 项目演进](#-项目演进)
     - [版本历史](#版本历史)
     - [当前版本特性 (V2.0)](#当前版本特性-v20)
-  - [🎉 总结](#总结)
+  - [🎉 总结](#-总结)
     - [项目价值](#项目价值)
     - [使用建议](#使用建议)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## Final Executive Summary - Comprehensive Edition
->
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 > **项目状态**: ✅ 100% 完成 (综合梳理版)
 > **日期**: 2026-03-09
 > **文档规模**: 556 Markdown 文件 + 32 Coq 文件
@@ -245,7 +244,7 @@ Theorem rust_type_system_fully_decidable :
 
 | 领域 | 代表 Crates | 分析深度 |
 |:-----|:------------|:--------:|
-| **异步运行时** | Tokio, async-std, smol | 形式化语义 |
+| **异步运行时** | Tokio, async-std [已归档], smol | 形式化语义 |
 | **Web 框架** | Actix-web, Axum, Rocket | 内存安全分析 |
 | **数据库** | Diesel, SQLx, SeaORM | 类型安全分析 |
 | **序列化** | Serde, rkyv, postcard | 零拷贝证明 |
@@ -514,11 +513,8 @@ cat docs/rust-ownership-decidability/coq-formalization/theories/Advanced/Metathe
 ## 权威来源索引
 
 > **[来源: Wikipedia - Memory Safety]**
-
 > **[来源: TRPL Ch. 4 - Ownership]**
-
 > **[来源: Rustonomicon - Ownership]**
-
 > **[来源: POPL 2018 - RustBelt]**
 
 ---
@@ -537,51 +533,3 @@ cat docs/rust-ownership-decidability/coq-formalization/theories/Advanced/Metathe
 >
 
 ---
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**

@@ -1,20 +1,18 @@
 //! Rust 1.93.0 WASM 特性实现模块
-//!
-//! 本模块展示了 Rust 1.93.0 在 WASM 场景中的应用，包括：
-//! - MaybeUninit 增强 API（assume_init_ref, assume_init_mut, assume_init_drop, write_copy_of_slice）
-//! - String/Vec into_raw_parts 在 WASM 内存零拷贝传递中的应用
-//! - VecDeque pop_front_if/pop_back_if 在 WASM 数据处理中的应用
-//! - slice.as_array() 在 WASM 固定大小数组处理中的应用
-//! - Duration::from_nanos_u128 在 WASM 高精度计时中的应用
-//! - char::MAX_LEN_UTF8/MAX_LEN_UTF16 在 WASM 字符串编码中的应用
-//! - fmt::from_fn 在 WASM 自定义格式化中的应用
-//!
+//! Rust 1.93.0 WASM feature module
+//! - Duration::from_nanos_u128 in WASM 高精度计时inapplication
+//! - char::MAX_LEN_UTF8/MAX_LEN_UTF16 in WASM 字符串Encodeinapplication
 //! # 文件信息
+//! #
 //! - 文件: rust_193_features.rs
 //! - 创建日期: 2026-02-12
+//! - date : 2026-02-12
 //! - 版本: 1.0
+//! - this : 1.0
+//! - 版this: 1.0
 //! - Rust 版本: 1.93.0
-//! - Edition: 2024
+//! - Rust this : 1.93.0
+//! - Rust 版this: 1.93.0
 
 // 允许MSRV不兼容警告，因为本模块专门展示Rust 1.93+特性
 #![allow(clippy::incompatible_msrv)]
@@ -26,14 +24,12 @@ use std::time::Duration;
 
 // ==================== 1. MaybeUninit 增强 API 在 WASM 中的应用 ====================
 
-/// 使用 Rust 1.93 MaybeUninit 新 API 的 WASM 安全缓冲区
 pub struct WasmBuffer193 {
     buffer: Vec<MaybeUninit<u8>>,
     initialized_len: usize,
 }
 
 impl WasmBuffer193 {
-    /// 创建指定大小的 WASM 缓冲区
     pub fn new(capacity: usize) -> Self {
         let mut buffer = Vec::with_capacity(capacity);
         unsafe {
@@ -46,6 +42,7 @@ impl WasmBuffer193 {
     }
 
     /// 使用 Rust 1.93 write_copy_of_slice 批量写入（需 Rust 1.93+）
+    /// Use Rust 1.93 write_copy_of_slice 批量Write（需 Rust 1.93+）
     pub fn write_from_slice(&mut self, data: &[u8]) -> usize {
         let write_len = data.len().min(self.buffer.len() - self.initialized_len);
         let dst = &mut self.buffer[self.initialized_len..self.initialized_len + write_len];
@@ -57,9 +54,7 @@ impl WasmBuffer193 {
         write_len
     }
 
-    /// 使用 Rust 1.93 assume_init_ref 获取已初始化部分的引用
-    ///
-    /// # Safety
+    /// Use Rust 1.93 assume_init_ref Get已Initializepartreference
     /// 调用者必须确保 len <= initialized_len
     pub unsafe fn get_initialized_ref(&self, len: usize) -> &[u8] {
         let len = len.min(self.initialized_len);
@@ -77,6 +72,7 @@ impl WasmBuffer193 {
 // ==================== 2. String/Vec into_raw_parts 在 WASM 中的应用 ====================
 
 /// 演示 String::into_raw_parts 用于零拷贝传递
+/// demonstration String::into_raw_parts
 pub fn string_to_raw_parts_wasm(s: String) -> (usize, usize, usize) {
     let (ptr, len, capacity) = s.into_raw_parts();
     let meta = (ptr as usize, len, capacity);
@@ -86,6 +82,7 @@ pub fn string_to_raw_parts_wasm(s: String) -> (usize, usize, usize) {
 }
 
 /// 演示 Vec::into_raw_parts 用于零拷贝传递
+/// demonstration Vec::into_raw_parts
 pub fn vec_to_raw_parts_wasm<T>(v: Vec<T>) -> (usize, usize, usize) {
     let (ptr, len, capacity) = v.into_raw_parts();
     let meta = (ptr as usize, len, capacity);
@@ -95,7 +92,6 @@ pub fn vec_to_raw_parts_wasm<T>(v: Vec<T>) -> (usize, usize, usize) {
 
 // ==================== 3. VecDeque pop_front_if / pop_back_if ====================
 
-/// 使用 Rust 1.93 VecDeque 条件弹出处理 WASM 数据流
 pub fn process_deque_conditional(mut deque: VecDeque<i32>) -> VecDeque<i32> {
     // 弹出前端满足条件的元素
     while let Some(v) = deque.pop_front_if(|x| *x < 0) {
@@ -111,16 +107,19 @@ pub fn process_deque_conditional(mut deque: VecDeque<i32>) -> VecDeque<i32> {
 // ==================== 4. slice.as_array() 在 WASM 中的应用 ====================
 
 /// 使用 Rust 1.93 as_array 处理固定大小数组
+/// Rust 1.93 as_array
 pub fn slice_to_array_four(slice: &[i32]) -> Option<[i32; 4]> {
     slice.as_array().copied()
 }
 
 /// 使用 char::MAX_LEN_UTF8 预分配 UTF-8 缓冲区
+/// char::MAX_LEN_UTF8 UTF-8 buffering
 pub fn max_utf8_buffer_size() -> usize {
     char::MAX_LEN_UTF8
 }
 
 /// 使用 char::MAX_LEN_UTF16 预分配 UTF-16 缓冲区
+/// char::MAX_LEN_UTF16 UTF-16 buffering
 pub fn max_utf16_buffer_size() -> usize {
     char::MAX_LEN_UTF16
 }
@@ -135,6 +134,7 @@ pub fn duration_from_nanos_u128(nanos: u128) -> Duration {
 // ==================== 6. fmt::from_fn 在 WASM 中的应用 ====================
 
 /// 使用 Rust 1.93 fmt::from_fn 创建自定义格式化器
+/// Rust 1.93 fmt::from_fn definition
 pub fn create_wasm_formatter(value: i32) -> impl fmt::Display {
     fmt::from_fn(move |f: &mut fmt::Formatter<'_>| write!(f, "WASM[{}]", value))
 }

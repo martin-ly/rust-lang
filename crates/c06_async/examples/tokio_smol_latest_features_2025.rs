@@ -1,25 +1,23 @@
 //! # Tokio 1.41+ 和 Smol 2.0+ 最新特性完整演示 2025
-//!
-//! Latest Features of Tokio 1.41+ and Smol 2.0+ Complete Demo 2025
+//! # Tokio 1.41+ and Smol 2.0+ feature complete demonstration 2025
 //!
 //! ## 📚 本示例涵盖
-//!
+//! ## 📚 this example
 //! ### Tokio 1.41+ 最新特性
-//! 1. **JoinSet 增强** - 动态任务集管理
-//! 2. **TaskLocal 改进** - 任务本地存储
+//! ### Tokio 1.41+ feature
+//! ### Tokio 1.41+ 最新feature
 //! 3. **Runtime Metrics** - 运行时指标收集
+//! 3. **Runtime Metrics** - runtime indicator
 //! 4. **协作式调度** - Cooperative scheduling improvements
 //! 5. **Async Drop** - 异步资源清理
+//! 5. **Async Drop** - async
 //! 6. **取消传播** - Cancellation token improvements
-//!
 //! ### Smol 2.0+ 最新特性
-//! 1. **轻量级 Executor** - 更小的内存占用
-//! 2. **Async-io 2.6+** - 改进的 I/O 层
-//! 3. **跨平台支持** - Windows, Linux, macOS 优化
-//! 4. **与 Tokio 互操作** - 混合运行时支持
-//!
+//! ### Smol 2.0+ feature
+//! ### Smol 2.0+ 最新feature
+//! 2. **Async-io 2.6+** - 改进 I/O 层
 //! ## 运行方式
-//! ```bash
+//! ## Run way
 //! cargo run --example tokio_smol_latest_features_2025
 //! ```
 //use std::sync::Arc;
@@ -36,18 +34,26 @@ use tokio::time::{interval, sleep};
 mod tokio_latest_features {
     use super::*;
 
-    /// # Tokio 特性 1: JoinSet 动态任务集管理
-    ///
     /// ## 新特性
+    /// ## feature
+    /// ## 新feature
     /// - 动态添加/移除任务
+    /// - /task
     /// - 有序/无序结果收集
+    /// - /result
     /// - 提前终止支持
+    /// - before
     /// - 错误传播
-    ///
+    /// - error propagation
     /// ## 使用场景
+    /// ## scenario
     /// - 并行爬虫 (动态发现新 URL)
+    /// - parallelism ( URL)
     /// - 工作池 (动态任务队列)
+    /// - (task )
     /// - 批处理系统
+    /// - system
+    /// - 批Handlesystem
     pub async fn joinset_demo() {
         println!("\n╔════════════════════════════════════════════════════════╗");
         println!("║  🎯 Tokio Feature 1: JoinSet 动态任务集               ║");
@@ -98,17 +104,22 @@ mod tokio_latest_features {
         println!("\n✅ JoinSet 演示完成");
     }
 
-    /// # Tokio 特性 2: TaskLocal 任务本地存储
-    ///
     /// ## 特性说明
+    /// ## feature explain
     /// - 类似线程本地存储,但用于异步任务
+    /// - similar to thread-local storage,but async task
     /// - 每个任务有独立的值
+    /// - task
     /// - 零成本抽象
-    ///
+    /// - cost
     /// ## 使用场景
+    /// ## scenario
     /// - 请求追踪 (Trace ID)
+    /// - (Trace ID)
     /// - 上下文传播
+    /// - on under propagation
     /// - 用户认证信息
+    /// -
     pub async fn task_local_demo() {
         println!("\n╔════════════════════════════════════════════════════════╗");
         println!("║  🏷️  Tokio Feature 2: TaskLocal 任务本地存储          ║");
@@ -121,6 +132,7 @@ mod tokio_latest_features {
         }
 
         /// 模拟业务逻辑函数 - 自动获取上下文
+        /// function - on under
         async fn handle_request(endpoint: &str) {
             REQUEST_ID.with(|req_id| {
                 USER_ID.with(|user_id| {
@@ -171,17 +183,27 @@ mod tokio_latest_features {
     }
 
     /// # Tokio 特性 3: Runtime Metrics 运行时指标
-    ///
     /// ## 可收集的指标
+    /// ## indicator
+    /// ## 可收集indicator
     /// - 活跃任务数
+    /// - task
     /// - 任务调度延迟
+    /// - task
     /// - Worker 线程利用率
+    /// - Worker thread
     /// - I/O 事件统计
-    ///
+    /// - I/O
     /// ## 使用场景
+    /// ## scenario
     /// - 性能监控
+    /// - performance
     /// - 容量规划
+    /// - plan
+    /// - 容量plan
+    /// - plan
     /// - 问题诊断
+    /// - problem
     pub async fn runtime_metrics_demo() {
         println!("\n╔════════════════════════════════════════════════════════╗");
         println!("║  📊 Tokio Feature 3: Runtime Metrics 运行时指标       ║");
@@ -234,16 +256,28 @@ mod tokio_latest_features {
     }
 
     /// # Tokio 特性 4: 协作式调度优化
-    ///
+    /// # Tokio feature 4: optimization
+    /// # Tokio feature 4: 协作式调度optimization
     /// ## 特性说明
+    /// ## feature explain
     /// - 自动插入 yield 点
+    /// - yield point
+    /// - 自动插入 yield point
     /// - 防止任务饿死
+    /// - task
     /// - 公平调度保证
-    ///
+    /// -
+    /// - 公平调度Guarantee
     /// ## 使用场景
+    /// ## scenario
     /// - CPU 密集型任务
+    /// - CPU task
+    /// - CPU 密集型task
     /// - 长时间运行的循环
+    /// - time Run circulation
     /// - 实时系统
+    /// - system
+    /// - 实时system
     pub async fn cooperative_scheduling_demo() {
         println!("\n╔════════════════════════════════════════════════════════╗");
         println!("║  🔄 Tokio Feature 4: 协作式调度优化                   ║");
@@ -289,16 +323,24 @@ mod tokio_latest_features {
     }
 
     /// # Tokio 特性 5: 取消令牌 (Cancellation Token)
-    ///
     /// ## 特性说明
+    /// ## feature explain
     /// - 结构化取消传播
+    /// - structure propagation
     /// - 父子令牌层次
+    /// - hierarchy
+    /// - 父子令牌hierarchy
     /// - 优雅关闭支持
-    ///
+    /// -
     /// ## 使用场景
+    /// ## scenario
     /// - 请求超时
+    /// -
     /// - 优雅关闭
+    /// -
+    /// - 优雅Close
     /// - 分布式事务
+    /// - distribution
     pub async fn cancellation_token_demo() {
         use tokio_util::sync::CancellationToken;
 
@@ -353,6 +395,7 @@ mod tokio_latest_features {
     }
 
     /// 运行所有 Tokio 特性演示
+    /// Run all Tokio feature demonstration
     pub async fn demo_all() {
         println!("\n");
         println!("╔══════════════════════════════════════════════════════════════╗");
@@ -385,15 +428,15 @@ mod smol_latest_features {
     use std::net::TcpListener;
 
     /// # Smol 特性 1: 轻量级 Executor
-    ///
+    /// # Smol feature 1: 轻量级 Executor
     /// ## 特性说明
-    /// - 极小的内存占用 (~200 bytes per task)
+    /// ## feature explain
     /// - 快速任务创建
+    /// - fast task
     /// - 单线程/多线程灵活配置
-    ///
+    /// - thread /thread
     /// ## 性能对比
-    /// - Tokio: ~1KB per task
-    /// - Smol: ~200 bytes per task
+    /// ## performance to
     pub async fn lightweight_executor_demo() {
         println!("\n╔════════════════════════════════════════════════════════╗");
         println!("║  🪶 Smol Feature 1: 轻量级 Executor                   ║");
@@ -426,16 +469,23 @@ mod smol_latest_features {
     }
 
     /// # Smol 特性 2: Async-io 集成
-    ///
+    /// # Smol feature 2: Async-io 集成
     /// ## 特性说明
+    /// ## feature explain
     /// - 跨平台 I/O 抽象
+    /// - platform I/O
+    /// - 跨platform I/O 抽象
     /// - epoll/kqueue/IOCP 自动选择
     /// - 与标准库兼容
-    ///
+    /// - and standard library
     /// ## 使用场景
+    /// ## scenario
     /// - 网络服务器
+    /// - network
     /// - 文件 I/O
+    /// - I/O
     /// - 进程通信
+    /// - process
     pub async fn async_io_demo() {
         println!("\n╔════════════════════════════════════════════════════════╗");
         println!("║  💾 Smol Feature 2: Async-io 集成                     ║");
@@ -490,17 +540,25 @@ mod smol_latest_features {
         println!("\n✅ Async-io 演示完成");
     }
 
-    /// # Smol 特性 3: 与 Tokio 互操作
-    ///
+    /// # Smol feature 3: and Tokio 互操作
     /// ## 特性说明
+    /// ## feature explain
     /// - 在 Smol 中运行 Tokio 代码
+    /// - in Smol in Run Tokio
     /// - 共享异步生态
+    /// - async ecosystem
+    /// - 共享asyncecosystem
     /// - 灵活运行时选择
-    ///
+    /// - runtime
     /// ## 使用场景
+    /// ## scenario
     /// - 迁移现有项目
+    /// - project
     /// - 使用特定库
+    /// - library
+    /// - Use特定library
     /// - 性能优化
+    /// - performance optimization
     #[allow(dead_code)]
     #[allow(unused_variables)]
     pub async fn interop_demo() {
@@ -537,17 +595,25 @@ mod smol_latest_features {
         println!("\n✅ 互操作演示完成");
     }
 
-    /// # Smol 特性 4: LocalExecutor 单线程优化
-    ///
     /// ## 特性说明
+    /// ## feature explain
     /// - 单线程专用 executor
+    /// - thread executor
     /// - !Send 任务支持
+    /// -!Send task
     /// - 更低开销
-    ///
+    /// - overhead
+    /// - 更低overhead
     /// ## 使用场景
+    /// ## scenario
     /// - GUI 应用
+    /// - GUI application
     /// - 单线程服务器
+    /// - thread
     /// - 嵌入式系统
+    /// - system
+    /// - 嵌入式system
+    /// - system
     #[allow(dead_code)]
     #[allow(unused_variables)]
     pub fn local_executor_demo() {
@@ -590,6 +656,7 @@ mod smol_latest_features {
     }
 
     /// 运行所有 Smol 特性演示
+    /// Run all Smol feature demonstration
     pub fn demo_all() {
         println!("\n");
         println!("╔══════════════════════════════════════════════════════════════╗");
@@ -618,6 +685,7 @@ mod performance_comparison {
     use super::*;
 
     /// 性能基准测试
+    /// Performance benchmark
     pub async fn benchmark_suite() {
         println!("\n");
         println!("╔══════════════════════════════════════════════════════════════╗");

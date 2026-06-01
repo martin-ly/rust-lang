@@ -1,5 +1,4 @@
 //! 运行：`cargo bench -p c06_async`
-//! 说明：该文件包含多组异步原语基准（JoinSet、MPSC、Semaphore 等），均在本地 Tokio 运行时内执行
 use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
 use std::sync::LazyLock;
 use prometheus::{Histogram, HistogramOpts, IntCounter, Opts, Registry};

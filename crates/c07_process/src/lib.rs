@@ -7,8 +7,10 @@
 //! # C07 Process Management Library
 //!
 //! 一个功能完整的 Rust 进程管理和 IPC 通信库。
+//! functionality complete Rust process and IP C library 。
 //!
 //! ## 快速开始
+//! ## fast
 //!
 //! ```rust
 //! use c07_process::prelude::*;
@@ -16,9 +18,11 @@
 //!
 //! fn main() -> c07_process::Result<()> {
 //!     // 创建进程管理器
+//!     // process
 //!     let pm = ProcessManager::new();
 //!
 //!     // 创建进程配置
+//!     // process
 //!     let mut env = HashMap::new();
 //!     env.insert("PATH".to_string(), "/usr/bin:/bin".to_string());
 //!
@@ -34,8 +38,11 @@
 //!     };
 //!
 //!     // 注意：在实际使用中，需要确保程序存在
+//!     // ：in actual in ，program in
 //!     // 这里只是演示配置的创建
+//!     // demonstration
 //!     println!("进程配置创建成功: {:?}", config);
+//!     println!("process : {:?}", config);
 //!
 //!     Ok(())
 //! }
@@ -147,9 +154,12 @@ pub const AUTHORS: &str = env!("CARGO_PKG_AUTHORS");
 pub const DESCRIPTION: &str = env!("CARGO_PKG_DESCRIPTION");
 
 /// 初始化库
+/// library
 /// 初始化进程管理库
+/// process library
 ///
 /// 初始化进程管理库，设置必要的资源。
+/// process library ，。
 ///
 /// # Examples
 ///
@@ -163,6 +173,7 @@ pub const DESCRIPTION: &str = env!("CARGO_PKG_DESCRIPTION");
 /// # Errors
 ///
 /// 如果初始化失败，返回错误。
+/// if ，。
 pub fn init() -> Result<()> {
     // 初始化日志系统
     tracing_subscriber::fmt()
@@ -174,11 +185,15 @@ pub fn init() -> Result<()> {
 }
 
 /// 库清理函数
+/// library function
 ///
 /// 清理全局资源和状态
+/// global and state
 /// 清理进程管理库资源
+/// process library
 ///
 /// 清理进程管理库占用的资源。
+/// process library 。
 ///
 /// # Examples
 ///
@@ -186,6 +201,7 @@ pub fn init() -> Result<()> {
 /// use c07_process::{cleanup, init};
 ///
 /// init().expect("进程管理初始化失败");
+/// init().expect("process ");
 /// let result = cleanup();
 /// assert!(result.is_ok());
 /// ```
@@ -193,6 +209,7 @@ pub fn init() -> Result<()> {
 /// # Errors
 ///
 /// 如果清理失败，返回错误。
+/// if ，。
 pub fn cleanup() -> Result<()> {
     tracing::info!("Cleaning up C07 Process Management Library");
 
@@ -203,9 +220,12 @@ pub fn cleanup() -> Result<()> {
 }
 
 /// 获取库信息
+/// library
 /// 获取库信息
+/// library
 ///
 /// 返回进程管理库的版本和功能信息。
+/// process library this and functionality 。
 ///
 /// # Examples
 ///
@@ -227,6 +247,7 @@ pub fn get_library_info() -> LibraryInfo {
 }
 
 /// 库信息结构
+/// library structure
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LibraryInfo {
     pub name: String,
@@ -237,6 +258,7 @@ pub struct LibraryInfo {
 }
 
 /// 获取启用的特性列表
+/// feature
 fn get_enabled_features() -> Vec<String> {
     // 使用 allow 属性来抑制条件编译导致的未使用 mut 警告
     #[allow(unused_mut)]

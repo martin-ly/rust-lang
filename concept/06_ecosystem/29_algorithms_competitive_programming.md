@@ -1,3 +1,5 @@
+> **内容分级**: [综述级]
+
 # 算法与竞赛编程 (Algorithms & Competitive Programming)
 >
 > **受众**: [进阶]

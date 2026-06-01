@@ -1,12 +1,17 @@
 //! 动态规划算法示例
-//!
+//! dynamic programming algorithm example
 //! 本示例展示C08算法模块的动态规划算法：
+//! this example C08algorithm module dynamic programming algorithm ：
 //! - 斐波那契数列
+//! -
 //! - 最长公共子序列（LCS）
+//! - sequence （LCS）
+//! - 最长公共子sequence（LCS）
 //! - 0-1背包问题
-//!
+//! - 0-1problem
+//! - 0-1背包problem
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example dynamic_programming_demo
 //! ```
 fn main() {
@@ -55,6 +60,7 @@ fn main() {
 }
 
 /// 使用动态规划计算斐波那契数列
+/// dynamic programming
 fn fibonacci_dp(n: usize) -> u64 {
     if n <= 1 {
         return n as u64;
@@ -69,6 +75,8 @@ fn fibonacci_dp(n: usize) -> u64 {
 }
 
 /// 最长公共子序列（LCS）
+/// sequence （LCS）
+/// 最长公共子sequence（LCS）
 fn lcs_dp(s1: &str, s2: &str) -> usize {
     let s1: Vec<char> = s1.chars().collect();
     let s2: Vec<char> = s2.chars().collect();
@@ -89,6 +97,8 @@ fn lcs_dp(s1: &str, s2: &str) -> usize {
 }
 
 /// 0-1背包问题
+/// 0-1problem
+/// 0-1背包problem
 fn knapsack_dp(weights: &[usize], values: &[usize], capacity: usize) -> usize {
     let n = weights.len();
     let mut dp = vec![vec![0; capacity + 1]; n + 1];

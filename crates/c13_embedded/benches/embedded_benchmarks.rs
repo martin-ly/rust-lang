@@ -1,12 +1,14 @@
 //! C13 Embedded 模块性能基准测试
-//!
-//! 测试 bare-metal 编程概念在 host 模拟环境下的性能表现。
+//! C13 Embedded module Performance benchmark
 //! 由于真实硬件环境不可用，这些基准测试主要用于验证算法逻辑的正确性和相对性能。
+//! real hardware environment ，benchmark main algorithm and to performance 。
 
 use criterion::{criterion_group, criterion_main, Criterion};
 
 /// 模拟 MMIO 寄存器访问性能
+/// MMIO performance
 /// 对应真实场景：嵌入式系统中频繁的寄存器读写
+/// to real scenario ：system in
 fn bench_mmio_register_access(c: &mut Criterion) {
     c.bench_function("mmio_register_read_write", |b| {
         b.iter(|| {
@@ -22,7 +24,9 @@ fn bench_mmio_register_access(c: &mut Criterion) {
 }
 
 /// 模拟位操作性能（嵌入式常见操作）
+/// performance （）
 /// 对应真实场景：GPIO 控制、标志位处理
+/// to real scenario ：GPIO 、mark
 fn bench_bit_manipulation(c: &mut Criterion) {
     c.bench_function("bit_manipulation", |b| {
         b.iter(|| {
@@ -44,6 +48,7 @@ fn bench_bit_manipulation(c: &mut Criterion) {
 }
 
 /// 模拟 CRC 计算（常用于嵌入式通信校验）
+/// CRC （）
 fn bench_crc32_calculation(c: &mut Criterion) {
     c.bench_function("crc32_calculation", |b| {
         let data: Vec<u8> = (0..256).map(|i| i as u8).collect();
@@ -65,6 +70,7 @@ fn bench_crc32_calculation(c: &mut Criterion) {
 }
 
 /// 模拟固定点数学运算（无 FPU 的嵌入式设备常用）
+/// point （ FPU ）
 fn bench_fixed_point_math(c: &mut Criterion) {
     c.bench_function("fixed_point_math", |b| {
         b.iter(|| {
@@ -80,6 +86,7 @@ fn bench_fixed_point_math(c: &mut Criterion) {
 }
 
 /// 模拟环形缓冲区操作（UART/通信常用）
+/// buffering （UART/）
 fn bench_ring_buffer(c: &mut Criterion) {
     c.bench_function("ring_buffer_operations", |b| {
         const SIZE: usize = 64;
@@ -111,6 +118,7 @@ fn bench_ring_buffer(c: &mut Criterion) {
 }
 
 /// 模拟中断上下文切换（简化版）
+/// in on under switching （）
 fn bench_interrupt_context_save(c: &mut Criterion) {
     c.bench_function("interrupt_context_save_restore", |b| {
         b.iter(|| {

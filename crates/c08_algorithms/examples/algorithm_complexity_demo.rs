@@ -1,14 +1,22 @@
 //! 算法复杂度示例
-//!
+//! algorithm complex example
 //! 本示例展示不同复杂度算法的性能对比：
+//! this example complex algorithm performance to ：
 //! - O(1) - 常数时间
+//! - O(1) - time
+//! - O(1) - 常数time
 //! - O(log n) - 对数时间
+//! - O(log n) - to time
+//! - O(log n) - to数time
 //! - O(n) - 线性时间
+//! - O(n) - line time
 //! - O(n log n) - 线性对数时间
+//! - O(n log n) - line to time
 //! - O(n²) - 平方时间
-//!
+//! - O(n²) - time
+//! - O(n²) - 平方time
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example algorithm_complexity_demo
 //! ```
 use std::time::Instant;
@@ -68,11 +76,15 @@ fn main() {
 }
 
 /// O(1) - 常数时间
+/// O(1) - time
+/// O(1) - 常数time
 fn constant_time(_n: usize) -> usize {
     42 // 无论输入大小，执行时间相同
 }
 
 /// O(log n) - 对数时间
+/// O(log n) - to time
+/// O(log n) - to数time
 fn log_time(n: usize) -> usize {
     let mut result = 0;
     let mut value = n;
@@ -84,6 +96,7 @@ fn log_time(n: usize) -> usize {
 }
 
 /// O(n) - 线性时间
+/// O(n) - line time
 fn linear_time(n: usize) -> usize {
     let mut sum = 0;
     for i in 0..n {
@@ -93,6 +106,7 @@ fn linear_time(n: usize) -> usize {
 }
 
 /// O(n log n) - 线性对数时间
+/// O(n log n) - line to time
 fn n_log_n_time(n: usize) -> usize {
     let mut result = 0;
     for _i in 0..n {

@@ -1,9 +1,9 @@
 //! # 设计模式性能基准测试
-//!
+//! # design Performance benchmark
 //! 测试不同设计模式实现的性能
-//!
+//! design performance
 //! ## 运行方式
-//!
+//! ## Run way
 //! ```bash
 //! cargo bench --bench design_patterns_bench
 //! ```
@@ -13,6 +13,7 @@ use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
 use std::hint::black_box;
 
 /// 测试工厂模式性能
+/// factory performance
 fn bench_factory_pattern(c: &mut Criterion) {
     let mut group = c.benchmark_group("factory_pattern");
 
@@ -36,6 +37,7 @@ fn bench_factory_pattern(c: &mut Criterion) {
 }
 
 /// 测试建造者模式性能
+/// performance
 fn bench_builder_pattern(c: &mut Criterion) {
     let mut group = c.benchmark_group("builder_pattern");
 
@@ -63,6 +65,7 @@ fn bench_builder_pattern(c: &mut Criterion) {
 }
 
 /// 测试策略模式性能 - 排序算法比较
+/// strategy performance - sorting algorithm
 fn bench_strategy_pattern(c: &mut Criterion) {
     let mut group = c.benchmark_group("strategy_pattern_sorting");
 
@@ -132,6 +135,7 @@ fn bench_strategy_pattern(c: &mut Criterion) {
 }
 
 /// 测试观察者模式性能
+/// observer performance
 fn bench_observer_pattern(c: &mut Criterion) {
     let mut group = c.benchmark_group("observer_pattern");
 

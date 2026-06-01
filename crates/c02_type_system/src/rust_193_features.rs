@@ -1,4 +1,5 @@
 //! Rust 1.93.0 类型系统 特性模块
+//! Rust 1.93.0 type system feature module
 #![allow(clippy::incompatible_msrv)]
 
 /// 演示 `char::MAX_LEN_UTF8` 和 `char::MAX_LEN_UTF16`
@@ -6,12 +7,10 @@ pub fn char_encoding_limits() -> (usize, usize) {
     (char::MAX_LEN_UTF8, char::MAX_LEN_UTF16)
 }
 
-/// 使用 `slice::as_array` 将定长切片转为数组引用
 pub fn get_array_ref<const N: usize>(slice: &[i32]) -> Option<&[i32; N]> {
     slice.as_array::<N>()
 }
 
-/// 结合类型推断演示 `as_array` 与 `copied`
 pub fn slice_to_owned_array(slice: &[i32]) -> Option<[i32; 3]> {
     slice.as_array::<3>().copied()
 }

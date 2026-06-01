@@ -1,39 +1,35 @@
 //! Rust 1.92.0 线程特性实现模块
-//!
-//! 本模块展示了 Rust 1.92.0 在线程和并发编程场景中的应用，包括：
-//! - `MaybeUninit` 在并发编程中的应用
-//! - `rotate_right` 在线程池管理中的应用
-//! - `NonZero::div_ceil` 在线程数量计算中的应用
-//!
+//! Rust 1.92.0 thread feature module
 //! ## 主要功能
-//!
+//! ## main functionality
 //! ### 1. 线程池任务管理
-//! - `ThreadPoolTaskQueue`: 使用 `rotate_right` 实现的任务队列
-//! - `ThreadPoolManager`: 线程安全的线程池管理器
-//! - `ThreadTask`: 任务项，支持优先级管理
-//!
+//! ### 1. thread pool task
 //! ### 2. 线程资源分配
-//! - `ThreadResourceAllocator`: 使用 `NonZero::div_ceil` 计算线程资源
-//! - `ThreadSchedulingConfig`: 线程调度配置
+//! ### 2. thread
 //! - `calculate_thread_pool_size`: 计算线程池大小
-//!
 //! ### 3. 并发安全初始化
-//! - `ThreadSafeUninitBuffer`: 使用 `MaybeUninit` 实现线程安全的缓冲区
-//! - `ThreadPoolQueue`: 基于 `MaybeUninit` 的任务队列
-//!
+//! ### 3. concurrency
 //! ### 4. 统计和监控
-//! - `ThreadPoolStats`: 线程池统计信息
+//! ### 4. and
 //! - `get_stats()`: 获取统计信息
+//! - `get_stats()`:
+//! - `get_stats()`: Get统计信息
 //! - `get_all_tasks()`: 获取所有任务
+//! - `get_all_tasks()`: all task
+//! - `get_all_tasks()`: Get所有task
 //! - `remove_task()`: 移除指定任务
-//!
+//! - `remove_task()`: task
+//! - `remove_task()`: 移除指定task
 //! # 文件信息
+//! #
 //! - 文件: rust_192_features.rs
 //! - 创建日期: 2025-12-11
+//! - date : 2025-12-11
 //! - 版本: 1.2
-//! - Rust版本: 1.92.0
-//! - Edition: 2024
+//! - this : 1.2
+//! - 版this: 1.2
 //! - 最后更新: 2025-12-11
+//! - finally : 2025-12-11
 use std::collections::VecDeque;
 use std::mem::MaybeUninit;
 use std::num::NonZeroUsize;
@@ -41,15 +37,13 @@ use std::sync::{Arc, Mutex};
 
 // ==================== 1. MaybeUninit 在并发编程中的应用 ====================
 
-/// 使用 MaybeUninit 实现线程安全的无锁数据初始化
-///
-/// Rust 1.92.0: 改进的 MaybeUninit 文档和有效性检查
 pub struct ThreadSafeUninitBuffer<T> {
     buffer: Vec<MaybeUninit<T>>,
 }
 
 impl<T> ThreadSafeUninitBuffer<T> {
     /// 创建指定大小的未初始化缓冲区
+    /// buffering
     pub fn new(size: usize) -> Self {
         let mut buffer = Vec::with_capacity(size);
         unsafe {
@@ -59,61 +53,72 @@ impl<T> ThreadSafeUninitBuffer<T> {
     }
 
     /// 在指定位置初始化数据
-    ///
-    /// Rust 1.92.0: 使用 MaybeUninit 确保安全性
-    ///
-    /// # Safety
+    /// in position
     ///
     /// 调用者必须确保：
+    /// must ：
     /// - `index` 在有效范围内（0 <= index < capacity）
     /// - 该位置之前未被初始化，或已正确清理
+    /// - this position 's before is ，or
     /// - 不会并发调用此方法
+    /// - concurrency this method
     pub unsafe fn init_at(&mut self, index: usize, value: T) {
         self.buffer[index].write(value);
     }
 
     /// 获取已初始化的引用
-    ///
-    /// # Safety
+    /// reference
+    /// Get已Initializereference
     ///
     /// 调用者必须确保：
+    /// must ：
     /// - `index` 在有效范围内（0 <= index < capacity）
     /// - 该位置已通过 `init_at` 正确初始化
+    /// - this position `init_at`
     /// - 返回的引用在有效生命周期内不会被释放
+    /// - reference in effective lifetime inside is
     pub unsafe fn get(&self, index: usize) -> &T {
         unsafe { self.buffer[index].assume_init_ref() }
     }
 
     /// 获取可变引用
-    ///
-    /// # Safety
+    /// reference
+    /// Get可变reference
     ///
     /// 调用者必须确保：
+    /// must ：
     /// - `index` 在有效范围内（0 <= index < capacity）
     /// - 该位置已通过 `init_at` 正确初始化
+    /// - this position `init_at`
     /// - 返回的可变引用在有效生命周期内不会被释放
+    /// - reference in effective lifetime inside is
     /// - 不会与其他引用产生数据竞争
+    /// - rather than reference
     pub unsafe fn get_mut(&mut self, index: usize) -> &mut T {
         unsafe { self.buffer[index].assume_init_mut() }
     }
 
     /// 获取缓冲区大小
+    /// buffering
     pub fn len(&self) -> usize {
         self.buffer.len()
     }
 
     /// 检查缓冲区是否为空
+    /// buffering as
     pub fn is_empty(&self) -> bool {
         self.buffer.is_empty()
     }
 
     /// 检查指定索引是否在有效范围内
+    /// in effective scope inside
     pub fn is_valid_index(&self, index: usize) -> bool {
         index < self.buffer.len()
     }
 }
 
 /// 线程池中的任务项
+/// thread pool in task
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
 pub struct ThreadTask {
     pub id: u64,
@@ -122,37 +127,42 @@ pub struct ThreadTask {
 
 impl ThreadTask {
     /// 创建一个新的任务
+    /// task
     pub fn new(id: u64, priority: u8) -> Self {
         ThreadTask { id, priority }
     }
 
     /// 创建一个高优先级任务
+    /// task
     pub fn high_priority(id: u64) -> Self {
         ThreadTask { id, priority: 255 }
     }
 
     /// 创建一个中优先级任务
+    /// in task
     pub fn medium_priority(id: u64) -> Self {
         ThreadTask { id, priority: 128 }
     }
 
     /// 创建一个低优先级任务
+    /// task
     pub fn low_priority(id: u64) -> Self {
         ThreadTask { id, priority: 0 }
     }
 
     /// 检查是否为高优先级任务
+    /// as task
     pub fn is_high_priority(&self) -> bool {
         self.priority >= 200
     }
 
     /// 检查是否为低优先级任务
+    /// as task
     pub fn is_low_priority(&self) -> bool {
         self.priority < 50
     }
 }
 
-/// 使用 MaybeUninit 实现线程池任务队列
 pub struct ThreadPoolQueue {
     tasks: Vec<MaybeUninit<ThreadTask>>,
     initialized_count: usize,
@@ -171,13 +181,15 @@ impl ThreadPoolQueue {
     }
 
     /// 添加任务（线程安全，需要外部同步）
-    ///
-    /// # Safety
+    /// task （thread-safe ，outside synchronous ）
     ///
     /// 调用者必须确保：
+    /// must ：
     /// - 在单线程环境中调用，或已提供外部同步机制
-    /// - `initialized_count` 小于 `tasks` 的长度
+    /// - in thread environment in ，or outside synchronous mechanism
+    /// - `initialized_count` 小于 `tasks` 长度
     /// - 不会并发调用此方法
+    /// - concurrency this method
     pub unsafe fn push(&mut self, task: ThreadTask) {
         if self.initialized_count < self.tasks.len() {
             self.tasks[self.initialized_count].write(task);
@@ -186,13 +198,14 @@ impl ThreadPoolQueue {
     }
 
     /// 获取任务（需要外部同步）
-    ///
-    /// # Safety
+    /// task （outside synchronous ）
     ///
     /// 调用者必须确保：
+    /// must ：
     /// - 在单线程环境中调用，或已提供外部同步机制
-    /// - `initialized_count` 正确反映了已初始化任务的数量
+    /// - in thread environment in ，or outside synchronous mechanism
     /// - 不会并发调用此方法
+    /// - concurrency this method
     pub unsafe fn pop(&mut self) -> Option<ThreadTask> {
         if self.initialized_count > 0 {
             self.initialized_count -= 1;
@@ -206,6 +219,7 @@ impl ThreadPoolQueue {
 // ==================== 2. rotate_right 在线程池管理中的应用 ====================
 
 /// 使用 rotate_right 实现线程池任务轮转
+/// rotate_right thread pool task
 pub struct ThreadPoolTaskQueue {
     tasks: VecDeque<ThreadTask>,
 }
@@ -218,11 +232,9 @@ impl ThreadPoolTaskQueue {
     }
 
     /// 轮转任务队列
-    ///
-    /// Rust 1.92.0: 使用新的 rotate_right 方法实现高效的队列轮转
-    ///
+    /// task
     /// # 参数
-    /// - `positions`: 轮转的位置数，如果大于队列长度，会自动取模
+    /// # parameter
     pub fn rotate(&mut self, positions: usize) {
         if self.tasks.is_empty() {
             return;
@@ -259,6 +271,7 @@ impl ThreadPoolTaskQueue {
     }
 
     /// 获取队列中的所有任务（用于测试和演示）
+    /// in all task （and demonstration ）
     pub fn iter(&self) -> impl Iterator<Item = &ThreadTask> {
         self.tasks.iter()
     }
@@ -269,16 +282,19 @@ impl ThreadPoolTaskQueue {
     }
 
     /// 查看队列头部的任务（不移除）
+    /// task （）
     pub fn peek(&self) -> Option<&ThreadTask> {
         self.tasks.front()
     }
 
     /// 查看队列头部的任务（可变引用）
+    /// task （reference ）
     pub fn peek_mut(&mut self) -> Option<&mut ThreadTask> {
         self.tasks.front_mut()
     }
 
     /// 批量添加任务
+    /// task
     pub fn push_batch(&mut self, tasks: impl IntoIterator<Item = ThreadTask>) {
         for task in tasks {
             self.tasks.push_back(task);
@@ -286,6 +302,8 @@ impl ThreadPoolTaskQueue {
     }
 
     /// 按优先级排序任务（高优先级在前）
+    /// ordering task （in before ）
+    /// 按优先级orderingtask（高优先级inbefore）
     pub fn sort_by_priority(&mut self) {
         let mut vec: Vec<ThreadTask> = self.tasks.drain(..).collect();
         vec.sort_by_key(|a| std::cmp::Reverse(a.priority));
@@ -293,6 +311,8 @@ impl ThreadPoolTaskQueue {
     }
 
     /// 按优先级排序任务（低优先级在前）
+    /// ordering task （in before ）
+    /// 按优先级orderingtask（低优先级inbefore）
     pub fn sort_by_priority_asc(&mut self) {
         let mut vec: Vec<ThreadTask> = self.tasks.drain(..).collect();
         vec.sort_by_key(|a| a.priority);
@@ -300,6 +320,8 @@ impl ThreadPoolTaskQueue {
     }
 
     /// 按任务 ID 排序
+    /// task ID ordering
+    /// 按task ID ordering
     pub fn sort_by_id(&mut self) {
         let mut vec: Vec<ThreadTask> = self.tasks.drain(..).collect();
         vec.sort_by_key(|t| t.id);
@@ -319,6 +341,7 @@ impl Default for ThreadPoolTaskQueue {
 }
 
 /// 线程池管理器
+/// thread pool
 pub struct ThreadPoolManager {
     queue: Arc<Mutex<ThreadPoolTaskQueue>>,
 }
@@ -331,6 +354,7 @@ impl ThreadPoolManager {
     }
 
     /// 执行一轮任务轮转（线程安全）
+    /// task （thread-safe ）
     pub fn rotate(&self) {
         let mut queue = self.queue.lock().expect("获取队列锁不应失败");
         if queue.len() > 1 {
@@ -339,48 +363,60 @@ impl ThreadPoolManager {
     }
 
     /// 添加任务（线程安全）
+    /// task （thread-safe ）
+    /// 添加task（thread-safe）
     pub fn add_task(&self, task: ThreadTask) {
         let mut queue = self.queue.lock().expect("获取队列锁不应失败");
         queue.push(task);
     }
 
     /// 获取下一个任务（线程安全）
+    /// under task （thread-safe ）
     pub fn next_task(&self) -> Option<ThreadTask> {
         let mut queue = self.queue.lock().expect("获取队列锁不应失败");
         queue.pop()
     }
 
     /// 获取队列中的任务数量（线程安全）
+    /// in task quantity （thread-safe ）
+    /// Get队列intaskquantity（thread-safe）
     pub fn task_count(&self) -> usize {
         let queue = self.queue.lock().expect("获取队列锁不应失败");
         queue.len()
     }
 
     /// 检查队列是否为空（线程安全）
+    /// as （thread-safe ）
     pub fn is_empty(&self) -> bool {
         let queue = self.queue.lock().expect("获取队列锁不应失败");
         queue.is_empty()
     }
 
     /// 清空队列（线程安全）
+    /// （thread-safe ）
     pub fn clear(&self) {
         let mut queue = self.queue.lock().expect("获取队列锁不应失败");
         queue.clear();
     }
 
     /// 批量添加任务（线程安全）
+    /// task （thread-safe ）
+    /// 批量添加task（thread-safe）
     pub fn add_tasks_batch(&self, tasks: impl IntoIterator<Item = ThreadTask>) {
         let mut queue = self.queue.lock().expect("获取队列锁不应失败");
         queue.push_batch(tasks);
     }
 
     /// 按优先级排序任务（线程安全）
+    /// ordering task （thread-safe ）
+    /// 按优先级orderingtask（thread-safe）
     pub fn sort_by_priority(&self) {
         let mut queue = self.queue.lock().expect("获取队列锁不应失败");
         queue.sort_by_priority();
     }
 
     /// 获取线程池统计信息
+    /// thread pool
     pub fn get_stats(&self) -> ThreadPoolStats {
         let queue = self.queue.lock().expect("获取队列锁不应失败");
         let tasks: Vec<_> = queue.iter().collect();
@@ -406,12 +442,14 @@ impl ThreadPoolManager {
     }
 
     /// 获取所有任务（用于调试和监控）
+    /// all task （and ）
     pub fn get_all_tasks(&self) -> Vec<ThreadTask> {
         let queue = self.queue.lock().expect("获取队列锁不应失败");
         queue.iter().cloned().collect()
     }
 
     /// 移除指定 ID 的任务
+    /// ID task
     pub fn remove_task(&self, task_id: u64) -> bool {
         let mut queue = self.queue.lock().expect("获取队列锁不应失败");
         let mut tasks: Vec<ThreadTask> = queue.iter().cloned().collect();
@@ -429,6 +467,7 @@ impl ThreadPoolManager {
 }
 
 /// 线程池统计信息
+/// thread pool
 #[derive(Debug, Clone)]
 pub struct ThreadPoolStats {
     pub total_tasks: usize,
@@ -446,14 +485,10 @@ impl Default for ThreadPoolManager {
 
 // ==================== 3. NonZero::div_ceil 在线程数量计算中的应用 ====================
 
-/// 使用 NonZero::div_ceil 计算线程池大小
-///
-/// Rust 1.92.0: 新增的 `div_ceil` 方法可以安全地计算线程池的容量
-///
 /// # 示例
-/// ```text
+/// # example
 /// // 归档模块示例
-/// ```
+/// // module example
 pub fn calculate_thread_pool_size(total_tasks: usize, tasks_per_thread: NonZeroUsize) -> usize {
     if total_tasks == 0 {
         return 0;
@@ -465,11 +500,11 @@ pub fn calculate_thread_pool_size(total_tasks: usize, tasks_per_thread: NonZeroU
 }
 
 /// 创建默认的线程资源分配器（基于 CPU 核心数）
-///
+/// thread （ CPU core ）
 /// # 示例
-/// ```text
+/// # example
 /// // 归档模块示例
-/// ```
+/// // module example
 pub fn create_default_resource_allocator() -> ThreadResourceAllocator {
     let num_cpus = num_cpus::get();
     ThreadResourceAllocator::new(
@@ -479,12 +514,11 @@ pub fn create_default_resource_allocator() -> ThreadResourceAllocator {
 }
 
 /// 创建默认的线程调度配置
-///
+/// thread scheduling
 /// # 示例
-/// ```text
+/// # example
 /// // 归档模块示例
-/// // use c05_threads::archive::rust_192_features::create_default_scheduling_config;
-/// ```
+/// // module example
 pub fn create_default_scheduling_config() -> ThreadSchedulingConfig {
     ThreadSchedulingConfig::new(
         NonZeroUsize::new(2).expect("线程数应非零"), // 最小 2 个线程
@@ -493,11 +527,12 @@ pub fn create_default_scheduling_config() -> ThreadSchedulingConfig {
 }
 
 /// 批量创建任务
-///
+/// task
+/// 批量Createtask
 /// # 示例
-/// ```text
+/// # example
 /// // 归档模块示例
-/// ```
+/// // module example
 pub fn create_tasks_batch<I, F>(ids: I, priority_fn: F) -> Vec<ThreadTask>
 where
     I: IntoIterator<Item = u64>,
@@ -509,11 +544,11 @@ where
 }
 
 /// 创建高优先级任务批次
-///
+/// task
 /// # 示例
-/// ```text
+/// # example
 /// // 归档模块示例
-/// ```
+/// // module example
 pub fn create_high_priority_tasks<I>(ids: I) -> Vec<ThreadTask>
 where
     I: IntoIterator<Item = u64>,
@@ -522,11 +557,11 @@ where
 }
 
 /// 创建低优先级任务批次
-///
+/// task
 /// # 示例
-/// ```text
+/// # example
 /// // 归档模块示例
-/// ```
+/// // module example
 pub fn create_low_priority_tasks<I>(ids: I) -> Vec<ThreadTask>
 where
     I: IntoIterator<Item = u64>,
@@ -535,12 +570,11 @@ where
 }
 
 /// 从任务列表创建线程池管理器并添加所有任务
-///
+/// from task thread pool and all task
 /// # 示例
-/// ```ignore
+/// # example
 /// // 归档模块示例
-/// // use c05_threads::archive::rust_192_features::{create_manager_with_tasks, ThreadTask};
-///
+/// // module example
 /// let tasks = vec![
 ///     ThreadTask::new(1, 10),
 ///     ThreadTask::new(2, 20),
@@ -555,6 +589,7 @@ pub fn create_manager_with_tasks(tasks: Vec<ThreadTask>) -> ThreadPoolManager {
 }
 
 /// 使用 div_ceil 实现线程资源分配器
+/// div_ceil thread
 pub struct ThreadResourceAllocator {
     total_cpus: usize,
     cpus_per_thread: NonZeroUsize,
@@ -569,6 +604,7 @@ impl ThreadResourceAllocator {
     }
 
     /// 计算可以创建的最大线程数
+    /// can maximum thread
     pub fn max_threads(&self) -> usize {
         if self.total_cpus == 0 {
             return 0;
@@ -580,11 +616,14 @@ impl ThreadResourceAllocator {
     }
 
     /// 获取总 CPU 核心数
+    /// CPU core
     pub fn total_cpus(&self) -> usize {
         self.total_cpus
     }
 
     /// 获取每线程 CPU 数
+    /// thread CPU
+    /// Get每thread CPU 数
     pub fn cpus_per_thread(&self) -> NonZeroUsize {
         self.cpus_per_thread
     }
@@ -595,12 +634,14 @@ impl ThreadResourceAllocator {
     }
 
     /// 计算可用线程数（考虑已使用的线程）
+    /// thread （thread ）
     pub fn available_threads(&self, used_threads: usize) -> usize {
         self.max_threads().saturating_sub(used_threads)
     }
 }
 
 /// 线程调度配置
+/// thread scheduling
 pub struct ThreadSchedulingConfig {
     min_threads: NonZeroUsize,
     max_threads: usize,
@@ -615,6 +656,7 @@ impl ThreadSchedulingConfig {
     }
 
     /// 根据任务数量计算需要的线程数
+    /// according to task quantity thread
     pub fn calculate_threads_for_tasks(&self, task_count: usize) -> usize {
         if task_count == 0 {
             return self.min_threads.get();
@@ -626,21 +668,25 @@ impl ThreadSchedulingConfig {
     }
 
     /// 获取最小线程数
+    /// minimum thread
     pub fn min_threads(&self) -> NonZeroUsize {
         self.min_threads
     }
 
     /// 获取最大线程数
+    /// maximum thread
     pub fn max_threads(&self) -> usize {
         self.max_threads
     }
 
     /// 检查线程数是否在有效范围内
+    /// thread in effective scope inside
     pub fn is_valid_thread_count(&self, thread_count: usize) -> bool {
         thread_count >= self.min_threads.get() && thread_count <= self.max_threads
     }
 
     /// 根据任务数量和建议的每线程任务数计算线程数
+    /// according to task quantity and thread task thread
     pub fn calculate_threads_with_tasks_per_thread(
         &self,
         task_count: usize,
@@ -657,6 +703,7 @@ impl ThreadSchedulingConfig {
 // ==================== 4. 综合应用示例 ====================
 
 /// 演示 Rust 1.92.0 线程特性
+/// demonstration Rust 1.92.0 thread feature
 pub fn demonstrate_rust_192_thread_features() {
     println!("\n=== Rust 1.92.0 线程特性演示 ===\n");
 

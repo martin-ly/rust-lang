@@ -61,7 +61,7 @@
 
 | 类别 | 案例 |
 |:---|:---|
-| 异步运行时 | Tokio, async-std |
+| 异步运行时 | Tokio, async-std [已归档] |
 | Web框架 | Actix-web, Axum |
 | 嵌入式 | Embassy, RTIC |
 | Actor系统 | Actix, Bastion |

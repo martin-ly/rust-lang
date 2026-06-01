@@ -74,7 +74,7 @@ Tokio 是 Rust 最流行的异步运行时，提供：
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-| 特性 | Tokio | async-std | smol |
+| 特性 | Tokio | async-std [已归档] | smol |
 |------|-------|-----------|------|
 | **性能** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
 | **生态** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ |
@@ -619,7 +619,7 @@ let rt = tokio::runtime::Builder::new_multi_thread()
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-单线程运行时（如 `async-std` 的早期版本）简单但无法利用多核。Tokio 的工作窃取模型：
+单线程运行时（如 `async-std [已归档]` 的早期版本）简单但无法利用多核。Tokio 的工作窃取模型：
 
 1. **负载均衡**: 自动将任务分布到所有 CPU 核心
 2. **无锁本地队列**: 线程优先从本地队列取任务，减少同步开销

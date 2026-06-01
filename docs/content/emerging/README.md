@@ -282,9 +282,9 @@ timeline
 
 ## 相关概念
 
-- [Async Closures](./10_async_closures.md)
-- [Generic Const Exprs](./10_generic_const_exprs.md)
-- [Rust 1.95 稳定特性](./10_rust_1_95_preview.md)
+- [Async Closures](../../../knowledge/06_ecosystem/emerging/01_async_closures.md)
+- [Generic Const Exprs](../../../knowledge/06_ecosystem/emerging/02_generic_const_exprs.md)
+- [Rust 1.95 稳定特性](../../../knowledge/06_ecosystem/emerging/03_rust_1_95.md)
 
 ---
 

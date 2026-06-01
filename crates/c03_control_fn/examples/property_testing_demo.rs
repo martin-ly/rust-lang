@@ -1,11 +1,12 @@
 //! 属性测试 (Property-Based Testing) 演示
-//!
-//! 使用 `proptest` 展示基于属性的测试方法：
 //! - 基础属性：交换律、结合律、分配律
+//! - foundation attribute ：exchange 、、
 //! - 自定义策略：生成有效输入数据
+//! - definition strategy ：effective
 //! - 状态机测试：模拟银行账户状态转换
+//! - state machine ：state conversion
 //! - 回归测试：proptest 自动发现反例并持久化
-//!
+//! - ：proptest and
 //! 运行: cargo test --example property_testing_demo -p c03_control_fn
 //! 运行示例: cargo run --example property_testing_demo -p c03_control_fn
 
@@ -16,16 +17,19 @@ use proptest::prelude::*;
 // ============================================================
 
 /// 整数加法交换律: a + b == b + a
+/// exchange : a + b == b + a
 fn add_commutative(a: i32, b: i32) -> bool {
     a.wrapping_add(b) == b.wrapping_add(a)
 }
 
 /// 整数乘法分配律: a * (b + c) == a * b + a * c
+/// : a * (b + c) == a * b + a * c
 fn mul_distributive(a: i32, b: i32, c: i32) -> bool {
     a.wrapping_mul(b.wrapping_add(c)) == a.wrapping_mul(b).wrapping_add(a.wrapping_mul(c))
 }
 
 /// 反转两次等于原序列
+/// etc. sequence
 fn reverse_involution<T: Clone + PartialEq>(xs: &[T]) -> bool {
     let mut ys = xs.to_vec();
     ys.reverse();
@@ -38,6 +42,7 @@ fn reverse_involution<T: Clone + PartialEq>(xs: &[T]) -> bool {
 // ============================================================
 
 /// 生成有效邮箱地址（简化版）
+/// effective （）
 #[allow(dead_code)]
 fn email_strategy() -> impl Strategy<Value = String> {
     ("[a-z0-9]{3,10}", "[a-z]{3,8}", "[a-z]{2,4}")
@@ -45,6 +50,7 @@ fn email_strategy() -> impl Strategy<Value = String> {
 }
 
 /// 生成有序向量（用于测试排序算法）
+/// （sorting algorithm ）
 #[allow(dead_code)]
 fn sorted_vec_strategy() -> impl Strategy<Value = Vec<i32>> {
     prop::collection::vec(any::<i32>(), 0..100).prop_map(|mut v| {
@@ -128,6 +134,7 @@ proptest! {
     #![proptest_config(ProptestConfig::with_cases(1000))]
 
     /// 测试加法交换律
+    /// exchange
     #[test]
     fn test_add_commutative(a in any::<i32>(), b in any::<i32>()) {
         prop_assert!(add_commutative(a, b));
@@ -140,12 +147,14 @@ proptest! {
     }
 
     /// 测试反转反转等于原序列
+    /// etc. sequence
     #[test]
     fn test_reverse_involution(xs in prop::collection::vec(any::<i32>(), 0..50)) {
         prop_assert!(reverse_involution(&xs));
     }
 
     /// 测试冒泡排序结果有序
+    /// bubble sort result
     #[test]
     fn test_bubble_sort_produces_sorted(
         mut xs in prop::collection::vec(any::<i32>(), 0..50)
@@ -157,6 +166,7 @@ proptest! {
     }
 
     /// 测试排序稳定性：结果长度不变
+    /// ordering ：result
     #[test]
     fn test_sort_preserves_length(
         mut xs in prop::collection::vec(any::<i32>(), 0..50)
@@ -167,6 +177,7 @@ proptest! {
     }
 
     /// 测试解析与字符串化互为逆操作
+    /// and as
     #[test]
     fn test_parse_u32_roundtrip(n in 0u32..=u32::MAX) {
         let s = n.to_string();
@@ -182,12 +193,14 @@ proptest! {
     }
 
     /// 测试自定义邮箱策略生成的邮箱包含 @
+    /// definition strategy @
     #[test]
     fn test_email_contains_at(email in email_strategy()) {
         prop_assert!(email.contains('@'));
     }
 
     /// 测试有序向量策略确实有序
+    /// strategy
     #[test]
     fn test_sorted_vec_strategy(v in sorted_vec_strategy()) {
         for i in 1..v.len() {
@@ -219,6 +232,7 @@ proptest! {
     #![proptest_config(ProptestConfig::with_cases(500))]
 
     /// 银行账户：存款后余额增加
+    /// ：after
     #[test]
     fn test_account_deposit_increases_balance(
         actions in prop::collection::vec(action_strategy(), 0..20)

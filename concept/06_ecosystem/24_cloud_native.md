@@ -1,3 +1,5 @@
+> **内容分级**: [综述级]
+
 # Rust 云原生生态
 >
 > **受众**: [进阶]
@@ -520,7 +522,7 @@ async fn task() {
 }
 
 fn main() {
-    // 错误做法: 在 tokio runtime 中调用 async-std 的 spawn
+    // 错误做法: 在 tokio runtime 中调用 async-std [已归档] 的 spawn
     // tokio::runtime::Runtime::new().unwrap().block_on(async {
     //     async_std::task::spawn(task()).await; // 可能 panic 或死锁
     // });

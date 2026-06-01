@@ -1,14 +1,13 @@
 #![forbid(unsafe_code)]
 #![allow(unexpected_cfgs)]
 
-//! WebAssembly Component Model (WASI Preview 2) 概念与工具链
-//!
-//! 本模块涵盖 WASI Preview 2 引入的组件模型核心概念：
 //! - 组件（Component）、世界（World）、接口（Interface）
 //! - WIT (Wasm Interface Types) 接口定义语言
 //! - wit-bindgen 绑定生成
+//! - wit-bindgen 绑定Generate
 //! - 组件组合与链接
-//! - 从 WASI Preview 1 到 Preview 2 的迁移路径
+//! - combination and
+//! - from WASI Preview 1 to Preview 2 迁移路径
 //! - 工具链: wasm-tools, wasmtime, jco
 
 use wasm_bindgen::prelude::*;
@@ -18,10 +17,9 @@ use wasm_bindgen::prelude::*;
 // =========================================================================
 
 /// # 组件模型概述
-///
-/// WebAssembly Component Model 是 WASI Preview 2 的核心创新，
-/// 它将 WASM 从低级的模块（Module）抽象提升到组件（Component）级别，
+/// #
 /// 实现了真正的语言无关、类型安全的跨组件互操作。
+/// 、type 。
 #[derive(Default)]
 pub struct ComponentModelOverview;
 
@@ -31,9 +29,6 @@ impl ComponentModelOverview {
         Self
     }
 
-    /// 什么是组件模型（WASI Preview 2 vs Preview 1）
-    ///
-    /// 对比两代 WASI 的核心差异，理解组件模型带来的范式转变。
     pub fn what_is_component_model() -> &'static str {
         r#"WebAssembly Component Model (WASI Preview 2)
 
@@ -62,8 +57,8 @@ impl ComponentModelOverview {
     }
 
     /// 世界（Worlds）、接口（Interfaces）和组件（Components）
-    ///
     /// 组件模型的三大核心概念及其关系。
+    /// core concept and its 。
     pub fn worlds_interfaces_components() -> &'static str {
         r#"组件模型三大核心概念
 
@@ -103,9 +98,9 @@ WIT 示例:
     }
 
     /// wit-bindgen 用于从 WIT 文件生成绑定
-    ///
-    /// wit-bindgen 是组件模型的核心工具，负责将 WIT 定义
+    /// wit-bindgen from WIT
     /// 转换为各目标语言的类型和桩代码。
+    /// conversion as goal type and 。
     pub fn wit_bindgen_usage() -> &'static str {
         r#"wit-bindgen: WIT 到目标语言的绑定生成器
 
@@ -151,8 +146,9 @@ WIT 示例:
     }
 
     /// 组件组合与链接
-    ///
+    /// combination and
     /// 组件模型最强大的特性之一：静态组合多个组件为一个。
+    /// feature 's ：combination as 。
     pub fn composition_and_linking() -> &'static str {
         r#"组件组合与链接 (Component Composition)
 
@@ -200,9 +196,9 @@ wasm-tools validate combined.wasm --features component-model
 // =========================================================================
 
 /// # WASI Preview 1 到 Preview 2 迁移指南
-///
-/// 为已有 WASI Preview 1 应用提供向组件模型迁移的路径和注意事项。
+/// # WASI Preview 1 to Preview 2 迁移指南
 /// WASI Preview 1 到 Preview 2 迁移指南
+/// WASI Preview 1 to Preview 2 迁移指南
 #[derive(Default)]
 pub struct WasiPreview2Migration;
 
@@ -212,7 +208,7 @@ impl WasiPreview2Migration {
         Self
     }
 
-    /// 从 WASI Preview 1 到 Preview 2 的迁移路径
+    /// from WASI Preview 1 to Preview 2 迁移路径
     pub fn migration_path() -> &'static str {
         r#"WASI Preview 1 → Preview 2 迁移路径
 
@@ -258,6 +254,8 @@ impl WasiPreview2Migration {
     }
 
     /// 关键 API 变更（文件系统、套接字、时钟）
+    /// key API （file system 、socket 、）
+    /// key API 变更（file system、socket、时钟）
     pub fn key_api_changes() -> &'static str {
         r#"WASI P1 → P2 关键 API 变更
 
@@ -313,6 +311,8 @@ Preview 2: wasi:clocks/wall-clock@0.2.0 + wasi:clocks/monotonic-clock@0.2.0
     }
 
     /// WIT 接口定义概念
+    /// WIT definition concept
+    /// WIT 接口definitionconcept
     pub fn wit_interface_definitions() -> &'static str {
         r#"WIT (Wasm Interface Types) 接口定义概念
 
@@ -366,19 +366,20 @@ Preview 2: wasi:clocks/wall-clock@0.2.0 + wasi:clocks/monotonic-clock@0.2.0
 // =========================================================================
 
 /// # 组件模型工具链
-///
-/// 构建、组合、运行和分发 WebAssembly 组件所需的工具集。
+/// # toolchain
+/// # 组件模型toolchain
 /// 组件模型工具链
+/// toolchain
 #[derive(Default)]
 pub struct WasmComponentTooling;
 
 impl WasmComponentTooling {
     /// 创建新的工具链指南实例
+    /// toolchain
     pub fn new() -> Self {
         Self
     }
 
-    /// wasm-tools: 组件创建、组合与验证
     pub fn wasm_tools_usage() -> &'static str {
         r#"wasm-tools: WebAssembly 组件模型工具链
 
@@ -417,7 +418,7 @@ cargo install wasm-tools
 "#
     }
 
-    /// wasmtime 作为组件运行时
+    /// wasmtime as组件runtime
     pub fn wasmtime_runtime() -> &'static str {
         r#"wasmtime: 组件模型运行时
 
@@ -462,7 +463,6 @@ let instance = linker.instantiate(&mut store, &component)?;
 "#
     }
 
-    /// jco: JavaScript 组件生成与运行
     pub fn jco_javascript_generation() -> &'static str {
         r#"jco: JavaScript 的 Component Model 工具链
 
@@ -525,8 +525,9 @@ console.log(result); // 5
 // =========================================================================
 
 /// 检测当前目标是否支持组件模型运行时
-///
+/// when before goal runtime
 /// 在 wasm32-wasip2 目标下返回 true，其他目标返回 false。
+/// in wasm32-wasip2 goal under true，its goal false。
 pub fn is_component_model_target() -> bool {
     cfg_select! {
         target_env = "wasip2" => true,
@@ -535,6 +536,7 @@ pub fn is_component_model_target() -> bool {
 }
 
 /// 获取当前平台的组件模型支持描述
+/// when before platform describe
 pub fn component_model_support_description() -> &'static str {
     cfg_select! {
         target_env = "wasip2" => "当前目标 wasm32-wasip2 原生支持组件模型",
@@ -544,9 +546,9 @@ pub fn component_model_support_description() -> &'static str {
 }
 
 /// 模拟组件模型环境下的接口调用
-///
-/// 在 wasip2 目标下返回真实组件模型格式的响应，
+/// environment under
 /// 其他目标下返回存根实现。
+/// its goal under 。
 pub fn simulate_component_call(interface: &str, function: &str) -> String {
     cfg_select! {
         target_env = "wasip2" => {
@@ -574,9 +576,6 @@ pub fn simulate_component_call(interface: &str, function: &str) -> String {
 // 5. JS 互操作示例（wasm_bindgen）
 // =========================================================================
 
-/// 组件模型运行时信息（供 JavaScript 调用）
-///
-/// 展示如何从 JS 获取当前 WASM 目标的组件模型支持状态。
 #[wasm_bindgen]
 #[derive(Default)]
 pub struct ComponentModelJsBridge;
@@ -584,39 +583,43 @@ pub struct ComponentModelJsBridge;
 #[wasm_bindgen]
 impl ComponentModelJsBridge {
     /// 创建 JS 桥接实例
+    /// JS bridge
     #[wasm_bindgen(constructor)]
     pub fn new() -> Self {
         Self
     }
 
     /// 返回当前目标是否支持组件模型
+    /// when before goal
     #[wasm_bindgen(js_name = isComponentModelTarget)]
     pub fn is_component_model_target_js() -> bool {
         is_component_model_target()
     }
 
     /// 返回平台支持描述（供 JS 显示）
+    /// platform describe （ JS display ）
     #[wasm_bindgen(js_name = supportDescription)]
     pub fn support_description_js() -> String {
         component_model_support_description().to_string()
     }
 
     /// 模拟一次组件接口调用并返回结果字符串
+    /// and result
     #[wasm_bindgen(js_name = simulateCall)]
     pub fn simulate_call_js(interface: &str, function: &str) -> String {
         simulate_component_call(interface, function)
     }
 
     /// 返回学习路径（供 JS 前端展示）
+    /// learn （ JS frontend ）
     #[wasm_bindgen(js_name = learningPath)]
     pub fn learning_path_js() -> String {
         learning_path().to_string()
     }
 }
 
-/// 供 JavaScript 直接调用的工具函数
-///
 /// 将 WIT 包名字符串解析为结构化对象。
+/// will WIT as structure to 。
 #[wasm_bindgen(js_name = parseWitPackageName)]
 pub fn parse_wit_package_name_js(name: &str) -> Option<String> {
     parse_wit_package_name(name).map(|(ns, pkg, ver)| {
@@ -632,9 +635,11 @@ pub fn parse_wit_package_name_js(name: &str) -> Option<String> {
 // =========================================================================
 
 /// 解析 WIT 风格的包名
-///
+/// WIT
 /// 输入: "wasi:http@0.2.0"
 /// 返回: (命名空间, 包名, 版本)
+/// : (space,, this )
+/// Return: (命名space, 包名, 版this)
 pub fn parse_wit_package_name(name: &str) -> Option<(&str, &str, &str)> {
     let (namespace_rest, version) = name.split_once('@')?;
     let (namespace, package) = namespace_rest.split_once(':')?;
@@ -642,6 +647,7 @@ pub fn parse_wit_package_name(name: &str) -> Option<(&str, &str, &str)> {
 }
 
 /// 获取推荐的组件模型学习路径
+/// learn
 pub fn learning_path() -> &'static str {
     r#"WebAssembly Component Model 学习路径
 

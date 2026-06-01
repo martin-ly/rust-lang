@@ -1,48 +1,31 @@
-//! Cargo SemVer Checks 专题指南
-//!
 //! **版本 attribution**: Rust 1.95+ 生态实践
-//!
-//! 本模块系统介绍 Rust 语义化版本控制（Semantic Versioning）的核心概念、
-//! Cargo 的 SemVer 规则、`cargo-semver-checks` 工具的使用方法，
 //! 以及如何在日常开发中避免无意的 API 破坏性变更。
-//!
+//! and in in API 。
 //! ## 目录
-//!
-//! 1. [什么是 Semantic Versioning](#什么是-semantic-versioning)
-//! 2. [为什么 API Breakage 很重要](#为什么-api-breakage-很重要)
+//! ##
+//! 2. [as什么 API Breakage 很important](#as什么-api-breakage-很important)
 //! 3. [cargo-semver-checks 工具](#cargo-semver-checks-工具)
 //! 4. [常见 Breaking Changes](#常见-breaking-changes)
-//! 5. [Deprecated 与迁移路径](#deprecated-与迁移路径)
 //! 6. [CI/CD 集成](#cicd-集成)
-//!
-//! ## Mermaid: SemVer 决策流程
-//!
-//! ```mermaid
+//! 6. [CI/CD ](#cicd-)
 //! flowchart TD
-//!     A[代码变更] --> B{是否修改 public API?}
 //!     B -->|否| C[PATCH]
 //!     B -->|是| D{是否向后兼容?}
-//!     D -->|是| E[MINOR]
+//!     B -->|| D{after?}
 //!     D -->|否| F[MAJOR]
 //!     F --> G[运行 cargo-semver-checks 验证]
-//! ```
 
 // ============================================================================
 // 1. 什么是 Semantic Versioning
 // ============================================================================
 
-/// SemVer 版本号格式：`MAJOR.MINOR.PATCH`
-///
 /// - **MAJOR**: 破坏性变更（breaking changes），不向后兼容。
-/// - **MINOR**: 向后兼容的功能新增。
-/// - **PATCH**: 向后兼容的问题修复。
-///
-/// Rust 生态通过 Cargo 强制遵循 SemVer：一旦 crate 发布到 crates.io，
-/// 下游用户依赖解析器会基于 SemVer 约束自动选择兼容版本。
+/// - **MAJOR**: （breaking changes），after 。
 pub struct SemVerBasics;
 
 impl SemVerBasics {
     /// 示例版本号解析
+    /// example this
     pub fn version_examples() {
         // 1.0.0 -> MAJOR=1, MINOR=0, PATCH=0
         // 1.2.3 -> MAJOR=1, MINOR=2, PATCH=3
@@ -54,58 +37,52 @@ impl SemVerBasics {
 // 2. 为什么 API Breakage 很重要
 // ============================================================================
 
-/// Cargo 的 SemVer 规则基于 Rust 类型系统和可见性。
-///
-/// 以下变更**通常**被视为 breaking：
 /// - 删除 `pub` 函数、类型、模块、trait。
-/// - 给非 `#[non_exhaustive]` 的 `pub struct` 添加字段。
-/// - 收窄泛型约束（如从 `T` 改为 `T: Clone`）。
-/// - 修改 trait 的 required method 签名（无默认实现时）。
+/// - `pub` function 、type 、module 、trait。
+/// - 给非 `#[non_exhaustive]` `pub struct` 添加field。
 /// - 改变 `pub` 常量的类型或值（若被用于模式匹配）。
-///
-/// 以下变更**通常**视为 compatible：
-/// - 给 `#[non_exhaustive]` 的 enum 添加 variant。
-/// - 给 trait 添加带有默认实现的方法。
+/// - `pub` constant type or （is ）。
+/// - 给 `#[non_exhaustive]` enum 添加 variant。
+/// - 给 trait 添加带有default implementationmethod。
 /// - 放宽函数参数类型（需保持调用端兼容）。
+/// - function parameter type （）。
 pub struct ApiBreakageConcepts;
 
 // ============================================================================
 // 3. cargo-semver-checks 工具
 // ============================================================================
 
-/// `cargo-semver-checks` 是基于 rustdoc JSON 的静态分析工具，
-/// 用于检测当前 crate 的公共 API 是否违反了 SemVer 规则。
-///
 /// ## 安装
-///
-/// ```bash
+/// ##
 /// cargo install cargo-semver-checks --locked
 /// ```
 ///
 /// ## 基本用法
-///
-/// ```bash
+/// ## this
 /// # 检查当前 crate
-/// cargo semver-checks
+/// # when before crate
 ///
 /// # 与已发布版本对比
-/// cargo semver-checks --baseline-version 0.1.0
-///
+/// # and this to
 /// # 与 git 标签对比
-/// cargo semver-checks --baseline-rev v0.1.0
-/// ```
+/// # and git to
+/// # and git 标签to比
 ///
 /// ## 检测范围
-///
-/// | 变更类型 | 检测能力 | 违反的 SemVer |
-/// |---------|---------|-------------|
+/// ## scope
+/// ## 检测range
 /// | 删除公共函数/类型 | ✅ | MAJOR |
+/// | function /type | ✅ | MAJOR |
 /// | 给非 exhaustive struct 添加字段 | ✅ | MAJOR |
+/// | 给非 exhaustive struct 添加field | ✅ | MAJOR |
 /// | 收窄函数返回类型 | ✅ | MAJOR |
+/// | function type | ✅ | MAJOR |
 /// | trait 新增 required method | ✅ | MAJOR |
 /// | 给 enum 添加 variant（无 non_exhaustive） | ✅ | MAJOR |
 /// | 修改文档 | ❌ | N/A |
+/// | | ❌ | N/A |
 /// | 行为变更 | ❌ | 需人工审查 |
+/// | as | ❌ | |
 pub struct CargoSemverChecksTool;
 
 // ============================================================================
@@ -116,20 +93,16 @@ pub struct CargoSemverChecksTool;
 // 4.1 Enum variant 添加
 // ---------------------------------------------------------------------------
 
-/// **问题**: 给 `pub enum` 添加 variant 会破坏所有使用 exhaustive match 的下游代码。
-///
 /// **解决方案**: 使用 `#[non_exhaustive]` 属性。
-///
+/// **solution **: `#[non_exhaustive]` attribute 。
 /// ```rust
 /// #[non_exhaustive]
 /// pub enum NetworkEvent {
 ///     Connected,
 ///     Disconnected,
-///     // 未来可安全添加：DataReceived,
-/// }
-/// ```
 ///
 /// 下游必须写 `_ => {}` 分支，从而允许未来扩展。
+/// under must `_ => {}` ，thereby future 。
 #[non_exhaustive]
 pub enum NetworkEvent {
     Connected,
@@ -141,22 +114,20 @@ pub enum NetworkEvent {
 // ---------------------------------------------------------------------------
 
 /// **问题**: 给 `pub trait` 添加 required method 会破坏所有外部实现者。
-///
+/// **problem **: `pub trait` required method all outside 。
 /// **解决方案**: 提供默认实现，或使用 sealed trait 模式。
-///
-/// ```rust
+/// **solution **: default implementation ，or sealed trait 。
 /// pub trait ProtocolHandler {
 ///     fn handle(&self, data: &[u8]);
 ///     // 新增方法时提供默认实现
-///     fn handle_async(&self, _data: &[u8]) -> std::future::Ready<()> {
-///         std::future::ready(())
+///     // method default implementation
 ///     }
-/// }
 /// ```
 pub trait ProtocolHandler {
     fn handle(&self, data: &[u8]);
 
     /// Rust 1.95+ 实践：新增方法必须附带默认实现，避免 breaking change。
+    /// Rust 1.95+ ：method must default implementation ， breaking change。
     fn handle_async(&self, _data: &[u8]) -> std::future::Ready<()> {
         std::future::ready(())
     }
@@ -167,22 +138,31 @@ pub trait ProtocolHandler {
 // ---------------------------------------------------------------------------
 
 /// **问题**: 直接修改 `pub type` 或结构体字段类型会导致下游编译失败。
-///
+/// **problem **: `pub type` or struct field type under 。
 /// **解决方案**:
+/// **solution **:
 /// - 使用 type alias 渐进迁移。
+/// - type alias 。
+/// - Use type alias 渐进迁移。
 /// - 使用 newtype 模式封装。
+/// - newtype 。
+/// - Use newtype 模式封装。
 /// - 保留旧类型并标记 `#[deprecated]`。
-///
+/// - type and mark `#[deprecated]`。
+/// - 保留旧typeandmark `#[deprecated]`。
 /// 旧类型（已废弃）
+/// type （）
 #[deprecated(since = "0.2.0", note = "请使用 `PacketId` 替代")]
 pub type OldPacketId = u32;
 
 /// 新类型：使用 newtype 模式增强类型安全
+/// type ： newtype type
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub struct PacketId(pub u64);
 
 impl PacketId {
     /// 从旧类型迁移
+    /// from type
     pub fn from_legacy(id: u32) -> Self {
         Self(id as u64)
     }
@@ -192,12 +172,12 @@ impl PacketId {
 // 4.4 Sealed trait 模式
 // ---------------------------------------------------------------------------
 
-/// 若不希望外部 crate 实现某个 trait，可使用 sealed trait 防止未来扩展导致的 breakage。
 mod sealed {
     pub trait Sealed {}
 }
 
 /// 公开 trait 但隐藏 sealed 父 trait，阻止外部实现。
+/// trait but hide sealed trait，outside 。
 pub trait InternalTrait: sealed::Sealed {
     fn do_something(&self);
 }
@@ -211,42 +191,42 @@ impl InternalTrait for String {
 // 5. Deprecated 与迁移路径
 // ============================================================================
 
-/// `#[deprecated]` 是 Rust 提供的标准属性，用于标记即将移除的 API，
 /// 给下游开发者留出迁移时间。
-///
+/// under time 。
 /// ## 使用规范
-///
+/// ## norm
 /// - `since = "x.y.z"`: 标记从哪个版本开始废弃。
+/// - `since = "x.y.z"`: mark from this 。
 /// - `note = "..."`: 提供替代方案或迁移说明。
-///
+/// - `note = "..."`: or explain 。
 /// ## 示例：函数废弃
-///
-/// ```rust
+/// ## example ：function
 /// #[deprecated(since = "0.3.0", note = "请使用 `connect_async` 替代")]
-/// pub fn connect_legacy(addr: &str) -> std::io::Result<()> {
-///     // ...
+/// #[deprecated(since = "0.3.0", note = "请Use `connect_async` 替代")]
 ///     # Ok(())
 /// }
 /// ```
 ///
 /// ## 迁移路径设计原则
-///
-/// 1. **MAJOR 版本前至少保留一个 MINOR 周期的 deprecated API**。
+/// ## design principle
+/// ## 迁移路径designprinciple
 /// 2. **在文档中提供 before/after 代码对比**。
+/// 2. **in in before/after to **。
 /// 3. **若涉及类型变更，提供 `From` / `Into` 转换**。
-///
-/// 已废弃的 legacy 连接函数
+/// 3. **and type ， `From` / `Into` conversion **。
+/// 已废弃 legacy Connectfunction
 #[deprecated(since = "0.3.0", note = "请使用 `connect_async` 替代")]
 pub fn connect_legacy(_addr: &str) -> std::io::Result<()> {
     Ok(())
 }
 
 /// 推荐的异步连接函数（占位）
+/// async function （）
 pub async fn connect_async(_addr: &str) -> std::io::Result<()> {
     Ok(())
 }
 
-/// 为平滑迁移提供 `From` 实现
+/// as平滑迁移Provides `From` Implementation of
 #[derive(Debug)]
 pub struct LegacyConfig {
     pub timeout_ms: u32,
@@ -269,10 +249,6 @@ impl From<LegacyConfig> for NewConfig {
 // 6. CI/CD 集成
 // ============================================================================
 
-/// 在 CI 中集成 `cargo-semver-checks` 可防止无意的 breaking change 进入主分支。
-///
-/// ## GitHub Actions 示例
-///
 /// ```yaml
 /// semver-checks:
 ///   name: SemVer Checks
@@ -292,13 +268,12 @@ impl From<LegacyConfig> for NewConfig {
 /// ```
 ///
 /// ## CI 策略建议
-///
-/// 1. **PR 检查**: 与 `main` 分支对比，阻止无意的 breaking change。
+/// ## CI strategy
+/// 1. **PR Check**: and `main` 分支to比，阻止无意 breaking change。
 /// 2. **发布前检查**: 与上一个发布的版本对比。
+/// 2. **before **: and on this to 。
 /// 3. **允许失败模式**: 对于实验性 crate，可设置 `continue-on-error: true`。
-///
-/// Mermaid: CI 流水线中的 SemVer 检查
-///
+/// 3. ****: to crate， `continue-on-error: true`。
 /// ```mermaid
 /// flowchart LR
 ///     A[Pull Request] --> B[Build & Test]

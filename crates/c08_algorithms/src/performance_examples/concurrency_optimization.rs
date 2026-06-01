@@ -1,9 +1,11 @@
 //! 并发性能优化实践示例
+//! concurrency performance optimization example
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex};
 use std::thread;
 
 /// 原子计数器
+/// atomic counter
 pub struct AtomicCounter {
     value: AtomicUsize,
 }
@@ -31,6 +33,7 @@ impl AtomicCounter {
 }
 
 /// 简单线程池
+/// simple thread pool
 pub struct SimpleThreadPool {
     workers: Vec<thread::JoinHandle<()>>,
     sender: Option<std::sync::mpsc::Sender<Box<dyn FnOnce() + Send + 'static>>>,
@@ -82,6 +85,7 @@ impl Drop for SimpleThreadPool {
 }
 
 /// 无锁栈（简化版）
+/// lock-free stack （）
 pub struct LockFreeStack<T> {
     head: Arc<AtomicUsize>,
     data: Arc<Mutex<Vec<Option<T>>>>,

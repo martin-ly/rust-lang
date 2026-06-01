@@ -1,12 +1,13 @@
 //! 简化的测试套件
-//!
 //! 专注于核心功能的测试，避免复杂的依赖问题
+//! core functionality ，complex problem
 use anyhow::Result;
 use c06_async::async_runtime_integration_framework_simple::*;
 use std::time::Duration;
 use tokio::time::sleep;
 
 /// 测试简化的异步运行时框架
+/// async runtime framework
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_simple_framework() {
@@ -20,6 +21,7 @@ async fn test_simple_framework() {
 }
 
 /// 测试异步同步转换服务
+/// async synchronous conversion
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_async_sync_conversion() {
@@ -30,6 +32,7 @@ async fn test_async_sync_conversion() {
 }
 
 /// 测试聚合组合服务
+/// aggregation combination
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_aggregation_composition() {
@@ -47,6 +50,7 @@ async fn test_aggregation_composition() {
 }
 
 /// 测试任务优先级
+/// task
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_task_priority() {
@@ -56,6 +60,7 @@ async fn test_task_priority() {
 }
 
 /// 测试运行时类型
+/// runtime type
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_runtime_type() {
@@ -77,6 +82,7 @@ async fn test_runtime_type() {
 }
 
 /// 测试性能指标
+/// performance indicator
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_runtime_metrics() {
@@ -94,6 +100,7 @@ async fn test_runtime_metrics() {
 }
 
 /// 测试运行时配置
+/// runtime
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_runtime_config() {
@@ -111,6 +118,7 @@ async fn test_runtime_config() {
 }
 
 /// 测试健康检查
+/// health check
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_health_check() {
@@ -122,6 +130,7 @@ async fn test_health_check() {
 }
 
 /// 测试批量任务执行
+/// task
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_batch_execution() {
@@ -143,6 +152,7 @@ async fn test_batch_execution() {
 }
 
 /// 测试性能监控
+/// performance
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_performance_monitoring() {
@@ -166,6 +176,7 @@ async fn test_performance_monitoring() {
 }
 
 /// 测试错误处理
+/// error handling
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_error_handling() {
@@ -186,6 +197,7 @@ async fn test_error_handling() {
 }
 
 /// 失败任务实现
+/// task
 struct FailingTask {
     name: String,
     priority: TaskPriority,

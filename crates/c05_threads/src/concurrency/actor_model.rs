@@ -1,14 +1,11 @@
 //! Actor 模型实现
-//!
-//! Actor 模型是一种并发计算模型，其中 Actor 是并发计算的基本单元。
-//! 每个 Actor 都有自己的状态和邮箱，通过消息传递进行通信。
-//!
+//! Actor
+//! Actor 模型Implementation of
 //! ## 核心概念
-//!
-//! - **Actor**: 独立的并发实体，有自己的状态和行为
-//! - **Mailbox**: 消息队列，存储发送给 Actor 的消息
-//! - **Message**: Actor 之间通信的数据结构
+//! ## core concept
+//! - **Message**: Actor 's间通信data structure
 //! - **Scheduler**: 负责调度 Actor 处理消息
+//! - **Scheduler**: Actor
 use std::collections::VecDeque;
 use std::sync::{Arc, Mutex};
 use std::thread;
@@ -17,24 +14,24 @@ use std::time::Duration;
 /// Actor 消息 trait
 pub trait Message: Send + 'static {
     /// 消息类型标识
+    /// type
     fn message_type(&self) -> &'static str;
 }
 
-/// Actor trait - 定义 Actor 的行为
+/// Actor trait - definition Actor 行as
 pub trait Actor: Send + 'static {
-    /// Actor 的类型
     type Message: Message;
 
     /// 处理消息
     fn handle(&mut self, msg: Self::Message);
 
     /// Actor 名称（用于调试）
+    /// Actor （）
     fn name(&self) -> &str {
         "UnnamedActor"
     }
 }
 
-/// Actor 邮箱 - 存储待处理的消息
 pub struct Mailbox<M: Message> {
     messages: Arc<Mutex<VecDeque<M>>>,
 }
@@ -48,6 +45,7 @@ impl<M: Message> Mailbox<M> {
     }
 
     /// 发送消息到邮箱
+    /// to
     pub fn send(&self, msg: M) -> Result<(), String> {
         let mut queue = self
             .messages
@@ -58,12 +56,14 @@ impl<M: Message> Mailbox<M> {
     }
 
     /// 接收消息（非阻塞）
+    /// （）
     pub fn try_recv(&self) -> Option<M> {
         let mut queue = self.messages.lock().ok()?;
         queue.pop_front()
     }
 
     /// 接收消息（阻塞，直到有消息）
+    /// （，to ）
     pub fn recv(&self) -> Option<M> {
         loop {
             if let Some(msg) = self.try_recv() {
@@ -74,11 +74,14 @@ impl<M: Message> Mailbox<M> {
     }
 
     /// 检查邮箱是否为空
+    /// as
     pub fn is_empty(&self) -> bool {
         self.messages.lock().map(|q| q.is_empty()).unwrap_or(true)
     }
 
     /// 获取邮箱中的消息数量
+    /// in quantity
+    /// Get邮箱in消息quantity
     pub fn len(&self) -> usize {
         self.messages.lock().map(|q| q.len()).unwrap_or(0)
     }
@@ -91,23 +94,26 @@ impl<M: Message> Default for Mailbox<M> {
 }
 
 /// Actor 引用 - 用于向 Actor 发送消息
+/// Actor reference - Actor
 pub struct ActorRef<M: Message> {
     mailbox: Arc<Mailbox<M>>,
     name: String,
 }
 
 impl<M: Message> ActorRef<M> {
-    /// 创建新的 Actor 引用
     pub fn new(mailbox: Arc<Mailbox<M>>, name: String) -> Self {
         Self { mailbox, name }
     }
 
     /// 发送消息到 Actor
+    /// to Actor
     pub fn tell(&self, msg: M) -> Result<(), String> {
         self.mailbox.send(msg)
     }
 
     /// 获取 Actor 名称
+    /// Actor
+    /// Get Actor 名称
     pub fn name(&self) -> &str {
         &self.name
     }
@@ -123,17 +129,19 @@ impl<M: Message> Clone for ActorRef<M> {
 }
 
 /// Actor 系统 - 管理多个 Actor
+/// Actor system - Actor
+/// Actor system - 管理多个 Actor
 pub struct ActorSystem {
     actors: Vec<thread::JoinHandle<()>>,
 }
 
 impl ActorSystem {
-    /// 创建新的 Actor 系统
     pub fn new() -> Self {
         Self { actors: Vec::new() }
     }
 
     /// 启动一个 Actor
+    /// Actor
     pub fn spawn<A>(&mut self, mut actor: A, mailbox: Arc<Mailbox<A::Message>>, name: String)
     where
         A: Actor,
@@ -151,6 +159,7 @@ impl ActorSystem {
     }
 
     /// 等待所有 Actor 完成（通常 Actor 会一直运行）
+    /// etc. all Actor （ Actor Run ）
     pub fn join_all(self) {
         for handle in self.actors {
             let _ = handle.join();
@@ -169,6 +178,8 @@ impl Default for ActorSystem {
 // ============================================================================
 
 /// 示例消息类型
+/// example type
+/// Example of消息type
 #[derive(Debug, Clone)]
 pub enum CounterMessage {
     Increment,
@@ -189,13 +200,14 @@ impl Message for CounterMessage {
 }
 
 /// 示例 Actor - 计数器
+/// example Actor -
+/// Example of Actor - 计数器
 pub struct CounterActor {
     count: i32,
     name: String,
 }
 
 impl CounterActor {
-    /// 创建新的计数器 Actor
     pub fn new(name: String) -> Self {
         Self { count: 0, name }
     }

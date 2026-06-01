@@ -1,9 +1,6 @@
 //! # 计数器类示例
-//!
-//! 展示如何导出 Rust 结构体到 JavaScript，实现有状态的对象
-//!
-//! ## JavaScript 使用示例
-//!
+//! # example
+//! # 计数器类Example of
 //! ```javascript
 //! import init, { Counter } from './pkg/c12_wasm.js';
 //!
@@ -15,7 +12,6 @@
 //! counter.increment();
 //! console.log(counter.value);  // 1
 //!
-//! counter.increment();
 //! counter.increment();
 //! console.log(counter.value);  // 3
 //!
@@ -31,8 +27,7 @@
 use wasm_bindgen::prelude::*;
 
 /// 计数器结构体
-///
-/// 这是一个简单的计数器示例，展示了如何在 Rust 和 JavaScript 之间共享状态
+/// struct
 #[wasm_bindgen]
 #[derive(Default)]
 pub struct Counter {
@@ -42,12 +37,12 @@ pub struct Counter {
 #[wasm_bindgen]
 impl Counter {
     /// 创建新的计数器实例
-    ///
     /// # 返回值
+    /// # return value
     /// 返回初始值为 0 的计数器
-    ///
+    /// as 0
     /// # 示例
-    /// ```javascript
+    /// # example
     /// const counter = new Counter();
     /// ```
     #[wasm_bindgen(constructor)]
@@ -56,12 +51,11 @@ impl Counter {
     }
 
     /// 使用指定初始值创建计数器
-    ///
     /// # 参数
+    /// # parameter
     /// - `initial_value`: 初始值
-    ///
     /// # 示例
-    /// ```javascript
+    /// # example
     /// const counter = Counter.with_value(10);
     /// ```
     #[wasm_bindgen(js_name = "withValue")]
@@ -72,42 +66,42 @@ impl Counter {
     }
 
     /// 增加计数器值
-    ///
     /// 每次调用会将内部值加 1
+    /// will inside 1
     #[wasm_bindgen]
     pub fn increment(&mut self) {
         self.value += 1;
     }
 
     /// 减少计数器值
-    ///
     /// 每次调用会将内部值减 1
+    /// will inside 1
     #[wasm_bindgen]
     pub fn decrement(&mut self) {
         self.value -= 1;
     }
 
     /// 增加指定的值
-    ///
     /// # 参数
-    /// - `amount`: 要增加的数量
+    /// # parameter
+    /// - `amount`: 要增加quantity
     #[wasm_bindgen]
     pub fn add(&mut self, amount: i32) {
         self.value += amount;
     }
 
     /// 减少指定的值
-    ///
     /// # 参数
-    /// - `amount`: 要减少的数量
+    /// # parameter
+    /// - `amount`: 要减少quantity
     #[wasm_bindgen]
     pub fn subtract(&mut self, amount: i32) {
         self.value -= amount;
     }
 
     /// 乘以指定的值
-    ///
     /// # 参数
+    /// # parameter
     /// - `factor`: 乘数
     #[wasm_bindgen]
     pub fn multiply(&mut self, factor: i32) {
@@ -115,12 +109,14 @@ impl Counter {
     }
 
     /// 除以指定的值
-    ///
     /// # 参数
+    /// # parameter
     /// - `divisor`: 除数
-    ///
     /// # 返回值
+    /// # return value
     /// 如果除数为0，返回 Err，否则返回 Ok
+    /// if as 0， Err， Ok
+    /// if除数as0，Return Err，否则Return Ok
     #[wasm_bindgen]
     pub fn divide(&mut self, divisor: i32) -> Result<(), JsValue> {
         if divisor == 0 {
@@ -131,56 +127,64 @@ impl Counter {
     }
 
     /// 重置计数器
-    ///
     /// 将计数器值重置为 0
+    /// will as 0
     #[wasm_bindgen]
     pub fn reset(&mut self) {
         self.value = 0;
     }
 
     /// 设置计数器值
-    ///
     /// # 参数
-    /// - `value`: 新的值
+    /// # parameter
+    /// - `value`: 新值
     #[wasm_bindgen(js_name = "setValue")]
     pub fn set_value(&mut self, value: i32) {
         self.value = value;
     }
 
     /// 获取当前计数器值
-    ///
+    /// when before
     /// # 返回值
+    /// # return value
     /// 返回当前计数器的值
+    /// when before
     #[wasm_bindgen(getter)]
     pub fn value(&self) -> i32 {
         self.value
     }
 
     /// 判断是否为正数
+    /// as
     #[wasm_bindgen(js_name = "isPositive")]
     pub fn is_positive(&self) -> bool {
         self.value > 0
     }
 
     /// 判断是否为负数
+    /// as
     #[wasm_bindgen(js_name = "isNegative")]
     pub fn is_negative(&self) -> bool {
         self.value < 0
     }
 
     /// 判断是否为零
+    /// as
     #[wasm_bindgen(js_name = "isZero")]
     pub fn is_zero(&self) -> bool {
         self.value == 0
     }
 
     /// 获取绝对值
+    /// to
+    /// Get绝to值
     #[wasm_bindgen(js_name = "absoluteValue")]
     pub fn absolute_value(&self) -> i32 {
         self.value.abs()
     }
 
     /// 转换为字符串
+    /// conversion as
     #[wasm_bindgen(js_name = "toString")]
     pub fn to_str(&self) -> String {
         format!("Counter(value: {})", self.value)

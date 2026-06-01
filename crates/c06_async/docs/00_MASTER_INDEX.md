@@ -55,7 +55,7 @@
 
 **特点**: 对比分析，实战指导
 
-- **01_comparison_2025.md** - Tokio/async-std/Smol全面对比 ⭐⭐⭐⭐⭐
+- **01_comparison_2025.md** - Tokio/Smol全面对比 ⭐⭐⭐⭐⭐
 - **02_tokio_best_practices.md** - Tokio生产实践 ⭐⭐⭐⭐
 - **03_smol_best_practices.md** - Smol轻量方案 ⭐⭐⭐
 - **04_cookbook.md** - 实战代码手册 ⭐⭐⭐⭐
@@ -283,7 +283,7 @@
 
 - **Web开发** → Tokio + Axum 相关文档
 - **CLI工具** → Smol + 轻量运行时
-- **学习项目** → async-std + 完整指南
+- **学习项目** → async-std [已归档] + 完整指南
 - **生产环境** → Tokio + 最佳实践
 - **嵌入式** → Smol + 性能优化
 
@@ -308,7 +308,7 @@
 
 - [Rust Async Book](https://rust-lang.github.io/async-book/) - 官方异步书
 - [Tokio Tutorial](https://tokio.rs/tokio/tutorial) - Tokio教程
-- [async-std Book](https://book.async.rs/) - async-std教程
+- [async-std [已归档] Book](https://book.async.rs/) - async-std [已归档]教程
 
 ---
 

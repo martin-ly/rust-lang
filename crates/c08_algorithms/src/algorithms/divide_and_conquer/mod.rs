@@ -1,13 +1,17 @@
 //! # 分治算法模块
+//! # divide and conquer algorithm module
 //!
 //! 本模块实现了各种分治算法。
+//! this module divide and conquer algorithm 。
 //use serde::{Serialize, Deserialize};
 
 /// 分治算法实现
+/// divide and conquer algorithm
 pub struct DivideAndConquerAlgorithms;
 
 impl DivideAndConquerAlgorithms {
     /// 最大子数组和
+    /// maximum and
     pub fn max_subarray_sum(arr: &[i32]) -> i32 {
         if arr.is_empty() {
             return 0;

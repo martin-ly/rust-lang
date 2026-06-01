@@ -1,12 +1,18 @@
 //! 神经网络实现
+//! neural network
 //!
 //! 本模块提供了基础的神经网络实现，包括：
+//! This module provides foundation neural network ，：
 //! - 多层感知机 (MLP)
+//! - (MLP)
 //! - 前向传播
+//! - before propagation
 //! - 反向传播
+//! - backpropagation
 use super::*;
 
 /// 激活函数类型
+/// activation function type
 #[derive(Debug, Clone)]
 pub enum ActivationFunction {
     Sigmoid,
@@ -17,6 +23,7 @@ pub enum ActivationFunction {
 
 impl ActivationFunction {
     /// 计算激活函数值
+    /// activation function
     pub fn apply(&self, x: f64) -> f64 {
         match self {
             ActivationFunction::Sigmoid => 1.0 / (1.0 + (-x).exp()),
@@ -27,6 +34,7 @@ impl ActivationFunction {
     }
 
     /// 计算激活函数的导数
+    /// activation function
     pub fn derivative(&self, x: f64) -> f64 {
         match self {
             ActivationFunction::Sigmoid => {
@@ -47,13 +55,16 @@ impl ActivationFunction {
 }
 
 /// 神经网络层
+/// neural network
 #[derive(Debug, Clone)]
 pub struct Layer {
     /// 权重矩阵 (输出维度 x 输入维度)
+    /// (dimension x dimension )
     weights: Vec<Vec<f64>>,
     /// 偏置向量
     biases: Vec<f64>,
     /// 激活函数
+    /// activation function
     activation: ActivationFunction,
 }
 
@@ -85,6 +96,7 @@ impl Layer {
     }
 
     /// 前向传播
+    /// before propagation
     pub fn forward(&self, input: &[f64]) -> Vec<f64> {
         self.weights
             .iter()
@@ -102,16 +114,19 @@ impl Layer {
     }
 
     /// 获取权重的可变引用
+    /// reference
     pub fn weights_mut(&mut self) -> &mut Vec<Vec<f64>> {
         &mut self.weights
     }
 
     /// 获取偏置的可变引用
+    /// reference
     pub fn biases_mut(&mut self) -> &mut Vec<f64> {
         &mut self.biases
     }
 
     /// 获取激活函数
+    /// activation function
     pub fn activation(&self) -> &ActivationFunction {
         &self.activation
     }
@@ -122,8 +137,10 @@ impl Layer {
 #[allow(clippy::upper_case_acronyms)]
 pub struct MLP {
     /// 网络层
+    /// network layer
     layers: Vec<Layer>,
     /// 学习率
+    /// learning rate
     learning_rate: f64,
     /// 是否已训练
     is_fitted: bool,
@@ -131,6 +148,7 @@ pub struct MLP {
 
 impl MLP {
     /// 创建新的 MLP
+    /// MLP
     pub fn new(
         layer_sizes: &[usize],
         activations: Vec<ActivationFunction>,
@@ -162,6 +180,7 @@ impl MLP {
     }
 
     /// 前向传播
+    /// before propagation
     pub fn forward(&self, input: &[f64]) -> Vec<f64> {
         self.layers
             .iter()
@@ -169,6 +188,7 @@ impl MLP {
     }
 
     /// 计算损失（均方误差）
+    /// loss （）
     pub fn loss(&self, predictions: &[f64], targets: &[f64]) -> f64 {
         predictions
             .iter()
@@ -179,6 +199,7 @@ impl MLP {
     }
 
     /// 反向传播训练
+    /// backpropagation
     pub fn train_step(&mut self, input: &[f64], target: &[f64]) -> MLResult<f64> {
         // 前向传播，保存中间结果
         let mut activations = vec![input.to_vec()];

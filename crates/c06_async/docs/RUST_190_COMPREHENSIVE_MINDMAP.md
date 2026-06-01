@@ -35,7 +35,7 @@
         │              │              │
     ┌───┴───┐     ┌────┴────┐    ┌───┴───┐
     │       │     │         │    │       │
-  async  Future  Tokio  async-std  Channel Select
+  async  Future  Tokio  async-std [已归档]  Channel Select
   await   trait   │         │     JoinSet  spawn
     │       │     │         │        │      │
   Poll   Waker  Executor Reactor  Mutex  Stream
@@ -138,7 +138,7 @@ Runtime 生态系统
 │  └─ 适用场景
 │     └─ 高并发服务器、网络应用
 │
-├─ 🌊 async-std
+├─ 🌊 async-std [已归档]
 │  ├─ 特性
 │  │  ├─ 标准库API风格
 │  │  ├─ 跨平台
@@ -169,10 +169,10 @@ Runtime 生态系统
 │     └─ 高性能I/O密集型应用
 │
 └─ 🎯 Runtime对比
-   ├─ 性能: Glommio > Tokio > async-std > Smol
-   ├─ 易用: async-std > Tokio > Smol > Glommio
-   ├─ 生态: Tokio >>> async-std > others
-   └─ 灵活: Smol > async-std > Tokio > Glommio
+   ├─ 性能: Glommio > Tokio > async-std [已归档] > Smol
+   ├─ 易用: smol > Tokio > Smol > Glommio
+   ├─ 生态: Tokio >>> async-std [已归档] > others
+   └─ 灵活: Smol > async-std [已归档] > Tokio > Glommio
 ```
 
 ---
@@ -393,7 +393,7 @@ Week 3-4: 高级应用
 │  └─ 优点: 成熟生态、文档齐全
 │     缺点: 依赖较重
 │
-├─ 学习/简单应用 → async-std
+├─ 学习/简单应用 → smol
 │  └─ 优点: API简洁、易上手
 │     缺点: 生态较小
 │

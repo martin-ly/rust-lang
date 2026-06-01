@@ -1,4 +1,5 @@
 //! TCP 套接字实现
+//! TCP socket
 use crate::error::{NetworkError, NetworkResult};
 use std::net::SocketAddr;
 use std::time::Duration;
@@ -7,6 +8,7 @@ use tokio::net::{TcpListener, TcpStream};
 use tokio::time::timeout;
 
 /// TCP 套接字配置
+/// TCP socket
 #[derive(Debug, Clone)]
 pub struct TcpConfig {
     pub address: SocketAddr,
@@ -29,6 +31,7 @@ impl Default for TcpConfig {
 }
 
 /// TCP 套接字封装
+/// TCP socket
 #[derive(Debug)]
 pub struct TcpSocket {
     stream: Option<TcpStream>,
@@ -39,6 +42,7 @@ pub struct TcpSocket {
 
 impl TcpSocket {
     /// 创建新的 TCP 套接字
+    /// TCP socket
     pub fn new(config: TcpConfig) -> Self {
         Self {
             stream: None,
@@ -49,6 +53,7 @@ impl TcpSocket {
     }
 
     /// 作为客户端连接到服务器
+    /// as to
     pub async fn connect(&mut self) -> NetworkResult<()> {
         let stream = TcpStream::connect(self.config.address).await?;
 
@@ -64,6 +69,7 @@ impl TcpSocket {
     }
 
     /// 异步读取数据
+    /// async
     pub async fn read(&mut self, buffer: &mut [u8]) -> NetworkResult<usize> {
         if let Some(ref mut stream) = self.stream {
             match self.config.timeout {
@@ -79,6 +85,7 @@ impl TcpSocket {
     }
 
     /// 异步写入数据
+    /// async
     pub async fn write(&mut self, data: &[u8]) -> NetworkResult<usize> {
         if let Some(ref mut stream) = self.stream {
             match self.config.timeout {
@@ -99,17 +106,20 @@ impl TcpSocket {
     }
 
     /// 获取本地地址
+    /// this
     pub fn local_addr(&self) -> Option<SocketAddr> {
         self.local_addr
     }
 
     /// 获取对端地址
+    /// to
     pub fn peer_addr(&self) -> Option<SocketAddr> {
         self.peer_addr
     }
 }
 
 /// TCP 监听器封装
+/// TCP
 pub struct TcpListenerWrapper {
     listener: TcpListener,
     config: TcpConfig,
@@ -117,6 +127,7 @@ pub struct TcpListenerWrapper {
 
 impl TcpListenerWrapper {
     /// 创建新的 TCP 监听器
+    /// TCP
     pub async fn new(config: TcpConfig) -> NetworkResult<Self> {
         let listener = TcpListener::bind(config.address).await?;
         Ok(Self { listener, config })

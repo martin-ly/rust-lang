@@ -1,21 +1,20 @@
-//! Rust 1.90 真正的泛型特性实现 (历史版本)
-//!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//!
+//! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
-//!
-//! 本模块实现了Rust 1.90版本中真正可用的泛型特性，包括：
-//! - 改进的const generics
-//! - 更好的trait bounds
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
+//! - 改进const generics
+//! - 更好trait bounds
 //! - 优化的类型推断
+//! - optimization type infer
 //! - 新的泛型约束
+//! - generic
 //! - 改进的关联类型
+//! - associated type
+//! - 改进associated type
 use anyhow::Result;
 use std::{collections::HashMap, fmt::Display};
 
-/// 利用Rust 1.90改进的const generics
-///
-/// 在Rust 1.90中，const generics得到了显著改进
+/// 利用Rust 1.90改进const generics
 pub struct ConstGenericMatrix<T, const ROWS: usize, const COLS: usize> {
     data: [[T; COLS]; ROWS],
     current_row: usize,
@@ -73,9 +72,7 @@ impl<T: Default + Copy, const ROWS: usize, const COLS: usize> ConstGenericMatrix
     }
 }
 
-/// 利用Rust 1.90改进的trait bounds
-///
-/// 在Rust 1.90中，trait bounds得到了显著改进
+/// 利用Rust 1.90改进trait bounds
 pub trait ImprovedTraitBounds<T> {
     type Output;
     type Error;
@@ -83,7 +80,6 @@ pub trait ImprovedTraitBounds<T> {
     fn process(&self, input: T) -> Result<Self::Output, Self::Error>;
 }
 
-/// 复杂trait bounds的实现
 impl<T, U, const ROWS: usize, const COLS: usize> ImprovedTraitBounds<T>
     for ConstGenericMatrix<U, ROWS, COLS>
 where
@@ -106,6 +102,7 @@ where
     U: std::fmt::Display,
 {
     /// 格式化矩阵数据为字符串
+    /// as
     #[allow(clippy::excessive_nesting)]
     fn format_matrix_data(&self) -> String {
         let mut result = String::new();
@@ -120,9 +117,7 @@ where
     }
 }
 
-/// 利用Rust 1.90优化的类型推断
-///
-/// 在Rust 1.90中，类型推断得到了显著优化
+/// 利用Rust 1.90optimizationtype inference
 #[allow(dead_code)]
 pub struct TypeInferenceOptimized<T> {
     data: Vec<T>,
@@ -152,6 +147,8 @@ impl<T> TypeInferenceOptimized<T> {
     }
 
     /// 演示改进的类型推断
+    /// demonstration type infer
+    /// Demonstration of改进type inference
     pub fn process_with_improved_inference<F, R>(&self, processor: F) -> Vec<R>
     where
         F: Fn(&T) -> R,
@@ -161,6 +158,8 @@ impl<T> TypeInferenceOptimized<T> {
     }
 
     /// 演示更智能的类型推断
+    /// demonstration type infer
+    /// Demonstration of更智能type inference
     pub fn smart_type_inference<F>(&mut self, processor: F) -> Result<()>
     where
         F: FnOnce(&mut Vec<T>) -> Result<()>,
@@ -170,9 +169,6 @@ impl<T> TypeInferenceOptimized<T> {
     }
 }
 
-/// 利用Rust 1.90新的泛型约束
-///
-/// 在Rust 1.90中，泛型约束得到了显著改进
 pub struct GenericConstraints<T, U>
 where
     T: Display + Clone,
@@ -197,6 +193,7 @@ where
     }
 
     /// 演示新的泛型约束
+    /// demonstration generic
     pub fn process_with_new_constraints<F, R>(&self, processor: F) -> R
     where
         F: FnOnce(&T, &U) -> R,
@@ -206,6 +203,7 @@ where
     }
 
     /// 演示更智能的泛型约束
+    /// demonstration generic
     pub fn smart_generic_constraints<F>(&mut self, processor: F) -> Result<()>
     where
         F: FnOnce(&mut T, &mut U) -> Result<()>,
@@ -223,9 +221,7 @@ where
     }
 }
 
-/// 利用Rust 1.90改进的关联类型
-///
-/// 在Rust 1.90中，关联类型得到了显著改进
+/// 利用Rust 1.90改进associated type
 pub trait ImprovedAssociatedTypes {
     type Input;
     type Output;
@@ -237,6 +233,7 @@ pub trait ImprovedAssociatedTypes {
 }
 
 /// 复杂关联类型的实现
+/// complex associated type
 impl<T, U> ImprovedAssociatedTypes for GenericConstraints<T, U>
 where
     T: Display + Clone,
@@ -260,9 +257,6 @@ where
     }
 }
 
-/// 利用Rust 1.90的泛型特化
-///
-/// 在Rust 1.90中，泛型特化得到了显著改进
 pub struct GenericSpecialization<T> {
     data: T,
     special_handling: bool,
@@ -286,6 +280,7 @@ impl<T> GenericSpecialization<T> {
 }
 
 /// 为特定类型提供特化实现
+/// as type
 impl GenericSpecialization<String> {
     pub fn process_string(&self) -> String {
         if self.special_handling {
@@ -306,7 +301,6 @@ impl GenericSpecialization<i32> {
     }
 }
 
-/// 综合演示Rust 1.90真正的泛型特性
 pub fn demonstrate_rust_190_real_generics() -> Result<()> {
     println!("🚀 演示 Rust 1.90 真正的泛型特性");
     println!("==========================================");

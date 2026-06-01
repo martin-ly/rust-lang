@@ -422,7 +422,7 @@ mindmap
 graph TB
     subgraph 异步
         A1[Tokio]
-        A2[async-std]
+        A2[async-std [已归档]]
         A3[smol]
     end
 

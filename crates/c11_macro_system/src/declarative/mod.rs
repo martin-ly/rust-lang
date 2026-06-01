@@ -1,8 +1,8 @@
 //! 声明宏实现和示例
-//!
-//! 本模块包含使用`macro_rules!`定义的各种声明宏示例。
+//! and example
 
 /// 基础宏示例
+/// foundation example
 pub mod basic_macros;
 
 /// 高级宏模式
@@ -12,4 +12,5 @@ pub mod advanced_macros;
 pub mod recursive_macros;
 
 /// 实用宏集合
+/// set
 pub mod utility_macros;

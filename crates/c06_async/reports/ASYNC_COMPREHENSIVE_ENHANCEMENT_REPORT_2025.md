@@ -160,7 +160,7 @@ Config = (A, M)
 
 **实测数据** (AMD Ryzen 9 5950X):
 
-| 指标 | Tokio | Smol | async-std |
+| 指标 | Tokio | Smol | async-std [已归档] |
  param($match) $match.Value -replace '[-:]+', ' --- ' ------- param($match) $match.Value -replace '[-:]+', ' --- ' -----------|
 | 任务创建 (1000个) | 245 μs | **189 μs** | 267 μs |
 | 上下文切换 | 0.31 μs | **0.22 μs** | 0.34 μs |
@@ -174,7 +174,7 @@ Config = (A, M)
 Web 服务 → Tokio (完整生态)
 CLI 工具 → Smol (轻量快速)
 嵌入式 → Smol (体积小)
-学习入门 → async-std (API友好)
+学习入门 → smol (API友好)
 ```
 
 **章节结构**:
@@ -403,7 +403,7 @@ Actor 不变量:
 │   运行时 (Runtime)                   │
 │   • Tokio                            │
 │   • Smol                             │
-│   • async-std                        │
+│   • async-std [已归档]                        │
 └──────────────┬──────────────────────┘
                │
 ┌──────────────▼──────────────────────┐

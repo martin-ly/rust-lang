@@ -1,18 +1,20 @@
 //! Linux io_uring 高性能 I/O 实战示例
-//!
-//! 本示例展示 Linux io_uring 接口在 Rust 中的应用，
+//! Linux io_uring performance I/O example
+//! Linux io_uring 高performance I/O 实战Example of
 //! 包括批量读写、零拷贝网络 I/O 和异步文件操作。
-//!
+//! 、network I/O and async file operation 。
+//! 包括批量读写、零拷贝network I/O andasyncfile operation。
 //! **平台限制**: 仅 Linux 5.1+ 支持 io_uring。
-//!
+//! **platform **: Linux 5.1+ io_uring。
 //! **依赖**: `tokio-uring` 或 `io-uring` crate。
-//!
+//! **依赖**: `tokio-uring` or `io-uring` crate。
 //! 权威来源:
+//! Source :
+//! 权威source:
 //! - [Cloudflare: io_uring 实践](https://blog.cloudflare.com/io_uring-the-future-of-async/)
 //! - [Linux kernel io_uring 文档](https://kernel.dk/io_uring.pdf)
-//!
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! # Linux only
 //! cargo run --example io_uring_demo -p c10_networks
 //! ```
@@ -22,22 +24,24 @@ use std::io;
 // ==================== 示例 1: io_uring 基础概念（纯说明） ====================
 
 /// io_uring 核心概念速览
-///
-/// io_uring 是 Linux 5.1+ 引入的异步 I/O 接口，通过共享内存环形队列
-/// 实现用户态与内核态的高效通信，避免传统 epoll + read/write 的系统调用开销。
-///
+/// io_uring core concept
 /// ## 核心组件
+/// ## core
 /// - **Submission Queue (SQ)**: 用户态提交 I/O 请求
 /// - **Completion Queue (CQ)**: 内核态返回 I/O 结果
 /// - **Ring Buffer**: 共享内存映射，零拷贝传递请求
-///
-/// ## 与 epoll 的对比
+/// - **Ring Buffer**: shared memory ，
+/// ## and epoll to比
 /// | 特性 | epoll | io_uring |
-/// |------|-------|----------|
 /// | 系统调用次数 | 每次 I/O 需 syscall | batch 后仅需 1 次 syscall |
+/// | system | I/O syscall | batch after 1 syscall |
 /// | 数据拷贝 | 内核 ↔ 用户态拷贝 | 支持 registered buffers（零拷贝） |
+/// | | kernel ↔ | registered buffers（） |
+/// | 数据拷贝 | kernel ↔ 用户态拷贝 | Supports registered buffers（零拷贝） |
 /// | 异步文件 I/O | 需线程池模拟 | 原生支持（Linux AIO 替代） |
+/// | async I/O | thread pool | （Linux AIO ） |
 /// | 性能 | 高 | 更高（批处理 + 轮询模式） |
+/// | performance | | （ + ） |
 fn io_uring_concepts() {
     println!("--- io_uring 核心概念 ---");
     println!("  io_uring 通过一对共享内存环形队列连接用户态和内核态:");
@@ -246,7 +250,6 @@ fn io_uring_performance_tips() {
 
 // ==================== 示例 6: io_uring vs epoll 代码对比 ====================
 
-/// 传统的 epoll + read 伪代码
 fn _traditional_epoll_pseudo_code() {
     println!("\n--- 传统 epoll 伪代码 ---");
     println!("  loop {{");
@@ -259,6 +262,7 @@ fn _traditional_epoll_pseudo_code() {
 }
 
 /// io_uring 批处理伪代码
+/// io_uring
 fn _io_uring_pseudo_code() {
     println!("\n--- io_uring 批处理伪代码 ---");
     println!("  loop {{");

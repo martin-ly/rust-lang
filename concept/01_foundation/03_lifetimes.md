@@ -1,3 +1,7 @@
+> **内容分级**: [综述级]
+>
+> **本节关键术语**: 生命周期 (Lifetime) · 生命周期注解 (Lifetime Annotation) · 静态生命周期 ('static) · 省略规则 (Elision) — [完整对照表](../00_meta/terminology_glossary.md)
+
 # Lifetimes（生命周期）
 >
 > **受众**: [初学者]

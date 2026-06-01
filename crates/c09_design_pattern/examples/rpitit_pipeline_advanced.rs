@@ -1,16 +1,21 @@
 //! Rust 1.90 RPITIT 流水线模式高级示例
-//!
+//! Rust 1.90 RPITIT pipeline example
 //! 本示例展示：
-//! 1. Return Position impl Trait in Traits (RPITIT)
+//! this example ：
 //! 2. 零成本抽象的流水线模式
+//! 2. cost pipeline
 //! 3. 可组合的数据处理管道
+//! 3. combination pipe
 //! 4. 惰性求值与迭代器链
+//! 4. and
 //! 5. 与传统关联类型的对比
+//! 5. and associated type to
 // ============================================================================
 // 核心 RPITIT Trait - 流水线处理器
 // ============================================================================
 
 /// 流水线处理器 trait (使用 RPITIT)
+/// pipeline trait ( RPITIT)
 pub trait PipelineProcessor {
     type Input;
     type Output;
@@ -19,6 +24,7 @@ pub trait PipelineProcessor {
     fn process(&self, input: Self::Input) -> impl Iterator<Item = Self::Output>;
 
     /// 批量处理 - 返回 impl Iterator (RPITIT)
+    /// 批量Handle - Return impl Iterator (RPITIT)
     fn process_batch<I>(&self, inputs: I) -> impl Iterator<Item = Self::Output>
     where
         I: IntoIterator<Item = Self::Input>,
@@ -34,9 +40,10 @@ pub trait PipelineProcessor {
     fn name(&self) -> &str;
 }
 
-/// 可链接的流水线 trait (使用 RPITIT)
+/// 可链接pipeline trait (Use RPITIT)
 pub trait ChainableProcessor: PipelineProcessor {
     /// 链接下一个处理器
+    /// under
     fn chain<P>(self, next: P) -> ProcessorChain<Self, P>
     where
         Self: Sized,
@@ -120,6 +127,7 @@ where
 }
 
 /// 转换处理器
+/// conversion
 pub struct MapProcessor<F, T>
 where
     F: Fn(String) -> T,
@@ -157,6 +165,7 @@ where
 // ============================================================================
 
 /// 数值生成器
+/// 数值generator
 pub struct RangeGenerator {
     start: i32,
     end: i32,
@@ -182,6 +191,7 @@ impl PipelineProcessor for RangeGenerator {
 }
 
 /// 数值过滤器（偶数）
+/// （）
 pub struct EvenFilter;
 
 impl PipelineProcessor for EvenFilter {
@@ -202,6 +212,7 @@ impl PipelineProcessor for EvenFilter {
 }
 
 /// 数值映射器（平方）
+/// （）
 pub struct SquareMapper;
 
 impl PipelineProcessor for SquareMapper {
@@ -296,6 +307,7 @@ impl PipelineProcessor for RecordValidator {
 }
 
 /// 记录增强器（添加标签）
+/// （）
 pub struct RecordEnricher {
     tag: String,
 }
@@ -321,6 +333,7 @@ impl PipelineProcessor for RecordEnricher {
 }
 
 /// 记录聚合器（提取摘要）
+/// aggregation （summary ）
 #[derive(Debug, Clone)]
 pub struct RecordSummary {
     pub id: u32,
@@ -391,15 +404,18 @@ where
 // ============================================================================
 
 /// 并行处理器 trait
+/// parallelism trait
 pub trait ParallelProcessor {
     type Input: Send;
     type Output: Send;
 
     /// 并行处理（返回 Send 迭代器）
+    /// parallelism （ Send ）
     fn process_parallel(&self, input: Self::Input) -> impl Iterator<Item = Self::Output> + Send;
 }
 
 /// 并行数值处理器
+/// parallelism
 pub struct ParallelNumProcessor {
     multiplier: i32,
 }

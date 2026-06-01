@@ -1,6 +1,7 @@
 //! 进程管理模块边界情况测试套件 / Process Management Module Edge Cases Test Suite
 
 /// 测试进程数量边界情况
+/// process quantity edge situation
 #[test]
 fn test_process_count_boundaries() {
     // 测试零进程
@@ -17,6 +18,7 @@ fn test_process_count_boundaries() {
 }
 
 /// 测试资源限制边界情况
+/// edge situation
 #[test]
 fn test_resource_limit_boundaries() {
     // 测试资源限制边界值
@@ -32,6 +34,7 @@ fn test_resource_limit_boundaries() {
 }
 
 /// 测试超时边界情况
+/// edge situation
 #[test]
 fn test_timeout_boundaries() {
     use std::time::Duration;
@@ -66,6 +69,7 @@ fn test_error_paths() {
 }
 
 /// 测试边界值组合
+/// edge combination
 #[test]
 fn test_boundary_value_combinations() {
     // 测试最小值和最大值组合
@@ -81,6 +85,7 @@ fn test_boundary_value_combinations() {
 }
 
 /// 测试资源耗尽情况
+/// situation
 #[test]
 fn test_resource_exhaustion() {
     // 测试大量进程创建（模拟）
@@ -94,6 +99,7 @@ fn test_resource_exhaustion() {
 }
 
 /// 测试进程生命周期边界情况
+/// process lifetime edge situation
 #[test]
 fn test_process_lifecycle_boundaries() {
     // 测试进程创建
@@ -110,6 +116,7 @@ fn test_process_lifecycle_boundaries() {
 }
 
 /// 测试IPC边界情况
+/// IP Cedge situation
 #[test]
 fn test_ipc_boundaries() {
     use std::time::Duration;

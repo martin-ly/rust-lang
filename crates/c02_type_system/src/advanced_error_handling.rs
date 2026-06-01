@@ -1,18 +1,27 @@
 //! 高级错误处理模块
-//!
-//! 本模块展示了 Rust 1.90 中的高级错误处理特性，包括：
+//! error handling module
+//! 高级error handlingmodule
 //! - 自定义错误类型
+//! - definition error type
+//! - 自definitionerror type
 //! - 错误链和上下文
+//! - and on under
 //! - 错误恢复机制
+//! - error recovery mechanism
 //! - 错误转换和映射
+//! - error conversion and
 //! - 错误日志和监控
+//! - and
 //! - 错误处理最佳实践
-//!
+//! - error handling
 //! # 文件信息
+//! #
 //! - 文件: advanced_error_handling.rs
 //! - 创建日期: 2025-01-27
+//! - date : 2025-01-27
 //! - 版本: 1.0
-//! - Rust版本: 1.90.0
+//! - this : 1.0
+//! - 版this: 1.0
 // - Edition: 2024
 
 use std::collections::HashMap;
@@ -23,19 +32,21 @@ use std::time::{SystemTime, UNIX_EPOCH};
 // ==================== 1. 自定义错误类型 ====================
 
 /// 应用错误类型
-///
-/// 展示了 Rust 1.90 中的自定义错误类型设计
+/// application error type
 #[derive(Debug, Clone)]
 pub enum AppError {
     /// 输入验证错误
     Validation(ValidationError),
     /// 网络错误
+    /// network
     Network(NetworkError),
     /// 数据库错误
+    /// database
     Database(DatabaseError),
     /// 业务逻辑错误
     Business(BusinessError),
     /// 系统错误
+    /// system
     System(SystemError),
     /// 配置错误
     Config(ConfigError),
@@ -58,6 +69,7 @@ pub struct ValidationError {
 }
 
 /// 网络错误
+/// network
 #[derive(Debug, Clone)]
 pub struct NetworkError {
     pub url: String,
@@ -66,6 +78,7 @@ pub struct NetworkError {
 }
 
 /// 数据库错误
+/// database
 #[derive(Debug, Clone)]
 pub struct DatabaseError {
     pub operation: String,
@@ -83,6 +96,7 @@ pub struct BusinessError {
 }
 
 /// 系统错误
+/// system
 #[derive(Debug, Clone)]
 pub struct SystemError {
     pub component: String,
@@ -167,8 +181,9 @@ impl std::error::Error for AppError {}
 // ==================== 2. 错误链和上下文 ====================
 
 /// 错误上下文
-///
+/// on under
 /// 提供了错误的上下文信息
+/// on under
 #[derive(Debug, Clone)]
 pub struct ErrorContext {
     pub timestamp: u64,
@@ -211,6 +226,7 @@ impl ErrorContext {
 }
 
 /// 带上下文的错误
+/// on under
 #[derive(Debug, Clone)]
 pub struct ContextualError {
     pub error: AppError,
@@ -280,11 +296,13 @@ impl std::error::Error for ContextualError {}
 // ==================== 3. 错误恢复机制 ====================
 
 /// 错误恢复策略
+/// error recovery strategy
 #[derive(Debug, Clone)]
 pub enum RecoveryStrategy {
     /// 重试
     Retry { max_attempts: u32, delay_ms: u64 },
     /// 回退到默认值
+    /// to
     Fallback { default_value: String },
     /// 跳过操作
     Skip,
@@ -295,6 +313,7 @@ pub enum RecoveryStrategy {
 }
 
 /// 错误恢复器
+/// error recovery
 #[allow(dead_code)]
 pub struct ErrorRecovery {
     strategies: HashMap<String, RecoveryStrategy>,
@@ -395,6 +414,7 @@ impl Default for ErrorRecovery {
 // ==================== 4. 错误转换和映射 ====================
 
 /// 错误转换器
+/// error conversion
 #[allow(dead_code)]
 pub struct ErrorTransformer {
     mappings: HashMap<String, Box<dyn Fn(AppError) -> AppError + Send + Sync>>,
@@ -450,6 +470,7 @@ impl Default for ErrorTransformer {
 // ==================== 5. 错误日志和监控 ====================
 
 /// 错误日志级别
+/// level
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum ErrorLevel {
     Debug,
@@ -477,6 +498,8 @@ pub struct ErrorMonitor {
 }
 
 /// 错误指标
+/// indicator
+/// 错误indicator
 #[derive(Debug, Default)]
 pub struct ErrorMetrics {
     pub total_errors: u64,
@@ -578,6 +601,7 @@ impl Default for ErrorMonitor {
 // ==================== 6. 错误处理最佳实践 ====================
 
 /// 错误处理工具
+/// error handling tool
 #[allow(dead_code)]
 pub struct ErrorHandler {
     monitor: ErrorMonitor,
@@ -610,6 +634,7 @@ impl ErrorHandler {
     }
 
     /// 确定错误级别
+    /// level
     fn determine_error_level(&self, error: &AppError) -> ErrorLevel {
         match error {
             AppError::Validation(_) => ErrorLevel::Warning,
@@ -636,11 +661,15 @@ impl ErrorHandler {
     }
 
     /// 添加恢复策略
+    /// strategy
+    /// 添加Resumestrategy
     pub fn add_recovery_strategy(&mut self, error_type: String, strategy: RecoveryStrategy) {
         self.recovery.add_strategy(error_type, strategy);
     }
 
     /// 添加错误转换
+    /// error conversion
+    /// 添加error conversion
     pub fn add_error_transformation<F>(&mut self, from_type: String, transformer: F)
     where
         F: Fn(AppError) -> AppError + Send + Sync + 'static,
@@ -658,6 +687,8 @@ impl Default for ErrorHandler {
 // ==================== 演示函数 ====================
 
 /// 演示所有高级错误处理特性
+/// demonstration all error handling feature
+/// Demonstration of所有高级error handlingfeature
 pub fn demonstrate_advanced_error_handling() {
     println!("=== 高级错误处理演示 ===\n");
 

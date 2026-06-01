@@ -405,7 +405,7 @@ loop {
 
 ```text
 ┌─────────────┐
-│  Executor   │  (Tokio/async-std)
+│  Executor   │  (Tokio/smol)
 └──────┬──────┘
        │
        ├──→ [Future 1] ──→ [Poll::Pending at await point]

@@ -1,9 +1,11 @@
 //! 通用优先队列封装：最小堆/最大堆，支持同步/异步批处理
+//! ：minimum heap /maximum heap ，synchronous /async
 use anyhow::Result;
 use std::cmp::Reverse;
 use std::collections::BinaryHeap;
 
 /// 堆类型
+/// heap type
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum HeapKind {
     Max,
@@ -63,6 +65,7 @@ impl<T: Ord> PriorityQueue<T> {
     }
 
     /// 批量推入（同步）
+    /// （synchronous ）
     pub fn extend<I: IntoIterator<Item = T>>(&mut self, iter: I) {
         for v in iter {
             self.push(v);
@@ -71,6 +74,7 @@ impl<T: Ord> PriorityQueue<T> {
 }
 
 /// 异步批量构建一个堆并返回（CPU 密集：spawn_blocking）
+/// async heap and （CPU ：spawn_blocking）
 pub async fn build_heap_async<T: Ord + Send + 'static>(
     kind: HeapKind,
     data: Vec<T>,

@@ -4,6 +4,7 @@ use std::sync::atomic::AtomicBool;
 use std::sync::{Arc, Mutex};
 
 /// 共享内存区域实现（简化版本）
+/// shared memory area （this ）
 pub struct SharedMemoryRegion {
     name: String,
     is_closed: Arc<AtomicBool>,
@@ -12,6 +13,7 @@ pub struct SharedMemoryRegion {
 
 impl SharedMemoryRegion {
     /// 创建新的共享内存区域
+    /// shared memory area
     pub fn new(name: &str, _size: usize, _config: crate::types::IpcConfig) -> IpcResult<Self> {
         Ok(Self {
             name: name.to_string(),
@@ -21,6 +23,7 @@ impl SharedMemoryRegion {
     }
 
     /// 连接到现有的共享内存区域
+    /// to shared memory area
     pub fn connect(name: &str, _config: crate::types::IpcConfig) -> IpcResult<Self> {
         Ok(Self {
             name: name.to_string(),

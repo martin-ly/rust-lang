@@ -1,10 +1,11 @@
 //! Rust 1.90 dyn upcasting 适配器模式示例
-//!
 //! 本示例展示：
-//! 1. trait 对象的上转型（dyn upcasting）
+//! this example ：
+//! 1. trait to象on转型（dyn upcasting）
 //! 2. 适配器模式的层次结构
-//! 3. 多层trait继承的实际应用
+//! 2. adapter hierarchy structure
 //! 4. 与传统方案的对比
+//! 4. and to
 use std::fmt;
 
 // ============================================================================
@@ -73,6 +74,7 @@ impl fmt::Display for HealthStatus {
 }
 
 /// 智能设备（同时可控制和可监控）
+/// （and ）
 pub trait SmartDevice: Controllable + Monitorable {
     fn firmware_version(&self) -> &str;
     fn update_firmware(&mut self, version: &str) -> Result<(), String>;
@@ -172,7 +174,6 @@ impl SmartDevice for SmartBulb {
 // 适配器层
 // ============================================================================
 
-/// 旧设备适配器（将不支持监控的设备适配为 SmartDevice）
 pub struct LegacyDeviceAdapter {
     device: Box<dyn Controllable>,
     id: String,
@@ -245,6 +246,7 @@ impl SmartDevice for LegacyDeviceAdapter {
 // ============================================================================
 
 /// 处理任何设备（基础层）
+/// （foundation ）
 pub fn process_device(device: &dyn Device) {
     println!("\n📱 设备信息:");
     println!("  ID: {}", device.device_id());
@@ -253,6 +255,7 @@ pub fn process_device(device: &dyn Device) {
 }
 
 /// 处理可控制设备（中间层）
+/// （in ）
 pub fn process_controllable(device: &mut dyn Controllable) {
     println!("\n🎮 控制设备:");
     let _ = device.turn_on();
@@ -264,6 +267,7 @@ pub fn process_controllable(device: &mut dyn Controllable) {
 }
 
 /// 处理可监控设备（中间层）
+/// （in ）
 pub fn process_monitorable(device: &dyn Monitorable) {
     println!("\n📊 监控设备:");
     let metrics = device.get_metrics();
@@ -277,6 +281,7 @@ pub fn process_monitorable(device: &dyn Monitorable) {
 }
 
 /// 处理智能设备（顶层）
+/// （）
 pub fn process_smart_device(device: &mut dyn SmartDevice) {
     println!("\n🤖 智能设备:");
     println!("  固件版本: {}", device.firmware_version());
@@ -320,6 +325,7 @@ impl DeviceManager {
     }
 
     /// 控制所有设备
+    /// all
     pub fn control_all(&mut self, turn_on: bool) {
         println!("\n🎛️  {} 所有设备", if turn_on { "打开" } else { "关闭" });
         for device in &mut self.devices {
@@ -339,6 +345,7 @@ impl DeviceManager {
     }
 
     /// 监控所有设备
+    /// all
     pub fn monitor_all(&self) {
         println!("\n📈 监控所有设备");
         for device in &self.devices {
@@ -353,6 +360,7 @@ impl DeviceManager {
     }
 
     /// 列出所有设备
+    /// all
     pub fn list_devices(&self) {
         println!("\n📋 设备列表");
         for device in &self.devices {

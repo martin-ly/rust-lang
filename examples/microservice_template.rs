@@ -2,15 +2,19 @@
 //   cargo add tokio --features full
 //   cargo run --example microservice_template.rs
 //! 微服务模板
-//! 
+//! microservice
 //! 整合 C06(异步), C09(设计模式), C10(网络)
-//! 
+//! integration C06(async ), C09(design ), C10(network )
 //! 特性:
+//! feature :
 //! - 配置管理 (Builder 模式)
+//! - (Builder )
 //! - 服务注册 (单例模式)
+//! - service registration (singleton )
 //! - 请求处理 (策略模式)
+//! - (strategy )
 //! - 日志记录 (观察者模式)
-//! 
+//! - (observer )
 //! 运行: cargo run --example microservice_template
 
 use std::collections::HashMap;
@@ -21,6 +25,8 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use tokio::sync::RwLock;
 
 /// 服务配置 (Builder 模式)
+/// (Builder )
+/// 服务Configure (Builder 模式)
 pub struct ServiceConfig {
     pub name: String,
     pub host: String,
@@ -85,6 +91,7 @@ impl ServiceConfigBuilder {
 }
 
 /// 服务注册表 (单例模式)
+/// service registration (singleton )
 pub struct ServiceRegistry {
     services: RwLock<HashMap<String, SocketAddr>>,
 }
@@ -114,6 +121,7 @@ impl ServiceRegistry {
 }
 
 /// HTTP 请求
+/// HTTP
 #[derive(Debug, Clone)]
 pub struct HttpRequest {
     pub method: String,
@@ -123,6 +131,7 @@ pub struct HttpRequest {
 }
 
 /// HTTP 响应
+/// HTTP
 #[derive(Debug, Clone)]
 pub struct HttpResponse {
     pub status: u16,
@@ -168,12 +177,14 @@ impl HttpResponse {
 }
 
 /// 请求处理器 trait (策略模式)
+/// trait (strategy )
 #[async_trait::async_trait]
 pub trait RequestHandler: Send + Sync {
     async fn handle(&self, req: HttpRequest) -> HttpResponse;
 }
 
 /// 健康检查处理器
+/// health check
 pub struct HealthHandler;
 
 #[async_trait::async_trait]
@@ -184,6 +195,7 @@ impl RequestHandler for HealthHandler {
 }
 
 /// API 处理器
+/// API
 pub struct ApiHandler {
     registry: Arc<ServiceRegistry>,
 }
@@ -209,6 +221,7 @@ impl RequestHandler for ApiHandler {
 }
 
 /// 路由器
+/// router
 #[derive(Default)]
 pub struct Router {
     routes: HashMap<String, Box<dyn RequestHandler>>,
@@ -236,6 +249,7 @@ impl Router {
 }
 
 /// 日志观察者 trait (观察者模式)
+/// observer trait (observer )
 #[async_trait::async_trait]
 pub trait LogObserver: Send + Sync {
     async fn on_request(&self, req: &HttpRequest);
@@ -257,6 +271,7 @@ impl LogObserver for ConsoleLogger {
 }
 
 /// 微服务
+/// microservice
 pub struct Microservice {
     config: ServiceConfig,
     router: Arc<Router>,

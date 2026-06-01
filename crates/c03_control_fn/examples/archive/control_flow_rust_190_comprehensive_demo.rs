@@ -1,15 +1,17 @@
 //! Rust 1.90 综合特性演示
-//!
-//! 本示例展示了 Rust 1.90 版本的所有主要新特性和增强功能：
+//! Rust 1.90 synthesize feature demonstration
 //! - 异步Drop
+//! - async Drop
 //! - 异步生成器
-//! - Polonius借用检查器改进
+//! - async
 //! - 下一代特质求解器
+//! - under trait
 //! - 并行前端编译
+//! - parallelism frontend
 //! - 性能优化特性
-//!
+//! - performance optimization feature
 //! 运行方式：
-//! ```bash
+//! Run way ：
 //! cargo run --example rust_190_comprehensive_demo
 //! ```
 use c03_control_fn::{
@@ -70,8 +72,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 /// 综合应用场景演示
-/// 
-/// 展示Rust 1.90特性在实际应用中的综合使用。
+/// synthesize application scenario demonstration
 async fn demonstrate_comprehensive_scenarios() -> Result<(), Box<dyn std::error::Error>> {
     
     // 场景1：异步Web服务
@@ -94,8 +95,7 @@ async fn demonstrate_comprehensive_scenarios() -> Result<(), Box<dyn std::error:
 }
 
 /// 异步Web服务演示
-/// 
-/// 展示如何使用Rust 1.90的异步特性构建高性能Web服务。
+/// async Web demonstration
 async fn demonstrate_async_web_service() -> Result<(), Box<dyn std::error::Error>> {
     println!("  构建异步Web服务...");
     
@@ -141,8 +141,7 @@ async fn demonstrate_async_web_service() -> Result<(), Box<dyn std::error::Error
 }
 
 /// 数据处理管道演示
-/// 
-/// 展示如何使用Rust 1.90的异步生成器和性能优化特性构建数据处理管道。
+/// pipe demonstration
 async fn demonstrate_data_processing_pipeline() -> Result<(), Box<dyn std::error::Error>> {
     println!("  构建数据处理管道...");
     
@@ -177,8 +176,7 @@ async fn demonstrate_data_processing_pipeline() -> Result<(), Box<dyn std::error
 }
 
 /// 高性能计算演示
-/// 
-/// 展示如何使用Rust 1.90的性能优化特性进行高性能计算。
+/// performance demonstration
 async fn demonstrate_high_performance_computing() -> Result<(), Box<dyn std::error::Error>> {
     println!("  执行高性能计算...");
     
@@ -224,8 +222,7 @@ async fn demonstrate_high_performance_computing() -> Result<(), Box<dyn std::err
 }
 
 /// 资源管理系统演示
-/// 
-/// 展示如何使用Rust 1.90的异步Drop和资源管理特性构建资源管理系统。
+/// system demonstration
 async fn demonstrate_resource_management_system() -> Result<(), Box<dyn std::error::Error>> {
     println!("  构建资源管理系统...");
     

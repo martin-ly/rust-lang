@@ -1,16 +1,21 @@
 //! Rust 1.90 / Edition 2024 特性示例入口 (历史版本)
+//! Rust 1.90 / Edition 2024 feature example (this )
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//! ⚠️ **this ** - this as reference
 //!
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 pub mod highlights {
     /// 展示 never 类型在不可达终止函数中的使用
+    /// never type in function in
     #[allow(unused)]
     pub fn terminate_with_panic() -> ! {
         panic!("terminated")
     }
 
     /// 展示 if-let 链式匹配
+    /// if-let
     #[allow(unused)]
     pub fn if_let_chain(opt_a: Option<i32>, opt_b: Option<i32>) -> Option<i32> {
         if let Some(a) = opt_a
@@ -24,8 +29,10 @@ pub mod highlights {
 }
 
 /// GATs（泛型关联类型）示例：带借用生命周期的集合访问
+/// GATs（generic associated type ）example ：borrowing lifetime set
 pub mod gats_demo {
     /// 定义一个集合视图 trait，返回值依赖输入生命周期
+    /// definition set trait，return value lifetime
     pub trait CollectionView {
         type Item<'a>
         where
@@ -61,6 +68,7 @@ pub mod gats_demo {
 /// RPITIT（在 trait 方法中返回 impl Trait）示例
 pub mod rpitit_demo {
     /// 文本源：提供按词迭代视图
+    /// this ：
     pub trait TextSource {
         /// 在 trait 方法中返回位置 impl Iterator（RPITIT）
         fn words<'a>(&'a self) -> impl Iterator<Item = &'a str> + 'a;
@@ -102,6 +110,7 @@ pub mod rpitit_demo {
 }
 
 /// dyn upcasting（子 trait 到父 trait 的动态上行转型）示例
+/// dyn upcasting（ trait to trait on ）example
 pub mod dyn_upcasting_demo {
     pub trait Logger {
         fn log(&self, msg: &str) -> String;

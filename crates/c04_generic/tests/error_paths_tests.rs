@@ -3,6 +3,7 @@
 #![allow(clippy::bool_assert_comparison)]
 
 /// 测试错误输入情况
+/// situation
 #[test]
 fn test_error_inputs() {
     // 测试类型不匹配（编译时错误，这里只测试运行时）
@@ -18,6 +19,7 @@ fn test_error_inputs() {
 }
 
 /// 测试错误状态情况
+/// state situation
 #[test]
 fn test_error_states() {
     // 测试Trait边界不满足的情况
@@ -31,6 +33,7 @@ fn test_error_states() {
 }
 
 /// 测试异常情况
+/// situation
 #[test]
 fn test_exception_cases() {
     // 测试类型转换异常
@@ -44,6 +47,7 @@ fn test_exception_cases() {
 }
 
 /// 测试资源耗尽情况
+/// situation
 #[test]
 fn test_resource_exhaustion() {
     // 测试大量泛型实例化
@@ -57,6 +61,7 @@ fn test_resource_exhaustion() {
 }
 
 /// 测试并发安全
+/// concurrency
 #[test]
 fn test_concurrent_safety() {
     use std::{
@@ -87,6 +92,7 @@ fn test_concurrent_safety() {
 }
 
 /// 测试泛型约束错误
+/// generic
 #[test]
 fn test_generic_constraint_errors() {
     // 测试Trait边界不满足的情况
@@ -108,6 +114,7 @@ fn test_generic_constraint_errors() {
 }
 
 /// 测试类型推断错误
+/// type infer
 #[test]
 fn test_type_inference_errors() {
     // 测试类型推断失败的情况

@@ -15,23 +15,30 @@ pub mod windows_fork;
 pub use windows_fork::WindowsFork;
 
 /// Fork trait，提供跨平台的进程分叉接口
+/// Fork trait，platform process
 pub trait Fork {
     /// 分叉当前进程
+    /// when before process
     fn fork(&self) -> crate::error::Result<ForkResult>;
 
     /// 检查是否为子进程
+    /// as process
     fn is_child(&self) -> bool;
 
     /// 检查是否为父进程
+    /// as process
     fn is_parent(&self) -> bool;
 }
 
 /// Fork结果
+/// Forkresult
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ForkResult {
     /// 父进程
+    /// process
     Parent,
     /// 子进程
+    /// process
     Child,
     /// 分叉失败
     Failed,
@@ -39,11 +46,13 @@ pub enum ForkResult {
 
 impl ForkResult {
     /// 检查是否为父进程
+    /// as process
     pub fn is_parent(&self) -> bool {
         matches!(self, ForkResult::Parent)
     }
 
     /// 检查是否为子进程
+    /// as process
     pub fn is_child(&self) -> bool {
         matches!(self, ForkResult::Child)
     }

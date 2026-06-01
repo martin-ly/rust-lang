@@ -1,21 +1,33 @@
 //! Rust 1.91 进程管理特性实现模块（历史版本）
+//! Rust 1.91 process feature module （this ）
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//! ⚠️ **this ** - this as reference
 //!
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //!
 //! 本模块展示了 Rust 1.91 在进程管理场景中的应用，包括：
+//! This module demonstrates Rust 1.91 in process scenario in application ，：
 //! - const 上下文增强（进程配置计算）
+//! - const on under （process ）
 //! - 新的稳定 API（BufRead::skip_while, ControlFlow 改进等）
 //! - JIT 编译器优化（进程数据处理性能提升）
+//! - JIT optimization （process performance ）
 //! - 内存分配器优化（进程通信优化）
+//! - allocator optimization （process optimization ）
 //! - 异步迭代器改进（进程输出处理）
+//! - async （process source ）
 //!
 //! # 文件信息
+//! #
 //! - 文件: rust_191_features.rs
 //! - 创建日期: 2025-01-27
+//! - date : 2025-01-27
 //! - 版本: 1.0
+//! - this : 1.0
 //! - Rust版本: 1.91.0
+//! - Rustthis : 1.91.0
 //! - Edition: 2024
 use std::io::{BufRead, BufReader, Cursor};
 use std::ops::ControlFlow;
@@ -23,10 +35,13 @@ use std::ops::ControlFlow;
 // ==================== 1. const 上下文增强在进程配置中的应用 ====================
 
 /// Rust 1.91 const 上下文增强在进程配置中的应用
+/// Rust 1.91 const on under in process in application
 pub mod const_process_config {
     /// 进程配置系统
+    /// process system
     ///
     /// 使用 Rust 1.91 的 const 上下文增强进行编译时配置计算
+    /// Rust 1.91 const on under compile-time
     pub struct ProcessConfigSystem;
 
     impl ProcessConfigSystem {
@@ -57,6 +72,7 @@ pub mod const_process_config {
     /// 资源限制配置
     ///
     /// 使用 const 上下文计算资源限制
+    /// const on under
     pub struct ResourceLimitsConfig;
 
     impl ResourceLimitsConfig {
@@ -81,12 +97,15 @@ pub mod const_process_config {
 // ==================== 2. 新的稳定 API 在进程管理中的应用 ====================
 
 /// Rust 1.91 新的稳定 API 在进程管理中的应用
+/// Rust 1.91 API in process in application
 pub mod process_new_apis {
     use super::*;
 
     /// 使用 BufRead::skip_while 解析进程输出
+    /// BufRead::skip_while process
     ///
     /// Rust 1.91 新增：跳过满足条件的字节
+    /// Rust 1.91 ：condition
     pub fn parse_process_output<R: BufRead>(reader: &mut R) -> Result<Vec<String>, std::io::Error> {
         let mut lines = Vec::new();
         let mut buf = String::new();
@@ -110,8 +129,10 @@ pub mod process_new_apis {
     }
 
     /// 使用改进的 ControlFlow 进行进程验证
+    /// ControlFlow process
     ///
     /// Rust 1.91 改进了 ControlFlow，可以携带更详细的错误信息
+    /// Rust 1.91 ControlFlow，can error message
     pub fn validate_process_config(
         max_processes: usize,
         current_processes: usize,
@@ -127,6 +148,7 @@ pub mod process_new_apis {
     }
 
     /// 使用 ControlFlow 进行进程资源检查
+    /// ControlFlow process
     pub fn check_process_resources(
         memory_mb: usize,
         max_memory_mb: usize,
@@ -154,12 +176,16 @@ pub mod process_new_apis {
 // ==================== 3. JIT 编译器优化在进程数据处理中的应用 ====================
 
 /// Rust 1.91 JIT 编译器优化在进程数据处理中的应用
+/// Rust 1.91 JIT optimization in process in application
 ///
 /// Rust 1.91 对迭代器操作进行了优化，性能提升 10-25%
+/// Rust 1.91 to optimization ，performance 10-25%
 pub mod process_jit_optimizations {
     /// 处理进程输出数据
+    /// process
     ///
     /// Rust 1.91 JIT 优化：迭代器链式操作性能提升约 15-25%
+    /// Rust 1.91 JIT optimization ：performance 15-25%
     pub fn process_process_output(lines: &[String]) -> Vec<String> {
         lines
             .iter()
@@ -170,8 +196,10 @@ pub mod process_jit_optimizations {
     }
 
     /// 计算进程统计信息
+    /// process
     ///
     /// Rust 1.91 JIT 优化：简单求和操作性能提升约 10-15%
+    /// Rust 1.91 JIT optimization ：simple and performance 10-15%
     pub fn calculate_process_stats(process_times: &[u64]) -> (u64, u64, u64) {
         let sum: u64 = process_times.iter().sum();
         let count = process_times.len() as u64;
@@ -181,8 +209,10 @@ pub mod process_jit_optimizations {
     }
 
     /// 过滤和转换进程数据
+    /// and conversion process
     ///
     /// Rust 1.91 JIT 优化：复杂链式操作性能提升约 20-25%
+    /// Rust 1.91 JIT optimization ：complex performance 20-25%
     pub fn filter_and_transform_process_data(data: &[i32]) -> Vec<i32> {
         data.iter()
             .filter(|&&x| x > 0)
@@ -192,6 +222,7 @@ pub mod process_jit_optimizations {
     }
 
     /// 性能演示
+    /// performance demonstration
     pub fn demonstrate_jit_optimizations() {
         println!("\n=== 进程数据处理 JIT 优化演示 ===");
 
@@ -217,12 +248,16 @@ pub mod process_jit_optimizations {
 // ==================== 4. 内存分配器优化在进程通信中的应用 ====================
 
 /// Rust 1.91 内存分配器优化在进程通信中的应用
+/// Rust 1.91 allocator optimization in process in application
 ///
 /// Rust 1.91 改进了内存分配器，小对象分配性能提升 25-30%
+/// Rust 1.91 allocator ，to performance 25-30%
 pub mod process_memory_optimizations {
     /// 创建小对象用于进程通信
+    /// to process
     ///
     /// Rust 1.91 优化：小对象（< 32 bytes）分配性能提升约 25-30%
+    /// Rust 1.91 optimization ：to （< 32 bytes）performance 25-30%
     pub fn create_small_message_objects() -> Vec<Vec<u8>> {
         let mut messages = Vec::new();
         // Rust 1.91 优化：频繁的小对象分配更加高效
@@ -233,8 +268,10 @@ pub mod process_memory_optimizations {
     }
 
     /// 处理进程间消息
+    /// process
     ///
     /// Rust 1.91 优化：在频繁的小对象分配场景下性能提升
+    /// Rust 1.91 optimization ：in to scenario under performance
     pub fn process_inter_process_messages(data: &str) -> Vec<String> {
         data.lines()
             .filter_map(|line| {
@@ -248,6 +285,7 @@ pub mod process_memory_optimizations {
     }
 
     /// 内存优化演示
+    /// memory optimization demonstration
     pub fn demonstrate_memory_optimizations() {
         println!("\n=== 进程通信内存优化演示 ===");
 
@@ -263,16 +301,20 @@ pub mod process_memory_optimizations {
 // ==================== 5. 异步迭代器改进在进程输出处理中的应用 ====================
 
 /// Rust 1.91 异步迭代器改进在进程输出处理中的应用
+/// Rust 1.91 async in process source in application
 ///
 /// Rust 1.91 对异步迭代器进行了优化，性能提升约 15-20%
+/// Rust 1.91 to async optimization ，performance 15-20%
 #[cfg(feature = "async")]
 pub mod process_async_improvements {
     #[cfg(feature = "async")]
     use futures::stream::{self, Stream, StreamExt};
 
     /// 异步处理进程输出流
+    /// async process stream
     ///
     /// Rust 1.91 优化：异步迭代器性能提升约 15-20%
+    /// Rust 1.91 optimization ：async performance 15-20%
     pub async fn process_async_process_output<S>(stream: S) -> Vec<String>
     where
         S: Stream<Item = String> + Send,
@@ -294,6 +336,7 @@ pub mod process_async_improvements {
     }
 
     /// 异步迭代器性能演示
+    /// async performance demonstration
     pub async fn demonstrate_async_improvements() {
         println!("\n=== 进程输出异步处理改进演示 ===");
 
@@ -315,10 +358,12 @@ pub mod process_async_improvements {
 // ==================== 6. 标准库新 API 在进程管理中的应用 ====================
 
 /// Rust 1.91 标准库新 API 在进程管理中的应用
+/// Rust 1.91 standard library API in process in application
 pub mod process_std_new_apis {
     /// str::split_ascii_whitespace 示例
     ///
     /// Rust 1.91 新增：仅处理 ASCII 空白字符，性能更好
+    /// Rust 1.91 ： ASCII ，performance
     pub fn parse_process_arguments(text: &str) -> Vec<&str> {
         text.split_ascii_whitespace().collect()
     }
@@ -326,6 +371,7 @@ pub mod process_std_new_apis {
     /// Vec::try_reserve_exact 示例
     ///
     /// Rust 1.91 新增：尝试精确分配容量，可能失败
+    /// Rust 1.91 ：，may
     pub fn allocate_process_buffer(
         size: usize,
     ) -> Result<Vec<u8>, std::collections::TryReserveError> {
@@ -335,6 +381,7 @@ pub mod process_std_new_apis {
     }
 
     /// 标准库新 API 演示
+    /// standard library API demonstration
     pub fn demonstrate_std_new_apis() {
         println!("\n=== 标准库新 API 演示 ===");
 
@@ -361,14 +408,18 @@ pub mod process_std_new_apis {
 // ==================== 7. 综合应用示例 ====================
 
 /// Rust 1.91 综合应用示例模块
+/// Rust 1.91 synthesize application example module
 ///
 /// 结合多个 Rust 1.91 特性的实际进程管理场景
+/// Rust 1.91 feature actual process scenario
 pub mod comprehensive_process_examples {
     use super::*;
 
     /// 综合进程管理系统
+    /// synthesize process system
     ///
     /// 使用 const 上下文增强和新的 API
+    /// const on under and API
     pub struct ComprehensiveProcessManager;
 
     impl ComprehensiveProcessManager {
@@ -391,8 +442,10 @@ pub mod comprehensive_process_examples {
     }
 
     /// 高性能进程数据处理管道
+    /// performance process pipe
     ///
     /// 利用 JIT 优化和内存分配改进
+    /// JIT optimization and memory
     pub fn process_process_data_pipeline(data: &[Vec<i32>]) -> Vec<i32> {
         // Rust 1.91 JIT 优化：链式迭代器性能提升约 20-25%
         data.iter()
@@ -404,8 +457,10 @@ pub mod comprehensive_process_examples {
     }
 
     /// 配置文件解析示例
+    /// example
     ///
     /// 使用新的 API 解析进程配置
+    /// API process
     pub fn parse_process_config(config_text: &str) -> Vec<String> {
         let mut cursor = Cursor::new(config_text.as_bytes());
         let mut reader = BufReader::new(&mut cursor);
@@ -435,6 +490,7 @@ pub mod comprehensive_process_examples {
 // ==================== 公开 API ====================
 
 /// Rust 1.91 进程管理特性演示入口
+/// Rust 1.91 process feature demonstration
 pub fn demonstrate_rust_191_process_features() {
     println!("========================================");
     println!("Rust 1.91 进程管理特性演示");

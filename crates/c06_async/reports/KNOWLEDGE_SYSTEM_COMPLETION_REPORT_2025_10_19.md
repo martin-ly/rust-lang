@@ -301,7 +301,7 @@ v(Pin) = (0.7, 0.85, 1.0, 1.0, O(1), 8B, 7, 0.7, 0.9)
 
 ### 4. 运行时对比矩阵 (10_runtime_comparison_matrix.md)
 
-**内容**: Tokio/async-std/Smol的全方位量化对比
+**内容**: Tokio/async-std [已归档]/Smol的全方位量化对比
 
 **对比维度**:
 
@@ -321,7 +321,7 @@ v(Pin) = (0.7, 0.85, 1.0, 1.0, O(1), 8B, 7, 0.7, 0.9)
 
 **量化数据**:
 
-| 指标 | Tokio | async-std | Smol |
+| 指标 | Tokio | async-std [已归档] | Smol |
  param($match) $match.Value -replace '[-:]+', ' --- ' ------- param($match) $match.Value -replace '[-:]+', ' --- ' ------|
 | 总评分 | 9.2/10 | 7.8/10 | 8.3/10 |
 | 10万并发延迟 | 2.1ms | 2.8ms | 2.2ms |
@@ -759,7 +759,7 @@ Future是Monad:
 ### Rust生态
 
 - Rust官方异步工作组
-- Tokio, async-std, Smol团队
+- Tokio, async-std [已归档], Smol团队
 - 异步生态贡献者
 
 ---

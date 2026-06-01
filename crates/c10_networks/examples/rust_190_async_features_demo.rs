@@ -1,10 +1,10 @@
 //! Rust 1.90 异步特性演示示例 (历史版本)
-//!
+//! Rust 1.90 async feature demonstration example (this )
+//! Rust 1.90 asyncfeaturedemonstration example (历史版this)
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//!
+//! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features_demo.rs`
-//!
-//! 本示例展示了如何使用Rust 1.90的新异步特性来改进网络编程
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features_demo.rs`
 use c10_networks::error::{NetworkError, NetworkResult};
 use c10_networks::unified_api::NetClient;
 use futures::StreamExt;
@@ -12,6 +12,7 @@ use std::time::{Duration, Instant};
 use tokio::time::timeout;
 
 /// Rust 1.90 异步特性演示
+/// Rust 1.90 async feature demonstration
 #[tokio::main]
 async fn main() -> NetworkResult<()> {
     // 初始化日志
@@ -38,7 +39,6 @@ async fn main() -> NetworkResult<()> {
     Ok(())
 }
 
-/// 演示1: 异步trait优化
 async fn demo_async_traits() -> NetworkResult<()> {
     println!("\n📡 演示1: 异步trait优化");
 
@@ -62,7 +62,6 @@ async fn demo_async_traits() -> NetworkResult<()> {
     Ok(())
 }
 
-/// 异步网络操作（展示改进的异步trait）
 async fn async_network_operation(
     client: &NetClient,
     host: &str,
@@ -84,6 +83,7 @@ async fn async_network_operation(
 }
 
 /// 演示2: 异步闭包改进
+/// demonstration 2: async
 async fn demo_async_closures() -> NetworkResult<()> {
     println!("\n🔄 演示2: 异步闭包改进");
 
@@ -113,6 +113,7 @@ async fn demo_async_closures() -> NetworkResult<()> {
 }
 
 /// 演示3: 常量泛型推断
+/// demonstration 3: constant generic infer
 async fn demo_const_generics() -> NetworkResult<()> {
     println!("\n🔢 演示3: 常量泛型推断");
 
@@ -133,7 +134,6 @@ async fn demo_const_generics() -> NetworkResult<()> {
     Ok(())
 }
 
-/// 改进的数据包处理函数（使用Rust 1.90的常量泛型推断）
 async fn process_packet_improved<const N: usize>(data: [u8; N]) -> NetworkResult<u32> {
     // Rust 1.90: 编译器自动推断数组长度
     let _len = data.len();
@@ -150,6 +150,7 @@ async fn process_packet_improved<const N: usize>(data: [u8; N]) -> NetworkResult
 }
 
 /// 演示4: 异步迭代器增强
+/// demonstration 4: async
 async fn demo_async_iterators() -> NetworkResult<()> {
     println!("\n🔄 演示4: 异步迭代器增强");
 
@@ -194,6 +195,7 @@ async fn demo_async_iterators() -> NetworkResult<()> {
 }
 
 /// 演示5: 生命周期语法检查
+/// demonstration 5: lifetime
 async fn demo_lifetime_syntax() -> NetworkResult<()> {
     println!("\n🔗 演示5: 生命周期语法检查");
 
@@ -212,6 +214,7 @@ async fn demo_lifetime_syntax() -> NetworkResult<()> {
 }
 
 /// 改进的生命周期处理
+/// lifetime
 async fn with_improved_lifetimes<'a>(
     client: &'a NetClient,
     host: &'a str,
@@ -232,6 +235,7 @@ async fn with_improved_lifetimes<'a>(
 }
 
 /// 生命周期检查示例
+/// lifetime example
 async fn process_with_lifetime_check(data: &[u8]) -> NetworkResult<String> {
     // 模拟异步处理
     tokio::time::sleep(Duration::from_millis(30)).await;
@@ -245,6 +249,7 @@ async fn process_with_lifetime_check(data: &[u8]) -> NetworkResult<String> {
 }
 
 /// 性能基准测试
+/// Performance benchmark
 #[allow(dead_code)]
 async fn benchmark_async_performance() -> NetworkResult<()> {
     println!("\n📊 异步性能基准测试");

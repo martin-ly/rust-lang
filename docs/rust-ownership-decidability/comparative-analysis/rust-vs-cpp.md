@@ -64,8 +64,9 @@
     - [选择 Rust 的场景](#选择-rust-的场景)
     - [混合使用场景](#混合使用场景)
   - [总结](#总结)
-  - Rust 和 C++ 都是强大的系统编程语言。C++ 提供了更大的灵活性和成熟的生态，而 Rust 提供了更强的安全保证和现代工具链。选择哪种语言取决于项目的具体需求、团队经验和风险承受能力。
+  - [Rust 和 C++ 都是强大的系统编程语言。C++ 提供了更大的灵活性和成熟的生态，而 Rust 提供了更强的安全保证和现代工具链。选择哪种语言取决于项目的具体需求、团队经验和风险承受能力](#rust-和-c-都是强大的系统编程语言c-提供了更大的灵活性和成熟的生态而-rust-提供了更强的安全保证和现代工具链选择哪种语言取决于项目的具体需求团队经验和风险承受能力)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 概述
 >
@@ -726,7 +727,7 @@ fn no_iterator_invalidation() {
 
 - **所有权 + Send/Sync**: 编译期数据竞争检测
 - **标准库线程**: std::thread
-- **异步运行时**: Tokio, async-std
+- **异步运行时**: Tokio, async-std [已归档]
 - **消息传递**: 类型安全通道
 - **共享状态**: Mutex, RwLock 自动解锁
 
@@ -793,7 +794,7 @@ use std::sync::Arc;
 | GUI | Qt, GTK, imgui | egui, iced, tauri |
 | 游戏开发 | Unreal, Unity (C#), SDL | Bevy, macroquad, Fyrox |
 | Web 后端 | 较少（CppRESTSDK） | Actix, Axum, Rocket |
-| 网络 | Boost.Asio, libuv | Tokio, async-std |
+| 网络 | Boost.Asio, libuv | Tokio, async-std [已归档] |
 | 序列化 | Protobuf, jsoncpp, nlohmann/json | Serde（统一） |
 | 机器学习 | TensorFlow C++, PyTorch C++ | burn, tch-rs, candle |
 

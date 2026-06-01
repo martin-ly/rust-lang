@@ -1820,7 +1820,7 @@ fn main() {
   - 借助 `thiserror`/`anyhow` 管理跨模式错误；`tracing` 统一观测；`serde` 用于配置/快照（备忘录）序列化。
   - 组合/访问者在 AST/DSL 场景可结合 `rowan`/`syn`。
 - 并发与异步模式：
-  - 执行器与原语：`tokio`（全功能）、`async-std`（备选），配合 `tokio::sync`/`futures` 原语实现观察者/事件驱动/生产者-消费者。
+  - 执行器与原语：`tokio`（全功能）、`smol`（轻量备选），配合 `tokio::sync`/`futures` 原语实现观察者/事件驱动/生产者-消费者。
   - 数据并行与流水线：`rayon` 用于并行迭代与归约；跨线程通信优先 `crossbeam`，需要异步可选 `tokio::sync::mpsc`。
   - 会话类型/协议安全（Actor/消息/中介者等高阶落地）：可参考学术成熟实现 `Rumpsteak`、`Ferrite` 以获得通讯协议在类型层面的保证（生产中择优评估稳定性与维护活性）。
 - I/O 与系统互操作：

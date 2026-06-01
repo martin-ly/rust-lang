@@ -2,17 +2,15 @@
 #![allow(unexpected_cfgs)]
 
 //! Rust 1.95 特性 —— WASM/WASI 场景实际可执行代码
-//!
-//! 本模块演示 Rust 1.95 在 WebAssembly 上下文中的六项重要稳定特性：
-//!
+//! Rust 1.95 feature —— WASM /WASI scenario actual
 //! | 特性 | 应用场景 |
-//! |------|----------|
+//! | feature | application scenario |
 //! | `cfg_select!` | 编译时选择 WASI p1/p2、浏览器或原生实现 |
-//! | `bool::TryFrom<{integer}>` | FFI 边界整数标志安全转换为 `bool` |
+//! | `cfg_select!` | compile-time WASI p1/p2、or |
 //! | `core::hint::cold_path` | WASM 错误路径分支预测优化 |
+//! | `core::hint::cold_path` | WASM branch prediction optimization |
+//! | `core::hint::cold_path` | WASM 错误路径branch predictionoptimization |
 //! | `if let` guards | `match` 中处理 wasm-bindgen `Result`/`Option` 模式 |
-//! | `core::range::RangeInclusive` | 端口范围、内存页范围验证 |
-//! | `ControlFlow::is_break`/`is_continue` (const) | 编译期评估的提前退出模式 |
 
 use core::range::RangeInclusive;
 use std::ops::ControlFlow;
@@ -22,31 +20,29 @@ use std::ops::ControlFlow;
 // =========================================================================
 
 /// WASM 运行时环境分类
-///
-/// 用于在编译期根据目标三元组确定当前所处的 WASM 执行环境。
+/// WASM runtime environment classification
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum WasmRuntime {
     /// 浏览器环境（含 Deno 等 Web 兼容运行时）
+    /// environment （ Deno etc. Web runtime ）
+    /// 浏览器environment（含 Deno etc. Web 兼容runtime）
     Browser,
     /// Node.js 环境
     NodeJs,
     /// WASI Preview 1（传统能力驱动模型）
+    /// WASI Preview 1（driver ）
     WasiPreview1,
     /// WASI Preview 2（组件模型）
     WasiPreview2,
     /// 纯 WASM，无宿主接口（`wasm32v1-none`）
     Standalone,
     /// 原生编译目标（非 WASM）
+    /// goal （ WASM ）
     Native,
 }
 
-/// 检测当前编译目标对应的 WASM 运行时环境
-///
-/// 使用 `cfg_select!` 在编译期进行类似 `match` 的配置选择，
-/// 不产生任何运行时开销，替代传统的 `cfg-if` crate。
-///
 /// # 示例
-/// ```
+/// # example
 /// use c12_wasm::rust_195_features::detect_runtime;
 /// let rt = detect_runtime();
 /// ```
@@ -60,8 +56,9 @@ pub const fn detect_runtime() -> WasmRuntime {
 }
 
 /// 获取当前平台推荐的日志输出方式描述
-///
+/// when before platform way describe
 /// 根据编译目标返回对应环境的日志策略说明。
+/// according to goal to environment strategy explain 。
 pub fn platform_log_description() -> &'static str {
     cfg_select! {
         target_env = "wasip1" => "WASI P1: 使用 wasi::stdout 输出日志",
@@ -72,6 +69,7 @@ pub fn platform_log_description() -> &'static str {
 }
 
 /// 获取当前平台可用的文件系统 API 描述
+/// when before platform file system API describe
 pub fn platform_fs_description() -> &'static str {
     cfg_select! {
         target_env = "wasip1" => "WASI P1 文件描述符 API",
@@ -84,25 +82,27 @@ pub fn platform_fs_description() -> &'static str {
 // 使用 `cfg_select!` 在项位置定义平台相关的函数实现。
 cfg_select! {
     target_env = "wasip1" => {
-        /// 模拟 WASI Preview 1 环境下的文件读取
+        /// 模拟 WASI Preview 1 environmentunderfile reading
         pub fn platform_read_file(path: &str) -> Result<String, &'static str> {
             Ok(format!("[WASI P1] 读取文件: {}", path))
         }
     }
     target_env = "wasip2" => {
-        /// 模拟 WASI Preview 2 环境下的文件读取
+        /// 模拟 WASI Preview 2 environmentunderfile reading
         pub fn platform_read_file(path: &str) -> Result<String, &'static str> {
             Ok(format!("[WASI P2] 组件模型读取: {}", path))
         }
     }
     target_arch = "wasm32" => {
-        /// 模拟浏览器 WASM 环境下的文件读取
+        /// 模拟浏览器 WASM environmentunderfile reading
         pub fn platform_read_file(path: &str) -> Result<String, &'static str> {
             Ok(format!("[Browser WASM] 获取资源: {}", path))
         }
     }
     _ => {
         /// 原生环境下的文件读取
+        /// environment under file reading
+        /// 原生environmentunderfile reading
         pub fn platform_read_file(path: &str) -> Result<String, &'static str> {
             std::fs::read_to_string(path).map_err(|_| "native read failed")
         }
@@ -113,22 +113,18 @@ cfg_select! {
 // 2. bool::TryFrom<{integer}> —— FFI 边界安全布尔转换
 // =========================================================================
 
-/// 将 WASM FFI 边界传入的 `u8` 标志安全转换为 `bool`
-///
-/// 在 WASM 与宿主环境（JavaScript、C）交互时，外部代码常以 `0`/`1`
 /// 整数表示布尔值。Rust 1.95 之前需手动检查，现在通过
-/// `bool::try_from` 在边界处获得类型安全，拒绝 `0` 和 `1` 以外的值。
-///
+/// represent 。Rust 1.95 's before ，present
 /// # 参数
-/// - `flag`: 外部传入的 `u8` 整数值
-///
+/// # parameter
 /// # 返回值
+/// # return value
 /// - `Ok(true)` 当且仅当 `flag == 1`
 /// - `Ok(false)` 当且仅当 `flag == 0`
 /// - `Err` 其他所有值
-///
+/// - `Err` its all
 /// # 示例
-/// ```
+/// # example
 /// use c12_wasm::rust_195_features::ffi_bool_from_u8;
 /// assert_eq!(ffi_bool_from_u8(1), Ok(true));
 /// assert!(ffi_bool_from_u8(2).is_err());
@@ -137,33 +133,28 @@ pub fn ffi_bool_from_u8(flag: u8) -> Result<bool, &'static str> {
     bool::try_from(flag).map_err(|_| "FFI bool flag must be 0 or 1")
 }
 
-/// 将 WASI 返回的 `i32` 状态码安全转换为 `bool`
-///
 /// 某些旧版 WASI 绑定以 `0` 表示成功、`1` 表示失败。
+/// WASI `0` represent 、`1` represent 。
 /// 若宿主环境错误地传入 `-1` 或 `2` 等值，此函数可立即捕获。
-///
+/// environment `-1` or `2` etc. ，this function 。
 /// # 参数
-/// - `status`: WASI 函数返回的 `i32` 状态码
+/// # parameter
 pub fn wasi_status_to_bool(status: i32) -> Result<bool, &'static str> {
     bool::try_from(status).map_err(|_| "WASI status must be 0 (success) or 1 (failure)")
 }
 
 /// 批量转换 JS 回调返回的整数标志数组
-///
-/// 常用于处理从 JavaScript 批量传入的布尔标志，例如配置选项数组。
-///
+/// conversion JS mark
 /// # 参数
-/// - `flags`: 外部传入的 `u8` 数组
-///
+/// # parameter
 /// # 返回值
+/// # return value
 /// 全部转换成功时返回 `Ok(Vec<bool>)`，任一失败则返回 `Err`
+/// all conversion `Ok(Vec<bool>)`， `Err`
 pub fn parse_js_bool_flags(flags: &[u8]) -> Result<Vec<bool>, &'static str> {
     flags.iter().map(|&f| ffi_bool_from_u8(f)).collect()
 }
 
-/// 将单个 `u32` 标志转换为 `Option<bool>`
-///
-/// 将 `0`/`1` 映射为 `Some(false)`/`Some(true)`，其他值映射为 `None`。
 pub fn ffi_bool_optional(flag: u32) -> Option<bool> {
     bool::try_from(flag).ok()
 }
@@ -173,17 +164,15 @@ pub fn ffi_bool_optional(flag: u32) -> Option<bool> {
 // =========================================================================
 
 /// 验证 WASM 内存页请求，对错误路径标记 `cold_path`
-///
+/// WASM memory ，to mark `cold_path`
 /// 在 WASM 运行时中，内存分配成功（热路径）远比失败（冷路径）常见。
-/// `cold_path` 提示编译器将错误分支置于远离热路径的位置，
-/// 优化指令缓存与分支预测，尤其有利于体积敏感的 WASM 模块。
-///
+/// in WASM runtime in ，memory （）（）。
 /// # 参数
-/// - `requested`: 请求的内存页数（每页 64 KiB）
-/// - `max_allowed`: 允许的最大页数
-///
+/// # parameter
 /// # 返回值
+/// # return value
 /// 验证通过返回请求页数，否则返回错误信息
+/// ，error message
 pub fn validate_memory_pages(requested: u32, max_allowed: u32) -> Result<u32, &'static str> {
     if requested == 0 {
         core::hint::cold_path();
@@ -197,12 +186,10 @@ pub fn validate_memory_pages(requested: u32, max_allowed: u32) -> Result<u32, &'
 }
 
 /// 验证 WASM 表（table）大小限制
-///
-/// WASM 表用于存储函数引用，过大的表会导致宿主环境资源耗尽。
-///
+/// WASM （table）
+/// Verify WASM 表（table）大小限制
 /// # 参数
-/// - `size`: 请求的表大小
-/// - `limit`: 允许的最大大小
+/// # parameter
 pub fn validate_table_size(size: u32, limit: u32) -> Result<u32, &'static str> {
     if size > limit {
         core::hint::cold_path();
@@ -216,12 +203,13 @@ pub fn validate_table_size(size: u32, limit: u32) -> Result<u32, &'static str> {
 }
 
 /// 解析并验证 WASM 数据段（data segment）大小
-///
+/// and WASM （data segment）
 /// 数据段过大可能导致实例化时内存不足。
-///
+/// may out of memory 。
 /// # 参数
+/// # parameter
 /// - `size_bytes`: 数据段字节大小
-/// - `max_bytes`: 允许的最大字节数
+/// - `size_bytes`:
 pub fn validate_data_segment(size_bytes: usize, max_bytes: usize) -> Result<usize, &'static str> {
     if size_bytes > max_bytes {
         core::hint::cold_path();
@@ -231,11 +219,13 @@ pub fn validate_data_segment(size_bytes: usize, max_bytes: usize) -> Result<usiz
 }
 
 /// 验证导入模块名称格式
-///
+/// module
 /// 无效的导入名称通常意味着宿主环境配置错误，属于异常场景。
-///
+/// ineffective environment ，scenario 。
 /// # 参数
+/// # parameter
 /// - `name`: 导入模块名称
+/// - `name`: module
 pub fn validate_import_name(name: &str) -> Result<&str, &'static str> {
     if name.is_empty() {
         core::hint::cold_path();
@@ -252,20 +242,17 @@ pub fn validate_import_name(name: &str) -> Result<&str, &'static str> {
 // 4. if let guards —— match 表达式中的模式守卫
 // =========================================================================
 
-/// 使用 `if let` guards 解析来自 JavaScript 的可选值
-///
-/// 处理从 wasm-bindgen 传入的 `Option<&str>`，可能包含整数、
 /// 空字符串或 `null`/`undefined`。`if let` guards 允许在单个
 /// `match` 表达式中完成多层解构，避免嵌套 `if let`。
-///
+/// `match` express in ， `if let`。
 /// # 参数
-/// - `value`: 从 JS 传入的可选字符串
-///
+/// # parameter
 /// # 返回值
+/// # return value
 /// 分类后的结果字符串或错误信息
-///
+/// classification after result or error message
 /// # 示例
-/// ```
+/// # example
 /// use c12_wasm::rust_195_features::process_js_optional_value;
 /// assert_eq!(
 ///     process_js_optional_value(Some("42")),
@@ -282,12 +269,13 @@ pub fn process_js_optional_value(value: Option<&str>) -> Result<String, &'static
 }
 
 /// 解析 WASM 模块导入描述符
-///
-/// 导入描述符可能是数字索引（`"5"`）、模块名对（`"env:memory"`）
+/// WASM module describe
 /// 或纯字符串。`if let` guards 使三种模式在同一条 `match` 中处理。
-///
+/// or 。`if let` guards in `match` in 。
 /// # 参数
+/// # parameter
 /// - `desc`: 导入描述符字符串
+/// - `desc`: describe
 pub fn parse_import_descriptor(desc: Option<&str>) -> Result<(String, u32), &'static str> {
     match desc {
         Some(s) if let Ok(index) = s.parse::<u32>() => Ok((String::from("by_index"), index)),
@@ -305,15 +293,21 @@ pub fn parse_import_descriptor(desc: Option<&str>) -> Result<(String, u32), &'st
 }
 
 /// 处理批量 WASM 调用结果
-///
+/// WASM result
 /// 批量执行 WASM 导出函数后，使用 `if let` guards 对结果分类：
+/// WASM function after ， `if let` guards to result classification ：
+/// 批量Execute WASM Exportsfunctionafter，Use `if let` guards toresultclassification：
 /// 非负成功值、负异常值、以及显式错误。
-///
+/// 、、and 。
 /// # 参数
+/// # parameter
 /// - `results`: WASM 调用结果数组
-///
+/// - `results`: WASM result
 /// # 返回值
+/// # return value
 /// `(成功值数组, 错误信息数组)`
+/// `(, error message )`
+/// `(成功值array, error messagearray)`
 pub fn process_batch_results(
     results: &[Result<i32, &'static str>],
 ) -> (Vec<i32>, Vec<&'static str>) {
@@ -332,11 +326,13 @@ pub fn process_batch_results(
 }
 
 /// 解析 WASM 全局变量初始化值
-///
+/// WASM global variable
 /// 全局初始化值可能是整数、浮点数字面量或特殊标志字符串。
-///
+/// global may 、point surface or mark 。
 /// # 参数
+/// # parameter
 /// - `input`: 初始化值字符串
+/// - `input`:
 pub fn parse_global_init(input: Option<&str>) -> Result<String, &'static str> {
     match input {
         Some(s) if let Ok(n) = s.parse::<i64>() => Ok(format!("i64.const {}", n)),
@@ -352,19 +348,17 @@ pub fn parse_global_init(input: Option<&str>) -> Result<String, &'static str> {
 // =========================================================================
 
 /// 验证端口范围是否有效
-///
-/// WASM 模块在需要网络功能时（如 WASI sockets）需指定合法的端口范围。
-/// 使用 `core::range::RangeInclusive` 替代传统的 `ops::RangeInclusive`，
+/// scope effective
 /// 获得更一致的范围类型支持。
-///
+/// scope type 。
 /// # 参数
-/// - `range`: 待验证的闭区间端口范围
-///
+/// # parameter
 /// # 返回值
+/// # return value
 /// 范围有效返回 `true`，否则返回 `false`
-///
+/// scope effective `true`， `false`
 /// # 示例
-/// ```
+/// # example
 /// use c12_wasm::rust_195_features::is_valid_port_range;
 /// use core::range::RangeInclusive;
 /// assert!(is_valid_port_range(&(1..=1024).into()));
@@ -374,38 +368,46 @@ pub fn is_valid_port_range(range: &RangeInclusive<u16>) -> bool {
 }
 
 /// 创建 WASM 内存页范围
-///
+/// WASM memory scope
 /// 每页大小为 64 KiB。闭区间范围清晰表达起始页和结束页均包含在内。
-///
+/// as 64 KiB。interval scope clear express and in inside 。
 /// # 参数
+/// # parameter
 /// - `start`: 起始页索引
+/// - `start`:
 /// - `end`: 结束页索引（包含）
-///
+/// - `end`: （）
+/// - `end`: 结束页索引（Contains）
 /// # 返回值
-/// 表示内存页范围的 `RangeInclusive<usize>`
+/// # return value
 pub fn memory_page_range(start: usize, end: usize) -> RangeInclusive<usize> {
     (start..=end).into()
 }
 
 /// 检查数据段大小是否在允许范围内
-///
+/// in scope inside
 /// # 参数
+/// # parameter
 /// - `size`: 数据段字节大小
-/// - `allowed`: 允许的闭区间范围
+/// - `size`:
 pub fn is_data_size_in_range(size: usize, allowed: &RangeInclusive<usize>) -> bool {
     allowed.contains(&size)
 }
 
 /// 将模块索引分批为连续的闭区间范围
-///
+/// will module as interval scope
 /// 加载大量 WASM 模块时，按批次处理可降低峰值内存占用。
-///
+/// WASM module ，memory 。
 /// # 参数
+/// # parameter
 /// - `total`: 模块总数
+/// - `total`: module
 /// - `batch_size`: 每批最大模块数
-///
+/// - `batch_size`: maximum module
 /// # 返回值
+/// # return value
 /// 各批次的闭区间索引范围数组
+/// interval scope
 pub fn batch_module_ranges(total: usize, batch_size: usize) -> Vec<RangeInclusive<usize>> {
     if batch_size == 0 || total == 0 {
         return Vec::new();
@@ -424,14 +426,16 @@ pub fn batch_module_ranges(total: usize, batch_size: usize) -> Vec<RangeInclusiv
 }
 
 /// 获取指定闭区间范围内的所有端口号
-///
-/// 用于生成 WASI 网络配置中的允许端口列表。
-///
+/// interval scope inside all port number
 /// # 参数
+/// # parameter
 /// - `range`: 端口闭区间范围
-///
+/// - `range`: interval scope
+/// - `range`: 端口闭intervalrange
 /// # 返回值
+/// # return value
 /// 范围内所有端口号的向量
+/// scope inside all port number
 pub fn ports_in_range(range: &RangeInclusive<u16>) -> Vec<u16> {
     if range.start > range.last {
         return Vec::new();
@@ -440,12 +444,15 @@ pub fn ports_in_range(range: &RangeInclusive<u16>) -> Vec<u16> {
 }
 
 /// 获取内存页范围的描述信息
-///
+/// memory scope describe
 /// # 参数
+/// # parameter
 /// - `range`: 内存页闭区间范围
-///
+/// - `range`: memory interval scope
 /// # 返回值
+/// # return value
 /// `(起始页, 结束页, 总页数)`
+/// `(,, )`
 pub fn memory_range_info(range: &RangeInclusive<usize>) -> (usize, usize, usize) {
     let start = range.start;
     let end = range.last;
@@ -458,16 +465,20 @@ pub fn memory_range_info(range: &RangeInclusive<usize>) -> (usize, usize, usize)
 // =========================================================================
 
 /// 在 WASM 导出表查找目标函数索引
-///
-/// 遍历导出名称列表，找到目标时以 `ControlFlow::Break(index)` 提前退出。
-///
+/// in WASM goal function
 /// # 参数
+/// # parameter
 /// - `exports`: 导出函数名称数组
+/// - `exports`: function
 /// - `target`: 目标函数名称
-///
+/// - `target`: goal function
 /// # 返回值
+/// # return value
 /// - `Break(index)` 如果找到
+/// - `Break(index)` if找to
 /// - `Continue(())` 如果未找到
+/// - `Continue(())` if to
+/// - `Continue(())` if未找to
 pub fn find_export_index(exports: &[&str], target: &str) -> ControlFlow<usize, ()> {
     for (i, &export) in exports.iter().enumerate() {
         if export == target {
@@ -477,42 +488,42 @@ pub fn find_export_index(exports: &[&str], target: &str) -> ControlFlow<usize, (
     ControlFlow::Continue(())
 }
 
-/// 在常量上下文中检查 `ControlFlow` 是否为 `Break`
-///
-/// Rust 1.95 将 `ControlFlow::is_break` 稳定为 `const fn`，
 /// 允许在编译期评估迭代器提前退出状态。
-///
+/// in before state 。
 /// # 参数
+/// # parameter
 /// - `cf`: 流程控制值
-///
+/// - `cf`: process
 /// # 返回值
-/// 若为 `Break` 变体返回 `true`
+/// # return value
 pub const fn is_break_const<T, U>(cf: &ControlFlow<T, U>) -> bool {
     cf.is_break()
 }
 
-/// 在常量上下文中检查 `ControlFlow` 是否为 `Continue`
-///
 /// # 参数
+/// # parameter
 /// - `cf`: 流程控制值
-///
+/// - `cf`: process
 /// # 返回值
-/// 若为 `Continue` 变体返回 `true`
+/// # return value
 pub const fn is_continue_const<T, U>(cf: &ControlFlow<T, U>) -> bool {
     cf.is_continue()
 }
 
 /// 验证 WASM 内存页序列，遇到超限页面时提前退出
-///
+/// WASM memory sequence ，to surface before
 /// 批量验证导入的内存页索引，发现非法值立即返回其位置。
-///
+/// memory ，its position 。
 /// # 参数
+/// # parameter
 /// - `pages`: 内存页索引数组
-/// - `max_page`: 允许的最大页索引
-///
+/// - `pages`: memory
 /// # 返回值
+/// # return value
 /// - `Break(index)` 如果 `pages[index]` 超过限制
+/// - `Break(index)` if `pages[index]` 超过限制
 /// - `Continue(())` 如果全部合法
+/// - `Continue(())` if all
 pub fn validate_page_sequence(pages: &[u32], max_page: u32) -> ControlFlow<usize, ()> {
     for (i, &page) in pages.iter().enumerate() {
         if page > max_page {
@@ -523,14 +534,20 @@ pub fn validate_page_sequence(pages: &[u32], max_page: u32) -> ControlFlow<usize
 }
 
 /// 在导入函数列表中查找第一个匹配指定模块名的函数
-///
+/// in function in first module function
 /// # 参数
+/// # parameter
 /// - `imports`: `(模块名, 函数名)` 数组
+/// - `imports`: `(module, function )`
 /// - `module`: 目标模块名
-///
+/// - `module`: goal module
 /// # 返回值
+/// # return value
 /// - `Break((索引, 函数名))` 如果找到
+/// - `Break((, function ))` if to
 /// - `Continue(())` 如果未找到
+/// - `Continue(())` if to
+/// - `Continue(())` if未找to
 pub fn find_import_by_module<'a>(
     imports: &'a [(&'a str, &'a str)],
     module: &str,
@@ -973,14 +990,12 @@ mod tests {
 use std::ffi::CStr;
 
 /// # 真实 Rust 1.95 特性演示
-///
-/// 展示 `&raw const`、 `const {}` 以及 `c"..."` 在 WASM 场景中的应用。
+/// # real Rust 1.95 feature demonstration
 pub struct RealRust195Features;
 
 impl RealRust195Features {
     /// 使用 `&raw const` 获取 WASM 内存指针
-    ///
-    /// `&raw const` 避免了创建中间引用，适合 FFI 和 WASM 边界。
+    /// `&raw const` WASM memory pointer
     pub fn wasm_safe_raw_ptr(value: u32) -> usize {
         let ptr = &raw const value;
         // 将裸指针转为地址，演示 &raw const 的用法（无需 unsafe 块）
@@ -988,11 +1003,13 @@ impl RealRust195Features {
     }
 
     /// 使用 `const {}` 计算 WASM 页面大小
+    /// `const {}` WASM surface
     pub const fn const_block_wasm_page() -> usize {
         const { 64 * 1024 }
     }
 
     /// 使用 `c"wasm"` C 字符串字面量
+    /// `c"wasm"` C surface
     pub fn c_str_for_wasm() -> &'static CStr {
         c"wasm"
     }

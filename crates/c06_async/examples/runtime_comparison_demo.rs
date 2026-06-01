@@ -1,18 +1,24 @@
 //! 异步运行时对比演示
-//!
+//! async runtime to demonstration
 //! 本示例对比了不同的异步运行时：
+//! this example to async runtime ：
 //! - Tokio（生产级运行时）
+//! - Tokio（runtime ）
+//! - Tokio（生产级runtime）
 //! - Smol（轻量级运行时）
+//! - Smol（runtime ）
+//! - Smol（轻量级runtime）
 //! - Async-std（标准库风格运行时）
-//!
+//! - Async-std（standard library runtime ）
 //! 运行方式：
-//! ```bash
+//! Run way ：
 //! cargo run --example runtime_comparison_demo
 //! ```
 use anyhow::Result;
 use std::time::{Duration, Instant};
 
 /// 主函数 - 使用 Tokio 运行时
+/// Main function - Tokio runtime
 #[tokio::main]
 async fn main() -> Result<()> {
     println!("🔄 异步运行时对比演示");
@@ -33,7 +39,6 @@ async fn main() -> Result<()> {
     Ok(())
 }
 
-/// 演示 Tokio 运行时的特性
 async fn demo_tokio_runtime() -> Result<()> {
     println!("  Tokio 运行时特性演示...");
 
@@ -92,7 +97,6 @@ async fn demo_tokio_runtime() -> Result<()> {
     Ok(())
 }
 
-/// 演示 Smol 运行时的特性
 async fn demo_smol_runtime() -> Result<()> {
     println!("  Smol 运行时特性演示...");
 
@@ -140,6 +144,7 @@ async fn demo_smol_runtime() -> Result<()> {
 }
 
 /// 性能对比演示
+/// performance to demonstration
 async fn compare_performance() -> Result<()> {
     println!("  性能对比测试...");
 
@@ -213,6 +218,7 @@ async fn compare_performance() -> Result<()> {
 }
 
 /// 内存使用分析（模拟）
+/// Memory usage analysis （）
 async fn analyze_memory_usage() -> Result<()> {
     println!("      内存使用分析...");
 
@@ -238,6 +244,7 @@ async fn analyze_memory_usage() -> Result<()> {
 }
 
 /// 运行时选择指南
+/// runtime
 #[allow(dead_code)]
 fn print_runtime_selection_guide() {
     println!("\n📋 运行时选择指南");

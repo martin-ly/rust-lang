@@ -1,31 +1,37 @@
 //! TCP Echo 服务器示例
-//!
-//! 这个示例展示了如何使用 c10_networks 库创建一个简单的 TCP Echo 服务器
-//!
+//! TCP Echo example
+//! TCP Echo 服务器Example of
 //! ## 功能特性
-//!
+//! ## functionality feature
 //! - ✅ 异步 TCP 服务器
+//! - ✅ async TCP
+//! - ✅ async TCP 服务器
 //! - ✅ 多客户端并发处理
+//! - ✅ concurrency
 //! - ✅ 连接管理和错误处理
+//! - ✅ and error handling
 //! - ✅ 可配置的套接字选项
+//! - ✅ socket
 //! - ✅ 完整的日志记录
-//!
+//! - ✅ complete
 //! ## 运行方式
-//!
+//! ## Run way
 //! ```bash
 //! # 启动服务器
-//! cargo run --example tcp_echo_server
-//!
+//! #
 //! # 在另一个终端测试连接
-//! telnet 127.0.0.1 8080
-//! ```
+//! # in
 //!
 //! ## 配置选项
-//!
+//! ##
 //! 可以通过环境变量配置服务器：
+//! can environment variable ：
 //! - `C10_TCP_ADDRESS`: 监听地址 (默认: 127.0.0.1:8080)
+//! - `C10_TCP _ADDRESS`: (: 127.0.0.1:8080)
 //! - `C10_TCP_TIMEOUT`: 连接超时 (默认: 30秒)
+//! - `C10_TCP _TIMEOUT`: (: 30)
 //! - `C10_TCP_BUFFER_SIZE`: 缓冲区大小 (默认: 8192字节)
+//! - `C10_TCP _BUFFER_SIZE`: buffering (: 8192)
 //! - `C10_TCP_KEEP_ALIVE`: 启用TCP Keep-Alive (默认: true)
 //! - `C10_TCP_NODELAY`: 启用TCP_NODELAY (默认: true)
 use c10_networks::{

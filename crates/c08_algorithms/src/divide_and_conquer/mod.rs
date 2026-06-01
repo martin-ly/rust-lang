@@ -1,4 +1,5 @@
 //! 分治算法：同步 / Rayon并行 / Tokio异步
+//! divide and conquer algorithm ：synchronous / Rayonparallelism / Tokioasync
 use anyhow::Result;
 use rayon::prelude::*;
 
@@ -7,6 +8,7 @@ use rayon::prelude::*;
 // =========================
 
 /// 同步：Kadane 线性算法
+/// synchronous ：Kadane line algorithm
 pub fn max_subarray_sum_sync(nums: &[i64]) -> i64 {
     let mut best = i64::MIN;
     let mut cur = 0i64;
@@ -18,6 +20,7 @@ pub fn max_subarray_sum_sync(nums: &[i64]) -> i64 {
 }
 
 /// 并行（示意）：分块计算局部 (best, prefix, suffix, sum) 再归并
+/// parallelism （indicate ）：local (best, prefix, suffix, sum) and
 #[derive(Clone, Copy, Debug)]
 struct Segment {
     best: i64,
@@ -81,6 +84,7 @@ pub fn max_subarray_sum_parallel(nums: &[i64]) -> i64 {
 }
 
 /// 异步封装
+/// async
 pub async fn max_subarray_sum_async(nums: Vec<i64>) -> Result<i64> {
     Ok(tokio::task::spawn_blocking(move || max_subarray_sum_parallel(&nums)).await?)
 }

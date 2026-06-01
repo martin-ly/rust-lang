@@ -1,18 +1,15 @@
 //! Miri 测试模块 - 网络编程内存安全验证
-//!
-//! 本模块包含用于 Miri 测试的网络相关代码示例。
-//!
+//! Miri module - network programming memory safety
 //! 运行方式:
-//!   cargo miri test miri_tests
+//! Run way :
 //!   MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test miri_tests
 
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
 
 // ==================== SocketAddr 内存安全 ====================
 
-/// 测试目的: 验证 SocketAddr 创建
-/// 测试场景: 创建 IPv4 SocketAddr
 /// 预期结果: 应该正确创建和访问
+/// result : should and
 #[test]
 fn test_socket_addr() {
     let addr = SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 8080);
@@ -22,8 +19,11 @@ fn test_socket_addr() {
 }
 
 /// 测试目的: 验证 IP 地址解析
+/// objective : IP address
 /// 测试场景: 解析字符串为 IP 地址
+/// scenario : as IP address
 /// 预期结果: 应该正确解析并访问 octets
+/// result : should and octets
 #[test]
 fn test_ip_parsing() {
     let ip: IpAddr = "192.168.1.1".parse().unwrap();
@@ -39,6 +39,7 @@ fn test_ip_parsing() {
 // ==================== 网络缓冲区 ====================
 
 /// 网络缓冲区结构
+/// network buffering structure
 struct NetworkBuffer {
     data: Box<[u8]>,
     read_pos: usize,
@@ -74,8 +75,11 @@ impl NetworkBuffer {
 }
 
 /// 测试目的: 验证网络缓冲区内存安全
+/// objective : network buffering memory safety
 /// 测试场景: 写入和读取数据
+/// scenario : and
 /// 预期结果: 应该正确管理读写位置
+/// result : should position
 #[test]
 fn test_network_buffer() {
     let mut buffer = NetworkBuffer::new(1024);
@@ -92,6 +96,7 @@ fn test_network_buffer() {
 // ==================== 协议头部结构 ====================
 
 /// TCP 头部结构（packed）
+/// TCP 头部structure（packed）
 #[repr(C, packed)]
 struct TcpHeader {
     src_port: u16,
@@ -105,9 +110,11 @@ struct TcpHeader {
     urgent: u16,
 }
 
-/// 测试目的: 验证 TCP 头部 packed struct 安全访问
+/// Test forobjective: Verify TCP 头部 packed struct 安全访问
 /// 测试场景: 创建 packed struct 并安全读取字段
+/// scenario : packed struct and field
 /// 预期结果: 使用 addr_of! 和 read_unaligned 应该安全访问
+/// result : addr_of! and read_unaligned should
 #[test]
 fn test_tcp_header() {
     use std::mem;
@@ -137,6 +144,7 @@ fn test_tcp_header() {
 // ==================== URI 解析 ====================
 
 /// URI 结构
+/// URI structure
 struct Uri {
     scheme: String,
     host: String,
@@ -171,8 +179,12 @@ impl Uri {
 }
 
 /// 测试目的: 验证 URI 解析
+/// objective : URI
 /// 测试场景: 解析完整 URI 字符串
+/// scenario : complete URI
+/// Test forscenario: Parsecomplete URI 字符串
 /// 预期结果: 应该正确提取各部分
+/// result : should part
 #[test]
 fn test_uri_parsing() {
     let uri = Uri::parse("http://example.com:8080/path").unwrap();
@@ -185,6 +197,7 @@ fn test_uri_parsing() {
 // ==================== 网络状态机 ====================
 
 /// 连接状态枚举
+/// state enum
 #[allow(dead_code)]
 enum ConnectionState {
     Closed,
@@ -195,6 +208,7 @@ enum ConnectionState {
 }
 
 /// 连接结构
+/// structure
 struct Connection {
     state: ConnectionState,
     local_addr: Option<SocketAddr>,
@@ -222,8 +236,11 @@ impl Connection {
 }
 
 /// 测试目的: 验证连接状态机
+/// objective : state machine
 /// 测试场景: 创建连接并转换状态
+/// scenario : and conversion state
 /// 预期结果: 应该正确管理状态
+/// result : should state
 #[test]
 fn test_connection_state() {
     let mut conn = Connection::new();

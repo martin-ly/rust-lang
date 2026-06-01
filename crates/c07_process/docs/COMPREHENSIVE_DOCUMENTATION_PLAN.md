@@ -54,7 +54,7 @@
   - 安全性与权限控制
 - **03.3 现代库集成**
   - tokio 异步管道
-  - async-std 管道支持
+  -
   - duct 管道组合
 
 #### 04. 高级 IPC 机制
@@ -89,7 +89,7 @@
   - 内存池管理
   - CPU 亲和性设置
 
-#### 06. Async-Std 进程管理
+#### 06. Async-Std [已归档] 进程管理
 
 - **06.1 Async-Std 基础**
   - `async_std::process` 模块
@@ -245,7 +245,7 @@
 [dependencies]
 # 异步运行时
 tokio = { version = "1.0", features = ["full"] }
-async-std = "1.0"
+
 
 # 进程管理
 duct = "0.13"

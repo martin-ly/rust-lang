@@ -5,6 +5,7 @@ use std::sync::{Arc, Mutex};
 use std::time::{Duration, SystemTime};
 
 /// 进程监控器
+/// process
 pub struct ProcessMonitor {
     processes: Arc<Mutex<HashMap<u32, ProcessInfo>>>,
     resources: Arc<Mutex<SystemResources>>,
@@ -13,6 +14,7 @@ pub struct ProcessMonitor {
 }
 
 /// 性能指标
+/// performance indicator
 #[derive(Debug, Clone)]
 pub struct PerformanceMetrics {
     pub cpu_usage_history: Vec<(SystemTime, f64)>,
@@ -23,6 +25,7 @@ pub struct PerformanceMetrics {
 }
 
 /// 磁盘IO统计
+/// IO
 #[derive(Debug, Clone, Default)]
 pub struct DiskIOStats {
     pub read_bytes: u64,
@@ -32,6 +35,7 @@ pub struct DiskIOStats {
 }
 
 /// 网络IO统计
+/// network IO
 #[derive(Debug, Clone, Default)]
 pub struct NetworkIOStats {
     pub bytes_sent: u64,
@@ -42,6 +46,7 @@ pub struct NetworkIOStats {
 
 impl ProcessMonitor {
     /// 创建新的进程监控器
+    /// process
     pub fn new() -> Self {
         Self {
             processes: Arc::new(Mutex::new(HashMap::new())),
@@ -66,6 +71,7 @@ impl ProcessMonitor {
     }
 
     /// 添加进程到监控
+    /// process to
     pub fn add_process(&self, info: ProcessInfo) -> ProcessResult<()> {
         let mut processes = self.processes.lock().expect("进程监控锁被污染");
         processes.insert(info.pid, info);
@@ -73,6 +79,7 @@ impl ProcessMonitor {
     }
 
     /// 移除进程监控
+    /// process
     pub fn remove_process(&self, pid: u32) -> ProcessResult<()> {
         let mut processes = self.processes.lock().expect("进程监控锁被污染");
         processes.remove(&pid);
@@ -80,6 +87,7 @@ impl ProcessMonitor {
     }
 
     /// 更新进程信息
+    /// process
     pub fn update_process(&self, info: ProcessInfo) -> ProcessResult<()> {
         let mut processes = self.processes.lock().expect("进程监控锁被污染");
         processes.insert(info.pid, info);
@@ -87,18 +95,21 @@ impl ProcessMonitor {
     }
 
     /// 获取所有监控的进程
+    /// all process
     pub fn get_processes(&self) -> Vec<ProcessInfo> {
         let processes = self.processes.lock().expect("进程监控锁被污染");
         processes.values().cloned().collect()
     }
 
     /// 获取特定进程信息
+    /// process
     pub fn get_process(&self, pid: u32) -> Option<ProcessInfo> {
         let processes = self.processes.lock().expect("进程监控锁被污染");
         processes.get(&pid).cloned()
     }
 
     /// 更新系统资源信息
+    /// system
     pub fn update_resources(&self, resources: SystemResources) {
         let mut current_resources = self.resources.lock().expect("系统资源锁被污染");
         *current_resources = resources.clone();
@@ -111,12 +122,14 @@ impl ProcessMonitor {
     }
 
     /// 获取系统资源信息
+    /// system
     pub fn get_resources(&self) -> SystemResources {
         let resources = self.resources.lock().expect("系统资源锁被污染");
         resources.clone()
     }
 
     /// 获取最后更新时间
+    /// finally time
     pub fn last_update(&self) -> SystemTime {
         let last_update = self.last_update.lock().expect("最后更新时间锁被污染");
         *last_update
@@ -129,6 +142,7 @@ impl ProcessMonitor {
     }
 
     /// 获取进程统计信息
+    /// process
     pub fn get_stats(&self) -> ProcessStats {
         let processes = self.processes.lock().expect("进程监控锁被污染");
         let total = processes.len();
@@ -156,6 +170,7 @@ impl ProcessMonitor {
     }
 
     /// 更新性能指标
+    /// performance indicator
     fn update_performance_metrics(&self, resources: &SystemResources) {
         let mut metrics = self.performance_metrics.lock().expect("性能指标锁被污染");
         let now = SystemTime::now();
@@ -175,12 +190,14 @@ impl ProcessMonitor {
     }
 
     /// 获取性能指标
+    /// performance indicator
     pub fn get_performance_metrics(&self) -> PerformanceMetrics {
         let metrics = self.performance_metrics.lock().expect("性能指标锁被污染");
         metrics.clone()
     }
 
     /// 获取CPU使用率趋势
+    /// CPU
     pub fn get_cpu_trend(&self, duration: Duration) -> Vec<(SystemTime, f64)> {
         let metrics = self.performance_metrics.lock().expect("性能指标锁被污染");
         let cutoff = SystemTime::now() - duration;
@@ -194,6 +211,7 @@ impl ProcessMonitor {
     }
 
     /// 获取内存使用率趋势
+    /// memory
     pub fn get_memory_trend(&self, duration: Duration) -> Vec<(SystemTime, u64)> {
         let metrics = self.performance_metrics.lock().expect("性能指标锁被污染");
         let cutoff = SystemTime::now() - duration;
@@ -227,6 +245,7 @@ impl ProcessMonitor {
 }
 
 /// 进程统计信息
+/// process
 #[derive(Debug, Clone)]
 pub struct ProcessStats {
     pub total: usize,

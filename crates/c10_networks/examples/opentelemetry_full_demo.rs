@@ -1,16 +1,11 @@
-//! OpenTelemetry 全链路追踪实战示例
-//!
-//! 本示例展示如何在 Rust 应用中集成 OpenTelemetry，实现：
 //! - 分布式追踪（Distributed Tracing）
 //! - 自动上下文传播
+//! - on under propagation
 //! - 导出到 Jaeger / OTLP / 标准输出
-//! - 与 tokio/tracing 生态的无缝集成
-//!
+//! - to Jaeger / OTLP / standard output
 //! **前置条件**:
-//! ```bash
+//! **before condition **:
 //! # 启动本地 Jaeger（All-in-one）
-//! docker run -d --name jaeger \
-//!   -p 16686:16686 \
 //!   -p 4317:4317 \
 //!   -p 4318:4318 \
 //!   jaegertracing/all-in-one:latest
@@ -19,12 +14,11 @@
 //! Jaeger UI: http://localhost:16686
 //!
 //! 权威来源:
-//! - [OpenTelemetry Rust](https://github.com/open-telemetry/opentelemetry-rust)
-//! - [AWS Distro for OpenTelemetry](https://aws-otel.github.io/)
+//! Source :
+//! 权威source:
 //! - [Cloudflare Tracing 实践](https://blog.cloudflare.com/)
-//!
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example opentelemetry_full_demo -p c10_networks
 //! ```
 
@@ -40,7 +34,6 @@ use opentelemetry_sdk::trace::SdkTracerProvider;
 use tracing_subscriber::layer::SubscriberExt;
 use tracing_subscriber::util::SubscriberInitExt;
 
-/// 初始化 OpenTelemetry + tracing 集成
 async fn init_telemetry() -> SdkTracerProvider {
     let resource = opentelemetry_sdk::Resource::builder()
         .with_service_name("rust-opentelemetry-demo")
@@ -132,6 +125,7 @@ use opentelemetry_sdk::propagation::TraceContextPropagator;
 use std::collections::HashMap;
 
 /// 模拟 HTTP 客户端：注入追踪上下文到请求头
+/// HTTP ：on under to
 fn inject_trace_context() -> HashMap<String, String> {
     let propagator = TraceContextPropagator::new();
     let mut headers = HashMap::new();
@@ -142,6 +136,7 @@ fn inject_trace_context() -> HashMap<String, String> {
 }
 
 /// 模拟 HTTP 服务端：从请求头提取追踪上下文
+/// HTTP ：from on under
 #[instrument]
 async fn handle_incoming_request(headers: HashMap<String, String>) {
     let propagator = TraceContextPropagator::new();
@@ -222,11 +217,7 @@ async fn risky_operation(should_fail: bool) -> Result<(), &'static str> {
 
 // ==================== 示例 7: 指标（Metrics）集成概览 ====================
 
-/// 虽然 OpenTelemetry 追踪（Tracing）是核心，但完整的可观测性还包括指标：
 /// - `opentelemetry::metrics` 用于记录 Counter、Histogram、Gauge
-/// - 与 Prometheus 或 OTLP 指标后端集成
-///
-/// ```rust,ignore
 /// use opentelemetry::metrics::MeterProvider;
 /// use opentelemetry::global;
 ///

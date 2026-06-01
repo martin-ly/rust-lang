@@ -1,15 +1,22 @@
 //! 异步数据库和缓存演示
-//!
+//! async database and demonstration
 //! 本示例展示了异步数据库和缓存操作：
+//! this example async database and ：
 //! - 数据库连接池管理
+//! - database connection pool
 //! - 异步查询和事务
+//! - async and
 //! - 缓存操作和失效策略
+//! - and strategy
 //! - 批量操作优化
+//! - optimization
+//! - 批量操作optimization
 //! - 读写分离
+//! - read-write splitting
 //! - 分布式锁
-//!
+//! - distribution lock
 //! 运行方式：
-//! ```bash
+//! Run way ：
 //! cargo run --example async_database_demo
 //! ```
 use anyhow::Result;

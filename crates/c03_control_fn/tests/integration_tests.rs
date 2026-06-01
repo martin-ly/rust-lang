@@ -1,6 +1,6 @@
-//! 控制流与函数模块集成测试套件 / Control Flow and Functions Module Integration Test Suite
 
 /// 测试控制流集成
+/// stream
 #[test]
 fn test_control_flow_integration() {
     let value = 5;
@@ -14,6 +14,7 @@ fn test_control_flow_integration() {
 }
 
 /// 测试函数调用集成
+/// function
 #[test]
 fn test_function_call_integration() {
     fn add(a: i32, b: i32) -> i32 {
@@ -25,6 +26,7 @@ fn test_function_call_integration() {
 }
 
 /// 测试循环集成
+/// circulation
 #[test]
 fn test_loop_integration() {
     let mut sum = 0;
@@ -47,6 +49,7 @@ fn test_pattern_matching_integration() {
 }
 
 /// 测试错误处理集成
+/// error handling
 #[test]
 fn test_error_handling_integration() {
     fn divide(a: i32, b: i32) -> Result<i32, String> {

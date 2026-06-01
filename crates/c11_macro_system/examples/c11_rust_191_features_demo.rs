@@ -1,19 +1,27 @@
 #![allow(clippy::useless_vec)]
 //! Rust 1.91 宏系统特性演示示例 (历史版本)
-//!
+//! Rust 1.91 system feature demonstration example (this )
+//! Rust 1.91 宏systemfeaturedemonstration example (历史版this)
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//!
+//! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features_demo.rs`
-//!
-//! 本示例展示了 Rust 1.91 中与宏系统相关的新特性和改进：
-//!
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features_demo.rs`
 //! 1. const 上下文增强（宏配置计算）
+//! 1. const on under （）
 //! 2. 新的稳定 API（宏数据处理）
+//! 2. API（）
 //! 3. JIT 编译器优化（宏展开性能提升）
+//! 3. JIT optimization （performance ）
 //! 4. 内存分配器优化（宏数据结构优化）
+//! 4. allocator optimization （data structure optimization ）
+//! 4. allocatoroptimization（宏data structureoptimization）
 //! 5. 宏展开缓存机制（编译时优化）
+//! 5. mechanism （compile-time optimization ）
+//! 5. 宏展开缓存mechanism（compile-timeoptimization）
 //! 6. 改进的宏错误消息（开发体验提升）
+//! 6. （volume ）
 //! 7. 过程宏编译优化（编译时间减少）
+//! 7. optimization （compile-time ）
 use c11_macro_system::rust_191_features::*;
 
 fn main() {
@@ -44,6 +52,7 @@ fn main() {
 }
 
 /// 演示 const 上下文增强
+/// demonstration const on under
 fn demo_const_context_enhancement() {
     println!("1. const 上下文增强（宏配置计算）");
     println!("   Rust 1.91: 可以在 const 上下文中创建对非静态常量的引用\n");
@@ -61,6 +70,8 @@ fn demo_const_context_enhancement() {
 }
 
 /// 演示新的稳定 API
+/// demonstration API
+/// Demonstration of新稳定 API
 fn demo_new_stable_apis() {
     println!("2. 新的稳定 API（宏数据处理）");
     println!("   Rust 1.91: BufRead::skip_while, 改进的 ControlFlow\n");
@@ -91,6 +102,8 @@ fn demo_new_stable_apis() {
 }
 
 /// 演示 JIT 编译器优化
+/// demonstration JIT optimization
+/// Demonstration of JIT 编译器optimization
 fn demo_jit_optimizations() {
     println!("\n3. JIT 编译器优化（宏展开性能提升）");
     println!("   Rust 1.91: 宏展开性能提升 10-25%\n");
@@ -99,6 +112,7 @@ fn demo_jit_optimizations() {
 }
 
 /// 演示内存分配器优化
+/// demonstration allocator optimization
 fn demo_memory_allocator_optimization() {
     println!("\n4. 内存分配器优化（宏数据结构优化）");
     println!("   Rust 1.91: 小对象分配性能提升 25-30%\n");
@@ -107,6 +121,8 @@ fn demo_memory_allocator_optimization() {
 }
 
 /// 演示宏展开缓存机制
+/// demonstration mechanism
+/// Demonstration of宏展开缓存mechanism
 fn demo_macro_expansion_cache() {
     println!("\n5. 宏展开缓存机制（编译时优化）");
     println!("   Rust 1.91: 缓存已展开的宏，减少重复展开\n");
@@ -143,6 +159,7 @@ fn demo_macro_expansion_cache() {
 }
 
 /// 演示改进的宏错误消息
+/// demonstration
 fn demo_improved_macro_errors() {
     println!("\n6. 改进的宏错误消息（开发体验提升）");
     println!("   Rust 1.91: 提供更详细、更有帮助的错误消息\n");
@@ -180,6 +197,7 @@ fn demo_improved_macro_errors() {
 }
 
 /// 演示过程宏编译优化
+/// demonstration optimization
 fn demo_proc_macro_compilation_optimization() {
     println!("\n7. 过程宏编译优化（编译时间减少）");
     println!("   Rust 1.91: 过程宏编译性能提升，支持缓存和增量编译\n");

@@ -1,21 +1,25 @@
 //! 无锁跳表实现
-//!
+//! lock-free skip list
 //! 本模块提供了一个简化但功能完整的无锁跳表实现。
+//! This module provides but functionality complete lock-free skip list 。
 //! 跳表是一种概率性数据结构，提供O(log n)的平均时间复杂度。
-//!
+//! skip list data structure ，O(log n)time complexity 。
 //! 注意：完全无锁的跳表实现非常复杂，本实现使用了一些简化的技术。
+//! ：lock-free skip list complex ，this technique 。
 use std::sync::atomic::{AtomicUsize, Ordering as AtomicOrdering};
 
 /// 无锁跳表（概念性实现）
-///
+/// lock-free skip list （concept ）
 /// 注意：完全无锁跳表实现非常复杂，这里提供一个概念性接口
-/// 实际使用中建议使用SkipListMap（基于DashMap的实现）
+/// ：lock-free skip list complex ，concept
 pub struct LockFreeSkipList<K, V>
 where
     K: Ord + Clone + Send + Sync,
     V: Clone + Send + Sync,
 {
     /// 元素数量（占位）
+    /// element quantity （）
+    /// elementquantity（占位）
     size: AtomicUsize,
     _phantom: std::marker::PhantomData<(K, V)>,
 }
@@ -26,6 +30,7 @@ where
     V: Clone + Send + Sync + 'static,
 {
     /// 创建新的无锁跳表
+    /// lock-free skip list
     pub fn new() -> Self {
         Self {
             size: AtomicUsize::new(0),
@@ -34,6 +39,8 @@ where
     }
 
     /// 插入元素（占位实现）
+    /// element （）
+    /// 插入element（占位Implementation of）
     pub fn insert(&self, _key: K, _value: V) -> bool {
         // 占位实现：完全无锁跳表实现非常复杂
         // 实际使用中建议使用SkipListMap
@@ -42,12 +49,16 @@ where
     }
 
     /// 查找元素（占位实现）
+    /// element （）
+    /// Findelement（占位Implementation of）
     pub fn get(&self, _key: &K) -> Option<V> {
         // 占位实现
         None
     }
 
     /// 删除元素（占位实现）
+    /// element （）
+    /// Deleteelement（占位Implementation of）
     pub fn remove(&self, _key: &K) -> Option<V> {
         // 占位实现
         let _ = self.size.fetch_sub(1, AtomicOrdering::Relaxed);
@@ -55,11 +66,13 @@ where
     }
 
     /// 获取跳表大小
+    /// skip list
     pub fn len(&self) -> usize {
         self.size.load(AtomicOrdering::Relaxed)
     }
 
     /// 检查跳表是否为空
+    /// skip list as
     pub fn is_empty(&self) -> bool {
         self.len() == 0
     }
@@ -75,9 +88,6 @@ where
     }
 }
 
-/// 使用DashMap的跳表实现（实际可用的版本）
-///
-/// 由于完全无锁跳表实现非常复杂，这里提供一个基于DashMap的实用版本
 pub struct SkipListMap<K, V>
 where
     K: std::hash::Hash + Eq + Send + Sync,
@@ -92,6 +102,7 @@ where
     V: Send + Sync,
 {
     /// 创建新的跳表映射
+    /// skip list
     pub fn new() -> Self {
         Self {
             inner: dashmap::DashMap::new(),
@@ -99,16 +110,20 @@ where
     }
 
     /// 插入元素
+    /// element
+    /// 插入element
     pub fn insert(&self, key: K, value: V) -> Option<V> {
         self.inner.insert(key, value)
     }
 
     /// 获取元素
+    /// element
     pub fn get(&self, key: &K) -> Option<dashmap::mapref::one::Ref<'_, K, V>> {
         self.inner.get(key)
     }
 
     /// 删除元素
+    /// element
     pub fn remove(&self, key: &K) -> Option<(K, V)> {
         self.inner.remove(key)
     }
@@ -119,6 +134,7 @@ where
     }
 
     /// 检查是否为空
+    /// as
     pub fn is_empty(&self) -> bool {
         self.inner.is_empty()
     }

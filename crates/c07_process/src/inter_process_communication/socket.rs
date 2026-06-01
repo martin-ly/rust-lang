@@ -5,6 +5,7 @@ use std::sync::atomic::AtomicBool;
 use std::sync::Arc;
 
 /// Unix域套接字实现（简化版本）
+/// Unixdomain socket （this ）
 pub struct UnixSocket {
     path: String,
     is_closed: Arc<AtomicBool>,
@@ -12,6 +13,7 @@ pub struct UnixSocket {
 
 impl UnixSocket {
     /// 创建新的Unix域套接字
+    /// Unixdomain socket
     pub fn new(path: &str, _config: IpcConfig) -> IpcResult<Self> {
         // 简化实现：在Windows上使用TCP套接字
         Ok(Self {
@@ -21,6 +23,7 @@ impl UnixSocket {
     }
 
     /// 连接到现有的Unix域套接字
+    /// to Unixdomain socket
     pub fn connect(path: &str, _config: IpcConfig) -> IpcResult<Self> {
         Ok(Self {
             path: path.to_string(),
@@ -56,6 +59,7 @@ impl IpcChannel for UnixSocket {
 }
 
 /// TCP套接字实现
+/// TCP socket
 #[allow(dead_code)]
 pub struct TcpSocket {
     address: String,
@@ -65,6 +69,7 @@ pub struct TcpSocket {
 
 impl TcpSocket {
     /// 创建新的TCP套接字
+    /// TCP socket
     pub fn new(address: &str, port: u16, _config: IpcConfig) -> IpcResult<Self> {
         Ok(Self {
             address: address.to_string(),
@@ -74,6 +79,7 @@ impl TcpSocket {
     }
 
     /// 连接到现有的TCP套接字
+    /// to TCP socket
     pub fn connect(address: &str, port: u16, _config: IpcConfig) -> IpcResult<Self> {
         Ok(Self {
             address: address.to_string(),

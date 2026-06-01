@@ -1,11 +1,18 @@
 //! Rust 1.90 性能优化模块
+//! Rust 1.90 performance optimization module
 //! 
 //! 本模块实现了Rust 1.90版本中的性能优化特性，包括：
+//! this module Rust 1.90this in performance optimization feature ，：
 //! - 并行编译优化
+//! - parallelism optimization
 //! - 特质求解器性能优化
+//! - trait performance optimization
 //! - 借用检查器性能优化
+//! - borrowing performance optimization
 //! - 内存布局优化
+//! - memory layout optimization
 //! - 零成本抽象验证
+//! - cost
 use std::sync::Arc;
 use std::time::{Duration, Instant};
 use tokio::time::sleep;
@@ -15,6 +22,7 @@ use anyhow::Result;
 use rayon::prelude::*;
 
 /// 性能基准测试器
+/// Performance benchmark
 pub struct PerformanceBenchmark {
     results: Arc<Mutex<HashMap<String, Vec<Duration>>>>,
 }
@@ -86,6 +94,7 @@ impl PerformanceBenchmark {
 }
 
 /// 并行编译优化演示
+/// parallelism optimization demonstration
 pub struct ParallelCompilationDemo {
     workers: usize,
 }
@@ -163,6 +172,7 @@ impl ParallelCompilationDemo {
 }
 
 /// 特质求解器性能演示
+/// trait performance demonstration
 pub struct TraitSolverPerformanceDemo {
     cache: Arc<Mutex<HashMap<String, usize>>>,
 }
@@ -229,6 +239,7 @@ impl TraitSolverPerformanceDemo {
 }
 
 /// 借用检查器性能演示
+/// borrowing performance demonstration
 pub struct BorrowCheckerPerformanceDemo {
     data: Arc<Mutex<HashMap<String, String>>>,
 }
@@ -295,6 +306,7 @@ impl BorrowCheckerPerformanceDemo {
 }
 
 /// 内存布局优化演示
+/// memory layout optimization demonstration
 pub struct MemoryLayoutOptimization {
     data: Vec<u8>,
 }
@@ -330,6 +342,7 @@ impl MemoryLayoutOptimization {
 }
 
 /// 零成本抽象验证
+/// cost
 pub struct ZeroCostAbstractionDemo;
 
 impl ZeroCostAbstractionDemo {
@@ -359,6 +372,7 @@ impl ZeroCostAbstractionDemo {
 }
 
 /// 综合演示性能优化特性
+/// synthesize demonstration performance optimization feature
 pub async fn demonstrate_performance_optimization_190() -> Result<()> {
     println!("⚡ 演示 Rust 1.90 性能优化特性");
     println!("==========================================");

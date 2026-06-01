@@ -1,40 +1,50 @@
 //! Rust 1.89 浮点数类型系统完整实现
-//!
-//! 本模块提供了 Rust 1.89 版本中浮点数类型的完整实现，包括：
+//! Rust 1.89 point type system complete
 //! - 所有浮点数类型的详细定义和特性
-//! - Rust 1.89 新特性的应用
+//! - all point type definition and feature
+//! - Rust 1.89 新featureapplication
 //! - 类型安全的最佳实践
+//! - type
 //! - 性能优化技巧
+//! - performance optimization tip
 //! - 完整的示例和测试用例
-//!
+//! - complete example and
 //! # 文件信息
+//! #
 //! - 文件: enhanced_float.rs
 //! - 创建日期: 2025-01-27
+//! - date : 2025-01-27
 //! - 版本: 1.0
-//! - Rust版本: 1.89.0
+//! - this : 1.0
+//! - 版this: 1.0
 //! - 作者: Rust 类型系统项目组
+//! - : Rust type system project
 use std::{f32, f64};
 
 /// Rust 1.89 浮点数类型系统
-///
-/// 本模块实现了 Rust 1.89 版本中所有浮点数类型的完整功能，
+/// Rust 1.89 point type system
 /// 包括类型安全、性能优化、错误处理等最佳实践。
+/// type 、performance optimization 、error handling etc. 。
 pub mod float_types {
     use super::*;
 
     /// 32位浮点数类型 (f32)
-    ///
+    /// 32point type (f32)
     /// f32 是单精度浮点数类型，占用4字节内存。
-    /// 在 Rust 1.89 中，f32 类型在性能和精度方面得到了进一步优化。
-    ///
+    /// f32 point type ，4memory 。
     /// # 特性
+    /// # feature
     /// - 内存占用：4字节
+    /// - memory ：4
     /// - 精度：约7位十进制数字
+    /// - ：7
     /// - 范围：约 ±3.4 × 10^38
+    /// - scope ： ±3.4 × 10^38
+    /// - range：约 ±3.4 × 10^38
     /// - 特殊值：NaN、+∞、-∞
-    ///
+    /// - ：NaN、+∞、-∞
     /// # 示例
-    /// ```rust
+    /// # example
     /// let value: f32 = std::f32::consts::PI;
     /// let max: f32 = f32::MAX;
     /// let min: f32 = f32::MIN;
@@ -43,6 +53,9 @@ pub mod float_types {
         use super::*;
 
         /// 基本 f32 操作
+        /// this f32
+        /// 基this f32 操作
+        /// this f32
         pub fn basic_operations() {
             let a: f32 = std::f32::consts::PI;
             let b: f32 = std::f32::consts::E;
@@ -94,6 +107,8 @@ pub mod float_types {
         }
 
         /// 数学函数
+        /// function
+        /// 数学function
         pub fn mathematical_functions() {
             let x: f32 = 1.0;
 
@@ -119,6 +134,7 @@ pub mod float_types {
         }
 
         /// 精度和舍入
+        /// and
         pub fn precision_and_rounding() {
             let value: f32 = std::f32::consts::PI;
 
@@ -138,18 +154,22 @@ pub mod float_types {
     }
 
     /// 64位浮点数类型 (f64)
-    ///
+    /// 64point type (f64)
     /// f64 是双精度浮点数类型，占用8字节内存。
-    /// 这是 Rust 的默认浮点数类型，提供更高的精度。
-    ///
+    /// f64 point type ，8memory 。
     /// # 特性
+    /// # feature
     /// - 内存占用：8字节
+    /// - memory ：8
     /// - 精度：约15-17位十进制数字
+    /// - ：15-17
     /// - 范围：约 ±1.8 × 10^308
+    /// - scope ： ±1.8 × 10^308
+    /// - range：约 ±1.8 × 10^308
     /// - 特殊值：NaN、+∞、-∞
-    ///
+    /// - ：NaN、+∞、-∞
     /// # 示例
-    /// ```rust
+    /// # example
     /// let value: f64 = std::f64::consts::PI;
     /// let max: f64 = f64::MAX;
     /// let min: f64 = f64::MIN;
@@ -158,6 +178,9 @@ pub mod float_types {
         use super::*;
 
         /// 基本 f64 操作
+        /// this f64
+        /// 基this f64 操作
+        /// this f64
         pub fn basic_operations() {
             let a: f64 = std::f64::consts::PI;
             let b: f64 = std::f64::consts::E;
@@ -209,6 +232,8 @@ pub mod float_types {
         }
 
         /// 数学函数
+        /// function
+        /// 数学function
         pub fn mathematical_functions() {
             let x: f64 = 1.0;
 
@@ -234,6 +259,7 @@ pub mod float_types {
         }
 
         /// 精度和舍入
+        /// and
         pub fn precision_and_rounding() {
             let value: f64 = std::f64::consts::PI;
 
@@ -254,13 +280,17 @@ pub mod float_types {
     }
 
     /// 浮点数比较
-    ///
+    /// point
     /// 由于浮点数的精度问题，直接使用 == 比较可能不准确。
+    /// point problem ， == may 。
     /// 本模块提供了安全的浮点数比较方法。
+    /// This module provides point method 。
     pub mod comparison {
         use super::*;
 
         /// 近似相等比较
+        /// etc.
+        /// 近似相etc.Compare
         pub fn approximate_equality() {
             let a: f64 = 0.1 + 0.2;
             let b: f64 = 0.3;
@@ -279,6 +309,8 @@ pub mod float_types {
         }
 
         /// 相对误差比较
+        /// to
+        /// 相to误差Compare
         pub fn relative_error_comparison() {
             let a: f64 = 1.0;
             let b: f64 = 1.0000000001;
@@ -293,6 +325,7 @@ pub mod float_types {
         }
 
         /// 有序比较
+        /// 有序Compare
         pub fn ordered_comparison() {
             let values = vec![
                 std::f64::consts::PI,
@@ -325,16 +358,27 @@ pub mod float_types {
     }
 
     /// 浮点数转换
-    ///
+    /// point conversion
     /// 本模块提供了浮点数类型转换功能，包括：
+    /// This module provides point type conversion functionality ，：
     /// - 显式类型转换
+    /// - type conversion
+    /// - 显式typeconversion
     /// - 安全转换
+    /// - conversion
+    /// - 安全conversion
     /// - 字符串转换
+    /// - conversion
+    /// - 字符串conversion
     /// - 整数转换
+    /// - conversion
+    /// - 整数conversion
     pub mod conversion {
         use super::*;
 
         /// 显式类型转换
+        /// type conversion
+        /// 显式typeconversion
         pub fn explicit_conversion() {
             let f32_value: f32 = std::f32::consts::PI;
             let f64_value: f64 = std::f64::consts::E;
@@ -351,6 +395,8 @@ pub mod float_types {
         }
 
         /// 安全类型转换
+        /// type conversion
+        /// 安全typeconversion
         pub fn safe_conversion() {
             let f64_value: f64 = std::f64::consts::PI;
 
@@ -364,6 +410,8 @@ pub mod float_types {
         }
 
         /// 字符串转换
+        /// conversion
+        /// 字符串conversion
         pub fn string_conversion() {
             let value: f64 = std::f64::consts::PI;
 
@@ -384,6 +432,8 @@ pub mod float_types {
         }
 
         /// 整数转换
+        /// conversion
+        /// 整数conversion
         pub fn integer_conversion() {
             let float_value: f64 = std::f64::consts::PI;
 
@@ -407,13 +457,16 @@ pub mod float_types {
     }
 
     /// 浮点数格式化
-    ///
+    /// point
     /// 本模块提供了各种浮点数格式化功能，
+    /// This module provides point functionality ，
     /// 包括不同精度、科学计数法、对齐等。
+    /// 、、to etc. 。
     pub mod formatting {
         use super::*;
 
         /// 精度格式化
+        /// 精度Format
         pub fn precision_formatting() {
             let value: f64 = std::f64::consts::PI;
 
@@ -438,6 +491,7 @@ pub mod float_types {
         }
 
         /// 对齐和填充
+        /// to and
         pub fn alignment_and_padding() {
             let value: f64 = std::f64::consts::PI;
 
@@ -466,13 +520,16 @@ pub mod float_types {
     }
 
     /// 浮点数错误处理
-    ///
+    /// point error handling
     /// 本模块提供了处理浮点数运算中可能出现的错误的方法，
+    /// This module provides point in may method ，
     /// 包括溢出、下溢、除零等。
+    /// 、under 、etc. 。
     pub mod error_handling {
         use super::*;
 
         /// 溢出检查
+        /// 溢出Check
         pub fn overflow_checking() {
             let large_value: f64 = f64::MAX;
             let small_value: f64 = f64::MIN_POSITIVE;
@@ -498,6 +555,7 @@ pub mod float_types {
         }
 
         /// 下溢检查
+        /// under
         pub fn underflow_checking() {
             let small_value: f64 = f64::MIN_POSITIVE;
 
@@ -512,6 +570,7 @@ pub mod float_types {
         }
 
         /// 除零检查
+        /// 除零Check
         pub fn division_by_zero_checking() {
             let value: f64 = 1.0;
             let zero: f64 = 0.0;
@@ -562,14 +621,18 @@ pub mod float_types {
 }
 
 /// 浮点数性能测试
-///
+/// point performance test
 /// 本模块提供了各种浮点数类型的性能测试，
+/// This module provides point type performance test ，
 /// 帮助开发者选择最适合的浮点数类型。
+/// point type 。
 pub mod performance_tests {
     use super::*;
     use std::time::Instant;
 
     /// 算术运算性能测试
+    /// performance test
+    /// 算术运算performance test
     pub fn arithmetic_performance_test() {
         const ITERATIONS: usize = 1_000_000;
 
@@ -602,6 +665,8 @@ pub mod performance_tests {
     }
 
     /// 数学函数性能测试
+    /// function performance test
+    /// 数学functionperformance test
     pub fn mathematical_functions_performance_test() {
         const ITERATIONS: usize = 100_000;
 
@@ -640,6 +705,7 @@ pub mod performance_tests {
     }
 
     /// 内存使用测试
+    /// memory
     pub fn memory_usage_test() {
         println!("浮点数类型内存使用:");
         println!("  f32: {} 字节", std::mem::size_of::<f32>());
@@ -662,9 +728,9 @@ pub mod performance_tests {
 }
 
 /// 主函数：演示所有浮点数类型功能
-///
-/// 本函数演示了 Rust 1.89 中所有浮点数类型的功能，
+/// Main function ：demonstration all point type functionality
 /// 包括基本操作、特殊值处理、数学函数、格式化等。
+/// this 、、function 、etc. 。
 pub fn demonstrate_all_float_types() {
     println!("=== Rust 1.89 浮点数类型系统演示 ===\n");
 
@@ -745,6 +811,7 @@ pub fn demonstrate_all_float_types() {
 }
 
 /// 简化的浮点数操作函数（保持向后兼容）
+/// point function （after ）
 #[allow(unused)]
 pub fn float_operation() {
     // 调用新的演示函数
@@ -752,6 +819,7 @@ pub fn float_operation() {
 }
 
 /// 简化的浮点数操作函数2（保持向后兼容）
+/// point function 2（after ）
 #[allow(unused)]
 pub fn float_operation_2() {
     // 调用新的演示函数

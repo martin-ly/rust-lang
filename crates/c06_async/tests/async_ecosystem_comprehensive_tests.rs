@@ -1,7 +1,7 @@
 //! 异步生态系统全面测试套件
-//!
+//! async ecosystem system surface
 //! 本测试套件涵盖了所有异步运行时的功能测试，
-//! 包括std、tokio、async-std、smol等库的测试
+//! this all async runtime functionality ，
 use anyhow::Result;
 use c06_async::async_ecosystem_comprehensive::*;
 use c06_async::async_integration_framework::*;
@@ -17,6 +17,7 @@ use tokio::sync::{Mutex, Semaphore};
 use tokio::time::sleep;
 
 /// 测试异步运行时分析器
+/// async runtime analyze
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_async_runtime_analyzer() {
@@ -24,20 +25,20 @@ async fn test_async_runtime_analyzer() {
 
     // 测试获取运行时分析
     assert!(analyzer.get_runtime_analysis("tokio").is_some());
-    assert!(analyzer.get_runtime_analysis("async-std").is_some());
     assert!(analyzer.get_runtime_analysis("smol").is_some());
     assert!(analyzer.get_runtime_analysis("std").is_some());
 
     // 测试运行时比较
-    let comparison = analyzer.compare_runtimes("tokio", "async-std");
+    let comparison = analyzer.compare_runtimes("tokio", "async-std [已归档]");
     assert!(comparison.is_some());
 
     let comparison = comparison.unwrap();
     assert_eq!(comparison.runtime1.runtime_name, "tokio");
-    assert_eq!(comparison.runtime2.runtime_name, "async-std");
+    assert_eq!(comparison.runtime2.runtime_name, "async-std [已归档]");
 }
 
 /// 测试异步集成模式
+/// async
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_async_integration_patterns() {
@@ -60,6 +61,7 @@ async fn test_async_integration_patterns() {
 }
 
 /// 测试异步运行时共性分析器
+/// async runtime analyze
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_async_commonality_analyzer() {
@@ -67,7 +69,7 @@ async fn test_async_commonality_analyzer() {
 
     // 测试获取运行时共性
     assert!(analyzer.get_runtime_commonality("tokio").is_some());
-    assert!(analyzer.get_runtime_commonality("async-std").is_some());
+    // async-std [已归档]
     assert!(analyzer.get_runtime_commonality("smol").is_some());
     assert!(analyzer.get_runtime_commonality("std").is_some());
 
@@ -81,6 +83,7 @@ async fn test_async_commonality_analyzer() {
 }
 
 /// 测试异步同步转换框架
+/// async synchronous conversion framework
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_async_sync_conversion_framework() {
@@ -98,6 +101,7 @@ async fn test_async_sync_conversion_framework() {
 }
 
 /// 测试聚合组合设计模式框架
+/// aggregation combination design framework
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_aggregation_composition_framework() {
@@ -160,6 +164,7 @@ async fn test_aggregation_composition_framework() {
 }
 
 /// 测试简化的异步运行时框架
+/// async runtime framework
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_simple_async_runtime_framework() {
@@ -193,6 +198,7 @@ async fn test_simple_async_runtime_framework() {
 }
 
 /// 测试异步同步转换服务
+/// async synchronous conversion
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_async_sync_conversion_service() {
@@ -225,6 +231,7 @@ async fn test_async_sync_conversion_service() {
 }
 
 /// 测试聚合组合服务
+/// aggregation combination
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_aggregation_composition_service() {
@@ -273,6 +280,7 @@ async fn test_data_source() {
 }
 
 /// 测试抽象异步操作
+/// async
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_abstract_async_operation() {
@@ -283,6 +291,7 @@ async fn test_abstract_async_operation() {
 }
 
 /// 测试任务优先级
+/// task
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_task_priority() {
@@ -292,6 +301,7 @@ async fn test_task_priority() {
 }
 
 /// 测试运行时类型
+/// runtime type
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_runtime_type() {
@@ -313,6 +323,7 @@ async fn test_runtime_type() {
 }
 
 /// 测试性能指标
+/// performance indicator
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_runtime_metrics() {
@@ -330,6 +341,7 @@ async fn test_runtime_metrics() {
 }
 
 /// 测试运行时配置
+/// runtime
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_runtime_config() {
@@ -347,6 +359,7 @@ async fn test_runtime_config() {
 }
 
 /// 测试并发安全性
+/// concurrency
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_concurrency_safety() {
@@ -382,6 +395,7 @@ async fn test_concurrency_safety() {
 }
 
 /// 测试错误处理
+/// error handling
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_error_handling() {
@@ -399,6 +413,7 @@ async fn test_error_handling() {
 }
 
 /// 失败任务实现
+/// task
 struct FailingTask {
     name: String,
     priority: TaskPriority,
@@ -436,6 +451,7 @@ impl AsyncTask for FailingTask {
 }
 
 /// 集成测试：完整的异步生态系统演示
+/// ：complete async ecosystem system demonstration
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_complete_async_ecosystem_demo() {
@@ -453,6 +469,8 @@ async fn test_complete_async_ecosystem_demo() {
 }
 
 /// 压力测试：大量并发任务
+/// stress test ：concurrency task
+/// stress test：大量concurrencytask
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_high_concurrency() {
@@ -487,6 +505,7 @@ async fn test_high_concurrency() {
 }
 
 /// 内存泄漏测试
+/// memory leak
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_memory_leak_prevention() {

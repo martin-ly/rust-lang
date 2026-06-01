@@ -1,11 +1,12 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **分级**: [C]
+>
 ## 📑 目录
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [📑 目录](#目录)
+- [📑 目录](#-目录)
 - [Part 2: Deep Dive Counter-Examples](#part-2-deep-dive-counter-examples)
   - [Extended Ownership Deep Dive](#extended-ownership-deep-dive)
     - [EDO.1 Understanding Move Semantics](#edo1-understanding-move-semantics)
@@ -1027,7 +1028,7 @@ This handbook covered:
 ## 相关文档
 
 - [所有权可判定性研究](./FINAL_MASTER_INDEX.md)
-- [Rust 安全关键生态系统](../RUST_SAFETY_CRITICAL_ECOSYSTEM/10_00_rust_safety_critical_ecosystem_master_index.md)
+- [Rust 安全关键生态系统](../../knowledge/04_expert/safety_critical/02_rust_safety_critical_ecosystem_master_index.md)
 - [概念：所有权基础](../../concept/01_foundation/01_ownership.md)
 
 ---

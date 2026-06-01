@@ -1,20 +1,14 @@
 //! # AI/ML 生态实战演示 —— Candle 极简主义 ML 框架
-//!
+//! # AI/ML ecosystem demonstration —— Candle ism ML framework
 //! 本示例使用 [Hugging Face Candle](https://github.com/huggingface/candle) 核心库，
-//! 演示 Rust 中的张量计算、神经网络前向传播和基础推理模式。
-//!
 //! ## 运行
-//!
+//! ## Run
 //! ```bash
 //! cargo run -p c08_algorithms --example ai_ml_ecosystem_demo
 //! ```
 //!
 //! ## 依赖
-//!
-//! - `candle-core`: 张量运算与自动微分后端
-//! - `candle-nn`: 神经网络层与优化器
-//!
-//! [来源: Candle GitHub / Hugging Face](https://github.com/huggingface/candle)
+//! ##
 
 #![allow(dead_code)]
 
@@ -39,8 +33,9 @@ fn main() -> Result<()> {
 }
 
 /// ## 演示 1: 张量基础操作
-///
+/// ## demonstration 1: tensor foundation
 /// 展示张量创建、形状变换和索引。
+/// tensor 、transformation and 。
 fn demo_01_tensor_basics(device: &Device) -> Result<()> {
     println!("📦 演示 1: 张量基础操作");
     println!("--------------------------");
@@ -65,8 +60,10 @@ fn demo_01_tensor_basics(device: &Device) -> Result<()> {
 }
 
 /// ## 演示 2: 矩阵运算
-///
+/// ## demonstration 2:
+/// ## Demonstration of 2: 矩阵运算
 /// 矩阵乘法、转置和逐元素运算。
+/// 、and element 。
 fn demo_02_matrix_operations(device: &Device) -> Result<()> {
     println!("🧮 演示 2: 矩阵运算");
     println!("--------------------");
@@ -96,8 +93,9 @@ fn demo_02_matrix_operations(device: &Device) -> Result<()> {
 }
 
 /// ## 演示 3: 简单神经网络前向传播
-///
+/// ## demonstration 3: simple neural network before propagation
 /// 使用 `candle_nn::Linear` 构建两层 MLP，执行前向传播。
+/// `candle_nn::Linear` MLP，before propagation 。
 fn demo_03_simple_neural_network(device: &Device) -> Result<()> {
     println!("🧠 演示 3: 简单神经网络前向传播");
     println!("---------------------------------");
@@ -148,8 +146,7 @@ fn demo_03_simple_neural_network(device: &Device) -> Result<()> {
 }
 
 /// ## 演示 4: Softmax 分类
-///
-/// 将原始 logits 转换为概率分布。
+/// ## demonstration 4: Softmax classification
 fn demo_04_softmax_classification(device: &Device) -> Result<()> {
     println!("📊 演示 4: Softmax 分类");
     println!("-----------------------");
@@ -177,8 +174,9 @@ fn demo_04_softmax_classification(device: &Device) -> Result<()> {
 }
 
 /// ## 演示 5: 线性回归
-///
+/// ## demonstration 5: line
 /// 手动实现梯度下降训练一个简单的线性模型。
+/// gradient descent simple line 。
 fn demo_05_linear_regression(device: &Device) -> Result<()> {
     println!("📈 演示 5: 线性回归训练");
     println!("------------------------");

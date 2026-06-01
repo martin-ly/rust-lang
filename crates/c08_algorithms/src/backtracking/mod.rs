@@ -1,8 +1,10 @@
 //! 回溯算法：同步 / Rayon并行 / Tokio异步
+//! backtracking algorithm ：synchronous / Rayonparallelism / Tokioasync
 use anyhow::Result;
 use rayon::prelude::*;
 
 /// 检查在 `row` 行把皇后放在 `col` 是否安全
+/// in `row` after in `col`
 fn is_safe(partial: &[usize], row: usize, col: usize) -> bool {
     for (r, &c) in partial.iter().enumerate() {
         if c == col {
@@ -37,6 +39,7 @@ fn solve_sync_inner(
 }
 
 /// 同步：返回所有解，每个解为长度为 n 的列索引数组
+/// synchronous ：all ，as as n
 pub fn nqueens_solutions_sync(n: usize) -> Vec<Vec<usize>> {
     let mut solutions = Vec::new();
     let mut partial = Vec::with_capacity(n);
@@ -45,6 +48,7 @@ pub fn nqueens_solutions_sync(n: usize) -> Vec<Vec<usize>> {
 }
 
 /// 并行：在首行的每个列位并行分支
+/// parallelism ：in parallelism
 pub fn nqueens_solutions_parallel(n: usize) -> Vec<Vec<usize>> {
     (0..n)
         .into_par_iter()
@@ -59,11 +63,13 @@ pub fn nqueens_solutions_parallel(n: usize) -> Vec<Vec<usize>> {
 }
 
 /// 异步：spawn_blocking 包裹 CPU 密集型回溯
+/// async ：spawn_blocking CPU
 pub async fn nqueens_solutions_async(n: usize) -> Result<Vec<Vec<usize>>> {
     Ok(tokio::task::spawn_blocking(move || nqueens_solutions_parallel(n)).await?)
 }
 
 /// 仅返回解数量（同步）
+/// quantity （synchronous ）
 pub fn nqueens_count_sync(n: usize) -> usize {
     nqueens_solutions_sync(n).len()
 }
@@ -153,6 +159,7 @@ pub async fn subsets_async<T: Clone + Send + Sync + 'static>(nums: Vec<T>) -> Re
 }
 
 /// 仅返回解数量（并行）
+/// quantity （parallelism ）
 pub fn nqueens_count_parallel(n: usize) -> usize {
     nqueens_solutions_parallel(n).len()
 }

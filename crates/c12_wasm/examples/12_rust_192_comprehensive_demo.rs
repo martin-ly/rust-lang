@@ -1,11 +1,13 @@
 //! Rust 1.92.0 WASM 综合应用示例
-//!
-//! 本示例展示了 Rust 1.92.0 特性在 WASM 中的综合应用，包括：
-//!
+//! Rust 1.92.0 WASM synthesize application example
 //! 1. 高性能内存管理器
+//! 1. performance memory
 //! 2. 优化的数据处理管道
+//! 2. optimization pipe
 //! 3. 安全的 FFI 互操作
+//! 3. FFI
 //! 4. 完整的性能优化方案
+//! 4. complete performance optimization
 use c12_wasm::rust_192_features::*;
 use std::num::NonZeroUsize;
 
@@ -28,6 +30,7 @@ fn main() {
 }
 
 /// 演示高性能内存管理器
+/// demonstration performance memory
 fn demo_high_performance_memory_manager() {
     println!("1. 高性能内存管理器");
     println!("   使用 MaybeUninit + NonZero::div_ceil\n");
@@ -57,6 +60,7 @@ fn demo_high_performance_memory_manager() {
 }
 
 /// 演示优化的数据处理管道
+/// demonstration optimization pipe
 fn demo_optimized_data_pipeline() {
     println!("\n2. 优化的数据处理管道");
     println!("   使用迭代器特化 + rotate_right\n");
@@ -84,6 +88,8 @@ fn demo_optimized_data_pipeline() {
 }
 
 /// 演示安全的 FFI 互操作
+/// demonstration FFI
+/// Demonstration of安全 FFI 互操作
 fn demo_safe_ffi_interop() {
     println!("\n3. 安全的 FFI 互操作");
     println!("   使用联合体原始引用\n");
@@ -108,6 +114,7 @@ fn demo_safe_ffi_interop() {
 }
 
 /// 演示完整的性能优化方案
+/// demonstration complete performance optimization
 fn demo_complete_optimization() {
     println!("\n4. 完整的性能优化方案");
     println!("   综合使用所有 Rust 1.92.0 特性\n");

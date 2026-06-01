@@ -1,7 +1,8 @@
 //! 数据包处理模块
-//!
-//! 本模块提供了基于 Rust 1.92.0 的数据包处理功能，
+//! module
+//! 数据包Handlemodule
 //! 包括数据包解析、序列化、缓冲管理等功能。
+//! 、sequence 、buffering etc. functionality 。
 pub mod buffer;
 pub mod parser;
 pub mod serializer;
@@ -16,19 +17,23 @@ use serde::{Deserialize, Serialize};
 use std::fmt;
 
 /// 数据包类型
+/// type
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum PacketType {
     /// 原始字节数据包
     Raw,
     /// HTTP 数据包
+    /// HTTP
     Http,
-    /// WebSocket 数据包
     WebSocket,
     /// TCP 数据包
+    /// TCP
     Tcp,
     /// UDP 数据包
+    /// UDP
     Udp,
     /// 自定义数据包
+    /// definition
     Custom(String),
 }
 
@@ -58,12 +63,14 @@ impl PacketHeader {
     }
 
     /// 设置序列号
+    /// sequence
     pub fn with_sequence_number(mut self, seq: u64) -> Self {
         self.sequence_number = Some(seq);
         self
     }
 
     /// 设置标志位
+    /// mark
     pub fn with_flags(mut self, flags: u32) -> Self {
         self.flags = flags;
         self
@@ -86,6 +93,7 @@ impl Packet {
     }
 
     /// 创建带序列号的数据包
+    /// sequence
     pub fn with_sequence(packet_type: PacketType, payload: Bytes, seq: u64) -> Self {
         let length = payload.len() as u32;
         let header = PacketHeader::new(packet_type, length).with_sequence_number(seq);
@@ -98,11 +106,14 @@ impl Packet {
     }
 
     /// 检查数据包是否为空
+    /// as
     pub fn is_empty(&self) -> bool {
         self.payload.is_empty()
     }
 
     /// 获取数据包类型
+    /// type
+    /// Get数据包type
     pub fn packet_type(&self) -> &PacketType {
         &self.header.packet_type
     }
@@ -127,6 +138,8 @@ impl fmt::Display for Packet {
 }
 
 /// 数据包构建器
+/// builder
+/// 数据包builder
 pub struct PacketBuilder {
     packet_type: PacketType,
     payload: BytesMut,
@@ -136,6 +149,7 @@ pub struct PacketBuilder {
 
 impl PacketBuilder {
     /// 创建新的数据包构建器
+    /// builder
     pub fn new(packet_type: PacketType) -> Self {
         Self {
             packet_type,
@@ -146,18 +160,21 @@ impl PacketBuilder {
     }
 
     /// 添加数据到载荷
+    /// to
     pub fn add_data(&mut self, data: &[u8]) -> &mut Self {
         self.payload.extend_from_slice(data);
         self
     }
 
     /// 设置序列号
+    /// sequence
     pub fn sequence_number(&mut self, seq: u64) -> &mut Self {
         self.sequence_number = Some(seq);
         self
     }
 
     /// 设置标志位
+    /// mark
     pub fn flags(&mut self, flags: u32) -> &mut Self {
         self.flags = flags;
         self
@@ -198,6 +215,7 @@ impl PacketStats {
     }
 
     /// 添加数据包到统计
+    /// to
     pub fn add_packet(&mut self, packet: &Packet) {
         self.total_packets += 1;
         self.total_bytes += packet.payload.len() as u64;
@@ -223,11 +241,13 @@ impl PacketStats {
     }
 
     /// 获取指定类型的数据包数量
+    /// type quantity
     pub fn packets_of_type(&self, packet_type: &PacketType) -> u64 {
         self.packets_by_type.get(packet_type).copied().unwrap_or(0)
     }
 
     /// 获取指定类型的数据包字节数
+    /// type
     pub fn bytes_of_type(&self, packet_type: &PacketType) -> u64 {
         self.bytes_by_type.get(packet_type).copied().unwrap_or(0)
     }
@@ -253,24 +273,28 @@ impl PacketFilter {
     }
 
     /// 允许指定的数据包类型
+    /// type
     pub fn allow_type(mut self, packet_type: PacketType) -> Self {
         self.allowed_types.insert(packet_type);
         self
     }
 
     /// 设置最小数据包大小
+    /// minimum
     pub fn min_size(mut self, size: usize) -> Self {
         self.min_size = Some(size);
         self
     }
 
     /// 设置最大数据包大小
+    /// maximum
     pub fn max_size(mut self, size: usize) -> Self {
         self.max_size = Some(size);
         self
     }
 
     /// 设置序列号范围
+    /// sequence scope
     pub fn sequence_range(mut self, start: u64, end: u64) -> Self {
         self.sequence_range = Some((start, end));
         self

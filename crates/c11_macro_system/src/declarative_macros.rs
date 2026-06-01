@@ -2,9 +2,9 @@
 //! 声明宏（Macro Rules）
 #![allow(clippy::vec_init_then_push)]
 //!
-//! 声明宏是Rust中最基础的宏形式，使用macro_rules!定义。
 
 /// 基础示例：创建一个简单的vec!宏等价物
+/// foundation example ：simple vec!etc.
 #[allow(clippy::vec_init_then_push)]
 #[macro_export]
 macro_rules! my_vec {
@@ -20,7 +20,7 @@ macro_rules! my_vec {
     };
 }
 
-/// 带有重复模式的宏 - 计算token数量
+/// 带有重复模式宏 - Calculatetokenquantity
 #[macro_export]
 macro_rules! count_tokens {
     // 计算参数数量
@@ -32,6 +32,8 @@ macro_rules! count_tokens {
 }
 
 /// 实现类似vec!的带容量初始化
+/// similar to vec!
+/// Implementation ofsimilar tovec!带容量Initialize
 #[macro_export]
 macro_rules! my_vec_with_capacity {
     // 匹配vec![value; count]格式
@@ -45,6 +47,7 @@ macro_rules! my_vec_with_capacity {
 }
 
 /// 条件编译宏示例
+/// condition example
 #[macro_export]
 macro_rules! debug_print {
     // 只在debug模式下打印
@@ -57,6 +60,7 @@ macro_rules! debug_print {
 }
 
 /// 实现自定义的if let链式调用
+/// definition if let
 #[macro_export]
 macro_rules! if_let_chain {
     // 基础情况：只有表达式

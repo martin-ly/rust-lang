@@ -1,15 +1,14 @@
 //! # 控制流模式与惯用法
-//!
-//! 本模块展示 Rust 中各种控制流结构的高级用法和最佳实践，
-//! 帮助开发者写出更地道、更高效的 Rust 代码。
+//! # stream and
 
-/// 展示 `match` 的高级模式
-///
+/// display `match` 高级模式
 /// 包括守卫、绑定、解构、范围匹配等技巧。
+/// 、、、scope etc. tip 。
 pub struct MatchPatterns;
 
 impl MatchPatterns {
     /// 使用 match 进行多条件分支
+    /// match condition
     pub fn classify_number(n: i32) -> &'static str {
         match n {
             0 => "zero",
@@ -22,6 +21,7 @@ impl MatchPatterns {
     }
 
     /// 使用 @ 绑定同时匹配和捕获值
+    /// @ and
     pub fn binding_at_patterns(msg: &str) -> String {
         match msg.split(':').collect::<Vec<_>>().as_slice() {
             ["ERROR", code @ "404"] => format!("Not found: {}", code),
@@ -33,6 +33,7 @@ impl MatchPatterns {
     }
 
     /// 匹配嵌套结构
+    /// structure
     pub fn match_nested(option_result: Option<Result<i32, ()>>) -> i32 {
         match option_result {
             Some(Ok(n)) if n > 0 => n * 2,
@@ -44,13 +45,14 @@ impl MatchPatterns {
 }
 
 /// 展示 `if let` / `while let` 链式用法
-///
-/// Rust 1.95+ 支持更灵活的 let 链（let chains），
+/// display `if let` / `while let` 链式用法
 /// 本模块展示如何优雅地处理嵌套 Option/Result。
+/// This module demonstrates Option/Result。
 pub struct LetChainPatterns;
 
 impl LetChainPatterns {
     /// 多条件 let 链（概念展示，实际使用需 Rust 1.95+ let_chains）
+    /// condition let （concept ，actual Rust 1.95+ let_chains）
     pub fn process_user_data(data: Option<&str>) -> Option<String> {
         let trimmed = data?.trim();
         if trimmed.is_empty() {
@@ -60,24 +62,27 @@ impl LetChainPatterns {
     }
 
     /// while let 遍历迭代器
+    /// while let
     pub fn sum_even_numbers(iter: impl Iterator<Item = i32>) -> i32 {
         iter.filter(|n| n % 2 == 0).sum()
     }
 }
 
 /// 展示 `loop` 标签和 break 返回值
-///
-/// Rust 的 `loop` 可以作为表达式返回值，配合标签实现多层跳出。
+/// `loop` and break return value
+/// display `loop` 标签and break return value
 pub struct LoopPatterns;
 
 impl LoopPatterns {
     /// 使用 break 返回值
+    /// break return value
     pub fn find_first_positive(numbers: &[i32]) -> Option<i32> {
         let result = numbers.iter().find(|&&n| n > 0);
         result.copied()
     }
 
     /// 使用嵌套循环查找数对
+    /// circulation to
     pub fn find_pair_sum(target: i32, arr: &[i32]) -> Option<(usize, usize)> {
         for (i, &a) in arr.iter().enumerate() {
             for (j, &b) in arr.iter().enumerate().skip(i + 1) {

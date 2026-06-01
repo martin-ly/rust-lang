@@ -1,10 +1,13 @@
 //! 同步原语演示程序
-//!
-//! 本程序展示Rust中各种同步原语的使用，包括：
+//! synchronous demonstration program
 //! - Mutex 互斥锁
+//! - Mutex mutex
 //! - 条件变量
+//! - condition variable
 //! - 原子操作
+//! - atomic operation
 //! - 读写锁
+//! - rwlock
 use c05_threads::synchronization::mutex::*;
 
 fn main() {

@@ -1,13 +1,12 @@
 //! 原子类型与内存序
-//!
-//! 涵盖 `AtomicBool`/`AtomicUsize` 基本操作、`Ordering` 含义、
-//! `compare_exchange` 与自旋计数器示例。
+//! type and memory
 use std::sync::atomic::{fence, AtomicBool, AtomicUsize, Ordering};
 use std::sync::Arc;
 use std::time::Duration;
 use std::{hint, thread};
 
 /// 展示最常用的原子操作与不同内存序
+/// atomic operation and memory
 pub fn atomic_basics_demo() {
     let flag = AtomicBool::new(false);
     let counter = AtomicUsize::new(0);
@@ -49,6 +48,7 @@ pub fn compare_exchange_demo() {
 }
 
 /// 自旋递增：多个线程在无锁场景下增计数
+/// ：thread in lock-free scenario under
 pub fn spin_increment(num_threads: usize, iters_per_thread: usize) -> usize {
     let shared = Arc::new(AtomicUsize::new(0));
     let mut handles = Vec::new();
@@ -79,6 +79,7 @@ pub fn spin_increment(num_threads: usize, iters_per_thread: usize) -> usize {
 }
 
 /// 可见性示例：一个线程写入，另一个线程读取
+/// example ：thread ，thread
 pub fn visibility_demo() -> usize {
     let ready = Arc::new(AtomicBool::new(false));
     let data = Arc::new(AtomicUsize::new(0));

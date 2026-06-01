@@ -5,13 +5,16 @@ use std::time::{Duration, SystemTime, UNIX_EPOCH};
 use tokio::time::{sleep, timeout};
 use tracing::{error, info, warn};
 
-/// 基于 Redis 的分布式锁实现
-///
 /// 特性：
+/// feature ：
 /// - 自动过期防止死锁
+/// - lock
 /// - 重入锁支持（可选）
+/// - reentrant lock （）
 /// - 指数退避重试
+/// - index
 /// - 超时保护
+/// -
 #[derive(Clone)]
 pub struct DistributedLock {
     redis_client: Client,
@@ -38,6 +41,8 @@ impl DistributedLock {
     }
 
     /// 尝试获取锁（非阻塞）
+    /// lock （）
+    /// 尝试Getlock（Non-blocking）
     pub async fn try_lock(&self) -> Result<bool> {
         let mut conn = self.redis_client.get_multiplexed_async_connection().await?;
 
@@ -55,6 +60,8 @@ impl DistributedLock {
     }
 
     /// 获取锁（阻塞，带重试）
+    /// lock （，）
+    /// Getlock（Block，带Retry）
     pub async fn lock(&self, max_wait: Duration) -> Result<()> {
         retry_future(
             || async {
@@ -74,6 +81,7 @@ impl DistributedLock {
     }
 
     /// 释放锁
+    /// lock
     pub async fn unlock(&self) -> Result<()> {
         let mut conn = self.redis_client.get_multiplexed_async_connection().await?;
 
@@ -102,6 +110,7 @@ impl DistributedLock {
     }
 
     /// 延长锁的过期时间
+    /// lock time
     pub async fn extend(&self, additional_seconds: u64) -> Result<bool> {
         let mut conn = self.redis_client.get_multiplexed_async_connection().await?;
 
@@ -125,6 +134,7 @@ impl DistributedLock {
 }
 
 /// 分布式锁使用示例
+/// distribution lock example
 #[tokio::main(flavor = "multi_thread")]
 async fn main() -> Result<()> {
     tracing_subscriber::fmt().with_env_filter("info").init();

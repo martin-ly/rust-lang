@@ -5,19 +5,25 @@ use std::sync::Arc;
 use std::time::Duration;
 use tokio::sync::RwLock;
 
-/// ACME 管理器：负责账户、订单、挑战处理与证书续期调度
 pub struct AcmeManager {
     /// 账户与证书的持久化目录
+    /// and certificate
     pub storage_dir: PathBuf,
     /// ACME 目录 URL（生产/测试）
+    /// ACME URL（/）
+    /// ACME 目录 URL（生产/Test for）
     pub directory_url: String,
     /// 域名列表
+    /// domain
     pub domains: Vec<String>,
     /// 可选：联系邮箱（占位参数）
+    /// ：（parameter ）
     pub contact_email: Option<String>,
     /// 可选：HTTP-01 挑战内存存储（占位接线）
+    /// ：HTTP -01 challenge memory （line ）
     pub http01_store: Option<Http01MemoryStore>,
     /// 占位模式：仅依赖磁盘证书文件
+    /// ：certificate
     pub placeholder_mode: bool,
 }
 
@@ -38,6 +44,7 @@ impl AcmeManager {
     }
 
     /// 证书链 PEM 文件路径（默认 storage_dir/cert.pem）
+    /// certificate chain PEM 文件路径（默认 storage_dir/cert.pem）
     pub fn cert_pem_path(&self) -> PathBuf {
         self.storage_dir.join("cert.pem")
     }
@@ -48,6 +55,7 @@ impl AcmeManager {
     }
 
     /// 启动后台续期任务（占位实现）
+    /// after task （）
     pub async fn spawn_renew_task(&self) -> NetworkResult<()> {
         let _interval = Duration::from_secs(60 * 60 * 12);
         let mgr = self.clone_for_task();
@@ -63,6 +71,8 @@ impl AcmeManager {
     }
 
     /// 触发一次立即申请/续期（占位实现）
+    /// /（）
+    /// 触发一次立即Request/续期（占位Implementation of）
     pub async fn obtain_or_renew_now(&self) -> NetworkResult<(Vec<u8>, Vec<u8>)> {
         // 测试数据：不存在则生成自签名；存在则读取返回
         let cert_path = self.cert_pem_path();
@@ -91,7 +101,6 @@ impl AcmeManager {
     }
 }
 
-/// 简易的 HTTP-01 挑战存储（token -> keyAuthorization）
 #[derive(Clone, Default)]
 pub struct Http01MemoryStore {
     inner: Arc<RwLock<HashMap<String, String>>>,

@@ -1,10 +1,13 @@
 //! 朴素贝叶斯分类器实现
+//! classification
 //!
 //! 本模块提供了朴素贝叶斯分类器的基础实现
+//! This module provides classification foundation
 use super::*;
 use std::collections::HashMap;
 
 /// 朴素贝叶斯分类器
+/// classification
 #[derive(Debug, Clone)]
 pub struct NaiveBayesClassifier {
     /// 是否已训练
@@ -12,15 +15,18 @@ pub struct NaiveBayesClassifier {
     /// 类别先验概率
     class_priors: Option<HashMap<Label, f64>>,
     /// 特征条件概率
+    /// condition
     feature_conditionals: Option<HashMap<Label, Vec<(f64, f64)>>>,
     /// 类别标签
     classes: Option<Vec<Label>>,
     /// 拉普拉斯平滑参数
+    /// parameter
     alpha: f64,
 }
 
 impl NaiveBayesClassifier {
     /// 创建新的朴素贝叶斯分类器
+    /// classification
     pub fn new() -> Self {
         Self {
             is_fitted: false,
@@ -32,12 +38,14 @@ impl NaiveBayesClassifier {
     }
 
     /// 设置拉普拉斯平滑参数
+    /// parameter
     pub fn alpha(mut self, alpha: f64) -> Self {
         self.alpha = alpha;
         self
     }
 
     /// 计算特征的条件概率（高斯分布假设）
+    /// condition （distribution hypothesize ）
     fn calculate_gaussian_probability(&self, feature_value: f64, mean: f64, variance: f64) -> f64 {
         if variance == 0.0 {
             return if (feature_value - mean).abs() < 1e-10 {
@@ -54,6 +62,7 @@ impl NaiveBayesClassifier {
     }
 
     /// 计算特征的均值和方差
+    /// and
     fn calculate_feature_stats(
         &self,
         data: &Dataset,
@@ -88,6 +97,7 @@ impl NaiveBayesClassifier {
     }
 
     /// 返回已知类别的只读迭代器（若未训练则为空）
+    /// （as ）
     pub fn classes_iter(&self) -> impl Iterator<Item = &Label> {
         self.classes.as_deref().into_iter().flatten()
     }
@@ -185,6 +195,7 @@ impl SupervisedLearning for NaiveBayesClassifier {
 }
 
 /// 多项式朴素贝叶斯分类器（适用于离散特征）
+/// classification （）
 #[derive(Debug, Clone)]
 pub struct MultinomialNaiveBayes {
     /// 是否已训练
@@ -192,15 +203,18 @@ pub struct MultinomialNaiveBayes {
     /// 类别先验概率
     class_priors: Option<HashMap<Label, f64>>,
     /// 特征条件概率
+    /// condition
     feature_conditionals: Option<HashMap<Label, Vec<f64>>>,
     /// 类别标签
     classes: Option<Vec<Label>>,
     /// 拉普拉斯平滑参数
+    /// parameter
     alpha: f64,
 }
 
 impl MultinomialNaiveBayes {
     /// 创建新的多项式朴素贝叶斯分类器
+    /// classification
     pub fn new() -> Self {
         Self {
             is_fitted: false,
@@ -212,6 +226,7 @@ impl MultinomialNaiveBayes {
     }
 
     /// 设置拉普拉斯平滑参数
+    /// parameter
     pub fn alpha(mut self, alpha: f64) -> Self {
         self.alpha = alpha;
         self
@@ -332,6 +347,7 @@ impl SupervisedLearning for MultinomialNaiveBayes {
 }
 
 /// 异步版本的朴素贝叶斯训练
+/// async this
 pub async fn naive_bayes_fit_async(
     data: Dataset,
     labels: Labels,

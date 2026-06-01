@@ -1,33 +1,45 @@
 //! Rust 1.89 基础语法模块
-//!
-//! 本模块提供了 Rust 语言的基础语法元素，包括：
+//! Rust 1.89 foundation module
 //! - 变量声明与绑定
+//! - variable and
 //! - 数据类型与类型推断
+//! - type and type infer
+//! - 数据typeandtype inference
 //! - 控制流结构
+//! - stream structure
+//! - 控制streamstructure
 //! - 函数定义与调用
+//! - function definition and
 //! - 表达式与语句
+//! - express and
 //! - 模式匹配
+//! -
 //! - 错误处理
-//!
-//! 所有示例都遵循 Rust 1.89 的最新语法规范，并包含详细的注释说明。
+//! - error handling
 use std::collections::HashMap;
 use std::fmt::{self, Display};
 
 /// 基础语法演示结构体
-///
-/// 这个结构体用于演示 Rust 的基础语法特性，包括：
+/// foundation demonstration struct
 /// - 结构体定义
+/// - struct definition
 /// - 方法实现
+/// - method
 /// - 生命周期参数
+/// - lifetime parameter
 /// - 泛型参数
+/// - generic parameter
 #[derive(Debug, Clone, PartialEq)]
 pub struct BasicSyntaxDemo<T>
 where
     T: Clone + PartialEq + Display,
 {
     /// 数据字段，使用泛型类型
+    /// field ，generic type
+    /// 数据field，Usegenerictype
     pub data: T,
     /// 计数器字段
+    /// field
     pub count: u32,
     /// 可选的元数据
     pub metadata: Option<String>,
@@ -37,16 +49,12 @@ impl<T> BasicSyntaxDemo<T>
 where
     T: Clone + PartialEq + Display,
 {
-    /// 创建新的 BasicSyntaxDemo 实例
-    ///
     /// # 参数
-    /// * `data` - 要存储的数据
-    ///
+    /// # parameter
     /// # 返回值
-    /// 返回一个新的 BasicSyntaxDemo 实例
-    ///
+    /// # return value
     /// # 示例
-    /// ```rust
+    /// # example
     /// use c03_control_fn::basic_syntax::BasicSyntaxDemo;
     ///
     /// let demo = BasicSyntaxDemo::new(42);
@@ -62,12 +70,13 @@ where
     }
 
     /// 更新数据并增加计数器
-    ///
+    /// and
     /// # 参数
-    /// * `new_data` - 新的数据值
-    ///
+    /// # parameter
+    /// * `new_data` - 新数据值
+    /// * `new_data` -
     /// # 示例
-    /// ```rust
+    /// # example
     /// use c03_control_fn::basic_syntax::BasicSyntaxDemo;
     ///
     /// let mut demo = BasicSyntaxDemo::new(42);
@@ -81,29 +90,32 @@ where
     }
 
     /// 设置元数据
-    ///
     /// # 参数
+    /// # parameter
     /// * `metadata` - 元数据字符串
-    ///
+    /// * `metadata` -
     /// # 示例
-    /// ```rust
+    /// # example
     /// use c03_control_fn::basic_syntax::BasicSyntaxDemo;
     ///
     /// let mut demo = BasicSyntaxDemo::new(42);
     /// demo.set_metadata("示例数据".to_string());
+    /// demo.set_metadata("Example of数据".to_string());
     /// assert_eq!(demo.metadata, Some("示例数据".to_string()));
-    /// ```
+    /// assert_eq!(demo.metadata, Some("Example of数据".to_string()));
     pub fn set_metadata(&mut self, metadata: String) {
         self.metadata = Some(metadata);
     }
 
     /// 获取数据的字符串表示
-    ///
+    /// represent
+    /// Get数据字符串represent
     /// # 返回值
+    /// # return value
     /// 返回数据的字符串表示
-    ///
+    /// represent
     /// # 示例
-    /// ```rust
+    /// # example
     /// use c03_control_fn::basic_syntax::BasicSyntaxDemo;
     ///
     /// let demo = BasicSyntaxDemo::new(42);
@@ -128,18 +140,20 @@ where
 }
 
 /// 变量声明与绑定演示
-///
-/// 演示 Rust 中变量声明、绑定和可变性的各种用法
+/// variable and demonstration
 pub mod variable_binding {
     use super::*;
 
     /// 基础变量声明演示
-    ///
-    /// 展示 Rust 中变量的基本声明方式：
+    /// foundation variable demonstration
     /// - 不可变变量（默认）
+    /// - variable （）
     /// - 可变变量（mut 关键字）
+    /// - variable （mut key ）
     /// - 类型注解
+    /// - type
     /// - 类型推断
+    /// - type infer
     pub fn basic_variable_declaration() {
         println!("=== 基础变量声明演示 ===");
 
@@ -177,8 +191,9 @@ pub mod variable_binding {
     }
 
     /// 复杂类型变量声明演示
-    ///
+    /// complex type variable demonstration
     /// 展示复杂数据类型的变量声明方式
+    /// complex type variable way
     pub fn complex_type_declaration() {
         println!("\n=== 复杂类型变量声明演示 ===");
 
@@ -223,8 +238,9 @@ pub mod variable_binding {
     }
 
     /// 模式匹配变量绑定演示
-    ///
+    /// variable demonstration
     /// 展示使用模式匹配进行变量绑定的高级用法
+    /// variable
     pub fn pattern_matching_binding() {
         println!("\n=== 模式匹配变量绑定演示 ===");
 
@@ -274,14 +290,12 @@ pub mod variable_binding {
 }
 
 /// 数据类型与类型推断演示
-///
-/// 演示 Rust 的类型系统和类型推断机制
+/// type and type infer demonstration
 pub mod type_system {
     use super::*;
 
     /// 基础数据类型演示
-    ///
-    /// 展示 Rust 的基础数据类型及其特性
+    /// foundation type demonstration
     pub fn basic_data_types() {
         println!("\n=== 基础数据类型演示 ===");
 
@@ -331,8 +345,8 @@ pub mod type_system {
     }
 
     /// 复合数据类型演示
-    ///
-    /// 展示 Rust 的复合数据类型
+    /// type demonstration
+    /// display Rust 复合数据type
     pub fn compound_data_types() {
         println!("\n=== 复合数据类型演示 ===");
 
@@ -363,8 +377,7 @@ pub mod type_system {
     }
 
     /// 类型推断演示
-    ///
-    /// 展示 Rust 强大的类型推断能力
+    /// type infer demonstration
     pub fn type_inference() {
         println!("\n=== 类型推断演示 ===");
 
@@ -395,20 +408,21 @@ pub mod type_system {
     }
 
     /// 辅助函数：两个数字相加
+    /// function ：
     fn add_numbers(a: i32, b: i32) -> i32 {
         a + b
     }
 }
 
 /// 控制流结构演示
-///
-/// 演示 Rust 中的各种控制流结构
+/// stream structure demonstration
+/// Demonstration of Rust in各种控制streamstructure
 pub mod control_flow {
     //use super::*;
 
     /// 条件语句演示
-    ///
-    /// 展示 if、if-else、if-else if-else 语句的用法
+    /// condition demonstration
+    /// display if、if-else、if-else if-else 语句用法
     pub fn conditional_statements() {
         println!("\n=== 条件语句演示 ===");
 
@@ -461,8 +475,7 @@ pub mod control_flow {
     }
 
     /// 循环语句演示
-    ///
-    /// 展示 loop、while、for 循环的用法
+    /// circulation demonstration
     pub fn loop_statements() {
         println!("\n=== 循环语句演示 ===");
 
@@ -517,8 +530,8 @@ pub mod control_flow {
     }
 
     /// 模式匹配演示
-    ///
-    /// 展示 match 表达式的强大功能
+    /// demonstration
+    /// 模式匹配Demonstration of
     pub fn pattern_matching() {
         println!("\n=== 模式匹配演示 ===");
 
@@ -596,14 +609,14 @@ pub mod control_flow {
 }
 
 /// 函数定义与调用演示
-///
-/// 演示 Rust 中函数的各种定义和调用方式
+/// function definition and demonstration
 pub mod functions {
     use super::*;
 
     /// 基础函数演示
-    ///
+    /// foundation function demonstration
     /// 展示函数的基本定义和调用方式
+    /// function this definition and way
     pub fn basic_functions() {
         println!("\n=== 基础函数演示 ===");
 
@@ -627,8 +640,9 @@ pub mod functions {
     }
 
     /// 高级函数特性演示
-    ///
+    /// function feature demonstration
     /// 展示函数的高级特性
+    /// function feature
     pub fn advanced_functions() {
         println!("\n=== 高级函数特性演示 ===");
 
@@ -659,8 +673,9 @@ pub mod functions {
     }
 
     /// 泛型函数演示
-    ///
+    /// generic function demonstration
     /// 展示泛型函数的使用
+    /// generic function
     pub fn generic_functions() {
         println!("\n=== 泛型函数演示 ===");
 
@@ -686,26 +701,32 @@ pub mod functions {
     // 辅助函数定义
 
     /// 简单的问候函数
+    /// simple function
     fn greet() {
         println!("Hello, Rust!");
     }
 
     /// 带参数的问候函数
+    /// parameter function
     fn greet_person(name: &str) {
         println!("Hello, {}!", name);
     }
 
     /// 加法函数
+    /// function
+    /// 加法function
     fn add(a: i32, b: i32) -> i32 {
         a + b
     }
 
     /// 复杂计算函数
+    /// complex function
     fn calculate(a: i32, b: i32, c: i32) -> i32 {
         a * b + c
     }
 
     /// 查找最小值和最大值
+    /// minimum and maximum
     fn find_min_max(slice: &[i32]) -> (i32, i32) {
         let mut min = slice[0];
         let mut max = slice[0];
@@ -723,6 +744,7 @@ pub mod functions {
     }
 
     /// 应用操作的高阶函数
+    /// application function
     fn apply_operation<F>(a: i32, b: i32, operation: F) -> i32
     where
         F: Fn(i32, i32) -> i32,
@@ -731,6 +753,7 @@ pub mod functions {
     }
 
     /// 创建乘数器的函数
+    /// function
     fn create_multiplier(factor: i32) -> impl Fn(i32) -> i32 {
         move |x| x * factor
     }
@@ -745,11 +768,13 @@ pub mod functions {
     }
 
     /// 泛型恒等函数
+    /// generic etc. function
     fn identity<T>(x: T) -> T {
         x
     }
 
     /// 泛型最大值函数
+    /// generic maximum function
     pub fn max_value<T>(a: T, b: T) -> T
     where
         T: PartialOrd,
@@ -763,14 +788,12 @@ pub mod functions {
 }
 
 /// 错误处理演示
-///
-/// 演示 Rust 中的错误处理机制
+/// Error handling demonstration
 pub mod error_handling {
     use std::num::ParseIntError;
 
     /// 基础错误处理演示
-    ///
-    /// 展示 Result 和 Option 的基本用法
+    /// foundation Error handling demonstration
     pub fn basic_error_handling() {
         println!("\n=== 基础错误处理演示 ===");
 
@@ -818,8 +841,9 @@ pub mod error_handling {
     }
 
     /// 高级错误处理演示
-    ///
+    /// Error handling demonstration
     /// 展示错误处理的高级特性
+    /// error handling feature
     pub fn advanced_error_handling() {
         println!("\n=== 高级错误处理演示 ===");
 
@@ -875,12 +899,14 @@ pub mod error_handling {
     // 辅助函数
 
     /// 解析字符串并翻倍
+    /// and
     pub fn parse_and_double(s: &str) -> Result<i32, ParseIntError> {
         let number = s.parse::<i32>()?;
         Ok(number * 2)
     }
 
     /// 安全除法函数
+    /// function
     fn safe_divide(a: i32, b: i32) -> Result<i32, CustomError> {
         if b == 0 {
             return Err(CustomError::DivisionByZero);
@@ -914,8 +940,9 @@ pub mod error_handling {
 }
 
 /// 综合演示函数
-///
+/// synthesize demonstration function
 /// 运行所有基础语法演示
+/// Run all foundation demonstration
 pub fn run_all_demos() {
     println!("🚀 Rust 1.89 基础语法综合演示");
     println!("=====================================");

@@ -1,14 +1,11 @@
-//! Miri 测试模块 - WebAssembly 内存安全验证
-//!
-//! 本模块包含用于 Miri 测试的 WebAssembly 相关代码示例。
-//!
 //! 运行方式:
-//!   cargo miri test miri_tests
+//! Run way :
 //!   MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test miri_tests
 
 // ==================== WASM 内存模型 ====================
 
 /// 线性内存模拟
+/// line memory
 struct LinearMemory {
     data: Vec<u8>,
     page_size: usize,
@@ -51,8 +48,12 @@ impl LinearMemory {
 }
 
 /// 测试目的: 验证线性内存基本操作
+/// objective : line memory this
 /// 测试场景: 创建内存、写入、读取、增长
+/// scenario : memory 、、、
+/// Test forscenario: Creatememory、Write、Read、增长
 /// 预期结果: 应该正确管理内存
+/// result : should memory
 #[test]
 fn test_linear_memory() {
     let mut mem = LinearMemory::new(1); // 1 page = 64KB
@@ -72,8 +73,11 @@ fn test_linear_memory() {
 }
 
 /// 测试目的: 验证越界访问保护
+/// objective :
 /// 测试场景: 尝试越界写入和在边界处写入
+/// scenario : and in edge
 /// 预期结果: 越界应该失败，边界处应该成功
+/// result : should ，edge should
 #[test]
 fn test_memory_bounds_check() {
     let mut mem = LinearMemory::new(1);
@@ -90,6 +94,8 @@ fn test_memory_bounds_check() {
 // ==================== WASM 值类型 ====================
 
 /// WASM 值类型联合体
+/// WASM type union volume
+/// WASM 值typeunionvolume
 #[repr(C)]
 union WasmValue {
     i32: i32,
@@ -98,9 +104,11 @@ union WasmValue {
     f64: f64,
 }
 
-/// 测试目的: 验证 WASM 值类型联合体
+/// Test forobjective: Verify WASM 值typeunionvolume
 /// 测试场景: 使用联合体存储不同类型值
+/// scenario : union volume type
 /// 预期结果: 应该正确存储和读取值
+/// result : should and
 #[test]
 fn test_wasm_value_union() {
     unsafe {
@@ -115,12 +123,14 @@ fn test_wasm_value_union() {
 // ==================== 调用栈 ====================
 
 /// 调用帧结构
+/// structure
 struct CallFrame {
     locals: Vec<i32>,
     return_addr: usize,
 }
 
 /// 调用栈结构
+/// stack structure
 struct CallStack {
     frames: Vec<CallFrame>,
     max_depth: usize,
@@ -155,8 +165,11 @@ impl CallStack {
 }
 
 /// 测试目的: 验证调用栈管理
+/// objective : stack
 /// 测试场景: push 和 pop 调用帧
+/// scenario : push and pop
 /// 预期结果: 应该正确管理栈
+/// result : should stack
 #[test]
 fn test_call_stack() {
     let mut stack = CallStack::new(1024);
@@ -173,8 +186,11 @@ fn test_call_stack() {
 }
 
 /// 测试目的: 验证栈溢出保护
+/// objective : stack overflow
 /// 测试场景: 超过最大深度 push
+/// scenario : maximum push
 /// 预期结果: 应该返回 false
+/// result : should false
 #[test]
 fn test_stack_overflow_protection() {
     let mut stack = CallStack::new(2);
@@ -187,6 +203,7 @@ fn test_stack_overflow_protection() {
 // ==================== 模块实例 ====================
 
 /// 模块实例结构
+/// module structure
 struct ModuleInstance {
     _memory: LinearMemory,
     globals: Vec<i32>,
@@ -224,8 +241,11 @@ impl ModuleInstance {
 }
 
 /// 测试目的: 验证模块实例状态
+/// objective : module state
 /// 测试场景: 操作全局变量和函数表
+/// scenario : global variable and function
 /// 预期结果: 应该正确管理状态
+/// result : should state
 #[test]
 fn test_module_instance() {
     let mut instance = ModuleInstance::new();

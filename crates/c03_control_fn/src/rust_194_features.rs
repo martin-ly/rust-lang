@@ -1,50 +1,50 @@
-//! Rust 1.94.0 控制流与函数特性实现模块
-//!
-//! 本模块展示了 Rust 1.94.0 在控制流和函数场景中的增强，包括：
-//! - 改进的闭包捕获语义 / Improved Closure Capture Semantics
-//! - 增强的 match 表达式 / Enhanced Match Expressions
 //! - 函数指针优化 / Function Pointer Optimizations
 //! - Edition 2024 控制流改进 / Edition 2024 Control Flow Improvements
 //! - 性能优化和编译时改进 / Performance Optimizations
-//!
 //! # 文件信息
+//! #
 //! - 文件: rust_194_features.rs
 //! - 创建日期: 2026-03-06
+//! - date : 2026-03-06
 //! - 版本: 1.0
-//! - Rust版本: 1.94.0
-//! - Edition: 2024
+//! - this : 1.0
+//! - 版this: 1.0
 use std::fmt::Debug;
 
 // ==================== Rust 1.94 真实特性: Peekable 新方法 ====================
 
 /// # Peekable 新方法 / Peekable Iterator New Methods
-///
-/// Rust 1.94.0 为 `Peekable` 迭代器添加了两个新方法：
+/// # Peekable 新method / Peekable Iterator New Methods
 /// - `next_if_map<F, R>(f: F) -> Option<R>` - 如果下一个元素满足条件，则映射并消耗它
-/// - `next_if_map_mut<F, R>(f: F) -> Option<R>` - next_if_map 的可变版本
-///
+/// - `next_if_map<F, R>(f: F) -> Option<R>` - if under element condition ，and
+/// - `next_if_map_mut<F, R>(f: F) -> Option<R>` - next_if_map 可变版this
 /// ## 特性说明
-/// - `next_if_map` 结合了 `peek()` 和 `map()` 的功能
+/// ## feature explain
 /// - 只有当映射函数返回 `Some` 时才会消耗元素
+/// - when function `Some` element
 /// - 适用于解析器、词法分析器等需要前瞻并条件性消耗元素的场景
-///
+/// - 、analyze etc. before and condition element scenario
 /// ## 使用场景
+/// ## scenario
 /// - 词法分析器 (Lexer) 实现
+/// - analyze (Lexer)
 /// - 解析器 (Parser) 前瞻
+/// - (Parser) before
 /// - 数据流的条件处理
-///
+/// - stream condition
 /// ## 注意
+/// ##
 /// 在当前 Rust 版本中，`next_if_map` 可能尚未稳定或 API 有所不同。
-/// 以下代码展示了概念用法，实际 API 请以 Rust 1.94 文档为准。
-/// 使用 Peekable 新方法实现的简单词法分析器
-///
+/// in when before Rust this in ，`next_if_map` may or API 。
 /// 演示如何使用 `next_if_map` 进行前瞻并条件性消耗标记
+/// demonstration `next_if_map` before and condition mark
 pub struct SimpleLexer<'a> {
     input: std::iter::Peekable<std::str::Chars<'a>>,
 }
 
 impl<'a> SimpleLexer<'a> {
     /// 创建新的词法分析器
+    /// analyze
     pub fn new(input: &'a str) -> Self {
         Self {
             input: input.chars().peekable(),
@@ -57,9 +57,8 @@ impl<'a> SimpleLexer<'a> {
     }
 
     /// 解析数字
-    ///
-    /// 使用传统的 next_if 方法（当前可用）
     /// 在 Rust 1.94 中可以使用 next_if_map 简化此逻辑
+    /// in Rust 1.94 in can next_if_map this
     pub fn parse_number(&mut self) -> Option<i64> {
         // 检查第一个字符是否为数字
         let &first_char = self.input.peek()?;
@@ -85,9 +84,8 @@ impl<'a> SimpleLexer<'a> {
     }
 
     /// 解析标识符
-    ///
-    /// 使用传统的 next_if 方法（当前可用）
     /// 在 Rust 1.94 中可以使用 next_if_map 简化此逻辑
+    /// in Rust 1.94 in can next_if_map this
     pub fn parse_identifier(&mut self) -> Option<String> {
         // 检查第一个字符是否为字母或下划线
         let &first_char = self.input.peek()?;
@@ -115,24 +113,25 @@ impl<'a> SimpleLexer<'a> {
     }
 
     /// 解析特定字符
-    ///
-    /// 使用传统的 next_if 方法（当前可用）
     pub fn expect_char(&mut self, expected: char) -> Option<char> {
         self.input.next_if(|c| *c == expected)
     }
 
     /// 查看下一个字符
+    /// under
     pub fn peek(&mut self) -> Option<&char> {
         self.input.peek()
     }
 
     /// 消耗并返回下一个字符
+    /// and under
     pub fn next_char(&mut self) -> Option<char> {
         self.input.next()
     }
 }
 
 /// 标记类型
+/// mark type
 #[derive(Debug, Clone, PartialEq)]
 pub enum Token {
     /// 数字
@@ -148,6 +147,7 @@ pub enum Token {
 }
 
 /// 标记迭代器
+/// mark
 pub struct TokenIterator<'a> {
     lexer: SimpleLexer<'a>,
 }
@@ -190,9 +190,8 @@ impl<'a> Iterator for TokenIterator<'a> {
     }
 }
 
-/// 使用 next_if_map 实现的数据过滤处理器
-///
 /// 演示如何在数据处理管道中使用 Peekable 新方法
+/// demonstration in pipe in Peekable method
 pub struct DataFilterProcessor<T, I: Iterator<Item = T>> {
     iter: std::iter::Peekable<I>,
 }
@@ -206,11 +205,13 @@ impl<T, I: Iterator<Item = T>> DataFilterProcessor<T, I> {
     }
 
     /// 提取并映射满足条件的元素
-    ///
+    /// and condition element
     /// 在当前版本中，结合 peek 和 next_if 实现类似功能
+    /// in when before this in ， peek and next_if similar to functionality
     /// 在 Rust 1.94 中可以使用 next_if_map 简化
-    ///
+    /// in Rust 1.94 in can next_if_map
     /// 此方法会跳过不满足条件的元素，直到找到第一个满足条件的
+    /// this method condition element ，to to first condition
     pub fn extract_and_map<F, R>(&mut self, mut predicate: F) -> Option<R>
     where
         F: FnMut(&T) -> Option<R>,
@@ -227,6 +228,8 @@ impl<T, I: Iterator<Item = T>> DataFilterProcessor<T, I> {
     }
 
     /// 跳过满足条件的元素
+    /// condition element
+    /// 跳过满足conditionelement
     pub fn skip_while<F>(&mut self, predicate: F)
     where
         F: Fn(&T) -> bool,
@@ -235,15 +238,18 @@ impl<T, I: Iterator<Item = T>> DataFilterProcessor<T, I> {
     }
 
     /// 查看下一个元素
+    /// under element
     pub fn peek(&mut self) -> Option<&T> {
         self.iter.peek()
     }
 }
 
 /// 解析结果类型
+/// result type
 #[derive(Debug, Clone, PartialEq)]
 pub enum ParseResult<T> {
     /// 成功解析
+    /// 成功Parse
     Success(T),
     /// 解析失败
     Failure(String),
@@ -252,8 +258,9 @@ pub enum ParseResult<T> {
 }
 
 /// 通用解析器（使用 next_if_map 模式）
-///
+/// （ next_if_map ）
 /// 演示高级解析模式
+/// demonstration
 pub struct GenericParser<T, I: Iterator<Item = T>> {
     input: std::iter::Peekable<I>,
 }
@@ -267,16 +274,21 @@ impl<T: Debug, I: Iterator<Item = T>> GenericParser<T, I> {
     }
 
     /// 尝试解析下一个元素
-    ///
+    /// under element
     /// 在当前版本中，结合 peek 和 next 实现类似功能
+    /// in when before this in ， peek and next similar to functionality
     /// 在 Rust 1.94 中可以使用 next_if_map 简化
-    ///
+    /// in Rust 1.94 in can next_if_map
     /// # 参数
-    /// - `predicate`: 一个函数，如果元素满足条件则返回 Some(转换后的值)
-    ///
+    /// # parameter
     /// # 返回
+    /// #
     /// - `Some(R)` 如果成功解析
+    /// - `Some(R)` if
+    /// - `Some(R)` if成功Parse
     /// - `None` 如果不满足条件
+    /// - `None` if condition
+    /// - `None` if不满足condition
     pub fn try_parse<F, R>(&mut self, predicate: F) -> Option<R>
     where
         F: Fn(&T) -> Option<R>,
@@ -290,13 +302,14 @@ impl<T: Debug, I: Iterator<Item = T>> GenericParser<T, I> {
     }
 
     /// 要求解析特定模式
-    ///
     /// # 参数
+    /// # parameter
     /// - `predicate`: 匹配函数
-    /// - `expected`: 期望的描述（用于错误消息）
-    ///
+    /// - `predicate`: 匹配function
     /// # 返回
+    /// #
     /// 解析结果
+    /// result
     pub fn require<F, R>(&mut self, predicate: F, expected: &str) -> ParseResult<R>
     where
         F: Fn(&T) -> Option<R>,
@@ -311,6 +324,7 @@ impl<T: Debug, I: Iterator<Item = T>> GenericParser<T, I> {
     }
 
     /// 解析多个元素直到条件不满足
+    /// element to condition
     pub fn parse_many<F, R>(&mut self, mut predicate: F) -> Vec<R>
     where
         F: FnMut(&T) -> Option<R>,
@@ -324,11 +338,13 @@ impl<T: Debug, I: Iterator<Item = T>> GenericParser<T, I> {
     }
 
     /// 检查是否还有更多元素
+    /// element
     pub fn has_more(&mut self) -> bool {
         self.input.peek().is_some()
     }
 
     /// 查看下一个元素
+    /// under element
     pub fn peek(&mut self) -> Option<&T> {
         self.input.peek()
     }
@@ -336,13 +352,9 @@ impl<T: Debug, I: Iterator<Item = T>> GenericParser<T, I> {
 
 // ==================== 1. 改进的闭包捕获语义 ====================
 
-/// # 1. 改进的闭包捕获语义 / Improved Closure Capture Semantics
-///
-/// Rust 1.94.0 进一步优化了闭包捕获规则，使代码更直观：
-/// Rust 1.94.0 further optimizes closure capture rules for more intuitive code:
 /// 闭包捕获分析器
-///
-/// Rust 1.94.0: 更精确的闭包捕获分析
+/// closure capture analyze
+/// Rust 1.94.0: 更精确closure captureanalysis
 pub struct ClosureCaptureAnalyzer<T> {
     data: T,
     access_count: usize,
@@ -350,6 +362,7 @@ pub struct ClosureCaptureAnalyzer<T> {
 
 impl<T> ClosureCaptureAnalyzer<T> {
     /// 创建新的分析器
+    /// analyze
     pub fn new(data: T) -> Self {
         Self {
             data,
@@ -358,8 +371,6 @@ impl<T> ClosureCaptureAnalyzer<T> {
     }
 
     /// 创建只读访问闭包
-    ///
-    /// Rust 1.94.0: 改进的不可变捕获
     pub fn create_reader<F, R>(&self, f: F) -> impl Fn() -> R + use<'_, F, T, R>
     where
         F: Fn(&T) -> R,
@@ -369,8 +380,6 @@ impl<T> ClosureCaptureAnalyzer<T> {
     }
 
     /// 创建可变访问闭包
-    ///
-    /// Rust 1.94.0: 改进的可变捕获
     pub fn create_mutator<F>(&mut self, f: F) -> impl FnMut() + use<'_, F, T>
     where
         F: Fn(&mut T, &mut usize),
@@ -390,8 +399,6 @@ impl<T> ClosureCaptureAnalyzer<T> {
 }
 
 /// 精确捕获闭包创建器
-///
-/// Rust 1.94.0: 支持更精确的闭包捕获指定
 pub fn create_precise_closure<T: Clone>(value: T) -> impl Fn() -> T {
     // Rust 1.94.0: 编译器更智能地决定捕获方式
     let captured = value;
@@ -400,11 +407,9 @@ pub fn create_precise_closure<T: Clone>(value: T) -> impl Fn() -> T {
 
 // ==================== 2. 增强的 match 表达式 ====================
 
-/// # 2. 增强的 match 表达式 / Enhanced Match Expressions
-///
-/// Rust 1.94.0 改进了 match 表达式的性能和可用性：
-/// Rust 1.94.0 improves match expression performance and usability:
 /// 匹配结果枚举
+/// result enum
+/// 匹配resultenum
 #[derive(Debug, Clone, PartialEq)]
 pub enum MatchResult<T> {
     Success(T),
@@ -412,9 +417,6 @@ pub enum MatchResult<T> {
     Pending,
 }
 
-/// 增强的 match 处理器
-///
-/// Rust 1.94.0: 优化的模式匹配性能
 pub struct EnhancedMatcher<T> {
     value: Option<T>,
 }
@@ -426,8 +428,8 @@ impl<T: PartialEq + std::fmt::Debug> EnhancedMatcher<T> {
     }
 
     /// 执行增强匹配
-    ///
-    /// Rust 1.94.0: 更快的模式匹配执行
+    /// Rust 1.94.0: 更快模式匹配Execute
+    /// Rust 1.94.0: Execute
     pub fn enhanced_match(&self) -> MatchResult<&T> {
         match &self.value {
             Some(v) if is_valid_value(v) => {
@@ -440,8 +442,7 @@ impl<T: PartialEq + std::fmt::Debug> EnhancedMatcher<T> {
     }
 
     /// 匹配或默认
-    ///
-    /// Rust 1.94.0: 改进的 match 表达式类型推断
+    /// or
     pub fn match_or_default<R, F>(&self, f: F, default: R) -> R
     where
         F: FnOnce(&T) -> R,
@@ -454,16 +455,14 @@ impl<T: PartialEq + std::fmt::Debug> EnhancedMatcher<T> {
 }
 
 /// 验证值是否有效
-///
-/// 检查值是否符合特定条件。当前实现对所有类型都返回 true，
+/// effective
 /// 实际使用时可以根据具体类型添加验证逻辑（如检查空字符串、零值等）。
+/// actual can according to volume type （、etc. ）。
 fn is_valid_value<T>(_value: &T) -> bool {
     true
 }
 
-/// 使用增强的 match 表达式处理结果
-///
-/// Rust 1.94.0: 更清晰的 match 臂类型推断
+/// Rust 1.94.0: 更clear match 臂type inference
 pub fn process_match_result<T: Debug>(result: MatchResult<T>) -> String {
     match result {
         MatchResult::Success(val) => format!("成功: {:?}", val),
@@ -475,12 +474,9 @@ pub fn process_match_result<T: Debug>(result: MatchResult<T>) -> String {
 // ==================== 3. 函数指针优化 ====================
 
 /// # 3. 函数指针优化 / Function Pointer Optimizations
-///
-/// Rust 1.94.0 优化了函数指针的处理和性能：
-/// Rust 1.94.0 optimizes function pointer handling and performance:
 /// 函数指针包装器
-///
-/// Rust 1.94.0: 改进的函数指针类型推断
+/// function pointer
+/// Rust 1.94.0: 改进function pointertype inference
 pub struct FunctionPtrWrapper<T, R> {
     func: fn(T) -> R,
     call_count: usize,
@@ -488,6 +484,7 @@ pub struct FunctionPtrWrapper<T, R> {
 
 impl<T, R> FunctionPtrWrapper<T, R> {
     /// 创建新的函数指针包装器
+    /// function pointer
     pub fn new(func: fn(T) -> R) -> Self {
         Self {
             func,
@@ -496,8 +493,7 @@ impl<T, R> FunctionPtrWrapper<T, R> {
     }
 
     /// 调用函数
-    ///
-    /// Rust 1.94.0: 优化的函数指针调用
+    /// function
     pub fn call(&mut self, arg: T) -> R {
         self.call_count += 1;
         (self.func)(arg)
@@ -510,15 +506,13 @@ impl<T, R> FunctionPtrWrapper<T, R> {
 }
 
 /// 优化的函数组合
-///
-/// Rust 1.94.0: 更好的函数组合类型推断
+/// optimization function combination
 pub fn compose_functions<T, U, V>(f: fn(T) -> U, g: fn(U) -> V) -> impl Fn(T) -> V {
     move |x| g(f(x))
 }
 
 /// 条件函数执行
-///
-/// Rust 1.94.0: 改进的条件编译优化
+/// condition function
 pub fn conditional_execute<T>(condition: bool, f: fn() -> T, g: fn() -> T) -> T {
     if condition { f() } else { g() }
 }
@@ -526,12 +520,8 @@ pub fn conditional_execute<T>(condition: bool, f: fn() -> T, g: fn() -> T) -> T 
 // ==================== 4. Edition 2024 控制流改进 ====================
 
 /// # 4. Edition 2024 控制流改进 / Edition 2024 Control Flow Improvements
-///
-/// Rust 1.94.0 与 Edition 2024 的控制流集成：
-/// Rust 1.94.0 control flow integration with Edition 2024:
 /// Edition 2024 控制流处理器
-///
-/// Rust 1.94.0: Edition 2024 优化的控制流
+/// Edition 2024 stream
 pub struct Edition2024ControlFlow<T> {
     value: Option<T>,
     #[allow(dead_code)]
@@ -547,6 +537,7 @@ pub enum Edition2024 {
 
 impl<T> Edition2024ControlFlow<T> {
     /// 创建新的控制流处理器
+    /// stream
     pub fn new(value: Option<T>) -> Self {
         Self {
             value,
@@ -555,11 +546,13 @@ impl<T> Edition2024ControlFlow<T> {
     }
 
     /// 执行 try 风格操作
-    ///
-    /// Rust 1.94.0 + Edition 2024: 改进的错误传播
-    ///
+    /// try
+    /// Execute try 风格操作
+    /// Rust 1.94.0 + Edition 2024: 改进error propagation
     /// # 错误
+    /// #
     /// 当没有值存在时返回 `Err(E)`，其中 E 由调用者提供的闭包或类型决定
+    /// when in `Err(E)`，its in E or type
     pub fn try_operation<F, E>(&self, f: F) -> Result<T, E>
     where
         T: Clone,
@@ -573,8 +566,8 @@ impl<T> Edition2024ControlFlow<T> {
     }
 
     /// 执行 while let 优化循环
-    ///
-    /// Rust 1.94.0: 优化的 while let 模式
+    /// while let optimization circulation
+    /// Rust 1.94.0: optimization while let 模式
     pub fn process_while_some<F>(&mut self, mut f: F)
     where
         F: FnMut(&T),
@@ -585,8 +578,9 @@ impl<T> Edition2024ControlFlow<T> {
     }
 
     /// 使用 if let 链
-    ///
-    /// Rust 1.94.0: 改进的 if let 链支持
+    /// if let
+    /// Use if let 链
+    /// Rust 1.94.0: 改进 if let 链Supports
     pub fn chain_if_let<R, F>(&self, f: F) -> Option<R>
     where
         F: FnOnce(&T) -> Option<R>,
@@ -601,19 +595,20 @@ impl<T> Edition2024ControlFlow<T> {
 
 // ==================== Rust 1.94 真实特性: array_windows 控制流 ====================
 
-/// # array_windows 在控制流中的应用
-///
-/// Rust 1.94.0 的 `array_windows` 方法可以与控制流结合，
+/// # array_windows in控制streaminapplication
 /// 实现高效的序列处理和模式检测。
-/// 使用 array_windows 的状态机解析器
-///
+/// efficient sequence and 。
 /// 检测状态转换模式
+/// state conversion
 pub struct StateMachineParser;
 
 impl StateMachineParser {
     /// 检测状态转换序列
-    ///
+    /// state conversion sequence
+    /// 检测stateconversionsequence
     /// 检测形如 [A, B, C] 的连续状态转换
+    /// [A, B, C] state conversion
+    /// 检测形如 [A, B, C] 连续stateconversion
     pub fn detect_transitions(states: &[&str]) -> Vec<(String, String)> {
         states
             .array_windows::<2>()
@@ -623,8 +618,9 @@ impl StateMachineParser {
     }
 
     /// 检测循环模式
-    ///
+    /// circulation
     /// 查找形如 [X, Y, Z, X, Y, Z] 的重复模式
+    /// [X, Y, Z, X, Y, Z]
     pub fn detect_loops(states: &[i32]) -> Vec<(usize, usize)> {
         states
             .array_windows::<3>()
@@ -635,8 +631,10 @@ impl StateMachineParser {
     }
 
     /// 检测条件状态
-    ///
+    /// condition state
+    /// 检测conditionstate
     /// 使用控制流进行条件检测
+    /// stream condition
     pub fn check_condition_sequence(data: &[i32], threshold: i32) -> Vec<usize> {
         data.array_windows::<2>()
             .enumerate()
@@ -649,15 +647,15 @@ impl StateMachineParser {
     }
 }
 
-/// 使用 array_windows 的事件处理器
-///
 /// 处理连续事件流
+/// stream
 pub struct EventStreamProcessor;
 
 impl EventStreamProcessor {
     /// 处理事件对
-    ///
+    /// to
     /// 使用 array_windows 处理连续事件对
+    /// array_windows to
     pub fn process_event_pairs<T, F>(events: &[T], mut processor: F)
     where
         T: Clone,
@@ -669,8 +667,8 @@ impl EventStreamProcessor {
     }
 
     /// 检测事件激增
-    ///
     /// 检测连续三个事件值都超过阈值的情况
+    /// situation
     pub fn detect_spikes(events: &[i32], threshold: i32) -> Vec<usize> {
         events
             .array_windows::<3>()
@@ -683,15 +681,14 @@ impl EventStreamProcessor {
 
 // ==================== Rust 1.94 真实特性: LazyCell 控制流 ====================
 
-/// # LazyCell 在控制流中的应用
-///
-/// Rust 1.94.0 的 `LazyCell` 可以与控制流结合，
 /// 实现条件初始化和延迟计算。
+/// condition and 。
 use std::cell::LazyCell;
 
 /// 条件延迟初始化控制器
-///
+/// condition
 /// 根据条件决定是否初始化值
+/// according to condition
 pub struct ConditionalLazyController<T, F = fn() -> T>
 where
     F: FnOnce() -> T,
@@ -705,6 +702,7 @@ where
     F: FnOnce() -> T,
 {
     /// 创建新的条件控制器
+    /// condition
     pub fn new(condition: impl Fn() -> bool + 'static, factory: F) -> Self {
         Self {
             cell: LazyCell::new(factory),
@@ -713,8 +711,9 @@ where
     }
 
     /// 尝试获取值（仅在条件满足时）
-    ///
+    /// （in condition ）
     /// 控制流：条件判断决定是否返回值
+    /// stream ：condition return value
     pub fn try_get(&self) -> Result<&T, &'static str> {
         if !(self.condition)() {
             return Err("条件不满足，无法获取值");
@@ -723,19 +722,22 @@ where
     }
 
     /// 获取值
+    /// Get值
     pub fn get(&self) -> &T {
         &self.cell
     }
 
     /// 检查条件是否满足
+    /// condition
     pub fn check_condition(&self) -> bool {
         (self.condition)()
     }
 }
 
 /// 控制流感知的延迟缓存
-///
+/// stream
 /// 根据执行路径决定初始化策略
+/// according to strategy
 pub struct ControlFlowLazyCache<T, F = fn() -> T>
 where
     F: FnOnce() -> T,
@@ -749,6 +751,7 @@ where
     F: FnOnce() -> T,
 {
     /// 创建新的控制流缓存
+    /// stream
     pub fn new(factory: F) -> Self {
         Self {
             cell: LazyCell::new(factory),
@@ -757,8 +760,8 @@ where
     }
 
     /// 智能获取
-    ///
     /// 控制流：根据调用次数返回不同的状态信息
+    /// stream ：according to state
     pub fn smart_get(&self) -> &T {
         let count = self.init_count.get();
         self.init_count.set(count + 1);
@@ -766,6 +769,7 @@ where
     }
 
     /// 条件重置（逻辑重置计数器）
+    /// condition （）
     pub fn reset_counter(&self) {
         self.init_count.set(0);
     }
@@ -776,6 +780,7 @@ where
     }
 
     /// 获取值
+    /// Get值
     pub fn get(&self) -> &T {
         &self.cell
     }
@@ -793,20 +798,24 @@ where
 // ==================== Rust 1.94 真实特性: 数学常量控制流 ====================
 
 /// # 数学常量在控制流中的应用
-///
-/// Rust 1.94.0 引入的数学常量可以与控制流结合，
+/// # constant in stream in application
 /// 实现数值分析和算法控制。
+/// analyze and algorithm 。
 /// 数学常量模块
+/// constant module
+/// 数学constantmodule
 pub mod math_consts {
     /// 欧拉-马歇罗尼常数
+    /// -
     pub const EULER_GAMMA: f64 = 0.5772156649015329_f64;
     /// 黄金比例
     pub const GOLDEN_RATIO: f64 = 1.618033988749895_f64;
 }
 
 /// 使用数学常数的收敛控制器
-///
 /// 基于 EULER_GAMMA 判断收敛性
+/// EULER_GAMMA
+/// Based on EULER_GAMMA 判断收敛性
 pub struct ConvergenceController {
     tolerance: f64,
     max_iterations: usize,
@@ -822,15 +831,16 @@ impl ConvergenceController {
     }
 
     /// 使用欧拉常数调整容差
-    ///
     /// 控制流：基于数学常数调整精度要求
+    /// stream ：
     pub fn adjusted_tolerance(&self) -> f64 {
         self.tolerance * (1.0 + math_consts::EULER_GAMMA)
     }
 
     /// 迭代直到收敛（f64 版本）
-    ///
+    /// to （f64 this ）
     /// 控制流：循环直到满足收敛条件
+    /// stream ：circulation to condition
     pub fn iterate_until_converged_f64<F>(&self, mut iterator: F, initial: f64) -> f64
     where
         F: FnMut(f64) -> Option<f64>,
@@ -869,8 +879,9 @@ impl ConvergenceController {
 }
 
 /// 黄金比例分割搜索（控制流版本）
-///
+/// （stream this ）
 /// 使用 GOLDEN_RATIO 进行区间搜索
+/// GOLDEN_RATIO interval
 pub fn golden_section_search<F>(mut f: F, mut a: f64, mut b: f64, tolerance: f64) -> f64
 where
     F: FnMut(f64) -> f64,
@@ -905,8 +916,10 @@ where
 }
 
 /// 使用调和数近似的流控制
-///
+/// and stream
 /// 基于 EULER_GAMMA 进行近似计算
+/// EULER_GAMMA
+/// Based on EULER_GAMMA 进行近似Calculate
 pub fn controlled_harmonic_sum(n: u64, use_approximation: bool) -> f64 {
     if use_approximation && n > 100 {
         // 控制流：大数使用近似公式
@@ -923,6 +936,7 @@ pub fn controlled_harmonic_sum(n: u64, use_approximation: bool) -> f64 {
 use std::ops::ControlFlow;
 
 /// 搜索二维数组，找到目标时提前退出
+/// ，to goal before
 pub fn search_in_matrix(matrix: &[Vec<i32>], target: i32) -> ControlFlow<(usize, usize), ()> {
     for (i, row) in matrix.iter().enumerate() {
         for (j, &val) in row.iter().enumerate() {
@@ -935,6 +949,8 @@ pub fn search_in_matrix(matrix: &[Vec<i32>], target: i32) -> ControlFlow<(usize,
 }
 
 /// 数据验证管道
+/// pipe
+/// 数据Verifypipe
 pub fn validate_data(data: &str) -> ControlFlow<String, ()> {
     if data.is_empty() {
         return ControlFlow::Break("数据不能为空".to_string());
@@ -962,13 +978,8 @@ pub fn batch_process<T, E>(
 
 // ==================== 5. 性能优化的控制流结构 ====================
 
-/// # 5. 性能优化的控制流结构 / Performance Optimized Control Flow Structures
-///
-/// Rust 1.94.0 提供了性能优化的控制流模式：
-/// Rust 1.94.0 provides performance-optimized control flow patterns:
 /// 优化循环结构
-///
-/// Rust 1.94.0: 编译器优化的循环模式
+/// optimization circulation structure
 pub fn optimized_loop<F>(iterations: usize, mut f: F)
 where
     F: FnMut(usize),
@@ -980,8 +991,9 @@ where
 }
 
 /// 向量化友好循环
-///
+/// vectorization circulation
 /// Rust 1.94.0: 支持自动向量化
+/// Rust 1.94.0: auto-vectorization
 pub fn vectorizable_loop(data: &mut [f64], factor: f64) {
     // Rust 1.94.0: 编译器可以对这个循环进行向量化
     for item in data.iter_mut() {
@@ -990,8 +1002,8 @@ pub fn vectorizable_loop(data: &mut [f64], factor: f64) {
 }
 
 /// 分支预测友好函数
-///
-/// Rust 1.94.0: 改进的分支预测
+/// branch prediction function
+/// Rust 1.94.0: 改进branch prediction
 pub fn branch_predictor_friendly(value: i32) -> i32 {
     // Rust 1.94.0: 编译器优化分支预测
     match value {
@@ -1006,8 +1018,8 @@ pub fn branch_predictor_friendly(value: i32) -> i32 {
 }
 
 /// 无分支计算
-///
-/// Rust 1.94.0: 更好的无分支优化
+/// 无分支Calculate
+/// Rust 1.94.0: 更好无分支optimization
 pub fn branchless_computation(values: &[i32]) -> i32 {
     values.iter().fold(0, |acc, &x| {
         // Rust 1.94.0: 编译器可以优化为无分支代码
@@ -1018,6 +1030,8 @@ pub fn branchless_computation(values: &[i32]) -> i32 {
 // ==================== 6. 综合应用示例 ====================
 
 /// 演示 Rust 1.94.0 控制流特性
+/// demonstration Rust 1.94.0 stream feature
+/// Demonstration of Rust 1.94.0 控制streamfeature
 pub fn demonstrate_rust_194_control_flow() {
     println!("\n=== Rust 1.94.0 控制流特性演示 ===\n");
 
@@ -1159,6 +1173,7 @@ pub fn demonstrate_rust_194_control_flow() {
 }
 
 /// 获取 Rust 1.94.0 控制流特性信息
+/// Rust 1.94.0 stream feature
 pub fn get_rust_194_control_flow_info() -> String {
     "Rust 1.94.0 控制流特性:\n- Peekable 新方法: next_if_map, next_if_map_mut\n- \
      改进的闭包捕获语义\n- 增强的 match 表达式\n- 函数指针优化\n- Edition 2024 控制流改进\n- \
@@ -1541,9 +1556,6 @@ mod tests {
 
     // ==================== 反例和边界测试 ====================
 
-    /// 测试 SimpleLexer 对无效数字的解析
-    ///
-    /// 验证当输入不是数字时，parse_number 返回 None
     #[test]
     fn test_simple_lexer_invalid_number() {
         let mut lexer = SimpleLexer::new("abc");
@@ -1563,9 +1575,8 @@ mod tests {
         assert_eq!(lexer2.parse_identifier(), Some("abc123".to_string()));
     }
 
-    /// 测试 SimpleLexer 对空输入的处理
-    ///
     /// 验证当输入为空字符串时，各种解析方法的行为
+    /// when as ，method as
     #[test]
     fn test_simple_lexer_empty_input() {
         let mut lexer = SimpleLexer::new("");
@@ -1579,9 +1590,8 @@ mod tests {
         assert_eq!(lexer.expect_char('='), None);
     }
 
-    /// 测试 validate_data 的边界条件
-    ///
     /// 验证验证函数在边界值上的行为
+    /// function in edge on as
     #[test]
     fn test_validate_data_edge_cases() {
         // 空字符串应该失败
@@ -1627,9 +1637,6 @@ mod tests {
         ));
     }
 
-    /// 测试 Edition2024ControlFlow 对未初始化状态的访问
-    ///
-    /// 验证当值为 None 时，各种方法的正确处理
     #[test]
     fn test_edition_wrapper_uninitialized() {
         let control_flow = Edition2024ControlFlow::<i32>::new(None);

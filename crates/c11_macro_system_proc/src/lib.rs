@@ -1,22 +1,21 @@
 //! # C11: Rust 过程宏系统
-//!
-//! 这个crate提供了Rust过程宏的完整实现和示例。
-//! 过程宏是Rust中最强大的元编程工具，允许在编译时生成和转换代码。
-//!
+//! # C11: Rust system
 //! ## 宏类型
-//!
-//! - **派生宏 (Derive Macros)**: 自动为结构体和枚举实现trait
+//! ## type
+//! ## 宏type
 //! - **属性宏 (Attribute Macros)**: 装饰函数、结构体等
+//! - **attribute (Attribute Macros)**: function 、struct etc.
+//! - **attribute macro (Attribute Macros)**: 装饰function、structetc.
 //! - **函数式宏 (Function-like Macros)**: 类似macro_rules!但更强大
-//!
 //! ## 核心概念
-//!
-//! - **TokenStream**: 宏的输入和输出
+//! ## core concept
 //! - **AST**: 抽象语法树表示
+//! - **AST**: tree represent
+//! - **AST**: 抽象语法treerepresent
 //! - **编译时执行**: 在编译阶段运行代码
-//!
+//! - **compile-time **: in stage Run
 //! ## 示例
-//!
+//! ## example
 //! ```rust
 //! use c11_macro_system_proc::*;
 //!
@@ -39,10 +38,8 @@ use proc_macro::TokenStream;
 use quote::quote;
 use syn::{DeriveInput, ItemFn, parse_macro_input};
 
-/// 自动生成Builder模式的派生宏
-///
 /// # 示例
-///
+/// # example
 /// ```rust
 /// use c11_macro_system_proc::Builder;
 ///
@@ -129,9 +126,10 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
 }
 
 /// 调试打印属性宏
-///
+/// attribute
+/// 调试Printattribute macro
 /// # 示例
-///
+/// # example
 /// ```rust
 /// use c11_macro_system_proc::debug_print;
 ///
@@ -160,9 +158,10 @@ pub fn debug_print(_attr: TokenStream, item: TokenStream) -> TokenStream {
 }
 
 /// 计时器属性宏
-///
+/// attribute
+/// 计时器attribute macro
 /// # 示例
-///
+/// # example
 /// ```rust
 /// use c11_macro_system_proc::timed;
 ///
@@ -194,20 +193,18 @@ pub fn timed(_attr: TokenStream, item: TokenStream) -> TokenStream {
 }
 
 /// 条件编译宏
-///
+/// condition
 /// # 示例
-///
+/// # example
 /// ```rust
 /// use c11_macro_system_proc::conditional;
 ///
 /// conditional! {
 ///     #[cfg(debug_assertions)]
 ///     println!("调试模式");
-///
-///     #[cfg(not(debug_assertions))]
+///     println!("");
 ///     println!("发布模式");
-/// }
-/// ```
+///     println!("");
 #[proc_macro]
 pub fn conditional(input: TokenStream) -> TokenStream {
     // 解析条件编译块：conditional! { #[cfg(cond)] { expr } #[cfg(not(cond))] { expr } }
@@ -277,10 +274,8 @@ pub fn conditional(input: TokenStream) -> TokenStream {
     selected.map_or_else(TokenStream::new, TokenStream::from)
 }
 
-/// 自动实现Clone trait的派生宏
-///
 /// # 示例
-///
+/// # example
 /// ```rust
 /// use c11_macro_system_proc::AutoClone;
 ///
@@ -322,9 +317,9 @@ pub fn derive_auto_clone(input: TokenStream) -> TokenStream {
 }
 
 /// 序列化辅助宏
-///
+/// sequence
 /// # 示例
-///
+/// # example
 /// ```rust
 /// use c11_macro_system_proc::serializable;
 ///
@@ -334,7 +329,6 @@ pub fn derive_auto_clone(input: TokenStream) -> TokenStream {
 ///         name: String,
 ///         email: String,
 ///     }
-/// }
 /// ```
 #[proc_macro]
 pub fn serializable(input: TokenStream) -> TokenStream {
@@ -358,7 +352,6 @@ pub fn serializable(input: TokenStream) -> TokenStream {
         #input
 
         impl #name {
-            /// 将结构体序列化为 JSON 字符串（简化版，无引号逃逸）
             pub fn to_json(&self) -> String {
                 let mut parts = Vec::new();
                 #(

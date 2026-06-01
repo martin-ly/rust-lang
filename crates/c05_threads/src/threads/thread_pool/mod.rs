@@ -1,10 +1,16 @@
 //! 线程池模块
-//!
+//! thread pool module
 //! 本模块提供线程池的基本实现，包括：
+//! This module provides thread pool this ，：
 //! 1) 简单线程池
+//! 1) simple thread pool
 //! 2) 可配置线程池
+//! 2) thread pool
+//! 2) 可Configurethread pool
 //! 3) 线程池性能测试
+//! 3) thread pool performance test
 //! 4) 任务结果返回（补充）
+//! 4) task result （）
 use std::sync::mpsc::{channel, Receiver, Sender};
 use std::sync::{Arc, Mutex};
 use std::thread;
@@ -15,6 +21,7 @@ type SharedReceiver = Arc<Mutex<Receiver<Job>>>;
 
 
 /// 简单线程池实现
+/// simple thread pool
 pub struct SimpleThreadPool {
     workers: Vec<Worker>,
     sender: Option<Sender<Job>>,
@@ -22,6 +29,7 @@ pub struct SimpleThreadPool {
 
 impl SimpleThreadPool {
     /// 创建新的线程池
+    /// thread pool
     pub fn new(size: usize) -> Self {
         assert!(size > 0);
 
@@ -41,6 +49,7 @@ impl SimpleThreadPool {
     }
 
     /// 执行任务
+    /// task
     pub fn execute<F>(&self, f: F)
     where
         F: FnOnce() + Send + 'static,
@@ -51,6 +60,7 @@ impl SimpleThreadPool {
     }
 
     /// 执行带返回值的任务（4）：返回一个接收端用于获取结果
+    /// return value task （4）：result
     pub fn execute_with_result<F, R>(&self, f: F) -> Receiver<R>
     where
         F: FnOnce() -> R + Send + 'static,
@@ -64,6 +74,7 @@ impl SimpleThreadPool {
     }
 
     /// 尝试执行任务（发送失败时返回 false）
+    /// task （ false）
     pub fn try_execute<F>(&self, f: F) -> bool
     where
         F: FnOnce() + Send + 'static,
@@ -90,6 +101,7 @@ impl Drop for SimpleThreadPool {
 }
 
 /// 工作线程
+/// worker thread
 struct Worker {
     #[allow(dead_code)]
     id: usize,
@@ -124,6 +136,8 @@ impl Worker {
 }
 
 /// 可配置线程池
+/// thread pool
+/// 可Configurethread pool
 pub struct ConfigurableThreadPool {
     workers: Vec<ConfigurableWorker>,
     sender: Option<Sender<Job>>,
@@ -132,6 +146,7 @@ pub struct ConfigurableThreadPool {
 }
 
 /// 线程池配置
+/// thread pool
 #[derive(Debug, Clone)]
 pub struct ThreadPoolConfig {
     pub min_threads: usize,
@@ -153,6 +168,7 @@ impl Default for ThreadPoolConfig {
 
 impl ConfigurableThreadPool {
     /// 创建新的可配置线程池
+    /// thread pool
     pub fn new(config: ThreadPoolConfig) -> Self {
         assert!(config.min_threads > 0);
         assert!(config.max_threads >= config.min_threads);
@@ -180,6 +196,7 @@ impl ConfigurableThreadPool {
     }
 
     /// 执行任务
+    /// task
     pub fn execute<F>(&self, f: F)
     where
         F: FnOnce() + Send + 'static,
@@ -191,6 +208,7 @@ impl ConfigurableThreadPool {
     }
 
     /// 尝试执行任务（队列关闭或满时返回 false）
+    /// task （or false）
     pub fn try_execute<F>(&self, f: F) -> bool
     where
         F: FnOnce() + Send + 'static,
@@ -202,11 +220,13 @@ impl ConfigurableThreadPool {
     }
 
     /// 主动关闭线程池，停止接收新任务并让工作线程优雅退出
+    /// thread pool ，task and worker thread
     pub fn shutdown(&mut self) {
         self.sender.take();
     }
 
     /// 动态扩容一次（在不超过 max_threads 时新增一个临时工作线程）
+    /// （in max_threads temporary worker thread ）
     pub fn scale_up_once(&mut self) -> bool {
         if self.workers.len() >= self.config.max_threads {
             return false;
@@ -218,7 +238,6 @@ impl ConfigurableThreadPool {
         true
     }
 
-    /// 执行带返回值的任务，带超时；超时返回 None
     pub fn execute_with_timeout<F, R>(&self, f: F, timeout: Duration) -> Option<R>
     where
         F: FnOnce() -> R + Send + 'static,
@@ -229,6 +248,7 @@ impl ConfigurableThreadPool {
     }
 
     /// 执行带返回值的任务（4）：返回一个接收端用于获取结果
+    /// return value task （4）：result
     pub fn execute_with_result<F, R>(&self, f: F) -> Receiver<R>
     where
         F: FnOnce() -> R + Send + 'static,
@@ -242,6 +262,7 @@ impl ConfigurableThreadPool {
     }
 
     /// 获取当前线程数
+    /// when before thread
     pub fn thread_count(&self) -> usize {
         self.workers.len()
     }
@@ -265,6 +286,8 @@ impl Drop for ConfigurableThreadPool {
 }
 
 /// 可配置工作线程
+/// worker thread
+/// 可Configureworker thread
 struct ConfigurableWorker {
     #[allow(dead_code)]
     id: usize,
@@ -303,6 +326,7 @@ impl ConfigurableWorker {
 }
 
 /// 线程池性能测试
+/// thread pool performance test
 pub fn benchmark_thread_pools() {
     println!("🔧 线程池性能测试");
 

@@ -11,8 +11,11 @@ use std::collections::hash_map::DefaultHasher;
 use std::hash::{Hash, Hasher};
 
 /// 2025年异步缓存系统演示
+/// 2025async system demonstration
 /// 展示最新的异步缓存编程模式和最佳实践
+/// async and
 /// 1. 异步LRU缓存
+/// 1. async LRU
 #[derive(Debug, Clone)]
 pub struct AsyncLRUCache<K, V>
 where
@@ -258,6 +261,7 @@ where
 }
 
 /// 2. 异步分布式缓存
+/// 2. async distribution
 #[derive(Debug, Clone)]
 pub struct AsyncDistributedCache {
     local_cache: Arc<RwLock<HashMap<String, DistributedCacheEntry>>>,
@@ -527,6 +531,7 @@ impl AsyncDistributedCache {
 }
 
 /// 3. 异步缓存预热系统
+/// 3. async system
 #[derive(Debug, Clone)]
 pub struct AsyncCacheWarmer {
     cache: AsyncLRUCache<String, String>,
@@ -718,6 +723,7 @@ impl AsyncCacheWarmer {
 }
 
 /// 4. 异步缓存监控和指标收集
+/// 4. async and indicator
 #[derive(Debug, Clone)]
 pub struct AsyncCacheMonitor {
     metrics_collector: Arc<RwLock<HashMap<String, CacheMetrics>>>,

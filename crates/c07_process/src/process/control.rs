@@ -4,6 +4,7 @@ use std::process::{Command, Stdio};
 use std::sync::{Arc, Mutex};
 
 /// 进程控制器
+/// process
 pub struct ProcessController {
     processes: Arc<Mutex<std::collections::HashMap<u32, ProcessInfo>>>,
 }
@@ -16,6 +17,7 @@ impl Default for ProcessController {
 
 impl ProcessController {
     /// 创建新的进程控制器
+    /// process
     pub fn new() -> Self {
         Self {
             processes: Arc::new(Mutex::new(std::collections::HashMap::new())),
@@ -23,6 +25,7 @@ impl ProcessController {
     }
 
     /// 启动进程
+    /// process
     pub fn start(&mut self, config: ProcessConfig) -> ProcessResult<u32> {
         let mut command = Command::new(&config.program);
 
@@ -72,6 +75,7 @@ impl ProcessController {
     }
 
     /// 停止进程
+    /// process
     pub fn stop(&mut self, pid: u32) -> ProcessResult<()> {
         let mut processes = self.processes.lock().expect("进程控制锁被污染");
 
@@ -84,6 +88,7 @@ impl ProcessController {
     }
 
     /// 终止进程
+    /// process
     pub fn terminate(&mut self, pid: u32) -> ProcessResult<()> {
         let mut processes = self.processes.lock().expect("进程控制锁被污染");
 
@@ -96,6 +101,7 @@ impl ProcessController {
     }
 
     /// 获取进程信息
+    /// process
     pub fn get_process_info(&self, pid: u32) -> ProcessResult<ProcessInfo> {
         let processes = self.processes.lock().expect("进程控制锁被污染");
 
@@ -106,6 +112,7 @@ impl ProcessController {
     }
 
     /// 获取所有进程信息
+    /// all process
     pub fn get_all_processes(&self) -> Vec<ProcessInfo> {
         let processes = self.processes.lock().expect("进程控制锁被污染");
         processes.values().cloned().collect()

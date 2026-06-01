@@ -1,15 +1,19 @@
 //! 异步网络编程演示
-//!
+//! async network programming demonstration
 //! 本示例展示了异步网络编程的各种场景：
+//! this example async network programming scenario ：
 //! - HTTP 客户端并发请求
+//! - HTTP concurrency
 //! - TCP 服务器和客户端
+//! - TCP and
 //! - UDP 通信
-//! - WebSocket 连接
+//! - UDP
 //! - 网络超时和重试
+//! - network and
 //! - 连接池管理
-//!
+//! -
 //! 运行方式：
-//! ```bash
+//! Run way ：
 //! cargo run --example async_network_demo
 //! ```
 use anyhow::Result;

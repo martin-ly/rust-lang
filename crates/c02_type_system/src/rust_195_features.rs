@@ -1,16 +1,13 @@
 //! Rust 1.95.0 类型系统新特性实现模块
-//!
-//! 本模块展示了 Rust 1.95.0 在类型系统方面的关键增强：
-//! - `core::range` 模块与 `RangeInclusive` / `RangeInclusiveIter` 类型 ⭐
-//! - `bool: TryFrom<{integer}>` (已在 c03 详细覆盖，此处提供类型系统视角)
-//!
+//! Rust 1.95.0 type system feature module
 //! # 版本信息
-//! - Rust版本: 1.95.0
+//! # this
 //! - 稳定日期: 2026-04-16
-//! - Edition: 2024
-//!
+//! - date : 2026-04-16
+//! - 稳定date: 2026-04-16
+//! - date: 2026-04-16
 //! # 参考
-//! - [Rust 1.95.0 Release Notes](https://releases.rs/docs/1.95.0/)
+//! # reference
 //! - [RFC 3550: New Range Types](https://rust-lang.github.io/rfcs/3550-new-range.html)
 
 use std::collections::{LinkedList, VecDeque};
@@ -20,41 +17,28 @@ use std::ops::RangeInclusive;
 // 1. core::range / RangeInclusive / RangeInclusiveIter
 // ============================================================================
 
-/// # `core::range` 模块与新的 `RangeInclusive` 类型
-///
 /// ## 概念定义
-/// Rust 1.95.0 引入了 `core::range` 模块，并新增了 `RangeInclusive` 和
-/// `RangeInclusiveIter` 类型。这是 RFC 3550 的阶段性成果，旨在为 Rust
+/// ## concept definition
 /// 提供更丰富、更一致的区间类型系统。
-///
+/// 、interval type system 。
 /// ## Wikipedia 概念对齐
-/// - **Interval (Mathematics)**: 数学中的区间概念 `[a, b]`，表示包含端点的范围
-/// - **Iterator**: 遍历集合元素的抽象，RangeInclusiveIter 是区间的惰性迭代器视图
-///
 /// ## 关键区分
-///
+/// ## key
+/// ## key区分
+/// ## key
 /// | 类型 | 表示法 | 包含端点？ | 用途 |
-/// |------|--------|----------|------|
+/// | type | represent | point ？ | purpose |
 /// | `std::ops::Range` | `a..b` | 半开 `[a, b)` | 通用索引、切片 |
-/// | `std::ops::RangeInclusive` | `a..=b` | 闭区间 `[a, b]` | 需要包含结束值的场景 |
-/// | **`core::range::RangeInclusive`** (1.96.0+) | `RangeInclusive::new(a, b)` | 闭区间 `[a, b]` | 新的统一类型，未来将成为标准 |
-/// | `core::range::RangeInclusiveIter` | 从 RangeInclusive 迭代 | 闭区间 | 显式的迭代器类型 |
-///
+/// | `std::ops::Range` | `a..b` | `[a, b)` | 、 |
 /// ## 设计动机（RFC 3550）
-/// 1. **一致性**: 将所有 range 类型统一到 `core::range` 模块下
-/// 2. **可扩展性**: 为未来的 `RangeFrom`, `RangeTo`, `RangeFull` 等提供统一命名空间
-/// 3. **清晰性**: `RangeInclusiveIter` 明确区分"区间值"和"区间迭代器"
-///
+/// ## design （RFC 3550）
 /// ## 反例 / 迁移注意
-/// - `core::range::RangeInclusive` **不是** `std::ops::RangeInclusive` 的替代
-/// - 两者目前共存：`std::ops::RangeInclusive` 侧重运算符重载，`core::range::RangeInclusive` 侧重模块组织
+/// ## /
 /// - 未来 edition 可能进一步统一，目前建议在新代码中使用 `core::range` 以保持一致性
+/// - future edition may ，before in in `core::range` consistency
 pub struct NewRangeTypesExamples;
 
 impl NewRangeTypesExamples {
-    /// 基础示例：创建新的 RangeInclusive
-    ///
-    /// 使用 `core::range::RangeInclusive::new(start, end)` 创建闭区间。
     pub fn basic_range_inclusive() {
         // 新的 core::range::RangeInclusive
         let range = core::range::RangeInclusive { start: 1, last: 5 };
@@ -71,10 +55,8 @@ impl NewRangeTypesExamples {
         assert_eq!(new_vals, vec![1, 2, 3, 4, 5]);
     }
 
-    /// RangeInclusiveIter 显式迭代器
-    ///
-    /// `RangeInclusiveIter` 是 `RangeInclusive` 的迭代器表示，
     /// 允许将区间作为迭代器类型传递，而不暴露具体的范围值。
+    /// will interval as type ，while expose volume scope 。
     pub fn range_inclusive_iter() {
         let range = core::range::RangeInclusive {
             start: 10,
@@ -87,8 +69,7 @@ impl NewRangeTypesExamples {
     }
 
     /// 算法应用：范围交集检测
-    ///
-    /// 使用新的 RangeInclusive 类型实现区间集合操作。
+    /// algorithm application ：scope intersection
     pub fn range_intersection(
         a: core::range::RangeInclusive<i32>,
         b: core::range::RangeInclusive<i32>,
@@ -104,6 +85,8 @@ impl NewRangeTypesExamples {
     }
 
     /// 算法应用：范围并集（相邻或重叠时合并）
+    /// algorithm application ：scope union （or and ）
+    /// algorithmapplication：rangeunion（相邻or重叠时Merge）
     pub fn range_union(
         a: core::range::RangeInclusive<i32>,
         b: core::range::RangeInclusive<i32>,
@@ -126,9 +109,6 @@ impl NewRangeTypesExamples {
         }
     }
 
-    /// 类型系统视角：RangeInclusive 作为泛型边界
-    ///
-    /// 展示了如何在泛型代码中使用新的 range 类型。
     pub fn sum_range<T>(range: core::range::RangeInclusive<T>) -> T
     where
         T: std::ops::Add<Output = T> + Clone + PartialOrd + From<u8>,
@@ -147,8 +127,9 @@ impl NewRangeTypesExamples {
     }
 
     /// 配置解析：从字符串创建范围
-    ///
+    /// ：from scope
     /// 实际应用中的范围解析示例。
+    /// actual application in scope example 。
     pub fn parse_range(s: &str) -> Option<core::range::RangeInclusive<u32>> {
         let parts: Vec<&str> = s.split("..=").collect();
         if parts.len() == 2 {
@@ -160,7 +141,6 @@ impl NewRangeTypesExamples {
         }
     }
 
-    /// 分页计算：使用 RangeInclusive 表示页码范围
     pub fn page_range(total_items: u32, items_per_page: u32) -> core::range::RangeInclusive<u32> {
         let total_pages = if total_items == 0 {
             1
@@ -179,8 +159,7 @@ impl NewRangeTypesExamples {
 // ============================================================================
 
 /// # 区间树与范围查询（概念性实现）
-///
-/// 使用新的 `core::range::RangeInclusive` 作为区间树节点的基础类型。
+/// # interval tree and scope （concept ）
 pub struct IntervalTree<T> {
     intervals: Vec<core::range::RangeInclusive<T>>,
 }
@@ -221,14 +200,13 @@ impl<T: Clone + Ord> Default for IntervalTree<T> {
 // 3. 与现有生态的互操作
 // ============================================================================
 
-/// # 新旧 RangeInclusive 互转
-///
-/// 展示了如何在 `std::ops::RangeInclusive` 和 `core::range::RangeInclusive`
 /// 之间进行转换，以便与使用旧类型的生态库互操作。
+/// 's conversion ，and type ecosystem library 。
 pub struct RangeInterop;
 
 impl RangeInterop {
     /// 从旧类型转换为新类型
+    /// from type conversion as type
     pub fn from_old(old: RangeInclusive<i32>) -> core::range::RangeInclusive<i32> {
         core::range::RangeInclusive {
             start: *old.start(),
@@ -237,11 +215,11 @@ impl RangeInterop {
     }
 
     /// 从新类型转换为旧类型
+    /// from type conversion as type
     pub fn to_new(new: core::range::RangeInclusive<i32>) -> RangeInclusive<i32> {
         new.start..=new.last
     }
 
-    /// 切片索引：新 RangeInclusive 暂不支持直接索引，需转换为旧类型
     pub fn slice_with_range(data: &[i32], range: core::range::RangeInclusive<usize>) -> &[i32] {
         let old_range = range.start..=range.last;
         &data[old_range]
@@ -253,16 +231,14 @@ impl RangeInterop {
 // ============================================================================
 
 /// # 集合可变插入方法
-///
-/// Rust 1.95.0 为 `Vec`、`VecDeque` 和 `LinkedList` 新增了返回 `&mut T` 的
+/// # set method
 /// 插入/推送方法。这些方法解决了"插入后需要立即修改元素"的常见问题，
-/// 避免了不必要的 `unwrap()` 或索引回查。
-///
+/// /method 。method "after element "problem ，
 /// ## 新增 API 列表
-///
+/// ## API
 /// | 集合类型 | 新方法 | 返回值 |
-/// |---------|--------|--------|
-/// | `Vec<T>` | `push_mut` | `&mut T` |
+/// | set type | method | return value |
+/// | settype | 新method | return value |
 /// | `Vec<T>` | `insert_mut` | `&mut T` |
 /// | `VecDeque<T>` | `push_front_mut` | `&mut T` |
 /// | `VecDeque<T>` | `push_back_mut` | `&mut T` |
@@ -271,19 +247,22 @@ impl RangeInterop {
 /// | `LinkedList<T>` | `push_back_mut` | `&mut T` |
 ///
 /// ## 设计动机
+/// ## design
 /// 在 1.95 之前，如果需要在插入元素后立即修改它，开发者必须：
+/// in 1.95 's before ，if in element after ，must ：
 /// 1. 先调用 `push` / `insert` / `push_front` 等
+/// 1. 先Call `push` / `insert` / `push_front` etc.
 /// 2. 再调用 `last_mut().unwrap()` 或按索引 `get_mut(index).unwrap()` 获取可变引用
+/// 2. 再Call `last_mut().unwrap()` or按索引 `get_mut(index).unwrap()` Get可变reference
 /// 3. 这不仅增加了样板代码，而且在某些情况下编译器难以证明引用的安全性
-///
-/// 1.95 的新方法将插入和获取可变引用合二为一，提高了代码的 ergonomics。
+/// 3. ，while and in situation under reference
 pub struct CollectionMutMethodsExamples;
 
 impl CollectionMutMethodsExamples {
     /// `Vec::push_mut` —— 推送并立即修改
-    ///
+    /// `Vec::push_mut` —— and
     /// ## 1.95 之前
-    /// ```ignore
+    /// ## 1.95 's before
     /// let mut v = Vec::new();
     /// v.push(String::new());
     /// let last = v.last_mut().unwrap();
@@ -291,7 +270,7 @@ impl CollectionMutMethodsExamples {
     /// ```
     ///
     /// ## 1.95 方式
-    /// `push_mut` 直接返回刚插入元素的可变引用。
+    /// ## 1.95 way
     pub fn vec_push_mut() {
         let mut names: Vec<String> = Vec::new();
 
@@ -304,9 +283,9 @@ impl CollectionMutMethodsExamples {
     }
 
     /// `Vec::insert_mut` —— 插入并立即修改
-    ///
+    /// `Vec::insert_mut` —— and
     /// ## 1.95 之前
-    /// ```ignore
+    /// ## 1.95 's before
     /// let mut v = vec![1, 3];
     /// v.insert(1, 0);
     /// let inserted = v.get_mut(1).unwrap();
@@ -314,7 +293,9 @@ impl CollectionMutMethodsExamples {
     /// ```
     ///
     /// ## 1.95 方式
+    /// ## 1.95 way
     /// `insert_mut` 在指定位置插入元素并返回其可变引用。
+    /// `insert_mut` in position element and its reference 。
     pub fn vec_insert_mut() {
         let mut scores = vec![85, 92];
 
@@ -325,10 +306,8 @@ impl CollectionMutMethodsExamples {
         assert_eq!(scores, vec![85, 93, 92]);
     }
 
-    /// `VecDeque::push_front_mut` —— 队首插入并修改
-    ///
     /// ## 1.95 之前
-    /// ```ignore
+    /// ## 1.95 's before
     /// let mut dq = VecDeque::from([2, 3]);
     /// dq.push_front(0);
     /// let head = dq.front_mut().unwrap();
@@ -336,6 +315,7 @@ impl CollectionMutMethodsExamples {
     /// ```
     ///
     /// ## 1.95 方式
+    /// ## 1.95 way
     pub fn vecdeque_push_front_mut() {
         let mut queue = VecDeque::from([200, 300]);
 
@@ -346,10 +326,8 @@ impl CollectionMutMethodsExamples {
         assert_eq!(queue, VecDeque::from([150, 200, 300]));
     }
 
-    /// `VecDeque::push_back_mut` —— 队尾插入并修改
-    ///
     /// ## 1.95 之前
-    /// ```ignore
+    /// ## 1.95 's before
     /// let mut dq = VecDeque::from([1, 2]);
     /// dq.push_back(3);
     /// let back = dq.back_mut().unwrap();
@@ -357,6 +335,7 @@ impl CollectionMutMethodsExamples {
     /// ```
     ///
     /// ## 1.95 方式
+    /// ## 1.95 way
     pub fn vecdeque_push_back_mut() {
         let mut queue = VecDeque::from([1, 2]);
 
@@ -367,10 +346,8 @@ impl CollectionMutMethodsExamples {
         assert_eq!(queue, VecDeque::from([1, 2, 30]));
     }
 
-    /// `VecDeque::insert_mut` —— 任意位置插入并修改
-    ///
     /// ## 1.95 之前
-    /// ```ignore
+    /// ## 1.95 's before
     /// let mut dq = VecDeque::from([1, 3]);
     /// dq.insert(1, 2);
     /// let mid = dq.get_mut(1).unwrap();
@@ -378,6 +355,7 @@ impl CollectionMutMethodsExamples {
     /// ```
     ///
     /// ## 1.95 方式
+    /// ## 1.95 way
     pub fn vecdeque_insert_mut() {
         let mut queue = VecDeque::from([10, 30]);
 
@@ -388,10 +366,8 @@ impl CollectionMutMethodsExamples {
         assert_eq!(queue, VecDeque::from([10, 40, 30]));
     }
 
-    /// `LinkedList::push_front_mut` —— 链表头部插入并修改
-    ///
     /// ## 1.95 之前
-    /// ```ignore
+    /// ## 1.95 's before
     /// let mut list = LinkedList::from([2, 3]);
     /// list.push_front(1);
     /// let front = list.front_mut().unwrap();
@@ -399,6 +375,7 @@ impl CollectionMutMethodsExamples {
     /// ```
     ///
     /// ## 1.95 方式
+    /// ## 1.95 way
     pub fn linkedlist_push_front_mut() {
         let mut list = LinkedList::from([20, 30]);
 
@@ -409,10 +386,8 @@ impl CollectionMutMethodsExamples {
         assert_eq!(list, LinkedList::from([15, 20, 30]));
     }
 
-    /// `LinkedList::push_back_mut` —— 链表尾部插入并修改
-    ///
     /// ## 1.95 之前
-    /// ```ignore
+    /// ## 1.95 's before
     /// let mut list = LinkedList::from([1, 2]);
     /// list.push_back(3);
     /// let back = list.back_mut().unwrap();
@@ -420,6 +395,7 @@ impl CollectionMutMethodsExamples {
     /// ```
     ///
     /// ## 1.95 方式
+    /// ## 1.95 way
     pub fn linkedlist_push_back_mut() {
         let mut list = LinkedList::from([1, 2]);
 
@@ -431,8 +407,9 @@ impl CollectionMutMethodsExamples {
     }
 
     /// 综合示例：使用 `push_mut` 构建复杂对象
-    ///
+    /// synthesize example ： `push_mut` complex to
     /// 展示了在构建嵌套结构时，新方法如何减少样板代码。
+    /// in structure ，method 。
     pub fn comprehensive_build_example() {
         let mut buffers: Vec<Vec<u8>> = Vec::new();
 
@@ -454,13 +431,13 @@ impl CollectionMutMethodsExamples {
 // ============================================================================
 
 /// # `cfg_select!` 宏
-///
-/// `cfg_select!` 是 Rust 1.95.0 稳定的编译时条件选择宏。
 /// 在类型系统中，它可用于编译期选择平台相关的常量。
+/// in type system in ，platform constant 。
 pub struct CfgSelectTypeExamples;
 
 impl CfgSelectTypeExamples {
     /// 平台相关的最大数组长度提示
+    /// platform maximum hint
     pub fn platform_array_hint() -> usize {
         cfg_select! {
             target_pointer_width = "64" => { usize::MAX / 16 }
@@ -651,27 +628,33 @@ use std::ops::ControlFlow;
 // ============================================================================
 
 /// # `Saturating<T>` 类型
-///
-/// Rust 1.95.0 稳定了 `std::num::Saturating<T>`，提供**饱和算术**语义：
-/// 溢出时不 panic，也不回绕 (wrap)，而是「饱和」到类型的最大值或最小值。
-///
 /// ## 对比
-///
+/// ## to
+/// ## to比
+/// ## to
 /// | 运算方式 | 溢出行为 | 适用场景 |
-/// |:---------|:---------|:---------|
+/// | way | as | scenario |
+/// | 运算way | 溢出行as | 适用scenario |
+/// | way | as | scenario |
 /// | 普通 `+` | Debug panic / Release wrap | 绝大多数场景 |
+/// | 普通 `+` | Debug panic / Release wrap | 绝大多数scenario |
 /// | `saturating_add` | 饱和到边界 | 信号处理、颜色值、音频采样 |
+/// | `saturating_add` | and to edge | 、、 |
 /// | `wrapping_add` | 回绕 | 哈希、密码学、位运算 |
-/// | `Saturating<T> + Saturating<T>` | 饱和（运算符重载） | 需要全程饱和的算法 |
-///
+/// | `wrapping_add` | | 、、 |
 /// ## 设计动机
+/// ## design
 /// - **信号处理**: 音频采样值溢出时不应回绕（会产生爆音）
+/// - ****: （）
 /// - **图形学**: RGB 颜色值溢出时应保持 255，不应回到 0
+/// - ****: RGB 255，to 0
 /// - **控制系统**: PID 控制器积分项不应因溢出而跳变
+/// - **system **: PID because while
 pub struct SaturatingTypeExamples;
 
 impl SaturatingTypeExamples {
     /// 基础示例：饱和加法 vs 普通加法
+    /// foundation example ：and vs
     pub fn basic_saturating() {
         let a = Saturating(250_u8);
         let b = Saturating(20_u8);
@@ -685,17 +668,20 @@ impl SaturatingTypeExamples {
     }
 
     /// 音频采样混合：饱和加法防止爆音
+    /// ：and
     pub fn audio_sample_mix(a: i16, b: i16) -> i16 {
         let mixed = Saturating(a) + Saturating(b);
         mixed.0
     }
 
     /// 颜色值混合：RGB 通道饱和
+    /// ：RGB channel and
     pub fn color_blend(c1: u8, c2: u8) -> u8 {
         (Saturating(c1) + Saturating(c2)).0
     }
 
     /// 乘法饱和：增益控制
+    /// and ：
     pub fn apply_gain(sample: u8, gain: u8) -> u8 {
         let s = Saturating(sample);
         let g = Saturating(gain);

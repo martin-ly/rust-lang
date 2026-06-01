@@ -1,9 +1,8 @@
 //! 高级声明宏模式
 
 /// 创建字符串向量
-///
 /// # 示例
-///
+/// # example
 /// ```
 /// # use c11_macro_system::vec_of_strings;
 /// let strings = vec_of_strings!["hello", "world"];
@@ -16,10 +15,8 @@ macro_rules! vec_of_strings {
     };
 }
 
-/// HashMap创建宏
-///
 /// # 示例
-///
+/// # example
 /// ```
 /// # use c11_macro_system::hashmap;
 /// # use std::collections::HashMap;

@@ -1,3 +1,5 @@
+> **内容分级**: [专家级]
+
 # Rust 编译器基础设施深度解析
 
 > **受众**: [专家]
@@ -273,6 +275,27 @@ RUSTFLAGS="-Z sanitizer=memory -Z build-std" \
 > **过渡**: 在工程实践中应用 Rust 编译器基础设施深度解析 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
 
 > **过渡**: Rust 编译器基础设施深度解析 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
+
+### 实践示例：条件编译与目标特性检测
+
+```rust
+// 根据目标平台启用不同实现
+#[cfg(target_arch = "x86_64")]
+fn optimized_add(a: i32, b: i32) -> i32 {
+    // x86_64 特定优化路径
+    a.wrapping_add(b)
+}
+
+#[cfg(not(target_arch = "x86_64"))]
+fn optimized_add(a: i32, b: i32) -> i32 {
+    // 通用回退路径
+    a.saturating_add(b)
+}
+
+fn main() {
+    println!("2 + 3 = {}", optimized_add(2, 3));
+}
+```
 
 ### 反命题与边界
 

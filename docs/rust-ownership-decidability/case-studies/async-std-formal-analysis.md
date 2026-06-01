@@ -1,4 +1,4 @@
-# async-std 运行时形式化分析
+# async-std [已归档] 运行时形式化分析
 
 > **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
@@ -7,7 +7,7 @@
 >
 > **形式化框架**: 异步语义 + 兼容性证明
 >
-> **参考**: async-std Documentation; Rust Async Book
+> **参考**: async-std [已归档] Documentation; Rust Async Book
 
 ---
 
@@ -15,7 +15,7 @@
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-- [async-std 运行时形式化分析](#async-std-运行时形式化分析)
+- [async-std [已归档] 运行时形式化分析](#async-std [已归档]-运行时形式化分析)
   - [目录](#目录)
   - [1. 引言](#1-引言)
   - [2. 与std API对应关系](#2-与std-api对应关系)
@@ -64,7 +64,7 @@
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-async-std是一个提供标准库风格API的异步运行时:
+async-std [已归档]是一个提供标准库风格API的异步运行时:
 
 - **API对应**: `std::fs` → `async_std::fs`
 - **零运行时成本**: 编译时选择运行时
@@ -85,7 +85,7 @@ async-std是一个提供标准库风格API的异步运行时:
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-| std API | async-std API | 区别 |
+| std API | async-std [已归档] API | 区别 |
 |---------|---------------|------|
 | `std::fs::read` | `async_std::fs::read` | 添加 `async` |
 | `std::net::TcpStream` | `async_std::net::TcpStream` | 添加异步方法 |
@@ -101,7 +101,7 @@ $$
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-> async-std的异步API与std的同步API语义等价(除了异步性)。
+> async-std [已归档]的异步API与std的同步API语义等价(除了异步性)。
 
 **证明**:
 
@@ -111,7 +111,7 @@ $$
 // std (同步)
 let content = std::fs::read_to_string("file.txt")?;
 
-// async-std (异步)
+// async-std [已归档] (异步)
 let content = async_std::fs::read_to_string("file.txt").await?;
 ```
 
@@ -145,7 +145,7 @@ pub mod task {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-> 使用async-std API的代码不依赖特定运行时实现。
+> 使用async-std [已归档] API的代码不依赖特定运行时实现。
 
 **证明**:
 
@@ -159,8 +159,8 @@ async fn my_code() {
 
 这个代码:
 
-1. 使用async-std的task API
-2. 不直接依赖Tokio或async-std内部
+1. 使用async-std [已归档]的task API
+2. 不直接依赖Tokio或async-std [已归档]内部
 3. 理论上可移植到任何兼容运行时
 
 ∎
@@ -363,7 +363,7 @@ while let Some(v) = s.next().await {
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-> async-std的Mutex保证互斥且不阻塞线程。
+> async-std [已归档]的Mutex保证互斥且不阻塞线程。
 
 **证明**:
 
@@ -450,7 +450,7 @@ async fn producer(tx: Sender<Data>) {
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> async-std的文件操作不阻塞执行器线程。
+> async-std [已归档]的文件操作不阻塞执行器线程。
 
 **证明**:
 
@@ -484,7 +484,7 @@ pub async fn read(path: impl AsRef<Path>) -> Result<Vec<u8>> {
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-> async-std的TcpStream支持零拷贝传输。
+> async-std [已归档]的TcpStream支持零拷贝传输。
 
 **实现**:
 
@@ -510,12 +510,12 @@ async fn zero_copy_sendfile(from: File, to: TcpStream) -> Result<()> {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> async-std和Tokio代码直接混用可能导致问题。
+> async-std [已归档]和Tokio代码直接混用可能导致问题。
 
 **问题**:
 
 ```rust,ignore
-// 在Tokio运行时中调用async-std API
+// 在Tokio运行时中调用async-std [已归档] API
 #[tokio::main]
 async fn main() {
     // 这可能panic或行为异常
@@ -525,7 +525,7 @@ async fn main() {
 
 **原因**:
 
-- async-std期望自己的运行时上下文
+- async-std [已归档]期望自己的运行时上下文
 - 线程局部存储可能不兼容
 - 计时器实现不同
 
@@ -578,7 +578,7 @@ async fn main() {
 **建议使用一个运行时**:
 
 - 纯Tokio项目: 使用Tokio API
-- 纯async-std项目: 使用async-std API
+- 纯async-std [已归档]项目: 使用async-std [已归档] API
 - 需要互操作: 使用兼容性crate
 
 ---
@@ -587,7 +587,7 @@ async fn main() {
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-1. **async-std Contributors.** (2024). *async-std Documentation*. <https://docs.rs/async-std/>
+1. **async-std [已归档] Contributors.** (2024). *async-std [已归档] Documentation*. <<https://docs.rs/async-std> [已归档]/>
 
 2. **Rust Async Working Group.** (2024). *Asynchronous Programming in Rust*. <https://rust-lang.github.io/async-book/>
 

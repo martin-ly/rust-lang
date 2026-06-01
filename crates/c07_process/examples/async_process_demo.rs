@@ -1,14 +1,15 @@
 //! 异步进程管理示例
-//!
+//! async process example
 //! 本示例展示如何使用C07进程管理模块的异步功能：
+//! this example C07process module async functionality ：
 //! - 异步进程创建
+//! - async process
 //! - 异步IO操作
+//! - async IO
 //! - 异步进程监控
-//!
-//! 注意：需要启用async特性
-//!
+//! - async process
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example async_process_demo --features async
 //! ```
 use c07_process::prelude::*;

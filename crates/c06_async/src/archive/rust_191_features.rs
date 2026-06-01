@@ -1,20 +1,32 @@
 //! Rust 1.91 异步编程特性实现模块（历史版本）
+//! Rust 1.91 async feature module （this ）
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//! ⚠️ **this ** - this as reference
 //!
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //!
 //! 本模块实现了 Rust 1.91 在异步编程方面的改进，包括：
+//! this module Rust 1.91 in async surface ，：
 //! - const 上下文增强在异步配置中的应用
+//! - const on under in async in application
 //! - 异步迭代器改进（性能提升 15-20%）
+//! - async （performance 15-20%）
 //! - JIT 编译器优化对异步代码的性能提升
+//! - JIT optimization to async performance
 //! - 内存分配优化对异步场景的影响
+//! - memory optimization to async scenario impact
 //!
 //! # 文件信息
+//! #
 //! - 文件: rust_191_features.rs
 //! - 创建日期: 2025-01-27
+//! - date : 2025-01-27
 //! - 版本: 1.0
+//! - this : 1.0
 //! - Rust版本: 1.91.0
+//! - Rustthis : 1.91.0
 //! - Edition: 2024
 use std::collections::HashMap;
 use std::time::{Duration, Instant};
@@ -25,8 +37,10 @@ use futures::stream::{self, Stream, StreamExt};
 // ==================== 1. const 上下文增强在异步配置中的应用 ====================
 
 /// Rust 1.91 const 上下文增强在异步配置中的应用
+/// Rust 1.91 const on under in async in application
 pub mod const_async_config {
     /// 异步配置系统
+    /// async system
     pub struct AsyncConfig {
         pub max_connections: usize,
         pub buffer_size: usize,
@@ -59,16 +73,21 @@ pub mod const_async_config {
 // ==================== 2. 异步迭代器改进 ====================
 
 /// Rust 1.91 异步迭代器改进
+/// Rust 1.91 async
 ///
 /// Rust 1.91 对异步迭代器进行了优化，性能提升约 15-20%
+/// Rust 1.91 to async optimization ，performance 15-20%
 ///
 /// 注意：此模块需要 futures 依赖
+/// ：this module futures
 pub mod async_iterator_improvements {
     use super::*;
 
     /// 异步流处理示例
+    /// async stream example
     ///
     /// Rust 1.91 优化：异步迭代器性能提升约 15-20%
+    /// Rust 1.91 optimization ：async performance 15-20%
     pub async fn process_async_stream<S>(input: S) -> Result<Vec<i32>, Box<dyn std::error::Error>>
     where
         S: Stream<Item = i32> + Send,
@@ -86,6 +105,7 @@ pub mod async_iterator_improvements {
     }
 
     /// 复杂异步流处理示例
+    /// complex async stream example
     pub async fn complex_async_pipeline<S>(input: S) -> Vec<i32>
     where
         S: Stream<Item = i32> + Send,
@@ -111,16 +131,21 @@ pub mod async_iterator_improvements {
 // ==================== 3. JIT 编译器优化对异步代码的影响 ====================
 
 /// Rust 1.91 JIT 编译器优化对异步代码的影响
+/// Rust 1.91 JIT optimization to async impact
 ///
 /// Rust 1.91 的 JIT 优化提升了异步场景下的迭代器操作性能
+/// Rust 1.91 JIT optimization async scenario under performance
 ///
 /// 注意：此模块需要 futures 依赖
+/// ：this module futures
 pub mod async_jit_optimizations {
     use super::*;
 
     /// 异步迭代器链式操作优化示例
+    /// async optimization example
     ///
     /// Rust 1.91 JIT 优化：异步迭代器链式操作性能提升 15-20%
+    /// Rust 1.91 JIT optimization ：async performance 15-20%
     pub async fn optimized_async_iterator_chain<S>(input: S) -> Vec<i32>
     where
         S: Stream<Item = i32> + Send,
@@ -136,6 +161,7 @@ pub mod async_jit_optimizations {
     }
 
     /// 异步批量处理示例
+    /// async example
     pub async fn async_batch_processing<S>(input: S, batch_size: usize) -> Vec<Vec<i32>>
     where
         S: Stream<Item = i32> + Send,
@@ -165,17 +191,22 @@ pub mod async_jit_optimizations {
 // ==================== 4. 内存分配优化对异步场景的影响 ====================
 
 /// Rust 1.91 内存分配优化对异步场景的影响
+/// Rust 1.91 memory optimization to async scenario impact
 ///
 /// Rust 1.91 的内存分配优化特别有利于异步场景下的小对象分配
+/// Rust 1.91 memory optimization advantageous async scenario under to
 ///
 /// 注意：此模块需要 tokio 依赖
+/// ：this module tokio
 pub mod async_memory_optimizations {
     use super::*;
     use tokio::time::sleep;
 
     /// 异步小对象分配示例
+    /// async to example
     ///
     /// Rust 1.91 优化：异步场景下小对象分配性能提升 25-30%
+    /// Rust 1.91 optimization ：async scenario under to performance 25-30%
     pub async fn async_small_object_allocation(count: usize) -> Vec<Vec<i32>> {
         let mut result = Vec::new();
 
@@ -190,6 +221,7 @@ pub mod async_memory_optimizations {
     }
 
     /// 异步 HashMap 操作优化示例
+    /// async HashMap optimization example
     pub async fn async_hashmap_operations(count: usize) -> HashMap<usize, i32> {
         let mut map = HashMap::new();
 
@@ -217,18 +249,23 @@ pub mod async_memory_optimizations {
 // ==================== 5. 异步错误处理改进 ====================
 
 /// Rust 1.91 异步错误处理改进
+/// Rust 1.91 async error handling
 ///
 /// 使用改进的 ControlFlow 进行异步错误处理
+/// ControlFlow async error handling
 ///
 /// 注意：此模块需要 tokio 依赖
+/// ：this module tokio
 pub mod async_error_handling {
     use super::*;
     use std::ops::ControlFlow;
     use tokio::time::sleep;
 
     /// 异步验证示例
+    /// async example
     ///
     /// 使用改进的 ControlFlow 进行异步验证
+    /// ControlFlow async
     pub async fn async_validate_items(items: Vec<i32>) -> ControlFlow<String, Vec<i32>> {
         for (idx, &item) in items.iter().enumerate() {
             if item < 0 {
@@ -244,6 +281,7 @@ pub mod async_error_handling {
     }
 
     /// 异步转换错误处理示例
+    /// async conversion error handling example
     pub async fn async_convert_items(items: Vec<String>) -> ControlFlow<String, Vec<i32>> {
         use std::ops::ControlFlow;
         let mut result = Vec::new();
@@ -291,13 +329,16 @@ pub mod async_error_handling {
 // ==================== 6. 综合应用示例 ====================
 
 /// Rust 1.91 异步编程综合应用示例
+/// Rust 1.91 async synthesize application example
 ///
 /// 注意：此模块需要 futures 依赖
+/// ：this module futures
 pub mod comprehensive_async_examples {
     use super::const_async_config;
     use super::*;
 
     /// 异步数据处理管道
+    /// async pipe
     pub struct AsyncPipeline {
         pub max_concurrent: usize,
         pub buffer_size: usize,
@@ -318,6 +359,7 @@ pub mod comprehensive_async_examples {
         }
 
         /// Rust 1.91 优化：异步处理管道性能提升
+        /// Rust 1.91 optimization ：async pipe performance
         pub async fn process<S>(&self, input: S) -> Vec<i32>
         where
             S: Stream<Item = i32> + Send,
@@ -349,13 +391,16 @@ pub mod comprehensive_async_examples {
 // ==================== 7. 异步流性能基准测试 ====================
 
 /// Rust 1.91 异步流性能基准测试
+/// Rust 1.91 async stream Performance benchmark
 ///
 /// 对比 Rust 1.90 和 Rust 1.91 的异步迭代器性能
+/// to Rust 1.90 and Rust 1.91 async performance
 pub mod async_stream_benchmarks {
     use super::*;
     use std::time::Instant;
 
     /// 性能测试结果
+    /// performance test result
     #[derive(Debug, Clone)]
     pub struct PerformanceResult {
         pub element_count: usize,
@@ -365,8 +410,10 @@ pub mod async_stream_benchmarks {
     }
 
     /// 异步流处理性能测试
+    /// async stream performance test
     ///
     /// Rust 1.91 优化：性能提升 15-20%
+    /// Rust 1.91 optimization ：performance 15-20%
     pub async fn benchmark_async_stream<S>(input: S, element_count: usize) -> PerformanceResult
     where
         S: Stream<Item = i32> + Send,
@@ -394,6 +441,7 @@ pub mod async_stream_benchmarks {
     }
 
     /// 批量异步处理性能测试
+    /// async performance test
     pub async fn benchmark_batch_processing<S>(input: S, batch_size: usize) -> PerformanceResult
     where
         S: Stream<Item = i32> + Send,
@@ -438,8 +486,10 @@ pub mod async_stream_benchmarks {
 // ==================== 8. 异步任务管理器 ====================
 
 /// Rust 1.91 优化的异步任务管理器
+/// Rust 1.91 optimization async task
 ///
 /// 利用内存分配优化和 JIT 优化提升任务管理性能
+/// memory optimization and JIT optimization task performance
 pub mod async_task_manager {
     use super::*;
     use std::collections::HashMap;
@@ -448,6 +498,7 @@ pub mod async_task_manager {
     use tokio::time::sleep;
 
     /// 任务状态
+    /// task state
     #[derive(Debug, Clone, PartialEq)]
     pub enum TaskStatus {
         Pending,
@@ -457,6 +508,7 @@ pub mod async_task_manager {
     }
 
     /// 任务信息
+    /// task
     #[derive(Debug, Clone)]
     pub struct TaskInfo {
         pub id: String,
@@ -466,8 +518,10 @@ pub mod async_task_manager {
     }
 
     /// 异步任务管理器
+    /// async task
     ///
     /// Rust 1.91 优化：利用小对象池优化任务信息分配
+    /// Rust 1.91 optimization ：to optimization task
     pub struct AsyncTaskManager {
         tasks: Arc<Mutex<HashMap<String, TaskInfo>>>,
         max_concurrent: usize,
@@ -475,6 +529,7 @@ pub mod async_task_manager {
 
     impl AsyncTaskManager {
         /// 创建新的任务管理器
+        /// task
         pub fn new(max_concurrent: usize) -> Self {
             Self {
                 tasks: Arc::new(Mutex::new(HashMap::new())),
@@ -483,8 +538,10 @@ pub mod async_task_manager {
         }
 
         /// 添加任务
+        /// task
         ///
         /// Rust 1.91 优化：小对象分配性能提升 25-30%
+        /// Rust 1.91 optimization ：to performance 25-30%
         pub async fn add_task(&self, task_id: String) -> Result<(), String> {
             let mut tasks = self.tasks.lock().await;
 
@@ -505,6 +562,7 @@ pub mod async_task_manager {
         }
 
         /// 执行任务
+        /// task
         pub async fn execute_task<F, T>(&self, task_id: &str, task: F) -> Result<T, String>
         where
             F: std::future::Future<Output = T> + Send,
@@ -535,6 +593,7 @@ pub mod async_task_manager {
         }
 
         /// 获取任务统计信息
+        /// task
         pub async fn get_statistics(&self) -> TaskStatistics {
             let tasks = self.tasks.lock().await;
 
@@ -567,6 +626,7 @@ pub mod async_task_manager {
     }
 
     /// 任务统计信息
+    /// task
     #[derive(Debug, Clone)]
     pub struct TaskStatistics {
         pub total: usize,
@@ -607,8 +667,10 @@ pub mod async_task_manager {
 // ==================== 9. 异步缓存系统 ====================
 
 /// Rust 1.91 优化的异步缓存系统
+/// Rust 1.91 optimization async system
 ///
 /// 利用内存分配优化提升缓存性能
+/// memory optimization performance
 pub mod async_cache_system {
     use super::*;
     use std::collections::HashMap;
@@ -635,8 +697,10 @@ pub mod async_cache_system {
     }
 
     /// 异步缓存系统
+    /// async system
     ///
     /// Rust 1.91 优化：小对象分配性能提升 25-30%
+    /// Rust 1.91 optimization ：to performance 25-30%
     pub struct AsyncCache<K, V> {
         cache: Arc<RwLock<HashMap<K, CacheEntry<V>>>>,
         max_size: usize,
@@ -658,6 +722,7 @@ pub mod async_cache_system {
         /// 获取值
         ///
         /// Rust 1.91 优化：HashMap 查找操作更快
+        /// Rust 1.91 optimization ：HashMap
         pub async fn get(&self, key: &K) -> Option<V> {
             let cache = self.cache.read().await;
 
@@ -673,6 +738,7 @@ pub mod async_cache_system {
         /// 设置值
         ///
         /// Rust 1.91 优化：小对象分配性能提升 25-30%
+        /// Rust 1.91 optimization ：to performance 25-30%
         pub async fn set(
             &self,
             key: K,
@@ -794,8 +860,10 @@ pub mod async_cache_system {
 // ==================== 公开 API ====================
 
 /// Rust 1.91 异步编程特性演示入口
+/// Rust 1.91 async feature demonstration
 ///
 /// 注意：异步功能需要启用 tokio 和 futures 特性
+/// ：async functionality tokio and futures feature
 pub async fn demonstrate_rust_191_async() {
     println!("========================================");
     println!("Rust 1.91 异步编程特性演示");
@@ -815,6 +883,7 @@ pub async fn demonstrate_rust_191_async() {
 }
 
 /// 同步版本演示入口（用于非异步环境）
+/// synchronous this demonstration （async environment ）
 pub fn demonstrate_rust_191_async_sync() {
     println!("========================================");
     println!("Rust 1.91 异步编程特性演示（同步版本）");

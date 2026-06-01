@@ -1,9 +1,13 @@
 //! # 示例03: 重复语法
-//!
+//! # example 03:
+//! # Example of03: 重复语法
 //! 演示宏中的重复模式 $(...)*
+//! demonstration in $(...)*
+//! Demonstration of宏in重复模式 $(...)*
 use std::collections::HashMap;
 
 /// 打印所有参数
+/// all parameter
 macro_rules! print_all {
     ($($arg:expr),* $(,)?) => {
         $(
@@ -20,6 +24,7 @@ macro_rules! make_tuple {
 }
 
 /// 创建结构体
+/// struct
 macro_rules! struct_builder {
     ($name:ident { $($field:ident: $ty:ty),* $(,)? }) => {
         struct $name {

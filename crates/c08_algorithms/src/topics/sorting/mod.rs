@@ -1,73 +1,103 @@
 //! 排序算法模块 - Rust 1.90 特性对齐
+//! sorting algorithm module - Rust 1.90 feature to
 //!
 //! 本模块实现了各种排序算法，包括：
+//! this module sorting algorithm ，：
 //! - 基础排序算法（冒泡、选择、插入）
+//! - foundation sorting algorithm （、、）
 //! - 高效排序算法（快速、归并、堆排序）
+//! - efficient sorting algorithm （fast 、and 、heap sort ）
 //! - 特殊排序算法（计数、基数、桶排序）
+//! - sorting algorithm （、、bucket sort ）
 //! - 并行和异步实现
+//! - parallelism and async
 //! - 形式化验证和证明
+//! - and
 use anyhow::Result;
 use rayon::prelude::*;
 use std::time::Instant;
 
 /// 排序算法类型枚举
+/// sorting algorithm type enum
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum SortingAlgorithm {
     /// 冒泡排序 - O(n²)
+    /// bubble sort - O(n²)
     Bubble,
     /// 选择排序 - O(n²)
+    /// selection sort - O(n²)
     Selection,
     /// 插入排序 - O(n²)
+    /// insertion sort - O(n²)
     Insertion,
     /// 快速排序 - O(n log n) 平均，O(n²) 最坏
+    /// quick sort - O(n log n) ，O(n²) worst
     Quick,
     /// 归并排序 - O(n log n)
+    /// merge sort - O(n log n)
     Merge,
     /// 堆排序 - O(n log n)
+    /// heap sort - O(n log n)
     Heap,
     /// 希尔排序 - O(n^1.3) 平均
+    /// shell sort - O(n^1.3)
     Shell,
     /// 计数排序 - O(n + k)
+    /// counting sort - O(n + k)
     Counting,
     /// 基数排序 - O(d(n + k))
+    /// radix sort - O(d(n + k))
     Radix,
     /// 桶排序 - O(n + k)
+    /// bucket sort - O(n + k)
     Bucket,
     /// Timsort - O(n log n) 稳定
     Timsort,
 }
 
 /// 排序算法实现类型
+/// sorting algorithm type
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum ImplementationType {
     /// 同步实现
+    /// synchronous
     Synchronous,
     /// 并行实现（Rayon）
+    /// parallelism （Rayon）
     Parallel,
     /// 异步实现（Tokio）
+    /// async （Tokio）
     Asynchronous,
 }
 
 /// 排序结果
+/// ordering result
 #[derive(Debug, Clone)]
 pub struct SortingResult<T> {
     /// 排序后的数据
+    /// ordering after
     pub data: Vec<T>,
     /// 执行时间
+    /// time
     pub execution_time: std::time::Duration,
     /// 比较次数
     pub comparisons: usize,
     /// 交换次数
+    /// exchange
     pub swaps: usize,
     /// 内存使用量（字节）
+    /// memory （）
     pub memory_usage: usize,
     /// 算法类型
+    /// algorithm type
     pub algorithm: SortingAlgorithm,
     /// 实现类型
+    /// type
     pub implementation: ImplementationType,
 }
 
 /// 排序算法复杂度信息
+/// sorting algorithm complex
 #[derive(Debug, Clone)]
 pub struct SortingComplexity {
     pub algorithm: SortingAlgorithm,
@@ -80,6 +110,7 @@ pub struct SortingComplexity {
 
 impl SortingComplexity {
     /// 获取所有排序算法的复杂度信息
+    /// all sorting algorithm complex
     pub fn get_all_complexities() -> Vec<Self> {
         vec![
             SortingComplexity {
@@ -175,10 +206,12 @@ impl SortingComplexity {
 }
 
 /// 排序算法实现器
+/// sorting algorithm
 pub struct SortingEngine;
 
 impl SortingEngine {
     /// 同步排序实现
+    /// synchronous ordering
     pub fn sort_sync<T>(mut data: Vec<T>, algorithm: SortingAlgorithm) -> SortingResult<T>
     where
         T: Ord + Clone,
@@ -243,6 +276,7 @@ impl SortingEngine {
     }
 
     /// 并行排序实现
+    /// parallel sort
     pub fn sort_parallel<T>(mut data: Vec<T>, algorithm: SortingAlgorithm) -> SortingResult<T>
     where
         T: Ord + Send + Clone,
@@ -280,6 +314,7 @@ impl SortingEngine {
     }
 
     /// 异步排序实现
+    /// async ordering
     pub async fn sort_async<T>(
         data: Vec<T>,
         algorithm: SortingAlgorithm,
@@ -297,6 +332,7 @@ impl SortingEngine {
     // =========================
 
     /// 冒泡排序
+    /// bubble sort
     fn bubble_sort<T: Ord>(data: &mut [T]) -> (usize, usize) {
         let mut comparisons = 0;
         let mut swaps = 0;
@@ -321,6 +357,7 @@ impl SortingEngine {
     }
 
     /// 选择排序
+    /// selection sort
     fn selection_sort<T: Ord>(data: &mut [T]) -> (usize, usize) {
         let mut comparisons = 0;
         let mut swaps = 0;
@@ -344,6 +381,7 @@ impl SortingEngine {
     }
 
     /// 插入排序
+    /// insertion sort
     fn insertion_sort<T: Ord>(data: &mut [T]) -> (usize, usize) {
         let mut comparisons = 0;
         let mut swaps = 0;
@@ -366,6 +404,7 @@ impl SortingEngine {
     }
 
     /// 快速排序
+    /// quick sort
     fn quick_sort<T: Ord>(data: &mut [T]) -> (usize, usize) {
         if data.len() <= 1 {
             return (0, 0);
@@ -411,6 +450,7 @@ impl SortingEngine {
     }
 
     /// 归并排序
+    /// merge sort
     fn merge_sort<T: Ord + Clone>(data: &mut [T]) -> (usize, usize) {
         if data.len() <= 1 {
             return (0, 0);
@@ -465,6 +505,7 @@ impl SortingEngine {
     }
 
     /// 堆排序
+    /// heap sort
     fn heap_sort<T: Ord>(data: &mut [T]) -> (usize, usize) {
         let mut comparisons = 0;
         let mut swaps = 0;
@@ -521,6 +562,7 @@ impl SortingEngine {
     }
 
     /// 希尔排序
+    /// shell sort
     fn shell_sort<T: Ord>(data: &mut [T]) -> (usize, usize) {
         let mut comparisons = 0;
         let mut swaps = 0;
@@ -554,15 +596,18 @@ impl SortingEngine {
 }
 
 /// 排序算法验证器
+/// sorting algorithm
 pub struct SortingValidator;
 
 impl SortingValidator {
     /// 验证排序结果是否正确
+    /// ordering result
     pub fn is_sorted<T: Ord>(data: &[T]) -> bool {
         data.windows(2).all(|w| w[0] <= w[1])
     }
 
     /// 验证排序结果的稳定性（对于稳定排序算法）
+    /// ordering result （to sorting algorithm ）
     pub fn is_stable<T: Ord + Clone>(_original: &[(T, usize)], _sorted: &[(T, usize)]) -> bool {
         // 简化实现：检查相同元素的相对位置是否保持不变
         // 实际实现需要更复杂的逻辑
@@ -570,6 +615,7 @@ impl SortingValidator {
     }
 
     /// 验证排序算法的正确性
+    /// sorting algorithm
     pub fn validate_sorting<T: Ord + Clone>(original: Vec<T>, result: &SortingResult<T>) -> bool {
         // 检查长度是否一致
         if original.len() != result.data.len() {

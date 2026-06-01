@@ -56,13 +56,13 @@
 
 | 目录 | 内容类型 | 文件数 |
 |------|---------|--------|
-| [01_learning/](01_learning/) | 学习规划 | 7 |
-| [02_reference/](02_reference/) | 参考资料 | 31 |
-| [03_practice/](03_practice/) | 实践练习 | 2 |
+| [01_learning/](01_learning/) | 学习规划 | 10 |
+| [02_reference/](02_reference/) | 参考资料 | 38 |
+| [03_practice/](03_practice/) | 实践练习 | 17 |
 | [04_thinking/](04_thinking/) | 思维方法 | 7 |
-| [05_guides/](05_guides/) | 使用指南 | 30 |
-| [06_toolchain/](06_toolchain/) | 工具链 | 21 |
-| [07_project/](07_project/) | 项目管理 | 14 |
+| [05_guides/](05_guides/) | 使用指南 | 36 |
+| [06_toolchain/](06_toolchain/) | 工具链 | 17 |
+| [07_project/](07_project/) | 项目管理 | 16 |
 
 ---
 

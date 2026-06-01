@@ -1,4 +1,5 @@
 //! 简单的异步生态系统演示程序
+//! simple async ecosystem system demonstration program
 use c06_async::async_runtime_integration_framework_simple::*;
 
 #[tokio::main]

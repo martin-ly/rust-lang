@@ -1,4 +1,6 @@
 //! HTTP 协议实现模块
+//! HTTP module
+//! HTTP 协议Implementation ofmodule
 use crate::error::NetworkError;
 use bytes::Bytes;
 use serde::{Deserialize, Serialize};
@@ -7,6 +9,7 @@ use std::fmt;
 use std::str::FromStr;
 
 /// HTTP 方法枚举
+/// HTTP method enum
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 #[allow(clippy::upper_case_acronyms)]
 pub enum HttpMethod {
@@ -60,6 +63,8 @@ impl fmt::Display for HttpMethod {
 }
 
 /// HTTP 版本枚举
+/// HTTP this enum
+/// HTTP 版thisenum
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub enum HttpVersion {
     Http1_0,
@@ -94,6 +99,7 @@ impl fmt::Display for HttpVersion {
 }
 
 /// HTTP 状态码
+/// HTTP state
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct HttpStatusCode {
     pub code: u16,
@@ -128,6 +134,8 @@ impl fmt::Display for HttpStatusCode {
 }
 
 /// HTTP 请求结构
+/// HTTP structure
+/// HTTP 请求structure
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct HttpRequest {
     pub method: HttpMethod,
@@ -159,6 +167,8 @@ impl HttpRequest {
 }
 
 /// HTTP 响应结构
+/// HTTP structure
+/// HTTP 响应structure
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct HttpResponse {
     pub version: HttpVersion,

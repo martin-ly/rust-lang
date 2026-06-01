@@ -1,6 +1,7 @@
 //! 错误处理测试
-//!
+//! error handling
 //! 测试各种错误场景和错误处理机制
+//! scenario and error handling mechanism
 use c07_process::error::{IpcError, ProcessError, SyncError};
 use c07_process::types::{ProcessConfig, ResourceLimits};
 use std::collections::HashMap;

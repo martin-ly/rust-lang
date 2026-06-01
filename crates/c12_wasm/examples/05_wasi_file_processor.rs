@@ -1,56 +1,65 @@
 //! # WASI 文件处理器示例
-//!
-//! 展示如何使用 WASI 创建可以在本地运行的命令行工具
-//!
+//! # WASI example
 //! ## 📐 知识结构
-//!
+//! ## 📐 structure
+//! ## 📐 知识structure
 //! ### 核心概念
-//!
-//! - **WASI**: WebAssembly System Interface，允许 WASM 访问系统资源
+//! ### core concept
 //!   - **属性**: 文件系统访问、命令行参数、标准I/O
-//!   - **关系**: 与WASM、系统编程、跨平台相关
-//!
+//!   - **attribute **: file system 、command parameter 、standard I/O
 //! ### 思维导图
-//!
-//! ```text
+//! ###
 //! WASI 文件处理器
-//! │
+//! WASI
 //! ├── 文件读取
+//! ├── file reading
 //! │   └── 读取文件内容
+//! │ └── inside
 //! ├── 文件处理
+//! ├──
+//! ├── 文件Handle
 //! │   ├── 统计信息
+//! │ ├──
 //! │   └── 文本转换
+//! │ └── this conversion
+//! │ └── 文thisconversion
 //! └── 文件写入
+//! └── file writing
 //!     └── 写入结果
-//! ```
+//!     └── result
 //!
 //! ## 编译方式
-//!
-//! ```bash
+//! ## way
+//! ## 编译way
+//! ## way
 //! # 添加 WASI 目标
-//! rustup target add wasm32-wasip1
-//!
+//! # WASI goal
+//! # 添加 WASI goal
 //! # 编译示例
-//! cargo build --example 05_wasi_file_processor --target wasm32-wasip1 --release
-//! ```
+//! # example
+//! # 编译Example of
 //!
 //! ## 运行方式
-//!
+//! ## Run way
 //! ```bash
-//! # 使用 WasmEdge 运行
-//! wasmedge target/wasm32-wasip1/release/examples/05_wasi_file_processor.wasm input.txt
 //!
 //! # 或使用 wasmtime 运行
-//! wasmtime target/wasm32-wasip1/release/examples/05_wasi_file_processor.wasm input.txt
+//! # or wasmtime Run
 //! ```
 //!
 //! ## 功能说明
-//!
+//! ## functionality explain
 //! 这个程序可以：
+//! program can ：
+//! 这个programcan：
 //! - 读取文件内容
+//! - inside
 //! - 统计行数、单词数、字符数
+//! - 、、
 //! - 转换为大写或小写
+//! - conversion as or
 //! - 查找特定文本
+//! - this
 use std::io::{self, Write};
 use std::{env, fs};
 

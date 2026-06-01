@@ -1,4 +1,5 @@
 //! 动态规划：同步 / Rayon并行 / Tokio异步
+//! dynamic programming ：synchronous / Rayonparallelism / Tokioasync
 use anyhow::Result;
 use rayon::prelude::*;
 
@@ -23,6 +24,7 @@ pub fn lcs_sync(a: &[u8], b: &[u8]) -> usize {
 }
 
 /// 并行 LCS（示意）：按对角线波前并行（简单版本：并行每一行的块）
+/// parallelism LCS（indicate ）：to line before parallelism （simple this ：parallelism ）
 pub fn lcs_parallel(a: &[u8], b: &[u8]) -> usize {
     // 简化且安全的版本：由于 LCS 具有强数据相关性，示例并行版本回退到同步实现。
     // 若需真正并行，可采用波前（anti-diagonal）调度或块内同步的算法。
@@ -87,6 +89,7 @@ pub async fn knapsack_01_async(
 // =========================
 
 /// 返回 LIS 的长度（严格上升）
+/// LIS （on ）
 pub fn lis_length_sync<T: Ord + Clone>(a: &[T]) -> usize {
     let mut tails: Vec<T> = Vec::new();
     for x in a.iter().cloned() {

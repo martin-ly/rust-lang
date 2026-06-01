@@ -1,39 +1,35 @@
 //! # Rust 1.89 特性示例 (历史版本)
-//!
+//! # Rust 1.89 feature example (this )
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//!
+//! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features_demo.rs`
-//!
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features_demo.rs`
 //! ## 版本历史说明
-//!
-//! 本文件展示 Rust 1.89 版本的特性，当前项目已升级到 Rust 1.92.0。
-//!
+//! ## this explain
 //! ### Rust 1.92.0 主要改进
-//!
-//! - **语言特性**: MaybeUninit 文档化、联合体原始引用、关联项多边界等
-//! - **标准库**: NonZero::div_ceil、rotate_right、Location::file_as_c_str
+//! ### Rust 1.92.0 main
 //! - **性能优化**: 迭代器方法特化、改进的编译优化
-//!
+//! - **performance optimization **: method 、optimization
 //! ### 迁移建议
-//!
+//! ###
 //! 1. 更新 Cargo.toml: `rust-version = "1.92"`
-//! 2. 参考 `examples/rust_192_features_demo.rs` 了解最新特性示例
-//! 3. 查看 `docs/RUST_192_CONTROL_FLOW_IMPROVEMENTS.md` 了解完整改进
-//!
 //! 参考:
-//! - [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/)
+//! reference :
 //! - [历史版本: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
-//!
-//! ---
+//! - [历史版this: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 //!
 //! # Rust 1.89 增强特性演示
-//!
-//! 本示例展示 Rust 1.89 版本的最新特性：
+//! # Rust 1.89 feature demonstration
 //! - let_chains 特性稳定化
+//! - let_chains feature
 //! - cfg_boolean_literals 特性稳定化
 //! - 裸函数支持稳定化
+//! - function
 //! - 危险隐式引用警告
+//! - reference warning
+//! - 危险隐式referencewarning
 //! - 无效空指针参数校验
+//! - ineffective pointer parameter
 use c03_control_fn::rust_189_enhanced_features::*;
 
 #[tokio::main]
@@ -80,6 +76,7 @@ async fn main() {
 }
 
 /// 实际应用场景演示
+/// actual application scenario demonstration
 fn demonstrate_real_world_usage() {
     println!("=== 实际应用场景演示 ===");
 
@@ -94,6 +91,8 @@ fn demonstrate_real_world_usage() {
 }
 
 /// 用户权限检查场景
+/// scenario
+/// 用户权限Checkscenario
 fn demonstrate_user_permission_check() {
     println!("--- 用户权限检查场景 ---");
 
@@ -127,6 +126,7 @@ fn demonstrate_user_permission_check() {
 }
 
 /// 配置管理场景
+/// scenario
 fn demonstrate_configuration_management() {
     println!("--- 配置管理场景 ---");
 
@@ -160,6 +160,7 @@ fn demonstrate_configuration_management() {
 }
 
 /// 错误处理场景
+/// error handling scenario
 fn demonstrate_error_handling() {
     println!("--- 错误处理场景 ---");
 
@@ -182,6 +183,7 @@ fn demonstrate_error_handling() {
 }
 
 /// 条件编译演示
+/// condition demonstration
 #[cfg(target_os = "linux")]
 fn _demonstrate_platform_specific_features() {
     println!("--- Linux 平台特定功能 ---");
@@ -201,6 +203,7 @@ fn _demonstrate_platform_specific_features() {
 }
 
 /// 性能优化演示
+/// performance optimization demonstration
 fn _demonstrate_performance_optimizations() {
     println!("--- 性能优化演示 ---");
 

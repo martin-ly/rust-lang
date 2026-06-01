@@ -1,13 +1,20 @@
 //! 屏障（Barrier）示例
-//!
+//! barrier （Barrier）example
 //! 展示：
+//! ：
 //! - 基本 `Barrier` 同步
+//! - this `Barrier` synchronous
+//! - 基this `Barrier` synchronous
 //! - 多阶段屏障（多轮栅栏）
+//! - stage barrier （）
+//! - 多stagebarrier（多轮栅栏）
 //! - 并行任务分批执行
+//! - parallelism task
 use std::sync::{Arc, Barrier};
 use std::thread;
 
 /// 基本屏障：所有线程到达后再继续
+/// this barrier ：all thread to after
 pub fn basic_barrier(num_threads: usize) {
     let barrier = Arc::new(Barrier::new(num_threads));
     let mut handles = Vec::new();
@@ -28,6 +35,7 @@ pub fn basic_barrier(num_threads: usize) {
 }
 
 /// 多阶段同步：同一批线程跨多个阶段使用同一个屏障
+/// stage synchronous ：thread stage barrier
 pub fn multi_phase_barrier(num_threads: usize, phases: usize) {
     let barrier = Arc::new(Barrier::new(num_threads));
     let mut handles = Vec::new();
@@ -50,6 +58,7 @@ pub fn multi_phase_barrier(num_threads: usize, phases: usize) {
 }
 
 /// 分批执行：把任务切成多批，每批次末尾用屏障等待
+/// ：task ，barrier etc.
 pub fn batched_parallel_sum(nums: &[u64], batch_size: usize, workers: usize) -> u64 {
     assert!(workers > 0 && batch_size > 0);
     let shared_nums = Arc::new(nums.to_vec());

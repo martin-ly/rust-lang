@@ -1,37 +1,42 @@
 //! io_uring 深度实践 —— Linux 高性能异步 I/O
-//!
+//! io_uring —— Linux performance async I/O
+//! io_uring 深度实践 —— Linux 高performanceasync I/O
 //! # 概述
-//!
-//! io_uring 是 Linux 内核 5.1+ 引入的异步 I/O 接口，通过共享的提交队列（SQ）和
-//! 完成队列（CQ）实现用户态与内核态的高效通信。Rust 生态中，`io-uring` crate
-//! 提供了安全绑定，`tokio-uring` 在此基础上构建了异步运行时。
-//!
+//! #
 //! # 核心概念
-//!
+//! # core concept
 //! ## 队列对（Queue Pair）
+//! ## 队列to（Queue Pair）
 //! - **Submission Queue (SQ)**: 用户态提交 I/O 请求，内核消费
+//! - **Submission Queue (SQ)**: I/O ，kernel
 //! - **Completion Queue (CQ)**: 内核返回 I/O 结果，用户态消费
-//! - **Ring Buffer**: SQ 和 CQ 都是环形缓冲区，通过内存映射共享
-//!
+//! - **Completion Queue (CQ)**: kernel I/O result ，
 //! ## 优势对比
-//!
+//! ## strength to
 //! | 特性 | epoll | io_uring |
-//! |------|-------|----------|
 //! | 接口语义 | 就绪通知（readiness） | 完成通知（completion） |
+//! | | （readiness） | （completion） |
+//! | 接口语义 | 就绪Notify（readiness） | 完成Notify（completion） |
 //! | 系统调用 | epoll_ctl + epoll_wait | io_uring_enter（可批量） |
 //! | 文件 I/O | 同步 fallback（阻塞） | 真正异步 |
+//! | I/O | synchronous fallback（） | async |
+//! | 文件 I/O | synchronous fallback（Block） | 真正async |
 //! | 批处理 | 逐个处理 | 批量提交/收割 |
+//! | | | / |
 //! | 零拷贝 | 不支持 | 支持（registered buffers） |
+//! | 零拷贝 | 不Supports | Supports（registered buffers） |
 //! |  polling 模式 | 不支持 | 支持（绕过 syscall） |
-//!
+//! | polling | | （ syscall） |
+//! | polling 模式 | 不Supports | Supports（绕过 syscall） |
 //! # 前置条件
+//! # before condition
 //! - Linux 内核 5.1+（建议 5.10+ 以获得完整特性）
+//! - Linux kernel 5.1+（ 5.10+ complete feature ）
+//! - Linux kernel 5.1+（建议 5.10+ 以获得completefeature）
 //! - 启用 `io-uring` feature: `cargo build -p c10_networks --features io-uring`
-//!
 //! # 参考
+//! # reference
 //! - [io_uring PDF](https://kernel.dk/io_uring.pdf) — Jens Axboe 原始论文
-//! - [io-uring crate](https://docs.rs/io-uring)
-//! - [tokio-uring](https://docs.rs/tokio-uring)
 
 #[cfg(all(target_os = "linux", feature = "io-uring"))]
 pub mod linux_impl {
@@ -43,11 +48,12 @@ pub mod linux_impl {
     // =========================================================================
 
     /// 异步读取整个文件到 `Vec<u8>`
-    ///
-    /// 展示了最基本的 io_uring 文件读取模式：
+    /// async to `Vec<u8>`
     /// 1. 打开文件
+    /// 1.
     /// 2. 构建 Read SQE (Submission Queue Entry)
     /// 3. 提交并等待完成
+    /// 3. and etc.
     /// 4. 处理 CQE (Completion Queue Entry)
     pub fn read_file_full(path: &str) -> std::io::Result<Vec<u8>> {
         let file = std::fs::File::open(path)?;
@@ -86,8 +92,7 @@ pub mod linux_impl {
     }
 
     /// 异步写入文件
-    ///
-    /// 展示了 Write SQE 的使用。
+    /// async
     pub fn write_file_full(path: &str, data: &[u8]) -> std::io::Result<usize> {
         use std::fs::OpenOptions;
 
@@ -130,9 +135,9 @@ pub mod linux_impl {
     // =========================================================================
 
     /// 批量读取多个文件
-    ///
-    /// io_uring 的核心优势：一次 `submit()` 提交多个操作，
+    /// io_uring corestrength：一次 `submit()` 提交多个操作，
     /// 减少用户态/内核态上下文切换。
+    /// /kernel on under switching 。
     pub fn read_multiple_files(paths: &[&str]) -> Vec<std::io::Result<Vec<u8>>> {
         let mut ring = IoUring::new(paths.len() as u32 * 2).expect("create ring");
         let mut files = Vec::new();
@@ -213,9 +218,7 @@ pub mod linux_impl {
     // =========================================================================
 
     /// 使用注册缓冲区减少内存拷贝
-    ///
-    /// 通过 `IORING_REGISTER_BUFFERS` 将用户态缓冲区注册到内核，
-    /// I/O 操作直接使用这些缓冲区，避免额外的 page pinning 开销。
+    /// buffering memory
     pub struct RegisteredBufferPool {
         ring: IoUring,
         buffers: Vec<Vec<u8>>,
@@ -288,12 +291,14 @@ pub mod linux_impl {
     // =========================================================================
 
     /// io_uring vs 同步 I/O 性能对比（概念框架）
-    ///
+    /// io_uring vs synchronous I/O performance to （concept framework ）
     /// 实际基准测试应使用 `criterion` crate。
+    /// actual benchmark `criterion` crate。
     pub struct IoUringBenchmark;
 
     impl IoUringBenchmark {
         /// 同步顺序读取
+        /// synchronous order
         pub fn sync_sequential_read(path: &str, chunk_size: usize) -> std::io::Result<usize> {
             use std::io::Read;
             let mut file = std::fs::File::open(path)?;
@@ -310,8 +315,9 @@ pub mod linux_impl {
         }
 
         /// io_uring 并发读取（概念）
-        ///
+        /// io_uring concurrency （concept ）
         /// 通过链接 SQE（Linked SQE）实现流水线化 I/O。
+        /// SQE（Linked SQE）pipeline I/O。
         pub fn io_uring_linked_reads(path: &str) -> std::io::Result<usize> {
             // 链接操作概念：Read → Process → Write 链
             // 实际实现需根据具体业务调整

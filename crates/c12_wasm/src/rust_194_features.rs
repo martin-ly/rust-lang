@@ -1,42 +1,43 @@
 //! Rust 1.94.0 WASM 特性实现模块
-//!
-//! 本模块展示了 Rust 1.94.0 真实特性在 WebAssembly 场景中的应用，包括：
+//! Rust 1.94.0 WASM feature module
 //! - array_windows - 切片数组窗口迭代器（用于 WASM 数据处理）
-//! - LazyCell/LazyLock 新方法 - get(), get_mut(), force_mut()
+//! - array_windows - （ WASM ）
 //! - 数学常量 - EULER_GAMMA, GOLDEN_RATIO (f32/f64)
+//! - 数学constant - EULER_GAMMA, GOLDEN_RATIO (f32/f64)
 //! - Peekable 新方法 - next_if_map(), next_if_map_mut()
-//! - char 到 usize 转换 - `TryFrom<char>` for usize
-//!
+//! - Peekable 新method - next_if_map(), next_if_map_mut()
 //! # 文件信息
+//! #
 //! - 文件: rust_194_features.rs
 //! - 创建日期: 2026-03-06
+//! - date : 2026-03-06
 //! - 版本: 1.0
-//! - Rust版本: 1.94.0
-//! - Edition: 2024
+//! - this : 1.0
+//! - 版this: 1.0
 use std::collections::HashMap;
 use std::sync::{LazyLock, Mutex};
 
 // ==================== 1. array_windows - WASM 数据处理 ====================
 
 /// # 1. array_windows - WASM 数据处理
-///
-/// Rust 1.94.0 的 `array_windows` 方法在 WebAssembly 应用中特别有用，
+/// # 1. array_windows - WASM 数据Handle
 /// 可以用于高效处理线性内存中的数据序列。
+/// can efficient line memory in sequence 。
 /// WASM 线性内存视图
-///
-/// 使用 array_windows 处理 WASM 内存中的数据
+/// WASM line memory
 pub struct WasmMemoryView<'a> {
     data: &'a [u8],
 }
 
 impl<'a> WasmMemoryView<'a> {
     /// 从切片创建内存视图
+    /// from memory
     pub fn new(data: &'a [u8]) -> Self {
         Self { data }
     }
 
     /// 读取 32 位整数（小端序）
-    ///
+    /// 32 （）
     /// Rust 1.96.0: array_windows<4> 用于读取 4 字节值
     pub fn read_i32_le(&self, offset: usize) -> Option<i32> {
         let bytes = self.data.get(offset..offset + 4)?;
@@ -44,8 +45,11 @@ impl<'a> WasmMemoryView<'a> {
     }
 
     /// 读取所有 32 位整数
-    ///
+    /// all 32
     /// Rust 1.94.0: chunks_exact(4) 批量读取 4 字节整数（非重叠窗口）
+    /// Rust 1.94.0: chunks_exact(4) 4 （）
+    /// Rust 1.94.0: chunks_exact(4) 批量Read 4 字节整数（非重叠窗口）
+    /// Rust 1.94.0: chunks_exact(4) Read 4 （）
     pub fn read_all_i32_le(&self) -> impl Iterator<Item = i32> + '_ {
         self.data
             .chunks_exact(4)
@@ -53,8 +57,9 @@ impl<'a> WasmMemoryView<'a> {
     }
 
     /// 查找字节序列
-    ///
+    /// sequence
     /// Rust 1.96.0: array_windows 用于滑动窗口搜索
+    /// Rust 1.96.0: array_windows
     pub fn find_sequence(&self, pattern: &[u8]) -> Option<usize> {
         if pattern.is_empty() || pattern.len() > self.data.len() {
             return None;
@@ -104,8 +109,9 @@ impl<'a> WasmMemoryView<'a> {
     }
 
     /// 验证内存对齐
-    ///
+    /// memory alignment
     /// Rust 1.96.0: array_windows 验证 4 字节对齐
+    /// Rust 1.96.0: array_windows Verify 4 字节to齐
     pub fn verify_4byte_alignment(&self) -> bool {
         if self.data.len() < 4 {
             return true;
@@ -116,8 +122,9 @@ impl<'a> WasmMemoryView<'a> {
     }
 
     /// 计算校验和（简化版）
-    ///
+    /// and （）
     /// Rust 1.96.0: array_windows<2> 用于 16 位校验和计算
+    /// Rust 1.96.0: array_windows<2> 16 and
     pub fn checksum_16bit(&self) -> u16 {
         let mut sum: u32 = 0;
 
@@ -141,13 +148,13 @@ impl<'a> WasmMemoryView<'a> {
 }
 
 /// WASM 数据包解析器
-///
+/// WASM
 /// 使用 array_windows 解析网络数据包
+/// array_windows network
 pub struct WasmPacketParser;
 
 impl WasmPacketParser {
     /// 以太网帧头解析
-    ///
     /// Rust 1.96.0: array_windows<6> 用于 MAC 地址
     pub fn parse_ethernet_header(data: &[u8]) -> Option<EthernetHeader> {
         if data.len() < 14 {
@@ -176,8 +183,10 @@ impl WasmPacketParser {
     }
 
     /// 查找 IP 头部
-    ///
+    /// IP
+    /// Find IP 头部
     /// Rust 1.96.0: array_windows<20> 用于 IP 头部检测
+    /// Rust 1.96.0: array_windows<20> Used for IP 头部检测
     pub fn find_ip_packet(data: &[u8]) -> Option<usize> {
         // 查找 0x45 (IPv4, IHL=5) 模式
         for (idx, window) in data.array_windows::<2>().enumerate() {
@@ -198,14 +207,17 @@ pub struct EthernetHeader {
 }
 
 /// WASM 图像数据处理
-///
+/// WASM
+/// WASM 图像数据Handle
 /// 使用 array_windows 处理像素数据
+/// array_windows
 pub struct WasmImageProcessor;
 
 impl WasmImageProcessor {
     /// 计算 RGB 像素的平均颜色
-    ///
+    /// RGB
     /// Rust 1.96.0: array_windows<3> 用于 RGB 像素处理
+    /// Rust 1.96.0: array_windows<3> Used for RGB 像素Handle
     pub fn average_rgb(data: &[u8]) -> Option<(u8, u8, u8)> {
         if data.len() < 3 {
             return None;
@@ -235,8 +247,9 @@ impl WasmImageProcessor {
     }
 
     /// 检测边缘（简化 Sobel 算子）
-    ///
+    /// edge （ Sobel ）
     /// Rust 1.96.0: array_windows<3> 用于 3x3 卷积
+    /// Rust 1.96.0: array_windows<3> Used for 3x3 卷积
     pub fn detect_edges_simple(data: &[u8], width: usize) -> Vec<u8> {
         if data.len() < width * 3 || width < 3 {
             return vec![0; data.len() / 3];
@@ -275,10 +288,9 @@ impl WasmImageProcessor {
 
 // ==================== 2. LazyLock 新方法 - WASM 模块管理 ====================
 
-/// # 2. LazyLock 新方法 - WASM 模块管理
-///
-/// Rust 1.94.0 的 LazyLock 新方法在 WASM 环境中可用于延迟初始化模块和资源。
 /// 全局 WASM 实例配置
+/// global WASM
+/// global WASM 实例Configure
 static WASM_INSTANCE_CONFIG: LazyLock<Mutex<WasmInstanceConfig>> = LazyLock::new(|| {
     Mutex::new(WasmInstanceConfig {
         memory_pages: 1,
@@ -289,6 +301,8 @@ static WASM_INSTANCE_CONFIG: LazyLock<Mutex<WasmInstanceConfig>> = LazyLock::new
 });
 
 /// WASM 实例配置
+/// WASM
+/// WASM 实例Configure
 #[derive(Debug, Clone)]
 pub struct WasmInstanceConfig {
     pub memory_pages: u32,
@@ -299,17 +313,20 @@ pub struct WasmInstanceConfig {
 
 impl WasmInstanceConfig {
     /// 获取内存限制（字节）
+    /// memory （）
     pub fn memory_limit_bytes(&self) -> usize {
         self.max_memory_pages as usize * 64 * 1024 // 64KB per page
     }
 
     /// 设置内存页数
+    /// memory
     pub fn set_memory_pages(&mut self, pages: u32) {
         self.memory_pages = pages.min(self.max_memory_pages);
     }
 }
 
 /// 获取 WASM 配置
+/// WASM
 pub fn get_wasm_config<F, R>(f: F) -> R
 where
     F: FnOnce(&WasmInstanceConfig) -> R,
@@ -321,6 +338,7 @@ where
 }
 
 /// 更新 WASM 配置
+/// WASM
 pub fn update_wasm_config<F>(f: F)
 where
     F: FnOnce(&mut WasmInstanceConfig),
@@ -332,6 +350,7 @@ where
 }
 
 /// 延迟初始化的导出函数表
+/// function
 static EXPORT_TABLE: LazyLock<HashMap<String, WasmExportInfo>> = LazyLock::new(|| {
     let mut table = HashMap::new();
     table.insert(
@@ -354,6 +373,7 @@ static EXPORT_TABLE: LazyLock<HashMap<String, WasmExportInfo>> = LazyLock::new(|
 });
 
 /// WASM 导出信息
+/// WASM
 #[derive(Debug, Clone)]
 pub struct WasmExportInfo {
     pub name: String,
@@ -362,6 +382,7 @@ pub struct WasmExportInfo {
 }
 
 /// 导出类型
+/// type
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ExportKind {
     Function,
@@ -375,7 +396,6 @@ pub fn get_export_info(name: &str) -> Option<&'static WasmExportInfo> {
     EXPORT_TABLE.get(name)
 }
 
-/// 延迟初始化的 WASI 预打开目录
 static WASI_PREOPENS: LazyLock<Mutex<Vec<WasiPreopenDir>>> = LazyLock::new(|| {
     Mutex::new(vec![WasiPreopenDir {
         guest_path: "/".to_string(),
@@ -385,6 +405,7 @@ static WASI_PREOPENS: LazyLock<Mutex<Vec<WasiPreopenDir>>> = LazyLock::new(|| {
 });
 
 /// WASI 预打开目录
+/// WASI
 #[derive(Debug, Clone)]
 pub struct WasiPreopenDir {
     pub guest_path: String,
@@ -413,21 +434,23 @@ pub fn get_preopen_dirs() -> Vec<WasiPreopenDir> {
 // ==================== 3. 数学常量 - WASM 图形计算 ====================
 
 /// # 3. 数学常量 - WASM 图形计算
-///
-/// Rust 1.94.0 的数学常量在 WebAssembly 图形和数学计算中非常有用。
+/// # 3. constant - WASM
+/// # 3. 数学constant - WASM 图形Calculate
 /// 黄金比例布局计算器
-///
+/// layout
 /// 使用 GOLDEN_RATIO 计算响应式布局
+/// GOLDEN_RATIO layout
 pub struct GoldenRatioLayout;
 
 impl GoldenRatioLayout {
     /// 黄金比例常量
+    /// constant
     const PHI: f64 = std::f64::consts::GOLDEN_RATIO;
     const PHI_F32: f32 = std::f32::consts::GOLDEN_RATIO;
 
     /// 计算黄金比例分割
-    ///
     /// 将宽度分割为符合黄金比例的两部分
+    /// will as part
     pub fn split_width(width: f64) -> (f64, f64) {
         let larger = width / Self::PHI;
         let smaller = width - larger;
@@ -441,7 +464,7 @@ impl GoldenRatioLayout {
     }
 
     /// 生成黄金螺旋点（用于动画路径）
-    ///
+    /// point （）
     /// Rust 1.94.0: 使用 GOLDEN_RATIO 生成螺旋
     pub fn golden_spiral_points(count: usize, scale: f64) -> Vec<(f64, f64)> {
         (0..count)
@@ -454,8 +477,8 @@ impl GoldenRatioLayout {
     }
 
     /// 计算黄金比例网格
-    ///
     /// 生成符合黄金比例的网格布局
+    /// layout
     pub fn golden_grid(
         container_width: f64,
         container_height: f64,
@@ -482,6 +505,7 @@ impl GoldenRatioLayout {
     }
 
     /// 使用 f32 版本进行快速计算（WASM 友好）
+    /// f32 this fast （WASM ）
     pub fn split_width_f32(width: f32) -> (f32, f32) {
         let larger = width / Self::PHI_F32;
         let smaller = width - larger;
@@ -490,8 +514,10 @@ impl GoldenRatioLayout {
 }
 
 /// 基于欧拉常数的音频合成器
-///
+/// synthesis
 /// 使用 EULER_GAMMA 进行音频波形计算
+/// EULER_GAMMA
+/// Use EULER_GAMMA 进行音频波形Calculate
 pub struct EulerAudioSynthesizer {
     sample_rate: f32,
     gamma: f32,
@@ -499,6 +525,7 @@ pub struct EulerAudioSynthesizer {
 
 impl EulerAudioSynthesizer {
     /// 创建新的合成器
+    /// synthesis
     pub fn new(sample_rate: f32) -> Self {
         Self {
             sample_rate,
@@ -507,8 +534,8 @@ impl EulerAudioSynthesizer {
     }
 
     /// 生成欧拉调制正弦波
-    ///
     /// Rust 1.94.0: 使用 EULER_GAMMA 调制波形
+    /// Rust 1.94.0: Use EULER_GAMMA 调制波形
     pub fn generate_euler_sine(&self, frequency: f32, duration_sec: f32) -> Vec<f32> {
         let num_samples = (self.sample_rate * duration_sec) as usize;
         let mut samples = Vec::with_capacity(num_samples);
@@ -525,6 +552,7 @@ impl EulerAudioSynthesizer {
     }
 
     /// 生成包络（使用欧拉常数）
+    /// （）
     pub fn generate_euler_envelope(&self, duration_sec: f32) -> Vec<f32> {
         let num_samples = (self.sample_rate * duration_sec) as usize;
         let decay_factor = (-self.gamma / duration_sec).exp();
@@ -538,6 +566,7 @@ impl EulerAudioSynthesizer {
     }
 
     /// 计算谐波序列（基于调和级数）
+    /// sequence （and ）
     pub fn harmonic_series(&self, fundamental: f32, harmonics: usize) -> Vec<f32> {
         let gamma_f64 = std::f64::consts::EULER_GAMMA;
 
@@ -554,8 +583,9 @@ impl EulerAudioSynthesizer {
 }
 
 /// WASM 图形变换器
-///
+/// WASM transformation
 /// 使用数学常量进行 2D/3D 变换
+/// constant 2D/3D transformation
 pub struct WasmTransform {
     matrix: [f64; 16],
 }
@@ -571,7 +601,6 @@ impl WasmTransform {
     }
 
     /// 黄金比例缩放
-    ///
     /// Rust 1.94.0: 使用 GOLDEN_RATIO
     pub fn golden_scale() -> Self {
         let phi = std::f64::consts::GOLDEN_RATIO;
@@ -583,6 +612,7 @@ impl WasmTransform {
     }
 
     /// 应用欧拉旋转（使用欧拉常数作为旋转因子）
+    /// application （as factor ）
     pub fn euler_rotation_y(angle: f64) -> Self {
         let gamma = std::f64::consts::EULER_GAMMA;
         let adjusted_angle = angle * (1.0 + gamma * 0.1);
@@ -599,6 +629,7 @@ impl WasmTransform {
     }
 
     /// 将变换应用到点
+    /// will transformation application to point
     pub fn transform_point(&self, x: f64, y: f64, z: f64) -> (f64, f64, f64) {
         let m = &self.matrix;
         (
@@ -612,11 +643,9 @@ impl WasmTransform {
 // ==================== 4. Peekable 新方法 - WASM 文本解析 ====================
 
 /// # 4. Peekable 新方法 - WASM 文本解析
-///
-/// Rust 1.94.0 的 Peekable 新方法在 WASM 文本解析中非常有用。
-/// WAT (WebAssembly Text) 解析器
-///
+/// # 4. Peekable method - WASM this
 /// 使用 Peekable 新方法解析 WASM 文本格式
+/// Peekable method WASM this
 pub struct WatParser<'a> {
     chars: std::iter::Peekable<std::str::Chars<'a>>,
     line: usize,
@@ -635,6 +664,7 @@ pub enum WatToken {
 
 impl<'a> WatParser<'a> {
     /// 创建新的 WAT 解析器
+    /// WAT
     pub fn new(input: &'a str) -> Self {
         Self {
             chars: input.chars().peekable(),
@@ -644,8 +674,10 @@ impl<'a> WatParser<'a> {
     }
 
     /// 跳过空白和注释
-    ///
+    /// and
     /// Rust 1.94.0: 使用 next_if() 简化空白跳过
+    /// Rust 1.94.0: next_if()
+    /// Rust 1.94.0: Use next_if() 简化空白跳过
     fn skip_whitespace(&mut self) {
         loop {
             // 跳过空白字符
@@ -700,8 +732,10 @@ impl<'a> WatParser<'a> {
     }
 
     /// 解析标识符或关键字
-    ///
+    /// or key
     /// Rust 1.94.0: 使用 next_if() 简化标识符解析
+    /// Rust 1.94.0: next_if()
+    /// Rust 1.94.0: Use next_if() 简化标识符Parse
     fn parse_identifier(&mut self) -> Option<String> {
         let mut ident = String::new();
 
@@ -763,8 +797,9 @@ impl<'a> WatParser<'a> {
     }
 
     /// 解析数字
-    ///
     /// Rust 1.94.0: 使用 next_if() 简化数字解析
+    /// Rust 1.94.0: next_if()
+    /// Rust 1.94.0: Use next_if() 简化数字Parse
     fn parse_number(&mut self) -> Option<f64> {
         let mut num_str = String::new();
 
@@ -796,6 +831,7 @@ impl<'a> WatParser<'a> {
     }
 
     /// 获取下一个 token
+    /// under token
     pub fn next_token(&mut self) -> Option<WatToken> {
         self.skip_whitespace();
 
@@ -832,6 +868,7 @@ impl<'a> WatParser<'a> {
     }
 
     /// 解析所有 tokens
+    /// all tokens
     pub fn parse_all(&mut self) -> Vec<WatToken> {
         let mut tokens = Vec::new();
         while let Some(token) = self.next_token() {
@@ -841,15 +878,16 @@ impl<'a> WatParser<'a> {
     }
 }
 
-/// 简单的 CSV 解析器（用于 WASM 数据处理）
-///
 /// 使用 Peekable 新方法
+/// Peekable method
+/// Use Peekable 新method
 pub struct SimpleCsvParser<'a> {
     chars: std::iter::Peekable<std::str::Chars<'a>>,
 }
 
 impl<'a> SimpleCsvParser<'a> {
     /// 创建新的 CSV 解析器
+    /// CSV
     pub fn new(input: &'a str) -> Self {
         Self {
             chars: input.chars().peekable(),
@@ -857,8 +895,9 @@ impl<'a> SimpleCsvParser<'a> {
     }
 
     /// 解析一个字段
-    ///
+    /// field
     /// Rust 1.94.0: 使用 next_if() 简化字段解析
+    /// Rust 1.94.0: next_if() field
     fn parse_field(&mut self) -> String {
         let mut field = String::new();
 
@@ -904,6 +943,7 @@ impl<'a> SimpleCsvParser<'a> {
     }
 
     /// 解析所有行
+    /// all
     pub fn parse_all(&mut self) -> Vec<Vec<String>> {
         let mut rows = Vec::new();
         while let Some(row) = self.parse_line() {
@@ -916,29 +956,29 @@ impl<'a> SimpleCsvParser<'a> {
 // ==================== 5. char 到 usize 转换 - WASM 字符编码 ====================
 
 /// # 5. char 到 usize 转换 - WASM 字符编码
-///
-/// Rust 1.94.0 的 `TryFrom<char>` for usize 在 WASM 字符编码和 UTF-8 处理中非常有用。
+/// # 5. char to usize conversion - WASM
+/// # 5. char to usize conversion - WASM 字符Encode
 /// UTF-8 编码器（用于 WASM 字符串处理）
-///
+/// UTF-8 （ WASM ）
 /// 使用 char 到 usize 转换进行 UTF-8 编码
+/// char to usize conversion UTF-8
 pub struct Utf8Encoder;
 
 impl Utf8Encoder {
-    /// 获取字符的 Unicode 码点值
-    ///
-    /// Rust 1.94.0: 使用 `TryFrom<char>` for usize
     pub fn code_point(c: char) -> Option<usize> {
         usize::try_from(c).ok()
     }
 
     /// 计算字符串的 UTF-8 字节长度
+    /// UTF-8
     pub fn utf8_byte_length(s: &str) -> usize {
         s.chars().map(|c| c.len_utf8()).sum()
     }
 
     /// 将字符编码为 UTF-8 字节
-    ///
+    /// will as UTF-8
     /// 返回字符的字节表示
+    /// represent
     pub fn encode_char(c: char) -> Vec<u8> {
         let mut buf = [0u8; 4];
         let len = c.encode_utf8(&mut buf).len();
@@ -946,8 +986,9 @@ impl Utf8Encoder {
     }
 
     /// 计算字符宽度（用于终端显示）
-    ///
+    /// （display ）
     /// 基于 Unicode 码点判断字符宽度
+    /// Unicode point
     pub fn char_width(c: char) -> usize {
         if let Some(cp) = Self::code_point(c) {
             // 控制字符宽度为 0
@@ -966,23 +1007,23 @@ impl Utf8Encoder {
     }
 
     /// 计算字符串显示宽度
+    /// display
     pub fn string_width(s: &str) -> usize {
         s.chars().map(Self::char_width).sum()
     }
 }
 
 /// Base64 编码器/解码器（WASM 友好）
-///
+/// Base64 /（WASM ）
 /// 使用 char 转换进行 Base64 处理
+/// char conversion Base64
 pub struct WasmBase64;
 
 impl WasmBase64 {
     /// Base64 字符集
+    /// Base64
     const ALPHABET: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
-    /// 将 Base64 字符转换为数值（包括填充字符标记）
-    ///
-    /// Rust 1.94.0: 使用 `TryFrom<char>` for usize
     fn char_to_value(c: char) -> Option<u8> {
         if c.is_ascii_alphanumeric() {
             if c.is_ascii_uppercase() {
@@ -1004,7 +1045,6 @@ impl WasmBase64 {
         }
     }
 
-    /// 编码字节数组为 Base64
     pub fn encode(data: &[u8]) -> String {
         let mut result = String::with_capacity(data.len().div_ceil(3) * 4);
         let chunks = data.chunks_exact(3);
@@ -1040,6 +1080,8 @@ impl WasmBase64 {
     }
 
     /// 解码 Base64 字符串
+    /// Base64
+    /// Decode Base64 字符串
     pub fn decode(s: &str) -> Option<Vec<u8>> {
         let mut result = Vec::with_capacity(s.len() / 4 * 3);
         let mut buffer = [0u8; 4];
@@ -1086,14 +1128,14 @@ impl WasmBase64 {
 }
 
 /// 字符频率分析器
-///
+/// analyze
 /// 使用 char 转换分析文本
+/// char conversion analyze this
 pub struct CharFrequencyAnalyzer;
 
 impl CharFrequencyAnalyzer {
     /// 分析字符频率
-    ///
-    /// Rust 1.94.0: 使用 `TryFrom<char>` for usize 进行字符分类
+    /// analyze
     pub fn analyze(s: &str) -> HashMap<String, usize> {
         let mut freq: HashMap<String, usize> = HashMap::new();
 
@@ -1127,6 +1169,7 @@ impl CharFrequencyAnalyzer {
     }
 
     /// 计算熵（简化版）
+    /// （）
     pub fn calculate_entropy(s: &str) -> f64 {
         if s.is_empty() {
             return 0.0;
@@ -1148,6 +1191,7 @@ impl CharFrequencyAnalyzer {
 // ==================== 6. 综合应用示例 ====================
 
 /// 演示 Rust 1.94.0 WASM 特性
+/// demonstration Rust 1.94.0 WASM feature
 pub fn demonstrate_rust_194_wasm_features() {
     println!("\n=== Rust 1.94.0 WASM 特性演示 ===\n");
 
@@ -1237,6 +1281,7 @@ pub fn demonstrate_rust_194_wasm_features() {
 }
 
 /// 获取 Rust 1.94.0 WASM 特性信息
+/// Rust 1.94.0 WASM feature
 pub fn get_rust_194_wasm_info() -> String {
     "Rust 1.94.0 WASM 特性:\n- array_windows - WASM 数据处理\n- LazyLock 新方法 - WASM 模块管理\n- \
      数学常量 - WASM 图形计算\n- Peekable 新方法 - WASM 文本解析\n- `TryFrom<char>` for usize - \
@@ -1249,6 +1294,7 @@ pub fn get_rust_194_wasm_info() -> String {
 use std::ops::ControlFlow;
 
 /// 搜索二维数组，找到目标时提前退出
+/// ，to goal before
 pub fn search_in_matrix(matrix: &[Vec<i32>], target: i32) -> ControlFlow<(usize, usize), ()> {
     for (i, row) in matrix.iter().enumerate() {
         for (j, &val) in row.iter().enumerate() {
@@ -1261,6 +1307,8 @@ pub fn search_in_matrix(matrix: &[Vec<i32>], target: i32) -> ControlFlow<(usize,
 }
 
 /// 数据验证管道
+/// pipe
+/// 数据Verifypipe
 pub fn validate_data(data: &str) -> ControlFlow<String, ()> {
     if data.is_empty() {
         return ControlFlow::Break("数据不能为空".to_string());
@@ -1421,9 +1469,8 @@ mod tests {
     // ==================== 边界测试和反例测试 ====================
 
     /// 测试越界访问
-    ///
     /// 验证 WASM 内存视图能正确处理越界访问而不 panic
-    /// 预期行为：返回 None 而不是 panic
+    /// WASM memory while panic
     #[test]
     fn test_wasm_memory_view_out_of_bounds() {
         let data: Vec<u8> = vec![0x01, 0x00, 0x00, 0x00];
@@ -1463,9 +1510,8 @@ mod tests {
     }
 
     /// 测试无效 WAT 语法
-    ///
-    /// 验证 WAT 解析器能正确处理无效的 WAT 语法而不 panic
-    /// 预期行为：返回部分解析结果或空列表，不 panic
+    /// ineffective WAT
+    /// Test forineffective WAT 语法
     #[test]
     fn test_wat_parser_invalid_syntax() {
         // 测试未闭合的括号
@@ -1515,9 +1561,7 @@ mod tests {
     }
 
     /// 测试无效 Base64 填充
-    ///
-    /// 验证 Base64 解码器能正确处理无效的填充而不 panic
-    /// 预期行为：返回 None 对于无效填充，正确解码有效填充
+    /// ineffective Base64
     #[test]
     fn test_wasm_base64_invalid_padding() {
         // 测试正确的填充（1个=）
@@ -1565,9 +1609,11 @@ mod tests {
     }
 
     /// 测试代理对处理
-    ///
+    /// to
     /// 验证 UTF-8 编码器能正确处理 Unicode 代理对和高码点字符
+    /// UTF-8 Unicode to and point
     /// 预期行为：正确处理 BMP 范围外的字符（4字节 UTF-8）
+    /// as ： BMP scope outside （4 UTF-8）
     #[test]
     fn test_utf8_encoder_surrogate() {
         // 注意：在 Rust 中，char 不能是孤立的代理项（U+D800-U+DFFF）
@@ -1639,9 +1685,9 @@ mod tests {
     }
 
     /// 测试未对齐读取
-    ///
-    /// 验证 WASM 内存视图使用 chunks_exact 正确处理未对齐的数据
+    /// to
     /// 预期行为：忽略不完整的尾部字节，只返回完整对齐的数据
+    /// as ：complete ，complete to
     #[test]
     fn test_read_all_i32_le_unaligned() {
         // 测试对齐的数据（8字节 = 2个i32）

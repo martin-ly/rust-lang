@@ -3,14 +3,23 @@
 #![allow(clippy::manual_abs_diff)]
 
 //! 性能优化示例
-//!
+//! performance optimization example
 //! 本示例展示了各种线程性能优化技术：
+//! this example thread performance optimization technique ：
 //! - 缓存行填充避免伪共享
+//! - cache line false sharing
 //! - 内存对齐优化
+//! - memory alignment optimization
 //! - 无锁数据结构性能对比
+//! - lock-free data structure performance to
 //! - 线程池性能调优
+//! - thread pool performance
 //! - NUMA 感知优化
+//! - NUMA optimization
+//! - NUMA 感知optimization
 //! - 工作窃取性能分析
+//! - performance analyze
+//! - 工作窃取performanceanalysis
 use rayon::prelude::*;
 use std::collections::VecDeque;
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -19,6 +28,7 @@ use std::thread;
 use std::time::{Duration, Instant};
 
 /// 缓存行填充结构
+/// cache line structure
 #[repr(align(64))]
 pub struct CacheLinePadded<T> {
     value: T,
@@ -43,6 +53,7 @@ impl<T> CacheLinePadded<T> {
 }
 
 /// 伪共享测试
+/// false sharing
 pub struct FalseSharingTest {
     counters: Vec<Arc<CacheLinePadded<AtomicUsize>>>,
 }
@@ -87,6 +98,7 @@ impl FalseSharingTest {
 }
 
 /// 无锁队列性能测试
+/// lock-free queue performance test
 pub struct LockFreeQueueBenchmark {
     queue: Arc<crossbeam_queue::SegQueue<usize>>,
 }
@@ -138,6 +150,7 @@ impl LockFreeQueueBenchmark {
 }
 
 /// 有锁队列性能测试
+/// lock performance test
 pub struct LockedQueueBenchmark {
     queue: Arc<Mutex<VecDeque<usize>>>,
 }
@@ -190,6 +203,7 @@ impl LockedQueueBenchmark {
 }
 
 /// 线程池性能测试
+/// thread pool performance test
 pub struct ThreadPoolBenchmark;
 
 impl ThreadPoolBenchmark {
@@ -251,6 +265,7 @@ impl ThreadPoolBenchmark {
 }
 
 /// NUMA 感知优化测试
+/// NUMA optimization
 pub struct NumaAwareBenchmark;
 
 impl NumaAwareBenchmark {
@@ -315,6 +330,8 @@ impl NumaAwareBenchmark {
 }
 
 /// 工作窃取性能分析
+/// performance analyze
+/// 工作窃取performanceanalysis
 pub struct WorkStealingAnalysis;
 
 impl WorkStealingAnalysis {
@@ -369,6 +386,7 @@ impl WorkStealingAnalysis {
 }
 
 /// 内存分配性能测试
+/// memory performance test
 pub struct MemoryAllocationBenchmark;
 
 impl MemoryAllocationBenchmark {
@@ -418,6 +436,7 @@ impl MemoryAllocationBenchmark {
 }
 
 /// 运行性能优化演示
+/// Run performance optimization demonstration
 fn main() {
     println!("=== 性能优化示例 ===\n");
 

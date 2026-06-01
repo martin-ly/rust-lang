@@ -304,7 +304,7 @@ pub fn push(&self, value: T) {
 - 背压与流控制
 - 超时和取消模式
 - 异步 trait 和动态分发
-- 运行时选择（Tokio vs async-std vs smol）
+- 运行时选择（Tokio vs async-std [已归档] vs smol）
 
 **关键代码示例**:
 

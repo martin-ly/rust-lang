@@ -1,6 +1,8 @@
 //! 实用工具集合（重试/超时/并发限制/熔断/令牌桶/度量与监督）
+//! tool set （//concurrency ///and ）
 //!
 //! 快速用法示例：
+//! fast example ：
 //! ```no_run
 //! use c06_async::utils::ExecStrategyBuilder;
 //! use std::time::Duration;
@@ -16,6 +18,7 @@
 //!     .run(
 //!         |attempt| async move {
 //!             // 你的异步任务，这里简单返回 Ok，生产中可返回 Err 重试
+//!             // async task ，simple Ok，in Err
 //!             Ok::<_, anyhow::Error>(format!("ok on attempt {}", attempt))
 //!         },
 //!         None::<fn(&anyhow::Error) -> bool>,
@@ -144,8 +147,10 @@ pub mod supervisor {
 }
 
 /// Metrics 模块 - 使用 Prometheus 提供指标端点
+/// Metrics module - Prometheus indicator point
 ///
 /// 注意：使用简单的 TCP HTTP 服务器实现
+/// ：simple TCP HTTP
 pub mod metrics {
     use prometheus::{Encoder, Registry, TextEncoder};
     use tokio::io::AsyncWriteExt;
@@ -177,6 +182,7 @@ pub mod metrics {
 }
 
 /// 统一执行助手：并发控制 + 超时 + 重试
+/// ：concurrency + +
 #[derive(Clone)]
 pub struct ExecHelper {
     limiter: SemaphoreLimiter,
@@ -236,6 +242,7 @@ impl ExecHelper {
     }
 
     /// 增强版：支持可重试判定与整体截止时间（deadline）
+    /// ：and whole time （deadline）
     pub async fn run_with_decider_and_deadline<F, Fut, T, E, D>(
         &self,
         mut make_fut: F,
@@ -299,6 +306,7 @@ impl ExecHelper {
 }
 
 /// 可配置策略构建器：并发/重试/退避/超时或截止/熔断/限速
+/// strategy builder ：concurrency ///or //
 #[derive(Clone)]
 pub struct ExecStrategyBuilder {
     concurrency: usize,
@@ -371,6 +379,7 @@ impl ExecStrategyBuilder {
     }
 
     /// 从 JSON 配置构建（支持高级选项）
+    /// from JSON （）
     pub fn from_config(cfg: &StrategyConfig) -> Self {
         let mut b = ExecStrategyBuilder::new()
             .concurrency(cfg.concurrency as usize)
@@ -422,6 +431,7 @@ impl ExecHelper {
 
 impl ExecStrategyRunner {
     /// 运行操作：可选择传入可重试判定
+    /// Run ：
     pub async fn run<F, Fut, T, E, D>(
         &self,
         make_fut: F,
@@ -485,6 +495,7 @@ impl ExecStrategyRunner {
     }
 }
 /// 简单令牌桶限速器（线程安全）
+/// simple （thread-safe ）
 #[derive(Clone)]
 pub struct SimpleTokenBucket {
     inner: Arc<parking_lot::Mutex<BucketInner>>,

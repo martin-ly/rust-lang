@@ -1,24 +1,21 @@
 //! Rust 1.92.0 控制流特性实现模块
-//!
-//! 本模块展示了 Rust 1.92.0 在控制流和函数场景中的应用，包括：
+//! Rust 1.92.0 stream feature module
 //! - `#[track_caller]` 和 `#[no_mangle]` 组合使用
-//! - 更严格的 Never 类型 Lint
-//! - `Location::file_as_c_str` 在错误报告中的应用
-//!
+//! - 更严格 Never type Lint
+//! - `Location::file_as_c_str` in错误报告inapplication
 //! # 文件信息
+//! #
 //! - 文件: rust_192_features.rs
 //! - 创建日期: 2025-12-11
+//! - date : 2025-12-11
 //! - 版本: 1.0
-//! - Rust版本: 1.92.0
-//! - Edition: 2024
+//! - this : 1.0
+//! - 版this: 1.0
 use std::panic::Location;
 
 // ==================== 1. #[track_caller] 和 #[no_mangle] 组合使用 ====================
 
-/// 使用 #[track_caller] 的错误处理函数
-///
-/// Rust 1.92.0: #[track_caller] 在控制流场景中的改进
-/// 注意：#[track_caller] 需要 Rust ABI，不能与 extern "C" 一起使用
+/// 注意：#[track_caller] Requires Rust ABI，cannotand extern "C" 一起Use
 #[track_caller]
 pub fn tracked_panic_handler(message: &str) {
     let caller = Location::caller();
@@ -47,7 +44,7 @@ macro_rules! tracked_assert {
 }
 
 /// 控制流检查函数，使用 #[track_caller]
-/// Rust 1.92.0: #[track_caller] 在控制流分析中的改进
+/// stream function ， #[track_caller]
 #[track_caller]
 pub fn control_flow_check(condition: bool) -> i32 {
     let caller = Location::caller();
@@ -63,8 +60,8 @@ pub fn control_flow_check(condition: bool) -> i32 {
 // ==================== 2. 更严格的 Never 类型 Lint ====================
 
 /// Never 类型示例函数
-///
-/// Rust 1.92.0: 对 Never 类型 (`!`) 有更严格的 Lint 检查
+/// Never type example function
+/// Rust 1.92.0: to Never type (`!`) 有更严格 Lint Check
 pub fn never_returns() -> ! {
     loop {
         // 这个函数永远不会返回
@@ -72,7 +69,6 @@ pub fn never_returns() -> ! {
     }
 }
 
-/// 使用 Never 类型的控制流
 pub fn control_flow_with_never(result: Result<i32, String>) -> i32 {
     match result {
         Ok(value) => value,
@@ -80,13 +76,11 @@ pub fn control_flow_with_never(result: Result<i32, String>) -> i32 {
     }
 }
 
-/// Never 类型在 panic 场景中的应用
 #[track_caller]
 pub fn panic_with_never(message: &str) -> ! {
     panic!("{}", message);
 }
 
-/// 使用 Never 类型的无限循环
 pub fn infinite_control_flow() -> ! {
     loop {
         std::thread::sleep(std::time::Duration::from_secs(1));
@@ -96,9 +90,7 @@ pub fn infinite_control_flow() -> ! {
 
 // ==================== 3. Location::file_as_c_str 在错误报告中的应用 ====================
 
-/// 使用 Location 创建详细的错误报告
-///
-/// Rust 1.92.0: Location API 在错误报告中的改进
+/// Rust 1.92.0: Location API in错误报告in改进
 pub fn create_error_report() -> String {
     let caller = Location::caller();
     let file_path = caller.file();
@@ -112,6 +104,7 @@ pub fn create_error_report() -> String {
 }
 
 /// 错误上下文结构体
+/// on under struct
 #[derive(Debug, Clone)]
 pub struct ErrorContext {
     pub file: &'static str,
@@ -132,6 +125,8 @@ impl ErrorContext {
 }
 
 /// 带有位置的错误类型
+/// position error type
+/// 带有positionerror type
 #[derive(Debug, Clone)]
 pub struct LocatedError {
     pub message: String,
@@ -166,6 +161,7 @@ impl std::error::Error for LocatedError {}
 // ==================== 4. 改进的控制流分析 ====================
 
 /// 控制流分析示例：条件分支
+/// control flow analysis example ：condition
 pub fn control_flow_branch(value: i32) -> Result<i32, LocatedError> {
     if value < 0 {
         return Err(LocatedError::new("Value must be non-negative"));
@@ -179,6 +175,7 @@ pub fn control_flow_branch(value: i32) -> Result<i32, LocatedError> {
 }
 
 /// 控制流分析示例：循环
+/// control flow analysis example ：circulation
 pub fn control_flow_loop(max_iterations: usize) -> usize {
     let mut count = 0;
 
@@ -193,6 +190,7 @@ pub fn control_flow_loop(max_iterations: usize) -> usize {
 }
 
 /// 控制流分析示例：匹配表达式
+/// control flow analysis example ：express
 pub fn control_flow_match(value: Option<i32>) -> i32 {
     match value {
         Some(v) if v > 0 => v * 2,
@@ -204,6 +202,7 @@ pub fn control_flow_match(value: Option<i32>) -> i32 {
 // ==================== 5. 综合应用示例 ====================
 
 /// 获取 Rust 1.92.0 控制流特性信息
+/// Rust 1.92.0 stream feature
 pub fn get_rust_192_control_flow_info() -> String {
     "Rust 1.92.0 控制流特性:\n\
         - #[track_caller] 在控制流场景中的改进\n\
@@ -214,6 +213,8 @@ pub fn get_rust_192_control_flow_info() -> String {
 }
 
 /// 演示 Rust 1.92.0 控制流特性
+/// demonstration Rust 1.92.0 stream feature
+/// Demonstration of Rust 1.92.0 控制streamfeature
 pub fn demonstrate_rust_192_control_flow() {
     println!("\n=== Rust 1.92.0 控制流特性演示 ===\n");
 
@@ -259,6 +260,7 @@ pub fn demonstrate_rust_192_control_flow() {
 // ==================== 6. 高级控制流特性 ====================
 
 /// 控制流分析器：用于分析函数的控制流路径
+/// control flow analysis ：analyze function stream
 #[derive(Default)]
 pub struct ControlFlowAnalyzer {
     branch_count: usize,
@@ -309,10 +311,12 @@ impl ControlFlowAnalyzer {
 
 
 /// 控制流优化器：提供控制流优化建议
+/// stream optimizer ：stream optimization
 pub struct ControlFlowOptimizer;
 
 impl ControlFlowOptimizer {
     /// 优化循环结构
+    /// optimization circulation structure
     pub fn optimize_loop(max_iterations: usize) -> usize {
         // 使用优化的循环结构
         (0..max_iterations)
@@ -321,6 +325,7 @@ impl ControlFlowOptimizer {
     }
 
     /// 优化分支结构
+    /// optimization structure
     #[track_caller]
     pub fn optimize_branch(value: i32) -> Result<i32, LocatedError> {
         // 早期返回优化
@@ -334,6 +339,7 @@ impl ControlFlowOptimizer {
     }
 
     /// 优化匹配表达式
+    /// optimization express
     pub fn optimize_match(value: Option<i32>) -> i32 {
         value
             .map(|v| if v > 0 { v * 2 } else { v.abs() })
@@ -344,6 +350,7 @@ impl ControlFlowOptimizer {
 // ==================== 7. 高级控制流模式 ====================
 
 /// 控制流模式匹配器：提供高级模式匹配功能
+/// stream ：functionality
 pub struct ControlFlowMatcher;
 
 impl ControlFlowMatcher {
@@ -380,6 +387,7 @@ impl ControlFlowMatcher {
     }
 
     /// 范围模式匹配
+    /// scope
     pub fn range_match(value: i32) -> &'static str {
         match value {
             0..=9 => "单位数",
@@ -392,10 +400,12 @@ impl ControlFlowMatcher {
 }
 
 /// 控制流组合器：组合多个控制流操作
+/// stream combination ：combination stream
 pub struct ControlFlowCombinator;
 
 impl ControlFlowCombinator {
     /// 链式条件检查
+    /// condition
     #[track_caller]
     pub fn chain_conditions(values: &[i32]) -> Result<Vec<i32>, LocatedError> {
         let mut result = Vec::new();
@@ -410,6 +420,7 @@ impl ControlFlowCombinator {
     }
 
     /// 组合循环和匹配
+    /// combination circulation and
     pub fn combine_loop_and_match(items: &[Option<i32>]) -> Vec<i32> {
         items
             .iter()
@@ -418,6 +429,7 @@ impl ControlFlowCombinator {
     }
 
     /// 组合分析和优化
+    /// combination analyze and optimization
     pub fn analyze_and_optimize(items: &[i32]) -> (usize, usize, usize, usize) {
         let mut analyzer = ControlFlowAnalyzer::new();
         let mut optimized_count = 0;
@@ -437,6 +449,7 @@ impl ControlFlowCombinator {
 }
 
 /// 控制流性能分析器：分析控制流性能
+/// stream performance analyze ：analyze stream performance
 #[derive(Default)]
 pub struct ControlFlowProfiler {
     branch_times: Vec<u128>,
@@ -454,6 +467,7 @@ impl ControlFlowProfiler {
     }
 
     /// 分析分支性能
+    /// analyze performance
     #[track_caller]
     pub fn profile_branch<F, R>(&mut self, f: F) -> R
     where
@@ -467,6 +481,7 @@ impl ControlFlowProfiler {
     }
 
     /// 分析循环性能
+    /// analyze circulation performance
     pub fn profile_loop<F, R>(&mut self, f: F) -> R
     where
         F: FnOnce() -> R,
@@ -479,6 +494,7 @@ impl ControlFlowProfiler {
     }
 
     /// 分析匹配性能
+    /// analyze performance
     pub fn profile_match<F, R>(&mut self, f: F) -> R
     where
         F: FnOnce() -> R,
@@ -491,6 +507,7 @@ impl ControlFlowProfiler {
     }
 
     /// 获取性能统计
+    /// performance
     pub fn get_stats(&self) -> (f64, f64, f64) {
         let branch_avg = if !self.branch_times.is_empty() {
             self.branch_times.iter().sum::<u128>() as f64 / self.branch_times.len() as f64
@@ -523,6 +540,7 @@ impl ControlFlowProfiler {
 
 
 /// 控制流验证器：验证控制流的正确性
+/// stream ：stream
 pub struct ControlFlowValidator;
 
 impl ControlFlowValidator {
@@ -539,6 +557,7 @@ impl ControlFlowValidator {
     }
 
     /// 验证循环终止条件
+    /// circulation condition
     pub fn validate_loop_termination(max_iterations: usize) -> Result<usize, LocatedError> {
         if max_iterations == 0 {
             return Ok(0);
@@ -557,6 +576,7 @@ impl ControlFlowValidator {
     }
 
     /// 验证匹配完整性
+    /// complete
     pub fn validate_match_coverage(value: Option<i32>) -> Result<i32, LocatedError> {
         match value {
             Some(v) if v >= 0 => Ok(v),
@@ -575,6 +595,7 @@ pub mod async_control_flow {
     use tokio::time::{sleep, Duration};
 
     /// 异步控制流处理函数
+    /// async stream function
     // 注意：async fn 上的 #[track_caller] 在 Rust 1.92.0 中有限制
     pub async fn async_control_flow_branch(value: i32) -> Result<i32, LocatedError> {
         // 模拟异步操作
@@ -591,6 +612,7 @@ pub mod async_control_flow {
     }
 
     /// 异步循环处理
+    /// async circulation
     pub async fn async_control_flow_loop(max_iterations: usize) -> usize {
         let mut count = 0;
 
@@ -608,6 +630,7 @@ pub mod async_control_flow {
     }
 
     /// 异步模式匹配处理
+    /// async
     pub async fn async_control_flow_match(value: Option<i32>) -> i32 {
         sleep(Duration::from_millis(5)).await;
 
@@ -619,6 +642,7 @@ pub mod async_control_flow {
     }
 
     /// 异步控制流组合
+    /// async stream combination
     pub async fn async_control_flow_combinator(values: &[i32]) -> Result<Vec<i32>, LocatedError> {
         let mut results = Vec::new();
 
@@ -634,6 +658,7 @@ pub mod async_control_flow {
 // ==================== 9. 控制流状态机 ====================
 
 /// 控制流状态机：用于管理复杂的状态转换
+/// stream state machine ：complex state conversion
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 pub enum ControlFlowState {
     #[default]
@@ -645,6 +670,7 @@ pub enum ControlFlowState {
 }
 
 /// 控制流状态机实现
+/// stream state machine
 #[derive(Default)]
 pub struct ControlFlowStateMachine {
     current_state: ControlFlowState,
@@ -698,6 +724,7 @@ impl ControlFlowStateMachine {
     }
 
     /// 执行状态机工作流
+    /// state machine stream
     pub fn execute_workflow(&mut self, value: i32) -> Result<i32, LocatedError> {
         // Initial -> Processing
         self.transition_to(ControlFlowState::Processing)?;
@@ -721,10 +748,12 @@ impl ControlFlowStateMachine {
 // ==================== 10. 迭代器控制流扩展 ====================
 
 /// 迭代器控制流扩展工具
+/// stream tool
 pub struct IteratorControlFlow;
 
 impl IteratorControlFlow {
     /// 使用控制流进行迭代器过滤
+    /// stream
     pub fn filter_with_control_flow<I, F>(iter: I, predicate: F) -> Vec<I::Item>
     where
         I: Iterator,
@@ -747,6 +776,7 @@ impl IteratorControlFlow {
     }
 
     /// 使用控制流进行迭代器映射
+    /// stream
     pub fn map_with_control_flow<I, F, T>(iter: I, mapper: F) -> Result<Vec<T>, LocatedError>
     where
         I: Iterator,
@@ -763,6 +793,7 @@ impl IteratorControlFlow {
     }
 
     /// 使用控制流进行迭代器折叠
+    /// stream
     pub fn fold_with_control_flow<I, F, T>(
         iter: I,
         init: T,
@@ -782,6 +813,7 @@ impl IteratorControlFlow {
     }
 
     /// 使用控制流进行迭代器查找
+    /// stream
     pub fn find_with_control_flow<I, F>(iter: I, predicate: F) -> Option<I::Item>
     where
         I: Iterator,
@@ -808,6 +840,7 @@ pub mod parallel_control_flow {
     use std::thread;
 
     /// 并行控制流处理结果
+    /// parallelism stream result
     #[derive(Default)]
     pub struct ParallelControlFlowResult<T> {
         results: Vec<Result<T, LocatedError>>,
@@ -864,6 +897,7 @@ pub mod parallel_control_flow {
 
 
     /// 并行处理控制流分支
+    /// parallelism stream
     pub fn parallel_control_flow_branch(
         values: &[i32],
         num_threads: usize,
@@ -897,6 +931,7 @@ pub mod parallel_control_flow {
 // ==================== 12. 控制流可视化工具 ====================
 
 /// 控制流可视化信息
+/// stream
 #[derive(Debug, Clone)]
 #[derive(Default)]
 pub struct ControlFlowVisualization {
@@ -975,10 +1010,12 @@ impl ControlFlowVisualization {
 // ==================== 13. 实用工具函数 ====================
 
 /// 控制流工具集：提供常用的控制流工具函数
+/// stream tool ：stream tool function
 pub struct ControlFlowUtils;
 
 impl ControlFlowUtils {
     /// 安全执行控制流操作，捕获所有错误
+    /// stream ，all
     #[track_caller]
     pub fn safe_execute<F, T, E>(f: F) -> Result<T, LocatedError>
     where
@@ -989,26 +1026,31 @@ impl ControlFlowUtils {
     }
 
     /// 批量执行控制流分支
+    /// stream
     pub fn batch_branch(values: &[i32]) -> Vec<Result<i32, LocatedError>> {
         values.iter().map(|&v| control_flow_branch(v)).collect()
     }
 
     /// 批量执行控制流匹配
+    /// stream
     pub fn batch_match(values: &[Option<i32>]) -> Vec<i32> {
         values.iter().map(|&v| control_flow_match(v)).collect()
     }
 
     /// 条件组合：所有条件都必须满足
+    /// condition combination ：all condition must
     pub fn all_conditions(conditions: &[bool]) -> bool {
         conditions.iter().all(|&c| c)
     }
 
     /// 条件组合：至少一个条件满足
+    /// condition combination ：condition
     pub fn any_condition(conditions: &[bool]) -> bool {
         conditions.iter().any(|&c| c)
     }
 
     /// 控制流重试机制
+    /// stream mechanism
     pub fn retry_with_control_flow<F, T>(
         mut f: F,
         max_retries: usize,
@@ -1035,6 +1077,7 @@ impl ControlFlowUtils {
     }
 
     /// 控制流超时包装（模拟）
+    /// stream （）
     pub fn with_timeout<F, T>(f: F, _timeout_ms: u64) -> Result<T, LocatedError>
     where
         F: FnOnce() -> Result<T, LocatedError>,
@@ -1044,6 +1087,7 @@ impl ControlFlowUtils {
     }
 
     /// 控制流缓存包装
+    /// stream
     pub fn with_cache<F, T>(
         cache: &mut std::collections::HashMap<i32, T>,
         key: i32,
@@ -1061,10 +1105,12 @@ impl ControlFlowUtils {
 }
 
 /// 控制流装饰器：为函数添加控制流功能
+/// stream decorator ：as function stream functionality
 pub struct ControlFlowDecorator;
 
 impl ControlFlowDecorator {
     /// 添加调用者追踪的装饰器
+    /// decorator
     #[track_caller]
     pub fn with_tracking<F, T>(f: F) -> Result<T, LocatedError>
     where
@@ -1084,6 +1130,8 @@ impl ControlFlowDecorator {
     }
 
     /// 添加性能分析的装饰器
+    /// performance analyze decorator
+    /// 添加performanceanalysisdecorator
     pub fn with_profiling<F, T>(profiler: &mut ControlFlowProfiler, f: F) -> T
     where
         F: FnOnce() -> T,
@@ -1092,6 +1140,8 @@ impl ControlFlowDecorator {
     }
 
     /// 添加验证的装饰器
+    /// decorator
+    /// 添加Verifydecorator
     #[track_caller]
     pub fn with_validation<F, T>(
         validator: impl Fn(&T) -> Result<(), LocatedError>,

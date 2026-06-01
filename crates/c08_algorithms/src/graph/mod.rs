@@ -1,4 +1,5 @@
 //! 图算法：同步 / Rayon并行 / Tokio异步
+//! graph algorithm ：synchronous / Rayonparallelism / Tokioasync
 use anyhow::Result;
 use rayon::prelude::*;
 use std::cmp::Ordering;
@@ -35,6 +36,7 @@ pub mod petgraph_bridge {
     }
 
     /// 用 petgraph 跑一次 Dijkstra，与自研实现做对照
+    /// petgraph Dijkstra，and to
     pub fn dijkstra_compare<T: Eq + Hash + Clone>(
         g: &HashMap<T, Vec<(T, f64)>>,
         start: &T,
@@ -56,6 +58,7 @@ pub mod petgraph_bridge {
 // =========================
 
 /// 同步 BFS 返回最短路径（若不可达返回 None）
+/// synchronous BFS （ None）
 pub fn bfs_shortest_path_sync<T>(
     graph: &HashMap<T, Vec<T>>,
     start: &T,
@@ -87,6 +90,7 @@ where
 }
 
 /// 并行 BFS：按层并行展开 frontier
+/// parallelism BFS：parallelism frontier
 pub fn bfs_shortest_path_parallel<T>(
     graph: &HashMap<T, Vec<T>>,
     start: &T,
@@ -204,6 +208,7 @@ impl<N: Eq> PartialOrd for State<N> {
 }
 
 /// 同步 Dijkstra：返回 (距离表, 前驱表)
+/// synchronous Dijkstra： (, before )
 pub fn dijkstra_sync<T>(
     graph: &HashMap<T, Vec<(T, f64)>>,
     start: &T,
@@ -259,6 +264,7 @@ where
 // =========================
 
 /// Kruskal MST（同步）：返回 (总权重, MST 边集合)
+/// Kruskal MST（synchronous ）： (, MST edge set )
 pub fn mst_kruskal_sync<T>(graph: &HashMap<T, Vec<(T, f64)>>) -> (f64, Vec<(T, T, f64)>)
 where
     T: Eq + Hash + Clone,
@@ -395,6 +401,7 @@ where
 }
 
 /// Prim MST（同步）：给定起点
+/// Prim MST（synchronous ）：point
 pub fn mst_prim_sync<T>(graph: &HashMap<T, Vec<(T, f64)>>, start: &T) -> (f64, Vec<(T, T, f64)>)
 where
     T: Eq + Hash + Clone,
@@ -609,6 +616,7 @@ pub async fn bellman_ford_async(
 }
 
 /// Floyd–Warshall：多源最短路（允许负边但无负环）。返回 n×n 距离矩阵
+/// Floyd–Warshall：（edge but ）。 n×n
 #[allow(clippy::needless_range_loop)]
 pub fn floyd_warshall_sync(n: usize, edges: &[(usize, usize, f64)]) -> Vec<Vec<f64>> {
     let mut d = vec![vec![f64::INFINITY; n]; n];
@@ -643,6 +651,7 @@ pub async fn floyd_warshall_async(
 }
 
 /// Floyd–Warshall 带路径重建：返回 (距离矩阵, next 矩阵)
+/// Floyd–Warshall ： (, next )
 pub fn floyd_warshall_with_path_sync(
     n: usize,
     edges: &[(usize, usize, f64)],
@@ -792,6 +801,7 @@ pub async fn hopcroft_karp_async(
 }
 
 /// 基于 Kőnig 定理：从未匹配的左侧点开始，沿未匹配边+匹配边交替遍历，最小点覆盖 = (左侧可达集合的补集) ∪ (右侧可达集合)
+/// Kőnig theorem ：from point ，edge +edge alternation ，minimum point = (set complement set ) ∪ (set )
 pub fn min_vertex_cover_bipartite(
     adj: &[Vec<usize>],
     pair_u: &[Option<usize>],
@@ -890,6 +900,7 @@ impl<T: Eq + Hash + Clone> TarjanState<T> {
 }
 
 /// Tarjan 强连通分量（同步）：返回每个 SCC 的顶点集合
+/// Tarjan strongly connected component （synchronous ）： SCC vertex set
 pub fn tarjan_scc_sync<T>(graph: &HashMap<T, Vec<T>>) -> Vec<Vec<T>>
 where
     T: Eq + Hash + Clone,
@@ -913,6 +924,7 @@ where
 }
 
 /// Tarjan 强连通分量（异步包装）
+/// Tarjan strongly connected component （async ）
 pub async fn tarjan_scc_async<T>(graph: HashMap<T, Vec<T>>) -> Result<Vec<Vec<T>>>
 where
     T: Eq + Hash + Clone + Send + 'static,
@@ -925,8 +937,11 @@ where
 // =========================
 
 /// Dinic 最大流（同步）。
+/// Dinic maximum flow （synchronous ）。
 /// 输入：邻接表 `graph`，其中每条边 (u -> v, cap) 为有向边容量；若要无向边请手动加双向。
+/// ： `graph`，its in edge (u -> v, cap) as edge ；edge 。
 /// 返回：从 `s` 到 `t` 的最大流值。
+/// ：from `s` to `t` maximum flow 。
 pub fn max_flow_dinic_sync<T>(graph: &HashMap<T, Vec<(T, i64)>>, s: &T, t: &T) -> i64
 where
     T: Eq + Hash + Clone,
@@ -1047,6 +1062,7 @@ where
 }
 
 /// Dinic 最大流（异步包装）
+/// Dinic maximum flow （async ）
 pub async fn max_flow_dinic_async<T>(graph: HashMap<T, Vec<(T, i64)>>, s: T, t: T) -> Result<i64>
 where
     T: Eq + Hash + Clone + Send + 'static,
@@ -1059,6 +1075,7 @@ where
 // =========================
 
 /// 返回最大流值
+/// maximum flow
 pub fn max_flow_edmonds_karp(adj: &HashMap<usize, Vec<(usize, i64)>>, s: usize, t: usize) -> i64 {
     // 构建残量网络
     let n = adj
@@ -1132,6 +1149,7 @@ pub fn max_flow_edmonds_karp(adj: &HashMap<usize, Vec<(usize, i64)>>, s: usize, 
 }
 
 /// 基于最终残量网络的可达性导出 s-t 最小割 (S 集, T 集)
+/// ultimately network s-t minimum cut (S, T )
 pub fn min_cut_from_residual(
     adj: &HashMap<usize, Vec<(usize, i64)>>,
     s: usize,
@@ -1217,6 +1235,7 @@ pub fn tree_diameter_undirected(n: usize, edges: &[(usize, usize)]) -> usize {
 // =========================
 
 /// 预处理 LCA（二叉提升），输入树（无向，根为 root）
+/// LCA（），tree （，as root）
 pub struct LcaBinaryLift<T: Eq + Hash + Clone> {
     pub root: T,
     node_to_idx: HashMap<T, usize>,
@@ -1547,6 +1566,7 @@ mod tests {
 // =========================
 
 /// 树的重心（删除后最大连通分量最小的节点）
+/// tree （after maximum minimum node ）
 pub fn tree_centroid_sync<T: Eq + Hash + Clone>(
     tree: &HashMap<T, Vec<T>>,
     root: &T,
@@ -1606,6 +1626,7 @@ pub fn tree_centroid_sync<T: Eq + Hash + Clone>(
 }
 
 /// 异步版本的树重心计算
+/// async this tree
 pub async fn tree_centroid_async<T: Eq + Hash + Clone + Send + 'static>(
     tree: HashMap<T, Vec<T>>,
     root: T,
@@ -1616,17 +1637,23 @@ pub async fn tree_centroid_async<T: Eq + Hash + Clone + Send + 'static>(
 }
 
 /// 树链剖分（重链剖分）骨架
+/// tree （）
 #[derive(Debug, Clone)]
 pub struct HeavyLightDecomposition<T: Eq + Hash + Clone> {
     /// 重链的根节点
+    /// node
     pub chain_heads: HashMap<T, T>,
     /// 每个节点所属的重链根
+    /// node
     pub chain_id: HashMap<T, T>,
     /// 重链中的位置
+    /// in position
     pub position: HashMap<T, usize>,
     /// 父节点
+    /// node
     pub parent: HashMap<T, Option<T>>,
     /// 子树大小
+    /// tree
     pub subtree_size: HashMap<T, usize>,
     /// 重儿子
     pub heavy_child: HashMap<T, Option<T>>,
@@ -1659,6 +1686,7 @@ impl<T: Eq + Hash + Clone> HeavyLightDecomposition<T> {
     }
 
     /// DFS计算子树大小
+    /// DFStree
     fn dfs_size(&mut self, tree: &HashMap<T, Vec<T>>, node: &T, parent: Option<&T>) -> usize {
         let mut size = 1;
         let mut max_child_size = 0;
@@ -1686,6 +1714,7 @@ impl<T: Eq + Hash + Clone> HeavyLightDecomposition<T> {
     }
 
     /// DFS构建重链
+    /// DFS
     fn dfs_hld(
         &mut self,
         tree: &HashMap<T, Vec<T>>,
@@ -1718,6 +1747,7 @@ impl<T: Eq + Hash + Clone> HeavyLightDecomposition<T> {
     }
 
     /// 查询两个节点之间的路径长度
+    /// node 's
     pub fn path_length(&self, u: &T, v: &T) -> usize {
         let mut len = 0;
         let mut a = u.clone();
@@ -1739,6 +1769,7 @@ impl<T: Eq + Hash + Clone> HeavyLightDecomposition<T> {
     }
 
     /// 查询两个节点的最近公共祖先
+    /// node
     pub fn lca(&self, u: &T, v: &T) -> T {
         let mut a = u.clone();
         let mut b = v.clone();
@@ -1761,6 +1792,7 @@ impl<T: Eq + Hash + Clone> HeavyLightDecomposition<T> {
 }
 
 /// 异步版本的重链剖分构建
+/// async this
 pub async fn hld_build_async<T: Eq + Hash + Clone + Send + 'static>(
     tree: HashMap<T, Vec<T>>,
     root: T,
@@ -1771,6 +1803,7 @@ pub async fn hld_build_async<T: Eq + Hash + Clone + Send + 'static>(
 }
 
 /// 树的最大独立集（树形DP）
+/// tree maximum independent set （tree DP）
 pub fn tree_max_independent_set_sync<T: Eq + Hash + Clone>(
     tree: &HashMap<T, Vec<T>>,
     root: &T,
@@ -1810,6 +1843,7 @@ pub fn tree_max_independent_set_sync<T: Eq + Hash + Clone>(
 }
 
 /// 异步版本的树最大独立集
+/// async this tree maximum independent set
 pub async fn tree_max_independent_set_async<T: Eq + Hash + Clone + Send + 'static>(
     tree: HashMap<T, Vec<T>>,
     root: T,

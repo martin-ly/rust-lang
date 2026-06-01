@@ -9,8 +9,11 @@ use tokio::time::sleep;
 use tracing::{debug, info, warn};
 
 /// 2025年异步内存管理优化演示
+/// 2025async memory optimization demonstration
 /// 展示最新的异步内存管理技术和最佳实践
+/// async memory technique and
 /// 1. 异步内存池管理器
+/// 1. async memory pool
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MemoryPoolConfig {
     pub initial_size: usize,
@@ -232,6 +235,7 @@ impl Clone for AsyncMemoryPool {
 }
 
 /// 2. 异步垃圾回收器
+/// 2. async
 pub struct AsyncGarbageCollector {
     objects: Arc<RwLock<HashMap<usize, GarbageCollectable>>>,
     reference_counts: Arc<RwLock<HashMap<usize, usize>>>,
@@ -417,6 +421,7 @@ impl Clone for AsyncGarbageCollector {
 }
 
 /// 3. 异步内存监控器
+/// 3. async memory
 pub struct AsyncMemoryMonitor {
     memory_usage: Arc<AtomicU64>,
     peak_memory: Arc<AtomicU64>,
@@ -524,6 +529,7 @@ impl Clone for AsyncMemoryMonitor {
 }
 
 /// 4. 异步内存优化管理器
+/// 4. async memory optimization
 pub struct AsyncMemoryOptimizer {
     memory_pool: AsyncMemoryPool,
     garbage_collector: AsyncGarbageCollector,

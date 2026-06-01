@@ -73,7 +73,7 @@
 
 | 模式/模型 | 相关 crate |
 | :--- | :--- |
-| 异步 | tokio、async-std |
+| 异步 | tokio、async-std [已归档] |
 | 并行 | rayon |
 | 分布式 | tonic、actix |
 | 序列化（Memento、DTO） | serde |

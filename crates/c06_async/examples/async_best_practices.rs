@@ -1,14 +1,22 @@
 //! 异步编程最佳实践示例
-//!
+//! async example
 //! 本示例展示了异步编程的最佳实践和常见陷阱：
+//! this example async and ：
 //! - 正确的异步函数设计
+//! - async function design
+//! - 正确asyncfunctiondesign
 //! - 资源管理和生命周期
+//! - and lifetime
+//! - 资源管理andlifetime
 //! - 错误处理策略
+//! - error handling strategy
 //! - 性能优化技巧
+//! - performance optimization tip
 //! - 常见陷阱和解决方案
-//!
+//! - and solution
+//! - 常见陷阱andsolution
 //! 运行方式：
-//! ```bash
+//! Run way ：
 //! cargo run --example async_best_practices
 //! ```
 use anyhow::{Context, Result};
@@ -49,6 +57,7 @@ async fn main() -> Result<()> {
 }
 
 /// 1. 异步函数设计最佳实践
+/// 1. async function design
 async fn demo_async_function_design() -> Result<()> {
     println!("  演示良好的异步函数设计...");
 
@@ -89,6 +98,7 @@ async fn demo_async_function_design() -> Result<()> {
 }
 
 /// 2. 资源管理最佳实践
+/// 2.
 async fn demo_resource_management() -> Result<()> {
     println!("  演示资源管理最佳实践...");
 
@@ -143,6 +153,7 @@ async fn demo_resource_management() -> Result<()> {
 }
 
 /// 3. 错误处理最佳实践
+/// 3. error handling
 async fn demo_error_handling_best_practices() -> Result<()> {
     println!("  演示错误处理最佳实践...");
 
@@ -172,6 +183,7 @@ async fn demo_error_handling_best_practices() -> Result<()> {
 }
 
 /// 4. 性能优化最佳实践
+/// 4. performance optimization
 async fn demo_performance_best_practices() -> Result<()> {
     println!("  演示性能优化最佳实践...");
 
@@ -216,6 +228,8 @@ async fn demo_performance_best_practices() -> Result<()> {
 }
 
 /// 5. 常见陷阱和解决方案
+/// 5. and solution
+/// 5. 常见陷阱andsolution
 async fn demo_common_pitfalls() -> Result<()> {
     println!("  演示常见陷阱和解决方案...");
 
@@ -326,18 +340,21 @@ async fn process_data_safely(data: String) -> Result<ProcessedData> {
 }
 
 /// 长时间运行的操作
+/// time Run
 async fn long_running_operation() -> String {
     sleep(Duration::from_secs(2)).await;
     "长时间操作完成".to_string()
 }
 
 /// 异步任务
+/// async task
 async fn async_task(name: &str, delay_ms: u64) -> String {
     sleep(Duration::from_millis(delay_ms)).await;
     format!("{}完成", name)
 }
 
 /// 风险操作（可能失败）
+/// risk （may ）
 async fn risky_operation() -> Result<String> {
     sleep(Duration::from_millis(50)).await;
 
@@ -373,12 +390,14 @@ async fn chain_operations() -> Result<String> {
 }
 
 /// 带上下文的操作
+/// on under
 async fn operation_with_context() -> Result<String> {
     risky_operation().await.context("执行风险操作失败")?;
     Ok("操作成功".to_string())
 }
 
 /// 类型化错误处理
+/// type error handling
 async fn typed_error_handling() -> Result<OperationResult, OperationError> {
     match risky_operation().await {
         Ok(_result) => Ok(OperationResult::Success(())),
@@ -387,6 +406,7 @@ async fn typed_error_handling() -> Result<OperationResult, OperationError> {
 }
 
 /// 高效处理单个项目
+/// efficient project
 async fn process_item_efficiently(item: i32) -> i32 {
     sleep(Duration::from_millis(10)).await;
     item * 2
@@ -399,24 +419,34 @@ async fn expensive_operation() -> String {
 }
 
 /// 操作步骤1
+/// step 1
+/// 操作step1
+/// step1
 async fn operation_step1() -> Result<String> {
     sleep(Duration::from_millis(50)).await;
     Ok("步骤1完成".to_string())
 }
 
 /// 操作步骤2
+/// step 2
+/// 操作step2
+/// step2
 async fn operation_step2(input: String) -> Result<String> {
     sleep(Duration::from_millis(50)).await;
     Ok(format!("步骤2完成: {}", input))
 }
 
 /// 操作步骤3
+/// step 3
+/// 操作step3
+/// step3
 async fn operation_step3(input: String) -> Result<String> {
     sleep(Duration::from_millis(50)).await;
     Ok(format!("步骤3完成: {}", input))
 }
 
 /// 管理资源结构体
+/// struct
 struct ManagedResource {
     name: String,
 }

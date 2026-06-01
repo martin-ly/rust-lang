@@ -1,13 +1,17 @@
 //! # 贪心算法模块
+//! # greedy algorithm module
 //!
 //! 本模块实现了各种贪心算法。
+//! this module greedy algorithm 。
 //use serde::{Serialize, Deserialize};
 
 /// 贪心算法实现
+/// greedy algorithm
 pub struct GreedyAlgorithms;
 
 impl GreedyAlgorithms {
     /// 活动选择问题
+    /// problem
     pub fn activity_selection(activities: &[(i32, i32)]) -> Vec<usize> {
         if activities.is_empty() {
             return vec![];

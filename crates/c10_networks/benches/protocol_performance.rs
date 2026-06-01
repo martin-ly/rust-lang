@@ -3,8 +3,8 @@
 #![allow(clippy::bind_instead_of_map)]
 
 //! 协议性能基准测试
-//!
-//! 这个模块包含了 c10_networks 库各种网络协议的性能基准测试
+//! Performance benchmark
+//! 协议performancebenchmark
 use c10_networks::protocol::http::{HttpMethod, HttpRequest, HttpStatusCode, HttpVersion};
 use c10_networks::protocol::tcp::{TcpConnection, TcpConnectionConfig, TcpState};
 use c10_networks::protocol::websocket::{
@@ -16,6 +16,8 @@ use std::hint::black_box;
 use std::time::Duration;
 
 /// HTTP 协议性能测试
+/// HTTP performance test
+/// HTTP 协议performance test
 fn bench_http_protocol(c: &mut Criterion) {
     let mut group = c.benchmark_group("http_protocol");
 
@@ -89,7 +91,6 @@ fn bench_http_protocol(c: &mut Criterion) {
     group.finish();
 }
 
-/// WebSocket 协议性能测试
 fn bench_websocket_protocol(c: &mut Criterion) {
     let mut group = c.benchmark_group("websocket_protocol");
 
@@ -161,6 +162,8 @@ fn bench_websocket_protocol(c: &mut Criterion) {
 }
 
 /// TCP 协议性能测试
+/// TCP performance test
+/// TCP 协议performance test
 fn bench_tcp_protocol(c: &mut Criterion) {
     let mut group = c.benchmark_group("tcp_protocol");
 
@@ -221,6 +224,7 @@ fn bench_tcp_protocol(c: &mut Criterion) {
 }
 
 /// 套接字配置性能测试
+/// socket performance test
 fn bench_socket_configuration(c: &mut Criterion) {
     let mut group = c.benchmark_group("socket_configuration");
 
@@ -262,6 +266,8 @@ fn bench_socket_configuration(c: &mut Criterion) {
 }
 
 /// 协议解析性能测试
+/// performance test
+/// 协议Parseperformance test
 fn bench_protocol_parsing(c: &mut Criterion) {
     let mut group = c.benchmark_group("protocol_parsing");
 
@@ -318,6 +324,8 @@ fn bench_protocol_parsing(c: &mut Criterion) {
 }
 
 /// 协议序列化性能测试
+/// sequence performance test
+/// 协议Serializeperformance test
 fn bench_protocol_serialization(c: &mut Criterion) {
     let mut group = c.benchmark_group("protocol_serialization");
 
@@ -356,6 +364,8 @@ fn bench_protocol_serialization(c: &mut Criterion) {
 }
 
 /// 协议兼容性性能测试
+/// performance test
+/// 协议兼容性performance test
 fn bench_protocol_compatibility(c: &mut Criterion) {
     let mut group = c.benchmark_group("protocol_compatibility");
 
@@ -412,6 +422,8 @@ fn bench_protocol_compatibility(c: &mut Criterion) {
 }
 
 /// 协议错误处理性能测试
+/// error handling performance test
+/// 协议error handlingperformance test
 fn bench_protocol_error_handling(c: &mut Criterion) {
     let mut group = c.benchmark_group("protocol_error_handling");
 

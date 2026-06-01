@@ -52,6 +52,7 @@ pub fn make_pipeline_iter<'a>(input: &'a [i32]) -> impl Iterator<Item = i32> + S
 }
 
 /// 可插拔阶段：使用函数指针实现类型擦除，便于组合
+/// stage ：function pointer type ，combination
 #[allow(unused)]
 pub enum StageFn {
     Map(fn(i32) -> i32),
@@ -59,6 +60,7 @@ pub enum StageFn {
 }
 
 /// 根据阶段列表构建流水线，返回位 impl Iterator + Send
+/// according to stage pipeline ， impl Iterator + Send
 #[allow(unused)]
 pub fn make_pluggable_iter<'a>(
     input: &'a [i32],

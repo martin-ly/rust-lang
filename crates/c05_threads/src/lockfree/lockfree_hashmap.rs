@@ -1,10 +1,16 @@
 //! 无锁哈希表实现
-//!
+//! lock-free hash map
 //! 本模块提供了多种无锁哈希表实现：
+//! This module provides lock-free hash map ：
 //! - 基于CAS的无锁哈希表
+//! - CASlock-free hash map
 //! - 分段无锁哈希表
+//! - segmentation lock-free hash map
 //! - 可扩展无锁哈希表
+//! - lock-free hash map
+//! - 可扩展lock-free hash map
 //! - 内存安全的无锁哈希表
+//! - memory safety lock-free hash map
 use std::collections::hash_map::DefaultHasher;
 use std::hash::{Hash, Hasher};
 use std::ptr;
@@ -18,6 +24,7 @@ use std::sync::atomic::{AtomicPtr, AtomicUsize, Ordering};
 use dashmap::DashMap;
 
 /// 无锁哈希表节点
+/// lock-free hash map node
 #[derive(Debug)]
 struct Node<K, V> {
     key: K,
@@ -36,8 +43,9 @@ impl<K, V> Node<K, V> {
 }
 
 /// 基于CAS的无锁哈希表
-///
+/// CASlock-free hash map
 /// 使用比较并交换操作实现无锁哈希表
+/// compare-and-swap lock-free hash map
 pub struct LockFreeHashMap<K, V> {
     buckets: Vec<AtomicPtr<Node<K, V>>>,
     size: AtomicUsize,
@@ -50,6 +58,7 @@ where
     V: Clone,
 {
     /// 创建新的无锁哈希表
+    /// lock-free hash map
     pub fn new(capacity: usize) -> Self {
         let mut buckets = Vec::with_capacity(capacity);
         for _ in 0..capacity {
@@ -71,6 +80,7 @@ where
     }
 
     /// 插入键值对
+    /// to
     pub fn insert(&self, key: K, value: V) -> bool {
         let hash = self.hash(&key);
         let new_node = Box::into_raw(Box::new(Node::new(key.clone(), value.clone())));
@@ -113,6 +123,7 @@ where
     }
 
     /// 获取值
+    /// Get值
     pub fn get(&self, key: &K) -> Option<V> {
         let hash = self.hash(key);
         let bucket = &self.buckets[hash];
@@ -131,6 +142,7 @@ where
     }
 
     /// 删除键值对
+    /// to
     pub fn remove(&self, key: &K) -> Option<V> {
         let hash = self.hash(key);
         let bucket = &self.buckets[hash];
@@ -204,11 +216,13 @@ where
     }
 
     /// 检查是否为空
+    /// as
     pub fn is_empty(&self) -> bool {
         self.len() == 0
     }
 
     /// 运行示例
+    /// Run example
     pub fn run_example() {
         println!("=== 无锁哈希表示例 ===");
 
@@ -261,8 +275,9 @@ impl<K, V> Drop for LockFreeHashMap<K, V> {
 }
 
 /// 分段无锁哈希表
-///
+/// segmentation lock-free hash map
 /// 将哈希表分成多个段，减少锁竞争
+/// will ，lock
 pub struct SegmentedLockFreeHashMap<K, V> {
     segments: Vec<LockFreeHashMap<K, V>>,
     segment_count: usize,
@@ -274,6 +289,7 @@ where
     V: Clone,
 {
     /// 创建新的分段无锁哈希表
+    /// segmentation lock-free hash map
     pub fn new(segment_count: usize, capacity_per_segment: usize) -> Self {
         let mut segments = Vec::with_capacity(segment_count);
         for _ in 0..segment_count {
@@ -287,6 +303,7 @@ where
     }
 
     /// 计算键应该属于哪个段
+    /// should
     fn get_segment(&self, key: &K) -> usize {
         let mut hasher = DefaultHasher::new();
         key.hash(&mut hasher);
@@ -294,18 +311,21 @@ where
     }
 
     /// 插入键值对
+    /// to
     pub fn insert(&self, key: K, value: V) -> bool {
         let segment_index = self.get_segment(&key);
         self.segments[segment_index].insert(key, value)
     }
 
     /// 获取值
+    /// Get值
     pub fn get(&self, key: &K) -> Option<V> {
         let segment_index = self.get_segment(key);
         self.segments[segment_index].get(key)
     }
 
     /// 删除键值对
+    /// to
     pub fn remove(&self, key: &K) -> Option<V> {
         let segment_index = self.get_segment(key);
         self.segments[segment_index].remove(key)
@@ -317,11 +337,13 @@ where
     }
 
     /// 检查是否为空
+    /// as
     pub fn is_empty(&self) -> bool {
         self.segments.iter().all(|s| s.is_empty())
     }
 
     /// 运行示例
+    /// Run example
     pub fn run_example() {
         println!("=== 分段无锁哈希表示例 ===");
 
@@ -358,8 +380,10 @@ where
 }
 
 /// 可扩展无锁哈希表
-///
+/// lock-free hash map
+/// 可扩展lock-free hash map
 /// 支持动态扩展的无锁哈希表
+/// lock-free hash map
 pub struct ScalableLockFreeHashMap<K, V> {
     tables: Vec<Arc<LockFreeHashMap<K, V>>>,
     current_table: AtomicUsize,
@@ -372,6 +396,7 @@ where
     V: Clone,
 {
     /// 创建新的可扩展无锁哈希表
+    /// lock-free hash map
     pub fn new(initial_capacity: usize) -> Self {
         let initial_table = Arc::new(LockFreeHashMap::new(initial_capacity));
 
@@ -398,6 +423,7 @@ where
     }
 
     /// 插入键值对
+    /// to
     pub fn insert(&self, key: K, value: V) -> bool {
         let current_index = self.current_table.load(Ordering::Acquire);
         let table = &self.tables[current_index];
@@ -414,6 +440,7 @@ where
     }
 
     /// 获取值
+    /// Get值
     pub fn get(&self, key: &K) -> Option<V> {
         let current_index = self.current_table.load(Ordering::Acquire);
         let table = &self.tables[current_index];
@@ -421,6 +448,7 @@ where
     }
 
     /// 运行示例
+    /// Run example
     pub fn run_example() {
         println!("=== 可扩展无锁哈希表示例 ===");
 
@@ -435,9 +463,6 @@ where
     }
 }
 
-/// 使用DashMap的高性能无锁哈希表
-///
-/// DashMap是一个高性能的无锁并发哈希表
 pub struct DashMapWrapper<K, V> {
     map: DashMap<K, V>,
 }
@@ -457,7 +482,6 @@ where
     K: Hash + Eq + Clone,
     V: Clone,
 {
-    /// 创建新的DashMap包装器
     pub fn new() -> Self {
         Self {
             map: DashMap::new(),
@@ -465,16 +489,19 @@ where
     }
 
     /// 插入键值对
+    /// to
     pub fn insert(&self, key: K, value: V) -> Option<V> {
         self.map.insert(key, value)
     }
 
     /// 获取值
+    /// Get值
     pub fn get(&self, key: &K) -> Option<V> {
         self.map.get(key).map(|entry| entry.clone())
     }
 
     /// 删除键值对
+    /// to
     pub fn remove(&self, key: &K) -> Option<V> {
         self.map.remove(key).map(|(_, value)| value)
     }
@@ -485,11 +512,13 @@ where
     }
 
     /// 检查是否为空
+    /// as
     pub fn is_empty(&self) -> bool {
         self.map.is_empty()
     }
 
     /// 运行示例
+    /// Run example
     pub fn run_example() {
         println!("=== DashMap无锁哈希表示例 ===");
 
@@ -526,6 +555,7 @@ where
 }
 
 /// 运行所有无锁哈希表示例
+/// Run all lock-free hash map example
 pub fn demonstrate_lockfree_hashmaps() {
     println!("=== 无锁哈希表演示 ===");
 

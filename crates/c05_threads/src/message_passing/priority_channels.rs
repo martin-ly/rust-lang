@@ -1,10 +1,18 @@
 //! 优先级通道实现
-//!
+//! priority channel
 //! 本模块提供了多种优先级通道实现：
+//! This module provides priority channel ：
 //! - 基于优先级的消息通道
+//! - message channel
+//! - Based on优先级message channel
 //! - 多级优先级通道
+//! - priority channel
+//! - 多级priority channel
 //! - 动态优先级调整通道
+//! - channel
 //! - 公平调度优先级通道
+//! - priority channel
+//! - 公平调度priority channel
 use std::cmp::Ordering;
 use std::collections::{BinaryHeap, VecDeque};
 use std::sync::{Arc, Condvar, Mutex};
@@ -72,8 +80,10 @@ impl<T: Eq> Ord for PriorityMessage<T> {
 }
 
 /// 基于优先级的消息通道
-///
+/// message channel
+/// Based on优先级message channel
 /// 使用二进制堆实现优先级队列
+/// heap
 pub struct PriorityChannel<T: Eq> {
     queue: Arc<Mutex<BinaryHeap<PriorityMessage<T>>>>,
     notifier: Arc<Condvar>,
@@ -88,6 +98,7 @@ impl<T: PartialEq + Eq> Default for PriorityChannel<T> {
 
 impl<T: PartialEq + Eq> PriorityChannel<T> {
     /// 创建新的优先级通道
+    /// priority channel
     pub fn new() -> Self {
         Self {
             queue: Arc::new(Mutex::new(BinaryHeap::new())),
@@ -97,6 +108,7 @@ impl<T: PartialEq + Eq> PriorityChannel<T> {
     }
 
     /// 创建有容量限制的优先级通道
+    /// priority channel
     pub fn with_capacity(capacity: usize) -> Self {
         Self {
             queue: Arc::new(Mutex::new(BinaryHeap::new())),
@@ -141,6 +153,7 @@ impl<T: PartialEq + Eq> PriorityChannel<T> {
     }
 
     /// 带超时的接收
+    /// 带超时Receive
     pub fn recv_timeout(&self, timeout: Duration) -> Option<T> {
         let mut queue = self.queue.lock().unwrap();
 
@@ -162,11 +175,13 @@ impl<T: PartialEq + Eq> PriorityChannel<T> {
     }
 
     /// 检查队列是否为空
+    /// as
     pub fn is_empty(&self) -> bool {
         self.queue.lock().unwrap().is_empty()
     }
 
     /// 运行优先级通道示例
+    /// Run priority channel example
     pub fn run_example() {
         println!("=== 优先级通道示例 ===");
 
@@ -207,8 +222,10 @@ impl<T: PartialEq + Eq> PriorityChannel<T> {
 }
 
 /// 多级优先级通道
-///
+/// priority channel
+/// 多级priority channel
 /// 支持多个优先级级别的通道
+/// level channel
 pub struct MultiLevelPriorityChannel<T: Eq> {
     channels: Vec<Arc<PriorityChannel<T>>>,
     level_count: usize,
@@ -216,6 +233,7 @@ pub struct MultiLevelPriorityChannel<T: Eq> {
 
 impl<T: PartialEq + Eq> MultiLevelPriorityChannel<T> {
     /// 创建新的多级优先级通道
+    /// priority channel
     pub fn new(level_count: usize) -> Self {
         let channels: Vec<Arc<PriorityChannel<T>>> = (0..level_count)
             .map(|_| Arc::new(PriorityChannel::new()))
@@ -228,6 +246,7 @@ impl<T: PartialEq + Eq> MultiLevelPriorityChannel<T> {
     }
 
     /// 发送消息到指定级别
+    /// to level
     pub fn send_to_level(&self, level: usize, data: T) -> Result<(), T> {
         if level >= self.level_count {
             return Err(data);
@@ -237,6 +256,7 @@ impl<T: PartialEq + Eq> MultiLevelPriorityChannel<T> {
     }
 
     /// 接收消息（按级别优先级）
+    /// （level ）
     pub fn recv(&self) -> Option<T> {
         // 从高优先级级别开始接收
         for level in 0..self.level_count {
@@ -256,6 +276,7 @@ impl<T: PartialEq + Eq> MultiLevelPriorityChannel<T> {
     }
 
     /// 运行多级优先级通道示例
+    /// Run priority channel example
     pub fn run_example() {
         println!("=== 多级优先级通道示例 ===");
 
@@ -296,8 +317,9 @@ impl<T: PartialEq + Eq> MultiLevelPriorityChannel<T> {
 }
 
 /// 动态优先级调整通道
-///
+/// channel
 /// 支持运行时调整消息优先级的通道
+/// runtime channel
 pub struct DynamicPriorityChannel<T: Eq> {
     queue: Arc<Mutex<BinaryHeap<PriorityMessage<T>>>>,
     notifier: Arc<Condvar>,
@@ -306,6 +328,7 @@ pub struct DynamicPriorityChannel<T: Eq> {
 
 impl<T: PartialEq + Eq> DynamicPriorityChannel<T> {
     /// 创建新的动态优先级通道
+    /// priority channel
     pub fn new<F>(priority_adjuster: F) -> Self
     where
         F: Fn(&T) -> u32 + Send + Sync + 'static,
@@ -318,6 +341,7 @@ impl<T: PartialEq + Eq> DynamicPriorityChannel<T> {
     }
 
     /// 发送消息（动态计算优先级）
+    /// （）
     pub fn send(&self, data: T) -> Result<(), T> {
         let priority = (self.priority_adjuster)(&data);
         let message = PriorityMessage::new(priority, data);
@@ -340,6 +364,7 @@ impl<T: PartialEq + Eq> DynamicPriorityChannel<T> {
     }
 
     /// 运行动态优先级通道示例
+    /// Run priority channel example
     pub fn run_example() {
         println!("=== 动态优先级通道示例 ===");
 
@@ -390,8 +415,10 @@ impl<T: PartialEq + Eq> DynamicPriorityChannel<T> {
 }
 
 /// 公平调度优先级通道
-///
+/// priority channel
+/// 公平调度priority channel
 /// 在保证优先级的同时，确保低优先级消息不会被饿死
+/// in ，is
 pub struct FairSchedulingPriorityChannel<T: Eq> {
     high_priority_queue: Arc<Mutex<VecDeque<PriorityMessage<T>>>>,
     low_priority_queue: Arc<Mutex<VecDeque<PriorityMessage<T>>>>,
@@ -403,6 +430,7 @@ pub struct FairSchedulingPriorityChannel<T: Eq> {
 
 impl<T: PartialEq + Eq> FairSchedulingPriorityChannel<T> {
     /// 创建新的公平调度优先级通道
+    /// priority channel
     pub fn new(high_priority_threshold: u32, fairness_ratio: usize) -> Self {
         Self {
             high_priority_queue: Arc::new(Mutex::new(VecDeque::new())),
@@ -431,6 +459,7 @@ impl<T: PartialEq + Eq> FairSchedulingPriorityChannel<T> {
     }
 
     /// 接收消息（公平调度）
+    /// （）
     pub fn recv(&self) -> Option<T> {
         loop {
             // 快路径：尝试一次无阻塞检查
@@ -458,6 +487,7 @@ impl<T: PartialEq + Eq> FairSchedulingPriorityChannel<T> {
     }
 
     /// 运行公平调度优先级通道示例
+    /// Run priority channel example
     pub fn run_example() {
         println!("=== 公平调度优先级通道示例 ===");
 
@@ -502,6 +532,7 @@ impl<T: PartialEq + Eq> FairSchedulingPriorityChannel<T> {
 }
 
 /// 运行所有优先级通道示例
+/// Run all priority channel example
 pub fn demonstrate_priority_channels() {
     println!("=== 优先级通道演示 ===");
 

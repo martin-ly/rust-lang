@@ -1,18 +1,18 @@
 //! Rust 1.95.0 `Vec::push_mut` / `insert_mut` 专题示例
-//!
-//! Rust 1.95.0 为 `Vec` 新增了 `push_mut` 和 `insert_mut` 方法，
+//! Rust 1.95.0 `Vec::push_mut` / `insert_mut` 专题Example of
 //! 允许在插入元素的同时获取其可变引用，避免二次查找。
-//!
+//! in element its reference ，。
 //! 权威来源: https://releases.rs/docs/1.95.0/
-//!
+//! 权威source: https://releases.rs/docs/1.95.0/
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example vec_push_mut_demo -p c02_type_system
 //! ```
 
 // ==================== 示例 1: Vec::push_mut 基础 ====================
 
 /// `push_mut` 在尾部插入元素并返回 `&mut T`
+/// `push_mut` in element and `&mut T`
 fn demo_push_mut_basic() {
     println!("--- Vec::push_mut 基础 ---");
 
@@ -31,7 +31,6 @@ fn demo_push_mut_basic() {
 
 // ==================== 示例 2: Vec::push_mut 与复杂类型 ====================
 
-/// `push_mut` 用于需要立即初始化的结构体
 fn demo_push_mut_struct() {
     println!("\n--- Vec::push_mut 与结构体 ---");
 
@@ -59,6 +58,7 @@ fn demo_push_mut_struct() {
 // ==================== 示例 3: Vec::insert_mut 基础 ====================
 
 /// `insert_mut` 在指定位置插入并返回 `&mut T`
+/// `insert_mut` in position and `&mut T`
 fn demo_insert_mut_basic() {
     println!("\n--- Vec::insert_mut 基础 ---");
 
@@ -77,6 +77,7 @@ fn demo_insert_mut_basic() {
 // ==================== 示例 4: 对比旧写法 vs 新写法 ====================
 
 /// 展示 `push_mut` 如何消除冗余索引
+/// `push_mut`
 fn demo_comparison_old_vs_new() {
     println!("\n--- 旧写法 vs 新写法对比 ---");
 
@@ -100,6 +101,7 @@ fn demo_comparison_old_vs_new() {
 // ==================== 示例 5: 批量构建并初始化 ====================
 
 /// 使用 `push_mut` 批量构建预分配向量
+/// `push_mut`
 fn demo_batch_build() {
     println!("\n--- 批量构建与初始化 ---");
 
@@ -128,6 +130,7 @@ fn demo_batch_build() {
 // ==================== 示例 6: insert_mut 在有序列表中的应用 ====================
 
 /// 在有序 Vec 中插入并调整邻居
+/// in Vec in and
 fn demo_insert_mut_sorted() {
     println!("\n--- insert_mut 在有序列表中的应用 ---");
 

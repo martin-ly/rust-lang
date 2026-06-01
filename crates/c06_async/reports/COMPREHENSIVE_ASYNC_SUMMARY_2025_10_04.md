@@ -344,7 +344,7 @@ cargo run --example tokio_smol_latest_features_2025
 
 - ✅ Tokio 1.41+ 全特性
 - ✅ Smol 2.0+ 轻量级运行时
-- ✅ async-std
+- ⚠️ async-std [已归档]
 - ✅ 运行时对比和选择
 
 **相关文件**:

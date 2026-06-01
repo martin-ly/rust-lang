@@ -45,7 +45,7 @@
 
 ## 项目概述
 
-本项目完成了对Rust异步编程生态系统的全面分析，包括`std`、`smol`、`async-std`、`tokio`等主要异步库的深度研究，并结合2025年最新特性和最佳实践，提供了完整的解决方案。
+本项目完成了对Rust异步编程生态系统的全面分析，包括`std`、`smol`、`async-std [已归档]`、`tokio`等主要异步库的深度研究，并结合2025年最新特性和最佳实践，提供了完整的解决方案。
 
 ## 完成内容
 
@@ -55,12 +55,12 @@
 
 - **std**: 标准库基础，提供Future trait和async/await语法支持
 - **tokio**: 生产级异步运行时，基于mio事件循环，高性能多线程调度器
-- **async-std**: 标准库风格API，现代化设计，快速编译
+- **async-std [已归档]**: 标准库风格API，现代化设计，快速编译
 - **smol**: 轻量级运行时，代码量少，嵌入式友好
 
 #### 1.2 特性对比分析
 
-| 特性 | std | tokio | async-std | smol |
+| 特性 | std | tokio | async-std [已归档] | smol |
  param($match) $match.Value -replace '[-:]+', ' --- ' ----- param($match) $match.Value -replace '[-:]+', ' --- ' ----------- param($match) $match.Value -replace '[-:]+', ' --- '
 | 性能 | 需要外部运行时 | 优秀 | 良好 | 良好 |
 | 生态系统 | 基础 | 极其丰富 | 良好 | 中等 |
@@ -252,7 +252,7 @@ cargo doc --open
 ### 1. 运行时选择
 
 - **生产环境**: 推荐使用 Tokio
-- **快速原型**: 推荐使用 async-std
+- **快速原型**: 推荐使用 async-std [已归档]
 - **资源受限**: 推荐使用 smol
 - **跨平台兼容**: 使用 std + 外部运行时
 
@@ -296,7 +296,7 @@ cargo doc --open
 ---
 
 **项目完成时间**: 2025年1月
-**技术栈**: Rust 1.90, Tokio, async-std, smol, tracing
+**技术栈**: Rust 1.90, Tokio, async-std [已归档], smol, tracing
 **状态**: ✅ 完成
 ---
 

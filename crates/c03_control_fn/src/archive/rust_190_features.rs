@@ -1,28 +1,28 @@
 //! Rust 1.90 新特性模块 (历史版本)
-//!
+//! Rust 1.90 feature module (this )
+//! Rust 1.90 新featuremodule (历史版this)
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//!
+//! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
-//!
-//! 本模块专门展示 Rust 1.90 版本中的新特性和增强功能：
-//! - 异步Drop (AsyncDrop)
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! - 异步生成器 (Async Generators)
-//! - Polonius借用检查器改进
 //! - 下一代特质求解器
+//! - under trait
 //! - 并行前端编译
+//! - parallelism frontend
 //! - 改进的对齐检查
+//! - to
+//! - 改进to齐Check
 //! - 枚举判别值指定
+//! - enum
 //! - 生命周期转换改进
-//!
-//! 所有示例都使用 Rust 1.90 的最新语法，并包含详细的注释和最佳实践。
+//! - lifetime conversion
 use std::collections::HashMap;
 use std::time::Duration;
 use tokio::time::sleep;
 
-/// Rust 1.90 异步Drop特性演示
-///
-/// AsyncDrop允许类型在被丢弃时执行异步操作，这对于需要在销毁前
 /// 执行I/O操作的类型（如TLS连接、数据库连接等）非常重要。
+/// I/Otype （TLS 、database etc. ）important 。
 #[derive(Debug, Clone)]
 pub struct FeatureDatabaseConnection {
     pub id: u32,
@@ -32,6 +32,7 @@ pub struct FeatureDatabaseConnection {
 
 impl FeatureDatabaseConnection {
     /// 创建新的数据库连接
+    /// database
     pub fn new(id: u32, url: String) -> Self {
         Self {
             id,
@@ -53,6 +54,7 @@ impl FeatureDatabaseConnection {
     }
 
     /// 执行查询
+    /// Execute query
     pub async fn query(&self, sql: &str) -> Result<Vec<HashMap<String, String>>, String> {
         if !self.is_connected {
             return Err("连接已关闭".to_string());
@@ -69,10 +71,6 @@ impl FeatureDatabaseConnection {
     }
 }
 
-/// Rust 1.90 异步Drop实现
-///
-/// 这是Rust 1.90的重要新特性，允许在析构函数中使用.await
-/// 注意：AsyncDrop在Rust 1.90中可能还没有完全稳定，这里使用模拟实现
 impl Drop for FeatureDatabaseConnection {
     fn drop(&mut self) {
         println!("开始清理数据库连接 {}", self.id);
@@ -89,8 +87,9 @@ impl Drop for FeatureDatabaseConnection {
 }
 
 /// Rust 1.90 异步生成器演示
-///
+/// Rust 1.90 async demonstration
 /// 异步生成器允许创建异步迭代器，这对于流式数据处理非常有用。
+/// async async ，to stream useful 。
 pub struct AsyncDataStream {
     pub data: Vec<i32>,
     pub current_index: usize,
@@ -106,7 +105,7 @@ impl AsyncDataStream {
 }
 
 /// 异步迭代器实现
-/// 注意：AsyncIterator在Rust 1.90中可能还没有完全稳定，这里使用自定义实现
+/// async
 impl AsyncDataStream {
     pub async fn next(&mut self) -> Option<i32> {
         if self.current_index >= self.data.len() {
@@ -123,9 +122,6 @@ impl AsyncDataStream {
     }
 }
 
-/// Rust 1.90 改进的借用检查器演示
-///
-/// Polonius借用检查器提供了更精确的借用分析，减少了误报。
 #[derive(Debug, Clone)]
 pub struct BorrowCheckerDemo {
     pub data: Vec<String>,
@@ -147,9 +143,9 @@ impl BorrowCheckerDemo {
     }
 
     /// 演示改进的借用检查
-    ///
-    /// Rust 1.90的Polonius借用检查器能够更精确地分析借用关系，
+    /// demonstration borrowing
     /// 减少不必要的借用错误。
+    /// borrowing 。
     pub fn improved_borrow_analysis(&mut self) -> Result<(), String> {
         // 在Rust 1.90中，这种模式更容易被借用检查器理解
         if let Some(first_item) = self.data.first() {
@@ -167,6 +163,8 @@ impl BorrowCheckerDemo {
     }
 
     /// 演示更智能的借用规则
+    /// demonstration borrowing rule
+    /// Demonstration of更智能borrowrule
     pub fn smart_borrow_rules(&self) -> Vec<&str> {
         let mut result = Vec::new();
 
@@ -182,8 +180,9 @@ impl BorrowCheckerDemo {
 }
 
 /// Rust 1.90 下一代特质求解器演示
-///
+/// Rust 1.90 under trait demonstration
 /// 新的特质求解器能够处理更复杂的特质约束，提供更好的错误消息。
+/// trait can complex trait ，。
 pub trait AdvancedTrait<T> {
     type Output;
     type Error;
@@ -192,6 +191,7 @@ pub trait AdvancedTrait<T> {
 }
 
 /// 复杂特质约束的实现
+/// complex trait
 impl AdvancedTrait<i32> for BorrowCheckerDemo {
     type Output = String;
     type Error = String;
@@ -207,6 +207,7 @@ impl AdvancedTrait<i32> for BorrowCheckerDemo {
 }
 
 /// 演示复杂的特质约束
+/// demonstration complex trait
 pub fn demonstrate_trait_solver() -> Result<(), String> {
     let demo = BorrowCheckerDemo::new();
 
@@ -217,9 +218,8 @@ pub fn demonstrate_trait_solver() -> Result<(), String> {
     Ok(())
 }
 
-/// Rust 1.90 改进的对齐检查演示
-///
 /// 在指针解引用处插入对齐检查作为调试断言，以在运行时捕获未定义的行为。
+/// in pointer reference to as ，in runtime definition as 。
 pub struct AlignmentDemo {
     pub data: [u8; 16],
     pub offset: usize,
@@ -240,13 +240,15 @@ impl AlignmentDemo {
     }
 
     /// 演示改进的对齐检查
-    ///
+    /// demonstration to
+    /// Demonstration of改进to齐Check
     /// Rust 1.90在编译时常量求值期间始终检查对齐，
+    /// Rust 1.90in compile-time constant to ，
     /// 并在指针解引用处插入对齐检查作为调试断言。
-    ///
-    /// # Safety
+    /// and in pointer reference to as 。
     ///
     /// `offset` 必须确保指针在边界内且正确对齐。
+    /// `offset` must pointer in edge inside and to 。
     pub unsafe fn demonstrate_alignment_check(&self, offset: usize) -> u8 {
         // Rust 1.90会自动插入对齐检查
         unsafe {
@@ -258,8 +260,7 @@ impl AlignmentDemo {
 }
 
 /// Rust 1.90 枚举判别值指定演示
-///
-/// 允许在所有repr(Int)枚举类型上指定明确的判别值。
+/// Rust 1.90 enum demonstration
 #[repr(u8)]
 #[derive(Debug)]
 pub enum Status {
@@ -271,6 +272,7 @@ pub enum Status {
 
 impl Status {
     /// 从判别值创建状态
+    /// from state
     pub fn from_discriminant(value: u8) -> Option<Self> {
         match value {
             1 => Some(Status::Pending),
@@ -288,8 +290,9 @@ impl Status {
 }
 
 /// Rust 1.90 生命周期转换改进演示
-///
+/// Rust 1.90 lifetime conversion demonstration
 /// 允许仅在生命周期上有所不同的相同类型之间进行转换。
+/// in lifetime on type 's conversion 。
 pub struct LifetimeDemo<'a> {
     pub data: &'a str,
     pub metadata: HashMap<String, String>,
@@ -304,8 +307,7 @@ impl<'a> LifetimeDemo<'a> {
     }
 
     /// 演示生命周期转换
-    ///
-    /// Rust 1.90允许更灵活的生命周期转换，只要类型结构相同。
+    /// demonstration lifetime conversion
     pub fn convert_lifetime<'b>(self) -> LifetimeDemo<'b>
     where
         'a: 'b,
@@ -318,8 +320,9 @@ impl<'a> LifetimeDemo<'a> {
 }
 
 /// Rust 1.90 综合特性演示
-///
+/// Rust 1.90 synthesize feature demonstration
 /// 展示多个新特性的组合使用。
+/// feature combination 。
 pub async fn demonstrate_rust_190_features() -> Result<(), String> {
     println!("🚀 演示 Rust 1.90 新特性");
 

@@ -1,7 +1,7 @@
-//! 控制流与函数模块错误路径测试套件 / Control Flow and Functions Module Error Paths Test Suite
 use c03_control_fn::*;
 
 /// 测试错误输入情况
+/// situation
 #[test]
 fn test_error_inputs() {
     // 测试无效输入
@@ -12,6 +12,7 @@ fn test_error_inputs() {
 }
 
 /// 测试错误状态情况
+/// state situation
 #[test]
 fn test_error_states() {
     // 测试错误状态
@@ -24,6 +25,7 @@ fn test_error_states() {
 }
 
 /// 测试异常情况
+/// situation
 #[test]
 fn test_exception_cases() {
     // 测试边界值异常
@@ -34,6 +36,7 @@ fn test_exception_cases() {
 }
 
 /// 测试资源耗尽情况
+/// situation
 #[test]
 fn test_resource_exhaustion() {
     // 测试大量循环
@@ -52,6 +55,7 @@ fn test_resource_exhaustion() {
 }
 
 /// 测试并发安全
+/// concurrency
 #[test]
 fn test_concurrent_safety() {
     use std::sync::{Arc, Mutex};

@@ -1,84 +1,80 @@
-//! Rust 1.95.0 嵌入式与裸指针新特性实现模块
-//!
-//! 本模块展示了 Rust 1.95.0 在嵌入式和系统编程方面的关键增强：
 //! - 裸指针 `as_ref_unchecked` / `as_mut_unchecked` ⭐
-//! - PowerPC 内联汇编稳定化
+//! - 裸pointer `as_ref_unchecked` / `as_mut_unchecked` ⭐
 //! - `asm_cfg` — 条件汇编 (Rust 1.95 stable) ⭐
-//! - `cfg_select!` 在嵌入式跨平台配置中的应用
-//!
 //! # 版本信息
-//! - Rust版本: 1.95.0
+//! # this
 //! - 稳定日期: 2026-04-16
-//! - Edition: 2024
-//!
+//! - date : 2026-04-16
+//! - 稳定date: 2026-04-16
+//! - date: 2026-04-16
 //! # 安全警告
-//! 本模块涉及 `unsafe` 操作，所有示例均标注了 SAFETY 注释。
+//! # warning
+//! # 安全warning
 //! 在 bare-metal 环境中使用需格外谨慎。
-//!
+//! in bare-metal environment in outside 。
 //! # 参考
-//! - [Rust 1.95.0 Release Notes](https://releases.rs/docs/1.95.0/)
+//! # reference
 
 // ============================================================================
 // 1. 裸指针 as_ref_unchecked / as_mut_unchecked
 // ============================================================================
 
 /// # 裸指针 `as_ref_unchecked` / `as_mut_unchecked`
-///
+/// # 裸pointer `as_ref_unchecked` / `as_mut_unchecked`
 /// ## 概念定义
-/// Rust 1.95.0 为裸指针稳定了以下方法：
-/// - `<*const T>::as_ref_unchecked(&self) -> &T`
-/// - `<*mut T>::as_ref_unchecked(&self) -> &T`
+/// ## concept definition
 /// - `<*mut T>::as_mut_unchecked(&self) -> &mut T`
 ///
-/// 这些方法将裸指针直接转换为引用，**不进行 null 检查**。
-/// 相比 `as_ref()`（返回 `Option<&T>`），它们避免了分支开销，
-/// 适用于**已确定非 null** 的指针场景。
-///
+/// 适Used for**已确定非 null** pointerscenario。
 /// ## Wikipedia 概念对齐
-/// - **Pointer (Computer Programming)**: 内存地址的抽象，裸指针是最低层级
-/// - **Type Safety**: Rust 通过 `unsafe` 边界将类型不安全操作显式化
-///
 /// ## 对比：安全 API vs 不检查 API
-///
+/// ## to ： API vs API
+/// ## to比：安全 API vs 不Check API
 /// | 方法 | 返回类型 | null 检查？ | 适用场景 | 开销 |
-/// |------|---------|-----------|---------|------|
-/// | `as_ref()` | `Option<&T>` | ✅ 有 | 可能为 null 的指针 | 分支预测 |
-/// | `as_ref_unchecked()` | `&T` | ❌ 无 | 已验证非 null 的指针 | 零开销 |
-/// | `as_mut()` | `Option<&mut T>` | ✅ 有 | 可能为 null 的可变指针 | 分支预测 |
-/// | `as_mut_unchecked()` | `&mut T` | ❌ 无 | 已验证非 null 的可变指针 | 零开销 |
-///
+/// | method | type | null ？ | scenario | overhead |
+/// | method | Returntype | null Check？ | 适用scenario | overhead |
+/// | `as_ref()` | `Option<&T>` | ✅ 有 | mayas null pointer | branch prediction |
+/// | `as_mut()` | `Option<&mut T>` | ✅ 有 | mayas null 可变pointer | branch prediction |
 /// ## 决策树
-/// ```text
+/// ## tree
+/// ## 决策tree
+/// ## tree
 /// 需要将裸指针转为引用？
-/// ├── 指针可能为 null？ → as_ref() / as_mut()（安全）
+/// will pointer as reference ？
+/// ├── pointermayas null？ → as_ref() / as_mut()（安全）
 /// ├── 指针由分配器/硬件保证非 null？
+/// ├── pointer /hardware null？
 /// │   ├── 性能敏感路径？ → as_ref_unchecked() / as_mut_unchecked()
 /// │   └── 调试/验证阶段？ → as_ref() + expect()
+/// │ └── /stage ？ → as_ref() + expect()
+/// │ └── 调试/Verifystage？ → as_ref() + expect()
 /// └── 指针指向 MMIO 寄存器？ → as_ref_unchecked()（硬件保证有效）
-/// ```
-///
+/// └── pointer MMIO ？ → as_ref_unchecked()（hardware effective ）
 /// ## 反例 / 严重误用
-/// - **未初始化的指针**：`as_ref_unchecked` 不检查 null，也不检查有效性
+/// ## /
 /// - **悬垂指针**：转换后引用的内存已释放 → UB
+/// - **pointer **：conversion after reference memory → UB
 /// - **违反别名规则**：两个 `*mut` 指向同一地址并都转为 `&mut` → UB
+/// - **rule **： `*mut` and as `&mut` → UB
 /// - **对齐违规**：未对齐指针转为引用 → UB
-///
+/// - **to **：to pointer as reference → UB
 /// ## SAFETY 要求
 /// 调用 `*_unchecked` 前必须保证：
+/// `*_unchecked` before must ：
 /// 1. 指针非 null
+/// 1. pointer null
 /// 2. 指针已对齐
+/// 2. pointer to
 /// 3. 指针指向有效内存
-/// 4. 不违反 Rust 的别名规则（`&mut` 唯一性）
+/// 3. pointer effective memory
 pub struct RawPointerUncheckedExamples;
 
 impl RawPointerUncheckedExamples {
     /// 示例 1：MMIO 寄存器访问（嵌入式核心场景）
-    ///
+    /// example 1：MMIO （core scenario ）
+    /// Example of 1：MMIO 寄存器访问（嵌入式corescenario）
     /// 在嵌入式系统中，外设寄存器映射到固定内存地址，硬件保证其有效。
-    /// 使用 `as_ref_unchecked` 避免每次访问的分支开销。
-    ///
-    /// # Safety
-    /// 调用者必须确保 `addr` 是有效的 MMIO 地址。
+    /// in system in ，outside to memory ，hardware its effective 。
     pub unsafe fn read_mmio_register<T>(addr: *const T) -> T
     where
         T: Copy,
@@ -88,9 +84,8 @@ impl RawPointerUncheckedExamples {
     }
 
     /// 示例 2：MMIO 寄存器写入
-    ///
-    /// # Safety
-    /// 调用者必须确保 `addr` 是有效的可写 MMIO 地址。
+    /// example 2：MMIO
+    /// Example of 2：MMIO 寄存器Write
     pub unsafe fn write_mmio_register<T>(addr: *mut T, value: T) {
         // SAFETY: 调用者保证 addr 是硬件映射的有效寄存器地址
         unsafe {
@@ -100,8 +95,9 @@ impl RawPointerUncheckedExamples {
 }
 
 /// 示例 3：静态分配缓冲区的零开销访问
-///
+/// example 3：buffering overhead
 /// 由链接器脚本或启动代码分配的静态缓冲区，地址编译期已知。
+/// this or buffering ，。
 pub struct StaticBuffer {
     ptr: *mut u8,
     len: usize,
@@ -110,12 +106,14 @@ pub struct StaticBuffer {
 impl StaticBuffer {
     /// # Safety
     /// `ptr` 必须指向 `len` 字节的已分配且有效的内存。
+    /// `ptr` must `len` and effective memory 。
     pub unsafe fn new(ptr: *mut u8, len: usize) -> Self {
         Self { ptr, len }
     }
 
     /// # Safety
     /// 调用者必须确保指针在构造时已验证非 null 且有效。
+    /// must pointer in null and effective 。
     pub unsafe fn as_slice(&self) -> &[u8] {
         // SAFETY: ptr 在构造时已验证非 null 且有效
         unsafe { std::slice::from_raw_parts(self.ptr.as_ref_unchecked(), self.len) }
@@ -123,18 +121,16 @@ impl StaticBuffer {
 
     /// # Safety
     /// 调用者必须确保指针在构造时已验证非 null 且有效，且不存在别名冲突。
+    /// must pointer in null and effective ，and in 。
     pub unsafe fn as_mut_slice(&mut self) -> &mut [u8] {
         // SAFETY: ptr 在构造时已验证非 null 且有效
         unsafe { std::slice::from_raw_parts_mut(self.ptr.as_mut_unchecked(), self.len) }
     }
 }
 
-/// 示例 4：与 `addr_of!` / `addr_of_mut!` 的协同
-///
-/// `addr_of!` 获取字段的裸指针（不创建中间引用），
+/// Example of 4：and `addr_of!` / `addr_of_mut!` 协同
 /// 然后使用 `as_ref_unchecked` 直接访问。
-///
-/// 这是 `&raw const` (1.82+) 的替代路径，适用于需要裸指针的场景。
+/// then `as_ref_unchecked` 。
 #[repr(C)]
 pub struct DeviceRegisters {
     pub status: u32,
@@ -143,7 +139,6 @@ pub struct DeviceRegisters {
 }
 
 /// # Safety
-/// 调用者必须确保 `regs` 指向有效的 DeviceRegisters 内存。
 pub unsafe fn read_status_via_addr_of(regs: *const DeviceRegisters) -> u32 {
     // SAFETY: 调用者保证 regs 有效；addr_of! 安全获取字段地址
     unsafe {
@@ -153,11 +148,9 @@ pub unsafe fn read_status_via_addr_of(regs: *const DeviceRegisters) -> u32 {
 }
 
 /// 示例 5：性能对比基准（概念性）
-///
-/// 在热路径中，`as_ref_unchecked` 消除了分支预测失败的可能性。
-///
-/// # Safety
+/// example 5：performance to （concept ）
 /// 调用者必须确保 `ptr` 非 null 且指向有效内存。
+/// must `ptr` null and effective memory 。
 pub unsafe fn hot_path_access_unchecked(ptr: *const u32) -> u32 {
     // 零分支，直接加载
     unsafe { *ptr.as_ref_unchecked() }
@@ -165,18 +158,16 @@ pub unsafe fn hot_path_access_unchecked(ptr: *const u32) -> u32 {
 
 /// # Safety
 /// 调用者必须确保 `ptr` 指向有效内存或为空。
+/// must `ptr` effective memory or as 。
 pub unsafe fn hot_path_access_checked(ptr: *const u32) -> Option<u32> {
     // 有分支（null 检查）
     unsafe { ptr.as_ref().copied() }
 }
 
-/// 示例 6：与 MaybeUninit 结合（安全初始化模式）
-///
-/// 使用 `MaybeUninit` 分配未初始化内存，
 /// 初始化后通过 `as_ref_unchecked` 访问（已知已初始化）。
-///
-/// # Safety
+/// after `as_ref_unchecked` （）。
 /// `f` 必须正确初始化传入的引用。
+/// `f` must reference 。
 pub unsafe fn init_and_access<T, F>(f: F) -> T
 where
     F: FnOnce(&mut T),
@@ -194,33 +185,21 @@ where
 // 2. PowerPC 内联汇编（1.95 稳定）
 // ============================================================================
 
-/// # PowerPC / PowerPC64 内联汇编
-///
-/// Rust 1.95.0 稳定了 PowerPC 和 PowerPC64 架构的内联汇编支持。
-/// 这使得 Rust 可用于嵌入式 PowerPC 系统（如网络设备、工业控制器、游戏主机）。
-///
 /// ## 概念
+/// ## concept
 /// - **Inline Assembly**: 在高级语言中直接嵌入机器指令
-/// - **RISC Architecture**: PowerPC 是精简指令集，与 ARM/x86 有显著差异
-///
+/// - **Inline Assembly**: in in
 /// ## 语法
-/// ```ignore
-/// unsafe {
+/// ##
 ///     std::arch::asm!(
-///         "nop",           // PowerPC 指令
-///         options(nomem, nostack)
-///     );
 /// }
 /// ```
 ///
 /// ## 平台支持状态（1.95）
-/// - `powerpc64-unknown-linux-musl` → **Tier 2 with host tools**
+/// ## platform state （1.95）
 pub struct PowerPcAsmExamples;
 
 impl PowerPcAsmExamples {
-    /// 概念性示例：PowerPC `nop` 指令
-    ///
-    /// 注意：此代码仅在 PowerPC 目标上可编译。
     #[cfg(any(target_arch = "powerpc", target_arch = "powerpc64"))]
     pub unsafe fn ppc_nop() {
         unsafe {
@@ -229,8 +208,7 @@ impl PowerPcAsmExamples {
     }
 
     /// 概念性示例：读取时间戳寄存器 (Time Base)
-    ///
-    /// PowerPC 的 Time Base 寄存器提供高精度计时。
+    /// concept example ：time (Time Base)
     #[cfg(any(target_arch = "powerpc", target_arch = "powerpc64"))]
     pub unsafe fn ppc_read_timebase() -> u64 {
         unsafe {
@@ -244,10 +222,6 @@ impl PowerPcAsmExamples {
         }
     }
 
-    /// Host 目标上的模拟（仅用于文档编译）
-    ///
-    /// # Safety
-    /// 此函数在 non-PowerPC 目标上为空操作，无安全约束。
     #[cfg(not(any(target_arch = "powerpc", target_arch = "powerpc64")))]
     pub unsafe fn ppc_nop() {
         // 在 non-PowerPC 目标上，内联汇编不可用
@@ -255,7 +229,6 @@ impl PowerPcAsmExamples {
     }
 
     /// # Safety
-    /// 此函数在 non-PowerPC 目标上使用系统时间模拟，无安全约束。
     #[cfg(not(any(target_arch = "powerpc", target_arch = "powerpc64")))]
     pub unsafe fn ppc_read_timebase() -> u64 {
         // 模拟：返回系统时间纳秒数
@@ -271,13 +244,11 @@ impl PowerPcAsmExamples {
 // ============================================================================
 
 /// # `asm_cfg` — 条件汇编
-///
-/// Rust 1.95.0 稳定了 `asm_cfg`，允许在 `asm!` 宏的**单个指令**上使用 `#[cfg]` 属性。
+/// # `asm_cfg` — condition
 /// 这使得编写跨平台内联汇编更加简洁，无需为每个平台维护完整的独立 `asm!` 块。
-///
+/// platform inside ，as platform complete `asm!` 。
 /// ## 语法
-/// ```ignore
-/// std::arch::asm!(
+/// ##
 ///     "common_instruction",
 ///     #[cfg(target_arch = "x86_64")]
 ///     "x86_specific_instruction",
@@ -288,22 +259,29 @@ impl PowerPcAsmExamples {
 /// ```
 ///
 /// ## 对比：传统方式 vs asm_cfg
-///
+/// ## to ：way vs asm_cfg
+/// ## to比：传统way vs asm_cfg
 /// | 方式 | 代码重复度 | 可维护性 |
-/// |:-----|:-----------|:---------|
+/// | way | | |
 /// | `#[cfg]` 包裹整个 `asm!` 块 | 高（每个平台写完整块） | 低 |
+/// | `#[cfg]` `asm!` | （platform complete ） | |
 /// | `asm_cfg`（指令级 `#[cfg]`） | 低（仅差异指令标记） | 高 |
+/// | `asm_cfg`（ `#[cfg]`） | （mark ） | |
+/// | `asm_cfg`（指令级 `#[cfg]`） | 低（仅差异指令mark） | 高 |
+/// | `asm_cfg`（ `#[cfg]`） | （mark） | |
 pub struct AsmCfgExamples;
 
 impl AsmCfgExamples {
     /// 跨平台内存屏障：使用 `asm_cfg` 选择正确的屏障指令
-    ///
+    /// platform memory barrier ： `asm_cfg` barrier
     /// x86_64 使用 `mfence`，aarch64 使用 `dmb ish`，其他平台使用编译器屏障。
-    ///
-    /// # Safety
+    /// x86_64 `mfence`，aarch64 `dmb ish`，its platform barrier 。
     /// 此函数调用 `std::arch::asm!`，属于 unsafe 操作。调用者需确保：
+    /// this function `std::arch::asm!`， unsafe 。：
     /// 1. 在正确的上下文中使用内存屏障
+    /// 1. in on under in memory barrier
     /// 2. 不会导致数据竞争或死锁
+    /// 2. or lock
     #[cfg(any(target_arch = "x86_64", target_arch = "aarch64"))]
     pub unsafe fn cross_platform_fence() {
         unsafe {
@@ -318,19 +296,23 @@ impl AsmCfgExamples {
     }
 
     /// Host 目标模拟（仅用于文档编译）
+    /// Host goal （）
     #[cfg(not(any(target_arch = "x86_64", target_arch = "aarch64")))]
     pub unsafe fn cross_platform_fence() {
         std::sync::atomic::fence(std::sync::atomic::Ordering::SeqCst);
     }
 
     /// 跨平台 `nop` + 可选调试断点
-    ///
+    /// platform `nop` + point
+    /// 跨platform `nop` + 可选调试断point
     /// x86_64 支持 `int3` 断点指令，aarch64 支持 `brk #0`，其他平台仅执行 `nop`。
-    ///
-    /// # Safety
+    /// x86_64 `int3` point ，aarch64 `brk #0`，its platform `nop`。
     /// 此函数调用 `std::arch::asm!`，属于 unsafe 操作。调用者需确保：
+    /// this function `std::arch::asm!`， unsafe 。：
     /// 1. 断点指令不会破坏程序状态
+    /// 1. point program state
     /// 2. 仅在调试环境中使用断点
+    /// 2. in environment in point
     #[cfg(any(target_arch = "x86_64", target_arch = "aarch64"))]
     pub unsafe fn nop_with_optional_breakpoint(_enable_breakpoint: bool) {
         unsafe {
@@ -339,6 +321,7 @@ impl AsmCfgExamples {
     }
 
     /// Host 目标模拟
+    /// Host goal
     #[cfg(not(any(target_arch = "x86_64", target_arch = "aarch64")))]
     pub unsafe fn nop_with_optional_breakpoint(_enable_breakpoint: bool) {
         // 在 host 目标上无操作
@@ -350,12 +333,12 @@ impl AsmCfgExamples {
 // ============================================================================
 
 /// # `cfg_select!` 嵌入式跨平台抽象
-///
-/// 展示了 `cfg_select!` 如何简化嵌入式开发中的架构特定代码选择。
+/// # `cfg_select!` platform
 pub struct EmbeddedCfgSelect;
 
 impl EmbeddedCfgSelect {
     /// 选择架构特定的内存屏障指令
+    /// architecture memory barrier
     pub fn memory_barrier() {
         cfg_select! {
             target_arch = "arm" => arm_barrier(),
@@ -368,6 +351,7 @@ impl EmbeddedCfgSelect {
     }
 
     /// 架构特定的时钟频率（典型值）
+    /// architecture （）
     pub const DEFAULT_SYSCLK_HZ: u32 = cfg_select! {
         target_arch = "arm" => 72_000_000,      // 72 MHz (STM32F1)
         target_arch = "aarch64" => 1_500_000_000, // 1.5 GHz (Raspberry Pi 4)
@@ -377,6 +361,7 @@ impl EmbeddedCfgSelect {
     };
 
     /// 栈对齐要求（字节）
+    /// stack to （）
     pub const STACK_ALIGNMENT: usize = cfg_select! {
         target_arch = "arm" => 8,
         target_arch = "aarch64" => 16,
@@ -387,6 +372,7 @@ impl EmbeddedCfgSelect {
     };
 
     /// 中断向量表大小
+    /// in
     pub const IRQ_VECTOR_COUNT: usize = cfg_select! {
         target_arch = "arm" => 16,      // Cortex-M NVIC
         target_arch = "riscv32" => 32,  // PLIC / CLINT
@@ -479,14 +465,15 @@ mod tests {
 use std::ffi::CStr;
 
 /// # 真实 Rust 1.95 特性演示
-///
-/// 展示 `&raw const`、 `const {}` 以及 `c"..."` 在嵌入式场景中的应用。
+/// # real Rust 1.95 feature demonstration
+/// display `&raw const`、 `const {}` and `c"..."` in嵌入式scenarioinapplication。
 pub struct RealRust195Features;
 
 impl RealRust195Features {
     /// 使用 `&raw const` 模拟寄存器访问
-    ///
+    /// `&raw const`
     /// `&raw const` 避免创建中间引用，适合 MMIO 和寄存器操作。
+    /// `&raw const` in reference ， MMIO and 。
     pub fn register_raw_ptr(value: u32) -> u32 {
         let ptr = &raw const value;
         // SAFETY: &raw const 直接创建裸指针，适用于已验证有效的寄存器地址
@@ -494,11 +481,13 @@ impl RealRust195Features {
     }
 
     /// 使用 `const {}` 定义寄存器掩码
+    /// `const {}` definition
     pub const fn const_block_register_mask() -> u32 {
         const { 0b1111 }
     }
 
     /// 使用 `c"embedded"` C 字符串字面量
+    /// `c"embedded"` C surface
     pub fn c_str_for_embedded() -> &'static CStr {
         c"embedded"
     }

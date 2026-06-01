@@ -1,5 +1,3 @@
-//! Rust 1.94 LazyCell/LazyLock 新方法完整示例
-//!
 //! 运行方式: rustc --edition 2024 examples/rust_194_lazy_lock_demo.rs && ./rust_194_lazy_lock_demo
 
 #![allow(dead_code)]
@@ -14,6 +12,7 @@ use std::time::{Duration, Instant};
 // =============================================================================
 
 /// 应用配置
+/// application
 #[derive(Debug)]
 pub struct AppConfig {
     database_url: String,
@@ -51,8 +50,7 @@ static CONFIG: LazyLock<AppConfig> = LazyLock::new(|| {
 // =============================================================================
 
 /// 高性能配置访问
-///
-/// Rust 1.94 新增的 get() 方法允许无锁检查初始化状态
+/// performance
 pub(crate) fn get_config_fast() -> Option<&'static AppConfig> {
     // 热路径优化: 使用 get() 进行无锁检查
     LazyLock::get(&CONFIG)
@@ -63,6 +61,8 @@ pub fn get_config() -> &'static AppConfig {
 }
 
 /// 模拟高频调用场景
+/// scenario
+/// 模拟高频Callscenario
 fn hot_path_optimized() {
     println!("\n=== 热路径优化测试 ===");
 
@@ -148,6 +148,7 @@ static CONNECTION_POOL: LazyLock<ConnectionPool> = LazyLock::new(|| {
 });
 
 /// 优化的连接获取
+/// optimization
 pub fn get_connection_fast() -> Option<Connection> {
     // 先检查是否已初始化
     if LazyLock::get(&CONNECTION_POOL).is_some() {
@@ -213,7 +214,6 @@ fn lazy_cell_demo() {
 // 双重检查锁定模式
 // =============================================================================
 
-/// 使用 LazyLock 实现线程安全的单例
 struct Singleton {
     data: String,
 }
@@ -279,6 +279,7 @@ static CACHE: LazyLock<Cache> = LazyLock::new(|| {
 });
 
 /// 带缓存的计算
+/// 带缓存Calculate
 fn expensive_computation(input: &str) -> String {
     // 先检查缓存
     if let Some(cached) = CACHE.get(input) {

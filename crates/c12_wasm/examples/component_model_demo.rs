@@ -1,50 +1,44 @@
-//! WebAssembly Component Model 实战示例
-//!
-//! 本示例展示 Rust 如何编译为 WebAssembly Component Model，
 //! 实现跨语言、跨运行时的可组合模块。
-//!
-//! **背景**: WebAssembly Component Model 于 2025 年底 finalized，
+//! 、runtime combination module 。
 //! Rust 通过 `wasm32-wasip2` 目标和 `cargo-component` 工具提供一级支持。
-//!
 //! **前置条件**:
-//! ```bash
+//! **before condition **:
 //! # 安装 cargo-component
-//! cargo install cargo-component
-//!
 //! # 添加 wasm32-wasip2 目标
-//! rustup target add wasm32-wasip2
-//! ```
+//! # 添加 wasm32-wasip2 goal
 //!
 //! 权威来源:
-//! - [WASI Preview 2](https://github.com/WebAssembly/WASI/tree/main/preview2)
-//! - [Component Model Spec](https://component-model.bytecodealliance.org/)
+//! Source :
+//! 权威source:
 //! - [Rust Blog: wasm32-wasip2 Tier 2](https://blog.rust-lang.org/)
 //!
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo build --example component_model_demo -p c12_wasm --target wasm32-wasip2
 //! wasmtime run target/wasm32-wasip2/examples/component_model_demo.wasm
 //! ```
 
 // ==================== 示例 1: Component Model 核心概念 ====================
 
-/// WebAssembly Component Model 核心概念速览
-///
-/// ## 从 Module 到 Component 的演进
-///
+/// ## from Module to Component 演进
 /// | 特性 | WASM Module (WASI 0.1) | WASM Component (WASI 0.2/Preview 2) |
-/// |------|------------------------|-------------------------------------|
 /// | 接口定义 | 无（宿主直接调用导出函数） | WIT (Wasm Interface Types) |
+/// | definition | （function ） | WIT (Wasm Interface Types) |
 /// | 类型系统 | 仅数字类型 | 完整类型系统（字符串、列表、记录、变体） |
+/// | type system | type | complete type system （、、、volume ） |
+/// | typesystem | 仅数字type | completetypesystem（字符串、列表、记录、变volume） |
 /// | 跨语言组合 | 困难（需 C ABI 约定） | 原生支持（语言无关接口） |
-/// | 资源管理 | 手动 | 基于能力的安全模型 (capability-based) |
+/// | combination | difficult （ C ABI ） | （） |
+/// | 跨语言combination | difficult（需 C ABI 约定） | 原生Supports（语言无关接口） |
+/// | 资源管理 | 手动 | Based on能力安全模型 (capability-based) |
+/// | | | Based on (capability-based) |
 /// | 包管理 | 无 | Warg / OCI registry |
-///
 /// ## 核心概念
+/// ## core concept
 /// - **WIT (Wasm Interface Types)**: 接口定义语言，类似 protobuf/IDL
-/// - **World**: 组件的运行时环境定义（imports + exports）
-/// - **Resource**: 带析构函数的状态ful对象（类似 RAII）
+/// - **World**: 组件runtimeenvironmentdefinition（imports + exports）
 /// - **Capability-based security**: 显式传递能力，而非隐式全局访问
+/// - **Capability-based security**: ，while global
 fn component_model_concepts() {
     println!("--- WebAssembly Component Model 核心概念 ---");
     println!("  Component Model 是 WASM 的下一个演进阶段:");
@@ -56,9 +50,6 @@ fn component_model_concepts() {
 
 // ==================== 示例 2: WIT 接口定义示例 ====================
 
-/// 示例 WIT 接口定义（以下内容为说明性注释，非可编译 Rust 代码）
-///
-/// ```wit
 /// // calculator.wit
 /// package example:calculator@1.0.0;
 ///
@@ -100,17 +91,14 @@ fn wit_interface_example() {
 
 // ==================== 示例 3: Rust 实现 WIT 接口（概念代码） ====================
 
-/// Rust 侧实现 WIT 接口（使用 `cargo-component` 生成的绑定）
-///
 /// 实际开发流程：
+/// actual process ：
 /// 1. 编写 `calculator.wit`
 /// 2. 运行 `cargo component bind` 生成 Rust 绑定
-/// 3. 实现生成的 trait
-///
+/// 2. Run `cargo component bind` Generate Rust 绑定
 /// ```rust,ignore
 /// // 由 cargo-component 自动生成
-/// mod bindings {
-///     wit_bindgen::generate!({
+/// // 由 cargo-component 自动Generate
 ///         world: "calculator-world",
 ///         path: "wit",
 ///     });
@@ -138,7 +126,6 @@ fn wit_interface_example() {
 ///         };
 ///         CalcResult::Ok(result)
 ///     }
-/// }
 ///
 /// bindings::export!(Calculator with_types_in bindings);
 /// ```
@@ -154,9 +141,6 @@ fn rust_wit_implementation() {
 
 // ==================== 示例 4: 使用 wasmtime 运行 Component ====================
 
-/// 在 wasmtime 中运行 Component 的宿主代码（概念代码）
-///
-/// ```rust,ignore
 /// use wasmtime::component::{Component, Linker};
 /// use wasmtime::{Engine, Store};
 ///
@@ -167,8 +151,7 @@ fn rust_wit_implementation() {
 ///
 ///     let mut linker = Linker::new(&engine);
 ///     // ... 链接 WASI 接口 ...
-///
-///     let mut store = Store::new(&engine, ());
+///     //... WASI...
 ///     let (ops, _) = Calculator::instantiate_async(&mut store, &component, &linker).await?;
 ///
 ///     let result = ops.call_eval(&mut store, Op::Add, 1.0, 2.0).await?;
@@ -189,6 +172,7 @@ fn host_component_usage() {
 // ==================== 示例 5: 从 WASI 0.1 迁移到 0.2 ====================
 
 /// WASI 0.1 (Preview 1) vs WASI 0.2 (Preview 2) 对比
+/// WASI 0.1 (Preview 1) vs WASI 0.2 (Preview 2) to比
 fn wasi_migration() {
     println!("\n--- WASI 0.1 → 0.2 迁移要点 ---");
 

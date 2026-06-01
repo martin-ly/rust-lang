@@ -1,10 +1,16 @@
 //! 模型检查模块
-//!
-//! 本模块提供了基于TLA+和Alloy的模型检查功能，包括：
+//! module
+//! 模型Checkmodule
 //! - 状态空间探索
+//! - state space
 //! - 属性验证
+//! - attribute
 //! - 反例生成
+//! -
+//! - 反例Generate
 //! - 可达性分析
+//! - analyze
+//! - 可达性analysis
 use crate::error::NetworkResult;
 use crate::semantics::*;
 use std::collections::{HashMap, HashSet, VecDeque};
@@ -15,10 +21,13 @@ pub struct ModelChecker {
     /// 配置
     config: ModelCheckingConfig,
     /// 状态空间
+    /// state space
     state_space: HashMap<String, NetworkState>,
     /// 状态转换
+    /// state conversion
     transitions: Vec<StateTransition>,
     /// 属性检查器
+    /// attribute
     property_checkers: Vec<Box<dyn PropertyChecker>>,
 }
 
@@ -26,31 +35,42 @@ pub struct ModelChecker {
 #[derive(Debug, Clone, Default)]
 pub struct ModelCheckingConfig {
     /// 最大状态数
+    /// maximum state
     pub max_states: usize,
     /// 超时时间
+    /// time
     pub timeout: Duration,
     /// 启用并行探索
+    /// parallelism
     pub parallel_exploration: bool,
     /// 启用状态压缩
+    /// state compression
+    /// 启用state compression
     pub state_compression: bool,
     /// 详细输出
+    /// 详细Output
     pub verbose: bool,
 }
 
 /// 模型检查结果
+/// result
+/// 模型Checkresult
 #[derive(Debug, Clone)]
 pub struct ModelCheckingResult {
     /// 检查是否成功
     pub success: bool,
     /// 探索的状态数
+    /// state
     pub states_explored: usize,
     /// 发现的违规
     pub violations: Vec<Violation>,
     /// 反例路径
     pub counter_examples: Vec<CounterExample>,
     /// 检查时间
+    /// time
     pub checking_time: Duration,
     /// 内存使用
+    /// memory
     pub memory_usage: usize,
     /// 覆盖度统计
     pub coverage: CoverageStats,
@@ -60,27 +80,39 @@ pub struct ModelCheckingResult {
 #[derive(Debug, Clone)]
 pub struct CounterExample {
     /// 反例ID
+    /// ID
     pub id: String,
     /// 违规的属性
+    /// attribute
+    /// 违规attribute
     pub violated_property: String,
     /// 执行路径
     pub execution_path: Vec<ExecutionStep>,
     /// 违规状态
+    /// state
+    /// 违规state
     pub violating_state: NetworkState,
     /// 反例描述
+    /// describe
+    /// 反例describe
     pub description: String,
 }
 
 /// 执行步骤
+/// step
 #[derive(Debug, Clone)]
 pub struct ExecutionStep {
     /// 步骤序号
+    /// step serial number
     pub step_number: usize,
     /// 状态
+    /// state
     pub state: NetworkState,
     /// 转换
+    /// conversion
     pub transition: Option<StateTransition>,
     /// 时间戳
+    /// time
     pub timestamp: u64,
 }
 
@@ -88,8 +120,10 @@ pub struct ExecutionStep {
 #[derive(Debug, Clone)]
 pub struct CoverageStats {
     /// 状态覆盖度
+    /// state
     pub state_coverage: f64,
     /// 转换覆盖度
+    /// conversion
     pub transition_coverage: f64,
     /// 路径覆盖度
     pub path_coverage: f64,
@@ -109,11 +143,14 @@ impl ModelChecker {
     }
 
     /// 添加属性检查器
+    /// attribute
     pub fn add_property_checker(&mut self, checker: Box<dyn PropertyChecker>) {
         self.property_checkers.push(checker);
     }
 
     /// 添加状态转换
+    /// state conversion
+    /// 添加stateconversion
     pub fn add_transition(&mut self, transition: StateTransition) {
         self.transitions.push(transition);
     }
@@ -150,6 +187,8 @@ impl ModelChecker {
     }
 
     /// 探索状态空间
+    /// state space
+    /// 探索state space
     fn explore_state_space(
         &mut self,
         initial_state: NetworkState,
@@ -238,6 +277,7 @@ impl ModelChecker {
     }
 
     /// 应用状态转换
+    /// application state conversion
     fn apply_transition(
         &self,
         state: &NetworkState,
@@ -257,6 +297,7 @@ impl ModelChecker {
     }
 
     /// 评估守卫条件
+    /// condition
     fn evaluate_guard(&self, guard: &Guard, state: &NetworkState) -> bool {
         match guard {
             Guard::True => true,
@@ -327,6 +368,7 @@ impl ModelChecker {
     }
 
     /// 应用动作
+    /// application
     fn apply_action(&self, action: &Action, state: &mut NetworkState) {
         match action {
             Action::NoOp => {
@@ -398,6 +440,7 @@ impl ModelChecker {
     }
 
     /// 寻找前驱状态
+    /// before state
     fn find_predecessor(
         &self,
         state_id: String,
@@ -439,6 +482,7 @@ impl ModelChecker {
     }
 
     /// 估算内存使用
+    /// memory
     fn estimate_memory_usage(&self) -> usize {
         let state_size = std::mem::size_of::<NetworkState>();
         let transition_size = std::mem::size_of::<StateTransition>();
@@ -448,15 +492,19 @@ impl ModelChecker {
 }
 
 /// 扩展的探索结果
+/// result
 #[derive(Debug, Clone)]
 pub struct ExplorationResult {
     /// 探索的状态数
+    /// state
     pub states_explored: usize,
     /// 发现的违规
     pub violations: Vec<Violation>,
     /// 完整性
+    /// complete
     pub completeness: Completeness,
     /// 探索时间
+    /// time
     pub exploration_time: Duration,
     /// 反例
     pub counter_examples: Vec<CounterExample>,
@@ -465,36 +513,45 @@ pub struct ExplorationResult {
 }
 
 /// TLA+模型检查器
+/// TLA+
 #[allow(dead_code)]
 pub struct TlaModelChecker {
     /// TLA+规范
+    /// TLA+norm
     spec: String,
     /// 配置
     config: TlaConfig,
 }
 
 /// TLA+配置
+/// TLA+
 #[derive(Debug, Clone, Default)]
 #[allow(dead_code)]
 pub struct TlaConfig {
     /// 最大状态数
+    /// maximum state
     pub max_states: usize,
     /// 超时时间
+    /// time
     pub timeout: Duration,
     /// 启用对称约简
+    /// to
     pub symmetry_reduction: bool,
     /// 启用死锁检查
+    /// lock
     pub deadlock_check: bool,
 }
 
 #[allow(dead_code)]
 impl TlaModelChecker {
     /// 创建TLA+模型检查器
+    /// TLA+
     pub fn new(spec: String, config: TlaConfig) -> Self {
         Self { spec, config }
     }
 
     /// 检查TLA+规范
+    /// TLA+norm
     pub fn check_spec(&self) -> NetworkResult<ModelCheckingResult> {
         // 这里应该调用TLA+工具进行实际检查
         // 现在返回模拟结果
@@ -515,6 +572,7 @@ impl TlaModelChecker {
     }
 
     /// 生成TLA+规范
+    /// TLA+norm
     pub fn generate_spec(&self, model: &SemanticModel) -> String {
         format!(
             "EXTENDS Naturals, Sequences, TLC\n\n\
@@ -533,6 +591,7 @@ impl TlaModelChecker {
     }
 
     /// 生成变量声明
+    /// variable
     fn generate_variables(&self, model: &SemanticModel) -> String {
         model
             .state_variables
@@ -543,24 +602,24 @@ impl TlaModelChecker {
     }
 
     /// 生成类型OK谓词
+    /// type OK
     fn generate_type_ok(&self, _model: &SemanticModel) -> String {
         // 简化实现
         "TRUE".to_string()
     }
 
-    /// 生成Init谓词
     fn generate_init(&self, _model: &SemanticModel) -> String {
         // 简化实现
         "TRUE".to_string()
     }
 
-    /// 生成Next谓词
     fn generate_next(&self, _model: &SemanticModel) -> String {
         // 简化实现
         "TRUE".to_string()
     }
 
     /// 生成变量列表
+    /// variable
     fn generate_variable_list(&self, model: &SemanticModel) -> String {
         model
             .state_variables

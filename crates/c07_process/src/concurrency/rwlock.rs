@@ -7,6 +7,7 @@ use std::sync::{Arc, RwLock as StdRwLock};
 use std::time::Instant;
 
 /// 进程安全的读写锁
+/// process rwlock
 #[allow(dead_code)]
 pub struct ProcessRwLock {
     name: String,
@@ -27,6 +28,7 @@ struct RwLockStats {
 
 impl ProcessRwLock {
     /// 创建新的读写锁
+    /// rwlock
     pub fn new(name: &str, config: SyncConfig) -> Self {
         Self {
             name: name.to_string(),
@@ -44,6 +46,7 @@ impl ProcessRwLock {
     }
 
     /// 尝试获取读锁
+    /// lock
     pub fn try_read(&self) -> Option<RwLockReadGuard<'_>> {
         if let Ok(guard) = self.inner.try_read() {
             self.stats
@@ -59,6 +62,7 @@ impl ProcessRwLock {
     }
 
     /// 尝试获取写锁
+    /// lock
     pub fn try_write(&self) -> Option<RwLockWriteGuard<'_>> {
         if let Ok(guard) = self.inner.try_write() {
             self.stats
@@ -74,6 +78,7 @@ impl ProcessRwLock {
     }
 
     /// 获取读锁
+    /// lock
     pub fn read(&self) -> SyncResult<RwLockReadGuard<'_>> {
         let start = Instant::now();
 
@@ -99,6 +104,7 @@ impl ProcessRwLock {
     }
 
     /// 获取写锁
+    /// lock
     pub fn write(&self) -> SyncResult<RwLockWriteGuard<'_>> {
         let start = Instant::now();
 
@@ -124,22 +130,26 @@ impl ProcessRwLock {
     }
 
     /// 检查锁是否被持有
+    /// lock is
     pub fn is_locked(&self) -> bool {
         self.inner.try_read().is_err() && self.inner.try_write().is_err()
     }
 
     /// 获取锁名称
+    /// lock
     pub fn name(&self) -> &str {
         &self.name
     }
 
     /// 获取等待者数量
+    /// etc. quantity
     pub fn waiter_count(&self) -> usize {
         0 // 标准库读写锁不提供等待者数量
     }
 }
 
 /// 读写锁读守卫
+/// rwlock
 #[allow(dead_code)]
 pub struct RwLockReadGuard<'a> {
     guard: std::sync::RwLockReadGuard<'a, ()>,
@@ -155,6 +165,7 @@ impl<'a> Drop for RwLockReadGuard<'a> {
 }
 
 /// 读写锁写守卫
+/// rwlock
 #[allow(dead_code)]
 pub struct RwLockWriteGuard<'a> {
     guard: std::sync::RwLockWriteGuard<'a, ()>,

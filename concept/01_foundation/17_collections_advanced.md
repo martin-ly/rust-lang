@@ -1,3 +1,5 @@
+> **内容分级**: [综述级]
+
 # 高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析
 
 > **受众**: [初学者]

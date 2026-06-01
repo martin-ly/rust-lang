@@ -1,14 +1,17 @@
 //! Rust 1.90 高级异步控制流模块
-//!
-//! 本模块展示了 Rust 1.90 在复杂异步控制流场景中的高级应用：
+//! Rust 1.90 async stream module
 //! - 异步状态机与事件驱动架构
+//! - async state machine and event-driven architecture
 //! - 异步工作流引擎
+//! - async stream
 //! - 异步数据管道处理
+//! - async pipe
 //! - 异步错误恢复机制
+//! - async error recovery mechanism
 //! - 异步资源池管理
+//! - async
 //! - 异步监控和指标收集
-//!
-//! 所有示例都使用 Rust 1.90 的最新特性，并包含详细的注释和最佳实践。
+//! - async and indicator
 use std::collections::{HashMap, VecDeque};
 use std::sync::Arc;
 use std::time::{Duration, Instant};
@@ -18,6 +21,7 @@ use anyhow::{Result, Context};
 use serde::{Deserialize, Serialize};
 
 /// 异步事件类型
+/// async type
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum AsyncEvent {
     DataReceived { id: String, data: Vec<u8> },
@@ -30,6 +34,7 @@ pub enum AsyncEvent {
 }
 
 /// 异步事件处理器枚举
+/// async enum
 #[derive(Debug, Clone)]
 pub enum AsyncEventHandler {
     DataProcessor(AdvancedDataProcessor),
@@ -132,6 +137,7 @@ impl ResourceManager {
 
 
 /// 异步事件总线
+/// async line
 #[allow(dead_code)]
 pub struct AsyncEventBus {
     handlers: Arc<RwLock<Vec<AsyncEventHandler>>>,
@@ -224,6 +230,7 @@ impl AsyncEventBus {
     }
 
     /// 获取指标
+    /// indicator
     pub async fn get_metrics(&self) -> EventMetrics {
         self.metrics.lock().await.clone()
     }
@@ -259,6 +266,7 @@ impl EventMetrics {
 }
 
 /// 异步工作流引擎
+/// async stream
 #[allow(dead_code)]
 pub struct AsyncWorkflowEngine {
     workflows: Arc<RwLock<HashMap<String, AsyncWorkflow>>>,
@@ -317,6 +325,7 @@ impl AsyncWorkflowEngine {
     }
 
     /// 创建新工作流
+    /// stream
     pub async fn create_workflow(&self, id: String, name: String, steps: Vec<WorkflowStep>) -> Result<()> {
         let workflow = AsyncWorkflow {
             id: id.clone(),
@@ -334,6 +343,7 @@ impl AsyncWorkflowEngine {
     }
 
     /// 执行工作流
+    /// stream
     pub async fn execute_workflow(&self, workflow_id: &str) -> Result<()> {
         let _permit = self.execution_semaphore.acquire().await
             .context("获取执行许可失败")?;
@@ -407,6 +417,7 @@ impl AsyncWorkflowEngine {
     }
 
     /// 执行工作流步骤
+    /// stream step
     async fn execute_step(&self, workflow_id: &str, step: &WorkflowStep) -> Result<()> {
         println!("    执行步骤: {} (工作流: {})", step.name, workflow_id);
 
@@ -447,6 +458,8 @@ impl AsyncWorkflowEngine {
     }
 
     /// 获取工作流状态
+    /// stream state
+    /// Get工作streamstate
     pub async fn get_workflow_status(&self, workflow_id: &str) -> Option<WorkflowStatus> {
         let workflows = self.workflows.read().await;
         workflows.get(workflow_id).map(|w| w.status.clone())
@@ -454,6 +467,7 @@ impl AsyncWorkflowEngine {
 }
 
 /// 异步数据管道
+/// async pipe
 #[allow(dead_code)]
 pub struct AsyncDataPipeline {
     stages: Vec<PipelineStage>,
@@ -503,6 +517,8 @@ impl AsyncDataPipeline {
     }
 
     /// 添加管道阶段
+    /// pipe stage
+    /// 添加pipestage
     pub fn add_stage(&mut self, stage: PipelineStage) {
         self.stages.push(stage);
     }
@@ -540,12 +556,14 @@ impl AsyncDataPipeline {
     }
 
     /// 获取管道指标
+    /// pipe indicator
     pub async fn get_metrics(&self) -> PipelineMetrics {
         self.metrics.lock().await.clone()
     }
 }
 
 /// 数据转换处理器
+/// conversion
 #[derive(Debug, Clone)]
 pub struct DataTransformProcessor {
     name: String,
@@ -620,6 +638,7 @@ impl PipelineProcessor {
     }
 
     /// 获取阶段名称
+    /// stage
     pub fn get_stage_name(&self) -> &str {
         match self {
             PipelineProcessor::DataTransform(processor) => &processor.name,
@@ -628,6 +647,7 @@ impl PipelineProcessor {
 }
 
 /// 综合演示高级异步控制流
+/// synthesize demonstration async stream
 pub async fn demonstrate_advanced_async_control_flow_190() -> Result<()> {
     println!("🚀 演示 Rust 1.90 高级异步控制流");
     println!("{}", "=".repeat(60));

@@ -1,14 +1,19 @@
 //! 异步性能基准测试套件
-//!
+//! async Performance benchmark
 //! 本基准测试套件评估各种异步操作和模式的性能：
+//! this benchmark async and performance ：
 //! - 异步任务生成和调度性能
+//! - async task and performance
 //! - 异步同步原语性能
+//! - async synchronous performance
 //! - 异步I/O操作性能
+//! - async I/Operformance
 //! - 并发控制性能
+//! - concurrency performance
 //! - 内存使用和分配性能
-//!
+//! - memory and performance
 //! 运行方式：
-//! ```bash
+//! Run way ：
 //! cargo bench --bench async_benchmarks
 //! ```
 use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
@@ -21,6 +26,7 @@ use tokio::sync::{Mutex, RwLock, Semaphore, mpsc};
 use tokio::time::sleep;
 
 /// 异步任务生成基准测试
+/// async task benchmark
 async fn benchmark_task_spawning(num_tasks: usize) {
     let mut handles = Vec::with_capacity(num_tasks);
 
@@ -38,6 +44,7 @@ async fn benchmark_task_spawning(num_tasks: usize) {
 }
 
 /// 异步计数器基准测试
+/// async benchmark
 async fn benchmark_async_counter(num_operations: usize) {
     let counter = Arc::new(Mutex::new(0));
     let mut handles = Vec::with_capacity(num_operations);
@@ -58,6 +65,7 @@ async fn benchmark_async_counter(num_operations: usize) {
 }
 
 /// 异步读写锁基准测试
+/// async rwlock benchmark
 async fn benchmark_rwlock(num_readers: usize, num_writers: usize) {
     let data = Arc::new(RwLock::new(HashMap::<usize, String>::new()));
     let mut handles = Vec::new();
@@ -89,6 +97,7 @@ async fn benchmark_rwlock(num_readers: usize, num_writers: usize) {
 }
 
 /// 异步通道基准测试
+/// async channel benchmark
 async fn benchmark_channels(num_messages: usize, buffer_size: usize) {
     let (tx, mut rx) = mpsc::channel(buffer_size);
 
@@ -115,6 +124,7 @@ async fn benchmark_channels(num_messages: usize, buffer_size: usize) {
 }
 
 /// 信号量基准测试
+/// semaphore benchmark
 async fn benchmark_semaphore(num_tasks: usize, permits: usize) {
     let semaphore = Arc::new(Semaphore::new(permits));
     let mut handles = Vec::with_capacity(num_tasks);
@@ -136,6 +146,7 @@ async fn benchmark_semaphore(num_tasks: usize, permits: usize) {
 }
 
 /// 异步流处理基准测试
+/// async stream benchmark
 async fn benchmark_stream_processing(num_items: usize) {
     let stream = futures::stream::iter(0..num_items)
         .map(|i| async move {
@@ -150,6 +161,7 @@ async fn benchmark_stream_processing(num_items: usize) {
 }
 
 /// 异步批处理基准测试
+/// async benchmark
 async fn benchmark_batch_processing(num_items: usize, batch_size: usize) {
     let mut batches = Vec::new();
 
@@ -175,6 +187,7 @@ async fn benchmark_batch_processing(num_items: usize, batch_size: usize) {
 }
 
 /// 异步超时基准测试
+/// async benchmark
 async fn benchmark_timeout(num_operations: usize) {
     let mut handles = Vec::with_capacity(num_operations);
 
@@ -200,6 +213,7 @@ async fn benchmark_timeout(num_operations: usize) {
 }
 
 /// 异步重试基准测试
+/// async benchmark
 async fn benchmark_retry(num_operations: usize, max_attempts: u32) {
     let mut handles = Vec::with_capacity(num_operations);
 
@@ -226,6 +240,7 @@ async fn benchmark_retry(num_operations: usize, max_attempts: u32) {
 }
 
 /// 异步缓存基准测试
+/// async benchmark
 async fn benchmark_cache(num_operations: usize, cache_size: usize) {
     let cache = Arc::new(RwLock::new(HashMap::<usize, String>::with_capacity(
         cache_size,
@@ -258,6 +273,7 @@ async fn benchmark_cache(num_operations: usize, cache_size: usize) {
 }
 
 /// 异步事件循环基准测试
+/// async circulation benchmark
 async fn benchmark_event_loop(num_events: usize) {
     let (tx, mut rx) = mpsc::unbounded_channel();
 
@@ -284,6 +300,7 @@ async fn benchmark_event_loop(num_events: usize) {
 }
 
 /// 设置基准测试
+/// benchmark
 fn setup_benchmark(c: &mut Criterion) {
     let rt = tokio::runtime::Runtime::new().unwrap();
 

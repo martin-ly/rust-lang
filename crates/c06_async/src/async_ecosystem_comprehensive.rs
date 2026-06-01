@@ -1,12 +1,19 @@
 //! Rust 异步生态系统全面分析模块
+//! Rust async ecosystem system surface analyze module
 //!
 //! 本模块提供了对Rust异步编程生态系统中各个主要库的全面分析，
+//! This module provides to Rustasync ecosystem system in main library surface analyze ，
 //! 包括：std、smol、tokio等库的概念定义、属性、联系关系、
+//! ：std、smol、tokioetc. library concept definition 、attribute 、、
 //! 区别、使用场景、示例和组合设计模式。
+//! 、scenario 、example and combination design 。
 //!
 //! > **历史说明**: `async-std` 运行时已于 **2025年3月** 停止维护，
+//! > **explain **: `async-std` runtime **20253** ，
 //! > 其仓库已归档。本模块保留 async-std 的对比分析作为历史参考，
+//! > its library 。this module async-std to analyze as reference ，
 //! > 但在新项目中应优先选择 **Tokio** 或 **smol**。
+//! > but in project in **Tokio** or **smol**。
 //! > 详见 [async-rs 归档公告](https://github.com/async-rs/async-std)。
 use anyhow::Result;
 use futures::future::join_all;
@@ -19,31 +26,42 @@ use tokio::task;
 use tokio::time::sleep;
 
 /// 异步生态系统架构分析
+/// async ecosystem system architecture analyze
 ///
 /// 这个结构体展示了不同异步运行时之间的关系和特性
+/// struct async runtime 's and feature
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AsyncEcosystemAnalysis {
     /// 运行时名称
+    /// runtime
     pub runtime_name: String,
     /// 核心特性
+    /// core feature
     pub core_features: Vec<String>,
     /// 性能特征
+    /// performance
     pub performance_characteristics: PerformanceCharacteristics,
     /// 适用场景
+    /// scenario
     pub use_cases: Vec<String>,
     /// 生态系统成熟度
+    /// ecosystem system
     pub ecosystem_maturity: EcosystemMaturity,
     /// 学习曲线
+    /// learn line
     pub learning_curve: LearningCurve,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PerformanceCharacteristics {
     /// 内存使用
+    /// memory
     pub memory_usage: String,
     /// 启动时间
+    /// time
     pub startup_time: String,
     /// 并发性能
+    /// concurrency performance
     pub concurrency_performance: String,
     /// 延迟特征
     pub latency_characteristics: String,
@@ -54,18 +72,23 @@ pub struct EcosystemMaturity {
     /// 社区活跃度
     pub community_activity: String,
     /// 文档质量
+    /// quality
     pub documentation_quality: String,
     /// 第三方库支持
+    /// third library
     pub third_party_support: String,
     /// 长期维护承诺
+    /// long-term
     pub maintenance_commitment: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LearningCurve {
     /// API复杂度
+    /// APIcomplex
     pub api_complexity: String,
     /// 概念理解难度
+    /// concept
     pub concept_difficulty: String,
     /// 迁移难度
     pub migration_difficulty: String,
@@ -74,6 +97,7 @@ pub struct LearningCurve {
 }
 
 /// 异步运行时特性对比分析器
+/// async runtime feature to analyze
 pub struct AsyncRuntimeAnalyzer {
     runtimes: HashMap<String, AsyncEcosystemAnalysis>,
 }
@@ -251,16 +275,19 @@ impl AsyncRuntimeAnalyzer {
     }
 
     /// 获取运行时分析
+    /// runtime analyze
     pub fn get_runtime_analysis(&self, runtime_name: &str) -> Option<&AsyncEcosystemAnalysis> {
         self.runtimes.get(runtime_name)
     }
 
     /// 获取所有运行时分析
+    /// all runtime analyze
     pub fn get_all_analyses(&self) -> &HashMap<String, AsyncEcosystemAnalysis> {
         &self.runtimes
     }
 
     /// 比较两个运行时的特性
+    /// runtime feature
     pub fn compare_runtimes(&self, runtime1: &str, runtime2: &str) -> Option<RuntimeComparison> {
         let analysis1 = self.runtimes.get(runtime1)?;
         let analysis2 = self.runtimes.get(runtime2)?;
@@ -326,6 +353,7 @@ pub struct RuntimeComparison {
 }
 
 /// 异步运行时集成模式演示
+/// async runtime demonstration
 #[allow(unused)]
 pub struct AsyncIntegrationPatterns {
     shared_state: Arc<RwLock<HashMap<String, String>>>,
@@ -341,7 +369,9 @@ impl AsyncIntegrationPatterns {
     }
 
     /// 模式1：运行时适配器模式
+    /// 1：runtime adapter
     /// 为不同的异步运行时提供统一的接口
+    /// as async runtime
     pub async fn runtime_adapter_pattern(&self) -> Result<()> {
         println!("🔄 运行时适配器模式演示");
 
@@ -359,7 +389,9 @@ impl AsyncIntegrationPatterns {
     }
 
     /// 模式2：任务组合模式
+    /// 2：task combination
     /// 将多个异步任务组合成更复杂的任务
+    /// will async task combination complex task
     pub async fn task_composition_pattern(&self) -> Result<()> {
         println!("🔗 任务组合模式演示");
 
@@ -383,7 +415,9 @@ impl AsyncIntegrationPatterns {
     }
 
     /// 模式3：运行时抽象模式
+    /// 3：runtime
     /// 通过抽象接口支持不同的异步运行时
+    /// async runtime
     pub async fn runtime_abstraction_pattern(&self) -> Result<()> {
         println!("🏗️ 运行时抽象模式演示");
 
@@ -402,7 +436,9 @@ impl AsyncIntegrationPatterns {
     }
 
     /// 模式4：异步同步转换模式
+    /// 4：async synchronous conversion
     /// 演示异步和同步代码之间的转换
+    /// demonstration async and synchronous 's conversion
     pub async fn async_sync_conversion_pattern(&self) -> Result<()> {
         println!("🔄 异步同步转换模式演示");
 
@@ -424,7 +460,9 @@ impl AsyncIntegrationPatterns {
     }
 
     /// 模式5：聚合组合设计模式
+    /// 5：aggregation combination design
     /// 演示聚合和组合的设计模式
+    /// demonstration aggregation and combination design
     pub async fn aggregation_composition_pattern(&self) -> Result<()> {
         println!("📊 聚合组合设计模式演示");
 
@@ -508,6 +546,7 @@ impl AsyncIntegrationPatterns {
 }
 
 /// 抽象异步操作
+/// async
 #[derive(Debug)]
 pub struct AbstractAsyncOperation {
     name: String,
@@ -551,6 +590,7 @@ impl DataSource {
 }
 
 /// 异步生态系统综合演示
+/// async ecosystem system synthesize demonstration
 pub async fn demonstrate_async_ecosystem_comprehensive() -> Result<()> {
     println!("🚀 Rust 异步生态系统全面分析演示");
     println!("================================================");

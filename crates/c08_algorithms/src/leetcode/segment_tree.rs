@@ -1,16 +1,22 @@
 //! LeetCode 线段树类算法（结合 Rust 1.92 特性）
+//! LeetCode segment tree algorithm （ Rust 1.92 feature ）
 //!
 //! 本模块实现经典的线段树类 LeetCode 题目，充分利用 Rust 1.92 的新特性。
+//! this module segment tree LeetCode ， Rust 1.92 feature 。
 //!
 //! ## Rust 1.92 特性应用
+//! ## Rust 1.92 feature application
 //!
 //! 1. **性能优化**: 使用线段树进行区间查询和更新
+//! 1. **performance optimization **: segment tree interval and
 //! 2. **内存优化**: 高效的线段树实现
+//! 2. **memory optimization **: efficient segment tree
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 
 // ==================== 数据结构定义 ====================
 
 /// 307. Range Sum Query - Mutable（区域和检索 - 数组可修改）
+/// 307. Range Sum Query - Mutable（area and - ）
 pub struct NumArray {
     tree: Vec<i32>,
     n: usize,
@@ -278,6 +284,7 @@ pub fn falling_squares(positions: Vec<Vec<i32>>) -> Vec<i32> {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有线段树类问题
+/// all segment tree problem
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

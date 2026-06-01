@@ -1,16 +1,26 @@
 //! 自适应锁实现
-//!
+//! adaptive lock
 //! 本模块提供了多种自适应锁实现：
+//! This module provides adaptive lock ：
 //! - 自适应互斥锁
+//! - mutex
 //! - 自适应读写锁
+//! - rwlock
+//! - 自适应rwlock
+//! - rwlock
 //! - 自适应自旋锁
+//! - spinlock
+//! - 自适应spinlock
 //! - 混合锁策略
+//! - lock strategy
+//! - 混合lockstrategy
 use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex, RwLock};
 use std::thread;
 use std::time::{Duration, Instant};
 
 /// 锁性能统计
+/// lock performance
 #[derive(Debug)]
 pub struct LockStats {
     pub total_acquires: AtomicUsize,
@@ -68,8 +78,9 @@ impl LockStats {
 }
 
 /// 自适应互斥锁
-///
+/// mutex
 /// 根据锁的竞争情况自动调整策略
+/// according to lock situation strategy
 pub struct AdaptiveMutex<T> {
     data: Arc<Mutex<T>>,
     stats: Arc<LockStats>,
@@ -158,8 +169,9 @@ impl<T> AdaptiveMutex<T> {
 }
 
 /// 自适应读写锁
-///
+/// rwlock
 /// 根据读写模式自动调整策略
+/// according to strategy
 pub struct AdaptiveRwLock<T> {
     data: Arc<RwLock<T>>,
     stats: Arc<LockStats>,
@@ -235,8 +247,10 @@ impl<T> AdaptiveRwLock<T> {
 }
 
 /// 自适应自旋锁
-///
+/// spinlock
+/// 自适应spinlock
 /// 根据等待时间自动调整自旋策略
+/// according to etc. time strategy
 pub struct AdaptiveSpinLock<T> {
     data: Arc<Mutex<T>>,
     stats: Arc<LockStats>,
@@ -316,8 +330,10 @@ impl<T> AdaptiveSpinLock<T> {
 }
 
 /// 混合锁策略
-///
+/// lock strategy
+/// 混合lockstrategy
 /// 根据锁的使用模式自动选择最佳策略
+/// according to lock strategy
 #[allow(dead_code)]
 pub struct HybridLock<T> {
     data: Arc<Mutex<T>>,
@@ -449,6 +465,7 @@ impl<T> HybridLock<T> {
 }
 
 /// 运行所有自适应锁示例
+/// Run all adaptive lock example
 pub fn demonstrate_adaptive_locks() {
     println!("=== 自适应锁演示 ===");
 

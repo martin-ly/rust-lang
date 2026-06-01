@@ -1,17 +1,23 @@
 //! 开源生态集成示例
-//!
+//! ecosystem example
 //! 本示例展示如何集成和使用主流开源库：
+//! this example and stream library ：
 //! - serde - 序列化/反序列化
+//! - serde - sequence /sequence
 //! - toml - 配置文件解析
+//! - toml -
 //! - chrono - 日期时间处理
+//! - chrono - date time
 //! - regex - 正则表达式
+//! - regex - express
 //! - tracing - 结构化日志和追踪
+//! - tracing - structure and
 //! - anyhow/thiserror - 错误处理
-//!
 //! # 运行前准备
+//! # Run before
 //! 在 Cargo.toml 中添加依赖：
-//! ```toml
-//! [dependencies]
+//! in Cargo.toml in ：
+//! in Cargo.toml in添加依赖：
 //! serde = { version = "1.0", features = ["derive"] }
 //! toml = "0.8"
 //! chrono = { version = "0.4", features = ["serde"] }
@@ -34,8 +40,9 @@ mod serde_examples {
     use std::collections::HashMap;
 
     /// # Serde 序列化最佳实践
-    ///
+    /// # Serde sequence
     /// ## 基本用法
+    /// ## this
     #[derive(Debug, Serialize, Deserialize)]
     pub struct Config {
         // 重命名字段（用于不同命名风格）
@@ -71,6 +78,7 @@ mod serde_examples {
     }
 
     /// ## 自定义序列化
+    /// ## definition sequence
     #[derive(Debug)]
     pub struct SensitiveString(String);
 
@@ -95,6 +103,7 @@ mod serde_examples {
     }
 
     /// ## 枚举序列化模式
+    /// ## enum sequence
     #[derive(Debug, Serialize, Deserialize)]
     #[serde(tag = "type", content = "data")]
     pub enum Event {
@@ -109,6 +118,7 @@ mod serde_examples {
     }
 
     /// ## 运行示例
+    /// ## Run example
     pub fn run_examples() {
         println!("=== Serde 序列化示例 ===\n");
 
@@ -156,25 +166,32 @@ mod toml_examples {
     use std::collections::HashMap;
 
     /// # TOML 配置解析最佳实践
-    ///
+    /// # TOML
     /// ## 配置文件结构
+    /// ## structure
     #[derive(Debug, Serialize, Deserialize)]
     pub struct AppConfig {
         /// 应用基本信息
+        /// application this
         pub app: AppInfo,
 
         /// 服务器配置
+        /// 服务器Configure
         #[serde(default)]
         pub server: ServerConfig,
 
         /// 数据库配置
+        /// database
         pub database: DatabaseConfig,
 
         /// 日志配置（可选）
+        /// （）
+        /// 日志Configure（可选）
         #[serde(default)]
         pub logging: Option<LoggingConfig>,
 
         /// 额外配置（动态键值）
+        /// outside （）
         #[serde(default)]
         pub features: HashMap<String, serde_json::Value>,
     }
@@ -230,8 +247,10 @@ mod toml_examples {
     }
 
     /// ## 配置加载模式
+    /// ##
     impl AppConfig {
         /// 从文件加载配置
+        /// from
         pub fn from_file(path: &str) -> anyhow::Result<Self> {
             let content = std::fs::read_to_string(path)
                 .map_err(|e| anyhow::anyhow!("Failed to read config file: {}", e))?;
@@ -244,6 +263,7 @@ mod toml_examples {
         }
 
         /// 从环境变量覆盖配置
+        /// from environment variable
         pub fn merge_env(&mut self) {
             if let Ok(port) = std::env::var("APP_PORT") {
                 if let Ok(port_num) = port.parse() {
@@ -271,6 +291,7 @@ mod toml_examples {
     }
 
     /// ## 示例 TOML 配置
+    /// ## example TOML
     const SAMPLE_CONFIG: &str = r#"
 [app]
 name = "MyApplication"
@@ -329,8 +350,9 @@ mod chrono_examples {
     use chrono::{DateTime, Duration, Local, NaiveDate, NaiveDateTime, TimeZone, Utc};
 
     /// # Chrono 日期时间处理最佳实践
-    ///
+    /// # Chrono date time
     /// ## 创建日期时间
+    /// ## date time
     pub fn creation_examples() {
         println!("\n=== Chrono 日期时间创建 ===\n");
 
@@ -356,6 +378,7 @@ mod chrono_examples {
     }
 
     /// ## 时间运算
+    /// ## time
     pub fn arithmetic_examples() {
         println!("\n=== Chrono 时间运算 ===\n");
 
@@ -384,6 +407,7 @@ mod chrono_examples {
     }
 
     /// ## 格式化与显示
+    /// ## and display
     pub fn formatting_examples() {
         println!("\n=== Chrono 格式化 ===\n");
 
@@ -405,6 +429,8 @@ mod chrono_examples {
     }
 
     /// ## 时区处理
+    /// ##
+    /// ## 时区Handle
     pub fn timezone_examples() {
         println!("\n=== Chrono 时区处理 ===\n");
 
@@ -421,6 +447,8 @@ mod chrono_examples {
     }
 
     /// ## 实用函数集合
+    /// ## function set
+    /// ## 实用functionset
     pub fn utility_examples() {
         println!("\n=== Chrono 实用函数 ===\n");
 
@@ -461,10 +489,11 @@ mod regex_examples {
     use std::collections::HashMap;
 
     /// # Regex 正则表达式最佳实践
-    ///
+    /// # Regex express
     /// ## 编译和缓存模式
-    ///
+    /// ## and
     /// 注意：正则应该在循环外编译，避免重复编译开销
+    /// ：should in circulation outside ，overhead
     pub struct RegexCache {
         patterns: HashMap<String, Regex>,
     }
@@ -486,6 +515,7 @@ mod regex_examples {
     }
 
     /// ## 常用验证模式
+    /// ##
     pub fn validation_examples() {
         println!("\n=== Regex 验证示例 ===\n");
 
@@ -516,6 +546,7 @@ mod regex_examples {
     }
 
     /// ## 提取和捕获
+    /// ## and
     pub fn extraction_examples() {
         println!("\n=== Regex 提取示例 ===\n");
 
@@ -545,6 +576,7 @@ mod regex_examples {
     }
 
     /// ## 分割和解析
+    /// ## and
     pub fn splitting_examples() {
         println!("\n=== Regex 分割示例 ===\n");
 
@@ -569,11 +601,13 @@ mod regex_examples {
 }
 
 /// # 错误处理最佳实践（使用 anyhow/thiserror）
+/// # error handling （ anyhow/thiserror）
 #[cfg(feature = "error_handling_examples")]
 mod error_handling_examples {
     use thiserror::Error;
 
     /// ## 定义错误类型（thiserror）
+    /// ## definition error type （thiserror）
     #[derive(Error, Debug)]
     pub enum ConfigError {
         #[error("配置文件未找到: {0}")]
@@ -590,6 +624,7 @@ mod error_handling_examples {
     }
 
     /// ## 应用级错误（anyhow）
+    /// ## application （anyhow）
     pub fn application_function() -> anyhow::Result<()> {
         // 使用 anyhow::Context 添加上下文
         let config =

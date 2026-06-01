@@ -8,8 +8,11 @@ use tokio::time::{sleep, timeout};
 use tracing::{debug, error, info, warn};
 
 /// 2025年简化异步测试框架演示
+/// 2025async framework demonstration
 /// 展示实用的异步测试技术和最佳实践
+/// async technique and
 /// 1. 简化异步测试运行器
+/// 1. async Run
 pub struct SimpleAsyncTestRunner {
     tests: Arc<RwLock<Vec<SimpleTestCase>>>,
     results: Arc<RwLock<Vec<SimpleTestResult>>>,
@@ -322,6 +325,7 @@ pub struct TestSummary {
 }
 
 /// 2. 简化异步测试夹具
+/// 2. async
 pub struct SimpleAsyncTestFixture {
     setup_data: Arc<RwLock<HashMap<String, String>>>,
     cleanup_count: Arc<RwLock<u32>>,
@@ -365,6 +369,8 @@ impl SimpleAsyncTestFixture {
 }
 
 /// 3. 简化异步性能测试工具
+/// 3. async performance test tool
+/// 3. 简化asyncperformance testtool
 #[allow(dead_code)]
 pub struct SimpleAsyncPerformanceTester {
     metrics: Arc<RwLock<SimplePerformanceMetrics>>,
@@ -485,6 +491,7 @@ impl SimpleAsyncPerformanceTester {
 }
 
 /// 4. 简化异步测试模拟器
+/// 4. async
 pub struct SimpleAsyncMockService {
     call_count: Arc<RwLock<HashMap<String, u32>>>,
     return_values: Arc<RwLock<HashMap<String, String>>>,
@@ -565,6 +572,7 @@ impl SimpleAsyncMockService {
 }
 
 /// 演示简化异步测试框架
+/// demonstration async framework
 #[tokio::main]
 async fn main() -> Result<()> {
     // 初始化日志

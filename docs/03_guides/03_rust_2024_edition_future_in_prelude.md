@@ -12,7 +12,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 2024 Edition `Future` in Prelude 影响分析](#rust-2024-edition-future-in-prelude-影响分析)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [概述](#概述)
   - [变化详情](#变化详情)
     - [之前（Rust 2021 及之前）](#之前rust-2021-及之前)
@@ -222,7 +222,7 @@ where
 
 - `async fn` 隐式返回实现 `Future` 的类型
 - `.await` 操作依赖 `Future::poll` 方法
-- 异步运行时（Tokio、async-std 等）围绕 `Future` trait 构建
+- 异步运行时（Tokio、smol 等）围绕 `Future` trait 构建
 
 ## 版本兼容性
 >

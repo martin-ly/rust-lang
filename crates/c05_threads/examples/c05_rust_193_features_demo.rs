@@ -1,10 +1,4 @@
-//! Rust 1.93.0 线程与并发相关 API 演示
-//!
-//! 本示例展示 Rust 1.93.0 在线程、并发、任务队列等场景中的新 API：
-//! - VecDeque::pop_front_if / pop_back_if - 条件性弹出，适合任务过滤
 //! - Duration::from_nanos_u128 - 高精度纳秒级计时
-//! - slice::as_array - 固定大小缓冲区的类型安全访问
-//!
 //! 运行: cargo run -p c05_threads --example rust_193_features_demo
 use std::collections::VecDeque;
 use std::sync::mpsc;
@@ -21,7 +15,6 @@ fn main() {
     println!("\n✅ 演示完成");
 }
 
-/// VecDeque::pop_front_if / pop_back_if (Rust 1.93) - 条件性弹出
 fn demonstrate_vecdeque_pop_if() {
     println!("--- VecDeque::pop_front_if / pop_back_if ---");
     let mut queue = VecDeque::from([-1, 2, 3, 5, 150, -2, 99]);

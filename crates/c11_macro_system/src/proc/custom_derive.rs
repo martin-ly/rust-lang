@@ -1,12 +1,12 @@
 //! 自定义派生宏示例
-//!
+//! definition example
 //! 展示如何实现自定义派生宏
+//! definition
 
 use proc_macro2::TokenStream;
 use quote::quote;
 use syn::{parse2, DeriveInput};
 
-/// 生成 CustomDebug 派生实现
 pub fn derive_custom_debug(input: TokenStream) -> TokenStream {
     let input: DeriveInput = parse2(input).expect("Failed to parse input");
     let name = &input.ident;
@@ -23,6 +23,8 @@ pub fn derive_custom_debug(input: TokenStream) -> TokenStream {
 }
 
 /// 生成 Builder 模式派生实现
+/// Builder
+/// Generate Builder 模式派生Implementation of
 pub fn derive_builder(input: TokenStream) -> TokenStream {
     let input: DeriveInput = parse2(input as TokenStream).expect("Failed to parse input");
     let name = &input.ident;

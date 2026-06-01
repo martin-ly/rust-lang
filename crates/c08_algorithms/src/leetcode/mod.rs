@@ -1,16 +1,23 @@
 //! LeetCode 分类算法实现模块
+//! LeetCode classification algorithm module
 //!
 //! 本模块按照 LeetCode 官方分类组织算法，充分利用 Rust 1.91 的新特性
+//! this module LeetCode classification organize algorithm ， Rust 1.91 feature
 //! 提供完整的算法实现、文档说明和示例代码。
+//! complete algorithm 、explain and example 。
 //!
 //! ## LeetCode 分类体系
+//! ## LeetCode classification system
 //!
 //! 本模块按照 LeetCode 官方标签分类：
+//! this module LeetCode classification ：
 //! - Array（数组）
 //! - String（字符串）
+//! - String（）
 //! - Hash Table（哈希表）
 //! - Dynamic Programming（动态规划）
 //! - Math（数学）
+//! - Math（）
 //! - Sorting（排序）
 //! - Greedy（贪心）
 //! - Depth-First Search（深度优先搜索）
@@ -26,6 +33,7 @@
 //! - Design（设计）
 //! - Backtracking（回溯）
 //! - Trie（字典树）
+//! - Trie（tree ）
 //! - Segment Tree（线段树）
 //! - Union Find（并查集）
 //! - Binary Indexed Tree（树状数组）
@@ -37,20 +45,30 @@
 //! - Queue（队列）
 //!
 //! ## Rust 1.91 特性应用
+//! ## Rust 1.91 feature application
 //!
 //! 本模块充分利用 Rust 1.91 的新特性：
+//! this module Rust 1.91 feature ：
 //! - **const 上下文增强**: 编译时算法配置计算
+//! - **const on under **: compile-time algorithm
 //! - **新的稳定 API**: `BufRead::skip_while`、改进的 `ControlFlow`
 //! - **JIT 编译器优化**: 迭代器操作性能提升 10-25%
+//! - **JIT optimization **: performance 10-25%
 //! - **内存分配器优化**: 小对象分配提升 25-30%
+//! - **allocator optimization **: to 25-30%
 //! - **异步迭代器改进**: 性能提升 15-20%
+//! - **async **: performance 15-20%
 //!
 //! ## 文件信息
+//! ##
 //! - 创建日期: 2025-11-01
+//! - date : 2025-11-01
 //! - Rust 版本: 1.91.0
+//! - Rust this : 1.91.0
 //! - Edition: 2024
 
 /// LeetCode 标签枚举
+/// LeetCode enum
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, serde::Serialize, serde::Deserialize)]
 #[non_exhaustive]
 pub enum LeetCodeTag {
@@ -61,44 +79,57 @@ pub enum LeetCodeTag {
     /// 哈希表
     HashTable,
     /// 动态规划
+    /// dynamic programming
     DynamicProgramming,
     /// 数学
     Math,
     /// 排序
+    /// ordering
     Sorting,
     /// 贪心
     Greedy,
     /// 深度优先搜索
+    /// depth-first search
     DepthFirstSearch,
     /// 二分查找
     BinarySearch,
     /// 广度优先搜索
+    /// breadth-first search
     BreadthFirstSearch,
     /// 树
+    /// tree
     Tree,
     /// 矩阵
     Matrix,
     /// 双指针
+    /// pointer
     TwoPointers,
     /// 位操作
     BitManipulation,
     /// 栈
+    /// stack
     Stack,
     /// 堆
+    /// heap
     Heap,
     /// 图
     Graph,
     /// 设计
+    /// design
     Design,
     /// 回溯
     Backtracking,
     /// 字典树
+    /// tree
     Trie,
     /// 线段树
+    /// segment tree
     SegmentTree,
     /// 并查集
+    /// disjoint set union
     UnionFind,
     /// 树状数组
+    /// Fenwick tree
     BinaryIndexedTree,
     /// 滑动窗口
     SlidingWindow,
@@ -107,6 +138,7 @@ pub enum LeetCodeTag {
     /// 递归
     Recursion,
     /// 单调栈
+    /// stack
     MonotonicStack,
     /// 有序映射
     OrderedMap,
@@ -116,6 +148,7 @@ pub enum LeetCodeTag {
 
 impl LeetCodeTag {
     /// 获取标签的中文名称
+    /// in
     pub fn chinese_name(&self) -> &'static str {
         match self {
             LeetCodeTag::Array => "数组",
@@ -186,6 +219,7 @@ impl LeetCodeTag {
     }
 
     /// 获取所有标签
+    /// all
     pub fn all_tags() -> Vec<LeetCodeTag> {
         vec![
             LeetCodeTag::Array,
@@ -222,53 +256,70 @@ impl LeetCodeTag {
 }
 
 /// LeetCode 问题信息
+/// LeetCode problem
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
 pub struct LeetCodeProblem {
     /// 问题编号
+    /// problem number
     pub problem_id: u32,
     /// 问题标题
+    /// problem
     pub title: String,
     /// 问题标题（英文）
+    /// problem （）
     pub title_en: String,
     /// 难度级别（Easy/Medium/Hard）
     pub difficulty: String,
     /// 标签列表
     pub tags: Vec<LeetCodeTag>,
     /// 问题描述
+    /// problem describe
     pub description: String,
     /// 示例
+    /// example
     pub examples: Vec<String>,
     /// 约束条件
+    /// condition
     pub constraints: Vec<String>,
     /// Rust 1.91 特性应用说明
+    /// Rust 1.91 feature application explain
     pub rust_191_features: Vec<String>,
     /// 算法复杂度
+    /// algorithm complex
     pub complexity: ComplexityInfo,
 }
 
 /// 复杂度信息
+/// complex
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
 pub struct ComplexityInfo {
     /// 时间复杂度
+    /// time complexity
     pub time_complexity: String,
     /// 空间复杂度
+    /// space complexity
     pub space_complexity: String,
     /// 说明
+    /// explain
     pub explanation: Option<String>,
 }
 
 /// 算法实现信息
+/// algorithm
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
 pub struct AlgorithmImplementation {
     /// 问题编号
+    /// problem number
     pub problem_id: u32,
     /// 实现类型（同步/并行/异步）
+    /// type （synchronous /parallelism /async ）
     pub implementation_type: ImplementationType,
     /// 代码实现
     pub code: String,
     /// 测试用例
     pub test_cases: Vec<TestCase>,
     /// Rust 1.91 特性说明
+    /// Rust 1.91 feature explain
     pub rust_191_notes: Vec<String>,
 }
 
@@ -280,100 +331,132 @@ pub struct TestCase {
     /// 预期输出
     pub expected_output: String,
     /// 说明
+    /// explain
     pub explanation: Option<String>,
 }
 
 /// 实现类型（复用 topics 模块的定义）
+/// type （ topics module definition ）
 pub use crate::topics::ImplementationType;
 
 /// 数组类算法（结合 Rust 1.91 特性）
+/// algorithm （ Rust 1.91 feature ）
 pub mod array;
 
 /// 字符串类算法（结合 Rust 1.91 特性）
+/// algorithm （ Rust 1.91 feature ）
 pub mod string_algorithms;
 
 /// 哈希表类算法（结合 Rust 1.91 特性）
+/// algorithm （ Rust 1.91 feature ）
 pub mod hash_table;
 
 /// 动态规划类算法（结合 Rust 1.91 特性）
+/// dynamic programming algorithm （ Rust 1.91 feature ）
 pub mod dynamic_programming;
 
 /// 双指针类算法（结合 Rust 1.91 特性）
+/// pointer algorithm （ Rust 1.91 feature ）
 pub mod two_pointers;
 
 /// 二分查找类算法（结合 Rust 1.91 特性）
+/// algorithm （ Rust 1.91 feature ）
 pub mod binary_search;
 
 /// 滑动窗口类算法（结合 Rust 1.91 特性）
+/// algorithm （ Rust 1.91 feature ）
 pub mod sliding_window;
 
 /// 栈类算法（结合 Rust 1.91 特性）
+/// stack algorithm （ Rust 1.91 feature ）
 pub mod stack;
 
 /// 堆类算法（结合 Rust 1.91 特性）
+/// heap algorithm （ Rust 1.91 feature ）
 pub mod heap;
 
 /// 树类算法（结合 Rust 1.91 特性）
+/// tree algorithm （ Rust 1.91 feature ）
 pub mod tree;
 
 /// 图类算法（结合 Rust 1.91 特性）
+/// algorithm （ Rust 1.91 feature ）
 pub mod graph;
 
 /// 回溯类算法（结合 Rust 1.91 特性）
+/// algorithm （ Rust 1.91 feature ）
 pub mod backtracking;
 
 /// 字典树类算法（结合 Rust 1.91 特性）
+/// tree algorithm （ Rust 1.91 feature ）
 pub mod trie;
 
 /// 位操作类算法（结合 Rust 1.92 特性）
+/// algorithm （ Rust 1.92 feature ）
 pub mod bit_manipulation;
 
 /// 数学类算法（结合 Rust 1.92 特性）
+/// algorithm （ Rust 1.92 feature ）
 pub mod math;
 
 /// 排序类算法（结合 Rust 1.92 特性）
+/// ordering algorithm （ Rust 1.92 feature ）
 pub mod sorting;
 
 /// 贪心类算法（结合 Rust 1.92 特性）
+/// algorithm （ Rust 1.92 feature ）
 pub mod greedy;
 
 /// 深度优先搜索类算法（结合 Rust 1.92 特性）
+/// depth-first search algorithm （ Rust 1.92 feature ）
 pub mod depth_first_search;
 
 /// 广度优先搜索类算法（结合 Rust 1.92 特性）
+/// breadth-first search algorithm （ Rust 1.92 feature ）
 pub mod breadth_first_search;
 
 /// 矩阵类算法（结合 Rust 1.92 特性）
+/// algorithm （ Rust 1.92 feature ）
 pub mod matrix;
 
 /// 设计类算法（结合 Rust 1.92 特性）
+/// design algorithm （ Rust 1.92 feature ）
 pub mod design;
 
 /// 链表类算法（结合 Rust 1.92 特性）
+/// algorithm （ Rust 1.92 feature ）
 pub mod linked_list;
 
 /// 递归类算法（结合 Rust 1.92 特性）
+/// categorization algorithm （ Rust 1.92 feature ）
 pub mod recursion;
 
 /// 队列类算法（结合 Rust 1.92 特性）
+/// algorithm （ Rust 1.92 feature ）
 pub mod queue;
 
 /// 并查集类算法（结合 Rust 1.92 特性）
+/// disjoint set union algorithm （ Rust 1.92 feature ）
 pub mod union_find;
 
 /// 单调栈类算法（结合 Rust 1.92 特性）
+/// stack algorithm （ Rust 1.92 feature ）
 pub mod monotonic_stack;
 
 /// 线段树类算法（结合 Rust 1.92 特性）
+/// segment tree algorithm （ Rust 1.92 feature ）
 pub mod segment_tree;
 
 /// 树状数组类算法（结合 Rust 1.92 特性）
+/// Fenwick tree algorithm （ Rust 1.92 feature ）
 pub mod binary_indexed_tree;
 
 /// 有序映射类算法（结合 Rust 1.92 特性）
+/// algorithm （ Rust 1.92 feature ）
 pub mod ordered_map;
 
 /// 获取所有 LeetCode 分类的问题列表
+/// all LeetCode classification problem
 #[allow(unreachable_patterns)] // LeetCodeTag 是 non_exhaustive，未来可能有新值
 pub fn get_all_problems_by_tag(tag: LeetCodeTag) -> Vec<LeetCodeProblem> {
     match tag {
@@ -411,6 +494,7 @@ pub fn get_all_problems_by_tag(tag: LeetCodeTag) -> Vec<LeetCodeProblem> {
 }
 
 /// 获取问题的实现代码
+/// problem
 pub fn get_problem_implementation(
     problem_id: u32,
     implementation_type: ImplementationType,
@@ -437,19 +521,32 @@ pub fn get_problem_implementation(
 }
 
 /// 生成实现代码（根据问题编号）
+/// （according to problem number ）
 ///
 /// 支持80+个常见LeetCode问题的代码生成，包括：
+/// 80+LeetCodeproblem ，：
 /// - 数组类：1, 11, 15, 26, 27, 53, 88, 121, 189, 217, 238, 283, 448, 485, 905, 977
+/// - ：1, 11, 15, 26, 27, 53, 88, 121, 189, 217, 238, 283, 448, 485, 905, 977
 /// - 字符串类：3, 14, 125, 344, 383, 387, 392, 409, 415, 438, 567, 647, 771, 844
+/// - ：3, 14, 125, 344, 383, 387, 392, 409, 415, 438, 567, 647, 771, 844
 /// - 链表类：19, 141, 206, 234, 876
+/// - ：19, 141, 206, 234, 876
 /// - 树类：94, 98, 100, 101, 102, 104, 226, 235, 543, 617
+/// - tree ：94, 98, 100, 101, 102, 104, 226, 235, 543, 617
 /// - 动态规划：53, 70, 121, 198, 300, 322, 509, 1143
+/// - dynamic programming ：53, 70, 121, 198, 300, 322, 509, 1143
 /// - 哈希表：1, 49, 136, 202, 217, 242, 268, 347, 349, 350, 383, 387
+/// - ：1, 49, 136, 202, 217, 242, 268, 347, 349, 350, 383, 387
 /// - 双指针：11, 15, 26, 27, 42, 75, 125, 283, 344
+/// - pointer ：11, 15, 26, 27, 42, 75, 125, 283, 344
 /// - 二分查找：33, 69, 278, 367
+/// - ：33, 69, 278, 367
 /// - 回溯：46, 78
+/// - ：46, 78
 /// - 位操作：136, 268, 371, 461
+/// - ：136, 268, 371, 461
 /// - 其他：56, 69, 75, 88, 200, 202, 215, 226, 234, 235, 242, 268, 300, 322, 344, 347, 349, 350, 367, 371, 383, 387, 392, 409, 415, 438, 448, 461, 485, 509, 543, 567, 617, 647, 739, 771, 844, 905, 977, 994, 1046, 1143
+/// - its ：56, 69, 75, 88, 200, 202, 215, 226, 234, 235, 242, 268, 300, 322, 344, 347, 349, 350, 367, 371, 383, 387, 392, 409, 415, 438, 448, 461, 485, 509, 543, 567, 617, 647, 739, 771, 844, 905, 977, 994, 1046, 1143
 fn generate_implementation_code(
     problem_id: u32,
     _implementation_type: ImplementationType,
@@ -1831,6 +1928,7 @@ fn is_bad_version(_version: i32) -> bool {
 }
 
 /// 生成测试用例（根据问题编号）
+/// （according to problem number ）
 fn generate_test_cases(problem_id: u32) -> Vec<TestCase> {
     match problem_id {
         1 => vec![

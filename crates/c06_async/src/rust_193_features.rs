@@ -1,15 +1,18 @@
 //! Rust 1.93.0 异步编程 特性模块
+//! Rust 1.93.0 async feature module
 #![allow(clippy::incompatible_msrv)]
 
 use std::collections::VecDeque;
 use std::fmt;
 
 /// 使用 `fmt::from_fn` 创建异步日志格式化器
+/// `fmt::from_fn` async
 pub fn create_async_log_formatter(task_id: u64) -> impl fmt::Display {
     fmt::from_fn(move |f: &mut fmt::Formatter<'_>| write!(f, "[async-task-{}]", task_id))
 }
 
 /// 异步风格的 `VecDeque` 条件消费（模拟异步缓冲区）
+/// async `VecDeque` condition （async buffering ）
 pub fn consume_async_buffer(deque: &mut VecDeque<i32>) -> Vec<i32> {
     let mut consumed = Vec::new();
     // 先消费前端小值
@@ -24,6 +27,7 @@ pub fn consume_async_buffer(deque: &mut VecDeque<i32>) -> Vec<i32> {
 }
 
 /// 演示将格式化器用于异步结果输出
+/// demonstration will async result
 pub fn format_async_results(results: &[i32]) -> String {
     let formatter = fmt::from_fn(|f: &mut fmt::Formatter<'_>| {
         write!(f, "results=[")?;

@@ -1,11 +1,14 @@
 //! 类型推断测试
-//!
-//! 测试Rust类型系统的核心特性：
+//! type infer
 //! - 类型推断
+//! - type infer
 //! - 类型注解
+//! - type
 //! - 泛型推断
+//! - generic infer
 
 /// 测试基本类型推断
+/// this type infer
 #[test]
 fn test_basic_type_inference() {
     // 整数类型推断
@@ -22,6 +25,7 @@ fn test_basic_type_inference() {
 }
 
 /// 测试泛型类型推断
+/// generic type infer
 #[test]
 fn test_generic_type_inference() {
     fn identity<T>(x: T) -> T {
@@ -38,6 +42,7 @@ fn test_generic_type_inference() {
 }
 
 /// 测试类型注解
+/// type
 #[test]
 fn test_type_annotations() {
     // 显式类型注解
@@ -54,6 +59,7 @@ fn test_type_annotations() {
 }
 
 /// 测试类型转换
+/// type conversion
 #[test]
 fn test_type_coercion() {
     // 整数提升
@@ -68,6 +74,7 @@ fn test_type_coercion() {
 }
 
 /// 测试Option<T>类型操作
+/// Option<T>type
 #[test]
 fn test_option_type_operations() {
     let some_value: Option<i32> = Some(42);
@@ -79,6 +86,7 @@ fn test_option_type_operations() {
 }
 
 /// 测试Result<T, E>类型操作
+/// Result<T, E>type
 #[test]
 fn test_result_type_operations() {
     let ok_result: Result<i32, &str> = Ok(42);
@@ -90,6 +98,7 @@ fn test_result_type_operations() {
 }
 
 /// 测试切片类型
+/// type
 #[test]
 fn test_slice_types() {
     let arr = [1, 2, 3, 4, 5];
@@ -101,6 +110,7 @@ fn test_slice_types() {
 }
 
 /// 测试动态类型
+/// type
 #[test]
 fn test_dynamic_types() {
     // trait对象动态分发

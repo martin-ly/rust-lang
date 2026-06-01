@@ -12,78 +12,16 @@
 
 ---
 
-## 📑 目录
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-- [Pin 和自引用类型形式化](#pin-和自引用类型形式化)
-  - [📑 目录](#目录)
-  - [📊 目录 {#-目录}](#目录)
-  - [🎯 研究目标 {#-研究目标}](#研究目标)
-    - [核心问题](#核心问题)
-    - [预期成果](#预期成果)
-  - [📚 理论基础 {#-理论基础}](#理论基础)
-    - [Pin 类型](#pin-类型)
-    - [自引用类型](#自引用类型)
-    - [移动语义与 Pin](#移动语义与-pin)
-    - [相关概念](#相关概念)
-    - [堆与栈固定：使用场景区分与设计论证](#堆与栈固定使用场景区分与设计论证)
-    - [理论背景](#理论背景)
-  - [权威来源对齐](#权威来源对齐)
-  - [🔬 形式化定义 {#-形式化定义}](#形式化定义)
-    - [1. Pin 类型形式化](#1-pin-类型形式化)
-    - [2. 自引用类型形式化](#2-自引用类型形式化)
-    - [3. Pin 保证](#3-pin-保证)
-    - [3.1 Unpin Trait 定义](#31-unpin-trait-定义)
-    - [3.2 Drop 与 Pin 的交互](#32-drop-与-pin-的交互)
-    - [3.3 Pin 投影规则](#33-pin-投影规则)
-    - [Rust 对应](#rust-对应)
-  - [⚠️ 反例：违反 Pin 规则 {#️-反例违反-pin-规则}](#反例违反-pin-规则)
-  - [🌳 公理-定理证明树 {#-公理-定理证明树}](#公理-定理证明树)
-    - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
-  - [✅ 证明目标 {#-证明目标}](#证明目标)
-    - [待证明的性质](#待证明的性质)
-    - [证明方法](#证明方法)
-  - [💻 代码示例与实践 {#-代码示例与实践}](#代码示例与实践)
-    - [示例 1: Pin 基础](#示例-1-pin-基础)
-    - [示例 2: 自引用结构](#示例-2-自引用结构)
-    - [示例 3: Future 和 Pin](#示例-3-future-和-pin)
-    - [示例 4: 自引用结构体](#示例-4-自引用结构体)
-    - [示例 5: Pin 投影](#示例-5-pin-投影)
-  - [📖 参考文献 {#-参考文献}](#参考文献)
-    - [学术论文（国际权威）](#学术论文国际权威)
-    - [官方文档](#官方文档)
-    - [相关代码](#相关代码)
-    - [工具资源](#工具资源)
-  - [🔄 研究进展 {#-研究进展}](#研究进展)
-    - [已完成 ✅ {#已完成-}](#已完成)
-    - [进行中 🔄（已完成）](#进行中-已完成)
-    - [计划中 📋（已完成）](#计划中-已完成)
-  - [🔗 系统集成与实际应用 {#-系统集成与实际应用}](#系统集成与实际应用)
-    - [与异步系统的集成](#与异步系统的集成)
-    - [与生命周期的集成](#与生命周期的集成)
-    - [实际应用案例](#实际应用案例)
-    - [相关思维表征](#相关思维表征)
-  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
-  - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
-
 ## 📊 目录 {#-目录}
 >
 > **[来源: Rust Official Docs]**
 
 - [Pin 和自引用类型形式化](#pin-和自引用类型形式化)
-  - [📑 目录](#目录)
-  - [📊 目录 {#-目录}](#目录)
-  - [🎯 研究目标 {#-研究目标}](#研究目标)
+  - [📊 目录 {#-目录}](#-目录--目录)
+  - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
     - [核心问题](#核心问题)
     - [预期成果](#预期成果)
-  - [📚 理论基础 {#-理论基础}](#理论基础)
+  - [📚 理论基础 {#-理论基础}](#-理论基础--理论基础)
     - [Pin 类型](#pin-类型)
     - [自引用类型](#自引用类型)
     - [移动语义与 Pin](#移动语义与-pin)
@@ -91,7 +29,7 @@
     - [堆与栈固定：使用场景区分与设计论证](#堆与栈固定使用场景区分与设计论证)
     - [理论背景](#理论背景)
   - [权威来源对齐](#权威来源对齐)
-  - [🔬 形式化定义 {#-形式化定义}](#形式化定义)
+  - [🔬 形式化定义 {#-形式化定义}](#-形式化定义--形式化定义)
     - [1. Pin 类型形式化](#1-pin-类型形式化)
     - [2. 自引用类型形式化](#2-自引用类型形式化)
     - [3. Pin 保证](#3-pin-保证)
@@ -99,39 +37,38 @@
     - [3.2 Drop 与 Pin 的交互](#32-drop-与-pin-的交互)
     - [3.3 Pin 投影规则](#33-pin-投影规则)
     - [Rust 对应](#rust-对应)
-  - [⚠️ 反例：违反 Pin 规则 {#️-反例违反-pin-规则}](#反例违反-pin-规则)
-  - [🌳 公理-定理证明树 {#-公理-定理证明树}](#公理-定理证明树)
+  - [⚠️ 反例：违反 Pin 规则 {#️-反例违反-pin-规则}](#️-反例违反-pin-规则-️-反例违反-pin-规则)
+  - [🌳 公理-定理证明树 {#-公理-定理证明树}](#-公理-定理证明树--公理-定理证明树)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
-  - [✅ 证明目标 {#-证明目标}](#证明目标)
+  - [✅ 证明目标 {#-证明目标}](#-证明目标--证明目标)
     - [待证明的性质](#待证明的性质)
     - [证明方法](#证明方法)
-  - [💻 代码示例与实践 {#-代码示例与实践}](#代码示例与实践)
+  - [💻 代码示例与实践 {#-代码示例与实践}](#-代码示例与实践--代码示例与实践)
     - [示例 1: Pin 基础](#示例-1-pin-基础)
     - [示例 2: 自引用结构](#示例-2-自引用结构)
     - [示例 3: Future 和 Pin](#示例-3-future-和-pin)
     - [示例 4: 自引用结构体](#示例-4-自引用结构体)
     - [示例 5: Pin 投影](#示例-5-pin-投影)
-  - [📖 参考文献 {#-参考文献}](#参考文献)
+  - [📖 参考文献 {#-参考文献}](#-参考文献--参考文献)
     - [学术论文（国际权威）](#学术论文国际权威)
     - [官方文档](#官方文档)
     - [相关代码](#相关代码)
     - [工具资源](#工具资源)
-  - [🔄 研究进展 {#-研究进展}](#研究进展)
-    - [已完成 ✅ {#已完成-}](#已完成)
+  - [🔄 研究进展 {#-研究进展}](#-研究进展--研究进展)
+    - [已完成 ✅ {#已完成-}](#已完成--已完成-)
     - [进行中 🔄（已完成）](#进行中-已完成)
     - [计划中 📋（已完成）](#计划中-已完成)
-  - [🔗 系统集成与实际应用 {#-系统集成与实际应用}](#系统集成与实际应用)
+  - [🔗 系统集成与实际应用 {#-系统集成与实际应用}](#-系统集成与实际应用--系统集成与实际应用)
     - [与异步系统的集成](#与异步系统的集成)
     - [与生命周期的集成](#与生命周期的集成)
     - [实际应用案例](#实际应用案例)
     - [相关思维表征](#相关思维表征)
-  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
-  - [权威来源索引](#权威来源索引)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [权威来源索引](#权威来源索引)
 
 ---
@@ -820,7 +757,7 @@ async fn use_future() {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-1. **async/await**：编译器生成的自引用 Future、`PhantomPinned`、`Unpin` 与 `!Unpin` 的区分；Tokio/async-std 的 `Pin<Box<dyn Future>>`。
+1. **async/await**：编译器生成的自引用 Future、`PhantomPinned`、`Unpin` 与 `!Unpin` 的区分；Tokio/async-std [已归档] 的 `Pin<Box<dyn Future>>`。
 2. **迭代器与 stream**：`Stream`、自引用迭代器的 `next` 返回 `Option<&'a T>` 与 Pin 的配合。
 3. **与其他语言**：C++ `std::optional`、Swift 的 inout 与 Rust Pin/Unpin 的对比；Rust 通过类型与 Pin 在库层面保证，无需 GC。
 
@@ -934,180 +871,3 @@ async fn use_future() {
 > **[来源: Rustonomicon]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
->
-> **[来源: [Iris Project](https://iris-project.org/)]**
->
-> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**

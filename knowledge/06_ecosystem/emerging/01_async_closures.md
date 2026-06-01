@@ -450,8 +450,8 @@ pub trait AsyncFnOnce<Args>: AsyncFnMut<Args> {
 //     async fn method(&self) -> i32;  // 不稳定
 // }
 
-// ✅ 正确: 使用现有的 async_trait 宏
-#[async_trait::async_trait]
+// ✅ 正确: Rust 1.75+ 原生支持异步 trait
+// （注：dyn Trait 仍需 async-trait 宏，见 AFIDT 1.97+）
 trait MyTrait {
     async fn method(&self) -> i32;
 }

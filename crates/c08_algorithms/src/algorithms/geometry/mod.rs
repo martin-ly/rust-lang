@@ -1,9 +1,12 @@
 //! # 几何算法模块
+//! # geometric algorithm module
 //!
 //! 本模块实现了各种几何算法。
+//! this module geometric algorithm 。
 use serde::{Deserialize, Serialize};
 
 /// 点结构
+/// point structure
 #[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]
 pub struct Point {
     pub x: f64,
@@ -11,10 +14,12 @@ pub struct Point {
 }
 
 /// 几何算法实现
+/// geometric algorithm
 pub struct GeometryAlgorithms;
 
 impl GeometryAlgorithms {
     /// 计算两点之间的距离
+    /// point 's
     pub fn distance(p1: Point, p2: Point) -> f64 {
         ((p1.x - p2.x).powi(2) + (p1.y - p2.y).powi(2)).sqrt()
     }
@@ -66,6 +71,7 @@ impl GeometryAlgorithms {
     }
 
     /// 计算叉积
+    /// cross product
     fn cross_product(p1: Point, p2: Point, p3: Point, p4: Point) -> f64 {
         (p2.x - p1.x) * (p4.y - p3.y) - (p2.y - p1.y) * (p4.x - p3.x)
     }

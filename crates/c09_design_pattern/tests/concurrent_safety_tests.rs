@@ -5,6 +5,7 @@ use std::sync::{Arc, Mutex};
 use std::thread;
 
 /// 测试共享状态并发安全
+/// state concurrency
 #[test]
 #[cfg_attr(miri, ignore)]
 fn test_shared_state_safety() {
@@ -31,6 +32,7 @@ fn test_shared_state_safety() {
 }
 
 /// 测试竞态条件
+/// condition
 #[test]
 fn test_race_conditions() {
     let counter = Arc::new(Mutex::new(0));
@@ -55,6 +57,7 @@ fn test_race_conditions() {
 }
 
 /// 测试内存安全
+/// memory safety
 #[test]
 fn test_memory_safety() {
     let shared = Arc::new(Mutex::new(Vec::<usize>::new()));
@@ -80,6 +83,7 @@ fn test_memory_safety() {
 }
 
 /// 测试原子操作
+/// atomic operation
 #[test]
 fn test_atomic_operations() {
     use std::sync::atomic::{AtomicUsize, Ordering};
@@ -105,6 +109,7 @@ fn test_atomic_operations() {
 }
 
 /// 测试同步原语
+/// synchronous
 #[test]
 fn test_synchronization_primitives() {
     use std::sync::Barrier;
@@ -129,6 +134,7 @@ fn test_synchronization_primitives() {
 }
 
 /// 测试设计模式并发安全
+/// design concurrency
 #[test]
 fn test_design_pattern_safety() {
     let shared = Arc::new(Mutex::new(0));

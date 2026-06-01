@@ -1,7 +1,7 @@
 //! 集成测试
-//!
-//! 本模块包含了 c10_networks 库的集成测试，
+//! 集成Test for
 //! 确保各个模块能够协同工作。
+//! module can 。
 use bytes::Bytes;
 use c10_networks::error::{NetworkError, NetworkResult};
 use c10_networks::packet::buffer::BufferConfig;
@@ -18,6 +18,7 @@ use std::time::Duration;
 use tokio::time::timeout;
 
 /// 测试 TCP 套接字的基本功能
+/// TCP socket this functionality
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_tcp_socket_basic() -> NetworkResult<()> {
@@ -40,6 +41,7 @@ async fn test_tcp_socket_basic() -> NetworkResult<()> {
 }
 
 /// 测试 UDP 套接字的基本功能
+/// UDP socket this functionality
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_udp_socket_basic() -> NetworkResult<()> {
@@ -59,7 +61,7 @@ async fn test_udp_socket_basic() -> NetworkResult<()> {
     Ok(())
 }
 
-/// 测试 HTTP 协议的基本功能
+/// Test for HTTP 协议基thisfunctionality
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_http_protocol_basic() -> NetworkResult<()> {
@@ -101,7 +103,6 @@ async fn test_http_protocol_basic() -> NetworkResult<()> {
     Ok(())
 }
 
-/// 测试 WebSocket 协议的基本功能
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_websocket_protocol_basic() -> NetworkResult<()> {
@@ -135,6 +136,7 @@ async fn test_websocket_protocol_basic() -> NetworkResult<()> {
 }
 
 /// 测试 TCP 连接管理的基本功能
+/// TCP this functionality
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_tcp_connection_management() -> NetworkResult<()> {
@@ -177,6 +179,7 @@ async fn test_tcp_connection_management() -> NetworkResult<()> {
 }
 
 /// 测试 TCP 连接池的基本功能
+/// TCP this functionality
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_tcp_connection_pool() -> NetworkResult<()> {
@@ -208,6 +211,7 @@ async fn test_tcp_connection_pool() -> NetworkResult<()> {
 }
 
 /// 测试数据包处理的基本功能
+/// this functionality
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_packet_processing() -> NetworkResult<()> {
@@ -234,6 +238,7 @@ async fn test_packet_processing() -> NetworkResult<()> {
 }
 
 /// 测试数据包缓冲区的功能
+/// buffering functionality
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_packet_buffer() -> NetworkResult<()> {
@@ -266,6 +271,7 @@ async fn test_packet_buffer() -> NetworkResult<()> {
 }
 
 /// 测试数据包解析和序列化
+/// and sequence
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_packet_serialization() -> NetworkResult<()> {
@@ -292,6 +298,7 @@ async fn test_packet_serialization() -> NetworkResult<()> {
 }
 
 /// 测试错误处理
+/// error handling
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_error_handling() -> NetworkResult<()> {
@@ -327,6 +334,7 @@ async fn test_error_handling() -> NetworkResult<()> {
 }
 
 /// 测试并发处理
+/// concurrency
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_concurrent_processing() -> NetworkResult<()> {
@@ -370,6 +378,7 @@ async fn test_concurrent_processing() -> NetworkResult<()> {
 }
 
 /// 测试性能基准
+/// performance
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_performance_benchmark() -> NetworkResult<()> {
@@ -449,6 +458,7 @@ async fn test_timeout_handling() -> NetworkResult<()> {
 }
 
 /// 测试内存使用
+/// memory
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_memory_usage() -> NetworkResult<()> {

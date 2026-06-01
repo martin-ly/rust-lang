@@ -1,23 +1,21 @@
 //! Rust 1.95 特性 —— 泛型编程场景
-//!
+//! Rust 1.95 feature —— generic scenario
 //! # 概述
-//!
-//! Rust 1.95 在泛型编程方面的增强：
+//! #
 //! - **`cfg_select!`** — 跨平台泛型特化选择
-//! - **`bool: TryFrom<integer>`** — 配置标志的泛型解析
-//! - **`if let` guards** — 泛型约束下的条件模式匹配
+//! - **`cfg_select!`** — platform generic
 
 // ============================================================================
 // 1. cfg_select! 与泛型特化
 // ============================================================================
 
 /// # 跨平台泛型特化
-///
-/// 使用 `cfg_select!` 在编译期选择平台特定的泛型实现。
+/// # platform generic
 pub struct GenericCfgSelectExamples;
 
 impl GenericCfgSelectExamples {
     /// 平台特定的对齐要求（用于泛型缓冲区分配）
+    /// platform to （generic buffering ）
     pub const DEFAULT_ALIGNMENT: usize = cfg_select! {
         target_arch = "x86_64" => 64,   // AVX-512 cache line
         target_arch = "aarch64" => 64,  // ARM cache line
@@ -27,12 +25,14 @@ impl GenericCfgSelectExamples {
         _ => 16,
     };
     /// 平台是否支持原子 64 位操作（影响泛型原子选择）
+    /// platform 64 （impact generic ）
     pub const HAS_ATOMIC_64: bool = cfg_select! {
         target_pointer_width = "64" => true,
         target_arch = "arm" => false, // 需 armv7-a+ 才支持
         _ => true,
     };
     /// 平台特定的指针宽度（用于泛型索引类型）
+    /// platform pointer （generic type ）
     pub const POINTER_WIDTH_BITS: usize = cfg_select! {
         target_pointer_width = "64" => 64,
         target_pointer_width = "32" => 32,
@@ -45,17 +45,16 @@ impl GenericCfgSelectExamples {
 // ============================================================================
 
 /// # 泛型配置解析
-///
-/// `bool: TryFrom<{integer}>` 允许在泛型代码中安全地将整数转为布尔值。
+/// # generic
 pub struct GenericBoolParseExamples;
 
 impl GenericBoolParseExamples {
-    /// 泛型配置项解析：将整数标志转为 bool
     pub fn parse_flag<T: TryInto<bool>>(value: T) -> Result<bool, &'static str> {
         value.try_into().map_err(|_| "invalid boolean flag")
     }
 
     /// 批量解析配置标志
+    /// mark
     pub fn parse_flags<T: TryInto<bool> + Copy>(values: &[T]) -> Result<Vec<bool>, &'static str> {
         values.iter().copied().map(Self::parse_flag).collect()
     }
@@ -66,12 +65,12 @@ impl GenericBoolParseExamples {
 // ============================================================================
 
 /// # 泛型算法中的条件模式匹配
-///
-/// `if let` guards 在泛型约束下提供更精确的模式匹配。
+/// # generic algorithm in condition
 pub struct GenericIfLetGuardExamples;
 
 impl GenericIfLetGuardExamples {
     /// 泛型值过滤：仅处理可解析为特定范围的值
+    /// generic ：as scope
     pub fn filter_in_range<T: std::str::FromStr + PartialOrd>(
         items: &[&str],
         min: T,
@@ -90,6 +89,7 @@ impl GenericIfLetGuardExamples {
     }
 
     /// 泛型结果扁平化：仅保留满足条件的 Ok 值
+    /// generic result ：condition Ok
     pub fn filter_ok_results<T, E>(
         results: Vec<Result<T, E>>,
         predicate: impl Fn(&T) -> bool,

@@ -1,7 +1,10 @@
 //! # 算法验证和证明模块
+//! # algorithm and module
 //!
 //! 本模块提供算法的形式化证明、正确性验证和复杂度分析。
+//! This module provides algorithm 、and complex analyze 。
 //! 确保算法的数学正确性和性能保证。
+//! algorithm and performance 。
 pub mod complexity_analysis;
 pub mod correctness;
 pub mod formal_proofs;
@@ -15,6 +18,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 /// 算法验证结果
+/// algorithm result
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AlgorithmVerificationResult {
     pub algorithm_name: String,
@@ -28,6 +32,7 @@ pub struct AlgorithmVerificationResult {
 }
 
 /// 证明步骤
+/// step
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ProofStep {
     pub step_number: usize,
@@ -38,6 +43,7 @@ pub struct ProofStep {
 }
 
 /// 证明类型
+/// type
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum ProofType {
     Invariant,
@@ -49,6 +55,7 @@ pub enum ProofType {
 }
 
 /// 证明状态
+/// state
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum ProofStatus {
     Pending,
@@ -59,6 +66,7 @@ pub enum ProofStatus {
 }
 
 /// 复杂度分析
+/// complex analyze
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ComplexityAnalysis {
     pub time_complexity: ComplexityBounds,
@@ -70,6 +78,7 @@ pub struct ComplexityAnalysis {
 }
 
 /// 复杂度边界
+/// complex edge
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ComplexityBounds {
     pub lower_bound: String,
@@ -78,6 +87,7 @@ pub struct ComplexityBounds {
 }
 
 /// 测试结果
+/// result
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TestResults {
     pub total_tests: usize,
@@ -98,6 +108,7 @@ pub struct TestCase {
 }
 
 /// 测试状态
+/// state
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum TestStatus {
     Passed,
@@ -107,10 +118,12 @@ pub enum TestStatus {
 }
 
 /// 算法验证器
+/// algorithm
 pub struct AlgorithmVerifier;
 
 impl AlgorithmVerifier {
     /// 验证排序算法的正确性
+    /// sorting algorithm
     pub fn verify_sorting_algorithm<T: Clone + Ord + Send + Sync>(
         algorithm_name: &str,
         sort_fn: impl Fn(&mut [T]) + Send + Sync,
@@ -145,6 +158,7 @@ impl AlgorithmVerifier {
     }
 
     /// 验证搜索算法的正确性
+    /// searching algorithm
     pub fn verify_search_algorithm<T: Clone + Ord + Send + Sync>(
         algorithm_name: &str,
         search_fn: impl Fn(&[T], &T) -> Option<usize> + Send + Sync,
@@ -179,6 +193,7 @@ impl AlgorithmVerifier {
     }
 
     /// 验证图算法的正确性
+    /// graph algorithm
     pub fn verify_graph_algorithm(
         algorithm_name: &str,
         algorithm_fn: impl Fn(&Graph, usize) -> GraphResult + Send + Sync,
@@ -213,6 +228,7 @@ impl AlgorithmVerifier {
     }
 
     /// 验证排序算法正确性
+    /// sorting algorithm
     fn verify_sorting_correctness<T: Clone + Ord>(
         sort_fn: &impl Fn(&mut [T]),
         test_cases: &[Vec<T>],
@@ -235,6 +251,7 @@ impl AlgorithmVerifier {
     }
 
     /// 验证搜索算法正确性
+    /// searching algorithm
     fn verify_search_correctness<T: Clone + Ord>(
         search_fn: &impl Fn(&[T], &T) -> Option<usize>,
         test_cases: &[(Vec<T>, T, Option<usize>)],
@@ -249,6 +266,7 @@ impl AlgorithmVerifier {
     }
 
     /// 验证图算法正确性
+    /// graph algorithm
     fn verify_graph_correctness(
         algorithm_fn: &impl Fn(&Graph, usize) -> GraphResult,
         test_cases: &[(Graph, usize, GraphResult)],
@@ -263,11 +281,13 @@ impl AlgorithmVerifier {
     }
 
     /// 检查数组是否已排序
+    /// ordering
     fn is_sorted<T: Ord>(arr: &[T]) -> bool {
         arr.windows(2).all(|w| w[0] <= w[1])
     }
 
     /// 检查两个数组是否包含相同的元素
+    /// element
     fn has_same_elements<T: Clone + Ord>(arr1: &[T], arr2: &[T]) -> bool {
         if arr1.len() != arr2.len() {
             return false;
@@ -282,6 +302,7 @@ impl AlgorithmVerifier {
     }
 
     /// 比较图算法结果
+    /// graph algorithm result
     fn compare_graph_results(result1: &GraphResult, result2: &GraphResult) -> bool {
         match (result1, result2) {
             (GraphResult::Distances(d1), GraphResult::Distances(d2)) => d1 == d2,
@@ -292,6 +313,7 @@ impl AlgorithmVerifier {
     }
 
     /// 分析排序算法复杂度
+    /// analyze sorting algorithm complex
     fn analyze_sorting_complexity(algorithm_name: &str) -> ComplexityAnalysis {
         match algorithm_name {
             "QuickSort" => ComplexityAnalysis {
@@ -362,6 +384,7 @@ impl AlgorithmVerifier {
     }
 
     /// 分析搜索算法复杂度
+    /// analyze searching algorithm complex
     fn analyze_search_complexity(algorithm_name: &str) -> ComplexityAnalysis {
         match algorithm_name {
             "BinarySearch" => ComplexityAnalysis {
@@ -416,6 +439,7 @@ impl AlgorithmVerifier {
     }
 
     /// 分析图算法复杂度
+    /// analyze graph algorithm complex
     fn analyze_graph_complexity(algorithm_name: &str) -> ComplexityAnalysis {
         match algorithm_name {
             "BFS" | "DFS" => ComplexityAnalysis {
@@ -470,6 +494,7 @@ impl AlgorithmVerifier {
     }
 
     /// 生成排序算法证明
+    /// sorting algorithm
     fn generate_sorting_proof(algorithm_name: &str) -> (bool, Vec<ProofStep>) {
         let mut proof_steps = Vec::new();
 
@@ -561,6 +586,7 @@ impl AlgorithmVerifier {
     }
 
     /// 生成搜索算法证明
+    /// searching algorithm
     fn generate_search_proof(algorithm_name: &str) -> (bool, Vec<ProofStep>) {
         let mut proof_steps = Vec::new();
 
@@ -618,6 +644,7 @@ impl AlgorithmVerifier {
     }
 
     /// 生成图算法证明
+    /// graph algorithm
     fn generate_graph_proof(algorithm_name: &str) -> (bool, Vec<ProofStep>) {
         let mut proof_steps = Vec::new();
 
@@ -673,6 +700,7 @@ impl AlgorithmVerifier {
     }
 
     /// 执行排序算法测试
+    /// sorting algorithm
     fn execute_sorting_tests<T: Clone + Ord>(
         sort_fn: &impl Fn(&mut [T]),
         test_cases: Vec<Vec<T>>,
@@ -716,6 +744,7 @@ impl AlgorithmVerifier {
     }
 
     /// 执行搜索算法测试
+    /// searching algorithm
     fn execute_search_tests<T: Clone + Ord>(
         search_fn: &impl Fn(&[T], &T) -> Option<usize>,
         test_cases: Vec<(Vec<T>, T, Option<usize>)>,
@@ -756,6 +785,7 @@ impl AlgorithmVerifier {
     }
 
     /// 执行图算法测试
+    /// graph algorithm
     fn execute_graph_tests(
         algorithm_fn: &impl Fn(&Graph, usize) -> GraphResult,
         test_cases: Vec<(Graph, usize, GraphResult)>,
@@ -797,6 +827,7 @@ impl AlgorithmVerifier {
 }
 
 /// 图结构（简化定义）
+/// structure （definition ）
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Graph {
     pub vertices: usize,
@@ -804,6 +835,7 @@ pub struct Graph {
 }
 
 /// 图算法结果
+/// graph algorithm result
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum GraphResult {
     Distances(Vec<f64>),
@@ -812,6 +844,7 @@ pub enum GraphResult {
 }
 
 /// 算法验证报告生成器
+/// algorithm
 pub struct VerificationReportGenerator;
 
 impl VerificationReportGenerator {

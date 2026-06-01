@@ -1,31 +1,42 @@
 #![allow(clippy::single_char_add_str)]
 
 //! 测试运行器模块
-//!
+//! Run module
 //! 本模块提供了统一的测试运行接口，
+//! This module provides Run ，
 //! 支持运行不同类型的测试套件。
+//! Run type 。
 use std::time::Instant;
 
 /// 测试运行器配置
+/// Run
 #[derive(Debug, Clone)]
 pub struct TestRunnerConfig {
     /// 是否运行单元测试
+    /// Run
     pub run_unit_tests: bool,
     /// 是否运行集成测试
+    /// Run
     pub run_integration_tests: bool,
     /// 是否运行性能测试
+    /// Run performance test
     pub run_performance_tests: bool,
     /// 是否运行安全测试
+    /// Run
     pub run_security_tests: bool,
     /// 是否运行协议测试
+    /// Run
     pub run_protocol_tests: bool,
     /// 是否运行DNS测试
+    /// Run DNS
     pub run_dns_tests: bool,
     /// 是否跳过网络测试
+    /// network
     pub skip_network_tests: bool,
     /// 是否详细输出
     pub verbose: bool,
     /// 测试超时时间
+    /// time
     pub timeout: Option<std::time::Duration>,
 }
 
@@ -46,6 +57,7 @@ impl Default for TestRunnerConfig {
 }
 
 /// 测试结果
+/// result
 #[derive(Debug, Clone)]
 pub struct TestResult {
     /// 测试名称
@@ -53,14 +65,19 @@ pub struct TestResult {
     /// 是否通过
     pub passed: bool,
     /// 执行时间
+    /// time
     pub duration: std::time::Duration,
     /// 错误信息（如果有）
+    /// error message （if ）
+    /// error message（if有）
     pub error: Option<String>,
     /// 测试类型
+    /// type
     pub test_type: TestType,
 }
 
 /// 测试类型
+/// type
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum TestType {
     Unit,
@@ -72,19 +89,28 @@ pub enum TestType {
 }
 
 /// 测试套件结果
+/// result
 #[derive(Debug, Clone)]
 pub struct TestSuiteResult {
     /// 套件名称
     pub suite_name: String,
     /// 测试结果列表
+    /// result
     pub results: Vec<TestResult>,
     /// 总执行时间
+    /// time
+    /// 总Executetime
     pub total_duration: std::time::Duration,
     /// 通过的测试数量
+    /// quantity
     pub passed_count: usize,
     /// 失败的测试数量
+    /// quantity
+    /// 失败Test forquantity
     pub failed_count: usize,
     /// 跳过的测试数量
+    /// quantity
+    /// 跳过Test forquantity
     pub skipped_count: usize,
 }
 
@@ -100,23 +126,27 @@ impl TestSuiteResult {
     }
 
     /// 是否所有测试都通过
+    /// all
     pub fn all_passed(&self) -> bool {
         self.failed_count == 0
     }
 }
 
 /// 测试运行器
+/// Run
 pub struct TestRunner {
     config: TestRunnerConfig,
 }
 
 impl TestRunner {
     /// 创建新的测试运行器
+    /// Run
     pub fn new(config: TestRunnerConfig) -> Self {
         Self { config }
     }
 
     /// 运行所有测试
+    /// Run all
     pub fn run_all_tests(&self) -> Vec<TestSuiteResult> {
         let mut results = Vec::new();
 
@@ -148,6 +178,8 @@ impl TestRunner {
     }
 
     /// 运行单元测试
+    /// Run
+    /// Run单元Test for
     fn run_unit_tests(&self) -> TestSuiteResult {
         let start = Instant::now();
         let mut results = Vec::new();
@@ -200,6 +232,8 @@ impl TestRunner {
     }
 
     /// 运行集成测试
+    /// Run
+    /// Run集成Test for
     fn run_integration_tests(&self) -> TestSuiteResult {
         let start = Instant::now();
         let mut results = Vec::new();
@@ -250,6 +284,7 @@ impl TestRunner {
     }
 
     /// 运行性能测试
+    /// Run performance test
     fn run_performance_tests(&self) -> TestSuiteResult {
         let start = Instant::now();
         let mut results = Vec::new();
@@ -301,6 +336,8 @@ impl TestRunner {
     }
 
     /// 运行安全测试
+    /// Run
+    /// Run安全Test for
     fn run_security_tests(&self) -> TestSuiteResult {
         let start = Instant::now();
         let mut results = Vec::new();
@@ -352,6 +389,8 @@ impl TestRunner {
     }
 
     /// 运行协议测试
+    /// Run
+    /// Run协议Test for
     fn run_protocol_tests(&self) -> TestSuiteResult {
         let start = Instant::now();
         let mut results = Vec::new();
@@ -404,6 +443,7 @@ impl TestRunner {
     }
 
     /// 运行DNS测试
+    /// Run DNS
     fn run_dns_tests(&self) -> TestSuiteResult {
         let start = Instant::now();
         let mut results = Vec::new();
@@ -503,6 +543,7 @@ impl TestReportGenerator {
 }
 
 /// 测试运行器主函数
+/// Run Main function
 #[test]
 fn test_test_runner() {
     let config = TestRunnerConfig::default();
@@ -538,6 +579,7 @@ fn test_test_runner_config() {
 }
 
 /// 测试结果验证
+/// result
 #[test]
 fn test_test_result() {
     let result = TestResult {
@@ -556,6 +598,7 @@ fn test_test_result() {
 }
 
 /// 测试套件结果验证
+/// result
 #[test]
 fn test_test_suite_result() {
     let results = vec![

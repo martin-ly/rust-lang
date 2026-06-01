@@ -1,6 +1,7 @@
 //! 设计模式模块边界情况测试套件 / Design Patterns Module Edge Cases Test Suite
 
 /// 测试模式组合边界情况
+/// combination edge situation
 #[test]
 fn test_pattern_combination_boundaries() {
     // 测试空模式列表
@@ -21,6 +22,7 @@ fn test_pattern_combination_boundaries() {
 }
 
 /// 测试执行模型边界情况
+/// edge situation
 #[test]
 fn test_execution_model_boundaries() {
     // 测试同步执行模型
@@ -53,6 +55,7 @@ fn test_error_paths() {
 }
 
 /// 测试边界值组合
+/// edge combination
 #[test]
 fn test_boundary_value_combinations() {
     // 测试最小和最大模式数量
@@ -68,6 +71,7 @@ fn test_boundary_value_combinations() {
 }
 
 /// 测试资源耗尽情况
+/// situation
 #[test]
 fn test_resource_exhaustion() {
     // 测试大量模式实例（模拟）
@@ -83,6 +87,7 @@ fn test_resource_exhaustion() {
 }
 
 /// 测试模式状态边界情况
+/// state edge situation
 #[test]
 fn test_pattern_state_boundaries() {
     // 测试初始状态
@@ -99,6 +104,7 @@ fn test_pattern_state_boundaries() {
 }
 
 /// 测试模式性能边界情况
+/// performance edge situation
 #[test]
 fn test_pattern_performance_boundaries() {
     use std::time::Duration;
@@ -113,6 +119,7 @@ fn test_pattern_performance_boundaries() {
 }
 
 /// 测试模式组合复杂度边界情况
+/// combination complex edge situation
 #[test]
 fn test_pattern_complexity_boundaries() {
     // 测试简单模式组合

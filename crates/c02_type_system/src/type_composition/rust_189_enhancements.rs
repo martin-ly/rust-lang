@@ -1,59 +1,69 @@
 //! # Rust 1.89 特性示例 (历史版本)
-//!
+//! # Rust 1.89 feature example (this )
 //! ⚠️ **注意**: 本示例针对 Rust 1.89 版本编写，部分特性在 Rust 1.90 中已有更新。
-//!
+//! ⚠️ ****: this example to Rust 1.89 this ，part feature in Rust 1.90 in 。
 //! ## Rust 1.90 主要更新
-//!
+//! ## Rust 1.90 main
 //! ### 编译器改进
+//! ###
 //! - **LLD 链接器**: Linux x86_64 默认启用，链接速度提升约 2x
+//! - **LLD **: Linux x86_64 ， 2x
 //! - **编译性能**: 增量编译优化，构建速度提升
-//!
+//! - **performance **: optimization ，
+//! - **编译performance**: 增量编译optimization，构建速度提升
+//! - **performance**: optimization，
 //! ### 标准库更新
+//! ### standard library
 //! - `u{n}::checked_sub_signed()` - 新增带符号减法检查方法
+//! - `u{n}::checked_sub_signed()` - symbol method
 //! - `<[T]>::reverse()` - 现在可在 const 上下文中使用
+//! - `<[T]>::reverse()` - present in const on under in
 //! - `f32/f64` 数学函数 - floor/ceil/trunc 等在 const 中可用
-//!
+//! - `f32/f64` 数学function - floor/ceil/trunc etc.in const in可用
 //! ### Lint 改进
+//! ### Lint
 //! - `mismatched_lifetime_syntaxes` - 默认启用，检查生命周期语法一致性
-//!
+//! - `mismatched_lifetime_syntaxes` - ，lifetime consistency
 //! ## 迁移建议
-//!
+//! ##
 //! 1. 更新 Cargo.toml: `rust-version = "1.90"`, `edition = "2024"`
-//! 2. 应用新的稳定 API 和 const 函数增强
 //! 3. 检查并修复新 lint 警告
-//!
+//! 3. and lint warning
 //! 参考: [Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
-//!
 //! ---
 //!
 //! # Rust 1.89 类型组合增强特性实现
-//!
-//! 本模块实现了Rust 1.89版本中引入的新类型系统特性，包括：
+//! # Rust 1.89 type combination feature
 //! - 显式推断的常量泛型参数
+//! - infer constant generic parameter
+//! - 显式inferconstantgeneric parameter
 //! - 不匹配的生命周期语法警告
-//! - 增强的泛型关联类型 (GATs)
+//! - lifetime warning
+//! - 增强genericassociated type (GATs)
 //! - 类型别名实现特征 (TAIT)
+//! - type (TAIT)
 //! - 高级类型组合模式
-//!
+//! - type combination
 //! # 文件信息
+//! #
 //! - 文件: rust_189_enhancements.rs
 //! - 创建日期: 2025-01-27
+//! - date : 2025-01-27
 //! - 版本: 1.0
-//! - Rust版本: 1.89.0
+//! - this : 1.0
+//! - 版this: 1.0
 
 /// Rust 1.89 类型组合增强特性
-///
-/// 本模块提供了Rust 1.89版本中新增的类型系统特性的完整实现，
+/// Rust 1.89 type combination feature
 /// 包括常量泛型推断、生命周期语法检查、GATs等核心功能。
+/// constant generic infer 、lifetime 、GATsetc. core functionality 。
 pub mod rust_189_type_composition {
 
-    /// 1. 增强的泛型关联类型 (Enhanced GATs)
-    ///
-    /// 本trait展示了Rust 1.89中GATs的增强功能，支持生命周期参数化的关联类型。
+    /// 1. 增强genericassociated type (Enhanced GATs)
     /// 这允许更灵活的类型组合和更精确的生命周期管理。
-    ///
+    /// type combination and lifetime 。
     /// # 示例
-    /// ```rust,ignore
+    /// # example
     /// // use c02_type_system::type_composition::rust_189_enhancements::rust_189_type_composition::EnhancedContainer;
     ///
     /// struct MyContainer {
@@ -71,53 +81,57 @@ pub mod rust_189_type_composition {
     ///     fn get_metadata<T: Clone>(&self) -> Option<&Self::Metadata<T>> {
     ///         Some(&"metadata".to_string())
     ///     }
-    /// }
     /// ```
     pub trait EnhancedContainer {
         /// 生命周期参数化的关联类型
-        ///
+        /// lifetime parameter associated type
         /// 这个关联类型可以依赖于生命周期参数，提供更精确的类型控制。
+        /// associated type can lifetime parameter ，type 。
         type Item<'a>
         where
             Self: 'a;
 
         /// 泛型参数化的元数据类型
-        ///
+        /// generic parameter type
         /// 支持泛型参数的关联类型，允许类型级别的组合。
+        /// generic parameter associated type ，type level combination 。
         type Metadata<T>
         where
             T: Clone;
 
         /// 获取生命周期受限的项
-        ///
+        /// lifetime
         /// # 参数
-        /// - `&'a self`: 生命周期受限的self引用
-        ///
+        /// # parameter
         /// # 返回
+        /// #
         /// 返回生命周期与输入相同的项引用
+        /// lifetime and reference
         fn get<'a>(&'a self) -> Option<Self::Item<'a>>;
 
         /// 获取泛型元数据
-        ///
+        /// generic
         /// # 类型参数
-        /// - `T`: 必须实现Clone trait的类型
-        ///
+        /// # type parameter
         /// # 返回
+        /// #
         /// 返回与类型T相关的元数据引用
+        /// and type Treference
         fn get_metadata<T: Clone>(&self) -> Option<&Self::Metadata<T>>;
     }
 
     /// 2. 常量泛型组合类型
-    ///
-    /// 本结构体展示了Rust 1.89中常量泛型的增强功能，支持编译时类型验证和优化。
+    /// 2. constant generic combination type
     /// 常量泛型允许在类型级别进行参数化，提供零运行时开销的类型安全保证。
-    ///
+    /// constant generic in type level parameter ，runtime overhead type 。
     /// # 类型参数
+    /// # type parameter
     /// - `T`: 数组元素的类型
+    /// - `T`: element type
     /// - `N`: 数组长度，必须是编译时常量
-    ///
+    /// - `N`: ，must compile-time constant
     /// # 示例
-    /// ```rust
+    /// # example
     /// use c02_type_system::rust_189_enhancements::rust_189_type_composition::ConstGenericArray;
     ///
     /// let arr = ConstGenericArray::new([1, 2, 3, 4, 5]);
@@ -127,22 +141,21 @@ pub mod rust_189_type_composition {
     #[derive(Debug)]
     pub struct ConstGenericArray<T, const N: usize> {
         /// 内部数组数据
-        ///
+        /// inside
         /// 数组长度在编译时确定，提供类型级别的长度保证。
+        /// in compile-time ，type level 。
         pub data: [T; N],
     }
 
     impl<T, const N: usize> ConstGenericArray<T, N> {
         /// 创建新的常量泛型数组
-        ///
+        /// constant generic
         /// # 参数
-        /// - `data`: 长度为N的数组数据
-        ///
+        /// # parameter
         /// # 返回
-        /// 返回新创建的ConstGenericArray实例
-        ///
+        /// #
         /// # 示例
-        /// ```rust
+        /// # example
         /// use c02_type_system::type_composition::rust_189_enhancements::rust_189_type_composition::ConstGenericArray;
         /// let arr = ConstGenericArray::new([1, 2, 3]);
         /// ```
@@ -151,33 +164,37 @@ pub mod rust_189_type_composition {
         }
 
         /// 获取数组长度
-        ///
         /// 返回编译时确定的数组长度N。
-        ///
+        /// compile-time N。
         /// # 返回
-        /// 数组长度，类型为usize
-        ///
+        /// #
         /// # 性能
+        /// # performance
         /// 此方法在编译时优化为常量，无运行时开销。
+        /// this method in compile-time optimization as constant ，runtime overhead 。
+        /// thismethodincompile-timeoptimizationasconstant，无runtimeoverhead。
         pub fn len(&self) -> usize {
             N
         }
 
         /// 检查数组是否为空
-        ///
+        /// as
         /// 基于编译时常量N判断数组是否为空。
-        ///
+        /// compile-time constant Nas 。
         /// # 返回
-        /// 如果N为0则返回true，否则返回false
-        ///
+        /// #
         /// # 性能
+        /// # performance
         /// 此方法在编译时优化为常量，无运行时开销。
+        /// this method in compile-time optimization as constant ，runtime overhead 。
+        /// thismethodincompile-timeoptimizationasconstant，无runtimeoverhead。
         pub fn is_empty(&self) -> bool {
             N == 0
         }
     }
 
     /// 3. 类型别名实现特征 (TAIT) 组合 - 使用具体类型
+    /// 3. type (TAIT) combination - volume type
     pub type NumberProcessor = i32;
 
     pub fn create_number_processor() -> NumberProcessor {
@@ -185,6 +202,7 @@ pub mod rust_189_type_composition {
     }
 
     /// 4. 高级类型组合模式
+    /// 4. type combination
     pub trait TypeLevelComposition {
         type Input;
         type Output;
@@ -197,6 +215,7 @@ pub mod rust_189_type_composition {
     }
 
     /// 5. 异步类型组合
+    /// 5. async type combination
     pub trait AsyncTypeComposition {
         type Future<T>
         where
@@ -209,6 +228,7 @@ pub mod rust_189_type_composition {
     }
 
     /// 6. 生命周期组合类型
+    /// 6. lifetime combination type
     pub struct LifetimeComposed<'a, 'b, T> {
         pub data: &'a T,
         pub metadata: &'b str,
@@ -229,6 +249,7 @@ pub mod rust_189_type_composition {
     }
 
     /// 7. 智能指针类型组合
+    /// 7. pointer type combination
     #[allow(dead_code)]
     #[derive(Debug)]
     pub struct SmartPointerComposition<T> {
@@ -254,6 +275,8 @@ pub mod rust_189_type_composition {
     }
 
     /// 8. 错误处理类型组合 - 修复类型参数问题
+    /// 8. error handling type combination - type parameter problem
+    /// 8. error handlingtypecombination - 修复typeparameterproblem
     pub type EnhancedResult<T> = Result<T, Box<dyn std::error::Error + Send + Sync>>;
 
     pub trait ErrorComposition {
@@ -267,6 +290,7 @@ pub mod rust_189_type_composition {
     }
 
     /// 9. 迭代器类型组合
+    /// 9. type combination
     pub trait IteratorComposition {
         type Item;
         type IntoIter: Iterator<Item = Self::Item>;
@@ -278,6 +302,7 @@ pub mod rust_189_type_composition {
     }
 
     /// 10. 并发类型组合
+    /// 10. concurrency type combination
     pub trait ConcurrentTypeComposition {
         type ThreadSafe<T>
         where
@@ -292,6 +317,7 @@ pub mod rust_189_type_composition {
 }
 
 /// 使用示例和测试
+/// example and
 #[cfg(test)]
 mod tests {
     use super::rust_189_type_composition::*;

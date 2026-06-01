@@ -2,16 +2,22 @@ use std::cell::Cell;
 use std::sync::OnceLock;
 
 /// 使用Rust 1.89新特性优化的单例模式实现
+/// Rust 1.89feature optimization singleton
 ///
 /// 特性：
+/// feature ：
 /// - 使用OnceLock确保线程安全的单例初始化
+/// - OnceLockthread-safe singleton
 /// - 支持Cell::update进行原子更新操作
+/// - Cell::update
 /// - 提供多种初始化方式
+/// - way
 pub struct Singleton<T> {
     instance: OnceLock<T>,
 }
 
 /// 支持Cell更新的单例变体
+/// Cellsingleton volume
 pub struct CellSingleton<T> {
     instance: Cell<Option<T>>,
 }
@@ -24,6 +30,7 @@ impl<T> Singleton<T> {
     }
 
     /// 获取单例实例，使用闭包进行延迟初始化
+    /// singleton ，
     pub fn get_instance<F>(&self, initializer: F) -> &T
     where
         F: FnOnce() -> T,
@@ -45,6 +52,7 @@ impl<T> CellSingleton<T> {
     }
 
     /// 使用Cell::update进行原子更新
+    /// Cell::update
     pub fn get_or_init<F>(&self, initializer: F) -> T
     where
         F: FnOnce() -> T,
@@ -88,6 +96,7 @@ pub fn test_singleton() {
 }
 
 /// 演示Cell::update的使用
+/// demonstration Cell::update
 #[allow(unused)]
 pub fn test_cell_update() {
     use std::cell::Cell;

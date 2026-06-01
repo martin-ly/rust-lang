@@ -160,7 +160,7 @@ pub trait NetworkStream: AsyncRead + AsyncWrite + Unpin + Send {
   - 并发模式适用场景分析
 
 - **异步运行时对比**
-  - Tokio vs async-std vs smol vs Glommio vs Monoio
+  - Tokio vs smol vs Glommio vs Monoio
   - 15个维度详细对比
   - 运行时性能基准代码
 

@@ -1,115 +1,126 @@
 //! # Rust 1.94.0 类型系统特性实现模块 / Rust 1.94.0 Type System Features Implementation Module
-//!
-//! 本模块实现了 Rust 1.94.0 版本中与类型系统相关的新特性和改进，包括：
-//! This module implements new features and improvements in Rust 1.94.0 related to the type system, including:
-//!
-//! - 增强的类型推断 / Enhanced Type Inference
-//! - 改进的泛型约束处理 / Improved Generic Constraint Handling
-//! - 更精确的借用检查器诊断 / More Precise Borrow Checker Diagnostics
+//! - 增强type inference / Enhanced Type Inference
 //! - Edition 2024 类型系统集成 / Edition 2024 Type System Integration
 //! - 性能优化和编译时改进 / Performance Optimizations and Compile-time Improvements
-//!
 //! # 文件信息
+//! #
 //! - 文件: rust_194_features.rs
 //! - 创建日期: 2026-03-06
+//! - date : 2026-03-06
 //! - 版本: 1.0
-//! - Rust版本: 1.94.0
-//! - Edition: 2024
-//!
+//! - this : 1.0
+//! - 版this: 1.0
 //! # 使用示例
-//!
+//! # example
 //! ```rust
 //! use c02_type_system::rust_194_features::*;
 //!
 //! // 1. 使用增强的类型推断
-//! let processor = TypeProcessor::new();
-//! let result: ProcessedValue<i32, String> = processor.process(42);
+//! // 1. type infer
+//! // 1. Use增强type inference
 //!
 //! // 2. 使用改进的泛型约束
-//! let container = TypedContainer::new("hello");
-//!
+//! // 2. generic
 //! // 3. 使用精确类型验证
-//! let validator = PreciseTypeValidator::new();
-//! assert!(validator.validate::<i32>());
+//! // 3. type
 //! ```
 use std::marker::PhantomData;
 
 // ==================== Rust 1.94 真实特性: 数学常量 ====================
 
 /// # 数学常量 / Mathematical Constants
-///
-/// Rust 1.94.0 为 `f32` 和 `f64` 类型添加了新的数学常量：
+/// # 数学constant / Mathematical Constants
 /// - `EULER_GAMMA` (欧拉-马歇罗尼常数, γ ≈ 0.5772)
+/// - `EULER_GAMMA` (-, γ ≈ 0.5772)
 /// - `GOLDEN_RATIO` (黄金比例, φ ≈ 1.6180)
-///
 /// ## 特性说明
-/// - `EULER_GAMMA`: 定义为 `lim(n→∞) [H_n - ln(n)]`，其中 H_n 是第 n 个调和数
-/// - `GOLDEN_RATIO`: 定义为 `(1 + √5) / 2`，约等于 1.6180339887...
-///
+/// ## feature explain
+/// - `GOLDEN_RATIO`: definitionas `(1 + √5) / 2`，约etc.于 1.6180339887...
 /// ## 使用场景
+/// ## scenario
 /// - 数学计算和算法实现
+/// - and algorithm
 /// - 黄金分割搜索算法
+/// - searching algorithm
+/// - 黄金分割searching algorithm
 /// - 数论和特殊函数计算
+/// - and function computing
 // use std::f32;  // 目前直接使用模块常量
 // use std::f64;
 ///
 /// f32 数学常量模块
+/// f32 constant module
+/// f32 数学constantmodule
 pub mod math_consts_f32 {
     /// 欧拉-马歇罗尼常数 (Euler-Mascheroni constant)
-    ///
     /// 约等于 0.5772156649
-    ///
+    /// etc. 0.5772156649
+    /// 约etc.于 0.5772156649
+    /// etc. 0.5772156649
     /// # 数学定义
-    /// γ = lim(n→∞) [Σ(1/k, k=1..n) - ln(n)]
+    /// # definition
+    /// # 数学definition
     pub const EULER_GAMMA: f32 = 0.577_215_7_f32;
 
     /// 黄金比例 (Golden Ratio)
-    ///
     /// 约等于 1.6180339887
-    ///
+    /// etc. 1.6180339887
+    /// 约etc.于 1.6180339887
+    /// etc. 1.6180339887
     /// # 数学定义
-    /// φ = (1 + √5) / 2
+    /// # definition
+    /// # 数学definition
     pub const GOLDEN_RATIO: f32 = 1.618034_f32;
 
     /// 黄金比例的共轭
-    ///
     /// 约等于 -0.6180339887
-    ///
+    /// etc. -0.6180339887
+    /// 约etc.于 -0.6180339887
+    /// etc. -0.6180339887
     /// # 数学定义
-    /// φ' = (1 - √5) / 2 = 1 - φ = -1/φ
+    /// # definition
+    /// # 数学definition
     pub const GOLDEN_RATIO_CONJUGATE: f32 = -0.618034_f32;
 }
 
 /// f64 数学常量模块
+/// f64 constant module
+/// f64 数学constantmodule
 pub mod math_consts_f64 {
     /// 欧拉-马歇罗尼常数 (Euler-Mascheroni constant)
-    ///
     /// 约等于 0.5772156649015329
-    ///
+    /// etc. 0.5772156649015329
+    /// 约etc.于 0.5772156649015329
+    /// etc. 0.5772156649015329
     /// # 数学定义
-    /// γ = lim(n→∞) [Σ(1/k, k=1..n) - ln(n)]
+    /// # definition
+    /// # 数学definition
     pub const EULER_GAMMA: f64 = 0.5772156649015329_f64;
 
     /// 黄金比例 (Golden Ratio)
-    ///
     /// 约等于 1.618033988749895
-    ///
+    /// etc. 1.618033988749895
+    /// 约etc.于 1.618033988749895
+    /// etc. 1.618033988749895
     /// # 数学定义
-    /// φ = (1 + √5) / 2
+    /// # definition
+    /// # 数学definition
     pub const GOLDEN_RATIO: f64 = 1.618033988749895_f64;
 
     /// 黄金比例的共轭
-    ///
     /// 约等于 -0.6180339887498949
-    ///
+    /// etc. -0.6180339887498949
+    /// 约etc.于 -0.6180339887498949
+    /// etc. -0.6180339887498949
     /// # 数学定义
-    /// φ' = (1 - √5) / 2 = 1 - φ = -1/φ
+    /// # definition
+    /// # 数学definition
     pub const GOLDEN_RATIO_CONJUGATE: f64 = -0.6180339887498949_f64;
 }
 
 /// 黄金分割搜索计算器
-///
 /// 使用 GOLDEN_RATIO 进行区间缩小搜索
+/// GOLDEN_RATIO interval
 pub struct GoldenSectionSearch {
     tolerance: f64,
     max_iterations: usize,
@@ -125,14 +136,19 @@ impl GoldenSectionSearch {
     }
 
     /// 在区间内搜索函数最小值
-    ///
+    /// in interval inside function minimum
     /// # 参数
+    /// # parameter
     /// - `f`: 目标函数
+    /// - `f`: goal function
     /// - `a`: 区间左端点
+    /// - `a`: interval point
     /// - `b`: 区间右端点
-    ///
+    /// - `b`: interval point
     /// # 返回
+    /// #
     /// 近似最小值点的 x 坐标
+    /// minimum point x coordinate
     pub fn find_minimum<F>(&self, mut f: F, mut a: f64, mut b: f64) -> f64
     where
         F: FnMut(f64) -> f64,
@@ -170,8 +186,7 @@ impl GoldenSectionSearch {
 }
 
 /// 计算调和数
-///
-/// H_n = 1 + 1/2 + 1/3 + ... + 1/n
+/// and
 #[allow(dead_code)]
 pub fn harmonic_number(n: u64) -> f64 {
     if n == 0 {
@@ -182,8 +197,9 @@ pub fn harmonic_number(n: u64) -> f64 {
 }
 
 /// 使用欧拉-马歇罗尼常数近似计算调和数
-///
+/// -and
 /// 对于大 n，H_n ≈ ln(n) + γ + 1/(2n)
+/// to于大 n，H_n ≈ ln(n) + γ + 1/(2n)
 #[allow(dead_code)]
 pub fn harmonic_number_approx(n: u64) -> f64 {
     if n == 0 {
@@ -196,31 +212,27 @@ pub fn harmonic_number_approx(n: u64) -> f64 {
 
 // ==================== Rust 1.94 真实特性: char 到 usize 转换 ====================
 
-/// # char 到 usize 的转换 / char to usize Conversion
-///
-/// Rust 1.94.0 为 `char` 类型实现了 `TryFrom<char> for usize`，
-/// 允许将 Unicode 标量值转换为 usize。
-///
+/// Allowswill Unicode 标量值conversionas usize。
 /// ## 特性说明
-/// - `char` 在 Rust 中表示 Unicode 标量值，范围是 0x0000 到 0xD7FF 和 0xE000 到 0x10FFFF
-/// - 转换使用 `TryFrom` trait，因为某些平台上的 usize 可能无法容纳所有 char 值
-/// - 在 64 位平台上，所有 char 值都可以成功转换为 usize
-///
+/// ## feature explain
 /// ## 使用场景
+/// ## scenario
 /// - Unicode 字符处理
+/// - Unicode
+/// - Unicode 字符Handle
 /// - 字符编码转换
+/// - conversion
+/// - 字符Encodeconversion
 /// - 字符集索引
-///
+/// -
 /// ## 注意
-/// 在 Rust 1.94 之前的版本中，可以直接使用 `c as usize` 进行转换，
-/// 因为 char 的 Unicode 标量值范围 (0..=0x10FFFF) 在 usize 的范围内。
-/// 将 char 转换为 usize
-///
+/// ##
+/// because char Unicode 标量值range (0..=0x10FFFF) in usize rangeinside。
 /// 在 Rust 1.94 中，可以直接使用 `usize::try_from(c)`。
 /// 在此之前，可以使用 `c as usize` 或此包装函数。
-///
+/// in this 's before ，can `c as usize` or this function 。
 /// # 示例
-/// ```
+/// # example
 /// use c02_type_system::rust_194_features::char_to_usize;
 /// let c = 'A';
 /// let value = char_to_usize(c);
@@ -232,26 +244,31 @@ pub fn char_to_usize(c: char) -> usize {
     usize::try_from(c).unwrap_or(0)
 }
 
-/// 将字符串中所有字符转换为 usize 值
 #[allow(dead_code)]
 pub fn string_to_char_values(s: &str) -> Vec<usize> {
     s.chars().map(char_to_usize).collect()
 }
 
 /// Unicode 字符信息结构
+/// Unicode structure
+/// Unicode 字符信息structure
 #[derive(Debug, Clone, PartialEq)]
 pub struct UnicodeCharInfo {
     /// 字符本身
+    /// this
     pub character: char,
     /// Unicode 标量值
     pub scalar_value: usize,
-    /// 是否为 ASCII 字符
     pub is_ascii: bool,
     /// 字符分类
+    /// classification
+    /// 字符classification
     pub category: CharCategory,
 }
 
 /// 字符分类
+/// classification
+/// 字符classification
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum CharCategory {
     /// 控制字符
@@ -261,15 +278,20 @@ pub enum CharCategory {
     /// 数字
     Digit,
     /// 标点符号
+    /// point symbol
+    /// 标pointsymbol
     Punctuation,
     /// 空白字符
     Whitespace,
     /// 其他
+    /// its
+    /// its他
     Other,
 }
 
 impl UnicodeCharInfo {
     /// 从 char 创建字符信息
+    /// from char
     pub fn from_char(c: char) -> Option<Self> {
         // Rust 1.94: 使用 try_from 进行安全转换
         let scalar_value = usize::try_from(c).unwrap_or(0);
@@ -297,6 +319,7 @@ impl UnicodeCharInfo {
     }
 
     /// 获取十六进制表示
+    /// tabulation
     pub fn hex_representation(&self) -> String {
         format!("U+{:04X}", self.scalar_value)
     }
@@ -304,27 +327,22 @@ impl UnicodeCharInfo {
 
 // ==================== 1. 增强的类型推断 ====================
 
-/// # 1. 增强的类型推断 / Enhanced Type Inference
+/// # 1. 增强type inference / Enhanced Type Inference
 ///
-/// Rust 1.94.0 进一步改进了类型推断系统，使编译器能够更智能地推断复杂类型：
-/// Rust 1.94.0 further improves the type inference system, allowing the compiler to
-/// more intelligently infer complex types:
-///
-/// - 更好的闭包类型推断 / Better closure type inference
-/// - 改进的泛型方法推断 / Improved generic method inference
-/// - 更智能的关联类型推断 / Smarter associated type inference
-///
+/// - 更好closuretype inference / Better closure type inference
+/// - 改进genericmethodinfer / Improved generic method inference
+/// - 更智能关联type inference / Smarter associated type inference
 /// 类型处理器 - 演示增强的类型推断
-///
-/// Rust 1.94.0: 改进的类型推断使得复杂的泛型模式更易于使用
+/// type - demonstration type infer
 pub struct TypeProcessor<T> {
     _phantom: PhantomData<T>,
 }
 
 impl<T> TypeProcessor<T> {
     /// 创建新的类型处理器
-    ///
+    /// type
     /// Rust 1.94.0: 类型推断改进使得显式类型标注更少需要
+    /// Rust 1.94.0: type infer type
     pub const fn new() -> Self {
         Self {
             _phantom: PhantomData,
@@ -332,8 +350,8 @@ impl<T> TypeProcessor<T> {
     }
 
     /// 处理值（演示类型推断）
-    ///
-    /// Rust 1.94.0: 改进的返回类型推断
+    /// （demonstration type infer ）
+    /// Rust 1.94.0: 改进Returntype inference
     pub fn process<U>(&self, value: T) -> ProcessedValue<T, U>
     where
         T: Clone,
@@ -346,8 +364,9 @@ impl<T> TypeProcessor<T> {
     }
 
     /// 转换类型（演示高级类型推断）
-    ///
-    /// Rust 1.94.0: 更智能的关联类型推断
+    /// conversion type （demonstration type infer ）
+    /// conversiontype（Demonstration of高级type inference）
+    /// Rust 1.94.0: 更智能关联type inference
     pub fn transform<F, R>(&self, value: T, f: F) -> R
     where
         F: FnOnce(T) -> R,
@@ -363,8 +382,8 @@ impl<T> Default for TypeProcessor<T> {
 }
 
 /// 处理后的值类型
-///
-/// Rust 1.94.0: 改进的泛型类型推断
+/// after type
+/// Rust 1.94.0: 改进generictype inference
 #[derive(Debug, Clone)]
 pub struct ProcessedValue<T, U> {
     pub original: T,
@@ -379,32 +398,28 @@ impl<T: PartialEq, U> PartialEq for ProcessedValue<T, U> {
 
 // ==================== 2. 改进的泛型约束处理 ====================
 
-/// # 2. 改进的泛型约束处理 / Improved Generic Constraint Handling
-///
-/// Rust 1.94.0 简化了复杂的泛型约束表达式，提高了可读性：
-/// Rust 1.94.0 simplifies complex generic constraint expressions for better readability:
-/// 类型容器 Trait - 演示改进的约束处理
-///
-/// Rust 1.94.0: 更清晰的约束语法
 pub trait TypedContainerTrait {
     /// 元素类型 - 多个边界约束
+    /// element type - edge
     type Item: Clone + Send + Sync + 'static;
 
     /// 获取容器大小
     fn len(&self) -> usize;
 
     /// 检查是否为空
+    /// as
     fn is_empty(&self) -> bool {
         self.len() == 0
     }
 
     /// 获取元素引用
+    /// element reference
     fn get(&self, index: usize) -> Option<&Self::Item>;
 }
 
 /// 泛型类型容器实现
-///
-/// Rust 1.94.0: 改进的约束传播
+/// generic type
+/// Rust 1.94.0: 改进约束propagation
 #[derive(Debug, Clone)]
 pub struct TypedContainer<T: Clone + Send + Sync + 'static> {
     data: Vec<T>,
@@ -412,16 +427,20 @@ pub struct TypedContainer<T: Clone + Send + Sync + 'static> {
 
 impl<T: Clone + Send + Sync + 'static> TypedContainer<T> {
     /// 创建新的类型容器
+    /// type
     pub fn new(value: T) -> Self {
         Self { data: vec![value] }
     }
 
     /// 从向量创建
+    /// from
     pub fn from_vec(data: Vec<T>) -> Self {
         Self { data }
     }
 
     /// 添加元素
+    /// element
+    /// 添加element
     pub fn push(&mut self, value: T) {
         self.data.push(value);
     }
@@ -432,8 +451,7 @@ impl<T: Clone + Send + Sync + 'static> TypedContainer<T> {
     }
 
     /// 映射操作
-    ///
-    /// Rust 1.94.0: 改进的闭包类型推断
+    /// Rust 1.94.0: 改进closuretype inference
     pub fn map<F, R>(&self, f: F) -> TypedContainer<R>
     where
         F: Fn(&T) -> R,
@@ -466,23 +484,19 @@ impl<T: Clone + Send + Sync + 'static + Default> Default for TypedContainer<T> {
 // ==================== 3. 精确类型验证器 ====================
 
 /// # 3. 精确类型验证器 / Precise Type Validator
-///
-/// Rust 1.94.0 提供了更精确的类型系统验证工具：
-/// Rust 1.94.0 provides more precise type system validation tools:
 /// 类型验证器
-///
-/// Rust 1.94.0: 增强的类型系统验证
+/// type
 pub struct PreciseTypeValidator;
 
 impl PreciseTypeValidator {
     /// 创建新的类型验证器
+    /// type
     pub const fn new() -> Self {
         Self
     }
 
     /// 验证类型是否满足约束
-    ///
-    /// Rust 1.94.0: 更精确的类型约束检查
+    /// type
     #[allow(clippy::extra_unused_type_parameters)]
     pub fn validate<T>(&self) -> bool
     where
@@ -494,15 +508,14 @@ impl PreciseTypeValidator {
     }
 
     /// 验证类型大小
-    ///
-    /// Rust 1.94.0: 改进的编译时类型大小验证
+    /// type
     pub fn check_size<T>(&self) -> usize {
         std::mem::size_of::<T>()
     }
 
     /// 验证类型对齐
-    ///
-    /// Rust 1.94.0: 增强的对齐验证
+    /// type to
+    /// Rust 1.94.0: 增强to齐Verify
     pub fn check_alignment<T>(&self) -> usize {
         std::mem::align_of::<T>()
     }
@@ -517,12 +530,9 @@ impl Default for PreciseTypeValidator {
 // ==================== 4. Edition 2024 类型系统集成 ====================
 
 /// # 4. Edition 2024 类型系统集成 / Edition 2024 Type System Integration
-///
-/// Rust 1.94.0 与 Edition 2024 的深度集成：
-/// Rust 1.94.0 deep integration with Edition 2024:
-/// Edition 2024 兼容的类型包装器
-///
+/// Rust 1.94.0 and Edition 2024 深度集成：
 /// Rust 1.94.0: Edition 2024 类型系统优化
+/// Rust 1.94.0: Edition 2024 type system optimization
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Edition2024Wrapper<T> {
     value: T,
@@ -538,8 +548,10 @@ pub enum Edition {
 
 impl<T> Edition2024Wrapper<T> {
     /// 创建 Edition 2024 包装器
-    ///
+    /// Edition 2024
+    /// Create Edition 2024 包装器
     /// Rust 1.94.0: 默认使用 Edition 2024
+    /// Rust 1.94.0: 默认Use Edition 2024
     pub const fn new(value: T) -> Self {
         Self {
             value,
@@ -547,18 +559,20 @@ impl<T> Edition2024Wrapper<T> {
         }
     }
 
-    /// 创建特定 Edition 的包装器
     pub fn with_edition(value: T, edition: Edition) -> Self {
         Self { value, edition }
     }
 
     /// 获取值引用
+    /// reference
+    /// Get值reference
     #[inline]
     pub fn get(&self) -> &T {
         &self.value
     }
 
     /// 获取值（消耗自身）
+    /// （）
     pub fn into_inner(self) -> T {
         self.value
     }
@@ -568,8 +582,6 @@ impl<T> Edition2024Wrapper<T> {
         self.edition
     }
 
-    /// 检查是否为 Edition 2024
-    ///
     /// Rust 1.94.0: Edition 2024 优化特性
     pub fn is_edition_2024(&self) -> bool {
         self.edition == Edition::Edition2024
@@ -579,29 +591,34 @@ impl<T> Edition2024Wrapper<T> {
 // ==================== Rust 1.94 真实特性: array_windows ====================
 
 /// # array_windows - 切片数组窗口迭代器
-///
-/// Rust 1.94.0 为切片添加了 `array_windows` 方法，允许将切片转换为固定大小数组的窗口迭代器。
+/// # array_windows -
 /// 这在处理类型安全的数据序列时非常有用。
-///
+/// in type sequence useful 。
 /// ## 类型安全特性
+/// ## type feature
 /// - 窗口大小 N 是编译时常量，保证类型安全
+/// - N compile-time constant ，type
 /// - 迭代器产生 `&[T; N]` 数组引用，避免运行时边界检查
+/// - `&[T; N]` reference ，runtime edge
 /// - 编译器可以优化固定大小的数组操作
-///
+/// - can optimization
 /// ## 使用场景
+/// ## scenario
 /// - 类型安全的滑动窗口计算
+/// - type
 /// - 编译时验证的序列模式匹配
+/// - compile-time sequence
 /// - 高性能数值计算
-///
+/// - performance
 /// 类型安全的滑动窗口分析器
-///
-/// 使用 array_windows 实现编译时确定窗口大小的分析器
+/// type analyze
 pub struct WindowAnalyzer;
 
 impl WindowAnalyzer {
     /// 检测序列中的模式
-    ///
+    /// sequence in
     /// 使用 const 泛型确保窗口大小在编译时已知
+    /// const generic in compile-time
     pub fn detect_pattern<T, const N: usize>(
         data: &[T],
         predicate: impl Fn(&[T; N]) -> bool,
@@ -613,8 +630,8 @@ impl WindowAnalyzer {
     }
 
     /// 计算滑动窗口统计
-    ///
     /// 类型安全：窗口大小 N 在编译时确定
+    /// type ： N in compile-time
     pub fn window_statistics<T, const N: usize>(data: &[T]) -> WindowStats<T>
     where
         T: Copy + std::ops::Add<Output = T> + std::ops::Div<f64, Output = T>,
@@ -634,26 +651,32 @@ impl WindowAnalyzer {
 }
 
 /// 窗口统计结果
+/// result
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct WindowStats<T> {
     /// 窗口大小
     pub window_size: usize,
     /// 窗口数量
+    /// quantity
+    /// 窗口quantity
     pub window_count: usize,
     /// 求和结果
+    /// and result
+    /// 求andresult
     pub sum: T,
 }
 
 /// 类型安全的序列验证器
-///
+/// type sequence
 /// 使用 array_windows 进行编译时类型检查
+/// array_windows compile-time type
 pub struct SequenceValidator;
 
 impl SequenceValidator {
     /// 验证序列是否单调递增
-    ///
+    /// sequence
     /// # 类型参数
-    /// - `T`: 实现 PartialOrd 的元素类型
+    /// # type parameter
     pub fn is_monotonically_increasing<T>(data: &[T]) -> bool
     where
         T: PartialOrd,
@@ -662,6 +685,7 @@ impl SequenceValidator {
     }
 
     /// 验证序列是否单调递减
+    /// sequence
     pub fn is_monotonically_decreasing<T>(data: &[T]) -> bool
     where
         T: PartialOrd,
@@ -670,8 +694,9 @@ impl SequenceValidator {
     }
 
     /// 检测序列中的重复三元组
-    ///
+    /// sequence in
     /// 查找形如 [x, x, x] 的模式
+    /// [x, x, x]
     pub fn find_repeated_triplets<T>(data: &[T]) -> Vec<usize>
     where
         T: PartialEq,
@@ -686,24 +711,25 @@ impl SequenceValidator {
 
 // ==================== Rust 1.94 真实特性: LazyCell/LazyLock 类型推断 ====================
 
-/// # LazyCell/LazyLock 与类型推断
-///
-/// Rust 1.94.0 为 `LazyCell` 和 `LazyLock` 添加了新的访问方法，
 /// 这些方法与类型系统的改进紧密结合：
+/// method and type system ：
 /// - `get()` - 返回 `Option<&T>`，利用类型推断确定 T
+/// - `get()` - `Option<&T>`，type infer T
 /// - `get_mut()` - 返回 `Option<&mut T>`，支持可变类型推断
+/// - `get_mut()` - `Option<&mut T>`，type infer
 /// - `force_mut()` - 强制初始化并获取可变引用
-///
+/// - `force_mut()` - and reference
 /// ## 类型推断改进
-/// - 编译器能更智能地推断 LazyCell 中存储的类型
+/// ## type infer
 /// - 减少显式类型标注的需要
+/// - type
 /// - 更好的闭包类型捕获
+/// - type
 use std::cell::LazyCell;
 use std::sync::LazyLock;
 
 /// 类型推断优化的延迟初始化缓存
-///
-/// 展示 Rust 1.94 改进的类型推断如何与 LazyCell 结合
+/// type infer optimization
 pub struct TypeInferredCache<T, F> {
     cell: LazyCell<T, F>,
 }
@@ -720,27 +746,34 @@ where
     }
 
     /// 尝试获取值（不触发初始化）
-    ///
-    /// Rust 1.94: 改进的返回类型推断
+    /// （）
+    /// 尝试Get值（不触发Initialize）
+    /// Rust 1.94: 改进Returntype inference
     pub fn try_get(&self) -> Option<&T> {
         LazyCell::get(&self.cell)
     }
 
     /// 获取或初始化值
-    ///
+    /// or
     /// Rust 1.94: 闭包返回类型推断改进
+    /// Rust 1.94: type infer
     pub fn get_or_init(&self) -> &T {
         &self.cell
     }
 
     /// 尝试获取可变引用（不触发初始化）
-    ///
+    /// reference （）
+    /// 尝试Get可变reference（不触发Initialize）
     /// Rust 1.94: 可变引用类型推断
+    /// Rust 1.94: reference type infer
+    /// Rust 1.94: 可变referencetype inference
     pub fn try_get_mut(&mut self) -> Option<&mut T> {
         LazyCell::get_mut(&mut self.cell)
     }
 
     /// 强制获取可变引用
+    /// reference
+    /// 强制Get可变reference
     pub fn force_get_mut(&mut self) -> &mut T {
         LazyCell::force_mut(&mut self.cell)
     }
@@ -758,6 +791,7 @@ impl<T: Default> Default for TypeInferredCache<T, fn() -> T> {
 }
 
 /// 线程安全的类型推断缓存
+/// thread-safe type infer
 pub struct ThreadSafeTypeCache<T, F> {
     lock: LazyLock<T, F>,
 }
@@ -768,6 +802,7 @@ where
     T: Send + Sync + 'static,
 {
     /// 创建新的线程安全缓存
+    /// thread-safe
     pub fn new(init: F) -> Self {
         Self {
             lock: LazyLock::new(init),
@@ -780,6 +815,7 @@ where
     }
 
     /// 获取或初始化
+    /// or
     pub fn get_or_init(&self) -> &T {
         &self.lock
     }
@@ -797,8 +833,9 @@ impl<T: Send + Sync + 'static + Default> Default for ThreadSafeTypeCache<T, fn()
 }
 
 /// 泛型延迟初始化工厂
-///
+/// generic factory
 /// 展示高级类型推断模式
+/// type infer
 pub struct LazyFactory<T, F> {
     cache: LazyCell<T, F>,
 }
@@ -808,6 +845,7 @@ where
     F: FnOnce() -> T,
 {
     /// 创建新的延迟工厂
+    /// factory
     pub fn new(factory: F) -> Self {
         Self {
             cache: LazyCell::new(factory),
@@ -815,6 +853,8 @@ where
     }
 
     /// 获取值（按需初始化）
+    /// （）
+    /// Get值（按需Initialize）
     pub fn get(&self) -> &T {
         &self.cache
     }
@@ -828,29 +868,30 @@ where
 // ==================== 5. 类型级编程增强 ====================
 
 /// # 5. 类型级编程增强 / Type-Level Programming Enhancements
-///
-/// Rust 1.94.0 增强了类型级编程能力：
-/// Rust 1.94.0 enhances type-level programming capabilities:
 /// 类型级布尔值
+/// type
 pub trait TypeBool {
     const VALUE: bool;
 }
 
 /// 真类型
+/// type
+/// 真type
 pub struct True;
 impl TypeBool for True {
     const VALUE: bool = true;
 }
 
 /// 假类型
+/// type
+/// 假type
 pub struct False;
 impl TypeBool for False {
     const VALUE: bool = false;
 }
 
 /// 类型级等于比较
-///
-/// Rust 1.94.0: 增强的类型级操作
+/// type etc.
 pub struct TypeEq<T, U>(PhantomData<(T, U)>);
 
 // 注意: 这里使用了专门化（specialization）来提供类型相等判断
@@ -865,8 +906,9 @@ pub struct TypeEq<T, U>(PhantomData<(T, U)>);
 // }
 
 /// 类型选择器
-///
+/// type
 /// Rust 1.94.0: 条件类型选择
+/// Rust 1.94.0: condition type
 pub struct TypeSelect<B, T, F>(PhantomData<(B, T, F)>);
 
 impl<T, F> TypeSelect<True, T, F> {
@@ -890,6 +932,7 @@ impl<T, F> TypeSelect<False, T, F> {
 // ==================== 6. 综合应用示例 ====================
 
 /// 演示 Rust 1.94.0 类型系统特性
+/// demonstration Rust 1.94.0 type system feature
 pub fn demonstrate_rust_194_type_system_features() {
     println!("\n=== Rust 1.94.0 类型系统特性演示 ===\n");
 
@@ -996,6 +1039,7 @@ pub fn demonstrate_rust_194_type_system_features() {
 }
 
 /// 获取 Rust 1.94.0 类型系统特性信息
+/// Rust 1.94.0 type system feature
 pub fn get_rust_194_type_system_info() -> String {
     "Rust 1.94.0 类型系统特性:\n- 数学常量: EULER_GAMMA, GOLDEN_RATIO\n- char 到 usize 转换\n- \
      增强的类型推断\n- 改进的泛型约束处理\n- 更精确的借用检查器诊断\n- Edition 2024 \
@@ -1309,9 +1353,6 @@ mod tests {
 
     // ==================== 边界测试 ====================
 
-    /// 测试 char 到 usize 转换的 Unicode 边界字符
-    ///
-    /// 验证各种 Unicode 边界字符（如代理项边界）的正确转换
     #[test]
     fn test_char_to_usize_unicode_boundaries() {
         // ASCII 边界
@@ -1333,8 +1374,9 @@ mod tests {
     }
 
     /// 测试黄金分割搜索的边界条件
-    ///
+    /// boundary condition
     /// 验证在极端输入条件下搜索器的行为
+    /// in condition under as
     #[test]
     fn test_golden_section_search_edge_cases() {
         // 测试非常小的区间
@@ -1359,8 +1401,7 @@ mod tests {
     }
 
     /// 测试类型验证器的实际检查逻辑
-    ///
-    /// 验证 PreciseTypeValidator 的实际验证行为
+    /// type actual
     #[test]
     fn test_type_validator_actual_check() {
         let validator = PreciseTypeValidator::new();

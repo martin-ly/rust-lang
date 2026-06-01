@@ -1,17 +1,16 @@
 #![allow(unexpected_cfgs)]
 
 //! Rust 1.95.0 宏系统新特性实现模块
-//!
-//! 本模块展示了 Rust 1.95.0 在宏系统方面的关键增强：
+//! Rust 1.95.0 system feature module
 //! - `cfg_select!` 宏 ⭐
-//!
 //! # 版本信息
-//! - Rust版本: 1.95.0
+//! # this
 //! - 稳定日期: 2026-04-16
-//! - Edition: 2024
-//!
+//! - date : 2026-04-16
+//! - 稳定date: 2026-04-16
+//! - date: 2026-04-16
 //! # 参考
-//! - [Rust 1.95.0 Release Notes](https://releases.rs/docs/1.95.0/)
+//! # reference
 //! - [core::macros 文档](https://doc.rust-lang.org/core/macro.cfg_select.html)
 
 // ============================================================================
@@ -19,55 +18,65 @@
 // ============================================================================
 
 /// # `cfg_select!` 宏
-///
 /// ## 概念定义
-/// `cfg_select!` 是 Rust 1.95.0 引入的标准宏，用于在编译时根据 `cfg` 条件
+/// ## concept definition
 /// 选择**第一个满足条件的表达式**。它是嵌套 `cfg!` 或 `#[cfg]` 属性的
+/// **first condition express **。 `cfg!` or `#[cfg]` attribute
 /// 简洁替代方案。
-///
+/// 。
 /// ## 语法形式
-/// ```ignore
-/// cfg_select! {
+/// ##
 ///     cfg1 => expr1,
 ///     cfg2 => expr2,
-///     _ => fallback_expr,  // 可选的默认分支
-/// }
-/// ```
+///     _ => fallback_expr, // 可选默认分支
+///     _ => fallback_expr, //
 ///
 /// ## Wikipedia 概念对齐
 /// - **Conditional Compilation**: 根据目标平台/特性选择不同代码路径
-/// - **Macro (Computer Science)**: 文本替换的元编程机制
-///
+/// - **Conditional Compilation**: according to goal platform /feature
 /// ## 对比：传统方式 vs cfg_select!
-///
+/// ## to ：way vs cfg_select!
+/// ## to比：传统way vs cfg_select!
 /// | 维度 | `#[cfg]` 属性 | `cfg!` 宏 | `cfg_select!` (1.95+) |
-/// |------|-------------|----------|---------------------|
+/// | dimension | `#[cfg]` attribute | `cfg!` 宏 | `cfg_select!` (1.95+) |
 /// | 适用位置 | 项级别 (item) | 表达式级别 | 表达式级别 |
+/// | position | level (item) | express level | express level |
 /// | 语法冗长度 | 高（需重复定义） | 中（嵌套 if） | 低（类 match） |
+/// | | （definition ） | in （ if） | （ match） |
 /// | 默认分支 | 不支持 | 需显式 else | `_ =>` 清晰表达 |
+/// | | | else | `_ =>` clear express |
+/// | 默认分支 | 不Supports | 需显式 else | `_ =>` clearexpress |
 /// | 组合条件 | 复杂 | 复杂 | 自然扁平 |
+/// | combination condition | complex | complex | |
+/// | combinationcondition | complex | complex | 自然扁平 |
 /// | 返回值统一性 | N/A | 需确保类型一致 | 编译器强制类型一致 |
-///
+/// | return value | N/A | type | type |
 /// ## 决策树：何时使用什么？
-/// ```text
+/// ## tree ：？
 /// 需要根据 cfg 条件选择代码？
+/// according to cfg condition ？
 /// ├── 选择整个函数/结构体/模块？ → #[cfg]
+/// ├── function /struct /module ？ → #[cfg]
+/// ├── 选择整个function/struct/module？ → #[cfg]
 /// ├── 选择语句块内的不同实现？
+/// ├── inside ？
 /// │   ├── 条件简单（1-2个）→ cfg! + if/else
+/// │ ├── condition simple （1-2）→ cfg! + if/else
+/// │ ├── conditionsimple（1-2个）→ cfg! + if/else
 /// │   └── 条件复杂或多分支？ → cfg_select!
+/// │ └── condition complex or ？ → cfg_select!
 /// └── 需要表达式值？ → cfg_select!
-/// ```
-///
+/// └── express ？ → cfg_select!
 /// ## 反例 / 限制
-/// - `cfg_select!` 是**表达式级**宏，不能用于模块/函数声明级别（那里仍需 `#[cfg]`）
-/// - 所有分支的表达式类型必须一致（与 `match` 相同）
-/// - 不支持 `cfg_attr` 的 attribute 注入场景
+/// ## /
+/// - 不Supports `cfg_attr` attribute 注入scenario
 pub struct CfgSelectExamples;
 
 impl CfgSelectExamples {
     /// 基础示例：选择平台特定的最大路径长度
-    ///
+    /// foundation example ：platform maximum
     /// 传统 `cfg!` 方式需要嵌套 if-else，而 `cfg_select!` 扁平化表达。
+    /// `cfg!` way if-else，while `cfg_select!` express 。
     pub fn max_path_length_cfg_bang() -> usize {
         // 传统方式：嵌套 if-else
         if cfg!(target_os = "windows") {
@@ -82,8 +91,9 @@ impl CfgSelectExamples {
     }
 
     /// 现代方式获取最大路径长度
-    ///
+    /// way maximum
     /// 使用 `cfg_select!` 扁平化条件选择。
+    /// `cfg_select!` condition 。
     pub fn max_path_length_modern() -> usize {
         // 现代方式：cfg_select! 扁平化
         cfg_select! {
@@ -95,8 +105,9 @@ impl CfgSelectExamples {
     }
 
     /// 特性标志选择：选择哈希算法实现
-    ///
+    /// feature mark ：algorithm
     /// 根据编译时启用的特性选择不同的哈希函数。
+    /// according to compile-time feature function 。
     pub fn select_hasher() -> &'static str {
         cfg_select! {
             feature = "blake3" => "blake3",
@@ -107,8 +118,7 @@ impl CfgSelectExamples {
     }
 
     /// 架构特定优化：选择 SIMD 宽度
-    ///
-    /// 展示了 `cfg_select!` 在性能敏感代码中的应用。
+    /// architecture optimization ： SIMD
     pub fn simd_lane_count() -> usize {
         cfg_select! {
             target_feature = "avx512f" => 16,
@@ -120,8 +130,9 @@ impl CfgSelectExamples {
     }
 
     /// 组合条件：目标架构 + 指针宽度
-    ///
+    /// combination condition ：goal architecture + pointer
     /// 展示了复杂条件的选择逻辑。
+    /// complex condition 。
     pub fn pointer_optimized_size() -> usize {
         cfg_select! {
             all(target_arch = "x86_64", target_pointer_width = "64") => 64,
@@ -132,8 +143,7 @@ impl CfgSelectExamples {
     }
 
     /// 与常量定义结合
-    ///
-    /// `cfg_select!` 可以在 const 上下文中使用（因为它是编译期宏）。
+    /// and constant definition
     pub const COMPILE_TIME_PAGE_SIZE: usize = cfg_select! {
         target_os = "windows" => 4096,
         target_os = "linux" => 4096,
@@ -142,8 +152,9 @@ impl CfgSelectExamples {
     };
 
     /// 与函数指针结合：选择平台特定的系统调用包装
-    ///
+    /// and function pointer ：platform system
     /// 所有分支必须返回相同类型（函数指针类型）。
+    /// all must type （function pointer type ）。
     pub fn select_syscall_wrapper() -> fn(i32) -> i32 {
         cfg_select! {
             target_os = "linux" => linux_wrapper,
@@ -154,6 +165,7 @@ impl CfgSelectExamples {
     }
 
     /// 错误码映射：平台特定的错误码转换
+    /// error code ：platform error code conversion
     pub fn platform_error_name(code: i32) -> &'static str {
         cfg_select! {
             target_family = "unix" => unix_error_name(code),
@@ -207,26 +219,27 @@ fn unknown_error_name(_code: i32) -> &'static str {
 // 2. 与 build.rs / 编译脚本结合的高级用法
 // ============================================================================
 
-/// # `cfg_select!` 在跨平台库设计中的模式
-///
-/// 展示了如何将 `cfg_select!` 与标准库的平台抽象结合，
 /// 构建清晰的跨平台代码结构。
+/// clear platform structure 。
 pub struct CrossPlatformPatterns;
 
 impl CrossPlatformPatterns {
     /// 选择平台特定的路径分隔符
+    /// platform
     pub const PATH_SEPARATOR: char = cfg_select! {
         target_os = "windows" => '\\',
         _ => '/',
     };
 
     /// 选择行尾序列
+    /// sequence
     pub const LINE_ENDING: &'static str = cfg_select! {
         target_os = "windows" => "\r\n",
         _ => "\n",
     };
 
     /// 最大文件描述符数量提示
+    /// maximum file descriptor quantity hint
     pub const FD_LIMIT_HINT: usize = cfg_select! {
         target_os = "linux" => 1024,
         target_os = "macos" => 256,
@@ -235,6 +248,7 @@ impl CrossPlatformPatterns {
     };
 
     /// 线程栈大小默认值（平台特定）
+    /// thread stack （platform ）
     pub const DEFAULT_STACK_SIZE: usize = cfg_select! {
         target_os = "linux" => 2 * 1024 * 1024,    // 2MB
         target_os = "macos" => 2 * 1024 * 1024,    // 2MB
@@ -307,30 +321,28 @@ mod tests {
 // ============================================================================
 
 /// # 真实 Rust 1.95 特性演示
-///
+/// # real Rust 1.95 feature demonstration
 /// 展示 Rust 2024 中 `unsafe fn` 需要显式 `unsafe {}` 块，
-/// `const {}` 在数组大小计算中的应用，以及 `if let` guards。
 pub struct RealRust195Features;
 
 impl RealRust195Features {
-    /// Rust 2024 风格的 `unsafe fn`
-    ///
+    /// Rust 2024 风格 `unsafe fn`
     /// 在 `unsafe fn` 内部，不安全操作仍需显式包裹在 `unsafe {}` 中。
-    ///
-    /// # Safety
+    /// in `unsafe fn` inside ，in `unsafe {}` in 。
     ///
     /// `ptr` 必须是有效的、正确对齐的指向已初始化 `u32` 的指针。
+    /// `ptr` must effective 、to `u32` pointer 。
     pub unsafe fn macro_generated_unsafe_fn(ptr: *const u32) -> u32 {
         // Rust 2024: 必须显式使用 unsafe 块
         unsafe { *ptr }
     }
 
-    /// 使用 `const {}` 计算宏生成的数组大小
     pub fn const_block_macro_output() -> [u8; 8] {
         [0u8; const { 4 + 4 }]
     }
 
     /// 使用 `if let` guard 分类宏标记
+    /// `if let` guard classification mark
     pub fn classify_macro_token(token: Option<&str>) -> Result<&'static str, &'static str> {
         match token {
             Some(t)

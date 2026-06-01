@@ -1,27 +1,29 @@
 //! QUIC / HTTP3 完整实现 —— 现代安全传输协议
-//!
+//! QUIC / HTTP 3 complete —— transmission
 //! # 概述
-//!
-//! QUIC (Quick UDP Internet Connections) 是 Google 开发、IETF 标准化的
-//! 基于 UDP 的传输协议。HTTP/3 在 QUIC 之上运行，解决了 TCP+TLS+HTTP/2
+//! #
 //! 的队头阻塞和握手延迟问题。
-//!
+//! and problem 。
 //! # 核心特性
-//!
+//! # core feature
 //! | 特性 | TCP+TLS+HTTP/2 | QUIC+HTTP/3 |
-//! |------|---------------|-------------|
 //! | 握手延迟 | 2-3 RTT (TCP+TLS) | 0-1 RTT (QUIC 内置 TLS 1.3) |
 //! | 队头阻塞 | TCP 层阻塞所有流 | 流独立，单流丢包不影响他流 |
+//! | | TCP all stream | stream ，stream impact stream |
 //! | 连接迁移 | 四元组变化需重连 | 连接 ID 标识，IP/端口变化不影响 |
+//! | | | ID ，IP /impact |
 //! | 拥塞控制 | 内核实现，应用不可控 | 用户态实现，可定制 |
+//! | | kernel ，application | ， |
 //! | 安全性 | TLS 在传输层之上 | TLS 1.3 内置于握手 |
-//!
+//! | | TLS in transport layer 's on | TLS 1.3 inside |
 //! # 依赖
+//! #
 //! - `quinn` — QUIC 协议实现
-//! - `rustls` — TLS 1.3
+//! - `quinn` — QUIC 协议Implementation of
 //! - `rcgen` — 自签名证书生成（开发/测试）
-//!
+//! - `rcgen` — self-signed certificate （/）
 //! # 前置条件
+//! # before condition
 //! 启用 `quic` feature: `cargo build -p c10_networks --features quic`
 
 #[cfg(feature = "quic")]
@@ -36,8 +38,7 @@ pub mod quic_full {
     // =====================================================================
 
     /// 生成自签名证书（开发/测试用）
-    ///
-    /// 生产环境应使用 Let's Encrypt 或企业 CA 签发的证书。
+    /// self-signed certificate （/）
     pub fn generate_self_signed_cert(
         subject_alt_names: Vec<String>,
     ) -> Result<(Vec<CertificateDer<'static>>, PrivateKeyDer<'static>), String> {
@@ -51,6 +52,8 @@ pub mod quic_full {
     }
 
     /// 加载 PEM 格式证书
+    /// PEM certificate
+    /// 加载 PEM 格式certificate
     pub fn load_certs_from_pem(cert_pem: &[u8]) -> Result<Vec<CertificateDer<'static>>, String> {
         use rustls::pki_types::pem::PemObject;
         let certs: Vec<_> = CertificateDer::pem_slice_iter(cert_pem)
@@ -62,7 +65,6 @@ pub mod quic_full {
         Ok(certs)
     }
 
-    /// 解析 SocketAddr 字符串
     pub fn parse_socket_addr(addr: &str) -> Result<SocketAddr, String> {
         addr.parse::<SocketAddr>()
             .map_err(|e| format!("parse socket addr: {}", e))
@@ -73,14 +75,15 @@ pub mod quic_full {
     // =====================================================================
 
     /// QUIC Echo 服务器
-    ///
     /// 接受连接，读取双向流中的数据，回传给客户端。
+    /// ，stream in ，。
     pub struct QuicEchoServer {
         endpoint: Endpoint,
     }
 
     impl QuicEchoServer {
         /// 创建服务器并绑定地址
+        /// and
         pub fn new(bind_addr: SocketAddr) -> Result<Self, String> {
             let (cert_chain, key) = generate_self_signed_cert(vec!["localhost".into()])?;
 
@@ -100,6 +103,8 @@ pub mod quic_full {
         }
 
         /// 运行服务器（阻塞）
+        /// Run （）
+        /// Run服务器（Block）
         pub async fn run(&self) -> Result<(), String> {
             println!(
                 "QUIC server listening on {}",
@@ -131,6 +136,7 @@ pub mod quic_full {
     }
 
     /// 处理单个 QUIC 连接
+    /// QUIC
     async fn handle_connection(connection: Connection) -> Result<(), String> {
         loop {
             // 接受双向流
@@ -156,6 +162,7 @@ pub mod quic_full {
     }
 
     /// 处理单个双向流
+    /// stream
     async fn handle_stream(mut send: SendStream, mut recv: RecvStream) -> Result<(), String> {
         let mut buf = vec![0u8; 4096];
         loop {
@@ -195,6 +202,7 @@ pub mod quic_full {
         }
 
         /// 连接到服务器并发送数据
+        /// to concurrency
         pub async fn echo(
             &self,
             server_addr: SocketAddr,
@@ -231,9 +239,11 @@ pub mod quic_full {
         }
 
         /// 0-RTT 概念性支持
-        ///
+        /// 0-RTT concept
         /// QUIC 支持会话恢复，实现 0-RTT 握手。
+        /// QUIC ， 0-RTT 。
         /// 需要在首次连接后保存会话票据。
+        /// in after 。
         pub async fn echo_with_0rtt(
             &self,
             _server_addr: SocketAddr,
@@ -251,16 +261,17 @@ pub mod quic_full {
     // 4. HTTP/3 层概念
     // =====================================================================
 
-    /// HTTP/3 与 QUIC 的关系说明
-    ///
-    /// HTTP/3 将 HTTP 语义映射到 QUIC 流：
-    /// - 每个请求/响应对使用独立的 QUIC 双向流
+    /// HTTP/3 and QUIC 关系explain
+    /// HTTP/3 will HTTP 语义Mapto QUIC stream：
     /// - 请求优先级通过 QUIC 流优先级实现
+    /// - QUIC stream
     /// - 服务器推送使用单向流
+    /// - stream
     pub struct Http3OverQuicConcept;
 
     impl Http3OverQuicConcept {
         /// HTTP/3 帧类型（概念性）
+        /// HTTP/3 type （concept ）
         pub fn frame_types() -> &'static str {
             r#"
 HTTP/3 核心帧类型:
@@ -277,10 +288,11 @@ HTTP/3 核心帧类型:
         }
 
         /// 连接迁移概念
-        ///
+        /// concept
         /// QUIC 使用连接 ID 而非四元组标识连接，支持网络切换：
-        /// - WiFi → 4G 切换不断连
+        /// QUIC ID while ，network switching ：
         /// - NAT 重绑定自动恢复
+        /// - NAT
         pub fn connection_migration_concept() -> &'static str {
             r#"
 QUIC 连接迁移:
@@ -302,9 +314,9 @@ QUIC 连接迁移:
     // =====================================================================
 
     /// QUIC 高级特性：不可靠数据报、0-RTT、连接迁移
-    ///
-    /// 本模块展示 quinn 0.11 提供的超越基础 Echo 的高级 QUIC 能力。
+    /// QUIC feature ：datagram 、0-RTT、
     /// 所有代码均为概念骨架，展示 API 的正确使用方式。
+    /// all as concept ， API way 。
     pub mod quic_advanced_features {
         #![forbid(unsafe_code)]
 
@@ -318,39 +330,48 @@ QUIC 连接迁移:
         // 5.1 Datagram (不可靠传输)
         // -----------------------------------------------------------------
 
-        /// QUIC Datagram —— 不可靠、无顺序保证的应用层数据报
-        ///
         /// 适合场景：
+        /// scenario ：
+        /// 适合scenario：
         /// - 游戏状态同步（位置、朝向，丢帧可容忍）
+        /// - state synchronous （position 、，）
+        /// - 游戏statesynchronous（position、朝向，丢帧可容忍）
         /// - 实时音视频（RTP over QUIC）
         /// - 高频遥测上报（允许部分丢失）
-        ///
-        /// 与流(Stream)的区别：
+        /// - on （part ）
+        /// andstream(Stream)区别：
         /// | 特性 | Stream | Datagram |
-        /// |------|--------|----------|
         /// | 可靠性 | 可靠、有序 | 不可靠、无序 |
+        /// | | 、 | 、 |
         /// | 分片 | 自动 | 须单包容纳 |
+        /// | sharding | | |
+        /// | fragmentation | 自动 | 须单包容纳 |
+        /// | fragmentation | | |
         /// | 流控 | 有 | 无 |
+        /// | stream | | |
         /// | 拥塞控制 | 有（不丢弃）| 有（可丢弃旧报）|
+        /// | | （）| （）|
         pub struct UnreliableDatagramChannel {
             connection: Connection,
         }
 
         impl UnreliableDatagramChannel {
             /// 基于已有连接创建数据报通道
+            /// datagram channel
             pub fn new(connection: Connection) -> Self {
                 Self { connection }
             }
 
             /// 发送不可靠数据报
-            ///
-            /// 数据须小于 `max_datagram_size()`，否则返回 `TooLarge` 错误。
+            /// datagram
             /// 若发送缓冲区满，旧数据报可能被丢弃（按 FIFO）。
+            /// buffering ，datagram may is （ FIFO）。
             pub fn send(&self, data: &[u8]) -> Result<(), quinn::SendDatagramError> {
                 self.connection.send_datagram(Bytes::copy_from_slice(data))
             }
 
             /// 异步发送（等待拥塞窗口，优先保留旧数据报）
+            /// async （etc. ，datagram ）
             pub async fn send_wait(&self, data: &[u8]) -> Result<(), quinn::SendDatagramError> {
                 self.connection
                     .send_datagram_wait(Bytes::copy_from_slice(data))
@@ -358,16 +379,19 @@ QUIC 连接迁移:
             }
 
             /// 接收一个数据报
+            /// datagram
             pub async fn recv(&self) -> Result<Bytes, quinn::ConnectionError> {
                 self.connection.read_datagram().await
             }
 
             /// 当前可发送的最大数据报尺寸
+            /// when before maximum datagram
             pub fn max_size(&self) -> Option<usize> {
                 self.connection.max_datagram_size()
             }
 
             /// 发送缓冲区剩余空间
+            /// buffering space
             pub fn send_buffer_space(&self) -> usize {
                 self.connection.datagram_send_buffer_space()
             }
@@ -378,26 +402,24 @@ QUIC 连接迁移:
         // -----------------------------------------------------------------
 
         /// 0-RTT —— 会话恢复时的零往返延迟
-        ///
-        /// QUIC 基于 TLS 1.3 的会话恢复机制，允许客户端在首次握手中附带应用数据，
+        /// 0-RTT ——
         /// 将延迟从 1-RTT 降至 0-RTT。
-        ///
+        /// will from 1-RTT 0-RTT。
         /// 安全警告：
+        /// warning ：
+        /// 安全warning：
         /// - 0-RTT 数据可能被重放攻击，因此只能用于幂等操作。
+        /// - 0-RTT may is ，therefore etc. 。
         /// - 服务器可能拒绝 0-RTT，此时数据不会送达。
-        ///
+        /// - may 0-RTT，this 。
         /// quinn API 说明：
         /// - 客户端：`Connecting::into_0rtt()` 在持有先前会话票据时返回 `Ok`。
-        ///   返回的 `ZeroRttAccepted` Future 在握手完成后解析为 `bool`：
-        ///   `true` 表示服务器接受了 0-RTT，`false` 表示被拒绝。
-        /// - 服务器：`Incoming::accept()` 得到 `Connecting` 后，`into_0rtt()` 总是返回
-        ///   `Ok`（即 0.5-RTT），且 `ZeroRttAccepted` 永远解析为 `true`。
+        /// - ：`Connecting::into_0rtt()` in before `Ok`。
         pub struct ZeroRttSession;
 
         impl ZeroRttSession {
             /// 客户端尝试 0-RTT 发送
-            ///
-            /// 须在 `ClientConfig` 中配置会话恢复（如 rustls 的 `enable_early_data`）。
+            /// 0-RTT
             pub fn client_try_0rtt(
                 connecting: Connecting,
             ) -> Result<(Connection, ZeroRttAccepted), Box<Connecting>> {
@@ -405,8 +427,10 @@ QUIC 连接迁移:
             }
 
             /// 服务器接受 0.5-RTT 连接
-            ///
+            /// 0.5-RTT
+            /// 服务器Accept 0.5-RTT Connect
             /// 服务器端可在握手完成前就开始发送数据（0.5-RTT）。
+            /// in before （0.5-RTT）。
             pub fn server_accept_0rtt(
                 connecting: Connecting,
             ) -> Result<(Connection, ZeroRttAccepted), Box<Connecting>> {
@@ -415,6 +439,7 @@ QUIC 连接迁移:
             }
 
             /// 检查 0-RTT 是否最终被接受
+            /// 0-RTT ultimately is
             pub async fn check_accepted(accepted: ZeroRttAccepted) -> bool {
                 accepted.await
             }
@@ -424,18 +449,15 @@ QUIC 连接迁移:
         // 5.3 Connection Migration (连接迁移)
         // -----------------------------------------------------------------
 
-        /// 连接迁移 —— WiFi ↔ 蜂窝网络无缝切换
-        ///
-        /// QUIC 使用连接 ID 而非四元组（源IP、源端口、目的IP、目的端口）标识连接，
         /// 因此客户端 IP/端口变化不会导致连接中断。
-        ///
+        /// therefore IP /in 。
         /// quinn 0.11 API 现状：
-        /// - `ServerConfig::migration(true)` 默认已启用，协议层自动处理 PATH_CHALLENGE/RESPONSE。
         /// - `Connection::remote_address()` 会在迁移完成后返回新地址。
+        /// - `Connection::remote_address()` in after 。
         /// - **quinn 目前不暴露应用层迁移事件**（如 `on_path_changed` 回调），
+        /// - **quinn before expose application layer **（ `on_path_changed` ），
         ///   应用只能通过轮询 `remote_address()` 或观察 RTT 变化间接感知。
-        ///
-        /// 若需更细粒度的路径控制，可考虑 `quinn-proto` 底层 API。
+        ///   application `remote_address()` or RTT 。
         pub struct ConnectionMigrationMonitor {
             connection: Connection,
         }
@@ -447,8 +469,9 @@ QUIC 连接迁移:
             }
 
             /// 轮询检测地址是否发生变化
-            ///
             /// 返回 `(old, new)` 若检测到变更。
+            /// `(old, new)` to 。
+            /// Return `(old, new)` 若检测to变更。
             pub async fn watch_address_change(
                 &self,
                 check_interval: Duration,
@@ -465,11 +488,13 @@ QUIC 连接迁移:
             }
 
             /// 获取当前对端地址
+            /// when before to
             pub fn current_remote_address(&self) -> SocketAddr {
                 self.connection.remote_address()
             }
 
             /// 获取当前连接 RTT（可用于判断路径质量）
+            /// when before RTT（quality ）
             pub fn current_rtt(&self) -> Duration {
                 self.connection.rtt()
             }
@@ -485,6 +510,7 @@ QUIC 连接迁移:
         // -----------------------------------------------------------------
 
         /// 数据报配置
+        /// datagram
         #[derive(Debug, Clone, PartialEq, Eq)]
         pub struct DatagramConfig {
             max_size: usize,
@@ -493,22 +519,26 @@ QUIC 连接迁移:
 
         impl DatagramConfig {
             /// 创建数据报配置
+            /// datagram
             pub fn new(max_size: usize, enabled: bool) -> Self {
                 Self { max_size, enabled }
             }
 
             /// 获取最大数据报尺寸
+            /// maximum datagram
             pub fn max_size(&self) -> usize {
                 self.max_size
             }
 
             /// 是否启用数据报
+            /// datagram
             pub fn enabled(&self) -> bool {
                 self.enabled
             }
         }
 
         /// 0-RTT 配置
+        /// 0-RTT
         #[derive(Debug, Clone, PartialEq, Eq)]
         pub struct ZeroRttConfig {
             enabled: bool,
@@ -517,6 +547,7 @@ QUIC 连接迁移:
 
         impl ZeroRttConfig {
             /// 创建 0-RTT 配置
+            /// 0-RTT
             pub fn new(enabled: bool, max_early_data: usize) -> Self {
                 Self {
                     enabled,
@@ -525,11 +556,13 @@ QUIC 连接迁移:
             }
 
             /// 是否启用 0-RTT
+            /// 0-RTT
             pub fn enabled(&self) -> bool {
                 self.enabled
             }
 
             /// 获取最大早期数据量
+            /// maximum
             pub fn max_early_data(&self) -> usize {
                 self.max_early_data
             }
@@ -557,6 +590,7 @@ QUIC 连接迁移:
             }
 
             /// 获取空闲超时时间（毫秒）
+            /// time （）
             pub fn idle_timeout_ms(&self) -> u64 {
                 self.idle_timeout_ms
             }
@@ -571,6 +605,7 @@ QUIC 连接迁移:
             use super::*;
 
             /// 验证 Datagram API 类型签名正确
+            /// Datagram API type
             #[test]
             fn test_datagram_api_surface() {
                 fn _assert_send(
@@ -594,6 +629,7 @@ QUIC 连接迁移:
             }
 
             /// 验证 0-RTT API 类型签名正确
+            /// 0-RTT API type
             #[test]
             fn test_zero_rtt_api_surface() {
                 fn _assert_into_0rtt(
@@ -605,6 +641,7 @@ QUIC 连接迁移:
             }
 
             /// 验证连接迁移相关 API 存在
+            /// API in
             #[test]
             fn test_migration_api_surface() {
                 fn _assert_remote_address(c: &Connection) -> SocketAddr {
@@ -617,7 +654,6 @@ QUIC 连接迁移:
                 let _ = _assert_rtt as fn(&Connection) -> _;
             }
 
-            /// 验证结构体可实例化（需要 Connection，故用 PhantomData 做编译检查）
             #[test]
             fn test_structs_compilable() {
                 let _ = std::marker::PhantomData::<UnreliableDatagramChannel>;
@@ -633,6 +669,7 @@ QUIC 连接迁移:
         use std::net::SocketAddr;
 
         /// 测试生成自签名证书成功并返回非空数据
+        /// self-signed certificate and
         #[test]
         fn test_generate_self_signed_cert_ok() {
             let (certs, key) = generate_self_signed_cert(vec!["localhost".to_string()]).unwrap();
@@ -647,6 +684,7 @@ QUIC 连接迁移:
         }
 
         /// 测试空主题别名时生成证书不 panic
+        /// certificate panic
         #[test]
         fn test_generate_self_signed_cert_empty_sans() {
             let result = generate_self_signed_cert(vec![]);
@@ -655,6 +693,7 @@ QUIC 连接迁移:
         }
 
         /// 测试从有效 PEM 加载证书成功
+        /// from effective PEM certificate
         #[test]
         fn test_load_certs_from_pem_valid() {
             let cert = rcgen::generate_simple_self_signed(vec!["test.example.com".into()]).unwrap();
@@ -665,6 +704,7 @@ QUIC 连接迁移:
         }
 
         /// 测试加载无效 PEM 数据应返回错误
+        /// ineffective PEM
         #[test]
         fn test_load_certs_from_pem_invalid() {
             let result = load_certs_from_pem(b"this is not a pem");
@@ -672,6 +712,7 @@ QUIC 连接迁移:
         }
 
         /// 测试加载空 PEM 数据应返回错误
+        /// PEM
         #[test]
         fn test_load_certs_from_pem_empty() {
             let result = load_certs_from_pem(b"");
@@ -679,6 +720,7 @@ QUIC 连接迁移:
         }
 
         /// 测试解析有效的 IPv4 地址
+        /// effective IPv4
         #[test]
         fn test_parse_socket_addr_valid_ipv4() {
             let addr = parse_socket_addr("127.0.0.1:8080").unwrap();
@@ -686,6 +728,7 @@ QUIC 连接迁移:
         }
 
         /// 测试解析有效的 IPv6 地址
+        /// effective IPv6
         #[test]
         fn test_parse_socket_addr_valid_ipv6() {
             let addr = parse_socket_addr("[::1]:443").unwrap();
@@ -693,6 +736,7 @@ QUIC 连接迁移:
         }
 
         /// 测试解析无效地址应返回错误
+        /// ineffective
         #[test]
         fn test_parse_socket_addr_invalid() {
             let result = parse_socket_addr("not-an-address");
@@ -702,7 +746,6 @@ QUIC 连接迁移:
             assert!(result.is_err(), "缺少端口应返回错误");
         }
 
-        /// 测试 Http3OverQuicConcept 帧类型说明文本非空
         #[test]
         fn test_http3_over_quic_concept_frame_types() {
             let text = Http3OverQuicConcept::frame_types();
@@ -710,7 +753,6 @@ QUIC 连接迁移:
             assert!(text.contains("HEADERS"), "应包含 HEADERS 帧说明");
         }
 
-        /// 测试 Http3OverQuicConcept 连接迁移说明文本非空
         #[test]
         fn test_http3_over_quic_concept_migration() {
             let text = Http3OverQuicConcept::connection_migration_concept();
@@ -721,7 +763,6 @@ QUIC 连接迁移:
             );
         }
 
-        /// 测试 DatagramConfig 创建与 getter
         #[test]
         fn test_datagram_config_creation_and_getters() {
             let cfg = quic_advanced_features::DatagramConfig::new(1200, true);
@@ -729,7 +770,6 @@ QUIC 连接迁移:
             assert!(cfg.enabled());
         }
 
-        /// 测试 ZeroRttConfig 创建与 getter
         #[test]
         fn test_zero_rtt_config_creation_and_getters() {
             let cfg = quic_advanced_features::ZeroRttConfig::new(true, 65536);
@@ -737,7 +777,6 @@ QUIC 连接迁移:
             assert_eq!(cfg.max_early_data(), 65536);
         }
 
-        /// 测试 MigrationConfig 创建与 getter
         #[test]
         fn test_migration_config_creation_and_getters() {
             let cfg = quic_advanced_features::MigrationConfig::new(true, 30000);

@@ -10,6 +10,7 @@ use nom::{
 // use std::fmt; // 暂时注释掉未使用的导入
 
 /// 解析结果
+/// result
 #[derive(Debug, Clone)]
 pub struct ParseResult {
     pub packet: super::Packet,
@@ -32,6 +33,7 @@ impl PacketParser {
     }
 
     /// 添加数据到解析缓冲区
+    /// to buffering
     pub fn feed(&mut self, data: &[u8]) -> NetworkResult<()> {
         if self.buffer.len() + data.len() > self.max_packet_size {
             return Err(NetworkError::Other("Buffer overflow".to_string()));
@@ -106,11 +108,13 @@ impl PacketParser {
     }
 
     /// 清空解析缓冲区
+    /// buffering
     pub fn clear(&mut self) {
         self.buffer.clear();
     }
 
     /// 获取缓冲区大小
+    /// buffering
     pub fn buffer_size(&self) -> usize {
         self.buffer.len()
     }
@@ -122,10 +126,13 @@ impl PacketParser {
 }
 
 /// HTTP 请求解析器
+/// HTTP
 pub struct HttpRequestParser;
 
 impl HttpRequestParser {
     /// 解析 HTTP 请求行
+    /// HTTP
+    /// Parse HTTP 请求行
     pub fn parse_request_line(input: &[u8]) -> IResult<&[u8], (String, String, String)> {
         let (input, method) = map(nom::bytes::complete::take_until(" "), |s: &[u8]| {
             String::from_utf8_lossy(s).to_string()
@@ -152,6 +159,8 @@ impl HttpRequestParser {
     }
 
     /// 解析 HTTP 头部
+    /// HTTP
+    /// Parse HTTP 头部
     pub fn parse_headers(
         input: &[u8],
     ) -> IResult<&[u8], std::collections::HashMap<String, String>> {
@@ -185,11 +194,9 @@ impl HttpRequestParser {
     }
 }
 
-/// WebSocket 帧解析器
 pub struct WebSocketFrameParser;
 
 impl WebSocketFrameParser {
-    /// 解析 WebSocket 帧
     pub fn parse_frame(input: &[u8]) -> IResult<&[u8], crate::protocol::websocket::WebSocketFrame> {
         if input.len() < 2 {
             return Err(nom::Err::Incomplete(nom::Needed::new(2)));
@@ -250,6 +257,7 @@ impl WebSocketFrameParser {
 }
 
 /// 数据包解析器工厂
+/// factory
 pub struct ParserFactory;
 
 impl ParserFactory {
@@ -259,11 +267,11 @@ impl ParserFactory {
     }
 
     /// 创建 HTTP 请求解析器
+    /// HTTP
     pub fn create_http_parser() -> HttpRequestParser {
         HttpRequestParser
     }
 
-    /// 创建 WebSocket 帧解析器
     pub fn create_websocket_parser() -> WebSocketFrameParser {
         WebSocketFrameParser
     }

@@ -1,7 +1,10 @@
 //! 改进的异步特性实现
+//! async feature
 //! 
 //! 本模块实现了当前稳定版本中实际可用的异步特性，
+//! this module when before this in actual async feature ，
 //! 包括超时控制、结构化并发、错误处理等实际功能。
+//! 、structure concurrency 、error handling etc. actual functionality 。
 use std::sync::Arc;
 use std::time::{Duration, Instant};
 use std::collections::VecDeque;
@@ -11,6 +14,7 @@ use anyhow::{Result, Context};
 use tracing::{warn, error};
 
 /// 改进的异步资源管理器
+/// async
 #[derive(Debug, Clone)]
 pub struct ImprovedAsyncResourceManager {
     resources: Arc<Mutex<Vec<AsyncResource>>>,
@@ -19,6 +23,7 @@ pub struct ImprovedAsyncResourceManager {
 }
 
 /// 异步资源
+/// async
 #[derive(Debug, Clone)]
 pub struct AsyncResource {
     pub id: String,
@@ -57,6 +62,7 @@ impl ImprovedAsyncResourceManager {
     }
 
     /// 结构化并发处理
+    /// structure concurrency
     pub async fn process_with_structured_concurrency<T>(
         &self,
         tasks: Vec<Box<dyn std::future::Future<Output = Result<T>> + Send>>,
@@ -155,6 +161,7 @@ impl ImprovedAsyncResourceManager {
 }
 
 /// 处理后的资源
+/// after
 #[derive(Debug, Clone)]
 pub struct ProcessedResource {
     pub original_id: String,
@@ -171,6 +178,7 @@ pub struct ManagerStatistics {
 }
 
 /// 异步任务调度器
+/// async task
 #[derive(Debug)]
 pub struct AsyncTaskScheduler {
     task_queue: Arc<Mutex<VecDeque<ScheduledTask>>>,
@@ -179,6 +187,7 @@ pub struct AsyncTaskScheduler {
 }
 
 /// 计划任务
+/// plan task
 pub struct ScheduledTask {
     pub id: String,
     pub delay: Duration,
@@ -197,6 +206,7 @@ impl std::fmt::Debug for ScheduledTask {
 
 impl AsyncTaskScheduler {
     /// 创建新的任务调度器
+    /// task
     pub fn new(max_concurrent_tasks: usize) -> Self {
         Self {
             task_queue: Arc::new(Mutex::new(VecDeque::new())),
@@ -206,6 +216,7 @@ impl AsyncTaskScheduler {
     }
 
     /// 调度任务
+    /// task
     pub async fn schedule_task(&self, task: ScheduledTask) -> Result<()> {
         let mut queue = self.task_queue.lock().await;
         queue.push_back(task);
@@ -230,6 +241,7 @@ impl AsyncTaskScheduler {
     }
 
     /// 获取下一个就绪的任务
+    /// under task
     async fn get_next_ready_task(&self) -> Option<ScheduledTask> {
         let mut queue = self.task_queue.lock().await;
         let now = Instant::now();
@@ -244,6 +256,7 @@ impl AsyncTaskScheduler {
     }
 
     /// 执行任务
+    /// task
     async fn execute_task(&self, task: ScheduledTask) -> Result<()> {
         let mut running = self.running_tasks.lock().await;
         
@@ -262,6 +275,7 @@ impl AsyncTaskScheduler {
     }
 
     /// 清理已完成的任务
+    /// task
     async fn cleanup_completed_tasks(&self) {
         let mut running = self.running_tasks.lock().await;
         running.retain(|handle| !handle.is_finished());
@@ -269,6 +283,7 @@ impl AsyncTaskScheduler {
 }
 
 /// 异步错误恢复机制
+/// async error recovery mechanism
 #[derive(Debug)]
 pub struct AsyncErrorRecovery {
     max_retries: usize,
@@ -276,6 +291,7 @@ pub struct AsyncErrorRecovery {
 }
 
 /// 退避策略
+/// strategy
 #[derive(Debug, Clone)]
 pub enum BackoffStrategy {
     Linear(Duration),
@@ -285,6 +301,7 @@ pub enum BackoffStrategy {
 
 impl AsyncErrorRecovery {
     /// 创建新的错误恢复器
+    /// error recovery
     pub fn new(max_retries: usize, backoff_strategy: BackoffStrategy) -> Self {
         Self {
             max_retries,
@@ -293,6 +310,7 @@ impl AsyncErrorRecovery {
     }
 
     /// 执行带重试的异步操作
+    /// async
     pub async fn execute_with_retry<F, T>(&self, mut operation: F) -> Result<T>
     where
         F: FnMut() -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<T>> + Send>> + Send,

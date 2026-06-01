@@ -8,8 +8,11 @@ use tokio::time::sleep;
 use tracing::{info, warn};
 
 /// 2025年简化异步性能基准测试套件
+/// 2025async Performance benchmark
 /// 展示实用的异步性能测试和基准测试最佳实践
+/// async performance test and benchmark
 /// 1. 简化基准测试配置
+/// 1. benchmark
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SimpleBenchmarkConfig {
     pub name: String,
@@ -30,6 +33,8 @@ impl Default for SimpleBenchmarkConfig {
 }
 
 /// 2. 简化基准测试结果
+/// 2. benchmark result
+/// 2. 简化benchmarkresult
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SimpleBenchmarkResult {
     pub name: String,
@@ -60,6 +65,7 @@ impl SimpleBenchmarkResult {
 }
 
 /// 3. 简化异步基准测试运行器
+/// 3. async benchmark Run
 pub struct SimpleAsyncBenchmarkRunner {
     config: SimpleBenchmarkConfig,
     results: Arc<RwLock<Vec<SimpleBenchmarkResult>>>,
@@ -171,6 +177,8 @@ impl SimpleAsyncBenchmarkRunner {
 }
 
 /// 4. 简化异步并发基准测试
+/// 4. async concurrency benchmark
+/// 4. 简化asyncconcurrencybenchmark
 pub struct SimpleAsyncConcurrencyBenchmark {
     semaphore: Arc<Semaphore>,
     success_count: Arc<AtomicUsize>,
@@ -241,6 +249,8 @@ impl SimpleAsyncConcurrencyBenchmark {
 }
 
 /// 5. 简化异步内存基准测试
+/// 5. async memory benchmark
+/// 5. 简化asyncmemorybenchmark
 pub struct SimpleAsyncMemoryBenchmark {
     allocations: Arc<AtomicUsize>,
     total_bytes: Arc<AtomicU64>,
@@ -291,6 +301,8 @@ impl SimpleAsyncMemoryBenchmark {
 }
 
 /// 6. 简化异步网络基准测试
+/// 6. async network benchmark
+/// 6. 简化asyncnetworkbenchmark
 pub struct SimpleAsyncNetworkBenchmark {
     request_count: Arc<AtomicUsize>,
     response_times: Arc<RwLock<Vec<Duration>>>,

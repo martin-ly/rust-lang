@@ -66,58 +66,60 @@ use tracing::{Level, debug, error, info, instrument, span, warn};
 // ============================================================================
 
 /// # Reactor 模式形式化定义
-/// # Formal Definition of Reactor Pattern
-///
+/// # Reactor definition
+/// # Reactor 模式形式化definition
 /// ## 数学模型 (Mathematical Model)
 ///
-/// Reactor = (EventQueue, Handlers, Demultiplexer, EventLoop)
-///
 /// 其中 (Where):
-/// - EventQueue: Queue<Event>        事件队列
-/// - Handlers: Map<EventType, Handler>  事件处理器映射
 /// - Demultiplexer: Events → Event   事件分离器
-/// - EventLoop: () → ()              事件循环
-///
+/// - Demultiplexer: Events → Event 事件分离器
 /// ## 核心不变量 (Core Invariants)
-///
 /// 1. **单线程保证** (Single-threaded Guarantee):
-///    ∀ event ∈ EventQueue, process(event) 在同一线程执行
-///
 /// 2. **非阻塞性** (Non-blocking):
 ///    ∀ handler ∈ Handlers, handler.handle() 不阻塞事件循环
-///
 /// 3. **事件顺序性** (Event Ordering):
 ///    若 event1 先于 event2 到达，则 event1 先被处理
+///    event1 event2 to ， event1 is
 ///    (除非有优先级调度)
-///
+///    ()
 /// 4. **完整性** (Completeness):
-///    ∀ event ∈ EventQueue, ∃ handler ∈ Handlers 处理该事件
-///
 /// ## 性质证明 (Property Proofs)
-///
 /// **定理 1: 活性 (Liveness)**
+/// **theorem 1: (Liveness)**
+/// **theorem 1: 活性 (Liveness)**
 /// 若事件队列非空，则最终会处理所有事件
-///
+/// ，ultimately all
 /// 证明 (Proof):
 /// - 事件循环持续运行
+/// - circulation Run
 /// - 每次迭代处理至少一个事件
+/// -
 /// - 因此最终处理所有事件 □
-///
+/// - therefore ultimately all □
 /// **定理 2: 安全性 (Safety)**
+/// **theorem 2: (Safety)**
+/// **theorem 2: 安全性 (Safety)**
 /// 不会同时处理两个事件
-///
 /// 证明 (Proof):
 /// - 事件循环是单线程的
+/// - circulation thread
 /// - 每次只处理一个事件
+/// -
 /// - 因此不会并发处理 □
-///
+/// - therefore concurrency □
 /// **定理 3: 公平性 (Fairness)**
+/// **theorem 3: (Fairness)**
+/// **theorem 3: 公平性 (Fairness)**
 /// 在无优先级的情况下，所有事件最终都会被处理
-///
+/// in situation under ，all ultimately is
 /// 证明 (Proof):
 /// - FIFO 队列保证顺序
+/// - FIFO order
+/// - FIFO 队列Guaranteeorder
 /// - 事件循环不会跳过事件
+/// - circulation
 /// - 因此所有事件都会被处理 □
+/// - therefore all is □
 // ============================================================================
 // 第二部分: 核心数据结构
 // Part 2: Core Data Structures
@@ -125,38 +127,34 @@ use tracing::{Level, debug, error, info, instrument, span, warn};
 
 ///
 /// 事件类型枚举
-/// Event Type Enumeration
-///
+/// type enum
+/// 事件typeenum
 /// 定义了系统中所有可能的事件类型
-/// Defines all possible event types in the system
+/// definition system in all may type
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum EventType {
     /// 网络 I/O 事件
-    /// Network I/O event
+    /// network I/O
+    /// network I/O 事件
     NetworkIo,
 
     /// 定时器事件
-    /// Timer event
     Timer,
 
     /// 用户输入事件
-    /// User input event
     UserInput,
 
     /// 系统信号事件
-    /// System signal event
+    /// system
     SystemSignal,
 
     /// 自定义事件
-    /// Custom event
+    /// definition
     Custom(String),
 }
 
 /// 事件优先级
-/// Event Priority
-///
 /// 用于优先级调度
-/// Used for priority scheduling
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
 pub enum Priority {
     /// 低优先级 (Low priority)
@@ -173,16 +171,17 @@ pub enum Priority {
 }
 
 /// 事件结构体
-/// Event Structure
-///
+/// struct
+/// 事件struct
 /// 表示系统中的一个事件
-/// Represents an event in the system
+/// represent system in
 #[derive(Debug, Clone)]
 pub struct Event {
     /// 事件 ID (Event ID)
     pub id: u64,
 
     /// 事件类型 (Event type)
+    /// 事件type (Event type)
     pub event_type: EventType,
 
     /// 事件优先级 (Event priority)
@@ -200,7 +199,6 @@ pub struct Event {
 
 impl Event {
     /// 创建新事件
-    /// Create new event
     pub fn new(id: u64, event_type: EventType, priority: Priority, data: Vec<u8>) -> Self {
         Self {
             id,
@@ -213,15 +211,12 @@ impl Event {
     }
 
     /// 添加元数据
-    /// Add metadata
     pub fn with_metadata(mut self, key: String, value: String) -> Self {
         self.metadata.insert(key, value);
         self
     }
 }
 
-/// 为 Event 实现 Ord trait 以支持优先级队列
-/// Implement Ord trait for Event to support priority queue
 impl Ord for Event {
     fn cmp(&self, other: &Self) -> std::cmp::Ordering {
         // 优先级高的排在前面
@@ -247,10 +242,12 @@ impl PartialEq for Event {
 impl Eq for Event {}
 
 /// 事件处理结果
-/// Event Handling Result
+/// result
+/// 事件Handleresult
 #[derive(Debug)]
 pub enum HandleResult {
     /// 成功处理 (Successfully handled)
+    /// 成功Handle (Successfully handled)
     Success,
 
     /// 处理失败 (Handling failed)
@@ -264,28 +261,22 @@ pub enum HandleResult {
 }
 
 /// 事件处理器 Trait
-/// Event Handler Trait
-///
+/// Trait
 /// 定义事件处理器的接口
-/// Defines the interface for event handlers
+/// definition
 #[async_trait::async_trait]
 pub trait EventHandler: Send + Sync {
     /// 处理事件
-    /// Handle event
-    ///
     /// # 参数 (Arguments)
-    /// - `event`: 要处理的事件 (Event to handle)
-    ///
     /// # 返回值 (Returns)
     /// 处理结果 (Handling result)
     async fn handle(&self, event: &Event) -> HandleResult;
 
     /// 获取处理器名称
-    /// Get handler name
     fn name(&self) -> &str;
 
     /// 是否可以处理该事件类型
-    /// Can handle this event type
+    /// can this type
     fn can_handle(&self, event_type: &EventType) -> bool;
 }
 
@@ -295,19 +286,19 @@ pub trait EventHandler: Send + Sync {
 // ============================================================================
 
 /// Reactor 统计信息
-/// Reactor Statistics
+/// Reactor
 #[derive(Debug, Clone, Default)]
 pub struct ReactorStats {
-    /// 处理的事件总数 (Total events processed)
     pub events_processed: u64,
 
-    /// 失败的事件数 (Failed events)
+    /// 失败事件数 (Failed events)
     pub events_failed: u64,
 
-    /// 重新调度的事件数 (Rescheduled events)
+    /// 重新调度事件数 (Rescheduled events)
     pub events_rescheduled: u64,
 
     /// 平均处理时间 (微秒) (Average processing time in microseconds)
+    /// 平均Handletime (微秒) (Average processing time in microseconds)
     pub avg_processing_time_us: u64,
 
     /// 当前队列长度 (Current queue length)
@@ -315,16 +306,15 @@ pub struct ReactorStats {
 }
 
 /// Reactor 配置
-/// Reactor Configuration
 #[derive(Debug, Clone)]
 pub struct ReactorConfig {
     /// 最大队列长度 (Maximum queue length)
     pub max_queue_length: usize,
 
     /// 批处理大小 (Batch size)
+    /// (Batch size)
     pub batch_size: usize,
 
-    /// 是否启用优先级调度 (Enable priority scheduling)
     pub enable_priority: bool,
 
     /// 统计更新间隔 (Statistics update interval)
@@ -343,10 +333,8 @@ impl Default for ReactorConfig {
 }
 
 /// Reactor 主结构体
-/// Reactor Main Structure
-///
-/// 实现了完整的 Reactor 模式
-/// Implements the complete Reactor pattern
+/// Reactor struct
+/// Reactor 主struct
 #[derive(Clone)]
 pub struct Reactor {
     /// 配置 (Configuration)
@@ -354,11 +342,10 @@ pub struct Reactor {
 
     /// 事件队列 (Event queue)
     /// 使用优先级队列实现优先级调度
-    /// Uses priority queue for priority scheduling
     event_queue: Arc<Mutex<BinaryHeap<Event>>>,
 
     /// FIFO 队列 (用于非优先级模式)
-    /// FIFO queue (for non-priority mode)
+    /// FIFO ()
     fifo_queue: Arc<Mutex<VecDeque<Event>>>,
 
     /// 事件处理器映射 (Event handler map)
@@ -376,12 +363,8 @@ pub struct Reactor {
 }
 
 impl Reactor {
-    /// 创建新的 Reactor
-    /// Create new Reactor
-    ///
     /// # 参数 (Arguments)
     /// - `config`: Reactor 配置 (Reactor configuration)
-    ///
     /// # 返回值 (Returns)
     /// Reactor 实例 (Reactor instance)
     pub fn new(config: ReactorConfig) -> Self {
@@ -400,10 +383,9 @@ impl Reactor {
     }
 
     /// 注册事件处理器
-    /// Register event handler
-    ///
     /// # 参数 (Arguments)
     /// - `event_type`: 事件类型 (Event type)
+    /// - `event_type`: 事件type (Event type)
     /// - `handler`: 事件处理器 (Event handler)
     #[instrument(skip(self, handler))]
     pub async fn register_handler(&self, event_type: EventType, handler: Arc<dyn EventHandler>) {
@@ -417,13 +399,9 @@ impl Reactor {
     }
 
     /// 提交事件
-    /// Submit event
-    ///
     /// # 参数 (Arguments)
-    /// - `event`: 要提交的事件 (Event to submit)
-    ///
+    /// - `event`: 要提交事件 (Event to submit)
     /// # 返回值 (Returns)
-    /// 是否成功提交 (Whether submission was successful)
     #[instrument(skip(self, event))]
     pub async fn submit_event(&self, event: Event) -> Result<(), String> {
         let span = span!(Level::DEBUG, "submit_event", event_id = event.id);
@@ -467,7 +445,6 @@ impl Reactor {
     }
 
     /// 批量提交事件
-    /// Submit events in batch
     pub async fn submit_events_batch(&self, events: Vec<Event>) -> Result<(), String> {
         for event in events {
             self.submit_event(event).await?;
@@ -476,7 +453,7 @@ impl Reactor {
     }
 
     /// 生成新的事件 ID
-    /// Generate new event ID
+    /// ID
     async fn next_id(&self) -> u64 {
         let mut id = self.next_event_id.lock().await;
         let current = *id;
@@ -485,7 +462,6 @@ impl Reactor {
     }
 
     /// 创建事件
-    /// Create event
     pub async fn create_event(
         &self,
         event_type: EventType,
@@ -497,10 +473,8 @@ impl Reactor {
     }
 
     /// 运行事件循环
-    /// Run event loop
-    ///
-    /// 这是 Reactor 的核心方法，实现了事件循环逻辑
-    /// This is the core method of Reactor, implementing the event loop logic
+    /// Run circulation
+    /// Run事件circulation
     #[instrument(skip(self))]
     pub async fn run(&self) {
         info!("Starting Reactor event loop");
@@ -545,10 +519,8 @@ impl Reactor {
     }
 
     /// 批量处理事件
-    /// Process events in batch
-    ///
     /// 批处理可以提高性能
-    /// Batch processing improves performance
+    /// can performance
     async fn process_events_batch(&self) {
         let batch_size = self.config.batch_size;
         let mut events = Vec::with_capacity(batch_size);
@@ -616,7 +588,6 @@ impl Reactor {
     }
 
     /// 处理单个事件
-    /// Process single event
     #[instrument(skip(event, handlers, stats, next_event_id, event_queue, fifo_queue, config))]
     async fn process_single_event(
         event: Event,
@@ -815,13 +786,11 @@ impl Reactor {
     }
 
     /// 获取统计信息
-    /// Get statistics
     pub async fn get_stats(&self) -> ReactorStats {
         self.stats.read().await.clone()
     }
 
     /// 关闭 Reactor
-    /// Shutdown Reactor
     pub async fn shutdown(&self) {
         info!("Shutting down Reactor");
         self.shutdown_tx.send(()).await.ok();
@@ -834,7 +803,7 @@ impl Reactor {
 // ============================================================================
 
 /// 网络 I/O 事件处理器
-/// Network I/O Event Handler
+/// network I/O
 struct NetworkIoHandler {
     name: String,
 }
@@ -866,7 +835,6 @@ impl EventHandler for NetworkIoHandler {
 }
 
 /// 定时器事件处理器
-/// Timer Event Handler
 struct TimerHandler {
     name: String,
 }
@@ -897,7 +865,6 @@ impl EventHandler for TimerHandler {
 }
 
 /// 用户输入事件处理器
-/// User Input Event Handler
 struct UserInputHandler {
     name: String,
 }
@@ -933,7 +900,7 @@ impl EventHandler for UserInputHandler {
 // ============================================================================
 
 /// 基础示例: 简单的事件处理
-/// Basic Example: Simple event processing
+/// foundation example : simple
 async fn basic_example() {
     println!("\n=== 基础示例: 简单的事件处理 ===");
     println!("=== Basic Example: Simple Event Processing ===\n");
@@ -1011,7 +978,7 @@ async fn basic_example() {
 }
 
 /// 高级示例: 优先级调度
-/// Advanced Example: Priority scheduling
+/// example :
 async fn priority_scheduling_example() {
     println!("\n=== 高级示例: 优先级调度 ===");
     println!("=== Advanced Example: Priority Scheduling ===\n");
@@ -1061,7 +1028,8 @@ async fn priority_scheduling_example() {
 }
 
 /// 性能测试: 高吞吐量场景
-/// Performance Test: High throughput scenario
+/// performance test : scenario
+/// performance test: 高吞吐量scenario
 async fn performance_test() {
     println!("\n=== 性能测试: 高吞吐量场景 ===");
     println!("=== Performance Test: High Throughput Scenario ===\n");

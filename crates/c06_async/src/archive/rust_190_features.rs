@@ -1,18 +1,28 @@
 //! Rust 异步编程特性模块 (历史版本)
+//! Rust async feature module (this )
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//! ⚠️ **this ** - this as reference
 //!
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //!
 //! 本模块实现了当前稳定版本中的异步编程特性，包括：
+//! this module when before this in async feature ，：
 //! - 改进的异步性能优化
+//! - async performance optimization
 //! - 增强的错误处理机制
+//! - error handling mechanism
 //! - 稳定的异步 Traits
+//! - async Traits
 //! - 结构化并发支持
+//! - structure concurrency
 //! - 超时控制和取消机制
+//! - and mechanism
 //!
 //! 注意：AsyncDrop、Async Generators 等特性仍在开发中，
 //! 本模块提供了模拟实现以供学习和测试使用。
+//! This module provides learn and 。
 use anyhow::Result;
 use std::collections::HashMap;
 use std::sync::Arc;
@@ -21,8 +31,10 @@ use tokio::sync::{Mutex, Semaphore};
 use tokio::time::sleep;
 
 /// 异步资源管理模拟实现
+/// async
 ///
 /// 注意：AsyncDrop trait 仍在开发中，这里使用 Drop trait 模拟异步资源清理
+/// ：AsyncDrop trait in in ， Drop trait async
 #[derive(Debug)]
 pub struct AsyncResource {
     id: String,
@@ -62,8 +74,10 @@ impl Drop for AsyncResource {
 }
 
 /// 异步生成器模拟实现
+/// async
 ///
 /// 在Rust 1.90中，AsyncIterator trait尚未稳定，这里使用自定义实现
+/// in Rust 1.90in ，AsyncIterator trait，definition
 pub struct AsyncDataGenerator {
     current: usize,
     max: usize,
@@ -100,8 +114,10 @@ impl AsyncDataGenerator {
 }
 
 /// 改进的借用检查器演示
+/// borrowing demonstration
 ///
 /// 展示Polonius借用检查器的改进，包括更好的生命周期推断
+/// Poloniusborrowing ，lifetime infer
 pub struct BorrowCheckerDemo {
     data: Arc<Mutex<HashMap<String, String>>>,
     semaphore: Arc<Semaphore>,
@@ -116,6 +132,7 @@ impl BorrowCheckerDemo {
     }
 
     /// 演示改进的借用检查器如何处理复杂的借用场景
+    /// demonstration borrowing complex borrowing scenario
     pub async fn complex_borrow_operation(&self, key: String, value: String) -> Result<String> {
         let _permit = self.semaphore.acquire().await?;
 
@@ -135,6 +152,7 @@ impl BorrowCheckerDemo {
     }
 
     /// 演示生命周期转换的改进
+    /// demonstration lifetime conversion
     pub async fn lifetime_conversion_demo(&self) -> Result<()> {
         let data = {
             let mut map = self.data.lock().await;
@@ -151,6 +169,7 @@ impl BorrowCheckerDemo {
 }
 
 /// 下一代特质求解器性能演示
+/// under trait performance demonstration
 pub struct TraitSolverDemo {
     cache: Arc<Mutex<HashMap<String, usize>>>,
 }
@@ -169,6 +188,7 @@ impl TraitSolverDemo {
     }
 
     /// 演示特质求解器的性能优化
+    /// demonstration trait performance optimization
     pub async fn trait_solver_performance_test(&self, input: &str) -> Result<usize> {
         let start = std::time::Instant::now();
 
@@ -204,6 +224,7 @@ impl TraitSolverDemo {
 }
 
 /// 并行前端编译优化演示
+/// parallelism frontend optimization demonstration
 pub struct ParallelFrontendDemo {
     workers: usize,
 }
@@ -222,6 +243,7 @@ impl ParallelFrontendDemo {
     }
 
     /// 演示并行编译优化
+    /// demonstration parallelism optimization
     pub async fn parallel_compilation_demo(&self, tasks: Vec<String>) -> Result<Vec<String>> {
         let semaphore = Arc::new(Semaphore::new(self.workers));
         let mut handles = Vec::new();
@@ -252,6 +274,7 @@ impl ParallelFrontendDemo {
 }
 
 /// 综合演示Rust 1.90异步特性
+/// synthesize demonstration Rust 1.90async feature
 pub async fn demonstrate_rust_190_async_features() -> Result<()> {
     println!("🚀 演示 Rust 1.90 异步编程新特性");
     println!("==========================================");

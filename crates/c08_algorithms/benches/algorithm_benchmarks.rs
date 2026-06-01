@@ -1,6 +1,7 @@
 //! 算法性能基准测试
-//!
+//! algorithm Performance benchmark
 //! 本文件包含各种算法的性能基准测试，用于评估2025年最新优化后的性能
+//! this algorithm Performance benchmark ，2025optimization after performance
 use c08_algorithms::algorithms::dynamic_programming::DynamicProgrammingAlgorithms;
 use c08_algorithms::algorithms::execution_modes::SyncAlgorithm;
 use c08_algorithms::algorithms::graph::GraphAlgorithms;
@@ -12,6 +13,7 @@ use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
 use std::hint::black_box;
 
 /// 排序算法基准测试
+/// sorting algorithm benchmark
 fn bench_sorting_algorithms(c: &mut Criterion) {
     let mut group = c.benchmark_group("sorting_algorithms");
 
@@ -32,6 +34,7 @@ fn bench_sorting_algorithms(c: &mut Criterion) {
 }
 
 /// 搜索算法基准测试
+/// searching algorithm benchmark
 fn bench_searching_algorithms(c: &mut Criterion) {
     let mut group = c.benchmark_group("searching_algorithms");
 
@@ -53,6 +56,7 @@ fn bench_searching_algorithms(c: &mut Criterion) {
 }
 
 /// 字符串算法基准测试
+/// string algorithm benchmark
 fn bench_string_algorithms(c: &mut Criterion) {
     let mut group = c.benchmark_group("string_algorithms");
 
@@ -72,6 +76,7 @@ fn bench_string_algorithms(c: &mut Criterion) {
 }
 
 /// 图算法基准测试
+/// graph algorithm benchmark
 fn bench_graph_algorithms(c: &mut Criterion) {
     let mut group = c.benchmark_group("graph_algorithms");
 
@@ -91,6 +96,7 @@ fn bench_graph_algorithms(c: &mut Criterion) {
 }
 
 /// 动态规划算法基准测试
+/// dynamic programming algorithm benchmark
 fn bench_dynamic_programming(c: &mut Criterion) {
     let mut group = c.benchmark_group("dynamic_programming");
 
@@ -124,6 +130,8 @@ fn bench_dynamic_programming(c: &mut Criterion) {
 }
 
 /// 数学算法基准测试
+/// algorithm benchmark
+/// 数学algorithmbenchmark
 fn bench_math_algorithms(c: &mut Criterion) {
     let mut group = c.benchmark_group("math_algorithms");
 
@@ -148,6 +156,7 @@ fn bench_math_algorithms(c: &mut Criterion) {
 }
 
 /// 内存使用基准测试
+/// memory benchmark
 fn bench_memory_usage(c: &mut Criterion) {
     let mut group = c.benchmark_group("memory_usage");
 
@@ -172,6 +181,7 @@ fn bench_memory_usage(c: &mut Criterion) {
 }
 
 /// 并发性能基准测试
+/// concurrency Performance benchmark
 fn bench_concurrent_algorithms(c: &mut Criterion) {
     let mut group = c.benchmark_group("concurrent_algorithms");
 

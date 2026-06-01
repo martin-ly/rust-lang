@@ -486,7 +486,7 @@ heaptrack ./target/release/myapp
 **A:**
 
 - **Tokio**: 生态系统最完善，推荐用于大多数项目
-- **async-std**: API 更接近标准库，适合特定场景
+- **async-std [已归档]**: API 更接近标准库，适合特定场景
 - **smol**: 轻量级，适合嵌入式或学习
 - **自定义**: 仅在特殊需求下考虑
 

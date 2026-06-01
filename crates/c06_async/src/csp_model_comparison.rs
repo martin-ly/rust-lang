@@ -3,69 +3,107 @@
 //! # 概述 (Overview)
 //!
 //! 本模块深入对比 Rust 和 Golang 的并发模型，重点分析：
+//! this module to Rust and Golang concurrency ，emphasis analyze ：
 //! - CSP 理论基础
+//! - CSP theory foundation
 //! - Golang 的 goroutine + channel 模型
 //! - Rust 的 async/await + channel 模型
 //! - 两者的语义差异与等价关系
+//! - and etc.
 //!
 //! # CSP 理论基础
+//! # CSP theory foundation
 //!
 //! ## 1. CSP 的形式化定义
+//! ## 1. CSP definition
 //!
 //! ### 1.1 基本概念
+//! ### 1.1 this concept
 //!
 //! ```text
 //! CSP (Communicating Sequential Processes) 由 Tony Hoare (1978) 提出
 //!
 //! 核心思想:
+//! core thought :
 //! - 进程 (Process): 独立的计算单元
+//! - process (Process):
 //! - 通信 (Communication): 进程间通过 channel 交换消息
+//! - (Communication): process channel exchange
 //! - 同步 (Synchronization): 通信隐含同步
+//! - synchronous (Synchronization): synchronous
 //!
 //! 形式化语法:
+//! :
 //! P ::= STOP                    (停止进程)
+//! P ::= STOP (process )
 //!     | SKIP                    (空进程)
+//!     | SKIP (process )
 //!     | a -> P                  (前缀: 执行动作 a 然后执行 P)
+//!     | a -> P (before : a then P)
 //!     | P □ Q                   (外部选择)
+//!     | P □ Q (outside )
 //!     | P ⊓ Q                   (内部选择)
+//!     | P ⊓ Q (inside )
 //!     | P || Q                  (并行组合)
+//!     | P || Q (parallelism combination )
 //!     | P ||| Q                 (交错组合)
+//!     | P ||| Q (combination )
 //! ```
 //!
 //! ### 1.2 Channel 语义
 //!
 //! ```text
 //! Channel 是进程间通信的媒介:
+//! Channel process :
 //!
 //! c!v  : 在 channel c 上发送值 v (输出)
+//! c!v : in channel c on v ()
 //! c?x  : 从 channel c 接收值到变量 x (输入)
+//! c?x : from channel c to variable x ()
 //!
 //! 同步语义:
+//! synchronous :
 //! - 发送者等待接收者
+//! - etc.
 //! - 接收者等待发送者
+//! - etc.
 //! - 通信是原子操作
+//! - atomic operation
 //!
 //! 缓冲语义:
+//! buffering :
 //! - 无缓冲: 严格同步 (Golang 默认)
+//! - unbuffered : synchronous (Golang )
 //! - 有缓冲: 异步通信 (容量有限)
+//! - buffering : async ()
 //! ```
 //!
 //! ### 1.3 并发组合
+//! ### 1.3 concurrency combination
 //!
 //! ```text
 //! 并行组合 (P || Q):
+//! parallelism combination (P || Q):
 //! - P 和 Q 并发执行
+//! - P and Q concurrency
 //! - 共享 channel 上的通信需要同步
+//! - channel on synchronous
 //! - 独立事件可以交错执行
+//! - can
 //!
 //! 示例:
+//! example :
 //! P = c!1 -> d!2 -> STOP
 //! Q = c?x -> e!x -> STOP
 //!
 //! P || Q 的可能执行:
+//! P || Q may :
 //! 1. c 上通信 (P 发送 1, Q 接收)
+//! 1. c on (P 1, Q )
 //! 2. P 执行 d!2
+//! 2. P d!2
 //! 3. Q 执行 e!1
+//! 3. Q e!1
 //! ```
 //!
 //! ## 2. Golang CSP 模型
@@ -74,11 +112,15 @@
 //!
 //! ```text
 //! Goroutine 是轻量级线程:
+//! Goroutine thread :
 //! - 栈大小动态增长 (初始 ~2KB)
+//! - stack ( ~2KB)
 //! - M:N 调度模型 (M goroutines on N OS threads)
 //! - 抢占式调度 (Go 1.14+)
+//! - (Go 1.14+)
 //!
 //! 语法:
+//! :
 //! go func() { ... }()  // 启动新 goroutine
 //! ```
 //!
@@ -87,21 +129,29 @@
 //! ```text
 //! Channel 类型:
 //! - 无缓冲: make(chan T)       // 同步通信
+//! - unbuffered : make(chan T) // synchronous
 //! - 有缓冲: make(chan T, n)    // 异步通信，容量 n
+//! - buffering : make(chan T, n) // async ， n
 //!
 //! 操作:
+//! :
 //! - ch <- v      // 发送
+//! - ch <- v //
 //! - v := <-ch    // 接收
+//! - v := <-ch //
 //! - close(ch)    // 关闭
 //!
 //! select 语句:
 //! select {
 //! case v := <-ch1:
 //!     // 处理 ch1
+//!     // ch1
 //! case ch2 <- v:
 //!     // 发送到 ch2
+//!     // to ch2
 //! default:
 //!     // 非阻塞
+//!     //
 //! }
 //! ```
 //!
@@ -111,13 +161,17 @@
 //!
 //! ```text
 //! Rust 的异步基于状态机:
+//! Rust async state machine :
 //! - async fn 返回 Future
 //! - .await 挂起 Future
 //! - 非抢占式调度 (cooperative)
+//! - (cooperative)
 //!
 //! 语法:
+//! :
 //! async fn foo() { ... }       // 异步函数
 //! foo().await                  // 等待完成
+//! foo().await // etc.
 //! tokio::spawn(async { ... })  // 生成任务
 //! ```
 //!
@@ -126,11 +180,15 @@
 //! ```text
 //! Channel 类型:
 //! - mpsc: 多生产者单消费者
+//! - mpsc: multi-producer single-consumer
 //!   - unbounded: 无界队列
 //!   - bounded: 有界队列
+//!   - bounded:
 //! - oneshot: 一次性通信
+//! - oneshot:
 //! - broadcast: 广播
 //! - watch: 观察值变化
+//! - watch:
 //!
 //! Tokio mpsc:
 //! let (tx, mut rx) = mpsc::channel(100);
@@ -147,11 +205,15 @@
 //! │ 并发原语        │ goroutine                │ async task               │
 //! │ 启动开销        │ ~2KB 栈                  │ ~64 bytes Future         │
 //! │ 调度模型        │ 抢占式                   │ 协作式                   │
+//! │ │ │ │
 //! │ Channel 类型    │ 统一类型                 │ 多种特化类型             │
+//! │ Channel type │ type │ type │
 //! │ select          │ 内置 select 语句         │ tokio::select! 宏        │
 //! │ 错误处理        │ panic + recover          │ Result<T, E>             │
 //! │ 内存安全        │ GC                       │ 所有权 + 借用检查        │
+//! │ memory safety │ GC │ ownership + borrowing │
 //! │ 性能            │ GC 暂停                  │ 零成本抽象               │
+//! │ performance │ GC │ cost │
 //! └─────────────────┴──────────────────────────┴──────────────────────────┘
 //! ```
 use std::time::Duration;
@@ -159,12 +221,15 @@ use tokio::sync::mpsc;
 use tokio::time::sleep;
 
 /// # 示例 1: 基本 CSP 模式
+/// # example 1: this CSP
 ///
 /// 经典的生产者-消费者模式
+/// -
 pub mod producer_consumer {
     use super::*;
 
     /// Golang 风格的实现 (模拟)
+    /// Golang ()
     ///
     /// ```go
     /// func producer(ch chan int) {
@@ -223,6 +288,7 @@ pub mod producer_consumer {
     }
 
     /// Rust 惯用风格
+    /// Rust
     pub mod rust_style {
         use super::*;
 
@@ -266,8 +332,10 @@ pub mod producer_consumer {
 }
 
 /// # 示例 2: Select 模式
+/// # example 2: Select
 ///
 /// 多路复用 channel 操作
+/// channel
 pub mod select_pattern {
     use super::*;
 
@@ -329,6 +397,7 @@ pub mod select_pattern {
     }
 
     /// Rust 的模式匹配增强
+    /// Rust
     pub mod rust_enhanced {
         use super::*;
 
@@ -379,6 +448,7 @@ pub mod select_pattern {
 /// # 示例 3: Worker Pool 模式
 ///
 /// 工作池并发处理任务
+/// concurrency task
 pub mod worker_pool {
     use super::*;
     use std::sync::Arc;
@@ -530,8 +600,10 @@ pub mod worker_pool {
 }
 
 /// # 示例 4: Pipeline 模式
+/// # example 4: Pipeline
 ///
 /// 流水线处理数据
+/// pipeline
 pub mod pipeline {
     use super::*;
 
@@ -612,6 +684,7 @@ pub mod pipeline {
     }
 
     /// Rust 惯用风格: 使用 Stream
+    /// Rust : Stream
     pub mod rust_style {
         use super::*;
         use tokio_stream::{StreamExt, wrappers::ReceiverStream};
@@ -657,8 +730,10 @@ pub mod pipeline {
 }
 
 /// # 示例 5: 扇入/扇出模式 (Fan-in/Fan-out)
+/// # example 5: / (Fan-in/Fan-out)
 ///
 /// 多个生产者，多个消费者
+/// ，
 pub mod fan_in_out {
     use super::*;
 
@@ -698,6 +773,7 @@ pub mod fan_in_out {
 }
 
 /// # 综合示例: 运行所有演示
+/// # synthesize example : Run all demonstrations
 pub async fn run_all_examples() {
     println!("╔══════════════════════════════════════════════════════════╗");
     println!("║       CSP 模型对比分析 (Rust vs Golang)                 ║");

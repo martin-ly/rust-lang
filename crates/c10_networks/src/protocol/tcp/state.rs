@@ -1,9 +1,11 @@
 //! TCP 状态机实现
+//! TCP state machine
 use crate::error::NetworkError;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 /// TCP 连接状态
+/// TCP state
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum TcpState {
     Closed,
@@ -21,11 +23,13 @@ pub enum TcpState {
 
 impl TcpState {
     /// 检查状态是否允许发送数据
+    /// state
     pub fn can_send_data(&self) -> bool {
         matches!(self, TcpState::Established)
     }
 
     /// 检查状态是否允许接收数据
+    /// state
     pub fn can_receive_data(&self) -> bool {
         matches!(self, TcpState::Established | TcpState::CloseWait)
     }
@@ -42,6 +46,7 @@ impl TcpState {
 }
 
 /// TCP 事件
+/// TCP
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum TcpEvent {
     Open,
@@ -53,6 +58,7 @@ pub enum TcpEvent {
 }
 
 /// TCP 状态机
+/// TCP state machine
 #[derive(Debug)]
 pub struct TcpStateMachine {
     current_state: TcpState,
@@ -61,6 +67,7 @@ pub struct TcpStateMachine {
 
 impl TcpStateMachine {
     /// 创建新的状态机
+    /// state machine
     pub fn new() -> Self {
         let mut table = HashMap::new();
 
@@ -83,6 +90,7 @@ impl TcpStateMachine {
     }
 
     /// 执行状态转换
+    /// state conversion
     pub fn transition(&mut self, event: TcpEvent) -> Result<(), NetworkError> {
         if let Some(new_state) = self
             .transition_table
@@ -99,11 +107,13 @@ impl TcpStateMachine {
     }
 
     /// 获取当前状态
+    /// when before state
     pub fn current_state(&self) -> &TcpState {
         &self.current_state
     }
 
     /// 检查是否可以执行事件
+    /// can
     pub fn can_execute(&self, event: &TcpEvent) -> bool {
         self.transition_table
             .contains_key(&(self.current_state.clone(), event.clone()))

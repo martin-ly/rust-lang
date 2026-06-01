@@ -1,6 +1,8 @@
 //! Rust 1.90 Edition 2024 新特性演示程序
+//! Rust 1.90 Edition 2024 feature demonstration program
 //!
 //! 这个程序展示了如何在 c07_process 项目中使用最新的 Rust 1.90 特性
+//! program in c07_process project in Rust 1.90 feature
 use c07_process::error::ProcessError;
 use c07_process::prelude::*;
 use c07_process::prelude::{
@@ -150,6 +152,7 @@ async fn main() -> Result<()> {
 }
 
 /// 演示新特性与现有功能的集成
+/// demonstration feature and functionality
 async fn demonstrate_integration_with_existing_features() -> Result<()> {
     // 创建进程管理器
     let mut pm = ProcessManager::new();
@@ -215,6 +218,7 @@ async fn demonstrate_integration_with_existing_features() -> Result<()> {
 }
 
 /// 使用新特性创建进程配置
+/// feature process
 fn create_config_with_new_features() -> Result<ProcessConfig> {
     // 使用改进的迭代器和模式匹配
     let args = vec!["Hello", "Rust", "1.90"]

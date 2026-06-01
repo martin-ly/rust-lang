@@ -1,8 +1,7 @@
 #![allow(clippy::type_complexity)]
 
 //! 内存性能基准测试
-//!
-//! 这个模块包含了 c10_networks 库内存管理相关的性能基准测试
+//! memory Performance benchmark
 use bytes::Bytes;
 use c10_networks::packet::{Packet, PacketStats, PacketType};
 use c10_networks::performance::cache::Cache;
@@ -13,6 +12,7 @@ use std::sync::Arc;
 use std::thread;
 
 /// 内存分配性能测试
+/// memory performance test
 fn bench_memory_allocation(c: &mut Criterion) {
     let mut group = c.benchmark_group("memory_allocation");
 
@@ -48,6 +48,7 @@ fn bench_memory_allocation(c: &mut Criterion) {
 }
 
 /// 内存池性能测试
+/// memory pool performance test
 fn bench_memory_pool(c: &mut Criterion) {
     let mut group = c.benchmark_group("memory_pool");
 
@@ -88,6 +89,8 @@ fn bench_memory_pool(c: &mut Criterion) {
 }
 
 /// 缓存性能测试
+/// performance test
+/// 缓存performance test
 fn bench_cache_performance(c: &mut Criterion) {
     let mut group = c.benchmark_group("cache_performance");
 
@@ -127,6 +130,8 @@ fn bench_cache_performance(c: &mut Criterion) {
 }
 
 /// 数据包内存性能测试
+/// memory performance test
+/// 数据包memoryperformance test
 fn bench_packet_memory(c: &mut Criterion) {
     let mut group = c.benchmark_group("packet_memory");
 
@@ -172,6 +177,8 @@ fn bench_packet_memory(c: &mut Criterion) {
 }
 
 /// 大数据块内存性能测试
+/// memory performance test
+/// 大数据块memoryperformance test
 fn bench_large_memory_blocks(c: &mut Criterion) {
     let mut group = c.benchmark_group("large_memory_blocks");
 
@@ -216,6 +223,7 @@ fn bench_large_memory_blocks(c: &mut Criterion) {
 }
 
 /// 内存碎片化性能测试
+/// memory performance test
 fn bench_memory_fragmentation(c: &mut Criterion) {
     let mut group = c.benchmark_group("memory_fragmentation");
 
@@ -277,6 +285,7 @@ fn bench_memory_fragmentation(c: &mut Criterion) {
 }
 
 /// 并发内存分配性能测试
+/// concurrency memory performance test
 fn bench_concurrent_memory_allocation(c: &mut Criterion) {
     let mut group = c.benchmark_group("concurrent_memory_allocation");
 
@@ -365,6 +374,7 @@ fn bench_concurrent_memory_allocation(c: &mut Criterion) {
 }
 
 /// 内存使用模式性能测试
+/// memory performance test
 fn bench_memory_usage_patterns(c: &mut Criterion) {
     let mut group = c.benchmark_group("memory_usage_patterns");
 
@@ -433,6 +443,7 @@ fn bench_memory_usage_patterns(c: &mut Criterion) {
 }
 
 /// 内存泄漏检测性能测试
+/// memory leak performance test
 fn bench_memory_leak_detection(c: &mut Criterion) {
     let mut group = c.benchmark_group("memory_leak_detection");
 

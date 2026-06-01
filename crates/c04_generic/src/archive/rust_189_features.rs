@@ -1,43 +1,30 @@
 //! # Rust 1.89 特性示例 (历史版本)
-//!
+//! # Rust 1.89 feature example (this )
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//!
+//! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
-//!
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! ## 版本历史说明
-//!
-//! 本文件展示 Rust 1.89 版本的特性，当前项目已升级到 Rust 1.92.0。
-//!
+//! ## this explain
 //! ### Rust 1.92.0 主要改进
-//!
+//! ### Rust 1.92.0 main
 //! - **语言特性**: 关联项多边界、增强的高阶生命周期、改进的自动特征推断
-//! - **标准库**: NonZero::div_ceil、rotate_right 等
+//! - **feature **: edge 、lifetime 、infer
 //! - **性能优化**: 迭代器方法特化、泛型约束优化
-//!
+//! - **performance optimization **: method 、generic optimization
 //! ### 迁移建议
-//!
+//! ###
 //! 1. 更新 Cargo.toml: `rust-version = "1.92"`
-//! 2. 参考 `rust_192_features.rs` 了解最新特性
-//! 3. 查看 `docs/RUST_192_GENERIC_IMPROVEMENTS.md` 了解完整改进
-//!
 //! 参考:
-//! - [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/)
+//! reference :
 //! - [历史版本: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
-//!
-//! ---
-//!
-//! # Rust 1.89 相关语言能力在泛型方向的重要对齐点（精选）
-//!
-//! 1) TAIT（Type Alias Impl Trait，稳定的 impl Trait 类型别名用法）
-//!    - 用途：为复杂的 `impl Trait` 返回或迭代器等零成本抽象提供可命名的别名。
+//! - [历史版this: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 //!
 //! 2) RPITIT（return-position impl Trait in traits，在 trait 方法返回位置使用 impl Trait）
 //!    - 用途：在 trait 方法签名中直接返回 `impl Trait`，配合对象安全限制或使用 GAT 进行更强抽象。
-//!
-//! 3) Const generics（常量泛型，含更完整的表达能力）
+//!    - purpose ：in trait method in `impl Trait`，to or GAT 。
 //!    - 用途：在类型层面对大小/阈值等不变参数建模，生成零成本特化代码。
-//!
-//! 下方示例均保持最小可编译与直观演示。更多边界与高级用法建议参考标准库与成熟库实现（如 itertools、rayon、serde）。
+//!    - purpose ：in type level to /etc. parameter ，cost 。
 // 1) TAIT（退而求其次演示）：
 // 由于某些编译器通道/版本下“类型别名中的 impl Trait”可能受限，这里以
 // “函数返回位置 impl Trait”来表达与 TAIT 接近的意图（零成本迭代器组合）。

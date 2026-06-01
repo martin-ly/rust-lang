@@ -1,15 +1,18 @@
 #![allow(clippy::type_complexity)]
 
 //! Rust 1.92.0 泛型特性性能基准测试套件
-//!
-//! 本模块提供 Rust 1.92.0 新特性的性能基准测试，包括：
+//! Rust 1.92.0 generic feature Performance benchmark
+//! This module provides Rust 1.92.0 新featureperformancebenchmark，包括：
 //! - 关联项的多个边界性能
+//! - edge performance
 //! - 高阶生命周期处理性能
+//! - lifetime performance
 //! - 泛型内存计算性能
+//! - generic memory performance
 //! - 迭代器方法特化性能
-//!
+//! - method performance
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo bench --bench rust_192_benchmarks
 //! ```
 use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
@@ -22,6 +25,7 @@ use c04_generic::archive::rust_192_features::{
 };
 
 /// 基准测试关联项的多个边界性能
+/// benchmark edge performance
 fn bench_multiple_bounds_performance(c: &mut Criterion) {
     let mut group = c.benchmark_group("multiple_bounds_performance");
     group.throughput(Throughput::Elements(1));
@@ -53,6 +57,7 @@ fn bench_multiple_bounds_performance(c: &mut Criterion) {
 }
 
 /// 基准测试泛型转换器性能
+/// benchmark generic conversion performance
 fn bench_generic_transformer_performance(c: &mut Criterion) {
     let mut group = c.benchmark_group("generic_transformer_performance");
     group.throughput(Throughput::Elements(1));
@@ -79,6 +84,7 @@ fn bench_generic_transformer_performance(c: &mut Criterion) {
 }
 
 /// 基准测试高阶生命周期处理性能
+/// benchmark lifetime performance
 fn bench_higher_ranked_lifetime_performance(c: &mut Criterion) {
     let mut group = c.benchmark_group("higher_ranked_lifetime_performance");
     group.throughput(Throughput::Elements(1));
@@ -109,6 +115,7 @@ fn bench_higher_ranked_lifetime_performance(c: &mut Criterion) {
 }
 
 /// 基准测试泛型内存计算性能
+/// benchmark generic memory performance
 fn bench_generic_memory_calculation_performance(c: &mut Criterion) {
     let mut group = c.benchmark_group("generic_memory_calculation_performance");
 
@@ -152,6 +159,7 @@ fn bench_generic_memory_calculation_performance(c: &mut Criterion) {
 }
 
 /// 基准测试迭代器方法特化性能
+/// benchmark method performance
 fn bench_iterator_specialization_performance(c: &mut Criterion) {
     let mut group = c.benchmark_group("iterator_specialization_performance");
     group.throughput(Throughput::Elements(1));
@@ -183,6 +191,7 @@ fn bench_iterator_specialization_performance(c: &mut Criterion) {
 }
 
 /// 基准测试泛型集合验证器性能
+/// benchmark generic set performance
 fn bench_collection_validator_performance(c: &mut Criterion) {
     let mut group = c.benchmark_group("collection_validator_performance");
     group.throughput(Throughput::Elements(1));
@@ -215,6 +224,7 @@ fn bench_collection_validator_performance(c: &mut Criterion) {
 }
 
 /// 综合性能基准测试：完整的泛型处理流程
+/// synthesize Performance benchmark ：complete generic process
 fn bench_complete_workflow_performance(c: &mut Criterion) {
     let mut group = c.benchmark_group("complete_workflow_performance");
     group.throughput(Throughput::Elements(1));

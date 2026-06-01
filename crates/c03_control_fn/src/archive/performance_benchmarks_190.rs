@@ -1,13 +1,15 @@
 //! Rust 1.90 性能基准测试模块
-//!
-//! 本模块提供了全面的性能基准测试，展示 Rust 1.90 新特性在性能方面的优势：
+//! Rust 1.90 Performance benchmark module
 //! - 异步性能基准测试
+//! - async Performance benchmark
 //! - 内存使用优化测试
+//! - memory optimization
 //! - 并发性能测试
+//! - concurrency performance test
 //! - 编译时间优化测试
+//! - compile-time optimization
 //! - 运行时性能分析
-//!
-//! 所有基准测试都使用 Rust 1.90 的最新特性，并提供详细的性能分析报告。
+//! - runtime performance analyze
 use std::collections::HashMap;
 use std::sync::Arc;
 use std::time::{Duration, Instant};
@@ -17,6 +19,7 @@ use anyhow::Result;
 use serde::{Deserialize, Serialize};
 
 /// 性能基准测试结果
+/// Performance benchmark result
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct BenchmarkResult {
     pub test_name: String,
@@ -31,6 +34,7 @@ pub struct BenchmarkResult {
 }
 
 /// 性能基准测试器
+/// Performance benchmark
 pub struct PerformanceBenchmark {
     results: Arc<Mutex<Vec<BenchmarkResult>>>,
     warmup_iterations: u32,
@@ -51,6 +55,7 @@ impl PerformanceBenchmark {
     }
 
     /// 运行基准测试
+    /// Run benchmark
     pub async fn benchmark<F, Fut, R>(
         &self,
         test_name: &str,
@@ -114,6 +119,7 @@ impl PerformanceBenchmark {
     }
 
     /// 运行同步基准测试
+    /// Run synchronous benchmark
     pub fn benchmark_sync<F, R>(
         &self,
         test_name: &str,
@@ -173,11 +179,14 @@ impl PerformanceBenchmark {
     }
 
     /// 获取所有测试结果
+    /// all result
+    /// Get所有Test forresult
     pub async fn get_results(&self) -> Vec<BenchmarkResult> {
         self.results.lock().await.clone()
     }
 
     /// 生成性能报告
+    /// performance
     pub async fn generate_report(&self) -> String {
         let results = self.get_results().await;
         let mut report = String::new();
@@ -222,6 +231,7 @@ impl PerformanceBenchmark {
 }
 
 /// 异步性能测试
+/// async performance test
 #[derive(Default)]
 pub struct AsyncPerformanceTests {
     benchmark: PerformanceBenchmark,
@@ -234,6 +244,7 @@ impl AsyncPerformanceTests {
     }
 
     /// 测试异步闭包性能
+    /// async performance
     pub async fn test_async_closure_performance(&self) -> Result<BenchmarkResult> {
         let result = self.benchmark.benchmark(
             "异步闭包性能测试",
@@ -256,6 +267,7 @@ impl AsyncPerformanceTests {
     }
 
     /// 测试异步 trait 性能
+    /// async trait performance
     pub async fn test_async_trait_performance(&self) -> Result<BenchmarkResult> {
         let result = self.benchmark.benchmark(
             "异步 trait 性能测试",
@@ -273,6 +285,7 @@ impl AsyncPerformanceTests {
     }
 
     /// 测试并发处理性能
+    /// concurrency performance
     pub async fn test_concurrent_processing_performance(&self) -> Result<BenchmarkResult> {
         let result = self.benchmark.benchmark(
             "并发处理性能测试",
@@ -303,6 +316,7 @@ impl AsyncPerformanceTests {
     }
 
     /// 测试异步状态机性能
+    /// async state machine performance
     pub async fn test_async_state_machine_performance(&self) -> Result<BenchmarkResult> {
         let result = self.benchmark.benchmark(
             "异步状态机性能测试",
@@ -325,6 +339,7 @@ impl AsyncPerformanceTests {
 }
 
 /// 测试用的异步处理器
+/// async
 #[allow(dead_code)]
 pub struct AsyncTestProcessor {
     name: String,
@@ -344,6 +359,7 @@ impl AsyncTestProcessor {
 }
 
 /// 测试用的异步状态机
+/// async state machine
 #[derive(Debug, Clone, PartialEq)]
 pub enum AsyncTestState {
     Initializing,
@@ -399,6 +415,7 @@ impl AsyncTestStateMachine {
 }
 
 /// 内存性能测试
+/// memory performance test
 #[allow(dead_code)]
 pub struct MemoryPerformanceTests {
     benchmark: PerformanceBenchmark,
@@ -418,6 +435,7 @@ impl MemoryPerformanceTests {
     }
 
     /// 测试元组集合内存使用
+    /// set memory
     pub fn test_tuple_collection_memory(&self) -> BenchmarkResult {
         self.benchmark.benchmark_sync(
             "元组集合内存使用测试",
@@ -436,6 +454,7 @@ impl MemoryPerformanceTests {
     }
 
     /// 测试枚举内存使用
+    /// enum memory
     pub fn test_enum_memory_usage(&self) -> BenchmarkResult {
         self.benchmark.benchmark_sync(
             "枚举内存使用测试",
@@ -463,6 +482,7 @@ impl MemoryPerformanceTests {
     }
 
     /// 测试异步资源内存使用
+    /// async memory
     pub async fn test_async_resource_memory(&self) -> Result<BenchmarkResult> {
         let result = self.benchmark.benchmark(
             "异步资源内存使用测试",
@@ -491,6 +511,7 @@ impl MemoryPerformanceTests {
 }
 
 /// 测试用的异步资源
+/// async
 #[derive(Debug, Clone)]
 #[allow(dead_code)]
 pub enum AsyncTestResource {
@@ -515,6 +536,7 @@ pub struct AsyncTestFile {
 }
 
 /// 并发性能测试
+/// concurrency performance test
 #[allow(dead_code)]
 pub struct ConcurrencyPerformanceTests {
     benchmark: PerformanceBenchmark,
@@ -534,6 +556,7 @@ impl ConcurrencyPerformanceTests {
     }
 
     /// 测试并发任务处理
+    /// concurrency task
     pub async fn test_concurrent_task_processing(&self) -> Result<BenchmarkResult> {
         let result = self.benchmark.benchmark(
             "并发任务处理测试",
@@ -561,6 +584,7 @@ impl ConcurrencyPerformanceTests {
     }
 
     /// 测试异步锁性能
+    /// async lock performance
     pub async fn test_async_lock_performance(&self) -> Result<BenchmarkResult> {
         let result = self.benchmark.benchmark(
             "异步锁性能测试",
@@ -592,6 +616,7 @@ impl ConcurrencyPerformanceTests {
     }
 
     /// 测试读写锁性能
+    /// rwlock performance
     pub async fn test_rwlock_performance(&self) -> Result<BenchmarkResult> {
         let result = self.benchmark.benchmark(
             "读写锁性能测试",
@@ -637,6 +662,7 @@ impl ConcurrencyPerformanceTests {
 }
 
 /// 综合性能测试演示
+/// synthesize performance test demonstration
 pub async fn demonstrate_performance_benchmarks_190() -> Result<()> {
     println!("🚀 演示 Rust 1.90 性能基准测试");
     println!("{}", "=".repeat(60));

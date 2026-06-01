@@ -14,7 +14,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust所有权与可判定性 - 最终完整报告](#rust所有权与可判定性---最终完整报告)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [执行摘要](#执行摘要)
     - [最终统计](#最终统计)
   - [文档完整清单](#文档完整清单)
@@ -42,9 +42,10 @@
     - [项目成就](#项目成就)
     - [100%完成确认](#100完成确认)
     - [最终评价](#最终评价)
-  - *"形式化不是目的，而是理解Rust本质的桥梁。"*
+  - [*"形式化不是目的，而是理解Rust本质的桥梁。"*](#形式化不是目的而是理解rust本质的桥梁)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 执行摘要
 >
@@ -120,7 +121,7 @@
 | rayon-parallelism.md | 14.2 KB | Rayon并行 | 并行 |
 | diesel-orm-type-safety.md | 13.6 KB | Diesel ORM | 数据库 |
 | actix-web-formal-analysis.md | 12.9 KB | Actix-web | Web |
-| async-std-formal-analysis.md | 11.1 KB | async-std | 异步 |
+| async-std [已归档]-formal-analysis.md | 11.1 KB | async-std [已归档] | 异步 |
 | tracing-formal-analysis.md | 9.7 KB | Tracing日志 | 可观测性 |
 | bytes-formal-analysis.md | 8.3 KB | Bytes缓冲区 | 网络 |
 | tonic-grpc-formal-analysis.md | 8.3 KB | Tonic gRPC | RPC |
@@ -150,7 +151,7 @@
 | Trait系统 | serde, tonic | A |
 | 泛型 | 全部 | A |
 | 并发/并行 | tokio, rayon, crossbeam | A+ |
-| 异步/await | tokio, async-std | A+ |
+| 异步/await | tokio, async-std [已归档] | A+ |
 | 内存安全 | memory-safety-proof | A+ |
 | Unsafe Rust | 全部涉及 | A |
 | FFI | 部分涉及 | B |
@@ -171,7 +172,7 @@
 | Box/Rc | std-smart-pointers | ✅ 完整 |
 | Pin/Unpin | std-pin-unpin | ✅ 完整 |
 | Iterator | std-iterator | ✅ 完整 |
-| Future/async | tokio, async-std | ✅ 完整 |
+| Future/async | tokio, async-std [已归档] | ✅ 完整 |
 
 ### 开源生态覆盖
 >
@@ -179,7 +180,7 @@
 
 | 领域 | 库数量 | 覆盖率 |
 |------|--------|--------|
-| 异步运行时 | 2 (Tokio, async-std) | 100% |
+| 异步运行时 | 2 (Tokio, async-std [已归档]) | 100% |
 | Web框架 | 3 (Actix, Axum, Hyper) | 90% |
 | 序列化 | 1 (Serde) | 100% |
 | 数据库 | 2 (Diesel, SQLx) | 90% |

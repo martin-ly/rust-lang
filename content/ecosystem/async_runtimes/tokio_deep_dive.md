@@ -180,7 +180,7 @@ Thread 1          Thread 2          Thread 3
 
 ## 📊 与其他运行时对比
 
-| 特性 | Tokio | async-std [已停止维护，不推荐] | smol | embassy |
+| 特性 | Tokio | async-std [已归档] [已停止维护，不推荐] | smol | embassy |
 |------|-------|-----------|------|---------|
 | 调度模型 | 工作窃取 | 工作窃取 | 单队列 | 协作式 |
 | 默认线程数 | num_cpus | num_cpus | 单线程 | 单线程 |
@@ -195,7 +195,7 @@ Thread 1          Thread 2          Thread 3
 需要 no_std? ──是──→ Embassy
                 └──否──→ 需要成熟生态? ──是──→ Tokio
                                       └──否──→ 追求简洁? ──是──→ smol
-                                                            └──否──→ tokio [历史: async-std 已停止维护]
+                                                            └──否──→ tokio [历史: async-std [已归档]]
 ```
 
 ---

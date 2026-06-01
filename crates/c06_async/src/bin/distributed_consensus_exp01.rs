@@ -7,6 +7,7 @@ use tokio::sync::{RwLock, mpsc};
 use tokio::time::sleep;
 
 /// Raft 节点状态
+/// Raft node state
 #[derive(Debug, Clone, PartialEq)]
 enum RaftState {
     Follower,
@@ -15,6 +16,7 @@ enum RaftState {
 }
 
 /// Raft 日志条目
+/// Raft
 #[derive(Debug, Clone, Serialize, Deserialize)]
 struct LogEntry {
     term: u64,
@@ -24,6 +26,7 @@ struct LogEntry {
 }
 
 /// Raft 节点
+/// Raft node
 struct RaftNode {
     id: String,
     state: Arc<RwLock<RaftState>>,
@@ -47,6 +50,7 @@ struct RaftNode {
 }
 
 /// Raft 消息类型
+/// Raft type
 #[derive(Debug, Clone)]
 enum RaftMessage {
     StartElection { node_id: String },
@@ -81,6 +85,7 @@ impl RaftNode {
     }
 
     /// 启动节点
+    /// node
     async fn start(&self, message_rx: mpsc::Receiver<RaftMessage>) {
         println!("🚀 Raft 节点 {} 启动", self.id);
 
@@ -102,6 +107,7 @@ impl RaftNode {
     }
 
     /// 启动选举计时器
+    /// election
     async fn start_election_timer(&self) {
         let state = self.state.clone();
         let current_term = self.current_term.clone();
@@ -139,6 +145,7 @@ impl RaftNode {
     }
 
     /// 开始选举
+    /// election
     async fn start_election(&self) {
         println!("🗳️  节点 {} 开始选举", self.id);
 
@@ -353,6 +360,7 @@ impl RaftNode {
     }
 
     /// 为任务克隆节点引用
+    /// as task node reference
     fn clone_for_task(&self) -> Self {
         Self {
             id: self.id.clone(),
@@ -372,6 +380,7 @@ impl RaftNode {
     }
 
     /// 显示系统状态
+    /// display system state
     async fn show_system_status(&self) {
         let state = self.state.read().await.clone();
         let term = *self.current_term.read().await;
@@ -386,6 +395,7 @@ impl RaftNode {
 }
 
 /// 分布式一致性系统
+/// distribution consistency system
 struct ConsensusSystem {
     nodes: Vec<Arc<RaftNode>>,
 }
@@ -409,6 +419,7 @@ impl ConsensusSystem {
     }
 
     /// 启动系统
+    /// system
     async fn start(&self) {
         println!("🚀 分布式一致性系统启动");
         println!("{}", "=".repeat(50));
@@ -439,6 +450,7 @@ impl ConsensusSystem {
     }
 
     /// 显示系统状态
+    /// display system state
     async fn show_system_status(&self) {
         println!("\n📊 系统状态:");
         for node in &self.nodes {

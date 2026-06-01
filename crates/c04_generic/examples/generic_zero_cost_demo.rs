@@ -1,19 +1,20 @@
 #![allow(clippy::type_complexity)]
 
 //! 零成本抽象验证示例
-//!
-//! 本示例展示Rust泛型的零成本抽象特性：
+//! cost example
 //! - 编译时单态化（Monomorphization）
 //! - 性能对比（泛型 vs 具体类型）
+//! - performance to （generic vs volume type ）
 //! - 零运行时开销验证
-//!
+//! - runtime overhead
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example generic_zero_cost_demo
 //! ```
 use std::time::Instant;
 
 /// 泛型计算函数
+/// generic function
 fn calculate_generic<T>(value: T) -> T
 where
     T: std::ops::Add<Output = T> + Copy,
@@ -22,11 +23,13 @@ where
 }
 
 /// 具体类型计算函数
+/// volume type function
 fn calculate_concrete(value: i32) -> i32 {
     value + value
 }
 
 /// 泛型容器
+/// generic
 struct GenericContainer<T> {
     items: Vec<T>,
 }
@@ -48,6 +51,7 @@ impl<T> GenericContainer<T> {
 }
 
 /// 具体类型容器
+/// volume type
 struct ConcreteContainer {
     items: Vec<i32>,
 }

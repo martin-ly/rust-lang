@@ -1,12 +1,9 @@
 //! Rust 1.95.0 `Atomic*::update` / `try_update` 专题示例
-//!
-//! Rust 1.95.0 稳定化了原子类型的 `update` 和 `try_update` 方法，
-//! 封装了 CAS（Compare-And-Swap）循环，让无锁并发代码更安全、更易读。
-//!
+//! Rust 1.95.0 `Atomic*::update` / `try_update` 专题Example of
 //! 权威来源: https://releases.rs/docs/1.95.0/
-//!
+//! 权威source: https://releases.rs/docs/1.95.0/
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example atomic_update_demo -p c05_threads
 //! ```
 
@@ -17,8 +14,7 @@ use std::thread;
 // ==================== 示例 1: AtomicUsize::update ====================
 
 /// 使用 `update` 原子递增计数器
-///
-/// `update` 会重试 CAS 直到成功，内部是一个自旋循环。
+/// `update`
 fn demo_atomic_usize_update() {
     println!("--- AtomicUsize::update ---");
 
@@ -35,8 +31,9 @@ fn demo_atomic_usize_update() {
 // ==================== 示例 2: AtomicUsize::try_update ====================
 
 /// 使用 `try_update` 条件性原子更新
-///
+/// `try_update` condition
 /// `try_update` 只尝试一次 CAS，如果条件不满足或并发冲突则返回 Err。
+/// `try_update` CAS，if condition or concurrency Err。
 fn demo_atomic_usize_try_update() {
     println!("\n--- AtomicUsize::try_update ---");
 
@@ -96,6 +93,7 @@ fn demo_atomic_bool_update() {
 // ==================== 示例 4: AtomicI32::update — 有界累加 ====================
 
 /// 使用 `update` 实现有界累加器（饱和语义）
+/// `update` （and ）
 fn demo_atomic_i32_saturating() {
     println!("\n--- AtomicI32::update (饱和累加) ---");
 
@@ -120,6 +118,7 @@ fn demo_atomic_i32_saturating() {
 // ==================== 示例 5: AtomicPtr::update / try_update ====================
 
 /// 原子指针更新：实现无锁栈节点推进
+/// atomic pointer ：lock-free stack node
 fn demo_atomic_ptr_update() {
     println!("\n--- AtomicPtr::update / try_update ---");
 
@@ -157,7 +156,6 @@ fn demo_atomic_ptr_update() {
 
 // ==================== 示例 6: 多线程竞争 — update vs 手动 CAS ====================
 
-/// 对比 `update` 与手动 CAS 循环的等价性
 fn demo_multi_thread_update() {
     println!("\n--- 多线程 AtomicUsize::update ---");
 
@@ -188,7 +186,6 @@ fn demo_multi_thread_update() {
 
 // ==================== 示例 7: try_update 的失败处理 ====================
 
-/// 演示 `try_update` 在并发场景下的失败情况
 fn demo_try_update_race_condition() {
     println!("\n--- AtomicUsize::try_update 并发竞争 ---");
 

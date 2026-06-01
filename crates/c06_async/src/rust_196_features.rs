@@ -1,7 +1,10 @@
 //! # Rust 1.96.0 稳定特性演示模块（异步编程）
+//! # Rust 1.96.0 feature demonstration module （async ）
 //!
 //! 本模块展示 Rust 1.96.0 在异步编程中的关键新 API：
+//! This module demonstrates Rust 1.96.0 in async in key API：
 //! - `core::range::Range` — `Copy` 语义，适用于异步任务分批范围
+//! - `core::range::Range` — `Copy` ，async task scope
 //! - `std::assert_matches!` / `debug_assert_matches!` — 异步 Result/Option 模式断言
 //! - `LazyLock::from(value)` — 异步运行时配置（非 `const`）
 
@@ -12,9 +15,12 @@ use std::sync::LazyLock;
 // ============================================================================
 
 /// 异步任务批次分配器。
+/// async task 。
 ///
 /// `core::range::Range` 实现 `Copy`，因此批次范围可以在多个异步任务之间
+/// `core::range::Range` `Copy`，therefore scope can in async task 's
 /// 自由复制，无需引用或生命周期管理。
+/// ，reference or lifetime 。
 pub struct AsyncTaskBatcher;
 
 impl AsyncTaskBatcher {
@@ -39,11 +45,13 @@ impl AsyncTaskBatcher {
     }
 
     /// 计算给定批次范围的总任务数。
+    /// scope task 。
     pub fn total_in_ranges(ranges: &[core::range::Range<usize>]) -> usize {
         ranges.iter().map(|r| r.end - r.start).sum()
     }
 
     /// 将范围映射为并发执行的建议优先级（范围越小优先级越高）。
+    /// will scope as concurrency （scope ）。
     pub fn priority_for_range(range: core::range::Range<usize>) -> u8 {
         let size = range.end - range.start;
         match size {
@@ -59,20 +67,25 @@ impl AsyncTaskBatcher {
 // ============================================================================
 
 /// 异步运行时配置，使用 `LazyLock::from` 包装运行时确定的值。
+/// async runtime ， `LazyLock::from` runtime 。
 ///
 /// ⚠️ `LazyLock::from` **不是 `const`**，不能用于 `static`。
 /// 适合在异步运行时初始化阶段构造配置对象。
+/// in async runtime stage to 。
 pub struct AsyncRuntimeConfig {
     /// 最大并发任务数
+    /// maximum concurrency task
     pub max_concurrency: LazyLock<usize, fn() -> usize>,
     /// 单次批处理大小
     pub batch_size: LazyLock<usize, fn() -> usize>,
     /// 默认超时（毫秒）
+    /// （）
     pub default_timeout_ms: LazyLock<u64, fn() -> u64>,
 }
 
 impl AsyncRuntimeConfig {
     /// 从运行时值构造配置。
+    /// from runtime 。
     pub fn from_values(max_concurrency: usize, batch_size: usize, timeout_ms: u64) -> Self {
         Self {
             max_concurrency: LazyLock::from(max_concurrency),
@@ -82,6 +95,7 @@ impl AsyncRuntimeConfig {
     }
 
     /// 获取配置摘要。
+    /// summary 。
     pub fn summary(&self) -> String {
         format!(
             "max_concurrency={}, batch_size={}, timeout_ms={}",
@@ -95,6 +109,7 @@ impl AsyncRuntimeConfig {
 // ============================================================================
 
 /// 异步任务结果。
+/// async task result 。
 #[derive(Debug, PartialEq)]
 pub enum AsyncTaskResult {
     Completed { id: usize, output: String },
@@ -103,8 +118,10 @@ pub enum AsyncTaskResult {
 }
 
 /// 使用 `assert_matches!` 验证异步结果集合。
+/// `assert_matches!` async result set 。
 ///
 /// 在测试异步系统时，比 `assert!(matches!(...))` 提供更好的诊断信息。
+/// in async system ， `assert!(matches!(...))` 。
 pub fn verify_async_results(results: &[AsyncTaskResult]) {
     use std::assert_matches;
 
@@ -119,6 +136,7 @@ pub fn verify_async_results(results: &[AsyncTaskResult]) {
 }
 
 /// 异步状态机状态。
+/// async state machine state 。
 #[derive(Debug, PartialEq, Clone, Copy)]
 pub enum AsyncState {
     Idle,
@@ -128,8 +146,10 @@ pub enum AsyncState {
 }
 
 /// 使用 `debug_assert_matches!` 在运行时检查异步不变式（零成本于 release）。
+/// `debug_assert_matches!` in runtime async （cost release）。
 ///
 /// 适用于验证异步状态机的内部状态转换是否符合预期。
+/// async state machine inside state conversion 。
 pub fn check_async_invariants(state: AsyncState) {
     use std::debug_assert_matches;
 
@@ -148,6 +168,7 @@ pub fn check_async_invariants(state: AsyncState) {
 // ============================================================================
 
 /// 运行 Rust 1.96 异步特性演示
+/// Run Rust 1.96 async feature demonstration
 pub fn demonstrate_rust_196_features() {
     println!("\n========================================");
     println!("   Rust 1.96.0 异步特性演示");
@@ -166,6 +187,7 @@ pub fn demonstrate_rust_196_features() {
 }
 
 /// 获取特性信息
+/// feature
 pub fn get_rust_196_async_info() -> String {
     "Rust 1.96.0 异步特性:\n- core::range::Range { start, end } — Copy 语义，异步任务分批\n- \
      LazyLock::from(value) — 异步运行时配置（非 const）\n- assert_matches! / debug_assert_matches! \

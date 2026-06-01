@@ -1,4 +1,5 @@
 //! 字符串算法：KMP 与 Rabin-Karp（同步 / 异步）
+//! string algorithm ：KMP and Rabin-Karp（synchronous / async ）
 #[cfg(feature = "with-aho")]
 use aho_corasick::AhoCorasick;
 use anyhow::Result;
@@ -8,6 +9,7 @@ use anyhow::Result;
 // =========================
 
 /// 计算前缀函数（最长相等真前后缀）
+/// before function （etc. before after ）
 fn compute_lps(pat: &[u8]) -> Vec<usize> {
     let mut lps = vec![0usize; pat.len()];
     let (mut len, mut i) = (0usize, 1usize);
@@ -27,6 +29,7 @@ fn compute_lps(pat: &[u8]) -> Vec<usize> {
 }
 
 /// KMP 搜索：返回所有匹配的起始下标
+/// KMP ：all under
 pub fn kmp_search(text: &str, pattern: &str) -> Vec<usize> {
     if pattern.is_empty() {
         return (0..=text.len()).collect();
@@ -62,6 +65,7 @@ pub async fn kmp_search_async(text: String, pattern: String) -> Result<Vec<usize
 // =========================
 
 /// Rabin-Karp 搜索：返回所有匹配的起始下标
+/// Rabin-Karp ：all under
 pub fn rabin_karp_search(text: &str, pattern: &str) -> Vec<usize> {
     let n = text.len();
     let m = pattern.len();
@@ -184,6 +188,7 @@ impl Trie {
     }
 
     /// Aho-Corasick 匹配，返回 (起始位置, 模式ID)
+    /// Aho-Corasick ， (position, ID)
     pub fn ac_search(&self, text: &[u8], patterns: &[Vec<u8>]) -> Vec<(usize, usize)> {
         let mut res = Vec::new();
         let mut s = 0usize;
@@ -204,6 +209,7 @@ impl Trie {
     }
 
     /// 返回只读节点迭代器视图（示例 API，Edition 2024：返回位置 impl Iterator）
+    /// node （example API，Edition 2024：position impl Iterator）
     pub fn nodes_iter(&self) -> impl Iterator<Item = &TrieNode> {
         self.nodes.iter()
     }
@@ -242,6 +248,7 @@ pub fn aho_search(text: &str, patterns: &[&str]) -> Vec<(usize, usize)> {
 // =========================
 
 /// 计算 Z 数组：`z[i]` 为 `s` 与 `s[i..]` 的最长公共前缀长度
+/// Z ：`z[i]` as `s` and `s[i..]` before
 pub fn z_algorithm(s: &str) -> Vec<usize> {
     let a = s.as_bytes();
     let n = a.len();
@@ -266,6 +273,7 @@ pub fn z_algorithm(s: &str) -> Vec<usize> {
 }
 
 /// 使用 Z-Algorithm 搜索 `pattern` 在 `text` 中的所有出现位置
+/// Z-Algorithm `pattern` in `text` in all position
 pub fn z_search(text: &str, pattern: &str) -> Vec<usize> {
     if pattern.is_empty() {
         return (0..=text.len()).collect();
@@ -318,6 +326,7 @@ pub fn suffix_array(text: &str) -> Vec<usize> {
 }
 
 /// 构建 LCP（Kasai），与 SA 对应
+/// LCP（Kasai），and SA to
 pub fn lcp_kasai(text: &str, sa: &[usize]) -> Vec<usize> {
     let n = text.len();
     let s = text.as_bytes();

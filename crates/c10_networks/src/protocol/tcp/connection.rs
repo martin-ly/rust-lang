@@ -1,4 +1,5 @@
 //! TCP 连接管理
+//! TCP
 use crate::error::{NetworkError, NetworkResult};
 use crate::socket::{TcpConfig, TcpSocket};
 use bytes::BytesMut;
@@ -8,6 +9,7 @@ use std::time::{Duration, Instant};
 use super::state::{TcpState, TcpStateMachine};
 
 /// TCP 连接配置
+/// TCP
 #[derive(Debug, Clone)]
 pub struct TcpConnectionConfig {
     pub local_addr: SocketAddr,
@@ -42,6 +44,7 @@ impl Default for TcpConnectionConfig {
 }
 
 /// TCP 连接
+/// TCP
 #[derive(Debug)]
 pub struct TcpConnection {
     pub id: u64,
@@ -62,6 +65,7 @@ pub struct TcpConnection {
 
 impl TcpConnection {
     /// 创建新的 TCP 连接
+    /// TCP
     pub fn new(id: u64, config: TcpConnectionConfig) -> Self {
         let now = Instant::now();
         let timeout = config.timeout;
@@ -84,6 +88,7 @@ impl TcpConnection {
     }
 
     /// 建立连接
+    /// 建立Connect
     pub async fn connect(&mut self) -> NetworkResult<()> {
         if !self
             .state_machine
@@ -174,6 +179,7 @@ impl TcpConnection {
     }
 
     /// 获取当前状态
+    /// when before state
     pub fn state(&self) -> &TcpState {
         self.state_machine.current_state()
     }
@@ -195,6 +201,7 @@ impl TcpConnection {
     }
 
     /// 更新拥塞窗口（慢启动）
+    /// （）
     pub fn update_congestion_window(&mut self) {
         if self.congestion_window < self.slow_start_threshold {
             // 慢启动阶段
@@ -207,6 +214,7 @@ impl TcpConnection {
     }
 
     /// 处理拥塞（快速重传）
+    /// （fast ）
     pub fn handle_congestion(&mut self) {
         self.slow_start_threshold = std::cmp::max(self.congestion_window / 2, 2);
         self.congestion_window = 1;
@@ -214,6 +222,7 @@ impl TcpConnection {
 }
 
 /// TCP 连接统计信息
+/// TCP
 #[derive(Debug, Clone)]
 pub struct TcpConnectionStats {
     pub id: u64,

@@ -4,21 +4,31 @@
 #![allow(clippy::needless_borrows_for_generic_args)]
 
 //! # C10 Networks - Rust 网络编程库
-//!
-//! 本库提供了基于 Rust 1.95.0 的现代网络编程功能，包括：
 //! - 异步网络通信
+//! - async network
 //! - 多种网络协议支持
+//! - network protocol
 //! - 高性能网络编程工具
+//! - performance network programming tool
+//! - 高performancenetwork programmingtool
 //! - 安全的网络通信
-//!
+//! - network
 //! ## 特性
-//!
+//! ## feature
 //! - 🚀 基于 Rust 1.95.0+ 最新特性 (Edition 2024)
+//! - 🚀 Rust 1.95.0+ feature (Edition 2024)
+//! - 🚀 Based on Rust 1.95.0+ 最新feature (Edition 2024)
 //! - 📅 对齐日期: 2026-05-12
+//! - 📅 to date : 2026-05-12
+//! - 📅 to齐date: 2026-05-12
 //! - ⚡ 异步/await 支持
+//! - ⚡ async /await
 //! - 🔒 内置安全功能
+//! - 🔒 inside functionality
 //! - 📊 性能监控
+//! - 📊 performance
 //! - 🧪 完整的测试覆盖
+//! - 🧪 complete
 pub mod asynchronous_communication;
 #[path = "diagnostics.rs"]
 pub mod diagnostics;
@@ -73,8 +83,7 @@ pub use security::tls_reload::TlsReloader;
 pub use unified_api::NetClient;
 
 /// 库版本信息
-///
-/// # Examples
+/// library this
 ///
 /// ```
 /// use c10_networks::VERSION;
@@ -84,8 +93,7 @@ pub use unified_api::NetClient;
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 
 /// 库名称
-///
-/// # Examples
+/// library
 ///
 /// ```
 /// use c10_networks::NAME;

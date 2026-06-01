@@ -74,7 +74,7 @@
     - [06.3 异步范式演进：从 Future 到 Async Closures](#063-异步范式演进从-future-到-async-closures)
     - [06.4 Async Closures 预研深度梳理](#064-async-closures-预研深度梳理)
     - [06.5 Return Type Notation (RTN) 预研](#065-return-type-notation-rtn-预研)
-    - [06.6 async-std 迁移方案](#066-async-std-迁移方案)
+    - [06.6 async-std [已归档] \[已归档\] 迁移方案](#066-async-std [已归档]-已归档-迁移方案)
     - [06.7 权威来源对齐](#067-权威来源对齐)
   - [07. 进程与 OS (c07\_process)](#07-进程与-os-c07_process)
     - [07.1 特性树图](#071-特性树图)
@@ -249,7 +249,7 @@ B = 本项目现有知识集合
 
 | 内容 | 位置 | 问题 | 处理建议 |
 |------|------|------|---------|
-| async-std 运行时示例 | c06_async/src/async_std/ | 2025年3月已归档 | ✅ 已有归档说明+迁移对照表 |
+| async-std [已归档] 运行时示例 | c06_async/src/async_std/ | 2025年3月已归档 | ✅ 已有归档说明+迁移对照表 |
 | 旧 WASI 目标 | c12_wasm | `wasm32-wasi` → `wasm32-wasip1` 已全量替换 | ✅ 代码/脚本/文档已更新 |
 | `static mut` 引用示例 | c05_threads, c13_embedded | 2024 Edition deny-by-default | ✅ 已迁移至 AtomicUsize/UnsafeCell |
 | 旧版 `async_trait` 依赖 | c10_networks | Axum 0.8+ 已不需要 | ⏳ 待评估（c10已有AFIT示例） |
@@ -1272,7 +1272,7 @@ graph TD
     F --> F4[Waker::noop 1.85]
 
     E --> E1[Tokio]
-    E --> E2[async-std 已归档 ⚠️]
+    E --> E2[async-std [已归档] ⚠️]
     E --> E3[smol]
     E --> E4[Embassy bare-metal]
 
@@ -1306,7 +1306,7 @@ graph TD
 | **AsyncFn traits** | 🔴 缺失 | 0% | **完全缺失** |
 | **AFIDT** | 🔴 缺失 | 0% | **完全缺失** |
 | **RTN** | 🔴 缺失 | 0% | **完全缺失** |
-| async-std | ⚠️ 过时 | — | 已归档，应迁移 |
+| async-std [已归档] | ⚠️ 过时 | — | 已归档，应迁移 |
 
 ### 06.3 异步范式演进：从 Future 到 Async Closures
 
@@ -1438,16 +1438,16 @@ where
 - RFC: [RFC 3654](https://rust-lang.github.io/rfcs/3654-return-type-notation.html)
 - 预计稳定: 1.97+
 
-### 06.6 async-std 迁移方案
+### 06.6 async-std [已归档] 迁移方案
 
 > **[来源: IEEE - Programming Language Standards]**
 
-**现状**: async-std 于 2025年3月归档，不再维护。
+**现状**: async-std [已归档] 于 2025年3月归档，不再维护。
 
 **迁移策略**:
 
 ```rust,ignore
-// 旧代码 (async-std)
+// 旧代码 (async-std [已归档])
 // use async_std::task;
 // task::spawn(async { ... });
 // async_std::fs::read_to_string("file.txt").await;
@@ -2331,7 +2331,7 @@ docs/01_core/
 
 | 内容 | 当前位置 | 目标位置 | 操作 |
 |------|---------|---------|------|
-| async-std 示例 | `c06_async/src/async_std/` | ✅ 已有归档说明+迁移对照表 |
+| async-std [已归档] 示例 | `c06_async/src/async_std/` | ✅ 已有归档说明+迁移对照表 |
 | 旧 WASI 目标引用 | `c12_wasm/` 各处 | ✅ 关键脚本已更新（docs/ 历史文档逐步更新） |
 | `static mut` 引用示例 | `c05_threads/`, `c13_embedded/` | ✅ 可编译代码已迁移（docs/ 教学示例逐步更新） |
 | 旧版 `async_trait` 依赖 | `c10_networks/src/protocol/async_traits.rs` | ⏳ 待评估（不影响编译） |
@@ -2355,7 +2355,7 @@ docs/01_core/
 | T1.3 | 更新 `VERSION_INDEX.md`：1.95 设为活跃版本 | docs/ | ✅ 已完成 |
 | T1.4 | 归档 1.94 特性文件，清理重复内容 | crates/*/src/archive/ | ⏳ 待执行 |
 | T1.5 | 审计并修复 `static mut` 引用示例 | c05_threads, c13_embedded | ✅ 已完成 |
-| T1.6 | async-std 示例迁移/归档 | c06_async | ✅ 已完成 |
+| T1.6 | async-std [已归档] 示例迁移/归档 | c06_async | ✅ 已完成 |
 | T1.7 | WASI 目标引用更新 | c12_wasm | ✅ 已完成 |
 | T1.8 | `unsafe_op_in_unsafe_fn` 兼容性修复 | 全局 unsafe fn | ✅ 已合规 |
 
@@ -2402,7 +2402,7 @@ docs/01_core/
 |--------|---------|------|------|
 | T3.1 | Async Closures 预研模块 | c06_async | ✅ 已创建 `async_closures_preview.rs` |
 | T3.2 | AFIDT 跟踪模块 | c06_async | ✅ 已创建 `afit_dyn_tracking.rs` |
-| T3.3 | async-std 迁移文档 | c06_async/docs | ✅ 已有归档说明+迁移对照表 |
+| T3.3 | async-std [已归档] 迁移文档 | c06_async/docs | ✅ 已有归档说明+迁移对照表 |
 | T3.4 | async_trait → 原生 AFIT 迁移 | c10_networks | ⏳ 待评估（c10已有AFIT示例） |
 | T3.5 | Async Closures 深度指南 | c06_async/docs | ✅ 已创建 `ASYNC_CLOSURES_GUIDE.md` |
 | T3.6 | RTN 预研文档 | c06_async/docs | ✅ 已集成在 AFIDT 模块中 |

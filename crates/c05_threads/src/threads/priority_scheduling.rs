@@ -1,10 +1,15 @@
 //! 线程优先级调度
-//!
+//! thread priority
 //! 本模块提供了线程优先级调度功能：
+//! This module provides thread priority functionality ：
 //! - 动态优先级调整
+//! -
 //! - 优先级继承
+//! -
 //! - 实时调度
+//! -
 //! - 调度策略管理
+//! - strategy
 use std::collections::{BinaryHeap, HashMap};
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::{Arc, Mutex};
@@ -12,6 +17,7 @@ use std::thread;
 use std::time::{Duration, Instant};
 
 /// 线程优先级
+/// thread priority
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
 pub enum ThreadPriority {
     Idle = 0,
@@ -52,9 +58,12 @@ impl ThreadPriority {
 }
 
 /// 调度策略
+/// strategy
+/// 调度strategy
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
 pub enum SchedulingPolicy {
     /// 先进先出
+    /// first-in-first-out
     Fifo,
     /// 轮转调度
     RoundRobin,
@@ -67,6 +76,7 @@ pub enum SchedulingPolicy {
 }
 
 /// 线程调度信息
+/// thread scheduling
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
 pub struct ThreadSchedulingInfo {
     pub thread_id: usize,
@@ -125,6 +135,7 @@ impl ThreadSchedulingInfo {
 }
 
 /// 线程优先级调度器
+/// thread priority
 pub struct ThreadPriorityScheduler {
     threads: Arc<Mutex<HashMap<usize, ThreadSchedulingInfo>>>,
     ready_queue: Arc<Mutex<BinaryHeap<ThreadSchedulingInfo>>>,
@@ -488,6 +499,7 @@ impl RealTimeScheduler {
 }
 
 /// 运行所有线程优先级调度示例
+/// Run all thread priority example
 pub fn demonstrate_priority_scheduling() {
     println!("=== 线程优先级调度演示 ===");
 

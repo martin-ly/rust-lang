@@ -72,80 +72,72 @@ use tracing::{Level, debug, info, instrument, warn};
 // ============================================================================
 
 /// # Actor 模式形式化定义
-/// # Formal Definition of Actor Pattern
-///
+/// # Actor definition
+/// # Actor 模式形式化definition
 /// ## 数学模型 (Mathematical Model)
-///
-/// Actor = (State, Behavior, Mailbox, Address)
 ///
 /// 其中 (Where):
 /// - State: S                          内部状态
-/// - Behavior: Message × S → (S, [Message], [Actor])  行为函数
+/// - State: S inside state
+/// - Behavior: Message × S → (S, [Message], [Actor]) 行asfunction
 /// - Mailbox: Queue<Message>           消息队列
-/// - Address: ActorRef                 Actor 引用
-///
+/// - Mailbox: Queue<Message> 消息队列
 /// ## 核心原则 (Core Principles)
-///
 /// 1. **封装性 (Encapsulation)**:
-///    Actor 的状态只能通过消息修改
 ///    ∀ s ∈ State, s 只能被 Behavior 修改
-///
+///    ∀ s ∈ State, s 只能is Behavior 修改
 /// 2. **位置透明 (Location Transparency)**:
-///    Actor 的位置对调用者透明
-///    send(ActorRef, Message) 不关心 Actor 在哪里
-///
 /// 3. **异步通信 (Asynchronous Communication)**:
 ///    消息发送是异步的，不阻塞发送者
+///    async ，
 ///    send(ref, msg) 立即返回
-///
+///    send(ref, msg) 立即Return
 /// 4. **消息顺序 (Message Ordering)**:
+/// 4. **消息order (Message Ordering)**:
 ///    从同一发送者到同一接收者的消息保持顺序
+///    from to order
 ///    若 msg1 先于 msg2 发送，则 msg1 先于 msg2 到达
-///
+///    msg1 msg2 ， msg1 msg2 to
+///    若 msg1 先于 msg2 Send，则 msg1 先于 msg2 to达
 /// ## Actor 生命周期 (Actor Lifecycle)
-///
 /// ```text
 /// Created → Started → Running → Stopping → Stopped
 ///     ↓         ↓         ↓         ↓         ↓
-///   preStart  receive  receive  postStop   (终止)
-/// ```
-///
 /// ## 监督策略 (Supervision Strategy)
-///
+/// ## 监督strategy (Supervision Strategy)
 /// 当子 Actor 失败时，监督者可以采取以下策略：
-/// When a child actor fails, the supervisor can take these strategies:
-///
+/// when Actor ，can under strategy ：
 /// 1. **Resume**: 继续处理下一条消息 (Continue with next message)
 /// 2. **Restart**: 重启 Actor (Restart the actor)
 /// 3. **Stop**: 停止 Actor (Stop the actor)
 /// 4. **Escalate**: 向上级监督者报告 (Escalate to parent supervisor)
-///
+/// 4. **Escalate**: 向on级监督者报告 (Escalate to parent supervisor)
 /// ## 性质证明 (Property Proofs)
-///
-/// **定理 1: 消息传递的可靠性 (Message Delivery Reliability)**
+/// **theorem 1: 消息传递可靠性 (Message Delivery Reliability)**
 /// 若 Actor A 向 Actor B 发送消息 m，且两者都在运行，
+/// Actor A Actor B m，and in Run ，
 /// 则 m 最终会被 B 接收
-///
+/// m ultimately is B
 /// 证明 (Proof):
-/// - 消息队列是可靠的 (FIFO)
 /// - Actor 持续处理消息
+/// - Actor
 /// - 因此消息最终会被处理 □
-///
+/// - therefore ultimately is □
 /// **定理 2: 状态一致性 (State Consistency)**
-/// Actor 的状态在处理消息时是一致的
-///
 /// 证明 (Proof):
-/// - Actor 是单线程的
 /// - 每次只处理一条消息
+/// -
 /// - 因此不会有并发修改状态 □
-///
-/// **定理 3: 监督树的容错性 (Fault Tolerance of Supervision Tree)**
+/// - therefore concurrency state □
 /// 若子 Actor 失败，监督者可以恢复系统到一致状态
-///
+/// Actor ，can system to state
 /// 证明 (Proof):
 /// - 监督者监控子 Actor
+/// - Actor
 /// - 失败时可以重启或替换
+/// - can or
 /// - 因此系统可以恢复 □
+/// - therefore system can □
 // ============================================================================
 // 第二部分: 核心数据结构
 // Part 2: Core Data Structures
@@ -153,22 +145,25 @@ use tracing::{Level, debug, info, instrument, warn};
 
 ///
 /// Actor 状态枚举
-/// Actor State Enumeration
+/// Actor state enum
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ActorState {
     /// 已创建但未启动 (Created but not started)
     Created,
 
     /// 正在启动 (Starting)
+    /// in (Starting)
     Starting,
 
     /// 运行中 (Running)
     Running,
 
     /// 正在停止 (Stopping)
+    /// in (Stopping)
     Stopping,
 
     /// 已停止 (Stopped)
+    /// 已Stop (Stopped)
     Stopped,
 
     /// 失败 (Failed)
@@ -176,7 +171,8 @@ pub enum ActorState {
 }
 
 /// 监督策略枚举
-/// Supervision Strategy Enumeration
+/// strategy enum
+/// 监督strategyenum
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum SupervisionStrategy {
     /// 继续 (Resume)
@@ -186,26 +182,28 @@ pub enum SupervisionStrategy {
     Restart,
 
     /// 停止 (Stop)
+    /// (Stop)
     Stop,
 
     /// 上报 (Escalate)
+    /// on报 (Escalate)
     Escalate,
 }
 
 /// Actor 统计信息
-/// Actor Statistics
+/// Actor
 #[derive(Debug, Clone)]
 pub struct ActorStats {
-    /// 处理的消息总数 (Total messages processed)
     pub messages_processed: u64,
 
-    /// 失败的消息数 (Failed messages)
+    /// 失败消息数 (Failed messages)
     pub messages_failed: u64,
 
     /// 重启次数 (Restart count)
     pub restart_count: u32,
 
     /// 平均处理时间 (微秒) (Average processing time in microseconds)
+    /// 平均Handletime (微秒) (Average processing time in microseconds)
     pub avg_processing_time_us: u64,
 
     /// 邮箱大小 (Mailbox size)
@@ -233,7 +231,6 @@ impl Default for ActorStats {
 }
 
 /// Actor 配置
-/// Actor Configuration
 #[derive(Debug, Clone)]
 pub struct ActorConfig {
     /// Actor 名称 (Actor name)
@@ -249,6 +246,7 @@ pub struct ActorConfig {
     pub restart_window: Duration,
 
     /// 监督策略 (Supervision strategy)
+    /// 监督strategy (Supervision strategy)
     pub supervision_strategy: SupervisionStrategy,
 }
 
@@ -265,17 +263,14 @@ impl Default for ActorConfig {
 }
 
 /// Actor 消息 Trait
-/// Actor Message Trait
-///
 /// 所有 Actor 消息必须实现此 trait
-/// All actor messages must implement this trait
+/// all Actor must this trait
 pub trait ActorMessage: Send + fmt::Debug + 'static {}
 
 /// 系统消息枚举
-/// System Message Enumeration
-///
+/// system enum
 /// 系统级别的控制消息
-/// System-level control messages
+/// system level
 #[derive(Debug)]
 pub enum SystemMessage {
     /// 启动 Actor (Start actor)
@@ -288,27 +283,28 @@ pub enum SystemMessage {
     Restart,
 
     /// 监督检查 (Supervision check)
+    /// 监督Check (Supervision check)
     SupervisionCheck,
 
     /// 获取状态 (Get state)
+    /// state (Get state)
     GetState(oneshot::Sender<ActorState>),
 
     /// 获取统计信息 (Get statistics)
+    /// Get统计信息 (Get statistics)
     GetStats(oneshot::Sender<ActorStats>),
 }
 
 impl ActorMessage for SystemMessage {}
 
 /// Actor 引用
-/// Actor Reference
 ///
-/// 用于向 Actor 发送消息的句柄
-/// Handle for sending messages to an actor
 pub struct ActorRef<M: ActorMessage> {
     /// Actor ID
     pub id: String,
 
     /// 消息发送通道 (Message sender channel)
+    /// 消息Sendchannel (Message sender channel)
     tx: mpsc::Sender<M>,
 
     /// 系统消息发送通道 (System message sender channel)
@@ -327,13 +323,8 @@ impl<M: ActorMessage> Clone for ActorRef<M> {
 
 impl<M: ActorMessage> ActorRef<M> {
     /// 发送消息
-    /// Send message
-    ///
     /// # 参数 (Arguments)
-    /// - `message`: 要发送的消息 (Message to send)
-    ///
     /// # 返回值 (Returns)
-    /// 是否成功发送 (Whether sending was successful)
     pub async fn send(&self, message: M) -> Result<(), String> {
         self.tx
             .send(message)
@@ -342,7 +333,7 @@ impl<M: ActorMessage> ActorRef<M> {
     }
 
     /// 发送系统消息
-    /// Send system message
+    /// system
     pub async fn send_system(&self, message: SystemMessage) -> Result<(), String> {
         self.system_tx
             .send(message)
@@ -351,13 +342,12 @@ impl<M: ActorMessage> ActorRef<M> {
     }
 
     /// 停止 Actor
-    /// Stop actor
     pub async fn stop(&self) -> Result<(), String> {
         self.send_system(SystemMessage::Stop).await
     }
 
     /// 获取 Actor 状态
-    /// Get actor state
+    /// Actor state
     pub async fn get_state(&self) -> Result<ActorState, String> {
         let (tx, rx) = oneshot::channel();
         self.send_system(SystemMessage::GetState(tx)).await?;
@@ -365,7 +355,7 @@ impl<M: ActorMessage> ActorRef<M> {
     }
 
     /// 获取 Actor 统计信息
-    /// Get actor statistics
+    /// Actor
     pub async fn get_stats(&self) -> Result<ActorStats, String> {
         let (tx, rx) = oneshot::channel();
         self.send_system(SystemMessage::GetStats(tx)).await?;
@@ -385,18 +375,19 @@ impl<M: ActorMessage> fmt::Debug for ActorRef<M> {
 // ============================================================================
 
 /// Actor 上下文
-/// Actor Context
-///
+/// Actor on under
 /// 提供 Actor 运行时环境和工具
-/// Provides actor runtime environment and utilities
+/// Actor runtime environment and tool
 pub struct ActorContext<M: ActorMessage> {
     /// Actor 引用 (Actor reference)
     pub actor_ref: ActorRef<M>,
 
     /// 父 Actor 引用 (Parent actor reference)
+    /// 父 Actor reference (Parent actor reference)
     pub parent: Option<ActorRef<SystemMessage>>,
 
     /// 子 Actor 引用 (Child actor references)
+    /// 子 Actor reference (Child actor references)
     pub children: Arc<RwLock<HashMap<String, ActorRef<SystemMessage>>>>,
 
     /// Actor 状态 (Actor state)
@@ -411,7 +402,7 @@ pub struct ActorContext<M: ActorMessage> {
 
 impl<M: ActorMessage> ActorContext<M> {
     /// 创建新的上下文
-    /// Create new context
+    /// on under
     fn new(
         actor_ref: ActorRef<M>,
         config: ActorConfig,
@@ -432,41 +423,41 @@ impl<M: ActorMessage> ActorContext<M> {
     }
 
     /// 添加子 Actor
-    /// Add child actor
+    /// Actor
     pub async fn add_child(&self, id: String, child: ActorRef<SystemMessage>) {
         let mut children = self.children.write().await;
         children.insert(id, child);
     }
 
     /// 移除子 Actor
-    /// Remove child actor
+    /// Actor
     pub async fn remove_child(&self, id: &str) {
         let mut children = self.children.write().await;
         children.remove(id);
     }
 
     /// 获取子 Actor
-    /// Get child actor
+    /// Actor
+    /// Get子 Actor
     pub async fn get_child(&self, id: &str) -> Option<ActorRef<SystemMessage>> {
         let children = self.children.read().await;
         children.get(id).cloned()
     }
 
     /// 更新状态
-    /// Update state
+    /// state
     pub async fn set_state(&self, new_state: ActorState) {
         let mut state = self.state.write().await;
         *state = new_state;
     }
 
     /// 获取状态
-    /// Get state
+    /// state
     pub async fn get_state(&self) -> ActorState {
         *self.state.read().await
     }
 
     /// 更新统计信息
-    /// Update statistics
     pub async fn update_stats<F>(&self, f: F)
     where
         F: FnOnce(&mut ActorStats),
@@ -477,7 +468,6 @@ impl<M: ActorMessage> ActorContext<M> {
     }
 
     /// 获取统计信息
-    /// Get statistics
     pub async fn get_stats(&self) -> ActorStats {
         self.stats.read().await.clone()
     }
@@ -486,43 +476,39 @@ impl<M: ActorMessage> ActorContext<M> {
 /// Actor Trait
 ///
 /// 所有 Actor 必须实现此 trait
-/// All actors must implement this trait
+/// all Actor must this trait
 #[async_trait::async_trait]
 pub trait Actor: Send + Sized + 'static {
     /// 消息类型 (Message type)
+    /// 消息type (Message type)
     type Message: ActorMessage;
 
     /// Actor 启动前调用
-    /// Called before actor starts
+    /// Actor before
     async fn pre_start(&mut self, _ctx: &ActorContext<Self::Message>) {
         // 默认实现为空
         // Default implementation is empty
     }
 
     /// 处理消息
-    /// Handle message
-    ///
     /// # 参数 (Arguments)
-    /// - `message`: 要处理的消息 (Message to handle)
     /// - `ctx`: Actor 上下文 (Actor context)
     async fn receive(&mut self, message: Self::Message, ctx: &ActorContext<Self::Message>);
 
     /// Actor 停止后调用
-    /// Called after actor stops
+    /// Actor after
     async fn post_stop(&mut self, _ctx: &ActorContext<Self::Message>) {
         // 默认实现为空
         // Default implementation is empty
     }
 
     /// 处理错误
-    /// Handle error
-    ///
     /// # 参数 (Arguments)
     /// - `error`: 错误信息 (Error message)
     /// - `ctx`: Actor 上下文 (Actor context)
-    ///
     /// # 返回值 (Returns)
     /// 监督策略 (Supervision strategy)
+    /// 监督strategy (Supervision strategy)
     async fn handle_error(
         &mut self,
         _error: String,
@@ -540,15 +526,13 @@ pub trait Actor: Send + Sized + 'static {
 // ============================================================================
 
 /// Actor 系统
-/// Actor System
 ///
-/// 管理所有 Actor 的生命周期
-/// Manages the lifecycle of all actors
+/// 管理所有 Actor lifetime
 pub struct ActorSystem {
     /// 系统名称 (System name)
     name: String,
 
-    /// 所有 Actor 的引用 (References to all actors)
+    /// 所有 Actor reference (References to all actors)
     actors: Arc<RwLock<HashMap<String, ActorRef<SystemMessage>>>>,
 
     /// 系统统计信息 (System statistics)
@@ -556,7 +540,7 @@ pub struct ActorSystem {
 }
 
 /// 系统统计信息
-/// System Statistics
+/// system
 #[derive(Debug, Clone, Default)]
 pub struct SystemStats {
     /// Actor 总数 (Total actors)
@@ -573,8 +557,6 @@ pub struct SystemStats {
 }
 
 impl ActorSystem {
-    /// 创建新的 Actor 系统
-    /// Create new actor system
     pub fn new(name: String) -> Self {
         info!(system_name = %name, "Creating actor system");
 
@@ -589,12 +571,10 @@ impl ActorSystem {
     }
 
     /// 启动 Actor
-    /// Spawn actor
     ///
     /// # 参数 (Arguments)
     /// - `actor`: Actor 实例 (Actor instance)
     /// - `config`: Actor 配置 (Actor configuration)
-    ///
     /// # 返回值 (Returns)
     /// Actor 引用 (Actor reference)
     pub async fn spawn<A>(&self, actor: A, config: ActorConfig) -> ActorRef<A::Message>
@@ -645,7 +625,6 @@ impl ActorSystem {
     }
 
     /// 运行 Actor
-    /// Run actor
     #[instrument(skip(actor, ctx, rx, system_rx))]
     async fn run_actor<A>(
         mut actor: A,
@@ -743,13 +722,13 @@ impl ActorSystem {
     }
 
     /// 获取系统统计信息
-    /// Get system statistics
+    /// system
     pub async fn get_stats(&self) -> SystemStats {
         self.stats.read().await.clone()
     }
 
     /// 关闭 Actor 系统
-    /// Shutdown actor system
+    /// Actor system
     pub async fn shutdown(&self) {
         info!(system = %self.name, "Shutting down actor system");
 
@@ -767,7 +746,6 @@ impl ActorSystem {
 // ============================================================================
 
 /// 银行账户消息
-/// Bank Account Message
 #[derive(Debug)]
 pub enum BankAccountMessage {
     /// 存款 (Deposit)
@@ -796,7 +774,7 @@ pub enum BankAccountMessage {
 impl ActorMessage for BankAccountMessage {}
 
 /// 银行账户 Actor
-/// Bank Account Actor
+/// Actor
 pub struct BankAccount {
     /// 账户 ID (Account ID)
     account_id: String,
@@ -954,7 +932,7 @@ impl Actor for BankAccount {
 // ============================================================================
 
 /// 基础示例: 银行账户操作
-/// Basic Example: Bank account operations
+/// foundation example :
 async fn basic_bank_example() {
     println!("\n=== 基础示例: 银行账户操作 ===");
     println!("=== Basic Example: Bank Account Operations ===\n");
@@ -1096,7 +1074,8 @@ async fn basic_bank_example() {
 }
 
 /// 高级示例: 监督树
-/// Advanced Example: Supervision tree
+/// example : tree
+/// 高级Example of: 监督tree
 async fn supervision_tree_example() {
     println!("\n=== 高级示例: 监督树 ===");
     println!("=== Advanced Example: Supervision Tree ===\n");
@@ -1179,7 +1158,7 @@ fn _simplified_supervision_tree_example() {
 }
 
 /// 性能测试: 高并发消息处理
-/// Performance Test: High concurrency message processing
+/// performance test : concurrency
 async fn performance_test() {
     println!("\n=== 性能测试: 高并发消息处理 ===");
     println!("=== Performance Test: High Concurrency Message Processing ===\n");

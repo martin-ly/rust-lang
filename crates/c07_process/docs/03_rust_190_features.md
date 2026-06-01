@@ -1482,7 +1482,7 @@ Async-Std 2.0 提供了标准库风格的异步进程管理。
 use async_std::process::{Command as AsyncStdCommand, Stdio};
 use async_std::io::prelude::*;
 
-// Async-Std 进程管理器
+// Async-Std [已归档] 进程管理器
 pub struct AsyncStdProcessManager {
     max_concurrent: usize,
     semaphore: async_std::sync::Semaphore,

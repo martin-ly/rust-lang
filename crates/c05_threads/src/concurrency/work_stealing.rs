@@ -1,10 +1,15 @@
 //! 工作窃取调度器 - 高性能并发调度
-//!
+//! - performance concurrency
 //! 本模块实现了多种工作窃取算法，包括：
+//! this module algorithm ，：
 //! - 双端队列工作窃取
+//! -
 //! - 优先级工作窃取
+//! -
 //! - 自适应工作窃取
+//! -
 //! - NUMA感知工作窃取
+//! - NUMA
 use crossbeam_deque::{
     Injector,
     Worker,
@@ -17,8 +22,10 @@ use std::thread;
 use std::time::{Duration, Instant};
 
 /// 基础工作窃取调度器
-///
+/// foundation
 /// 使用双端队列实现经典的工作窃取算法
+/// algorithm
+/// Use双端队列Implementation of经典工作窃取algorithm
 pub struct WorkStealingScheduler<T> {
     workers: Arc<Vec<Mutex<Worker<T>>>>,
     injector: Arc<Injector<T>>,
@@ -38,11 +45,13 @@ impl<T> WorkStealingScheduler<T> {
     }
 
     /// 获取工作线程的索引
+    /// worker thread
     pub fn get_worker_index(&self) -> usize {
         self.stealer_count.fetch_add(1, Ordering::Relaxed) % self.workers.len()
     }
 
     /// 推送任务到指定工作线程
+    /// task to worker thread
     pub fn push_task(&self, worker_index: usize, task: T) {
         if worker_index < self.workers.len()
             && let Ok(worker) = self.workers[worker_index].lock() {
@@ -51,11 +60,13 @@ impl<T> WorkStealingScheduler<T> {
     }
 
     /// 推送任务到全局注入器
+    /// task to global
     pub fn push_global_task(&self, task: T) {
         self.injector.push(task);
     }
 
     /// 从指定工作线程窃取任务
+    /// from worker thread task
     pub fn steal_task(&self, worker_index: usize) -> Option<T> {
         if worker_index >= self.workers.len() {
             return None;
@@ -88,6 +99,8 @@ impl<T> WorkStealingScheduler<T> {
     }
 
     /// 运行工作窃取示例
+    /// Run example
+    /// Run工作窃取Example of
     #[cfg(feature = "work_stealing_examples")]
     pub fn run_example() {
         println!("=== 工作窃取调度器示例 ===");
@@ -123,8 +136,8 @@ impl<T> WorkStealingScheduler<T> {
 }
 
 /// 优先级工作窃取调度器
-///
 /// 支持任务优先级的增强型工作窃取调度器
+/// task
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
 pub struct PriorityTask<T> {
     priority: u32,
@@ -168,18 +181,21 @@ impl<T> PriorityWorkStealingScheduler<T> {
     }
 
     /// 推送高优先级任务
+    /// task
     pub fn push_high_priority_task(&self, task: T) {
         let priority_task = PriorityTask::new(0, task); // 0 是最高优先级
         self.high_priority_injector.push(priority_task);
     }
 
     /// 推送普通优先级任务
+    /// task
     pub fn push_normal_priority_task(&self, priority: u32, task: T) {
         let priority_task = PriorityTask::new(priority, task);
         self.injector.push(priority_task);
     }
 
     /// 窃取任务（优先处理高优先级任务）
+    /// task （task ）
     pub fn steal_task(&self, worker_index: usize) -> Option<T> {
         if worker_index >= self.workers.len() {
             return None;
@@ -217,6 +233,7 @@ impl<T> PriorityWorkStealingScheduler<T> {
     }
 
     /// 运行优先级工作窃取示例
+    /// Run example
     #[cfg(feature = "work_stealing_examples")]
     pub fn run_example() {
         println!("=== 优先级工作窃取调度器示例 ===");
@@ -257,8 +274,8 @@ impl<T> PriorityWorkStealingScheduler<T> {
 }
 
 /// 自适应工作窃取调度器
-///
 /// 根据系统负载自动调整工作窃取策略
+/// according to system strategy
 #[allow(dead_code)]
 pub struct AdaptiveWorkStealingScheduler<T> {
     workers: Vec<Mutex<Worker<T>>>,
@@ -286,11 +303,13 @@ impl<T> AdaptiveWorkStealingScheduler<T> {
     }
 
     /// 推送任务
+    /// task
     pub fn push_task(&self, task: T) {
         self.injector.push(task);
     }
 
     /// 自适应窃取任务
+    /// task
     pub fn steal_task(&self, worker_index: usize) -> Option<T> {
         if worker_index >= self.workers.len() {
             return None;
@@ -397,6 +416,7 @@ impl<T> AdaptiveWorkStealingScheduler<T> {
     }
 
     /// 运行自适应工作窃取示例
+    /// Run example
     #[cfg(feature = "work_stealing_examples")]
     pub fn run_example() {
         println!("=== 自适应工作窃取调度器示例 ===");
@@ -432,8 +452,7 @@ impl<T> AdaptiveWorkStealingScheduler<T> {
 }
 
 /// NUMA感知工作窃取调度器
-///
-/// 考虑NUMA拓扑结构的工作窃取调度器
+/// NUMA
 #[allow(dead_code)]
 pub struct NumaAwareWorkStealingScheduler<T> {
     numa_nodes: Vec<Vec<Mutex<Worker<T>>>>,
@@ -461,6 +480,7 @@ impl<T> NumaAwareWorkStealingScheduler<T> {
     }
 
     /// 推送任务到指定NUMA节点
+    /// task to NUMAnode
     pub fn push_task_to_node(&self, node_id: usize, task: T) {
         if node_id < self.node_injectors.len() {
             self.node_injectors[node_id].push(task);
@@ -468,11 +488,13 @@ impl<T> NumaAwareWorkStealingScheduler<T> {
     }
 
     /// 推送任务到全局注入器
+    /// task to global
     pub fn push_global_task(&self, task: T) {
         self.global_injector.push(task);
     }
 
     /// NUMA感知窃取任务
+    /// NUMAtask
     pub fn steal_task(&self, node_id: usize, worker_id: usize) -> Option<T> {
         if node_id >= self.numa_nodes.len() || worker_id >= self.numa_nodes[node_id].len() {
             return None;
@@ -525,6 +547,7 @@ impl<T> NumaAwareWorkStealingScheduler<T> {
     }
 
     /// 运行NUMA感知工作窃取示例
+    /// Run NUMAexample
     #[cfg(feature = "work_stealing_examples")]
     pub fn run_example() {
         println!("=== NUMA感知工作窃取调度器示例 ===");
@@ -568,6 +591,7 @@ impl<T> NumaAwareWorkStealingScheduler<T> {
 }
 
 /// 运行所有工作窃取示例
+/// Run all example
 pub fn demonstrate_work_stealing() {
     println!("=== 工作窃取算法演示 ===");
     #[cfg(feature = "work_stealing_examples")]

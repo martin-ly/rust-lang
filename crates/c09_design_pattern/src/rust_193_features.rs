@@ -1,10 +1,12 @@
 //! Rust 1.93.0 设计模式 特性模块
+//! Rust 1.93.0 design feature module
 #![allow(clippy::incompatible_msrv)]
 
 use std::fmt;
 use std::mem::MaybeUninit;
 
 /// 使用 `fmt::from_fn` 实现动态格式化策略模式
+/// `fmt::from_fn` strategy
 pub fn dynamic_formatter(strategy: &str, value: i32) -> impl fmt::Display + use<'_> {
     fmt::from_fn(move |f: &mut fmt::Formatter<'_>| match strategy {
         "hex" => write!(f, "0x{:X}", value),
@@ -14,6 +16,7 @@ pub fn dynamic_formatter(strategy: &str, value: i32) -> impl fmt::Display + use<
 }
 
 /// 使用 `MaybeUninit` 实现懒初始化模式（Lazy Init）
+/// `MaybeUninit` （Lazy Init）
 pub struct LazyInit<T> {
     slot: MaybeUninit<T>,
     initialized: bool,

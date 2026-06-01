@@ -1,15 +1,22 @@
 //! Rust 1.90 Edition 2024 最新特性演示 (历史版本)
-//!
+//! Rust 1.90 Edition 2024 feature demonstration (this )
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//!
+//! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
-//!
-//! 本模块展示了 Rust 1.90 和 Edition 2024 的最新特性：
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! - 显式推断的常量泛型参数
+//! - infer constant generic parameter
+//! - 显式inferconstantgeneric parameter
 //! - 改进的异步编程特性
+//! - async feature
 //! - 增强的类型系统
+//! - type system
+//! - 增强typesystem
 //! - 新的标准库功能
+//! - standard library functionality
+//! - 新standardlibraryfunctionality
 //! - 性能优化特性
+//! - performance optimization feature
 use rayon::prelude::*;
 use std::collections::HashMap;
 use std::sync::{
@@ -24,8 +31,8 @@ use std::time::{Duration, Instant};
 // ============================================================================
 
 /// 使用显式推断的常量泛型参数
-///
-/// Rust 1.89 稳定了显式推断的常量泛型参数，允许在泛型参数中使用 `_` 进行推断
+/// infer constant generic parameter
+/// Use显式inferconstantgeneric parameter
 pub struct GenericArray<T, const N: usize> {
     data: [T; N],
 }
@@ -40,11 +47,13 @@ impl<T: Default + Copy, const N: usize> Default for GenericArray<T, N> {
 
 impl<T: Default + Copy, const N: usize> GenericArray<T, N> {
     /// 创建新的泛型数组
+    /// generic
     pub fn new() -> Self {
         Self::default()
     }
 
     /// 使用显式推断创建数组
+    /// infer
     pub fn from_slice<const M: usize>(slice: &[T; M]) -> Self
     where
         T: Clone,
@@ -65,11 +74,13 @@ impl<T: Default + Copy, const N: usize> GenericArray<T, N> {
     }
 
     /// 检查数组是否为空
+    /// as
     pub const fn is_empty(&self) -> bool {
         N == 0
     }
 
     /// 获取元素
+    /// element
     pub fn get(&self, index: usize) -> Option<&T> {
         if index < N {
             Some(&self.data[index])
@@ -79,6 +90,7 @@ impl<T: Default + Copy, const N: usize> GenericArray<T, N> {
     }
 
     /// 设置元素
+    /// element
     pub fn set(&mut self, index: usize, value: T) -> Result<(), &'static str> {
         if index < N {
             self.data[index] = value;
@@ -94,8 +106,8 @@ impl<T: Default + Copy, const N: usize> GenericArray<T, N> {
 // ============================================================================
 
 /// 异步生成器函数 (使用 async gen 语法)
-///
-/// Rust 2024 保留了 gen 关键字以支持未来可能加入的异步生成器功能
+/// async function ( async gen )
+/// asyncgeneratorfunction (Use async gen 语法)
 #[cfg(feature = "tokio")]
 pub async fn async_number_generator(start: u32, count: u32) -> impl Iterator<Item = u32> {
     // 模拟异步生成器
@@ -109,6 +121,8 @@ pub async fn async_number_generator(start: u32, count: u32) -> impl Iterator<Ite
 }
 
 /// 改进的异步错误处理
+/// async error handling
+/// 改进asyncerror handling
 #[cfg(feature = "tokio")]
 pub async fn improved_async_error_handling() -> Result<String, Box<dyn std::error::Error>> {
     // 使用 ? 操作符进行错误传播
@@ -127,9 +141,6 @@ async fn async_operation() -> Result<String, &'static str> {
 // 增强的类型系统
 // ============================================================================
 
-/// 使用 Never 类型 (!) 的函数
-///
-/// Rust 1.90 调整了 ! 类型的回退行为，增强了类型系统的表达能力
 #[cfg(feature = "unstable")]
 pub fn never_returning_function() -> ! {
     loop {
@@ -138,30 +149,31 @@ pub fn never_returning_function() -> ! {
     }
 }
 
-/// 使用 Never 类型的错误处理（Rust 1.94.1 stable：使用 Infallible）
 pub fn error_handling_with_never() -> Result<i32, std::convert::Infallible> {
     // 这个函数永远不会返回错误
     Ok(42)
 }
 
 /// 改进的泛型约束
+/// generic
 pub trait ImprovedTrait<T> {
     /// 使用 -> impl Trait 语法
+    /// Use -> impl Trait 语法
     fn process(&self, input: T) -> impl Iterator<Item = T>;
 
     /// 异步方法支持
+    /// async method
     #[cfg(feature = "tokio")]
     #[allow(async_fn_in_trait)]
     async fn async_process(&self, input: T) -> T;
 }
 
-/// 实现改进的 trait
+/// Implementation of改进 trait
 pub struct ImprovedStruct<T> {
     data: T,
 }
 
 impl<T> ImprovedStruct<T> {
-    /// 创建新的 ImprovedStruct 实例
     pub fn new(data: T) -> Self {
         Self { data }
     }
@@ -185,6 +197,8 @@ impl<T: Clone> ImprovedTrait<T> for ImprovedStruct<T> {
 // ============================================================================
 
 /// 使用新的标准库功能
+/// standard library functionality
+/// Use新standardlibraryfunctionality
 pub struct StandardLibraryFeatures;
 
 impl StandardLibraryFeatures {
@@ -202,6 +216,7 @@ impl StandardLibraryFeatures {
     }
 
     /// 使用改进的集合操作
+    /// set
     pub fn improved_collections() {
         let mut map = HashMap::new();
         map.insert("key1", 1);
@@ -218,6 +233,7 @@ impl StandardLibraryFeatures {
     }
 
     /// 使用改进的并发原语
+    /// concurrency
     pub fn improved_concurrency() {
         let counter = Arc::new(Mutex::new(0));
         let handles: Vec<_> = (0..4)
@@ -246,10 +262,12 @@ impl StandardLibraryFeatures {
 // ============================================================================
 
 /// 使用性能优化特性
+/// performance optimization feature
 pub struct PerformanceOptimizations;
 
 impl PerformanceOptimizations {
     /// 使用内联汇编进行性能优化
+    /// inside performance optimization
     pub fn inline_assembly_optimization() {
         let mut value = 42u64;
 
@@ -266,6 +284,7 @@ impl PerformanceOptimizations {
     }
 
     /// 使用 SIMD 指令进行向量化操作
+    /// SIMD vectorization
     pub fn simd_vectorization() {
         let mut data = [1.0f32, 2.0, 3.0, 4.0];
 
@@ -278,6 +297,7 @@ impl PerformanceOptimizations {
     }
 
     /// 使用内存预取优化
+    /// memory prefetch optimization
     pub fn memory_prefetch_optimization() {
         let data = [1, 2, 3, 4, 5, 6, 7, 8];
 
@@ -297,10 +317,14 @@ impl PerformanceOptimizations {
 // ============================================================================
 
 /// 使用高级并发特性
+/// concurrency feature
+/// Use高级concurrencyfeature
 pub struct AdvancedConcurrency;
 
 impl AdvancedConcurrency {
     /// 使用改进的线程池
+    /// thread pool
+    /// Use改进thread pool
     pub fn improved_thread_pool() {
         let pool = rayon::ThreadPoolBuilder::new()
             .num_threads(4)
@@ -315,6 +339,7 @@ impl AdvancedConcurrency {
     }
 
     /// 使用无锁数据结构
+    /// lock-free data structure
     pub fn lockfree_data_structures() {
         use crossbeam_queue::ArrayQueue;
 
@@ -336,6 +361,7 @@ impl AdvancedConcurrency {
     }
 
     /// 使用内存屏障进行同步
+    /// memory barrier synchronous
     pub fn memory_barriers() {
         use std::sync::atomic::{AtomicBool, Ordering};
 
@@ -370,6 +396,7 @@ impl AdvancedConcurrency {
 // ============================================================================
 
 /// 运行所有 Rust 1.90 特性演示
+/// Run all Rust 1.90 feature demonstration
 pub fn demonstrate_rust_190_features() {
     println!("=== Rust 1.90 Edition 2024 特性演示 ===");
 
@@ -478,7 +505,7 @@ mod tests {
 // 高级 Rust 1.90 特性扩展
 // ============================================================================
 
-/// 高性能原子计数器，使用 Rust 1.90 的最新优化
+/// 高performanceatomic counter，Use Rust 1.90 最新optimization
 #[allow(dead_code)]
 pub struct HighPerformanceCounter {
     value: AtomicUsize,
@@ -500,16 +527,17 @@ impl HighPerformanceCounter {
     }
 
     /// 使用内存屏障优化的原子递增
+    /// memory barrier optimization
     pub fn increment(&self) -> usize {
         self.value.fetch_add(1, Ordering::SeqCst)
     }
 
-    /// 使用 Relaxed 内存序的高性能递增
     pub fn increment_relaxed(&self) -> usize {
         self.value.fetch_add(1, Ordering::Relaxed)
     }
 
     /// 获取当前值
+    /// when before
     pub fn get(&self) -> usize {
         self.value.load(Ordering::Acquire)
     }
@@ -520,7 +548,6 @@ impl HighPerformanceCounter {
     }
 }
 
-/// 使用 Rust 1.90 特性的高性能线程池
 #[allow(dead_code)]
 pub struct AdvancedThreadPool {
     workers: Vec<thread::JoinHandle<()>>,
@@ -575,7 +602,6 @@ impl AdvancedThreadPool {
     }
 }
 
-/// 使用 Rust 1.90 特性的无锁环形缓冲区
 #[allow(dead_code)]
 pub struct LockFreeRingBuffer<const N: usize> {
     buffer: [AtomicUsize; N],
@@ -631,7 +657,6 @@ impl<const N: usize> LockFreeRingBuffer<N> {
     }
 }
 
-/// 使用 Rust 1.90 特性的内存预取优化
 #[allow(dead_code)]
 pub struct MemoryPrefetchOptimizer {
     prefetch_distance: usize,
@@ -643,6 +668,7 @@ impl MemoryPrefetchOptimizer {
     }
 
     /// 优化的向量求和，使用内存预取
+    /// optimization and ，memory prefetch
     pub fn optimized_vector_sum(&self, data: &[f64]) -> f64 {
         let mut sum = 0.0;
         let chunk_size = 64; // 缓存行大小
@@ -665,12 +691,10 @@ impl MemoryPrefetchOptimizer {
     }
 }
 
-/// 使用 Rust 1.90 特性的 SIMD 优化
 #[allow(dead_code)]
 pub struct SimdOptimizer;
 
 impl SimdOptimizer {
-    /// SIMD 优化的向量加法
     pub fn simd_vector_add(a: &[f32], b: &[f32]) -> Vec<f32> {
         assert_eq!(a.len(), b.len());
         let mut result = vec![0.0; a.len()];
@@ -696,12 +720,13 @@ impl SimdOptimizer {
     }
 }
 
-/// 使用 Rust 1.90 特性的高级并发模式
 #[allow(dead_code)]
 pub struct AdvancedConcurrencyPatterns;
 
 impl AdvancedConcurrencyPatterns {
     /// 工作窃取模式，使用 Rust 1.90 特性优化
+    /// ， Rust 1.90 feature optimization
+    /// 工作窃取模式，Use Rust 1.90 featureoptimization
     pub fn work_stealing_demo() {
         let pool = rayon::ThreadPoolBuilder::new()
             .num_threads(4)
@@ -720,6 +745,7 @@ impl AdvancedConcurrencyPatterns {
     }
 
     /// 无锁数据结构演示
+    /// lock-free data structure demonstration
     pub fn lockfree_demo() {
         let buffer = Arc::new(LockFreeRingBuffer::<1024>::new());
 
@@ -753,6 +779,7 @@ impl AdvancedConcurrencyPatterns {
     }
 
     /// 内存优化演示
+    /// memory optimization demonstration
     pub fn memory_optimization_demo() {
         let optimizer = MemoryPrefetchOptimizer::new(64);
         let data: Vec<f64> = (1..=1000000).map(|i| i as f64).collect();
@@ -765,6 +792,7 @@ impl AdvancedConcurrencyPatterns {
     }
 
     /// SIMD 优化演示
+    /// SIMD optimization demonstration
     pub fn simd_optimization_demo() {
         let a: Vec<f32> = (1..=1000000).map(|i| i as f32).collect();
         let b: Vec<f32> = (1..=1000000).map(|i| (i * 2) as f32).collect();
@@ -779,6 +807,8 @@ impl AdvancedConcurrencyPatterns {
 }
 
 /// 演示所有 Rust 1.90 高级特性
+/// demonstration all Rust 1.90 feature
+/// Demonstration of所有 Rust 1.90 高级feature
 pub fn demonstrate_advanced_rust_190_features() {
     println!("=== Rust 1.90 高级特性演示 ===");
 

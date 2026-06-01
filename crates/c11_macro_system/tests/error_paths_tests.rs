@@ -2,6 +2,7 @@
 //! 宏系统模块错误路径测试套件 / Macro System Module Error Paths Test Suite
 
 /// 测试错误输入情况
+/// situation
 #[test]
 fn test_error_inputs() {
     // 测试无效宏语法（编译时错误，这里只测试运行时）
@@ -19,6 +20,7 @@ fn test_error_inputs() {
 }
 
 /// 测试错误状态情况
+/// state situation
 #[test]
 fn test_error_states() {
     // 测试宏展开失败（模拟）
@@ -31,6 +33,7 @@ fn test_error_states() {
 }
 
 /// 测试异常情况
+/// situation
 #[test]
 fn test_exception_cases() {
     // 测试宏展开异常（模拟）
@@ -43,6 +46,7 @@ fn test_exception_cases() {
 }
 
 /// 测试资源耗尽情况
+/// situation
 #[test]
 fn test_resource_exhaustion() {
     // 测试大量宏展开（模拟）
@@ -56,6 +60,7 @@ fn test_resource_exhaustion() {
 }
 
 /// 测试并发安全
+/// concurrency
 #[test]
 fn test_concurrent_safety() {
     use std::sync::{Arc, Mutex};

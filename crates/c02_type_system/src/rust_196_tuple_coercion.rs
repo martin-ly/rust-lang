@@ -1,26 +1,26 @@
 //! # Rust 1.95.0 元组 Coercion 特性示例
-//!
-//! 本模块展示了 Rust 1.95.0 中引入的元组元素 coercion 特性，
-//! 元组元素现在可以作为 coercion site，允许更灵活的类型转换。
-//!
+//! # Rust 1.95.0 Coercion feature example
 //! # 文件信息
+//! #
 //! - 文件: rust_196_tuple_coercion.rs
 //! - 创建日期: 2026-04-10
+//! - date : 2026-04-10
 //! - 版本: 1.0
-//! - Rust版本: 1.95.0
-//! - Edition: 2024
+//! - this : 1.0
+//! - 版this: 1.0
 
 // use std::any::Any;
 // use std::sync::Arc;
 
-/// Rust 1.95 `if let` guards 在类型系统中的应用
-///
 /// `if let` guards 允许在 match arm 上直接进行模式匹配和条件判断，
+/// `if let` guards in match arm on and condition ，
 /// 减少嵌套层级，使代码更扁平、更易读。
+/// ，、。
 pub struct TypeIfLetGuardExamples;
 
 impl TypeIfLetGuardExamples {
     /// 安全地解析类型标识符
+    /// type
     pub fn parse_type_id(input: Option<&str>) -> Result<usize, &'static str> {
         match input {
             Some(s) if let Ok(id) = s.parse::<usize>() => Ok(id),
@@ -30,6 +30,7 @@ impl TypeIfLetGuardExamples {
     }
 
     /// 验证类型转换结果
+    /// type conversion result
     pub fn validate_conversion(result: Result<Option<i32>, &'static str>) -> &'static str {
         match result {
             Ok(Some(v)) if v >= 0 => "非负整数",
@@ -43,19 +44,18 @@ impl TypeIfLetGuardExamples {
 // ==================== 1. 基础元组 Coercion ====================
 
 /// # 基础元组 Coercion
-///
-/// Rust 1.95.0 允许元组元素作为 coercion site，
+/// # foundation Coercion
 /// 这意味着可以在元组构造时自动进行类型转换。
-///
+/// can in type conversion 。
 /// ## 主要特性
-/// - 引用到 trait object 的转换
+/// ## main feature
 /// - 数组到切片的转换
+/// - to conversion
 /// - 函数指针的转换
+/// - function pointer conversion
 /// - 自定义类型的自动转换
+/// - definition type conversion
 pub mod basic_coercion {
-    /// 展示元组中的引用到 trait object 转换
-    ///
-    /// Rust 1.95.0: `(&T, &U)` 可以自动转换为 `(&dyn Trait, &dyn Trait)`
     pub fn tuple_to_trait_object() {
         // 创建具体类型的引用
         let x: i32 = 42;
@@ -76,8 +76,7 @@ pub mod basic_coercion {
     }
 
     /// 展示元组中的数组到切片转换
-    ///
-    /// Rust 1.95.0: `([T; N], [T; M])` 可以自动转换为 `(&[T], &[T])`
+    /// in to conversion
     pub fn tuple_array_to_slice() {
         let arr1 = [1, 2, 3];
         let arr2 = [4, 5, 6, 7, 8];
@@ -92,8 +91,9 @@ pub mod basic_coercion {
     }
 
     /// 展示元组中的函数指针转换
-    ///
+    /// in function pointer conversion
     /// Rust 1.95.0: 具体函数可以自动 coercion 到函数指针
+    /// Rust 1.95.0: volume function can coercion to function pointer
     pub fn tuple_fn_pointer_coercion() {
         fn add_one(x: i32) -> i32 {
             x + 1
@@ -117,8 +117,9 @@ pub mod basic_coercion {
     }
 
     /// 展示元组中的自定义类型转换
-    ///
+    /// in definition type conversion
     /// 通过实现 From trait 实现自动转换
+    /// From trait conversion
     #[derive(Debug, Clone)]
     pub struct Wrapper<T>(pub T);
 
@@ -143,14 +144,11 @@ pub mod basic_coercion {
 // ==================== 2. 嵌套元组 Coercion ====================
 
 /// # 嵌套元组 Coercion
-///
-/// Rust 1.95.0 支持嵌套元组的 coercion 传播。
+/// # Coercion
+/// # 嵌套tuple Coercion
 pub mod nested_coercion {
     // Wrapper not used, removed unused import
 
-    /// 展示嵌套元组的 coercion
-    ///
-    /// 嵌套元组中的元素也可以进行 coercion
     pub fn nested_tuple_coercion() {
         let inner1 = (1, 2);
         let inner2 = (3, 4);
@@ -169,7 +167,6 @@ pub mod nested_coercion {
         println!("Nested tuple: {:?}, {:?}", nested.0, nested.1);
     }
 
-    /// 展示三元组及更高维度的 coercion
     pub fn higher_order_tuple_coercion() {
         let x = 1u8;
         let y = 2u16;
@@ -185,7 +182,6 @@ pub mod nested_coercion {
         println!("Triple coercion: {:?}", triple);
     }
 
-    /// 展示元组数组的 coercion
     pub fn tuple_array_coercion() {
         let tuples = [(1, 2), (3, 4), (5, 6)];
 
@@ -208,16 +204,10 @@ pub mod nested_coercion {
 
 // ==================== 3. 智能指针与元组 Coercion ====================
 
-/// # 智能指针与元组 Coercion
-///
-/// 展示智能指针在元组 coercion 中的应用。
 pub mod smart_pointer_coercion {
     use std::rc::Rc;
     use std::sync::Arc;
 
-    /// 展示 Arc 在元组中的 coercion
-    ///
-    /// Rust 1.95.0: 支持 `Arc<T>` 到 `Arc<dyn Trait>` 的 coercion
     pub fn arc_coercion() {
         let x = Arc::new(42i32);
         let y = Arc::new("hello");
@@ -239,7 +229,6 @@ pub mod smart_pointer_coercion {
         println!("Arc coercion tuple created");
     }
 
-    /// 展示 Rc 在元组中的 coercion
     pub fn rc_coercion() {
         let _x = Rc::new(vec![1, 2, 3]);
         let _y = Rc::new(vec![4, 5, 6]);
@@ -250,9 +239,6 @@ pub mod smart_pointer_coercion {
         println!("Rc coercion tuple: {:?}, {:?}", tuple.0, tuple.1);
     }
 
-    /// 展示 Box 在元组中的 coercion
-    ///
-    /// Rust 1.95.0: `Box<T>` 到 `Box<dyn Trait>` 的 coercion
     pub fn box_coercion() {
         trait Drawable {
             fn draw(&self);
@@ -299,31 +285,24 @@ pub mod smart_pointer_coercion {
 
 // ==================== 4. 生命周期与元组 Coercion ====================
 
-/// # 生命周期与元组 Coercion
-///
-/// 展示元组 coercion 如何与生命周期交互。
 pub mod lifetime_coercion {
-    /// 展示生命周期在元组 coercion 中的传播
-    ///
     /// Rust 1.95.0: 正确传播生命周期约束
+    /// Rust 1.95.0: propagation lifetime
     pub fn lifetime_propagation<'a>(x: &'a i32, y: &'a i32) -> (&'a i32, &'a i32) {
         // 返回元组时，生命周期自动传播
         (x, y)
     }
 
-    /// 展示静态生命周期在元组 coercion 中的应用
     pub fn static_lifetime_coercion() -> (&'static str, &'static str) {
         // 静态字符串的 coercion
         ("hello", "world")
     }
 
-    /// 展示生命周期的 Elision 与元组 coercion
     pub fn elided_lifetime_coercion<'a>(s1: &'a str, s2: &'a str) -> (&'a str, &'a str) {
         // 生命周期省略规则仍然适用
         (s1, s2)
     }
 
-    /// 展示复杂生命周期的元组 coercion
     pub fn complex_lifetime<'a, 'b>(x: &'a i32, y: &'b str) -> (&'a i32, &'b str)
     where
         'a: 'b, // 'a 至少和 'b 一样长
@@ -334,15 +313,11 @@ pub mod lifetime_coercion {
 
 // ==================== 5. 实际应用场景 ====================
 
-/// # 元组 Coercion 的实际应用场景
-///
-/// 展示元组 coercion 在实际编程中的应用。
 pub mod practical_applications {
     use std::collections::HashMap;
 
-    /// 错误处理中的元组 coercion
-    ///
     /// 将不同类型的错误统一处理
+    /// will type
     #[derive(Debug)]
     pub enum AppError {
         Io(std::io::Error),
@@ -363,8 +338,10 @@ pub mod practical_applications {
     }
 
     /// 多结果处理
-    ///
+    /// result
     /// Rust 1.95.0: 自动 coercion 错误类型
+    /// Rust 1.95.0: coercion error type
+    /// Rust 1.95.0: 自动 coercion error type
     pub fn process_multiple_results() -> Result<(i32, String), AppError> {
         // 不同类型的错误自动 coercion 到 AppError
         // Rust 1.95.0: 在元组构造时自动处理
@@ -375,8 +352,9 @@ pub mod practical_applications {
     }
 
     /// 配置参数传递
-    ///
+    /// parameter
     /// 使用元组传递不同类型但相关的配置
+    /// type but
     pub struct Config {
         pub timeout: u64,
         pub retries: u32,
@@ -394,6 +372,7 @@ pub mod practical_applications {
     }
 
     /// 展示配置 coercion
+    /// coercion
     pub fn create_config() -> Config {
         // Rust 1.95.0: 元组自动 coercion 到 Config
         // let config: Config = (30, 3, true);
@@ -403,8 +382,9 @@ pub mod practical_applications {
     }
 
     /// 数据库查询结果处理
-    ///
+    /// database result
     /// 使用元组表示多列查询结果
+    /// represent result
     pub fn process_query_results() -> Vec<(i32, String, Option<f64>)> {
         // 模拟数据库查询结果
         vec![
@@ -415,8 +395,11 @@ pub mod practical_applications {
     }
 
     /// API 响应处理
-    ///
+    /// API
+    /// API 响应Handle
     /// 使用元组表示 API 响应的不同部分
+    /// represent API part
+    /// Usetuplerepresent API 响应不同part
     pub type ApiResponse<T> = (u16, HashMap<String, String>, T);
 
     pub fn process_api_response<T>(response: ApiResponse<T>) -> T {
@@ -426,8 +409,7 @@ pub mod practical_applications {
     }
 
     /// 坐标转换
-    ///
-    /// 使用元组 coercion 进行不同坐标系的转换
+    /// coordinate conversion
     pub trait Coordinate {
         fn to_cartesian(&self) -> (f64, f64, f64);
     }
@@ -461,6 +443,7 @@ pub mod practical_applications {
     }
 
     /// 展示坐标 coercion
+    /// coordinate coercion
     pub fn convert_coordinates(coords: &[Box<dyn Coordinate>]) -> Vec<(f64, f64, f64)> {
         // Rust 1.95.0: 元组结果自动 coercion
         coords.iter().map(|c| c.to_cartesian()).collect()
@@ -470,14 +453,13 @@ pub mod practical_applications {
 // ==================== 6. 类型擦除与元组 ====================
 
 /// # 类型擦除与元组
-///
+/// # type and
 /// 展示元组在类型擦除中的应用。
+/// in type in application 。
 pub mod type_erasure {
     use std::any::Any;
 
     /// 异构元组存储
-    ///
-    /// 使用 trait object 存储不同类型的值
     pub struct HeterogeneousTuple {
         elements: Vec<Box<dyn Any>>,
     }
@@ -505,8 +487,7 @@ pub mod type_erasure {
     }
 
     /// 使用元组进行类型擦除
-    ///
-    /// Rust 1.95.0: 简化异构数据结构的创建
+    /// type
     pub fn create_heterogeneous_data() -> (Box<dyn Any>, Box<dyn Any>, Box<dyn Any>) {
         // 不同类型擦除到统一的 trait object
         let x: Box<dyn Any> = Box::new(42i32);
@@ -517,8 +498,8 @@ pub mod type_erasure {
     }
 
     /// 动态分派元组
-    ///
     /// 使用元组传递动态分派的函数
+    /// function
     pub type DynFnTuple<'a> = (Box<dyn Fn() + 'a>, Box<dyn Fn(i32) -> i32 + 'a>);
 
     pub fn create_dynamic_functions() -> DynFnTuple<'static> {
@@ -532,6 +513,7 @@ pub mod type_erasure {
 // ==================== 7. 演示函数 ====================
 
 /// 演示基础元组 coercion
+/// demonstration foundation coercion
 #[allow(dead_code)]
 pub fn demonstrate_basic_coercion() {
     println!("\n=== 基础元组 Coercion 演示 ===\n");
@@ -543,6 +525,8 @@ pub fn demonstrate_basic_coercion() {
 }
 
 /// 演示嵌套元组 coercion
+/// demonstration coercion
+/// Demonstration of嵌套tuple coercion
 #[allow(dead_code)]
 pub fn demonstrate_nested_coercion() {
     println!("\n=== 嵌套元组 Coercion 演示 ===\n");
@@ -553,6 +537,7 @@ pub fn demonstrate_nested_coercion() {
 }
 
 /// 演示智能指针 coercion
+/// demonstration pointer coercion
 #[allow(dead_code)]
 pub fn demonstrate_smart_pointer_coercion() {
     println!("\n=== 智能指针 Coercion 演示 ===\n");
@@ -563,6 +548,7 @@ pub fn demonstrate_smart_pointer_coercion() {
 }
 
 /// 演示实际应用场景
+/// demonstration actual application scenario
 #[allow(dead_code)]
 pub fn demonstrate_practical_applications() {
     println!("\n=== 实际应用场景演示 ===\n");
@@ -596,6 +582,7 @@ pub fn demonstrate_practical_applications() {
 }
 
 /// 演示 Rust 1.95.0 元组 coercion 特性
+/// demonstration Rust 1.95.0 coercion feature
 pub fn demonstrate_rust_196_tuple_coercion() {
     println!("\n========================================");
     println!("   Rust 1.95.0 元组 Coercion 特性演示");
@@ -615,6 +602,7 @@ pub fn demonstrate_rust_196_tuple_coercion() {
 }
 
 /// 获取 Rust 1.95.0 元组 coercion 特性信息
+/// Rust 1.95.0 coercion feature
 pub fn get_rust_196_tuple_info() -> String {
     "Rust 1.95.0 元组 Coercion 特性:\n- 元组元素作为 coercion site\n- 支持引用到 trait object \
      的转换\n- 支持数组到切片的转换\n- 支持智能指针的 coercion\n- 与生命周期系统正确交互"

@@ -7,22 +7,35 @@
 #![feature(gen_blocks, yield_expr)]
 #![cfg_attr(feature = "portable_simd", feature(portable_simd))]
 //! Rust 1.95.0 高级算法实现库
+//! Rust 1.95.0 algorithm library
 //!
 //! 本库提供了Rust中各种高级算法的完整实现，完全对齐 Rust 1.95.0 版本特性，
+//! this library Rustin algorithm complete ，to Rust 1.95.0 this feature ，
 //! 包括排序、搜索、图算法、机器学习算法、密码学算法等。
+//! ordering 、、graph algorithm 、machine learning algorithm 、algorithm etc. 。
 //!
 //! ## 特性
+//! ## feature
 //!
 //! - **Rust 1.95.0+ 特性对齐**: 完全支持最新语言特性 (Edition 2024)
+//! - **Rust 1.95.0+ feature to **: feature (Edition 2024)
 //! - **对齐日期**: 2026-05-12
+//! - **to date **: 2026-05-12
 //! - **LeetCode 分类组织**: 按照 LeetCode 官方分类组织算法
+//! - **LeetCode classification organize **: LeetCode classification organize algorithm
 //! - **主题化组织**: 按算法主题分类组织
+//! - **organize **: algorithm classification organize
 //! - **多实现方式**: 同步、并行、异步实现
+//! - **way **: synchronous 、parallelism 、async
 //! - **形式化验证**: 包含算法正确性证明（循环不变量、霍尔逻辑）
+//! - ****: algorithm （circulation variable 、）
 //! - **完整文档**: 详细的算法说明和复杂度分析（主定理、摊还分析）
+//! - **complete **: algorithm explain and complex analyze （theorem 、analyze ）
 //! - **异步模式**: Actor/Reactor/CSP三大模式完整实现
+//! - **async **: Actor/Reactor/CSPcomplete
 //!
 //! ## 使用示例
+//! ## example
 //
 // ```rust
 // use c08_algorithms::topics::sorting::{SortingEngine, SortingAlgorithm};
@@ -112,10 +125,12 @@ pub mod algorithm_decision_trees;
 pub mod leetcode;
 
 /// 算法库版本信息
+/// algorithm library this
 pub const VERSION: &str = "0.3.0";
 pub const RUST_VERSION: &str = "1.92.0";
 
 /// 获取库版本信息
+/// library this
 ///
 /// # Examples
 ///
@@ -130,6 +145,7 @@ pub fn get_version() -> &'static str {
 }
 
 /// 获取支持的 Rust 版本
+/// Rust this
 ///
 /// # Examples
 ///
@@ -144,6 +160,7 @@ pub fn get_rust_version() -> &'static str {
 }
 
 /// 重新导出主题化模块的主要类型
+/// module main type
 pub use topics::{
     AlgorithmBenchmark, AlgorithmCategory, AlgorithmInfo, BenchmarkResult, ComplexityAnalyzer,
     ImplementationType, LibraryStats, get_library_stats,

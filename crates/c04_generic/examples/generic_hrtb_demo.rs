@@ -1,18 +1,15 @@
 #![allow(clippy::type_complexity)]
 
-//! 高阶Trait边界（HRTB）示例
-//!
-//! 本示例展示HRTB（Higher-Rank Trait Bounds）的使用：
-//! - HRTB的基本语法
 //! - for<'a> 语法
+//! - for<'a>
 //! - 实际应用场景
-//!
+//! - actual application scenario
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example generic_hrtb_demo
 //! ```
 
-/// 带有生命周期参数的trait
+/// 带有lifetimeparametertrait
 trait Processor<'a> {
     type Input;
     type Output;
@@ -32,7 +29,6 @@ impl<'a> Processor<'a> for StringProcessor {
     }
 }
 
-/// 使用HRTB的函数
 fn process_with_hrtb<P>(processor: P, input: &str) -> String
 where
     P: for<'a> Processor<'a, Input = &'a str, Output = String>,
@@ -41,6 +37,7 @@ where
 }
 
 /// 借用迭代器trait
+/// borrowing trait
 trait LendingIterator {
     type Item<'a>
     where
@@ -50,6 +47,7 @@ trait LendingIterator {
 }
 
 /// 数字迭代器
+/// 数字iterator
 struct NumberIterator {
     numbers: Vec<i32>,
     index: usize,
@@ -79,6 +77,7 @@ impl LendingIterator for NumberIterator {
 }
 
 /// 使用HRTB处理迭代器
+/// HRTB
 fn process_iterator<I>(mut iterator: I) -> Vec<i32>
 where
     I: for<'a> LendingIterator<Item<'a> = &'a i32>,

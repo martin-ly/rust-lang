@@ -1,9 +1,11 @@
 //! 数据包序列化器
+//! sequence
 use crate::error::{NetworkError, NetworkResult};
 use bytes::{Bytes, BytesMut};
 // use std::fmt; // 暂时注释掉未使用的导入
 
 /// 序列化结果
+/// sequence result
 #[derive(Debug, Clone)]
 pub struct SerializeResult {
     pub data: Bytes,
@@ -11,6 +13,7 @@ pub struct SerializeResult {
 }
 
 /// 数据包序列化器
+/// sequence
 pub struct PacketSerializer {
     buffer: BytesMut,
     max_size: usize,
@@ -18,6 +21,7 @@ pub struct PacketSerializer {
 
 impl PacketSerializer {
     /// 创建新的数据包序列化器
+    /// sequence
     pub fn new(max_size: usize) -> Self {
         Self {
             buffer: BytesMut::new(),
@@ -26,6 +30,7 @@ impl PacketSerializer {
     }
 
     /// 序列化数据包
+    /// sequence
     pub fn serialize(&mut self, packet: &super::Packet) -> NetworkResult<SerializeResult> {
         self.buffer.clear();
 
@@ -46,6 +51,7 @@ impl PacketSerializer {
     }
 
     /// 序列化数据包头部
+    /// sequence
     fn serialize_header(&mut self, header: &super::PacketHeader) -> NetworkResult<()> {
         // 序列化数据包类型
         let packet_type_raw = match &header.packet_type {
@@ -75,6 +81,7 @@ impl PacketSerializer {
     }
 
     /// 批量序列化数据包
+    /// sequence
     pub fn serialize_batch(
         &mut self,
         packets: &[super::Packet],
@@ -90,21 +97,26 @@ impl PacketSerializer {
     }
 
     /// 清空序列化缓冲区
+    /// sequence buffering
     pub fn clear(&mut self) {
         self.buffer.clear();
     }
 
     /// 获取缓冲区大小
+    /// buffering
     pub fn buffer_size(&self) -> usize {
         self.buffer.len()
     }
 }
 
 /// HTTP 请求序列化器
+/// HTTP sequence
 pub struct HttpRequestSerializer;
 
 impl HttpRequestSerializer {
     /// 序列化 HTTP 请求
+    /// sequence HTTP
+    /// Serialize HTTP 请求
     pub fn serialize_request(
         method: &str,
         uri: &str,
@@ -146,10 +158,13 @@ impl HttpRequestSerializer {
 }
 
 /// HTTP 响应序列化器
+/// HTTP sequence
 pub struct HttpResponseSerializer;
 
 impl HttpResponseSerializer {
     /// 序列化 HTTP 响应
+    /// sequence HTTP
+    /// Serialize HTTP 响应
     pub fn serialize_response(
         version: &str,
         status_code: u16,
@@ -190,11 +205,9 @@ impl HttpResponseSerializer {
     }
 }
 
-/// WebSocket 帧序列化器
 pub struct WebSocketFrameSerializer;
 
 impl WebSocketFrameSerializer {
-    /// 序列化 WebSocket 帧
     pub fn serialize_frame(
         frame: &crate::protocol::websocket::WebSocketFrame,
     ) -> NetworkResult<SerializeResult> {
@@ -251,31 +264,35 @@ impl WebSocketFrameSerializer {
 }
 
 /// 数据包序列化器工厂
+/// sequence factory
 pub struct SerializerFactory;
 
 impl SerializerFactory {
     /// 创建数据包序列化器
+    /// sequence
     pub fn create_packet_serializer(max_size: usize) -> PacketSerializer {
         PacketSerializer::new(max_size)
     }
 
     /// 创建 HTTP 请求序列化器
+    /// HTTP sequence
     pub fn create_http_request_serializer() -> HttpRequestSerializer {
         HttpRequestSerializer
     }
 
     /// 创建 HTTP 响应序列化器
+    /// HTTP sequence
     pub fn create_http_response_serializer() -> HttpResponseSerializer {
         HttpResponseSerializer
     }
 
-    /// 创建 WebSocket 帧序列化器
     pub fn create_websocket_frame_serializer() -> WebSocketFrameSerializer {
         WebSocketFrameSerializer
     }
 }
 
 /// 序列化器统计信息
+/// sequence
 #[derive(Debug, Clone, Default)]
 pub struct SerializerStats {
     pub total_serialized: u64,
@@ -288,6 +305,7 @@ pub struct SerializerStats {
 
 impl SerializerStats {
     /// 添加序列化结果到统计
+    /// sequence result to
     pub fn add_result(&mut self, result: &SerializeResult) {
         self.total_serialized += 1;
         self.total_bytes += result.size as u64;

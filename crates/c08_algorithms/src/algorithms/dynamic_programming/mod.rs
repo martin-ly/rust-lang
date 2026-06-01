@@ -1,13 +1,17 @@
 //! # 动态规划算法模块
+//! # dynamic programming algorithm module
 //!
 //! 本模块实现了各种动态规划算法。
+//! this module dynamic programming algorithm 。
 //use serde::{Serialize, Deserialize};
 
 /// 动态规划算法实现
+/// dynamic programming algorithm
 pub struct DynamicProgrammingAlgorithms;
 
 impl DynamicProgrammingAlgorithms {
     /// 最长公共子序列
+    /// sequence
     pub fn longest_common_subsequence(text1: &str, text2: &str) -> i32 {
         let m = text1.len();
         let n = text2.len();
@@ -27,6 +31,7 @@ impl DynamicProgrammingAlgorithms {
     }
 
     /// 0-1 背包问题
+    /// 0-1 problem
     pub fn knapsack_01(weights: &[i32], values: &[i32], capacity: i32) -> i32 {
         let n = weights.len();
         let mut dp = vec![vec![0; (capacity + 1) as usize]; n + 1];

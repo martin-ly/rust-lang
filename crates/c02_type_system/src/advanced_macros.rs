@@ -1,17 +1,21 @@
 //! Rust 1.90 高级宏系统演示
-//!
-//! 本模块展示了 Rust 1.90 中宏系统的高级用法，包括：
+//! Rust 1.90 system demonstration
 //! - 声明宏 (Declarative Macros)
 //! - 过程宏 (Procedural Macros)
 //! - 属性宏 (Attribute Macros)
 //! - 派生宏 (Derive Macros)
 //! - 函数式宏 (Function-like Macros)
 //! - 宏组合和嵌套
+//! - combination and
 //! - 宏元编程
+//! -
 //! - 编译时计算宏
+//! - compile-time
 /// 声明宏演示
+/// demonstration
 pub mod declarative_macros {
     /// 简单的声明宏 - 创建向量
+    /// simple -
     #[macro_export]
     macro_rules! create_vec {
         () => {
@@ -29,6 +33,7 @@ pub mod declarative_macros {
     }
 
     /// 条件编译宏
+    /// condition
     #[macro_export]
     macro_rules! debug_print {
         ($($arg:tt)*) => {
@@ -40,6 +45,7 @@ pub mod declarative_macros {
     }
 
     /// 递归宏 - 计算阶乘 (限制递归深度)
+    /// - ()
     #[macro_export]
     macro_rules! factorial {
         (0) => {
@@ -97,6 +103,7 @@ pub mod declarative_macros {
     }
 
     /// 类型构建器宏
+    /// type builder
     #[macro_export]
     macro_rules! type_builder {
         ($name:ident) => {
@@ -128,8 +135,10 @@ pub mod declarative_macros {
 }
 
 /// 过程宏演示
+/// demonstration
 pub mod procedural_macros {
     /// 简单的函数式宏
+    /// simple functional
     #[macro_export]
     macro_rules! measure_time {
         ($name:literal, $code:block) => {{
@@ -165,6 +174,7 @@ pub mod procedural_macros {
     }
 
     /// 类型转换宏
+    /// type conversion
     #[macro_export]
     macro_rules! try_convert {
         ($value:expr, $target:ty) => {
@@ -174,8 +184,11 @@ pub mod procedural_macros {
 }
 
 /// 属性宏演示
+/// attribute demonstration
 pub mod attribute_macros {
     /// 缓存属性宏
+    /// attribute
+    /// 缓存attribute macro
     #[macro_export]
     macro_rules! cached {
         ($key:expr, $value:expr) => {{
@@ -199,6 +212,7 @@ pub mod attribute_macros {
     }
 
     /// 重试属性宏
+    /// attribute
     #[macro_export]
     macro_rules! retry {
         ($max_attempts:expr, $code:block) => {{
@@ -219,6 +233,7 @@ pub mod attribute_macros {
     }
 
     /// 性能监控宏
+    /// performance
     #[macro_export]
     macro_rules! profile {
         ($name:literal, $code:block) => {{
@@ -232,8 +247,9 @@ pub mod attribute_macros {
 }
 
 /// 派生宏演示
+/// demonstration
 pub mod derive_macros {
-    /// 自动实现 Debug 和 Clone 的宏
+    /// 自动Implementation of Debug and Clone 宏
     #[macro_export]
     macro_rules! auto_derive {
         ($name:ident) => {
@@ -252,6 +268,7 @@ pub mod derive_macros {
     }
 
     /// 序列化宏
+    /// sequence
     #[macro_export]
     macro_rules! serializable {
         ($name:ident, $($field:ident: $type:ty),+ $(,)?) => {
@@ -272,8 +289,10 @@ pub mod derive_macros {
 }
 
 /// 宏组合和嵌套演示
+/// combination and demonstration
 pub mod macro_composition {
     /// 组合多个宏
+    /// combination
     #[macro_export]
     macro_rules! complex_operation {
         ($name:literal, $data:expr) => {{
@@ -300,6 +319,7 @@ pub mod macro_composition {
     }
 
     /// 条件宏组合
+    /// condition combination
     #[macro_export]
     macro_rules! conditional_macro {
         ($condition:expr, $true_macro:ident, $false_macro:ident, $arg:expr) => {
@@ -313,8 +333,11 @@ pub mod macro_composition {
 }
 
 /// 宏元编程演示
+/// demonstration
+/// 宏元编程Demonstration of
 pub mod macro_metaprogramming {
     /// 生成函数宏
+    /// function
     #[macro_export]
     macro_rules! generate_functions {
         ($($name:ident: $type:ty),+ $(,)?) => {
@@ -327,6 +350,7 @@ pub mod macro_metaprogramming {
     }
 
     /// 生成结构体宏
+    /// struct
     #[macro_export]
     macro_rules! generate_structs {
         ($($name:ident),+ $(,)?) => {
@@ -346,6 +370,7 @@ pub mod macro_metaprogramming {
     }
 
     /// 生成枚举宏
+    /// enum
     #[macro_export]
     macro_rules! generate_enum {
         ($name:ident, $($variant:ident),+ $(,)?) => {
@@ -383,8 +408,10 @@ pub mod macro_metaprogramming {
 }
 
 /// 编译时计算宏演示
+/// compile-time demonstration
 pub mod compile_time_macros {
     /// 编译时字符串处理
+    /// compile-time
     #[macro_export]
     macro_rules! compile_time_string {
         ($s:literal) => {{
@@ -394,6 +421,7 @@ pub mod compile_time_macros {
     }
 
     /// 编译时数学计算
+    /// compile-time
     #[macro_export]
     macro_rules! compile_time_math {
         ($a:literal + $b:literal) => {
@@ -411,6 +439,7 @@ pub mod compile_time_macros {
     }
 
     /// 编译时类型信息
+    /// compile-time type
     #[macro_export]
     macro_rules! type_info {
         ($type:ty) => {{
@@ -423,6 +452,7 @@ pub mod compile_time_macros {
     }
 
     /// 编译时条件编译
+    /// compile-time condition
     #[macro_export]
     macro_rules! feature_gate {
         ($feature:literal, $code:block) => {
@@ -433,8 +463,10 @@ pub mod compile_time_macros {
 }
 
 /// 高级宏工具
+/// tool
 pub mod macro_utilities {
     /// 宏调试工具
+    /// tool
     #[macro_export]
     macro_rules! macro_debug {
         ($($arg:tt)*) => {
@@ -446,6 +478,8 @@ pub mod macro_utilities {
     }
 
     /// 宏性能测试
+    /// performance test
+    /// 宏performance test
     #[macro_export]
     macro_rules! macro_benchmark {
         ($name:literal, $iterations:literal, $code:block) => {{
@@ -462,6 +496,8 @@ pub mod macro_utilities {
     }
 
     /// 宏错误处理
+    /// error handling
+    /// 宏error handling
     #[macro_export]
     macro_rules! macro_try {
         ($expr:expr) => {
@@ -477,6 +513,7 @@ pub mod macro_utilities {
 }
 
 /// 宏系统演示主函数
+/// system demonstration Main function
 pub fn demonstrate_advanced_macros() {
     println!("🔧 Rust 1.90 高级宏系统演示");
     println!("=============================");
@@ -485,6 +522,8 @@ pub fn demonstrate_advanced_macros() {
 }
 
 /// 详细演示函数
+/// demonstration function
+/// 详细demonstration function
 pub fn demonstrate_macro_details() {
     println!("\n🔧 高级宏系统详细演示");
     println!("========================");

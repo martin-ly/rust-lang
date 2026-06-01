@@ -6,28 +6,35 @@
 #![allow(clippy::module_name_repetitions)]
 
 //! # C13 Embedded - Bare-metal 嵌入式 Rust 学习模块
-//!
-//! 本 crate 提供完整的 bare-metal 嵌入式 Rust 编程示例，包括：
+//! # C13 Embedded - Bare-metal 嵌入式 Rust learnmodule
+//! This crate providescomplete bare-metal 嵌入式 Rust 编程Example of，包括：
 //! - `no_std` 环境编程
+//! - `no_std` environment
 //! - 内存映射寄存器 (MMIO) 操作
+//! - memory mapping (MMIO)
 //! - UART 驱动设计
+//! - UART driver design
 //! - 中断处理
+//! - in
+//! - in断Handle
 //! - HAL 设计模式（类型状态）
+//! - HAL design （type state ）
 //! - C 语言互操作 (FFI)
-//!
+//! - C (FFI)
 //! ## 编译说明
-//!
+//! ## explain
+//! ## 编译explain
 //! - **Host 目标** (`x86_64-pc-windows-msvc`): 使用模拟代码演示概念，`cargo check` 可正常通过
+//! - **Host goal ** (`x86_64-pc-windows-msvc`): demonstration concept ，`cargo check`
+//! - **Host goal** (`x86_64-pc-windows-msvc`): Use模拟代码Demonstration ofconcept，`cargo check` 可正常Via
 //! - **嵌入式目标** (`thumbv7m-none-eabi` 等): 启用 `embedded` feature，使用真实硬件抽象层
-//!
+//! - **goal ** (`thumbv7m-none-eabi` etc. ): `embedded` feature，real hardware
 //! ## 快速开始
-//!
-//! ```bash
+//! ## fast
 //! # Host 上检查编译
-//! cargo check -p c13_embedded
-//!
+//! # Host on
 //! # 运行演示程序
-//! cargo run -p c13_embedded --bin embedded_demo
+//! # Run demonstration program
 //! ```
 
 // 核心模块
@@ -60,6 +67,7 @@ pub mod uart_driver; // RTIC 实时中断驱动并发
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 
 /// 获取库信息
+/// library
 pub fn get_library_info() -> LibraryInfo {
     LibraryInfo {
         name: "c13_embedded",
@@ -73,13 +81,17 @@ pub fn get_library_info() -> LibraryInfo {
 }
 
 /// 库信息结构体
+/// library struct
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct LibraryInfo {
     /// 库名称
+    /// library
     pub name: &'static str,
     /// 版本号
+    /// this
     pub version: &'static str,
     /// 当前编译目标
+    /// when before goal
     pub target: &'static str,
 }
 

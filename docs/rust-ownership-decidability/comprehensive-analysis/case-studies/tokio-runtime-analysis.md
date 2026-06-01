@@ -12,7 +12,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Tokio运行时深度案例分析](#tokio运行时深度案例分析)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [1. 项目概览](#1-项目概览)
     - [1.1 基本信息](#11-基本信息)
     - [1.2 架构概览](#12-架构概览)
@@ -45,7 +45,6 @@
     - [8.1 优势](#81-优势)
     - [8.2 限制](#82-限制)
     - [8.3 形式化评估](#83-形式化评估)
-  - **Tokio版本**: 1.35+
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -406,7 +405,7 @@ pub async fn unsafe_cancel() {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-| 场景 | Tokio | async-std | Go | 说明 |
+| 场景 | Tokio | async-std [已归档] | Go | 说明 |
 |:---|:---:|:---:|:---:|:---|
 | 单线程ping-pong | 50ns | 55ns | 80ns | 任务切换延迟 |
 | 多线程spawn | 200ns | 220ns | 300ns | 跨线程任务创建 |

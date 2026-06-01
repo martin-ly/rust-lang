@@ -1,4 +1,5 @@
 //! 宏调试工具
+//! tool
 
 /// 宏调试信息
 #[derive(Debug)]
@@ -6,6 +7,7 @@ pub struct MacroDebugInfo {
     /// 宏名称
     pub name: String,
     /// 调用位置
+    /// position
     pub location: String,
     /// 展开次数
     pub expansions: usize,

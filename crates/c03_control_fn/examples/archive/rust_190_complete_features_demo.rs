@@ -1,24 +1,28 @@
 //! Rust 1.90 完整特性演示程序 (历史版本)
-//!
+//! Rust 1.90 complete feature demonstration program (this )
+//! Rust 1.90 completefeaturedemonstration program (历史版this)
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//!
+//! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features_demo.rs`
-//!
-//! 本程序演示了 Rust 1.90 edition=2024 的所有最新特性，包括：
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features_demo.rs`
 //! - 异步闭包 (async closures)
-//! - 元组的 FromIterator 和 Extend 实现
-//! - 改进的 async fn trait
-//! - 异步 Drop (AsyncDrop)
+//! - 改进 async fn trait
 //! - 异步生成器 (async generators)
 //! - Polonius 借用检查器改进
+//! - Polonius borrowing
 //! - 下一代特质求解器
+//! - under trait
 //! - 并行前端编译
+//! - parallelism frontend
 //! - 改进的对齐检查
+//! - to
+//! - 改进to齐Check
 //! - 枚举判别值指定
+//! - enum
 //! - 生命周期转换改进
-//!
+//! - lifetime conversion
 //! 运行方式：
-//! ```bash
+//! Run way ：
 //! cargo run --example rust_190_complete_features_demo
 //! ```
 use c03_control_fn::rust_190_complete_features::*;
@@ -49,6 +53,7 @@ async fn main() -> Result<()> {
 }
 
 /// 实际应用场景演示
+/// actual application scenario demonstration
 async fn demonstrate_real_world_scenarios() -> Result<()> {
     
     // 场景1：Web API 异步处理
@@ -71,6 +76,7 @@ async fn demonstrate_real_world_scenarios() -> Result<()> {
 }
 
 /// Web API 异步处理场景
+/// Web API async scenario
 async fn demonstrate_web_api_scenario() -> Result<()> {
     println!("  模拟 Web API 异步处理场景...");
     
@@ -106,6 +112,7 @@ async fn demonstrate_web_api_scenario() -> Result<()> {
 }
 
 /// 数据流处理管道场景
+/// stream pipe scenario
 async fn demonstrate_data_stream_scenario() -> Result<()> {
     println!("  模拟数据流处理管道场景...");
     
@@ -144,6 +151,7 @@ async fn demonstrate_data_stream_scenario() -> Result<()> {
 }
 
 /// 资源池管理场景
+/// scenario
 async fn demonstrate_resource_pool_scenario() -> Result<()> {
     println!("  模拟资源池管理场景...");
     
@@ -196,6 +204,7 @@ async fn demonstrate_resource_pool_scenario() -> Result<()> {
 }
 
 /// 并发任务处理场景
+/// concurrency task scenario
 async fn demonstrate_concurrent_task_scenario() -> Result<()> {
     println!("  模拟并发任务处理场景...");
     

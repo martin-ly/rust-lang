@@ -1,10 +1,12 @@
 //! 性能指标收集器
+//! performance indicator
 // use crate::error::{NetworkError, NetworkResult}; // 暂时注释掉未使用的导入
 use std::collections::HashMap;
 use std::sync::{Arc, RwLock};
 use std::time::{Duration, Instant};
 
 /// 性能指标
+/// performance indicator
 #[derive(Debug, Clone, Default)]
 pub struct PerformanceMetrics {
     pub total_operations: u64,
@@ -21,6 +23,7 @@ pub struct PerformanceMetrics {
 }
 
 /// 指标收集器
+/// indicator
 pub struct MetricsCollector {
     metrics: Arc<RwLock<PerformanceMetrics>>,
     start_time: Instant,
@@ -35,6 +38,7 @@ impl Default for MetricsCollector {
 
 impl MetricsCollector {
     /// 创建新的指标收集器
+    /// indicator
     pub fn new() -> Self {
         Self {
             metrics: Arc::new(RwLock::new(PerformanceMetrics::default())),
@@ -54,6 +58,7 @@ impl MetricsCollector {
     }
 
     /// 记录操作时间
+    /// time
     pub fn record_operation_time(&self, operation: &str, duration: Duration) {
         let mut metrics = self
             .metrics
@@ -82,6 +87,7 @@ impl MetricsCollector {
     }
 
     /// 记录内存使用
+    /// memory
     pub fn record_memory_usage(&self, bytes: usize) {
         let mut metrics = self
             .metrics
@@ -97,6 +103,8 @@ impl MetricsCollector {
     }
 
     /// 记录网络 I/O
+    /// network I/O
+    /// 记录network I/O
     pub fn record_network_io(&self, bytes: usize, is_read: bool) {
         let mut metrics = self
             .metrics
@@ -128,6 +136,7 @@ impl MetricsCollector {
     }
 
     /// 获取指标
+    /// indicator
     pub fn get_metrics(&self) -> PerformanceMetrics {
         self.metrics
             .read()
@@ -136,6 +145,7 @@ impl MetricsCollector {
     }
 
     /// 重置指标
+    /// indicator
     pub fn reset(&self) {
         let mut metrics = self
             .metrics
@@ -152,6 +162,7 @@ impl MetricsCollector {
     }
 
     /// 更新指标
+    /// indicator
     pub fn update(&self) {
         let mut metrics = self
             .metrics
@@ -161,6 +172,7 @@ impl MetricsCollector {
     }
 
     /// 获取运行时间
+    /// runtime
     pub fn uptime(&self) -> Duration {
         self.start_time.elapsed()
     }
@@ -215,6 +227,7 @@ impl MetricsCollector {
     }
 
     /// 获取内存统计
+    /// memory
     pub fn get_memory_stats(&self) -> MemoryStats {
         let metrics = self
             .metrics
@@ -272,6 +285,7 @@ pub struct ThroughputStats {
 }
 
 /// 内存统计
+/// memory
 #[derive(Debug, Clone)]
 pub struct MemoryStats {
     pub current_usage: usize,
@@ -288,6 +302,7 @@ pub struct ErrorStats {
 }
 
 /// 性能报告生成器
+/// performance
 pub struct PerformanceReporter {
     collector: Arc<MetricsCollector>,
     report_interval: Duration,
@@ -296,6 +311,7 @@ pub struct PerformanceReporter {
 
 impl PerformanceReporter {
     /// 创建新的性能报告生成器
+    /// performance
     pub fn new(collector: Arc<MetricsCollector>, report_interval: Duration) -> Self {
         Self {
             collector,
@@ -305,6 +321,7 @@ impl PerformanceReporter {
     }
 
     /// 生成性能报告
+    /// performance
     pub fn generate_report(&mut self) -> PerformanceReport {
         let metrics = self.collector.get_metrics();
         let operation_stats = self.collector.get_operation_stats();
@@ -326,11 +343,13 @@ impl PerformanceReporter {
     }
 
     /// 检查是否应该生成报告
+    /// should
     pub fn should_report(&self) -> bool {
         self.last_report.elapsed() >= self.report_interval
     }
 
     /// 生成并打印报告
+    /// and
     pub fn print_report(&mut self) {
         let report = self.generate_report();
         println!("=== 性能报告 ===");
@@ -352,6 +371,7 @@ impl PerformanceReporter {
 }
 
 /// 性能报告
+/// performance
 #[derive(Debug, Clone)]
 pub struct PerformanceReport {
     pub timestamp: Instant,
@@ -364,6 +384,7 @@ pub struct PerformanceReport {
 }
 
 /// 性能监控器
+/// performance
 pub struct PerformanceMonitor {
     collector: Arc<MetricsCollector>,
     reporter: PerformanceReporter,
@@ -371,6 +392,7 @@ pub struct PerformanceMonitor {
 
 impl PerformanceMonitor {
     /// 创建新的性能监控器
+    /// performance
     pub fn new(report_interval: Duration) -> Self {
         let collector = Arc::new(MetricsCollector::new());
         let reporter = PerformanceReporter::new(collector.clone(), report_interval);
@@ -382,6 +404,7 @@ impl PerformanceMonitor {
     }
 
     /// 获取指标收集器
+    /// indicator
     pub fn collector(&self) -> Arc<MetricsCollector> {
         self.collector.clone()
     }
@@ -394,6 +417,7 @@ impl PerformanceMonitor {
     }
 
     /// 生成最终报告
+    /// ultimately
     pub fn final_report(&mut self) -> PerformanceReport {
         self.reporter.generate_report()
     }

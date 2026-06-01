@@ -1,12 +1,11 @@
 //! Unsafe Rust 模式专题演示
-//!
+//! Unsafe Rust demonstration
+//! Unsafe Rust 模式专题Demonstration of
 //! 覆盖常见 unsafe 编程模式，每个模式附带 SAFETY 注释：
-//! - NonNull<T>（协变 + 非空保证）
+//! unsafe ， SAFETY ：
 //! - addr_of_mut!（未初始化字段地址获取）
-//! - ManuallyDrop<T>（控制 Drop 时机）
+//! - addr_of_mut!（field ）
 //! - unsafe trait / unsafe impl（自定义不安全 trait）
-//! - MaybeUninit 条件初始化
-//!
 //! 运行：cargo run --example unsafe_patterns_demo -p c03_control_fn
 
 use std::mem::{ManuallyDrop, MaybeUninit};
@@ -16,8 +15,6 @@ use std::ptr::NonNull;
 // 1. NonNull<T> — 协变 + 非空指针
 // ============================================================
 
-/// 使用 NonNull<T> 构建的侵入式链表节点。
-/// NonNull<T> 比 *mut T 更安全：保证非空 + 协变。
 struct IntrusiveNode {
     value: i32,
     next: Option<NonNull<IntrusiveNode>>,
@@ -111,8 +108,8 @@ fn demo_manually_drop() {
 // ============================================================
 
 /// # Safety
-/// 实现者必须保证 `as_bytes` 返回的切片在整个对象生命周期内有效，
 /// 且不会被修改导致对象状态不一致。
+/// and is to state 。
 unsafe trait AsBytes {
     fn as_bytes(&self) -> &[u8];
 }

@@ -8,45 +8,44 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权系统可判定性 - 综合知识梳理](#rust-所有权系统可判定性---综合知识梳理)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [Comprehensive Knowledge Synthesis](#comprehensive-knowledge-synthesis)
-  - [📊 知识体系全景](#知识体系全景)
+  - [📊 知识体系全景](#-知识体系全景)
     - [1. 四层知识结构](#1-四层知识结构)
     - [2. 核心理论依赖图](#2-核心理论依赖图)
-  - [🎯 核心知识体系](#核心知识体系)
+  - [🎯 核心知识体系](#-核心知识体系)
     - [1. 五大核心定理](#1-五大核心定理)
     - [2. 三大核心概念](#2-三大核心概念)
       - [所有权 (Ownership)](#所有权-ownership)
       - [借用 (Borrowing)](#借用-borrowing)
       - [生命周期 (Lifetimes)](#生命周期-lifetimes)
-  - [📚 完整模块索引](#完整模块索引)
+  - [📚 完整模块索引](#-完整模块索引)
     - [00 - 理论基础 (`00-foundations/`)](#00---理论基础-00-foundations)
     - [01 - 核心概念 (`01-core-concepts/`)](#01---核心概念-01-core-concepts)
     - [03 - 验证工具 (`03-verification-tools/`)](#03---验证工具-03-verification-tools)
     - [11 - 设计模式 (`11-design-patterns/`)](#11---设计模式-11-design-patterns)
     - [12 - 并发模式 (`12-concurrency-patterns/`)](#12---并发模式-12-concurrency-patterns)
     - [16 - 程序语义 (`16-program-semantics/`)](#16---程序语义-16-program-semantics)
-  - [🛤️ 优化学习路径](#优化学习路径)
+  - [🛤️ 优化学习路径](#️-优化学习路径)
     - [路径 A: 快速入门 (4小时) → 初学者](#路径-a-快速入门-4小时--初学者)
     - [路径 B: 系统掌握 (2周) → 进阶开发者](#路径-b-系统掌握-2周--进阶开发者)
     - [路径 C: 形式化专家 (持续) → 研究者](#路径-c-形式化专家-持续--研究者)
-  - [🔬 Coq 形式化体系](#coq-形式化体系)
+  - [🔬 Coq 形式化体系](#-coq-形式化体系)
     - [核心定理证明状态](#核心定理证明状态)
     - [Rust 1.94 特性形式化](#rust-194-特性形式化)
-  - [📊 案例研究覆盖](#案例研究覆盖)
+  - [📊 案例研究覆盖](#-案例研究覆盖)
     - [按领域分类](#按领域分类)
-  - [🔗 关键交叉引用](#关键交叉引用)
+  - [🔗 关键交叉引用](#-关键交叉引用)
     - [核心依赖链](#核心依赖链)
-  - [📈 质量保证指标](#质量保证指标)
+  - [📈 质量保证指标](#-质量保证指标)
     - [完成度统计](#完成度统计)
     - [内容深度分布](#内容深度分布)
-  - [🎯 使用建议](#使用建议)
+  - [🎯 使用建议](#-使用建议)
     - [问题诊断速查](#问题诊断速查)
-  - [🎉 项目成就总结](#项目成就总结)
+  - [🎉 项目成就总结](#-项目成就总结)
     - [理论贡献](#理论贡献)
     - [独特价值](#独特价值)
-  - [📞 索引快速导航](#索引快速导航)
-  - **🎉 Rust 所有权系统可判定性知识库 - 100% 综合梳理完成! 🎉**
+  - [📞 索引快速导航](#-索引快速导航)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -409,7 +408,7 @@
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```
+```text
 基础阶段 (2周)
 ├── 数学基础
 │   ├── 00-foundations/00-01-linear-logic-deep.md
@@ -481,7 +480,7 @@
 
 | 领域 | Crates | 文件数 |
 |:-----|:-------|:------:|
-| 异步运行时 | Tokio, async-std, smol | 15+ |
+| 异步运行时 | Tokio, async-std [已归档], smol | 15+ |
 | Web 框架 | Actix-web, Axum, Rocket | 10+ |
 | 数据库 | Diesel, SQLx, SeaORM | 8+ |
 | 序列化 | Serde, rkyv, postcard | 6+ |
@@ -501,7 +500,7 @@
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-```
+```text
 UNIFIED_THEORETICAL_FRAMEWORK.md
     ├── THEOREM_DEPENDENCY_GRAPH.md
     ├── formal-foundations/proofs/*.md
@@ -624,6 +623,7 @@ README.md (入口)
 > *"系统化知识 + 严格证明 + 丰富案例 = 深入理解 Rust 所有权系统"*
 
 **🎉 Rust 所有权系统可判定性知识库 - 100% 综合梳理完成! 🎉**
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -649,11 +649,8 @@ README.md (入口)
 ## 权威来源索引
 
 > **[来源: Wikipedia - Memory Safety]**
-
 > **[来源: TRPL Ch. 4 - Ownership]**
-
 > **[来源: Rustonomicon - Ownership]**
-
 > **[来源: POPL 2018 - RustBelt]**
 
 ---

@@ -47,7 +47,7 @@ graph TB
     Core --> Poll[Poll机制]
 
     Runtime --> Tokio[Tokio]
-    Runtime --> AsyncStd[async-std]
+    Runtime --> AsyncStd[async-std [已归档]]
     Runtime --> Smol[Smol]
     Runtime --> Glommio[Glommio/Monoio]
 
@@ -114,7 +114,7 @@ graph LR
 
 | Runtime       | 线程模型  | I/O模型           | 生态       | 性能       | 学习曲线   | Rust 1.92.0 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- || **Tokio**     | 多线程    | epoll/kqueue/IOCP | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐     | 完全支持    |
-| **async-std** | 多线程    | epoll/kqueue      | ⭐⭐⭐⭐   | ⭐⭐⭐⭐   | ⭐⭐⭐⭐⭐ | 支持        |
+| **async-std [已归档]** | 多线程    | epoll/kqueue      | ⭐⭐⭐⭐   | ⭐⭐⭐⭐   | ⭐⭐⭐⭐⭐ | 支持        |
 | **Smol**      | 单/多线程 | epoll/kqueue      | ⭐⭐⭐     | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐   | 支持        |
 | **Glommio**   | 单线程    | io_uring          | ⭐⭐       | ⭐⭐⭐⭐⭐ | ⭐⭐       | 支持        |
 | **Monoio**    | 单线程    | io_uring          | ⭐⭐       | ⭐⭐⭐⭐⭐ | ⭐⭐       | 支持        |
@@ -154,7 +154,7 @@ gantt
 
     section Runtime成熟
     Tokio 1.0         :done, 2020-12, 2020-12
-    async-std稳定     :done, 2019-08, 2020-06
+    async-std [已归档]稳定     :done, 2019-08, 2020-06
 
     section 现代特性
     async fn in trait :done, 2023-03, 2023-12

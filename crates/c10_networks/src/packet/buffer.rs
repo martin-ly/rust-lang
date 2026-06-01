@@ -1,4 +1,5 @@
 //! 数据包缓冲区管理
+//! buffering
 use crate::error::{NetworkError, NetworkResult};
 #[cfg(test)]
 use bytes::Bytes;
@@ -6,6 +7,7 @@ use std::collections::VecDeque;
 use std::time::{Duration, Instant};
 
 /// 缓冲区错误类型
+/// buffering error type
 #[derive(Debug, thiserror::Error)]
 pub enum BufferError {
     #[error("Buffer is full")]
@@ -27,6 +29,7 @@ impl From<BufferError> for NetworkError {
 }
 
 /// 数据包缓冲区配置
+/// buffering
 #[derive(Debug, Clone)]
 pub struct BufferConfig {
     pub max_size: usize,
@@ -49,6 +52,7 @@ impl Default for BufferConfig {
 }
 
 /// 数据包缓冲区
+/// buffering
 pub struct PacketBuffer {
     config: BufferConfig,
     packets: VecDeque<super::Packet>,
@@ -59,6 +63,7 @@ pub struct PacketBuffer {
 
 impl PacketBuffer {
     /// 创建新的数据包缓冲区
+    /// buffering
     pub fn new(config: BufferConfig) -> Self {
         Self {
             config,
@@ -70,6 +75,7 @@ impl PacketBuffer {
     }
 
     /// 添加数据包到缓冲区
+    /// to buffering
     pub fn push(&mut self, packet: super::Packet) -> Result<(), BufferError> {
         let packet_size = packet.total_size();
 
@@ -94,6 +100,7 @@ impl PacketBuffer {
     }
 
     /// 从缓冲区取出数据包
+    /// from buffering
     pub fn pop(&mut self) -> Option<super::Packet> {
         if let Some(packet) = self.packets.pop_front() {
             self.total_size -= packet.total_size();
@@ -104,47 +111,56 @@ impl PacketBuffer {
     }
 
     /// 查看下一个数据包但不移除
+    /// under but
     pub fn peek(&self) -> Option<&super::Packet> {
         self.packets.front()
     }
 
     /// 检查缓冲区是否为空
+    /// buffering as
     pub fn is_empty(&self) -> bool {
         self.packets.is_empty()
     }
 
     /// 检查缓冲区是否已满
+    /// buffering
     pub fn is_full(&self) -> bool {
         self.packets.len() >= self.config.max_packets || self.total_size >= self.config.max_size
     }
 
     /// 获取缓冲区中的数据包数量
+    /// buffering in quantity
     pub fn len(&self) -> usize {
         self.packets.len()
     }
 
     /// 获取缓冲区总大小
+    /// buffering
     pub const fn total_size(&self) -> usize {
         self.total_size
     }
 
     /// 清空缓冲区
+    /// buffering
     pub fn clear(&mut self) {
         self.packets.clear();
         self.total_size = 0;
     }
 
     /// 检查是否应该刷新缓冲区
+    /// should buffering
     fn should_flush(&self) -> bool {
         self.last_flush.elapsed() >= self.config.flush_interval
     }
 
     /// 刷新缓冲区（重置刷新时间）
+    /// buffering （time ）
     fn flush(&mut self) {
         self.last_flush = Instant::now();
     }
 
     /// 获取缓冲区统计信息
+    /// buffering
     pub fn stats(&self) -> BufferStats {
         BufferStats {
             packet_count: self.packets.len(),
@@ -157,6 +173,7 @@ impl PacketBuffer {
     }
 
     /// 等待数据包到达
+    /// etc. to
     pub async fn wait_for_packet(&mut self) -> NetworkResult<super::Packet> {
         let timeout_duration = self.config.timeout.unwrap_or(Duration::from_secs(30));
         let start = Instant::now();
@@ -186,6 +203,7 @@ impl PacketBuffer {
     }
 
     /// 按类型过滤数据包
+    /// type
     pub fn filter_by_type(&mut self, packet_type: &super::PacketType) -> Vec<super::Packet> {
         let mut result = Vec::new();
         let mut remaining = VecDeque::new();
@@ -204,12 +222,14 @@ impl PacketBuffer {
     }
 
     /// 重新计算缓冲区大小
+    /// buffering
     fn recalculate_size(&mut self) {
         self.total_size = self.packets.iter().map(|p| p.total_size()).sum();
     }
 }
 
 /// 缓冲区统计信息
+/// buffering
 #[derive(Debug, Clone)]
 pub struct BufferStats {
     pub packet_count: usize,
@@ -221,6 +241,7 @@ pub struct BufferStats {
 }
 
 /// 环形缓冲区
+/// buffering
 pub struct RingBuffer {
     buffer: Vec<u8>,
     head: usize,
@@ -231,6 +252,7 @@ pub struct RingBuffer {
 
 impl RingBuffer {
     /// 创建新的环形缓冲区
+    /// buffering
     pub fn new(capacity: usize) -> Self {
         Self {
             buffer: vec![0; capacity],
@@ -242,6 +264,7 @@ impl RingBuffer {
     }
 
     /// 写入数据到缓冲区
+    /// to buffering
     pub fn write(&mut self, data: &[u8]) -> Result<usize, BufferError> {
         if data.is_empty() {
             return Ok(0);
@@ -264,6 +287,7 @@ impl RingBuffer {
     }
 
     /// 从缓冲区读取数据
+    /// from buffering
     pub fn read(&mut self, buffer: &mut [u8]) -> Result<usize, BufferError> {
         if buffer.is_empty() || self.size == 0 {
             return Ok(0);
@@ -281,26 +305,33 @@ impl RingBuffer {
     }
 
     /// 检查缓冲区是否为空
+    /// buffering as
     pub const fn is_empty(&self) -> bool {
         self.size == 0
     }
 
     /// 检查缓冲区是否已满
+    /// buffering
     pub const fn is_full(&self) -> bool {
         self.size == self.capacity
     }
 
     /// 获取可用空间
+    /// space
+    /// Get可用space
     pub const fn available(&self) -> usize {
         self.capacity - self.size
     }
 
     /// 获取已使用空间
+    /// space
+    /// Get已Usespace
     pub const fn used(&self) -> usize {
         self.size
     }
 
     /// 清空缓冲区
+    /// buffering
     pub fn clear(&mut self) {
         self.head = 0;
         self.tail = 0;

@@ -34,7 +34,6 @@
     - [完整学习资源树](#完整学习资源树)
   - [📝 总结](#-总结)
   - [🔗 相关文档](#-相关文档)
-  - [**更新频率**: 随 Rust 版本更新和项目进展持续更新](#更新频率-随-rust-版本更新和项目进展持续更新)
 
 **版本**: 1.0
 **Rust 版本**: 1.92.0+
@@ -740,7 +739,7 @@ graph TB
     AsyncBlock --> BlockMove[move async]
 
     Runtime --> Tokio[tokio]
-    Runtime --> AsyncStd[async-std]
+    Runtime --> AsyncStd[smol]
     Runtime --> Executor[executor]
 
     Tokio --> TokioFeatures[功能丰富]
@@ -1184,6 +1183,7 @@ graph TB
 **注意**: 本文档使用 Mermaid 语法创建思维导图，在支持的 Markdown 查看器中可查看完整可视化效果。
 
 **更新频率**: 随 Rust 版本更新和项目进展持续更新
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

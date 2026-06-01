@@ -1,4 +1,5 @@
 //! 运行所有类型系统示例
+//! Run all type system examples
 use c02_type_system::examples::{
     generics_examples, lifetimes_examples, traits_examples, type_definition_examples,
 };

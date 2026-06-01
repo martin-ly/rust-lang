@@ -1,11 +1,16 @@
 //! LeetCode 贪心类算法（结合 Rust 1.92 特性）
+//! LeetCode algorithm （ Rust 1.92 feature ）
 //!
 //! 本模块实现经典的贪心类 LeetCode 题目，充分利用 Rust 1.92 的新特性。
+//! this module LeetCode ， Rust 1.92 feature 。
 //!
 //! ## Rust 1.92 特性应用
+//! ## Rust 1.92 feature application
 //!
 //! 1. **性能优化**: 迭代器操作性能提升
+//! 1. **performance optimization **: performance
 //! 2. **内存优化**: 使用标准库高效数据结构
+//! 2. **memory optimization **: standard library efficient data structure
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 
 // ==================== 经典题目实现 ====================
@@ -13,16 +18,25 @@ use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 /// 45. Jump Game II（跳跃游戏 II）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给你一个非负整数数组 nums ，你最初位于数组的第一个位置。
+/// nums ，first position 。
 /// 数组中的每个元素代表你在该位置可以跳跃的最大长度。
+/// in element in this position can maximum 。
 /// 你的目标是使用最少的跳跃次数到达数组的最后一个位置。
+/// goal at least to finally position 。
 ///
 /// ## Rust 1.92 特性应用
+/// ## Rust 1.92 feature application
 /// - **贪心算法**: 一次遍历，贪心选择最远可达位置
+/// - **greedy algorithm **: ，position
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(1)
+/// - space complexity : O(1)
 pub fn jump(nums: Vec<i32>) -> i32 {
     let n = nums.len();
     if n < 2 {
@@ -50,18 +64,28 @@ pub fn jump(nums: Vec<i32>) -> i32 {
 }
 
 /// 55. Jump Game（跳跃游戏）
+/// 55. Jump Game（）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给定一个非负整数数组 nums ，你最初位于数组的 第一个下标 。
+/// nums ， first under 。
 /// 数组中的每个元素代表你在该位置可以跳跃的最大长度。
+/// in element in this position can maximum 。
 /// 判断你是否能够到达最后一个下标。
+/// can to finally under 。
 ///
 /// ## Rust 1.92 特性应用
+/// ## Rust 1.92 feature application
 /// - **贪心算法**: 一次遍历，贪心选择最远可达位置
+/// - **greedy algorithm **: ，position
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(1)
+/// - space complexity : O(1)
 pub fn can_jump(nums: Vec<i32>) -> bool {
     let n = nums.len();
     let mut farthest = 0;
@@ -82,16 +106,25 @@ pub fn can_jump(nums: Vec<i32>) -> bool {
 /// 122. Best Time to Buy and Sell Stock II（买卖股票的最佳时机 II）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给你一个整数数组 prices ，其中 `prices[i]` 表示某支股票第 i 天的价格。
+/// prices ，its in `prices[i]` represent i price 。
 /// 在每一天，你可以决定是否购买和/或出售股票。你在任何时候 最多 只能持有 一股 股票。
+/// in ，can and /or 。in at most 。
 /// 你也可以先购买，然后在 同一天 出售。返回 你能获得的 最大 利润 。
+/// can ，then in 。 maximum profit 。
 ///
 /// ## Rust 1.92 特性应用
+/// ## Rust 1.92 feature application
 /// - **贪心算法**: 贪心选择所有正收益
+/// - **greedy algorithm **: all return
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(1)
+/// - space complexity : O(1)
 pub fn max_profit_ii(prices: Vec<i32>) -> i32 {
     let mut profit = 0;
 
@@ -107,17 +140,27 @@ pub fn max_profit_ii(prices: Vec<i32>) -> i32 {
 /// 134. Gas Station（加油站）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 在一条环路上有 n 个加油站，其中第 i 个加油站有汽油 `gas[i]` 升。
+/// in on n ，its in i `gas[i]` 。
 /// 你有一辆油箱容量无限的的汽车，从第 i 个加油站开往第 i+1 个加油站需要消耗汽油 `cost[i]` 升。
+/// ，from i i+1 `cost[i]` 。
 /// 你从其中的一个加油站出发，开始时油箱为空。
+/// from its in ，as 。
 /// 给定两个整数数组 gas 和 cost ，如果你可以绕环路行驶一周，则返回出发时加油站的编号，否则返回 -1 。
+/// gas and cost ，if can ，number ， -1 。
 ///
 /// ## Rust 1.92 特性应用
+/// ## Rust 1.92 feature application
 /// - **贪心算法**: 贪心选择起始点
+/// - **greedy algorithm **: point
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(1)
+/// - space complexity : O(1)
 pub fn can_complete_circuit(gas: Vec<i32>, cost: Vec<i32>) -> i32 {
     let n = gas.len();
     let mut total_tank = 0;
@@ -144,14 +187,21 @@ pub fn can_complete_circuit(gas: Vec<i32>, cost: Vec<i32>) -> i32 {
 /// 179. Largest Number（最大数）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给定一组非负整数 nums，重新排列每个数的顺序（每个数不可拆分）使之组成一个最大的整数。
+/// nums，arrangement order （）'s maximum 。
 ///
 /// ## Rust 1.92 特性应用
+/// ## Rust 1.92 feature application
 /// - **贪心排序**: 使用自定义比较函数排序
+/// - **ordering **: definition function ordering
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n log n)
+/// - time complexity : O(n log n)
 /// - 空间复杂度: O(n)
+/// - space complexity : O(n)
 pub fn largest_number(nums: Vec<i32>) -> String {
     let mut nums_str: Vec<String> = nums.iter().map(|n| n.to_string()).collect();
 
@@ -171,6 +221,7 @@ pub fn largest_number(nums: Vec<i32>) -> String {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有贪心类问题
+/// all problem
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

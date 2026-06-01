@@ -9,6 +9,7 @@ use std::sync::atomic::AtomicBool;
 use std::sync::Arc;
 
 /// 命名管道实现
+/// named pipe
 pub struct NamedPipe {
     name: String,
     file_path: PathBuf,
@@ -17,6 +18,7 @@ pub struct NamedPipe {
 
 impl NamedPipe {
     /// 创建新的命名管道
+    /// named pipe
     pub fn new(name: &str, _config: IpcConfig) -> IpcResult<Self> {
         // 在Windows上，我们使用文件作为简单的IPC机制
         let pipe_path = format!("{}.pipe", name);
@@ -37,6 +39,7 @@ impl NamedPipe {
     }
 
     /// 连接到现有的命名管道
+    /// to named pipe
     pub fn connect(name: &str, _config: IpcConfig) -> IpcResult<Self> {
         let pipe_path = format!("{}.pipe", name);
 
@@ -105,11 +108,13 @@ impl NamedPipe {
     }
 
     /// 检查管道是否关闭
+    /// pipe
     pub fn is_closed(&self) -> bool {
         self.is_closed.load(std::sync::atomic::Ordering::Relaxed)
     }
 
     /// 关闭管道
+    /// pipe
     pub fn close(&mut self) -> IpcResult<()> {
         self.is_closed
             .store(true, std::sync::atomic::Ordering::Relaxed);
@@ -124,11 +129,13 @@ impl NamedPipe {
     }
 
     /// 获取管道名称
+    /// pipe
     pub fn name(&self) -> &str {
         &self.name
     }
 
     /// 获取协议类型
+    /// type
     pub fn protocol(&self) -> IpcProtocol {
         IpcProtocol::Pipe
     }

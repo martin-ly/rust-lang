@@ -1,19 +1,15 @@
-//! Rust 1.95.0 线程与并发新特性实现模块
-//!
-//! 本模块展示了 Rust 1.95.0 在线程与并发编程方面的关键增强：
-//! - `AtomicPtr::update` / `try_update` ⭐
-//! - `AtomicBool::update` / `try_update` ⭐
 //! - `Atomic*::update` / `try_update` (整数类型) ⭐
-//! - `core::hint::cold_path` ⭐
+//! - `Atomic*::update` / `try_update` (整数type) ⭐
 //! - `thread::scope` TLS 析构函数交互文档更新
-//!
+//! - `thread::scope` TLS destructor
 //! # 版本信息
-//! - Rust版本: 1.95.0
+//! # this
 //! - 稳定日期: 2026-04-16
-//! - Edition: 2024
-//!
+//! - date : 2026-04-16
+//! - 稳定date: 2026-04-16
+//! - date: 2026-04-16
 //! # 参考
-//! - [Rust 1.95.0 Release Notes](https://releases.rs/docs/1.95.0/)
+//! # reference
 
 use std::sync::atomic::{AtomicBool, AtomicI32, AtomicPtr, AtomicUsize, Ordering};
 use std::sync::Arc;
@@ -24,53 +20,54 @@ use std::thread;
 // ============================================================================
 
 /// # `Atomic*::update` / `try_update` 深度解析
-///
+/// # `Atomic*::update` / `try_update` 深度Parse
 /// ## 概念定义
-/// Rust 1.95.0 为所有原子类型稳定了 `update` 和 `try_update` 方法：
+/// ## concept definition
 /// - `update(f)`: 读取当前值，应用 `f` 得到新值，CAS 循环直到成功
+/// - `update(f)`: when before ，application `f` to ，CAS circulation to
 /// - `try_update(f)`: 同上，但如果 `f` 返回 `Err`，则中止并返回错误
-///
-/// 这是对传统 `fetch_update` 方法的补充，提供了更简洁的函数式 API。
-///
+/// - `try_update(f)`: on ，but if `f` `Err`，in and
 /// ## Wikipedia 概念对齐
-/// - **Compare-and-Swap (CAS)**: 原子操作的基石，`update` 是 CAS 循环的高阶抽象
-/// - **Lock-free Algorithm**: 无锁编程范式，原子更新是核心原语
-///
 /// ## 对比：传统方式 vs update
-///
+/// ## to ：way vs update
+/// ## to比：传统way vs update
 /// | 维度 | `fetch_update` (旧) | `update` / `try_update` (1.95+) |
-/// |------|-------------------|-------------------------------|
+/// | dimension | `fetch_update` (旧) | `update` / `try_update` (1.95+) |
 /// | 返回值 | `Result<T, T>` (成功返回旧值) | 直接返回新值 |
-/// | 错误处理 | 需手动处理 `CompareExchangeError` | `try_update` 天然支持 `Result` |
+/// | return value | `Result<T, T>` () | |
 /// | 语义清晰度 | 较模糊（成功/失败返回不同类型） | 明确：成功→新值，失败→错误 |
+/// | clear | vague （/type ） | explicit ：→，→ |
 /// | 函数式风格 | 较弱 | 强（直接传入闭包） |
-///
+/// | functional | | （） |
 /// ## 决策树
-/// ```text
+/// ## tree
+/// ## 决策tree
+/// ## tree
 /// 需要原子更新值？
+/// ？
 /// ├── 更新必定成功？ → update(closure)
 /// ├── 更新可能失败（需前置条件检查）？ → try_update(closure)
+/// ├── may （before condition ）？ → try_update(closure)
 /// ├── 需要旧值？ → fetch_update (保留旧 API)
+/// ├── ？ → fetch_update ( API)
 /// └── 仅需简单加减？ → fetch_add / fetch_sub
-/// ```
-///
 /// ## 反例 / 限制
-/// - `update` 内部是 CAS 循环，如果闭包执行时间过长或竞争激烈，可能导致**活锁 (livelock)**
+/// ## /
 /// - 闭包可能被调用多次（CAS 失败重试），因此闭包必须是**无副作用的纯函数**
-/// - `try_update` 中返回 `Err` 不会回滚已执行的闭包副作用
+/// - may is （CAS ），therefore must **role function **
 pub struct AtomicUpdateExamples;
 
 impl AtomicUpdateExamples {
     /// 基础示例：原子计数器递增（使用 update）
-    ///
+    /// foundation example ：atomic counter （ update）
     /// 对比 `fetch_add`：当更新逻辑较复杂时，`update` 更优雅。
+    /// to `fetch_add`：when complex ，`update` 。
     pub fn atomic_counter_update(counter: &AtomicUsize) -> usize {
         counter.update(Ordering::Relaxed, Ordering::Relaxed, |old| old + 1)
     }
 
     /// 条件更新：仅当值满足条件时才更新（try_update）
-    ///
-    /// 展示了 `try_update` 的强大能力：原子性条件更新。
+    /// condition ：when condition （try_update）
     pub fn try_increment_if_even(counter: &AtomicI32) -> Result<i32, i32> {
         counter.try_update(Ordering::SeqCst, Ordering::SeqCst, |old| {
             if old % 2 == 0 {
@@ -82,8 +79,7 @@ impl AtomicUpdateExamples {
     }
 
     /// 原子指针更新：CAS 循环简化
-    ///
-    /// `AtomicPtr::update` 极大地简化了指针级别的原子操作。
+    /// atomic pointer ：CAS circulation
     pub fn update_shared_config<T>(ptr: &AtomicPtr<T>, updater: impl Fn(&T) -> T) -> *mut T {
         ptr.update(Ordering::Acquire, Ordering::Relaxed, |old_ptr| {
             // SAFETY: 假设 old_ptr 是有效的，且我们拥有更新权
@@ -93,9 +89,7 @@ impl AtomicUpdateExamples {
         })
     }
 
-    /// AtomicBool 的条件翻转
-    ///
-    /// 仅当当前为 `false` 时设为 `true`（一次性触发）。
+    /// 仅whenwhenbeforeas `false` 时设as `true`（一次性触发）。
     pub fn try_set_flag(flag: &AtomicBool) -> Result<bool, bool> {
         flag.try_update(Ordering::SeqCst, Ordering::SeqCst, |current| {
             if current {
@@ -106,9 +100,6 @@ impl AtomicUpdateExamples {
         })
     }
 
-    /// 指数退避：结合 update 与线程休眠
-    ///
-    /// 展示了 `update` 在并发算法中的实际应用。
     pub fn exponential_backoff_attempt(attempts: &AtomicUsize) -> usize {
         let attempt = attempts.update(Ordering::Relaxed, Ordering::Relaxed, |old| old + 1);
         let delay_ms = 2usize.pow(attempt.min(10) as u32);
@@ -122,8 +113,7 @@ impl AtomicUpdateExamples {
 // ============================================================================
 
 /// 状态机转换：原子状态更新
-///
-/// 使用 `try_update` 实现线程安全的状态机转换。
+/// state machine conversion ：state
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ConnectionState {
     Idle = 0,
@@ -154,8 +144,9 @@ impl AtomicUpdateExamples {
 // ============================================================================
 
 /// 并发统计：使用 update 累加复杂指标
-///
+/// concurrency ： update complex indicator
 /// 在并发场景下安全地更新复合统计值。
+/// in concurrency scenario under 。
 pub struct ConcurrentStats {
     total_requests: AtomicUsize,
     total_errors: AtomicUsize,
@@ -197,41 +188,45 @@ impl Default for ConcurrentStats {
 // ============================================================================
 
 /// # `core::hint::cold_path` 解析
-///
 /// ## 概念定义
-/// `cold_path` 是一个编译器提示，告诉优化器：当前代码路径**极少执行**（冷路径）。
+/// ## concept definition
 /// 编译器会据此进行代码布局优化，将冷路径移到远离热路径的位置，
+/// this layout optimization ，will to position ，
 /// 改善指令缓存 (I-cache) 利用率。
-///
+/// (I-cache) 。
 /// ## Wikipedia 概念对齐
-/// - **Branch Prediction**: CPU 推测执行机制，`cold_path` 帮助编译器生成对预测器友好的代码
-/// - **Profile-guided Optimization (PGO)**: 基于执行频率的优化，`cold_path` 是手动 PGO 提示
-///
 /// ## 对比
-///
+/// ## to
+/// ## to比
+/// ## to
 /// | 方式 | 语义 | 稳定性 | 适用场景 |
-/// |------|------|--------|---------|
+/// | way | | | scenario |
 /// | `cold_path` (1.95+) | 明确标记冷路径 | 标准库稳定 | 错误处理、panic、边界检查失败 |
-/// | `std::intrinsics::unlikely` | 暗示布尔表达式为假 | 不稳定 (intrinsic) | 条件分支 |
-/// | `#[cold]` 属性 | 标记函数为冷 | 已稳定 | 整个函数 |
+/// | `cold_path` (1.95+) | explicit mark | standard library | error handling 、panic、edge |
 /// | `LLVM __builtin_expect` | 底层编译器提示 | C/FFI | 底层优化 |
-///
+/// | `LLVM __builtin_expect` | hint | C/FFI | optimization |
+/// | `LLVM __builtin_expect` | 底层编译器hint | C/FFI | 底层optimization |
 /// ## 决策树
-/// ```text
+/// ## tree
+/// ## 决策tree
+/// ## tree
 /// 有极少执行的错误/边界路径？
+/// /edge ？
 /// ├── 整个函数极少调用？ → #[cold]
+/// ├── function ？ → #[cold]
 /// ├── 函数内某分支极少命中？ → cold_path()
-/// └── 布尔条件极少为真？ → unlikely() (unstable)
-/// ```
-///
+/// ├── function inside in ？ → cold_path()
 /// ## 反例 / 误用
+/// ## /
 /// - **不要滥用**：标记非冷路径为冷会导致分支预测失败，降低性能
-/// - **不要与 IO/睡眠混用**：IO 已经是慢路径，`cold_path` 对延迟无帮助
+/// - ****：mark as branch prediction ，performance
 /// - **不要替代错误处理**：它只是优化提示，不改变语义
+/// - **error handling **：optimization hint ，
 pub struct ColdPathExamples;
 
 impl ColdPathExamples {
     /// 基础示例：错误处理路径标记为冷
+    /// foundation example ：error handling mark as
     pub fn parse_or_default(input: &str) -> i32 {
         match input.parse::<i32>() {
             Ok(value) => value,
@@ -244,6 +239,7 @@ impl ColdPathExamples {
     }
 
     /// 并发场景：锁竞争失败路径
+    /// concurrency scenario ：lock
     pub fn try_lock_with_cold_hint<T>(
         lock: &std::sync::Mutex<T>,
     ) -> Option<std::sync::MutexGuard<'_, T>> {
@@ -258,6 +254,8 @@ impl ColdPathExamples {
     }
 
     /// 状态机：非法状态转换
+    /// state machine ：state conversion
+    /// state machine：非法stateconversion
     pub fn state_transition_safe(current: ConnectionState, event: &str) -> ConnectionState {
         match (current, event) {
             (ConnectionState::Idle, "connect") => ConnectionState::Connecting,
@@ -271,10 +269,6 @@ impl ColdPathExamples {
         }
     }
 
-    /// 与 `#[cold]` 属性函数结合使用
-    ///
-    /// 当整个错误处理函数都是冷路径时，优先使用 `#[cold]`；
-    /// 当只有某条分支是冷路径时，使用 `cold_path()`。
     #[cold]
     fn handle_fatal_error() -> ! {
         eprintln!("Fatal error occurred");
@@ -294,25 +288,25 @@ impl ColdPathExamples {
 // 3. thread::scope TLS 析构函数交互
 // ============================================================================
 
-/// # `thread::scope` 与 TLS (Thread Local Storage) 析构
-///
-/// Rust 1.95.0 更新了 `thread::scope` 的文档，明确了 `join` 与 TLS 析构函数的交互：
+/// # `thread::scope` and TLS (Thread Local Storage) 析构
 /// - `thread::scope` 返回前会**等待所有线程完成**
+/// - `thread::scope` before **etc. all thread **
 /// - 但 TLS 析构函数**可能**在 scope 返回后才执行（取决于平台实现）
-/// - 因此不应在 scope 外部依赖 TLS 中的数据
-///
+/// - but TLS destructor **may **in scope after （platform ）
 /// ## Wikipedia 概念对齐
 /// - **Thread-local Storage**: 线程私有存储，线程退出时析构
-/// - **RAII (Resource Acquisition Is Initialization)**: TLS 析构是 RAII 的线程级扩展
-///
+/// - **Thread-local Storage**: thread ，thread
 /// ## 最佳实践
+/// ##
 /// 1. 在 `thread::scope` 内通过 `join` 或共享引用获取结果
-/// 2. 不要依赖 TLS 数据在 scope 外部的可用性
+/// 1. in `thread::scope` inside `join` or reference result
 /// 3. 使用 `Arc`/`Mutex` 等显式共享机制替代 TLS 跨线程通信
+/// 3. `Arc`/`Mutex` etc. mechanism TLS thread communication
 pub struct ScopeTlsExamples;
 
 impl ScopeTlsExamples {
     /// 安全示例：通过共享引用而非 TLS 传递结果
+    /// example ：reference while TLS result
     pub fn safe_scope_pattern() -> i32 {
         let result = Arc::new(AtomicI32::new(0));
 
@@ -329,9 +323,9 @@ impl ScopeTlsExamples {
         result.load(Ordering::Relaxed)
     }
 
-    /// TLS 在 scope 中的正确使用
-    ///
+    /// TLS in scope in正确Use
     /// TLS 仅用于线程内部状态，不跨线程暴露。
+    /// TLS thread inside state ，thread expose 。
     pub fn tls_inside_scope() {
         thread_local! {
             static COUNTER: std::cell::Cell<i32> = const { std::cell::Cell::new(0) };
@@ -366,13 +360,11 @@ impl ScopeTlsExamples {
 // ============================================================================
 
 /// # `cfg_select!` 宏
-///
-/// `cfg_select!` 是 Rust 1.95.0 稳定的编译时条件选择宏。
 /// 在线程编程中，可用于编译期选择平台相关的线程栈大小默认值。
+/// in thread in ，platform thread stack 。
 pub struct CfgSelectThreadExamples;
 
 impl CfgSelectThreadExamples {
-    /// 平台相关的默认线程栈大小 (bytes)
     pub const DEFAULT_STACK_SIZE: usize = cfg_select! {
         target_os = "linux" => { 2 * 1024 * 1024 }
         target_os = "macos" => { 2 * 1024 * 1024 }

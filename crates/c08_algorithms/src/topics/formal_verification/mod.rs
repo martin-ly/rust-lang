@@ -1,22 +1,31 @@
 //! 形式化验证模块 - Rust 1.90 特性对齐
+//! module - Rust 1.90 feature to
 //!
 //! 本模块实现了算法形式化验证和证明，包括：
+//! this module algorithm and ，：
 //! - 算法正确性证明
+//! - algorithm
 //! - 复杂度分析证明
+//! - complex analyze
 //! - 不变式验证
+//! -
 //! - 终止性证明
+//! -
 //! - 安全性验证
+//! -
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::fmt;
 
 /// 形式化验证类型
+/// type
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum VerificationType {
     /// 正确性验证
     Correctness,
     /// 复杂度验证
+    /// complex
     Complexity,
     /// 终止性验证
     Termination,
@@ -25,12 +34,14 @@ pub enum VerificationType {
     /// 不变式验证
     Invariant,
     /// 完整性验证
+    /// complete
     Completeness,
     /// 最优性验证
     Optimality,
 }
 
 /// 验证状态
+/// state
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum VerificationStatus {
     /// 已验证
@@ -38,10 +49,12 @@ pub enum VerificationStatus {
     /// 验证失败
     Failed,
     /// 验证中
+    /// in
     InProgress,
     /// 未验证
     NotVerified,
     /// 部分验证
+    /// part
     PartiallyVerified,
 }
 
@@ -49,39 +62,53 @@ pub enum VerificationStatus {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FormalProof {
     /// 证明ID
+    /// ID
     pub id: String,
     /// 算法名称
+    /// algorithm
     pub algorithm_name: String,
     /// 验证类型
+    /// type
     pub verification_type: VerificationType,
     /// 证明状态
+    /// state
     pub status: VerificationStatus,
     /// 证明步骤
+    /// step
     pub steps: Vec<ProofStep>,
     /// 前置条件
+    /// before condition
     pub preconditions: Vec<String>,
     /// 后置条件
+    /// after condition
     pub postconditions: Vec<String>,
     /// 不变式
     pub invariants: Vec<String>,
     /// 证明时间
+    /// time
     pub proof_time: std::time::Duration,
     /// 证明者
     pub prover: String,
     /// 证明日期
+    /// date
     pub proof_date: String,
 }
 
 /// 证明步骤
+/// step
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ProofStep {
     /// 步骤编号
+    /// step number
     pub step_number: usize,
     /// 步骤描述
+    /// step describe
     pub description: String,
     /// 使用的规则或定理
+    /// rule or theorem
     pub rule: String,
     /// 前提条件
+    /// prerequisite condition
     pub premises: Vec<String>,
     /// 结论
     pub conclusion: String,
@@ -90,76 +117,101 @@ pub struct ProofStep {
 }
 
 /// 算法规范
+/// algorithm norm
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AlgorithmSpecification {
     /// 算法名称
+    /// algorithm
     pub name: String,
     /// 输入规范
+    /// norm
     pub input_spec: InputSpecification,
     /// 输出规范
+    /// norm
     pub output_spec: OutputSpecification,
     /// 前置条件
+    /// before condition
     pub preconditions: Vec<Condition>,
     /// 后置条件
+    /// after condition
     pub postconditions: Vec<Condition>,
     /// 不变式
     pub invariants: Vec<Invariant>,
     /// 复杂度规范
+    /// complex norm
     pub complexity_spec: ComplexitySpecification,
 }
 
 /// 输入规范
+/// norm
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct InputSpecification {
     /// 参数列表
+    /// parameter
     pub parameters: Vec<Parameter>,
     /// 约束条件
+    /// condition
     pub constraints: Vec<String>,
 }
 
 /// 输出规范
+/// norm
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OutputSpecification {
     /// 返回值类型
+    /// return value type
     pub return_type: String,
     /// 输出约束
     pub constraints: Vec<String>,
 }
 
 /// 参数规范
+/// parameter norm
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Parameter {
     /// 参数名
+    /// parameter
     pub name: String,
     /// 参数类型
+    /// parameter type
     pub param_type: String,
     /// 是否必需
     pub required: bool,
     /// 约束条件
+    /// condition
     pub constraints: Vec<String>,
 }
 
 /// 条件
+/// condition
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Condition {
     /// 条件ID
+    /// condition ID
     pub id: String,
     /// 条件描述
+    /// condition describe
     pub description: String,
     /// 条件表达式
+    /// condition express
     pub expression: String,
     /// 条件类型
+    /// condition type
     pub condition_type: ConditionType,
 }
 
 /// 条件类型
+/// condition type
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum ConditionType {
     /// 前置条件
+    /// before condition
     Precondition,
     /// 后置条件
+    /// after condition
     Postcondition,
     /// 循环不变式
+    /// circulation
     LoopInvariant,
     /// 类不变式
     ClassInvariant,
@@ -169,29 +221,39 @@ pub enum ConditionType {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Invariant {
     /// 不变式ID
+    /// ID
     pub id: String,
     /// 不变式描述
+    /// describe
     pub description: String,
     /// 不变式表达式
+    /// express
     pub expression: String,
     /// 作用域
+    /// role domain
     pub scope: String,
     /// 是否保持
     pub maintained: bool,
 }
 
 /// 复杂度规范
+/// complex norm
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ComplexitySpecification {
     /// 时间复杂度
+    /// time complexity
     pub time_complexity: String,
     /// 空间复杂度
+    /// space complexity
     pub space_complexity: String,
     /// 最佳情况
+    /// situation
     pub best_case: Option<String>,
     /// 平均情况
+    /// situation
     pub average_case: Option<String>,
     /// 最坏情况
+    /// worst situation
     pub worst_case: Option<String>,
 }
 
@@ -200,6 +262,7 @@ pub struct FormalVerifier;
 
 impl FormalVerifier {
     /// 验证算法正确性
+    /// algorithm
     pub fn verify_correctness(
         &self,
         spec: &AlgorithmSpecification,
@@ -278,6 +341,7 @@ impl FormalVerifier {
     }
 
     /// 验证算法复杂度
+    /// algorithm complex
     pub fn verify_complexity(
         &self,
         spec: &AlgorithmSpecification,
@@ -334,6 +398,7 @@ impl FormalVerifier {
     }
 
     /// 验证算法终止性
+    /// algorithm
     pub fn verify_termination(
         &self,
         spec: &AlgorithmSpecification,
@@ -388,6 +453,7 @@ impl FormalVerifier {
     }
 
     /// 验证算法安全性
+    /// algorithm
     pub fn verify_safety(
         &self,
         spec: &AlgorithmSpecification,
@@ -443,14 +509,18 @@ impl FormalVerifier {
 }
 
 /// 算法实现特征
+/// algorithm
 pub trait AlgorithmImplementation {
     /// 获取算法名称
+    /// algorithm
     fn name(&self) -> &str;
 
     /// 执行算法
+    /// algorithm
     fn execute(&self, input: &[i32]) -> Result<Vec<i32>>;
 
     /// 获取算法复杂度
+    /// algorithm complex
     fn complexity(&self) -> ComplexitySpecification;
 }
 
@@ -469,11 +539,13 @@ impl ProofManager {
     }
 
     /// 添加算法规范
+    /// algorithm norm
     pub fn add_specification(&mut self, spec: AlgorithmSpecification) {
         self.specifications.insert(spec.name.clone(), spec);
     }
 
     /// 获取算法规范
+    /// algorithm norm
     pub fn get_specification(&self, name: &str) -> Option<&AlgorithmSpecification> {
         self.specifications.get(name)
     }
@@ -489,6 +561,7 @@ impl ProofManager {
     }
 
     /// 获取算法的所有证明
+    /// algorithm all
     pub fn get_algorithm_proofs(&self, algorithm_name: &str) -> Vec<&FormalProof> {
         self.proofs
             .values()
@@ -497,6 +570,7 @@ impl ProofManager {
     }
 
     /// 验证算法
+    /// algorithm
     pub fn verify_algorithm(
         &mut self,
         algorithm_name: &str,
@@ -577,6 +651,7 @@ pub struct ProofValidator;
 
 impl ProofValidator {
     /// 验证证明的有效性
+    /// effective
     pub fn validate_proof(proof: &FormalProof) -> bool {
         // 检查证明步骤的逻辑一致性
         for step in &proof.steps {
@@ -596,6 +671,7 @@ impl ProofValidator {
     }
 
     /// 验证证明的完整性
+    /// complete
     pub fn validate_completeness(proof: &FormalProof) -> bool {
         // 检查是否有足够的步骤
         if proof.steps.is_empty() {

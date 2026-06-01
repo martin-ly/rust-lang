@@ -1,11 +1,15 @@
 //! Rust 异步生态系统综合演示
-//!
-//! 本示例展示了 std、smol、async-std、tokio 等异步库的：
+//! Rust async ecosystem system synthesize demonstration
 //! - 概念定义和特性对比
+//! - concept definition and feature to
 //! - 集成框架层面的共性
+//! - framework level
 //! - 异步同步转换机制
+//! - async synchronous conversion mechanism
 //! - 聚合组合设计模式
+//! - aggregation combination design
 //! - 异步日志调试和跟踪
+//! - async and
 use anyhow::Result;
 use futures::future::try_join_all;
 use std::collections::HashMap;
@@ -32,6 +36,7 @@ use c06_async::async_runtime_integration_framework_simple::{
 };
 
 /// 异步运行时特性对比演示
+/// async runtime feature to demonstration
 async fn demonstrate_runtime_comparison() -> Result<()> {
     println!("🔍 异步运行时特性对比演示");
     println!("================================================");
@@ -52,9 +57,9 @@ async fn demonstrate_runtime_comparison() -> Result<()> {
     // 2. 运行时比较
     println!("\n⚖️ 运行时比较:");
     let comparisons = vec![
-        ("tokio", "async-std"),
+        ("tokio", "async-std [已归档]"),
         ("tokio", "smol"),
-        ("async-std", "smol"),
+        ("async-std [已归档]", "smol"),
         ("std", "tokio"),
     ];
 
@@ -71,6 +76,7 @@ async fn demonstrate_runtime_comparison() -> Result<()> {
 }
 
 /// 异步运行时共性分析演示
+/// async runtime analyze demonstration
 async fn demonstrate_runtime_commonality() -> Result<()> {
     println!("\n🔗 异步运行时共性分析演示");
     println!("================================================");
@@ -99,7 +105,7 @@ async fn demonstrate_runtime_commonality() -> Result<()> {
 
     // 3. 运行时性能特征
     println!("\n⚡ 运行时性能特征:");
-    let runtime_names = vec!["std", "tokio", "async-std", "smol"];
+    let runtime_names = vec!["std", "tokio", "smol"];
     for runtime_name in runtime_names {
         if let Some(commonality) = analyzer.get_runtime_commonality(runtime_name) {
             println!("\n  {} 性能特征:", runtime_name);
@@ -128,6 +134,7 @@ async fn demonstrate_runtime_commonality() -> Result<()> {
 }
 
 /// 异步同步转换演示
+/// async synchronous conversion demonstration
 async fn demonstrate_async_sync_conversion() -> Result<()> {
     println!("\n🔄 异步同步转换演示");
     println!("================================================");
@@ -164,6 +171,7 @@ async fn demonstrate_async_sync_conversion() -> Result<()> {
 }
 
 /// 聚合组合设计模式演示
+/// aggregation combination design demonstration
 async fn demonstrate_aggregation_composition() -> Result<()> {
     println!("\n📊 聚合组合设计模式演示");
     println!("================================================");
@@ -248,6 +256,7 @@ async fn demonstrate_aggregation_composition() -> Result<()> {
 }
 
 /// 简化异步运行时框架演示
+/// async runtime framework demonstration
 async fn demonstrate_simple_runtime_framework() -> Result<()> {
     println!("\n🚀 简化异步运行时框架演示");
     println!("================================================");
@@ -288,6 +297,7 @@ async fn demonstrate_simple_runtime_framework() -> Result<()> {
 }
 
 /// 异步日志调试演示
+/// async demonstration
 async fn demonstrate_local_async_logging_debugging() -> Result<()> {
     println!("\n📝 异步日志调试演示");
     println!("================================================");
@@ -391,6 +401,7 @@ async fn demonstrate_local_async_logging_debugging() -> Result<()> {
 }
 
 /// 综合性能基准测试
+/// synthesize Performance benchmark
 async fn demonstrate_performance_benchmarks() -> Result<()> {
     println!("\n⚡ 综合性能基准测试");
     println!("================================================");
@@ -465,6 +476,7 @@ async fn demonstrate_performance_benchmarks() -> Result<()> {
 }
 
 /// 获取内存使用量（简化实现）
+/// memory （）
 fn get_memory_usage() -> usize {
     // 在实际应用中，这里应该使用系统API获取真实内存使用量
     // 这里只是一个占位符实现
@@ -472,11 +484,13 @@ fn get_memory_usage() -> usize {
 }
 
 /// 主演示函数
+/// demonstration function
+/// 主demonstration function
 #[tokio::main]
 async fn main() -> Result<()> {
     println!("🚀 Rust 异步生态系统综合演示");
     println!("================================================");
-    println!("本演示展示了 std、smol、async-std、tokio 等异步库的全面特性");
+    println!("本演示展示了 std、tokio、smol 等异步库的全面特性");
     println!("包括概念定义、属性关系、使用场景、设计模式和最佳实践");
     println!("================================================");
 

@@ -1,7 +1,8 @@
 //! 安全测试模块
-//!
-//! 本模块包含了 c10_networks 库的安全测试，
+//! module
+//! 安全Test formodule
 //! 确保各种安全机制和防护措施正常工作。
+//! mechanism and 。
 use bytes::Bytes;
 use c10_networks::error::{NetworkError, SecurityError};
 use c10_networks::packet::{Packet, PacketType};
@@ -38,6 +39,7 @@ fn test_malicious_packet_detection() {
 }
 
 /// 测试HTTP安全头部验证
+/// HTTP
 #[test]
 fn test_http_security_headers() {
     let mut request = c10_networks::protocol::http::HttpRequest::new(
@@ -66,7 +68,6 @@ fn test_http_security_headers() {
     assert!(response.headers.len() >= 3);
 }
 
-/// 测试WebSocket安全验证
 #[test]
 fn test_websocket_security_validation() {
     // 测试WebSocket握手密钥验证
@@ -94,6 +95,7 @@ fn test_websocket_security_validation() {
 }
 
 /// 测试输入验证和清理
+/// and
 #[test]
 fn test_input_validation_and_sanitization() {
     // 测试恶意输入检测
@@ -145,6 +147,7 @@ fn test_packet_size_limits() {
 }
 
 /// 测试序列号安全
+/// sequence
 #[test]
 fn test_sequence_number_security() {
     // 测试正常序列号
@@ -167,6 +170,7 @@ fn test_sequence_number_security() {
 }
 
 /// 测试错误处理安全
+/// error handling
 #[test]
 #[ignore] // 安全测试在部分环境可能失败
 fn test_error_handling_security() {
@@ -193,6 +197,7 @@ fn test_error_handling_security() {
 }
 
 /// 测试网络错误安全
+/// network
 #[test]
 fn test_network_error_security() {
     // 测试网络错误类型
@@ -223,6 +228,7 @@ fn test_network_error_security() {
 }
 
 /// 测试数据包类型安全
+/// type
 #[test]
 fn test_packet_type_security() {
     // 测试正常数据包类型
@@ -253,6 +259,7 @@ fn test_packet_type_security() {
 }
 
 /// 测试ACME管理器安全
+/// ACME
 #[allow(unused)]
 #[test]
 fn test_acme_manager_security() {
@@ -298,6 +305,7 @@ fn test_packet_filter_security() {
 }
 
 /// 测试并发安全
+/// concurrency
 #[test]
 fn test_concurrency_security() {
     use std::sync::Arc;
@@ -337,6 +345,7 @@ fn test_concurrency_security() {
 }
 
 /// 测试内存安全
+/// memory safety
 #[test]
 fn test_memory_security() {
     // 测试内存分配安全
@@ -363,6 +372,7 @@ fn test_memory_security() {
 }
 
 /// 测试边界条件安全
+/// boundary condition
 #[test]
 fn test_boundary_condition_security() {
     // 测试空数据包

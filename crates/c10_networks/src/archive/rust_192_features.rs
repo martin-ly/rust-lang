@@ -1,24 +1,24 @@
 //! Rust 1.92.0 网络编程特性实现模块
-//!
-//! 本模块展示了 Rust 1.92.0 在网络编程场景中的应用，包括：
-//! - 新的稳定 API（`rotate_right`, `NonZero::div_ceil`）
+//! Rust 1.92.0 network programming feature module
 //! - 性能优化（迭代器方法特化）
+//! - performance optimization （method ）
 //! - 网络缓冲区优化
-//!
+//! - network buffering optimization
 //! # 文件信息
+//! #
 //! - 文件: rust_192_features.rs
 //! - 创建日期: 2025-12-11
+//! - date : 2025-12-11
 //! - 版本: 1.0
-//! - Rust版本: 1.92.0
-//! - Edition: 2024
+//! - this : 1.0
+//! - 版this: 1.0
 use std::collections::VecDeque;
 use std::num::NonZeroUsize;
 
 // ==================== 1. rotate_right 在网络缓冲区中的应用 ====================
 
 /// 使用 rotate_right 实现网络接收缓冲区
-///
-/// Rust 1.92.0: 新增的 `rotate_right` 方法可以高效实现网络缓冲区的轮转
+/// rotate_right network buffering
 pub struct NetworkReceiveBuffer {
     buffer: VecDeque<u8>,
     capacity: usize,
@@ -26,6 +26,7 @@ pub struct NetworkReceiveBuffer {
 
 impl NetworkReceiveBuffer {
     /// 创建一个新的网络接收缓冲区
+    /// network buffering
     pub fn new(capacity: usize) -> Self {
         NetworkReceiveBuffer {
             buffer: VecDeque::with_capacity(capacity),
@@ -34,8 +35,7 @@ impl NetworkReceiveBuffer {
     }
 
     /// 轮转缓冲区
-    ///
-    /// Rust 1.92.0: 使用新的 rotate_right 方法实现高效的缓冲区轮转
+    /// buffering
     pub fn rotate(&mut self, positions: usize) {
         if self.buffer.is_empty() {
             return;
@@ -48,6 +48,7 @@ impl NetworkReceiveBuffer {
     }
 
     /// 添加数据到缓冲区
+    /// to buffering
     pub fn push(&mut self, data: u8) {
         if self.buffer.len() >= self.capacity {
             self.buffer.pop_front();
@@ -56,11 +57,13 @@ impl NetworkReceiveBuffer {
     }
 
     /// 从缓冲区读取数据
+    /// from buffering
     pub fn pop(&mut self) -> Option<u8> {
         self.buffer.pop_front()
     }
 
     /// 获取缓冲区中的数据
+    /// buffering in
     pub fn data(&self) -> &[u8] {
         // 将 VecDeque 转换为切片（简化示例）
         // 实际实现可能需要更复杂的转换
@@ -68,6 +71,7 @@ impl NetworkReceiveBuffer {
     }
 
     /// 获取缓冲区长度
+    /// buffering
     pub fn len(&self) -> usize {
         self.buffer.len()
     }
@@ -78,6 +82,7 @@ impl NetworkReceiveBuffer {
 }
 
 /// 网络数据包队列
+/// network
 pub struct NetworkPacketQueue {
     packets: VecDeque<NetworkPacket>,
 }
@@ -97,8 +102,6 @@ impl NetworkPacketQueue {
     }
 
     /// 轮转数据包队列
-    ///
-    /// Rust 1.92.0: 使用新的 rotate_right 方法实现高效的队列轮转
     pub fn rotate(&mut self, positions: usize) {
         if self.packets.is_empty() {
             return;
@@ -126,9 +129,6 @@ impl Default for NetworkPacketQueue {
 
 // ==================== 2. NonZero::div_ceil 在网络分片计算中的应用 ====================
 
-/// 使用 NonZero::div_ceil 计算网络数据包分片数量
-///
-/// Rust 1.92.0: 新增的 `div_ceil` 方法可以安全地计算网络分片的数量
 pub fn calculate_packet_fragments(total_size: usize, fragment_size: NonZeroUsize) -> usize {
     if total_size == 0 {
         return 0;
@@ -140,6 +140,7 @@ pub fn calculate_packet_fragments(total_size: usize, fragment_size: NonZeroUsize
 }
 
 /// 使用 div_ceil 实现网络连接池
+/// div_ceil network
 pub struct NetworkConnectionPool {
     total_connections: usize,
     connections_per_pool: NonZeroUsize,
@@ -154,6 +155,7 @@ impl NetworkConnectionPool {
     }
 
     /// 计算可以创建的连接池数量
+    /// can quantity
     pub fn pool_count(&self) -> usize {
         if self.total_connections == 0 {
             return 0;
@@ -166,6 +168,7 @@ impl NetworkConnectionPool {
 }
 
 /// 网络带宽分配器
+/// network
 pub struct NetworkBandwidthAllocator {
     total_bandwidth: usize,
     bandwidth_per_connection: NonZeroUsize,
@@ -180,6 +183,7 @@ impl NetworkBandwidthAllocator {
     }
 
     /// 计算最大并发连接数
+    /// maximum concurrency
     pub fn max_connections(&self) -> usize {
         if self.total_bandwidth == 0 {
             return 0;
@@ -194,14 +198,14 @@ impl NetworkBandwidthAllocator {
 // ==================== 3. 迭代器方法特化在网络数据处理中的应用 ====================
 
 /// 使用特化的迭代器比较方法比较网络数据包列表
-///
-/// Rust 1.92.0: Iterator::eq 为 TrustedLen 迭代器特化，性能更好
+/// method network
 pub fn compare_packet_lists(list1: &[NetworkPacket], list2: &[NetworkPacket]) -> bool {
     // Rust 1.92.0: 特化的迭代器比较方法，性能更好
     list1.iter().eq(list2.iter())
 }
 
 /// 使用迭代器特化检查网络数据包序列
+/// network sequence
 pub fn check_packet_sequence(packets: &[NetworkPacket], expected_ids: &[u64]) -> bool {
     let actual_ids: Vec<u64> = packets.iter().map(|p| p.id).collect();
     // Rust 1.92.0: 特化的迭代器比较
@@ -209,6 +213,7 @@ pub fn check_packet_sequence(packets: &[NetworkPacket], expected_ids: &[u64]) ->
 }
 
 /// 使用迭代器特化验证网络数据完整性
+/// network complete
 pub fn verify_network_data(data1: &[u8], data2: &[u8]) -> bool {
     // Rust 1.92.0: 特化的迭代器比较，性能更好
     data1.iter().eq(data2.iter())
@@ -216,7 +221,6 @@ pub fn verify_network_data(data1: &[u8], data2: &[u8]) -> bool {
 
 // ==================== 4. 综合应用示例 ====================
 
-/// 演示 Rust 1.92.0 特性在网络编程中的应用
 pub fn demonstrate_rust_192_network_features() {
     println!("\n=== Rust 1.92.0 网络编程特性演示 ===\n");
 

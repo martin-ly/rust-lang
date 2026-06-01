@@ -1,13 +1,8 @@
-//! Rust 1.95.0 `VecDeque` / `LinkedList` `push_*_mut` 专题示例
-//!
-//! Rust 1.95.0 为 `VecDeque` 和 `LinkedList` 新增了返回可变引用的插入方法：
-//! - VecDeque: `push_front_mut`, `push_back_mut`, `insert_mut`
-//! - LinkedList: `push_front_mut`, `push_back_mut`
 //!
 //! 权威来源: https://releases.rs/docs/1.95.0/
-//!
+//! 权威source: https://releases.rs/docs/1.95.0/
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example collections_mut_ref_demo -p c08_algorithms
 //! ```
 
@@ -16,6 +11,7 @@ use std::collections::{LinkedList, VecDeque};
 // ==================== 示例 1: VecDeque::push_front_mut / push_back_mut ====================
 
 /// 双端队列两端插入并立即修改
+/// and
 fn demo_vecdeque_push_mut() {
     println!("--- VecDeque::push_front_mut / push_back_mut ---");
 
@@ -38,6 +34,7 @@ fn demo_vecdeque_push_mut() {
 // ==================== 示例 2: VecDeque::insert_mut ====================
 
 /// 在双端队列指定位置插入并修改
+/// in position and
 fn demo_vecdeque_insert_mut() {
     println!("\n--- VecDeque::insert_mut ---");
 
@@ -53,7 +50,6 @@ fn demo_vecdeque_insert_mut() {
 
 // ==================== 示例 3: VecDeque 作为滑动窗口缓存 ====================
 
-/// 使用 `push_back_mut` 构建需要立即初始化的缓存条目
 fn demo_vecdeque_cache() {
     println!("\n--- VecDeque::push_back_mut 滑动窗口缓存 ---");
 
@@ -87,6 +83,7 @@ fn demo_vecdeque_cache() {
 // ==================== 示例 4: LinkedList::push_front_mut / push_back_mut ====================
 
 /// 链表两端插入并立即修改
+/// and
 fn demo_linkedlist_push_mut() {
     println!("\n--- LinkedList::push_front_mut / push_back_mut ---");
 
@@ -111,6 +108,7 @@ fn demo_linkedlist_push_mut() {
 // ==================== 示例 5: LinkedList 构建日志缓冲区 ====================
 
 /// 使用 `push_back_mut` 构建结构化日志链表
+/// `push_back_mut` structure
 fn demo_linkedlist_log_buffer() {
     println!("\n--- LinkedList::push_back_mut 日志缓冲区 ---");
 
@@ -150,7 +148,6 @@ fn demo_linkedlist_log_buffer() {
 
 // ==================== 示例 6: 对比 VecDeque 与 LinkedList 的 push_mut ====================
 
-/// 展示两种容器在 `push_*_mut` 语义上的一致性
 fn demo_comparison() {
     println!("\n--- VecDeque vs LinkedList push_*_mut 对比 ---");
 

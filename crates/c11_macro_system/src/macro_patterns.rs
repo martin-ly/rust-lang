@@ -1,8 +1,8 @@
 //! 宏设计模式
-//!
+//! design
 //! 常见的宏设计模式和最佳实践。
+//! design and 。
 
-/// 生成 getter/setter 方法的模式
 #[macro_export]
 macro_rules! getter_setter {
     // 为每个字段生成getter和setter
@@ -21,7 +21,6 @@ macro_rules! getter_setter {
     };
 }
 
-/// Builder模式宏
 #[macro_export]
 macro_rules! builder {
     ($name:ident { $($field:ident: $type:ty),* $(,)? }) => {
@@ -58,7 +57,6 @@ macro_rules! builder {
     };
 }
 
-/// 自定义Error类型生成宏（简化版，仅支持无参数变体）
 #[macro_export]
 macro_rules! define_error {
     (
@@ -89,7 +87,6 @@ macro_rules! define_error {
     };
 }
 
-/// 实现Newtype模式的宏
 #[macro_export]
 macro_rules! newtype {
     ($name:ident, $type:ty) => {

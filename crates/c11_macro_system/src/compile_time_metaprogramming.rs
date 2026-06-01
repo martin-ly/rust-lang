@@ -1,16 +1,14 @@
 //! 编译时元编程（Compile-Time Metaprogramming）
-//!
-//! 本模块探讨 Rust 中编译时元编程的核心模式，包括 `const fn`、
-//! `const` 泛型、声明宏的协同使用，以及 tt muncher 等高级技巧。
 
 /// 常量元编程：利用 `const fn` 和 `const` 泛型在编译期完成计算
-///
-/// `const fn` 允许在编译期执行纯函数计算，而 `const` 泛型将值提升到类型系统，
+/// constant ： `const fn` and `const` generic in
 /// 两者结合可以实现零运行时开销的元编程。
+/// can runtime overhead 。
 pub struct ConstMetaprogramming;
 
 impl ConstMetaprogramming {
     /// 返回 `const fn` 概念文档
+    /// `const fn` concept
     pub fn const_fn_concept() -> &'static str {
         r#"
 # `const fn` 作为编译时计算工具
@@ -37,6 +35,7 @@ impl ConstMetaprogramming {
     }
 
     /// 展示 `const fn` 计算数组长度
+    /// `const fn`
     pub const fn array_len_from_const_fn() -> usize {
         // 在编译期计算长度
         const fn compute_size(base: usize, multiplier: usize) -> usize {
@@ -47,6 +46,7 @@ impl ConstMetaprogramming {
     }
 
     /// 返回 `const` 泛型概念文档
+    /// `const` generic concept
     pub fn const_generics_concept() -> &'static str {
         r#"
 # `const` 泛型用于类型级计算
@@ -66,8 +66,10 @@ impl ConstMetaprogramming {
     }
 
     /// 使用 const 泛型进行编译期维度检查
+    /// const generic dimension
     pub fn matrix_dimension_demo() {
         /// 定长向量，长度在类型中编码
+        /// ，in type in
         #[derive(Debug, Clone, Copy, PartialEq, Eq)]
         pub struct Vector<T, const N: usize>([T; N]);
 
@@ -78,6 +80,7 @@ impl ConstMetaprogramming {
             }
 
             /// 向量长度（编译期已知）
+            /// （）
             pub const fn len(&self) -> usize {
                 N
             }
@@ -112,6 +115,7 @@ impl ConstMetaprogramming {
     }
 
     /// 返回 `std::mem::size_of` 概念文档
+    /// `std::mem::size_of` concept
     pub fn size_of_concept() -> &'static str {
         r#"
 # `std::mem::size_of` 与其他 const 操作
@@ -133,6 +137,7 @@ impl ConstMetaprogramming {
     }
 
     /// 编译期断言类型大小
+    /// type
     pub const fn assert_type_size<T>() {
         // 使用 const 断言确保类型大小符合预期
         const fn check_size<T>() {
@@ -142,6 +147,7 @@ impl ConstMetaprogramming {
     }
 
     /// 返回 const 求值限制概念文档
+    /// const concept
     pub fn const_limitations_concept() -> &'static str {
         r#"
 # const 求值的限制
@@ -162,14 +168,11 @@ impl ConstMetaprogramming {
     }
 }
 
-/// 宏与常量的协同：利用宏生成 `const` 声明
-///
-/// 宏擅长操作语法树，而 `const` 提供类型安全的编译期值。
 /// 将两者结合可以生成高效的编译期数据结构。
+/// will can efficient data structure 。
 pub struct MacroAndConstSynergy;
 
 impl MacroAndConstSynergy {
-    /// 返回宏生成 const 声明的概念文档
     pub fn macro_generates_const_concept() -> &'static str {
         r#"
 # 宏生成 `const` 声明
@@ -196,6 +199,7 @@ macro_rules! define_consts {
     }
 
     /// 宏生成 const 查找表
+    /// const
     pub fn const_lookup_table_demo() {
         /// 生成编译期查找表的宏
         macro_rules! const_lookup_table {
@@ -232,8 +236,11 @@ macro_rules! define_consts {
     }
 
     /// 宏生成 const match 分支
+    /// const match
+    /// 宏Generate const match 分支
     pub fn const_match_arms_demo() {
         /// 将枚举变体映射到编译期字符串的宏
+        /// will enum volume to
         macro_rules! define_enum_str {
             (
                 $vis:vis enum $name:ident {
@@ -272,6 +279,7 @@ macro_rules! define_consts {
     }
 
     /// 返回完美哈希函数概念文档
+    /// perfect function concept
     pub fn perfect_hash_concept() -> &'static str {
         r#"
 # 编译期完美哈希函数
@@ -292,9 +300,12 @@ macro_rules! define_consts {
     }
 
     /// 展示宏构建的简单完美哈希
+    /// simple perfect
     pub fn simple_perfect_hash_demo() {
         /// 为少量编译期已知字符串生成完美哈希的宏
+        /// as perfect
         /// （简化版：使用长度+首字符作为哈希）
+        /// （：+as ）
         macro_rules! perfect_hash_match {
             (
                 $input:expr,
@@ -331,13 +342,11 @@ macro_rules! define_consts {
 }
 
 /// TT Muncher 模式：递归解析 Token Tree
-///
-/// TT Muncher 是声明宏中一种强大的递归模式，通过每次"吃掉"一个 token tree，
-/// 逐步处理整个 token 列表。它是声明宏实现复杂解析的核心技巧。
 pub struct TtMuncherPattern;
 
 impl TtMuncherPattern {
     /// 返回 tt muncher 概念文档
+    /// tt muncher concept
     pub fn tt_muncher_concept() -> &'static str {
         r#"
 # TT Muncher 模式
@@ -376,8 +385,9 @@ macro_rules! my_muncher {
     }
 
     /// 使用 tt muncher 编译期计数参数
+    /// tt muncher parameter
+    /// Use tt muncher 编译期计数parameter
     pub fn count_args_demo() {
-        /// 编译期计数 token 数量的 tt muncher（跳过逗号分隔符）
         macro_rules! count_args {
             // 终止条件
             () => { 0 };
@@ -403,8 +413,9 @@ macro_rules! my_muncher {
     }
 
     /// 使用 tt muncher 从 token 列表构建元组
+    /// tt muncher from token
+    /// Use tt muncher from token 列表构建tuple
     pub fn build_tuple_demo() {
-        /// 将 token 列表转换为元组表达式的宏
         macro_rules! as_tuple {
             // 终止：空元组
             () => { () };
@@ -435,6 +446,7 @@ macro_rules! my_muncher {
     }
 
     /// 返回递归宏模式概念文档
+    /// concept
     pub fn recursive_macro_pattern_concept() -> &'static str {
         r#"
 # 递归宏模式解析 Token Tree

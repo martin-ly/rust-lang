@@ -1,30 +1,32 @@
 //! Rust 1.91 线程特性实现模块（历史版本）
-//!
+//! Rust 1.91 thread feature module （this ）
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//!
+//! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
-//!
-//! 本模块实现了 Rust 1.91 在线程和并发编程方面的改进，包括：
-//! - const 上下文增强在多线程配置中的应用
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! - JIT 编译器优化对多线程代码的性能提升
+//! - JIT optimization to thread performance
 //! - 内存分配优化对并发场景的影响
+//! - memory optimization to concurrency scenario impact
 //! - 改进的错误处理在多线程中的应用
-//!
+//! - error handling in thread in application
 //! # 文件信息
+//! #
 //! - 文件: rust_191_features.rs
 //! - 创建日期: 2025-01-27
+//! - date : 2025-01-27
 //! - 版本: 1.0
-//! - Rust版本: 1.91.0
-//! - Edition: 2024
+//! - this : 1.0
+//! - 版this: 1.0
 use std::ops::ControlFlow;
 use std::sync::{Arc, Mutex};
 use std::thread;
 
 // ==================== 1. const 上下文增强在多线程配置中的应用 ====================
 
-/// Rust 1.91 const 上下文增强在多线程配置中的应用
 pub mod const_thread_config {
     /// 多线程配置系统
+    /// thread system
     pub struct ThreadConfig {
         pub max_threads: usize,
         pub stack_size: usize,
@@ -55,15 +57,13 @@ pub mod const_thread_config {
 
 // ==================== 2. JIT 编译器优化对多线程代码的影响 ====================
 
-/// Rust 1.91 JIT 编译器优化对多线程代码的影响
-///
-/// Rust 1.91 的 JIT 优化提升了多线程场景下的迭代器操作性能
 pub mod thread_jit_optimizations {
     use super::*;
 
     /// 并行迭代器优化示例
-    ///
+    /// parallelism optimization example
     /// Rust 1.91 JIT 优化：并行迭代器性能提升 10-25%
+    /// Rust 1.91 JIT optimization ：parallelism performance 10-25%
     pub fn parallel_iterator_processing(data: &[i32]) -> i32 {
         // Rust 1.91 优化：并行迭代器链式操作性能提升
         use rayon::prelude::*;
@@ -72,8 +72,9 @@ pub mod thread_jit_optimizations {
     }
 
     /// 多线程数据处理示例
-    ///
+    /// thread example
     /// Rust 1.91 优化：多线程数据分割和处理性能提升
+    /// Rust 1.91 optimization ：thread and performance
     pub fn multi_thread_processing(data: Vec<i32>, thread_count: usize) -> i32 {
         let chunk_size = data.len().div_ceil(thread_count);
         let data = Arc::new(data);
@@ -121,15 +122,13 @@ pub mod thread_jit_optimizations {
 
 // ==================== 3. 内存分配优化对并发场景的影响 ====================
 
-/// Rust 1.91 内存分配优化对并发场景的影响
-///
-/// Rust 1.91 的内存分配优化特别有利于并发场景下的小对象分配
 pub mod thread_memory_optimizations {
     use super::*;
 
     /// 并发小对象分配示例
-    ///
+    /// concurrency to example
     /// Rust 1.91 优化：并发场景下小对象分配性能提升 25-30%
+    /// Rust 1.91 optimization ：concurrency scenario under to performance 25-30%
     pub fn concurrent_small_object_allocation(
         thread_count: usize,
         objects_per_thread: usize,
@@ -162,7 +161,6 @@ pub mod thread_memory_optimizations {
         results.iter().flatten().cloned().collect()
     }
 
-    /// 并发 HashMap 操作优化示例
     pub fn concurrent_hashmap_operations(
         thread_count: usize,
         operations_per_thread: usize,
@@ -210,14 +208,12 @@ pub mod thread_memory_optimizations {
 // ==================== 4. 多线程错误处理改进 ====================
 
 /// Rust 1.91 多线程错误处理改进
-///
-/// 使用改进的 ControlFlow 进行多线程错误处理
+/// Rust 1.91 thread error handling
 pub mod thread_error_handling {
     use super::*;
 
     /// 多线程验证示例
-    ///
-    /// 使用改进的 ControlFlow 进行多线程验证
+    /// thread example
     pub fn multi_thread_validation(
         data: &[i32],
         thread_count: usize,
@@ -296,10 +292,12 @@ pub mod thread_error_handling {
 // ==================== 5. 综合应用示例 ====================
 
 /// Rust 1.91 多线程综合应用示例
+/// Rust 1.91 thread synthesize application example
 pub mod comprehensive_thread_examples {
     use super::*;
 
     /// 多线程数据处理管道
+    /// thread pipe
     pub struct ThreadPipeline<T> {
         data: Vec<T>,
         thread_count: usize,
@@ -311,6 +309,7 @@ pub mod comprehensive_thread_examples {
         }
 
         /// Rust 1.91 优化：多线程处理管道性能提升
+        /// Rust 1.91 optimization ：thread pipe performance
         pub fn process<U, R, M, Red>(&self, mapper: M, reducer: Red) -> R
         where
             T: Send + Sync + Clone + 'static,
@@ -365,6 +364,7 @@ pub mod comprehensive_thread_examples {
 // ==================== 公开 API ====================
 
 /// Rust 1.91 线程特性演示入口
+/// Rust 1.91 thread feature demonstration
 pub fn demonstrate_rust_191_threads() {
     println!("========================================");
     println!("Rust 1.91 线程特性演示");

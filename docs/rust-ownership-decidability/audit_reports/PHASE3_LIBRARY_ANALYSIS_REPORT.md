@@ -14,7 +14,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust所有权与可判定性 - 第三阶段库分析完成报告](#rust所有权与可判定性---第三阶段库分析完成报告)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [执行摘要](#执行摘要)
     - [新增文档概览](#新增文档概览)
       - [标准库扩展 (3个)](#标准库扩展-3个)
@@ -25,7 +25,7 @@
     - [3. `Pin<P>` - 自引用结构安全](#3-pinp---自引用结构安全)
   - [开源库深度分析](#开源库深度分析)
     - [4. Actix-web - Actor模型Web框架](#4-actix-web---actor模型web框架)
-    - [5. async-std - 标准库风格异步运行时](#5-async-std---标准库风格异步运行时)
+    - [5. async-std \[已归档\] - 标准库风格异步运行时](#5-async-std-已归档---标准库风格异步运行时)
     - [6. Tracing - 结构化日志与分布式追踪](#6-tracing---结构化日志与分布式追踪)
     - [7. Bytes - 零拷贝网络缓冲区](#7-bytes---零拷贝网络缓冲区)
     - [8. Tonic - gRPC框架](#8-tonic---grpc框架)
@@ -49,9 +49,10 @@
   - [结论](#结论)
     - [100% 完成确认](#100-完成确认)
     - [项目里程碑](#项目里程碑)
-  - *"从理论基础到生态实践，从内存安全到并发保证，这是Rust形式化理论的完整百科全书。"*
+  - [*"从理论基础到生态实践，从内存安全到并发保证，这是Rust形式化理论的完整百科全书。"*](#从理论基础到生态实践从内存安全到并发保证这是rust形式化理论的完整百科全书)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 执行摘要
 >
@@ -78,7 +79,7 @@
 | 文档 | 主题 | 定理数量 | 关键贡献 |
 |------|------|----------|----------|
 | `actix-web-formal-analysis.md` (11.7 KB) | Actix-web框架 | 10个 | Actor模型、类型安全路由 |
-| `async-std-formal-analysis.md` (10 KB) | async-std运行时 | 9个 | std API对应、Stream trait |
+| `async-std [已归档]-formal-analysis.md` (10 KB) | async-std [已归档]运行时 | 9个 | std API对应、Stream trait |
 | `tracing-formal-analysis.md` (10 KB) | Tracing日志 | 10个 | Span模型、零成本结构化日志 |
 | `bytes-formal-analysis.md` (8.5 KB) | Bytes缓冲区 | 8个 | 引用计数、零拷贝网络IO |
 | `tonic-grpc-formal-analysis.md` (8.5 KB) | Tonic gRPC | 8个 | 类型安全RPC、流控制 |
@@ -189,7 +190,7 @@ Actor Handler
 HTTP Response
 ```
 
-### 5. async-std - 标准库风格异步运行时
+### 5. async-std [已归档] - 标准库风格异步运行时
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -339,7 +340,7 @@ Bidirectional: Stream<Request> ◄──► Stream<Response>
 - ✅ parking_lot (同步)
 - ✅ Hyper (HTTP)
 - ✅ Actix-web (Web框架)
-- ✅ async-std (异步运行时)
+- ✅ async-std [已归档] (异步运行时)
 - ✅ Tracing (日志)
 - ✅ Bytes (缓冲区)
 - ✅ Tonic (gRPC)
@@ -451,7 +452,7 @@ Bidirectional: Stream<Request> ◄──► Stream<Response>
 ├── parking_lot-formal-analysis.md
 ├── hyper-formal-analysis.md
 ├── actix-web-formal-analysis.md
-├── async-std-formal-analysis.md
+├── async-std [已归档]-formal-analysis.md
 ├── tracing-formal-analysis.md
 ├── bytes-formal-analysis.md
 ├── tonic-grpc-formal-analysis.md

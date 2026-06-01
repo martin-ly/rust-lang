@@ -467,7 +467,7 @@ Week 3-4: 生产级系统
 ├─ 通用场景 → Tokio标准I/O
 ├─ 高性能 → io_uring (glommio/monoio)
 ├─ 超低延迟 → AF_XDP + eBPF
-└─ 跨平台 → Tokio/async-std
+└─ 跨平台 → Tokio/smol
 
 选择TLS库？
 │

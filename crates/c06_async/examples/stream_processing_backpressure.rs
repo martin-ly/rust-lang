@@ -7,6 +7,7 @@ use tokio::time::{interval, sleep};
 use tracing::{debug, error, info, warn};
 
 /// 流处理管道配置
+/// stream pipe
 #[derive(Debug, Clone)]
 pub struct StreamConfig {
     pub buffer_size: usize,
@@ -38,6 +39,8 @@ pub struct DataItem {
 }
 
 /// 窗口聚合结果
+/// aggregation result
+/// 窗口aggregationresult
 #[derive(Debug)]
 pub struct WindowResult {
     pub window_start: Instant,
@@ -51,6 +54,7 @@ pub struct WindowResult {
 }
 
 /// 流处理器
+/// stream
 pub struct StreamProcessor {
     config: StreamConfig,
     semaphore: Arc<Semaphore>,
@@ -112,6 +116,7 @@ impl StreamProcessor {
     }
 
     /// 创建数据流（模拟数据源）
+    /// stream （）
     pub fn create_data_stream() -> impl futures::Stream<Item = DataItem> + Unpin {
         let (tx, rx) = mpsc::unbounded_channel();
 
@@ -173,6 +178,7 @@ impl StreamProcessor {
     }
 
     /// 窗口聚合处理
+    /// aggregation
     async fn process_window(&self, items: Vec<DataItem>) -> WindowResult {
         let start = items
             .first()
@@ -210,6 +216,7 @@ impl StreamProcessor {
     }
 
     /// 更新处理指标
+    /// indicator
     fn update_metrics(&self, processing_time: Duration, is_error: bool) {
         if is_error {
             self.metrics
@@ -232,6 +239,7 @@ impl StreamProcessor {
     }
 
     /// 检查背压条件
+    /// backpressure condition
     #[allow(dead_code)]
     fn check_backpressure(&self, queue_size: usize) -> bool {
         let utilization = queue_size as f64 / self.config.buffer_size as f64;
@@ -246,6 +254,7 @@ impl StreamProcessor {
     }
 
     /// 运行流处理管道
+    /// Run stream pipe
     pub async fn run_pipeline(&self) -> Result<()> {
         let (tx, mut rx) = mpsc::channel::<DataItem>(self.config.buffer_size);
 

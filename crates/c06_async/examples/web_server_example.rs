@@ -1,6 +1,6 @@
 //! Web服务器示例
-//!
-//! 展示如何使用Tokio构建高性能异步Web服务器
+//! Web example
+//! Web服务器Example of
 use anyhow::Result;
 use std::sync::Arc;
 use std::time::Duration;
@@ -9,6 +9,8 @@ use tokio::net::{TcpListener, TcpStream};
 use tokio::time::sleep;
 
 /// HTTP请求结构
+/// HTTP structure
+/// HTTP请求structure
 #[derive(Debug, Clone)]
 pub struct HttpRequest {
     pub method: String,
@@ -18,6 +20,8 @@ pub struct HttpRequest {
 }
 
 /// HTTP响应结构
+/// HTTP structure
+/// HTTP响应structure
 #[derive(Debug, Clone)]
 pub struct HttpResponse {
     pub status_code: u16,
@@ -66,6 +70,7 @@ pub struct RouteHandler {
 }
 
 /// 异步Web服务器
+/// async Web
 pub struct AsyncWebServer {
     listener: TcpListener,
     routes: Vec<RouteHandler>,
@@ -74,6 +79,7 @@ pub struct AsyncWebServer {
 
 impl AsyncWebServer {
     /// 创建新的Web服务器
+    /// Web
     pub async fn new(addr: &str) -> Result<Self> {
         let listener = TcpListener::bind(addr).await?;
         println!("🚀 Web服务器启动在: {}", addr);
@@ -159,6 +165,7 @@ impl AsyncWebServer {
     }
 
     /// 解析HTTP请求
+    /// HTTP
     fn parse_request(request_str: &str) -> Result<HttpRequest> {
         let lines: Vec<&str> = request_str.lines().collect();
         if lines.is_empty() {
@@ -225,6 +232,7 @@ impl AsyncWebServer {
 }
 
 /// 示例路由处理器
+/// example
 /// 首页处理器
 fn home_handler(_request: &HttpRequest) -> Result<HttpResponse> {
     let html = r#"
@@ -250,6 +258,7 @@ fn home_handler(_request: &HttpRequest) -> Result<HttpResponse> {
 }
 
 /// API状态处理器
+/// APIstate
 fn status_handler(_request: &HttpRequest) -> Result<HttpResponse> {
     let status = serde_json::json!({
         "status": "running",
@@ -267,6 +276,7 @@ fn status_handler(_request: &HttpRequest) -> Result<HttpResponse> {
 }
 
 /// 时间处理器
+/// time
 fn time_handler(_request: &HttpRequest) -> Result<HttpResponse> {
     let now = chrono::Utc::now();
     let time_info = serde_json::json!({
@@ -302,6 +312,7 @@ fn echo_handler(request: &HttpRequest) -> Result<HttpResponse> {
 }
 
 /// 异步任务示例
+/// async task example
 async fn background_task(request_count: Arc<tokio::sync::Mutex<u64>>) {
     loop {
         sleep(Duration::from_secs(10)).await;
@@ -311,6 +322,7 @@ async fn background_task(request_count: Arc<tokio::sync::Mutex<u64>>) {
 }
 
 /// 主函数
+/// Main function
 #[tokio::main]
 async fn main() -> Result<()> {
     println!("🚀 启动异步Web服务器示例");

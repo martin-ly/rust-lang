@@ -30,7 +30,7 @@
     - [4.3 平台兼容性](#43-平台兼容性)
   - [5. 现代库集成](#5-现代库集成)
     - [5.1 Tokio 异步进程](#51-tokio-异步进程)
-    - [5.2 Async-Std 进程管理](#52-async-std-进程管理)
+    - [5.2 Async-Std \[已归档\] 进程管理](#52-async-std-已归档-进程管理)
     - [5.3 Duct 进程组合](#53-duct-进程组合)
   - [6. 最佳实践](#6-最佳实践)
     - [6.1 资源管理最佳实践](#61-资源管理最佳实践)
@@ -835,13 +835,13 @@ async fn tokio_async_process() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-### 5.2 Async-Std 进程管理
+### 5.2 Async-Std [已归档] 进程管理
 
 ```rust
 use async_std::process::{Command as AsyncStdCommand, Stdio};
 use async_std::io::{BufReader, BufWriter};
 
-// Async-Std 进程管理
+// Async-Std [已归档] 进程管理
 async fn async_std_process() -> Result<(), Box<dyn std::error::Error>> {
     let mut child = AsyncStdCommand::new("async_std_program")
         .stdin(Stdio::piped())

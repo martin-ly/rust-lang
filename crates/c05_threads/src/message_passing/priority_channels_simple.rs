@@ -1,6 +1,7 @@
 //! 简化的优先级通道实现
-//!
+//! priority channel
 //! 为了避免复杂的线程安全问题，这里提供了一个简化版本的优先级通道
+//! as complex thread-safe problem ，this priority channel
 use std::collections::{
     //BinaryHeap,
     VecDeque,
@@ -16,6 +17,7 @@ use std::sync::{
 use std::cmp::Ordering;
 
 /// 简单的优先级消息
+/// simple
 #[derive(Debug, Clone)]
 pub struct SimplePriorityMessage<T> {
     pub priority: u32,
@@ -51,6 +53,8 @@ impl<T> Ord for SimplePriorityMessage<T> {
 }
 
 /// 简化的优先级通道
+/// priority channel
+/// 简化priority channel
 pub struct SimplePriorityChannel<T> {
     queue: Arc<Mutex<VecDeque<SimplePriorityMessage<T>>>>,
 }
@@ -63,6 +67,7 @@ impl<T> Default for SimplePriorityChannel<T> {
 
 impl<T> SimplePriorityChannel<T> {
     /// 创建新的简化优先级通道
+    /// priority channel
     pub fn new() -> Self {
         Self {
             queue: Arc::new(Mutex::new(VecDeque::new())),
@@ -103,6 +108,7 @@ impl<T> SimplePriorityChannel<T> {
     }
 
     /// 检查是否为空
+    /// as
     pub fn is_empty(&self) -> bool {
         self.queue.lock().unwrap().is_empty()
     }
@@ -117,6 +123,7 @@ impl<T> Clone for SimplePriorityChannel<T> {
 }
 
 /// 运行简化优先级通道示例
+/// Run priority channel example
 pub fn run_simple_example() {
     println!("=== 简化优先级通道示例 ===");
 

@@ -1,12 +1,13 @@
 //! 字符串算法示例
-//!
+//! string algorithm example
 //! 本示例展示C08算法模块的字符串算法：
+//! this example C08algorithm module string algorithm ：
 //! - KMP算法
-//! - Rabin-Karp算法
+//! - KMPalgorithm
 //! - 字符串匹配
-//!
+//! -
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example string_algorithms_demo
 //! ```
 fn main() {
@@ -50,6 +51,7 @@ fn main() {
 }
 
 /// KMP算法的简化实现（演示概念）
+/// KMPalgorithm （demonstration concept ）
 fn kmp_search(text: &str, pattern: &str) -> Option<usize> {
     let text: Vec<char> = text.chars().collect();
     let pattern: Vec<char> = pattern.chars().collect();
@@ -89,6 +91,7 @@ fn kmp_search(text: &str, pattern: &str) -> Option<usize> {
 }
 
 /// 计算最长公共前缀后缀（LPS）数组
+/// before after （LPS）
 fn compute_lps(pattern: &[char]) -> Vec<usize> {
     let m = pattern.len();
     let mut lps = vec![0; m];
@@ -112,6 +115,7 @@ fn compute_lps(pattern: &[char]) -> Vec<usize> {
 }
 
 /// 简单的字符串匹配算法（暴力搜索）
+/// simple algorithm （）
 fn naive_search(text: &str, pattern: &str) -> Option<usize> {
     let text: Vec<char> = text.chars().collect();
     let pattern: Vec<char> = pattern.chars().collect();

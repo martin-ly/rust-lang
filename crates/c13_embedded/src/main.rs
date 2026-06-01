@@ -1,6 +1,8 @@
 //! Embedded Demo - 嵌入式演示程序
-//!
+//! Embedded Demo - demonstration program
+//! Embedded Demo - 嵌入式demonstration program
 //! 在 host 目标上运行模拟演示，在 ARM 目标上展示 bare-metal 入口。
+//! in host goal on Run demonstration ，in ARM goal on bare-metal 。
 
 #![cfg_attr(target_arch = "arm", no_std)]
 #![cfg_attr(target_arch = "arm", no_main)]

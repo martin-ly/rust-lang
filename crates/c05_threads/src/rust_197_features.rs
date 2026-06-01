@@ -1,4 +1,3 @@
-//! Rust 1.97 特性跟踪模块 —— 线程与并发
 #![allow(clippy::incompatible_msrv)]
 
 use std::collections::VecDeque;
@@ -6,27 +5,17 @@ use std::io::{self, BufRead};
 use std::sync::atomic::AtomicU32;
 
 /// # Rust 1.97 线程/并发特性演示
-///
-/// Rust 1.97 稳定化的核心并发 API：
+/// # Rust 1.97 thread /concurrency feature demonstration
+/// Rust 1.97 稳定化coreconcurrency API：
 /// - `Atomic*::from_ptr` — 从裸指针创建原子引用（const stable）
-/// - `BufRead` for `VecDeque<u8>` — 无锁缓冲区读取
-/// - `std::ptr::swap` / `std::mem::swap` const stable
-/// - `NonNull::new` const stable
 pub struct Rust197ThreadFeatures;
 
 impl Rust197ThreadFeatures {
-    /// 使用 `AtomicU32::from_ptr` 从共享内存指针创建原子引用
-    ///
-    /// # Safety
-    /// 指针必须对齐且指向有效的 `AtomicU32` 兼容内存。
     pub unsafe fn atomic_from_ptr(ptr: *mut u32) -> &'static AtomicU32 {
         // SAFETY: caller ensures pointer is valid and aligned
         unsafe { AtomicU32::from_ptr(ptr) }
     }
 
-    /// 使用 `VecDeque<u8>` 的 `BufRead` 实现进行线程间缓冲区读取
-    ///
-    /// Rust 1.97 为 `VecDeque<u8>` 实现了 `BufRead`，使其可以直接作为缓冲读取器使用。
     pub fn read_from_vecdeque_buffer(data: &mut VecDeque<u8>) -> io::Result<Vec<u8>> {
         let buf = data.fill_buf()?;
         let result = buf.to_vec();
@@ -35,9 +24,8 @@ impl Rust197ThreadFeatures {
         Ok(result)
     }
 
-    /// 演示 `std::mem::swap` 在 const 上下文中的使用
-    ///
     /// Rust 1.97 使 `std::mem::swap` 在 const 上下文中稳定可用。
+    /// Rust 1.97 `std::mem::swap` in const on under in 。
     pub const fn const_swap_example() -> (i32, i32) {
         let mut a = 1;
         let mut b = 2;
@@ -45,7 +33,6 @@ impl Rust197ThreadFeatures {
         (a, b)
     }
 
-    /// 演示 `NonNull::new` 在 const 上下文中的使用
     pub const fn const_nonnull_example() -> Option<std::ptr::NonNull<i32>> {
         let mut value = 42;
         std::ptr::NonNull::new(&mut value)

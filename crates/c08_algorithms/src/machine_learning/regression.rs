@@ -1,12 +1,16 @@
 //! 回归算法实现
+//! algorithm
 //!
 //! 本模块提供了回归算法的实现，包括线性回归等
+//! This module provides algorithm ，line etc.
 use super::*;
 
 /// 线性回归模型
+/// line
 #[derive(Debug, Clone)]
 pub struct LinearRegression {
     /// 权重系数
+    /// coefficient
     coefficients: Option<Vec<f64>>,
     /// 截距
     intercept: Option<f64>,
@@ -16,6 +20,7 @@ pub struct LinearRegression {
 
 impl LinearRegression {
     /// 创建新的线性回归模型
+    /// line
     pub fn new() -> Self {
         Self {
             coefficients: None,
@@ -25,6 +30,7 @@ impl LinearRegression {
     }
 
     /// 获取模型参数
+    /// parameter
     pub fn parameters(&self) -> Option<(Vec<f64>, f64)> {
         if let (Some(coef), Some(intercept)) = (&self.coefficients, &self.intercept) {
             Some((coef.clone(), *intercept))

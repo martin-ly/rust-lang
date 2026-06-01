@@ -2,9 +2,9 @@
 //   cargo add tokio --features full
 //   cargo run --example comprehensive_web_server.rs
 //! 综合 Web 服务器示例
-//! 
+//! synthesize Web server example
 //! 整合 C04(泛型), C06(异步), C09(设计模式), C10(网络)
-//! 
+//! integration C04(generic ), C06(async ), C09(design ), C10(network )
 //! 运行: cargo run --example comprehensive_web_server
 
 use std::collections::HashMap;
@@ -14,11 +14,13 @@ use tokio::net::{TcpListener, TcpStream};
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 /// 泛型路由处理器
+/// generic
 trait Handler<T>: Send + Sync {
     async fn handle(&self, req: Request) -> Response;
 }
 
 /// HTTP 请求
+/// HTTP
 #[derive(Debug, Clone)]
 struct Request {
     method: String,
@@ -28,6 +30,7 @@ struct Request {
 }
 
 /// HTTP 响应
+/// HTTP
 #[derive(Debug, Clone)]
 struct Response {
     status: u16,
@@ -72,9 +75,11 @@ impl Response {
 }
 
 /// 状态共享（单例模式）
+/// state （singleton ）
 type SharedState = Arc<RwLock<HashMap<String, String>>>;
 
 /// 构建器模式的 Web 服务器
+/// builder Web server
 struct WebServer {
     host: String,
     port: u16,
@@ -108,6 +113,7 @@ impl WebServer {
 }
 
 /// Web 服务器构建器
+/// Web server builder
 #[derive(Default)]
 struct WebServerBuilder {
     host: Option<String>,

@@ -1,15 +1,23 @@
 //! Rust 1.92.0 进程管理特性实现模块
+//! Rust 1.92.0 process feature module
 //!
 //! 本模块展示了 Rust 1.92.0 在进程管理场景中的应用，包括：
+//! This module demonstrates Rust 1.92.0 in process scenario in application ，：
 //! - 新的稳定 API（`rotate_right`, `NonZero::div_ceil`）
 //! - 性能优化（迭代器方法特化）
+//! - performance optimization （method ）
 //! - 改进的进程队列管理
+//! - process
 //!
 //! # 文件信息
+//! #
 //! - 文件: rust_192_features.rs
 //! - 创建日期: 2025-12-11
+//! - date : 2025-12-11
 //! - 版本: 1.0
+//! - this : 1.0
 //! - Rust版本: 1.92.0
+//! - Rustthis : 1.92.0
 //! - Edition: 2024
 use std::collections::VecDeque;
 use std::num::NonZeroUsize;
@@ -18,8 +26,10 @@ use std::sync::{Arc, Mutex};
 // ==================== 1. rotate_right 在进程队列管理中的应用 ====================
 
 /// 使用 rotate_right 实现进程优先级队列
+/// rotate_right process
 ///
 /// Rust 1.92.0: 新增的 `rotate_right` 方法可以高效实现进程队列的轮转调度
+/// Rust 1.92.0: `rotate_right` method can efficient process
 #[derive(Default)]
 pub struct ProcessQueue {
     processes: VecDeque<ProcessInfo>,
@@ -40,8 +50,10 @@ impl ProcessQueue {
     }
 
     /// 轮转进程队列
+    /// process
     ///
     /// Rust 1.92.0: 使用新的 rotate_right 方法实现高效的队列轮转
+    /// Rust 1.92.0: rotate_right method efficient
     pub fn rotate(&mut self, positions: usize) {
         if self.processes.is_empty() {
             return;
@@ -62,6 +74,7 @@ impl ProcessQueue {
     }
 
     /// 获取队列中的所有进程（用于演示）
+    /// in all process （demonstration ）
     pub fn iter(&self) -> impl Iterator<Item = &ProcessInfo> {
         self.processes.iter()
     }
@@ -77,6 +90,7 @@ impl ProcessQueue {
 }
 
 /// 使用 rotate_right 实现循环进程调度器
+/// rotate_right circulation process
 #[allow(dead_code)]
 pub struct RoundRobinScheduler {
     queue: Arc<Mutex<ProcessQueue>>,
@@ -105,8 +119,10 @@ impl RoundRobinScheduler {
 // ==================== 2. NonZero::div_ceil 在进程池大小计算中的应用 ====================
 
 /// 使用 NonZero::div_ceil 计算进程池大小
+/// NonZero::div_ceil process
 ///
 /// Rust 1.92.0: 新增的 `div_ceil` 方法可以安全地计算进程池的容量
+/// Rust 1.92.0: `div_ceil` method can process
 pub fn calculate_process_pool_size(total_tasks: usize, tasks_per_process: NonZeroUsize) -> usize {
     if total_tasks == 0 {
         return 0;
@@ -118,6 +134,7 @@ pub fn calculate_process_pool_size(total_tasks: usize, tasks_per_process: NonZer
 }
 
 /// 使用 div_ceil 实现进程资源分配
+/// div_ceil process
 pub struct ProcessResourceAllocator {
     total_memory: usize,
     memory_per_process: NonZeroUsize,
@@ -132,6 +149,7 @@ impl ProcessResourceAllocator {
     }
 
     /// 计算可以创建的进程数
+    /// can process
     pub fn max_processes(&self) -> usize {
         if self.total_memory == 0 {
             return 0;
@@ -146,6 +164,7 @@ impl ProcessResourceAllocator {
 // ==================== 3. 迭代器方法特化在进程列表比较中的应用 ====================
 
 /// 使用特化的迭代器比较方法比较进程列表
+/// method process
 ///
 /// Rust 1.92.0: Iterator::eq 为 TrustedLen 迭代器特化，性能更好
 pub fn compare_process_lists(list1: &[ProcessInfo], list2: &[ProcessInfo]) -> bool {
@@ -154,6 +173,7 @@ pub fn compare_process_lists(list1: &[ProcessInfo], list2: &[ProcessInfo]) -> bo
 }
 
 /// 使用迭代器特化检查进程状态
+/// process state
 pub fn check_process_states(processes: &[ProcessInfo], expected_pids: &[u32]) -> bool {
     let actual_pids: Vec<u32> = processes.iter().map(|p| p.pid).collect();
     // Rust 1.92.0: 特化的迭代器比较
@@ -163,6 +183,7 @@ pub fn check_process_states(processes: &[ProcessInfo], expected_pids: &[u32]) ->
 // ==================== 4. 综合应用示例 ====================
 
 /// 演示 Rust 1.92.0 特性在进程管理中的应用
+/// demonstration Rust 1.92.0 feature in process in application
 pub fn demonstrate_rust_192_process_features() {
     println!("\n=== Rust 1.92.0 进程管理特性演示 ===\n");
 

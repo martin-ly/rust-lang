@@ -1,21 +1,23 @@
 //! # 数据库交互 Hands-On 演示
-//!
+//! # database Hands-On demonstration
 //! 本示例整合 Rust 数据库生态三大核心库：
-//! - **SQLx**: 编译时检查的异步 SQL 工具包（本示例使用运行时查询以零配置运行）
+//! this example integration Rust database ecosystem core library ：
 //! - **Sea-ORM**: 异步动态 ORM，支持关系映射与迁移
-//! - **Redis**: 高性能缓存与消息队列
-//!
+//! - **Sea-ORM**: async ORM，and
 //! 使用 SQLite 内存模式，无需安装外部数据库即可运行。
-//!
+//! SQLite memory ，outside database Run 。
 //! ## 运行
-//!
+//! ## Run
 //! ```bash
 //! cargo run -p c06_async --example database_ecosystem_demo
 //! ```
 //!
 //! [来源: SQLx 官方文档](https://docs.rs/sqlx)
+//! [source: SQLx 官方文档](https://docs.rs/sqlx)
 //! [来源: Sea-ORM 官方文档](https://docs.rs/sea-orm)
+//! [source: Sea-ORM 官方文档](https://docs.rs/sea-orm)
 //! [来源: Redis rs 官方文档](https://docs.rs/redis)
+//! [source: Redis rs 官方文档](https://docs.rs/redis)
 
 use anyhow::Result;
 use sea_orm::{ConnectionTrait, Database, DbBackend, Statement};
@@ -35,8 +37,9 @@ async fn main() -> Result<()> {
 }
 
 /// ## 演示 1: SQLx + SQLite 内存数据库
-///
+/// ## demonstration 1: SQLx + SQLite in-memory database
 /// 直接使用 SQL 进行创建表、插入、查询操作。
+/// SQL 、、。
 async fn demo_01_sqlx_sqlite() -> Result<()> {
     println!("📦 演示 1: SQLx 原始 SQL 操作 (SQLite 内存模式)");
     println!("---------------------------------------------------");
@@ -101,9 +104,8 @@ async fn demo_01_sqlx_sqlite() -> Result<()> {
     Ok(())
 }
 
-/// ## 演示 2: Sea-ORM CRUD 与关系映射
-///
 /// 使用 ORM 进行类型安全的增删改查。
+/// ORM type 。
 async fn demo_02_sea_orm_crud() -> Result<()> {
     println!("🌊 演示 2: Sea-ORM 类型安全 CRUD");
     println!("----------------------------------");
@@ -174,9 +176,10 @@ async fn demo_02_sea_orm_crud() -> Result<()> {
 }
 
 /// ## 演示 3: Redis 缓存模式
-///
+/// ## demonstration 3: Redis
+/// ## Demonstration of 3: Redis 缓存模式
 /// 演示 Redis 连接、基本 KV 操作和缓存模式。
-/// 如果没有运行中的 Redis 服务器，将优雅降级为模拟模式。
+/// demonstration Redis 、this KV and 。
 async fn demo_03_redis_cache() -> Result<()> {
     println!("🔴 演示 3: Redis 缓存模式");
     println!("--------------------------");
@@ -245,8 +248,7 @@ async fn demo_03_redis_cache() -> Result<()> {
 }
 
 /// ## 演示 4: 连接池与缓存模式整合
-///
-/// 展示生产环境中的典型架构：数据库 + Redis 缓存的组合查询。
+/// ## demonstration 4: and integration
 async fn demo_04_connection_pool_pattern() -> Result<()> {
     println!("🏗️  演示 4: 连接池与缓存模式整合");
     println!("-----------------------------------");
@@ -285,6 +287,7 @@ async fn demo_04_connection_pool_pattern() -> Result<()> {
 }
 
 /// 模拟 Cache-Aside 模式：先查缓存，未命中再查数据库
+/// Cache-Aside ：，in database
 async fn fetch_article_with_cache(
     pool: &SqlitePool,
     id: i64,

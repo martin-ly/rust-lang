@@ -1,29 +1,25 @@
 //! Hazard Pointer 实现
-//!
-//! Hazard Pointer 是一种无锁内存回收机制，用于解决无锁数据结构中
 //! 的 ABA 问题和安全内存释放问题。
-//!
+//! ABA problem and memory problem 。
 //! ## 核心概念
-//!
-//! - **Hazard Pointer**: 线程声明它正在访问的指针，防止其他线程释放该内存
-//! - **退役列表 (Retirement List)**: 等待安全释放的节点列表
+//! ## core concept
 //! - **回收扫描**: 定期检查退役列表中的节点是否可以安全释放
-//!
+//! - ****: in node can
 //! ## 工作流程
-//!
-//! 1. 线程读取指针前，先将其标记为 Hazard Pointer
+//! ## process
+//! ## 工作process
 //! 2. 重新验证指针仍然有效
+//! 2. pointer effective
 //! 3. 使用完成后清除 Hazard Pointer
+//! 3. after Hazard Pointer
 //! 4. 需要删除的节点放入退役列表
-//! 5. 定期检查退役列表，释放不再被任何 Hazard Pointer 保护的节点
+//! 4. node
 use std::collections::VecDeque;
 // 使用原始指针而非 NonNull，因为原始指针天然实现 Send + Sync
 use std::sync::atomic::{AtomicPtr, AtomicUsize, Ordering};
 use std::sync::{Mutex, RwLock};
 
 /// Hazard Pointer 记录
-///
-/// 每个线程拥有固定数量的 Hazard Pointer 槽位。
 #[derive(Debug)]
 pub struct HazardPointer {
     ptr: AtomicPtr<u8>,
@@ -37,9 +33,9 @@ impl HazardPointer {
     }
 
     /// 设置 Hazard Pointer
-    ///
     /// # Safety
     /// 调用者必须确保 ptr 指向有效的内存。
+    /// must ptr effective memory 。
     pub unsafe fn protect<T>(&self, ptr: *mut T) {
         self.ptr.store(ptr as *mut u8, Ordering::Release);
     }
@@ -50,19 +46,17 @@ impl HazardPointer {
     }
 
     /// 获取当前保护的指针
+    /// when before pointer
     pub fn get(&self) -> *mut u8 {
         self.ptr.load(Ordering::Acquire)
     }
 }
 
 /// 线程本地 Hazard Pointer 集合
-///
-/// 每个线程拥有固定数量的 Hazard Pointer 槽位（通常 1-3 个足够）。
 pub const MAX_HAZARD_POINTERS: usize = 4;
 
 /// 全局 Hazard Pointer 记录
-///
-/// 使用 RwLock 管理所有活跃的 Hazard Pointer。
+/// global Hazard Pointer 记录
 pub struct HazardPointerRegistry {
     hazards: RwLock<Vec<*mut HazardPointer>>,
     retired_count: AtomicUsize,
@@ -80,7 +74,6 @@ impl Default for HazardPointerRegistry {
 }
 
 impl HazardPointerRegistry {
-    /// 创建新的 Hazard Pointer 注册表
     pub const fn new() -> Self {
         Self {
             hazards: RwLock::new(Vec::new()),
@@ -102,7 +95,6 @@ impl HazardPointerRegistry {
         }
     }
 
-    /// 检查指针是否被任何 Hazard Pointer 保护
     pub fn is_protected(&self, ptr: *mut u8) -> bool {
         if let Ok(guard) = self.hazards.read() {
             for &hp in guard.iter() {
@@ -123,14 +115,16 @@ impl HazardPointerRegistry {
 }
 
 /// 退役节点记录
+/// node
 struct RetiredNode {
     ptr: *mut u8,
     deleter: Box<dyn FnOnce(*mut u8) + Send>,
 }
 
 /// 内存回收器
-///
+/// memory
 /// 管理退役节点，在确保安全时释放内存。
+/// node ，in memory 。
 pub struct MemoryReclaimer {
     retired: Mutex<VecDeque<RetiredNode>>,
     registry: &'static HazardPointerRegistry,
@@ -138,6 +132,7 @@ pub struct MemoryReclaimer {
 
 impl MemoryReclaimer {
     /// 创建新的内存回收器
+    /// memory
     pub const fn new(registry: &'static HazardPointerRegistry) -> Self {
         Self {
             retired: Mutex::new(VecDeque::new()),
@@ -146,8 +141,9 @@ impl MemoryReclaimer {
     }
 
     /// 退役节点
-    ///
+    /// node
     /// 节点不会立即释放，而是加入退役列表等待安全回收。
+    /// node ，while etc. 。
     pub fn retire<T>(&self, ptr: *mut T) {
         let deleter = Box::new(|p: *mut u8| unsafe {
             let _ = Box::from_raw(p as *mut T);
@@ -173,6 +169,7 @@ impl MemoryReclaimer {
     }
 
     /// 尝试回收不再被保护的退役节点
+    /// is node
     pub fn try_reclaim(&self) {
         let mut to_reclaim = Vec::new();
 
@@ -196,15 +193,13 @@ impl MemoryReclaimer {
 }
 
 /// 线程本地 Hazard Pointer 上下文
-///
-/// 封装了线程使用的 Hazard Pointer 和回收器。
+/// thread this Hazard Pointer on under
 pub struct ThreadLocalHP {
     hazards: [HazardPointer; MAX_HAZARD_POINTERS],
     registry: &'static HazardPointerRegistry,
 }
 
 impl ThreadLocalHP {
-    /// 创建新的线程本地 Hazard Pointer 上下文
     pub const fn new(registry: &'static HazardPointerRegistry) -> Self {
         Self {
             hazards: [
@@ -217,7 +212,6 @@ impl ThreadLocalHP {
         }
     }
 
-    /// 获取第一个可用的 Hazard Pointer
     pub fn hazard(&self, index: usize) -> &HazardPointer {
         assert!(index < MAX_HAZARD_POINTERS);
         &self.hazards[index]

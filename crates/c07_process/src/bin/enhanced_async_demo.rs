@@ -1,7 +1,10 @@
 //! 增强的异步功能演示程序
+//! async functionality demonstration program
 //!
 //! 这个程序展示了增强的异步进程管理功能，包括异步闭包、
+//! program async process functionality ，async 、
 //! 性能监控、错误恢复等 Rust 1.90 新特性
+//! performance 、error recovery etc. Rust 1.90 feature
 #[cfg(feature = "async")]
 use c07_process::EnhancedAsyncProcessManager;
 #[cfg(feature = "async")]

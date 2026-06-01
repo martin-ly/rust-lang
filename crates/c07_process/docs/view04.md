@@ -207,7 +207,7 @@ Rust 标准库对这些模型的直接支持程度不同。
   - Rust 支持：`std::fs::File` 结合 `memmap2` 等 crates。需要 `unsafe` 进行可变映射。
   - 同样需要外部同步。
 - **网络套接字 (Network Sockets)**：
-  - `std::net` (同步) 和 `tokio::net` / `async-std::net` (异步) 提供 TCP/UDP 套接字。
+  - `std::net` (同步) 和 `tokio::net` / `async-std [已归档]::net` (异步) 提供 TCP/UDP 套接字。
   - 主要用于跨机器通信，但通过 `localhost` (`127.0.0.1` 或 `::1`) 可用于本地 IPC。
   - **优点**：标准化，跨平台，网络透明。
   - **缺点**：相比 Unix 域套接字或共享内存，性能开销更大（涉及网络协议栈）。

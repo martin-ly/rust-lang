@@ -1,17 +1,23 @@
 //! K-means 聚类算法实现
+//! K-means algorithm
 //!
 //! 本模块提供了 K-means 聚类算法的基础实现
+//! This module provides K-means algorithm foundation
 use super::*;
 use rand::RngExt;
 
 /// K-means 聚类器
+/// K-means
 #[derive(Debug, Clone)]
 pub struct KMeans {
     /// 聚类数量
+    /// quantity
     k: usize,
     /// 聚类中心
+    /// center
     centers: Option<Dataset>,
     /// 最大迭代次数
+    /// maximum
     max_iterations: usize,
     /// 收敛阈值
     tolerance: f64,
@@ -21,6 +27,7 @@ pub struct KMeans {
 
 impl KMeans {
     /// 创建新的 K-means 聚类器
+    /// K-means
     pub fn new(k: usize) -> Self {
         Self {
             k,
@@ -32,11 +39,13 @@ impl KMeans {
     }
 
     /// 返回聚类中心的只读迭代器（若未拟合则为空）
+    /// center （as ）
     pub fn centers_iter(&self) -> impl Iterator<Item = &DataPoint> {
         self.centers.as_deref().into_iter().flatten()
     }
 
     /// 设置最大迭代次数
+    /// maximum
     pub fn max_iterations(mut self, max_iter: usize) -> Self {
         self.max_iterations = max_iter;
         self
@@ -58,6 +67,7 @@ impl KMeans {
     }
 
     /// 找到最近的聚类中心
+    /// to center
     fn find_closest_center_in(point: &DataPoint, centers: &[DataPoint]) -> usize {
         let mut min_distance = f64::INFINITY;
         let mut closest_center = 0;
@@ -74,6 +84,7 @@ impl KMeans {
     }
 
     /// 初始化聚类中心（K-means++ 方法）
+    /// center （K-means++ method ）
     fn initialize_centers(&self, data: &Dataset) -> Dataset {
         let mut centers = Vec::with_capacity(self.k);
         use rand::rngs::ThreadRng;
@@ -214,6 +225,7 @@ impl UnsupervisedLearning for KMeans {
 }
 
 /// 异步版本的 K-means 训练
+/// async this K-means
 pub async fn kmeans_fit_async(
     k: usize,
     data: Dataset,
@@ -237,6 +249,7 @@ pub async fn kmeans_fit_async(
 }
 
 /// 并行版本的 K-means 训练（使用 rayon）
+/// parallelism this K-means （ rayon）
 #[cfg(feature = "with-petgraph")]
 pub fn kmeans_fit_parallel(
     k: usize,

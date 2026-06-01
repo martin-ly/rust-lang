@@ -21,7 +21,7 @@
 > **[来源: Rust Official Docs]**
 
 ```
-RUST_SAFETY_CRITICAL_ECOSYSTEM/
+knowledge/04_expert/safety_critical/ (原 docs/RUST_SAFETY_CRITICAL_ECOSYSTEM/ 已合并至此)
 ├── 01_mind_maps/                    # 思维导图 - 宏观视角
 │   └── RUST_ECOSYSTEM_MIND_MAP.md   # 生态系统全景图
 │

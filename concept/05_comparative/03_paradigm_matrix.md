@@ -1,3 +1,5 @@
+> **内容分级**: [综述级]
+
 # Paradigm Matrix: Multi-Language Formal Comparison（多语言范式对比矩阵）
 
 > **受众**: [进阶]

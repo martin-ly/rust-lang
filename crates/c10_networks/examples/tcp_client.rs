@@ -1,55 +1,68 @@
 //! TCP 客户端示例
-//!
-//! 这个示例展示了如何使用 c10_networks 库创建一个 TCP 客户端
-//!
+//! TCP example
+//! TCP 客户端Example of
 //! ## 📖 理论基础
-//!
+//! ## 📖 theory foundation
 //! TCP (传输控制协议) 是一种面向连接的、可靠的传输层协议。它提供：
-//!
+//! TCP (transmission ) surface 、transport layer 。：
 //! - **连接导向**: 建立连接、数据传输、连接释放
+//! - ****: 、transmission 、
 //! - **可靠性**: 数据包确认、重传、排序
+//! - ****: 、、ordering
 //! - **流量控制**: 滑动窗口机制
+//! - **flow rate **: mechanism
 //! - **拥塞控制**: 慢启动、拥塞避免、快速重传
-//!
+//! - ****: 、、fast
 //! ## 🔬 实现原理
-//!
+//! ## 🔬
+//! ## 🔬 Implementation of原理
 //! ### TCP 连接建立过程
-//!
+//! ### TCP
 //! 1. **SYN**: 客户端发送 SYN 包，请求建立连接
+//! 1. **SYN**: SYN ，
+//! 1. **SYN**: 客户端Send SYN 包，请求建立Connect
 //! 2. **SYN-ACK**: 服务器响应 SYN-ACK 包，确认连接请求
+//! 2. **SYN-ACK**: SYN-ACK ，
 //! 3. **ACK**: 客户端发送 ACK 包，完成三次握手
-//!
+//! 3. **ACK**: ACK ，
 //! ### 配置参数说明
-//!
-//! - `address`: 目标服务器的 IP 地址和端口号
-//! - `timeout`: 连接建立的最大等待时间，防止无限等待
+//! ### parameter explain
 //! - `buffer_size`: 读写缓冲区大小，影响内存使用和性能
+//! - `buffer_size`: buffering ，impact memory and performance
 //! - `keep_alive`: 启用 TCP Keep-Alive，检测连接状态
+//! - `keep_alive`: 启用 TCP Keep-Alive，检测Connectstate
 //! - `tcp_nodelay`: 禁用 Nagle 算法，减少延迟
-//!
+//! - `tcp_nodelay`: Nagle algorithm ，
+//! - `tcp_nodelay`: 禁用 Nagle algorithm，减少延迟
 //! ## 🚀 使用场景
-//!
+//! ## 🚀 scenario
 //! - **客户端应用**: 连接到服务器获取服务
+//! - **application **: to
 //! - **微服务通信**: 服务间通信
+//! - **microservice **:
 //! - **数据同步**: 定期数据同步
+//! - **synchronous **: synchronous
+//! - **数据synchronous**: 定期数据synchronous
 //! - **实时通信**: 聊天、游戏等实时应用
-//!
+//! - ****: 、etc. application
 //! ## ⚠️ 注意事项
-//!
+//! ## ⚠️
 //! - **错误处理**: 网络连接可能失败，需要适当的错误处理
+//! - **error handling **: network may ，when error handling
 //! - **资源管理**: 及时关闭连接，避免资源泄漏
+//! - ****: and ，
 //! - **超时设置**: 合理设置超时时间，避免长时间等待
+//! - ****: time ，time etc.
 //! - **缓冲区大小**: 根据应用需求调整缓冲区大小
-//!
+//! - **buffering **: according to application buffering
 //! ## 🔧 运行方式
-//!
+//! ## 🔧 Run way
 //! ```bash
 //! # 运行客户端示例
-//! cargo run --example tcp_client
-//!
+//! # Run example
+//! # Run客户端Example of
 //! # 需要先启动对应的服务器
-//! cargo run --example tcp_echo_server
-//! ```
+//! # to
 use c10_networks::{
     error::NetworkResult,
     socket::{TcpConfig, TcpSocket},

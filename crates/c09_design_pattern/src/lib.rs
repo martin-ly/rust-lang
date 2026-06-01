@@ -3,9 +3,12 @@
 #![allow(clippy::type_complexity)]
 #![allow(clippy::new_without_default)]
 //! Rust设计模式实践案例库
+//! Rustdesign library
 //!
 //! 本库提供了Rust中各种设计模式的完整实现和实际应用案例，
+//! this library Rustin design complete and actual application ，
 //! 包括基础设计模式、高级设计模式以及在特定领域的应用。
+//! foundation design 、design and in domain application 。
 // 基础设计模式模块
 pub mod behavioral;
 pub mod creational;
@@ -61,9 +64,11 @@ pub mod rust_idioms;
 // pub mod bin; // 暂时注释掉，避免编译错误
 
 /// 设计模式库版本信息
+/// design library this
 pub const VERSION: &str = "1.0.1";
 
 /// 获取库版本信息
+/// library this
 ///
 /// # Examples
 ///
@@ -78,6 +83,7 @@ pub fn get_version() -> &'static str {
 }
 
 /// 设计模式分类
+/// design classification
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum PatternCategory {
     Creational,
@@ -89,17 +95,22 @@ pub enum PatternCategory {
 }
 
 /// 执行模型：同步/异步/混合
+/// ：synchronous /async /
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum ExecutionModel {
     /// 纯同步：阻塞式执行
+    /// synchronous ：
     Sync,
     /// 纯异步：基于 async/await 或事件驱动
+    /// async ： async/await or event-driven
     Async,
     /// 混合：同步为主，提供异步适配；或异步内部含阻塞边界
+    /// ：synchronous as ，async ；or async inside edge
     Hybrid,
 }
 
 /// 设计模式信息
+/// design
 #[derive(Debug, Clone)]
 pub struct PatternInfo {
     pub name: String,
@@ -107,10 +118,12 @@ pub struct PatternInfo {
     pub description: String,
     pub use_cases: Vec<String>,
     /// 执行模型（同步/异步/混合）
+    /// （synchronous /async /）
     pub execution_model: ExecutionModel,
 }
 
 /// 获取所有设计模式信息
+/// all design
 ///
 /// # Examples
 ///
@@ -308,6 +321,7 @@ pub fn get_all_patterns() -> Vec<PatternInfo> {
 }
 
 /// 根据分类获取设计模式
+/// according to classification design
 pub fn get_patterns_by_category(category: PatternCategory) -> Vec<PatternInfo> {
     get_all_patterns()
         .into_iter()
@@ -316,6 +330,7 @@ pub fn get_patterns_by_category(category: PatternCategory) -> Vec<PatternInfo> {
 }
 
 /// 搜索设计模式
+/// design
 pub fn search_patterns(query: &str) -> Vec<PatternInfo> {
     let query_lower = query.to_lowercase();
     get_all_patterns()
@@ -332,6 +347,7 @@ pub fn search_patterns(query: &str) -> Vec<PatternInfo> {
 }
 
 /// 按执行模型获取设计模式
+/// design
 pub fn get_patterns_by_execution_model(model: ExecutionModel) -> Vec<PatternInfo> {
     get_all_patterns()
         .into_iter()

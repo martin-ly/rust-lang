@@ -7,6 +7,7 @@ use std::sync::{Arc, Condvar, Mutex};
 use std::time::{Duration, Instant};
 
 /// 进程安全的屏障
+/// process barrier
 #[allow(dead_code)]
 pub struct ProcessBarrier {
     name: String,
@@ -27,6 +28,7 @@ struct BarrierStats {
 
 impl ProcessBarrier {
     /// 创建新的屏障
+    /// barrier
     pub fn new(name: &str, parties: usize, config: SyncConfig) -> Self {
         Self {
             name: name.to_string(),
@@ -44,6 +46,7 @@ impl ProcessBarrier {
     }
 
     /// 等待所有参与者到达
+    /// etc. all and to
     pub fn wait(&self) -> SyncResult<BarrierWaitResult> {
         let start = Instant::now();
 
@@ -122,12 +125,14 @@ impl ProcessBarrier {
     }
 
     /// 检查屏障是否被锁定
+    /// barrier is lock
     pub fn is_locked(&self) -> bool {
         let current = self.current.lock().expect("屏障计数锁被污染");
         *current < self.parties
     }
 
     /// 获取等待者数量
+    /// etc. quantity
     pub fn waiter_count(&self) -> usize {
         let current = self.current.lock().expect("屏障计数锁被污染");
         self.parties - *current
@@ -135,21 +140,26 @@ impl ProcessBarrier {
 }
 
 /// 屏障等待结果
+/// barrier etc. result
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum BarrierWaitResult {
     /// 等待其他参与者
+    /// etc. its and
     Wait,
     /// 所有参与者都已到达
+    /// all and to
     Barrier,
 }
 
 impl BarrierWaitResult {
     /// 检查是否为等待状态
+    /// as etc. state
     pub const fn is_wait(&self) -> bool {
         matches!(self, BarrierWaitResult::Wait)
     }
 
     /// 检查是否为屏障状态
+    /// as barrier state
     pub const fn is_barrier(&self) -> bool {
         matches!(self, BarrierWaitResult::Barrier)
     }

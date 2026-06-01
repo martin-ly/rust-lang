@@ -1,20 +1,15 @@
 // [来源: Treiber 1986 / Rust Atomics and Locks]
 //! 无锁栈实现 (Treiber Stack)
-//!
-//! 使用原子操作实现的无锁后进先出（LIFO）栈结构。
-//!
 //! ## 核心算法
-//!
-//! Treiber Stack 是最经典的无锁数据结构之一，基于 CAS（Compare-And-Swap）
-//! 操作实现线程安全的 push 和 pop。
-//!
+//! ## core algorithm
+//! 操作Implementation ofthread-safe push and pop。
 //! ## 内存安全
-//!
-//! 本实现使用 `crossbeam_epoch` 进行安全的内存回收，避免 ABA 问题。
+//! ## memory safety
 use std::ptr;
 use std::sync::atomic::{AtomicPtr, Ordering};
 
 /// 栈节点
+/// stack node
 struct Node<T> {
     data: T,
     next: AtomicPtr<Node<T>>,
@@ -30,11 +25,10 @@ impl<T> Node<T> {
 }
 
 /// 无锁栈 (Treiber Stack)
-///
 /// 线程安全的无锁栈实现，支持多生产者多消费者场景。
-///
+/// thread-safe lock-free stack ，scenario 。
 /// # 示例
-///
+/// # example
 /// ```
 /// use c05_threads::lockfree::lockfree_stack::LockFreeStack;
 ///
@@ -54,6 +48,7 @@ unsafe impl<T: Send> Sync for LockFreeStack<T> {}
 
 impl<T> LockFreeStack<T> {
     /// 创建新的无锁栈
+    /// lock-free stack
     pub fn new() -> Self {
         Self {
             head: AtomicPtr::new(ptr::null_mut()),
@@ -61,8 +56,9 @@ impl<T> LockFreeStack<T> {
     }
 
     /// 将元素压入栈顶
-    ///
+    /// will element stack
     /// 使用 CAS 循环确保线程安全。
+    /// CAS circulation thread-safe 。
     pub fn push(&self, data: T) {
         let new_node = Box::into_raw(Box::new(Node::new(data)));
 
@@ -83,8 +79,7 @@ impl<T> LockFreeStack<T> {
     }
 
     /// 从栈顶弹出元素
-    ///
-    /// 返回 `None` 如果栈为空。
+    /// from stack element
     pub fn pop(&self) -> Option<T> {
         loop {
             let current_head = self.head.load(Ordering::Acquire);
@@ -109,6 +104,7 @@ impl<T> LockFreeStack<T> {
     }
 
     /// 检查栈是否为空
+    /// stack as
     pub fn is_empty(&self) -> bool {
         self.head.load(Ordering::Acquire).is_null()
     }
@@ -155,7 +151,7 @@ mod tests {
     }
 
     /// 注意：此并发测试未实现内存回收机制（Hazard Pointers / EBR）。
-    /// 在 Miri 下运行会报告数据竞争。作为概念演示，生产环境应使用 crossbeam-epoch。
+    /// ：this concurrency memory mechanism （Hazard Pointers / EBR）。
     #[test]
     #[ignore = "概念演示：未实现内存回收，Miri 会报告数据竞争"]
     fn test_concurrent_push_pop() {
@@ -183,7 +179,7 @@ mod tests {
     }
 
     /// 注意：此并发测试未实现内存回收机制。
-    /// 在 Miri 下运行会报告数据竞争。作为概念演示，生产环境应使用 crossbeam-epoch。
+    /// ：this concurrency memory mechanism 。
     #[test]
     #[ignore = "概念演示：未实现内存回收，Miri 会报告数据竞争"]
     fn test_concurrent_mixed_operations() {

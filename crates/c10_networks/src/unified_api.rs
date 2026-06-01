@@ -35,6 +35,7 @@ pub struct PoolStats {
 }
 
 /// 性能指标
+/// performance indicator
 #[derive(Debug, Clone)]
 pub struct PerformanceMetrics {
     pub active_connections: usize,
@@ -76,12 +77,14 @@ impl CacheEntry {
     }
 
     /// 获取数据大小（用于调试和监控）
+    /// （and ）
     pub fn data_size(&self) -> usize {
         self.data.len()
     }
 }
 
 /// 统一的网络客户端入口，封装常见操作（示例级）
+/// network ，（example ）
 #[derive(Clone)]
 pub struct NetClient {
     #[allow(dead_code)]
@@ -128,6 +131,7 @@ impl NetClient {
     }
 
     /// 从缓存获取数据
+    /// from
     #[allow(dead_code)]
     fn get_from_cache(&self, key: &str) -> Option<Bytes> {
         let cache = self.cache.read().ok()?;
@@ -143,6 +147,7 @@ impl NetClient {
     }
 
     /// 存储到缓存
+    /// to
     #[allow(dead_code)]
     fn store_in_cache(&self, key: String, data: Bytes, ttl: Duration) {
         if let Ok(mut cache) = self.cache.write() {
@@ -152,6 +157,7 @@ impl NetClient {
     }
 
     /// 性能监控：获取详细的性能指标
+    /// performance ：performance indicator
     pub fn get_performance_metrics(&self) -> PerformanceMetrics {
         let stats = self.get_stats();
         let cache_size = self.cache.read().map(|c| c.len()).unwrap_or(0);
@@ -172,8 +178,11 @@ impl NetClient {
     }
 
     /// 选择 DNS 解析器：
+    /// DNS ：
     /// - 默认：系统解析器
+    /// - ：system
     /// - 通过环境变量 C10_DNS_BACKEND 可选：system|cloudflare_doh|cloudflare_dot|google_doh|google_dot|quad9_doh|quad9_dot
+    /// - Viaenvironmentvariable C10_DNS_BACKEND 可选：system|cloudflare_doh|cloudflare_dot|google_doh|google_dot|quad9_doh|quad9_dot
     async fn select_dns_resolver(&self) -> NetworkResult<crate::protocol::dns::DnsResolver> {
         use crate::protocol::dns::DnsResolver;
         let _backend = std::env::var("C10_DNS_BACKEND").unwrap_or_else(|_| "system".to_string());
@@ -181,6 +190,7 @@ impl NetClient {
     }
 
     /// DNS: 查询 A/AAAA (优化版本)
+    /// DNS : A/AAAA (optimization this )
     pub async fn dns_lookup_ips(&self, host: &str) -> NetworkResult<Vec<IpAddr>> {
         // 更新统计信息
         self.stats.total_requests.fetch_add(1, Ordering::Relaxed);
@@ -245,12 +255,13 @@ impl NetClient {
     }
 
     /// DNS: 逆向解析 PTR
+    /// DNS : PTR
+    /// DNS: 逆向Parse PTR
     pub async fn dns_reverse(&self, ip: IpAddr) -> NetworkResult<Vec<String>> {
         let r = self.select_dns_resolver().await?;
         r.reverse_lookup(ip).await
     }
 
-    /// WebSocket 发送文本并等待一条回显（示例）
     pub async fn ws_echo(&self, url: &str, text: &str) -> NetworkResult<String> {
         use futures_util::{SinkExt, StreamExt};
         let url = url::Url::parse(url).map_err(|e| NetworkError::Other(e.to_string()))?;
@@ -270,6 +281,7 @@ impl NetClient {
     }
 
     /// UDP 发送并等待一次回显（示例）
+    /// UDP and etc. （example ）
     pub async fn udp_echo(&self, addr: &str, data: &[u8]) -> NetworkResult<Bytes> {
         use tokio::net::UdpSocket;
         let socket = UdpSocket::bind("127.0.0.1:0")
@@ -287,7 +299,6 @@ impl NetClient {
         Ok(Bytes::copy_from_slice(&buf[..n]))
     }
 
-    /// gRPC 调用（示例：Hello）- 已实现基础功能
     pub async fn grpc_hello(&self, endpoint: &str, name: &str) -> NetworkResult<String> {
         // 使用 tonic 进行 gRPC 调用
         use tonic::transport::Channel;
@@ -305,8 +316,7 @@ impl NetClient {
     }
 
     /// P2P 启动最小节点（返回监听地址字符串向量，示例）
-    /// 
-    /// 注意: 当前为简化实现，实际P2P功能需要配置libp2p
+    /// P2P minimum node （，example ）
     pub async fn p2p_start_minimal(&self) -> NetworkResult<Vec<String>> {
         // 简化实现：返回本地监听地址
         // 实际实现需要使用 libp2p::Swarm 创建P2P节点
@@ -316,7 +326,6 @@ impl NetClient {
 }
 
 impl NetClient {
-    /// WebSocket 回显（带重试）
     pub async fn ws_echo_with_retry(
         &self,
         url: &str,
@@ -332,6 +341,8 @@ impl NetClient {
     }
 
     /// UDP 回显（带重试）
+    /// UDP （）
+    /// UDP 回显（带Retry）
     pub async fn udp_echo_with_retry(
         &self,
         addr: &str,
@@ -346,7 +357,6 @@ impl NetClient {
         .await
     }
 
-    /// gRPC Hello（带重试）
     pub async fn grpc_hello_with_retry(
         &self,
         endpoint: &str,

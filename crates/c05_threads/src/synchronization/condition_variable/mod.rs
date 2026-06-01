@@ -1,12 +1,16 @@
 //! 条件变量（Condvar）示例
+//! condition variable （Condvar）example
 //! - 经典生产者/消费者
+//! - /
 //! - 超时等待与虚假唤醒处理
+//! - etc. and false
 use std::collections::VecDeque;
 use std::sync::{Arc, Condvar, Mutex};
 use std::thread;
 use std::time::{Duration, Instant};
 
 /// 简单的有界队列：生产者/消费者
+/// simple ：/
 pub fn bounded_queue_demo(
     capacity: usize,
     producers: usize,
@@ -70,6 +74,7 @@ pub fn bounded_queue_demo(
 }
 
 /// 超时等待：直到某事件发生或达到截止时间
+/// etc. ：to or to time
 pub fn wait_with_timeout_demo(timeout_ms: u64) -> bool {
     let pair = Arc::new((Mutex::new(false), Condvar::new()));
     let (lock, cvar) = &*pair;

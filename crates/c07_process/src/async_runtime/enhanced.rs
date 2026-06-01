@@ -1,7 +1,10 @@
 //! 增强的异步运行时功能
+//! async runtime functionality
 //!
 //! 这个模块提供了完整的异步进程管理功能，包括异步闭包支持、
+//! module complete async process functionality ，async 、
 //! 智能错误恢复、性能监控等 Rust 1.90 新特性
+//! error recovery 、performance etc. Rust 1.90 feature
 use crate::error::{ProcessError, ProcessResult};
 use crate::types::{ProcessConfig, ProcessInfo, ProcessStatus};
 use std::collections::HashMap;
@@ -13,6 +16,7 @@ use tokio::sync::{Mutex as TokioMutex, RwLock as TokioRwLock, Semaphore, mpsc, o
 use tokio::time::timeout;
 
 /// 增强的异步进程管理器
+/// async process
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 pub struct EnhancedAsyncProcessManager {
@@ -25,6 +29,7 @@ pub struct EnhancedAsyncProcessManager {
 }
 
 /// 增强的异步管理进程
+/// async process
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 struct EnhancedManagedProcess {
@@ -37,6 +42,7 @@ struct EnhancedManagedProcess {
 }
 
 /// 进程输出
+/// process
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 #[derive(Debug, Clone)]
@@ -48,6 +54,7 @@ pub struct ProcessOutput {
 }
 
 /// 进程性能指标
+/// process performance indicator
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 #[derive(Debug, Clone)]
@@ -61,6 +68,7 @@ pub struct ProcessMetrics {
 }
 
 /// 性能统计信息
+/// performance
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 #[derive(Debug, Clone, Default)]
@@ -76,6 +84,7 @@ pub struct PerformanceStats {
 }
 
 /// 性能监控器
+/// performance
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 pub struct PerformanceMonitor {
@@ -84,6 +93,7 @@ pub struct PerformanceMonitor {
 }
 
 /// 错误恢复器
+/// error recovery
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 pub struct ErrorRecovery {
@@ -93,6 +103,7 @@ pub struct ErrorRecovery {
 }
 
 /// 重试策略
+/// strategy
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 #[derive(Debug, Clone)]
@@ -104,6 +115,7 @@ pub struct RetryPolicy {
 }
 
 /// 恢复策略
+/// strategy
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 #[derive(Clone)]
@@ -115,6 +127,7 @@ pub enum RecoveryStrategy {
 }
 
 /// 增强的异步命令
+/// async command
 #[cfg(feature = "async")]
 enum EnhancedAsyncCommand {
     Spawn {
@@ -150,6 +163,7 @@ enum EnhancedAsyncCommand {
 #[cfg(feature = "async")]
 impl EnhancedAsyncProcessManager {
     /// 创建新的增强异步进程管理器
+    /// async process
     pub async fn new(max_concurrent_processes: usize) -> ProcessResult<Self> {
         let (command_sender, command_receiver) = mpsc::unbounded_channel();
         let processes = Arc::new(TokioRwLock::new(HashMap::new()));
@@ -195,6 +209,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 异步启动进程（基础版本）
+    /// async process （foundation this ）
     pub async fn spawn(&self, config: ProcessConfig) -> ProcessResult<u32> {
         let (response_sender, response_receiver) = oneshot::channel();
 
@@ -213,8 +228,10 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 异步启动进程（带回调版本 - 使用异步闭包）
+    /// async process （this - async ）
     ///
     /// 这是 Rust 1.90 新特性的演示，支持异步闭包
+    /// Rust 1.90 feature demonstration ，async
     pub async fn spawn_with_callback<F>(
         &self,
         config: ProcessConfig,
@@ -241,6 +258,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 异步终止进程
+    /// async process
     pub async fn kill(&self, pid: u32, force: bool) -> ProcessResult<()> {
         let (response_sender, response_receiver) = oneshot::channel();
 
@@ -260,6 +278,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 异步获取进程信息
+    /// async process
     pub async fn get_info(&self, pid: u32) -> ProcessResult<ProcessInfo> {
         let (response_sender, response_receiver) = oneshot::channel();
 
@@ -278,6 +297,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 异步获取进程性能指标
+    /// async process performance indicator
     pub async fn get_metrics(&self, pid: u32) -> ProcessResult<ProcessMetrics> {
         let (response_sender, response_receiver) = oneshot::channel();
 
@@ -296,6 +316,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 异步获取所有进程
+    /// async all process
     pub async fn list_all(&self) -> Vec<ProcessInfo> {
         let (response_sender, response_receiver) = oneshot::channel();
 
@@ -313,6 +334,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 获取性能统计信息（使用 Rust 1.90 改进的模式匹配）
+    /// performance （ Rust 1.90 ）
     pub async fn get_performance_stats(&self) -> ProcessResult<PerformanceStats> {
         let processes = self.processes.read().await;
         let mut stats = PerformanceStats::default();
@@ -350,6 +372,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 异步清理资源
+    /// async
     pub async fn cleanup(&self) -> ProcessResult<()> {
         let (response_sender, response_receiver) = oneshot::channel();
 
@@ -367,6 +390,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 异步写入标准输入
+    /// async standard input
     pub async fn write_stdin(&self, pid: u32, data: &[u8]) -> ProcessResult<()> {
         let mut processes = self.processes.write().await;
         if let Some(managed_process) = processes.get_mut(&pid) {
@@ -386,6 +410,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 异步读取标准输出
+    /// async standard output
     pub async fn read_stdout(&self, pid: u32) -> ProcessResult<Vec<u8>> {
         let mut processes = self.processes.write().await;
         if let Some(managed_process) = processes.get_mut(&pid) {
@@ -408,9 +433,12 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 异步启动进程（使用 Rust 1.90 异步闭包特性）
+    /// async process （ Rust 1.90 async feature ）
     ///
     /// 这个版本使用了 Rust 1.90 的新异步闭包特性
+    /// this Rust 1.90 async feature
     /// 注意：由于异步闭包仍不稳定，这里使用 Future trait 作为替代
+    /// ：async ， Future trait as
     pub async fn spawn_with_async_callback<F, Fut>(
         &self,
         config: ProcessConfig,
@@ -442,6 +470,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 带超时等待进程完成
+    /// etc. process
     pub async fn wait_with_timeout(
         &self,
         pid: u32,
@@ -483,6 +512,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 异步读取标准错误
+    /// async standard error
     async fn read_stderr(&self, pid: u32) -> ProcessResult<Vec<u8>> {
         let mut processes = self.processes.write().await;
         if let Some(managed_process) = processes.get_mut(&pid) {
@@ -505,6 +535,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 命令处理器
+    /// command
     async fn command_handler(
         mut receiver: mpsc::UnboundedReceiver<EnhancedAsyncCommand>,
         processes: Arc<TokioRwLock<HashMap<u32, EnhancedManagedProcess>>>,
@@ -571,6 +602,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 处理启动进程命令
+    /// process command
     async fn handle_spawn(
         config: ProcessConfig,
         processes: &Arc<TokioRwLock<HashMap<u32, EnhancedManagedProcess>>>,
@@ -648,6 +680,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 处理带回调的启动进程命令
+    /// process command
     async fn handle_spawn_with_callback<F>(
         config: ProcessConfig,
         callback: F,
@@ -691,6 +724,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 处理终止进程命令
+    /// process command
     #[allow(unused_variables)]
     async fn handle_kill(
         pid: u32,
@@ -727,6 +761,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 处理获取进程信息命令
+    /// process command
     async fn handle_get_info(
         pid: u32,
         processes: &Arc<TokioRwLock<HashMap<u32, EnhancedManagedProcess>>>,
@@ -741,6 +776,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 处理获取进程指标命令
+    /// process indicator command
     async fn handle_get_metrics(
         pid: u32,
         processes: &Arc<TokioRwLock<HashMap<u32, EnhancedManagedProcess>>>,
@@ -756,6 +792,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 处理列出所有进程命令
+    /// all process command
     async fn handle_list_all(
         processes: &Arc<TokioRwLock<HashMap<u32, EnhancedManagedProcess>>>,
     ) -> Vec<ProcessInfo> {
@@ -765,6 +802,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 处理清理命令
+    /// command
     async fn handle_cleanup(
         processes: &Arc<TokioRwLock<HashMap<u32, EnhancedManagedProcess>>>,
     ) -> ProcessResult<()> {
@@ -777,6 +815,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 性能监控循环
+    /// performance circulation
     #[allow(unused_variables)]
     async fn performance_monitoring_loop(
         performance_monitor: Arc<PerformanceMonitor>,

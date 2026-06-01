@@ -1,10 +1,7 @@
 //! Rust 1.93.0 进程管理相关 API 演示
-//!
-//! 本示例展示 Rust 1.93.0 在进程、超时、数据传递等场景中的新 API：
+//! Rust 1.93.0 process API demonstration
 //! - Duration::from_nanos_u128 - 高精度纳秒级超时
 //! - String::into_raw_parts - 进程间数据传递
-//! - VecDeque::pop_front_if - 进程输出队列过滤
-//!
 //! 运行: cargo run -p c07_process --example rust_193_features_demo
 use std::collections::VecDeque;
 use std::process::Command;

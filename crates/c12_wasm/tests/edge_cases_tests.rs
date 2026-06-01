@@ -3,6 +3,7 @@
 use c12_wasm::basic_examples;
 
 /// 测试WASM模块大小边界情况
+/// WASM module edge situation
 #[test]
 fn test_wasm_module_size_boundaries() {
     // 测试最小模块大小
@@ -19,6 +20,7 @@ fn test_wasm_module_size_boundaries() {
 }
 
 /// 测试内存限制边界情况
+/// memory edge situation
 #[test]
 fn test_memory_limit_boundaries() {
     // 测试最小内存限制
@@ -35,6 +37,7 @@ fn test_memory_limit_boundaries() {
 }
 
 /// 测试WASM函数边界情况
+/// WASM function edge situation
 #[test]
 fn test_wasm_function_boundaries() {
     // 测试基本函数
@@ -64,6 +67,7 @@ fn test_error_paths() {
 }
 
 /// 测试边界值组合
+/// edge combination
 #[test]
 fn test_boundary_value_combinations() {
     // 测试最小值和最大值
@@ -79,6 +83,7 @@ fn test_boundary_value_combinations() {
 }
 
 /// 测试资源耗尽情况
+/// situation
 #[test]
 fn test_resource_exhaustion() {
     // 测试大量WASM模块（模拟）
@@ -92,6 +97,7 @@ fn test_resource_exhaustion() {
 }
 
 /// 测试WASI边界情况
+/// WASI edge situation
 #[test]
 fn test_wasi_boundaries() {
     // 测试文件操作边界

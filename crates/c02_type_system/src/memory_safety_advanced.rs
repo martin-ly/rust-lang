@@ -1,15 +1,22 @@
 // [来源: The Rustonomicon / Rust Reference]
 //! 内存安全高级演示模块
-//!
-//! 本模块演示了 Rust 1.90 中的各种内存安全高级特性，包括：
+//! memory safety demonstration module
 //! - 高级生命周期管理
+//! - lifetime
 //! - 内存布局优化
+//! - memory layout optimization
 //! - 零成本抽象
+//! - cost
 //! - 智能指针高级用法
+//! - pointer
 //! - 内存池和分配器
+//! - memory pool and
 //! - 内存泄漏检测
+//! - memory leak
 //! - 缓冲区溢出防护
+//! - buffer overflow
 //! - 内存对齐和缓存优化
+//! - memory alignment and optimization
 use std::alloc::{GlobalAlloc, Layout, System};
 use std::marker::PhantomData;
 use std::mem::{align_of, size_of};
@@ -19,10 +26,12 @@ use std::sync::atomic::{AtomicUsize, Ordering};
 use std::time::{Duration, Instant};
 
 /// 高级生命周期管理
+/// lifetime
 pub mod advanced_lifetimes {
     use super::*;
 
     /// 生命周期追踪器
+    /// lifetime
     pub struct LifetimeTracker<'a, T> {
         data: &'a T,
         created_at: Instant,
@@ -52,6 +61,7 @@ pub mod advanced_lifetimes {
     }
 
     /// 生命周期组合器
+    /// lifetime combination
     pub struct LifetimeCombinator<'a, 'b, T, U>
     where
         T: 'a,
@@ -92,6 +102,7 @@ pub mod advanced_lifetimes {
     }
 
     /// 生命周期验证器
+    /// lifetime
     pub struct LifetimeValidator<'a> {
         lifetime_id: &'a str,
         created_at: Instant,
@@ -122,10 +133,12 @@ pub mod advanced_lifetimes {
 }
 
 /// 内存布局优化
+/// memory layout optimization
 pub mod memory_layout {
     use super::*;
 
     /// 缓存行对齐的数据结构
+    /// cache line to data structure
     #[repr(align(64))]
     pub struct CacheAligned<T> {
         pub data: T,
@@ -150,6 +163,7 @@ pub mod memory_layout {
     }
 
     /// 内存池分配器
+    /// memory pool
     pub struct MemoryPool {
         blocks: Vec<*mut u8>,
         pub block_size: usize,
@@ -222,6 +236,7 @@ pub mod memory_layout {
     }
 
     /// 内存对齐工具
+    /// memory alignment tool
     pub struct AlignmentUtils;
 
     impl AlignmentUtils {
@@ -248,10 +263,12 @@ pub mod memory_layout {
 }
 
 /// 零成本抽象
+/// cost
 pub mod zero_cost_abstractions {
     use super::*;
 
     /// 零成本包装器
+    /// cost
     #[derive(Debug, Clone, Copy)]
     pub struct ZeroCostWrapper<T> {
         value: T,
@@ -290,6 +307,7 @@ pub mod zero_cost_abstractions {
     }
 
     /// 编译时计算
+    /// compile-time
     pub const fn compile_time_factorial(n: u32) -> u32 {
         match n {
             0 | 1 => 1,
@@ -298,6 +316,8 @@ pub mod zero_cost_abstractions {
     }
 
     /// 零成本迭代器
+    /// cost
+    /// 零costiterator
     pub struct ZeroCostIterator<'a, T> {
         data: &'a [T],
         index: usize,
@@ -328,10 +348,12 @@ pub mod zero_cost_abstractions {
 }
 
 /// 智能指针高级用法
+/// pointer
 pub mod smart_pointers {
     use super::*;
 
     /// 引用计数智能指针
+    /// reference counting pointer
     pub struct RefCounted<T> {
         data: *mut T,
         count: *mut AtomicUsize,
@@ -383,6 +405,8 @@ pub mod smart_pointers {
     }
 
     /// 弱引用智能指针
+    /// reference pointer
+    /// 弱referencesmart pointer
     pub struct WeakRef<T> {
         data: *mut T,
         count: *mut AtomicUsize,
@@ -422,6 +446,7 @@ pub mod smart_pointers {
     }
 
     /// 自定义分配器
+    /// definition
     pub struct CustomAllocator {
         pool: super::memory_layout::MemoryPool,
     }
@@ -452,6 +477,7 @@ pub mod smart_pointers {
 }
 
 /// 内存泄漏检测
+/// memory leak
 pub mod memory_leak_detection {
     use std::collections::HashMap;
     use std::sync::atomic::{AtomicUsize, Ordering};
@@ -459,6 +485,7 @@ pub mod memory_leak_detection {
     use std::time::Instant;
 
     /// 内存泄漏检测器
+    /// memory leak
     #[allow(clippy::arc_with_non_send_sync)]
     pub struct MemoryLeakDetector {
         allocations: Arc<Mutex<HashMap<*mut u8, AllocationInfo>>>,
@@ -538,9 +565,11 @@ pub mod memory_leak_detection {
 }
 
 /// 缓冲区溢出防护
+/// buffer overflow
 pub mod buffer_overflow_protection {
 
     /// 安全缓冲区
+    /// buffering
     pub struct SafeBuffer {
         data: Vec<u8>,
         size: usize,
@@ -630,6 +659,7 @@ pub mod buffer_overflow_protection {
     impl std::error::Error for BufferError {}
 
     /// 边界检查工具
+    /// edge tool
     pub struct BoundsChecker;
 
     impl BoundsChecker {
@@ -683,9 +713,11 @@ pub mod buffer_overflow_protection {
 }
 
 /// 内存对齐和缓存优化
+/// memory alignment and optimization
 pub mod memory_alignment_cache {
 
     /// 缓存友好的数据结构
+    /// cache-friendly data structure
     #[repr(align(64))]
     #[derive(Default)]
     pub struct CacheFriendlyStruct {
@@ -710,6 +742,7 @@ pub mod memory_alignment_cache {
     }
 
     /// 内存预取工具
+    /// memory prefetch tool
     pub struct MemoryPrefetcher;
 
     impl MemoryPrefetcher {
@@ -735,10 +768,12 @@ pub mod memory_alignment_cache {
     }
 
     /// 内存访问模式优化
+    /// memory optimization
     pub struct MemoryAccessOptimizer;
 
     impl MemoryAccessOptimizer {
         /// 顺序访问模式
+        /// order
         pub fn sequential_access<T>(data: &[T], mut f: impl FnMut(&T)) {
             for item in data {
                 f(item);
@@ -764,6 +799,8 @@ pub mod memory_alignment_cache {
 }
 
 /// 主演示函数
+/// demonstration function
+/// 主demonstration function
 pub fn demonstrate_memory_safety_advanced() {
     println!("🛡️  Rust 1.90 内存安全高级演示");
     println!("=================================");

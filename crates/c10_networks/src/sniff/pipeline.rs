@@ -31,6 +31,7 @@ pub struct TcpStatsSnapshot {
 }
 
 /// 启动 ARP 抓包异步流，返回一个 mpsc Receiver
+/// ARP async stream ， mpsc Receiver
 pub async fn arp_stream(
     cfg: ArpSniffConfig,
     channel_size: usize,
@@ -95,6 +96,7 @@ fn parse_arp_frame(frame: &[u8]) -> Option<ArpRecord> {
 }
 
 /// 启动 TCP 统计异步流：定期输出一个统计快照
+/// TCP async stream ：
 pub async fn tcp_stats_stream(
     iface_name: Option<&str>,
     interval: Duration,

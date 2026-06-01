@@ -1,6 +1,7 @@
 //! # 基础功能测试
-//!
+//! # foundation functionality
 //! 测试 lib.rs 中的基础示例代码
+//! lib.rs in foundation example
 use c12_wasm::array_examples::*;
 use c12_wasm::basic_examples::*;
 use c12_wasm::complex_types::*;

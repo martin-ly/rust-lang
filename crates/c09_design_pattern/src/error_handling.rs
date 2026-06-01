@@ -1,28 +1,40 @@
 use std::error::Error;
 /// 设计模式错误处理模块
+/// design error handling module
 ///
 /// 提供统一的错误处理机制，支持各种设计模式的错误场景
+/// error handling mechanism ，design scenario
 /// 使用Rust 1.89的新特性优化错误处理性能
+/// Rust 1.89feature optimization error handling performance
 use std::fmt;
 
 /// 设计模式通用错误类型
+/// design error type
 #[derive(Debug, Clone)]
 pub enum DesignPatternError {
     /// 单例模式错误
+    /// singleton
     SingletonError(String),
     /// 工厂模式错误
+    /// factory
     FactoryError(String),
     /// 代理模式错误
+    /// proxy pattern
     ProxyError(String),
     /// 享元模式错误
+    /// flyweight
     FlyweightError(String),
     /// 责任链模式错误
+    /// chain of responsibility
     ChainError(String),
     /// 观察者模式错误
+    /// observer
     ObserverError(String),
     /// 并发模式错误
+    /// concurrency
     ConcurrencyError(String),
     /// 内存分配错误
+    /// memory
     MemoryError(String),
     /// 配置错误
     ConfigurationError(String),
@@ -47,14 +59,18 @@ impl fmt::Display for DesignPatternError {
 impl Error for DesignPatternError {}
 
 /// 错误处理结果类型
+/// error handling result type
 pub type PatternResult<T> = Result<T, DesignPatternError>;
 
 /// 错误恢复策略
+/// error recovery strategy
 #[derive(Debug, Clone)]
 pub enum RecoveryStrategy {
     /// 重试策略
+    /// strategy
     Retry { max_attempts: u32, delay_ms: u64 },
     /// 降级策略
+    /// strategy
     Fallback,
     /// 忽略错误
     Ignore,
@@ -63,6 +79,7 @@ pub enum RecoveryStrategy {
 }
 
 /// 错误处理器
+/// error handling
 pub struct ErrorHandler {
     strategy: RecoveryStrategy,
     error_count: std::sync::atomic::AtomicU32,
@@ -77,6 +94,7 @@ impl ErrorHandler {
     }
 
     /// 处理错误并尝试恢复
+    /// and
     pub fn handle_error<T, F>(&self, mut operation: F) -> PatternResult<T>
     where
         F: FnMut() -> PatternResult<T>,
@@ -145,6 +163,7 @@ impl ErrorHandler {
 }
 
 /// 单例模式错误处理
+/// singleton error handling
 pub struct SingletonErrorHandler {
     handler: ErrorHandler,
 }
@@ -174,6 +193,7 @@ impl SingletonErrorHandler {
 }
 
 /// 工厂模式错误处理
+/// factory error handling
 pub struct FactoryErrorHandler {
     handler: ErrorHandler,
 }
@@ -200,6 +220,7 @@ impl FactoryErrorHandler {
 }
 
 /// 代理模式错误处理
+/// proxy pattern error handling
 pub struct ProxyErrorHandler {
     handler: ErrorHandler,
 }
@@ -229,6 +250,7 @@ impl ProxyErrorHandler {
 }
 
 /// 享元模式错误处理
+/// flyweight error handling
 pub struct FlyweightErrorHandler {
     handler: ErrorHandler,
 }
@@ -305,6 +327,7 @@ pub fn global_error_monitor() -> &'static ErrorMonitor {
 }
 
 /// 错误处理宏
+/// error handling
 #[macro_export]
 macro_rules! handle_pattern_error {
     ($result:expr, $error_type:ident, $message:expr) => {
@@ -320,10 +343,12 @@ macro_rules! log_pattern_error {
 }
 
 /// 错误处理工具函数
+/// error handling tool function
 pub mod utils {
     use super::*;
 
     /// 安全执行操作，自动处理错误
+    /// ，
     pub fn safe_execute<T, F>(operation: F) -> PatternResult<T>
     where
         F: Fn() -> PatternResult<T>,
@@ -338,6 +363,7 @@ pub mod utils {
     }
 
     /// 验证输入参数
+    /// parameter
     pub fn validate_input<T>(value: Option<T>, name: &str) -> PatternResult<T> {
         let Some(v) = value else {
             return Err(DesignPatternError::ConfigurationError(format!(
@@ -349,6 +375,7 @@ pub mod utils {
     }
 
     /// 验证数值范围
+    /// scope
     pub fn validate_range(value: i32, min: i32, max: i32, name: &str) -> PatternResult<i32> {
         if value >= min && value <= max {
             Ok(value)

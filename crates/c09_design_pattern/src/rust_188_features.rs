@@ -1,12 +1,16 @@
 //! Rust 188.0 新特性实现模块 —— c09_design_pattern
 //!
 //! 本模块展示了 Rust 188.0 (2025-06-26) 的关键语言特性和工具链改进。
+//! This module demonstrates Rust 188.0 (2025-06-26) key feature and toolchain 。
 //!
 //! - `let_chains`: Let Chains 在 2024 Edition 中稳定
 //!
 //! # 版本信息
+//! # this
 //! - Rust 版本: 188.0
+//! - Rust this : 188.0
 //! - 稳定日期: 2025-06-26
+//! - date : 2025-06-26
 //! - Edition: 2024
 
 // ============================================================================
@@ -17,19 +21,28 @@
 ///
 /// Rust 1.88.0 在 2024 Edition 中稳定了 let chains，
 /// 允许在 `if` 和 `while` 条件中将 `let` 模式与布尔表达式混合使用。
+/// in `if` and `while` condition in will `let` and express 。
 ///
 /// ## 语法
+/// ##
 /// `if let Some(x) = opt && x > 0 { ... }`
 ///
 /// ## 之前
+/// ## 's before
 /// 需要使用嵌套 `if let` 或 `match`。
+/// `if let` or `match`。
 ///
 /// ## 现在
+/// ## present
 /// 可以直接链式组合多个 let 条件和布尔条件。
+/// can combination let condition and condition 。
 ///
 /// ## 限制
+/// ##
 /// - 仅在 Edition 2024 中可用
+/// - in Edition 2024 in
 /// - 不支持 `||`（或）与 `let` 混合（因语义复杂）
+/// - `||`（or ）and `let` （because complex ）
 pub fn process_option_chain(opt: Option<i32>) -> Option<i32> {
     if let Some(x) = opt
         && x > 0

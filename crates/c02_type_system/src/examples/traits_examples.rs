@@ -1,14 +1,24 @@
 //! 特征系统示例代码
-//!
+//! system example
 //! 本文件包含了特征系统的各种示例，包括：
+//! this system example ，：
 //! - 特征定义与实现
+//! - definition and
 //! - 特征对象和动态分发
+//! - to and
 //! - 对象安全规则
+//! - to rule
+//! - to象安全rule
+//! - torule
 //! - 高级特性（关联类型、GATs、关联常量）
+//! - feature （associated type 、GATs、associated constant ）
+//! - 高级feature（associated type、GATs、associated constant）
 //! - 常见设计模式
+//! - design
 use std::fmt::{Debug, Display};
 
 /// 特征基础示例
+/// foundation example
 pub fn trait_basics_examples() {
     println!("=== 特征基础示例 ===");
 
@@ -31,6 +41,7 @@ pub fn trait_basics_examples() {
 }
 
 /// 特征对象示例
+/// to example
 pub fn trait_object_examples() {
     println!("\n=== 特征对象示例 ===");
 
@@ -44,6 +55,7 @@ pub fn trait_object_examples() {
 }
 
 /// 高级特征特性示例
+/// feature example
 pub fn advanced_traits_examples() {
     println!("\n=== 高级特征特性示例 ===");
 
@@ -71,6 +83,7 @@ pub fn advanced_traits_examples() {
 }
 
 /// 标准库特征示例
+/// standard library example
 pub fn std_traits_examples() {
     println!("\n=== 标准库特征示例 ===");
 
@@ -101,6 +114,7 @@ pub fn std_traits_examples() {
 }
 
 /// 设计模式示例
+/// design example
 pub fn design_patterns_examples() {
     println!("\n=== 设计模式示例 ===");
 
@@ -135,6 +149,7 @@ pub fn design_patterns_examples() {
 }
 
 /// 性能考虑示例
+/// performance example
 pub fn performance_examples() {
     println!("\n=== 性能考虑示例 ===");
 
@@ -156,6 +171,7 @@ pub fn performance_examples() {
 // ============================================================================
 
 /// 基本形状特征
+/// this
 #[allow(dead_code)]
 #[allow(unused_variables)]
 trait Shape {
@@ -180,6 +196,7 @@ trait Iterator {
 }
 
 /// 流式迭代器特征
+/// stream
 #[allow(dead_code)]
 #[allow(unused_variables)]
 trait StreamingIterator {
@@ -191,6 +208,7 @@ trait StreamingIterator {
 }
 
 /// 常量特征
+/// constant
 #[allow(dead_code)]
 #[allow(unused_variables)]
 trait Constants {
@@ -257,6 +275,7 @@ impl Processor for Trimmer {
 }
 
 /// 大写转换器
+/// conversion
 #[allow(dead_code)]
 #[allow(unused_variables)]
 struct Uppercaser;
@@ -284,6 +303,7 @@ impl Iterator for Counter {
 }
 
 /// 字符串流
+/// stream
 #[allow(dead_code)]
 #[allow(unused_variables)]
 struct StringStream {
@@ -309,6 +329,8 @@ impl StreamingIterator for StringStream {
 }
 
 /// 我的类型
+/// type
+/// 我type
 #[allow(dead_code)]
 #[allow(unused_variables)]
 struct MyType;
@@ -319,6 +341,7 @@ impl Constants for MyType {
 }
 
 /// 点
+/// point
 #[allow(dead_code)]
 #[derive(Debug, Copy, Clone)]
 #[allow(unused_variables)]
@@ -406,12 +429,14 @@ impl PersonBuilder {
 }
 
 /// 排序策略特征
+/// ordering strategy
 #[allow(dead_code)]
 trait SortStrategy<T> {
     fn sort(&self, items: &mut [T]);
 }
 
 /// 快速排序
+/// quick sort
 #[allow(dead_code)]
 struct QuickSort;
 
@@ -422,6 +447,7 @@ impl<T: Ord> SortStrategy<T> for QuickSort {
 }
 
 /// 排序器
+/// ordering
 #[allow(dead_code)]
 struct Sorter<T> {
     strategy: Box<dyn SortStrategy<T>>,
@@ -460,6 +486,7 @@ impl Logger for FileLogger {
 }
 
 /// 外部日志器
+/// outside
 #[allow(dead_code)]
 struct ExternalLogger;
 
@@ -470,6 +497,8 @@ impl ExternalLogger {
 }
 
 /// 日志器适配器
+/// adapter
+/// 日志器adapter
 #[allow(dead_code)]
 struct LoggerAdapter {
     external_logger: ExternalLogger,
@@ -486,17 +515,20 @@ impl Logger for LoggerAdapter {
 // ============================================================================
 
 /// 泛型处理器
+/// generic
 fn process_generic<T: std::fmt::Display>(item: T) -> String {
     format!("Processed: {}", item)
 }
 
 /// 特征对象处理器
+/// to
 fn process_trait_object(processor: Box<dyn Processor>, data: Vec<i32>) -> String {
     let sum: i32 = data.iter().sum();
     processor.process(&sum.to_string())
 }
 
 /// 求和处理器
+/// and
 #[allow(dead_code)]
 struct SumProcessor;
 
@@ -507,6 +539,7 @@ impl Processor for SumProcessor {
 }
 
 /// 使用关联常量
+/// associated constant
 fn use_constants<T: Constants>() {
     println!(
         "Max: {}, Min: {}, Default: {}",
@@ -517,6 +550,7 @@ fn use_constants<T: Constants>() {
 }
 
 /// 运行所有特征示例
+/// Run all example
 pub fn run_all_examples() {
     println!("Rust 特征系统示例");
     println!("==================");

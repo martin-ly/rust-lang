@@ -14,12 +14,12 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Web 应用开发场景树](#web-应用开发场景树)
-  - [📑 目录](#目录)
-  - [🌳 Web 应用场景树](#web-应用场景树)
-  - [📊 RESTful API 场景](#restful-api-场景)
+  - [📑 目录](#-目录)
+  - [🌳 Web 应用场景树](#-web-应用场景树)
+  - [📊 RESTful API 场景](#-restful-api-场景)
     - [场景 1: CRUD API](#场景-1-crud-api)
-  - [🔗 相关文档](#相关文档)
-  - **状态**: ✅ 100% 完成
+  - [🔗 相关文档](#-相关文档)
+  - [**状态**: ✅ 100% 完成](#状态--100-完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -124,7 +124,7 @@ async fn get_user(Path(id): Path<Uuid>) -> Json<User> {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [Axum 深度解析](../ecosystem/web_frameworks/10_axum_deep_dive.md)
+- [Axum 深度解析](../../../knowledge/06_ecosystem/deep_dives/01_axum_deep_dive.md)
 
 ---
 

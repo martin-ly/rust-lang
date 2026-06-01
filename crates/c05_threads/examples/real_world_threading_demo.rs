@@ -1,13 +1,20 @@
 //! 真实世界线程编程示例
+//! real thread example
 #![allow(clippy::type_complexity)]
 #![allow(clippy::new_without_default)]
 //!
 //! 本示例展示了在实际项目中常见的线程编程场景：
+//! this example in actual project in thread scenario ：
 //! - 多线程文件处理
+//! - thread
 //! - 并发网络请求
+//! - concurrency network
 //! - 实时数据处理
+//! -
 //! - 任务调度系统
+//! - task system
 //! - 资源池管理
+//! -
 use rayon::prelude::*;
 use std::collections::VecDeque;
 use std::sync::mpsc;
@@ -19,6 +26,8 @@ use std::thread;
 use std::time::{Duration, Instant};
 
 /// 文件处理任务
+/// task
+/// 文件Handletask
 #[allow(dead_code)]
 #[derive(Debug, Clone)]
 pub struct FileTask {
@@ -40,6 +49,7 @@ impl FileTask {
 }
 
 /// 多线程文件处理器
+/// thread
 #[allow(dead_code)]
 pub struct MultiThreadFileProcessor {
     workers: Vec<thread::JoinHandle<()>>,
@@ -122,6 +132,7 @@ impl MultiThreadFileProcessor {
 }
 
 /// 并发网络请求处理器
+/// concurrency network
 #[allow(dead_code)]
 pub struct ConcurrentHttpClient {
     max_concurrent: usize,
@@ -244,6 +255,7 @@ impl RealTimeDataProcessor {
 }
 
 /// 任务调度器
+/// task
 #[allow(dead_code)]
 pub struct TaskScheduler {
     tasks: Arc<Mutex<VecDeque<(Instant, Box<dyn FnOnce() + Send + 'static>)>>>,
@@ -373,6 +385,7 @@ impl<T> ResourcePool<T> {
 }
 
 /// 演示多线程文件处理
+/// demonstration thread
 #[allow(dead_code)]
 fn demo_file_processing() {
     println!("=== 多线程文件处理演示 ===");
@@ -404,6 +417,7 @@ fn demo_file_processing() {
 }
 
 /// 演示并发网络请求
+/// demonstration concurrency network
 #[allow(dead_code)]
 fn demo_concurrent_requests() {
     println!("=== 并发网络请求演示 ===");
@@ -442,6 +456,8 @@ fn demo_concurrent_requests() {
 }
 
 /// 演示实时数据处理
+/// demonstration
+/// Demonstration of实时数据Handle
 #[allow(dead_code)]
 fn demo_real_time_processing() {
     println!("=== 实时数据处理演示 ===");
@@ -463,6 +479,7 @@ fn demo_real_time_processing() {
 }
 
 /// 演示任务调度
+/// demonstration task
 #[allow(dead_code)]
 fn demo_task_scheduling() {
     println!("=== 任务调度演示 ===");
@@ -490,6 +507,8 @@ fn demo_task_scheduling() {
 }
 
 /// 演示资源池管理
+/// demonstration
+/// Demonstration of资源池管理
 #[allow(dead_code)]
 fn demo_resource_pool() {
     println!("=== 资源池管理演示 ===");

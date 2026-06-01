@@ -1,10 +1,14 @@
 //! Rust 1.90 Edition 2024 新特性实现 (历史版本)
+//! Rust 1.90 Edition 2024 feature (this )
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//! ⚠️ **this ** - this as reference
 //!
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //!
 //! 这个模块展示了如何在 c07_process 项目中使用最新的 Rust 1.90 特性
+//! module in c07_process project in Rust 1.90 feature
 use crate::error::{ProcessError, ProcessResult};
 use crate::types::{ProcessConfig, ProcessInfo};
 use std::collections::HashMap;
@@ -12,6 +16,7 @@ use std::sync::{Arc, Mutex};
 use std::time::Duration;
 
 /// Rust 1.90 新特性演示和实现
+/// Rust 1.90 feature demonstration and
 #[allow(unused_variables)]
 #[allow(dead_code)]
 pub struct Rust190Features {
@@ -30,6 +35,7 @@ macro_rules! process_error {
 
 impl Rust190Features {
     /// 创建新的特性演示实例
+    /// feature demonstration
     #[allow(dead_code)]
     pub fn new() -> Self {
         Self {
@@ -39,8 +45,10 @@ impl Rust190Features {
     }
 
     /// 演示异步闭包特性
+    /// demonstration async feature
     ///
     /// Rust 1.90 引入了异步闭包，允许在闭包中使用 async/await
+    /// Rust 1.90 async ，in in async/await
     #[allow(dead_code)]
     pub async fn demonstrate_async_closures(&self) -> ProcessResult<()> {
         println!("🚀 演示异步闭包特性");
@@ -79,8 +87,10 @@ impl Rust190Features {
     }
 
     /// 演示改进的模式匹配
+    /// demonstration
     ///
     /// Rust 1.90 改进了模式匹配的精确性和性能
+    /// Rust 1.90 and performance
     #[allow(dead_code)]
     pub fn demonstrate_improved_pattern_matching(&self, result: ProcessResult<u32>) {
         println!("🔍 演示改进的模式匹配");
@@ -115,8 +125,10 @@ impl Rust190Features {
     }
 
     /// 演示改进的迭代器
+    /// demonstration
     ///
     /// Rust 1.90 提供了更高效的迭代器方法
+    /// Rust 1.90 efficient method
     #[allow(dead_code)]
     pub fn demonstrate_improved_iterators(&self, configs: Vec<ProcessConfig>) -> Vec<u32> {
         println!("🔄 演示改进的迭代器");
@@ -139,8 +151,10 @@ impl Rust190Features {
     }
 
     /// 演示改进的错误处理
+    /// demonstration error handling
     ///
     /// Rust 1.90 提供了更好的错误处理机制
+    /// Rust 1.90 error handling mechanism
     #[allow(dead_code)]
     pub fn demonstrate_improved_error_handling(&self) -> ProcessResult<()> {
         println!("🛠️ 演示改进的错误处理");
@@ -166,8 +180,10 @@ impl Rust190Features {
     }
 
     /// 演示新的类型推断
+    /// demonstration type infer
     ///
     /// Rust 1.90 改进了类型推断能力
+    /// Rust 1.90 type infer
     #[allow(dead_code)]
     pub fn demonstrate_improved_type_inference(&self) {
         println!("🧠 演示改进的类型推断");
@@ -186,8 +202,10 @@ impl Rust190Features {
     }
 
     /// 演示改进的宏系统
+    /// demonstration system
     ///
     /// Rust 1.90 提供了更强大的宏功能
+    /// Rust 1.90 functionality
     #[allow(dead_code)]
     pub fn demonstrate_improved_macros(&self) {
         println!("🔧 演示改进的宏系统");
@@ -201,8 +219,10 @@ impl Rust190Features {
     }
 
     /// 演示新的标准库特性
+    /// demonstration standard library feature
     ///
     /// Rust 1.90 标准库的新特性
+    /// Rust 1.90 standard library feature
     #[allow(dead_code)]
     pub fn demonstrate_std_library_features(&self) {
         println!("📚 演示标准库新特性");
@@ -224,8 +244,10 @@ impl Rust190Features {
     }
 
     /// 演示改进的并发特性
+    /// demonstration concurrency feature
     ///
     /// Rust 1.90 的并发改进
+    /// Rust 1.90 concurrency
     #[allow(dead_code)]
     pub async fn demonstrate_improved_concurrency(&self) -> ProcessResult<()> {
         println!("⚡ 演示改进的并发特性");
@@ -300,8 +322,10 @@ impl Default for Rust190Features {
 // 宏已上移至文件顶部
 
 /// 异步任务演示
+/// async task demonstration
 ///
 /// 展示如何使用 Rust 1.90 的异步特性
+/// Rust 1.90 async feature
 #[allow(dead_code)]
 pub struct AsyncTaskDemo {
     task_id: u64,
@@ -329,6 +353,7 @@ impl AsyncTaskDemo {
     }
 
     /// 异步执行任务
+    /// async task
     #[allow(dead_code)]
     pub async fn execute(&mut self) -> ProcessResult<()> {
         println!("🚀 开始执行任务: {}", self.name);

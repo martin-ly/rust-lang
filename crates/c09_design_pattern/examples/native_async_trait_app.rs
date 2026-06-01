@@ -1,17 +1,17 @@
 //! Rust 1.90 原生 async trait 完整应用示例
-//!
+//! Rust 1.90 async trait complete application example
 //! 本示例展示：
+//! this example ：
 //! 1. 原生 async trait 方法（无需 async-trait 宏）
+//! 1. 原生 async trait method（无需 async-trait 宏）
 //! 2. 多种异步数据源的统一接口
+//! 2. async
 //! 3. 异步中间件链模式
+//! 3. async middleware
 //! 4. 异步重试和超时策略
-//! 5. 与 async-trait 宏的性能对比
-//!
+//! 4. async and strategy
 //! ## 设计说明
-//!
-//! 带有 async 方法的 trait 不是 dyn-compatible（对象安全），因为异步方法返回
-//! 的 impl Future 类型无法用于 trait 对象。本示例使用枚举包装不同类型的实现，
-//! 这是 Rust 中处理此类情况的标准做法。
+//! ## design explain
 use std::collections::HashMap;
 use std::future::Future;
 use std::pin::Pin;
@@ -23,20 +23,26 @@ use std::time::{Duration, Instant};
 // ============================================================================
 
 /// 异步数据源 trait
+/// async trait
 #[allow(async_fn_in_trait)]
 pub trait AsyncDataSource {
     /// 数据类型
+    /// type
     type Data;
     /// 错误类型
+    /// error type
     type Error;
 
     /// 异步读取数据
+    /// async
     async fn read(&self) -> Result<Self::Data, Self::Error>;
 
     /// 异步写入数据
+    /// async
     async fn write(&mut self, data: &Self::Data) -> Result<(), Self::Error>;
 
     /// 异步健康检查
+    /// async health check
     async fn health_check(&self) -> bool;
 
     /// 获取元信息
@@ -232,24 +238,31 @@ impl AsyncDataSource for DatabaseDataSource {
 // ============================================================================
 
 /// 异步中间件
+/// async middleware
 #[allow(async_fn_in_trait)]
 pub trait AsyncMiddleware {
     /// 执行类型
+    /// type
     type Context;
     /// 错误类型
+    /// error type
     type Error;
 
     /// 前置处理
+    /// before
     async fn before(&self, context: &mut Self::Context) -> Result<(), Self::Error>;
 
     /// 后置处理
+    /// after
     async fn after(&self, context: &mut Self::Context) -> Result<(), Self::Error>;
 
     /// 中间件名称
+    /// middleware
     fn name(&self) -> &str;
 }
 
 /// 请求上下文
+/// on under
 #[derive(Debug)]
 pub struct RequestContext {
     pub data: String,
@@ -272,6 +285,8 @@ impl RequestContext {
 }
 
 /// 日志中间件
+/// middleware
+/// 日志middleware
 pub struct LoggingMiddleware {
     name: String,
 }
@@ -313,6 +328,7 @@ impl AsyncMiddleware for LoggingMiddleware {
 }
 
 /// 验证中间件
+/// middleware
 pub struct ValidationMiddleware {
     min_length: usize,
 }
@@ -349,6 +365,7 @@ impl AsyncMiddleware for ValidationMiddleware {
 }
 
 /// 转换中间件
+/// conversion middleware
 pub struct TransformMiddleware {
     to_uppercase: bool,
 }
@@ -384,7 +401,7 @@ impl AsyncMiddleware for TransformMiddleware {
 // 中间件链 - 使用枚举避免 trait object 问题
 // ============================================================================
 
-/// 中间件枚举（因为 async trait 不支持 dyn trait）
+/// middlewareenum（because async trait 不Supports dyn trait）
 pub enum MiddlewareType {
     Logging(LoggingMiddleware),
     Validation(ValidationMiddleware),
@@ -475,6 +492,7 @@ impl MiddlewareChain {
 #[allow(async_fn_in_trait)]
 pub trait AsyncRetryStrategy {
     /// 是否应该重试
+    /// should
     async fn should_retry(&self, attempt: usize, error: &str) -> bool;
 
     /// 获取重试延迟
@@ -482,6 +500,7 @@ pub trait AsyncRetryStrategy {
 }
 
 /// 指数退避策略
+/// index strategy
 pub struct ExponentialBackoff {
     max_retries: usize,
     base_delay_ms: u64,
@@ -508,6 +527,7 @@ impl AsyncRetryStrategy for ExponentialBackoff {
 }
 
 /// 带重试的异步执行
+/// async
 pub async fn with_retry<F, Fut, T, E, S>(operation: F, strategy: &S) -> Result<T, E>
 where
     F: Fn() -> Fut,

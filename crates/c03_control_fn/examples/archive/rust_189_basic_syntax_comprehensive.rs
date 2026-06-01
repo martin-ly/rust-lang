@@ -1,50 +1,58 @@
 //! # Rust 1.89 特性示例 (历史版本)
-//!
+//! # Rust 1.89 feature example (this )
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//!
+//! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features_demo.rs`
-//!
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features_demo.rs`
 //! ## 版本历史说明
-//!
-//! 本文件展示 Rust 1.89 版本的特性，当前项目已升级到 Rust 1.92.0。
-//!
+//! ## this explain
 //! ### Rust 1.92.0 主要改进
-//!
-//! - **语言特性**: MaybeUninit 文档化、联合体原始引用、关联项多边界等
-//! - **标准库**: NonZero::div_ceil、rotate_right、Location::file_as_c_str
+//! ### Rust 1.92.0 main
 //! - **性能优化**: 迭代器方法特化、改进的编译优化
-//!
+//! - **performance optimization **: method 、optimization
 //! ### 迁移建议
-//!
+//! ###
 //! 1. 更新 Cargo.toml: `rust-version = "1.92"`
-//! 2. 参考 `examples/rust_192_features_demo.rs` 了解最新特性示例
-//! 3. 查看 `docs/RUST_192_CONTROL_FLOW_IMPROVEMENTS.md` 了解完整改进
-//!
 //! 参考:
-//! - [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/)
+//! reference :
 //! - [历史版本: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
-//!
-//! ---
+//! - [历史版this: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 //!
 //! # Rust 1.89 基础语法综合示例
-//!
-//! 本示例展示了 Rust 1.89 版本中基础语法的所有重要特性，包括：
+//! # Rust 1.89 foundation synthesize example
 //! - 变量声明与绑定
+//! - variable and
 //! - 数据类型与类型推断
+//! - type and type infer
+//! - 数据typeandtype inference
 //! - 控制流结构
+//! - stream structure
+//! - 控制streamstructure
 //! - 函数定义与调用
+//! - function definition and
 //! - 表达式与语句
+//! - express and
 //! - 模式匹配
+//! -
 //! - 错误处理
+//! - error handling
 //! - let_chains 新特性
+//! - let_chains 新feature
 //! - cfg_boolean_literals 新特性
+//! - cfg_boolean_literals 新feature
 //! - 增强的模式匹配
+//! -
 //! - 改进的类型推断
+//! - type infer
+//! - 改进type inference
 //! - 新的控制流特性
+//! - stream feature
+//! - 新控制streamfeature
 //! - 改进的错误处理
-//!
+//! - error handling
+//! - 改进error handling
 //! 运行方式：
-//! ```bash
+//! Run way ：
 //! cargo run --example rust_189_basic_syntax_comprehensive
 //! ```
 use c03_control_fn::*;
@@ -54,6 +62,7 @@ use std::thread;
 use std::time::Duration;
 
 /// 主函数 - 运行所有基础语法演示
+/// Main function - Run all foundation demonstration
 fn main() {
     println!("🚀 Rust 1.89 基础语法综合示例");
     println!("=====================================");
@@ -73,6 +82,7 @@ fn main() {
 }
 
 /// 运行基础语法演示
+/// Run foundation demonstration
 fn run_basic_syntax_demos() {
     println!("📚 第一部分：基础语法演示");
     println!("==========================");
@@ -108,6 +118,7 @@ fn run_basic_syntax_demos() {
 }
 
 /// 运行 Rust 1.89 新特性演示
+/// Run Rust 1.89 feature demonstration
 fn run_rust_189_demos() {
     println!("\n\n🆕 第二部分：Rust 1.89 新特性演示");
     println!("==================================");
@@ -145,6 +156,7 @@ fn run_rust_189_demos() {
 }
 
 /// 运行综合应用示例
+/// Run synthesize application example
 fn run_comprehensive_examples() {
     println!("\n\n🎯 第三部分：综合应用示例");
     println!("==========================");
@@ -166,8 +178,7 @@ fn run_comprehensive_examples() {
 }
 
 /// 数据处理示例
-/// 
-/// 展示如何使用 Rust 1.89 的基础语法进行数据处理
+/// example
 fn data_processing_example() {
     println!("\n📊 数据处理示例");
     println!("================");
@@ -215,8 +226,7 @@ fn data_processing_example() {
 }
 
 /// 异步编程示例
-/// 
-/// 展示如何使用 Rust 1.89 的基础语法进行异步编程
+/// async example
 fn async_programming_example() {
     println!("\n⚡ 异步编程示例");
     println!("================");
@@ -245,8 +255,7 @@ fn async_programming_example() {
 }
 
 /// 错误处理示例
-/// 
-/// 展示如何使用 Rust 1.89 的基础语法进行错误处理
+/// error handling example
 fn error_handling_example() {
     println!("\n🛡️ 错误处理示例");
     println!("================");
@@ -284,8 +293,7 @@ fn error_handling_example() {
 }
 
 /// 性能优化示例
-/// 
-/// 展示如何使用 Rust 1.89 的基础语法进行性能优化
+/// performance optimization example
 fn performance_optimization_example() {
     println!("\n🚀 性能优化示例");
     println!("================");
@@ -308,8 +316,7 @@ fn performance_optimization_example() {
 }
 
 /// 并发编程示例
-/// 
-/// 展示如何使用 Rust 1.89 的基础语法进行并发编程
+/// concurrency example
 fn concurrent_programming_example() {
     println!("\n🔄 并发编程示例");
     println!("================");
@@ -354,6 +361,7 @@ fn concurrent_programming_example() {
 // 辅助数据结构和函数
 
 /// 用户数据结构
+/// User data structure
 #[derive(Debug, Clone)]
 struct UserData {
     name: String,
@@ -372,6 +380,7 @@ impl UserData {
 }
 
 /// 异步操作结构
+/// async structure
 #[derive(Debug)]
 struct AsyncOperation {
     name: String,
@@ -388,6 +397,7 @@ impl AsyncOperation {
 }
 
 /// 异步结果结构
+/// async result structure
 #[derive(Debug)]
 struct AsyncResult {
     is_success: bool,
@@ -395,6 +405,7 @@ struct AsyncResult {
 }
 
 /// 复杂操作结构
+/// complex structure
 #[derive(Debug)]
 struct ComplexOperation {
     name: String,
@@ -426,6 +437,7 @@ impl ComplexOperation {
 }
 
 /// 共享计数器结构
+/// structure
 #[derive(Debug)]
 struct SharedCounter {
     count: std::sync::Mutex<i32>,
@@ -449,6 +461,7 @@ impl SharedCounter {
 }
 
 /// 异步任务结构
+/// async task structure
 #[derive(Debug)]
 struct AsyncTask {
     name: String,
@@ -471,6 +484,7 @@ impl AsyncTask {
 }
 
 /// 模拟异步操作
+/// async
 fn simulate_async_operation(name: &str, duration_ms: u64) -> Option<String> {
     // 模拟异步操作
     thread::sleep(Duration::from_millis(duration_ms));
@@ -478,6 +492,7 @@ fn simulate_async_operation(name: &str, duration_ms: u64) -> Option<String> {
 }
 
 /// 处理异步结果
+/// async result
 fn process_async_result(result: String) -> Option<AsyncResult> {
     Some(AsyncResult {
         is_success: true,
@@ -486,6 +501,7 @@ fn process_async_result(result: String) -> Option<AsyncResult> {
 }
 
 /// 优化数据处理
+/// optimization
 fn process_data_optimized(data: &[i32]) -> Vec<i32> {
     data.iter()
         .filter(|&&x| x % 2 == 0)
@@ -494,6 +510,7 @@ fn process_data_optimized(data: &[i32]) -> Vec<i32> {
 }
 
 /// 编译时计算
+/// compile-time
 const fn calculate_at_compile_time() -> i32 {
     42 * 2 + 16
 }

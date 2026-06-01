@@ -1,10 +1,15 @@
 //! 计数信号量（基于通道/Condvar 简化实现）
+//! semaphore （channel /Condvar ）
+//! 计数semaphore（Based onchannel/Condvar 简化Implementation of）
 //! - 限流并发度
+//! - stream concurrency
 //! - 异步无依赖，纯 std 同步原语
+//! - async ， std synchronous
 use std::sync::{Arc, Condvar, Mutex};
 use std::thread;
 
 /// 一个简单的计数信号量实现（阻塞版）
+/// simple semaphore （）
 #[derive(Clone)]
 pub struct Semaphore {
     inner: Arc<(Mutex<usize>, Condvar)>,
@@ -35,6 +40,7 @@ impl Semaphore {
 }
 
 /// 使用信号量限制并发：并行下载/计算的最大并发数
+/// semaphore concurrency ：parallelism under /maximum concurrency
 pub fn throttle_concurrency(tasks: usize, max_parallel: usize) -> usize {
     let sem = Semaphore::new(max_parallel);
     let mut handles = Vec::new();

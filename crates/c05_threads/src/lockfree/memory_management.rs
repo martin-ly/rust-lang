@@ -1,33 +1,31 @@
 //! 无锁内存管理
-//!
+//! lock-free memory management
 //! 本模块展示无锁数据结构中常见的内存管理技术：
-//! - Epoch-Based Reclamation (EBR)
-//! - Hazard Pointers
+//! This module demonstrates lock-free data structure in memory technique ：
 //! - 引用计数
-//!
+//! - reference counting
 //! ## Epoch-Based Reclamation
 //!
-//! EBR 是一种高效的内存回收机制，由 `crossbeam-epoch` 实现。
-//! 它将操作分为三个阶段（epoch），确保没有线程访问旧 epoch 的内存后安全释放。
-//!
 //! ## 使用 crossbeam-epoch
-//!
 //! ```ignore
 //! use crossbeam_epoch::{self, Atomic, Owned, Shared, Guard};
 //!
 //! let guard = &crossbeam_epoch::pin();
 //! // 在 guard 保护下安全地访问无锁数据结构
-//! ```
+//! // in guard under lock-free data structure
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 /// 全局 Epoch 计数器
-///
+/// global Epoch
+/// global Epoch 计数器
 /// 用于协调所有线程的内存回收进度。
+/// all thread memory 。
 static GLOBAL_EPOCH: AtomicUsize = AtomicUsize::new(0);
 
 /// Epoch-Based Reclamation 管理器
-///
 /// 简化版的 EBR 管理器，展示核心概念。
+/// EBR ，core concept 。
+/// 简化版 EBR 管理器，displaycoreconcept。
 pub struct EpochManager {
     local_epoch: AtomicUsize,
 }
@@ -39,7 +37,6 @@ impl Default for EpochManager {
 }
 
 impl EpochManager {
-    /// 创建新的 Epoch 管理器
     pub const fn new() -> Self {
         Self {
             local_epoch: AtomicUsize::new(0),
@@ -47,8 +44,10 @@ impl EpochManager {
     }
 
     /// 进入当前 epoch（pin）
-    ///
+    /// when before epoch（pin）
+    /// 进入whenbefore epoch（pin）
     /// 线程在访问共享数据前必须 pin，防止其访问的内存被回收。
+    /// thread in before must pin，its memory is 。
     pub fn pin(&self) -> usize {
         let global = GLOBAL_EPOCH.load(Ordering::Acquire);
         self.local_epoch.store(global, Ordering::Release);
@@ -56,15 +55,16 @@ impl EpochManager {
     }
 
     /// 解除 pin
-    ///
+    /// pin
     /// 线程完成共享数据访问后应 unpin，允许内存回收。
+    /// thread after unpin，memory 。
     pub fn unpin(&self) {
         self.local_epoch.store(usize::MAX, Ordering::Release);
     }
 
     /// 尝试推进全局 epoch
-    ///
-    /// 当所有线程都进入新 epoch 时，可以安全回收旧 epoch 的内存。
+    /// global epoch
+    /// 尝试推进global epoch
     pub fn try_advance_epoch(&self) -> bool {
         let current = GLOBAL_EPOCH.load(Ordering::Acquire);
         // 简化实现：直接推进 epoch
@@ -79,21 +79,18 @@ impl EpochManager {
     }
 
     /// 获取当前全局 epoch
+    /// when before global epoch
     pub fn current_epoch() -> usize {
         GLOBAL_EPOCH.load(Ordering::Acquire)
     }
 }
 
-/// 基于 Epoch 的内存回收队列
-///
-/// 将待释放的内存按 epoch 分批管理。
 pub struct EpochReclaimer<T> {
     epochs: [Vec<T>; 3],
     current: AtomicUsize,
 }
 
 impl<T> EpochReclaimer<T> {
-    /// 创建新的 Epoch 回收器
     pub fn new() -> Self {
         Self {
             epochs: [Vec::new(), Vec::new(), Vec::new()],
@@ -101,15 +98,13 @@ impl<T> EpochReclaimer<T> {
         }
     }
 
-    /// 将数据加入当前 epoch 的退役列表
     pub fn defer(&mut self, data: T) {
         let idx = self.current.load(Ordering::Relaxed) % 3;
         self.epochs[idx].push(data);
     }
 
-    /// 推进 epoch，返回可以安全释放的数据
-    ///
     /// 三 epoch 轮转：当前 → 上一批次 → 上上批次（可回收）。
+    /// epoch ：when before → on → on on （）。
     pub fn advance(&mut self) -> Vec<T> {
         let current = self.current.load(Ordering::Relaxed) % 3;
         // 返回上上 epoch 的数据（确保所有线程都已离开）
@@ -126,8 +121,9 @@ impl<T> Default for EpochReclaimer<T> {
 }
 
 /// 引用计数节点包装器
-///
+/// reference counting node
 /// 使用引用计数管理共享节点的生命周期。
+/// reference counting node lifetime 。
 pub struct ArcNode<T> {
     data: T,
     ref_count: AtomicUsize,
@@ -135,6 +131,7 @@ pub struct ArcNode<T> {
 
 impl<T> ArcNode<T> {
     /// 创建新的引用计数节点
+    /// reference counting node
     pub fn new(data: T) -> Self {
         Self {
             data,
@@ -143,22 +140,28 @@ impl<T> ArcNode<T> {
     }
 
     /// 增加引用计数
+    /// reference counting
+    /// 增加reference counting
     pub fn acquire(&self) {
         self.ref_count.fetch_add(1, Ordering::Relaxed);
     }
 
     /// 减少引用计数，返回是否需要释放
+    /// reference counting ，
     pub fn release(&self) -> bool {
         self.ref_count.fetch_sub(1, Ordering::Release) == 1
     }
 
     /// 获取数据引用
+    /// reference
+    /// Get数据reference
     pub fn data(&self) -> &T {
         &self.data
     }
 }
 
 /// 内存管理策略枚举
+/// memory strategy enum
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum MemoryStrategy {
     /// Epoch-Based Reclamation
@@ -170,6 +173,7 @@ pub enum MemoryStrategy {
 }
 
 /// 获取内存管理策略说明
+/// memory strategy explain
 pub fn strategy_description(strategy: MemoryStrategy) -> &'static str {
     match strategy {
         MemoryStrategy::EpochReclamation => {

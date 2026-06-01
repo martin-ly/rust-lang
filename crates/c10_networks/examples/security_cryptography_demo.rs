@@ -1,10 +1,11 @@
 //! # 安全密码学基础演示 —— `ring`
-//!
+//! # foundation demonstration —— `ring`
 //! 本示例使用 [`ring`](https://docs.rs/ring) 库演示现代密码学原语，
+//! this example [`ring`](https://docs.rs/ring) library demonstration ，
 //! 覆盖哈希、HMAC、AEAD 加密和数字签名。
-//!
+//! 、HMAC、AEAD and 。
 //! ## 运行
-//!
+//! ## Run
 //! ```bash
 //! cargo run -p c10_networks --example security_cryptography_demo
 //! ```
@@ -30,6 +31,8 @@ fn main() {
 }
 
 /// ## 演示 1: 哈希函数 (SHA-256 / SHA-384)
+/// ## demonstration 1: function (SHA-256 / SHA-384)
+/// ## Demonstration of 1: 哈希function (SHA-256 / SHA-384)
 fn demo_01_hashing() {
     println!("📦 演示 1: 哈希函数");
     println!("-------------------");
@@ -78,6 +81,8 @@ fn demo_02_hmac() {
 }
 
 /// ## 演示 3: AEAD 对称加密 (AES-128-GCM)
+/// ## demonstration 3: AEAD to (AES-128-GCM)
+/// ## Demonstration of 3: AEAD to称Encrypt (AES-128-GCM)
 fn demo_03_aead_encryption() {
     println!("🔒 演示 3: AES-128-GCM 认证加密");
     println!("---------------------------------");
@@ -128,6 +133,8 @@ fn demo_03_aead_encryption() {
 }
 
 /// ## 演示 4: 数字签名 (Ed25519)
+/// ## demonstration 4: (Ed25519)
+/// ## Demonstration of 4: 数字签名 (Ed25519)
 fn demo_04_digital_signature() {
     println!("✍️  演示 4: Ed25519 数字签名");
     println!("-----------------------------");

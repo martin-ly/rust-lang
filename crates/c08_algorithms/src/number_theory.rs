@@ -1,4 +1,5 @@
 //! 数论基础：快速幂、扩展欧几里得、模逆、Miller–Rabin、Pollard Rho
+//! foundation ：fast 、、、Miller–Rabin、Pollard Rho
 pub fn mod_pow(mut a: u128, mut e: u128, m: u128) -> u128 {
     let mut r = 1u128;
     a %= m;

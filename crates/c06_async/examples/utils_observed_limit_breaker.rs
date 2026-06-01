@@ -1,11 +1,10 @@
 //! 运行方式：
-//! cargo run -p c06_async --example utils_observed_limit_breaker
+//! Run way ：
 //!
 //! 功能：
-//! - 使用 `SimpleTokenBucket` 进行限速
-//! - 使用 `CircuitBreaker` 进行熔断（含半开探测）
-//! - 使用 `ExecStrategyBuilder` 组合重试/退避/超时策略
+//! functionality ：
 //! - 暴露 Prometheus 指标：`/metrics`（默认 127.0.0.1:9899）
+//! - expose Prometheus indicator：`/metrics`（默认 127.0.0.1:9899）
 use std::sync::Arc;
 use std::time::Duration;
 

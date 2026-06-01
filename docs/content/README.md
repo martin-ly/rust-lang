@@ -44,21 +44,21 @@ mindmap
 ```text
 content/
 ├── README.md                 # 本文件
-├── emerging/                 # 前沿特性跟踪
-│   ├── README.md
-│   ├── 10_rust_1_95_preview.md  (历史预览文档，内容已过时)
-│   ├── 10_generic_const_exprs.md
-│   └── 10_async_closures.md
-├── ecosystem/                # 生态系统深度
-│   ├── README.md
-│   ├── web_frameworks/
-│   │   └── 10_axum_deep_dive.md
-│   ├── database/
-│   └── async_runtimes/
-├── production/               # 生产实践
+├── emerging/                 # 前沿特性跟踪 (内容已迁移至 knowledge/06_ecosystem/emerging/)
 │   └── README.md
-└── academic/                 # 学术研究
-    └── README.md
+├── ecosystem/                # 生态系统深度 (内容已迁移至 knowledge/06_ecosystem/)
+│   └── README.md
+├── production/               # 生产实践 (内容已迁移至 knowledge/06_ecosystem/deployment/)
+│   └── README.md
+├── academic/                 # 学术研究
+│   ├── README.md
+│   ├── 10_coq_formalization_guide.md
+│   ├── 10_tree_borrows_authoritative_guide.md
+│   └── 10_tree_borrows_guide.md
+├── representations/          # 知识表征
+│   └── 10_knowledge_representation_matrix.md
+└── scenarios/                # 应用场景
+    └── 10_web_application_scenarios.md
 ```
 
 ---
@@ -69,11 +69,13 @@ content/
 
 | 类别 | 文档数 | 代码示例 | 完成度 |
 |------|--------|----------|--------|
-| emerging | 4 | 15+ | 70% |
-| ecosystem | 2 | 10+ | 40% |
-| production | 1 | 8+ | 60% |
-| academic | 1 | 5+ | 50% |
-| **总计** | **8** | **38+** | **55%** |
+| emerging | 1 | 0 | 归档 |
+| ecosystem | 1 | 0 | 归档 |
+| production | 1 | 0 | 归档 |
+| academic | 4 | 15+ | 70% |
+| representations | 1 | 5+ | 50% |
+| scenarios | 1 | 8+ | 60% |
+| **总计** | **9** | **28+** | **65%** |
 
 ---
 
@@ -112,21 +114,22 @@ content/
 
 ### 前沿特性
 
-- [Rust 1.95 稳定特性](emerging/10_rust_1_95_preview.md)
-- [Generic Const Expressions](emerging/10_generic_const_exprs.md)
-- [Async Closures](emerging/10_async_closures.md)
+> 已迁移至 [knowledge/06_ecosystem/emerging/](../../knowledge/06_ecosystem/emerging/)
 
 ### 生态系统
 
-- [Axum 深度解析](ecosystem/web_frameworks/10_axum_deep_dive.md)
+> 已迁移至 [knowledge/06_ecosystem/deep_dives/](../../knowledge/06_ecosystem/deep_dives/)
 
 ### 生产实践
 
-- [生产就绪检查清单](production/README.md)
+> 已迁移至 [knowledge/06_ecosystem/deployment/](../../knowledge/06_ecosystem/deployment/)
 
 ### 学术研究
 
-- [RustBelt 项目](academic/README.md)
+- [RustBelt 与 Tree Borrows](academic/10_tree_borrows_authoritative_guide.md)
+- [Coq 形式化验证指南](academic/10_coq_formalization_guide.md)
+- [知识表征矩阵](representations/10_knowledge_representation_matrix.md)
+- [Web 应用场景](scenarios/10_web_application_scenarios.md)
 
 ---
 
@@ -134,9 +137,9 @@ content/
 
 ### 高优先级
 
-- [ ] 补充 Sea-ORM 深度文档
-- [ ] 添加 Tokio 运行时解析
-- [ ] 创建 Kubernetes 部署指南
+- [x] 补充 Sea-ORM 深度文档 → 已迁移至 [knowledge/06_ecosystem/databases/](../../knowledge/06_ecosystem/databases/)
+- [x] 添加 Tokio 运行时解析 → 已迁移至 [knowledge/06_ecosystem/deep_dives/](../../knowledge/06_ecosystem/deep_dives/)
+- [x] 创建 Kubernetes 部署指南 → 已迁移至 [knowledge/06_ecosystem/deployment/](../../knowledge/06_ecosystem/deployment/)
 - [ ] 整合 Tree Borrows 论文
 
 ### 中优先级

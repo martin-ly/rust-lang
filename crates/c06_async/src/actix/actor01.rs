@@ -1,8 +1,12 @@
 //! Actix 最小可运行示例：定义消息/Actor，发送并接收响应。
+//! Actix minimum Run example ：definition /Actor，and 。
 //!
 //! 用法：
+//! ：
 //! - 库内调用异步版本：`actor_exp01().await`（需在 Actix 系统/运行时内）
+//! - library inside async this ：`actor_exp01().await`（in Actix system /runtime inside ）
 //! - 可直接在可执行入口调用同步封装：`actor_exp01_run()`（内部启动并关闭系统）
+//! - in synchronous ：`actor_exp01_run()`（inside and system ）
 //!
 //! 示例参见 `examples/actix_basic.rs`。
 use actix::System;
@@ -47,6 +51,7 @@ pub async fn actor_exp01() {
 }
 
 /// 同步封装：内部创建并运行 Actix `System`，方便示例/二进制入口直接调用
+/// synchronous ：inside and Run Actix `System`，example /
 #[allow(unused)]
 pub fn actor_exp01_run() {
     let sys = System::new();

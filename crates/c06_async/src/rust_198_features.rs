@@ -1,4 +1,5 @@
 //! Rust 1.98 Nightly 前瞻 —— 异步迭代与生成器
+//! Rust 1.98 Nightly before —— async and
 #![allow(clippy::incompatible_msrv)]
 
 use std::async_iter::AsyncIterator;
@@ -6,11 +7,16 @@ use std::pin::Pin;
 use std::task::{Context, Poll};
 
 /// # Rust 1.98 Nightly 异步特性前瞻
+/// # Rust 1.98 Nightly async feature before
 ///
 /// 本模块展示 nightly 1.98 中的前沿异步特性：
+/// This module demonstrates nightly 1.98 in before async feature ：
 /// - `for await` 循环 — 原生异步迭代语法糖
+/// - `for await` circulation — async
 /// - `AsyncIterator` trait — 标准异步迭代器接口
+/// - `AsyncIterator` trait — standard async
 /// - `gen` 块与异步流的结合
+/// - `gen` and async stream
 ///
 /// **⚠️ 需要 nightly Rust + `#![feature(async_iterator, async_for_loop)]`**
 pub struct Rust198AsyncFeatures;
@@ -20,6 +26,7 @@ pub struct Rust198AsyncFeatures;
 // ============================================================================
 
 /// 计数异步迭代器：从 start 开始，每次产生下一个整数
+/// async ：from start ，under
 pub struct CountingAsyncIter {
     current: i32,
     end: i32,
@@ -27,6 +34,7 @@ pub struct CountingAsyncIter {
 
 impl CountingAsyncIter {
     /// 创建新的计数异步迭代器
+    /// async
     pub fn new(start: i32, end: i32) -> Self {
         Self { current: start, end }
     }
@@ -48,6 +56,7 @@ impl AsyncIterator for CountingAsyncIter {
 }
 
 /// 异步迭代器包装器：对 item 应用变换函数
+/// async ：to item application transformation function
 pub struct MapAsyncIter<I, F> {
     inner: I,
     f: F,
@@ -74,6 +83,7 @@ where
 
 impl Rust198AsyncFeatures {
     /// 使用 `for await` 语法遍历异步迭代器并求和
+    /// `for await` async and and
     ///
     /// `for await x in iter` 是 `while let Some(x) = iter.next().await` 的语法糖。
     pub async fn sum_async_iter(iter: impl AsyncIterator<Item = i32>) -> i32 {
@@ -85,6 +95,7 @@ impl Rust198AsyncFeatures {
     }
 
     /// 使用 `for await` 语法过滤并收集异步流
+    /// `for await` and async stream
     pub async fn collect_even_async(iter: impl AsyncIterator<Item = i32>) -> Vec<i32> {
         let mut result = Vec::new();
         for await x in iter {
@@ -96,11 +107,13 @@ impl Rust198AsyncFeatures {
     }
 
     /// 创建一个异步计数流
+    /// async stream
     pub fn count_stream(start: i32, end: i32) -> CountingAsyncIter {
         CountingAsyncIter::new(start, end)
     }
 
     /// 对异步流进行映射变换
+    /// to async stream transformation
     pub fn map_stream<I, F, T>(inner: I, f: F) -> MapAsyncIter<I, F>
     where
         I: AsyncIterator,
@@ -110,8 +123,10 @@ impl Rust198AsyncFeatures {
     }
 
     /// 使用 `for await` 实现异步流式批处理
+    /// `for await` async stream
     ///
     /// 从异步迭代器读取数据，当累积 `batch_size` 个元素时 yield 一批。
+    /// from async ，when `batch_size` element yield 。
     pub async fn batch_process(
         iter: impl AsyncIterator<Item = i32>,
         batch_size: usize,

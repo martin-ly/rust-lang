@@ -1,24 +1,33 @@
 //! LeetCode 二分查找类算法（结合 Rust 1.91 特性）
+//! LeetCode algorithm （ Rust 1.91 feature ）
 //!
 //! 本模块实现经典的二分查找类 LeetCode 题目，充分利用 Rust 1.91 的新特性。
+//! this module LeetCode ， Rust 1.91 feature 。
 //!
 //! ## Rust 1.91 特性应用
+//! ## Rust 1.91 feature application
 //!
 //! - **JIT 优化**: 二分查找操作性能提升 10-15%
+//! - **JIT optimization **: performance 10-15%
 //! - **内存优化**: 迭代器优化，减少内存分配
+//! - **memory optimization **: optimization ，memory
 //! - **新的稳定 API**: 改进的数组切片操作
+//! - ** API**:
 //!
 //! ## 包含的经典题目
+//! ##
 //!
 //! - 33. Search in Rotated Sorted Array（搜索旋转排序数组）
 //! - 34. Find First and Last Position of Element in Sorted Array（在排序数组中查找元素的第一个和最后一个位置）
 //! - 35. Search Insert Position（搜索插入位置）
 //! - 69. Sqrt(x)（x 的平方根）
+//! - 69. Sqrt(x)（x ）
 //! - 74. Search a 2D Matrix（搜索二维矩阵）
 //! - 81. Search in Rotated Sorted Array II（搜索旋转排序数组 II）
 //! - 153. Find Minimum in Rotated Sorted Array（寻找旋转排序数组中的最小值）
 //! - 162. Find Peak Element（寻找峰值）
 //! - 278. First Bad Version（第一个错误的版本）
+//! - 278. First Bad Version（first this ）
 //! - 367. Valid Perfect Square（有效的完全平方数）
 //! - 704. Binary Search（二分查找）
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
@@ -26,16 +35,25 @@ use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 /// 704. Binary Search（二分查找）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给定一个 `n` 个元素有序的（升序）整型数组 `nums` 和一个目标值 `target`，写一个函数搜索 `nums` 中的 `target`，
+/// `n` element （） `nums` and goal `target`，function `nums` in `target`，
 /// 如果目标值存在返回下标，否则返回 `-1`。
+/// if goal in under ， `-1`。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 二分查找操作性能提升 10-15%
+/// - **JIT optimization **: performance 10-15%
 /// - **内存优化**: 迭代器优化，减少内存分配
+/// - **memory optimization **: optimization ，memory
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(log n)
+/// - time complexity : O(log n)
 /// - 空间复杂度: O(1)
+/// - space complexity : O(1)
 pub fn binary_search(nums: Vec<i32>, target: i32) -> i32 {
     let mut left = 0;
     let mut right = nums.len().saturating_sub(1);
@@ -62,16 +80,25 @@ pub fn binary_search(nums: Vec<i32>, target: i32) -> i32 {
 /// 33. Search in Rotated Sorted Array（搜索旋转排序数组）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 整数数组 `nums` 按升序排列，数组中的值 **互不相同**。在传递给函数之前，`nums` 在预先未知的某个下标 `k`（`0 <= k < nums.length`）上进行了 **旋转**。
+/// `nums` arrangement ，in ****。in function 's before ，`nums` in under `k`（`0 <= k < nums.length`）on ****。
 /// 给你 **旋转后** 的数组 `nums` 和一个整数 `target`，如果 `nums` 中存在这个目标值 `target`，则返回它的下标，否则返回 `-1`。
+/// **after ** `nums` and `target`，if `nums` in in goal `target`，under ， `-1`。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 变体二分查找性能提升
+/// - **JIT optimization **: volume performance
 /// - **内存优化**: O(1) 空间复杂度
+/// - **memory optimization **: O(1) space complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(log n)
+/// - time complexity : O(log n)
 /// - 空间复杂度: O(1)
+/// - space complexity : O(1)
 pub fn search_rotated(nums: Vec<i32>, target: i32) -> i32 {
     let mut left = 0;
     let mut right = nums.len().saturating_sub(1);
@@ -112,16 +139,25 @@ pub fn search_rotated(nums: Vec<i32>, target: i32) -> i32 {
 /// 34. Find First and Last Position of Element in Sorted Array（在排序数组中查找元素的第一个和最后一个位置）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给你一个按照非递减顺序排列的整数数组 `nums`，和一个目标值 `target`。请你找出给定目标值在数组中的开始位置和结束位置。
+/// order arrangement `nums`，and goal `target`。goal in in position and position 。
 /// 如果数组中不存在目标值 `target`，返回 `[-1, -1]`。
+/// if in in goal `target`， `[-1, -1]`。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 两次二分查找性能提升
+/// - **JIT optimization **: performance
 /// - **内存优化**: O(1) 空间复杂度
+/// - **memory optimization **: O(1) space complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(log n)
+/// - time complexity : O(log n)
 /// - 空间复杂度: O(1)
+/// - space complexity : O(1)
 pub fn search_range(nums: Vec<i32>, target: i32) -> Vec<i32> {
     fn find_first(nums: &[i32], target: i32) -> i32 {
         let mut left = 0;
@@ -185,15 +221,23 @@ pub fn search_range(nums: Vec<i32>, target: i32) -> Vec<i32> {
 /// 35. Search Insert Position（搜索插入位置）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。
+/// ordering and goal ，in in to goal ，and its 。if goal in in ，will is order position 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 二分查找性能提升
+/// - **JIT optimization **: performance
 /// - **内存优化**: O(1) 空间复杂度
+/// - **memory optimization **: O(1) space complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(log n)
+/// - time complexity : O(log n)
 /// - 空间复杂度: O(1)
+/// - space complexity : O(1)
 pub fn search_insert(nums: Vec<i32>, target: i32) -> i32 {
     let mut left = 0;
     let mut right = nums.len().saturating_sub(1);
@@ -217,17 +261,26 @@ pub fn search_insert(nums: Vec<i32>, target: i32) -> i32 {
 }
 
 /// 69. Sqrt(x)（x 的平方根）
+/// 69. Sqrt(x)（x ）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给你一个非负整数 `x`，计算并返回 `x` 的 **算术平方根**。由于返回类型是整数，结果只保留 **整数部分**，小数部分将被 **舍去**。
+/// `x`，and `x` ****。type ，result **part **，part will is ****。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 二分查找性能提升
+/// - **JIT optimization **: performance
 /// - **内存优化**: O(1) 空间复杂度
+/// - **memory optimization **: O(1) space complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(log n)
+/// - time complexity : O(log n)
 /// - 空间复杂度: O(1)
+/// - space complexity : O(1)
 pub fn my_sqrt(x: i32) -> i32 {
     if x < 2 {
         return x;
@@ -256,17 +309,27 @@ pub fn my_sqrt(x: i32) -> i32 {
 /// 74. Search a 2D Matrix（搜索二维矩阵）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 编写一个高效的算法来判断 `m x n` 矩阵中，是否存在一个目标值。该矩阵具有如下特性：
+/// efficient algorithm `m x n` in ，in goal 。this has under feature ：
 /// - 每行中的整数从左到右按升序排列
+/// - in from to arrangement
 /// - 每行的第一个整数大于前一行的最后一个整数
+/// - first before finally
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 将二维数组视为一维数组进行二分查找
+/// - **JIT optimization **: will as
 /// - **内存优化**: O(1) 空间复杂度
+/// - **memory optimization **: O(1) space complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(log(mn))
+/// - time complexity : O(log(mn))
 /// - 空间复杂度: O(1)
+/// - space complexity : O(1)
 pub fn search_matrix(matrix: Vec<Vec<i32>>, target: i32) -> bool {
     if matrix.is_empty() || matrix[0].is_empty() {
         return false;
@@ -301,17 +364,27 @@ pub fn search_matrix(matrix: Vec<Vec<i32>>, target: i32) -> bool {
 /// 153. Find Minimum in Rotated Sorted Array（寻找旋转排序数组中的最小值）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 已知一个长度为 `n` 的数组，预先按照升序排列，经由 `1` 到 `n` 次 **旋转** 后，得到输入数组。
+/// as `n` ，arrangement ， `1` to `n` **** after ，to 。
 /// 给你一个元素值 **互不相同** 的数组 `nums`，它原来是一个升序排列的数组，并按上述情形进行了多次旋转。
+/// element **** `nums`，arrangement ，and on circumstance 。
 /// 请你找出并返回数组中的 **最小元素**。
+/// and in **minimum element **。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 变体二分查找性能提升
+/// - **JIT optimization **: volume performance
 /// - **内存优化**: O(1) 空间复杂度
+/// - **memory optimization **: O(1) space complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(log n)
+/// - time complexity : O(log n)
 /// - 空间复杂度: O(1)
+/// - space complexity : O(1)
 pub fn find_min(nums: Vec<i32>) -> i32 {
     let mut left = 0;
     let mut right = nums.len().saturating_sub(1);
@@ -335,16 +408,25 @@ pub fn find_min(nums: Vec<i32>) -> i32 {
 /// 162. Find Peak Element（寻找峰值）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 峰值元素是指其值严格大于左右相邻值的元素。给你一个整数数组 `nums`，找到峰值元素并返回其索引。
+/// element its element 。 `nums`，to element and its 。
 /// 数组可能包含多个峰值，在这种情况下，返回 **任何一个峰值** 所在位置即可。
+/// may ，in situation under ， **** in position 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 二分查找性能提升
+/// - **JIT optimization **: performance
 /// - **内存优化**: O(1) 空间复杂度
+/// - **memory optimization **: O(1) space complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(log n)
+/// - time complexity : O(log n)
 /// - 空间复杂度: O(1)
+/// - space complexity : O(1)
 pub fn find_peak_element(nums: Vec<i32>) -> i32 {
     let mut left = 0;
     let mut right = nums.len().saturating_sub(1);
@@ -366,19 +448,30 @@ pub fn find_peak_element(nums: Vec<i32>) -> i32 {
 }
 
 /// 278. First Bad Version（第一个错误的版本）
+/// 278. First Bad Version（first this ）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 你是产品经理，目前正在带领一个团队开发新的产品。不幸的是，你的产品的最新版本没有通过质量检测。
+/// ，before in 。，this quality 。
 /// 由于每个版本都是基于之前的版本开发的，所以错误的版本之后的所有版本都是错的。
+/// this 's before this ，so this 's after all this 。
 /// 假设你有 `n` 个版本 `[1, 2, ..., n]`，你想找出导致之后所有版本出错的第一个错误的版本。
+/// hypothesize `n` this `[1, 2,..., n]`，'s after all this first this 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 二分查找性能提升
+/// - **JIT optimization **: performance
 /// - **内存优化**: O(1) 空间复杂度
+/// - **memory optimization **: O(1) space complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(log n)
+/// - time complexity : O(log n)
 /// - 空间复杂度: O(1)
+/// - space complexity : O(1)
 pub fn first_bad_version(n: i32, is_bad_version: impl Fn(i32) -> bool) -> i32 {
     let mut left = 1;
     let mut right = n;
@@ -400,15 +493,23 @@ pub fn first_bad_version(n: i32, is_bad_version: impl Fn(i32) -> bool) -> i32 {
 /// 367. Valid Perfect Square（有效的完全平方数）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给你一个正整数 `num`。如果 `num` 是一个完全平方数，则返回 `true`，否则返回 `false`。
+/// `num`。if `num` ， `true`， `false`。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 二分查找性能提升
+/// - **JIT optimization **: performance
 /// - **内存优化**: O(1) 空间复杂度
+/// - **memory optimization **: O(1) space complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(log n)
+/// - time complexity : O(log n)
 /// - 空间复杂度: O(1)
+/// - space complexity : O(1)
 pub fn is_perfect_square(num: i32) -> bool {
     if num < 2 {
         return true;
@@ -435,6 +536,7 @@ pub fn is_perfect_square(num: i32) -> bool {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有二分查找类问题
+/// all problem
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

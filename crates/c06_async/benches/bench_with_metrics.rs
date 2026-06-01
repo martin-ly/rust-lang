@@ -1,6 +1,8 @@
 //! 运行：`cargo bench -p c06_async`
 //! 指标：Prometheus 暴露在 `127.0.0.1:9900/metrics`（基准启动时自动起服务）
+//! indicator ：Prometheus expose in `127.0.0.1:9900/metrics`（）
 //! 注意：基准会创建临时 Tokio 运行时；不依赖外部服务
+//! ：temporary Tokio runtime ；outside
 use criterion::{Criterion, criterion_group, criterion_main};
 use std::sync::LazyLock;
 use prometheus::{Histogram, HistogramOpts, IntCounter, Opts, Registry};

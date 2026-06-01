@@ -1,13 +1,17 @@
 //! Rust 190.0 新特性实现模块 —— c08_algorithms
 //!
 //! 本模块展示了 Rust 190.0 (2025-09-18) 的关键语言特性和工具链改进。
+//! This module demonstrates Rust 190.0 (2025-09-18) key feature and toolchain 。
 //!
 //! - `lld_default`: x86_64 默认 LLD 链接器
 //! - `cargo_multi_publish`: Cargo 多包发布稳定
 //!
 //! # 版本信息
+//! # this
 //! - Rust 版本: 190.0
+//! - Rust this : 190.0
 //! - 稳定日期: 2025-09-18
+//! - date : 2025-09-18
 //! - Edition: 2024
 
 // ============================================================================
@@ -15,25 +19,34 @@
 // ============================================================================
 
 /// # x86_64 默认使用 LLD 链接器
+/// # x86_64 LLD
 ///
 /// Rust 1.90.0 在 `x86_64-unknown-linux-gnu` 目标上默认使用 LLD 链接器，
 /// 显著减少链接时间（尤其是大型项目）。
+/// significant time （its project ）。
 ///
 /// ## 影响
+/// ## impact
 /// - 链接速度提升：大型 workspace 链接时间可减少 20-50%
+/// - ： workspace time 20-50%
 /// - 二进制兼容性：LLD 生成的二进制与 GNU ld 基本一致
+/// - ：LLD and GNU ld this
 /// - 可通过 `-C link-arg=-fuse-ld=gold` 等覆盖
 ///
 /// ## 验证当前链接器
+/// ## when before
 /// ```bash
 /// rustc --print cfg | grep target_abi
 /// # 或通过 verbose 编译输出查看
+/// # or verbose
 /// cargo build --verbose 2>&1 | grep "linker"
 /// ```
 ///
 /// ## 对 Cargo.toml 的影响
 /// 无需修改配置，工具链自动处理。
+/// ，toolchain 。
 /// 若需显式指定链接器，可在 `.cargo/config.toml` 中设置：
+/// ，in `.cargo/config.toml` in ：
 /// ```toml
 /// [target.x86_64-unknown-linux-gnu]
 /// linker = "clang"
@@ -56,24 +69,34 @@ fn test_lld_default_info() {
 /// # Cargo 多包发布（Multi-Package Publishing）
 ///
 /// Rust 1.90.0 稳定了 `cargo publish` 的多包发布支持，
+/// Rust 1.90.0 `cargo publish` ，
 /// 允许一次性发布 workspace 中的多个 crate。
+/// workspace in crate。
 ///
 /// ## 使用方式
+/// ## way
 /// ```bash
 /// # 发布 workspace 中的所有包
+/// # workspace in all
 /// cargo publish --workspace
 ///
 /// # 发布特定包及其依赖
+/// # and its
 /// cargo publish -p my-crate --with-deps
 /// ```
 ///
 /// ## 对 Workspace 的影响
 /// - 简化 CI/CD 发布流程
+/// - CI/CD process
 /// - 确保依赖版本一致性
+/// - this consistency
 /// - 减少手动发布错误
+/// -
 ///
 /// ## 验证发布顺序
+/// ## order
 /// Cargo 会自动计算依赖拓扑，按正确顺序发布。
+/// Cargo ，order 。
 pub fn publish_order_example() -> Vec<&'static str> {
     // 模拟 workspace 发布顺序
     vec!["common", "c01_ownership", "c02_type_system", "c10_networks"]

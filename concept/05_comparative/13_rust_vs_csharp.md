@@ -1,3 +1,5 @@
+> **内容分级**: [综述级]
+
 # Rust vs C#：托管与原生之路
 >
 > **受众**: [进阶]
@@ -659,7 +661,11 @@ fn main() {
 }
 ```
 
-> **修正**: C# 的 `async/await` 从 `Main` 方法开始就支持：`static async Task Main()` 是合法的，编译器自动生成状态机包装。Rust 的 `main` 不能是 `async fn`——`main` 是程序入口点，操作系统直接调用，无运行时调度 async 任务。必须用 `#[tokio::main]` 宏或手动创建 runtime 并 `block_on`。这是设计差异：C# 的 async 是语言级别的（编译器内置状态机生成），Rust 的 async 是库级别的（`Future` trait + runtime crate）。C# 的 `async Main` 隐藏了 runtime 创建，Rust 要求显式选择 runtime（tokio、smol [历史: async-std 已停止维护]）。这与 JavaScript 的 `async` 函数（自动由事件循环调度）或 Python 的 `asyncio.run()`（显式入口，类似 Rust）类似——Rust 的显式设计提供了更多控制权，但增加了样板代码。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [C# Async Main](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-options/language#asyncmain)]
+> **修正**: C# 的 `async/await` 从 `Main` 方法开始就支持：`static async Task Main()` 是合法的，编译器自动生成状态机包装。
+> Rust 的 `main` 不能是 `async fn`——`main` 是程序入口点，操作系统直接调用，无运行时调度 async 任务。
+> 必须用 `#[tokio::main]` 宏或手动创建 runtime 并 `block_on`。这是设计差异：C# 的 async 是语言级别的（编译器内置状态机生成），Rust 的 async 是库级别的（`Future` trait + runtime crate）。
+> C# 的 `async Main` 隐藏了 runtime 创建，Rust 要求显式选择 runtime（tokio、smol [历史: async-std [已归档]]）。
+> 这与 JavaScript 的 `async` 函数（自动由事件循环调度）或 Python 的 `asyncio.run()`（显式入口，类似 Rust）类似——Rust 的显式设计提供了更多控制权，但增加了样板代码。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [C# Async Main](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-options/language#asyncmain)]
 
 ### 10.4 边界测试：C# 的属性与 Rust 的派生宏的编译期差异（编译错误）
 

@@ -1,9 +1,11 @@
 //! 排序算法：同步 / Rayon并行 / Tokio异步 统一接口
+//! sorting algorithm ：synchronous / Rayonparallelism / Tokioasync
 use anyhow::Result;
 use rayon::prelude::*;
 use rayon::slice::{ParallelSlice, ParallelSliceMut};
 
 /// 排序算法类型
+/// sorting algorithm type
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum SortingAlgo {
     Quick,
@@ -13,6 +15,7 @@ pub enum SortingAlgo {
 }
 
 /// 同步排序（原地）
+/// synchronous ordering （）
 pub fn sort_sync<T>(data: &mut [T], algo: SortingAlgo)
 where
     T: Ord + Clone,
@@ -26,6 +29,7 @@ where
 }
 
 /// Rayon 并行排序（原地）
+/// Rayon parallel sort （）
 pub fn sort_parallel<T>(data: &mut [T], algo: SortingAlgo)
 where
     T: Ord + Send,
@@ -39,6 +43,7 @@ where
 }
 
 /// Tokio 异步排序（接收与返回 Vec）
+/// Tokio async ordering （and Vec）
 pub async fn sort_async<T>(data: Vec<T>, algo: SortingAlgo) -> Result<Vec<T>>
 where
     T: Ord + Send + 'static,
@@ -260,6 +265,7 @@ pub fn radix_sort_lsd_sync_i32(data: Vec<i32>) -> Vec<i32> {
 // =========================
 
 /// 计数排序（非负整数，返回新的 Vec）
+/// counting sort （， Vec）
 pub fn counting_sort_sync_u32(data: &[u32]) -> Vec<u32> {
     if data.is_empty() {
         return Vec::new();
@@ -279,6 +285,7 @@ pub fn counting_sort_sync_u32(data: &[u32]) -> Vec<u32> {
 }
 
 /// 并行计数排序（并行统计 + 归并）
+/// parallelism counting sort （parallelism + and ）
 pub fn counting_sort_parallel_u32(data: &[u32]) -> Vec<u32> {
     if data.is_empty() {
         return Vec::new();
@@ -315,6 +322,7 @@ pub async fn counting_sort_async_u32(data: Vec<u32>) -> Result<Vec<u32>> {
 }
 
 /// 基数排序（LSD，按 8bit 桶，原地稳定，返回新 Vec）
+/// radix sort （LSD， 8bit ，， Vec）
 pub fn radix_sort_lsd_sync_u32(mut data: Vec<u32>) -> Vec<u32> {
     let n = data.len();
     if n <= 1 {

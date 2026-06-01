@@ -54,6 +54,8 @@
       - [JNI/JNA 集成](#jnijna-集成)
     - [思维转换](#思维转换)
   - [总结](#总结)
+  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 概述
 >
@@ -707,7 +709,7 @@ class HelloController {
 |------|------------|--------|
 | Web | Actix-web, Axum, Rocket | ★★★★☆ |
 | ORM | Diesel, SQLx, SeaORM | ★★★★☆ |
-| 异步 | Tokio, async-std | ★★★★★ |
+| 异步 | Tokio, async-std [已归档] | ★★★★★ |
 | 序列化 | Serde | ★★★★★ |
 | CLI | Clap, StructOpt | ★★★★★ |
 | WebAssembly | wasm-bindgen | ★★★★★ |

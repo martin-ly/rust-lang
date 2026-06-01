@@ -38,7 +38,7 @@
 
 | Runtime       | 线程模型              | I/O               | 生态       | 性能       | 内存 | 学习       | 生产       |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- || **Tokio**     | 多线程(work-stealing) | epoll/kqueue/IOCP | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | 中   | ⭐⭐⭐     | ⭐⭐⭐⭐⭐ |
-| **async-std** | 多线程                | epoll/kqueue      | ⭐⭐⭐⭐   | ⭐⭐⭐⭐   | 中   | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐   |
+| **async-std [已归档]** | 多线程                | epoll/kqueue      | ⭐⭐⭐⭐   | ⭐⭐⭐⭐   | 中   | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐   |
 | **Smol**      | 可配置                | epoll/kqueue      | ⭐⭐⭐     | ⭐⭐⭐⭐⭐ | 低   | ⭐⭐⭐⭐   | ⭐⭐⭐     |
 | **Glommio**   | 单线程per-core        | io_uring          | ⭐⭐       | ⭐⭐⭐⭐⭐ | 低   | ⭐⭐       | ⭐⭐       |
 | **Monoio**    | 单线程per-core        | io_uring          | ⭐⭐       | ⭐⭐⭐⭐⭐ | 低   | ⭐⭐       | ⭐⭐       |
@@ -47,7 +47,7 @@
 
 | Runtime   | spawn | channel | timeout | 总吞吐     |
 | :--- | :--- | :--- | :--- | :--- || Tokio     | 12 µs | 0.8 µs  | 15 µs   | 800k ops/s |
-| async-std | 15 µs | 1.0 µs  | 18 µs   | 650k ops/s |
+| async-std [已归档] | 15 µs | 1.0 µs  | 18 µs   | 650k ops/s |
 | Smol      | 10 µs | 0.7 µs  | 12 µs   | 900k ops/s |
 
 ---
@@ -81,7 +81,7 @@
 
 ### 延迟对比 (P50/P99)
 
-| 操作         | Tokio    | async-std  | Smol       |
+| 操作         | Tokio    | async-std [已归档]  | Smol       |
 | :--- | :--- | :--- | :--- || spawn        | 8/20 µs  | 10/25 µs   | 6/15 µs    |
 | channel send | 0.5/2 µs | 0.7/2.5 µs | 0.4/1.5 µs |
 | timeout      | 10/30 µs | 12/35 µs   | 8/25 µs    |
@@ -90,7 +90,7 @@
 
 | Runtime   | 基础   | 每任务 | 每连接 |
 | :--- | :--- | :--- | :--- || Tokio     | 2 MB   | 2 KB   | 1 KB   |
-| async-std | 1.5 MB | 2 KB   | 1 KB   |
+| async-std [已归档] | 1.5 MB | 2 KB   | 1 KB   |
 | Smol      | 500 KB | 1 KB   | 500 B  |
 
 ---
@@ -104,7 +104,7 @@
 | **微服务**    | Tokio          | 工具齐全 |
 | **嵌入式**    | Smol           | 轻量级   |
 | **高性能I/O** | Glommio/Monoio | io_uring |
-| **学习**      | async-std      | 易学     |
+| **学习**      | async-std [已归档]      | 易学     |
 
 ### Rust 1.92.0 升级建议（兼容 Rust 1.90+ 特性）
 

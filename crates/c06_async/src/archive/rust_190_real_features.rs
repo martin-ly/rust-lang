@@ -1,15 +1,23 @@
 //! Rust 1.90 真正的语言特性实现 (历史版本)
+//! Rust 1.90 feature (this )
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//! ⚠️ **this ** - this as reference
 //!
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //!
 //! 本模块实现了Rust 1.90版本中真正可用的语言特性，包括：
+//! this module Rust 1.90this in feature ，：
 //! - 真正的AsyncDrop实现
+//! - AsyncDrop
 //! - 真正的AsyncIterator实现
 //! - Polonius借用检查器改进的利用
+//! - Poloniusborrowing
 //! - 下一代特质求解器优化
+//! - under trait optimization
 //! - 并行前端编译优化
+//! - parallelism frontend optimization
 use std::sync::Arc;
 use std::time::Duration;
 use tokio::time::sleep;
@@ -20,8 +28,10 @@ use std::future::Future;
 use std::pin::Pin;
 
 /// 真正的AsyncDrop实现
+/// AsyncDrop
 ///
 /// 在Rust 1.90中，AsyncDrop trait已经稳定，这里实现真正的异步资源清理
+/// in Rust 1.90in ，AsyncDrop trait，async
 pub struct AsyncResource190 {
     id: String,
     data: Arc<Mutex<Vec<u8>>>,
@@ -48,6 +58,7 @@ impl AsyncResource190 {
     }
 
     /// 创建异步清理Future
+    /// async Future
     pub fn create_cleanup_future(&mut self) {
         let id = self.id.clone();
         self.cleanup_future = Some(Box::pin(async move {
@@ -60,6 +71,7 @@ impl AsyncResource190 {
 }
 
 /// 实现真正的AsyncDrop
+/// AsyncDrop
 impl Drop for AsyncResource190 {
     fn drop(&mut self) {
         println!("AsyncResource190 {} 开始销毁", self.id);
@@ -80,8 +92,10 @@ impl Drop for AsyncResource190 {
 }
 
 /// 真正的异步迭代器实现
+/// async
 ///
 /// 在Rust 1.90中，我们使用自定义的异步迭代器实现
+/// in Rust 1.90in ，definition async
 pub struct AsyncDataStream190 {
     data: Vec<i32>,
     current_index: usize,
@@ -98,6 +112,7 @@ impl AsyncDataStream190 {
     }
 
     /// 异步获取下一个元素
+    /// async under element
     pub async fn next(&mut self) -> Option<i32> {
         if self.current_index >= self.data.len() {
             return None;
@@ -113,6 +128,7 @@ impl AsyncDataStream190 {
     }
 
     /// 收集所有元素
+    /// all element
     pub async fn collect_all(&mut self) -> Vec<i32> {
         let mut result = Vec::new();
         while let Some(value) = self.next().await {
@@ -123,6 +139,7 @@ impl AsyncDataStream190 {
 }
 
 /// 利用Polonius借用检查器改进的复杂借用场景
+/// Poloniusborrowing complex borrowing scenario
 pub struct PoloniusBorrowDemo {
     data: Arc<Mutex<HashMap<String, String>>>,
     semaphore: Arc<Semaphore>,
@@ -137,8 +154,10 @@ impl PoloniusBorrowDemo {
     }
 
     /// 演示Polonius借用检查器的改进
+    /// demonstration Poloniusborrowing
     ///
     /// 在Rust 1.90中，Polonius借用检查器能够更好地处理复杂的借用场景
+    /// in Rust 1.90in ，Poloniusborrowing can complex borrowing scenario
     pub async fn complex_borrow_operation(&self, key: String, value: String) -> Result<String> {
         let _permit = self.semaphore.acquire().await?;
 
@@ -164,6 +183,7 @@ impl PoloniusBorrowDemo {
     }
 
     /// 演示更智能的借用分析
+    /// demonstration borrowing analyze
     pub async fn smart_borrow_analysis(&self) -> Result<Vec<String>> {
         let mut results = Vec::new();
 
@@ -181,6 +201,7 @@ impl PoloniusBorrowDemo {
 }
 
 /// 下一代特质求解器优化演示
+/// under trait optimization demonstration
 pub struct NextGenTraitSolver {
     cache: Arc<Mutex<HashMap<String, usize>>>,
     computation_count: Arc<Mutex<usize>>,
@@ -201,6 +222,7 @@ impl NextGenTraitSolver {
     }
 
     /// 演示下一代特质求解器的性能优化
+    /// demonstration under trait performance optimization
     pub async fn optimized_trait_solving<T>(&self, input: T) -> Result<usize>
     where
         T: std::fmt::Display + std::hash::Hash + Eq + Clone,
@@ -249,6 +271,7 @@ impl NextGenTraitSolver {
 }
 
 /// 并行前端编译优化演示
+/// parallelism frontend optimization demonstration
 pub struct ParallelFrontendOptimizer {
     workers: usize,
     task_queue: Arc<Mutex<Vec<String>>>,
@@ -271,6 +294,7 @@ impl ParallelFrontendOptimizer {
     }
 
     /// 演示并行编译优化
+    /// demonstration parallelism optimization
     pub async fn parallel_compilation(&self, tasks: Vec<String>) -> Result<Vec<String>> {
         // 初始化任务队列
         {
@@ -321,6 +345,7 @@ impl ParallelFrontendOptimizer {
 }
 
 /// 综合演示Rust 1.90真正特性
+/// synthesize demonstration Rust 1.90feature
 pub async fn demonstrate_rust_190_real_features() -> Result<()> {
     println!("🚀 演示 Rust 1.90 真正的语言特性");
     println!("==========================================");

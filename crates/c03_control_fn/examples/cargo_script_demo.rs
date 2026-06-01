@@ -1,39 +1,39 @@
 #![allow(unused)]
 
 //! # Cargo Script 单文件脚本演示
-//!
+//! # Cargo Script this demonstration
 //! **版本 attribution**: Rust 1.79+ 稳定化，Rust 1.95+ 持续增强
-//!
+//! **版this attribution**: Rust 1.79+ 稳定化，Rust 1.95+ 持续增强
 //! Cargo Script 允许在单个 `.rs` 文件中编写完整 Rust 程序并直接嵌入依赖，
+//! Cargo Script in `.rs` in complete Rust program and ，
 //! 无需 `Cargo.toml` 或完整项目目录结构。
-//!
+//! `Cargo.toml` or complete project structure 。
 //! ## 核心概念
-//!
+//! ## core concept
 //! - **单文件可执行**: 将源码、依赖清单、元数据合并到一个文件。
+//! - ****: will 、、and to 。
 //! - **嵌入式 manifest**: 使用 frontmatter 或代码块声明 `dependencies`。
+//! - **嵌入式 manifest**: Use frontmatter or代码块声明 `dependencies`。
 //! - **即时运行**: 通过 `cargo` 或 `rust-script` 直接执行，享受自动缓存。
-//!
+//! - **Run **: `cargo` or `rust-script` ，。
+//! - **即时Run**: Via `cargo` or `rust-script` 直接Execute，享受自动缓存。
 //! ## 运行方式概览
-//!
-//! ```bash
+//! ## Run way
 //! # 方式 A: cargo 原生支持 (Rust 1.79+)
-//! cargo run --manifest-path script.rs
-//!
+//! # way A: cargo (Rust 1.79+)
+//! # way A: cargo 原生Supports (Rust 1.79+)
 //! # 方式 B: nightly 实验标志 (旧习惯)
-//! cargo +nightly -Zscript script.rs
-//!
+//! # way B: nightly mark ()
+//! # way B: nightly 实验mark (旧习惯)
 //! # 方式 C: 第三方 rust-script 工具
-//! cargo install rust-script
-//! rust-script script.rs
+//! # way C: third rust-script tool
 //! ```
 //!
 //! ## 文件格式对比
-//!
-//! ```text
+//! ## to
 //! ┌─────────────────────────────────────────────────────────────┐
 //! │  cargo-script (原生)        │  rust-script (社区)            │
-//! ├─────────────────────────────────────────────────────────────┤
-//! │  #!/usr/bin/env cargo        │  #!/usr/bin/env rust-script    │
+//! │ cargo-script (原生) │ rust-script (社区) │
 //! │  ```cargo                     │  ---                           │
 //! │  [dependencies]               │  dependencies:                 │
 //! │  serde = "1"                  │    serde = "1"                 │
@@ -41,7 +41,6 @@
 //! └─────────────────────────────────────────────────────────────┘
 //! ```
 //!
-//! > 注：本文件为**教学文档**，所有 cargo-script 特有语法均使用 `//` 注释展示，
 //! > 以保证在 stable toolchain 下可通过 `cargo check --examples` 编译。
 
 // ============================================================================
@@ -112,6 +111,8 @@
 //     }
 
 /// 占位：quick CLI 概念函数
+/// ：quick CLI concept function
+/// 占位：quick CLI conceptfunction
 fn _quick_cli_concept() {
     // 实际使用时，上述代码可直接放入单文件并运行。
 }
@@ -147,6 +148,7 @@ fn _quick_cli_concept() {
 //     }
 
 /// 占位：data processing 概念函数
+/// 占位：data processing conceptfunction
 fn _data_processing_concept() {}
 
 // ============================================================================
@@ -168,6 +170,8 @@ fn _data_processing_concept() {}
 //     }
 
 /// 占位：API test 概念函数
+/// ：API test concept function
+/// 占位：API test conceptfunction
 fn _api_test_concept() {}
 
 // ============================================================================

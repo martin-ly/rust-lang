@@ -1,6 +1,8 @@
 //! 数据库系统设计模式应用
+//! database system design application
 //!
 //! 本模块展示了在数据库系统中应用各种设计模式的实践案例，
+//! This module demonstrates in database system in application design ，
 //! 包括DAO、Active Record、Unit of Work等经典模式。
 use std::any::Any;
 use std::collections::HashMap;
@@ -10,6 +12,7 @@ use std::collections::HashMap;
 // ============================================================================
 
 /// 数据库连接接口
+/// database
 pub trait DatabaseConnection {
     fn execute(&mut self, query: &str) -> Result<(), String>;
     fn query(&self, query: &str) -> Result<Vec<HashMap<String, String>>, String>;
@@ -19,6 +22,7 @@ pub trait DatabaseConnection {
 }
 
 /// 模拟数据库连接
+/// database
 pub struct MockDatabaseConnection {
     data: HashMap<String, Vec<HashMap<String, String>>>,
     in_transaction: bool,
@@ -84,6 +88,7 @@ impl DatabaseConnection for MockDatabaseConnection {
 }
 
 /// 用户实体
+/// volume
 #[derive(Debug, Clone)]
 pub struct User {
     pub id: Option<i32>,
@@ -92,6 +97,7 @@ pub struct User {
 }
 
 /// 用户DAO接口
+/// DAO
 pub trait UserDao {
     fn find_by_id(&self, id: i32) -> Result<Option<User>, String>;
     fn find_all(&self) -> Result<Vec<User>, String>;
@@ -101,6 +107,7 @@ pub trait UserDao {
 }
 
 /// 用户DAO实现
+/// DAO
 pub struct UserDaoImpl {
     connection: Box<dyn DatabaseConnection>,
 }
@@ -188,6 +195,7 @@ pub trait ActiveRecord {
 }
 
 /// 产品实体（Active Record实现）
+/// volume （Active Record）
 #[derive(Debug, Clone)]
 pub struct Product {
     pub id: Option<i32>,
@@ -281,6 +289,7 @@ impl ActiveRecord for Product {
 // ============================================================================
 
 /// 实体状态
+/// volume state
 #[derive(Debug, Clone, PartialEq)]
 pub enum EntityState {
     Unchanged,
@@ -290,6 +299,7 @@ pub enum EntityState {
 }
 
 /// 实体跟踪器
+/// volume
 pub struct EntityTracker<T> {
     entity: T,
     state: EntityState,

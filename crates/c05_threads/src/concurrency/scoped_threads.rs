@@ -1,7 +1,7 @@
 //! 作用域线程 - Rust 1.89 核心特性
-//!
-//! 本模块展示了 Rust 1.89 中 thread::scope 的强大功能
+//! role domain thread - Rust 1.89 core feature
 //! 允许安全地跨线程借用数据，无需 Arc 和 Mutex
+//! thread borrowing ， Arc and Mutex
 use std::collections::HashMap;
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::{mpsc, Arc, Condvar, Mutex};
@@ -9,8 +9,9 @@ use std::thread;
 use std::time::Duration;
 
 /// 作用域线程基础示例
-///
+/// role domain thread foundation example
 /// 展示如何使用 thread::scope 安全地跨线程共享数据
+/// thread::scope thread
 pub struct ScopedThreadsDemo {
     data: Vec<i32>,
 }
@@ -21,8 +22,9 @@ impl ScopedThreadsDemo {
     }
 
     /// 基础作用域线程示例
-    ///
+    /// foundation role domain thread example
     /// 展示如何在线程间安全地共享可变引用
+    /// in thread reference
     pub fn basic_scoped_example(&mut self) {
         println!("=== 基础作用域线程示例 ===");
 
@@ -74,8 +76,9 @@ impl ScopedThreadsDemo {
     }
 
     /// 复杂数据结构的作用域线程
-    ///
+    /// complex data structure role domain thread
     /// 展示如何处理复杂的数据结构
+    /// complex data structure
     pub fn complex_data_structure_example(&mut self) {
         println!("=== 复杂数据结构示例 ===");
 
@@ -113,8 +116,9 @@ impl ScopedThreadsDemo {
     }
 
     /// 条件同步示例
-    ///
+    /// condition synchronous example
     /// 展示如何在作用域线程中使用条件变量
+    /// in role domain thread in condition variable
     pub fn conditional_synchronization_example(&mut self) {
         println!("=== 条件同步示例 ===");
 
@@ -156,8 +160,9 @@ impl ScopedThreadsDemo {
     }
 
     /// 错误处理示例
-    ///
+    /// error handling example
     /// 展示如何在作用域线程中处理错误
+    /// in role domain thread in
     pub fn error_handling_example(&mut self) {
         println!("=== 错误处理示例 ===");
 
@@ -189,8 +194,9 @@ impl ScopedThreadsDemo {
     }
 
     /// 性能对比示例
-    ///
+    /// performance to example
     /// 对比作用域线程与传统线程的性能
+    /// to role domain thread and thread performance
     pub fn performance_comparison_example(&mut self) {
         println!("=== 性能对比示例 ===");
 
@@ -274,8 +280,9 @@ impl ScopedThreadsDemo {
     }
 
     /// 嵌套作用域示例
-    ///
+    /// role domain example
     /// 展示如何使用嵌套的作用域线程
+    /// role domain thread
     pub fn nested_scopes_example(&mut self) {
         println!("=== 嵌套作用域示例 ===");
 
@@ -319,6 +326,7 @@ impl ScopedThreadsDemo {
     }
 
     /// 运行所有示例
+    /// Run all example
     pub fn run_all_examples(&mut self) {
         self.basic_scoped_example();
         self.complex_data_structure_example();
@@ -330,12 +338,13 @@ impl ScopedThreadsDemo {
 }
 
 /// 高级作用域线程模式
+/// role domain thread
 pub struct AdvancedScopedPatterns;
 
 impl AdvancedScopedPatterns {
     /// 工作窃取模式
-    ///
     /// 使用作用域线程实现工作窃取
+    /// role domain thread
     pub fn work_stealing_pattern() {
         println!("=== 工作窃取模式 ===");
 
@@ -382,8 +391,9 @@ impl AdvancedScopedPatterns {
     }
 
     /// 流水线模式
-    ///
+    /// pipeline
     /// 使用作用域线程实现流水线处理
+    /// role domain thread pipeline
     pub fn pipeline_pattern() {
         println!("=== 流水线模式 ===");
 
@@ -435,8 +445,9 @@ impl AdvancedScopedPatterns {
     }
 
     /// 屏障同步模式
-    ///
+    /// barrier synchronous
     /// 使用作用域线程实现屏障同步
+    /// role domain thread barrier synchronous
     pub fn barrier_synchronization_pattern() {
         println!("=== 屏障同步模式 ===");
 
@@ -477,12 +488,14 @@ impl AdvancedScopedPatterns {
 }
 
 /// 作用域线程最佳实践
+/// role domain thread
 pub struct ScopedThreadsBestPractices;
 
 impl ScopedThreadsBestPractices {
     /// 内存布局优化
-    ///
+    /// memory layout optimization
     /// 展示如何优化内存布局以提高缓存性能
+    /// optimization memory layout performance
     pub fn memory_layout_optimization() {
         println!("=== 内存布局优化 ===");
 
@@ -550,8 +563,9 @@ impl ScopedThreadsBestPractices {
     }
 
     /// 错误传播
-    ///
+    /// error propagation
     /// 展示如何在作用域线程中传播错误
+    /// in role domain thread in propagation
     pub fn error_propagation() {
         println!("=== 错误传播 ===");
 
@@ -588,12 +602,15 @@ impl ScopedThreadsBestPractices {
 }
 
 /// 动态负载均衡作用域线程
+/// role domain thread
+/// 动态负载均衡roledomainthread
 pub struct DynamicLoadBalancingScopedThreads;
 
 impl DynamicLoadBalancingScopedThreads {
     /// 动态负载均衡示例
-    ///
+    /// example
     /// 根据任务完成情况动态调整线程工作负载
+    /// according to task situation thread
     pub fn dynamic_load_balancing_example() {
         println!("=== 动态负载均衡示例 ===");
 
@@ -655,8 +672,9 @@ impl DynamicLoadBalancingScopedThreads {
     }
 
     /// 自适应线程池示例
-    ///
+    /// thread pool example
     /// 根据系统负载动态调整线程数量
+    /// according to system thread quantity
     pub fn adaptive_thread_pool_example() {
         println!("=== 自适应线程池示例 ===");
 
@@ -724,6 +742,7 @@ impl DynamicLoadBalancingScopedThreads {
 }
 
 /// 运行所有作用域线程示例
+/// Run all role domain thread example
 pub fn demonstrate_scoped_threads() {
     println!("=== 作用域线程演示 ===");
 

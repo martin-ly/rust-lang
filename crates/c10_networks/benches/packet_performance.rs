@@ -3,8 +3,8 @@
 #![allow(clippy::bind_instead_of_map)]
 
 //! 数据包性能基准测试
-//!
-//! 这个模块包含了 c10_networks 库数据包处理的性能基准测试
+//! Performance benchmark
+//! 数据包performancebenchmark
 
 use bytes::Bytes;
 use c10_networks::packet::buffer::BufferConfig;
@@ -16,6 +16,8 @@ use std::hint::black_box;
 use std::time::Duration;
 
 /// 数据包创建性能测试
+/// performance test
+/// 数据包Createperformance test
 fn bench_packet_creation(c: &mut Criterion) {
     let mut group = c.benchmark_group("packet_creation");
 
@@ -73,6 +75,7 @@ fn bench_packet_creation(c: &mut Criterion) {
 }
 
 /// 带序列号的数据包创建性能测试
+/// sequence performance test
 fn bench_packet_with_sequence(c: &mut Criterion) {
     c.bench_function("packet_with_sequence", |b| {
         b.iter(|| {
@@ -87,6 +90,8 @@ fn bench_packet_with_sequence(c: &mut Criterion) {
 }
 
 /// 数据包构建器性能测试
+/// builder performance test
+/// 数据包builderperformance test
 fn bench_packet_builder(c: &mut Criterion) {
     let mut group = c.benchmark_group("packet_builder");
 
@@ -125,6 +130,8 @@ fn bench_packet_builder(c: &mut Criterion) {
 }
 
 /// 数据包统计性能测试
+/// performance test
+/// 数据包统计performance test
 fn bench_packet_stats(c: &mut Criterion) {
     let mut group = c.benchmark_group("packet_stats");
 
@@ -167,6 +174,7 @@ fn bench_packet_stats(c: &mut Criterion) {
 }
 
 /// 数据包过滤器性能测试
+/// performance test
 fn bench_packet_filter(c: &mut Criterion) {
     let mut group = c.benchmark_group("packet_filter");
 
@@ -207,6 +215,7 @@ fn bench_packet_filter(c: &mut Criterion) {
 }
 
 /// 数据包缓冲区性能测试
+/// buffering performance test
 fn bench_packet_buffer(c: &mut Criterion) {
     let mut group = c.benchmark_group("packet_buffer");
 
@@ -265,6 +274,8 @@ fn bench_packet_buffer(c: &mut Criterion) {
 }
 
 /// 数据包序列化性能测试
+/// sequence performance test
+/// 数据包Serializeperformance test
 fn bench_packet_serialization(c: &mut Criterion) {
     let mut group = c.benchmark_group("packet_serialization");
 
@@ -301,6 +312,8 @@ fn bench_packet_serialization(c: &mut Criterion) {
 }
 
 /// 大数据包性能测试
+/// performance test
+/// 大数据包performance test
 fn bench_large_packet_performance(c: &mut Criterion) {
     let mut group = c.benchmark_group("large_packet_performance");
 
@@ -341,6 +354,7 @@ fn bench_large_packet_performance(c: &mut Criterion) {
 }
 
 /// 并发数据包处理性能测试
+/// concurrency performance test
 fn bench_concurrent_packet_processing(c: &mut Criterion) {
     use std::sync::Arc;
     use std::thread;
@@ -423,6 +437,7 @@ fn bench_concurrent_packet_processing(c: &mut Criterion) {
 }
 
 /// 数据包类型比较性能测试
+/// type performance test
 #[allow(unused)]
 fn bench_packet_type_comparison(c: &mut Criterion) {
     let mut group = c.benchmark_group("packet_type_comparison");

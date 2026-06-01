@@ -18,6 +18,7 @@ macro_rules! passthrough_ident {
 }
 
 /// 测试宏展开边界情况
+/// edge situation
 #[test]
 fn test_macro_expansion_boundaries() {
     // 测试简单宏展开
@@ -42,6 +43,7 @@ fn test_macro_expansion_boundaries() {
 }
 
 /// 测试嵌套深度边界情况
+/// edge situation
 #[test]
 fn test_nesting_depth_boundaries() {
     // 使用 token 递归来安全地验证“嵌套深度”场景
@@ -75,6 +77,7 @@ fn test_error_paths() {
 }
 
 /// 测试边界值组合
+/// edge combination
 #[test]
 fn test_boundary_value_combinations() {
     // 测试最小值和最大值
@@ -90,6 +93,7 @@ fn test_boundary_value_combinations() {
 }
 
 /// 测试资源耗尽情况
+/// situation
 #[test]
 fn test_resource_exhaustion() {
     // 测试大量宏展开（模拟）
@@ -103,6 +107,7 @@ fn test_resource_exhaustion() {
 }
 
 /// 测试复杂宏场景
+/// complex scenario
 #[test]
 fn test_complex_macro_scenarios() {
     // 测试条件宏
@@ -131,6 +136,7 @@ fn test_complex_macro_scenarios() {
 }
 
 /// 测试宏性能边界情况
+/// performance edge situation
 #[test]
 fn test_macro_performance_boundaries() {
     use std::time::Instant;
@@ -148,6 +154,7 @@ fn test_macro_performance_boundaries() {
 }
 
 /// 测试宏递归边界情况
+/// edge situation
 #[test]
 fn test_macro_recursion_boundaries() {
     // 使用同一个 token 递归宏来模拟“浅层递归”
@@ -155,6 +162,7 @@ fn test_macro_recursion_boundaries() {
 }
 
 /// 测试宏参数类型边界情况
+/// parameter type edge situation
 #[test]
 fn test_macro_parameter_type_boundaries() {
     // 测试表达式参数

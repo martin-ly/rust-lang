@@ -1,35 +1,27 @@
 //! # Rust 1.94.0 泛型编程特性实现模块 / Rust 1.94.0 Generic Programming Features Implementation Module
-//!
-//! 本模块实现了 Rust 1.94.0 版本中与泛型编程相关的新特性和改进，包括：
-//! This module implements new features and improvements in Rust 1.94.0 related to generic programming, including:
-//!
-//! - 改进的泛型类型推断 / Improved Generic Type Inference
-//! - 更灵活的关联类型 / More Flexible Associated Types
-//! - 增强的 trait 边界推断 / Enhanced Trait Bounds Inference
+//! - 改进generictype inference / Improved Generic Type Inference
+//! - 更灵活associated type / More Flexible Associated Types
 //! - Edition 2024 泛型优化 / Edition 2024 Generic Optimizations
 //! - 编译时泛型验证 / Compile-time Generic Validation
-//!
 //! # 文件信息
+//! #
 //! - 文件: rust_194_features.rs
 //! - 创建日期: 2026-03-06
+//! - date : 2026-03-06
 //! - 版本: 1.0
-//! - Rust版本: 1.94.0
-//! - Edition: 2024
-//!
+//! - this : 1.0
+//! - 版this: 1.0
 //! # 使用示例
-//!
+//! # example
 //! ```ignore
 //! use c04_generic::rust_194_features::*;
 //!
 //! // 1. 使用改进的泛型推断
-//! let container = SmartContainer::new(42);
-//!
+//! // 1. generic infer
+//! // 1. Use改进genericinfer
 //! // 2. 使用灵活的关联类型
-//! let adapter = TypeAdapter::new();
-//!
-//! // 3. 使用增强的 trait 边界
-//! let validator = GenericValidator::new();
-//! ```
+//! // 2. associated type
+//! // 2. Use灵活associated type
 
 // 允许MSRV不兼容警告，因为本模块专门展示Rust 1.94+特性
 #![allow(clippy::incompatible_msrv)]
@@ -38,12 +30,9 @@ use std::marker::PhantomData;
 
 // ==================== Rust 1.94 真实特性: array_windows 泛型应用 ====================
 
-/// # array_windows 在泛型编程中的应用
-///
-/// Rust 1.94.0 的 `array_windows` 方法可以与泛型结合，创建通用的窗口处理算法
 /// 通用滑动窗口处理器
-///
 /// 使用 const 泛型参数指定窗口大小
+/// const generic parameter
 pub struct SlidingWindowProcessor<T, const N: usize> {
     _phantom: PhantomData<T>,
 }
@@ -57,6 +46,7 @@ impl<T: Copy + std::ops::Add<Output = T> + Default, const N: usize> SlidingWindo
     }
 
     /// 计算窗口和
+    /// and
     pub fn window_sums(&self, data: &[T]) -> Vec<T> {
         if data.len() < N {
             return Vec::new();
@@ -68,6 +58,7 @@ impl<T: Copy + std::ops::Add<Output = T> + Default, const N: usize> SlidingWindo
     }
 
     /// 查找满足条件的窗口
+    /// condition
     pub fn find_window<F>(&self, data: &[T], predicate: F) -> Option<[T; N]>
     where
         F: Fn(&[T; N]) -> bool,
@@ -93,21 +84,14 @@ use std::{cell::LazyCell, sync::OnceLock};
 // 用于在 LazyCell 中实现 set 功能的辅助类型
 use std::cell::UnsafeCell;
 
-/// # LazyCell/LazyLock 的泛型封装
-///
-/// Rust 1.94.0 的新方法与泛型结合，提供更灵活的延迟初始化模式
-///
 /// ## 注意
-/// 在 Rust 1.94 之前的版本中，使用 OnceCell/OnceLock 实现类似功能。
-/// Rust 1.96 引入了 LazyCell::get(), get_mut(), force_mut() 方法。
+/// ##
 /// 泛型延迟初始化容器
-///
+/// generic
 /// 支持单线程和多线程两种模式
-/// 在 Rust 1.94 中，可以使用 LazyCell/LazyLock 的 get(), get_mut(), force_mut() 方法
+/// thread and thread
 pub enum LazyContainer<T, F = fn() -> T> {
-    /// 单线程版本 (使用 LazyCell + UnsafeCell 支持手动设置)
     Cell(UnsafeCell<LazyCell<T, F>>),
-    /// 多线程版本 (使用 OnceLock，支持手动设置)
     Lock(OnceLock<T>),
 }
 
@@ -116,6 +100,7 @@ unsafe impl<T: Send, F: Send> Sync for LazyContainer<T, F> {}
 
 impl<T, F> LazyContainer<T, F> {
     /// 创建单线程延迟初始化容器
+    /// thread
     pub const fn cell(init: F) -> Self
     where
         F: FnOnce() -> T,
@@ -124,6 +109,7 @@ impl<T, F> LazyContainer<T, F> {
     }
 
     /// 创建多线程延迟初始化容器
+    /// thread
     pub const fn lock() -> Self
     where
         T: Send + Sync + 'static,
@@ -131,7 +117,6 @@ impl<T, F> LazyContainer<T, F> {
         LazyContainer::Lock(OnceLock::new())
     }
 
-    /// 尝试获取值（不触发初始化）- 对应 Rust 1.96 LazyCell::get()
     pub fn try_get(&self) -> Option<&T> {
         match self {
             LazyContainer::Cell(cell) => unsafe { LazyCell::get(&*cell.get()) },
@@ -140,6 +125,7 @@ impl<T, F> LazyContainer<T, F> {
     }
 
     /// 获取或初始化值
+    /// or
     pub fn get_or_init(&self) -> &T
     where
         F: FnOnce() -> T,
@@ -158,6 +144,8 @@ impl<T, F> LazyContainer<T, F> {
     }
 
     /// 设置值 (仅适用于 Lock 变体)
+    /// ( Lock volume )
+    /// Set值 (仅适Used for Lock 变volume)
     pub fn set(&self, value: T) -> Result<(), T> {
         match self {
             LazyContainer::Cell(_) => {
@@ -170,7 +158,7 @@ impl<T, F> LazyContainer<T, F> {
 }
 
 /// 可变的泛型延迟初始化容器（仅单线程）
-/// 在 Rust 1.94 中，可以直接使用 LazyCell 的 get_mut() 和 force_mut() 方法
+/// generic （thread ）
 pub struct LazyCellContainer<T, F = fn() -> T> {
     cell: UnsafeCell<LazyCell<T, F>>,
 }
@@ -199,17 +187,16 @@ impl<T, F> LazyCellContainer<T, F> {
         }
     }
 
-    /// 尝试获取值（不触发初始化）- 对应 Rust 1.96 LazyCell::get()
     pub fn try_get(&self) -> Option<&T> {
         unsafe { LazyCell::get(&*self.cell.get()) }
     }
 
-    /// 尝试获取可变引用（不触发初始化）- 对应 Rust 1.96 LazyCell::get_mut()
     pub fn try_get_mut(&mut self) -> Option<&mut T> {
         unsafe { LazyCell::get_mut(&mut *self.cell.get()) }
     }
 
     /// 获取或初始化值
+    /// or
     pub fn get_or_init(&self) -> &T
     where
         F: FnOnce() -> T,
@@ -217,7 +204,6 @@ impl<T, F> LazyCellContainer<T, F> {
         unsafe { LazyCell::force(&*self.cell.get()) }
     }
 
-    /// 强制获取可变引用 - 对应 Rust 1.96 LazyCell::force_mut()
     pub fn force_get_mut(&mut self) -> &mut T
     where
         F: FnOnce() -> T,
@@ -230,8 +216,8 @@ impl<T, F> LazyCellContainer<T, F> {
         unsafe { LazyCell::get(&*self.cell.get()).is_some() }
     }
 
-    /// 设置值 - 在 Rust 1.94+ 的 LazyCell 中，值是通过初始化函数设置的
     /// 此方法不再适用，保留 API 兼容性但总是返回错误
+    /// this method ， API but
     #[deprecated(
         since = "1.0.0",
         note = "LazyCell 在 Rust 1.94+ 需要通过初始化函数设置值，请使用 new() 时传入的初始化函数"
@@ -245,12 +231,15 @@ impl<T, F> LazyCellContainer<T, F> {
 // ==================== Rust 1.94 真实特性: 数学常量泛型应用 ====================
 
 /// # 数学常量在泛型编程中的应用
-///
-/// Rust 1.94.0 的数学常量 EULER_GAMMA 和 GOLDEN_RATIO
-/// 可以与泛型 trait 结合使用
+/// # constant in generic in application
+/// Rust 1.94.0 数学constant EULER_GAMMA and GOLDEN_RATIO
+/// canandgeneric trait 结合Use
 /// 数学常量 trait
+/// constant trait
+/// 数学constant trait
 pub trait MathConstants {
     /// 欧拉-马歇罗尼常数
+    /// -
     const EULER_GAMMA: Self;
     /// 黄金比例
     const GOLDEN_RATIO: Self;
@@ -271,27 +260,27 @@ impl MathConstants for f64 {
 }
 
 /// 使用数学常量的泛型斐波那契计算器
-///
+/// constant generic
 /// # 浮点精度限制
-///
+/// # point
 /// 本计算器使用比奈公式（Binet's formula）进行计算：
-/// F(n) = (φⁿ - (1-φ)ⁿ) / √5
-///
+/// this （Binet's formula）：
 /// 由于使用浮点数运算，存在以下精度限制：
+/// point ，in under ：
 /// - **f32**: 在 n > 35 时开始出现明显精度误差
+/// - **f32**: in n > 35 obvious
 /// - **f64**: 在 n > 70 时开始出现明显精度误差
-///
+/// - **f64**: in n > 70 obvious
 /// 对于更大的 n 值，建议使用整数实现的斐波那契计算。
-///
+/// to n ，。
+/// to于更大 n 值，建议Use整数Implementation of斐波那契Calculate。
 /// # 示例
-///
+/// # example
 /// ```
 /// use c04_generic::rust_194_features::{FibonacciCalculator, MathConstants};
 ///
 /// let calc = FibonacciCalculator::<f64>::new();
 /// let f10 = calc.calculate(10); // 精确值: 55
-/// assert!((f10 - 55.0).abs() < 1e-10);
-/// ```
 pub struct FibonacciCalculator<T: MathConstants + Copy> {
     _phantom: PhantomData<T>,
 }
@@ -305,10 +294,10 @@ impl<T: MathConstants + Copy> FibonacciCalculator<T> {
     }
 
     /// 使用比奈公式（Binet's formula）计算第 n 个斐波那契数
-    ///
-    /// F(n) = (φⁿ - (1-φ)ⁿ) / √5
+    /// （Binet's formula） n
     ///
     /// 注意：由于浮点精度限制，仅对较小的 n 有效
+    /// ：point ，to n effective
     pub fn calculate(&self, n: u32) -> T
     where
         T: std::ops::Mul<Output = T>
@@ -327,6 +316,8 @@ impl<T: MathConstants + Copy> FibonacciCalculator<T> {
     }
 
     /// 辅助方法：计算 x^n
+    /// method ： x^n
+    /// 辅助method：Calculate x^n
     fn pow(&self, x: T, n: u32) -> T
     where
         T: std::ops::Mul<Output = T> + Copy + From<f64>,
@@ -350,18 +341,19 @@ impl<T: MathConstants + Copy> Default for FibonacciCalculator<T> {
 
 // ==================== Rust 1.94 真实特性: char 转换泛型应用 ====================
 
-/// # char 到 usize 转换在泛型编程中的应用
-///
-/// Rust 1.94.0 的 `TryFrom<char>` for usize 可以与泛型结合
 /// 泛型字符编码转换器
+/// generic conversion
 pub trait CharEncoder<T> {
     /// 将字符编码为类型 T
+    /// will as type T
     fn encode(c: char) -> Option<T>;
     /// 将 T 解码为字符
+    /// will T as
     fn decode(value: T) -> Option<char>;
 }
 
 /// Usize 字符编码器（使用 Rust 1.94 新特性）
+/// Usize （ Rust 1.94 feature ）
 pub struct UsizeCharEncoder;
 
 impl CharEncoder<usize> for UsizeCharEncoder {
@@ -375,6 +367,7 @@ impl CharEncoder<usize> for UsizeCharEncoder {
 }
 
 /// 泛型字符映射表
+/// generic
 pub struct CharMap<V> {
     entries: Vec<(char, V)>,
 }
@@ -388,6 +381,7 @@ impl<V: Clone> CharMap<V> {
     }
 
     /// 插入键值对
+    /// to
     pub fn insert(&mut self, c: char, value: V) {
         if let Some(pos) = self.entries.iter().position(|(k, _)| *k == c) {
             self.entries[pos] = (c, value);
@@ -401,7 +395,6 @@ impl<V: Clone> CharMap<V> {
         self.entries.iter().find(|(k, _)| *k == c).map(|(_, v)| v)
     }
 
-    /// 将字符键转换为 usize 索引（使用 Rust 1.94 特性）
     pub fn to_usize_map(&self) -> Vec<(usize, V)> {
         self.entries
             .iter()
@@ -418,13 +411,11 @@ impl<V: Clone> Default for CharMap<V> {
 
 // ==================== 1. 改进的泛型类型推断 ====================
 
-/// # 1. 改进的泛型类型推断 / Improved Generic Type Inference
-///
-/// Rust 1.94.0 显著改进了泛型类型推断，减少了显式类型标注的需要：
-/// Rust 1.94.0 significantly improves generic type inference, reducing the need for explicit type annotations:
+/// # 1. 改进generictype inference / Improved Generic Type Inference
 /// 智能容器 - 演示改进的泛型推断
-///
-/// Rust 1.94.0: 更智能的泛型类型推断
+/// - demonstration generic infer
+/// 智能容器 - Demonstration of改进genericinfer
+/// Rust 1.94.0: 更智能generictype inference
 #[derive(Debug, Clone)]
 pub struct SmartContainer<T> {
     data: T,
@@ -433,8 +424,7 @@ pub struct SmartContainer<T> {
 
 impl<T> SmartContainer<T> {
     /// 创建新的智能容器
-    ///
-    /// Rust 1.94.0: 改进的构造函数类型推断
+    /// Rust 1.94.0: 改进constructortype inference
     pub const fn new(data: T) -> Self {
         Self {
             data,
@@ -443,8 +433,7 @@ impl<T> SmartContainer<T> {
     }
 
     /// 创建带元数据的容器
-    ///
-    /// Rust 1.94.0: 更好的多参数类型推断
+    /// Rust 1.94.0: 更好多parametertype inference
     pub fn with_metadata(data: T, metadata: impl Into<String>) -> Self {
         Self {
             data,
@@ -453,13 +442,15 @@ impl<T> SmartContainer<T> {
     }
 
     /// 获取数据引用
+    /// reference
+    /// Get数据reference
     pub fn get(&self) -> &T {
         &self.data
     }
 
     /// 转换容器类型
-    ///
-    /// Rust 1.94.0: 改进的泛型方法类型推断
+    /// conversion type
+    /// Rust 1.94.0: 改进genericmethodtype inference
     pub fn map<F, R>(self, f: F) -> SmartContainer<R>
     where
         F: FnOnce(T) -> R,
@@ -471,8 +462,7 @@ impl<T> SmartContainer<T> {
     }
 
     /// 链式操作
-    ///
-    /// Rust 1.94.0: 更好的链式调用类型推断
+    /// Rust 1.94.0: 更好链式Calltype inference
     pub fn and_then<F, R>(self, f: F) -> SmartContainer<R>
     where
         F: FnOnce(T) -> SmartContainer<R>,
@@ -488,8 +478,8 @@ impl<T: Default> Default for SmartContainer<T> {
 }
 
 /// 泛型函数组合器
-///
-/// Rust 1.94.0: 改进的泛型函数类型推断
+/// generic function combination
+/// Rust 1.94.0: 改进genericfunctiontype inference
 pub struct GenericComposer<F, G> {
     first: F,
     second: G,
@@ -497,13 +487,15 @@ pub struct GenericComposer<F, G> {
 
 impl<F, G> GenericComposer<F, G> {
     /// 创建新的组合器
+    /// combination
     pub const fn new(first: F, second: G) -> Self {
         Self { first, second }
     }
 
     /// 组合执行
-    ///
+    /// combination
     /// Rust 1.94.0: 自动推断中间类型
+    /// Rust 1.94.0: infer in type
     pub fn compose<T, U, V>(&self, value: T) -> V
     where
         F: Fn(T) -> U,
@@ -515,27 +507,27 @@ impl<F, G> GenericComposer<F, G> {
 
 // ==================== 2. 更灵活的关联类型 ====================
 
-/// # 2. 更灵活的关联类型 / More Flexible Associated Types
-///
-/// Rust 1.94.0 提供了更灵活的关联类型定义和使用方式：
-/// Rust 1.94.0 provides more flexible associated type definitions and usage:
+/// # 2. 更灵活associated type / More Flexible Associated Types
 /// 类型适配器 Trait
-///
-/// Rust 1.94.0: 更灵活的关联类型定义
+/// type adapter Trait
+/// Rust 1.94.0: 更灵活associated typedefinition
 pub trait TypeAdapter {
     /// 输入类型
+    /// type
     type Input: Clone;
     /// 输出类型 - 可以有更灵活的约束
+    /// type - can
     type Output: Clone + Send;
     /// 错误类型
+    /// error type
     type Error: std::error::Error;
 
     /// 适配转换
+    /// conversion
+    /// 适配conversion
     fn adapt(&self, input: Self::Input) -> Result<Self::Output, Self::Error>;
 
     /// 批量适配
-    ///
-    /// Rust 1.94.0: 改进的关联类型在泛型上下文中的使用
     fn adapt_batch(&self, inputs: Vec<Self::Input>) -> Result<Vec<Self::Output>, Self::Error>
     where
         Self: Sized,
@@ -545,6 +537,7 @@ pub trait TypeAdapter {
 }
 
 /// 字符串到整数适配器
+/// to adapter
 #[derive(Debug, Clone, Copy, Default)]
 pub struct StringToIntAdapter;
 
@@ -574,8 +567,9 @@ impl TypeAdapter for StringToIntAdapter {
 }
 
 /// 类型适配器实现
-///
+/// type adapter
 /// Rust 1.94.0: 泛型适配器模式
+/// Rust 1.94.0: generic adapter
 #[derive(Debug, Clone)]
 pub struct GenericAdapter<T, U, F>
 where
@@ -614,13 +608,8 @@ where
 
 // ==================== 3. 增强的 trait 边界推断 ====================
 
-/// # 3. 增强的 trait 边界推断 / Enhanced Trait Bounds Inference
-///
-/// Rust 1.94.0 改进了 trait 边界的自动推断：
-/// Rust 1.94.0 improves automatic trait bounds inference:
 /// 泛型验证器
-///
-/// Rust 1.94.0: 更智能的 trait 边界推断
+/// generic
 pub struct GenericValidator<T: ?Sized> {
     _phantom: PhantomData<T>,
 }
@@ -634,8 +623,9 @@ impl<T: ?Sized> GenericValidator<T> {
     }
 
     /// 验证类型实现 Clone
-    ///
+    /// type Clone
     /// Rust 1.94.0: 编译器自动推断 trait 边界
+    /// Rust 1.94.0: infer trait edge
     pub fn validate_clone(&self) -> bool
     where
         T: Clone,
@@ -644,8 +634,7 @@ impl<T: ?Sized> GenericValidator<T> {
     }
 
     /// 验证类型实现 Send + Sync
-    ///
-    /// Rust 1.94.0: 更精确的 trait 边界检查
+    /// type Send + Sync
     pub fn validate_thread_safe(&self) -> bool
     where
         T: Send + Sync,
@@ -654,6 +643,7 @@ impl<T: ?Sized> GenericValidator<T> {
     }
 
     /// 验证类型大小
+    /// type
     pub fn check_size(&self) -> usize
     where
         T: Sized,
@@ -669,8 +659,7 @@ impl<T: ?Sized> Default for GenericValidator<T> {
 }
 
 /// 复杂 trait 边界结构
-///
-/// Rust 1.94.0: 简化的复杂 trait 边界表达
+/// complex trait edge structure
 #[derive(Debug, Clone)]
 pub struct ComplexBoundsStruct<T, U>
 where
@@ -691,8 +680,7 @@ where
     }
 
     /// 交换值
-    ///
-    /// Rust 1.94.0: 改进的泛型约束传播
+    /// exchange
     pub fn swap(self) -> ComplexBoundsStruct<U, T> {
         ComplexBoundsStruct {
             first: self.second,
@@ -709,12 +697,8 @@ where
 // ==================== 4. Edition 2024 泛型优化 ====================
 
 /// # 4. Edition 2024 泛型优化 / Edition 2024 Generic Optimizations
-///
-/// Rust 1.94.0 与 Edition 2024 的泛型系统集成：
-/// Rust 1.94.0 generic system integration with Edition 2024:
 /// Edition 2024 泛型容器
-///
-/// Rust 1.94.0: Edition 2024 优化的泛型代码
+/// Edition 2024 generic
 #[derive(Debug, Clone)]
 pub struct Edition2024Generic<T> {
     value: T,
@@ -730,6 +714,7 @@ pub enum Edition2024Marker {
 
 impl<T> Edition2024Generic<T> {
     /// 创建 Edition 2024 泛型容器
+    /// Edition 2024 generic
     pub const fn new(value: T) -> Self {
         Self {
             value,
@@ -737,7 +722,6 @@ impl<T> Edition2024Generic<T> {
         }
     }
 
-    /// 创建特定 Edition 的容器
     pub fn with_edition(value: T, edition: Edition2024Marker) -> Self {
         Self {
             value,
@@ -746,13 +730,13 @@ impl<T> Edition2024Generic<T> {
     }
 
     /// 获取值
+    /// Get值
     pub fn get(&self) -> &T {
         &self.value
     }
 
     /// 转换值
-    ///
-    /// Rust 1.94.0: Edition 2024 优化的泛型转换
+    /// conversion
     pub fn transform<F, R>(self, f: F) -> Edition2024Generic<R>
     where
         F: FnOnce(T) -> R,
@@ -763,7 +747,6 @@ impl<T> Edition2024Generic<T> {
         }
     }
 
-    /// 检查是否为 Modern Edition
     pub fn is_modern(&self) -> bool {
         self.edition_marker == Edition2024Marker::Modern
     }
@@ -772,18 +755,17 @@ impl<T> Edition2024Generic<T> {
 // ==================== 5. 编译时泛型验证 ====================
 
 /// # 5. 编译时泛型验证 / Compile-time Generic Validation
-///
-/// Rust 1.94.0 增强了编译时的泛型验证能力：
-/// Rust 1.94.0 enhances compile-time generic validation:
 /// 编译时类型断言
-///
+/// compile-time type
 /// Rust 1.94.0: 编译时泛型约束验证
+/// Rust 1.94.0: compile-time generic
 pub struct CompileTimeAssert<T: ?Sized> {
     _phantom: PhantomData<T>,
 }
 
 impl<T: ?Sized> CompileTimeAssert<T> {
     /// 断言类型实现 Send
+    /// type Send
     pub const fn assert_send()
     where
         T: Send,
@@ -791,6 +773,7 @@ impl<T: ?Sized> CompileTimeAssert<T> {
     }
 
     /// 断言类型实现 Sync
+    /// type Sync
     pub const fn assert_sync()
     where
         T: Sync,
@@ -798,6 +781,7 @@ impl<T: ?Sized> CompileTimeAssert<T> {
     }
 
     /// 断言类型大小
+    /// type
     pub const fn assert_size(expected: usize)
     where
         T: Sized,
@@ -807,14 +791,16 @@ impl<T: ?Sized> CompileTimeAssert<T> {
 }
 
 /// 类型级别验证器
-///
-/// Rust 1.94.0: 类型级别的泛型验证
+/// type level
 pub trait TypeLevelValidation {
     /// 验证类型有效性
+    /// type effective
     const IS_VALID: bool;
     /// 类型大小
+    /// type
     const SIZE: usize;
     /// 类型对齐
+    /// type to
     const ALIGN: usize;
 }
 
@@ -832,6 +818,7 @@ where
 use std::ops::ControlFlow;
 
 /// 搜索二维数组，找到目标时提前退出
+/// ，to goal before
 pub fn search_in_matrix(matrix: &[Vec<i32>], target: i32) -> ControlFlow<(usize, usize), ()> {
     for (i, row) in matrix.iter().enumerate() {
         for (j, &val) in row.iter().enumerate() {
@@ -844,6 +831,8 @@ pub fn search_in_matrix(matrix: &[Vec<i32>], target: i32) -> ControlFlow<(usize,
 }
 
 /// 数据验证管道
+/// pipe
+/// 数据Verifypipe
 pub fn validate_data(data: &str) -> ControlFlow<String, ()> {
     if data.is_empty() {
         return ControlFlow::Break("数据不能为空".to_string());
@@ -872,6 +861,7 @@ pub fn batch_process<T, E>(
 // ==================== 6. 综合应用示例 ====================
 
 /// 演示 Rust 1.94.0 泛型编程特性
+/// demonstration Rust 1.94.0 generic feature
 pub fn demonstrate_rust_194_generic_features() {
     println!("\n=== Rust 1.94.0 泛型编程特性演示 ===\n");
 
@@ -970,6 +960,7 @@ pub fn demonstrate_rust_194_generic_features() {
 }
 
 /// 获取 Rust 1.94.0 泛型编程特性信息
+/// Rust 1.94.0 generic feature
 pub fn get_rust_194_generic_info() -> String {
     "Rust 1.94.0 泛型编程特性:\n\
         - array_windows 泛型应用\n\
@@ -1265,8 +1256,9 @@ mod tests {
     // ==================== 边界测试 ====================
 
     /// 测试斐波那契计算器的浮点精度限制
-    ///
+    /// point
     /// 验证使用浮点计算斐波那契数在 n 较大时出现精度误差
+    /// point in n
     #[test]
     fn test_fibonacci_precision_limit() {
         let calc_f64 = FibonacciCalculator::<f64>::new();
@@ -1297,9 +1289,8 @@ mod tests {
         // f64 在 n > 70 时开始出现明显的精度误差
     }
 
-    /// 测试 SlidingWindowProcessor 对空数据的处理（扩展版）
-    ///
     /// 验证当输入数据为空或数据长度小于窗口大小时的正确行为
+    /// when as or as
     #[test]
     fn test_sliding_window_empty_extended() {
         let processor = SlidingWindowProcessor::<i32, 3>::new();
@@ -1324,9 +1315,6 @@ mod tests {
         assert_eq!(found, None);
     }
 
-    /// 测试 LazyCellContainer 重复初始化行为
-    ///
-    /// 验证 OnceCell 的 set 操作在已初始化时返回错误
     #[test]
     fn test_lazy_cell_container_reinit() {
         // Rust 1.94+ 的 LazyCell 需要初始化函数，不支持手动设置

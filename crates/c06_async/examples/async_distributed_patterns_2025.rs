@@ -10,8 +10,11 @@ use tracing::{debug, info, warn};
 use uuid::Uuid;
 
 /// 2025年分布式异步模式演示
+/// 2025distribution async demonstration
 /// 展示最新的分布式系统异步编程模式和最佳实践
+/// distribution system async and
 /// 1. 分布式服务发现
+/// 1. distribution service discovery
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ServiceInstance {
     pub id: String,
@@ -222,6 +225,7 @@ impl ServiceDiscovery {
 // }
 
 /// 2. 分布式负载均衡器
+/// 2. distribution load balancer
 #[derive(Debug)]
 pub struct LoadBalancer {
     discovery: ServiceDiscovery,
@@ -379,6 +383,7 @@ impl LoadBalancer {
 }
 
 /// 3. 分布式消息队列
+/// 3. distribution
 #[derive(Debug, Clone)]
 pub struct DistributedMessageQueue {
     queues: Arc<RwLock<HashMap<String, Vec<Message>>>>,
@@ -553,6 +558,7 @@ pub struct QueueStats {
 }
 
 /// 4. 分布式配置管理
+/// 4. distribution
 #[derive(Debug, Clone)]
 pub struct DistributedConfigManager {
     configurations: Arc<RwLock<HashMap<String, Configuration>>>,

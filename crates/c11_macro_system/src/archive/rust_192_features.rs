@@ -1,37 +1,39 @@
 //! Rust 1.92.0 宏系统特性实现模块
-//!
-//! 本模块展示了 Rust 1.92.0 在宏系统场景中的应用，包括：
-//! - 新的稳定 API（`rotate_right`, `NonZero::div_ceil`）
+//! Rust 1.92.0 system feature module
 //! - 性能优化（迭代器方法特化）
+//! - performance optimization （method ）
 //! - 宏展开性能改进
-//!
+//! - performance
 //! # 文件信息
+//! #
 //! - 文件: rust_192_features.rs
 //! - 创建日期: 2025-12-11
+//! - date : 2025-12-11
 //! - 版本: 1.0
-//! - Rust版本: 1.92.0
-//! - Edition: 2024
+//! - this : 1.0
+//! - 版this: 1.0
 use std::collections::VecDeque;
 use std::num::NonZeroUsize;
 
 // ==================== 1. rotate_right 在宏展开队列管理中的应用 ====================
 
 /// 宏展开项
-///
 /// 表示一个待展开的宏，包含名称、优先级和深度信息
+/// represent ，、and
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct MacroExpansionItem {
     /// 宏名称
     pub name: String,
     /// 展开优先级（数值越大优先级越高）
+    /// （）
     pub priority: u8,
     /// 宏展开深度
     pub depth: usize,
 }
 
 /// 使用 rotate_right 实现宏展开队列
-///
-/// Rust 1.92.0: 新增的 `rotate_right` 方法可以高效实现宏展开队列的轮转
+/// rotate_right
+/// Use rotate_right Implementation of宏展开队列
 #[derive(Default)]
 pub struct MacroExpansionQueue {
     items: VecDeque<MacroExpansionItem>,
@@ -44,8 +46,6 @@ impl MacroExpansionQueue {
     }
 
     /// 轮转宏展开队列
-    ///
-    /// Rust 1.92.0: 使用新的 rotate_right 方法实现高效的队列轮转
     pub fn rotate(&mut self, positions: usize) {
         if self.items.is_empty() {
             return;
@@ -63,11 +63,13 @@ impl MacroExpansionQueue {
     }
 
     /// 从队列头部移除并返回一个宏展开项
+    /// from and
     pub fn pop(&mut self) -> Option<MacroExpansionItem> {
         self.items.pop_front()
     }
 
     /// 获取队列中的所有项（用于演示）
+    /// in all （demonstration ）
     pub fn iter(&self) -> impl Iterator<Item = &MacroExpansionItem> {
         self.items.iter()
     }
@@ -78,6 +80,7 @@ impl MacroExpansionQueue {
     }
 
     /// 检查队列是否为空
+    /// as
     pub fn is_empty(&self) -> bool {
         self.items.is_empty()
     }
@@ -85,9 +88,6 @@ impl MacroExpansionQueue {
 
 // ==================== 2. NonZero::div_ceil 在宏缓存大小计算中的应用 ====================
 
-/// 使用 NonZero::div_ceil 计算宏缓存大小
-///
-/// Rust 1.92.0: 新增的 `div_ceil` 方法可以安全地计算宏缓存的容量
 pub fn calculate_macro_cache_size(
     total_macros: usize,
     macros_per_cache_entry: NonZeroUsize,
@@ -102,6 +102,7 @@ pub fn calculate_macro_cache_size(
 }
 
 /// 使用 div_ceil 实现宏展开内存分配
+/// div_ceil memory
 pub struct MacroMemoryAllocator {
     total_memory: usize,
     memory_per_macro: NonZeroUsize,
@@ -109,10 +110,11 @@ pub struct MacroMemoryAllocator {
 
 impl MacroMemoryAllocator {
     /// 创建一个新的宏内存分配器
-    ///
+    /// allocator
     /// # 参数
+    /// # parameter
     /// * `total_memory` - 总内存大小（单位：KB）
-    /// * `memory_per_macro` - 每个宏所需的内存大小（单位：KB）
+    /// * `total_memory` - memory （：KB）
     pub fn new(total_memory: usize, memory_per_macro: NonZeroUsize) -> Self {
         MacroMemoryAllocator {
             total_memory,
@@ -121,6 +123,7 @@ impl MacroMemoryAllocator {
     }
 
     /// 计算可以展开的宏数量
+    /// can quantity
     pub fn max_macros(&self) -> usize {
         if self.total_memory == 0 {
             return 0;
@@ -135,14 +138,14 @@ impl MacroMemoryAllocator {
 // ==================== 3. 迭代器方法特化在宏列表比较中的应用 ====================
 
 /// 使用特化的迭代器比较方法比较宏列表
-///
-/// Rust 1.92.0: Iterator::eq 为 TrustedLen 迭代器特化，性能更好
+/// method
 pub fn compare_macro_lists(list1: &[MacroExpansionItem], list2: &[MacroExpansionItem]) -> bool {
     // Rust 1.92.0: 特化的迭代器比较方法，性能更好
     list1.iter().eq(list2.iter())
 }
 
 /// 使用迭代器特化检查宏展开状态
+/// state
 pub fn check_macro_expansion_states(
     macros: &[MacroExpansionItem],
     expected_names: &[String],
@@ -155,8 +158,7 @@ pub fn check_macro_expansion_states(
 // ==================== 4. 宏展开性能优化 ====================
 
 /// 宏展开性能监控器
-///
-/// 使用 Rust 1.92.0 的新特性优化宏展开性能
+/// performance
 #[derive(Default)]
 pub struct MacroExpansionPerformanceMonitor {
     expansion_times: Vec<u64>,
@@ -166,29 +168,35 @@ pub struct MacroExpansionPerformanceMonitor {
 
 impl MacroExpansionPerformanceMonitor {
     /// 创建一个新的宏展开性能监控器
+    /// performance
     pub fn new() -> Self {
         Self::default()
     }
 
     /// 记录一次宏展开及其耗时
-    ///
+    /// and its
     /// # 参数
+    /// # parameter
     /// * `time_ns` - 展开耗时（纳秒）
+    /// * `time_ns` - （）
     pub fn record_expansion(&mut self, time_ns: u64) {
         self.expansion_times.push(time_ns);
     }
 
     /// 记录一次缓存命中
+    /// cache hit
     pub fn record_cache_hit(&mut self) {
         self.cache_hits += 1;
     }
 
     /// 记录一次缓存未命中
+    /// cache miss
     pub fn record_cache_miss(&mut self) {
         self.cache_misses += 1;
     }
 
     /// 计算平均展开时间
+    /// time
     pub fn average_expansion_time(&self) -> Option<f64> {
         if self.expansion_times.is_empty() {
             return None;
@@ -199,6 +207,7 @@ impl MacroExpansionPerformanceMonitor {
     }
 
     /// 计算缓存命中率
+    /// cache hit
     pub fn cache_hit_rate(&self) -> f64 {
         let total = self.cache_hits + self.cache_misses;
         if total == 0 {
@@ -213,11 +222,13 @@ impl MacroExpansionPerformanceMonitor {
     }
 
     /// 获取缓存命中次数
+    /// cache hit
     pub fn cache_hits(&self) -> usize {
         self.cache_hits
     }
 
     /// 获取缓存未命中次数
+    /// cache miss
     pub fn cache_misses(&self) -> usize {
         self.cache_misses
     }
@@ -225,7 +236,6 @@ impl MacroExpansionPerformanceMonitor {
 
 // ==================== 5. 综合应用示例 ====================
 
-/// 演示 Rust 1.92.0 特性在宏系统中的应用
 pub fn demonstrate_rust_192_macro_features() {
     println!("\n=== Rust 1.92.0 宏系统特性演示 ===\n");
 

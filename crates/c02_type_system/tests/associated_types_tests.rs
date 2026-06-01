@@ -1,12 +1,17 @@
 //! 关联类型测试
-//!
-//! 测试Rust的关联类型系统：
+//! associated type
 //! - 基本关联类型
+//! - this associated type
+//! - 基thisassociated type
 //! - 泛型关联类型 (GATs)
+//! - generic associated type (GATs)
 //! - 关联常量
+//! - associated constant
 //! - 关联类型约束
+//! - associated type
 
 /// 测试基本关联类型
+/// this associated type
 #[test]
 fn test_basic_associated_types() {
     trait Iterator {
@@ -39,6 +44,7 @@ fn test_basic_associated_types() {
 }
 
 /// 测试关联类型在泛型中的使用
+/// associated type in generic in
 #[test]
 fn test_associated_types_in_generics() {
     trait Container {
@@ -65,7 +71,6 @@ fn test_associated_types_in_generics() {
     assert_eq!(*get_item(&box_item), 42);
 }
 
-/// 测试关联类型与where子句
 #[test]
 fn test_associated_types_with_where() {
     trait Container {
@@ -95,6 +100,7 @@ fn test_associated_types_with_where() {
 }
 
 /// 测试关联常量
+/// associated constant
 #[test]
 fn test_associated_constants() {
     trait Config {
@@ -114,6 +120,7 @@ fn test_associated_constants() {
 }
 
 /// 测试泛型关联类型 (GATs)
+/// generic associated type (GATs)
 #[test]
 fn test_generic_associated_types() {
     trait LendingIterator {
@@ -156,6 +163,7 @@ fn test_generic_associated_types() {
 }
 
 /// 测试关联类型作为类型别名
+/// associated type as type
 #[test]
 fn test_associated_type_aliases() {
     trait Service {
@@ -201,6 +209,7 @@ fn test_associated_type_aliases() {
 }
 
 /// 测试关联类型的默认实现
+/// associated type default implementation
 #[test]
 fn test_default_associated_types() {
     trait Processor {
@@ -227,6 +236,7 @@ fn test_default_associated_types() {
 }
 
 /// 测试关联类型约束
+/// associated type
 #[test]
 fn test_associated_type_constraints() {
     use std::fmt::Debug;
@@ -254,6 +264,7 @@ fn test_associated_type_constraints() {
 }
 
 /// 测试复杂关联类型模式
+/// complex associated type
 #[test]
 fn test_complex_associated_type_pattern() {
     trait Database {

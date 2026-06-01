@@ -8,6 +8,7 @@ use tokio::time::{interval, sleep};
 use tracing::{debug, error, info};
 
 /// 应用指标收集器
+/// application indicator
 #[derive(Debug, Clone)]
 pub struct MetricsCollector {
     // 计数器
@@ -144,11 +145,14 @@ impl MetricsCollector {
     }
 
     /// 更新内存使用
+    /// memory
     pub fn update_memory_usage(&self, bytes: u64) {
         self.memory_usage_bytes.set(bytes as f64);
     }
 
     /// 更新 CPU 使用率
+    /// CPU
+    /// Update CPU Use率
     pub fn update_cpu_usage(&self, percent: f64) {
         self.cpu_usage_percent.set(percent);
     }
@@ -170,6 +174,7 @@ impl MetricsCollector {
     }
 
     /// 更新缓存命中率
+    /// cache hit
     pub fn update_cache_hit_ratio(&self, cache_name: &str, ratio: f64) {
         self.custom_metrics
             .cache_hit_ratio
@@ -178,6 +183,7 @@ impl MetricsCollector {
     }
 
     /// 获取指标文本格式
+    /// indicator this
     pub fn gather_metrics(&self) -> Result<String> {
         let metric_families = self.registry.gather();
         let encoder = TextEncoder::new();
@@ -187,6 +193,7 @@ impl MetricsCollector {
 }
 
 /// 模拟应用服务
+/// application
 pub struct ApplicationService {
     metrics: MetricsCollector,
     request_count: RwLock<u64>,
@@ -244,6 +251,7 @@ impl ApplicationService {
     }
 
     /// 启动系统指标收集
+    /// system indicator
     pub async fn start_system_metrics_collection(&self) {
         let metrics = self.metrics.clone();
 
@@ -273,6 +281,7 @@ impl ApplicationService {
     }
 
     /// 启动自定义指标更新
+    /// definition indicator
     pub async fn start_custom_metrics_update(&self) {
         let metrics = self.metrics.clone();
 
@@ -318,6 +327,7 @@ impl ApplicationService {
     }
 
     /// 启动指标导出服务
+    /// indicator
     pub async fn start_metrics_server(&self, port: u16) -> Result<()> {
         let metrics = self.metrics.clone();
 
@@ -350,6 +360,7 @@ impl ApplicationService {
     }
 
     /// 获取当前统计
+    /// when before
     pub async fn get_stats(&self) -> (u64, u64) {
         let requests = *self.request_count.read().await;
         let errors = *self.error_count.read().await;

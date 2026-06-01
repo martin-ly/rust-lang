@@ -1,7 +1,7 @@
 //! 异步生态系统性能基准测试套件
-//!
+//! async ecosystem system Performance benchmark
 //! 本基准测试套件用于测试和比较不同异步运行时的性能，
-//! 包括 std、tokio、smol 等库的性能对比 [历史: async-std 已于 2025-03 停止维护]
+//! this benchmark and async runtime performance ，
 use c06_async::async_runtime_integration_framework_simple::*;
 use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
 use std::hint::black_box;
@@ -11,6 +11,7 @@ use tokio::sync::{Mutex, Semaphore};
 use tokio::time::sleep;
 
 /// 基准测试：单个任务执行性能
+/// benchmark ：task performance
 fn benchmark_single_task_execution(c: &mut Criterion) {
     let rt = tokio::runtime::Runtime::new().unwrap();
 
@@ -27,6 +28,7 @@ fn benchmark_single_task_execution(c: &mut Criterion) {
 }
 
 /// 基准测试：批量任务执行性能
+/// benchmark ：task performance
 fn benchmark_batch_task_execution(c: &mut Criterion) {
     let rt = tokio::runtime::Runtime::new().unwrap();
 
@@ -61,6 +63,7 @@ fn benchmark_batch_task_execution(c: &mut Criterion) {
 }
 
 /// 基准测试：不同优先级的任务执行性能
+/// benchmark ：task performance
 fn benchmark_task_priority_performance(c: &mut Criterion) {
     let rt = tokio::runtime::Runtime::new().unwrap();
 
@@ -94,6 +97,7 @@ fn benchmark_task_priority_performance(c: &mut Criterion) {
 }
 
 /// 基准测试：异步同步转换性能
+/// benchmark ：async synchronous conversion performance
 fn benchmark_async_sync_conversion(c: &mut Criterion) {
     let rt = tokio::runtime::Runtime::new().unwrap();
 
@@ -140,6 +144,7 @@ fn benchmark_async_sync_conversion(c: &mut Criterion) {
 }
 
 /// 基准测试：聚合组合模式性能
+/// benchmark ：aggregation combination performance
 fn benchmark_aggregation_composition(c: &mut Criterion) {
     let rt = tokio::runtime::Runtime::new().unwrap();
 
@@ -205,6 +210,7 @@ fn benchmark_aggregation_composition(c: &mut Criterion) {
 }
 
 /// 基准测试：并发安全性性能
+/// benchmark ：concurrency performance
 fn benchmark_concurrency_safety(c: &mut Criterion) {
     let rt = tokio::runtime::Runtime::new().unwrap();
 
@@ -252,6 +258,7 @@ fn benchmark_concurrency_safety(c: &mut Criterion) {
 }
 
 /// 基准测试：内存使用性能
+/// benchmark ：memory performance
 fn benchmark_memory_usage(c: &mut Criterion) {
     let rt = tokio::runtime::Runtime::new().unwrap();
 
@@ -277,6 +284,7 @@ fn benchmark_memory_usage(c: &mut Criterion) {
 }
 
 /// 基准测试：错误处理性能
+/// benchmark ：error handling performance
 fn benchmark_error_handling(c: &mut Criterion) {
     let rt = tokio::runtime::Runtime::new().unwrap();
 
@@ -299,6 +307,7 @@ fn benchmark_error_handling(c: &mut Criterion) {
 }
 
 /// 失败任务实现（用于错误处理基准测试）
+/// task （error handling benchmark ）
 struct FailingTask {
     name: String,
     priority: TaskPriority,
@@ -336,6 +345,7 @@ impl AsyncTask for FailingTask {
 }
 
 /// 基准测试：不同运行时类型的性能对比
+/// benchmark ：runtime type performance to
 fn benchmark_runtime_type_comparison(c: &mut Criterion) {
     let rt = tokio::runtime::Runtime::new().unwrap();
 
@@ -376,6 +386,8 @@ fn benchmark_runtime_type_comparison(c: &mut Criterion) {
 }
 
 /// 基准测试：超时处理性能
+/// benchmark ：performance
+/// benchmark：超时Handleperformance
 fn benchmark_timeout_handling(c: &mut Criterion) {
     let rt = tokio::runtime::Runtime::new().unwrap();
 
@@ -410,6 +422,8 @@ fn benchmark_timeout_handling(c: &mut Criterion) {
 }
 
 /// 基准测试：监控性能
+/// benchmark ：performance
+/// benchmark：监控performance
 fn benchmark_monitoring_performance(c: &mut Criterion) {
     let rt = tokio::runtime::Runtime::new().unwrap();
 
@@ -439,6 +453,7 @@ fn benchmark_monitoring_performance(c: &mut Criterion) {
 }
 
 /// 基准测试：健康检查性能
+/// benchmark ：health check performance
 fn benchmark_health_check_performance(c: &mut Criterion) {
     let rt = tokio::runtime::Runtime::new().unwrap();
 
@@ -474,6 +489,7 @@ fn benchmark_health_check_performance(c: &mut Criterion) {
 }
 
 /// 基准测试：压力测试
+/// benchmark ：stress test
 fn benchmark_stress_test(c: &mut Criterion) {
     let rt = tokio::runtime::Runtime::new().unwrap();
 

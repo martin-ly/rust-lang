@@ -1,12 +1,15 @@
 //! 并行迭代器实现和示例
-//!
+//! parallelism and example
 //! 本模块提供并行迭代器的实现和示例，展示如何使用并行处理来加速迭代操作。
+//! This module provides parallelism and example ，parallelism 。
 //! 可以集成 `rayon` 或提供自定义实现。
+//! can `rayon` or definition 。
 use std::sync::{Arc, Mutex};
 
 /// 并行迭代器适配器
-///
+/// parallelism adapter
 /// 将普通迭代器转换为并行迭代器
+/// will conversion as parallelism
 pub struct ParallelIteratorAdapter<I> {
     #[allow(dead_code)]
     iter: I,
@@ -15,6 +18,7 @@ pub struct ParallelIteratorAdapter<I> {
 
 impl<I> ParallelIteratorAdapter<I> {
     /// 创建新的并行迭代器适配器
+    /// parallelism adapter
     pub fn new(iter: I, chunk_size: usize) -> Self {
         Self { iter, chunk_size }
     }
@@ -27,6 +31,7 @@ impl<I> ParallelIteratorAdapter<I> {
 }
 
 /// 并行处理结果
+/// parallelism result
 pub struct ParallelResult<T> {
     results: Vec<T>,
     processing_time: std::time::Duration,
@@ -34,6 +39,7 @@ pub struct ParallelResult<T> {
 
 impl<T> ParallelResult<T> {
     /// 创建新的并行处理结果
+    /// parallelism result
     pub fn new(results: Vec<T>, processing_time: std::time::Duration) -> Self {
         Self {
             results,
@@ -42,19 +48,22 @@ impl<T> ParallelResult<T> {
     }
 
     /// 获取结果
+    /// result
     pub fn results(&self) -> &[T] {
         &self.results
     }
 
     /// 获取处理时间
+    /// time
     pub fn processing_time(&self) -> std::time::Duration {
         self.processing_time
     }
 }
 
 /// 并行映射函数
-///
+/// parallelism function
 /// 对集合中的每个元素应用函数，并行处理
+/// to set in element application function ，parallelism
 pub fn parallel_map<T, R, F>(items: &[T], f: F) -> Vec<R>
 where
     T: Send + Sync + Clone + 'static,
@@ -100,9 +109,9 @@ where
 }
 
 /// 并行过滤函数
-///
+/// parallelism function
 /// 并行过滤集合中的元素
-/// 注意：这是一个简化实现，实际项目中建议使用 rayon 库
+/// parallelism set in element
 pub fn parallel_filter<T, F>(items: &[T], predicate: F) -> Vec<T>
 where
     T: Send + Sync + Clone + std::fmt::Debug + 'static,
@@ -152,9 +161,9 @@ where
 }
 
 /// 并行归约函数
-///
+/// parallelism function
 /// 并行归约集合中的元素
-/// 注意：这是一个简化实现，实际项目中建议使用 rayon 库
+/// parallelism set in element
 pub fn parallel_reduce<T, F>(items: &[T], identity: T, op: F) -> T
 where
     T: Send + Sync + Clone + std::fmt::Debug + 'static,
@@ -203,9 +212,9 @@ where
 }
 
 /// 并行查找函数
-///
+/// parallelism function
 /// 并行查找集合中满足条件的元素
-/// 注意：这是一个简化实现，实际项目中建议使用 rayon 库
+/// parallelism set in condition element
 pub fn parallel_find<T, F>(items: &[T], predicate: F) -> Option<usize>
 where
     T: Send + Sync + Clone + 'static,

@@ -1,14 +1,18 @@
 //! Rust 1.93.0 宏系统 特性模块
+//! Rust 1.93.0 system feature module
+//! Rust 1.93.0 宏system featuremodule
 #![allow(clippy::incompatible_msrv)]
 
 use std::fmt;
 
 /// 使用 `fmt::from_fn` 创建宏展开追踪格式化器
+/// `fmt::from_fn`
 pub fn macro_trace_formatter(name: &str, line: u32) -> impl fmt::Display + use<'_> {
     fmt::from_fn(move |f: &mut fmt::Formatter<'_>| write!(f, "[macro:{}@L{}]", name, line))
 }
 
 /// 使用 `fmt::from_fn` 构建条件格式化输出
+/// `fmt::from_fn` condition
 pub fn conditional_formatter(show_debug: bool, value: i32) -> impl fmt::Display {
     fmt::from_fn(move |f: &mut fmt::Formatter<'_>| {
         if show_debug {
@@ -20,6 +24,7 @@ pub fn conditional_formatter(show_debug: bool, value: i32) -> impl fmt::Display 
 }
 
 /// 组合多个 `fmt::from_fn` 创建结构化日志输出
+/// combination `fmt::from_fn` structure
 pub fn structured_log_formatter(level: &str, msg: &str) -> impl fmt::Display {
     let level = level.to_string();
     let msg = msg.to_string();

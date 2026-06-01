@@ -17,7 +17,7 @@
     - [3. impl Trait in associated types](#3-impl-trait-in-associated-types)
   - [异步运行时实战](#异步运行时实战)
     - [1. Tokio 高性能服务器](#1-tokio-高性能服务器)
-    - [2. async-std 文件处理](#2-async-std-文件处理)
+    - [2. async-std \[已归档\] 文件处理](#2-async-std-已归档-文件处理)
     - [3. Smol 轻量级任务调度](#3-smol-轻量级任务调度)
   - [异步并发模式](#异步并发模式)
     - [1. 结构化并发 (JoinSet)](#1-结构化并发-joinset)
@@ -422,10 +422,10 @@ pub async fn demo_tokio_server() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-### 2. async-std 文件处理
+### 2. async-std [已归档] 文件处理
 
 ```rust
-//! async-std 文件异步处理
+//! async-std [已归档] 文件异步处理
 //! 特性: 并发读取、批处理、进度报告
 
 use async_std::fs::{File, read_dir};
@@ -498,7 +498,7 @@ impl AsyncFileProcessor {
 
 /// 示例：文件处理
 pub async fn demo_async_std_files() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-    println!("\n=== async-std 文件处理示例 ===\n");
+    println!("\n=== async-std [已归档] 文件处理示例 ===\n");
 
     let processor = AsyncFileProcessor::new();
 
@@ -945,7 +945,7 @@ pub async fn demo_timeout_cancellation() -> Result<(), Box<dyn std::error::Error
 ## 🎯 学习建议
 
 1. **先掌握基础**: 完成上述 Rust 1.90 核心特性示例
-2. **选择运行时**: 根据项目需求选择 Tokio/async-std/Smol
+2. **选择运行时**: 根据项目需求选择 Tokio/Smol
 3. **理解并发模式**: 掌握 JoinSet、Select、超时控制
 4. **实践生产模式**: 学习连接池、熔断器等模式
 5. **性能优化**: 测量、分析、优化

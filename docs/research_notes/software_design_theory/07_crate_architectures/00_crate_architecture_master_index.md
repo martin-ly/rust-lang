@@ -12,7 +12,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust 工业级 Crate 架构解构总索引](#rust-工业级-crate-架构解构总索引)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [一、解构范围与选型标准](#一解构范围与选型标准)
   - [二、Crate 架构全景矩阵](#二crate-架构全景矩阵)
   - [三、按层次分类的架构图谱](#三按层次分类的架构图谱)
@@ -47,7 +47,7 @@
 **排除标准**：
 
 - 实验性/个人项目（GitHub stars < 1000 且无稳定 release）
-- 已被官方弃用的 crate（如 `async-std`）
+- 已被官方弃用的 crate（如 `async-std [已归档]`）
 - 纯 FFI 封装层（无 Rust  idiomatic 设计创新）
 
 ---

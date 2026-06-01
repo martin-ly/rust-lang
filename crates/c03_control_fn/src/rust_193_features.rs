@@ -1,4 +1,4 @@
-//! Rust 1.93.0 控制流与函数 特性模块
+//! Rust 1.93.0 控制streamandfunction featuremodule
 #![allow(clippy::incompatible_msrv)]
 
 use std::collections::VecDeque;
@@ -9,7 +9,6 @@ pub fn create_greeting_formatter(name: &str) -> impl fmt::Display + use<'_> {
     fmt::from_fn(move |f: &mut fmt::Formatter<'_>| write!(f, "Hello, {}!", name))
 }
 
-/// 使用 `VecDeque::pop_front_if` 过滤队首元素
 pub fn pop_front_negative(deque: &mut VecDeque<i32>) -> Vec<i32> {
     let mut popped = Vec::new();
     while let Some(v) = deque.pop_front_if(|x| *x < 0) {
@@ -18,7 +17,6 @@ pub fn pop_front_negative(deque: &mut VecDeque<i32>) -> Vec<i32> {
     popped
 }
 
-/// 使用 `VecDeque::pop_back_if` 过滤队尾元素
 pub fn pop_back_greater_than(deque: &mut VecDeque<i32>, threshold: i32) -> Vec<i32> {
     let mut popped = Vec::new();
     while let Some(v) = deque.pop_back_if(|x| *x > threshold) {

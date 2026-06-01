@@ -1,35 +1,50 @@
 //! 标准库全面指南示例
-//!
-//! 本示例全面展示Rust标准库的核心模块和最佳实践：
+//! standard library surface example
 //! - std::collections - 集合类型深度使用
+//! - std::collections - set type
 //! - std::iter - 迭代器模式
+//! - std::iter - iterator pattern
 //! - std::fs/io - 文件系统操作
+//! - std::fs/io - file system
 //! - std::sync - 并发原语
+//! - std::sync - concurrency
 //! - std::time - 时间处理
+//! - std::time - time
 //! - std::fmt - 格式化
-//!
+//! - std::fmt -
 //! # 知识结构
-//! ```text
+//! # structure
+//! # 知识structure
 //! 标准库全面指南
+//! standard library surface
 //! ├── 集合类型 (Collections)
 //! │   ├── Vec - 动态数组
-//! │   ├── HashMap - 哈希映射
-//! │   ├── HashSet - 哈希集合
-//! │   ├── BTreeMap - 有序映射
-//! │   └── BinaryHeap - 优先队列
+//! │ ├── Vec -
+//! │ ├── Vec - 动态array
 //! ├── 迭代器 (Iterator)
 //! │   ├── 适配器方法
+//! │ ├── adapter method
 //! │   ├── 消费方法
+//! │ ├── method
+//! │ ├── 消费method
 //! │   └── 自定义迭代器
+//! │ └── definition
+//! │ └── 自definitioniterator
 //! ├── 文件系统 (Filesystem)
 //! │   ├── 文件读写
+//! │ ├──
 //! │   ├── 目录操作
+//! │ ├──
 //! │   └── 路径处理
+//! │ └──
+//! │ └── 路径Handle
 //! └── 并发同步 (Sync)
-//!     ├── Mutex/RwLock
+//! └── concurrency synchronous (Sync)
 //!     ├── Arc
 //!     └── 原子类型
-//! ```
+//!     └── type
+//!     └── 原子type
+//!     └── type
 
 #![allow(unused)]
 
@@ -43,8 +58,9 @@ use std::sync::{Arc, Mutex, RwLock};
 use std::time::{Duration, Instant};
 
 /// # 集合类型深度示例
-///
+/// # set type example
 /// ## Vec - 动态数组的最佳实践
+/// ## Vec -
 pub fn vec_comprehensive_examples() {
     println!("\n=== Vec 全面示例 ===\n");
 
@@ -103,7 +119,6 @@ pub fn vec_comprehensive_examples() {
     }
 }
 
-/// ## HashMap - 哈希映射的最佳实践
 pub fn hashmap_comprehensive_examples() {
     println!("\n=== HashMap 全面示例 ===\n");
 
@@ -164,7 +179,6 @@ fn expensive_computation() -> i32 {
     42
 }
 
-/// ## HashSet - 哈希集合的最佳实践
 pub fn hashset_comprehensive_examples() {
     println!("\n=== HashSet 全面示例 ===\n");
 
@@ -202,7 +216,6 @@ pub fn hashset_comprehensive_examples() {
     println!("Word count: {}", words.len());
 }
 
-/// ## BTreeMap - 有序映射的最佳实践
 pub fn btreemap_comprehensive_examples() {
     println!("\n=== BTreeMap 全面示例 ===\n");
 
@@ -234,7 +247,6 @@ pub fn btreemap_comprehensive_examples() {
     }
 }
 
-/// ## BinaryHeap - 优先队列的最佳实践
 pub fn binaryheap_comprehensive_examples() {
     println!("\n=== BinaryHeap 全面示例 ===\n");
 
@@ -292,6 +304,7 @@ fn find_top_k(nums: Vec<i32>, k: usize) -> Vec<i32> {
 }
 
 /// # 迭代器模式深度示例
+/// # iterator pattern example
 pub fn iterator_comprehensive_examples() {
     println!("\n=== 迭代器全面示例 ===\n");
 
@@ -355,6 +368,7 @@ impl Iterator for Fibonacci {
 }
 
 /// # 文件系统操作深度示例
+/// # file system example
 pub fn filesystem_comprehensive_examples() -> io::Result<()> {
     println!("\n=== 文件系统全面示例 ===\n");
 
@@ -446,6 +460,7 @@ pub fn filesystem_comprehensive_examples() -> io::Result<()> {
 }
 
 /// # 并发同步原语深度示例
+/// # concurrency synchronous example
 pub fn sync_comprehensive_examples() {
     println!("\n=== 同步原语全面示例 ===\n");
 
@@ -520,6 +535,7 @@ pub fn sync_comprehensive_examples() {
 }
 
 /// # 时间处理深度示例
+/// # time example
 pub fn time_comprehensive_examples() {
     println!("\n=== 时间处理全面示例 ===\n");
 
@@ -563,6 +579,7 @@ pub fn time_comprehensive_examples() {
 }
 
 /// # 格式化深度示例
+/// # example
 pub fn fmt_comprehensive_examples() {
     println!("\n=== 格式化全面示例 ===\n");
 
@@ -607,6 +624,7 @@ impl fmt::Display for Point {
 }
 
 /// # 错误处理模式示例
+/// # error handling example
 pub fn error_handling_examples() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n=== 错误处理模式示例 ===\n");
 

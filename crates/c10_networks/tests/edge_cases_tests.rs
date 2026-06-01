@@ -1,5 +1,6 @@
 //! 网络编程模块边界情况测试套件 / Network Programming Module Edge Cases Test Suite
 /// 测试数据包大小边界情况
+/// edge situation
 #[test]
 fn test_packet_size_boundaries() {
     // 测试空数据包
@@ -17,6 +18,7 @@ fn test_packet_size_boundaries() {
 }
 
 /// 测试连接数边界情况
+/// edge situation
 #[test]
 fn test_connection_count_boundaries() {
     // 测试零连接
@@ -33,6 +35,7 @@ fn test_connection_count_boundaries() {
 }
 
 /// 测试超时边界情况
+/// edge situation
 #[test]
 fn test_timeout_boundaries() {
     use std::time::Duration;
@@ -67,6 +70,7 @@ fn test_error_paths() {
 }
 
 /// 测试边界值组合
+/// edge combination
 #[test]
 fn test_boundary_value_combinations() {
     // 测试最小和最大端口号
@@ -82,6 +86,7 @@ fn test_boundary_value_combinations() {
 }
 
 /// 测试资源耗尽情况
+/// situation
 #[test]
 fn test_resource_exhaustion() {
     // 测试大量连接（模拟）
@@ -95,6 +100,7 @@ fn test_resource_exhaustion() {
 }
 
 /// 测试网络协议边界情况
+/// network protocol edge situation
 #[test]
 fn test_protocol_boundaries() {
     // 测试TCP协议
@@ -111,6 +117,7 @@ fn test_protocol_boundaries() {
 }
 
 /// 测试网络缓冲区边界情况
+/// network buffering edge situation
 #[test]
 fn test_buffer_boundaries() {
     // 测试空缓冲区
@@ -127,6 +134,7 @@ fn test_buffer_boundaries() {
 }
 
 /// 测试网络连接状态边界情况
+/// network state edge situation
 #[test]
 #[warn(dead_code)]
 fn test_connection_state_boundaries() {
@@ -145,6 +153,7 @@ fn test_connection_state_boundaries() {
 }
 
 /// 测试网络重试边界情况
+/// network edge situation
 #[test]
 fn test_retry_boundaries() {
     // 测试零重试

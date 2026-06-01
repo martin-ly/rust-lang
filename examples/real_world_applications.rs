@@ -1,10 +1,12 @@
 //! 实际应用场景示例集合
-//!
-//! 本文件包含各种实际应用场景的示例，展示Rust在实际项目中的使用
+//! actual application scenario example set
+//! This file contains various real-world application scenario examples, demonstrating Rust usage in actual projects.
 use std::sync::Mutex;
 use std::thread;
 
 /// Web服务器示例
+/// Web example
+/// Web服务器Example of
 pub fn web_server_example() {
     println!("🌐 Web服务器示例");
 
@@ -37,6 +39,7 @@ pub fn web_server_example() {
 }
 
 /// 数据处理管道示例
+/// pipe example
 pub fn data_processing_pipeline_example() {
     println!("\n📊 数据处理管道示例");
 
@@ -57,6 +60,7 @@ pub fn data_processing_pipeline_example() {
 }
 
 /// 并发任务处理示例
+/// concurrency task example
 pub fn concurrent_task_processing_example() {
     println!("\n⚡ 并发任务处理示例");
 
@@ -92,6 +96,7 @@ pub fn concurrent_task_processing_example() {
 }
 
 /// 配置管理示例
+/// example
 pub fn configuration_management_example() {
     println!("\n⚙️ 配置管理示例");
 
@@ -126,6 +131,7 @@ pub fn configuration_management_example() {
 }
 
 /// 错误处理示例
+/// error handling example
 pub fn error_handling_example() {
     println!("\n🛡️ 错误处理示例");
 
@@ -145,6 +151,7 @@ pub fn error_handling_example() {
 }
 
 /// 主函数
+/// Main function
 fn main() {
     println!("🚀 Rust 实际应用场景示例集合");
     println!("============================\n");

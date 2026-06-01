@@ -611,12 +611,14 @@ makes C++ template specialization so fragile."#
 // ============================================================================
 
 /// 类型族（Type Families）概念演示
-///
+/// type （Type Families）concept demonstration
 /// 类型族允许根据一个类型参数选择另一个相关类型。
+/// type according to type parameter type 。
 /// Rust 中通过关联类型（associated types）实现。
 pub struct TypeFamilyDemo;
 
 /// 容器类型族 trait
+/// type trait
 pub trait ContainerFamily {
     type Container<T>: Container<T>;
 }
@@ -648,6 +650,7 @@ impl<T> Container<T> for Vec<T> {
 }
 
 /// 树形容器族（简化版）
+/// tree （）
 pub struct TreeFamily;
 
 pub struct SimpleTree<T> {
@@ -682,6 +685,7 @@ impl<T> Container<T> for SimpleTree<T> {
 
 impl TypeFamilyDemo {
     /// 使用类型族创建容器
+    /// type
     pub fn create_container<F, T>(items: Vec<T>) -> F::Container<T>
     where
         F: ContainerFamily,
@@ -690,11 +694,13 @@ impl TypeFamilyDemo {
     }
 
     /// 展示同一份代码对不同类型族工作
+    /// to type
     pub fn add_i32(a: i32, b: i32) -> i32 {
         a + b
     }
 
     /// 展示同一份代码对不同类型族工作
+    /// to type
     pub fn add_f64(a: f64, b: f64) -> f64 {
         a + b
     }

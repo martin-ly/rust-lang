@@ -1,34 +1,37 @@
 //! Rust 1.91 特性实现模块（历史版本）
-//!
+//! Rust 1.91 feature module （this ）
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//!
+//! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
-//!
-//! 本模块展示了 Rust 1.91 中的新特性和改进，包括：
-//! - const 上下文增强（对非静态常量的引用）
-//! - 新的稳定 API（BufRead::skip_while, ControlFlow 改进等）
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! - JIT 编译器优化（迭代器性能提升）
+//! - JIT optimization （performance ）
 //! - 内存分配器优化
+//! - allocator optimization
 //! - 类型检查器优化
+//! - type optimization
 //! - 异步迭代器改进
-//!
+//! - async
 //! # 文件信息
+//! #
 //! - 文件: rust_191_features.rs
 //! - 创建日期: 2025-01-27
+//! - date : 2025-01-27
 //! - 版本: 1.0
-//! - Rust版本: 1.91.0
-//! - Edition: 2024
+//! - this : 1.0
+//! - 版this: 1.0
 use std::io::{BufRead, BufReader, Cursor};
 use std::ops::ControlFlow;
 
 // ==================== 1. const 上下文增强 ====================
 
 /// Rust 1.91 const 上下文增强示例模块
+/// Rust 1.91 const on under example module
 pub mod const_context_enhancements {
-    /// Rust 1.91 新增：支持对非静态常量的引用
-    ///
     /// 在 Rust 1.90 中，只能引用静态变量（static）
+    /// in Rust 1.90 in ，reference variable （static）
     /// 在 Rust 1.91 中，可以引用常量（const）
+    /// in Rust 1.91 in ，can reference constant （const）
     pub fn demonstrate_const_refs() {
         // Rust 1.91: 支持非静态常量的引用
         const VALUE: i32 = 42;
@@ -45,8 +48,9 @@ pub mod const_context_enhancements {
     }
 
     /// 编译时配置计算示例
-    ///
+    /// compile-time example
     /// 展示如何在编译时使用 const 上下文增强进行配置计算
+    /// in compile-time const on under
     pub struct ConfigSystem;
 
     impl ConfigSystem {
@@ -64,8 +68,7 @@ pub mod const_context_enhancements {
         pub const SIZE_DOUBLED: usize = *Self::SIZE_REF * 2;
 
         /// 类型系统相关：在 const 上下文中使用类型推断
-        ///
-        /// Rust 1.91: const 上下文中的类型推断改进
+        /// type system ：in const on under in type infer
         pub const fn get_type_info() -> &'static str {
             const TYPE_NAME: &str = "usize";
             TYPE_NAME
@@ -82,8 +85,7 @@ pub mod const_context_enhancements {
     }
 
     /// 数学计算库示例
-    ///
-    /// 展示 const 函数与引用结合使用
+    /// library example
     pub const fn fibonacci(n: u32) -> u32 {
         match n {
             0 => 0,
@@ -93,6 +95,7 @@ pub mod const_context_enhancements {
     }
 
     /// 使用 const 上下文增强计算斐波那契数列
+    /// const on under
     pub fn demonstrate_fibonacci() {
         println!("\n=== Const 上下文斐波那契计算 ===");
 
@@ -107,13 +110,10 @@ pub mod const_context_enhancements {
 
 // ==================== 2. 新的稳定 API ====================
 
-/// Rust 1.91 新的稳定 API 示例模块
+/// Rust 1.91 新稳定 API Example ofmodule
 pub mod new_stable_apis {
     use super::*;
 
-    /// BufRead::skip_while 示例
-    ///
-    /// Rust 1.91 新增：跳过满足条件的字节
     pub fn demonstrate_skip_while() {
         println!("\n=== BufRead::skip_while ===");
 
@@ -137,8 +137,9 @@ pub mod new_stable_apis {
     }
 
     /// 配置文件解析示例
-    ///
+    /// example
     /// 使用 skip_while 解析配置文件
+    /// skip_while
     pub fn parse_config_file<R: BufRead>(reader: &mut R) -> Result<Vec<String>, std::io::Error> {
         let mut lines = Vec::new();
         let mut buf = String::new();
@@ -161,9 +162,6 @@ pub mod new_stable_apis {
         Ok(lines)
     }
 
-    /// ControlFlow 改进示例
-    ///
-    /// Rust 1.91 改进了 ControlFlow，提供更好的错误处理
     pub fn process_numbers(numbers: &[i32]) -> ControlFlow<String, i32> {
         let mut sum = 0;
         for &n in numbers {
@@ -176,7 +174,6 @@ pub mod new_stable_apis {
         ControlFlow::Continue(sum)
     }
 
-    /// 使用改进的 ControlFlow 进行复杂验证
     pub fn validate_and_process(data: &[i32]) -> ControlFlow<String, Vec<i32>> {
         data.iter().try_fold(Vec::new(), |mut acc, &n| {
             if n < 0 {
@@ -192,28 +189,30 @@ pub mod new_stable_apis {
 // ==================== 3. JIT 编译器优化 ====================
 
 /// Rust 1.91 JIT 编译器优化示例模块
-///
-/// Rust 1.91 对迭代器操作进行了优化，性能提升 10-25%
+/// Rust 1.91 JIT optimization example module
 pub mod jit_optimizations {
     /// 简单迭代器操作性能提升示例
-    ///
+    /// simple performance example
     /// Rust 1.91 JIT 优化：简单求和操作性能提升约 10-15%
+    /// Rust 1.91 JIT optimization ：simple and performance 10-15%
     pub fn calculate_sum(v: &[i32]) -> i32 {
         // Rust 1.91 优化：在 JIT 模式下性能提升
         v.iter().sum()
     }
 
     /// 复杂链式迭代器操作性能提升示例
-    ///
+    /// complex performance example
     /// Rust 1.91 JIT 优化：复杂链式操作性能提升约 15-25%
+    /// Rust 1.91 JIT optimization ：complex performance 15-25%
     pub fn process_data(v: &[i32]) -> Vec<i32> {
         // Rust 1.91 优化：链式迭代器在 JIT 模式下性能提升更明显
         v.iter().map(|x| x * 2).filter(|&x| x > 10).collect()
     }
 
     /// 复杂嵌套迭代器性能提升示例
-    ///
+    /// complex performance example
     /// Rust 1.91 JIT 优化：嵌套迭代器性能提升约 20-30%
+    /// Rust 1.91 JIT optimization ：performance 20-30%
     pub fn complex_processing(data: &[Vec<i32>]) -> Vec<i32> {
         data.iter()
             .flatten()                    // 扁平化
@@ -224,6 +223,7 @@ pub mod jit_optimizations {
     }
 
     /// 性能对比演示
+    /// performance to demonstration
     pub fn demonstrate_performance() {
         println!("\n=== JIT 编译器优化演示 ===");
 
@@ -245,12 +245,12 @@ pub mod jit_optimizations {
 // ==================== 4. 内存分配器优化 ====================
 
 /// Rust 1.91 内存分配器优化示例模块
-///
-/// Rust 1.91 改进了内存分配器，小对象分配性能提升 25-30%
+/// Rust 1.91 allocator optimization example module
 pub mod memory_optimizations {
     /// 小对象分配性能提升示例
-    ///
+    /// to performance example
     /// Rust 1.91 优化：小对象（< 32 bytes）分配性能提升约 25-30%
+    /// Rust 1.91 optimization ：to （< 32 bytes）performance 25-30%
     pub fn create_small_objects() -> Vec<Vec<i32>> {
         let mut vec = Vec::new();
         // Rust 1.91 优化：频繁的小对象分配更加高效
@@ -261,8 +261,9 @@ pub mod memory_optimizations {
     }
 
     /// JSON 解析场景示例
-    ///
+    /// JSON scenario example
     /// 在实际应用中，频繁解析小 JSON 对象受益于内存分配优化
+    /// in actual application in ， JSON to memory optimization
     pub fn parse_many_small_json(data: &str) -> Vec<String> {
         // Rust 1.91 优化：在频繁的小对象分配场景下性能提升
         data.lines()
@@ -278,6 +279,7 @@ pub mod memory_optimizations {
     }
 
     /// 内存优化演示
+    /// memory optimization demonstration
     pub fn demonstrate_memory_optimizations() {
         println!("\n=== 内存分配器优化演示 ===");
 
@@ -294,39 +296,48 @@ pub mod memory_optimizations {
 // ==================== 5. 类型检查器优化（类型系统增强） ====================
 
 /// Rust 1.91 类型检查器优化示例模块（类型系统增强）
-///
-/// Rust 1.91 改进了类型检查器，大型代码库编译时间减少 10-20%
+/// Rust 1.91 type optimization example module （type system ）
 /// 本模块专注于类型系统相关的优化和改进
+/// this module type system optimization and
 pub mod type_checker_optimizations {
     use std::collections::HashMap;
     use std::time::Instant;
 
     /// 类型推断缓存键
+    /// type infer
     type TypeInferenceKey = String;
 
     /// 类型推断缓存值
+    /// type infer
     type TypeInferenceValue = String;
 
-    /// Rust 1.91 优化的类型推断器
-    ///
     /// 包含缓存机制，提升类型推断性能
+    /// mechanism ，type infer performance
     pub struct OptimizedTypeInferencer {
         /// 类型推断缓存（Rust 1.91 新增）
+        /// type infer （Rust 1.91 ）
         inference_cache: HashMap<TypeInferenceKey, TypeInferenceValue>,
         /// 类型推断统计
+        /// type infer
         statistics: TypeInferenceStatistics,
     }
 
     /// 类型推断统计信息
+    /// type infer
     #[derive(Debug, Clone)]
     pub struct TypeInferenceStatistics {
         /// 总推断次数
+        /// infer
         pub total_inferences: usize,
         /// 缓存命中次数
+        /// cache hit
         pub cache_hits: usize,
         /// 缓存未命中次数
+        /// cache miss
         pub cache_misses: usize,
         /// 平均推断时间（微秒）
+        /// infer time （）
+        /// 平均infertime（微秒）
         pub avg_inference_time: u64,
     }
 
@@ -338,6 +349,7 @@ pub mod type_checker_optimizations {
 
     impl OptimizedTypeInferencer {
         /// 创建新的类型推断器
+        /// type infer
         pub fn new() -> Self {
             Self {
                 inference_cache: HashMap::new(),
@@ -351,8 +363,11 @@ pub mod type_checker_optimizations {
         }
 
         /// 推断类型（带缓存优化）
-        ///
+        /// infer type （optimization ）
+        /// infertype（带缓存optimization）
         /// Rust 1.91 优化：使用缓存加速类型推断
+        /// Rust 1.91 optimization ：type infer
+        /// Rust 1.91 optimization：Use缓存加速type inference
         pub fn infer_type_cached(&mut self, expression: &str) -> String {
             let start_time = Instant::now();
             self.statistics.total_inferences += 1;
@@ -399,8 +414,10 @@ pub mod type_checker_optimizations {
     }
 
     /// 复杂类型推断示例
-    ///
+    /// complex type infer example
     /// Rust 1.91 优化：改进类型推断算法，编译更快
+    /// Rust 1.91 optimization ：type infer algorithm ，
+    /// Rust 1.91 optimization：改进type inferencealgorithm，编译更快
     pub fn complex_type_inference<T>(items: Vec<T>) -> Vec<T>
     where
         T: Clone + std::fmt::Debug,
@@ -410,8 +427,9 @@ pub mod type_checker_optimizations {
     }
 
     /// 泛型类型推断示例
-    ///
+    /// generic type infer example
     /// Rust 1.91 优化：泛型类型推断性能提升
+    /// Rust 1.91 optimization ：generic type infer performance
     pub fn generic_type_inference<T, U>(items: Vec<(T, U)>) -> Vec<T>
     where
         T: Clone,
@@ -421,9 +439,6 @@ pub mod type_checker_optimizations {
         items.iter().map(|(t, _u)| t.clone()).collect()
     }
 
-    /// const 上下文中的类型推断
-    ///
-    /// Rust 1.91: 在 const 上下文中支持更复杂的类型推断
     pub const fn const_type_inference() -> &'static str {
         // Rust 1.91: const 上下文中的类型推断改进
         // 注意：这是演示 const 上下文中的类型推断，VALUE 用于类型推断
@@ -433,8 +448,9 @@ pub mod type_checker_optimizations {
     }
 
     /// 借用检查器优化示例
-    ///
+    /// borrowing optimization example
     /// Rust 1.91 优化：借用检查器性能提升
+    /// Rust 1.91 optimization ：borrowing performance
     pub fn borrow_checker_example() {
         let mut vec = vec![1, 2, 3, 4, 5];
 
@@ -451,6 +467,7 @@ pub mod type_checker_optimizations {
     }
 
     /// 类型推断演示
+    /// type infer demonstration
     pub fn demonstrate_type_inference() {
         println!("\n=== 类型推断优化演示 ===");
 
@@ -487,14 +504,14 @@ pub mod type_checker_optimizations {
 // ==================== 6. 异步迭代器改进 ====================
 
 /// Rust 1.91 异步迭代器改进示例模块
-///
-/// Rust 1.91 对异步迭代器进行了优化，性能提升约 15-20%
+/// Rust 1.91 async example module
 pub mod async_iterator_improvements {
     use futures::stream::{self, Stream, StreamExt};
 
     /// 异步流处理示例
-    ///
+    /// async stream example
     /// Rust 1.91 优化：异步迭代器性能提升约 15-20%
+    /// Rust 1.91 optimization ：async performance 15-20%
     pub async fn process_async_stream<S>(stream: S) -> Vec<i32>
     where
         S: Stream<Item = i32> + Send,
@@ -510,6 +527,7 @@ pub mod async_iterator_improvements {
     }
 
     /// 异步迭代器性能演示
+    /// async performance demonstration
     pub async fn demonstrate_async_improvements() {
         println!("\n=== 异步迭代器改进演示 ===");
 
@@ -526,10 +544,11 @@ pub mod async_iterator_improvements {
 // ==================== 7. 标准库新 API ====================
 
 /// Rust 1.91 标准库新 API 示例模块
+/// Rust 1.91 standard library API example module
 pub mod std_new_apis {
     /// str::split_ascii_whitespace 示例
-    ///
     /// Rust 1.91 新增：仅处理 ASCII 空白字符，性能更好
+    /// Rust 1.91 ： ASCII ，performance
     pub fn demonstrate_split_ascii_whitespace() {
         println!("\n=== str::split_ascii_whitespace ===");
 
@@ -547,8 +566,8 @@ pub mod std_new_apis {
     }
 
     /// Vec::try_reserve_exact 示例
-    ///
     /// Rust 1.91 新增：尝试精确分配容量，可能失败
+    /// Rust 1.91 ：，may
     pub fn demonstrate_try_reserve_exact() {
         println!("\n=== Vec::try_reserve_exact ===");
 
@@ -575,14 +594,13 @@ pub mod std_new_apis {
 // ==================== 8. 综合应用示例 ====================
 
 /// Rust 1.91 综合应用示例模块
-///
-/// 结合多个 Rust 1.91 特性的实际应用场景
+/// Rust 1.91 synthesize application example module
+/// 结合多个 Rust 1.91 featureactualapplicationscenario
 pub mod comprehensive_examples {
     use super::*;
 
     /// 配置系统示例
-    ///
-    /// 使用 const 上下文增强和新的 API
+    /// system example
     pub struct ComprehensiveConfig {
         pub max_workers: usize,
         pub buffer_size: usize,
@@ -625,8 +643,9 @@ pub mod comprehensive_examples {
     }
 
     /// 高性能数据处理管道示例
-    ///
+    /// performance pipe example
     /// 利用 JIT 优化和内存分配改进
+    /// JIT optimization and memory
     pub fn process_large_dataset(data: &[Vec<i32>]) -> Vec<i32> {
         // Rust 1.91 JIT 优化：链式迭代器性能提升约 20-25%
         data.iter()
@@ -638,8 +657,9 @@ pub mod comprehensive_examples {
     }
 
     /// 配置文件解析示例
-    ///
+    /// example
     /// 使用新的 API 解析配置文件
+    /// API
     pub fn parse_config(config_text: &str) -> Vec<String> {
         let mut cursor = Cursor::new(config_text.as_bytes());
         let mut reader = BufReader::new(&mut cursor);
@@ -669,6 +689,7 @@ pub mod comprehensive_examples {
 // ==================== 公开 API ====================
 
 /// Rust 1.91 特性演示入口
+/// Rust 1.91 feature demonstration
 pub fn demonstrate_rust_191_features() {
     println!("========================================");
     println!("Rust 1.91 新特性演示");

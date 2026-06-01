@@ -1,6 +1,10 @@
 //! # 示例02: 宏模式匹配
-//!
+//! # example 02:
+//! # Example of02: 宏模式匹配
+//! # Example of02:
 //! 演示宏中的模式匹配功能
+//! demonstration in functionality
+//! Demonstration of宏in模式匹配functionality
 
 /// 支持多种模式的计算宏
 macro_rules! calc {
@@ -27,6 +31,7 @@ macro_rules! calc {
 }
 
 /// 类型转换宏
+/// type conversion
 macro_rules! cast {
     ($val:expr => $ty:ty) => {
         $val as $ty

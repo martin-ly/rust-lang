@@ -1,7 +1,10 @@
 //! 增强的IPC通信演示程序
+//! IP Cdemonstration program
 //!
 //! 这个程序展示了增强的IPC通信功能，包括零拷贝数据传输、
+//! program IP Cfunctionality ，transmission 、
 //! 性能监控、错误恢复等 Rust 1.90 新特性
+//! performance 、error recovery etc. Rust 1.90 feature
 #[cfg(feature = "async")]
 use c07_process::prelude::*;
 

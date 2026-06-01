@@ -163,7 +163,7 @@ docs/
 ### 1. 全面的异步编程覆盖
 
 - **基础概念**: Future、async/await、Stream
-- **运行时对比**: Tokio、Smol、async-std
+- **运行时对比**: Tokio、Smol、async-std [已归档]
 - **同步原语**: Mutex、RwLock、Notify、Semaphore
 - **高级模式**: 生产者-消费者、发布-订阅、工作池
 - **实际应用**: 网络编程、数据库操作、性能优化

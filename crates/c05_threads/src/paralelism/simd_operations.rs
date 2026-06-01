@@ -1,10 +1,13 @@
 //! SIMD（单指令多数据）操作
-//!
-//! 本模块提供了SIMD并行计算功能：
+//! SIMD （）
 //! - 向量化数学运算
+//! - vectorization
 //! - 并行数据处理
+//! - parallelism
 //! - SIMD优化算法
+//! - SIMD optimization algorithm
 //! - 自动向量化
+//! - auto-vectorization
 use std::arch::x86_64::*;
 //use std::mem;
 //use std::thread;
@@ -12,6 +15,8 @@ use std::arch::x86_64::*;
 use rayon::prelude::*;
 
 /// SIMD向量类型
+/// SIMD type
+/// SIMD向量type
 #[derive(Debug, Clone)]
 pub struct SimdVector {
     data: Vec<f32>,
@@ -19,7 +24,6 @@ pub struct SimdVector {
 }
 
 impl SimdVector {
-    /// 创建新的SIMD向量
     pub fn new(data: Vec<f32>) -> Self {
         let length = data.len();
         Self { data, length }
@@ -47,6 +51,7 @@ impl SimdVector {
     }
 
     /// 检查向量是否为空
+    /// as
     pub fn is_empty(&self) -> bool {
         self.length == 0
     }
@@ -57,16 +62,20 @@ impl SimdVector {
     }
 
     /// 获取向量数据的可变引用
+    /// reference
     pub fn data_mut(&mut self) -> &mut [f32] {
         &mut self.data
     }
 }
 
 /// SIMD数学运算
+/// SIMD
 pub struct SimdMath;
 
 impl SimdMath {
     /// 向量加法（SIMD优化）
+    /// （SIMD optimization ）
+    /// 向量加法（SIMDoptimization）
     pub fn add(a: &SimdVector, b: &SimdVector) -> SimdVector {
         if a.len() != b.len() {
             panic!("向量长度不匹配");
@@ -83,6 +92,8 @@ impl SimdMath {
     }
 
     /// 向量减法（SIMD优化）
+    /// （SIMD optimization ）
+    /// 向量减法（SIMDoptimization）
     pub fn sub(a: &SimdVector, b: &SimdVector) -> SimdVector {
         if a.len() != b.len() {
             panic!("向量长度不匹配");
@@ -99,6 +110,8 @@ impl SimdMath {
     }
 
     /// 向量乘法（SIMD优化）
+    /// （SIMD optimization ）
+    /// 向量乘法（SIMDoptimization）
     pub fn mul(a: &SimdVector, b: &SimdVector) -> SimdVector {
         if a.len() != b.len() {
             panic!("向量长度不匹配");
@@ -115,6 +128,8 @@ impl SimdMath {
     }
 
     /// 向量点积（SIMD优化）
+    /// dot product （SIMD optimization ）
+    /// 向量dot product（SIMDoptimization）
     pub fn dot(a: &SimdVector, b: &SimdVector) -> f32 {
         if a.len() != b.len() {
             panic!("向量长度不匹配");
@@ -124,11 +139,15 @@ impl SimdMath {
     }
 
     /// 向量范数（SIMD优化）
+    /// （SIMD optimization ）
+    /// 向量范数（SIMDoptimization）
     pub fn norm(a: &SimdVector) -> f32 {
         unsafe { Self::norm_simd(&a.data) }
     }
 
     /// 向量归一化（SIMD优化）
+    /// （SIMD optimization ）
+    /// 向量归一化（SIMDoptimization）
     pub fn normalize(a: &SimdVector) -> SimdVector {
         let norm = Self::norm(a);
         if norm == 0.0 {
@@ -144,6 +163,8 @@ impl SimdMath {
     }
 
     /// SIMD向量加法实现
+    /// SIMD
+    /// SIMD向量加法Implementation of
     unsafe fn add_simd(a: &[f32], b: &[f32], result: &mut [f32]) {
         let len = a.len();
         let mut i = 0;
@@ -167,6 +188,8 @@ impl SimdMath {
     }
 
     /// SIMD向量减法实现
+    /// SIMD
+    /// SIMD向量减法Implementation of
     unsafe fn sub_simd(a: &[f32], b: &[f32], result: &mut [f32]) {
         let len = a.len();
         let mut i = 0;
@@ -190,6 +213,8 @@ impl SimdMath {
     }
 
     /// SIMD向量乘法实现
+    /// SIMD
+    /// SIMD向量乘法Implementation of
     unsafe fn mul_simd(a: &[f32], b: &[f32], result: &mut [f32]) {
         let len = a.len();
         let mut i = 0;
@@ -213,6 +238,7 @@ impl SimdMath {
     }
 
     /// SIMD向量点积实现
+    /// SIMD dot product
     unsafe fn dot_simd(a: &[f32], b: &[f32]) -> f32 {
         let len = a.len();
         let mut i = 0;
@@ -247,6 +273,8 @@ impl SimdMath {
     }
 
     /// SIMD向量范数实现
+    /// SIMD
+    /// SIMD向量范数Implementation of
     unsafe fn norm_simd(a: &[f32]) -> f32 {
         let len = a.len();
         let mut i = 0;
@@ -280,6 +308,8 @@ impl SimdMath {
     }
 
     /// SIMD向量归一化实现
+    /// SIMD
+    /// SIMD向量归一化Implementation of
     unsafe fn normalize_simd(a: &[f32], norm: f32, result: &mut [f32]) {
         let len = a.len();
         let mut i = 0;
@@ -304,10 +334,12 @@ impl SimdMath {
 }
 
 /// SIMD并行数据处理
+/// SIMD parallelism
 pub struct SimdParallelDataProcessor;
 
 impl SimdParallelDataProcessor {
     /// 并行向量加法
+    /// parallelism
     pub fn parallel_add(a: &SimdVector, b: &SimdVector) -> SimdVector {
         if a.len() != b.len() {
             panic!("向量长度不匹配");
@@ -332,6 +364,7 @@ impl SimdParallelDataProcessor {
     }
 
     /// 并行向量乘法
+    /// parallelism
     pub fn parallel_mul(a: &SimdVector, b: &SimdVector) -> SimdVector {
         if a.len() != b.len() {
             panic!("向量长度不匹配");
@@ -356,6 +389,7 @@ impl SimdParallelDataProcessor {
     }
 
     /// 并行向量点积
+    /// parallelism dot product
     pub fn parallel_dot(a: &SimdVector, b: &SimdVector) -> f32 {
         if a.len() != b.len() {
             panic!("向量长度不匹配");
@@ -378,6 +412,7 @@ impl SimdParallelDataProcessor {
     }
 
     /// 并行向量范数
+    /// parallelism
     pub fn parallel_norm(a: &SimdVector) -> f32 {
         let chunk_size = a.len() / num_cpus::get();
 
@@ -397,10 +432,10 @@ impl SimdParallelDataProcessor {
 }
 
 /// SIMD优化算法
+/// SIMD optimization algorithm
 pub struct SimdOptimizedAlgorithms;
 
 impl SimdOptimizedAlgorithms {
-    /// SIMD优化的矩阵乘法
     pub fn matrix_multiply(a: &[Vec<f32>], b: &[Vec<f32>]) -> Vec<Vec<f32>> {
         let rows_a = a.len();
         let cols_a = a[0].len();
@@ -420,7 +455,6 @@ impl SimdOptimizedAlgorithms {
         result
     }
 
-    /// SIMD优化的卷积运算
     pub fn convolution(input: &[f32], kernel: &[f32]) -> Vec<f32> {
         let input_len = input.len();
         let kernel_len = kernel.len();
@@ -436,7 +470,6 @@ impl SimdOptimizedAlgorithms {
         result
     }
 
-    /// SIMD优化的快速傅里叶变换
     pub fn fft(input: &[f32]) -> Vec<f32> {
         let len = input.len();
         let mut result = vec![0.0; len];
@@ -450,6 +483,8 @@ impl SimdOptimizedAlgorithms {
     }
 
     /// SIMD矩阵乘法实现
+    /// SIMD
+    /// SIMD矩阵乘法Implementation of
     unsafe fn matrix_multiply_simd(a: &[Vec<f32>], b: &[Vec<f32>], result: &mut [Vec<f32>]) {
         let rows_a = a.len();
         let cols_a = a[0].len();
@@ -491,6 +526,8 @@ impl SimdOptimizedAlgorithms {
     }
 
     /// SIMD卷积运算实现
+    /// SIMD
+    /// SIMD卷积运算Implementation of
     unsafe fn convolution_simd(input: &[f32], kernel: &[f32], result: &mut [f32]) {
         let _input_len = input.len();
         let kernel_len = kernel.len();
@@ -530,6 +567,7 @@ impl SimdOptimizedAlgorithms {
     }
 
     /// SIMD快速傅里叶变换实现
+    /// SIMD fast transformation
     unsafe fn fft_simd(input: &[f32], result: &mut [f32]) {
         let len = input.len();
 
@@ -546,10 +584,12 @@ impl SimdOptimizedAlgorithms {
 }
 
 /// 自动向量化
+/// auto-vectorization
 pub struct AutoVectorization;
 
 impl AutoVectorization {
     /// 自动向量化的数组求和
+    /// auto-vectorization and
     pub fn sum_array(data: &[f32]) -> f32 {
         let mut sum = 0.0;
 
@@ -562,6 +602,7 @@ impl AutoVectorization {
     }
 
     /// 自动向量化的数组乘法
+    /// auto-vectorization
     pub fn multiply_arrays(a: &[f32], b: &[f32]) -> Vec<f32> {
         let mut result = vec![0.0; a.len()];
 
@@ -574,6 +615,7 @@ impl AutoVectorization {
     }
 
     /// 自动向量化的数组加法
+    /// auto-vectorization
     pub fn add_arrays(a: &[f32], b: &[f32]) -> Vec<f32> {
         let mut result = vec![0.0; a.len()];
 
@@ -587,6 +629,7 @@ impl AutoVectorization {
 }
 
 /// 运行所有SIMD操作示例
+/// Run all SIMD example
 pub fn demonstrate_simd_operations() {
     println!("=== SIMD操作演示 ===");
 

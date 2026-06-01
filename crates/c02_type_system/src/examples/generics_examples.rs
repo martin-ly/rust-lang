@@ -1,14 +1,21 @@
 //! 泛型系统示例代码
-//!
+//! generic system example
 //! 本文件包含了泛型系统的各种示例，包括：
+//! this generic system example ，：
 //! - 泛型函数和结构体
+//! - generic function and struct
 //! - 特征约束和 where 子句
+//! - and where
 //! - 高级泛型特性（GATs、HRTB、常量泛型）
+//! - generic feature （GATs、HRTB、constant generic ）
+//! - 高级genericfeature（GATs、HRTB、const generic）
 //! - 变型（Variance）
 //! - 性能优化技巧
+//! - performance optimization tip
 use std::fmt::Debug;
 
 /// 泛型函数示例
+/// generic function example
 pub fn generic_function_examples() {
     println!("=== 泛型函数示例 ===");
 
@@ -28,6 +35,7 @@ pub fn generic_function_examples() {
 }
 
 /// 泛型结构体示例
+/// generic struct example
 pub fn generic_struct_examples() {
     println!("\n=== 泛型结构体示例 ===");
 
@@ -48,6 +56,7 @@ pub fn generic_struct_examples() {
 }
 
 /// 特征约束示例
+/// example
 pub fn trait_constraint_examples() {
     println!("\n=== 特征约束示例 ===");
 
@@ -65,6 +74,7 @@ pub fn trait_constraint_examples() {
 }
 
 /// 高级泛型特性示例
+/// generic feature example
 pub fn advanced_generics_examples() {
     println!("\n=== 高级泛型特性示例 ===");
 
@@ -89,6 +99,8 @@ pub fn advanced_generics_examples() {
 }
 
 /// 变型示例
+/// example
+/// 变型Example of
 pub fn variance_examples() {
     println!("\n=== 变型示例 ===");
 
@@ -104,6 +116,7 @@ pub fn variance_examples() {
 }
 
 /// 性能优化示例
+/// performance optimization example
 pub fn performance_examples() {
     println!("\n=== 性能优化示例 ===");
 
@@ -124,16 +137,20 @@ pub fn performance_examples() {
 // ============================================================================
 
 /// 泛型恒等函数
+/// generic etc. function
 pub fn identity<T>(x: T) -> T {
     x
 }
 
 /// 创建元组的泛型函数
+/// generic function
 pub fn make_pair<T, U>(first: T, second: U) -> (T, U) {
     (first, second)
 }
 
 /// 带约束的泛型函数
+/// generic function
+/// 带约束genericfunction
 pub fn clone_and_print<T: Clone + Debug>(item: T) -> T {
     let cloned = item.clone();
     println!("Cloned item: {:?}", cloned);
@@ -141,6 +158,7 @@ pub fn clone_and_print<T: Clone + Debug>(item: T) -> T {
 }
 
 /// 泛型结构体
+/// generic struct
 #[derive(Debug)]
 pub struct Point<T> {
     pub x: T,
@@ -154,6 +172,8 @@ impl<T> Point<T> {
 }
 
 /// 多个类型参数的泛型结构体
+/// type parameter generic struct
+/// 多个typeparametergenericstruct
 #[derive(Debug)]
 pub struct Pair<T, U> {
     pub first: T,
@@ -167,6 +187,7 @@ impl<T, U> Pair<T, U> {
 }
 
 /// 泛型容器
+/// generic
 pub struct Container<T> {
     value: T,
 }
@@ -186,18 +207,21 @@ impl<T> Container<T> {
 }
 
 /// 带约束的泛型函数
+/// generic function
+/// 带约束genericfunction
 pub fn print_debug<T: Debug>(item: T) {
     println!("Debug: {:?}", item);
 }
 
 /// 多个约束的泛型函数
+/// generic function
+/// 多个约束genericfunction
 pub fn clone_and_debug<T: Clone + Debug>(item: T) -> T {
     let cloned = item.clone();
     println!("Cloned and debug: {:?}", cloned);
     cloned
 }
 
-/// 使用 where 子句的复杂函数
 pub fn complex_function<T, U>(x: T, y: U) -> String
 where
     T: Clone + Debug,
@@ -208,6 +232,7 @@ where
 }
 
 /// 泛型关联类型 (GATs) 示例
+/// generic associated type (GATs) example
 pub trait Iterator {
     type Item<'a>
     where
@@ -231,6 +256,7 @@ impl Iterator for Counter {
 }
 
 /// 高阶生命周期约束 (HRTB) 示例
+/// lifetime (HRTB) example
 pub fn higher_ranked_lifetime<F>(f: &F)
 where
     F: for<'a> Fn(&'a str) -> &'a str,
@@ -241,6 +267,7 @@ where
 }
 
 /// 常量泛型示例
+/// constant generic example
 #[allow(dead_code)]
 pub struct Array<T, const N: usize> {
     data: [T; N],
@@ -275,17 +302,22 @@ where
     }
 
     /// 检查数组是否为空
+    /// as
     pub fn is_empty(&self) -> bool {
         N == 0
     }
 }
 
 /// 变型示例 - 协变
+/// example -
+/// 变型Example of - 协变
 pub fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() { x } else { y }
 }
 
 /// 变型示例 - 逆变
+/// example -
+/// 变型Example of - 逆变
 #[allow(dead_code)]
 pub trait Handler<T> {
     fn handle(&self, input: T);
@@ -308,12 +340,14 @@ where
 }
 
 /// 性能优化示例
+/// performance optimization example
 #[allow(dead_code)]
 pub fn generic_function<T>(x: T) -> T {
     x
 }
 
 /// 运行所有泛型示例
+/// Run all generic example
 pub fn run_all_examples() {
     println!("Rust 泛型系统示例");
     println!("==================");

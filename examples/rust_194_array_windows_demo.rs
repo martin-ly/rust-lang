@@ -1,5 +1,4 @@
 //! Rust 1.94 array_windows 特性完整示例
-//!
 //! 运行方式: rustc --edition 2024 examples/rust_194_array_windows_demo.rs && ./rust_194_array_windows_demo
 
 #![allow(dead_code)]
@@ -11,6 +10,7 @@ use std::time::Instant;
 // =============================================================================
 
 /// 检测 ABBA 模式
+/// ABBA
 /// 示例: xyyx, abba
 fn has_abba(s: &str) -> bool {
     s.as_bytes()
@@ -38,10 +38,12 @@ fn moving_average(data: &[f64], window_size: usize) -> Vec<f64> {
 // =============================================================================
 
 /// 股票技术指标分析器
+/// technique indicator analyze
 struct TechnicalAnalyzer;
 
 impl TechnicalAnalyzer {
     /// 计算简单移动平均线 (SMA)
+    /// simple line (SMA)
     fn calculate_sma(prices: &[f64], period: usize) -> Vec<f64> {
         if prices.len() < period {
             return Vec::new();
@@ -71,6 +73,7 @@ impl TechnicalAnalyzer {
     }
 
     /// 计算指数移动平均线 (EMA)
+    /// index line (EMA)
     fn calculate_ema(prices: &[f64], period: usize) -> Vec<f64> {
         if prices.len() < period {
             return Vec::new();
@@ -93,6 +96,7 @@ impl TechnicalAnalyzer {
     }
 
     /// 检测 MACD 交叉信号
+    /// MACD
     fn detect_macd_signals(short_term: &[f64], long_term: &[f64]) -> Vec<TradeSignal> {
         short_term
             .iter()
@@ -154,6 +158,7 @@ enum TradeSignal {
 // =============================================================================
 
 /// 简单移动平均滤波器
+/// simple
 fn moving_average_filter(signal: &[f64], window_size: usize) -> Vec<f64> {
     match window_size {
         3 => signal
@@ -172,6 +177,7 @@ fn moving_average_filter(signal: &[f64], window_size: usize) -> Vec<f64> {
 }
 
 /// 边缘检测 (Sobel 算子简化版)
+/// edge (Sobel )
 fn edge_detection_1d(data: &[f64]) -> Vec<f64> {
     data.array_windows::<3>()
         .map(|[a, _b, c]| {

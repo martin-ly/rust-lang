@@ -1,10 +1,16 @@
 //! Rust 1.90 异步控制流增强模块
+//! Rust 1.90 async stream module
 //! 
 //! 本模块实现了Rust 1.90版本中的异步控制流增强特性，包括：
+//! this module Rust 1.90this in async stream feature ，：
 //! - 异步状态机
+//! - async state machine
 //! - 异步资源管理
+//! - async
 //! - 异步错误处理
+//! - async error handling
 //! - 异步并发控制
+//! - async concurrency
 use std::sync::Arc;
 use std::time::Duration;
 use tokio::time::sleep;
@@ -14,6 +20,7 @@ use std::collections::HashMap;
 use anyhow::{Result, anyhow};
 
 /// 异步状态枚举
+/// async state enum
 #[derive(Debug, Clone, PartialEq)]
 pub enum AsyncState {
     Initializing,
@@ -26,6 +33,7 @@ pub enum AsyncState {
 }
 
 /// 异步状态机
+/// async state machine
 #[derive(Debug, Clone)]
 pub struct AsyncStateMachine190 {
     state: Arc<Mutex<AsyncState>>,
@@ -142,6 +150,7 @@ impl AsyncStateMachine190 {
 }
 
 /// 异步资源管理器
+/// async
 #[allow(unused)]
 pub struct AsyncResourceManager {
     resources: Arc<Mutex<HashMap<String, Box<dyn AsyncResource + Send + Sync>>>>,
@@ -149,7 +158,9 @@ pub struct AsyncResourceManager {
 }
 
 /// 异步资源trait
+/// async trait
 /// 注意：由于async fn在trait中不支持dyn，这里使用同步版本
+/// ：async fnin traitin dyn，synchronous this
 #[allow(unused)]
 pub trait AsyncResource {
     fn cleanup(&mut self) -> Result<(), String>;
@@ -195,6 +206,7 @@ impl AsyncResourceManager {
 }
 
 /// 数据库连接资源
+/// database
 #[allow(unused)]
 pub struct DatabaseResource {
     id: String,
@@ -221,6 +233,7 @@ impl AsyncResource for DatabaseResource {
 }
 
 /// 异步错误处理器
+/// async error handling
 pub struct AsyncErrorHandler190 {
     max_retries: usize,
     retry_delay: Duration,
@@ -264,6 +277,7 @@ impl AsyncErrorHandler190 {
 }
 
 /// 异步并发控制器
+/// async concurrency
 #[allow(unused)]
 pub struct AsyncConcurrencyController {
     active_tasks: Arc<Mutex<HashMap<String, JoinHandle<Result<(), String>>>>>,
@@ -324,6 +338,7 @@ impl AsyncConcurrencyController {
 }
 
 /// 综合演示异步控制流增强
+/// synthesize demonstration async stream
 pub async fn demonstrate_async_control_flow_190() -> Result<()> {
     println!("🔄 演示 Rust 1.90 异步控制流增强");
     println!("==========================================");

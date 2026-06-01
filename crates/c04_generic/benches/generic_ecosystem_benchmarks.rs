@@ -1,10 +1,10 @@
 //! C04 泛型与生态系统集成性能基准测试
-//!
-//! 测试泛型在实际生态库（rayon, itertools, serde）中的性能表现。
+//! C04 generic and ecosystem system Performance benchmark
 
 use criterion::{Criterion, criterion_group, criterion_main};
 
 /// 基准测试：rayon 并行求和 vs 串行求和
+/// benchmark ：rayon parallelism and vs and
 fn bench_parallel_vs_serial_sum(c: &mut Criterion) {
     use c04_generic::ecosystem_examples::parallel_square_sum;
 
@@ -40,6 +40,7 @@ fn bench_itertools_pairs(c: &mut Criterion) {
 }
 
 /// 基准测试：serde JSON 序列化/反序列化
+/// benchmark ：serde JSON sequence /sequence
 fn bench_serde_roundtrip(c: &mut Criterion) {
     use c04_generic::ecosystem_examples::{User, user_from_json, user_to_json};
 
@@ -65,6 +66,7 @@ fn bench_serde_roundtrip(c: &mut Criterion) {
 }
 
 /// 基准测试：anyhow + thiserror 错误处理开销
+/// benchmark ：anyhow + thiserror error handling overhead
 fn bench_error_handling_overhead(c: &mut Criterion) {
     use c04_generic::ecosystem_examples::find_name;
 
@@ -86,6 +88,7 @@ fn bench_error_handling_overhead(c: &mut Criterion) {
 }
 
 /// 基准测试：泛型容器内存分配模式
+/// benchmark ：generic memory
 fn bench_generic_container_ops(c: &mut Criterion) {
     c.bench_function("generic_vec_push", |b| {
         b.iter(|| {

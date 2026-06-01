@@ -1,26 +1,25 @@
 //! # 容器化微服务示例
-//!
-//! 本示例展示如何构建适合容器化部署的 Wasm 微服务
-//!
+//! # containerization microservice example
 //! ## 特性
+//! ## feature
 //! - HTTP 服务器
+//! - HTTP
 //! - 健康检查端点
+//! - health check point
 //! - Prometheus 指标暴露
 //! - 优雅关闭
+//! -
+//! - 优雅Close
 //! - 环境变量配置
-//!
+//! - environment variable
 //! ## 编译
-//! ```bash
-//! cargo build --example 08_container_microservice --target wasm32-wasip1 --release
+//! ##
 //! ```
 //!
-//! ## 运行（使用 WasmEdge）
-//! ```bash
 //! wasmedge --dir .:. target/wasm32-wasip1/release/examples/08_container_microservice.wasm
 //! ```
 //!
 //! ## Docker 运行
-//! ```bash
 //! docker run --runtime=io.containerd.wasmedge.v1 \
 //!   --platform=wasi/wasm \
 //!   -p 8080:8080 \
@@ -34,6 +33,7 @@ use std::sync::Arc;
 use std::time::{SystemTime, UNIX_EPOCH};
 
 /// 应用配置
+/// application
 #[allow(dead_code)]
 #[derive(Debug, Clone)]
 struct AppConfig {
@@ -42,13 +42,17 @@ struct AppConfig {
     /// 服务器端口
     port: u16,
     /// 日志级别
+    /// level
+    /// 日志level
     log_level: String,
     /// 最大连接数
+    /// maximum
     max_connections: usize,
 }
 
 impl AppConfig {
     /// 从环境变量加载配置
+    /// from environment variable
     fn from_env() -> Self {
         Self {
             host: env::var("HOST").unwrap_or_else(|_| "0.0.0.0".to_string()),
@@ -66,6 +70,7 @@ impl AppConfig {
 }
 
 /// 应用指标
+/// application indicator
 #[derive(Debug)]
 struct AppMetrics {
     /// 总请求数
@@ -75,6 +80,7 @@ struct AppMetrics {
     /// 失败请求数
     failed_requests: AtomicU64,
     /// 启动时间戳
+    /// time
     start_time: u64,
 }
 
@@ -103,7 +109,7 @@ impl AppMetrics {
         }
     }
 
-    /// 生成 Prometheus 格式的指标
+    /// Generate Prometheus 格式indicator
     fn to_prometheus(&self) -> String {
         let total = self.total_requests.load(Ordering::Relaxed);
         let successful = self.successful_requests.load(Ordering::Relaxed);
@@ -127,6 +133,8 @@ impl AppMetrics {
 }
 
 /// HTTP 响应构建器
+/// HTTP builder
+/// HTTP 响应builder
 struct Response {
     status: u16,
     status_text: &'static str,
@@ -177,6 +185,8 @@ impl Response {
 }
 
 /// HTTP 请求解析
+/// HTTP
+/// HTTP 请求Parse
 #[derive(Debug)]
 struct Request {
     method: String,
@@ -211,6 +221,8 @@ impl Request {
 }
 
 /// 主应用
+/// application
+/// 主application
 struct App {
     config: AppConfig,
     metrics: Arc<AppMetrics>,
@@ -328,11 +340,13 @@ impl App {
     }
 
     /// 健康检查
+    /// health check
     fn handle_health(&self) -> Response {
         Response::json(r#"{"status":"healthy","timestamp":0}"#.to_string())
     }
 
     /// 就绪检查
+    /// 就绪Check
     fn handle_ready(&self) -> Response {
         // 在实际应用中，这里会检查依赖服务（数据库、缓存等）
         Response::json(r#"{"status":"ready"}"#.to_string())
@@ -350,12 +364,14 @@ impl App {
     }
 
     /// Echo 服务
+    /// Echo
     fn handle_echo(&self, _request: &Request) -> Response {
         // 简化版：实际应该解析请求体
         Response::json(r#"{"echo":"Request body would be echoed here"}"#.to_string())
     }
 
     /// API 信息
+    /// API
     fn handle_api(&self, path: &str) -> Response {
         if path == "/api/info" {
             Response::json(format!(

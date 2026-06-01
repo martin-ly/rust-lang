@@ -1,17 +1,15 @@
 // 注意: 本示例需要 tokio crate，请通过 Cargo 项目运行:
 //   cargo add tokio --features full
 //   cargo run --example rust_194_controlflow_patterns.rs
-//! Rust 1.94 `ControlFlow` 深度示例
-//!
-//! 本文件演示 `std::ops::ControlFlow` 在实际生产场景中的高级应用，
 //! 包括流控制、错误处理和提前终止模式。
+//! stream 、error handling and before 。
 
 use std::ops::ControlFlow;
 
 /// 连接池健康检查
-/// 
-/// 使用 ControlFlow 快速检查是否有可用连接，
+/// health check
 /// 找到第一个可用连接即停止迭代。
+/// to first 。
 pub struct ConnectionPool {
     connections: Vec<Connection>,
 }
@@ -29,8 +27,9 @@ impl ConnectionPool {
     }
     
     /// 快速检查是否有可用连接
-    /// 
+    /// fast
     /// 性能优势：找到第一个可用连接即停止，避免遍历整个列表
+    /// performance strength ：to first ，
     pub fn has_available(&self) -> bool {
         matches!(
             self.connections.iter().try_fold(
@@ -48,6 +47,7 @@ impl ConnectionPool {
     }
     
     /// 查找第一个可用连接
+    /// first
     pub fn find_first_available(&self) -> Option<&Connection> {
         match self.connections.iter().try_fold(
             ControlFlow::Continue(None),
@@ -65,6 +65,7 @@ impl ConnectionPool {
     }
     
     /// 批量验证连接，返回第一个失效的连接
+    /// ，first
     pub fn find_first_invalid(&self) -> Option<&Connection> {
         match self.connections.iter().try_fold(
             ControlFlow::Continue(()),
@@ -97,9 +98,8 @@ impl Connection {
 }
 
 /// 批处理控制器
-/// 
-/// 使用 ControlFlow 实现复杂的批处理边界控制，
 /// 支持超时、错误阈值和提前终止。
+/// 、and before 。
 pub struct BatchProcessor<T> {
     items: Vec<T>,
     config: BatchConfig,
@@ -130,7 +130,6 @@ impl<T: Clone> BatchProcessor<T> {
         Self { items, config }
     }
     
-    /// 处理批次，使用 ControlFlow 控制流程
     pub async fn process<F, Fut>(&self, mut processor: F) -> BatchResult<T>
     where
         F: FnMut(&T) -> Fut,
@@ -178,8 +177,7 @@ impl<T: Clone> BatchProcessor<T> {
 }
 
 /// 树形结构搜索
-/// 
-/// 使用 ControlFlow 实现深度优先搜索，找到目标即停止。
+/// tree structure
 #[derive(Debug)]
 pub struct TreeNode<T> {
     pub value: T,
@@ -188,6 +186,7 @@ pub struct TreeNode<T> {
 
 impl<T: PartialEq + Clone> TreeNode<T> {
     /// 深度优先搜索，找到目标值即停止
+    /// depth-first search ，to goal
     pub fn dfs_find(&self, target: &T) -> Option<T> {
         match self.dfs_recursive(target) {
             ControlFlow::Break(found) => Some(found),
@@ -212,8 +211,7 @@ impl<T: PartialEq + Clone> TreeNode<T> {
 }
 
 /// 管道处理模式
-/// 
-/// 使用 ControlFlow 构建可组合的处理管道。
+/// pipe
 pub struct ProcessingPipeline<T, E> {
     steps: Vec<Box<dyn Fn(T) -> ControlFlow<E, T>>>,
 }
@@ -244,8 +242,7 @@ impl<T, E> ProcessingPipeline<T, E> {
 }
 
 /// 错误累积与报告
-/// 
-/// 使用 ControlFlow 收集所有错误后再统一处理。
+/// and
 pub fn validate_all<T, E>(
     items: Vec<T>,
     validator: impl Fn(&T) -> Result<(), E>,
@@ -266,8 +263,6 @@ pub fn validate_all<T, E>(
 }
 
 /// 分页数据获取
-/// 
-/// 使用 ControlFlow 控制分页获取，直到满足条件或数据耗尽。
 pub async fn fetch_paginated_data<F, Fut, T>(
     mut fetch_page: F,
     max_items: usize,

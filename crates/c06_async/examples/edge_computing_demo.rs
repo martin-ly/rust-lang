@@ -1,17 +1,25 @@
 //! 边缘计算异步演示
-//!
+//! edge computing async demonstration
 //! 本示例展示了异步编程在边缘计算中的应用：
+//! this example async in edge computing in application ：
 //! - 边缘节点管理
+//! - edge node
 //! - 数据预处理和过滤
+//! - and
 //! - 边缘AI推理
+//! - edge AIreason
 //! - 实时数据处理
+//! -
 //! - 边缘存储管理
+//! - edge
 //! - 网络连接管理
+//! - network
 //! - 资源调度
+//! -
 //! - 边缘协同计算
-//!
+//! - edge
 //! 运行方式：
-//! ```bash
+//! Run way ：
 //! cargo run --example edge_computing_demo
 //! ```
 use anyhow::Result;
@@ -24,6 +32,7 @@ use tokio::time::sleep;
 use uuid::Uuid;
 
 /// 边缘节点信息
+/// edge node
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct EdgeNode {
     pub id: String,
@@ -71,6 +80,7 @@ pub enum NodeStatus {
 }
 
 /// 边缘任务
+/// edge task
 #[derive(Debug, Clone)]
 pub struct EdgeTask {
     pub id: String,
@@ -110,6 +120,7 @@ pub struct TaskRequirements {
 }
 
 /// 边缘任务调度器
+/// edge task
 pub struct EdgeTaskScheduler {
     nodes: Arc<RwLock<HashMap<String, EdgeNode>>>,
     task_queue: Arc<Mutex<VecDeque<EdgeTask>>>,
@@ -404,6 +415,7 @@ pub struct SystemStats {
 }
 
 /// 边缘数据处理器
+/// edge
 pub struct EdgeDataProcessor {
     input_stream: mpsc::UnboundedReceiver<SensorData>,
     output_stream: mpsc::UnboundedSender<ProcessedData>,
@@ -562,6 +574,7 @@ impl EdgeDataProcessor {
 }
 
 /// 边缘AI推理引擎
+/// edge AIreason
 pub struct EdgeAIEngine {
     models: Arc<RwLock<HashMap<String, AIModel>>>,
     inference_queue: Arc<Mutex<VecDeque<InferenceRequest>>>,

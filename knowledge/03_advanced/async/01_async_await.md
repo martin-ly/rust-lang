@@ -30,7 +30,7 @@
 - [x] 区分 `Send` 与 `!Send` 的 `Future`，并理解 `'static` bound 的来源
 - [x] 使用 `join!`、`select!`、`spawn` 构建并发异步程序
 - [x] 识别并修复非取消安全（cancel-unsafe）的异步代码
-- [x] 在 Tokio、async-std、smol、embassy 之间做出运行时选择
+- [x] 在 Tokio、async-std [已归档]、smol、embassy 之间做出运行时选择
 
 ---
 
@@ -169,7 +169,7 @@ graph TD
     I --> J[async/await State Machine]
     J --> K[Waker & Context]
     K --> L[Executor / Reactor]
-    L --> M[Tokio / async-std / smol]
+    L --> M[Tokio / async-std [已归档] / smol]
 
     style J fill:#f9f,stroke:#333,stroke-width:2px
     style G fill:#bbf,stroke:#333
@@ -769,7 +769,7 @@ stateDiagram-v2
                                    │是                   │否│ • tokio::net    │
                                    ▼                     ▼ │ • 大量中间件     │
                           ┌──────────────────┐  ┌──────────────────┐ │
-                          │ **smol**         │  │ **async-std**    │ │ 风险: 编译慢   │
+                          │ **smol**         │  │ **async-std [已归档]**    │ │ 风险: 编译慢   │
                           │ 小型模块化运行时  │  │ 多线程，类 std API│ │ 学习曲线陡峭   │
                           ├──────────────────┤  ├──────────────────┤ │
                           │ • 核心仅数千行   │  │ • 兼容 std 习惯  │ └──────────────────┘

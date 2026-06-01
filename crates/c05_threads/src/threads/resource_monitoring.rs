@@ -1,10 +1,17 @@
 //! 线程资源监控
-//!
+//! thread
 //! 本模块提供了线程资源监控功能：
+//! This module provides thread functionality ：
 //! - CPU使用率监控
+//! - CPU
+//! - CPUUse率监控
+//! - CPUUse
 //! - 内存使用监控
+//! - memory
 //! - 系统调用统计
+//! - system
 //! - 性能分析
+//! - performance analyze
 use std::collections::HashMap;
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::{Arc, Mutex};
@@ -12,6 +19,7 @@ use std::thread;
 use std::time::{Duration, Instant};
 
 /// 线程资源使用统计
+/// thread
 #[derive(Debug, Clone)]
 pub struct ThreadResourceStats {
     pub thread_id: usize,
@@ -68,6 +76,7 @@ impl ThreadResourceStats {
 }
 
 /// 系统资源监控器
+/// system
 pub struct SystemResourceMonitor {
     thread_stats: Arc<Mutex<HashMap<usize, ThreadResourceStats>>>,
     system_stats: Arc<Mutex<SystemStats>>,
@@ -228,6 +237,7 @@ impl Clone for SystemResourceMonitor {
 }
 
 /// 性能分析器
+/// performance analyze
 #[allow(dead_code)]
 pub struct PerformanceProfiler {
     monitor: Arc<SystemResourceMonitor>,
@@ -420,6 +430,7 @@ impl ProfileReport {
 }
 
 /// 运行所有资源监控示例
+/// Run all example
 pub fn demonstrate_resource_monitoring() {
     println!("=== 线程资源监控演示 ===");
 

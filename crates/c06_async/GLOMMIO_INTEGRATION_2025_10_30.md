@@ -171,7 +171,7 @@ cargo run --example glommio_comprehensive_2025
 - Glommio: Thread-per-core
 - Tokio: Work-stealing
 - Smol: 轻量级多模式
-- async-std: 标准库风格
+- async-std [已归档]: 标准库风格
 
 #### 性能基准测试
 
@@ -190,7 +190,7 @@ cargo run --example glommio_comprehensive_2025
 - ✅ Glommio: 高频交易、数据库引擎、高性能网络服务
 - ✅ Tokio: 微服务、Web 应用、云原生应用
 - ✅ Smol: 嵌入式系统、CLI 工具
-- ✅ async-std: 从同步代码迁移、教育项目
+- ⚠️ async-std [已归档]: 历史参考
 
 #### 代码对比
 
@@ -203,7 +203,7 @@ cargo run --example glommio_comprehensive_2025
 - Glommio: 4-8周 (最陡峭)
 - Tokio: 2-4周
 - Smol: 1-2周
-- async-std: 1-2周
+- async-std [已归档]: 历史参考
 
 #### 迁移指南
 

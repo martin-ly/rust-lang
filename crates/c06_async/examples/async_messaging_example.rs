@@ -1,6 +1,7 @@
 //! 异步消息传递示例
-//!
+//! async example
 //! 展示如何使用异步编程进行消息传递和事件处理
+//! async and
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
@@ -10,6 +11,8 @@ use tokio::sync::{RwLock, broadcast, mpsc};
 use tokio::time::sleep;
 
 /// 消息类型枚举
+/// type enum
+/// 消息typeenum
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum MessageType {
     Text(String),
@@ -20,6 +23,8 @@ pub enum MessageType {
 }
 
 /// 消息结构
+/// structure
+/// 消息structure
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Message {
     pub id: u64,
@@ -40,6 +45,7 @@ pub enum MessagePriority {
 }
 
 /// 消息处理器trait
+/// trait
 #[async_trait::async_trait]
 pub trait MessageHandler: Send + Sync {
     async fn handle_message(&self, message: Message) -> Result<()>;
@@ -47,6 +53,7 @@ pub trait MessageHandler: Send + Sync {
 }
 
 /// 文本消息处理器
+/// this
 pub struct TextMessageHandler {
     name: String,
 }
@@ -107,6 +114,7 @@ impl MessageHandler for ImageMessageHandler {
 }
 
 /// 命令消息处理器
+/// command
 pub struct CommandMessageHandler {
     name: String,
 }
@@ -135,6 +143,7 @@ impl MessageHandler for CommandMessageHandler {
 }
 
 /// 异步消息系统
+/// async system
 pub struct AsyncMessageSystem {
     message_id_counter: Arc<RwLock<u64>>,
     handlers: Arc<RwLock<HashMap<String, Box<dyn MessageHandler>>>>,
@@ -161,6 +170,7 @@ impl Default for AsyncMessageSystem {
 
 impl AsyncMessageSystem {
     /// 创建新的消息系统
+    /// system
     pub fn new() -> Self {
         let (message_tx, message_rx) = mpsc::unbounded_channel();
         let (broadcast_tx, _) = broadcast::channel(1000);
@@ -238,6 +248,8 @@ impl AsyncMessageSystem {
     }
 
     /// 消息处理循环
+    /// circulation
+    /// 消息Handlecirculation
     async fn message_processing_loop(&self, mut message_rx: mpsc::UnboundedReceiver<Message>) {
         println!("🔄 消息处理循环启动");
 
@@ -308,6 +320,7 @@ impl AsyncMessageSystem {
     }
 
     /// 判断处理器是否应该处理该消息
+    /// should this
     fn should_handle_message(&self, handler: &dyn MessageHandler, message: &Message) -> bool {
         match &message.message_type {
             MessageType::Text(_) => handler.get_handler_name().contains("Text"),
@@ -389,6 +402,7 @@ impl MessageProducer {
     }
 
     /// 发送文本消息
+    /// this
     pub async fn send_text(
         &self,
         recipient: &str,
@@ -423,6 +437,7 @@ impl MessageProducer {
     }
 
     /// 发送命令消息
+    /// command
     pub async fn send_command(
         &self,
         recipient: &str,
@@ -459,6 +474,7 @@ impl MessageProducer {
 }
 
 /// 主函数
+/// Main function
 #[tokio::main]
 async fn main() -> Result<()> {
     println!("🚀 启动异步消息传递示例");

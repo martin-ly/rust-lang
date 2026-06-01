@@ -1,10 +1,15 @@
 //! 线程管理
-//!
+//! thread
 //! 本模块提供了高级线程管理功能：
+//! This module provides thread functionality ：
 //! - 线程生命周期管理
+//! - thread lifetime
 //! - 线程池管理
+//! - thread pool
 //! - 线程状态监控
+//! - thread state
 //! - 线程通信
+//! - thread communication
 
 // 允许类型复杂性警告
 #![allow(clippy::type_complexity)]
@@ -16,6 +21,7 @@ use std::thread;
 use std::time::{Duration, Instant};
 
 /// 线程状态
+/// thread state
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ThreadState {
     Created,
@@ -26,6 +32,7 @@ pub enum ThreadState {
 }
 
 /// 线程信息
+/// thread
 #[derive(Debug, Clone)]
 pub struct ThreadInfo {
     pub id: usize,
@@ -67,6 +74,7 @@ impl ThreadInfo {
 }
 
 /// 线程管理器
+/// thread
 pub struct ThreadManager {
     threads: Arc<Mutex<HashMap<usize, ThreadInfo>>>,
     next_thread_id: Arc<AtomicUsize>,
@@ -191,6 +199,8 @@ impl ThreadManager {
 }
 
 /// 高级线程池
+/// thread pool
+/// 高级thread pool
 #[allow(dead_code)]
 pub struct AdvancedThreadPool {
     manager: Arc<ThreadManager>,
@@ -316,6 +326,7 @@ impl AdvancedThreadPool {
 }
 
 /// 线程通信管理器
+/// thread communication
 pub struct ThreadCommunicationManager {
     channels: Arc<Mutex<HashMap<String, mpsc::Sender<Message>>>>,
     message_handlers: Arc<Mutex<HashMap<String, Box<dyn Fn(Message) + Send + Sync>>>>,
@@ -382,6 +393,7 @@ impl ThreadCommunicationManager {
 }
 
 /// 运行所有线程管理示例
+/// Run all thread example
 pub fn demonstrate_thread_management() {
     println!("=== 线程管理演示 ===");
 

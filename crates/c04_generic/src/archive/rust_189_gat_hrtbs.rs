@@ -1,35 +1,26 @@
 //! # Rust 1.89 特性示例 (历史版本)
-//!
+//! # Rust 1.89 feature example (this )
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//!
+//! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
-//!
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! ## 版本历史说明
-//!
-//! 本文件展示 Rust 1.89 版本的 GAT 和 HRTB 特性，当前项目已升级到 Rust 1.92.0。
-//!
+//! ## this explain
 //! ### Rust 1.92.0 主要改进
-//!
+//! ### Rust 1.92.0 main
 //! - **关联项多边界**: 更灵活的类型约束表达
+//! - **edge **: type express
 //! - **高阶生命周期增强**: 更精确的生命周期处理
-//! - **标准库**: NonZero::div_ceil、rotate_right 等
-//!
+//! - **lifetime **: lifetime
 //! ### 迁移建议
-//!
+//! ###
 //! 1. 更新 Cargo.toml: `rust-version = "1.92"`
-//! 2. 参考 `rust_192_features.rs` 了解最新特性
-//! 3. 查看 `docs/RUST_192_GENERIC_IMPROVEMENTS.md` 了解完整改进
-//!
 //! 参考:
-//! - [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/)
+//! reference :
 //! - [历史版本: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
+//! - [历史版this: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 //!
-//! ---
-//!
-//! # Rust 1.89 方向的 GAT（Generic Associated Types）与 HRTB（Higher-Rank Trait Bounds）精简演示
-//!
-//! GAT 用于在关联类型中引入额外的生命周期/类型参数，使 trait 的接口表达力更强。
-//! HRTB 用于像 `for<'a> ...` 这类"对所有生命周期均成立"的约束，常见于函数指针/闭包接收借用数据的情况。
+//! # Rust 1.89 direction GAT（Generic Associated Types）and HRTB（Higher-Rank Trait Bounds）精简Demonstration of
 // 1) GAT：一个最简“只读切片访问器”接口
 pub mod gat_demo {
     pub trait SliceProvider {

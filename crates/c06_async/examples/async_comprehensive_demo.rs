@@ -1,6 +1,3 @@
-//! Rust异步生态系统综合演示
-//!
-//! 本示例展示了Rust异步生态系统的完整功能
 //use std::sync::Arc;
 use std::time::{Duration, Instant};
 //use std::collections::HashMap;
@@ -9,6 +6,7 @@ use tokio::time::sleep;
 //use tracing::{info, warn, error, debug};
 
 /// 综合演示配置
+/// synthesize demonstration
 #[derive(Debug, Clone)]
 pub struct ComprehensiveDemoConfig {
     pub enable_verbose_logging: bool,
@@ -33,6 +31,8 @@ impl Default for ComprehensiveDemoConfig {
 }
 
 /// 主演示函数
+/// demonstration function
+/// 主demonstration function
 #[tokio::main]
 async fn main() -> Result<()> {
     println!("🚀 Rust异步生态系统综合演示");
@@ -63,6 +63,7 @@ async fn main() -> Result<()> {
 }
 
 /// 基础演示
+/// foundation demonstration
 async fn run_basic_demo() -> Result<()> {
     println!("\n📝 基础异步功能演示:");
 
@@ -87,6 +88,8 @@ async fn run_basic_demo() -> Result<()> {
 }
 
 /// 高级演示
+/// demonstration
+/// 高级Demonstration of
 async fn run_advanced_demo() -> Result<()> {
     println!("\n🔧 高级异步功能演示:");
 
@@ -110,6 +113,7 @@ async fn run_advanced_demo() -> Result<()> {
 }
 
 /// 性能测试
+/// performance test
 async fn run_performance_test() -> Result<()> {
     println!("\n📊 性能测试:");
 

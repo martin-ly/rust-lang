@@ -1,44 +1,52 @@
-//! # Rust 异步编程调试与监控完整指南 2025
-//!
-//! Complete Guide to Async Debugging and Monitoring in Rust 2025
 //!
 //! ## 📚 本示例涵盖
-//!
+//! ## 📚 this example
 //! ### 🔍 一、结构化日志 (Structured Logging)
-//! - tracing 框架的完整使用
-//! - Span 和 Event 的最佳实践
+//! - Span and Event 最佳实践
 //! - 日志级别和过滤器
+//! - level and
 //! - 日志订阅器配置
+//! -
 //! - 分布式追踪
-//!
+//! - distribution
 //! ### 🐛 二、异步任务调试 (Async Task Debugging)
 //! - tokio-console 实时监控
 //! - 任务资源泄漏检测
+//! - task
 //! - 死锁检测
+//! - lock
 //! - 任务阻塞分析
-//!
+//! - task analyze
 //! ### 📊 三、性能指标收集 (Performance Metrics)
 //! - Prometheus 指标导出
 //! - 自定义指标
+//! - definition indicator
+//! - 自definitionindicator
 //! - 实时监控仪表板
+//! -
 //! - 告警规则
-//!
+//! - rule
+//! - 告警rule
+//! - rule
 //! ### 🏥 四、健康检查 (Health Checks)
+//! ### 🏥 四、health check (Health Checks)
 //! - 活性检查 (Liveness)
+//! - (Liveness)
+//! - 活性Check (Liveness)
 //! - 就绪检查 (Readiness)
+//! - 就绪Check (Readiness)
 //! - 依赖项检查
-//!
+//! -
 //! ## 运行方式
-//! ```bash
+//! ## Run way
 //! # 启用 tokio-console 需要特殊编译标志
-//! RUSTFLAGS="--cfg tokio_unstable" cargo run --example async_debugging_monitoring_2025
-//! ```
+//! # tokio-console mark
 //!
 //! ## 版本信息
-//! - Rust: 1.90+
-//! - Tokio: 1.41+ (with tokio_unstable)
+//! ## this
 //! - Tracing: 0.1+
 //! - 日期: 2025-10-04
+//! - date : 2025-10-04
 use std::sync::Arc;
 use std::time::{Duration, Instant, SystemTime};
 use tokio::sync::{Mutex, RwLock};
@@ -53,19 +61,24 @@ use tracing_subscriber::util::SubscriberInitExt;
 // ============================================================================
 
 /// # Tracing 初始化 - 配置日志订阅器
-///
+/// # Tracing -
 /// ## Tracing 架构
 /// - **Subscriber**: 订阅和处理事件
-/// - **Layer**: 可组合的中间件
-/// - **Span**: 带有进入/退出事件的时间段
+/// - **Subscriber**: and
+/// - **Layer**: 可combinationmiddleware
 /// - **Event**: 单点事件(日志)
-///
+/// - **Event**: point ()
 /// ## 日志级别
-/// - TRACE: 最详细的信息
+/// ## level
+/// ## 日志level
 /// - DEBUG: 调试信息
+/// - DEBUG:
 /// - INFO: 一般信息
+/// - INFO:
 /// - WARN: 警告信息
+/// - WARN: warning
 /// - ERROR: 错误信息
+/// - ERROR: error message
 pub fn init_tracing() {
     // 创建格式化层 - 用于输出到终端
     let fmt_layer = tracing_subscriber::fmt::layer()
@@ -92,8 +105,9 @@ pub fn init_tracing() {
 }
 
 /// # 带追踪的业务服务
-///
+/// #
 /// 演示如何在实际业务代码中使用 tracing
+/// demonstration in actual in tracing
 pub struct UserService {
     users: Arc<RwLock<Vec<User>>>,
     request_count: Arc<Mutex<u64>>,
@@ -122,12 +136,19 @@ impl UserService {
     }
 
     /// # 创建用户 - 带完整的追踪信息
-    ///
-    /// ## `#[instrument]` 宏的作用
+    /// # - complete
+    /// ## `#[instrument]` 宏role
     /// - 自动创建 span
+    /// - span
+    /// - 自动Create span
     /// - 记录函数参数
+    /// - function parameter
+    /// - 记录functionparameter
     /// - 记录返回值(使用 ret)
+    /// - return value ( ret)
+    /// - 记录return value(Use ret)
     /// - 记录错误(使用 err)
+    /// - ( err)
     #[instrument(
         name = "user_service.create_user",
         skip(self), // 跳过 self 参数
@@ -174,6 +195,7 @@ impl UserService {
     }
 
     /// # 查询用户 - 带性能追踪
+    /// # - performance
     #[instrument(
         name = "user_service.get_user",
         skip(self),
@@ -211,6 +233,7 @@ impl UserService {
     }
 
     /// # 获取统计信息
+    /// #
     #[instrument(skip(self))]
     pub async fn get_stats(&self) -> UserServiceStats {
         let users_count = self.users.read().await.len();
@@ -243,14 +266,16 @@ pub struct UserServiceStats {
 // ============================================================================
 
 /// # 指标收集器
-///
-/// 使用简化的指标收集系统(生产环境建议使用 Prometheus)
+/// # indicator
 pub struct MetricsCollector {
     /// 计数器 - 单调递增
+    /// -
     counters: Arc<RwLock<std::collections::HashMap<String, u64>>>,
     /// 仪表盘 - 可增可减
+    /// -
     gauges: Arc<RwLock<std::collections::HashMap<String, f64>>>,
     /// 直方图 - 记录数值分布
+    /// - distribution
     histograms: Arc<RwLock<std::collections::HashMap<String, Vec<f64>>>>,
 }
 
@@ -295,6 +320,7 @@ impl MetricsCollector {
     }
 
     /// 获取所有指标的快照
+    /// all indicator
     #[instrument(skip(self))]
     pub async fn snapshot(&self) -> MetricsSnapshot {
         let counters = self.counters.read().await.clone();
@@ -372,11 +398,8 @@ pub struct HistogramSummary {
 // ============================================================================
 
 /// # 健康检查服务
-///
+/// # health check
 /// ## Kubernetes 健康检查
-/// - **Liveness**: 应用是否活着(崩溃重启)
-/// - **Readiness**: 应用是否准备好接收流量
-/// - **Startup**: 应用是否启动完成
 pub struct HealthChecker {
     start_time: SystemTime,
     dependencies: Arc<RwLock<Vec<DependencyHealth>>>,
@@ -419,6 +442,7 @@ impl HealthChecker {
     }
 
     /// 活性检查 - 基本健康状态
+    /// - this state
     #[instrument(skip(self))]
     pub async fn liveness_check(&self) -> HealthStatus {
         let uptime = SystemTime::now()
@@ -436,6 +460,7 @@ impl HealthChecker {
     }
 
     /// 就绪检查 - 检查所有依赖项
+    /// - all
     #[instrument(skip(self))]
     pub async fn readiness_check(&self) -> HealthStatus {
         let deps = self.dependencies.read().await;
@@ -468,6 +493,7 @@ impl HealthChecker {
     }
 
     /// 更新依赖项健康状态
+    /// state
     #[instrument(skip(self))]
     pub async fn update_dependency_health(
         &self,
@@ -507,8 +533,10 @@ pub struct HealthStatus {
 // ============================================================================
 
 /// # 任务监控器
-///
+/// # task
 /// 追踪异步任务的生命周期和性能
+/// async task lifetime and performance
+/// 追踪asynctasklifetimeandperformance
 pub struct TaskMonitor {
     metrics: Arc<MetricsCollector>,
 }
@@ -519,6 +547,7 @@ impl TaskMonitor {
     }
 
     /// 运行被监控的任务
+    /// Run is task
     #[instrument(skip(self, task_fn), fields(task.name = %task_name))]
     pub async fn run_monitored_task<F, T>(&self, task_name: &str, task_fn: F) -> Result<T, String>
     where

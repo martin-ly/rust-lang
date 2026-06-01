@@ -1,4 +1,5 @@
 //! Sparse Table（稀疏表）：支持幂等操作的静态区间查询，如 RMQ(min/max)、GCD、按位与/或/异或。
+//! Sparse Table（）：etc. interval ， RMQ(min/max)、GCD、and /or /or 。
 #[derive(Clone, Debug)]
 pub struct SparseTable<T> {
     pub n: usize,
@@ -32,6 +33,7 @@ impl<T: Copy> SparseTable<T> {
     }
 
     /// 查询幂等操作（如 min/max/gcd）： op(op(a,b),c) = op(a,op(b,c)) 且满足可重复覆盖
+    /// etc. （ min/max/gcd）： op(op(a,b),c) = op(a,op(b,c)) and
     pub fn query_idempotent<F>(&self, l: usize, r_exclusive: usize, mut op: F) -> T
     where
         F: FnMut(T, T) -> T,

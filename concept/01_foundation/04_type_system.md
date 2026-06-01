@@ -1,3 +1,7 @@
+> **内容分级**: [综述级]
+>
+> **本节关键术语**: 类型系统 (Type System) · 结构体 (Struct) · 枚举 (Enum) · 模式匹配 (Pattern Matching) · 泛型 (Generic) · Trait — [完整对照表](../00_meta/terminology_glossary.md)
+
 # Type System Basics（类型系统基础）
 >
 > **受众**: [初学者]

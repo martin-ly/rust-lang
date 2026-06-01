@@ -3,8 +3,7 @@
 #![allow(clippy::bind_instead_of_map)]
 
 //! 并发性能基准测试
-//!
-//! 这个模块包含了 c10_networks 库并发处理相关的性能基准测试
+//! concurrency Performance benchmark
 
 use c10_networks::error::{
     ErrorStats, NetworkError, PerformanceError, ProtocolError, SecurityError,
@@ -17,6 +16,8 @@ use std::thread;
 use std::time::Duration;
 
 /// 错误创建性能测试
+/// performance test
+/// 错误Createperformance test
 fn bench_error_creation(c: &mut Criterion) {
     let mut group = c.benchmark_group("error_creation");
 
@@ -57,6 +58,7 @@ fn bench_error_creation(c: &mut Criterion) {
 }
 
 /// 错误恢复性能测试
+/// error recovery performance test
 fn bench_error_recovery(c: &mut Criterion) {
     let mut group = c.benchmark_group("error_recovery");
 
@@ -97,6 +99,8 @@ fn bench_error_recovery(c: &mut Criterion) {
 }
 
 /// 错误统计性能测试
+/// performance test
+/// 错误统计performance test
 fn bench_error_stats(c: &mut Criterion) {
     let mut group = c.benchmark_group("error_stats");
 
@@ -152,6 +156,7 @@ fn bench_error_stats(c: &mut Criterion) {
 }
 
 /// 错误传播性能测试
+/// error propagation performance test
 fn bench_error_propagation(c: &mut Criterion) {
     let mut group = c.benchmark_group("error_propagation");
 
@@ -196,6 +201,7 @@ fn bench_error_propagation(c: &mut Criterion) {
 }
 
 /// 错误处理链性能测试
+/// error handling performance test
 fn bench_error_handling_chain(c: &mut Criterion) {
     let mut group = c.benchmark_group("error_handling_chain");
 
@@ -251,6 +257,8 @@ fn bench_error_handling_chain(c: &mut Criterion) {
 }
 
 /// 错误日志记录性能测试
+/// performance test
+/// 错误日志记录performance test
 fn bench_error_logging(c: &mut Criterion) {
     let mut group = c.benchmark_group("error_logging");
 
@@ -285,6 +293,8 @@ fn bench_error_logging(c: &mut Criterion) {
 }
 
 /// 错误序列化性能测试
+/// sequence performance test
+/// 错误Serializeperformance test
 fn bench_error_serialization(c: &mut Criterion) {
     let mut group = c.benchmark_group("error_serialization");
 
@@ -319,6 +329,7 @@ fn bench_error_serialization(c: &mut Criterion) {
 }
 
 /// 错误处理性能测试
+/// error handling performance test
 fn bench_error_handling_performance(c: &mut Criterion) {
     let mut group = c.benchmark_group("error_handling_performance");
 
@@ -386,6 +397,7 @@ fn bench_error_handling_performance(c: &mut Criterion) {
 }
 
 /// 错误处理并发性能测试
+/// error handling concurrency performance test
 fn bench_error_handling_concurrency(c: &mut Criterion) {
     let mut group = c.benchmark_group("error_handling_concurrency");
 

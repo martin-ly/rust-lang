@@ -1,14 +1,19 @@
 //! Rust 最佳实践 vs 反例对比
-//!
-//! 本文件通过对比展示Rust中的最佳实践和常见反例：
+//! Rust vs to
 //! - 集合使用模式
+//! - set
 //! - 错误处理方式
+//! - error handling way
 //! - 内存管理
+//! - memory
 //! - 并发编程
+//! - concurrency
 //! - 性能优化
-//!
+//! - performance optimization
 //! # 使用说明
+//! # explain
 //! 每个示例包含 ❌ 反例（Anti-pattern）和 ✅ 最佳实践（Best Practice）
+//! example ❌ （Anti-pattern）and ✅ （Best Practice）
 
 #![allow(unused)]
 
@@ -19,12 +24,16 @@ use std::sync::{Arc, Mutex};
 use std::thread;
 
 /// # 集合使用最佳实践
+/// # set
 mod collections_best_practices {
     use super::*;
 
     /// ## 1. Vec 容量预分配
-    ///
+    /// ## 1. Vec
+    /// ## 1. Vec 容量预Allocate
     /// ❌ 反例：重复分配内存
+    /// ❌ ：memory
+    /// ❌ 反例：重复Allocatememory
     pub fn vec_bad_example() -> Vec<i32> {
         let mut vec = Vec::new();
         for i in 0..1000 {
@@ -34,6 +43,7 @@ mod collections_best_practices {
     }
 
     /// ✅ 最佳实践：预分配容量
+    /// ✅ ：
     pub fn vec_good_example() -> Vec<i32> {
         let mut vec = Vec::with_capacity(1000);
         for i in 0..1000 {
@@ -42,9 +52,8 @@ mod collections_best_practices {
         vec
     }
 
-    /// ## 2. HashMap 批量插入
-    ///
     /// ❌ 反例：逐个插入
+    /// ❌ ：
     pub fn hashmap_bad_example() -> HashMap<String, i32> {
         let mut map = HashMap::new();
         for i in 0..100 {
@@ -54,13 +63,14 @@ mod collections_best_practices {
     }
 
     /// ✅ 最佳实践：使用 collect
+    /// ✅ ： collect
+    /// ✅ 最佳实践：Use collect
     pub fn hashmap_good_example() -> HashMap<String, i32> {
         (0..100).map(|i| (format!("key{}", i), i)).collect() // 更高效的批量插入
     }
 
     /// ## 3. 避免不必要的克隆
-    ///
-    /// ❌ 反例：不必要的 clone
+    /// ## 3.
     pub fn clone_bad_example(data: Vec<String>) -> Vec<String> {
         let mut result = Vec::new();
         for item in &data {
@@ -70,6 +80,8 @@ mod collections_best_practices {
     }
 
     /// ✅ 最佳实践：使用迭代器引用
+    /// ✅ ：reference
+    /// ✅ 最佳实践：Useiteratorreference
     pub fn clone_good_example(data: &[String]) -> impl Iterator<Item = &String> + '_ {
         data.iter() // 返回迭代器，避免复制
     }
@@ -93,14 +105,13 @@ mod collections_best_practices {
 }
 
 /// # 错误处理最佳实践
+/// # error handling
 mod error_handling_best_practices {
     use std::collections::HashMap;
     use std::fs::File;
     use std::io::{self, Read};
 
     /// ## 1. Result 传播
-    ///
-    /// ❌ 反例：过度的 match 嵌套
     pub fn read_file_bad(path: &str) -> Result<String, io::Error> {
         match File::open(path) {
             Ok(mut file) => {
@@ -115,6 +126,8 @@ mod error_handling_best_practices {
     }
 
     /// ✅ 最佳实践：使用 ? 运算符
+    /// ✅ ：?
+    /// ✅ 最佳实践：Use ? operator
     pub fn read_file_good(path: &str) -> Result<String, io::Error> {
         let mut file = File::open(path)?;
         let mut contents = String::new();
@@ -123,8 +136,8 @@ mod error_handling_best_practices {
     }
 
     /// ## 2. Option 处理
-    ///
     /// ❌ 反例：手动 unwrap
+    /// ❌ ： unwrap
     pub fn option_bad(map: &HashMap<String, i32>, key: &str) -> i32 {
         match map.get(key) {
             Some(val) => *val,
@@ -133,13 +146,16 @@ mod error_handling_best_practices {
     }
 
     /// ✅ 最佳实践：使用 unwrap_or
+    /// ✅ ： unwrap_or
+    /// ✅ 最佳实践：Use unwrap_or
     pub fn option_good(map: &HashMap<String, i32>, key: &str) -> i32 {
         map.get(key).copied().unwrap_or(0)
     }
 
     /// ## 3. 错误转换
-    ///
+    /// ## 3. error conversion
     /// ❌ 反例：手动错误映射
+    /// ❌ ：
     pub fn parse_number_bad(s: &str) -> Result<i32, String> {
         match s.parse::<i32>() {
             Ok(n) => Ok(n),
@@ -148,6 +164,8 @@ mod error_handling_best_practices {
     }
 
     /// ✅ 最佳实践：使用 map_err
+    /// ✅ ： map_err
+    /// ✅ 最佳实践：Use map_err
     pub fn parse_number_good(s: &str) -> Result<i32, String> {
         s.parse::<i32>().map_err(|e| format!("Parse error: {}", e))
     }
@@ -170,10 +188,12 @@ mod error_handling_best_practices {
 }
 
 /// # 内存管理最佳实践
+/// # memory
 mod memory_best_practices {
     /// ## 1. 避免内存泄漏：使用 RAII
-    ///
+    /// ## 1. memory leak ： RAII
     /// ❌ 反例：手动内存管理
+    /// ❌ ：memory
     pub fn memory_bad() {
         // 在unsafe代码中手动分配，容易忘记释放
         // let ptr = Box::into_raw(Box::new(42));
@@ -182,6 +202,7 @@ mod memory_best_practices {
     }
 
     /// ✅ 最佳实践：使用 RAII
+    /// ✅ ： RAII
     pub fn memory_good() {
         let _data = Box::new(42); // 自动释放
                                   // ... 某些操作
@@ -189,25 +210,29 @@ mod memory_best_practices {
     }
 
     /// ## 2. 大数组的栈/堆选择
-    ///
+    /// ## 2. stack /heap
     /// ❌ 反例：大数组分配在栈上
+    /// ❌ ：in stack on
     pub fn stack_bad() {
         // let _large_array = [0u8; 1_000_000]; // 可能导致栈溢出
     }
 
     /// ✅ 最佳实践：大数组分配到堆上
+    /// ✅ ：to heap on
     pub fn stack_good() {
         let _large_vec = vec![0u8; 1_000_000]; // 安全地在堆上分配
     }
 
     /// ## 3. 避免不必要的装箱
-    ///
+    /// ## 3.
     /// ❌ 反例：小类型装箱
+    /// ❌ ：type
     pub fn boxing_bad() -> Box<i32> {
         Box::new(42) // i32 可以直接放在栈上
     }
 
     /// ✅ 最佳实践：直接返回值
+    /// ✅ ：return value
     pub fn boxing_good() -> i32 {
         42 // 更高效的栈分配
     }
@@ -222,13 +247,15 @@ mod memory_best_practices {
 }
 
 /// # 并发编程最佳实践
+/// # concurrency
 mod concurrency_best_practices {
     use std::sync::{Arc, Mutex};
     use std::thread;
 
     /// ## 1. 锁的范围最小化
-    ///
+    /// ## 1. lock scope minimum
     /// ❌ 反例：持有锁时间过长
+    /// ❌ ：lock time
     pub fn lock_scope_bad() {
         let data = Arc::new(Mutex::new(vec![1, 2, 3]));
         let data_clone = Arc::clone(&data);
@@ -242,6 +269,7 @@ mod concurrency_best_practices {
     }
 
     /// ✅ 最佳实践：最小化锁范围
+    /// ✅ ：minimum lock scope
     pub fn lock_scope_good() {
         let data = Arc::new(Mutex::new(vec![1, 2, 3]));
         let data_clone = Arc::clone(&data);
@@ -259,8 +287,9 @@ mod concurrency_best_practices {
     }
 
     /// ## 2. 避免死锁
-    ///
+    /// ## 2. lock
     /// ❌ 反例：锁顺序不一致
+    /// ❌ ：lock order
     pub fn deadlock_bad() {
         let lock1 = Arc::new(Mutex::new(1));
         let lock2 = Arc::new(Mutex::new(2));
@@ -283,6 +312,7 @@ mod concurrency_best_practices {
     }
 
     /// ✅ 最佳实践：统一的锁获取顺序
+    /// ✅ ：lock order
     pub fn deadlock_good() {
         let lock1 = Arc::new(Mutex::new(1));
         let lock2 = Arc::new(Mutex::new(2));
@@ -306,14 +336,17 @@ mod concurrency_best_practices {
     }
 
     /// ## 3. 使用消息传递而非共享状态
-    ///
+    /// ## 3. while state
     /// ❌ 反例：过度使用共享状态
+    /// ❌ ：state
     pub fn shared_state_bad() {
         // 多个线程竞争修改共享数据
         // 复杂且容易出错
     }
 
     /// ✅ 最佳实践：使用通道
+    /// ✅ ：channel
+    /// ✅ 最佳实践：Usechannel
     pub fn channel_good() {
         let (tx, rx) = std::sync::mpsc::channel();
 
@@ -338,10 +371,12 @@ mod concurrency_best_practices {
 }
 
 /// # 性能优化最佳实践
+/// # performance optimization
 mod performance_best_practices {
     /// ## 1. 字符串拼接
-    ///
+    /// ## 1.
     /// ❌ 反例：重复字符串分配
+    /// ❌ ：
     pub fn string_concat_bad() -> String {
         let mut result = String::new();
         for i in 0..100 {
@@ -351,12 +386,15 @@ mod performance_best_practices {
     }
 
     /// ✅ 最佳实践：使用 push_str 或 join
+    /// ✅ ： push_str or join
+    /// ✅ 最佳实践：Use push_str or join
     pub fn string_concat_good() -> String {
         let items: Vec<String> = (0..100).map(|i| format!("item{}", i)).collect();
         items.join("") // 更高效的拼接
     }
 
     /// ✅ 最佳实践：使用 write! 宏
+    /// ✅ ： write!
     pub fn string_concat_best() -> String {
         use std::fmt::Write;
         let mut result = String::with_capacity(1000);
@@ -367,8 +405,10 @@ mod performance_best_practices {
     }
 
     /// ## 2. 迭代器 vs 索引循环
-    ///
+    /// ## 2. vs circulation
+    /// ## 2. iterator vs 索引circulation
     /// ❌ 反例：索引访问
+    /// ❌ ：
     #[allow(clippy::needless_range_loop)]
     pub fn iteration_bad(data: &[i32]) -> i32 {
         let mut sum = 0;
@@ -379,13 +419,18 @@ mod performance_best_practices {
     }
 
     /// ✅ 最佳实践：使用迭代器
+    /// ✅ ：
+    /// ✅ 最佳实践：Useiterator
     pub fn iteration_good(data: &[i32]) -> i32 {
         data.iter().sum() // 优化更好，更简洁
     }
 
     /// ## 3. 避免不必要的分配
-    ///
+    /// ## 3.
     /// ❌ 反例：重复分配
+    /// ❌ ：
+    /// ❌ 反例：重复Allocate
+    /// ❌ ：Allocate
     pub fn allocation_bad(data: &str) -> Vec<String> {
         let mut parts = Vec::new();
         for part in data.split(',') {
@@ -398,6 +443,8 @@ mod performance_best_practices {
     }
 
     /// ✅ 最佳实践：使用引用
+    /// ✅ ：reference
+    /// ✅ 最佳实践：Usereference
     pub fn allocation_good(data: &str) -> impl Iterator<Item = &str> + '_ {
         data.split(',').map(str::trim).filter(|s| !s.is_empty())
     }
@@ -420,34 +467,42 @@ mod performance_best_practices {
 }
 
 /// # API 设计最佳实践
+/// # API design
 mod api_design_best_practices {
     /// ## 1. 返回类型选择
-    ///
+    /// ## 1. type
     /// ❌ 反例：返回裸指针
+    /// ❌ ：pointer
     pub unsafe fn raw_pointer_bad() -> *const u8 {
         std::ptr::null()
     }
 
     /// ✅ 最佳实践：返回 Option 或 Result
+    /// ✅ ： Option or Result
+    /// ✅ 最佳实践：Return Option or Result
     pub fn safe_api_good() -> Option<&'static u8> {
         None
     }
 
     /// ## 2. 借用 vs 所有权
-    ///
+    /// ## 2. borrowing vs ownership
     /// ❌ 反例：不必要的所有权转移
+    /// ❌ ：ownership transfer
+    /// ❌ 反例：不必要ownershiptransfer
     pub fn ownership_bad(s: String) -> String {
         s.to_uppercase()
     }
 
     /// ✅ 最佳实践：接受借用
+    /// ✅ ：borrowing
+    /// ✅ 最佳实践：Acceptborrow
     pub fn borrow_good(s: &str) -> String {
         s.to_uppercase()
     }
 
     /// ## 3. Builder 模式
-    ///
     /// ❌ 反例：复杂的多参数构造
+    /// ❌ ：complex parameter
     pub struct ConfigBad {
         pub host: String,
         pub port: u16,
@@ -467,6 +522,7 @@ mod api_design_best_practices {
     }
 
     /// ✅ 最佳实践：Builder 模式
+    /// ✅ ：Builder
     #[derive(Debug)]
     pub struct ConfigGood {
         host: String,

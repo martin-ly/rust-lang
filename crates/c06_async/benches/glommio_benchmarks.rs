@@ -1,16 +1,13 @@
 //! # Glommio 性能基准测试
-//!
-//! 对 Glommio 运行时与其他运行时进行全面的性能对比测试。
-//!
+//! # Glommio Performance benchmark
 //! ## 运行基准测试
-//!
+//! ## Run benchmark
 //! ```bash
 //! # 运行所有基准测试
-//! cargo bench --bench glommio_benchmarks
+//! # Run all benchmark
 //!
 //! # 仅在 Linux 上运行
-//! cargo bench --bench glommio_benchmarks --target x86_64-unknown-linux-gnu
-//! ```
+//! # in Linux on Run
 #![cfg(target_os = "linux")]
 
 use criterion::{BenchmarkId, Criterion, Throughput, black_box, criterion_group, criterion_main};

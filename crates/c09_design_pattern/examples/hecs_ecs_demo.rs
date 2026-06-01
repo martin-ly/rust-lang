@@ -1,12 +1,14 @@
 //! HECS ECS 生态系统演示
-//!
-//! 使用 `hecs` crate 演示实体组件系统的核心概念：
+//! HECS ECS ecosystem system demonstration
 //! - World: 实体容器
+//! - World: volume
 //! - Entity: 唯一标识符
+//! - Entity:
 //! - Component: 纯数据（Position, Velocity, Health, Name）
 //! - System: 查询 + 逻辑（移动、碰撞、渲染）
+//! - System: + （、、）
 //! - Query: 按组件类型筛选实体
-//!
+//! - Query: type volume
 //! 运行: cargo run --example hecs_ecs_demo -p c09_design_pattern
 
 use hecs::{Entity, World};

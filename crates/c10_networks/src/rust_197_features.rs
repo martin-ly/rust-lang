@@ -1,48 +1,47 @@
 //! Rust 1.97 特性跟踪模块 —— 网络编程
+//! Rust 1.97 feature module —— network programming
 #![allow(clippy::incompatible_msrv)]
 
 use std::net::{IpAddr, Ipv4Addr, Ipv6Addr};
 use std::ops::{BitAnd, BitOr, Not};
 
 /// # Rust 1.97 网络特性演示
-///
-/// Rust 1.97 稳定化的核心网络 API：
-/// - `Ipv6Addr::is_unique_local` / `is_unicast_link_local`
-/// - `IpAddr::to_canonical` / `Ipv6Addr::to_canonical`
-/// - `Not`, `BitAnd`, `BitOr` 等位运算 trait 为 IP 地址实现
+/// # Rust 1.97 network feature demonstration
+/// Rust 1.97 稳定化corenetwork API：
 pub struct Rust197NetworkFeatures;
 
 impl Rust197NetworkFeatures {
-    /// 检查 IPv6 地址是否为 Unique Local Address (ULA, fc00::/7)
     pub fn is_unique_local(addr: Ipv6Addr) -> bool {
         addr.is_unique_local()
     }
 
-    /// 检查 IPv6 地址是否为 Unicast Link-Local (fe80::/10)
     pub fn is_unicast_link_local(addr: Ipv6Addr) -> bool {
         addr.is_unicast_link_local()
     }
 
     /// 将 IPv6 地址转换为其规范形式
-    ///
-    /// 对于 IPv4-mapped IPv6 地址，返回对应的 IPv4 地址；否则返回自身。
+    /// will IPv6 conversion as its norm
     pub fn to_canonical(addr: IpAddr) -> IpAddr {
         addr.to_canonical()
     }
 
-    /// 演示 IPv6 地址的位运算（Rust 1.97+）
-    ///
+    /// Demonstration of IPv6 地址位运算（Rust 1.97+）
     /// IP 地址现在支持 `!`, `&`, `|`, `^` 等位运算。
+    /// IP address present `!`, `&`, `|`, `^` etc. 。
     pub fn ipv6_bitwise_mask(addr: Ipv6Addr, mask: Ipv6Addr) -> Ipv6Addr {
         addr.bitand(mask)
     }
 
     /// 演示 IPv4 地址的位或运算
+    /// demonstration IPv4 or
+    /// Demonstration of IPv4 地址位or运算
     pub fn ipv4_bitwise_or(a: Ipv4Addr, b: Ipv4Addr) -> Ipv4Addr {
         a.bitor(b)
     }
 
     /// 演示 IPv4 地址的取反运算
+    /// demonstration IPv4
+    /// Demonstration of IPv4 地址取反运算
     pub fn ipv4_invert(addr: Ipv4Addr) -> Ipv4Addr {
         addr.not()
     }

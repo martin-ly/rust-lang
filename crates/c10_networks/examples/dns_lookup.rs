@@ -1,54 +1,72 @@
 //! DNS 查询示例
-//!
-//! 这个示例展示了如何使用 c10_networks 库进行 DNS 查询
-//!
+//! DNS example
+//! DNS 查询Example of
 //! ## 📖 理论基础
-//!
+//! ## 📖 theory foundation
 //! DNS (域名系统) 是互联网的目录服务，将域名映射到 IP 地址：
-//!
+//! DNS (domain system ) ，will domain to IP address ：
 //! - **分层结构**: 树状域名空间
+//! - **layering structure **: tree domain space
 //! - **递归查询**: 客户端向 DNS 服务器查询
+//! - ****: DNS
 //! - **迭代查询**: DNS 服务器之间的查询
+//! - ****: DNS 's
 //! - **缓存机制**: 提高查询效率
-//!
+//! - **mechanism **: efficiency
+//! - **缓存mechanism**: 提高查询efficiency
 //! ## 🔬 实现原理
-//!
+//! ## 🔬
+//! ## 🔬 Implementation of原理
 //! ### DNS 记录类型
-//!
+//! ### DNS type
+//! ### DNS 记录type
 //! - **A 记录**: IPv4 地址记录
+//! - **A **: IPv4
 //! - **AAAA 记录**: IPv6 地址记录
+//! - **AAAA **: IPv6
 //! - **MX 记录**: 邮件交换记录
+//! - **MX **: exchange
 //! - **TXT 记录**: 文本记录
+//! - **TXT **: this
 //! - **SRV 记录**: 服务记录
+//! - **SRV **:
 //! - **PTR 记录**: 指针记录（逆向解析）
-//!
+//! - **PTR **: pointer （）
 //! ### DNS 解析器类型
-//!
+//! ### DNS type
 //! - **系统解析器**: 使用系统默认 DNS 服务器
-//! - **DoH 解析器**: 使用 DNS over HTTPS
-//! - **DoT 解析器**: 使用 DNS over TLS
+//! - **system **: system DNS
 //! - **自定义解析器**: 使用指定的 DNS 服务器
-//!
+//! - **definition **: DNS
 //! ## 🚀 使用场景
-//!
+//! ## 🚀 scenario
 //! - **域名解析**: 将域名转换为 IP 地址
+//! - **domain **: will domain conversion as IP address
 //! - **邮件服务**: 查找邮件服务器
+//! - ****:
 //! - **服务发现**: 发现网络服务
+//! - **service discovery **: network
 //! - **负载均衡**: 基于 DNS 的负载均衡
-//!
+//! - ****: DNS
 //! ## ⚠️ 注意事项
-//!
+//! ## ⚠️
 //! - **缓存策略**: 合理设置 DNS 缓存
+//! - **strategy **: DNS
+//! - **缓存strategy**: 合理Set DNS 缓存
 //! - **超时处理**: 处理 DNS 查询超时
+//! - ****: DNS
+//! - **超时Handle**: Handle DNS 查询超时
 //! - **错误处理**: 处理 DNS 查询错误
+//! - **error handling **: DNS
+//! - **error handling**: Handle DNS 查询错误
 //! - **安全考虑**: 注意 DNS 劫持和污染
-//!
+//! - ****: DNS and
 //! ## 🔧 运行方式
-//!
+//! ## 🔧 Run way
 //! ```bash
 //! # 运行 DNS 查询示例
-//! cargo run --example dns_lookup
-//! ```
+//! # Run DNS example
+//! # Run DNS 查询Example of
 use c10_networks::protocol::dns::{DnsResolver, presets};
 
 #[tokio::main]

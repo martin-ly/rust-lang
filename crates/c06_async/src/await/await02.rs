@@ -1,29 +1,47 @@
 //! 异步并发编程高级示例
+//! async concurrency example
 //!
 //! 本模块展示了如何使用 `futures::join!` 宏来实现并发执行多个异步操作。
+//! This module demonstrates `futures::join!` concurrency async 。
 //! 这是异步编程中的一个重要模式，可以显著提高程序的性能。
+//! async in important ，can significant program performance 。
 //!
 //! ## 核心概念
+//! ## core concept
 //!
 //! ### futures::join! 宏
 //! - **作用**: 同时等待多个 Future 完成
+//! - **role **: etc. Future
 //! - **并发性**: 所有 Future 会并发执行，而不是顺序执行
+//! - **concurrency **: all Future concurrency ，while order
 //! - **等待策略**: 等待所有 Future 都完成后才返回
+//! - **etc. strategy **: etc. all Future after
 //! - **错误处理**: 如果任何一个 Future 失败，join! 会返回错误
+//! - **error handling **: if Future ，join!
 //!
 //! ### 并发 vs 并行
+//! ### concurrency vs parallelism
 //! - **并发**: 多个任务可以同时进行，但在单线程中交替执行
+//! - **concurrency **: task can ，but in thread in alternation
 //! - **并行**: 多个任务同时在多个 CPU 核心上执行
+//! - **parallelism **: task in CPU core on
 //! - **异步并发**: 在等待 I/O 时执行其他任务，提高资源利用率
+//! - **async concurrency **: in etc. I/O its task ，
 //!
 //! ## 使用场景
+//! ## scenario
 //!
 //! 1. **网络请求**: 同时发起多个 HTTP 请求
+//! 1. **network **: HTTP
 //! 2. **数据库查询**: 并发执行多个数据库操作
+//! 2. **database **: concurrency database
 //! 3. **文件操作**: 同时读取多个文件
+//! 3. **file operation **:
 //! 4. **API 调用**: 调用多个外部服务
+//! 4. **API **: outside
 //!
 //! ## 使用示例
+//! ## example
 //!
 //! ```no_run
 //! use c06_async::r#await::process;
@@ -36,23 +54,37 @@
 use reqwest::{Client, Error};
 
 /// 异步获取数据的辅助函数
+/// async function
 ///
 /// 这个函数封装了 HTTP GET 请求的异步操作，展示了如何将同步的网络操作
+/// function HTTP GET async ，will synchronous network
 /// 转换为异步操作。
+/// conversion as async 。
 ///
 /// # 参数
+/// # parameter
 /// - `url`: 要请求的 URL 地址
+/// - `url`: URL
 /// - `client`: HTTP 客户端实例，包含超时等配置
+/// - `client`: HTTP ，etc.
 ///
 /// # 返回值
+/// # return value
 /// - `Ok(String)`: 成功获取的响应体内容
+/// - `Ok(String)`: volume inside
 /// - `Err(Error)`: 请求失败时的错误信息
+/// - `Err(Error)`: error message
 ///
 /// # 异步流程
+/// # async process
 /// 1. 发起 HTTP GET 请求（异步）
+/// 1. HTTP GET （async ）
 /// 2. 等待响应返回（异步）
+/// 2. etc. （async ）
 /// 3. 将响应体转换为字符串（异步）
+/// 3. will volume conversion as （async ）
 /// 4. 返回结果
+/// 4. result
 async fn fetch_data(url: &str, client: &Client) -> Result<String, Error> {
     // 第一步：异步发送 HTTP 请求
     // send() 方法返回一个 Future，await 等待请求完成
@@ -67,21 +99,33 @@ async fn fetch_data(url: &str, client: &Client) -> Result<String, Error> {
 }
 
 /// 演示异步并发编程的主要函数
+/// demonstration async concurrency main function
 ///
 /// 这个函数展示了如何使用 `futures::join!` 宏来并发执行多个异步操作。
+/// function `futures::join!` concurrency async 。
 /// 相比顺序执行，并发执行可以显著减少总的执行时间。
+/// order ，concurrency can significant time 。
 ///
 /// # 并发策略
+/// # concurrency strategy
 /// 1. **不同超时**: 为不同的请求设置不同的超时时间
+/// 1. ****: as time
 /// 2. **并发执行**: 使用 `join!` 同时等待多个 Future
+/// 2. **concurrency **: `join!` etc. Future
 /// 3. **错误处理**: 处理部分成功、全部失败等不同情况
+/// 3. **error handling **: part 、all etc. situation
 ///
 /// # 性能优势
+/// # performance strength
 /// - 如果顺序执行，总时间 = 请求1时间 + 请求2时间
+/// - if order ，time = 1time + 2time
 /// - 如果并发执行，总时间 ≈ max(请求1时间, 请求2时间)
+/// - if concurrency ，time ≈ max(1time, 2time )
 /// - 在网络 I/O 密集的场景中，性能提升非常显著
+/// - in network I/O scenario in ，performance significant
 ///
 /// # 示例
+/// # example
 /// ```no_run
 /// use c06_async::r#await::process;
 ///

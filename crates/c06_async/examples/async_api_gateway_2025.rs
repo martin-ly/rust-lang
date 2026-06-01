@@ -12,8 +12,11 @@ use tracing::{debug, error, info, instrument, warn};
 use uuid::Uuid;
 
 /// 2025年异步API网关演示
+/// 2025async APIgateway demonstration
 /// 展示最新的异步API网关编程模式和最佳实践
+/// async APIgateway and
 /// 1. 异步API网关核心
+/// 1. async APIgateway core
 #[allow(dead_code)]
 #[derive(Debug, Clone)]
 pub struct AsyncAPIGateway {
@@ -543,6 +546,7 @@ impl RequestContext {
 }
 
 /// 2. 异步健康检查系统
+/// 2. async health check system
 #[derive(Debug, Clone)]
 pub struct AsyncHealthChecker {
     services: Arc<RwLock<HashMap<String, BackendService>>>,
@@ -645,6 +649,7 @@ impl AsyncHealthChecker {
 }
 
 /// 3. 异步监控和指标收集
+/// 3. async and indicator
 #[derive(Debug, Clone)]
 pub struct AsyncMetricsCollector {
     metrics: Arc<RwLock<HashMap<String, Metric>>>,

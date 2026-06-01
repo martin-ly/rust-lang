@@ -7,6 +7,7 @@ use std::collections::HashMap;
 use std::time::{Duration, Instant};
 
 /// 性能测试结果
+/// performance test result
 #[derive(Debug, Clone)]
 pub struct BenchmarkResult {
     pub name: String,
@@ -17,6 +18,7 @@ pub struct BenchmarkResult {
 }
 
 /// 性能对比分析器
+/// performance to analyze
 pub struct PerformanceAnalyzer {
     results: HashMap<String, BenchmarkResult>,
     baseline: Option<String>,
@@ -74,6 +76,7 @@ impl PerformanceAnalyzer {
 }
 
 /// 性能分析结果
+/// performance analyze result
 pub struct PerformanceAnalysis {
     pub comparisons: Vec<(String, f64)>,
     pub summary: String,
@@ -108,6 +111,7 @@ impl PerformanceAnalysis {
 }
 
 /// 基准测试运行器
+/// benchmark Run
 pub struct BenchmarkRunner {
     iterations: u64,
     warmup_iterations: u64,
@@ -150,10 +154,13 @@ impl BenchmarkRunner {
 }
 
 /// Rust 1.89 新特性性能测试
+/// Rust 1.89 feature performance test
+/// Rust 1.89 新featureperformance test
 pub mod rust_189_benchmarks {
     use super::*;
 
     /// 1. 常量泛型性能测试
+    /// 1. constant generic performance test
     pub fn benchmark_const_generics() -> Vec<BenchmarkResult> {
         let mut results = Vec::new();
         let runner = BenchmarkRunner::new(1_000_000, 100_000);
@@ -175,6 +182,7 @@ pub mod rust_189_benchmarks {
     }
 
     /// 2. GATs 性能测试
+    /// 2. GATs performance test
     pub fn benchmark_gats() -> Vec<BenchmarkResult> {
         let mut results = Vec::new();
         let runner = BenchmarkRunner::new(500_000, 50_000);
@@ -200,6 +208,8 @@ pub mod rust_189_benchmarks {
     }
 
     /// 3. TAIT 性能测试 - 修复TAIT语法问题
+    /// 3. TAIT performance test - TAITproblem
+    /// 3. TAIT performance test - 修复TAIT语法problem
     pub fn benchmark_tait() -> Vec<BenchmarkResult> {
         let mut results = Vec::new();
         let runner = BenchmarkRunner::new(1_000_000, 100_000);
@@ -219,6 +229,7 @@ pub mod rust_189_benchmarks {
     }
 
     /// 4. 编译时计算性能测试
+    /// 4. compile-time performance test
     pub fn benchmark_compile_time() -> Vec<BenchmarkResult> {
         let mut results = Vec::new();
         let runner = BenchmarkRunner::new(2_000_000, 200_000);
@@ -238,6 +249,7 @@ pub mod rust_189_benchmarks {
     }
 
     /// 5. 内存布局优化测试
+    /// 5. memory layout optimization
     pub fn benchmark_memory_layout() -> Vec<BenchmarkResult> {
         let mut results = Vec::new();
         let runner = BenchmarkRunner::new(500_000, 50_000);
@@ -258,6 +270,7 @@ pub mod rust_189_benchmarks {
 }
 
 /// 测试数据结构
+/// data structure
 struct ConstGenericArray<T, const N: usize> {
     data: [T; N],
 }
@@ -269,6 +282,7 @@ impl<T, const N: usize> ConstGenericArray<T, N> {
 }
 
 /// 传统迭代器
+/// 传统iterator
 struct TraditionalIterator {
     data: Vec<i32>,
 }
@@ -283,6 +297,7 @@ impl TraditionalIterator {
 }
 
 /// GATs迭代器
+/// GATs
 struct GatsIterator {
     data: Vec<i32>,
 }
@@ -297,11 +312,15 @@ impl GatsIterator {
 }
 
 /// 传统函数
+/// function
+/// 传统function
 fn traditional_function() -> Box<dyn std::fmt::Display> {
     Box::new(42)
 }
 
 /// TAIT函数 - 修复TAIT语法问题
+/// TAITfunction - TAITproblem
+/// TAITfunction - 修复TAIT语法problem
 type TaitType = i32;
 
 fn tait_function() -> TaitType {
@@ -309,6 +328,7 @@ fn tait_function() -> TaitType {
 }
 
 /// 运行时斐波那契
+/// runtime
 fn runtime_fibonacci(n: u32) -> u32 {
     match n {
         0 | 1 => n,
@@ -317,9 +337,12 @@ fn runtime_fibonacci(n: u32) -> u32 {
 }
 
 /// 编译时常量
+/// compile-time constant
 const COMPILE_TIME_FIB_10: u32 = 55;
 
 /// 未优化内存布局
+/// optimization memory layout
+/// 未optimizationmemory layout
 struct UnoptimizedLayout {
     a: u8,  // 1 byte
     b: u32, // 4 bytes
@@ -327,6 +350,7 @@ struct UnoptimizedLayout {
 }
 
 /// 优化内存布局
+/// optimization memory layout
 #[repr(C)]
 struct OptimizedLayout {
     a: u8,  // 1 byte
@@ -335,6 +359,7 @@ struct OptimizedLayout {
 }
 
 /// 运行所有性能测试
+/// Run all performance test
 pub fn run_all_benchmarks() -> PerformanceAnalysis {
     let mut analyzer = PerformanceAnalyzer::new();
 
@@ -373,6 +398,7 @@ pub fn run_all_benchmarks() -> PerformanceAnalysis {
 }
 
 /// 测试模块
+/// module
 #[cfg(test)]
 mod tests {
     use super::*;

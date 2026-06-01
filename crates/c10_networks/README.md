@@ -371,8 +371,7 @@ async fn main() -> anyhow::Result<()> {
 ```rust
 use c10_networks::protocol::async_traits::AsyncNetworkClient;
 
-// Rust 1.92.0的改进异步trait语法
-#[async_trait::async_trait]
+// Rust 1.75+ 原生异步 trait（无需 async-trait 宏）
 impl AsyncNetworkClient for MyClient {
     async fn connect(&self, address: &str) -> NetworkResult<()> {
         // 改进的生命周期处理

@@ -1,25 +1,33 @@
 //! 指数退避重试策略（替代已废弃的 backoff crate）
+//! index strategy （ backoff crate）
 //!
 //! 提供与 backoff 0.4.x 兼容的 `ExponentialBackoff` API，
 //! 以及一个简化的异步重试助手函数。
+//! and async function 。
 use std::time::{Duration, Instant};
 
 /// 指数退避配置
+/// index
 #[derive(Debug, Clone)]
 pub struct ExponentialBackoff {
     /// 初始重试间隔
     pub initial_interval: Duration,
     /// 最大重试间隔
+    /// maximum
     pub max_interval: Duration,
     /// 最大累计重试时间（None 表示无限制）
+    /// maximum time （None represent ）
     pub max_elapsed_time: Option<Duration>,
     /// 间隔乘数
     pub multiplier: f64,
     /// 随机化因子（0.0~1.0），为 0 时不添加 jitter
+    /// factor （0.0~1.0），as 0 jitter
     pub randomization_factor: f64,
     /// 当前间隔（内部状态，由 next_backoff 维护）
+    /// when before （inside state ， next_backoff ）
     pub current_interval: Duration,
     /// 开始时间（内部状态，由 next_backoff 维护）
+    /// time （inside state ， next_backoff ）
     pub start_time: Option<Instant>,
 }
 
@@ -39,6 +47,7 @@ impl Default for ExponentialBackoff {
 
 impl ExponentialBackoff {
     /// 计算下一次退避延迟
+    /// under
     pub fn next_backoff(&mut self) -> Option<Duration> {
         if self.start_time.is_none() {
             self.start_time = Some(Instant::now());
@@ -68,6 +77,7 @@ impl ExponentialBackoff {
     }
 
     /// 重置退避状态
+    /// state
     pub fn reset(&mut self) {
         self.current_interval = self.initial_interval;
         self.start_time = None;
@@ -75,8 +85,10 @@ impl ExponentialBackoff {
 }
 
 /// 对异步操作执行指数退避重试
+/// to async index
 ///
 /// 所有错误均视为可重试（transient），直到超过配置限制。
+/// all as （transient），to 。
 pub async fn retry_future<F, Fut, T, E>(
     mut operation: F,
     initial_interval: Duration,

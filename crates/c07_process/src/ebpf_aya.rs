@@ -1,44 +1,65 @@
 //! eBPF + Rust (Aya) 预研模块
 //!
 //! ⚠️ **警告**: 本模块内容基于 Aya 框架文档，需要 Linux 内核 5.7+ 和特定工具链。
+//! ⚠️ **warning **: this module inside Aya framework ， Linux kernel 5.7+ and toolchain 。
 //! eBPF 程序需要 root 权限或 CAP_BPF 能力。
+//! eBPF program root or CAP_BPF 。
 //!
 //! # 概念定义
+//! # concept definition
 //!
 //! [Aya](https://aya-rs.dev/) 是一个纯 Rust eBPF 开发框架，允许用 Rust 编写
 //! 内核态和用户态 eBPF 程序，无需 libbpf 或 C。
+//! kernel and eBPF program ， libbpf or C。
 //!
 //! ## 认知必要性
+//! ##
 //! - 可观测性、网络安全、性能分析的核心技术
+//! - 、network 、performance analyze core technique
 //! - Rust 的零成本抽象完美契合 eBPF 的资源约束
+//! - Rust cost perfect eBPF
 //!
 //! ## 核心概念
+//! ## core concept
 //!
 //! ```text
 //! What:   用 Rust 编写 eBPF 程序并加载到内核
+//! What: Rust eBPF program and to kernel
 //! How:    aya crate + BPF map + verifier-friendly Rust subset
 //! When:   XDP 网络过滤、tracepoint 追踪、BPF 性能计数器
+//! When: XDP network 、tracepoint 、BPF performance
 //! Not:    不是所有 Rust 代码都能编译为 eBPF！需要 verifier-safe 子集
+//! Not: all Rust as eBPF！ verifier-safe subset
 //! ```
 //!
 //! # eBPF 架构
+//! # eBPF architecture
 //!
 //! ```text
 //! 用户态 (Rust + Aya)
 //! ├── 编译 eBPF 字节码 (LLVM BPF target)
 //! ├── 加载到内核 (bpf syscall)
+//! ├── to kernel (bpf syscall)
 //! ├── 与 BPF Map 交互 (共享键值存储)
+//! ├── and BPF Map ()
 //! └── 处理事件 (perf buffer / ring buffer)
 //!
 //! 内核态 (eBPF VM)
+//! kernel (eBPF VM)
 //! ├── XDP: 网络包处理（最早介入点）
+//! ├── XDP: network （point ）
 //! ├── TC: 流量控制
+//! ├── TC: flow rate
 //! ├── Tracepoint: 内核事件追踪
+//! ├── Tracepoint: kernel
 //! ├── Kprobe: 内核函数探针
+//! ├── Kprobe: kernel function
 //! └── Uprobe: 用户态函数探针
+//! └── Uprobe: function
 //! ```
 //!
 //! # 权威来源
+//! # Source
 //! - 项目: [aya-rs/aya](https://github.com/aya-rs/aya)
 //! - 文档: [aya-rs.dev](https://aya-rs.dev/)
 //! - 书籍: [Aya Book](https://aya-rs.dev/book/)
@@ -52,9 +73,12 @@
 /// # XDP (eXpress Data Path) 程序
 ///
 /// XDP 是 Linux 内核中最早的网络包处理点，在驱动层直接处理，
+/// XDP Linux kernel in network point ，in driver ，
 /// 性能可达百万级 PPS（每秒包数）。
+/// performance PPS（）。
 ///
 /// ## 内核态 eBPF 程序（概念）
+/// ## kernel eBPF program （concept ）
 /// ```ignore
 /// #![no_std]
 /// #![no_main]
@@ -64,16 +88,19 @@
 /// #[xdp]
 /// pub fn xdp_firewall(ctx: XdpContext) -> u32 {
 ///     // SAFETY: ctx 由内核传入，有效
+///     // SAFETY: ctx kernel ，effective
 ///     let data = unsafe { ctx.data() };
 ///     let data_end = unsafe { ctx.data_end() };
 ///
 ///     // 检查以太网头
+///     //
 ///     let eth_len = 14;
 ///     if data + eth_len > data_end {
 ///         return xdp_action::XDP_ABORTED;
 ///     }
 ///
 ///     // 解析 IP 头，检查来源
+///     // IP ，Source
 ///     let ip_header = data + eth_len;
 ///     let ip_len = 20;
 ///     if ip_header + ip_len > data_end {
@@ -81,6 +108,7 @@
 ///     }
 ///
 ///     // 如果是黑名单 IP，丢弃
+///     // if IP ，
 ///     // if is_blacklisted(ip_header) {
 ///     //     return xdp_action::XDP_DROP;
 ///     // }
@@ -92,6 +120,7 @@ pub struct XdpFirewallConcept;
 
 impl XdpFirewallConcept {
     /// XDP 动作类型说明
+    /// XDP type explain
     pub fn xdp_actions() -> &'static str {
         "| 动作 | 含义 | 性能 |\n|------|------|------|\n| XDP_ABORTED | 程序错误，丢包 | - |\n| \
          XDP_DROP | 静默丢包 | 最高 |\n| XDP_PASS | 传递给网络栈 | 默认 |\n| XDP_TX | \
@@ -106,9 +135,11 @@ impl XdpFirewallConcept {
 /// # Tracepoint 程序
 ///
 /// Tracepoint 是内核预定义的静态探针，用于追踪内核子系统事件
+/// Tracepoint kernel definition ，kernel system
 ///（如 sched_switch、syscalls、net_dev_queue 等）。
 ///
 /// ## 内核态 eBPF 程序（概念）
+/// ## kernel eBPF program （concept ）
 /// ```ignore
 /// #![no_std]
 /// #![no_main]
@@ -129,6 +160,7 @@ impl XdpFirewallConcept {
 /// #[tracepoint]
 /// pub fn trace_sched_switch(ctx: TracePointContext) -> u32 {
 ///     // 读取当前进程信息
+///     // when before process
 ///     let pid: u32 = unsafe { ctx.read_at_offset(16) };
 ///
 ///     // 尝试写入 ring buffer
@@ -161,13 +193,18 @@ impl TracepointConcept {
 /// # BPF Map 类型
 ///
 /// BPF Map 是内核态和用户态共享的键值存储，用于：
+/// BPF Map kernel and ，：
 /// - 配置传递（用户态 → 内核态）
+/// - （ → kernel ）
 /// - 数据收集（内核态 → 用户态）
+/// - （kernel → ）
 /// - 程序间通信（eBPF ↔ eBPF）
+/// - program （eBPF ↔ eBPF）
 pub struct BpfMapConcepts;
 
 impl BpfMapConcepts {
     /// 常用 Map 类型
+    /// Map type
     pub fn map_types() -> &'static str {
         "| Map 类型 | 用途 | 内核版本 |\n|----------|------|----------|\n| HashMap | 通用键值存储 \
          | 3.19+ |\n| Array | 固定大小数组 | 3.19+ |\n| RingBuf | 高性能事件流 | 5.8+ |\n| \
@@ -176,6 +213,7 @@ impl BpfMapConcepts {
     }
 
     /// 用户态读取 RingBuf 的概念代码
+    /// RingBuf concept
     pub fn userspace_ringbuf_concept() -> &'static str {
         "// 用户态 Rust 代码\n\
          use aya::maps::ring_buf::RingBuf;\n\
@@ -196,21 +234,27 @@ impl BpfMapConcepts {
 // ============================================================================
 
 /// # Aya 项目目录结构
+/// # Aya project structure
 ///
 /// ```text
 /// my-ebpf-project/
 /// ├── Cargo.toml          # 工作区定义
+/// ├── Cargo.toml # definition
 /// ├── my-ebpf/            # 内核态 eBPF 程序
+/// ├── my-ebpf/ # kernel eBPF program
 /// │   ├── Cargo.toml
 /// │   └── src/
 /// │       └── main.rs     # #[xdp] / #[tracepoint] 程序
 /// ├── my-ebpf-common/     # 共享类型定义
+/// ├── my-ebpf-common/ # type definition
 /// │   └── src/
 /// │       └── lib.rs
 /// └── my-userspace/       # 用户态加载器
+/// └── my-userspace/ #
 ///     ├── Cargo.toml
 ///     └── src/
 ///         └── main.rs     # 加载 eBPF、处理事件
+///         └── main.rs # eBPF、
 /// ```
 pub struct AyaProjectStructure;
 
@@ -219,26 +263,39 @@ pub struct AyaProjectStructure;
 // ============================================================================
 
 /// # eBPF 编程限制
+/// # eBPF
 ///
 /// ## ❌ Verifier 约束
 /// - 程序大小限制：最多 100 万条指令（5.2+）
+/// - program ：at most 100 （5.2+）
 /// - 循环必须可证明有界
+/// - circulation must
 /// - 不能访问任意内存地址
+/// - cannot memory
 /// - 不能调用任意内核函数（仅限白名单 helper）
+/// - cannot kernel function （ helper）
 ///
 /// ## ❌ Rust 子集限制
+/// ## ❌ Rust subset
 /// - 不能使用 `std`（只有 `core`）
+/// - cannot `std`（ `core`）
 /// - 不能使用 panic（需设置 panic handler）
 /// - 不能使用动态分配（某些 map 类型除外）
+/// - cannot （ map type outside ）
 /// - 浮点运算受限
+/// - point
 ///
 /// ## ❌ 安全边界
+/// ## ❌ edge
 /// eBPF 程序运行在内核态，一旦加载就有最高权限。
+/// eBPF program Run in kernel ，。
 /// 必须通过 verifier 检查，否则加载失败。
+/// must verifier ，。
 pub struct EbpfLimitations;
 
 impl EbpfLimitations {
     /// Verifier 常见拒绝原因
+    /// Verifier cause
     pub fn verifier_rejections() -> &'static str {
         "| 原因 | 说明 | 解决 |\n|------|------|------|\n| invalid memory access | \
          访问未验证的指针 | 添加边界检查 |\n| unreachable instruction | 死代码 | 简化控制流 |\n| \
@@ -252,13 +309,16 @@ impl EbpfLimitations {
 // ============================================================================
 
 /// # eBPF 开发工具链
+/// # eBPF toolchain
 ///
 /// | 工具 | 用途 |
+/// | tool | purpose |
 /// |------|------|
 /// | `cargo-generate aya-rs/aya-template` | 生成项目模板 |
 /// | `bpf-linker` | BPF target 链接器 |
 /// | `llvm-objcopy` | 生成 BPF 字节码 |
 /// | `bpftool` | 加载/查看/调试 eBPF |
+/// | `bpftool` | // eBPF |
 /// | `libbpf-bootstrap` | C 参考实现 |
 pub struct EbpfToolchain;
 
@@ -298,7 +358,9 @@ mod tests {
 /// # Tracepoint 追踪
 ///
 /// Tracepoint 是内核预定义的静态探针点，覆盖关键系统调用和内核事件。
+/// Tracepoint kernel definition point ，key system and kernel 。
 /// 相比 kprobe，tracepoint 具有稳定的 ABI（内核版本间不变）。
+/// kprobe，tracepoint has ABI（kernel this ）。
 pub struct TracepointConcepts;
 
 impl TracepointConcepts {
@@ -364,12 +426,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 // ============================================================================
 
 /// # Aya 开发工具链
+/// # Aya toolchain
 ///
 /// eBPF 开发需要特定的工具链配置。
+/// eBPF toolchain 。
 pub struct AyaToolchainRequirements;
 
 impl AyaToolchainRequirements {
     /// 开发工具链要求说明
+    /// toolchain explain
     pub fn requirements() -> &'static str {
         r#"
 Aya 开发环境要求：

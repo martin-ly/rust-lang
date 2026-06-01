@@ -1,10 +1,10 @@
 //! Rust 1.96 特性模块 —— 宏系统场景
-//!
-//! 本模块展示 Rust 1.96 稳定新特性在宏系统学习中的应用：
+//! Rust 1.96 feature module —— system scenario
+//! Rust 1.96 featuremodule —— 宏systemscenario
 //! - `expr` metavariable 传递给 `cfg`
 //! - `assert_matches!` 用于宏展开结果测试
+//! - `assert_matches!` result
 //! - `core::range` 用于 token span 范围表示
-//! - `ManuallyDrop` 用于宏卫生标记类型
 
 #![allow(clippy::incompatible_msrv)]
 
@@ -15,9 +15,10 @@ use std::mem::ManuallyDrop;
 // Rust 1.96: expr metavariable to cfg（保留并维护）
 // ============================================================================
 
-/// 在 Rust 1.96 之前，声明式宏中的 `expr` fragment specifier
 /// 不能用于 `#[cfg(...)]` 属性参数。1.96 放宽了这一限制，
+/// cannot `#[cfg(...)]` attribute parameter 。1.96 ，
 /// 允许通过宏参数动态生成条件编译属性。
+/// parameter condition attribute 。
 macro_rules! cfg_conditional {
     ($cond:expr, $item:item) => {
         #[cfg($cond)]
@@ -40,15 +41,18 @@ cfg_conditional!(
 );
 
 /// 条件编译宏的实用包装
+/// condition
 pub struct ExprMetavariableToCfgExamples;
 
 impl ExprMetavariableToCfgExamples {
     /// 返回当前平台标识（通过条件编译宏生成）
+    /// when before platform （condition ）
     pub fn platform_hint() -> &'static str {
         _platform_id()
     }
 
     /// 演示：使用宏根据 cfg 条件选择不同的实现
+    /// demonstration ：according to cfg condition
     pub fn cfg_select_hint() -> &'static str {
         _platform_id()
     }
@@ -59,20 +63,24 @@ impl ExprMetavariableToCfgExamples {
 // ============================================================================
 
 /// 宏展开结果的枚举表示
+/// result enum represent
+/// 宏展开resultenumrepresent
 #[derive(Debug, Clone, PartialEq)]
 pub enum ExpansionResult {
     /// 展开成功
     Success {
-        /// 生成的 token 数量
         tokens: usize,
         /// span 数量
+        /// span quantity
         span_count: usize,
     },
     /// 展开出错
     Error {
         /// 错误信息
+        /// error message
         message: &'static str,
         /// 所在行号
+        /// in
         line: u32,
     },
     /// 空展开
@@ -80,6 +88,7 @@ pub enum ExpansionResult {
 }
 
 /// 宏展开结果断言工具
+/// result tool
 pub struct MacroExpansionAssertions;
 
 impl MacroExpansionAssertions {
@@ -89,6 +98,7 @@ impl MacroExpansionAssertions {
     }
 
     /// 检查宏展开错误信息
+    /// error message
     pub fn assert_error_with_message(result: &ExpansionResult, expected: &str) {
         assert_matches!(
             result,
@@ -97,6 +107,7 @@ impl MacroExpansionAssertions {
     }
 
     /// 检查宏展开是否为空
+    /// as
     pub fn assert_empty(result: &ExpansionResult) {
         assert_matches!(result, ExpansionResult::Empty);
     }
@@ -106,16 +117,17 @@ impl MacroExpansionAssertions {
 // Rust 1.96.0: core::range 用于 token span 范围
 // ============================================================================
 
-/// 使用 `core::range` 表示宏 token 的 span 范围
 pub struct TokenSpanRange {
     /// 左闭右开范围
+    /// scope
     pub range: core::range::Range<usize>,
     /// 闭区间范围
+    /// interval scope
+    /// 闭intervalrange
     pub range_inclusive: core::range::RangeInclusive<usize>,
 }
 
 impl TokenSpanRange {
-    /// 创建新的 token span 范围
     pub fn new(start: usize, end: usize) -> Self {
         Self {
             range: core::range::Range { start, end },
@@ -124,16 +136,19 @@ impl TokenSpanRange {
     }
 
     /// 检查位置是否在范围内
+    /// position in scope inside
     pub fn contains(&self, pos: usize) -> bool {
         self.range.start <= pos && pos < self.range.end
     }
 
     /// 获取范围长度
+    /// scope
     pub fn len(&self) -> usize {
         self.range.end - self.range.start
     }
 
     /// 是否为空范围
+    /// as scope
     pub fn is_empty(&self) -> bool {
         self.range.start == self.range.end
     }
@@ -143,13 +158,13 @@ impl TokenSpanRange {
 // Rust 1.96: ManuallyDrop 用于宏卫生标记类型
 // ============================================================================
 
-/// 宏卫生标记：使用 ManuallyDrop 包装标识符，避免在分析阶段被自动释放
 pub struct HygieneMarker<T> {
     inner: ManuallyDrop<T>,
 }
 
 impl<T> HygieneMarker<T> {
     /// 创建新的卫生标记
+    /// mark
     pub fn new(value: T) -> Self {
         Self {
             inner: ManuallyDrop::new(value),
@@ -157,11 +172,13 @@ impl<T> HygieneMarker<T> {
     }
 
     /// 获取内部值的引用
+    /// inside reference
     pub fn get(&self) -> &T {
         &self.inner
     }
 
     /// 获取内部值（消费 self，不调用 drop）
+    /// inside （ self， drop）
     pub fn into_inner(self) -> T {
         ManuallyDrop::into_inner(self.inner)
     }
@@ -172,6 +189,8 @@ impl<T> HygieneMarker<T> {
 // ============================================================================
 
 /// 演示 Rust 1.96 新特性
+/// demonstration Rust 1.96 feature
+/// Demonstration of Rust 1.96 新feature
 pub fn demonstrate_rust_196_features() {
     println!("\n=== Rust 1.96 宏系统特性演示 ===");
 
@@ -197,6 +216,7 @@ pub fn demonstrate_rust_196_features() {
 }
 
 /// 获取特性信息
+/// feature
 pub fn get_rust_196_macro_info() -> String {
     "Rust 1.96.0 宏系统特性:\n- expr metavariable to cfg\n- assert_matches! for macro expansion \
      testing\n- core::range for token span ranges\n- ManuallyDrop for macro hygiene markers"

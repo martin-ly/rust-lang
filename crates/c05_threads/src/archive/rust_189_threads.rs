@@ -1,37 +1,31 @@
 //! # Rust 1.89 特性示例 (历史版本)
-//!
+//! # Rust 1.89 feature example (this )
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//!
+//! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
-//!
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! ## 版本历史说明
-//!
-//! 本文件展示 Rust 1.89 版本的特性，当前项目已升级到 Rust 1.92.0。
-//!
+//! ## this explain
 //! ### Rust 1.92.0 主要改进
-//!
-//! - **MaybeUninit 改进**: 文档化的内存管理，更安全的并发编程
-//! - **标准库**: rotate_right、NonZero::div_ceil 在线程池中的应用
+//! ### Rust 1.92.0 main
 //! - **性能优化**: 迭代器方法特化，提升并发数据处理性能
-//!
+//! - **performance optimization **: method ，concurrency performance
 //! ### 迁移建议
-//!
+//! ###
 //! 1. 更新 Cargo.toml: `rust-version = "1.92"`
-//! 2. 参考 `rust_192_features.rs` 了解最新特性
-//! 3. 查看 `docs/RUST_192_THREADS_IMPROVEMENTS.md` 了解完整改进
-//!
 //! 参考:
-//! - [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/)
+//! reference :
 //! - [历史版本: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
-//!
-//! ---
+//! - [历史版this: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 //!
 //! # Rust 1.89 并发方向对齐示例
-//!
-//! - 标准库 scoped 线程（thread::scope）更安全的借用跨线程
+//! # Rust 1.89 concurrency direction to example
 //! - crossbeam-channel vs std::mpsc 对比
+//! - crossbeam-channel vs std::mpsc to比
 //! - rayon 数据并行 map/reduce
 //! - parking_lot 互斥/读写锁
+//! - parking_lot /rwlock
+//! - parking_lot 互斥/rwlock
 use std::thread;
 
 pub fn demo_scoped_threads() {

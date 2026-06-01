@@ -1,12 +1,16 @@
 //! # 同步排序算法实现
+//! # synchronous sorting algorithm
 //!
 //! 本模块实现了各种同步排序算法，提供传统的单线程排序实现。
+//! this module synchronous sorting algorithm ，thread ordering 。
 //! 适用于小到中等规模的数据排序。
+//! to in etc. scale ordering 。
 use super::*;
 use crate::algorithms::execution_modes::SyncAlgorithm;
 //use std::cmp::Ordering;
 
 /// 快速排序算法
+/// quick sort algorithm
 pub struct QuickSort;
 
 impl SyncAlgorithm<Vec<i32>, Vec<i32>> for QuickSort {
@@ -37,6 +41,7 @@ impl SyncSortingAlgorithm for QuickSort {
 }
 
 /// 快速排序递归实现
+/// quick sort
 fn quick_sort_recursive(arr: &mut [i32], low: usize, high: usize) {
     if low < high {
         let pi = partition(arr, low, high);
@@ -50,6 +55,7 @@ fn quick_sort_recursive(arr: &mut [i32], low: usize, high: usize) {
 }
 
 /// 分区函数
+/// partitioning function
 fn partition(arr: &mut [i32], low: usize, high: usize) -> usize {
     let pivot = arr[high];
     let mut i = low;
@@ -66,6 +72,7 @@ fn partition(arr: &mut [i32], low: usize, high: usize) -> usize {
 }
 
 /// 归并排序算法
+/// merge sort algorithm
 pub struct MergeSort;
 
 impl SyncAlgorithm<Vec<i32>, Vec<i32>> for MergeSort {
@@ -101,6 +108,7 @@ impl SyncSortingAlgorithm for MergeSort {
 }
 
 /// 归并排序递归实现
+/// merge sort
 fn merge_sort_recursive(arr: &mut [i32]) {
     if arr.len() <= 1 {
         return;
@@ -116,6 +124,7 @@ fn merge_sort_recursive(arr: &mut [i32]) {
 }
 
 /// 归并函数
+/// and function
 fn merge(arr: &mut [i32], mid: usize) {
     let left = arr[..mid].to_vec();
     let right = arr[mid..].to_vec();
@@ -149,6 +158,7 @@ fn merge(arr: &mut [i32], mid: usize) {
 }
 
 /// 堆排序算法
+/// heap sort algorithm
 pub struct HeapSort;
 
 impl SyncAlgorithm<Vec<i32>, Vec<i32>> for HeapSort {
@@ -183,6 +193,7 @@ impl SyncSortingAlgorithm for HeapSort {
 }
 
 /// 堆排序实现
+/// heap sort
 fn heap_sort(arr: &mut [i32]) {
     let n = arr.len();
 
@@ -199,6 +210,7 @@ fn heap_sort(arr: &mut [i32]) {
 }
 
 /// 堆化函数
+/// heap function
 fn heapify(arr: &mut [i32], n: usize, i: usize) {
     let mut largest = i;
     let left = 2 * i + 1;
@@ -219,6 +231,7 @@ fn heapify(arr: &mut [i32], n: usize, i: usize) {
 }
 
 /// 插入排序算法
+/// insertion sort algorithm
 pub struct InsertionSort;
 
 impl SyncAlgorithm<Vec<i32>, Vec<i32>> for InsertionSort {
@@ -246,6 +259,7 @@ impl SyncSortingAlgorithm for InsertionSort {
 }
 
 /// 插入排序实现
+/// insertion sort
 fn insertion_sort(arr: &mut [i32]) {
     for i in 1..arr.len() {
         let key = arr[i];
@@ -261,6 +275,7 @@ fn insertion_sort(arr: &mut [i32]) {
 }
 
 /// 选择排序算法
+/// selection sort algorithm
 pub struct SelectionSort;
 
 impl SyncAlgorithm<Vec<i32>, Vec<i32>> for SelectionSort {
@@ -288,6 +303,7 @@ impl SyncSortingAlgorithm for SelectionSort {
 }
 
 /// 选择排序实现
+/// selection sort
 fn selection_sort(arr: &mut [i32]) {
     for i in 0..arr.len() - 1 {
         let mut min_idx = i;
@@ -305,6 +321,7 @@ fn selection_sort(arr: &mut [i32]) {
 }
 
 /// 冒泡排序算法
+/// bubble sort algorithm
 pub struct BubbleSort;
 
 impl SyncAlgorithm<Vec<i32>, Vec<i32>> for BubbleSort {
@@ -332,6 +349,7 @@ impl SyncSortingAlgorithm for BubbleSort {
 }
 
 /// 冒泡排序实现
+/// bubble sort
 fn bubble_sort(arr: &mut [i32]) {
     let n = arr.len();
 
@@ -352,6 +370,7 @@ fn bubble_sort(arr: &mut [i32]) {
 }
 
 /// 基数排序算法
+/// radix sort algorithm
 pub struct RadixSort;
 
 impl SyncAlgorithm<Vec<i32>, Vec<i32>> for RadixSort {
@@ -380,6 +399,7 @@ impl SyncSortingAlgorithm for RadixSort {
 }
 
 /// 基数排序实现
+/// radix sort
 fn radix_sort(arr: &mut [i32]) {
     let max = *arr.iter().max().unwrap_or(&0);
     let mut exp = 1;
@@ -391,6 +411,7 @@ fn radix_sort(arr: &mut [i32]) {
 }
 
 /// 按位计数排序
+/// counting sort
 fn counting_sort_by_digit(arr: &mut [i32], exp: i32) {
     let n = arr.len();
     let mut output = vec![0; n];
@@ -418,6 +439,7 @@ fn counting_sort_by_digit(arr: &mut [i32], exp: i32) {
 }
 
 /// 计数排序算法
+/// counting sort algorithm
 pub struct CountingSort;
 
 impl SyncAlgorithm<Vec<i32>, Vec<i32>> for CountingSort {
@@ -446,6 +468,7 @@ impl SyncSortingAlgorithm for CountingSort {
 }
 
 /// 计数排序实现
+/// counting sort
 fn counting_sort(arr: &mut [i32]) {
     let max = *arr.iter().max().unwrap_or(&0);
     let min = *arr.iter().min().unwrap_or(&0);
@@ -476,6 +499,7 @@ fn counting_sort(arr: &mut [i32]) {
 }
 
 /// 桶排序算法
+/// bucket sort algorithm
 pub struct BucketSort;
 
 impl SyncAlgorithm<Vec<i32>, Vec<i32>> for BucketSort {
@@ -504,6 +528,7 @@ impl SyncSortingAlgorithm for BucketSort {
 }
 
 /// 桶排序实现
+/// bucket sort
 fn bucket_sort(arr: &mut [i32]) {
     let n = arr.len();
     if n == 0 {
@@ -641,6 +666,7 @@ fn tim_sort(arr: &mut [i32]) {
 }
 
 /// 合并两个运行
+/// and Run
 fn merge_runs(arr: &mut [i32], start1: usize, end1: usize, start2: usize, end2: usize) {
     let left = arr[start1..end1].to_vec();
     let right = arr[start2..end2].to_vec();

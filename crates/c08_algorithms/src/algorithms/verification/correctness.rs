@@ -1,9 +1,12 @@
 //! # 算法正确性验证模块
+//! # algorithm module
 //!
 //! 本模块提供算法正确性验证的工具和方法。
+//! This module provides algorithm tool and method 。
 use serde::{Deserialize, Serialize};
 
 /// 正确性验证结果
+/// result
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CorrectnessVerificationResult {
     pub algorithm_name: String,
@@ -26,6 +29,7 @@ pub struct TestCase {
 }
 
 /// 测试状态
+/// state
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum TestStatus {
     Passed,
@@ -39,6 +43,7 @@ pub struct CorrectnessVerifier;
 
 impl CorrectnessVerifier {
     /// 验证排序算法的正确性
+    /// sorting algorithm
     pub fn verify_sorting_correctness<T: Clone + Ord>(
         sort_fn: impl Fn(&mut [T]),
         test_cases: &[Vec<T>],
@@ -61,6 +66,7 @@ impl CorrectnessVerifier {
     }
 
     /// 验证搜索算法的正确性
+    /// searching algorithm
     pub fn verify_search_correctness<T: Clone + Ord>(
         search_fn: impl Fn(&[T], &T) -> Option<usize>,
         test_cases: &[(Vec<T>, T, Option<usize>)],
@@ -75,11 +81,13 @@ impl CorrectnessVerifier {
     }
 
     /// 检查数组是否已排序
+    /// ordering
     fn is_sorted<T: Ord>(arr: &[T]) -> bool {
         arr.windows(2).all(|w| w[0] <= w[1])
     }
 
     /// 检查两个数组是否包含相同的元素
+    /// element
     fn has_same_elements<T: Clone + Ord>(arr1: &[T], arr2: &[T]) -> bool {
         if arr1.len() != arr2.len() {
             return false;

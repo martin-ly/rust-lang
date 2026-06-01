@@ -1,31 +1,45 @@
 //! Rust for Linux 预研模块
 //!
 //! ⚠️ **警告**: 本模块内容基于 Rust-for-Linux 项目文档和内核 6.12+ 实践，
+//! ⚠️ **warning **: this module inside Rust-for-Linux project and kernel 6.12+ ，
 //! 需要特定内核环境和交叉编译工具链，不能在用户态直接运行。
+//! kernel environment and toolchain ，cannot in Run 。
 //!
 //! # 概念定义
+//! # concept definition
 //!
 //! [Rust for Linux](https://github.com/Rust-for-Linux/linux) 是 Linux 内核官方支持的
 //! Rust 开发框架，从内核 6.1 开始引入，允许用 Rust 编写内核模块、驱动程序。
+//! Rust framework ，from kernel 6.1 ， Rust kernel module 、driver program 。
 //!
 //! ## 认知必要性
+//! ##
 //! - 2026 年趋势置信度: **90%** (Debian 14 将包含 Rust 工具链)
+//! - 2026 : **90%** (Debian 14 will Rust toolchain )
 //! - 影响: 系统编程的终极场景
+//! - impact : system scenario
 //! - 学习价值: 理解 `no_std`、FFI、`unsafe` 的极致应用
+//! - learn value : `no_std`、FFI、`unsafe` application
 //!
 //! ## 核心概念
+//! ## core concept
 //!
 //! ```text
 //! What:   用 Rust 替代 C 编写 Linux 内核模块
+//! What: Rust C Linux kernel module
 //! How:    kernel crate + no_std + unsafe FFI + 内核 ABI
 //! When:   设备驱动、文件系统、网络协议栈
+//! When: driver 、file system 、network protocol stack
 //! Not:    不是用户态程序！没有 std，没有 libc，只有 core/alloc
+//! Not: program ！ std， libc， core/alloc
 //! ```
 //!
 //! # 权威来源
+//! # Source
 //! - 项目: [Rust-for-Linux](https://github.com/Rust-for-Linux/linux)
 //! - 文档: [docs.kernel.org/rust](https://docs.kernel.org/rust/)
 //! - 预计生产化: 内核 6.12+
+//! - : kernel 6.12+
 
 #![allow(dead_code)]
 
@@ -34,6 +48,7 @@
 // ============================================================================
 
 /// # 内核模块 Hello World（概念代码）
+/// # kernel module Hello World（concept ）
 ///
 /// ```ignore
 /// #![no_std]
@@ -68,11 +83,13 @@ pub struct KernelModuleBasics;
 
 impl KernelModuleBasics {
     /// 内核模块的生命周期说明
+    /// kernel module lifetime explain
     pub fn module_lifecycle() -> &'static str {
         "1. insmod: 调用 Module::init()\n2. Running: 模块提供服务\n3. rmmod: 调用 Drop::drop() 清理"
     }
 
     /// 内核与用户态的关键差异
+    /// kernel and key
     pub fn kernel_vs_userspace() -> &'static str {
         "| 维度 | 用户态 Rust | 内核态 Rust |\n|------|------------|------------|\n| 标准库 | std \
          | core + alloc（可选）|\n| 内存分配 | 全局 allocator | kmalloc / kfree|\n| 错误处理 | \
@@ -86,22 +103,28 @@ impl KernelModuleBasics {
 // ============================================================================
 
 /// # 内核中的 no_std 编程
+/// # kernel in no_std
 ///
 /// 内核态 Rust 必须在 `#![no_std]` 环境下运行，这意味着：
+/// kernel Rust must in `#![no_std]` environment under Run ，：
 /// - 没有 `std::vec::Vec`（除非启用 `alloc`）
 /// - 没有 `std::println!`（使用 `pr_info!` / `pr_err!`）
 /// - 没有 `std::thread`（使用内核 API）
+/// - `std::thread`（kernel API）
 /// - 没有 panic 展开（必须设置 `panic = abort`）
+/// - panic （must `panic = abort`）
 pub struct NoStdKernelPatterns;
 
 impl NoStdKernelPatterns {
     /// 内核中的错误处理模式
+    /// kernel in error handling
     pub fn kernel_error_handling() -> &'static str {
         "内核中没有 unwrap() 的奢侈：\n- 所有分配可能失败（返回 ENOMEM）\n- 使用 Result<T, Error> \
          传播错误\n- 关键路径使用 GFP_ATOMIC（不可睡眠）"
     }
 
     /// 内核中的 SAFETY 注释规范
+    /// kernel in SAFETY norm
     pub fn safety_comment_example() -> &'static str {
         "// SAFETY: `ptr` 由内核分配器返回，且我们持有唯一的引用。\n// 调用者在 `ptr` \
          无效后不得使用此函数。\nunsafe fn dereference_kernel_ptr<T>(ptr: *mut T) -> &'static mut \
@@ -114,6 +137,7 @@ impl NoStdKernelPatterns {
 // ============================================================================
 
 /// # 字符设备驱动（概念结构）
+/// # driver （concept structure ）
 ///
 /// ```ignore
 /// struct RustCharDevice {
@@ -145,6 +169,7 @@ pub struct DeviceDriverFramework;
 
 impl DeviceDriverFramework {
     /// Rust 驱动开发的优势
+    /// Rust driver strength
     pub fn rust_driver_advantages() -> &'static str {
         "1. 内存安全：消除 UAF / 双重释放 / 缓冲区溢出\n2. 并发安全：Mutex / Spinlock 的 RAII \
          封装\n3. 类型状态：未初始化设备无法调用 read/write\n4. 零成本抽象：高级 API 编译为与 C \
@@ -157,25 +182,32 @@ impl DeviceDriverFramework {
 // ============================================================================
 
 /// # 内核模块构建流程
+/// # kernel module process
 ///
 /// ```text
 /// 1. 获取 Rust-for-Linux 内核源码
+/// 1. Rust-for-Linux kernel
 ///    git clone https://github.com/Rust-for-Linux/linux.git
 ///
 /// 2. 配置内核（启用 CONFIG_RUST）
+/// 2. kernel （ CONFIG_RUST）
 ///    make menuconfig  # 选择 Device Drivers -> Rust support
 ///
 /// 3. 编写 Rust 内核模块
+/// 3. Rust kernel module
 ///    保存到 drivers/char/rust_example.rs
 ///
 /// 4. 编译
+/// 4.
 ///    make LLVM=1 -j$(nproc)
 ///
 /// 5. 加载模块
+/// 5. module
 ///    insmod rust_example.ko
 ///    dmesg | tail  # 查看 pr_info! 输出
 ///
 /// 6. 卸载
+/// 6.
 ///    rmmod rust_example
 /// ```
 pub struct KernelBuildWorkflow;
@@ -187,12 +219,18 @@ pub struct KernelBuildWorkflow;
 /// # Rust for Linux 2026 趋势
 ///
 /// | 里程碑 | 时间 | 状态 |
+/// | | time | state |
 /// |--------|------|------|
 /// | 内核 6.1 引入 Rust | 2022 | ✅ 完成 |
+/// | kernel 6.1 Rust | 2022 | ✅ |
 /// | NVMe 驱动 Rust 重写 | 2024 | 🔄 进行中 |
+/// | NVMe driver Rust | 2024 | 🔄 in |
 /// | Android 内核 Rust 支持 | 2025 | ✅ 完成 |
+/// | Android kernel Rust | 2025 | ✅ |
 /// | Debian 14 包含 Rust 工具链 | 2027 | 📅 预计 |
+/// | Debian 14 Rust toolchain | 2027 | 📅 |
 /// | 核心子系统 Rust 化 | 2028+ | 📅 长期 |
+/// | core system Rust | 2028+ | 📅 long-term |
 pub struct RustForLinuxTrends;
 
 // ============================================================================

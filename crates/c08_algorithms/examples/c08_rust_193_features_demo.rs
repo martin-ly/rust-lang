@@ -1,8 +1,3 @@
-//! Rust 1.93.0 算法与集合相关 API 演示
-//!
-//! 本示例展示 Rust 1.93.0 在算法、集合等场景中的新 API：
-//! - VecDeque::pop_front_if / pop_back_if
-//! - BTreeMap::append
 //! - slice::as_array
 //! - Duration::from_nanos_u128
 //!
@@ -39,7 +34,6 @@ fn demonstrate_vecdeque_pop_if() {
     println!("  最终: {:?}", deque);
 }
 
-/// BTreeMap::append (Rust 1.93 - 行为：相同 key 保留目标)
 fn demonstrate_btreemap_append() {
     println!("\n--- BTreeMap::append ---");
     let mut a: BTreeMap<&str, i32> = BTreeMap::from([("x", 1), ("y", 2)]);

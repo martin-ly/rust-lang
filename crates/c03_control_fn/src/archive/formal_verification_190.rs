@@ -1,31 +1,35 @@
 //! Rust 1.90 形式化验证工具链模块
-//!
-//! 本模块专门展示 Rust 1.90 版本中形式化验证工具链的集成：
+//! Rust 1.90 toolchain module
+//! Rust 1.90 形式化Verifytoolchainmodule
 //! - Prusti 程序验证
+//! - Prusti program
 //! - SMACK 模型检查
+//! - SMACK
+//! - SMACK 模型Check
 //! - Creusot 形式化规约
+//! - Creusot
 //! - Kani 模型检查
+//! - Kani
+//! - Kani 模型Check
 //! - MIRAI 静态分析
-//!
-//! 所有示例都使用 Rust 1.90 的最新特性，并包含详细的验证说明。
+//! - MIRAI analyze
+//! - MIRAI 静态analysis
 use std::collections::HashMap;
 
 /// Prusti 程序验证演示
-///
-/// Prusti 是一个基于 Viper 的 Rust 程序验证器，能够验证程序的不变量和后置条件。
+/// Prusti program demonstration
 pub struct PrustiVerificationDemo {
     pub data: Vec<i32>,
     pub max_size: usize,
 }
 
 impl PrustiVerificationDemo {
-    /// 创建新的 Prusti 验证演示
-    ///
     /// # 前置条件
+    /// # before condition
     /// - max_size 必须大于 0
-    ///
+    /// - max_size must 0
     /// # 后置条件
-    /// - 返回的实例的 max_size 等于输入参数
+    /// # after condition
     pub fn new(max_size: usize) -> Self {
         // Prusti 会验证 max_size > 0
         assert!(max_size > 0, "max_size must be greater than 0");
@@ -37,14 +41,21 @@ impl PrustiVerificationDemo {
     }
 
     /// 添加元素到数据结构
-    ///
+    /// element to data structure
+    /// 添加elementtodata structure
     /// # 前置条件
+    /// # before condition
     /// - value 必须大于 0
+    /// - value must 0
     /// - 当前大小必须小于 max_size
-    ///
+    /// - when before must max_size
     /// # 后置条件
+    /// # after condition
     /// - 数据结构的大小增加 1
+    /// - data structure 1
     /// - 新添加的元素在数据结构中
+    /// - element in data structure in
+    /// - 新添加elementindata structurein
     pub fn add_element(&mut self, value: i32) -> Result<(), String> {
         // Prusti 会验证前置条件
         assert!(value > 0, "value must be positive");
@@ -55,12 +66,15 @@ impl PrustiVerificationDemo {
     }
 
     /// 获取元素
-    ///
+    /// element
     /// # 前置条件
+    /// # before condition
     /// - index 必须在有效范围内
-    ///
+    /// - index must in effective scope inside
     /// # 后置条件
+    /// # after condition
     /// - 返回的元素大于 0
+    /// - element 0
     pub fn get_element(&self, index: usize) -> Option<i32> {
         if index < self.data.len() {
             Some(self.data[index])
@@ -70,18 +84,24 @@ impl PrustiVerificationDemo {
     }
 
     /// 计算所有元素的和
-    ///
+    /// all element and
     /// # 后置条件
+    /// # after condition
     /// - 返回值大于等于 0
+    /// - return value etc. 0
     pub fn sum(&self) -> i32 {
         self.data.iter().sum()
     }
 
     /// 验证不变量
-    ///
+    /// variable
     /// # 不变量
+    /// # variable
+    /// # 不variable
     /// - 所有元素都大于 0
+    /// - all element 0
     /// - 数据结构大小不超过 max_size
+    /// - data structure max_size
     pub fn verify_invariants(&self) -> bool {
         // 验证所有元素都大于 0
         let all_positive = self.data.iter().all(|&x| x > 0);
@@ -94,15 +114,13 @@ impl PrustiVerificationDemo {
 }
 
 /// SMACK 模型检查演示
-///
-/// SMACK 是一个用于验证 C/C++ 和 Rust 程序的模型检查器。
+/// SMACK demonstration
 pub struct SmackModelCheckingDemo {
     pub state: u32,
     pub transitions: HashMap<u32, Vec<u32>>,
 }
 
 impl SmackModelCheckingDemo {
-    /// 创建新的 SMACK 模型检查演示
     pub fn new(initial_state: u32) -> Self {
         Self {
             state: initial_state,
@@ -111,15 +129,21 @@ impl SmackModelCheckingDemo {
     }
 
     /// 添加状态转换
+    /// state conversion
+    /// 添加stateconversion
     pub fn add_transition(&mut self, from: u32, to: u32) {
         self.transitions.entry(from).or_default().push(to);
     }
 
     /// 执行状态转换
-    ///
+    /// state conversion
     /// # 模型检查属性
+    /// # attribute
+    /// # 模型Checkattribute
     /// - 状态转换必须是有效的
+    /// - state conversion must effective
     /// - 不能进入死锁状态
+    /// - cannot lock state
     pub fn transition(&mut self, target_state: u32) -> Result<(), String> {
         if let Some(valid_transitions) = self.transitions.get(&self.state) {
             if valid_transitions.contains(&target_state) {
@@ -134,9 +158,11 @@ impl SmackModelCheckingDemo {
     }
 
     /// 检查可达性
-    ///
     /// # 模型检查属性
+    /// # attribute
+    /// # 模型Checkattribute
     /// - 检查目标状态是否可达
+    /// - goal state
     pub fn is_reachable(&self, target_state: u32) -> bool {
         if self.state == target_state {
             return true;
@@ -166,19 +192,20 @@ impl SmackModelCheckingDemo {
 }
 
 /// Creusot 形式化规约演示
-///
-/// Creusot 是一个用于 Rust 程序形式化规约和验证的工具。
+/// Creusot demonstration
+/// Creusot 形式化规约Demonstration of
 pub struct CreusotSpecificationDemo {
     pub buffer: Vec<u8>,
     pub capacity: usize,
 }
 
 impl CreusotSpecificationDemo {
-    /// 创建新的 Creusot 规约演示
-    ///
     /// # 规约
+    /// #
     /// - capacity 必须大于 0
+    /// - capacity must 0
     /// - 初始缓冲区为空
+    /// - buffering as
     pub fn new(capacity: usize) -> Self {
         assert!(capacity > 0, "capacity must be positive");
 
@@ -189,14 +216,17 @@ impl CreusotSpecificationDemo {
     }
 
     /// 写入数据到缓冲区
-    ///
+    /// to buffering
     /// # 前置条件
-    /// - data 不能为空
+    /// # before condition
     /// - 缓冲区必须有足够空间
-    ///
+    /// - buffering must space
     /// # 后置条件
+    /// # after condition
     /// - 缓冲区包含写入的数据
+    /// - buffering
     /// - 缓冲区大小增加 data.len()
+    /// - buffering data.len()
     pub fn write(&mut self, data: &[u8]) -> Result<(), String> {
         if data.is_empty() {
             return Err("data cannot be empty".to_string());
@@ -211,14 +241,17 @@ impl CreusotSpecificationDemo {
     }
 
     /// 从缓冲区读取数据
-    ///
+    /// from buffering
     /// # 前置条件
+    /// # before condition
     /// - size 必须大于 0
+    /// - size must 0
     /// - 缓冲区必须有足够数据
-    ///
+    /// - buffering must
     /// # 后置条件
-    /// - 返回的数据长度等于 size
+    /// # after condition
     /// - 缓冲区大小减少 size
+    /// - buffering size
     pub fn read(&mut self, size: usize) -> Result<Vec<u8>, String> {
         if size == 0 {
             return Err("size must be positive".to_string());
@@ -233,25 +266,27 @@ impl CreusotSpecificationDemo {
     }
 
     /// 获取缓冲区状态
-    ///
+    /// buffering state
     /// # 不变量
+    /// # variable
+    /// # 不variable
     /// - 缓冲区大小不超过容量
+    /// - buffering
     /// - 缓冲区大小非负
+    /// - buffering
     pub fn get_status(&self) -> (usize, usize) {
         (self.buffer.len(), self.capacity)
     }
 }
 
 /// Kani 模型检查演示
-///
-/// Kani 是一个用于 Rust 程序的模型检查器，能够验证内存安全和并发属性。
+/// Kani demonstration
 pub struct KaniModelCheckingDemo {
     pub counter: u32,
     pub max_value: u32,
 }
 
 impl KaniModelCheckingDemo {
-    /// 创建新的 Kani 模型检查演示
     pub fn new(max_value: u32) -> Self {
         Self {
             counter: 0,
@@ -260,10 +295,13 @@ impl KaniModelCheckingDemo {
     }
 
     /// 增加计数器
-    ///
     /// # 模型检查属性
+    /// # attribute
+    /// # 模型Checkattribute
     /// - 计数器不能溢出
+    /// - cannot
     /// - 计数器不能超过最大值
+    /// - cannot maximum
     pub fn increment(&mut self) -> Result<(), String> {
         if self.counter >= self.max_value {
             return Err("counter would overflow".to_string());
@@ -276,9 +314,11 @@ impl KaniModelCheckingDemo {
     }
 
     /// 减少计数器
-    ///
     /// # 模型检查属性
+    /// # attribute
+    /// # 模型Checkattribute
     /// - 计数器不能下溢
+    /// - cannot under
     pub fn decrement(&mut self) -> Result<(), String> {
         if self.counter == 0 {
             return Err("counter would underflow".to_string());
@@ -291,25 +331,27 @@ impl KaniModelCheckingDemo {
     }
 
     /// 重置计数器
-    ///
     /// # 后置条件
+    /// # after condition
     /// - 计数器值为 0
+    /// - as 0
     pub fn reset(&mut self) {
         self.counter = 0;
     }
 
     /// 获取计数器值
-    ///
     /// # 不变量
+    /// # variable
+    /// # 不variable
     /// - 返回值不超过 max_value
+    /// - return value max_value
     pub fn get_value(&self) -> u32 {
         self.counter
     }
 }
 
 /// MIRAI 静态分析演示
-///
-/// MIRAI 是一个用于 Rust 程序的静态分析工具，能够检测潜在的错误。
+/// MIRAI analyze demonstration
 pub struct MiraiStaticAnalysisDemo {
     pub data: Vec<String>,
     pub index: usize,
@@ -322,7 +364,6 @@ impl Default for MiraiStaticAnalysisDemo {
 }
 
 impl MiraiStaticAnalysisDemo {
-    /// 创建新的 MIRAI 静态分析演示
     pub fn new() -> Self {
         Self {
             data: Vec::new(),
@@ -336,10 +377,15 @@ impl MiraiStaticAnalysisDemo {
     }
 
     /// 获取当前数据
-    ///
+    /// when before
     /// # 静态分析属性
+    /// # analyze attribute
+    /// # 静态analysisattribute
     /// - 索引必须在有效范围内
+    /// - must in effective scope inside
+    /// - 索引mustineffectiverangeinside
     /// - 不能返回悬垂引用
+    /// - cannot reference
     pub fn get_current(&self) -> Option<&String> {
         if self.index < self.data.len() {
             Some(&self.data[self.index])
@@ -349,9 +395,12 @@ impl MiraiStaticAnalysisDemo {
     }
 
     /// 移动到下一个数据
-    ///
+    /// to under
     /// # 静态分析属性
+    /// # analyze attribute
+    /// # 静态analysisattribute
     /// - 索引不能超出范围
+    /// - cannot scope
     pub fn advance(&mut self) -> bool {
         if self.index + 1 < self.data.len() {
             self.index += 1;
@@ -362,9 +411,12 @@ impl MiraiStaticAnalysisDemo {
     }
 
     /// 移动到上一个数据
-    ///
+    /// to on
     /// # 静态分析属性
+    /// # analyze attribute
+    /// # 静态analysisattribute
     /// - 索引不能下溢
+    /// - cannot under
     pub fn previous(&mut self) -> bool {
         if self.index > 0 {
             self.index -= 1;
@@ -381,8 +433,9 @@ impl MiraiStaticAnalysisDemo {
 }
 
 /// 形式化验证综合演示
-///
+/// synthesize demonstration
 /// 展示多个形式化验证工具的综合应用。
+/// tool synthesize application 。
 pub async fn demonstrate_formal_verification_190() -> Result<(), String> {
     println!("🔍 演示 Rust 1.90 形式化验证工具链");
 

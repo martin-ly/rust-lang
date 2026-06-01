@@ -1,9 +1,12 @@
 //! # 算法理论知识模块
+//! # algorithm theory module
 //!
 //! 本模块提供算法的理论基础和数学原理。
+//! This module provides algorithm theory foundation and 。
 use serde::{Deserialize, Serialize};
 
 /// 理论知识
+/// theory
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TheoryKnowledge {
     pub mathematical_foundation: String,
@@ -14,10 +17,12 @@ pub struct TheoryKnowledge {
 }
 
 /// 理论分析器
+/// theory analyze
 pub struct TheoryAnalyzer;
 
 impl TheoryAnalyzer {
     /// 分析排序算法的理论基础
+    /// analyze sorting algorithm theory foundation
     pub fn analyze_sorting_theory(algorithm_name: &str) -> TheoryKnowledge {
         match algorithm_name {
             "QuickSort" => TheoryKnowledge {

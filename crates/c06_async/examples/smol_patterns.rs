@@ -4,6 +4,7 @@ use smol::io::{AsyncReadExt, AsyncWriteExt};
 use smol::net::TcpListener;
 
 /// 入口：Smol 轻量运行时，适合 CLI/嵌入式/库内嵌。
+/// ：Smol runtime ， CLI//library inside 。
 fn main() -> Result<()> {
     env_logger::init();
     smol::block_on(async move {
@@ -15,7 +16,6 @@ fn main() -> Result<()> {
     })
 }
 
-/// 并发集合：FuturesUnordered 适合大量动态并发任务。
 async fn basic_concurrency() -> Result<()> {
     async fn compute(i: usize) -> Result<usize> {
         Ok(i * 2)
@@ -33,6 +33,7 @@ async fn basic_concurrency() -> Result<()> {
 }
 
 /// 最小 echo 服务器：detach 后注意错误丢失问题。
+/// minimum echo ：detach after problem 。
 async fn tcp_echo(addr: &str) -> Result<()> {
     let listener = TcpListener::bind(addr).await?;
     let local = listener.local_addr()?;

@@ -1,10 +1,15 @@
 //! 机器学习算法模块
+//! machine learning algorithm module
 //!
 //! 本模块提供了常用的机器学习算法实现，包括：
+//! This module provides machine learning algorithm ，：
 //! - 聚类算法 (K-means, DBSCAN)
 //! - 分类算法 (决策树, SVM)
+//! - classification algorithm (tree, SVM)
 //! - 神经网络 (基础神经网络)
+//! - neural network (foundation neural network )
 //! - 回归算法 (线性回归, 逻辑回归)
+//! - algorithm (line, )
 pub mod clustering;
 pub mod decision_tree;
 pub mod kmeans;
@@ -17,17 +22,21 @@ use std::error::Error;
 use std::fmt;
 
 /// 机器学习算法错误类型
+/// machine learning algorithm error type
 #[derive(Debug, Clone)]
 pub enum MLError {
     /// 输入数据无效
+    /// ineffective
     InvalidInput(String),
     /// 模型未训练
     ModelNotTrained,
     /// 训练失败
     TrainingFailed(String),
     /// 预测失败
+    /// forecast
     PredictionFailed(String),
     /// 维度不匹配
+    /// dimension
     DimensionMismatch { expected: usize, actual: usize },
 }
 
@@ -48,29 +57,37 @@ impl fmt::Display for MLError {
 impl Error for MLError {}
 
 /// 机器学习算法结果类型
+/// machine learning algorithm result type
 pub type MLResult<T> = Result<T, MLError>;
 
 /// 数据点表示
+/// point represent
 pub type DataPoint = Vec<f64>;
 
 /// 数据集表示
+/// represent
 pub type Dataset = Vec<DataPoint>;
 
 /// 标签类型
+/// type
 pub type Label = i32;
 
 /// 标签集合
+/// set
 pub type Labels = Vec<Label>;
 
 /// 监督学习算法 Trait
+/// supervised learning algorithm Trait
 pub trait SupervisedLearning {
     /// 训练模型
     fn train(&mut self, data: &Dataset, labels: &Labels) -> MLResult<()>;
 
     /// 预测单个样本
+    /// forecast this
     fn predict(&self, sample: &DataPoint) -> MLResult<Label>;
 
     /// 批量预测
+    /// forecast
     fn predict_batch(&self, data: &Dataset) -> MLResult<Labels> {
         data.iter().map(|sample| self.predict(sample)).collect()
     }
@@ -88,28 +105,34 @@ pub trait SupervisedLearning {
 }
 
 /// 无监督学习算法 Trait
+/// unsupervised learning algorithm Trait
 pub trait UnsupervisedLearning {
     /// 训练模型
     fn fit(&mut self, data: &Dataset) -> MLResult<()>;
 
     /// 获取聚类结果
+    /// result
     fn predict(&self, data: &Dataset) -> MLResult<Labels>;
 
     /// 获取聚类中心（如适用）
+    /// center （）
     fn cluster_centers(&self) -> Option<Dataset> {
         None
     }
 }
 
 /// 回归算法 Trait
+/// algorithm Trait
 pub trait Regression {
     /// 训练模型
     fn train(&mut self, data: &Dataset, targets: &[f64]) -> MLResult<()>;
 
     /// 预测单个样本
+    /// forecast this
     fn predict(&self, sample: &DataPoint) -> MLResult<f64>;
 
     /// 批量预测
+    /// forecast
     fn predict_batch(&self, data: &Dataset) -> MLResult<Vec<f64>> {
         data.iter().map(|sample| self.predict(sample)).collect()
     }
@@ -127,6 +150,7 @@ pub trait Regression {
     }
 
     /// 计算R²分数
+    /// R²
     fn r2_score(&self, data: &Dataset, targets: &[f64]) -> MLResult<f64> {
         let predictions = self.predict_batch(data)?;
         let mean_target = targets.iter().sum::<f64>() / targets.len() as f64;
@@ -147,6 +171,7 @@ pub trait Regression {
 }
 
 /// 模型评估指标
+/// indicator
 pub struct Metrics {
     pub accuracy: f64,
     pub precision: f64,
@@ -156,6 +181,7 @@ pub struct Metrics {
 
 impl Metrics {
     /// 计算分类指标
+    /// classification indicator
     pub fn compute_classification_metrics(predictions: &Labels, actual: &Labels) -> MLResult<Self> {
         if predictions.len() != actual.len() {
             return Err(MLError::DimensionMismatch {
@@ -206,10 +232,12 @@ impl Metrics {
 }
 
 /// 数据预处理工具
+/// tool
 pub mod preprocessing {
     use super::*;
 
     /// 标准化数据
+    /// standard
     pub fn standardize(data: &mut Dataset) -> MLResult<(Vec<f64>, Vec<f64>)> {
         if data.is_empty() {
             return Err(MLError::InvalidInput("数据集为空".to_string()));
@@ -253,6 +281,7 @@ pub mod preprocessing {
     }
 
     /// 归一化到 [0, 1] 范围
+    /// to [0, 1] scope
     pub fn normalize(data: &mut Dataset) -> MLResult<(Vec<f64>, Vec<f64>)> {
         if data.is_empty() {
             return Err(MLError::InvalidInput("数据集为空".to_string()));

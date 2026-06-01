@@ -1,9 +1,10 @@
 //! 基础声明宏示例
+//! foundation example
 
 /// 简单的打印宏
-///
+/// simple
 /// # 示例
-///
+/// # example
 /// ```
 /// # use c11_macro_system::say_hello;
 /// say_hello!();
@@ -16,14 +17,13 @@ macro_rules! say_hello {
 }
 
 /// 创建函数的宏
-///
+/// function
 /// # 示例
-///
+/// # example
 /// ```
 /// # use c11_macro_system::create_function;
 /// create_function!(foo);
 /// foo(); // 输出: "function foo was called"
-/// ```
 #[macro_export]
 macro_rules! create_function {
     ($func_name:ident) => {
@@ -34,9 +34,9 @@ macro_rules! create_function {
 }
 
 /// 计算表达式并打印结果
-///
+/// express and result
 /// # 示例
-///
+/// # example
 /// ```
 /// # use c11_macro_system::calculate;
 /// calculate!(1 + 2);

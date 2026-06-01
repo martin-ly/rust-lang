@@ -1,13 +1,17 @@
 //! 搜索算法示例
-//!
+//! searching algorithm example
 //! 本示例展示C08算法模块的各种搜索算法：
+//! this example C08algorithm module searching algorithm ：
 //! - 二分搜索
+//! - binary search
 //! - 线性搜索
+//! - linear search
 //! - 插值搜索
+//! - interpolation search
 //! - 并行搜索
-//!
+//! - parallelism
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example searching_algorithms_demo
 //! ```
 use c08_algorithms::searching::{binary_search_sync, parallel_search};

@@ -1,12 +1,9 @@
 //! Rust 1.95.0 `cfg_select!` 宏专题示例
-//!
-//! `cfg_select!` 是 Rust 1.95.0 稳定化的编译期条件选择宏，
-//! 功能上替代了流行的 `cfg-if` crate，但语法更贴近 Rust 原生风格。
-//!
+//! Rust 1.95.0 `cfg_select!` 宏专题Example of
 //! 权威来源: https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/
-//!
+//! 权威source: https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example cfg_select_demo -p c03_control_fn
 //! ```
 
@@ -67,6 +64,7 @@ cfg_select! {
 // ==================== 示例 2: 表达式级条件编译 ====================
 
 /// 获取当前平台的最大文件描述符数量（示意值）
+/// when before platform maximum file descriptor quantity （indicate ）
 fn get_max_fds() -> u32 {
     cfg_select! {
         target_os = "windows" => 8192,
@@ -85,6 +83,8 @@ fn get_path_separator() -> char {
 }
 
 /// 获取行尾序列
+/// sequence
+/// Get行尾sequence
 fn get_line_ending() -> &'static str {
     cfg_select! {
         target_os = "windows" => "\r\n",
@@ -113,6 +113,8 @@ cfg_select! {
 // ==================== 示例 4: 调试/发布模式差异 ====================
 
 /// 获取日志级别
+/// level
+/// Get日志level
 fn get_log_level() -> &'static str {
     cfg_select! {
         debug_assertions => "DEBUG",
@@ -121,6 +123,8 @@ fn get_log_level() -> &'static str {
 }
 
 /// 获取超时配置（毫秒）
+/// （）
+/// Get超时Configure（毫秒）
 fn get_timeout_ms() -> u64 {
     cfg_select! {
         debug_assertions => 300_000, // 调试模式: 5 分钟
@@ -131,6 +135,7 @@ fn get_timeout_ms() -> u64 {
 // ==================== 示例 5: 与 cfg! 宏的对比 ====================
 
 /// 使用 `cfg!` 的运行时检查（编译期求值但生成所有分支代码）
+/// `cfg!` runtime （but all ）
 fn check_platform_with_cfg_macro() -> &'static str {
     if cfg!(target_os = "windows") {
         "Running on Windows (checked at compile-time, all branches exist in IR)"
@@ -141,7 +146,6 @@ fn check_platform_with_cfg_macro() -> &'static str {
     }
 }
 
-/// 使用 `cfg_select!` 的编译期选择（仅保留匹配分支）
 fn check_platform_with_cfg_select() -> &'static str {
     cfg_select! {
         target_os = "windows" => "Windows-only code compiled",
@@ -153,6 +157,7 @@ fn check_platform_with_cfg_select() -> &'static str {
 // ==================== 示例 6: 复杂条件组合 ====================
 
 /// 获取内存页大小（示意值）
+/// memory （indicate ）
 fn get_page_size() -> usize {
     cfg_select! {
         all(target_os = "windows", target_arch = "x86_64") => 4096,
@@ -164,6 +169,7 @@ fn get_page_size() -> usize {
 }
 
 /// 获取指针宽度描述
+/// pointer describe
 fn get_pointer_width_desc() -> &'static str {
     cfg_select! {
         target_pointer_width = "64" => "64-bit platform",

@@ -22,7 +22,7 @@
     - [模式 4: 超时控制](#模式-4-超时控制)
   - [🏗️ 运行时对比](#️-运行时对比)
     - [Tokio（推荐，功能最全）](#tokio推荐功能最全)
-    - [async-std（类似标准库 API）](#async-std类似标准库-api)
+    - [smol（轻量运行时）](#smol轻量运行时)
     - [smol（轻量级）](#smol轻量级)
   - [🔄 常见并发模式](#-常见并发模式)
     - [模式 1: Fan-out（任务分发）](#模式-1-fan-out任务分发)
@@ -326,13 +326,13 @@ async fn main() { }
 
 ---
 
-### async-std（类似标准库 API）
+### smol（轻量运行时）
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust,ignore
 [dependencies]
-async-std = { version = "1", features = ["attributes"] }
+smol = "2"
 
 #[async_std::main]
 async fn main() {
@@ -790,7 +790,7 @@ async fn good(mutex: Arc<Mutex<i32>>) {
 │  └─ 使用 Tokio（功能最全）
 │
 ├─ 简单任务？
-│  └─ 使用 async-std（API 简单）
+│  └─ 使用 smol（API 简单）
 │
 ├─ 嵌入式/轻量？
 │  └─ 使用 smol（依赖少）
@@ -1289,7 +1289,7 @@ pub fn get_async_config() -> Option<&'static AsyncConfig> {
 
 > **[来源: tokio.rs Documentation]**
 
-> **[来源: async-std.rs Documentation]**
+> **[来源: async-std [已归档].rs Documentation]**
 
 ---
 

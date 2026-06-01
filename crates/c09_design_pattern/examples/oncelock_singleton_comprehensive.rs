@@ -1,11 +1,13 @@
-//! Rust 1.90 OnceLock 单例模式综合示例
-//!
 //! 本示例展示：
+//! this example ：
 //! 1. 全局配置单例（线程安全）
+//! 1. global singleton （thread-safe ）
 //! 2. 全局日志器单例（内部可变性）
+//! 2. global singleton （inside ）
 //! 3. 全局缓存单例（性能优化）
+//! 3. global singleton （performance optimization ）
 //! 4. 全局连接池单例（资源管理）
-//! 5. 与 lazy_static 的性能对比
+//! 4. global singleton （）
 use std::collections::{HashMap, VecDeque};
 use std::sync::{Arc, Mutex, OnceLock};
 use std::thread;
@@ -26,10 +28,12 @@ pub struct AppConfig {
 }
 
 /// 全局配置单例
+/// global singleton
 static CONFIG: OnceLock<AppConfig> = OnceLock::new();
 
 impl AppConfig {
     /// 获取全局配置实例（惰性初始化）
+    /// global （）
     pub fn global() -> &'static AppConfig {
         CONFIG.get_or_init(|| {
             println!("🔧 初始化全局配置...");
@@ -46,6 +50,7 @@ impl AppConfig {
     }
 
     /// 测试环境专用初始化
+    /// environment
     #[cfg(test)]
     pub fn init_for_test(config: AppConfig) -> Result<(), AppConfig> {
         CONFIG.set(config)
@@ -88,6 +93,7 @@ impl std::fmt::Display for LogLevel {
 }
 
 /// 全局日志器（支持并发写入）
+/// global （concurrency ）
 pub struct GlobalLogger {
     entries: Mutex<VecDeque<LogEntry>>,
     max_entries: usize,
@@ -98,6 +104,7 @@ static LOGGER: OnceLock<GlobalLogger> = OnceLock::new();
 
 impl GlobalLogger {
     /// 获取全局日志器实例
+    /// global
     pub fn global() -> &'static GlobalLogger {
         LOGGER.get_or_init(|| {
             println!("📝 初始化全局日志器...");
@@ -132,12 +139,14 @@ impl GlobalLogger {
     }
 
     /// 获取指定级别的日志数量
+    /// level quantity
     pub fn count_by_level(&self, level: LogLevel) -> usize {
         let entries = self.entries.lock().unwrap();
         entries.iter().filter(|e| e.level == level).count()
     }
 
     /// 获取运行时间
+    /// runtime
     pub fn uptime(&self) -> Duration {
         self.start_time.elapsed()
     }
@@ -272,6 +281,7 @@ where
     }
 
     /// 获取缓存统计
+    /// Get cache stats
     pub fn stats(&self) -> CacheStats {
         let hits = *self.hit_count.lock().unwrap();
         let misses = *self.miss_count.lock().unwrap();
@@ -304,6 +314,7 @@ pub struct CacheStats {
 }
 
 /// 全局字符串缓存单例
+/// global singleton
 static STRING_CACHE: OnceLock<GlobalCache<String, String>> = OnceLock::new();
 
 pub fn string_cache() -> &'static GlobalCache<String, String> {
@@ -353,6 +364,7 @@ impl ConnectionPool {
     }
 
     /// 获取一个连接
+    /// Get一个Connect
     pub fn acquire(&self) -> Option<usize> {
         let mut connections = self.connections.lock().unwrap();
 

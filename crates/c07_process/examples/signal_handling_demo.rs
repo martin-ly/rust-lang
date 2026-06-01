@@ -1,14 +1,17 @@
 //! 信号处理示例
-//!
+//! example
 //! 本示例展示进程信号处理的概念和最佳实践：
+//! this example process concept and ：
 //! - 信号类型说明
+//! - type explain
+//! - 信号typeexplain
 //! - 信号处理策略
+//! - strategy
+//! - 信号Handlestrategy
 //! - 跨平台注意事项
-//!
-//! 注意：Windows不支持Unix信号，本示例主要展示概念
-//!
+//! - platform
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example signal_handling_demo
 //! ```
 use c07_process::prelude::*;

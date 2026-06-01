@@ -1,10 +1,9 @@
 //! # Rust 1.96.0 稳定特性演示模块
-//!
-//! 本模块展示 Rust 1.96.0 在线程并发编程中的关键新 API：
-//! - `core::range::Range` — 基于字段的构造、`Copy` 语义、可复用的范围值
+//! # Rust 1.96.0 feature demonstration module
+//! # Rust 1.96.0 稳定featuredemonstration module
 //! - `std::assert_matches!` — 模式匹配断言，用于线程 `Result` 测试
-//! - `LazyLock::from(value)` — 从已有值构造惰性锁（非 `const`，不能用于 `static`）
-//! - `From<T> for AssertUnwindSafe<T>` — 要求 `T: UnwindSafe`
+//! - `std::assert_matches!` — ，thread `Result`
+//! - `std::assert_matches!` — 模式匹配断言，Used forthread `Result` Test for
 
 use std::panic::{AssertUnwindSafe, catch_unwind};
 use std::sync::LazyLock;
@@ -14,20 +13,19 @@ use std::sync::LazyLock;
 // ============================================================================
 
 /// 线程池范围管理器（使用 Rust 1.96.0 `core::range::Range`）
-///
+/// thread pool scope （ Rust 1.96.0 `core::range::Range`）
 /// `core::range::Range` 实现 `Copy`，因此可以安全地在线程间复制范围值，
+/// `core::range::Range` `Copy`，therefore can in thread scope ，
 /// 而不需要引用或 `Arc`。
+/// while reference or `Arc`。
 pub struct ThreadPoolRangeManager {
-    /// 每个工作线程负责的任务范围（半开区间 `[start, end)`）
     worker_ranges: Vec<core::range::Range<usize>>,
     /// 当前活跃的工作线程索引范围
+    /// when before worker thread scope
     active_range: core::range::Range<usize>,
 }
 
 impl ThreadPoolRangeManager {
-    /// 为 `total_tasks` 个任务在 `worker_count` 个线程间分配范围。
-    ///
-    /// 利用 `core::range::Range { start, end }` 的公共字段构造范围。
     pub fn new(total_tasks: usize, worker_count: usize) -> Self {
         if worker_count == 0 || total_tasks == 0 {
             return Self {
@@ -57,23 +55,26 @@ impl ThreadPoolRangeManager {
         }
     }
 
-    /// 获取指定工作线程的任务范围（`Copy`，直接返回值）
+    /// Get指定worker threadtaskrange（`Copy`，直接return value）
     pub fn get_worker_range(&self, worker_id: usize) -> Option<core::range::Range<usize>> {
         self.worker_ranges.get(worker_id).copied()
     }
 
     /// 检查工作线程是否处于活跃范围
+    /// worker thread scope
     pub fn is_worker_active(&self, worker_id: usize) -> bool {
         // `core::range::Range` 目前没有 `contains`，需手动判断
         worker_id >= self.active_range.start && worker_id < self.active_range.end
     }
 
     /// 获取所有范围（`Copy` 语义保证可以安全复制）
+    /// all scope （`Copy` can ）
     pub fn all_ranges(&self) -> &[core::range::Range<usize>] {
         &self.worker_ranges
     }
 
     /// 计算所有范围覆盖的总任务数（验证无遗漏）
+    /// all scope task （）
     pub fn total_covered_tasks(&self) -> usize {
         self.worker_ranges.iter().map(|r| r.end - r.start).sum()
     }
@@ -83,19 +84,16 @@ impl ThreadPoolRangeManager {
 // 2. LazyLock::from(value) — 线程安全的单例/配置（非 const）
 // ============================================================================
 
-/// 使用 `LazyLock::from` 构造已初始化的线程安全配置容器。
-///
-/// ⚠️ `LazyLock::from(value)` **不是 `const`**，因此不能用于 `static`。
-/// 它适合在运行时将已知值包装为 `LazyLock`，以兼容需要 `LazyLock` 的 API。
 pub struct ThreadSafeConfig {
-    /// 线程池最大并发数（已初始化的 `LazyLock`）
     pub max_threads: LazyLock<usize, fn() -> usize>,
     /// 任务队列容量上限
+    /// task on
     pub queue_capacity: LazyLock<usize, fn() -> usize>,
 }
 
 impl ThreadSafeConfig {
     /// 从运行时确定的值创建配置。
+    /// from runtime 。
     pub fn from_values(max_threads: usize, queue_capacity: usize) -> Self {
         Self {
             max_threads: LazyLock::from(max_threads),
@@ -104,6 +102,7 @@ impl ThreadSafeConfig {
     }
 
     /// 获取当前配置摘要
+    /// when before summary
     pub fn summary(&self) -> String {
         format!(
             "max_threads={}, queue_capacity={}",
@@ -116,16 +115,11 @@ impl ThreadSafeConfig {
 // 3. From<T> for AssertUnwindSafe<T> — 线程 panic 捕获
 // ============================================================================
 
-/// 使用 `From<T> for AssertUnwindSafe<T>` 在线程中安全地捕获 panic。
-///
-/// 转换要求 `T: UnwindSafe`。对于非 `UnwindSafe` 类型（如 `&mut T`），
-/// 编译器会拒绝转换，防止将不安全的引用跨 panic 边界传递。
 pub struct ThreadPanicHandler;
 
 impl ThreadPanicHandler {
     /// 在线程中执行闭包，捕获 panic 并返回 `Result`。
-    ///
-    /// 闭包必须实现 `UnwindSafe`，否则 `AssertUnwindSafe::from(closure)` 编译失败。
+    /// in thread in ， panic and `Result`。
     pub fn run_capturing_panic<F, R>(f: F) -> Result<R, Box<dyn std::any::Any + Send>>
     where
         F: FnOnce() -> R + Send + 'static,
@@ -137,6 +131,8 @@ impl ThreadPanicHandler {
     }
 
     /// 验证：即使闭包 panic，也能被安全捕获。
+    /// ： panic，is 。
+    /// Verify：即使closure panic，也能is安全捕获。
     pub fn demo_panic_capture() -> &'static str {
         let result = Self::run_capturing_panic(|| {
             panic!("模拟线程异常");
@@ -153,6 +149,7 @@ impl ThreadPanicHandler {
 // ============================================================================
 
 /// 线程任务结果枚举
+/// thread task result enum
 #[derive(Debug, PartialEq)]
 pub enum ThreadTaskResult {
     Success {
@@ -170,8 +167,7 @@ pub enum ThreadTaskResult {
 }
 
 /// 使用 `assert_matches!` 验证线程结果模式。
-///
-/// 相比 `assert!(matches!(...))`，失败时会打印值的 `Debug` 表示，便于诊断。
+/// `assert_matches!` thread result 。
 pub fn verify_thread_results(results: Vec<ThreadTaskResult>) {
     use std::assert_matches;
 
@@ -190,6 +186,7 @@ pub fn verify_thread_results(results: Vec<ThreadTaskResult>) {
 // ============================================================================
 
 /// 运行 Rust 1.96 特性演示
+/// Run Rust 1.96 feature demonstration
 pub fn demonstrate_rust_196_features() {
     println!("\n========================================");
     println!("   Rust 1.96.0 线程特性演示");
@@ -214,6 +211,7 @@ pub fn demonstrate_rust_196_features() {
 }
 
 /// 获取特性信息
+/// feature
 pub fn get_rust_196_thread_info() -> String {
     "Rust 1.96.0 线程特性:\n- core::range::Range { start, end } — Copy 语义，可复用的线程池范围\n- \
      LazyLock::from(value) — 从值构造线程安全惰性容器（非 const）\n- From<T> for \

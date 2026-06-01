@@ -1,12 +1,7 @@
 //! Rust 1.93.0 宏系统相关 API 演示
-//!
-//! 本示例展示 Rust 1.93.0 在宏展开、类型检查等场景中的新 API：
-//! - slice::as_array - 宏生成的切片到数组转换
+//! Rust 1.93.0 system API demonstration
 //! - Duration::from_nanos_u128 - 宏展开计时
 //! - offset_of! 类型 well-formed 检查 (Rust 1.93)
-//!
-//! 注意: offset_of! 在 1.93 中加强了类型检查，详见 toolchain 兼容性文档
-//!
 //! 运行: cargo run -p c11_macro_system --example rust_193_features_demo
 use std::time::Duration;
 

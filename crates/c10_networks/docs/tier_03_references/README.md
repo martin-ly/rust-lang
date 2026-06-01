@@ -17,7 +17,7 @@
    - 协议选择决策树
 
 2. **[02\_网络库对比选择.md](./02_网络库对比选择.md)** (~950 行, 80+ 示例)
-   - 异步运行时对比 (Tokio vs async-std vs smol)
+   - 异步运行时对比 (Tokio vs smol)
    - HTTP库对比 (reqwest vs hyper vs surf)
    - 服务器框架对比 (axum vs actix-web vs warp vs rocket)
    - TLS库对比 (rustls vs native-tls vs openssl)

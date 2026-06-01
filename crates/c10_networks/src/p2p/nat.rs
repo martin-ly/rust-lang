@@ -1,4 +1,5 @@
 //! NAT 可达性与端口映射抽象（预留接口）
+//! NAT and （）
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum Reachability {
     Public,

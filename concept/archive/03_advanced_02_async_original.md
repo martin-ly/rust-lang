@@ -9,7 +9,8 @@
 > **定理链编号**: T-050 Pin 安全性 → T-051 轮询一致性 → T-052 async/await 转换正确性
 > **层级**: L3 高级概念
 > **层级一致性**: 本文件所有定理与定义均锚定于 L3 抽象层；涉及 L4 形式化公理处已显式标注。前置概念（L1-L2）为推理前提，后置概念（Pin/Streams）为自然延伸。
-> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Lifetimes](../01_foundation/03_lifetimes.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Error Handling](../02_intermediate/04_error_handling.md)
+> **前置概念**:
+> [Ownership](../01_foundation/01_ownership.md) · [Lifetimes](../01_foundation/03_lifetimes.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Error Handling](../02_intermediate/04_error_handling.md)
 > **后置概念**: [Pin/Unpin] · [Streams]
 > **主要来源**: [TRPL: Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/) · [RFC 2394] · [RFC 2349]
 
@@ -238,7 +239,7 @@ Poll 类型:
 | **维度** | **Async（异步）** | **Threading（线程）** | **Parallel（并行）** |
 |:---|:---|:---|:---|
 | **核心抽象** | Future / Task | OS Thread | Data / Task |
-| **调度者** | 运行时（Tokio/async-std） | OS 内核 | 运行时 / OS |
+| **调度者** | 运行时（Tokio/async-std [已归档]） | OS 内核 | 运行时 / OS |
 | **上下文切换** | 用户态（极轻量，~ns 级） | 内核态（较重，~μs 级） | 视实现 |
 | **内存占用** | 小（~几百字节栈） | 大（~MB 栈） | 视实现 |
 | **适用场景** | IO 密集型 | CPU 密集型 + 阻塞 | CPU 密集型 |
@@ -271,12 +272,12 @@ Poll 类型:
 | **运行时** | **调度策略** | **线程池** | **生态** | **适用场景** |
 |:---|:---|:---|:---|:---|
 | **Tokio** | 工作窃取 M:N | 多线程 | 最丰富（axum, tonic, hyper） | 生产级服务端 |
-| **async-std** | 工作窃取 M:N | 多线程 | 中等 | 通用异步 |
+| **async-std [已归档]** | 工作窃取 M:N | 多线程 | 中等 | 通用异步 |
 | **smol** | 简单高效 | 可配置 | 轻量 | 嵌入式/低资源 |
 | **embassy** | 协程/中断驱动 | 单线程 | 嵌入式 | IoT/嵌入式 |
 | **glommio** | 线程 per core | 1 线程/核心 | 专用 | 存储/IO 密集型 |
 
-> **来源**: [Tokio Documentation: Runtime internals] · [async-std docs] · [smol docs] · [embassy docs] · [glommio docs]
+> **来源**: [Tokio Documentation: Runtime internals] · [async-std [已归档] docs] · [smol docs] · [embassy docs] · [glommio docs]
 
 ---
 
@@ -681,7 +682,7 @@ graph LR
 | 维度 | Rust `async/await` | C++20 Coroutines | Haskell `async` / `IO` | Go Goroutine |
 |:---|:---|:---|:---|:---|
 | **核心抽象** | `Future` + `poll` 状态机 | `co_await` + promise/awaitable | `IO` monad / `async` 库 | `go` 关键字 + channel |
-| **调度方式** | 协作式（运行时库: tokio/async-std） | 协作式（可自定义 allocator） | 惰性求值 + GHC 运行时调度 | 抢占式 M:N 调度 |
+| **调度方式** | 协作式（运行时库: tokio/async-std [已归档]） | 协作式（可自定义 allocator） | 惰性求值 + GHC 运行时调度 | 抢占式 M:N 调度 |
 | **运行时开销** | 零（状态机无分配） | 零（编译器生成状态机） | 有（thunk 求值 + GC） | 有（调度器 + 栈管理） |
 | **自引用支持** | `Pin<T>` 强制位置不变性 | `coroutine_handle` + 自定义分配 | 无（惰性求值天然避免） | 无（值语义 + GC） |
 | **取消语义** | `Drop` 隐式取消（需设计） | 无内置（需手动实现） | `killThread` / 异常 | 无内置（需 channel 协调） |
@@ -722,7 +723,7 @@ graph TD
     D --> D3[自引用结构必需]
 
     E --> E1[Tokio: 生产级]
-    E --> E2[async-std]
+    E --> E2[async-std [已归档]]
     E --> E3[smol / embassy]
 
     F --> F1["join! 并发等待"]
@@ -2256,9 +2257,7 @@ mod tests {
 ```
 
 > **[来源: loom 官方示例; Rust Atomics and Locks by Mara Bos]** 自定义并发原语（自旋锁、无锁队列、RCU）是 loom 的核心应用场景。loom 会系统地探索 `compare_exchange_weak` 的失败路径、线程切换时机以及 Drop 的顺序，从而发现手工难以构造的边界情况。[来源: Tokio 内部 loom 测试套件]
-
 > **Bloom 层级**: 应用 —— 使用 loom 验证并发原语是生产级 Rust 并发编程的标准实践。
-
 > **交叉链接**: 内存序模型见 [../02_intermediate/01_traits.md](../02_intermediate/01_traits.md) §5.4（`Atomic*` 与内存序）；unsafe 边界见 [../03_advanced/03_unsafe.md](../03_advanced/03_unsafe.md) §2（`UnsafeCell` 与内部可变性）。
 
 ### 8.13 Miri 动态验证：async 状态机的内存安全检测
@@ -2303,7 +2302,6 @@ help: alloc232 was deallocated here:
 
 > **关键洞察**: Miri 不仅报告 UB，还精确追踪**分配点**和**释放点**，帮助开发者理解指针何时变为悬垂。这对于 async 状态机中的自引用结构尤为重要——状态机被 Pin 后若被 unsafe 代码移动，内部自引用指针会变为悬垂，Miri 能精确定位违规的 `move` 操作。
 [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
-
 > [来源: [RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html)]
 >
 #### 场景 2：无效值检测（非法 bool 构造）
@@ -2330,7 +2328,6 @@ error: Undefined Behavior: constructing invalid value of type bool:
 
 > **关键洞察**: Rust 编译器假设 `bool` 只能是 `0x00` 或 `0x01`，并基于此做分支优化（如将 `if b` 编译为跳转表）。无效 `bool` 值会导致控制流跳转到任意位置。async 状态机的 discriminant（状态标签）同理——若通过 unsafe 构造无效状态标签，恢复执行时会进入不存在的状态分支。
 [来源: [Tokio Docs](https://tokio.rs/)]
-
 > [来源: [Rust Async Book: Cancellation](https://rust-lang.github.io/async-book/09_workarounds/03_cancel_safe.html)]
 >
 #### 场景 3：async 状态机中的未初始化内存
@@ -2364,7 +2361,6 @@ warning: the type `bool` does not permit being left uninitialized
 
 > **关键洞察**: async 状态机的局部变量在挂起时被存入状态机结构体。若局部变量未初始化（通过 `MaybeUninit::uninit().assume_init()`），恢复执行后读取该变量即触发 UB。Miri 的 `invalid_value` lint 在解释执行时检测此类问题，而编译器仅发出 warning（无法静态确定 `assume_init` 是否安全）。
 [来源: [TRPL](https://doc.rust-lang.org/book/ch17-00-async-await.html)]
-
 > [来源: [Tokio Docs: Cancellation](https://tokio.rs/tokio/topics/cancellation)]
 >
 #### Miri 与 async 状态机的特殊关联
@@ -2390,9 +2386,8 @@ Miri 的局限（与 loom 互补）:
 ---
 
 ## 九、知识来源关系（Provenance）
->
-> [来源: [Rust Async Book]]
 
+> [来源: [Rust Async Book]]
 > **章节过渡**：所有论断均有出处。以下表格明确每条核心论断的来源与可信度等级，便于读者追溯与验证。
 
 | **论断** | **来源** | **可信度** |
@@ -2431,9 +2426,8 @@ Miri 的局限（与 loom 互补）:
 - [x] **TODO**: 补充 `loom` 并发模型检测工具 —— 已完成: 2026-05-14
 
 ### 补充章节：AFIT（Async Fn In Traits）与 RPITIT
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 > **层次一致性标注**：本节内容属于 L3 向 L4 过渡地带，涉及 trait 系统与存在类型的交互，需在理解 §3.1 状态机变换与 §5.1 定理 A1 后阅读。
 
 #### 问题与解决方案演进
@@ -2555,9 +2549,8 @@ trait DataProvider<'a> {
 ---
 
 ## 十二、`AsyncFn` Trait 家族：异步闭包的类型化（1.85 stable，RFC 3668）
->
-> [来源: [Rust Async Book]]
 
+> [来源: [Rust Async Book]]
 > **稳定版本**: Rust 1.85 (stable) · **适用 Edition**: 所有 Edition（非 Edition-gated）
 > **形式化意义**: 高阶函数的异步扩展——效果系统（Effect System）的原型
 
@@ -2649,9 +2642,8 @@ async fn async_fn(f: impl AsyncFn(i32) -> i32) -> i32 { f(42).await }
 ---
 
 ## 十三、`gen` blocks：同步协程的语义定位
->
-> [来源: [Rust Async Book]]
 
+> [来源: [Rust Async Book]]
 > **稳定版本**: Rust 1.95 (stable，需 nightly feature gate) · **预计全面稳定**: 1.98+
 > **形式化意义**: 同步协程（Coroutine）的语法糖——`Iterator` 状态机的自动化生成
 
@@ -2714,7 +2706,6 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 **关键限制**: `gen` block 是**同步的**。异步生成器（`Stream`，支持 `.await` + `yield`）仍在 RFC 讨论中。
 
 > **来源**: [RFC 2394 §3: Generator transform] · [rust-lang/rust #117078] · [Rust 1.95 Release Notes]
-
 > **[来源: rust-lang/rust #117078]** Gen blocks tracking issue.
 > **[来源: Rust 1.95 Release Notes]** `gen` blocks stabilized with feature gate.
 
@@ -2741,7 +2732,6 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 > `async fn` 的本质是状态机——编译器将 `await` 点转换为 enum 变体。这种转换依赖于泛型（`impl Future<Output = T>`）和 Trait（`Future::poll`）的协同。理解 async 的底层实现，需要回到泛型和 Trait 的基础。
 >
 > 底层机制见 [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md)（Trait 定义）与 [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md)（泛型单态化）。
-
 > **过渡: L3 → L5**
 >
 > 异步编程不是 Rust 的发明——JavaScript 的 Promise、C# 的 async/await、Go 的 goroutine 都解决了类似问题。但 Rust 的 `Future` 是零成本的：编译后的状态机没有运行时调度器开销，这与 Go 的 goroutine（M:N 调度）形成鲜明对比。
@@ -2752,9 +2742,8 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 ---
 
 ## Wikipedia 概念对齐
->
-> [来源: [Rust Async Book]]
 
+> [来源: [Rust Async Book]]
 > **[来源: Wikipedia]** 核心概念与国际知识库映射。
 
 | 概念 | Wikipedia 词条 | 说明 |

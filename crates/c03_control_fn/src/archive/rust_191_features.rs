@@ -1,30 +1,28 @@
-//! Rust 1.91 控制流与函数特性实现模块（历史版本）
-//!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//!
+//! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
-//!
-//! 本模块实现了 Rust 1.91 在控制流和函数系统方面的改进，包括：
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! - const 上下文增强（在控制流中使用）
-//! - 改进的错误处理和 ControlFlow
+//! - const on under （in stream in ）
 //! - 优化的函数调用和性能改进
+//! - optimization function and performance
 //! - JIT 编译器优化对控制流的影响
-//!
+//! - JIT optimization to stream impact
 //! # 文件信息
+//! #
 //! - 文件: rust_191_features.rs
 //! - 创建日期: 2025-01-27
+//! - date : 2025-01-27
 //! - 版本: 1.0
-//! - Rust版本: 1.91.0
-//! - Edition: 2024
+//! - this : 1.0
+//! - 版this: 1.0
 use std::ops::ControlFlow;
 
 // ==================== 1. const 上下文增强在控制流中的应用 ====================
 
-/// Rust 1.91 const 上下文增强在控制流中的应用
 pub mod const_control_flow {
     /// 编译时控制流计算
-    ///
-    /// Rust 1.91 允许在 const 上下文中进行更复杂的控制流操作
+    /// compile-time stream
     pub const fn const_factorial(n: u32) -> u32 {
         match n {
             0 | 1 => 1,
@@ -33,13 +31,15 @@ pub mod const_control_flow {
     }
 
     /// 使用 const 引用进行计算
-    ///
+    /// const reference
     /// Rust 1.91: 可以在 const 上下文中使用引用
+    /// Rust 1.91: can in const on under in reference
     pub const CONST_VALUE: u32 = 10;
     pub const CONST_REF: &u32 = &CONST_VALUE; // ✅ Rust 1.91 新特性
     pub const FACTORIAL_10: u32 = const_factorial(*CONST_REF);
 
     /// 编译时配置系统
+    /// compile-time system
     pub struct Config {
         pub max_retries: u32,
         pub timeout_ms: u64,
@@ -65,13 +65,9 @@ pub mod const_control_flow {
 
 // ==================== 2. 改进的 ControlFlow ====================
 
-/// Rust 1.91 改进的 ControlFlow 示例
 pub mod improved_control_flow {
     use super::*;
 
-    /// 使用改进的 ControlFlow 进行数据处理
-    ///
-    /// Rust 1.91 改进了 ControlFlow，提供更好的错误信息
     pub fn process_with_control_flow<T>(
         items: &[T],
         validator: impl Fn(&T) -> bool,
@@ -94,6 +90,7 @@ pub mod improved_control_flow {
     }
 
     /// 复杂验证流程示例
+    /// complex process example
     pub fn validate_pipeline(data: &[i32]) -> ControlFlow<String, i32> {
         // 第一步：检查是否为空
         if data.is_empty() {
@@ -141,12 +138,12 @@ pub mod improved_control_flow {
 // ==================== 3. 函数性能优化 ====================
 
 /// Rust 1.91 函数性能优化示例
-///
-/// Rust 1.91 的 JIT 编译器优化对函数调用和迭代器的性能提升
+/// Rust 1.91 function performance optimization example
 pub mod function_performance {
     /// 优化的迭代器链式调用
-    ///
+    /// optimization
     /// Rust 1.91 JIT 优化：迭代器链式操作性能提升 10-25%
+    /// Rust 1.91 JIT optimization ：performance 10-25%
     pub fn optimized_iterator_chain(data: &[i32]) -> Vec<i32> {
         data.iter()
             .filter(|&&x| x > 0)
@@ -157,8 +154,9 @@ pub mod function_performance {
     }
 
     /// 递归函数优化
-    ///
+    /// function optimization
     /// Rust 1.91 优化：递归函数调用性能提升
+    /// Rust 1.91 optimization ：function performance
     pub fn optimized_recursive_fibonacci(n: u32) -> u32 {
         match n {
             0 => 0,
@@ -168,6 +166,7 @@ pub mod function_performance {
     }
 
     /// 尾递归优化示例（使用辅助函数）
+    /// optimization example （function ）
     pub fn tail_recursive_factorial(n: u32, acc: u32) -> u32 {
         match n {
             0 | 1 => acc,
@@ -197,12 +196,10 @@ pub mod function_performance {
 // ==================== 4. 错误处理改进 ====================
 
 /// Rust 1.91 错误处理改进示例
+/// Rust 1.91 error handling example
 pub mod error_handling {
     use super::*;
 
-    /// 使用 ControlFlow 进行错误处理
-    ///
-    /// Rust 1.91 改进了 ControlFlow，提供更好的错误信息传递
     pub fn parse_numbers(input: &str) -> ControlFlow<String, Vec<i32>> {
         let mut numbers = Vec::new();
 
@@ -223,6 +220,7 @@ pub mod error_handling {
     }
 
     /// 多级验证示例
+    /// example
     pub fn multi_level_validation(data: &[i32]) -> ControlFlow<String, i32> {
         // 第一级：检查长度
         if data.is_empty() {
@@ -286,12 +284,14 @@ pub mod error_handling {
 // ==================== 5. 综合应用示例 ====================
 
 /// Rust 1.91 控制流综合应用示例
+/// Rust 1.91 stream synthesize application example
 pub mod comprehensive_examples {
     use std::collections::HashMap;
     use std::io::{BufRead, BufReader, Cursor};
     use std::ops::ControlFlow;
 
     /// 配置系统：结合 const 上下文和控制流
+    /// system ： const on under and stream
     pub struct ControlFlowConfig {
         pub max_iterations: usize,
         pub timeout_ms: u64,
@@ -306,6 +306,7 @@ pub mod comprehensive_examples {
     }
 
     /// 处理控制流管道
+    /// stream pipe
     pub fn process_pipeline(data: &[i32]) -> ControlFlow<String, HashMap<String, i32>> {
         let mut stats = HashMap::new();
 
@@ -329,6 +330,7 @@ pub mod comprehensive_examples {
     }
 
     /// 使用 Rust 1.91 新 API 解析配置
+    /// Rust 1.91 API
     pub fn parse_config_with_new_apis(config_text: &str) -> Vec<String> {
         let mut cursor = Cursor::new(config_text.as_bytes());
         let mut reader = BufReader::new(&mut cursor);
@@ -386,11 +388,9 @@ pub mod comprehensive_examples {
 
 // ==================== 6. 优化的条件语句和模式匹配 ====================
 
-/// Rust 1.91 优化的条件语句和模式匹配
 pub mod optimized_conditionals {
     /// 编译时条件计算
-    ///
-    /// Rust 1.91: 可以在 const 上下文中进行更复杂的条件计算
+    /// compile-time condition
     pub const fn const_max(a: u32, b: u32) -> u32 {
         if a > b {
             a
@@ -400,8 +400,9 @@ pub mod optimized_conditionals {
     }
 
     /// 优化的模式匹配
-    ///
+    /// optimization
     /// Rust 1.91: 模式匹配性能优化，编译时间减少
+    /// Rust 1.91: performance optimization ，compile-time
     pub fn optimized_pattern_matching(value: Option<i32>) -> String {
         match value {
             Some(n) => {
@@ -417,7 +418,6 @@ pub mod optimized_conditionals {
         }
     }
 
-    /// const 上下文中的模式匹配
     pub const fn const_match(value: u32) -> u32 {
         match value {
             0 | 1 => 1,
@@ -446,13 +446,13 @@ pub mod optimized_conditionals {
 
 // ==================== 7. 优化的循环结构 ====================
 
-/// Rust 1.91 优化的循环结构
 pub mod optimized_loops {
     use std::ops::ControlFlow;
 
     /// 优化的迭代器循环
-    ///
+    /// optimization circulation
     /// Rust 1.91 JIT 优化：迭代器循环性能提升 10-25%
+    /// Rust 1.91 JIT optimization ：circulation performance 10-25%
     pub fn optimized_for_loop(data: &[i32]) -> Vec<i32> {
         let mut result = Vec::new();
         // Rust 1.91: 迭代器循环自动优化
@@ -462,9 +462,6 @@ pub mod optimized_loops {
         result
     }
 
-    /// 使用 ControlFlow 的早期退出循环
-    ///
-    /// Rust 1.91: 改进的 ControlFlow 使循环早期退出更清晰
     pub fn early_exit_loop(data: &[i32], max: i32) -> ControlFlow<String, Vec<i32>> {
         let mut result = Vec::new();
 
@@ -481,9 +478,8 @@ pub mod optimized_loops {
         ControlFlow::Continue(result)
     }
 
-    /// const 上下文中的循环
-    ///
     /// Rust 1.91: const 函数中可以使用循环
+    /// Rust 1.91: const function in can circulation
     pub const fn const_loop_sum(n: u32) -> u32 {
         let mut sum = 0;
         let mut i = 0;
@@ -522,13 +518,15 @@ pub mod optimized_loops {
 // ==================== 8. 函数调用优化 ====================
 
 /// Rust 1.91 函数调用优化
+/// Rust 1.91 function optimization
 pub mod function_call_optimization {
     use std::collections::HashMap;
     use std::time::Instant;
 
     /// 函数调用缓存机制
-    ///
+    /// function mechanism
     /// Rust 1.91: 函数调用可以通过编译器优化进行缓存
+    /// Rust 1.91: function can optimization
     pub struct FunctionCache<K, V> {
         cache: HashMap<K, V>,
     }
@@ -555,6 +553,7 @@ pub mod function_call_optimization {
         }
 
         /// 缓存函数调用结果
+        /// function result
         pub fn call_or_cache<F>(&mut self, key: K, f: F) -> V
         where
             F: FnOnce() -> V,
@@ -570,8 +569,9 @@ pub mod function_call_optimization {
     }
 
     /// 优化的递归函数
-    ///
+    /// optimization function
     /// Rust 1.91: 递归函数调用性能优化
+    /// Rust 1.91: function performance optimization
     pub fn optimized_power(base: i32, exp: u32) -> i32 {
         match exp {
             0 => 1,
@@ -585,8 +585,7 @@ pub mod function_call_optimization {
     }
 
     /// 内联函数优化提示
-    ///
-    /// Rust 1.91: 编译器更智能的内联决策
+    /// inside function optimization hint
     #[inline(always)]
     pub fn small_helper(x: i32) -> i32 {
         x * 2 + 1
@@ -624,10 +623,12 @@ pub mod function_call_optimization {
 // ==================== 9. 闭包优化 ====================
 
 /// Rust 1.91 闭包优化
+/// Rust 1.91 optimization
 pub mod closure_optimization {
     /// 优化的闭包捕获
-    ///
+    /// optimization closure capture
     /// Rust 1.91: 闭包捕获优化，减少内存使用
+    /// Rust 1.91: closure capture optimization ，memory
     pub fn optimized_closure_capture() -> Vec<i32> {
         let multiplier = 2;
         let numbers = vec![1, 2, 3, 4, 5];
@@ -636,9 +637,8 @@ pub mod closure_optimization {
         numbers.into_iter().map(|x| x * multiplier).collect()
     }
 
-    /// const 上下文中的闭包
-    ///
     /// Rust 1.91: const 函数中可以更灵活地使用闭包概念
+    /// Rust 1.91: const function in can concept
     pub const fn const_closure_equivalent() -> i32 {
         // const 上下文中不能直接使用闭包，但可以模拟
         let mut result = 0;
@@ -651,8 +651,10 @@ pub mod closure_optimization {
     }
 
     /// 高阶函数优化
-    ///
+    /// function optimization
+    /// 高阶functionoptimization
     /// Rust 1.91: 高阶函数调用性能优化
+    /// Rust 1.91: function performance optimization
     pub fn optimized_higher_order_function<T, F>(data: &[T], f: F) -> Vec<T>
     where
         T: Clone,
@@ -682,6 +684,7 @@ pub mod closure_optimization {
 // ==================== 公开 API ====================
 
 /// Rust 1.91 控制流特性演示入口
+/// Rust 1.91 stream feature demonstration
 pub fn demonstrate_rust_191_control_flow() {
     println!("========================================");
     println!("Rust 1.91 控制流与函数特性演示");
@@ -699,6 +702,7 @@ pub fn demonstrate_rust_191_control_flow() {
 }
 
 /// 获取 Rust 1.91 控制流特性信息
+/// Rust 1.91 stream feature
 pub fn get_rust_191_control_flow_info() -> &'static str {
     "Rust 1.91 控制流与函数特性模块 - 包含 const 上下文增强、ControlFlow 改进、函数性能优化等"
 }

@@ -1,55 +1,50 @@
 //! Rust 1.98 Nightly 前瞻 —— 嵌入式/系统编程实验特性
+//! Rust 1.98 Nightly before —— /system feature
 #![allow(clippy::incompatible_msrv)]
 
 /// # Rust 1.98 Nightly 嵌入式前瞻
-///
-/// 本模块展示 nightly 1.98 中可用的系统级实验特性：
 /// - `core::intrinsics::breakpoint` — 软件断点（调试器 hook）
 /// - `#[rustc_align(N)]` — 函数级别对齐控制
-///
+/// - `#[rustc_align(N)]` — function level to
 /// **⚠️ 需要 nightly Rust + `#![feature(core_intrinsics, fn_align)]`**
 pub struct Rust198EmbeddedFeatures;
 
 impl Rust198EmbeddedFeatures {
     /// 触发调试断点
-    ///
-    /// `breakpoint()` 会生成架构相关的断点指令（如 x86 的 `int3`、ARM 的 `bkpt`）。
+    /// point
     /// 当程序在调试器下运行时，这会暂停执行并允许检查状态。
-    ///
-    /// # Safety
+    /// when program in under runtime ，and state 。
     /// 在没有调试器的环境中，断点指令可能导致信号/异常。
+    /// in environment in ，point may /。
     /// 仅应在调试场景或已配置异常处理器的嵌入式系统中使用。
+    /// in scenario or system in 。
     #[inline(never)]
     pub unsafe fn trigger_debug_breakpoint() {
         core::intrinsics::breakpoint();
     }
 
     /// 返回一个具有指定函数对齐的函数指针
-    ///
-    /// `#[rustc_align(N)]` 控制函数在内存中的起始地址对齐。
-    /// 对缓存行对齐（64 bytes）的代码路径可提升 I-cache 效率。
-    ///
-    /// # Note
+    /// has function to function pointer
     /// 当前 nightly 使用 `#[rustc_align(...)]`（非 `#[repr(align(...))]`）。
+    /// whenbefore nightly Use `#[rustc_align(...)]`（非 `#[repr(align(...))]`）。
     #[rustc_align(64)]
     pub fn cache_line_aligned_function() -> i32 {
         42
     }
 
-    /// 返回一个具有 16 字节对齐的函数指针（SIMD 友好）
     #[rustc_align(16)]
     pub fn simd_aligned_entry() -> i32 {
         -559038737i32 // 0xDEAD_BEEF as i32
     }
 
     /// 检查当前平台是否为调试构建
+    /// when before platform as
     pub fn is_debug_build() -> bool {
         cfg!(debug_assertions)
     }
 
     /// 在调试构建中触发断点，release 构建中跳过
-    ///
-    /// 安全的包装器，仅在 debug 模式下调用 `breakpoint()`。
+    /// in in point ，release in
     pub fn debug_break_if_debug() {
         if cfg!(debug_assertions) {
             // SAFETY: 仅在 debug 构建中执行，通常有调试器 attached 或可被忽略

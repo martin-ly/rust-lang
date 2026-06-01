@@ -246,7 +246,6 @@ async fn with_auth(
 #[derive(Debug)]
 struct ApiKey(String);
 
-#[async_trait]
 impl<S> FromRequestParts<S> for ApiKey
 where
     S: Send + Sync,

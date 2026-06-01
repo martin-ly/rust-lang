@@ -1,10 +1,8 @@
 //! Rust 1.93.0 网络编程相关 API 演示
-//!
-//! 本示例展示 Rust 1.93.0 在网络、缓冲、超时等场景中的新 API：
+//! Rust 1.93.0 network programming API demonstration
 //! - Duration::from_nanos_u128 - 高精度网络超时
 //! - slice::as_array - 固定大小网络包解析
-//! - VecDeque::pop_front_if - 接收缓冲过滤
-//!
+//! - slice::as_array - network
 //! 运行: cargo run -p c10_networks --example rust_193_features_demo
 use std::collections::VecDeque;
 use std::time::Duration;

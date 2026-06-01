@@ -1,3 +1,5 @@
+> **内容分级**: [专家级]
+
 # Macros（宏系统）
 
 > **受众**: [专家]
@@ -2212,3 +2214,16 @@ macro_rules! conditional_feature {
 ```
 
 > **语义**: 此前 `cfg` 属性中的元变量仅限 `literal` 和 `path` 片段类型。1.96 扩展了 `expr` 的支持范围，使宏生成条件编译代码时更灵活，减少字符串拼接的 unsafe 模式。这是宏系统向更完整表达式支持演进的一步。[来源: [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/)] · [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)]
+
+---
+
+## 导航：下一步去哪？
+
+> **自检**：你当前掌握的核心概念是否已能独立应用？
+
+| 选择 | 条件 | 目标 |
+|:---|:---|:---|
+| 🔙 巩固基础 | 仍有模糊概念 | 回到 [L2 对应主题](../02_intermediate/) 或 [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) |
+| 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](./README.md) 选择其他主题 |
+| 🎓 进入 L4 形式化 | 想理解"为什么"的数学证明 | [L4 形式化](../04_formal/README.md) |
+| 🏗️ 进入 L6 生态 | 想掌握生产工具链 | [L6 生态](../06_ecosystem/README.md) |

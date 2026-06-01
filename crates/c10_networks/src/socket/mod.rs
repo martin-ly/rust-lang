@@ -1,7 +1,8 @@
 //! 套接字模块
-//!
-//! 本模块提供了基于 Rust 1.92.0 的现代套接字封装，
+//! socket module
 //! 支持 TCP 和 UDP 协议，以及异步网络编程。
+//! TCP and UDP ，and async network programming 。
+//! Supports TCP and UDP 协议，andasyncnetwork programming。
 pub mod tcp;
 pub mod udp;
 
@@ -12,6 +13,7 @@ use crate::error::{NetworkError, NetworkResult};
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
 
 /// 套接字类型枚举
+/// socket type enum
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum SocketType {
     Tcp,
@@ -19,6 +21,7 @@ pub enum SocketType {
 }
 
 /// 套接字工具函数
+/// socket tool function
 pub mod utils {
     use super::*;
     use std::net::ToSocketAddrs;
@@ -31,6 +34,7 @@ pub mod utils {
     }
 
     /// 创建本地回环地址
+    /// this loopback address
     pub fn localhost(port: u16) -> SocketAddr {
         SocketAddr::new(IpAddr::V4(Ipv4Addr::LOCALHOST), port)
     }
@@ -54,25 +58,31 @@ pub mod utils {
 }
 
 /// 套接字工厂
+/// socket factory
 pub struct SocketFactory;
 
 impl SocketFactory {
     /// 创建 TCP 套接字
+    /// TCP socket
     pub fn create_tcp_socket(config: TcpConfig) -> TcpSocket {
         TcpSocket::new(config)
     }
 
     /// 创建 UDP 套接字
+    /// UDP socket
     pub async fn create_udp_socket(config: UdpConfig) -> NetworkResult<UdpSocketWrapper> {
         UdpSocketWrapper::new(config).await
     }
 
     /// 创建 TCP 监听器
+    /// TCP
+    /// Create TCP 监听器
     pub async fn create_tcp_listener(config: TcpConfig) -> NetworkResult<TcpListenerWrapper> {
         TcpListenerWrapper::new(config).await
     }
 
     /// 创建 UDP 套接字并绑定
+    /// UDP socket and
     pub async fn create_udp_socket_bind(addr: SocketAddr) -> NetworkResult<UdpSocketWrapper> {
         UdpSocketWrapper::bind(addr).await
     }

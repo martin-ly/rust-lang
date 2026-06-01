@@ -1,7 +1,10 @@
 //! 增强的错误处理演示程序
+//! Error handling demonstration program
 //!
 //! 这个程序展示了增强的错误处理功能，包括错误恢复、
+//! program error handling functionality ，error recovery 、
 //! 错误链追踪、错误分类等 Rust 1.90 新特性
+//! 、classification etc. Rust 1.90 feature
 #[cfg(feature = "async")]
 use c07_process::error::{
     ConfigError, IpcError, PlatformError, ProcessError, ResourceError, SyncError,

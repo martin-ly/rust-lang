@@ -1,3 +1,5 @@
+> **内容分级**: [综述级]
+
 # C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态）
 >
 > **受众**: [进阶]

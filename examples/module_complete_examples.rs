@@ -1,11 +1,13 @@
 //! 各模块完整示例集合
-//!
+//! module complete example set
 //! 本文件包含所有12个核心模块的完整示例，展示每个模块的核心功能
+//! this all 12core module complete example ，module core functionality
 use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::Duration;
 
 /// C01 - 所有权与借用完整示例
+/// C01 - ownership and borrowing complete example
 pub fn ownership_borrow_complete_example() {
     println!("📦 C01 - 所有权与借用完整示例");
 
@@ -35,6 +37,7 @@ fn change_string(s: &mut String) {
 }
 
 /// C02 - 类型系统完整示例
+/// C02 - type system complete example
 pub fn type_system_complete_example() {
     println!("\n🔷 C02 - 类型系统完整示例");
 
@@ -65,6 +68,7 @@ pub fn type_system_complete_example() {
 }
 
 /// C03 - 控制流与函数完整示例
+/// C03 - stream and function complete example
 pub fn control_flow_complete_example() {
     println!("\n🔄 C03 - 控制流与函数完整示例");
 
@@ -108,6 +112,7 @@ fn add_numbers(a: i32, b: i32) -> i32 {
 }
 
 /// C04 - 泛型编程完整示例
+/// C04 - generic complete example
 pub fn generic_programming_complete_example() {
     println!("\n🔀 C04 - 泛型编程完整示例");
 
@@ -141,6 +146,7 @@ pub fn generic_programming_complete_example() {
 }
 
 /// C05 - 线程与并发完整示例
+/// C05 - thread and concurrency complete example
 pub fn threads_concurrency_complete_example() {
     println!("\n🧵 C05 - 线程与并发完整示例");
 
@@ -175,16 +181,18 @@ pub fn threads_concurrency_complete_example() {
 }
 
 /// C06 - 异步编程完整示例
+/// C06 - async complete example
 pub fn async_programming_complete_example() {
     println!("\n⚡ C06 - 异步编程完整示例");
 
-    // 注意：实际异步代码需要tokio或async-std运行时
+    // 注意：实际异步代码需要tokio或smol运行时
     println!("  - 异步编程需要运行时支持（如tokio）");
     println!("  - 示例：async fn fetch_data() -> Result<String, Error>");
     println!("  - 示例：使用.await等待异步操作完成");
 }
 
 /// C07 - 进程管理完整示例
+/// C07 - process complete example
 pub fn process_management_complete_example() {
     println!("\n🔧 C07 - 进程管理完整示例");
 
@@ -194,6 +202,7 @@ pub fn process_management_complete_example() {
 }
 
 /// C08 - 算法与数据结构完整示例
+/// C08 - algorithm and data structure complete example
 pub fn algorithms_data_structures_complete_example() {
     println!("\n📊 C08 - 算法与数据结构完整示例");
 
@@ -217,6 +226,7 @@ pub fn algorithms_data_structures_complete_example() {
 }
 
 /// C09 - 设计模式完整示例
+/// C09 - design complete example
 pub fn design_patterns_complete_example() {
     println!("\n🎨 C09 - 设计模式完整示例");
 
@@ -255,16 +265,18 @@ pub fn design_patterns_complete_example() {
 }
 
 /// C10 - 网络编程完整示例
+/// C10 - network programming complete example
 pub fn network_programming_complete_example() {
     println!("\n🌐 C10 - 网络编程完整示例");
 
-    // 注意：实际网络编程需要tokio或async-std
+    // 注意：实际网络编程需要tokio或smol
     println!("  - 网络编程需要异步运行时支持");
     println!("  - 示例：TcpListener::bind(\"127.0.0.1:8080\")");
     println!("  - 示例：TcpStream::connect(\"127.0.0.1:8080\")");
 }
 
 /// C11 - 宏系统完整示例
+/// C11 - system complete example
 pub fn macro_system_complete_example() {
     println!("\n🔧 C11 - 宏系统完整示例");
 
@@ -291,6 +303,7 @@ pub fn macro_system_complete_example() {
 }
 
 /// C12 - WASM完整示例
+/// C12 - WASM complete example
 pub fn wasm_complete_example() {
     println!("\n🌍 C12 - WASM完整示例");
 
@@ -301,6 +314,7 @@ pub fn wasm_complete_example() {
 }
 
 /// 主函数
+/// Main function
 fn main() {
     println!("🚀 Rust 各模块完整示例集合");
     println!("==========================\n");

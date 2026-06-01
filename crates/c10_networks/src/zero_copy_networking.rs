@@ -1,9 +1,7 @@
 #![forbid(unsafe_code)]
 
 //! 零拷贝网络编程概念解析
-//!
-//! 本模块讲解 Linux 零拷贝技术（sendfile、mmap、io_uring）的概念，
-//! 以及 Rust 中相关 API 的对比与使用场景。
+//! network programming concept
 
 use std::io;
 
@@ -12,6 +10,8 @@ use std::io;
 // ============================================================================
 
 /// `sendfile` 零拷贝文件传输概念
+/// `sendfile` transmission concept
+/// `sendfile` 零拷贝文件transmissionconcept
 pub struct SendfileConcept;
 
 impl SendfileConcept {
@@ -45,7 +45,6 @@ sendfile 流程（2 次拷贝，2 次上下文切换）：
 "#
     }
 
-    /// sendfile 在 Rust 中的使用方式
     pub fn rust_usage() -> &'static str {
         r#"=== Rust 中的 sendfile 概念 ===
 
@@ -66,11 +65,11 @@ Rust 标准库不直接暴露 sendfile 系统调用，
 // 2. mmap + 网络概念
 // ============================================================================
 
-/// `mmap` 与网络结合的概念
 pub struct MmapNetworkConcept;
 
 impl MmapNetworkConcept {
     /// mmap 网络应用概念
+    /// mmap network application concept
     pub fn concept() -> &'static str {
         r#"=== mmap + 网络概念 ===
 
@@ -106,6 +105,7 @@ Rust 中的相关 API：
 // ============================================================================
 
 /// io_uring 概念概述
+/// io_uring concept
 pub struct IoUringConcept;
 
 impl IoUringConcept {
@@ -140,7 +140,7 @@ io_uring 是 Linux 内核 5.1+ 引入的异步 I/O 接口：
 "#
     }
 
-    /// io_uring 与 epoll 的零拷贝差异
+    /// io_uring and epoll 零拷贝差异
     pub fn vs_epoll() -> &'static str {
         r#"=== io_uring vs epoll（零拷贝角度） ===
 
@@ -165,6 +165,7 @@ io_uring 是 Linux 内核 5.1+ 引入的异步 I/O 接口：
 // ============================================================================
 
 /// Rust 零拷贝 API 对比
+/// Rust API to
 pub struct ZeroCopyApiComparison;
 
 impl ZeroCopyApiComparison {
@@ -210,6 +211,8 @@ impl ZeroCopyApiComparison {
     }
 
     /// API 对比总结
+    /// API to summary
+    /// API to比summary
     pub fn comparison() -> &'static str {
         r#"=== Rust 零拷贝 API 对比总结 ===
 
@@ -228,9 +231,8 @@ impl ZeroCopyApiComparison {
     }
 }
 
-/// 模拟零拷贝传输（概念实现：实际仍使用 std::io::copy 作为 safe fallback）
-///
 /// 真实零拷贝需要 unsafe 或平台特定 API，此处仅作语义演示。
+/// real unsafe or platform API，this demonstration 。
 pub fn simulate_zero_copy_transfer(
     reader: &mut impl io::Read,
     writer: &mut impl io::Write,

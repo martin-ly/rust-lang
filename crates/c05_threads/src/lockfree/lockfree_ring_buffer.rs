@@ -1,10 +1,15 @@
 //! 无锁环形缓冲区实现
-//!
+//! lock-free ring buffer
 //! 本模块提供了多种无锁环形缓冲区实现：
+//! This module provides lock-free ring buffer ：
 //! - 单生产者单消费者环形缓冲区
+//! - single-producer single-consumer buffering
 //! - 多生产者单消费者环形缓冲区
+//! - multi-producer single-consumer buffering
 //! - 多生产者多消费者环形缓冲区
+//! - buffering
 //! - 可扩展环形缓冲区
+//! - buffering
 use crossbeam_queue::ArrayQueue;
 #[allow(unused_imports)]
 use crossbeam_utils::CachePadded;
@@ -18,8 +23,7 @@ use std::sync::{
 use std::thread;
 #[cfg(feature = "custom_ring_buffers")]
 /// 单生产者单消费者环形缓冲区
-///
-/// 使用原子操作实现的高性能SPSC环形缓冲区
+/// single-producer single-consumer buffering
 pub struct SpscRingBuffer<T> {
     buffer: Vec<CachePadded<UnsafeCell<Option<T>>>>,
     capacity: usize,
@@ -35,7 +39,6 @@ unsafe impl<T: Send> Sync for SpscRingBuffer<T> {}
 
 #[cfg(feature = "custom_ring_buffers")]
 impl<T> SpscRingBuffer<T> {
-    /// 创建新的SPSC环形缓冲区
     pub fn new(capacity: usize) -> Self {
         let mut buffer = Vec::with_capacity(capacity);
         for _ in 0..capacity {
@@ -51,6 +54,7 @@ impl<T> SpscRingBuffer<T> {
     }
 
     /// 尝试推送元素
+    /// element
     pub fn try_push(&self, item: T) -> Result<(), T> {
         let current_tail = self.tail.load(Ordering::Relaxed);
         let next_tail = (current_tail + 1) % self.capacity;
@@ -72,6 +76,7 @@ impl<T> SpscRingBuffer<T> {
     }
 
     /// 尝试弹出元素
+    /// element
     pub fn try_pop(&self) -> Option<T> {
         let current_head = self.head.load(Ordering::Relaxed);
 
@@ -94,6 +99,7 @@ impl<T> SpscRingBuffer<T> {
     }
 
     /// 获取缓冲区大小
+    /// buffering
     pub fn len(&self) -> usize {
         let tail = self.tail.load(Ordering::Acquire);
         let head = self.head.load(Ordering::Acquire);
@@ -106,11 +112,13 @@ impl<T> SpscRingBuffer<T> {
     }
 
     /// 检查缓冲区是否为空
+    /// buffering as
     pub fn is_empty(&self) -> bool {
         self.head.load(Ordering::Acquire) == self.tail.load(Ordering::Acquire)
     }
 
     /// 检查缓冲区是否已满
+    /// buffering
     pub fn is_full(&self) -> bool {
         let tail = self.tail.load(Ordering::Acquire);
         let next_tail = (tail + 1) % self.capacity;
@@ -118,6 +126,7 @@ impl<T> SpscRingBuffer<T> {
     }
 
     /// 运行SPSC示例
+    /// Run SPSCexample
     pub fn run_example() {
         println!("=== SPSC环形缓冲区示例 ===");
 
@@ -157,8 +166,7 @@ impl<T> SpscRingBuffer<T> {
 
 #[cfg(feature = "custom_ring_buffers")]
 /// 多生产者单消费者环形缓冲区
-///
-/// 使用原子操作实现的高性能MPSC环形缓冲区
+/// multi-producer single-consumer buffering
 pub struct MpscRingBuffer<T> {
     buffer: Vec<CachePadded<UnsafeCell<Option<T>>>>,
     capacity: usize,
@@ -176,7 +184,6 @@ unsafe impl<T: Send> Sync for MpscRingBuffer<T> {}
 
 #[cfg(feature = "custom_ring_buffers")]
 impl<T> MpscRingBuffer<T> {
-    /// 创建新的MPSC环形缓冲区
     pub fn new(capacity: usize) -> Self {
         let mut buffer = Vec::with_capacity(capacity);
         for _ in 0..capacity {
@@ -193,6 +200,7 @@ impl<T> MpscRingBuffer<T> {
     }
 
     /// 尝试推送元素
+    /// element
     pub fn try_push(&self, item: T) -> Result<(), T> {
         loop {
             let current_tail = self.tail.load(Ordering::Relaxed);
@@ -222,6 +230,7 @@ impl<T> MpscRingBuffer<T> {
     }
 
     /// 尝试弹出元素
+    /// element
     pub fn try_pop(&self) -> Option<T> {
         let current_head = self.head.load(Ordering::Relaxed);
 
@@ -244,6 +253,7 @@ impl<T> MpscRingBuffer<T> {
     }
 
     /// 运行MPSC示例
+    /// Run MPSCexample
     pub fn run_example() {
         println!("=== MPSC环形缓冲区示例 ===");
 
@@ -296,8 +306,7 @@ impl<T> MpscRingBuffer<T> {
 
 #[cfg(feature = "custom_ring_buffers")]
 /// 多生产者多消费者环形缓冲区
-///
-/// 使用原子操作实现的高性能MPMC环形缓冲区
+/// buffering
 pub struct MpmcRingBuffer<T> {
     buffer: Vec<CachePadded<UnsafeCell<Option<T>>>>,
     capacity: usize,
@@ -312,7 +321,6 @@ unsafe impl<T: Send> Send for MpmcRingBuffer<T> {}
 unsafe impl<T: Send> Sync for MpmcRingBuffer<T> {}
 #[cfg(feature = "custom_ring_buffers")]
 impl<T> MpmcRingBuffer<T> {
-    /// 创建新的MPMC环形缓冲区
     pub fn new(capacity: usize) -> Self {
         let mut buffer = Vec::with_capacity(capacity);
         for _ in 0..capacity {
@@ -328,6 +336,7 @@ impl<T> MpmcRingBuffer<T> {
     }
 
     /// 尝试推送元素
+    /// element
     pub fn try_push(&self, item: T) -> Result<(), T> {
         loop {
             let current_tail = self.tail.load(Ordering::Relaxed);
@@ -362,6 +371,7 @@ impl<T> MpmcRingBuffer<T> {
     }
 
     /// 尝试弹出元素
+    /// element
     pub fn try_pop(&self) -> Option<T> {
         loop {
             let current_head = self.head.load(Ordering::Relaxed);
@@ -396,6 +406,7 @@ impl<T> MpmcRingBuffer<T> {
     }
 
     /// 运行MPMC示例
+    /// Run MPMCexample
     pub fn run_example() {
         println!("=== MPMC环形缓冲区示例 ===");
 
@@ -451,8 +462,9 @@ impl<T> MpmcRingBuffer<T> {
 
 #[cfg(feature = "custom_ring_buffers")]
 /// 可扩展环形缓冲区
-///
+/// buffering
 /// 支持动态扩展的环形缓冲区
+/// buffering
 pub struct ScalableRingBuffer<T> {
     buffers: Vec<Arc<MpmcRingBuffer<T>>>,
     current_buffer: AtomicUsize,
@@ -462,6 +474,7 @@ pub struct ScalableRingBuffer<T> {
 #[cfg(feature = "custom_ring_buffers")]
 impl<T> ScalableRingBuffer<T> {
     /// 创建新的可扩展环形缓冲区
+    /// buffering
     pub fn new(initial_capacity: usize) -> Self {
         let initial_buffer = Arc::new(MpmcRingBuffer::new(initial_capacity));
 
@@ -473,6 +486,7 @@ impl<T> ScalableRingBuffer<T> {
     }
 
     /// 扩展缓冲区
+    /// buffering
     fn expand(&self) {
         let new_capacity = self.capacity_per_buffer * 2;
         let _new_buffer = Arc::new(MpmcRingBuffer::<T>::new(new_capacity));
@@ -486,6 +500,7 @@ impl<T> ScalableRingBuffer<T> {
     }
 
     /// 尝试推送元素
+    /// element
     pub fn try_push(&self, item: T) -> Result<(), T> {
         let current_index = self.current_buffer.load(Ordering::Acquire);
         let buffer = &self.buffers[current_index];
@@ -503,6 +518,7 @@ impl<T> ScalableRingBuffer<T> {
     }
 
     /// 尝试弹出元素
+    /// element
     pub fn try_pop(&self) -> Option<T> {
         let current_index = self.current_buffer.load(Ordering::Acquire);
         let buffer = &self.buffers[current_index];
@@ -521,6 +537,7 @@ impl<T> ScalableRingBuffer<T> {
     }
 
     /// 运行可扩展环形缓冲区示例
+    /// Run buffering example
     pub fn run_example() {
         println!("=== 可扩展环形缓冲区示例 ===");
 
@@ -567,15 +584,11 @@ impl<T> ScalableRingBuffer<T> {
 unsafe impl<T: Send> Send for ScalableRingBuffer<T> {}
 #[cfg(feature = "custom_ring_buffers")]
 unsafe impl<T: Send> Sync for ScalableRingBuffer<T> {}
-/// 使用Crossbeam的高性能环形缓冲区
-///
-/// 基于Crossbeam库的高性能实现
 pub struct CrossbeamRingBuffer<T> {
     queue: ArrayQueue<T>,
 }
 
 impl<T> CrossbeamRingBuffer<T> {
-    /// 创建新的Crossbeam环形缓冲区
     pub fn new(capacity: usize) -> Self {
         Self {
             queue: ArrayQueue::new(capacity),
@@ -583,16 +596,17 @@ impl<T> CrossbeamRingBuffer<T> {
     }
 
     /// 尝试推送元素
+    /// element
     pub fn try_push(&self, item: T) -> Result<(), T> {
         self.queue.push(item)
     }
 
     /// 尝试弹出元素
+    /// element
     pub fn try_pop(&self) -> Option<T> {
         self.queue.pop()
     }
 
-    /// 运行Crossbeam环形缓冲区示例
     pub fn run_example() {
         println!("=== Crossbeam环形缓冲区示例 ===");
 
@@ -636,6 +650,7 @@ impl<T> CrossbeamRingBuffer<T> {
 }
 
 /// 运行所有环形缓冲区示例
+/// Run all buffering example
 pub fn demonstrate_lockfree_ring_buffers() {
     println!("=== 无锁环形缓冲区演示 ===");
 

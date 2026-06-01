@@ -1,12 +1,13 @@
 //! # 类型状态机（Type-State Pattern）
-//!
-//! 使用 Rust 类型系统在编译期保证状态转换的正确性。
 //! 这是一种零运行时开销的设计模式，错误的状态转换会在编译期被拒绝。
+//! runtime overhead design ，state conversion in is 。
 
 /// HTTP 请求构建器 —— 类型状态机示例
-///
+/// HTTP builder —— type state machine example
 /// 只有按正确顺序设置 method → url → body 后才能发送请求。
+/// order method → url → body after 。
 /// 未完成前置步骤时，后续方法不可用。
+/// before step ，after method 。
 pub struct HttpRequestBuilder<State> {
     method: Option<String>,
     url: Option<String>,
@@ -15,12 +16,18 @@ pub struct HttpRequestBuilder<State> {
 }
 
 /// 初始状态：尚未设置任何字段
+/// initial state ：field
+/// initial state：尚未Set任何field
 pub struct Init;
 /// 已设置 method
+/// method
+/// 已Set method
 pub struct MethodSet;
 /// 已设置 method + url
+/// 已Set method + url
 pub struct UrlSet;
 /// 已设置 method + url + body（可发送）
+/// 已Set method + url + body（可Send）
 pub struct Ready;
 
 impl Default for HttpRequestBuilder<Init> {
@@ -31,6 +38,7 @@ impl Default for HttpRequestBuilder<Init> {
 
 impl HttpRequestBuilder<Init> {
     /// 创建新的请求构建器
+    /// builder
     pub fn new() -> Self {
         Self {
             method: None,
@@ -40,7 +48,6 @@ impl HttpRequestBuilder<Init> {
         }
     }
 
-    /// 设置 HTTP 方法，状态转换为 MethodSet
     pub fn method(self, m: impl Into<String>) -> HttpRequestBuilder<MethodSet> {
         HttpRequestBuilder {
             method: Some(m.into()),
@@ -52,7 +59,6 @@ impl HttpRequestBuilder<Init> {
 }
 
 impl HttpRequestBuilder<MethodSet> {
-    /// 设置 URL，状态转换为 UrlSet
     pub fn url(self, u: impl Into<String>) -> HttpRequestBuilder<UrlSet> {
         HttpRequestBuilder {
             method: self.method,
@@ -64,7 +70,7 @@ impl HttpRequestBuilder<MethodSet> {
 }
 
 impl HttpRequestBuilder<UrlSet> {
-    /// 设置请求体，状态转换为 Ready
+    /// Set请求volume，stateconversionas Ready
     pub fn body(self, b: impl Into<String>) -> HttpRequestBuilder<Ready> {
         HttpRequestBuilder {
             method: self.method,
@@ -75,6 +81,8 @@ impl HttpRequestBuilder<UrlSet> {
     }
 
     /// 不设置 body 直接发送（GET 请求等）
+    /// body （GET etc. ）
+    /// 不Set body 直接Send（GET 请求etc.）
     pub fn send(self) -> String {
         format!(
             "{} {} (no body)",
@@ -97,8 +105,7 @@ impl HttpRequestBuilder<Ready> {
 }
 
 /// 文件操作状态机 —— 防止未打开就读写
-///
-/// 只有 `Open` 状态的文件才能读写。
+/// file operation state machine ——
 pub struct FileHandle<State> {
     path: String,
     _state: std::marker::PhantomData<State>,

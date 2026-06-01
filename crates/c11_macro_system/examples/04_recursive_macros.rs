@@ -1,6 +1,7 @@
 //! # 示例04: 递归宏
-//!
+//! # example 04:
 //! 演示递归宏的使用
+//! demonstration
 use c11_macro_system::{count, max};
 
 /// 递归反转
@@ -14,6 +15,7 @@ macro_rules! reverse {
 }
 
 /// 列表求和
+/// and
 macro_rules! sum {
     () => { 0 };
     ($x:expr) => { $x };
@@ -23,6 +25,7 @@ macro_rules! sum {
 }
 
 /// 找最小值
+/// minimum
 macro_rules! min {
     ($x:expr) => { $x };
     ($x:expr, $($rest:expr),+ $(,)?) => {

@@ -83,7 +83,6 @@ async fn health() -> &'static str {
 //     }
 // }
 
-/// 外部 HTTP 请求示例：带重试与指数退避
 async fn fetch_external_data(
     State(state): State<AppState>,
 ) -> anyhow::Result<Json<serde_json::Value>, axum::http::StatusCode> {

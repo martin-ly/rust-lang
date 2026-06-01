@@ -1,10 +1,15 @@
 //! 异步集成框架层面分析
+//! async framework level analyze
 //!
 //! 本模块提供了异步生态系统在集成框架层面的分析，
+//! This module provides async ecosystem system in framework level analyze ，
 //! 包括：运行时共性、异步同步转换、聚合组合设计模式等。
+//! ：runtime 、async synchronous conversion 、aggregation combination design etc. 。
 //!
 //! > **历史说明**: `async-std` 已于 **2025年3月** 停止维护并归档。
+//! > **explain **: `async-std` **20253** and 。
 //! > 框架保留 async-std 的模拟接口作为历史参考，新项目请使用 Tokio。
+//! > framework async-std as reference ，project Tokio。
 use anyhow::Result;
 use futures::future::try_join_all;
 use serde::{Deserialize, Serialize};
@@ -16,29 +21,39 @@ use tokio::task;
 use tokio::time::sleep;
 
 /// 异步运行时共性分析
+/// async runtime analyze
 ///
 /// 分析不同异步运行时的共同特性和设计模式
+/// analyze async runtime feature and design
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AsyncRuntimeCommonality {
     /// 运行时名称
+    /// runtime
     pub runtime_name: String,
     /// 核心共性特性
+    /// core feature
     pub common_features: Vec<CommonFeature>,
     /// 设计模式
+    /// design
     pub design_patterns: Vec<DesignPattern>,
     /// 性能特征
+    /// performance
     pub performance_characteristics: PerformanceProfile,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CommonFeature {
     /// 特性名称
+    /// feature
     pub name: String,
     /// 特性描述
+    /// feature describe
     pub description: String,
     /// 实现方式
+    /// way
     pub implementation: String,
     /// 使用场景
+    /// scenario
     pub use_cases: Vec<String>,
 }
 
@@ -47,10 +62,13 @@ pub struct DesignPattern {
     /// 模式名称
     pub name: String,
     /// 模式类型
+    /// type
     pub pattern_type: PatternType,
     /// 模式描述
+    /// describe
     pub description: String,
     /// 实现示例
+    /// example
     pub implementation_example: String,
 }
 
@@ -65,16 +83,20 @@ pub enum PatternType {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PerformanceProfile {
     /// 内存使用模式
+    /// memory
     pub memory_usage_pattern: String,
     /// CPU使用模式
+    /// CPU
     pub cpu_usage_pattern: String,
     /// 并发处理能力
+    /// concurrency
     pub concurrency_capability: String,
     /// 延迟特征
     pub latency_profile: String,
 }
 
 /// 异步运行时共性分析器
+/// async runtime analyze
 pub struct AsyncCommonalityAnalyzer {
     runtimes: HashMap<String, AsyncRuntimeCommonality>,
 }
@@ -218,11 +240,13 @@ impl AsyncCommonalityAnalyzer {
     }
 
     /// 获取运行时共性分析
+    /// runtime analyze
     pub fn get_runtime_commonality(&self, runtime_name: &str) -> Option<&AsyncRuntimeCommonality> {
         self.runtimes.get(runtime_name)
     }
 
     /// 分析所有运行时的共同特性
+    /// analyze all runtime feature
     pub fn analyze_common_features(&self) -> Vec<CommonFeature> {
         // 返回所有运行时的共同特性
         if let Some(first_runtime) = self.runtimes.values().next() {
@@ -233,6 +257,7 @@ impl AsyncCommonalityAnalyzer {
     }
 
     /// 分析设计模式共性
+    /// analyze design
     pub fn analyze_common_patterns(&self) -> Vec<DesignPattern> {
         if let Some(first_runtime) = self.runtimes.values().next() {
             first_runtime.design_patterns.clone()
@@ -243,8 +268,10 @@ impl AsyncCommonalityAnalyzer {
 }
 
 /// 异步同步转换框架
+/// async synchronous conversion framework
 ///
 /// 提供异步和同步代码之间的转换机制
+/// async and synchronous 's conversion mechanism
 #[allow(unused)]
 pub struct AsyncSyncConversionFramework {
     thread_pool: Arc<Semaphore>,
@@ -260,6 +287,7 @@ impl AsyncSyncConversionFramework {
     }
 
     /// 异步到同步转换
+    /// async to synchronous conversion
     pub async fn async_to_sync_conversion<T, F>(&self, async_operation: F) -> Result<T>
     where
         F: std::future::Future<Output = Result<T>> + Send + 'static,
@@ -275,6 +303,7 @@ impl AsyncSyncConversionFramework {
     }
 
     /// 同步到异步转换
+    /// synchronous to async conversion
     pub async fn sync_to_async_conversion<F, T>(&self, sync_operation: F) -> Result<T>
     where
         F: FnOnce() -> Result<T> + Send + 'static,
@@ -290,6 +319,7 @@ impl AsyncSyncConversionFramework {
     }
 
     /// 混合模式转换
+    /// conversion
     pub async fn hybrid_conversion(&self) -> Result<()> {
         println!("🔄 混合模式转换:");
 
@@ -316,6 +346,7 @@ impl AsyncSyncConversionFramework {
     }
 
     /// 转换缓存机制
+    /// conversion mechanism
     pub async fn conversion_with_caching(
         &self,
         key: &str,
@@ -345,8 +376,10 @@ impl AsyncSyncConversionFramework {
 }
 
 /// 聚合组合设计模式框架
+/// aggregation combination design framework
 ///
 /// 提供聚合和组合的设计模式实现
+/// aggregation and combination design
 #[allow(unused)]
 pub struct AggregationCompositionFramework {
     component_registry: Arc<RwLock<HashMap<String, Box<dyn AsyncComponent + Send + Sync>>>>,
@@ -361,6 +394,7 @@ pub trait AsyncComponent {
 }
 
 /// 聚合引擎
+/// aggregation
 #[allow(unused)]
 #[derive(Debug)]
 pub struct AggregationEngine {
@@ -405,6 +439,7 @@ impl AggregationCompositionFramework {
     }
 
     /// 顺序聚合模式
+    /// order aggregation
     pub async fn sequential_aggregation(
         &self,
         component_names: Vec<String>,
@@ -429,6 +464,7 @@ impl AggregationCompositionFramework {
     }
 
     /// 并行聚合模式
+    /// parallelism aggregation
     pub async fn parallel_aggregation(
         &self,
         component_names: Vec<String>,
@@ -453,6 +489,7 @@ impl AggregationCompositionFramework {
     }
 
     /// 管道聚合模式
+    /// pipe aggregation
     pub async fn pipeline_aggregation(
         &self,
         pipeline_stages: Vec<Vec<String>>,
@@ -480,6 +517,7 @@ impl AggregationCompositionFramework {
     }
 
     /// 扇出聚合模式
+    /// aggregation
     pub async fn fan_out_aggregation(
         &self,
         component_name: &str,
@@ -506,6 +544,7 @@ impl AggregationCompositionFramework {
     }
 
     /// 扇入聚合模式
+    /// aggregation
     pub async fn fan_in_aggregation(
         &self,
         component_names: Vec<String>,
@@ -532,6 +571,7 @@ impl AggregationCompositionFramework {
 }
 
 /// 示例组件实现
+/// example
 pub struct DataProcessingComponent {
     name: String,
     processing_delay: Duration,
@@ -563,6 +603,7 @@ impl AsyncComponent for DataProcessingComponent {
 }
 
 /// 综合演示异步集成框架
+/// synthesize demonstration async framework
 pub async fn demonstrate_async_integration_framework() -> Result<()> {
     println!("🚀 异步集成框架层面分析演示");
     println!("================================================");

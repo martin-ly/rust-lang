@@ -1,6 +1,7 @@
 //! 泛型模块边界情况测试套件 / Generics Module Edge Cases Test Suite
 
 /// 测试泛型参数边界情况
+/// generic parameter edge situation
 #[test]
 fn test_generic_parameter_boundaries() {
     // 测试基本泛型类型
@@ -20,7 +21,6 @@ fn test_generic_parameter_boundaries() {
     assert!(identity(true));
 }
 
-/// 测试Trait边界情况
 #[test]
 fn test_trait_boundaries() {
     // 测试基本Trait边界
@@ -63,6 +63,7 @@ fn test_trait_boundaries() {
 }
 
 /// 测试类型推断边界情况
+/// type infer edge situation
 #[test]
 fn test_type_inference_boundaries() {
     // 测试类型推断
@@ -103,6 +104,7 @@ fn test_error_paths() {
 }
 
 /// 测试边界值组合
+/// edge combination
 #[test]
 fn test_boundary_value_combinations() {
     // 测试最小值和最大值
@@ -125,6 +127,7 @@ fn test_boundary_value_combinations() {
 }
 
 /// 测试复杂泛型场景
+/// complex generic scenario
 #[test]
 fn test_complex_generic_scenarios() {
     // 测试嵌套泛型
@@ -153,6 +156,7 @@ fn test_complex_generic_scenarios() {
 }
 
 /// 测试资源耗尽情况
+/// situation
 #[test]
 fn test_resource_exhaustion() {
     // 测试大量泛型实例化

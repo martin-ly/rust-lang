@@ -1,18 +1,27 @@
 //! LeetCode 双指针类算法（结合 Rust 1.91 特性）
+//! LeetCode pointer algorithm （ Rust 1.91 feature ）
 //!
 //! 本模块实现经典的双指针类 LeetCode 题目，充分利用 Rust 1.91 的新特性。
+//! this module pointer LeetCode ， Rust 1.91 feature 。
 //!
 //! ## Rust 1.91 特性应用
+//! ## Rust 1.91 feature application
 //!
 //! - **JIT 优化**: 双指针遍历性能提升 10-15%
+//! - **JIT optimization **: pointer performance 10-15%
 //! - **内存优化**: 原地操作，O(1) 空间复杂度
+//! - **memory optimization **: ，O(1) space complexity
 //! - **新的稳定 API**: 改进的迭代器操作
+//! - ** API**:
 //!
 //! ## 包含的经典题目
+//! ##
 //!
 //! - 11. Container With Most Water（盛最多水的容器）
 //! - 15. 3Sum（三数之和）
+//! - 15. 3Sum（'s and ）
 //! - 16. 3Sum Closest（最接近的三数之和）
+//! - 16. 3Sum Closest（'s and ）
 //! - 26. Remove Duplicates from Sorted Array（删除有序数组中的重复项）
 //! - 27. Remove Element（移除元素）
 //! - 42. Trapping Rain Water（接雨水）
@@ -23,21 +32,32 @@
 //! - 283. Move Zeroes（移动零）
 //! - 344. Reverse String（反转字符串）
 //! - 345. Reverse Vowels of a String（反转字符串中的元音字母）
+//! - 345. Reverse Vowels of a String（in ）
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 
 /// 16. 3Sum Closest（最接近的三数之和）
+/// 16. 3Sum Closest（'s and ）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给你一个长度为 `n` 的整数数组 `nums` 和 一个目标值 `target`。请你从 `nums` 中选出三个整数，
+/// as `n` `nums` and goal `target`。from `nums` in ，
 /// 使它们的和与 `target` 最接近。返回这三个数的和。
+/// and and `target` 。and 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 双指针遍历性能提升
+/// - **JIT optimization **: pointer performance
 /// - **内存优化**: O(1) 空间复杂度（不包括输入）
+/// - **memory optimization **: O(1) space complexity （）
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n²)
+/// - time complexity : O(n²)
 /// - 空间复杂度: O(1)
+/// - space complexity : O(1)
 pub fn three_sum_closest(mut nums: Vec<i32>, target: i32) -> i32 {
     nums.sort_unstable();
     let n = nums.len();
@@ -69,15 +89,23 @@ pub fn three_sum_closest(mut nums: Vec<i32>, target: i32) -> i32 {
 /// 42. Trapping Rain Water（接雨水）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给定 `n` 个非负整数表示每个宽度为 `1` 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
+/// `n` represent as `1` ，this arrangement ，under 's after 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 双指针遍历性能提升
+/// - **JIT optimization **: pointer performance
 /// - **内存优化**: O(1) 空间复杂度
+/// - **memory optimization **: O(1) space complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(1)
+/// - space complexity : O(1)
 pub fn trap(height: Vec<i32>) -> i32 {
     if height.len() < 3 {
         return 0;
@@ -114,16 +142,25 @@ pub fn trap(height: Vec<i32>) -> i32 {
 /// 75. Sort Colors（颜色分类）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给定一个包含红色、白色和蓝色、共 `n` 个元素的数组 `nums`，原地对它们进行排序，使得相同颜色的元素相邻，
+/// 、and 、 `n` element `nums`，to ordering ，element ，
 /// 并按照红色、白色、蓝色顺序排列。我们使用整数 `0`、`1` 和 `2` 分别表示红色、白色和蓝色。
+/// and 、、order arrangement 。 `0`、`1` and `2` represent 、and 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 单次遍历
+/// - **JIT optimization **:
 /// - **内存优化**: 原地操作
+/// - **memory optimization **:
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(1)
+/// - space complexity : O(1)
 pub fn sort_colors(nums: &mut [i32]) {
     let mut p0 = 0; // 0 的右边界
     let mut p2 = nums.len(); // 2 的左边界
@@ -150,16 +187,25 @@ pub fn sort_colors(nums: &mut [i32]) {
 /// 80. Remove Duplicates from Sorted Array II（删除有序数组中的重复项 II）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给你一个有序数组 `nums`，请你 **原地** 删除重复出现的元素，使每个元素 **最多出现两次**，
+/// `nums`， **** element ，element **at most **，
 /// 返回删除后数组的新长度。
+/// after 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 单次遍历
+/// - **JIT optimization **:
 /// - **内存优化**: 原地操作
+/// - **memory optimization **:
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(1)
+/// - space complexity : O(1)
 pub fn remove_duplicates_ii(nums: &mut [i32]) -> usize {
     if nums.len() <= 2 {
         return nums.len();
@@ -182,16 +228,25 @@ pub fn remove_duplicates_ii(nums: &mut [i32]) -> usize {
 /// 125. Valid Palindrome（验证回文串）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 如果在将所有大写字符转换为小写字符、并移除所有非字母数字字符之后，短语正着读和反着读都一样。
+/// if in will all conversion as 、and all 's after ，and 。
 /// 则可以认为该短语是一个 **回文串**。
+/// can as this ****。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 双指针遍历
+/// - **JIT optimization **: pointer
 /// - **新的稳定 API**: 使用字符判断方法
+/// - ** API**: method
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(1)
+/// - space complexity : O(1)
 pub fn is_palindrome(s: &str) -> bool {
     let chars: Vec<char> = s.chars().collect();
     let mut left = 0;
@@ -220,15 +275,23 @@ pub fn is_palindrome(s: &str) -> bool {
 /// 167. Two Sum II - Input Array Is Sorted（两数之和 II - 输入有序数组）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给你一个下标从 **1** 开始的整数数组 `numbers`，该数组已按 **非递减顺序排列**，请你从数组中找出满足相加之和等于目标数 `target` 的两个数。
+/// under from **1** `numbers`，this **order arrangement **，from in 's and etc. goal `target` 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 双指针遍历性能提升
+/// - **JIT optimization **: pointer performance
 /// - **内存优化**: O(1) 空间复杂度
+/// - **memory optimization **: O(1) space complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(1)
+/// - space complexity : O(1)
 pub fn two_sum_ii(numbers: Vec<i32>, target: i32) -> Vec<i32> {
     let mut left = 0;
     let mut right = numbers.len() - 1;
@@ -251,15 +314,23 @@ pub fn two_sum_ii(numbers: Vec<i32>, target: i32) -> Vec<i32> {
 /// 344. Reverse String（反转字符串）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 `s` 的形式给出。
+/// function ，its role will 。 `s` 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 双指针遍历
+/// - **JIT optimization **: pointer
 /// - **内存优化**: 原地操作
+/// - **memory optimization **:
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(1)
+/// - space complexity : O(1)
 pub fn reverse_string(s: &mut [char]) {
     let mut left = 0;
     let mut right = s.len().saturating_sub(1);
@@ -273,17 +344,26 @@ pub fn reverse_string(s: &mut [char]) {
 }
 
 /// 345. Reverse Vowels of a String（反转字符串中的元音字母）
+/// 345. Reverse Vowels of a String（in ）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给你一个字符串 `s`，仅反转字符串中的所有元音字母，并返回结果字符串。
+/// `s`，in all ，and result 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 双指针遍历
+/// - **JIT optimization **: pointer
 /// - **内存优化**: 原地操作
+/// - **memory optimization **:
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(n)（因为需要转换为 `Vec<char>`）
+/// - space complexity : O(n)（because conversion as `Vec<char>`）
 pub fn reverse_vowels(s: String) -> String {
     let mut chars: Vec<char> = s.chars().collect();
     let mut left = 0;
@@ -312,6 +392,7 @@ pub fn reverse_vowels(s: String) -> String {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有双指针类问题
+/// all pointer problem
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

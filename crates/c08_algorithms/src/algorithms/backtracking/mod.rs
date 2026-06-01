@@ -1,13 +1,17 @@
 //! # 回溯算法模块
+//! # backtracking algorithm module
 //!
 //! 本模块实现了各种回溯算法。
+//! this module backtracking algorithm 。
 //use serde::{Serialize, Deserialize};
 
 /// 回溯算法实现
+/// backtracking algorithm
 pub struct BacktrackingAlgorithms;
 
 impl BacktrackingAlgorithms {
     /// N 皇后问题
+    /// N after problem
     pub fn n_queens(n: usize) -> Vec<Vec<usize>> {
         let mut solutions = Vec::new();
         let mut board = vec![0; n];
@@ -43,6 +47,7 @@ impl BacktrackingAlgorithms {
     }
 
     /// 全排列
+    /// arrangement
     pub fn permutations(nums: &[i32]) -> Vec<Vec<i32>> {
         let mut result = Vec::new();
         let mut current = Vec::new();

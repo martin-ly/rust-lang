@@ -1,11 +1,18 @@
 //! 异步生态系统集成模块
+//! async ecosystem system module
 //!
 //! 本模块展示了如何集成和组合使用不同的异步运行时和设计模式：
+//! This module demonstrates and combination async runtime and design ：
 //! 1. 多运行时集成策略
+//! 1. runtime strategy
 //! 2. 聚合组合设计模式
+//! 2. aggregation combination design
 //! 3. 异步同步转换最佳实践
+//! 3. async synchronous conversion
 //! 4. 跨运行时任务调度
+//! 4. runtime task
 //! 5. 统一异步接口设计
+//! 5. async design
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
@@ -17,6 +24,7 @@ use tracing::{error, info};
 use uuid::Uuid;
 
 /// 异步运行时枚举
+/// async runtime enum
 #[derive(Debug, Clone)]
 pub enum AsyncRuntime {
     Tokio(TokioRuntime),
@@ -75,6 +83,7 @@ impl AsyncRuntime {
 }
 
 /// 运行时状态
+/// runtime state
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RuntimeStatus {
     pub name: String,
@@ -87,6 +96,7 @@ pub struct RuntimeStatus {
 }
 
 /// Tokio运行时实现
+/// Tokioruntime
 #[derive(Debug, Clone)]
 pub struct TokioRuntime {
     runtime: Arc<tokio::runtime::Runtime>,
@@ -160,6 +170,7 @@ impl TokioRuntime {
 }
 
 /// Smol运行时实现
+/// Smolruntime
 #[derive(Debug, Clone)]
 pub struct SmolRuntime {
     executor: Arc<smol::Executor<'static>>,
@@ -229,7 +240,9 @@ impl SmolRuntime {
 }
 
 /// 异步运行时管理器
+/// async runtime
 /// 实现聚合模式，统一管理多个运行时
+/// aggregation ，runtime
 #[allow(dead_code)]
 pub struct AsyncRuntimeManager {
     runtimes: Arc<RwLock<HashMap<String, AsyncRuntime>>>,
@@ -245,6 +258,7 @@ impl AsyncRuntimeManager {
     }
 
     /// 注册运行时
+    /// runtime
     pub async fn register_runtime(&self, name: String, runtime: AsyncRuntime) -> Result<()> {
         let mut runtimes = self.runtimes.write().await;
         runtimes.insert(name.clone(), runtime);
@@ -253,17 +267,20 @@ impl AsyncRuntimeManager {
     }
 
     /// 获取运行时
+    /// runtime
     pub async fn get_runtime(&self, name: &str) -> Option<AsyncRuntime> {
         let runtimes = self.runtimes.read().await;
         runtimes.get(name).cloned()
     }
 
     /// 获取默认运行时
+    /// runtime
     pub async fn get_default_runtime(&self) -> Option<AsyncRuntime> {
         self.get_runtime(&self.default_runtime).await
     }
 
     /// 启动所有运行时
+    /// all runtime
     pub async fn start_all(&self) -> Result<()> {
         let runtimes = self.runtimes.read().await;
         for (name, runtime) in runtimes.iter() {
@@ -274,6 +291,7 @@ impl AsyncRuntimeManager {
     }
 
     /// 停止所有运行时
+    /// all runtime
     pub async fn stop_all(&self) -> Result<()> {
         let runtimes = self.runtimes.read().await;
         for (name, runtime) in runtimes.iter() {
@@ -284,6 +302,7 @@ impl AsyncRuntimeManager {
     }
 
     /// 智能任务分发
+    /// task
     pub async fn spawn_task<F, T>(
         &self,
         _task_name: String,
@@ -307,6 +326,7 @@ impl AsyncRuntimeManager {
     }
 
     /// 获取所有运行时状态
+    /// all runtime state
     pub async fn get_all_status(&self) -> Vec<RuntimeStatus> {
         let runtimes = self.runtimes.read().await;
         let mut statuses = Vec::new();
@@ -321,7 +341,9 @@ impl AsyncRuntimeManager {
 }
 
 /// 异步任务包装器
+/// async task
 /// 实现装饰器模式，为任务添加额外功能
+/// decorator ，as task outside functionality
 #[allow(dead_code)]
 pub struct AsyncTaskWrapper<T> {
     inner: T,
@@ -367,6 +389,7 @@ impl<T> AsyncTaskWrapper<T> {
 }
 
 /// 异步日志记录器接口
+/// async
 #[async_trait::async_trait]
 pub trait AsyncLogger: Send + Sync {
     async fn log_task_start(&self, task_id: &str);
@@ -375,6 +398,7 @@ pub trait AsyncLogger: Send + Sync {
 }
 
 /// 简单异步日志记录器实现
+/// simple async
 #[allow(dead_code)]
 pub struct SimpleAsyncLogger;
 
@@ -403,7 +427,9 @@ impl AsyncLogger for SimpleAsyncLogger {
 }
 
 /// 异步同步转换器
+/// async synchronous conversion
 /// 提供异步和同步代码之间的转换功能
+/// async and synchronous 's conversion functionality
 #[allow(dead_code)]
 pub struct AsyncSyncConverter {
     runtime_manager: Arc<AsyncRuntimeManager>,
@@ -415,6 +441,7 @@ impl AsyncSyncConverter {
     }
 
     /// 异步转同步
+    /// async synchronous
     pub async fn async_to_sync<F, T>(&self, future: F) -> Result<T>
     where
         F: std::future::Future<Output = T>,
@@ -429,6 +456,7 @@ impl AsyncSyncConverter {
     }
 
     /// 同步转异步
+    /// synchronous async
     pub async fn sync_to_async<F, T>(&self, sync_fn: F) -> Result<T>
     where
         F: FnOnce() -> T + Send + 'static,
@@ -450,6 +478,7 @@ impl AsyncSyncConverter {
     }
 
     /// 跨运行时转换
+    /// runtime conversion
     pub async fn cross_runtime_convert<F, T>(
         &self,
         source_runtime: &str,
@@ -481,6 +510,7 @@ impl AsyncSyncConverter {
 }
 
 /// 异步生态系统集成演示
+/// async ecosystem system demonstration
 pub async fn demonstrate_async_ecosystem_integration() -> Result<()> {
     println!("🚀 异步生态系统集成演示");
     println!("================================================");

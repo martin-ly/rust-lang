@@ -1,11 +1,18 @@
 //! Rust 1.90 算法库 - 主题化组织
+//! Rust 1.90 algorithm library - organize
 //!
 //! 本库按照算法主题进行组织，每个主题包含：
+//! this library algorithm organize ，：
 //! - 同步实现
+//! - synchronous
 //! - 并行实现（使用 Rayon）
+//! - parallelism （ Rayon）
 //! - 异步实现（使用 Tokio）
+//! - async （ Tokio）
 //! - 形式化验证和证明
+//! - and
 //! - 完整的文档和注释
+//! - complete and
 // 基础算法主题
 pub mod formal_verification;
 pub mod searching;
@@ -30,68 +37,92 @@ pub mod sorting;
 // pub mod async_algorithms;
 
 /// 算法库版本信息
+/// algorithm library this
 pub const VERSION: &str = "0.2.0";
 pub const RUST_VERSION: &str = "1.90";
 
 /// 获取库版本信息
+/// library this
 pub fn get_version() -> &'static str {
     VERSION
 }
 
 /// 获取支持的 Rust 版本
+/// Rust this
 pub fn get_rust_version() -> &'static str {
     RUST_VERSION
 }
 
 /// 算法分类枚举
+/// algorithm classification enum
 #[derive(Debug, Clone, PartialEq, Eq, Hash, serde::Serialize, serde::Deserialize)]
 pub enum AlgorithmCategory {
     /// 排序算法
+    /// sorting algorithm
     Sorting,
     /// 搜索算法
+    /// searching algorithm
     Searching,
     /// 图论算法
+    /// algorithm
     GraphTheory,
     /// 动态规划
+    /// dynamic programming
     DynamicProgramming,
     /// 分治算法
+    /// divide and conquer algorithm
     DivideConquer,
     /// 贪心算法
+    /// greedy algorithm
     Greedy,
     /// 回溯算法
+    /// backtracking algorithm
     Backtracking,
     /// 字符串算法
+    /// string algorithm
     StringAlgorithms,
     /// 数论算法
+    /// algorithm
     NumberTheory,
     /// 几何算法
+    /// geometric algorithm
     Geometry,
     /// 组合数学
+    /// combination
     Combinatorics,
     /// 优化算法
+    /// optimization algorithm
     Optimization,
     /// 并行算法
+    /// parallel algorithm
     ParallelAlgorithms,
     /// 异步算法
+    /// async algorithm
     AsyncAlgorithms,
     /// 形式化验证
     FormalVerification,
 }
 
 /// 算法复杂度类型
+/// algorithm complex type
 #[derive(Debug, Clone, PartialEq, Eq, Hash, serde::Serialize, serde::Deserialize)]
 pub enum ComplexityType {
     /// 时间复杂度
+    /// time complexity
     TimeComplexity,
     /// 空间复杂度
+    /// space complexity
     SpaceComplexity,
     /// 并行复杂度
+    /// parallelism complex
     ParallelComplexity,
     /// 通信复杂度
+    /// complex
     CommunicationComplexity,
 }
 
 /// 算法复杂度表示
+/// algorithm complex represent
 #[derive(Debug, Clone, PartialEq, Eq, Hash, serde::Serialize, serde::Deserialize)]
 pub struct Complexity {
     pub complexity_type: ComplexityType,
@@ -103,6 +134,7 @@ pub struct Complexity {
 }
 
 /// 算法信息结构
+/// algorithm structure
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
 pub struct AlgorithmInfo {
     pub name: String,
@@ -116,19 +148,24 @@ pub struct AlgorithmInfo {
 }
 
 /// 实现类型
+/// type
 #[derive(Debug, Clone, PartialEq, Eq, Hash, serde::Serialize, serde::Deserialize)]
 pub enum ImplementationType {
     /// 同步实现
+    /// synchronous
     Synchronous,
     /// 并行实现
+    /// parallelism
     Parallel,
     /// 异步实现
+    /// async
     Asynchronous,
     /// 混合实现
     Hybrid,
 }
 
 /// 算法性能基准测试结果
+/// algorithm Performance benchmark result
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
 pub struct BenchmarkResult {
     pub algorithm_name: String,
@@ -141,6 +178,7 @@ pub struct BenchmarkResult {
 }
 
 /// 算法库统计信息
+/// algorithm library
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
 pub struct LibraryStats {
     pub total_algorithms: usize,
@@ -150,6 +188,7 @@ pub struct LibraryStats {
 }
 
 /// 获取算法库统计信息
+/// algorithm library
 pub fn get_library_stats() -> LibraryStats {
     // 这里会根据实际实现的算法数量来填充统计信息
     // 暂时返回基础结构
@@ -162,6 +201,7 @@ pub fn get_library_stats() -> LibraryStats {
 }
 
 /// 获取所有算法信息
+/// all algorithm
 pub fn get_all_algorithms() -> Vec<AlgorithmInfo> {
     vec![
         // 排序算法
@@ -219,6 +259,7 @@ pub fn get_all_algorithms() -> Vec<AlgorithmInfo> {
 }
 
 /// 搜索算法
+/// searching algorithm
 pub fn search_algorithms(query: &str) -> Vec<AlgorithmInfo> {
     let query_lower = query.to_lowercase();
     get_all_algorithms()
@@ -235,6 +276,7 @@ pub fn search_algorithms(query: &str) -> Vec<AlgorithmInfo> {
 }
 
 /// 根据分类获取算法
+/// according to classification algorithm
 pub fn get_algorithms_by_category(category: AlgorithmCategory) -> Vec<AlgorithmInfo> {
     get_all_algorithms()
         .into_iter()
@@ -243,6 +285,7 @@ pub fn get_algorithms_by_category(category: AlgorithmCategory) -> Vec<AlgorithmI
 }
 
 /// 算法性能基准测试器
+/// algorithm Performance benchmark
 pub struct AlgorithmBenchmark {
     results: std::collections::HashMap<String, Vec<BenchmarkResult>>,
 }
@@ -261,6 +304,7 @@ impl AlgorithmBenchmark {
     }
 
     /// 运行基准测试
+    /// Run benchmark
     pub fn run_benchmark<F>(
         &mut self,
         name: &str,
@@ -279,6 +323,7 @@ impl AlgorithmBenchmark {
     }
 
     /// 获取平均执行时间
+    /// time
     pub fn get_average_time(&self, name: &str) -> Option<std::time::Duration> {
         self.results.get(name).map(|results| {
             let total: std::time::Duration = results.iter().map(|r| r.execution_time).sum();
@@ -287,6 +332,7 @@ impl AlgorithmBenchmark {
     }
 
     /// 生成基准测试报告
+    /// benchmark
     pub fn generate_report(&self) -> String {
         let mut report = String::from("算法性能基准测试报告\n");
         report.push_str("========================\n\n");
@@ -312,10 +358,12 @@ impl AlgorithmBenchmark {
 }
 
 /// 算法复杂度分析器
+/// algorithm complex analyze
 pub struct ComplexityAnalyzer;
 
 impl ComplexityAnalyzer {
     /// 分析算法的时间复杂度
+    /// analyze algorithm time complexity
     pub fn analyze_time_complexity<F>(
         test_fn: F,
         input_sizes: &[usize],
@@ -334,6 +382,7 @@ impl ComplexityAnalyzer {
     }
 
     /// 估算算法的时间复杂度
+    /// algorithm time complexity
     pub fn estimate_complexity(results: &[(usize, std::time::Duration)]) -> String {
         if results.len() < 2 {
             return "数据不足".to_string();

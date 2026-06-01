@@ -1,4 +1,5 @@
 //! 网络拓扑与路由发现（教学化简化版）
+//! network and （）
 use std::collections::{HashMap, HashSet, VecDeque};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
@@ -34,6 +35,7 @@ impl TopologyGraph {
     }
 
     /// 简化版 BFS 路由发现
+    /// BFS
     pub fn find_path_bfs(&self, src: &NodeId, dst: &NodeId) -> Option<Vec<NodeId>> {
         let mut q = VecDeque::new();
         let mut prev: HashMap<NodeId, NodeId> = HashMap::new();

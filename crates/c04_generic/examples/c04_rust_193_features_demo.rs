@@ -1,10 +1,6 @@
 //! Rust 1.93.0 泛型编程相关 API 演示
-//!
-//! 本示例展示 Rust 1.93.0 在泛型、集合、类型转换等场景中的新 API：
-//! - slice::as_array - 泛型切片到数组的类型安全转换
-//! - Vec::into_raw_parts - 泛型向量的内存布局
+//! Rust 1.93.0 generic API demonstration
 //! - Duration::from_nanos_u128 - 泛型时间计算
-//!
 //! 运行: cargo run -p c04_generic --example rust_193_features_demo
 use std::time::Duration;
 

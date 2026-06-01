@@ -1,12 +1,13 @@
 //! 跨平台进程管理示例
-//!
+//! platform process example
 //! 本示例展示C07进程管理模块的跨平台特性：
-//! - Windows/Linux/macOS兼容性
+//! this example C07process module platform feature ：
 //! - 平台特定API抽象
+//! - platform API
 //! - 跨平台最佳实践
-//!
+//! - platform
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example cross_platform_demo
 //! ```
 use c07_process::prelude::*;

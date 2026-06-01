@@ -1,10 +1,12 @@
-//! 读写锁（RwLock）示例
 //! - 读多写少场景
+//! - scenario
 //! - 尝试升级/降级（通过数据拷贝/重取锁实现，Rust 标准库不支持原地升级）
+//! - /（/lock ，Rust standard library ）
 use std::sync::{Arc, RwLock};
 use std::thread;
 
 /// 读多写少：多个读者可以并发，写者独占
+/// ：can concurrency ，
 pub fn read_heavy_demo(readers: usize, writers: usize, iters: usize) -> usize {
     let data = Arc::new(RwLock::new(0usize));
     let mut handles = Vec::new();
@@ -40,6 +42,7 @@ pub fn read_heavy_demo(readers: usize, writers: usize, iters: usize) -> usize {
 }
 
 /// 模拟“升级/降级”：先读后写（释放读锁再取写锁）、写后读（释放写锁再取读锁）
+/// “/”：after （lock lock ）、after （lock lock ）
 pub fn emulate_upgrade_downgrade() -> (usize, usize) {
     let data = Arc::new(RwLock::new(1usize));
 

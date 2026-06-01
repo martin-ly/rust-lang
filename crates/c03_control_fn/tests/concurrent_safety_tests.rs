@@ -1,10 +1,10 @@
 #![allow(clippy::assertions_on_constants)]
 
-//! 控制流与函数模块并发安全测试套件 / Control Flow and Functions Module Concurrent Safety Test Suite
 use std::sync::{Arc, Mutex};
 use std::thread;
 
 /// 测试共享状态并发安全
+/// state concurrency
 #[test]
 fn test_shared_state_safety() {
     let counter = Arc::new(Mutex::new(0));
@@ -29,6 +29,7 @@ fn test_shared_state_safety() {
 }
 
 /// 测试竞态条件
+/// condition
 #[test]
 fn test_race_conditions() {
     let shared = Arc::new(Mutex::new(Vec::<i32>::new()));
@@ -54,6 +55,7 @@ fn test_race_conditions() {
 }
 
 /// 测试内存安全
+/// memory safety
 #[test]
 fn test_memory_safety() {
     let shared = Arc::new(Mutex::new(0usize));
@@ -78,6 +80,7 @@ fn test_memory_safety() {
 }
 
 /// 测试原子操作
+/// atomic operation
 #[test]
 fn test_atomic_operations() {
     use std::sync::atomic::{AtomicUsize, Ordering};
@@ -103,6 +106,7 @@ fn test_atomic_operations() {
 }
 
 /// 测试同步原语
+/// synchronous
 #[test]
 fn test_synchronization_primitives() {
     use std::sync::Barrier;

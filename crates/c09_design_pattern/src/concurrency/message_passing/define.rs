@@ -72,6 +72,7 @@ pub trait AsyncEventHandler<E: ?Sized> {
         Self: 'a;
 
     /// 使用关联类型返回 Future，避免在公有 trait 中使用 `async fn`
+    /// associated type Future，in trait in `async fn`
     type Fut<'a>: Future<Output = ()> + 'a
     where
         E: 'a,
@@ -103,34 +104,42 @@ impl AsyncEventHandler<String> for StringEventHandler {
 }
 
 /// 简易异步事件总线（带背压与取消）
+/// async line （backpressure and ）
 pub mod async_bus {
     use super::*;
     use std::future::Future;
     use std::pin::Pin;
 
     /// 面向 String 事件的简化总线，避免复杂的关联类型约束
+    /// surface String line ，complex associated type
     pub struct EventBusString {
         handler: StringEventHandler,
     }
 
     /// 泛型事件总线：适用于 Ref<'a> = &'a E 的处理器
+    /// generic line ： Ref<'a> = &'a E
     pub struct EventBusGeneric<H, E> {
         pub handler: H,
         _marker: core::marker::PhantomData<E>,
     }
 
     /// 背压策略（顺序驱动下的语义模拟）
+    /// backpressure strategy （order driver under ）
     #[derive(Clone, Copy)]
     pub enum BackpressureStrategy {
         /// 丢弃最旧：仅处理最近的 N 条（由 caller 控制切片大小）
+        /// ： N （ caller ）
         DropOldest,
         /// 阻塞（顺序驱动下等价于逐条处理，无丢弃）
+        /// （order driver under etc. ，）
         Block,
         /// 批量聚合：按批处理，批内顺序消费
+        /// aggregation ：，inside order
         Batch(usize),
     }
 
     /// 统一事件总线接口：以关联 Future 的形式提供异步 API
+    /// line ： Future async API
     pub trait EventBus<E> {
         type Fut<'a>: Future<Output = ()> + 'a
         where
@@ -154,6 +163,7 @@ pub mod async_bus {
         }
 
         /// 推送事件（顺序 await 处理，模拟背压：顺序消费）
+        /// （order await ，backpressure ：order ）
         pub async fn run_with_backpressure(&self, events: &[String]) {
             for e in events {
                 self.handler.on_event(e).await;
@@ -161,6 +171,7 @@ pub mod async_bus {
         }
 
         /// 处理事件，遇到取消信号则提前返回
+        /// ，to before
         pub async fn run_until_cancel(&self, events: &[String], cancel: bool) {
             for e in events {
                 if cancel {
@@ -171,6 +182,7 @@ pub mod async_bus {
         }
 
         /// 依据背压策略处理事件
+        /// basis backpressure strategy
         pub async fn run_with_strategy(&self, events: &[String], strategy: BackpressureStrategy) {
             match strategy {
                 BackpressureStrategy::Block => {
@@ -199,7 +211,9 @@ pub mod async_bus {
         }
 
         /// 带超时取消（顺序驱动的计数截止模拟）
+        /// （order driver ）
         /// max_events 作为超时阈值的无运行时近似（处理达到阈值即视为超时）。
+        /// max_events as runtime （to as ）。
         pub async fn run_with_timeout_like(&self, events: &[String], max_events: usize) {
             for (count, e) in events.iter().enumerate() {
                 if count >= max_events {

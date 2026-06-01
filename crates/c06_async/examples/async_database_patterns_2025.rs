@@ -9,8 +9,11 @@ use tracing::{debug, info};
 //use std::sync::atomic::{AtomicUsize, AtomicU64, Ordering};
 
 /// 2025年异步数据库模式演示
+/// 2025async database demonstration
 /// 展示最新的异步数据库编程模式和最佳实践
+/// async database and
 /// 1. 异步数据库连接池
+/// 1. async database connection pool
 #[derive(Debug, Clone)]
 pub struct AsyncDatabasePool {
     connections: Arc<RwLock<Vec<DatabaseConnection>>>,
@@ -295,6 +298,7 @@ pub struct QueryResult {
 }
 
 /// 2. 异步数据库事务管理器
+/// 2. async database transaction
 #[derive(Debug, Clone)]
 pub struct AsyncTransactionManager {
     pool: AsyncDatabasePool,
@@ -504,6 +508,7 @@ impl TransactionHandle {
 }
 
 /// 3. 异步数据库缓存系统
+/// 3. async database system
 #[derive(Debug, Clone)]
 pub struct AsyncDatabaseCache {
     cache_store: Arc<RwLock<HashMap<String, CacheEntry>>>,
@@ -701,6 +706,7 @@ impl AsyncDatabaseCache {
 }
 
 /// 4. 异步数据库查询优化器
+/// 4. async database optimizer
 #[derive(Debug, Clone)]
 pub struct AsyncQueryOptimizer {
     query_cache: AsyncDatabaseCache,

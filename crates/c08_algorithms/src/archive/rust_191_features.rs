@@ -1,21 +1,34 @@
 //! Rust 1.91 算法特性实现模块（历史版本）
+//! Rust 1.91 algorithm feature module （this ）
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//! ⚠️ **this ** - this as reference
 //!
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //!
 //! 本模块展示了 Rust 1.91 在算法实现场景中的应用，包括：
+//! This module demonstrates Rust 1.91 in algorithm scenario in application ，：
 //! - const 上下文增强（算法常量配置计算）
+//! - const on under （algorithm constant ）
 //! - 新的稳定 API（算法数据处理）
+//! - API（algorithm ）
 //! - JIT 编译器优化（算法性能提升）
+//! - JIT optimization （algorithm performance ）
 //! - 内存分配器优化（算法数据结构优化）
+//! - allocator optimization （algorithm data structure optimization ）
 //! - 异步迭代器改进（并行算法性能提升）
+//! - async （parallel algorithm performance ）
 //!
 //! # 文件信息
+//! #
 //! - 文件: rust_191_features.rs
 //! - 创建日期: 2025-01-27
+//! - date : 2025-01-27
 //! - 版本: 1.0
+//! - this : 1.0
 //! - Rust版本: 1.91.0
+//! - Rustthis : 1.91.0
 //! - Edition: 2024
 use std::io::{BufRead, BufReader, Cursor};
 use std::ops::ControlFlow;
@@ -23,10 +36,13 @@ use std::ops::ControlFlow;
 // ==================== 1. const 上下文增强在算法配置中的应用 ====================
 
 /// Rust 1.91 const 上下文增强在算法配置中的应用
+/// Rust 1.91 const on under in algorithm in application
 pub mod const_algorithm_config {
     /// 算法配置系统
+    /// algorithm system
     ///
     /// 使用 Rust 1.91 的 const 上下文增强进行编译时配置计算
+    /// Rust 1.91 const on under compile-time
     pub struct AlgorithmConfigSystem;
 
     impl AlgorithmConfigSystem {
@@ -55,8 +71,10 @@ pub mod const_algorithm_config {
     }
 
     /// 数学常量配置
+    /// constant
     ///
     /// 使用 const 上下文计算数学常量
+    /// const on under constant
     pub struct MathConstants;
 
     impl MathConstants {
@@ -78,6 +96,7 @@ pub mod const_algorithm_config {
     }
 
     /// 计算斐波那契数列（编译时）
+    /// （compile-time ）
     pub const fn fibonacci(n: u32) -> u32 {
         match n {
             0 => 0,
@@ -87,6 +106,7 @@ pub mod const_algorithm_config {
     }
 
     /// 使用 const 上下文增强计算斐波那契数列
+    /// const on under
     pub fn demonstrate_fibonacci() {
         println!("\n=== Const 上下文斐波那契计算 ===");
 
@@ -102,12 +122,15 @@ pub mod const_algorithm_config {
 // ==================== 2. 新的稳定 API 在算法中的应用 ====================
 
 /// Rust 1.91 新的稳定 API 在算法中的应用
+/// Rust 1.91 API in algorithm in application
 pub mod algorithm_new_apis {
     use super::*;
 
     /// 使用 BufRead::skip_while 解析算法输入数据
+    /// BufRead::skip_while algorithm
     ///
     /// Rust 1.91 新增：跳过满足条件的字节
+    /// Rust 1.91 ：condition
     pub fn parse_algorithm_input<R: BufRead>(reader: &mut R) -> Result<Vec<i32>, std::io::Error> {
         let mut numbers = Vec::new();
         let mut buf = String::new();
@@ -131,8 +154,10 @@ pub mod algorithm_new_apis {
     }
 
     /// 使用改进的 ControlFlow 进行算法验证
+    /// ControlFlow algorithm
     ///
     /// Rust 1.91 改进了 ControlFlow，可以携带更详细的错误信息
+    /// Rust 1.91 ControlFlow，can error message
     pub fn validate_algorithm_input(
         data: &[i32],
         min_value: i32,
@@ -154,6 +179,7 @@ pub mod algorithm_new_apis {
     }
 
     /// 使用 ControlFlow 进行算法边界检查
+    /// ControlFlow algorithm edge
     pub fn check_algorithm_bounds(array: &[i32], index: usize) -> ControlFlow<String, i32> {
         if index >= array.len() {
             return ControlFlow::Break(format!("索引 {} 超出数组长度 {}", index, array.len()));
@@ -165,28 +191,36 @@ pub mod algorithm_new_apis {
 // ==================== 3. JIT 编译器优化在算法中的应用 ====================
 
 /// Rust 1.91 JIT 编译器优化在算法中的应用
+/// Rust 1.91 JIT optimization in algorithm in application
 ///
 /// Rust 1.91 对迭代器操作进行了优化，算法性能提升 10-25%
+/// Rust 1.91 to optimization ，algorithm performance 10-25%
 pub mod algorithm_jit_optimizations {
     /// 简单求和算法
+    /// simple and algorithm
     ///
     /// Rust 1.91 JIT 优化：简单求和操作性能提升约 10-15%
+    /// Rust 1.91 JIT optimization ：simple and performance 10-15%
     pub fn sum_array(v: &[i32]) -> i32 {
         // Rust 1.91 优化：在 JIT 模式下性能提升
         v.iter().sum()
     }
 
     /// 复杂链式算法操作
+    /// complex algorithm
     ///
     /// Rust 1.91 JIT 优化：复杂链式操作性能提升约 15-25%
+    /// Rust 1.91 JIT optimization ：complex performance 15-25%
     pub fn process_algorithm_data(v: &[i32]) -> Vec<i32> {
         // Rust 1.91 优化：链式迭代器在 JIT 模式下性能提升更明显
         v.iter().map(|x| x * 2).filter(|&x| x > 10).collect()
     }
 
     /// 嵌套迭代器算法操作
+    /// algorithm
     ///
     /// Rust 1.91 JIT 优化：嵌套迭代器性能提升约 20-30%
+    /// Rust 1.91 JIT optimization ：performance 20-30%
     pub fn complex_algorithm_processing(data: &[Vec<i32>]) -> Vec<i32> {
         data.iter()
             .flatten() // 扁平化
@@ -197,6 +231,7 @@ pub mod algorithm_jit_optimizations {
     }
 
     /// 排序算法性能演示
+    /// sorting algorithm performance demonstration
     pub fn demonstrate_algorithm_performance() {
         println!("\n=== 算法 JIT 优化演示 ===");
 
@@ -218,12 +253,16 @@ pub mod algorithm_jit_optimizations {
 // ==================== 4. 内存分配器优化在算法数据结构中的应用 ====================
 
 /// Rust 1.91 内存分配器优化在算法数据结构中的应用
+/// Rust 1.91 allocator optimization in algorithm data structure in application
 ///
 /// Rust 1.91 改进了内存分配器，小对象分配性能提升 25-30%
+/// Rust 1.91 allocator ，to performance 25-30%
 pub mod algorithm_memory_optimizations {
     /// 创建小对象用于算法数据结构
+    /// to algorithm data structure
     ///
     /// Rust 1.91 优化：小对象（< 32 bytes）分配性能提升约 25-30%
+    /// Rust 1.91 optimization ：to （< 32 bytes）performance 25-30%
     pub fn create_small_algorithm_objects() -> Vec<Vec<i32>> {
         let mut vec = Vec::new();
         // Rust 1.91 优化：频繁的小对象分配更加高效
@@ -234,8 +273,10 @@ pub mod algorithm_memory_optimizations {
     }
 
     /// 处理算法输入数据
+    /// algorithm
     ///
     /// Rust 1.91 优化：在频繁的小对象分配场景下性能提升
+    /// Rust 1.91 optimization ：in to scenario under performance
     pub fn parse_algorithm_data(data: &str) -> Vec<i32> {
         data.split_ascii_whitespace()
             .filter_map(|s| s.parse::<i32>().ok())
@@ -243,6 +284,7 @@ pub mod algorithm_memory_optimizations {
     }
 
     /// 内存优化演示
+    /// memory optimization demonstration
     pub fn demonstrate_memory_optimizations() {
         println!("\n=== 算法数据结构内存优化演示 ===");
 
@@ -258,14 +300,18 @@ pub mod algorithm_memory_optimizations {
 // ==================== 5. 异步迭代器改进在并行算法中的应用 ====================
 
 /// Rust 1.91 异步迭代器改进在并行算法中的应用
+/// Rust 1.91 async in parallel algorithm in application
 ///
 /// Rust 1.91 对异步迭代器进行了优化，性能提升约 15-20%
+/// Rust 1.91 to async optimization ，performance 15-20%
 pub mod algorithm_async_improvements {
     use futures::stream::{self, Stream, StreamExt};
 
     /// 异步处理算法数据流
+    /// async algorithm stream
     ///
     /// Rust 1.91 优化：异步迭代器性能提升约 15-20%
+    /// Rust 1.91 optimization ：async performance 15-20%
     pub async fn process_async_algorithm_stream<S>(stream: S) -> Vec<i32>
     where
         S: Stream<Item = i32> + Send,
@@ -281,6 +327,7 @@ pub mod algorithm_async_improvements {
     }
 
     /// 异步算法性能演示
+    /// async algorithm performance demonstration
     pub async fn demonstrate_async_improvements() {
         println!("\n=== 并行算法异步改进演示 ===");
 
@@ -297,10 +344,12 @@ pub mod algorithm_async_improvements {
 // ==================== 6. 标准库新 API 在算法中的应用 ====================
 
 /// Rust 1.91 标准库新 API 在算法中的应用
+/// Rust 1.91 standard library API in algorithm in application
 pub mod algorithm_std_new_apis {
     /// str::split_ascii_whitespace 示例
     ///
     /// Rust 1.91 新增：仅处理 ASCII 空白字符，性能更好
+    /// Rust 1.91 ： ASCII ，performance
     pub fn parse_algorithm_input(text: &str) -> Vec<&str> {
         text.split_ascii_whitespace().collect()
     }
@@ -308,6 +357,7 @@ pub mod algorithm_std_new_apis {
     /// Vec::try_reserve_exact 示例
     ///
     /// Rust 1.91 新增：尝试精确分配容量，可能失败
+    /// Rust 1.91 ：，may
     pub fn allocate_algorithm_buffer(
         size: usize,
     ) -> Result<Vec<i32>, std::collections::TryReserveError> {
@@ -317,6 +367,7 @@ pub mod algorithm_std_new_apis {
     }
 
     /// 标准库新 API 演示
+    /// standard library API demonstration
     pub fn demonstrate_std_new_apis() {
         println!("\n=== 标准库新 API 演示 ===");
 
@@ -343,14 +394,18 @@ pub mod algorithm_std_new_apis {
 // ==================== 7. 综合应用示例 ====================
 
 /// Rust 1.91 综合应用示例模块
+/// Rust 1.91 synthesize application example module
 ///
 /// 结合多个 Rust 1.91 特性的实际算法场景
+/// Rust 1.91 feature actual algorithm scenario
 pub mod comprehensive_algorithm_examples {
     use super::*;
 
     /// 综合算法管理系统
+    /// synthesize algorithm system
     ///
     /// 使用 const 上下文增强和新的 API
+    /// const on under and API
     pub struct ComprehensiveAlgorithmSystem;
 
     impl ComprehensiveAlgorithmSystem {
@@ -373,8 +428,10 @@ pub mod comprehensive_algorithm_examples {
     }
 
     /// 高性能算法数据处理管道
+    /// performance algorithm pipe
     ///
     /// 利用 JIT 优化和内存分配改进
+    /// JIT optimization and memory
     pub fn process_algorithm_data_pipeline(data: &[Vec<i32>]) -> Vec<i32> {
         // Rust 1.91 JIT 优化：链式迭代器性能提升约 20-25%
         data.iter()
@@ -386,8 +443,10 @@ pub mod comprehensive_algorithm_examples {
     }
 
     /// 配置文件解析示例
+    /// example
     ///
     /// 使用新的 API 解析算法配置
+    /// API algorithm
     pub fn parse_algorithm_config(config_text: &str) -> Vec<String> {
         let mut cursor = Cursor::new(config_text.as_bytes());
         let mut reader = BufReader::new(&mut cursor);
@@ -417,6 +476,7 @@ pub mod comprehensive_algorithm_examples {
 // ==================== 公开 API ====================
 
 /// Rust 1.91 算法特性演示入口
+/// Rust 1.91 algorithm feature demonstration
 pub fn demonstrate_rust_191_algorithm_features() {
     println!("========================================");
     println!("Rust 1.91 算法特性演示");

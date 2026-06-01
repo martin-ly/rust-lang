@@ -1,25 +1,19 @@
-//! Rust 1.95.0 PowerPC / PowerPC64 内联汇编专题示例
-//!
-//! Rust 1.95.0 稳定化了 PowerPC 和 PowerPC64 架构的内联汇编支持。
-//! 本示例展示在 `#[cfg(target_arch = "powerpc64")]` 条件下的汇编代码，
 //! 并附带 x86_64 回退实现，确保在所有平台上可编译运行。
-//!
+//! and x86_64 ，in all platform on Run 。
 //! 权威来源: https://releases.rs/docs/1.95.0/
-//!
+//! 权威source: https://releases.rs/docs/1.95.0/
 //! 运行方式:
-//! ```bash
-//! # 在 PowerPC64 目标上:
-//! cargo run --example ppc_asm_demo -p c11_macro_system --target powerpc64-unknown-linux-gnu
+//! Run way :
 //!
 //! # 在其他目标上（使用回退实现）:
-//! cargo run --example ppc_asm_demo -p c11_macro_system
-//! ```
+//! # in its goal on （）:
 
 use std::arch::asm;
 
 // ==================== 平台抽象层 ====================
 
 /// 获取当前架构名称
+/// when before architecture
 #[inline(always)]
 fn arch_name() -> &'static str {
     cfg_select! {
@@ -32,8 +26,6 @@ fn arch_name() -> &'static str {
 }
 
 /// 内存屏障（Memory Fence）
-///
-/// PowerPC 使用 `sync` 指令实现全内存屏障。
 #[inline(always)]
 fn memory_fence() {
     cfg_select! {
@@ -50,9 +42,9 @@ fn memory_fence() {
 }
 
 /// 获取时间戳计数器（Time Base Register）
-///
-/// PowerPC 使用 `mftb` 指令读取时间基准寄存器。
+/// time （Time Base Register）
 /// 返回一个 64 位时间戳值。
+/// 64 time 。
 #[inline(always)]
 fn read_timestamp() -> u64 {
     cfg_select! {
@@ -107,6 +99,7 @@ fn read_timestamp() -> u64 {
 }
 
 /// 无操作（NOP）
+/// （NOP）
 #[inline(always)]
 #[allow(dead_code)]
 fn arch_nop() {
@@ -122,8 +115,7 @@ fn arch_nop() {
 }
 
 /// 读取 CPU 标识信息
-///
-/// PowerPC 使用 `mfspr` 读取特殊功能寄存器。
+/// CPU
 #[inline(always)]
 fn read_processor_version() -> u32 {
     cfg_select! {
@@ -207,9 +199,6 @@ fn demo_processor_version() {
 
 // ==================== 示例 4: 原子自增（使用内联汇编） ====================
 
-/// 使用 PowerPC `lwarx` / `stwcx.` 指令实现原子自增
-///
-/// 这是 PowerPC 的 LL/SC（Load-Link / Store-Conditional）原语。
 #[inline(always)]
 fn atomic_increment_ppc(addr: &mut u32) -> u32 {
     cfg_select! {

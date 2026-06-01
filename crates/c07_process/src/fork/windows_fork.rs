@@ -3,17 +3,20 @@ use crate::error::Result;
 
 /// Windows平台的fork实现
 /// 由于Windows不支持fork，这里提供基于CreateProcess的替代方案
+/// Windowsfork，CreateProcess
 pub struct WindowsFork {
     is_child: bool,
 }
 
 impl WindowsFork {
     /// 创建新的Windows fork实例
+    /// Windows fork
     pub fn new() -> Self {
         Self { is_child: false }
     }
 
     /// 创建子进程（Windows上的替代方案）
+    /// process （Windowson ）
     pub fn create_child(&self) -> Result<ForkResult> {
         // Windows上使用CreateProcess创建子进程
         // 这里返回Failed，因为Windows不支持真正的fork

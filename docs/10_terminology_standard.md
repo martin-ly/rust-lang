@@ -18,7 +18,7 @@
 > **[来源: Rust Official Docs]**
 
 - [Rust 术语标准化文档](#rust-术语标准化文档)
-  - [📋 目录](#目录)
+  - [📋 目录](#-目录)
   - [简介](#简介)
     - [术语表使用说明](#术语表使用说明)
   - [所有权相关术语](#所有权相关术语)
@@ -36,7 +36,7 @@
   - [更新历史](#更新历史)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -178,7 +178,7 @@
 | 上下文 | Context | 传递给 `poll` 方法的异步执行上下文，包含 waker | Reference Ch 37.1 |
 | Waker | Waker | 通知执行器 Future 可以再次轮询的机制 | Reference Ch 37.1 |
 | 执行器 | Executor | 管理和调度 Future 执行运行时的组件 | The Book Ch 17.3 |
-| 运行时 | Runtime | 提供异步执行环境的库（如 Tokio、async-std） | The Book Ch 17.3 |
+| 运行时 | Runtime | 提供异步执行环境的库（如 Tokio、async-std [已归档]） | The Book Ch 17.3 |
 | 反应器 | Reactor | 监听 I/O 事件并唤醒对应 waker 的运行时组件 | Reference Ch 37.1 |
 | 任务 | Task | 异步运行时调度的执行单元，通常是顶层的 Future | The Book Ch 17.3 |
 | 阻塞操作 | Blocking Operation | 会阻塞当前线程直到完成的操作，不应在异步上下文中执行 | The Book Ch 17.3 |

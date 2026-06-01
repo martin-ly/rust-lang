@@ -1,5 +1,5 @@
 # Rust 异步生态系统综合演示运行脚本
-# 本脚本演示了 std、smol、async-std、tokio 等异步库的全面特性
+# 本脚本演示了 std、tokio、smol 等异步库的全面特性
 
 Write-Host "🚀 Rust 异步生态系统综合演示" -ForegroundColor Green
 Write-Host "================================================" -ForegroundColor Yellow

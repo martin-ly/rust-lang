@@ -10,6 +10,7 @@ use tokio::{
 };
 
 /// 入口：多线程 Tokio 运行时。生产环境建议结合 CPU 配额调整线程数。
+/// ：thread Tokio runtime 。environment CPU thread 。
 #[tokio::main(flavor = "multi_thread")]
 async fn main() -> Result<()> {
     // 结构化日志（开发环境使用人类可读格式；生产可输出 JSON）
@@ -25,7 +26,6 @@ async fn main() -> Result<()> {
     Ok(())
 }
 
-/// 超时与取消：timeout 只说明未在时限内完成，不保证任务“已停止”。
 async fn basic_timeout() {
     let slow = async { tokio::time::sleep(Duration::from_millis(500)).await };
     let res = timeout(Duration::from_millis(50), slow).await;
@@ -33,6 +33,7 @@ async fn basic_timeout() {
 }
 
 /// 背压：使用有界队列并匹配消费速率，避免生产过快导致 OOM。
+/// backpressure ：and ， OOM。
 async fn mpsc_backpressure() {
     let (tx, mut rx) = mpsc::channel::<u64>(256);
     let prod = tokio::spawn(async move {
@@ -50,7 +51,6 @@ async fn mpsc_backpressure() {
     let _ = tokio::join!(prod, cons);
 }
 
-/// 并发限流：信号量与 JoinSet 控制并发上限与结果收割。
 async fn limited_concurrency(n: usize) -> Result<()> {
     async fn work(i: usize) -> Result<usize> {
         Ok(i * 2)
@@ -72,7 +72,6 @@ async fn limited_concurrency(n: usize) -> Result<()> {
     Ok(())
 }
 
-/// 最小 echo 服务器：注意错误处理与连接的生命周期。
 async fn echo_server(addr: &str) -> Result<()> {
     let listener = TcpListener::bind(addr).await?;
     let local = listener.local_addr()?;

@@ -1,26 +1,36 @@
 //! LeetCode 树类算法（结合 Rust 1.91 特性）
+//! LeetCode tree algorithm （ Rust 1.91 feature ）
 //!
 //! 本模块实现经典的树类 LeetCode 题目，充分利用 Rust 1.91 的新特性。
+//! this module tree LeetCode ， Rust 1.91 feature 。
 //!
 //! ## Rust 1.91 特性应用
+//! ## Rust 1.91 feature application
 //!
 //! - **JIT 优化**: 树遍历操作性能提升 10-15%
+//! - **JIT optimization **: tree performance 10-15%
 //! - **内存优化**: 使用递归和迭代优化的空间复杂度
+//! - **memory optimization **: and optimization space complexity
 //! - **递归优化**: 尾递归优化和迭代器优化
+//! - **optimization **: optimization and optimization
 //!
 //! ## 包含的经典题目
+//! ##
 //!
 //! - 94. Binary Tree Inorder Traversal（二叉树的中序遍历）
 //! - 100. Same Tree（相同的树）
+//! - 100. Same Tree（tree ）
 //! - 101. Symmetric Tree（对称二叉树）
 //! - 104. Maximum Depth of Binary Tree（二叉树的最大深度）
 //! - 110. Balanced Binary Tree（平衡二叉树）
 //! - 111. Minimum Depth of Binary Tree（二叉树的最小深度）
 //! - 112. Path Sum（路径总和）
+//! - 112. Path Sum（and ）
 //! - 144. Binary Tree Preorder Traversal（二叉树的前序遍历）
 //! - 145. Binary Tree Postorder Traversal（二叉树的后序遍历）
 //! - 226. Invert Binary Tree（翻转二叉树）
 //! - 235. Lowest Common Ancestor（二叉搜索树的最近公共祖先）
+//! - 235. Lowest Common Ancestor（tree ）
 //! - 543. Diameter of Binary Tree（二叉树的直径）
 //! - 617. Merge Two Binary Trees（合并二叉树）
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
@@ -28,6 +38,7 @@ use std::cell::RefCell;
 use std::rc::Rc;
 
 /// LeetCode 标准二叉树节点定义
+/// LeetCode standard binary tree node definition
 #[derive(Debug, PartialEq, Eq)]
 pub struct TreeNode {
     pub val: i32,
@@ -49,15 +60,23 @@ impl TreeNode {
 /// 104. Maximum Depth of Binary Tree（二叉树的最大深度）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给定一个二叉树，找出其最大深度。二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。
+/// binary tree ，its maximum 。binary tree as node to node on node 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 递归遍历性能提升
+/// - **JIT optimization **: performance
 /// - **内存优化**: 使用递归栈，O(h) 空间复杂度
+/// - **memory optimization **: stack ，O(h) space complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(h)，其中 h 是树的高度
+/// - space complexity : O(h)，its in h tree
 pub fn max_depth(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
     match root {
         None => 0,
@@ -71,17 +90,26 @@ pub fn max_depth(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
 }
 
 /// 100. Same Tree（相同的树）
+/// 100. Same Tree（tree ）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给你两棵二叉树的根节点 `p` 和 `q`，编写一个函数来检验这两棵树是否相同。
+/// binary tree node `p` and `q`，function tree 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 递归遍历性能提升
+/// - **JIT optimization **: performance
 /// - **内存优化**: O(h) 空间复杂度
+/// - **memory optimization **: O(h) space complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(h)
+/// - space complexity : O(h)
 pub fn is_same_tree(p: Option<Rc<RefCell<TreeNode>>>, q: Option<Rc<RefCell<TreeNode>>>) -> bool {
     match (p, q) {
         (None, None) => true,
@@ -99,15 +127,23 @@ pub fn is_same_tree(p: Option<Rc<RefCell<TreeNode>>>, q: Option<Rc<RefCell<TreeN
 /// 101. Symmetric Tree（对称二叉树）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给你一个二叉树的根节点 `root`，检查它是否轴对称。
+/// binary tree node `root`，axis to 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 递归遍历性能提升
+/// - **JIT optimization **: performance
 /// - **内存优化**: O(h) 空间复杂度
+/// - **memory optimization **: O(h) space complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(h)
+/// - space complexity : O(h)
 pub fn is_symmetric(root: Option<Rc<RefCell<TreeNode>>>) -> bool {
     match root {
         None => true,
@@ -138,16 +174,25 @@ fn is_symmetric_helper(
 /// 110. Balanced Binary Tree（平衡二叉树）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给定一个二叉树，判断它是否是高度平衡的二叉树。
+/// binary tree ，binary tree 。
 /// 一棵高度平衡二叉树定义为：一个二叉树每个节点的左右两个子树的高度差的绝对值不超过 1。
+/// balanced binary tree definition as ：binary tree node tree to 1。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 递归遍历性能提升
+/// - **JIT optimization **: performance
 /// - **内存优化**: O(h) 空间复杂度
+/// - **memory optimization **: O(h) space complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(h)
+/// - space complexity : O(h)
 pub fn is_balanced(root: Option<Rc<RefCell<TreeNode>>>) -> bool {
     is_balanced_helper(root).0
 }
@@ -172,15 +217,23 @@ fn is_balanced_helper(root: Option<Rc<RefCell<TreeNode>>>) -> (bool, i32) {
 /// 111. Minimum Depth of Binary Tree（二叉树的最小深度）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给定一个二叉树，找出其最小深度。最小深度是从根节点到最近叶子节点的最短路径上的节点数量。
+/// binary tree ，its minimum 。minimum from node to node on node quantity 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 递归遍历性能提升
+/// - **JIT optimization **: performance
 /// - **内存优化**: O(h) 空间复杂度
+/// - **memory optimization **: O(h) space complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(h)
+/// - space complexity : O(h)
 pub fn min_depth(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
     match root {
         None => 0,
@@ -199,18 +252,28 @@ pub fn min_depth(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
 }
 
 /// 112. Path Sum（路径总和）
+/// 112. Path Sum（and ）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给你二叉树的根节点 `root` 和一个表示目标和的整数 `target_sum`。
+/// binary tree node `root` and represent goal and `target_sum`。
 /// 判断该树中是否存在 **根节点到叶子节点** 的路径，这条路径上所有节点值相加等于目标和 `target_sum`。
+/// this tree in in **node to node ** ，on all node etc. goal and `target_sum`。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 递归遍历性能提升
+/// - **JIT optimization **: performance
 /// - **内存优化**: O(h) 空间复杂度
+/// - **memory optimization **: O(h) space complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(h)
+/// - space complexity : O(h)
 pub fn has_path_sum(root: Option<Rc<RefCell<TreeNode>>>, target_sum: i32) -> bool {
     match root {
         None => false,
@@ -234,15 +297,23 @@ pub fn has_path_sum(root: Option<Rc<RefCell<TreeNode>>>, target_sum: i32) -> boo
 /// 226. Invert Binary Tree（翻转二叉树）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给你一棵二叉树的根节点 `root`，翻转这棵二叉树，并返回其根节点。
+/// binary tree node `root`，binary tree ，and its node 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 递归遍历性能提升
+/// - **JIT optimization **: performance
 /// - **内存优化**: O(h) 空间复杂度
+/// - **memory optimization **: O(h) space complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(h)
+/// - space complexity : O(h)
 pub fn invert_tree(root: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> {
     match root {
         None => None,
@@ -263,16 +334,25 @@ pub fn invert_tree(root: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<Tre
 /// 543. Diameter of Binary Tree（二叉树的直径）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给你一棵二叉树的根节点，返回该树的 **直径**。
+/// binary tree node ，this tree ****。
 /// 二叉树的 **直径** 是指树中任意两个节点之间最长路径的 **长度**。这条路径可能穿过也可能不穿过根节点。
+/// binary tree **** tree in node 's ****。may may node 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 递归遍历性能提升
+/// - **JIT optimization **: performance
 /// - **内存优化**: O(h) 空间复杂度
+/// - **memory optimization **: O(h) space complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(h)
+/// - space complexity : O(h)
 pub fn diameter_of_binary_tree(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
     let mut max_diameter = 0;
 
@@ -298,16 +378,25 @@ pub fn diameter_of_binary_tree(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
 /// 617. Merge Two Binary Trees（合并二叉树）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给你两棵二叉树：`root1` 和 `root2`。想象一下，当你将其中一棵覆盖到另一棵上时，两棵树上的一些节点会重叠（而另一些不会）。
+/// binary tree ：`root1` and `root2`。imagine under ，when will its in to on ，tree on node （while ）。
 /// 你需要将这两棵树合并成一棵新二叉树。合并的规则是：如果两个节点重叠，那么将这两个节点的值相加作为合并后节点的新值；否则，不为 null 的节点将直接作为新二叉树的节点。
+/// will tree and binary tree 。and rule ：if node ，will node as and after node ；，as null node will as binary tree node 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 递归遍历性能提升
+/// - **JIT optimization **: performance
 /// - **内存优化**: O(h) 空间复杂度
+/// - **memory optimization **: O(h) space complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(h)
+/// - space complexity : O(h)
 pub fn merge_trees(
     root1: Option<Rc<RefCell<TreeNode>>>,
     root2: Option<Rc<RefCell<TreeNode>>>,
@@ -333,15 +422,23 @@ pub fn merge_trees(
 /// 94. Binary Tree Inorder Traversal（二叉树的中序遍历）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给定一个二叉树的根节点 `root`，返回它的 **中序** 遍历。
+/// binary tree node `root`， **in ** 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 迭代器操作性能提升
+/// - **JIT optimization **: performance
 /// - **内存优化**: 使用栈迭代，O(h) 空间复杂度
+/// - **memory optimization **: stack ，O(h) space complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(h)
+/// - space complexity : O(h)
 pub fn inorder_traversal(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
     let mut result = Vec::new();
     let mut stack = Vec::new();
@@ -369,15 +466,23 @@ pub fn inorder_traversal(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
 /// 144. Binary Tree Preorder Traversal（二叉树的前序遍历）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给你二叉树的根节点 `root`，返回它节点值的 **前序** 遍历。
+/// binary tree node `root`，node **before ** 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 迭代器操作性能提升
+/// - **JIT optimization **: performance
 /// - **内存优化**: 使用栈迭代，O(h) 空间复杂度
+/// - **memory optimization **: stack ，O(h) space complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(h)
+/// - space complexity : O(h)
 pub fn preorder_traversal(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
     let mut result = Vec::new();
     let mut stack = Vec::new();
@@ -405,15 +510,23 @@ pub fn preorder_traversal(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
 /// 145. Binary Tree Postorder Traversal（二叉树的后序遍历）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给你一棵二叉树的根节点 `root`，返回其节点值的 **后序** 遍历。
+/// binary tree node `root`，its node **after ** 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 迭代器操作性能提升
+/// - **JIT optimization **: performance
 /// - **内存优化**: 使用栈迭代，O(h) 空间复杂度
+/// - **memory optimization **: stack ，O(h) space complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(h)
+/// - space complexity : O(h)
 pub fn postorder_traversal(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
     let mut result = Vec::new();
     let mut stack = Vec::new();
@@ -440,17 +553,26 @@ pub fn postorder_traversal(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
 }
 
 /// 235. Lowest Common Ancestor（二叉搜索树的最近公共祖先）
+/// 235. Lowest Common Ancestor（tree ）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给定一个二叉搜索树, 找到该树中两个指定节点的最近公共祖先。
+/// tree, to this tree in node 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 递归遍历性能提升
+/// - **JIT optimization **: performance
 /// - **内存优化**: O(h) 空间复杂度，利用 BST 性质
+/// - **memory optimization **: O(h) space complexity ， BST
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(h)，其中 h 是树的高度
+/// - time complexity : O(h)，its in h tree
 /// - 空间复杂度: O(1)（迭代）或 O(h)（递归）
+/// - space complexity : O(1)（）or O(h)（）
 pub fn lowest_common_ancestor(
     root: Option<Rc<RefCell<TreeNode>>>,
     p: Option<Rc<RefCell<TreeNode>>>,
@@ -480,6 +602,7 @@ pub fn lowest_common_ancestor(
 // ==================== 问题信息注册 ====================
 
 /// 获取所有树类问题
+/// all tree problem
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {
@@ -582,6 +705,7 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
 // ==================== 测试辅助函数 ====================
 
 /// 从数组构建二叉树（用于测试）
+/// from binary tree （）
 #[cfg(test)]
 pub fn build_tree_from_vec(vals: &[Option<i32>]) -> Option<Rc<RefCell<TreeNode>>> {
     if vals.is_empty() || vals[0].is_none() {

@@ -1,34 +1,38 @@
 //! C++ 互操作概念演示
-//!
-//! `cxx` crate 提供了安全、双向的 C++/Rust 桥接。
+//! C++ concept demonstration
 //! 核心理念：
-//! - Rust 拥有共享结构体的内存安全保证
-//! - C++ 只能看到 opaque Rust 类型或共享的 trivial 类型
+//! core philosophy ：
 //! - 自动生成的桥接头文件确保 ABI 兼容
+//! - bridge ABI
 
 #[cfg(feature = "cxx-interop")]
 pub mod cxx_bridge {
-    //! 真实的 cxx 桥接需要 `#[cxx::bridge]` 模块和 build.rs 支持。
     //! 此处展示概念性结构。
+    //! this concept structure 。
 
     /// 由 cxx 生成的共享结构体概念
+    /// cxx struct concept
     #[derive(Debug, Clone, Copy)]
     pub struct SharedPoint {
         /// x 坐标
+        /// x coordinate
         pub x: f64,
         /// y 坐标
+        /// y coordinate
         pub y: f64,
     }
 
     /// Opaque C++ 类型概念
+    /// Opaque C++ type concept
     pub enum CppOpaqueType {}
 }
 
 #[cfg(not(feature = "cxx-interop"))]
 pub mod cxx_stub {
-    //! cxx feature 未启用时的占位实现
+    //! cxx feature 未启用时占位Implementation of
 
     /// cxx 桥接概念说明
+    /// cxx bridge concept explain
     pub fn explain_cxx_bridge() {
         println!(
             "cxx crate 桥接模式核心概念:\n1. 共享类型 (Shared Types): 在 #[cxx::bridge] 中定义的 \
@@ -41,6 +45,8 @@ pub mod cxx_stub {
     }
 
     /// bindgen 工作流程概念
+    /// bindgen process concept
+    /// bindgen 工作processconcept
     pub fn explain_bindgen_workflow() {
         println!(
             "bindgen 工作流程:\n1. 编写 wrapper.h 包含需要绑定的 C/C++ 头文件\n2. build.rs 中调用 \
@@ -52,6 +58,8 @@ pub mod cxx_stub {
 }
 
 /// 统一接口：cxx 桥接说明
+/// ：cxx bridge explain
+/// 统一接口：cxx bridgeexplain
 pub fn explain_cxx_bridge() {
     #[cfg(feature = "cxx-interop")]
     println!(
@@ -63,6 +71,8 @@ pub fn explain_cxx_bridge() {
 }
 
 /// 统一接口：bindgen 流程说明
+/// ：bindgen process explain
+/// 统一接口：bindgen processexplain
 pub fn explain_bindgen_workflow() {
     #[cfg(feature = "cxx-interop")]
     println!("bindgen workflow: see build.rs for details");

@@ -1,15 +1,23 @@
 //! # Rust 1.92.0 算法特性实现模块
+//! # Rust 1.92.0 algorithm feature module
 //!
 //! 本模块展示了 Rust 1.92.0 在算法实现场景中的应用，包括：
+//! This module demonstrates Rust 1.92.0 in algorithm scenario in application ，：
 //! - 新的稳定 API（`rotate_right`, `NonZero::div_ceil`）
 //! - 性能优化（迭代器方法特化）
+//! - performance optimization （method ）
 //! - 改进的 Lint 行为
+//! - Lint as
 //!
 //! # 文件信息
+//! #
 //! - 文件: rust_192_features.rs
 //! - 创建日期: 2025-12-11
+//! - date : 2025-12-11
 //! - 版本: 1.0
+//! - this : 1.0
 //! - Rust版本: 1.92.0
+//! - Rustthis : 1.92.0
 //! - Edition: 2024
 use std::collections::BTreeMap;
 use std::num::NonZeroUsize;
@@ -17,8 +25,10 @@ use std::num::NonZeroUsize;
 // ==================== 1. rotate_right 在算法中的应用 ====================
 
 /// 使用 rotate_right 实现循环移位算法
+/// rotate_right circulation algorithm
 ///
 /// Rust 1.92.0: 新增的 `rotate_right` 方法可以高效实现循环移位
+/// Rust 1.92.0: `rotate_right` method can efficient circulation
 pub fn rotate_array_right<T>(arr: &mut [T], k: usize) {
     if arr.is_empty() || k == 0 {
         return;
@@ -32,6 +42,7 @@ pub fn rotate_array_right<T>(arr: &mut [T], k: usize) {
 }
 
 /// 使用 rotate_right 实现循环缓冲区
+/// rotate_right circulation buffering
 pub struct CircularBuffer<T> {
     data: Vec<T>,
     start: usize,
@@ -46,6 +57,7 @@ impl<T> CircularBuffer<T> {
     }
 
     /// 旋转缓冲区
+    /// buffering
     pub fn rotate(&mut self, positions: usize) {
         if self.data.is_empty() {
             return;
@@ -69,8 +81,10 @@ impl<T> CircularBuffer<T> {
 // ==================== 2. NonZero::div_ceil 在算法中的应用 ====================
 
 /// 使用 NonZero::div_ceil 计算数组分块数量
+/// NonZero::div_ceil quantity
 ///
 /// Rust 1.92.0: 新增的 `div_ceil` 方法可以安全地计算向上取整除法
+/// Rust 1.92.0: `div_ceil` method can on
 pub fn calculate_chunks<T>(arr: &[T], chunk_size: NonZeroUsize) -> usize {
     // Rust 1.92.0: 使用 NonZero::div_ceil 安全计算
     let size = NonZeroUsize::new(arr.len()).unwrap_or(NonZeroUsize::new(1).unwrap());
@@ -78,6 +92,7 @@ pub fn calculate_chunks<T>(arr: &[T], chunk_size: NonZeroUsize) -> usize {
 }
 
 /// 使用 div_ceil 实现分页算法
+/// div_ceil algorithm
 pub fn calculate_pages(total_items: usize, items_per_page: NonZeroUsize) -> usize {
     if total_items == 0 {
         return 0;
@@ -91,6 +106,7 @@ pub fn calculate_pages(total_items: usize, items_per_page: NonZeroUsize) -> usiz
 // ==================== 3. 迭代器方法特化在算法中的应用 ====================
 
 /// 使用特化的迭代器比较方法
+/// method
 ///
 /// Rust 1.92.0: Iterator::eq 和 Iterator::eq_by 为 TrustedLen 迭代器特化
 pub fn compare_arrays<T: PartialEq>(arr1: &[T], arr2: &[T]) -> bool {
@@ -99,6 +115,7 @@ pub fn compare_arrays<T: PartialEq>(arr1: &[T], arr2: &[T]) -> bool {
 }
 
 /// 使用特化的迭代器比较方法比较排序结果
+/// method ordering result
 pub fn verify_sorted<T: PartialEq + Ord>(arr: &[T], expected: &[T]) -> bool {
     // Rust 1.92.0: 使用特化的 eq 方法（性能优化）
     arr.iter().eq(expected.iter())
@@ -107,6 +124,7 @@ pub fn verify_sorted<T: PartialEq + Ord>(arr: &[T], expected: &[T]) -> bool {
 // ==================== 4. 实战案例 ====================
 
 /// 案例1: 使用 rotate_right 实现轮转数组查找
+/// 1: rotate_right
 pub fn search_rotated_array(arr: &[i32], target: i32) -> Option<usize> {
     // 假设数组已经旋转，使用 rotate_right 可以恢复原始顺序
     let mut sorted = arr.to_vec();
@@ -125,6 +143,7 @@ fn find_pivot(arr: &[i32]) -> Option<usize> {
 }
 
 /// 案例2: 使用 div_ceil 实现内存对齐算法
+/// 2: div_ceil memory alignment algorithm
 pub fn align_size(size: usize, alignment: NonZeroUsize) -> usize {
     if size == 0 {
         return alignment.get();
@@ -136,6 +155,7 @@ pub fn align_size(size: usize, alignment: NonZeroUsize) -> usize {
 }
 
 /// 案例3: 使用新特性优化排序算法
+/// 3: feature optimization sorting algorithm
 pub fn optimized_merge_sort<T: Clone + Ord>(arr: &mut [T]) {
     if arr.len() <= 1 {
         return;
@@ -188,6 +208,7 @@ mod tests {
 /// Rust 1.92.0 新增：btree_map::Entry::insert_entry 和 VacantEntry::insert_entry
 ///
 /// 提供更高效的 BTreeMap 插入操作，返回插入的值的可变引用。
+/// efficient BTreeMap ，reference 。
 /// Rust 1.92.0: `Entry::insert_entry` 和 `VacantEntry::insert_entry` 已稳定
 pub fn demonstrate_btree_map_insert_entry() {
     println!("\n=== Rust 1.92.0 BTreeMap::Entry::insert_entry 演示 ===\n");
@@ -223,6 +244,7 @@ pub fn demonstrate_btree_map_insert_entry() {
 }
 
 /// 使用 insert_entry 实现高效的缓存更新
+/// insert_entry efficient
 pub struct Cache<K, V> {
     data: BTreeMap<K, V>,
 }
@@ -241,6 +263,7 @@ impl<K: Ord, V> Cache<K, V> {
     }
 
     /// 插入或更新缓存项（使用 insert_entry 优化）
+    /// or （ insert_entry optimization ）
     pub fn insert_or_update(&mut self, key: K, value: V) -> &mut V {
         // Rust 1.92.0: 使用 insert_entry 避免额外的查找
         self.data.entry(key).insert_entry(value).into_mut()

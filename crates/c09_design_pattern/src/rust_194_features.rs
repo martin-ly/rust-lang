@@ -1,29 +1,41 @@
 //! Rust 1.94.0 设计模式特性实现模块
+//! Rust 1.94.0 design feature module
 //!
 //! 本模块展示了 Rust 1.94.0 真实特性在设计模式场景中的应用，包括：
+//! This module demonstrates Rust 1.94.0 real feature in design scenario in application ，：
 //! - array_windows - 切片数组窗口迭代器
+//! - array_windows -
 //! - LazyCell/LazyLock 新方法 - get(), get_mut(), force_mut()
 //! - 数学常量 - EULER_GAMMA, GOLDEN_RATIO (f32/f64)
 //! - Peekable 新方法 - next_if_map(), next_if_map_mut()
 //! - char 到 usize 转换 - `TryFrom<char>` for usize
 //!
 //! # 文件信息
+//! #
 //! - 文件: rust_194_features.rs
 //! - 创建日期: 2026-03-06
+//! - date : 2026-03-06
 //! - 版本: 1.0
+//! - this : 1.0
 //! - Rust版本: 1.94.0
+//! - Rustthis : 1.94.0
 //! - Edition: 2024
 use std::sync::LazyLock;
 
 // ==================== 1. array_windows - 滑动窗口模式 ====================
 
 /// # 1. array_windows - 滑动窗口模式
+/// # 1. array_windows -
 ///
 /// Rust 1.94.0 引入了 `array_windows` 方法，可以创建固定大小的滑动窗口迭代器。
+/// Rust 1.94.0 `array_windows` method ，can 。
 /// 这在设计模式中非常有用，特别是需要处理连续数据序列的模式。
+/// in design in useful ，sequence 。
 /// 使用 array_windows 实现滑动窗口日志模式
+/// array_windows
 ///
 /// 展示如何使用 array_windows 实现一个固定大小的滑动窗口日志记录器
+/// array_windows
 #[derive(Debug, Clone)]
 pub struct SlidingWindowLogger<const N: usize> {
     logs: Vec<String>,
@@ -41,8 +53,10 @@ impl<const N: usize> SlidingWindowLogger<N> {
     }
 
     /// 获取最近的 N 条日志作为窗口
+    /// N as
     ///
     /// Rust 1.94.0: 使用 array_windows 获取固定大小的日志窗口
+    /// Rust 1.94.0: array_windows
     #[allow(dead_code)]
     pub fn recent_windows(&self) -> impl Iterator<Item = &[String; N]> {
         self.logs.array_windows::<N>()
@@ -51,6 +65,7 @@ impl<const N: usize> SlidingWindowLogger<N> {
     /// 检测连续重复的模式
     ///
     /// 使用 array_windows 检测是否有连续 N 条相同的日志
+    /// array_windows N
     pub fn detect_repeated_pattern(&self) -> bool
     where
         [String; N]:,
@@ -66,11 +81,13 @@ impl<const N: usize> SlidingWindowLogger<N> {
     }
 
     /// 获取日志数量
+    /// quantity
     pub fn len(&self) -> usize {
         self.logs.len()
     }
 
     /// 检查是否为空
+    /// as
     pub fn is_empty(&self) -> bool {
         self.logs.is_empty()
     }
@@ -83,8 +100,10 @@ impl<const N: usize> Default for SlidingWindowLogger<N> {
 }
 
 /// 使用 array_windows 实现状态机转换检测
+/// array_windows state machine conversion
 ///
 /// 展示如何在状态机模式中使用 array_windows 检测无效的状态转换
+/// in state machine in array_windows ineffective state conversion
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ConnectionState {
     Disconnected,
@@ -94,12 +113,15 @@ pub enum ConnectionState {
 }
 
 /// 状态转换检测器
+/// state conversion
 pub struct StateTransitionValidator;
 
 impl StateTransitionValidator {
     /// 验证状态转换序列是否有效
+    /// state conversion sequence effective
     ///
     /// Rust 1.94.0: 使用 array_windows 检查连续状态转换
+    /// Rust 1.94.0: array_windows state conversion
     pub fn validate_transitions(states: &[ConnectionState]) -> bool {
         if states.len() < 2 {
             return true;
@@ -112,6 +134,7 @@ impl StateTransitionValidator {
     }
 
     /// 检查单个状态转换是否有效
+    /// state conversion effective
     fn is_valid_transition(from: ConnectionState, to: ConnectionState) -> bool {
         matches!(
             (from, to),
@@ -127,12 +150,16 @@ impl StateTransitionValidator {
 // ==================== 2. LazyLock 新方法 - 单例模式优化 ====================
 
 /// # 2. LazyLock 新方法 - 单例模式优化
+/// # 2. LazyLock method - singleton optimization
 ///
 /// Rust 1.94.0 为 LazyLock 添加了新的方法：get(), get_mut(), force_mut()
 /// 这些方法使得在单例模式中更灵活地访问和修改全局状态。
+/// method in singleton in and global state 。
 /// 使用 LazyLock 实现线程安全的配置单例
+/// LazyLock thread-safe singleton
 ///
 /// Rust 1.94.0: 利用 LazyLock 的新方法实现可变的全局配置
+/// Rust 1.94.0: LazyLock method global
 pub struct GlobalConfig {
     settings: std::collections::HashMap<String, String>,
     version: u32,
@@ -162,18 +189,22 @@ impl GlobalConfig {
     }
 
     /// 获取版本号
+    /// this
     pub fn version(&self) -> u32 {
         self.version
     }
 }
 
 /// 全局配置实例 - 使用 LazyLock 实现延迟初始化
+/// global - LazyLock
 static GLOBAL_CONFIG: LazyLock<std::sync::Mutex<GlobalConfig>> =
     LazyLock::new(|| std::sync::Mutex::new(GlobalConfig::new()));
 
 /// 获取全局配置的只读访问
+/// global
 ///
 /// Rust 1.94.0: 使用 LazyLock::get() 获取已初始化的引用
+/// Rust 1.94.0: LazyLock::get() reference
 /// 通过闭包提供安全的只读访问
 pub fn with_config_readonly<F, R>(f: F) -> R
 where
@@ -184,8 +215,10 @@ where
 }
 
 /// 获取全局配置的可变访问
+/// global
 ///
 /// Rust 1.94.0: 使用 LazyLock 配合 Mutex 实现安全的可变访问
+/// Rust 1.94.0: LazyLock Mutex
 pub fn with_config<F, R>(f: F) -> R
 where
     F: FnOnce(&mut GlobalConfig) -> R,
@@ -195,8 +228,10 @@ where
 }
 
 /// 使用 LazyLock 实现缓存模式
+/// LazyLock
 ///
 /// Rust 1.94.0: 利用 LazyLock 的 force_mut() 实现可重新计算的缓存
+/// Rust 1.94.0: LazyLock force_mut()
 pub struct ComputedCache<T> {
     cache: LazyLock<T>,
     recompute_count: std::sync::atomic::AtomicUsize,
@@ -214,13 +249,16 @@ impl<T: Default + 'static> ComputedCache<T> {
     /// 获取缓存值
     ///
     /// Rust 1.94.0: 使用 LazyLock::get() 检查是否已初始化
+    /// Rust 1.94.0: LazyLock::get()
     pub fn get(&self) -> &T {
         &self.cache
     }
 
     /// 强制重新计算（需要可变引用）
+    /// （reference ）
     ///
     /// Rust 1.94.0: 使用 LazyLock 的新方法实现缓存刷新
+    /// Rust 1.94.0: LazyLock method
     #[allow(dead_code)]
     pub fn force_recompute(&mut self)
     where
@@ -241,26 +279,33 @@ impl<T: Default + 'static> ComputedCache<T> {
 // ==================== 3. 数学常量 - 工厂模式优化 ====================
 
 /// # 3. 数学常量 - 工厂模式优化
+/// # 3. constant - factory optimization
 ///
 /// Rust 1.94.0 在 f32 和 f64 上添加了 EULER_GAMMA 和 GOLDEN_RATIO 常量。
 /// 这些常量可以在工厂模式中用于几何计算和优化算法。
+/// constant can in factory in and optimization algorithm 。
 /// 黄金比例工厂
+/// factory
 ///
 /// 使用 GOLDEN_RATIO 实现基于黄金分割的工厂模式
+/// GOLDEN_RATIO factory
 pub struct GoldenRatioFactory;
 
 impl GoldenRatioFactory {
     /// 黄金比例常量（f64）
+    /// constant （f64）
     ///
     /// Rust 1.94.0: std::f64::consts::GOLDEN_RATIO
     pub const PHI_F64: f64 = std::f64::consts::GOLDEN_RATIO;
 
     /// 黄金比例常量（f32）
+    /// constant （f32）
     ///
     /// Rust 1.94.0: std::f32::consts::GOLDEN_RATIO
     pub const PHI_F32: f32 = std::f32::consts::GOLDEN_RATIO;
 
     /// 欧拉-马歇罗尼常数（f64）
+    /// -（f64）
     ///
     /// Rust 1.94.0: std::f64::consts::EULER_GAMMA
     #[allow(dead_code)]
@@ -273,6 +318,7 @@ impl GoldenRatioFactory {
     }
 
     /// 创建黄金比例螺旋上的点
+    /// on point
     pub fn golden_spiral_points(count: usize) -> Vec<(f64, f64)> {
         (0..count)
             .map(|i| {
@@ -284,13 +330,19 @@ impl GoldenRatioFactory {
     }
 
     /// 使用黄金分割搜索查找函数最小值
+    /// function minimum
     ///
     /// # Arguments
     /// * `left` - 搜索区间左边界
+    /// * `left` - interval edge
     /// * `right` - 搜索区间右边界
+    /// * `right` - interval edge
     /// * `epsilon` - 精度阈值
+    /// * `epsilon` -
     /// * `max_iterations` - 最大迭代次数，防止无限循环
+    /// * `max_iterations` - maximum ，circulation
     /// * `f` - 目标函数
+    /// * `f` - goal function
     pub fn golden_section_search<F>(
         mut left: f64,
         mut right: f64,
@@ -332,6 +384,7 @@ impl GoldenRatioFactory {
 }
 
 /// 矩形结构
+/// structure
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Rectangle {
     pub width: f64,
@@ -340,12 +393,14 @@ pub struct Rectangle {
 
 impl Rectangle {
     /// 检查是否为黄金比例矩形
+    /// as
     pub fn is_golden_ratio(&self) -> bool {
         let ratio = self.width / self.height;
         (ratio - GoldenRatioFactory::PHI_F64).abs() < 0.001
     }
 
     /// 计算面积
+    /// surface
     pub fn area(&self) -> f64 {
         self.width * self.height
     }
@@ -354,10 +409,12 @@ impl Rectangle {
 /// 欧拉常数计算器
 ///
 /// 使用 EULER_GAMMA 进行调和级数相关的计算
+/// EULER_GAMMA and
 pub struct EulerCalculator;
 
 impl EulerCalculator {
     /// 使用欧拉常数近似计算调和级数
+    /// and
     ///
     /// H_n ≈ ln(n) + γ + 1/(2n)
     pub fn approximate_harmonic(n: u64) -> f64 {
@@ -369,6 +426,7 @@ impl EulerCalculator {
     }
 
     /// 精确计算调和级数（用于对比）
+    /// and （to ）
     pub fn exact_harmonic(n: u64) -> f64 {
         (1..=n).map(|k| 1.0 / k as f64).sum()
     }
@@ -377,12 +435,16 @@ impl EulerCalculator {
 // ==================== 4. Peekable 新方法 - 迭代器模式增强 ====================
 
 /// # 4. Peekable 新方法 - 迭代器模式增强
+/// # 4. Peekable method - iterator pattern
 ///
 /// Rust 1.94.0 为 Peekable 迭代器添加了 next_if_map() 和 next_if_map_mut() 方法。
 /// 这些方法在迭代器模式中提供了更强大的条件处理能力。
+/// method in iterator pattern in condition 。
 /// 使用 Peekable 新方法实现词法分析器
+/// Peekable method analyze
 ///
 /// Rust 1.94.0: 使用 next_if_map() 简化条件解析
+/// Rust 1.94.0: next_if_map() condition
 #[derive(Debug, Clone, PartialEq)]
 pub enum Token {
     Number(f64),
@@ -393,12 +455,14 @@ pub enum Token {
 }
 
 /// 词法分析器
+/// analyze
 pub struct Lexer<'a> {
     input: std::iter::Peekable<std::str::Chars<'a>>,
 }
 
 impl<'a> Lexer<'a> {
     /// 创建新的词法分析器
+    /// analyze
     pub fn new(input: &'a str) -> Self {
         Self {
             input: input.chars().peekable(),
@@ -408,6 +472,7 @@ impl<'a> Lexer<'a> {
     /// 跳过空白字符
     ///
     /// Rust 1.94.0: 使用 next_if() 简化空白字符跳过
+    /// Rust 1.94.0: next_if()
     fn skip_whitespace(&mut self) {
         while self.input.next_if(|c| c.is_whitespace()).is_some() {}
     }
@@ -415,6 +480,7 @@ impl<'a> Lexer<'a> {
     /// 解析数字
     ///
     /// Rust 1.94.0: 使用 next_if() 简化数字解析
+    /// Rust 1.94.0: next_if()
     fn parse_number(&mut self) -> Option<f64> {
         let mut num_str = String::new();
 
@@ -441,6 +507,7 @@ impl<'a> Lexer<'a> {
     /// 解析标识符
     ///
     /// Rust 1.94.0: 使用 next_if() 简化标识符解析
+    /// Rust 1.94.0: next_if()
     fn parse_identifier(&mut self) -> Option<String> {
         let mut ident = String::new();
 
@@ -463,6 +530,7 @@ impl<'a> Lexer<'a> {
     }
 
     /// 获取下一个 token
+    /// under token
     pub fn next_token(&mut self) -> Token {
         self.skip_whitespace();
 
@@ -488,8 +556,10 @@ impl<'a> Lexer<'a> {
 }
 
 /// 使用 Peekable 实现过滤链模式
+/// Peekable
 ///
 /// Rust 1.94.0: 利用 next_if_map() 实现复杂的过滤逻辑
+/// Rust 1.94.0: next_if_map() complex
 pub struct FilterChain<I, F>
 where
     I: Iterator,
@@ -539,16 +609,20 @@ where
 // ==================== 5. char 到 usize 转换 - 解析器模式 ====================
 
 /// # 5. char 到 usize 转换 - 解析器模式
+/// # 5. char to usize conversion -
 ///
 /// Rust 1.94.0 实现了 `TryFrom<char>` for usize。
 /// 这在解析器模式中非常有用，可以将字符直接转换为索引位置。
+/// in in useful ，can will conversion as position 。
 /// 使用 char 到 usize 转换实现位置映射器
+/// char to usize conversion position
 ///
 /// Rust 1.94.0: 利用 `TryFrom<char>` for usize 简化字符位置计算
 pub struct CharPositionMapper;
 
 impl CharPositionMapper {
     /// 将字符转换为网格位置
+    /// will conversion as position
     ///
     /// Rust 1.94.0: 直接使用 TryFrom 将 char 转换为 usize
     pub fn char_to_position(c: char) -> Option<(usize, usize)> {
@@ -568,11 +642,13 @@ impl CharPositionMapper {
     }
 
     /// 将字符串转换为位置序列
+    /// will conversion as position sequence
     pub fn string_to_positions(s: &str) -> Vec<(usize, usize)> {
         s.chars().filter_map(Self::char_to_position).collect()
     }
 
     /// 计算字符的数值表示（用于哈希等）
+    /// represent （etc. ）
     ///
     /// Rust 1.94.0: 使用 `TryFrom<char>` for usize
     pub fn char_to_numeric_value(c: char) -> Option<usize> {
@@ -587,6 +663,7 @@ impl CharPositionMapper {
 }
 
 /// 使用 char 转换实现简单计算器
+/// char conversion simple
 ///
 /// Rust 1.94.0: 利用 `TryFrom<char>` for usize 解析数字字符
 pub struct SimpleCharCalculator;
@@ -606,6 +683,7 @@ impl SimpleCharCalculator {
     }
 
     /// 计算字符串中所有数字字符的和
+    /// in all and
     pub fn sum_digits(s: &str) -> usize {
         s.chars()
             .filter_map(CharPositionMapper::char_to_numeric_value)
@@ -616,6 +694,7 @@ impl SimpleCharCalculator {
 // ==================== 6. 综合应用示例 ====================
 
 /// 演示 Rust 1.94.0 设计模式特性
+/// demonstration Rust 1.94.0 design feature
 pub fn demonstrate_rust_194_design_patterns() {
     println!("\n=== Rust 1.94.0 设计模式特性演示 ===\n");
 
@@ -706,6 +785,7 @@ pub fn demonstrate_rust_194_design_patterns() {
 }
 
 /// 获取 Rust 1.94.0 设计模式特性信息
+/// Rust 1.94.0 design feature
 pub fn get_rust_194_design_pattern_info() -> String {
     "Rust 1.94.0 设计模式特性:\n- array_windows - 滑动窗口模式\n- LazyLock 新方法 - \
      单例模式优化\n- 数学常量 (EULER_GAMMA, GOLDEN_RATIO) - 工厂模式优化\n- Peekable 新方法 - \
@@ -718,6 +798,7 @@ pub fn get_rust_194_design_pattern_info() -> String {
 use std::ops::ControlFlow;
 
 /// 搜索二维数组，找到目标时提前退出
+/// ，to goal before
 pub fn search_in_matrix(matrix: &[Vec<i32>], target: i32) -> ControlFlow<(usize, usize), ()> {
     for (i, row) in matrix.iter().enumerate() {
         for (j, &val) in row.iter().enumerate() {
@@ -730,6 +811,7 @@ pub fn search_in_matrix(matrix: &[Vec<i32>], target: i32) -> ControlFlow<(usize,
 }
 
 /// 数据验证管道
+/// pipe
 pub fn validate_data(data: &str) -> ControlFlow<String, ()> {
     if data.is_empty() {
         return ControlFlow::Break("数据不能为空".to_string());
@@ -895,9 +977,12 @@ mod tests {
     // ==================== 边界测试和反例测试 ====================
 
     /// 测试全局配置线程安全
+    /// global thread-safe
     ///
     /// 验证全局配置在多线程环境下能正确工作
+    /// global in thread environment under
     /// 预期行为：多个线程同时读写配置不会导致数据竞争或 panic
+    /// as ：thread or panic
     #[test]
     fn test_global_config_thread_safety() {
         use std::sync::Arc;
@@ -962,7 +1047,9 @@ mod tests {
     /// 测试缓存淘汰
     ///
     /// 验证计算缓存的行为和"淘汰"逻辑
+    /// as and ""
     /// 预期行为：缓存应该保持值直到显式重新计算
+    /// as ：should to
     #[test]
     fn test_singleton_cache_eviction() {
         // 测试 ComputedCache 的行为
@@ -994,9 +1081,12 @@ mod tests {
     }
 
     /// 测试无效状态转换
+    /// ineffective state conversion
     ///
     /// 验证状态转换验证器能正确检测无效的状态转换
+    /// state conversion ineffective state conversion
     /// 预期行为：返回 false 对于无效转换，true 对于有效转换
+    /// as ： false to ineffective conversion ，true to effective conversion
     #[test]
     fn test_state_transition_validator_invalid() {
         // 测试无效的直接连接转换（跳过 Connecting）
@@ -1057,9 +1147,12 @@ mod tests {
     }
 
     /// 测试黄金比例工厂边界
+    /// factory edge
     ///
     /// 验证黄金比例工厂能正确处理边界值
+    /// factory edge
     /// 预期行为：正确处理零、负数和极大值输入
+    /// as ：、and
     #[test]
     fn test_golden_ratio_factory_edge_cases() {
         // 测试零宽度矩形 - 注意：0/0 是 NaN，不等于 PHI

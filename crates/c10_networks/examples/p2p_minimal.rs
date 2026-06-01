@@ -1,41 +1,48 @@
 //! P2P 网络最小示例
-//!
-//! 这个示例展示了如何使用 libp2p 创建一个简单的 P2P 网络节点
-//!
+//! P2P network minimum example
 //! ## 功能特性
-//!
+//! ## functionality feature
 //! - ✅ P2P 节点创建和身份管理
+//! - ✅ P2P node and
 //! - ✅ TCP 传输层配置
+//! - ✅ TCP transport layer
 //! - ✅ Noise 加密和 Yamux 多路复用
-//! - ✅ GossipSub 消息传播
+//! - ✅ Noise and Yamux
+//! - ✅ Noise Encryptand Yamux 多路复用
 //! - ✅ Kademlia DHT 发现
 //! - ✅ Ping 协议保活
+//! - ✅ Ping
 //! - ✅ Identify 协议节点识别
-//!
+//! - ✅ Identify node
 //! ## 运行方式
-//!
+//! ## Run way
 //! ```bash
 //! # 启动第一个节点
-//! cargo run --example p2p_minimal
-//!
+//! # first node
 //! # 在另一个终端启动第二个节点（会自动发现第一个节点）
-//! cargo run --example p2p_minimal
-//! ```
+//! # in second node （first node ）
 //!
 //! ## P2P 协议栈
-//!
+//! ## P2P stack
+//! ## P2P 协议stack
 //! 本示例使用了以下 P2P 协议：
+//! this example under P2P ：
 //! - **传输层**: TCP
+//! - **transport layer **: TCP
 //! - **安全层**: Noise
+//! - ****: Noise
 //! - **多路复用**: Yamux
-//! - **消息传播**: GossipSub
+//! - ****: Yamux
 //! - **节点发现**: Kademlia DHT
 //! - **保活机制**: Ping
+//! - **mechanism **: Ping
+//! - **保活mechanism**: Ping
 //! - **节点识别**: Identify
-//!
+//! - **node **: Identify
 //! ## 配置选项
-//!
+//! ##
 //! 可以通过环境变量配置节点：
+//! can environment variable node ：
 //! - `C10_P2P_LISTEN_ADDR`: 监听地址 (默认: /ip4/0.0.0.0/tcp/0)
 //! - `C10_P2P_TOPIC`: 订阅主题 (默认: c10-demo)
 //! - `C10_P2P_PUBLISH_INTERVAL`: 发布间隔 (默认: 5秒)

@@ -1,47 +1,70 @@
 //! LeetCode 哈希表类算法（结合 Rust 1.91 特性）
+//! LeetCode algorithm （ Rust 1.91 feature ）
 //!
 //! 本模块实现经典的哈希表类 LeetCode 题目，充分利用 Rust 1.91 的新特性。
+//! this module LeetCode ， Rust 1.91 feature 。
 //!
 //! ## Rust 1.91 特性应用
+//! ## Rust 1.91 feature application
 //!
 //! - **JIT 优化**: HashMap 操作性能提升 10-15%
+//! - **JIT optimization **: HashMap performance 10-15%
 //! - **内存优化**: 使用 HashMap 和 HashSet 高效存储
+//! - **memory optimization **: HashMap and HashSet efficient
 //! - **新的稳定 API**: 改进的集合操作
+//! - ** API**: set
 //!
 //! ## 包含的经典题目
+//! ##
 //!
 //! - 1. Two Sum（两数之和）
+//! - 1. Two Sum（'s and ）
 //! - 13. Roman to Integer（罗马数字转整数）
+//! - 13. Roman to Integer（）
 //! - 49. Group Anagrams（字母异位词分组）
+//! - 49. Group Anagrams（grouping ）
 //! - 136. Single Number（只出现一次的数字）
+//! - 136. Single Number（）
 //! - 202. Happy Number（快乐数）
 //! - 205. Isomorphic Strings（同构字符串）
 //! - 217. Contains Duplicate（存在重复元素）
 //! - 219. Contains Duplicate II（存在重复元素 II）
 //! - 242. Valid Anagram（有效的字母异位词）
+//! - 242. Valid Anagram（effective ）
 //! - 290. Word Pattern（单词规律）
 //! - 349. Intersection of Two Arrays（两个数组的交集）
 //! - 350. Intersection of Two Arrays II（两个数组的交集 II）
 //! - 383. Ransom Note（赎金信）
 //! - 389. Find the Difference（找不同）
 //! - 454. 4Sum II（四数相加 II）
+//! - 454. 4Sum II（ II）
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 use std::collections::HashMap;
 use std::collections::HashSet;
 
 /// 13. Roman to Integer（罗马数字转整数）
+/// 13. Roman to Integer（）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 罗马数字包含以下七种字符: `I`，`V`，`X`，`L`，`C`，`D` 和 `M`。
+/// under : `I`，`V`，`X`，`L`，`C`，`D` and `M`。
 /// 给定一个罗马数字，将其转换成整数。
+/// ，will its conversion 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: HashMap 查找操作性能提升
+/// - **JIT optimization **: HashMap performance
 /// - **内存优化**: 使用 HashMap 存储映射关系
+/// - **memory optimization **: HashMap
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(1)
+/// - space complexity : O(1)
 pub fn roman_to_int(s: String) -> i32 {
     // Rust 1.91: const 上下文增强（在算法中可以使用）
     let roman_map: HashMap<char, i32> = [
@@ -80,18 +103,28 @@ pub fn roman_to_int(s: String) -> i32 {
 }
 
 /// 49. Group Anagrams（字母异位词分组）
+/// 49. Group Anagrams（grouping ）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给你一个字符串数组，请你将 **字母异位词** 组合在一起。可以按任意顺序返回结果列表。
+/// ，will **** combination in 。can order result 。
 /// **字母异位词** 是由重新排列源单词的字母得到的一个新单词，所有源单词中的字母通常恰好只用一次。
+/// **** arrangement to ，all in 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: HashMap 插入和查找性能提升
+/// - **JIT optimization **: HashMap and performance
 /// - **内存优化**: 使用排序后的字符串作为键
+/// - **memory optimization **: ordering after as
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n*k*log k)，其中 n 是字符串数量，k 是字符串平均长度
+/// - time complexity : O(n*k*log k)，its in n quantity ，k
 /// - 空间复杂度: O(n*k)
+/// - space complexity : O(n*k)
 pub fn group_anagrams(strs: Vec<String>) -> Vec<Vec<String>> {
     let mut map: HashMap<String, Vec<String>> = HashMap::new();
 
@@ -108,17 +141,26 @@ pub fn group_anagrams(strs: Vec<String>) -> Vec<Vec<String>> {
 }
 
 /// 136. Single Number（只出现一次的数字）
+/// 136. Single Number（）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给你一个 **非空** 整数数组 `nums`，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。
+/// **** `nums`，element outside ，its element 。element 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 位运算操作性能提升
+/// - **JIT optimization **: performance
 /// - **内存优化**: O(1) 空间复杂度（使用位运算）
+/// - **memory optimization **: O(1) space complexity （）
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(1)
+/// - space complexity : O(1)
 pub fn single_number(nums: Vec<i32>) -> i32 {
     // Rust 1.91 JIT 优化：位运算
     nums.iter().fold(0, |acc, &x| acc ^ x)
@@ -127,17 +169,27 @@ pub fn single_number(nums: Vec<i32>) -> i32 {
 /// 202. Happy Number（快乐数）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 编写一个算法来判断一个数 `n` 是不是快乐数。
+/// algorithm `n` 。
 /// 「快乐数」定义为：对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和，然后重复这个过程直到这个数变为 1，
+/// 「」definition as ：to ，will this as position on and ，then to as 1，
 /// 也可能是 **无限循环** 但始终变不到 1。如果 **可以变为** 1，那么这个数就是快乐数。
+/// may **circulation ** but to 1。if **can as ** 1，。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: HashSet 操作性能提升
+/// - **JIT optimization **: HashSet performance
 /// - **内存优化**: 使用 HashSet 检测循环
+/// - **memory optimization **: HashSet circulation
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(log n)
+/// - time complexity : O(log n)
 /// - 空间复杂度: O(log n)
+/// - space complexity : O(log n)
 pub fn is_happy(n: i32) -> bool {
     let mut seen = HashSet::new();
     let mut num = n;
@@ -166,16 +218,25 @@ fn sum_of_squares(n: i32) -> i32 {
 /// 205. Isomorphic Strings（同构字符串）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给定两个字符串 `s` 和 `t`，判断它们是否是同构的。
+/// `s` and `t`，。
 /// 如果 `s` 中的字符可以按某种映射关系替换得到 `t`，那么这两个字符串是同构的。
+/// if `s` in can to `t`，。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 双 HashMap 操作性能提升
+/// - **JIT optimization **: HashMap performance
 /// - **内存优化**: 使用两个 HashMap 进行双向映射
+/// - **memory optimization **: HashMap
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(k)，其中 k 是字符集大小
+/// - space complexity : O(k)，its in k
 pub fn is_isomorphic(s: String, t: String) -> bool {
     if s.len() != t.len() {
         return false;
@@ -217,16 +278,24 @@ pub fn is_isomorphic(s: String, t: String) -> bool {
 /// 219. Contains Duplicate II（存在重复元素 II）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给你一个整数数组 `nums` 和一个整数 `k`，判断数组中是否存在两个 **不同的索引** `i` 和 `j`，
+/// `nums` and `k`，in in **** `i` and `j`，
 /// 满足 `nums[i] == nums[j]` 且 `abs(i - j) <= k`。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: HashMap 操作性能提升
+/// - **JIT optimization **: HashMap performance
 /// - **内存优化**: 滑动窗口 + HashMap
+/// - **memory optimization **: + HashMap
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(min(n, k))
+/// - space complexity : O(min(n, k))
 pub fn contains_nearby_duplicate(nums: Vec<i32>, k: i32) -> bool {
     let mut map: HashMap<i32, usize> = HashMap::new();
 
@@ -244,17 +313,26 @@ pub fn contains_nearby_duplicate(nums: Vec<i32>, k: i32) -> bool {
 }
 
 /// 242. Valid Anagram（有效的字母异位词）
+/// 242. Valid Anagram（effective ）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给定两个字符串 `s` 和 `t`，编写一个函数来判断 `t` 是否是 `s` 的字母异位词。
+/// `s` and `t`，function `t` `s` 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 字符频率统计性能提升
+/// - **JIT optimization **: performance
 /// - **内存优化**: 使用数组计数（固定大小）
+/// - **memory optimization **: （）
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(1)
+/// - space complexity : O(1)
 pub fn is_anagram(s: String, t: String) -> bool {
     if s.len() != t.len() {
         return false;
@@ -288,15 +366,23 @@ pub fn is_anagram(s: String, t: String) -> bool {
 /// 290. Word Pattern（单词规律）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给定一种规律 `pattern` 和一个字符串 `s`，判断 `s` 是否遵循相同的规律。
+/// `pattern` and `s`， `s` 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: HashMap 操作性能提升
+/// - **JIT optimization **: HashMap performance
 /// - **内存优化**: 使用 HashMap 进行模式匹配
+/// - **memory optimization **: HashMap
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n + m)，其中 n 是 pattern 长度，m 是 s 长度
+/// - time complexity : O(n + m)，its in n pattern ，m s
 /// - 空间复杂度: O(n)
+/// - space complexity : O(n)
 pub fn word_pattern(pattern: String, s: String) -> bool {
     let words: Vec<&str> = s.split_whitespace().collect();
 
@@ -339,15 +425,23 @@ pub fn word_pattern(pattern: String, s: String) -> bool {
 /// 349. Intersection of Two Arrays（两个数组的交集）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给定两个数组 `nums1` 和 `nums2`，返回它们的交集。输出结果中的每个元素一定是 **唯一** 的。
+/// `nums1` and `nums2`，intersection 。result in element **** 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: HashSet 操作性能提升
+/// - **JIT optimization **: HashSet performance
 /// - **内存优化**: 使用 HashSet 快速查找
+/// - **memory optimization **: HashSet fast
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n + m)
+/// - time complexity : O(n + m)
 /// - 空间复杂度: O(n + m)
+/// - space complexity : O(n + m)
 pub fn intersection(nums1: Vec<i32>, nums2: Vec<i32>) -> Vec<i32> {
     let set1: HashSet<i32> = nums1.into_iter().collect();
     let set2: HashSet<i32> = nums2.into_iter().collect();
@@ -359,16 +453,25 @@ pub fn intersection(nums1: Vec<i32>, nums2: Vec<i32>) -> Vec<i32> {
 /// 350. Intersection of Two Arrays II（两个数组的交集 II）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给你两个整数数组 `nums1` 和 `nums2`，请你以数组形式返回两数组的交集。
+/// `nums1` and `nums2`，intersection 。
 /// 返回结果中每个元素出现的次数，应与元素在两个数组中都出现的次数一致（如果出现次数不一致，则考虑取较小值）。
+/// result in element ，and element in in （if ，）。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: HashMap 操作性能提升
+/// - **JIT optimization **: HashMap performance
 /// - **内存优化**: 使用 HashMap 统计频率
+/// - **memory optimization **: HashMap
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n + m)
+/// - time complexity : O(n + m)
 /// - 空间复杂度: O(min(n, m))
+/// - space complexity : O(min(n, m))
 pub fn intersect(nums1: Vec<i32>, nums2: Vec<i32>) -> Vec<i32> {
     use std::collections::HashMap;
 
@@ -404,16 +507,25 @@ pub fn intersect(nums1: Vec<i32>, nums2: Vec<i32>) -> Vec<i32> {
 /// 389. Find the Difference（找不同）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给定两个字符串 `s` 和 `t`，它们只包含小写字母。字符串 `t` 由字符串 `s` 随机重排，然后在随机位置添加一个字母。
+/// `s` and `t`，。 `t` `s` ，then in position 。
 /// 请找出在 `t` 中被添加的字母。
+/// in `t` in is 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: 字符频率统计性能提升
+/// - **JIT optimization **: performance
 /// - **内存优化**: 使用数组计数或位运算
+/// - **memory optimization **: or
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n)
+/// - time complexity : O(n)
 /// - 空间复杂度: O(1)
+/// - space complexity : O(1)
 pub fn find_the_difference(s: String, t: String) -> char {
     // 方法1: 使用位运算（更高效）
     let mut result = 0u8;
@@ -431,19 +543,28 @@ pub fn find_the_difference(s: String, t: String) -> char {
 }
 
 /// 454. 4Sum II（四数相加 II）
+/// 454. 4Sum II（ II）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 给你四个整数数组 `nums1`、`nums2`、`nums3` 和 `nums4`，数组长度都是 `n`，请你计算有多少个元组 `(i, j, k, l)` 能满足：
+/// `nums1`、`nums2`、`nums3` and `nums4`， `n`， `(i, j, k, l)` ：
 /// - `0 <= i, j, k, l < n`
 /// - `nums1[i] + nums2[j] + nums3[k] + nums4[l] == 0`
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: HashMap 操作性能提升
+/// - **JIT optimization **: HashMap performance
 /// - **内存优化**: 分组计算，减少时间复杂度
+/// - **memory optimization **: grouping ，time complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - 时间复杂度: O(n²)
+/// - time complexity : O(n²)
 /// - 空间复杂度: O(n²)
+/// - space complexity : O(n²)
 pub fn four_sum_count(nums1: Vec<i32>, nums2: Vec<i32>, nums3: Vec<i32>, nums4: Vec<i32>) -> i32 {
     let mut map: HashMap<i32, i32> = HashMap::new();
 
@@ -472,6 +593,7 @@ pub fn four_sum_count(nums1: Vec<i32>, nums2: Vec<i32>, nums3: Vec<i32>, nums4: 
 // ==================== 问题信息注册 ====================
 
 /// 获取所有哈希表类问题
+/// all problem
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

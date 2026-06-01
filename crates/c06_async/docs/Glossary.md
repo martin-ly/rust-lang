@@ -70,7 +70,7 @@
 
 ### 运行时 (Runtime)
 
-**定义**: 一个库，提供了执行异步代码所需的服务。它包含一个或多个执行器、一个 I/O 事件反应器（如 epoll, kqueue）、定时器以及任务调度逻辑。`tokio` 和 `async-std` 是最流行的运行时。
+**定义**: 一个库，提供了执行异步代码所需的服务。它包含一个或多个执行器、一个 I/O 事件反应器（如 epoll, kqueue）、定时器以及任务调度逻辑。`tokio` 和 `async-std [已归档]` 是最流行的运行时。
 
 **相关**: [02_runtime_and_execution_model](./02_runtime_and_execution_model.md)
 

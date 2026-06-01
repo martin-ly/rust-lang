@@ -300,7 +300,7 @@ pie title WCP Rust 实现状态分布 (43 模式)
 | 模式类别 | 核心语义 | 推荐 Rust 构造 | 常用 Crates | 所有权安全要点 |
 |:---|:---|:---|:---|:---|
 | **Sequence** | 严格顺序执行 | `let` 绑定、`;` 语句序列、函数组合、`.await` 链、迭代器适配器 | `std`, `futures`, `itertools` | 所有权自然传递；前驱 `move` 后后继接管 |
-| **Parallel Split** | 单线程分裂为多条并行分支 | `tokio::spawn`, `thread::spawn`, `rayon::join`, `async { }` 块 | `tokio`, `rayon`, `async-std` | `move` 闭包分裂所有权；共享数据用 `Arc` |
+| **Parallel Split** | 单线程分裂为多条并行分支 | `tokio::spawn`, `thread::spawn`, `rayon::join`, `async { }` 块 | `tokio`, `rayon`, `async-std [已归档]` | `move` 闭包分裂所有权；共享数据用 `Arc` |
 | **Synchronization** | 所有并行分支完成后继续 | `tokio::join!`, `futures::join`, `Barrier::wait`, `mpsc::recv`, `JoinHandle::await` | `tokio`, `async-channel` | 需共享计数器或通道；注意 `cancel-safe` |
 | **Exclusive Choice** | 从多条互斥路径中恰好选择一条 | `match`（穷尽性检查）、`if-else`、 `Result`/`Option` 组合子 | `std` | 编译期保证完备性；无需运行时开销 |
 | **Multi-Choice** | 同时激活多个分支（非互斥） | `select!` + 动态守卫、`FuturesUnordered`、`JoinSet` | `tokio`, `futures` | 动态分支数 ⇒ 需 `Arc` 或 `move` 克隆 |

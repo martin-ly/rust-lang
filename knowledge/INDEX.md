@@ -59,6 +59,7 @@
 | `assert_matches!` / `debug_assert_matches!` | [06_ecosystem/emerging/05_rust_1_96.md](06_ecosystem/emerging/05_rust_1_96.md) | ✅ |
 | `core::range::{Range, RangeFrom, RangeToInclusive}` | [06_ecosystem/emerging/05_rust_1_96.md](06_ecosystem/emerging/05_rust_1_96.md) | ✅ |
 | `From<T>` for `LazyLock` / `LazyCell` / `AssertUnwindSafe` | [06_ecosystem/emerging/05_rust_1_96.md](06_ecosystem/emerging/05_rust_1_96.md) | ✅ |
+| `LazyLock` / `LazyCell` 访问器 (`get`, `get_mut`, `force_mut`) | [06_ecosystem/emerging/05_rust_1_96.md](06_ecosystem/emerging/05_rust_1_96.md) | ✅ |
 | `NonZero*` 范围迭代 (`Step` trait) | [06_ecosystem/emerging/05_rust_1_96.md](06_ecosystem/emerging/05_rust_1_96.md) | ✅ |
 | `expr` metavariable to `cfg` | [06_ecosystem/emerging/05_rust_1_96.md](06_ecosystem/emerging/05_rust_1_96.md) | ✅ |
 | `ManuallyDrop` 常量模式 | [06_ecosystem/emerging/05_rust_1_96.md](06_ecosystem/emerging/05_rust_1_96.md) | ✅ |
@@ -89,7 +90,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-- **array_windows** - [01_fundamentals/iterators.md](01_fundamentals/02_iterators.md) - Rust 1.96
+- **array_windows** - [01_fundamentals/iterators.md](01_fundamentals/02_iterators.md) - Rust 1.94
 - **async/await** - [03_advanced/async/async_await.md](03_advanced/async/01_async_await.md)
 - **async closure** - [03_advanced/async/async_closure.md](03_advanced/async/02_async_closure.md) - Rust 1.85+
 - **atomics** - [03_advanced/concurrency/atomics.md](03_advanced/concurrency/01_atomics.md)

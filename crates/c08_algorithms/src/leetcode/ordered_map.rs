@@ -1,11 +1,16 @@
 //! LeetCode 有序映射类算法（结合 Rust 1.92 特性）
+//! LeetCode algorithm （ Rust 1.92 feature ）
 //!
 //! 本模块实现经典的有序映射类 LeetCode 题目，充分利用 Rust 1.92 的新特性。
+//! this module LeetCode ， Rust 1.92 feature 。
 //!
 //! ## Rust 1.92 特性应用
+//! ## Rust 1.92 feature application
 //!
 //! 1. **性能优化**: 使用 BTreeMap 等有序映射数据结构
+//! 1. **performance optimization **: BTreeMap etc. data structure
 //! 2. **内存优化**: 高效的有序映射实现
+//! 2. **memory optimization **: efficient
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 use std::collections::BTreeMap;
 
@@ -93,6 +98,7 @@ pub fn contains_nearby_almost_duplicate(nums: Vec<i32>, k: i32, t: i32) -> bool 
 }
 
 /// 699. Falling Squares（掉落的方块）- 有序映射版本
+/// 699. Falling Squares（）- this
 pub fn falling_squares_ordered_map(positions: Vec<Vec<i32>>) -> Vec<i32> {
     let mut heights = BTreeMap::new();
     let mut result = Vec::new();
@@ -128,6 +134,7 @@ pub fn falling_squares_ordered_map(positions: Vec<Vec<i32>>) -> Vec<i32> {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有有序映射类问题
+/// all problem
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

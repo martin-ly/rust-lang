@@ -1,12 +1,15 @@
 //! 进程组管理示例
-//!
+//! process example
 //! 本示例展示如何使用C07进程管理模块进行进程组管理：
+//! this example C07process module process ：
 //! - 进程组创建
+//! - process
 //! - 进程组配置
+//! - process
 //! - 进程组操作
-//!
+//! - process
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example process_group_demo
 //! ```
 use c07_process::prelude::*;

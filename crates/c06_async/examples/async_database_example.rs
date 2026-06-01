@@ -1,6 +1,7 @@
 //! 异步数据库操作示例
-//!
+//! Async database operation example
 //! 展示如何使用异步编程进行数据库操作
+//! Demonstrates how to use async programming for database operations
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
@@ -10,6 +11,7 @@ use tokio::sync::RwLock;
 use tokio::time::sleep;
 
 /// 用户数据结构
+/// User data structure
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct User {
     pub id: u64,
@@ -19,6 +21,7 @@ pub struct User {
 }
 
 /// 数据库连接池
+/// database connection pool
 pub struct DatabaseConnectionPool {
     connections: Arc<RwLock<Vec<DatabaseConnection>>>,
     max_connections: usize,
@@ -33,6 +36,7 @@ impl DatabaseConnectionPool {
     }
 
     /// 获取数据库连接
+    /// Get database connection
     pub async fn get_connection(&self) -> Result<DatabaseConnection> {
         let mut connections = self.connections.write().await;
 
@@ -45,6 +49,7 @@ impl DatabaseConnectionPool {
     }
 
     /// 归还数据库连接
+    /// Return database connection
     pub async fn return_connection(&self, mut connection: DatabaseConnection) {
         let mut connections = self.connections.write().await;
 
@@ -56,6 +61,7 @@ impl DatabaseConnectionPool {
 }
 
 /// 数据库连接
+/// database
 pub struct DatabaseConnection {
     pub id: u64,
     pub is_active: bool,
@@ -80,6 +86,7 @@ impl DatabaseConnection {
     }
 
     /// 执行查询
+    /// Execute query
     pub async fn query(&mut self, _sql: &str) -> Result<Vec<User>> {
         // 模拟数据库查询时间
         sleep(Duration::from_millis(50)).await;
@@ -106,6 +113,7 @@ impl DatabaseConnection {
     }
 
     /// 执行插入
+    /// Execute insert
     pub async fn insert(&mut self, _user: &User) -> Result<u64> {
         // 模拟数据库插入时间
         sleep(Duration::from_millis(30)).await;
@@ -117,6 +125,7 @@ impl DatabaseConnection {
     }
 
     /// 执行更新
+    /// Execute update
     pub async fn update(&mut self, _id: u64, _user: &User) -> Result<bool> {
         // 模拟数据库更新时间
         sleep(Duration::from_millis(40)).await;
@@ -128,6 +137,7 @@ impl DatabaseConnection {
     }
 
     /// 执行删除
+    /// Execute delete
     pub async fn delete(&mut self, _id: u64) -> Result<bool> {
         // 模拟数据库删除时间
         sleep(Duration::from_millis(20)).await;
@@ -140,6 +150,7 @@ impl DatabaseConnection {
 }
 
 /// 异步用户服务
+/// Async user service
 pub struct AsyncUserService {
     connection_pool: Arc<DatabaseConnectionPool>,
     cache: Arc<RwLock<HashMap<u64, User>>>,
@@ -154,6 +165,7 @@ impl AsyncUserService {
     }
 
     /// 获取所有用户
+    /// Get all users
     pub async fn get_all_users(&self) -> Result<Vec<User>> {
         println!("🔍 查询所有用户");
 
@@ -175,6 +187,7 @@ impl AsyncUserService {
     }
 
     /// 根据ID获取用户
+    /// Get user by ID
     pub async fn get_user_by_id(&self, id: u64) -> Result<Option<User>> {
         println!("🔍 查询用户 ID: {}", id);
 
@@ -213,6 +226,7 @@ impl AsyncUserService {
     }
 
     /// 创建新用户
+    /// Create new user
     pub async fn create_user(&self, name: String, email: String) -> Result<User> {
         println!("➕ 创建新用户: {} ({})", name, email);
 
@@ -246,6 +260,7 @@ impl AsyncUserService {
     }
 
     /// 更新用户
+    /// Update user
     pub async fn update_user(&self, id: u64, name: String, email: String) -> Result<bool> {
         println!("✏️ 更新用户 ID: {}", id);
 
@@ -276,6 +291,7 @@ impl AsyncUserService {
     }
 
     /// 删除用户
+    /// Delete user
     pub async fn delete_user(&self, id: u64) -> Result<bool> {
         println!("🗑️ 删除用户 ID: {}", id);
 
@@ -299,6 +315,7 @@ impl AsyncUserService {
     }
 
     /// 批量创建用户
+    /// Batch create users
     pub async fn batch_create_users(&self, users_data: Vec<(String, String)>) -> Result<Vec<User>> {
         println!("📦 批量创建 {} 个用户", users_data.len());
 
@@ -326,6 +343,7 @@ impl AsyncUserService {
     }
 
     /// 获取缓存统计
+    /// Get cache stats
     pub async fn get_cache_stats(&self) -> (usize, Vec<u64>) {
         let cache = self.cache.read().await;
         let count = cache.len();
@@ -344,6 +362,7 @@ impl Clone for AsyncUserService {
 }
 
 /// 数据库事务示例
+/// database transaction example
 pub struct DatabaseTransaction {
     connection: DatabaseConnection,
     operations: Vec<TransactionOperation>,
@@ -409,6 +428,7 @@ impl DatabaseTransaction {
 }
 
 /// 主函数
+/// Main function
 #[tokio::main]
 async fn main() -> Result<()> {
     println!("🚀 启动异步数据库操作示例");

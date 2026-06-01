@@ -500,7 +500,7 @@ mindmap
         多线程调度
         I/O驱动
         定时器
-      async-std
+      smol
         标准库风格
         兼容性
       Smol
@@ -923,7 +923,7 @@ mindmap
       Tokio
         多线程调度
         I/O驱动
-      async-std
+      smol
         标准库风格
       Smol
         轻量级

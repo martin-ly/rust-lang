@@ -1,45 +1,57 @@
 //! # CSP 模式完整实现 2025
-//! # Comprehensive CSP (Communicating Sequential Processes) Pattern Implementation 2025
-//!
+//! # CSP complete 2025
 //! ## 📚 本示例全面涵盖
-//!
+//! ## 📚 this example surface
 //! ### 🎯 一、理论形式化 (Theoretical Formalization)
-//! - CSP 进程代数的数学定义 (Hoare 1978)
 //! - 通道语义和通信原语
+//! - channel and
 //! - 进程组合和并发操作
+//! - process combination and concurrency
 //! - 死锁检测和活性证明
-//!
+//! - lock and
 //! ### 🏗️ 二、核心数据结构 (Core Data Structures)
+//! ### 🏗️ 二、coredata structure (Core Data Structures)
 //! - Channel 类型 (bounded, unbounded, broadcast, oneshot)
 //! - Process 抽象和生命周期
+//! - Process and lifetime
+//! - Process 抽象andlifetime
 //! - Select 多路复用机制
+//! - Select mechanism
+//! - Select 多路复用mechanism
 //! - Pipeline 流水线架构
-//!
+//! - Pipeline pipeline architecture
 //! ### ⚡ 三、CSP 核心实现 (CSP Core Implementation)
 //! - 进程创建和管理
+//! - process and
 //! - 通道通信和同步
+//! - channel and synchronous
 //! - Select 语句实现
+//! - Select
+//! - Select 语句Implementation of
 //! - 超时和取消机制
-//!
+//! - and mechanism
 //! ### 🎨 四、实际应用示例 (Practical Applications)
 //! - 数据处理流水线 (Data Processing Pipeline)
+//! - 数据Handlepipeline (Data Processing Pipeline)
 //! - 分布式任务调度 (Distributed Task Scheduler)
 //! - 实时日志聚合系统 (Real-time Log Aggregation)
-//!
+//! - 实时日志aggregationsystem (Real-time Log Aggregation)
 //! ### 📊 五、示例和测试 (Examples and Tests)
 //! - 基本通信示例
+//! - this example
 //! - 高级并发模式
+//! - concurrency
 //! - 性能基准测试
-//!
+//! - Performance benchmark
 //! ## 运行方式
-//! ```bash
+//! ## Run way
 //! cargo run --example csp_pattern_comprehensive_2025
 //! ```
 //!
 //! ## 版本信息
-//! - Rust: 1.90+
-//! - Tokio: 1.41+
+//! ## this
 //! - 日期: 2025-10-06
+//! - date : 2025-10-06
 use std::collections::HashMap;
 use std::sync::Arc;
 use std::time::{Duration, Instant};
@@ -53,26 +65,24 @@ use tokio::time::{sleep, timeout};
 // ============================================================================
 
 /// # CSP 模式理论形式化
-/// # CSP Pattern Theoretical Formalization
-///
+/// # CSP theory
 /// ## 数学定义 (Mathematical Definition)
-///
+/// ## 数学definition (Mathematical Definition)
 /// ### CSP 进程代数 (CSP Process Algebra, Hoare 1978)
-/// ```text
 /// P ::= STOP                    // 停止进程 (Deadlock)
 ///     | SKIP                    // 空进程 (Successful termination)
+///     | SKIP // 空process (Successful termination)
 ///     | a → P                   // 前缀 (Prefix: event a then process P)
 ///     | P □ Q                   // 外部选择 (External choice)
 ///     | P ⊓ Q                   // 内部选择 (Internal choice)
 ///     | P ||| Q                 // 交错并行 (Interleaving)
+///     | P ||| Q // 交错parallelism (Interleaving)
 ///     | P || Q                  // 接口并行 (Interface parallel)
+///     | P || Q // 接口parallelism (Interface parallel)
 ///     | P ; Q                   // 顺序组合 (Sequential composition)
 ///     | P \ A                   // 隐藏 (Hiding)
 ///     | f(P)                    // 重命名 (Renaming)
-/// ```
-///
-/// ### Rust 中的 CSP 映射 (CSP Mapping in Rust)
-/// ```text
+///     | f(P) // 重命名 (Renaming)
 /// Channel<T> = (Sender<T>, Receiver<T>)
 /// send(ch, v) ≡ ch!v → SKIP
 /// recv(ch) ≡ ch?x → SKIP
@@ -81,103 +91,139 @@ use tokio::time::{sleep, timeout};
 /// ```
 ///
 /// ## 核心原则 (Core Principles)
-///
 /// ### 1. 通信同步 (Communication Synchronization)
+/// ### 1. 通信synchronous (Communication Synchronization)
 /// - **定义**: 发送和接收必须同步进行
+/// - **definition **: and must synchronous
 /// - **Rust 实现**: `mpsc::channel`, `oneshot::channel`
 /// - **特性**:
+/// - **feature **:
 ///   - 有界通道提供背压控制
+///   - bounded channel backpressure
 ///   - 无界通道可能导致内存问题
+///   - unbounded channel may memory problem
 ///   - 广播通道支持多播
-///
+///   - broadcast channel
 /// ### 2. 进程独立性 (Process Independence)
 /// - **定义**: 进程只通过通道通信，无共享状态
+/// - **definition **: process channel ，state
 /// - **Rust 实现**: `tokio::spawn`, `async fn`
 /// - **特性**:
+/// - **feature **:
 ///   - 每个进程拥有独立的状态
+///   - process has state
 ///   - 通过消息传递共享数据
+///   -
 ///   - 避免数据竞争
-///
+///   -
 /// ### 3. 非确定性选择 (Non-deterministic Choice)
 /// - **定义**: `select!` 宏实现多路复用
+/// - **definition **: `select!`
+/// - **definition**: `select!` 宏Implementation of多路复用
 /// - **Rust 实现**: `tokio::select!`
 /// - **特性**:
+/// - **feature **:
 ///   - 公平调度
+///   -
 ///   - 随机选择就绪分支
+///   -
 ///   - 支持超时和取消
-///
+///   - and
 /// ## 形式化性质 (Formal Properties)
-///
 /// ### 性质 1: 死锁自由 (Deadlock Freedom)
-/// ```text
 /// 定理: 如果 CSP 系统满足以下条件，则无死锁:
+/// theorem : if CSP system under condition ，lock :
 /// 1. 所有通道最终被关闭
+/// 1. all channel ultimately is
 /// 2. 所有进程最终终止或进入 STOP 状态
+/// 2. all process ultimately or STOP state
 /// 3. 不存在循环等待
-///
+/// 3. in circulation etc.
 /// 证明 (Proof):
 /// 假设存在死锁，则存在进程集合 {P1, P2, ..., Pn}，其中:
+/// hypothesize in lock ，in process set {P1, P2,..., Pn}，its in :
 /// - Pi 等待 P(i+1) 的消息 (i = 1..n-1)
+/// - Pi etc. P(i+1) (i = 1..n-1)
+/// - Pi Wait P(i+1) 消息 (i = 1..n-1)
 /// - Pn 等待 P1 的消息
-///
+/// - Pn etc. P1
+/// - Pn Wait P1 消息
 /// 但根据条件 3，不存在循环等待，矛盾。
+/// but according to condition 3，in circulation etc. ，。
 /// 因此系统无死锁。 ∎
-/// ```
-///
+/// therefore system lock 。 ∎
 /// ### 性质 2: 消息传递可靠性 (Message Delivery Reliability)
-/// ```text
 /// 定理: 在 CSP 系统中，如果发送成功，则消息最终被接收。
-///
+/// theorem : in CSP system in ，if ，ultimately is 。
 /// 证明 (Proof):
 /// 1. send(ch, v) 成功 ⟹ v 在通道缓冲区中
+/// 1. send(ch, v) ⟹ v in channel buffering in
 /// 2. 通道未关闭 ⟹ 接收者可以接收
+/// 2. channel ⟹ can
 /// 3. 接收者活跃 ⟹ 最终调用 recv(ch)
+/// 3. ⟹ ultimately recv(ch)
 /// 4. recv(ch) ⟹ 从缓冲区取出 v
+/// 4. recv(ch) ⟹ from buffering v
 /// 因此，消息 v 最终被接收。 ∎
-/// ```
-///
+/// therefore ， v ultimately is 。 ∎
 /// ### 性质 3: 公平性 (Fairness)
-/// ```text
-/// 定理: select! 宏保证公平性，即所有就绪分支有相同的被选中概率。
-///
+/// ### 3: (Fairness)
 /// 证明 (Proof):
-/// Tokio 的 select! 实现使用随机化算法:
 /// 1. 检查所有分支的就绪状态
+/// 1. all state
 /// 2. 从就绪分支中随机选择一个
+/// 2. from in
 /// 3. 执行选中的分支
-///
+/// 3. in
 /// 因此，每个就绪分支被选中的概率为 1/n (n 为就绪分支数)。 ∎
-/// ```
-///
+/// therefore ，is in as 1/n (n as )。 ∎
 /// ## CSP vs Actor vs Reactor 对比
-/// ## CSP vs Actor vs Reactor Comparison
-///
+/// ## CSP vs Actor vs Reactor to比
 /// | 特性 | CSP | Actor | Reactor |
-/// |------|-----|-------|---------|
 /// | 通信方式 | Channel (通道) | Message (消息) | Event (事件) |
+/// | way | Channel (channel ) | Message () | Event () |
+/// | 通信way | Channel (channel) | Message (消息) | Event (事件) |
 /// | 耦合度 | 低 (解耦) | 低 (解耦) | 中 (事件驱动) |
+/// | | () | () | in (event-driven ) |
+/// | 耦合度 | 低 (解耦) | 低 (解耦) | in (event-driven) |
+/// | | () | () | in (event-driven) |
 /// | 同步性 | 支持同步/异步 | 异步 | 异步 |
+/// | synchronous | synchronous /async | async | async |
 /// | 选择机制 | select! | - | - |
+/// | mechanism | select! | - | - |
+/// | 选择mechanism | select! | - | - |
 /// | 适用场景 | Pipeline, 数据流 | 并发实体, 状态机 | I/O 密集, 事件驱动 |
+/// | scenario | Pipeline, stream | concurrency volume, state machine | I/O, event-driven |
 /// | 状态管理 | 进程内部 | Actor 内部 | Handler 内部 |
+/// | state | process inside | Actor inside | Handler inside |
 /// | 容错性 | 通道关闭 | 监督树 | 错误处理 |
+/// | | channel | tree | error handling |
 /// | 性能 | 高 (零拷贝) | 中 (消息拷贝) | 高 (事件驱动) |
-///
+/// | performance | () | in () | (event-driven ) |
+/// | performance | 高 (零拷贝) | in (消息拷贝) | 高 (event-driven) |
 /// ## 优势 (Advantages)
 /// 1. **简单性**: 通道通信比共享内存简单
+/// 1. **simple **: channel shared memory simple
 /// 2. **可组合性**: 进程可以灵活组合
+/// 2. **combination **: process can combination
 /// 3. **可测试性**: 进程独立，易于测试
+/// 3. ****: process ，
 /// 4. **可扩展性**: 易于扩展到分布式系统
-///
+/// 4. ****: to distribution system
 /// ## 使用场景 (Use Cases)
+/// ## scenario (Use Cases)
 /// 1. **数据处理流水线**: 多阶段数据处理
+/// 1. **pipeline **: stage
 /// 2. **并发任务调度**: 任务分发和结果收集
+/// 2. **concurrency task **: task and result
 /// 3. **实时系统**: 传感器数据处理
-/// 4. **分布式计算**: MapReduce 等模式
+/// 3. **system **:
+/// 3. **实时system**: 传感器数据Handle
+/// 3. **system**: Handle
 pub mod theory_csp_formalization {
 
     /// 打印 CSP 理论形式化说明
-    /// Print CSP theoretical formalization
+    /// CSP theory explain
     #[allow(dead_code)]
     pub fn print_theory() {
         println!("\n╔══════════════════════════════════════════════════════════════════╗");
@@ -209,32 +255,33 @@ pub mod theory_csp_formalization {
 // ============================================================================
 
 /// 通道类型枚举
-/// Channel Type Enumeration
+/// channel type enum
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ChannelType {
     /// 有界通道 (Bounded Channel)
     /// - 固定容量，提供背压控制
-    /// - Fixed capacity, provides backpressure control
+    /// - ，backpressure
     Bounded,
 
     /// 无界通道 (Unbounded Channel)
     /// - 无限容量，可能导致内存问题
-    /// - Unlimited capacity, may cause memory issues
+    /// - ，may memory problem
     Unbounded,
 
     /// 广播通道 (Broadcast Channel)
     /// - 多个接收者，消息广播
-    /// - Multiple receivers, message broadcast
+    /// - ，
     Broadcast,
 
     /// 单次通道 (Oneshot Channel)
+    /// 单次channel (Oneshot Channel)
     /// - 单次发送和接收
-    /// - Single send and receive
+    /// - and
     Oneshot,
 }
 
 /// 进程状态
-/// Process State
+/// process state
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ProcessState {
     /// 运行中 (Running)
@@ -251,7 +298,7 @@ pub enum ProcessState {
 }
 
 /// 进程统计信息
-/// Process Statistics
+/// process
 #[derive(Debug, Clone)]
 pub struct ProcessStats {
     /// 进程 ID (Process ID)
@@ -267,6 +314,7 @@ pub struct ProcessStats {
     pub messages_received: u64,
 
     /// 运行时间 (Runtime)
+    /// runtime (Runtime)
     pub runtime: Duration,
 
     /// 启动时间 (Start time)
@@ -275,7 +323,7 @@ pub struct ProcessStats {
 
 impl ProcessStats {
     /// 创建新的进程统计
-    /// Create new process statistics
+    /// process
     pub fn new(id: String) -> Self {
         Self {
             id,
@@ -288,13 +336,12 @@ impl ProcessStats {
     }
 
     /// 更新运行时间
-    /// Update runtime
+    /// runtime
     pub fn update_runtime(&mut self) {
         self.runtime = self.start_time.elapsed();
     }
 
     /// 打印统计信息
-    /// Print statistics
     pub fn print(&self) {
         println!("📊 进程统计 [{}]:", self.id);
         println!("   状态: {:?}", self.state);
@@ -305,7 +352,7 @@ impl ProcessStats {
 }
 
 /// CSP 系统配置
-/// CSP System Configuration
+/// CSP system
 #[derive(Debug, Clone)]
 pub struct CspSystemConfig {
     /// 通道容量 (Channel capacity)
@@ -315,9 +362,9 @@ pub struct CspSystemConfig {
     pub num_processes: usize,
 
     /// 超时时间 (Timeout duration)
+    /// 超时time (Timeout duration)
     pub timeout_duration: Duration,
 
-    /// 是否启用统计 (Enable statistics)
     pub enable_stats: bool,
 }
 
@@ -338,7 +385,7 @@ impl Default for CspSystemConfig {
 // ============================================================================
 
 /// CSP 系统管理器
-/// CSP System Manager
+/// CSP system
 pub struct CspSystem {
     /// 配置 (Configuration)
     config: CspSystemConfig,
@@ -352,7 +399,7 @@ pub struct CspSystem {
 
 impl CspSystem {
     /// 创建新的 CSP 系统
-    /// Create new CSP system
+    /// CSP system
     pub fn new(config: CspSystemConfig) -> Self {
         Self {
             config,
@@ -362,7 +409,7 @@ impl CspSystem {
     }
 
     /// 注册进程
-    /// Register process
+    /// process
     pub async fn register_process(&self, id: String) {
         if self.config.enable_stats {
             let mut stats = self.stats.lock().await;
@@ -371,7 +418,7 @@ impl CspSystem {
     }
 
     /// 更新进程统计
-    /// Update process statistics
+    /// process
     pub async fn update_stats<F>(&self, id: &str, update_fn: F)
     where
         F: FnOnce(&mut ProcessStats),
@@ -386,7 +433,7 @@ impl CspSystem {
     }
 
     /// 打印所有统计信息
-    /// Print all statistics
+    /// all
     pub async fn print_all_stats(&self) {
         if self.config.enable_stats {
             println!("\n╔══════════════════════════════════════════════════════════════════╗");
@@ -413,20 +460,27 @@ impl CspSystem {
 // ============================================================================
 
 /// 示例 1: 数据处理流水线
-/// Example 1: Data Processing Pipeline
-///
+/// example 1: pipeline
+/// Example of 1: 数据Handlepipeline
 /// ## 形式化描述 (Formal Description)
-/// ```text
-/// Source = generate → send!ch1 → Source
+/// ## 形式化describe (Formal Description)
 /// Transform = recv?ch1 → process → send!ch2 → Transform
 /// Sink = recv?ch2 → store → Sink
 /// Pipeline = Source ||| Transform ||| Sink
 /// ```
 ///
 /// ## 应用场景 (Use Cases)
+/// ## application scenario (Use Cases)
 /// - 日志处理: 收集 → 解析 → 存储
+/// - : → →
+/// - 日志Handle: 收集 → Parse → 存储
+/// - Handle: → Parse →
 /// - 图像处理: 读取 → 滤镜 → 编码
+/// - : → →
+/// - 图像Handle: Read → 滤镜 → Encode
 /// - 数据分析: 提取 → 转换 → 加载 (ETL)
+/// - analyze : → conversion → (ETL)
+/// - 数据analysis: 提取 → conversion → 加载 (ETL)
 pub async fn data_processing_pipeline_example() {
     println!("\n╔══════════════════════════════════════════════════════════════════╗");
     println!("║                                                                  ║");
@@ -547,20 +601,20 @@ pub async fn data_processing_pipeline_example() {
 }
 
 /// 示例 2: 分布式任务调度
-/// Example 2: Distributed Task Scheduler
-///
+/// example 2: distribution task
 /// ## 形式化描述 (Formal Description)
-/// ```text
-/// Dispatcher = recv?task_queue → select_worker → send!worker_ch → Dispatcher
+/// ## 形式化describe (Formal Description)
 /// Worker_i = recv?worker_ch → execute → send!result_ch → Worker_i
 /// Collector = recv?result_ch → aggregate → Collector
 /// System = Dispatcher ||| Worker_1 ||| ... ||| Worker_n ||| Collector
 /// ```
 ///
 /// ## 应用场景 (Use Cases)
-/// - 分布式计算: MapReduce
+/// ## application scenario (Use Cases)
 /// - 任务队列: 异步任务处理
+/// - task : async task
 /// - 负载均衡: 请求分发
+/// - :
 pub async fn distributed_task_scheduler_example() {
     println!("\n╔══════════════════════════════════════════════════════════════════╗");
     println!("║                                                                  ║");
@@ -717,11 +771,10 @@ pub async fn distributed_task_scheduler_example() {
 }
 
 /// 示例 3: 实时日志聚合系统
-/// Example 3: Real-time Log Aggregation System
-///
+/// example 3: aggregation system
+/// Example of 3: 实时日志aggregationsystem
 /// ## 形式化描述 (Formal Description)
-/// ```text
-/// Source_i = generate_log → send!log_ch → Source_i
+/// ## 形式化describe (Formal Description)
 /// Filter = recv?log_ch → filter → send!filtered_ch → Filter
 /// Aggregator = recv?filtered_ch → aggregate → send!output_ch → Aggregator
 /// Output = recv?output_ch → display → Output
@@ -729,9 +782,14 @@ pub async fn distributed_task_scheduler_example() {
 /// ```
 ///
 /// ## 应用场景 (Use Cases)
+/// ## application scenario (Use Cases)
 /// - 日志收集: 多源日志聚合
+/// - : aggregation
 /// - 监控系统: 实时指标收集
+/// - system : indicator
 /// - 告警系统: 事件过滤和聚合
+/// - system : and aggregation
+/// - 告警system: 事件Filterandaggregation
 pub async fn realtime_log_aggregation_example() {
     println!("\n╔══════════════════════════════════════════════════════════════════╗");
     println!("║                                                                  ║");
@@ -944,7 +1002,7 @@ pub async fn realtime_log_aggregation_example() {
 // ============================================================================
 
 /// 基本通信示例
-/// Basic Communication Example
+/// this example
 pub async fn basic_communication_example() {
     println!("\n╔══════════════════════════════════════════════════════════════════╗");
     println!("║                                                                  ║");
@@ -1018,7 +1076,8 @@ pub async fn basic_communication_example() {
 }
 
 /// Select 多路复用示例
-/// Select Multiplexing Example
+/// Select example
+/// Select 多路复用Example of
 pub async fn select_multiplexing_example() {
     println!("\n╔══════════════════════════════════════════════════════════════════╗");
     println!("║                                                                  ║");
@@ -1083,7 +1142,7 @@ pub async fn select_multiplexing_example() {
 }
 
 /// 性能基准测试
-/// Performance Benchmark
+/// Performance benchmark
 pub async fn performance_benchmark() {
     println!("\n╔══════════════════════════════════════════════════════════════════╗");
     println!("║                                                                  ║");

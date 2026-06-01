@@ -9,8 +9,11 @@ use tracing::{debug, error, info, warn};
 //use std::sync::atomic::{AtomicUsize, AtomicU64, AtomicBool, Ordering};
 
 /// 2025年异步物联网模式演示
+/// 2025async demonstration
 /// 展示最新的物联网异步编程模式和最佳实践
+/// async and
 /// 1. 异步物联网设备管理器
+/// 1. async
 #[derive(Debug, Clone)]
 pub struct AsyncIoTDeviceManager {
     devices: Arc<RwLock<HashMap<String, IoTDevice>>>,
@@ -356,6 +359,7 @@ impl AsyncIoTDeviceManager {
 }
 
 /// 2. 异步物联网数据处理管道
+/// 2. async pipe
 #[derive(Debug, Clone)]
 pub struct AsyncIoTDataPipeline {
     data_processors: Arc<RwLock<Vec<DataProcessor>>>,
@@ -591,6 +595,7 @@ impl AsyncIoTDataPipeline {
 }
 
 /// 3. 异步物联网监控和告警系统
+/// 3. async and system
 #[derive(Debug, Clone)]
 pub struct AsyncIoTSurveillanceSystem {
     alerts: Arc<RwLock<Vec<Alert>>>,

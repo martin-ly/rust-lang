@@ -1,28 +1,37 @@
 //! 类型状态模式（Type State Pattern）示例
-//!
-//! 本示例展示如何使用Rust的类型系统实现类型状态模式：
+//! type state （Type State Pattern）example
 //! - 使用类型参数表示状态
+//! - type parameter represent state
 //! - 状态转换的类型安全保证
+//! - state conversion type
 //! - 编译时状态验证
-//!
+//! - compile-time state
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example generic_type_state_demo
 //! ```
 
 /// 未初始化状态标记
+/// state mark
+/// 未Initializestatemark
 pub struct Uninitialized;
 
 /// 已初始化状态标记
+/// state mark
+/// 已Initializestatemark
 pub struct Initialized;
 
 /// 运行中状态标记
+/// Run in state mark
 pub struct Running;
 
 /// 已停止状态标记
+/// state mark
+/// 已Stopstatemark
 pub struct Stopped;
 
 /// 使用类型状态的状态机
+/// type state state machine
 pub struct StateMachine<S> {
     state: std::marker::PhantomData<S>,
     value: Option<i32>,
@@ -36,6 +45,7 @@ impl Default for StateMachine<Uninitialized> {
 
 impl StateMachine<Uninitialized> {
     /// 创建未初始化的状态机
+    /// state machine
     pub fn new() -> Self {
         Self {
             state: std::marker::PhantomData,
@@ -44,6 +54,7 @@ impl StateMachine<Uninitialized> {
     }
 
     /// 初始化状态机
+    /// state machine
     pub fn initialize(self, value: i32) -> StateMachine<Initialized> {
         StateMachine {
             state: std::marker::PhantomData,
@@ -54,11 +65,13 @@ impl StateMachine<Uninitialized> {
 
 impl StateMachine<Initialized> {
     /// 获取值（只能在已初始化状态下调用）
+    /// （in state under ）
     pub fn get_value(&self) -> i32 {
         self.value.unwrap()
     }
 
     /// 启动状态机
+    /// state machine
     pub fn start(self) -> StateMachine<Running> {
         StateMachine {
             state: std::marker::PhantomData,
@@ -69,11 +82,14 @@ impl StateMachine<Initialized> {
 
 impl StateMachine<Running> {
     /// 获取值（运行中状态）
+    /// （Run in state ）
+    /// Get值（Runinstate）
     pub fn get_value(&self) -> i32 {
         self.value.unwrap()
     }
 
     /// 停止状态机
+    /// state machine
     pub fn stop(self) -> StateMachine<Stopped> {
         StateMachine {
             state: std::marker::PhantomData,
@@ -84,11 +100,14 @@ impl StateMachine<Running> {
 
 impl StateMachine<Stopped> {
     /// 获取值（已停止状态）
+    /// （state ）
+    /// Get值（已Stopstate）
     pub fn get_value(&self) -> i32 {
         self.value.unwrap()
     }
 
     /// 重置状态机
+    /// state machine
     pub fn reset(self) -> StateMachine<Uninitialized> {
         StateMachine {
             state: std::marker::PhantomData,

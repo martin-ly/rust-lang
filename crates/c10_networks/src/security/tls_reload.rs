@@ -7,6 +7,7 @@ use std::sync::Arc;
 use tokio::sync::RwLock;
 
 /// 线程安全的 TLS 配置热重载容器
+/// thread-safe TLS
 #[derive(Clone)]
 pub struct TlsReloader(Arc<RwLock<ServerConfig>>);
 

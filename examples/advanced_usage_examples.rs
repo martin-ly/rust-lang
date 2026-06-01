@@ -1,10 +1,12 @@
 //! 高级用法示例集合
-//!
-//! 本文件包含各种高级Rust用法示例，展示实际应用场景
+//! example set
+//! 高级用法Example ofset
+//! This file contains various advanced Rust usage examples, demonstrating practical application scenarios.
 use std::sync::Arc;
 use std::thread;
 
 /// 高级所有权模式示例
+/// ownership example
 pub fn advanced_ownership_example() {
     println!("📦 高级所有权模式示例");
 
@@ -24,6 +26,7 @@ pub fn advanced_ownership_example() {
 }
 
 /// 高级并发模式示例
+/// concurrency example
 pub fn advanced_concurrency_example() {
     println!("\n⚡ 高级并发模式示例");
 
@@ -54,6 +57,7 @@ pub fn advanced_concurrency_example() {
 }
 
 /// 高级错误处理示例
+/// error handling example
 pub fn advanced_error_handling_example() {
     println!("\n🛡️ 高级错误处理示例");
 
@@ -84,6 +88,7 @@ pub fn advanced_error_handling_example() {
 }
 
 /// 高级类型系统示例
+/// type system example
 pub fn advanced_type_system_example() {
     println!("\n🔧 高级类型系统示例");
 
@@ -116,6 +121,7 @@ pub fn advanced_type_system_example() {
 }
 
 /// 高级性能优化示例
+/// performance optimization example
 pub fn advanced_performance_example() {
     println!("\n⚡ 高级性能优化示例");
 
@@ -139,6 +145,7 @@ pub fn advanced_performance_example() {
 }
 
 /// Rust 1.94 特性示例
+/// Rust 1.94 feature example
 pub fn rust_194_features_example() {
     println!("\n🆕 Rust 1.94 特性示例");
 
@@ -165,6 +172,7 @@ pub fn rust_194_features_example() {
 }
 
 /// 主函数
+/// Main function
 fn main() {
     println!("🚀 Rust 高级用法示例集合");
     println!("======================\n");

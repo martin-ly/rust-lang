@@ -1,45 +1,44 @@
 //! # Rust 1.89 特性示例 (历史版本)
-//!
+//! # Rust 1.89 feature example (this )
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//!
+//! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
-//!
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! ## 版本历史说明
-//!
-//! 本文件展示 Rust 1.89 版本的特性，当前项目已升级到 Rust 1.92.0。
-//!
+//! ## this explain
 //! ### Rust 1.92.0 主要改进
-//!
-//! - **语言特性**: MaybeUninit 文档化、联合体原始引用、关联项多边界等
-//! - **标准库**: NonZero::div_ceil、rotate_right、Location::file_as_c_str
+//! ### Rust 1.92.0 main
 //! - **性能优化**: 迭代器方法特化、改进的编译优化
-//!
+//! - **performance optimization **: method 、optimization
 //! ### 迁移建议
-//!
+//! ###
 //! 1. 更新 Cargo.toml: `rust-version = "1.92"`
-//! 2. 参考 `rust_192_features.rs` 了解最新特性
-//! 3. 查看 `docs/RUST_192_CONTROL_FLOW_IMPROVEMENTS.md` 了解完整改进
-//!
 //! 参考:
-//! - [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/)
+//! reference :
 //! - [历史版本: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
-//!
-//! ---
+//! - [历史版this: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 //!
 //! # Rust 1.89 增强特性模块
-//!
-//! 本模块包含 Rust 1.89 版本的最新特性实现，包括：
+//! # Rust 1.89 feature module
+//! # Rust 1.89 增强featuremodule
 //! - let_chains 特性稳定化
+//! - let_chains feature
 //! - cfg_boolean_literals 特性稳定化
 //! - 裸函数支持稳定化
+//! - function
 //! - 危险隐式引用警告
+//! - reference warning
+//! - 危险隐式referencewarning
 //! - 无效空指针参数校验
+//! - ineffective pointer parameter
 // 移除未使用的导入
 
 /// Rust 1.89 let_chains 特性演示
 pub mod let_chains_189 {
 
     /// 用户状态枚举
+    /// state enum
+    /// 用户stateenum
     #[derive(Debug, Clone)]
     pub enum UserStatus {
         Active(u32, String),
@@ -48,6 +47,7 @@ pub mod let_chains_189 {
     }
 
     /// 获取当前用户状态
+    /// when before state
     pub fn get_current_user_status() -> UserStatus {
         UserStatus::Active(12345, "Rustacean".to_string())
     }
@@ -80,7 +80,7 @@ pub mod let_chains_189 {
         }
     }
 
-    /// 嵌套结构体的 let_chains 演示
+    /// 嵌套struct let_chains Demonstration of
     #[derive(Debug)]
     pub struct User {
         pub id: u32,
@@ -125,12 +125,15 @@ pub mod let_chains_189 {
 pub mod cfg_boolean_literals_189 {
 
     /// 始终启用的功能
+    /// functionality
+    /// 始终启用functionality
     #[cfg(true)]
     pub fn feature_always_on() {
         println!("✅ 这是一个始终启用的功能");
     }
 
     /// 永远不会启用的功能
+    /// functionality
     #[cfg(false)]
     pub fn feature_never_on() {
         // 此函数不会被编译
@@ -138,18 +141,22 @@ pub mod cfg_boolean_literals_189 {
     }
 
     /// Linux 专属功能（结合布尔字面量）
+    /// Linux functionality （surface ）
     #[cfg(all(target_os = "linux", true))]
     pub fn linux_specific_feature() {
         println!("✅ 这是一个 Linux 专属功能");
     }
 
     /// Windows 专属功能
+    /// Windows functionality
+    /// Windows 专属functionality
     #[cfg(all(target_os = "windows", true))]
     pub fn windows_specific_feature() {
         println!("✅ 这是一个 Windows 专属功能");
     }
 
     /// 条件编译演示
+    /// condition demonstration
     pub fn demonstrate_cfg_boolean_literals() {
         println!("=== Rust 1.89 cfg_boolean_literals 特性演示 ===");
 
@@ -166,6 +173,7 @@ pub mod cfg_boolean_literals_189 {
     }
 
     /// 复杂的条件编译示例
+    /// complex condition example
     #[cfg(all(
         any(target_os = "linux", target_os = "macos"),
         true,
@@ -177,15 +185,20 @@ pub mod cfg_boolean_literals_189 {
 }
 
 /// Rust 1.89 裸函数支持演示
+/// Rust 1.89 function demonstration
 pub mod naked_functions_189 {
 
     /// 裸函数示例（需要 unsafe 和 asm! 宏）
+    /// function example （ unsafe and asm! ）
     /// 注意：这需要 nightly 版本和 asm! 宏支持
+    /// ： nightly this and asm!
+    /// 注意：这Requires nightly 版thisand asm! 宏Supports
     #[cfg(all(feature = "nightly", target_arch = "x86_64"))]
     pub mod naked_functions {
         // 使用 nightly 的 naked_asm! 宏
 
         /// 简单的裸函数
+        /// simple function
         #[cfg(false)]
         #[naked]
         pub unsafe extern "C" fn simple_naked_function() -> ! {
@@ -195,6 +208,7 @@ pub mod naked_functions_189 {
         }
 
         /// 带参数的裸函数
+        /// parameter function
         // 该示例需要更复杂的 ABI/保存约定，演示目的先禁用
         #[cfg(false)]
         #[naked]
@@ -206,6 +220,7 @@ pub mod naked_functions_189 {
     }
 
     /// 裸函数演示（安全版本）
+    /// function demonstration （this ）
     pub fn demonstrate_naked_functions() {
         println!("=== Rust 1.89 裸函数支持演示 ===");
 
@@ -223,9 +238,12 @@ pub mod naked_functions_189 {
 }
 
 /// Rust 1.89 危险隐式引用警告演示
+/// Rust 1.89 reference warning demonstration
 pub mod dangerous_implicit_autorefs_189 {
 
     /// 演示危险隐式引用
+    /// demonstration reference
+    /// Demonstration of危险隐式reference
     pub fn demonstrate_dangerous_implicit_autorefs() {
         println!("=== Rust 1.89 危险隐式引用警告演示 ===");
 
@@ -245,6 +263,7 @@ pub mod dangerous_implicit_autorefs_189 {
     }
 
     /// 演示正确的指针使用方式
+    /// demonstration pointer way
     pub fn demonstrate_safe_pointer_usage() {
         println!("=== 安全的指针使用方式 ===");
 
@@ -262,9 +281,11 @@ pub mod dangerous_implicit_autorefs_189 {
 }
 
 /// Rust 1.89 无效空指针参数校验演示
+/// Rust 1.89 ineffective pointer parameter demonstration
 pub mod invalid_null_arguments_189 {
 
     /// 演示无效空指针参数校验
+    /// demonstration ineffective pointer parameter
     pub fn demonstrate_invalid_null_arguments() {
         println!("=== Rust 1.89 无效空指针参数校验演示 ===");
 
@@ -290,6 +311,7 @@ pub mod invalid_null_arguments_189 {
     }
 
     /// 演示安全的指针参数传递
+    /// demonstration pointer parameter
     pub fn demonstrate_safe_pointer_arguments() {
         println!("=== 安全的指针参数传递 ===");
 
@@ -301,6 +323,8 @@ pub mod invalid_null_arguments_189 {
     }
 
     /// 安全处理指针的函数
+    /// pointer function
+    /// 安全Handlepointerfunction
     fn process_pointer_safely(ptr: *const i32, len: usize) {
         if ptr.is_null() {
             println!("❌ 接收到空指针，无法处理");
@@ -317,10 +341,12 @@ pub mod invalid_null_arguments_189 {
 }
 
 /// Rust 1.89 综合特性演示
+/// Rust 1.89 synthesize feature demonstration
 pub struct Rust189EnhancedFeatures;
 
 impl Rust189EnhancedFeatures {
     /// 运行所有 Rust 1.89 增强特性演示
+    /// Run all Rust 1.89 feature demonstration
     pub fn run_all_demonstrations() {
         println!("🚀 Rust 1.89 增强特性综合演示");
         println!("=====================================");
@@ -356,6 +382,7 @@ impl Rust189EnhancedFeatures {
     }
 
     /// 获取 Rust 1.89 特性列表
+    /// Rust 1.89 feature
     pub fn get_feature_list() -> Vec<&'static str> {
         vec![
             "let_chains - 在 if 和 while 条件中使用 && 操作符",
@@ -367,6 +394,7 @@ impl Rust189EnhancedFeatures {
     }
 
     /// 检查特性支持状态
+    /// feature state
     pub fn check_feature_support() -> std::collections::HashMap<String, bool> {
         let mut support_status = std::collections::HashMap::new();
 

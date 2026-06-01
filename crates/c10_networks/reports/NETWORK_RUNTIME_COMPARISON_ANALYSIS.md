@@ -1,3 +1,6 @@
+
+> ⚠️ **归档说明**: 本文档包含 async-std [已归档] 的历史信息。async-std [已归档] 已于 2025年3月停止维护，新项目请使用 Tokio 或 smol。
+
 # 网络运行时库对比分析报告
 
 ## 📊 目录
@@ -6,7 +9,7 @@
   - [📊 目录](#-目录)
   - [执行摘要](#执行摘要)
   - [1. 主要网络运行时库对比](#1-主要网络运行时库对比)
-    - [1.1 Tokio vs async-std 详细对比](#11-tokio-vs-async-std-详细对比)
+    - [1.1 Tokio vs async-std \[已归档\] 详细对比](#11-tokio-vs-async-std-已归档-详细对比)
     - [1.2 具体技术特性对比](#12-具体技术特性对比)
       - [1.2.1 异步运行时特性](#121-异步运行时特性)
       - [1.2.2 网络编程支持](#122-网络编程支持)
@@ -36,7 +39,7 @@
     - [6.3 序列化和工具库](#63-序列化和工具库)
     - [6.4 监控和日志](#64-监控和日志)
   - [7. 迁移策略](#7-迁移策略)
-    - [7.1 从async-std迁移到Tokio](#71-从async-std迁移到tokio)
+    - [7.1 从async-std \[已归档\]迁移到Tokio](#71-从async-std-已归档迁移到tokio)
     - [7.2 渐进式迁移策略](#72-渐进式迁移策略)
   - [8. 结论和建议](#8-结论和建议)
     - [8.1 最终推荐](#81-最终推荐)
@@ -52,9 +55,9 @@
 
 ## 1. 主要网络运行时库对比
 
-### 1.1 Tokio vs async-std 详细对比
+### 1.1 Tokio vs async-std [已归档] 详细对比
 
-| 特性维度 | Tokio | async-std | 本项目选择 | 理由 |
+| 特性维度 | Tokio | async-std [已归档] | 本项目选择 | 理由 |
  param($match) $match.Value -replace '[-:]+', ' --- ' ------- param($match) $match.Value -replace '[-:]+', ' --- ' ------------ param($match) $match.Value -replace '[-:]+', ' --- '
 | **性能** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ✅ Tokio | 生产环境验证，高性能 |
 | **生态系统** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ✅ Tokio | 丰富的第三方库支持 |
@@ -75,7 +78,7 @@
 - 强大的I/O多路复用
 - 优秀的背压处理
 
-**async-std优势**:
+**async-std [已归档]优势**:
 
 - 类似标准库的API设计
 - 简化的异步编程模型
@@ -116,7 +119,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-**async-std网络特性**:
+**async-std [已归档]网络特性**:
 
 ```rust
 // 简化的TCP服务器
@@ -161,7 +164,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 - `axum`: 模块化的Web框架
 - `tower`: 服务抽象层
 
-**async-std生态系统**:
+**async-std [已归档]生态系统**:
 
 - `surf`: 简化的HTTP客户端
 - `tide`: 异步Web框架
@@ -176,7 +179,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 - `mongodb`: MongoDB异步驱动
 - `sqlx`: 异步SQL工具包
 
-**async-std生态系统**:
+**async-std [已归档]生态系统**:
 
 - 有限的数据库支持
 - 主要依赖Tokio生态系统
@@ -316,7 +319,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 3.1 网络I/O性能对比
 
-| 测试场景 | Tokio | async-std | 性能差异 |
+| 测试场景 | Tokio | async-std [已归档] | 性能差异 |
  param($match) $match.Value -replace '[-:]+', ' --- ' ------- param($match) $match.Value -replace '[-:]+', ' --- ' ----------|
 | TCP Echo服务器 | 100,000 req/s | 85,000 req/s | Tokio +17.6% |
 | HTTP服务器 | 95,000 req/s | 80,000 req/s | Tokio +18.8% |
@@ -350,10 +353,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 3. 生态系统熟悉 (2-3周)
 4. 高级特性掌握 (2-4周)
 
-**async-std学习路径**:
+**async-std [已归档]学习路径**:
 
 1. 基础异步概念 (1周)
-2. async-std API (1周)
+2. async-std [已归档] API (历史参考)
 3. 生态系统熟悉 (1-2周)
 4. 高级特性掌握 (1-2周)
 
@@ -366,7 +369,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 - 性能分析工具
 - 监控和指标
 
-**async-std调试特点**:
+**async-std [已归档]调试特点**:
 
 - 简化的错误处理
 - 直观的调试信息
@@ -383,7 +386,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 - 活跃的安全更新
 - 企业级支持
 
-**async-std生产考虑**:
+**async-std [已归档]生产考虑**:
 
 - 相对较新的项目
 - 较少的生产案例
@@ -398,7 +401,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 - 灵活的配置选项
 - 强大的生态系统
 
-**async-std扩展性**:
+**async-std [已归档]扩展性**:
 
 - 简化的架构
 - 有限的中间件
@@ -463,7 +466,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ## 7. 迁移策略
 
-### 7.1 从async-std迁移到Tokio
+### 7.1 从async-std [已归档]迁移到Tokio
 
 **迁移步骤**:
 
@@ -476,7 +479,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 **迁移示例**:
 
 ```rust
-// async-std版本
+// async-std [已归档]版本
 #[async_std::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let listener = async_std::net::TcpListener::bind("127.0.0.1:8080").await?;

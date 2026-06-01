@@ -1,9 +1,12 @@
 //! # 机器学习算法模块
+//! # machine learning algorithm module
 //!
 //! 本模块实现了各种机器学习算法。
+//! this module machine learning algorithm 。
 //use serde::{Serialize, Deserialize};
 
 /// 机器学习算法实现
+/// machine learning algorithm
 pub struct MachineLearningAlgorithms;
 
 impl MachineLearningAlgorithms {
@@ -85,6 +88,7 @@ impl MachineLearningAlgorithms {
     }
 
     /// 线性回归
+    /// line
     pub fn linear_regression(x: &[f64], y: &[f64]) -> (f64, f64) {
         let n = x.len() as f64;
         let sum_x: f64 = x.iter().sum();

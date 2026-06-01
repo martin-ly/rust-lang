@@ -1,7 +1,10 @@
 //! 性能优化实践
+//! performance optimization
 //!
 //! 本模块展示了Rust中各种性能优化技术的实践案例，
+//! This module demonstrates Rustin performance optimization technique ，
 //! 包括内存优化、并发优化、编译时优化和运行时性能分析。
+//! memory optimization 、concurrency optimization 、compile-time optimization and runtime performance analyze 。
 use std::alloc::{Layout, alloc, dealloc};
 use std::collections::HashMap;
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -14,6 +17,7 @@ use std::time::{Duration, Instant};
 // ============================================================================
 
 /// 内存池实现
+/// memory pool
 pub struct MemoryPool {
     block_size: usize,
     block_count: usize,
@@ -73,6 +77,7 @@ impl Drop for MemoryPool {
 }
 
 /// 对象池实现
+/// to
 pub struct ObjectPool<T> {
     objects: Vec<T>,
     available: Vec<usize>,
@@ -123,6 +128,7 @@ impl<T> ObjectPool<T> {
 }
 
 /// 内存优化示例
+/// memory optimization example
 pub struct MemoryOptimizedBuffer {
     data: Vec<u8>,
     capacity: usize,
@@ -163,6 +169,7 @@ impl MemoryOptimizedBuffer {
 // ============================================================================
 
 /// 无锁计数器
+/// lock-free
 pub struct LockFreeCounter {
     value: AtomicUsize,
 }
@@ -194,6 +201,7 @@ impl LockFreeCounter {
 }
 
 /// 线程池实现
+/// thread pool
 pub struct ThreadPool {
     workers: Vec<Worker>,
     sender: std::sync::mpsc::Sender<Message>,
@@ -285,6 +293,7 @@ impl Drop for ThreadPool {
 }
 
 /// 并发优化示例
+/// concurrency optimization example
 pub struct ConcurrentOptimizedProcessor {
     thread_pool: ThreadPool,
     counter: LockFreeCounter,
@@ -335,6 +344,7 @@ impl ConcurrentOptimizedProcessor {
 // ============================================================================
 
 /// 编译时常量函数
+/// compile-time constant function
 pub const fn calculate_fibonacci(n: u32) -> u32 {
     if n <= 1 {
         n
@@ -344,6 +354,7 @@ pub const fn calculate_fibonacci(n: u32) -> u32 {
 }
 
 /// 编译时优化的查找表
+/// compile-time optimization
 pub const LOOKUP_TABLE: [u32; 10] = [
     calculate_fibonacci(0),
     calculate_fibonacci(1),
@@ -358,6 +369,7 @@ pub const LOOKUP_TABLE: [u32; 10] = [
 ];
 
 /// 泛型优化示例
+/// generic optimization example
 pub struct OptimizedContainer<T, const N: usize> {
     data: [T; N],
     len: usize,
@@ -405,6 +417,7 @@ impl<T: Default + Copy, const N: usize> OptimizedContainer<T, N> {
 }
 
 /// 编译时优化的字符串处理
+/// compile-time optimization
 pub const fn string_length(s: &str) -> usize {
     s.len()
 }
@@ -416,6 +429,7 @@ pub const HELLO_LENGTH: usize = string_length("Hello, World!");
 // ============================================================================
 
 /// 性能分析器
+/// performance analyze
 pub struct PerformanceProfiler {
     measurements: HashMap<String, Vec<Duration>>,
     current_measurements: HashMap<String, Instant>,
@@ -490,6 +504,7 @@ impl PerformanceProfiler {
 }
 
 /// 性能基准测试
+/// Performance benchmark
 pub struct BenchmarkRunner {
     profiler: PerformanceProfiler,
 }
@@ -541,6 +556,7 @@ impl BenchmarkRunner {
 }
 
 /// 内存使用分析器
+/// Memory usage analysis
 pub struct MemoryProfiler {
     allocations: HashMap<String, usize>,
     deallocations: HashMap<String, usize>,
@@ -613,10 +629,12 @@ impl MemoryProfiler {
 // ============================================================================
 
 /// 性能优化示例集合
+/// performance optimization example set
 pub struct PerformanceExamples;
 
 impl PerformanceExamples {
     /// 内存优化示例
+    /// memory optimization example
     pub fn memory_optimization_example() {
         println!("=== 内存优化示例 ===");
 
@@ -649,6 +667,7 @@ impl PerformanceExamples {
     }
 
     /// 并发优化示例
+    /// concurrency optimization example
     pub fn concurrency_optimization_example() {
         println!("\n=== 并发优化示例 ===");
 
@@ -684,6 +703,7 @@ impl PerformanceExamples {
     }
 
     /// 编译时优化示例
+    /// compile-time optimization example
     pub fn compile_time_optimization_example() {
         println!("\n=== 编译时优化示例 ===");
 
@@ -702,6 +722,7 @@ impl PerformanceExamples {
     }
 
     /// 运行时性能分析示例
+    /// runtime performance analyze example
     pub fn runtime_profiling_example() {
         println!("\n=== 运行时性能分析示例 ===");
 

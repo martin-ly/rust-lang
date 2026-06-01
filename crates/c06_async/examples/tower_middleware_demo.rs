@@ -1,11 +1,7 @@
 //! Tower 中间件栈演示
-//!
-//! 展示 Tower 生态的核心抽象：
+//! Tower middleware stack demonstration
 //! - Service trait: 异步请求-响应处理
-//! - ServiceBuilder: 链式构建服务栈
-//! - 内置中间件: Timeout, RateLimit, Buffer
-//! - ServiceExt: ready, oneshot, map_request, map_response
-//!
+//! - Service trait: async -
 //! 运行: cargo run --example tower_middleware_demo -p c06_async
 
 use std::future::Future;

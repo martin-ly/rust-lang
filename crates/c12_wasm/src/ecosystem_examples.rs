@@ -1,12 +1,15 @@
 //! # Rust 1.90 生态库示例代码
-//!
-//! 本模块展示了如何使用 Rust 1.90 新特性和成熟的 WASM 生态库
+//! # Rust 1.90 ecosystem library example
 
 /// Rust 1.90 新特性示例
+/// Rust 1.90 feature example
 pub mod rust_190_features {
     /// let-else 模式示例
-    ///
+    /// let-else example
+    /// let-else 模式Example of
     /// Rust 1.90: 使用 let-else 简化错误处理
+    /// Rust 1.90: let-else error handling
+    /// Rust 1.90: Use let-else 简化error handling
     pub fn process_data_with_let_else(data: Option<String>) -> Result<String, String> {
         // let-else 模式：如果匹配失败，执行 else 分支
         let Some(value) = data else {
@@ -17,19 +20,21 @@ pub mod rust_190_features {
     }
 
     /// return-position impl Trait 示例
-    ///
     /// Rust 1.90: 函数可以直接返回 impl Trait
+    /// Rust 1.90: function can impl Trait
     pub fn get_filtered_numbers(numbers: &[i32]) -> impl Iterator<Item = &i32> {
         numbers.iter().filter(|&&x| x > 0)
     }
 }
 
 /// 设计模式示例
+/// design example
 pub mod design_patterns {
     use std::sync::OnceLock;
     use wasm_bindgen::prelude::*;
 
     /// 工厂模式示例
+    /// factory example
     pub mod factory {
         use super::*;
 
@@ -83,6 +88,7 @@ pub mod design_patterns {
     }
 
     /// 建造者模式示例
+    /// example
     pub mod builder {
         use super::*;
 
@@ -169,7 +175,6 @@ pub mod design_patterns {
         }
     }
 
-    /// 单例模式示例（使用 Rust 1.90+ 的 OnceLock）
     pub mod singleton {
         use super::*;
 
@@ -213,6 +218,7 @@ pub mod design_patterns {
     }
 
     /// 观察者模式示例
+    /// observer example
     pub mod observer {
         use super::*;
         use std::cell::RefCell;
@@ -276,6 +282,7 @@ pub mod design_patterns {
     }
 
     /// 策略模式示例
+    /// strategy example
     pub mod strategy {
         use super::*;
 
@@ -336,6 +343,7 @@ pub mod design_patterns {
     }
 
     /// 适配器模式示例
+    /// adapter example
     pub mod adapter {
         use super::*;
 

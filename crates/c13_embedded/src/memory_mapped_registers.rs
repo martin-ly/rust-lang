@@ -1,52 +1,57 @@
 //! 内存映射寄存器 (Memory-Mapped I/O, MMIO)
-//!
 //! 在嵌入式系统中，外设寄存器被映射到特定的内存地址。
+//! in system in ，outside is to memory 。
 //! 通过读写这些地址来控制硬件（如 GPIO、UART、定时器等）。
-//!
+//! hardware （ GPIO、UART、etc. ）。
 //! ## 核心概念
-//!
-//! - **volatile 访问**：编译器不能优化或重排对外设的读写
+//! ## core concept
 //! - **对齐要求**：寄存器通常需要 32 位或 16 位对齐
+//! - **to **： 32 or 16 to
 //! - **原子性**：某些外设访问需要是原子的
+//! - ****：outside
 
-/// 模拟的内存映射 GPIO 寄存器组
-///
-/// 以 STM32F1 风格的 GPIO 为例：
+/// 模拟memory mapping GPIO 寄存器组
+/// 以 STM32F1 风格 GPIO as例：
 /// - MODER: 模式寄存器
+/// - MODER:
 /// - ODR:   输出数据寄存器
+/// - ODR:
 /// - IDR:   输入数据寄存器
-///
+/// - IDR:
 /// 真实硬件中，这些结构体通过 `#[repr(C)]` 保证内存布局，
+/// real hardware in ，struct `#[repr(C)]` memory layout ，
 /// 并使用 `volatile-register` crate 或原始指针访问。
 #[repr(C)]
 pub struct GpioRegisters {
     /// 端口模式寄存器（每个引脚 2 位）
+    /// （ 2 ）
     pub moder: u32,
     /// 输出类型寄存器
+    /// type
     pub otyper: u32,
     /// 输出速度寄存器
     pub ospeedr: u32,
     /// 上拉/下拉寄存器
+    /// on /under
     pub pupdr: u32,
     /// 输入数据寄存器
     pub idr: u32,
     /// 输出数据寄存器
     pub odr: u32,
     /// 位设置/清除寄存器
+    /// /
     pub bsrr: u32,
     /// 配置锁定寄存器
+    /// lock
     pub lckr: u32,
 }
 
 /// GPIO 寄存器基地址（模拟）
-///
+/// GPIO （）
 /// 在真实硬件上，这是固定的内存地址，例如：
-/// `const GPIOA: *mut GpioRegisters = 0x4002_0000 as *mut GpioRegisters;`
+/// in real hardware on ，memory ，for example ：
 pub const GPIOA_BASE: usize = 0x4002_0000;
 
-/// 安全的 GPIO 包装器
-///
-/// 通过 Rust 的所有权和借用检查，确保寄存器访问的安全。
 pub struct GpioPort {
     base: *mut GpioRegisters,
 }
@@ -56,11 +61,7 @@ unsafe impl Send for GpioPort {}
 unsafe impl Sync for GpioPort {}
 
 impl GpioPort {
-    /// 创建新的 GPIO 端口实例（unsafe，因为需要确保地址有效）
     ///
-    /// # Safety
-    ///
-    /// 调用者必须确保 `base` 指向有效的 GPIO 寄存器组。
     pub const unsafe fn new(base: usize) -> Self {
         Self {
             base: base as *mut GpioRegisters,
@@ -68,20 +69,25 @@ impl GpioPort {
     }
 
     /// 读取 MODER 寄存器
-    ///
+    /// MODER
+    /// Read MODER 寄存器
     /// 使用 `core::ptr::read_volatile` 确保编译器不会优化掉读操作。
+    /// `core::ptr::read_volatile` optimization 。
     pub fn read_moder(&self) -> u32 {
         // Safety: 构造时已保证 base 有效
         unsafe { core::ptr::read_volatile(core::ptr::addr_of!((*self.base).moder)) }
     }
 
     /// 写入 MODER 寄存器
+    /// MODER
+    /// Write MODER 寄存器
     pub fn write_moder(&mut self, value: u32) {
         // Safety: 构造时已保证 base 有效，&mut self 确保独占访问
         unsafe { core::ptr::write_volatile(core::ptr::addr_of_mut!((*self.base).moder), value) }
     }
 
     /// 设置特定引脚为输出模式
+    /// as
     pub fn set_pin_output(&mut self, pin: u8) {
         assert!(pin < 16, "引脚号必须在 0-15 范围内");
         let mut moder = self.read_moder();
@@ -93,6 +99,7 @@ impl GpioPort {
     }
 
     /// 设置特定引脚电平（高电平）
+    /// （）
     pub fn set_pin_high(&mut self, pin: u8) {
         assert!(pin < 16, "引脚号必须在 0-15 范围内");
         // BSRR 寄存器：低 16 位设置，高 16 位清除
@@ -101,6 +108,7 @@ impl GpioPort {
     }
 
     /// 清除特定引脚电平（低电平）
+    /// （）
     pub fn set_pin_low(&mut self, pin: u8) {
         assert!(pin < 16, "引脚号必须在 0-15 范围内");
         let bsrr = 1 << (pin + 16);
@@ -108,6 +116,7 @@ impl GpioPort {
     }
 
     /// 读取引脚输入状态
+    /// state
     pub fn read_pin(&self, pin: u8) -> bool {
         assert!(pin < 16, "引脚号必须在 0-15 范围内");
         let idr = unsafe { core::ptr::read_volatile(core::ptr::addr_of!((*self.base).idr)) };
@@ -116,8 +125,10 @@ impl GpioPort {
 }
 
 /// 位操作工具函数
-///
+/// tool function
+/// 位操作toolfunction
 /// 嵌入式编程中大量涉及位操作。
+/// in and 。
 pub struct BitOps;
 
 impl BitOps {
@@ -137,19 +148,17 @@ impl BitOps {
     }
 
     /// 检查指定位是否为 1
+    /// as 1
     pub const fn is_bit_set(value: u32, bit: u8) -> bool {
         (value & (1 << bit)) != 0
     }
 
-    /// 修改位域（value 写入 bits 范围的位）
     pub const fn modify_bits(original: u32, start: u8, width: u8, value: u32) -> u32 {
         let mask = ((1u32 << width) - 1) << start;
         (original & !mask) | ((value << start) & mask)
     }
 }
 
-/// 使用 `volatile-register` crate 的示例（ARM 目标下）
-///
 /// ```rust,ignore
 /// use volatile_register::{RW, RO, WO};
 ///

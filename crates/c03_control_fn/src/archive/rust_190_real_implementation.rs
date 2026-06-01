@@ -1,23 +1,23 @@
-//! Rust 1.90 真正的语言特性实现 (历史版本)
-//!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//!
+//! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
-//!
-//! 本模块实现了Rust 1.90版本中真正可用的语言特性，包括：
-//! - 改进的const generics
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
+//! - 改进const generics
 //! - 更好的生命周期推断
-//! - 优化的trait求解器
+//! - lifetime infer
+//! - 更好lifetimeinfer
 //! - 改进的错误处理
+//! - error handling
+//! - 改进error handling
 //! - 新的标准库特性
+//! - standard library feature
+//! - 新standardlibraryfeature
 use std::collections::HashMap;
 use std::time::Duration;
 use tokio::time::sleep;
 use anyhow::Result;
 
-/// 利用Rust 1.90改进的const generics
-///
-/// 在Rust 1.90中，const generics得到了显著改进
+/// 利用Rust 1.90改进const generics
 pub struct ConstGenericArray<T, const N: usize> {
     data: [T; N],
     current_index: usize,
@@ -68,9 +68,7 @@ impl<T: Default + Copy, const N: usize> ConstGenericArray<T, N> {
     }
 }
 
-/// 利用Rust 1.90改进的生命周期推断
-///
-/// 在Rust 1.90中，生命周期推断得到了显著改进
+/// 利用Rust 1.90改进lifetimeinfer
 pub struct LifetimeOptimized<'a, T> {
     data: &'a T,
     metadata: HashMap<String, String>,
@@ -85,8 +83,10 @@ impl<'a, T> LifetimeOptimized<'a, T> {
     }
 
     /// 演示改进的生命周期推断
-    ///
+    /// demonstration lifetime infer
+    /// Demonstration of改进lifetimeinfer
     /// 在Rust 1.90中，编译器能够更好地推断生命周期
+    /// in Rust 1.90in ，can infer lifetime
     pub fn process_with_improved_lifetimes(&self, key: &str, value: &str) -> Result<&'a T> {
         // Rust 1.90能够更好地理解这里的生命周期关系
         let result = {
@@ -101,6 +101,8 @@ impl<'a, T> LifetimeOptimized<'a, T> {
     }
 
     /// 演示更智能的生命周期分析
+    /// demonstration lifetime analyze
+    /// Demonstration of更智能lifetimeanalysis
     pub fn smart_lifetime_analysis(&self, inputs: &[&str]) -> Vec<&'a T> {
         let mut results = Vec::new();
 
@@ -113,9 +115,6 @@ impl<'a, T> LifetimeOptimized<'a, T> {
     }
 }
 
-/// 利用Rust 1.90优化的trait求解器
-///
-/// 在Rust 1.90中，trait求解器得到了显著优化
 pub trait OptimizedTrait<T> {
     type Output;
     type Error;
@@ -123,7 +122,6 @@ pub trait OptimizedTrait<T> {
     fn process(&self, input: T) -> Result<Self::Output, Self::Error>;
 }
 
-/// 复杂trait约束的实现
 impl<T: std::fmt::Display + Clone> OptimizedTrait<T> for LifetimeOptimized<'_, T> {
     type Output = String;
     type Error = String;
@@ -135,9 +133,7 @@ impl<T: std::fmt::Display + Clone> OptimizedTrait<T> for LifetimeOptimized<'_, T
     }
 }
 
-/// 利用Rust 1.90改进的错误处理
-///
-/// 在Rust 1.90中，错误处理得到了显著改进
+/// 利用Rust 1.90改进error handling
 pub struct ErrorHandling190 {
     error_count: std::sync::atomic::AtomicUsize,
     success_count: std::sync::atomic::AtomicUsize,
@@ -158,6 +154,8 @@ impl ErrorHandling190 {
     }
 
     /// 演示改进的错误处理
+    /// demonstration error handling
+    /// Demonstration of改进error handling
     pub async fn process_with_improved_error_handling<T, F, R>(
         &self,
         input: T,
@@ -178,7 +176,7 @@ impl ErrorHandling190 {
         }
     }
 
-    /// 批量处理 with 改进的错误处理
+    /// 批量Handle with 改进error handling
     pub async fn batch_process<T, F, R>(
         &self,
         inputs: Vec<T>,
@@ -205,9 +203,7 @@ impl ErrorHandling190 {
     }
 }
 
-/// 利用Rust 1.90新的标准库特性
-///
-/// 在Rust 1.90中，标准库得到了许多新特性
+/// 利用Rust 1.90新standardlibraryfeature
 #[derive(Default)]
 pub struct StandardLibrary190 {
     data: HashMap<String, Vec<u8>>,
@@ -221,6 +217,8 @@ impl StandardLibrary190 {
     }
 
     /// 演示新的标准库特性
+    /// demonstration standard library feature
+    /// Demonstration of新standardlibraryfeature
     pub async fn process_with_new_stdlib_features(&mut self, key: String, value: Vec<u8>) -> Result<String> {
         // 使用Rust 1.90的新特性
         let hash = self.compute_hash(&value);
@@ -239,6 +237,7 @@ impl StandardLibrary190 {
     }
 
     /// 使用新的标准库方法计算哈希
+    /// standard library method
     fn compute_hash(&self, data: &[u8]) -> u64 {
         use std::collections::hash_map::DefaultHasher;
         use std::hash::{Hash, Hasher};
@@ -249,12 +248,14 @@ impl StandardLibrary190 {
     }
 
     /// 获取缓存统计
+    /// Get cache stats
     pub fn get_cache_stats(&self) -> (usize, usize) {
         (self.data.len(), self.cache.len())
     }
 }
 
 /// 综合演示Rust 1.90真正特性
+/// synthesize demonstration Rust 1.90feature
 pub async fn demonstrate_rust_190_real_implementation() -> Result<()> {
     println!("🚀 演示 Rust 1.90 真正的语言特性实现");
     println!("==========================================");

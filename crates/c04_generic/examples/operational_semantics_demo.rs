@@ -1,11 +1,13 @@
 //! 小步操作语义 (Small-Step Operational Semantics) 演示
-//!
-//! 实现一个极简的类 Rust 表达式语言及其操作语义，用于直观理解：
-//! - Move 语义：值的所有权转移
+//! 小步操作语义 (Small-Step Operational Semantics) Demonstration of
+//! - Move 语义：值ownershiptransfer
 //! - 不可变借用 (&T)：共享只读访问
+//! - borrowing (&T)：
 //! - 可变借用 (&mut T)：独占读写访问
+//! - borrowing (&mut T)：
 //! - Drop 语义：资源释放
-//!
+//! - Drop ：
+//! - Drop 语义：资源Release
 //! 运行: cargo run --example operational_semantics_demo -p c04_generic
 
 use std::collections::HashMap;
@@ -44,6 +46,7 @@ enum Mutability {
 // ============================================================
 
 /// 栈上的变量绑定。每个绑定有一个**所有权状态**。
+/// stack on variable 。**ownership state **。
 #[derive(Clone, Debug, PartialEq)]
 enum Ownership {
     Owned(Value),      // 拥有值
@@ -241,6 +244,7 @@ fn step(expr: Expr, state: &mut State) -> Result<(Expr, bool), String> {
 }
 
 /// 完全求值（多步规约直到得到值或错误）
+/// （to to or ）
 fn eval(expr: Expr, state: &mut State) -> Result<Value, String> {
     let mut current = expr;
     loop {

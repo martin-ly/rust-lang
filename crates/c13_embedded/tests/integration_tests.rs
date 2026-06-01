@@ -1,6 +1,5 @@
 //! 集成测试
-//!
-//! 验证 c13_embedded 各模块在 host 目标下的正确性。
+//! 集成Test for
 
 use c13_embedded::bare_metal_basics::{PanicHandlerConcept, StartupCode};
 use c13_embedded::ffi_c_interop::{

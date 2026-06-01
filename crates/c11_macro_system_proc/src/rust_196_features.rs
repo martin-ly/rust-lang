@@ -1,8 +1,7 @@
 //! Rust 1.96 特性模块 —— 过程宏场景
-//!
-//! 本模块展示 Rust 1.96 在过程宏上下文中的关键特性：
+//! Rust 1.96 feature module —— scenario
 //! - `assert_matches!` 用于过程宏诊断测试
-//! - `From<T> for LazyLock` 用于过程宏元数据缓存
+//! - `assert_matches!`
 //! - `never type` 元组 coercion 用于错误路径
 
 #![allow(clippy::incompatible_msrv, dead_code, unreachable_code)]
@@ -15,6 +14,7 @@ use std::sync::LazyLock;
 // ============================================================================
 
 /// 过程宏诊断结果的枚举表示
+/// result enum represent
 #[derive(Debug, Clone, PartialEq)]
 pub enum ProcMacroDiagnostic {
     /// 解析成功
@@ -22,29 +22,39 @@ pub enum ProcMacroDiagnostic {
     /// 语法错误
     SyntaxError {
         /// 错误描述
+        /// describe
+        /// 错误describe
         description: &'static str,
         /// 错误位置
+        /// position
+        /// 错误position
         offset: usize,
     },
     /// 不支持的语法结构
+    /// structure
     Unsupported {
         /// 结构名称
+        /// structure
         construct: &'static str,
     },
     /// 编译通过，无诊断信息
+    /// ，
     Clean,
 }
 
 /// 过程宏诊断断言工具
+/// tool
 pub struct ProcMacroDiagnosticAssertions;
 
 impl ProcMacroDiagnosticAssertions {
     /// 断言诊断为解析成功
+    /// as
     pub fn assert_parse_ok(diag: &ProcMacroDiagnostic) {
         assert_matches!(diag, ProcMacroDiagnostic::ParseOk);
     }
 
     /// 断言诊断为指定类型的语法错误
+    /// as type
     pub fn assert_syntax_error_at(diag: &ProcMacroDiagnostic, expected_offset: usize) {
         assert_matches!(
             diag,
@@ -53,6 +63,8 @@ impl ProcMacroDiagnosticAssertions {
     }
 
     /// 断言诊断为不支持的结构
+    /// as structure
+    /// 断言诊断as不Supportsstructure
     pub fn assert_unsupported(diag: &ProcMacroDiagnostic, name: &str) {
         assert_matches!(
             diag,
@@ -70,11 +82,12 @@ impl ProcMacroDiagnosticAssertions {
 // Rust 1.96: From<T> for LazyLock 用于过程宏元数据缓存
 // ============================================================================
 
-/// 过程宏元数据缓存：利用 `LazyLock::from(value)` 立即初始化
 pub struct MacroMetadataCache {
     /// 支持的属性列表（立即初始化，无需闭包）
+    /// attribute （，）
     supported_attrs: LazyLock<Vec<&'static str>>,
     /// 版本信息（立即初始化）
+    /// this （）
     version_info: LazyLock<String>,
 }
 
@@ -88,16 +101,19 @@ impl MacroMetadataCache {
     }
 
     /// 检查是否支持指定属性
+    /// attribute
     pub fn is_attr_supported(&self, attr: &str) -> bool {
         self.supported_attrs.contains(&attr)
     }
 
     /// 获取版本信息
+    /// this
     pub fn version(&self) -> &str {
         &self.version_info
     }
 
     /// 获取支持属性数量
+    /// attribute quantity
     pub fn attr_count(&self) -> usize {
         self.supported_attrs.len()
     }
@@ -114,9 +130,10 @@ impl Default for MacroMetadataCache {
 // ============================================================================
 
 /// 模拟过程宏展开中的错误结果元组
-///
-/// 在错误路径上，`panic!()` 返回 `!` 类型，可自动 coercing 为
+/// in result
+/// in错误路径on，`panic!()` Return `!` type，可自动 coercing as
 /// 元组中的任意类型，从而统一返回类型。
+/// in type ，thereby type 。
 pub fn error_tuple_with_never() -> (usize, &'static str, u32) {
     if false {
         // 正常路径永远不会执行，但类型检查通过
@@ -127,6 +144,8 @@ pub fn error_tuple_with_never() -> (usize, &'static str, u32) {
 }
 
 /// 另一个错误路径示例：使用 unreachable!()
+/// example ： unreachable!()
+/// 另一个错误路径Example of：Use unreachable!()
 pub fn unreachable_tuple_with_never() -> (bool, u64) {
     if false {
         return (true, 42);
@@ -136,6 +155,7 @@ pub fn unreachable_tuple_with_never() -> (bool, u64) {
 }
 
 /// 演示函数
+/// demonstration function
 pub fn demonstrate_rust_196_features() {
     println!("\n=== Rust 1.96 过程宏特性演示 ===");
 

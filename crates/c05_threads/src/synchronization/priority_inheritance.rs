@@ -1,16 +1,22 @@
 //! 优先级继承实现
-//!
+//! 优先级继承Implementation of
 //! 本模块提供了优先级继承机制，防止优先级反转问题：
+//! This module provides mechanism ，problem ：
 //! - 优先级继承互斥锁
+//! - mutex
 //! - 优先级继承读写锁
+//! - rwlock
 //! - 优先级继承信号量
+//! - semaphore
 //! - 优先级继承屏障
+//! - barrier
 use std::collections::{BinaryHeap, HashMap};
 use std::sync::{Arc, Condvar, Mutex};
 use std::thread;
 use std::time::{Duration, Instant};
 
 /// 线程优先级
+/// thread priority
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
 pub enum ThreadPriority {
     Low = 1,
@@ -36,6 +42,7 @@ impl ThreadPriority {
 }
 
 /// 线程信息
+/// thread
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
 pub struct ThreadInfo {
     pub id: usize,
@@ -72,6 +79,7 @@ impl ThreadInfo {
 }
 
 /// 优先级继承互斥锁
+/// mutex
 pub struct PriorityInheritanceMutex<T> {
     data: Arc<Mutex<T>>,
     owner: Arc<Mutex<Option<ThreadInfo>>>,
@@ -200,6 +208,7 @@ impl<T> PriorityInheritanceMutex<T> {
 }
 
 /// 优先级继承读写锁
+/// rwlock
 pub struct PriorityInheritanceRwLock<T> {
     data: Arc<Mutex<T>>,
     readers: Arc<Mutex<Vec<ThreadInfo>>>,
@@ -426,6 +435,7 @@ impl<T> PriorityInheritanceRwLock<T> {
 }
 
 /// 优先级继承信号量
+/// semaphore
 pub struct PriorityInheritanceSemaphore {
     count: Arc<Mutex<usize>>,
     waiters: Arc<Mutex<BinaryHeap<ThreadInfo>>>,
@@ -492,6 +502,7 @@ impl PriorityInheritanceSemaphore {
 }
 
 /// 运行所有优先级继承示例
+/// Run all example
 pub fn demonstrate_priority_inheritance() {
     println!("=== 优先级继承演示 ===");
 

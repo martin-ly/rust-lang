@@ -1,14 +1,21 @@
 //! LeetCode 字典树类算法（结合 Rust 1.91 特性）
+//! LeetCode tree algorithm （ Rust 1.91 feature ）
 //!
 //! 本模块实现经典的字典树（Trie）类 LeetCode 题目，充分利用 Rust 1.91 的新特性。
+//! this module tree （Trie） LeetCode ， Rust 1.91 feature 。
 //!
 //! ## Rust 1.91 特性应用
+//! ## Rust 1.91 feature application
 //!
 //! - **JIT 优化**: Trie 操作性能提升 10-15%
+//! - **JIT optimization **: Trie performance 10-15%
 //! - **内存优化**: 使用数组存储子节点，O(ALPHABET_SIZE * N) 空间复杂度
+//! - **memory optimization **: node ，O(ALPHABET_SIZE * N) space complexity
 //! - **迭代器优化**: 字符串遍历性能提升
+//! - **optimization **: performance
 //!
 //! ## 包含的经典题目
+//! ##
 //!
 //! - 208. Implement Trie (Prefix Tree)（实现 Trie (前缀树)）
 //! - 211. Design Add and Search Words Data Structure（添加与搜索单词 - 数据结构设计）
@@ -17,6 +24,7 @@
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 
 /// Trie 节点结构
+/// Trie node structure
 #[derive(Default)]
 pub struct TrieNode {
     children: [Option<Box<TrieNode>>; 26],
@@ -32,16 +40,25 @@ impl TrieNode {
 /// 208. Implement Trie (Prefix Tree)（实现 Trie (前缀树)）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// Trie（发音类似 "try"）或者说 **前缀树** 是一种树形数据结构，用于高效地存储和检索字符串数据集中的键。
+/// Trie（similar to "try"）or **before tree ** tree data structure ，efficient and in 。
 /// 这一数据结构有相当多的应用情景，例如自动补全和拼写检查。
+/// data structure when application scene ，for example and 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: Trie 操作性能提升 10-15%
+/// - **JIT optimization **: Trie performance 10-15%
 /// - **内存优化**: 使用数组存储子节点，O(ALPHABET_SIZE * N) 空间复杂度
+/// - **memory optimization **: node ，O(ALPHABET_SIZE * N) space complexity
 ///
 /// ## 复杂度
+/// ## complex
 /// - insert 时间复杂度: O(m)，其中 m 是字符串长度
+/// - insert time complexity : O(m)，its in m
 /// - search 时间复杂度: O(m)
+/// - search time complexity : O(m)
 /// - starts_with 时间复杂度: O(m)
 /// - 空间复杂度: O(ALPHABET_SIZE * N * M)
 pub struct Trie {
@@ -50,6 +67,7 @@ pub struct Trie {
 
 impl Trie {
     /// 创建新的 Trie
+    /// Trie
     pub fn new() -> Self {
         Self {
             root: TrieNode::new(),
@@ -57,6 +75,7 @@ impl Trie {
     }
 
     /// 向前缀树中插入字符串
+    /// before tree in
     pub fn insert(&mut self, word: String) {
         let mut node = &mut self.root;
 
@@ -73,6 +92,7 @@ impl Trie {
     }
 
     /// 在前缀树中搜索字符串
+    /// in before tree in
     pub fn search(&self, word: String) -> bool {
         let mut node = &self.root;
 
@@ -89,6 +109,7 @@ impl Trie {
     }
 
     /// 检查是否有以给定前缀开头的字符串
+    /// before
     pub fn starts_with(&self, prefix: String) -> bool {
         let mut node = &self.root;
 
@@ -114,19 +135,30 @@ impl Default for Trie {
 /// 211. Design Add and Search Words Data Structure（添加与搜索单词 - 数据结构设计）
 ///
 /// ## 问题描述
+/// ## problem describe
 /// 请你设计一个数据结构，支持 **添加新单词** 和 **查找字符串是否与任何先前添加的字符串匹配**。
+/// design data structure ， **** and **and before **。
 /// 实现词典类 `WordDictionary`：
 /// - `WordDictionary()` 初始化词典对象
+/// - `WordDictionary()` to
 /// - `void addWord(word)` 将 `word` 添加到数据结构中，之后可以对它进行匹配
+/// - `void addWord(word)` will `word` to data structure in ，'s after can to
 /// - `bool search(word)` 如果数据结构中存在字符串与 `word` 匹配，则返回 `true`；否则，返回 `false`。`word` 中可能包含一些 `'.'`，每个 `.` 都可以表示任何一个字母。
+/// - `bool search(word)` if data structure in in and `word` ， `true`；， `false`。`word` in may `'.'`， `.` can represent 。
 ///
 /// ## Rust 1.91 特性应用
+/// ## Rust 1.91 feature application
 /// - **JIT 优化**: Trie 操作性能提升
+/// - **JIT optimization **: Trie performance
 /// - **内存优化**: 使用 Trie 存储单词
+/// - **memory optimization **: Trie
 ///
 /// ## 复杂度
+/// ## complex
 /// - add_word 时间复杂度: O(m)，其中 m 是单词长度
+/// - add_word time complexity : O(m)，its in m
 /// - search 时间复杂度: O(26^m)，其中 m 是单词长度（最坏情况，有多个 '.'）
+/// - search time complexity : O(26^m)，its in m （worst situation ， '.'）
 /// - 空间复杂度: O(ALPHABET_SIZE * N * M)
 pub struct WordDictionary {
     root: TrieNode,
@@ -196,6 +228,7 @@ impl Default for WordDictionary {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有字典树类问题
+/// all tree problem
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

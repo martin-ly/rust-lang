@@ -9,8 +9,11 @@ use tokio::sync::RwLock;
 use tracing::{debug, error, info, warn};
 
 /// 2025年异步安全编程模式演示
+/// 2025async demonstration
 /// 展示最新的异步安全编程技术和最佳实践
+/// async technique and
 /// 1. 异步访问控制管理器
+/// 1. async
 pub struct AsyncAccessControlManager {
     permissions: Arc<RwLock<HashMap<String, Vec<String>>>>,
     rate_limits: Arc<RwLock<HashMap<String, RateLimit>>>,
@@ -172,6 +175,7 @@ impl AsyncAccessControlManager {
 }
 
 /// 2. 异步加密服务
+/// 2. async
 pub struct AsyncEncryptionService {
     encryption_key: Arc<RwLock<Vec<u8>>>,
     encryption_history: Arc<RwLock<Vec<EncryptionRecord>>>,
@@ -254,6 +258,7 @@ impl AsyncEncryptionService {
 }
 
 /// 3. 异步输入验证器
+/// 3. async
 pub struct AsyncInputValidator {
     validation_rules: Arc<RwLock<HashMap<String, Vec<ValidationRule>>>>,
     validation_history: Arc<RwLock<Vec<ValidationRecord>>>,
@@ -396,6 +401,7 @@ impl AsyncInputValidator {
 }
 
 /// 4. 异步安全会话管理器
+/// 4. async
 pub struct AsyncSecureSessionManager {
     sessions: Arc<RwLock<HashMap<String, SecureSession>>>,
     session_timeout: Duration,
@@ -538,6 +544,7 @@ impl AsyncSecureSessionManager {
 }
 
 /// 5. 异步安全日志记录器
+/// 5. async
 pub struct AsyncSecureLogger {
     log_entries: Arc<RwLock<Vec<SecurityLogEntry>>>,
     log_levels: Arc<RwLock<HashMap<String, LogLevel>>>,
@@ -690,6 +697,7 @@ impl AsyncSecureLogger {
 }
 
 /// 演示异步安全编程模式
+/// demonstration async
 #[tokio::main]
 async fn main() -> Result<()> {
     // 初始化日志

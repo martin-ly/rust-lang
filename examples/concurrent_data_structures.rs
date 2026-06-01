@@ -1,6 +1,8 @@
 //! 并发数据结构示例
-//!
+//! concurrency data structure example
 //! 整合 C04(泛型), C05(并发), C08(算法), C09(设计模式)
+//! integration C04(generic ), C05(concurrency ), C08(algorithm ), C09(design )
+//! Integrates C04 (Generics), C05 (Concurrency), C08 (Algorithms), C09 (Design Patterns)
 
 use std::collections::VecDeque;
 use std::sync::{Arc, Condvar, Mutex};
@@ -8,6 +10,7 @@ use std::thread;
 use std::time::Duration;
 
 /// 泛型有界阻塞队列（生产者-消费者模式）
+/// generic （-）
 pub struct BoundedQueue<T> {
     queue: Mutex<VecDeque<T>>,
     condvar: Condvar,
@@ -24,6 +27,8 @@ impl<T> BoundedQueue<T> {
     }
 
     /// 入队（阻塞）
+    /// （）
+    /// 入队（Block）
     pub fn enqueue(&self, item: T) {
         let mut queue = self.queue.lock().unwrap();
 
@@ -36,6 +41,8 @@ impl<T> BoundedQueue<T> {
     }
 
     /// 出队（阻塞）
+    /// （）
+    /// 出队（Block）
     pub fn dequeue(&self) -> T {
         let mut queue = self.queue.lock().unwrap();
 
@@ -49,6 +56,8 @@ impl<T> BoundedQueue<T> {
     }
 
     /// 尝试入队（非阻塞）
+    /// （）
+    /// 尝试入队（Non-blocking）
     pub fn try_enqueue(&self, item: T) -> bool {
         let mut queue = self.queue.lock().unwrap();
 
@@ -62,6 +71,8 @@ impl<T> BoundedQueue<T> {
     }
 
     /// 尝试出队（非阻塞）
+    /// （）
+    /// 尝试出队（Non-blocking）
     pub fn try_dequeue(&self) -> Option<T> {
         let mut queue = self.queue.lock().unwrap();
 
@@ -73,17 +84,20 @@ impl<T> BoundedQueue<T> {
     }
 
     /// 当前大小
+    /// when before
     pub fn len(&self) -> usize {
         self.queue.lock().unwrap().len()
     }
 
     /// 是否为空
+    /// as
     pub fn is_empty(&self) -> bool {
         self.queue.lock().unwrap().is_empty()
     }
 }
 
 /// 泛型线程安全栈
+/// generic thread-safe stack
 pub struct ConcurrentStack<T> {
     stack: Mutex<Vec<T>>,
     condvar: Condvar,
@@ -129,6 +143,7 @@ impl<T> ConcurrentStack<T> {
 }
 
 /// 工作窃取队列（简化版）
+/// （）
 pub struct WorkStealingQueue<T> {
     local: Mutex<VecDeque<T>>,
     shared: Mutex<VecDeque<T>>,
@@ -143,16 +158,19 @@ impl<T> WorkStealingQueue<T> {
     }
 
     /// 本地线程推送（LIFO）
+    /// this thread （LIFO）
     pub fn push_local(&self, item: T) {
         self.local.lock().unwrap().push_back(item);
     }
 
     /// 本地线程弹出（LIFO）
+    /// this thread （LIFO）
     pub fn pop_local(&self) -> Option<T> {
         self.local.lock().unwrap().pop_back()
     }
 
     /// 偷取任务（FIFO，从其他线程调用）
+    /// task （FIFO，from its thread ）
     pub fn steal(&self) -> Option<T> {
         // 先尝试偷取共享队列
         if let Some(item) = self.shared.lock().unwrap().pop_front() {
@@ -164,12 +182,14 @@ impl<T> WorkStealingQueue<T> {
     }
 
     /// 分发到共享队列
+    /// to
     pub fn push_shared(&self, item: T) {
         self.shared.lock().unwrap().push_back(item);
     }
 }
 
 /// 演示：生产者-消费者模式
+/// demonstration ：-
 fn demo_producer_consumer() {
     println!("\n📦 演示: 生产者-消费者模式");
 
@@ -201,6 +221,8 @@ fn demo_producer_consumer() {
 }
 
 /// 演示：工作窃取
+/// demonstration ：
+/// Demonstration of：工作窃取
 fn demo_work_stealing() {
     println!("\n🔄 演示: 工作窃取队列");
 
@@ -238,6 +260,7 @@ fn demo_work_stealing() {
 }
 
 /// 演示：并发栈
+/// demonstration ：concurrency stack
 fn demo_concurrent_stack() {
     println!("\n📚 演示: 并发栈");
 

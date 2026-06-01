@@ -1,13 +1,12 @@
 //! 现代 Rust 模式 (2024-2025)
-//!
-//! 本示例展示 Rust 1.70+ 到 1.94 的现代编程模式：
+//! Rust (2024-2025)
 //! - let...else 语法
-//! - ControlFlow 类型
 //! - 内联 const
 //! - 泛型关联类型 (GATs)
-//! - RPITIT (Return Position Impl Trait In Traits)
+//! - generic associated type (GATs)
 //! - 异步 trait
 //! - 类型推导改进
+//! - type
 
 #![allow(unused)]
 
@@ -16,11 +15,10 @@ use std::fmt::Display;
 use std::ops::{ControlFlow, Deref};
 
 /// # 1. let...else 语法 (Rust 1.65+)
-///
-/// 用于提前返回的模式匹配，比 match 更简洁
 mod let_else_patterns {
     use std::collections::HashMap;
     /// 解析配置的传统方式
+    /// way
     pub fn parse_config_legacy(input: &str) -> Option<HashMap<String, String>> {
         let lines: Vec<&str> = match input.lines().next() {
             Some(first) if first.starts_with("#CONFIG") => input.lines().skip(1).collect(),
@@ -38,7 +36,7 @@ mod let_else_patterns {
         Some(config)
     }
 
-    /// 使用 let...else 的现代方式
+    /// Use let...else 现代way
     pub fn parse_config_modern(input: &str) -> Option<HashMap<String, String>> {
         // 提前返回无效输入
         let first = input.lines().next()?;
@@ -57,7 +55,7 @@ mod let_else_patterns {
         Some(config)
     }
 
-    /// 更复杂的 let...else 用法
+    /// 更complex let...else 用法
     pub fn process_nested_data(data: Option<Option<Option<String>>>) -> String {
         let Some(Some(Some(content))) = data else {
             return "default".to_string();
@@ -82,14 +80,12 @@ mod let_else_patterns {
     }
 }
 
-/// # 2. ControlFlow 类型 (Rust 1.55+)
-///
 /// 用于自定义控制流的优雅抽象
+/// definition stream
 mod control_flow_patterns {
     use super::*;
     use std::collections::HashMap;
 
-    /// 使用 ControlFlow 实现提前终止的遍历
     pub fn find_first_error<T, E>(
         items: &[T],
         validator: impl Fn(&T) -> Result<(), E>,
@@ -100,7 +96,6 @@ mod control_flow_patterns {
         Ok(())
     }
 
-    /// 使用 ControlFlow 实现有限搜索
     pub fn find_with_limit<T>(
         items: &[T],
         limit: usize,
@@ -117,7 +112,6 @@ mod control_flow_patterns {
         None
     }
 
-    /// 批量处理的 ControlFlow
     pub fn process_batch<T, E>(
         items: Vec<T>,
         processor: impl Fn(T) -> Result<T, E>,
@@ -150,15 +144,17 @@ mod control_flow_patterns {
 }
 
 /// # 3. 内联 const (Rust 1.79+)
-///
 /// 编译期常量计算
+/// constant
 mod inline_const {
     /// 编译时计算数组大小
+    /// compile-time
     pub const fn array_size() -> usize {
         1024 * 1024 // 1MB
     }
 
     /// 编译时计算哈希
+    /// compile-time
     pub const fn hash_string(s: &str) -> u64 {
         let mut hash = 0u64;
         let bytes = s.as_bytes();
@@ -187,12 +183,12 @@ mod inline_const {
 }
 
 /// # 4. 泛型关联类型 (GATs) - Rust 1.65+
-///
-/// 允许 trait 中的关联类型带有泛型参数
+/// # 4. generic associated type (GATs) - Rust 1.65+
 mod gat_patterns {
     use std::collections::HashMap;
 
     /// 泛型集合 trait
+    /// generic set trait
     pub trait Container {
         type Item<'a>
         where
@@ -229,6 +225,7 @@ mod gat_patterns {
     }
 
     /// 异步迭代器 trait（使用 GAT）
+    /// async trait（ GAT）
     pub trait AsyncIterator {
         type Item<'a>
         where
@@ -254,19 +251,19 @@ mod gat_patterns {
     }
 }
 
-/// # 5. 特质中的返回位置 impl Trait (RPITIT) - Rust 1.75+
-///
-/// 在 trait 方法中使用 impl Trait 作为返回类型
 mod rpitit_patterns {
     use std::fmt::Display;
 
     /// 传统方式：需要显式关联类型
+    /// way ：associated type
     pub trait ProducerOld {
         type Output: Display;
         fn produce(&self) -> Self::Output;
     }
 
     /// 现代方式：使用 impl Trait
+    /// way ： impl Trait
+    /// 现代way：Use impl Trait
     pub trait Producer {
         fn produce(&self) -> impl Display;
     }
@@ -284,6 +281,7 @@ mod rpitit_patterns {
     }
 
     /// 更复杂的用法：返回迭代器
+    /// complex ：
     pub trait DataSource {
         fn items(&self) -> impl Iterator<Item = i32> + '_;
     }
@@ -312,13 +310,14 @@ mod rpitit_patterns {
 }
 
 /// # 6. 异步 trait - Rust 1.75+
-///
 /// 原生异步 trait 支持
+/// async trait
+/// 原生async trait Supports
 mod async_trait_native {
     use std::future::Future;
 
-    /// 异步 trait（需要 async-trait crate 的时代）
     /// 现在可以直接在 trait 中使用 async fn
+    /// present can in trait in async fn
     pub trait DataFetcher {
         async fn fetch(&self, url: &str) -> Result<String, String>;
 
@@ -332,6 +331,7 @@ mod async_trait_native {
     }
 
     /// 实现异步 trait
+    /// async trait
     pub struct HttpFetcher;
 
     impl DataFetcher for HttpFetcher {
@@ -341,7 +341,6 @@ mod async_trait_native {
         }
     }
 
-    /// 返回 Future 的 trait 方法
     pub trait AsyncProcessor {
         fn process<'a>(&'a self, data: &'a str) -> impl Future<Output = String> + 'a;
     }
@@ -355,8 +354,10 @@ mod async_trait_native {
 }
 
 /// # 7. 类型推导和模式匹配改进
+/// # 7. type and
 mod type_inference_patterns {
     /// 更智能的类型推导
+    /// type
     pub fn smart_inference() {
         // 编译器现在可以更好地推导类型
         let numbers = [1, 2, 3, 4, 5]; // 无需显式类型标注
@@ -413,8 +414,10 @@ mod type_inference_patterns {
 }
 
 /// # 8. 新的标准库 API
+/// # 8. standard library API
+/// # 8. 新standardlibrary API
 mod new_std_apis {
-    /// Option 的新方法
+    /// Option 新method
     pub fn option_new_methods() {
         let x: Option<i32> = Some(5);
 
@@ -427,7 +430,7 @@ mod new_std_apis {
         println!("After inspect: {:?}", y);
     }
 
-    /// slice 的新方法
+    /// slice 新method
     pub fn slice_new_methods() {
         let _arr = [1, 2, 3, 4, 5];
 
@@ -439,7 +442,6 @@ mod new_std_apis {
         // Rust 1.77+ 新增了许多实用的 slice 方法
     }
 
-    /// HashMap 的新方法
     pub fn hashmap_new_methods() {
         let mut map = std::collections::HashMap::new();
         map.insert("a", 1);

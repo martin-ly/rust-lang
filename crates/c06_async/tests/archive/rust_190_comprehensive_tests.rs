@@ -1,12 +1,15 @@
 //! Rust 1.90 异步编程综合测试套件
-//! 
-//! 本测试套件验证Rust 1.90版本中的所有异步编程新特性，确保：
-//! - 异步Drop和异步生成器功能正常
+//! Rust 1.90 async synthesize
 //! - 改进的借用检查器工作正确
+//! - borrowing
 //! - 下一代特质求解器性能优化
+//! - under trait performance optimization
 //! - 并行前端编译优化有效
+//! - parallelism frontend optimization effective
 //! - 异步控制流增强稳定
+//! - async stream
 //! - 性能优化特性可靠
+//! - performance optimization feature
 use c06_async::{
     rust_190_features,
     async_control_flow_190,
@@ -16,6 +19,7 @@ use anyhow::Result;
 use std::time::Duration;
 
 /// 测试Rust 1.90基础特性
+/// Rust 1.90foundation feature
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_rust_190_basic_features() -> Result<()> {
@@ -49,6 +53,7 @@ async fn test_rust_190_basic_features() -> Result<()> {
 }
 
 /// 测试异步控制流增强
+/// async stream
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_async_control_flow_enhancements() -> Result<()> {
@@ -87,6 +92,7 @@ async fn test_async_control_flow_enhancements() -> Result<()> {
 }
 
 /// 测试性能优化特性
+/// performance optimization feature
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_performance_optimization_features() -> Result<()> {
@@ -131,6 +137,7 @@ async fn test_performance_optimization_features() -> Result<()> {
 }
 
 /// 测试综合场景
+/// synthesize scenario
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_comprehensive_scenarios() -> Result<()> {
@@ -163,6 +170,7 @@ async fn test_comprehensive_scenarios() -> Result<()> {
 }
 
 /// 测试错误处理
+/// error handling
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_error_handling() -> Result<()> {
@@ -192,6 +200,7 @@ async fn test_error_handling() -> Result<()> {
 }
 
 /// 测试并发性能
+/// concurrency performance
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_concurrency_performance() -> Result<()> {
@@ -219,6 +228,7 @@ async fn test_concurrency_performance() -> Result<()> {
 }
 
 /// 测试内存安全
+/// memory safety
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_memory_safety() -> Result<()> {
@@ -241,6 +251,7 @@ async fn test_memory_safety() -> Result<()> {
 }
 
 /// 测试性能基准
+/// performance
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_performance_benchmark() -> Result<()> {
@@ -285,6 +296,7 @@ async fn test_resource_cleanup() -> Result<()> {
 }
 
 /// 测试状态转换
+/// state conversion
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_state_transitions() -> Result<()> {

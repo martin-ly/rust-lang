@@ -1,29 +1,39 @@
 //! 并发相关的缓存优化示例与工具
-//!
+//! concurrency optimization example and tool
 //! 本模块提供与并发相关的缓存优化技术，包括：
+//! This module provides and concurrency optimization technique ，：
 //! - 缓存行对齐
+//! - cache line to
 //! - 伪共享避免
+//! - false sharing
 //! - 预取优化
+//! - prefetch optimization
 //! - 缓存友好的数据结构
+//! - cache-friendly data structure
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 /// 缓存行大小（通常为 64 字节）
+/// cache line （as 64 ）
 pub const CACHE_LINE_SIZE: usize = 64;
 
 /// 缓存行对齐的结构体
-///
+/// cache line to struct
 /// 使用 `#[repr(align(64))]` 确保结构体按缓存行对齐，
+/// `#[repr(align(64))]` struct cache line to ，
 /// 避免伪共享（false sharing）问题
+/// false sharing （false sharing）problem
 #[repr(align(64))]
 pub struct CacheAlignedCounter {
     /// 计数器值
     pub value: AtomicUsize,
     /// 填充字节，确保独占一个缓存行
+    /// ，cache line
     _padding: [u8; CACHE_LINE_SIZE - std::mem::size_of::<AtomicUsize>()],
 }
 
 impl CacheAlignedCounter {
     /// 创建新的缓存对齐计数器
+    /// to
     pub fn new(initial_value: usize) -> Self {
         Self {
             value: AtomicUsize::new(initial_value),
@@ -37,6 +47,7 @@ impl CacheAlignedCounter {
     }
 
     /// 获取当前值
+    /// when before
     pub fn get(&self) -> usize {
         self.value.load(Ordering::Relaxed)
     }
@@ -54,15 +65,18 @@ impl Default for CacheAlignedCounter {
 }
 
 /// 伪共享检测工具
-///
+/// false sharing tool
 /// 用于检测和避免伪共享问题
+/// and false sharing problem
 pub struct FalseSharingDetector {
     /// 检测到的伪共享次数
+    /// to false sharing
     false_sharing_count: AtomicUsize,
 }
 
 impl FalseSharingDetector {
     /// 创建新的伪共享检测器
+    /// false sharing
     pub fn new() -> Self {
         Self {
             false_sharing_count: AtomicUsize::new(0),
@@ -70,6 +84,7 @@ impl FalseSharingDetector {
     }
 
     /// 检测两个地址是否在同一缓存行
+    /// in cache line
     pub fn same_cache_line(&self, addr1: *const u8, addr2: *const u8) -> bool {
         let addr1 = addr1 as usize;
         let addr2 = addr2 as usize;
@@ -77,11 +92,13 @@ impl FalseSharingDetector {
     }
 
     /// 记录伪共享检测
+    /// false sharing
     pub fn record_false_sharing(&self) {
         self.false_sharing_count.fetch_add(1, Ordering::Relaxed);
     }
 
     /// 获取伪共享计数
+    /// false sharing
     pub fn false_sharing_count(&self) -> usize {
         self.false_sharing_count.load(Ordering::Relaxed)
     }
@@ -94,10 +111,12 @@ impl Default for FalseSharingDetector {
 }
 
 /// 缓存友好的数组结构
-///
+/// cache-friendly structure
 /// 使用缓存行对齐的数组，提高缓存命中率
+/// cache line to ，cache hit
 pub struct CacheFriendlyArray<T> {
     /// 数据数组
+    /// 数据array
     data: Vec<T>,
     /// 数组大小
     size: usize,
@@ -105,6 +124,7 @@ pub struct CacheFriendlyArray<T> {
 
 impl<T> CacheFriendlyArray<T> {
     /// 创建新的缓存友好数组
+    /// cache-friendly
     pub fn new(size: usize) -> Self
     where
         T: Default + Clone,
@@ -121,21 +141,27 @@ impl<T> CacheFriendlyArray<T> {
     }
 
     /// 检查数组是否为空
+    /// as
     pub fn is_empty(&self) -> bool {
         self.size == 0
     }
 
     /// 获取元素（不可变）
+    /// element （）
+    /// Getelement（不可变）
     pub fn get(&self, index: usize) -> Option<&T> {
         self.data.get(index)
     }
 
     /// 获取元素（可变）
+    /// element （）
+    /// Getelement（可变）
     pub fn get_mut(&mut self, index: usize) -> Option<&mut T> {
         self.data.get_mut(index)
     }
 
     /// 设置元素
+    /// element
     pub fn set(&mut self, index: usize, value: T) -> Result<(), String> {
         if index >= self.size {
             return Err(format!(
@@ -149,12 +175,14 @@ impl<T> CacheFriendlyArray<T> {
 }
 
 /// 预取提示
-///
+/// prefetch hint
 /// 提示 CPU 预取数据到缓存
+/// hint CPU prefetch to
 pub struct PrefetchHint;
 
 impl PrefetchHint {
     /// 预取数据到 L1 缓存
+    /// prefetch to L1
     #[cfg(target_arch = "x86_64")]
     pub fn prefetch_l1(addr: *const u8) {
         unsafe {
@@ -163,6 +191,7 @@ impl PrefetchHint {
     }
 
     /// 预取数据到 L2 缓存
+    /// prefetch to L2
     #[cfg(target_arch = "x86_64")]
     pub fn prefetch_l2(addr: *const u8) {
         unsafe {
@@ -171,6 +200,7 @@ impl PrefetchHint {
     }
 
     /// 预取数据到 L3 缓存
+    /// prefetch to L3
     #[cfg(target_arch = "x86_64")]
     pub fn prefetch_l3(addr: *const u8) {
         unsafe {
@@ -179,6 +209,7 @@ impl PrefetchHint {
     }
 
     /// 非 x86_64 架构的占位实现
+    /// x86_64 architecture
     #[cfg(not(target_arch = "x86_64"))]
     pub fn prefetch_l1(_addr: *const u8) {
         // 非 x86_64 架构不支持硬件预取
@@ -196,15 +227,18 @@ impl PrefetchHint {
 }
 
 /// 缓存优化的并行累加器
-///
+/// optimization parallelism
 /// 使用线程本地存储避免伪共享
+/// thread-local storage false sharing
 pub struct CacheOptimizedAccumulator {
     /// 线程本地计数器数组（每个线程一个缓存行）
+    /// thread this （thread cache line ）
     counters: Vec<CacheAlignedCounter>,
 }
 
 impl CacheOptimizedAccumulator {
     /// 创建新的缓存优化累加器
+    /// optimization
     pub fn new(thread_count: usize) -> Self {
         Self {
             counters: (0..thread_count)
@@ -214,16 +248,19 @@ impl CacheOptimizedAccumulator {
     }
 
     /// 获取线程的计数器
+    /// thread
     pub fn get_counter(&self, thread_id: usize) -> Option<&CacheAlignedCounter> {
         self.counters.get(thread_id)
     }
 
     /// 累加所有计数器的值
+    /// all
     pub fn total(&self) -> usize {
         self.counters.iter().map(|c| c.get()).sum()
     }
 
     /// 重置所有计数器
+    /// all
     pub fn reset_all(&self) {
         for counter in &self.counters {
             counter.reset();

@@ -1,8 +1,5 @@
 //! Loom 模型检测测试：Lock-free Treiber Stack
-//!
-//! 使用 Loom 对基于 `loom::sync::atomic::AtomicPtr` 的无锁栈进行系统性状态空间探索，
-//! 验证 CAS 操作在线程交错下的正确性（无 ABA 问题、无数据竞争、无 use-after-free）。
-//!
+//! Loom 模型检测Test for：Lock-free Treiber Stack
 //! 运行：cargo test --test loom_lockfree_tests -p c05_threads -- --ignored
 
 use loom::sync::atomic::{AtomicPtr, Ordering};

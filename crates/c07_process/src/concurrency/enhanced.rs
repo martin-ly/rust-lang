@@ -1,7 +1,10 @@
 //! 增强的同步原语功能
+//! synchronous functionality
 //!
 //! 这个模块提供了增强的同步原语功能，包括死锁检测、
+//! module synchronous functionality ，lock 、
 //! 性能监控、自适应锁策略等 Rust 1.90 新特性
+//! performance 、adaptive lock strategy etc. Rust 1.90 feature
 use crate::error::{SyncError, SyncResult};
 use crate::types::{SyncConfig, SyncPrimitive};
 use serde::{Deserialize, Serialize};
@@ -12,6 +15,7 @@ use std::time::{Duration, Instant};
 use tokio::sync::{Barrier, Mutex as TokioMutex, RwLock as TokioRwLock, Semaphore};
 
 /// 增强的同步管理器
+/// synchronous
 #[cfg(feature = "async")]
 pub struct EnhancedSyncManager {
     primitives: Arc<TokioRwLock<HashMap<String, Arc<dyn EnhancedSyncPrimitiveTrait>>>>,
@@ -22,27 +26,33 @@ pub struct EnhancedSyncManager {
 }
 
 /// 增强的同步原语trait
+/// synchronous trait
 #[cfg(feature = "async")]
 pub trait EnhancedSyncPrimitiveTrait: Send + Sync {
     /// 获取原语名称
     fn name(&self) -> &str;
 
     /// 获取原语类型
+    /// type
     fn primitive_type(&self) -> SyncPrimitive;
 
     /// 检查是否被锁定
+    /// is lock
     fn is_locked(&self) -> bool;
 
     /// 获取等待者数量
+    /// etc. quantity
     fn waiter_count(&self) -> usize;
 
     /// 获取统计信息
     fn get_stats(&self) -> EnhancedPrimitiveStats;
 
     /// 获取性能指标
+    /// performance indicator
     fn get_performance_metrics(&self) -> SyncPerformanceMetrics;
 
     /// 检查死锁风险
+    /// lock risk
     fn check_deadlock_risk(&self) -> DeadlockRisk;
 
     /// 自适应调整
@@ -50,6 +60,7 @@ pub trait EnhancedSyncPrimitiveTrait: Send + Sync {
 }
 
 /// 增强的互斥锁
+/// mutex
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 pub struct EnhancedMutex {
@@ -63,6 +74,7 @@ pub struct EnhancedMutex {
 }
 
 /// 增强的读写锁
+/// rwlock
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 pub struct EnhancedRwLock {
@@ -76,6 +88,7 @@ pub struct EnhancedRwLock {
 }
 
 /// 增强的信号量
+/// semaphore
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 pub struct EnhancedSemaphore {
@@ -89,6 +102,7 @@ pub struct EnhancedSemaphore {
 }
 
 /// 增强的屏障
+/// barrier
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 pub struct EnhancedBarrier {
@@ -251,6 +265,7 @@ impl EnhancedSyncPrimitiveTrait for EnhancedBarrier {
 }
 
 /// 死锁检测器
+/// lock
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 pub struct DeadlockDetector {
@@ -261,6 +276,7 @@ pub struct DeadlockDetector {
 }
 
 /// 同步性能监控器
+/// synchronous performance
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 pub struct SyncPerformanceMonitor {
@@ -302,6 +318,7 @@ pub struct EnhancedPrimitiveStats {
 }
 
 /// 同步性能指标
+/// synchronous performance indicator
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[allow(dead_code)]
@@ -321,6 +338,7 @@ fn now_instant() -> Instant {
 }
 
 /// 死锁风险等级
+/// lock risk grade
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[allow(dead_code)]
@@ -332,6 +350,7 @@ pub enum DeadlockRisk {
 }
 
 /// 性能分析结果
+/// performance analyze result
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[allow(dead_code)]
@@ -345,6 +364,7 @@ pub struct PerformanceAnalysis {
 }
 
 /// 单个原语性能分析
+/// performance analyze
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[allow(dead_code)]
@@ -355,6 +375,7 @@ pub struct PrimitiveAnalysis {
 }
 
 /// 增强的互斥锁统计信息
+/// mutex
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 struct EnhancedMutexStats {
@@ -367,6 +388,7 @@ struct EnhancedMutexStats {
 }
 
 /// 增强的读写锁统计信息
+/// rwlock
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 struct EnhancedRwLockStats {
@@ -381,6 +403,7 @@ struct EnhancedRwLockStats {
 }
 
 /// 增强的信号量统计信息
+/// semaphore
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 struct EnhancedSemaphoreStats {
@@ -393,6 +416,7 @@ struct EnhancedSemaphoreStats {
 }
 
 /// 增强的屏障统计信息
+/// barrier
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 struct EnhancedBarrierStats {
@@ -407,6 +431,7 @@ struct EnhancedBarrierStats {
 #[allow(dead_code)]
 impl EnhancedSyncManager {
     /// 创建新的增强同步管理器
+    /// synchronous
     pub async fn new(config: SyncConfig) -> SyncResult<Self> {
         let primitives = Arc::new(TokioRwLock::new(HashMap::new()));
         let deadlock_detector = Arc::new(DeadlockDetector::new());
@@ -441,6 +466,7 @@ impl EnhancedSyncManager {
     }
 
     /// 创建增强的互斥锁
+    /// mutex
     pub async fn create_enhanced_mutex(&self, name: &str) -> SyncResult<Arc<EnhancedMutex>> {
         let mutex = EnhancedMutex::new(
             name,
@@ -462,6 +488,7 @@ impl EnhancedSyncManager {
     }
 
     /// 创建增强的读写锁
+    /// rwlock
     pub async fn create_enhanced_rwlock(&self, name: &str) -> SyncResult<Arc<EnhancedRwLock>> {
         let rwlock = EnhancedRwLock {
             name: name.to_string(),
@@ -502,6 +529,7 @@ impl EnhancedSyncManager {
     }
 
     /// 创建增强的信号量
+    /// semaphore
     pub async fn create_enhanced_semaphore(
         &self,
         name: &str,
@@ -544,6 +572,7 @@ impl EnhancedSyncManager {
     }
 
     /// 创建增强的屏障
+    /// barrier
     pub async fn create_enhanced_barrier(
         &self,
         name: &str,
@@ -585,11 +614,13 @@ impl EnhancedSyncManager {
     }
 
     /// 获取所有原语名称
+    /// all
     pub async fn get_primitive_names(&self) -> Vec<String> {
         self.primitives.read().await.keys().cloned().collect()
     }
 
     /// 检查原语是否存在
+    /// in
     pub async fn has_primitive(&self, name: &str) -> bool {
         self.primitives.read().await.contains_key(name)
     }
@@ -601,6 +632,7 @@ impl EnhancedSyncManager {
     }
 
     /// 获取所有原语统计信息
+    /// all
     pub async fn get_all_stats(&self) -> HashMap<String, EnhancedPrimitiveStats> {
         let primitives = self.primitives.read().await;
         let mut stats = HashMap::new();
@@ -613,18 +645,22 @@ impl EnhancedSyncManager {
     }
 
     /// 获取性能指标
+    /// performance indicator
     pub async fn get_performance_metrics(&self, name: &str) -> Option<SyncPerformanceMetrics> {
         self.performance_monitor.get_metrics(name).await
     }
 
     /// 获取所有性能指标
+    /// all performance indicator
     pub async fn get_all_performance_metrics(&self) -> HashMap<String, SyncPerformanceMetrics> {
         self.performance_monitor.get_all_metrics().await
     }
 
     /// 智能性能分析（使用 Rust 1.90 改进的迭代器）
+    /// performance analyze （ Rust 1.90 ）
     ///
     /// 使用 Rust 1.90 的改进迭代器特性进行性能分析
+    /// Rust 1.90 feature performance analyze
     pub async fn analyze_performance(&self) -> SyncResult<PerformanceAnalysis> {
         let all_metrics = self.get_all_performance_metrics().await;
 
@@ -676,6 +712,7 @@ impl EnhancedSyncManager {
     }
 
     /// 检查死锁风险
+    /// lock risk
     pub async fn check_deadlock_risk(&self) -> HashMap<String, DeadlockRisk> {
         let primitives = self.primitives.read().await;
         let mut risks = HashMap::new();
@@ -688,6 +725,7 @@ impl EnhancedSyncManager {
     }
 
     /// 自适应调整所有原语
+    /// all
     pub async fn adaptive_adjust_all(&self, load: f64) -> SyncResult<()> {
         let primitives = self.primitives.read().await;
 
@@ -699,6 +737,7 @@ impl EnhancedSyncManager {
     }
 
     /// 死锁检测循环
+    /// lock circulation
     async fn deadlock_detection_loop(detector: Arc<DeadlockDetector>) {
         let mut interval = tokio::time::interval(Duration::from_secs(1));
 
@@ -712,6 +751,7 @@ impl EnhancedSyncManager {
     }
 
     /// 性能监控循环
+    /// performance circulation
     async fn performance_monitoring_loop(monitor: Arc<SyncPerformanceMonitor>) {
         let mut interval = tokio::time::interval(Duration::from_secs(1));
 
@@ -725,6 +765,7 @@ impl EnhancedSyncManager {
     }
 
     /// 自适应调度循环
+    /// circulation
     async fn adaptive_scheduling_loop(scheduler: Arc<AdaptiveScheduler>) {
         let mut interval = tokio::time::interval(Duration::from_secs(5));
 
@@ -772,8 +813,10 @@ impl EnhancedMutex {
     }
 
     /// 智能锁获取（使用 Rust 1.90 异步闭包特性）
+    /// lock （ Rust 1.90 async feature ）
     ///
     /// 支持异步闭包回调，在锁获取成功后执行自定义逻辑
+    /// async ，in lock after definition
     pub async fn lock_with_callback<F, Fut>(&self, callback: F) -> SyncResult<()>
     where
         F: FnOnce(EnhancedMutexGuard<'_>) -> Fut + Send + Sync + 'static,
@@ -788,8 +831,10 @@ impl EnhancedMutex {
     }
 
     /// 获取锁（带死锁检测和 Rust 1.90 智能模式匹配）
+    /// lock （lock and Rust 1.90 ）
     ///
     /// 使用 Rust 1.90 的改进模式匹配和错误处理特性
+    /// Rust 1.90 and error handling feature
     pub async fn lock(&self) -> SyncResult<EnhancedMutexGuard<'_>> {
         let start_time = Instant::now();
 
@@ -865,6 +910,7 @@ impl EnhancedMutex {
     }
 
     /// 尝试获取锁
+    /// lock
     pub fn try_lock(&self) -> Option<EnhancedMutexGuard<'_>> {
         if let Ok(guard) = self.inner.try_lock() {
             self.stats.lock_count.fetch_add(1, Ordering::Relaxed);
@@ -901,6 +947,7 @@ impl EnhancedMutex {
 #[cfg(feature = "async")]
 impl EnhancedRwLock {
     /// 获取读锁
+    /// lock
     pub async fn read(&self) -> tokio::sync::RwLockReadGuard<'_, ()> {
         let start_time = Instant::now();
         let guard = self.inner.read().await;
@@ -928,6 +975,7 @@ impl EnhancedRwLock {
     }
 
     /// 获取写锁
+    /// lock
     pub async fn write(&self) -> tokio::sync::RwLockWriteGuard<'_, ()> {
         let start_time = Instant::now();
         let guard = self.inner.write().await;
@@ -989,6 +1037,7 @@ impl EnhancedSemaphore {
 #[cfg(feature = "async")]
 impl EnhancedBarrier {
     /// 等待所有参与者到达屏障
+    /// etc. all and to barrier
     pub async fn wait(&self) -> tokio::sync::BarrierWaitResult {
         let start_time = Instant::now();
         let res = self.inner.wait().await;
@@ -1013,6 +1062,7 @@ impl EnhancedBarrier {
     }
 }
 /// 增强的互斥锁守卫
+/// mutex
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 pub struct EnhancedMutexGuard<'a> {

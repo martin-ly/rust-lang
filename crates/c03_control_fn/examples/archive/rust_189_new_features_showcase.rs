@@ -1,43 +1,41 @@
 //! # Rust 1.89 特性示例 (历史版本)
-//!
+//! # Rust 1.89 feature example (this )
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//!
+//! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features_demo.rs`
-//!
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features_demo.rs`
 //! ## 版本历史说明
-//!
-//! 本文件展示 Rust 1.89 版本的特性，当前项目已升级到 Rust 1.92.0。
-//!
+//! ## this explain
 //! ### Rust 1.92.0 主要改进
-//!
-//! - **语言特性**: MaybeUninit 文档化、联合体原始引用、关联项多边界等
-//! - **标准库**: NonZero::div_ceil、rotate_right、Location::file_as_c_str
+//! ### Rust 1.92.0 main
 //! - **性能优化**: 迭代器方法特化、改进的编译优化
-//!
+//! - **performance optimization **: method 、optimization
 //! ### 迁移建议
-//!
+//! ###
 //! 1. 更新 Cargo.toml: `rust-version = "1.92"`
-//! 2. 参考 `examples/rust_192_features_demo.rs` 了解最新特性示例
-//! 3. 查看 `docs/RUST_192_CONTROL_FLOW_IMPROVEMENTS.md` 了解完整改进
-//!
 //! 参考:
-//! - [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/)
+//! reference :
 //! - [历史版本: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
-//!
-//! ---
+//! - [历史版this: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 //!
 //! # Rust 1.89 新特性展示
-//!
-//! 本示例专门展示 Rust 1.89 版本的新特性和增强功能：
+//! # Rust 1.89 feature
+//! # Rust 1.89 新featuredisplay
 //! - let_chains 稳定化
 //! - cfg_boolean_literals 稳定化
 //! - 增强的模式匹配
+//! -
 //! - 改进的类型推断
+//! - type infer
+//! - 改进type inference
 //! - 新的控制流特性
+//! - stream feature
+//! - 新控制streamfeature
 //! - 改进的错误处理
-//!
+//! - error handling
+//! - 改进error handling
 //! 运行方式：
-//! ```bash
+//! Run way ：
 //! cargo run --example rust_189_new_features_showcase
 //! ```
 use std::collections::HashMap;
@@ -46,6 +44,8 @@ use std::thread;
 use std::time::Duration;
 
 /// 主函数 - 展示 Rust 1.89 新特性
+/// Main function - Rust 1.89 feature
+/// Main function - display Rust 1.89 新feature
 fn main() {
     println!("🚀 Rust 1.89 新特性展示");
     println!("=========================");
@@ -245,6 +245,7 @@ fn showcase_enhanced_pattern_matching() {
 }
 
 /// 展示增强的类型推断
+/// type infer
 fn showcase_enhanced_type_inference() {
     println!("\n\n🧠 增强的类型推断特性展示");
     println!("===========================");
@@ -277,6 +278,7 @@ fn showcase_enhanced_type_inference() {
 }
 
 /// 展示新的控制流特性
+/// stream feature
 fn showcase_new_control_flow() {
     println!("\n\n🔄 新的控制流特性展示");
     println!("=====================");
@@ -329,6 +331,7 @@ fn showcase_new_control_flow() {
 }
 
 /// 展示改进的错误处理
+/// error handling
 fn showcase_improved_error_handling() {
     println!("\n\n🛡️ 改进的错误处理特性展示");
     println!("===========================");
@@ -378,6 +381,7 @@ fn showcase_improved_error_handling() {
 }
 
 /// 展示综合应用
+/// synthesize application
 fn showcase_comprehensive_usage() {
     println!("\n\n🎯 综合应用展示");
     println!("================");
@@ -432,6 +436,7 @@ fn showcase_comprehensive_usage() {
 // 辅助数据结构和函数
 
 /// 形状枚举
+/// enum
 #[derive(Debug)]
 enum Shape {
     Circle(f64),
@@ -440,6 +445,8 @@ enum Shape {
 }
 
 /// 自定义结果类型
+/// definition result type
+/// 自definitionresulttype
 #[derive(Debug)]
 enum CustomResult {
     Success(i32),
@@ -448,6 +455,7 @@ enum CustomResult {
 }
 
 /// 异步操作结构
+/// async structure
 #[derive(Debug)]
 struct AsyncOperation {
     name: String,
@@ -470,11 +478,13 @@ impl AsyncOperation {
 }
 
 /// 检查三角形是否有效
+/// effective
 fn is_valid_triangle(a: f64, b: f64, c: f64) -> bool {
     a + b > c && a + c > b && b + c > a
 }
 
 /// 创建泛型数据
+/// generic
 fn create_generic_data<T>(value: T) -> GenericData<T>
 where
     T: Clone + Display,
@@ -483,6 +493,7 @@ where
 }
 
 /// 异步操作
+/// async
 async fn async_operation(x: i32) -> i32 {
     x * 2
 }
@@ -502,11 +513,13 @@ fn recoverable_operation(input: &str) -> Result<i32, String> {
 }
 
 /// 错误转换
+/// error conversion
 fn convert_error(s: &str) -> Result<i32, CustomError> {
     s.parse::<i32>().map_err(|e| CustomError::ParseError(e))
 }
 
 /// 泛型数据结构
+/// generic data structure
 #[derive(Debug)]
 struct GenericData<T> {
     value: T,
@@ -522,6 +535,8 @@ where
 }
 
 /// 自定义错误类型
+/// definition error type
+/// 自definitionerror type
 #[derive(Debug)]
 enum CustomError {
     ParseError(std::num::ParseIntError),

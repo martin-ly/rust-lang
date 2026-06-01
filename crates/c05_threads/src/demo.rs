@@ -1,6 +1,7 @@
 //! 综合演示模块
-//!
+//! Comprehensive demonstration module
 //! 本模块展示了所有线程相关功能的综合使用
+//! This module demonstrates comprehensive usage of all thread-related features
 use std::sync::Arc;
 use std::thread;
 use std::time::Duration;
@@ -31,6 +32,7 @@ pub mod message_passing {
 }
 
 /// 综合演示
+/// synthesize demonstration
 pub fn run_comprehensive_demo() {
     println!("=== Rust 线程编程综合演示 ===");
     println!("本演示展示了Rust 1.89中线程编程的各种高级特性\n");
@@ -118,6 +120,7 @@ pub fn run_comprehensive_demo() {
 }
 
 /// 性能基准测试
+/// Performance benchmark
 pub fn run_performance_benchmarks() {
     println!("=== 性能基准测试 ===");
 
@@ -235,6 +238,7 @@ pub fn run_performance_benchmarks() {
 }
 
 /// 内存使用分析
+/// Memory usage analysis
 pub fn run_memory_analysis() {
     println!("=== 内存使用分析 ===");
 
@@ -296,6 +300,7 @@ pub fn run_memory_analysis() {
 }
 
 /// 错误处理演示
+/// Error handling demonstration
 pub fn run_error_handling_demo() {
     println!("=== 错误处理演示 ===");
 
@@ -328,6 +333,7 @@ pub fn run_error_handling_demo() {
 }
 
 /// 运行所有演示
+/// Run all demonstrations
 pub fn run_all_demos() {
     println!("开始运行所有演示...\n");
 

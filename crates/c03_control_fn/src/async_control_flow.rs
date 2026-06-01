@@ -4,10 +4,10 @@
 use std::future::Future;
 
 /// 异步控制流执行器
+/// async stream
 pub struct AsyncControlFlowExecutor;
 
 impl AsyncControlFlowExecutor {
-    /// 异步if-else控制流
     pub async fn async_if_else<F, G, T>(&self, condition: bool, if_branch: F, else_branch: G) -> T
     where
         F: Future<Output = T>,
@@ -21,6 +21,7 @@ impl AsyncControlFlowExecutor {
     }
 
     /// 异步循环控制流
+    /// async circulation stream
     pub async fn async_loop<F, T>(
         &self,
         mut condition: F,
@@ -40,6 +41,7 @@ impl AsyncControlFlowExecutor {
     }
 
     /// 异步for循环控制流
+    /// async forcirculation stream
     pub async fn async_for<T, F, Fut>(&self, items: Vec<T>, processor: F) -> Vec<T>
     where
         T: Clone,
@@ -57,6 +59,7 @@ impl AsyncControlFlowExecutor {
     }
 
     /// 异步模式匹配
+    /// async
     pub async fn async_match<T, U, F, Fut>(&self, value: T, patterns: Vec<F>) -> Option<U>
     where
         T: Clone,
@@ -73,6 +76,7 @@ impl AsyncControlFlowExecutor {
 }
 
 /// 异步状态机
+/// async state machine
 pub struct AsyncStateMachine<S, T> {
     state: S,
     _phantom: std::marker::PhantomData<T>,
@@ -96,6 +100,7 @@ impl<S, T> AsyncStateMachine<S, T> {
 }
 
 /// 异步迭代器trait
+/// async trait
 pub trait AsyncIterator {
     type Item;
     type Future: Future<Output = Option<Self::Item>>;
@@ -104,6 +109,7 @@ pub trait AsyncIterator {
 }
 
 /// 异步流处理器
+/// async stream
 pub struct AsyncStreamProcessor<T> {
     items: Vec<T>,
     index: usize,
@@ -135,10 +141,12 @@ impl<T> AsyncStreamProcessor<T> {
 }
 
 /// 异步控制流组合器
+/// async stream combination
 pub struct AsyncControlFlowComposer;
 
 impl AsyncControlFlowComposer {
     /// 组合多个异步操作
+    /// combination async
     pub async fn compose<T, U, V, F, G, Fut1, Fut2>(&self, first: F, second: G, value: T) -> V
     where
         F: Fn(T) -> Fut1,
@@ -151,6 +159,7 @@ impl AsyncControlFlowComposer {
     }
 
     /// 并行执行多个异步操作
+    /// parallelism async
     pub async fn parallel<F, T>(&self, operations: Vec<F>) -> Vec<T>
     where
         F: Future<Output = T> + Send + 'static,
@@ -172,6 +181,7 @@ impl AsyncControlFlowComposer {
     }
 
     /// 条件异步执行
+    /// condition async
     pub async fn conditional<F, T>(&self, condition: bool, operation: F) -> Option<T>
     where
         F: Future<Output = T>,
@@ -185,10 +195,12 @@ impl AsyncControlFlowComposer {
 }
 
 /// 异步错误处理
+/// async error handling
 pub struct AsyncErrorHandler;
 
 impl AsyncErrorHandler {
     /// 重试异步操作
+    /// async
     pub async fn retry<F, T, E, Fut>(
         &self,
         mut operation: F,
@@ -219,6 +231,7 @@ impl AsyncErrorHandler {
     }
 
     /// 超时异步操作
+    /// async
     pub async fn with_timeout<F, T>(
         &self,
         operation: F,

@@ -1,17 +1,25 @@
 //! 分布式系统异步演示
-//!
+//! distribution system async demonstration
 //! 本示例展示了分布式系统中的异步编程模式：
+//! this example distribution system in async ：
 //! - 分布式锁
+//! - distribution lock
 //! - 一致性哈希
+//! - consistent hashing
 //! - 分布式缓存
+//! - distribution
 //! - 分布式消息队列
+//! - distribution
 //! - 分布式事务
+//! - distribution
 //! - 分布式配置管理
+//! - distribution
 //! - 分布式日志
+//! - distribution
 //! - 分布式监控
-//!
+//! - distribution
 //! 运行方式：
-//! ```bash
+//! Run way ：
 //! cargo run --example distributed_systems_demo
 //! ```
 use anyhow::Result;
@@ -25,6 +33,7 @@ use tokio::time::interval;
 use uuid::Uuid;
 
 /// 分布式锁
+/// distribution lock
 #[allow(dead_code)]
 pub struct DistributedLock {
     lock_name: String,
@@ -107,6 +116,7 @@ impl DistributedLock {
 }
 
 /// 一致性哈希环
+/// consistent hashing
 #[allow(dead_code)]
 pub struct ConsistentHashRing<T> {
     ring: Arc<RwLock<BTreeMap<u64, T>>>,
@@ -172,6 +182,7 @@ impl<T: Clone + Send + Sync + std::fmt::Debug> ConsistentHashRing<T> {
 }
 
 /// 分布式缓存
+/// distribution
 #[allow(dead_code)]
 pub struct DistributedCache {
     nodes: Arc<ConsistentHashRing<String>>,
@@ -294,6 +305,7 @@ pub struct CacheStats {
 }
 
 /// 分布式消息队列
+/// distribution
 #[allow(dead_code)]
 pub struct DistributedMessageQueue {
     topics: Arc<RwLock<HashMap<String, Topic>>>,
@@ -453,6 +465,7 @@ pub struct TopicStats {
 }
 
 /// 分布式事务协调器
+/// distribution
 #[allow(dead_code)]
 pub struct DistributedTransactionCoordinator {
     transactions: Arc<RwLock<HashMap<String, Transaction>>>,

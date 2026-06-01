@@ -7,25 +7,31 @@ use thiserror::Error;
 pub mod enhanced;
 
 /// 进程管理相关错误
+/// process
 #[derive(Error, Debug)]
 pub enum ProcessError {
     /// 进程创建失败
+    /// process
     #[error("Failed to create process: {0}")]
     CreationFailed(String),
 
     /// 进程启动失败
+    /// process
     #[error("Failed to start process: {0}")]
     StartFailed(String),
 
     /// 进程等待失败
+    /// process etc.
     #[error("Failed to wait for process: {0}")]
     WaitFailed(String),
 
     /// 进程终止失败
+    /// process
     #[error("Failed to terminate process: {0}")]
     TerminationFailed(String),
 
     /// 进程不存在
+    /// process in
     #[error("Process not found: {0}")]
     NotFound(u32),
 
@@ -38,43 +44,53 @@ pub enum ProcessError {
     ResourceExhausted(String),
 
     /// 无效的进程配置
+    /// ineffective process
     #[error("Invalid process configuration: {0}")]
     InvalidConfig(String),
 
     /// 进程已终止
+    /// process
     #[error("Process already terminated")]
     AlreadyTerminated,
 
     /// 子进程错误
+    /// process
     #[error("Child process error: {0}")]
     ChildError(#[from] ChildProcessError),
 
     /// IO错误
+    /// IO
     #[error("IO error: {0}")]
     Io(#[from] io::Error),
 }
 
 /// 子进程相关错误
+/// process
 #[derive(Error, Debug)]
 pub enum ChildProcessError {
     /// 子进程异常退出
+    /// process
     #[error("Child process exited abnormally: {0:?}")]
     AbnormalExit(ExitStatus),
 
     /// 子进程超时
+    /// process
     #[error("Child process timeout after {0:?}")]
     Timeout(std::time::Duration),
 
     /// 子进程信号中断
+    /// process in
     #[error("Child process interrupted by signal: {0}")]
     SignalInterrupted(i32),
 
     /// 子进程资源限制
+    /// process
     #[error("Child process resource limit exceeded: {0}")]
     ResourceLimitExceeded(String),
 }
 
 /// IPC相关错误
+/// IP C
 #[derive(Error, Debug)]
 pub enum IpcError {
     /// 连接失败
@@ -98,22 +114,27 @@ pub enum IpcError {
     ProtocolNotSupported(String),
 
     /// 通道已关闭
+    /// channel
     #[error("IPC channel is closed")]
     ChannelClosed,
 
     /// 通道未找到
+    /// channel to
     #[error("IPC channel not found: {0}")]
     ChannelNotFound(String),
 
     /// 序列化错误
+    /// sequence
     #[error("Serialization error: {0}")]
     SerializationError(String),
 
     /// 反序列化错误
+    /// sequence
     #[error("Deserialization error: {0}")]
     DeserializationError(String),
 
     /// 共享内存错误
+    /// shared memory
     #[error("Shared memory error: {0}")]
     SharedMemoryError(String),
 
@@ -123,17 +144,21 @@ pub enum IpcError {
 }
 
 /// 同步相关错误
+/// synchronous
 #[derive(Error, Debug)]
 pub enum SyncError {
     /// 锁获取失败
+    /// lock
     #[error("Failed to acquire lock: {0}")]
     LockAcquisitionFailed(String),
 
     /// 锁释放失败
+    /// lock
     #[error("Failed to release lock: {0}")]
     LockReleaseFailed(String),
 
     /// 死锁检测
+    /// lock
     #[error("Deadlock detected: {0}")]
     DeadlockDetected(String),
 
@@ -142,38 +167,47 @@ pub enum SyncError {
     Timeout(std::time::Duration),
 
     /// 条件变量错误
+    /// condition variable
     #[error("Condition variable error: {0}")]
     CondVarError(String),
 
     /// 信号量错误
+    /// semaphore
     #[error("Semaphore error: {0}")]
     SemaphoreError(String),
 
     /// 屏障错误
+    /// barrier
     #[error("Barrier error: {0}")]
     BarrierError(String),
 
     /// 原子操作错误
+    /// atomic operation
     #[error("Atomic operation error: {0}")]
     AtomicError(String),
 }
 
 /// 系统资源错误
+/// system
 #[derive(Error, Debug)]
 pub enum ResourceError {
     /// 内存不足
+    /// out of memory
     #[error("Insufficient memory: requested {0}, available {1}")]
     InsufficientMemory(u64, u64),
 
     /// 文件描述符不足
+    /// file descriptor
     #[error("Insufficient file descriptors: requested {0}, available {1}")]
     InsufficientFileDescriptors(u64, u64),
 
     /// CPU时间不足
+    /// CPUtime
     #[error("Insufficient CPU time: requested {0}, available {1}")]
     InsufficientCpuTime(u64, u64),
 
     /// 磁盘空间不足
+    /// space
     #[error("Insufficient disk space: requested {0}, available {1}")]
     InsufficientDiskSpace(u64, u64),
 
@@ -183,21 +217,26 @@ pub enum ResourceError {
 }
 
 /// 平台特定错误
+/// platform
 #[derive(Error, Debug)]
 pub enum PlatformError {
     /// Unix系统错误
+    /// Unixsystem
     #[error("Unix system error: {0}")]
     Unix(String),
 
     /// Windows系统错误
+    /// Windowssystem
     #[error("Windows system error: {0}")]
     Windows(String),
 
     /// 跨平台不支持
+    /// platform
     #[error("Cross-platform not supported: {0}")]
     NotSupported(String),
 
     /// 平台特定功能缺失
+    /// platform functionality
     #[error("Platform-specific feature missing: {0}")]
     FeatureMissing(String),
 }
@@ -206,6 +245,7 @@ pub enum PlatformError {
 #[derive(Error, Debug)]
 pub enum ConfigError {
     /// 配置文件不存在
+    /// in
     #[error("Configuration file not found: {0}")]
     FileNotFound(String),
 
@@ -218,6 +258,7 @@ pub enum ConfigError {
     MissingItem(String),
 
     /// 配置项无效
+    /// ineffective
     #[error("Invalid configuration item: {0}")]
     InvalidItem(String),
 
@@ -227,17 +268,21 @@ pub enum ConfigError {
 }
 
 /// 通用错误类型
+/// error type
 #[derive(Error, Debug)]
 pub enum C07ProcessError {
     /// 进程错误
+    /// process
     #[error("Process error: {0}")]
     Process(#[from] ProcessError),
 
     /// IPC错误
+    /// IP C
     #[error("IPC error: {0}")]
     Ipc(#[from] IpcError),
 
     /// 同步错误
+    /// synchronous
     #[error("Synchronization error: {0}")]
     Sync(#[from] SyncError),
 
@@ -246,6 +291,7 @@ pub enum C07ProcessError {
     Resource(#[from] ResourceError),
 
     /// 平台错误
+    /// platform
     #[error("Platform error: {0}")]
     Platform(#[from] PlatformError),
 
@@ -254,10 +300,12 @@ pub enum C07ProcessError {
     Config(#[from] ConfigError),
 
     /// IO错误
+    /// IO
     #[error("IO error: {0}")]
     Io(#[from] io::Error),
 
     /// 其他错误
+    /// its
     #[error("Other error: {0}")]
     Other(String),
 }
@@ -287,16 +335,21 @@ impl From<std::time::SystemTimeError> for C07ProcessError {
 }
 
 /// 错误结果类型别名
+/// result type
 pub type Result<T> = std::result::Result<T, C07ProcessError>;
 
 /// 进程结果类型别名
+/// process result type
 pub type ProcessResult<T> = std::result::Result<T, ProcessError>;
 
 /// IPC结果类型别名
+/// IP Cresult type
 pub type IpcResult<T> = std::result::Result<T, IpcError>;
 
 /// 同步结果类型别名
+/// synchronous result type
 pub type SyncResult<T> = std::result::Result<T, SyncError>;
 
 /// 资源结果类型别名
+/// result type
 pub type ResourceResult<T> = std::result::Result<T, ResourceError>;

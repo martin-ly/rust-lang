@@ -9,8 +9,11 @@ use tokio::time::sleep;
 use tracing::{info, instrument};
 
 /// 2025年高级异步设计模式演示
+/// 2025async design demonstration
 /// 包含最新的异步编程模式和最佳实践
+/// async and
 /// 1. 异步状态机模式
+/// 1. async state machine
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum AsyncState {
     Idle,
@@ -90,6 +93,7 @@ impl AsyncStateMachine {
 }
 
 /// 2. 异步观察者模式
+/// 2. async observer
 pub enum AsyncObserver {
     EventLogger(AsyncEventLogger),
 }
@@ -156,6 +160,7 @@ impl AsyncSubject {
 }
 
 /// 3. 异步命令模式
+/// 3. async command
 pub enum AsyncCommand {
     LogCommand(AsyncLogCommand),
 }
@@ -258,6 +263,7 @@ impl AsyncCommandInvoker {
 }
 
 /// 4. 异步责任链模式
+/// 4. async chain of responsibility
 pub enum AsyncHandler {
     Validation(AsyncValidationHandler),
     Processing(AsyncProcessingHandler),
@@ -320,6 +326,7 @@ impl AsyncChain {
 }
 
 /// 5. 异步适配器模式
+/// 5. async adapter
 pub trait AsyncTarget {
     fn async_request(&self) -> impl std::future::Future<Output = Result<String>> + Send;
 }
@@ -352,6 +359,7 @@ impl AsyncTarget for AsyncAdapter {
 }
 
 /// 6. 异步装饰器模式
+/// 6. async decorator
 pub enum AsyncComponent {
     Concrete(AsyncConcreteComponent),
     Decorator(AsyncDecorator),
@@ -394,6 +402,7 @@ impl AsyncDecorator {
 }
 
 /// 7. 异步门面模式
+/// 7. async surface
 pub struct AsyncFacade {
     subsystem_a: Arc<AsyncSubsystemA>,
     subsystem_b: Arc<AsyncSubsystemB>,
@@ -454,6 +463,7 @@ impl AsyncFacade {
 }
 
 /// 8. 异步单例模式
+/// 8. async singleton
 pub struct AsyncSingleton {
     data: Arc<RwLock<String>>,
 }
@@ -483,6 +493,7 @@ impl AsyncSingleton {
 }
 
 /// 9. 异步建造者模式
+/// 9. async
 pub struct AsyncProduct {
     part_a: String,
     part_b: String,
@@ -545,6 +556,7 @@ impl AsyncBuilder {
 }
 
 /// 10. 异步策略模式
+/// 10. async strategy
 pub enum AsyncStrategy {
     StrategyA(AsyncStrategyA),
     StrategyB(AsyncStrategyB),
@@ -608,6 +620,7 @@ impl AsyncContext {
 }
 
 /// 演示所有高级异步设计模式
+/// demonstration all async design
 #[tokio::main]
 async fn main() -> Result<()> {
     // 初始化日志

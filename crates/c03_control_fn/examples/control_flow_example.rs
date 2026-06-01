@@ -1,15 +1,20 @@
 //! Rust 1.89 控制流特性示例
-//!
-//! 本示例展示了Rust 1.89版本中的控制流特性：
+//! Rust 1.89 stream feature example
 //! - 改进的模式匹配
+//! -
 //! - 控制流优化
+//! - stream optimization
+//! - 控制streamoptimization
 //! - 新的控制结构
+//! - structure
+//! - 新控制structure
 //! - 性能改进
+//! - performance
 use anyhow::Result;
 
-/// Rust 1.89 改进的模式匹配示例
-///
+/// Rust 1.89 改进模式匹配Example of
 /// 模式匹配现在支持更复杂的模式和更好的性能
+/// present complex and performance
 #[derive(Debug, Clone, PartialEq)]
 enum Shape {
     Circle { radius: f64 },
@@ -20,6 +25,7 @@ enum Shape {
 
 impl Shape {
     /// 计算面积
+    /// surface
     fn area(&self) -> f64 {
         match self {
             Shape::Circle { radius } => std::f64::consts::PI * radius * radius,
@@ -37,6 +43,7 @@ impl Shape {
     }
 
     /// 检查是否为规则形状
+    /// as rule
     fn is_regular(&self) -> bool {
         match self {
             Shape::Circle { .. } => true,
@@ -58,12 +65,14 @@ impl Shape {
 }
 
 /// Rust 1.89 控制流优化示例
-///
+/// Rust 1.89 stream optimization example
 /// 控制流现在有了显著的性能改进
+/// stream present significant performance
 struct ControlFlowOptimizer;
 
 impl ControlFlowOptimizer {
     /// 优化的条件判断
+    /// optimization condition
     #[inline(always)]
     fn optimized_condition_check(&self, value: i32) -> &'static str {
         // 编译器会优化这种连续的条件判断
@@ -81,6 +90,7 @@ impl ControlFlowOptimizer {
     }
 
     /// 优化的循环控制
+    /// optimization circulation
     #[inline(always)]
     fn optimized_loop_control(&self, items: &[i32]) -> (i32, i32, i32) {
         let mut sum = 0;
@@ -100,6 +110,7 @@ impl ControlFlowOptimizer {
     }
 
     /// 优化的迭代器链
+    /// optimization
     #[inline(always)]
     fn optimized_iterator_chain(&self, items: &[i32]) -> Vec<i32> {
         items
@@ -111,13 +122,11 @@ impl ControlFlowOptimizer {
     }
 }
 
-/// Rust 1.89 新的控制结构示例
-///
 /// 引入了新的控制结构来简化常见的编程模式
+/// structure
 struct NewControlStructures;
 
 impl NewControlStructures {
-    /// 使用let-else模式（Rust 1.89中的改进）
     fn let_else_pattern(&self, input: Option<String>) -> Result<String> {
         let Some(value) = input else {
             return Err(anyhow::anyhow!("输入为空"));
@@ -131,6 +140,7 @@ impl NewControlStructures {
     }
 
     /// 改进的if-let模式
+    /// if-let
     fn improved_if_let(&self, input: Option<i32>) -> String {
         if let Some(value) = input {
             if value > 0 {
@@ -145,7 +155,6 @@ impl NewControlStructures {
         }
     }
 
-    /// 使用match表达式作为值
     fn match_as_expression(&self, input: &str) -> i32 {
         match input {
             "one" | "一" => 1,
@@ -159,12 +168,14 @@ impl NewControlStructures {
 }
 
 /// Rust 1.89 控制流性能改进示例
-///
+/// Rust 1.89 stream performance example
 /// 控制流现在有了显著的性能改进
+/// stream present significant performance
 struct PerformanceImprovements;
 
 impl PerformanceImprovements {
     /// 分支预测友好的控制流
+    /// branch prediction stream
     #[inline(always)]
     fn branch_prediction_friendly(&self, data: &[i32]) -> Vec<i32> {
         let mut result = Vec::new();
@@ -183,6 +194,7 @@ impl PerformanceImprovements {
     }
 
     /// 无分支控制流
+    /// stream
     #[inline(always)]
     fn branchless_control_flow(&self, a: i32, b: i32) -> i32 {
         // 使用位运算避免分支
@@ -191,6 +203,7 @@ impl PerformanceImprovements {
     }
 
     /// 向量化友好的控制流
+    /// vectorization stream
     #[inline(always)]
     fn vectorization_friendly(&self, data: &[f64]) -> Vec<f64> {
         data.iter()
@@ -200,12 +213,14 @@ impl PerformanceImprovements {
 }
 
 /// Rust 1.89 控制流错误处理改进示例
-///
+/// Rust 1.89 stream error handling example
 /// 错误处理现在更加优雅和高效
+/// error handling present and efficient
 struct ErrorHandlingImprovements;
 
 impl ErrorHandlingImprovements {
     /// 使用?操作符的改进
+    /// ?
     fn improved_error_handling(&self, input: &str) -> Result<i32> {
         let parsed = input.parse::<i32>()?;
 
@@ -217,19 +232,21 @@ impl ErrorHandlingImprovements {
     }
 
     /// 使用map_or的改进
+    /// map_or
+    /// Usemap_or改进
     fn map_or_improvement(&self, input: Option<String>) -> String {
         input
             .map(|s| s.to_uppercase())
             .unwrap_or_else(|| "默认值".to_string())
     }
 
-    /// 使用and_then的改进
     fn and_then_improvement(&self, input: Option<i32>) -> Option<String> {
         input.filter(|&x| x > 0).map(|x| format!("正数: {}", x))
     }
 }
 
 /// 主函数
+/// Main function
 fn main() -> Result<()> {
     println!("🚀 Rust 1.89 控制流特性演示");
     println!("{}", "=".repeat(50));

@@ -1,12 +1,6 @@
 //! Const Generics 扩展预览
-//!
-//! 本模块演示 Rust 2026 年旗舰稳定化目标中的两项 const generics 扩展：
-//! - `adt_const_params`: 允许结构体和枚举作为 const 泛型参数
-//! - `min_generic_const_args`: 允许关联常量作为 const 泛型参数
-//!
 //! **编译要求**: 需要 nightly Rust + 对应 feature gates
-//! ```bash
-//! cargo +nightly check -p c04_generic
+//! **编译要求**: Requires nightly Rust + to应 feature gates
 //! ```
 //!
 //! **来源**: [Rust Project Goals 2026 — Const Generics](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)
@@ -16,26 +10,18 @@
 // ============================================================================
 
 /// # 概念：超越整数的编译期常量
-///
-/// 当前稳定的 const generics 仅支持整数、`bool`、`char` 和基本类型。
-/// `adt_const_params` 扩展允许**结构体**和**枚举**作为泛型参数，
+/// # concept ：constant
+/// # concept：超越整数编译期constant
+/// `adt_const_params` 扩展Allows**struct**and**enum**asgeneric parameter，
 /// 打开了编译期元编程的新维度。
-///
-/// ```rust,ignore
+/// dimension 。
 /// #![feature(adt_const_params)]
 /// #![feature(generic_const_exprs)] // 常需同时启用
 ///
-/// use std::marker::ConstParamTy;
-///
-/// // 定义可作为 const 泛型参数的类型
-/// #[derive(ConstParamTy, PartialEq, Eq, Copy, Clone)]
-/// struct Point {
 ///     x: i32,
 ///     y: i32,
 /// }
 ///
-/// // 使用 Point 作为 const 泛型参数！
-/// struct Grid<const ORIGIN: Point> {
 ///     cells: Vec<i32>,
 /// }
 ///
@@ -43,19 +29,12 @@
 ///     fn describe_origin() -> (i32, i32) {
 ///         (ORIGIN.x, ORIGIN.y)
 ///     }
-/// }
 ///
-/// // 每个不同的 ORIGIN 值都是独立的类型
-/// type GridAtOrigin = Grid<{ Point { x: 0, y: 0 } }>;
-/// type GridAtOffset = Grid<{ Point { x: 10, y: 20 } }>;
 /// ```
 ///
-/// **关键约束**: 作为 const 泛型参数的类型必须实现 `ConstParamTy` trait，
-/// 这要求类型是 `PartialEq + Eq + Copy + 'static`，且不包含指针/引用。
 pub struct AdtConstParamsConcept;
 
 impl AdtConstParamsConcept {
-    /// 理论说明：为什么需要 `ConstParamTy`?
     pub fn why_const_param_ty() -> &'static str {
         r#"`ConstParamTy` trait 是 `adt_const_params` 的安全边界：
 
@@ -67,6 +46,8 @@ impl AdtConstParamsConcept {
     }
 
     /// 适用场景分析
+    /// scenario analyze
+    /// 适用scenarioanalysis
     pub fn use_cases() -> &'static str {
         r#"adt_const_params 的典型应用场景：
 
@@ -87,12 +68,9 @@ impl AdtConstParamsConcept {
 // ============================================================================
 
 /// # 概念：从 trait 中"提取"编译期常量
-///
-/// 当前 const generics 只能使用字面量或简单的 const 表达式。
+/// # concept ：from trait in ""constant
+/// # concept：from trait in"提取"编译期constant
 /// `min_generic_const_args` 允许使用**关联常量**（`T::ASSOC_CONST`）
-/// 作为泛型参数，打通了 "trait 定义 → 编译期常量 → 类型构造" 的链条。
-///
-/// ```rust,ignore
 /// #![feature(min_generic_const_args)]
 /// #![feature(generic_const_exprs)]
 ///
@@ -110,22 +88,18 @@ impl AdtConstParamsConcept {
 ///     const CAPACITY: usize = 8192;
 /// }
 ///
-/// // 关键突破：T::CAPACITY 作为数组大小！
-/// struct Buffer<T: BufferConfig> {
 ///     data: [u8; T::CAPACITY], // ← 此前 impossible
-///     len: usize,
 /// }
 ///
 /// type NetworkBuffer = Buffer<NetworkConfig>; // [u8; 4096]
 /// type FileBuffer = Buffer<FileConfig>;       // [u8; 8192]
 /// ```
 ///
-/// **形式化意义**: 这扩展了 Rust 的 **依赖类型（dependent types）** 能力——
-/// 类型的形状（shape）依赖于 trait 实现中的常量值。
 pub struct MinGenericConstArgsConcept;
 
 impl MinGenericConstArgsConcept {
     /// 理论说明：关联常量与类型构造的交互
+    /// theory explain ：associated constant and type
     pub fn theory() -> &'static str {
         r#"min_generic_const_args 的类型论意义：
 
@@ -149,6 +123,8 @@ let b: Buffer<{ Config::SIZE }> = ...; // ERROR!
     }
 
     /// 适用场景分析
+    /// scenario analyze
+    /// 适用scenarioanalysis
     pub fn use_cases() -> &'static str {
         r#"min_generic_const_args 的典型应用场景：
 
@@ -180,10 +156,9 @@ let b: Buffer<{ Config::SIZE }> = ...; // ERROR!
 // ============================================================================
 
 /// # 组合：ADT + 关联常量 = 结构化编译期元数据
-///
+/// # combination ：ADT + associated constant = structure
 /// 当 `adt_const_params` 和 `min_generic_const_args` 同时使用时：
-///
-/// ```rust,ignore
+/// when `adt_const_params` and `min_generic_const_args` 同时Use时：
 /// #![feature(adt_const_params)]
 /// #![feature(min_generic_const_args)]
 /// #![feature(generic_const_exprs)]
@@ -206,8 +181,6 @@ let b: Buffer<{ Config::SIZE }> = ...; // ERROR!
 ///     const DIMS: Dimensions = Dimensions { width: 1920, height: 1080, channels: 3 };
 /// }
 ///
-/// // 组合使用：关联常量（Dimensions 结构体）作为 const 泛型参数
-/// struct Image<F: ImageFormat>
 /// where
 ///     [f32; F::DIMS.width * F::DIMS.height * F::DIMS.channels]: Sized,
 /// {
@@ -215,12 +188,11 @@ let b: Buffer<{ Config::SIZE }> = ...; // ERROR!
 /// }
 /// ```
 ///
-/// **关键洞察**: 这实现了 "trait 定义编译期元数据 → 元数据结构化（ADT）→
-/// 类型根据元数据构造" 的完整链条，是 Rust 向 "编译期依赖类型" 演进的关键一步。
 pub struct CombinedPower;
 
 impl CombinedPower {
     /// 组合使用的架构模式
+    /// combination architecture
     pub fn architecture_pattern() -> &'static str {
         r#"Const Generics 扩展的架构设计模式：
 
@@ -252,14 +224,14 @@ Trait 定义配置常量
 // ============================================================================
 
 /// # 2026 稳定化预期
-///
+/// # 2026
 /// | 特性 | 当前状态 | 2026 目标 | 前置条件 |
-/// |:---|:---|:---|:---|
-/// | `adt_const_params` | nightly | 稳定化 | `ConstParamTy` trait 稳定；标准库类型实现 |
+/// | feature | when before state | 2026 goal | before condition |
 /// | `min_generic_const_args` | nightly | 稳定化 | 关联常量求解可靠性；错误信息改进 |
+/// | `min_generic_const_args` | nightly | | associated constant ；error message |
 /// | `generic_const_exprs` | nightly | 继续演进 | const eval 性能；复杂表达式边界 |
-///
 /// **对现有代码的影响**: 几乎为零。这些是纯新增能力，不涉及破坏性变更。
+/// **to impact **: as 。，and 。
 pub struct StabilizationRoadmap;
 
 impl StabilizationRoadmap {

@@ -1,7 +1,10 @@
 //! 增强的性能优化系统
+//! performance optimization system
 //!
 //! 这个模块提供了增强的性能优化功能，包括内存使用优化、
+//! module performance optimization functionality ，memory optimization 、
 //! CPU性能提升、I/O性能改进等 Rust 1.90 新特性
+//! CPUperformance 、I/Operformance etc. Rust 1.90 feature
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::sync::Arc;
@@ -10,6 +13,7 @@ use std::time::{Duration, Instant, SystemTime};
 use tokio::sync::{Mutex as TokioMutex, RwLock as TokioRwLock};
 
 /// 增强的性能管理器
+/// performance
 #[cfg(feature = "async")]
 #[derive(Clone)]
 #[allow(dead_code)]
@@ -23,6 +27,7 @@ pub struct EnhancedPerformanceManager {
 }
 
 /// 内存监控器
+/// memory
 #[cfg(feature = "async")]
 #[derive(Clone)]
 #[allow(dead_code)]
@@ -34,6 +39,7 @@ pub struct MemoryMonitor {
 }
 
 /// CPU监控器
+/// CPU
 #[cfg(feature = "async")]
 #[derive(Clone)]
 #[allow(dead_code)]
@@ -45,6 +51,7 @@ pub struct CpuMonitor {
 }
 
 /// I/O监控器
+/// I/O
 #[cfg(feature = "async")]
 #[derive(Clone)]
 #[allow(dead_code)]
@@ -65,6 +72,7 @@ pub struct CacheManager {
 }
 
 /// 性能优化器
+/// performance optimizer
 #[cfg(feature = "async")]
 #[derive(Clone)]
 #[allow(dead_code)]
@@ -75,6 +83,7 @@ pub struct PerformanceOptimizer {
 }
 
 /// 内存快照
+/// memory
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[allow(dead_code)]
@@ -90,6 +99,7 @@ pub struct MemorySnapshot {
 }
 
 /// CPU快照
+/// CPU
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[allow(dead_code)]
@@ -103,6 +113,7 @@ pub struct CpuSnapshot {
 }
 
 /// I/O快照
+/// I/O
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[allow(dead_code)]
@@ -118,6 +129,7 @@ pub struct IoSnapshot {
 }
 
 /// I/O统计信息
+/// I/O
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[allow(dead_code)]
@@ -148,6 +160,7 @@ pub struct CacheStats {
 }
 
 /// 缓存策略
+/// strategy
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[allow(dead_code)]
@@ -161,6 +174,7 @@ pub struct CachePolicy {
 }
 
 /// 驱逐策略
+/// strategy
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum EvictionStrategy {
@@ -172,6 +186,7 @@ pub enum EvictionStrategy {
 }
 
 /// 优化规则
+/// optimization rule
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OptimizationRule {
@@ -183,6 +198,7 @@ pub struct OptimizationRule {
 }
 
 /// 优化条件
+/// optimization condition
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum OptimizationCondition {
@@ -195,6 +211,7 @@ pub enum OptimizationCondition {
 }
 
 /// 优化动作
+/// optimization
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum OptimizationAction {
@@ -209,6 +226,7 @@ pub enum OptimizationAction {
 }
 
 /// 优化尝试
+/// optimization
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OptimizationAttempt {
@@ -222,6 +240,7 @@ pub struct OptimizationAttempt {
 }
 
 /// 性能配置
+/// performance
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PerformanceConfig {
@@ -236,6 +255,7 @@ pub struct PerformanceConfig {
 }
 
 /// 内存泄漏检测器
+/// memory leak
 #[cfg(feature = "async")]
 #[derive(Clone)]
 #[allow(dead_code)]
@@ -256,6 +276,7 @@ pub struct ThermalMonitor {
 }
 
 /// 热状态
+/// state
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[allow(dead_code)]
@@ -291,6 +312,7 @@ pub struct BandwidthSnapshot {
 #[cfg(feature = "async")]
 impl EnhancedPerformanceManager {
     /// 创建新的增强性能管理器
+    /// performance
     pub async fn new(config: PerformanceConfig) -> Self {
         let memory_monitor = Arc::new(MemoryMonitor::new());
         let cpu_monitor = Arc::new(CpuMonitor::new());
@@ -327,6 +349,7 @@ impl EnhancedPerformanceManager {
     }
 
     /// 智能内存优化（使用 Rust 1.90 改进的模式匹配）
+    /// memory optimization （ Rust 1.90 ）
     pub async fn optimize_memory(&self) -> OptimizationResult {
         let memory_stats = self.memory_monitor.get_memory_stats().await;
 
@@ -390,6 +413,7 @@ impl EnhancedPerformanceManager {
     }
 
     /// 智能CPU优化（使用 Rust 1.90 异步闭包）
+    /// CPUoptimization （ Rust 1.90 async ）
     pub async fn optimize_cpu<F, Fut>(&self, optimization_fn: F) -> OptimizationResult
     where
         F: FnOnce(f64) -> Fut + Send + Sync + 'static,
@@ -415,6 +439,7 @@ impl EnhancedPerformanceManager {
     }
 
     /// 批量性能优化（使用 Rust 1.90 改进的迭代器）
+    /// performance optimization （ Rust 1.90 ）
     pub async fn batch_optimize(&self) -> Vec<OptimizationResult> {
         // 使用 Rust 1.90 改进的迭代器进行批量优化
         // 执行各种优化任务
@@ -455,6 +480,7 @@ impl EnhancedPerformanceManager {
     }
 
     /// I/O优化
+    /// I/Ooptimization
     pub async fn optimize_io(&self) -> OptimizationResult {
         let io_stats = self.io_monitor.get_io_stats().await;
 
@@ -480,6 +506,7 @@ impl EnhancedPerformanceManager {
     }
 
     /// 缓存优化
+    /// optimization
     pub async fn optimize_cache(&self) -> OptimizationResult {
         let cache_stats = self.cache_manager.get_cache_stats().await;
 
@@ -505,6 +532,7 @@ impl EnhancedPerformanceManager {
     }
 
     /// 获取综合性能报告
+    /// synthesize performance
     pub async fn get_performance_report(&self) -> PerformanceReport {
         let memory_stats = self.memory_monitor.get_memory_stats().await;
         let cpu_stats = self.cpu_monitor.get_cpu_stats().await;
@@ -528,6 +556,7 @@ impl EnhancedPerformanceManager {
     }
 
     /// 计算性能分数
+    /// performance
     async fn calculate_performance_score(
         &self,
         memory_stats: &MemorySnapshot,
@@ -572,6 +601,7 @@ impl EnhancedPerformanceManager {
     }
 
     /// 生成优化建议
+    /// optimization
     async fn generate_recommendations(&self, performance_score: f64) -> Vec<String> {
         let mut recommendations = Vec::new();
 
@@ -599,6 +629,7 @@ impl EnhancedPerformanceManager {
     }
 
     /// 记录批量优化统计
+    /// optimization
     async fn log_batch_optimization_stats(
         &self,
         success_count: usize,
@@ -620,6 +651,7 @@ impl EnhancedPerformanceManager {
     }
 
     /// 后台监控循环
+    /// after circulation
     async fn background_monitoring_loop(
         memory_monitor: Arc<MemoryMonitor>,
         cpu_monitor: Arc<CpuMonitor>,
@@ -646,6 +678,7 @@ impl EnhancedPerformanceManager {
 }
 
 /// 优化结果
+/// optimization result
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OptimizationResult {
@@ -656,6 +689,7 @@ pub struct OptimizationResult {
 }
 
 /// 性能报告
+/// performance
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PerformanceReport {

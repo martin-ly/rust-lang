@@ -1,31 +1,29 @@
 //! no_std 编程实践
-//!
-//! 演示如何在无标准库环境下使用 Rust 的核心功能。
-//!
+//! no_std
 //! `core` crate 包含以下核心类型和 trait，在所有目标上都可用：
+//! `core` crate under core type and trait，in all goal on ：
 //! - 基本类型：`i32`, `u8`, `bool`, `str` 等
+//! - this type ：`i32`, `u8`, `bool`, `str` etc.
+//! - 基thistype：`i32`, `u8`, `bool`, `str` etc.
 //! - 切片和数组：`[T]`, `[T; N]`
-//! - 迭代器：`Iterator`, `IntoIterator`
-//! - `Option`, `Result`
+//! - and ：`[T]`, `[T; N]`
+//! - 切片andarray：`[T]`, `[T; N]`
 //! - `Drop`, `Clone`, `Copy`, `Send`, `Sync`
 
 use core::fmt;
 
 /// 演示使用 `core` 替代 `std`
-///
+/// demonstration `core` `std`
 /// 在 `no_std` 中，大部分类型需要从 `core` 引入：
+/// in `no_std` in ，part type from `core` ：
 /// - `core::slice` 替代 `std::slice`
 /// - `core::fmt` 替代 `std::fmt`
 /// - `core::ptr` 替代 `std::ptr`
-///
-/// 技巧：使用 `use core::...` 而不是 `use std::...`。
 pub struct CoreUsageDemo;
 
 impl CoreUsageDemo {
     /// 使用 core::fmt 格式化数字
-    ///
-    /// 在 no_std 中，`format!` 宏不可用（因为它需要分配器），
-    /// 但可以使用 `write!` 到固定大小的缓冲区。
+    /// core::fmt
     pub fn format_number(value: u32, buf: &mut [u8]) -> Result<usize, fmt::Error> {
         struct Writer<'a> {
             buf: &'a mut [u8],
@@ -52,6 +50,7 @@ impl CoreUsageDemo {
     }
 
     /// 使用 core 迭代器处理数据
+    /// core
     pub fn sum_slice(data: &[u32]) -> u32 {
         // 与 std 中完全相同，因为 Iterator 定义在 core 中
         data.iter().sum()
@@ -59,9 +58,9 @@ impl CoreUsageDemo {
 }
 
 /// 固定容量环形缓冲区（no_std 友好集合示例）
-///
+/// buffering （no_std set example ）
 /// 在真实项目中，可使用 `heapless::Vec` 或 `heapless::Deque`。
-/// 这里展示一个纯 core 实现的固定容量队列，无需 `alloc`。
+/// inrealprojectin，可Use `heapless::Vec` or `heapless::Deque`。
 pub struct FixedRingBuffer<T, const N: usize> {
     buffer: [Option<T>; N],
     head: usize,
@@ -77,6 +76,7 @@ impl<T: Copy + Default, const N: usize> Default for FixedRingBuffer<T, N> {
 
 impl<T: Copy + Default, const N: usize> FixedRingBuffer<T, N> {
     /// 创建新的空环形缓冲区
+    /// buffering
     pub const fn new() -> Self {
         // 使用 Option<T> 简化实现；生产环境可用 MaybeUninit 优化
         Self {
@@ -88,6 +88,7 @@ impl<T: Copy + Default, const N: usize> FixedRingBuffer<T, N> {
     }
 
     /// 向缓冲区添加元素
+    /// buffering element
     pub fn push(&mut self, value: T) -> Result<(), &'static str> {
         if self.count >= N {
             return Err("缓冲区已满");
@@ -99,6 +100,7 @@ impl<T: Copy + Default, const N: usize> FixedRingBuffer<T, N> {
     }
 
     /// 从缓冲区取出元素
+    /// from buffering element
     pub fn pop(&mut self) -> Option<T> {
         if self.count == 0 {
             return None;
@@ -110,36 +112,35 @@ impl<T: Copy + Default, const N: usize> FixedRingBuffer<T, N> {
     }
 
     /// 当前元素数量
+    /// when before element quantity
     pub const fn len(&self) -> usize {
         self.count
     }
 
     /// 是否为空
+    /// as
     pub const fn is_empty(&self) -> bool {
         self.count == 0
     }
 }
 
 /// 自旋锁概念演示（替代 std::sync::Mutex）
-///
+/// spinlock concept demonstration （ std::sync::Mutex）
 /// 在单核 bare-metal 中，关闭中断即可实现互斥。
+/// in bare-metal in ，in 。
 /// 多核环境下需要使用原子操作。
-///
+/// environment under atomic operation 。
 /// 真实项目可使用 `spin::Mutex` 或 `critical-section` crate。
 pub struct SpinLockConcept;
 
 impl SpinLockConcept {
     /// 描述自旋锁的使用场景
+    /// describe spinlock scenario
     pub fn description() -> &'static str {
         "在 bare-metal 中，自旋锁通过关闭中断或原子操作实现互斥，替代 std::sync::Mutex"
     }
 }
 
-/// 演示 alloc 的条件使用
-///
-/// 如果启用了全局分配器，可以通过 `extern crate alloc;` 使用：
-/// - `alloc::vec::Vec`
-/// - `alloc::boxed::Box`
 /// - `alloc::string::String`
 /// - `alloc::collections::VecDeque`
 ///

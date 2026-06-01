@@ -8,7 +8,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [综合概念对比矩阵](#综合概念对比矩阵)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [1. 并发模型对比矩阵](#1-并发模型对比矩阵)
   - [2. 同步原语对比矩阵](#2-同步原语对比矩阵)
   - [3. 智能指针对比矩阵](#3-智能指针对比矩阵)
@@ -22,9 +22,10 @@
   - [使用指南](#使用指南)
     - [如何选择正确的工具/模式？](#如何选择正确的工具模式)
     - [常见决策路径](#常见决策路径)
-  - **更新日期**: 2026-03-05
+  - [**更新日期**: 2026-03-05](#更新日期-2026-03-05)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 1. 并发模型对比矩阵
 >
@@ -39,7 +40,7 @@
 | **死锁风险** | 高 | 中 | 低 | 无 |
 | **扩展性** | 低 | 高 | 高 | 中 |
 | **适用场景** | CPU密集型 | IO密集型 | 分布式系统 | 数值计算 |
-| **Rust支持** | std::thread | tokio/async-std | actix/bastion | rayon |
+| **Rust支持** | std::thread | tokio/async-std [已归档] | actix/bastion | rayon |
 | **学习曲线** | 低 | 中 | 高 | 低 |
 | **调试难度** | 高 | 中 | 中 | 低 |
 
@@ -77,7 +78,7 @@
 | 运行时 | 平台 | IO模型 | 最小化 | 特性 | 适用场景 |
 |:---|:---|:---|:---:|:---|:---|
 | Tokio | Linux/Mac/Win | epoll/kqueue/IOCP | 否 | 完整生态 | 通用async |
-| async-std | Linux/Mac/Win | epoll/kqueue/IOCP | 否 | 标准库风格 | 通用async |
+| async-std [已归档] | Linux/Mac/Win | epoll/kqueue/IOCP | 否 | 标准库风格 | 通用async |
 | smol | Linux/Mac/Win | epoll/kqueue/IOCP | 是 | 轻量 | 资源受限 |
 | monoio | Linux 5.6+ | io_uring | 是 | 极致性能 | 高性能网关 |
 | glommio | Linux 5.6+ | io_uring + DMA | 是 | 存储优化 | 存储密集型 |

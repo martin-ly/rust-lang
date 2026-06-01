@@ -1,7 +1,8 @@
 //! 单元测试模块
-//!
-//! 本模块包含了 c10_networks 库的单元测试，
+//! module
+//! 单元Test formodule
 //! 确保各个模块的功能正确性。
+//! module functionality 。
 use bytes::Bytes;
 use c10_networks::error::{
     ErrorStats, NetworkError, PerformanceError, ProtocolError, SecurityError,
@@ -15,6 +16,7 @@ use c10_networks::socket::{utils, TcpConfig, UdpConfig};
 use std::time::Duration;
 
 /// 测试错误处理模块
+/// error handling module
 #[test]
 fn test_network_error_types() {
     // 测试不同类型的错误
@@ -90,6 +92,7 @@ fn test_protocol_errors() {
 }
 
 /// 测试性能错误
+/// performance
 #[test]
 fn test_performance_errors() {
     let pool_error = PerformanceError::PoolExhausted;
@@ -144,6 +147,7 @@ fn test_security_errors() {
 }
 
 /// 测试数据包创建和基本操作
+/// and this
 #[test]
 fn test_packet_creation() {
     let payload = Bytes::copy_from_slice(b"test data");
@@ -159,6 +163,7 @@ fn test_packet_creation() {
 }
 
 /// 测试带序列号的数据包
+/// sequence
 #[test]
 fn test_packet_with_sequence() {
     let payload = Bytes::copy_from_slice(b"sequence test");
@@ -169,6 +174,7 @@ fn test_packet_with_sequence() {
 }
 
 /// 测试数据包构建器
+/// builder
 #[test]
 fn test_packet_builder() {
     let mut builder = PacketBuilder::new(PacketType::Http);
@@ -229,6 +235,7 @@ fn test_packet_filter() {
 }
 
 /// 测试序列号过滤器
+/// sequence
 #[test]
 fn test_packet_filter_sequence() {
     let filter = PacketFilter::new().sequence_range(100, 200);
@@ -245,6 +252,7 @@ fn test_packet_filter_sequence() {
 }
 
 /// 测试数据包类型
+/// type
 #[test]
 fn test_packet_types() {
     let types = vec![
@@ -263,6 +271,7 @@ fn test_packet_types() {
 }
 
 /// 测试HTTP协议基本功能
+/// HTTP this functionality
 #[test]
 fn test_http_protocol() {
     // 测试HTTP方法
@@ -309,7 +318,6 @@ fn test_http_protocol() {
     assert!(response.body.len() >= 20);
 }
 
-/// 测试WebSocket协议基本功能
 #[test]
 fn test_websocket_protocol() {
     // 测试WebSocket帧创建
@@ -340,6 +348,7 @@ fn test_websocket_protocol() {
 }
 
 /// 测试套接字配置
+/// socket
 #[test]
 fn test_socket_configs() {
     // 测试TCP配置
@@ -372,6 +381,7 @@ fn test_socket_configs() {
 }
 
 /// 测试数据包序列化和反序列化
+/// sequence and sequence
 #[test]
 fn test_packet_serialization() {
     let original_packet = Packet::new(PacketType::Raw, Bytes::copy_from_slice(b"test data"));
@@ -406,6 +416,7 @@ fn test_packet_header() {
 }
 
 /// 测试数据包显示格式
+/// display
 #[test]
 fn test_packet_display() {
     let packet = Packet::with_sequence(PacketType::Http, Bytes::copy_from_slice(b"test"), 123);
@@ -449,6 +460,7 @@ fn test_empty_packet() {
 }
 
 /// 测试数据包构建器链式调用
+/// builder
 #[test]
 fn test_packet_builder_chaining() {
     let mut builder = PacketBuilder::new(PacketType::Custom("test".to_string()));
@@ -478,6 +490,7 @@ fn test_packet_filter_default() {
 }
 
 /// 测试数据包类型比较
+/// type
 #[test]
 fn test_packet_type_equality() {
     assert_eq!(PacketType::Raw, PacketType::Raw);

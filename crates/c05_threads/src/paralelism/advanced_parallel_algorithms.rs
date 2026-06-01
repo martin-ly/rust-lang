@@ -1,11 +1,17 @@
 //! 高级并行算法实现
-//!
+//! parallel algorithm
 //! 本模块提供了多种高级并行算法：
+//! This module provides parallel algorithm ：
 //! - 并行归并排序
+//! - parallelism merge sort
 //! - 并行快速排序
+//! - parallelism quick sort
 //! - 并行基数排序
+//! - parallelism radix sort
 //! - 并行图算法
+//! - parallelism graph algorithm
 //! - 并行数值计算
+//! - parallelism
 // use std::sync::{
 //     Arc,
 //     Mutex
@@ -20,10 +26,12 @@ use rayon::prelude::*;
 // };
 
 /// 并行归并排序
+/// parallelism merge sort
 pub struct ParallelMergeSort;
 
 impl ParallelMergeSort {
     /// 并行归并排序实现
+    /// parallelism merge sort
     pub fn sort<T>(arr: &mut [T])
     where
         T: Ord + Send + Sync + Clone,
@@ -43,6 +51,7 @@ impl ParallelMergeSort {
     }
 
     /// 合并两个已排序的数组
+    /// and ordering
     fn merge<T>(arr: &mut [T], mid: usize)
     where
         T: Ord + Clone,
@@ -79,6 +88,7 @@ impl ParallelMergeSort {
     }
 
     /// 运行归并排序示例
+    /// Run merge sort example
     pub fn run_example() {
         println!("=== 并行归并排序示例 ===");
 
@@ -95,10 +105,12 @@ impl ParallelMergeSort {
 }
 
 /// 并行快速排序
+/// parallelism quick sort
 pub struct ParallelQuickSort;
 
 impl ParallelQuickSort {
     /// 并行快速排序实现
+    /// parallelism quick sort
     pub fn sort<T>(arr: &mut [T])
     where
         T: Ord + Send + Sync + Clone,
@@ -115,6 +127,7 @@ impl ParallelQuickSort {
     }
 
     /// 分区函数
+    /// partitioning function
     fn partition<T>(arr: &mut [T]) -> usize
     where
         T: Ord,
@@ -135,6 +148,7 @@ impl ParallelQuickSort {
     }
 
     /// 运行快速排序示例
+    /// Run quick sort example
     pub fn run_example() {
         println!("=== 并行快速排序示例 ===");
 
@@ -151,10 +165,12 @@ impl ParallelQuickSort {
 }
 
 /// 并行基数排序
+/// parallelism radix sort
 pub struct ParallelRadixSort;
 
 impl ParallelRadixSort {
     /// 并行基数排序实现
+    /// parallelism radix sort
     pub fn sort(arr: &mut [i32]) {
         if arr.is_empty() {
             return;
@@ -170,6 +186,7 @@ impl ParallelRadixSort {
     }
 
     /// 计数排序
+    /// counting sort
     fn counting_sort(arr: &mut [i32], exp: i32) {
         let n = arr.len();
         let mut output = vec![0; n];
@@ -197,6 +214,7 @@ impl ParallelRadixSort {
     }
 
     /// 运行基数排序示例
+    /// Run radix sort example
     pub fn run_example() {
         println!("=== 并行基数排序示例 ===");
 
@@ -213,10 +231,12 @@ impl ParallelRadixSort {
 }
 
 /// 并行图算法
+/// parallelism graph algorithm
 pub struct ParallelGraphAlgorithms;
 
 impl ParallelGraphAlgorithms {
     /// 并行广度优先搜索
+    /// parallelism breadth-first search
     pub fn parallel_bfs(graph: &[Vec<usize>], start: usize) -> Vec<usize> {
         let n = graph.len();
         let mut distances = vec![usize::MAX; n];
@@ -257,6 +277,7 @@ impl ParallelGraphAlgorithms {
     }
 
     /// 并行深度优先搜索
+    /// parallelism depth-first search
     pub fn parallel_dfs(graph: &[Vec<usize>], start: usize) -> Vec<bool> {
         let n = graph.len();
         let mut visited = vec![false; n];
@@ -282,6 +303,7 @@ impl ParallelGraphAlgorithms {
     }
 
     /// 运行图算法示例
+    /// Run graph algorithm example
     pub fn run_example() {
         println!("=== 并行图算法示例 ===");
 
@@ -320,10 +342,12 @@ impl ParallelGraphAlgorithms {
 }
 
 /// 并行数值计算
+/// parallelism
 pub struct ParallelNumericalComputing;
 
 impl ParallelNumericalComputing {
     /// 并行矩阵乘法
+    /// parallelism
     pub fn parallel_matrix_multiply(a: &[Vec<f64>], b: &[Vec<f64>]) -> Vec<Vec<f64>> {
         let rows = a.len();
         let cols = b[0].len();
@@ -342,16 +366,19 @@ impl ParallelNumericalComputing {
     }
 
     /// 并行向量点积
+    /// parallelism dot product
     pub fn parallel_dot_product(a: &[f64], b: &[f64]) -> f64 {
         a.par_iter().zip(b.par_iter()).map(|(x, y)| x * y).sum()
     }
 
     /// 并行向量范数计算
+    /// parallelism
     pub fn parallel_vector_norm(v: &[f64]) -> f64 {
         v.par_iter().map(|x| x * x).sum::<f64>().sqrt()
     }
 
     /// 并行积分计算（梯形法则）
+    /// parallelism （）
     pub fn parallel_integrate<F>(f: F, a: f64, b: f64, n: usize) -> f64
     where
         F: Fn(f64) -> f64 + Send + Sync,
@@ -370,6 +397,7 @@ impl ParallelNumericalComputing {
     }
 
     /// 运行数值计算示例
+    /// Run example
     pub fn run_example() {
         println!("=== 并行数值计算示例 ===");
 
@@ -410,6 +438,7 @@ impl ParallelNumericalComputing {
 }
 
 /// 运行所有高级并行算法示例
+/// Run all parallel algorithm example
 pub fn demonstrate_advanced_parallel_algorithms() {
     println!("=== 高级并行算法演示 ===");
 

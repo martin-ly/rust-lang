@@ -3,13 +3,16 @@
 #![allow(clippy::bind_instead_of_map)]
 
 //! 网络性能基准测试
-//!
+//! network Performance benchmark
 //! 本文件包含各种网络操作的性能基准测试，用于评估2025年最新优化后的性能
+//! this network Performance benchmark ，2025optimization after performance
 use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
 use std::io::{Read, Write};
 use std::time::Duration;
 
 /// HTTP请求处理基准测试
+/// HTTP benchmark
+/// HTTP请求Handlebenchmark
 fn bench_http_request_processing(c: &mut Criterion) {
     let mut group = c.benchmark_group("http_request_processing");
 
@@ -54,6 +57,8 @@ fn bench_http_request_processing(c: &mut Criterion) {
 }
 
 /// 数据序列化基准测试
+/// sequence benchmark
+/// 数据Serializebenchmark
 fn bench_data_serialization(c: &mut Criterion) {
     let mut group = c.benchmark_group("data_serialization");
 
@@ -94,6 +99,7 @@ fn bench_data_serialization(c: &mut Criterion) {
 }
 
 /// 加密解密基准测试
+/// benchmark
 fn bench_encryption_decryption(c: &mut Criterion) {
     let mut group = c.benchmark_group("encryption_decryption");
 
@@ -130,6 +136,7 @@ fn bench_encryption_decryption(c: &mut Criterion) {
 }
 
 /// 网络I/O基准测试
+/// network I/Obenchmark
 fn bench_network_io(c: &mut Criterion) {
     let mut group = c.benchmark_group("network_io");
 
@@ -162,6 +169,7 @@ fn bench_network_io(c: &mut Criterion) {
 }
 
 /// 连接池基准测试
+/// benchmark
 fn bench_connection_pool(c: &mut Criterion) {
     let mut group = c.benchmark_group("connection_pool");
 
@@ -203,6 +211,7 @@ fn bench_connection_pool(c: &mut Criterion) {
 }
 
 /// 负载均衡基准测试
+/// benchmark
 fn bench_load_balancing(c: &mut Criterion) {
     let mut group = c.benchmark_group("load_balancing");
 
@@ -260,6 +269,8 @@ fn bench_load_balancing(c: &mut Criterion) {
 }
 
 /// 缓存基准测试
+/// benchmark
+/// 缓存benchmark
 fn bench_caching(c: &mut Criterion) {
     let mut group = c.benchmark_group("caching");
 
@@ -318,6 +329,7 @@ fn bench_caching(c: &mut Criterion) {
 }
 
 /// 异步操作基准测试
+/// async benchmark
 fn bench_async_operations(c: &mut Criterion) {
     let mut group = c.benchmark_group("async_operations");
 
@@ -389,6 +401,7 @@ fn create_test_data(size: usize) -> TestData {
 }
 
 /// 测试数据结构
+/// data structure
 #[derive(serde::Serialize, serde::Deserialize, Clone)]
 struct TestData {
     id: u32,

@@ -1,4 +1,5 @@
 //! Rust 1.97 特性跟踪模块 —— 设计模式
+//! Rust 1.97 feature module —— design
 #![allow(clippy::incompatible_msrv)]
 
 use std::ffi::CString;
@@ -7,22 +8,28 @@ use std::num::NonZeroU32;
 use std::str::FromStr;
 
 /// # Rust 1.97 设计模式特性演示
+/// # Rust 1.97 design feature demonstration
 ///
 /// Rust 1.97 稳定化的核心设计模式相关 API：
+/// Rust 1.97 core design API：
 /// - `FromStr` for `CString` — 从字符串解析 C 字符串
+/// - `FromStr` for `CString` — from C
 /// - `LowerExp` / `UpperExp` for `NonZero` — 科学计数法格式化
 /// - `Option::as_slice` / `as_mut_slice` — Null Object 模式
 pub struct Rust197DesignPatternFeatures;
 
 impl Rust197DesignPatternFeatures {
     /// 使用 `FromStr` for `CString` 从字符串创建 C 字符串
+    /// `FromStr` for `CString` from C
     ///
     /// 如果输入包含 NUL 字节，返回错误。
+    /// if NUL ，。
     pub fn parse_c_string(input: &str) -> Result<CString, CStringParseError> {
         CString::from_str(input).map_err(|_| CStringParseError)
     }
 
     /// 使用 `NonZeroU32` 的科学计数法格式化
+    /// `NonZeroU32`
     ///
     /// Rust 1.97 为 `NonZero` 类型实现了 `LowerExp` 和 `UpperExp`。
     pub fn format_nonzero_scientific(n: NonZeroU32) -> (String, String) {
@@ -34,13 +41,16 @@ impl Rust197DesignPatternFeatures {
     /// 使用 `Option::as_slice` 实现 Null Object 模式
     ///
     /// `None` 映射为空切片，`Some` 映射为单元素切片，
+    /// `None` as ，`Some` as element ，
     /// 统一处理"可能存在的值"和"空值"两种情况。
+    /// "may in "and ""situation 。
     pub fn option_to_slice<T>(opt: &Option<T>) -> &[T] {
         opt.as_slice()
     }
 }
 
 /// `CString` 解析错误的标记类型
+/// `CString` mark type
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct CStringParseError;
 

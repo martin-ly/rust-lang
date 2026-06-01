@@ -1,40 +1,32 @@
 //! # Rust 1.89 特性示例 (历史版本)
-//!
+//! # Rust 1.89 feature example (this )
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//!
+//! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
-//!
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! ## 版本历史说明
-//!
-//! 本文件展示 Rust 1.89 版本的特性，当前项目已升级到 Rust 1.92.0。
-//!
+//! ## this explain
 //! ### Rust 1.92.0 主要改进
-//!
+//! ### Rust 1.92.0 main
 //! - **语言特性**: 关联项多边界、增强的高阶生命周期、改进的自动特征推断
-//! - **标准库**: NonZero::div_ceil、rotate_right 等
+//! - **feature **: edge 、lifetime 、infer
 //! - **性能优化**: 迭代器方法特化、泛型约束优化
-//!
+//! - **performance optimization **: method 、generic optimization
 //! ### 迁移建议
-//!
+//! ###
 //! 1. 更新 Cargo.toml: `rust-version = "1.92"`
-//! 2. 参考 `rust_192_features.rs` 了解最新特性
-//! 3. 查看 `docs/RUST_192_GENERIC_IMPROVEMENTS.md` 了解完整改进
-//!
 //! 参考:
-//! - [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/)
+//! reference :
 //! - [历史版本: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
-//!
-//! ---
+//! - [历史版this: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 //!
 //! # Rust 1.89 全面特性展示模块
-//!
-//! 本模块展示了 Rust 1.89 版本中与泛型相关的新特性和改进，包括：
-//! 1. RPITIT (Return Position Impl Trait In Traits)
-//! 2. 增强的常量泛型 (Enhanced Const Generics)
-//! 3. 改进的 trait 上行转换 (Trait Upcasting)
+//! # Rust 1.89 surface feature module
+//! # Rust 1.89 全surfacefeaturedisplaymodule
+//! 2. 增强const generic (Enhanced Const Generics)
+//! 3. 改进 trait on行conversion (Trait Upcasting)
 //! 4. 类型推断改进 (Type Inference Improvements)
 //! 5. 生命周期推断增强 (Lifetime Inference Enhancements)
-//! 6. 新的泛型约束语法 (New Generic Constraint Syntax)
 use std::{
     fmt::{Debug, Display},
     marker::PhantomData,
@@ -49,17 +41,19 @@ use std::{
 // };
 
 /// RPITIT 特性演示
-///
-/// RPITIT 允许在 trait 方法的返回位置直接使用 impl Trait
+/// RPITIT feature demonstration
 pub mod rpitit_features {
 
     /// 数据处理器 trait - 展示 RPITIT
+    /// trait - RPITIT
     pub trait DataProcessor<T> {
         /// 处理数据并返回迭代器 - 使用 RPITIT
+        /// and - RPITIT
         #[allow(clippy::type_complexity)]
         fn process(&self, data: Vec<T>) -> impl Iterator<Item = T> + '_;
 
         /// 过滤和处理数据 - 使用 RPITIT
+        /// and - RPITIT
         #[allow(clippy::type_complexity)]
         fn filter_and_process<F>(&self, data: Vec<T>, predicate: F) -> impl Iterator<Item = T> + '_
         where
@@ -157,10 +151,13 @@ pub mod rpitit_features {
 }
 
 /// 增强的常量泛型特性演示
+/// constant generic feature demonstration
 pub mod enhanced_const_generics {
     use super::*;
 
     /// 固定大小矩阵 - 展示常量泛型
+    /// - constant generic
+    /// 固定大小矩阵 - displayconst generic
     #[derive(Debug, Clone, PartialEq)]
     #[allow(clippy::type_complexity)]
     pub struct Matrix<T, const ROWS: usize, const COLS: usize> {
@@ -177,11 +174,13 @@ pub mod enhanced_const_generics {
         }
 
         /// 获取元素
+        /// element
         pub fn get(&self, row: usize, col: usize) -> Option<&T> {
             self.data.get(row)?.get(col)
         }
 
         /// 设置元素
+        /// element
         #[allow(clippy::type_complexity)]
         pub fn set(&mut self, row: usize, col: usize, value: T) -> bool {
             #[allow(clippy::excessive_nesting)]
@@ -209,6 +208,7 @@ pub mod enhanced_const_generics {
     }
 
     /// 矩阵加法 - 展示常量泛型约束
+    /// - constant generic
     impl<T: Add<Output = T> + Copy + Default, const ROWS: usize, const COLS: usize>
         Add<Matrix<T, ROWS, COLS>> for Matrix<T, ROWS, COLS>
     {
@@ -228,6 +228,7 @@ pub mod enhanced_const_generics {
     }
 
     /// 环形缓冲区 - 展示常量泛型
+    /// buffering - constant generic
     #[derive(Debug, Clone)]
     #[allow(clippy::type_complexity)]
     pub struct RingBuffer<T, const CAPACITY: usize> {
@@ -336,7 +337,6 @@ pub mod enhanced_const_generics {
     }
 }
 
-/// 改进的 trait 上行转换特性演示
 pub mod trait_upcasting {
 
     /// 基础 trait
@@ -347,18 +347,22 @@ pub mod trait_upcasting {
     }
 
     /// 可绘制 trait - 继承自 Shape
+    /// trait - Shape
     pub trait Drawable: Shape {
         fn draw(&self);
         fn color(&self) -> String;
     }
 
     /// 可移动 trait
+    /// trait
+    /// 可Move trait
     pub trait Movable {
         fn move_to(&mut self, x: f64, y: f64);
         fn position(&self) -> (f64, f64);
     }
 
     /// 圆形实现
+    /// 圆形Implementation of
     pub struct Circle {
         radius: f64,
         x: f64,
@@ -409,6 +413,8 @@ pub mod trait_upcasting {
     }
 
     /// 形状管理器 - 展示 trait 上行转换
+    /// - trait on conversion
+    /// 形状管理器 - display trait on行conversion
     #[allow(clippy::type_complexity)]
     pub struct ShapeManager {
         shapes: Vec<Box<dyn Drawable>>,
@@ -430,7 +436,6 @@ pub mod trait_upcasting {
             self.shapes.push(shape);
         }
 
-        /// 上转到 Shape trait - 展示新的上行转换语法
         #[allow(clippy::type_complexity)]
         pub fn get_total_area(&self) -> f64 {
             self.shapes
@@ -443,6 +448,7 @@ pub mod trait_upcasting {
         }
 
         /// 绘制所有形状
+        /// all
         pub fn draw_all(&self) {
             for shape in &self.shapes {
                 shape.draw();
@@ -451,10 +457,12 @@ pub mod trait_upcasting {
     }
 
     /// 通用形状处理器 - 展示 trait 上行转换
+    /// - trait on conversion
     pub struct ShapeProcessor;
 
     impl ShapeProcessor {
         /// 处理形状 - 展示上行转换
+        /// - on conversion
         #[allow(clippy::type_complexity)]
         pub fn process_shape(shape: &dyn Drawable) -> (f64, f64, String) {
             let shape_ref: &dyn Shape = shape;
@@ -505,10 +513,12 @@ pub mod trait_upcasting {
 }
 
 /// 类型推断改进演示
+/// type infer demonstration
 pub mod type_inference_improvements {
     use super::*;
 
     /// 通用数据转换器 - 展示改进的类型推断
+    /// conversion - type infer
     #[allow(clippy::type_complexity)]
     pub struct DataConverter<T, U> {
         _phantom_t: PhantomData<T>,
@@ -530,6 +540,7 @@ pub mod type_inference_improvements {
         }
 
         /// 转换数据 - 展示类型推断
+        /// conversion - type infer
         #[allow(clippy::type_complexity)]
         pub fn convert<F>(&self, input: T, converter: F) -> U
         where
@@ -539,6 +550,8 @@ pub mod type_inference_improvements {
         }
 
         /// 批量转换 - 展示复杂类型推断
+        /// conversion - complex type infer
+        /// 批量conversion - displaycomplextype inference
         #[allow(clippy::type_complexity)]
         pub fn convert_batch<F, I>(&self, inputs: I, converter: F) -> Vec<U>
         where
@@ -550,6 +563,7 @@ pub mod type_inference_improvements {
     }
 
     /// 智能类型推断示例
+    /// type infer example
     #[allow(clippy::type_complexity)]
     pub fn demonstrate_type_inference() {
         // Rust 1.89 可以更好地推断复杂泛型类型
@@ -566,6 +580,7 @@ pub mod type_inference_improvements {
     }
 
     /// 复杂的类型推断场景
+    /// complex type infer scenario
     #[allow(clippy::type_complexity)]
     pub fn complex_type_inference() {
         // 多级泛型推断
@@ -603,9 +618,11 @@ pub mod type_inference_improvements {
 }
 
 /// 生命周期推断增强演示
+/// lifetime infer demonstration
 pub mod lifetime_inference_enhancements {
 
     /// 生命周期推断改进示例
+    /// lifetime infer example
     #[allow(clippy::type_complexity)]
     pub struct DataHolder<'a, T> {
         data: &'a T,
@@ -617,7 +634,6 @@ pub mod lifetime_inference_enhancements {
             Self { data, metadata }
         }
 
-        /// Rust 1.89 在生命周期推断方面的改进
         #[allow(clippy::type_complexity)]
         pub fn get_data(&self) -> &'a T {
             self.data
@@ -629,6 +645,7 @@ pub mod lifetime_inference_enhancements {
         }
 
         /// 复杂生命周期推断场景
+        /// complex lifetime infer scenario
         #[allow(clippy::type_complexity)]
         pub fn process_data<F, U>(&self, processor: F) -> U
         where
@@ -639,6 +656,7 @@ pub mod lifetime_inference_enhancements {
     }
 
     /// 生命周期推断改进的实际应用
+    /// lifetime infer actual application
     #[allow(clippy::type_complexity)]
     pub fn demonstrate_lifetime_inference() {
         let original_data = vec![1, 2, 3, 4, 5];
@@ -655,6 +673,7 @@ pub mod lifetime_inference_enhancements {
     }
 
     /// 多生命周期参数推断改进
+    /// lifetime parameter infer
     pub struct MultiLifetimeHolder<'a, 'b, T, U> {
         first: &'a T,
         second: &'b U,
@@ -665,7 +684,6 @@ pub mod lifetime_inference_enhancements {
             Self { first, second }
         }
 
-        /// Rust 1.89 在多生命周期推断方面的改进
         pub fn combine<F, R>(&self, combiner: F) -> R
         where
             F: Fn(&'a T, &'b U) -> R,
@@ -695,20 +713,22 @@ pub mod lifetime_inference_enhancements {
 }
 
 /// 新的泛型约束语法演示
+/// generic demonstration
 pub mod new_generic_constraint_syntax {
     use super::*;
 
-    /// 使用新的泛型约束语法的 trait
     pub trait AdvancedProcessor<T>
     where
         T: Clone + Debug + PartialEq,
     {
         /// 处理数据并返回新类型
+        /// and type
         fn process<U>(&self, data: T) -> U
         where
             U: From<T> + Display;
 
         /// 条件处理
+        /// condition
         fn conditional_process<F, U>(&self, data: T, condition: F) -> Option<U>
         where
             F: Fn(&T) -> bool,
@@ -759,6 +779,7 @@ pub mod new_generic_constraint_syntax {
     }
 
     /// 使用新的约束语法的函数
+    /// function
     pub fn advanced_generic_function<T, U, F>(input: T, processor: F) -> U
     where
         T: Clone + Send + Sync,
@@ -769,6 +790,7 @@ pub mod new_generic_constraint_syntax {
     }
 
     /// 复杂约束示例
+    /// complex example
     pub fn complex_constraint_example<T, U, V>(
         data: Vec<T>,
         processor: impl Fn(T) -> U,
@@ -828,6 +850,7 @@ pub mod new_generic_constraint_syntax {
 }
 
 /// 综合演示函数
+/// synthesize demonstration function
 pub fn demonstrate_rust_189_comprehensive() {
     use new_generic_constraint_syntax::AdvancedProcessor;
     use rpitit_features::DataProcessor;

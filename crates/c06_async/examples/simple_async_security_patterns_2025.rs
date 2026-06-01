@@ -6,8 +6,11 @@ use tokio::sync::RwLock;
 use tracing::{error, info, warn};
 
 /// 2025年简化异步安全编程模式演示
+/// 2025async demonstration
 /// 展示实用的异步安全编程最佳实践
+/// async
 /// 1. 简化异步访问控制
+/// 1. async
 #[derive(Debug, Clone, PartialEq)]
 pub enum Permission {
     Read,
@@ -74,6 +77,7 @@ impl SimpleAsyncAccessControl {
 }
 
 /// 2. 简化异步加密服务
+/// 2. async
 pub struct SimpleAsyncEncryption {
     key: Arc<RwLock<String>>,
     operation_count: Arc<RwLock<u32>>,
@@ -131,6 +135,7 @@ impl SimpleAsyncEncryption {
 }
 
 /// 3. 简化异步输入验证
+/// 3. async
 #[derive(Debug, Clone)]
 pub struct ValidationRule {
     pub field: String,
@@ -211,6 +216,7 @@ impl SimpleAsyncValidator {
 }
 
 /// 4. 简化异步会话管理
+/// 4. async
 #[derive(Debug, Clone)]
 pub struct Session {
     pub id: String,
@@ -300,6 +306,7 @@ impl SimpleAsyncSessionManager {
 }
 
 /// 5. 简化异步安全日志
+/// 5. async
 #[derive(Debug, Clone, PartialEq)]
 pub enum SecurityLevel {
     Low,

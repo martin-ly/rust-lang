@@ -7,6 +7,7 @@ use tokio::time::sleep;
 // 移除未使用的导入
 
 /// 应用配置
+/// application
 #[allow(dead_code)]
 #[derive(Debug, Clone)]
 struct AppConfig {
@@ -54,6 +55,7 @@ impl ConfigManager {
     }
 
     /// 获取当前配置
+    /// when before
     async fn get_config(&self) -> AppConfig {
         self.config.read().await.clone()
     }
@@ -81,6 +83,7 @@ impl ConfigManager {
     }
 
     /// 注册配置观察者
+    /// observer
     async fn watch_config(&self) -> tokio::sync::mpsc::Receiver<AppConfig> {
         let (tx, rx) = tokio::sync::mpsc::channel(100);
         self.watchers.lock().await.push(tx);
@@ -89,6 +92,7 @@ impl ConfigManager {
 }
 
 /// 健康检查状态
+/// health check state
 #[derive(Debug, Clone)]
 struct HealthStatus {
     status: String,
@@ -126,6 +130,7 @@ impl HealthStatus {
 }
 
 /// 健康检查器
+/// health check
 struct HealthChecker {
     status: Arc<RwLock<HealthStatus>>,
     config: Arc<ConfigManager>,
@@ -140,6 +145,7 @@ impl HealthChecker {
     }
 
     /// 执行健康检查
+    /// health check
     async fn check_health(&self) -> HealthStatus {
         let mut status = HealthStatus::new();
 
@@ -169,6 +175,7 @@ impl HealthChecker {
     }
 
     /// 检查数据库连接
+    /// database
     async fn check_database(&self) -> CheckResult {
         let start = Instant::now();
 
@@ -194,6 +201,7 @@ impl HealthChecker {
     }
 
     /// 检查 Redis 连接
+    /// Redis
     async fn check_redis(&self) -> CheckResult {
         let start = Instant::now();
 
@@ -219,6 +227,7 @@ impl HealthChecker {
     }
 
     /// 检查配置有效性
+    /// effective
     async fn check_config(&self) -> CheckResult {
         let start = Instant::now();
 
@@ -241,6 +250,7 @@ impl HealthChecker {
     }
 
     /// 检查系统资源
+    /// system
     async fn check_resources(&self) -> CheckResult {
         let start = Instant::now();
 
@@ -266,6 +276,7 @@ impl HealthChecker {
     }
 
     /// 获取当前健康状态
+    /// when before state
     async fn get_status(&self) -> HealthStatus {
         self.status.read().await.clone()
     }
@@ -331,6 +342,7 @@ async fn test_config_hot_reload(config_manager: Arc<ConfigManager>) {
 }
 
 /// 健康检查测试
+/// health check
 async fn test_health_checks(health_checker: Arc<HealthChecker>) {
     println!("\n🚀 健康检查测试");
     println!("{}", "=".repeat(40));

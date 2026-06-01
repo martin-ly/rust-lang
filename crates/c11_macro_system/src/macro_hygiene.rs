@@ -1,8 +1,7 @@
 //! 宏卫生（Macro Hygiene）
-//!
-//! Rust宏卫生的概念和最佳实践。
 
 /// 宏卫生示例：变量不会泄漏到外部作用域
+/// example ：variable to outside role domain
 #[macro_export]
 macro_rules! hygienic_let {
     ($name:ident = $value:expr) => {
@@ -11,7 +10,9 @@ macro_rules! hygienic_let {
 }
 
 /// 非卫生宏的问题示例（对比）
+/// problem example （to ）
 /// 在C/C++的宏中，这种情况会导致问题
+/// in C/C++in ，situation problem
 #[macro_export]
 macro_rules! problematic_in_other_languages {
     // 在Rust中这是安全的，因为宏有自己的作用域
@@ -20,7 +21,6 @@ macro_rules! problematic_in_other_languages {
     };
 }
 
-/// 使用$crate确保卫生
 #[macro_export]
 macro_rules! use_crate_path {
     () => {
@@ -29,7 +29,6 @@ macro_rules! use_crate_path {
     };
 }
 
-/// 内部函数，通过$crate暴露
 pub fn some_internal_fn() {
     println!("Internal function called");
 }
@@ -46,6 +45,7 @@ macro_rules! with_unique_ident {
 }
 
 /// 宏中的生命周期卫生
+/// in lifetime
 #[macro_export]
 macro_rules! make_wrapper {
     ($name:ident) => {
@@ -66,9 +66,11 @@ macro_rules! make_wrapper {
 }
 
 /// 宏卫生测试示例
+/// example
 #[cfg(test)]
 mod hygiene_tests {
     /// 测试变量不泄漏
+    /// variable
     #[test]
     fn test_variable_hygiene() {
         hygienic_let!(x = 42);
@@ -80,6 +82,7 @@ mod hygiene_tests {
     }
 
     /// 测试生命周期卫生
+    /// lifetime
     #[test]
     fn test_lifetime_hygiene() {
         make_wrapper!(MyWrapper);
@@ -91,16 +94,19 @@ mod hygiene_tests {
 }
 
 /// 宏卫生最佳实践总结
+/// summary
 pub mod best_practices {
-    /// 1. 始终使用$crate引用当前crate的项
     pub fn use_crate_path() {}
 
     /// 2. 避免在宏中创建可能冲突的变量名
+    /// 2. in in may variable
     pub fn avoid_common_names() {}
 
     /// 3. 使用局部作用域限制变量生命周期
+    /// 3. local role domain variable lifetime
     pub fn use_local_scope() {}
 
     /// 4. 文档化宏创建的所有标识符
+    /// 4. all
     pub fn document_identifiers() {}
 }

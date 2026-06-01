@@ -1,11 +1,12 @@
 //! 综合集成示例 - 展示多个模块的协同使用
-//!
-//! 本示例展示如何将多个Rust模块组合使用，构建一个完整的应用程序
+//! synthesize example - module
+//! This example demonstrates how to combine multiple Rust modules to build a complete application.
 use std::sync::Mutex;
 use std::thread;
 use std::time::{Duration, Instant};
 
 /// 综合集成示例主函数
+/// synthesize example Main function
 fn main() {
     println!("🚀 Rust 综合集成示例");
     println!("====================\n");
@@ -28,6 +29,7 @@ fn main() {
 }
 
 /// 演示所有权与类型系统集成
+/// demonstration ownership and type system
 fn demonstrate_ownership_type_integration() {
     println!("📦 1. 所有权与类型系统集成");
 
@@ -51,6 +53,7 @@ fn demonstrate_ownership_type_integration() {
 }
 
 /// 演示并发与异步集成
+/// demonstration concurrency and async
 fn demonstrate_concurrency_async_integration() {
     println!("\n⚡ 2. 并发与异步集成");
 
@@ -77,6 +80,7 @@ fn demonstrate_concurrency_async_integration() {
 }
 
 /// 演示算法与性能优化集成
+/// demonstration algorithm and performance optimization
 fn demonstrate_algorithm_performance_integration() {
     println!("\n📊 3. 算法与性能优化集成");
 
@@ -96,6 +100,7 @@ fn demonstrate_algorithm_performance_integration() {
 }
 
 /// 演示网络与进程管理集成
+/// demonstration network and process
 fn demonstrate_network_process_integration() {
     println!("\n🌐 4. 网络与进程管理集成");
 

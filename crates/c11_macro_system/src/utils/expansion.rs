@@ -1,6 +1,8 @@
 //! 宏展开辅助工具
+//! tool
 
 /// 宏展开上下文信息
+/// on under
 #[derive(Debug, Clone, Default)]
 pub struct ExpansionContext {
     /// 展开深度
@@ -11,6 +13,7 @@ pub struct ExpansionContext {
 
 impl ExpansionContext {
     /// 创建新的展开上下文
+    /// on under
     pub fn new() -> Self {
         Self::default()
     }

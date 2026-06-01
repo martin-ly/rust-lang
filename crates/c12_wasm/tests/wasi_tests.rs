@@ -1,10 +1,10 @@
 //! # WASI 功能测试
-//!
-//! 测试 WASI 相关的功能
-//!
+//! # WASI functionality
+//! Test for WASI 相关functionality
 //! 注意：这些测试只能在 WASI 环境中运行
+//! ：in WASI environment in Run
 //! 运行方式：
-//! ```bash
+//! Run way ：
 //! cargo test --target wasm32-wasip1
 //! ```
 #[cfg(target_family = "wasm")]

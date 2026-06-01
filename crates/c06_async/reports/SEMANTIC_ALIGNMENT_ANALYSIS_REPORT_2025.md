@@ -343,7 +343,7 @@ prometheus = "0.13"
 
 - **Tokio**: 生产级异步运行时，功能丰富
 - **Smol**: 轻量级异步运行时，性能优秀
-- **async-std**: 标准库风格的异步运行时
+- **async-std [已归档]**: 标准库风格的异步运行时
 - **混合模式**: 多运行时协同工作
 
 ### ⚡ 性能优化技术
@@ -475,7 +475,7 @@ mod tests {
  param($match) $match.Value -replace '[-:]+', ' --- ' ---------- param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- '
 | Tokio | 15ms | 45MB | 1,400,000 ops/sec | 生产环境 |
 | Smol | 8ms | 25MB | 1,200,000 ops/sec | 轻量级应用 |
-| async-std | 20ms | 50MB | 1,100,000 ops/sec | 标准库兼容 |
+| async-std [已归档] | 20ms | 50MB | 1,100,000 ops/sec | 标准库兼容 |
 
 ## 🎯 实施建议
 

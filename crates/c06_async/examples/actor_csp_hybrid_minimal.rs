@@ -17,7 +17,6 @@ struct Message {
     payload: String,
 }
 
-/// 简化的 Actor：仅负责接收消息并按优先级路由到内部 CSP 流水线入口
 #[derive(Clone)]
 struct IngressActor {
     tx_high: mpsc::Sender<Message>,
@@ -40,7 +39,6 @@ impl IngressActor {
     }
 }
 
-/// 将两个优先级邮箱合并为一个 CSP 入口，使用 select 抢占高优先级
 async fn run_mailbox_mux(
     mut rx_high: mpsc::Receiver<Message>,
     mut rx_norm: mpsc::Receiver<Message>,
@@ -70,7 +68,6 @@ async fn run_mailbox_mux(
     }
 }
 
-/// 简单的流水线阶段：模拟处理耗时，并打印 trace
 async fn run_pipeline_stage(mut rx: mpsc::Receiver<Message>) {
     while let Some(msg) = rx.recv().await {
         match msg.priority {

@@ -1,12 +1,14 @@
 //! Arc 主题
-//! - 强/弱引用：`Arc` 与 `Weak`
+//! Arc
+//! - 强/弱reference：`Arc` and `Weak`
 //! - 循环引用与打破
-//! - `Arc<Mutex<T>>` vs `Arc<RwLock<T>>`
+//! - circulation reference and
 pub mod count;
 
 use std::sync::{Arc, Mutex, RwLock, Weak};
 
 /// 强/弱引用：当强引用计数归零后资源被释放，弱引用不会保持资源存活
+/// /reference ：when reference counting after is ，reference
 pub fn strong_weak_demo() -> (usize, usize) {
     let a = Arc::new(10);
     let w1: Weak<i32> = Arc::downgrade(&a);
@@ -17,7 +19,6 @@ pub fn strong_weak_demo() -> (usize, usize) {
     (strong_cnt_before, strong_cnt_after)
 }
 
-/// 循环引用与打破：使用 `Weak` 避免 `Arc` 形成环
 pub fn break_cycle_demo() -> String {
     #[derive(Debug)]
     struct Node {
@@ -58,7 +59,6 @@ pub fn break_cycle_demo() -> String {
     }
 }
 
-/// 对比：`Arc<Mutex<T>>` 与 `Arc<RwLock<T>>`
 pub fn mutex_vs_rwlock(readers: usize, writers: usize, iters: usize) -> (usize, usize) {
     let m = Arc::new(Mutex::new(0usize));
     let r = Arc::new(RwLock::new(0usize));

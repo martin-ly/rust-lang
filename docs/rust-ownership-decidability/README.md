@@ -328,7 +328,7 @@ Thm SUPERVISION-FAULT-ISOLATION: 监督树隔离故障
 | 类别 | 案例文件 | 难度 | 阅读时间 |
 |:-----|:---------|:----:|:--------:|
 | **异步运行时** | `tokio-runtime-formal-analysis.md` | 🟡 | 2小时 |
-| **异步运行时** | `async-std-formal-analysis.md` | 🟡 | 1.5小时 |
+| **异步运行时** | `async-std [已归档]-formal-analysis.md` | 🟡 | 1.5小时 |
 | **Web框架** | `actix-web-formal-analysis.md` | 🟡 | 2小时 |
 | **Web框架** | `axum-formal-analysis.md` | 🟡 | 1.5小时 |
 | **序列化** | `serde-formal-analysis.md` | 🟡 | 1.5小时 |

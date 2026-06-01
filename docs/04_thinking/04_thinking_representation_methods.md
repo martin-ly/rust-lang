@@ -152,7 +152,7 @@ mindmap
       async/await
       运行时
         Tokio
-        async-std
+        smol
       Stream
     宏系统
       声明宏 macro_rules!
@@ -475,7 +475,7 @@ mindmap
         多线程调度
         I/O驱动
         定时器
-      async-std
+      smol
         标准库风格
         兼容性
       Smol
@@ -789,7 +789,7 @@ graph TD
     Q1 -->|CPU 密集| Sync[选择同步]
 
     Async --> Async1[Tokio 运行时]
-    Async --> Async2[async-std 备选]
+    Async --> Async2[smol 备选]
 
     Sync --> Q2{共享状态?}
     Q2 -->|是| Q3{读多写少?}

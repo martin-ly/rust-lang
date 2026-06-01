@@ -1,12 +1,20 @@
 //! 搜索算法模块 - Rust 1.90 特性对齐
+//! searching algorithm module - Rust 1.90 feature to
 //!
 //! 本模块实现了各种搜索算法，包括：
+//! this module searching algorithm ，：
 //! - 线性搜索算法
+//! - linear search algorithm
 //! - 二分搜索算法
+//! - binary search algorithm
 //! - 树搜索算法
+//! - tree searching algorithm
 //! - 图搜索算法
+//! - searching algorithm
 //! - 并行和异步实现
+//! - parallelism and async
 //! - 形式化验证和证明
+//! - and
 use anyhow::Result;
 use rayon::prelude::*;
 use std::cmp::Ordering;
@@ -15,67 +23,92 @@ use std::hash::Hash;
 use std::time::Instant;
 
 /// 搜索算法类型枚举
+/// searching algorithm type enum
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum SearchingAlgorithm {
     /// 线性搜索 - O(n)
+    /// linear search - O(n)
     Linear,
     /// 二分搜索 - O(log n)
+    /// binary search - O(log n)
     Binary,
     /// 指数搜索 - O(log n)
+    /// exponential search - O(log n)
     Exponential,
     /// 插值搜索 - O(log log n) 平均
+    /// interpolation search - O(log log n)
     Interpolation,
     /// 跳跃搜索 - O(√n)
+    /// jump search - O(√n)
     Jump,
     /// 三分搜索 - O(log n)
+    /// ternary search - O(log n)
     Ternary,
     /// 深度优先搜索 - O(V + E)
+    /// depth-first search - O(V + E)
     DepthFirst,
     /// 广度优先搜索 - O(V + E)
+    /// breadth-first search - O(V + E)
     BreadthFirst,
     /// A* 搜索 - O(b^d)
+    /// A* search - O(b^d)
     AStar,
     /// Dijkstra 搜索 - O((V + E) log V)
     Dijkstra,
 }
 
 /// 搜索算法实现类型
+/// searching algorithm type
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum ImplementationType {
     /// 同步实现
+    /// synchronous
     Synchronous,
     /// 并行实现（Rayon）
+    /// parallelism （Rayon）
     Parallel,
     /// 异步实现（Tokio）
+    /// async （Tokio）
     Asynchronous,
 }
 
 /// 搜索结果
+/// result
 #[derive(Debug, Clone)]
 pub struct SearchResult<T> {
     /// 是否找到目标
+    /// to goal
     pub found: bool,
     /// 找到的索引或位置
+    /// to or position
     pub index: Option<usize>,
     /// 找到的值
+    /// to
     pub value: Option<T>,
     /// 执行时间
+    /// time
     pub execution_time: std::time::Duration,
     /// 比较次数
     pub comparisons: usize,
     /// 访问的节点数
+    /// node
     pub nodes_visited: usize,
     /// 算法类型
+    /// algorithm type
     pub algorithm: SearchingAlgorithm,
     /// 实现类型
+    /// type
     pub implementation: ImplementationType,
     /// 路径（用于图搜索）
+    /// （）
     pub path: Option<Vec<T>>,
     /// 距离（用于图搜索）
+    /// （）
     pub distance: Option<f64>,
 }
 
 /// 搜索算法复杂度信息
+/// searching algorithm complex
 #[derive(Debug, Clone)]
 pub struct SearchingComplexity {
     pub algorithm: SearchingAlgorithm,
@@ -88,6 +121,7 @@ pub struct SearchingComplexity {
 
 impl SearchingComplexity {
     /// 获取所有搜索算法的复杂度信息
+    /// all searching algorithm complex
     pub fn get_all_complexities() -> Vec<Self> {
         vec![
             SearchingComplexity {
@@ -175,10 +209,12 @@ impl SearchingComplexity {
 }
 
 /// 搜索算法实现器
+/// searching algorithm
 pub struct SearchingEngine;
 
 impl SearchingEngine {
     /// 同步线性搜索
+    /// synchronous linear search
     pub fn linear_search_sync<T>(data: &[T], target: &T) -> SearchResult<T>
     where
         T: PartialEq + Clone,
@@ -221,6 +257,7 @@ impl SearchingEngine {
     }
 
     /// 并行线性搜索
+    /// parallelism linear search
     pub fn linear_search_parallel<T>(data: &[T], target: &T) -> SearchResult<T>
     where
         T: PartialEq + Send + Sync + Clone,
@@ -263,6 +300,7 @@ impl SearchingEngine {
     }
 
     /// 异步线性搜索
+    /// async linear search
     pub async fn linear_search_async<T>(data: Vec<T>, target: T) -> Result<SearchResult<T>>
     where
         T: PartialEq + Send + Clone + 'static,
@@ -273,6 +311,7 @@ impl SearchingEngine {
     }
 
     /// 同步二分搜索
+    /// synchronous binary search
     pub fn binary_search_sync<T>(data: &[T], target: &T) -> SearchResult<T>
     where
         T: Ord + Clone,
@@ -326,6 +365,7 @@ impl SearchingEngine {
     }
 
     /// 异步二分搜索
+    /// async binary search
     pub async fn binary_search_async<T>(data: Vec<T>, target: T) -> Result<SearchResult<T>>
     where
         T: Ord + Send + Clone + 'static,
@@ -336,6 +376,7 @@ impl SearchingEngine {
     }
 
     /// 指数搜索
+    /// exponential search
     pub fn exponential_search_sync<T>(data: &[T], target: &T) -> SearchResult<T>
     where
         T: Ord + Clone,
@@ -404,6 +445,7 @@ impl SearchingEngine {
     }
 
     /// 插值搜索
+    /// interpolation search
     pub fn interpolation_search_sync(data: &[i64], target: i64) -> SearchResult<i64> {
         let start = Instant::now();
         let mut comparisons = 0;
@@ -494,6 +536,7 @@ impl SearchingEngine {
     }
 
     /// 跳跃搜索
+    /// jump search
     pub fn jump_search_sync<T>(data: &[T], target: &T) -> SearchResult<T>
     where
         T: Ord + Clone,
@@ -569,6 +612,7 @@ impl SearchingEngine {
     }
 
     /// 三分搜索（用于单峰函数）
+    /// ternary search （function ）
     pub fn ternary_search_sync<F>(
         mut left: f64,
         mut right: f64,
@@ -611,6 +655,7 @@ impl SearchingEngine {
     }
 
     /// 深度优先搜索
+    /// depth-first search
     pub fn depth_first_search_sync<T: Eq + Hash + Clone>(
         graph: &HashMap<T, Vec<T>>,
         start: &T,
@@ -675,6 +720,7 @@ impl SearchingEngine {
     }
 
     /// 广度优先搜索
+    /// breadth-first search
     pub fn breadth_first_search_sync<T: Eq + Hash + Clone>(
         graph: &HashMap<T, Vec<T>>,
         start: &T,
@@ -747,10 +793,12 @@ impl SearchingEngine {
 }
 
 /// 搜索算法验证器
+/// searching algorithm
 pub struct SearchingValidator;
 
 impl SearchingValidator {
     /// 验证搜索结果是否正确
+    /// result
     pub fn validate_search_result<T: PartialEq>(
         data: &[T],
         target: &T,
@@ -774,6 +822,7 @@ impl SearchingValidator {
     }
 
     /// 验证搜索算法的性能
+    /// searching algorithm performance
     pub fn validate_performance(result: &SearchResult<()>) -> bool {
         result.execution_time.as_nanos() > 0 && result.comparisons > 0 && result.nodes_visited > 0
     }

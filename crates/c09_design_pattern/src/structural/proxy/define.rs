@@ -1,8 +1,12 @@
 //! 使用Rust 1.89新特性优化的代理模式实现
+//! Rust 1.89feature optimization proxy pattern
 //!
 //! 特性：
+//! feature ：
 //! - 利用裸指针Default实现简化初始化
+//! - pointer Default
 //! - 支持多种代理类型（虚拟代理、保护代理、远程代理等）
+//! - type （、、etc. ）
 //定义一个 Subject trait
 #[allow(unused)]
 pub trait Subject {
@@ -161,6 +165,7 @@ pub fn test_proxy() {
 }
 
 /// 演示裸指针Default特性的使用
+/// demonstration pointer Defaultfeature
 #[allow(unused)]
 pub fn test_pointer_default() {
     use std::ptr;

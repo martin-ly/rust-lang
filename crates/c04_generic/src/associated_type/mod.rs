@@ -768,10 +768,9 @@ mod tests {
         assert_eq!(counter.count(), 3);
     }
 
-    /// 使用 `gen` block 实现与 Counter 等价的迭代器
-    ///
-    /// `gen` block 将手动状态机（struct Counter + impl Iterator）
+    /// Use `gen` block Implementation ofand Counter etc.价iterator
     /// 简化为直观的命令式代码，编译器自动处理状态转换。
+    /// as imperative ，state conversion 。
     #[test]
     fn test_gen_counter() {
         let gen_counter = gen move {

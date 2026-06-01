@@ -22,6 +22,7 @@ use tokio::process::Command as TokioCommand;
 use tokio::sync::{Mutex as TokioMutex, RwLock as TokioRwLock, mpsc, oneshot};
 
 /// 异步进程管理器
+/// async process
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 pub struct AsyncProcessManager {
@@ -31,6 +32,7 @@ pub struct AsyncProcessManager {
 }
 
 /// 异步管理的进程
+/// async process
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 struct AsyncManagedProcess {
@@ -42,6 +44,7 @@ struct AsyncManagedProcess {
 }
 
 /// 异步命令
+/// async command
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 #[allow(clippy::large_enum_variant)]
@@ -67,6 +70,7 @@ enum AsyncCommand {
 #[allow(dead_code)]
 impl AsyncProcessManager {
     /// 创建新的异步进程管理器
+    /// async process
     pub async fn new() -> Self {
         let (command_sender, command_receiver) = mpsc::channel(100);
         let processes = Arc::new(TokioRwLock::new(HashMap::new()));
@@ -88,6 +92,7 @@ impl AsyncProcessManager {
     }
 
     /// 异步写入标准输入
+    /// async standard input
     pub async fn write_stdin(&self, pid: u32, data: &[u8]) -> ProcessResult<()> {
         let mut processes = self.processes.write().await;
         if let Some(managed_process) = processes.get_mut(&pid) {
@@ -123,6 +128,7 @@ impl AsyncProcessManager {
     }
 
     /// 关闭标准输入
+    /// standard input
     pub async fn close_stdin(&self, pid: u32) -> ProcessResult<()> {
         let mut processes = self.processes.write().await;
         if let Some(managed_process) = processes.get_mut(&pid) {
@@ -141,6 +147,7 @@ impl AsyncProcessManager {
     }
 
     /// 读取标准输出
+    /// standard output
     pub async fn read_stdout(&self, pid: u32) -> ProcessResult<Vec<u8>> {
         let mut processes = self.processes.write().await;
         if let Some(managed_process) = processes.get_mut(&pid) {
@@ -171,6 +178,7 @@ impl AsyncProcessManager {
     }
 
     /// 读取标准错误
+    /// standard error
     pub async fn read_stderr(&self, pid: u32) -> ProcessResult<Vec<u8>> {
         let mut processes = self.processes.write().await;
         if let Some(managed_process) = processes.get_mut(&pid) {
@@ -201,6 +209,7 @@ impl AsyncProcessManager {
     }
 
     /// 带超时等待
+    /// etc.
     pub async fn wait_with_timeout(
         &self,
         pid: u32,
@@ -234,6 +243,7 @@ impl AsyncProcessManager {
     }
 
     /// 异步启动进程
+    /// async process
     pub async fn spawn(&self, config: ProcessConfig) -> ProcessResult<u32> {
         let (response_sender, response_receiver) = oneshot::channel();
 
@@ -253,6 +263,7 @@ impl AsyncProcessManager {
     }
 
     /// 异步终止进程
+    /// async process
     pub async fn kill(&self, pid: u32) -> ProcessResult<()> {
         let (response_sender, response_receiver) = oneshot::channel();
 
@@ -271,6 +282,7 @@ impl AsyncProcessManager {
     }
 
     /// 异步获取进程信息
+    /// async process
     pub async fn get_info(&self, pid: u32) -> ProcessResult<ProcessInfo> {
         let (response_sender, response_receiver) = oneshot::channel();
 
@@ -290,6 +302,7 @@ impl AsyncProcessManager {
     }
 
     /// 异步获取所有进程
+    /// async all process
     pub async fn list_all(&self) -> Vec<ProcessInfo> {
         let (response_sender, response_receiver) = oneshot::channel();
 
@@ -307,6 +320,7 @@ impl AsyncProcessManager {
     }
 
     /// 命令处理器
+    /// command
     async fn command_handler(
         mut receiver: mpsc::Receiver<AsyncCommand>,
         processes: Arc<TokioRwLock<HashMap<u32, AsyncManagedProcess>>>,
@@ -335,6 +349,7 @@ impl AsyncProcessManager {
     }
 
     /// 处理启动进程命令
+    /// process command
     async fn handle_spawn(
         config: ProcessConfig,
         processes: &Arc<TokioRwLock<HashMap<u32, AsyncManagedProcess>>>,
@@ -396,6 +411,7 @@ impl AsyncProcessManager {
     }
 
     /// 处理终止进程命令
+    /// process command
     async fn handle_kill(
         pid: u32,
         processes: &Arc<TokioRwLock<HashMap<u32, AsyncManagedProcess>>>,
@@ -411,6 +427,7 @@ impl AsyncProcessManager {
     }
 
     /// 处理获取进程信息命令
+    /// process command
     async fn handle_get_info(
         pid: u32,
         processes: &Arc<TokioRwLock<HashMap<u32, AsyncManagedProcess>>>,
@@ -425,6 +442,7 @@ impl AsyncProcessManager {
     }
 
     /// 处理列出所有进程命令
+    /// all process command
     async fn handle_list_all(
         processes: &Arc<TokioRwLock<HashMap<u32, AsyncManagedProcess>>>,
     ) -> Vec<ProcessInfo> {
@@ -435,6 +453,7 @@ impl AsyncProcessManager {
 }
 
 /// 异步进程池
+/// async process
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 pub struct AsyncProcessPool {
@@ -447,6 +466,7 @@ pub struct AsyncProcessPool {
 #[cfg(feature = "async")]
 impl AsyncProcessPool {
     /// 创建新的异步进程池
+    /// async process
     pub async fn new(pool_size: usize) -> ProcessResult<Self> {
         let manager = AsyncProcessManager::new().await;
         let available_processes = Arc::new(TokioMutex::new(Vec::new()));
@@ -466,6 +486,7 @@ impl AsyncProcessPool {
     }
 
     /// 初始化进程池
+    /// process
     async fn initialize_pool(&self) -> ProcessResult<()> {
         for _ in 0..self.pool_size {
             let config = ProcessConfig {
@@ -487,6 +508,7 @@ impl AsyncProcessPool {
     }
 
     /// 异步获取可用进程
+    /// async process
     pub async fn get_process(&self) -> ProcessResult<u32> {
         let mut available = self.available_processes.lock().await;
 
@@ -504,6 +526,7 @@ impl AsyncProcessPool {
     }
 
     /// 异步释放进程回池
+    /// async process
     pub async fn release_process(&self, pid: u32) -> ProcessResult<()> {
         self.busy_processes.lock().await.remove(&pid);
         self.available_processes.lock().await.push(pid);
@@ -511,6 +534,7 @@ impl AsyncProcessPool {
     }
 
     /// 异步获取进程池统计
+    /// async process
     pub async fn get_stats(&self) -> ProcessPoolStats {
         let available_count = self.available_processes.lock().await.len();
         let busy_count = self.busy_processes.lock().await.len();
@@ -529,9 +553,11 @@ impl AsyncProcessPool {
 }
 
 /// 进程池统计信息（重新导出以避免冲突）
+/// process （）
 use crate::process::pool::ProcessPoolStats;
 
 /// 异步任务调度器
+/// async task
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 pub struct AsyncTaskScheduler {
@@ -541,6 +567,7 @@ pub struct AsyncTaskScheduler {
 }
 
 /// 异步任务
+/// async task
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 pub struct AsyncTask {
@@ -554,6 +581,7 @@ pub struct AsyncTask {
 #[allow(dead_code)]
 impl AsyncTaskScheduler {
     /// 创建新的异步任务调度器
+    /// async task
     pub fn new(worker_count: usize) -> Self {
         Self {
             task_queue: Arc::new(TokioMutex::new(Vec::new())),
@@ -580,6 +608,7 @@ impl AsyncTaskScheduler {
     }
 
     /// 添加任务
+    /// task
     pub async fn add_task(&self, task: AsyncTask) {
         let mut queue = self.task_queue.lock().await;
         queue.push(task);
@@ -588,6 +617,7 @@ impl AsyncTaskScheduler {
     }
 
     /// 工作循环
+    /// circulation
     async fn worker_loop(
         _worker_id: usize,
         task_queue: Arc<TokioMutex<Vec<AsyncTask>>>,
@@ -611,6 +641,7 @@ impl AsyncTaskScheduler {
 }
 
 /// 非异步版本的占位符实现
+/// async this
 #[cfg(not(feature = "async"))]
 #[allow(dead_code)]
 pub struct AsyncProcessManager;

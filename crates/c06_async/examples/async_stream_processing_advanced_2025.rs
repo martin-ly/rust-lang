@@ -12,8 +12,11 @@ use tokio::time::sleep;
 use tracing::{debug, info, warn};
 
 /// 2025年高级异步流处理演示
+/// 2025async stream demonstration
 /// 展示最新的异步流处理技术和模式
+/// async stream technique and
 /// 1. 异步流处理器基础结构
+/// 1. async stream foundation structure
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct StreamEvent {
     pub id: u64,
@@ -31,6 +34,7 @@ pub enum EventType {
 }
 
 /// 异步流处理器
+/// async stream
 pub struct AsyncStreamProcessor {
     input_stream: Pin<Box<dyn Stream<Item = StreamEvent> + Send>>,
     processors: Vec<StreamTransform>,
@@ -48,6 +52,7 @@ pub struct StreamMetrics {
 }
 
 /// 流转换器枚举
+/// stream conversion enum
 #[derive(Clone)]
 pub enum StreamTransform {
     DataTransformer(AsyncDataTransformer),
@@ -74,6 +79,7 @@ impl StreamTransform {
 }
 
 /// 流转换器trait (保留用于具体实现)
+/// stream conversion trait (volume )
 pub trait StreamTransformImpl: Send + Sync + Clone {
     fn transform(
         &mut self,
@@ -167,6 +173,7 @@ impl AsyncStreamProcessor {
 }
 
 /// 2. 异步流聚合器
+/// 2. async stream aggregation
 pub struct AsyncStreamAggregator<T, Acc> {
     window_size: Duration,
     max_items: usize,
@@ -234,6 +241,7 @@ impl<T: Clone, Acc: Clone> AsyncStreamAggregator<T, Acc> {
 }
 
 /// 3. 异步流分片器
+/// 3. async stream sharding
 pub struct AsyncStreamSharder<T> {
     shard_count: usize,
     shard_function: fn(&T) -> usize,
@@ -296,6 +304,7 @@ impl<T: Send + 'static> AsyncStreamSharder<T> {
 }
 
 /// 4. 异步流合并器
+/// 4. async stream and
 pub struct AsyncStreamMerger<T> {
     input_streams: Vec<Pin<Box<dyn Stream<Item = T> + Send>>>,
     merge_strategy: MergeStrategy,
@@ -394,6 +403,7 @@ impl<T: Send + 'static> AsyncStreamMerger<T> {
 }
 
 /// 5. 异步流过滤器
+/// 5. async stream
 pub struct AsyncStreamFilter<T> {
     filter_fn: Arc<Box<dyn Fn(&T) -> bool + Send + Sync>>,
     metrics: Arc<RwLock<FilterMetrics>>,
@@ -446,6 +456,7 @@ impl<T: Send + Sync + 'static> AsyncStreamFilter<T> {
 }
 
 /// 6. 异步流转换器实现
+/// 6. async stream conversion
 #[derive(Clone)]
 pub struct AsyncDataTransformer;
 
@@ -526,6 +537,7 @@ impl StreamTransformImpl for AsyncEventEnricher {
 }
 
 /// 7. 异步流背压控制器
+/// 7. async stream backpressure
 pub struct AsyncBackpressureController {
     max_buffer_size: usize,
     current_buffer_size: Arc<RwLock<usize>>,
@@ -561,6 +573,7 @@ impl AsyncBackpressureController {
 }
 
 /// 8. 异步流监控器
+/// 8. async stream
 pub struct AsyncStreamMonitor {
     metrics: Arc<RwLock<StreamMetrics>>,
     alert_thresholds: AlertThresholds,
@@ -626,6 +639,7 @@ impl AsyncStreamMonitor {
 }
 
 /// 演示高级异步流处理
+/// demonstration async stream
 #[tokio::main]
 async fn main() -> Result<()> {
     // 初始化日志

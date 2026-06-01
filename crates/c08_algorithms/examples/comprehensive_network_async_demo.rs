@@ -1,44 +1,64 @@
 //! 综合网络异步编程演示程序
-//!
+//! synthesize network async demonstration program
 //! 本示例展示如何结合网络编程（C10）和异步编程（C06）构建高性能网络应用。
-//!
+//! this example network programming （C10）and async （C06）performance network application 。
 //! ## 📐 知识结构
-//!
+//! ## 📐 structure
+//! ## 📐 知识structure
 //! ### 核心概念
-//!
+//! ### core concept
 //! - **异步网络编程**: 结合异步编程和网络编程的编程范式
+//! - **async network programming **: async and network programming
 //!   - **属性**: 非阻塞 I/O、高并发、事件驱动
+//!   - **attribute **: I/O、concurrency 、event-driven
+//!   - **attribute**: Non-blocking I/O、高concurrency、event-driven
 //!   - **关系**: 与异步编程、网络编程相关
-//!
+//!   - ****: and async 、network programming
 //! - **异步服务器**: 使用异步运行时处理网络请求的服务器
+//! - **async **: async runtime network
 //!   - **属性**: 高并发、低资源占用、事件驱动
+//!   - **attribute **: concurrency 、、event-driven
+//!   - **attribute**: 高concurrency、低资源占用、event-driven
 //!   - **关系**: 与异步编程、网络协议相关
-//!
+//!   - ****: and async 、network protocol
 //! ### 思维导图
-//!
-//! ```text
+//! ###
 //! 网络异步演示
-//! │
+//! network async demonstration
 //! ├── 异步网络服务器
+//! ├── async network
 //! │   ├── TCP 监听
+//! │ ├── TCP
+//! │ ├── TCP 监听
+//! │ ├── TCP
 //! │   ├── 异步接受连接
+//! │ ├── async
 //! │   └── 并发处理请求
+//! │ └── concurrency
 //! ├── 异步 I/O
+//! ├── async I/O
 //! │   ├── 异步读取
+//! │ ├── async
 //! │   └── 异步写入
+//! │ └── async
 //! └── 错误处理
+//! └── error handling
 //!     ├── 错误传播
+//!     ├── error propagation
 //!     └── 错误恢复
-//! ```
+//!     └── error recovery
 use std::time::Duration;
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use tokio::net::TcpListener;
 use tokio::time::{Instant, sleep};
 
 /// 异步 TCP 服务器
-///
+/// async TCP
+/// async TCP 服务器
 /// 注意：此函数用于演示目的，在实际运行中会阻塞主线程
+/// ：this function demonstration objective ，in actual Run in main thread
 /// 如需使用，请单独启动服务器线程
+/// ，thread
 #[allow(dead_code)]
 async fn async_tcp_server() -> Result<(), Box<dyn std::error::Error>> {
     println!("🚀 启动异步 TCP 服务器...");
@@ -79,6 +99,7 @@ async fn async_tcp_server() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 /// 异步 HTTP 客户端（简化版）
+/// async HTTP （）
 async fn async_http_client(url: &str) -> Result<String, Box<dyn std::error::Error>> {
     println!("🌐 发送 HTTP 请求到: {}", url);
 
@@ -89,6 +110,7 @@ async fn async_http_client(url: &str) -> Result<String, Box<dyn std::error::Erro
 }
 
 /// 并发处理多个请求
+/// concurrency
 async fn concurrent_requests() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n⚡ 并发处理多个请求...");
 
@@ -122,6 +144,7 @@ async fn concurrent_requests() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 /// 使用 select! 处理多个异步任务
+/// select! async task
 async fn select_example() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n🎯 使用 select! 处理多个任务...");
 
@@ -148,6 +171,7 @@ async fn select_example() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 /// 流式处理数据
+/// stream
 async fn stream_processing() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n🌊 流式处理数据...");
 
@@ -164,6 +188,7 @@ async fn stream_processing() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 /// 异步任务池
+/// async task
 async fn task_pool_example() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n🏊 异步任务池示例...");
 

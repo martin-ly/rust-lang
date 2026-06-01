@@ -4,7 +4,9 @@ use tokio::sync::Mutex;
 use tokio::time::sleep;
 
 /// 模拟分布式锁实现
+/// distribution lock
 /// 在实际生产环境中，这通常基于 Redis、ZooKeeper 或 etcd
+/// in actual environment in ， Redis 、ZooKeeper or etcd
 #[derive(Debug)]
 struct DistributedLock {
     id: String,
@@ -25,6 +27,7 @@ impl DistributedLock {
     }
 
     /// 尝试获取锁
+    /// lock
     async fn try_acquire(&mut self) -> bool {
         // 模拟网络延迟和竞争
         sleep(Duration::from_millis(rand::random::<u64>() % 100)).await;
@@ -41,6 +44,7 @@ impl DistributedLock {
     }
 
     /// 释放锁
+    /// lock
     async fn release(&mut self) -> bool {
         if self.acquired_at.is_some() {
             self.acquired_at = None;
@@ -53,6 +57,7 @@ impl DistributedLock {
     }
 
     /// 检查锁是否仍然有效
+    /// lock effective
     fn is_valid(&self) -> bool {
         if let Some(acquired_at) = self.acquired_at {
             acquired_at.elapsed() < self.ttl
@@ -75,6 +80,7 @@ impl DistributedLock {
 }
 
 /// 分布式锁管理器
+/// distribution lock
 struct LockManager {
     locks: Arc<Mutex<Vec<DistributedLock>>>,
 }
@@ -87,6 +93,7 @@ impl LockManager {
     }
 
     /// 获取指定资源的锁
+    /// lock
     async fn acquire_lock(&self, resource: &str, ttl: Duration) -> Option<String> {
         let mut lock = DistributedLock::new(resource.to_string(), ttl);
 
@@ -100,6 +107,7 @@ impl LockManager {
     }
 
     /// 释放指定锁
+    /// lock
     async fn release_lock(&self, lock_id: &str) -> bool {
         let mut locks = self.locks.lock().await;
         if let Some(index) = locks.iter().position(|l| l.id == lock_id) {
@@ -111,6 +119,7 @@ impl LockManager {
     }
 
     /// 获取所有活跃锁的状态
+    /// all lock state
     async fn get_locks_status(&self) -> Vec<(String, String, bool)> {
         let locks = self.locks.lock().await;
         locks
@@ -121,6 +130,7 @@ impl LockManager {
 }
 
 /// 模拟分布式任务执行
+/// distribution task
 async fn execute_distributed_task(manager: Arc<LockManager>, resource: &str, task_id: u32) {
     println!("🚀 任务 {} 尝试获取资源 {} 的锁", task_id, resource);
 

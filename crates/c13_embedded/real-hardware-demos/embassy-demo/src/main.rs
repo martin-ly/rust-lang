@@ -2,22 +2,18 @@
 #![no_main]
 
 //! Embassy 异步 LED 闪烁示例 (Raspberry Pi Pico)
-//!
+//! Embassy async LED 闪烁Example of (Raspberry Pi Pico)
 //! 使用 Embassy 框架在 RP2040 上实现异步 LED 闪烁。
-//! 这是 `embassy_framework.rs` 中概念代码的真实硬件版本。
-//!
+//! Embassy framework in RP2040 on async LED 。
 //! # 硬件要求
-//! - Raspberry Pi Pico / Pico W
+//! # hardware
 //! - 板载 LED 连接在 GPIO25（Pico）或 WL_GPIO0（Pico W）
-//!
+//! - 板载 LED Connectin GPIO25（Pico）or WL_GPIO0（Pico W）
 //! # 编译
-//! ```bash
-//! cargo build --release
+//! #
 //! ```
 //!
 //! # 烧录 (probe-rs)
-//! ```bash
-//! cargo run --release
 //! ```
 
 use defmt::*;
@@ -28,6 +24,7 @@ use embassy_time::Timer;
 use panic_probe as _;
 
 /// 主入口 — Embassy Executor 自动管理 async 任务调度
+/// — Embassy Executor async task
 #[embassy_executor::main]
 async fn main(_spawner: Spawner) {
     info!("Embassy demo starting on RP2040!");

@@ -1,3 +1,7 @@
+> **内容分级**: [综述级]
+>
+> **本节关键术语**: 所有权 (Ownership) · 移动 (Move) · 借用 (Borrow) · 引用 (Reference) · 生命周期 (Lifetime) — [完整对照表](../00_meta/terminology_glossary.md)
+
 # Ownership（所有权）
 
 > **受众**: [初学者]

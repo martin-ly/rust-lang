@@ -1,9 +1,12 @@
 //! 操作系统特定线程功能
-//!
+//! operating system thread functionality
 //! 本模块提供了针对不同操作系统的线程功能：
+//! This module provides to operating system thread functionality ：
 //! - Windows: 线程池、纤程、异步I/O
+//! - Windows: thread pool 、fiber 、async I/O
 //! - Linux: pthread、实时调度、信号处理
-//! - macOS: Grand Central Dispatch、线程池
+//! - Linux: pthread、、
+//! - Linux: pthread、实时调度、信号Handle
 use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
 use std::thread;
 use std::time::Duration;
@@ -13,7 +16,6 @@ use std::time::Duration;
 mod windows_threads {
     use super::*;
 
-    /// Windows线程池
     #[allow(dead_code)]
     pub struct WindowsThreadPool {
         pool_size: usize,
@@ -66,7 +68,6 @@ mod windows_threads {
         }
     }
 
-    /// Windows纤程
     pub struct WindowsFiber {
         fiber_id: usize,
         stack_size: usize,
@@ -108,7 +109,6 @@ mod windows_threads {
         }
     }
 
-    /// Windows异步I/O
     pub struct WindowsAsyncIO {
         io_operations: AtomicUsize,
         completed_operations: AtomicUsize,
@@ -159,7 +159,6 @@ mod windows_threads {
 mod linux_threads {
     use super::*;
 
-    /// Linux pthread包装器
     pub struct LinuxPthread {
         thread_id: usize,
         priority: i32,
@@ -209,7 +208,6 @@ mod linux_threads {
         }
     }
 
-    /// Linux实时调度
     pub struct LinuxRealTimeScheduler {
         real_time_threads: Arc<Mutex<Vec<usize>>>,
         deadline_monitor: Arc<Mutex<HashMap<usize, Duration>>>,
@@ -264,7 +262,6 @@ mod linux_threads {
         }
     }
 
-    /// Linux信号处理
     pub struct LinuxSignalHandler {
         signal_handlers: Arc<Mutex<HashMap<i32, Box<dyn Fn() + Send + Sync>>>>,
         signal_count: AtomicUsize,
@@ -310,7 +307,6 @@ mod linux_threads {
 mod macos_threads {
     use super::*;
 
-    /// macOS Grand Central Dispatch队列
     pub struct MacOSDispatchQueue {
         queue_name: String,
         queue_type: DispatchQueueType,
@@ -382,7 +378,6 @@ mod macos_threads {
         }
     }
 
-    /// macOS线程池
     pub struct MacOSThreadPool {
         pool_size: usize,
         active_threads: AtomicUsize,
@@ -436,6 +431,7 @@ mod macos_threads {
 }
 
 /// 跨平台线程功能包装器
+/// platform thread functionality
 #[allow(dead_code)]
 pub struct CrossPlatformThreadFeatures {
     #[cfg(target_os = "windows")]
@@ -541,6 +537,7 @@ impl CrossPlatformThreadFeatures {
 }
 
 /// 运行所有操作系统特定线程功能示例
+/// Run all operating system thread functionality example
 pub fn demonstrate_os_thread_features() {
     println!("=== 操作系统特定线程功能演示 ===");
 

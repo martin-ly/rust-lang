@@ -1,6 +1,4 @@
 //! 过程宏集成测试 / Proc-Macro Integration Tests
-//!
-//! 验证 `c11_macro_system_proc` 提供的所有过程宏在消费者 crate 中的行为。
 
 use c11_macro_system_proc::{AutoClone, Builder, conditional, debug_print, serializable, timed};
 

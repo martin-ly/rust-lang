@@ -1,10 +1,17 @@
 //! 背压处理机制
-//!
+//! backpressure mechanism
 //! 本模块提供了多种背压处理策略：
+//! This module provides backpressure strategy ：
 //! - 阻塞背压
+//! - backpressure
 //! - 丢弃背压
+//! - backpressure
+//! - 丢弃backpressure
 //! - 自适应背压
+//! - backpressure
+//! - 自适应backpressure
 //! - 流量控制背压
+//! - flow rate backpressure
 use std::sync::{
     Arc,
     Mutex,
@@ -43,7 +50,6 @@ pub trait BackpressureRx<T: Send>: Send + Sync {
     fn recv(&self) -> Option<T>;
 }
 
-/// 将任意实现 BackpressureRx 的通道桥接到 crossbeam 的 Sender
 pub fn bridge_to_mpsc<T: Send, R>(
     rx: Arc<R>,
     tx: Sender<T>,
@@ -76,6 +82,7 @@ pub fn bridge_to_mpsc<T: Send, R>(
 }
 
 /// 限速桥接：控制每个元素发送之间的最小时间间隔
+/// bridge ：element 's minimum time
 pub fn bridge_to_mpsc_rate_limited<T: Send, R>(
     rx: Arc<R>,
     tx: Sender<T>,
@@ -115,19 +122,25 @@ pub fn bridge_to_mpsc_rate_limited<T: Send, R>(
 }
 
 /// 背压策略枚举
+/// backpressure strategy enum
 #[derive(Debug, Clone, PartialEq)]
 pub enum BackpressureStrategy {
     /// 阻塞策略：当缓冲区满时阻塞发送者
+    /// strategy ：when buffering
     Blocking,
     /// 丢弃策略：当缓冲区满时丢弃新消息
+    /// strategy ：when buffering
     Dropping,
     /// 自适应策略：根据系统负载动态调整
+    /// strategy ：according to system
     Adaptive,
     /// 流量控制策略：使用滑动窗口控制流量
+    /// flow rate strategy ：flow rate
     FlowControl,
 }
 
 /// 背压配置
+/// backpressure
 #[derive(Debug, Clone)]
 pub struct BackpressureConfig {
     pub strategy: BackpressureStrategy,
@@ -152,8 +165,9 @@ impl Default for BackpressureConfig {
 }
 
 /// 阻塞背压通道
-///
+/// backpressure channel
 /// 当缓冲区满时阻塞发送者，直到有空间可用
+/// when buffering ，to space
 pub struct BlockingBackpressureChannel<T> {
     sender: Sender<T>,
     receiver: Receiver<T>,
@@ -163,6 +177,7 @@ pub struct BlockingBackpressureChannel<T> {
 
 impl<T> BlockingBackpressureChannel<T> {
     /// 创建新的阻塞背压通道
+    /// backpressure channel
     pub fn new(buffer_size: usize) -> Self {
         let (sender, receiver) = bounded(buffer_size);
 
@@ -175,6 +190,7 @@ impl<T> BlockingBackpressureChannel<T> {
     }
 
     /// 发送消息（阻塞）
+    /// （）
     pub fn send(&self, message: T) -> Result<(), T> {
         match self.sender.try_send(message) {
             Ok(()) => {
@@ -199,6 +215,7 @@ impl<T> BlockingBackpressureChannel<T> {
     }
 
     /// 尝试发送消息（非阻塞）
+    /// （）
     pub fn try_send(&self, message: T) -> Result<(), T> {
         match self.sender.try_send(message) {
             Ok(()) => {
@@ -211,12 +228,14 @@ impl<T> BlockingBackpressureChannel<T> {
     }
 
     /// 获取当前缓冲区使用率
+    /// when before buffering
     pub fn usage_ratio(&self) -> f64 {
         let current = self.current_size.load(Ordering::Relaxed);
         current as f64 / self.buffer_size as f64
     }
 
     /// 运行阻塞背压示例
+    /// Run backpressure example
     pub fn run_example() {
         println!("=== 阻塞背压通道示例 ===");
 
@@ -268,8 +287,10 @@ impl<T: Send> BackpressureRx<T> for BlockingBackpressureChannel<T> {
 }
 
 /// 丢弃背压通道
-///
+/// backpressure channel
+/// 丢弃backpressurechannel
 /// 当缓冲区满时丢弃新消息
+/// when buffering
 pub struct DroppingBackpressureChannel<T> {
     sender: Sender<T>,
     receiver: Receiver<T>,
@@ -281,6 +302,7 @@ pub struct DroppingBackpressureChannel<T> {
 
 impl<T> DroppingBackpressureChannel<T> {
     /// 创建新的丢弃背压通道
+    /// backpressure channel
     pub fn new(buffer_size: usize, drop_threshold: f64) -> Self {
         let (sender, receiver) = bounded(buffer_size);
 
@@ -295,6 +317,7 @@ impl<T> DroppingBackpressureChannel<T> {
     }
 
     /// 发送消息（可能丢弃）
+    /// （may ）
     pub fn send(&self, message: T) -> Result<(), T> {
         let usage_ratio = self.usage_ratio();
 
@@ -328,17 +351,21 @@ impl<T> DroppingBackpressureChannel<T> {
     }
 
     /// 获取当前缓冲区使用率
+    /// when before buffering
     pub fn usage_ratio(&self) -> f64 {
         let current = self.current_size.load(Ordering::Relaxed);
         current as f64 / self.buffer_size as f64
     }
 
     /// 获取丢弃的消息数量
+    /// quantity
+    /// Get丢弃消息quantity
     pub fn dropped_count(&self) -> usize {
         self.dropped_count.load(Ordering::Relaxed)
     }
 
     /// 运行丢弃背压示例
+    /// Run backpressure example
     pub fn run_example() {
         println!("=== 丢弃背压通道示例 ===");
 
@@ -391,8 +418,10 @@ impl<T: Send> BackpressureRx<T> for DroppingBackpressureChannel<T> {
 }
 
 /// 自适应背压通道
-///
+/// backpressure channel
+/// 自适应backpressurechannel
 /// 根据系统负载动态调整背压策略
+/// according to system backpressure strategy
 pub struct AdaptiveBackpressureChannel<T> {
     sender: Sender<T>,
     receiver: Receiver<T>,
@@ -406,6 +435,7 @@ pub struct AdaptiveBackpressureChannel<T> {
 
 impl<T> AdaptiveBackpressureChannel<T> {
     /// 创建新的自适应背压通道
+    /// backpressure channel
     pub fn new(config: BackpressureConfig) -> Self {
         let (sender, receiver) = bounded(config.buffer_size);
 
@@ -422,6 +452,7 @@ impl<T> AdaptiveBackpressureChannel<T> {
     }
 
     /// 发送消息（自适应策略）
+    /// （strategy ）
     pub fn send(&self, message: T) -> Result<(), T> {
         self.adapt_strategy();
 
@@ -513,17 +544,21 @@ impl<T> AdaptiveBackpressureChannel<T> {
     }
 
     /// 获取当前缓冲区使用率
+    /// when before buffering
     pub fn usage_ratio(&self) -> f64 {
         let current = self.current_size.load(Ordering::Relaxed);
         current as f64 / self.buffer_size as f64
     }
 
     /// 获取丢弃的消息数量
+    /// quantity
+    /// Get丢弃消息quantity
     pub fn dropped_count(&self) -> usize {
         self.dropped_count.load(Ordering::Relaxed)
     }
 
     /// 运行自适应背压示例
+    /// Run backpressure example
     pub fn run_example() {
         println!("=== 自适应背压通道示例 ===");
 
@@ -585,8 +620,9 @@ impl<T: Send> BackpressureRx<T> for AdaptiveBackpressureChannel<T> {
 }
 
 /// 流量控制背压通道
-///
+/// flow rate backpressure channel
 /// 使用滑动窗口控制流量
+/// flow rate
 pub struct FlowControlBackpressureChannel<T> {
     sender: Sender<T>,
     receiver: Receiver<T>,
@@ -600,6 +636,7 @@ pub struct FlowControlBackpressureChannel<T> {
 
 impl<T> FlowControlBackpressureChannel<T> {
     /// 创建新的流量控制背压通道
+    /// flow rate backpressure channel
     pub fn new(buffer_size: usize, window_size: usize, window_reset_time: Duration) -> Self {
         let (sender, receiver) = bounded(buffer_size);
 
@@ -616,6 +653,7 @@ impl<T> FlowControlBackpressureChannel<T> {
     }
 
     /// 发送消息（流量控制）
+    /// （flow rate ）
     pub fn send(&self, message: T) -> Result<(), T> {
         self.reset_window_if_needed();
 
@@ -652,18 +690,21 @@ impl<T> FlowControlBackpressureChannel<T> {
     }
 
     /// 获取当前缓冲区使用率
+    /// when before buffering
     pub fn usage_ratio(&self) -> f64 {
         let current = self.current_size.load(Ordering::Relaxed);
         current as f64 / self.buffer_size as f64
     }
 
     /// 获取当前窗口使用率
+    /// when before
     pub fn window_usage_ratio(&self) -> f64 {
         let current = self.current_window.load(Ordering::Relaxed);
         current as f64 / self.window_size as f64
     }
 
     /// 运行流量控制背压示例
+    /// Run flow rate backpressure example
     pub fn run_example() {
         println!("=== 流量控制背压通道示例 ===");
 
@@ -720,6 +761,7 @@ impl<T: Send> BackpressureRx<T> for FlowControlBackpressureChannel<T> {
 }
 
 /// 运行所有背压处理示例
+/// Run all backpressure example
 pub fn demonstrate_backpressure_handling() {
     println!("=== 背压处理演示 ===");
 

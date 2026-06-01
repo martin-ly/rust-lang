@@ -1,4 +1,5 @@
 //! UDP 套接字实现
+//! UDP socket
 use crate::error::{NetworkError, NetworkResult};
 use std::net::{Ipv4Addr, SocketAddr};
 use std::time::Duration;
@@ -6,6 +7,7 @@ use tokio::net::UdpSocket;
 use tokio::time::timeout;
 
 /// UDP 套接字配置
+/// UDP socket
 #[derive(Debug, Clone)]
 pub struct UdpConfig {
     pub address: SocketAddr,
@@ -28,6 +30,7 @@ impl Default for UdpConfig {
 }
 
 /// UDP 套接字封装
+/// UDP socket
 #[derive(Debug)]
 pub struct UdpSocketWrapper {
     socket: UdpSocket,
@@ -37,6 +40,7 @@ pub struct UdpSocketWrapper {
 
 impl UdpSocketWrapper {
     /// 创建新的 UDP 套接字
+    /// UDP socket
     pub async fn new(config: UdpConfig) -> NetworkResult<Self> {
         let socket = UdpSocket::bind(config.address).await?;
         let local_addr = socket.local_addr()?;
@@ -49,6 +53,7 @@ impl UdpSocketWrapper {
     }
 
     /// 绑定到指定地址
+    /// to
     pub async fn bind(addr: SocketAddr) -> NetworkResult<Self> {
         let socket = UdpSocket::bind(addr).await?;
         let local_addr = socket.local_addr()?;
@@ -61,6 +66,7 @@ impl UdpSocketWrapper {
     }
 
     /// 发送数据到指定地址
+    /// to
     pub async fn send_to(&self, data: &[u8], addr: SocketAddr) -> NetworkResult<usize> {
         match self.config.timeout {
             Some(timeout_duration) => timeout(timeout_duration, self.socket.send_to(data, addr))
@@ -83,12 +89,14 @@ impl UdpSocketWrapper {
     }
 
     /// 连接到指定地址（用于已连接套接字）
+    /// to （connected socket ）
     pub async fn connect(&self, addr: SocketAddr) -> NetworkResult<()> {
         self.socket.connect(addr).await?;
         Ok(())
     }
 
     /// 发送数据（已连接套接字）
+    /// （connected socket ）
     pub async fn send(&self, data: &[u8]) -> NetworkResult<usize> {
         match self.config.timeout {
             Some(timeout_duration) => timeout(timeout_duration, self.socket.send(data))
@@ -100,6 +108,7 @@ impl UdpSocketWrapper {
     }
 
     /// 接收数据（已连接套接字）
+    /// （connected socket ）
     pub async fn recv(&self, buffer: &mut [u8]) -> NetworkResult<usize> {
         match self.config.timeout {
             Some(timeout_duration) => timeout(timeout_duration, self.socket.recv(buffer))
@@ -111,6 +120,7 @@ impl UdpSocketWrapper {
     }
 
     /// 获取本地地址
+    /// this
     pub fn local_addr(&self) -> SocketAddr {
         self.local_addr
     }

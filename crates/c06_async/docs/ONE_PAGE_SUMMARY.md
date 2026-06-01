@@ -11,7 +11,7 @@
 | :--- | :--- |
 | **async/await** | `async fn` 返回 `Future`；`.await` 挂起与恢复 |
 | **Future** | 惰性执行；需 executor 轮询；`Pin` 自引用 |
-| **运行时** | Tokio、async-std；`#[tokio::main]`；任务调度 |
+| **运行时** | Tokio、async-std [已归档]；`#[tokio::main]`；任务调度 |
 | **并发模型** | 多任务单线程（协作式）；与 OS 线程互补 |
 
 ---
@@ -31,7 +31,7 @@
 
 | 场景 | 选型 |
 | :--- | :--- |
-| 异步运行时 | Tokio（主流）或 async-std |
+| 异步运行时 | Tokio（主流）或 smol |
 | 异步锁 | `tokio::sync::Mutex` |
 | 异步通道 | `tokio::sync::mpsc` |
 | 超时/取消 | `tokio::time::timeout`；`CancellationToken` |

@@ -198,7 +198,7 @@ docs/
 ### 1. 全面的异步编程覆盖
 
 - **基础概念**: Future、async/await、Stream
-- **运行时对比**: Tokio、Smol、async-std
+- **运行时对比**: Tokio、Smol、async-std [已归档]
 - **同步原语**: Mutex、RwLock、Notify、Semaphore
 - **高级模式**: 生产者-消费者、发布-订阅、工作池
 - **实际应用**: 网络编程、数据库操作、性能优化
@@ -363,7 +363,7 @@ ls examples/
 | 维度 | 完成度 | 说明 |
  param($match) $match.Value -replace '[-:]+', ' --- ' -------- param($match) $match.Value -replace '[-:]+', ' --- '
 | 基础异步概念 | 100% | 完全覆盖 Future、async/await、Stream |
-| 运行时对比 | 100% | Tokio、Smol、async-std 完整对比 |
+| 运行时对比 | 100% | Tokio、Smol、async-std [已归档] 完整对比 |
 | 同步原语 | 100% | Mutex、RwLock、Notify、Semaphore 等 |
 | 高级工具 | 100% | 任务管理、重试、批处理、限流等 |
 | 实际应用 | 100% | 网络、数据库、性能优化等 |

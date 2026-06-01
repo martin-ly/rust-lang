@@ -15,7 +15,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust Project Goals 2026 对齐矩阵](#rust-project-goals-2026-对齐矩阵)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [一、旗舰主题映射（Flagship Themes → 项目内容）](#一旗舰主题映射flagship-themes--项目内容)
   - [二、2026 稳定化目标详细映射](#二2026-稳定化目标详细映射)
     - [2.1 语言与编译器层](#21-语言与编译器层)
@@ -25,9 +25,9 @@
     - [2.5 WASM 与跨语言层](#25-wasm-与跨语言层)
   - [三、缺口热力图](#三缺口热力图)
   - [四、行动建议（按优先级排序）](#四行动建议按优先级排序)
-    - [🔴 P0 — 立即创建（完全缺失，2026 年稳定化目标）](#p0--立即创建完全缺失2026-年稳定化目标)
-    - [🟡 P1 — 补充深化（部分覆盖，需升级）](#p1--补充深化部分覆盖需升级)
-    - [🟢 P2 — 跟踪观察（nightly / 长期演进）](#p2--跟踪观察nightly--长期演进)
+    - [🔴 P0 — 立即创建（完全缺失，2026 年稳定化目标）](#-p0--立即创建完全缺失2026-年稳定化目标)
+    - [🟡 P1 — 补充深化（部分覆盖，需升级）](#-p1--补充深化部分覆盖需升级)
+    - [🟢 P2 — 跟踪观察（nightly / 长期演进）](#-p2--跟踪观察nightly--长期演进)
   - [五、参考链接](#五参考链接)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
@@ -44,7 +44,7 @@
 | **Constify all the things** | 结构体和关联常量进入泛型参数；编译期类型内省 | `concept/02_intermediate/02_generics.md` · `concept/02_intermediate/01_traits.md` | 🟡 60% | `adt_const_params` 代码示例缺失；`min_generic_const_args` 代码示例缺失；reflection 未覆盖 |
 | **Higher-level Rust** | 单文件脚本带依赖 | `concept/06_ecosystem/09_cargo_script.md` · `docs/06_toolchain/06_cargo_script_guide.md` | 🟡 75% | ✅ 独立章节 + 指南已创建；frontmatter 语法、SemVer 影响、工程实践全覆盖 |
 | **Secure your supply chain** | 公共 API 依赖控制、破坏性变更检测、SBOM 生成 | `SECURITY_RESPONSE.md` · `deny.toml` | 🟡 50% | cargo-semver-checks 未覆盖；SBOM 生成实践缺失 |
-| **Safety-Critical Rust** | 认证工具链、规范、功能安全证据 | `RUST_SAFETY_CRITICAL_ECOSYSTEM/` · `concept/07_future/02_formal_methods.md` | 🟡 60% | MC/DC coverage 未覆盖；normative unsafe docs 未与官方路线对齐；FLS 发布节奏未覆盖 |
+| **Safety-Critical Rust** | 认证工具链、规范、功能安全证据 | `knowledge/04_expert/safety_critical/` · `concept/07_future/02_formal_methods.md` | 🟡 60% | MC/DC coverage 未覆盖；normative unsafe docs 未与官方路线对齐；FLS 发布节奏未覆盖 |
 
 ---
 
@@ -100,7 +100,7 @@
 |:---|:---|:---:|:---|:---|:---|
 | **a-mir-formality 作为类型系统规范** | — | 推进中 | 🟡 部分 | `concept/04_formal/02_type_theory.md` | 缺少 a-mir-formality 工具链使用指南 |
 | **Normative Documentation for Sound unsafe Rust** | — | 推进中 | 🟡 部分 | `concept/03_advanced/03_unsafe.md` | 未与官方 Safety-Critical 路线对齐 |
-| **Safety-Critical Lints in Clippy** | — | 推进中 | 🟡 部分 | `RUST_SAFETY_CRITICAL_ECOSYSTEM/` | 缺少 Clippy 安全 lint 矩阵 |
+| **Safety-Critical Lints in Clippy** | — | 推进中 | 🟡 部分 | `knowledge/04_expert/safety_critical/` | 缺少 Clippy 安全 lint 矩阵 |
 | **MC/DC Coverage Support** | — | 推进中 | 🔴 **缺失** | — | 完全缺失 |
 | **MemorySanitizer / ThreadSanitizer** | Jakob Koschel | **目标 2026 稳定** | 🟡 部分 | `docs/03_miri_guide.md` | 缺少 MSan/TSan 与 Miri 的对比 |
 | **BorrowSanitizer** | — | 原型 | 🔴 **缺失** | — | 完全缺失 |

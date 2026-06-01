@@ -1,18 +1,23 @@
 #![allow(clippy::type_complexity)]
 //! Rust 1.90 GATs 零拷贝观察者模式高级示例
-//!
+//! Rust 1.90 GATs observer example
 //! 本示例展示：
-//! 1. 使用 GATs 实现零拷贝的观察者模式
+//! this example ：
 //! 2. 借用视图（Borrowing View）避免克隆
+//! 2. borrowing （Borrowing View）
 //! 3. 多种数据类型的观察者
+//! 3. type observer
+//! 3. 多种数据typeobserver
 //! 4. 事件过滤和转换
+//! 4. and conversion
+//! 4. 事件Filterandconversion
 //! 5. 性能对比：GATs vs 克隆方式
-//!
+//! 5. performance to ：GATs vs way
 //! ## 设计说明
-//!
+//! ## design explain
 //! GATs（泛型关联类型）使 trait 不再 dyn-compatible（对象安全），因此不能
-//! 使用 `Box<dyn Observer>` 等 trait 对象。本示例使用枚举包装不同类型的
-//! 观察者来解决这个问题，这是 Rust 中处理此类情况的惯用方法。
+//! GATs（generic associated type ） trait dyn-compatible（to ），therefore cannot
+//! GATs（genericassociated type）使 trait 不再 dyn-compatible（to象安全），thereforecannot
 use std::collections::HashMap;
 use std::time::Instant;
 
@@ -21,16 +26,20 @@ use std::time::Instant;
 // ============================================================================
 
 /// GATs 观察者 trait - 支持借用视图
+/// GATs observer trait - borrowing
 pub trait Observer {
     /// 关联类型：借用视图（带生命周期）
+    /// associated type ：borrowing （lifetime ）
     type ViewType<'a>
     where
         Self: 'a;
 
     /// 接收借用的数据（零拷贝）
+    /// borrowing （）
     fn update<'a>(&'a mut self, view: Self::ViewType<'a>);
 
     /// 观察者名称
+    /// observer
     fn name(&self) -> &str;
 }
 
@@ -49,6 +58,7 @@ pub trait Subject {
 // ============================================================================
 
 /// 字符串统计观察者
+/// observer
 pub struct StringStatsObserver {
     name: String,
     total_chars: usize,
@@ -104,6 +114,7 @@ impl Observer for StringStatsObserver {
 }
 
 /// 字符串模式匹配观察者
+/// observer
 pub struct PatternObserver {
     name: String,
     patterns: Vec<String>,
@@ -153,6 +164,7 @@ impl Observer for PatternObserver {
 // ============================================================================
 
 /// 数值统计观察者
+/// observer
 pub struct NumStatsObserver {
     name: String,
     sum: i64,
@@ -228,6 +240,7 @@ impl Observer for NumStatsObserver {
 }
 
 /// 数值过滤观察者（仅记录符合条件的数值）
+/// observer （condition ）
 pub struct FilterObserver<F>
 where
     F: Fn(i32) -> bool,
@@ -291,6 +304,8 @@ pub struct User {
 }
 
 /// 用户统计观察者（借用 User 引用）
+/// observer （borrowing User reference ）
+/// 用户统计observer（borrow User reference）
 pub struct UserStatsObserver {
     name: String,
     total_users: usize,
@@ -364,7 +379,7 @@ impl Observer for UserStatsObserver {
 // Subject 实现 - 使用枚举包装观察者以避免 trait object 问题
 // ============================================================================
 
-/// 字符串观察者枚举（因为 GATs 不支持 dyn trait）
+/// 字符串observerenum（because GATs 不Supports dyn trait）
 pub enum StringObserverType {
     Stats(StringStatsObserver),
     Pattern(PatternObserver),
@@ -446,6 +461,8 @@ impl StringSubject {
 }
 
 /// 数值观察者枚举
+/// observer enum
+/// 数值observerenum
 pub enum NumObserverType {
     Stats(NumStatsObserver),
     Filter(FilterObserver<fn(i32) -> bool>),
@@ -519,6 +536,7 @@ impl NumVecSubject {
 // ============================================================================
 
 /// 旧方式：克隆数据的观察者
+/// way ：observer
 pub trait CloningObserver {
     type Data: Clone;
     fn update_cloned(&mut self, data: Self::Data);
@@ -539,6 +557,7 @@ impl CloningObserver for CloningStringObserver {
 }
 
 /// 性能基准测试
+/// Performance benchmark
 pub fn benchmark_gats_vs_cloning() {
     const ITERATIONS: usize = 10_000;
     const DATA_SIZE: usize = 1000;

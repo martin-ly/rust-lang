@@ -1,9 +1,12 @@
 //! # 性能优化模块
+//! # performance optimization module
 //!
 //! 本模块提供算法性能优化的工具和方法。
+//! This module provides algorithm performance optimization tool and method 。
 use serde::{Deserialize, Serialize};
 
 /// 优化建议
+/// optimization
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OptimizationSuggestion {
     pub algorithm_name: String,
@@ -14,6 +17,7 @@ pub struct OptimizationSuggestion {
 }
 
 /// 优化类型
+/// optimization type
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum OptimizationType {
     Memory,
@@ -32,10 +36,12 @@ pub enum Difficulty {
 }
 
 /// 性能优化器
+/// performance optimizer
 pub struct PerformanceOptimizer;
 
 impl PerformanceOptimizer {
     /// 分析算法优化机会
+    /// analyze algorithm optimization opportunity
     pub fn analyze_optimization_opportunities(algorithm_name: &str) -> Vec<OptimizationSuggestion> {
         match algorithm_name {
             "QuickSort" => vec![

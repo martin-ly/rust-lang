@@ -1,15 +1,22 @@
 //! 异步编程模式演示
-//!
+//! async demonstration
 //! 本示例展示了常见的异步编程模式：
+//! this example async ：
 //! - 生产者-消费者模式
+//! - -
 //! - 发布-订阅模式
+//! - publish-subscribe
 //! - 工作池模式
+//! -
 //! - 背压处理
+//! - backpressure
 //! - 优雅关闭
+//! -
+//! - 优雅Close
 //! - 错误恢复
-//!
+//! - error recovery
 //! 运行方式：
-//! ```bash
+//! Run way ：
 //! cargo run --example async_patterns_demo
 //! ```
 use std::sync::Arc;

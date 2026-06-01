@@ -33,7 +33,7 @@
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -76,7 +76,7 @@
 **定理 SUM-T2**：若 $F$ 涉及异步运行时、线程池或通信，则 $\mathit{SuppB}(F) \in \{\mathrm{Native},\, \mathrm{Lib}\}$；
 `std` 提供 `thread`、`mpsc`，但 `tokio`/`rayon` 为 Lib。
 
-*证明*：由 Def 1.1。异步运行时（Waker、Executor）不由 `std` 提供，需 tokio/async-std；
+*证明*：由 Def 1.1。异步运行时（Waker、Executor）不由 `std` 提供，需 tokio/async-std [已归档]；
 线程与 mpsc 由 `std` 提供；故为 Native 或 Lib。∎
 
 **引理 SUM-L1**：若 $C$ 为 `no_std` crate 且 $\mathit{deps}(C) \subseteq \{\mathrm{core},\, \mathrm{alloc}\}$，则 $\mathit{SuppB}(C) \in \{\mathrm{Native},\, \mathrm{Lib}\}$。
@@ -183,7 +183,7 @@
 | 模型 | 支持边界 | 说明 |
 | :--- | :--- | :--- |
 | 同步 | 原生支持 | 默认执行模型 |
-| 异步 | 库支持 | 需 tokio/async-std 等运行时 |
+| 异步 | 库支持 | 需 tokio/async-std [已归档] 等运行时 |
 | 并发 | 原生支持 | std::thread、mpsc、Mutex |
 | 并行 | 库支持 | rayon（推荐）；std 提供 thread + join |
 | 分布式 | 库支持 | tonic、actix、surge 等 |
@@ -211,7 +211,7 @@
 | 支持边界 | 设计模式/执行模型 | 典型 crate |
 | :--- | :--- | :--- |
 | 原生 | 绝大多数 GoF 23 | std、core |
-| 库 | 异步 | tokio、async-std |
+| 库 | 异步 | tokio、async-std [已归档] |
 | 库 | 并行 | rayon |
 | 库 | 分布式 RPC | tonic、surge |
 | 库 | ORM/数据访问 | diesel、sqlx |
@@ -226,7 +226,7 @@
 | 需求 | 建议 |
 | :--- | :--- |
 | 零依赖 | 用原生支持；GoF 23 均可用 std |
-| 异步 | 加 tokio/async-std；库支持 |
+| 异步 | 加 tokio/async-std [已归档]；库支持 |
 | 并行 | 加 rayon；库支持 |
 | 分布式 | 加 tonic/actix；库支持 |
 | FFI | 封装 unsafe；最小化暴露 |

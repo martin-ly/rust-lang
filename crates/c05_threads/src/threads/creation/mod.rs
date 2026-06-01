@@ -1,15 +1,20 @@
 //! 线程创建模块
-//!
-//! 本模块演示Rust中线程的创建方法，包括：
+//! thread module
 //! 1) 基本线程创建
+//! 1) this thread
 //! 2) 线程命名
+//! 2) thread
 //! 3) 线程栈大小设置
+//! 3) thread stack
 //! 4) 线程创建最佳实践
+//! 4) thread
 //! 5) 线程错误处理与结果传递（补充）
+//! 5) thread error handling and result （）
 use std::thread;
 use std::time::Duration;
 
 /// 基本线程创建示例
+/// this thread example
 pub fn basic_thread_creation() {
     println!("🔧 基本线程创建示例");
 
@@ -26,6 +31,7 @@ pub fn basic_thread_creation() {
 }
 
 /// 带参数的线程创建
+/// parameter thread
 pub fn thread_with_parameters() {
     println!("🔧 带参数的线程创建示例");
 
@@ -43,6 +49,7 @@ pub fn thread_with_parameters() {
 }
 
 /// 线程命名示例
+/// thread example
 pub fn named_threads() {
     println!("🔧 线程命名示例");
 
@@ -61,6 +68,7 @@ pub fn named_threads() {
 }
 
 /// 自定义栈大小的线程
+/// definition stack thread
 pub fn custom_stack_size_thread() {
     println!("🔧 自定义栈大小线程示例");
 
@@ -78,6 +86,7 @@ pub fn custom_stack_size_thread() {
 }
 
 /// 多线程并行执行
+/// thread parallelism
 pub fn parallel_execution() {
     println!("🔧 多线程并行执行示例");
 
@@ -101,6 +110,7 @@ pub fn parallel_execution() {
 }
 
 /// 线程创建最佳实践
+/// thread
 pub fn thread_best_practices() {
     println!("🔧 线程创建最佳实践");
 
@@ -132,8 +142,11 @@ pub fn thread_best_practices() {
 }
 
 /// 线程错误处理与结果传递（5）
+/// thread error handling and result （5）
 /// - 在线程中使用 Result 进行显式错误返回
+/// - in thread in Result
 /// - 主线程 join 后匹配错误并处理
+/// - main thread join after and
 pub fn thread_error_handling_example() {
     println!("🔧 线程错误处理与结果传递示例");
     let handle = thread::spawn(|| -> Result<i32, &'static str> {

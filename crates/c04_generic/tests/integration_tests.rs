@@ -1,6 +1,7 @@
 //! 泛型模块集成测试套件 / Generics Module Integration Test Suite
 
 /// 测试泛型函数集成
+/// generic function
 #[test]
 fn test_generic_function_integration() {
     fn identity<T>(x: T) -> T {
@@ -12,6 +13,7 @@ fn test_generic_function_integration() {
 }
 
 /// 测试泛型结构体集成
+/// generic struct
 #[test]
 fn test_generic_struct_integration() {
     struct Container<T> {
@@ -25,7 +27,6 @@ fn test_generic_struct_integration() {
     assert_eq!(str_container.value, "hello");
 }
 
-/// 测试Trait约束集成
 #[test]
 fn test_trait_bound_integration() {
     trait Display {
@@ -46,6 +47,7 @@ fn test_trait_bound_integration() {
 }
 
 /// 测试泛型枚举集成
+/// generic enum
 #[test]
 fn test_generic_enum_integration() {
     enum Option<T> {
@@ -68,6 +70,7 @@ fn test_generic_enum_integration() {
 }
 
 /// 测试关联类型集成
+/// associated type
 #[test]
 fn test_associated_type_integration() {
     trait Iterator {
@@ -94,6 +97,7 @@ fn test_associated_type_integration() {
 }
 
 /// 测试泛型方法集成
+/// generic method
 #[test]
 #[allow(dead_code)]
 fn test_generic_method_integration() {

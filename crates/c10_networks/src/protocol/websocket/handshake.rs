@@ -1,8 +1,6 @@
-//! WebSocket 握手处理
 // use crate::error::NetworkError; // 暂时注释掉未使用的导入
 use std::collections::HashMap;
 
-/// WebSocket 握手请求
 #[derive(Debug, Clone)]
 pub struct WebSocketHandshakeRequest {
     pub method: String,
@@ -27,12 +25,10 @@ impl WebSocketHandshakeRequest {
         self.headers.insert(name.to_string(), value.to_string());
     }
 
-    /// 设置 WebSocket 密钥
     pub fn set_websocket_key(&mut self, key: &str) {
         self.add_header("Sec-WebSocket-Key", key);
     }
 
-    /// 设置 WebSocket 版本
     pub fn set_websocket_version(&mut self, version: &str) {
         self.add_header("Sec-WebSocket-Version", version);
     }
@@ -48,7 +44,7 @@ impl WebSocketHandshakeRequest {
         self.add_header("Connection", "Upgrade");
     }
 
-    /// 编码为 HTTP 请求
+    /// Encodeas HTTP 请求
     pub fn encode(&self) -> String {
         let mut request = format!("{} {} {}\r\n", self.method, self.uri, self.version);
 
@@ -61,7 +57,6 @@ impl WebSocketHandshakeRequest {
     }
 }
 
-/// WebSocket 握手响应
 #[derive(Debug, Clone)]
 pub struct WebSocketHandshakeResponse {
     pub status_code: u16,
@@ -86,7 +81,6 @@ impl WebSocketHandshakeResponse {
         self.headers.insert(name.to_string(), value.to_string());
     }
 
-    /// 设置 WebSocket 接受密钥
     pub fn set_websocket_accept(&mut self, accept: &str) {
         self.add_header("Sec-WebSocket-Accept", accept);
     }
@@ -97,7 +91,7 @@ impl WebSocketHandshakeResponse {
         self.add_header("Connection", "Upgrade");
     }
 
-    /// 编码为 HTTP 响应
+    /// Encodeas HTTP 响应
     pub fn encode(&self) -> String {
         let mut response = format!(
             "{} {} {}\r\n",
@@ -113,17 +107,14 @@ impl WebSocketHandshakeResponse {
     }
 }
 
-/// WebSocket 客户端工具
 pub struct WebSocketClient;
 
 impl WebSocketClient {
-    /// 生成 WebSocket 密钥
     pub fn generate_key() -> String {
         // 简化的密钥生成，实际应用中应该使用更安全的随机数生成
         "dGhlIHNhbXBsZSBub25jZQ==".to_string()
     }
 
-    /// 计算 WebSocket 接受密钥
     pub fn calculate_accept(_key: &str) -> String {
         // 简化的接受密钥计算，实际应用中应该使用 SHA-1 和 Base64
         "s3pPLMBiTxaQ9kYGzzhZRbK+xOo=".to_string()

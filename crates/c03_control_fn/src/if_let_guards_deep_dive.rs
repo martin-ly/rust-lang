@@ -1,15 +1,18 @@
 //! `if let` Guards 深度解析 (Rust 1.95.0)
-//!
-//! 本模块深入剖析 Rust 1.95.0 稳定的 `if let` guards 特性，
+//! `if let` Guards 深度Parse (Rust 1.95.0)
 //! 涵盖语法细节、实战模式、迁移指南和性能考量。
-//!
+//! 、、and performance 。
 //! # 版本信息
+//! # this
 //! - Rust 版本: 1.95.0
+//! - Rust this : 1.95.0
+//! - Rust 版this: 1.95.0
 //! - 稳定日期: 2026-04-16
-//! - Edition: 2024
-//!
+//! - date : 2026-04-16
+//! - 稳定date: 2026-04-16
+//! - date: 2026-04-16
 //! # 参考
-//! - [Rust 1.95.0 Release Notes](https://releases.rs/docs/1.95.0/)
+//! # reference
 //! - [RFC 3637: Guard Patterns](https://rust-lang.github.io/rfcs/3637-guard-patterns.html)
 
 // ============================================================================
@@ -17,40 +20,42 @@
 // ============================================================================
 
 /// # `if let` Guards 语法深度解析
-///
+/// # `if let` Guards
+/// # `if let` Guards 语法深度Parse
 /// ## 语法形式
-/// ```ignore
-/// match expr {
+/// ##
 ///     pattern if let P = expr2 && condition => { ... }
 ///     //     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ if let guard
 /// }
 /// ```
 ///
 /// ## 核心规则
+/// ## core rule
 /// 1. `if let` guard 只能出现在 `match` arm 上，不能用于 `if let` 表达式本身
-/// 2. guard 中的绑定在 arm 右侧**不可见**
+/// 1. `if let` guard present `match` arm on ，cannot `if let` express this
+/// 2. guard in绑定in arm 右侧**不可见**
+/// 2. guard inin arm ****
 /// 3. 可以与常规布尔条件通过 `&&` 组合
-/// 4. 多个 `if let` guard 不能在同一 arm 上串联（与 let chains 不同）
-///
-/// ## 与 `let` chains (1.88+) 的本质区别
+/// 3. can and condition `&&` combination
 /// | 维度 | `if let` guards | `let` chains |
-/// |------|-----------------|--------------|
 /// | 位置 | match arm level | expression level |
 /// | 语法上下文 | `match` | `if` / `while` |
 /// | 绑定可见性 | guard 内，arm body 外 | then 块内 |
+/// | | guard inside ，arm body outside | then inside |
+/// | 绑定可见性 | guard inside，arm body outside | then 块inside |
 /// | 组合能力 | `&&` 连接布尔条件 | 任意 `&&` 链 |
+/// | combination | `&&` condition | `&&` |
 pub struct IfLetGuardsSyntax;
 
 impl IfLetGuardsSyntax {
-    /// 返回 `if let` guard 的语法说明
+    /// Return `if let` guard 语法explain
     pub fn explain_syntax() -> &'static str {
         "`if let` guard 语法: `pattern if let P = expr && condition => body`\n- 只能用于 match \
          arm\n- guard 中的绑定在 body 中不可见\n- 可与布尔条件通过 && 组合"
     }
 
-    /// 传统嵌套 match vs `if let` guard 的扁平化写法
-    ///
     /// 展示同一场景下两种写法的对比，突出可读性差异。
+    /// scenario under to ，。
     pub fn compare_nested_match_vs_guard(input: Option<&str>) -> Result<u32, &'static str> {
         // 传统写法：嵌套 match（箭头型缩进）
         let _traditional = match input {
@@ -77,9 +82,6 @@ impl IfLetGuardsSyntax {
         }
     }
 
-    /// 演示绑定作用域限制：guard 中的绑定在 arm body 中不可见
-    ///
-    /// 这是 `if let` guard 最常见的误解点。
     pub fn demonstrate_binding_scope_limitation(opt: Option<String>) -> String {
         match opt {
             // ❌ 错误理解：以为 `s` 可以在 guard 和 body 之间共享
@@ -97,9 +99,9 @@ impl IfLetGuardsSyntax {
         }
     }
 
-    /// 对比 `if let` guard（arm-level）与 `let` chains（expression-level）
-    ///
+    /// to比 `if let` guard（arm-level）and `let` chains（expression-level）
     /// 两者看起来相似，但语法位置和语义截然不同。
+    /// ，but position and 。
     pub fn contrast_with_let_chains(input: Option<&str>) -> (String, String) {
         // if let guard: 在 match arm 上
         let guard_result = match input {
@@ -133,11 +135,10 @@ impl IfLetGuardsSyntax {
 // ============================================================================
 
 /// # `if let` Guards 实战模式
-///
-/// 展示 `if let` guard 在真实代码场景中的典型应用模式。
 pub struct IfLetGuardsPatterns;
 
 /// 词法分析器 Token 类型
+/// analyze Token type
 #[derive(Debug, Clone, PartialEq)]
 pub enum Token {
     Identifier(String),
@@ -149,6 +150,7 @@ pub enum Token {
 }
 
 /// 词法分析器状态
+/// analyze state
 #[derive(Debug, Clone, PartialEq)]
 pub enum LexerState {
     Start,
@@ -160,9 +162,9 @@ pub enum LexerState {
 
 impl IfLetGuardsPatterns {
     /// 模式 1: 解析器/词法分析器状态机
-    ///
-    /// 状态机转换是 `if let` guard 最自然的应用场景：
+    /// 1: /analyze state machine
     /// 从当前状态和输入事件推导出下一状态，guard 负责验证转换条件。
+    /// from when before state and under state ，guard conversion condition 。
     pub fn lexer_state_machine(state: LexerState, ch: Option<char>) -> LexerState {
         match (state, ch) {
             // 从 Start 状态，遇到数字字符，转入 InNumber
@@ -198,8 +200,8 @@ impl IfLetGuardsPatterns {
     }
 
     /// 模式 2: 错误处理 —— 嵌套 Result/Option 解包
-    ///
-    /// `Result<Option<T>, E>` 是 Rust 中常见的嵌套类型，`if let` guard 使其扁平化。
+    /// 2: error handling —— Result/Option
+    /// 模式 2: error handling —— 嵌套 Result/Option 解包
     pub fn handle_nested_result_option<T>(result: Result<Option<T>, &'static str>) -> &'static str
     where
         T: std::fmt::Display,
@@ -222,8 +224,7 @@ impl IfLetGuardsPatterns {
     }
 
     /// 模式 3: 过滤集合 —— 复杂条件筛选
-    ///
-    /// 对迭代器中的元素应用带 guard 的模式匹配，实现复杂过滤逻辑。
+    /// 3: set —— complex condition
     pub fn filter_valid_entries(entries: &[Option<&str>]) -> Vec<u32> {
         entries
             .iter()
@@ -241,8 +242,9 @@ impl IfLetGuardsPatterns {
     }
 
     /// 模式 4: 枚举变体匹配 + 额外条件
-    ///
+    /// 4: enum volume + outside condition
     /// 在匹配枚举变体时，通过 `if let` guard 进一步解构和验证内部数据。
+    /// in enum volume ， `if let` guard and inside 。
     pub fn classify_event(event: &NetworkEvent) -> &'static str {
         match event {
             NetworkEvent::ConnectSuccess { session_id }
@@ -272,6 +274,7 @@ impl IfLetGuardsPatterns {
 }
 
 /// 网络事件枚举（用于模式匹配示例）
+/// network enum （example ）
 #[derive(Debug, Clone, PartialEq)]
 pub enum NetworkEvent {
     ConnectSuccess { session_id: String },
@@ -285,15 +288,16 @@ pub enum NetworkEvent {
 // ============================================================================
 
 /// # `if let` Guards 迁移指南
-///
-/// 提供从传统嵌套 match 到 `if let` guard 的系统性迁移指导，
 /// 包括适用场景、禁忌场景和性能考量。
+/// scenario 、scenario and performance 。
 pub struct IfLetGuardsMigrationGuide;
 
 impl IfLetGuardsMigrationGuide {
     /// 步骤 1: 识别候选代码 —— 寻找嵌套 match 或 if-let-inside-match
-    ///
+    /// step 1: —— match or if-let-inside-match
+    /// step 1: 识别候选代码 —— 寻找嵌套 match or if-let-inside-match
     /// 返回迁移检查清单。
+    /// 。
     pub fn migration_steps() -> [&'static str; 4] {
         [
             "1. 识别 match 内部嵌套的 if let 或次级 match",
@@ -304,8 +308,8 @@ impl IfLetGuardsMigrationGuide {
     }
 
     /// 示例：逐步迁移演示
-    ///
-    /// 从嵌套 match 逐步重构为 if let guard。
+    /// example ：demonstration
+    /// Example of：逐步迁移Demonstration of
     pub fn step_by_step_migration(input: Option<&str>) -> Result<i32, &'static str> {
         // 原始代码（嵌套 match）
         let _before = match input {
@@ -333,8 +337,10 @@ impl IfLetGuardsMigrationGuide {
     }
 
     /// 何时**不应**使用 `if let` guard
-    ///
+    /// **** `if let` guard
+    /// 何时**不应**Use `if let` guard
     /// 可读性始终是首要考虑因素。
+    /// factor 。
     pub fn when_not_to_use() -> [&'static str; 4] {
         [
             "guard 超过 2-3 个条件时，考虑拆分为独立函数",
@@ -344,9 +350,8 @@ impl IfLetGuardsMigrationGuide {
         ]
     }
 
-    /// 可读性反例：过度复杂的 guard
-    ///
     /// 虽然可以编译，但可读性极差，应避免。
+    /// can ，but ，。
     pub fn readability_antipattern(data: Option<&str>) -> &'static str {
         // ❌ 反模式：guard 过长，逻辑难以理解
         let _bad = match data {
@@ -382,9 +387,8 @@ impl IfLetGuardsMigrationGuide {
         m.fract() == 0.0
     }
 
-    /// 与条件编译的交互：`cfg_select!`
-    ///
     /// `if let` guard 本身不受 `cfg` 影响，但可以在不同平台使用不同验证逻辑。
+    /// `if let` guard this `cfg` impact ，but can in platform 。
     pub fn interaction_with_cfg(input: Option<&str>) -> &'static str {
         // 平台特定的验证函数
         fn platform_validator(s: &str) -> Option<i32> {
@@ -407,10 +411,7 @@ impl IfLetGuardsMigrationGuide {
         }
     }
 
-    /// 性能说明：`if let` guard 是零成本抽象
-    ///
-    /// 编译器在编译期将 guard  desugar 为等效的控制流，
-    /// 运行时开销与手写嵌套 match 完全相同。
+    /// 编译器in编译期will guard desugar asetc.效控制stream，
     pub fn performance_notes() -> &'static str {
         "`if let` guard 是零成本抽象:\n- 编译期 desugaring 为嵌套条件分支\n- \
          不引入额外运行时开销\n- 不生成临时堆分配\n- 优化器可将 guard 内联到单一决策树"
@@ -422,6 +423,7 @@ impl IfLetGuardsMigrationGuide {
 // ============================================================================
 
 /// 演示 `if let` guards 核心特性
+/// demonstration `if let` guards core feature
 pub fn demonstrate_if_let_guards() {
     println!("\n========================================");
     println!("   if let Guards 深度解析演示");
@@ -507,6 +509,7 @@ pub fn demonstrate_if_let_guards() {
 }
 
 /// 获取 `if let` guards 特性信息
+/// `if let` guards feature
 pub fn get_if_let_guards_info() -> String {
     "Rust 1.95.0 if let guards 深度解析:\n- 语法: match arm 上直接使用 if let P = expr\n- \
      绑定作用域: guard 内可见，arm body 不可见\n- 与 let chains 区别: guard = arm-level, chains = \

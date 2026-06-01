@@ -1,21 +1,12 @@
-//! Rust 1.97 特性跟踪模块 —— 宏系统与构建
 #![allow(clippy::incompatible_msrv)]
 
-/// # Rust 1.97 宏系统与构建特性演示
-///
-/// Rust 1.97 稳定化的 Cargo 构建相关改进：
 /// - `CARGO_CFG_FEATURE` 环境变量传递给 build scripts
 /// - cfg 中关键字 future-incompatibility warning
-/// - higher precedence trailing flags
-///
-/// **注意**: 以下代码展示的是概念性用法，实际 build script 需要在 `build.rs` 中运行。
 pub struct Rust197MacroFeatures;
 
 impl Rust197MacroFeatures {
     /// 演示如何在 build script 中使用 `CARGO_CFG_FEATURE`
-    ///
     /// 在 `build.rs` 中可以通过 `env::var("CARGO_CFG_FEATURE")` 获取
-    /// 当前启用的 feature 列表（逗号分隔）。
     pub fn cargo_cfg_feature_doc() -> &'static str {
         r#"
         // In build.rs:
@@ -31,9 +22,6 @@ impl Rust197MacroFeatures {
         "#
     }
 
-    /// 演示 cfg 中关键字的 future-incompatibility warning
-    ///
-    /// Rust 1.97 开始对 cfg 条件中的关键字（如 `cfg(target_os = "windows")` 中的
     /// `target_os`）引入 future-incompatibility warning。
     pub fn cfg_keyword_warning_doc() -> &'static str {
         r#"
@@ -45,8 +33,6 @@ impl Rust197MacroFeatures {
     }
 
     /// 演示 higher precedence trailing flags
-    ///
-    /// Cargo 1.97 稳定化了尾部标志的更高优先级解析规则。
     pub fn trailing_flags_doc() -> &'static str {
         r#"
         // 在 Cargo.toml 的 [target.'cfg(...)'.linker] 配置中，

@@ -1,9 +1,12 @@
 //! # 复杂度分析模块
+//! # complex analyze module
 //!
 //! 本模块提供算法复杂度分析的工具和方法。
+//! This module provides algorithm complex analyze tool and method 。
 use serde::{Deserialize, Serialize};
 
 /// 复杂度分析结果
+/// complex analyze result
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ComplexityAnalysisResult {
     pub algorithm_name: String,
@@ -17,6 +20,7 @@ pub struct ComplexityAnalysisResult {
 }
 
 /// 复杂度边界
+/// complex edge
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ComplexityBounds {
     pub lower_bound: String,
@@ -26,10 +30,12 @@ pub struct ComplexityBounds {
 }
 
 /// 复杂度分析器
+/// complex analyze
 pub struct ComplexityAnalyzer;
 
 impl ComplexityAnalyzer {
     /// 分析排序算法复杂度
+    /// analyze sorting algorithm complex
     pub fn analyze_sorting_complexity(algorithm_name: &str) -> ComplexityAnalysisResult {
         match algorithm_name {
             "QuickSort" => ComplexityAnalysisResult {
@@ -96,6 +102,7 @@ impl ComplexityAnalyzer {
     }
 
     /// 分析搜索算法复杂度
+    /// analyze searching algorithm complex
     pub fn analyze_search_complexity(algorithm_name: &str) -> ComplexityAnalysisResult {
         match algorithm_name {
             "BinarySearch" => ComplexityAnalysisResult {

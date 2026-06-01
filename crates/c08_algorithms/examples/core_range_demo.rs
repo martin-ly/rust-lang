@@ -1,18 +1,10 @@
 //! Rust 1.96.0 `core::range` 模块专题示例
-//!
-//! 本示例展示 Rust 1.96.0 中 `core::range` 模块的完整新 API：
-//! - `core::range::Range` / `RangeIter` — 半开区间 `[start, end)`
-//! - `core::range::RangeFrom` / `RangeFromIter` — 无限区间 `[start, ∞)`
-//! - `core::range::RangeToInclusive` — 闭区间 `(-∞, end]`（不实现 IntoIterator）
-//! - `core::range::RangeInclusive` / `RangeInclusiveIter` — 闭区间 `[start, end]`
-//!
-//! 这些类型实现 `IntoIterator` 而非直接 `Iterator`，因此当元素类型 `T: Copy` 时，
 //! 范围类型本身也实现 `Copy`，可多次迭代而不被消费。
-//!
+//! scope type this `Copy`，while is 。
 //! 权威来源: https://releases.rs/docs/1.96.0/ | RFC 3550
-//!
+//! 权威source: https://releases.rs/docs/1.96.0/ | RFC 3550
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example core_range_demo -p c08_algorithms
 //! ```
 
@@ -20,7 +12,6 @@
 // 示例 1: core::range::Range — 半开区间 [start, end)
 // ============================================================================
 
-/// 使用 `core::range::Range` 创建可复用的半开区间
 fn demonstrate_core_range() {
     println!("=== core::range::Range (半开区间 [start, end)) ===");
 
@@ -48,7 +39,6 @@ fn demonstrate_core_range() {
 // 示例 2: core::range::RangeFrom — 无限区间 [start, ∞)
 // ============================================================================
 
-/// 使用 `core::range::RangeFrom` 创建无限区间
 fn demonstrate_core_range_from() {
     println!("\n=== core::range::RangeFrom (无限区间 [start, ∞)) ===");
 
@@ -71,7 +61,6 @@ fn demonstrate_core_range_from() {
 // 示例 3: core::range::RangeToInclusive — 闭区间 (-∞, end]
 // ============================================================================
 
-/// 使用 `core::range::RangeToInclusive` 创建上限闭区间
 fn demonstrate_core_range_to_inclusive() {
     println!("\n=== core::range::RangeToInclusive (闭区间 (-∞, end]) ===");
 
@@ -92,7 +81,6 @@ fn demonstrate_core_range_to_inclusive() {
 // 示例 4: core::range::RangeInclusive — 闭区间 [start, end]
 // ============================================================================
 
-/// 使用 `core::range::RangeInclusive` 创建包含性范围
 fn demonstrate_core_range_inclusive() {
     println!("\n=== core::range::RangeInclusive (闭区间 [start, end]) ===");
 
@@ -119,7 +107,6 @@ fn demonstrate_core_range_inclusive() {
 // 示例 5: Copy 语义 — 范围值不被消费
 // ============================================================================
 
-/// 演示 core::range 类型的 Copy 语义：多次迭代不消费原始值
 fn demonstrate_copy_semantics() {
     println!("\n=== Copy 语义: 多次迭代不消费 ===");
 
@@ -148,7 +135,6 @@ fn demonstrate_copy_semantics() {
 
 use core::range::RangeInclusive;
 
-/// 使用 RangeInclusive 实现包含边界的二分查找
 fn inclusive_binary_search(
     arr: &[i32],
     target: i32,
@@ -204,6 +190,7 @@ struct TimeRange {
 }
 
 /// 找出重叠的区间
+/// interval
 fn find_overlapping_intervals(intervals: &[TimeRange]) -> Vec<(&'static str, &'static str)> {
     let mut overlaps = Vec::new();
     for i in 0..intervals.len() {

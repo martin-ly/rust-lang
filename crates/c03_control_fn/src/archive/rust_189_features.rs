@@ -1,39 +1,32 @@
 //! # Rust 1.89 特性示例 (历史版本)
-//!
+//! # Rust 1.89 feature example (this )
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//!
+//! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
-//!
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! ## 版本历史说明
-//!
-//! 本文件展示 Rust 1.89 版本的特性，当前项目已升级到 Rust 1.92.0。
-//!
+//! ## this explain
 //! ### Rust 1.92.0 主要改进
-//!
-//! - **语言特性**: MaybeUninit 文档化、联合体原始引用、关联项多边界等
-//! - **标准库**: NonZero::div_ceil、rotate_right、Location::file_as_c_str
+//! ### Rust 1.92.0 main
 //! - **性能优化**: 迭代器方法特化、改进的编译优化
-//!
+//! - **performance optimization **: method 、optimization
 //! ### 迁移建议
-//!
+//! ###
 //! 1. 更新 Cargo.toml: `rust-version = "1.92"`
-//! 2. 参考 `rust_192_features.rs` 了解最新特性
-//! 3. 查看 `docs/RUST_192_CONTROL_FLOW_IMPROVEMENTS.md` 了解完整改进
-//!
 //! 参考:
-//! - [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/)
+//! reference :
 //! - [历史版本: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
-//!
-//! ---
+//! - [历史版this: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 //!
 //! # Rust 1.89 最新特性模块
-//!
+//! # Rust 1.89 feature module
+//! # Rust 1.89 最新featuremodule
 //! 包含异步trait、GATs、常量泛型等核心新特性
+//! async trait、GATs、constant generic etc. core feature
 use std::collections::HashMap;
 use std::fmt::Display;
 use std::future::Future;
 
-/// 异步trait实现示例（避免在trait中直接使用 async fn）
 pub trait AsyncProcessor {
     fn process(
         &self,
@@ -43,6 +36,7 @@ pub trait AsyncProcessor {
 }
 
 /// 文本处理器实现
+/// this
 pub struct TextProcessor;
 
 impl AsyncProcessor for TextProcessor {
@@ -60,6 +54,7 @@ impl AsyncProcessor for TextProcessor {
 }
 
 /// 数据处理器trait
+/// trait
 pub trait DataProcessor {
     type Input;
     type Output;
@@ -68,6 +63,7 @@ pub trait DataProcessor {
 }
 
 /// 简单处理器实现
+/// simple
 pub struct SimpleProcessor;
 
 impl DataProcessor for SimpleProcessor {
@@ -155,6 +151,7 @@ pub trait Collection {
 }
 
 /// 向量集合实现
+/// set
 pub struct VecCollection<T> {
     pub items: Vec<T>,
 }
@@ -171,7 +168,6 @@ impl<T> Collection for VecCollection<T> {
     }
 }
 
-/// 为VecWrapper实现Collection trait
 impl<T> Collection for VecWrapper<T> {
     type Item = T;
     type Iterator<'a>
@@ -185,6 +181,7 @@ impl<T> Collection for VecWrapper<T> {
 }
 
 /// 常量泛型示例
+/// constant generic example
 pub struct Matrix<T, const ROWS: usize, const COLS: usize> {
     data: [[T; COLS]; ROWS],
 }
@@ -225,11 +222,13 @@ impl<T: Default + Copy, const ROWS: usize, const COLS: usize> Matrix<T, ROWS, CO
 }
 
 /// 编译时计算示例
+/// compile-time example
 pub const fn calculate_matrix_size<const ROWS: usize, const COLS: usize>() -> usize {
     ROWS * COLS
 }
 
 /// 编译时常量
+/// compile-time constant
 pub const FACTORIAL_10: u64 = {
     let mut result = 1;
     let mut i = 1;
@@ -255,11 +254,13 @@ pub const PRIME_17: bool = {
 };
 
 /// 生命周期推断优化示例
+/// lifetime infer optimization example
 pub fn process_strings(strings: &[String]) -> Vec<&str> {
     strings.iter().map(|s| s.as_str()).collect()
 }
 
 /// 类型推导增强示例
+/// type example
 pub fn create_map() -> HashMap<String, i32> {
     let mut map = HashMap::new();
     map.insert("key1".to_string(), 1);
@@ -268,6 +269,7 @@ pub fn create_map() -> HashMap<String, i32> {
 }
 
 /// 类型级数字
+/// type
 pub struct Type0;
 pub struct Type1;
 pub struct Type2;
@@ -295,11 +297,13 @@ impl Type4 {
 }
 
 /// 编译时验证函数
+/// compile-time function
 pub const fn is_square_matrix<const ROWS: usize, const COLS: usize>() -> bool {
     ROWS == COLS
 }
 
 /// 编译时阶乘计算
+/// compile-time
 pub const fn compile_time_factorial(n: u64) -> u64 {
     if n <= 1 {
         1
@@ -309,6 +313,7 @@ pub const fn compile_time_factorial(n: u64) -> u64 {
 }
 
 /// 编译时素数检查
+/// compile-time
 pub const fn is_prime(n: u64) -> bool {
     if n < 2 {
         false

@@ -1,42 +1,54 @@
 //! # Rust 异步编程性能优化完整指南 2025
-//!
-//! Complete Guide to Async Performance Optimization in Rust 2025
+//! # Rust async performance optimization complete 2025
 //!
 //! ## 📚 本示例涵盖
-//!
+//! ## 📚 this example
 //! ### 🚀 一、内存优化 (Memory Optimization)
+//! ### 🚀 一、memoryoptimization (Memory Optimization)
 //! - 对象池 (Object Pool) - 减少分配开销
+//! - to (Object Pool) - overhead
+//! - to象池 (Object Pool) - 减少Allocateoverhead
 //! - 内存重用 (Memory Reuse) - 避免频繁分配
+//! - memory (Memory Reuse) -
 //! - 自定义分配器 (Custom Allocators)
 //! - Arena 分配器 (Arena Allocator)
-//!
 //! ### ⚡ 二、零拷贝技术 (Zero-Copy)
-//! - Bytes/BytesMut - 引用计数的缓冲区
+//! ### ⚡ 、technique (Zero-Copy)
+//! ### ⚡ 二、零拷贝technique (Zero-Copy)
 //! - Splice - 内核空间传输
+//! - Splice - kernel space transmission
 //! - mmap - 内存映射 I/O
+//! - mmap - memory mapping I/O
 //! - sendfile - 零拷贝文件传输
-//!
+//! - sendfile - transmission
+//! - sendfile - 零拷贝文件transmission
 //! ### 🔢 三、SIMD 向量化 (SIMD Vectorization)
+//! ### 🔢 三、SIMD vectorization (SIMD Vectorization)
 //! - 自动向量化优化
+//! - auto-vectorization optimization
 //! - 手动 SIMD 操作
+//! - SIMD
 //! - portable_simd 使用
 //! - 批量数据处理
-//!
+//! -
 //! ### 📊 四、性能基准测试 (Benchmarking)
+//! ### 📊 、Performance benchmark (Benchmarking)
+//! ### 📊 四、performancebenchmark (Benchmarking)
 //! - criterion 基准测试
 //! - 性能对比分析
+//! - performance to analyze
 //! - 瓶颈识别
-//!
+//! -
 //! ## 运行方式
-//! ```bash
+//! ## Run way
 //! cargo run --example async_performance_optimization_2025 --release
 //! ```
 //!
 //! ## 版本信息
-//! - Rust: 1.90+
-//! - Tokio: 1.41+
+//! ## this
 //! - Bytes: 1.7+
 //! - 日期: 2025-10-04
+//! - date : 2025-10-04
 use bytes::{BufMut, Bytes, BytesMut};
 use std::collections::VecDeque;
 use std::sync::Arc;
@@ -48,25 +60,36 @@ use tokio::sync::{Mutex, RwLock};
 // ============================================================================
 
 /// # 对象池实现 - 减少分配开销
-///
+/// # to - overhead
+/// # to象池Implementation of - 减少Allocateoverhead
 /// ## 设计模式: Object Pool Pattern
 /// 重用昂贵的对象,减少分配和释放的开销
-///
+/// to,and overhead
 /// ## 性能收益
+/// ## performance return
 /// - 减少 50-80% 的分配时间
+/// - 50-80% time
+/// - 减少 50-80% Allocatetime
 /// - 降低内存碎片
+/// - memory
 /// - 提高缓存命中率
-///
+/// - cache hit
 /// ## 适用场景
+/// ## scenario
+/// ## 适用scenario
 /// - 频繁创建/销毁的对象
+/// - /to
 /// - 大对象的重用
+/// - to
 /// - 高性能网络服务
+/// - performance network
 pub struct BufferPool {
-    /// 缓冲区池 - 使用 VecDeque 实现 FIFO
     pool: Arc<Mutex<VecDeque<Vec<u8>>>>,
     /// 缓冲区大小 - 固定大小便于管理
+    /// buffering -
     buffer_size: usize,
     /// 池容量 - 最大缓存数量
+    /// - maximum quantity
     max_capacity: usize,
     /// 统计信息
     stats: Arc<RwLock<PoolStats>>,
@@ -77,20 +100,25 @@ pub struct PoolStats {
     /// 总分配次数
     allocations: u64,
     /// 池命中次数
+    /// in
     hits: u64,
     /// 池未命中次数
+    /// in
     misses: u64,
     /// 当前池大小
+    /// when before
     current_size: usize,
 }
 
 impl BufferPool {
     /// 创建新的缓冲区池
-    ///
+    /// buffering
     /// # 参数
+    /// # parameter
     /// - `initial_capacity`: 初始容量
     /// - `max_capacity`: 最大容量
     /// - `buffer_size`: 每个缓冲区大小
+    /// - `buffer_size`: buffering
     pub fn new(initial_capacity: usize, max_capacity: usize, buffer_size: usize) -> Self {
         let mut pool = VecDeque::with_capacity(max_capacity);
 
@@ -111,10 +139,14 @@ impl BufferPool {
     }
 
     /// 从池中获取缓冲区
-    ///
+    /// from in buffering
     /// ## 性能特点
+    /// ## performance point
     /// - 池命中: O(1) 时间复杂度
+    /// - in : O(1) time complexity
+    /// - 池命in: O(1) time complexity
     /// - 池未命中: 需要新分配,O(n) 其中 n = buffer_size
+    /// - in :,O(n) its in n = buffer_size
     pub async fn acquire(&self) -> Vec<u8> {
         let mut pool = self.pool.lock().await;
         let mut stats = self.stats.write().await;
@@ -139,10 +171,13 @@ impl BufferPool {
     }
 
     /// 归还缓冲区到池
-    ///
+    /// buffering to
     /// ## 注意事项
+    /// ##
     /// - 如果池已满,缓冲区将被丢弃(自动回收)
+    /// - if,buffering will is ()
     /// - 缓冲区会被清空以防止数据泄露
+    /// - buffering is
     pub async fn release(&self, mut buffer: Vec<u8>) {
         let mut pool = self.pool.lock().await;
         let mut stats = self.stats.write().await;
@@ -163,6 +198,8 @@ impl BufferPool {
     }
 
     /// 获取命中率
+    /// in
+    /// Get命in率
     pub async fn hit_rate(&self) -> f64 {
         let stats = self.stats.read().await;
         if stats.allocations == 0 {
@@ -173,9 +210,8 @@ impl BufferPool {
     }
 }
 
-/// # RAII 封装的缓冲区
-///
 /// 自动归还缓冲区到池,使用 Drop trait 保证资源回收
+/// buffering to, Drop trait
 pub struct PooledBuffer {
     buffer: Option<Vec<u8>>,
     pool: Arc<Mutex<VecDeque<Vec<u8>>>>,
@@ -215,23 +251,29 @@ impl Drop for PooledBuffer {
 // ============================================================================
 
 /// # 零拷贝缓冲区管理
-///
+/// # buffering
 /// ## 核心概念
+/// ## core concept
 /// - **零拷贝**: 数据不需要在内核态和用户态之间复制
+/// - ****: in kernel and 's
 /// - **引用计数**: 多个所有者共享同一块内存
+/// - **reference counting **: all memory
+/// - **reference counting**: 多个所有者共享同一块memory
 /// - **写时复制**: 只在修改时才复制数据
-///
+/// - ****: in
 /// ## 使用 Bytes 库
-/// - `Bytes`: 不可变的引用计数缓冲区
-/// - `BytesMut`: 可变的引用计数缓冲区
+/// ## Bytes library
 /// - `split_to()`: O(1) 切分操作
+/// - `split_to()`: O(1)
 pub struct ZeroCopyBuffer {
     /// 内部缓冲区 - 使用 Bytes 实现零拷贝
+    /// inside buffering - Bytes
     data: Bytes,
 }
 
 impl ZeroCopyBuffer {
     /// 从切片创建(会发生一次复制)
+    /// from ()
     pub fn from_slice(data: &[u8]) -> Self {
         Self {
             data: Bytes::copy_from_slice(data),
@@ -239,6 +281,8 @@ impl ZeroCopyBuffer {
     }
 
     /// 从 Vec 创建(零拷贝,转移所有权)
+    /// from Vec (,transfer ownership )
+    /// from Vec Create(零拷贝,transferownership)
     pub fn from_vec(data: Vec<u8>) -> Self {
         Self {
             data: Bytes::from(data),
@@ -246,11 +290,17 @@ impl ZeroCopyBuffer {
     }
 
     /// 克隆引用(零拷贝,增加引用计数)
-    ///
+    /// reference (,reference counting )
+    /// Clonereference(零拷贝,增加reference counting)
     /// ## 性能特点
+    /// ## performance point
     /// - O(1) 时间复杂度
+    /// - O(1) time complexity
     /// - 不复制底层数据
+    /// -
     /// - 只增加引用计数
+    /// - reference counting
+    /// - 只增加reference counting
     pub fn clone_ref(&self) -> Self {
         Self {
             data: self.data.clone(), // 零拷贝克隆
@@ -258,9 +308,9 @@ impl ZeroCopyBuffer {
     }
 
     /// 切分缓冲区(零拷贝)
-    ///
+    /// buffering ()
     /// ## 示例
-    /// ```text
+    /// ## example
     /// Original: [AAAA|BBBB]
     /// After split_at(4):
     ///   - self: [BBBB]
@@ -271,6 +321,7 @@ impl ZeroCopyBuffer {
     }
 
     /// 获取切片视图(零拷贝)
+    /// ()
     pub fn as_slice(&self) -> &[u8] {
         &self.data
     }
@@ -285,18 +336,19 @@ impl ZeroCopyBuffer {
     }
 }
 
-/// # BytesMut 构建器 - 高效的可变缓冲区
-///
 /// ## 性能优势
+/// ## performance strength
 /// - 预分配容量减少重新分配
+/// -
 /// - 支持就地修改
-/// - 支持零拷贝转换为 Bytes
+/// -
 pub struct BytesBuilder {
     buffer: BytesMut,
 }
 
 impl BytesBuilder {
     /// 创建指定容量的构建器
+    /// builder
     pub fn with_capacity(capacity: usize) -> Self {
         Self {
             buffer: BytesMut::with_capacity(capacity),
@@ -314,16 +366,17 @@ impl BytesBuilder {
     }
 
     /// 追加 u32 (大端序)
+    /// u32 ()
     pub fn append_u32(&mut self, value: u32) {
         self.buffer.put_u32(value);
     }
 
-    /// 转换为不可变 Bytes (零拷贝)
     pub fn freeze(self) -> Bytes {
         self.buffer.freeze()
     }
 
     /// 获取当前长度
+    /// when before
     pub fn len(&self) -> usize {
         self.buffer.len()
     }
@@ -338,22 +391,28 @@ impl BytesBuilder {
 // ============================================================================
 
 /// # SIMD 向量化数据处理
-///
-/// ## SIMD (Single Instruction Multiple Data)
+/// # SIMD vectorization
 /// - 一条指令处理多个数据
-/// - 利用 CPU 的向量指令集 (SSE, AVX, NEON)
+/// -
+/// - 利用 CPU 向量指令集 (SSE, AVX, NEON)
+/// - CPU (SSE, AVX, NEON)
 /// - 可获得 2-8x 性能提升
-///
-/// ## Rust 中的 SIMD
+/// - 2-8x performance
 /// - 编译器自动向量化 (需要 `#[inline]` 和优化标志)
+/// - auto-vectorization ( `#[inline]` and optimization mark )
+/// - 编译器auto-vectorization (Requires `#[inline]` andoptimizationmark)
 /// - 手动 SIMD (使用 `std::simd` 或 `packed_simd`)
+/// - 手动 SIMD (Use `std::simd` or `packed_simd`)
 /// - 可移植 SIMD (使用 `portable_simd`)
+/// - 可移植 SIMD (Use `portable_simd`)
 pub struct SimdProcessor;
 
 impl SimdProcessor {
     /// # 标量加法 (Scalar Addition) - 基准实现
-    ///
+    /// # (Scalar Addition) -
+    /// # 标量加法 (Scalar Addition) - 基准Implementation of
     /// 逐个元素相加,没有向量化
+    /// element,vectorization
     pub fn add_scalar(a: &[f32], b: &[f32], result: &mut [f32]) {
         assert_eq!(a.len(), b.len());
         assert_eq!(a.len(), result.len());
@@ -364,13 +423,17 @@ impl SimdProcessor {
     }
 
     /// # 向量化加法 (Vectorized Addition) - 优化版本
-    ///
+    /// # vectorization (Vectorized Addition) - optimization this
     /// ## 编译器优化提示
+    /// ## optimization hint
+    /// ## 编译器optimizationhint
     /// - `#[inline]`: 内联函数
+    /// - `#[inline]`: inside function
     /// - Release 模式: `-C opt-level=3`
     /// - 目标特性: `-C target-cpu=native`
-    ///
     /// 编译器会自动将循环向量化,一次处理 4-8 个元素
+    /// will circulation vectorization, 4-8 element
+    /// 编译器会自动willcirculationvectorization,一次Handle 4-8 个element
     #[inline(always)]
     pub fn add_vectorized(a: &[f32], b: &[f32], result: &mut [f32]) {
         assert_eq!(a.len(), b.len());
@@ -383,11 +446,18 @@ impl SimdProcessor {
     }
 
     /// # 批量数据处理 - 利用 SIMD 和缓存局部性
-    ///
+    /// # - SIMD and local
     /// ## 性能优化技巧
+    /// ## performance optimization tip
     /// 1. 数据对齐 - 使用 16/32 字节对齐
+    /// 1. to - 16/32 to
+    /// 1. 数据to齐 - Use 16/32 字节to齐
+    /// 1. to - Use 16/32 to
     /// 2. 批量处理 - 减少循环开销
+    /// 2. - circulation overhead
+    /// 2. 批量Handle - 减少circulationoverhead
     /// 3. 缓存友好 - 顺序访问内存
+    /// 3. cache-friendly - order memory
     #[inline]
     pub fn process_batch(data: &mut [f32], multiplier: f32) {
         for item in data.iter_mut() {
@@ -396,8 +466,10 @@ impl SimdProcessor {
     }
 
     /// # 并行 SIMD 处理 - 结合多线程和 SIMD
-    ///
+    /// # parallelism SIMD - thread and SIMD
+    /// # parallelism SIMD Handle - 结合多threadand SIMD
     /// 使用 rayon 进行数据并行,编译器自动向量化内部循环
+    /// rayon data parallelism,auto-vectorization inside circulation
     pub async fn parallel_process(mut data: Vec<f32>, multiplier: f32) -> Vec<f32> {
         use rayon::prelude::*;
 
@@ -417,12 +489,15 @@ impl SimdProcessor {
 }
 
 /// # 高性能哈希计算 - SIMD 优化
-///
+/// # performance - SIMD optimization
 /// 使用 SIMD 加速哈希计算(简化示例)
+/// SIMD (example )
+/// Use SIMD 加速哈希Calculate(简化Example of)
 pub struct SimdHasher;
 
 impl SimdHasher {
     /// 标量版本 - 逐字节处理
+    /// this -
     pub fn hash_scalar(data: &[u8]) -> u64 {
         let mut hash: u64 = 0;
         for &byte in data {
@@ -432,9 +507,11 @@ impl SimdHasher {
     }
 
     /// 向量化版本 - 编译器自动向量化优化
-    ///
+    /// vectorization this - auto-vectorization optimization
     /// 在 Release 模式下,编译器可能会自动向量化循环。
+    /// in Release under,may auto-vectorization circulation 。
     /// 保持与标量版本完全相同的计算结果。
+    /// and this result 。
     #[inline(always)]
     pub fn hash_vectorized(data: &[u8]) -> u64 {
         let mut hash: u64 = 0;
@@ -463,6 +540,7 @@ impl SimdHasher {
 // ============================================================================
 
 /// 性能基准测试结果
+/// Performance benchmark result
 #[derive(Debug)]
 struct BenchmarkResult {
     name: String,
@@ -489,6 +567,7 @@ impl BenchmarkResult {
 }
 
 /// 运行所有性能基准测试
+/// Run all Performance benchmark
 async fn run_benchmarks() {
     println!("\n{}", "=".repeat(60));
     println!("性能基准测试 (Performance Benchmarks)");
@@ -512,6 +591,7 @@ async fn run_benchmarks() {
 }
 
 /// 基准测试: 内存池性能
+/// benchmark : memory pool performance
 async fn benchmark_buffer_pool() {
     let pool = BufferPool::new(100, 200, 4096);
     let iterations = 10_000;
@@ -550,6 +630,8 @@ async fn benchmark_buffer_pool() {
 }
 
 /// 基准测试: 零拷贝性能
+/// benchmark : performance
+/// benchmark: 零拷贝performance
 async fn benchmark_zero_copy() {
     let data = vec![0u8; 1_000_000];
     let iterations = 1_000;
@@ -585,6 +667,7 @@ async fn benchmark_zero_copy() {
 }
 
 /// 基准测试: SIMD 向量化
+/// benchmark : SIMD vectorization
 async fn benchmark_simd() {
     let size = 1_000_000;
     let a: Vec<f32> = (0..size).map(|i| i as f32).collect();
@@ -622,6 +705,7 @@ async fn benchmark_simd() {
 }
 
 /// 基准测试: 综合优化效果
+/// benchmark : synthesize optimization effect
 async fn benchmark_comprehensive() {
     println!("  测试场景: 高性能网络缓冲区处理");
 

@@ -1,7 +1,7 @@
 //! Rust 1.90 异步特性集成测试套件
-//!
-//! 本测试套件提供了全面的集成测试，验证 Rust 1.90 异步特性
+//! Rust 1.90 async feature
 //! 在实际应用场景中的正确性和性能表现
+//! in actual application scenario in and performance
 use anyhow::Result;
 use std::sync::Arc;
 use std::time::{Duration, Instant};
@@ -651,6 +651,8 @@ impl MockConnection {
 }
 
 /// 主测试函数
+/// function
+/// 主Test forfunction
 #[tokio::main]
 async fn main() -> Result<()> {
     // 初始化日志

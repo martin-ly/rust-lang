@@ -2,18 +2,29 @@
 #![allow(clippy::vec_init_then_push)]
 
 //! 类型定义系统示例代码
-//!
+//! type definition system example
 //! 本文件包含了类型定义系统的各种示例，包括：
+//! this type definition system example ，：
 //! - 基本数据类型
+//! - this type
 //! - 复合类型
+//! - type
+//! - 复合type
+//! - type
 //! - 自定义类型
+//! - definition type
+//! - 自definitiontype
 //! - 指针类型
+//! - pointer type
 //! - 函数类型
+//! - function type
 //! - 泛型类型
+//! - generic type
 use std::rc::Rc;
 use std::sync::Arc;
 
 /// 基本数据类型示例
+/// this type example
 pub fn basic_data_types_examples() {
     println!("=== 基本数据类型示例 ===");
 
@@ -49,6 +60,7 @@ pub fn basic_data_types_examples() {
 }
 
 /// 复合类型示例
+/// type example
 pub fn compound_types_examples() {
     println!("\n=== 复合类型示例 ===");
 
@@ -79,6 +91,7 @@ pub fn compound_types_examples() {
 }
 
 /// 自定义类型示例
+/// definition type example
 pub fn custom_types_examples() {
     println!("\n=== 自定义类型示例 ===");
 
@@ -121,6 +134,7 @@ pub fn custom_types_examples() {
 }
 
 /// 指针类型示例
+/// pointer type example
 #[allow(unused_variables)]
 pub fn pointer_types_examples() {
     println!("\n=== 指针类型示例 ===");
@@ -153,6 +167,7 @@ pub fn pointer_types_examples() {
 }
 
 /// 函数类型示例
+/// function type example
 pub fn function_types_examples() {
     println!("\n=== 函数类型示例 ===");
 
@@ -184,6 +199,7 @@ pub fn function_types_examples() {
 }
 
 /// 泛型类型示例
+/// generic type example
 pub fn generic_types_examples() {
     println!("\n=== 泛型类型示例 ===");
 
@@ -218,6 +234,7 @@ pub fn generic_types_examples() {
 }
 
 /// 类型转换示例
+/// type conversion example
 pub fn type_conversion_examples() {
     println!("\n=== 类型转换示例 ===");
 
@@ -239,6 +256,7 @@ pub fn type_conversion_examples() {
 }
 
 /// 类型推断示例
+/// type infer example
 pub fn type_inference_examples() {
     println!("\n=== 类型推断示例 ===");
 
@@ -264,6 +282,8 @@ pub fn type_inference_examples() {
 // ============================================================================
 
 /// 用户结构体
+/// struct
+/// 用户struct
 #[allow(dead_code)]
 #[derive(Debug)]
 struct User {
@@ -293,14 +313,19 @@ impl User {
 }
 
 /// 颜色元组结构体
+/// struct
+/// 颜色tuplestruct
 #[allow(dead_code)]
 struct Color(i32, i32, i32);
 
 /// 点元组结构体
+/// point struct
 #[allow(dead_code)]
 struct Point3D(i32, i32, i32);
 
 /// IP地址枚举
+/// IP enum
+/// IP地址enum
 #[derive(Debug)]
 #[allow(dead_code)]
 enum IpAddr {
@@ -309,6 +334,7 @@ enum IpAddr {
 }
 
 /// 消息枚举
+/// enum
 #[allow(dead_code)]
 #[derive(Debug)]
 enum Message {
@@ -330,6 +356,7 @@ impl Message {
 }
 
 /// 泛型点结构体
+/// generic point struct
 #[derive(Debug)]
 struct Point<T> {
     x: T,
@@ -359,6 +386,7 @@ impl Point<f32> {
 }
 
 /// 泛型选项枚举
+/// generic enum
 #[derive(Debug)]
 #[allow(dead_code)]
 enum MyOption<T> {
@@ -367,6 +395,7 @@ enum MyOption<T> {
 }
 
 /// 泛型函数
+/// generic function
 #[allow(dead_code)]
 fn largest<T: PartialOrd + Copy>(list: &[T]) -> T {
     let mut largest = list[0];
@@ -381,21 +410,27 @@ fn largest<T: PartialOrd + Copy>(list: &[T]) -> T {
 }
 
 /// 添加函数
+/// function
+/// 添加function
 fn add_one(x: i32) -> i32 {
     x + 1
 }
 
 /// 执行两次函数
+/// function
 fn do_twice(f: fn(i32) -> i32, arg: i32) -> i32 {
     f(arg) + f(arg)
 }
 
 /// 改变字符串函数
+/// function
 fn change(some_string: &mut String) {
     some_string.push_str(", world");
 }
 
 /// 自定义智能指针
+/// definition pointer
+/// 自definitionsmart pointer
 use std::ops::Deref;
 
 struct MyBox<T>(T);

@@ -1,21 +1,34 @@
 //! Rust 1.91 设计模式特性实现模块（历史版本）
+//! Rust 1.91 design feature module （this ）
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//! ⚠️ **this ** - this as reference
 //!
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //!
 //! 本模块展示了 Rust 1.91 在设计模式实现场景中的应用，包括：
+//! This module demonstrates Rust 1.91 in design scenario in application ，：
 //! - const 上下文增强（设计模式配置计算）
+//! - const on under （design ）
 //! - 新的稳定 API（设计模式数据处理）
+//! - API（design ）
 //! - JIT 编译器优化（设计模式性能提升）
+//! - JIT optimization （design performance ）
 //! - 内存分配器优化（设计模式对象创建优化）
+//! - allocator optimization （design to optimization ）
 //! - 异步迭代器改进（并发设计模式性能提升）
+//! - async （concurrency design performance ）
 //!
 //! # 文件信息
+//! #
 //! - 文件: rust_191_features.rs
 //! - 创建日期: 2025-01-27
+//! - date : 2025-01-27
 //! - 版本: 1.0
+//! - this : 1.0
 //! - Rust版本: 1.91.0
+//! - Rustthis : 1.91.0
 //! - Edition: 2024
 use std::io::{BufRead, BufReader, Cursor};
 use std::ops::ControlFlow;
@@ -23,10 +36,13 @@ use std::ops::ControlFlow;
 // ==================== 1. const 上下文增强在设计模式配置中的应用 ====================
 
 /// Rust 1.91 const 上下文增强在设计模式配置中的应用
+/// Rust 1.91 const on under in design in application
 pub mod const_pattern_config {
     /// 设计模式配置系统
+    /// design system
     ///
     /// 使用 Rust 1.91 的 const 上下文增强进行编译时配置计算
+    /// Rust 1.91 const on under compile-time
     pub struct PatternConfigSystem;
 
     impl PatternConfigSystem {
@@ -55,8 +71,10 @@ pub mod const_pattern_config {
     }
 
     /// 单例模式配置
+    /// singleton
     ///
     /// 使用 const 上下文计算单例配置
+    /// const on under singleton
     pub struct SingletonConfig;
 
     impl SingletonConfig {
@@ -81,12 +99,15 @@ pub mod const_pattern_config {
 // ==================== 2. 新的稳定 API 在设计模式中的应用 ====================
 
 /// Rust 1.91 新的稳定 API 在设计模式中的应用
+/// Rust 1.91 API in design in application
 pub mod pattern_new_apis {
     use super::*;
 
     /// 使用 BufRead::skip_while 解析设计模式配置
+    /// BufRead::skip_while design
     ///
     /// Rust 1.91 新增：跳过满足条件的字节
+    /// Rust 1.91 ：condition
     pub fn parse_pattern_config<R: BufRead>(reader: &mut R) -> Result<Vec<String>, std::io::Error> {
         let mut lines = Vec::new();
         let mut buf = String::new();
@@ -110,8 +131,10 @@ pub mod pattern_new_apis {
     }
 
     /// 使用改进的 ControlFlow 进行设计模式验证
+    /// ControlFlow design
     ///
     /// Rust 1.91 改进了 ControlFlow，可以携带更详细的错误信息
+    /// Rust 1.91 ControlFlow，can error message
     pub fn validate_pattern_instance(
         current_instances: usize,
         max_instances: usize,
@@ -127,6 +150,7 @@ pub mod pattern_new_apis {
     }
 
     /// 使用 ControlFlow 进行策略模式验证
+    /// ControlFlow strategy
     pub fn validate_strategy_pattern(
         strategies: &[String],
         max_strategies: usize,
@@ -146,12 +170,16 @@ pub mod pattern_new_apis {
 // ==================== 3. JIT 编译器优化在设计模式中的应用 ====================
 
 /// Rust 1.91 JIT 编译器优化在设计模式中的应用
+/// Rust 1.91 JIT optimization in design in application
 ///
 /// Rust 1.91 对迭代器操作进行了优化，设计模式性能提升 10-25%
+/// Rust 1.91 to optimization ，design performance 10-25%
 pub mod pattern_jit_optimizations {
     /// 处理观察者模式事件
+    /// observer
     ///
     /// Rust 1.91 JIT 优化：迭代器链式操作性能提升约 15-25%
+    /// Rust 1.91 JIT optimization ：performance 15-25%
     pub fn process_observer_events(events: &[String]) -> Vec<String> {
         events
             .iter()
@@ -162,8 +190,10 @@ pub mod pattern_jit_optimizations {
     }
 
     /// 计算工厂模式统计信息
+    /// factory
     ///
     /// Rust 1.91 JIT 优化：简单求和操作性能提升约 10-15%
+    /// Rust 1.91 JIT optimization ：simple and performance 10-15%
     pub fn calculate_factory_stats(object_counts: &[usize]) -> (usize, usize, usize) {
         let sum: usize = object_counts.iter().sum();
         let count = object_counts.len();
@@ -173,8 +203,10 @@ pub mod pattern_jit_optimizations {
     }
 
     /// 过滤和转换命令模式数据
+    /// and conversion command
     ///
     /// Rust 1.91 JIT 优化：复杂链式操作性能提升约 20-25%
+    /// Rust 1.91 JIT optimization ：complex performance 20-25%
     pub fn filter_and_transform_commands(commands: &[String]) -> Vec<String> {
         commands
             .iter()
@@ -185,6 +217,7 @@ pub mod pattern_jit_optimizations {
     }
 
     /// 性能演示
+    /// performance demonstration
     pub fn demonstrate_pattern_performance() {
         println!("\n=== 设计模式 JIT 优化演示 ===");
 
@@ -210,12 +243,16 @@ pub mod pattern_jit_optimizations {
 // ==================== 4. 内存分配器优化在设计模式对象创建中的应用 ====================
 
 /// Rust 1.91 内存分配器优化在设计模式对象创建中的应用
+/// Rust 1.91 allocator optimization in design to in application
 ///
 /// Rust 1.91 改进了内存分配器，小对象分配性能提升 25-30%
+/// Rust 1.91 allocator ，to performance 25-30%
 pub mod pattern_memory_optimizations {
     /// 创建小对象用于设计模式实例
+    /// to design
     ///
     /// Rust 1.91 优化：小对象（< 32 bytes）分配性能提升约 25-30%
+    /// Rust 1.91 optimization ：to （< 32 bytes）performance 25-30%
     pub fn create_small_pattern_objects() -> Vec<Vec<u8>> {
         let mut objects = Vec::new();
         // Rust 1.91 优化：频繁的小对象分配更加高效
@@ -226,8 +263,10 @@ pub mod pattern_memory_optimizations {
     }
 
     /// 处理设计模式数据
+    /// design
     ///
     /// Rust 1.91 优化：在频繁的小对象分配场景下性能提升
+    /// Rust 1.91 optimization ：in to scenario under performance
     pub fn process_pattern_data(data: &str) -> Vec<String> {
         data.lines()
             .filter_map(|line| {
@@ -241,6 +280,7 @@ pub mod pattern_memory_optimizations {
     }
 
     /// 内存优化演示
+    /// memory optimization demonstration
     pub fn demonstrate_memory_optimizations() {
         println!("\n=== 设计模式对象创建内存优化演示 ===");
 
@@ -256,15 +296,19 @@ pub mod pattern_memory_optimizations {
 // ==================== 5. 异步迭代器改进在并发设计模式中的应用 ====================
 
 /// Rust 1.91 异步迭代器改进在并发设计模式中的应用
+/// Rust 1.91 async in concurrency design in application
 ///
 /// Rust 1.91 对异步迭代器进行了优化，性能提升约 15-20%
+/// Rust 1.91 to async optimization ，performance 15-20%
 #[cfg(feature = "futures")]
 pub mod pattern_async_improvements {
     use futures::stream::{self, Stream, StreamExt};
 
     /// 异步处理观察者模式事件流
+    /// async observer stream
     ///
     /// Rust 1.91 优化：异步迭代器性能提升约 15-20%
+    /// Rust 1.91 optimization ：async performance 15-20%
     pub async fn process_async_pattern_stream<S>(stream: S) -> Vec<String>
     where
         S: Stream<Item = String> + Send,
@@ -280,6 +324,7 @@ pub mod pattern_async_improvements {
     }
 
     /// 异步迭代器性能演示
+    /// async performance demonstration
     pub async fn demonstrate_async_improvements() {
         println!("\n=== 并发设计模式异步改进演示 ===");
 
@@ -301,10 +346,12 @@ pub mod pattern_async_improvements {
 // ==================== 6. 标准库新 API 在设计模式中的应用 ====================
 
 /// Rust 1.91 标准库新 API 在设计模式中的应用
+/// Rust 1.91 standard library API in design in application
 pub mod pattern_std_new_apis {
     /// str::split_ascii_whitespace 示例
     ///
     /// Rust 1.91 新增：仅处理 ASCII 空白字符，性能更好
+    /// Rust 1.91 ： ASCII ，performance
     pub fn parse_pattern_config(text: &str) -> Vec<&str> {
         text.split_ascii_whitespace().collect()
     }
@@ -312,6 +359,7 @@ pub mod pattern_std_new_apis {
     /// Vec::try_reserve_exact 示例
     ///
     /// Rust 1.91 新增：尝试精确分配容量，可能失败
+    /// Rust 1.91 ：，may
     pub fn allocate_pattern_buffer(
         size: usize,
     ) -> Result<Vec<u8>, std::collections::TryReserveError> {
@@ -321,6 +369,7 @@ pub mod pattern_std_new_apis {
     }
 
     /// 标准库新 API 演示
+    /// standard library API demonstration
     pub fn demonstrate_std_new_apis() {
         println!("\n=== 标准库新 API 演示 ===");
 
@@ -346,14 +395,18 @@ pub mod pattern_std_new_apis {
 // ==================== 7. 综合应用示例 ====================
 
 /// Rust 1.91 综合应用示例模块
+/// Rust 1.91 synthesize application example module
 ///
 /// 结合多个 Rust 1.91 特性的实际设计模式场景
+/// Rust 1.91 feature actual design scenario
 pub mod comprehensive_pattern_examples {
     use super::*;
 
     /// 综合设计模式管理系统
+    /// synthesize design system
     ///
     /// 使用 const 上下文增强和新的 API
+    /// const on under and API
     pub struct ComprehensivePatternSystem;
 
     impl ComprehensivePatternSystem {
@@ -376,8 +429,10 @@ pub mod comprehensive_pattern_examples {
     }
 
     /// 高性能设计模式数据处理管道
+    /// performance design pipe
     ///
     /// 利用 JIT 优化和内存分配改进
+    /// JIT optimization and memory
     pub fn process_pattern_data_pipeline(data: &[Vec<String>]) -> Vec<String> {
         // Rust 1.91 JIT 优化：链式迭代器性能提升约 20-25%
         data.iter()
@@ -389,8 +444,10 @@ pub mod comprehensive_pattern_examples {
     }
 
     /// 配置文件解析示例
+    /// example
     ///
     /// 使用新的 API 解析设计模式配置
+    /// API design
     pub fn parse_pattern_config(config_text: &str) -> Vec<String> {
         let mut cursor = Cursor::new(config_text.as_bytes());
         let mut reader = BufReader::new(&mut cursor);
@@ -420,6 +477,7 @@ pub mod comprehensive_pattern_examples {
 // ==================== 公开 API ====================
 
 /// Rust 1.91 设计模式特性演示入口
+/// Rust 1.91 design feature demonstration
 pub fn demonstrate_rust_191_pattern_features() {
     println!("========================================");
     println!("Rust 1.91 设计模式特性演示");

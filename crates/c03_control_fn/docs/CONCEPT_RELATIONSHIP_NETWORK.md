@@ -48,7 +48,6 @@
   - [📚 参考和扩展阅读](#-参考和扩展阅读)
     - [核心文档链接](#核心文档链接)
     - [深度阅读](#深度阅读)
-  - [**文档版本**: v1.0](#文档版本-v10)
 
 ## 📊 文档概述
 
@@ -648,7 +647,7 @@ graph TB
     Runtime --> IO[IO驱动]
 
     Executor --> Tokio[tokio]
-    Executor --> AsyncStd[async-std]
+    Executor --> AsyncStd[smol]
 
     Scheduler --> TaskQueue[任务队列]
     IO --> Reactor[反应器模式]
@@ -1053,6 +1052,7 @@ graph TB
 
 **维护团队**: Rust 学习社区
 **文档版本**: v1.0
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

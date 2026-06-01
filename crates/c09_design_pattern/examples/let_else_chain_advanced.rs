@@ -1,11 +1,14 @@
 //! Rust 1.90 let-else 责任链模式高级示例
-//!
+//! Rust 1.90 let-else chain of responsibility example
 //! 本示例展示：
-//! 1. 使用 let-else 简化责任链中的早退逻辑
+//! this example ：
 //! 2. HTTP 中间件责任链
+//! 2. HTTP middleware chain of responsibility
 //! 3. 请求验证责任链
+//! 3. chain of responsibility
+//! 3. 请求Verifychain of responsibility
 //! 4. 错误处理责任链
-//! 5. 与传统 if-let/match 的代码对比
+//! 4. error handling chain of responsibility
 use std::collections::HashMap;
 use std::fmt;
 
@@ -76,6 +79,7 @@ impl Response {
 
 pub trait Handler {
     /// 处理请求，使用 let-else 实现早退
+    /// ， let-else
     fn handle(&self, request: &Request) -> Result<Response, String>;
 
     /// Handler 名称

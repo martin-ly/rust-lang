@@ -1,7 +1,10 @@
 //! 增强的进程间通信功能
+//! process functionality
 //!
 //! 这个模块提供了高性能的IPC通信功能，包括零拷贝数据传输、
+//! module performance IP Cfunctionality ，transmission 、
 //! 智能错误恢复、连接池管理等 Rust 1.90 新特性
+//! error recovery 、etc. Rust 1.90 feature
 use crate::error::{IpcError, IpcResult};
 use crate::types::{IpcConfig, IpcProtocol, Message};
 use serde::{Deserialize, Serialize};
@@ -15,6 +18,7 @@ use tokio::net::{UnixListener, UnixStream};
 use tokio::sync::{Mutex as TokioMutex, RwLock as TokioRwLock};
 
 /// 增强的IPC管理器
+/// IP C
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 pub struct EnhancedIpcManager {
@@ -26,6 +30,7 @@ pub struct EnhancedIpcManager {
 }
 
 /// 增强的IPC通道
+/// IP Cchannel
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 pub struct EnhancedIpcChannel {
@@ -50,6 +55,7 @@ pub enum EnhancedConnection {
 }
 
 /// 命名管道连接
+/// named pipe
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 pub struct NamedPipeConnection {
@@ -59,6 +65,7 @@ pub struct NamedPipeConnection {
 }
 
 /// 共享内存连接
+/// shared memory
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 pub struct SharedMemoryConnection {
@@ -88,6 +95,7 @@ pub struct ConnectionPool {
 }
 
 /// IPC性能监控器
+/// IP Cperformance
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 pub struct IpcPerformanceMonitor {
@@ -96,6 +104,7 @@ pub struct IpcPerformanceMonitor {
 }
 
 /// IPC指标
+/// IP Cindicator
 #[cfg(feature = "async")]
 #[derive(Debug, Clone)]
 #[allow(dead_code)]
@@ -111,6 +120,7 @@ pub struct IpcMetrics {
 }
 
 /// IPC错误恢复器
+/// IP Cerror recovery
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 pub struct IpcErrorRecovery {
@@ -120,6 +130,7 @@ pub struct IpcErrorRecovery {
 }
 
 /// IPC重试策略
+/// IP Cstrategy
 #[cfg(feature = "async")]
 #[derive(Debug, Clone)]
 #[allow(dead_code)]
@@ -131,6 +142,7 @@ pub struct IpcRetryPolicy {
 }
 
 /// IPC恢复策略
+/// IP Cstrategy
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 pub enum IpcRecoveryStrategy {
@@ -141,6 +153,7 @@ pub enum IpcRecoveryStrategy {
 }
 
 /// 通道统计信息
+/// channel
 #[cfg(feature = "async")]
 #[derive(Debug, Clone)]
 #[allow(dead_code)]
@@ -160,6 +173,7 @@ pub struct ChannelStats {
 #[allow(dead_code)]
 impl EnhancedIpcManager {
     /// 创建新的增强IPC管理器
+    /// IP C
     pub async fn new(config: IpcConfig) -> IpcResult<Self> {
         let channels = Arc::new(TokioRwLock::new(HashMap::new()));
         let connection_pool = Arc::new(ConnectionPool::new(10, Duration::from_secs(30)));
@@ -176,6 +190,7 @@ impl EnhancedIpcManager {
     }
 
     /// 创建TCP套接字通道
+    /// TCP socket channel
     #[allow(dead_code)]
     pub async fn create_tcp_channel(&self, name: &str, host: &str, port: u16) -> IpcResult<()> {
         let _listener = TcpListener::bind(format!("{}:{}", host, port))
@@ -219,6 +234,7 @@ impl EnhancedIpcManager {
     }
 
     /// 创建Unix套接字通道
+    /// Unixsocket channel
     #[cfg(unix)]
     #[allow(dead_code)]
     pub async fn create_unix_channel(&self, name: &str, path: &str) -> IpcResult<()> {
@@ -259,6 +275,7 @@ impl EnhancedIpcManager {
     }
 
     /// 创建共享内存通道
+    /// shared memory channel
     #[allow(dead_code)]
     pub async fn create_shared_memory_channel(&self, name: &str, size: usize) -> IpcResult<()> {
         let region = memmap2::MmapOptions::new()
@@ -303,6 +320,7 @@ impl EnhancedIpcManager {
     }
 
     /// 创建消息队列通道
+    /// channel
     #[allow(dead_code)]
     pub async fn create_message_queue_channel(&self, name: &str, capacity: usize) -> IpcResult<()> {
         let connection = EnhancedConnection::MessageQueue(MessageQueueConnection {
@@ -342,8 +360,10 @@ impl EnhancedIpcManager {
     }
 
     /// 发送消息（零拷贝优化）
+    /// （optimization ）
     ///
     /// 使用 Rust 1.90 新特性进行零拷贝数据传输优化
+    /// Rust 1.90 feature transmission optimization
     #[allow(dead_code)]
     pub async fn send_message_zero_copy<T>(
         &self,
@@ -437,8 +457,10 @@ impl EnhancedIpcManager {
     }
 
     /// 接收消息（零拷贝优化）
+    /// （optimization ）
     ///
     /// 使用 Rust 1.90 新特性进行零拷贝数据接收优化
+    /// Rust 1.90 feature optimization
     #[allow(dead_code)]
     pub async fn receive_message_zero_copy<T>(&self, channel_name: &str) -> IpcResult<Message<T>>
     where
@@ -515,6 +537,7 @@ impl EnhancedIpcManager {
     }
 
     /// 获取通道统计信息
+    /// channel
     #[allow(dead_code)]
     pub async fn get_channel_stats(&self, channel_name: &str) -> Option<ChannelStats> {
         let channels = self.channels.read().await;
@@ -525,8 +548,10 @@ impl EnhancedIpcManager {
     }
 
     /// 批量发送消息（使用 Rust 1.90 改进的迭代器）
+    /// （ Rust 1.90 ）
     ///
     /// 使用 Rust 1.90 的改进迭代器特性进行批量消息处理
+    /// Rust 1.90 feature
     #[allow(dead_code)]
     pub async fn send_batch_messages<T>(
         &self,
@@ -562,8 +587,10 @@ impl EnhancedIpcManager {
     }
 
     /// 高性能消息广播（使用 Rust 1.90 并发特性）
+    /// performance （ Rust 1.90 concurrency feature ）
     ///
     /// 使用 Rust 1.90 的改进并发特性进行消息广播
+    /// Rust 1.90 concurrency feature
     #[allow(dead_code)]
     pub async fn broadcast_message<T>(
         &self,
@@ -659,8 +686,10 @@ impl EnhancedIpcManager {
     }
 
     /// 零拷贝共享内存传输（使用 Rust 1.90 内存映射特性）
+    /// shared memory transmission （ Rust 1.90 memory mapping feature ）
     ///
     /// 使用 Rust 1.90 的内存映射和零拷贝特性进行高性能数据传输
+    /// Rust 1.90 memory mapping and feature performance transmission
     #[allow(dead_code)]
     pub async fn zero_copy_shared_memory_transfer(
         &self,
@@ -708,8 +737,10 @@ impl EnhancedIpcManager {
     }
 
     /// 智能连接池管理（使用 Rust 1.90 智能指针特性）
+    /// （ Rust 1.90 pointer feature ）
     ///
     /// 使用 Rust 1.90 的智能指针和生命周期管理特性
+    /// Rust 1.90 pointer and lifetime feature
     #[allow(dead_code)]
     pub async fn get_or_create_connection(
         &self,
@@ -748,6 +779,7 @@ impl EnhancedIpcManager {
     }
 
     /// 获取所有通道统计信息
+    /// all channel
     pub async fn get_all_channel_stats(&self) -> HashMap<String, ChannelStats> {
         let channels = self.channels.read().await;
         let mut stats = HashMap::new();
@@ -762,6 +794,7 @@ impl EnhancedIpcManager {
     }
 
     /// 清理所有通道
+    /// all channel
     pub async fn cleanup(&self) -> IpcResult<()> {
         let mut channels = self.channels.write().await;
         channels.clear();
@@ -769,6 +802,7 @@ impl EnhancedIpcManager {
     }
 
     /// 更新通道统计信息
+    /// channel
     async fn update_channel_stats(
         &self,
         channel_name: &str,

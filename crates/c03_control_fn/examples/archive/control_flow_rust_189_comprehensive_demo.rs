@@ -1,10 +1,11 @@
 //! Rust 1.89 综合特性演示示例
-//!
-//! 本示例展示了Rust 1.89版本的核心新特性的综合应用：
-//! - 异步trait完全稳定化
+//! Rust 1.89 synthesize feature demonstration example
 //! - 常量泛型改进
+//! - constant generic
 //! - 异步控制流增强
+//! - async stream
 //! - 性能优化特性
+//! - performance optimization feature
 use c03_control_fn::async_control_flow::AsyncStateMachine;
 use c03_control_fn::async_control_flow_189::AsyncControlFlowExecutor189;
 use c03_control_fn::performance_optimization_189::{COptimizedLayout, DefaultLayout, fast_add};
@@ -42,7 +43,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     Ok(())
 }
 
-/// 异步trait完全稳定化演示
 async fn async_trait_demo() {
     println!("   📡 创建异步处理器...");
 
@@ -61,6 +61,7 @@ async fn async_trait_demo() {
 }
 
 /// 常量泛型改进演示
+/// constant generic demonstration
 fn const_generics_demo() {
     println!("   🔢 创建常量泛型矩阵...");
 
@@ -94,6 +95,7 @@ fn const_generics_demo() {
 }
 
 /// 异步控制流增强演示
+/// async stream demonstration
 async fn async_control_flow_demo() {
     println!("   🔄 异步控制流演示...");
 
@@ -119,6 +121,7 @@ async fn async_control_flow_demo() {
 }
 
 /// 性能优化特性演示
+/// performance optimization feature demonstration
 fn performance_optimization_demo() {
     println!("   ⚡ 性能优化特性演示...");
 
@@ -141,6 +144,7 @@ fn performance_optimization_demo() {
 }
 
 /// 综合应用场景演示
+/// synthesize application scenario demonstration
 async fn comprehensive_application_demo() {
     println!("   🌟 综合应用场景演示...");
 

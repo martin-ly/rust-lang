@@ -1,13 +1,17 @@
 //! IPC通信完整示例
-//!
+//! IP Ccomplete example
 //! 本示例展示如何使用C07进程管理模块进行IPC通信：
+//! this example C07process module IP C：
 //! - 命名管道通信
+//! - named pipe
 //! - TCP套接字通信
+//! - TCP socket
 //! - 共享内存通信
+//! - shared memory
 //! - 消息队列通信
-//!
+//! -
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example ipc_communication_demo
 //! ```
 use c07_process::prelude::*;

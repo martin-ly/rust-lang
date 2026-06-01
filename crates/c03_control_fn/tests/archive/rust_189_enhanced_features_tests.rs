@@ -1,22 +1,18 @@
 //! Rust 1.89 功能 (历史版本)
-//!
+//! Rust 1.89 functionality (this )
+//! Rust 1.89 functionality (历史版this)
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//!
+//! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新测试请参考 `rust_192_comprehensive_tests.rs`
-//!
 //! ## 版本历史说明
-//!
-//! 本文件展示 Rust 1.89 版本的测试，当前项目已升级到 Rust 1.92.0。
-//!
+//! ## this explain
 //! 参考:
-//! - [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/)
+//! reference :
 //! - [历史版本: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
-//!
-//! ---
+//! - [历史版this: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 //!
 //! # Rust 1.89 增强特性测试套件
-//!
-//! 本测试套件覆盖 Rust 1.89 版本的所有增强特性：
+//! # Rust 1.89 feature
 //! - let_chains 特性测试
 //! - cfg_boolean_literals 特性测试
 //! - naked_functions 特性测试
@@ -157,6 +153,7 @@ mod cfg_boolean_literals_tests {
 }
 
 /// 危险隐式引用测试
+/// reference
 #[cfg(test)]
 mod dangerous_implicit_autorefs_tests {
 
@@ -193,6 +190,7 @@ mod dangerous_implicit_autorefs_tests {
 }
 
 /// 无效空指针参数测试
+/// ineffective pointer parameter
 #[cfg(test)]
 mod invalid_null_arguments_tests {
 
@@ -242,6 +240,7 @@ mod invalid_null_arguments_tests {
 }
 
 /// 综合特性测试
+/// synthesize feature
 #[cfg(test)]
 mod comprehensive_tests {
     use super::Rust189EnhancedFeatures;
@@ -370,6 +369,7 @@ mod comprehensive_tests {
 }
 
 /// 性能测试
+/// performance test
 #[cfg(test)]
 mod performance_tests {
     use std::time::Instant;
@@ -419,6 +419,7 @@ mod performance_tests {
 }
 
 /// 边界条件测试
+/// boundary condition
 #[cfg(test)]
 mod edge_case_tests {
 

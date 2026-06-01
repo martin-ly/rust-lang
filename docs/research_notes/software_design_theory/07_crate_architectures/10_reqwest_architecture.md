@@ -231,7 +231,7 @@ graph TD
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-Reqwest 的异步 API 构建于 `hyper` + `tokio`（默认）或 `async-std`（可选特性）之上：
+Reqwest 的异步 API 构建于 `hyper` + `tokio`（默认）或 `async-std [已归档]`（可选特性）之上：
 
 ```rust,ignore
 #[tokio::main]

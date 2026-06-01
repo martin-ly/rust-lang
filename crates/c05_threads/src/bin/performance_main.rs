@@ -1,10 +1,14 @@
 //! 多线程性能优化主程序
-//!
-//! 本程序展示Rust 2025版本的高级多线程优化技术，包括：
+//! thread performance optimization program
 //! - 高性能线程池
+//! - performance thread pool
+//! - 高performancethread pool
 //! - 工作窃取调度
+//! -
 //! - 无锁数据结构
+//! - lock-free data structure
 //! - 并发算法优化
+//! - concurrency algorithm optimization
 use c05_threads::advanced_concurrency::{
     parallel_map, parallel_reduce, HighPerformanceThreadPool, LockFreeRingBuffer, LockFreeStack,
 };
@@ -59,6 +63,7 @@ fn main() {
 }
 
 /// 交互式性能演示
+/// performance demonstration
 fn interactive_performance_demo() {
     let data_size = 1_000_000;
     let data: Vec<i32> = (0..data_size).collect();
@@ -83,6 +88,8 @@ fn interactive_performance_demo() {
 }
 
 /// 演示高性能线程池
+/// demonstration performance thread pool
+/// Demonstration of高performancethread pool
 fn demo_high_performance_thread_pool(data: &[i32]) {
     let data = data.to_vec();
     let thread_counts = [1, 2, 4, 8];
@@ -118,6 +125,7 @@ fn demo_high_performance_thread_pool(data: &[i32]) {
 }
 
 /// 演示无锁数据结构
+/// demonstration lock-free data structure
 fn demo_lock_free_structures() {
     // 无锁环形缓冲区
     let buffer = LockFreeRingBuffer::new(1000);
@@ -157,6 +165,7 @@ fn demo_lock_free_structures() {
 }
 
 /// 演示并发算法
+/// demonstration concurrency algorithm
 fn demo_concurrent_algorithms(data: &[i32]) {
     let thread_counts = [1, 2, 4, 8];
 
@@ -184,6 +193,7 @@ fn demo_concurrent_algorithms(data: &[i32]) {
 }
 
 /// 演示性能对比
+/// demonstration performance to
 fn demo_performance_comparison(data: &[i32]) {
     println!("  串行处理 vs 并行处理对比:");
 
@@ -220,6 +230,7 @@ fn demo_performance_comparison(data: &[i32]) {
 }
 
 /// 内存使用监控
+/// memory
 #[allow(dead_code)]
 fn monitor_memory_usage() {
     // 这里可以添加内存使用监控代码
@@ -228,6 +239,7 @@ fn monitor_memory_usage() {
 }
 
 /// 性能优化建议
+/// performance optimization
 #[allow(dead_code)]
 fn provide_optimization_suggestions() {
     println!("\n💡 性能优化建议:");

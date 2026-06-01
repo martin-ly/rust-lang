@@ -1,8 +1,7 @@
 //! Miri 测试模块 - 类型系统内存安全验证
-//!
-//! 本模块包含用于 Miri 测试的 unsafe 代码示例，验证类型系统的内存安全性。
+//! Miri module - type system memory safety
 //! 运行方式:
-//!   cargo miri test miri_tests
+//! Run way :
 //!   MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test miri_tests
 
 use std::mem::MaybeUninit;
@@ -10,9 +9,8 @@ use std::ptr::NonNull;
 
 // ==================== 基本 Unsafe 类型操作测试 ====================
 
-/// 测试目的: 验证 MaybeUninit 基本使用
-/// 测试场景: 使用 MaybeUninit 处理未初始化内存
 /// 预期结果: 应该正确写入和读取值
+/// result : should and
 #[test]
 fn test_maybeuninit_basic() {
     let mut x = MaybeUninit::<i32>::uninit();
@@ -23,9 +21,11 @@ fn test_maybeuninit_basic() {
     }
 }
 
-/// 测试目的: 验证 MaybeUninit 数组初始化
 /// 测试场景: 逐步初始化数组元素
+/// scenario : element
+/// Test forscenario: 逐步Initializearrayelement
 /// 预期结果: 应该正确初始化所有元素
+/// result : should all element
 #[test]
 fn test_maybeuninit_array() {
     let mut arr: [MaybeUninit<i32>; 5] = unsafe { MaybeUninit::uninit().assume_init() };
@@ -45,9 +45,8 @@ fn test_maybeuninit_array() {
     // arr 包含 MaybeUninit，不需要显式 forget
 }
 
-/// 测试目的: 验证 NonNull 指针基本操作
-/// 测试场景: 使用 NonNull 包装裸指针
 /// 预期结果: 应该正确读写值
+/// result : should
 #[test]
 fn test_nonnull_basic() {
     let mut x = 42;
@@ -61,8 +60,11 @@ fn test_nonnull_basic() {
 }
 
 /// 测试目的: 验证裸指针别名规则
+/// objective : pointer rule
 /// 测试场景: 创建两个指向同一位置的裸指针并交替使用
+/// scenario : position pointer and alternation
 /// 预期结果: Tree Borrows 下只要遵循别名规则就应该通过
+/// result : Tree Borrows under rule should
 #[test]
 fn test_raw_pointer_alias() {
     let mut x = 0;
@@ -89,9 +91,8 @@ impl<'a> Drop for DropTracker<'a> {
     }
 }
 
-/// 测试目的: 验证 ManuallyDrop 阻止自动 Drop
-/// 测试场景: 使用 ManuallyDrop 包装有 Drop 的类型
 /// 预期结果: 离开作用域时不应自动调用 Drop
+/// result : role domain Drop
 #[test]
 fn test_manually_drop() {
     let mut dropped = false;
@@ -110,9 +111,8 @@ fn test_manually_drop() {
     assert!(dropped);
 }
 
-/// 测试目的: 验证 ManuallyDrop 内部值访问
-/// 测试场景: 访问 ManuallyDrop 内部的 Vec
 /// 预期结果: 应该能够正常访问和取出内部值
+/// result : should can and inside
 #[test]
 fn test_manually_drop_access() {
     let manual = ManuallyDrop::new(vec![1, 2, 3]);
@@ -127,9 +127,8 @@ fn test_manually_drop_access() {
 
 // ==================== 类型转换和内存操作 ====================
 
-/// 测试目的: 验证 from_ne_bytes 基础使用
-/// 测试场景: 使用 from_ne_bytes 转换字节数组为整数
 /// 预期结果: 应该正确解析字节序
+/// result : should
 #[test]
 fn test_from_ne_bytes_basic() {
     let bytes: [u8; 4] = [0x00, 0x00, 0x00, 0x01];
@@ -145,9 +144,10 @@ fn test_from_ne_bytes_basic() {
     }
 }
 
-/// 测试目的: 验证 addr_of! 和 addr_of_mut!
 /// 测试场景: 获取 packed struct 字段地址
+/// scenario : packed struct field
 /// 预期结果: 应该能够安全获取字段地址而不创建引用
+/// result : should can field while reference
 #[repr(C)]
 struct Packed {
     a: u8,
@@ -173,6 +173,7 @@ use std::marker::PhantomPinned;
 use std::pin::Pin;
 
 /// 自引用结构示例
+/// reference structure example
 struct SelfReferential {
     data: String,
     ptr_to_data: *const String,
@@ -203,8 +204,11 @@ impl SelfReferential {
 }
 
 /// 测试目的: 验证自引用结构通过 Pin 保证安全
+/// objective : reference structure Pin
 /// 测试场景: 创建自引用结构并通过 Pin 访问
+/// scenario : reference structure and Pin
 /// 预期结果: 应该能够安全访问自引用数据
+/// result : should can reference
 #[test]
 fn test_self_referential() {
     let self_ref = SelfReferential::new(String::from("Hello"));
@@ -216,6 +220,7 @@ fn test_self_referential() {
 // ==================== 联合体测试 ====================
 
 /// 联合体示例 - 用于 FFI 或低级内存操作
+/// union volume example - FFI or memory
 #[repr(C)]
 union IntOrFloat {
     i: i32,
@@ -223,8 +228,11 @@ union IntOrFloat {
 }
 
 /// 测试目的: 验证联合体基本操作
+/// objective : union volume this
 /// 测试场景: 使用联合体解释同一内存为不同类型
+/// scenario : union volume explain memory as type
 /// 预期结果: 应该能够正确访问不同字段
+/// result : should can field
 #[test]
 fn test_union_basic() {
     let u = IntOrFloat { i: 1065353216 }; // f32::to_bits() for 1.0
@@ -241,8 +249,11 @@ use std::ffi::c_void;
 use std::os::raw::c_int;
 
 /// 测试目的: 验证外部类型指针操作
+/// objective : outside type pointer
 /// 测试场景: 使用 FFI 类型进行指针转换
+/// scenario : FFI type pointer conversion
 /// 预期结果: 应该能够正确转换和访问
+/// result : should can conversion and
 #[test]
 fn test_ffi_pointer() {
     let mut value: c_int = 42;
@@ -258,8 +269,11 @@ fn test_ffi_pointer() {
 // ==================== 对齐和内存布局 ====================
 
 /// 测试目的: 验证对齐检查
+/// objective : to
 /// 测试场景: 创建对齐类型并验证地址对齐
+/// scenario : to type and to
 /// 预期结果: 地址应该满足对齐要求
+/// result : should to
 #[repr(align(16))]
 #[allow(dead_code)]
 struct Aligned16(u8);
@@ -273,8 +287,11 @@ fn test_alignment() {
 }
 
 /// 测试目的: 验证未对齐数据读取
+/// objective : to
 /// 测试场景: 从可能未对齐的地址读取数据
+/// scenario : from may to
 /// 预期结果: 使用 read_unaligned 应该安全
+/// result : read_unaligned should
 #[test]
 fn test_unaligned_read() {
     let bytes: [u8; 8] = [0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00];
@@ -291,8 +308,11 @@ fn test_unaligned_read() {
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 /// 测试目的: 验证原子操作内存序
+/// objective : atomic operation memory
 /// 测试场景: 使用不同内存序进行原子操作
+/// scenario : memory atomic operation
 /// 预期结果: 操作应该正确完成
+/// result : should
 #[test]
 fn test_atomic_operations() {
     let atomic = AtomicUsize::new(0);
@@ -311,8 +331,11 @@ fn test_atomic_operations() {
 // ==================== 边界情况测试 ====================
 
 /// 测试目的: 验证零大小类型的指针操作
+/// objective : type pointer
 /// 测试场景: 创建 ZST 指针并解引用
+/// scenario : ZST pointer and reference
 /// 预期结果: ZST 指针操作应该安全
+/// result : ZST pointer should
 #[test]
 fn test_zst_pointers() {
     struct Zst;
@@ -332,8 +355,11 @@ fn test_zst_pointers() {
 }
 
 /// 测试目的: 验证空指针检查
+/// objective : pointer
 /// 测试场景: 检查空指针和非空指针
+/// scenario : pointer and pointer
 /// 预期结果: 应该正确识别空指针
+/// result : should pointer
 #[test]
 fn test_null_check() {
     let ptr: *const i32 = std::ptr::null();
@@ -345,9 +371,10 @@ fn test_null_check() {
 
 // ==================== Miri 特定测试 ====================
 
-/// 测试目的: 验证 Tree Borrows 与共享引用
 /// 测试场景: 创建多个共享引用并重新借用
+/// scenario : reference and borrowing
 /// 预期结果: 共享引用应该可以共存
+/// result : reference should can
 #[test]
 fn test_tree_borrows_shared_ref() {
     let x = 42;
@@ -363,9 +390,8 @@ fn test_tree_borrows_shared_ref() {
     assert_eq!(*r3, 42);
 }
 
-/// 测试目的: 验证内部可变性与 Miri
-/// 测试场景: 使用 RefCell 进行内部可变性
 /// 预期结果: 应该能够正确借用和修改
+/// result : should can borrowing and
 #[test]
 fn test_interior_mutability() {
     use std::cell::RefCell;
@@ -382,9 +408,11 @@ fn test_interior_mutability() {
 
 // ==================== 应该被 Miri 检测的错误（标记为 ignore） ====================
 
-/// 测试目的: 验证 use-after-free 检测
+/// Test forobjective: Verify use-after-free 检测
 /// 测试场景: 使用已释放内存的指针
+/// scenario : use-after-free memory pointer
 /// 预期结果: Miri 应该检测到 UB
+/// result : Miri should to UB
 #[test]
 #[ignore = "This test should fail with use-after-free"]
 fn test_use_after_free() {
@@ -398,9 +426,11 @@ fn test_use_after_free() {
     }
 }
 
-/// 测试目的: 验证 double-free 检测
+/// Test forobjective: Verify double-free 检测
 /// 测试场景: 对同一指针调用两次 Box::from_raw
+/// scenario : to pointer Box::from_raw
 /// 预期结果: Miri 应该检测到 UB
+/// result : Miri should to UB
 #[test]
 #[ignore = "This test should fail with double-free"]
 fn test_double_free() {
@@ -414,8 +444,11 @@ fn test_double_free() {
 }
 
 /// 测试目的: 验证越界访问检测
+/// objective :
 /// 测试场景: 访问数组越界位置
+/// scenario : position
 /// 预期结果: Miri 应该检测到 UB
+/// result : Miri should to UB
 #[test]
 #[ignore = "This test should fail with out-of-bounds"]
 fn test_out_of_bounds() {
@@ -432,6 +465,8 @@ fn test_out_of_bounds() {
 #[cfg(test)]
 mod utils {
     /// 安全包装：将 &[u8] 转换为 &str（带验证）
+    /// ：will &[u8] conversion as &str（）
+    /// 安全包装：will &[u8] conversionas &str（带Verify）
     #[allow(dead_code)]
     pub fn safe_bytes_to_str(bytes: &[u8]) -> Option<&str> {
         std::str::from_utf8(bytes).ok()

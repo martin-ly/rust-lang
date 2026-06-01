@@ -1,20 +1,16 @@
 //! Rust 1.92.0 WASM 特性实现模块
-//!
-//! 本模块展示了 Rust 1.92.0 在 WASM 场景中的应用，包括：
-//! - `MaybeUninit` 在 WASM 内存管理中的应用
-//! - `NonZero::div_ceil` 在 WASM 缓冲区分配中的应用
-//! - 联合体原始引用在 WASM FFI 中的应用
-//! - 迭代器方法特化在 WASM 性能优化中的应用
-//! - `Location::file_as_c_str` 在 WASM 调试中的应用
-//! - `<[_]>::rotate_right` 在 WASM 数据处理中的应用
-//! - WASM 特定的性能优化
-//!
+//! Rust 1.92.0 WASM feature module
+//! - `Location::file_as_c_str` in WASM 调试inapplication
+//! - `<[_]>::rotate_right` in WASM 数据Handleinapplication
+//! - WASM 特定performanceoptimization
 //! # 文件信息
+//! #
 //! - 文件: rust_192_features.rs
 //! - 创建日期: 2025-12-11
+//! - date : 2025-12-11
 //! - 版本: 1.0
-//! - Rust版本: 1.92.0
-//! - Edition: 2024
+//! - this : 1.0
+//! - 版this: 1.0
 use std::mem::MaybeUninit;
 use std::num::NonZeroUsize;
 use std::panic::Location;
@@ -24,16 +20,12 @@ use wasm_bindgen::prelude::*;
 
 // ==================== 1. MaybeUninit 在 WASM 内存管理中的应用 ====================
 
-/// WASM 内存缓冲区，使用 MaybeUninit 优化
-///
-/// Rust 1.92.0: 改进的 MaybeUninit 文档和有效性检查
 pub struct WasmBuffer {
     buffer: Vec<MaybeUninit<u8>>,
     initialized_len: usize,
 }
 
 impl WasmBuffer {
-    /// 创建指定大小的 WASM 缓冲区
     pub fn new(capacity: usize) -> Self {
         let mut buffer = Vec::with_capacity(capacity);
         unsafe {
@@ -46,12 +38,10 @@ impl WasmBuffer {
     }
 
     /// 写入数据到缓冲区
-    ///
-    /// Rust 1.92.0: 使用 MaybeUninit 确保安全性
-    ///
-    /// # Safety
+    /// to buffering
     ///
     /// 调用者必须确保不会超出缓冲区容量，且写入的数据不会导致未定义行为
+    /// must buffering ，and definition as
     pub unsafe fn write(&mut self, data: &[u8]) -> usize {
         let write_len = data.len().min(self.buffer.len() - self.initialized_len);
         for (i, &byte) in data.iter().enumerate().take(write_len) {
@@ -63,9 +53,6 @@ impl WasmBuffer {
 
     /// 读取已初始化的数据
     ///
-    /// # Safety
-    ///
-    /// 调用者必须确保 `len` 不超过 `initialized_len`，且读取范围内的数据已正确初始化
     pub unsafe fn read(&self, len: usize) -> Vec<u8> {
         let read_len = len.min(self.initialized_len);
         let mut result = Vec::with_capacity(read_len);
@@ -88,6 +75,7 @@ impl WasmBuffer {
 }
 
 /// WASM 对象池，用于重用内存
+/// WASM to ，memory
 pub struct WasmObjectPool<T> {
     pool: Vec<MaybeUninit<T>>,
     available: usize,
@@ -95,6 +83,7 @@ pub struct WasmObjectPool<T> {
 
 impl<T> WasmObjectPool<T> {
     /// 创建指定大小的对象池
+    /// to
     pub fn new(size: usize) -> Self {
         let mut pool = Vec::with_capacity(size);
         unsafe {
@@ -104,10 +93,10 @@ impl<T> WasmObjectPool<T> {
     }
 
     /// 从池中获取对象（如果可用）
-    ///
-    /// # Safety
+    /// from in to （if ）
     ///
     /// 调用者必须确保返回的对象在使用前已正确初始化，且不会在同一位置重复读取
+    /// must to in before ，and in position
     pub unsafe fn acquire(&mut self) -> Option<T> {
         if self.available == 0 {
             return None;
@@ -117,10 +106,10 @@ impl<T> WasmObjectPool<T> {
     }
 
     /// 归还对象到池中
-    ///
-    /// # Safety
+    /// to to in
     ///
     /// 调用者必须确保 `obj` 已经完全移动，且不会在池中位置已有有效对象时重复写入
+    /// must `obj` ，and in in position effective to
     pub unsafe fn release(&mut self, obj: T) {
         if self.available < self.pool.len() {
             self.pool[self.available].write(obj);
@@ -131,11 +120,6 @@ impl<T> WasmObjectPool<T> {
 
 // ==================== 2. NonZero::div_ceil 在 WASM 缓冲区分配中的应用 ====================
 
-/// 使用 NonZero::div_ceil 计算 WASM 缓冲区块数
-///
-/// Rust 1.92.0: 新增的 `div_ceil` 方法可以安全地计算向上取整除法
-///
-/// # Note
 ///
 /// This function uses Rust 1.92.0 feature `div_ceil`. MSRV warnings are expected
 /// since clippy.toml specifies MSRV 1.90.0, but this crate requires Rust 1.92.0+.
@@ -153,6 +137,7 @@ pub fn calculate_buffer_chunks(total_size: usize, chunk_size: NonZeroUsize) -> u
 }
 
 /// WASM 内存分配器配置
+/// WASM allocator
 pub struct WasmAllocatorConfig {
     page_size: NonZeroUsize,
     max_pages: usize,
@@ -166,7 +151,6 @@ impl WasmAllocatorConfig {
         }
     }
 
-    /// 计算需要的 WASM 页面数
     #[allow(clippy::min_ident_chars)] // MSRV difference: using Rust 1.92.0 feature
     pub fn calculate_pages(&self, total_bytes: usize) -> usize {
         if total_bytes == 0 {
@@ -180,6 +164,7 @@ impl WasmAllocatorConfig {
 }
 
 /// WASM 数据传输配置
+/// WASM transmission
 pub struct WasmTransferConfig {
     packet_size: NonZeroUsize,
 }
@@ -190,8 +175,7 @@ impl WasmTransferConfig {
     }
 
     /// 计算需要的数据包数量
-    ///
-    /// # Note
+    /// quantity
     ///
     /// This function uses Rust 1.92.0 feature `div_ceil`. MSRV warnings are expected.
     #[allow(clippy::min_ident_chars)] // MSRV difference: using Rust 1.92.0 feature
@@ -208,31 +192,38 @@ impl WasmTransferConfig {
 
 // ==================== 3. 联合体原始引用在 WASM FFI 中的应用 ====================
 
-/// WASM FFI 联合体，用于与 JavaScript 互操作
-///
 /// Rust 1.92.0: 允许在安全代码中使用原始引用访问联合体字段
+/// Rust 1.92.0: in in reference union volume field
 #[repr(C)]
 pub union WasmFFIUnion {
     /// 整数字段
+    /// field
+    /// 整数field
     pub integer: u32,
     /// 浮点数字段
+    /// point field
     pub float: f32,
     /// 字节数组字段
+    /// field
+    /// 字节arrayfield
     pub bytes: [u8; 4],
 }
 
 impl WasmFFIUnion {
     /// 创建新的联合体
+    /// union volume
     pub fn new() -> Self {
         Self { integer: 0 }
     }
 
     /// Rust 1.92.0: 使用原始引用安全访问联合体字段
+    /// Rust 1.92.0: reference union volume field
     pub fn get_integer_raw(&self) -> *const u32 {
         &raw const self.integer
     }
 
     /// Rust 1.92.0: 使用可变原始引用访问联合体字段
+    /// Rust 1.92.0: reference union volume field
     pub fn get_integer_mut_raw(&mut self) -> *mut u32 {
         &raw mut self.integer
     }
@@ -256,15 +247,11 @@ impl Default for WasmFFIUnion {
 
 // ==================== 4. 迭代器方法特化在 WASM 性能优化中的应用 ====================
 
-/// WASM 优化的数组比较
-///
-/// Rust 1.92.0: 使用特化的迭代器比较方法提升性能
 pub fn wasm_optimized_array_eq<T: PartialEq>(arr1: &[T], arr2: &[T]) -> bool {
     // Rust 1.92.0: 特化的迭代器比较方法
     arr1.iter().eq(arr2.iter())
 }
 
-/// WASM 优化的向量比较
 pub fn wasm_optimized_vec_eq<T: PartialEq>(vec1: &[T], vec2: &[T]) -> bool {
     // Rust 1.92.0: 特化的迭代器比较方法
     vec1.iter().eq(vec2.iter())
@@ -273,14 +260,15 @@ pub fn wasm_optimized_vec_eq<T: PartialEq>(vec1: &[T], vec2: &[T]) -> bool {
 // ==================== 5. rotate_right 在 WASM 数据处理中的应用 ====================
 
 /// WASM 数据旋转处理
-///
-/// Rust 1.92.0: 使用 rotate_right 进行高效的数据旋转
+/// WASM
+/// WASM 数据旋转Handle
 pub fn wasm_rotate_data<T>(data: &mut [T], positions: usize) {
     // Rust 1.92.0: 新稳定化的 rotate_right 方法
     data.rotate_right(positions);
 }
 
 /// WASM 循环缓冲区
+/// WASM circulation buffering
 pub struct WasmCircularBuffer<T> {
     buffer: Vec<T>,
 }
@@ -296,12 +284,14 @@ impl<T> WasmCircularBuffer<T> {
     }
 
     /// 旋转缓冲区
+    /// buffering
     pub fn rotate(&mut self, positions: usize) {
         // Rust 1.92.0: 使用 rotate_right 进行高效旋转
         self.buffer.rotate_right(positions);
     }
 
     /// 获取缓冲区引用
+    /// buffering reference
     pub fn buffer(&self) -> &[T] {
         &self.buffer
     }
@@ -310,8 +300,9 @@ impl<T> WasmCircularBuffer<T> {
 // ==================== 6. Location::file_as_c_str 在 WASM 调试中的应用 ====================
 
 /// WASM 调试信息收集器
-///
+/// WASM
 /// Rust 1.92.0: 使用 Location::file_as_c_str 收集调试信息
+/// Rust 1.92.0: Use Location::file_as_c_str 收集调试信息
 pub struct WasmDebugInfo {
     pub file: &'static str,
     pub line: u32,
@@ -320,6 +311,7 @@ pub struct WasmDebugInfo {
 
 impl WasmDebugInfo {
     /// 从调用位置创建调试信息
+    /// from position
     pub fn from_caller() -> Self {
         let location = Location::caller();
         WasmDebugInfo {
@@ -337,7 +329,6 @@ impl WasmDebugInfo {
 
 // ==================== 7. WASM 特定的性能优化 ====================
 
-/// WASM 优化的数组处理
 #[cfg(target_arch = "wasm32")]
 #[wasm_bindgen]
 pub struct WasmOptimizedProcessor {
@@ -355,6 +346,7 @@ impl WasmOptimizedProcessor {
     }
 
     /// 处理数据（WASM 绑定）
+    /// （WASM ）
     #[wasm_bindgen]
     pub fn process(&mut self, data: &[u8]) -> usize {
         unsafe { self.buffer.write(data) }
@@ -367,7 +359,6 @@ impl WasmOptimizedProcessor {
     }
 }
 
-/// 非 WASM 平台的兼容实现
 #[cfg(not(target_arch = "wasm32"))]
 pub struct WasmOptimizedProcessor {
     buffer: WasmBuffer,
@@ -393,6 +384,7 @@ impl WasmOptimizedProcessor {
 // ==================== 4. 综合应用示例 ====================
 
 /// 演示 Rust 1.92.0 WASM 特性
+/// demonstration Rust 1.92.0 WASM feature
 pub fn demonstrate_rust_192_wasm_features() {
     println!("\n=== Rust 1.92.0 WASM 特性演示 ===\n");
 

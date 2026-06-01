@@ -3,34 +3,40 @@
 #![allow(clippy::type_complexity)]
 #![allow(clippy::assertions_on_constants)]
 
-//! Rust 1.95.0 控制流与函数特性研究项目
-//!
+//! Rust 1.95.0 控制streamandfunctionfeatureresearchproject
 //! 本项目专注于控制流与函数系统的深度分析和实践应用，
+//! this project stream and function system analyze and application ，
 //! 涵盖了异步编程增强、类型系统增强、性能优化特性等核心新特性。
-//!
+//! async 、type system 、performance optimization feature etc. core feature 。
 //! **当前版本**: Rust 1.95.0+ (Edition 2024)
 //! **对齐日期**: 2026-05-12
-//!
+//! **to date **: 2026-05-12
+//! **to齐date**: 2026-05-12
 //! ## Rust 1.95.0 新特性
-//!
-//! - **if let guards**: match 表达式中的嵌套模式匹配守卫
+//! ## Rust 1.95.0 feature
+//! ## Rust 1.95.0 新feature
 //! - **bool 转浮点数**: `impl From<bool> for {f32, f64}`
-//! - **RangeInclusive 改进**: 迭代性能优化
 //! - **异步Drop**: 异步资源清理支持
+//! - **async Drop**: async
 //! - **异步生成器**: 原生异步迭代器支持 (nightly)
-//! - **Polonius借用检查器**: 更精确的借用分析
+//! - **async **: async (nightly)
+//! - **Poloniusborrow checker**: 更精确borrowanalysis
 //! - **下一代特质求解器**: 更快的编译和更好的错误消息
+//! - **under trait **: and
 //! - **并行前端**: 并行编译支持
-//!
+//! - **parallelism frontend **: parallelism
 //! ## 历史特性模块
-//!
-//! 以下模块包含 Rust 1.92.0–1.94 的历史特性实现：
-//!
+//! ## feature module
+//! ## 历史featuremodule
 //! - **异步Drop**: 异步资源清理支持
+//! - **async Drop**: async
 //! - **异步生成器**: 原生异步迭代器支持
-//! - **Polonius借用检查器**: 更精确的借用分析
+//! - **async **: async
+//! - **Poloniusborrow checker**: 更精确borrowanalysis
 //! - **下一代特质求解器**: 更快的编译和更好的错误消息
+//! - **under trait **: and
 //! - **并行前端**: 并行编译支持
+//! - **parallelism frontend **: parallelism
 // 导出核心模块
 pub mod async_control_flow;
 pub mod control_flow_patterns;
@@ -126,41 +132,43 @@ pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 pub const RUST_VERSION: &str = "1.94.0";
 
 /// 项目信息
+/// project
 pub struct ProjectInfo;
 
 impl ProjectInfo {
     /// 获取项目版本
+    /// project this
     pub fn version() -> &'static str {
         VERSION
     }
 
-    /// 获取支持的Rust版本
     pub fn rust_version() -> &'static str {
         RUST_VERSION
     }
 
     /// 获取项目描述
+    /// project describe
     pub fn description() -> &'static str {
         "Rust 1.95.0 控制流与函数特性研究项目"
     }
 }
 
 /// 初始化项目
-///
+/// project
 /// 初始化控制流与函数模块，设置日志系统并打印项目信息。
-///
-/// # Examples
+/// stream and function module ，system and project 。
 ///
 /// ```
 /// use c03_control_fn::init;
 ///
 /// // 初始化项目
-/// init();
+/// // project
 /// ```
 ///
 /// # Note
 ///
 /// 此函数会初始化日志系统，多次调用是安全的。
+/// this function system ，。
 pub fn init() {
     // 设置日志
     tracing_subscriber::fmt::init();

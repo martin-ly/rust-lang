@@ -1,7 +1,9 @@
 //! 异步生态系统性能基准测试
-//!
+//! async ecosystem system Performance benchmark
 //! 本模块提供了对各个异步运行时的性能基准测试，
+//! This module provides to async runtime Performance benchmark ，
 //! 包括内存使用、启动时间、并发性能等指标。
+//! memory 、time 、concurrency performance etc. indicator 。
 use c06_async::{
     async_integration_framework::{
         AggregationCompositionFramework, AsyncSyncConversionFramework, DataProcessingComponent,
@@ -16,6 +18,7 @@ use std::time::Duration;
 use tokio::runtime::Runtime;
 
 /// 基准测试：异步任务执行性能
+/// benchmark ：async task performance
 fn bench_async_task_execution(c: &mut Criterion) {
     let mut group = c.benchmark_group("async_task_execution");
 
@@ -51,6 +54,7 @@ fn bench_async_task_execution(c: &mut Criterion) {
 }
 
 /// 基准测试：流处理性能
+/// benchmark ：stream performance
 fn bench_stream_processing(c: &mut Criterion) {
     let mut group = c.benchmark_group("stream_processing");
 
@@ -66,6 +70,7 @@ fn bench_stream_processing(c: &mut Criterion) {
 }
 
 /// 基准测试：异步同步转换性能
+/// benchmark ：async synchronous conversion performance
 fn bench_async_sync_conversion(c: &mut Criterion) {
     let mut group = c.benchmark_group("async_sync_conversion");
 
@@ -86,6 +91,7 @@ fn bench_async_sync_conversion(c: &mut Criterion) {
 }
 
 /// 基准测试：聚合组合模式性能
+/// benchmark ：aggregation combination performance
 fn bench_aggregation_composition(c: &mut Criterion) {
     let mut group = c.benchmark_group("aggregation_composition");
 
@@ -147,6 +153,7 @@ fn bench_aggregation_composition(c: &mut Criterion) {
 }
 
 /// 基准测试：运行时组合模式性能
+/// benchmark ：runtime combination performance
 fn bench_runtime_composition(c: &mut Criterion) {
     let mut group = c.benchmark_group("runtime_composition");
 
@@ -180,6 +187,7 @@ fn bench_runtime_composition(c: &mut Criterion) {
 }
 
 /// 基准测试：内存使用效率
+/// benchmark ：memory efficiency
 fn bench_memory_efficiency(c: &mut Criterion) {
     let mut group = c.benchmark_group("memory_efficiency");
 
@@ -209,6 +217,7 @@ fn bench_memory_efficiency(c: &mut Criterion) {
 }
 
 /// 基准测试：启动时间
+/// benchmark ：time
 fn bench_startup_time(c: &mut Criterion) {
     let mut group = c.benchmark_group("startup_time");
 
@@ -237,6 +246,7 @@ fn bench_startup_time(c: &mut Criterion) {
 }
 
 /// 基准测试：并发性能
+/// benchmark ：concurrency performance
 fn bench_concurrency_performance(c: &mut Criterion) {
     let mut group = c.benchmark_group("concurrency_performance");
 
@@ -262,6 +272,7 @@ fn bench_concurrency_performance(c: &mut Criterion) {
 }
 
 /// 基准测试：错误处理性能
+/// benchmark ：error handling performance
 fn bench_error_handling_performance(c: &mut Criterion) {
     let mut group = c.benchmark_group("error_handling_performance");
 

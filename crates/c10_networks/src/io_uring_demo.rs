@@ -1,34 +1,33 @@
 //! io_uring 高性能 I/O 演示
-//!
-//! io_uring 是 Linux 内核 5.1+ 引入的异步 I/O 接口，
+//! io_uring performance I/O demonstration
+//! io_uring 高performance I/O Demonstration of
 //! 通过共享的提交队列（SQ）和完成队列（CQ）实现用户态与内核态的高效通信。
-//!
+//! （SQ）and （CQ）and kernel efficient 。
 //! ## 架构
+//! ## architecture
 //! - Submission Queue (SQ): 用户态提交 I/O 请求
 //! - Completion Queue (CQ): 内核态返回 I/O 结果
 //! - 无需系统调用即可完成批量 I/O 提交（如果开启 polling）
-//!
-//! ## 与 epoll 的差异
+//! - system I/O （if polling）
+//! ## and epoll 差异
 //! | 特性 | epoll | io_uring |
-//! |------|-------|----------|
 //! | 接口 | 基于文件描述符的就绪通知 | 基于操作的完成通知 |
+//! | | file descriptor | |
 //! | 系统调用 | 每次 wait 需 syscall | 批量提交可绕过 syscall |
+//! | system | wait syscall | syscall |
 //! | 缓冲区管理 | 用户态预分配 | 支持 registered buffers |
-//! | 文件 I/O | 同步 fallback | 真正的异步文件 I/O |
-//!
+//! | buffering | | registered buffers |
 //! # 权威来源
-//! - [kernel.org io_uring](https://kernel.dk/io_uring.pdf)
-//! - [io-uring crate](https://github.com/tokio-rs/io-uring)
+//! # Source
+//! # 权威source
 //! - [tokio-uring](https://github.com/tokio-rs/tokio-uring)
 
 #[cfg(all(target_os = "linux", feature = "io-uring"))]
 pub mod linux_impl {
     use std::os::unix::io::AsRawFd;
 
-    /// 使用 io-uring crate 读取文件的示例
-    ///
     /// # 注意
-    ///
+    /// #
     /// 此代码需要 Linux 环境和 `io-uring` feature。
     pub fn read_file_with_io_uring(path: &str, buf: &mut [u8]) -> std::io::Result<usize> {
         use io_uring::{IoUring, opcode, types};
@@ -62,9 +61,6 @@ pub mod linux_impl {
         Ok(ret as usize)
     }
 
-    /// 批量读取多个文件（io_uring 的核心优势）
-    ///
-    /// 展示 io_uring 的批量提交能力：一次 syscall 提交多个 I/O 请求。
     pub fn batch_read_files(paths: &[&str], bufs: &mut [Vec<u8>]) -> std::io::Result<Vec<usize>> {
         use io_uring::{IoUring, opcode, types};
 
@@ -105,9 +101,8 @@ pub mod linux_impl {
         Ok(results)
     }
 
-    /// 使用 tokio-uring 的 echo server
-    ///
     /// 展示如何基于 io_uring 构建异步网络服务。
+    /// io_uring async network 。
     pub async fn tokio_uring_echo_server(addr: &str) -> std::io::Result<()> {
         use std::net::SocketAddr;
         use tokio_uring::net::TcpListener;
@@ -145,9 +140,8 @@ pub mod linux_impl {
     }
 
     /// 使用 Registered Buffers（固定缓冲区）
-    ///
-    /// io_uring 允许预先注册缓冲区，避免每次 I/O 的内存锁定开销。
     /// 这对高频小 I/O 场景（如数据库、缓存）有显著性能提升。
+    /// to I/O scenario （database 、）significant performance 。
     pub fn registered_buffers_concept() -> &'static str {
         r#"
 // 1. 注册缓冲区池
@@ -169,9 +163,8 @@ let read_e = opcode::Read::new(fd, buf_ptr, buf_len)
     }
 
     /// 操作链（Linked Operations）
-    ///
-    /// io_uring 支持将多个操作链接为原子序列：
     /// 前一个操作完成后自动触发下一个，无需用户态干预。
+    /// before after under ，。
     pub fn linked_operations_concept() -> &'static str {
         r#"
 // 链式操作：先打开文件，然后读取，最后关闭
@@ -194,7 +187,7 @@ let close_e = opcode::Close::new(types::Fd(0))
 "#
     }
 
-    /// io_uring 与 epoll 的决策树
+    /// io_uring and epoll 决策tree
     pub fn when_to_use_io_uring() -> &'static str {
         r#"
 何时使用 io_uring？
@@ -220,6 +213,7 @@ let close_e = opcode::Close::new(types::Fd(0))
 "#
     }
     /// io_uring 性能对比说明
+    /// io_uring performance to explain
     pub fn performance_comparison() -> &'static str {
         "| 场景 | epoll | io_uring | 提升 |\n|------|-------|----------|------|\n| 单文件读取 | 1 \
          syscall | 1 syscall | 相当 |\n| 100 文件批量读 | 100 syscalls | 1 syscall | ~100x |\n| \
@@ -230,9 +224,9 @@ let close_e = opcode::Close::new(types::Fd(0))
 
 #[cfg(not(all(target_os = "linux", feature = "io-uring")))]
 pub mod stub {
-    //! io_uring feature 未启用或非 Linux 目标时的占位实现。
 
     /// io_uring 概念说明
+    /// io_uring concept explain
     pub fn io_uring_concept() {
         println!(
             "[stub] io_uring 是 Linux 5.1+ 的高性能异步 I/O 接口。\n启用 'io-uring' feature 并在 \
@@ -241,6 +235,7 @@ pub mod stub {
     }
 
     /// 性能对比占位
+    /// performance to
     pub fn performance_comparison() -> &'static str {
         "io_uring 性能对比需要 Linux 环境和 io-uring feature"
     }

@@ -7,6 +7,7 @@ use std::path::Path;
 use std::sync::{Arc, Mutex};
 
 /// 文件系统通道实现
+/// file system channel
 #[allow(dead_code)]
 pub struct FileSystemChannel {
     name: String,
@@ -16,6 +17,7 @@ pub struct FileSystemChannel {
 
 impl FileSystemChannel {
     /// 创建新的文件系统通道
+    /// file system channel
     pub fn new(name: &str, config: IpcConfig) -> IpcResult<Self> {
         let file_path = format!("{}.fs", name);
 
@@ -35,6 +37,7 @@ impl FileSystemChannel {
     }
 
     /// 连接到现有的文件系统通道
+    /// to file system channel
     pub fn connect(name: &str, config: IpcConfig) -> IpcResult<Self> {
         let file_path = format!("{}.fs", name);
 

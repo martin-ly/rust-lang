@@ -1,11 +1,16 @@
 //! LeetCode 深度优先搜索类算法（结合 Rust 1.92 特性）
+//! LeetCode depth-first search algorithm （ Rust 1.92 feature ）
 //!
 //! 本模块实现经典的深度优先搜索类 LeetCode 题目，充分利用 Rust 1.92 的新特性。
+//! this module depth-first search LeetCode ， Rust 1.92 feature 。
 //!
 //! ## Rust 1.92 特性应用
+//! ## Rust 1.92 feature application
 //!
 //! 1. **性能优化**: 递归和迭代器操作性能提升
+//! 1. **performance optimization **: and performance
 //! 2. **内存优化**: 使用栈或递归优化
+//! 2. **memory optimization **: stack or optimization
 use crate::leetcode::tree::TreeNode;
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 use std::cell::RefCell;
@@ -99,6 +104,7 @@ pub fn num_islands_dfs(grid: Vec<Vec<char>>) -> i32 {
 }
 
 /// 236. Lowest Common Ancestor（二叉树的最近公共祖先）
+/// 236. Lowest Common Ancestor（binary tree ）
 pub fn lowest_common_ancestor(
     root: Option<Rc<RefCell<TreeNode>>>,
     p: Option<Rc<RefCell<TreeNode>>>,
@@ -146,6 +152,7 @@ pub fn diameter_of_binary_tree(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有深度优先搜索类问题
+/// all depth-first search problem
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

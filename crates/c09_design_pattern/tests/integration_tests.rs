@@ -3,9 +3,10 @@ use c09_design_pattern::behavioral::chain_of_responsibility::define::{
 };
 use c09_design_pattern::creational::abstract_factory::enum_trait::{CircleFactory, ShapeFactory};
 /// 跨模式集成测试
-///
 /// 测试不同设计模式之间的协作和集成
+/// design 's and
 /// 验证模式组合使用的正确性和性能
+/// combination and performance
 use c09_design_pattern::creational::singleton::define::Singleton;
 use c09_design_pattern::structural::flyweight::define::{
     Flyweight, OptimizedFlyweightFactory as FlyweightFactory,
@@ -20,6 +21,7 @@ mod integration_tests {
     use std::thread;
 
     /// 测试单例模式与工厂模式的集成
+    /// singleton and factory
     #[test]
     fn test_singleton_with_factory_integration() {
         // 创建单例工厂
@@ -44,6 +46,7 @@ mod integration_tests {
     }
 
     /// 测试：执行模型分类查询基础正确性
+    /// ：classification foundation
     #[test]
     fn test_execution_model_query() {
         assert_eq!(get_version(), "1.0.1");
@@ -65,6 +68,7 @@ mod integration_tests {
     }
 
     /// 测试代理模式与享元模式的集成
+    /// proxy pattern and flyweight
     #[test]
     fn test_proxy_with_flyweight_integration() {
         let mut flyweight_factory = FlyweightFactory::new();
@@ -85,6 +89,7 @@ mod integration_tests {
     }
 
     /// 测试责任链模式与观察者模式的集成
+    /// chain of responsibility and observer
     #[test]
     #[allow(clippy::arc_with_non_send_sync)]
     fn test_chain_with_observer_integration() {
@@ -106,6 +111,7 @@ mod integration_tests {
     }
 
     /// 测试多线程环境下的模式集成
+    /// thread environment under
     #[test]
     fn test_multithreaded_pattern_integration() {
         let singleton = Arc::new(Singleton::new());
@@ -133,6 +139,7 @@ mod integration_tests {
     }
 
     /// 测试享元模式与代理模式的性能集成
+    /// flyweight and proxy pattern performance
     #[test]
     fn test_flyweight_proxy_performance_integration() {
         let mut flyweight_factory = FlyweightFactory::new();
@@ -164,6 +171,7 @@ mod integration_tests {
     }
 
     /// 测试错误处理和恢复机制
+    /// error handling and mechanism
     #[test]
     fn test_error_handling_integration() {
         let mut flyweight_factory = FlyweightFactory::new();
@@ -183,6 +191,7 @@ mod integration_tests {
     }
 
     /// 测试内存使用优化
+    /// memory optimization
     #[test]
     fn test_memory_optimization_integration() {
         let mut flyweight_factory = FlyweightFactory::new();
@@ -210,6 +219,7 @@ mod integration_tests {
 }
 
 /// 性能基准测试
+/// Performance benchmark
 #[cfg(test)]
 mod performance_tests {
     use super::*;

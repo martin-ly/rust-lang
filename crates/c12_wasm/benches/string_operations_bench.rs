@@ -1,9 +1,10 @@
 //! # 字符串操作性能基准测试
-//!
+//! # Performance benchmark
+//! # 字符串操作performancebenchmark
 //! 测试各种字符串操作的性能
-//!
+//! performance
 //! ## 运行方式
-//!
+//! ## Run way
 //! ```bash
 //! cargo bench --bench string_operations_bench
 //! ```
@@ -12,6 +13,7 @@ use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
 use std::hint::black_box;
 
 /// 测试字符串反转性能
+/// performance
 fn bench_reverse_string(c: &mut Criterion) {
     let mut group = c.benchmark_group("reverse_string");
 
@@ -39,6 +41,7 @@ fn bench_reverse_string(c: &mut Criterion) {
 }
 
 /// 测试回文检测性能
+/// performance
 fn bench_is_palindrome(c: &mut Criterion) {
     let mut group = c.benchmark_group("is_palindrome");
 
@@ -58,6 +61,7 @@ fn bench_is_palindrome(c: &mut Criterion) {
 }
 
 /// 测试单词计数性能
+/// performance
 fn bench_count_words(c: &mut Criterion) {
     let mut group = c.benchmark_group("count_words");
 
@@ -78,6 +82,7 @@ fn bench_count_words(c: &mut Criterion) {
 }
 
 /// 测试大小写转换性能
+/// conversion performance
 fn bench_case_conversion(c: &mut Criterion) {
     let mut group = c.benchmark_group("case_conversion");
 

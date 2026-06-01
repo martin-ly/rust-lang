@@ -1,6 +1,4 @@
 //! C10 Networks 示例程序
-//!
-//! 展示基于 Rust 1.92.0 的网络编程功能
 use c10_networks::{
     NAME, VERSION,
     error::{NetworkError, NetworkResult},
@@ -26,6 +24,8 @@ async fn main() -> NetworkResult<()> {
 }
 
 /// 演示 HTTP 客户端功能
+/// demonstration HTTP functionality
+/// Demonstration of HTTP 客户端functionality
 async fn demo_http_client() -> NetworkResult<()> {
     println!("\n📡 演示 HTTP 客户端功能");
 
@@ -65,6 +65,7 @@ async fn demo_http_client() -> NetworkResult<()> {
 }
 
 /// 演示错误处理功能
+/// demonstration error handling functionality
 async fn demo_error_handling() -> NetworkResult<()> {
     println!("\n⚠️  演示错误处理功能");
 

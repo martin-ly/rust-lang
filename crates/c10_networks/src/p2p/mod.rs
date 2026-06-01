@@ -1,4 +1,5 @@
 //! P2P 模块（身份、发现、DHT、发布订阅、NAT 可达性）
+//! P2P module （、、DHT、、NAT ）
 pub mod dht;
 pub mod discovery;
 pub mod identity;
@@ -6,6 +7,7 @@ pub mod nat;
 pub mod pubsub;
 
 /// 对外暴露的最小统一接口
+/// to outside expose minimum
 pub struct P2pConfig {
     pub node_name: String,
 }

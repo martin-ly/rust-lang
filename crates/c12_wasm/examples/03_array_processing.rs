@@ -1,15 +1,11 @@
 //! # 数组处理示例
-//!
-//! 展示如何在 WASM 和 JavaScript 之间传递和处理数组数据
-//!
+//! # example
 //! ## 运行方式
-//!
+//! ## Run way
 //! ```bash
 //! # 使用 wasm-pack 构建
-//! wasm-pack build --target web
-//! ```
-//!
-//! ## JavaScript 使用示例
+//! # wasm-pack
+//! # Use wasm-pack 构建
 //!
 //! ```javascript
 //! import init, {
@@ -30,24 +26,30 @@
 use wasm_bindgen::prelude::*;
 
 /// 计算数组总和
-///
+/// and
 /// # 参数
+/// # parameter
 /// - `arr`: 整数数组
-///
+/// - `arr`:
+/// - `arr`: 整数array
 /// # 返回值
+/// # return value
 /// 返回数组中所有元素的和
+/// in all element and
 #[wasm_bindgen]
 pub fn sum_array(arr: &[i32]) -> i32 {
     arr.iter().sum()
 }
 
 /// 计算数组平均值
-///
 /// # 参数
+/// # parameter
 /// - `arr`: 浮点数数组
-///
+/// - `arr`: point
 /// # 返回值
+/// # return value
 /// 返回平均值，如果数组为空则返回 0.0
+/// ，if as 0.0
 #[wasm_bindgen]
 pub fn average(arr: &[f64]) -> f64 {
     if arr.is_empty() {
@@ -58,29 +60,34 @@ pub fn average(arr: &[f64]) -> f64 {
 }
 
 /// 查找最大值
-///
+/// maximum
 /// # 参数
+/// # parameter
 /// - `arr`: 整数数组
-///
+/// - `arr`:
+/// - `arr`: 整数array
 /// # 返回值
-/// 返回最大值，如果数组为空则返回 None (JavaScript 中为 undefined)
+/// # return value
 #[wasm_bindgen]
 pub fn find_max(arr: &[i32]) -> Option<i32> {
     arr.iter().max().copied()
 }
 
 /// 查找最小值
+/// minimum
 #[wasm_bindgen]
 pub fn find_min(arr: &[i32]) -> Option<i32> {
     arr.iter().min().copied()
 }
 
 /// 过滤正数
-///
 /// # 参数
+/// # parameter
 /// - `arr`: 整数数组
-///
+/// - `arr`:
+/// - `arr`: 整数array
 /// # 返回值
+/// # return value
 /// 返回只包含正数的新数组
 #[wasm_bindgen]
 pub fn filter_positive(arr: &[i32]) -> Vec<i32> {
@@ -94,36 +101,49 @@ pub fn filter_even(arr: &[i32]) -> Vec<i32> {
 }
 
 /// 映射：所有元素乘以2
-///
+/// ：all element 2
 /// # 参数
+/// # parameter
 /// - `arr`: 整数数组
-///
+/// - `arr`:
+/// - `arr`: 整数array
 /// # 返回值
+/// # return value
 /// 返回新数组，每个元素都是原来的2倍
+/// ，element 2
 #[wasm_bindgen]
 pub fn double_elements(arr: &[i32]) -> Vec<i32> {
     arr.iter().map(|&x| x * 2).collect()
 }
 
 /// 反转数组
-///
+/// 反转array
 /// # 参数
+/// # parameter
 /// - `arr`: 整数数组
-///
+/// - `arr`:
+/// - `arr`: 整数array
 /// # 返回值
+/// # return value
 /// 返回反转后的新数组
+/// after
 #[wasm_bindgen]
 pub fn reverse_array(arr: &[i32]) -> Vec<i32> {
     arr.iter().rev().copied().collect()
 }
 
 /// 排序数组（升序）
-///
+/// ordering （）
+/// orderingarray（升序）
 /// # 参数
+/// # parameter
 /// - `arr`: 整数数组
-///
+/// - `arr`:
+/// - `arr`: 整数array
 /// # 返回值
+/// # return value
 /// 返回排序后的新数组
+/// ordering after
 #[wasm_bindgen]
 pub fn sort_ascending(arr: &[i32]) -> Vec<i32> {
     let mut result = arr.to_vec();
@@ -132,12 +152,15 @@ pub fn sort_ascending(arr: &[i32]) -> Vec<i32> {
 }
 
 /// 去重
-///
 /// # 参数
+/// # parameter
 /// - `arr`: 整数数组
-///
+/// - `arr`:
+/// - `arr`: 整数array
 /// # 返回值
+/// # return value
 /// 返回去重后的新数组（保持原始顺序）
+/// after （order ）
 #[wasm_bindgen]
 pub fn unique(arr: &[i32]) -> Vec<i32> {
     let mut seen = std::collections::HashSet::new();

@@ -4,6 +4,7 @@
 use std::sync::atomic::{AtomicBool, AtomicIsize, AtomicUsize, Ordering};
 
 /// 进程安全的原子布尔值
+/// process
 pub struct ProcessAtomicBool {
     inner: AtomicBool,
 }
@@ -17,6 +18,7 @@ impl ProcessAtomicBool {
     }
 
     /// 获取当前值
+    /// when before
     pub fn load(&self, ordering: Ordering) -> bool {
         self.inner.load(ordering)
     }
@@ -27,11 +29,13 @@ impl ProcessAtomicBool {
     }
 
     /// 交换值
+    /// exchange
     pub fn swap(&self, value: bool, ordering: Ordering) -> bool {
         self.inner.swap(value, ordering)
     }
 
     /// 比较并交换
+    /// compare-and-swap
     pub fn compare_exchange(
         &self,
         current: bool,
@@ -43,28 +47,33 @@ impl ProcessAtomicBool {
     }
 
     /// 获取并设置
+    /// and
     pub fn fetch_and(&self, value: bool, ordering: Ordering) -> bool {
         self.inner.fetch_and(value, ordering)
     }
 
     /// 获取或设置
+    /// or
     pub fn fetch_or(&self, value: bool, ordering: Ordering) -> bool {
         self.inner.fetch_or(value, ordering)
     }
 
     /// 获取异或设置
+    /// or
     pub fn fetch_xor(&self, value: bool, ordering: Ordering) -> bool {
         self.inner.fetch_xor(value, ordering)
     }
 }
 
 /// 进程安全的原子无符号整数
+/// process symbol
 pub struct ProcessAtomicUsize {
     inner: AtomicUsize,
 }
 
 impl ProcessAtomicUsize {
     /// 创建新的原子无符号整数
+    /// symbol
     pub fn new(value: usize) -> Self {
         Self {
             inner: AtomicUsize::new(value),
@@ -72,6 +81,7 @@ impl ProcessAtomicUsize {
     }
 
     /// 获取当前值
+    /// when before
     pub fn load(&self, ordering: Ordering) -> usize {
         self.inner.load(ordering)
     }
@@ -82,11 +92,13 @@ impl ProcessAtomicUsize {
     }
 
     /// 交换值
+    /// exchange
     pub fn swap(&self, value: usize, ordering: Ordering) -> usize {
         self.inner.swap(value, ordering)
     }
 
     /// 比较并交换
+    /// compare-and-swap
     pub fn compare_exchange(
         &self,
         current: usize,
@@ -98,48 +110,57 @@ impl ProcessAtomicUsize {
     }
 
     /// 获取并添加
+    /// and
     pub fn fetch_add(&self, value: usize, ordering: Ordering) -> usize {
         self.inner.fetch_add(value, ordering)
     }
 
     /// 获取并减去
+    /// and
     pub fn fetch_sub(&self, value: usize, ordering: Ordering) -> usize {
         self.inner.fetch_sub(value, ordering)
     }
 
     /// 获取并位与
+    /// and and
     pub fn fetch_and(&self, value: usize, ordering: Ordering) -> usize {
         self.inner.fetch_and(value, ordering)
     }
 
     /// 获取并位或
+    /// and or
     pub fn fetch_or(&self, value: usize, ordering: Ordering) -> usize {
         self.inner.fetch_or(value, ordering)
     }
 
     /// 获取并位异或
+    /// and or
     pub fn fetch_xor(&self, value: usize, ordering: Ordering) -> usize {
         self.inner.fetch_xor(value, ordering)
     }
 
     /// 获取并取最大值
+    /// and maximum
     pub fn fetch_max(&self, value: usize, ordering: Ordering) -> usize {
         self.inner.fetch_max(value, ordering)
     }
 
     /// 获取并取最小值
+    /// and minimum
     pub fn fetch_min(&self, value: usize, ordering: Ordering) -> usize {
         self.inner.fetch_min(value, ordering)
     }
 }
 
 /// 进程安全的原子有符号整数
+/// process symbol
 pub struct ProcessAtomicIsize {
     inner: AtomicIsize,
 }
 
 impl ProcessAtomicIsize {
     /// 创建新的原子有符号整数
+    /// symbol
     pub fn new(value: isize) -> Self {
         Self {
             inner: AtomicIsize::new(value),
@@ -147,6 +168,7 @@ impl ProcessAtomicIsize {
     }
 
     /// 获取当前值
+    /// when before
     pub fn load(&self, ordering: Ordering) -> isize {
         self.inner.load(ordering)
     }
@@ -157,11 +179,13 @@ impl ProcessAtomicIsize {
     }
 
     /// 交换值
+    /// exchange
     pub fn swap(&self, value: isize, ordering: Ordering) -> isize {
         self.inner.swap(value, ordering)
     }
 
     /// 比较并交换
+    /// compare-and-swap
     pub fn compare_exchange(
         &self,
         current: isize,
@@ -173,36 +197,43 @@ impl ProcessAtomicIsize {
     }
 
     /// 获取并添加
+    /// and
     pub fn fetch_add(&self, value: isize, ordering: Ordering) -> isize {
         self.inner.fetch_add(value, ordering)
     }
 
     /// 获取并减去
+    /// and
     pub fn fetch_sub(&self, value: isize, ordering: Ordering) -> isize {
         self.inner.fetch_sub(value, ordering)
     }
 
     /// 获取并位与
+    /// and and
     pub fn fetch_and(&self, value: isize, ordering: Ordering) -> isize {
         self.inner.fetch_and(value, ordering)
     }
 
     /// 获取并位或
+    /// and or
     pub fn fetch_or(&self, value: isize, ordering: Ordering) -> isize {
         self.inner.fetch_or(value, ordering)
     }
 
     /// 获取并位异或
+    /// and or
     pub fn fetch_xor(&self, value: isize, ordering: Ordering) -> isize {
         self.inner.fetch_xor(value, ordering)
     }
 
     /// 获取并取最大值
+    /// and maximum
     pub fn fetch_max(&self, value: isize, ordering: Ordering) -> isize {
         self.inner.fetch_max(value, ordering)
     }
 
     /// 获取并取最小值
+    /// and minimum
     pub fn fetch_min(&self, value: isize, ordering: Ordering) -> isize {
         self.inner.fetch_min(value, ordering)
     }

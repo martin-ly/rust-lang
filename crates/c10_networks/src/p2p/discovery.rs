@@ -1,4 +1,5 @@
 //! 节点发现抽象（预留接口）
+//! node （）
 #[derive(Clone, Debug)]
 pub struct PeerInfo {
     pub id_hex: String,

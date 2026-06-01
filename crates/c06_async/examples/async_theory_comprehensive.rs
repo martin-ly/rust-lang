@@ -1,10 +1,9 @@
 //! 异步理论综合示例
-//!
+//! async theory synthesize example
 //! 运行所有理论分析模块的完整演示
-//!
+//! Run all theory analyze module complete demonstration
 //! 用法:
-//! ```bash
-//! cargo run --example async_theory_comprehensive
+//! :
 //! ```
 use c06_async::{
     actor_reactor_patterns, async_recursion_analysis, async_semantics_theory, csp_model_comparison,

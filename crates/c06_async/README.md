@@ -153,14 +153,14 @@
 - **📐 [多维矩阵对比分析](../../docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)** (NEW!)
   - **5大技术领域全面对比** | Runtime/Future/并发模式/性能
   - **15+ 性能对比表格** | 实测数据（100万次操作）
-  - **Tokio vs async-std vs Smol** | 详细Runtime对比
+  - **Tokio vs Smol** | 详细Runtime对比
   - **技术选型决策矩阵** | 按场景精准推荐
   - **适合**: 技术选型、性能优化、生产部署
 
 - **🗺️ [Rust 1.93.0 综合思维导图](./docs/RUST_192_COMPREHENSIVE_MINDMAP.md)** (NEW! 2025-12-11)
   - **ASCII艺术图表** | Future/Runtime/并发原语完整体系
   - **async/await机制可视化** | Waker/Pin/Poll详解
-  - **Runtime对比决策树** | Tokio/async-std/Smol/Glommio选择
+  - **Runtime对比决策树** | Tokio/Smol/Glommio选择
   - **3级学习路径** | 初学者/进阶/专家(2-10周)
   - **问题诊断树** | 异步错误快速定位
   - **适合**: 快速overview、复习、知识结构梳理
@@ -180,7 +180,7 @@
 **[Rust 1.93.0 异步编程实战示例集](docs/RUST_192_ASYNC_PRACTICAL_EXAMPLES.md)** ⭐⭐⭐⭐⭐
 
 - **Rust 1.93.0 核心特性**: async trait、async closure、impl Trait in associated types
-- **三大运行时实战**: Tokio高性能服务器、async-std文件处理、Smol任务调度
+- **三大运行时实战**: Tokio高性能服务器、smol任务调度
 - **并发模式**: 结构化并发(JoinSet)、Select多路选择、超时和取消
 - **800+ 行可运行代码**: 详细注释、生产级质量
 
@@ -201,7 +201,7 @@
 
 - **Tokio**: 生产级异步运行时，功能丰富
 - **Smol**: 轻量级异步运行时，性能优秀
-- **async-std**: 标准库风格的异步运行时
+- **smol**: 轻量异步运行时
 - **Glommio**: 基于 io_uring 的极致性能运行时 (Linux 专用) ⭐ **NEW!**
 - **混合模式**: 多运行时协同工作
 
@@ -967,7 +967,7 @@ kubectl get pods -n rust-async-190
   - 选型决策指南
 
 - **[Glommio 运行时对比分析 2025](docs/tier_03_references/06_runtime_comparison_glommio_2025.md)** ⭐⭐⭐ **NEW! 2025-10-30**
-  - Glommio vs Tokio vs Smol vs async-std 全面对比
+  - Glommio vs Tokio vs Smol 全面对比
   - Thread-per-core 架构深度解析
   - io_uring 性能优势分析
   - 详细的性能基准测试数据

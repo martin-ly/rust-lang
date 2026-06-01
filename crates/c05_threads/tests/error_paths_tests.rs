@@ -5,6 +5,7 @@ use std::sync::{Arc, Mutex};
 use std::thread;
 
 /// 测试错误输入情况
+/// situation
 #[test]
 fn test_error_inputs() {
     // 测试无效线程配置
@@ -17,6 +18,7 @@ fn test_error_inputs() {
 }
 
 /// 测试错误状态情况
+/// state situation
 #[test]
 fn test_error_states() {
     // 测试线程创建失败（模拟）
@@ -33,6 +35,7 @@ fn test_error_states() {
 }
 
 /// 测试异常情况
+/// situation
 #[test]
 fn test_exception_cases() {
     // 测试线程panic情况（模拟）
@@ -45,6 +48,7 @@ fn test_exception_cases() {
 }
 
 /// 测试资源耗尽情况
+/// situation
 #[test]
 fn test_resource_exhaustion() {
     // 测试大量线程创建（模拟）
@@ -65,6 +69,7 @@ fn test_resource_exhaustion() {
 }
 
 /// 测试并发安全
+/// concurrency
 #[test]
 fn test_concurrent_safety() {
     let shared = Arc::new(Mutex::new(0));
@@ -89,6 +94,7 @@ fn test_concurrent_safety() {
 }
 
 /// 测试线程创建失败
+/// thread
 #[test]
 fn test_thread_creation_failure() {
     use std::thread;
@@ -100,7 +106,6 @@ fn test_thread_creation_failure() {
     assert_eq!(result, 42);
 }
 
-/// 测试线程panic处理
 #[test]
 fn test_thread_panic_handling() {
     use std::thread;

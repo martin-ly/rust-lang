@@ -1,5 +1,6 @@
-//! 将 `crossbeam_channel::Receiver<T>` 适配为可迭代流。
+//! will `crossbeam_channel::Receiver<T>` 适配as可Iteratestream。
 //! 注意：这是同步阻塞迭代器，适用于简单消费场景。
+//! ：synchronous ，simple scenario 。
 use crossbeam_channel::Receiver;
 use std::thread::sleep;
 use std::time::{Duration, Instant};
@@ -14,11 +15,13 @@ impl<T> ReceiverStream<T> {
     }
 
     /// 阻塞等待下一项（可能永远阻塞）
+    /// etc. under （may ）
     pub fn next_blocking(&self) -> Option<T> {
         self.receiver.recv().ok()
     }
 
     /// 在给定超时时间内尝试获取下一项，超时返回 None
+    /// in time inside under ， None
     pub fn next_once_with_timeout(&self, timeout: Duration) -> Option<T> {
         self.receiver.recv_timeout(timeout).ok()
     }
@@ -29,6 +32,7 @@ impl<T> ReceiverStream<T> {
     }
 
     /// 消费 self，返回阻塞迭代器
+    /// self，
     #[allow(clippy::should_implement_trait)]
     pub fn into_iter(self) -> ReceiverIntoIter<T> {
         ReceiverIntoIter {
@@ -37,6 +41,7 @@ impl<T> ReceiverStream<T> {
     }
 
     /// 轻量 map 适配器：返回惰性迭代器
+    /// map adapter ：
     pub fn map<U, F>(self, f: F) -> impl Iterator<Item = U>
     where
         F: FnMut(T) -> U,
@@ -45,6 +50,7 @@ impl<T> ReceiverStream<T> {
     }
 
     /// 轻量 filter 适配器：返回惰性迭代器
+    /// filter adapter ：
     pub fn filter<F>(self, mut pred: F) -> impl Iterator<Item = T>
     where
         F: FnMut(&T) -> bool,
@@ -52,7 +58,6 @@ impl<T> ReceiverStream<T> {
         self.into_iter().filter(move |item| pred(item))
     }
 
-    /// 最多获取 batch_size 条，使用 per_item_timeout 作为单次取元素超时
     pub fn next_batch_max(&self, batch_size: usize, per_item_timeout: Duration) -> Vec<T> {
         let mut out = Vec::with_capacity(batch_size);
         for _ in 0..batch_size {
@@ -66,6 +71,7 @@ impl<T> ReceiverStream<T> {
     }
 
     /// 在总超时 total_timeout 内持续消费，单次取元素超时 per_item_timeout
+    /// in total_timeout inside ，element per_item_timeout
     pub fn take_until_timeout(
         &self,
         total_timeout: Duration,
@@ -84,6 +90,7 @@ impl<T> ReceiverStream<T> {
     }
 
     /// 以近似速率限制生成迭代器（每个元素之间最小间隔 min_interval）
+    /// （element 's minimum min_interval）
     pub fn rate_limit_iter(self, min_interval: Duration) -> impl Iterator<Item = T> {
         let mut last = Instant::now();
         self.into_iter().inspect(move |_item| {
@@ -96,6 +103,7 @@ impl<T> ReceiverStream<T> {
     }
 
     /// 在最大等待窗口 max_wait 内凑批，至少 1 条，最多 batch_size 条
+    /// in maximum etc. max_wait inside ， 1 ，at most batch_size
     pub fn next_batch_with_max_wait(&self, batch_size: usize, max_wait: Duration) -> Vec<T> {
         let mut out = Vec::with_capacity(batch_size);
         let start = Instant::now();

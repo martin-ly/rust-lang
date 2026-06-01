@@ -1,7 +1,7 @@
-//! 控制流与函数模块边界情况测试套件 / Control Flow and Functions Module Edge Cases Test Suite
 use c03_control_fn::*;
 
 /// 测试空循环边界情况
+/// circulation edge situation
 #[test]
 fn test_empty_loops() {
     // 空循环测试
@@ -22,6 +22,7 @@ fn test_empty_loops() {
 }
 
 /// 测试单次迭代边界情况
+/// edge situation
 #[test]
 fn test_single_iteration() {
     // 单次迭代循环
@@ -43,6 +44,7 @@ fn test_single_iteration() {
 }
 
 /// 测试大值循环边界情况
+/// circulation edge situation
 #[test]
 fn test_large_value_loops() {
     // 大值循环
@@ -59,6 +61,7 @@ fn test_large_value_loops() {
 }
 
 /// 测试边界分支情况
+/// edge situation
 #[test]
 fn test_boundary_branches() {
     // 测试边界值分支
@@ -102,6 +105,7 @@ fn test_error_paths() {
 }
 
 /// 测试资源耗尽情况
+/// situation
 #[test]
 fn test_resource_exhaustion() {
     // 测试大量循环
@@ -120,6 +124,7 @@ fn test_resource_exhaustion() {
 }
 
 /// 测试边界值组合
+/// edge combination
 #[test]
 fn test_boundary_value_combinations() {
     // 测试最小值和最大值

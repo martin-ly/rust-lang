@@ -1,17 +1,20 @@
 #![allow(clippy::type_complexity)]
 #![allow(clippy::empty_line_after_doc_comments)]
 //! Rust 异步编程综合模式示例 2025
-//! Comprehensive Async Patterns Example 2025
-//!
+//! Rust async synthesize example 2025
 //! 本示例展示:
+//! this example :
 //! 1. Actor、Reactor、CSP 三大模式对比
+//! 1. Actor、Reactor、CSP 三大模式to比
 //! 2. 异步设计模式实战
-//! 3. Tokio 与 Smol 混合使用
+//! 2. async design
+//! 3. Tokio and Smol 混合Use
 //! 4. 生产级架构模式
+//! 4. architecture
 //! 5. 性能优化技巧
-//!
+//! 5. performance optimization tip
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example comprehensive_async_patterns_2025
 //! ```
 use std::collections::HashMap;
@@ -48,12 +51,14 @@ mod actor_pattern {
     }
 
     /// Actor 上下文
+    /// Actor on under
     #[allow(dead_code)]
     pub struct ActorContext<A: Actor> {
         pub addr: Option<ActorAddress<A>>,
     }
 
     /// Actor 地址（用于发送消息）
+    /// Actor （）
     #[derive(Clone)]
     #[allow(dead_code)]
     pub struct ActorAddress<A: Actor> {
@@ -61,6 +66,7 @@ mod actor_pattern {
     }
 
     /// 消息信封（包含响应通道）
+    /// （channel ）
     #[allow(dead_code)]
     struct ActorEnvelope<A: Actor> {
         msg: A::Message,
@@ -71,6 +77,7 @@ mod actor_pattern {
     #[allow(unused_variables)]
     impl<A: Actor> ActorAddress<A> {
         /// 发送消息并等待响应
+        /// and etc.
         pub async fn send(
             &self,
             msg: A::Message,
@@ -87,6 +94,7 @@ mod actor_pattern {
         }
 
         /// 发送消息（不等待响应）
+        /// （etc. ）
         pub fn do_send(&self, msg: A::Message) {
             let (tx, _) = oneshot::channel();
             let envelope = ActorEnvelope {
@@ -102,6 +110,7 @@ mod actor_pattern {
 
     impl ActorSystem {
         /// 启动一个 Actor
+        /// Actor
         pub fn spawn<A: Actor>(mut actor: A) -> ActorAddress<A> {
             let (tx, mut rx) = mpsc::unbounded_channel::<ActorEnvelope<A>>();
 
@@ -243,6 +252,7 @@ mod reactor_pattern {
     use super::*;
 
     /// 事件类型
+    /// type
     #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
     #[allow(dead_code)]
     pub enum EventType {
@@ -263,6 +273,7 @@ mod reactor_pattern {
     }
 
     /// 事件处理器 trait
+    /// trait
     #[async_trait::async_trait]
     pub trait EventHandler: Send + Sync {
         async fn handle(&self, event: Event) -> Result<(), Box<dyn std::error::Error>>;
@@ -306,6 +317,7 @@ mod reactor_pattern {
         }
 
         /// 启动事件循环
+        /// circulation
         pub async fn run(&self) {
             {
                 let mut running = self.running.write().await;
@@ -358,6 +370,7 @@ mod reactor_pattern {
         }
 
         /// 停止事件循环
+        /// circulation
         pub async fn stop(&self) {
             let mut running = self.running.write().await;
             *running = false;
@@ -503,6 +516,7 @@ mod csp_pattern {
     use super::*;
 
     /// CSP 风格的生产者-消费者
+    /// CSP -
     pub async fn producer_consumer_demo() {
         println!("\n╔════════════════════════════════════════╗");
         println!("║    CSP 模式: 生产者-消费者             ║");
@@ -549,7 +563,7 @@ mod csp_pattern {
         println!("\n✓ 生产者-消费者演示完成，处理 {} 个项目", count);
     }
 
-    /// CSP 风格的 Pipeline
+    /// CSP 风格 Pipeline
     pub async fn pipeline_demo() {
         println!("\n╔════════════════════════════════════════╗");
         println!("║        CSP 模式: Pipeline              ║");
@@ -597,6 +611,7 @@ mod csp_pattern {
     }
 
     /// CSP 风格的 Fan-out/Fan-in
+    /// CSP 风格 Fan-out/Fan-in
     #[allow(dead_code)]
     pub async fn fan_out_in_demo() {
         println!("\n╔════════════════════════════════════════╗");
@@ -652,6 +667,7 @@ mod design_patterns {
     use super::*;
 
     /// 重试策略模式
+    /// strategy
     pub struct RetryStrategy {
         max_attempts: usize,
         base_delay: Duration,
@@ -666,6 +682,7 @@ mod design_patterns {
         }
 
         /// 指数退避重试
+        /// index
         pub async fn execute<F, T, E>(&self, mut operation: F) -> Result<T, E>
         where
             F: FnMut() -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<T, E>> + Send>>,
@@ -857,6 +874,8 @@ mod production_patterns {
     use super::*;
 
     /// 服务健康检查
+    /// health check
+    /// 服务health check
     pub struct HealthChecker {
         checks: Vec<Box<dyn HealthCheck>>,
     }
@@ -890,6 +909,7 @@ mod production_patterns {
     }
 
     /// 数据库健康检查
+    /// database health check
     struct DatabaseHealthCheck;
 
     #[async_trait::async_trait]
@@ -905,6 +925,8 @@ mod production_patterns {
     }
 
     /// 缓存健康检查
+    /// health check
+    /// 缓存health check
     struct CacheHealthCheck;
 
     #[async_trait::async_trait]

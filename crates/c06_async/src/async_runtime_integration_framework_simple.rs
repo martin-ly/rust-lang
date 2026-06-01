@@ -1,10 +1,16 @@
 //! 简化的异步运行时集成框架
+//! async runtime framework
 //!
 //! 本模块提供了一个简化的异步运行时集成框架，支持：
+//! This module provides async runtime framework ，：
 //! - 多运行时组合和切换
+//! - runtime combination and switching
 //! - 运行时适配器模式
+//! - runtime adapter
 //! - 异步同步转换机制
+//! - async synchronous conversion mechanism
 //! - 聚合组合设计模式
+//! - aggregation combination design
 use anyhow::Result;
 use async_trait::async_trait;
 use futures::future::try_join_all;
@@ -17,6 +23,7 @@ use tokio::task;
 use tokio::time::sleep;
 
 /// 异步运行时类型枚举
+/// async runtime type enum
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum AsyncRuntimeType {
     Std,
@@ -26,6 +33,7 @@ pub enum AsyncRuntimeType {
 }
 
 /// 运行时配置
+/// runtime
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RuntimeConfig {
     pub runtime_type: AsyncRuntimeType,
@@ -46,6 +54,7 @@ impl Default for RuntimeConfig {
 }
 
 /// 运行时性能指标
+/// runtime performance indicator
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RuntimeMetrics {
     pub task_count: u64,
@@ -66,6 +75,7 @@ impl Default for RuntimeMetrics {
 }
 
 /// 异步任务抽象
+/// async task
 #[async_trait]
 pub trait AsyncTask: Send + Sync {
     async fn execute(&self) -> Result<String>;
@@ -75,6 +85,7 @@ pub trait AsyncTask: Send + Sync {
 }
 
 /// 任务优先级
+/// task
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
 pub enum TaskPriority {
     Low = 1,
@@ -84,6 +95,7 @@ pub enum TaskPriority {
 }
 
 /// 简化的异步运行时集成框架
+/// async runtime framework
 pub struct SimpleAsyncRuntimeFramework {
     config: RuntimeConfig,
     semaphore: Arc<Semaphore>,
@@ -100,6 +112,7 @@ impl SimpleAsyncRuntimeFramework {
     }
 
     /// 执行单个任务
+    /// task
     pub async fn execute_task(&self, task: Box<dyn AsyncTask>) -> Result<String> {
         let _permit = self.semaphore.acquire().await?;
         let start = std::time::Instant::now();
@@ -139,6 +152,7 @@ impl SimpleAsyncRuntimeFramework {
     }
 
     /// 执行批量任务
+    /// task
     pub async fn execute_batch(&self, tasks: Vec<Box<dyn AsyncTask>>) -> Result<Vec<String>> {
         let mut sorted_tasks = tasks;
         sorted_tasks.sort_by_key(|b| std::cmp::Reverse(b.get_priority()));
@@ -153,11 +167,13 @@ impl SimpleAsyncRuntimeFramework {
     }
 
     /// 获取性能指标
+    /// performance indicator
     pub async fn get_metrics(&self) -> RuntimeMetrics {
         self.metrics.lock().await.clone()
     }
 
     /// 健康检查
+    /// health check
     pub async fn health_check(&self) -> Result<bool> {
         let health_task = HealthCheckTask::new(self.config.runtime_type);
         let result = self.execute_task(Box::new(health_task)).await;
@@ -166,6 +182,7 @@ impl SimpleAsyncRuntimeFramework {
 }
 
 /// 健康检查任务
+/// health check task
 pub struct HealthCheckTask {
     runtime_type: AsyncRuntimeType,
 }
@@ -197,6 +214,7 @@ impl AsyncTask for HealthCheckTask {
 }
 
 /// 示例任务实现
+/// example task
 pub struct ExampleTask {
     name: String,
     priority: TaskPriority,
@@ -234,6 +252,7 @@ impl AsyncTask for ExampleTask {
 }
 
 /// 异步同步转换服务
+/// async synchronous conversion
 pub struct AsyncSyncConversionService {
     thread_pool: Arc<Semaphore>,
 }
@@ -246,6 +265,7 @@ impl AsyncSyncConversionService {
     }
 
     /// 异步到同步转换
+    /// async to synchronous conversion
     pub async fn async_to_sync<T, F>(&self, async_operation: F) -> Result<T>
     where
         F: std::future::Future<Output = Result<T>> + Send + 'static,
@@ -256,6 +276,7 @@ impl AsyncSyncConversionService {
     }
 
     /// 同步到异步转换
+    /// synchronous to async conversion
     pub async fn sync_to_async<F, T>(&self, sync_operation: F) -> Result<T>
     where
         F: FnOnce() -> Result<T> + Send + 'static,
@@ -266,6 +287,7 @@ impl AsyncSyncConversionService {
     }
 
     /// 混合转换模式
+    /// conversion
     pub async fn hybrid_conversion(&self) -> Result<(String, String)> {
         // 异步操作
         let async_result = self
@@ -288,6 +310,7 @@ impl AsyncSyncConversionService {
 }
 
 /// 聚合组合设计模式服务
+/// aggregation combination design
 pub struct AggregationCompositionService {
     component_registry: Arc<RwLock<HashMap<String, Box<dyn AsyncComponent + Send + Sync>>>>,
 }
@@ -324,6 +347,7 @@ impl AggregationCompositionService {
     }
 
     /// 顺序聚合
+    /// order aggregation
     pub async fn sequential_aggregation(
         &self,
         component_names: Vec<String>,
@@ -345,6 +369,7 @@ impl AggregationCompositionService {
     }
 
     /// 并行聚合
+    /// parallelism aggregation
     pub async fn parallel_aggregation(
         &self,
         component_names: Vec<String>,
@@ -365,6 +390,7 @@ impl AggregationCompositionService {
 }
 
 /// 示例组件实现
+/// example
 pub struct DataProcessingComponent {
     name: String,
     processing_delay: Duration,
@@ -392,6 +418,7 @@ impl AsyncComponent for DataProcessingComponent {
 }
 
 /// 综合演示函数
+/// synthesize demonstration function
 pub async fn demonstrate_simple_async_runtime_framework() -> Result<()> {
     println!("🚀 简化异步运行时集成框架演示");
     println!("================================================");

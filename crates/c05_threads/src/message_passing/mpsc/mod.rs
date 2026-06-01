@@ -1,7 +1,7 @@
 //! 多生产者-单/多消费者（MPSC/MPMC）通道：`crossbeam_channel`
+//! 多生产者-单/多消费者（MPSC/MPMC）channel：`crossbeam_channel`
 //! 用法：
-//! ```
-//! use c05_threads::message_passing::mpsc::{unbounded, Receiver, Sender};
+//! ：
 //! let (tx, rx): (Sender<i32>, Receiver<i32>) = unbounded();
 //! tx.send(7).unwrap();
 //! assert_eq!(rx.recv().unwrap(), 7);

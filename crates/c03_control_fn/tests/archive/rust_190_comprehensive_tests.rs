@@ -1,15 +1,15 @@
 //! Rust 1.90 综合特性测试
-//!
-//! 本测试文件包含 Rust 1.90 版本所有新特性的综合测试：
-//! - 异步Drop测试
+//! Rust 1.90 synthesize feature
 //! - 异步生成器测试
-//! - Polonius借用检查器测试
+//! - async
 //! - 下一代特质求解器测试
+//! - under trait
 //! - 并行前端编译测试
+//! - parallelism frontend
 //! - 形式化验证工具链测试
-//!
+//! - toolchain
 //! 运行方式：
-//! ```bash
+//! Run way ：
 //! cargo test rust_190_comprehensive_tests
 //! ```
 use c03_control_fn::{
@@ -24,7 +24,6 @@ use c03_control_fn::async_control_flow_190::AsyncResourceManager;
 use std::time::Duration;
 use tokio::time::sleep;
 
-/// 测试异步Drop功能
 #[tokio::test]
 async fn test_async_drop() {
     let mut conn = DatabaseConnection::new("1".to_string(), "test://localhost".to_string());
@@ -44,6 +43,7 @@ async fn test_async_drop() {
 }
 
 /// 测试异步生成器功能
+/// async functionality
 #[tokio::test]
 async fn test_async_generator() {
     let mut stream = AsyncDataStream::new(vec![1, 2, 3, 4, 5]);
@@ -57,6 +57,7 @@ async fn test_async_generator() {
 }
 
 /// 测试改进的借用检查器
+/// borrowing
 #[test]
 fn test_improved_borrow_checker() {
     // 分别创建实例以避免借用冲突
@@ -76,6 +77,7 @@ fn test_improved_borrow_checker() {
 }
 
 /// 测试下一代特质求解器
+/// under trait
 #[test]
 fn test_next_generation_trait_solver() {
     let demo = ParallelCompilationDemo::new(100);
@@ -90,6 +92,7 @@ fn test_next_generation_trait_solver() {
 }
 
 /// 测试并行前端编译
+/// parallelism frontend
 #[tokio::test]
 async fn test_parallel_frontend_compilation() {
     let demo = ParallelCompilationDemo::new(1000);
@@ -108,6 +111,7 @@ async fn test_parallel_frontend_compilation() {
 }
 
 /// 测试改进的对齐检查
+/// to
 #[test]
 fn test_improved_alignment_check() {
     let demo = AlignmentDemo::new();
@@ -119,6 +123,7 @@ fn test_improved_alignment_check() {
 }
 
 /// 测试枚举判别值指定
+/// enum
 #[test]
 fn test_enum_discriminant_specification() {
     let status = Status::Running;
@@ -132,6 +137,7 @@ fn test_enum_discriminant_specification() {
 }
 
 /// 测试生命周期转换改进
+/// lifetime conversion
 #[test]
 fn test_lifetime_conversion_improvement() {
     let demo = LifetimeDemo::new("test data");
@@ -140,6 +146,7 @@ fn test_lifetime_conversion_improvement() {
 }
 
 /// 测试异步状态机
+/// async state machine
 #[tokio::test]
 async fn test_async_state_machine() {
     let sm = AsyncStateMachine190::new(3);
@@ -158,6 +165,7 @@ async fn test_async_state_machine() {
 }
 
 /// 测试异步资源管理器
+/// async
 #[tokio::test]
 async fn test_async_resource_manager() {
     let rm = AsyncResourceManager::new();
@@ -174,6 +182,7 @@ async fn test_async_resource_manager() {
 }
 
 /// 测试异步错误处理
+/// async error handling
 #[tokio::test]
 async fn test_async_error_handler() {
     let eh = AsyncErrorHandler190::new(2);
@@ -193,6 +202,7 @@ async fn test_async_error_handler() {
 }
 
 /// 测试异步并发控制
+/// async concurrency
 #[tokio::test]
 async fn test_async_concurrency_controller() {
     let cc = AsyncConcurrencyController::new(2);
@@ -207,6 +217,7 @@ async fn test_async_concurrency_controller() {
 }
 
 /// 测试性能基准测试工具
+/// Performance benchmark tool
 #[tokio::test]
 async fn test_performance_benchmark() {
     let benchmark = PerformanceBenchmark::new();
@@ -221,7 +232,6 @@ async fn test_performance_benchmark() {
     assert!(results.iter().any(|r| r.test_name == "test"));
 }
 
-/// 测试Prusti程序验证
 #[test]
 fn test_prusti_verification() {
     let mut demo = PrustiVerificationDemo::new(5);
@@ -243,6 +253,7 @@ fn test_prusti_verification() {
 }
 
 /// 测试SMACK模型检查
+/// SMACK
 #[test]
 fn test_smack_model_checking() {
     let mut demo = SmackModelCheckingDemo::new(0);
@@ -260,7 +271,6 @@ fn test_smack_model_checking() {
     assert!(!demo.is_reachable(3));
 }
 
-/// 测试Creusot形式化规约
 #[test]
 fn test_creusot_specification() {
     let mut demo = CreusotSpecificationDemo::new(10);
@@ -275,7 +285,6 @@ fn test_creusot_specification() {
     assert_eq!(demo.get_status(), (2, 10));
 }
 
-/// 测试Kani模型检查
 #[test]
 fn test_kani_model_checking() {
     let mut demo = KaniModelCheckingDemo::new(10);
@@ -293,6 +302,7 @@ fn test_kani_model_checking() {
 }
 
 /// 测试MIRAI静态分析
+/// MIRAIanalyze
 #[test]
 fn test_mirai_static_analysis() {
     let mut demo = MiraiStaticAnalysisDemo::new();
@@ -314,6 +324,7 @@ fn test_mirai_static_analysis() {
 }
 
 /// 综合测试：所有Rust 1.90特性
+/// synthesize ：all Rust 1.90feature
 #[tokio::test]
 async fn test_comprehensive_rust_190_features() {
     // 测试基础特性
@@ -330,6 +341,7 @@ async fn test_comprehensive_rust_190_features() {
 }
 
 /// 压力测试：大量并发操作
+/// stress test ：concurrency
 #[tokio::test]
 async fn test_stress_concurrent_operations() {
     let sm = AsyncStateMachine190::new(10);
@@ -362,6 +374,7 @@ async fn test_stress_concurrent_operations() {
 }
 
 /// 内存安全测试：确保没有内存泄漏
+/// memory safety ：memory leak
 #[tokio::test]
 async fn test_memory_safety() {
     // 创建大量资源
@@ -382,6 +395,7 @@ async fn test_memory_safety() {
 }
 
 /// 错误处理测试：确保错误处理正确
+/// error handling ：error handling
 #[tokio::test]
 async fn test_error_handling() {
     let mut demo = PrustiVerificationDemo::new(3); // 增加容量以避免panic
@@ -401,6 +415,7 @@ async fn test_error_handling() {
 }
 
 /// 性能测试：确保性能在合理范围内
+/// performance test ：performance in scope inside
 #[tokio::test]
 async fn test_performance_characteristics() {
     let benchmark = PerformanceBenchmark::new();

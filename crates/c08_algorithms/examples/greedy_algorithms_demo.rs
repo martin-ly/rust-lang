@@ -1,12 +1,15 @@
 //! 贪心算法示例
-//!
+//! greedy algorithm example
 //! 本示例展示C08算法模块的贪心算法：
+//! this example C08algorithm module greedy algorithm ：
 //! - 区间调度
+//! - interval
 //! - 零钱兑换
+//! -
 //! - 活动选择
-//!
+//! -
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example greedy_algorithms_demo
 //! ```
 fn main() {
@@ -43,6 +46,7 @@ fn main() {
 }
 
 /// 区间调度（贪心算法）
+/// interval （greedy algorithm ）
 fn interval_scheduling(intervals: &[(i32, i32)]) -> Vec<(i32, i32)> {
     let mut sorted = intervals.to_vec();
     sorted.sort_by_key(|&(start, end)| (end, start)); // 按结束时间排序
@@ -61,6 +65,7 @@ fn interval_scheduling(intervals: &[(i32, i32)]) -> Vec<(i32, i32)> {
 }
 
 /// 零钱兑换（贪心版本，适用于标准硬币系统）
+/// （this ，standard system ）
 fn coin_change_greedy(coins: &[usize], amount: usize) -> Option<Vec<usize>> {
     let mut sorted_coins = coins.to_vec();
     sorted_coins.sort_by(|a, b| b.cmp(a)); // 降序排列

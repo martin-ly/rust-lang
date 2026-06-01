@@ -26,6 +26,7 @@ use std::{
 };
 
 /// 数据结构实现示例
+/// data structure example
 pub mod data_structures {
     use super::*;
     use std::hash::Hash;
@@ -62,6 +63,7 @@ pub mod data_structures {
     type GenPhantomData<T> = PhantomData<T>;
 
     /// 泛型环形缓冲区 - 展示常量泛型推断
+    /// generic buffering - constant generic infer
     #[derive(Debug, Clone)]
     pub struct RingBuffer<T, const CAPACITY: usize> {
         buffer: [GenOption<T>; CAPACITY],
@@ -78,6 +80,7 @@ pub mod data_structures {
 
     impl<T, const CAPACITY: usize> RingBuffer<T, CAPACITY> {
         /// 创建新的环形缓冲区
+        /// buffering
         pub fn new() -> Self {
             Self {
                 buffer: [(); CAPACITY].map(|_| None),
@@ -88,6 +91,7 @@ pub mod data_structures {
         }
 
         /// 添加元素到缓冲区
+        /// element to buffering
         pub fn push(&mut self, item: T) -> GenResult<(), T> {
             if self.count >= CAPACITY {
                 return Err(item);
@@ -100,6 +104,7 @@ pub mod data_structures {
         }
 
         /// 从缓冲区移除元素
+        /// from buffering element
         pub fn pop(&mut self) -> GenOption<T> {
             if self.count == 0 {
                 return None;
@@ -112,26 +117,31 @@ pub mod data_structures {
         }
 
         /// 获取缓冲区当前大小
+        /// buffering when before
         pub fn len(&self) -> usize {
             self.count
         }
 
         /// 检查缓冲区是否为空
+        /// buffering as
         pub fn is_empty(&self) -> bool {
             self.count == 0
         }
 
         /// 检查缓冲区是否已满
+        /// buffering
         pub fn is_full(&self) -> bool {
             self.count >= CAPACITY
         }
 
         /// 获取缓冲区容量
+        /// buffering
         pub fn capacity(&self) -> usize {
             CAPACITY
         }
 
         /// 清空缓冲区
+        /// buffering
         pub fn clear(&mut self) {
             self.buffer = [(); CAPACITY].map(|_| None);
             self.head = 0;
@@ -141,6 +151,7 @@ pub mod data_structures {
     }
 
     /// 泛型LRU缓存 - 展示复杂泛型使用
+    /// generic LRU - complex generic
     #[derive(Debug, Clone)]
     pub struct LRUCache<K, V, const CAPACITY: usize>
     where
@@ -167,6 +178,7 @@ pub mod data_structures {
         V: LruValue,
     {
         /// 创建新的LRU缓存
+        /// LRU
         pub fn new() -> Self {
             Self {
                 cache: HashMap::new(),
@@ -175,6 +187,7 @@ pub mod data_structures {
         }
 
         /// 获取值
+        /// Get值
         pub fn get(&mut self, key: &K) -> MaybeRef<'_, V> {
             if let Some(value) = self.cache.get(key) {
                 // 更新访问顺序
@@ -187,6 +200,7 @@ pub mod data_structures {
         }
 
         /// 设置值
+        /// Set值
         pub fn set(&mut self, key: K, value: V) {
             if self.cache.contains_key(&key) {
                 self.update_existing(&key, value);
@@ -210,6 +224,7 @@ pub mod data_structures {
         }
 
         /// 如果需要，移除最久未使用的项
+        /// if ，
         fn evict_if_needed(&mut self) {
             if self.cache.len() >= CAPACITY {
                 self.remove_oldest_item();
@@ -230,6 +245,7 @@ pub mod data_structures {
         }
 
         /// 检查缓存是否为空
+        /// as
         pub fn is_empty(&self) -> bool {
             self.cache.is_empty()
         }
@@ -249,6 +265,7 @@ pub mod data_structures {
     impl<T: Clone> LruValue for T {}
 
     /// 泛型堆栈 - 展示简单泛型数据结构
+    /// generic heap stack - simple generic data structure
     #[derive(Debug, Clone)]
     pub struct Stack<T> {
         items: GenVec<T>,
@@ -262,31 +279,39 @@ pub mod data_structures {
 
     impl<T> Stack<T> {
         /// 创建新的堆栈
+        /// heap stack
         pub const fn new() -> Self {
             Self { items: Vec::new() }
         }
 
         /// 推入元素
+        /// element
+        /// 推入element
         pub fn push(&mut self, item: T) {
             self.items.push(item);
         }
 
         /// 弹出元素
+        /// element
+        /// 弹出element
         pub fn pop(&mut self) -> Maybe<T> {
             self.items.pop()
         }
 
         /// 查看栈顶元素
+        /// stack element
         pub fn peek(&self) -> MaybeRef<'_, T> {
             self.items.last()
         }
 
         /// 获取堆栈大小
+        /// heap stack
         pub fn len(&self) -> usize {
             self.items.len()
         }
 
         /// 检查堆栈是否为空
+        /// heap stack as
         pub fn is_empty(&self) -> bool {
             self.items.is_empty()
         }
@@ -353,6 +378,7 @@ pub mod data_structures {
 }
 
 /// 算法实现示例
+/// algorithm example
 pub mod algorithms {
     use super::*;
 
@@ -366,6 +392,7 @@ pub mod algorithms {
     type GenResult<T, E> = Result<T, E>;
 
     /// 快速排序实现
+    /// quick sort
     pub fn quicksort<T>(arr: GenMutSlice<T>)
     where
         T: PartialOrd + Clone,
@@ -398,6 +425,7 @@ pub mod algorithms {
     }
 
     /// 归并排序实现
+    /// merge sort
     pub fn mergesort<T>(arr: GenMutSlice<T>)
     where
         T: PartialOrd + Clone,
@@ -448,6 +476,7 @@ pub mod algorithms {
     }
 
     /// 二分搜索实现
+    /// binary search
     pub fn binary_search<T>(arr: GenSlice<T>, target: &T) -> GenOption<usize>
     where
         T: PartialOrd,
@@ -469,6 +498,7 @@ pub mod algorithms {
     }
 
     /// 线性搜索实现
+    /// linear search
     pub fn linear_search<T>(arr: GenSlice<T>, target: &T) -> GenOption<usize>
     where
         T: PartialEq,
@@ -482,6 +512,7 @@ pub mod algorithms {
     }
 
     /// 计算最大公约数
+    /// maximum
     pub fn gcd<T>(a: T, b: T) -> T
     where
         T: PartialEq + Sub<Output = T> + Rem<Output = T> + Clone + Default,
@@ -494,6 +525,7 @@ pub mod algorithms {
     }
 
     /// 计算最小公倍数
+    /// minimum
     pub fn lcm<T>(a: T, b: T) -> T
     where
         T: PartialEq
@@ -582,6 +614,7 @@ pub mod algorithms {
 }
 
 /// 并发编程示例
+/// concurrency example
 pub mod concurrency {
     use super::*;
 
@@ -599,12 +632,14 @@ pub mod concurrency {
     type GenResult<T, E> = Result<T, E>;
 
     /// 线程安全的泛型计数器
+    /// thread-safe generic
     pub struct ThreadSafeCounter<T> {
         value: GenArcMutex<T>,
     }
 
     impl<T> ThreadSafeCounter<T> {
         /// 创建新的线程安全计数器
+        /// thread-safe
         pub fn new(initial_value: T) -> Self {
             Self {
                 value: Arc::new(Mutex::new(initial_value)),
@@ -612,6 +647,7 @@ pub mod concurrency {
         }
 
         /// 获取当前值
+        /// when before
         pub fn get(&self) -> T
         where
             T: Clone,
@@ -623,11 +659,13 @@ pub mod concurrency {
         }
 
         /// 设置值
+        /// Set值
         pub fn set(&self, new_value: T) {
             *self.value.lock().expect("ThreadSafeCounter 锁被 poisoned") = new_value;
         }
 
         /// 增加计数（仅适用于数值类型）
+        /// （type ）
         pub fn increment(&self) -> T
         where
             T: Add<T, Output = T> + Clone + From<i32>,
@@ -647,6 +685,7 @@ pub mod concurrency {
     }
 
     /// 泛型线程池
+    /// generic thread pool
     #[allow(dead_code)]
     pub struct ThreadPool<T, R> {
         workers: GenThreadJoinHandles<()>,
@@ -673,6 +712,7 @@ pub mod concurrency {
         R: Send + 'static,
     {
         /// 创建新的线程池
+        /// thread pool
         pub fn new<F>(size: usize, worker_fn: F) -> Self
         where
             F: Fn() -> R + Send + Sync + 'static + Clone,
@@ -699,18 +739,21 @@ pub mod concurrency {
         }
 
         /// 提交任务
+        /// task
         pub fn execute(&self, task: T) -> GenResult<(), GenSendError<T>> {
             self.sender.send(task)
         }
     }
 
     /// 读写锁保护的泛型数据
+    /// rwlock generic
     pub struct ReadWriteData<T> {
         data: GenArcRwLock<T>,
     }
 
     impl<T> ReadWriteData<T> {
         /// 创建新的读写锁保护数据
+        /// rwlock
         pub fn new(data: T) -> Self {
             Self {
                 data: Arc::new(RwLock::new(data)),
@@ -776,6 +819,7 @@ pub mod concurrency {
 }
 
 /// 错误处理示例
+/// error handling example
 pub mod error_handling {
     use super::*;
 
@@ -784,6 +828,8 @@ pub mod error_handling {
     type GenResult<T, E> = Result<T, E>;
 
     /// 自定义错误类型
+    /// definition error type
+    /// 自definitionerror type
     #[derive(Debug, Clone)]
     pub enum GenericError<T> {
         NotFound(T),
@@ -809,9 +855,11 @@ pub mod error_handling {
     impl<T> std::error::Error for GenericError<T> where T: Display + Debug {}
 
     /// 泛型结果类型
+    /// generic result type
     pub type GenericResult<T, E> = Result<T, GenericError<E>>;
 
     /// 泛型查找函数
+    /// generic function
     pub fn find_item<'a, T, U>(items: &'a [T], target: &U) -> Result<&'a T, GenericError<U>>
     where
         T: PartialEq<U>,
@@ -824,6 +872,7 @@ pub mod error_handling {
     }
 
     /// 泛型验证函数
+    /// generic function
     pub fn validate_input<T, F>(input: T, validator: F) -> Result<T, GenericError<T>>
     where
         F: Fn(&T) -> bool,
@@ -837,6 +886,7 @@ pub mod error_handling {
     }
 
     /// 泛型处理函数
+    /// generic function
     pub fn process_data<T, U, F>(data: T, processor: F) -> Result<U, GenericError<String>>
     where
         F: Fn(T) -> Result<U, String>,
@@ -881,6 +931,7 @@ pub mod error_handling {
 }
 
 /// 性能优化示例
+/// performance optimization example
 pub mod performance {
     use super::*;
 
@@ -893,6 +944,7 @@ pub mod performance {
     type GenVec<T> = Vec<T>;
 
     /// 泛型性能计时器
+    /// generic performance
     pub struct PerformanceTimer<T> {
         start_time: Instant,
         _phantom: GenPhantomData<T>,
@@ -908,11 +960,13 @@ pub mod performance {
         }
 
         /// 结束计时并返回耗时
+        /// and
         pub fn elapsed(&self) -> Duration {
             self.start_time.elapsed()
         }
 
         /// 测量函数执行时间
+        /// function time
         pub fn measure<F, R>(f: F) -> (R, Duration)
         where
             F: FnOnce() -> R,
@@ -925,6 +979,7 @@ pub mod performance {
     }
 
     /// 泛型缓存系统
+    /// generic system
     pub struct Cache<K, V> {
         cache: GenHashMap<K, V>,
         max_size: usize,
@@ -946,11 +1001,13 @@ pub mod performance {
         }
 
         /// 获取值
+        /// Get值
         pub fn get(&self, key: &K) -> GenOption<&V> {
             self.cache.get(key)
         }
 
         /// 设置值
+        /// Set值
         pub fn set(&mut self, key: K, value: V) {
             self.update_order_if_exists(&key);
             self.evict_oldest_if_needed();
@@ -959,6 +1016,8 @@ pub mod performance {
         }
 
         /// 如果键已存在，更新顺序
+        /// if in ，order
+        /// if键已存in，Updateorder
         fn update_order_if_exists(&mut self, key: &K) {
             if self.cache.contains_key(key) {
                 self.order.retain(|k| k != key);
@@ -966,6 +1025,7 @@ pub mod performance {
         }
 
         /// 如果需要，移除最老的项
+        /// if ，
         fn evict_oldest_if_needed(&mut self) {
             while self.cache.len() >= self.max_size {
                 self.remove_next_oldest();
@@ -973,6 +1033,7 @@ pub mod performance {
         }
 
         /// 移除下一个最老的项
+        /// under
         fn remove_next_oldest(&mut self) {
             if let Some(oldest) = self.order.pop_front() {
                 self.cache.remove(&oldest);
@@ -991,12 +1052,14 @@ pub mod performance {
         }
 
         /// 检查缓存是否为空
+        /// as
         pub fn is_empty(&self) -> bool {
             self.cache.is_empty()
         }
     }
 
     /// 泛型批处理系统
+    /// generic system
     pub struct BatchProcessor<T, R> {
         batch_size: usize,
         processor: Box<BatchFn<T, R>>,
@@ -1077,10 +1140,13 @@ pub mod performance {
 }
 
 /// Rust 1.90 新特性示例
+/// Rust 1.90 feature example
 pub mod rust_190_improvements {
     use super::*;
 
     /// 改进的泛型类型推断
+    /// generic type infer
+    /// 改进generictype inference
     pub fn improved_type_inference() {
         // Rust 1.90 在类型推断方面有所改进
         let numbers = [1, 2, 3, 4, 5];
@@ -1090,6 +1156,7 @@ pub mod rust_190_improvements {
     }
 
     /// 更简洁的泛型约束语法
+    /// generic
     pub fn simplified_constraint_syntax<T>(value: T) -> T
     where
         T: Clone + Debug,
@@ -1099,6 +1166,8 @@ pub mod rust_190_improvements {
     }
 
     /// 增强的错误处理与泛型
+    /// error handling and generic
+    /// 增强error handlingandgeneric
     pub fn enhanced_error_handling<T, E>(result: Result<T, E>) -> Result<String, String>
     where
         T: Display,
@@ -1110,6 +1179,8 @@ pub mod rust_190_improvements {
     }
 
     /// 改进的异步泛型
+    /// async generic
+    /// 改进asyncgeneric
     pub async fn improved_async_generic<T>(value: T) -> T
     where
         T: Send + Sync + Clone,
@@ -1120,10 +1191,12 @@ pub mod rust_190_improvements {
     }
 
     /// 更强大的类型别名
+    /// type
     pub type GenericResult<T, E = String> = Result<T, E>;
     pub type GenericOption<T> = Option<T>;
 
     /// 使用改进的类型别名
+    /// type
     pub fn use_improved_aliases(value: i32) -> GenericResult<i32> {
         if value > 0 {
             Ok(value * 2)
@@ -1147,6 +1220,8 @@ pub mod rust_190_improvements {
     }
 
     /// 更好的生命周期推断
+    /// lifetime infer
+    /// 更好lifetimeinfer
     pub fn better_lifetime_inference<'a>(first: &'a str, second: &'a str) -> &'a str {
         if first.len() > second.len() {
             first
@@ -1155,7 +1230,7 @@ pub mod rust_190_improvements {
         }
     }
 
-    /// 增强的 const 泛型
+    /// 增强 const generic
     pub fn enhanced_const_generics<const N: usize>(arr: [i32; N]) -> i32 {
         arr.iter().sum()
     }
@@ -1216,6 +1291,7 @@ pub mod rust_190_improvements {
 }
 
 /// 综合演示函数
+/// synthesize demonstration function
 pub fn demonstrate_practical_examples() {
     println!("\n=== 实用示例演示 ===");
 

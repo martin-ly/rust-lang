@@ -1,15 +1,21 @@
 //! 无锁B+树实现
-//!
+//! lock-free B+ tree
 //! 本模块提供了高性能的无锁B+树实现，支持：
+//! This module provides performance lock-free B+ tree ，：
 //! - 无锁插入、删除、查找操作
+//! - lock-free 、、
 //! - 范围查询
+//! - scope
 //! - 并发迭代器
+//! - concurrency
 //! - 内存管理优化
+//! - memory optimization
 use crossbeam_epoch::{self, Guard};
 use std::ptr;
 use std::sync::atomic::{AtomicPtr, AtomicUsize, Ordering};
 
 /// B+树节点
+/// B+tree node
 #[allow(dead_code)]
 #[derive(Debug)]
 pub struct BPlusTreeNode<K, V> {
@@ -28,6 +34,7 @@ where
     V: Clone + Send + Sync,
 {
     /// 创建新的B+树节点
+    /// B+tree node
     pub fn new(is_leaf: bool, order: usize) -> Self {
         Self {
             keys: Vec::with_capacity(order),
@@ -49,21 +56,25 @@ where
     }
 
     /// 获取节点大小
+    /// node
     pub fn size(&self) -> usize {
         self.size.load(Ordering::Acquire)
     }
 
     /// 检查节点是否已满
+    /// node
     pub fn is_full(&self, order: usize) -> bool {
         self.size.load(Ordering::Acquire) >= order
     }
 
     /// 检查节点是否为空
+    /// node as
     pub fn is_empty(&self) -> bool {
         self.size.load(Ordering::Acquire) == 0
     }
 
     /// 在叶子节点中插入键值对
+    /// in node in to
     pub fn insert_leaf(&self, key: K, value: V, _order: usize) -> Result<(), (K, V)> {
         // 不再根据 order 限制容量，允许叶子节点动态增长，避免触发未实现的分裂逻辑
         // 找到插入位置，保持键有序
@@ -89,6 +100,7 @@ where
     }
 
     /// 在内部节点中插入键
+    /// in inside node in
     pub fn insert_internal(
         &self,
         key: K,
@@ -125,6 +137,7 @@ where
     }
 
     /// 查找键的位置
+    /// position
     pub fn find_key_position(&self, key: &K) -> usize {
         for (i, existing_key) in self.keys.iter().enumerate() {
             if key <= existing_key {
@@ -135,6 +148,8 @@ where
     }
 
     /// 获取子节点指针
+    /// node pointer
+    /// Get子nodepointer
     pub fn get_child(&self, index: usize) -> *mut BPlusTreeNode<K, V> {
         if index < self.children.len() {
             self.children[index].load(Ordering::Acquire)
@@ -144,6 +159,8 @@ where
     }
 
     /// 设置子节点指针
+    /// node pointer
+    /// Set子nodepointer
     pub fn set_child(&self, index: usize, child_ptr: *mut BPlusTreeNode<K, V>) {
         if index < self.children.len() {
             self.children[index].store(child_ptr, Ordering::Release);
@@ -151,6 +168,7 @@ where
     }
 
     /// 获取值
+    /// Get值
     pub fn get_value(&self, index: usize) -> Option<V> {
         if index < self.values.len() {
             self.values[index].clone()
@@ -160,6 +178,7 @@ where
     }
 
     /// 设置值
+    /// Set值
     pub fn set_value(&self, index: usize, value: Option<V>) {
         if index < self.values.len() {
             unsafe {
@@ -171,6 +190,7 @@ where
 }
 
 /// 无锁B+树
+/// lock-free B+ tree
 pub struct LockFreeBPlusTree<K, V> {
     root: AtomicPtr<BPlusTreeNode<K, V>>,
     order: usize,
@@ -183,6 +203,7 @@ where
     V: Clone + Send + Sync,
 {
     /// 创建新的无锁B+树
+    /// lock-free B+ tree
     pub fn new(order: usize) -> Self {
         let root = Box::into_raw(Box::new(BPlusTreeNode::new(true, order)));
 
@@ -194,6 +215,7 @@ where
     }
 
     /// 插入键值对
+    /// to
     pub fn insert(&self, key: K, value: V) -> Result<(), (K, V)> {
         let guard = crossbeam_epoch::pin();
 
@@ -257,6 +279,7 @@ where
     }
 
     /// 分裂节点
+    /// node
     fn split_node(
         &self,
         _parent_ptr: *mut BPlusTreeNode<K, V>,
@@ -271,6 +294,7 @@ where
     }
 
     /// 分裂根节点
+    /// node
     fn split_root(&self, key: K, value: V, _guard: &Guard) -> Result<(), (K, V)> {
         // 这里需要实现根节点分裂逻辑
         // 为了简化，我们返回错误
@@ -383,6 +407,7 @@ where
     }
 
     /// 范围查询
+    /// scope
     pub fn range_query(&self, start: &K, end: &K) -> Vec<V> {
         let guard = crossbeam_epoch::pin();
         let mut result = Vec::new();
@@ -396,6 +421,7 @@ where
     }
 
     /// 查找叶子节点
+    /// node
     fn find_leaf_node(&self, key: &K, _guard: &Guard) -> Option<*mut BPlusTreeNode<K, V>> {
         let root_ptr = self.root.load(Ordering::Acquire);
         if root_ptr.is_null() {
@@ -422,6 +448,7 @@ where
     }
 
     /// 收集范围值
+    /// scope
     fn collect_range_values(
         &self,
         start_node: *mut BPlusTreeNode<K, V>,
@@ -456,16 +483,19 @@ where
     }
 
     /// 获取树的大小
+    /// tree
     pub fn size(&self) -> usize {
         self.size.load(Ordering::Acquire)
     }
 
     /// 检查树是否为空
+    /// tree as
     pub fn is_empty(&self) -> bool {
         self.size.load(Ordering::Acquire) == 0
     }
 
     /// 运行B+树示例
+    /// Run B+tree example
     pub fn run_example() {
         println!("=== 无锁B+树示例 ===");
 
@@ -511,6 +541,7 @@ impl<K, V> Drop for LockFreeBPlusTree<K, V> {
 }
 
 /// 运行所有B+树示例
+/// Run all B+tree example
 pub fn demonstrate_lockfree_bplus_tree() {
     println!("=== 无锁B+树演示 ===");
 

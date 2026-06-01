@@ -1,22 +1,19 @@
-//! # WasmEdge 和新技术示例代码
-//!
-//! 本模块展示了如何使用 WasmEdge 和最新的 WASM 技术
 
-/// WasmEdge 高级特性示例
 pub mod wasmedge_advanced {
     use std::fs;
     use std::io::{Read, Write};
     use std::net::TcpListener;
 
-    /// 使用 WasmEdge 运行 HTTP 服务器
-    ///
     /// # 特性
+    /// # feature
     /// - 快速启动（AOT 编译）
+    /// - fast （AOT ）
     /// - 低内存占用
+    /// - memory
     /// - 高并发支持
-    ///
+    /// - concurrency
     /// # 使用方式
-    /// ```bash
+    /// # way
     /// wasmedge --allow-net --enable-threads server.wasm
     /// ```
     pub fn run_http_server() -> Result<(), Box<dyn std::error::Error>> {
@@ -42,10 +39,8 @@ pub mod wasmedge_advanced {
         Ok(())
     }
 
-    /// 高性能文件处理（利用 WasmEdge 零拷贝特性）
-    ///
     /// # 性能说明
-    /// WasmEdge 会自动优化文件访问，减少内存复制
+    /// # performance explain
     pub fn process_large_file(path: &str) -> Result<usize, Box<dyn std::error::Error>> {
         let content = fs::read_to_string(path)?;
         let processed = content.lines().filter(|line| !line.is_empty()).count();
@@ -53,10 +48,13 @@ pub mod wasmedge_advanced {
     }
 
     /// 内存管理示例
-    ///
+    /// memory example
     /// # 性能优化
+    /// # performance optimization
     /// - 预分配容量
+    /// -
     /// - 重用缓冲区
+    /// - buffering
     pub fn efficient_data_processing(data: &[u8]) -> Vec<u8> {
         let mut result = Vec::with_capacity(data.len());
         result.extend_from_slice(data);
@@ -66,14 +64,14 @@ pub mod wasmedge_advanced {
 }
 
 /// WASI-NN AI 推理示例
+/// WASI -NN AI reason example
 pub mod wasi_nn_examples {
     /// 图像分类示例
-    ///
+    /// classification example
     /// # 注意
+    /// #
     /// 实际实现需要使用 WASI-NN bindings
-    ///
-    /// # 使用 WasmEdge 运行
-    /// ```bash
+    /// actual WASI -NN bindings
     /// wasmedge --enable-wasi-nn --enable-wasi-nn-tensorflow app.wasm
     /// ```
     #[allow(dead_code)]
@@ -89,12 +87,15 @@ pub mod wasi_nn_examples {
         }
 
         /// 运行图像分类
-        ///
+        /// Run classification
+        /// Run图像classification
         /// # 参数
+        /// # parameter
         /// - `image_data`: 图像数据（JPEG/PNG 格式）
-        ///
         /// # 返回值
+        /// # return value
         /// 返回分类结果（类别索引和置信度）
+        /// classification result （and ）
         pub fn classify(&self, _image_data: &[u8]) -> Result<Vec<f32>, String> {
             // 实际实现需要使用 WASI-NN API
             // 这里只是示例结构
@@ -116,6 +117,7 @@ pub mod wasi_nn_examples {
     }
 
     /// 文本处理示例（使用 AI 模型）
+    /// this example （ AI ）
     #[allow(dead_code)]
     pub struct TextProcessor {
         model_data: Vec<u8>,
@@ -128,6 +130,7 @@ pub mod wasi_nn_examples {
         }
 
         /// 处理文本
+        /// this
         pub fn process(&self, text: &str) -> Result<String, String> {
             // 使用 AI 模型处理文本
             // 实际实现需要使用 WASI-NN
@@ -139,9 +142,7 @@ pub mod wasi_nn_examples {
 /// WASI-Crypto 示例
 pub mod wasi_crypto_examples {
     /// 数据加密示例
-    ///
-    /// # 使用 WasmEdge 运行
-    /// ```bash
+    /// example
     /// wasmedge --enable-wasi-crypto app.wasm
     /// ```
     pub fn encrypt_data(data: &[u8], _key: &[u8]) -> Result<Vec<u8>, String> {
@@ -159,6 +160,7 @@ pub mod wasi_crypto_examples {
     }
 
     /// 数据哈希示例
+    /// example
     pub fn hash_data(_data: &[u8]) -> Vec<u8> {
         // 使用 SHA-256 哈希
         // 实际实现需要使用 WASI-Crypto
@@ -168,6 +170,7 @@ pub mod wasi_crypto_examples {
     }
 
     /// 数字签名示例
+    /// example
     pub fn sign_data(_data: &[u8], _private_key: &[u8]) -> Result<Vec<u8>, String> {
         // 使用 ECDSA 签名
         // 实际实现需要使用 WASI-Crypto
@@ -187,14 +190,14 @@ pub mod wasi_crypto_examples {
 }
 
 /// 多线程 WASM 示例
+/// thread WASM example
+/// 多thread WASM Example of
 pub mod threading_examples {
     use std::sync::{Arc, Mutex};
     use std::thread;
 
     /// 并行处理数据
-    ///
-    /// # 使用 WasmEdge 运行
-    /// ```bash
+    /// parallelism
     /// wasmedge --enable-threads app.wasm
     /// ```
     pub fn parallel_process(data: &[i32], num_threads: usize) -> Vec<i32> {
@@ -235,6 +238,7 @@ pub mod threading_examples {
     }
 
     /// 线程池示例
+    /// thread pool example
     #[allow(dead_code)]
     pub struct ThreadPool {
         workers: Vec<thread::JoinHandle<()>>,
@@ -282,7 +286,6 @@ pub mod threading_examples {
     }
 }
 
-/// WasmEdge 性能优化示例
 pub mod performance_examples {
     use std::cell::RefCell;
 
@@ -292,9 +295,11 @@ pub mod performance_examples {
     }
 
     /// 重用缓冲区的数据处理
-    ///
+    /// buffering
     /// # 性能说明
+    /// # performance explain
     /// 通过重用线程局部缓冲区，避免频繁分配内存
+    /// thread-local buffering ，memory
     pub fn process_with_reuse(data: &[u8]) -> Vec<u8> {
         BUFFER.with(|buf| {
             let mut buffer = buf.borrow_mut();
@@ -310,19 +315,26 @@ pub mod performance_examples {
     }
 
     /// 批量处理（减少函数调用开销）
+    /// （function overhead ）
     pub fn batch_process(items: &[i32]) -> Vec<i32> {
         items.iter().map(|&x| x * 2).collect()
     }
 }
 
 /// 云原生应用示例
+/// application example
 pub mod cloud_native_examples {
     /// 边缘计算函数
-    ///
+    /// edge computing function
     /// # 特性
+    /// # feature
     /// - 快速启动
+    /// - fast
     /// - 低内存占用
+    /// - memory
     /// - 高并发
+    /// - concurrency
+    /// - 高concurrency
     pub fn edge_function(request: &[u8]) -> Vec<u8> {
         // 快速处理请求
         let response = format!(
@@ -334,6 +346,7 @@ pub mod cloud_native_examples {
     }
 
     /// 微服务示例
+    /// microservice example
     pub struct Microservice {
         name: String,
     }

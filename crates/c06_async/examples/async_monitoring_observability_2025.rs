@@ -9,8 +9,11 @@ use tracing::{debug, info};
 //use std::sync::atomic::{AtomicUsize, AtomicU64, Ordering};
 
 /// 2025年异步监控和可观测性演示
+/// 2025async and demonstration
 /// 展示最新的异步监控编程模式和最佳实践
+/// async and
 /// 1. 异步指标收集器
+/// 1. async indicator
 #[derive(Debug, Clone)]
 pub struct AsyncMetricsCollector {
     metrics: Arc<RwLock<HashMap<String, Metric>>>,
@@ -170,6 +173,7 @@ impl AsyncMetricsCollector {
 }
 
 /// 2. 异步日志聚合器
+/// 2. async aggregation
 #[derive(Debug, Clone)]
 pub struct AsyncLogAggregator {
     logs: Arc<RwLock<Vec<LogEntry>>>,
@@ -357,6 +361,7 @@ impl AsyncLogAggregator {
 }
 
 /// 3. 异步分布式追踪
+/// 3. async distribution
 #[derive(Debug, Clone)]
 pub struct AsyncDistributedTracing {
     traces: Arc<RwLock<HashMap<String, Trace>>>,
@@ -544,6 +549,7 @@ pub enum SpanHandle {
 }
 
 /// 4. 异步健康检查系统
+/// 4. async health check system
 #[derive(Debug, Clone)]
 pub struct AsyncHealthChecker {
     checks: Arc<RwLock<HashMap<String, HealthCheck>>>,

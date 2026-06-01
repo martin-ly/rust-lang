@@ -6,6 +6,7 @@ use tokio::sync::RwLock;
 use uuid::Uuid;
 
 /// 领域事件基类
+/// domain
 #[derive(Debug, Clone, Serialize, Deserialize)]
 struct DomainEvent {
     id: String,
@@ -33,6 +34,7 @@ impl DomainEvent {
 }
 
 /// 用户聚合根
+/// aggregation
 #[derive(Debug, Clone, Serialize, Deserialize)]
 struct User {
     id: String,
@@ -131,12 +133,14 @@ impl EventStore {
     }
 
     /// 获取聚合的所有事件
+    /// aggregation all
     async fn get_events(&self, aggregate_id: &str) -> Vec<DomainEvent> {
         let events = self.events.read().await;
         events.get(aggregate_id).cloned().unwrap_or_default()
     }
 
     /// 获取所有事件
+    /// all
     async fn get_all_events(&self) -> Vec<DomainEvent> {
         let events = self.events.read().await;
         events.values().flatten().cloned().collect()
@@ -144,6 +148,7 @@ impl EventStore {
 }
 
 /// 命令处理器
+/// command
 struct CommandHandler {
     event_store: Arc<EventStore>,
 }
@@ -173,6 +178,7 @@ impl CommandHandler {
     }
 
     /// 更新用户
+    /// Update user
     async fn update_user(
         &self,
         user_id: &str,
@@ -200,6 +206,7 @@ impl CommandHandler {
     }
 
     /// 更改用户状态
+    /// state
     async fn change_user_status(&self, user_id: &str, status: &str) -> Result<()> {
         let events = self.event_store.get_events(user_id).await;
         if events.is_empty() {
@@ -221,6 +228,7 @@ impl CommandHandler {
 }
 
 /// 查询处理器 (CQRS 的查询端)
+/// (CQRS )
 struct QueryHandler {
     event_store: Arc<EventStore>,
     read_models: Arc<RwLock<HashMap<String, User>>>,
@@ -272,12 +280,14 @@ impl QueryHandler {
     }
 
     /// 获取所有用户
+    /// Get all users
     async fn get_all_users(&self) -> Vec<User> {
         let read_models = self.read_models.read().await;
         read_models.values().cloned().collect()
     }
 
     /// 按状态查询用户
+    /// state
     async fn get_users_by_status(&self, status: &str) -> Vec<User> {
         let read_models = self.read_models.read().await;
         read_models
@@ -296,6 +306,7 @@ impl QueryHandler {
 }
 
 /// 事件溯源系统
+/// event sourcing system
 struct EventSourcingSystem {
     event_store: Arc<EventStore>,
     command_handler: Arc<CommandHandler>,
@@ -316,6 +327,7 @@ impl EventSourcingSystem {
     }
 
     /// 运行事件溯源示例
+    /// Run event sourcing example
     async fn run_example(&self) -> Result<()> {
         println!("🚀 事件溯源示例启动");
         println!("{}", "=".repeat(50));

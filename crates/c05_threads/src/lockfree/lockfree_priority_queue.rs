@@ -1,22 +1,23 @@
 //! 无锁优先队列实现
-//!
-//! 基于跳表（Skip List）概念的无锁优先队列。
-//!
+//! lock-free
 //! ## 设计思路
-//!
+//! ## design
 //! 使用有序链表实现简化版的无锁优先队列，支持线程安全的
+//! lock-free ，thread-safe
 //! `push` 和 `pop` 操作。
-//!
+//! `push` and `pop` 操作。
 //! ## 复杂度
-//!
+//! ## complex
 //! - `push`: O(n)（简化实现）
-//! - `pop`: O(1)
-//!
+//! - `push`: O(n)（）
+//! - `push`: O(n)（简化Implementation of）
 //! 生产环境应使用 `crossbeam_skiplist` 实现 O(log n) 复杂度。
+//! environment `crossbeam_skiplist` O(log n) complex 。
 use std::ptr;
 use std::sync::atomic::{AtomicPtr, Ordering as AtomicOrdering};
 
 /// 优先队列节点
+/// node
 struct Node<T> {
     data: T,
     priority: i32,
@@ -34,12 +35,13 @@ impl<T> Node<T> {
 }
 
 /// 无锁优先队列
-///
+/// lock-free
 /// 基于有序链表实现的线程安全优先队列。
+/// thread-safe 。
 /// 优先级数值越高，元素越先被弹出。
-///
+/// ，element is 。
 /// # 示例
-///
+/// # example
 /// ```
 /// use c05_threads::lockfree::lockfree_priority_queue::LockFreePriorityQueue;
 ///
@@ -61,6 +63,7 @@ unsafe impl<T: Send> Sync for LockFreePriorityQueue<T> {}
 
 impl<T> LockFreePriorityQueue<T> {
     /// 创建新的无锁优先队列
+    /// lock-free
     pub fn new() -> Self {
         Self {
             head: AtomicPtr::new(ptr::null_mut()),
@@ -68,8 +71,10 @@ impl<T> LockFreePriorityQueue<T> {
     }
 
     /// 插入元素（按优先级排序）
-    ///
+    /// element （ordering ）
+    /// 插入element（按优先级ordering）
     /// 优先级越高的元素越靠近队首。
+    /// element 。
     pub fn push(&self, data: T, priority: i32) {
         let new_node = Box::into_raw(Box::new(Node::new(data, priority)));
 
@@ -141,8 +146,8 @@ impl<T> LockFreePriorityQueue<T> {
     }
 
     /// 弹出优先级最高的元素
-    ///
-    /// 返回 `None` 如果队列为空。
+    /// element
+    /// Return `None` if队列as空。
     pub fn pop(&self) -> Option<T> {
         loop {
             let current_head = self.head.load(AtomicOrdering::Acquire);
@@ -172,11 +177,13 @@ impl<T> LockFreePriorityQueue<T> {
     }
 
     /// 检查队列是否为空
+    /// as
     pub fn is_empty(&self) -> bool {
         self.head.load(AtomicOrdering::Acquire).is_null()
     }
 
     /// 查看队首元素（不弹出）
+    /// element （）
     pub fn peek(&self) -> Option<&T> {
         let head = self.head.load(AtomicOrdering::Acquire);
         if head.is_null() {
@@ -238,7 +245,7 @@ mod tests {
     }
 
     /// 注意：此并发测试未实现内存回收机制（Hazard Pointers / EBR）。
-    /// 在 Miri 下运行会报告数据竞争。作为概念演示，生产环境应使用 crossbeam-epoch。
+    /// ：this concurrency memory mechanism （Hazard Pointers / EBR）。
     #[test]
     #[ignore = "概念演示：未实现内存回收，Miri 会报告数据竞争"]
     fn test_concurrent_push() {
@@ -269,7 +276,7 @@ mod tests {
     }
 
     /// 注意：此并发测试未实现内存回收机制。
-    /// 在 Miri 下运行会报告数据竞争。作为概念演示，生产环境应使用 crossbeam-epoch。
+    /// ：this concurrency memory mechanism 。
     #[test]
     #[ignore = "概念演示：未实现内存回收，Miri 会报告数据竞争"]
     fn test_concurrent_mixed_operations() {

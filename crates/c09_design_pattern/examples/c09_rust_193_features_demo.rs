@@ -1,10 +1,8 @@
 //! Rust 1.93.0 设计模式相关 API 演示
-//!
-//! 本示例展示 Rust 1.93.0 在设计模式、数据转换等场景中的新 API：
-//! - slice::as_array - 建造者模式中的固定大小验证
-//! - Duration::from_nanos_u128 - 策略模式中的高精度配置
+//! Rust 1.93.0 design API demonstration
+//! - slice::as_array - 建造者模式in固定大小Verify
 //! - fmt::from_fn - 自定义格式化器模式
-//!
+//! - fmt::from_fn - definition
 //! 运行: cargo run -p c09_design_pattern --example rust_193_features_demo
 use std::fmt;
 

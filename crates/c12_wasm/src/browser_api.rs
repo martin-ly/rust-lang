@@ -1,37 +1,46 @@
 //! WASM 浏览器 API 交互示例
-//!
+//! WASM API example
+//! WASM 浏览器 API 交互Example of
 //! 展示如何使用 web-sys 与浏览器 API 交互
+//! web-sys and API
 
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsCast;
 use web_sys::{console, Document, HtmlElement, Window};
 
 /// 获取窗口对象
+/// to
 pub fn window() -> Option<Window> {
     web_sys::window()
 }
 
 /// 获取文档对象
+/// to
 pub fn document() -> Option<Document> {
     window()?.document()
 }
 
 /// 在控制台打印日志
+/// in
 pub fn log(msg: &str) {
     console::log_1(&msg.into());
 }
 
 /// 在控制台打印警告
+/// in warning
+/// in控制台Printwarning
 pub fn warn(msg: &str) {
     console::warn_1(&msg.into());
 }
 
 /// 在控制台打印错误
+/// in
 pub fn error(msg: &str) {
     console::error_1(&msg.into());
 }
 
 /// 获取元素 by ID
+/// element by ID
 pub fn get_element_by_id(id: &str) -> Option<HtmlElement> {
     let document = document()?;
     document
@@ -41,6 +50,7 @@ pub fn get_element_by_id(id: &str) -> Option<HtmlElement> {
 }
 
 /// 设置元素文本内容
+/// element this inside
 pub fn set_text_content(id: &str, content: &str) -> Result<(), JsValue> {
     if let Some(element) = get_element_by_id(id) {
         element.set_text_content(Some(content));
@@ -51,6 +61,7 @@ pub fn set_text_content(id: &str, content: &str) -> Result<(), JsValue> {
 }
 
 /// 简单的计时器类
+/// simple
 pub struct Timer {
     start: f64,
     name: String,
@@ -71,6 +82,7 @@ impl Timer {
     }
 
     /// 结束计时并打印结果
+    /// and result
     pub fn end(&self) {
         let end = web_sys::window()
             .and_then(|w| w.performance())
@@ -83,16 +95,17 @@ impl Timer {
 }
 
 /// 本地存储操作
+/// this
 pub mod local_storage {
     use super::*;
     use web_sys::Storage;
 
-    /// 获取 localStorage
     pub fn get_storage() -> Option<Storage> {
         web_sys::window()?.local_storage().ok()?
     }
 
     /// 设置值
+    /// Set值
     pub fn set_item(key: &str, value: &str) -> Result<(), JsValue> {
         if let Some(storage) = get_storage() {
             storage.set_item(key, value)?;
@@ -103,6 +116,7 @@ pub mod local_storage {
     }
 
     /// 获取值
+    /// Get值
     pub fn get_item(key: &str) -> Option<String> {
         let storage = get_storage()?;
         storage.get_item(key).ok()?

@@ -1,49 +1,70 @@
 //! 形式化规范定义模块
-//!
+//! norm definition module
+//! 形式化normdefinitionmodule
 //! 本模块提供了网络协议的形式化规范定义，包括：
+//! This module provides network protocol norm definition ，：
 //! - TCP协议状态机规范
+//! - TCP state machine norm
+//! - TCP协议state machinenorm
 //! - HTTP协议语义规范
-//! - WebSocket协议规范
+//! - HTTP norm
 //! - 异步通信语义规范
+//! - async norm
 // use crate::error::NetworkResult;
 use crate::semantics::*;
 use std::collections::{HashMap, HashSet};
 use std::fmt;
 
 /// TCP协议形式化规范
+/// TCP norm
 pub struct TcpFormalSpec {
     /// 状态定义
+    /// state definition
     pub states: HashSet<TcpState>,
     /// 事件定义
+    /// definition
+    /// 事件definition
     pub events: HashSet<TcpEvent>,
     /// 状态转换表
+    /// state conversion
     transition_table: HashMap<(TcpState, TcpEvent), TcpState>,
     /// 不变量
+    /// variable
+    /// 不variable
     invariants: Vec<TcpInvariant>,
 }
 
 /// TCP事件
+/// TCP
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum TcpEvent {
     /// 主动打开
     ActiveOpen,
     /// 被动打开
+    /// is
+    /// is动Open
     PassiveOpen,
     /// 发送SYN
+    /// SYN
     SendSyn,
     /// 接收SYN
+    /// SYN
     ReceiveSyn,
     /// 发送SYN+ACK
     SendSynAck,
     /// 接收SYN+ACK
     ReceiveSynAck,
     /// 发送ACK
+    /// ACK
     SendAck,
     /// 接收ACK
+    /// ACK
     ReceiveAck,
     /// 发送FIN
+    /// FIN
     SendFin,
     /// 接收FIN
+    /// FIN
     ReceiveFin,
     /// 发送FIN+ACK
     SendFinAck,
@@ -58,28 +79,43 @@ pub enum TcpEvent {
 }
 
 /// TCP不变量
+/// TCP variable
+/// TCP不variable
 #[derive(Debug, Clone)]
 pub struct TcpInvariant {
     /// 不变量名称
+    /// variable
     pub name: String,
     /// 不变量条件
+    /// variable condition
+    /// 不variablecondition
     pub condition: TcpInvariantCondition,
     /// 不变量类型
+    /// variable type
+    /// 不variabletype
     pub invariant_type: TcpInvariantType,
 }
 
 /// TCP不变量条件
+/// TCP variable condition
+/// TCP不variablecondition
 #[derive(Debug, Clone)]
 pub enum TcpInvariantCondition {
     /// 状态条件
+    /// state condition
     StateCondition(TcpState),
     /// 序列号条件
+    /// sequence condition
     SequenceNumberCondition { min_seq: u32, max_seq: u32 },
     /// 窗口大小条件
+    /// condition
     WindowSizeCondition { min_window: u16, max_window: u16 },
     /// 认证条件
+    /// condition
     AuthenticationCondition(bool),
     /// 复合条件
+    /// condition
+    /// 复合condition
     CompoundCondition {
         operator: LogicalOperator,
         conditions: Vec<TcpInvariantCondition>,
@@ -87,15 +123,23 @@ pub enum TcpInvariantCondition {
 }
 
 /// TCP不变量类型
+/// TCP variable type
+/// TCP不variabletype
 #[derive(Debug, Clone, PartialEq)]
 pub enum TcpInvariantType {
     /// 状态不变量
+    /// state variable
     StateInvariant,
     /// 数据不变量
+    /// variable
+    /// 数据不variable
     DataInvariant,
     /// 安全不变量
+    /// variable
+    /// 安全不variable
     SecurityInvariant,
     /// 性能不变量
+    /// performance variable
     PerformanceInvariant,
 }
 
@@ -119,11 +163,13 @@ impl Default for TcpFormalSpec {
 
 impl TcpFormalSpec {
     /// 创建TCP形式化规范
+    /// TCP norm
     pub fn new() -> Self {
         Self::default()
     }
 
     /// 初始化状态
+    /// state
     fn initialize_states(&mut self) {
         self.states.insert(TcpState::Closed);
         self.states.insert(TcpState::Listen);
@@ -157,6 +203,7 @@ impl TcpFormalSpec {
     }
 
     /// 初始化状态转换
+    /// state conversion
     fn initialize_transitions(&mut self) {
         // CLOSED -> LISTEN (被动打开)
         self.transition_table
@@ -232,6 +279,7 @@ impl TcpFormalSpec {
     }
 
     /// 初始化不变量
+    /// variable
     fn initialize_invariants(&mut self) {
         // 状态不变量：ESTABLISHED状态必须认证
         self.invariants.push(TcpInvariant {
@@ -268,16 +316,19 @@ impl TcpFormalSpec {
     }
 
     /// 获取状态转换
+    /// state conversion
     pub fn get_transition(&self, state: TcpState, event: TcpEvent) -> Option<TcpState> {
         self.transition_table.get(&(state, event)).copied()
     }
 
     /// 验证状态转换的有效性
+    /// state conversion effective
     pub fn is_valid_transition(&self, from: TcpState, to: TcpState, event: TcpEvent) -> bool {
         self.get_transition(from, event) == Some(to)
     }
 
     /// 检查不变量
+    /// variable
     pub fn check_invariant(&self, state: &ConnectionState, invariant: &TcpInvariant) -> bool {
         match &invariant.condition {
             TcpInvariantCondition::StateCondition(expected_state) => state.state == *expected_state,
@@ -309,6 +360,7 @@ impl TcpFormalSpec {
     }
 
     /// 检查不变量条件
+    /// variable condition
     fn check_invariant_condition(
         &self,
         state: &ConnectionState,
@@ -344,11 +396,14 @@ impl TcpFormalSpec {
     }
 
     /// 获取所有不变量
+    /// all variable
+    /// Get所有不variable
     pub fn get_invariants(&self) -> &Vec<TcpInvariant> {
         &self.invariants
     }
 
     /// 获取状态转换表
+    /// state conversion
     pub fn get_transition_table(&self) -> &HashMap<(TcpState, TcpEvent), TcpState> {
         &self.transition_table
     }
@@ -384,21 +439,31 @@ impl fmt::Display for TcpFormalSpec {
 }
 
 /// HTTP协议形式化规范
+/// HTTP norm
 #[allow(dead_code)]
 pub struct HttpFormalSpec {
     /// HTTP版本
+    /// HTTP this
+    /// HTTP版this
     version: HttpVersion,
     /// 方法定义
+    /// method definition
     pub methods: HashSet<HttpMethod>,
     /// 状态码定义
+    /// state definition
     pub status_codes: HashSet<HttpStatusCode>,
     /// 头部字段定义
+    /// field definition
+    /// 头部fielddefinition
     header_fields: HashSet<String>,
     /// 协议规则
+    /// rule
     protocol_rules: Vec<HttpProtocolRule>,
 }
 
 /// HTTP版本
+/// HTTP this
+/// HTTP版this
 #[derive(Debug, Clone, PartialEq)]
 pub enum HttpVersion {
     Http1_0,
@@ -408,6 +473,7 @@ pub enum HttpVersion {
 }
 
 /// HTTP方法
+/// HTTP method
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum HttpMethod {
     Get,
@@ -422,6 +488,7 @@ pub enum HttpMethod {
 }
 
 /// HTTP状态码
+/// HTTP state
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum HttpStatusCode {
     /// 信息响应
@@ -437,30 +504,43 @@ pub enum HttpStatusCode {
 }
 
 /// HTTP协议规则
+/// HTTP rule
+/// HTTP协议rule
 #[derive(Debug, Clone)]
 #[allow(dead_code)]
 pub struct HttpProtocolRule {
     /// 规则名称
+    /// rule
     pub name: String,
     /// 规则条件
+    /// rule condition
     pub condition: HttpRuleCondition,
     /// 规则动作
+    /// rule
     pub action: HttpRuleAction,
     /// 规则类型
+    /// rule type
     pub rule_type: HttpRuleType,
 }
 
 /// HTTP规则条件
+/// HTTP rule condition
 #[derive(Debug, Clone)]
 #[allow(dead_code)]
 pub enum HttpRuleCondition {
     /// 方法条件
+    /// method condition
     MethodCondition(HttpMethod),
     /// 状态码条件
+    /// state condition
     StatusCodeCondition(HttpStatusCode),
     /// 头部条件
+    /// condition
+    /// 头部condition
     HeaderCondition { name: String, value: String },
     /// 复合条件
+    /// condition
+    /// 复合condition
     CompoundCondition {
         operator: LogicalOperator,
         conditions: Vec<HttpRuleCondition>,
@@ -468,6 +548,7 @@ pub enum HttpRuleCondition {
 }
 
 /// HTTP规则动作
+/// HTTP rule
 #[derive(Debug, Clone)]
 #[allow(dead_code)]
 pub enum HttpRuleAction {
@@ -484,19 +565,24 @@ pub enum HttpRuleAction {
 }
 
 /// HTTP规则类型
+/// HTTP rule type
 #[derive(Debug, Clone, PartialEq)]
 #[allow(dead_code)]
 pub enum HttpRuleType {
     /// 安全规则
+    /// rule
     SecurityRule,
     /// 性能规则
+    /// performance rule
     PerformanceRule,
     /// 功能规则
+    /// functionality rule
     FunctionalRule,
 }
 
 impl HttpFormalSpec {
     /// 创建HTTP形式化规范
+    /// HTTP norm
     pub fn new(version: HttpVersion) -> Self {
         let mut spec = Self {
             version,
@@ -515,6 +601,7 @@ impl HttpFormalSpec {
     }
 
     /// 初始化HTTP方法
+    /// HTTP method
     fn initialize_methods(&mut self) {
         self.methods.insert(HttpMethod::Get);
         self.methods.insert(HttpMethod::Post);
@@ -528,6 +615,7 @@ impl HttpFormalSpec {
     }
 
     /// 初始化状态码
+    /// state
     fn initialize_status_codes(&mut self) {
         // 信息响应
         self.status_codes.insert(HttpStatusCode::Informational(100));
@@ -555,6 +643,7 @@ impl HttpFormalSpec {
     }
 
     /// 初始化头部字段
+    /// field
     fn initialize_header_fields(&mut self) {
         let headers = vec![
             "Content-Type",
@@ -582,6 +671,7 @@ impl HttpFormalSpec {
     }
 
     /// 初始化协议规则
+    /// rule
     fn initialize_protocol_rules(&mut self) {
         // 安全规则：必须使用HTTPS
         self.protocol_rules.push(HttpProtocolRule {
@@ -621,7 +711,6 @@ impl HttpFormalSpec {
         });
     }
 
-    /// 检查HTTP请求的有效性
     pub fn is_valid_request(&self, method: &HttpMethod, headers: &HashMap<String, String>) -> bool {
         // 检查方法是否支持
         if !self.methods.contains(method) {
@@ -637,7 +726,6 @@ impl HttpFormalSpec {
         }
     }
 
-    /// 检查HTTP响应的有效性
     pub fn is_valid_response(
         &self,
         status_code: &HttpStatusCode,
@@ -657,6 +745,7 @@ impl HttpFormalSpec {
     }
 
     /// 应用协议规则
+    /// application rule
     pub fn apply_rules(
         &self,
         method: &HttpMethod,
@@ -674,6 +763,7 @@ impl HttpFormalSpec {
     }
 
     /// 检查规则条件匹配
+    /// rule condition
     fn matches_condition(
         &self,
         condition: &HttpRuleCondition,

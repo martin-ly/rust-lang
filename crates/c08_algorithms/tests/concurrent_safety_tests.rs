@@ -3,6 +3,7 @@ use std::sync::{Arc, Mutex};
 use std::thread;
 
 /// 测试共享状态并发安全
+/// state concurrency
 #[cfg_attr(miri, ignore)]
 #[test]
 fn test_shared_state_safety() {
@@ -29,6 +30,7 @@ fn test_shared_state_safety() {
 }
 
 /// 测试竞态条件
+/// condition
 #[cfg_attr(miri, ignore)]
 #[test]
 fn test_race_conditions() {
@@ -54,6 +56,7 @@ fn test_race_conditions() {
 }
 
 /// 测试内存安全
+/// memory safety
 #[cfg_attr(miri, ignore)]
 #[test]
 fn test_memory_safety() {
@@ -80,6 +83,7 @@ fn test_memory_safety() {
 }
 
 /// 测试原子操作
+/// atomic operation
 #[cfg_attr(miri, ignore)]
 #[test]
 fn test_atomic_operations() {
@@ -106,6 +110,7 @@ fn test_atomic_operations() {
 }
 
 /// 测试同步原语
+/// synchronous
 #[cfg_attr(miri, ignore)]
 #[test]
 fn test_synchronization_primitives() {

@@ -1,9 +1,7 @@
-//! WebSocket 帧处理
 use crate::error::NetworkError;
 use bytes::Bytes;
 use serde::{Deserialize, Serialize};
 
-/// WebSocket 操作码
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub enum WebSocketOpcode {
     Continuation = 0x0,
@@ -16,6 +14,7 @@ pub enum WebSocketOpcode {
 
 impl WebSocketOpcode {
     /// 从字节值创建操作码
+    /// from
     pub fn from_u8(value: u8) -> Result<Self, NetworkError> {
         match value {
             0x0 => Ok(WebSocketOpcode::Continuation),
@@ -32,6 +31,7 @@ impl WebSocketOpcode {
     }
 
     /// 检查是否为控制帧
+    /// as
     pub fn is_control_frame(&self) -> bool {
         matches!(
             self,
@@ -40,6 +40,7 @@ impl WebSocketOpcode {
     }
 
     /// 检查是否为数据帧
+    /// as
     pub fn is_data_frame(&self) -> bool {
         matches!(
             self,
@@ -48,7 +49,6 @@ impl WebSocketOpcode {
     }
 }
 
-/// WebSocket 帧
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WebSocketFrame {
     pub fin: bool,
@@ -60,7 +60,6 @@ pub struct WebSocketFrame {
 }
 
 impl WebSocketFrame {
-    /// 创建新的 WebSocket 帧
     pub fn new(opcode: WebSocketOpcode, payload: Bytes) -> Self {
         Self {
             fin: true,
@@ -73,6 +72,7 @@ impl WebSocketFrame {
     }
 
     /// 创建文本帧
+    /// this
     pub fn text(text: &str) -> Self {
         Self::new(
             WebSocketOpcode::Text,
@@ -101,12 +101,16 @@ impl WebSocketFrame {
     }
 
     /// 创建 Ping 帧
+    /// Ping
+    /// Create Ping 帧
     pub fn ping(data: Option<&[u8]>) -> Self {
         let payload = data.map(Bytes::copy_from_slice).unwrap_or_default();
         Self::new(WebSocketOpcode::Ping, payload)
     }
 
     /// 创建 Pong 帧
+    /// Pong
+    /// Create Pong 帧
     pub fn pong(data: Option<&[u8]>) -> Self {
         let payload = data.map(Bytes::copy_from_slice).unwrap_or_default();
         Self::new(WebSocketOpcode::Pong, payload)

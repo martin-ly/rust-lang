@@ -1,10 +1,15 @@
 //! # Rust 1.96.0 特性 — 设计模式
+//! # Rust 1.96.0 feature — design
 //!
 //! Rust 1.96.0 为设计模式实现带来的核心稳定特性：
+//! Rust 1.96.0 as design core feature ：
 //!
 //! - **`LazyLock::from(value)`**: 单例模式中的惰性初始化构造
+//! - **`LazyLock::from(value)`**: singleton in
 //! - **`assert_matches!`**: 状态机模式的状态断言测试
+//! - **`assert_matches!`**: state machine state
 //! - **`ManuallyDrop` 常量模式**: 在模式匹配中使用 `ManuallyDrop` 常量
+//! - **`ManuallyDrop` constant **: in in `ManuallyDrop` constant
 
 use std::mem::ManuallyDrop;
 use std::sync::LazyLock;
@@ -12,15 +17,19 @@ use std::sync::LazyLock;
 // ==================== LazyLock::from 在单例模式中的应用 ====================
 
 /// 使用 LazyLock::from 实现单例配置
+/// LazyLock::from singleton
 ///
 /// `LazyLock::from(value)` 允许直接从一个已知的值创建 `LazyLock`，
+/// `LazyLock::from(value)` from `LazyLock`，
 /// 适用于配置已预计算的单例场景。
+/// singleton scenario 。
 pub struct SingletonConfig {
     value: LazyLock<String>,
 }
 
 impl SingletonConfig {
     /// 从已知值创建单例配置
+    /// from singleton
     pub fn from_value(value: String) -> Self {
         Self {
             value: LazyLock::from(value),
@@ -34,6 +43,7 @@ impl SingletonConfig {
 }
 
 /// 使用 LazyLock::from 实现线程安全的单例计数器描述
+/// LazyLock::from thread-safe singleton describe
 pub struct SingletonCounter {
     description: LazyLock<String>,
 }
@@ -53,6 +63,7 @@ impl SingletonCounter {
 // ==================== assert_matches! 在状态机模式测试中的应用 ====================
 
 /// 状态机状态枚举
+/// state machine state enum
 #[derive(Debug, Clone, PartialEq)]
 pub enum ConnectionState {
     Disconnected,
@@ -62,6 +73,7 @@ pub enum ConnectionState {
 }
 
 /// 状态机转换
+/// state machine conversion
 pub fn transition(state: ConnectionState, event: &str) -> ConnectionState {
     match (state, event) {
         (ConnectionState::Disconnected, "connect") => ConnectionState::Connecting,
@@ -79,17 +91,21 @@ pub fn transition(state: ConnectionState, event: &str) -> ConnectionState {
 // ==================== ManuallyDrop 常量在模式中的应用 ====================
 
 /// 使用 ManuallyDrop 常量作为模式匹配标记
+/// ManuallyDrop constant as mark
 ///
 /// Rust 1.96 允许在模式匹配中使用 `ManuallyDrop` 常量。
+/// Rust 1.96 in in `ManuallyDrop` constant 。
 pub struct MarkerType<T> {
     value: ManuallyDrop<T>,
 }
 
 impl MarkerType<i32> {
     /// 特殊标记值常量
+    /// mark constant
     pub const SPECIAL: ManuallyDrop<i32> = ManuallyDrop::new(42);
 
     /// 创建新的标记类型
+    /// mark type
     pub fn new(value: i32) -> Self {
         Self {
             value: ManuallyDrop::new(value),
@@ -97,11 +113,13 @@ impl MarkerType<i32> {
     }
 
     /// 检查是否为特殊标记值
+    /// as mark
     pub fn is_special(&self) -> bool {
         matches!(self.value, Self::SPECIAL)
     }
 
     /// 使用模式匹配处理特殊标记
+    /// mark
     pub fn process(&self) -> &'static str {
         match self.value {
             Self::SPECIAL => "special_marker",
@@ -111,6 +129,7 @@ impl MarkerType<i32> {
 }
 
 /// 使用 ManuallyDrop 常量模式进行类型标记
+/// ManuallyDrop constant type mark
 pub enum TaggedValue {
     Int(ManuallyDrop<i32>),
     Text(ManuallyDrop<String>),
@@ -118,9 +137,11 @@ pub enum TaggedValue {
 
 impl TaggedValue {
     /// 默认整数标记常量
+    /// mark constant
     pub const DEFAULT_INT: ManuallyDrop<i32> = ManuallyDrop::new(0);
 
     /// 匹配默认标记
+    /// mark
     pub fn is_default_int(&self) -> bool {
         matches!(self, TaggedValue::Int(Self::DEFAULT_INT))
     }
@@ -129,6 +150,7 @@ impl TaggedValue {
 // ==================== 演示函数 ====================
 
 /// 演示 Rust 1.96 设计模式特性
+/// demonstration Rust 1.96 design feature
 pub fn demonstrate_rust_196_features() {
     println!("\n========================================");
     println!("   Rust 1.96.0 设计模式特性演示");
@@ -157,6 +179,7 @@ pub fn demonstrate_rust_196_features() {
 }
 
 /// 获取特性信息
+/// feature
 pub fn get_rust_196_pattern_info() -> String {
     "Rust 1.96.0 设计模式特性:\n- LazyLock::from(value) 用于单例模式直接构造\n- assert_matches! \
      用于状态机模式断言测试\n- ManuallyDrop 常量可作为模式匹配使用"

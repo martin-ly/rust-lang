@@ -33,6 +33,7 @@ use std::{
 };
 
 /// 工厂模式 - 使用泛型创建不同类型的对象
+/// factory - generic type to
 pub mod factory_pattern {
     use super::*;
 
@@ -104,11 +105,13 @@ pub mod factory_pattern {
     }
 
     /// 泛型工厂 trait
+    /// generic factory trait
     pub trait ProductFactory<T: Product> {
         fn create_product(&self, name: String, price: f64) -> T;
     }
 
     /// 电子产品工厂
+    /// factory
     pub struct ElectronicProductFactory {
         default_warranty: u32,
     }
@@ -126,6 +129,7 @@ pub mod factory_pattern {
     }
 
     /// 服装产品工厂
+    /// factory
     pub struct ClothingProductFactory {
         default_size: String,
     }
@@ -143,9 +147,11 @@ pub mod factory_pattern {
     }
 
     /// 通用工厂管理器
-    ///
+    /// factory
     /// 这个结构体使用泛型来实现类型安全的工厂模式。
+    /// struct generic type factory 。
     /// 虽然类型约束看起来复杂，但这是为了实现编译时类型安全所必需的。
+    /// type complex ，but as compile-time type 。
     pub struct FactoryManager<T: Product, F: ProductFactory<T>> {
         factory: F,
         products: Vec<T>,
@@ -195,21 +201,24 @@ pub mod factory_pattern {
 }
 
 /// 建造者模式 - 使用泛型构建复杂对象
+/// - generic complex to
 pub mod builder_pattern {
     use super::*;
 
-    /// 可构建的 trait
     pub trait Buildable: Sized {
         type Builder: Builder<Self>;
         fn builder() -> Self::Builder;
     }
 
     /// 建造者 trait
+    /// trait
     pub trait Builder<T> {
         fn build(self) -> T;
     }
 
     /// 用户结构体
+    /// struct
+    /// 用户struct
     #[derive(Debug, Clone)]
     pub struct User {
         pub name: String,
@@ -293,6 +302,7 @@ pub mod builder_pattern {
     }
 
     /// 泛型建造者管理器
+    /// generic
     pub struct BuilderManager<T: Buildable> {
         _phantom: PhantomData<T>,
     }
@@ -339,19 +349,23 @@ pub mod builder_pattern {
 }
 
 /// 策略模式 - 使用泛型实现不同的算法策略
+/// strategy - generic algorithm strategy
 pub mod strategy_pattern {
     use super::*;
 
     /// 策略容器别名，降低类型复杂度
+    /// strategy ，type complex
     pub type StrategyBox<T> = Box<dyn SortStrategy<T>>;
 
     /// 排序策略 trait
+    /// ordering strategy trait
     pub trait SortStrategy<T> {
         fn sort(&self, data: &mut [T]);
         fn name(&self) -> &str;
     }
 
     /// 冒泡排序策略
+    /// bubble sort strategy
     pub struct BubbleSortStrategy;
 
     impl<T: PartialOrd + Clone> SortStrategy<T> for BubbleSortStrategy {
@@ -372,6 +386,7 @@ pub mod strategy_pattern {
     }
 
     /// 选择排序策略
+    /// selection sort strategy
     pub struct SelectionSortStrategy;
 
     impl<T: PartialOrd + Clone> SortStrategy<T> for SelectionSortStrategy {
@@ -396,6 +411,7 @@ pub mod strategy_pattern {
     }
 
     /// 泛型排序器
+    /// generic ordering
     pub struct Sorter<T, S: SortStrategy<T>> {
         strategy: S,
         _phantom: PhantomData<T>,
@@ -419,6 +435,7 @@ pub mod strategy_pattern {
     }
 
     /// 策略管理器
+    /// strategy
     pub struct StrategyManager<T> {
         strategies: HashMap<String, StrategyBox<T>>,
     }
@@ -487,13 +504,16 @@ pub mod strategy_pattern {
 }
 
 /// 观察者模式 - 使用泛型实现事件通知系统
+/// observer - generic system
 pub mod observer_pattern {
     use super::*;
 
     /// 观察者容器别名，降低类型复杂度
+    /// observer ，type complex
     pub type ObserverBox<T> = Box<dyn Observer<T>>;
 
     /// 观察者 trait
+    /// observer trait
     pub trait Observer<T> {
         fn update(&mut self, data: &T);
         fn get_id(&self) -> String;
@@ -507,6 +527,8 @@ pub mod observer_pattern {
     }
 
     /// 具体观察者 - 日志观察者
+    /// volume observer - observer
+    /// 具volumeobserver - 日志observer
     pub struct LogObserver {
         id: String,
         logs: Vec<String>,
@@ -537,6 +559,8 @@ pub mod observer_pattern {
     }
 
     /// 具体观察者 - 统计观察者
+    /// volume observer - observer
+    /// 具volumeobserver - 统计observer
     pub struct StatsObserver<T> {
         id: String,
         count: usize,
@@ -573,6 +597,7 @@ pub mod observer_pattern {
     }
 
     /// 泛型主题
+    /// generic
     pub struct GenericSubject<T> {
         observers: Vec<ObserverBox<T>>,
         data: Option<T>,
@@ -641,16 +666,19 @@ pub mod observer_pattern {
 }
 
 /// 装饰器模式 - 使用泛型为对象添加功能
+/// decorator - generic as to functionality
 pub mod decorator_pattern {
     use super::*;
 
     /// 基础组件 trait
+    /// foundation trait
     pub trait Component<T> {
         fn operation(&self, input: T) -> T;
         fn get_description(&self) -> String;
     }
 
     /// 具体组件
+    /// volume
     pub struct ConcreteComponent {
         name: String,
     }
@@ -672,6 +700,7 @@ pub mod decorator_pattern {
     }
 
     /// 装饰器基类
+    /// decorator
     pub struct Decorator<T, C: Component<T>> {
         component: C,
         _phantom: PhantomData<T>,
@@ -697,6 +726,8 @@ pub mod decorator_pattern {
     }
 
     /// 具体装饰器 - 日志装饰器
+    /// volume decorator - decorator
+    /// 具volumedecorator - 日志decorator
     pub struct LoggingDecorator<T, C: Component<T>> {
         decorator: Decorator<T, C>,
     }
@@ -723,6 +754,8 @@ pub mod decorator_pattern {
     }
 
     /// 具体装饰器 - 缓存装饰器
+    /// volume decorator - decorator
+    /// 具volumedecorator - 缓存decorator
     pub struct CachingDecorator<T: Clone + Eq + std::hash::Hash, C: Component<T>> {
         decorator: Decorator<T, C>,
         cache: HashMap<T, T>,
@@ -776,10 +809,12 @@ pub mod decorator_pattern {
 }
 
 /// 单例模式 - 使用泛型实现线程安全的单例
+/// singleton - generic thread-safe singleton
 pub mod singleton_pattern {
     use super::*;
 
     /// 泛型单例管理器
+    /// generic singleton
     pub struct SingletonManager<T> {
         instance: Arc<RwLock<Option<Arc<T>>>>,
     }
@@ -830,6 +865,7 @@ pub mod singleton_pattern {
     }
 
     /// 配置管理器单例
+    /// singleton
     pub struct ConfigManager {
         config: HashMap<String, String>,
     }
@@ -864,6 +900,7 @@ pub mod singleton_pattern {
     }
 
     /// 数据库连接池单例
+    /// database connection pool singleton
     pub struct DatabasePool {
         connections: Vec<String>,
         max_connections: usize,
@@ -927,6 +964,7 @@ pub mod singleton_pattern {
 }
 
 /// 命令模式 - 使用泛型实现可撤销的操作
+/// command - generic
 pub mod command_pattern {
 
     /// 命令 trait
@@ -937,9 +975,12 @@ pub mod command_pattern {
     }
 
     /// 命令容器别名，降低类型复杂度
+    /// command ，type complex
     pub type CommandBox<T> = Box<dyn Command<T>>;
 
     /// 具体命令 - 设置值命令
+    /// volume command - command
+    /// 具volumecommand - Set值command
     pub struct SetValueCommand<T> {
         old_value: Option<T>,
         new_value: T,
@@ -976,6 +1017,8 @@ pub mod command_pattern {
     }
 
     /// 具体命令 - 数学运算命令
+    /// volume command - command
+    /// 具volumecommand - 数学运算command
     pub struct MathOperationCommand<T> {
         operation: Box<dyn Fn(T) -> T>,
         inverse_operation: Box<dyn Fn(T) -> T>,
@@ -1022,6 +1065,7 @@ pub mod command_pattern {
     }
 
     /// 命令调用者
+    /// command
     pub struct CommandInvoker<T> {
         history: Vec<CommandBox<T>>,
         current_index: usize,
@@ -1131,6 +1175,7 @@ pub mod command_pattern {
 }
 
 /// 综合演示函数
+/// synthesize demonstration function
 pub fn demonstrate_advanced_patterns() {
     use builder_pattern::{Buildable, Builder};
     use decorator_pattern::Component;

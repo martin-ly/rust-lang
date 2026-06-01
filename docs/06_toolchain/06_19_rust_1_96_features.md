@@ -139,6 +139,30 @@ let cell: LazyCell<Vec<u8>> = LazyCell::from(vec![1, 2, 3]);
 let safe: AssertUnwindSafe<i32> = AssertUnwindSafe::from(42);
 ```
 
+#### 9a. `LazyLock` / `LazyCell` 访问器方法 (`get`, `get_mut`, `force_mut`)
+
+Rust 1.96 为 `LazyLock` 和 `LazyCell` 新增了无锁/可变访问器，优化热路径性能：
+
+```rust
+use std::sync::LazyLock;
+use std::cell::LazyCell;
+
+static CFG: LazyLock<String> = LazyLock::new(|| "config".to_string());
+
+// get() — 无锁检查，若未初始化返回 None（热路径优化）
+if let Some(val) = LazyLock::get(&CFG) {
+    println!("已初始化: {}", val);
+}
+
+// get_mut() — 获取可变引用（仅当当前线程独有时可用）
+let mut cell: LazyCell<i32> = LazyCell::new(|| 42);
+*LazyCell::get_mut(&mut cell).unwrap() += 1;
+
+// force_mut() — 强制初始化并获取可变引用
+let val = LazyCell::force_mut(&mut cell);
+*val = 100;
+```
+
 #### 10. `NonZero` 整数范围迭代
 
 ```rust

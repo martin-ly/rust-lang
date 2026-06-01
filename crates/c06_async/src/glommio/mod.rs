@@ -1,35 +1,54 @@
 //! # Glommio 高性能异步运行时模块
+//! # Glommio performance async runtime module
 //!
 //! Glommio 是由 DataDog 开发的基于 io_uring 的高性能异步运行时。
+//! Glommio DataDog io_uring performance async runtime 。
 //! 它采用 thread-per-core 架构，专为极致性能设计。
+//! thread-per-core architecture ，as performance design 。
 //!
 //! ## 核心特性
+//! ## core feature
 //!
 //! - **Thread-per-core 架构**: 每个 CPU 核心一个线程，避免线程切换开销
+//! - **Thread-per-core architecture **: CPU core thread ，thread switching overhead
 //! - **基于 io_uring**: 利用 Linux 5.1+ 的高性能 I/O 接口
+//! - ** io_uring**: Linux 5.1+ performance I/O
 //! - **NUMA 感知**: 针对多 socket 系统优化
+//! - **NUMA **: to socket system optimization
 //! - **零拷贝 I/O**: 最小化数据复制
+//! - ** I/O**: minimum
 //! - **CPU 亲和性**: 精确控制任务调度到特定核心
+//! - **CPU and **: task to core
 //!
 //! ## 适用场景
+//! ## scenario
 //!
 //! - 高频交易系统
+//! - system
 //! - 数据库引擎
+//! - database
 //! - 高性能网络服务
+//! - performance network
 //! - 实时数据处理
+//! -
 //!
 //! ## 限制
+//! ##
 //!
 //! - **仅支持 Linux**: 依赖 io_uring (Linux 5.1+)
 //! - **学习曲线**: thread-per-core 模型需要特殊的编程思维
+//! - **learn line **: thread-per-core
 //! - **生态系统**: 相对较小的生态系统
+//! - **ecosystem system **: to ecosystem system
 #![cfg(target_os = "linux")]
 
 use std::time::Duration;
 
 /// Glommio 运行时示例
+/// Glommio runtime example
 ///
 /// # 示例
+/// # example
 ///
 /// ```rust,no_run
 /// use c06_async::glommio::GlommioExample;
@@ -41,6 +60,7 @@ pub struct GlommioExample;
 
 impl GlommioExample {
     /// 运行基本示例
+    /// Run this example
     pub fn run_basic_example() {
         #[cfg(target_os = "linux")]
         {
@@ -67,6 +87,7 @@ impl GlommioExample {
     }
 
     /// 运行 I/O 密集型示例
+    /// Run I/O example
     pub fn run_io_intensive_example() {
         #[cfg(target_os = "linux")]
         {
@@ -101,6 +122,7 @@ impl GlommioExample {
     }
 
     /// 运行多核并行示例
+    /// Run parallelism example
     pub fn run_multicore_example() {
         #[cfg(target_os = "linux")]
         {
@@ -143,10 +165,12 @@ impl GlommioExample {
 }
 
 /// Glommio 性能特性分析
+/// Glommio performance feature analyze
 pub struct GlommioPerformance;
 
 impl GlommioPerformance {
     /// 获取性能特性描述
+    /// performance feature describe
     pub fn get_characteristics() -> Vec<(&'static str, &'static str)> {
         vec![
             ("架构模型", "Thread-per-core (每核心一线程)"),
@@ -162,6 +186,7 @@ impl GlommioPerformance {
     }
 
     /// 与其他运行时的对比
+    /// rather than runtime to
     pub fn compare_with_others() -> Vec<(&'static str, &'static str, &'static str, &'static str)> {
         vec![
             ("特性", "Glommio", "Tokio", "Smol"),
@@ -177,6 +202,7 @@ impl GlommioPerformance {
 }
 
 /// Glommio 最佳实践
+/// Glommio
 pub struct GlommioBestPractices;
 
 impl GlommioBestPractices {

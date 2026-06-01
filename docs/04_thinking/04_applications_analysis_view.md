@@ -38,7 +38,7 @@
     - [本文档的Rust 1.95+更新要点](#本文档的rust-195更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
+      - [相关文档](#相关文档-1)
   - [权威来源索引](#权威来源索引)
 
 ---
@@ -88,7 +88,7 @@
 | Web 框架 | axum / actix-web | axum 与 Tokio 同源、actix 高性能 |
 | 相关模块 | C06 异步、C10 网络 | 异步 I/O、TCP/HTTP |
 
-**公理 / 定理 → 论证**：Web 选型遵循「I/O 密集型」公理——大量请求等待网络/磁盘。定理：异步 runtime 在 I/O 等待时复用线程，可支撑更高并发。Tokio 选型依据：M:N 调度、与 async-std 生态对比、生产验证。axum 与 Tokio 同源，减少调度开销。
+**公理 / 定理 → 论证**：Web 选型遵循「I/O 密集型」公理——大量请求等待网络/磁盘。定理：异步 runtime 在 I/O 等待时复用线程，可支撑更高并发。Tokio 选型依据：M:N 调度、与 smol 生态对比、生产验证。axum 与 Tokio 同源，减少调度开销。
 
 **决策树**：REST/GraphQL？→ axum；极高 QPS？→ actix-web；gRPC？→ tonic；WebSocket？→ axum/tokio-tungstenite。
 

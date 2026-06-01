@@ -7,14 +7,15 @@ use c09_design_pattern::creational::singleton::define::Singleton;
 use c09_design_pattern::structural::flyweight::define::OptimizedFlyweightFactory;
 use c09_design_pattern::structural::proxy::define::{Proxy, RealSubject, Subject, VirtualProxy};
 /// 性能基准测试
-///
-/// 使用Criterion框架进行设计模式的性能基准测试
+/// Performance benchmark
 /// 测试各种模式在不同场景下的性能表现
+/// in scenario under performance
 use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
 use std::hint::black_box;
 use std::sync::Arc;
 
 /// 单例模式性能基准测试
+/// singleton Performance benchmark
 fn benchmark_singleton(c: &mut Criterion) {
     let mut group = c.benchmark_group("singleton");
 
@@ -42,6 +43,7 @@ fn benchmark_singleton(c: &mut Criterion) {
 }
 
 /// 享元模式性能基准测试
+/// flyweight Performance benchmark
 fn benchmark_flyweight(c: &mut Criterion) {
     let mut group = c.benchmark_group("flyweight");
 
@@ -86,6 +88,7 @@ fn benchmark_flyweight(c: &mut Criterion) {
 }
 
 /// 代理模式性能基准测试
+/// proxy pattern Performance benchmark
 fn benchmark_proxy(c: &mut Criterion) {
     let mut group = c.benchmark_group("proxy");
 
@@ -121,6 +124,7 @@ fn benchmark_proxy(c: &mut Criterion) {
 }
 
 /// 责任链模式性能基准测试
+/// chain of responsibility Performance benchmark
 fn benchmark_chain_of_responsibility(c: &mut Criterion) {
     let mut group = c.benchmark_group("chain_of_responsibility");
 
@@ -156,6 +160,7 @@ fn benchmark_chain_of_responsibility(c: &mut Criterion) {
 }
 
 /// 内存使用基准测试
+/// memory benchmark
 fn benchmark_memory_usage(c: &mut Criterion) {
     let mut group = c.benchmark_group("memory_usage");
 
@@ -195,6 +200,7 @@ fn benchmark_memory_usage(c: &mut Criterion) {
 }
 
 /// 并发性能基准测试
+/// concurrency Performance benchmark
 fn benchmark_concurrency(c: &mut Criterion) {
     let mut group = c.benchmark_group("concurrency");
 
@@ -225,6 +231,7 @@ fn benchmark_concurrency(c: &mut Criterion) {
 }
 
 /// 可扩展性基准测试
+/// benchmark
 fn benchmark_scalability(c: &mut Criterion) {
     let mut group = c.benchmark_group("scalability");
 

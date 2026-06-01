@@ -1,14 +1,16 @@
 //! 网络编程错误处理模块
-//!
+//! network programming error handling module
 //! 本模块定义了网络编程中使用的各种错误类型，
-//! 利用 Rust 1.92.0 的新特性提供更好的错误处理体验。
+//! this module definition network programming in error type ，
 use std::time::Duration;
 use thiserror::Error;
 
 /// 网络编程中的主要错误类型
+/// network programming in main error type
 #[derive(Error, Debug)]
 pub enum NetworkError {
     /// IO 错误
+    /// IO
     #[error("IO error: {0}")]
     Io(#[from] std::io::Error),
 
@@ -37,54 +39,65 @@ pub enum NetworkError {
     Configuration(String),
 
     /// 其他错误
+    /// its
     #[error("Other error: {0}")]
     Other(String),
 
     /// 无效状态错误
+    /// ineffective state
     #[error("Invalid state: {0}")]
     InvalidState(String),
 
     /// 缓冲区错误
+    /// buffering
     #[error("Buffer error: {0}")]
     Buffer(String),
 
     /// 序列化/反序列化错误
+    /// sequence /sequence
     #[error("Serialization error: {0}")]
     Serialization(#[from] serde_json::Error),
 
     /// URL 解析错误
+    /// URL
     #[error("URL parsing error: {0}")]
     Url(#[from] url::ParseError),
 }
 
 /// 网络结果类型别名
+/// network result type
 pub type NetworkResult<T> = Result<T, NetworkError>;
 
 /// 协议特定的错误类型
+/// error type
 #[derive(Error, Debug)]
 pub enum ProtocolError {
     /// HTTP 协议错误
+    /// HTTP
     #[error("HTTP error: {status} - {message}")]
     Http { status: u16, message: String },
 
-    /// WebSocket 协议错误
     #[error("WebSocket error: {0}")]
     WebSocket(String),
 
     /// TCP 协议错误
+    /// TCP
     #[error("TCP error: {0}")]
     Tcp(String),
 
     /// UDP 协议错误
+    /// UDP
     #[error("UDP error: {0}")]
     Udp(String),
 
     /// DNS 协议错误
+    /// DNS
     #[error("DNS error: {0}")]
     Dns(String),
 }
 
 /// 性能相关错误
+/// performance
 #[derive(Error, Debug)]
 pub enum PerformanceError {
     /// 连接池耗尽
@@ -96,6 +109,7 @@ pub enum PerformanceError {
     RateLimit { limit: u64, period: Duration },
 
     /// 内存不足
+    /// out of memory
     #[error("Insufficient memory: required {required}, available {available}")]
     InsufficientMemory { required: usize, available: usize },
 
@@ -108,6 +122,7 @@ pub enum PerformanceError {
 #[derive(Error, Debug)]
 pub enum SecurityError {
     /// 证书验证失败
+    /// certificate
     #[error("Certificate verification failed: {0}")]
     CertificateVerification(String),
 
@@ -125,14 +140,17 @@ pub enum SecurityError {
 }
 
 /// 错误恢复策略
+/// error recovery strategy
 pub trait ErrorRecovery {
     /// 是否可以重试
+    /// can
     fn is_retryable(&self) -> bool;
 
     /// 获取重试延迟
     fn retry_delay(&self) -> Option<Duration>;
 
     /// 获取最大重试次数
+    /// maximum
     fn max_retries(&self) -> Option<u32>;
 }
 
@@ -193,8 +211,10 @@ impl common::RustLangError for NetworkError {
 }
 
 /// 错误上下文扩展
+/// on under
 pub trait ErrorContext<T> {
     /// 添加上下文信息
+    /// on under
     fn with_context<F>(self, f: F) -> Result<T, NetworkError>
     where
         F: FnOnce() -> String;

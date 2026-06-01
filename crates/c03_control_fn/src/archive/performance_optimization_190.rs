@@ -1,14 +1,16 @@
 //! Rust 1.90 性能优化特性模块
-//!
-//! 本模块专门展示 Rust 1.90 版本中的性能优化特性：
+//! Rust 1.90 performance optimization feature module
 //! - 并行前端编译优化
+//! - parallelism frontend optimization
 //! - 下一代特质求解器性能提升
-//! - Polonius借用检查器优化
+//! - under trait performance
 //! - 改进的内存布局优化
+//! - memory layout optimization
+//! - 改进memory layoutoptimization
 //! - 编译时计算增强
+//! - compile-time
 //! - 零成本抽象优化
-//!
-//! 所有示例都使用 Rust 1.90 的最新性能优化特性，并包含详细的基准测试。
+//! - cost optimization
 use std::collections::HashMap;
 use std::sync::Arc;
 use std::time::{Duration, Instant};
@@ -16,9 +18,9 @@ use std::hint::black_box;
 use tokio::sync::Mutex;
 
 /// 性能基准测试工具
+/// Performance benchmark tool
 /// 性能优化基准测试
-///
-/// 用于测试Rust 1.90性能优化特性的效果。
+/// performance optimization benchmark
 pub struct OptimizationBenchmark {
     results: Arc<Mutex<HashMap<String, Vec<Duration>>>>,
 }
@@ -31,6 +33,7 @@ impl Default for OptimizationBenchmark {
 
 impl OptimizationBenchmark {
     /// 创建新的性能基准测试工具
+    /// Performance benchmark tool
     pub fn new() -> Self {
         Self {
             results: Arc::new(Mutex::new(HashMap::new())),
@@ -38,6 +41,7 @@ impl OptimizationBenchmark {
     }
 
     /// 运行基准测试
+    /// Run benchmark
     pub async fn benchmark<F, R>(&self, name: &str, iterations: usize, test_fn: F) -> Duration
     where
         F: Fn() -> R,
@@ -65,11 +69,13 @@ impl OptimizationBenchmark {
     }
 
     /// 获取基准测试结果
+    /// benchmark result
     pub async fn get_results(&self) -> HashMap<String, Vec<Duration>> {
         self.results.lock().await.clone()
     }
 
     /// 打印性能报告
+    /// performance
     pub async fn print_report(&self) {
         let results = self.get_results().await;
 
@@ -92,8 +98,7 @@ impl OptimizationBenchmark {
 }
 
 /// 并行编译优化演示
-///
-/// 展示Rust 1.90并行前端编译的性能提升。
+/// parallelism optimization demonstration
 pub struct ParallelCompilationDemo {
     pub data: Vec<i32>,
     pub processed_data: Arc<Mutex<Vec<i32>>>,
@@ -101,6 +106,7 @@ pub struct ParallelCompilationDemo {
 
 impl ParallelCompilationDemo {
     /// 创建新的并行编译演示
+    /// parallelism demonstration
     pub fn new(size: usize) -> Self {
         Self {
             data: (0..size as i32).collect(),
@@ -114,6 +120,7 @@ impl ParallelCompilationDemo {
     }
 
     /// 并行处理数据
+    /// parallelism
     pub async fn process_parallel(&self) -> Vec<i32> {
         let chunk_size = self.data.len() / num_cpus::get();
         let mut handles = Vec::new();
@@ -135,7 +142,6 @@ impl ParallelCompilationDemo {
         result
     }
 
-    /// 使用SIMD优化的处理
     pub fn process_simd(&self) -> Vec<i32> {
         // 模拟SIMD优化
         self.data.iter().map(|x| x * x + 1).collect()
@@ -143,14 +149,14 @@ impl ParallelCompilationDemo {
 }
 
 /// 特质求解器性能演示
-///
-/// 展示Rust 1.90下一代特质求解器的性能提升。
+/// trait performance demonstration
 pub trait PerformanceTrait<T> {
     type Output;
     fn process(&self, input: T) -> Self::Output;
 }
 
 /// 复杂特质实现
+/// complex trait
 impl PerformanceTrait<i32> for ParallelCompilationDemo {
     type Output = i64;
 
@@ -173,8 +179,7 @@ impl PerformanceTrait<Vec<i32>> for ParallelCompilationDemo {
 }
 
 /// 借用检查器性能演示
-///
-/// 展示Rust 1.90 Polonius借用检查器的性能优化。
+/// borrowing performance demonstration
 pub struct BorrowCheckerPerformanceDemo {
     pub data: Vec<String>,
     pub metadata: HashMap<String, String>,
@@ -182,6 +187,7 @@ pub struct BorrowCheckerPerformanceDemo {
 
 impl BorrowCheckerPerformanceDemo {
     /// 创建新的借用检查器性能演示
+    /// borrowing performance demonstration
     pub fn new(size: usize) -> Self {
         Self {
             data: (0..size).map(|i| format!("item_{}", i)).collect(),
@@ -190,6 +196,7 @@ impl BorrowCheckerPerformanceDemo {
     }
 
     /// 传统借用模式
+    /// borrowing
     pub fn traditional_borrow(&mut self) -> Vec<&str> {
         let mut result = Vec::new();
         for item in &self.data {
@@ -200,7 +207,6 @@ impl BorrowCheckerPerformanceDemo {
         result
     }
 
-    /// 优化的借用模式（Rust 1.90）
     pub fn optimized_borrow(&self) -> Vec<&str> {
         self.data.iter()
             .filter(|item| item.len() > 5)
@@ -209,6 +215,7 @@ impl BorrowCheckerPerformanceDemo {
     }
 
     /// 复杂借用场景
+    /// complex borrowing scenario
     pub fn complex_borrow_scenario(&mut self) -> Result<(), String> {
         // Rust 1.90的借用检查器能够更好地处理这种复杂场景
         if let Some(first_item) = self.data.first() {
@@ -226,8 +233,7 @@ impl BorrowCheckerPerformanceDemo {
 }
 
 /// 内存布局优化演示
-///
-/// 展示Rust 1.90改进的内存布局优化。
+/// memory layout optimization demonstration
 #[repr(C, packed)]
 pub struct OptimizedStruct {
     pub id: u32,
@@ -244,6 +250,7 @@ pub struct UnoptimizedStruct {
 
 impl OptimizedStruct {
     /// 创建优化的结构体
+    /// optimization struct
     pub fn new(id: u32, flag: bool, data: [u8; 4]) -> Self {
         Self { id, flag, data }
     }
@@ -256,6 +263,7 @@ impl OptimizedStruct {
 
 impl UnoptimizedStruct {
     /// 创建未优化的结构体
+    /// optimization struct
     pub fn new(id: u32, flag: bool, data: [u8; 4]) -> Self {
         Self { id, flag, data }
     }
@@ -267,8 +275,7 @@ impl UnoptimizedStruct {
 }
 
 /// 编译时计算增强演示
-///
-/// 展示Rust 1.90编译时计算的增强功能。
+/// compile-time demonstration
 pub struct CompileTimeComputation {
     pub values: [i32; 10],
 }
@@ -281,6 +288,7 @@ impl Default for CompileTimeComputation {
 
 impl CompileTimeComputation {
     /// 创建编译时计算演示
+    /// compile-time demonstration
     pub const fn new() -> Self {
         Self {
             values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
@@ -288,6 +296,7 @@ impl CompileTimeComputation {
     }
 
     /// 编译时计算斐波那契数列
+    /// compile-time
     pub const fn fibonacci(n: u32) -> u32 {
         match n {
             0 => 0,
@@ -297,6 +306,7 @@ impl CompileTimeComputation {
     }
 
     /// 编译时计算数组和
+    /// compile-time and
     pub const fn array_sum() -> i32 {
         let mut sum = 0;
         let mut i = 0;
@@ -308,20 +318,21 @@ impl CompileTimeComputation {
     }
 
     /// 运行时计算（对比）
+    /// runtime （to ）
     pub fn runtime_sum(&self) -> i32 {
         self.values.iter().sum()
     }
 }
 
 /// 零成本抽象优化演示
-///
-/// 展示Rust 1.90零成本抽象的优化。
+/// cost optimization demonstration
 pub struct ZeroCostAbstractionDemo {
     pub data: Vec<i32>,
 }
 
 impl ZeroCostAbstractionDemo {
     /// 创建零成本抽象演示
+    /// cost demonstration
     pub fn new(size: usize) -> Self {
         Self {
             data: (0..size as i32).collect(),
@@ -329,6 +340,7 @@ impl ZeroCostAbstractionDemo {
     }
 
     /// 使用迭代器（零成本抽象）
+    /// （cost ）
     pub fn iterator_processing(&self) -> i32 {
         self.data.iter()
             .filter(|&&x| x % 2 == 0)
@@ -337,6 +349,8 @@ impl ZeroCostAbstractionDemo {
     }
 
     /// 手动循环（对比）
+    /// circulation （to ）
+    /// 手动circulation（to比）
     pub fn manual_loop_processing(&self) -> i32 {
         let mut sum = 0;
         for &x in &self.data {
@@ -360,8 +374,7 @@ impl ZeroCostAbstractionDemo {
 }
 
 /// 性能优化综合演示
-///
-/// 展示Rust 1.90性能优化特性的综合应用。
+/// performance optimization synthesize demonstration
 pub async fn demonstrate_performance_optimization_190() -> Result<(), String> {
     println!("🚀 演示 Rust 1.90 性能优化特性");
 

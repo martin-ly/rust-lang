@@ -1,7 +1,7 @@
 //! Rust 1.93.0 网络编程 特性模块
+//! Rust 1.93.0 network programming feature module
 #![allow(clippy::incompatible_msrv)]
 
-/// 使用 `String::into_raw_parts` 获取网络数据包的字符串元信息
 pub fn string_packet_meta(s: String) -> (usize, usize, usize) {
     let (ptr, len, cap) = s.into_raw_parts();
     let meta = (ptr as usize, len, cap);
@@ -11,16 +11,19 @@ pub fn string_packet_meta(s: String) -> (usize, usize, usize) {
 }
 
 /// 使用 `char::MAX_LEN_UTF8` 预分配网络消息 UTF-8 编码缓冲区
+/// `char::MAX_LEN_UTF8` network UTF-8 buffering
 pub fn utf8_encode_buffer_size() -> usize {
     char::MAX_LEN_UTF8
 }
 
 /// 使用 `char::MAX_LEN_UTF16` 预分配网络消息 UTF-16 编码缓冲区
+/// `char::MAX_LEN_UTF16` network UTF-16 buffering
 pub fn utf16_encode_buffer_size() -> usize {
     char::MAX_LEN_UTF16
 }
 
 /// 使用 `slice::as_array` 解析 4 字节网络头部
+/// `slice::as_array` 4 network
 pub fn parse_network_header(slice: &[u8]) -> Option<&[u8; 4]> {
     slice.as_array::<4>()
 }

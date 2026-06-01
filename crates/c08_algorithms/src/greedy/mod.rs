@@ -1,4 +1,5 @@
 //! 贪心算法：同步 / Rayon并行 / Tokio异步
+//! greedy algorithm ：synchronous / Rayonparallelism / Tokioasync
 use anyhow::Result;
 use rayon::prelude::*;
 use std::collections::{BinaryHeap, HashMap};
@@ -14,6 +15,7 @@ pub struct Interval {
 }
 
 /// 同步：按结束时间排序选择
+/// synchronous ：time ordering
 pub fn interval_scheduling_sync(mut intervals: Vec<Interval>) -> Vec<Interval> {
     intervals.sort_by_key(|iv| iv.end);
     let mut result = Vec::new();
@@ -28,6 +30,7 @@ pub fn interval_scheduling_sync(mut intervals: Vec<Interval>) -> Vec<Interval> {
 }
 
 /// 并行：并行排序后线性选择
+/// parallelism ：parallel sort after line
 pub fn interval_scheduling_parallel(mut intervals: Vec<Interval>) -> Vec<Interval> {
     intervals.par_sort_unstable_by_key(|iv| iv.end);
     let mut result = Vec::new();
@@ -51,6 +54,7 @@ pub async fn interval_scheduling_async(intervals: Vec<Interval>) -> Result<Vec<I
 // =========================
 
 /// 同步：对标准币值系统（如美分）正确
+/// synchronous ：to standard system （）
 pub fn coin_change_greedy_sync(mut coins: Vec<i64>, mut amount: i64) -> Vec<i64> {
     coins.sort_unstable();
     coins.reverse();
@@ -68,6 +72,7 @@ pub fn coin_change_greedy_sync(mut coins: Vec<i64>, mut amount: i64) -> Vec<i64>
 }
 
 /// 并行：并行预处理（排序），选择仍为线性
+/// parallelism ：parallelism （ordering ），as line
 pub fn coin_change_greedy_parallel(mut coins: Vec<i64>, amount: i64) -> Vec<i64> {
     coins.par_sort_unstable();
     let coins: Vec<i64> = coins.into_iter().rev().collect();

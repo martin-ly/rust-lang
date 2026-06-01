@@ -1,13 +1,21 @@
 //! 生命周期系统示例代码
-//!
+//! lifetime system example
 //! 本文件包含了生命周期系统的各种示例，包括：
+//! this lifetime system example ，：
 //! - 生命周期基础
+//! - lifetime foundation
 //! - 生命周期注解
+//! - lifetime
 //! - 生命周期推断
+//! - lifetime infer
 //! - 高级生命周期特性
+//! - lifetime feature
+//! - 高级lifetimefeature
 //! - 常见模式和最佳实践
+//! - and
 
 /// 生命周期基础示例
+/// lifetime foundation example
 pub fn lifetime_basics_examples() {
     println!("=== 生命周期基础示例 ===");
 
@@ -26,6 +34,7 @@ pub fn lifetime_basics_examples() {
 }
 
 /// 生命周期注解示例
+/// lifetime example
 pub fn lifetime_annotation_examples() {
     println!("\n=== 生命周期注解示例 ===");
 
@@ -45,6 +54,7 @@ pub fn lifetime_annotation_examples() {
 }
 
 /// 生命周期推断示例
+/// lifetime infer example
 pub fn lifetime_elision_examples() {
     println!("\n=== 生命周期推断示例 ===");
 
@@ -58,6 +68,7 @@ pub fn lifetime_elision_examples() {
 }
 
 /// 高级生命周期示例
+/// lifetime example
 pub fn advanced_lifetimes_examples() {
     println!("\n=== 高级生命周期示例 ===");
 
@@ -81,6 +92,7 @@ pub fn advanced_lifetimes_examples() {
 }
 
 /// 生命周期与泛型示例
+/// lifetime and generic example
 pub fn lifetime_generics_examples() {
     println!("\n=== 生命周期与泛型示例 ===");
 
@@ -95,6 +107,7 @@ pub fn lifetime_generics_examples() {
 }
 
 /// 生命周期与特征示例
+/// lifetime and example
 pub fn lifetime_traits_examples() {
     println!("\n=== 生命周期与特征示例 ===");
 
@@ -116,6 +129,7 @@ pub fn lifetime_traits_examples() {
 }
 
 /// 常见模式示例
+/// example
 pub fn common_patterns_examples() {
     println!("\n=== 常见模式示例 ===");
 
@@ -149,6 +163,7 @@ pub fn common_patterns_examples() {
 }
 
 /// 性能考虑示例
+/// performance example
 #[allow(unused_variables)]
 pub fn performance_examples() {
     println!("\n=== 性能考虑示例 ===");
@@ -171,6 +186,7 @@ pub fn performance_examples() {
 }
 
 /// 调试技巧示例
+/// tip example
 #[allow(unused_variables)]
 pub fn debugging_examples() {
     println!("\n=== 调试技巧示例 ===");
@@ -193,11 +209,13 @@ pub fn debugging_examples() {
 // ============================================================================
 
 /// 最长字符串函数
+/// function
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() { x } else { y }
 }
 
 /// 重要摘录结构体
+/// important struct
 struct ImportantExcerpt<'a> {
     part: &'a str,
 }
@@ -214,6 +232,7 @@ impl<'a> ImportantExcerpt<'a> {
 }
 
 /// 获取第一个单词
+/// first
 fn get_first_word(s: &str) -> &str {
     let bytes = s.as_bytes();
 
@@ -227,12 +246,15 @@ fn get_first_word(s: &str) -> &str {
 }
 
 /// 多重生命周期函数
+/// lifetime function
+/// 多重lifetimefunction
 #[allow(unused_variables)]
 fn multiple_lifetimes<'a>(x: &'a str, y: &str) -> &'a str {
     x
 }
 
 /// 生命周期约束函数
+/// lifetime function
 #[allow(unused_variables)]
 fn lifetime_constraints<'a, 'b>(x: &'a str, y: &'b str) -> &'a str
 where
@@ -242,6 +264,7 @@ where
 }
 
 /// 高阶生命周期约束
+/// lifetime
 #[allow(unused_variables)]
 fn higher_ranked_lifetime<F>(f: &F)
 where
@@ -253,6 +276,7 @@ where
 }
 
 /// 泛型生命周期函数
+/// generic lifetime function
 fn generic_lifetime<'a, T>(x: &'a T, y: &'a T) -> &'a T
 where
     T: std::fmt::Display,
@@ -262,6 +286,7 @@ where
 }
 
 /// 泛型引用结构体
+/// generic reference struct
 #[allow(unused_variables)]
 struct GenericRef<'a, T: ?Sized> {
     value: &'a T,
@@ -339,6 +364,7 @@ impl Drawable for Rectangle {
 }
 
 /// 绘制对象
+/// to
 #[allow(dead_code)]
 fn draw_objects(objects: &[Box<dyn Drawable>]) {
     for object in objects {
@@ -347,6 +373,7 @@ fn draw_objects(objects: &[Box<dyn Drawable>]) {
 }
 
 /// 单词迭代器
+/// 单词iterator
 #[allow(dead_code)]
 struct Words<'a> {
     text: &'a str,
@@ -386,6 +413,8 @@ impl<'a> Iterator for Words<'a> {
 }
 
 /// 缓存结构
+/// structure
+/// 缓存structure
 #[allow(dead_code)]
 struct Cache<'a, T> {
     data: std::collections::HashMap<String, &'a T>,
@@ -484,6 +513,7 @@ impl<'a> Parser<'a> {
 }
 
 /// 令牌类型
+/// type
 #[allow(dead_code)]
 #[allow(unused_variables)]
 #[derive(Debug)]
@@ -494,6 +524,7 @@ enum Token<'a> {
 }
 
 /// 性能示例函数
+/// performance example function
 #[allow(unused_variables)]
 fn no_runtime_cost(x: &str) -> &str {
     x
@@ -505,6 +536,7 @@ fn simple_function(s: &str) -> &str {
 }
 
 /// 引用结构体
+/// reference struct
 #[allow(dead_code)]
 #[allow(unused_variables)]
 struct RefStruct<'a> {
@@ -512,6 +544,7 @@ struct RefStruct<'a> {
 }
 
 /// 运行所有生命周期示例
+/// Run all lifetime example
 pub fn run_all_examples() {
     println!("Rust 生命周期系统示例");
     println!("======================");

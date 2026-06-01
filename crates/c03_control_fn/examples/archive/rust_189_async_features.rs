@@ -1,38 +1,32 @@
 //! # Rust 1.89 特性示例 (历史版本)
-//!
+//! # Rust 1.89 feature example (this )
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//!
+//! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features_demo.rs`
-//!
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features_demo.rs`
 //! ## 版本历史说明
-//!
-//! 本文件展示 Rust 1.89 版本的特性，当前项目已升级到 Rust 1.92.0。
-//!
+//! ## this explain
 //! ### Rust 1.92.0 主要改进
-//!
-//! - **语言特性**: MaybeUninit 文档化、联合体原始引用、关联项多边界等
-//! - **标准库**: NonZero::div_ceil、rotate_right、Location::file_as_c_str
+//! ### Rust 1.92.0 main
 //! - **性能优化**: 迭代器方法特化、改进的编译优化
-//!
+//! - **performance optimization **: method 、optimization
 //! ### 迁移建议
-//!
+//! ###
 //! 1. 更新 Cargo.toml: `rust-version = "1.92"`
-//! 2. 参考 `examples/rust_192_features_demo.rs` 了解最新特性示例
-//! 3. 查看 `docs/RUST_192_CONTROL_FLOW_IMPROVEMENTS.md` 了解完整改进
-//!
 //! 参考:
-//! - [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/)
+//! reference :
 //! - [历史版本: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
-//!
-//! ---
+//! - [历史版this: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 //!
 //! # Rust 1.89 异步编程特性示例
-//!
-//! 本示例展示了Rust 1.89版本中的异步编程增强特性：
+//! # Rust 1.89 async feature example
 //! - async fn trait 完全稳定化
 //! - 异步闭包改进
+//! - async
 //! - 异步迭代器支持
+//! - async
 //! - 异步运行时优化
+//! - async runtime optimization
 //use std::future::Future;
 use std::pin::Pin;
 use std::task::{Context, Poll};
@@ -42,20 +36,24 @@ use futures::future::{BoxFuture, join_all};
 use tokio_stream::{Stream, StreamExt};
 
 /// Rust 1.89 Async Trait 完全支持示例
-///
-/// 在Rust 1.89中，async fn trait已经完全稳定，支持：
 /// - 动态分发
+/// -
 /// - 特征对象向上转型
+/// - to on
 /// - 零成本抽象
+/// - cost
 #[allow(dead_code)]
 trait AsyncProcessor: Send + Sync {
     /// 异步处理数据
+    /// async
     fn process<'a>(&'a self, data: &'a [u8]) -> BoxFuture<'a, Result<Vec<u8>>>;
 
     /// 异步验证数据
+    /// async
     fn validate<'a>(&'a self, input: &'a str) -> BoxFuture<'a, bool>;
 
     /// 异步批量处理
+    /// async
     fn batch_process<'a>(&'a self, items: Vec<&'a [u8]>) -> BoxFuture<'a, Result<Vec<Vec<u8>>>> {
         Box::pin(async move {
             let mut results = Vec::new();
@@ -69,6 +67,7 @@ trait AsyncProcessor: Send + Sync {
 }
 
 /// 基础异步处理器实现
+/// foundation async
 struct BasicProcessor {
     name: String,
 }
@@ -101,6 +100,7 @@ impl AsyncProcessor for BasicProcessor {
 }
 
 /// 高级异步处理器实现
+/// async
 struct AdvancedProcessor {
     name: String,
     cache: std::collections::HashMap<String, Vec<u8>>,
@@ -147,17 +147,19 @@ impl AsyncProcessor for AdvancedProcessor {
 }
 
 /// 异步特征对象向上转型示例
+/// async to on example
 #[allow(dead_code)]
 async fn process_with_dyn(processor: &dyn AsyncProcessor, data: &[u8]) -> Result<Vec<u8>> {
     processor.process(data).await
 }
 
 /// 异步闭包改进示例
-///
-/// Rust 1.89中异步闭包有了显著改进：
+/// async example
 /// - 更好的生命周期推断
+/// - lifetime infer
+/// - 更好lifetimeinfer
 /// - 改进的错误诊断
-/// - 与async fn trait的更好集成
+/// -
 async fn async_closure_examples() {
     // 异步闭包作为参数
     let async_operation = |x: i32| async move {
@@ -184,8 +186,7 @@ async fn async_closure_examples() {
 }
 
 /// 异步迭代器示例
-///
-/// Rust 1.89中异步迭代器得到了更好的支持
+/// async example
 #[allow(dead_code)]
 struct AsyncNumberGenerator {
     start: i32,
@@ -219,6 +220,7 @@ impl Stream for AsyncNumberGenerator {
 
 impl AsyncNumberGenerator {
     /// 异步处理生成的数字
+    /// async
     async fn process_numbers(&mut self) -> Vec<i32> {
         let mut results = Vec::new();
 
@@ -233,11 +235,13 @@ impl AsyncNumberGenerator {
 }
 
 /// 异步运行时优化示例
-///
-/// Rust 1.89中异步运行时有了显著改进：
+/// async runtime optimization example
 /// - 改进的工作窃取调度器
+/// -
 /// - 更好的任务本地存储
+/// - task this
 /// - 优化的内存使用
+/// - optimization memory
 async fn runtime_optimization_examples() {
     // 并行任务处理 - 40%性能提升
     let tasks: Vec<_> = (0..1000)
@@ -258,6 +262,7 @@ async fn runtime_optimization_examples() {
 }
 
 /// 异步流式处理示例
+/// async stream example
 async fn stream_processing_examples() {
     // 改进的异步流处理 - 30%性能提升
     let numbers: Vec<i32> = (0..100).collect();
@@ -278,6 +283,7 @@ async fn stream_processing_examples() {
 }
 
 /// 异步取消机制改进示例
+/// async mechanism example
 async fn cancellation_improvements() {
     // 创建可取消的任务
     let task = tokio::spawn(async {
@@ -302,6 +308,7 @@ async fn cancellation_improvements() {
 }
 
 /// 主函数
+/// Main function
 #[tokio::main]
 async fn main() -> Result<()> {
     println!("🚀 Rust 1.89 异步编程特性演示");

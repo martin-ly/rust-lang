@@ -1,47 +1,46 @@
-//! Rust 1.97 特性跟踪模块 —— WebAssembly
 #![allow(clippy::incompatible_msrv)]
 
 use std::num::NonZeroU32;
 
 /// # Rust 1.97 WASM 相关特性演示
-///
-/// Rust 1.97 稳定化的与 WASM/跨平台相关的 API：
+/// # Rust 1.97 WASM feature demonstration
 /// - `midpoint` / `isqrt` — 数值计算（WASM32 目标可用）
 /// - `pointer::addr` / `with_addr` — Strict Provenance（WASM 内存模型安全）
 /// - `Option::as_slice` — 零成本抽象
 pub struct Rust197WasmFeatures;
 
 impl Rust197WasmFeatures {
-    /// 使用 `u32::midpoint` 计算索引中点（WASM 友好的无溢出算法）
-    ///
     /// 在 32 位 WASM 目标上，`(low + high) / 2` 可能溢出，
+    /// in 32 WASM goal on ，`(low + high) / 2` may ，
     /// `midpoint` 使用位运算避免此问题。
+    /// `midpoint` this problem 。
+    /// `midpoint` Use位运算Avoidthisproblem。
     pub fn wasm_safe_midpoint(low: u32, high: u32) -> u32 {
         low.midpoint(high)
     }
 
     /// 使用 `u32::isqrt` 计算整数平方根（WASM 无浮点依赖）
-    ///
+    /// `u32::isqrt` （WASM point ）
     /// 纯整数算法，不依赖 WASM 浮点单元。
+    /// algorithm ， WASM point 。
     pub fn wasm_integer_sqrt(n: u32) -> u32 {
         n.isqrt()
     }
 
     /// 使用 `pointer::addr` 获取线性内存地址
-    ///
+    /// `pointer::addr` line memory
     /// 在 WASM 中，指针即线性内存偏移量。`addr()` 安全地获取此值。
+    /// in WASM in ，pointer line memory 。`addr()` this 。
     pub fn wasm_memory_addr<T>(ptr: *const T) -> usize {
         ptr.addr()
     }
 
-    /// 使用 `Option::as_slice` 实现 WASM 边界的高效可选值传递
-    ///
     /// 通过切片视图避免额外的分支和内存分配。
+    /// outside and memory 。
     pub fn option_as_slice_for_wasm<T>(opt: &Option<T>) -> &[T] {
         opt.as_slice()
     }
 
-    /// 使用 `NonZeroU32` 的科学计数法格式化（WASM 文本输出）
     pub fn format_nonzero_for_wasm(n: NonZeroU32) -> String {
         format!("{:e}", n)
     }

@@ -1,22 +1,22 @@
 //! Rust 1.95 特性 —— 网络场景
-//!
+//! Rust 1.95 feature —— network scenario
 //! # 概述
-//!
-//! Rust 1.95 为网络编程带来了多项关键增强：
+//! #
 //! - **`Atomic*::update`/`try_update`** — 无锁连接池计数器、并发统计
-//! - **`core::hint::cold_path`** — 错误处理与异常路径优化
-//! - **`if let` guards** — 协议解析状态机中的条件匹配
+//! - **`Atomic*::update`/`try_update`** — lock-free 、concurrency
 //! - **`cfg_select!`** — 跨平台网络系统调用抽象
-//!
+//! - **`cfg_select!`** — platform network system
 //! # 网络场景特性映射
-//!
+//! # network scenario feature
 //! | 1.95 特性 | 网络应用场景 | 收益 |
-//! |-----------|-------------|------|
-//! | `AtomicUsize::update` | 连接池引用计数 | 无锁、零分配 |
-//! | `AtomicU32::try_update` | 速率限制令牌桶 | 原子性条件扣减 |
+//! | 1.95 feature | network application scenario | return |
 //! | `cold_path()` | TCP 连接失败处理 | I-cache 友好 |
 //! | `if let` guards | HTTP 头部解析 | 减少嵌套、提升可读性 |
+//! | `if let` guards | HTTP | 、 |
+//! | `if let` guards | HTTP 头部Parse | 减少嵌套、提升可读性 |
+//! | `if let` guards | HTTP Parse | 、 |
 //! | `cfg_select!` | socket 创建跨平台 | 零条件编译开销 |
+//! | `cfg_select!` | socket platform | condition overhead |
 
 use std::sync::atomic::{AtomicU32, AtomicUsize, Ordering};
 
@@ -25,19 +25,22 @@ use std::sync::atomic::{AtomicU32, AtomicUsize, Ordering};
 // ============================================================================
 
 /// # 原子操作在网络中的深度应用
-///
+/// # atomic operation in network in application
 /// 网络服务中常见的原子场景：连接计数、请求统计、速率限制。
+/// network in scenario ：、、。
 pub struct NetworkAtomicExamples;
 
 impl NetworkAtomicExamples {
     /// 连接池引用计数递增（update）
-    ///
+    /// reference counting （update）
     /// 每个新连接建立时原子递增活跃连接数。
+    /// 。
     pub fn increment_active_connections(counter: &AtomicUsize) -> usize {
         counter.update(Ordering::Relaxed, Ordering::Relaxed, |old| old + 1)
     }
 
     /// 连接池引用计数递减（update）
+    /// reference counting （update）
     pub fn decrement_active_connections(counter: &AtomicUsize) -> usize {
         counter.update(Ordering::Relaxed, Ordering::Relaxed, |old| {
             old.saturating_sub(1)
@@ -45,8 +48,9 @@ impl NetworkAtomicExamples {
     }
 
     /// 速率限制：令牌桶原子扣减（try_update）
-    ///
+    /// ：（try_update）
     /// 尝试从令牌桶中消耗一个令牌。如果桶为空，返回 `Err`。
+    /// from in 。if as ， `Err`。
     pub fn try_consume_token(bucket: &AtomicU32) -> Result<u32, u32> {
         bucket.try_update(Ordering::Acquire, Ordering::Relaxed, |tokens| {
             if tokens > 0 { Some(tokens - 1) } else { None }
@@ -59,6 +63,7 @@ impl NetworkAtomicExamples {
     }
 
     /// 请求统计：原子累加响应大小
+    /// ：
     pub fn record_response_size(counter: &AtomicUsize, size: usize) -> usize {
         counter.update(Ordering::Relaxed, Ordering::Relaxed, |old| old + size)
     }
@@ -69,13 +74,14 @@ impl NetworkAtomicExamples {
 // ============================================================================
 
 /// # 冷路径优化在网络服务中的应用
-///
+/// # optimization in network in application
 /// 网络服务中，错误路径（连接失败、超时、协议错误）应该远少于成功路径。
-/// `cold_path()` 告诉编译器将这些分支移出热代码路径，改善 I-cache。
+/// network in ，（、、）should 。
 pub struct NetworkColdPathExamples;
 
 impl NetworkColdPathExamples {
     /// TCP 连接建立：错误路径标记为冷
+    /// TCP ：mark as
     pub fn handle_connect_result(
         result: Result<std::net::TcpStream, std::io::Error>,
     ) -> Option<std::net::TcpStream> {
@@ -89,7 +95,6 @@ impl NetworkColdPathExamples {
         }
     }
 
-    /// HTTP 解析：非法方法路径标记为冷
     pub fn parse_http_method(method: &str) -> Option<&str> {
         match method {
             "GET" | "POST" | "PUT" | "DELETE" | "HEAD" | "OPTIONS" | "PATCH" => Some(method),
@@ -101,6 +106,7 @@ impl NetworkColdPathExamples {
     }
 
     /// 限流检查：被限流路径标记为冷
+    /// stream ：is stream mark as
     pub fn check_rate_limit(remaining: &AtomicU32) -> bool {
         match NetworkAtomicExamples::try_consume_token(remaining) {
             Ok(_) => true,
@@ -116,9 +122,7 @@ impl NetworkColdPathExamples {
 // 3. if let guards — 协议解析状态机
 // ============================================================================
 
-/// # `if let` guards 在协议解析中的应用
-///
-/// HTTP/1.1 流水线或 WebSocket 握手状态机中，条件匹配可大幅简化代码。
+/// # `if let` guards in协议Parseinapplication
 pub struct ProtocolIfLetGuardExamples;
 
 impl ProtocolIfLetGuardExamples {
@@ -137,7 +141,6 @@ impl ProtocolIfLetGuardExamples {
         }
     }
 
-    /// WebSocket 握手：验证 Upgrade 头部
     pub fn check_websocket_upgrade(upgrade: Option<&str>, connection: Option<&str>) -> bool {
         matches!(
             (upgrade, connection),
@@ -148,6 +151,7 @@ impl ProtocolIfLetGuardExamples {
     }
 
     /// TCP 状态转换：仅在特定状态下允许转换
+    /// TCP state conversion ：in state under conversion
     pub fn tcp_state_transition(state: &str, event: &str) -> Option<&'static str> {
         match (state, event) {
             ("SYN_SENT", "SYN-ACK")
@@ -172,14 +176,11 @@ fn extract_seq(event: &str) -> Option<u32> {
 // 4. cfg_select! — 跨平台网络系统调用
 // ============================================================================
 
-/// # `cfg_select!` 在网络系统调用中的应用
-///
-/// 不同操作系统的 socket 创建、ioctl 调用有显著差异。
-/// `cfg_select!` 提供了零开销的跨平台抽象。
 pub struct NetworkCfgSelectExamples;
 
 impl NetworkCfgSelectExamples {
     /// 获取系统默认的 TCP 发送缓冲区大小（概念值）
+    /// system TCP buffering （concept ）
     pub const DEFAULT_TCP_SEND_BUFFER: usize = cfg_select! {
         target_os = "linux" => 16384,
         target_os = "macos" => 8192,
@@ -188,6 +189,7 @@ impl NetworkCfgSelectExamples {
     };
 
     /// 获取系统默认的 TCP 接收缓冲区大小（概念值）
+    /// system TCP buffering （concept ）
     pub const DEFAULT_TCP_RECV_BUFFER: usize = cfg_select! {
         target_os = "linux" => 87380,
         target_os = "macos" => 65536,
@@ -196,6 +198,7 @@ impl NetworkCfgSelectExamples {
     };
 
     /// 最大并发连接数推荐值（基于平台限制）
+    /// maximum concurrency （platform ）
     pub const MAX_CONNECTIONS_RECOMMENDED: usize = cfg_select! {
         target_os = "linux" => 65535,
         target_os = "macos" => 16384,
@@ -204,6 +207,7 @@ impl NetworkCfgSelectExamples {
     };
 
     /// 跨平台 socket 创建标志（概念值）
+    /// platform socket mark （concept ）
     pub fn socket_creation_flags() -> i32 {
         cfg_select! {
             target_os = "linux" => 0x80000 | 0x800, // SOCK_CLOEXEC | SOCK_NONBLOCK
@@ -296,19 +300,22 @@ mod tests {
 use std::ffi::CStr;
 
 /// # 真实 Rust 1.95 特性演示
-///
+/// # real Rust 1.95 feature demonstration
 /// 展示 `c"..."` C 字符串字面量、`if let` guards 以及 `const {}` 块。
+/// `c"..."` C surface 、`if let` guards and `const {}` 。
 pub struct RealRust195Features;
 
 impl RealRust195Features {
     /// 使用 `c"HTTP/1.1"` 表示协议版本
+    /// `c"HTTP/1.1 "` represent this
     pub fn protocol_cstr_literal() -> &'static CStr {
         c"HTTP/1.1"
     }
 
     /// 使用 `if let` guard 解析数据包
-    ///
+    /// `if let` guard
     /// 在 match 臂中直接解构 `Option` 并检查条件。
+    /// in match in `Option` and condition 。
     pub fn parse_packet_with_guard(packet: Option<Vec<u8>>) -> Result<usize, &'static str> {
         match packet {
             Some(data)
@@ -323,6 +330,7 @@ impl RealRust195Features {
     }
 
     /// 使用 `const {}` 计算协议头大小
+    /// `const {}`
     pub const fn const_block_header_size() -> usize {
         const { 4 + 2 + 2 }
     }

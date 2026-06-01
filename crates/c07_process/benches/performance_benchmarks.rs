@@ -5,6 +5,7 @@ use std::hint::black_box;
 use std::time::Duration;
 
 /// 进程创建性能基准测试
+/// process Performance benchmark
 fn benchmark_process_creation(c: &mut Criterion) {
     let mut group = c.benchmark_group("Process Creation");
 
@@ -56,6 +57,7 @@ fn benchmark_process_creation(c: &mut Criterion) {
 }
 
 /// 进程池性能基准测试
+/// process Performance benchmark
 fn benchmark_process_pool(c: &mut Criterion) {
     let mut group = c.benchmark_group("Process Pool");
 
@@ -122,6 +124,8 @@ fn benchmark_process_pool(c: &mut Criterion) {
 }
 
 /// IPC通信性能基准测试
+/// IP CPerformance benchmark
+/// IPC通信performancebenchmark
 fn benchmark_ipc_communication(c: &mut Criterion) {
     let mut group = c.benchmark_group("IPC Communication");
 
@@ -145,6 +149,7 @@ fn benchmark_ipc_communication(c: &mut Criterion) {
 }
 
 /// 同步原语性能基准测试
+/// synchronous Performance benchmark
 fn benchmark_synchronization(c: &mut Criterion) {
     let mut group = c.benchmark_group("Synchronization");
 
@@ -198,6 +203,7 @@ fn benchmark_synchronization(c: &mut Criterion) {
 }
 
 /// 并发性能基准测试
+/// concurrency Performance benchmark
 fn benchmark_concurrency(c: &mut Criterion) {
     let mut group = c.benchmark_group("Concurrency");
 
@@ -283,6 +289,7 @@ fn benchmark_concurrency(c: &mut Criterion) {
 }
 
 /// 内存使用性能基准测试
+/// memory Performance benchmark
 fn benchmark_memory_usage(c: &mut Criterion) {
     let mut group = c.benchmark_group("Memory Usage");
 

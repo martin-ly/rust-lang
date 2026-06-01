@@ -8,9 +8,6 @@ use tokio::time::sleep;
 use tracing::{debug, error, info};
 //use std::sync::atomic::{AtomicUsize, AtomicU64, Ordering};
 
-/// 2025年WebAssembly异步支持演示
-/// 展示最新的WebAssembly异步编程模式和最佳实践
-/// 1. WebAssembly模块管理器
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WasmModuleConfig {
     pub module_name: String,
@@ -203,7 +200,6 @@ pub struct WasmExecutionResult {
     pub memory_used: usize,
 }
 
-/// 2. WebAssembly异步任务调度器
 #[allow(dead_code)]
 #[derive(Debug, Clone)]
 pub struct AsyncWasmTaskScheduler {
@@ -388,7 +384,6 @@ impl AsyncWasmTaskScheduler {
     }
 }
 
-/// 3. WebAssembly内存管理器
 #[derive(Debug, Clone)]
 pub struct AsyncWasmMemoryManager {
     memory_pools: Arc<RwLock<HashMap<String, WasmMemoryPool>>>,

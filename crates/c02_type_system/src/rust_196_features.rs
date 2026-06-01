@@ -1,24 +1,18 @@
 //! # Rust 1.96 特性跟踪模块（含历史特性复习）
-//!
-//! 本模块包含 Rust 1.96.0 稳定版的类型系统增强：
-//! - `core::range` 完整类型族（`Range`、`RangeFrom`、`RangeInclusive`、`RangeToInclusive`）⭐
+//! # Rust 1.96 feature module （feature ）
 //! - `assert_matches!` / `debug_assert_matches!` — 模式匹配断言宏 ⭐
-//! - `From<T>` for `LazyCell` / `LazyLock` / `AssertUnwindSafe` ⭐
-//! - `NonZero` 范围迭代 ⭐
-//! - `ManuallyDrop` 常量模式 ⭐
 //! - `expr` metavariable 传递给 `cfg` ⭐
-//! - Never 类型在 tuple 中的强制转换 ⭐
-//!
+//! - Never typein tuple in强制conversion ⭐
 //! 以及历史特性复习（非 1.96 新增，但与本模块教学相关）：
-//! - `impl From<bool> for {f32, f64}` — 1.68.0 stable
-//! - `VecDeque::new` 的 const 上下文支持 — 1.68.0 stable
-//!
+//! and feature （ 1.96 ，but and this module ）：
 //! # 版本信息
-//! - Rust版本: 1.96.0+ (stable)
+//! # this
 //! - 稳定日期: 2026-05-28
-//! - Edition: 2024
-//!
+//! - date : 2026-05-28
+//! - 稳定date: 2026-05-28
+//! - date: 2026-05-28
 //! # Rust 1.96.0 类型系统新特性
+//! # Rust 1.96.0 type system feature
 
 use std::assert_matches;
 
@@ -27,29 +21,34 @@ use std::assert_matches;
 // ============================================================================
 
 /// # 布尔到浮点转换 (`From<bool> for f32/f64`)
-///
-/// Rust 1.68.0 稳定了 `impl From<bool> for f32` 和 `impl From<bool> for f64`，
-/// 允许将 `bool` 直接转换为 `0.0` (false) 或 `1.0` (true)。
-///
+/// # to point conversion (`From<bool> for f32/f64`)
+/// # 布尔to浮pointconversion (`From<bool> for f32/f64`)
+/// Allowswill `bool` 直接conversionas `0.0` (false) or `1.0` (true)。
 /// ## 类型系统意义
-/// 这是 Rust 类型一致性 (type coherence) 的进一步完善：
+/// ## type system
 /// - `bool` 已实现 `From<bool> for {integer}` (1.68.0 stable)
+/// - `bool` 已Implementation of `From<bool> for {integer}` (1.68.0 stable)
 /// - 1.96 补全了对浮点类型的对称转换
-/// - 统一了数值类型从 `bool` 的转换接口
-///
+/// - 1.96 to point type to conversion
 /// ## 应用场景
+/// ## application scenario
 /// - 机器学习特征向量构建 (0.0/1.0 特征)
+/// - machine learning (0.0/1.0 )
 /// - 概率计算中的指示函数
+/// - in function
 /// - 传感器数据处理 (布尔状态 → 浮点信号)
+/// - (state → point )
 pub struct BoolToFloatConversionExamples;
 
 impl BoolToFloatConversionExamples {
     /// 将布尔数组转换为 f64 特征向量
+    /// will conversion as f64
     pub fn bool_vector_to_features(flags: &[bool]) -> Vec<f64> {
         flags.iter().map(|&b| f64::from(b)).collect()
     }
 
     /// 条件概率指示函数: P(A) ≈ mean(indicator_A)
+    /// condition function : P(A) ≈ mean(indicator_A)
     pub fn indicator(probability: f64, condition: bool) -> f64 {
         if condition {
             probability
@@ -59,6 +58,7 @@ impl BoolToFloatConversionExamples {
     }
 
     /// 传感器布尔状态转换为模拟信号强度
+    /// state conversion as
     pub fn sensor_status_to_signal(active: bool, base_strength: f64) -> f64 {
         f64::from(active) * base_strength
     }
@@ -70,25 +70,19 @@ impl BoolToFloatConversionExamples {
 
 use std::collections::VecDeque;
 
-/// # `VecDeque::new` const 支持
-///
-/// Rust 1.68.0 使 `VecDeque::new` 可在 `const` 上下文中调用，
 /// 允许在编译期初始化双端队列常量。
-///
+/// in constant 。
 /// ## 类型系统意义
-/// 这是 `const fn` 能力向标准库集合的持续扩展，
+/// ## type system
 /// 使得更多数据结构可以在编译期构造，减少运行时初始化开销。
-///
+/// data structure can in ，runtime overhead 。
 /// ## 限制
-/// - 仅 `new()` 为 const，其他操作（push/pop）仍非常量
-/// - 需要 `const Mutex` 或 `static` + `LazyLock` 才能实现真正的编译期全局队列
+/// ##
 pub struct ConstVecDequeExamples;
 
 impl ConstVecDequeExamples {
-    /// 编译期初始化的空 VecDeque 常量
     pub const EMPTY_QUEUE: VecDeque<i32> = VecDeque::new();
 
-    /// 使用 const VecDeque 构建静态配置
     pub fn build_static_config() -> VecDeque<&'static str> {
         // 注意: 在 stable Rust 中，const VecDeque 只能初始化，
         // 修改需要结合 LazyLock 或运行时初始化
@@ -124,15 +118,18 @@ impl ConstVecDequeExamples {
 // ==================== 示例 1: 基础 Never 类型 ====================
 
 /// 永远不会返回的函数
-///
+/// function
+/// 永远不会Returnfunction
 /// `-> !` 明确标记此函数不会正常返回，只会通过 panic/exit/无限循环结束。
+/// `->!` explicit mark this function ， panic/exit/circulation 。
 pub fn always_panics() -> ! {
     panic!("此函数永远不会返回")
 }
 
 /// 无限循环也返回 never 类型
-///
+/// circulation never type
 /// 在嵌入式或服务器场景中常见：主循环永不退出。
+/// in or scenario in ：circulation 。
 pub fn infinite_loop() -> ! {
     loop {
         // 执行某些永久运行的任务
@@ -141,8 +138,7 @@ pub fn infinite_loop() -> ! {
 }
 
 /// 进程退出函数
-///
-/// `std::process::exit` 返回 `!`，因为调用后程序立即终止。
+/// process function
 pub fn fatal_error(message: &str) -> ! {
     eprintln!("致命错误: {}", message);
     std::process::exit(1)
@@ -151,24 +147,24 @@ pub fn fatal_error(message: &str) -> ! {
 // ==================== 示例 2: Result<T, !> —— 不可能失败的运算 ====================
 
 /// 安全的整数加法（不可能溢出）
-///
+/// （may ）
 /// 当通过类型系统或前置条件保证操作不会失败时，可以使用 `!` 作为错误类型。
+/// when type system or before condition ，can `!` as error type 。
 pub fn safe_add(a: u32, b: u32) -> Result<u32, !> {
     // 如果业务逻辑保证不会溢出，错误类型为 `!`
     Ok(a.wrapping_add(b))
 }
 
 /// 字符串字面量的解析（编译期已知有效）
-///
+/// surface （effective ）
 /// 从已知有效的字符串构建数字，理论上不可能失败。
+/// from effective ，theory on may 。
 pub fn parse_known_valid() -> Result<i32, !> {
     // 编译器知道 "42" 一定能解析成功
     Ok("42".parse().unwrap())
 }
 
-/// 将 `Result<T, !>` 安全地转换为 `T`
-///
-/// 由于 `!` 表示不可能出现的错误，可以直接 unwrap 而无需担心 panic。
+/// will `Result<T, !>` 安全地conversionas `T`
 pub fn unwrap_infallible<T>(result: Result<T, !>) -> T {
     // Rust 2024: match 对 `Result<T, !>` 支持穷尽性检查，
     // 编译器知道 `Err` 分支不可能发生
@@ -180,9 +176,7 @@ pub fn unwrap_infallible<T>(result: Result<T, !>) -> T {
 
 // ==================== 示例 3: match 穷尽性检查 ====================
 
-/// 使用 `Result<T, !>` 的穷尽性 match
-///
-/// Rust 2024 Edition 中，编译器能更好地识别 `!` 类型的穷尽性。
+/// Use `Result<T, !>` 穷尽性 match
 pub fn demonstrate_exhaustive_match() -> i32 {
     let x: Result<i32, !> = Ok(42);
 
@@ -193,22 +187,25 @@ pub fn demonstrate_exhaustive_match() -> i32 {
     }
 }
 
-/// 自定义枚举与 never 类型的组合
-///
+/// 自definitionenumand never typecombination
 /// 使用泛型参数表示"某些变体在特定上下文中不可能出现"。
+/// generic parameter represent "volume in on under in may "。
 #[derive(Debug, PartialEq, Clone)]
 pub enum Event<T, E> {
     /// 数据到达
+    /// to
     Data(T),
     /// 错误发生
     Error(E),
     /// 流结束
+    /// stream
     End,
 }
 
 /// 处理不可能出错的流事件
-///
+/// may stream
 /// 当 `E = !` 时，Error 变体在物理上不可能被构造。
+/// when `E =!` ，Error volume in on may is 。
 pub fn process_infallible_stream(event: Event<i32, !>) -> Option<i32> {
     match event {
         Event::Data(v) => Some(v),
@@ -218,8 +215,7 @@ pub fn process_infallible_stream(event: Event<i32, !>) -> Option<i32> {
 }
 
 /// 过滤后的结果类型
-///
-/// 当错误已经被提前过滤掉，剩余的结果类型可以标记为 `Result<T, !>`。
+/// after result type
 pub fn filtered_result(values: Vec<Result<i32, String>>) -> Vec<Result<i32, !>> {
     values
         .into_iter()
@@ -233,8 +229,7 @@ pub fn filtered_result(values: Vec<Result<i32, String>>) -> Vec<Result<i32, !>> 
 // ==================== 示例 4: 控制流中的 never 类型 ====================
 
 /// 提前返回辅助函数
-///
-/// 在 match 中使用返回 `!` 的函数，利用其可以转换为任何类型的特性。
+/// before function
 pub fn validate_positive(value: Option<i32>) -> i32 {
     match value {
         Some(v) if v > 0 => v,
@@ -242,9 +237,6 @@ pub fn validate_positive(value: Option<i32>) -> i32 {
     }
 }
 
-/// 条件分支中的 never 类型 coercion
-///
-/// `!` 在条件表达式中自动 coercion 为目标类型。
 pub fn conditional_never(flag: bool) -> i32 {
     if flag {
         42
@@ -253,9 +245,6 @@ pub fn conditional_never(flag: bool) -> i32 {
     }
 }
 
-/// Option 的 map 与 never 类型
-///
-/// `Option<!>` 等价于 `None`，因为无法构造 `Some(!)`。
 pub fn demonstrate_option_never() -> String {
     let impossible: Option<!> = None;
 
@@ -269,23 +258,28 @@ pub fn demonstrate_option_never() -> String {
 // ==================== 示例 5: 实际应用场景 ====================
 
 /// 配置加载结果
-///
+/// result
 /// 在某些场景下，配置必须存在且有效，否则程序直接退出。
+/// in scenario under ，must in and effective ，program 。
 pub type InfallibleConfig = Result<AppConfig, !>;
 
 /// 应用配置
+/// application
 #[derive(Debug, PartialEq, Clone)]
 pub struct AppConfig {
     /// 应用名称
+    /// application
     pub name: String,
     /// 版本号
+    /// this
     pub version: String,
 }
 
 impl AppConfig {
     /// 加载配置（在生产环境中不可失败）
-    ///
+    /// （in environment in ）
     /// 如果配置缺失，直接终止进程而非返回错误。
+    /// if ，process while 。
     pub fn load_critical() -> Result<AppConfig, !> {
         match Self::load_optional() {
             Some(config) => Ok(config),
@@ -294,6 +288,7 @@ impl AppConfig {
     }
 
     /// 可选加载（可能失败）
+    /// （may ）
     fn load_optional() -> Option<AppConfig> {
         Some(AppConfig {
             name: "MyApp".to_string(),
@@ -303,8 +298,9 @@ impl AppConfig {
 }
 
 /// 编译期常量求值
-///
+/// constant
 /// 编译期计算不可能在运行时失败，错误类型为 `!`。
+/// may in runtime ，error type as `!`。
 pub const fn compile_time_compute(input: u32) -> Result<u32, !> {
     Ok(input * 2)
 }
@@ -312,6 +308,7 @@ pub const fn compile_time_compute(input: u32) -> Result<u32, !> {
 // ==================== 演示函数 ====================
 
 /// 演示 Never 类型特性
+/// demonstration Never type feature
 pub fn demonstrate_never_type() {
     println!("\n========================================");
     println!("   Rust 2024 Edition Never 类型 (!) 演示");
@@ -353,6 +350,7 @@ pub fn demonstrate_never_type() {
 }
 
 /// 获取 never 类型特性信息
+/// never type feature
 pub fn get_never_type_info() -> String {
     "Rust 2024 Edition Never 类型 (!) 特性:\n- `!` 可强制转换为任何类型\n- `Result<T, !>` \
      表示不可能失败的操作\n- match 穷尽性检查：无需处理 `Err(!)` 分支\n- \
@@ -365,66 +363,45 @@ pub fn get_never_type_info() -> String {
 // ============================================================================
 
 /// # `core::range` 模块完整类型族
-///
-/// Rust 1.95 稳定了 `RangeInclusive` 和 `RangeInclusiveIter`。
-/// **1.96.0 补齐了 `core::range` 的其余核心类型**：
-///
+/// # `core::range` module complete type
 /// | 类型 | 语法 | 含义 | 对应迭代器 |
-/// |:---|:---|:---|:---|
-/// | `Range` | `start..end` | 半开区间 `[start, end)` | `RangeIter` |
-/// | `RangeFrom` | `start..` | 无限区间 `[start, ∞)` | `RangeFromIter` |
-/// | `RangeToInclusive` | `..=end` | 闭区间 `(-∞, end]` | `RangeToInclusiveIter` |
-/// | `RangeInclusive` (1.95) | `start..=end` | 闭区间 `[start, end]` | `RangeInclusiveIter` |
-///
+/// | type | | | to |
+/// | type | 语法 | 含义 | to应iterator |
 /// **来源**: [Rust Standard Library: core::range] · [RFC 3550]
-///
 /// ## 设计目标
-///
+/// ## design goal
 /// 1. **模块统一**: 所有 range 类型集中到 `core::range`
-/// 2. **零成本抽象**: `RangeIter` 等是惰性视图，不分配内存
-/// 3. **泛型一致**: 为 future 的 `Range<T>` 泛型化做准备
-///
+/// 1. **module **: all range type in to `core::range`
 /// ## 代码示例
-///
-/// ```rust,ignore
-/// // 注意: RangeToInclusive 的 IntoIterator 需要 Rust 1.96+ 且 Idx: Zero
-/// use core::range::{
-///     Range, RangeFrom, RangeFromIter, RangeIter, RangeToInclusive, RangeToInclusiveIter,
+/// ## example
+/// ## 代码Example of
 /// };
 ///
 /// // Range: 半开区间 [1, 5)
-/// let range = Range { start: 1, end: 5 };
-/// let mut iter: RangeIter<i32> = range.into_iter();
+/// // Range: interval [1, 5)
+/// // Range: 半开interval [1, 5)
 /// assert_eq!(iter.next(), Some(1));
 /// assert_eq!(iter.next(), Some(2));
 /// // ... 3, 4, None
 ///
-/// // RangeFrom: 无限区间 [10, ∞)
-/// let from = RangeFrom { start: 10 };
-/// let mut iter: RangeFromIter<i32> = from.into_iter();
 /// assert_eq!(iter.next(), Some(10));
 /// assert_eq!(iter.next(), Some(11));
 /// // ... 无限递增（需配合 take）
-///
-/// // RangeToInclusive: 闭区间 (-∞, 5]
-/// let to = RangeToInclusive { last: 5 };
-/// // 注意：RangeToInclusive 需要从 0 开始迭代
-/// let mut iter: RangeToInclusiveIter<i32> = to.into_iter();
-/// assert_eq!(iter.next(), Some(0));
+/// //... （ take）
 /// assert_eq!(iter.next(), Some(1));
 /// // ... 2, 3, 4, 5, None
 /// ```
 ///
 /// ## 与 `std::ops` 的关系
-///
-/// ```text
+/// ## and `std::ops`
+/// ## and `std::ops` 关系
 /// std::ops::Range<T>        ↔  core::range::Range<T>
 /// std::ops::RangeFrom<T>    ↔  core::range::RangeFrom<T>
 /// std::ops::RangeToInclusive<T> ↔  core::range::RangeToInclusive<T>
 ///
-/// 当前状态：两者共存，core::range 是未来方向
 /// 推荐：新代码使用 core::range 以保持一致性
-/// ```
+/// ： core::range consistency
+/// 推荐：新代码Use core::range 以保持consistency
 pub fn core_range_demo() {
     use core::range::{Range, RangeFrom, RangeToInclusive};
 
@@ -446,11 +423,6 @@ pub fn core_range_demo() {
 // 5. `NonZero` 范围迭代 (1.96 stable)
 // ============================================================================
 
-/// # `NonZero` 整数范围迭代
-///
-/// Rust 1.96 为 `NonZero*` 类型实现了 `Step` trait，允许对非零整数范围进行迭代：
-///
-/// ```rust
 /// use std::num::NonZeroU32;
 /// use std::ops::Range;
 ///
@@ -464,11 +436,13 @@ pub fn core_range_demo() {
 /// ```
 ///
 /// **应用场景**:
+/// **application scenario **:
 /// - 数据库 ID 范围扫描（ID 永不为 0）
+/// - database ID scope （ID as 0）
 /// - 文件描述符遍历（fd >= 1）
+/// - file descriptor （fd >= 1）
 /// - 任何语义上排除 0 的数值范围
-///
-/// **来源**: [Rust Standard Library: NonZero]
+/// - on 0 scope
 pub fn nonzero_range_demo() {
     use std::num::NonZeroU32;
     use std::ops::Range;
@@ -486,10 +460,9 @@ pub fn nonzero_range_demo() {
 // ============================================================================
 
 /// # 模式断言宏
-///
+/// #
 /// `assert_matches!` 允许对表达式进行模式匹配断言，无需展开 `if let`：
-///
-/// ```rust
+/// `assert_matches!` to express ， `if let`：
 /// use std::assert_matches;
 /// let result: Result<i32, &str> = Ok(42);
 /// assert_matches!(result, Ok(n) if n > 0);
@@ -498,11 +471,12 @@ pub fn nonzero_range_demo() {
 /// assert_matches!(option, Some(s) if s.len() > 0);
 /// ```
 ///
-/// **与 `assert!(matches!(...))` 的区别**:
+/// **and `assert!(matches!(...))` 区别**:
 /// - 错误信息更友好（显示实际值 vs 模式）
+/// - error message （display actual vs ）
 /// - 支持 guard 条件（`if expr`）
 /// - 支持变量绑定（`Ok(v) => { use v; }`）
-///
+/// - variable （`Ok(v) => { use v; }`）
 /// **来源**: [Rust Standard Library: assert_matches]
 pub fn assert_matches_demo() {
     // assert_matches! 在 Rust 1.96.0+ 稳定
@@ -596,24 +570,31 @@ mod tests {
 }
 
 /// 类型转换反模式与边界情况专题
+/// type conversion and edge situation
 pub mod anti_patterns_and_edge_cases {
     /// 展示类型转换中的反模式和边界情况
+    /// type conversion in and edge situation
     pub struct TypeConversionAntiPatterns;
 
     impl TypeConversionAntiPatterns {
         /// ❌ 不推荐：无检查地将大类型转换为小类型
+        /// ❌ ：will type conversion as type
         pub fn dangerous_narrowing(value: u64) -> u8 {
             // ❌ 反例：直接 as 转换，高位截断而不报错
             value as u8
         }
 
         /// ✅ 推荐：使用 try_into 进行安全转换
+        /// ✅ ： try_into conversion
+        /// ✅ 推荐：Use try_into 进行安全conversion
         pub fn safe_narrowing(value: u64) -> Result<u8, &'static str> {
             value.try_into().map_err(|_| "value out of u8 range")
         }
 
         /// ⚠️ 边界情况：f64 到整数的精度丢失边界
+        /// ⚠️ edge situation ：f64 to edge
         /// 超过 2^53 的 f64 无法精确表示所有整数
+        /// 2^53 f64 represent all
         pub fn f64_to_integer_boundary(value: f64) -> Result<i64, &'static str> {
             // ⚠️ 边界情况：检查 f64 是否能精确表示目标整数
             const MAX_EXACT_INTEGER: f64 = 9_007_199_254_740_992.0; // 2^53
@@ -630,6 +611,7 @@ pub mod anti_patterns_and_edge_cases {
         }
 
         /// ⚠️ 边界情况：u8 极值边界上的运算
+        /// ⚠️ edge situation ：u8 edge on
         pub fn u8_arithmetic_boundary(a: u8, b: u8) -> Result<u8, &'static str> {
             // ⚠️ 边界情况：在边界值上运算可能静默溢出
             a.checked_add(b).ok_or("u8 overflow")
@@ -697,23 +679,19 @@ pub mod anti_patterns_and_edge_cases {
 
 /// # `From<T>` for `LazyLock<T, F>` / `LazyCell<T, F>` / `AssertUnwindSafe<T>`
 ///
-/// Rust 1.96 稳定了从值直接构造这些类型的 `From` 实现：
 pub mod from_for_cell_types {
     use std::cell::LazyCell;
     use std::panic::AssertUnwindSafe;
     use std::sync::LazyLock;
 
-    /// 从值直接构造 LazyLock，无需闭包
     pub fn lazy_lock_from_value() -> LazyLock<String> {
         LazyLock::from("production".to_string())
     }
 
-    /// 从值直接构造 LazyCell
     pub fn lazy_cell_from_value() -> LazyCell<Vec<i32>> {
         LazyCell::from(vec![1, 2, 3])
     }
 
-    /// 从值直接构造 AssertUnwindSafe
     pub fn assert_unwind_from_value() -> AssertUnwindSafe<i32> {
         AssertUnwindSafe::from(42)
     }
@@ -742,16 +720,12 @@ pub mod from_for_cell_types {
     }
 }
 
-/// # `ManuallyDrop` 常量作为模式
-///
-/// Rust 1.96 修复了 1.94.0 引入的回归，允许在 match 中使用 ManuallyDrop 常量：
 pub mod manually_drop_pattern {
     use std::mem::ManuallyDrop;
 
     const TAG_A: ManuallyDrop<u32> = ManuallyDrop::new(1);
     const TAG_B: ManuallyDrop<u32> = ManuallyDrop::new(2);
 
-    /// 使用 ManuallyDrop 常量进行模式匹配
     pub fn classify(value: ManuallyDrop<u32>) -> &'static str {
         match value {
             TAG_A => "tag_a",
@@ -774,12 +748,10 @@ pub mod manually_drop_pattern {
 }
 
 /// # `expr` Metavariable 传递给 `cfg`
-///
-/// Rust 1.96 允许宏将 `expr` 类型的 metavariable 传递给 `cfg` 属性。
-/// 完整可运行示例见 `c11_macro_system::rust_196_features::ExprMetavariableToCfgExamples`。
-///
 /// 关键变更：在 1.96 之前，`expr` fragment specifier 不能用于 `#[cfg(...)]` 属性参数。
+/// key ：in 1.96 's before ，`expr` fragment specifier cannot `#[cfg(...)]` attribute parameter 。
 /// 1.96 放宽了这一限制，允许通过宏参数动态生成条件编译属性。
+/// 1.96 ，parameter condition attribute 。
 pub mod expr_metavariable_to_cfg {
     #[cfg(test)]
     mod tests {
@@ -791,18 +763,11 @@ pub mod expr_metavariable_to_cfg {
     }
 }
 
-/// # Never Type 在 Tuple 表达式中的强制转换
-///
-/// Rust 1.96 修复了 never type (`!`) 在 tuple 表达式中的 coercion 行为，
-/// 确保 diverging 表达式在 tuple 中始终被正确强制转换为目标类型。
-///
 /// 在 1.96 之前，某些边缘情况下 `!` 类型在 tuple 中不会被自动 coercion，
+/// in 1.96 's before ，edge situation under `!` type in tuple in is coercion，
 /// 导致编译失败。1.96 统一了这一行为。
+/// 。1.96 as 。
 pub mod never_type_tuple_coercion {
-    /// 演示 never type 在 tuple 中的 coercion
-    ///
-    /// `diverge()` 返回 `!`，在 `(diverge(), 42)` 中被 coercion 为 `i32`。
-    /// 整个表达式永远不会返回，因为 `diverge()` 不会返回。
     #[allow(dead_code, unreachable_code)]
     fn _never_in_tuple() -> (i32, i32) {
         fn diverge() -> ! {
@@ -811,17 +776,11 @@ pub mod never_type_tuple_coercion {
         (diverge(), 42)
     }
 
-    /// 使用 `todo!()` 返回 `!` 的温和演示
-    ///
-    /// 注意：此函数本身也会 diverge，因为 `todo!()` 返回 `!`。
     #[allow(dead_code, unreachable_code)]
     fn _todo_in_tuple() -> (String, i32) {
         (todo!("implement this"), 42)
     }
 
-    /// 验证 never type coercion 的编译时测试
-    ///
-    /// 通过 `catch_unwind` 捕获 panic，验证代码能编译且运行时行为正确。
     #[cfg(test)]
     mod tests {
         use std::panic::catch_unwind;

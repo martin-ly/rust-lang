@@ -1,18 +1,16 @@
-//! Rust 1.94.0 线程与并发特性实现模块
-//!
-//! 本模块展示了 Rust 1.94.0 在线程和并发编程场景中的增强，包括：
-//! - LazyCell 和 LazyLock 的新方法 / LazyCell and LazyLock New Methods
 //! - 数学常量 / Mathematical Constants
+//! - 数学constant / Mathematical Constants
 //! - Peekable 迭代器新方法 / Peekable Iterator New Methods
 //! - 数组窗口迭代器 / Array Windows Iterator
 //! - char 到 usize 转换 / char to usize Conversion
-//!
 //! # 文件信息
+//! #
 //! - 文件: rust_194_features.rs
 //! - 创建日期: 2026-03-06
+//! - date : 2026-03-06
 //! - 版本: 1.0
-//! - Rust版本: 1.94.0
-//! - Edition: 2024
+//! - this : 1.0
+//! - 版this: 1.0
 use std::cell::LazyCell;
 use std::iter::Peekable;
 use std::sync::LazyLock;
@@ -20,25 +18,22 @@ use std::sync::atomic::{AtomicU64, Ordering};
 
 // ==================== 1. LazyCell 和 LazyLock 新方法 ====================
 
-/// # 1. LazyCell 和 LazyLock 新方法 / LazyCell and LazyLock New Methods
-///
-/// Rust 1.94.0 为 LazyCell 和 LazyLock 添加了新方法，提供更灵活的访问方式：
 /// - `get()`: 获取引用，如果未初始化则进行初始化
+/// - `get()`: reference ，if
 /// - `get_mut()`: 获取可变引用，如果未初始化则进行初始化
+/// - `get_mut()`: reference ，if
 /// - `force_mut()`: 强制初始化并获取可变引用
-///
+/// - `force_mut()`: and reference
 /// 这些新方法使得在并发和单线程环境中使用懒加载更加灵活。
+/// method in concurrency and thread environment in 。
 /// 线程安全的全局懒加载值
-///
-/// Rust 1.94.0: 使用 LazyLock 存储全局配置
+/// thread-safe global
 pub static GLOBAL_CONFIG: LazyLock<String> = LazyLock::new(|| {
     println!("初始化全局配置...");
     "Config loaded from global source".to_string()
 });
 
 /// 延迟初始化的计算值
-///
-/// Rust 1.94.0: 使用 LazyLock 存储昂贵的计算结果
 pub static EXPENSIVE_COMPUTATION: LazyLock<u64> = LazyLock::new(|| {
     println!("执行昂贵计算...");
     // 模拟复杂计算
@@ -47,16 +42,13 @@ pub static EXPENSIVE_COMPUTATION: LazyLock<u64> = LazyLock::new(|| {
 
 thread_local! {
     /// 线程局部懒加载值
-    ///
-    /// Rust 1.94.0: LazyCell 在单线程环境中的使用
+    /// thread-local
     static THREAD_LOCAL_LAZY: LazyCell<Vec<u8>> = LazyCell::new(|| {
         println!("初始化线程局部数据...");
         vec![1, 2, 3, 4, 5]
     });
 }
 
-/// 演示 LazyLock 的新方法
-///
 /// Rust 1.94.0: get(), get_mut(), force_mut() 方法
 #[allow(dead_code)]
 pub fn demonstrate_lazylock_methods() {
@@ -76,9 +68,6 @@ pub fn demonstrate_lazylock_methods() {
     println!("计算结果: {}", computation_result);
 }
 
-/// 使用 LazyCell 的单线程缓存
-///
-/// Rust 1.94.0: LazyCell 在单线程中的应用
 pub struct SingleThreadCache<T> {
     value: Option<T>,
     init: fn() -> T,
@@ -91,6 +80,7 @@ impl<T> SingleThreadCache<T> {
     }
 
     /// 从默认值创建缓存
+    /// from
     pub const fn with_default() -> Self
     where
         T: Default,
@@ -107,6 +97,8 @@ impl<T> SingleThreadCache<T> {
     }
 
     /// 获取可变引用
+    /// reference
+    /// Get可变reference
     pub fn get_mut(&mut self) -> &mut T {
         self.value.get_or_insert_with(self.init)
     }
@@ -124,8 +116,7 @@ impl<T: Default> Default for SingleThreadCache<T> {
 }
 
 /// 线程安全的懒加载资源管理器
-///
-/// Rust 1.94.0: 使用 LazyLock 管理线程安全资源
+/// thread-safe
 pub struct ThreadSafeResourceManager<T: Send + Sync> {
     resource: LazyLock<T>,
     access_count: AtomicU64,
@@ -141,7 +132,8 @@ impl<T: Send + Sync> ThreadSafeResourceManager<T> {
     }
 
     /// 获取资源引用
-    ///
+    /// reference
+    /// Get资源reference
     /// Rust 1.94.0: 使用 Deref
     pub fn get(&self) -> &T {
         self.access_count.fetch_add(1, Ordering::Relaxed);
@@ -157,13 +149,14 @@ impl<T: Send + Sync> ThreadSafeResourceManager<T> {
 // ==================== 2. 数学常量 ====================
 
 /// # 2. 数学常量 / Mathematical Constants
-///
-/// Rust 1.94.0 为标准库添加了新的数学常量：
+/// # 2. 数学constant / Mathematical Constants
 /// - `EULER_GAMMA`: 欧拉-马歇罗尼常数 (γ ≈ 0.57721)
+/// - `EULER_GAMMA`: - (γ ≈ 0.57721)
 /// - `GOLDEN_RATIO`: 黄金比例 (φ ≈ 1.61803)
-///
 /// 这些常量可用于 f32 和 f64 类型。
+/// constant f32 and f64 type 。
 /// 数学常量的使用示例
+/// constant example
 #[allow(dead_code)]
 pub fn demonstrate_math_constants() {
     println!("\n=== 数学常量演示 ===\n");
@@ -199,16 +192,16 @@ pub fn demonstrate_math_constants() {
 }
 
 /// 使用黄金比例的计算
-///
-/// Rust 1.94.0: GOLDEN_RATIO 在算法中的应用
+/// Use黄金比例Calculate
 pub fn golden_ratio_calculation(n: u32) -> f64 {
     let phi = 1.618033988749895_f64; // std::f64::consts::GOLDEN_RATIO
     phi.powi(n as i32)
 }
 
 /// 使用欧拉常数的对数计算
-///
-/// Rust 1.94.0: EULER_GAMMA 在数值分析中的应用
+/// to
+/// Use欧拉常数to数Calculate
+/// Rust 1.94.0: EULER_GAMMA in数值analysisinapplication
 pub fn euler_gamma_approximation(n: u64) -> f64 {
     let gamma = 0.5772156649015329_f64; // std::f64::consts::EULER_GAMMA
     (n as f64).ln() + gamma
@@ -217,13 +210,13 @@ pub fn euler_gamma_approximation(n: u64) -> f64 {
 // ==================== 3. Peekable 新方法 ====================
 
 /// # 3. Peekable 迭代器新方法 / Peekable Iterator New Methods
-///
-/// Rust 1.94.0 为 Peekable 迭代器添加了两个新方法：
 /// - `next_if_map()`: 如果满足条件则消费元素并映射
+/// - `next_if_map()`: if condition element and
 /// - `next_if_map_mut()`: 可变版本，允许修改元素
-///
+/// - `next_if_map_mut()`: this ，element
 /// 这些方法简化了条件消费和转换的模式。
-/// 演示 Peekable 的新方法
+/// method condition and conversion 。
+/// Demonstration of Peekable 新method
 #[allow(dead_code)]
 pub fn demonstrate_peekable_methods() {
     println!("\n=== Peekable 新方法演示 ===\n");
@@ -267,9 +260,6 @@ pub fn demonstrate_peekable_methods() {
     }
 }
 
-/// 使用 Peekable 的解析器
-///
-/// Rust 1.94.0: next_if_map 在解析器模式中的应用
 pub struct SimpleParser<I: Iterator> {
     iter: Peekable<I>,
 }
@@ -283,6 +273,7 @@ impl<I: Iterator> SimpleParser<I> {
     }
 
     /// 尝试解析下一个元素
+    /// under element
     pub fn parse_next<T, F>(&mut self, f: F) -> Option<T>
     where
         F: FnOnce(&I::Item) -> Option<T>,
@@ -297,12 +288,14 @@ impl<I: Iterator> SimpleParser<I> {
     }
 
     /// 查看下一个元素
+    /// under element
     pub fn peek(&mut self) -> Option<&I::Item> {
         self.iter.peek()
     }
 }
 
 /// 字符串解析器示例
+/// example
 pub fn parse_tokens(input: &str) -> Vec<Token> {
     let chars = input.chars().peekable();
     let mut parser = SimpleParser::new(chars);
@@ -341,6 +334,7 @@ pub fn parse_tokens(input: &str) -> Vec<Token> {
 }
 
 /// 令牌类型
+/// type
 #[derive(Debug, Clone, PartialEq)]
 pub enum Token {
     Number(u32),
@@ -351,10 +345,8 @@ pub enum Token {
 // ==================== 4. 数组窗口迭代器 ====================
 
 /// # 4. 数组窗口迭代器 / Array Windows Iterator
-///
-/// Rust 1.94.0 为切片添加了 `array_windows` 方法，
 /// 允许以固定大小的数组窗口遍历切片。
-/// 演示 array_windows 的基本用法
+/// 。
 #[allow(dead_code)]
 pub fn demonstrate_array_windows() {
     println!("\n=== 数组窗口迭代器演示 ===\n");
@@ -395,16 +387,17 @@ pub fn demonstrate_array_windows() {
 }
 
 /// 使用 array_windows 计算差分
-///
-/// Rust 1.94.0: 数组窗口在数值分析中的应用
+/// array_windows
 pub fn compute_differences(data: &[f64]) -> Vec<f64> {
     // Rust 1.94.0: data.array_windows::<2>().map(|[a, b]| b - a).collect()
     data.array_windows::<2>().map(|[a, b]| b - a).collect()
 }
 
 /// 检测数据中的异常值
-///
+/// in
 /// Rust 1.94.0: 使用 array_windows 进行滑动窗口分析
+/// Rust 1.94.0: array_windows analyze
+/// Rust 1.94.0: Use array_windows 进行滑动窗口analysis
 pub fn detect_outliers(data: &[f64], threshold: f64) -> Vec<usize> {
     let mut outliers = Vec::new();
 
@@ -422,10 +415,7 @@ pub fn detect_outliers(data: &[f64], threshold: f64) -> Vec<usize> {
 // ==================== 5. char 到 usize 转换 ====================
 
 /// # 5. char 到 usize 转换 / char to usize Conversion
-///
-/// Rust 1.94.0 实现了 `TryFrom<char>` for `usize`,
-/// 允许将 char 安全地转换为 usize（基于其 Unicode 标量值）。
-/// 演示 char 到 usize 的转换
+/// Allowswill char 安全地conversionas usize（Based onits Unicode 标量值）。
 #[allow(dead_code)]
 pub fn demonstrate_char_to_usize() {
     println!("\n=== char 到 usize 转换演示 ===\n");
@@ -451,15 +441,10 @@ pub fn demonstrate_char_to_usize() {
     println!("字符 '{}' 的 Unicode 标量值: {:#X}", emoji, emoji_value);
 }
 
-/// 将字符串转换为 usize 数组
-///
-/// Rust 1.94.0: `TryFrom<char>` for usize 的应用
 pub fn string_to_usize_array(s: &str) -> Vec<usize> {
     s.chars().map(|c| usize::try_from(c).unwrap_or(0)).collect()
 }
 
-/// 查找字符的 Unicode 范围
-///
 /// Rust 1.94.0: 使用 char 到 usize 转换进行 Unicode 分析
 pub fn analyze_unicode_ranges(chars: &[char]) -> UnicodeAnalysis {
     let mut ascii_count = 0;
@@ -486,6 +471,7 @@ pub fn analyze_unicode_ranges(chars: &[char]) -> UnicodeAnalysis {
 }
 
 /// Unicode 分析结果
+/// Unicode analyze result
 #[derive(Debug, Clone, Copy, Default)]
 pub struct UnicodeAnalysis {
     pub ascii_count: usize,
@@ -499,6 +485,7 @@ pub struct UnicodeAnalysis {
 use std::ops::ControlFlow;
 
 /// 搜索二维数组，找到目标时提前退出
+/// ，to goal before
 pub fn search_in_matrix(matrix: &[Vec<i32>], target: i32) -> ControlFlow<(usize, usize), ()> {
     for (i, row) in matrix.iter().enumerate() {
         for (j, &val) in row.iter().enumerate() {
@@ -511,6 +498,8 @@ pub fn search_in_matrix(matrix: &[Vec<i32>], target: i32) -> ControlFlow<(usize,
 }
 
 /// 数据验证管道
+/// pipe
+/// 数据Verifypipe
 pub fn validate_data(data: &str) -> ControlFlow<String, ()> {
     if data.is_empty() {
         return ControlFlow::Break("数据不能为空".to_string());
@@ -539,6 +528,7 @@ pub fn batch_process<T, E>(
 // ==================== 6. 综合应用示例 ====================
 
 /// 演示 Rust 1.94.0 线程特性
+/// demonstration Rust 1.94.0 thread feature
 pub fn demonstrate_rust_194_thread_features() {
     println!("\n=== Rust 1.94.0 线程与并发特性演示 ===\n");
 
@@ -585,6 +575,7 @@ pub fn demonstrate_rust_194_thread_features() {
 }
 
 /// 获取 Rust 1.94.0 线程特性信息
+/// Rust 1.94.0 thread feature
 pub fn get_rust_194_thread_info() -> String {
     "Rust 1.94.0 线程与并发特性:\n\
         - LazyCell 和 LazyLock 新方法 (get, get_mut, force_mut)\n\
@@ -736,10 +727,9 @@ mod tests {
     // ==================== 并发边界测试 ====================
 
     /// 测试单线程缓存在并发访问下的限制
-    ///
-    /// 说明：SingleThreadCache 设计上不是线程安全的，
+    /// thread in concurrency under
     /// 本测试验证在单线程内的正确使用模式。
-    /// 在并发环境中应该使用 ThreadSafeResourceManager。
+    /// this in thread inside 。
     #[test]
     fn test_single_thread_cache_concurrent() {
         use std::cell::RefCell;
@@ -770,9 +760,6 @@ mod tests {
         // 这是设计上的限制，而非错误
     }
 
-    /// 测试线程安全资源管理器在 Mutex Poison 情况下的行为
-    ///
-    /// 模拟线程 panic 后资源管理器的恢复能力
     #[test]
     fn test_thread_safe_cache_poison() {
         use std::sync::{Arc, Mutex};
@@ -813,8 +800,7 @@ mod tests {
     }
 
     /// 测试异步数据库连接池耗尽
-    ///
-    /// 验证当连接池中的连接都被获取后，acquire 返回 None
+    /// async database connection pool
     #[test]
     fn test_async_db_pool_exhaustion() {
         use std::sync::atomic::{AtomicUsize, Ordering};

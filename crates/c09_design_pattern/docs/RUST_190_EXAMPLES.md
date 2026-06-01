@@ -549,7 +549,7 @@ pub struct FileDataSource {
 
 impl AsyncDataSource for FileDataSource {
     async fn read(&self) -> Result<String, std::io::Error> {
-        // 使用tokio或async-std
+        // 使用tokio或smol
         tokio::fs::read_to_string(&self.path).await
     }
 

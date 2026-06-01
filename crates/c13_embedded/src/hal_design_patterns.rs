@@ -1,30 +1,38 @@
 //! HAL 设计模式
-//!
-//! 硬件抽象层 (Hardware Abstraction Layer) 是嵌入式 Rust 的核心。
+//! HAL design
 //! 通过类型系统和所有权，HAL 可以在编译时防止许多常见错误。
-//!
+//! type system and ownership ，HAL can in compile-time 。
 //! ## 类型状态编程 (Type State)
-//!
-//! 利用泛型和 PhantomData，将外设状态编码到类型中。
+//! ## type state (Type State)
 //! 只有处于正确状态的外设才能执行对应操作。
+//! state outside to 。
 
 use core::marker::PhantomData;
 
 /// 外设状态标记
+/// outside state mark
 pub mod states {
     /// 未初始化状态
+    /// state
+    /// 未Initializestate
     pub struct Uninitialized;
     /// 已初始化状态
+    /// state
+    /// 已Initializestate
     pub struct Initialized;
     /// 正在传输状态
+    /// in transmission state
+    /// 正intransmissionstate
     pub struct Transmitting;
     /// 接收状态
+    /// state
     pub struct Receiving;
 }
 
 /// 类型状态 SPI 外设示例
-///
+/// type state SPI outside example
 /// STATE 泛型参数编码外设当前状态。
+/// STATE generic parameter outside when before state 。
 pub struct Spi<STATE> {
     _state: PhantomData<STATE>,
     base: usize,
@@ -32,6 +40,7 @@ pub struct Spi<STATE> {
 
 impl Spi<states::Uninitialized> {
     /// 创建未初始化的 SPI 实例
+    /// SPI
     pub const fn new(base: usize) -> Self {
         Self {
             _state: PhantomData,
@@ -39,7 +48,6 @@ impl Spi<states::Uninitialized> {
         }
     }
 
-    /// 初始化 SPI，状态转换为 Initialized
     pub fn init(self, _baudrate: u32, _mode: u8) -> Spi<states::Initialized> {
         Spi {
             _state: PhantomData,
@@ -49,7 +57,6 @@ impl Spi<states::Uninitialized> {
 }
 
 impl Spi<states::Initialized> {
-    /// 发送数据，状态变为 Transmitting
     pub fn send(self, _data: &[u8]) -> Spi<states::Transmitting> {
         Spi {
             _state: PhantomData,
@@ -57,7 +64,6 @@ impl Spi<states::Initialized> {
         }
     }
 
-    /// 接收数据，状态变为 Receiving
     pub fn receive(self, _buf: &mut [u8]) -> Spi<states::Receiving> {
         Spi {
             _state: PhantomData,
@@ -66,6 +72,7 @@ impl Spi<states::Initialized> {
     }
 
     /// 反初始化
+    /// 反Initialize
     pub fn deinit(self) -> Spi<states::Uninitialized> {
         Spi {
             _state: PhantomData,
@@ -76,11 +83,13 @@ impl Spi<states::Initialized> {
 
 impl Spi<states::Transmitting> {
     /// 检查传输是否完成
+    /// transmission
     pub fn is_complete(&self) -> bool {
         true
     }
 
     /// 等待传输完成
+    /// etc. transmission
     pub fn wait(self) -> Spi<states::Initialized> {
         Spi {
             _state: PhantomData,
@@ -90,8 +99,9 @@ impl Spi<states::Transmitting> {
 }
 
 /// 所有权转移配置模式
-///
+/// ownership transfer
 /// 通过消耗 self 来确保每个配置步骤只执行一次。
+/// self step 。
 pub struct UartBuilder {
     base: usize,
     baudrate: Option<u32>,
@@ -100,7 +110,6 @@ pub struct UartBuilder {
 }
 
 impl UartBuilder {
-    /// 创建新的 UART 构建器
     pub const fn new(base: usize) -> Self {
         Self {
             base,
@@ -129,6 +138,7 @@ impl UartBuilder {
     }
 
     /// 构建 UART 实例
+    /// UART
     pub fn build(self) -> Result<UartInstance, &'static str> {
         let _ = self.baudrate.ok_or("波特率未设置")?;
         let _ = self.data_bits.ok_or("数据位未设置")?;
@@ -136,24 +146,20 @@ impl UartBuilder {
     }
 }
 
-/// 构建完成的 UART 实例
 pub struct UartInstance {
     /// UART 寄存器基地址
+    /// UART
     pub base: usize,
 }
 
 /// 零成本抽象演示
-///
-/// Rust 的泛型和内联优化确保 HAL 抽象在 release 模式下完全消除运行时开销。
+/// cost demonstration
 pub struct ZeroCostAbstraction;
 
 impl ZeroCostAbstraction {
-    /// 内联优化的 GPIO 设置函数
     ///
-    /// # Safety
-    ///
-    /// `gpio_base` 必须是有效的、已映射的 GPIO 寄存器基地址。
     /// 调用者负责确保内存安全。
+    /// memory safety 。
     #[inline(always)]
     pub unsafe fn set_pin_optimized(gpio_base: *mut u32, pin: u8, high: bool) {
         let offset = if high { 0 } else { 16 };

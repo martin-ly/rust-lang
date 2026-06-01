@@ -10,6 +10,8 @@ use tokio::time::{sleep, timeout};
 use tracing::{debug, error, info, warn};
 
 /// 服务状态
+/// state
+/// 服务state
 #[derive(Debug, Clone, PartialEq)]
 pub enum ServiceStatus {
     Healthy,
@@ -29,6 +31,7 @@ pub struct ServiceInstance {
 }
 
 /// 熔断器状态
+/// state
 #[derive(Debug, Clone, PartialEq)]
 pub enum CircuitState {
     Closed,   // 正常状态
@@ -152,6 +155,7 @@ impl CircuitBreaker {
 }
 
 /// 服务发现
+/// service discovery
 #[derive(Debug)]
 pub struct ServiceDiscovery {
     services: Arc<DashMap<String, Vec<ServiceInstance>>>,
@@ -323,6 +327,7 @@ impl ServiceDiscovery {
 }
 
 /// 重试策略
+/// strategy
 pub struct RetryPolicy {
     max_retries: u32,
     backoff: ExponentialBackoff,

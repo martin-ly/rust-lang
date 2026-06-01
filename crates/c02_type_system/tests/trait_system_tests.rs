@@ -1,12 +1,6 @@
-//! Trait系统测试
-//!
-//! 测试Rust的trait系统：
-//! - 基本trait定义和实现
-//! - trait边界
 //! - 关联类型
-//! - trait对象
+//! - associated type
 
-/// 测试基本trait定义和实现
 #[test]
 fn test_basic_trait() {
     trait Drawable {
@@ -27,7 +21,6 @@ fn test_basic_trait() {
     assert_eq!(circle.draw(), "Circle with radius 5");
 }
 
-/// 测试默认trait方法
 #[test]
 fn test_default_trait_methods() {
     trait Greet {
@@ -48,7 +41,6 @@ fn test_default_trait_methods() {
     assert_eq!(person.greet_with_name("Alice"), "Hello, Alice!");
 }
 
-/// 测试trait继承
 #[test]
 fn test_trait_inheritance() {
     trait Animal {
@@ -73,7 +65,6 @@ fn test_trait_inheritance() {
     assert_eq!(dog.bark(), "Labrador says: Woof!");
 }
 
-/// 测试trait边界
 #[test]
 fn test_trait_bounds() {
     fn print_debug<T: std::fmt::Debug>(item: T) {
@@ -85,7 +76,6 @@ fn test_trait_bounds() {
     print_debug(vec![1, 2, 3]);
 }
 
-/// 测试多重trait边界
 #[test]
 fn test_multiple_trait_bounds() {
     fn process<T>(item: T)
@@ -102,6 +92,7 @@ fn test_multiple_trait_bounds() {
 }
 
 /// 测试关联类型
+/// associated type
 #[test]
 fn test_associated_types() {
     trait Container {
@@ -132,7 +123,6 @@ fn test_associated_types() {
     assert_eq!(box_item.get(), Some(&42));
 }
 
-/// 测试trait对象动态分发
 #[test]
 fn test_trait_objects() {
     trait Shape {
@@ -172,7 +162,6 @@ fn test_trait_objects() {
     assert!((shapes[1].area() - 12.566).abs() < 0.01);
 }
 
-/// 测试泛型trait实现
 #[test]
 fn test_generic_trait_impl() {
     trait Wrapper<T> {
@@ -193,7 +182,6 @@ fn test_generic_trait_impl() {
     assert_eq!(*container.get(), 42);
 }
 
-/// 测试trait的impl Trait返回类型
 #[test]
 fn test_impl_trait_return() {
     fn make_iter() -> impl Iterator<Item = i32> {

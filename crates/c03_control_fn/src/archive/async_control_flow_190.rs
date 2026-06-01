@@ -1,14 +1,15 @@
 //! Rust 1.90 异步控制流增强模块
-//!
-//! 本模块专门展示 Rust 1.90 版本中异步控制流的增强功能：
-//! - 异步Drop集成
+//! Rust 1.90 async stream module
 //! - 异步生成器控制流
+//! - async stream
 //! - 异步状态机
+//! - async state machine
 //! - 异步错误处理
+//! - async error handling
 //! - 异步并发控制
+//! - async concurrency
 //! - 异步资源管理
-//!
-//! 所有示例都使用 Rust 1.90 的最新异步特性，并包含详细的注释和最佳实践。
+//! - async
 use std::collections::HashMap;
 use std::sync::Arc;
 use std::time::Duration;
@@ -22,8 +23,7 @@ type TaskMap = HashMap<String, TaskHandle>;
 type AsyncTaskMap = Arc<Mutex<TaskMap>>;
 
 /// 异步状态机演示
-///
-/// 展示如何使用Rust 1.90的异步特性构建复杂的状态机。
+/// async state machine demonstration
 #[derive(Debug, Clone, PartialEq)]
 pub enum AsyncState {
     Initializing,
@@ -36,6 +36,8 @@ pub enum AsyncState {
 }
 
 /// 异步状态机 (Rust 1.90版本)
+/// async state machine (Rust 1.90this )
+/// asyncstate machine (Rust 1.90版this)
 #[derive(Clone)]
 pub struct AsyncStateMachine190 {
     state: Arc<RwLock<AsyncState>>,
@@ -45,6 +47,7 @@ pub struct AsyncStateMachine190 {
 
 impl AsyncStateMachine190 {
     /// 创建新的异步状态机
+    /// async state machine
     pub fn new(max_concurrent: usize) -> Self {
         Self {
             state: Arc::new(RwLock::new(AsyncState::Initializing)),
@@ -54,6 +57,7 @@ impl AsyncStateMachine190 {
     }
 
     /// 异步状态转换
+    /// async state conversion
     pub async fn transition_to(&self, new_state: AsyncState) -> Result<(), String> {
         let mut state = self.state.write().await;
         let current_state = state.clone();
@@ -69,6 +73,7 @@ impl AsyncStateMachine190 {
     }
 
     /// 检查状态转换是否合法
+    /// state conversion
     fn is_valid_transition(&self, from: &AsyncState, to: &AsyncState) -> bool {
         matches!((from, to),
             (AsyncState::Initializing, AsyncState::Running) |
@@ -82,6 +87,7 @@ impl AsyncStateMachine190 {
     }
 
     /// 异步处理数据
+    /// async
     pub async fn process_data(&self, key: String, value: String) -> Result<(), String> {
         // 获取信号量许可
         let _permit = self.semaphore.acquire().await.map_err(|e| e.to_string())?;
@@ -104,6 +110,7 @@ impl AsyncStateMachine190 {
     }
 
     /// 获取当前状态
+    /// when before state
     pub async fn get_state(&self) -> AsyncState {
         self.state.read().await.clone()
     }
@@ -115,8 +122,7 @@ impl AsyncStateMachine190 {
 }
 
 /// 异步资源管理器
-///
-/// 演示如何使用Rust 1.90的异步Drop进行资源管理。
+/// async
 #[allow(unused)]
 pub struct AsyncResourceManager {
     resources: Arc<Mutex<HashMap<String, Box<dyn AsyncResource + Send + Sync>>>>,
@@ -124,7 +130,7 @@ pub struct AsyncResourceManager {
 }
 
 /// 异步资源trait
-/// 注意：由于async fn在trait中不支持dyn，这里使用同步版本
+/// async trait
 #[allow(unused)]
 pub trait AsyncResource {
     fn cleanup(&mut self) -> Result<(), String>;
@@ -132,6 +138,7 @@ pub trait AsyncResource {
 }
 
 /// 数据库连接资源
+/// database
 #[allow(unused)]
 pub struct DatabaseResource {
     id: String,
@@ -165,6 +172,7 @@ impl AsyncResource for DatabaseResource {
 }
 
 /// 异步文件资源
+/// async
 pub struct AsyncFileResource {
     id: String,
     file_path: String,
@@ -204,6 +212,7 @@ impl Default for AsyncResourceManager {
 
 impl AsyncResourceManager {
     /// 创建新的异步资源管理器
+    /// async
     pub fn new() -> Self {
         Self {
             resources: Arc::new(Mutex::new(HashMap::new())),
@@ -226,6 +235,7 @@ impl AsyncResourceManager {
     }
 
     /// 异步清理所有资源
+    /// async all
     pub async fn cleanup_all(&self) -> Result<(), String> {
         let mut resources = self.resources.lock().await;
 
@@ -239,8 +249,6 @@ impl AsyncResourceManager {
     }
 }
 
-/// Rust 1.90 异步Drop实现
-/// 注意：AsyncDrop在Rust 1.90中可能还没有完全稳定，这里使用模拟实现
 impl Drop for AsyncResourceManager {
     fn drop(&mut self) {
         println!("开始清理资源管理器");
@@ -252,8 +260,9 @@ impl Drop for AsyncResourceManager {
 }
 
 /// 异步错误处理演示 (Rust 1.90版本)
-///
+/// async Error handling demonstration (Rust 1.90this )
 /// 展示如何在异步环境中进行错误处理和恢复。
+/// in async environment in error handling and 。
 pub struct AsyncErrorHandler190 {
     retry_count: Arc<Mutex<HashMap<String, u32>>>,
     max_retries: u32,
@@ -261,6 +270,7 @@ pub struct AsyncErrorHandler190 {
 
 impl AsyncErrorHandler190 {
     /// 创建新的异步错误处理器
+    /// async error handling
     pub fn new(max_retries: u32) -> Self {
         Self {
             retry_count: Arc::new(Mutex::new(HashMap::new())),
@@ -269,6 +279,7 @@ impl AsyncErrorHandler190 {
     }
 
     /// 异步重试机制
+    /// async mechanism
     pub async fn retry_async<F, T, E>(&self, operation_id: &str, mut operation: F) -> Result<T, E>
     where
         F: FnMut() -> Result<T, E>,
@@ -311,8 +322,7 @@ impl AsyncErrorHandler190 {
 }
 
 /// 异步并发控制演示
-///
-/// 展示如何使用Rust 1.90的异步特性进行并发控制。
+/// async concurrency demonstration
 #[allow(unused)]
 pub struct AsyncConcurrencyController {
     active_tasks: AsyncTaskMap,
@@ -323,6 +333,7 @@ pub struct AsyncConcurrencyController {
 #[allow(unused)]
 impl AsyncConcurrencyController {
     /// 创建新的异步并发控制器
+    /// async concurrency
     pub fn new(max_concurrent: usize) -> Self {
         Self {
             active_tasks: Arc::new(Mutex::new(HashMap::new())),
@@ -332,6 +343,8 @@ impl AsyncConcurrencyController {
     }
 
     /// 提交异步任务
+    /// async task
+    /// 提交asynctask
     pub async fn submit_task<F>(&self, task_id: String, task: F) -> Result<(), String>
     where
         F: FnOnce() -> Result<(), String> + Send + 'static,
@@ -360,6 +373,7 @@ impl AsyncConcurrencyController {
     }
 
     /// 等待任务完成
+    /// etc. task
     pub async fn wait_for_task(&self, task_id: &str) -> Result<(), String> {
         // 简化版本：直接返回成功（因为任务已经同步执行完成）
         println!("等待任务 {} 完成", task_id);
@@ -367,11 +381,14 @@ impl AsyncConcurrencyController {
     }
 
     /// 获取活跃任务数量
+    /// task quantity
+    /// Get活跃taskquantity
     pub async fn get_active_task_count(&self) -> usize {
         self.active_tasks.lock().await.len()
     }
 
     /// 等待所有任务完成
+    /// etc. all task
     pub async fn wait_for_all_tasks(&self) -> Result<(), String> {
         // 简化版本：直接返回成功（因为任务已经同步执行完成）
         println!("等待所有任务完成");
@@ -380,8 +397,7 @@ impl AsyncConcurrencyController {
 }
 
 /// 异步控制流综合演示
-///
-/// 展示Rust 1.90异步控制流的综合应用。
+/// async stream synthesize demonstration
 pub async fn demonstrate_async_control_flow_190() -> Result<(), String> {
     println!("🚀 演示 Rust 1.90 异步控制流增强");
 

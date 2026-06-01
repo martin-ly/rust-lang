@@ -1,13 +1,17 @@
 //! # 数论算法模块
+//! # algorithm module
 //!
 //! 本模块实现了各种数论算法。
+//! this module algorithm 。
 //use serde::{Serialize, Deserialize};
 
 /// 数论算法实现
+/// algorithm
 pub struct NumberTheoryAlgorithms;
 
 impl NumberTheoryAlgorithms {
     /// 最大公约数 (GCD)
+    /// maximum (GCD)
     pub fn gcd(a: u64, b: u64) -> u64 {
         if b == 0 {
             a
@@ -17,11 +21,13 @@ impl NumberTheoryAlgorithms {
     }
 
     /// 最小公倍数 (LCM)
+    /// minimum (LCM)
     pub fn lcm(a: u64, b: u64) -> u64 {
         a * b / Self::gcd(a, b)
     }
 
     /// 快速幂
+    /// fast
     pub fn fast_power(base: u64, exponent: u64, modulus: u64) -> u64 {
         let mut result = 1;
         let mut base = base % modulus;

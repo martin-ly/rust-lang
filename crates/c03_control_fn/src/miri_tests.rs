@@ -1,9 +1,7 @@
 //! Miri 测试模块 - 控制流和函数内存安全验证
-//!
-//! 本模块包含用于 Miri 测试的控制流和函数相关代码示例。
-//!
+//! Miri module - stream and function memory safety
 //! 运行方式:
-//!   cargo miri test miri_tests
+//! Run way :
 //!   MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test miri_tests
 
 use std::mem::MaybeUninit;
@@ -12,8 +10,9 @@ use std::ptr;
 // ==================== 控制流和内存安全 ====================
 
 /// 测试目的: 验证复杂控制流中的初始化
-/// 测试场景: 在条件分支中初始化 MaybeUninit
+/// objective : complex stream in
 /// 预期结果: 应该正确处理初始化状态
+/// result : should state
 #[test]
 fn test_control_flow_init() {
     let mut x = MaybeUninit::<i32>::uninit();
@@ -35,8 +34,11 @@ fn test_control_flow_init() {
 }
 
 /// 测试目的: 验证提前返回的内存安全
+/// objective : before memory safety
 /// 测试场景: 函数可能提前返回，正确处理未初始化内存
+/// scenario : function may before ，memory
 /// 预期结果: 应该安全处理两种返回路径
+/// result : should
 #[test]
 fn test_early_return_safety() {
     fn may_return_early(should_return: bool) -> Option<i32> {
@@ -57,8 +59,9 @@ fn test_early_return_safety() {
 }
 
 /// 测试目的: 验证循环中的内存操作
-/// 测试场景: 在循环中初始化和读取 MaybeUninit 数组
+/// objective : circulation in memory
 /// 预期结果: 应该正确完成所有操作
+/// result : should all
 #[test]
 fn test_loop_memory_operations() {
     let mut arr: [MaybeUninit<i32>; 5] = unsafe { MaybeUninit::uninit().assume_init() };
@@ -81,8 +84,11 @@ fn test_loop_memory_operations() {
 // ==================== 函数指针和闭包 ====================
 
 /// 测试目的: 验证函数指针调用
+/// objective : function pointer
 /// 测试场景: 使用函数指针调用函数
+/// scenario : function pointer function
 /// 预期结果: 应该正确调用并返回结果
+/// result : should and result
 #[test]
 fn test_function_pointer() {
     fn add(a: i32, b: i32) -> i32 {
@@ -94,8 +100,11 @@ fn test_function_pointer() {
 }
 
 /// 测试目的: 验证不安全函数指针
+/// objective : function pointer
 /// 测试场景: 使用 unsafe fn 指针
+/// scenario : unsafe fn pointer
 /// 预期结果: 应该正确调用并返回结果
+/// result : should and result
 #[test]
 fn test_unsafe_fn_pointer() {
     unsafe fn unsafe_add(a: i32, b: i32) -> i32 {
@@ -109,8 +118,11 @@ fn test_unsafe_fn_pointer() {
 }
 
 /// 测试目的: 验证闭包捕获和生命周期
+/// objective : closure capture and lifetime
 /// 测试场景: 闭包捕获外部变量
+/// scenario : closure capture outside variable
 /// 预期结果: 应该正确捕获并使用变量
+/// result : should and variable
 #[test]
 fn test_closure_capture() {
     let x = 10;
@@ -120,8 +132,11 @@ fn test_closure_capture() {
 }
 
 /// 测试目的: 验证可变闭包捕获
+/// objective : closure capture
 /// 测试场景: 闭包捕获并修改外部变量
+/// scenario : closure capture and outside variable
 /// 预期结果: 应该正确修改外部变量
+/// result : should outside variable
 #[test]
 fn test_closure_mut_capture() {
     let mut x = 0;
@@ -138,8 +153,11 @@ fn test_closure_mut_capture() {
 // ==================== 递归和栈安全 ====================
 
 /// 测试目的: 验证递归深度控制
+/// objective :
 /// 测试场景: 计算阶乘
+/// scenario :
 /// 预期结果: 应该正确计算并返回结果
+/// result : should and result
 #[test]
 fn test_recursion_depth() {
     fn factorial(n: u64) -> u64 {
@@ -154,8 +172,11 @@ fn test_recursion_depth() {
 }
 
 /// 测试目的: 验证尾递归概念
+/// objective : concept
 /// 测试场景: 使用累加器实现尾递归风格
+/// scenario :
 /// 预期结果: 应该正确计算并返回结果
+/// result : should and result
 #[test]
 fn test_tail_call_concept() {
     fn sum_tail(n: u64, acc: u64) -> u64 {
@@ -171,9 +192,10 @@ fn test_tail_call_concept() {
 
 // ==================== 不安全的控制流 ====================
 
-/// 测试目的: 验证 ptr::read 和 ptr::write
 /// 测试场景: 使用裸指针读写内存
+/// scenario : pointer memory
 /// 预期结果: 应该正确读写值
+/// result : should
 #[test]
 fn test_ptr_read_write() {
     let mut x = 0i32;
@@ -185,9 +207,10 @@ fn test_ptr_read_write() {
     }
 }
 
-/// 测试目的: 验证条件性的 ptr::write
 /// 测试场景: 条件满足时才写入内存
+/// scenario : condition memory
 /// 预期结果: 应该安全地条件写入
+/// result : should condition
 #[test]
 fn test_conditional_ptr_write() {
     let mut x = MaybeUninit::<i32>::uninit();
@@ -202,8 +225,9 @@ fn test_conditional_ptr_write() {
 }
 
 /// 测试目的: 验证标签循环
-/// 测试场景: 使用带标签的 loop 实现复杂控制流
+/// objective : circulation
 /// 预期结果: 应该正确跳出指定循环
+/// result : should circulation
 #[test]
 fn test_loop_as_goto() {
     let mut i = 0;
@@ -223,8 +247,11 @@ fn test_loop_as_goto() {
 // ==================== 模式匹配和析构 ====================
 
 /// 测试目的: 验证复杂模式匹配的内存安全
+/// objective : complex memory safety
 /// 测试场景: 对复杂枚举进行模式匹配
+/// scenario : to complex enum
 /// 预期结果: 应该正确匹配并访问字段
+/// result : should and field
 #[test]
 fn test_pattern_match_safety() {
     #[allow(dead_code)]
@@ -247,8 +274,11 @@ fn test_pattern_match_safety() {
 }
 
 /// 测试目的: 验证匹配中的引用重新借用
+/// objective : in reference borrowing
 /// 测试场景: 在 match 中对可变引用进行重新借用
+/// scenario : in match in to reference borrowing
 /// 预期结果: 匹配后原引用应该仍然有效
+/// result : after reference should effective
 #[test]
 fn test_match_reborrow() {
     let mut x = 5;
@@ -264,8 +294,11 @@ fn test_match_reborrow() {
 // ==================== 迭代器适配器 ====================
 
 /// 测试目的: 验证自定义迭代器
+/// objective : definition
 /// 测试场景: 实现一个简单的计数迭代器
+/// scenario : simple
 /// 预期结果: 应该正确生成序列
+/// result : should sequence
 #[test]
 fn test_custom_iterator() {
     struct CountUp {
@@ -292,9 +325,10 @@ fn test_custom_iterator() {
     assert_eq!(sum, 1 + 2 + 3 + 4);
 }
 
-/// 测试目的: 验证迭代器与 unsafe
 /// 测试场景: 使用裸指针遍历并修改数组
+/// scenario : pointer and
 /// 预期结果: 应该正确修改所有元素
+/// result : should all element
 #[test]
 fn test_iterator_unsafe() {
     let mut data = [1, 2, 3, 4, 5];
@@ -311,9 +345,10 @@ fn test_iterator_unsafe() {
 
 // ==================== 错误处理控制流 ====================
 
-/// 测试目的: 验证 Result 和 ? 运算符
 /// 测试场景: 使用 ? 运算符传播错误
+/// scenario :? propagation
 /// 预期结果: 应该正确处理成功和错误路径
+/// result : should and
 #[test]
 fn test_result_control_flow() {
     fn may_fail(x: i32) -> Result<i32, ()> {
@@ -334,9 +369,11 @@ fn test_result_control_flow() {
     assert_eq!(compound(-1), Err(()));
 }
 
-/// 测试目的: 验证 panic 安全
+/// Test forobjective: Verify panic 安全
 /// 测试场景: 确保 Drop 在正常退出时被调用
+/// scenario : Drop in is
 /// 预期结果: Drop 应该被调用，标记被设置
+/// result : Drop should is ，mark is
 #[test]
 fn test_panic_safety() {
     struct Guard<'a>(&'a mut bool);
@@ -359,9 +396,10 @@ fn test_panic_safety() {
 
 // ==================== 边界情况 ====================
 
-/// 测试目的: 验证 break 值
-/// 测试场景: 使用带值的 break 退出代码块
+/// Test forobjective: Verify break 值
+/// Test forscenario: Use带值 break 退出代码块
 /// 预期结果: 应该正确返回值
+/// result : should return value
 #[test]
 fn test_break_with_value() {
     let result = 'block: {
@@ -376,9 +414,8 @@ fn test_break_with_value() {
     assert_eq!(result, 10);
 }
 
-/// 测试目的: 验证 continue 与标签
-/// 测试场景: 使用带标签的 continue 跳过内层循环
 /// 预期结果: 应该正确控制循环流程
+/// result : should circulation process
 #[test]
 fn test_labeled_continue() {
     let mut count = 0;

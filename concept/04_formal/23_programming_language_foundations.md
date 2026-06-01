@@ -1,6 +1,10 @@
+> **内容分级**: [专家级]
+
 # 通用程序语言理论基础：Rust 的 PL 基座
 
 > **受众**: [研究者]
+> ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
+>
 > **Bloom 层级**: 评价 → 创造
 > **定位**: 从通用程序语言（PL）理论视角审视 Rust 的设计根基，建立从 λ 演算到 Rust 类型系统的概念桥梁。
 > **前置概念**: [Type Theory](./02_type_theory.md) · [Linear Logic](./01_linear_logic.md) · [Ownership Formal](./03_ownership_formal.md)

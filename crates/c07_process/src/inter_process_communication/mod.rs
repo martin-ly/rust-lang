@@ -13,16 +13,20 @@ pub trait IpcChannel: Send + Sync {
     fn receive_message(&self) -> IpcResult<Message<Vec<u8>>>;
 
     /// 获取通道名称
+    /// channel
     fn name(&self) -> &str;
 
     /// 检查通道是否已关闭
+    /// channel
     fn is_closed(&self) -> bool;
 
     /// 关闭通道
+    /// channel
     fn close(&mut self) -> IpcResult<()>;
 }
 
 /// 通道统计信息
+/// channel
 #[derive(Debug, Clone)]
 pub struct ChannelStats {
     pub messages_sent: u64,
@@ -47,6 +51,7 @@ impl Default for ChannelStats {
 }
 
 /// IPC管理器
+/// IP C
 pub struct IpcManager {
     channels: Arc<Mutex<HashMap<String, Box<dyn IpcChannel>>>>,
     config: IpcConfig,
@@ -63,6 +68,7 @@ impl IpcManager {
     }
 
     /// 创建命名管道
+    /// named pipe
     pub fn create_named_pipe(&mut self, name: &str) -> IpcResult<()> {
         let pipe = crate::pipe::NamedPipe::new(name, self.config.clone())?;
         let mut channels = self.channels.lock().expect("IPC通道锁被污染");
@@ -71,6 +77,7 @@ impl IpcManager {
     }
 
     /// 创建Unix域套接字
+    /// Unixdomain socket
     pub fn create_unix_socket(&mut self, name: &str) -> IpcResult<()> {
         let socket = socket::UnixSocket::new(name, self.config.clone())?;
         let mut channels = self.channels.lock().expect("IPC通道锁被污染");
@@ -79,6 +86,7 @@ impl IpcManager {
     }
 
     /// 创建TCP套接字
+    /// TCP socket
     pub fn create_tcp_socket(&mut self, name: &str, port: u16) -> IpcResult<()> {
         let socket = socket::TcpSocket::new(name, port, self.config.clone())?;
         let mut channels = self.channels.lock().expect("IPC通道锁被污染");
@@ -87,6 +95,7 @@ impl IpcManager {
     }
 
     /// 创建共享内存区域
+    /// shared memory area
     pub fn create_shared_memory(&mut self, name: &str, size: usize) -> IpcResult<()> {
         let shm = shared_memory::SharedMemoryRegion::new(name, size, self.config.clone())?;
         let mut channels = self.channels.lock().expect("IPC通道锁被污染");
@@ -103,6 +112,7 @@ impl IpcManager {
     }
 
     /// 创建文件系统通道
+    /// file system channel
     pub fn create_file_system_channel(&mut self, name: &str) -> IpcResult<()> {
         let fs = channel::FileSystemChannel::new(name, self.config.clone())?;
         let mut channels = self.channels.lock().expect("IPC通道锁被污染");
@@ -111,6 +121,7 @@ impl IpcManager {
     }
 
     /// 删除通道
+    /// channel
     pub fn remove_channel(&mut self, name: &str) -> IpcResult<()> {
         let mut channels = self.channels.lock().expect("IPC通道锁被污染");
         if let Some(mut channel) = channels.remove(name) {
@@ -120,6 +131,7 @@ impl IpcManager {
     }
 
     /// 清理所有通道
+    /// all channel
     pub fn cleanup(&mut self) -> IpcResult<()> {
         let mut channels = self.channels.lock().expect("IPC通道锁被污染");
         for (_, mut channel) in channels.drain() {
@@ -129,12 +141,14 @@ impl IpcManager {
     }
 
     /// 获取通道列表
+    /// channel
     pub fn list_channels(&self) -> Vec<String> {
         let channels = self.channels.lock().expect("IPC通道锁被污染");
         channels.keys().cloned().collect()
     }
 
     /// 获取通道统计信息
+    /// channel
     pub fn get_channel_stats(&self, name: &str) -> Option<ChannelStats> {
         let channels = self.channels.lock().expect("IPC通道锁被污染");
         if channels.contains_key(name) {
@@ -145,6 +159,7 @@ impl IpcManager {
     }
 
     /// 发送消息到指定通道
+    /// to channel
     pub fn send_message(&self, channel_name: &str, msg: &Message<Vec<u8>>) -> IpcResult<()> {
         let channels = self.channels.lock().expect("IPC通道锁被污染");
         if let Some(channel) = channels.get(channel_name) {
@@ -162,6 +177,7 @@ impl IpcManager {
     }
 
     /// 从指定通道接收消息
+    /// from channel
     pub fn receive_message(&self, channel_name: &str) -> IpcResult<Message<Vec<u8>>> {
         let channels = self.channels.lock().expect("IPC通道锁被污染");
         if let Some(channel) = channels.get(channel_name) {
@@ -179,12 +195,14 @@ impl IpcManager {
     }
 
     /// 获取总体统计信息
+    /// overall
     pub fn get_stats(&self) -> ChannelStats {
         self.stats.lock().expect("IPC统计锁被污染").clone()
     }
 }
 
 /// 异步IPC管理器
+/// async IP C
 pub struct AsyncIpcManager {
     manager: IpcManager,
 }
@@ -197,17 +215,20 @@ impl AsyncIpcManager {
     }
 
     /// 异步发送消息（简化版本，不使用tokio）
+    /// async （this ，tokio）
     pub fn send_message(&self, channel_name: &str, msg: &Message<Vec<u8>>) -> IpcResult<()> {
         self.manager.send_message(channel_name, msg)
     }
 
     /// 异步接收消息（简化版本，不使用tokio）
+    /// async （this ，tokio）
     pub fn receive_message(&self, channel_name: &str) -> IpcResult<Message<Vec<u8>>> {
         self.manager.receive_message(channel_name)
     }
 }
 
 /// IPC连接器
+/// IP C
 pub struct IpcConnector {
     config: IpcConfig,
 }
@@ -218,36 +239,42 @@ impl IpcConnector {
     }
 
     /// 连接到命名管道
+    /// to named pipe
     pub fn connect_to_pipe(&self, name: &str) -> IpcResult<Box<dyn IpcChannel>> {
         let pipe = crate::pipe::NamedPipe::connect(name, self.config.clone())?;
         Ok(Box::new(pipe))
     }
 
     /// 连接到Unix域套接字
+    /// to Unixdomain socket
     pub fn connect_to_unix_socket(&self, name: &str) -> IpcResult<Box<dyn IpcChannel>> {
         let socket = socket::UnixSocket::connect(name, self.config.clone())?;
         Ok(Box::new(socket))
     }
 
     /// 连接到TCP套接字
+    /// to TCP socket
     pub fn connect_to_tcp_socket(&self, name: &str, port: u16) -> IpcResult<Box<dyn IpcChannel>> {
         let socket = socket::TcpSocket::connect(name, port, self.config.clone())?;
         Ok(Box::new(socket))
     }
 
     /// 连接到共享内存区域
+    /// to shared memory area
     pub fn connect_to_shared_memory(&self, name: &str) -> IpcResult<Box<dyn IpcChannel>> {
         let shm = shared_memory::SharedMemoryRegion::connect(name, self.config.clone())?;
         Ok(Box::new(shm))
     }
 
     /// 连接到消息队列
+    /// to
     pub fn connect_to_message_queue(&self, name: &str) -> IpcResult<Box<dyn IpcChannel>> {
         let queue = message_queue::MessageQueue::connect(name, self.config.clone())?;
         Ok(Box::new(queue))
     }
 
     /// 连接到文件系统通道
+    /// to file system channel
     pub fn connect_to_file_system_channel(&self, name: &str) -> IpcResult<Box<dyn IpcChannel>> {
         let fs = channel::FileSystemChannel::connect(name, self.config.clone())?;
         Ok(Box::new(fs))

@@ -1,6 +1,6 @@
 //! epoll/IOCP/kqueue 事件抽象（教学化占位实现）
-//! - Linux: epoll (LT/ET)
-//! - macOS/BSD: kqueue
+//! epoll/IOCP/kqueue （）
+//! epoll/IOCP/kqueue 事件抽象（教学化占位Implementation of）
 //! - Windows: IOCP
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum TriggerMode {
@@ -29,8 +29,8 @@ pub trait EventLoop {
     fn poll(&mut self, timeout_ms: i32) -> Vec<Event>;
 }
 
-/// 跨平台占位：Linux 使用 epoll，Windows 使用 IOCP，macOS 使用 kqueue。
 /// 这里提供一个最简的可编译占位实现，方便上层编译通过与单元测试。
+/// ，on and 。
 #[cfg(target_os = "linux")]
 mod backend {
     use super::*;
@@ -146,6 +146,7 @@ mod backend {
 pub use backend::EventLoopImpl;
 
 /// 最小事件循环 demo（跨平台占位）
+/// minimum circulation demo（platform ）
 pub fn minimal_demo() {
     let mut el = EventLoopImpl::new();
     let _ = el.register(0, Interest::Readable, TriggerMode::Level);

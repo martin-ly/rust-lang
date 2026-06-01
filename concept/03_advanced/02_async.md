@@ -1,3 +1,5 @@
+> **内容分级**: [专家级]
+
 # Async/Await（异步编程）
 
 > **受众**: [专家]
@@ -127,6 +129,7 @@
     - [16.5 边界测试：`Pin<&mut Self>` 在 async trait 中的误用（编译错误）](#165-边界测试pinmut-self-在-async-trait-中的误用编译错误)
     - [10.4 边界测试：`async fn` 在 trait 中的缺失与 `async_trait` crate（编译错误）](#104-边界测试async-fn-在-trait-中的缺失与-async_trait-crate编译错误)
   - [参考来源](#参考来源)
+  - [导航：下一步去哪？](#导航下一步去哪)
 
 ## 〇、认知路径（Cognitive Path）
 
@@ -2875,3 +2878,16 @@ fn main() {}
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
+---
+
+## 导航：下一步去哪？
+
+> **自检**：你当前掌握的核心概念是否已能独立应用？
+
+| 选择 | 条件 | 目标 |
+|:---|:---|:---|
+| 🔙 巩固基础 | 仍有模糊概念 | 回到 [L2 对应主题](../02_intermediate/) 或 [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) |
+| 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](./README.md) 选择其他主题 |
+| 🎓 进入 L4 形式化 | 想理解"为什么"的数学证明 | [L4 形式化](../04_formal/README.md) |
+| 🏗️ 进入 L6 生态 | 想掌握生产工具链 | [L6 生态](../06_ecosystem/README.md) |

@@ -1,6 +1,8 @@
 //! 性能优化实践示例模块
+//! performance optimization example module
 //!
 //! 本模块提供四个主要性能优化领域的实践示例：
+//! This module provides main performance optimization domain example ：
 //! - 内存优化 (Memory Optimization)
 //! - 并发性能优化 (Concurrency Performance Optimization)  
 //! - 编译时优化 (Compile-time Optimization)
@@ -13,6 +15,7 @@ pub mod runtime_profiling;
 use std::time::{Duration, Instant};
 
 /// 性能基准测试结果
+/// Performance benchmark result
 #[derive(Debug, Clone)]
 pub struct BenchmarkResult {
     pub name: String,
@@ -22,6 +25,7 @@ pub struct BenchmarkResult {
 }
 
 /// 性能优化基准测试器
+/// performance optimization benchmark
 pub struct PerformanceBenchmarker {
     results: Vec<BenchmarkResult>,
 }
@@ -40,6 +44,7 @@ impl PerformanceBenchmarker {
     }
 
     /// 运行基准测试
+    /// Run benchmark
     pub fn benchmark<F>(&mut self, name: &str, iterations: usize, f: F) -> BenchmarkResult
     where
         F: Fn(),
@@ -65,11 +70,13 @@ impl PerformanceBenchmarker {
     }
 
     /// 获取所有基准测试结果
+    /// all benchmark result
     pub fn get_results(&self) -> &[BenchmarkResult] {
         &self.results
     }
 
     /// 打印基准测试报告
+    /// benchmark
     pub fn print_report(&self) {
         println!("=== 性能优化基准测试报告 ===");
         for result in &self.results {
@@ -80,6 +87,7 @@ impl PerformanceBenchmarker {
 }
 
 /// 内存使用监控器
+/// memory
 pub struct MemoryMonitor {
     initial_usage: Option<usize>,
 }
@@ -104,12 +112,14 @@ impl MemoryMonitor {
     }
 
     /// 获取当前内存使用
+    /// when before memory
     pub fn get_current_usage(&self) -> Option<usize> {
         // 模拟内存使用监控
         Some(1024 * 1024) // 1MB
     }
 
     /// 计算内存增长
+    /// memory
     pub fn calculate_growth(&self) -> Option<usize> {
         if let Some(initial) = self.initial_usage {
             self.get_current_usage().map(|current| current - initial)
@@ -120,6 +130,7 @@ impl MemoryMonitor {
 }
 
 /// 性能分析器
+/// performance analyze
 pub struct PerformanceProfiler {
     measurements: Vec<(String, Duration)>,
 }
@@ -138,6 +149,7 @@ impl PerformanceProfiler {
     }
 
     /// 测量函数执行时间
+    /// function time
     pub fn measure<F, T>(&mut self, name: &str, f: F) -> T
     where
         F: FnOnce() -> T,
@@ -151,11 +163,13 @@ impl PerformanceProfiler {
     }
 
     /// 获取测量结果
+    /// result
     pub fn get_measurements(&self) -> &[(String, Duration)] {
         &self.measurements
     }
 
     /// 生成性能报告
+    /// performance
     pub fn generate_report(&self) -> String {
         let mut report = String::from("=== 性能分析报告 ===\n");
 

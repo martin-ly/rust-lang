@@ -1,17 +1,25 @@
 //! 高级异步工具演示
-//!
+//! async tool demonstration
 //! 本示例展示了高级异步工具的使用：
+//! this example async tool ：
 //! - 异步任务管理器
+//! - async task
 //! - 智能重试引擎
+//! -
 //! - 异步批处理器
+//! - async
 //! - 异步限流器
+//! - async stream
 //! - 异步缓存管理器
+//! - async
 //! - 异步事件总线
+//! - async line
 //! - 异步健康检查器
+//! - async health check
 //! - 异步配置管理器
-//!
+//! - async
 //! 运行方式：
-//! ```bash
+//! Run way ：
 //! cargo run --example advanced_tools_demo
 //! ```
 use anyhow::Result;
@@ -26,6 +34,7 @@ mod mock_tools {
     use super::*;
 
     /// 模拟异步任务管理器
+    /// async task
     pub struct MockTaskManager {
         pub tasks: Arc<Mutex<Vec<TaskInfo>>>,
         pub stats: Arc<Mutex<TaskStats>>,
@@ -252,6 +261,7 @@ mod mock_tools {
     }
 
     /// 模拟异步批处理器
+    /// async
     pub struct MockBatchProcessor<T> {
         pub batch_size: usize,
         pub processing_interval: Duration,
@@ -321,6 +331,7 @@ mod mock_tools {
     }
 
     /// 模拟异步限流器
+    /// async stream
     pub struct MockRateLimiter {
         requests_per_second: u32,
         current_requests: Arc<Mutex<u32>>,
@@ -363,6 +374,7 @@ mod mock_tools {
     }
 
     /// 模拟异步缓存管理器
+    /// async
     pub struct MockCacheManager<K, V> {
         cache: Arc<Mutex<std::collections::HashMap<K, CacheEntry<V>>>>,
         ttl: Duration,
@@ -444,6 +456,7 @@ mod mock_tools {
     }
 
     /// 模拟异步事件总线
+    /// async line
     pub struct MockEventBus<T> {
         subscribers: Arc<Mutex<Vec<tokio::sync::mpsc::UnboundedSender<T>>>>,
         stats: Arc<Mutex<EventStats>>,

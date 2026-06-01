@@ -1,12 +1,15 @@
 //! # 异步排序算法实现
+//! # async sorting algorithm
 //!
 //! 本模块实现了各种异步排序算法。
+//! this module async sorting algorithm 。
 use super::*;
 use crate::algorithms::execution_modes::AsyncAlgorithm;
 use std::future::Future;
 use std::pin::Pin;
 
 /// 异步快速排序算法
+/// async quick sort algorithm
 pub struct AsyncQuickSort;
 
 impl AsyncAlgorithm<Vec<i32>, Vec<i32>> for AsyncQuickSort {
@@ -50,6 +53,7 @@ impl AsyncSortingAlgorithm for AsyncQuickSort {
 }
 
 /// 异步归并排序算法
+/// async merge sort algorithm
 pub struct AsyncMergeSort;
 
 impl AsyncAlgorithm<Vec<i32>, Vec<i32>> for AsyncMergeSort {
@@ -297,6 +301,7 @@ impl AsyncSortingAlgorithm for AsyncTimSort {
 }
 
 /// 快速排序递归实现
+/// quick sort
 fn quick_sort_recursive(arr: &mut [i32], low: usize, high: usize) {
     if low < high {
         let pi = partition(arr, low, high);
@@ -310,6 +315,7 @@ fn quick_sort_recursive(arr: &mut [i32], low: usize, high: usize) {
 }
 
 /// 分区函数
+/// partitioning function
 fn partition(arr: &mut [i32], low: usize, high: usize) -> usize {
     let pivot = arr[high];
     let mut i = low;
@@ -326,6 +332,7 @@ fn partition(arr: &mut [i32], low: usize, high: usize) -> usize {
 }
 
 /// 归并排序递归实现
+/// merge sort
 fn merge_sort_recursive(arr: &mut [i32]) {
     if arr.len() <= 1 {
         return;
@@ -341,6 +348,7 @@ fn merge_sort_recursive(arr: &mut [i32]) {
 }
 
 /// 归并函数
+/// and function
 fn merge(arr: &mut [i32], mid: usize) {
     let left = arr[..mid].to_vec();
     let right = arr[mid..].to_vec();

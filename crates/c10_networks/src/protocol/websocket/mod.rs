@@ -1,7 +1,6 @@
-//! WebSocket 协议实现模块
-//!
-//! 本模块提供了基于 Rust 1.92.0 的 WebSocket 协议实现，
 //! 包括握手、帧处理、消息传递等功能。
+//! 、、etc. functionality 。
+//! 包括握手、帧Handle、消息传递etc.functionality。
 pub mod frame;
 pub mod handshake;
 
@@ -11,7 +10,6 @@ pub use handshake::{WebSocketClient, WebSocketHandshakeRequest, WebSocketHandsha
 // use crate::error::{NetworkError, NetworkResult}; // 暂时注释掉未使用的导入
 use std::collections::HashMap;
 
-/// WebSocket 连接状态
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum WebSocketState {
     Connecting,
@@ -20,7 +18,6 @@ pub enum WebSocketState {
     Closed,
 }
 
-/// WebSocket 连接
 pub struct WebSocketConnection {
     pub state: WebSocketState,
     pub uri: String,
@@ -28,7 +25,6 @@ pub struct WebSocketConnection {
 }
 
 impl WebSocketConnection {
-    /// 创建新的 WebSocket 连接
     pub fn new(uri: &str) -> Self {
         Self {
             state: WebSocketState::Connecting,
@@ -38,6 +34,7 @@ impl WebSocketConnection {
     }
 
     /// 添加自定义请求头
+    /// definition
     pub fn add_header(&mut self, name: &str, value: &str) {
         self.headers.insert(name.to_string(), value.to_string());
     }

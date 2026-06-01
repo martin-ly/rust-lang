@@ -2,6 +2,7 @@
 use std::sync::Arc;
 
 /// 测试异步函数集成
+/// async function
 #[test]
 fn test_async_function_integration() {
     async fn async_add(a: i32, b: i32) -> i32 {
@@ -13,7 +14,6 @@ fn test_async_function_integration() {
     assert_eq!(result, 7);
 }
 
-/// 测试Future集成
 #[test]
 fn test_future_integration() {
     use std::future::Future;
@@ -39,6 +39,7 @@ fn test_future_integration() {
 }
 
 /// 测试异步并发集成
+/// async concurrency
 #[test]
 #[cfg_attr(miri, ignore)]
 fn test_async_concurrency_integration() {
@@ -59,6 +60,7 @@ fn test_async_concurrency_integration() {
 }
 
 /// 测试异步错误处理集成
+/// async error handling
 #[test]
 fn test_async_error_handling_integration() {
     async fn async_divide(a: i32, b: i32) -> Result<i32, String> {
@@ -75,6 +77,7 @@ fn test_async_error_handling_integration() {
 }
 
 /// 测试异步流集成
+/// async stream
 #[test]
 fn test_async_stream_integration() {
     use futures::stream::{self, StreamExt};
@@ -89,6 +92,7 @@ fn test_async_stream_integration() {
 }
 
 /// 测试异步同步原语集成
+/// async synchronous
 #[test]
 fn test_async_sync_primitives_integration() {
     use tokio::sync::Mutex;

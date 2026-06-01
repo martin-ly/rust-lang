@@ -1,9 +1,7 @@
 //! Miri 测试模块 - 泛型和 Trait 边界内存安全验证
-//!
-//! 本模块包含用于 Miri 测试的泛型和 Trait 相关代码示例。
-//!
+//! Miri module - generic and Trait edge memory safety
 //! 运行方式:
-//!   cargo miri test miri_tests
+//! Run way :
 //!   MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test miri_tests
 
 use std::{
@@ -14,9 +12,11 @@ use std::{
 
 // ==================== 泛型内存操作 ====================
 
-/// 测试目的: 验证泛型 transmute（安全包装）
+/// Test forobjective: Verifygeneric transmute（安全包装）
 /// 测试场景: 将字节数组转换为整数
+/// scenario : will conversion as
 /// 预期结果: 应该正确转换并返回
+/// result : should conversion and
 fn safe_transmute<T, U>(value: T) -> U
 where
     T: Copy,
@@ -31,9 +31,10 @@ where
     }
 }
 
-/// 测试目的: 验证泛型 transmute 功能
 /// 测试场景: 将 [u8; 4] 转换为 u32
+/// scenario : will [u8; 4] conversion as u32
 /// 预期结果: 应该正确解析字节序
+/// result : should
 #[test]
 fn test_generic_transmute() {
     let bytes: [u8; 4] = [0x01, 0x00, 0x00, 0x00];
@@ -46,9 +47,10 @@ fn test_generic_transmute() {
     }
 }
 
-/// 测试目的: 验证泛型 MaybeUninit 数组初始化
 /// 测试场景: 使用闭包初始化泛型数组
+/// scenario : generic
 /// 预期结果: 应该正确初始化所有元素
+/// result : should all element
 fn init_array_generic<T, const N: usize>(f: impl Fn(usize) -> T) -> [T; N] {
     let mut arr: [MaybeUninit<T>; N] = unsafe { MaybeUninit::uninit().assume_init() };
 
@@ -60,8 +62,11 @@ fn init_array_generic<T, const N: usize>(f: impl Fn(usize) -> T) -> [T; N] {
 }
 
 /// 测试目的: 验证泛型数组初始化
+/// objective : generic
 /// 测试场景: 初始化 [i32; 5] 数组
+/// scenario : [i32; 5]
 /// 预期结果: 应该正确初始化并返回
+/// result : should and
 #[test]
 fn test_generic_array_init() {
     let arr: [i32; 5] = init_array_generic(|i| i as i32 * 10);
@@ -71,6 +76,7 @@ fn test_generic_array_init() {
 // ==================== PhantomData ====================
 
 /// 带生命周期的裸指针包装
+/// lifetime pointer
 struct PtrWithLifetime<'a, T> {
     ptr: *const T,
     _marker: PhantomData<&'a T>,
@@ -90,9 +96,8 @@ impl<'a, T> PtrWithLifetime<'a, T> {
     }
 }
 
-/// 测试目的: 验证 PhantomData 生命周期标记
-/// 测试场景: 使用 PtrWithLifetime 访问数据
 /// 预期结果: 应该能够安全解引用
+/// result : should can reference
 #[test]
 fn test_phantomdata_lifetime() {
     let data = 42;
@@ -103,7 +108,6 @@ fn test_phantomdata_lifetime() {
     }
 }
 
-/// 使用 PhantomData 禁用 Send
 struct NonSend<T> {
     data: T,
     _marker: PhantomData<*const ()>,
@@ -118,9 +122,8 @@ impl<T> NonSend<T> {
     }
 }
 
-/// 测试目的: 验证 NonSend 类型
-/// 测试场景: 创建和使用 NonSend 包装的类型
 /// 预期结果: 应该能够正常使用数据
+/// result : should can
 #[test]
 fn test_phantomdata_send_sync() {
     let non_send = NonSend::new(42);
@@ -130,13 +133,14 @@ fn test_phantomdata_send_sync() {
 // ==================== 泛型 Trait 边界 ====================
 
 /// 要求类型实现 Sized
+/// type Sized
 fn require_sized<T: Sized>(value: T) -> T {
     value
 }
 
-/// 测试目的: 验证 Sized 边界约束
-/// 测试场景: 传递 i32 到要求 Sized 的函数
+/// Test forscenario: 传递 i32 to要求 Sized function
 /// 预期结果: 应该正常工作
+/// result : should
 #[test]
 fn test_sized_bound() {
     assert_eq!(require_sized(42), 42);
@@ -156,9 +160,11 @@ fn use_trait_object<T: MyTrait + ?Sized>(val: &T) -> i32 {
     val.do_something()
 }
 
-/// 测试目的: 验证 ?Sized 边界
 /// 测试场景: 传递具体类型和 trait object
+/// scenario : volume type and trait object
+/// Test forscenario: 传递具volumetypeand trait object
 /// 预期结果: 两者都应该工作
+/// result : should
 #[test]
 fn test_unsized_bound() {
     let x = 21;
@@ -186,8 +192,11 @@ impl<T> Container for Wrapper<T> {
 }
 
 /// 测试目的: 验证关联类型内存布局
+/// objective : associated type memory layout
 /// 测试场景: 使用关联类型访问数据
+/// scenario : associated type
 /// 预期结果: 应该正确获取数据
+/// result : should
 #[test]
 fn test_associated_type() {
     let wrapper = Wrapper(42);
@@ -197,6 +206,7 @@ fn test_associated_type() {
 // ==================== 泛型生命周期 ====================
 
 /// 包含多个生命周期参数的结构体
+/// lifetime parameter struct
 struct Borrowed<'a, 'b, T, U>
 where
     T: 'a,
@@ -213,8 +223,11 @@ impl<'a, 'b, T, U> Borrowed<'a, 'b, T, U> {
 }
 
 /// 测试目的: 验证复杂生命周期
+/// objective : complex lifetime
 /// 测试场景: 创建包含多个引用的结构体
+/// scenario : reference struct
 /// 预期结果: 应该正确访问两个字段
+/// result : should field
 #[test]
 fn test_complex_lifetimes() {
     let x = 1;
@@ -228,6 +241,7 @@ fn test_complex_lifetimes() {
 // ==================== 泛型常量 ====================
 
 /// 使用常量泛型的数组包装
+/// constant generic
 struct ArrayWrapper<T, const N: usize> {
     data: [T; N],
 }
@@ -241,8 +255,9 @@ impl<T: Default + Copy, const N: usize> ArrayWrapper<T, N> {
 }
 
 /// 测试目的: 验证常量泛型
-/// 测试场景: 创建 ArrayWrapper<i32, 5>
+/// objective : constant generic
 /// 预期结果: 应该创建正确大小的数组
+/// result : should
 #[test]
 fn test_const_generic() {
     let arr: ArrayWrapper<i32, 5> = ArrayWrapper::new();
@@ -250,8 +265,11 @@ fn test_const_generic() {
 }
 
 /// 测试目的: 验证常量泛型数组分割
+/// objective : constant generic
 /// 测试场景: 分割数组为两部分
+/// scenario : as part
 /// 预期结果: 应该正确分割数组
+/// result : should
 fn split_array<T, const N: usize>(arr: [T; N]) -> (Vec<T>, Vec<T>)
 where
     T: Copy,
@@ -272,8 +290,12 @@ where
 }
 
 /// 测试目的: 验证数组分割
+/// objective :
 /// 测试场景: 分割 [i32; 6] 数组
+/// scenario : [i32; 6]
+/// Test forscenario: 分割 [i32; 6] array
 /// 预期结果: 应该正确分割为两部分
+/// result : should as part
 #[test]
 fn test_const_generic_expr() {
     let arr = [1, 2, 3, 4, 5, 6];
@@ -285,7 +307,7 @@ fn test_const_generic_expr() {
 
 // ==================== 泛型特化模式 ====================
 
-/// 带泛型的 Drop 实现
+/// 带generic Drop Implementation of
 struct GenericDrop<T>(Option<T>);
 
 impl<T> GenericDrop<T> {
@@ -305,9 +327,8 @@ impl<T> Drop for GenericDrop<T> {
     }
 }
 
-/// 测试目的: 验证泛型 Drop
-/// 测试场景: 创建 GenericDrop 并取出值
 /// 预期结果: Drop 时应该安全处理 None
+/// result : Drop should None
 #[test]
 fn test_generic_drop() {
     {
@@ -332,9 +353,10 @@ where
     }
 }
 
-/// 测试目的: 验证闭包 Trait 边界
 /// 测试场景: 使用 trait object 调用闭包
+/// scenario : trait object
 /// 预期结果: 应该正确调用并返回结果
+/// result : should and result
 #[test]
 fn test_closure_trait_bound() {
     let double: &dyn Callable = &|x: i32| x * 2;
@@ -344,6 +366,7 @@ fn test_closure_trait_bound() {
 // ==================== 泛型与 unsafe ====================
 
 /// 泛型裸指针写入
+/// generic pointer
 fn generic_ptr_write<T>(ptr: *mut T, value: T) {
     unsafe {
         ptr::write(ptr, value);
@@ -351,13 +374,17 @@ fn generic_ptr_write<T>(ptr: *mut T, value: T) {
 }
 
 /// 泛型裸指针读取
+/// generic pointer
 fn generic_ptr_read<T: Copy>(ptr: *const T) -> T {
     unsafe { ptr::read(ptr) }
 }
 
 /// 测试目的: 验证泛型指针操作
+/// objective : generic pointer
 /// 测试场景: 使用泛型函数读写指针
+/// scenario : generic function pointer
 /// 预期结果: 应该正确读写值
+/// result : should
 #[test]
 fn test_generic_ptr_ops() {
     let mut x = 0i32;
@@ -366,6 +393,7 @@ fn test_generic_ptr_ops() {
 }
 
 /// 泛型内存替换
+/// generic memory
 fn generic_replace<T>(dest: &mut T, src: T) -> T {
     unsafe {
         let result = ptr::read(dest);
@@ -375,8 +403,11 @@ fn generic_replace<T>(dest: &mut T, src: T) -> T {
 }
 
 /// 测试目的: 验证泛型替换
+/// objective : generic
 /// 测试场景: 替换变量的值
+/// scenario : variable
 /// 预期结果: 应该返回旧值并设置新值
+/// result : should and
 #[test]
 fn test_generic_replace() {
     let mut x = 10;
@@ -389,6 +420,7 @@ fn test_generic_replace() {
 // ==================== 类型擦除 ====================
 
 /// 类型擦除结构
+/// type structure
 struct TypeErased {
     data: *mut (),
     drop_fn: unsafe fn(*mut ()),
@@ -422,8 +454,9 @@ impl Drop for TypeErased {
 }
 
 /// 测试目的: 验证类型擦除
-/// 测试场景: 创建 TypeErased 并丢弃
+/// objective : type
 /// 预期结果: 应该正确调用析构函数
+/// result : should destructor
 #[test]
 fn test_type_erasure() {
     let erased = TypeErased::new(42i32);
@@ -432,7 +465,7 @@ fn test_type_erasure() {
 
 // ==================== 默认类型参数 ====================
 
-/// 带默认类型参数的 Config
+/// 带默认typeparameter Config
 struct Config<T = i32, const N: usize = 10> {
     data: [T; N],
 }
@@ -446,8 +479,11 @@ impl<T: Default + Copy, const N: usize> Config<T, N> {
 }
 
 /// 测试目的: 验证默认类型参数
+/// objective : type parameter
 /// 测试场景: 使用默认类型参数创建 Config
+/// scenario : type parameter Config
 /// 预期结果: 应该使用默认类型 i32 和大小 10
+/// result : should type i32 and 10
 #[test]
 fn test_default_type_params() {
     let config: Config = Config::new();

@@ -1,12 +1,17 @@
 //! # 算法选择决策树
+//! # algorithm tree
 //!
 //! 本模块提供了各种算法选择的决策树，帮助开发者根据问题特征选择最合适的算法。
+//! This module provides algorithm tree ，according to problem algorithm 。
 //!
 //! 每个决策树以结构体形式组织，通过关联函数返回详细的决策指南（Markdown + ASCII 图表）。
+//! tree struct organize ，associated function （Markdown + ASCII ）。
 //!
 //! ## 决策树列表
+//! ## tree
 //!
 //! | 结构体 | 覆盖领域 |
+//! | struct | domain |
 //! |--------|----------|
 //! | `SortingDecisionTree` | 排序算法选择 |
 //! | `SearchingDecisionTree` | 搜索算法选择 |
@@ -19,12 +24,15 @@
 // ============================================================
 
 /// 排序算法决策树
+/// sorting algorithm tree
 ///
 /// 根据数据规模、稳定性需求、内存限制和键类型，选择最合适的排序算法。
+/// according to scale 、、memory and type ，sorting algorithm 。
 pub struct SortingDecisionTree;
 
 impl SortingDecisionTree {
     /// 快速排序 (QuickSort) 使用指南
+    /// quick sort (QuickSort)
     pub fn quicksort_guide() -> &'static str {
         r#"# QuickSort 决策指南
 
@@ -63,6 +71,7 @@ data.sort_unstable(); // 底层为 Pattern-defeating QuickSort (pdqsort)
     }
 
     /// 归并排序 (MergeSort) 使用指南
+    /// merge sort (MergeSort)
     pub fn mergesort_guide() -> &'static str {
         r#"# MergeSort 决策指南
 
@@ -102,6 +111,7 @@ data.sort_by_key(|k| k.0); // 稳定排序，基于 Timsort
     }
 
     /// 堆排序 (HeapSort) 使用指南
+    /// heap sort (HeapSort)
     pub fn heapsort_guide() -> &'static str {
         r#"# HeapSort 决策指南
 
@@ -146,6 +156,7 @@ sorted.reverse(); // BinaryHeap 是大根堆
     }
 
     /// 计数排序 / 基数排序 (CountingSort / RadixSort) 使用指南
+    /// counting sort / radix sort (CountingSort / RadixSort)
     pub fn counting_radix_sort_guide() -> &'static str {
         r#"# CountingSort / RadixSort 决策指南
 
@@ -199,6 +210,7 @@ fn counting_sort(arr: &mut [u32], max_val: u32) {
     }
 
     /// 插入排序 (InsertionSort) 使用指南
+    /// insertion sort (InsertionSort)
     pub fn insertion_sort_guide() -> &'static str {
         r#"# InsertionSort 决策指南
 
@@ -286,12 +298,15 @@ v2.sort_by_key(|k| k.0);          // 稳定，保留原始相对顺序
 // ============================================================
 
 /// 搜索算法决策树
+/// searching algorithm tree
 ///
 /// 根据数据是否有序、访问模式、键类型选择搜索策略。
+/// according to 、、type strategy 。
 pub struct SearchingDecisionTree;
 
 impl SearchingDecisionTree {
     /// 线性搜索 vs 二分搜索 vs 插值搜索
+    /// linear search vs binary search vs interpolation search
     pub fn linear_vs_binary_vs_interpolation() -> &'static str {
         r#"# 线性搜索 vs 二分搜索 vs 插值搜索
 
@@ -349,6 +364,7 @@ fn interpolation_search(arr: &[i32], target: i32) -> Option<usize> {
     }
 
     /// 哈希表查找 vs 树查找
+    /// vs tree
     pub fn hash_vs_tree_lookup() -> &'static str {
         r#"# 哈希表查找 vs 树查找
 
@@ -399,6 +415,7 @@ for (k, v) in btree.range(15..=25) {
     }
 
     /// 预处理（排序+二分） vs 线性扫描
+    /// （ordering +） vs line
     pub fn preprocess_vs_linear_scan() -> &'static str {
         r#"# 预处理 vs 线性扫描
 
@@ -531,8 +548,10 @@ fn rabin_karp(text: &[u8], pattern: &[u8]) -> Vec<usize> {
 // ============================================================
 
 /// 图算法决策树
+/// graph algorithm tree
 ///
 /// 根据图的类型（稀疏/稠密、有向/无向、权重特征）选择图算法。
+/// according to type （/、/、）graph algorithm 。
 pub struct GraphAlgorithmDecisionTree;
 
 impl GraphAlgorithmDecisionTree {
@@ -804,12 +823,15 @@ fn kahn_topological_sort(graph: &[Vec<usize>], n: usize) -> Option<Vec<usize>> {
 // ============================================================
 
 /// 动态规划决策树
+/// dynamic programming tree
 ///
 /// 帮助判断问题是否适合 DP，以及选择实现方式。
+/// problem DP，and way 。
 pub struct DynamicProgrammingDecisionTree;
 
 impl DynamicProgrammingDecisionTree {
     /// 判断 DP 是否适用
+    /// DP
     pub fn when_dp_applies() -> &'static str {
         r#"# 动态规划适用性判断
 
@@ -862,6 +884,7 @@ fn fibonacci(n: usize) -> u64 {
     }
 
     /// 自顶向下 (记忆化) vs 自底向上 (填表)
+    /// top-down (memoization ) vs bottom-up ()
     pub fn top_down_vs_bottom_up() -> &'static str {
         r#"# Top-Down (记忆化) vs Bottom-Up (填表)
 
@@ -918,6 +941,7 @@ fn fib_tab(n: usize) -> u64 {
     }
 
     /// 空间优化技巧（滚动数组）
+    /// space optimization tip （）
     pub fn space_optimization() -> &'static str {
         r#"# DP 空间优化：滚动数组
 
@@ -969,6 +993,7 @@ fn knapsack_rolling(weights: &[usize], values: &[u64], cap: usize) -> u64 {
     }
 
     /// 贪心 vs DP
+    /// vs DP
     pub fn greedy_vs_dp() -> &'static str {
         r#"# 贪心 vs 动态规划
 
@@ -1027,20 +1052,28 @@ fn activity_selection(mut activities: Vec<(usize, usize)>) -> Vec<(usize, usize)
 // ============================================================================
 
 /// 常见算法的简洁 Rust 实现骨架
+/// algorithm Rust
 ///
 /// 这些实现侧重于清晰度和教学价值，而非极致性能。
+/// clear and value ，while performance 。
 /// 每个算法都包含完整注释，说明关键不变量和边界条件。
+/// algorithm complete ，explain key variable and boundary condition 。
 pub struct AlgorithmSkeletons;
 
 impl AlgorithmSkeletons {
     /// 二分查找（迭代版）
+    /// （）
     ///
     /// # 前提条件
+    /// # prerequisite condition
     /// - `arr` 必须是有序的（升序）
+    /// - `arr` must （）
     ///
     /// # 复杂度
+    /// # complex
     /// - 时间: O(log n)
     /// - 空间: O(1)
+    /// - space : O(1)
     pub fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
         let mut left = 0usize;
         let mut right = arr.len();
@@ -1057,11 +1090,16 @@ impl AlgorithmSkeletons {
     }
 
     /// 快速排序（原地）
+    /// quick sort （）
     ///
     /// # 复杂度
+    /// # complex
     /// - 平均时间: O(n log n)
+    /// - time : O(n log n)
     /// - 最坏时间: O(n²)
+    /// - worst time : O(n²)
     /// - 空间: O(log n) 递归栈
+    /// - space : O(log n) stack
     pub fn quick_sort(arr: &mut [i32]) {
         if arr.len() <= 1 {
             return;
@@ -1087,14 +1125,21 @@ impl AlgorithmSkeletons {
     }
 
     /// BFS 图遍历
+    /// BFS
     ///
     /// # 参数
+    /// # parameter
     /// - `n`: 节点数（0..n-1）
+    /// - `n`: node （0..n-1）
     /// - `edges`: 无向边列表
+    /// - `edges`: edge
     /// - `start`: 起始节点
+    /// - `start`: node
     ///
     /// # 返回
+    /// #
     /// 遍历顺序
+    /// order
     pub fn bfs_traversal(n: usize, edges: &[(usize, usize)], start: usize) -> Vec<usize> {
         let mut adj = vec![vec![]; n];
         for &(u, v) in edges {
@@ -1127,12 +1172,15 @@ impl AlgorithmSkeletons {
 // ============================================================
 
 /// 并发算法决策树
+/// concurrency algorithm tree
 ///
 /// 根据问题特征选择并行策略、同步原语和向量化方案。
+/// according to problem parallelism strategy 、synchronous and vectorization 。
 pub struct ConcurrencyAlgorithmDecisionTree;
 
 impl ConcurrencyAlgorithmDecisionTree {
     /// 顺序 vs 并行：何时并行化有帮助
+    /// order vs parallelism ：parallelism
     pub fn sequential_vs_parallel() -> &'static str {
         r#"# 顺序 vs 并行：何时并行化
 
@@ -1183,6 +1231,7 @@ let large: Vec<i32> = (0..10_000_000)
     }
 
     /// 数据并行 vs 任务并行
+    /// data parallelism vs task parallelism
     pub fn data_vs_task_parallelism() -> &'static str {
         r#"# 数据并行 vs 任务并行
 
@@ -1236,6 +1285,7 @@ fn task_parallel() {
     }
 
     /// 锁 vs 无锁：决策因素
+    /// lock vs lock-free ：factor
     pub fn lock_vs_lock_free() -> &'static str {
         r#"# 锁 (Lock-based) vs 无锁 (Lock-free)
 
@@ -1289,6 +1339,7 @@ counter.fetch_add(1, Ordering::Relaxed);
     }
 
     /// SIMD 适用性判断
+    /// SIMD
     pub fn simd_applicability() -> &'static str {
         r#"# SIMD 适用性判断
 

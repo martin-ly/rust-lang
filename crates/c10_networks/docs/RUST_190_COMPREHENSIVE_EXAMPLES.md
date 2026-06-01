@@ -338,7 +338,7 @@ Rust异步编程
 │   │   ├── tokio::select!
 │   │   ├── tokio::join!
 │   │   └── tokio::try_join!
-│   ├── async-std
+│   ├── async-std [已归档]
 │   │   ├── 类似std接口
 │   │   ├── 多线程调度
 │   │   └── async_std::task

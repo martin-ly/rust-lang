@@ -1,25 +1,30 @@
 //! # WASI 0.2 组件模型示例
-//!
+//! # WASI 0.2 example
+//! # WASI 0.2 组件模型Example of
 //! 本示例展示如何使用 WASI 0.2 (Preview 2) 组件模型构建模块化应用
-//!
+//! this example WASI 0.2 (Preview 2) module application
 //! ## 特性
+//! ## feature
 //! - WASI 0.2 标准接口
+//! - WASI 0.2 standard
 //! - 组件模型架构
+//! - architecture
+//! - 组件模型architecture
 //! - WIT 接口定义
+//! - WIT definition
+//! - WIT 接口definition
 //! - 资源管理
+//! -
 //! - 类型安全的互操作
-//!
+//! - type
 //! ## 编译
-//! ```bash
+//! ##
 //! # 安装 wasm32-wasip2 target
-//! rustup target add wasm32-wasip2
-//!
 //! # 编译
-//! cargo build --example 09_wasi_02_component_example --target wasm32-wasip2 --release
-//! ```
+//! #
 //!
 //! ## WIT 定义
-//!
+//! ## WIT definition
 //! ```wit
 //! // wit/world.wit
 //! package example:component@1.0.0;
@@ -38,12 +43,13 @@
 //! ```
 //!
 //! ## 运行
-//! ```bash
+//! ## Run
 //! wasmtime run target/wasm32-wasip2/release/examples/09_wasi_02_component_example.wasm
 //! ```
 use std::fs;
 
 /// 应用配置
+/// application
 #[derive(Debug)]
 struct AppConfig {
     /// 工作目录
@@ -51,6 +57,8 @@ struct AppConfig {
     /// 输出文件
     output_file: String,
     /// 日志级别
+    /// level
+    /// 日志level
     log_level: LogLevel,
 }
 
@@ -64,6 +72,7 @@ enum LogLevel {
 
 impl AppConfig {
     /// 从环境变量加载配置
+    /// from environment variable
     fn from_env() -> Result<Self, String> {
         let work_dir = std::env::var("WORK_DIR").unwrap_or_else(|_| ".".to_string());
         let output_file = std::env::var("OUTPUT_FILE").unwrap_or_else(|_| "output.txt".to_string());
@@ -85,6 +94,8 @@ impl AppConfig {
 }
 
 /// 日志系统
+/// system
+/// 日志system
 struct Logger {
     level: LogLevel,
 }
@@ -139,6 +150,7 @@ impl Logger {
 }
 
 /// 文件处理器 - 展示 WASI 0.2 文件系统 API
+/// - WASI 0.2 file system API
 struct FileProcessor {
     logger: Logger,
 }
@@ -149,6 +161,7 @@ impl FileProcessor {
     }
 
     /// 列出目录中的文件
+    /// in
     fn list_files(&self, dir: &str) -> Result<Vec<String>, String> {
         self.logger
             .debug(&format!("Listing files in directory: {}", dir));
@@ -170,6 +183,7 @@ impl FileProcessor {
     }
 
     /// 读取文件内容
+    /// inside
     fn read_file(&self, path: &str) -> Result<String, String> {
         self.logger.debug(&format!("Reading file: {}", path));
 
@@ -193,6 +207,7 @@ impl FileProcessor {
     }
 
     /// 处理文本文件（统计信息）
+    /// this （）
     fn analyze_text(&self, content: &str) -> TextStats {
         self.logger.debug("Analyzing text");
 
@@ -209,6 +224,7 @@ impl FileProcessor {
 }
 
 /// 文本统计信息
+/// this
 #[derive(Debug)]
 struct TextStats {
     char_count: usize,
@@ -227,6 +243,7 @@ impl TextStats {
 }
 
 /// 数据转换器 - 展示组件间数据流
+/// conversion - stream
 struct DataTransformer {
     logger: Logger,
 }
@@ -237,6 +254,7 @@ impl DataTransformer {
     }
 
     /// 转换为大写
+    /// conversion as
     fn to_uppercase(&self, text: &str) -> String {
         self.logger
             .debug(&format!("Transforming {} chars to uppercase", text.len()));
@@ -244,6 +262,7 @@ impl DataTransformer {
     }
 
     /// 转换为小写
+    /// conversion as
     fn to_lowercase(&self, text: &str) -> String {
         self.logger
             .debug(&format!("Transforming {} chars to lowercase", text.len()));
@@ -251,6 +270,7 @@ impl DataTransformer {
     }
 
     /// 反转文本
+    /// this
     fn reverse(&self, text: &str) -> String {
         self.logger.debug("Reversing text");
         text.chars().rev().collect()
@@ -264,6 +284,8 @@ impl DataTransformer {
 }
 
 /// 主应用程序
+/// application program
+/// 主applicationprogram
 struct Application {
     config: AppConfig,
     logger: Logger,
@@ -291,6 +313,7 @@ impl Application {
     }
 
     /// 运行应用程序
+    /// Run application program
     fn run(&self) -> Result<(), String> {
         self.logger.info("Starting application");
 
@@ -313,6 +336,7 @@ impl Application {
     }
 
     /// 演示文件系统操作
+    /// demonstration file system
     fn demo_filesystem(&self) -> Result<(), String> {
         self.logger.info("=== File System Demo ===");
 
@@ -346,6 +370,7 @@ impl Application {
     }
 
     /// 演示文本处理
+    /// demonstration this
     fn demo_text_processing(&self) -> Result<(), String> {
         self.logger.info("=== Text Processing Demo ===");
 
@@ -376,6 +401,7 @@ impl Application {
     }
 
     /// 演示环境变量
+    /// demonstration environment variable
     fn demo_environment_vars(&self) {
         self.logger.info("=== Environment Variables Demo ===");
 

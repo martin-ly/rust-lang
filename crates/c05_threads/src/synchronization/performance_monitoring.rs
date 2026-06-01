@@ -1,16 +1,22 @@
 //! 性能监控模块
-//!
+//! performance module
 //! 本模块提供了同步原语的性能监控功能：
+//! This module provides synchronous performance functionality ：
 //! - 锁竞争监控
+//! - lock
 //! - 等待时间统计
+//! - etc. time
 //! - 吞吐量测量
+//! -
 //! - 性能分析报告
+//! - performance analyze
 use std::sync::atomic::{AtomicBool, AtomicU64, AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::{Duration, Instant};
 
 /// 性能指标
+/// performance indicator
 #[derive(Debug)]
 pub struct PerformanceMetrics {
     pub total_operations: AtomicUsize,
@@ -166,6 +172,7 @@ impl PerformanceMetrics {
 }
 
 /// 性能监控器
+/// performance
 pub struct PerformanceMonitor {
     metrics: Arc<PerformanceMetrics>,
     start_time: Instant,
@@ -260,6 +267,7 @@ impl PerformanceMonitor {
 }
 
 /// 性能报告
+/// performance
 #[derive(Debug, Clone)]
 pub struct PerformanceReport {
     pub elapsed_time: Duration,
@@ -293,6 +301,7 @@ impl PerformanceReport {
 }
 
 /// 性能监控的互斥锁
+/// performance mutex
 pub struct MonitoredMutex<T> {
     data: Arc<Mutex<T>>,
     monitor: Arc<PerformanceMonitor>,
@@ -335,6 +344,7 @@ impl<T> MonitoredMutex<T> {
 }
 
 /// 性能监控的读写锁
+/// performance rwlock
 pub struct MonitoredRwLock<T> {
     data: Arc<std::sync::RwLock<T>>,
     monitor: Arc<PerformanceMonitor>,
@@ -400,6 +410,7 @@ impl<T> MonitoredRwLock<T> {
 }
 
 /// 性能基准测试
+/// Performance benchmark
 pub struct PerformanceBenchmark {
     monitors: Vec<Arc<PerformanceMonitor>>,
     start_time: Instant,
@@ -493,6 +504,7 @@ impl ComparisonReport {
 }
 
 /// 运行所有性能监控示例
+/// Run all performance example
 pub fn demonstrate_performance_monitoring() {
     println!("=== 性能监控演示 ===");
 

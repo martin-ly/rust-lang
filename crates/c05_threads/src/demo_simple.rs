@@ -1,11 +1,15 @@
 //! 简化的演示模块
-//!
+//! demonstration module
+//! 简化demonstration module
 //! 本模块提供了简化的演示功能，避免复杂的线程安全问题
+//! This module provides demonstration functionality ，complex thread-safe problem
 use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::{Duration, Instant};
 
 /// 简化的演示功能
+/// demonstration functionality
+/// 简化Demonstration offunctionality
 pub fn demonstrate_simple_features() {
     println!("=== 简化功能演示 ===");
 
@@ -20,6 +24,7 @@ pub fn demonstrate_simple_features() {
 }
 
 /// 基础同步演示
+/// foundation synchronous demonstration
 fn demonstrate_basic_sync() {
     println!("=== 基础同步演示 ===");
 
@@ -55,6 +60,8 @@ fn demonstrate_basic_sync() {
 }
 
 /// 消息传递演示
+/// demonstration
+/// 消息传递Demonstration of
 fn demonstrate_message_passing() {
     println!("=== 消息传递演示 ===");
 
@@ -93,6 +100,7 @@ fn demonstrate_message_passing() {
 }
 
 /// 性能基准演示
+/// performance demonstration
 fn demonstrate_performance_benchmark() {
     println!("=== 性能基准演示 ===");
 

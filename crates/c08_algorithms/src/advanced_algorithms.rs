@@ -1,19 +1,27 @@
 //! 高级算法实现模块
+//! algorithm module
 //!
 //! 本模块提供了Rust中的高级算法实现，包括：
+//! This module provides Rustin algorithm ，：
 //! - 并行算法
+//! - parallel algorithm
 //! - 分布式算法  
+//! - distributed algorithm
 //! - 机器学习算法
+//! - machine learning algorithm
 //! - 密码学算法
+//! - algorithm
 use rayon::prelude::*;
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 
 /// 并行排序算法实现
+/// parallel sort algorithm
 pub struct ParallelSort;
 
 impl ParallelSort {
     /// 并行快速排序
+    /// parallelism quick sort
     pub fn parallel_quicksort<T: Ord + Send + Sync>(arr: &mut [T]) {
         if arr.len() <= 1 {
             return;
@@ -30,6 +38,7 @@ impl ParallelSort {
     }
 
     /// 并行归并排序
+    /// parallelism merge sort
     pub fn parallel_mergesort<T: Ord + Send + Sync + Clone>(arr: &mut [T]) {
         if arr.len() <= 1 {
             return;
@@ -49,6 +58,7 @@ impl ParallelSort {
     }
 
     /// 并行基数排序
+    /// parallelism radix sort
     pub fn parallel_radix_sort(arr: &mut [u32]) {
         const RADIX: usize = 256;
         const BITS: usize = 32;
@@ -146,10 +156,12 @@ impl ParallelSort {
 }
 
 /// 分布式算法实现
+/// distributed algorithm
 pub struct DistributedAlgorithms;
 
 impl DistributedAlgorithms {
     /// 分布式MapReduce实现
+    /// distribution MapReduce
     pub fn map_reduce<T, U, V, F, G>(data: Vec<T>, map_fn: F, reduce_fn: G, num_workers: usize) -> V
     where
         T: Send + Sync + Clone,
@@ -184,6 +196,7 @@ impl DistributedAlgorithms {
 }
 
 /// 分布式共识算法 (简化版Paxos)
+/// distribution consensus algorithm (Paxos )
 pub struct PaxosNode {
     #[allow(dead_code)]
     id: usize,
@@ -230,6 +243,7 @@ impl PaxosNode {
 }
 
 /// 分布式哈希表 (DHT) 实现
+/// distribution (DHT)
 pub struct DistributedHashTable<K, V> {
     nodes: HashMap<u64, Arc<Mutex<HashMap<K, V>>>>,
     num_nodes: usize,
@@ -283,6 +297,7 @@ where
 }
 
 /// 线性回归实现
+/// line
 pub struct LinearRegression {
     weights: Vec<f64>,
     bias: f64,
@@ -325,6 +340,7 @@ impl LinearRegression {
 }
 
 /// K-means聚类算法
+/// K-meansalgorithm
 pub struct KMeans {
     k: usize,
     centroids: Vec<Vec<f64>>,
@@ -423,6 +439,7 @@ impl KMeans {
 }
 
 /// 决策树实现
+/// tree
 pub struct DecisionTree {
     root: Option<Box<TreeNode>>,
     max_depth: usize,
@@ -604,9 +621,11 @@ impl DecisionTree {
 }
 
 /// 密码学算法实现
+/// algorithm
 pub struct CryptographicAlgorithms;
 
 /// RSA加密算法实现
+/// RSAalgorithm
 #[allow(clippy::upper_case_acronyms)]
 pub struct RSA {
     public_key: (u64, u64),
@@ -756,6 +775,7 @@ impl RSA {
 }
 
 /// AES加密算法实现 (简化版)
+/// AESalgorithm ()
 #[allow(clippy::upper_case_acronyms)]
 pub struct AES {
     key: [u8; 16],
@@ -915,6 +935,7 @@ impl AES {
 }
 
 /// SHA-256哈希算法实现
+/// SHA-256algorithm
 pub struct SHA256 {
     state: [u32; 8],
 }

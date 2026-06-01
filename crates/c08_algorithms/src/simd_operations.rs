@@ -1,13 +1,16 @@
 //! Portable SIMD 向量化操作
 //!
 //! 本模块展示 Rust 的向量化编程：
+//! This module demonstrates Rust vectorization ：
 //! - `std::simd` (portable_simd): 跨平台 SIMD 抽象（需要 nightly feature `portable_simd`）
 //! - `std::arch`: 平台特定的 SIMD 指令（stable）
 //!
 //! ## 条件编译
+//! ## condition
 //!
 //! - 启用 `portable_simd` feature 时，使用 `core::simd` 进行跨平台 SIMD 编程
 //! - 默认情况下，使用 `std::arch::x86_64` 的 SSE2/AVX 回退或纯标量实现
+//! - situation under ， `std::arch::x86_64` SSE2/AVX or
 
 #[cfg(feature = "portable_simd")]
 pub mod portable {
@@ -17,6 +20,7 @@ pub mod portable {
     /// SIMD 数组加法（portable_simd）
     ///
     /// 使用 8-lane f32 SIMD（256-bit），一次处理 8 个元素。
+    /// 8-lane f32 SIMD （256-bit）， 8 element 。
     pub fn simd_array_add(a: &[f32], b: &[f32], result: &mut [f32]) {
         assert_eq!(a.len(), b.len());
         assert_eq!(a.len(), result.len());
@@ -38,6 +42,7 @@ pub mod portable {
     }
 
     /// SIMD 向量化搜索（线性查找等于目标值的索引）
+    /// SIMD vectorization （line etc. goal ）
     pub fn simd_search(arr: &[f32], target: f32) -> Option<usize> {
         const LANES: usize = 8;
         let target_vec = Simd::<f32, LANES>::splat(target);
@@ -65,8 +70,10 @@ pub mod portable {
 #[cfg(not(feature = "portable_simd"))]
 pub mod fallback {
     //! 默认回退实现：使用平台特定 SIMD（x86_64 SSE2/AVX）或标量代码
+    //! ：platform SIMD （x86_64 SSE2/AVX）or
 
     /// 数组加法（优先 AVX2，其次 SSE2，最后标量）
+    /// （ AVX2，second SSE2，finally ）
     pub fn simd_array_add(a: &[f32], b: &[f32], result: &mut [f32]) {
         assert_eq!(a.len(), b.len());
         assert_eq!(a.len(), result.len());
@@ -88,10 +95,12 @@ pub mod fallback {
     }
 
     /// AVX2 加速数组加法（256-bit，8x f32）
+    /// AVX2 （256-bit，8x f32）
     ///
     /// # Safety
     ///
     /// 调用者必须确保 CPU 支持 AVX2。
+    /// must CPU AVX2。
     #[cfg(target_arch = "x86_64")]
     #[target_feature(enable = "avx2")]
     unsafe fn avx2_array_add(a: &[f32], b: &[f32], result: &mut [f32]) {
@@ -109,10 +118,12 @@ pub mod fallback {
     }
 
     /// SSE2 加速数组加法（128-bit，4x f32）
+    /// SSE2 （128-bit，4x f32）
     ///
     /// # Safety
     ///
     /// 调用者必须确保 CPU 支持 SSE2。
+    /// must CPU SSE2。
     #[cfg(target_arch = "x86_64")]
     #[target_feature(enable = "sse2")]
     unsafe fn sse2_array_add(a: &[f32], b: &[f32], result: &mut [f32]) {
@@ -138,24 +149,28 @@ pub mod fallback {
 // ========== 统一接口 ==========
 
 /// 向量化数组加法（portable_simd 启用时使用核心 SIMD 实现）
+/// vectorization （portable_simd core SIMD ）
 #[cfg(feature = "portable_simd")]
 pub fn array_add(a: &[f32], b: &[f32], result: &mut [f32]) {
     portable::simd_array_add(a, b, result);
 }
 
 /// 向量化数组加法（回退实现）
+/// vectorization （）
 #[cfg(not(feature = "portable_simd"))]
 pub fn array_add(a: &[f32], b: &[f32], result: &mut [f32]) {
     fallback::simd_array_add(a, b, result);
 }
 
 /// 向量化搜索（portable_simd 启用时使用核心 SIMD 实现）
+/// vectorization （portable_simd core SIMD ）
 #[cfg(feature = "portable_simd")]
 pub fn search(arr: &[f32], target: f32) -> Option<usize> {
     portable::simd_search(arr, target)
 }
 
 /// 向量化搜索（回退实现）
+/// vectorization （）
 #[cfg(not(feature = "portable_simd"))]
 pub fn search(arr: &[f32], target: f32) -> Option<usize> {
     fallback::simd_search(arr, target)

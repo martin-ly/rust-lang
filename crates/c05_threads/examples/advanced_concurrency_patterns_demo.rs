@@ -1,13 +1,20 @@
 //! 高级并发模式示例
-//!
+//! concurrency example
 //! 本示例展示了复杂并发场景下的设计模式：
+//! this example complex concurrency scenario under design ：
 //! - Actor 模型
 //! - 发布-订阅模式
+//! - publish-subscribe
 //! - 管道模式
+//! - pipe
 //! - 扇出-扇入模式
+//! - -
 //! - 背压处理
+//! - backpressure
 //! - 熔断器模式
+//! -
 //! - 限流器模式
+//! - stream
 use crossbeam_channel::{Receiver, Sender, unbounded};
 use std::collections::HashMap;
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -16,6 +23,8 @@ use std::thread;
 use std::time::{Duration, Instant};
 
 /// Actor 模型实现
+/// Actor
+/// Actor 模型Implementation of
 #[allow(dead_code)]
 pub struct Actor<Message> {
     receiver: Receiver<Message>,
@@ -79,6 +88,7 @@ where
 }
 
 /// 发布-订阅模式
+/// publish-subscribe
 #[allow(dead_code)]
 pub struct PubSub<T> {
     subscribers: Arc<Mutex<HashMap<String, Sender<T>>>>,
@@ -141,6 +151,7 @@ where
 }
 
 /// 管道模式
+/// pipe
 #[allow(dead_code)]
 pub struct Pipeline {
     input: Sender<String>,
@@ -203,6 +214,7 @@ impl Pipeline {
 }
 
 /// 扇出-扇入模式
+/// -
 #[allow(dead_code)]
 pub struct FanOutFanIn {
     input: Sender<String>,
@@ -389,6 +401,7 @@ impl CircuitBreaker {
 }
 
 /// 限流器模式
+/// stream
 #[allow(dead_code)]
 pub struct RateLimiter {
     tokens: Arc<AtomicUsize>,
@@ -440,6 +453,8 @@ impl RateLimiter {
 }
 
 /// 演示 Actor 模型
+/// demonstration Actor
+/// Demonstration of Actor 模型
 fn demo_actor_model() {
     println!("=== Actor 模型演示 ===");
 
@@ -463,6 +478,7 @@ fn demo_actor_model() {
 }
 
 /// 演示发布-订阅模式
+/// demonstration publish-subscribe
 fn demo_pub_sub() {
     println!("=== 发布-订阅模式演示 ===");
 
@@ -493,6 +509,7 @@ fn demo_pub_sub() {
 }
 
 /// 演示管道模式
+/// demonstration pipe
 fn demo_pipeline() {
     println!("=== 管道模式演示 ===");
 
@@ -513,6 +530,8 @@ fn demo_pipeline() {
 }
 
 /// 演示扇出-扇入模式
+/// demonstration -
+/// Demonstration of扇出-扇入模式
 fn demo_fan_out_fan_in() {
     println!("=== 扇出-扇入模式演示 ===");
 
@@ -533,6 +552,8 @@ fn demo_fan_out_fan_in() {
 }
 
 /// 演示熔断器模式
+/// demonstration
+/// Demonstration of熔断器模式
 fn demo_circuit_breaker() {
     println!("=== 熔断器模式演示 ===");
 
@@ -571,6 +592,7 @@ fn demo_circuit_breaker() {
 }
 
 /// 演示限流器模式
+/// demonstration stream
 fn demo_rate_limiter() {
     println!("=== 限流器模式演示 ===");
 

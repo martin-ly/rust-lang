@@ -1,9 +1,12 @@
 //! 支持向量机（SVM）算法实现
+//! （SVM）algorithm
 //!
 //! 本模块提供了支持向量机算法的基础实现
+//! This module provides algorithm foundation
 use super::*;
 
 /// 支持向量机分类器（简化版本）
+/// classification （this ）
 #[derive(Debug, Clone)]
 pub struct SVMClassifier {
     /// 是否已训练
@@ -16,6 +19,7 @@ pub struct SVMClassifier {
 
 impl SVMClassifier {
     /// 创建新的 SVM 分类器
+    /// SVM classification
     pub fn new() -> Self {
         Self {
             is_fitted: false,

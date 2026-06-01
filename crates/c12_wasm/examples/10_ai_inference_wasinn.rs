@@ -1,44 +1,43 @@
 //! # AI 推理示例 - WASI-NN
-//!
-//! 本示例展示如何使用 WasmEdge WASI-NN 插件进行神经网络推理
-//!
+//! # AI reason example - WASI -NN
 //! ## 支持的后端
-//! - PyTorch
+//! ## backend
 //! - TensorFlow Lite
 //! - OpenVINO
 //! - GGML (llama.cpp)
 //!
 //! ## 功能
+//! ## functionality
 //! - 图像分类
+//! - classification
+//! - 图像classification
 //! - 文本生成 (LLM)
+//! - this (LLM)
 //! - 自定义模型推理
+//! - definition reason
 //! - 批量处理
-//!
+//! -
+//! - 批量Handle
 //! ## 编译
-//! ```bash
-//! cargo build --example 10_ai_inference_wasinn --target wasm32-wasip1 --release
+//! ##
 //! ```
 //!
 //! ## 运行
-//! ```bash
-//! # 使用 WasmEdge 运行（需要安装 WASI-NN 插件）
-//! wasmedge --dir .:. \
-//!   target/wasm32-wasip1/release/examples/10_ai_inference_wasinn.wasm \
+//! ## Run
 //!   model.onnx
 //! ```
 //!
 //! ## 安装 WASI-NN 插件
-//! ```bash
-//! # Ubuntu/Debian
+//! ## WASI -NN
 //! curl -sSf https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/install.sh | \
 //!   bash -s -- --plugins wasi_nn-pytorch wasi_nn-ggml
 //!
 //! # 验证安装
-//! wasmedge --version
-//! ```
+//! #
 use std::fs;
 
 /// WASI-NN 错误类型
+/// WASI -NN error type
 #[derive(Debug)]
 pub enum WasiNNError {
     ModelNotFound,
@@ -61,15 +60,14 @@ impl std::fmt::Display for WasiNNError {
 }
 
 /// 推理后端类型
+/// reason backend type
 #[derive(Debug, Clone, Copy)]
 pub enum InferenceBackend {
-    /// PyTorch 后端
     PyTorch,
-    /// TensorFlow Lite 后端
     TFLite,
-    /// OpenVINO 后端
     OpenVINO,
     /// Ggml 后端（用于 LLM）
+    /// Ggml backend （ LLM）
     Ggml,
 }
 
@@ -86,6 +84,7 @@ impl InferenceBackend {
 }
 
 /// 张量数据类型
+/// tensor type
 #[derive(Debug, Clone, Copy)]
 pub enum TensorType {
     F32,
@@ -95,6 +94,7 @@ pub enum TensorType {
 }
 
 /// 图像分类器
+/// classification
 pub struct ImageClassifier {
     model_path: String,
     backend: InferenceBackend,
@@ -146,6 +146,7 @@ impl ImageClassifier {
     }
 
     /// 执行推理
+    /// reason
     pub fn classify(&self, image_data: &[u8]) -> Result<ClassificationResult, WasiNNError> {
         println!("=== Image Classification ===");
         println!("Backend: {:?}", self.backend);
@@ -170,6 +171,7 @@ impl ImageClassifier {
     }
 
     /// 模拟推理（实际应使用 WASI-NN API）
+    /// reason （actual WASI -NN API）
     fn mock_inference(&self, _input: &[f32]) -> ClassificationResult {
         // 模拟输出概率
         vec![
@@ -181,6 +183,7 @@ impl ImageClassifier {
     }
 
     /// 获取 Top-K 结果
+    /// Top-K result
     pub fn top_k(&self, mut results: ClassificationResult, k: usize) -> ClassificationResult {
         results.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap());
         results.truncate(k);
@@ -189,9 +192,13 @@ impl ImageClassifier {
 }
 
 /// 分类结果：(标签, 置信度)
+/// classification result ：(, )
+/// classificationresult：(标签, 置信度)
 pub type ClassificationResult = Vec<(String, f32)>;
 
 /// LLM 文本生成器
+/// LLM this
+/// LLM 文thisgenerator
 pub struct LLMGenerator {
     model_path: String,
     max_tokens: usize,
@@ -210,12 +217,14 @@ impl LLMGenerator {
     }
 
     /// 设置最大生成 token 数
+    /// maximum token
     pub fn with_max_tokens(mut self, max_tokens: usize) -> Self {
         self.max_tokens = max_tokens;
         self
     }
 
     /// 生成文本
+    /// this
     pub fn generate(&self, prompt: &str) -> Result<String, WasiNNError> {
         println!("=== LLM Text Generation ===");
         println!("Model: {}", self.model_path);
@@ -236,6 +245,7 @@ impl LLMGenerator {
     }
 
     /// 简单的分词器（模拟）
+    /// simple （）
     fn tokenize(&self, text: &str) -> Vec<u32> {
         // 实际应使用模型的 tokenizer
         text.split_whitespace()
@@ -244,6 +254,7 @@ impl LLMGenerator {
     }
 
     /// 模拟文本生成
+    /// this
     fn mock_generate(&self, prompt: &str) -> String {
         format!(
             "{} This is a simulated response from the language model. In a real implementation, \
@@ -255,6 +266,7 @@ impl LLMGenerator {
 }
 
 /// 批量推理处理器
+/// reason
 #[allow(dead_code)]
 pub struct BatchInference {
     model_path: String,
@@ -301,6 +313,8 @@ impl BatchInference {
 }
 
 /// 模型性能分析
+/// performance analyze
+/// 模型performanceanalysis
 pub struct ModelBenchmark {
     iterations: usize,
 }
@@ -311,6 +325,7 @@ impl ModelBenchmark {
     }
 
     /// 基准测试
+    /// benchmark
     pub fn benchmark<F>(&self, name: &str, mut inference_fn: F)
     where
         F: FnMut() -> Result<(), WasiNNError>,
@@ -337,10 +352,13 @@ impl ModelBenchmark {
 }
 
 /// 实用工具函数
+/// tool function
+/// 实用toolfunction
 pub mod utils {
     use super::*;
 
     /// 打印分类结果
+    /// classification result
     pub fn print_classification_results(results: &ClassificationResult) {
         println!("\nClassification Results:");
         println!("{:-<50}", "");
@@ -351,6 +369,7 @@ pub mod utils {
     }
 
     /// 打印张量形状
+    /// tensor
     pub fn print_tensor_info(name: &str, shape: &[usize], dtype: TensorType) {
         println!("Tensor '{}': shape={:?}, dtype={:?}", name, shape, dtype);
     }

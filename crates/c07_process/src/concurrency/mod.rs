@@ -16,23 +16,28 @@ use std::sync::{Arc, Mutex as StdMutex};
 use std::time::Duration;
 
 /// 同步管理器
+/// synchronous
 pub struct SyncManager {
     primitives: Arc<StdMutex<HashMap<String, Arc<dyn SyncPrimitiveTrait>>>>,
     config: SyncConfig,
 }
 
 /// 同步原语trait
+/// synchronous trait
 pub trait SyncPrimitiveTrait: Send + Sync {
     /// 获取原语名称
     fn name(&self) -> &str;
 
     /// 获取原语类型
+    /// type
     fn primitive_type(&self) -> SyncPrimitive;
 
     /// 检查是否被锁定
+    /// is lock
     fn is_locked(&self) -> bool;
 
     /// 获取等待者数量
+    /// etc. quantity
     fn waiter_count(&self) -> usize;
 
     /// 获取统计信息
@@ -54,6 +59,7 @@ pub struct PrimitiveStats {
 
 impl SyncManager {
     /// 创建新的同步管理器
+    /// synchronous
     pub fn new(config: SyncConfig) -> Self {
         Self {
             primitives: Arc::new(StdMutex::new(HashMap::new())),
@@ -62,6 +68,7 @@ impl SyncManager {
     }
 
     /// 创建互斥锁
+    /// mutex
     pub fn create_mutex(
         &mut self,
         name: &str,
@@ -79,6 +86,7 @@ impl SyncManager {
     }
 
     /// 创建读写锁
+    /// rwlock
     pub fn create_rwlock(
         &mut self,
         name: &str,
@@ -96,6 +104,7 @@ impl SyncManager {
     }
 
     /// 创建条件变量
+    /// condition variable
     pub fn create_condvar(
         &mut self,
         name: &str,
@@ -113,6 +122,7 @@ impl SyncManager {
     }
 
     /// 创建信号量
+    /// semaphore
     pub fn create_semaphore(
         &mut self,
         name: &str,
@@ -135,6 +145,7 @@ impl SyncManager {
     }
 
     /// 创建屏障
+    /// barrier
     pub fn create_barrier(
         &mut self,
         name: &str,
@@ -154,11 +165,13 @@ impl SyncManager {
     }
 
     /// 获取所有原语名称
+    /// all
     pub fn get_primitive_names(&self) -> Vec<String> {
         self.primitives.lock().expect("同步原语锁被污染").keys().cloned().collect()
     }
 
     /// 检查原语是否存在
+    /// in
     pub fn has_primitive(&self, name: &str) -> bool {
         self.primitives.lock().expect("同步原语锁被污染").contains_key(name)
     }
@@ -170,6 +183,7 @@ impl SyncManager {
     }
 
     /// 获取所有原语统计信息
+    /// all
     pub fn get_all_stats(&self) -> HashMap<String, PrimitiveStats> {
         let primitives = self.primitives.lock().expect("同步原语锁被污染");
         let mut stats = HashMap::new();

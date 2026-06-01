@@ -12,7 +12,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust Async 生态系统专题 - 完整完成报告](#rust-async-生态系统专题---完整完成报告)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [完成情况](#完成情况)
   - [完整文档清单](#完整文档清单)
     - [专题主文档](#专题主文档)
@@ -40,7 +40,7 @@
     - [关键依赖版本](#关键依赖版本)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 完成情况
 >
@@ -58,7 +58,7 @@
 │  🔬 性能数据: 完整对比                                           │
 │                                                                  │
 │  ✅ 嵌入式生态: Embassy, RTIC, Drone, Tock                      │
-│  ✅ 标准运行时: Tokio, async-std, smol, bastion                 │
+│  ✅ 标准运行时: Tokio, async-std [已归档], smol, bastion                 │
 │  ✅ io_uring生态: tokio-uring, glommio, monoio, compio          │
 │  ✅ 开源协议: Quinn, sqlx, lapin, rdkafka                       │
 │  ✅ 选择指南: 决策树 + 场景匹配                                   │
@@ -159,7 +159,7 @@
 | 库 | 类型 | 状态 | 覆盖内容 |
 |:---|:-----|:----:|:---------|
 | **Tokio** | 标准 | ⭐ 活跃 | Scheduler、Reactor、Timer、生态 |
-| **async-std** | 标准 | 🔄 缓慢 | 类标准库API |
+| **async-std [已归档]** | 标准 | 🔄 缓慢 | 类标准库API |
 | **smol** | 轻量 | ⭐ 活跃 | 最小实现、快速编译 |
 | **bastion** | Actor | ⭐ 活跃 | 容错、监督 |
 
@@ -287,7 +287,7 @@
 │   │   └─ bastion
 │   │
 │   └─ 需要轻量级/快速编译?
-│       └─ smol / async-std
+│       └─ smol / async-std [已归档]
 │
 ├─ 跨平台 (Linux/macOS/Windows)
 │   └─ Tokio (唯一成熟选择)

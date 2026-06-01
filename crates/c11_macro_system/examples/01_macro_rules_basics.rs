@@ -1,29 +1,38 @@
 //! # 示例01: macro_rules!基础
-//!
 //! 本示例演示声明宏的基本用法
-//!
+//! this example demonstration this
 //! ## 📐 知识结构
-//!
+//! ## 📐 structure
+//! ## 📐 知识structure
 //! ### 核心概念
-//!
-//! - **声明宏 (Declarative Macros)**: 使用 macro_rules! 定义的宏
+//! ### core concept
 //!   - **属性**: 模式匹配、宏展开、代码生成
+//!   - **attribute **: 、、
+//!   - **attribute**: 模式匹配、宏展开、代码Generate
+//!   - **attribute**: 、、Generate
 //!   - **关系**: 与宏系统、代码生成相关
-//!
+//!   - ****: and system 、
 //! ### 思维导图
-//!
-//! ```text
+//! ###
 //! macro_rules! 基础
-//! │
 //! ├── 简单宏
+//! ├── simple
 //! │   └── 无参数宏
+//! │ └── parameter
 //! ├── 函数创建
+//! ├── function
 //! │   └── 代码生成
+//! │ └──
+//! │ └── 代码Generate
 //! ├── 表达式计算
+//! ├── express
 //! │   └── 编译时计算
+//! │ └── compile-time
 //! └── 向量创建
+//! └──
+//! └── 向量Create
 //!     └── 便捷语法
-//! ```
+//!     └──
 use c11_macro_system::*;
 
 fn main() {

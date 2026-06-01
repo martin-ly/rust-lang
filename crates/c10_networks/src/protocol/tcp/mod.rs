@@ -1,7 +1,8 @@
 //! TCP 协议实现模块
-//!
-//! 本模块提供了基于 Rust 1.92.0 的 TCP 协议实现，
+//! TCP module
+//! TCP 协议Implementation ofmodule
 //! 包括连接管理、状态机、流量控制等功能。
+//! 、state machine 、flow rate etc. functionality 。
 pub mod connection;
 pub mod state;
 
@@ -14,6 +15,7 @@ use std::time::Duration;
 use tokio::sync::Mutex;
 
 /// TCP 连接池
+/// TCP
 #[allow(unused)]
 #[derive(Debug)]
 pub struct TcpConnectionPool {
@@ -59,12 +61,14 @@ impl TcpConnectionPool {
     }
 
     /// 移除连接
+    /// 移除Connect
     pub async fn remove_connection(&self, id: u64) -> bool {
         let mut connections = self.connections.lock().await;
         connections.remove(&id).is_some()
     }
 
     /// 清理超时连接
+    /// Clean up超时Connect
     pub async fn cleanup_timeout_connections(&self) -> usize {
         let mut connections = self.connections.lock().await;
         let mut to_remove = Vec::new();
@@ -115,6 +119,7 @@ impl TcpConnectionPool {
 }
 
 /// TCP 连接池统计信息
+/// TCP
 #[derive(Debug, Clone)]
 pub struct TcpPoolStats {
     pub total_connections: usize,

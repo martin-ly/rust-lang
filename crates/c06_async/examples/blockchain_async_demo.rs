@@ -1,17 +1,26 @@
 //! 区块链异步演示
-//!
+//! async demonstration
 //! 本示例展示了异步编程在区块链应用中的使用：
+//! this example async in application in ：
 //! - 异步交易处理
+//! - async
 //! - 区块验证和挖矿
+//! - and
 //! - 智能合约执行
+//! -
 //! - 共识机制
+//! - mechanism
+//! - 共识mechanism
 //! - 网络同步
+//! - network synchronous
 //! - 钱包管理
+//! -
 //! - 挖矿池
+//! -
 //! - 区块链浏览器
-//!
+//! -
 //! 运行方式：
-//! ```bash
+//! Run way ：
 //! cargo run --example blockchain_async_demo
 //! ```
 use anyhow::Result;
@@ -486,6 +495,8 @@ pub struct PoolStats {
 }
 
 /// 区块链网络节点
+/// network node
+/// 区块链networknode
 pub struct BlockchainNode {
     pub id: String,
     pub address: String,

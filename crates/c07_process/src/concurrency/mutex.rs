@@ -7,6 +7,7 @@ use std::sync::{Arc, Mutex as StdMutex};
 use std::time::{Duration, Instant};
 
 /// 进程安全的互斥锁
+/// process mutex
 #[allow(dead_code)]
 pub struct ProcessMutex {
     name: String,
@@ -24,6 +25,7 @@ struct MutexStats {
 
 impl ProcessMutex {
     /// 创建新的互斥锁
+    /// mutex
     pub fn new(name: &str, config: SyncConfig) -> Self {
         Self {
             name: name.to_string(),
@@ -39,6 +41,7 @@ impl ProcessMutex {
     }
 
     /// 尝试获取锁
+    /// lock
     #[allow(dead_code)]
     pub fn try_lock(&self) -> Option<MutexGuard<'_>> {
         if let Ok(guard) = self.inner.try_lock() {
@@ -55,6 +58,7 @@ impl ProcessMutex {
     }
 
     /// 获取锁（阻塞）
+    /// lock （）
     pub fn lock(&self) -> SyncResult<MutexGuard<'_>> {
         let start = Instant::now();
 
@@ -97,6 +101,7 @@ impl ProcessMutex {
     }
 
     /// 带超时的锁获取
+    /// lock
     pub fn lock_timeout(&self, timeout: Duration) -> SyncResult<MutexGuard<'_>> {
         let start = Instant::now();
 
@@ -114,16 +119,19 @@ impl ProcessMutex {
     }
 
     /// 检查锁是否被持有
+    /// lock is
     pub fn is_locked(&self) -> bool {
         self.inner.try_lock().is_err()
     }
 
     /// 获取锁名称
+    /// lock
     pub fn name(&self) -> &str {
         &self.name
     }
 
     /// 获取等待者数量（互斥锁总是0或1）
+    /// etc. quantity （mutex 0or 1）
     pub fn waiter_count(&self) -> usize {
         if self.is_locked() {
             1
@@ -134,6 +142,7 @@ impl ProcessMutex {
 }
 
 /// 互斥锁守卫
+/// mutex
 #[allow(dead_code)]
 pub struct MutexGuard<'a> {
     guard: std::sync::MutexGuard<'a, ()>,

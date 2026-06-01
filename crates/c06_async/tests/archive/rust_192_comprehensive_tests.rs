@@ -1,11 +1,13 @@
 //! Rust 1.92.0 异步编程综合测试套件
-//!
-//! 本测试套件验证 Rust 1.92.0 版本中的所有异步编程新特性，确保：
+//! Rust 1.92.0 async synthesize
 //! - rotate_right 在异步任务队列中正常工作
-//! - NonZero::div_ceil 在异步池计算中正确应用
+//! - rotate_right in async task in
 //! - 迭代器方法特化性能优化有效
+//! - method performance optimization effective
 //! - 异步任务调度器功能完整
+//! - async task functionality complete
 //! - 异步资源分配器工作正常
+//! - async
 use c06_async::rust_192_features::{
     AsyncTaskQueue, AsyncTaskScheduler, AsyncResourceAllocator,
     TaskItem, calculate_async_pool_size, compare_async_task_lists,
@@ -16,7 +18,6 @@ use std::num::NonZeroUsize;
 use std::time::Duration;
 use tokio::time::timeout;
 
-/// 测试 rotate_right 在异步任务队列中的应用
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_async_task_queue_rotate() -> Result<()> {
@@ -58,7 +59,6 @@ async fn test_async_task_queue_rotate_empty() {
     assert_eq!(queue.len(), 0);
 }
 
-/// 测试 NonZero::div_ceil 在异步池计算中的应用
 #[test]
 fn test_async_pool_size_calculation() {
     let tasks_per_worker = NonZeroUsize::new(5).unwrap();
@@ -73,6 +73,7 @@ fn test_async_pool_size_calculation() {
 }
 
 /// 测试异步资源分配器
+/// async
 #[test]
 fn test_async_resource_allocator() {
     // 测试基本分配
@@ -89,6 +90,7 @@ fn test_async_resource_allocator() {
 }
 
 /// 测试异步任务调度器
+/// async task
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_async_task_scheduler() -> Result<()> {
@@ -120,6 +122,7 @@ async fn test_async_task_scheduler() -> Result<()> {
 }
 
 /// 测试异步任务调度器的并发安全性
+/// async task concurrency
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_async_task_scheduler_concurrent() -> Result<()> {
@@ -160,6 +163,7 @@ async fn test_async_task_scheduler_concurrent() -> Result<()> {
 }
 
 /// 测试迭代器方法特化在异步任务列表比较中的应用
+/// method in async task in application
 #[test]
 fn test_compare_async_task_lists() {
     let list1 = vec![
@@ -206,6 +210,7 @@ fn test_compare_async_task_lists() {
 }
 
 /// 测试异步任务状态检查
+/// async task state
 #[test]
 fn test_check_async_task_states() {
     let tasks = vec![
@@ -240,6 +245,7 @@ fn test_check_async_task_states() {
 }
 
 /// 测试异步任务队列的基本操作
+/// async task this
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_async_task_queue_operations() {
@@ -264,6 +270,7 @@ async fn test_async_task_queue_operations() {
 }
 
 /// 测试异步任务调度器的超时处理
+/// async task
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_async_task_scheduler_timeout() -> Result<()> {
@@ -284,6 +291,7 @@ async fn test_async_task_scheduler_timeout() -> Result<()> {
 }
 
 /// 综合测试：完整的异步任务处理流程
+/// synthesize ：complete async task process
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_complete_async_task_workflow() -> Result<()> {
@@ -331,6 +339,7 @@ async fn test_complete_async_task_workflow() -> Result<()> {
 }
 
 /// 测试新增的队列操作方法
+/// method
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_queue_utility_methods() {
@@ -369,6 +378,7 @@ async fn test_queue_utility_methods() {
 }
 
 /// 测试批量添加任务
+/// task
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_batch_operations() {
@@ -391,6 +401,7 @@ async fn test_batch_operations() {
 }
 
 /// 测试调度器的新方法
+/// method
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_scheduler_utility_methods() -> Result<()> {

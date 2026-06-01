@@ -1,10 +1,17 @@
 //! 无锁屏障实现
-//!
+//! lock-free barrier
 //! 本模块提供了多种无锁屏障实现：
+//! This module provides lock-free barrier ：
 //! - 基础无锁屏障
+//! - foundation lock-free barrier
 //! - 分层屏障
+//! - layering barrier
 //! - 自适应屏障
+//! - barrier
+//! - 自适应barrier
 //! - 可重用屏障
+//! - barrier
+//! - 可重用barrier
 use crossbeam_utils::CachePadded;
 use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
 use std::sync::Arc;
@@ -12,8 +19,9 @@ use std::thread;
 use std::time::{Duration, Instant};
 
 /// 基础无锁屏障
-///
+/// foundation lock-free barrier
 /// 使用原子操作实现的高性能屏障
+/// atomic operation performance barrier
 pub struct LockFreeBarrier {
     count: CachePadded<AtomicUsize>,
     total: usize,
@@ -23,6 +31,7 @@ pub struct LockFreeBarrier {
 
 impl LockFreeBarrier {
     /// 创建新的无锁屏障
+    /// lock-free barrier
     pub fn new(count: usize) -> Self {
         Self {
             count: CachePadded::new(AtomicUsize::new(count)),
@@ -33,6 +42,7 @@ impl LockFreeBarrier {
     }
 
     /// 等待屏障
+    /// etc. barrier
     pub fn wait(&self) -> bool {
         let local_sense = !self.sense.load(Ordering::Acquire);
         let generation = self.generation.load(Ordering::Acquire);
@@ -56,19 +66,22 @@ impl LockFreeBarrier {
     }
 
     /// 获取当前等待的线程数
+    /// when before etc. thread
     pub fn waiting_count(&self) -> usize {
         self.total - self.count.load(Ordering::Acquire)
     }
 
     /// 获取总线程数
+    /// thread
     pub fn total_count(&self) -> usize {
         self.total
     }
 }
 
 /// 分层屏障
-///
+/// layering barrier
 /// 使用分层结构减少竞争的高性能屏障
+/// layering structure performance barrier
 pub struct HierarchicalBarrier {
     levels: Vec<LockFreeBarrier>,
     level_count: usize,
@@ -77,6 +90,7 @@ pub struct HierarchicalBarrier {
 
 impl HierarchicalBarrier {
     /// 创建新的分层屏障
+    /// layering barrier
     pub fn new(total_threads: usize, thread_id: usize) -> Self {
         let mut levels = Vec::new();
         let mut level_count = 0;
@@ -98,6 +112,7 @@ impl HierarchicalBarrier {
     }
 
     /// 等待分层屏障
+    /// etc. layering barrier
     pub fn wait(&self) -> bool {
         let mut current_thread_id = self.thread_id;
         let mut is_last = false;
@@ -125,8 +140,10 @@ impl HierarchicalBarrier {
 }
 
 /// 自适应屏障
-///
+/// barrier
+/// 自适应barrier
 /// 根据系统负载自动调整策略的屏障
+/// according to system strategy barrier
 pub struct AdaptiveBarrier {
     barrier: LockFreeBarrier,
     spin_threshold: AtomicUsize,
@@ -138,6 +155,7 @@ pub struct AdaptiveBarrier {
 
 impl AdaptiveBarrier {
     /// 创建新的自适应屏障
+    /// barrier
     pub fn new(count: usize) -> Self {
         Self {
             barrier: LockFreeBarrier::new(count),
@@ -150,6 +168,7 @@ impl AdaptiveBarrier {
     }
 
     /// 等待自适应屏障
+    /// etc. barrier
     pub fn wait(&self) -> bool {
         let start_time = Instant::now();
         let local_sense = !self.barrier.sense.load(Ordering::Acquire);
@@ -213,6 +232,7 @@ impl AdaptiveBarrier {
     }
 
     /// 获取当前自旋阈值
+    /// when before
     pub fn get_spin_threshold(&self) -> usize {
         self.spin_threshold.load(Ordering::Acquire)
     }
@@ -224,8 +244,10 @@ impl AdaptiveBarrier {
 }
 
 /// 可重用屏障
-///
+/// barrier
+/// 可重用barrier
 /// 支持多次使用的屏障
+/// barrier
 pub struct ReusableBarrier {
     barrier: LockFreeBarrier,
     phase: AtomicUsize,
@@ -234,6 +256,7 @@ pub struct ReusableBarrier {
 
 impl ReusableBarrier {
     /// 创建新的可重用屏障
+    /// barrier
     pub fn new(count: usize) -> Self {
         Self {
             barrier: LockFreeBarrier::new(count),
@@ -243,6 +266,7 @@ impl ReusableBarrier {
     }
 
     /// 等待可重用屏障
+    /// etc. barrier
     pub fn wait(&self) -> bool {
         let current_phase = self.phase.load(Ordering::Acquire);
         let is_last = self.barrier.wait();
@@ -261,11 +285,13 @@ impl ReusableBarrier {
     }
 
     /// 获取当前阶段
+    /// when before stage
     pub fn get_phase(&self) -> usize {
         self.phase.load(Ordering::Acquire)
     }
 
     /// 重置屏障
+    /// barrier
     pub fn reset(&self) {
         self.phase.store(0, Ordering::Release);
         self.barrier
@@ -275,6 +301,7 @@ impl ReusableBarrier {
 }
 
 /// 屏障性能测试
+/// barrier performance test
 pub struct BarrierBenchmark {
     barrier: Arc<dyn BarrierTrait + Send + Sync>,
     thread_count: usize,
@@ -282,6 +309,7 @@ pub struct BarrierBenchmark {
 }
 
 /// 屏障特征
+/// barrier
 pub trait BarrierTrait {
     fn wait(&self) -> bool;
 }
@@ -315,6 +343,7 @@ impl BarrierTrait for ReusableBarrier {
 
 impl BarrierBenchmark {
     /// 创建新的屏障性能测试
+    /// barrier performance test
     pub fn new(
         barrier: Arc<dyn BarrierTrait + Send + Sync>,
         thread_count: usize,
@@ -328,6 +357,7 @@ impl BarrierBenchmark {
     }
 
     /// 运行性能测试
+    /// Run performance test
     pub fn run_benchmark(&self) -> Duration {
         let start_time = Instant::now();
         let barrier = self.barrier.clone();
@@ -354,6 +384,7 @@ impl BarrierBenchmark {
 }
 
 /// 运行所有屏障示例
+/// Run all barrier example
 pub fn demonstrate_lockfree_barriers() {
     println!("=== 无锁屏障演示 ===");
 

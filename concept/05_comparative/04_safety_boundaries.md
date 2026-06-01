@@ -1,3 +1,5 @@
+> **内容分级**: [专家级]
+
 # Rust 安全保证的边界条件全景（Safety Boundary Panorama）
 
 > **受众**: [进阶]

@@ -1,5 +1,6 @@
 //! 算法模块边界情况测试套件 / Algorithms Module Edge Cases Test Suite
 /// 测试空数组/集合边界情况
+/// /set edge situation
 #[test]
 fn test_empty_collections() {
     // 测试空数组排序
@@ -18,6 +19,7 @@ fn test_empty_collections() {
 }
 
 /// 测试单元素边界情况
+/// element edge situation
 #[test]
 fn test_single_element() {
     // 单元素数组
@@ -36,6 +38,7 @@ fn test_single_element() {
 }
 
 /// 测试大数组边界情况
+/// edge situation
 #[test]
 fn test_large_arrays() {
     // 大数组创建（规模控制在 i32 不溢出：sum(0..5000)=12497500 < i32::MAX）
@@ -53,6 +56,7 @@ fn test_large_arrays() {
 }
 
 /// 测试算法边界条件
+/// algorithm boundary condition
 #[test]
 fn test_algorithm_edge_cases() {
     // 测试边界值
@@ -92,6 +96,7 @@ fn test_error_paths() {
 }
 
 /// 测试资源耗尽情况
+/// situation
 #[test]
 #[cfg_attr(miri, ignore)]
 fn test_resource_exhaustion() {
@@ -106,6 +111,7 @@ fn test_resource_exhaustion() {
 }
 
 /// 测试边界值组合
+/// edge combination
 #[test]
 fn test_boundary_value_combinations() {
     // 测试最小值和最大值

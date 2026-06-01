@@ -7,8 +7,11 @@ use tokio::time::sleep;
 use tracing::{error, info, warn};
 
 /// 2025年简化异步设计模式演示
+/// 2025async design demonstration
 /// 展示实用的异步编程模式和最佳实践
+/// async and
 /// 1. 异步状态机模式
+/// 1. async state machine
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum AsyncState {
     Idle,
@@ -69,6 +72,7 @@ impl AsyncStateMachine {
 }
 
 /// 2. 异步事件系统
+/// 2. async system
 pub struct AsyncEventSystem {
     subscribers: Arc<RwLock<Vec<String>>>,
     event_history: Arc<RwLock<Vec<String>>>,
@@ -115,6 +119,7 @@ impl AsyncEventSystem {
 }
 
 /// 3. 异步命令模式（简化版）
+/// 3. async command （）
 pub struct AsyncCommandInvoker {
     history: Arc<RwLock<Vec<String>>>,
     current_index: Arc<RwLock<isize>>,
@@ -189,6 +194,7 @@ impl AsyncCommandInvoker {
 }
 
 /// 4. 异步缓存系统
+/// 4. async system
 pub struct AsyncCache<K, V> {
     cache: Arc<RwLock<std::collections::HashMap<K, V>>>,
     hit_count: Arc<RwLock<u64>>,
@@ -243,6 +249,7 @@ impl<K: Clone + std::hash::Hash + Eq + Send + Sync, V: Clone + Send + Sync> Asyn
 }
 
 /// 5. 异步任务调度器
+/// 5. async task
 pub struct AsyncTaskScheduler {
     tasks: Arc<RwLock<Vec<String>>>,
     completed_tasks: Arc<RwLock<Vec<String>>>,
@@ -299,6 +306,7 @@ impl AsyncTaskScheduler {
 }
 
 /// 6. 异步重试机制
+/// 6. async mechanism
 pub struct AsyncRetryManager {
     max_attempts: u32,
     base_delay: Duration,
@@ -346,6 +354,7 @@ impl AsyncRetryManager {
 }
 
 /// 7. 异步限流器
+/// 7. async stream
 pub struct AsyncRateLimiter {
     max_requests: u32,
     time_window: Duration,
@@ -385,6 +394,7 @@ impl AsyncRateLimiter {
 }
 
 /// 8. 异步健康检查系统
+/// 8. async health check system
 pub struct AsyncHealthChecker {
     checks: Arc<RwLock<Vec<HealthCheck>>>,
     last_check: Arc<RwLock<Option<Instant>>>,
@@ -472,6 +482,7 @@ impl AsyncHealthChecker {
 }
 
 /// 演示所有简化的异步设计模式
+/// demonstration all async design
 #[tokio::main]
 async fn main() -> Result<()> {
     // 初始化日志

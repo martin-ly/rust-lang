@@ -1,63 +1,53 @@
 //! # 基础加法示例
-//!
-//! 这是最简单的 WASM 示例，展示如何导出一个加法函数到 JavaScript。
-//!
+//! # foundation example
 //! ## 📐 知识结构
-//!
+//! ## 📐 structure
+//! ## 📐 知识structure
 //! ### 核心概念
-//!
-//! - **WASM 基础示例**: 展示如何将 Rust 函数编译为 WASM 并在 JavaScript 中调用
+//! ### core concept
 //!   - **属性**: 函数导出、类型转换、互操作
-//!   - **关系**: 与 WASM、JavaScript、wasm-bindgen 相关
-//!
+//!   - **attribute **: function 、type conversion 、
 //! ### 思维导图
-//!
-//! ```text
+//! ###
 //! WASM 基础示例
-//! │
+//! WASM foundation example
 //! ├── Rust 函数
+//! ├── Rust function
 //! │   └── 导出函数
-//! ├── 编译为 WASM
-//! │   └── wasm-pack
-//! └── JavaScript 调用
-//!     └── wasm-bindgen
+//! │ └── function
+//! ├── 编译as WASM
 //! ```
 //!
 //! ## 运行方式
-//!
+//! ## Run way
 //! ```bash
-//! # 编译为 WASM
-//! cargo build --example 01_basic_add --target wasm32-unknown-unknown --release
+//! # 编译as WASM
+//! # 查看Generate WASM 文件
 //!
-//! # 查看生成的 WASM 文件
-//! ls -lh target/wasm32-unknown-unknown/release/examples/01_basic_add.wasm
-//! ```
-//!
-//! ## JavaScript 集成
-//!
-//! ```javascript
 //! // 加载 WASM 模块
-//! const wasmModule = await WebAssembly.instantiateStreaming(
-//!     fetch('01_basic_add.wasm')
+//! // WASM module
+//! // 加载 WASM module
 //! );
 //!
 //! // 调用 add 函数
-//! const result = wasmModule.instance.exports.add(5, 3);
+//! // add function
 //! console.log('5 + 3 =', result); // 输出: 5 + 3 = 8
-//! ```
 use wasm_bindgen::prelude::*;
 
 /// 简单的加法函数
-///
+/// simple function
 /// # 参数
+/// # parameter
 /// - `a`: 第一个加数
+/// - `a`: first
 /// - `b`: 第二个加数
-///
+/// - `b`: second
 /// # 返回值
+/// # return value
 /// 返回两个数的和
-///
+/// and
 /// # 示例
-/// ```
+/// # example
 /// use c12_wasm::basic_examples::add;
 /// assert_eq!(add(2, 3), 5);
 /// ```

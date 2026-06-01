@@ -1,19 +1,26 @@
 //! 异步测试框架演示
-//!
+//! async framework demonstration
 //! 本示例展示了异步测试的各种技术和最佳实践：
+//! this example async technique and ：
 //! - 异步单元测试
+//! - async
 //! - 集成测试
+//! -
+//! - 集成Test for
 //! - 性能测试
+//! - performance test
 //! - 并发测试
+//! - concurrency
 //! - 模拟和存根
+//! - and
 //! - 测试工具和辅助函数
-//!
+//! - tool and function
 //! 运行方式：
-//! ```bash
+//! Run way ：
 //! cargo test --example async_testing_demo
 //! # 或者运行特定测试
-//! cargo test --example async_testing_demo async_testing_demo::tests::test_concurrent_operations
-//! ```
+//! # or Run
+//! # or者Run特定Test for
 use std::sync::Arc;
 use std::time::{Duration, Instant};
 use tokio::sync::{Mutex, RwLock, Semaphore};
@@ -22,6 +29,7 @@ use tokio::time::{interval, sleep, timeout};
 use anyhow::Result;
 
 /// 异步计数器 - 用于测试
+/// async -
 #[derive(Debug, Clone)]
 pub struct AsyncCounter {
     count: Arc<Mutex<i32>>,
@@ -80,6 +88,7 @@ impl AsyncCounter {
 }
 
 /// 异步任务调度器 - 用于测试
+/// async task -
 #[derive(Debug)]
 pub struct AsyncTaskScheduler {
     tasks: Arc<RwLock<Vec<Task>>>,
@@ -185,6 +194,7 @@ impl AsyncTaskScheduler {
 }
 
 /// 异步数据处理器 - 用于测试
+/// async -
 #[derive(Debug)]
 pub struct AsyncDataProcessor {
     buffer: Arc<RwLock<Vec<String>>>,
@@ -268,10 +278,12 @@ impl AsyncDataProcessor {
 }
 
 /// 测试工具和辅助函数
+/// tool and function
 pub mod test_utils {
     use super::*;
 
     /// 等待条件满足
+    /// etc. condition
     pub async fn wait_for_condition<F, Fut>(
         mut condition: F,
         timeout_duration: Duration,
@@ -293,6 +305,7 @@ pub mod test_utils {
     }
 
     /// 测量异步操作执行时间
+    /// async time
     pub async fn measure_execution_time<F, Fut, T>(operation: F) -> (T, Duration)
     where
         F: FnOnce() -> Fut,
@@ -305,11 +318,13 @@ pub mod test_utils {
     }
 
     /// 并发执行多个异步操作
+    /// concurrency async
     pub async fn run_concurrent<T>(futures: Vec<std::pin::Pin<Box<dyn std::future::Future<Output = T> + Send>>>) -> Vec<T> {
         futures::future::join_all(futures).await
     }
 
     /// 模拟网络延迟
+    /// network
     pub async fn simulate_network_delay(min_ms: u64, max_ms: u64) {
         let delay = min_ms + rand::random::<u64>() % (max_ms - min_ms);
         sleep(Duration::from_millis(delay)).await;
@@ -322,6 +337,8 @@ pub mod test_utils {
 }
 
 /// 主演示函数
+/// demonstration function
+/// 主demonstration function
 pub async fn run_async_testing_demo() -> Result<()> {
     println!("🧪 异步测试框架演示");
     println!("================================");
@@ -587,6 +604,7 @@ async fn demo_mocking_and_stubbing() -> Result<()> {
 }
 
 /// 模拟异步服务
+/// async
 #[derive(Debug)]
 struct MockAsyncService {
     should_fail: Arc<Mutex<bool>>,

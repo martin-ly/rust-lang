@@ -1,5 +1,5 @@
 //! 运行方式：
-//! cargo run -p c06_async --example streams_smoke
+//! Run way ：
 use std::time::Duration;
 
 #[tokio::main]

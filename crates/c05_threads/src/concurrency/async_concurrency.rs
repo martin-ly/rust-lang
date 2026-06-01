@@ -1,21 +1,28 @@
 //! 异步并发工具和示例
-//!
+//! async concurrency tool and example
 //! 本模块提供异步并发编程的工具和示例，包括：
+//! This module provides async concurrency tool and example ，：
 //! - 异步任务管理
+//! - async task
 //! - 异步通道通信
+//! - async channel
 //! - 异步屏障和信号量
+//! - async barrier and semaphore
 //! - 异步超时处理
+//! - async
 use std::sync::Arc;
 use std::time::Duration;
 
 /// 异步任务管理器
-///
+/// async task
 /// 用于管理和调度异步任务
+/// and async task
 pub struct AsyncTaskManager {
     tasks: Vec<TaskHandle>,
 }
 
 /// 任务句柄
+/// task
 pub struct TaskHandle {
     id: u64,
     name: String,
@@ -23,11 +30,13 @@ pub struct TaskHandle {
 
 impl AsyncTaskManager {
     /// 创建新的异步任务管理器
+    /// async task
     pub fn new() -> Self {
         Self { tasks: Vec::new() }
     }
 
     /// 注册任务
+    /// task
     pub fn register_task(&mut self, id: u64, name: String) -> TaskHandle {
         let handle = TaskHandle { id, name };
         self.tasks.push(handle.clone());
@@ -35,11 +44,14 @@ impl AsyncTaskManager {
     }
 
     /// 获取任务数量
+    /// task quantity
     pub fn task_count(&self) -> usize {
         self.tasks.len()
     }
 
     /// 获取所有任务
+    /// all task
+    /// Get所有task
     pub fn get_tasks(&self) -> &[TaskHandle] {
         &self.tasks
     }
@@ -62,19 +74,22 @@ impl Clone for TaskHandle {
 
 impl TaskHandle {
     /// 获取任务ID
+    /// task ID
     pub fn id(&self) -> u64 {
         self.id
     }
 
     /// 获取任务名称
+    /// task
     pub fn name(&self) -> &str {
         &self.name
     }
 }
 
 /// 异步通道包装器
-///
+/// async channel
 /// 提供异步发送和接收功能
+/// async and functionality
 pub struct AsyncChannel<T> {
     sender: Arc<std::sync::mpsc::Sender<T>>,
     receiver: Arc<std::sync::mpsc::Receiver<T>>,
@@ -82,6 +97,7 @@ pub struct AsyncChannel<T> {
 
 impl<T> AsyncChannel<T> {
     /// 创建新的异步通道
+    /// async channel
     pub fn new() -> Self {
         let (sender, receiver) = std::sync::mpsc::channel();
         Self {
@@ -112,12 +128,14 @@ impl<T> Default for AsyncChannel<T> {
 }
 
 /// 异步发送端
+/// async
 pub struct AsyncSender<T> {
     inner: Arc<std::sync::mpsc::Sender<T>>,
 }
 
 impl<T> AsyncSender<T> {
     /// 发送消息（非阻塞）
+    /// （）
     pub fn send(&self, msg: T) -> Result<(), String> {
         self.inner
             .send(msg)
@@ -134,12 +152,14 @@ impl<T> Clone for AsyncSender<T> {
 }
 
 /// 异步接收端
+/// async
 pub struct AsyncReceiver<T> {
     inner: Arc<std::sync::mpsc::Receiver<T>>,
 }
 
 impl<T> AsyncReceiver<T> {
     /// 接收消息（阻塞）
+    /// （）
     pub fn recv(&self) -> Result<T, String> {
         self.inner
             .recv()
@@ -147,6 +167,7 @@ impl<T> AsyncReceiver<T> {
     }
 
     /// 尝试接收消息（非阻塞）
+    /// （）
     pub fn try_recv(&self) -> Result<T, String> {
         self.inner
             .try_recv()
@@ -155,8 +176,9 @@ impl<T> AsyncReceiver<T> {
 }
 
 /// 异步屏障
-///
+/// async barrier
 /// 用于同步多个异步任务
+/// synchronous async task
 pub struct AsyncBarrier {
     count: Arc<std::sync::atomic::AtomicUsize>,
     target: usize,
@@ -164,6 +186,7 @@ pub struct AsyncBarrier {
 
 impl AsyncBarrier {
     /// 创建新的异步屏障
+    /// async barrier
     pub fn new(count: usize) -> Self {
         Self {
             count: Arc::new(std::sync::atomic::AtomicUsize::new(0)),
@@ -172,25 +195,30 @@ impl AsyncBarrier {
     }
 
     /// 等待所有任务到达屏障
+    /// etc. all task to barrier
     pub fn wait(&self) -> bool {
         let current = self.count.fetch_add(1, std::sync::atomic::Ordering::SeqCst) + 1;
         current >= self.target
     }
 
     /// 重置屏障
+    /// barrier
     pub fn reset(&self) {
         self.count.store(0, std::sync::atomic::Ordering::SeqCst);
     }
 
     /// 获取当前等待的任务数
+    /// when before etc. task
     pub fn current_count(&self) -> usize {
         self.count.load(std::sync::atomic::Ordering::SeqCst)
     }
 }
 
 /// 异步超时包装器
-///
+/// async
 /// 为操作添加超时功能
+/// as functionality
+/// as操作添加超时functionality
 pub struct AsyncTimeout {
     duration: Duration,
 }
@@ -202,19 +230,23 @@ impl AsyncTimeout {
     }
 
     /// 获取超时时间
+    /// time
+    /// Get超时time
     pub fn duration(&self) -> Duration {
         self.duration
     }
 
     /// 检查是否超时（示例实现）
+    /// （example ）
     pub fn is_timeout(&self, elapsed: Duration) -> bool {
         elapsed >= self.duration
     }
 }
 
 /// 异步信号量
-///
+/// async semaphore
 /// 用于控制并发访问数量
+/// concurrency quantity
 pub struct AsyncSemaphore {
     permits: Arc<std::sync::atomic::AtomicUsize>,
     max_permits: usize,
@@ -222,6 +254,7 @@ pub struct AsyncSemaphore {
 
 impl AsyncSemaphore {
     /// 创建新的信号量
+    /// semaphore
     pub fn new(permits: usize) -> Self {
         Self {
             permits: Arc::new(std::sync::atomic::AtomicUsize::new(permits)),
@@ -230,6 +263,8 @@ impl AsyncSemaphore {
     }
 
     /// 获取许可（非阻塞）
+    /// （）
+    /// Get许可（Non-blocking）
     pub fn try_acquire(&self) -> bool {
         let current = self.permits.load(std::sync::atomic::Ordering::SeqCst);
         if current > 0 {

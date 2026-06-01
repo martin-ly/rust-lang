@@ -1,14 +1,19 @@
 //! 排序算法示例
-//!
+//! sorting algorithm example
 //! 本示例展示C08算法模块的各种排序算法：
+//! this example C08algorithm module sorting algorithm ：
 //! - 快速排序
+//! - quick sort
 //! - 归并排序
+//! - merge sort
 //! - 堆排序
+//! - heap sort
 //! - 冒泡排序
+//! - bubble sort
 //! - 插入排序
-//!
+//! - insertion sort
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example sorting_algorithms_demo
 //! ```
 use c08_algorithms::sorting::{SortingAlgo, sort_sync};

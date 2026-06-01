@@ -1,10 +1,14 @@
 //! NUMA感知并行计算
-//!
-//! 本模块提供了NUMA（非统一内存访问）感知的并行计算功能：
+//! NUMAparallelism
 //! - NUMA拓扑检测
+//! - NUMA
 //! - NUMA感知任务分配
+//! - NUMAtask
 //! - NUMA本地内存分配
+//! - NUMAthis memory
 //! - NUMA感知数据布局
+//! - NUMAlayout
+//! - NUMA感知数据layout
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::thread;
@@ -13,6 +17,7 @@ use std::time::Duration;
 use num_cpus;
 
 /// NUMA节点信息
+/// NUMAnode
 #[derive(Debug, Clone)]
 pub struct NumaNode {
     pub id: usize,
@@ -22,6 +27,7 @@ pub struct NumaNode {
 }
 
 /// NUMA拓扑信息
+/// NUMA
 #[derive(Debug, Clone)]
 pub struct NumaTopology {
     pub nodes: Vec<NumaNode>,
@@ -36,7 +42,6 @@ impl Default for NumaTopology {
 }
 
 impl NumaTopology {
-    /// 创建新的NUMA拓扑
     pub fn new() -> Self {
         let total_cpus = num_cpus::get();
         let mut nodes = Vec::new();
@@ -58,23 +63,26 @@ impl NumaTopology {
         }
     }
 
-    /// 获取指定NUMA节点的信息
     pub fn get_node(&self, node_id: usize) -> Option<&NumaNode> {
         self.nodes.get(node_id)
     }
 
     /// 获取所有NUMA节点
+    /// all NUMAnode
+    /// Get所有NUMAnode
     pub fn get_nodes(&self) -> &[NumaNode] {
         &self.nodes
     }
 
     /// 获取NUMA节点数量
+    /// NUMAnode quantity
     pub fn node_count(&self) -> usize {
         self.nodes.len()
     }
 }
 
 /// NUMA感知任务分配器
+/// NUMAtask
 pub struct NumaAwareTaskAllocator {
     topology: NumaTopology,
     node_workloads: Arc<Mutex<HashMap<usize, usize>>>,
@@ -87,7 +95,6 @@ impl Default for NumaAwareTaskAllocator {
 }
 
 impl NumaAwareTaskAllocator {
-    /// 创建新的NUMA感知任务分配器
     pub fn new() -> Self {
         Self {
             topology: NumaTopology::new(),
@@ -96,6 +103,7 @@ impl NumaAwareTaskAllocator {
     }
 
     /// 分配任务到最优NUMA节点
+    /// task to NUMAnode
     pub fn allocate_task(&self, _task_id: usize) -> usize {
         let mut workloads = self.node_workloads.lock().expect("获取工作负载锁不应失败");
 
@@ -118,6 +126,7 @@ impl NumaAwareTaskAllocator {
     }
 
     /// 完成任务，减少工作负载
+    /// task ，
     pub fn complete_task(&self, node_id: usize) {
         let mut workloads = self.node_workloads.lock().expect("获取工作负载锁不应失败");
         if let Some(workload) = workloads.get_mut(&node_id)
@@ -128,12 +137,14 @@ impl NumaAwareTaskAllocator {
     }
 
     /// 获取NUMA节点工作负载
+    /// NUMAnode
     pub fn get_node_workload(&self, node_id: usize) -> usize {
         let workloads = self.node_workloads.lock().expect("获取工作负载锁不应失败");
         workloads.get(&node_id).copied().unwrap_or(0)
     }
 
     /// 获取所有节点工作负载
+    /// all node
     pub fn get_all_workloads(&self) -> HashMap<usize, usize> {
         let workloads = self.node_workloads.lock().unwrap();
         workloads.clone()
@@ -141,6 +152,8 @@ impl NumaAwareTaskAllocator {
 }
 
 /// NUMA感知数据布局
+/// NUMAlayout
+/// NUMA感知数据layout
 #[allow(dead_code)]
 pub struct NumaAwareDataLayout<T> {
     data: Vec<Vec<T>>,
@@ -148,7 +161,6 @@ pub struct NumaAwareDataLayout<T> {
 }
 
 impl<T> NumaAwareDataLayout<T> {
-    /// 创建新的NUMA感知数据布局
     pub fn new(topology: NumaTopology) -> Self {
         let mut data = Vec::new();
         for _ in 0..topology.node_count() {
@@ -158,7 +170,6 @@ impl<T> NumaAwareDataLayout<T> {
         Self { data, topology }
     }
 
-    /// 将数据分配到指定NUMA节点
     pub fn allocate_to_node(&mut self, node_id: usize, item: T) -> Result<(), String> {
         if node_id >= self.data.len() {
             return Err(format!("无效的NUMA节点ID: {}", node_id));
@@ -169,22 +180,26 @@ impl<T> NumaAwareDataLayout<T> {
     }
 
     /// 从指定NUMA节点获取数据
+    /// from NUMAnode
     pub fn get_from_node(&self, node_id: usize) -> Option<&Vec<T>> {
         self.data.get(node_id)
     }
 
     /// 获取所有数据
+    /// all
     pub fn get_all_data(&self) -> &Vec<Vec<T>> {
         &self.data
     }
 
     /// 获取数据分布统计
+    /// distribution
     pub fn get_distribution_stats(&self) -> Vec<usize> {
         self.data.iter().map(|node_data| node_data.len()).collect()
     }
 }
 
 /// NUMA感知并行计算
+/// NUMAparallelism
 pub struct NumaAwareParallelCompute {
     allocator: NumaAwareTaskAllocator,
     topology: NumaTopology,
@@ -197,7 +212,6 @@ impl Default for NumaAwareParallelCompute {
 }
 
 impl NumaAwareParallelCompute {
-    /// 创建新的NUMA感知并行计算实例
     pub fn new() -> Self {
         Self {
             allocator: NumaAwareTaskAllocator::new(),
@@ -205,7 +219,6 @@ impl NumaAwareParallelCompute {
         }
     }
 
-    /// 执行NUMA感知的并行计算
     pub fn compute_parallel<F, R>(&self, tasks: Vec<F>) -> Vec<R>
     where
         F: FnOnce() -> R + Send + Sync + 'static,
@@ -253,7 +266,6 @@ impl NumaAwareParallelCompute {
             .collect()
     }
 
-    /// 执行NUMA感知的并行归约
     pub fn reduce_parallel<F, R>(&self, data: Vec<R>, reduce_fn: F) -> R
     where
         F: Fn(R, R) -> R + Send + Sync + Clone + 'static,
@@ -309,7 +321,6 @@ impl NumaAwareParallelCompute {
         final_result
     }
 
-    /// 执行NUMA感知的并行映射
     pub fn map_parallel<F, T, R>(&self, data: Vec<T>, map_fn: F) -> Vec<R>
     where
         F: Fn(T) -> R + Send + Sync + Clone + 'static,
@@ -355,6 +366,7 @@ impl NumaAwareParallelCompute {
     }
 
     /// 运行NUMA感知并行计算示例
+    /// Run NUMAparallelism example
     pub fn run_example() {
         println!("=== NUMA感知并行计算示例 ===");
 
@@ -402,6 +414,8 @@ impl NumaAwareParallelCompute {
 }
 
 /// NUMA感知内存分配器
+/// NUMAallocator
+/// NUMA感知allocator
 pub struct NumaAwareMemoryAllocator {
     topology: NumaTopology,
     node_allocations: Arc<Mutex<HashMap<usize, Vec<usize>>>>,
@@ -414,7 +428,6 @@ impl Default for NumaAwareMemoryAllocator {
 }
 
 impl NumaAwareMemoryAllocator {
-    /// 创建新的NUMA感知内存分配器
     pub fn new() -> Self {
         Self {
             topology: NumaTopology::new(),
@@ -423,6 +436,7 @@ impl NumaAwareMemoryAllocator {
     }
 
     /// 在指定NUMA节点分配内存
+    /// in NUMAnode memory
     pub fn allocate_on_node(&self, node_id: usize, size: usize) -> Result<usize, String> {
         if node_id >= self.topology.node_count() {
             return Err(format!("无效的NUMA节点ID: {}", node_id));
@@ -438,7 +452,6 @@ impl NumaAwareMemoryAllocator {
         Ok(address)
     }
 
-    /// 释放指定NUMA节点的内存
     pub fn deallocate_on_node(&self, node_id: usize, address: usize) -> Result<(), String> {
         if node_id >= self.topology.node_count() {
             return Err(format!("无效的NUMA节点ID: {}", node_id));
@@ -456,6 +469,7 @@ impl NumaAwareMemoryAllocator {
     }
 
     /// 获取NUMA节点内存使用统计
+    /// NUMAnode memory
     pub fn get_memory_stats(&self) -> HashMap<usize, usize> {
         let allocations = self.node_allocations.lock().expect("获取分配锁不应失败");
         allocations
@@ -469,6 +483,7 @@ impl NumaAwareMemoryAllocator {
 }
 
 /// 运行所有NUMA感知示例
+/// Run all NUMAexample
 pub fn demonstrate_numa_aware() {
     println!("=== NUMA感知并行计算演示 ===");
 

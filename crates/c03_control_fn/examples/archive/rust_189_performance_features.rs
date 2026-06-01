@@ -1,38 +1,36 @@
 //! # Rust 1.89 特性示例 (历史版本)
-//!
+//! # Rust 1.89 feature example (this )
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//!
+//! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features_demo.rs`
-//!
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features_demo.rs`
 //! ## 版本历史说明
-//!
-//! 本文件展示 Rust 1.89 版本的特性，当前项目已升级到 Rust 1.92.0。
-//!
+//! ## this explain
 //! ### Rust 1.92.0 主要改进
-//!
+//! ### Rust 1.92.0 main
 //! - **迭代器方法特化**: 性能提升 15-25%
-//! - **标准库**: rotate_right、NonZero::div_ceil 等
+//! - **method **: performance 15-25%
 //! - **性能优化**: 改进的编译优化
-//!
+//! - **performance optimization **: optimization
+//! - **performanceoptimization**: 改进编译optimization
 //! ### 迁移建议
-//!
+//! ###
 //! 1. 更新 Cargo.toml: `rust-version = "1.92"`
-//! 2. 参考 `examples/rust_192_features_demo.rs` 了解最新特性示例
-//! 3. 查看 `docs/RUST_192_CONTROL_FLOW_IMPROVEMENTS.md` 了解完整改进
-//!
 //! 参考:
-//! - [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/)
+//! reference :
 //! - [历史版本: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
-//!
-//! ---
+//! - [历史版this: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 //!
 //! # Rust 1.89 性能优化特性示例
-//!
-//! 本示例展示了Rust 1.89版本中的性能优化特性：
+//! # Rust 1.89 performance optimization feature example
 //! - 零成本抽象增强
+//! - cost
 //! - 内存布局优化
+//! - memory layout optimization
 //! - 编译时计算增强
+//! - compile-time
 //! - 内联优化改进
+//! - inside optimization
 // #[warn(unused_imports)]
 // use std::alloc::{alloc, dealloc, Layout};
 // use std::ptr;
@@ -40,8 +38,9 @@ use anyhow::Result;
 use std::time::Instant;
 
 /// Rust 1.89 零成本抽象增强示例
-///
+/// Rust 1.89 cost example
 /// 零成本抽象现在有了显著改进，提供更好的内联和优化
+/// cost present significant ，inside and optimization
 #[inline(always)]
 fn fast_add(a: i32, b: i32) -> i32 {
     a + b
@@ -54,24 +53,28 @@ fn fast_multiply(a: i32, b: i32) -> i32 {
 }
 
 /// 零成本抽象：编译时优化的数学运算
+/// cost ：compile-time optimization
 #[derive(Debug, Clone, Copy)]
 struct OptimizedCalculator;
 
 #[allow(dead_code)]
 impl OptimizedCalculator {
     /// 编译时优化的加法
+    /// compile-time optimization
     #[inline(always)]
     fn add(&self, a: i32, b: i32) -> i32 {
         fast_add(a, b)
     }
 
     /// 编译时优化的乘法
+    /// compile-time optimization
     #[inline(always)]
     fn multiply(&self, a: i32, b: i32) -> i32 {
         fast_multiply(a, b)
     }
 
     /// 编译时优化的复合运算
+    /// compile-time optimization
     #[inline(always)]
     fn complex_calculation(&self, a: i32, b: i32, c: i32) -> i32 {
         let sum = self.add(a, b);
@@ -81,6 +84,7 @@ impl OptimizedCalculator {
 }
 
 /// 零成本抽象：编译时类型擦除
+/// cost ：compile-time type
 #[allow(dead_code)]
 trait FastOperation {
     type Input;
@@ -90,6 +94,7 @@ trait FastOperation {
 }
 
 /// 快速加法操作
+/// fast
 #[allow(dead_code)]
 struct FastAdd;
 
@@ -104,6 +109,7 @@ impl FastOperation for FastAdd {
 }
 
 /// 快速乘法操作
+/// fast
 #[allow(dead_code)]
 struct FastMultiply;
 
@@ -118,18 +124,25 @@ impl FastOperation for FastMultiply {
 }
 
 /// 零成本抽象：编译时多态
+/// cost ：compile-time
 #[allow(dead_code)]
 fn execute_operation<T: FastOperation>(op: &T, input: T::Input) -> T::Output {
     op.execute(input)
 }
 
 /// Rust 1.89 内存布局优化示例
-///
+/// Rust 1.89 memory layout optimization example
 /// 内存布局现在有了显著改进，包括：
+/// memory layout present significant ，：
 /// - 改进的结构体布局和打包
+/// - struct layout and
 /// - 自动对齐优化
+/// - to optimization
+/// - 自动to齐optimization
 /// - 缓存友好的数据组织
+/// - cache-friendly organize
 /// 优化前：可能存在填充的结构体
+/// optimization before ：may in struct
 #[repr(C)]
 struct UnoptimizedStruct {
     a: u8, // 1字节
@@ -140,6 +153,8 @@ struct UnoptimizedStruct {
 }
 
 /// 优化后：紧凑布局的结构体
+/// optimization after ：layout struct
+/// optimizationafter：紧凑layoutstruct
 #[repr(C, packed)]
 struct OptimizedStruct {
     a: u8,  // 1字节
@@ -148,6 +163,7 @@ struct OptimizedStruct {
 }
 
 /// 缓存友好的数据组织
+/// cache-friendly organize
 #[repr(C)]
 struct CacheFriendlyStruct {
     // 热点数据放在前面
@@ -159,6 +175,7 @@ struct CacheFriendlyStruct {
 }
 
 /// 内存布局优化：数组结构体
+/// memory layout optimization ：struct
 #[repr(C)]
 struct OptimizedArray<T, const N: usize> {
     data: [T; N],
@@ -193,12 +210,16 @@ impl<T: Default + Copy, const N: usize> OptimizedArray<T, N> {
 }
 
 /// Rust 1.89 编译时计算增强示例
-///
+/// Rust 1.89 compile-time example
 /// 编译时计算现在支持更强大的功能：
-/// - 更强大的const fn
+/// compile-time present functionality ：
+/// - 更强大const fn
 /// - 编译时求值优化
+/// - compile-time optimization
 /// - 类型级计算增强
+/// - type
 /// 编译时常量函数
+/// compile-time constant function
 const fn compile_time_factorial(n: u32) -> u64 {
     if n <= 1 {
         1
@@ -208,6 +229,7 @@ const fn compile_time_factorial(n: u32) -> u64 {
 }
 
 /// 编译时斐波那契数列
+/// compile-time
 const fn compile_time_fibonacci(n: u32) -> u64 {
     match n {
         0 => 0,
@@ -217,6 +239,7 @@ const fn compile_time_fibonacci(n: u32) -> u64 {
 }
 
 /// 编译时素数检查
+/// compile-time
 const fn is_prime(n: u64) -> bool {
     if n < 2 {
         return false;
@@ -239,6 +262,7 @@ const fn is_prime(n: u64) -> bool {
 }
 
 /// 编译时计算：查找前N个素数
+/// compile-time ：before N
 const fn find_primes<const N: usize>() -> [u64; N] {
     let mut primes = [0; N];
     let mut count = 0;
@@ -256,17 +280,23 @@ const fn find_primes<const N: usize>() -> [u64; N] {
 }
 
 /// 编译时常量
+/// compile-time constant
 const FACTORIAL_10: u64 = compile_time_factorial(10);
 const FIBONACCI_20: u64 = compile_time_fibonacci(20);
 const FIRST_10_PRIMES: [u64; 10] = find_primes::<10>();
 
 /// Rust 1.89 内联优化改进示例
-///
+/// Rust 1.89 inside optimization example
 /// 内联优化现在有了显著改进：
+/// inside optimization present significant ：
 /// - 更智能的内联决策
+/// - inside
 /// - 跨模块内联优化
+/// - module inside optimization
 /// - 链接时优化增强
+/// - link-time optimization
 /// 内联优化：数学运算
+/// inside optimization ：
 #[inline(always)]
 fn optimized_math_operations(a: f64, b: f64) -> (f64, f64, f64) {
     let sum = a + b;
@@ -276,6 +306,7 @@ fn optimized_math_operations(a: f64, b: f64) -> (f64, f64, f64) {
 }
 
 /// 内联优化：字符串处理
+/// inside optimization ：
 #[inline(always)]
 #[allow(dead_code)]
 fn optimized_string_operations(s: &str) -> (usize, bool, String) {
@@ -286,6 +317,7 @@ fn optimized_string_operations(s: &str) -> (usize, bool, String) {
 }
 
 /// 内联优化：集合操作
+/// inside optimization ：set
 #[inline(always)]
 #[allow(dead_code)]
 fn optimized_collection_operations<T: Clone>(items: &[T]) -> (usize, bool, Vec<T>) {
@@ -296,6 +328,7 @@ fn optimized_collection_operations<T: Clone>(items: &[T]) -> (usize, bool, Vec<T
 }
 
 /// 性能基准测试
+/// Performance benchmark
 fn performance_benchmark() {
     println!("🚀 性能基准测试开始");
 
@@ -359,6 +392,7 @@ fn performance_benchmark() {
 }
 
 /// 内存使用分析
+/// Memory usage analysis
 fn memory_usage_analysis() {
     println!("\n📊 内存使用分析");
 
@@ -393,6 +427,7 @@ fn memory_usage_analysis() {
 }
 
 /// 优化建议和最佳实践
+/// optimization and
 fn optimization_best_practices() {
     println!("\n💡 优化最佳实践");
 
@@ -418,6 +453,7 @@ fn optimization_best_practices() {
 }
 
 /// 主函数
+/// Main function
 fn main() -> Result<()> {
     println!("🚀 Rust 1.89 性能优化特性演示");
     println!("{}", "=".repeat(50));

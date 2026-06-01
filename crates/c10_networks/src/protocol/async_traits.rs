@@ -1,41 +1,48 @@
 #![allow(async_fn_in_trait)]
 
 //! 原生 AFIT (async fn in trait) 实现 —— Rust 1.75.0+ 稳定特性
-//!
-//! 本模块展示了如何使用**原生** `async fn` 在 trait 中定义异步接口。
+//! 原生 AFIT (async fn in trait) Implementation of —— Rust 1.75.0+ 稳定feature
 //! 自 Rust 1.75 起，`async fn` 在 trait 中已稳定，无需 `#[async_trait]` 宏。
-//!
+//! 自 Rust 1.75 起，`async fn` in trait in已稳定，无需 `#[async_trait]` 宏。
 //! # 迁移收益
-//! - 零宏开销：无需 `async-trait` crate 的代码生成
-//! - 更自然的语法：直接使用 `async fn`，无需 `Box<dyn Future>` 包装
-//! - 更精确的类型：返回 `impl Future` 而非统一装箱
-//!
+//! # return
+//! # 迁移return
+//! - 零宏overhead：无需 `async-trait` crate 代码Generate
+//! - 更自然语法：直接Use `async fn`，无需 `Box<dyn Future>` 包装
+//! - ：Use `async fn`， `Box<dyn Future>`
 //! # 限制
+//! #
 //! - 暂不支持 `dyn Trait`（需等待 AFIDT — async fn in dyn trait）
+//! - 暂不Supports `dyn Trait`（需Wait AFIDT — async fn in dyn trait）
 //! - 如需 `Send` bound，当前需显式使用 `impl Future<Output = T> + Send`
-//!
 //! # 参考
-//! - [Rust 1.75 Release Notes](https://releases.rs/docs/1.75.0/)
+//! # reference
 //! - [Tracking Issue: AFIDT](https://github.com/rust-lang/rust/issues/133119)
 use crate::error::{NetworkError, NetworkResult};
 use bytes::Bytes;
 use std::time::Duration;
 
 /// 异步网络客户端 trait（原生 AFIT）
+/// async network trait（ AFIT）
 pub trait AsyncNetworkClient {
     /// 异步连接到指定地址
+    /// async to
     async fn connect(&self, address: &str) -> NetworkResult<()>;
 
     /// 异步发送数据（改进的生命周期处理）
+    /// async （lifetime ）
     async fn send<'a>(&'a self, data: &'a [u8]) -> NetworkResult<usize>;
 
     /// 异步接收数据（改进的生命周期处理）
+    /// async （lifetime ）
     async fn receive<'a>(&'a self, buffer: &'a mut [u8]) -> NetworkResult<usize>;
 
     /// 异步关闭连接
+    /// async
     async fn close(&self) -> NetworkResult<()>;
 
     /// 检查连接状态
+    /// state
     fn is_connected(&self) -> bool;
 
     /// 获取连接统计信息
@@ -54,39 +61,50 @@ pub struct ConnectionStats {
 }
 
 /// 异步协议处理器 trait（原生 AFIT）
+/// async trait（ AFIT）
 pub trait AsyncProtocolHandler {
     /// 异步处理协议消息
+    /// async
     async fn handle_message<'a>(&'a self, message: &'a [u8]) -> NetworkResult<Bytes>;
 
     /// 异步验证消息格式
+    /// async
     async fn validate_message(&self, message: &[u8]) -> NetworkResult<bool>;
 
     /// 异步序列化消息
+    /// async sequence
     async fn serialize_message(&self, data: &[u8]) -> NetworkResult<Bytes>;
 
     /// 异步反序列化消息
+    /// async sequence
     async fn deserialize_message(&self, data: &[u8]) -> NetworkResult<Vec<u8>>;
 }
 
 /// 异步缓存 trait（原生 AFIT）
+/// async trait（ AFIT）
 pub trait AsyncCache<K, V>
 where
     K: Send + Sync + Clone + 'static,
     V: Send + Sync + Clone + 'static,
 {
     /// 异步获取缓存值
+    /// async
     async fn get(&self, key: &K) -> NetworkResult<Option<V>>;
 
     /// 异步设置缓存值
+    /// async
     async fn set(&self, key: K, value: V, ttl: Option<Duration>) -> NetworkResult<()>;
 
     /// 异步删除缓存值
+    /// async
     async fn delete(&self, key: &K) -> NetworkResult<bool>;
 
     /// 异步清理过期缓存
+    /// async
     async fn cleanup_expired(&self) -> NetworkResult<usize>;
 
     /// 异步获取缓存统计信息
+    /// async Get cache stats
     async fn get_stats(&self) -> NetworkResult<CacheStats>;
 }
 
@@ -102,8 +120,10 @@ pub struct CacheStats {
 }
 
 /// 异步流处理器 trait（原生 AFIT）
+/// async stream trait（ AFIT）
 pub trait AsyncStreamProcessor {
     /// 异步处理数据流
+    /// async stream
     async fn process_stream<F, Fut>(&self, stream: F) -> NetworkResult<()>
     where
         F: futures::Stream<Item = Result<Bytes, NetworkError>> + Send + 'static,
@@ -111,6 +131,7 @@ pub trait AsyncStreamProcessor {
         F: futures::StreamExt<Item = Result<Bytes, NetworkError>>;
 
     /// 异步过滤数据流
+    /// async stream
     async fn filter_stream<F>(
         &self,
         stream: F,
@@ -121,6 +142,7 @@ pub trait AsyncStreamProcessor {
         F: futures::StreamExt<Item = Result<Bytes, NetworkError>>;
 
     /// 异步转换数据流
+    /// async conversion stream
     async fn transform_stream<F, Fut>(
         &self,
         stream: F,
@@ -133,11 +155,14 @@ pub trait AsyncStreamProcessor {
 }
 
 /// 异步错误处理器 trait（原生 AFIT）
+/// async error handling trait（ AFIT）
 pub trait AsyncErrorHandler {
     /// 异步处理错误
+    /// async
     async fn handle_error(&self, error: NetworkError) -> NetworkResult<()>;
 
     /// 异步重试操作
+    /// async
     async fn retry_with_backoff<F, Fut>(
         &self,
         operation: F,
@@ -149,12 +174,15 @@ pub trait AsyncErrorHandler {
         Fut: std::future::Future<Output = NetworkResult<()>> + Send;
 
     /// 异步恢复操作
+    /// async
     async fn recover_from_error(&self, error: &NetworkError) -> NetworkResult<bool>;
 }
 
 /// 异步监控 trait（原生 AFIT）
+/// async trait（ AFIT）
 pub trait AsyncMonitor {
     /// 异步记录指标
+    /// async indicator
     async fn record_metric(
         &self,
         name: &str,
@@ -163,16 +191,20 @@ pub trait AsyncMonitor {
     ) -> NetworkResult<()>;
 
     /// 异步记录事件
+    /// async
     async fn record_event(&self, event: &str, details: &str) -> NetworkResult<()>;
 
     /// 异步获取指标
+    /// async indicator
     async fn get_metrics(&self) -> NetworkResult<Vec<Metric>>;
 
     /// 异步导出指标
+    /// async indicator
     async fn export_metrics(&self, format: ExportFormat) -> NetworkResult<String>;
 }
 
 /// 指标结构
+/// indicator structure
 #[derive(Debug, Clone)]
 pub struct Metric {
     pub name: String,
@@ -189,7 +221,6 @@ pub enum ExportFormat {
     InfluxDb,
 }
 
-/// 异步trait组合器
 pub struct AsyncTraitComposer<T> {
     #[allow(dead_code)]
     inner: T,
@@ -201,6 +232,7 @@ impl<T> AsyncTraitComposer<T> {
     }
 
     /// 组合多个异步操作
+    /// combination async
     pub async fn compose_operations<F1, F2, Fut1, Fut2, T1, T2>(
         &self,
         op1: F1,
@@ -219,6 +251,7 @@ impl<T> AsyncTraitComposer<T> {
     }
 
     /// 并行执行多个异步操作
+    /// parallelism async
     pub async fn parallel_execute<F, Fut, T2>(&self, operations: Vec<F>) -> NetworkResult<Vec<T2>>
     where
         F: Fn() -> Fut + Send + Sync,
@@ -230,11 +263,11 @@ impl<T> AsyncTraitComposer<T> {
     }
 }
 
-/// 异步trait性能优化工具
 pub struct AsyncTraitOptimizer;
 
 impl AsyncTraitOptimizer {
     /// 异步操作批处理
+    /// async
     pub async fn batch_operations<F, Fut, T>(
         operations: Vec<F>,
         batch_size: usize,
@@ -256,6 +289,7 @@ impl AsyncTraitOptimizer {
     }
 
     /// 异步操作限流
+    /// async stream
     pub async fn rate_limited_execute<F, Fut, T>(
         operations: Vec<F>,
         rate_limit: Duration,
@@ -287,6 +321,7 @@ mod tests {
     use super::*;
 
     /// 测试用的异步网络客户端实现
+    /// async network
     struct TestAsyncNetworkClient {
         connected: bool,
         stats: ConnectionStats,

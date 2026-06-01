@@ -1,4 +1,4 @@
-//! 控制流与函数模块性能基准测试 / Control Flow and Functions Module Performance Benchmarks
+//! 控制streamandfunctionmoduleperformancebenchmark / Control Flow and Functions Module Performance Benchmarks
 use criterion::{Criterion, criterion_group, criterion_main};
 use std::hint::black_box;
 

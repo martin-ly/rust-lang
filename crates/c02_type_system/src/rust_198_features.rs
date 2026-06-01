@@ -1,32 +1,26 @@
 //! Rust 1.98 Nightly 前瞻 —— 类型系统实验特性
+//! Rust 1.98 Nightly before —— type system feature
 #![allow(clippy::incompatible_msrv)]
 
 use std::marker::CoercePointee;
 use std::ops::Deref;
 
 /// # Rust 1.98 Nightly 类型系统前瞻
-///
-/// 本模块展示 nightly 1.98 中可用的前沿类型系统特性：
-/// - `derive(CoercePointee)` — 自动生成智能指针的强制转换逻辑
-/// - `!` (never type) 显式标注 — 在更多上下文中的类型推导应用
-///
+/// # Rust 1.98 Nightly type system before
 /// **⚠️ 所有代码需要 nightly Rust 编译器。**
+/// **⚠️ all nightly Rust 。**
+/// **⚠️ 所有代码Requires nightly Rust 编译器。**
 pub struct Rust198TypeFeatures;
 
 // ============================================================================
 // derive(CoercePointee) 演示
 // ============================================================================
 
-/// 使用 `#[derive(CoercePointee)]` 创建的自定义智能指针
-///
-/// `CoercePointee` 自动为智能指针实现 `CoerceUnsized`，
-/// 使得 `MyBox<T>` 可以像 `Box<T>` 一样自动从 `T` 协变到 `dyn Trait`。
 #[derive(CoercePointee)]
 #[repr(transparent)]
 pub struct MyBox<'a, #[pointee] T: ?Sized>(&'a T);
 
 impl<'a, T: ?Sized> MyBox<'a, T> {
-    /// 创建新的 MyBox
     pub fn new(value: &'a T) -> Self {
         Self(value)
     }
@@ -40,24 +34,23 @@ impl<'a, T: ?Sized> Deref for MyBox<'a, T> {
 }
 
 impl Rust198TypeFeatures {
-    /// 使用 `derive(CoercePointee)` 创建自定义智能指针
-    ///
-    /// `MyBox<T>` 可以像标准库智能指针一样工作，且支持自动 CoerceUnsized。
     pub fn create_smart_pointer(s: &str) -> MyBox<'_, str> {
         MyBox(s)
     }
 
     /// 使用 never type 显式标注不可达分支
-    ///
+    /// never type
     /// `Result<T, !>` 表示该操作永远不会失败，match 时不需要处理 Err 分支。
+    /// `Result<T,!>` represent this ，match Err 。
     pub fn infallible_operation() -> Result<i32, !> {
         Ok(42)
     }
 
     /// 使用 never type 进行穷尽性检查优化
-    ///
-    /// 当错误类型为 `!` 时，编译器知道 match 的 `Ok` 分支是唯一的，
+    /// never type optimization
+    /// Use never type 进行穷尽性Checkoptimization
     /// 可以省略 `_` 通配分支。
+    /// can `_` 。
     pub fn exhaustive_match(r: Result<i32, !>) -> i32 {
         match r {
             Ok(v) => v,
@@ -66,8 +59,9 @@ impl Rust198TypeFeatures {
     }
 
     /// 发散函数返回 never type
-    ///
+    /// function never type
     /// `-> !` 明确表示函数永不返回（panic/exit/loop）。
+    /// `->!` explicit represent function （panic/exit/loop）。
     pub fn diverging_function() -> ! {
         panic!("This function never returns normally")
     }

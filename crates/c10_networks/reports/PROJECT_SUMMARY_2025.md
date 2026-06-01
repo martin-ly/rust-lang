@@ -155,7 +155,7 @@ fn parse_request(data: &[u8]) -> NetworkResult<HttpRequest> {
 
 ### 1. 依赖项现代化
 
-- 添加了 tokio、async-std 等现代异步运行时
+- 添加了 tokio、async-std [已归档] 等现代异步运行时
 - 集成了 bytes、nom 等高性能网络库
 - 引入了 thiserror、anyhow 等错误处理库
 - 配置了 tracing、criterion 等监控和测试工具
@@ -182,7 +182,7 @@ fn parse_request(data: &[u8]) -> NetworkResult<HttpRequest> {
 [dependencies]
 # 异步运行时
 tokio = { version = "1.0", features = ["full"] }
-async-std = "1.12"
+
 
 # 网络和字节处理
 bytes = { version = "1.0", features = ["serde"] }

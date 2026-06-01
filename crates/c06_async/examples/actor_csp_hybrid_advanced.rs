@@ -44,6 +44,7 @@ impl IngressActor {
 }
 
 /// 简易限速器：令牌桶
+/// ：
 struct TokenBucket {
     capacity: u64,
     tokens: u64,
@@ -144,6 +145,7 @@ async fn run_stage_limited(
 }
 
 /// 指标心跳（示意）：每秒打印一次近似处理速率
+/// indicator （indicate ）：
 async fn run_metrics_heartbeat(mut shutdown_rx: broadcast::Receiver<()>) -> anyhow::Result<()> {
     let mut tick = interval(Duration::from_secs(1));
     let mut n = 0u64;

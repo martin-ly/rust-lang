@@ -1,7 +1,7 @@
 //! 并发编程模式 - Rust 1.89 特性集成
-//!
-//! 本模块提供了现代并发编程的核心模式，结合 Rust 1.89 的新特性
+//! concurrency - Rust 1.89 feature
 //! 包括：生产者-消费者、读者-写者、工作窃取、分治等模式
+//! ：-、-、、etc.
 use std::sync::{
     Arc,
     Mutex,
@@ -20,9 +20,9 @@ use parking_lot::{
 use rayon::prelude::*;
 
 /// 生产者-消费者模式实现
-///
-/// 使用 Rust 1.89 的 scoped threads 和 crossbeam channels
+/// -
 /// 提供高性能的生产者-消费者通信
+/// performance -
 #[allow(dead_code)]
 pub struct ProducerConsumer<T> {
     sender: Sender<T>,
@@ -32,6 +32,7 @@ pub struct ProducerConsumer<T> {
 
 impl<T> ProducerConsumer<T> {
     /// 创建新的生产者-消费者实例
+    /// -
     pub fn new(buffer_size: usize) -> Self {
         let (sender, receiver) = bounded(buffer_size);
         Self {
@@ -42,6 +43,7 @@ impl<T> ProducerConsumer<T> {
     }
 
     /// 创建无界通道的生产者-消费者
+    /// unbounded channel -
     pub fn unbounded() -> Self {
         let (sender, receiver) = unbounded();
         Self {
@@ -62,6 +64,7 @@ impl<T> ProducerConsumer<T> {
     }
 
     /// 运行生产者-消费者示例
+    /// Run -example
     pub fn run_example() {
         let pc = ProducerConsumer::new(10);
         let sender = pc.sender();
@@ -95,9 +98,11 @@ impl<T> ProducerConsumer<T> {
 }
 
 /// 读者-写者模式实现
-///
-/// 使用 parking_lot 的高性能读写锁
+/// -
+/// 读者-写者模式Implementation of
+/// Use parking_lot 高performancerwlock
 /// 支持多个读者或单个写者
+/// or
 #[allow(dead_code)]
 pub struct ReaderWriterPattern<T> {
     data: Arc<ParkingRwLock<T>>,
@@ -133,6 +138,8 @@ impl<T> ReaderWriterPattern<T> {
     }
 
     /// 运行读者-写者示例
+    /// Run -example
+    /// Run读者-写者Example of
     pub fn run_example() {
         let rw = Arc::new(ReaderWriterPattern::new(vec![1, 2, 3, 4, 5]));
 
@@ -165,8 +172,9 @@ impl<T> ReaderWriterPattern<T> {
 }
 
 /// 分治模式实现
-///
+/// 分治模式Implementation of
 /// 使用 rayon 进行并行分治计算
+/// rayon parallelism
 pub struct DivideAndConquer {
     threshold: usize,
 }
@@ -177,6 +185,7 @@ impl DivideAndConquer {
     }
 
     /// 并行归并排序
+    /// parallelism merge sort
     pub fn parallel_merge_sort<T>(&self, mut data: Vec<T>) -> Vec<T>
     where
         T: Send + Sync + Clone + Ord,
@@ -217,6 +226,7 @@ impl DivideAndConquer {
     }
 
     /// 并行快速排序
+    /// parallelism quick sort
     pub fn parallel_quicksort<T>(&self, mut data: Vec<T>) -> Vec<T>
     where
         T: Send + Sync + Clone + Ord,
@@ -243,6 +253,8 @@ impl DivideAndConquer {
     }
 
     /// 运行分治示例
+    /// Run example
+    /// Run分治Example of
     pub fn run_example() {
         let dc = DivideAndConquer::new(1000);
 
@@ -266,8 +278,9 @@ impl DivideAndConquer {
 }
 
 /// 管道模式实现
-///
+/// pipe
 /// 使用通道连接多个处理阶段
+/// channel stage
 pub struct Pipeline<T> {
     stages: Vec<Box<dyn Fn(T) -> T + Send + Sync>>,
 }
@@ -291,11 +304,13 @@ impl<T> Pipeline<T> {
     }
 
     /// 运行管道处理
+    /// Run pipe
     pub fn process(&self, input: T) -> T {
         self.stages.iter().fold(input, |acc, stage| stage(acc))
     }
 
     /// 并行管道处理
+    /// parallelism pipe
     pub fn process_parallel(&self, inputs: Vec<T>) -> Vec<T>
     where
         T: Send + Sync + Clone,
@@ -307,6 +322,7 @@ impl<T> Pipeline<T> {
     }
 
     /// 运行管道示例
+    /// Run pipe example
     pub fn run_example() {
         let mut pipeline = Pipeline::new();
 
@@ -336,8 +352,10 @@ impl<T> Pipeline<T> {
 }
 
 /// 扇出-扇入模式实现
-///
+/// -
+/// 扇出-扇入模式Implementation of
 /// 将任务分发到多个工作线程，然后收集结果
+/// will task to worker thread ，then result
 pub struct FanOutFanIn<T, R> {
     worker_count: usize,
     worker_fn: Box<dyn Fn(T) -> R + Send + Sync>,
@@ -359,6 +377,7 @@ where
     }
 
     /// 执行扇出-扇入处理
+    /// -
     pub fn process(&self, inputs: Vec<T>) -> Vec<R> {
         let chunk_size = inputs.len().div_ceil(self.worker_count);
 
@@ -374,6 +393,8 @@ where
     }
 
     /// 运行扇出-扇入示例
+    /// Run -example
+    /// Run扇出-扇入Example of
     pub fn run_example() {
         let fan_out_fan_in = FanOutFanIn::new(4, |x: i32| {
             // 模拟计算密集型任务
@@ -393,6 +414,7 @@ where
 }
 
 /// 并发模式演示
+/// concurrency demonstration
 pub fn demonstrate_concurrency_patterns() {
     println!("=== 并发编程模式演示 ===");
 

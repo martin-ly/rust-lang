@@ -1,12 +1,15 @@
 //! 图算法示例
-//!
+//! graph algorithm example
 //! 本示例展示C08算法模块的各种图算法：
+//! this example C08algorithm module graph algorithm ：
 //! - BFS（广度优先搜索）
+//! - BFS（breadth-first search ）
 //! - DFS（深度优先搜索）
+//! - DFS（depth-first search ）
 //! - 最短路径
-//!
+//! -
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example graph_algorithms_demo
 //! ```
 use c08_algorithms::graph::bfs_shortest_path_sync;

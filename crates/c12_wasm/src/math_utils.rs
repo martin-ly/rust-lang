@@ -1,10 +1,13 @@
 //! WASM 数学工具模块
-//!
+//! WASM tool module
+//! WASM 数学toolmodule
 //! 高性能数学计算，适合在浏览器中运行
+//! performance ，in in Run
 
 use wasm_bindgen::prelude::*;
 
 /// 向量2D
+/// 2D
 #[wasm_bindgen]
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Vec2 {
@@ -50,6 +53,7 @@ impl Vec2 {
     }
 
     /// 点积
+    /// dot product
     pub fn dot(&self, other: &Vec2) -> f64 {
         self.x * other.x + self.y * other.y
     }
@@ -70,12 +74,14 @@ impl Vec2 {
     }
 
     /// 到另一个向量的距离
+    /// to
     pub fn distance_to(&self, other: &Vec2) -> f64 {
         self.sub(other).length()
     }
 }
 
 /// 矩阵 2x2
+/// 2x2
 #[wasm_bindgen]
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Mat2 {
@@ -126,6 +132,7 @@ impl Mat2 {
     }
 
     /// 矩阵与向量乘法
+    /// and
     pub fn transform(&self, vec: &Vec2) -> Vec2 {
         Vec2 {
             x: self.m00 * vec.x + self.m01 * vec.y,
@@ -135,8 +142,9 @@ impl Mat2 {
 }
 
 /// 快速傅里叶变换 (FFT) - 简化版本
-///
+/// fast transformation (FFT) - this
 /// 注意: 这是一个简化的 FFT 实现，用于演示
+/// : FFT ，demonstration
 pub fn fft(input: &[f64]) -> Vec<(f64, f64)> {
     let n = input.len();
     if n <= 1 {
@@ -173,6 +181,7 @@ pub fn mean(data: &[f64]) -> f64 {
 }
 
 /// 计算标准差
+/// standard
 #[wasm_bindgen]
 pub fn std_dev(data: &[f64]) -> f64 {
     if data.len() < 2 {
@@ -185,6 +194,7 @@ pub fn std_dev(data: &[f64]) -> f64 {
 }
 
 /// 线性回归结果
+/// line result
 #[wasm_bindgen]
 #[derive(Debug, Clone, Copy)]
 pub struct LinearRegressionResult {
@@ -194,8 +204,9 @@ pub struct LinearRegressionResult {
 }
 
 /// 线性回归
-///
+/// line
 /// 返回回归结果
+/// result
 #[wasm_bindgen]
 pub fn linear_regression(x: &[f64], y: &[f64]) -> LinearRegressionResult {
     if x.len() != y.len() || x.len() < 2 {

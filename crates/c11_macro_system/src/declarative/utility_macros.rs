@@ -1,11 +1,11 @@
 //! 实用声明宏集合
-//!
+//! set
+//! 实用declarative macroset
 //! 提供常见的实用宏模式
 
 /// 实现 getter 和 setter 方法
-///
 /// # 示例
-///
+/// # example
 /// ```ignore
 /// # use c11_macro_system::impl_getter_setter;
 /// struct Person {
@@ -20,8 +20,9 @@
 /// ```
 ///
 /// 注意: 此宏使用 `paste::paste!` 进行标识符拼接。
+/// : this `paste::paste!` 。
 /// 若需使用此宏，请在 Cargo.toml 中添加 `paste = "1.0"` 依赖。
-/// Rust 目前尚无稳定的原生标识符拼接方案，`quote` 宏也无法在声明宏中直接替代 `paste`。
+/// this ，in Cargo.toml in `paste = "1.0"` 。
 #[macro_export]
 macro_rules! impl_getter_setter {
     ($field:ident : $type:ty) => {
@@ -38,9 +39,9 @@ macro_rules! impl_getter_setter {
 }
 
 /// 创建测试模块
-///
+/// module
 /// # 示例
-///
+/// # example
 /// ```
 /// # use c11_macro_system::test_module;
 /// test_module! {
@@ -50,7 +51,6 @@ macro_rules! impl_getter_setter {
 ///     test_sub: {
 ///         assert_eq!(2 - 1, 1);
 ///     }
-/// }
 /// ```
 #[macro_export]
 macro_rules! test_module {
@@ -69,9 +69,9 @@ macro_rules! test_module {
 }
 
 /// 实现 From 转换
-///
+/// From conversion
 /// # 示例
-///
+/// # example
 /// ```
 /// # use c11_macro_system::impl_from;
 /// struct Wrapper<T>(T);
@@ -90,9 +90,8 @@ macro_rules! impl_from {
 }
 
 /// 实现 Display trait
-///
 /// # 示例
-///
+/// # example
 /// ```ignore
 /// use c11_macro_system::impl_display;
 /// struct Point { x: i32, y: i32 }
@@ -111,9 +110,10 @@ macro_rules! impl_display {
 }
 
 /// 创建 vec 的简写宏
-///
+/// vec
+/// Create vec 简写宏
 /// # 示例
-///
+/// # example
 /// ```
 /// # use c11_macro_system::vec_of;
 /// let v = vec_of![1, 2, 3];
@@ -125,10 +125,8 @@ macro_rules! vec_of {
     };
 }
 
-/// 实现 Deref 和 DerefMut
-///
 /// # 示例
-///
+/// # example
 /// ```ignore
 /// use c11_macro_system::impl_deref;
 /// struct MyVec<T>(Vec<T>);

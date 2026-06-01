@@ -1,7 +1,9 @@
 //! 线程局部存储（TLS）示例
-//! 1) std::thread_local!
+//! thread-local （TLS ）example
 //! 2) 初始化一次与每线程独立副本
+//! 2) and thread this
 //! 3) 结合线程使用（补充）
+//! 3) thread （）
 use std::cell::RefCell;
 
 thread_local! {
@@ -16,6 +18,7 @@ pub fn tls_increment() -> u32 {
 }
 
 /// 在线程里使用 TLS（3）
+/// in thread TLS （3）
 pub fn tls_in_threads() -> (u32, u32) {
     let h = std::thread::spawn(tls_increment);
     let a = tls_increment();

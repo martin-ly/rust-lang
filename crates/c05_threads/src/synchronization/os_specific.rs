@@ -1,9 +1,9 @@
 //! 操作系统特定的同步原语
-//!
+//! operating system synchronous
 //! 本模块提供了针对不同操作系统的优化同步原语：
+//! This module provides to operating system optimization synchronous ：
 //! - Windows: 关键段、事件、信号量
-//! - Linux: futex、pthread
-//! - macOS: Grand Central Dispatch
+//! - Windows: key 、、semaphore
 use std::sync::atomic::{
     AtomicUsize,
     //AtomicBool,
@@ -18,7 +18,6 @@ use std::time::Duration;
 mod windows_sync {
     use super::*;
 
-    /// Windows关键段
     pub struct WindowsCriticalSection {
         cs: std::sync::Mutex<()>,
     }
@@ -43,7 +42,6 @@ mod windows_sync {
         }
     }
 
-    /// Windows事件
     pub struct WindowsEvent {
         event: Arc<Mutex<bool>>,
         condvar: Arc<std::sync::Condvar>,
@@ -91,7 +89,6 @@ mod windows_sync {
         }
     }
 
-    /// Windows信号量
     pub struct WindowsSemaphore {
         count: Arc<Mutex<usize>>,
         condvar: Arc<std::sync::Condvar>,
@@ -167,7 +164,6 @@ mod linux_sync {
         }
     }
 
-    /// Linux pthread互斥锁
     pub struct LinuxPthreadMutex<T> {
         data: Arc<Mutex<T>>,
         futex: LinuxFutex,
@@ -205,7 +201,6 @@ mod linux_sync {
 mod macos_sync {
     use super::*;
 
-    /// macOS Grand Central Dispatch队列
     pub struct MacOSDispatchQueue {
         queue: Arc<Mutex<Vec<Box<dyn FnOnce() + Send + 'static>>>>,
         condvar: Arc<std::sync::Condvar>,
@@ -258,6 +253,7 @@ mod macos_sync {
 }
 
 /// 跨平台同步原语包装器
+/// platform synchronous
 pub struct CrossPlatformSync<T> {
     data: Arc<Mutex<T>>,
     #[cfg(target_os = "windows")]
@@ -315,6 +311,7 @@ impl<T> CrossPlatformSync<T> {
 }
 
 /// 操作系统特定的性能监控
+/// operating system performance
 pub struct OSSpecificPerformanceMonitor {
     lock_contention: AtomicUsize,
     lock_acquisitions: AtomicUsize,
@@ -366,6 +363,7 @@ impl OSSpecificPerformanceMonitor {
 }
 
 /// 运行所有操作系统特定示例
+/// Run all operating system example
 pub fn demonstrate_os_specific() {
     println!("=== 操作系统特定同步原语演示 ===");
 

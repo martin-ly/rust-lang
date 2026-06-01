@@ -3,34 +3,35 @@
 #![allow(clippy::type_complexity)]
 #![allow(clippy::assertions_on_constants)]
 
-//! # C11: Rust宏系统 (Macro System)
-//!
-//! 本模块提供Rust宏系统的系统化学习内容，包括声明宏和过程宏。
-//!
 //! ## 模块结构
-//!
+//! ## module structure
 //! - `declarative` - 声明宏实现和示例
+//! - `declarative` - and example
 //! - `utils` - 宏开发辅助工具
-//!
+//! - `utils` - tool
+//! - `utils` - 宏开发辅助tool
+//! - `utils` - tool
 //! ## 快速开始
-//!
-//! ```rust
+//! ## fast
 //! use c11_macro_system::*;
 //!
 //! // 使用声明宏示例
+//! // example
 //! // 查看 examples/ 目录获取更多示例
-//! ```
-//!
+//! // examples/ example
+//! // 查看 examples/ 目录Get更多Example of
 //! ## 学习路径
-//!
+//! ## learn
 //! 1. 查看 `docs/00_MASTER_INDEX.md` 获取完整学习导航
+//! 1. `docs/00_MASTER_INDEX.md` complete learn
 //! 2. 阅读理论文档了解宏的基础概念
+//! 2. theory foundation concept
 //! 3. 运行示例代码进行实践
+//! 3. Run example
 //! 4. 完成练习巩固知识
-//!
+//! 4.
 //! ## 相关资源
-//!
-//! - [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)
+//! ##
 //! - [The Rust Reference - Macros](https://doc.rust-lang.org/reference/macros.html)
 #![warn(missing_docs)]
 #![warn(clippy::all)]
@@ -41,6 +42,7 @@ pub mod error;
 pub mod utils;
 
 /// 过程宏实现模块（文档和示例）
+/// module （and example ）
 pub mod proc;
 
 // Rust 1.91 新特性模块
@@ -93,8 +95,7 @@ pub use archive::rust_192_features::{
 };
 
 /// 模块版本信息
-///
-/// # Examples
+/// module this
 ///
 /// ```
 /// use c11_macro_system::VERSION;
@@ -104,8 +105,7 @@ pub use archive::rust_192_features::{
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 
 /// 模块名称
-///
-/// # Examples
+/// module
 ///
 /// ```
 /// use c11_macro_system::MODULE_NAME;

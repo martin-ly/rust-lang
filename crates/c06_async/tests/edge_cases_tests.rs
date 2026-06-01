@@ -1,6 +1,5 @@
 //! 异步编程模块边界情况测试套件 / Async Programming Module Edge Cases Test Suite
 
-/// 测试Future边界情况
 #[test]
 fn test_future_boundaries() {
     // 测试立即完成的Future
@@ -17,7 +16,6 @@ fn test_future_boundaries() {
     assert_eq!(100, 100);
 }
 
-/// 测试Stream边界情况
 #[test]
 fn test_stream_boundaries() {
     // 测试空Stream
@@ -34,6 +32,7 @@ fn test_stream_boundaries() {
 }
 
 /// 测试并发度边界情况
+/// concurrency edge situation
 #[test]
 fn test_concurrency_boundaries() {
     // 测试低并发度
@@ -66,6 +65,7 @@ fn test_error_paths() {
 }
 
 /// 测试边界值组合
+/// edge combination
 #[test]
 fn test_boundary_value_combinations() {
     // 测试最小值和最大值
@@ -81,6 +81,7 @@ fn test_boundary_value_combinations() {
 }
 
 /// 测试资源耗尽情况
+/// situation
 #[test]
 fn test_resource_exhaustion() {
     // 测试大量Future创建（模拟）
@@ -94,6 +95,7 @@ fn test_resource_exhaustion() {
 }
 
 /// 测试异步并发安全
+/// async concurrency
 #[test]
 fn test_async_concurrent_safety() {
     // 测试异步共享状态（模拟）
@@ -106,6 +108,7 @@ fn test_async_concurrent_safety() {
 }
 
 /// 测试异步任务取消边界情况
+/// async task edge situation
 #[test]
 fn test_async_cancellation_boundaries() {
     // 测试立即取消
@@ -118,6 +121,7 @@ fn test_async_cancellation_boundaries() {
 }
 
 /// 测试异步错误传播边界情况
+/// async error propagation edge situation
 #[test]
 fn test_async_error_propagation_boundaries() {
     // 测试单个错误
@@ -130,6 +134,7 @@ fn test_async_error_propagation_boundaries() {
 }
 
 /// 测试异步超时边界情况
+/// async edge situation
 #[test]
 fn test_async_timeout_boundaries() {
     use std::time::Duration;
@@ -148,6 +153,7 @@ fn test_async_timeout_boundaries() {
 }
 
 /// 测试异步背压边界情况
+/// async backpressure edge situation
 #[test]
 fn test_async_backpressure_boundaries() {
     // 测试无背压

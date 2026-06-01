@@ -1,7 +1,10 @@
 //! # 算法知识体系模块
+//! # algorithm system module
 //!
 //! 本模块整合了完整的算法知识体系，包括理论基础、应用场景、最佳实践等。
+//! this module integration complete algorithm system ，theory foundation 、application scenario 、etc. 。
 //! 为算法学习和应用提供全面的知识支持。
+//! as algorithm learn and application surface 。
 pub mod applications;
 pub mod best_practices;
 pub mod theory;
@@ -15,6 +18,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 /// 算法知识库
+/// algorithm library
 pub struct AlgorithmKnowledgeBase {
     algorithms: HashMap<String, AlgorithmKnowledge>,
     categories: HashMap<String, CategoryKnowledge>,
@@ -22,6 +26,7 @@ pub struct AlgorithmKnowledgeBase {
 }
 
 /// 算法知识
+/// algorithm
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AlgorithmKnowledge {
     pub name: String,
@@ -37,6 +42,7 @@ pub struct AlgorithmKnowledge {
 }
 
 /// 理论知识
+/// theory
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TheoryKnowledge {
     pub mathematical_foundation: String,
@@ -57,6 +63,7 @@ pub struct ImplementationKnowledge {
 }
 
 /// 复杂度知识
+/// complex
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ComplexityKnowledge {
     pub time_complexity: ComplexityBounds,
@@ -69,6 +76,7 @@ pub struct ComplexityKnowledge {
 }
 
 /// 复杂度边界
+/// complex edge
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ComplexityBounds {
     pub lower_bound: String,
@@ -78,6 +86,7 @@ pub struct ComplexityBounds {
 }
 
 /// 算法变体
+/// algorithm volume
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AlgorithmVariant {
     pub name: String,
@@ -98,6 +107,7 @@ pub struct HistoryKnowledge {
 }
 
 /// 分类知识
+/// classification
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CategoryKnowledge {
     pub name: String,
@@ -110,6 +120,7 @@ pub struct CategoryKnowledge {
 }
 
 /// 应用知识
+/// application
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ApplicationKnowledge {
     pub domain: String,
@@ -122,6 +133,7 @@ pub struct ApplicationKnowledge {
 
 impl AlgorithmKnowledgeBase {
     /// 创建新的算法知识库
+    /// algorithm library
     pub fn new() -> Self {
         let mut knowledge_base = Self {
             algorithms: HashMap::new(),
@@ -134,6 +146,7 @@ impl AlgorithmKnowledgeBase {
     }
 
     /// 初始化知识库
+    /// library
     fn initialize_knowledge(&mut self) {
         self.initialize_sorting_algorithms();
         self.initialize_searching_algorithms();
@@ -144,6 +157,7 @@ impl AlgorithmKnowledgeBase {
     }
 
     /// 初始化排序算法知识
+    /// sorting algorithm
     fn initialize_sorting_algorithms(&mut self) {
         // 快速排序
         self.algorithms.insert(
@@ -401,6 +415,7 @@ function merge(left, right):
     }
 
     /// 初始化搜索算法知识
+    /// searching algorithm
     fn initialize_searching_algorithms(&mut self) {
         // 二分搜索
         self.algorithms.insert(
@@ -493,6 +508,7 @@ function binary_search(array, target):
     }
 
     /// 初始化图算法知识
+    /// graph algorithm
     fn initialize_graph_algorithms(&mut self) {
         // BFS
         self.algorithms.insert(
@@ -575,6 +591,7 @@ function bfs(graph, start):
     }
 
     /// 初始化动态规划算法知识
+    /// dynamic programming algorithm
     fn initialize_dynamic_programming_algorithms(&mut self) {
         // 最长公共子序列
         self.algorithms.insert(
@@ -659,6 +676,7 @@ function lcs(X, Y):
     }
 
     /// 初始化分类知识
+    /// classification
     fn initialize_categories(&mut self) {
         self.categories.insert(
             "排序".to_string(),
@@ -733,6 +751,7 @@ function lcs(X, Y):
     }
 
     /// 初始化应用知识
+    /// application
     fn initialize_applications(&mut self) {
         self.applications.insert(
             "数据库系统".to_string(),
@@ -794,36 +813,43 @@ function lcs(X, Y):
     }
 
     /// 获取算法知识
+    /// algorithm
     pub fn get_algorithm_knowledge(&self, name: &str) -> Option<&AlgorithmKnowledge> {
         self.algorithms.get(name)
     }
 
     /// 获取分类知识
+    /// classification
     pub fn get_category_knowledge(&self, name: &str) -> Option<&CategoryKnowledge> {
         self.categories.get(name)
     }
 
     /// 获取应用知识
+    /// application
     pub fn get_application_knowledge(&self, name: &str) -> Option<&ApplicationKnowledge> {
         self.applications.get(name)
     }
 
     /// 获取所有算法名称
+    /// all algorithm
     pub fn get_all_algorithm_names(&self) -> Vec<String> {
         self.algorithms.keys().cloned().collect()
     }
 
     /// 获取所有分类名称
+    /// all classification
     pub fn get_all_category_names(&self) -> Vec<String> {
         self.categories.keys().cloned().collect()
     }
 
     /// 获取所有应用名称
+    /// all application
     pub fn get_all_application_names(&self) -> Vec<String> {
         self.applications.keys().cloned().collect()
     }
 
     /// 搜索算法
+    /// searching algorithm
     pub fn search_algorithms(&self, query: &str) -> Vec<&AlgorithmKnowledge> {
         self.algorithms
             .values()
@@ -836,6 +862,7 @@ function lcs(X, Y):
     }
 
     /// 生成知识库报告
+    /// library
     pub fn generate_knowledge_report(&self) -> String {
         let mut report = String::new();
 

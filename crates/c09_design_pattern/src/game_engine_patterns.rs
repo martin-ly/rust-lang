@@ -1,6 +1,8 @@
 //! 游戏引擎设计模式应用
+//! design application
 //!
 //! 本模块展示了在游戏引擎中应用各种设计模式的实践案例，
+//! This module demonstrates in in application design ，
 //! 包括Component、Observer、State等经典模式。
 use std::any::{Any, TypeId};
 use std::collections::HashMap;
@@ -10,6 +12,7 @@ use std::collections::HashMap;
 // ============================================================================
 
 /// 实体ID类型
+/// volume IDtype
 pub type EntityId = u64;
 
 /// 组件接口
@@ -20,6 +23,7 @@ pub trait Component: Any + Send + Sync {
 }
 
 /// 位置组件
+/// position
 #[derive(Debug, Clone)]
 pub struct Position {
     pub x: f32,
@@ -59,6 +63,7 @@ pub struct Renderable {
 impl Component for Renderable {}
 
 /// 实体管理器
+/// volume
 pub struct EntityManager {
     entities: HashMap<EntityId, HashMap<TypeId, Box<dyn Component>>>,
     next_id: EntityId,
@@ -138,11 +143,13 @@ impl EntityManager {
 }
 
 /// 系统接口
+/// system
 pub trait System {
     fn update(&mut self, entity_manager: &mut EntityManager, delta_time: f32);
 }
 
 /// 移动系统
+/// system
 pub struct MovementSystem;
 
 impl System for MovementSystem {
@@ -166,6 +173,7 @@ impl System for MovementSystem {
 }
 
 /// 渲染系统
+/// system
 pub struct RenderSystem;
 
 impl System for RenderSystem {
@@ -197,6 +205,7 @@ impl System for RenderSystem {
 // ============================================================================
 
 /// 事件类型
+/// type
 #[derive(Debug, Clone)]
 pub enum GameEvent {
     PlayerMoved {
@@ -217,6 +226,7 @@ pub enum GameEvent {
 }
 
 /// 观察者接口
+/// observer
 pub trait Observer {
     fn on_event(&mut self, event: &GameEvent);
 }
@@ -259,6 +269,7 @@ impl EventManager {
 }
 
 /// 成就系统（观察者）
+/// system （observer ）
 pub struct AchievementSystem {
     achievements: HashMap<String, bool>,
 }
@@ -306,6 +317,7 @@ impl Observer for AchievementSystem {
 }
 
 /// 日志系统（观察者）
+/// system （observer ）
 pub struct LoggingSystem;
 
 impl Observer for LoggingSystem {
@@ -338,6 +350,7 @@ impl Observer for LoggingSystem {
 // ============================================================================
 
 /// 游戏状态接口
+/// state
 pub trait GameState {
     fn enter(&mut self);
     fn update(&mut self, delta_time: f32) -> Option<Box<dyn GameState>>;
@@ -346,6 +359,7 @@ pub trait GameState {
 }
 
 /// 主菜单状态
+/// state
 pub struct MainMenuState {
     selected_option: usize,
     options: Vec<String>,
@@ -425,6 +439,7 @@ impl MainMenuState {
 }
 
 /// 游戏进行状态
+/// state
 pub struct PlayingState {
     player_health: f32,
     score: u32,
@@ -480,6 +495,7 @@ impl GameState for PlayingState {
 }
 
 /// 暂停状态
+/// state
 pub struct PauseState {
     player_health: f32,
     score: u32,
@@ -521,6 +537,7 @@ impl GameState for PauseState {
 }
 
 /// 游戏结束状态
+/// state
 pub struct GameOverState {
     final_score: u32,
 }
@@ -556,6 +573,7 @@ impl GameState for GameOverState {
 }
 
 /// 设置状态
+/// state
 pub struct SettingsState;
 
 impl Default for SettingsState {
@@ -593,6 +611,7 @@ impl GameState for SettingsState {
 }
 
 /// 退出状态
+/// state
 pub struct ExitState;
 
 impl GameState for ExitState {
@@ -614,6 +633,7 @@ impl GameState for ExitState {
 }
 
 /// 游戏状态管理器
+/// state
 pub struct GameStateManager {
     current_state: Option<Box<dyn GameState>>,
 }

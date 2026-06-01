@@ -1,15 +1,21 @@
 //! 真实世界应用场景演示
-//!
+//! real application scenario demonstration
 //! 本示例展示了在真实世界应用中使用异步编程的场景：
+//! this example in real application in async scenario ：
 //! - Web API 服务器
+//! - Web API
 //! - 消息队列处理
+//! -
 //! - 文件上传和处理
+//! - on and
 //! - 定时任务调度
+//! - task
 //! - 配置热重载
+//! -
 //! - 健康检查和监控
-//!
+//! - health check and
 //! 运行方式：
-//! ```bash
+//! Run way ：
 //! cargo run --example real_world_app_demo
 //! ```
 use anyhow::Result;

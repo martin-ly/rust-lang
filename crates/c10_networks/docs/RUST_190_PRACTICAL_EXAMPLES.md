@@ -93,7 +93,7 @@
 
 - 协议对比矩阵 (TCP/UDP/QUIC/WebSocket/HTTP/gRPC)
 - 并发模型对比 (OS线程/async/Actor/CSP)
-- 异步运行时对比 (Tokio/async-std/smol/Glommio)
+- 异步运行时对比 (Tokio/smol/Glommio)
 - 序列化格式对比 (JSON/MessagePack/Protobuf/Bincode)
 - TLS实现对比 (rustls/native-tls/openssl/boring)
 - 连接池实现对比 (deadpool/bb8/r2d2/mobc)

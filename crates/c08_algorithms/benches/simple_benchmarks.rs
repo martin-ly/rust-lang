@@ -1,12 +1,15 @@
 //! 简化的算法性能基准测试
-//!
+//! algorithm Performance benchmark
+//! 简化algorithmperformancebenchmark
 //! 本文件包含简化的算法性能基准测试，使用实际存在的函数
+//! this algorithm Performance benchmark ，actual in function
 use c08_algorithms::algorithms::sorting::sync::{MergeSort, QuickSort};
 use c08_algorithms::algorithms::SyncAlgorithm;
 use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
 use std::hint::black_box;
 
 /// 排序算法基准测试
+/// sorting algorithm benchmark
 fn bench_sorting_algorithms(c: &mut Criterion) {
     let mut group = c.benchmark_group("sorting_algorithms");
 
@@ -35,6 +38,7 @@ fn bench_sorting_algorithms(c: &mut Criterion) {
 }
 
 /// 内存分配基准测试
+/// memory benchmark
 fn bench_memory_allocation(c: &mut Criterion) {
     let mut group = c.benchmark_group("memory_allocation");
 
@@ -73,6 +77,7 @@ fn bench_memory_allocation(c: &mut Criterion) {
 }
 
 /// 数学运算基准测试
+/// benchmark
 fn bench_math_operations(c: &mut Criterion) {
     let mut group = c.benchmark_group("math_operations");
 
@@ -98,6 +103,7 @@ fn bench_math_operations(c: &mut Criterion) {
 }
 
 /// 字符串操作基准测试
+/// benchmark
 fn bench_string_operations(c: &mut Criterion) {
     let mut group = c.benchmark_group("string_operations");
 
@@ -129,6 +135,7 @@ fn bench_string_operations(c: &mut Criterion) {
 }
 
 /// 并发性能基准测试
+/// concurrency Performance benchmark
 fn bench_concurrent_operations(c: &mut Criterion) {
     let mut group = c.benchmark_group("concurrent_operations");
 

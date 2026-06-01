@@ -1,34 +1,34 @@
 //! # WASI-Crypto 加密操作示例
-//!
+//! # WASI -Crypto example
 //! 本示例展示如何使用 WASI-Crypto API 进行密码学操作
-//!
+//! this example WASI -Crypto API
 //! ## 支持的操作
-//! - 对称加密 (AES-GCM, ChaCha20-Poly1305)
+//! ##
 //! - 非对称加密 (RSA, ECDSA, Ed25519)
+//! - to (RSA, ECDSA, Ed25519)
+//! - 非to称Encrypt (RSA, ECDSA, Ed25519)
 //! - 哈希函数 (SHA-256, SHA-512, BLAKE3)
+//! - 哈希function (SHA-256, SHA-512, BLAKE3)
 //! - 密钥派生 (HKDF, PBKDF2)
 //! - 数字签名
+//! -
 //! - 消息认证码 (HMAC)
-//!
+//! - (HMAC)
 //! ## 编译
-//! ```bash
-//! cargo build --example 11_crypto_operations --target wasm32-wasip1 --release
+//! ##
 //! ```
 //!
 //! ## 运行
-//! ```bash
-//! # 使用 WasmEdge（需要安装 WASI-Crypto 插件）
-//! wasmedge --dir .:. target/wasm32-wasip1/release/examples/11_crypto_operations.wasm
-//! ```
+//! ## Run
 //!
 //! ## 安装 WASI-Crypto 插件
-//! ```bash
-//! curl -sSf https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/install.sh | \
 //!   bash -s -- --plugins wasi_crypto
 //! ```
 use std::fmt;
 
 /// 密码学错误类型
+/// error type
+/// 密码学error type
 #[derive(Debug)]
 pub enum CryptoError {
     EncryptionFailed(String),
@@ -55,6 +55,8 @@ impl fmt::Display for CryptoError {
 }
 
 /// 对称加密算法
+/// to algorithm
+/// to称Encryptalgorithm
 #[derive(Debug, Clone, Copy)]
 pub enum SymmetricAlgorithm {
     AesGcm256,
@@ -87,6 +89,7 @@ impl SymmetricAlgorithm {
 }
 
 /// 对称加密器
+/// to
 pub struct SymmetricCipher {
     algorithm: SymmetricAlgorithm,
 }
@@ -110,6 +113,7 @@ impl SymmetricCipher {
     }
 
     /// 生成随机 nonce
+    /// nonce
     fn generate_nonce(&self) -> Vec<u8> {
         let nonce_size = self.algorithm.nonce_size();
         vec![0x11u8; nonce_size] // 模拟 nonce
@@ -196,6 +200,7 @@ impl SymmetricCipher {
 }
 
 /// 加密数据结构
+/// data structure
 #[derive(Debug)]
 pub struct EncryptedData {
     pub ciphertext: Vec<u8>,
@@ -204,6 +209,8 @@ pub struct EncryptedData {
 }
 
 /// 非对称加密算法
+/// to algorithm
+/// 非to称Encryptalgorithm
 #[derive(Debug, Clone, Copy)]
 pub enum AsymmetricAlgorithm {
     Ed25519,
@@ -222,6 +229,7 @@ impl AsymmetricAlgorithm {
 }
 
 /// 密钥对
+/// to
 #[derive(Debug)]
 pub struct KeyPair {
     pub public_key: Vec<u8>,
@@ -239,6 +247,7 @@ impl DigitalSignature {
     }
 
     /// 生成密钥对
+    /// to
     pub fn generate_keypair(&self) -> Result<KeyPair, CryptoError> {
         println!("\n=== Key Pair Generation ===");
         println!("Algorithm: {}", self.algorithm.name());
@@ -294,6 +303,8 @@ impl DigitalSignature {
 }
 
 /// 哈希算法
+/// algorithm
+/// 哈希algorithm
 #[derive(Debug, Clone, Copy)]
 pub enum HashAlgorithm {
     Sha256,
@@ -345,6 +356,7 @@ impl Hasher {
     }
 
     /// HMAC 计算
+    /// HMAC
     pub fn hmac(&self, key: &[u8], data: &[u8]) -> Result<Vec<u8>, CryptoError> {
         println!("\n=== HMAC ===");
         println!("Algorithm: HMAC-{}", self.algorithm.name());
@@ -360,10 +372,12 @@ impl Hasher {
 }
 
 /// 密钥派生函数
+/// function
 pub struct KeyDerivation;
 
 impl KeyDerivation {
     /// HKDF 密钥派生
+    /// HKDF
     pub fn hkdf(
         hash_algo: HashAlgorithm,
         ikm: &[u8], // Input Key Material
@@ -386,6 +400,7 @@ impl KeyDerivation {
     }
 
     /// PBKDF2 密钥派生
+    /// PBKDF2
     pub fn pbkdf2(
         hash_algo: HashAlgorithm,
         password: &[u8],
@@ -409,10 +424,12 @@ impl KeyDerivation {
 }
 
 /// 实用工具
+/// tool
 mod utils {
     use super::*;
 
     /// 打印二进制数据为十六进制
+    /// as
     pub fn print_hex(label: &str, data: &[u8], max_len: usize) {
         let display_data = &data[..data.len().min(max_len)];
         println!("{}: {}", label, hex_encode(display_data));
@@ -431,6 +448,7 @@ mod utils {
 }
 
 /// 简单的十六进制编码
+/// simple
 fn hex_encode(data: &[u8]) -> String {
     data.iter().map(|b| format!("{:02x}", b)).collect()
 }

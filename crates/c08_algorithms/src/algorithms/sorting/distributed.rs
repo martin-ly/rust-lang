@@ -1,7 +1,10 @@
 //! # 分布式排序算法
+//! # distribution sorting algorithm
 //!
 //! 本模块实现了各种排序算法的分布式版本，支持跨节点的分布式计算。
+//! this module sorting algorithm distribution this ，node distribution 。
 //! 适用于大规模数据处理和需要水平扩展的场景。
+//! scale and level scenario 。
 use super::{AlgorithmComplexity, SortingAlgorithm};
 use crate::algorithms::execution_modes::{
     DistributedAlgorithm,
@@ -11,6 +14,7 @@ use crate::algorithms::execution_modes::{
 //use serde::{Serialize, Deserialize};
 
 /// 分布式快速排序
+/// distribution quick sort
 pub struct DistributedQuickSort;
 
 impl DistributedAlgorithm<Vec<i32>, Vec<i32>> for DistributedQuickSort {
@@ -52,6 +56,7 @@ impl super::DistributedSortingAlgorithm for DistributedQuickSort {
 }
 
 /// 分布式归并排序
+/// distribution merge sort
 pub struct DistributedMergeSort;
 
 impl DistributedAlgorithm<Vec<i32>, Vec<i32>> for DistributedMergeSort {
@@ -100,6 +105,7 @@ impl super::DistributedSortingAlgorithm for DistributedMergeSort {
 }
 
 /// 分布式堆排序
+/// distribution heap sort
 pub struct DistributedHeapSort;
 
 impl DistributedAlgorithm<Vec<i32>, Vec<i32>> for DistributedHeapSort {
@@ -146,6 +152,7 @@ impl super::DistributedSortingAlgorithm for DistributedHeapSort {
 }
 
 /// 分布式插入排序
+/// distribution insertion sort
 pub struct DistributedInsertionSort;
 
 impl DistributedAlgorithm<Vec<i32>, Vec<i32>> for DistributedInsertionSort {
@@ -185,6 +192,7 @@ impl super::DistributedSortingAlgorithm for DistributedInsertionSort {
 }
 
 /// 分布式选择排序
+/// distribution selection sort
 pub struct DistributedSelectionSort;
 
 impl DistributedAlgorithm<Vec<i32>, Vec<i32>> for DistributedSelectionSort {
@@ -224,6 +232,7 @@ impl super::DistributedSortingAlgorithm for DistributedSelectionSort {
 }
 
 /// 分布式冒泡排序
+/// distribution bubble sort
 pub struct DistributedBubbleSort;
 
 impl DistributedAlgorithm<Vec<i32>, Vec<i32>> for DistributedBubbleSort {
@@ -263,6 +272,7 @@ impl super::DistributedSortingAlgorithm for DistributedBubbleSort {
 }
 
 /// 分布式基数排序
+/// distribution radix sort
 pub struct DistributedRadixSort;
 
 impl DistributedAlgorithm<Vec<i32>, Vec<i32>> for DistributedRadixSort {
@@ -300,6 +310,7 @@ impl super::DistributedSortingAlgorithm for DistributedRadixSort {
 }
 
 /// 分布式计数排序
+/// distribution counting sort
 pub struct DistributedCountingSort;
 
 impl DistributedAlgorithm<Vec<i32>, Vec<i32>> for DistributedCountingSort {
@@ -347,6 +358,7 @@ impl super::DistributedSortingAlgorithm for DistributedCountingSort {
 }
 
 /// 分布式桶排序
+/// distribution bucket sort
 pub struct DistributedBucketSort;
 
 impl DistributedAlgorithm<Vec<i32>, Vec<i32>> for DistributedBucketSort {
@@ -400,6 +412,7 @@ impl super::DistributedSortingAlgorithm for DistributedBucketSort {
 }
 
 /// 分布式 Tim 排序
+/// distribution Tim ordering
 pub struct DistributedTimSort;
 
 impl DistributedAlgorithm<Vec<i32>, Vec<i32>> for DistributedTimSort {

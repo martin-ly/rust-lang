@@ -1,14 +1,17 @@
-//! 线程 join 与结果汇聚
-//!
 //! 1) 基本 join
+//! 1) this join
+//! 1) 基this join
 //! 2) 多线程 join 汇聚结果
-//! 3) 带“超时等待”的 join（用通道模拟）
-//! 4) join 错误处理与 panic 传播（补充）
+//! 2) thread join result
+//! 2) 多thread join 汇聚result
+//! 4) join error handlingand panic propagation（补充）
 use std::sync::mpsc;
 use std::thread;
 use std::time::Duration;
 
 /// 基本 join 示例
+/// this join example
+/// 基this join Example of
 pub fn basic_join() {
     let handle = thread::spawn(|| {
         thread::sleep(Duration::from_millis(20));
@@ -19,6 +22,7 @@ pub fn basic_join() {
 }
 
 /// 多线程 join 并汇聚结果
+/// thread join and result
 pub fn join_multiple_and_collect(n: usize) -> i32 {
     let mut handles = Vec::new();
     for i in 0..n as i32 {
@@ -31,6 +35,7 @@ pub fn join_multiple_and_collect(n: usize) -> i32 {
 }
 
 /// 使用通道模拟“join 带超时”
+/// channel “join ”
 pub fn join_with_timeout_simulated(timeout_ms: u64) -> Option<i32> {
     let (tx, rx) = mpsc::channel();
     thread::spawn(move || {
@@ -40,7 +45,6 @@ pub fn join_with_timeout_simulated(timeout_ms: u64) -> Option<i32> {
     rx.recv_timeout(Duration::from_millis(timeout_ms)).ok()
 }
 
-/// join 错误处理与 panic 传播（4）
 pub fn join_with_panic_handling() -> bool {
     let handle = thread::spawn(|| {
         panic!("boom");

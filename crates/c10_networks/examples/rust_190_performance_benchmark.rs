@@ -3,12 +3,11 @@
 #![allow(clippy::useless_vec)]
 
 //! Rust 1.90 性能基准测试示例 (历史版本)
-//!
+//! Rust 1.90 Performance benchmark example (this )
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//!
+//! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features_demo.rs`
-//!
-//! 本示例展示了如何使用Rust 1.90的新特性进行性能基准测试
+//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features_demo.rs`
 use c10_networks::error::{NetworkError, NetworkResult};
 use c10_networks::unified_api::NetClient;
 use futures::StreamExt;
@@ -16,6 +15,7 @@ use std::time::{Duration, Instant};
 use tokio::time::timeout;
 
 /// 性能基准测试结果
+/// Performance benchmark result
 #[allow(dead_code)]
 #[derive(Debug, Clone)]
 struct BenchmarkResult {
@@ -59,6 +59,7 @@ impl BenchmarkResult {
 }
 
 /// Rust 1.90 性能基准测试主函数
+/// Rust 1.90 Performance benchmark Main function
 #[tokio::main]
 async fn main() -> NetworkResult<()> {
     // 初始化日志
@@ -97,6 +98,7 @@ async fn main() -> NetworkResult<()> {
 }
 
 /// 基准测试1: DNS解析性能
+/// benchmark 1: DNS performance
 async fn benchmark_dns_lookup(
     client: &NetClient,
     operations: usize,
@@ -145,6 +147,7 @@ async fn benchmark_dns_lookup(
 }
 
 /// 基准测试2: 并发异步操作性能
+/// benchmark 2: concurrency async performance
 async fn benchmark_concurrent_operations(
     client: &NetClient,
     total_operations: usize,
@@ -216,6 +219,7 @@ async fn benchmark_concurrent_operations(
 }
 
 /// 基准测试3: 异步流处理性能
+/// benchmark 3: async stream performance
 async fn benchmark_stream_processing(stream_size: usize) -> NetworkResult<BenchmarkResult> {
     println!("\n🔄 基准测试3: 异步流处理性能 (流大小: {})", stream_size);
 
@@ -244,6 +248,7 @@ async fn benchmark_stream_processing(stream_size: usize) -> NetworkResult<Benchm
 }
 
 /// 基准测试4: 内存池性能
+/// benchmark 4: memory pool performance
 async fn benchmark_memory_pool(operations: usize) -> NetworkResult<BenchmarkResult> {
     println!("\n💾 基准测试4: 内存池性能 ({} 次操作)", operations);
 
@@ -286,6 +291,8 @@ async fn benchmark_memory_pool(operations: usize) -> NetworkResult<BenchmarkResu
 }
 
 /// 基准测试5: 缓存操作性能
+/// benchmark 5: performance
+/// benchmark5: 缓存操作performance
 async fn benchmark_cache_operations(operations: usize) -> NetworkResult<BenchmarkResult> {
     println!("\n🗄️ 基准测试5: 缓存操作性能 ({} 次操作)", operations);
 
@@ -331,6 +338,7 @@ async fn benchmark_cache_operations(operations: usize) -> NetworkResult<Benchmar
 }
 
 /// 打印基准测试结果
+/// benchmark result
 fn print_benchmark_results(results: &[BenchmarkResult]) {
     println!("\n📊 基准测试结果汇总:");
     println!("{:-<120}", "");
@@ -365,6 +373,7 @@ fn print_benchmark_results(results: &[BenchmarkResult]) {
 }
 
 /// 生成性能报告
+/// performance
 async fn generate_performance_report(results: &[BenchmarkResult]) -> NetworkResult<()> {
     println!("\n📋 生成性能报告...");
 
@@ -409,6 +418,7 @@ async fn generate_performance_report(results: &[BenchmarkResult]) -> NetworkResu
 }
 
 /// 系统资源监控
+/// system
 #[allow(dead_code)]
 struct SystemMonitor {
     start_memory: usize,
@@ -437,6 +447,7 @@ impl SystemMonitor {
 }
 
 /// 获取内存使用量（简化实现）
+/// memory （）
 #[allow(dead_code)]
 fn get_memory_usage() -> usize {
     // 这是一个简化的实现，实际应用中应该使用更精确的内存监控

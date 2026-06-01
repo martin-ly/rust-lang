@@ -1,9 +1,12 @@
 #![forbid(unsafe_code)]
 
 //! 异步运行时内部原理概念解析
+//! async runtime inside concept
 //!
 //! 本模块以概念形式讲解 Waker、任务队列、Tokio 调度器架构与 Future 状态机。
+//! this module concept Waker、task 、Tokio architecture and Future state machine 。
 //! 所有代码均为 safe Rust 概念实现，不使用任何 unsafe。
+//! all as safe Rust concept ， unsafe。
 
 use std::collections::VecDeque;
 use std::future::Future;
@@ -15,15 +18,18 @@ use std::sync::Arc;
 // ============================================================================
 
 /// 概念性 Waker 实现
+/// concept Waker
 ///
 /// 真实 Waker 由 `std::task::RawWaker` 和 vtable 构成，需要 unsafe 代码。
 /// 这里使用 `Arc<AtomicBool>` 模拟"唤醒标记"的语义。
+/// `Arc<AtomicBool>` "mark "。
 pub struct ConceptWaker {
     awakened: Arc<AtomicBool>,
 }
 
 impl ConceptWaker {
     /// 创建新的 Waker，唤醒标记为 false
+    /// Waker，mark as false
     pub fn new() -> Self {
         Self {
             awakened: Arc::new(AtomicBool::new(false)),
@@ -31,21 +37,25 @@ impl ConceptWaker {
     }
 
     /// 模拟 `wake()`：将唤醒标记设为 true
+    /// `wake()`：will mark as true
     pub fn wake(&self) {
         self.awakened.store(true, Ordering::Release);
     }
 
     /// 检查是否已被唤醒
+    /// is
     pub fn is_awakened(&self) -> bool {
         self.awakened.load(Ordering::Acquire)
     }
 
     /// 获取底层的 `Arc<AtomicBool>`（用于克隆）
+    /// `Arc<AtomicBool>`（）
     pub fn inner(&self) -> Arc<AtomicBool> {
         Arc::clone(&self.awakened)
     }
 
     /// 重置唤醒标记
+    /// mark
     pub fn reset(&self) {
         self.awakened.store(false, Ordering::Release);
     }
@@ -70,15 +80,19 @@ impl Clone for ConceptWaker {
 // ============================================================================
 
 /// 概念性异步任务队列
+/// concept async task
 ///
 /// 真实运行时（如 Tokio）使用复杂的队列结构（全局注入器 + 本地工作窃取队列）。
+/// real runtime （ Tokio）complex structure （global + this ）。
 /// 这里使用 `VecDeque<Box<dyn Future<Output = ()>>>` 展示最基本的任务缓冲语义。
+/// `VecDeque<Box<dyn Future<Output = ()>>>` this task buffering 。
 pub struct ConceptTaskQueue {
     tasks: VecDeque<Box<dyn Future<Output = ()> + 'static>>,
 }
 
 impl ConceptTaskQueue {
     /// 创建空任务队列
+    /// task
     pub fn new() -> Self {
         Self {
             tasks: VecDeque::new(),
@@ -86,21 +100,25 @@ impl ConceptTaskQueue {
     }
 
     /// 向队列尾部追加任务
+    /// task
     pub fn push(&mut self, task: Box<dyn Future<Output = ()> + 'static>) {
         self.tasks.push_back(task);
     }
 
     /// 从队列头部取出任务
+    /// from task
     pub fn pop(&mut self) -> Option<Box<dyn Future<Output = ()> + 'static>> {
         self.tasks.pop_front()
     }
 
     /// 当前任务数
+    /// when before task
     pub fn len(&self) -> usize {
         self.tasks.len()
     }
 
     /// 是否为空
+    /// as
     pub fn is_empty(&self) -> bool {
         self.tasks.is_empty()
     }
@@ -122,10 +140,12 @@ impl Default for ConceptTaskQueue {
 // ============================================================================
 
 /// Tokio 调度器架构概念
+/// Tokio architecture concept
 pub struct TokioSchedulerArchitecture;
 
 impl TokioSchedulerArchitecture {
     /// 架构总览
+    /// architecture
     pub fn overview() -> &'static str {
         r#"=== Tokio 调度器架构 ===
 
@@ -171,6 +191,7 @@ Tokio 的本地队列容量通常为 256，满时任务溢出到全局队列。
     }
 
     /// 全局队列与本地队列对比
+    /// global and this to
     pub fn global_vs_local() -> &'static str {
         r#"=== 全局队列 vs 本地队列 ===
 
@@ -194,10 +215,12 @@ spawn -> 全局队列 -> 工作线程获取 -> 本地队列 -> 执行
 // ============================================================================
 
 /// Future 状态机概念图
+/// Future state machine concept
 pub struct FutureStateMachine;
 
 impl FutureStateMachine {
     /// Future 状态机概念
+    /// Future state machine concept
     pub fn concept() -> &'static str {
         r#"=== Future 状态机概念 ===
 
@@ -232,6 +255,7 @@ poll() 方法：
     }
 
     /// Future 生命周期
+    /// Future lifetime
     pub fn lifecycle() -> &'static str {
         r#"=== Future 生命周期 ===
 

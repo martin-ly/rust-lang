@@ -1,17 +1,27 @@
 //! AI集成异步演示
-//!
+//! AIasync demonstration
 //! 本示例展示了异步编程在AI应用中的使用：
+//! this example async in AIapplication in ：
 //! - 异步AI模型推理
+//! - async AIreason
 //! - 批量处理
+//! -
+//! - 批量Handle
 //! - 流式处理
+//! - stream
 //! - 模型管理
+//! -
 //! - 推理缓存
+//! - reason
 //! - 异步训练
+//! - async
 //! - 模型版本管理
+//! - this
 //! - AI服务编排
-//!
+//! - AIorchestration
+//! - AI服务orchestration
 //! 运行方式：
-//! ```bash
+//! Run way ：
 //! cargo run --example ai_integration_demo
 //! ```
 use anyhow::Result;
@@ -24,6 +34,7 @@ use tokio::time::sleep;
 use uuid::Uuid;
 
 /// AI模型信息
+/// AI
 #[derive(Debug, Clone)]
 pub struct ModelInfo {
     pub id: String,
@@ -59,6 +70,7 @@ impl std::fmt::Display for ModelType {
 }
 
 /// 推理请求
+/// reason
 #[derive(Debug, Clone)]
 pub struct InferenceRequest {
     pub id: String,
@@ -79,6 +91,7 @@ pub enum InferencePriority {
 }
 
 /// 推理结果
+/// reason result
 #[derive(Debug, Clone)]
 pub struct InferenceResult {
     pub request_id: String,
@@ -91,6 +104,7 @@ pub struct InferenceResult {
 }
 
 /// 异步AI模型
+/// async AI
 pub struct AsyncAIModel {
     info: ModelInfo,
     inference_queue: Arc<Mutex<VecDeque<InferenceRequest>>>,
@@ -246,6 +260,7 @@ pub struct ModelStats {
 }
 
 /// AI模型管理器
+/// AI
 pub struct AIModelManager {
     models: Arc<RwLock<HashMap<String, AsyncAIModel>>>,
     model_versions: Arc<RwLock<HashMap<String, Vec<String>>>>,
@@ -334,6 +349,7 @@ impl AIModelManager {
 }
 
 /// 流式AI处理器
+/// stream AI
 pub struct StreamingAIProcessor {
     model: AsyncAIModel,
     input_stream: mpsc::UnboundedReceiver<Vec<f32>>,
@@ -383,6 +399,7 @@ impl StreamingAIProcessor {
 }
 
 /// 异步AI训练器
+/// async AI
 #[allow(dead_code)]
 pub struct AsyncAITrainer {
     #[allow(dead_code)]

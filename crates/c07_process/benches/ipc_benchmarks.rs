@@ -1,6 +1,7 @@
 //! C07 进程间通信（IPC）性能基准测试
-//!
+//! C07 process （IP C）Performance benchmark
 //! 测试消息传递、进程配置创建和同步原语的性能。
+//! 、process and synchronous performance 。
 
 use c07_process::{
     IpcConfig, IpcManager, IpcProtocol, Message, ProcessConfig, ProcessManager, ResourceLimits,
@@ -10,6 +11,7 @@ use std::collections::HashMap;
 use std::time::Duration;
 
 /// 基准测试：IPC 消息创建与序列化
+/// benchmark ：IP C and sequence
 fn bench_ipc_message_creation(c: &mut Criterion) {
     c.bench_function("ipc_message_creation", |b| {
         b.iter(|| {
@@ -25,6 +27,7 @@ fn bench_ipc_message_creation(c: &mut Criterion) {
 }
 
 /// 基准测试：进程配置创建
+/// benchmark ：process
 fn bench_process_config_creation(c: &mut Criterion) {
     c.bench_function("process_config_creation", |b| {
         let mut env = HashMap::new();
@@ -48,6 +51,8 @@ fn bench_process_config_creation(c: &mut Criterion) {
 }
 
 /// 基准测试：IPC 管理器初始化
+/// benchmark ：IP C
+/// benchmark：IPC 管理器Initialize
 fn bench_ipc_manager_init(c: &mut Criterion) {
     c.bench_function("ipc_manager_init", |b| {
         b.iter(|| {
@@ -65,6 +70,7 @@ fn bench_ipc_manager_init(c: &mut Criterion) {
 }
 
 /// 基准测试：进程管理器创建
+/// benchmark ：process
 fn bench_process_manager_creation(c: &mut Criterion) {
     c.bench_function("process_manager_creation", |b| {
         b.iter(|| {
@@ -74,7 +80,6 @@ fn bench_process_manager_creation(c: &mut Criterion) {
     });
 }
 
-/// 基准测试：ResourceLimits 默认创建
 fn bench_resource_limits_default(c: &mut Criterion) {
     c.bench_function("resource_limits_default", |b| {
         b.iter(|| {
@@ -84,7 +89,6 @@ fn bench_resource_limits_default(c: &mut Criterion) {
     });
 }
 
-/// 基准测试：HashMap 环境变量克隆（进程创建常见开销）
 fn bench_env_hashmap_clone(c: &mut Criterion) {
     let mut env = HashMap::new();
     for i in 0..50 {

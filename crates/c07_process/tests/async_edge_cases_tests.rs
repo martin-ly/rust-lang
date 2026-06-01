@@ -1,6 +1,7 @@
 //! 异步进程管理的边界情况测试
-//!
+//! async process edge situation
 //! 这些测试覆盖了异步进程管理中的边界情况和错误处理场景
+//! async process in edge situation and error handling scenario
 #[cfg(feature = "async")]
 mod async_edge_cases {
     use c07_process::AsyncProcessManager;

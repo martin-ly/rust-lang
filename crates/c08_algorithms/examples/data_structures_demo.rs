@@ -1,13 +1,17 @@
 //! 数据结构示例
-//!
+//! data structure example
 //! 本示例展示C08算法模块中使用的各种数据结构：
+//! this example C08algorithm module in data structure ：
 //! - 栈
+//! - stack
 //! - 队列
+//! -
 //! - 堆
+//! - heap
 //! - 哈希表
-//!
+//! -
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example data_structures_demo
 //! ```
 use std::collections::{BinaryHeap, HashMap, VecDeque};

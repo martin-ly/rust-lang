@@ -108,21 +108,22 @@ pub mod type_inference;
 pub mod type_parameter;
 
 /// 类型别名模块 - 提供项目中使用的所有复杂类型别名
+/// type module - project in all complex type
 pub mod type_aliases;
 
-/// 归档的历史版本特性模块 - 包含 Rust 1.89-1.92 版本的历史特性实现
-/// 归档的历史版本特性模块 - 包含 Rust 1.89-1.92 版本的历史特性实现
 pub mod archive;
 pub mod generic_define;
 
 /// 高级泛型模式模块 - GAT、类型族、HList
+/// generic module - GAT、type 、HList
 pub mod advanced;
 
-/// 基础语法模块 - 提供 Rust 泛型编程的基础语法和概念
 pub mod basic_syntax;
 /// Const Generics 扩展预览模块（adt_const_params + min_generic_const_args）
+/// Const Generics 扩展预览module（adt_const_params + min_generic_const_args）
 pub mod const_generics_extended_preview;
 /// Next-generation Trait Solver 预览模块（nightly 实验性）
+/// Next-generation Trait Solver 预览module（nightly 实验性）
 pub mod next_solver_preview;
 pub mod rust_186_features;
 pub mod rust_187_features;
@@ -138,17 +139,21 @@ pub mod rust_196_features;
 pub mod rust_197_features;
 
 /// 高级泛型模式和设计模式示例模块 - 展示使用泛型实现的设计模式
+/// generic and design example module - generic design
 pub mod advanced_patterns;
 
 pub mod dyn_trait_advanced;
 /// 高级泛型编程模式模块 - GAT、HRTB、类型族、特化概念
+/// generic module - GAT、HRTB、type 、concept
 pub mod generic_advanced_patterns;
 pub mod type_state_machine;
 
 /// 实用示例模块 - 展示实际项目中的泛型编程应用
+/// example module - actual project in generic application
 pub mod practical_examples;
 
 /// 成熟库示例模块
+/// library example module
 pub mod ecosystem_examples {
     use anyhow::{Context, Result};
     use itertools::Itertools;
@@ -256,6 +261,7 @@ pub mod ecosystem_examples {
 }
 
 /// 性能基准测试模块
+/// Performance benchmark module
 pub mod benchmarks {
     use std::time::Instant;
 
@@ -269,6 +275,7 @@ pub mod benchmarks {
     type IntVec = Vec<i32>;
 
     /// 泛型函数性能基准测试
+    /// generic function Performance benchmark
     pub fn benchmark_generic_functions() {
         println!("\n=== 泛型函数性能基准测试 ===");
 
@@ -297,6 +304,7 @@ pub mod benchmarks {
     }
 
     /// 并发性能基准测试
+    /// concurrency Performance benchmark
     pub fn benchmark_concurrency() {
         println!("\n=== 并发性能基准测试 ===");
 
@@ -335,6 +343,7 @@ pub mod benchmarks {
     }
 
     /// 内存使用基准测试
+    /// memory benchmark
     pub fn benchmark_memory_usage() {
         println!("\n=== 内存使用基准测试 ===");
 
@@ -359,16 +368,15 @@ pub mod benchmarks {
 }
 
 /// 项目完成状态总结
-///
+/// project state summary
 /// 打印项目的完成状态总结信息，包括各个模块的完成情况。
-///
-/// # Examples
+/// project state summary ，module situation 。
 ///
 /// ```
 /// use c04_generic::project_status_summary;
 ///
 /// // 打印项目状态总结
-/// project_status_summary();
+/// // project state summary
 /// ```
 pub fn project_status_summary() {
     println!("\n=== Rust Generics 项目完成状态总结 ===");

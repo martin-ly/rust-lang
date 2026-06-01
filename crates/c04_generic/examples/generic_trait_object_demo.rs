@@ -1,13 +1,13 @@
-//! Trait对象与泛型对比示例
 #![allow(clippy::type_complexity)]
 //!
-//! 本示例展示Trait对象（动态分派）与泛型（静态分派）的对比：
 //! - 静态分派 vs 动态分派
+//! - vs
 //! - 性能对比
+//! - performance to
 //! - 使用场景选择
-//!
+//! - scenario
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example generic_trait_object_demo
 //! ```
 use std::time::Instant;
@@ -50,11 +50,12 @@ impl Shape for Rectangle {
 }
 
 /// 使用泛型（静态分派）
+/// generic （）
+/// Usegeneric（静态分派）
 fn calculate_area_generic<T: Shape>(shape: &T) -> f64 {
     shape.area()
 }
 
-/// 使用Trait对象（动态分派）
 fn calculate_area_dynamic(shape: &dyn Shape) -> f64 {
     shape.area()
 }

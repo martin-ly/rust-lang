@@ -18,9 +18,8 @@
     - [Q1: `Send` 和 `Sync` 到底有什么区别？我总是搞混](#q1-send-和-sync-到底有什么区别我总是搞混)
     - [Q2: 既然 `Mutex` 这么好用，为什么 Rust 还推崇消息传递？](#q2-既然-mutex-这么好用为什么-rust-还推崇消息传递)
     - [Q3: `Arc<Mutex<T>>` 看起来很笨重，它到底是怎么工作的？](#q3-arcmutext-看起来很笨重它到底是怎么工作的)
-    - [Q4: 我应该什么时候用 `Rayon`，什么时候用 `async/await` (Tokio/async-std)？](#q4-我应该什么时候用-rayon什么时候用-asyncawait-tokioasync-std)
+    - [Q4: 我应该什么时候用 `Rayon`，什么时候用 `async/await` (Tokio/smol)？](#q4-我应该什么时候用-rayon什么时候用-asyncawait-tokiosmol)
     - [Q5: 直接使用原子类型 (Atomics) 会比 `Mutex` 更快吗？](#q5-直接使用原子类型-atomics-会比-mutex-更快吗)
-  - [**准则**: 除非你是在编写像 `Mutex` 本身这样的底层同步原语，或者是性能分析表明一个 `Mutex` 确实是无法接受的瓶颈，否则请始终使用 `Mutex`、`RwLock` 或通道等更高层次的抽象。安全性和正确性远比微小的性能提升更重要。](#准则-除非你是在编写像-mutex-本身这样的底层同步原语或者是性能分析表明一个-mutex-确实是无法接受的瓶颈否则请始终使用-mutexrwlock-或通道等更高层次的抽象安全性和正确性远比微小的性能提升更重要)
 
 ## 问答
 
@@ -62,7 +61,7 @@
 
 ---
 
-### Q4: 我应该什么时候用 `Rayon`，什么时候用 `async/await` (Tokio/async-std)？
+### Q4: 我应该什么时候用 `Rayon`，什么时候用 `async/await` (Tokio/smol)？
 
 **A4:** 这是一个关于 **CPU 密集型** vs. **I/O 密集型**任务的核心问题。
 
@@ -88,7 +87,11 @@
 - **性能**: 对于非常简单的操作（如递增一个计数器），直接使用 `AtomicI32::fetch_add` 确实会比 `Mutex<i32>` 更快，因为它避免了锁的开销。
 - **危险性**: 这是在与魔鬼交易。直接使用原子类型意味着你必须手动处理**内存排序**，这是并发编程中最复杂、最微妙、最容易出错的部分。一个错误的 `Ordering` 可能导致在某些硬件上正常工作，但在另一些硬件上出现难以复现的数据竞争。
 
-**准则**: 除非你是在编写像 `Mutex` 本身这样的底层同步原语，或者是性能分析表明一个 `Mutex` 确实是无法接受的瓶颈，否则请始终使用 `Mutex`、`RwLock` 或通道等更高层次的抽象。安全性和正确性远比微小的性能提升更重要
+**准则**:
+
+除非你是在编写像 `Mutex` 本身这样的底层同步原语，或者是性能分析表明一个 `Mutex` 确实是无法接受的瓶颈，否则请始终使用 `Mutex`、`RwLock` 或通道等更高层次的抽象。
+安全性和正确性远比微小的性能提升更重要
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -1,31 +1,23 @@
-//! C10 Networks - OpenTelemetry 全链路追踪集成
-//!
-//! 提供完整的 tracing + OpenTelemetry 集成，支持导出到 Jaeger 和标准输出。
-//!
 //! # 设计目标
-//! - 与现有 `tracing` 生态无缝集成
-//! - 支持 OTLP HTTP/gRPC 导出到 Jaeger/Tempo
+//! # design goal
 //! - 提供 stdout 导出器用于开发和调试
+//! - stdout and
 //! - 零成本抽象：未启用时不产生运行时开销
-//!
+//! - cost ：runtime overhead
+//! - zero-cost abstraction：未启用时不Generateruntimeoverhead
 //! # 参考实践
-//! - Microsoft: Application Insights OpenTelemetry 集成
-//! - AWS: Distro for OpenTelemetry (ADOT)
+//! # reference
 //! - Cloudflare: 边缘 tracing 实践
-//!
 //! # 快速开始
-//!
-//! ```rust,no_run
+//! # fast
 //! use c10_networks::telemetry::{init_tracer, TelemetryConfig, ExportTarget};
 //!
 //! #[tokio::main]
 //! async fn main() {
 //!     let config = TelemetryConfig::jaeger_local();
 //!     let _guard = init_tracer(config).await.expect("追踪系统初始化失败");
-//!
 //!     // 你的应用代码...
-//! }
-//! ```
+//!     // application...
 
 use opentelemetry::trace::TracerProvider as _;
 use std::time::Duration;
@@ -34,17 +26,21 @@ use tracing_subscriber::layer::SubscriberExt;
 use tracing_subscriber::util::SubscriberInitExt;
 
 /// 遥测配置
+/// 遥测Configure
 #[derive(Debug, Clone)]
 pub struct TelemetryConfig {
     /// 服务名称
     pub service_name: String,
     /// 服务版本
+    /// this
     pub service_version: String,
     /// 导出目标
+    /// goal
     pub target: ExportTarget,
     /// 批量导出间隔
     pub export_interval: Duration,
     /// 采样率 (0.0 - 1.0)
+    /// (0.0 - 1.0)
     pub sampling_rate: f64,
 }
 
@@ -62,8 +58,7 @@ impl Default for TelemetryConfig {
 
 impl TelemetryConfig {
     /// 本地 Jaeger 开发配置
-    ///
-    /// Jaeger UI: http://localhost:16686
+    /// this Jaeger
     pub fn jaeger_local() -> Self {
         Self {
             service_name: "c10_networks".to_string(),
@@ -75,6 +70,7 @@ impl TelemetryConfig {
     }
 
     /// 标准输出导出配置（开发调试）
+    /// standard output （）
     pub fn stdout() -> Self {
         Self {
             service_name: "c10_networks".to_string(),
@@ -86,6 +82,7 @@ impl TelemetryConfig {
     }
 
     /// OTLP HTTP 端点配置
+    /// OTLP HTTP point
     pub fn otlp_http(endpoint: impl Into<String>) -> Self {
         Self {
             service_name: "c10_networks".to_string(),
@@ -98,19 +95,24 @@ impl TelemetryConfig {
 }
 
 /// 导出目标
+/// goal
 #[derive(Debug, Clone)]
 pub enum ExportTarget {
     /// 标准输出（开发调试）
+    /// standard output （）
+    /// standard output（开发调试）
     Stdout,
     /// 本地 Jaeger (OTLP HTTP, http://localhost:4318)
     JaegerLocal,
     /// 自定义 OTLP HTTP 端点
+    /// definition OTLP HTTP point
+    /// 自definition OTLP HTTP 端point
     OtlpHttp(String),
 }
 
 /// 遥测守卫
-///
 /// 当此守卫被 drop 时，会刷新并关闭 tracer。
+/// when this is drop ，and tracer。
 pub struct TelemetryGuard {
     provider: opentelemetry_sdk::trace::SdkTracerProvider,
 }
@@ -124,9 +126,9 @@ impl Drop for TelemetryGuard {
 }
 
 /// 初始化 Tracer
-///
+/// Tracer
 /// # 示例
-///
+/// # example
 /// ```rust,no_run
 /// use c10_networks::telemetry::{init_tracer, TelemetryConfig};
 ///
@@ -185,6 +187,7 @@ pub async fn init_tracer(
 }
 
 /// 初始化 stdout 导出器（开发调试）
+/// stdout （）
 async fn init_stdout_tracer(
     resource: opentelemetry_sdk::Resource,
     _config: &TelemetryConfig,
@@ -200,6 +203,7 @@ async fn init_stdout_tracer(
 }
 
 /// 初始化 OTLP HTTP 导出器
+/// OTLP HTTP
 async fn init_otlp_tracer(
     resource: opentelemetry_sdk::Resource,
     endpoint: String,
@@ -232,16 +236,15 @@ async fn init_otlp_tracer(
 }
 
 /// 创建网络请求追踪 Span
-///
+/// network Span
 /// # 示例
-///
+/// # example
 /// ```rust
 /// use c10_networks::telemetry::request_span;
 ///
 /// let _span = request_span("GET", "/api/v1/users", "192.168.1.1");
 /// // 请求处理代码...
-/// drop(_span);
-/// ```
+/// //...
 pub fn request_span(method: &str, path: &str, peer_addr: &str) -> Span {
     let otel_name = format!("{} {}", method, path);
     tracing::info_span!(
@@ -254,6 +257,8 @@ pub fn request_span(method: &str, path: &str, peer_addr: &str) -> Span {
 }
 
 /// 创建 DNS 查询追踪 Span
+/// DNS Span
+/// Create DNS 查询追踪 Span
 pub fn dns_query_span(query: &str, record_type: &str) -> Span {
     tracing::info_span!(
         "dns_query",
@@ -264,6 +269,7 @@ pub fn dns_query_span(query: &str, record_type: &str) -> Span {
 }
 
 /// 创建 TCP 连接追踪 Span
+/// TCP Span
 pub fn tcp_connection_span(peer_addr: &str, local_addr: &str) -> Span {
     tracing::info_span!(
         "tcp_connection",
@@ -274,6 +280,7 @@ pub fn tcp_connection_span(peer_addr: &str, local_addr: &str) -> Span {
 }
 
 /// 记录网络错误事件
+/// network
 pub fn record_network_error(span: &Span, error: &dyn std::error::Error) {
     tracing::error!(
         parent: span,

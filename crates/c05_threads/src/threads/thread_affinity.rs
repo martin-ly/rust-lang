@@ -1,10 +1,15 @@
 //! 线程亲和性管理
-//!
+//! thread affinity
 //! 本模块提供了线程亲和性管理功能：
+//! This module provides thread affinity functionality ：
 //! - CPU核心绑定
+//! - CPUcore
 //! - NUMA节点绑定
+//! - NUMAnode
 //! - 动态亲和性调整
+//! - and
 //! - 亲和性监控
+//! - and
 use num_cpus;
 use std::collections::HashMap;
 use std::sync::atomic::{AtomicBool, Ordering};
@@ -13,6 +18,7 @@ use std::thread;
 use std::time::Duration;
 
 /// 线程亲和性配置
+/// thread affinity
 #[derive(Debug, Clone, PartialEq)]
 pub struct ThreadAffinityConfig {
     pub cpu_mask: Vec<usize>,
@@ -33,6 +39,7 @@ impl Default for ThreadAffinityConfig {
 }
 
 /// 线程亲和性管理器
+/// thread affinity
 pub struct ThreadAffinityManager {
     config: Arc<Mutex<ThreadAffinityConfig>>,
     thread_affinities: Arc<Mutex<HashMap<usize, ThreadAffinityConfig>>>,
@@ -280,6 +287,7 @@ pub enum WorkloadType {
 }
 
 /// 线程亲和性监控器
+/// thread affinity
 pub struct ThreadAffinityMonitor {
     manager: Arc<ThreadAffinityManager>,
     monitoring_enabled: Arc<AtomicBool>,
@@ -344,6 +352,7 @@ impl ThreadAffinityManager {
 }
 
 /// 运行所有线程亲和性示例
+/// Run all thread affinity example
 pub fn demonstrate_thread_affinity() {
     println!("=== 线程亲和性演示 ===");
 

@@ -7,6 +7,7 @@ use std::net::{IpAddr, SocketAddr};
 use std::time::Duration;
 
 /// DNS 解析器封装（基于 Hickory-DNS 0.26+）
+/// DNS （ Hickory-DNS 0.26+）
 #[derive(Clone)]
 pub struct DnsResolver {
     inner: TokioResolver,
@@ -20,6 +21,7 @@ impl std::fmt::Debug for DnsResolver {
 
 impl DnsResolver {
     /// 使用系统 DNS 配置创建解析器（/etc/resolv.conf、Registry 等）
+    /// system DNS （/etc/resolv.conf、Registry etc. ）
     pub async fn from_system() -> NetworkResult<Self> {
         let resolver = TokioResolver::builder_tokio()
             .map_err(|e| NetworkError::Other(format!("dns system config: {e}")))?
@@ -29,6 +31,7 @@ impl DnsResolver {
     }
 
     /// 使用给定配置与选项创建解析器（支持自定义 DoT/DoH）
+    /// and （definition DoT/DoH）
     pub async fn from_config(
         config: ResolverConfig,
         mut opts: ResolverOpts,
@@ -58,6 +61,8 @@ impl DnsResolver {
     }
 
     /// 查询 A/AAAA 记录，返回 IP 列表（自动合并）
+    /// A/AAAA ， IP （and ）
+    /// 查询 A/AAAA 记录，Return IP 列表（自动Merge）
     pub async fn lookup_ips(&self, host: &str) -> NetworkResult<Vec<IpAddr>> {
         let lookup = self
             .inner
@@ -68,6 +73,7 @@ impl DnsResolver {
     }
 
     /// 查询 TXT 记录
+    /// TXT
     pub async fn lookup_txt(&self, name: &str) -> NetworkResult<Vec<String>> {
         let lookup = self
             .inner
@@ -85,6 +91,7 @@ impl DnsResolver {
     }
 
     /// 查询 MX 记录
+    /// MX
     pub async fn lookup_mx(&self, name: &str) -> NetworkResult<Vec<(u16, String)>> {
         let lookup = self
             .inner
@@ -104,6 +111,7 @@ impl DnsResolver {
     }
 
     /// 查询 SRV 记录
+    /// SRV
     pub async fn lookup_srv(&self, name: &str) -> NetworkResult<Vec<(SRV, String)>> {
         let lookup = self
             .inner
@@ -123,6 +131,8 @@ impl DnsResolver {
     }
 
     /// 逆向解析（PTR）
+    /// （PTR）
+    /// 逆向Parse（PTR）
     pub async fn reverse_lookup(&self, addr: IpAddr) -> NetworkResult<Vec<String>> {
         let lookup = self
             .inner
@@ -139,7 +149,6 @@ impl DnsResolver {
             .collect())
     }
 
-    /// 将域名解析为可连接的 SocketAddr（带端口）
     pub async fn resolve_socket_addrs(
         &self,
         host: &str,

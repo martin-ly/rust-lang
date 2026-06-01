@@ -1,11 +1,12 @@
 //! C02 类型系统练习
-//!
+//! C02 type system
 //! 运行: cargo test --package c02_type_system -- exercises::type_tricks
 
 #[cfg(test)]
 mod tests {
     use std::assert_matches;
     /// 练习 1: 实现一个类型，它可以是整数或字符串
+    /// 1: type ，can or
     #[derive(Debug, PartialEq)]
     enum IntOrString {
         Int(i32),
@@ -22,6 +23,7 @@ mod tests {
     }
 
     /// 练习 2: 实现一个泛型函数，返回类型的默认值
+    /// 2: generic function ，type
     fn default_value<T: Default>() -> T {
         T::default()
     }
@@ -34,6 +36,7 @@ mod tests {
     }
 
     /// 练习 3: 使用类型别名简化复杂类型
+    /// 3: type complex type
     type ResultMap<K, V> = Result<std::collections::HashMap<K, V>, String>;
 
     fn create_map<K: std::hash::Hash + Eq, V>() -> ResultMap<K, V> {
@@ -47,6 +50,7 @@ mod tests {
     }
 
     /// 练习 4: Newtype 模式
+    /// 4: Newtype
     #[derive(Debug, Clone, Copy, PartialEq, Eq)]
     struct UserId(u64);
     #[derive(Debug, Clone, Copy, PartialEq, Eq)]

@@ -1,13 +1,5 @@
-//! Rust 1.92.0 WebAssembly 特性演示示例
-//!
-//! 本示例展示了 Rust 1.92.0 在 WebAssembly 场景中的应用，包括：
-//!
-//! 1. MaybeUninit 在 WASM 内存管理中的应用
-//! 2. NonZero::div_ceil 在 WASM 缓冲区分配中的应用
-//! 3. 联合体原始引用在 WASM FFI 中的应用
-//! 4. 迭代器方法特化在 WASM 性能优化中的应用
-//! 5. rotate_right 在 WASM 数据处理中的应用
-//! 6. Location::file_as_c_str 在 WASM 调试中的应用
+//! 5. rotate_right in WASM 数据Handleinapplication
+//! 6. Location::file_as_c_str in WASM 调试inapplication
 use c12_wasm::rust_192_features::*;
 use std::num::NonZeroUsize;
 
@@ -35,7 +27,6 @@ fn main() {
     println!("\n=== 所有演示完成 ===");
 }
 
-/// 演示 MaybeUninit 在 WASM 内存管理中的应用
 fn demo_maybeuninit() {
     println!("1. MaybeUninit 在 WASM 内存管理中的应用");
     println!("   Rust 1.92.0: 正式文档化的 MaybeUninit 使用模式\n");
@@ -50,7 +41,6 @@ fn demo_maybeuninit() {
     }
 }
 
-/// 演示 NonZero::div_ceil 在 WASM 缓冲区分配中的应用
 fn demo_nonzero_div_ceil() {
     println!("\n2. NonZero::div_ceil 在 WASM 缓冲区分配中的应用");
     println!("   Rust 1.92.0: 新增的 div_ceil 方法可以安全地计算向上取整除法\n");
@@ -76,7 +66,6 @@ fn demo_nonzero_div_ceil() {
     println!("   5000 字节需要数据包数: {}", packets);
 }
 
-/// 演示联合体原始引用在 WASM FFI 中的应用
 fn demo_union_raw_refs() {
     println!("\n3. 联合体原始引用在 WASM FFI 中的应用");
     println!("   Rust 1.92.0: 允许在安全代码中使用原始引用访问联合体字段\n");
@@ -92,7 +81,6 @@ fn demo_union_raw_refs() {
     println!("   可变原始引用地址: {:p}", mut_raw_ref);
 }
 
-/// 演示迭代器方法特化在 WASM 性能优化中的应用
 fn demo_iterator_specialization() {
     println!("\n4. 迭代器方法特化在 WASM 性能优化中的应用");
     println!("   Rust 1.92.0: 为 TrustedLen 迭代器特化了比较方法\n");
@@ -112,7 +100,7 @@ fn demo_iterator_specialization() {
     println!("   向量1 == 向量3: {}", are_equal_1_3);
 }
 
-/// 演示 rotate_right 在 WASM 数据处理中的应用
+/// Demonstration of rotate_right in WASM 数据Handleinapplication
 fn demo_rotate_right() {
     println!("\n5. rotate_right 在 WASM 数据处理中的应用");
     println!("   Rust 1.92.0: 稳定化的 rotate_right 方法提供高效的数据旋转\n");
@@ -130,7 +118,7 @@ fn demo_rotate_right() {
     println!("   缓冲区内容: {:?}", circular_buffer.buffer());
 }
 
-/// 演示 Location::file_as_c_str 在 WASM 调试中的应用
+/// Demonstration of Location::file_as_c_str in WASM 调试inapplication
 fn demo_location_debug() {
     println!("\n6. Location::file_as_c_str 在 WASM 调试中的应用");
     println!("   Rust 1.92.0: 稳定化的 Location::file_as_c_str 提供调试信息\n");

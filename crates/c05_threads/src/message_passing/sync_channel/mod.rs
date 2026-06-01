@@ -1,7 +1,6 @@
 //! 同步容量通道：标准库 `std::sync::mpsc::sync_channel`
 //! 用法：
-//! ```
-//! use c05_threads::message_passing::sync_channel::{sync_channel, Receiver, SyncSender};
+//! ：
 //! let (tx, rx): (SyncSender<i32>, Receiver<i32>) = sync_channel(1);
 //! tx.send(1).unwrap();
 //! assert_eq!(rx.recv().unwrap(), 1);

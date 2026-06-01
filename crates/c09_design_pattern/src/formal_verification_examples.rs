@@ -1,10 +1,16 @@
 //! 形式化验证示例：设计模式的正确性证明
+//! example ：design
 //!
 //! 本模块提供设计模式的形式化验证示例，包括：
+//! This module provides design example ，：
 //! - 类型级证明
+//! - type
 //! - 不变量验证
+//! - variable
 //! - 终止性证明
+//! -
 //! - 并发安全性证明
+//! - concurrency
 
 // 允许文档注释后空行，因为本模块需要格式化分隔
 #![allow(clippy::empty_line_after_doc_comments)]
@@ -17,13 +23,17 @@ use std::sync::{Arc, Mutex};
 // ============================================================================
 
 /// 状态标记：未初始化
+/// state mark ：
 pub struct Uninitialized;
 /// 状态标记：已初始化
+/// state mark ：
 pub struct Initialized;
 /// 状态标记：已关闭
+/// state mark ：
 pub struct Closed;
 
 /// 状态机：文件句柄（类型级状态）
+/// state machine ：file handle （type state ）
 pub struct FileHandle<State> {
     path: String,
     _state: PhantomData<State>,
@@ -31,6 +41,7 @@ pub struct FileHandle<State> {
 
 impl FileHandle<Uninitialized> {
     /// 创建未初始化的文件句柄
+    /// file handle
     pub fn new(path: String) -> Self {
         FileHandle {
             path,
@@ -39,6 +50,7 @@ impl FileHandle<Uninitialized> {
     }
 
     /// 打开文件，转换到Initialized状态
+    /// ，conversion to Initializedstate
     pub fn open(self) -> Result<FileHandle<Initialized>, std::io::Error> {
         // 实际IO操作
         println!("Opening file: {}", self.path);
@@ -51,6 +63,7 @@ impl FileHandle<Uninitialized> {
 
 impl FileHandle<Initialized> {
     /// 读取文件（只有Initialized状态可以读取）
+    /// （Initializedstate can ）
     pub fn read(&self) -> Result<String, std::io::Error> {
         println!("Reading from file: {}", self.path);
         Ok("file contents".to_string())
@@ -63,6 +76,7 @@ impl FileHandle<Initialized> {
     }
 
     /// 关闭文件，转换到Closed状态
+    /// ，conversion to Closedstate
     pub fn close(self) -> FileHandle<Closed> {
         println!("Closing file: {}", self.path);
         FileHandle {
@@ -74,33 +88,41 @@ impl FileHandle<Initialized> {
 
 impl FileHandle<Closed> {
     /// 获取文件路径（Closed状态仍可访问）
+    /// （Closedstate ）
     pub fn path(&self) -> &str {
         &self.path
     }
 }
 
 /// **形式化证明**：
+/// ****：
 ///
 /// 定理：非法状态转换在编译时被拒绝
+/// theorem ：state conversion in compile-time is
 ///
 /// 证明：
+/// ：
 /// 1. `FileHandle<Uninitialized>` 只能调用 `open()`
 /// 2. `FileHandle<Initialized>` 只能调用 `read()/write()/close()`
 /// 3. `FileHandle<Closed>` 只能调用 `path()`
 /// 4. 类型系统保证无法跨状态调用方法
+/// 4. type system state method
 ///
 /// 例如，以下代码无法编译：
+/// for example ，under ：
 /// ```compile_fail
 /// let file = FileHandle::<Uninitialized>::new("test.txt".into());
 /// file.read(); // 错误：Uninitialized状态无read方法
 /// ```
 ///
 /// 因此，状态转换的正确性在**编译时**得到保证。∎
+/// therefore ，state conversion in **compile-time **to 。∎
 // ============================================================================
 // 2. 不变量：运行时验证设计模式的正确性
 // ============================================================================
 
 /// 单例模式：保证唯一性不变量
+/// singleton ：variable
 pub struct Singleton {
     data: i32,
 }
@@ -109,13 +131,19 @@ static SINGLETON: std::sync::OnceLock<Singleton> = std::sync::OnceLock::new();
 
 impl Singleton {
     /// 获取单例实例
+    /// singleton
     ///
     /// **不变量**：在任何时刻，最多存在一个Singleton实例
+    /// **variable **：in moment ，at most in Singleton
     ///
     /// **证明**：
+    /// ****：
     /// 1. `OnceLock::get_or_init` 保证闭包最多执行一次
+    /// 1. `OnceLock::get_or_init` at most
     /// 2. 所有调用返回相同的引用
+    /// 2. all reference
     /// 3. 因此，唯一性不变量在运行时成立。∎
+    /// 3. therefore ，variable in runtime 。∎
     pub fn instance() -> &'static Singleton {
         SINGLETON.get_or_init(|| Singleton { data: 42 })
     }
@@ -126,6 +154,7 @@ impl Singleton {
 }
 
 /// 观察者模式：一致性不变量
+/// observer ：consistency variable
 pub struct Subject {
     state: i32,
     observers: Vec<Arc<Mutex<dyn Observer>>>,
@@ -148,14 +177,21 @@ impl Subject {
     }
 
     /// 通知所有观察者
+    /// all observer
     ///
     /// **不变量**：所有观察者的状态与Subject一致
+    /// **variable **：all observer state and Subject
     ///
     /// **证明**（通过循环不变量）：
+    /// ****（circulation variable ）：
     /// 初始：所有观察者状态 = 旧state
+    /// ：all observer state = state
     /// 循环体：对每个观察者调用 `update(new_state)`
+    /// circulation volume ：to observer `update(new_state)`
     /// 终止：所有观察者状态 = new_state
+    /// ：all observer state = new_state
     /// 因此，一致性不变量在 `notify()` 后成立。∎
+    /// therefore ，consistency variable in `notify()` after 。∎
     pub fn notify(&self) {
         for observer in &self.observers {
             if let Ok(mut obs) = observer.lock() {
@@ -181,20 +217,26 @@ impl Default for Subject {
 // ============================================================================
 
 /// 递归快速排序：终止性证明
+/// quick sort ：
 ///
 /// **定理**：对于任意有限数组，`quick_sort` 在有限步内终止
+/// **theorem **：to ，`quick_sort` in inside
 ///
 /// **证明**（通过良基归纳）：
+/// ****（summarize ）：
 ///
 /// 定义测度函数（measure）：`μ(arr) = arr.len()`
 ///
 /// 1. **基础情况**：`arr.len() <= 1` 时，直接返回，终止。
+/// 1. **foundation situation **：`arr.len() <= 1` ，，。
 /// 2. **递归情况**：`arr.len() > 1` 时：
+/// 2. **situation **：`arr.len() > 1` ：
 ///    - 分割为 `left` 和 `right`
 ///    - `μ(left) < μ(arr)` 且 `μ(right) < μ(arr)`
 ///    - 根据归纳假设，`quick_sort(left)` 和 `quick_sort(right)` 终止
 ///    - 因此 `quick_sort(arr)` 终止
 /// 3. **结论**：对所有有限数组，算法终止。∎
+/// 3. ****：to all ，algorithm 。∎
 pub fn quick_sort<T: Ord + Clone>(arr: &[T]) -> Vec<T> {
     // 基础情况
     if arr.len() <= 1 {
@@ -222,15 +264,22 @@ pub fn quick_sort<T: Ord + Clone>(arr: &[T]) -> Vec<T> {
 // ============================================================================
 
 /// 线程安全的计数器：数据竞争自由证明
+/// thread-safe ：
 ///
 /// **定理**：`SafeCounter` 的所有操作无数据竞争
+/// **theorem **：`SafeCounter` all
 ///
 /// **证明**：
+/// ****：
 /// 1. `counter` 字段类型为 `Arc<Mutex<u64>>`
 /// 2. `Mutex::lock()` 保证互斥访问
+/// 2. `Mutex::lock()`
 /// 3. 任意时刻最多一个线程持有锁
+/// 3. moment at most thread lock
 /// 4. 因此，不可能有两个线程同时访问 `counter`
+/// 4. therefore ，may thread `counter`
 /// 5. 根据Rust内存模型，无数据竞争。∎
+/// 5. according to Rustmemory model ，。∎
 #[derive(Clone)]
 pub struct SafeCounter {
     counter: Arc<Mutex<u64>>,
@@ -262,14 +311,21 @@ impl Default for SafeCounter {
 }
 
 /// 生产者-消费者：死锁自由证明
+/// -：lock
 ///
 /// **定理**：使用 `mpsc::channel` 的生产者-消费者模式无死锁
+/// **theorem **： `mpsc::channel` -lock
 ///
 /// **证明**（通过资源排序）：
+/// ****（ordering ）：
 /// 1. 生产者只持有 `Sender`
+/// 1. `Sender`
 /// 2. 消费者只持有 `Receiver`
+/// 2. `Receiver`
 /// 3. 资源依赖图无环：Sender → Receiver（单向）
+/// 3. ：Sender → Receiver（）
 /// 4. 根据Coffman条件（循环等待），无死锁。∎
+/// 4. according to Coffmancondition （circulation etc. ），lock 。∎
 pub mod producer_consumer {
     use std::sync::mpsc;
     use std::thread;
@@ -301,6 +357,7 @@ pub mod producer_consumer {
 // ============================================================================
 
 /// 数据库连接：类型级生命周期管理
+/// database ：type lifetime
 pub struct DatabaseConnection<State> {
     conn_string: String,
     _state: PhantomData<State>,
@@ -342,14 +399,20 @@ impl DatabaseConnection<Connected> {
 }
 
 /// **形式化证明**：
+/// ****：
 ///
 /// 定理：资源泄漏在编译时被防止
+/// theorem ：in compile-time is
 ///
 /// 证明：
+/// ：
 /// 1. `DatabaseConnection<Connected>` 拥有所有权
 /// 2. 离开作用域时，必须显式 `disconnect()` 或被drop
+/// 2. role domain ，must `disconnect()` or is drop
 /// 3. Rust的所有权系统保证资源被释放
+/// 3. Rustownership system is
 /// 4. 因此，无资源泄漏。∎
+/// 4. therefore ，。∎
 // ============================================================================
 // 测试用例：验证形式化性质
 // ============================================================================

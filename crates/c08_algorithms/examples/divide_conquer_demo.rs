@@ -1,12 +1,15 @@
 //! 分治算法示例
-//!
+//! divide and conquer algorithm example
 //! 本示例展示C08算法模块的分治算法：
+//! this example C08algorithm module divide and conquer algorithm ：
 //! - 归并排序
+//! - merge sort
 //! - 快速排序
+//! - quick sort
 //! - 最大子数组和
-//!
+//! - maximum and
 //! 运行方式:
-//! ```bash
+//! Run way :
 //! cargo run --example divide_conquer_demo
 //! ```
 fn main() {
@@ -40,6 +43,7 @@ fn main() {
 }
 
 /// 归并排序
+/// merge sort
 fn merge_sort(arr: &mut [i32]) {
     if arr.len() <= 1 {
         return;
@@ -84,6 +88,7 @@ fn merge(arr: &mut [i32], mid: usize) {
 }
 
 /// 最大子数组和（分治）
+/// maximum and （）
 fn max_subarray_sum(arr: &[i32]) -> i32 {
     if arr.is_empty() {
         return 0;

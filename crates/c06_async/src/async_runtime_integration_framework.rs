@@ -1,11 +1,18 @@
 //! 异步运行时集成框架
+//! async runtime framework
 //!
 //! 本模块提供了一个高级的异步运行时集成框架，支持：
+//! This module provides async runtime framework ，：
 //! - 多运行时组合和切换
+//! - runtime combination and switching
 //! - 运行时适配器模式
+//! - runtime adapter
 //! - 异步同步转换机制
+//! - async synchronous conversion mechanism
 //! - 聚合组合设计模式
+//! - aggregation combination design
 //! - 性能监控和优化
+//! - performance and optimization
 use std::sync::Arc;
 use std::time::Duration;
 use std::collections::HashMap;
@@ -19,6 +26,7 @@ use serde::{Deserialize, Serialize};
 use async_trait::async_trait;
 
 /// 异步运行时类型枚举
+/// async runtime type enum
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum AsyncRuntimeType {
     Std,
@@ -28,6 +36,7 @@ pub enum AsyncRuntimeType {
 }
 
 /// 运行时配置
+/// runtime
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RuntimeConfig {
     pub runtime_type: AsyncRuntimeType,
@@ -50,6 +59,7 @@ impl Default for RuntimeConfig {
 }
 
 /// 运行时性能指标
+/// runtime performance indicator
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RuntimeMetrics {
     pub task_count: u64,
@@ -76,6 +86,7 @@ impl Default for RuntimeMetrics {
 }
 
 /// 异步任务抽象
+/// async task
 #[async_trait]
 pub trait AsyncTask: Send + Sync {
     async fn execute(&self) -> Result<String>;
@@ -85,6 +96,7 @@ pub trait AsyncTask: Send + Sync {
 }
 
 /// 任务优先级
+/// task
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
 pub enum TaskPriority {
     Low = 1,
@@ -94,6 +106,7 @@ pub enum TaskPriority {
 }
 
 /// 运行时适配器接口
+/// runtime adapter
 #[async_trait]
 pub trait RuntimeAdapter: Send + Sync {
     async fn execute_task(&self, task: Box<dyn AsyncTask>) -> Result<String>;
@@ -104,6 +117,7 @@ pub trait RuntimeAdapter: Send + Sync {
 }
 
 /// Tokio运行时适配器
+/// Tokioruntime adapter
 pub struct TokioRuntimeAdapter {
     config: RuntimeConfig,
     metrics: Arc<Mutex<RuntimeMetrics>>,
@@ -206,6 +220,7 @@ impl Clone for TokioRuntimeAdapter {
 }
 
 /// 异步运行时集成框架
+/// async runtime framework
 pub struct AsyncRuntimeIntegrationFramework {
     adapters: Arc<RwLock<HashMap<AsyncRuntimeType, Box<dyn RuntimeAdapter>>>>,
     config: RuntimeConfig,
@@ -213,6 +228,7 @@ pub struct AsyncRuntimeIntegrationFramework {
 }
 
 /// 指标收集器
+/// indicator
 #[derive(Debug)]
 pub struct MetricsCollector {
     runtime_metrics: HashMap<AsyncRuntimeType, RuntimeMetrics>,
@@ -250,6 +266,7 @@ impl AsyncRuntimeIntegrationFramework {
     }
 
     /// 注册运行时适配器
+    /// runtime adapter
     pub async fn register_adapter(&self, adapter: Box<dyn RuntimeAdapter>) -> Result<()> {
         let runtime_type = adapter.get_runtime_type();
         let mut adapters = self.adapters.write().await;
@@ -259,6 +276,7 @@ impl AsyncRuntimeIntegrationFramework {
     }
 
     /// 执行任务（自动选择最佳运行时）
+    /// task （runtime ）
     pub async fn execute_task(&self, task: Box<dyn AsyncTask>) -> Result<String> {
         let runtime_type = self.select_optimal_runtime(&task).await;
         let adapters = self.adapters.read().await;
@@ -273,6 +291,7 @@ impl AsyncRuntimeIntegrationFramework {
     }
 
     /// 执行批量任务（负载均衡）
+    /// task （）
     pub async fn execute_batch(&self, tasks: Vec<Box<dyn AsyncTask>>) -> Result<Vec<String>> {
         let adapters = self.adapters.read().await;
         let available_runtimes: Vec<_> = adapters.keys().cloned().collect();
@@ -314,6 +333,7 @@ impl AsyncRuntimeIntegrationFramework {
     }
 
     /// 运行时性能监控
+    /// runtime performance
     pub async fn monitor_performance(&self) -> Result<()> {
         let adapters = self.adapters.read().await;
         let mut collector = self.metrics_collector.lock().await;
@@ -333,6 +353,7 @@ impl AsyncRuntimeIntegrationFramework {
     }
 
     /// 运行时健康检查
+    /// runtime health check
     pub async fn health_check(&self) -> Result<HashMap<AsyncRuntimeType, bool>> {
         let adapters = self.adapters.read().await;
         let mut health_status = HashMap::new();
@@ -350,6 +371,7 @@ impl AsyncRuntimeIntegrationFramework {
     }
 
     /// 运行时切换
+    /// runtime switching
     pub async fn switch_runtime(&self, from: AsyncRuntimeType, to: AsyncRuntimeType) -> Result<()> {
         let adapters = self.adapters.read().await;
 
@@ -363,6 +385,7 @@ impl AsyncRuntimeIntegrationFramework {
     }
 
     /// 选择最优运行时
+    /// runtime
     async fn select_optimal_runtime(&self, task: &dyn AsyncTask) -> AsyncRuntimeType {
         // 简化的运行时选择逻辑
         match task.get_priority() {
@@ -374,6 +397,7 @@ impl AsyncRuntimeIntegrationFramework {
 }
 
 /// 健康检查任务
+/// health check task
 pub struct HealthCheckTask {
     runtime_type: AsyncRuntimeType,
 }
@@ -405,6 +429,7 @@ impl AsyncTask for HealthCheckTask {
 }
 
 /// 示例任务实现
+/// example task
 pub struct ExampleTask {
     name: String,
     priority: TaskPriority,
@@ -442,6 +467,7 @@ impl AsyncTask for ExampleTask {
 }
 
 /// 异步同步转换服务
+/// async synchronous conversion
 pub struct AsyncSyncConversionService {
     thread_pool: Arc<Semaphore>,
     conversion_cache: Arc<RwLock<HashMap<String, String>>>,
@@ -456,6 +482,7 @@ impl AsyncSyncConversionService {
     }
 
     /// 异步到同步转换
+    /// async to synchronous conversion
     pub async fn async_to_sync<T, F>(&self, async_operation: F) -> Result<T>
     where
         F: Future<Output = Result<T>> + Send + 'static,
@@ -466,6 +493,7 @@ impl AsyncSyncConversionService {
     }
 
     /// 同步到异步转换
+    /// synchronous to async conversion
     pub async fn sync_to_async<F, T>(&self, sync_operation: F) -> Result<T>
     where
         F: FnOnce() -> Result<T> + Send + 'static,
@@ -476,6 +504,7 @@ impl AsyncSyncConversionService {
     }
 
     /// 混合转换模式
+    /// conversion
     pub async fn hybrid_conversion(&self) -> Result<(String, String)> {
         // 异步操作
         let async_result = self.async_to_sync(async {
@@ -494,6 +523,7 @@ impl AsyncSyncConversionService {
 }
 
 /// 聚合组合设计模式服务
+/// aggregation combination design
 pub struct AggregationCompositionService {
     component_registry: Arc<RwLock<HashMap<String, Box<dyn AsyncComponent + Send + Sync>>>>,
     aggregation_strategies: Arc<RwLock<HashMap<String, AggregationStrategy>>>,
@@ -533,6 +563,7 @@ impl AggregationCompositionService {
     }
 
     /// 顺序聚合
+    /// order aggregation
     pub async fn sequential_aggregation(&self, component_names: Vec<String>, input: &str) -> Result<Vec<String>> {
         let registry = self.component_registry.read().await;
         let mut results = Vec::new();
@@ -550,6 +581,7 @@ impl AggregationCompositionService {
     }
 
     /// 并行聚合
+    /// parallelism aggregation
     pub async fn parallel_aggregation(&self, component_names: Vec<String>, input: &str) -> Result<Vec<String>> {
         let registry = self.component_registry.read().await;
         let mut tasks = Vec::new();
@@ -565,6 +597,7 @@ impl AggregationCompositionService {
     }
 
     /// 管道聚合
+    /// pipe aggregation
     pub async fn pipeline_aggregation(&self, pipeline_stages: Vec<Vec<String>>, input: &str) -> Result<Vec<String>> {
         let mut current_input = input.to_string();
         let mut all_results = Vec::new();
@@ -580,6 +613,7 @@ impl AggregationCompositionService {
 }
 
 /// 示例组件实现
+/// example
 pub struct DataProcessingComponent {
     name: String,
     processing_delay: Duration,
@@ -611,6 +645,7 @@ impl AsyncComponent for DataProcessingComponent {
 }
 
 /// 综合演示函数
+/// synthesize demonstration function
 pub async fn demonstrate_async_runtime_integration_framework() -> Result<()> {
     println!("🚀 异步运行时集成框架演示");
     println!("================================================");

@@ -1,11 +1,18 @@
 //! 异步日志调试和跟踪模块
+//! async and module
 //!
 //! 本模块提供了完整的异步日志系统，包括：
+//! This module provides complete async system ，：
 //! - 结构化日志记录
+//! - structure
 //! - 异步任务跟踪
+//! - async task
 //! - 性能监控
+//! - performance
 //! - 本地调试工具
+//! - this tool
 //! - 分布式追踪支持
+//! - distribution
 use anyhow::Result;
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 use std::collections::HashMap;
@@ -18,6 +25,7 @@ use tracing::{Level, debug, error, info, info_span, warn};
 use tracing_subscriber::{EnvFilter, layer::SubscriberExt, util::SubscriberInitExt};
 
 /// 自定义序列化函数，跳过 Instant 字段
+/// definition sequence function ， Instant field
 fn serialize_instant<S>(_instant: &Instant, serializer: S) -> Result<S::Ok, S::Error>
 where
     S: Serializer,
@@ -27,6 +35,7 @@ where
 }
 
 /// 自定义反序列化函数，为 Instant 字段提供默认值
+/// definition sequence function ，as Instant field
 fn deserialize_instant<'de, D>(_deserializer: D) -> Result<Instant, D::Error>
 where
     D: Deserializer<'de>,
@@ -36,19 +45,25 @@ where
 }
 
 /// 异步日志配置
+/// async
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AsyncLoggingConfig {
     /// 日志级别
+    /// level
     pub log_level: String,
     /// 是否启用结构化日志
+    /// structure
     pub enable_structured_logging: bool,
     /// 是否启用性能监控
+    /// performance
     pub enable_performance_monitoring: bool,
     /// 是否启用分布式追踪
+    /// distribution
     pub enable_distributed_tracing: bool,
     /// 日志输出格式
     pub log_format: LogFormat,
     /// 最大日志文件大小（MB）
+    /// maximum （MB）
     pub max_log_file_size_mb: u64,
     /// 日志文件保留天数
     pub log_retention_days: u32,
@@ -76,25 +91,33 @@ impl Default for AsyncLoggingConfig {
 }
 
 /// 异步任务信息
+/// async task
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AsyncTaskInfo {
     /// 任务ID
+    /// task ID
     pub task_id: String,
     /// 任务名称
+    /// task
     pub name: String,
     /// 开始时间
+    /// time
     #[serde(
         serialize_with = "serialize_instant",
         deserialize_with = "deserialize_instant"
     )]
     pub start_time: Instant,
     /// 任务状态
+    /// task state
     pub status: TaskStatus,
     /// 任务优先级
+    /// task
     pub priority: TaskPriority,
     /// 任务元数据
+    /// task
     pub metadata: HashMap<String, String>,
     /// 错误信息（如果有）
+    /// error message （if ）
     pub error: Option<String>,
 }
 
@@ -116,25 +139,34 @@ pub enum TaskPriority {
 }
 
 /// 性能指标
+/// performance indicator
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PerformanceMetrics {
     /// 总任务数
+    /// task
     pub total_tasks: u64,
     /// 成功任务数
+    /// task
     pub successful_tasks: u64,
     /// 失败任务数
+    /// task
     pub failed_tasks: u64,
     /// 取消任务数
+    /// task
     pub cancelled_tasks: u64,
     /// 平均执行时间（纳秒）
+    /// time （）
     pub average_execution_time_ns: u64,
     /// 最大执行时间（纳秒）
+    /// maximum time （）
     pub max_execution_time_ns: u64,
     /// 最小执行时间（纳秒）
+    /// minimum time （）
     pub min_execution_time_ns: u64,
     /// 成功率
     pub success_rate: f64,
     /// 吞吐量（任务/秒）
+    /// （task /）
     pub throughput_tasks_per_second: f64,
 }
 
@@ -155,6 +187,7 @@ impl Default for PerformanceMetrics {
 }
 
 /// 异步任务跟踪器
+/// async task
 pub struct AsyncTaskTracker {
     config: AsyncLoggingConfig,
     tasks: Arc<RwLock<HashMap<String, AsyncTaskInfo>>>,
@@ -173,6 +206,7 @@ impl AsyncTaskTracker {
     }
 
     /// 初始化日志系统
+    /// system
     pub fn init_logging(&self) -> Result<()> {
         let env_filter = EnvFilter::try_from_default_env()
             .unwrap_or_else(|_| EnvFilter::new(&self.config.log_level));
@@ -200,6 +234,7 @@ impl AsyncTaskTracker {
     }
 
     /// 开始跟踪任务
+    /// task
     pub async fn start_task(
         &self,
         name: String,
@@ -233,6 +268,7 @@ impl AsyncTaskTracker {
     }
 
     /// 完成任务
+    /// task
     pub async fn complete_task(&self, task_id: &str) -> Result<()> {
         let execution_time = {
             let mut tasks = self.tasks.write().await;
@@ -259,6 +295,7 @@ impl AsyncTaskTracker {
     }
 
     /// 任务失败
+    /// task
     pub async fn fail_task(&self, task_id: &str, error: String) -> Result<()> {
         let execution_time = {
             let mut tasks = self.tasks.write().await;
@@ -287,6 +324,7 @@ impl AsyncTaskTracker {
     }
 
     /// 取消任务
+    /// task
     pub async fn cancel_task(&self, task_id: &str) -> Result<()> {
         let execution_time = {
             let mut tasks = self.tasks.write().await;
@@ -313,23 +351,27 @@ impl AsyncTaskTracker {
     }
 
     /// 获取任务信息
+    /// task
     pub async fn get_task_info(&self, task_id: &str) -> Option<AsyncTaskInfo> {
         let tasks = self.tasks.read().await;
         tasks.get(task_id).cloned()
     }
 
     /// 获取所有任务信息
+    /// all task
     pub async fn get_all_tasks(&self) -> Vec<AsyncTaskInfo> {
         let tasks = self.tasks.read().await;
         tasks.values().cloned().collect()
     }
 
     /// 获取性能指标
+    /// performance indicator
     pub async fn get_performance_metrics(&self) -> PerformanceMetrics {
         self.performance_monitor.get_metrics().await
     }
 
     /// 清理已完成的任务
+    /// task
     pub async fn cleanup_completed_tasks(&self) -> Result<()> {
         let mut tasks = self.tasks.write().await;
         let initial_count = tasks.len();
@@ -346,6 +388,7 @@ impl AsyncTaskTracker {
 }
 
 /// 异步性能监控器
+/// async performance
 pub struct AsyncPerformanceMonitor {
     metrics: Arc<Mutex<PerformanceMetrics>>,
     start_time: Instant,
@@ -418,6 +461,7 @@ impl AsyncPerformanceMonitor {
 }
 
 /// 异步日志装饰器
+/// async decorator
 pub struct AsyncLoggingDecorator {
     tracker: Arc<AsyncTaskTracker>,
 }
@@ -428,6 +472,7 @@ impl AsyncLoggingDecorator {
     }
 
     /// 装饰异步函数，自动添加日志和跟踪
+    /// async function ，and
     pub async fn execute_with_logging<F, T>(
         &self,
         name: String,
@@ -459,7 +504,9 @@ impl AsyncLoggingDecorator {
 }
 
 /// 结构化日志记录器
+/// structure
 /// 日志记录器用于记录结构化日志，并将其与异步任务跟踪和性能监控集成在一起
+/// structure ，and will its and async task and performance in
 #[allow(dead_code)]
 pub struct StructuredLogger {
     tracker: Arc<AsyncTaskTracker>,
@@ -471,6 +518,7 @@ impl StructuredLogger {
     }
 
     /// 记录结构化日志
+    /// structure
     pub async fn log_structured(
         &self,
         level: Level,
@@ -510,6 +558,7 @@ impl StructuredLogger {
     }
 
     /// 记录性能事件
+    /// performance
     pub async fn log_performance_event(&self, operation: &str, duration: Duration, success: bool) {
         let mut fields = HashMap::new();
         fields.insert("operation".to_string(), operation.to_string());
@@ -522,6 +571,7 @@ impl StructuredLogger {
 }
 
 /// 本地调试工具
+/// this tool
 pub struct LocalDebugger {
     tracker: Arc<AsyncTaskTracker>,
     breakpoints: Arc<RwLock<HashMap<String, bool>>>,
@@ -536,6 +586,7 @@ impl LocalDebugger {
     }
 
     /// 设置断点
+    /// point
     pub async fn set_breakpoint(&self, task_name: &str) {
         let mut breakpoints = self.breakpoints.write().await;
         breakpoints.insert(task_name.to_string(), true);
@@ -543,6 +594,7 @@ impl LocalDebugger {
     }
 
     /// 清除断点
+    /// point
     pub async fn clear_breakpoint(&self, task_name: &str) {
         let mut breakpoints = self.breakpoints.write().await;
         breakpoints.remove(task_name);
@@ -550,12 +602,14 @@ impl LocalDebugger {
     }
 
     /// 检查断点
+    /// point
     pub async fn check_breakpoint(&self, task_name: &str) -> bool {
         let breakpoints = self.breakpoints.read().await;
         breakpoints.get(task_name).copied().unwrap_or(false)
     }
 
     /// 调试模式执行任务
+    /// task
     pub async fn debug_execute<F, T>(&self, task_name: &str, operation: F) -> Result<T>
     where
         F: std::future::Future<Output = Result<T>>,
@@ -605,6 +659,7 @@ pub struct DebugInfo {
 }
 
 /// 综合演示函数
+/// synthesize demonstration function
 pub async fn demonstrate_async_logging_debugging() -> Result<()> {
     println!("🚀 异步日志调试和跟踪系统演示");
     println!("================================================");

@@ -1,12 +1,19 @@
 //! Rust 1.95 特性 —— 设计模式场景
+//! Rust 1.95 feature —— design scenario
 //!
 //! # 概述
+//! #
 //!
 //! Rust 1.95 为设计模式实现带来的增强：
+//! Rust 1.95 as design ：
 //! - **`cfg_select!`** — 跨平台抽象工厂
+//! - **`cfg_select!`** — platform factory
 //! - **`Atomic*::update`** — 单例模式的并发初始化
+//! - **`Atomic*::update`** — singleton concurrency
 //! - **`if let` guards** — 状态机模式的条件转换
+//! - **`if let` guards** — state machine condition conversion
 //! - **`cold_path`** — 错误处理路径优化
+//! - **`cold_path`** — error handling optimization
 
 use std::sync::atomic::{AtomicUsize, Ordering};
 
@@ -15,12 +22,15 @@ use std::sync::atomic::{AtomicUsize, Ordering};
 // ============================================================================
 
 /// # 抽象工厂模式（跨平台）
+/// # factory （platform ）
 ///
 /// `cfg_select!` 在编译期选择平台特定的实现，零运行时开销。
+/// `cfg_select!` in platform ，runtime overhead 。
 pub struct PlatformAbstractFactory;
 
 impl PlatformAbstractFactory {
     /// 创建平台特定的线程池大小推荐值
+    /// platform thread pool
     pub const DEFAULT_THREAD_POOL_SIZE: usize = cfg_select! {
         target_os = "linux" => 8,
         target_os = "macos" => 4,
@@ -35,6 +45,7 @@ impl PlatformAbstractFactory {
     };
 
     /// 换行符序列
+    /// sequence
     pub const LINE_ENDING: &'static str = cfg_select! {
         target_os = "windows" => "\r\n",
         _ => "\n",
@@ -46,17 +57,21 @@ impl PlatformAbstractFactory {
 // ============================================================================
 
 /// # 并发设计模式中的原子操作
+/// # concurrency design in atomic operation
 ///
 /// 对象池、连接池等模式中的原子计数。
+/// to 、etc. in 。
 pub struct ConcurrentPatternExamples;
 
 impl ConcurrentPatternExamples {
     /// 对象池引用计数（装饰器模式中的包装计数）
+    /// to reference counting （decorator in ）
     pub fn pool_borrow_count_increment(counter: &AtomicUsize) -> usize {
         counter.update(Ordering::Acquire, Ordering::Relaxed, |old| old + 1)
     }
 
     /// 对象池引用计数递减
+    /// to reference counting
     pub fn pool_borrow_count_decrement(counter: &AtomicUsize) -> usize {
         counter.update(Ordering::Release, Ordering::Relaxed, |old| {
             old.saturating_sub(1)
@@ -64,6 +79,7 @@ impl ConcurrentPatternExamples {
     }
 
     /// 尝试获取对象池中的对象（享元模式）
+    /// to in to （flyweight ）
     pub fn try_acquire_from_pool(counter: &AtomicUsize, max_size: usize) -> Result<usize, usize> {
         counter.try_update(Ordering::Acquire, Ordering::Relaxed, |current| {
             if current < max_size {
@@ -75,6 +91,7 @@ impl ConcurrentPatternExamples {
     }
 
     /// 观察者模式：原子事件计数器递增
+    /// observer ：
     pub fn event_notify(counter: &AtomicUsize) -> usize {
         counter.update(Ordering::Relaxed, Ordering::Relaxed, |old| old + 1)
     }
@@ -85,12 +102,15 @@ impl ConcurrentPatternExamples {
 // ============================================================================
 
 /// # 状态机设计模式
+/// # state machine design
 ///
 /// `if let` guards 简化了状态机的条件转换逻辑。
+/// `if let` guards state machine condition conversion 。
 pub struct StateMachinePatternExamples;
 
 impl StateMachinePatternExamples {
     /// 订单状态机转换
+    /// state machine conversion
     pub fn order_state_transition(
         state: &str,
         event: &str,
@@ -107,6 +127,7 @@ impl StateMachinePatternExamples {
     }
 
     /// 命令模式：条件执行
+    /// command ：condition
     pub fn execute_command(
         cmd: &str,
         args: Option<&str>,
@@ -127,12 +148,15 @@ impl StateMachinePatternExamples {
 // ============================================================================
 
 /// # 设计模式中的异常路径
+/// # design in
 ///
 /// 错误处理、验证失败等罕见路径。
+/// error handling 、etc. 。
 pub struct PatternColdPathExamples;
 
 impl PatternColdPathExamples {
     /// 访问者模式：未处理的类型为冷路径
+    /// visitor ：type as
     pub fn visit_supported_type(ty: &str) -> Result<(), &'static str> {
         match ty {
             "int" | "float" | "string" | "bool" => Ok(()),
@@ -144,6 +168,7 @@ impl PatternColdPathExamples {
     }
 
     /// 策略模式：策略验证失败为冷路径
+    /// strategy ：strategy as
     pub fn validate_strategy(name: &str) -> bool {
         match name {
             "round_robin" | "least_conn" | "ip_hash" => true,
@@ -217,14 +242,18 @@ mod tests {
 use std::ops::ControlFlow;
 
 /// # 真实 Rust 1.95 特性演示
+/// # real Rust 1.95 feature demonstration
 ///
 /// 展示 `AsyncFn` 在策略模式中的应用以及 `ControlFlow::map_continue` 的访问者模式。
+/// `AsyncFn` in strategy in application and `ControlFlow::map_continue` visitor 。
 pub struct RealRust195Features;
 
 impl RealRust195Features {
     /// 使用 `AsyncFn` 实现异步策略模式
+    /// `AsyncFn` async strategy
     ///
     /// `async |x| x * 2` 闭包实现了 `AsyncFn` trait，可作为策略注入。
+    /// `async |x| x * 2` `AsyncFn` trait，as strategy 。
     pub async fn async_strategy_pattern() -> i32 {
         run_strategy(async |x: i32| -> i32 { x * 2 }, 21).await
     }
@@ -232,6 +261,7 @@ impl RealRust195Features {
     /// 使用 `ControlFlow::map_continue` 实现访问者模式
     ///
     /// 在遍历过程中对 `Continue` 值进行映射转换。
+    /// in in to `Continue` conversion 。
     pub fn control_flow_visitor() -> ControlFlow<&'static str, i32> {
         let intermediate = ControlFlow::Continue(5);
         intermediate.map_continue(|v| v + 10)

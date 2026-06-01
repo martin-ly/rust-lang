@@ -3,38 +3,51 @@
 //! # 概述 (Overview)
 //!
 //! 本模块深入分析 Rust 中的异步递归，包括：
+//! this module analyze Rust in async ，：
 //! - 异步递归与同步递归的等价关系
+//! - async and synchronous etc.
 //! - 异步递归的实现技术（Box、async-recursion）
+//! - async technique （Box、async-recursion）
 //! - 尾递归优化在异步中的应用
+//! - optimization in async in application
 //! - 递归与迭代的转换证明
+//! - and conversion
 //! - 内存模型与栈管理
+//! - memory model and stack
 //!
 //! # 理论基础 (Theoretical Foundations)
 //!
 //! ## 1. 递归的形式化定义
+//! ## 1. definition
 //!
 //! ### 1.1 同步递归
+//! ### 1.1 synchronous
 //!
 //! ```text
 //! 递归函数 f : A → B 定义为：
+//! function f : A → B definition as ：
 //! f(x) = if base_case(x) then base_value(x)
 //!        else combine(f(rec_call(x)))
 //!
 //! 示例: 阶乘
+//! example :
 //! fact(n) = if n ≤ 1 then 1
 //!           else n * fact(n - 1)
 //! ```
 //!
 //! ### 1.2 异步递归
+//! ### 1.2 async
 //!
 //! ```text
 //! 异步递归函数 f_async : A → Future<B> 定义为：
+//! async function f_async : A → Future<B> definition as ：
 //! f_async(x) = async {
 //!   if base_case(x) then return base_value(x)
 //!   else combine(await f_async(rec_call(x)))
 //! }
 //!
 //! 示例: 异步阶乘
+//! example : async
 //! fact_async(n) = async {
 //!   if n ≤ 1 then return 1
 //!   else return n * await fact_async(n - 1)
@@ -42,11 +55,13 @@
 //! ```
 //!
 //! ## 2. 异步递归的挑战
+//! ## 2. async challenge
 //!
 //! ### 2.1 大小问题 (Sized Issue)
 //!
 //! ```text
 //! 问题: 异步函数返回 impl Future，其大小在编译时未知
+//! problem : async function impl Future，its in compile-time
 //!
 //! async fn f(n: u32) -> u32 {
 //!     if n == 0 { 0 }
@@ -54,13 +69,16 @@
 //! }
 //!
 //! 原因: Future 包含捕获的状态，递归调用导致无限大小
+//! cause : Future state ，
 //! sizeof(F) = sizeof(State) + sizeof(F)  // 无法求解
 //! ```
 //!
 //! ### 2.2 解决方案: Box 堆分配
+//! ### 2.2 solution : Box heap
 //!
 //! ```text
 //! 使用 Box 打破循环依赖：
+//! Box circulation ：
 //! sizeof(Box<F>) = sizeof(pointer) = 8 bytes (64-bit)
 //!
 //! fn f(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
@@ -72,17 +90,21 @@
 //! ```
 //!
 //! ## 3. 递归与迭代的等价性
+//! ## 3. and etc.
 //!
 //! ### 3.1 尾递归 (Tail Recursion)
 //!
 //! ```text
 //! 尾递归定义: f 是尾递归的，如果递归调用是函数的最后一个操作
+//! definition : f ，if function finally
 //!
 //! 尾递归形式:
+//! :
 //! f(x, acc) = if base_case(x) then acc
 //!             else f(rec_call(x), update(acc))
 //!
 //! 等价迭代形式:
+//! etc. :
 //! f_iter(x) = {
 //!     let mut acc = init;
 //!     while !base_case(x) {
@@ -94,15 +116,19 @@
 //! ```
 //!
 //! ### 3.2 一般递归到迭代的转换
+//! ### 3.2 to conversion
 //!
 //! ```text
 //! 使用显式栈模拟递归:
+//! stack :
 //!
 //! 递归版本:
+//! this :
 //! fn f(x) = if base(x) then g(x)
 //!           else h(x, f(left(x)), f(right(x)))
 //!
 //! 迭代版本:
+//! this :
 //! fn f_iter(x) = {
 //!     stack = [x];
 //!     while !stack.is_empty() {
@@ -114,16 +140,24 @@
 //! ```
 //!
 //! ## 4. 异步递归的内存模型
+//! ## 4. async memory model
 //!
 //! ```text
 //! 同步递归: 使用系统栈
+//! synchronous : system stack
 //! - 每次调用占用栈帧
+//! - stack
 //! - 深度受限于栈大小 (通常 2-8 MB)
+//! - stack ( 2-8 MB)
 //!
 //! 异步递归: 使用堆内存
+//! async : heap memory
 //! - 每个 Future 在堆上分配 (通过 Box)
+//! - Future in heap on ( Box)
 //! - 深度受限于堆大小 (通常远大于栈)
+//! - heap (stack )
 //! - 可以处理更深的递归
+//! - can
 //! ```
 use std::future::Future;
 use std::pin::Pin;
@@ -131,19 +165,24 @@ use std::time::Duration;
 use tokio::time::sleep;
 
 /// # 示例 1: 基本异步递归
+/// # example 1: this async
 ///
 /// 展示如何正确实现异步递归函数
+/// async function
 pub mod basic_async_recursion {
     use super::*;
 
     /// 同步递归: 计算阶乘
+    /// synchronous :
     ///
     /// ## 形式化定义
+    /// ## definition
     /// ```text
     /// fact : ℕ → ℕ
     /// fact(n) = Π_{i=1}^{n} i
     ///
     /// 递归定义:
+    /// definition :
     /// fact(0) = 1
     /// fact(n) = n × fact(n-1)
     /// ```
@@ -152,12 +191,15 @@ pub mod basic_async_recursion {
     }
 
     /// 异步递归: 计算阶乘（使用 Box 实现）
+    /// async : （ Box ）
     ///
     /// ## 实现要点
+    /// ## main point
     /// ```text
     /// 1. 返回类型: Pin<Box<dyn Future<Output = u64>>>
     /// 2. 使用 Box::pin 包装 async block
     /// 3. async move 捕获所有权
+    /// 3. async move ownership
     /// ```
     pub fn factorial_async(n: u64) -> Pin<Box<dyn Future<Output = u64> + Send>> {
         Box::pin(async move {
@@ -172,8 +214,10 @@ pub mod basic_async_recursion {
     }
 
     /// 尾递归异步版本（避免装箱）
+    /// async this （）
     ///
     /// ## 使用尾递归避免装箱开销
+    /// ## overhead
     pub async fn factorial_async_tail_wrapper(n: u64) -> u64 {
         factorial_async_tail_impl(n, 1).await
     }
@@ -190,6 +234,7 @@ pub mod basic_async_recursion {
     }
 
     /// 验证等价性
+    /// etc.
     pub async fn verify_equivalence() {
         println!("\n=== 异步递归基础示例 ===");
 
@@ -211,14 +256,18 @@ pub mod basic_async_recursion {
 }
 
 /// # 示例 2: 尾递归优化
+/// # example 2: optimization
 ///
 /// 展示尾递归及其在异步中的应用
+/// and its in async in application
 pub mod tail_recursion {
     use super::*;
 
     /// 非尾递归版本: 阶乘
+    /// this :
     ///
     /// ## 问题
+    /// ## problem
     /// ```text
     /// fact(5) = 5 * fact(4)
     ///         = 5 * (4 * fact(3))
@@ -227,6 +276,7 @@ pub mod tail_recursion {
     ///         = 5 * (4 * (3 * (2 * 1)))
     ///
     /// 需要保留所有中间状态，栈深度 = n
+    /// all in state ，stack = n
     /// ```
     pub fn factorial_non_tail(n: u64) -> u64 {
         if n <= 1 {
@@ -237,8 +287,10 @@ pub mod tail_recursion {
     }
 
     /// 尾递归版本: 阶乘
+    /// this :
     ///
     /// ## 优化
+    /// ## optimization
     /// ```text
     /// fact_tail(5, 1) = fact_tail(4, 5)
     ///                 = fact_tail(3, 20)
@@ -247,6 +299,7 @@ pub mod tail_recursion {
     ///                 = 120
     ///
     /// 只需保留当前状态，可以优化为循环
+    /// when before state ，can optimization as circulation
     /// ```
     pub fn factorial_tail(n: u64, acc: u64) -> u64 {
         if n <= 1 {
@@ -257,6 +310,7 @@ pub mod tail_recursion {
     }
 
     /// 异步尾递归版本
+    /// async this
     pub fn factorial_async_tail(n: u64, acc: u64) -> Pin<Box<dyn Future<Output = u64> + Send>> {
         Box::pin(async move {
             if n <= 1 {
@@ -269,13 +323,17 @@ pub mod tail_recursion {
     }
 
     /// 迭代版本（等价于尾递归）
+    /// this （etc. ）
     ///
     /// ## 等价性证明
+    /// ## etc.
     /// ```text
     /// 对于所有 n,
+    /// to all n,
     /// factorial_tail(n, 1) = factorial_iter(n)
     ///
     /// 证明: 归纳法
+    /// : summarize
     /// Base case: n = 1
     ///   factorial_tail(1, 1) = 1
     ///   factorial_iter(1) = 1
@@ -288,6 +346,7 @@ pub mod tail_recursion {
     ///   = (k+1)!
     ///
     ///   factorial_iter(k+1) 经过 k+1 次迭代也得到 (k+1)!
+    ///   factorial_iter(k+1) k+1 to (k+1)!
     ///   ✓
     /// ```
     pub fn factorial_iter(n: u64) -> u64 {
@@ -301,6 +360,7 @@ pub mod tail_recursion {
     }
 
     /// 异步迭代版本
+    /// async this
     pub async fn factorial_async_iter(n: u64) -> u64 {
         let mut acc = 1;
         let mut i = n;
@@ -313,6 +373,7 @@ pub mod tail_recursion {
     }
 
     /// 验证所有版本的等价性
+    /// all this etc.
     pub async fn verify_all_versions() {
         println!("\n=== 尾递归优化示例 ===");
 
@@ -339,12 +400,15 @@ pub mod tail_recursion {
 }
 
 /// # 示例 3: 树的递归遍历
+/// # example 3: tree
 ///
 /// 展示更复杂的递归结构
+/// complex structure
 pub mod tree_traversal {
     use super::*;
 
     /// 二叉树定义
+    /// binary tree definition
     #[derive(Debug, Clone)]
     pub enum Tree {
         Leaf(i32),
@@ -353,6 +417,7 @@ pub mod tree_traversal {
 
     impl Tree {
         /// 创建示例树
+        /// example tree
         ///
         /// ```text
         ///       10
@@ -379,6 +444,7 @@ pub mod tree_traversal {
     }
 
     /// 同步递归: 计算树的和
+    /// synchronous : tree and
     pub fn sum_sync(tree: &Tree) -> i32 {
         match tree {
             Tree::Leaf(val) => *val,
@@ -387,6 +453,7 @@ pub mod tree_traversal {
     }
 
     /// 异步递归: 计算树的和
+    /// async : tree and
     pub fn sum_async(tree: &Tree) -> Pin<Box<dyn Future<Output = i32> + Send + '_>> {
         Box::pin(async move {
             match tree {
@@ -402,12 +469,17 @@ pub mod tree_traversal {
     }
 
     /// 迭代版本: 使用显式栈
+    /// this : stack
     ///
     /// ## 转换方法
+    /// ## conversion method
     /// ```text
     /// 1. 创建栈存储待处理节点
+    /// 1. stack node
     /// 2. 深度优先遍历
+    /// 2.
     /// 3. 累加所有值
+    /// 3. all
     /// ```
     pub fn sum_iter(tree: &Tree) -> i32 {
         let mut stack = vec![tree];
@@ -430,6 +502,7 @@ pub mod tree_traversal {
     }
 
     /// 异步迭代版本
+    /// async this
     pub async fn sum_async_iter(tree: &Tree) -> i32 {
         let mut stack = vec![tree];
         let mut total = 0;
@@ -452,6 +525,7 @@ pub mod tree_traversal {
     }
 
     /// 验证等价性
+    /// etc.
     pub async fn verify_equivalence() {
         println!("\n=== 树遍历递归示例 ===");
 
@@ -476,19 +550,25 @@ pub mod tree_traversal {
 }
 
 /// # 示例 4: 深度递归与栈溢出
+/// # example 4: and stack overflow
 ///
 /// 展示异步递归在深度场景下的优势
+/// async in scenario under strength
 pub mod deep_recursion {
     use super::*;
 
     /// 同步递归: 求和 1 到 n
+    /// synchronous : and 1 to n
     /// ⚠️ 注意: 深度过大会导致栈溢出
+    /// ⚠️ : stack overflow
     pub fn sum_to_n_sync(n: u64) -> u64 {
         if n == 0 { 0 } else { n + sum_to_n_sync(n - 1) }
     }
 
     /// 异步递归: 求和 1 到 n
+    /// async : and 1 to n
     /// ✓ 使用堆内存，可以处理更深的递归
+    /// ✓ heap memory ，can
     pub fn sum_to_n_async(n: u64) -> Pin<Box<dyn Future<Output = u64> + Send>> {
         Box::pin(async move {
             if n == 0 {
@@ -501,6 +581,7 @@ pub mod deep_recursion {
     }
 
     /// 尾递归版本（不会栈溢出）
+    /// this （stack overflow ）
     pub fn sum_to_n_tail(n: u64, acc: u64) -> u64 {
         if n == 0 {
             acc
@@ -510,19 +591,24 @@ pub mod deep_recursion {
     }
 
     /// 迭代版本（最高效）
+    /// this （efficient ）
     pub fn sum_to_n_iter(n: u64) -> u64 {
         (1..=n).sum()
     }
 
     /// 数学公式版本（O(1) 时间复杂度）
+    /// this （O(1) time complexity ）
     ///
     /// ## 数学证明
+    /// ##
     /// ```text
     /// sum(1..n) = Σ_{i=1}^{n} i = n(n+1)/2
     ///
     /// 证明 (归纳法):
+    /// (summarize ):
     /// Base: n=1, sum=1, formula=1(1+1)/2=1 ✓
     /// Step: 假设 n=k 成立
+    /// Step: hypothesize n=k
     ///   sum(1..k+1) = sum(1..k) + (k+1)
     ///               = k(k+1)/2 + (k+1)
     ///               = (k(k+1) + 2(k+1))/2
@@ -578,20 +664,24 @@ pub mod deep_recursion {
 /// # 示例 5: 互递归 (Mutual Recursion)
 ///
 /// 展示相互调用的递归函数
+/// function
 pub mod mutual_recursion {
     use super::*;
 
     /// 判断偶数（通过互递归）
+    /// （）
     pub fn is_even_sync(n: u32) -> bool {
         if n == 0 { true } else { is_odd_sync(n - 1) }
     }
 
     /// 判断奇数（通过互递归）
+    /// （）
     pub fn is_odd_sync(n: u32) -> bool {
         if n == 0 { false } else { is_even_sync(n - 1) }
     }
 
     /// 异步版本: 判断偶数
+    /// async this :
     pub fn is_even_async(n: u32) -> Pin<Box<dyn Future<Output = bool> + Send>> {
         Box::pin(async move {
             if n == 0 {
@@ -603,6 +693,7 @@ pub mod mutual_recursion {
     }
 
     /// 异步版本: 判断奇数
+    /// async this :
     pub fn is_odd_async(n: u32) -> Pin<Box<dyn Future<Output = bool> + Send>> {
         Box::pin(async move {
             if n == 0 {
@@ -638,6 +729,7 @@ pub mod mutual_recursion {
 }
 
 /// # 综合示例: 运行所有演示
+/// # synthesize example : Run all demonstrations
 pub async fn run_all_examples() {
     println!("╔══════════════════════════════════════════════════════════╗");
     println!("║       Rust 异步递归深度分析                              ║");

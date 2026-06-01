@@ -1,3 +1,5 @@
+> **内容分级**: [专家级]
+
 # Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行
 
 > **受众**: [进阶]
@@ -136,7 +138,7 @@ graph TD
 | 执行模型 | 调度方式 | 内存模型 | 通信机制 | Rust 代表库 | Go 对应 | 理论根基 |
 |:---|:---|:---|:---|:---|:---|:---|
 | **OS 线程** | 抢占式（OS 内核） | 共享内存 + 缓存一致性 | 共享内存 / channel | `std::thread` | `runtime.GOMAXPROCS` | CCS / 进程代数 |
-| **async/await** | 协作式（用户态） | 单线程共享 / 多线程 Send | Future 组合 | `tokio` / `smol` [历史: async-std 已停止维护] | goroutine + select | Kahn 网络 / CPS |
+| **async/await** | 协作式（用户态） | 单线程共享 / 多线程 Send | Future 组合 | `tokio` / `smol` [历史: async-std [已归档]] | goroutine + select | Kahn 网络 / CPS |
 | **Fork-Join** | 工作窃取 | 共享内存 | 隐式（子任务结果合并） | `rayon` | 无原生 | Blelloch 工作度量 |
 | **CSP** | 同步阻塞 / 异步缓冲 | 消息传递（所有权转移） | channel send/recv | `crossbeam-channel` | `chan <- v` / `<-chan` | Hoare CSP |
 | **Actor** | 单线程事件循环 | 隔离（每个 Actor 独占） | 异步 mailbox | `actix` / `ractor` | 无原生 | Hewitt Actor |
@@ -275,7 +277,7 @@ sequenceDiagram
 |:---|:---|:---|
 | 协程类型 | 无栈（stackless） | 有栈（stackful, ~2KB 起） |
 | 调度时机 | 惰性（仅 poll 时执行） | 立即（创建后开始执行） |
-| 调度器 | 外部 executor（Tokio / smol [历史: async-std 已停止维护]） | Go 运行时内置 |
+| 调度器 | 外部 executor（Tokio / smol [历史: async-std [已归档]]） | Go 运行时内置 |
 | 并行性 | async 本身不产生并行 | goroutine 自动分配到多核 |
 | 内存布局 | 状态机在栈/调用者内存中内联 | 独立栈，运行时管理 |
 | 跨 await 状态 | 显式（Pin + 状态机） | 隐式（栈保存全部状态） |
@@ -498,7 +500,7 @@ fn consumer() {
 | **Proactor** | 完成通知（I/O 已完成）+ 系统传递数据 | `io_uring`（Linux）via `tokio-uring` | 无原生支持 |
 
 Rust 的事件驱动模型是**显式的**：
-程序员需选择 executor（Tokio / smol [历史: async-std 已停止维护]）并理解 poll 语义。
+程序员需选择 executor（Tokio / smol [历史: async-std [已归档]]）并理解 poll 语义。
 Go 的事件驱动是**隐式的**：`netpoller` 集成在运行时，goroutine 的阻塞 I/O 自动被转换为事件驱动。
 
 > **同构性评价**: Tokio 的 Reactor 与 Go 的 netpoller 在**epoll/kqueue 层面同构**——二者都基于操作系统的事件通知机制。但在**用户接口层面不同构**：Rust 要求显式 `async/await` + executor 选择，Go 将事件驱动透明化为阻塞语义。 [来源: Tokio Internals; Go Runtime 文档]
@@ -519,7 +521,7 @@ Go 的事件驱动是**隐式的**：`netpoller` 集成在运行时，goroutine 
 | 并发原语 | 两套：`std::thread`（并行）+ `async/await`（并发） | 一套：goroutine（统一） |
 | 内存管理 | 编译期（无 GC） | 运行时 GC |
 | 错误处理 | `Result` + `?`（显式传播） | 多值返回 `(_, err)`（约定） |
-| 生态复杂度 | 高（需选择 Tokio / smol [历史: async-std 已停止维护] / rayon） | 低（标准库即完整） |
+| 生态复杂度 | 高（需选择 Tokio / smol [历史: async-std [已归档]] / rayon） | 低（标准库即完整） |
 
 ### 10.2 性能特征对比
 
@@ -670,7 +672,7 @@ graph TD
 | 本文件主题 | L1 基础 | L2 进阶 | L3 高级 | L4 形式化 | L5 对比 | L6 生态 | L7 前沿 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 同步线程 | — | — | `std::thread` | 进程代数 CCS | vs Go M:N | 线程池 crate | 绿色线程? |
-| 异步协程 | — | — | `async/await` | CPS / 状态机 | vs JS/C# | Tokio / smol [历史: async-std 已停止维护] | gen blocks |
+| 异步协程 | — | — | `async/await` | CPS / 状态机 | vs JS/C# | Tokio / smol [历史: async-std [已归档]] | gen blocks |
 | 并行计算 | — | — | `rayon` | Blelloch 工作度量 | vs C++ TBB | 并行算法库 | GPU 并行? |
 | CSP | — | — | `mpsc` / `crossbeam` | Hoare CSP / π 演算 | vs Go channel | channel crate | 流处理 |
 | Actor | — | — | `actix` / `ractor` | Hewitt Actor | vs Erlang | Actor 框架 | 分布式 Actor |
@@ -800,7 +802,7 @@ fn main() {
 > 3) 阻塞系统调用的影响不同（绿色线程阻塞会挂起整个 OS 线程，影响同线程的其他绿色线程）。
 > Rust 选择 1:1 线程简化 FFI（C 库假设 OS 线程）、简化调试（栈追踪直接对应 OS 线程）、避免调度器复杂度。
 > 这与 Go 的 goroutine（M:N，由运行时调度）或 Erlang 的 process（M:N，由 BEAM VM 调度）不同
-> ——Rust 将并发抽象交给库（tokio、smol [历史: async-std 已停止维护]），
+> ——Rust 将并发抽象交给库（tokio、smol [历史: async-std [已归档]]），
 > 内核保持简单。执行模型同构的关键洞察：不是所有并发模型都能透明映射，选择受生态系统、性能需求、兼容性约束。
 > [来源: [Rust RFC 230](https://rust-lang.github.io/rfcs/0230-remove-runtime.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-01-threads.html)]

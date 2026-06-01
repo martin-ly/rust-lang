@@ -1,10 +1,9 @@
 //! 形式化验证演示
-//!
+//! demonstration
 //! 展示异步编程中的形式化验证技术
-//!
+//! async in technique
 //! 用法:
-//! ```bash
-//! cargo run --example formal_verification_demo
+//! :
 //! ```
 use c06_async::formal_verification;
 

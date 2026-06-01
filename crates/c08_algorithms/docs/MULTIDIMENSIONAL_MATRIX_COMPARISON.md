@@ -23,7 +23,6 @@
   - [🎯 算法选择决策支持系统](#-算法选择决策支持系统)
     - [综合决策矩阵](#综合决策矩阵)
   - [📚 参考资源](#-参考资源)
-  - [**维护者**: c08\_algorithms 团队](#维护者-c08_algorithms-团队)
 
 **版本**: 1.0.0
 **Rust版本**: 1.92.0
@@ -191,7 +190,7 @@ mod tests {
 | **适用场景**  | CPU 密集、简单任务 | CPU 密集、可分解        | IO 密集、高并发    | 大规模、跨机器       |
 | **性能特征**  | ⭐⭐ 基线性能      | ⭐⭐⭐⭐⭐ CPU 利用率高 | ⭐⭐⭐⭐ IO 吞吐高 | ⭐⭐⭐⭐⭐ 横向扩展  |
 | **复杂度**    | ⭐ 简单            | ⭐⭐⭐ 中等             | ⭐⭐⭐⭐ 复杂      | ⭐⭐⭐⭐⭐ 很复杂    |
-| **Rust 支持** | 原生               | `rayon`                 | `tokio/async-std`  | 第三方框架           |
+| **Rust 支持** | 原生               | `rayon`                 | `tokio/smol`  | 第三方框架           |
 | **数据共享**  | 直接访问           | `Arc/Mutex`             | `Arc` + 异步锁     | 网络传输             |
 | **调试难度**  | ⭐ 容易            | ⭐⭐⭐ 中等             | ⭐⭐⭐⭐ 困难      | ⭐⭐⭐⭐⭐ 很困难    |
 | **开销**      | 最低               | 线程创建/切换           | Task 切换          | 网络延迟             |
@@ -455,6 +454,7 @@ mod tests {
 **最后更新**: 2025年10月19日
 **文档版本**: 1.0.0
 **维护者**: c08_algorithms 团队
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

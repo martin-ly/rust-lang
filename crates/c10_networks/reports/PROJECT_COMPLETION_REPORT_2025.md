@@ -184,7 +184,7 @@ struct ZeroCopyBuffer {
 [dependencies]
 # 异步运行时
 tokio = { version = "1.0", features = ["full"] }
-async-std = "1.12"
+
 
 # 网络和字节处理
 bytes = { version = "1.0", features = ["serde"] }

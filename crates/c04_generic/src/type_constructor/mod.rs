@@ -1099,9 +1099,7 @@ mod tests {
     }
 
     /// `gen` block 重构：用命令式代码替代手动 Iterator 状态机
-    ///
-    /// `gen` block 由编译器自动转换为状态机，生成的代码与手动实现
-    /// 的 `Iterator` trait 等价，但源码更简洁、更易于维护。
+    /// `gen` block ：imperative Iterator state machine
     #[test]
     fn test_gen_number_iterator() {
         let gen_iter = gen move {

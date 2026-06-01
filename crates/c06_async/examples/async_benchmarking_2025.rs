@@ -8,8 +8,11 @@ use tokio::time::{sleep, timeout};
 use tracing::{error, info, warn};
 
 /// 2025年异步性能基准测试套件
+/// 2025async Performance benchmark
 /// 展示最新的异步性能测试和基准测试最佳实践
+/// async performance test and benchmark
 /// 1. 异步基准测试配置
+/// 1. async benchmark
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct BenchmarkConfig {
     pub name: String,
@@ -34,6 +37,7 @@ impl Default for BenchmarkConfig {
 }
 
 /// 2. 异步基准测试结果
+/// 2. async benchmark result
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct BenchmarkResult {
     pub name: String,
@@ -74,6 +78,7 @@ impl BenchmarkResult {
 }
 
 /// 3. 异步基准测试运行器
+/// 3. async benchmark Run
 pub struct AsyncBenchmarkRunner {
     config: BenchmarkConfig,
     results: Arc<RwLock<Vec<BenchmarkResult>>>,
@@ -212,6 +217,7 @@ impl AsyncBenchmarkRunner {
 }
 
 /// 4. 异步并发基准测试
+/// 4. async concurrency benchmark
 pub struct AsyncConcurrencyBenchmark {
     semaphore: Arc<Semaphore>,
     success_count: Arc<AtomicUsize>,
@@ -290,6 +296,7 @@ impl AsyncConcurrencyBenchmark {
 }
 
 /// 5. 异步内存基准测试
+/// 5. async memory benchmark
 pub struct AsyncMemoryBenchmark {
     allocations: Arc<AtomicUsize>,
     total_bytes: Arc<AtomicU64>,
@@ -340,6 +347,7 @@ impl AsyncMemoryBenchmark {
 }
 
 /// 6. 异步网络基准测试
+/// 6. async network benchmark
 pub struct AsyncNetworkBenchmark {
     request_count: Arc<AtomicUsize>,
     response_times: Arc<RwLock<Vec<Duration>>>,

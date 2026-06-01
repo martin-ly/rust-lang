@@ -188,7 +188,7 @@ cd ../examples && ls
 # 分类示例
 examples/
 ├── 01_basics/           # 基础Future实现
-├── 02_runtimes/         # Tokio/async-std/Smol
+├── 02_runtimes/         # Tokio/Smol
 ├── 03_streams/          # Stream和Sink
 ├── 04_patterns/         # 设计模式
 ├── 05_performance/      # 性能优化
@@ -253,7 +253,7 @@ async fn fetch_data() -> String {
 **主流选择**:
 
 - **Tokio** - 高性能，生态最丰富
-- **async-std** - API类似标准库，易用
+- **async-std [已归档]** - API类似标准库，易用
 - **Smol** - 轻量级（~1500行），适合嵌入式
 
 ### 4. Pin - 内存位置固定
@@ -283,7 +283,7 @@ while let Some(item) = stream.next().await {
 - 📘 **[概念本体](./knowledge_system/01_concept_ontology.md)** - 200+概念的形式化定义
 - 🕸️ **[关系网络](./knowledge_system/02_relationship_network.md)** - 7种关系类型的语义网络
 - 📊 **[属性空间](./knowledge_system/03_property_space.md)** - 9维度的多维分析
-- 🔬 **[运行时对比矩阵](./knowledge_system/10_runtime_comparison_matrix.md)** - 量化对比Tokio/async-std/Smol
+- 🔬 **[运行时对比矩阵](./knowledge_system/10_runtime_comparison_matrix.md)** - 量化对比Tokio/Smol
 - 🧠 **[核心概念思维导图](./knowledge_system/20_core_concepts_mindmap.md)** - 7大支柱层次结构
 - 📐 **[形式语义](./knowledge_system/30_formal_semantics.md)** - 数学模型和理论基础
 
@@ -316,7 +316,7 @@ while let Some(item) = stream.next().await {
 
 - 📘 [Async Book (官方)](https://rust-lang.github.io/async-book/)
 - 📘 [Tokio 教程](https://tokio.rs/tokio/tutorial)
-- 📘 [async-std 文档](https://async.rs/)
+- 📘 [async-std [已归档] 文档](https://async.rs/)
 - 📘 [Smol 文档](https://docs.rs/smol/)
 
 ### 相关模块
@@ -331,7 +331,7 @@ while let Some(item) = stream.next().await {
 ### 新用户建议
 
 1. **先理解基础**: 学习完C01和C05后再学习异步
-2. **选择运行时**: 新项目推荐Tokio，学习可用async-std
+2. **选择运行时**: 新项目推荐Tokio，学习可用smol
 3. **循序渐进**: 从核心系列01-06开始，不要跳跃
 4. **动手实践**: 每学完一个概念就运行相关示例
 
@@ -339,7 +339,7 @@ while let Some(item) = stream.next().await {
 
 ⚠️ **不要在async中阻塞**: 使用`spawn_blocking`处理阻塞操作
 
-⚠️ **小心运行时混用**: Tokio和async-std不兼容
+⚠️ **小心运行时混用**: Tokio和async-std [已归档]不兼容
 
 ⚠️ **理解函数颜色**: async函数只能在async上下文调用
 
@@ -377,7 +377,7 @@ while let Some(item) = stream.next().await {
 ```toml
 [dependencies]
 tokio = { version = "1.35", features = ["full"] }
-async-std = "1.12"
+
 smol = "2.0"
 futures = "0.3"
 tokio-stream = "0.1"
@@ -425,7 +425,7 @@ async-trait = "0.1"
 ### 按技术栈
 
 - **Tokio** → [runtimes/02_tokio_best_practices](./runtimes/02_tokio_best_practices.md)
-- **async-std** → [runtimes/04_cookbook](./runtimes/04_cookbook.md)
+- **async-std [已归档]** → [runtimes/04_cookbook](./runtimes/04_cookbook.md)
 - **Smol** → [runtimes/03_smol_best_practices](./runtimes/03_smol_best_practices.md)
 
 ---

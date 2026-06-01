@@ -1,6 +1,7 @@
 //! C09 设计模式搜索与查询性能基准测试
-//!
+//! C09 design and Performance benchmark
 //! 测试设计模式库的查询、过滤和匹配操作性能。
+//! design library 、and performance 。
 
 use c09_design_pattern::{
     get_all_patterns, get_patterns_by_category, get_patterns_by_execution_model, search_patterns,
@@ -9,6 +10,7 @@ use c09_design_pattern::{
 use criterion::{criterion_group, criterion_main, Criterion};
 
 /// 基准测试：获取所有设计模式
+/// benchmark ：all design
 fn bench_get_all_patterns(c: &mut Criterion) {
     c.bench_function("get_all_patterns", |b| {
         b.iter(|| {
@@ -19,6 +21,7 @@ fn bench_get_all_patterns(c: &mut Criterion) {
 }
 
 /// 基准测试：按分类过滤
+/// benchmark ：classification
 fn bench_filter_by_category(c: &mut Criterion) {
     c.bench_function("filter_by_category_creational", |b| {
         b.iter(|| {
@@ -36,6 +39,7 @@ fn bench_filter_by_category(c: &mut Criterion) {
 }
 
 /// 基准测试：按执行模型过滤
+/// benchmark ：
 fn bench_filter_by_execution_model(c: &mut Criterion) {
     c.bench_function("filter_by_execution_sync", |b| {
         b.iter(|| {
@@ -53,6 +57,7 @@ fn bench_filter_by_execution_model(c: &mut Criterion) {
 }
 
 /// 基准测试：搜索设计模式
+/// benchmark ：design
 fn bench_search_patterns(c: &mut Criterion) {
     c.bench_function("search_patterns_hit", |b| {
         b.iter(|| {
@@ -77,6 +82,7 @@ fn bench_search_patterns(c: &mut Criterion) {
 }
 
 /// 基准测试：枚举匹配（模拟运行时分发）
+/// benchmark ：enum （runtime ）
 fn bench_enum_matching(c: &mut Criterion) {
     let categories = vec![
         PatternCategory::Creational,
