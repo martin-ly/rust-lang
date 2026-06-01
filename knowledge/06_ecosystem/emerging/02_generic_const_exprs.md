@@ -213,7 +213,7 @@ let mat: Matrix<i32, 3, 4> = Matrix::new([0; 12]);  // 3 * 4 = 12
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 #![feature(generic_const_exprs)]
 
 // 数组连接类型

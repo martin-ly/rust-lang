@@ -33,7 +33,7 @@ Rust 1.97 的核心看点：
 
 **当前状态**: 已合并至 nightly，预计 1.97 进入 stable。
 
-```rust
+```rust,ignore
 // 1.97+：无需 #[async_trait]
 pub trait DataSource {
     async fn fetch(&self, key: &str) -> Result<String, Error>;
@@ -70,7 +70,7 @@ async fn process(source: &dyn DataSource) -> Result<(), Error> {
 
 从双端队列头部截断元素，与现有的 `truncate`（尾部截断）对称：
 
-```rust
+```rust,ignore
 use std::collections::VecDeque;
 
 let mut deque = VecDeque::from([1, 2, 3, 4, 5]);
@@ -82,7 +82,7 @@ assert_eq!(deque, [3, 4, 5]);
 
 对 `RefCell` 中的值进行映射转换，失败时返回错误而非 panic：
 
-```rust
+```rust,ignore
 use std::cell::RefCell;
 
 let cell = RefCell::new(Some(42));
@@ -97,7 +97,7 @@ assert_eq!(*result.unwrap(), 42);
 
 整数格式化直接写入现有缓冲区，避免临时字符串分配：
 
-```rust
+```rust,ignore
 let mut buf = String::new();
 42u32.format_into(&mut buf);
 assert_eq!(buf, "42");
@@ -117,7 +117,7 @@ Rust 1.97 将继续完善 `cargo script`（单文件 Rust 脚本）体验：
 - 改进的依赖内联语法
 - 更好的错误诊断
 
-```rust
+```rust,ignore
 ---
 [dependencies]
 reqwest = "0.13"

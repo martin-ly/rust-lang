@@ -47,6 +47,9 @@
     - [方法层映射](#方法层映射-5)
   - [八、问题图谱与概念文件的交叉索引](#八问题图谱与概念文件的交叉索引)
   - [九、来源与可信度](#九来源与可信度)
+  - [认知路径](#认知路径)
+    - [核心推理链](#核心推理链)
+    - [反命题与边界](#反命题与边界)
 
 ---
 
@@ -139,7 +142,11 @@ graph TD
     Q3 --> M3
     Q4 --> M4
 
-    V1[验证: Miri 检查 UAF]<br/>V2[验证: valgrind / ASan]<br/>V3[验证: Kani 形式化验证]
+    V1[验证: Miri 检查 UAF]
+
+    V2[验证: valgrind / ASan]
+
+    V3[验证: Kani 形式化验证]
 
     M1 & M2 & M3 & M4 --> V1
     M4 --> V2 & V3
@@ -184,7 +191,11 @@ graph TD
     Q3 --> M3
     Q4 --> M4
 
-    V1[验证: Miri 检测数据竞争]<br/>V2[验证: ThreadSanitizer]<br/>V3[验证: loom 模型检测]
+    V1[验证: Miri 检测数据竞争]
+
+    V2[验证: ThreadSanitizer]
+
+    V3[验证: loom 模型检测]
 
     M1 & M2 & M3 --> V1 & V2
     M4 --> V3
@@ -220,7 +231,7 @@ graph TD
 
     M1[方法: Tokio / Tokio（async-std 已于 2025-03 停止维护）<br/>单线程 vs 多线程运行时]
     M2[方法: Arc + clone<br/>避免跨 await 借用]
-    M3[方法: select! / drop(Future)<br/>CancellationToken]
+    M3["方法: select / drop Future<br/>CancellationToken"]
     M4[方法: spawn_blocking<br/>rayon 数据并行]
 
     GP --> Q1 & Q2 & Q3 & Q4
@@ -229,7 +240,11 @@ graph TD
     Q3 --> M3
     Q4 --> M4
 
-    V1[验证: Miri 检测 Pin 违反]<br/>V2[验证: tokio-console 调试]<br/>V3[验证: 负载测试 / 压测]
+    V1[验证: Miri 检测 Pin 违反]
+
+    V2[验证: tokio-console 调试]
+
+    V3[验证: 负载测试 / 压测]
 
     M1 & M2 & M3 & M4 --> V1 & V2 & V3
 ```
@@ -264,7 +279,7 @@ graph TD
 
     M1[方法: bindgen / cbindgen<br/>自动生成类型映射]
     M2[方法: Box::into_raw / from_raw<br/>明确所有权转移]
-    M3[方法: extern "C" fn<br/>panic = abort]
+    M3[方法: extern C fn<br/>panic = abort]
     M4[方法: Option<NonNull<T>><br/>指针包装]
 
     GP --> Q1 & Q2 & Q3 & Q4
@@ -273,7 +288,11 @@ graph TD
     Q3 --> M3
     Q4 --> M4
 
-    V1[验证: Miri 检测 FFI UB]<br/>V2[验证: valgrind / ASan]<br/>V3[验证: C 侧单元测试]
+    V1[验证: Miri 检测 FFI UB]
+
+    V2[验证: valgrind / ASan]
+
+    V3[验证: C 侧单元测试]
 
     M1 & M2 & M3 & M4 --> V1 & V2 & V3
 ```
@@ -317,7 +336,11 @@ graph TD
     Q3 --> M3
     Q4 --> M4
 
-    V1[验证: Criterion.rs 基准测试]<br/>V2[验证: perf / flamegraph]<br/>V3[验证: cachegrind / callgrind]
+    V1[验证: Criterion.rs 基准测试]
+
+    V2[验证: perf / flamegraph]
+
+    V3[验证: cachegrind / callgrind]
 
     M1 & M2 & M3 & M4 --> V1 & V2 & V3
 ```
@@ -361,7 +384,11 @@ graph TD
     Q3 --> M3
     Q4 --> M4
 
-    V1[验证: 错误路径单元测试]<br/>V2[验证: fuzz 测试错误处理]<br/>V3[验证: 错误消息用户测试]
+    V1[验证: 错误路径单元测试]
+
+    V2[验证: fuzz 测试错误处理]
+
+    V3[验证: 错误消息用户测试]
 
     M1 & M2 & M3 & M4 --> V1 & V2 & V3
 ```

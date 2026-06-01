@@ -1321,7 +1321,7 @@ graph TD
     A[需要错误定位信息？] --> B{需要完整调用链？}
     B -->|是| C[使用 Backtrace]
     B -->|否| D{需要精确源位置？}
-    D -->|是| E[使用 #[track_caller] + Location::caller]
+    D -->|是| E["使用 #[track_caller] + Location::caller"]
     D -->|否| F[仅使用 error message]
     C --> G[权衡: 生产环境性能开销]
     E --> H[权衡: 仅适用于函数调用点]
@@ -1605,8 +1605,7 @@ graph TD
     A[选择错误处理库] --> B{库代码还是应用代码?}
     B -->|库| C{需要调用者 match 错误?}
     C -->|是| D[thiserror / snafu]
-    C -->|否| E[thiserror + #[error(transparent)]
-包装底层错误]
+    C -->|否| E["thiserror + #[error(transparent)]\n包装底层错误"]
     B -->|应用| F{需要富媒体诊断?}
     F -->|是| G[miette + fancy]
     F -->|否| H{需要彩色 backtrace + spantrace?}

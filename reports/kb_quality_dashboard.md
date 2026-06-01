@@ -9,10 +9,10 @@ Enter the new date: (yy-mm-dd)
 | 指标 | 数值 | 目标 | 状态 |
 |:---|:---|:---|:---|
 | 总文件数 | 258 | 27 | ✅ |
-| 总定理链 (⟹) | 1311 | ≥270 | ✅ |
+| 总定理链 (⟹) | 1305 | ≥270 | ✅ |
 | 总反命题 | 605 | ≥40 | ✅ |
 | 总 Mermaid 图 | 532 | ≥50 | ✅ |
-| 编译验证代码块 | 2600 | ≥150 | ✅ |
+| 编译验证代码块 | 2599 | ≥150 | ✅ |
 | 定理矩阵总行 | 12391 | — | — |
 | 死链数量 | 0 | 0 | ✅ |
 
@@ -26,7 +26,7 @@ Enter the new date: (yy-mm-dd)
 | L3 | 26 | 5.4 | 5.8 | 26/26 (100%) |
 | L4 | 23 | 5.0 | 5.8 | 23/23 (100%) |
 | L5 | 18 | 3.8 | 6.7 | 18/18 (100%) |
-| L6 | 61 | 5.9 | 11.1 | 61/61 (100%) |
+| L6 | 61 | 5.8 | 10.9 | 61/61 (100%) |
 | L7 | 44 | 5.3 | 9.8 | 44/44 (100%) |
 
 ## 风险文件
@@ -51,7 +51,7 @@ Enter the new date: (yy-mm-dd)
 | concept\00_meta\concept_definition_decision_forest.md | L0 | 1073 | 5 | 1 | 10 | 0 | 6 | ✅ |
 | concept\00_meta\concept_index.md | L0 | 703 | 6 | 2 | 0 | 0 | 6 | ✅ |
 | concept\00_meta\decidability_spectrum.md | L0 | 837 | 3 | 1 | 6 | 2 | 6 | ✅ |
-| concept\00_meta\expressiveness_multiview.md | L0 | 713 | 3 | 1 | 7 | 7 | 6 | ✅ |
+| concept\00_meta\expressiveness_multiview.md | L0 | 716 | 3 | 1 | 7 | 7 | 6 | ✅ |
 | concept\00_meta\fault_tree_analysis_collection.md | L0 | 723 | 3 | 1 | 7 | 0 | 6 | ✅ |
 | concept\00_meta\inter_layer_map.md | L0 | 578 | 14 | 1 | 2 | 0 | 6 | ✅ |
 | concept\00_meta\inter_layer_topology.md | L0 | 353 | 10 | 1 | 3 | 0 | 6 | ✅ |
@@ -66,7 +66,7 @@ Enter the new date: (yy-mm-dd)
 | concept\00_meta\problem_graph.md | L0 | 426 | 3 | 1 | 7 | 0 | 6 | ✅ |
 | concept\00_meta\quality_dashboard_v2.md | L0 | 281 | 3 | 1 | 3 | 0 | 6 | ✅ |
 | concept\00_meta\quick_reference.md | L0 | 772 | 3 | 1 | 0 | 25 | 6 | ✅ |
-| concept\00_meta\rustbelt_predicate_map.md | L0 | 367 | 11 | 1 | 6 | 0 | 6 | ✅ |
+| concept\00_meta\rustbelt_predicate_map.md | L0 | 368 | 11 | 1 | 6 | 0 | 6 | ✅ |
 | concept\00_meta\self_assessment.md | L0 | 2162 | 0 | 1 | 0 | 55 | 6 | ✅ |
 | concept\00_meta\semantic_bridge_algorithms_patterns.md | L0 | 333 | 3 | 1 | 0 | 4 | 6 | ✅ |
 | concept\00_meta\semantic_expressiveness.md | L0 | 1081 | 3 | 1 | 2 | 1 | 6 | ✅ |
@@ -179,7 +179,7 @@ Enter the new date: (yy-mm-dd)
 | concept\05_comparative\02_rust_vs_go.md | L5 | 912 | 3 | 3 | 6 | 11 | 6 | ✅ |
 | concept\05_comparative\03_paradigm_matrix.md | L5 | 910 | 6 | 5 | 8 | 7 | 16 | ✅ |
 | concept\05_comparative\04_safety_boundaries.md | L5 | 954 | 8 | 1 | 7 | 9 | 9 | ✅ |
-| concept\05_comparative\05_execution_model_isomorphism.md | L5 | 829 | 3 | 1 | 5 | 13 | 6 | ✅ |
+| concept\05_comparative\05_execution_model_isomorphism.md | L5 | 910 | 3 | 1 | 5 | 13 | 6 | ✅ |
 | concept\05_comparative\06_rust_vs_java.md | L5 | 536 | 3 | 3 | 3 | 7 | 6 | ✅ |
 | concept\05_comparative\07_rust_vs_python.md | L5 | 614 | 3 | 3 | 2 | 6 | 6 | ✅ |
 | concept\05_comparative\08_rust_vs_javascript.md | L5 | 603 | 3 | 3 | 2 | 5 | 6 | ✅ |
@@ -202,14 +202,14 @@ Enter the new date: (yy-mm-dd)
 | concept\06_ecosystem\06_blockchain.md | L6 | 856 | 5 | 0 | 3 | 14 | 6 | ✅ |
 | concept\06_ecosystem\07_game_ecs.md | L6 | 1229 | 3 | 0 | 7 | 22 | 6 | ✅ |
 | concept\06_ecosystem\08_wasi.md | L6 | 587 | 6 | 5 | 2 | 11 | 12 | ✅ |
-| concept\06_ecosystem\09_cargo_script.md | L6 | 510 | 6 | 1 | 2 | 9 | 12 | ✅ |
+| concept\06_ecosystem\09_cargo_script.md | L6 | 575 | 4 | 1 | 2 | 9 | 8 | ✅ |
 | concept\06_ecosystem\10_public_private_deps.md | L6 | 515 | 6 | 1 | 2 | 10 | 12 | ✅ |
 | concept\06_ecosystem\11_webassembly.md | L6 | 500 | 6 | 3 | 3 | 5 | 12 | ✅ |
 | concept\06_ecosystem\12_testing_strategies.md | L6 | 619 | 6 | 3 | 2 | 9 | 12 | ✅ |
 | concept\06_ecosystem\13_logging_observability.md | L6 | 581 | 6 | 3 | 3 | 8 | 12 | ✅ |
-| concept\06_ecosystem\14_documentation.md | L6 | 570 | 6 | 3 | 2 | 9 | 12 | ✅ |
+| concept\06_ecosystem\14_documentation.md | L6 | 599 | 4 | 3 | 2 | 7 | 8 | ✅ |
 | concept\06_ecosystem\15_performance_optimization.md | L6 | 670 | 6 | 3 | 1 | 10 | 12 | ✅ |
-| concept\06_ecosystem\16_testing.md | L6 | 588 | 6 | 3 | 2 | 6 | 12 | ✅ |
+| concept\06_ecosystem\16_testing.md | L6 | 633 | 4 | 3 | 2 | 7 | 8 | ✅ |
 | concept\06_ecosystem\17_cross_compilation.md | L6 | 589 | 6 | 3 | 1 | 5 | 12 | ✅ |
 | concept\06_ecosystem\18_distributed_systems.md | L6 | 695 | 6 | 3 | 1 | 8 | 12 | ✅ |
 | concept\06_ecosystem\19_security_practices.md | L6 | 664 | 6 | 3 | 1 | 7 | 12 | ✅ |

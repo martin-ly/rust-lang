@@ -585,7 +585,7 @@
       "layer": "L0",
       "title": "Rust 语义表达力多视角深化（Multiview Expressiveness Analysis）",
       "positioning": "本文件从**纵向理论视角**（计算/类型/控制/内存/并发/抽象/安全）深化 Rust 的表达能力，与 `semantic_expressiveness.md` 的**横向七维光谱**形成正交互补。前者回答「Rust 能表达什么」，后者回答「Rust 从哪些维度表达」。",
-      "line_count": 713,
+      "line_count": 716,
       "theorem_chains": [
         {
           "text": "| Rust 语义表达力多视角深化（Multiview Expressiveness Analysis） 结构化组织 ⟹ 高效检索 | 理解分类维度与索引关系 | 能快速定位目标概念 | 高 |",
@@ -1677,7 +1677,7 @@
       "layer": "L0",
       "title": "RustBelt 谓词映射图（RustBelt Predicate Map）",
       "positioning": "本文件将 RustBelt（Jung et al., POPL 2018）中的核心形式化谓词——**所有权谓词 `own(τ)`** 和 **共享谓词 `shr(κ, ℓ)`**——可视化映射到 Rust 的 L1-L3 工程概念，建立\"数学符号 ↔ 代码直觉\"的双向桥梁。",
-      "line_count": 367,
+      "line_count": 368,
       "theorem_chains": [
         {
           "text": "| **创建** | `⊤ ⟹ own(τ)(v̄)` | `let x = Box::new(42);` | 获得新值的所有权 |",
@@ -20436,7 +20436,7 @@
       "layer": "L5",
       "title": "Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行",
       "positioning": "本文件从**数学模型同构性**视角系统梳理 Rust 的执行模型（同步/异步/并发/并行），并与 Go、理论模型（CSP/Actor/π 演算/进程代数）建立精确的对应关系。",
-      "line_count": 829,
+      "line_count": 910,
       "theorem_chains": [
         {
           "text": "| Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -23730,16 +23730,8 @@
       "layer": "L6",
       "title": "Cargo Script：单文件 Rust 程序",
       "positioning": "将 Rust 从\"项目级语言\"扩展为\"脚本级语言\"的工程机制，使单文件可执行成为一等公民。",
-      "line_count": 510,
+      "line_count": 575,
       "theorem_chains": [
-        {
-          "text": "- **定理**: Cargo Script：单文件 Rust 程序 定义 ⟹ 类型安全保证",
-          "type": "paragraph"
-        },
-        {
-          "text": "- **定理**: Cargo Script：单文件 Rust 程序 定义 ⟹ 类型安全保证",
-          "type": "paragraph"
-        },
         {
           "text": "- **定理**: Cargo Script：单文件 Rust 程序 定义 ⟹ 类型安全保证",
           "type": "paragraph"
@@ -23793,7 +23785,7 @@
           ],
           "lines": 2,
           "should_fail": false,
-          "code_preview": "#!/usr/bin/env cargo ..."
+          "code_preview": "#!/usr/bin/env cargo     ..."
         },
         {
           "flags": [
@@ -23847,7 +23839,7 @@
         "./01_toolchain.md",
         "./03_core_crates.md"
       ],
-      "transitions": 12,
+      "transitions": 8,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
       "matrix_rows": 28
@@ -24338,16 +24330,8 @@
       "layer": "L6",
       "title": "文档生态：rustdoc、文档测试与 API 文档规范",
       "positioning": "覆盖 Rust **文档生态**的核心工具与实践——从 rustdoc 的渲染机制、文档测试（doctest）、到 API 文档规范（RFC 1574）和 mdBook 静态站点生成，分析 Rust 文档文化如何成为语言生态的竞争优势。",
-      "line_count": 570,
+      "line_count": 599,
       "theorem_chains": [
-        {
-          "text": "- **定理**: 文档生态：rustdoc、文档测试与 API 文档规范 定义 ⟹ 类型安全保证",
-          "type": "paragraph"
-        },
-        {
-          "text": "- **定理**: 文档生态：rustdoc、文档测试与 API 文档规范 定义 ⟹ 类型安全保证",
-          "type": "paragraph"
-        },
         {
           "text": "- **定理**: 文档生态：rustdoc、文档测试与 API 文档规范 定义 ⟹ 类型安全保证",
           "type": "paragraph"
@@ -24379,14 +24363,6 @@
       "code_blocks": [
         {
           "flags": [
-            "代码示例\"]"
-          ],
-          "lines": 22,
-          "should_fail": false,
-          "code_preview": "    end      subgraph Rustdoc[\"rustdoc 处理\"]         PARSE[\"解析 AST\"]         EXTR..."
-        },
-        {
-          "flags": [
             "ignore"
           ],
           "lines": 11,
@@ -24398,14 +24374,6 @@
           "lines": 17,
           "should_fail": false,
           "code_preview": "/// 使用 [`MyStruct`] 进行演示。 /// /// 也可以使用 [完整路径](crate::module::MyStruct)。 /// ///..."
-        },
-        {
-          "flags": [
-            "（默认 doctest）\"]"
-          ],
-          "lines": 1,
-          "should_fail": false,
-          "code_preview": "    Q2 -->|否| IGNORE[\"✅ 使用 ..."
         },
         {
           "flags": [],
@@ -24451,7 +24419,7 @@
         "./01_toolchain.md",
         "./11_webassembly.md"
       ],
-      "transitions": 12,
+      "transitions": 8,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
       "matrix_rows": 11
@@ -24591,17 +24559,9 @@
       "path": "concept\\06_ecosystem\\16_testing.md",
       "layer": "L6",
       "title": "测试生态：单元测试、集成测试与验证策略",
-      "positioning": "覆盖 Rust **测试生态**的全景——从内置测试框架（#[test]）、mockall [来源: [mockall](https://docs.rs/mockall/latest/mockall/)] 模拟、property-based testing（proptest [来源: [proptest](https://docs.rs/proptest/latest/proptest/)]）到模糊测试（cargo-fuzz），分析 Rust 的类型系统如何与测试策略协同实现\"编译即验证\"的工程学理念。",
-      "line_count": 588,
+      "positioning": "> 覆盖 Rust **测试生态**的全景——从内置测试框架（#[test]）、",
+      "line_count": 633,
       "theorem_chains": [
-        {
-          "text": "- **定理**: 测试生态：单元测试、集成测试与验证策略 定义 ⟹ 类型安全保证",
-          "type": "paragraph"
-        },
-        {
-          "text": "- **定理**: 测试生态：单元测试、集成测试与验证策略 定义 ⟹ 类型安全保证",
-          "type": "paragraph"
-        },
         {
           "text": "- **定理**: 测试生态：单元测试、集成测试与验证策略 定义 ⟹ 类型安全保证",
           "type": "paragraph"
@@ -24678,6 +24638,14 @@
           "lines": 1,
           "should_fail": false,
           "code_preview": "/// ..."
+        },
+        {
+          "flags": [
+            "`（默认，编译 + 运行）；"
+          ],
+          "lines": 1,
+          "should_fail": false,
+          "code_preview": "> 2) ` ..."
         }
       ],
       "sources": [],
@@ -24688,7 +24656,7 @@
         "../07_future/02_formal_methods.md",
         "./14_documentation.md"
       ],
-      "transitions": 12,
+      "transitions": 8,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
       "matrix_rows": 18

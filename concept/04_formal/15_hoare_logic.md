@@ -1,10 +1,8 @@
 # Hoare 逻辑：程序验证的形式化基础与 Rust 契约
->
-> **受众**: [研究者]
 
+> **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >
-
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 系统讲解 **Hoare 逻辑（霍尔逻辑）**——从前置条件、后置条件、循环不变量的经典形式化，到最弱前置条件演算，揭示 Hoare 逻辑如何为 Rust 的 unsafe 代码契约、内部不变量和形式化验证工具提供理论基础。
 > **前置概念**: [Ownership Formalization](./03_ownership_formal.md) · [Verification Toolchain](./05_verification_toolchain.md)
@@ -51,6 +49,9 @@
     - [10.4 边界测试： weakest precondition 与 `unsafe` 代码的规范缺口（编译错误/验证失败）](#104-边界测试-weakest-precondition-与-unsafe-代码的规范缺口编译错误验证失败)
     - [10.5 边界测试：循环不变量的发现与人工介入（验证失败）](#105-边界测试循环不变量的发现与人工介入验证失败)
     - [10.9 边界测试：生命周期参数的不匹配返回](#109-边界测试生命周期参数的不匹配返回)
+  - [认知路径](#认知路径)
+    - [核心推理链](#核心推理链)
+    - [反命题与边界](#反命题与边界)
 
 ---
 
@@ -508,7 +509,7 @@ Rust unsafe 代码的 Hoare 三元组视角:
 ```mermaid
 graph TD
     subgraph "Hoare Logic Foundation"
-        A[Hoare Triple<br/>{P} C {Q}] --> B[Weakest Precondition<br/>wp(C,Q)]
+        A["Hoare Triple<br/>{P} C {Q}"] --> B["Weakest Precondition<br/>wp(C,Q)"]
         B --> C[Assignment Axiom]
         B --> D[Sequence Rule]
         B --> E[Conditional Rule]
@@ -580,7 +581,12 @@ fn divide_fixed(a: i32, b: NonZeroI32) -> i32 {
 }
 ```
 
-> **修正**: Hoare 逻辑的三元组 `{P} C {Q}` 中，前置条件 `P` 和后置条件 `Q` 是逻辑断言。Rust 的类型系统可部分编码这些条件：`NonZeroI32` 类型编码 `b ≠ 0` 的前置条件，`Result<T, E>` 编码可能失败的后置条件。这是**类型驱动设计**（type-driven design）的体现——将运行时断言提升为编译期类型约束。与依赖类型（Idris、Agda）相比，Rust 的编码能力有限（无法表达任意数学断言），但足以处理常见的不变量（非零、非空、正数等）。[来源: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)]
+> **修正**:
+> Hoare 逻辑的三元组 `{P} C {Q}` 中，前置条件 `P` 和后置条件 `Q` 是逻辑断言。
+> Rust 的类型系统可部分编码这些条件：`NonZeroI32` 类型编码 `b ≠ 0` 的前置条件，`Result<T, E>` 编码可能失败的后置条件。
+> 这是**类型驱动设计**（type-driven design）的体现——将运行时断言提升为编译期类型约束。
+> 与依赖类型（Idris、Agda）相比，Rust 的编码能力有限（无法表达任意数学断言），但足以处理常见的不变量（非零、非空、正数等）。
+> [来源: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)]
 
 ### 10.2 边界测试：循环不变量的违反（逻辑错误）
 
@@ -603,7 +609,16 @@ fn find_max(arr: &[i32]) -> Option<i32> {
 }
 ```
 
-> **修正**: Hoare 逻辑要求循环具有**不变量**（invariant）——在每次迭代前后保持为真的断言。`find_max` 的循环不变量是 `max = max(arr[0..i])`（`max` 是已遍历部分的最大值）。形式化验证工具（Prusti、Creusot）要求开发者显式标注不变量，然后验证：1) 初始化满足不变量；2) 每次迭代保持不变量；3) 终止时不变量蕴含后置条件。这确保了算法正确性，而非仅依赖测试覆盖。[来源: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)]
+> **修正**:
+> Hoare 逻辑要求循环具有**不变量**（invariant）——在每次迭代前后保持为真的断言。
+> `find_max` 的循环不变量是 `max = max(arr[0..i])`（`max` 是已遍历部分的最大值）。
+> 形式化验证工具（Prusti、Creusot）要求开发者显式标注不变量，然后验证：
+>
+> 1) 初始化满足不变量；
+> 2) 每次迭代保持不变量；
+> 3) 终止时不变量蕴含后置条件。
+> 这确保了算法正确性，而非仅依赖测试覆盖。
+> [来源: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)]
 
 ### 10.3 边界测试：霍尔逻辑的不变量与 Rust 的 `while let`（编译错误）
 
@@ -617,7 +632,20 @@ fn drain_map(map: &mut std::collections::HashMap<i32, String>) {
 }
 ```
 
-> **修正**: 霍尔逻辑中的循环不变量（loop invariant）要求在循环体执行前后保持某个断言。Rust 的借用检查在 `while let` 中隐式追踪不变量：迭代器 `map.iter()` 借用 `map`，循环体中 `map.remove` 需要 `&mut map`，二者冲突。即使逻辑上" draining 所有元素后 map 为空"是正确的，编译器无法验证每次迭代的不变量（迭代器状态与 map 状态一致）。解决方案：1) `while let Some((k, _)) = map.keys().next().copied() { map.remove(&k); }`（重新获取迭代器）；2) `std::mem::take(map)` 后 drain；3) `retain`（若支持）。这与 Java 的 `ConcurrentHashMap`（迭代中修改可能抛 `ConcurrentModificationException`）或 C++ 的 `unordered_map`（迭代器可能失效）不同——Rust 在编译期阻止所有迭代中修改。[来源: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-03-hash-maps.html)]
+> **修正**:
+> 霍尔逻辑中的循环不变量（loop invariant）要求在循环体执行前后保持某个断言。
+> Rust 的借用检查在 `while let` 中隐式追踪不变量：
+> 迭代器 `map.iter()` 借用 `map`，循环体中 `map.remove` 需要 `&mut map`，二者冲突。
+> 即使逻辑上" draining 所有元素后 map 为空"是正确的，编译器无法验证每次迭代的不变量（迭代器状态与 map 状态一致）。
+>
+> 解决方案：
+>
+> 1) `while let Some((k, _)) = map.keys().next().copied() { map.remove(&k); }`（重新获取迭代器）；
+> 2) `std::mem::take(map)` 后 drain；
+> 3) `retain`（若支持）。
+> 这与 Java 的 `ConcurrentHashMap`（迭代中修改可能抛 `ConcurrentModificationException`）或 C++ 的 `unordered_map`（迭代器可能失效）不同——Rust 在编译期阻止所有迭代中修改。
+> [来源: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-03-hash-maps.html)]
 
 ### 10.4 边界测试： weakest precondition 与 `unsafe` 代码的规范缺口（编译错误/验证失败）
 
@@ -632,7 +660,19 @@ fn abs(x: i32) -> i32 {
 //  weakest precondition 应要求 x != i32::MIN
 ```
 
-> **修正**:  weakest precondition（WP）演算从后向前推导程序的前置条件。`abs` 的规范 `ensures(ret >= 0)` 要求：1) `x >= 0` 时，`x >= 0`（成立）；2) `x < 0` 时，`-x >= 0`。但 `i32::MIN = -2147483648`，`-i32::MIN` 在 Rust 中溢出（debug panic，release wrapping）。WP 应推导出前置条件 `x != i32::MIN`，但开发者可能遗漏。这是形式化方法的现实挑战：规范（specification）本身可能有漏洞。Rust 的类型系统部分缓解（`checked_neg` 返回 `Option`），但`unsafe`代码和数值算法仍需人工审查规范完整性。这与 SPARK/Ada（整数范围在类型中声明，溢出在编译期检查）或 Frama-C（需手动写 ACSL 规范）类似——形式化验证的质量取决于规范的质量。[来源: [Weakest Precondition Calculus](https://en.wikipedia.org/wiki/Predicate_transformer_semantics)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**:
+> weakest precondition（WP）演算从后向前推导程序的前置条件。
+> `abs` 的规范 `ensures(ret >= 0)` 要求：
+>
+> 1) `x >= 0` 时，`x >= 0`（成立）；
+> 2) `x < 0` 时，`-x >= 0`。
+> 但 `i32::MIN = -2147483648`，`-i32::MIN` 在 Rust 中溢出（debug panic，release wrapping）。
+> WP 应推导出前置条件 `x != i32::MIN`，但开发者可能遗漏。
+> 这是形式化方法的现实挑战：规范（specification）本身可能有漏洞。
+> Rust 的类型系统部分缓解（`checked_neg` 返回 `Option`），但`unsafe`代码和数值算法仍需人工审查规范完整性。
+> 这与 SPARK/Ada（整数范围在类型中声明，溢出在编译期检查）或 Frama-C（需手动写 ACSL 规范）类似——形式化验证的质量取决于规范的质量。
+> [来源: [Weakest Precondition Calculus](https://en.wikipedia.org/wiki/Predicate_transformer_semantics)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.5 边界测试：循环不变量的发现与人工介入（验证失败）
 
@@ -652,7 +692,18 @@ fn gcd(a: u32, b: u32) -> u32 {
 // 不变量: gcd(x, y) == gcd(a, b) && x >= 0 && y >= 0
 ```
 
-> **修正**: 霍尔逻辑中，**循环不变量**（loop invariant）是证明循环正确性的关键：在每次迭代前后保持为真的断言。发现不变量通常是**人类智慧**的任务——自动工具（Dafny、Why3）可验证给定的不变量，但难以自动发现。`gcd` 的不变量 `gcd(x, y) == gcd(a, b)` 需要数论知识，非通用启发式可推导。Rust 的形式化工具现状：1) Prusti 支持 `#[invariant(...)]` 注解；2) Creusot 支持类似 WhyML 的逻辑函数；3) Kani 依赖有界展开，不直接处理不变量。这与 Isabelle/HOL（手动证明，完全控制）或 Dafny（自动生成部分不变量）类似——不变量的发现是形式化方法的"艺术"部分，需要领域知识和创造力。[来源: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)] · [来源: [Prusti Loop Invariants](https://www.pm.inf.ethz.ch/research/prusti.html)]
+> **修正**:
+> 霍尔逻辑中，**循环不变量**（loop invariant）是证明循环正确性的关键：在每次迭代前后保持为真的断言。
+> 发现不变量通常是**人类智慧**的任务——自动工具（Dafny、Why3）可验证给定的不变量，但难以自动发现。
+> `gcd` 的不变量 `gcd(x, y) == gcd(a, b)` 需要数论知识，非通用启发式可推导。
+> Rust 的形式化工具现状：
+>
+> 1) Prusti 支持 `#[invariant(...)]` 注解；
+> 2) Creusot 支持类似 WhyML 的逻辑函数；
+> 3) Kani 依赖有界展开，不直接处理不变量。
+> 这与 Isabelle/HOL（手动证明，完全控制）或 Dafny（自动生成部分不变量）类似——不变量的发现是形式化方法的"艺术"部分，需要领域知识和创造力。
+> [来源: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)] ·
+> [来源: [Prusti Loop Invariants](https://www.pm.inf.ethz.ch/research/prusti.html)]
 
 ### 10.9 边界测试：生命周期参数的不匹配返回
 
@@ -680,12 +731,9 @@ fn main() {}
 | Hoare 逻辑：程序验证的形式化基础与 Rust 契约 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > **过渡**: 掌握 Hoare 逻辑：程序验证的形式化基础与 Rust 契约 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 Hoare 逻辑：程序验证的形式化基础与 Rust 契约 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: Hoare 逻辑：程序验证的形式化基础与 Rust 契约 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 
 > **反命题**: "Hoare 逻辑：程序验证的形式化基础与 Rust 契约 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
-

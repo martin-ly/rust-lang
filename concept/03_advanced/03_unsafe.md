@@ -159,14 +159,12 @@
 
 ## 一、权威定义（Definition）
 
->
 > 从形式系统角度看，`unsafe` 是 Rust 类型证明系统的显式边界突破。理解 unsafe 的权威定义，是区分"编译器保证"与"人工保证"的第一道门槛。
 
 ### 1.1 Wikipedia 权威定义
 
 > **[Wikipedia: Undefined behavior]** In computer programming, undefined behavior (UB) is the result of executing computer code whose behavior is not prescribed by the language specification to which the code can adhere, for the current state of the program. This happens when the translator of the source code makes certain assumptions, but these assumptions are not satisfied during execution.
 > **[Wikipedia: Memory safety]** Memory safety is the state of being protected from various software bugs and security vulnerabilities when dealing with memory access, such as buffer overflows and dangling pointers. A programming language is memory-safe if it prevents such issues through its design, type system, or automatic memory management.
-
 > **[Wikipedia: Foreign function interface]** A foreign function interface (FFI) is a mechanism by which a program written in one programming language can call routines or make use of services written in another. FFI is the primary mechanism used by Rust to interoperate with C and other languages.
 
 ### 1.2 TRPL 官方定义
@@ -174,10 +172,8 @@
 > **[TRPL: Ch19.1]** Rust has a second language hiding out inside it, unsafe Rust, which works just like regular Rust but gives you extra superpowers. Unsafe Rust exists because, by nature, static analysis is conservative. When the compiler tries to determine whether or not code upholds the guarantees, it's better for it to reject some valid programs than to accept some invalid programs.
 
 ### 1.3 Rustonomicon 定义
->
 
 > **[Rustonomicon]** A block of code prefixed with `unsafe` does not permit the writing of arbitrary code. The `unsafe` keyword has two meanings: it declares the existence of a contract the compiler doesn't know about, and it declares that you have verified that contract.
-
 > **[Rustonomicon: What is unsafe?]** unsafe 不是关闭检查器，而是声明程序员已人工验证某个编译器无法知晓的契约。安全抽象 = unsafe 实现 + safe 接口 + 人工证明。✅ 已验证
 >
 > **[TRPL: Ch19.1]** Safe Rust = 编译器可证明安全的程序集合；Unsafe Rust = Safe Rust ∪ 需要人工证明安全性的操作集合。✅ 已验证
@@ -202,11 +198,9 @@ Unsafe Rust = Safe Rust ∪ { 操作 O | O 需要人工证明安全性 }
 ## 二、概念属性矩阵（Attribute Matrix）
 
 > 在明确定义后，我们需要对 unsafe 提供的操作进行系统分类。以下三个矩阵分别覆盖：操作能力、未定义行为类型、以及各角色的安全责任。
-
 > **[来源: Rust Reference: Unsafe Rust; Rustonomicon]** Unsafe 操作分为 7 类，每类有明确的安全契约。
 
 ### 2.1 Unsafe 操作分类矩阵
->
 
 | **操作** | **语法** | **安全风险** | **典型用途** | **Safe 封装示例** |
 |:---|:---|:---|:---|:---|
@@ -555,7 +549,7 @@ graph TD
 
     F --> F1[FFI 边界]
     F --> F2[自定义数据结构]
-    F --> F3[Send/Sync 实现: Send = 可跨线程转移所有权(move), Sync = 可跨线程共享引用]
+    F --> F3["Send/Sync 实现: Send = 可跨线程转移所有权(move), Sync = 可跨线程共享引用"]
     F --> F4[零拷贝解析]
 ```
 
@@ -758,11 +752,11 @@ graph TD
 ```mermaid
 graph TD
     P1["❌ 命题: unsafe 块内没有安全检查"] --> Q1{"类型检查是否运行?"}
-    Q1 -->"|✅ 仍运行|" A1["类型系统未关闭<br/>泛型约束、trait bound 仍生效"]
-    Q1 -->"|仅特定检查关闭|" Q2{"哪些检查关闭?"}
-    Q2 -->"|裸指针解引用|" A2["借用检查器对 *const/*mut 不追踪"]
-    Q2 -->"|FFI 调用|" A3["编译器不验证外部函数契约"]
-    Q2 -->"|unsafe trait impl|" A4["编译器不验证 Send/Sync 语义"]
+    Q1   -->|"✅ 仍运行"| A1["类型系统未关闭<br/>泛型约束、trait bound 仍生效"]
+    Q1   -->|"仅特定检查关闭"| Q2{"哪些检查关闭?"}
+    Q2   -->|"裸指针解引用"| A2["借用检查器对 *const/*mut 不追踪"]
+    Q2   -->|"FFI 调用"| A3["编译器不验证外部函数契约"]
+    Q2   -->|"unsafe trait impl"| A4["编译器不验证 Send/Sync 语义"]
 
     style P1 fill:#f66,color:#fff
     style A1 fill:#6f6
@@ -781,10 +775,10 @@ graph TD
 ```mermaid
 graph TD
     P2["❌ 命题: 用 unsafe = 必然 UB"] --> Q1{"unsafe 块内是否违反 Validity Invariant?"}
-    Q1 -->"|否|" Q2{"Safety Contract 是否完整?"}
-    Q1 -->"|是|" A1["UB 触发"]
-    Q2 -->"|是|" A2["✅ 正确使用 unsafe 是安全的"]
-    Q2 -->"|否|" A3["可能通过 safe API 泄露 UB"]
+    Q1   -->|"否"| Q2{"Safety Contract 是否完整?"}
+    Q1   -->|"是"| A1["UB 触发"]
+    Q2   -->|"是"| A2["✅ 正确使用 unsafe 是安全的"]
+    Q2   -->|"否"| A3["可能通过 safe API 泄露 UB"]
 
     style P2 fill:#f66,color:#fff
     style A1 fill:#f66,color:#fff
@@ -802,12 +796,12 @@ graph TD
 ```mermaid
 graph TD
     P3["❌ 命题: raw pointer ≡ 引用"] --> Q1{"是否有生命周期检查?"}
-    Q1 -->"|引用: ✅ 有|" A1["编译器保证生命周期内有效"]
-    Q1 -->"|裸指针: ❌ 无|" Q2{"是否有对齐保证?"}
-    Q2 -->"|引用: ✅ 自动对齐|" A2["&T 必须对齐且非空"]
-    Q2 -->"|裸指针: ❌ 无|" Q3{"是否有有效值保证?"}
-    Q3 -->"|引用: ✅ 必须指向有效值|" A3["bool 必须是 0/1，enum 必须有效"]
-    Q3 -->"|裸指针: ❌ 无|" A4["可指向任意位模式"]
+    Q1   -->|"引用: ✅ 有"| A1["编译器保证生命周期内有效"]
+    Q1   -->|"裸指针: ❌ 无"| Q2{"是否有对齐保证?"}
+    Q2   -->|"引用: ✅ 自动对齐"| A2["&T 必须对齐且非空"]
+    Q2   -->|"裸指针: ❌ 无"| Q3{"是否有有效值保证?"}
+    Q3   -->|"引用: ✅ 必须指向有效值"| A3["bool 必须是 0/1，enum 必须有效"]
+    Q3   -->|"裸指针: ❌ 无"| A4["可指向任意位模式"]
 
     style P3 fill:#f66,color:#fff
     style A1 fill:#6f6
@@ -826,14 +820,14 @@ graph TD
 ```mermaid
 graph TD
     P4["❌ 命题: FFI 调用总是安全的"] --> Q1{"ABI 是否匹配?"}
-    Q1 -->"|否|" A1["调用约定不匹配 → 栈损坏/崩溃"]
-    Q1 -->"|是|" Q2{"内存布局是否兼容?"}
-    Q2 -->"|否|" A2["#[repr(C)] 遗漏 → 字段偏移错误"]
-    Q2 -->"|是|" Q3{"指针生命周期是否一致?"}
-    Q3 -->"|否|" A3["C 返回悬垂指针 → UAF"]
-    Q3 -->"|是|" Q4{"C 端是否遵守协议?"}
-    Q4 -->"|否|" A4["数据竞争/内存篡改"]
-    Q4 -->"|是|" A5["✅ FFI 调用可安全"]
+    Q1   -->|"否"| A1["调用约定不匹配 → 栈损坏/崩溃"]
+    Q1   -->|"是"| Q2{"内存布局是否兼容?"}
+    Q2   -->|"否"| A2["#[repr(C)] 遗漏 → 字段偏移错误"]
+    Q2   -->|"是"| Q3{"指针生命周期是否一致?"}
+    Q3   -->|"否"| A3["C 返回悬垂指针 → UAF"]
+    Q3   -->|"是"| Q4{"C 端是否遵守协议?"}
+    Q4   -->|"否"| A4["数据竞争/内存篡改"]
+    Q4   -->|"是"| A5["✅ FFI 调用可安全"]
 
     style P4 fill:#f66,color:#fff
     style A1 fill:#f66,color:#fff

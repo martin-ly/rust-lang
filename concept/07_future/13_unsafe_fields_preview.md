@@ -1,18 +1,30 @@
 # Unsafe Fields 预研：字段级安全边界的精确标注
->
+
 > **受众**: [专家]
 > **内容分级**: [实验级]
-
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 Unsafe Fields 预览特性
-> **定位**: 探讨 Rust 中引入 **unsafe [来源: [Rust Unsafe](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)] [来源: [Rust Nomicon](https://doc.rust-lang.org/nomicon/)] [来源: [Rust Reference — Unsafe](https://doc.rust-lang.org/reference/unsafe-keyword.html)] field [来源: [Rust RFC - Unsafe Fields](https://github.com/rust-lang/rfcs/pull/3458)]s** 的提案——允许在结构体字段级别标记 `unsafe`，将 `unsafe` 的粒度从**代码块**细化到**字段访问**，提升 unsafe Rust 的局部性和可审计性。
-> **前置概念**: [Unsafe](../03_advanced/03_unsafe.md) · [Ownership](../01_foundation/01_ownership.md) · [Type System](../01_foundation/04_type_system.md)
+> **定位**:
+> 探讨 Rust 中引入 **unsafe
+> [来源: [Rust Unsafe](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)]
+> [来源: [Rust Nomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rust Reference — Unsafe](https://doc.rust-lang.org/reference/unsafe-keyword.html)]
+> field [来源: [Rust RFC - Unsafe Fields](https://github.com/rust-lang/rfcs/pull/3458)]** 的提案
+> ——允许在结构体字段级别标记 `unsafe`，将 `unsafe` 的粒度从**代码块**细化到**字段访问**，提升 unsafe Rust 的局部性和可审计性。
+> **前置概念**:
+> [Unsafe](../03_advanced/03_unsafe.md) ·
+> [Ownership](../01_foundation/01_ownership.md) ·
+> [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Safety Tags](./08_safety_tags_preview.md)
 
 ---
 
-> **来源**: [Rust RFC — Unsafe Fields](https://github.com/rust-lang/rfcs/pull/3458) · [Rustonomicon — Unsafe Rust](https://doc.rust-lang.org/nomicon/) · [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) · [Rust Internals — Unsafe Field Discussion](https://internals.rust-lang.org/)
+> **来源**:
+> [Rust RFC — Unsafe Fields](https://github.com/rust-lang/rfcs/pull/3458) ·
+> [Rustonomicon — Unsafe Rust](https://doc.rust-lang.org/nomicon/) ·
+> [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) ·
+> [Rust Internals — Unsafe Field Discussion](https://internals.rust-lang.org/)
 
 ## 📑 目录
 
@@ -39,6 +51,10 @@
     - [10.2 边界测试：unsafe 字段与 Drop 的交互（运行时 UB）](#102-边界测试unsafe-字段与-drop-的交互运行时-ub)
     - [10.3 边界测试：unsafe 字段与 `#[repr(C)]` 的交互（编译错误）](#103-边界测试unsafe-字段与-reprc-的交互编译错误)
     - [10.4 边界测试：unsafe 字段与不变式的文档化（逻辑错误）](#104-边界测试unsafe-字段与不变式的文档化逻辑错误)
+    - [补充定理链](#补充定理链)
+  - [认知路径](#认知路径)
+    - [核心推理链](#核心推理链)
+    - [反命题与边界](#反命题与边界)
 
 ---
 
@@ -197,7 +213,7 @@ unsafe 字段的不变量模式:
 ```mermaid
 graph LR
     subgraph SafetyTags["Safety Tags 机器可读"]
-        A["#[safety(tag = \"valid_ptr\")]"] --> B["自动化工具验证"]
+        A["#[safety(tag = 'valid_ptr')]"] --> B["自动化工具验证"]
     end
 
     subgraph UnsafeFields["Unsafe Fields 人工审计"]
@@ -408,7 +424,13 @@ impl Buffer {
 }
 ```
 
-> **修正**: `unsafe fields`（实验性特性）允许将 struct 的特定字段标记为 unsafe，要求所有读写操作在 `unsafe` 块中进行。这比将整个类型标记为 unsafe（如 `std::mem::ManuallyDrop`）更细粒度：只有字段访问需要 `unsafe`，类型的构造和其他方法可以是安全的。使用场景：FFI 绑定中的原始句柄、自引用结构中的内部指针、手动内存管理中的元数据。安全封装模式：`Buffer` 的公开 API 完全安全，内部使用 `unsafe` 字段实现；unsafe 字段的文档必须明确列出不变式（invariants）和前置条件。这与 C 的结构体（所有字段无限制访问）或 Rust 当前的 `pub`/`priv` 封装（不区分安全级别）不同——unsafe fields 将"需要人工审查的代码"在语法层面显式化。[来源: [Unsafe Fields RFC Draft](https://github.com/rust-lang/rfcs/pull/0000)] · [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]
+> **修正**:
+> `unsafe fields`（实验性特性）允许将 struct 的特定字段标记为 unsafe，要求所有读写操作在 `unsafe` 块中进行。
+> 这比将整个类型标记为 unsafe（如 `std::mem::ManuallyDrop`）更细粒度：只有字段访问需要 `unsafe`，类型的构造和其他方法可以是安全的。
+> 使用场景：FFI 绑定中的原始句柄、自引用结构中的内部指针、手动内存管理中的元数据。
+> 安全封装模式：`Buffer` 的公开 API 完全安全，内部使用 `unsafe` 字段实现；unsafe 字段的文档必须明确列出不变式（invariants）和前置条件。
+> 这与 C 的结构体（所有字段无限制访问）或 Rust 当前的 `pub`/`priv` 封装（不区分安全级别）不同——unsafe fields 将"需要人工审查的代码"在语法层面显式化。
+> [来源: [Unsafe Fields RFC Draft](https://github.com/rust-lang/rfcs/pull/0000)] · [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]
 
 ### 10.2 边界测试：unsafe 字段与 Drop 的交互（运行时 UB）
 

@@ -37,6 +37,9 @@
   - [六、从谓词到定理的推导链](#六从谓词到定理的推导链)
   - [七、与概念判定森林的对照](#七与概念判定森林的对照)
   - [八、来源与可信度](#八来源与可信度)
+  - [认知路径](#认知路径)
+    - [核心推理链](#核心推理链)
+    - [反命题与边界](#反命题与边界)
 
 ---
 
@@ -45,22 +48,22 @@
 ```mermaid
 mindmap
   root((RustBelt 谓词<br/>L4 → L1 映射))
-    own[own(τ)<br/>所有权谓词]
-      数学定义[⟦τ⟧.own(v̄) ∈ List(Val) → iProp]
+    own["own(τ)<br/>所有权谓词"]
+      数学定义["⟦τ⟧.own(v̄) ∈ List(Val) → iProp"]
       Rust映射[唯一所有者<br/>Move / Drop / Copy]
-      代码示例[let x = Box::new(42)]
-    shr[shr(κ, ℓ)<br/>共享谓词]
-      数学定义[⟦τ⟧.shr(κ, ℓ) ∈ Lft × Loc → iProp]
+      代码示例["let x = Box::new(42)"]
+    shr["shr(κ, ℓ)<br/>共享谓词"]
+      数学定义["⟦τ⟧.shr(κ, ℓ) ∈ Lft × Loc → iProp"]
       Rust映射[共享引用<br/>&T / 不可变借用]
-      代码示例[let r = &x]
-    borrow[borrow(κ, q)<br/>分数权限]
-      数学定义[q ∈ (0,1] 分数]
-      Rust映射[&T(q=∞) / &mut T(q=1)]
-      代码示例[let r = &mut x]
-    lifetime[[α]₁<br/>生命周期令牌]
-      数学定义[α 存活命题]
-      Rust映射['a 有效性<br/>作用域包含]
-      代码示例[fn foo<'a>(x: &'a str)]
+      代码示例["let r = &x"]
+    borrow["borrow(κ, q)<br/>分数权限"]
+      数学定义["q ∈ (0,1] 分数"]
+      Rust映射["&T(q=∞) / &mut T(q=1)"]
+      代码示例["let r = &mut x"]
+    lifetime["[α]₁<br/>生命周期令牌"]
+      数学定义["α 存活命题"]
+      Rust映射["'a 有效性<br/>作用域包含"]
+      代码示例["fn foo<'a>(x: &'a str)"]
 ```
 
 > **认知功能**: 本 mindmap 将抽象的 Iris 分离逻辑谓词压缩为**四层结构**：数学定义（L4）→ 形式化含义 → Rust 映射（L1-L3）→ 代码示例。这种"自上而下"的映射帮助学习者在"看到 `own(τ)` 符号"时，能立即联想到"Rust 中的所有权唯一性"。[来源: 💡 原创分析]
@@ -95,8 +98,8 @@ own(τ)(v̄) ≜ 值 v̄ 唯一归属于当前线程，
 
 ```mermaid
 graph LR
-    subgraph Math[数学层 L4]
-        O[own(τ)(v̄)]
+    subgraph Math["数学层 L4"]
+        O["own(τ)(v̄)"]
     end
 
     subgraph Intuition[直觉层 L2]
@@ -143,8 +146,8 @@ shr(κ, ℓ) ≜ 在生命周期 κ 存活期间，
 
 ```mermaid
 graph LR
-    subgraph Math[数学层 L4]
-        S[shr(κ, ℓ)]
+    subgraph Math["数学层 L4"]
+        S["shr(κ, ℓ)"]
     end
 
     subgraph Intuition[直觉层 L2]
@@ -190,9 +193,9 @@ graph LR
 
 ```mermaid
 graph TD
-    subgraph Lifetime[生命周期令牌]
-        A1[[α]₁ — α 存活]
-        A2[†α — α 可终结]
+    subgraph Lifetime["生命周期令牌"]
+        A1["[α]₁ — α 存活"]
+        A2["†α — α 可终结"]
     end
 
     subgraph Rust[Rust 对应]
@@ -241,25 +244,25 @@ graph TD
 
 ```mermaid
 graph TD
-    subgraph Box[Box<T>]
-        B1[own(Box<T>)(p)]
-        B2[∃v. p ↦ v]
-        B3[own(T)(v)]
+    subgraph Box["Box&lt;T&gt;"]
+        B1["own(Box&lt;T&gt;)(p)"]
+        B2["∃v. p ↦ v"]
+        B3["own(T)(v)"]
         B1 --> B2 & B3
     end
 
-    subgraph Rc[Rc<T>]
-        R1[own(Rc<T>)(p)]
-        R2[∃n, v. p ↦ (n, v)]
-        R3[n > 0]
-        R4[shr(∞, v)]
+    subgraph Rc["Rc&lt;T&gt;"]
+        R1["own(Rc&lt;T&gt;)(p)"]
+        R2["∃n, v. p ↦ (n, v)"]
+        R3["n > 0"]
+        R4["shr(∞, v)"]
         R1 --> R2 & R3 & R4
     end
 
-    subgraph Mutex[Mutex<T>]
-        M1[own(Mutex<T>)(p)]
-        M2[is_lock(p)]
-        M3[shr(∞, inner(p))]
+    subgraph Mutex["Mutex&lt;T&gt;"]
+        M1["own(Mutex&lt;T&gt;)(p)"]
+        M2["is_lock(p)"]
+        M3["shr(∞, inner(p))"]
         M1 --> M2 & M3
     end
 ```
@@ -356,9 +359,7 @@ graph TD
 | RustBelt 谓词映射图（RustBelt Predicate Map） 跨层映射 ⟹ 系统掌握 | 打通 L0-L7 的关联路径 | 形成完整的 Rust 能力图谱 | 高 |
 
 > **过渡**: 利用本文件的导航结构，读者可以从当前位置快速跃迁到任意概念层级，实现非线性学习。
-
 > **过渡**: RustBelt 谓词映射图（RustBelt Predicate Map） 的维护需要与概念内容同步更新，确保元数据与实际知识体系的一致性。
-
 > **过渡**: 将 RustBelt 谓词映射图（RustBelt Predicate Map） 作为学习起点或复习锚点，有助于建立全局视野，避免陷入局部细节而忽视整体架构。
 
 ### 反命题与边界

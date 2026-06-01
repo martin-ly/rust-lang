@@ -185,10 +185,10 @@
 
 ```mermaid
 stateDiagram-v2
-    [*] --> Owned: let x = T::new()
+    [*] --> Owned: create T
 
-    Owned --> Moved: let y = x
-    Moved --> [*]: 原变量失效
+    Owned --> Moved: move to y
+    Moved --> [*]: original invalid
 
     Owned --> SharedBorrow: let r = &x
     SharedBorrow --> Returned: r 作用域结束
@@ -361,7 +361,7 @@ graph TD
     A --> E[工具链]
     A --> F[认知路径]
 
-    B --> B1[Σ; Γ ⊢ e : τ {Σ'}]
+    B --> B1["Σ; Γ ⊢ e : τ {Σ'}"]
     B --> B2[堆状态转换]
     B --> B3[Move / Borrow / Drop]
 
@@ -370,7 +370,7 @@ graph TD
     C --> C3[Invariants]
     C --> C4[Unsafe 封装证明]
 
-    D --> D1[Own(x, T)]
+    D --> D1["Own(x, T)"]
     D --> D2[Fractional Permissions]
     D --> D3[Separating Conjunction]
     D --> D4[Reed 2009 资源标签]
@@ -1008,9 +1008,13 @@ Tree Borrows 通过 **Reserved → Active** 的延迟激活，允许裸指针与
 
 **核心更新（2024–2025）**:
 
-1. **Miri 默认启用 Tree Borrows**（2024 年末）：`-Zmiri-tree-borrows` 从实验性标志转为 Miri 默认行为，Stacked Borrows 退为兼容选项 (`-Zmiri-stacked-borrows`)。这意味着 Rust 生态的 Miri 回归测试（crater）全部基于 Tree Borrows 运行。 [来源: [Wikipedia — Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)]
+1. **Miri 默认启用 Tree Borrows**（2024 年末）：
+   `-Zmiri-tree-borrows` 从实验性标志转为 Miri 默认行为，Stacked Borrows 退为兼容选项 (`-Zmiri-stacked-borrows`)。
+   这意味着 Rust 生态的 Miri 回归测试（crater）全部基于 Tree Borrows 运行。
+   [来源: [Wikipedia — Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)]
 
-2. **`&raw` 操作符语义对齐**：Rust 1.82 引入的 `&raw const expr` / `&raw mut expr`（直接创建裸指针，无中间引用）与 Tree Borrows 的 Reserved 权限天然兼容。Stacked Borrows 中 `&expr as *const _` 的中间引用创建会导致不必要的标签压栈，Tree Borrows 通过保留原节点的 Reserved 状态避免了这一开销。
+2. **`&raw` 操作符语义对齐**：Rust 1.82 引入的 `&raw const expr` / `&raw mut expr`（直接创建裸指针，无中间引用）与 Tree Borrows 的 Reserved 权限天然兼容。
+   Stacked Borrows 中 `&expr as *const _` 的中间引用创建会导致不必要的标签压栈，Tree Borrows 通过保留原节点的 Reserved 状态避免了这一开销。
 
 3. **UnsafeCell 精确建模**：PLDI 2025 版本对 `UnsafeCell` 的内部可变性模式进行了更精细的权限传播规则，使得 `RefCell`、`Mutex` 等标准库原语在 Miri 下的假阳性显著减少。
 
@@ -1237,20 +1241,22 @@ Miri 的 Tree Borrows 检测器直接实现了上述操作语义：
 | **RustBelt** | 基于 Iris 的逻辑模型（独立于 SB/TB）| 证明 Safe Rust 的 soundness |
 | **rustc** | 无显式模型（优化假设近似 TB）| 编译器优化不破坏合法别名 |
 
-> **关键洞察**: RustBelt 的 Iris 证明不直接依赖 SB 或 TB，而是建立在更抽象的**来源（provenance）**与**权限**之上。SB/TB 是将这些抽象权限映射到具体内存访问序列的**操作语义模型**。Tree Borrows 成为 Miri 默认意味着：**社区共识的 UB 定义已正式从 Stacked Borrows 的严格栈模型转向 Tree Borrows 的宽松树模型**。这一转变不会影响 RustBelt 的安全性证明，因为任何 TB 接受的程序必然满足 Iris 的权限约束（TB ⟹ Iris 权限模型），且 TB 比 SB 接受更多合法程序（SB ⟹ TB 接受集 ⊆ TB 接受集）。
-
-> **跨层映射更新**: `L3::Miri` 默认模型变更 ↔ [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) §5.6 Tree Borrows 演进 · [`../07_future/05_rust_version_tracking.md`](../07_future/05_rust_version_tracking.md) §3 前沿特性跟踪
-
+> **关键洞察**:
+> RustBelt 的 Iris 证明不直接依赖 SB 或 TB，而是建立在更抽象的**来源（provenance）**与**权限**之上。
+> SB/TB 是将这些抽象权限映射到具体内存访问序列的**操作语义模型**。
+> Tree Borrows 成为 Miri 默认意味着：**社区共识的 UB 定义已正式从 Stacked Borrows 的严格栈模型转向 Tree Borrows 的宽松树模型**。
+> 这一转变不会影响 RustBelt 的安全性证明，因为任何 TB 接受的程序必然满足 Iris 的权限约束（TB ⟹ Iris 权限模型），且 TB 比 SB 接受更多合法程序（SB ⟹ TB 接受集 ⊆ TB 接受集）。
+> **跨层映射更新**:
+> `L3::Miri` 默认模型变更 ↔ [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) §5.6 Tree Borrows 演进 · [`../07_future/05_rust_version_tracking.md`](../07_future/05_rust_version_tracking.md) §3 前沿特性跟踪
 > **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.2 "别名模型与 Miri 检测"
-
 > **过渡: L4 → L3**
-> 形式化的别名模型（SB/TB）和所有权逻辑（Oxide）是 Rust 编译器优化假设的理论根基，但程序员日常接触的只是 `&T`/`&mut T` 的语法糖。从形式化规则到工程实践的认知桥梁在于：理解 "为什么 `&mut T` 保证唯一性" 不需要掌握分离逻辑，但掌握分离逻辑能帮你写出更安全的 `unsafe` 代码。
+> 形式化的别名模型（SB/TB）和所有权逻辑（Oxide）是 Rust 编译器优化假设的理论根基，但程序员日常接触的只是 `&T`/`&mut T` 的语法糖。
+> 从形式化规则到工程实践的认知桥梁在于：理解 "为什么 `&mut T` 保证唯一性" 不需要掌握分离逻辑，但掌握分离逻辑能帮你写出更安全的 `unsafe` 代码。
 > 工程实践中的对应见 [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md)（unsafe 逃逸门）与 [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md)（并发安全的编译期保证）。
-
 > **过渡: L4 → L5**
-> Rust 的所有权形式化是独特的——C++ 没有系统性的所有权逻辑，Go 依赖 GC 消除所有权问题，Haskell 用纯函数隔离副作用。理解这些差异需要在形式化层面比较 "语言如何表达资源的生命周期"。
+> Rust 的所有权形式化是独特的——C++ 没有系统性的所有权逻辑，Go 依赖 GC 消除所有权问题，Haskell 用纯函数隔离副作用。
+> 理解这些差异需要在形式化层面比较 "语言如何表达资源的生命周期"。
 > 对比视角见 [`../05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md)（RAII 语义差异）与 [`../05_comparative/03_paradigm_matrix.md`](../05_comparative/03_paradigm_matrix.md)（类型系统谱系）。
-
 > **过渡: L4 → L7**
 > 当前的形式化工具（RustBelt、Kani、Miri）覆盖了 Rust 安全子集的大部分，但 Polonius 的 loan-based 语义、Tree Borrows 的别名模型、以及 Effects System 的类型效应都还在演进中。形式化不是终点，而是语言设计迭代的基础。
 > 演进方向见 [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md)（形式化方法工具链）与 [`../07_future/03_evolution.md`](../07_future/03_evolution.md)（语言演进路线图）。
@@ -1283,23 +1289,10 @@ Miri 的 Tree Borrows 检测器直接实现了上述操作语义：
 
 ## 权威来源索引
 
->
->
->
->
->
->
->
-
----
-
----
-
----
-
 > **补充来源**
-
-> **相关谓词映射**: [RustBelt 核心谓词](../00_meta/rustbelt_predicate_map.md#一rustbelt-核心谓词定义) · [定理推导链](../00_meta/rustbelt_predicate_map.md#六从谓词到定理的推导链)
+> **相关谓词映射**:
+> [RustBelt 核心谓词](../00_meta/rustbelt_predicate_map.md#一rustbelt-核心谓词定义) ·
+> [定理推导链](../00_meta/rustbelt_predicate_map.md#六从谓词到定理的推导链)
 
 ## 十、边界测试：所有权形式化的编译错误
 
@@ -1327,7 +1320,12 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的所有权系统可视为一种**仿射类型系统**（affine type system）——资源最多使用一次（move），但允许通过 `Drop` 隐式释放。纯线性类型系统（linear logic）要求资源**恰好**使用一次，不允许隐式丢弃。Rust 的 `Drop` trait 提供了从线性到仿射的过渡：值可隐式 drop（不显式使用），或显式 move 到消费函数。这是 Rust 实用主义的设计选择——完全线性类型对系统编程过于严格（如临时字符串的中间结果）。[来源: [RustBelt Paper](https://plv.mpi-sws.org/rustbelt/)]
+> **修正**:
+> Rust 的所有权系统可视为一种**仿射类型系统**（affine type system）——资源最多使用一次（move），但允许通过 `Drop` 隐式释放。
+> 纯线性类型系统（linear logic）要求资源**恰好**使用一次，不允许隐式丢弃。
+> Rust 的 `Drop` trait 提供了从线性到仿射的过渡：值可隐式 drop（不显式使用），或显式 move 到消费函数。
+> 这是 Rust 实用主义的设计选择——完全线性类型对系统编程过于严格（如临时字符串的中间结果）。
+> [来源: [RustBelt Paper](https://plv.mpi-sws.org/rustbelt/)]
 
 ### 10.2 边界测试：分离逻辑与共享可变状态的不可兼得（编译错误）
 
@@ -1392,7 +1390,13 @@ fn main() {
 }
 ```
 
-> **修正**: 形式化上，`x` 的生命周期 `ℓ_x` 受限于函数作用域。`&x` 的类型是 `&'a i32`，其中 `'a` 是引用的生命周期。函数返回类型 `&i32` 隐含一个生命周期参数 `'a`，但编译器无法找到与 `x` 的生命周期匹配的输入参数——`x` 是局部变量，其生命周期短于函数返回后。这与 C 的返回局部变量指针（编译器通常警告但不阻止，运行时悬垂）或 C++ 的返回局部引用（同样警告，运行时 UB）形成鲜明对比。Rust 的所有权形式化将"悬垂指针"这一运行时错误转化为编译期类型错误，通过**区域类型**（region types）和**生命周期包含**（lifetime inclusion）的约束系统实现。[来源: [RustBelt Paper](https://doi.org/10.1145/3158154)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
+> **修正**:
+> 形式化上，`x` 的生命周期 `ℓ_x` 受限于函数作用域。`&x` 的类型是 `&'a i32`，其中 `'a` 是引用的生命周期。
+> 函数返回类型 `&i32` 隐含一个生命周期参数 `'a`，但编译器无法找到与 `x` 的生命周期匹配的输入参数——`x` 是局部变量，其生命周期短于函数返回后。
+> 这与 C 的返回局部变量指针（编译器通常警告但不阻止，运行时悬垂）或 C++ 的返回局部引用（同样警告，运行时 UB）形成鲜明对比。
+> Rust 的所有权形式化将"悬垂指针"这一运行时错误转化为编译期类型错误，通过**区域类型**（region types）和**生命周期包含**（lifetime inclusion）的约束系统实现。
+> [来源: [RustBelt Paper](https://doi.org/10.1145/3158154)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
 
 ### 10.3 边界测试：形式化所有权与编译器实现的差距（编译错误）
 
@@ -1408,7 +1412,14 @@ fn main() {
 }
 ```
 
-> **修正**: 上述代码在 Rust 当前编译器中**确实编译错误**，但从**形式化角度**有争议：`r1` 借用 `v[0]`，`v.push(4)` 可能重新分配整个 `Vec` 的内存（若容量不足），使 `r1` 悬垂。若 `v` 容量充足，`push` 不重新分配，形式化上 `r1` 和 `push` 不冲突。但编译器保守地拒绝——因为无法静态确定 `push` 是否重新分配。Polonius（下一代借用检查器）可能放松此类限制，但当前 NLL 保守。这展示了**形式化模型**与**编译器实现**的差距：形式化证明安全，但实现为保守近似。这与 Java 的数组越界检查（运行时精确检查）或 C 的"信任程序员"（无检查）不同——Rust 在编译期做保守决策，牺牲部分合法程序以换取零运行时开销。[来源: [Polonius](https://github.com/rust-lang/polonius)] · [来源: [Niko Matsakis Blog](https://smallcultfollowing.com/babysteps/)]
+> **修正**:
+> 上述代码在 Rust 当前编译器中**确实编译错误**，但从**形式化角度**有争议：`r1` 借用 `v[0]`，`v.push(4)` 可能重新分配整个 `Vec` 的内存（若容量不足），使 `r1` 悬垂。
+> 若 `v` 容量充足，`push` 不重新分配，形式化上 `r1` 和 `push` 不冲突。
+> 但编译器保守地拒绝——因为无法静态确定 `push` 是否重新分配。
+> Polonius（下一代借用检查器）可能放松此类限制，但当前 NLL 保守。
+> 这展示了**形式化模型**与**编译器实现**的差距：形式化证明安全，但实现为保守近似。
+> 这与 Java 的数组越界检查（运行时精确检查）或 C 的"信任程序员"（无检查）不同——Rust 在编译期做保守决策，牺牲部分合法程序以换取零运行时开销。
+> [来源: [Polonius](https://github.com/rust-lang/polonius)] · [来源: [Niko Matsakis Blog](https://smallcultfollowing.com/babysteps/)]
 
 ### 10.4 边界测试：形式化所有权与编译器实现的偏差（运行时 UB）
 
@@ -1422,7 +1433,24 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 编译器的**借用检查**实现了**所有权形式化模型**的近似：1) 形式化："同一时间只能有一个 `&mut` 或任意数量的 `&`"；2) 编译器：NLL（Non-Lexical Lifetimes）使借用仅在**使用点**检查，而非作用域；3) Polonius（未来）：更精确的流敏感分析，允许更多合法程序。形式化与实现的差距：1) 某些安全程序被拒绝（false positive，如交叉引用循环）；2) 某些 unsafe 代码绕过检查（程序员责任）；3) `RefCell` 运行时检查替代编译期检查。研究：RustBelt 证明标准库的 unsafe 代码在形式化模型下安全；Stacked Borrows / Tree Borrows 定义引用的别名规则（Miri 检查）。这与 C 的内存模型（无形式化，实现定义行为）或 Haskell 的纯度（类似形式化，但无显式所有权）不同——Rust 是形式化理论成功指导工业实践的案例。[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)] · [来源: [Stacked Borrows](https://github.com/rust-lang/unsafe-code-guidelines/blob/master/wip/stacked-borrows.md)]
+> **修正**:
+> Rust 编译器的**借用检查**实现了**所有权形式化模型**的近似：
+>
+> 1) 形式化："同一时间只能有一个 `&mut` 或任意数量的 `&`"；
+> 2) 编译器：NLL（Non-Lexical Lifetimes）使借用仅在**使用点**检查，而非作用域；
+> 3) Polonius（未来）：更精确的流敏感分析，允许更多合法程序。
+>
+> 形式化与实现的差距：
+>
+> 1) 某些安全程序被拒绝（false positive，如交叉引用循环）；
+> 2) 某些 unsafe 代码绕过检查（程序员责任）；
+> 3) `RefCell` 运行时检查替代编译期检查。
+>
+> 研究：RustBelt 证明标准库的 unsafe 代码在形式化模型下安全；
+> Stacked Borrows / Tree Borrows 定义引用的别名规则（Miri 检查）。
+> 这与 C 的内存模型（无形式化，实现定义行为）或 Haskell 的纯度（类似形式化，但无显式所有权）不同——Rust 是形式化理论成功指导工业实践的案例。
+> [来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)] ·
+> [来源: [Stacked Borrows](https://github.com/rust-lang/unsafe-code-guidelines/blob/master/wip/stacked-borrows.md)]
 
 ### 10.2 边界测试：const fn 中的非编译期操作
 

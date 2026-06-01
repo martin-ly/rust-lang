@@ -1,7 +1,6 @@
 # 文档生态：rustdoc、文档测试与 API 文档规范
->
-> **受众**: [进阶]
 
+> **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: F×App — 文档工具和约定的应用
@@ -11,7 +10,12 @@
 
 ---
 
-> **来源**: [rustdoc Documentation](https://doc.rust-lang.org/rustdoc/) · [RFC 1574 — API Documentation](https://github.com/rust-lang/rfcs/pull/1574) · [mdBook Guide](https://rust-lang.github.io/mdBook/) · [RFC 1946 — Intra-rustdoc links](https://github.com/rust-lang/rfcs/pull/1946) · [docs.rs](https://docs.rs/about)
+> **来源**:
+> [rustdoc Documentation](https://doc.rust-lang.org/rustdoc/) ·
+> [RFC 1574 — API Documentation](https://github.com/rust-lang/rfcs/pull/1574) ·
+> [mdBook Guide](https://rust-lang.github.io/mdBook/) ·
+> [RFC 1946 — Intra-rustdoc links](https://github.com/rust-lang/rfcs/pull/1946) ·
+> [docs.rs](https://docs.rs/about)
 
 ## 📑 目录
 
@@ -37,6 +41,10 @@
     - [10.1 边界测试：`doctest` 中的隐式 `main`（编译错误）](#101-边界测试doctest-中的隐式-main编译错误)
     - [10.2 边界测试：`rustdoc` 的链接解析失败（编译错误）](#102-边界测试rustdoc-的链接解析失败编译错误)
     - [10.4 边界测试：`doctest` 的 `compile_fail` 与 `ignore` 的误用（测试失败）](#104-边界测试doctest-的-compile_fail-与-ignore-的误用测试失败)
+    - [补充定理链](#补充定理链)
+  - [认知路径](#认知路径)
+    - [核心推理链](#核心推理链)
+    - [反命题与边界](#反命题与边界)
 
 ---
 
@@ -52,7 +60,7 @@ graph LR
     subgraph Source["源代码"]
         RS["*.rs 文件"]
         DOC["/// 文档注释"]
-        EXAMPLE["```rust 代码示例"]
+        EXAMPLE["rust 代码示例"]
     end
 
     subgraph Rustdoc["rustdoc 处理"]
@@ -344,9 +352,9 @@ graph TD
     ROOT["命题: 所有代码示例都应使用 doctest"]
     ROOT --> Q1{"是否需要编译验证?"}
     Q1 -->|是| Q2{"是否是可运行代码?"}
-    Q1 -->|否| TEXT["✅ 使用 ```text 或 ```ignore"]
-    Q2 -->|是| TRUE["✅ 使用 ```rust（默认 doctest）"]
-    Q2 -->|否| IGNORE["✅ 使用 ```ignore 或 ```no_run"]
+    Q1 -->|否| TEXT["✅ 使用 text 或 ignore 标记"]
+    Q2 -->|是| TRUE["✅ 使用 rust（默认 doctest）"]
+    Q2 -->|否| IGNORE["✅ 使用 ignore 或 no_run 标记"]
 
     style TRUE fill:#c8e6c9
     style TEXT fill:#c8e6c9
@@ -508,7 +516,11 @@ fn documented() {}
 // ```
 ```
 
-> **修正**: Rust 的文档测试（doctest）自动将代码块包裹在 `fn main() { ... }` 中。若代码块包含 `fn main()` 或返回类型，需使用 `no_run` 或 `compile_fail` 属性。`compile_fail` 属性验证代码确实编译失败——这是测试"编译期保证"的独特方式。与 Python 的 doctest（只检查输出）不同，Rust 的 doctest是完整的编译-运行测试，确保文档中的代码始终有效。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: Rust 的文档测试（doctest）自动将代码块包裹在 `fn main() { ... }` 中。
+> 若代码块包含 `fn main()` 或返回类型，需使用 `no_run` 或 `compile_fail` 属性。`compile_fail` 属性验证代码确实编译失败
+> ——这是测试"编译期保证"的独特方式。
+> 与 Python 的 doctest（只检查输出）不同，Rust 的 doctest是完整的编译-运行测试，确保文档中的代码始终有效。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.2 边界测试：`rustdoc` 的链接解析失败（编译错误）
 
@@ -522,7 +534,11 @@ pub fn linked() {}
 pub fn linked_fixed() {}
 ```
 
-> **修正**: Rust 1.48+ 的 `rustdoc` 支持 intra-doc links——用 `[`Name`]` 语法链接到 crate 内的项或标准库类型。未解析的链接产生编译警告（CI 中可提升为错误）。这要求文档维护者确保所有引用有效，避免死链接。与 JavaDoc 或 Doxygen 的外部链接不同，Rust 的 intra-doc links 在编译期验证目标存在，将文档一致性检查提前到构建阶段。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**:
+> Rust 1.48+ 的 `rustdoc` 支持 intra-doc links——用 `[`Name`]` 语法链接到 crate 内的项或标准库类型。
+> 未解析的链接产生编译警告（CI 中可提升为错误）。这要求文档维护者确保所有引用有效，避免死链接。
+> 与 JavaDoc 或 Doxygen 的外部链接不同，Rust 的 intra-doc links 在编译期验证目标存在，将文档一致性检查提前到构建阶段。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.4 边界测试：`doctest` 的 `compile_fail` 与 `ignore` 的误用（测试失败）
 
@@ -535,15 +551,29 @@ fn documented_function() {}
 fn main() {}
 ```
 
-> **修正**: Rust 的 **doctest**（文档测试）支持 `compile_fail` 属性：代码应编译失败，若编译通过则测试失败。`ignore` 属性：跳过测试（不编译也不运行）。`no_run` 属性：编译但不运行。常见误用：1) `compile_fail` 用于运行时错误代码（应使用 `no_run` 或 `should_panic`）；2) `ignore` 用于依赖外部资源的测试（正确）；3) `compile_fail` 代码实际编译通过（测试失败）。doctest 的编写原则：1) `compile_fail` — 仅用于展示编译错误；2) `no_run` — 用于无限循环或 I/O 代码；3) 无属性 — 正常编译运行；4) `ignore` — 平台特定或需要外部设置的代码。这与 Python 的 doctest（运行示例代码，验证输出）或 Elixir 的 doctests（类似 Python）不同——Rust 的 doctest 支持编译失败验证，是文档即测试的强大工具。[来源: [The Rust Programming Language](https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html)] · [来源: [Rustdoc Book](https://doc.rust-lang.org/rustdoc/index.html)]
-> **过渡**: 文档生态：rustdoc、文档测试与 API 文档规范 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: 文档生态：rustdoc、文档测试与 API 文档规范 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **修正**:
+> Rust 的 **doctest**（文档测试）支持 `compile_fail` 属性：代码应编译失败，若编译通过则测试失败。
+> `ignore` 属性：跳过测试（不编译也不运行）。`no_run` 属性：编译但不运行。
+> 常见误用：
+>
+> 1) `compile_fail` 用于运行时错误代码（应使用 `no_run` 或 `should_panic`）；
+> 2) `ignore` 用于依赖外部资源的测试（正确）；
+> 3) `compile_fail` 代码实际编译通过（测试失败）。
+>
+> doctest 的编写原则：
+>
+> 1) `compile_fail` — 仅用于展示编译错误；
+> 2) `no_run` — 用于无限循环或 I/O 代码；
+> 3) 无属性 — 正常编译运行；
+> 4) `ignore` — 平台特定或需要外部设置的代码。
+> 这与 Python 的 doctest（运行示例代码，验证输出）或 Elixir 的 doctests（类似 Python）不同
+> ——Rust 的 doctest 支持编译失败验证，是文档即测试的强大工具。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html)] ·
+> [来源: [Rustdoc Book](https://doc.rust-lang.org/rustdoc/index.html)]
 > **过渡**: 文档生态：rustdoc、文档测试与 API 文档规范 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ### 补充定理链
 
-- **定理**: 文档生态：rustdoc、文档测试与 API 文档规范 定义 ⟹ 类型安全保证
-- **定理**: 文档生态：rustdoc、文档测试与 API 文档规范 定义 ⟹ 类型安全保证
 - **定理**: 文档生态：rustdoc、文档测试与 API 文档规范 定义 ⟹ 类型安全保证
 
 ## 认知路径
@@ -559,11 +589,10 @@ fn main() {}
 | 文档生态：rustdoc、文档测试与 API 文档规范 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 文档生态：rustdoc、文档测试与 API 文档规范 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 文档生态：rustdoc、文档测试与 API 文档规范 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: 文档生态：rustdoc、文档测试与 API 文档规范 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界
 
-> **反命题**: "文档生态：rustdoc、文档测试与 API 文档规范 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
+> **反命题**: "文档生态：rustdoc、文档测试与 API 文档规范 是万能解决方案，适用于所有场景" —— 错误。
+> 任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。

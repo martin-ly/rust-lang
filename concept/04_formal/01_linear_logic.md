@@ -198,8 +198,8 @@ graph TD
     B --> B3[Exchange: 交换]
     B --> B4[Affine = Linear + Weakening]
 
-    C --> C1[⊗ 张量: (A, B)]
-    C --> C2[⊸ 线性蕴含: fn(A)->B]
+    C --> C1["⊗ 张量: (A, B)"]
+    C --> C2["⊸ 线性蕴含: fn(A)->B"]
     C --> C3[& With: 外部选择]
     C --> C4[⊕ Plus: 内部选择]
     C --> C5[⅋ Par: 交替使用]

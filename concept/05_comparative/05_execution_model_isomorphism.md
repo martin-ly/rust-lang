@@ -66,6 +66,9 @@
     - [10.4 边界测试：CPS 变换与 Rust 的 `?` 运算符（编译错误）](#104-边界测试cps-变换与-rust-的--运算符编译错误)
     - [10.5 边界测试：CPS 变换中的栈溢出（运行时 panic）](#105-边界测试cps-变换中的栈溢出运行时-panic)
     - [10.3 边界测试：尾递归与 Rust 的 TCO 缺失（运行时栈溢出）](#103-边界测试尾递归与-rust-的-tco-缺失运行时栈溢出)
+  - [认知路径](#认知路径)
+    - [核心推理链](#核心推理链)
+    - [反命题与边界](#反命题与边界)
 
 ---
 
@@ -179,7 +182,10 @@ handle.join().unwrap();
 | 阻塞影响 | 阻塞整个 OS 线程 | 运行时自动将 goroutine 移到其他线程 |
 | 亲和性控制 | 完整（可绑定到 CPU） | 有限（GOMAXPROCS） |
 
-> **同构性评价**: Rust 1:1 线程与 Go goroutine 在**进程代数 CCS 层面**同构——两者都是独立的并发执行单元，可通过 channel / 共享内存通信。但在**资源模型**上不同构：Rust 线程是「重量级资源」（OS 可见），Go goroutine 是「轻量级对象」（运行时管理）。 [来源: rustvsgo.com; Go Runtime Scheduler 文档]
+> **同构性评价**:
+> Rust 1:1 线程与 Go goroutine 在**进程代数 CCS 层面**同构——两者都是独立的并发执行单元，可通过 channel / 共享内存通信。
+> 但在**资源模型**上不同构：Rust 线程是「重量级资源」（OS 可见），Go goroutine 是「轻量级对象」（运行时管理）。
+> [来源: rustvsgo.com; Go Runtime Scheduler 文档]
 
 ---
 
@@ -231,7 +237,6 @@ impl Future for ExampleFuture {
 ```
 
 ### 4.2 Poll 契约与 Waker 机制
->
 
 > **Poll 契约**: `Future::poll` 必须满足：
 >
@@ -276,15 +281,19 @@ sequenceDiagram
 | 跨 await 状态 | 显式（Pin + 状态机） | 隐式（栈保存全部状态） |
 | 取消语义 | 协作式取消（poll 返回后丢弃） | 无原生取消（需 context） |
 
-> **定理 T-EM-001（async 与 goroutine 不同构）**: Rust `async/await` 与 Go goroutine **不同构**——前者是**惰性求值的无栈状态机**，后者是**立即调度的有栈协程**。二者在「创建后是否立即执行」和「状态存储方式」上存在不可调和的语义差异。 [来源: RFC 2394; *Zero-cost futures in Rust*, Aaron Turon 2016]
+> **定理 T-EM-001（async 与 goroutine 不同构）**:
+> Rust `async/await` 与 Go goroutine **不同构**——前者是**惰性求值的无栈状态机**，后者是**立即调度的有栈协程**。
+> 二者在「创建后是否立即执行」和「状态存储方式」上存在不可调和的语义差异。
+> [来源: RFC 2394; *Zero-cost futures in Rust*, Aaron Turon 2016]
 
 ---
 
 ## 五、并行模型
 
 > [来源: rayon docs, Blumofe 1999]：Fork-Join 与工作窃取
-
-> **Fork-Join 模型**: 将大问题递归分解为子问题（fork），在子任务完成后合并结果（join）。Rust 的 `rayon` crate 实现了基于工作窃取（work-stealing）的 Fork-Join 调度器。 [来源: Blumofe & Leiserson, *Scheduling Multithreaded Computations by Work Stealing*, 1999]
+> **Fork-Join 模型**: 将大问题递归分解为子问题（fork），在子任务完成后合并结果（join）。
+> Rust 的 `rayon` crate 实现了基于工作窃取（work-stealing）的 Fork-Join 调度器。
+> [来源: Blumofe & Leiserson, *Scheduling Multithreaded Computations by Work Stealing*, 1999]
 
 ```rust
 // 惯用：rayon 并行迭代
@@ -325,7 +334,9 @@ fn parallel_merge_sort<T: Ord + Send>(data: &mut [T]) {
 
 ### 6.1 Rust channel 的 CSP 语义
 
-> **CSP（Communicating Sequential Processes）**: Hoare 1978 提出的并发模型，核心原则是「通过通信共享内存，而非通过共享内存通信」。进程通过**同步通道（synchronous channel）**通信，发送方和接收方在通道上「会合（rendezvous）」。 [来源: Hoare, *Communicating Sequential Processes*, CACM 1978]
+> **CSP（Communicating Sequential Processes）**: Hoare 1978 提出的并发模型，核心原则是「通过通信共享内存，而非通过共享内存通信」。
+> 进程通过**同步通道（synchronous channel）**通信，发送方和接收方在通道上「会合（rendezvous）」。
+> [来源: Hoare, *Communicating Sequential Processes*, CACM 1978]
 
 Rust 的 `std::sync::mpsc`（multiple producer, single consumer）是 CSP 的工程实现，但有以下关键扩展：
 
@@ -365,7 +376,11 @@ let received = rx.recv().unwrap(); // 所有权转移到 received
 | 关闭语义 | `drop(sender)` 关闭 | `close(ch)` 显式关闭 |
 | 零值 channel | 无（必须显式创建） | `nil` channel（永远阻塞） |
 
-> **同构性评价**: Rust channel 与 Go channel 在**进程代数层面同态**——二者都是进程间通信的 FIFO 队列。但在**内存模型层面不同构**：Rust 的 move 语义使 channel 通信变成了**线性通道**（值只能存在于一个地方），而 Go 的拷贝语义允许值在发送后继续存在于发送方栈上。这导致 Rust channel 在编译期即可排除 use-after-send 错误，Go 则需依赖 GC 和程序员约定。 [来源: Hoare 1978; Go Concurrency Patterns; rustvsgo.com]
+> **同构性评价**: Rust channel 与 Go channel 在**进程代数层面同态**——二者都是进程间通信的 FIFO 队列。
+> 但在**内存模型层面不同构**：
+> Rust 的 move 语义使 channel 通信变成了**线性通道**（值只能存在于一个地方），而 Go 的拷贝语义允许值在发送后继续存在于发送方栈上。
+> 这导致 Rust channel 在编译期即可排除 use-after-send 错误，Go 则需依赖 GC 和程序员约定。
+> [来源: Hoare 1978; Go Concurrency Patterns; rustvsgo.com]
 
 ---
 
@@ -375,7 +390,9 @@ let received = rx.recv().unwrap(); // 所有权转移到 received
 
 ### 7.1 Rust Actor 的实现原理
 
-> **Actor 模型**: 由 Carl Hewitt 1973 提出，Actor 是**有身份（named）**的独立计算实体，通过**异步、非阻塞**的消息投递（mailbox）通信。每个 Actor 顺序处理其 mailbox 中的消息，天然支持分布式和容错。 [来源: Hewitt, Bishop & Steiger, *A Universal Modular ACTOR Formalism*, IJCAI 1973]
+> **Actor 模型**: 由 Carl Hewitt 1973 提出，Actor 是**有身份（named）**的独立计算实体，通过**异步、非阻塞**的消息投递（mailbox）通信。
+> 每个 Actor 顺序处理其 mailbox 中的消息，天然支持分布式和容错。
+> [来源: Hewitt, Bishop & Steiger, *A Universal Modular ACTOR Formalism*, IJCAI 1973]
 
 Rust 的 Actor 框架（Actix, Ractor, Kameo）利用类型系统保证 Actor 安全：
 
@@ -404,10 +421,9 @@ addr.do_send(Increment); // 异步发送，编译期检查消息类型
 - **生命周期隔离**: Actor 状态封装在 Actor 内部，外部只能通过消息接口访问。
 
 ### 7.2 Actor vs CSP 的形式化区分
->
 
 | 维度 | CSP | Actor |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | 进程身份 | 匿名 | 有地址（ActorRef / Addr） |
 | 通信同步性 | 同步 rendezvous（或缓冲） | 异步 mailbox |
 | 通信方向 | 通道是双向的（sender/receiver 成对） | 单向（发送方知道接收方地址） |
@@ -415,7 +431,10 @@ addr.do_send(Increment); // 异步发送，编译期检查消息类型
 | 分布式 | 需额外协议 | 天然支持（地址可跨网络） |
 | Rust 实现 | `crossbeam-channel` | `actix` / `ractor` |
 
-> **关键洞察**: CSP 的「匿名进程 + 命名通道」与 Actor 的「命名进程 + 匿名通道（mailbox）」是**对偶（dual）**关系。Rust 的类型系统可同时编码两者：CSP 通过 `Sender<T>`/`Receiver<T>` 的类型保证，Actor 通过 `Addr<T>` 和 `Handler<M>` trait 的类型保证。 [来源: *Seven Concurrency Models in Seven Weeks*]
+> **关键洞察**:
+> CSP 的「匿名进程 + 命名通道」与 Actor 的「命名进程 + 匿名通道（mailbox）」是**对偶（dual）**关系。
+> Rust 的类型系统可同时编码两者：CSP 通过 `Sender<T>`/`Receiver<T>` 的类型保证，Actor 通过 `Addr<T>` 和 `Handler<M>` trait 的类型保证。
+> [来源: *Seven Concurrency Models in Seven Weeks*]
 
 ---
 
@@ -425,20 +444,24 @@ addr.do_send(Increment); // 异步发送，编译期检查消息类型
 
 ### 8.1 Rust 与 C++11 内存模型的同构性
 
-> **Rust 直接复用 C++11 内存模型**: Rust 1.0 起明确采用 C/C++11 的并发内存模型，包括 happens-before、synchronizes-with、sequenced-before 的完整框架。 [来源: Rust Reference §18.4; Boehm & Adve, *Foundations of the C++ Concurrency Memory Model*, PLDI 2008]
+> **Rust 直接复用 C++11 内存模型**:
+> Rust 1.0 起明确采用 C/C++11 的并发内存模型，包括 happens-before、synchronizes-with、sequenced-before 的完整框架。
+> [来源: Rust Reference §18.4; Boehm & Adve, *Foundations of the C++ Concurrency Memory Model*, PLDI 2008]
 
 | Rust `Ordering` | C++ `memory_order` | 语义 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | `Relaxed` | `memory_order_relaxed` | 无同步，仅原子性 |
 | `Acquire` | `memory_order_acquire` | 加载操作，建立 synchronizes-with |
 | `Release` | `memory_order_release` | 存储操作，建立 synchronizes-with |
 | `AcqRel` | `memory_order_acq_rel` | Acquire + Release（RMW 操作） |
 | `SeqCst` | `memory_order_seq_cst` | 全局顺序一致性 |
 
-> **同构性评价**: Rust 的五种 `Ordering` 与 C++11 的 `memory_order` **一一同构**（isomorphic）。在 Rust 中写 `AtomicUsize::fetch_add(1, Ordering::Acquire)` 与在 C++ 中写 `atomic_var.fetch_add(1, std::memory_order_acquire)` 具有完全相同的语义。 [来源: Rust Reference §18.4.2]
+> **同构性评价**:
+> Rust 的五种 `Ordering` 与 C++11 的 `memory_order` **一一同构**（isomorphic）。
+> 在 Rust 中写 `AtomicUsize::fetch_add(1, Ordering::Acquire)` 与在 C++ 中写 `atomic_var.fetch_add(1, std::memory_order_acquire)` 具有完全相同的语义。
+> [来源: Rust Reference §18.4.2]
 
 ### 8.2 Acquire-Release 的语义精化
->
 
 ```rust
 // 惯用：Release-Acquire 建立 happens-before
@@ -459,7 +482,9 @@ fn consumer() {
 }
 ```
 
-> **定理 T-EM-002（Acquire-Release 同步）**: 若线程 A 执行 `store(x, Release)` 且线程 B 执行 `load(x, Acquire)` 并读取到该值，则线程 A 中所有**sequenced-before **于该 `store` 的内存写入，对线程 B 中所有** sequenced-after** 于该 `load` 的操作可见。 [来源: Boehm & Adve PLDI 2008; Batty et al., *Mathematizing C++ Concurrency*, POPL 2011]
+> **定理 T-EM-002（Acquire-Release 同步）**:
+> 若线程 A 执行 `store(x, Release)` 且线程 B 执行 `load(x, Acquire)` 并读取到该值，则线程 A 中所有**sequenced-before **于该 `store` 的内存写入，对线程 B 中所有** sequenced-after** 于该 `load` 的操作可见。
+> [来源: Boehm & Adve PLDI 2008; Batty et al., *Mathematizing C++ Concurrency*, POPL 2011]
 
 ---
 
@@ -468,11 +493,13 @@ fn consumer() {
 > [来源: Stevens UNP, Tokio Internals]：Reactor 与 Proactor
 
 | 模型 | 机制 | Rust 实现 | Go 实现 |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | **Reactor** | 就绪通知（可读/可写）+ 应用主动 I/O | `mio` / `tokio::net`（epoll/kqueue/IOCP） | `netpoller`（集成在运行时） |
 | **Proactor** | 完成通知（I/O 已完成）+ 系统传递数据 | `io_uring`（Linux）via `tokio-uring` | 无原生支持 |
 
-Rust 的事件驱动模型是**显式的**：程序员需选择 executor（Tokio / smol [历史: async-std 已停止维护]）并理解 poll 语义。Go 的事件驱动是**隐式的**：`netpoller` 集成在运行时，goroutine 的阻塞 I/O 自动被转换为事件驱动。
+Rust 的事件驱动模型是**显式的**：
+程序员需选择 executor（Tokio / smol [历史: async-std 已停止维护]）并理解 poll 语义。
+Go 的事件驱动是**隐式的**：`netpoller` 集成在运行时，goroutine 的阻塞 I/O 自动被转换为事件驱动。
 
 > **同构性评价**: Tokio 的 Reactor 与 Go 的 netpoller 在**epoll/kqueue 层面同构**——二者都基于操作系统的事件通知机制。但在**用户接口层面不同构**：Rust 要求显式 `async/await` + executor 选择，Go 将事件驱动透明化为阻塞语义。 [来源: Tokio Internals; Go Runtime 文档]
 
@@ -509,7 +536,6 @@ Rust 的事件驱动模型是**显式的**：程序员需选择 executor（Tokio
 ---
 
 ## 十一、async/await / CPS / 状态机
->
 
 > **定理 T-EM-003（三重等价性）**: 对任意 well-typed 的 `async fn`，以下三种形式在「poll 语义」下行为等价：
 >
@@ -519,7 +545,7 @@ Rust 的事件驱动模型是**显式的**：程序员需选择 executor（Tokio
 
 **等价性证明概要**:
 
-```
+```text
 直接风格:          async fn f() -> T { let x = g().await; h(x).await }
                       ↓ 编译器 desugar
 状态机:            enum F { Start, AfterG { x: X }, AfterH }
@@ -573,17 +599,21 @@ graph TD
 ### 13.1 执行模型维度雷达图
 
 ```mermaid
-radar
-    title 执行模型多维对比：Rust vs Go vs Erlang vs C++
-    axis 内存效率, 启动速度, 调度透明性, 并行表达力, 并发表达力, 容错能力, 生态一致性
-
-    Rust: 0.95, 0.6, 0.5, 0.95, 0.9, 0.6, 0.7
-    Go: 0.7, 0.95, 0.95, 0.6, 0.95, 0.75, 0.95
-    Erlang: 0.6, 0.9, 0.9, 0.4, 0.9, 0.95, 0.9
-    Cpp: 0.9, 0.8, 0.3, 0.9, 0.6, 0.4, 0.5
+xychart-beta
+    title "Execution Model Comparison: Rust vs Go vs Erlang vs C++"
+    x-axis [Memory, Startup, Scheduling, Parallel, Concurrency, FaultTol, Ecosystem]
+    y-axis "Score" 0 --> 1
+    bar [0.95, 0.6, 0.5, 0.95, 0.9, 0.6, 0.7]
+    bar [0.7, 0.95, 0.95, 0.6, 0.95, 0.75, 0.95]
+    bar [0.6, 0.9, 0.9, 0.4, 0.9, 0.95, 0.9]
+    bar [0.9, 0.8, 0.3, 0.9, 0.6, 0.4, 0.5]
 ```
 
-> **认知功能**: 多维量化对比不同语言/运行时的执行模型特征，将抽象权衡转化为可直观比较的形状。使用建议：用雷达图识别技术选型的核心 trade-off——Rust 强在内存效率与并行表达力，Go 强在调度透明性与生态一致性。关键洞察：语言设计哲学直接决定雷达图轮廓——无 GC 带来内存效率优势，但也以启动速度和调度透明性为代价。[来源: 💡 原创分析]
+> 七维度：内存效率、启动速度、调度透明性、并行表达力、并发表达力、容错能力、生态一致性
+> **认知功能**: 多维量化对比不同语言/运行时的执行模型特征，将抽象权衡转化为可直观比较的形状。
+> 使用建议：用雷达图识别技术选型的核心 trade-off——Rust 强在内存效率与并行表达力，Go 强在调度透明性与生态一致性。
+> 关键洞察：语言设计哲学直接决定雷达图轮廓——无 GC 带来内存效率优势，但也以启动速度和调度透明性为代价。
+> [来源: 💡 原创分析]
 
 ### 13.2 内存-计算-通信 三维模型空间
 
@@ -611,7 +641,10 @@ graph TD
     G2 --- C
 ```
 
-> **认知功能**: 将执行模型映射到"内存-计算-通信"正交维度，帮助理解不同语言抽象在模型空间中的占据位置。使用建议：当系统混合多种并发模型时，用三维空间定位各组件的交互界面与潜在冲突点。关键洞察：Rust 提供横跨整个三维空间的原语（thread/async/channel/rayon），而 Go 的 goroutine 主要集中于"消息传递+异步"象限，体现了不同的设计哲学。[来源: 💡 原创分析]
+> **认知功能**:
+> 将执行模型映射到"内存-计算-通信"正交维度，帮助理解不同语言抽象在模型空间中的占据位置。
+> 使用建议：当系统混合多种并发模型时，用三维空间定位各组件的交互界面与潜在冲突点。
+> 关键洞察：Rust 提供横跨整个三维空间的原语（thread/async/channel/rayon），而 Go 的 goroutine 主要集中于"消息传递+异步"象限，体现了不同的设计哲学。[来源: 💡 原创分析]
 
 ---
 
@@ -635,10 +668,10 @@ graph TD
 ### L0-L7 纵向映射
 
 | 本文件主题 | L1 基础 | L2 进阶 | L3 高级 | L4 形式化 | L5 对比 | L6 生态 | L7 前沿 |
-|:---|:---|:---|:---|:---|:---|:---|:---|
-| 同步线程 | — | — | `std::thread` | 进程代数 CCS | vs Go M:N | 线程池 crate | 绿色线程?
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| 同步线程 | — | — | `std::thread` | 进程代数 CCS | vs Go M:N | 线程池 crate | 绿色线程? |
 | 异步协程 | — | — | `async/await` | CPS / 状态机 | vs JS/C# | Tokio / smol [历史: async-std 已停止维护] | gen blocks |
-| 并行计算 | — | — | `rayon` | Blelloch 工作度量 | vs C++ TBB | 并行算法库 | GPU 并行?
+| 并行计算 | — | — | `rayon` | Blelloch 工作度量 | vs C++ TBB | 并行算法库 | GPU 并行? |
 | CSP | — | — | `mpsc` / `crossbeam` | Hoare CSP / π 演算 | vs Go channel | channel crate | 流处理 |
 | Actor | — | — | `actix` / `ractor` | Hewitt Actor | vs Erlang | Actor 框架 | 分布式 Actor |
 | 内存共享 | — | — | `Mutex` / `Atomic` | C11 内存模型 | vs C++ atomic | 无锁结构 | 新内存模型 |
@@ -657,7 +690,15 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Async Book](https://rust-lang.github.io/async-book/) · [Tokio Tutorial](https://tokio.rs/tokio/tutorial/async) · [Hoare *Communicating Sequential Processes*](https://doi.org/10.1145/359576.359585) · [Milner *The Polyadic π-Calculus*](https://doi.org/10.1007/BFb0030902) · [Hewitt et al. *A Universal Modular ACTOR Formalism*](https://doi.org/10.1145/1624775.1624804) · [Boehm & Adve PLDI 2008](https://doi.org/10.1145/1375581.1375595) · [Blumofe & Leiserson *Work Stealing*](https://doi.org/10.1145/324133.324234) · [SPAA 2024 Rust Parallelism](https://www.eecg.utoronto.ca/~mcj/talks/2024.rpb.slides.spaa.pdf)
+> **权威来源**:
+> [Rust Async Book](https://rust-lang.github.io/async-book/) ·
+> [Tokio Tutorial](https://tokio.rs/tokio/tutorial/async) ·
+> [Hoare *Communicating Sequential Processes*](https://doi.org/10.1145/359576.359585) ·
+> [Milner *The Polyadic π-Calculus*](https://doi.org/10.1007/BFb0030902) ·
+> [Hewitt et al. *A Universal Modular ACTOR Formalism*](https://doi.org/10.1145/1624775.1624804) ·
+> [Boehm & Adve PLDI 2008](https://doi.org/10.1145/1375581.1375595) ·
+> [Blumofe & Leiserson *Work Stealing*](https://doi.org/10.1145/324133.324234) ·
+> [SPAA 2024 Rust Parallelism](https://www.eecg.utoronto.ca/~mcj/talks/2024.rpb.slides.spaa.pdf)
 > **Rust 版本**: 1.96.0 stable (Edition 2024)
 > **文档版本**: 1.0
 > **最后更新**: 2026-05-21
@@ -667,18 +708,10 @@ graph TD
 
 ## 权威来源索引
 
->
->
->
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/),
+> [The Rust Programming Language](https://doc.rust-lang.org/book/),
+> [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]
-
----
-
----
-
----
-
 > **相关文件**: [范式矩阵](./03_paradigm_matrix.md) · [异步](../03_advanced/02_async.md) · [并发](../03_advanced/01_concurrency.md)
 
 ## 十、边界测试：执行模型同构的编译错误
@@ -701,7 +734,14 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 支持两种 panic 策略：`unwind`（栈展开，调用 Drop）和 `abort`（直接终止进程，不调用 Drop）。`unwind` 是默认策略，允许资源清理；`abort` 产生更小的二进制文件，但可能导致资源泄漏。嵌入式环境通常使用 `abort`。执行模型的选择影响资源管理语义——同一 Unsafe Rust 代码在两种策略下可能有不同的安全保证。形式化语义中，`unwind` 对应于带有异常处理的计算，`abort` 对应于底部（⊥）。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**:
+> Rust 支持两种 panic 策略：`unwind`（栈展开，调用 Drop）和 `abort`（直接终止进程，不调用 Drop）。
+> `unwind` 是默认策略，允许资源清理；
+> `abort` 产生更小的二进制文件，但可能导致资源泄漏。
+> 嵌入式环境通常使用 `abort`。
+> 执行模型的选择影响资源管理语义——同一 Unsafe Rust 代码在两种策略下可能有不同的安全保证。
+> 形式化语义中，`unwind` 对应于带有异常处理的计算，`abort` 对应于底部（⊥）。
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.2 边界测试：`async` 与线程的执行模型混淆（编译错误）
 
@@ -729,7 +769,13 @@ fn main() {
 }
 ```
 
-> **修正**: `async fn` 创建的是 **Future**（惰性计算描述），不是线程。Future 必须在运行时（runtime）上执行，通过 `await` 挂起和恢复。这与 Go 的 goroutine（轻量级线程，自动调度）或 Erlang 的 process（独立执行单元）不同。Rust 的 async/await 是**零成本抽象**——Future 被编译为状态机，无运行时开销（除非使用运行时如 Tokio）。理解 "Future ≠ Thread" 是正确使用 Rust 异步编程的关键。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+>
+> **修正**: `async fn` 创建的是 **Future**（惰性计算描述），不是线程。
+> Future 必须在运行时（runtime）上执行，通过 `await` 挂起和恢复。
+> 这与 Go 的 goroutine（轻量级线程，自动调度）或 Erlang 的 process（独立执行单元）不同。
+> Rust 的 async/await 是**零成本抽象**——Future 被编译为状态机，无运行时开销（除非使用运行时如 Tokio）。
+> 理解 "Future ≠ Thread" 是正确使用 Rust 异步编程的关键。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.3 边界测试：绿色线程与 OS 线程的 API 混用（编译错误）
 
@@ -745,7 +791,19 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 1.0 之前实验过绿色线程（M:N 调度，用户态线程），但最终移除，改为原生 OS 线程（1:1 调度）。绿色线程与 OS 线程的**执行模型同构性**不成立：1) 栈大小不同（绿色线程的小栈 vs OS 线程的 8MB 栈）；2) TLS（线程局部存储）实现不同；3) 阻塞系统调用的影响不同（绿色线程阻塞会挂起整个 OS 线程，影响同线程的其他绿色线程）。Rust 选择 1:1 线程简化 FFI（C 库假设 OS 线程）、简化调试（栈追踪直接对应 OS 线程）、避免调度器复杂度。这与 Go 的 goroutine（M:N，由运行时调度）或 Erlang 的 process（M:N，由 BEAM VM 调度）不同——Rust 将并发抽象交给库（tokio、smol [历史: async-std 已停止维护]），内核保持简单。执行模型同构的关键洞察：不是所有并发模型都能透明映射，选择受生态系统、性能需求、兼容性约束。[来源: [Rust RFC 230](https://rust-lang.github.io/rfcs/0230-remove-runtime.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-01-threads.html)]
+> **修正**:
+> Rust 1.0 之前实验过绿色线程（M:N 调度，用户态线程），但最终移除，改为原生 OS 线程（1:1 调度）。
+> 绿色线程与 OS 线程的**执行模型同构性**不成立：
+>
+> 1) 栈大小不同（绿色线程的小栈 vs OS 线程的 8MB 栈）；
+> 2) TLS（线程局部存储）实现不同；
+> 3) 阻塞系统调用的影响不同（绿色线程阻塞会挂起整个 OS 线程，影响同线程的其他绿色线程）。
+> Rust 选择 1:1 线程简化 FFI（C 库假设 OS 线程）、简化调试（栈追踪直接对应 OS 线程）、避免调度器复杂度。
+> 这与 Go 的 goroutine（M:N，由运行时调度）或 Erlang 的 process（M:N，由 BEAM VM 调度）不同
+> ——Rust 将并发抽象交给库（tokio、smol [历史: async-std 已停止维护]），
+> 内核保持简单。执行模型同构的关键洞察：不是所有并发模型都能透明映射，选择受生态系统、性能需求、兼容性约束。
+> [来源: [Rust RFC 230](https://rust-lang.github.io/rfcs/0230-remove-runtime.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-01-threads.html)]
 
 ### 10.4 边界测试：CPS 变换与 Rust 的 `?` 运算符（编译错误）
 
@@ -768,7 +826,15 @@ fn direct_style(x: i32) -> Result<String, String> {
 }
 ```
 
-> **修正**: Rust 的 `?` 运算符是**隐式 CPS 变换**（continuation-passing style）：`expr?` 在 `Err` 时提前返回，在 `Ok` 时继续执行。编译器将 `?` 展开为 `match` 表达式，本质上是 CPS 的语法糖。手动编写 CPS（如 `cps_style`）在 Rust 中极其繁琐，因为 Rust 没有 first-class continuation（如 Scheme 的 `call/cc`）。这与 Haskell 的 `do` 语法（隐式 Monad 绑定，类似 `?`）或 JavaScript 的 `async/await`（隐式 Promise 展开）类似——现代语言通过语法糖隐藏 CPS 复杂性，使顺序代码看起来是直线的，底层是回调/状态机。执行模型同构：直接风格和 CPS 风格在语义上等价，但人类可读性和编译器优化空间不同。[来源: [Continuation-Passing Style](https://en.wikipedia.org/wiki/Continuation-passing_style)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-03-improving-our-io-project.html)]
+> **修正**:
+> Rust 的 `?` 运算符是**隐式 CPS 变换**（continuation-passing style）：`expr?` 在 `Err` 时提前返回，在 `Ok` 时继续执行。
+> 编译器将 `?` 展开为 `match` 表达式，本质上是 CPS 的语法糖。
+> 手动编写 CPS（如 `cps_style`）在 Rust 中极其繁琐，因为 Rust 没有 first-class continuation（如 Scheme 的 `call/cc`）。
+> 这与 Haskell 的 `do` 语法（隐式 Monad 绑定，类似 `?`）或 JavaScript 的 `async/await`（隐式 Promise 展开）类似
+> ——现代语言通过语法糖隐藏 CPS 复杂性，使顺序代码看起来是直线的，底层是回调/状态机。
+> 执行模型同构：直接风格和 CPS 风格在语义上等价，但人类可读性和编译器优化空间不同。
+> [来源: [Continuation-Passing Style](https://en.wikipedia.org/wiki/Continuation-passing_style)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-03-improving-our-io-project.html)]
 
 ### 10.5 边界测试：CPS 变换中的栈溢出（运行时 panic）
 
@@ -783,7 +849,15 @@ fn cps_factorial(n: u64, k: Box<dyn Fn(u64) -> u64>) -> u64 {
 }
 ```
 
-> **修正**: CPS（Continuation-Passing Style）将控制流转换为函数调用，每个"下一步"成为闭包参数。上述代码中，`k` 是累积的闭包链：每次递归包装一层 `move |r| k(n * r)`。`n = 100000` 时，闭包链深 10 万层，`k(1)` 调用时逐层展开，栈溢出。这与直接递归的栈溢出原因相同——CPS 不消除递归，只是改变形式。**尾递归优化**（TCO）可消除尾调用的栈帧，但 Rust 不保证 TCO。真正的 CPS 优化：使用 trampoline（蹦床）模式——返回 "下一步" 闭包而非调用它，外层循环执行。这与 Scheme 的 TCO（语言保证）或 JavaScript 的异步回调（事件循环作为 trampoline）不同——Rust 要求开发者手动实现 trampoline 或使用迭代。[来源: [Continuation-Passing Style](https://en.wikipedia.org/wiki/Continuation-passing_style)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**:
+> CPS（Continuation-Passing Style）将控制流转换为函数调用，每个"下一步"成为闭包参数。
+> 上述代码中，`k` 是累积的闭包链：每次递归包装一层 `move |r| k(n * r)`。`n = 100000` 时，闭包链深 10 万层，`k(1)` 调用时逐层展开，栈溢出。
+> 这与直接递归的栈溢出原因相同——CPS 不消除递归，只是改变形式。
+> **尾递归优化**（TCO）可消除尾调用的栈帧，但 Rust 不保证 TCO。
+> 真正的 CPS 优化：使用 trampoline（蹦床）模式——返回 "下一步" 闭包而非调用它，外层循环执行。
+> 这与 Scheme 的 TCO（语言保证）或 JavaScript 的异步回调（事件循环作为 trampoline）不同——Rust 要求开发者手动实现 trampoline 或使用迭代。
+> [来源: [Continuation-Passing Style](https://en.wikipedia.org/wiki/Continuation-passing_style)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.3 边界测试：尾递归与 Rust 的 TCO 缺失（运行时栈溢出）
 
@@ -802,7 +876,18 @@ fn main() {
 }
 ```
 
-> **修正**: Rust **不保证**尾调用优化（TCO），即使代码在语法上是尾递归。`n * factorial(n - 1)` 不是尾调用（乘法在递归返回后执行）。即使是真正的尾递归（`factorial(n, acc)`），Rust 编译器（LLVM 后端）可能优化也可能不优化——依赖优化级别和内联启发式。可靠方案：1) 使用循环替代递归；2) 使用显式栈数据结构（`Vec` 模拟递归）；3) 使用 `trampolin` crate（蹦床模式）。这与 Scheme 的 TCO（语言保证）或 Erlang 的尾递归（VM 优化）不同——Rust 偏向命令式循环，递归仅用于算法清晰表达。2024 年 Rust 社区讨论过 `become` 关键字（显式尾调用），但尚未稳定。[来源: [Rust Reference — Tail Expressions](https://doc.rust-lang.org/reference/expressions.html#tail-expressions)] · [来源: [Rust Internals](https://internals.rust-lang.org/)]
+> **修正**: Rust **不保证**尾调用优化（TCO），即使代码在语法上是尾递归。
+> `n * factorial(n - 1)` 不是尾调用（乘法在递归返回后执行）。
+> 即使是真正的尾递归（`factorial(n, acc)`），Rust 编译器（LLVM 后端）可能优化也可能不优化——依赖优化级别和内联启发式。
+> 可靠方案：
+>
+> 1) 使用循环替代递归；
+> 2) 使用显式栈数据结构（`Vec` 模拟递归）；
+> 3) 使用 `trampolin` crate（蹦床模式）。
+> 这与 Scheme 的 TCO（语言保证）或 Erlang 的尾递归（VM 优化）不同——Rust 偏向命令式循环，递归仅用于算法清晰表达。
+> 2024 年 Rust 社区讨论过 `become` 关键字（显式尾调用），但尚未稳定。
+> [来源: [Rust Reference — Tail Expressions](https://doc.rust-lang.org/reference/expressions.html#tail-expressions)] ·
+> [来源: [Rust Internals](https://internals.rust-lang.org/)]
 
 ## 认知路径
 
@@ -811,18 +896,16 @@ fn main() {
 ### 核心推理链
 
 | 定理 | 前提 | 结论 | 置信度 |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
 | Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
 | Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > **过渡**: 掌握 Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 
-> **反命题**: "Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
-
+> **反命题**: "Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行 在所有场景下都是最佳选择" —— 错误。
+> 需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
