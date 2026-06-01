@@ -206,6 +206,8 @@ pub fn timed(_attr: TokenStream, item: TokenStream) -> TokenStream {
 ///     println!("");
 ///     println!("发布模式");
 ///     println!("");
+/// }
+/// ```
 #[proc_macro]
 pub fn conditional(input: TokenStream) -> TokenStream {
     // 解析条件编译块：conditional! { #[cfg(cond)] { expr } #[cfg(not(cond))] { expr } }
@@ -330,6 +332,7 @@ pub fn derive_auto_clone(input: TokenStream) -> TokenStream {
 ///         name: String,
 ///         email: String,
 ///     }
+/// }
 /// ```
 #[proc_macro]
 pub fn serializable(input: TokenStream) -> TokenStream {

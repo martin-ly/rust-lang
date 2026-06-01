@@ -108,6 +108,7 @@ impl FileHandle<Closed> {
 /// let file = FileHandle::<Uninitialized>::new("test.txt".into());
 /// file.read(); // 错误：Uninitialized状态无read方法
 /// file.read(); // errorUninitializedstatuswithoutread method
+/// ```
 ///
 /// 因此，状态转换的正确性在**编译时**得到保证。∎
 /// therefore ，state conversion in **compile-time **to 。∎

@@ -25,11 +25,13 @@ use std::cmp::Ordering;
 /// ## Formal Specification
 ///
 /// **前置条件** (Precondition):
+/// ```text
 /// ∀i ∈ [0, n-2]. arr[i] ≤ arr[i+1]  // 数组已排序
 /// i [0, n-2]. arr[i] arr[i+1] // array sort
 /// ```
 ///
 /// **后置条件** (Postcondition):
+/// ```text
 /// result = Some(idx) ⟺ arr[idx] = target ∧ 0 ≤ idx < n
 /// result = None      ⟺ ∀i ∈ [0, n). arr[i] ≠ target
 /// ```
@@ -47,7 +49,6 @@ use std::cmp::Ordering;
 ///
 /// ## 循环不变量
 /// ## circulation variable
-///
 /// ```text
 /// 不变量 I:
 /// variable I:
@@ -58,7 +59,6 @@ use std::cmp::Ordering;
 /// ```
 ///
 /// ## 正确性证明（霍尔逻辑）
-///
 /// ```text
 /// 初始化：
 /// ：
@@ -94,7 +94,6 @@ use std::cmp::Ordering;
 ///
 /// ## Rust实现
 /// ## Rust
-///
 /// ```rust
 /// use c08_algorithms::algorithms::formal_verification_examples::binary_search_verified;
 ///
