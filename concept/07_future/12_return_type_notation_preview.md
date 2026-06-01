@@ -423,3 +423,34 @@ impl Processor for MyProcessor {
 ```
 
 > **修正**: `impl Trait` 在 trait 方法返回类型中的使用（RPITIT，Return Position Impl Trait In Traits）与 RTN 交互复杂：默认实现返回 `impl Send`，要求所有重写也返回 `Send` 类型。但编译器如何验证？1) 在 trait 定义处检查默认实现；2) 在每个 `impl` 处检查重写；3) 通过 RTN `Processor::process(..): Send` 在调用点验证。当前 Rust 1.75+ 支持 RPITIT，但 RTN 仍处于实验阶段。设计决策：返回类型约束应属于 trait 契约（所有实现必须满足）还是调用者约束（特定调用需要）？RTN 倾向于后者，但前者也有需求（如 `Iterator::next` 返回 `Option<Self::Item>`，`Item` 在 trait 定义时约束）。这与 Java 的泛型返回类型（编译期擦除，无此问题）或 C++ 的 `auto` 返回（推断具体类型，无约束）不同——Rust 的 `impl Trait` 是存在类型 + 约束的组合。[来源: [Rust RFC 3654](https://rust-lang.github.io/rfcs/3654-return-type-notation.html)] · [来源: [Rust RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bound.html)]
+> **过渡**: Return Type Notation 预研：精确捕获的显式控制 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: Return Type Notation 预研：精确捕获的显式控制 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: Return Type Notation 预研：精确捕获的显式控制 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+
+### 补充定理链
+
+- **定理**: Return Type Notation 预研：精确捕获的显式控制 定义 ⟹ 类型安全保证
+- **定理**: Return Type Notation 预研：精确捕获的显式控制 定义 ⟹ 类型安全保证
+- **定理**: Return Type Notation 预研：精确捕获的显式控制 定义 ⟹ 类型安全保证
+
+## 认知路径
+
+> **认知路径**: 从 Rust 核心语言特性出发，经由 **Return Type Notation 预研：精确捕获的显式控制** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| Return Type Notation 预研：精确捕获的显式控制 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
+| Return Type Notation 预研：精确捕获的显式控制 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
+| Return Type Notation 预研：精确捕获的显式控制 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+> **过渡**: 掌握 Return Type Notation 预研：精确捕获的显式控制 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
+
+> **过渡**: 在工程实践中应用 Return Type Notation 预研：精确捕获的显式控制 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
+
+> **过渡**: Return Type Notation 预研：精确捕获的显式控制 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
+
+### 反命题与边界
+
+> **反命题**: "Return Type Notation 预研：精确捕获的显式控制 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。

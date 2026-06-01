@@ -1,8 +1,8 @@
 # Rust 学习项目版本索引
 
-> **当前活跃版本**: Rust 1.95.0
-> **发布日期**: 2026-04-16
-> **最后更新**: 2026-05-06
+> **当前活跃版本**: Rust 1.96.0
+> **发布日期**: 2026-05-28
+> **最后更新**: 2026-06-01
 > **状态**: ✅ 100% 完成
 
 ---
@@ -43,8 +43,9 @@ crates/
 | Rust 1.92 | 2024-07 | 已归档 | `*/src/archive/rust_192_features.rs` |
 | Rust 1.93 | 2026-01-22 | 已归档 | `*/src/archive/rust_193_features.rs` |
 | Rust 1.94 | 2026-03-05 | 已归档 | `*/src/archive/rust_194_features.rs` |
-| **Rust 1.95** | **2026-04-16** | **活跃** | `*/src/rust_195_features.rs` |
-| 权威来源 | [releases.rs](https://releases.rs/docs/1.95.0/) | - | - |
+| Rust 1.95 | 2026-04-16 | 已归档 | `*/src/archive/rust_195_features.rs` |
+| **Rust 1.96** | **2026-05-28** | **活跃** | `*/src/rust_196_features.rs` |
+| 权威来源 | [releases.rs](https://releases.rs/docs/1.96.0/) | - | - |
 
 ---
 
@@ -53,9 +54,9 @@ crates/
 ### 访问当前版本特性 (推荐)
 
 ```rust
-// 使用最新 1.95 特性
-use c01_ownership_borrow_scope::rust_195_features::*;
-use c02_type_system::rust_195_features::*;
+// 使用最新 1.96 特性
+use c01_ownership_borrow_scope::rust_196_features::*;
+use c02_type_system::rust_196_features::*;
 ```
 
 ### 访问历史版本特性
@@ -75,8 +76,8 @@ use c01_ownership_borrow_scope::rust_190_features::*;
 ### 版本生命周期
 
 1. **活跃版本 (Active)**
-   - 当前稳定版本 (Rust 1.95)
-   - 位于 `src/rust_195_features.rs`
+   - 当前稳定版本 (Rust 1.96)
+   - 位于 `src/rust_196_features.rs`
    - 积极维护和更新
 
 2. **归档版本 (Archived)**
@@ -107,20 +108,20 @@ Rust 新版本发布
 
 ## Crate 版本覆盖情况
 
-| Crate | 1.89 | 1.90 | 1.91 | 1.92 | 1.93 | 1.94 | 1.95 (活跃) |
-|-------|------|------|------|------|------|------|-------------|
-| c01_ownership_borrow_scope | - | ✅ | ✅ | ✅ | - | ✅ | ✅ |
-| c02_type_system | - | - | ✅ | ✅ | - | ✅ | ✅ |
-| c03_control_fn | ✅ | ✅ | ✅ | ✅ | - | ✅ | ✅ |
-| c04_generic | ✅ | ✅ | ✅ | ✅ | - | ✅ | ✅ |
-| c05_threads | - | ✅ | ✅ | ✅ | - | ✅ | ✅ |
-| c06_async | - | ✅ | ✅ | ✅ | - | ✅ | ✅ |
-| c07_process | - | ✅ | ✅ | ✅ | - | ✅ | ✅ |
-| c08_algorithms | - | - | ✅ | ✅ | - | ✅ | ✅ |
-| c09_design_pattern | ✅ | ✅ | ✅ | ✅ | - | ✅ | ✅ |
-| c10_networks | - | - | ✅ | ✅ | - | ✅ | ✅ |
-| c11_macro_system | - | - | ✅ | ✅ | - | ✅ | ✅ |
-| c12_wasm | - | - | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Crate | 1.89 | 1.90 | 1.91 | 1.92 | 1.93 | 1.94 | 1.95 | 1.96 (活跃) |
+|-------|------|------|------|------|------|------|------|-------------|
+| c01_ownership_borrow_scope | - | ✅ | ✅ | ✅ | - | ✅ | ✅ | ✅ |
+| c02_type_system | - | - | ✅ | ✅ | - | ✅ | ✅ | ✅ |
+| c03_control_fn | ✅ | ✅ | ✅ | ✅ | - | ✅ | ✅ | ✅ |
+| c04_generic | ✅ | ✅ | ✅ | ✅ | - | ✅ | ✅ | ✅ |
+| c05_threads | - | ✅ | ✅ | ✅ | - | ✅ | ✅ | ✅ |
+| c06_async | - | ✅ | ✅ | ✅ | - | ✅ | ✅ | ✅ |
+| c07_process | - | ✅ | ✅ | ✅ | - | ✅ | ✅ | ✅ |
+| c08_algorithms | - | - | ✅ | ✅ | - | ✅ | ✅ | ✅ |
+| c09_design_pattern | ✅ | ✅ | ✅ | ✅ | - | ✅ | ✅ | ✅ |
+| c10_networks | - | - | ✅ | ✅ | - | ✅ | ✅ | ✅ |
+| c11_macro_system | - | - | ✅ | ✅ | - | ✅ | ✅ | ✅ |
+| c12_wasm | - | - | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ---
 

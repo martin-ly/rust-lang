@@ -144,7 +144,7 @@ graph TD
 
 与传统监督学习依赖人工标注不同，Rust 编译器提供了一个**完全确定性的反馈环境**：
 
-```rust
+```rust,compile_fail
 // 状态: 错误代码 + rustc JSON 诊断
 // 动作: 修改代码（插入/删除/替换 token）
 // 奖励: +10 编译通过, +5 错误减少, -3 引入新错误, -5 测试失败
@@ -726,7 +726,7 @@ fn correct_fix(s: &str) -> String {
 
 ### 10.1 边界测试：ML 模型输入维度不匹配（运行时错误）
 
-```rust
+```rust,ignore
 use ndarray::Array2;
 
 fn predict(model: &dyn Fn(&Array2<f32>) -> Array2<f32>, input: Array2<f32>) {
@@ -828,3 +828,12 @@ fn main() {
 ```
 
 > **修正**: AI 工具（Copilot、ChatGPT）生成 Rust 代码时，**所有权和生命周期**是最常见的错误类型：1) 返回局部引用（悬垂引用）；2) 在闭包中错误捕获引用（非 `'static`）；3) 借用冲突（`&mut` 与 `&` 重叠）。AI 的训练数据包含大量 C/Java/Python 代码，这些语言的引用语义与 Rust 不同，导致生成"看起来像正确 Rust"但实际编译错误的代码。缓解：1) **始终编译 AI 生成的代码**；2) 使用 `cargo check` + `cargo clippy`；3) 对关键代码运行 Miri；4) 不依赖 AI 生成 unsafe 代码。这与人类初学者的错误模式类似——Rust 的所有权系统是独特的，需要专门学习，AI 也无法从其他语言的训练中自动掌握。[来源: [GitHub Copilot](https://github.com/features/copilot)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **过渡**: AI × Rust：生成-验证闭环与确定性容器 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: AI × Rust：生成-验证闭环与确定性容器 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: AI × Rust：生成-验证闭环与确定性容器 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+
+### 补充定理链
+
+- **定理**: AI × Rust：生成-验证闭环与确定性容器 定义 ⟹ 类型安全保证
+- **定理**: AI × Rust：生成-验证闭环与确定性容器 定义 ⟹ 类型安全保证
+

@@ -577,3 +577,26 @@ fn main() {
 ```
 
 > **修正**: JavaScript 的**弱类型**系统允许大量隐式转换：`"5" + 3` → `"53"`、`"5" - 3` → `2`、`true + 1` → `2`。这些规则复杂且易错（`[] + {}` → `"[object Object]"`）。Rust 是**强类型**的：几乎所有操作都要求操作数类型匹配，无隐式转换（`i32` → `u32` 需 `as`，`String` → `&str` 需 `&` 或 `Deref`）。这是设计哲学的根本差异：JavaScript 追求灵活和快速开发，Rust 追求安全和可维护。从 JavaScript 迁移到 Rust 的开发者常感"繁琐"，但类型错误在编译期被捕获，而非运行期成为 Heisenbug。这与 Python 的隐式转换（类似 JavaScript）或 Go 的强类型（类似 Rust，但有隐式接口实现）类似——Rust 在强类型谱系中属于最严格的一端。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)] · [来源: [JavaScript Type Coercion](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Type_coercion)]
+
+## 认知路径
+
+> **认知路径**: 从 L0 基础概念出发，经由本节的 **Rust vs JavaScript：系统编程与脚本执行的范式差异** 核心原理，通向 L2 进阶模式与 L3 工程实践。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| Rust vs JavaScript：系统编程与脚本执行的范式差异 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
+| Rust vs JavaScript：系统编程与脚本执行的范式差异 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| Rust vs JavaScript：系统编程与脚本执行的范式差异 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
+
+> **过渡**: 掌握 Rust vs JavaScript：系统编程与脚本执行的范式差异 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+
+> **过渡**: 在实践中应用 Rust vs JavaScript：系统编程与脚本执行的范式差异 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
+
+> **过渡**: Rust vs JavaScript：系统编程与脚本执行的范式差异 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+
+### 反命题与边界
+
+> **反命题**: "Rust vs JavaScript：系统编程与脚本执行的范式差异 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+

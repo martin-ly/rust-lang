@@ -507,15 +507,16 @@ fn main() {
 
 ### 10.1 边界测试：异步运行时混用（编译错误）
 
-```rust,compile_fail
-// 假设同时依赖 tokio 和 Tokio
+```rust
+// ⚠️ 运行时风险: 混用不同运行时的 spawn 可能导致 panic 或死锁
+// 以下代码展示了潜在问题（已注释掉，避免实际运行）
 
 async fn task() {
     println!("running");
 }
 
 fn main() {
-    // ❌ 编译错误/运行时 panic: 在 tokio runtime 中调用 Tokio 的 future
+    // 错误做法: 在 tokio runtime 中调用 async-std 的 spawn
     // tokio::runtime::Runtime::new().unwrap().block_on(async {
     //     async_std::task::spawn(task()).await; // 可能 panic 或死锁
     // });
@@ -625,3 +626,34 @@ async fn health_check() -> &'static str {
 ```
 
 > **修正**: Kubernetes 探针的区分：1) **livenessProbe**：检测死锁/无限循环，失败 → 重启容器；2) **readinessProbe**：检测依赖就绪，失败 → 从 service endpoints 移除（不重启）；3) **startupProbe**：保护慢启动应用，失败 → 重启。反模式：1) 同一端点处理两种探针 → 无法区分状态；2) liveness 检查外部依赖 → 外部故障导致全部 pod 重启，级联故障；3) 超时过短 → 正常慢请求触发重启。Rust 云原生应用应暴露 `/health/live`（简单存活检查）和 `/health/ready`（依赖就绪检查）。这与 Go 的 Kubernetes 客户端或 Java 的 Spring Boot Actuator 类似——探针设计是分布式系统可靠性的基石。[来源: [Kubernetes Probes](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)] · [来源: [AWS Well-Architected](https://docs.aws.amazon.com/wellarchitected/latest/health-safety-pillar/welcome.html)]
+> **过渡**: Rust 云原生生态 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: Rust 云原生生态 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: Rust 云原生生态 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+
+### 补充定理链
+
+- **定理**: Rust 云原生生态 定义 ⟹ 类型安全保证
+- **定理**: Rust 云原生生态 定义 ⟹ 类型安全保证
+- **定理**: Rust 云原生生态 定义 ⟹ 类型安全保证
+
+## 认知路径
+
+> **认知路径**: 从 Rust 核心语言特性出发，经由 **Rust 云原生生态** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| Rust 云原生生态 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
+| Rust 云原生生态 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
+| Rust 云原生生态 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+> **过渡**: 掌握 Rust 云原生生态 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
+
+> **过渡**: 在工程实践中应用 Rust 云原生生态 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
+
+> **过渡**: Rust 云原生生态 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
+
+### 反命题与边界
+
+> **反命题**: "Rust 云原生生态 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。

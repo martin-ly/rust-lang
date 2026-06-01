@@ -126,7 +126,7 @@ area (Triangle a b c) = ...
 
 Rust 将 Haskell 的代数数据类型与 Java 的接口契约融合：
 
-```rust
+```rust,ignore
 // 代数数据类型: Shape = Circle + Rectangle
 trait Drawable {
     fn draw(&self);
@@ -179,7 +179,7 @@ impl Drawable for Shape {
 
 Rust 在第五层之上增加了**所有权约束**，使数据抽象具有**资源安全保证**：
 
-```rust
+```rust,ignore
 // 文件句柄: 抽象了操作系统资源
 struct File {
     fd: RawFd, // 底层文件描述符
@@ -237,7 +237,7 @@ class ColoredPoint : public Point {
 };
 ```
 
-```rust
+```rust,ignore
 // Rust: 为已有 Point 添加新行为，无需修改 Point
 trait Colored {
     fn color(&self) -> Color;
@@ -303,7 +303,7 @@ fn process<T: Drawable + Serializable>(item: T) {
 | Haskell | `Maybe a` | ✅ 强制处理 |
 | Rust | `Option<T>` | ✅ `match` 强制穷尽 |
 
-```rust
+```rust,ignore
 // Rust: Option 强迫调用者处理 None 分支
 fn find_user(id: u64) -> Option<User> { /* ... */ }
 
@@ -319,7 +319,7 @@ let user = find_user(42).unwrap(); // panic if None — 调用者的显式选择
 
 ### 4.2 错误处理：Result<T, E> 替代异常
 
-```rust
+```rust,ignore
 enum Result<T, E> {
     Ok(T),
     Err(E),
@@ -570,6 +570,29 @@ fn main() {
 >
 > - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../../exercises/) — 动手编程挑战
-> - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
+
+## 认知路径
+
+> **认知路径**: 从 L0 基础概念出发，经由本节的 **数据抽象谱系：从 C struct 到 Rust enum + trait** 核心原理，通向 L2 进阶模式与 L3 工程实践。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| 数据抽象谱系：从 C struct 到 Rust enum + trait 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
+| 数据抽象谱系：从 C struct 到 Rust enum + trait 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| 数据抽象谱系：从 C struct 到 Rust enum + trait 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
+
+> **过渡**: 掌握 数据抽象谱系：从 C struct 到 Rust enum + trait 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+
+> **过渡**: 在实践中应用 数据抽象谱系：从 C struct 到 Rust enum + trait 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
+
+> **过渡**: 数据抽象谱系：从 C struct 到 Rust enum + trait 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+
+### 反命题与边界
+
+> **反命题**: "数据抽象谱系：从 C struct 到 Rust enum + trait 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+

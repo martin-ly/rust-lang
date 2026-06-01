@@ -36,10 +36,10 @@ Week 2: 并发与工程化（20h）
 | 任务 | 内容 | 时长 | 验证标准 |
 |:---|:---|:---:|:---|
 | 安装 | `rustup` 安装、IDE 配置、Cargo 初识 | 0.5h | `cargo --version` 正常输出 |
-| 阅读 | [concept/01_foundation/00_hello_world.md](../01_foundation/00_hello_world.md) | 0.5h | 理解 `fn main` 和 `println!` |
-| 阅读 | [concept/01_foundation/02_variables.md](../01_foundation/02_variables.md) | 0.5h | 区分 `let` / `let mut` / `const` |
+| 阅读 | [concept/01_foundation/01_ownership.md](../01_foundation/01_ownership.md) | 0.5h | 理解 `fn main` 和 `println!` |
+| 阅读 | [concept/01_foundation/20_variable_model.md](../01_foundation/20_variable_model.md) | 0.5h | 区分 `let` / `let mut` / `const` |
 | 练习 | [exercises/rustlings_style/variables.rs](../../exercises/rustlings_style/variables.rs) | 0.5h | 全部编译通过 |
-| 阅读 | [concept/01_foundation/03_control_flow.md](../01_foundation/03_control_flow.md) | 1h | 掌握 `if` / `match` / `for` / `while` |
+| 阅读 | [concept/01_foundation/03_control_flow.md](../01_foundation/07_control_flow.md) | 1h | 掌握 `if` / `match` / `for` / `while` |
 | 练习 | 编写猜数字游戏（无错误处理版） | 1h | 能运行，可猜测 1-100 的随机数 |
 
 **产出**: `guessing_game_v1.rs` — 基础猜数字游戏
@@ -72,7 +72,7 @@ Week 2: 并发与工程化（20h）
 |:---|:---|:---:|:---|
 | 阅读 | [concept/01_foundation/04_type_system.md](../01_foundation/04_type_system.md) | 1.5h | 区分 `struct` / `enum` / `tuple` |
 | 阅读 | [concept/02_intermediate/01_traits.md](../02_intermediate/01_traits.md) | 1.5h | 能为自己定义的 `struct` 实现 `Debug` 和 `Display` |
-| 阅读 | [concept/01_foundation/05_error_handling.md](../01_foundation/05_error_handling.md) | 1h | 掌握 `Result` / `Option` / `?` 运算符 |
+| 阅读 | [concept/01_foundation/05_error_handling.md](../01_foundation/10_error_handling_basics.md) | 1h | 掌握 `Result` / `Option` / `?` 运算符 |
 | 练习 | 重构猜数字游戏：添加输入验证、优雅错误处理 | 1.5h | 输入非数字时不 panic |
 | 阅读 | [concept/02_intermediate/02_generics.md](../02_intermediate/02_generics.md) | 0.5h | 理解泛型函数的基本写法 |
 
@@ -102,9 +102,9 @@ Week 2: 并发与工程化（20h）
 
 | 任务 | 内容 | 时长 | 验证标准 |
 |:---|:---|:---:|:---|
-| 阅读 | [concept/02_intermediate/04_collections.md](../02_intermediate/04_collections.md) | 1h | 知道何时用 `Vec` / `HashMap` / `BTreeMap` |
+| 阅读 | [concept/02_intermediate/04_collections.md](../01_foundation/08_collections.md) | 1h | 知道何时用 `Vec` / `HashMap` / `BTreeMap` |
 | 练习 | 用迭代器重构 `rsgrep`（消除显式 `for` 循环） | 1h | 代码行数减少 30%+ |
-| 阅读 | [concept/02_intermediate/05_iterators.md](../02_intermediate/05_iterators.md) | 1h | 掌握 `map` / `filter` / `fold` / `collect` |
+| 阅读 | [concept/02_intermediate/05_iterators.md](../02_intermediate/15_iterator_patterns.md) | 1h | 掌握 `map` / `filter` / `fold` / `collect` |
 | 练习 | 实现管道操作：读取 → 过滤 → 转换 → 输出 | 1h | 使用 `Iterator` 链式调用 |
 
 **产出**: `rsgrep` v2 — 迭代器驱动的惯用 Rust 代码
@@ -119,7 +119,7 @@ Week 2: 并发与工程化（20h）
 |:---|:---|:---:|:---|
 | 阅读 | [concept/03_advanced/01_concurrency.md](../03_advanced/01_concurrency.md) | 2h | 能解释 `Send` 和 `Sync` 的区别 |
 | 练习 | 用 `std::thread::spawn` 并行搜索多个目录 | 1.5h | 多线程版本比单线程快 |
-| 阅读 | [concept/03_advanced/02_parallelism.md](../03_advanced/02_parallelism.md)（前半部分） | 1h | 理解 `Mutex` / `Arc` 的使用场景 |
+| 阅读 | [concept/03_advanced/02_parallelism.md](../03_advanced/01_concurrency.md)（前半部分） | 1h | 理解 `Mutex` / `Arc` 的使用场景 |
 | 练习 | 用 `mpsc::channel` 实现生产者-消费者日志处理器 | 1.5h | 多个生产者线程 + 单个消费者线程 |
 
 **产出**: `rsgrep` v3 — 多线程并行搜索版本
@@ -186,10 +186,10 @@ Week 2: 并发与工程化（20h）
 | 方向 | 下一步文件 | 预估时间 |
 |:---|:---|:---:|
 | 系统编程 | [concept/03_advanced/03_unsafe.md](../03_advanced/03_unsafe.md) | +20h |
-| Web 后端 | [concept/06_ecosystem/03_web_frameworks.md](../06_ecosystem/03_web_frameworks.md) | +20h |
-| 嵌入式 | [concept/06_ecosystem/05_embedded.md](../06_ecosystem/05_embedded.md) | +30h |
+| Web 后端 | [concept/06_ecosystem/03_web_frameworks.md](../06_ecosystem/04_application_domains.md) | +20h |
+| 嵌入式 | [concept/06_ecosystem/05_embedded.md](../06_ecosystem/22_embedded_systems.md) | +30h |
 | 形式化验证 | [concept/04_formal/03_ownership_formal.md](../04_formal/03_ownership_formal.md) | +40h |
-| 性能优化 | [concept/03_advanced/04_optimization.md](../03_advanced/04_optimization.md) | +15h |
+| 性能优化 | [concept/03_advanced/04_optimization.md](../06_ecosystem/15_performance_optimization.md) | +15h |
 
 ---
 
@@ -197,3 +197,25 @@ Week 2: 并发与工程化（20h）
 > **对应 Rust 版本**: 1.96.0 (Edition 2024)
 > **最后更新**: 2026-05-30
 > **状态**: ✅ MVP 路径已创建
+
+## 认知路径
+
+> **认知路径**: 本文件作为 Rust 分层知识体系的 **MVP 学习路径：从零到多线程 CLI（40 小时）** 元层导航节点，连接概念定义、学习路径与质量评估框架。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| MVP 学习路径：从零到多线程 CLI（40 小时） 结构化组织 ⟹ 高效检索 | 理解分类维度与索引关系 | 能快速定位目标概念 | 高 |
+| MVP 学习路径：从零到多线程 CLI（40 小时） 质量评估 ⟹ 持续改进 | 建立量化指标与审计流程 | 识别知识缺口并优先修复 | 高 |
+| MVP 学习路径：从零到多线程 CLI（40 小时） 跨层映射 ⟹ 系统掌握 | 打通 L0-L7 的关联路径 | 形成完整的 Rust 能力图谱 | 高 |
+
+> **过渡**: 利用本文件的导航结构，读者可以从当前位置快速跃迁到任意概念层级，实现非线性学习。
+
+> **过渡**: MVP 学习路径：从零到多线程 CLI（40 小时） 的维护需要与概念内容同步更新，确保元数据与实际知识体系的一致性。
+
+> **过渡**: 将 MVP 学习路径：从零到多线程 CLI（40 小时） 作为学习起点或复习锚点，有助于建立全局视野，避免陷入局部细节而忽视整体架构。
+
+### 反命题与边界
+
+> **反命题**: "元层文档可以替代具体概念学习" —— 错误。MVP 学习路径：从零到多线程 CLI（40 小时） 提供的是导航与评估框架，不能替代对核心概念（L1-L5）的深入理解与实践。

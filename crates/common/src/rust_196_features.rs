@@ -364,7 +364,7 @@ pub fn demonstrate_all_rust_196_features() {
 
 /// 获取 Rust 1.96 特性信息
 pub fn get_rust_196_feature_info() -> String {
-    "Rust 1.96 稳定特性参考:\n- core::range family (Range, RangeInclusive, RangeFrom, \
+    "Rust 1.96.0 稳定特性参考:\n- core::range family (Range, RangeInclusive, RangeFrom, \
      RangeToInclusive, RangeIter, RangeFromIter, RangeToInclusiveIter)\n- assert_matches! / \
      debug_assert_matches! macro\n- From<T> for LazyCell / LazyLock / AssertUnwindSafe\n- \
      ManuallyDrop patterns\n- NonZero range iteration\n- never type tuple coercion\n- expr \

@@ -90,7 +90,7 @@ processExcept :: Int -> Either Error Int  -- 可能抛出异常
 
 Rust 通过 **所有权 + 类型系统** 显式化副作用：
 
-```rust
+```rust,ignore
 // Rust: 副作用通过参数类型和返回类型显式表达
 fn process_pure(x: i32) -> i32 { x * 2 }  // 无副作用（参数和返回都不涉及效果）
 
@@ -164,7 +164,7 @@ unsafe fn raw_access(ptr: *const i32, offset: isize) -> i32 {
 
 Rust 将异常效果编码在返回类型中：
 
-```rust
+```rust,ignore
 // 显式异常效果: 调用者必须处理 Err 分支
 fn may_fail() -> Result<i32, Error> {
     Ok(42)
@@ -191,7 +191,7 @@ fn compose() -> Result<i32, Error> {
 
 `async fn` 将并发效果编码在返回类型中：
 
-```rust
+```rust,compile_fail
 // async 效果: 函数返回 Future，实际计算延迟到 await
 async fn fetch_data() -> Vec<u8> {
     // 此函数体不会立即执行！
@@ -216,7 +216,7 @@ let data = fetch_data().await;
 1. **确定性**: 相同输入总是产生相同输出
 2. **无副作用**: 不修改外部状态，不进行 IO
 
-```rust
+```rust,ignore
 // 纯函数
 fn add(a: i32, b: i32) -> i32 { a + b }
 
@@ -231,7 +231,7 @@ fn log_message(msg: &str) { println!("{}", msg); } // 有 IO 副作用
 
 Rust 没有全局引用透明的保证，但可以通过类型系统识别纯函数：
 
-```rust
+```rust,compile_fail
 // 纯函数的 Rust 签名特征:
 // 1. 不接受 &mut T 参数
 // 2. 不返回 Result/Option（除非输入包含）
@@ -291,7 +291,7 @@ fn functional_sum(data: &[i32]) -> i32 {
 
 **代数数据类型（ADT）的函数式遗产**:
 
-```rust
+```rust,compile_fail
 // Rust 的 enum = 代数数据类型（来自 ML/Haskell）
 enum Option<T> {
     Some(T),  // 构造函数 = 值构造子
@@ -335,7 +335,7 @@ fn implicit_side_effect() {
 
 ### 7.2 边界测试：`unsafe` 中的副作用逃逸
 
-```rust
+```rust,ignore
 // 边界测试: unsafe 块内的副作用不受编译器验证
 fn unsafe_effect_escape() {
     let mut x = 5;
@@ -514,7 +514,7 @@ fn main() {
 >
 > - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../../exercises/) — 动手编程挑战
-> - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
 
@@ -532,3 +532,26 @@ fn main() {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rust RFCs](https://rust-lang.github.io/rfcs/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
+## 认知路径
+
+> **认知路径**: 从 L0 基础概念出发，经由本节的 **副作用与纯度：从引用透明到 Rust 的所有权效果** 核心原理，通向 L2 进阶模式与 L3 工程实践。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| 副作用与纯度：从引用透明到 Rust 的所有权效果 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
+| 副作用与纯度：从引用透明到 Rust 的所有权效果 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| 副作用与纯度：从引用透明到 Rust 的所有权效果 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
+
+> **过渡**: 掌握 副作用与纯度：从引用透明到 Rust 的所有权效果 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+
+> **过渡**: 在实践中应用 副作用与纯度：从引用透明到 Rust 的所有权效果 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
+
+> **过渡**: 副作用与纯度：从引用透明到 Rust 的所有权效果 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+
+### 反命题与边界
+
+> **反命题**: "副作用与纯度：从引用透明到 Rust 的所有权效果 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+

@@ -11,7 +11,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [2026年迁移指南](#2026年迁移指南)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [迁移清单](#迁移清单)
     - [1. 工具链更新](#1-工具链更新)
     - [2. 代码现代化](#2-代码现代化)
@@ -38,7 +38,7 @@
     - [版本兼容性表](#版本兼容性表)
     - [回滚指南](#回滚指南)
   - [参考资源](#参考资源)
-  - **详细指南**: 2026\_RUST\_ECOSYSTEM\_COMPREHENSIVE\_REVIEW.md
+  - [**详细指南**: 2026\_RUST\_ECOSYSTEM\_COMPREHENSIVE\_REVIEW.md](#详细指南-2026_rust_ecosystem_comprehensive_reviewmd)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -173,7 +173,7 @@ redundant_guards = "warn"
 >
 > **[来源: Rust Official Docs]**
 
-Rust 1.95/1.96 引入了多项重要特性，包括 `if let guards` (1.95)、Range 类型改进和元组 coercion。本章节指导您从 1.94 平滑迁移到 1.96。
+Rust 1.95.0/1.96 引入了多项重要特性，包括 `if let guards` (1.95.0)、Range 类型改进和元组 coercion。本章节指导您从 1.94.0 平滑迁移到 1.96.0。
 
 > ⚠️ 迁移提示: `isqrt` (≥1.84)、`HashMap::get_disjoint_mut` (≥1.83)、`Vec::pop_if` (≥1.83) 等 API 在更早版本已稳定，无需等待 1.96。
 
@@ -425,7 +425,7 @@ let wide: (i32, i32) = (narrow.0 as i32, narrow.1 as i32);
 
 | 特性 | 最低版本 | 说明 |
 |------|----------|------|
-| if let guards | 1.95 | match 守卫中的嵌套模式匹配 |
+| if let guards | 1.95.0 | match 守卫中的嵌套模式匹配 |
 | isqrt | 1.84 | 整数平方根运算 |
 | HashMap::get_disjoint_mut | 1.86 | 安全并行可变访问 |
 | Vec::pop_if | 1.86 | 条件弹出元素 |

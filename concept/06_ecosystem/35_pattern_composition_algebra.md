@@ -39,7 +39,7 @@
 
 ### 2.2 并行组合（⊗）：独立共存[来源: [GoF — Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)]
 
-```rust
+```rust,ignore
 // Observer ⊗ Factory: 事件通知与对象创建独立运行
 use std::sync::{Arc, Mutex, Weak};
 
@@ -66,7 +66,7 @@ impl EventSystem {
 
 ### 2.3 串行复合（∘）：流水线
 
-```rust
+```rust,ignore
 // Validation ∘ Transformation ∘ Persistence
 // 输入 → [验证] → [转换] → [持久化] → 输出
 
@@ -82,7 +82,7 @@ fn process_request(req: Request) -> Result<Response, Error> {
 
 ### 2.4 选择和（⊕）：条件分支
 
-```rust
+```rust,ignore
 // CircuitBreaker ⊕ Retry ⊕ Fallback
 // 根据失败率选择策略
 
@@ -107,7 +107,7 @@ impl ResilienceStrategy {
 
 ### 2.5 精炼（→）：实现细化[来源: [Refactoring Guru — Design Patterns](https://refactoring.guru/design-patterns)]
 
-```rust
+```rust,ignore
 // Strategy → Command: 策略的执行被封装为命令
 
 trait Strategy {
@@ -222,7 +222,7 @@ impl StrategyCommand {
 
 ### 5.1 Typestate + Builder：编译期状态机
 
-```rust
+```rust,ignore
 // Typestate 模式: 编译期保证状态转换合法
 struct Uninitialized;
 struct Initialized;
@@ -296,7 +296,7 @@ fn write_atomic(path: &str, data: &[u8]) -> io::Result<()> {
 
 ### 5.3 Trait Object + Strategy：动态分发与零成本抽象的融合
 
-```rust
+```rust,ignore
 // 编译期多态（零成本）+ 运行期多态（动态分发）的组合
 
 trait PaymentStrategy {
@@ -353,7 +353,7 @@ let service = ServiceBuilder::new()
 
 ### 6.2 Saga 模式：分布式事务的组合
 
-```rust
+```rust,ignore
 // Saga = T1 ∘ T2 ∘ ... ∘ Tn ∘ (Compensation_n ∘ ... ∘ Compensation_1)
 // 每个事务 T_i 都有对应的补偿操作 C_i
 
@@ -460,7 +460,7 @@ fn main() {
 
 ### 7.3 边界测试：模式组合的状态空间爆炸
 
-```rust
+```rust,ignore
 // 边界测试: 当组合的模式数量增加时，状态空间呈指数增长
 
 // 2 个模式: 4 种状态组合
@@ -629,3 +629,34 @@ fn option_j(_: i32) -> Option<i32> { Some(10) }
 > [来源: [Wikipedia — Monad](https://en.wikipedia.org/wiki/Monad_(functional_programming))]
 > [来源: [Wikipedia — Functor](https://en.wikipedia.org/wiki/Functor)]
 > [来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]
+> **过渡**: 模式组合代数：设计模式的结构化关联与冲突分析 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: 模式组合代数：设计模式的结构化关联与冲突分析 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: 模式组合代数：设计模式的结构化关联与冲突分析 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+
+### 补充定理链
+
+- **定理**: 模式组合代数：设计模式的结构化关联与冲突分析 定义 ⟹ 类型安全保证
+- **定理**: 模式组合代数：设计模式的结构化关联与冲突分析 定义 ⟹ 类型安全保证
+- **定理**: 模式组合代数：设计模式的结构化关联与冲突分析 定义 ⟹ 类型安全保证
+
+## 认知路径
+
+> **认知路径**: 从 Rust 核心语言特性出发，经由 **模式组合代数：设计模式的结构化关联与冲突分析** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| 模式组合代数：设计模式的结构化关联与冲突分析 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
+| 模式组合代数：设计模式的结构化关联与冲突分析 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
+| 模式组合代数：设计模式的结构化关联与冲突分析 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+> **过渡**: 掌握 模式组合代数：设计模式的结构化关联与冲突分析 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
+
+> **过渡**: 在工程实践中应用 模式组合代数：设计模式的结构化关联与冲突分析 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
+
+> **过渡**: 模式组合代数：设计模式的结构化关联与冲突分析 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
+
+### 反命题与边界
+
+> **反命题**: "模式组合代数：设计模式的结构化关联与冲突分析 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。

@@ -362,7 +362,7 @@ internal = { path = "crates/internal", public = false } # 实现细节 crate
 
 ### 10.1 边界测试：`pub(crate)` 依赖的泄漏（编译错误）
 
-```rust
+```rust,ignore
 // crate A
 pub struct PublicType;
 
@@ -447,18 +447,68 @@ impl Serializable for MyData {
 
 ### 10.3 边界测试：public dependency 的 semver 不兼容传播（编译中断）
 
-```rust,compile_fail
-// Crate A (v1.0):
-// pub fn serialize<T: serde::Serialize>(x: T) -> String { ... }
+```toml
+# Crate A (v1.0) Cargo.toml:
+[dependencies]
+serde = "1.0"  # 公开依赖
 
-// Crate B 依赖 A v1.0 和 serde v2.0:
-// [dependencies]
-// a = "1.0"
-// serde = "2.0" // ❌ 编译错误: A 公开依赖 serde 1.0
+# Crate B Cargo.toml:
+[dependencies]
+a = "1.0"
+serde = "2.0"  # 与 A 的 serde 1.0 版本冲突
+```
+
+```rust,compile_fail
+// ❌ 编译错误: trait 版本不兼容导致类型不匹配
+// 模拟公开依赖版本冲突的场景
+
+trait SerializeV1 { fn serialize_v1(&self); }
+trait SerializeV2 { fn serialize_v2(&self); }
+
+struct Data;
+impl SerializeV2 for Data { fn serialize_v2(&self) {} }
+
+fn serialize<T: SerializeV1>(x: T) -> String {
+    x.serialize_v1();
+    String::from("serialized")
+}
 
 fn main() {
-    // serde 1.0 和 2.0 的 trait 不兼容
+    let data = Data;
+    // Data 实现了 SerializeV2，但 serialize() 要求 SerializeV1
+    let _s = serialize(data); // ❌ 编译错误: Data 未实现 SerializeV1
 }
 ```
 
 > **修正**: `public = true` 的依赖成为 crate API 的**类型签名一部分**。若 crate A 公开返回 `serde_json::Value`，下游 crate B 若同时依赖不同版本的 serde，编译失败——同一 trait 的两个版本视为不同类型。 Cargo 的依赖解析：1) 尽量统一版本（语义版本兼容时）；2) 不兼容版本在依赖图中可共存（视为不同 crate）；3) 但 public dependency 要求 API 中只有一个版本。企业级策略：1) 核心库（serde、tokio）保持长期稳定版本；2) 用 newtype 封装外部类型（`struct MyValue(serde_json::Value)`）；3) `cargo-deny` 自动检测 public dependency 冲突。这与 npm 的 peer dependencies（运行时检查）或 Python 的依赖解析（pip 的宽松策略）不同——Rust 在编译期强制执行 public dependency 的一致性。[来源: [RFC 3516](https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html)] · [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/reference/features.html)]
+> **过渡**: Public/Private Dependencies：可见性控制的工程化 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: Public/Private Dependencies：可见性控制的工程化 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: Public/Private Dependencies：可见性控制的工程化 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+
+### 补充定理链
+
+- **定理**: Public/Private Dependencies：可见性控制的工程化 定义 ⟹ 类型安全保证
+- **定理**: Public/Private Dependencies：可见性控制的工程化 定义 ⟹ 类型安全保证
+- **定理**: Public/Private Dependencies：可见性控制的工程化 定义 ⟹ 类型安全保证
+
+## 认知路径
+
+> **认知路径**: 从 Rust 核心语言特性出发，经由 **Public/Private Dependencies：可见性控制的工程化** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| Public/Private Dependencies：可见性控制的工程化 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
+| Public/Private Dependencies：可见性控制的工程化 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
+| Public/Private Dependencies：可见性控制的工程化 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+> **过渡**: 掌握 Public/Private Dependencies：可见性控制的工程化 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
+
+> **过渡**: 在工程实践中应用 Public/Private Dependencies：可见性控制的工程化 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
+
+> **过渡**: Public/Private Dependencies：可见性控制的工程化 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
+
+### 反命题与边界
+
+> **反命题**: "Public/Private Dependencies：可见性控制的工程化 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。

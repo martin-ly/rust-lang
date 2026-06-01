@@ -159,7 +159,7 @@ A a = c; // 切片！只复制 A 部分，vptr 指向 A 的 vtable，B 部分丢
 
 #### 3.2.1 `dyn Trait` 的内存布局
 
-```rust
+```rust,ignore
 trait Drawable {
     fn draw(&self);
     fn bounds(&self) -> Rect;
@@ -194,7 +194,7 @@ vtable for dyn Drawable:
 
 #### 3.2.2 无对象切片
 
-```rust
+```rust,ignore
 fn draw_shape(shape: &dyn Drawable) {
     shape.draw(); // 通过胖指针的 vtable 调用
 }
@@ -427,7 +427,7 @@ Rust 的 panic 有两种模式：
 | **Unwind** | 调用析构函数（类似 C++） | 生成 unwind 元数据 |
 | **Abort** | 直接终止进程（不展开） | 无 unwind 元数据 |
 
-```rust
+```rust,ignore
 // Cargo.toml 中配置 panic 策略
 [profile.release]
 panic = "abort"  // 二进制体积更小，无栈展开开销
@@ -449,7 +449,7 @@ panic = "abort"  // 二进制体积更小，无栈展开开销
 
 ### 8.1 反例：FFI 中因布局差异导致的数据损坏
 
-```rust
+```rust,ignore
 // Rust 端（错误：忘记 #[repr(C)]）
 struct Point {
     x: f64,
@@ -500,7 +500,7 @@ fn niche_optimization() {
 
 ### 8.3 边界测试：dyn Trait 胖指针的 FFI 传递
 
-```rust
+```rust,ignore
 // 错误：试图将 dyn Trait 传递给 C
 #[no_mangle]
 pub extern "C" fn bad_draw(shape: &dyn Drawable) { // ❌ 编译错误
@@ -695,3 +695,26 @@ fn main() {
 > [来源: [Wikipedia — Application Binary Interface](https://en.wikipedia.org/wiki/Application_binary_interface)]
 > [来源: [Wikipedia — Name Mangling](https://en.wikipedia.org/wiki/Name_mangling)]
 > [来源: [Wikipedia — Virtual Method Table](https://en.wikipedia.org/wiki/Virtual_method_table)]
+
+## 认知路径
+
+> **认知路径**: 从 L0 基础概念出发，经由本节的 **Rust vs C++：ABI、对象模型与内存布局** 核心原理，通向 L2 进阶模式与 L3 工程实践。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| Rust vs C++：ABI、对象模型与内存布局 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
+| Rust vs C++：ABI、对象模型与内存布局 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| Rust vs C++：ABI、对象模型与内存布局 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
+
+> **过渡**: 掌握 Rust vs C++：ABI、对象模型与内存布局 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+
+> **过渡**: 在实践中应用 Rust vs C++：ABI、对象模型与内存布局 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
+
+> **过渡**: Rust vs C++：ABI、对象模型与内存布局 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+
+### 反命题与边界
+
+> **反命题**: "Rust vs C++：ABI、对象模型与内存布局 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+

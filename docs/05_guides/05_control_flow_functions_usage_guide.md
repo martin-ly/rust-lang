@@ -14,20 +14,20 @@
 ## 📋 目录
 
 - [控制流与函数使用指南](#控制流与函数使用指南)
-  - [📋 目录](#目录)
-  - [📋 概述](#概述)
-  - [🚀 快速开始](#快速开始)
-  - [📊 核心功能](#核心功能)
+  - [📋 目录](#-目录)
+  - [📋 概述](#-概述)
+  - [🚀 快速开始](#-快速开始)
+  - [📊 核心功能](#-核心功能)
     - [1. 控制流模式](#1-控制流模式)
     - [2. 函数系统](#2-函数系统)
     - [3. 闭包](#3-闭包)
     - [4. 模式匹配](#4-模式匹配)
-    - [5. if let guards (Rust 1.95)](#5-if-let-guards-rust-195)
+    - [5. if let guards (Rust 1.95.0)](#5-if-let-guards-rust-1950)
     - [6. 协程与生成器](#6-协程与生成器)
-  - [⚡ 性能优化](#性能优化)
-  - [🔧 错误处理](#错误处理)
-  - [🐛 常见问题与解决方案](#常见问题与解决方案)
-  - [🔗 相关文档](#相关文档)
+  - [⚡ 性能优化](#-性能优化)
+  - [🔧 错误处理](#-错误处理)
+  - [🐛 常见问题与解决方案](#-常见问题与解决方案)
+  - [🔗 相关文档](#-相关文档)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -37,7 +37,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-本指南对应 `crates/c03_control_fn`，涵盖 Rust 控制流、函数系统、闭包、模式匹配以及 Rust 1.95 的 `if let guards` 和协程/生成器前瞻。
+本指南对应 `crates/c03_control_fn`，涵盖 Rust 控制流、函数系统、闭包、模式匹配以及 Rust 1.95.0 的 `if let guards` 和协程/生成器前瞻。
 
 **前置知识**: [knowledge/01_fundamentals/](../../knowledge/01_fundamentals/)
 **速查卡**: [02_control_flow_functions_cheatsheet.md](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md)
@@ -166,7 +166,7 @@ fn advanced_matching() {
 }
 ```
 
-### 5. if let guards (Rust 1.95)
+### 5. if let guards (Rust 1.95.0)
 >
 > **[来源: Rust Official Docs]**
 

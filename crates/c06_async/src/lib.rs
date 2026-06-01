@@ -285,7 +285,7 @@ pub mod utils;
 ///
 /// ⚠️ **关于 `async_trait` 的使用说明**:
 /// 本 crate 的部分示例代码仍使用 `#[async_trait::async_trait]`，原因如下：
-/// - Rust 1.75 AFIT (async fn in trait) 已稳定，但**不支持 trait object (`dyn Trait`)**
+/// - Rust 1.75.0 AFIT (async fn in trait) 已稳定，但**不支持 trait object (`dyn Trait`)**
 /// - AFIDT (async fn in dyn trait) 预计 1.97-1.98 稳定，当前仍需 nightly
 /// - 教学代码需要在 `dyn Trait` 场景下演示，因此 `async_trait` 仍是必要 workaround
 /// - 详见 [`afit_dyn_tracking`] 模块的对比分析
@@ -315,10 +315,10 @@ pub mod rust_190_features;
 pub mod rust_191_features;
 pub mod rust_192_features;
 pub mod rust_193_features;
-/// Rust 1.95 异步特性 (if let guards 场景)
+/// Rust 1.95.0 异步特性 (if let guards 场景)
 /// 注: 1.94 历史特性见 rust_194_features 模块
 pub mod rust_194_features;
-pub mod rust_195_features; // Rust 1.95 特性 (async 场景 if let guards)
+pub mod rust_195_features; // Rust 1.95.0 特性 (async 场景 if let guards)
 pub mod rust_196_features;
 pub mod rust_197_features;
 pub mod rust_198_features;

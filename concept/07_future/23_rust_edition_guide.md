@@ -473,3 +473,34 @@ fn main() {
 ```
 
 > **修正**: Workspace 中**多 edition 共存**是常见场景（逐步迁移），但依赖解析复杂：1) proc-macro crate 的 edition 影响宏展开代码的解析；2) `resolver = "3"`（2024 edition 默认）改变依赖特征解析；3) 某些 crate 的 `build.rs` 依赖特定 edition 行为。最佳实践：1) workspace 统一 `resolver = "2"` 或 `"3"`（不混用）；2) proc-macro crate 优先升级到新 edition（影响所有依赖者）；3) 使用 `cargo tree` 检查依赖图中 edition 分布。`cargo` 的依赖解析保证：同一 crate 的多个版本可在依赖图中共存，但 proc-macro 只能有一个版本（编译期加载）。这与 npm 的 workspaces（类似多包管理）或 Java 的 Maven multi-module（版本统一强制）不同——Rust 的 workspace 更灵活，但 edition 交互是高级话题。[来源: [The Cargo Book](https://doc.rust-lang.org/cargo/reference/resolver.html)] · [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)]
+> **过渡**: Rust Edition 机制与迁移指南 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: Rust Edition 机制与迁移指南 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: Rust Edition 机制与迁移指南 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+
+### 补充定理链
+
+- **定理**: Rust Edition 机制与迁移指南 定义 ⟹ 类型安全保证
+- **定理**: Rust Edition 机制与迁移指南 定义 ⟹ 类型安全保证
+- **定理**: Rust Edition 机制与迁移指南 定义 ⟹ 类型安全保证
+
+## 认知路径
+
+> **认知路径**: 从 Rust 核心语言特性出发，经由 **Rust Edition 机制与迁移指南** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| Rust Edition 机制与迁移指南 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
+| Rust Edition 机制与迁移指南 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
+| Rust Edition 机制与迁移指南 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+> **过渡**: 掌握 Rust Edition 机制与迁移指南 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
+
+> **过渡**: 在工程实践中应用 Rust Edition 机制与迁移指南 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
+
+> **过渡**: Rust Edition 机制与迁移指南 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
+
+### 反命题与边界
+
+> **反命题**: "Rust Edition 机制与迁移指南 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。

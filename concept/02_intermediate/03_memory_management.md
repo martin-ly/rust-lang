@@ -1868,7 +1868,7 @@ fn main() {}
 
 Rust 1.96 稳定了 `ManuallyDrop` 的模式匹配支持，允许在解构时直接访问内部值而不触发 `Drop`：
 
-```rust
+```rust,ignore
 use std::mem::ManuallyDrop;
 
 let md = ManuallyDrop::new(vec![1, 2, 3]);

@@ -2082,7 +2082,7 @@ auto result = parse_int("42");
 // result.value(); // 可能抛 bad_expected_access！
 ```
 
-```rust
+```rust,ignore
 // Rust: Result（强制处理）
 fn parse_int(s: &str) -> Result<i32, ParseIntError> {
     s.parse::<i32>()
@@ -2112,7 +2112,7 @@ public:
 // 在栈展开过程中，若另一个异常正在传播，析构函数抛异常会导致 std::terminate
 ```
 
-```rust
+```rust,ignore
 // Rust: Drop 不能失败
 impl Drop for Safe {
     fn drop(&mut self) {
@@ -2350,6 +2350,6 @@ fn main() {
 >
 > - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../../exercises/) — 动手编程挑战
-> - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。

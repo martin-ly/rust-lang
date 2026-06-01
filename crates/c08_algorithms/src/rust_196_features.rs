@@ -14,7 +14,7 @@
 
 use std::ops::RangeInclusive;
 
-/// if let guards (Rust 1.95 稳定，非 1.96 新特性) 在算法中的应用
+/// if let guards (Rust 1.95.0 稳定，非当前版本新特性) 在算法中的应用
 ///
 /// `if let` guards 允许在 match arm 上直接进行模式匹配和条件判断，
 /// 减少嵌套层级，使代码更扁平、更易读。

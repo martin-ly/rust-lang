@@ -27,3 +27,25 @@ fn main() {}
 ```
 
 > **修正**: **TAIT**（Type Alias Impl Trait，稳定于 1.75）允许：1) `type MyIter = impl Iterator<Item = i32>;` — 类型别名隐藏具体类型；2) 模块边界抽象（库内部使用具体类型，外部只看到 trait bound）；3) 与 GAT 结合实现复杂类型关系。限制：1) TAIT 只能出现在**模块级**（不能在函数内部）；2) concrete type 必须能从所有使用点**唯一确定**；3) 不支持递归（infinite type）。应用场景：1) 库 API 隐藏实现细节；2) 复杂泛型代码的类型简化；3) 与 `impl Trait` 返回类型配合。这与 Haskell 的 `type` synonym（完全透明，不隐藏实现）或 OCaml 的 `module type`（模块签名抽象，类似但不同粒度）不同——Rust 的 TAIT 是类型系统的精确抽象机制。[来源: [TAIT Tracking Issue](https://github.com/rust-lang/rust/issues/63063)] · [来源: [Type Alias Impl Trait](https://rust-lang.github.io/rfcs/2515-type_alias_impl_trait.html)]
+
+## 认知路径
+
+> **认知路径**: 从 Rust 核心语言特性出发，经由 **TAIT Preview** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| TAIT Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
+| TAIT Preview 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
+| TAIT Preview 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+> **过渡**: 掌握 TAIT Preview 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
+
+> **过渡**: 在工程实践中应用 TAIT Preview 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
+
+> **过渡**: TAIT Preview 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
+
+### 反命题与边界
+
+> **反命题**: "TAIT Preview 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。

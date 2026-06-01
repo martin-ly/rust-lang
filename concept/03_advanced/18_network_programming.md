@@ -9,7 +9,7 @@
 
 ---
 
-> **来源**: [Tokio Documentation](https://tokio.rs/) · [Tokio API Docs](https://docs.rs/tokio/latest/tokio/) · [Tokio TCP](https://docs.rs/tokio/latest/tokio/net/struct.TcpListener.html) · [Tokio UDP](https://docs.rs/tokio/latest/tokio/net/struct.UdpSocket.html) · [Tower Service](https://docs.rs/tower/latest/tower/trait.Service.html) · [Tower Middleware](https://docs.rs/tower/latest/tower/) · [Hyper](https://hyper.rs/) · [Rust Async Book](https://rust-lang.github.io/async-book/) · [RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-async_await.html) · [RFC 793 — TCP](https://tools.ietf.org/html/rfc793) · [RFC 768 — UDP](https://tools.ietf.org/html/rfc768) · [Linux socket man pages](https://man7.org/linux/man-pages/man2/socket.2.html) · [mio crate](https://docs.rs/mio/latest/mio/) · [AFIT（async fn in trait，Rust 1.75+ 稳定） crate](<https://docs.rs/AFIT（async> fn in trait，Rust 1.75+ 稳定）/latest/async_trait/) · [pin-project crate](https://docs.rs/pin-project/latest/pin_project/)
+> **来源**: [Tokio Documentation](https://tokio.rs/) · [Tokio API Docs](https://docs.rs/tokio/latest/tokio/) · [Tokio TCP](https://docs.rs/tokio/latest/tokio/net/struct.TcpListener.html) · [Tokio UDP](https://docs.rs/tokio/latest/tokio/net/struct.UdpSocket.html) · [Tower Service](https://docs.rs/tower/latest/tower/trait.Service.html) · [Tower Middleware](https://docs.rs/tower/latest/tower/) · [Hyper](https://hyper.rs/) · [Rust Async Book](https://rust-lang.github.io/async-book/) · [RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-async_await.html) · [RFC 793 — TCP](https://tools.ietf.org/html/rfc793) · [RFC 768 — UDP](https://tools.ietf.org/html/rfc768) · [Linux socket man pages](https://man7.org/linux/man-pages/man2/socket.2.html) · [mio crate](https://docs.rs/mio/latest/mio/) · [AFIT（async fn in trait，Rust 1.75.0+ 稳定） crate](<https://docs.rs/AFIT（async> fn in trait，Rust 1.75.0+ 稳定）/latest/async_trait/) · [pin-project crate](https://docs.rs/pin-project/latest/pin_project/)
 
 ## 📑 目录
 
@@ -682,7 +682,7 @@ graph LR
 | [mio crate](https://docs.rs/mio/latest/mio/) | ✅ 二级 | Tokio 底层的跨平台 IO 多路复用库 |
 | [Hyper](https://hyper.rs/) | ✅ 二级 | Rust HTTP 实现，基于 Tokio |
 | [Linux socket man pages](https://man7.org/linux/man-pages/man2/socket.2.html) | ✅ 三级 | Linux socket 系统调用手册 |
-| [AFIT（async fn in trait，Rust 1.75+ 稳定） crate](<https://docs.rs/AFIT（async> fn in trait，Rust 1.75+ 稳定）/latest/async_trait/) | ✅ 三级 | trait 中 async fn 的过渡方案 |
+| [AFIT（async fn in trait，Rust 1.75.0+ 稳定） crate](<https://docs.rs/AFIT（async> fn in trait，Rust 1.75.0+ 稳定）/latest/async_trait/) | ✅ 三级 | trait 中 async fn 的过渡方案 |
 | [pin-project crate](https://docs.rs/pin-project/latest/pin_project/) | ✅ 三级 | 自引用结构体的 Pin 投影 |
 | [Tokio TCP Docs](https://docs.rs/tokio/latest/tokio/net/struct.TcpListener.html) | ✅ 一级 | TcpListener API 文档 |
 | [Tokio UDP Docs](https://docs.rs/tokio/latest/tokio/net/struct.UdpSocket.html) | ✅ 一级 | UdpSocket API 文档 |
@@ -780,16 +780,25 @@ fn main() {
 
 ### 10.4 边界测试：TcpStream 的同步读写与 async 混用（编译错误/运行时死锁）
 
-```rust,compile_fail
+```rust
 use std::net::TcpStream;
 
 fn main() {
-    let stream = TcpStream::connect("127.0.0.1:8080").unwrap();
-    // ❌ 编译错误: std::net::TcpStream 没有 async 方法
-    // stream.read_async(&mut buf).await;
+    let mut stream = TcpStream::connect("127.0.0.1:8080").unwrap();
+    // std::net::TcpStream 提供阻塞 IO（read/write）
+    // 如需异步 IO，应使用 tokio::net::TcpStream
+}
+```
 
-    // 正确: 使用 tokio::net::TcpStream（async 版本）
-    // 或 std::net::TcpStream 的阻塞 IO
+```rust,compile_fail
+// ❌ 编译错误: std::net::TcpStream 没有 async 方法
+use std::net::TcpStream;
+
+async fn read_async() {
+    let stream = TcpStream::connect("127.0.0.1:8080").unwrap();
+    let mut buf = [0u8; 1024];
+    // std::net::TcpStream 没有 read_async 方法
+    stream.read_async(&mut buf).await; // 方法不存在
 }
 ```
 
@@ -811,3 +820,26 @@ fn main() {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
+## 认知路径
+
+> **认知路径**: 从 L0 基础概念出发，经由本节的 **Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象** 核心原理，通向 L2 进阶模式与 L3 工程实践。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
+| Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
+
+> **过渡**: 掌握 Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+
+> **过渡**: 在实践中应用 Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
+
+> **过渡**: Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+
+### 反命题与边界
+
+> **反命题**: "Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+

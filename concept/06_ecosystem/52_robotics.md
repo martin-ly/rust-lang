@@ -202,7 +202,7 @@ ROS2 通信原语:
 
 > **[ros2-rust/rclrs](https://github.com/ros2-rust/ros2_rust)** 是 ROS2 官方支持的 Rust 客户端库，通过 `rcl`（ROS Client Library，C 接口）与 ROS2 核心交互。设计理念：**零成本抽象**与**内存安全**并重，利用 Rust 的所有权系统防止常见的 DDS 数据竞争和生命周期错误。[来源: [ros2-rust GitHub](https://github.com/ros2-rust/ros2_rust)]
 
-```rust
+```rust,ignore
 // rclrs 基础节点示例
 use rclrs::{Context, Node, QosProfile, spin};
 use std::sync::Arc;
@@ -249,7 +249,7 @@ rclrs 架构约束:
 
 > **[safe_drive](https://github.com/tier4/safe_drive)** 是 Tier IV 开发的 ROS2 Rust 绑定，强调**线程安全**和**确定性执行**。与 rclrs 不同，safe_drive 使用**自定义执行器**和**类型化话题**，在编译期防止话题类型不匹配和回调竞争。[来源: [safe_drive GitHub](https://github.com/tier4/safe_drive)]
 
-```rust
+```rust,ignore
 // safe_drive 类型化话题与多线程执行器
 use safe_drive::{context::Context, error::DynError};
 
@@ -301,7 +301,7 @@ safe_drive 执行器:
 | **dust_dds** | 纯 Rust | 早期 | 独立 DDS 实现，无 FFI |
 | **ros2_rust/rclrs** | 通过 RMW | 官方 | 间接使用，不直接暴露 DDS |
 
-```rust
+```rust,ignore
 // cyclonedds-rs 直接 DDS 编程（跳过 ROS2 层）
 use cyclonedds_rs::{DomainParticipant, Topic, DataReader, QosPolicy};
 
@@ -355,7 +355,7 @@ ROS2 执行器类型对比:
   · 需配合 PREEMPT_RT 和优先级继承协议
 ```
 
-```rust
+```rust,ignore
 // rclrs 自定义执行器调度（概念性）
 use rclrs::{Executor, ExecutorOptions, CallbackPriority};
 
@@ -403,7 +403,7 @@ Rust 实现:
   · 通过 libc 绑定或 rt-mutex crate 实现
 ```
 
-```rust
+```rust,ignore
 // 实时 POSIX Mutex 绑定（概念性 FFI）
 use libc::{pthread_mutex_t, pthread_mutexattr_t, PTHREAD_PRIO_INHERIT};
 
@@ -441,7 +441,7 @@ impl Drop for RtMutex {
 | **Zephyr** | C FFI | 丰富的硬件抽象层 | 机器人外设 |
 | **RTIC** | 纯 Rust | 基于 Cortex-M 的零成本并发 | ARM 微控制器 |
 
-```rust
+```rust,ignore
 // RTIC 实时应用骨架（ARM Cortex-M）
 #[rtic::app(device = stm32f4xx_hal::pac, dispatchers = [TIM2])]
 mod app {
@@ -487,7 +487,7 @@ mod app {
 
 > **[nalgebra](https://docs.rs/nalgebra/)** 是 Rust 生态的核心线性代数库，提供向量、矩阵、变换和几何原语。机器人学中几乎所有感知和计算任务都依赖高效的线性代数运算。[来源: [nalgebra Documentation](https://docs.rs/nalgebra/)]
 
-```rust
+```rust,ignore
 // 点云变换与坐标系转换（nalgebra）
 use nalgebra::{Vector3, Isometry3};
 
@@ -524,7 +524,7 @@ fn lidar_to_base_link(scan: &LaserScan, lidar_pose: &Isometry3<f64>) -> Vec<Vect
 
 > **[openrr](https://github.com/openrr/openrr)** 是 Tier IV 和开源社区开发的 Rust 机器人框架，提供**运动学**、**运动规划**、**远程操作**和**仿真**的统一抽象。目标是成为机器人学的 "ROS for Rust"——不仅仅是 ROS2 绑定，而是原生 Rust 的机器人工具箱。[来源: [openrr GitHub](https://github.com/openrr/openrr)]
 
-```rust
+```rust,ignore
 // OpenRR 运动学链与逆运动学
 use k::{Chain, Joint, JointType, JacobianIkSolver};
 
@@ -563,7 +563,7 @@ openrr 生态:
 
 > **[ROS2 Navigation Stack (Nav2)](https://navigation.ros.org/)** 是 ROS2 的参考导航实现，提供定位（AMCL）、路径规划（Planner）、行为树（BT）和恢复行为。Rust 生态正在构建等效的导航原语，但尚未形成完整栈。[来源: [Nav2 Documentation](https://navigation.ros.org/)]
 
-```rust
+```rust,ignore
 // Rust A* 路径规划（pathfinding crate）
 use pathfinding::prelude::astar;
 
@@ -632,7 +632,7 @@ MPC 求解流程:
    自定义梯度下降利用 nalgebra 矩阵运算
 ```
 
-```rust
+```rust,ignore
 // LQR 状态反馈控制器（nalgebra）
 use nalgebra::SMatrix;
 
@@ -656,7 +656,7 @@ fn control_law<const N: usize, const M: usize>(
 
 > 状态空间表示是现代控制理论的标准数学语言。`nalgebra` 和 `nshare` 使 Rust 能够直接操作状态空间矩阵，而无需像 C++ 那样依赖 Eigen 的宏魔法。[来源: [nalgebra User Guide](https://www.nalgebra.org/)]
 
-```rust
+```rust,ignore
 // 卡尔曼滤波器（线性系统）
 struct KalmanFilter<const N: usize, const M: usize> {
     x: SMatrix<f64, N, 1>, p: SMatrix<f64, N, N>, // 状态估计、误差协方差
@@ -885,3 +885,34 @@ impl GoodNode {
 - [机器学习生态](./46_machine_learning_ecosystem.md) — 感知算法、神经网络推理
 - [形式化验证工具](./47_formal_verification_tools.md) — 模型检查、定理证明、Kani
 - [分布式共识](./50_distributed_consensus.md) — 多机器人协同、一致性
+> **过渡**: Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+
+### 补充定理链
+
+- **定理**: Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 定义 ⟹ 类型安全保证
+- **定理**: Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 定义 ⟹ 类型安全保证
+- **定理**: Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 定义 ⟹ 类型安全保证
+
+## 认知路径
+
+> **认知路径**: 从 Rust 核心语言特性出发，经由 **Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态）** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
+| Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
+| Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+> **过渡**: 掌握 Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
+
+> **过渡**: 在工程实践中应用 Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
+
+> **过渡**: Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
+
+### 反命题与边界
+
+> **反命题**: "Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。

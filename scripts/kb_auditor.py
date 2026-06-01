@@ -246,6 +246,9 @@ def check_link_validity(audits: list[FileAudit]) -> list[dict]:
     dead_links = []
     for audit in audits:
         for ref in audit.cross_references:
+            # 跳过外部 URL
+            if ref.startswith(("http://", "https://")):
+                continue
             # 解析相对路径
             ref_path = (audit.path.parent / ref).resolve()
             if not ref_path.exists():

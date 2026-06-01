@@ -33,3 +33,25 @@ fn main() {
 ```
 
 > **修正**: **单事件翻转**（SEU, Single Event Upset）是太空辐射导致的位翻转：1) 发生在 SRAM、寄存器、逻辑电路；2) 可翻转指针值 → 指向无效地址；3) 可翻转校验和 → 数据损坏不被检测。Rust 的内存安全在此无效：1) 位翻转不违反 Rust 的引用规则（翻转后的指针仍"合法"，只是指向错误地址）；2) `unsafe` 代码的 raw pointer 更脆弱；3) 需硬件级保护（EDAC、三模冗余）。缓解策略：1) **EDAC**（Error Detection And Correction）内存；2) **CRC** 或 **双校验和**；3) **看门狗定时器**；4) **Rust 的 `no_std` + 自定义 panic handler**（优雅降级）。这与 C 的同样脆弱（无内存安全优势）或 Ada 的 SPARK（形式化验证，但不抗硬件错误）类似——太空软件需多层防护：形式化验证 + 内存安全 + 硬件冗余 + 错误检测。[来源: [Space Software](https://www.nasa.gov/software/)] · [来源: [SEU Mitigation](https://www.sciencedirect.com/topics/engineering/single-event-upset)]
+
+## 认知路径
+
+> **认知路径**: 从 Rust 核心语言特性出发，经由 **Rust in Space Preview** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| Rust in Space Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
+| Rust in Space Preview 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
+| Rust in Space Preview 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+> **过渡**: 掌握 Rust in Space Preview 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
+
+> **过渡**: 在工程实践中应用 Rust in Space Preview 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
+
+> **过渡**: Rust in Space Preview 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
+
+### 反命题与边界
+
+> **反命题**: "Rust in Space Preview 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。

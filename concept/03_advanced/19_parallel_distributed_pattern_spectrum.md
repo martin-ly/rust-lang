@@ -193,7 +193,7 @@ let value = queue.pop();
 
 ### 4.1 Actor 模型
 
-```rust
+```rust,ignore
 use actix::prelude::*;
 
 // Actor: 封装状态 + 邮箱 + 消息处理
@@ -300,7 +300,7 @@ while let Some(value) = rx.recv().await {
 
 ### 5.1 共识算法：Raft
 
-```rust
+```rust,ignore
 // Raft 的核心状态机（简化概念模型）
 enum NodeState {
     Follower { leader_id: Option<NodeId> },
@@ -353,7 +353,7 @@ Gossip 传播模型:
 
 CRDT 是**无需同步**即可保证最终一致性的数据结构：
 
-```rust
+```rust,ignore
 // G-Counter（Grow-only Counter）: 单调递增的分布式计数器
 use crdt::GCounter;
 
@@ -523,7 +523,7 @@ fn main() {
 
 ### 8.3 边界测试：CRDT 的合并顺序独立性
 
-```rust
+```rust,ignore
 use crdt::GCounter;
 
 fn crdt_commutativity() {
@@ -706,3 +706,26 @@ fn main() {}
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
+## 认知路径
+
+> **认知路径**: 从 L0 基础概念出发，经由本节的 **并行与分布式模式谱系：从线程池到共识算法** 核心原理，通向 L2 进阶模式与 L3 工程实践。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| 并行与分布式模式谱系：从线程池到共识算法 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
+| 并行与分布式模式谱系：从线程池到共识算法 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| 并行与分布式模式谱系：从线程池到共识算法 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
+
+> **过渡**: 掌握 并行与分布式模式谱系：从线程池到共识算法 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+
+> **过渡**: 在实践中应用 并行与分布式模式谱系：从线程池到共识算法 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
+
+> **过渡**: 并行与分布式模式谱系：从线程池到共识算法 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+
+### 反命题与边界
+
+> **反命题**: "并行与分布式模式谱系：从线程池到共识算法 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+

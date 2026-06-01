@@ -40,7 +40,7 @@
 
 1. **08-01-const-generics.md** - 理解编译时计算能力
 2. **08-02-async-rust.md** - 掌握异步编程的核心概念
-3. **08-05-rust-195-features-formal.md** - Rust 1.95 新特性的形式化语义（if let guards、use<..> 精确捕获）
+3. **08-05-rust-195-features-formal.md** - Rust 1.95.0 新特性的形式化语义（if let guards、use<..> 精确捕获）
 4. **08-06-zero-cost-abstractions.md** - 学习如何写出高效的抽象代码
 
 ### 进阶路径

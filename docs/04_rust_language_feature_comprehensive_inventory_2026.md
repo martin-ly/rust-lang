@@ -27,14 +27,14 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 语言特性全量梳理与对称差分析 2026](#rust-语言特性全量梳理与对称差分析-2026)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [00. 执行摘要与对称差总览](#00-执行摘要与对称差总览)
     - [00.1 分析方法论](#001-分析方法论)
     - [00.2 缺失项热力图 (A \\ B)](#002-缺失项热力图-a--b)
-      - [🔴 P0 — 语言核心层（1.95.0 已稳定，认知必需）](#p0--语言核心层1950-已稳定认知必需)
-      - [🔴 P0 — 异步范式层（改变编程心智模型）](#p0--异步范式层改变编程心智模型)
-      - [🟡 P1 — 系统与网络层](#p1--系统与网络层)
-      - [🟢 P2 — 类型系统与工具链层](#p2--类型系统与工具链层)
+      - [🔴 P0 — 语言核心层（1.95.0 已稳定，认知必需）](#-p0--语言核心层1950-已稳定认知必需)
+      - [🔴 P0 — 异步范式层（改变编程心智模型）](#-p0--异步范式层改变编程心智模型)
+      - [🟡 P1 — 系统与网络层](#-p1--系统与网络层)
+      - [🟢 P2 — 类型系统与工具链层](#-p2--类型系统与工具链层)
     - [00.3 冗余/过时项热力图 (B \\ A)](#003-冗余过时项热力图-b--a)
     - [00.4 特性成熟度决策树](#004-特性成熟度决策树)
   - [01. 所有权与内存安全 (c01\_ownership\_borrow\_scope)](#01-所有权与内存安全-c01_ownership_borrow_scope)
@@ -52,8 +52,8 @@
   - [03. 控制流与函数 (c03\_control\_fn)](#03-控制流与函数-c03_control_fn)
     - [03.1 特性树图](#031-特性树图)
     - [03.2 核心概念完备性检查](#032-核心概念完备性检查)
-    - [03.3 1.95+ 新增特性深度梳理：if let guards](#033-195-新增特性深度梳理if-let-guards)
-    - [03.4 边界与反例：let chains (1.88) 与 if let guards (1.95) 的区别](#034-边界与反例let-chains-188-与-if-let-guards-195-的区别)
+    - [03.3 1.95.0+ 新增特性深度梳理：if let guards](#033-1950-新增特性深度梳理if-let-guards)
+    - [03.4 边界与反例：let chains (1.88) 与 if let guards (1.95.0) 的区别](#034-边界与反例let-chains-188-与-if-let-guards-1950-的区别)
     - [03.5 权威来源对齐](#035-权威来源对齐)
   - [04. 泛型与 Trait (c04\_generic)](#04-泛型与-trait-c04_generic)
     - [04.1 特性树图](#041-特性树图)
@@ -135,7 +135,7 @@
     - [B.2 1.95 语言特性（非 API）](#b2-195-语言特性非-api)
   - [附录 C：特性成熟度决策树](#附录-c特性成熟度决策树)
   - [附录 D：认知完备性检查表](#附录-d认知完备性检查表)
-  - *项目 MSRV: 1.96.0+ (Edition 2024)*
+  - [*项目 MSRV: 1.96.0+ (Edition 2024)*](#项目-msrv-1960-edition-2024)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -655,7 +655,7 @@ graph TD
     CF --> CF2[loop / while / for]
     CF --> CF3[break / continue with labels]
     CF --> CF4[let chains 1.88 ⭐]
-    CF --> CF5[if let guards 1.95 ⭐]
+    CF --> CF5[if let guards 1.95.0 ⭐]
 
     F --> F1[fn / async fn]
     F --> F2[Closures]
@@ -680,9 +680,9 @@ graph TD
 | Closures | ✅ 完善 | 85% | — |
 | async fn | ✅ 完善 | 80% | async closures 缺失 |
 | let chains | ⚠️ 部分 | 60% | 缺少深度示例 |
-| **if let guards** | 🔴 缺失 | 0% | **1.95 完全缺失** |
+| **if let guards** | 🔴 缺失 | 0% | **1.95.0 完全缺失** |
 
-### 03.3 1.95+ 新增特性深度梳理：if let guards
+### 03.3 1.95.0+ 新增特性深度梳理：if let guards
 
 > **[来源: TRPL - The Rust Programming Language]**
 
@@ -788,14 +788,14 @@ fn old_way(msg: Message) -> String {
 - 来源: [rust-lang/rust#135345](https://github.com/rust-lang/rust/pull/135345)
 - 前置依赖: `let chains` (1.88, 2024 Edition)
 
-### 03.4 边界与反例：let chains (1.88) 与 if let guards (1.95) 的区别
+### 03.4 边界与反例：let chains (1.88) 与 if let guards (1.95.0) 的区别
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 | 特性 | 语法 | 适用位置 | 稳定版本 |
 |------|------|---------|----------|
 | `let chains` | `if let Some(x) = a && x > 0` | `if` / `while` 条件 | 1.88 (2024 Ed) |
-| `if let guards` | `Some(y) if let Some(x) = a` | `match` arm guard | 1.95 |
+| `if let guards` | `Some(y) if let Some(x) = a` | `match` arm guard | 1.95.0 |
 
 **反例：混淆两者的使用场景**:
 
@@ -825,7 +825,7 @@ fn if_let_guards_example(opt: Option<Option<i32>>) -> i32 {
 | Control Flow | Rust Book Ch.3 | ✅ 已引用 |
 | Pattern Matching | Rust Reference Ch.8 | ✅ 已引用 |
 | let chains | 1.88, 2024 Edition | ⚠️ 部分覆盖 |
-| if let guards | 1.95, RFC 3637 | ✅ 已覆盖 |
+| if let guards | 1.95.0, RFC 3637 | ✅ 已覆盖 |
 
 ---
 
@@ -852,7 +852,7 @@ graph TD
     T --> T1[Trait 基础]
     T --> T2[Associated Types]
     T --> T3[GATs 1.65]
-    T --> T4[AFIT async fn in trait 1.75 ⭐]
+    T --> T4[AFIT async fn in trait 1.75.0 ⭐]
     T --> T5[ATPIT 1.84]
     T --> T6[Trait Upcasting 1.86]
     T --> T7[AFIDT async fn in dyn trait 预研]
@@ -955,7 +955,7 @@ fn missing_lifetime<'a>(x: &'a str) -> impl Iterator<Item = char> + use<> {
 
 ```mermaid
 graph LR
-    A[async fn<br/>1.39] --> B[AFIT<br/>async fn in trait<br/>1.75]
+    A[async fn<br/>1.39] --> B[AFIT<br/>async fn in trait<br/>1.75.0]
     B --> C[AFIDT<br/>async fn in dyn trait<br/>1.97+ Nightly]
     B --> D[Async Closures<br/>async || {}<br/>1.96 FCP]
     D --> E[AsyncFn traits<br/>AsyncFn/Mut/Once<br/>1.94 Prelude]
@@ -1276,7 +1276,7 @@ graph TD
     E --> E3[smol]
     E --> E4[Embassy bare-metal]
 
-    AFIT --> AFIT1[async fn in trait 1.75]
+    AFIT --> AFIT1[async fn in trait 1.75.0]
     AFIT --> AFIT2[AFIDT nightly]
     AFIT --> AFIT3[RTN 预研]
     AFIT --> AFIT4[AsyncFn traits in prelude 1.94]
@@ -1318,7 +1318,7 @@ graph TD
 Future trait (1.36)
   → async/await 语法糖 (1.39)
     → Future/IntoFuture in prelude (1.85)
-      → AFIT: async fn in trait (1.75)
+      → AFIT: async fn in trait (1.75.0)
         → AsyncFn traits in prelude (1.94)
           → Async Closures: async || {} (1.96 FCP)
             → AFIDT: async fn in dyn trait (1.97+ nightly)

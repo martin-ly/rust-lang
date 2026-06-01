@@ -11,7 +11,7 @@
 
 /// 使用 assert_matches! 测试控制流结果
 ///
-/// `assert_matches!(expr, pattern)` 是 Rust 1.96 引入的标准断言宏，
+/// `assert_matches!(expr, pattern)` 是 Rust 1.96.0 引入的标准断言宏，
 /// 支持可选的 `if guard`，但不支持 `=> { block }` 语法。
 pub fn classify_status(code: u16) -> Result<&'static str, &'static str> {
     match code {

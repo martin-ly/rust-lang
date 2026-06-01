@@ -321,14 +321,14 @@
 | P13-T2 | 更新 `05_rust_version_tracking.md` Open Enums 跟踪状态 | 状态: 🔴 缺失 → ✅ 已创建 | ✅ |
 | P13-T3 | 更新 `07_future/README.md` 文件索引 | 添加 open_enums_preview.md 条目 | ✅ |
 | P13-T4 | 同步 `audit_checklist.md` ⬜ → ✅（自动化验证项） | 19 项检查状态同步 | ✅ |
-| P13-T5 | 调研 Rust 1.96 特性纳入可行性 | 调研报告：core::range ✅ 适合，Open Enums/Cargo Script ⚠️ premature | ✅ |
+| P13-T5 | 调研 Rust 1.96.0 特性纳入可行性 | 调研报告：core::range ✅ 适合，Open Enums/Cargo Script ⚠️ premature | ✅ |
 
 **关键成果**:
 
 - 创建 `open_enums_preview.md`（~18 KB），涵盖 `#[non_exhaustive]` 形式化语义、跨语言对比（Scala/Haskell/OCaml）、API 设计模式、反命题决策树
 - 补齐 version_tracking.md 中长期标记为"🔴 缺失"的 Open Enums 概念文件
 - audit_checklist.md 全部 ⬜ 项同步为 ✅，反映实际自动化审计通过状态
-- 确认 1.96 特性中 `core::range` / `assert_matches!` 适合概念化，`cargo script` / Open Enums 仍处 premature 阶段
+- 确认 1.96.0 特性中 `core::range` / `assert_matches!` 适合概念化，`cargo script` / Open Enums 仍处 premature 阶段
 
 ---
 

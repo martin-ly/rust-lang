@@ -207,7 +207,7 @@ impl AsyncIteratorAdapterExamples {
 /// Future trait (1.36)
 ///   → async/await 语法糖 (1.39)
 ///     → Future/IntoFuture in prelude (1.85)
-///       → AFIT: async fn in trait (1.75)
+///       → AFIT: async fn in trait (1.75.0)
 ///         → AsyncFn traits in prelude (1.94)
 ///           → Async Closures: async || {} (1.96 FCP)
 ///             → AFIDT: async fn in dyn trait (1.97+ nightly)

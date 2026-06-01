@@ -1356,7 +1356,7 @@ fn main() {
 <details>
 <summary>📝 测验 1：以下代码能否编译？</summary>
 
-```rust
+```rust,compile_fail
 fn main() {
     let mut s = String::from("hello");
     let r1 = &s;
@@ -1371,7 +1371,7 @@ fn main() {
 <details>
 <summary>📝 测验 2：以下代码能否编译？</summary>
 
-```rust
+```rust,compile_fail
 fn main() {
     let mut v = vec![1, 2, 3, 4];
     let a = &mut v[0..2];
@@ -1477,7 +1477,7 @@ fn main() {
 <details>
 <summary>点击查看题目</summary>
 
-```rust
+```rust,compile_fail
 fn main() {
     let mut s = String::from("hello");
     let r1 = &s;
@@ -1497,7 +1497,7 @@ fn main() {
 
 **修复**: 将不可变引用的使用范围限制在可变引用之前：
 
-```rust
+```rust,ignore
 let r1 = &s;
 println!("{}", r1);  // r1 最后一次使用
 let r2 = &mut s;     // ✅ 现在可以创建可变引用
@@ -1512,7 +1512,7 @@ let r2 = &mut s;     // ✅ 现在可以创建可变引用
 <details>
 <summary>点击查看题目</summary>
 
-```rust
+```rust,compile_fail
 fn dangle() -> &String {
     let s = String::from("hello");
     &s
@@ -1572,7 +1572,7 @@ fn no_dangle() -> String {
 <details>
 <summary>点击查看题目</summary>
 
-```rust
+```rust,compile_fail
 fn main() {
     let mut data = vec![1, 2, 3];
     let first = &data[0];
@@ -1592,7 +1592,7 @@ fn main() {
 
 **修复**: 在 `push` 之前使用完 `first`：
 
-```rust
+```rust,ignore
 let first = &data[0];
 println!("{}", first);  // 先使用
 let first = first;       // 结束借用

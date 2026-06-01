@@ -37,7 +37,7 @@ use std::ops::RangeInclusive;
 /// |------|--------|----------|------|
 /// | `std::ops::Range` | `a..b` | 半开 `[a, b)` | 通用索引、切片 |
 /// | `std::ops::RangeInclusive` | `a..=b` | 闭区间 `[a, b]` | 需要包含结束值的场景 |
-/// | **`core::range::RangeInclusive`** (1.95+) | `RangeInclusive::new(a, b)` | 闭区间 `[a, b]` | 新的统一类型，未来将成为标准 |
+/// | **`core::range::RangeInclusive`** (1.96.0+) | `RangeInclusive::new(a, b)` | 闭区间 `[a, b]` | 新的统一类型，未来将成为标准 |
 /// | `core::range::RangeInclusiveIter` | 从 RangeInclusive 迭代 | 闭区间 | 显式的迭代器类型 |
 ///
 /// ## 设计动机（RFC 3550）

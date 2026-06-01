@@ -45,11 +45,11 @@ pub mod rust_191_features;
 pub mod rust_192_features;
 pub mod rust_193_features;
 pub mod rust_194_features; // Rust 1.94 特性
-pub mod rust_195_features; // Rust 1.95 特性 (if let guards, bool TryFrom)
+pub mod rust_195_features; // Rust 1.95.0 特性 (if let guards, bool TryFrom)
 pub mod rust_196_features; // Rust 2024 Edition let chains
 pub mod rust_197_features;
 
-pub mod rust_196_gen_examples; // gen blocks 前瞻 (nightly-only, 非 1.96 stable) // if let guards 深度解析 (Rust 1.95 stable)
+pub mod rust_196_gen_examples; // gen blocks 前瞻 (nightly-only, 非 1.96 stable) // if let guards 深度解析 (Rust 1.95.0 stable)
 
 // 重新导出Rust 1.94.0新特性
 pub use rust_194_features::{

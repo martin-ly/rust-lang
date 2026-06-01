@@ -705,24 +705,27 @@ fn main() {
 
 ### 10.2 边界测试：`async` 与线程的执行模型混淆（编译错误）
 
-```rust,compile_fail
+```rust
+// ✅ async fn 定义本身完全合法
 async fn async_task() {
-    // ❌ 编译错误: async fn 不会自动创建新线程
-    // 以下代码仍在当前线程执行，只是可以被挂起
     println!("running");
 }
 
 fn main() {
-    let future = async_task(); // 创建 Future，不执行
-    // future.await; // 需要 async 上下文
+    let future = async_task(); // 创建 Future，但不执行
+    // future.await; // 需要 async 上下文才能 .await
+}
+```
+
+```rust,compile_fail
+// ❌ 编译错误: 在非 async 上下文中使用 .await
+async fn async_task() {
+    println!("running");
 }
 
-// 正确: 使用 block_on 或 spawn
-use std::future::Future;
-
-fn fixed() {
+fn main() {
     let future = async_task();
-    // tokio::runtime::Runtime::new().unwrap().block_on(future);
+    future.await; // 编译错误: .await 只能在 async 块或 async fn 中使用
 }
 ```
 
@@ -800,3 +803,26 @@ fn main() {
 ```
 
 > **修正**: Rust **不保证**尾调用优化（TCO），即使代码在语法上是尾递归。`n * factorial(n - 1)` 不是尾调用（乘法在递归返回后执行）。即使是真正的尾递归（`factorial(n, acc)`），Rust 编译器（LLVM 后端）可能优化也可能不优化——依赖优化级别和内联启发式。可靠方案：1) 使用循环替代递归；2) 使用显式栈数据结构（`Vec` 模拟递归）；3) 使用 `trampolin` crate（蹦床模式）。这与 Scheme 的 TCO（语言保证）或 Erlang 的尾递归（VM 优化）不同——Rust 偏向命令式循环，递归仅用于算法清晰表达。2024 年 Rust 社区讨论过 `become` 关键字（显式尾调用），但尚未稳定。[来源: [Rust Reference — Tail Expressions](https://doc.rust-lang.org/reference/expressions.html#tail-expressions)] · [来源: [Rust Internals](https://internals.rust-lang.org/)]
+
+## 认知路径
+
+> **认知路径**: 从 L0 基础概念出发，经由本节的 **Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行** 核心原理，通向 L2 进阶模式与 L3 工程实践。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
+| Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
+
+> **过渡**: 掌握 Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+
+> **过渡**: 在实践中应用 Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
+
+> **过渡**: Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+
+### 反命题与边界
+
+> **反命题**: "Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+

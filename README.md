@@ -1,10 +1,10 @@
-# Rust 分层概念知识体系 v1.2
+# Rust 分层概念知识体系 v2.5
 
-> **Rust版本**: 1.96.0 stable (2026-05-30)
+> **Rust版本**: 1.96.0 stable (2026-05-28)
 > **Edition**: 2024
-> **状态**: v2.5 活跃维护 | 278+ concept 文件 | 100% Bloom 覆盖 | 4 误报死链 | Phase 1~5 完成
+> **状态**: v2.5 活跃维护 | 280+ concept 文件 | 2,800+ 文档 | 100% Bloom 覆盖 | Phase 1~5 完成
 
-[![Rust](https://img.shields.io/badge/rust-1.97.0+-blue.svg)](https://www.rust-lang.org)
+[![Rust](https://img.shields.io/badge/rust-1.96.0+-blue.svg)](https://www.rust-lang.org)
 [![Edition](https://img.shields.io/badge/edition-2024-purple.svg)](https://doc.rust-lang.org/edition-guide/rust-2024/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![KB Quality](https://img.shields.io/badge/kb_quality-0_risk_files-brightgreen.svg)](reports/kb_quality_dashboard.md)
@@ -52,6 +52,10 @@ cat reports/kb_quality_dashboard.md
 
 # 构建概念搜索索引
 python scripts/build_search_index.py
+
+# 编译验证
+cargo build --workspace
+cargo test --workspace
 ```
 
 ---
@@ -66,6 +70,7 @@ python scripts/build_search_index.py
 | [`quick_reference.md`](concept/00_meta/quick_reference.md) | A-Z概念速查 + 17个错误码 + 模式决策树 | ~630行 |
 | [`self_assessment.md`](concept/00_meta/self_assessment.md) | **80道自测题**（L1-L6，含折叠答案） | ~850行 |
 | [`semantic_space.md`](concept/00_meta/semantic_space.md) | 表征空间理论 + 等价表达 + 机制组合代数 | ~1000行 |
+| [`terminology_glossary.md`](concept/00_meta/terminology_glossary.md) | 101个核心术语中英对照 + 定义 | ~400行 |
 
 ### L1-L3：核心概念
 
@@ -79,6 +84,7 @@ python scripts/build_search_index.py
 | L2 | [`02_generics.md`](concept/02_intermediate/02_generics.md) | Const Generics、单态化、HRTB |
 | L2 | [`03_memory_management.md`](concept/02_intermediate/03_memory_management.md) | Box/Rc/Arc、内部可变性、MaybeUninit |
 | L2 | [`04_error_handling.md`](concept/02_intermediate/04_error_handling.md) | Result/Option、?运算符、错误传播 |
+| L2 | [`05_assert_matches.md`](concept/02_intermediate/05_assert_matches.md) | 模式匹配断言（1.96 stable） |
 | L3 | [`01_concurrency.md`](concept/03_advanced/01_concurrency.md) | Send/Sync、Atomic内存序、死锁分析 |
 | L3 | [`02_async.md`](concept/03_advanced/02_async.md) | Future/Pin/Waker、async/await状态机 |
 | L3 | [`03_unsafe.md`](concept/03_advanced/03_unsafe.md) | FFI、repr属性、Miri、原始指针 |
@@ -92,6 +98,7 @@ python scripts/build_search_index.py
 | [`02_type_theory.md`](concept/04_formal/02_type_theory.md) | System F、HM算法、参数性定理 |
 | [`03_ownership_formal.md`](concept/04_formal/03_ownership_formal.md) | Oxide、Tree Borrows、Polonius |
 | [`04_rustbelt.md`](concept/04_formal/04_rustbelt.md) | Iris分离逻辑、CSL、验证工具链 |
+| [`22_modern_verification_tools.md`](concept/04_formal/22_modern_verification_tools.md) | AutoVerus、Kani、ESBMC、Safety Tags |
 
 ### L5-L7：对比、生态、未来
 
@@ -108,6 +115,7 @@ python scripts/build_search_index.py
 | L7 | [`01_ai_integration.md`](concept/07_future/01_ai_integration.md) | AI辅助编程、RL on编译错误 |
 | L7 | [`02_formal_methods.md`](concept/07_future/02_formal_methods.md) | Kani/Miri/CI集成 |
 | L7 | [`03_evolution.md`](concept/07_future/03_evolution.md) | Edition系统、Effects System |
+| L7 | [`rust_1_97_preview.md`](concept/07_future/rust_1_97_preview.md) | 1.97 前沿特性跟踪 |
 
 ---
 
@@ -115,12 +123,15 @@ python scripts/build_search_index.py
 
 | 指标 | 数值 | 状态 |
 |:---|:---|:---|
-| 总文件数 | 37 | ✅ |
-| 定理链 (⟹) | 277 | ✅ |
-| 反命题 | 98 | ✅ |
-| Mermaid图 | 178 | ✅ |
-| 代码块 | 319 | ✅ |
-| 死链 | 0 | ✅ |
+| concept 文件 | 280+ | ✅ |
+| 总 Markdown 文档 | 2,800+ | ✅ |
+| Rust 源文件 | 1,500+ | ✅ |
+| Workspace Crates | 17 + exercises | ✅ |
+| 定理链 (⟹) | 277+ | ✅ |
+| 反命题 | 98+ | ✅ |
+| Mermaid图 | 665+ | ✅ |
+| 代码块编译验证 | 81.1% 通过 | 🔄 持续优化 |
+| 死链 | 0 (核心路径) | ✅ |
 | 风险文件（非L0）| 0 | ✅ |
 | 认知路径覆盖率 | 100% | ✅ |
 | 自测题 | 80题 | ✅ |
@@ -132,7 +143,7 @@ python scripts/build_search_index.py
 
 ```
 rust-lang/
-├── concept/                    # 📚 知识体系核心（37个md文件）
+├── concept/                    # 📚 知识体系核心（280+ 个 md 文件）
 │   ├── 00_meta/                # L0: 学习工具 + 质量基础设施
 │   ├── 01_foundation/          # L1: 所有权/借用/生命周期/类型系统
 │   ├── 02_intermediate/        # L2: Trait/泛型/内存管理/错误处理
@@ -141,18 +152,29 @@ rust-lang/
 │   ├── 05_comparative/         # L5: 多语言对比
 │   ├── 06_ecosystem/           # L6: 工具链/模式/crate/应用
 │   └── 07_future/              # L7: AI/形式化/演进
-├── scripts/
-│   ├── kb_auditor.py           # 质量审计脚本
-│   ├── build_search_index.py   # 概念搜索索引
-│   └── fix_code_blocks.py      # 代码块标记修复
-├── reports/
-│   └── kb_quality_dashboard.md # 质量仪表盘
-├── .github/workflows/
-│   └── kb_audit.yml            # CI自动审计
-├── concept_kb.json             # 结构化知识导出
-├── concept_search_index.json   # 概念搜索索引
+├── crates/                     # 🦀 可编译代码示例（17 workspace members）
+│   ├── c01_ownership_borrow_scope/
+│   ├── c02_type_system/
+│   ├── c03_control_fn/
+│   ├── c04_generic/
+│   ├── c05_threads/
+│   ├── c06_async/
+│   ├── c07_process/
+│   ├── c08_algorithms/
+│   ├── c09_design_pattern/
+│   ├── c10_networks/
+│   ├── c11_macro_system/
+│   ├── c12_wasm/
+│   ├── c13_embedded/
+│   └── common/
+├── exercises/                  # 📝 编程练习（64 道，10 主题）
+├── book/                       # 📖 mdbook 源文件
+├── knowledge/                  # 🎯 结构化知识卡片
+├── docs/                       # 📋 参考文档、研究报告、模板
+├── scripts/                    # 🔧 自动化脚本（质量审计、链接检查、索引构建）
+├── reports/                    # 📊 质量仪表盘、审计报告
+├── .github/workflows/          # 🔄 CI 自动审计
 ├── CHANGELOG.md                # 变更日志
-├── RELEASE_v1.0.md             # v1.0发布说明
 └── README.md                   # 本文件
 ```
 
@@ -166,6 +188,9 @@ rust-lang/
 - ✅ 风险文件识别
 - ✅ 定理链/代码块统计
 - ✅ 质量仪表盘更新
+- ✅ 代码块编译验证
+- ✅ Miri 内存安全验证
+- ✅ 版本跟踪检查
 
 ---
 
@@ -176,16 +201,17 @@ rust-lang/
 ---
 
 **维护者**: rust-lang 知识体系项目组
-**最后更新**: 2026-05-13
-**版本**: v1.0.0
-**状态**: ✅ v1.0 正式发布
+**最后更新**: 2026-06-01
+**版本**: v2.5.0
+**状态**: ✅ v2.5 活跃维护
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-06-01 全面更新 README 数据，对齐实际项目规模（280+ concept、17 crates、2,800+ 文档）
 
-**文档版本**: 1.1
+**文档版本**: 2.0
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+**最后更新**: 2026-06-01
+**状态**: ✅ 门面数据全面更新

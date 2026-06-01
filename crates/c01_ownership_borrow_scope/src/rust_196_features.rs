@@ -106,7 +106,7 @@ impl AssertUnwindSafeExamples {
 
 /// # `core::range::Range` 的 Copy 语义与所有权
 ///
-/// Rust 1.96 的 `core::range::Range` 在元素类型 `T: Copy` 时自身也实现 `Copy`。
+/// Rust 1.96.0 的 `core::range::Range` 在元素类型 `T: Copy` 时自身也实现 `Copy`。
 /// 这意味着范围值可以多次迭代而不被 move/consum——与 `std::ops::Range` 形成对比。
 pub struct RangeOwnershipExamples;
 

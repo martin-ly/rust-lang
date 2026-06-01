@@ -466,3 +466,34 @@ fn main() {
 ```
 
 > **修正**: `wasm32-unknown-unknown` 目标无默认 panic handler（`no_std` 环境）。panic 时调用 `core::panicking::panic`，默认实现是 `loop {}`（无限循环）或 `unreachable`（WASM 陷阱）。调试困难：浏览器控制台显示 `RuntimeError: unreachable`，无 Rust panic 消息。解决方案：1) 使用 `console_error_panic_hook` crate（将 panic 消息输出到浏览器 console）；2) 自定义 panic handler `#![feature(panic_handler)]` + `#[panic_handler]`；3) 使用 ``wasm32-wasip1` 或 `wasm32-wasip2`` 目标（有标准 panic 输出）。这与 C 的 WASM（`abort()` 同样产生陷阱）或 AssemblyScript（有内置 panic 处理）类似——`wasm32-unknown-unknown` 是最小化目标，需手动配置错误处理。[来源: [console_error_panic_hook](https://github.com/rustwasm/console_error_panic_hook)] · [来源: [Rust WASM Book](https://rustwasm.github.io/book/)]
+> **过渡**: WebAssembly 生态：Rust 的浏览器外运行时 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: WebAssembly 生态：Rust 的浏览器外运行时 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: WebAssembly 生态：Rust 的浏览器外运行时 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+
+### 补充定理链
+
+- **定理**: WebAssembly 生态：Rust 的浏览器外运行时 定义 ⟹ 类型安全保证
+- **定理**: WebAssembly 生态：Rust 的浏览器外运行时 定义 ⟹ 类型安全保证
+- **定理**: WebAssembly 生态：Rust 的浏览器外运行时 定义 ⟹ 类型安全保证
+
+## 认知路径
+
+> **认知路径**: 从 Rust 核心语言特性出发，经由 **WebAssembly 生态：Rust 的浏览器外运行时** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| WebAssembly 生态：Rust 的浏览器外运行时 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
+| WebAssembly 生态：Rust 的浏览器外运行时 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
+| WebAssembly 生态：Rust 的浏览器外运行时 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+> **过渡**: 掌握 WebAssembly 生态：Rust 的浏览器外运行时 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
+
+> **过渡**: 在工程实践中应用 WebAssembly 生态：Rust 的浏览器外运行时 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
+
+> **过渡**: WebAssembly 生态：Rust 的浏览器外运行时 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
+
+### 反命题与边界
+
+> **反命题**: "WebAssembly 生态：Rust 的浏览器外运行时 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。

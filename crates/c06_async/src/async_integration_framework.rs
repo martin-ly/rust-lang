@@ -167,7 +167,7 @@ impl AsyncCommonalityAnalyzer {
         ];
 
         // 为每个运行时创建共性分析
-        let runtime_names = vec!["std", "tokio", "smol"]; // [历史: async-std 已于 2025-03 停止维护]
+        let runtime_names = vec!["std", "tokio", "smol", "async-std"]; // [历史: async-std 已于 2025-03 停止维护，保留为参考]
 
         for runtime_name in runtime_names {
             let performance_profile = match runtime_name {

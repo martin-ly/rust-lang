@@ -510,3 +510,26 @@ fn main() {
 ```
 
 > **修正**: Rust 的 `Option<T>` 消除了 **null 指针异常**：1) `None` 和 `Some(T)` 是不同的变体，编译器强制处理；2) `unwrap()` 在 `None` 时 panic（显式选择）；3) `?` 运算符传播 `None`（在返回 `Option` 的函数中）。Java 8+ 的 `Optional<T>` 类似，但：1) `Optional` 可仍为 `null`（`Optional` 本身是引用类型）；2) 不强制使用（编译器不检查）；3) 序列化问题。Kotlin 的 `T?`（可空类型）与 Rust 的 `Option<T>` 更接近，但 Kotlin 在 JVM 上运行时仍有 null（与 Java 互操作）。这与 Swift 的 `Optional<T>`（类似 Rust，但语法糖 `?`/`!`）或 Haskell 的 `Maybe a`（同样编译期强制处理）相同——Rust 的 `Option` 是类型系统的核心，非可选特性。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)] · [来源: [Rust Reference — Option](https://doc.rust-lang.org/std/option/enum.Option.html)]
+
+## 认知路径
+
+> **认知路径**: 从 L0 基础概念出发，经由本节的 **Rust vs Java：系统编程与托管运行时的范式对比** 核心原理，通向 L2 进阶模式与 L3 工程实践。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| Rust vs Java：系统编程与托管运行时的范式对比 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
+| Rust vs Java：系统编程与托管运行时的范式对比 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| Rust vs Java：系统编程与托管运行时的范式对比 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
+
+> **过渡**: 掌握 Rust vs Java：系统编程与托管运行时的范式对比 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+
+> **过渡**: 在实践中应用 Rust vs Java：系统编程与托管运行时的范式对比 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
+
+> **过渡**: Rust vs Java：系统编程与托管运行时的范式对比 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+
+### 反命题与边界
+
+> **反命题**: "Rust vs Java：系统编程与托管运行时的范式对比 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+

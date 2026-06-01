@@ -4,13 +4,19 @@
 
 | 类别 | 数量 |
 |:---|:---:|
-| 总链接数 | 113561 |
-| 有效链接 | 48410 |
-| 损坏链接 | 0 |
-| 外部链接 | 65139 |
+| 总链接数 | 113573 |
+| 有效链接 | 48409 |
+| 损坏链接 | 1 |
+| 外部链接 | 65151 |
 | 仅锚点链接 | 39285 |
 
 ## 损坏链接清单（按问题类型分组）
+
+### 锚点不存在 (1个)
+
+| 源文件 | 链接文本 | 链接路径 | 问题 |
+|:---|:---|:---|:---|
+| docs\research_notes\type_theory\10_trait_system_formalization.md | RPITIT 与 async fn in trait（Rust 1.75.0 稳定化） | `#rpitit-与-async-fn-in-traitrust-193-稳定化` | 同文件锚点不存在: #rpitit-与-async-fn-in-traitrust-193-稳定化 |
 
 ## 修复建议
 
@@ -35,5 +41,6 @@
 
 | 源文件 | 损坏链接数 |
 |:---|:---:|
+| docs\research_notes\type_theory\10_trait_system_formalization.md | 1 |
 
-**总计 0 个文件包含损坏链接**
+**总计 1 个文件包含损坏链接**

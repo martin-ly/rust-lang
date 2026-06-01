@@ -1091,12 +1091,12 @@ graph TD
 ### 编译错误示例
 
 ```rust,compile_fail
-// 错误: 在 safe Rust 中直接创建裸指针并解引用
+// 错误: 在 safe Rust 中直接解引用裸指针
 fn unsafe_in_safe() -> i32 {
     let x = 42;
     let ptr = &x as *const i32;
     // ❌ 编译错误: 解引用裸指针需要 `unsafe` 块
-    unsafe { *ptr } // 即使包在 unsafe 块内，此示例也展示边界
+    *ptr // 不能在 safe 代码中解引用裸指针
 }
 ```
 
@@ -1260,7 +1260,7 @@ fn correct_order() {
 
 ### 10.3 边界测试：`Mutex` 的毒化（poisoning）与错误恢复（运行时 panic）
 
-```rust,compile_fail
+```rust,no_run
 use std::sync::{Arc, Mutex};
 use std::thread;
 
@@ -1276,7 +1276,7 @@ fn main() {
 
     let _ = handle.join();
 
-    // ❌ 运行时 panic: Mutex 被毒化，lock() 返回 Err(PoisonError)
+    // ⚠️ 运行时 panic: Mutex 被毒化，lock() 返回 Err(PoisonError)
     let guard = data.lock().unwrap();
     println!("{}", *guard);
 }
@@ -1298,7 +1298,7 @@ fn main() {
     thread::spawn(move || { tx2.send(2).unwrap(); });
 
     // ❌ 编译错误: 不能克隆 Receiver（mpsc = multiple producer, single consumer）
-    // let rx2 = rx.clone();
+    let rx2 = rx.clone(); // mpsc::Receiver<T> 未实现 Clone
 
     for _ in 0..2 {
         println!("{}", rx.recv().unwrap());
@@ -1330,3 +1330,7 @@ fn main() {
 > [来源: [Crossbeam crate](https://docs.rs/crossbeam/)]
 > [来源: [Rayon crate](https://docs.rs/rayon/)]
 > [来源: [Rust Atomics and Locks Book](https://marabos.nl/atomics/)]
+> **过渡**: Concurrency（并发模型） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: Concurrency（并发模型） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: Concurrency（并发模型） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+

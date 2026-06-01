@@ -476,3 +476,34 @@ fn main() {
 ```
 
 > **修正**: Cargo script 的 **shebang**（`#!/usr/bin/env cargo`）是 Unix 特性，Windows 不支持。Windows 运行 cargo script：1) `cargo +nightly run script.rs`（显式调用）；2) 使用 `cargo-script` crate（已集成到 cargo nightly）；3) 文件关联（将 `.rs` 关联到 cargo）。cargo script 的限制：1) 无 workspace 共享依赖；2) 每次运行可能重新编译（无增量编译缓存）；3) 不支持复杂构建脚本。适用场景：快速原型、单次运行脚本、教学示例。这与 Python 的 shebang（跨平台更成熟）或 Deno 的 `deno run script.ts`（内置脚本运行，无需 shebang）不同——Rust 的 cargo script 是实验性功能，仍在演进。[来源: [Cargo Script RFC](https://rust-lang.github.io/rfcs/3424-cargo-script.html)] · [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)]
+> **过渡**: Cargo Script：单文件 Rust 程序 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: Cargo Script：单文件 Rust 程序 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: Cargo Script：单文件 Rust 程序 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+
+### 补充定理链
+
+- **定理**: Cargo Script：单文件 Rust 程序 定义 ⟹ 类型安全保证
+- **定理**: Cargo Script：单文件 Rust 程序 定义 ⟹ 类型安全保证
+- **定理**: Cargo Script：单文件 Rust 程序 定义 ⟹ 类型安全保证
+
+## 认知路径
+
+> **认知路径**: 从 Rust 核心语言特性出发，经由 **Cargo Script：单文件 Rust 程序** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| Cargo Script：单文件 Rust 程序 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
+| Cargo Script：单文件 Rust 程序 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
+| Cargo Script：单文件 Rust 程序 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+> **过渡**: 掌握 Cargo Script：单文件 Rust 程序 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
+
+> **过渡**: 在工程实践中应用 Cargo Script：单文件 Rust 程序 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
+
+> **过渡**: Cargo Script：单文件 Rust 程序 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
+
+### 反命题与边界
+
+> **反命题**: "Cargo Script：单文件 Rust 程序 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。

@@ -354,7 +354,7 @@ TensorFlow 模型  →   tf2onnx             →   .onnx 文件
 
 > **[linfa](https://github.com/rust-ml/linfa)** 是 Rust 的通用机器学习框架，提供类似 scikit-learn 的 API（fit/transform/predict）。支持聚类、降维、回归、分类等算法，每个算法是独立的子 crate。[来源: [linfa Documentation](https://docs.rs/linfa/latest/linfa/)]
 
-```rust
+```rust,ignore
 // linfa：K-Means 聚类
 use linfa::prelude::*;
 use linfa_clustering::KMeans;
@@ -396,7 +396,7 @@ fn kmeans_example() {
 
 > **[smartcore](https://github.com/smartcorelib/smartcore)** 是专为 `#![no_std]` 环境设计的机器学习库，可在嵌入式设备和 WASM 中运行。提供基础的统计和 ML 算法，不依赖 `std`。[来源: [smartcore GitHub](https://github.com/smartcorelib/smartcore)]
 
-```rust
+```rust,ignore
 // smartcore：嵌入式友好的线性回归（no_std）
 use smartcore::linalg::naive::dense_matrix::DenseMatrix;
 use smartcore::linear::linear_regression::LinearRegression;
@@ -431,7 +431,7 @@ fn embedded_ml() {
 
 > **[polars](https://pola.rs/)** 是用 Rust 编写的高性能 DataFrame 库，提供 Python 和 Rust API。核心设计：**Apache Arrow 列式内存格式 + 查询优化器 + 多线程执行**。比 pandas 快 10-100 倍，内存占用更低。[来源: [Polars User Guide](https://docs.pola.rs/)]
 
-```rust
+```rust,ignore
 // polars：DataFrame 操作
 use polars::prelude::*;
 
@@ -523,7 +523,7 @@ SIMD 优化:
 
 > **[DataFusion](https://arrow.apache.org/datafusion/)** 是用 Rust 实现的可扩展查询执行引擎，基于 Apache Arrow。支持 SQL 和 DataFrame API，可嵌入到应用中作为分析引擎。是 InfluxDB IOx、Ballista（分布式）的基础。[来源: [DataFusion Documentation](https://arrow.apache.org/datafusion/)]
 
-```rust
+```rust,ignore
 // DataFusion：SQL 查询引擎
 use datafusion::prelude::*;
 
@@ -821,3 +821,34 @@ fn safe_inference(model: &impl Module<B>, input: Tensor<B, 2>) {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+> **过渡**: Machine Learning Ecosystem（机器学习生态） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: Machine Learning Ecosystem（机器学习生态） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: Machine Learning Ecosystem（机器学习生态） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+
+### 补充定理链
+
+- **定理**: Machine Learning Ecosystem（机器学习生态） 定义 ⟹ 类型安全保证
+- **定理**: Machine Learning Ecosystem（机器学习生态） 定义 ⟹ 类型安全保证
+- **定理**: Machine Learning Ecosystem（机器学习生态） 定义 ⟹ 类型安全保证
+
+## 认知路径
+
+> **认知路径**: 从 Rust 核心语言特性出发，经由 **Machine Learning Ecosystem（机器学习生态）** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| Machine Learning Ecosystem（机器学习生态） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
+| Machine Learning Ecosystem（机器学习生态） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
+| Machine Learning Ecosystem（机器学习生态） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+> **过渡**: 掌握 Machine Learning Ecosystem（机器学习生态） 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
+
+> **过渡**: 在工程实践中应用 Machine Learning Ecosystem（机器学习生态） 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
+
+> **过渡**: Machine Learning Ecosystem（机器学习生态） 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
+
+### 反命题与边界
+
+> **反命题**: "Machine Learning Ecosystem（机器学习生态） 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。

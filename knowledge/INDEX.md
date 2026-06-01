@@ -141,7 +141,7 @@
 
 ### I
 
-- **if let guards** - [02_intermediate/control_flow/if_let_guards.md](02_intermediate/control_flow/01_if_let_guards.md) - Rust 1.95
+- **if let guards** - [02_intermediate/control_flow/if_let_guards.md](02_intermediate/control_flow/01_if_let_guards.md) - Rust 1.95.0
 - **inline assembly** - [03_advanced/unsafe/inline_asm.md](03_advanced/unsafe/02_inline_asm.md)
 - **installation** - [00_start/02_installation.md](00_start/02_installation.md)
 - **iterators** - [01_fundamentals/iterators.md](01_fundamentals/02_iterators.md)

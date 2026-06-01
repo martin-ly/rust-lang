@@ -1,14 +1,21 @@
-//! # Rust 1.96 特性跟踪模块（含历史特性复习与 1.96 前瞻）
+//! # Rust 1.96 特性跟踪模块（含历史特性复习）
 //!
 //! 本模块包含 Rust 1.96.0 稳定版的类型系统增强：
-//! - `impl From<bool> for {f32, f64}` — 布尔到浮点安全转换 ⭐
-//! - `VecDeque::new` 的 const 上下文支持 — 常量初始化集合 ⭐
+//! - `core::range` 完整类型族（`Range`、`RangeFrom`、`RangeInclusive`、`RangeToInclusive`）⭐
+//! - `assert_matches!` / `debug_assert_matches!` — 模式匹配断言宏 ⭐
+//! - `From<T>` for `LazyCell` / `LazyLock` / `AssertUnwindSafe` ⭐
+//! - `NonZero` 范围迭代 ⭐
+//! - `ManuallyDrop` 常量模式 ⭐
+//! - `expr` metavariable 传递给 `cfg` ⭐
+//! - Never 类型在 tuple 中的强制转换 ⭐
 //!
-//! 以及 nightly-only 的 Never 类型 (`!`) 深度专题（供前瞻学习）。
+//! 以及历史特性复习（非 1.96 新增，但与本模块教学相关）：
+//! - `impl From<bool> for {f32, f64}` — 1.68.0 stable
+//! - `VecDeque::new` 的 const 上下文支持 — 1.68.0 stable
 //!
 //! # 版本信息
-//! - Rust版本: 1.96.0+ (stable features) / nightly (`!` type)
-//! - 稳定日期: 2026-05-XX
+//! - Rust版本: 1.96.0+ (stable)
+//! - 稳定日期: 2026-05-28
 //! - Edition: 2024
 //!
 //! # Rust 1.96.0 类型系统新特性
@@ -16,7 +23,7 @@
 use std::assert_matches;
 
 // ============================================================================
-// 1. `impl From<bool> for {f32, f64}` — 布尔到浮点转换 (1.68 stable)
+// 1. `impl From<bool> for {f32, f64}` — 布尔到浮点转换 (1.68.0 stable)
 // ============================================================================
 
 /// # 布尔到浮点转换 (`From<bool> for f32/f64`)
@@ -26,7 +33,7 @@ use std::assert_matches;
 ///
 /// ## 类型系统意义
 /// 这是 Rust 类型一致性 (type coherence) 的进一步完善：
-/// - `bool` 已实现 `From<bool> for {integer}` (1.75 stable)
+/// - `bool` 已实现 `From<bool> for {integer}` (1.68.0 stable)
 /// - 1.96 补全了对浮点类型的对称转换
 /// - 统一了数值类型从 `bool` 的转换接口
 ///
@@ -58,7 +65,7 @@ impl BoolToFloatConversionExamples {
 }
 
 // ============================================================================
-// 2. `VecDeque::new` 的 const 上下文支持 (1.68 stable)
+// 2. `VecDeque::new` 的 const 上下文支持 (1.68.0 stable)
 // ============================================================================
 
 use std::collections::VecDeque;
@@ -96,7 +103,7 @@ impl ConstVecDequeExamples {
 // ✅ **状态**: `!` 类型的核心功能在 Rust 1.96+ stable / Edition 2024 中已可用：
 //    - `!` 作为函数返回类型（`-> !`）—— 早已稳定
 //    - `Result<T, !>` / `Option<!>` —— stable 可用（通过 edition 2024）
-//    - never type 在 tuple 表达式中的 coercion —— Rust 1.96 stable
+//    - never type 在 tuple 表达式中的 coercion —— Rust 1.96.0 stable
 //    - match 穷尽性检查（`Result<T, !>` 无需 `Err` 分支）—— stable 可用
 //
 // ⚠️ **限制**: `!` 作为显式类型别名（如 `type MyNever = !;`）在某些上下文中仍受限，
@@ -354,13 +361,13 @@ pub fn get_never_type_info() -> String {
 }
 
 // ============================================================================
-// 4. `core::range` 模块补齐 — `Range` / `RangeFrom` / `RangeToInclusive` (1.96 stable)
+// 4. `core::range` 模块补齐 — `Range` / `RangeFrom` / `RangeToInclusive` (1.96.0 stable)
 // ============================================================================
 
 /// # `core::range` 模块完整类型族
 ///
 /// Rust 1.95 稳定了 `RangeInclusive` 和 `RangeInclusiveIter`。
-/// **1.96 补齐了 `core::range` 的其余核心类型**：
+/// **1.96.0 补齐了 `core::range` 的其余核心类型**：
 ///
 /// | 类型 | 语法 | 含义 | 对应迭代器 |
 /// |:---|:---|:---|:---|
@@ -475,7 +482,7 @@ pub fn nonzero_range_demo() {
 }
 
 // ============================================================================
-// 6. `assert_matches!` / `debug_assert_matches!` (1.96 stable)
+// 6. `assert_matches!` / `debug_assert_matches!` (1.96.0 stable)
 // ============================================================================
 
 /// # 模式断言宏
@@ -498,7 +505,7 @@ pub fn nonzero_range_demo() {
 ///
 /// **来源**: [Rust Standard Library: assert_matches]
 pub fn assert_matches_demo() {
-    // assert_matches! 在 Rust 1.96+ 稳定
+    // assert_matches! 在 Rust 1.96.0+ 稳定
     let result: Result<i32, &str> = Ok(42);
     assert_matches!(result, Ok(n) if n > 0);
 }

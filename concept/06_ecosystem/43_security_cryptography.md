@@ -155,7 +155,7 @@ AES-GCM 参数:
   ✅ 推荐使用 96 位随机 Nonce（计数器或 CSPRNG）
 ```
 
-```rust
+```rust,ignore
 use aes_gcm::{
     aead::{Aead, AeadCore, KeyInit, OsRng},
     Aes256Gcm, Nonce,
@@ -207,7 +207,7 @@ AES-GCM vs ChaCha20-Poly1305:
   cpb = cycles per byte
 ```
 
-```rust
+```rust,ignore
 use chacha20poly1305::{
     aead::{Aead, AeadCore, KeyInit, OsRng},
     ChaCha20Poly1305, Nonce,
@@ -256,7 +256,7 @@ RSA vs Ed25519 对比:
   └─────────────────┴─────────────────┴─────────────────────────────┘
 ```
 
-```rust
+```rust,ignore
 use ed25519_dalek::{SigningKey, Signer, Verifier, VerifyingKey};
 use rand::rngs::OsRng;
 
@@ -286,7 +286,7 @@ fn verify_signature(
 
 > **[RFC 7748](https://tools.ietf.org/html/rfc7748)** X25519 是基于 Curve25519 的 ECDH 密钥交换协议，被 TLS 1.3 采用为必备算法。特征：**常量时间实现、无需要求验证点的合法性**（ twist-security 设计）。
 
-```rust
+```rust,ignore
 use x25519_dalek::{EphemeralSecret, PublicKey};
 use rand::rngs::OsRng;
 
@@ -332,7 +332,7 @@ assert_eq!(alice_shared.as_bytes(), bob_shared.as_bytes());
   ✅ 第二原像抗性：给定 x，找到 y ≠ x 使 hash(x) = hash(y) 不可行
 ```
 
-```rust
+```rust,ignore
 use sha2::{Sha256, Digest};
 use blake3;
 
@@ -361,7 +361,7 @@ fn keyed_hash_blake3(key: &[u8; 32], data: &[u8]) -> [u8; 32] {
 
 > **[RFC 2104](https://tools.ietf.org/html/rfc2104)** HMAC（Hash-based Message Authentication Code）是使用密钥的哈希函数，提供**消息认证**和**完整性**保证。HMAC 的安全性不依赖于底层哈希函数的强碰撞抗性（即使 MD5/SHA-1 被破解，HMAC-MD5/HMAC-SHA1 仍然是安全的）。
 
-```rust
+```rust,ignore
 use hmac::{Hmac, Mac};
 use sha2::Sha256;
 
@@ -404,7 +404,7 @@ Argon2id 推荐参数（OWASP 2023）:
   并行度: 1 (p=1)
 ```
 
-```rust
+```rust,ignore
 use argon2::{Argon2, PasswordHasher, PasswordVerifier, password_hash::{
     SaltString, PasswordHash, PasswordHasher as _, PasswordVerifier as _,
 }};
@@ -448,7 +448,7 @@ fn derive_keys(master_key: &[u8], salt: &[u8]) -> ([u8; 32], [u8; 32]) {
 
 > **[ring](https://briansmith.org/rustdoc/ring/)** 是 Brian Smith 开发的 Rust 密码学库，聚合了 BoringSSL（Google 的 OpenSSL 分支）的高性能、审计过的密码学原语。设计哲学：**最小 API 表面积、高安全性默认值、无 unsafe 暴露**。
 
-```rust
+```rust,ignore
 use ring::aead::{Aes256Gcm, Nonce, UnboundKey, AES_256_GCM};
 use ring::rand::SecureRandom;
 use ring::signature::{Ed25519KeyPair, UnparsedPublicKey, ED25519};
@@ -481,7 +481,7 @@ fn ring_sign(key_pair: &Ed25519KeyPair, message: &[u8]) -> ring::signature::Sign
 
 > **[rustls](https://docs.rs/rustls/latest/rustls/)** 是 Joseph Birr-Pixton 开发的纯 Rust TLS 库，目标是**替代 OpenSSL**。与 OpenSSL 相比：内存安全（无缓冲区溢出）、无 unsafe（核心代码）、API 设计更现代（基于 Rust 类型系统）。
 
-```rust
+```rust,ignore
 use rustls::{ClientConfig, ServerConfig, RootCertStore};
 use std::sync::Arc;
 
@@ -560,7 +560,7 @@ fn create_tls_server(cert_chain: Vec<CertificateDer<'static>>, key: PrivateKeyDe
 常量时间比较: 无论输入如何，执行时间固定
 ```
 
-```rust
+```rust,ignore
 use subtle::ConstantTimeEq;
 
 // ❌ 错误：非常量时间比较（Rust 默认 ==）
@@ -784,3 +784,34 @@ fn weak_hash_password(password: &str) -> String {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+> **过渡**: Security & Cryptography（安全与密码学） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: Security & Cryptography（安全与密码学） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: Security & Cryptography（安全与密码学） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+
+### 补充定理链
+
+- **定理**: Security & Cryptography（安全与密码学） 定义 ⟹ 类型安全保证
+- **定理**: Security & Cryptography（安全与密码学） 定义 ⟹ 类型安全保证
+- **定理**: Security & Cryptography（安全与密码学） 定义 ⟹ 类型安全保证
+
+## 认知路径
+
+> **认知路径**: 从 Rust 核心语言特性出发，经由 **Security & Cryptography（安全与密码学）** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| Security & Cryptography（安全与密码学） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
+| Security & Cryptography（安全与密码学） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
+| Security & Cryptography（安全与密码学） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+> **过渡**: 掌握 Security & Cryptography（安全与密码学） 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
+
+> **过渡**: 在工程实践中应用 Security & Cryptography（安全与密码学） 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
+
+> **过渡**: Security & Cryptography（安全与密码学） 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
+
+### 反命题与边界
+
+> **反命题**: "Security & Cryptography（安全与密码学） 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。

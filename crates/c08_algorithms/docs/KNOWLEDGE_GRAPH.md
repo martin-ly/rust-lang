@@ -198,7 +198,7 @@ fn merge<T: Ord + Clone>(arr: &mut [T], left: &[T], right: &[T]) {
     }
 }
 
-/// 异步归并排序 - Rust 1.92.0 async fn in trait（自 Rust 1.90 引入）
+/// 异步归并排序 - Rust 1.75.0 async fn in trait
 pub trait AsyncSort {
     async fn sort_async(&mut self) -> Result<(), Box<dyn std::error::Error + Send + Sync>>;
 }
@@ -430,7 +430,7 @@ where
     distances
 }
 
-/// 异步 Dijkstra - 展示 async fn in trait (Rust 1.92.0，自 Rust 1.90 引入)
+/// 异步 Dijkstra - 展示 async fn in trait (Rust 1.75.0)
 pub trait AsyncGraph<V, W> {
     async fn shortest_path(&self, start: V, end: V) -> Option<(Vec<V>, W)>;
 }

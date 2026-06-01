@@ -11,7 +11,7 @@
 //! # 问题背景
 //!
 //! ```text
-//! AFIT (1.75): async fn in trait ✅
+//! AFIT (1.75.0): async fn in trait ✅
 //!   └── 但 trait object (dyn Trait) 不支持 async fn ❌
 //!       └── 需要 async_trait 宏 workaround
 //!           └── AFIDT (1.97+ nightly): 原生支持 dyn async trait ✅

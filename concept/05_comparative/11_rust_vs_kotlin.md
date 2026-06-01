@@ -698,3 +698,26 @@ fn main() {
 ```
 
 > **修正**: Kotlin 的 **nullable 类型**（`String?`）在类型系统中标记可能为 null，但运行时与 `String` 相同（JVM 的引用类型）。`?.`（安全调用）和 `?:`（Elvis 运算符）是语法糖，编译为 null 检查。Rust 的 `Option<T>` 是**枚举**：`Some(T)` 或 `None`，占用额外空间（discriminant），但编译器优化（Niche Value Optimization）可使 `Option<&T>` 与 `&T` 同大小（用 null 指针表示 `None`）。Kotlin 的优势：与 Java 互操作、语法简洁；Rust 的优势：无 null 指针（`Option` 是显式枚举）、模式匹配穷尽检查、零成本抽象（`Option<&T>` 无额外开销）。这与 TypeScript 的 `string | null`（联合类型，编译期检查）或 Haskell 的 `Maybe a`（类似 `Option`）相同——Rust 的 `Option` 是代数数据类型，非语言特殊的 null。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)] · [来源: [Kotlin Null Safety](https://kotlinlang.org/docs/null-safety.html)]
+
+## 认知路径
+
+> **认知路径**: 从 L0 基础概念出发，经由本节的 **Rust vs Kotlin：静态安全的两种路径** 核心原理，通向 L2 进阶模式与 L3 工程实践。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| Rust vs Kotlin：静态安全的两种路径 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
+| Rust vs Kotlin：静态安全的两种路径 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| Rust vs Kotlin：静态安全的两种路径 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
+
+> **过渡**: 掌握 Rust vs Kotlin：静态安全的两种路径 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+
+> **过渡**: 在实践中应用 Rust vs Kotlin：静态安全的两种路径 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
+
+> **过渡**: Rust vs Kotlin：静态安全的两种路径 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+
+### 反命题与边界
+
+> **反命题**: "Rust vs Kotlin：静态安全的两种路径 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+

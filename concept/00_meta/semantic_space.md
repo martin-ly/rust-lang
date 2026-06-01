@@ -1248,3 +1248,25 @@ fn main() {
 > 这与数学中的"域"（field/area/domain）或编程中的"类型"（type/kind/sort）类似——跨学科术语重叠需要上下文消歧。
 > [来源: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/items/generics.html#lifetime-parameters)] ·
 > [来源: [Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)]
+
+## 认知路径
+
+> **认知路径**: 本文件作为 Rust 分层知识体系的 **Rust 表征空间（Semantic / Representational Space）** 元层导航节点，连接概念定义、学习路径与质量评估框架。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| Rust 表征空间（Semantic / Representational Space） 结构化组织 ⟹ 高效检索 | 理解分类维度与索引关系 | 能快速定位目标概念 | 高 |
+| Rust 表征空间（Semantic / Representational Space） 质量评估 ⟹ 持续改进 | 建立量化指标与审计流程 | 识别知识缺口并优先修复 | 高 |
+| Rust 表征空间（Semantic / Representational Space） 跨层映射 ⟹ 系统掌握 | 打通 L0-L7 的关联路径 | 形成完整的 Rust 能力图谱 | 高 |
+
+> **过渡**: 利用本文件的导航结构，读者可以从当前位置快速跃迁到任意概念层级，实现非线性学习。
+
+> **过渡**: Rust 表征空间（Semantic / Representational Space） 的维护需要与概念内容同步更新，确保元数据与实际知识体系的一致性。
+
+> **过渡**: 将 Rust 表征空间（Semantic / Representational Space） 作为学习起点或复习锚点，有助于建立全局视野，避免陷入局部细节而忽视整体架构。
+
+### 反命题与边界
+
+> **反命题**: "元层文档可以替代具体概念学习" —— 错误。Rust 表征空间（Semantic / Representational Space） 提供的是导航与评估框架，不能替代对核心概念（L1-L5）的深入理解与实践。

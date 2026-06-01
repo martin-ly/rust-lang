@@ -63,7 +63,7 @@
 
 | 文件 | 状态 | 更新动作 |
 |:---|:---|:---|
-| `concept/02_intermediate/05_assert_matches.md` | ✅ 已完成 | 标记为 1.96 稳定 |
+| `concept/02_intermediate/05_assert_matches.md` | ✅ 已完成 | 标记为 1.96.0 稳定 |
 | `concept/02_intermediate/06_range_types.md` | ✅ 已完成 | 标记为 1.96 稳定 |
 | `docs/06_toolchain/06_19_rust_1_96_features.md` | ✅ 已完成 | 重写为真实 1.96 特性 |
 

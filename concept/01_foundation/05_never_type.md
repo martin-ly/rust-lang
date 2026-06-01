@@ -135,7 +135,7 @@ fn demo_coercion(flag: bool) -> String {
 
 发散函数（diverging function）是返回 `!` 的函数，它们通过 `panic!`、`exit` 或无限循环结束，不会正常返回。
 
-```rust
+```rust,ignore
 /// 类型签名明确标记：此函数不会返回
 pub fn fatal_error(message: &str) -> ! {
     eprintln!("Fatal: {}", message);
@@ -157,7 +157,7 @@ pub fn get_config() -> Config {
 
 当操作在逻辑上不可能失败时，使用 `!` 作为 `Result` 的错误类型：
 
-```rust
+```rust,ignore
 /// 编译期已验证的解析（不可能失败）
 pub fn parse_compile_time_known() -> Result<i32, !> {
     Ok("42".parse().unwrap()) // 我们知道 "42" 一定能解析
@@ -182,7 +182,7 @@ pub fn unwrap_infallible<T>(result: Result<T, !>) -> T {
 
 `Option<!>` 等价于 `None`——因为无法构造 `Some(!)`：
 
-```rust
+```rust,ignore
 /// 表示"已经被过滤掉的值"
 pub fn impossible_value() -> Option<!> {
     None // 唯一可能的值
@@ -207,7 +207,7 @@ pub fn handle_impossible(opt: Option<!>) -> &'static str {
 
 Rust 编译器利用 `!` 的空性（uninhabitedness）进行穷尽性检查：
 
-```rust
+```rust,ignore
 /// 对 Result<T, !> 的 match 不需要 Err 分支
 pub fn process_infallible(result: Result<i32, !>) -> i32 {
     match result {
@@ -248,7 +248,7 @@ pub fn handle_events(event: Event<i32, !>) -> Option<i32> {
 | 与 `panic!` 集成 | ✅ `panic!()` 返回 `!` | ❌ 不直接关联 |
 | 类型论地位 | ✅ 标准底类型 | ❌ 用户定义类型 |
 
-```rust
+```rust,ignore
 // 使用空枚举（旧方式，不推荐）
 enum Void {}
 
@@ -270,7 +270,7 @@ fn new_style() -> Result<i32, !> {
 
 Rust 1.96 稳定了 never type 在 **tuple 表达式**中的 coercion 行为：
 
-```rust
+```rust,ignore
 /// Rust 1.96+：! 在 tuple 中自动 coercion
 fn tuple_coercion_demo() -> (i32, String) {
     if false {
@@ -310,7 +310,7 @@ impl Config {
 
 ### 模式 1：编译期常量求值
 
-```rust
+```rust,ignore
 /// 编译期计算不可能运行时失败
 pub const fn compile_time_compute(input: u32) -> Result<u32, !> {
     Ok(input * 2)
@@ -319,7 +319,7 @@ pub const fn compile_time_compute(input: u32) -> Result<u32, !> {
 
 ### 模式 2：流处理中的不可能错误
 
-```rust
+```rust,ignore
 /// 过滤后的流：错误已被前置处理
 pub fn filtered_stream(items: Vec<Result<i32, String>>) -> Vec<Result<i32, !>> {
     items.into_iter().filter_map(|r| r.ok().map(Ok)).collect()
@@ -328,7 +328,7 @@ pub fn filtered_stream(items: Vec<Result<i32, String>>) -> Vec<Result<i32, !>> {
 
 ### 模式 3：与 `ControlFlow` 结合
 
-```rust
+```rust,ignore
 use std::ops::ControlFlow;
 
 /// 递归遍历中的短路控制
@@ -403,6 +403,29 @@ fn incomplete_match(result: Result<i32, !>) -> i32 {
 >
 > - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../../exercises/) — 动手编程挑战
-> - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
+
+## 认知路径
+
+> **认知路径**: 从 L0 基础概念出发，经由本节的 **Never Type (`!`)：底类型与穷尽性** 核心原理，通向 L2 进阶模式与 L3 工程实践。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| Never Type (`!`)：底类型与穷尽性 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
+| Never Type (`!`)：底类型与穷尽性 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| Never Type (`!`)：底类型与穷尽性 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
+
+> **过渡**: 掌握 Never Type (`!`)：底类型与穷尽性 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+
+> **过渡**: 在实践中应用 Never Type (`!`)：底类型与穷尽性 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
+
+> **过渡**: Never Type (`!`)：底类型与穷尽性 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+
+### 反命题与边界
+
+> **反命题**: "Never Type (`!`)：底类型与穷尽性 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+

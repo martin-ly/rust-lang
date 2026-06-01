@@ -227,3 +227,25 @@ mindmap
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
+## 认知路径
+
+> **认知路径**: 本文件作为 Rust 分层知识体系的 **Rust 知识体系全局思维导图（Knowledge Mindmap）** 元层导航节点，连接概念定义、学习路径与质量评估框架。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| Rust 知识体系全局思维导图（Knowledge Mindmap） 结构化组织 ⟹ 高效检索 | 理解分类维度与索引关系 | 能快速定位目标概念 | 高 |
+| Rust 知识体系全局思维导图（Knowledge Mindmap） 质量评估 ⟹ 持续改进 | 建立量化指标与审计流程 | 识别知识缺口并优先修复 | 高 |
+| Rust 知识体系全局思维导图（Knowledge Mindmap） 跨层映射 ⟹ 系统掌握 | 打通 L0-L7 的关联路径 | 形成完整的 Rust 能力图谱 | 高 |
+
+> **过渡**: 利用本文件的导航结构，读者可以从当前位置快速跃迁到任意概念层级，实现非线性学习。
+
+> **过渡**: Rust 知识体系全局思维导图（Knowledge Mindmap） 的维护需要与概念内容同步更新，确保元数据与实际知识体系的一致性。
+
+> **过渡**: 将 Rust 知识体系全局思维导图（Knowledge Mindmap） 作为学习起点或复习锚点，有助于建立全局视野，避免陷入局部细节而忽视整体架构。
+
+### 反命题与边界
+
+> **反命题**: "元层文档可以替代具体概念学习" —— 错误。Rust 知识体系全局思维导图（Knowledge Mindmap） 提供的是导航与评估框架，不能替代对核心概念（L1-L5）的深入理解与实践。

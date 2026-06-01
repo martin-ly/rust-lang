@@ -48,7 +48,7 @@ impl LazyFromExamples {
 }
 
 // ============================================================================
-// 2. assert_matches! / debug_assert_matches! (1.96 stable)
+// 2. assert_matches! / debug_assert_matches! (1.96.0 stable)
 // ============================================================================
 
 /// # 模式匹配断言在进程管理中的应用
@@ -77,7 +77,7 @@ impl ProcessAssertMatchesExamples {
 
 /// # `core::range::Range` 在进程资源管理中的应用
 ///
-/// Rust 1.96 的 `core::range::Range` 实现 `Copy`，可多次迭代，
+/// Rust 1.96.0 的 `core::range::Range` 实现 `Copy`，可多次迭代，
 /// 适合表示进程 ID 范围、内存地址范围、资源限制等。
 pub struct ProcessRangeExamples;
 

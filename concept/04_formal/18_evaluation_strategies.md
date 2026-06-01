@@ -32,7 +32,7 @@
 
 **关键差异示例**:
 
-```rust
+```rust,ignore
 // Rust: 严格求值 — 参数先求值，再调用函数
 fn strict_example() {
     let result = divide(10, 0); // ❌ 运行时 panic: 0 先被求值
@@ -161,7 +161,7 @@ fn main() {
 
 Rust 通过**显式类型**实现工程级惰性求值：
 
-```rust
+```rust,ignore
 // Iterator: 惰性构造，消费时才求值
 let iter = vec![1, 2, 3].iter().map(|x| x * 2); // 未执行任何计算
 let result: Vec<_> = iter.collect(); // 消费时才计算
@@ -239,7 +239,7 @@ Rust 明确规定了表达式的求值顺序：
 
 **Rust 的独特设计**: 通过**线性所有权**而非**惰性求值**来管理副作用：
 
-```rust
+```rust,ignore
 // Rust: 可变性通过 &mut T 显式追踪
 fn mutate(x: &mut i32) {
     *x += 1; // 编译器知道这是副作用，因为 x 是 &mut
@@ -259,7 +259,7 @@ fn mutate(x: &mut i32) {
 
 ### 6.1 反例：严格求值的性能陷阱
 
-```rust
+```rust,ignore
 fn strict_trap() {
     let expensive = compute_expensive(); // 立即求值，即使可能不用
     if condition {
@@ -280,7 +280,7 @@ fn lazy_solution() {
 
 ### 6.2 边界测试：求值顺序的确定性验证
 
-```rust
+```rust,compile_fail
 fn evaluation_order() {
     let mut v = vec![];
 
@@ -444,3 +444,26 @@ fn main() {}
 ```
 
 > **修正**: **Const fn**：1) 函数体必须是编译期可计算的；2) `Vec::new()` 在某些 Rust 版本中不是 `const fn`；3) 编译期限制逐步放宽（`const_mut_refs`、`const_vec_string` 等）。
+
+## 认知路径
+
+> **认知路径**: 从 L0 基础概念出发，经由本节的 **求值策略：Call-by-Value, Call-by-Name, Call-by-Need** 核心原理，通向 L2 进阶模式与 L3 工程实践。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| 求值策略：Call-by-Value, Call-by-Name, Call-by-Need 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
+| 求值策略：Call-by-Value, Call-by-Name, Call-by-Need 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| 求值策略：Call-by-Value, Call-by-Name, Call-by-Need 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
+
+> **过渡**: 掌握 求值策略：Call-by-Value, Call-by-Name, Call-by-Need 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+
+> **过渡**: 在实践中应用 求值策略：Call-by-Value, Call-by-Name, Call-by-Need 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
+
+> **过渡**: 求值策略：Call-by-Value, Call-by-Name, Call-by-Need 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+
+### 反命题与边界
+
+> **反命题**: "求值策略：Call-by-Value, Call-by-Name, Call-by-Need 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+

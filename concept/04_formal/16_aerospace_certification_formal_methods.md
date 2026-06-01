@@ -993,3 +993,26 @@ fn main() {}
 ```
 
 > **修正**: DO-178C（航空软件认证）要求 **MC/DC**（Modified Condition/Decision Coverage）：每个条件必须独立影响决策结果。`a && (b || c)` 需要 5 个测试用例满足 MC/DC。Kani 等模型检查器验证**所有可能输入**（有界），自然满足 MC/DC，但工具链认证是障碍：1) 形式化工具本身需通过 DO-330（工具鉴定）；2) 生成的证据需被认证机构接受；3) Rust 缺乏 DO-178C 的 A 级认证历史。Ferrocene 项目：提供经过认证的 Rust 工具链，支持 DO-178C、ISO 26262（汽车）、IEC 61508（工业）。这与 Ada/SPARK（长期用于航空，有完整认证历史）或 C（广泛认证但需大量测试）不同——Rust 的形式化验证生态正在成熟，但工业认证仍需时间积累。[来源: [DO-178C](https://en.wikipedia.org/wiki/DO-178C)] · [来源: [Ferrocene](https://ferrous-systems.com/ferrocene/)] · [来源: [MC/DC](https://en.wikipedia.org/wiki/Modified_condition/decision_coverage)]
+
+## 认知路径
+
+> **认知路径**: 从 L0 基础概念出发，经由本节的 **航空航天认证与形式化方法 (Aerospace Certification & Formal Methods)** 核心原理，通向 L2 进阶模式与 L3 工程实践。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| 航空航天认证与形式化方法 (Aerospace Certification & Formal Methods) 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
+| 航空航天认证与形式化方法 (Aerospace Certification & Formal Methods) 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| 航空航天认证与形式化方法 (Aerospace Certification & Formal Methods) 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
+
+> **过渡**: 掌握 航空航天认证与形式化方法 (Aerospace Certification & Formal Methods) 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+
+> **过渡**: 在实践中应用 航空航天认证与形式化方法 (Aerospace Certification & Formal Methods) 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
+
+> **过渡**: 航空航天认证与形式化方法 (Aerospace Certification & Formal Methods) 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+
+### 反命题与边界
+
+> **反命题**: "航空航天认证与形式化方法 (Aerospace Certification & Formal Methods) 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+

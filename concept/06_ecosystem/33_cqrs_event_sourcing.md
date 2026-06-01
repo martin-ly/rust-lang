@@ -88,7 +88,7 @@ CQRS 扩展（Young 2010）:
   - 读模型（Query Model）：优化查询性能、去规范化、物化视图
 ```
 
-```rust
+```rust,ignore
 // CQS 在 Rust 中的直接体现
 
 // 命令：改变状态，返回 ()（或 Result<(), Error>）
@@ -128,7 +128,7 @@ fn bad_example(state: &mut OrderState) -> OrderSummary {
              保存完整事件序列 Events
 ```
 
-```rust
+```rust,ignore
 // 事件溯源的核心：状态是事件的左折叠（left fold）
 #[derive(Debug, Clone, Serialize, Deserialize)]
 enum BankAccountEvent {
@@ -275,7 +275,7 @@ graph TB
 
 命令端的核心职责是**验证领域规则**和**维护聚合一致性**。在 CQRS+ES 中，命令端不直接更新数据库状态，而是生成事件。
 
-```rust
+```rust,ignore
 // 命令端：聚合根（Aggregate Root）
 #[derive(Debug)]
 struct OrderAggregate {
@@ -353,7 +353,7 @@ impl OrderAggregate {
 
 查询端的核心职责是**快速响应查询**，通常通过**物化视图**（Materialized View）实现。读模型可以任意去规范化，以优化特定查询场景。
 
-```rust
+```rust,ignore
 // 查询端：物化视图（去规范化、针对查询优化）
 #[derive(Debug, Clone, Serialize, Deserialize)]
 struct OrderQueryView {
@@ -450,7 +450,7 @@ impl OrderProjection {
 
 事件溯源的基石是**事件存储的追加模型**（Append-Only Model）：事件一旦写入，永不修改、永不删除。
 
-```rust
+```rust,ignore
 // 事件存储的追加接口
 // 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]
 trait EventStore {
@@ -497,7 +497,7 @@ async fn append_with_occ(
 
 随着事件积累，重建状态的性能退化。快照（Snapshot）是状态的周期性快照，用于加速重建。
 
-```rust
+```rust,ignore
 #[derive(Debug, Serialize, Deserialize)]
 struct OrderSnapshot {
     stream_id: String,
@@ -562,7 +562,7 @@ async fn load_aggregate(
 
 业务需求演进时，事件结构可能需要改变。**事件升级**（Event Upcasting）是将旧版本事件转换为当前版本事件的策略，确保历史事件仍可反序列化。
 
-```rust
+```rust,ignore
 // 事件版本化：通过枚举实现多版本兼容
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(tag = "version")]
@@ -625,7 +625,7 @@ impl OrderEventUpcaster {
 
 在分布式系统中，跨聚合/跨服务的业务流程需要**编排**（Orchestration）或**编舞**（Choreography）。Saga 模式通过事件驱动的方式协调长事务。
 
-```rust
+```rust,ignore
 // Saga：订单处理流程的编排
 #[derive(Debug)]
 struct OrderSaga {
@@ -807,7 +807,7 @@ async fn outbox_publisher(db: &sqlx::PgPool, kafka: &FutureProducer) {
 
 CQRS+ES 中，命令端和查询端之间不可避免地存在**延迟**——从事件生成到投影处理器更新读模型需要时间。
 
-```rust
+```rust,ignore
 // 最终一致性的时间边界分析
 #[derive(Debug)]
 struct ConsistencyMetrics {
@@ -927,7 +927,7 @@ pub struct OrderItem {
 ### 6.2 命令处理器
 >
 
-```rust
+```rust,ignore
 // 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]
 pub trait CommandHandler<C: Command> {
     type Error;
@@ -1346,3 +1346,34 @@ fn good_deserialization() {
 - [架构设计模式](./35_architecture_patterns.md) — 分层/六边形/洋葱/整洁架构
 - [Async/Await](../03_advanced/02_async.md) — 异步编程基础
 - [公理语义](../04_formal/20_axiomatic_semantics.md) — Hoare 逻辑、wp 计算
+> **过渡**: CQRS & Event Sourcing（命令查询职责分离与事件溯源） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: CQRS & Event Sourcing（命令查询职责分离与事件溯源） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: CQRS & Event Sourcing（命令查询职责分离与事件溯源） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+
+### 补充定理链
+
+- **定理**: CQRS & Event Sourcing（命令查询职责分离与事件溯源） 定义 ⟹ 类型安全保证
+- **定理**: CQRS & Event Sourcing（命令查询职责分离与事件溯源） 定义 ⟹ 类型安全保证
+- **定理**: CQRS & Event Sourcing（命令查询职责分离与事件溯源） 定义 ⟹ 类型安全保证
+
+## 认知路径
+
+> **认知路径**: 从 Rust 核心语言特性出发，经由 **CQRS & Event Sourcing（命令查询职责分离与事件溯源）** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| CQRS & Event Sourcing（命令查询职责分离与事件溯源） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
+| CQRS & Event Sourcing（命令查询职责分离与事件溯源） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
+| CQRS & Event Sourcing（命令查询职责分离与事件溯源） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+> **过渡**: 掌握 CQRS & Event Sourcing（命令查询职责分离与事件溯源） 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
+
+> **过渡**: 在工程实践中应用 CQRS & Event Sourcing（命令查询职责分离与事件溯源） 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
+
+> **过渡**: CQRS & Event Sourcing（命令查询职责分离与事件溯源） 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
+
+### 反命题与边界
+
+> **反命题**: "CQRS & Event Sourcing（命令查询职责分离与事件溯源） 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。

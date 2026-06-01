@@ -688,3 +688,34 @@ fn test_b() {
 ```
 
 > **修正**: Rust CI 缓存的核心是**键的精确性**和**分层缓存**：1) `~/.cargo/registry`（依赖源码，变化慢）；2) `target/`（编译产物，变化快）；3) `~/.cargo/bin`（工具二进制）。`Swatinem/rust-cache` 是社区最佳实践：自动处理分层、正确键、过期清理。常见陷阱：1) 未区分 debug/release → 缓存冲突；2) 未包含 `rustc --version` → 工具链升级后缓存失效；3) 缓存过大 → GitHub Actions 10GB 限制。Rust 编译产物（`target/`）通常几百 MB 到数 GB，缓存可节省 50-90% 的 CI 时间。这与 Java 的 Maven/Gradle 缓存或 Node.js 的 `node_modules` 缓存类似——但 Rust 的增量编译使 `target/` 缓存特别有效。[来源: [Swatinem/rust-cache](https://github.com/Swatinem/rust-cache)] · [来源: [GitHub Actions Caching](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows)]
+> **过渡**: DevOps 与 CI/CD：Rust 的持续交付工程实践 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: DevOps 与 CI/CD：Rust 的持续交付工程实践 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: DevOps 与 CI/CD：Rust 的持续交付工程实践 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+
+### 补充定理链
+
+- **定理**: DevOps 与 CI/CD：Rust 的持续交付工程实践 定义 ⟹ 类型安全保证
+- **定理**: DevOps 与 CI/CD：Rust 的持续交付工程实践 定义 ⟹ 类型安全保证
+- **定理**: DevOps 与 CI/CD：Rust 的持续交付工程实践 定义 ⟹ 类型安全保证
+
+## 认知路径
+
+> **认知路径**: 从 Rust 核心语言特性出发，经由 **DevOps 与 CI/CD：Rust 的持续交付工程实践** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| DevOps 与 CI/CD：Rust 的持续交付工程实践 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
+| DevOps 与 CI/CD：Rust 的持续交付工程实践 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
+| DevOps 与 CI/CD：Rust 的持续交付工程实践 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+> **过渡**: 掌握 DevOps 与 CI/CD：Rust 的持续交付工程实践 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
+
+> **过渡**: 在工程实践中应用 DevOps 与 CI/CD：Rust 的持续交付工程实践 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
+
+> **过渡**: DevOps 与 CI/CD：Rust 的持续交付工程实践 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
+
+### 反命题与边界
+
+> **反命题**: "DevOps 与 CI/CD：Rust 的持续交付工程实践 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。

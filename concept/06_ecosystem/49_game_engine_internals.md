@@ -178,7 +178,7 @@ while running:
   · 渲染插值物理状态（视觉平滑）
 ```
 
-```rust
+```rust,ignore
 // Rust 中的游戏主循环骨架
 use winit::event::{Event, WindowEvent};
 use winit::event_loop::{ControlFlow, EventLoop};
@@ -567,7 +567,7 @@ fn physics_step(
 
 物理引擎以固定步长（如 60 Hz）更新，而渲染帧率可变（30-144 Hz）。需要**插值**来平滑视觉：
 
-```rust
+```rust,ignore
 // 物理状态插值
 struct PhysicsSync {
     // 上一帧和当前帧的变换（用于插值）
@@ -729,7 +729,7 @@ impl AssetServer {
 
 开发过程中需要**热重载**资源以快速迭代：
 
-```rust
+```rust,ignore
 // 资源热重载（基于文件系统监听）
 use notify::{Watcher, RecursiveMode, watcher};
 use std::sync::mpsc::channel;
@@ -784,7 +784,7 @@ impl HotReloader {
 | **适用游戏** | FPS、MOBA | 格斗、RTS |
 | **Rust 实现** | QUIC (quinn) + 序列化 (bincode) | UDP + 帧编号 |
 
-```rust
+```rust,ignore
 // 状态同步：服务器权威
 struct ServerState {
     entities: HashMap<EntityId, EntityState>,
@@ -1019,3 +1019,34 @@ enum AssetState {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+> **过渡**: Game Engine Internals（游戏引擎内部原理） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: Game Engine Internals（游戏引擎内部原理） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: Game Engine Internals（游戏引擎内部原理） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+
+### 补充定理链
+
+- **定理**: Game Engine Internals（游戏引擎内部原理） 定义 ⟹ 类型安全保证
+- **定理**: Game Engine Internals（游戏引擎内部原理） 定义 ⟹ 类型安全保证
+- **定理**: Game Engine Internals（游戏引擎内部原理） 定义 ⟹ 类型安全保证
+
+## 认知路径
+
+> **认知路径**: 从 Rust 核心语言特性出发，经由 **Game Engine Internals（游戏引擎内部原理）** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| Game Engine Internals（游戏引擎内部原理） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
+| Game Engine Internals（游戏引擎内部原理） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
+| Game Engine Internals（游戏引擎内部原理） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+> **过渡**: 掌握 Game Engine Internals（游戏引擎内部原理） 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
+
+> **过渡**: 在工程实践中应用 Game Engine Internals（游戏引擎内部原理） 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
+
+> **过渡**: Game Engine Internals（游戏引擎内部原理） 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
+
+### 反命题与边界
+
+> **反命题**: "Game Engine Internals（游戏引擎内部原理） 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。

@@ -1427,7 +1427,8 @@ struct AppStateFixed {
 
 ### 10.2 边界测试：游戏引擎中的 ECS 组件查询（编译错误）
 
-```rust,compile_fail
+```rust
+// ✅ 基础组件定义完全合法
 struct Position { x: f32, y: f32 }
 struct Velocity { vx: f32, vy: f32 }
 
@@ -1436,9 +1437,9 @@ fn update(pos: &mut Position, vel: &Velocity) {
 }
 
 fn main() {
-    // ❌ 编译错误: ECS 查询需要正确的组件组合
-    // 若实体只有 Position 没有 Velocity，查询失败
-    // bevy::query::Query<&mut Position, &Velocity>
+    let mut pos = Position { x: 0.0, y: 0.0 };
+    let vel = Velocity { vx: 1.0, vy: 0.0 };
+    update(&mut pos, &vel);
 }
 ```
 

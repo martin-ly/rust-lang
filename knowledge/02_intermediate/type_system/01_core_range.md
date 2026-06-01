@@ -12,7 +12,7 @@
 
 ## 一、概念定义
 
-Rust 1.96.0 引入了 `core::range` 模块 [来源: Rust 1.96 Release Notes / 2026; RFC 3550 — Rangeful / 2025;
+Rust 1.96.0 引入了 `core::range` 模块 [来源: Rust 1.96.0 Release Notes / 2026; RFC 3550 — Rangeful / 2025;
 核心设计决策: 新增 `RangeInclusive` 和 `RangeInclusiveIter` 类型，为未来统一所有 range 类型提供命名空间]，新增 `RangeInclusive` 和 `RangeInclusiveIter` 类型。
 这是对 `std::ops::RangeInclusive` 的模块级补充，旨在为未来统一所有 range 类型提供命名空间。
 
@@ -24,7 +24,7 @@ Rust 1.96.0 引入了 `core::range` 模块 [来源: Rust 1.96 Release Notes / 20
 |------|--------|---------|------|
 | `std::ops::Range` | `a..b` | 半开 `[a, b)` | `core::ops` |
 | `std::ops::RangeInclusive` | `a..=b` | 闭区间 `[a, b]` | `core::ops` |
-| **`core::range::RangeInclusive`** (1.96+) | `RangeInclusive::new(a, b)` | 闭区间 `[a, b]` | `core::range` |
+| **`core::range::RangeInclusive`** (1.96.0+) | `RangeInclusive::new(a, b)` | 闭区间 `[a, b]` | `core::range` |
 
 > ⚠️ **注意**: `core::range::RangeInclusive` 目前**不是** `std::ops::RangeInclusive` 的替代，两者共存。
 
@@ -205,7 +205,7 @@ std::ops::Range                     std::ops::RangeInclusive
   迭代: a, a+1, ..., b-1               迭代: a, a+1, ..., b
   空区间: a >= b                       空区间: a > b（但 a..=a 含一个元素）
 
-core::range::RangeInclusive (1.96+):
+core::range::RangeInclusive (1.96.0+):
   与 std::ops::RangeInclusive 语义相同
   位于 core::range 模块，为未来的 range 统一提供命名空间
 ```
@@ -241,7 +241,7 @@ core::range::RangeInclusive (1.96+):
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-1. **`core::range::RangeInclusive` 与 `std::ops::RangeInclusive` 在语义上有何异同？** 为什么 Rust 1.95 引入前者而不直接替换后者？
+1. **`core::range::RangeInclusive` 与 `std::ops::RangeInclusive` 在语义上有何异同？** 为什么 Rust 1.96.0 引入前者而不直接替换后者？
 
 2. **`RangeInclusive::new(5, 3)` 创建的是什么区间？** 迭代时会产生什么结果？
 

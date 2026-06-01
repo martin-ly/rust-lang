@@ -348,7 +348,7 @@ mod async_trait_native {
 
     pub fn demonstrate() {
         println!("=== 异步 trait ===\n");
-        println!("Rust 1.75+ 支持原生 async fn in traits");
+        println!("Rust 1.75.0+ 支持原生 async fn in traits");
         println!("不再需要 async-trait crate");
         println!();
     }

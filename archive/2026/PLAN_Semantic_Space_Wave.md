@@ -161,7 +161,7 @@ Rust 的核心机制可以看作一个代数组合系统：
 
 **组合规则**：
 
-```
+```text
 Own(T) × Lifetime('a) → Box<'a, T>  // 有生命周期的所有权
 Borrow(T, shared) × Lifetime('a) → &'a T  // 共享引用
 Borrow(T, exclusive) × Lifetime('a) → &'a mut T  // 独占引用
@@ -172,7 +172,7 @@ Own(T) × Trait(Sync) → 跨线程共享安全
 
 **非法组合**（编译器拒绝）：
 
-```
+```text
 Borrow(T, shared) × Borrow(T, exclusive) → ❌ 编译错误 E0502
 Own(T) × Own(T) → ❌ 所有权已转移 E0382
 Lifetime('a) × Lifetime('b) where 'a > 'b → ❌ 生命周期不足 E0597

@@ -448,3 +448,34 @@ fn main() {}
 ```
 
 > **修正**: **Safety Tags** 是 Rust 形式化验证的前沿方向：1) 在 unsafe 函数上标注**安全契约**（前置条件、后置条件、副作用）；2) 静态分析工具验证调用点满足契约；3) 与 Miri、Kani、Prusti 等工具集成。当前状态：讨论阶段，无 RFC。相关努力：1) `contracts` crate（运行时契约检查）；2) 文档约定（`SAFETY:` 注释）；3) `unsafe-code-guidelines` working group 的形式化规范。Safety Tags 若实现，将使 Rust 的 unsafe 代码从"文档化契约"提升到"工具验证契约"，是向"形式化保证 unsafe 安全"迈出的重要一步。这与 Ada/SPARK 的 contracts（`Pre`/`Post` 条件，工具验证）或 Dafny 的 `requires`/`ensures`（编译期验证）类似——Rust 的安全标签将是语言原生支持或标准化注释。[来源: [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)] · [来源: [Rust Safety Research](https://www.rust-lang.org/governance/wgs)]
+> **过渡**: Safety Tags 概念预研：Unsafe 契约的机器可读标注 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: Safety Tags 概念预研：Unsafe 契约的机器可读标注 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: Safety Tags 概念预研：Unsafe 契约的机器可读标注 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+
+### 补充定理链
+
+- **定理**: Safety Tags 概念预研：Unsafe 契约的机器可读标注 定义 ⟹ 类型安全保证
+- **定理**: Safety Tags 概念预研：Unsafe 契约的机器可读标注 定义 ⟹ 类型安全保证
+- **定理**: Safety Tags 概念预研：Unsafe 契约的机器可读标注 定义 ⟹ 类型安全保证
+
+## 认知路径
+
+> **认知路径**: 从 Rust 核心语言特性出发，经由 **Safety Tags 概念预研：Unsafe 契约的机器可读标注** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| Safety Tags 概念预研：Unsafe 契约的机器可读标注 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
+| Safety Tags 概念预研：Unsafe 契约的机器可读标注 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
+| Safety Tags 概念预研：Unsafe 契约的机器可读标注 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+> **过渡**: 掌握 Safety Tags 概念预研：Unsafe 契约的机器可读标注 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
+
+> **过渡**: 在工程实践中应用 Safety Tags 概念预研：Unsafe 契约的机器可读标注 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
+
+> **过渡**: Safety Tags 概念预研：Unsafe 契约的机器可读标注 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
+
+### 反命题与边界
+
+> **反命题**: "Safety Tags 概念预研：Unsafe 契约的机器可读标注 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。

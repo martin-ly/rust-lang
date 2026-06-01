@@ -566,7 +566,7 @@ pub(in crate::outer) fn limited_visible() {}
 
 这些不是严格关键字，但具有特殊含义，建议避免用作标识符。
 
-#### `union`
+### `union`
 
 定义 C 风格联合体（需要 `unsafe`）。
 

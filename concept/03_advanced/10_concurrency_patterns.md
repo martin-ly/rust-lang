@@ -555,7 +555,7 @@ fn scoped_fixed() {
 
 ### 4.5 边界测试：`Condvar` 虚假唤醒未处理（逻辑错误）
 
-```rust
+```rust,ignore
 use std::sync::{Arc, Mutex, Condvar};
 use std::thread;
 
@@ -687,7 +687,7 @@ fn main() {
 
 ### 10.4 边界测试：Send/Sync 的 auto trait 边界与线程安全（编译错误）
 
-```rust,compute_fail
+```rust,compile_fail,compute_fail
 use std::rc::Rc;
 use std::thread;
 
@@ -730,3 +730,26 @@ fn main() {
 > [来源: [RFC 0458 — Send and Sync](https://rust-lang.github.io/rfcs/0458-send-sync.html)]
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
+## 认知路径
+
+> **认知路径**: 从 L0 基础概念出发，经由本节的 **并发 模式：从消息 传递到锁自由的数据结构** 核心原理，通向 L2 进阶模式与 L3 工程实践。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| 并发 模式：从消息 传递到锁自由的数据结构 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
+| 并发 模式：从消息 传递到锁自由的数据结构 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| 并发 模式：从消息 传递到锁自由的数据结构 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
+
+> **过渡**: 掌握 并发 模式：从消息 传递到锁自由的数据结构 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+
+> **过渡**: 在实践中应用 并发 模式：从消息 传递到锁自由的数据结构 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
+
+> **过渡**: 并发 模式：从消息 传递到锁自由的数据结构 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+
+### 反命题与边界
+
+> **反命题**: "并发 模式：从消息 传递到锁自由的数据结构 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+

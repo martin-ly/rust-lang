@@ -806,7 +806,7 @@ Widget w3 = std::move(w2); // 移动初始化
 Widget w4 = 42;      // 隐式转换构造（若未 explicit）
 ```
 
-```rust
+```rust,ignore
 // Rust: 初始化 = 所有权获取
 let w1 = Widget::new();  // 约定：关联函数作为构造器
 let w2 = w1.clone();     // 显式拷贝（Clone trait）
@@ -1211,7 +1211,23 @@ fn main() {
 }
 ```
 
-> **修正**: `Copy` trait 标记**按位复制语义**的类型：赋值和传参时隐式复制原值，原值仍可用。`Copy` 的条件：1) 所有字段都实现 `Copy`；2) 不包含 `Drop` 实现；3) 通常是标量类型（整数、浮点、布尔、`char`、元组（若元素都 `Copy`））。`String`、`Vec<T>`、`Box<T>` 不实现 `Copy`（它们管理堆内存，复制需深拷贝）。常见陷阱：1) 给自定义 struct 添加 `#[derive(Copy)]` 忘记检查所有字段；2) 为含 `Drop` 的类型派生 `Copy` → 编译错误；3) `&T` 实现 `Copy`（引用是固定大小的指针），但 `&mut T` 不实现（可变引用需独占）。这与 C 的 `memcpy`（无语义区分）或 C++ 的拷贝构造函数（可自定义行为）不同——Rust 的 `Copy` 是编译期标记，保证复制是简单且无副作用的。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] · [来源: [Rust Reference — Copy](https://doc.rust-lang.org/reference/special-types-and-traits.html#copy)]
+> **修正**: `Copy` trait 标记**按位复制语义**的类型：赋值和传参时隐式复制原值，原值仍可用。
+> `Copy` 的条件：
+>
+> 1) 所有字段都实现 `Copy`；
+> 2) 不包含 `Drop` 实现；
+> 3) 通常是标量类型（整数、浮点、布尔、`char`、元组（若元素都 `Copy`））。
+> `String`、`Vec<T>`、`Box<T>` 不实现 `Copy`（它们管理堆内存，复制需深拷贝）。
+>
+> 常见陷阱：
+>
+> 1) 给自定义 struct 添加 `#[derive(Copy)]` 忘记检查所有字段；
+> 2) 为含 `Drop` 的类型派生 `Copy` → 编译错误；
+> 3) `&T` 实现 `Copy`（引用是固定大小的指针），但 `&mut T` 不实现（可变引用需独占）。
+> 这与 C 的 `memcpy`（无语义区分）或 C++ 的拷贝构造函数（可自定义行为）不同
+> ——Rust 的 `Copy` 是编译期标记，保证复制是简单且无副作用的。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] ·
+> [来源: [Rust Reference — Copy](https://doc.rust-lang.org/reference/special-types-and-traits.html#copy)]
 
 ### 10.6 边界测试：所有权转移与函数返回的隐式 move（编译错误）
 
@@ -1260,7 +1276,7 @@ fn main() {
 <details>
 <summary>📝 测验 2：以下代码能否编译？</summary>
 
-```rust
+```rust,compile_fail
 fn main() {
     let s = String::from("hello");
     let s2 = s;
@@ -1361,7 +1377,7 @@ Rust 所有权系统有哪三条核心规则？
 <details>
 <summary>点击查看题目</summary>
 
-```rust
+```rust,compile_fail
 fn main() {
     let s = String::from("hello");
     let s2 = s;
@@ -1378,7 +1394,7 @@ fn main() {
 
 正确做法：使用 `clone()` 或借用。
 
-```rust
+```rust,ignore
 let s2 = s.clone(); // ✅
 // 或
 let s2 = &s;        // ✅ 借用

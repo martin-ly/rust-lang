@@ -98,7 +98,7 @@ Future 核心机制
 │        • 让出执行权
 │        • 自动状态机转换
 │
-├─ 🎯 async fn in trait (Rust 1.75+)
+├─ 🎯 async fn in trait (Rust 1.75.0+)
 │  └─ trait AsyncRead {
 │         async fn read(&mut self, buf: &mut [u8]) -> Result<usize>;
 │     }

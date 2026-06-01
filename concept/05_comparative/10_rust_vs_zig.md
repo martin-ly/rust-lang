@@ -666,3 +666,26 @@ fn main() {
 ```
 
 > **修正**: Rust 的 `const fn` 支持**编译期求值**，但能力有限：1) 不能堆分配（`Vec`、`Box`、`String`）；2) 不能调用非 `const fn`；3) 不能有 `unsafe` 块。Zig 的 `comptime` 更强大：可在编译期执行任意代码（包括内存分配、I/O、网络请求），编译失败时提供堆栈跟踪。Rust 的 `const` 系统保守但安全：保证编译期求值终止（无无限循环），避免编译期副作用。未来演进：`const Heap`（提案中，允许编译期堆分配）、`const_mut_refs`（已稳定，允许 `&mut` 在 const fn 中）。这与 C++ 的 `constexpr`（C++20 支持堆分配和虚函数）或 D 的 CTFE（Compile-Time Function Execution，类似 Zig）不同——Rust 的 const 系统逐步扩展，每次需形式化验证安全性。[来源: [Rust Reference — const fn](https://doc.rust-lang.org/reference/items/functions.html#const-functions)] · [来源: [Zig Documentation](https://ziglang.org/documentation/master/)]
+
+## 认知路径
+
+> **认知路径**: 从 L0 基础概念出发，经由本节的 **Rust vs Zig：现代系统语言的两种哲学** 核心原理，通向 L2 进阶模式与 L3 工程实践。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| Rust vs Zig：现代系统语言的两种哲学 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
+| Rust vs Zig：现代系统语言的两种哲学 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| Rust vs Zig：现代系统语言的两种哲学 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
+
+> **过渡**: 掌握 Rust vs Zig：现代系统语言的两种哲学 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+
+> **过渡**: 在实践中应用 Rust vs Zig：现代系统语言的两种哲学 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
+
+> **过渡**: Rust vs Zig：现代系统语言的两种哲学 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+
+### 反命题与边界
+
+> **反命题**: "Rust vs Zig：现代系统语言的两种哲学 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+

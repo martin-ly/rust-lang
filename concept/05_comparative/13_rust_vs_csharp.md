@@ -711,3 +711,26 @@ fn main() {
 ```
 
 > **修正**: Rust 的 `async fn` 是**惰性**的：调用时不执行函数体，只创建一个 `Future` 状态机。执行在 `.await` 或 `tokio::spawn` 时开始。C# 的 `async` 方法是**立即执行**的：调用时立即执行到第一个 `await`，然后返回 `Task`。语义差异影响：1) Rust 的 `async fn` 可组合（`future::join(t1, t2).await`）而不立即执行；2) C# 的 `Task.WhenAll` 组合已运行的任务；3) Rust 的 `Drop` 在 Future 被取消时执行（异步清理），C# 的 `IDisposable` 需显式 `using`。这与 JavaScript 的 Promise（立即执行，类似 C#）或 Kotlin 的 suspend function（惰性，类似 Rust）不同——Rust 的惰性 async 提供更多控制，但需注意意外未执行。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-01-futures-and-syntax.html)] · [来源: [Async Rust](https://rust-lang.github.io/async-book/)]
+
+## 认知路径
+
+> **认知路径**: 从 L0 基础概念出发，经由本节的 **Rust vs C：托管与原生之路** 核心原理，通向 L2 进阶模式与 L3 工程实践。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| Rust vs C：托管与原生之路 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
+| Rust vs C：托管与原生之路 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| Rust vs C：托管与原生之路 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
+
+> **过渡**: 掌握 Rust vs C：托管与原生之路 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+
+> **过渡**: 在实践中应用 Rust vs C：托管与原生之路 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
+
+> **过渡**: Rust vs C：托管与原生之路 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+
+### 反命题与边界
+
+> **反命题**: "Rust vs C：托管与原生之路 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+

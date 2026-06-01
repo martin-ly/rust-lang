@@ -2061,3 +2061,7 @@ fn main() {
 > [来源: [Wikipedia — Type System](https://en.wikipedia.org/wiki/Type_system)]
 > [来源: [Wikipedia — Programming Language](https://en.wikipedia.org/wiki/Programming_language)]
 > [来源: [Wikipedia — Rust](https://en.wikipedia.org/wiki/Rust_(programming_language))]
+> **过渡**: Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证> 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证> 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **过渡**: Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证> 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+

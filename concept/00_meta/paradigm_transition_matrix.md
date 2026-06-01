@@ -239,3 +239,25 @@ quadrantChart
 ---
 
 > **相关文件**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md) · [Rust vs Go](../05_comparative/02_rust_vs_go.md) · [范式矩阵](../05_comparative/03_paradigm_matrix.md) · [学习指南](learning_guide.md)
+
+## 认知路径
+
+> **认知路径**: 本文件作为 Rust 分层知识体系的 **Rust 范式转换模式矩阵（Paradigm Transition Matrix）** 元层导航节点，连接概念定义、学习路径与质量评估框架。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| Rust 范式转换模式矩阵（Paradigm Transition Matrix） 结构化组织 ⟹ 高效检索 | 理解分类维度与索引关系 | 能快速定位目标概念 | 高 |
+| Rust 范式转换模式矩阵（Paradigm Transition Matrix） 质量评估 ⟹ 持续改进 | 建立量化指标与审计流程 | 识别知识缺口并优先修复 | 高 |
+| Rust 范式转换模式矩阵（Paradigm Transition Matrix） 跨层映射 ⟹ 系统掌握 | 打通 L0-L7 的关联路径 | 形成完整的 Rust 能力图谱 | 高 |
+
+> **过渡**: 利用本文件的导航结构，读者可以从当前位置快速跃迁到任意概念层级，实现非线性学习。
+
+> **过渡**: Rust 范式转换模式矩阵（Paradigm Transition Matrix） 的维护需要与概念内容同步更新，确保元数据与实际知识体系的一致性。
+
+> **过渡**: 将 Rust 范式转换模式矩阵（Paradigm Transition Matrix） 作为学习起点或复习锚点，有助于建立全局视野，避免陷入局部细节而忽视整体架构。
+
+### 反命题与边界
+
+> **反命题**: "元层文档可以替代具体概念学习" —— 错误。Rust 范式转换模式矩阵（Paradigm Transition Matrix） 提供的是导航与评估框架，不能替代对核心概念（L1-L5）的深入理解与实践。

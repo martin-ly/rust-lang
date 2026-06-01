@@ -91,7 +91,7 @@ assert!(matches!(x, Some(n) if n > 100)); // ❌ 失败
 ### 1.2 `assert_matches!`：从判断到断言
 >
 
-Rust 1.96 稳定化 `assert_matches!`，将 `matches!` 的布尔结果**提升为断言契约**：
+Rust 1.96.0 稳定化 `assert_matches!`，将 `matches!` 的布尔结果**提升为断言契约**：
 
 ```rust
 // 需要 Rust 1.96+
@@ -129,7 +129,7 @@ let result: Result<i32, &str> = Ok(42);
 assert!(matches!(result, Ok(n) if n > 10));
 // 失败时信息: "assertion failed: matches!(result, Ok(n) if n > 10)"
 
-// 方式 B: assert_matches!（Rust 1.96+）
+// 方式 B: assert_matches!（Rust 1.96.0+）
 assert_matches!(result, Ok(n) if n > 10);
 // 失败时信息: 显示实际值和期望模式，更易于调试
 ```
@@ -143,7 +143,7 @@ assert_matches!(result, Ok(n) if n > 10);
 
 与 `assert!` / `debug_assert!` 的关系一致：
 
-```rust
+```rust,ignore
 use std::assert_matches::debug_assert_matches;
 
 // release 模式下被消除（零运行时开销）
@@ -238,7 +238,7 @@ if let Message::Coord { x, y } = msg {
 ### 3.1 测试中的 Result/Option 断言
 >
 
-```rust
+```rust,ignore
 use std::assert_matches::assert_matches;
 
 #[derive(Debug, PartialEq)]
@@ -264,7 +264,7 @@ fn parse_config() {
 ### 3.2 复杂枚举变体验证
 >
 
-```rust
+```rust,ignore
 use std::assert_matches::assert_matches;
 
 #[derive(Debug)]
@@ -341,7 +341,7 @@ graph TD
 
 ### 4.2 边界极限
 
-```rust
+```rust,ignore
 use std::assert_matches::assert_matches;
 
 // 边界 1: 嵌套模式
@@ -448,23 +448,24 @@ fn main() {
 ### 10.1 边界测试：`assert_matches!` 在非 Option/Result 上使用（编译错误）
 
 ```rust,compile_fail
+// ❌ 编译错误: assert_matches! 未导入
 fn main() {
-    let x = 42;
-    // ❌ 编译错误: assert_matches! 需要匹配模式
-    // 标准库 assert_matches! 要求右侧是模式表达式
-    assert_matches!(x, 42); // 若未导入或类型不匹配则报错
+    let result: Result<i32, &str> = Ok(42);
+    assert_matches!(result, Ok(_)); // 错误: 找不到宏 assert_matches!
 }
+```
 
-// 正确: 对枚举类型使用模式匹配
+```rust
+// ✅ 正确: 导入后使用
 use std::assert_matches;
 
-fn fixed() {
+fn main() {
     let result: Result<i32, &str> = Ok(42);
     assert_matches!(result, Ok(_)); // ✅ 匹配 Ok 变体
 }
 ```
 
-> **修正**: `assert_matches!`（Rust 长期 unstable，于 1.96 stable）专门用于测试枚举变体匹配。
+> **修正**: `assert_matches!`（Rust 长期 unstable，于 1.96.0 stable）专门用于测试枚举变体匹配。
 > 它不同于 `assert_eq!`——后者要求值实现 `PartialEq`，而 `assert_matches!` 使用模式匹配，不要求 `PartialEq`。
 > 在 `assert_matches!` 稳定前，使用 `matches!` 宏或 `if let` 进行测试断言。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
@@ -499,13 +500,20 @@ fn fixed() {
 #[test]
 fn test_nested_match() {
     let result: Result<Option<i32>, ()> = Ok(Some(42));
-    // ❌ 编译错误: assert_matches! 对嵌套模式的绑定支持有限
+    // ⚠️ 设计限制: assert_matches! 是宏，绑定不可导出到宏外部
     // assert_matches!(result, Ok(Some(x)) if x > 0);
-    // 若未启用 unstable feature，不可用
+    // 如需在断言后使用 x，应改用 if let
 }
 ```
 
-> **修正**: `assert_matches!`（Rust 1.58+ stable）检查值是否匹配给定模式，但**模式中的绑定**（`x`）在宏外部不可见。`assert_matches!(result, Ok(Some(x)))` 中 `x` 只在宏内部有效，测试代码不能后续使用 `x`。若需提取绑定值，使用 `if let`：`if let Ok(Some(x)) = result { assert!(x > 0); } else { panic!("match failed"); }`。`assert_matches!` 的优势是简洁和良好的失败消息（打印不匹配的值），劣势是绑定不可导出。这与 `matches!` 宏（返回 `bool`，无绑定）或 `insta` 的 snapshot 测试（结构化匹配）互补。`assert_matches!` 的设计体现了 Rust 宏的能力边界：宏生成的代码在词法上封闭，无法将绑定泄露到外部。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/assert_matches/macro.assert_matches.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: `assert_matches!`（Rust 1.96.0 stable）检查值是否匹配给定模式，但**模式中的绑定**（`x`）在宏外部不可见。
+> `assert_matches!(result, Ok(Some(x)))` 中 `x` 只在宏内部有效，测试代码不能后续使用 `x`。
+> 若需提取绑定值，使用 `if let`：`if let Ok(Some(x)) = result { assert!(x > 0); } else { panic!("match failed"); }`。
+> `assert_matches!` 的优势是简洁和良好的失败消息（打印不匹配的值），劣势是绑定不可导出。
+> 这与 `matches!` 宏（返回 `bool`，无绑定）或 `insta` 的 snapshot 测试（结构化匹配）互补。
+> `assert_matches!` 的设计体现了 Rust 宏的能力边界：宏生成的代码在词法上封闭，无法将绑定泄露到外部。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/assert_matches/macro.assert_matches.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.4 边界测试：自定义断言失败消息的类型约束（编译错误）
 
@@ -552,6 +560,29 @@ fn main() {
 >
 > - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../../exercises/) — 动手编程挑战
-> - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
+> - [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
+
+## 认知路径
+
+> **认知路径**: 从 L0 基础概念出发，经由本节的 **`assert_matches!`：模式匹配断言的形式化语义** 核心原理，通向 L2 进阶模式与 L3 工程实践。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| `assert_matches!`：模式匹配断言的形式化语义 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
+| `assert_matches!`：模式匹配断言的形式化语义 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| `assert_matches!`：模式匹配断言的形式化语义 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
+
+> **过渡**: 掌握 `assert_matches!`：模式匹配断言的形式化语义 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+
+> **过渡**: 在实践中应用 `assert_matches!`：模式匹配断言的形式化语义 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
+
+> **过渡**: `assert_matches!`：模式匹配断言的形式化语义 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+
+### 反命题与边界
+
+> **反命题**: "`assert_matches!`：模式匹配断言的形式化语义 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+

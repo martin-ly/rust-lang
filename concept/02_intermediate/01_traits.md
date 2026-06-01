@@ -380,11 +380,14 @@ impl<P₁...Pn> Trait<T₁...Tm> for Type
 
 ### 4.3 推论：Auto Trait 结构化推导 ⟹ Send/Sync 自动实现
 
-> **[Rust Reference: Auto Traits](https://doc.rust-lang.org/reference/special-types-and-traits.html#auto-traits)** · **[TRPL: Ch16](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)** Auto Trait 的自动实现基于结构成员递归检查，是编译器自动证明的特例。 ✅ 已验证
+> **[Rust Reference: Auto Traits](https://doc.rust-lang.org/reference/special-types-and-traits.html#auto-traits)** ·
+> **[TRPL: Ch16](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)** Auto Trait 的自动实现基于结构成员递归检查，是编译器自动证明的特例。 ✅ 已验证
 
 #### 定义与语法
 
-Auto trait 由 `auto trait` 关键字声明，是编译器自动为类型实现的标记 trait。标准库中最重要的 Auto trait 是 `Send` 和 `Sync`——`Send` 表示类型可安全跨线程转移所有权（值 move 到另一线程无数据竞争），`Sync` 表示类型可安全跨线程共享引用（`&T` 可在多线程间安全读取）：
+Auto trait 由 `auto trait` 关键字声明，是编译器自动为类型实现的标记 trait。
+标准库中最重要的 Auto trait 是 `Send` 和 `Sync`
+——`Send` 表示类型可安全跨线程转移所有权（值 move 到另一线程无数据竞争），`Sync` 表示类型可安全跨线程共享引用（`&T` 可在多线程间安全读取）：
 
 ```rust,ignore
 // Send: 标记可安全跨线程转移所有权的类型（值 move 到另一线程安全）
@@ -393,11 +396,17 @@ pub unsafe auto trait Send {}
 pub unsafe auto trait Sync {}
 ```
 
-> **形式化定义**: T: Send ⇔ 类型 T 可安全跨线程转移所有权（值 move 到另一线程不会导致数据竞争或内存不安全）。T: Sync ⇔ &T: Send，即 T 的共享引用可安全跨线程共享。
+> **形式化定义**:
+> T: Send ⇔ 类型 T 可安全跨线程转移所有权（值 move 到另一线程不会导致数据竞争或内存不安全）。
+> T: Sync ⇔ &T: Send，即 T 的共享引用可安全跨线程共享。
 
-与普通 trait 不同，Auto trait **不含任何关联项（方法、类型、常量）**，仅作为类型的编译期属性标记。`unsafe` 前缀意味着：当开发者通过 `unsafe impl` 手动实现或覆盖时，必须自行承担内存安全与线程安全的正确性责任。
+与普通 trait 不同，Auto trait **不含任何关联项（方法、类型、常量）**，仅作为类型的编译期属性标记。
+`unsafe` 前缀意味着：当开发者通过 `unsafe impl` 手动实现或覆盖时，必须自行承担内存安全与线程安全的正确性责任。
 
-> **Send 核心语义**: `Send` 标记**可以安全跨线程转移所有权**的类型——即值的所有权从一个线程 move 到另一个线程不会导致数据竞争或内存不安全 [来源: Rust Reference — Send and Sync / 2025; Rustonomicon — Send and Sync / 2025; RustBelt — 数据竞争自由定理 / POPL 2018]。`Sync` 标记**可以安全跨线程共享引用**的类型——即 `&T` 可以安全地传递给多个线程同时读取。
+> **Send 核心语义**:
+> `Send` 标记**可以安全跨线程转移所有权**的类型——即值的所有权从一个线程 move 到另一个线程不会导致数据竞争或内存不安全
+> [来源: Rust Reference — Send and Sync / 2025; Rustonomicon — Send and Sync / 2025; RustBelt — 数据竞争自由定理 / POPL 2018]。
+> `Sync` 标记**可以安全跨线程共享引用**的类型——即 `&T` 可以安全地传递给多个线程同时读取。
 
 #### 自动推导规则
 
@@ -419,7 +428,7 @@ pub unsafe auto trait Sync {}
 具体规则如下：
 
 | **类型构造** | **Send 推导条件** | **Sync 推导条件** | **备注** |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | `struct Foo<T>` | 所有字段 `T: Send` | 所有字段 `T: Sync` | 逐字段递归检查 |
 | `enum Bar` | 所有变体的所有字段满足 | 所有变体的所有字段满足 | 取变体并集 |
 | `Vec<T>` | `T: Send` | `T: Sync` | 标准库内部已声明 |
@@ -462,11 +471,17 @@ impl !Send for RawFd {}  // 显式阻止自动 Send
 impl !Sync for RawFd {}  // 显式阻止自动 Sync
 ```
 
-> **⚠️ 安全边界**: `unsafe impl Send/Sync` 是 Rust 并发抽象的安全根基。错误的实现会导致数据竞争、悬垂指针等未定义行为（UB）。仅在类型内部同步机制（如 Mutex、原子操作）确实保证线程安全时才应手动实现。一旦违反，整个程序的类型系统保证即告失效。
+> **⚠️ 安全边界**:
+> `unsafe impl Send/Sync` 是 Rust 并发抽象的安全根基。
+> 错误的实现会导致数据竞争、悬垂指针等未定义行为（UB）。
+> 仅在类型内部同步机制（如 Mutex、原子操作）确实保证线程安全时才应手动实现。
+> 一旦违反，整个程序的类型系统保证即告失效。
 
 ### 4.4 Trait + 泛型 ⟹ 零成本抽象
 
-> **[TRPL: Ch10.2](https://doc.rust-lang.org/book/ch10-02-traits.html)** · **[Rust Reference: Monomorphization](https://doc.rust-lang.org/reference/glossary.html#monomorphization)** Trait 泛型的零成本抽象由单态化和编译器内联优化保证。 ✅ 已验证
+> **[TRPL: Ch10.2](https://doc.rust-lang.org/book/ch10-02-traits.html)** ·
+> **[Rust Reference: Monomorphization](https://doc.rust-lang.org/reference/glossary.html#monomorphization)**
+> Trait 泛型的零成本抽象由单态化和编译器内联优化保证。 ✅ 已验证
 
 ```text
 前提 1: Trait 定义接口契约
@@ -480,10 +495,11 @@ impl !Sync for RawFd {}  // 显式阻止自动 Sync
 
 ### 4.5 定理一致性矩阵
 
-> **[原创分析]** · **[Rust Reference: Type System](https://doc.rust-lang.org/reference/type-system.html)** 定理一致性矩阵基于 Rust 编译器错误码和类型系统公理的系统归纳，每条推理链标注"⟹"因果关系。 💡 原创分析
+> **[原创分析]** · **[Rust Reference: Type System](https://doc.rust-lang.org/reference/type-system.html)**
+> 定理一致性矩阵基于 Rust 编译器错误码和类型系统公理的系统归纳，每条推理链标注"⟹"因果关系。 💡 原创分析
 
 | **定理/引理/推论** | **前提** | **结论** | **依赖的 L4 公理** | **被哪些定理依赖** | **失效条件** | **典型错误码** |
-|:---|:---|:---|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **引理**: Orphan Rule ⟹ Coherence | crate 边界清晰；至少一方本地 | impl 声明位置受限，无跨 crate 孤儿 impl | 类型论一致性；模块化封装 | 全局唯一 impl；Blanket impl 可满足 | `#[fundamental]` 类型例外（`&T`, `Box<T>`, `&mut T`） | E0117 |
 | **定理**: 全局唯一 impl | Orphan Rule + 无重叠 impl | 调用目标唯一确定；单态化可行 | Coherence 公理 | 单态化零成本；Trait 对象安全 | specialization（min_specialization 不稳定） | E0119 |
 | **定理**: Trait 对象安全 | 方法无 `Self: Sized`；无泛型方法；无静态方法 | `dyn Trait` 是合法类型；vtable 可构造 | 存在类型 + vtable 理论 | 运行时多态分发；`Box<dyn Trait>` | `Self: Sized` superbound；泛型方法 | E0038 |
@@ -495,10 +511,12 @@ impl !Sync for RawFd {}  // 显式阻止自动 Sync
 | **引理**: `impl Trait` 存在类型 | 返回类型满足 Trait；单一具体类型 | 抽象返回类型；隐藏实现细节 | 存在量化 ∃T.Trait(T) | API 设计；版本兼容性 | 多分支返回不同类型（除非 `dyn Trait`） | E0746 / E0706 |
 | **定理**: Negative impl 语义 | `impl !Trait for T` 声明 | 显式排除自动实现；类型不实现 Trait | 否定信息逻辑；非单调推理 | Auto Trait 手动控制；unsafe 边界 | 与正 impl 冲突；与 blanket impl 交互复杂 | E0751 |
 
-> **一致性检查**: Orphan Rule ⟹ Coherence ⟹ 全局唯一 impl（链 A），且 Trait 对象安全 ⟹ dyn Trait 可行性（链 B），形成**从定义约束到使用能力**的两条正交推理链。Auto Trait 推导是编译器对结构性质的自动证明，Blanket impl 提供全称量词的默认行为，`impl Trait` 引入存在量化——三者与对象安全共同构成 Trait 系统的"静动两面"。
+> **一致性检查**: Orphan Rule ⟹ Coherence ⟹ 全局唯一 impl（链 A），且 Trait 对象安全 ⟹ dyn Trait 可行性（链 B），形成**从定义约束到使用能力**的两条正交推理链。
+> Auto Trait 推导是编译器对结构性质的自动证明，Blanket impl 提供全称量词的默认行为，`impl Trait` 引入存在量化——三者与对象安全共同构成 Trait 系统的"静动两面"。
 > **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.2 "类型系统一致性"
-
-> **过渡到示例与反例**: 定理链提供了形式化保证，但工程实践中这些保证的边界在哪里？下一节通过正例展示定理的适用场景，通过反例揭示定理失效的精确条件——特别是 E0117、E0119、E0038 等编译错误的触发机制，将抽象定理映射到具体代码行为。
+> **过渡到示例与反例**:
+> 定理链提供了形式化保证，但工程实践中这些保证的边界在哪里？
+> 下一节通过正例展示定理的适用场景，通过反例揭示定理失效的精确条件——特别是 E0117、E0119、E0038 等编译错误的触发机制，将抽象定理映射到具体代码行为。
 
 ---
 
@@ -627,7 +645,9 @@ fn returns_iter() -> impl Iterator<Item = u32> {
 
 ### 5.6 正确示例：Generic Associated Types (GATs)
 
-> **[RFC 1598](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html)** · **[Rust Reference: Generic Associated Types](https://doc.rust-lang.org/reference/items/associated-items.html#associated-types)** GATs 允许关联类型携带自己的泛型参数，是 Rust 对 System Fω 中类型族（type family）的部分模拟。 ✅ 已验证
+> **[RFC 1598](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html)** ·
+> **[Rust Reference: Generic Associated Types](https://doc.rust-lang.org/reference/items/associated-items.html#associated-types)**
+> GATs 允许关联类型携带自己的泛型参数，是 Rust 对 System Fω 中类型族（type family）的部分模拟。 ✅ 已验证
 
 #### 语法与动机
 
@@ -714,21 +734,26 @@ trait Convert {
 **核心优势总结**：
 
 | **维度** | **普通关联类型** | **GATs** |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | 表达能力 | 一对一（类型 → 类型） | 一对多（类型 → 类型族） |
 | trait 签名 | 可能臃肿（trait 级泛型） | 简洁（泛型在关联类型） |
 | 典型场景 | `Iterator::Item` | `LendingIterator`、`类型级映射` |
 | 编译器支持 | 稳定 | 稳定（Rust 1.65+） |
 
 > **⚠️ 边界**: GATs 要求 `where Self: 'a` 等约束来确保生命周期合法；无界递归或矛盾的关联类型约束仍会导致编译错误（E0275、E0049）。
-
-> **过渡到反命题分析**: 示例展示了 Trait 系统的正确使用方式，但反例只是孤立场景。下一节通过系统化的反命题分析，将"定理何时成立/何时失效"形式化为可遍历的决策树，覆盖编译期、运行时、语义、工程四个层面。每个反命题对应定理矩阵中的一个失效条件，形成"定理—反命题—决策树"的三位一体逻辑结构。
+> **过渡到反命题分析**: 示例展示了 Trait 系统的正确使用方式，但反例只是孤立场景。
+> 下一节通过系统化的反命题分析，将"定理何时成立/何时失效"形式化为可遍历的决策树，覆盖编译期、运行时、语义、工程四个层面。
+> 每个反命题对应定理矩阵中的一个失效条件，形成"定理—反命题—决策树"的三位一体逻辑结构。
 
 ---
 
 ### 5.7 正确示例：Specialization（特化）的语义与边界
 
-> **[RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html)** · **[Rust Reference: Implementation](https://doc.rust-lang.org/reference/items/implementations.html)** Specialization 允许为**更具体的类型子集**提供特化的 trait 实现，同时保留对更广泛类型的默认实现。这是 Rust 对**ad-hoc 多态**的扩展，与 C++ 模板特化（template specialization）形成跨语言对照。⚠️ 当前仅 `min_specialization` 子集在 nightly 可用，稳定版尚不支持。
+> **[RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html)** ·
+> **[Rust Reference: Implementation](https://doc.rust-lang.org/reference/items/implementations.html)**
+> Specialization 允许为**更具体的类型子集**提供特化的 trait 实现，同时保留对更广泛类型的默认实现。
+> 这是 Rust 对**ad-hoc 多态**的扩展，与 C++ 模板特化（template specialization）形成跨语言对照。
+> ⚠️ 当前仅 `min_specialization` 子集在 nightly 可用，稳定版尚不支持。
 
 #### 问题与默认实现
 
@@ -748,7 +773,8 @@ where
 }
 ```
 
-> **[来源: RFC 1210; Rust Reference: min_specialization]** Blanket impl 提供默认行为覆盖，specialization 允许为更具体类型提供更高效的实现路径，特化 impl 必须是默认 impl 约束的逻辑子集（always applicable）。
+> **[来源: RFC 1210; Rust Reference: min_specialization]**
+> Blanket impl 提供默认行为覆盖，specialization 允许为更具体类型提供更高效的实现路径，特化 impl 必须是默认 impl 约束的逻辑子集（always applicable）。
 
 #### 特化实现：为具体类型提供更优路径
 
@@ -783,7 +809,8 @@ impl Convert<String> for &str {
 | **零成本抽象** | 单态化后无运行时开销 | 单态化后无运行时开销 |
 | **稳定状态** | ❌ nightly only（`min_specialization`） | ✅ 稳定 20+ 年 |
 
-> **[来源: RFC 1210]** Specialization 的核心约束是**永远特化（always applicable）**：特化 impl 的约束必须是默认 impl 约束的**逻辑子集**，否则编译器拒绝。⚠️ 这防止了 "特化 impl 在某些情况下不适用" 的语义陷阱。
+> **[来源: RFC 1210]** Specialization 的核心约束是**永远特化（always applicable）**：特化 impl 的约束必须是默认 impl 约束的**逻辑子集**，否则编译器拒绝。
+> ⚠️ 这防止了 "特化 impl 在某些情况下不适用" 的语义陷阱。
 
 #### 编译错误：非法重叠
 
@@ -798,9 +825,13 @@ impl Foo for Vec<u8> { fn foo() {} }       // ⚠️ 更特化
 // ❌ 错误：impl 2 和 impl 3 都可应用于 Vec<u8>，且互不覆盖
 ```
 
-**原因**: `Vec<u8>` 同时满足 `Vec<T>`（T=u8）和 `Vec<u8>`，但两者不是严格的子类型关系。`min_specialization` 要求特化链必须是**全序（total order）**，禁止这种菱形重叠。
+**原因**:
+`Vec<u8>` 同时满足 `Vec<T>`（T=u8）和 `Vec<u8>`，但两者不是严格的子类型关系。
+`min_specialization` 要求特化链必须是**全序（total order）**，禁止这种菱形重叠。
 
-> **关键洞察**: Specialization 不是"多继承"的替代物。它的语义是"为更具体的类型提供更高效的实现"，而非"为同一类型附加多个行为"。这与 C++ 模板特化的"代码选择"机制同构，但受 Coherence 公理约束。
+> **关键洞察**: Specialization 不是"多继承"的替代物。
+> 它的语义是"为更具体的类型提供更高效的实现"，而非"为同一类型附加多个行为"。
+> 这与 C++ 模板特化的"代码选择"机制同构，但受 Coherence 公理约束。
 
 ---
 

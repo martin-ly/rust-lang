@@ -2339,9 +2339,9 @@ Miri 的局限（与 loom 互补）:
 ```text
 问题（Rust < 1.75）:
   trait 中不能写 async fn
-   workaround: 手动返回关联 Future 类型或使用 AFIT（async fn in trait，Rust 1.75+ 稳定） crate
+   workaround: 手动返回关联 Future 类型或使用 AFIT（async fn in trait，Rust 1.75.0+ 稳定） crate
 
-解决方案 1: AFIT（async fn in trait，Rust 1.75+ 稳定） crate（宏模拟）
+解决方案 1: AFIT（async fn in trait，Rust 1.75.0+ 稳定） crate（宏模拟）
   // 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]
   trait MyTrait {
       async fn method(&self);
@@ -2355,7 +2355,7 @@ Miri 的局限（与 loom 互补）:
   }
   // Rust 1.75 前不稳定
 
-最终方案: AFIT（Rust 1.75+ 稳定）
+最终方案: AFIT（Rust 1.75.0+ 稳定）
   trait MyTrait {
       async fn method(&self);
   }
@@ -2668,7 +2668,7 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 
 `Stream` trait 是 Rust 异步编程中对**流（连续数据序列）**的核心抽象：
 
-```rust
+```rust,ignore
 pub trait Stream {
     type Item;
     fn poll_next(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Option<Self::Item>>;
@@ -2861,7 +2861,7 @@ impl Service for MyService {
 fn main() {}
 ```
 
-> **修正**: Rust stable **不支持 trait 中的 `async fn`**（RPITIT — Return Position Impl Trait In Traits，1.75+ 已稳定！）。`async_trait` crate 提供过程宏 workaround：`// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]` 自动将 `async fn` 转为返回 `Pin<Box<dyn Future>>`。1.75+ 后，原生 `async fn` 在 trait 中可用，但需注意：1) `Send` 约束不自动推导（`async_trait` 自动添加）；2) 动态分发（`dyn Trait`）仍需 `async_trait` 或手动 `Box::pin`。异步 trait 是 Rust async 生态的关键里程碑，使 async/await 可用于 trait 抽象。这与 C# 的 `async` 接口方法（原生支持）或 Java 的 `CompletableFuture`（接口中返回 Future，非 async 方法）不同——Rust 的 async trait 支持是语言演进的重要步骤。[来源: [Rust 1.75 Release Notes](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html)] · [来源: [async_trait crate](https://docs.rs/AFIT（async fn in trait，Rust 1.75+ 稳定）/)]
+> **修正**: Rust stable **不支持 trait 中的 `async fn`**（RPITIT — Return Position Impl Trait In Traits，1.75.0+ 已稳定！）。`async_trait` crate 提供过程宏 workaround：`// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]` 自动将 `async fn` 转为返回 `Pin<Box<dyn Future>>`。1.75.0+ 后，原生 `async fn` 在 trait 中可用，但需注意：1) `Send` 约束不自动推导（`async_trait` 自动添加）；2) 动态分发（`dyn Trait`）仍需 `async_trait` 或手动 `Box::pin`。异步 trait 是 Rust async 生态的关键里程碑，使 async/await 可用于 trait 抽象。这与 C# 的 `async` 接口方法（原生支持）或 Java 的 `CompletableFuture`（接口中返回 Future，非 async 方法）不同——Rust 的 async trait 支持是语言演进的重要步骤。[来源: [Rust 1.75 Release Notes](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html)] · [来源: [async_trait crate](https://docs.rs/AFIT（async fn in trait，Rust 1.75.0+ 稳定）/)]
 
 ## 参考来源
 

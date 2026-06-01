@@ -1604,3 +1604,25 @@ fn main() {
 ```
 
 > **修正**: Cargo feature 是**累加**的：依赖树中任何 crate 启用 feature，该 feature 对整棵树生效。互斥 feature 的设计：1) `cfg_mutually_exclusive!`（第三方宏）；2) 运行时检查（`panic!("feat-a and feat-b are mutually exclusive")`）；3) 文档明确说明（但不强制）。Cargo 的 feature resolver v2（2021+）改进了特性解析：dev-dependencies 不激活 features，弱依赖（`dep-name?/feature-name`）按需启用。feature 滥用是 Rust 生态的常见问题：1) 过多 feature 导致测试矩阵爆炸；2) 隐式 feature 依赖（`tokio/rt` 启用 `tokio/rt-multi-thread`）；3) 编译时间增加（每个 feature 组合可能触发重新编译）。这与 npm 的 `optionalDependencies` 或 Python 的 `extras_require` 类似——Rust 的 feature 系统是编译期的条件编译，影响代码包含和依赖解析。[来源: [The Cargo Book](https://doc.rust-lang.org/cargo/reference/features.html)] · [来源: [RFC 2957 — Weak Dependencies](https://rust-lang.github.io/rfcs/2957-cargo-features-2.html)]
+
+## 认知路径
+
+> **认知路径**: 从 Rust 核心语言特性出发，经由 **Toolchain（工具链与 Cargo）** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| Toolchain（工具链与 Cargo） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
+| Toolchain（工具链与 Cargo） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
+| Toolchain（工具链与 Cargo） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
+
+> **过渡**: 掌握 Toolchain（工具链与 Cargo） 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
+
+> **过渡**: 在工程实践中应用 Toolchain（工具链与 Cargo） 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
+
+> **过渡**: Toolchain（工具链与 Cargo） 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
+
+### 反命题与边界
+
+> **反命题**: "Toolchain（工具链与 Cargo） 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。

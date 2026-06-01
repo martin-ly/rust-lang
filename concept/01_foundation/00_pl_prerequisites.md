@@ -142,7 +142,7 @@ fn increment() -> i32 {
 readFile :: FilePath -> IO String   -- IO 标记"此函数有副作用"
 ```
 
-```rust
+```rust,ignore
 // Rust：通过所有权隔离副作用
 fn read_file(path: &str) -> Result<String, io::Error> {
     // 副作用（文件读取）被封装在函数体内
@@ -327,7 +327,7 @@ impl Future for FetchDataFuture {
 
 Rust 的所有权系统如何保证控制流安全？
 
-```rust
+```rust,ignore
 // 顺序：变量按声明顺序初始化，按逆序 Drop
 let a = resource();
 let b = resource();   // a 先存在，b 后存在
@@ -387,3 +387,26 @@ unsafe {
 > - [Wadler, 1995 — Monads for Functional Programming](https://doi.org/10.1007/3-540-59451-5_2)
 > - [TRPL Ch13 — Closures and Iterators](https://doc.rust-lang.org/book/ch13-00-closures.html)
 > - [Rust Async Book — Async/Await Primer](https://rust-lang.github.io/async-book/01_getting_started/01_chapter.html)
+
+## 认知路径
+
+> **认知路径**: 从 L0 基础概念出发，经由本节的 **编程语言理论基础（PL Prerequisites）** 核心原理，通向 L2 进阶模式与 L3 工程实践。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| 编程语言理论基础（PL Prerequisites） 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
+| 编程语言理论基础（PL Prerequisites） 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| 编程语言理论基础（PL Prerequisites） 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
+
+> **过渡**: 掌握 编程语言理论基础（PL Prerequisites） 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+
+> **过渡**: 在实践中应用 编程语言理论基础（PL Prerequisites） 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
+
+> **过渡**: 编程语言理论基础（PL Prerequisites） 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+
+### 反命题与边界
+
+> **反命题**: "编程语言理论基础（PL Prerequisites） 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+

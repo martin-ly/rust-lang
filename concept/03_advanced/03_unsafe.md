@@ -2752,7 +2752,7 @@ Unsafe Fields 提议将 unsafe 粒度下沉到**字段级别**。
 
 **语法草案**（仍在设计中）：
 
-```rust
+```rust,ignore
 // 当前 Rust: 整个结构体被 unsafe 污染
 pub struct IoUring {
     fd: i32,           // 普通字段

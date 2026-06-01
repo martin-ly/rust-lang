@@ -15,7 +15,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Next-gen Trait Solver 跟踪报告](#next-gen-trait-solver-跟踪报告)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [1. Rust 当前 Trait Solver 的局限](#1-rust-当前-trait-solver-的局限)
     - [1.1 主要技术局限](#11-主要技术局限)
       - [A. 高阶类型推理 (Higher-Ranked Type Inference)](#a-高阶类型推理-higher-ranked-type-inference)
@@ -116,7 +116,7 @@ type DeepItem<T: Iterable> = <<T as Iterable>::Iter as Iterator>::Item;
 |------|---------------|------|
 | GATs | 已稳定 (1.65)，但受限 | 复杂约束推导不准确 |
 | RPITIT | 已稳定 (1.75) | 在复杂 trait 层次中推断不稳定 |
-| AFIT (async fn in traits) | 已稳定 (1.75) | 隐式 `Send`  bounds 推导问题 |
+| AFIT (async fn in traits) | 已稳定 (1.75.0) | 隐式 `Send`  bounds 推导问题 |
 | TAIT (type alias impl trait) | 部分稳定 | 嵌套 TAIT 场景受限 |
 | Specialization | 未稳定 | 重叠 impl 检查过于保守 |
 

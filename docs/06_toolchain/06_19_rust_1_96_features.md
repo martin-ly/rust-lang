@@ -109,7 +109,7 @@ debug_assert_matches!(config, Config::Debug { verbose: true });
 
 #### 8. `core::range` 类型族
 
-Rust 1.96 补齐了 `core::range` 模块，所有 range 类型获得对应的显式迭代器类型：
+Rust 1.96.0 补齐了 `core::range` 模块，所有 range 类型获得对应的显式迭代器类型：
 
 | `core::range` 类型 | 对应 `std::ops` | 迭代器类型 | 区间语义 |
 |:---|:---|:---|:---|
