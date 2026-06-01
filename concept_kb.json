@@ -58,7 +58,7 @@
       "layer": "L0",
       "title": "Cross Reference Matrix（交叉引用矩阵）",
       "positioning": "",
-      "line_count": 78,
+      "line_count": 79,
       "theorem_chains": [
         {
           "text": "| Cross Reference Matrix（交叉引用矩阵） 结构化组织 ⟹ 高效检索 | 理解分类维度与索引关系 | 能快速定位目标概念 | 高 |",
@@ -106,7 +106,7 @@
       "layer": "L0",
       "title": "Concept Audit Guide（概念审计指南）",
       "positioning": "",
-      "line_count": 68,
+      "line_count": 69,
       "theorem_chains": [
         {
           "text": "| Concept Audit Guide（概念审计指南） 结构化组织 ⟹ 高效检索 | 理解分类维度与索引关系 | 能快速定位目标概念 | 高 |",
@@ -154,7 +154,7 @@
       "layer": "L0",
       "title": "Rust 知识体系 A/S/P 三维认知标记规范",
       "positioning": "本文件定义 `concept/` 知识体系中的 **A(应用) / S(结构) / P(程序)** 三维认知标记规范，作为现有 Bloom 层级标注的补充维度。A/S/P 标记连接 **Krathwohl 知识维度** 与 **Bloom 认知过程维度**，将抽象的双维矩阵压缩为可操作的标签系统。",
-      "line_count": 466,
+      "line_count": 464,
       "theorem_chains": [
         {
           "text": "| Rust 知识体系 A/S/P 三维认知标记规范 结构化组织 ⟹ 高效检索 | 理解分类维度与索引关系 | 能快速定位目标概念 | 高 |",
@@ -192,7 +192,7 @@
       "layer": "L0",
       "title": "概念一致性检查清单（Concept Consistency Audit Checklist）",
       "positioning": "本文件定义 `concept/` 知识体系的**质量门禁**，用于定期审计概念文件的一致性、完备性和关系清晰度。",
-      "line_count": 344,
+      "line_count": 342,
       "theorem_chains": [
         {
           "text": "| 概念一致性检查清单（Concept Consistency Audit Checklist） 结构化组织 ⟹ 高效检索 | 理解分类维度与索引关系 | 能快速定位目标概念 | 高 |",
@@ -232,7 +232,7 @@
       "layer": "L0",
       "title": "权威来源映射表（Authority Source Map）",
       "positioning": "",
-      "line_count": 146,
+      "line_count": 142,
       "theorem_chains": [
         {
           "text": "| 权威来源映射表（Authority Source Map） 结构化组织 ⟹ 高效检索 | 理解分类维度与索引关系 | 能快速定位目标概念 | 高 |",
@@ -271,7 +271,7 @@
       "layer": "L0",
       "title": "Rust 安全边界扩展推理树",
       "positioning": "本文件从「安全边界」核心出发，推演向更底层、更通用、更危险领域的扩展路径，标注每条扩展边的条件、风险和补偿机制。",
-      "line_count": 296,
+      "line_count": 297,
       "theorem_chains": [
         {
           "text": "| Rust 安全边界扩展推理树 结构化组织 ⟹ 高效检索 | 理解分类维度与索引关系 | 能快速定位目标概念 | 高 |",
@@ -320,7 +320,7 @@
       "layer": "L0",
       "title": "Rust 知识体系双维认知矩阵（Krathwohl × Bloom）",
       "positioning": "本文件建立 **Krathwohl 知识维度**（事实性 / 概念性 / 程序性 / 元认知）与 **Bloom 认知过程维度**（记忆 → 理解 → 应用 → 分析 → 评价 → 创造）的双维交叉矩阵，为 `concept/` 下每个概念文件提供超越单一 Bloom 标签的多维认知定位。",
-      "line_count": 336,
+      "line_count": 340,
       "theorem_chains": [
         {
           "text": "| Rust 知识体系双维认知矩阵（Krathwohl × Bloom） 结构化组织 ⟹ 高效检索 | 理解分类维度与索引关系 | 能快速定位目标概念 | 高 |",
@@ -358,7 +358,7 @@
       "layer": "L0",
       "title": "Rust 知识体系能力图谱（Competency Graph）",
       "positioning": "本文件建立 `concept/` 知识体系的**能力评估与提升框架**，定义 Rust 编程能力的六维雷达模型，提供自评工具、薄弱点诊断和个性化训练路径推荐。与 `problem_graph.md`（\"遇到什么问题\"）和 `cognitive_dimension_matrix.md`（\"认知类型是什么\"）形成三角互补。",
-      "line_count": 365,
+      "line_count": 363,
       "theorem_chains": [
         {
           "text": "| Rust 知识体系能力图谱（Competency Graph） 结构化组织 ⟹ 高效检索 | 理解分类维度与索引关系 | 能快速定位目标概念 | 高 |",
@@ -396,7 +396,7 @@
       "layer": "L0",
       "title": "Rust 知识体系概念定义判定森林（Concept Definition Decision Forest）",
       "positioning": "本文件为 L1-L4 核心概念建立从**定义**出发的完整判定链：**前提假设 → 推理规则 → 判定条件 → 边界 → 失效模式**。与 `theorem_inference_forest.md`（从 L4 公理出发的定理链）形成互补：后者回答「安全保证从哪来」，本文件回答「编译器/开发者如何逐步判定代码是否合法」。",
-      "line_count": 1077,
+      "line_count": 1075,
       "theorem_chains": [
         {
           "text": "> **符号约定**: `⊢` 推导 / `⟹` 蕴含 / `⇐` 依赖 / `⊘` 反例 / `≡` 等价 / `∧` 与 / `∨` 或",
@@ -442,7 +442,7 @@
       "layer": "L0",
       "title": "全局概念索引（Concept Index）",
       "positioning": "本文件是 `concept/` 知识体系的**倒排索引**，从概念名称快速定位到定义文件、交叉引用位置、Bloom 认知层级和语义链接关系。",
-      "line_count": 707,
+      "line_count": 708,
       "theorem_chains": [
         {
           "text": "| **定理一致性矩阵** | 27 | 每文件的 ⟹ 推理链表格 | 🔷 元结构 |",
@@ -681,7 +681,7 @@
       "layer": "L0",
       "title": "Rust 知识体系失效分析树集（Fault Tree Analysis Collection）",
       "positioning": "> 本文件建立 Rust 知识体系中的**标准故障树分析（FTA）**体系，将现有反例路径升级为工程安全标准的失效分析格式。",
-      "line_count": 727,
+      "line_count": 728,
       "theorem_chains": [
         {
           "text": "| Rust 知识体系失效分析树集（Fault Tree Analysis Collection） 结构化组织 ⟹ 高效检索 | 理解分类维度与索引关系 | 能快速定位目标概念 | 高 |",
@@ -719,7 +719,7 @@
       "layer": "L0",
       "title": "跨层知识图谱（Inter-Layer Dependency Map）",
       "positioning": "本文件是 `concept/` 知识体系的全局关系骨架，显式定义 L0-L7 各层之间的**逻辑蕴含关系**、**形式化映射**、**反事实依赖**和**反向反馈**。",
-      "line_count": 582,
+      "line_count": 583,
       "theorem_chains": [
         {
           "text": "| — | Send/Sync (Marker Trait) | 并发安全保证 | 并发分离逻辑 (CSL) | **同态** | Send/Sync ⟹ CSL 资源安全 |",
@@ -800,7 +800,7 @@
       "layer": "L0",
       "title": "Rust 知识体系跨层依赖与蕴含拓扑图",
       "positioning": "本文件建立 L0-L7 八层架构之间的全局依赖与蕴含关系，回答「学习/理解/验证某一概念时，必须前置掌握什么、可后置推导什么、与什么互斥、与什么同构」。",
-      "line_count": 357,
+      "line_count": 358,
       "theorem_chains": [
         {
           "text": "> **符号约定**: `⟹` 蕴含 / `←` 依赖 / `≡` 同构 / `⊘` 互斥 / `↔` 双向映射",
@@ -872,7 +872,7 @@
       "layer": "L0",
       "title": "Rust 知识体系层次内模型间映射图",
       "positioning": "本文件梳理每一层（L1-L4）内部核心模型之间的等价、蕴含、依赖和互斥关系，回答「同一层级内的概念如何相互定义、相互支撑、相互约束」。",
-      "line_count": 291,
+      "line_count": 292,
       "theorem_chains": [
         {
           "text": "> **原则**: 每个映射必须标注关系类型（≡ 同构 / ⟹ 蕴含 / ← 依赖 / ⊘ 互斥）和形式化依据。",
@@ -953,7 +953,7 @@
       "layer": "L0",
       "title": "Rust 知识体系知识图谱本体规范（Knowledge Graph Ontology）",
       "positioning": "本文件定义 `concept/` 知识体系的**显式关系类型本体**，将现有隐式交叉链接升级为 W3C RDF/OWL 风格的知识图谱。每个概念节点之间的边标注明确的关系类型（依赖、蕴含、互斥、细化、等价、反例），支持机器可解析的语义推理。",
-      "line_count": 363,
+      "line_count": 364,
       "theorem_chains": [
         {
           "text": "4. **闭环性**: 互斥关系必须双向声明（A mutexWith B ⟹ B mutexWith A）",
@@ -1045,7 +1045,7 @@
       "layer": "L0",
       "title": "Rust 知识体系学习指南（Learning Guide）",
       "positioning": "本文件是 `concept/` 知识体系的**用户手册**，回答三个核心问题——\"我应该从哪里开始？\"\"按什么顺序读？\"\"如何验证自己掌握了？\"",
-      "line_count": 528,
+      "line_count": 529,
       "theorem_chains": [
         {
           "text": "| `methodology.md` | 0.5h | — | 理解本知识体系的组织方法论 | 1. Bloom 层级如何映射到文件层级？2. ⟹ 推理链的格式要求是什么？ |",
@@ -1128,7 +1128,7 @@
       "layer": "L0",
       "title": "MVP 学习路径：从零到多线程 CLI（40 小时）",
       "positioning": "本项目的**最小可行学习路径**（Minimum Viable Path）。无论背景如何，完成本路径即可独立编写带并发/异步的 Rust CLI 工具。",
-      "line_count": 223,
+      "line_count": 224,
       "theorem_chains": [
         {
           "text": "| MVP 学习路径：从零到多线程 CLI（40 小时） 结构化组织 ⟹ 高效检索 | 理解分类维度与索引关系 | 能快速定位目标概念 | 高 |",
@@ -1181,7 +1181,7 @@
       "layer": "L0",
       "title": "方法论：思维表征与知识结构规范",
       "positioning": "本文件定义 `concept/` 下所有主题文件的内容结构、思维表征方式和知识组织规范，确保内容的**一致性、可比较性、可扩展性**。",
-      "line_count": 493,
+      "line_count": 494,
       "theorem_chains": [
         {
           "text": "| 方法论：思维表征与知识结构规范 结构化组织 ⟹ 高效检索 | 理解分类维度与索引关系 | 能快速定位目标概念 | 高 |",
@@ -1228,7 +1228,7 @@
       "layer": "L0",
       "title": "Rust 知识体系全景导航（Navigation Hub）",
       "positioning": "本文件是 `concept/` 知识体系的**统一入口**，提供按层级、按主题、按背景的多维导航路径。",
-      "line_count": 250,
+      "line_count": 251,
       "theorem_chains": [
         {
           "text": "| Rust 知识体系全景导航（Navigation Hub） 结构化组织 ⟹ 高效检索 | 理解分类维度与索引关系 | 能快速定位目标概念 | 高 |",
@@ -1329,7 +1329,7 @@
       "layer": "L0",
       "title": "Rust 范式转换模式矩阵（Paradigm Transition Matrix）",
       "positioning": "本文件系统化梳理从其他编程语言（主要是 C++）迁移到 Rust 时的**范式转换模式**，以矩阵形式呈现\"源语言模式 → Rust 模式 → 转换影响 → 学习难点\"。与 `05_comparative/` 的对比文件（如 `01_rust_vs_cpp.md`）形成互补：后者是\"逐项对比\"，本文件是\"转换模式矩阵\"。",
-      "line_count": 268,
+      "line_count": 269,
       "theorem_chains": [
         {
           "text": "| Rust 范式转换模式矩阵（Paradigm Transition Matrix） 结构化组织 ⟹ 高效检索 | 理解分类维度与索引关系 | 能快速定位目标概念 | 高 |",
@@ -1367,7 +1367,7 @@
       "layer": "L0",
       "title": "Rust 知识体系问题图谱（Problem Graph）",
       "positioning": "本文件建立 `concept/` 知识体系的**问题分解网络**，将复杂的系统级工程问题逐层分解为概念级子问题，再映射到具体的方法层解决方案。与 `concept_definition_decision_forest.md`（\"如何判定代码是否合法\"）形成互补：问题图谱回答**\"遇到什么问题 → 需要理解什么概念 → 应用什么方法\"**。",
-      "line_count": 452,
+      "line_count": 453,
       "theorem_chains": [
         {
           "text": "| Rust 知识体系问题图谱（Problem Graph） 结构化组织 ⟹ 高效检索 | 理解分类维度与索引关系 | 能快速定位目标概念 | 高 |",
@@ -1443,7 +1443,7 @@
       "layer": "L0",
       "title": "Rust 概念速查卡片（Quick Reference）",
       "positioning": "面试前/编码时的快速查阅手册。每个核心概念\"一页纸\"——定义 + 代码 + 错误码 + 关联概念。",
-      "line_count": 776,
+      "line_count": 777,
       "theorem_chains": [
         {
           "text": "| Rust 概念速查卡片（Quick Reference） 结构化组织 ⟹ 高效检索 | 理解分类维度与索引关系 | 能快速定位目标概念 | 高 |",
@@ -1677,7 +1677,7 @@
       "layer": "L0",
       "title": "RustBelt 谓词映射图（RustBelt Predicate Map）",
       "positioning": "本文件将 RustBelt（Jung et al., POPL 2018）中的核心形式化谓词——**所有权谓词 `own(τ)`** 和 **共享谓词 `shr(κ, ℓ)`**——可视化映射到 Rust 的 L1-L3 工程概念，建立\"数学符号 ↔ 代码直觉\"的双向桥梁。",
-      "line_count": 369,
+      "line_count": 370,
       "theorem_chains": [
         {
           "text": "| **创建** | `⊤ ⟹ own(τ)(v̄)` | `let x = Box::new(42);` | 获得新值的所有权 |",
@@ -1747,7 +1747,7 @@
       "layer": "L0",
       "title": "Rust 知识体系自测题库（Self-Assessment）",
       "positioning": "每个层级配套的自测题，用于验证知识掌握程度。答案和解析附在每题之后（可折叠）。",
-      "line_count": 2166,
+      "line_count": 2167,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -2177,7 +2177,7 @@
       "layer": "L0",
       "title": "语义桥：算法、设计模式与工作流模式的统一谱系",
       "positioning": "",
-      "line_count": 337,
+      "line_count": 338,
       "theorem_chains": [
         {
           "text": "| 语义桥：算法、设计模式与工作流模式的统一谱系 结构化组织 ⟹ 高效检索 | 理解分类维度与索引关系 | 能快速定位目标概念 | 高 |",
@@ -2244,7 +2244,7 @@
       "layer": "L0",
       "title": "Rust Semantic Expressiveness: A Panoramic Survey（Rust 语义表达力全景梳理）",
       "positioning": "本文件从**横向语义维度**梳理 Rust 语言的表达能力光谱，与 L0-L7 纵向概念体系形成正交互补。",
-      "line_count": 1085,
+      "line_count": 1086,
       "theorem_chains": [
         {
           "text": "| Rust Semantic Expressiveness: A Panoramic Survey（Rust 语义表达力全景梳理） 结构化组织 ⟹ 高效检索 | 理解分类维度与索引关系 | 能快速定位目标概念 | 高 |",
@@ -2508,7 +2508,7 @@
       "layer": "L0",
       "title": "Rust 知识体系定理推理森林",
       "positioning": "本文件建立 L1-L4 核心模型内的「公理 → 引理 → 定理 → 推论」推理链，形成跨模型的定理森林，标注每条推理链的前提、规则、失效条件和反例路径。",
-      "line_count": 466,
+      "line_count": 467,
       "theorem_chains": [
         {
           "text": "> **符号约定**: `⊢` 推导 / `⟹` 蕴含 / `⇐` 依赖 / `⊘` 反例 / `≡` 等价",
@@ -2562,7 +2562,7 @@
       "layer": "L0",
       "title": "全局待办清单（Global TODO Tracker）",
       "positioning": "汇总 `concept/` 下所有文件的待补充项，按优先级和层级组织，支持持续审计与迭代。",
-      "line_count": 276,
+      "line_count": 277,
       "theorem_chains": [
         {
           "text": "| 全局待办清单（Global TODO Tracker） 结构化组织 ⟹ 高效检索 | 理解分类维度与索引关系 | 能快速定位目标概念 | 高 |",
@@ -13610,7 +13610,7 @@
       "layer": "L3",
       "title": "Unsafe Rust",
       "positioning": "",
-      "line_count": 2829,
+      "line_count": 2830,
       "theorem_chains": [
         {
           "text": "- v1.1 (2026-05-13): 重构增强——定理一致性矩阵扩展至10行（⟹推理链）、反命题决策树×4、认知路径六步递进、章节过渡段落、层次一致性标注",
@@ -24069,7 +24069,7 @@
       "layer": "L6",
       "title": "WebAssembly 生态：Rust 的浏览器外运行时",
       "positioning": "> 系统分析 Rust 在 **WebAssembly (Wasm)** 生态中的核心地位，",
-      "line_count": 506,
+      "line_count": 525,
       "theorem_chains": [
         {
           "text": "- **定理**: WebAssembly 生态：Rust 的浏览器外运行时 定义 ⟹ 类型安全保证",
@@ -24108,6 +24108,12 @@
         }
       ],
       "code_blocks": [
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "/// 编译目标: wasm32-unknown-unknown /// 此函数可被 JavaScript 或其他宿主直接调用 #[no_mangle] pub..."
+        },
         {
           "flags": [
             "ignore"
@@ -24294,7 +24300,7 @@
       "layer": "L6",
       "title": "日志与可观测性：Rust 服务端监控生态",
       "positioning": "覆盖 Rust 生态中 **日志（log/tracing [来源: [tokio tracing](https://docs.rs/tracing/latest/tracing/)]）**、**指标（metrics）**、**分布式追踪（distributed tracing）**三大可观测性支柱，分析各 crate 的设计哲学与选型策略。",
-      "line_count": 587,
+      "line_count": 611,
       "theorem_chains": [
         {
           "text": "- **定理**: 日志与可观测性：Rust 服务端监控生态 定义 ⟹ 类型安全保证",
@@ -24333,6 +24339,12 @@
         }
       ],
       "code_blocks": [
+        {
+          "flags": [],
+          "lines": 20,
+          "should_fail": false,
+          "code_preview": "use std::time::Instant;  fn main() {     let start = Instant::now();      // 结构化..."
+        },
         {
           "flags": [
             "ignore"
@@ -24645,7 +24657,7 @@
       "layer": "L6",
       "title": "测试生态：单元测试、集成测试与验证策略",
       "positioning": "> 覆盖 Rust **测试生态**的全景——从内置测试框架（#[test]）、",
-      "line_count": 637,
+      "line_count": 667,
       "theorem_chains": [
         {
           "text": "- **定理**: 测试生态：单元测试、集成测试与验证策略 定义 ⟹ 类型安全保证",
@@ -24676,6 +24688,12 @@
         }
       ],
       "code_blocks": [
+        {
+          "flags": [],
+          "lines": 26,
+          "should_fail": false,
+          "code_preview": "// 单元测试写在同一个文件中 pub fn add(a: i32, b: i32) -> i32 { a + b }  #[cfg(test)] mod te..."
+        },
         {
           "flags": [
             "ignore"
@@ -24968,7 +24986,7 @@
       "layer": "L6",
       "title": "安全 实践：Rust 代码的防御性编程",
       "positioning": "系统讲解 Rust **安全编程实践**——从输入验证、加密使用、到审计和供应链安全，揭示如何在 Rust 的内存安全基础上构建全面的安全防御体系。",
-      "line_count": 672,
+      "line_count": 713,
       "theorem_chains": [
         {
           "text": "- **定理**: 安全 实践：Rust 代码的防御性编程 定义 ⟹ 类型安全保证",
@@ -25007,6 +25025,12 @@
         }
       ],
       "code_blocks": [
+        {
+          "flags": [],
+          "lines": 34,
+          "should_fail": false,
+          "code_preview": "/// 验证并清理用户输入（防御注入攻击） fn sanitize_input(input: &str) -> Result<String, &'static ..."
+        },
         {
           "flags": [
             "ignore"
@@ -25649,7 +25673,7 @@
       "layer": "L6",
       "title": "Rust CLI 开发生态",
       "positioning": "探讨 Rust 在命令行工具开发领域的生态——从 clap 的参数解析到 indicatif 的进度条，分析 Rust 如何成为现代 CLI 工具的首选语言。",
-      "line_count": 699,
+      "line_count": 714,
       "theorem_chains": [
         {
           "text": "- **定理**: Rust CLI 开发生态 定义 ⟹ 类型安全保证",
@@ -25688,6 +25712,12 @@
         }
       ],
       "code_blocks": [
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "use std::env;  fn main() {     let args: Vec<String> = env::args().collect();   ..."
+        },
         {
           "flags": [
             "ignore"
@@ -28543,7 +28573,7 @@
       "layer": "L6",
       "title": "Security & Cryptography（安全与密码学）",
       "positioning": "",
-      "line_count": 826,
+      "line_count": 867,
       "theorem_chains": [
         {
           "text": "- **定理**: Security & Cryptography（安全与密码学） 定义 ⟹ 类型安全保证",
@@ -28582,6 +28612,12 @@
         }
       ],
       "code_blocks": [
+        {
+          "flags": [],
+          "lines": 35,
+          "should_fail": false,
+          "code_preview": "use std::collections::hash_map::DefaultHasher; use std::hash::{Hash, Hasher};  /..."
+        },
         {
           "flags": [
             "ignore"
@@ -29063,7 +29099,7 @@
       "layer": "L6",
       "title": "Formal Verification Tools（形式化验证工具生态）",
       "positioning": "",
-      "line_count": 788,
+      "line_count": 787,
       "theorem_chains": [
         {
           "text": "- **定理**: Formal Verification Tools（形式化验证工具生态） 定义 ⟹ 类型安全保证",

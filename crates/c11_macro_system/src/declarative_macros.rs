@@ -1,3 +1,5 @@
+//! Declarative Macros
+
 // [来源: Rust Reference / The Little Book of Rust Macros]
 //! 声明宏（Macro Rules）
 #![allow(clippy::vec_init_then_push)]

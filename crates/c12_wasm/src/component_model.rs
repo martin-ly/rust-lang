@@ -1,3 +1,5 @@
+//! Component Model
+
 #![forbid(unsafe_code)]
 #![allow(unexpected_cfgs)]
 

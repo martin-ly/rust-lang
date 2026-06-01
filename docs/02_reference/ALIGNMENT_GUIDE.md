@@ -3,7 +3,7 @@
 > **分级**: [A]
 > **Bloom 层级**: L2 (理解)
 > **创建日期**: 2026-02-13
-> > **权威来源**: [Rust Reference — Type Layout](https://doc.rust-lang.org/reference/type-layout.html), [Rustonomicon — Data Layout](https://doc.rust-lang.org/nomicon/data.html), [The Rust Programming Language — Ch04](https://doc.rust-lang.org/book/ch04-00-ownership.html)
+> > **权威来源**: [Rust Reference — Type Layout](https://doc.rust-lang.org/reference/type-layout.html), [Rustonomicon — Data Layout](https://doc.rust-lang.org/nomicon/data.html), [The Rust Programming Language — Ch04](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference 类型布局来源标注、Rustonomicon 数据布局引用 [来源: Authority Source Sprint Batch 8]
 
@@ -23,7 +23,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust 对齐知识综合指南](#rust-对齐知识综合指南)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [一、概念分类](#一概念分类)
   - [二、内存对齐（核心）](#二内存对齐核心)
     - [2.0 为何要对齐（Why Alignment Matters）](#20-为何要对齐why-alignment-matters)

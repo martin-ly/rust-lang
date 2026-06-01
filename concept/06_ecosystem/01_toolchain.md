@@ -1116,7 +1116,7 @@ RUSTFLAGS="-Zcodegen-backend=cranelift" cargo +nightly build
 > **来源**: [Rust Project Goals 2026 — Cranelift Backend](https://rust-lang.github.io/rust-project-goals/2026h1/cranelift.html) ·
 > [rustc_codegen_cranelift GitHub](https://github.com/rust-lang/rustc_codegen_cranelift) ·
 > [Bytecode Alliance — Cranelift](https://github.com/bytecodealliance/wasmtime/tree/main/cranelift) ·
-> [Rust Blog — Project Goals Update 2026-04](https://blog.rust-lang.org/2026/05/18/project-goals-2026-04/) · 可信度: ✅
+> [Rust Blog — Project Goals Update 2026-04](https://blog.rust-lang.org/2026/05/18/2026/05/18/project-goals-2026-04.html) · 可信度: ✅
 
 ### 7.4 gccrs — GCC 前端替代实现
 

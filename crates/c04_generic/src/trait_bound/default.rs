@@ -1,3 +1,5 @@
+//! Default
+
 /*
 Default trait 是 Rust 中用于提供默认值的重要特征。
 它定义了 `default` 方法，允许类型提供合理的默认实例。

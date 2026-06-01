@@ -72,6 +72,47 @@
 ## 一、权威定义（Definition）
 >
 
+**可编译示例** — 标准库哈希与 HMAC 风格验证：
+
+```rust
+use std::collections::hash_map::DefaultHasher;
+use std::hash::{Hash, Hasher};
+
+/// 计算数据的哈希值（用于完整性校验，非密码学安全）
+fn compute_hash<T: Hash>(data: &T) -> u64 {
+    let mut hasher = DefaultHasher::new();
+    data.hash(&mut hasher);
+    hasher.finish()
+}
+
+/// 常量时间比较（防止定时攻击）
+fn constant_time_eq(a: &[u8], b: &[u8]) -> bool {
+    if a.len() != b.len() {
+        return false;
+    }
+    let mut result = 0u8;
+    for (x, y) in a.iter().zip(b.iter()) {
+        result |= x ^ y;
+    }
+    result == 0
+}
+
+fn main() {
+    let password = b"correct-horse-battery-staple";
+    let stored_hash = compute_hash(&password.as_slice());
+
+    let input = b"correct-horse-battery-staple";
+    let input_hash = compute_hash(&input.as_slice());
+
+    assert!(constant_time_eq(
+        &stored_hash.to_le_bytes(),
+        &input_hash.to_le_bytes()
+    ));
+}
+```
+
+> ⚠️ **注意**: `DefaultHasher` 仅适用于数据结构哈希，**不应用于密码学场景**。密码学哈希请使用 `sha2`/`blake3` crate。
+
 ### 1.1 Kerckhoffs 原则
 >
 

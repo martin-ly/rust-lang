@@ -156,6 +156,7 @@
   - [参考来源](#参考来源)
     - [16.7 前沿方向：Unsafe Fields（字段级 unsafe，Rust 2026 Project Goal）](#167-前沿方向unsafe-fields字段级-unsaferust-2026-project-goal)
   - [Null 指针有效性定义](#null-指针有效性定义)
+  - [导航：下一步去哪？](#导航下一步去哪)
 
 <!-- L3::权威定义 -->
 
@@ -1328,7 +1329,7 @@ pub struct TcpHeader {
 
 ### 补充章节：Miri 的使用方法与限制
 
-> **权威来源**: [Miri Book](https://rustc-dev-guide.rust-lang.org/miri.html) · [Rust Blog: Miri is available on CI](https://blog.rust-lang.org/inside-rust/2020/02/07/miri-is-now-available-on-rust-nightly.html)
+> **权威来源**: [Miri Book](https://rustc-dev-guide.rust-lang.org/miri.html) · [Rust Blog: Miri is available on CI](https://github.com/rust-lang/miri)
 > **层级标注**: `L3::动态验证` → `L1::借用` 别名违规检测 · `L4::RustBelt` 操作语义动态近似
 
 **定义**：Miri（Memory Inspector for Rust）是 Rust 编译器 MIR（Mid-level IR）的解释执行器。它不生成机器码，而是在 MIR 层面逐步解释程序，同时维护精确的内存状态（包括初始化状态、别名权限栈/树、分配生命周期），从而动态检测未定义行为（UB）。

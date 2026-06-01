@@ -1,3 +1,5 @@
+//! Lib
+
 // [来源: Rust Reference / The Little Book of Rust Macros]
 //! Declarative macros (macro_rules!) and macro hygiene.
 #![allow(clippy::type_complexity)]

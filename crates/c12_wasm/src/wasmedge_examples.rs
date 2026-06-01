@@ -1,3 +1,4 @@
+//! Wasmedge Examples
 
 pub mod wasmedge_advanced {
     use std::fs;
@@ -264,13 +265,15 @@ pub mod threading_examples {
             let workers = (0..size)
                 .map(|_| {
                     let receiver = Arc::clone(&receiver);
-                    thread::spawn(move || loop {
-                        let job: Job = receiver
-                            .lock()
-                            .expect("thread pool receiver mutex poisoned")
-                            .recv()
-                            .expect("thread pool channel closed");
-                        job();
+                    thread::spawn(move || {
+                        loop {
+                            let job: Job = receiver
+                                .lock()
+                                .expect("thread pool receiver mutex poisoned")
+                                .recv()
+                                .expect("thread pool channel closed");
+                            job();
+                        }
                     })
                 })
                 .collect();

@@ -1,3 +1,5 @@
+//! Lib
+
 // [来源: Rust Reference / RFC 1196]
 //! Generics, trait bounds, associated types, and const generics.
 #![allow(clippy::type_complexity)]

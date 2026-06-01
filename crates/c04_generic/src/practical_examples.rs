@@ -1,3 +1,5 @@
+//! Practical Examples
+
 /*
  * 实用示例模块 - Rust 1.89 泛型编程实践
  *

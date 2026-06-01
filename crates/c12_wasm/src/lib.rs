@@ -1,3 +1,5 @@
+//! Lib
+
 // [来源: WebAssembly Spec / wasm-bindgen docs]
 //! WebAssembly compilation targets, WASI, and browser integration.
 #![allow(clippy::type_complexity)]

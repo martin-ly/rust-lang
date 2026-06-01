@@ -1,3 +1,5 @@
+//! Generic Define
+
 // [来源: Rust Reference / RFC 1196]
 /*
 Rust 的泛型机制是其强大类型系统的重要组成部分，允许开发者编写灵活、可重用的代码。

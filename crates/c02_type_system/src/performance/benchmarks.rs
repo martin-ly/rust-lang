@@ -1,3 +1,5 @@
+//! Benchmarks
+
 // Rust 1.89 类型系统性能测试和对比分析
 // 文件: benchmarks.rs
 // 创建日期: 2025-01-27

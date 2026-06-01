@@ -1,3 +1,5 @@
+//! Type Size
+
 use c02_type_system::primitive_types::sized_type::*;
 
 fn main() {

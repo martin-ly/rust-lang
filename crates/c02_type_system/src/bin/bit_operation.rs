@@ -1,3 +1,5 @@
+//! Bit Operation
+
 use c02_type_system::primitive_types::scalar_types::bit::bit_operation::*;
 
 fn main() {

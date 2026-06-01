@@ -57,13 +57,33 @@
 
 **B1. async-std 全局标记**: 最后 1 个未标记文件 `MASTER_INDEX_AUTO.md` 已添加 `[已归档 2025-03]`
 
-**B2. crates 零英文优先**: c02/c05/common 的 lib.rs 已有英文；为 **15 个子模块 mod.rs** 添加双语 `//!` 注释
+**B2. crates 零英文优先**: c02/c05/common 的 lib.rs 已有英文；为 **80+ 个子模块和源文件** 添加双语 `//!` 注释
 
 ### 🔧 验证
 
-- `cargo check --workspace`: **通过**（c11_macro_system 37 warnings 为既有）
+### 🔗 权威来源链接修复
+
+- 修复 TRPL ownership 章节 URL (`ch04-00-ownership.html` → `ch04-00-understanding-ownership.html`)，3 处
+- 修复 Rust Blog project-goals URL (添加 `.html` 后缀)，5 处
+- 替换失效的 async-fn-rpitit 链接 → `Rust-1.75.0.html`
+- 替换失效的 Miri nightly 链接 → `github.com/rust-lang/miri`
+- 替换失效的 formal-methods 链接 → `rustverify.com/`
+- 替换失效的 ferrous-systems safety-critical-rust 链接 → `ferrocene.dev/`
+
+### 📝 L6 代码示例补充
+
+- `16_testing.md`: 新增 `#[cfg(test)]` + `#[test]` + `#[should_panic]` 完整可编译示例
+- `25_cli_development.md`: 新增 `std::env::args()` 极简 CLI 可编译示例
+- `13_logging_observability.md`: 新增 `eprintln!` 结构化日志 + 指标可编译示例
+- `43_security_cryptography.md`: 新增 `DefaultHasher` + 常量时间比较可编译示例
+- `11_webassembly.md`: 新增 `#[no_mangle]` Wasm 导出函数可编译示例
+- `19_security_practices.md`: 新增输入验证 + 密码强度检查可编译示例
+
+### 🔧 验证
+
+- `cargo check --workspace`: **通过**（c11_macro_system 36 warnings 为既有）
 - `cargo clippy --workspace`: **通过**
-- `kb_auditor.py`: 死链 **0** / 258 文件，定理链 1,305，代码块 2,600
+- `kb_auditor.py`: 死链 **0** / 258 文件，定理链 1,305，代码块 2,606
 - `version_fact_check.py`: 版本错误 **0** / 285 文件
 
 ---

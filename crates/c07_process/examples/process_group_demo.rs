@@ -14,8 +14,8 @@
 //! Run way :
 //! cargo run --example process_group_demo
 //! ```
-use c07_process::prelude::*;
 use c07_process::ProcessGroupManager;
+use c07_process::prelude::*;
 use std::collections::HashMap;
 
 fn main() -> Result<()> {

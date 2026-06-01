@@ -1,3 +1,5 @@
+//! Libp2p Advanced
+
 #![forbid(unsafe_code)]
 
 //! libp2p 深度集成 —— 点对点网络协议栈
@@ -36,8 +38,8 @@
 /// Ed25519、Secp256k1、RSA etc. type 。
 /// Supports Ed25519、Secp256k1、RSA etc.多种密钥type。
 pub mod identity {
-    use libp2p::identity::Keypair;
     use libp2p::PeerId;
+    use libp2p::identity::Keypair;
 
     /// 生成新的节点身份
     /// node
@@ -82,7 +84,7 @@ pub mod identity {
 /// - node
 /// - Run协议行as（behaviour）
 pub mod swarm_builder {
-    use libp2p::{noise, tcp, yamux, Swarm, SwarmBuilder};
+    use libp2p::{Swarm, SwarmBuilder, noise, tcp, yamux};
     use std::time::Duration;
 
     /// 构建基础 TCP + Noise + Yamux Swarm

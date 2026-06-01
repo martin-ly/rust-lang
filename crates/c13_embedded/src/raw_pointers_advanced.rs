@@ -1,3 +1,4 @@
+//! Raw Pointers Advanced
 
 /// 裸指针基础操作
 /// pointer foundation operation
@@ -52,14 +53,12 @@ pub mod volatile_access {
 
     /// 使用 volatile read 读取寄存器
     /// volatile read
-    ///
     pub unsafe fn read_register(addr: *const u32) -> u32 {
         unsafe { addr.read_volatile() }
     }
 
     /// 使用 volatile write 写入寄存器
     /// volatile write
-    ///
     pub unsafe fn write_register(addr: *mut u32, value: u32) {
         unsafe {
             addr.write_volatile(value);

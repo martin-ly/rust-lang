@@ -1289,7 +1289,7 @@ fn fixed() {
 | **`null-ptr-deref` guarantees** | MCP 计划中 | 定义空指针解引用的保证语义，为 Miri 和编译器优化提供明确的 UB 边界 |
 | **zerocopy traits** (`NoCell` / `Freeze`) | 积极讨论 | 定义"可安全按位复制"的类型类，为内核和网络协议栈提供零拷贝抽象 |
 
-> **来源**: [Rust Project Goals — April 2026 Update](https://blog.rust-lang.org/2026/05/18/project-goals-2026-04/) · [Rust Internals — All Hands 2026](https://internals.rust-lang.org/) · 可信度: 🟡（基于会议纪要和官方博客的综合）
+> **来源**: [Rust Project Goals — April 2026 Update](https://blog.rust-lang.org/2026/05/18/2026/05/18/project-goals-2026-04.html) · [Rust Internals — All Hands 2026](https://internals.rust-lang.org/) · 可信度: 🟡（基于会议纪要和官方博客的综合）
 
 ### 6.7 Safety-Critical Rust：从原型到认证的鸿沟
 
@@ -1324,7 +1324,7 @@ fn fixed() {
 
 > **来源**: [Rust Blog — What does it take to ship Rust in safety-critical?](https://blog.rust-lang.org/2026/01/14/what-does-it-take-to-ship-rust-in-safety-critical.html) · [Ferrocene](https://ferrocene.dev/) · [Safety-Critical Rust Consortium](https://rustfoundation.org/) · 可信度: ✅
 
-> **权威来源**: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) · [Rust Blog — Project Goals Update 2026-04](https://blog.rust-lang.org/2026/05/18/project-goals-2026-04/) · [Polonius Repository](https://github.com/rust-lang/polonius) · [Cranelift Documentation](https://cranelift.dev/) · [Rust Internals Forum](https://internals.rust-lang.org/) · [Rust Blog — Safety-Critical Rust 2026-01-14](https://blog.rust-lang.org/2026/01/14/what-does-it-take-to-ship-rust-in-safety-critical.html)
+> **权威来源**: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) · [Rust Blog — Project Goals Update 2026-04](https://blog.rust-lang.org/2026/05/18/2026/05/18/project-goals-2026-04.html) · [Polonius Repository](https://github.com/rust-lang/polonius) · [Cranelift Documentation](https://cranelift.dev/) · [Rust Internals Forum](https://internals.rust-lang.org/) · [Rust Blog — Safety-Critical Rust 2026-01-14](https://blog.rust-lang.org/2026/01/14/what-does-it-take-to-ship-rust-in-safety-critical.html)
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)

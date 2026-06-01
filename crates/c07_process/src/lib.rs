@@ -1,3 +1,5 @@
+//! Lib
+
 // [来源: Rust Standard Library / Rust Reference]
 //! Process management, IPC, signals, and system programming.
 #![allow(clippy::type_complexity)]
@@ -18,11 +20,11 @@
 //!
 //! fn main() -> c07_process::Result<()> {
 //!     // 创建进程管理器
-//! // createprocess manager
+//!     // createprocess manager
 //!     let pm = ProcessManager::new();
 //!
 //!     // 创建进程配置
-//! // createprocess configuration
+//!     // createprocess configuration
 //!     let mut env = HashMap::new();
 //!     env.insert("PATH".to_string(), "/usr/bin:/bin".to_string());
 //!

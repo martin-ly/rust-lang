@@ -1,3 +1,5 @@
+//! Lib
+
 // [来源: Rust Reference / TRPL]
 //! Control flow, functions, closures, and error handling patterns.
 #![allow(clippy::type_complexity)]

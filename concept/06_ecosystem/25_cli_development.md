@@ -85,6 +85,21 @@ CLI 设计原则:
   └── 现代工具链（cargo install）
 ```
 
+**可编译示例** — 标准库实现的极简 CLI：
+
+```rust
+use std::env;
+
+fn main() {
+    let args: Vec<String> = env::args().collect();
+
+    match args.len() {
+        1 => println!("Usage: {} <name>", args[0]),
+        _ => println!("Hello, {}!", args[1]),
+    }
+}
+```
+
 > **认知功能**: **Rust 的单一二进制和快速启动使其成为 CLI 工具的理想选择**——用户体验优于解释型语言。
 > [来源: [Rust CLI Book](https://rust-cli.github.io/book/index.html)]
 

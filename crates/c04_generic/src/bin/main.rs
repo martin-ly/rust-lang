@@ -1,3 +1,5 @@
+//! Main
+
 use c04_generic::{
     advanced_patterns::*,
     basic_syntax::*,

@@ -1,3 +1,5 @@
+//! Error Handling
+
 use std::error::Error;
 /// 设计模式错误处理模块
 ///

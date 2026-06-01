@@ -87,6 +87,30 @@ graph TD
 > **关键洞察**: Rust 的**零成本抽象**哲学同样适用于可观测性——tracing 的 Span 在 release 模式下可通过编译期开关完全消除开销。
 > [来源: [Google SRE Book — Monitoring](https://sre.google/sre-book/monitoring-distributed-systems/)] · [来源: [OpenTelemetry Specification](https://opentelemetry.io/docs/specs/otel/)]
 
+**可编译示例** — 标准库日志输出：
+
+```rust
+use std::time::Instant;
+
+fn main() {
+    let start = Instant::now();
+
+    // 结构化日志：使用 eprintln! 输出到 stderr
+    eprintln!("[INFO] 服务启动: pid={}", std::process::id());
+
+    let result = compute(42);
+
+    // 指标化输出：时长 + 结果
+    let elapsed = start.elapsed();
+    eprintln!("[METRIC] compute_duration_ms={:.2} result={}",
+              elapsed.as_secs_f64() * 1000.0, result);
+}
+
+fn compute(n: i32) -> i32 {
+    n * n
+}
+```
+
 ---
 
 ### 1.2 Rust 日志生态演进

@@ -1,3 +1,5 @@
+//! Generic Define
+
 use c04_generic::generic_define::*;
 
 fn main() {

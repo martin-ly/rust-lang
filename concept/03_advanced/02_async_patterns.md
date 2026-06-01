@@ -772,7 +772,7 @@ fn main() {}
 > 2) `trait T { fn method(&self) -> impl Future<Output = i32>; }` + 手动 `Box::pin`（复杂）。
 > 这与 JavaScript 的 `async` 方法（接口中直接声明，无特殊限制）或 Kotlin 的 `suspend` 函数（类似，但编译器处理）不同
 > ——Rust 的 `async fn` in trait 是类型系统的重大扩展。
-> [来源: [Async Fn In Traits](https://blog.rust-lang.org/2023/12/21/async-fn-rpitit.html)] ·
+> [来源: [Async Fn In Traits](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html)] ·
 > [来源: [RPITIT](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html)]
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/) ·

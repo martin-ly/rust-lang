@@ -85,6 +85,47 @@ Rust 提供的安全保证:
   ├── unsafe 代码可能引入漏洞
   └── 供应链攻击（恶意依赖）
 
+```
+
+**可编译示例** — 输入验证与密码强度检查：
+
+```rust
+/// 验证并清理用户输入（防御注入攻击）
+fn sanitize_input(input: &str) -> Result<String, &'static str> {
+    const MAX_LEN: usize = 1024;
+
+    if input.is_empty() {
+        return Err("Input cannot be empty");
+    }
+    if input.len() > MAX_LEN {
+        return Err("Input exceeds maximum length");
+    }
+    // 拒绝控制字符（防御终端转义序列注入）
+    if input.chars().any(|c| c.is_control() && c != '\n' && c != '\t') {
+        return Err("Input contains invalid control characters");
+    }
+
+    Ok(input.trim().to_string())
+}
+
+/// 密码强度检查（纯逻辑，非密码学）
+fn check_password_strength(password: &str) -> Result<(), &'static str> {
+    if password.len() < 12 {
+        return Err("Password must be at least 12 characters");
+    }
+    let has_upper = password.chars().any(|c| c.is_uppercase());
+    let has_lower = password.chars().any(|c| c.is_lowercase());
+    let has_digit = password.chars().any(|c| c.is_ascii_digit());
+    let has_special = password.chars().any(|c| !c.is_alphanumeric());
+
+    if !(has_upper && has_lower && has_digit && has_special) {
+        return Err("Password must contain uppercase, lowercase, digit, and special character");
+    }
+    Ok(())
+}
+```
+
+```text
   安全层次:
   ┌─────────────────────────────────────────┐
   │  逻辑安全（应用层验证）                  │

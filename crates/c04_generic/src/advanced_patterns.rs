@@ -1,3 +1,5 @@
+//! Advanced Patterns
+
 // [来源: Rust Reference / RFC 1598]
 /*
  * 高级泛型模式和设计模式示例模块

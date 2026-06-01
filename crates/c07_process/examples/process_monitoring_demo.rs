@@ -12,8 +12,9 @@
 //! Run way :
 //! cargo run --example process_monitoring_demo
 //! ```
-use c07_process::prelude::*;
+
 use c07_process::SystemResources;
+use c07_process::prelude::*;
 
 fn main() -> Result<()> {
     println!("🚀 进程监控示例\n");

@@ -1,3 +1,5 @@
+//! Result01
+
 use std::fmt;
 
 #[allow(unused)]

@@ -94,6 +94,36 @@ Rust 测试的三种内置形式:
   └── #[test_case] (第三方): 参数化测试
 ```
 
+**可编译示例**:
+
+```rust
+// 单元测试写在同一个文件中
+pub fn add(a: i32, b: i32) -> i32 { a + b }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_add() {
+        assert_eq!(add(2, 3), 5);
+    }
+
+    #[test]
+    #[should_panic(expected = "divide by zero")]
+    fn test_divide_by_zero() {
+        let _ = 1 / 0;
+    }
+
+    #[test]
+    #[ignore = "expensive computation"]
+    fn test_expensive() {
+        // 运行: cargo test -- --ignored
+        assert!(true);
+    }
+}
+```
+
 > **认知功能**: Rust 的测试框架是**语言内置**的——不需要外部依赖即可写测试。这与 JavaScript（需要 Jest/Mocha）或 Java（需要 JUnit）形成对比。
 > [来源: [TRPL — Testing]]
 > **关键洞察**: `#[cfg(test)]` 条件编译使测试代码在生产构建中**完全消除**——零运行时开销。

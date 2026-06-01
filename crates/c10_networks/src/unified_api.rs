@@ -1,3 +1,5 @@
+//! Unified Api
+
 use crate::diagnostics::NetDiagnostics;
 use crate::error::{NetworkError, NetworkResult};
 use bytes::Bytes;

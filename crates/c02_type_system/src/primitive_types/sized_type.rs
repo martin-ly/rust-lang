@@ -1,3 +1,5 @@
+//! Sized Type
+
 /*
 
 Sized trait 是 Rust 中的一个 trait，用于限制类型的大小。

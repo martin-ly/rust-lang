@@ -1,3 +1,5 @@
+//! Dyn Trait Advanced
+
 #![allow(clippy::doc_lazy_continuation)]
 
 //! Dyn Trait 高级用法

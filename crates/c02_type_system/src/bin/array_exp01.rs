@@ -1,3 +1,5 @@
+//! Array Exp01
+
 use c02_type_system::primitive_types::compound_types::array::define::*;
 
 #[cfg(not(target_env = "msvc"))]

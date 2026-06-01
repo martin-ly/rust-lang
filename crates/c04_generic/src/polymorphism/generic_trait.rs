@@ -1,3 +1,5 @@
+//! Generic Trait
+
 /*
 Generic Trait 是 Rust 中实现多态性的核心机制之一。
 它允许我们定义可以处理多种类型的特征，实现编译时多态。

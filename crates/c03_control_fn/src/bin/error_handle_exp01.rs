@@ -1,3 +1,5 @@
+//! Error Handle Exp01
+
 use c03_control_fn::error_handling::result01;
 
 fn main() {

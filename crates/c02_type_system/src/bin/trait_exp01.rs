@@ -1,3 +1,5 @@
+//! Trait Exp01
+
 use c02_type_system::type_class::*;
 
 fn main() {

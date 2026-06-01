@@ -1,3 +1,5 @@
+//! Mod
+
 #![allow(clippy::type_complexity)]
 /*
 在 Rust 中，关联类型（associated types）是与特征（traits）相关联的类型参数。

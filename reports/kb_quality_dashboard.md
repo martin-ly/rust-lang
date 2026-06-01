@@ -12,7 +12,7 @@ Enter the new date: (yy-mm-dd)
 | 总定理链 (⟹) | 1305 | ≥270 | ✅ |
 | 总反命题 | 605 | ≥40 | ✅ |
 | 总 Mermaid 图 | 532 | ≥50 | ✅ |
-| 编译验证代码块 | 2600 | ≥150 | ✅ |
+| 编译验证代码块 | 2606 | ≥150 | ✅ |
 | 定理矩阵总行 | 12491 | — | — |
 | 死链数量 | 0 | 0 | ✅ |
 
@@ -40,41 +40,41 @@ Enter the new date: (yy-mm-dd)
 | 文件 | 层级 | 行数 | ⟹ | 反命题 | Mermaid | 代码块 | 过渡段 | 认知路径 |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|
 | concept\00_meta\03_bloom_taxonomy.md | L0 | 76 | 3 | 1 | 0 | 1 | 6 | ✅ |
-| concept\00_meta\05_cross_reference_matrix.md | L0 | 78 | 3 | 1 | 0 | 1 | 6 | ✅ |
-| concept\00_meta\08_concept_audit_guide.md | L0 | 68 | 3 | 1 | 0 | 1 | 6 | ✅ |
-| concept\00_meta\asp_marking_guide.md | L0 | 466 | 3 | 1 | 3 | 0 | 6 | ✅ |
-| concept\00_meta\audit_checklist.md | L0 | 344 | 3 | 2 | 1 | 0 | 6 | ✅ |
-| concept\00_meta\authority_source_map.md | L0 | 146 | 3 | 1 | 0 | 0 | 6 | ✅ |
-| concept\00_meta\boundary_extension_tree.md | L0 | 296 | 3 | 1 | 3 | 1 | 6 | ✅ |
-| concept\00_meta\cognitive_dimension_matrix.md | L0 | 336 | 3 | 1 | 2 | 0 | 6 | ✅ |
-| concept\00_meta\competency_graph.md | L0 | 365 | 3 | 1 | 3 | 0 | 6 | ✅ |
-| concept\00_meta\concept_definition_decision_forest.md | L0 | 1077 | 5 | 1 | 10 | 0 | 6 | ✅ |
-| concept\00_meta\concept_index.md | L0 | 707 | 6 | 2 | 0 | 0 | 6 | ✅ |
+| concept\00_meta\05_cross_reference_matrix.md | L0 | 79 | 3 | 1 | 0 | 1 | 6 | ✅ |
+| concept\00_meta\08_concept_audit_guide.md | L0 | 69 | 3 | 1 | 0 | 1 | 6 | ✅ |
+| concept\00_meta\asp_marking_guide.md | L0 | 464 | 3 | 1 | 3 | 0 | 6 | ✅ |
+| concept\00_meta\audit_checklist.md | L0 | 342 | 3 | 2 | 1 | 0 | 6 | ✅ |
+| concept\00_meta\authority_source_map.md | L0 | 142 | 3 | 1 | 0 | 0 | 6 | ✅ |
+| concept\00_meta\boundary_extension_tree.md | L0 | 297 | 3 | 1 | 3 | 1 | 6 | ✅ |
+| concept\00_meta\cognitive_dimension_matrix.md | L0 | 340 | 3 | 1 | 2 | 0 | 6 | ✅ |
+| concept\00_meta\competency_graph.md | L0 | 363 | 3 | 1 | 3 | 0 | 6 | ✅ |
+| concept\00_meta\concept_definition_decision_forest.md | L0 | 1075 | 5 | 1 | 10 | 0 | 6 | ✅ |
+| concept\00_meta\concept_index.md | L0 | 708 | 6 | 2 | 0 | 0 | 6 | ✅ |
 | concept\00_meta\decidability_spectrum.md | L0 | 840 | 3 | 1 | 6 | 2 | 6 | ✅ |
 | concept\00_meta\expressiveness_multiview.md | L0 | 719 | 3 | 1 | 7 | 7 | 6 | ✅ |
-| concept\00_meta\fault_tree_analysis_collection.md | L0 | 727 | 3 | 1 | 7 | 0 | 6 | ✅ |
-| concept\00_meta\inter_layer_map.md | L0 | 582 | 14 | 1 | 2 | 0 | 6 | ✅ |
-| concept\00_meta\inter_layer_topology.md | L0 | 357 | 10 | 1 | 3 | 0 | 6 | ✅ |
-| concept\00_meta\intra_layer_model_map.md | L0 | 291 | 13 | 1 | 5 | 0 | 6 | ✅ |
-| concept\00_meta\kg_ontology.md | L0 | 363 | 6 | 1 | 2 | 0 | 6 | ✅ |
+| concept\00_meta\fault_tree_analysis_collection.md | L0 | 728 | 3 | 1 | 7 | 0 | 6 | ✅ |
+| concept\00_meta\inter_layer_map.md | L0 | 583 | 14 | 1 | 2 | 0 | 6 | ✅ |
+| concept\00_meta\inter_layer_topology.md | L0 | 358 | 10 | 1 | 3 | 0 | 6 | ✅ |
+| concept\00_meta\intra_layer_model_map.md | L0 | 292 | 13 | 1 | 5 | 0 | 6 | ✅ |
+| concept\00_meta\kg_ontology.md | L0 | 364 | 6 | 1 | 2 | 0 | 6 | ✅ |
 | concept\00_meta\knowledge_mindmap.md | L0 | 255 | 3 | 1 | 2 | 0 | 6 | ✅ |
-| concept\00_meta\learning_guide.md | L0 | 528 | 5 | 1 | 1 | 1 | 6 | ✅ |
-| concept\00_meta\LEARNING_MVP_PATH.md | L0 | 223 | 3 | 1 | 0 | 0 | 6 | ✅ |
-| concept\00_meta\methodology.md | L0 | 493 | 3 | 2 | 5 | 1 | 6 | ✅ |
-| concept\00_meta\navigation.md | L0 | 250 | 3 | 1 | 0 | 0 | 6 | ✅ |
-| concept\00_meta\paradigm_transition_matrix.md | L0 | 268 | 3 | 1 | 3 | 0 | 6 | ✅ |
-| concept\00_meta\problem_graph.md | L0 | 452 | 3 | 1 | 7 | 0 | 6 | ✅ |
+| concept\00_meta\learning_guide.md | L0 | 529 | 5 | 1 | 1 | 1 | 6 | ✅ |
+| concept\00_meta\LEARNING_MVP_PATH.md | L0 | 224 | 3 | 1 | 0 | 0 | 6 | ✅ |
+| concept\00_meta\methodology.md | L0 | 494 | 3 | 2 | 5 | 1 | 6 | ✅ |
+| concept\00_meta\navigation.md | L0 | 251 | 3 | 1 | 0 | 0 | 6 | ✅ |
+| concept\00_meta\paradigm_transition_matrix.md | L0 | 269 | 3 | 1 | 3 | 0 | 6 | ✅ |
+| concept\00_meta\problem_graph.md | L0 | 453 | 3 | 1 | 7 | 0 | 6 | ✅ |
 | concept\00_meta\quality_dashboard_v2.md | L0 | 284 | 3 | 1 | 3 | 0 | 6 | ✅ |
-| concept\00_meta\quick_reference.md | L0 | 776 | 3 | 1 | 0 | 25 | 6 | ✅ |
-| concept\00_meta\rustbelt_predicate_map.md | L0 | 369 | 11 | 1 | 6 | 0 | 6 | ✅ |
-| concept\00_meta\self_assessment.md | L0 | 2166 | 0 | 1 | 0 | 55 | 6 | ✅ |
-| concept\00_meta\semantic_bridge_algorithms_patterns.md | L0 | 337 | 3 | 1 | 0 | 4 | 6 | ✅ |
-| concept\00_meta\semantic_expressiveness.md | L0 | 1085 | 3 | 1 | 2 | 1 | 6 | ✅ |
+| concept\00_meta\quick_reference.md | L0 | 777 | 3 | 1 | 0 | 25 | 6 | ✅ |
+| concept\00_meta\rustbelt_predicate_map.md | L0 | 370 | 11 | 1 | 6 | 0 | 6 | ✅ |
+| concept\00_meta\self_assessment.md | L0 | 2167 | 0 | 1 | 0 | 55 | 6 | ✅ |
+| concept\00_meta\semantic_bridge_algorithms_patterns.md | L0 | 338 | 3 | 1 | 0 | 4 | 6 | ✅ |
+| concept\00_meta\semantic_expressiveness.md | L0 | 1086 | 3 | 1 | 2 | 1 | 6 | ✅ |
 | concept\00_meta\semantic_space.md | L0 | 1277 | 12 | 2 | 5 | 9 | 6 | ✅ |
 | concept\00_meta\sources.md | L0 | 448 | 3 | 1 | 3 | 0 | 6 | ✅ |
 | concept\00_meta\terminology_glossary.md | L0 | 401 | 3 | 1 | 0 | 0 | 6 | ✅ |
-| concept\00_meta\theorem_inference_forest.md | L0 | 466 | 6 | 1 | 3 | 0 | 6 | ✅ |
-| concept\00_meta\todos.md | L0 | 276 | 3 | 1 | 0 | 0 | 6 | ✅ |
+| concept\00_meta\theorem_inference_forest.md | L0 | 467 | 6 | 1 | 3 | 0 | 6 | ✅ |
+| concept\00_meta\todos.md | L0 | 277 | 3 | 1 | 0 | 0 | 6 | ✅ |
 | concept\01_foundation\00_pl_prerequisites.md | L1 | 418 | 3 | 1 | 0 | 12 | 6 | ✅ |
 | concept\01_foundation\01_ownership.md | L1 | 1503 | 12 | 3 | 7 | 35 | 16 | ✅ |
 | concept\01_foundation\02_borrowing.md | L1 | 1615 | 3 | 3 | 6 | 38 | 20 | ✅ |
@@ -130,7 +130,7 @@ Enter the new date: (yy-mm-dd)
 | concept\03_advanced\02_async_advanced.md | L3 | 1361 | 4 | 1 | 1 | 30 | 6 | ✅ |
 | concept\03_advanced\02_async_patterns.md | L3 | 817 | 3 | 3 | 1 | 11 | 6 | ✅ |
 | concept\03_advanced\02_async_programming.md | L3 | 43 | 3 | 1 | 0 | 0 | 6 | ✅ |
-| concept\03_advanced\03_unsafe.md | L3 | 2829 | 14 | 4 | 10 | 45 | 3 | ✅ |
+| concept\03_advanced\03_unsafe.md | L3 | 2830 | 14 | 4 | 10 | 45 | 3 | ✅ |
 | concept\03_advanced\03_unsafe_rust.md | L3 | 41 | 3 | 1 | 0 | 0 | 6 | ✅ |
 | concept\03_advanced\04_macros.md | L3 | 2230 | 22 | 8 | 8 | 51 | 8 | ✅ |
 | concept\03_advanced\05_macros.md | L3 | 42 | 3 | 1 | 0 | 0 | 6 | ✅ |
@@ -204,21 +204,21 @@ Enter the new date: (yy-mm-dd)
 | concept\06_ecosystem\08_wasi.md | L6 | 587 | 6 | 5 | 2 | 11 | 12 | ✅ |
 | concept\06_ecosystem\09_cargo_script.md | L6 | 577 | 4 | 1 | 2 | 9 | 8 | ✅ |
 | concept\06_ecosystem\10_public_private_deps.md | L6 | 521 | 6 | 1 | 2 | 10 | 12 | ✅ |
-| concept\06_ecosystem\11_webassembly.md | L6 | 506 | 6 | 3 | 3 | 5 | 12 | ✅ |
+| concept\06_ecosystem\11_webassembly.md | L6 | 525 | 6 | 3 | 3 | 6 | 12 | ✅ |
 | concept\06_ecosystem\12_testing_strategies.md | L6 | 623 | 6 | 3 | 2 | 9 | 12 | ✅ |
-| concept\06_ecosystem\13_logging_observability.md | L6 | 587 | 6 | 3 | 3 | 8 | 12 | ✅ |
+| concept\06_ecosystem\13_logging_observability.md | L6 | 611 | 6 | 3 | 3 | 9 | 12 | ✅ |
 | concept\06_ecosystem\14_documentation.md | L6 | 601 | 4 | 3 | 2 | 7 | 8 | ✅ |
 | concept\06_ecosystem\15_performance_optimization.md | L6 | 676 | 6 | 3 | 1 | 10 | 12 | ✅ |
-| concept\06_ecosystem\16_testing.md | L6 | 637 | 4 | 3 | 2 | 7 | 8 | ✅ |
+| concept\06_ecosystem\16_testing.md | L6 | 667 | 4 | 3 | 2 | 8 | 8 | ✅ |
 | concept\06_ecosystem\17_cross_compilation.md | L6 | 595 | 6 | 3 | 1 | 5 | 12 | ✅ |
 | concept\06_ecosystem\18_distributed_systems.md | L6 | 701 | 6 | 3 | 1 | 8 | 12 | ✅ |
-| concept\06_ecosystem\19_security_practices.md | L6 | 672 | 6 | 3 | 1 | 7 | 12 | ✅ |
+| concept\06_ecosystem\19_security_practices.md | L6 | 713 | 6 | 3 | 1 | 8 | 12 | ✅ |
 | concept\06_ecosystem\20_licensing_and_compliance.md | L6 | 630 | 6 | 3 | 1 | 6 | 12 | ✅ |
 | concept\06_ecosystem\21_game_development.md | L6 | 627 | 6 | 3 | 1 | 8 | 12 | ✅ |
 | concept\06_ecosystem\22_embedded_systems.md | L6 | 700 | 6 | 3 | 1 | 8 | 12 | ✅ |
 | concept\06_ecosystem\23_database_access.md | L6 | 748 | 6 | 3 | 1 | 8 | 12 | ✅ |
 | concept\06_ecosystem\24_cloud_native.md | L6 | 666 | 6 | 3 | 1 | 8 | 12 | ✅ |
-| concept\06_ecosystem\25_cli_development.md | L6 | 699 | 6 | 3 | 1 | 8 | 12 | ✅ |
+| concept\06_ecosystem\25_cli_development.md | L6 | 714 | 6 | 3 | 1 | 9 | 12 | ✅ |
 | concept\06_ecosystem\26_game_development.md | L6 | 650 | 6 | 3 | 1 | 7 | 12 | ✅ |
 | concept\06_ecosystem\27_web_frameworks.md | L6 | 924 | 6 | 4 | 3 | 11 | 12 | ✅ |
 | concept\06_ecosystem\28_devops_and_ci_cd.md | L6 | 730 | 6 | 3 | 2 | 6 | 12 | ✅ |
@@ -238,11 +238,11 @@ Enter the new date: (yy-mm-dd)
 | concept\06_ecosystem\40_reactive_programming.md | L6 | 1010 | 6 | 3 | 0 | 14 | 12 | ✅ |
 | concept\06_ecosystem\41_workflow_theory.md | L6 | 1321 | 6 | 3 | 0 | 17 | 12 | ✅ |
 | concept\06_ecosystem\42_api_design_patterns.md | L6 | 1222 | 6 | 3 | 0 | 19 | 12 | ✅ |
-| concept\06_ecosystem\43_security_cryptography.md | L6 | 826 | 6 | 3 | 0 | 15 | 12 | ✅ |
+| concept\06_ecosystem\43_security_cryptography.md | L6 | 867 | 6 | 3 | 0 | 16 | 12 | ✅ |
 | concept\06_ecosystem\45_compiler_internals.md | L6 | 785 | 6 | 3 | 0 | 7 | 12 | ✅ |
 | concept\06_ecosystem\46_machine_learning_ecosystem.md | L6 | 861 | 6 | 3 | 0 | 14 | 12 | ✅ |
 | concept\06_ecosystem\47_compiler_infrastructure.md | L6 | 303 | 6 | 2 | 0 | 1 | 12 | ✅ |
-| concept\06_ecosystem\47_formal_verification_tools.md | L6 | 788 | 6 | 3 | 0 | 11 | 12 | ✅ |
+| concept\06_ecosystem\47_formal_verification_tools.md | L6 | 787 | 6 | 3 | 0 | 11 | 12 | ✅ |
 | concept\06_ecosystem\48_data_engineering.md | L6 | 868 | 6 | 3 | 0 | 12 | 12 | ✅ |
 | concept\06_ecosystem\48_industrial_case_studies.md | L6 | 307 | 6 | 1 | 0 | 2 | 12 | ✅ |
 | concept\06_ecosystem\49_game_engine_internals.md | L6 | 1059 | 6 | 3 | 0 | 13 | 12 | ✅ |

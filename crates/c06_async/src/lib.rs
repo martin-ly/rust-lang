@@ -1,3 +1,5 @@
+//! Lib
+
 // [来源: Rust Reference / RFC 2394 / RFC 3185]
 //! Async/await, futures, streams, and runtime integrations (Tokio, Smol).
 #![allow(clippy::type_complexity)]

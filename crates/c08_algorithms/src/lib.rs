@@ -1,3 +1,5 @@
+//! Lib
+
 // [来源: Rust Standard Library / The Algorithm Design Manual]
 //! Collections, iterators, and algorithmic patterns in Rust.
 #![allow(clippy::type_complexity)]

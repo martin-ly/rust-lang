@@ -11,8 +11,7 @@ use std::collections::HashMap;
 use std::io::{Read, Write};
 use std::process::{Child, Command, ExitStatus, Stdio};
 use std::sync::{Arc, Mutex};
-use std::time::SystemTime;
-use std::time::{Duration, Instant};
+use std::time::{Duration, Instant, SystemTime};
 
 /// 进程管理器
 /// process manager
@@ -90,7 +89,10 @@ impl ProcessManager {
 
         let managed_process = ManagedProcess { child, info };
 
-        self.processes.lock().expect("进程管理锁被污染").insert(pid, managed_process);
+        self.processes
+            .lock()
+            .expect("进程管理锁被污染")
+            .insert(pid, managed_process);
 
         Ok(pid)
     }
@@ -493,7 +495,10 @@ impl ProcessGroupManager {
             created_at: SystemTime::now(),
         };
 
-        self.groups.lock().expect("进程组锁被污染").insert(pgid, group);
+        self.groups
+            .lock()
+            .expect("进程组锁被污染")
+            .insert(pgid, group);
         pgid
     }
 

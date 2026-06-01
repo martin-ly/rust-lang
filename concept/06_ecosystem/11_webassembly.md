@@ -82,6 +82,25 @@ Wasm 的内存模型:
 > **设计洞察**: Wasm 的**无未定义行为**保证与 Rust 的**安全子集**高度契合。C/C++ 编译到 Wasm 时，许多 UB 行为（如越界访问）被 Wasm 运行时捕获；而 Rust 在编译期就消除了这类 UB。
 > [来源: [WebAssembly Specification — Security](https://webassembly.github.io/spec/core/appendix/security.html)]
 
+**可编译示例** — 极简 Wasm 导出函数：
+
+```rust
+/// 编译目标: wasm32-unknown-unknown
+/// 此函数可被 JavaScript 或其他宿主直接调用
+#[no_mangle]
+pub extern "C" fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+
+#[no_mangle]
+pub extern "C" fn greet(name_ptr: *const u8, name_len: usize) {
+    // 实际项目中应使用 wasm-bindgen 处理字符串
+    let _slice = unsafe {
+        std::slice::from_raw_parts(name_ptr, name_len)
+    };
+}
+```
+
 ---
 
 ### 1.2 Rust → Wasm 的编译模型

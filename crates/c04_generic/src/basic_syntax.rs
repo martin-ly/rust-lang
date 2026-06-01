@@ -1,3 +1,5 @@
+//! Basic Syntax
+
 /*
  * Rust 泛型基础语法模块 - Rust 1.89 版本增强
  *

@@ -1,3 +1,5 @@
+//! Factory
+
 #[allow(unused)]
 #[derive(Copy, Clone)]
 pub struct Product {

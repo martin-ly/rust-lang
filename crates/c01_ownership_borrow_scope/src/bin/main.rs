@@ -1,3 +1,5 @@
+//! Main
+
 fn main() {
     borrow_scope();
     println!("For fill cargo run");

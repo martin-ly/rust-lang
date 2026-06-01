@@ -200,7 +200,7 @@ TypeScript 核心特征:
   ├── 风险: 编译错误（而非运行时泄漏）
   ├── 确定性: 无 GC pause，内存行为可预测
   └── 典型场景: 系统编程、嵌入式、高性能服务
-  > [来源: [TRPL — Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)] · [来源: [Rustnomicon](https://doc.rust-lang.org/nomicon/)]
+  > [来源: [TRPL — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)] · [来源: [Rustnomicon](https://doc.rust-lang.org/nomicon/)]
 
   内存泄漏边界:
   ├── TypeScript: 可能（循环引用、全局缓存）

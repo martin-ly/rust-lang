@@ -1,3 +1,5 @@
+//! Benchmarks Simple
+
 // Rust 1.89 类型系统性能测试 - 简化版本
 // 文件: benchmarks_simple.rs
 // 创建日期: 2025-01-27

@@ -1,3 +1,5 @@
+//! Wasm Performance
+
 #![forbid(unsafe_code)]
 
 //! 本模块涵盖 WASM 二进制体积优化、启动时间优化、JS/WASM 边界开销分析，

@@ -1,9 +1,8 @@
 > **内容分级**: [专家级]
 
 # Formal Verification Tools（形式化验证工具生态）
->
-> **受众**: [进阶]
 
+> **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: C×Eva — 评价 Rust 形式化验证工具的技术能力与适用边界
@@ -542,7 +541,7 @@ Rust MIR
                       └── 无偏好 → Verus（生态最活跃）✅
 ```
 
-> **来源**: [Formal Methods for Rust — Rust Lang Blog](https://blog.rust-lang.org/inside-rust/2023/03/17/formal-methods.html) · [Rust Verification Workshop](https://rustverify.com/)
+> **来源**: [Formal Methods for Rust — Rust Lang Blog](https://rustverify.com/) · [Rust Verification Workshop](https://rustverify.com/)
 
 ---
 

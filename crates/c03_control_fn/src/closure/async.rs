@@ -1,3 +1,5 @@
+//! Async
+
 // 定义一个异步函数，接受一个实现 FnOnce 的闭包
 #[allow(unused)]
 pub async fn async_fn_once<F>(f: F)

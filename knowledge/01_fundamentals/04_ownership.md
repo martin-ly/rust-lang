@@ -56,7 +56,7 @@
 >
 > **⏱️ 预计学习时间**：45-60 分钟
 > **📚 难度级别**：⭐⭐⭐ 中等
-> **权威来源**: [The Rust Programming Language — Ch04](https://doc.rust-lang.org/book/ch04-00-ownership.html),
+> **权威来源**: [The Rust Programming Language — Ch04](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html),
 > [Rust Reference — Ownership](https://doc.rust-lang.org/reference/ownership.html),
 > [Rustonomicon — Ownership](https://doc.rust-lang.org/nomicon/ownership.html),
 > [RustBelt (Jung et al., POPL 2018)](https://plv.mpi-sws.org/rustbelt/)

@@ -69,7 +69,7 @@
                                 └── 步骤5: 什么时候该选哪个？
                                     └── 安全关键/并发/新系统 → Rust；硬实时/遗留代码/模板元编程 → C++[来源: [Rust vs C++ — JetBrains Survey](https://www.jetbrains.com/lp/devecosystem-2024/)]
                                         └── 步骤6: 对比的边界在哪里？
-                                            └── 单地址空间内Rust封闭，跨网络/FFI/AI生成层需额外形式化[来源: [Ferrous Systems — Safety Critical Rust](https://ferrous-systems.com/safety-critical-rust/)]
+                                            └── 单地址空间内Rust封闭，跨网络/FFI/AI生成层需额外形式化[来源: [Ferrous Systems — Safety Critical Rust](https://ferrocene.dev/)]
 ```
 
 **递进关系**: 历史语境 → 数学根基 → 实现机制 → 工程决策 → 系统边界。每一步都是下一步的必要前提。

@@ -1,3 +1,5 @@
+//! Lib
+
 // [来源: Rust Reference / Design Patterns (GoF)]
 //! Idiomatic Rust design patterns and architectural strategies.
 #![allow(clippy::type_complexity)]

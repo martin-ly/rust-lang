@@ -1,3 +1,5 @@
+//! Tests
+
 use super::*;
 
 #[test]
