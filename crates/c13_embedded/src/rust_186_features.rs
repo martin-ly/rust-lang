@@ -77,6 +77,8 @@ mod tests {
 /// function + ``#[target_feature]`` combination allow ，but point must in `unsafe` in 。
 /// function + ``#[target_feature]`` combination ，but point must in `unsafe` in 。
 ///
+/// # Safety
+///
 /// 调用者必须通过 `is_x86_feature_detected!("sse2")` 等方式
 /// 确保目标平台支持 SSE2 特性，否则调用此函数是未定义行为。
 /// goal platform SSE2 feature ，this function definition as 。

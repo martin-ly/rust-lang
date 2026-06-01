@@ -17,7 +17,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Cargo Script 单文件脚本指南](#cargo-script-单文件脚本指南)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [1. 什么是 Cargo Script？](#1-什么是-cargo-script)
     - [1.1 为什么需要它？](#11-为什么需要它)
     - [1.2 适用场景](#12-适用场景)

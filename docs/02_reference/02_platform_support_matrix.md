@@ -18,7 +18,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 平台支持矩阵（截至 Rust 1.95.0）](#rust-平台支持矩阵截至-rust-1950)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [一、Rust 1.95.0 新增 / 变更的平台支持](#一rust-1950-新增--变更的平台支持)
     - [1.1 Tier 2 with Host Tools（新增）](#11-tier-2-with-host-tools新增)
     - [1.2 Tier 2（新增）](#12-tier-2新增)

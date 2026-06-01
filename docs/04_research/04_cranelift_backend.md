@@ -15,7 +15,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Cranelift 后端编译加速跟踪报告](#cranelift-后端编译加速跟踪报告)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [1. Cranelift 简介](#1-cranelift-简介)
     - [1.1 项目起源](#11-项目起源)
     - [1.2 架构位置](#12-架构位置)

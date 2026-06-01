@@ -34,6 +34,8 @@ use std::mem::MaybeUninit;
 
 /// 利用 1.92 文档化 layout Guarantee。
 ///
+/// # Safety
+///
 /// 调用者必须确保  中的每个元素都已被正确初始化。
 /// The caller must ensure every element in  has been properly initialized.
 /// must in element is 。

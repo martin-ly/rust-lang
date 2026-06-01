@@ -74,7 +74,7 @@
     - [06.3 异步范式演进：从 Future 到 Async Closures](#063-异步范式演进从-future-到-async-closures)
     - [06.4 Async Closures 预研深度梳理](#064-async-closures-预研深度梳理)
     - [06.5 Return Type Notation (RTN) 预研](#065-return-type-notation-rtn-预研)
-    - [06.6 async-std [已归档] \[已归档\] 迁移方案](#066-async-std [已归档]-已归档-迁移方案)
+    - [06.6 async-std \[已归档\] 迁移方案](#066-async-std-已归档-迁移方案)
     - [06.7 权威来源对齐](#067-权威来源对齐)
   - [07. 进程与 OS (c07\_process)](#07-进程与-os-c07_process)
     - [07.1 特性树图](#071-特性树图)

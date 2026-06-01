@@ -90,6 +90,8 @@ mod tests {
 /// Safe functions + ``#[target_feature]`` combination is allowed, but the call site must be in an `unsafe` block.
 /// function + ``#[target_feature]`` combination ，but point must in `unsafe` in 。
 ///
+/// # Safety
+///
 /// 调用者必须通过 `is_x86_feature_detected!("sse2")` 等方式
 /// 确保目标平台支持 SSE2 特性，否则调用此函数是未定义行为。
 /// Ensure the target platform supports SSE2; otherwise, calling this function is undefined behavior.
