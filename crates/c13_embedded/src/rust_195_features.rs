@@ -76,6 +76,9 @@ impl RawPointerUncheckedExamples {
     /// Example of 1：MMIO 寄存器访问（嵌入式corescenario）
     /// 在嵌入式系统中，外设寄存器映射到固定内存地址，硬件保证其有效。
     /// in system in ，outside to memory ，hardware its effective 。
+    /// # Safety
+    ///
+    /// `addr` 必须是硬件映射的有效寄存器地址。
     pub unsafe fn read_mmio_register<T>(addr: *const T) -> T
     where
         T: Copy,
@@ -87,6 +90,9 @@ impl RawPointerUncheckedExamples {
     /// 示例 2：MMIO 寄存器写入
     /// example 2：MMIO
     /// Example of 2：MMIO 寄存器Write
+    /// # Safety
+    ///
+    /// `addr` 必须是硬件映射的有效寄存器地址。
     pub unsafe fn write_mmio_register<T>(addr: *mut T, value: T) {
         // SAFETY: 调用者保证 addr 是硬件映射的有效寄存器地址
         unsafe {
@@ -152,6 +158,9 @@ pub unsafe fn read_status_via_addr_of(regs: *const DeviceRegisters) -> u32 {
 
 /// 示例 5：性能对比基准（概念性）
 /// example 5：performance to （concept ）
+///
+/// # Safety
+///
 /// 调用者必须确保 `ptr` 非 null 且指向有效内存。
 /// must `ptr` null and effective memory 。
 pub unsafe fn hot_path_access_unchecked(ptr: *const u32) -> u32 {
@@ -169,6 +178,9 @@ pub unsafe fn hot_path_access_checked(ptr: *const u32) -> Option<u32> {
 
 /// 初始化后通过 `as_ref_unchecked` 访问（已知已初始化）。
 /// after `as_ref_unchecked` （）。
+///
+/// # Safety
+///
 /// `f` 必须正确初始化传入的引用。
 /// `f` must reference 。
 pub unsafe fn init_and_access<T, F>(f: F) -> T
@@ -227,6 +239,9 @@ impl PowerPcAsmExamples {
         }
     }
 
+    /// # Safety
+    ///
+    /// 仅在对应架构上调用。
     #[cfg(not(any(target_arch = "powerpc", target_arch = "powerpc64")))]
     pub unsafe fn ppc_nop() {
         // 在 non-PowerPC 目标上，内联汇编不可用
@@ -293,6 +308,9 @@ impl AsmCfgExamples {
     /// 2. 不会导致数据竞争或死锁
     /// 2. data or lock
     /// 2. or lock
+    /// # Safety
+    ///
+    /// 调用者必须确保在正确的上下文中使用内存屏障。
     #[cfg(any(target_arch = "x86_64", target_arch = "aarch64"))]
     pub unsafe fn cross_platform_fence() {
         unsafe {
@@ -308,6 +326,9 @@ impl AsmCfgExamples {
 
     /// Host 目标模拟（仅用于文档编译）
     /// Host goal （）
+    /// # Safety
+    ///
+    /// 调用者必须确保在正确的上下文中使用内存屏障。
     #[cfg(not(any(target_arch = "x86_64", target_arch = "aarch64")))]
     pub unsafe fn cross_platform_fence() {
         std::sync::atomic::fence(std::sync::atomic::Ordering::SeqCst);
@@ -325,6 +346,9 @@ impl AsmCfgExamples {
     /// 1. point program state
     /// 2. 仅在调试环境中使用断点
     /// 2. in environment in point
+    /// # Safety
+    ///
+    /// 调用者必须确保断点指令不会破坏程序状态。
     #[cfg(any(target_arch = "x86_64", target_arch = "aarch64"))]
     pub unsafe fn nop_with_optional_breakpoint(_enable_breakpoint: bool) {
         unsafe {
@@ -334,6 +358,9 @@ impl AsmCfgExamples {
 
     /// Host 目标模拟
     /// Host goal
+    /// # Safety
+    ///
+    /// 调用者必须确保断点指令不会破坏程序状态。
     #[cfg(not(any(target_arch = "x86_64", target_arch = "aarch64")))]
     pub unsafe fn nop_with_optional_breakpoint(_enable_breakpoint: bool) {
         // 在 host 目标上无操作

@@ -16,7 +16,9 @@
 //! - O(n²) - time
 //! - O(n²) - 平方time
 //! 运行方式:
+//!
 //! Run way :
+//!
 //! cargo run --example algorithm_complexity_demo
 //! ```
 use std::time::Instant;

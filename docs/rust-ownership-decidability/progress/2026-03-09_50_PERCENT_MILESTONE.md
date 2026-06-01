@@ -10,10 +10,11 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [50% 里程碑报告](#50-里程碑报告)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [最新进展](#最新进展)
     - [新增内容](#新增内容)
       - [1. DecidabilityTheorems.v (120 行)](#1-decidabilitytheoremsv-120-行)
@@ -33,8 +34,10 @@
   - [下一步计划](#下一步计划)
     - [目标: 60%](#目标-60)
   - [持续承诺](#持续承诺)
-  - **下次目标**: 60%
+  - [**下次目标**: 60%](#下次目标-60)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 最新进展
 >
@@ -61,6 +64,7 @@
 - ✅ 无效借用反例
 
 ### 当前统计
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -74,9 +78,11 @@ Coq 代码:       2,753 行 (+333 行)
 ---
 
 ## 完成度更新
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Phase 1: 基础构建
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - ✅ 100% 完成
@@ -84,6 +90,7 @@ Coq 代码:       2,753 行 (+333 行)
 - ✅ 核心定理框架
 
 ### Phase 2: 可判定性深化
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - 🔄 60% 完成
@@ -91,6 +98,7 @@ Coq 代码:       2,753 行 (+333 行)
 - 🔄 完善证明
 
 ### Phase 3-4: 扩展和发布
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - ⏳ 待开始
@@ -204,7 +212,6 @@ Theorem rust_ownership_system_fully_decidable :
 - [progress 目录](./README.md)
 - [上级目录](../README.md)
 
-
 ---
 
 ## 权威来源索引
@@ -239,4 +246,3 @@ Theorem rust_ownership_system_fully_decidable :
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

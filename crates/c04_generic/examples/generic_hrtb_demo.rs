@@ -5,8 +5,11 @@
 //! - for<'a>
 //! - 实际应用场景
 //! - actual application scenario
+//!
 //! 运行方式:
+//!
 //! Run way :
+//!
 //! cargo run --example generic_hrtb_demo
 //! ```
 

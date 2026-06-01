@@ -2,10 +2,14 @@
 //! generic example
 //! - 实际应用场景
 //! - actual application scenario
+//!
 //! 本示例展示如何使用现有特性模拟特化效果
 //! this example feature effect
+//!
 //! 运行方式:
+//!
 //! Run way :
+//!
 //! cargo run --example generic_specialization_demo
 //! ```
 use std::fmt::Display;

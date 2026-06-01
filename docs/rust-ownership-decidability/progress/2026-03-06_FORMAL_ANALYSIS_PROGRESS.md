@@ -10,16 +10,17 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [形式化模型分析与论证推进报告](#形式化模型分析与论证推进报告)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [本次推进完成的工作](#本次推进完成的工作)
-    - [✅ 1. 统一理论框架文档](#1-统一理论框架文档)
-    - [✅ 2. 语义等价性证明文档](#2-语义等价性证明文档)
-    - [✅ 3. 类型-所有权统一理论文档](#3-类型-所有权统一理论文档)
-    - [✅ 4. 定理依赖图更新](#4-定理依赖图更新)
-    - [✅ 5. 证明策略库文档](#5-证明策略库文档)
+    - [✅ 1. 统一理论框架文档](#-1-统一理论框架文档)
+    - [✅ 2. 语义等价性证明文档](#-2-语义等价性证明文档)
+    - [✅ 3. 类型-所有权统一理论文档](#-3-类型-所有权统一理论文档)
+    - [✅ 4. 定理依赖图更新](#-4-定理依赖图更新)
+    - [✅ 5. 证明策略库文档](#-5-证明策略库文档)
   - [本次推进统计](#本次推进统计)
   - [剩余未完成工作](#剩余未完成工作)
     - [Coq 形式化层（代码级）](#coq-形式化层代码级)
@@ -28,15 +29,17 @@
       - [低优先级](#低优先级)
     - [估计剩余工作量](#估计剩余工作量)
   - [质量保证](#质量保证)
-    - [文档完整性检查 ✅](#文档完整性检查)
-    - [形式化完整性检查 ⚠️](#形式化完整性检查)
+    - [文档完整性检查 ✅](#文档完整性检查-)
+    - [形式化完整性检查 ⚠️](#形式化完整性检查-️)
   - [下一步行动建议](#下一步行动建议)
     - [短期（1-2周）](#短期1-2周)
     - [中期（3-4周）](#中期3-4周)
     - [长期（1-2月）](#长期1-2月)
   - [结论](#结论)
-  - *推进负责人: Rust-Ownership-Decidability Team*
+  - [*推进负责人: Rust-Ownership-Decidability Team*](#推进负责人-rust-ownership-decidability-team)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 本次推进完成的工作
 >
@@ -91,6 +94,7 @@
 ---
 
 ### ✅ 3. 类型-所有权统一理论文档
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **文件**: `formal-foundations/proofs/type-ownership-unified-theory.md`
@@ -117,6 +121,7 @@
 ---
 
 ### ✅ 4. 定理依赖图更新
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **文件**: `THEOREM_10_dependency_graph.md`
@@ -130,6 +135,7 @@
 ---
 
 ### ✅ 5. 证明策略库文档
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **文件**: `formal-foundations/proofs/PROOF_PATTERNS.md`
@@ -155,6 +161,7 @@
 ---
 
 ## 本次推进统计
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 类别 | 数量 | 行数 | 字节数 |
@@ -166,9 +173,11 @@
 ---
 
 ## 剩余未完成工作
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### Coq 形式化层（代码级）
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 根据 `TECHNICAL_DEBT.md` 和框架分析，仍有以下 `admit` 需要填充：
@@ -193,6 +202,7 @@
 - [ ] `program_correctness` - 程序正确性
 
 ### 估计剩余工作量
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 任务类别 | 估计时间 | 复杂度 |
@@ -205,9 +215,11 @@
 ---
 
 ## 质量保证
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 文档完整性检查 ✅
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [x] 统一理论框架文档
@@ -217,6 +229,7 @@
 - [x] 理论-实践映射
 
 ### 形式化完整性检查 ⚠️
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [x] 语义等价性证明（文档层）
@@ -228,9 +241,11 @@
 ---
 
 ## 下一步行动建议
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 短期（1-2周）
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **填充关键 admit**
@@ -243,6 +258,7 @@
    - 验证语义等价证明的一致性
 
 ### 中期（3-4周）
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **完成 Coq 层证明**
@@ -254,6 +270,7 @@
    - 证明检查脚本
 
 ### 长期（1-2月）
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. **研究前沿扩展**
@@ -299,7 +316,6 @@
 
 - [progress 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 
@@ -357,4 +373,3 @@
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

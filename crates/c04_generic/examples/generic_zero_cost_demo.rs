@@ -7,8 +7,11 @@
 //! - performance to （generic vs volume type ）
 //! - 零运行时开销验证
 //! - runtime overhead
+//!
 //! 运行方式:
+//!
 //! Run way :
+//!
 //! cargo run --example generic_zero_cost_demo
 //! ```
 use std::time::Instant;

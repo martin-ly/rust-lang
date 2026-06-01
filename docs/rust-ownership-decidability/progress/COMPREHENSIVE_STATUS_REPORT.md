@@ -10,10 +10,11 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权系统可判定性 - 综合状态报告](#rust-所有权系统可判定性---综合状态报告)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [执行摘要](#执行摘要)
   - [交付物清单](#交付物清单)
     - [1. 核心 Coq 文件 (3,514 行)](#1-核心-coq-文件-3514-行)
@@ -52,8 +53,10 @@
     - [文献](#文献)
     - [工具](#工具)
   - [结论](#结论)
-  - **下次报告**: 2026-03-13 (Week 2 结束)
+  - [**下次报告**: 2026-03-13 (Week 2 结束)](#下次报告-2026-03-13-week-2-结束)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 执行摘要
 >
@@ -88,6 +91,7 @@
 | **总计** | **2,653** | | |
 
 ### 2. 元模型文档 (2,250 行)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 文档 | 行数 | 状态 | 描述 |
@@ -100,6 +104,7 @@
 | **总计** | **2,000+** | | |
 
 ### 3. 进度跟踪文档
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - `10_progress_tracking.md` - 持续跟踪
@@ -111,9 +116,11 @@
 ---
 
 ## 核心技术成果
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 1. Linearizability 的 Coq 形式化
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```coq
@@ -129,6 +136,7 @@ Definition Linearizable (Γ : type_env) : Prop :=
 **意义**: 这是 Payet et al. (NFM 2022) 论文中终止性条件的直接形式化，是证明 borrow checking 终止性的关键。
 
 ### 2. 完整的类型系统
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 实现了 Rust 核心类型系统：
@@ -140,6 +148,7 @@ Definition Linearizable (Γ : type_env) : Prop :=
 - 生命周期/区域系统
 
 ### 3. 操作语义
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 定义了两种操作语义并建立联系：
@@ -149,6 +158,7 @@ Definition Linearizable (Γ : type_env) : Prop :=
 - **等价性定理**: 两者等价
 
 ### 4. 所有权安全判断
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 核心判断 `ownership_safe` 实现了 Rust 的所有权规则：
@@ -160,11 +170,13 @@ Definition Linearizable (Γ : type_env) : Prop :=
 ---
 
 ## 验证示例
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 所有示例都通过类型检查：
 
 ### 示例 1: 基本不可变借用
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -176,6 +188,7 @@ let y = &x;
 ✅ 类型检查通过
 
 ### 示例 2: 可变借用
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -188,6 +201,7 @@ let y = &mut x;
 ✅ 类型检查通过
 
 ### 示例 3: 多个共享借用
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -200,6 +214,7 @@ let z = &x;
 ✅ 类型检查通过
 
 ### 示例 4: Box 类型
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -210,6 +225,7 @@ let x = Box::new(5);
 ✅ 类型检查通过
 
 ### 示例 5: 借用链
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -224,6 +240,7 @@ let z = &y;
 ---
 
 ## 定理证明状态
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 定理 | 状态 | 完成度 | 文件 |
@@ -236,6 +253,7 @@ let z = &y;
 | 可判定性 | ⏳ | 0% | 待创建 |
 
 ### 已完成的引理
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 1. `ty_rank_nonneg` - 类型秩非负
@@ -244,6 +262,7 @@ let z = &y;
 4. `all_examples_type_safe` - 综合类型安全定理
 
 ### 待完成的证明
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. `linearizable_acyclic` - Linearizability 蕴含无环性 (admit)
@@ -254,9 +273,11 @@ let z = &y;
 ---
 
 ## 质量指标
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 代码质量
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -268,6 +289,7 @@ Coq 编译:        100% ✅ (无错误)
 ```
 
 ### 文档质量
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -278,6 +300,7 @@ Coq 文档:        10% ⏳
 ```
 
 ### 项目健康度
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -290,6 +313,7 @@ Coq 文档:        10% ⏳
 ---
 
 ## 风险与缓解
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 风险 | 概率 | 影响 | 状态 | 缓解措施 |
@@ -302,9 +326,11 @@ Coq 文档:        10% ⏳
 ---
 
 ## 下周计划 (2026-03-09 至 2026-03-13)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 目标
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - 完成所有核心定理的证明
@@ -312,6 +338,7 @@ Coq 文档:        10% ⏳
 - 达到 Phase 1 100%
 
 ### 详细任务
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 #### Day 3 (周一) - Termination 完成
@@ -345,6 +372,7 @@ Coq 文档:        10% ⏳
 - [ ] 编写 Week 2 报告
 
 ### 里程碑目标
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -357,6 +385,7 @@ Coq 代码: 3,500 -> 5,000+ 行
 ---
 
 ## 长期路线图
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -376,9 +405,11 @@ Phase 4 (验证发布)          ░░░░░░░░░░░░░░░░
 ---
 
 ## 资源使用
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 文献
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [x] Oxide: The Essence of Rust
@@ -387,6 +418,7 @@ Phase 4 (验证发布)          ░░░░░░░░░░░░░░░░
 - [ ] Stacked Borrows: An Aliasing Model for Rust
 
 ### 工具
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - Coq 8.17 ✅
@@ -396,6 +428,7 @@ Phase 4 (验证发布)          ░░░░░░░░░░░░░░░░
 ---
 
 ## 结论
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **第一周成果显著**，超额完成了预期目标。核心基础已经建立，包括：
@@ -430,11 +463,11 @@ Phase 4 (验证发布)          ░░░░░░░░░░░░░░░░
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [progress 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 
@@ -502,4 +535,3 @@ Phase 4 (验证发布)          ░░░░░░░░░░░░░░░░
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

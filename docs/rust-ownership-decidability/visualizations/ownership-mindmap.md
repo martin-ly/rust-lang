@@ -38,7 +38,7 @@ graph TD
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [所有权系统思维导图](#所有权系统思维导图)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [ASCII版本](#ascii版本)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)

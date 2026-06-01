@@ -6,12 +6,16 @@
 /// - `core::intrinsics::breakpoint` — 软件断点（调试器 hook）
 /// - `#[rustc_align(N)]` — 函数级别对齐控制
 /// - `#[rustc_align(N)]` — function level to
+///
 /// **⚠️ 需要 nightly Rust + `#![feature(core_intrinsics, fn_align)]`**
 pub struct Rust198EmbeddedFeatures;
 
 impl Rust198EmbeddedFeatures {
     /// 触发调试断点
     /// point
+    ///
+    /// # Safety
+    ///
     /// 当程序在调试器下运行时，这会暂停执行并允许检查状态。
     /// when program in under runtime ，and allow state 。
     /// when program in under runtime ，and state 。

@@ -289,6 +289,7 @@ impl MathConstants for f64 {
 /// - **f32**: in n > 35 obvious
 /// - **f64**: 在 n > 70 时开始出现明显精度误差
 /// - **f64**: in n > 70 obvious
+///
 /// 对于更大的 n 值，建议使用整数实现的斐波那契计算。
 /// to n ，。
 /// to于更大 n 值，建议Use整数Implementation of斐波那契Calculate。
@@ -438,6 +439,7 @@ impl<V: Clone> Default for CharMap<V> {
 /// # 1. improvegenerictype inference / Improved Generic Type Inference
 /// 智能容器 - 演示改进的泛型推断
 /// - demonstration generic infer
+///
 /// 智能容器 - Demonstration of改进genericinfer
 /// Rust 1.94.0: 更智能generictype inference
 #[derive(Debug, Clone)]

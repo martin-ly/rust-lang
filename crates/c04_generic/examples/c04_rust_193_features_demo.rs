@@ -1,6 +1,7 @@
 //! Rust 1.93.0 泛型编程相关 API 演示
 //! Rust 1.93.0 generic API demonstration
 //! - Duration::from_nanos_u128 - 泛型时间计算
+//!
 //! 运行: cargo run -p c04_generic --example rust_193_features_demo
 use std::time::Duration;
 

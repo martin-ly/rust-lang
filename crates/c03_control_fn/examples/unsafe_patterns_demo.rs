@@ -6,6 +6,7 @@
 //! - addr_of_mut!（未初始化字段地址获取）
 //! - addr_of_mut!（field ）
 //! - unsafe trait / unsafe impl（自定义不安全 trait）
+//!
 //! 运行：cargo run --example unsafe_patterns_demo -p c03_control_fn
 
 use std::mem::{ManuallyDrop, MaybeUninit};
@@ -23,8 +24,14 @@ struct IntrusiveNode {
 fn demo_non_null() {
     println!("=== NonNull<T> 侵入式链表 ===");
 
-    let mut a = Box::new(IntrusiveNode { value: 1, next: None });
-    let mut b = Box::new(IntrusiveNode { value: 2, next: None });
+    let mut a = Box::new(IntrusiveNode {
+        value: 1,
+        next: None,
+    });
+    let mut b = Box::new(IntrusiveNode {
+        value: 2,
+        next: None,
+    });
 
     // SAFETY: Box::as_mut() returns a valid, non-null, unique reference.
     let a_ptr = NonNull::new(Box::as_mut(&mut a)).unwrap();
@@ -158,8 +165,7 @@ fn demo_maybe_uninit_array() {
     println!("\n=== MaybeUninit 条件初始化数组 ===");
 
     const N: usize = 5;
-    let mut buffer: [MaybeUninit<i32>; N] =
-        unsafe { MaybeUninit::uninit().assume_init() };
+    let mut buffer: [MaybeUninit<i32>; N] = unsafe { MaybeUninit::uninit().assume_init() };
 
     // 条件初始化前 3 个元素
     for (i, slot) in buffer.iter_mut().enumerate().take(3) {

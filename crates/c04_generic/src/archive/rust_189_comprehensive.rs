@@ -22,8 +22,11 @@
 //! ###
 //! 1. 更新 Cargo.toml: `rust-version = "1.92"`
 //! 1. Update Cargo.toml: `rust-version = "1.92"`
+//! 
 //! 参考:
+//!
 //! Reference:
+//!
 //! reference :
 //! - [历史版本: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 //! - [Historical version: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
@@ -171,6 +174,7 @@ pub mod enhanced_const_generics {
 
     /// 固定大小矩阵 - 展示常量泛型
     /// - constant generic
+    ///
     /// 固定大小矩阵 - displayconst generic
     #[derive(Debug, Clone, PartialEq)]
     #[allow(clippy::type_complexity)]
@@ -432,6 +436,7 @@ pub mod trait_upcasting {
 
     /// 形状管理器 - 展示 trait 上行转换
     /// - trait on conversion
+    ///
     /// 形状管理器 - display trait on行conversion
     #[allow(clippy::type_complexity)]
     pub struct ShapeManager {

@@ -91,6 +91,10 @@ impl<F: FnMut(i32)> CallbackWrapper<F> {
 
     /// Get C 可Callfunction pointerand user_data
     ///
+    /// # Safety
+    ///
+    /// 调用者必须确保返回的函数指针和 user_data 被正确使用，
+    /// 并在不再需要时调用适当的释放函数。
     pub unsafe fn into_raw(
         self,
     ) -> (

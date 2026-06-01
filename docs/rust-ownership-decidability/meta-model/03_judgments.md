@@ -4,10 +4,11 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权系统元模型 - 判断形式](#rust-所有权系统元模型---判断形式)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [1. 判断 (Judgments) 概述](#1-判断-judgments-概述)
   - [2. 语法判断 (Syntactic Judgments)](#2-语法判断-syntactic-judgments)
     - [2.1 类型判断](#21-类型判断)
@@ -47,9 +48,10 @@
     - [7.3 序列规则](#73-序列规则)
     - [7.4 赋值规则](#74-赋值规则)
   - [8. 判断的 Coq 形式化草图](#8-判断的-coq-形式化草图)
-  - **最后更新**: 2026-03-05
+  - [**最后更新**: 2026-03-05](#最后更新-2026-03-05)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 1. 判断 (Judgments) 概述
 >
@@ -124,6 +126,7 @@
 ```
 
 ### 2.3 子类型判断
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -148,6 +151,7 @@
 ```
 
 ### 2.4 良构性判断
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### 2.4.1 类型良构
@@ -197,9 +201,11 @@
 ```
 
 ## 3. 语义判断 (Semantic Judgments)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 3.1 大步求值 (Big-Step Evaluation)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -210,6 +216,7 @@
 ```
 
 ### 3.2 单步求值 (Small-Step Evaluation)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
@@ -219,6 +226,7 @@
 ```
 
 ### 3.3 位置求值 (Place Evaluation)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -228,6 +236,7 @@
 ```
 
 ### 3.4 模式匹配
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
@@ -237,9 +246,11 @@ v ~ pattern ⇒ σ
 ```
 
 ## 4. 元理论判断 (Metatheoretic Judgments)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 4.1 类型保持 (Preservation)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -251,6 +262,7 @@ Theorem Preservation:
 ```
 
 ### 4.2 进展 (Progress)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -263,6 +275,7 @@ Theorem Progress:
 ```
 
 ### 4.3 类型安全 (Type Safety)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -270,6 +283,7 @@ Type Safety = Preservation + Progress
 ```
 
 ### 4.4 终止性 (Termination)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -291,9 +305,11 @@ where:
 ```
 
 ## 5. 辅助判断
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 5.1 自由变量
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -302,6 +318,7 @@ fv(τ) = 类型 τ 中的自由变量集合
 ```
 
 ### 5.2 变量捕获
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
@@ -309,6 +326,7 @@ captured(e) = 闭包 e 捕获的变量集合
 ```
 
 ### 5.3 生命周期包含
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -328,6 +346,7 @@ captured(e) = 闭包 e 捕获的变量集合
 ```
 
 ### 5.4 贷款冲突检查
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -339,6 +358,7 @@ overlap(p₁, p₂) =
 ```
 
 ### 5.5 借用检查
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -348,6 +368,7 @@ check_borrow(Θ, ω, p) = ok | error
 ```
 
 ## 6. 判断之间的关系
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -389,9 +410,11 @@ check_borrow(Θ, ω, p) = ok | error
 ```
 
 ## 7. 判断的推理规则示例
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 7.1 借用规则 (完整版)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
@@ -404,6 +427,7 @@ check_borrow(Θ, ω, p) = ok | error
 ```
 
 ### 7.2 所有权安全核心规则
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -417,6 +441,7 @@ check_borrow(Θ, ω, p) = ok | error
 ```
 
 ### 7.3 序列规则
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
@@ -428,6 +453,7 @@ check_borrow(Θ, ω, p) = ok | error
 ```
 
 ### 7.4 赋值规则
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -440,6 +466,7 @@ check_borrow(Θ, ω, p) = ok | error
 ```
 
 ## 8. 判断的 Coq 形式化草图
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```coq
@@ -504,6 +531,7 @@ Inductive eval :
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [meta-model 目录](./README.md)
@@ -603,4 +631,3 @@ Inductive eval :
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

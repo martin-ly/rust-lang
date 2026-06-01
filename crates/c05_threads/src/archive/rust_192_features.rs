@@ -61,6 +61,8 @@ impl<T> ThreadSafeUninitBuffer<T> {
     /// 在指定位置初始化数据
     /// in position
     ///
+    /// # Safety
+    ///
     /// 调用者必须确保：
     /// The caller must ensure:
     /// must ：
@@ -79,6 +81,8 @@ impl<T> ThreadSafeUninitBuffer<T> {
     /// reference
     /// Get已Initializereference
     ///
+    /// # Safety
+    ///
     /// 调用者必须确保：
     /// The caller must ensure:
     /// must ：
@@ -96,6 +100,8 @@ impl<T> ThreadSafeUninitBuffer<T> {
     /// Gets可变引用
     /// reference
     /// Get可变reference
+    ///
+    /// # Safety
     ///
     /// 调用者必须确保：
     /// The caller must ensure:
@@ -206,6 +212,8 @@ impl ThreadPoolQueue {
     /// 添加任务（线程安全，需要外部同步）
     /// task （thread-safe ，outside synchronous ）
     ///
+    /// # Safety
+    ///
     /// 调用者必须确保：
     /// The caller must ensure:
     /// must ：
@@ -224,6 +232,8 @@ impl ThreadPoolQueue {
     /// 获取任务（需要外部同步）
     /// Gets任务（需要外部同步）
     /// task （outside synchronous ）
+    ///
+    /// # Safety
     ///
     /// 调用者必须确保：
     /// The caller must ensure:
@@ -634,10 +644,7 @@ where
 /// // Archived module example
 /// ```
 /// // module example
-/// let tasks = vec![
-///     ThreadTask::new(1, 10),
-///     ThreadTask::new(2, 20),
-/// ];
+/// let tasks = vec![ThreadTask::new(1, 10), ThreadTask::new(2, 20)];
 /// let manager = create_manager_with_tasks(tasks);
 /// assert_eq!(manager.task_count(), 2);
 /// ```

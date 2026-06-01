@@ -389,6 +389,8 @@ pub mod simd_optimization {
     /// SIMD 向量加法（Requires x86_64 Supports）
     /// SIMD vectoraddition（Requires x86_64 Supports）
     ///
+    /// # Safety
+    ///
     /// 调用者必须确保：
     /// The caller must ensure:
     /// must ：

@@ -8,8 +8,11 @@
 //! - time space
 //! - 算法改进
 //! - algorithm
+//!
 //! 运行方式:
+//!
 //! Run way :
+//!
 //! cargo run --example algorithm_optimization_demo
 //! ```
 use std::collections::HashMap;

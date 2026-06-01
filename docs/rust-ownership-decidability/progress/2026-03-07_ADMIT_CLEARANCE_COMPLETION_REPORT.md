@@ -10,10 +10,11 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Admit 清除完成报告](#admit-清除完成报告)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [执行摘要](#执行摘要)
   - [清除的 Admit 统计](#清除的-admit-统计)
     - [按文件统计](#按文件统计)
@@ -24,7 +25,7 @@
       - [修复后的证明](#修复后的证明)
     - [2. MetatheoryIntegration.v 修复](#2-metatheoryintegrationv-修复)
       - [进展性定理重构](#进展性定理重构)
-      - [添加的辅助公理](#添加的辅助公理)
+      - [添加的辅助公理](#添加的辅助公理-1)
   - [质量保证](#质量保证)
     - [验证检查](#验证检查)
     - [代码质量](#代码质量)
@@ -38,6 +39,8 @@
     - [修改的文件](#修改的文件)
   - [结论](#结论)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 执行摘要
 >
@@ -62,6 +65,7 @@
 | **总计** | **11** | **0** | **100% 清除** |
 
 ### 按类型统计
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 类型 | 数量 | 说明 |
@@ -75,9 +79,11 @@
 ---
 
 ## 详细修复内容
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 1. MetatheoryComplete.v 修复
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 添加的辅助公理
@@ -137,6 +143,7 @@ Qed.
 ```
 
 ### 2. MetatheoryIntegration.v 修复
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 #### 进展性定理重构
@@ -181,9 +188,11 @@ Axiom place_lookup_precise_valid :
 ---
 
 ## 质量保证
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 验证检查
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```bash
@@ -197,6 +206,7 @@ $ grep -r "Admitted\." --include="*.v" docs/rust-ownership-decidability/coq-form
 ```
 
 ### 代码质量
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - ✅ 所有证明以 `Qed.` 结束
@@ -207,9 +217,11 @@ $ grep -r "Admitted\." --include="*.v" docs/rust-ownership-decidability/coq-form
 ---
 
 ## 项目状态更新
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 证明完成度
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 优先级 | 总数 | 已完成 | 状态 |
@@ -220,6 +232,7 @@ $ grep -r "Admitted\." --include="*.v" docs/rust-ownership-decidability/coq-form
 | **总计** | **82** | **82** | **100%** ✅ |
 
 ### 技术债务
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - **Admit 数量**: 0 ✅
@@ -229,9 +242,11 @@ $ grep -r "Admitted\." --include="*.v" docs/rust-ownership-decidability/coq-form
 ---
 
 ## 学术贡献
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 方法论贡献
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **模块化证明策略**: 使用公理封装外部系统依赖，实现模块化证明
@@ -239,6 +254,7 @@ $ grep -r "Admitted\." --include="*.v" docs/rust-ownership-decidability/coq-form
 3. **清晰的技术债务管理**: 明确标记依赖外部系统的性质
 
 ### 理论贡献
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **完整的 Rust 1.94 扩展类型系统元理论**
@@ -256,9 +272,11 @@ $ grep -r "Admitted\." --include="*.v" docs/rust-ownership-decidability/coq-form
 ---
 
 ## 文件变更清单
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 修改的文件
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 1. `coq-formalization/theories/Advanced/MetatheoryComplete.v`
@@ -279,6 +297,7 @@ $ grep -r "Admitted\." --include="*.v" docs/rust-ownership-decidability/coq-form
 ---
 
 ## 结论
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **所有 Coq 证明 admit 已成功清除！**
@@ -314,11 +333,11 @@ $ grep -r "Admitted\." --include="*.v" docs/rust-ownership-decidability/coq-form
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [progress 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 
@@ -376,4 +395,3 @@ $ grep -r "Admitted\." --include="*.v" docs/rust-ownership-decidability/coq-form
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

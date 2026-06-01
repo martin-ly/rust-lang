@@ -10,10 +10,11 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [内容创建批次 2 - 完成报告](#内容创建批次-2---完成报告)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [本次完成内容](#本次完成内容)
     - [1. 扩展 17-unsafe-rust/ (核心目标)](#1-扩展-17-unsafe-rust-核心目标)
     - [2. 填充 10-research-frontiers/](#2-填充-10-research-frontiers)
@@ -30,8 +31,10 @@
   - [下一步建议](#下一步建议)
     - [继续内容创建 (批次 3)](#继续内容创建-批次-3)
     - [优先处理](#优先处理)
-  - *累积新增: 17 文件, ~112 KB*
+  - [*累积新增: 17 文件, ~112 KB*](#累积新增-17-文件-112-kb)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 本次完成内容
 >
@@ -62,6 +65,7 @@
 **小结**: 添加研究前沿内容。
 
 ### 3. 填充 exercises/
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 文件 | 大小 | 描述 |
@@ -73,9 +77,11 @@
 ---
 
 ## 统计
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 新增文件
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 类别 | 数量 | 总大小 |
@@ -84,6 +90,7 @@
 | 更新 README | 2 | - |
 
 ### 内容深度
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 深度 | 数量 |
@@ -196,7 +203,6 @@
 - [progress 目录](./README.md)
 - [上级目录](../README.md)
 
-
 ---
 
 ## 权威来源索引
@@ -231,4 +237,3 @@
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

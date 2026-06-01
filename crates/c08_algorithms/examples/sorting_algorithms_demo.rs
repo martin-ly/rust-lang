@@ -13,7 +13,9 @@
 //! - 插入排序
 //! - insertion sort
 //! 运行方式:
+//!
 //! Run way :
+//!
 //! cargo run --example sorting_algorithms_demo
 //! ```
 use c08_algorithms::sorting::{SortingAlgo, sort_sync};

@@ -11,6 +11,10 @@ use std::sync::atomic::AtomicU32;
 pub struct Rust197ThreadFeatures;
 
 impl Rust197ThreadFeatures {
+    /// # Safety
+    ///
+    /// 调用者必须确保指针有效且正确对齐。
+    /// Caller must ensure the pointer is valid and properly aligned.
     pub unsafe fn atomic_from_ptr(ptr: *mut u32) -> &'static AtomicU32 {
         // SAFETY: caller ensures pointer is valid and aligned
         unsafe { AtomicU32::from_ptr(ptr) }

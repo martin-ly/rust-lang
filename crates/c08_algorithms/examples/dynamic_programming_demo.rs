@@ -10,8 +10,11 @@
 //! - 0-1背包问题
 //! - 0-1problem
 //! - 0-1背包problem
+//!
 //! 运行方式:
+//!
 //! Run way :
+//!
 //! cargo run --example dynamic_programming_demo
 //! ```
 fn main() {

@@ -11,7 +11,9 @@
 //! - 子集生成
 //! - subset
 //! 运行方式:
+//!
 //! Run way :
+//!
 //! cargo run --example backtracking_algorithms_demo
 //! ```
 fn main() {

@@ -336,6 +336,8 @@ impl RealRust195Features {
     /// in `unsafe fn` inside ，operation in `unsafe {}` in 。
     /// in `unsafe fn` inside ，in `unsafe {}` in 。
     ///
+    /// # Safety
+    ///
     /// `ptr` 必须是有效的、正确对齐的指向已初始化 `u32` 的指针。
     /// `ptr` must effective 、to `u32` pointer 。
     pub unsafe fn macro_generated_unsafe_fn(ptr: *const u32) -> u32 {

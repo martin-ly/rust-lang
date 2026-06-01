@@ -11,7 +11,9 @@
 //! - 并行搜索
 //! - parallelism
 //! 运行方式:
+//!
 //! Run way :
+//!
 //! cargo run --example searching_algorithms_demo
 //! ```
 use c08_algorithms::searching::{binary_search_sync, parallel_search};

@@ -58,9 +58,9 @@
     - [10.2 常见模式映射](#102-常见模式映射)
   - [总结](#总结)
   - [参考文献](#参考文献)
-  - *维护者: Rust Comparative Study Team*
+  - [*维护者: Rust Comparative Study Team*](#维护者-rust-comparative-study-team)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 

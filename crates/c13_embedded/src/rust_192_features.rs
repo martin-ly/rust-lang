@@ -27,6 +27,8 @@ use std::mem::MaybeUninit;
 
 /// 利用 1.92 文档化 layout Guarantee。
 ///
+/// # Safety
+///
 /// 调用者必须确保  中的每个元素都已被正确初始化。
 /// must in element is 。
 /// 如果数组包含未初始化的元素，调用此函数将导致未定义行为。

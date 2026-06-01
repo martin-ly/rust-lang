@@ -163,6 +163,7 @@ pub struct UartInstance {
 pub struct ZeroCostAbstraction;
 
 impl ZeroCostAbstraction {
+    /// # Safety
     ///
     /// 调用者负责确保内存安全。
     /// memory safety 。

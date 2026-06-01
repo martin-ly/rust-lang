@@ -55,6 +55,9 @@ impl WasmBuffer193 {
     }
 
     /// Use Rust 1.93 assume_init_ref Get已Initializepartreference
+    ///
+    /// # Safety
+    ///
     /// 调用者必须确保 len <= initialized_len
     pub unsafe fn get_initialized_ref(&self, len: usize) -> &[u8] {
         let len = len.min(self.initialized_len);

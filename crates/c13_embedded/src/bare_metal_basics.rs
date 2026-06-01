@@ -46,7 +46,9 @@ impl PanicHandlerConcept {
 /// 3. **.bss **：will global variable
 /// 4. **调用 `main()` 或 `#[entry]` 函数**
 /// 4. ** `main()` or `#[entry]` function **
+///
 /// 在 Cortex-M 上，`cortex-m-rt` crate 自动处理这些步骤：
+///
 /// use cortex_m_rt::entry;
 ///
 /// #\[entry\]

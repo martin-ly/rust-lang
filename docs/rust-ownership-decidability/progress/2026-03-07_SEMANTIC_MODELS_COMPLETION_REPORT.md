@@ -10,10 +10,11 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [语义模型全面梳理完成报告](#语义模型全面梳理完成报告)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [执行摘要](#执行摘要)
   - [新增文档清单](#新增文档清单)
     - [1. Tree Borrows 全面分析](#1-tree-borrows-全面分析)
@@ -38,6 +39,8 @@
   - [未来工作建议](#未来工作建议)
   - [结论](#结论)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 执行摘要
 >
@@ -72,6 +75,7 @@
 - Jung, R., et al. "Tree Borrows: A new aliasing model for Rust." PLDI 2025.
 
 ### 2. 可执行语义对比分析
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **文件**: `formal-foundations/models/executable-semantics-comparison.md`
@@ -93,6 +97,7 @@
 - Ho, S., & Protzenko, J. "Aeneas: Rust Verification by Functional Translation." POPL 2022.
 
 ### 3. Drop Elaboration 形式化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **文件**: `formal-foundations/models/drop-elaboration-formal.md`
@@ -112,6 +117,7 @@
 - Fukala, V. "Formalization of Rust Drop Elaboration." Bachelor Thesis, ETH Zürich, 2024.
 
 ### 4. 符号借用检查
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **文件**: `formal-foundations/models/symbolic-borrow-checking.md`
@@ -131,6 +137,7 @@
 - Ho, S., Fromherz, A., & Protzenko, J. "Sound Borrow-Checking for Rust via Symbolic Semantics." POPL 2024.
 
 ### 5. RefinedRust 类型系统
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **文件**: `formal-foundations/models/refinedrust-type-system.md`
@@ -149,6 +156,7 @@
 - Gahrler, L., et al. "RefinedRust: A Type System for High-Assurance Verification of Rust Programs." PLDI 2024.
 
 ### 6. Relaxed Memory 模型
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **文件**: `formal-foundations/models/relaxed-memory-model.md`
@@ -169,9 +177,11 @@
 ---
 
 ## 国际权威资料覆盖统计
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 顶级会议论文
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 会议 | 年份 | 数量 | 覆盖状态 |
@@ -182,6 +192,7 @@
 | FMSD | 2024 | 1 篇 | ✅ 100% |
 
 ### 权威机构
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 机构 | 代表项目 | 覆盖状态 |
@@ -195,6 +206,7 @@
 ---
 
 ## 语义模型覆盖矩阵
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 语义模型 | 现有文档 | 新增文档 | 状态 |
@@ -213,6 +225,7 @@
 ---
 
 ## 形式化方法覆盖
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 方法 | 应用 | 文档 |
@@ -227,9 +240,11 @@
 ---
 
 ## 质量保证
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 文档质量标准
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [x] 所有文档包含完整目录结构
@@ -239,6 +254,7 @@
 - [x] 所有文档包含参考文献列表
 
 ### 交叉引用完整性
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [x] 与现有 Coq 形式化代码对应
@@ -249,6 +265,7 @@
 ---
 
 ## 新增内容统计
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 指标 | 数值 |
@@ -263,9 +280,11 @@
 ---
 
 ## 学习路径建议
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 路径 A: 别名模型专家
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -275,6 +294,7 @@
 ```
 
 ### 路径 B: 形式化验证工程师
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -284,6 +304,7 @@
 ```
 
 ### 路径 C: 编译器开发者
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -295,6 +316,7 @@
 ---
 
 ## 未来工作建议
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 虽然当前语义模型已全面对标国际权威资料，以下方向可进一步深化：
@@ -308,6 +330,7 @@
 ---
 
 ## 结论
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **Rust 所有权系统语义模型已全面对标国际权威资料！**
@@ -344,11 +367,11 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [progress 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 
@@ -400,4 +423,3 @@
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

@@ -9,8 +9,11 @@
 //! - 最大子数组和
 //! - maximum array and
 //! - maximum and
+//!
 //! 运行方式:
+//!
 //! Run way :
+//!
 //! cargo run --example divide_conquer_demo
 //! ```
 fn main() {

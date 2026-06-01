@@ -6,8 +6,11 @@
 //! - performance to
 //! - 使用场景选择
 //! - scenario
+//!
 //! 运行方式:
+//!
 //! Run way :
+//!
 //! cargo run --example generic_trait_object_demo
 //! ```
 use std::time::Instant;

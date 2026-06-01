@@ -8,7 +8,7 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [15 交错路由模式 (Interleaved Routing)](#15-交错路由模式-interleaved-routing)
-  - [📋 目录](#目录)
+  - [📋 目录](#-目录)
   - [模式定义与语义](#模式定义与语义)
     - [核心语义](#核心语义)
     - [与并行和顺序的区别](#与并行和顺序的区别)
@@ -32,7 +32,7 @@
   - [学术参考](#学术参考)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 模式定义与语义
 >

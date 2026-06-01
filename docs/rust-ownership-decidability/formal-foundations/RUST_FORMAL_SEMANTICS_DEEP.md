@@ -252,8 +252,9 @@
     - [A.6 Borrow Safety](#a6-borrow-safety)
   - [Appendix B: Notation Reference](#appendix-b-notation-reference)
   - [Document Information](#document-information)
-  - *End of Document*
+  - [*End of Document*](#end-of-document)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 

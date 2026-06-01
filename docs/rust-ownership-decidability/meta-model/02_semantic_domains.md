@@ -4,10 +4,11 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权系统元模型 - 语义域](#rust-所有权系统元模型---语义域)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [1. 概述](#1-概述)
   - [2. 基本集合](#2-基本集合)
     - [2.1 内存位置 (Locations)](#21-内存位置-locations)
@@ -46,8 +47,10 @@
     - [9.3 有限性约束](#93-有限性约束)
   - [10. 语义域间的关系](#10-语义域间的关系)
   - [11. 符号速查表](#11-符号速查表)
-  - **最后更新**: 2026-03-05
+  - [**最后更新**: 2026-03-05](#最后更新-2026-03-05)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 1. 概述
 >
@@ -68,6 +71,7 @@ Loc ≜ {ℓ₁, ℓ₂, ℓ₃, ...}      可数无限集合
 ```
 
 ### 2.2 区域变量 (Region Variables)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -75,6 +79,7 @@ RVar ≜ {r₁, r₂, r₃, ...}     可数无限集合
 ```
 
 ### 2.3 变量 (Variables)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -82,6 +87,7 @@ Var ≜ {x, y, z, ...}         程序变量
 ```
 
 ### 2.4 标签 (Tags)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -89,9 +95,11 @@ Tag ≜ {t₁, t₂, t₃, ...}      用于 Stacked Borrows 风格语义
 ```
 
 ## 3. 值域 (Value Domain)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 3.1 值的基本定义
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -106,6 +114,7 @@ Pointer ≜ Loc × Tag × Mutability      (带标签的指针)
 ```
 
 ### 3.2 闭包 (Closures)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -113,6 +122,7 @@ Closure ≜ Var* × Expr × Env           (参数、体、捕获环境)
 ```
 
 ### 3.3 语义值的归纳定义
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -135,9 +145,11 @@ Inductive value : Type :=
 ```
 
 ## 4. 堆/内存模型 (Heap/Memory Model)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 4.1 简单抽象堆
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -147,6 +159,7 @@ Heap ≜ Loc →fin Val
 ```
 
 ### 4.2 Stacked Borrows 风格堆
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -160,6 +173,7 @@ Heap_SB ≜ Loc →fin HeapEntry
 ```
 
 ### 4.3 区域化堆 (Oxide 风格)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -171,9 +185,11 @@ RegionEnv ≜ RVar →fin P(Loan)             (区域到贷款集合的映射)
 ```
 
 ## 5. 环境 (Environments)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 5.1 类型环境 (Type Environment)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -184,6 +200,7 @@ TypeEnv ≜ Var →fin Type
 ```
 
 ### 5.2 值环境 (Value Environment / Stack)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -194,6 +211,7 @@ ValEnv ≜ Var →fin Val
 ```
 
 ### 5.3 区域环境 (Region Environment)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -204,6 +222,7 @@ RegionEnv ≜ RVar →fin P(Loc)
 ```
 
 ### 5.4 贷款环境 (Loan Environment)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -214,6 +233,7 @@ LoanEnv ≜ RVar →fin P(Loan)
 ```
 
 ### 5.5 完整环境
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -227,9 +247,11 @@ Env ≜ TypeEnv × RegionEnv × LoanEnv × ValEnv
 ```
 
 ## 6. 类型域 (Type Domain)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 6.1 类型定义
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -249,6 +271,7 @@ EnumType ≜ enum_name × Type*
 ```
 
 ### 6.2 可变性
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -259,6 +282,7 @@ shrd  : 共享/不可变
 ```
 
 ### 6.3 区域
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -268,9 +292,11 @@ Region ≜ P(RVar) ∪ {'static}
 ```
 
 ## 7. 配置/状态 (Configurations)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 7.1 表达式配置
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -280,6 +306,7 @@ ExprConfig ≜ Env × Heap × Expr
 ```
 
 ### 7.2 求值结果
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -291,6 +318,7 @@ MemoryError ≜ UseAfterFree + DoubleFree + OutOfBounds + NullDeref
 ```
 
 ### 7.3 状态转换
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -301,9 +329,11 @@ MemoryError ≜ UseAfterFree + DoubleFree + OutOfBounds + NullDeref
 ```
 
 ## 8. 辅助域
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 8.1 位置 (Places)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -315,6 +345,7 @@ Place ≜ Var                                  (基础变量)
 ```
 
 ### 8.2 借用链 (Borrow Chains)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -324,6 +355,7 @@ BorrowChain ≜ (Mutability × Place)*
 ```
 
 ### 8.3 帧 (Stack Frames)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -333,9 +365,11 @@ CallStack ≜ Frame*
 ```
 
 ## 9. 语义域的数学性质
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 9.1 偏序关系
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -347,6 +381,7 @@ CallStack ≜ Frame*
 ```
 
 ### 9.2 格结构
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -358,6 +393,7 @@ Region 形成完全格:
 ```
 
 ### 9.3 有限性约束
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -369,6 +405,7 @@ Region 形成完全格:
 ```
 
 ## 10. 语义域间的关系
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -445,7 +482,6 @@ Region 形成完全格:
 - [meta-model 目录](./README.md)
 - [上级目录](../README.md)
 
-
 ---
 
 ## 权威来源索引
@@ -500,4 +536,3 @@ Region 形成完全格:
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

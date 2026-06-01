@@ -28,6 +28,7 @@ use std::sync::atomic::{AtomicU64, Ordering};
 /// - `get_mut()`: reference ，if
 /// - `force_mut()`: 强制初始化并获取可变引用
 /// - `force_mut()`: and reference
+///
 /// 这些新方法使得在并发和单线程环境中使用懒加载更加灵活。
 /// method in concurrency and thread environment in 。
 /// 线程安全的全局懒加载值
@@ -166,6 +167,7 @@ impl<T: Send + Sync> ThreadSafeResourceManager<T> {
 /// - `EULER_GAMMA`: 欧拉-马歇罗尼常数 (γ ≈ 0.57721)
 /// - `EULER_GAMMA`: - (γ ≈ 0.57721)
 /// - `GOLDEN_RATIO`: 黄金比例 (φ ≈ 1.61803)
+///
 /// 这些常量可用于 f32 和 f64 类型。
 /// constant f32 and f64 type 。
 /// 数学常量的使用示例
@@ -227,6 +229,7 @@ pub fn euler_gamma_approximation(n: u64) -> f64 {
 /// - `next_if_map()`: if condition element and
 /// - `next_if_map_mut()`: 可变版本，允许修改元素
 /// - `next_if_map_mut()`: this ，element
+///
 /// 这些方法简化了条件消费和转换的模式。
 /// method condition and conversion 。
 /// Demonstration of Peekable 新method

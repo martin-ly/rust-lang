@@ -10,6 +10,7 @@
 ---
 
 ## 📋 执行摘要
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本次任务聚焦于 `rust-ownership-decidability` 项目中与语义相关的未完成工作。
@@ -18,9 +19,11 @@
 ---
 
 ## ✅ 已完成工作
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1. 创建缺失的 README.md 导航文档
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | # | 文件路径 | 状态 | 内容概要 |
@@ -32,6 +35,7 @@
 | 5 | `theorems/README.md` | ✅ | 核心定理集导航 (2.7 KB) |
 
 ### 2. 更新项目结构文档
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - **文件**: `10_project_structure.md`
@@ -43,9 +47,11 @@
 ---
 
 ## 📊 完成统计
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 新增文档统计
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 指标 | 数值 |
@@ -56,6 +62,7 @@
 | 交叉引用链接 | 50+ 个 |
 
 ### 目录完整性检查
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **修复前**: 5 个目录缺少 README.md
@@ -71,9 +78,11 @@
 ---
 
 ## 📁 文档详情
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 16-program-semantics/README.md
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **功能**: 程序语义深度分析模块的完整导航
@@ -93,6 +102,7 @@
 - 高级语义分析 (4 个)
 
 ### progress/README.md
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **功能**: 项目进度追踪的中央导航
@@ -112,6 +122,7 @@
 - 状态报告 (5 个)
 
 ### meta-model/README.md
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **功能**: Rust 所有权系统元模型的导航
@@ -130,6 +141,7 @@
 - 判断形式体系
 
 ### formal-foundations/README.md
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **功能**: 形式化理论基础的导航
@@ -150,6 +162,7 @@
 - 分离逻辑可靠性
 
 ### theorems/README.md
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **功能**: 核心形式化定理的索引
@@ -164,6 +177,7 @@
 ---
 
 ## 🔗 交叉引用完整性
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 所有新创建的 README 文件均包含：
@@ -176,9 +190,11 @@
 ---
 
 ## 🎯 质量保证
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 文档质量标准
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [x] 所有文档包含完整目录结构
@@ -187,6 +203,7 @@
 - [x] 内容实质性和完整性确认
 
 ### 导航完整性
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 目录 | 修复前 | 修复后 |
@@ -261,11 +278,9 @@
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 
@@ -305,4 +320,3 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-

@@ -43,6 +43,9 @@ impl Rust197EmbeddedFeatures {
     /// `pointer::byte_add` pointer
     /// Use `pointer::byte_add` 按字节偏移pointer
     /// 替代 `ptr.cast::<u8>().add(offset).cast::<T>()` 繁琐写法。
+    ///
+    /// # Safety
+    ///
     /// 调用者必须确保偏移后的指针仍在有效分配范围内。
     /// must after pointer in effective scope inside 。
     pub unsafe fn offset_by_bytes<T>(ptr: *const T, offset: usize) -> *const T {
@@ -52,6 +55,10 @@ impl Rust197EmbeddedFeatures {
 
     /// 两个指针必须指向同一个分配的对象。
     /// pointer must to 。
+    ///
+    /// # Safety
+    ///
+    /// 调用者必须确保两个指针指向同一个分配的对象。
     pub unsafe fn byte_distance<T>(a: *const T, b: *const T) -> isize {
         // SAFETY: caller ensures both pointers are within the same allocation
         unsafe { a.byte_offset_from(b) }

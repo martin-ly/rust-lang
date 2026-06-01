@@ -62,6 +62,10 @@ unsafe impl Sync for UartDriver {}
 impl UartDriver {
     /// 创建 UART 驱动实例
     /// UART driver
+    ///
+    /// # Safety
+    ///
+    /// `base` 必须是有效的 UART 寄存器基地址。
     pub const unsafe fn new(base: usize) -> Self {
         Self {
             base: base as *mut UartRegisters,
@@ -161,6 +165,8 @@ impl fmt::Write for UartDriver {
 /// 3. ISR，in in in /
 /// 4. 使用环形缓冲区解耦 ISR 和应用代码
 /// 4. buffering ISR and application
+///
+/// ```text
 /// #\[interrupt\]
 /// fn UART0() {
 ///     let uart = unsafe { UART_DRIVER.as_mut().unwrap() };
@@ -168,7 +174,7 @@ impl fmt::Write for UartDriver {
 ///         let byte = uart.receive_byte().unwrap();
 ///         RX_BUFFER.push(byte);
 ///     }
-/// ```text
+/// ```
 pub struct InterruptDrivenUart;
 
 #[cfg(test)]

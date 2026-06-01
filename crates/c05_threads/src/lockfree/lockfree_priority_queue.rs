@@ -13,7 +13,9 @@
 //! - `push`: O(n)（简化实现）
 //! - `push`: O(n)（）
 //! - `push`: O(n)（简化Implementation of）
+//!
 //! 生产环境应使用 `crossbeam_skiplist` 实现 O(log n) 复杂度。
+//!
 //! environment `crossbeam_skiplist` O(log n) complex 。
 use std::ptr;
 use std::sync::atomic::{AtomicPtr, Ordering as AtomicOrdering};

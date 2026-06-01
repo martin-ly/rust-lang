@@ -344,6 +344,7 @@ QUIC 连接迁移:
         /// - high on （allow part ）
         /// - on （part ）
         /// andstream(Stream)区别：
+        ///
         /// | 特性 | Stream | Datagram |
         /// | 可靠性 | 可靠、有序 | 不可靠、无序 |
         /// | | 、 | 、 |
@@ -419,6 +420,7 @@ QUIC 连接迁移:
         /// - may reject 0-RTT，this data 。
         /// - may 0-RTT，this 。
         /// quinn API 说明：
+        ///
         /// - 客户端：`Connecting::into_0rtt()` 在持有先前会话票据时返回 `Ok`。
         /// - ：`Connecting::into_0rtt()` in before `Ok`。
         pub struct ZeroRttSession;

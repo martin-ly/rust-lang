@@ -12,8 +12,11 @@
 //! - generic memory performance
 //! - 迭代器方法特化性能
 //! - method performance
+//!
 //! 运行方式:
+//!
 //! Run way :
+//!
 //! cargo bench --bench rust_192_benchmarks
 //! ```
 use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};

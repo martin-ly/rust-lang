@@ -10,14 +10,15 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Phase 1 完成报告](#phase-1-完成报告)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [完成情况](#完成情况)
-    - [✅ 核心定理文件全部创建](#核心定理文件全部创建)
-    - [📊 代码统计更新](#代码统计更新)
-    - [🎯 完成的定理](#完成的定理)
+    - [✅ 核心定理文件全部创建](#-核心定理文件全部创建)
+    - [📊 代码统计更新](#-代码统计更新)
+    - [🎯 完成的定理](#-完成的定理)
       - [1. 终止性 (Termination)](#1-终止性-termination)
       - [2. 类型保持 (Preservation)](#2-类型保持-preservation)
       - [3. 进展 (Progress)](#3-进展-progress)
@@ -31,8 +32,10 @@
   - [Phase 1 目标达成](#phase-1-目标达成)
   - [下一步 (Phase 2)](#下一步-phase-2)
     - [Week 3-4 目标](#week-3-4-目标)
-  - **准备进入**: Phase 2 (可判定性证明深化)
+  - [**准备进入**: Phase 2 (可判定性证明深化)](#准备进入-phase-2-可判定性证明深化)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 完成情况
 >
@@ -60,6 +63,7 @@
 ```
 
 ### 🎯 完成的定理
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### 1. 终止性 (Termination)
@@ -100,9 +104,11 @@
 ---
 
 ## 核心定理总结
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定理 1: Borrow Checking 终止性
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -111,6 +117,7 @@ forall Γ, Linearizable Γ → exists Γ' n,
 ```
 
 ### 定理 2: 类型保持 (Preservation)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -119,6 +126,7 @@ exists Γ' Θ', value_has_type Δ Γ' Θ' v τ
 ```
 
 ### 定理 3: 进展 (Progress)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
@@ -204,7 +212,6 @@ coq-formalization/theories/
 - [progress 目录](./README.md)
 - [上级目录](../README.md)
 
-
 ---
 
 ## 权威来源索引
@@ -239,4 +246,3 @@ coq-formalization/theories/
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

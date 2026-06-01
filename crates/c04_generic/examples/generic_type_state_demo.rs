@@ -6,8 +6,11 @@
 //! - state conversion type
 //! - 编译时状态验证
 //! - compile-time state
+//!
 //! 运行方式:
+//!
 //! Run way :
+//!
 //! cargo run --example generic_type_state_demo
 //! ```
 

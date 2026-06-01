@@ -52,6 +52,8 @@
     - [RustSEM](#rustsem)
     - [Aeneas](#aeneas)
     - [K-Framework](#k-framework)
+  - [*状态: 完成*](#状态-完成)
+  - [权威来源索引](#权威来源索引)
 
 ---
 

@@ -20,6 +20,7 @@
 /// - IDR:   输入数据寄存器
 /// - IDR: input data
 /// - IDR:
+///
 /// 真实硬件中，这些结构体通过 `#[repr(C)]` 保证内存布局，
 /// real hardware in ，struct `#[repr(C)]` memory layout ，
 /// 并使用 `volatile-register` crate 或原始指针访问。
@@ -66,7 +67,9 @@ unsafe impl Send for GpioPort {}
 unsafe impl Sync for GpioPort {}
 
 impl GpioPort {
+    /// # Safety
     ///
+    /// `base` 必须是有效的 GPIO 寄存器基地址。
     pub const unsafe fn new(base: usize) -> Self {
         Self {
             base: base as *mut GpioRegisters,

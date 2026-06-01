@@ -366,6 +366,7 @@ pub mod nat_traversal {
 /// - `Relay Server`: Accept reservation、转发 circuit flow rate。
 ///   或主动通过 Relay 拨号其他节点。
 ///   or Relay its node 。
+///
 /// 再尝试升级as直连（hole punching）。
 /// as（hole punching）。
 pub mod relay {

@@ -29,6 +29,7 @@
 //! 1. 更新 Cargo.toml: `rust-version = "1.92"`
 //! 2. reference `rust_192_features.rs` feature
 //! 3. 查看 `docs/RUST_192_DESIGN_PATTERN_IMPROVEMENTS.md` 了解完整改进
+//!
 //! reference :
 //! - [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/)
 //! - [历史版本: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)

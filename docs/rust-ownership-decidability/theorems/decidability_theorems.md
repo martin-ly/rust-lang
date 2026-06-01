@@ -4,10 +4,11 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权系统可判定性 - 核心定理](#rust-所有权系统可判定性---核心定理)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [定理 1: Borrow Checking 终止性 (Termination)](#定理-1-borrow-checking-终止性-termination)
     - [1.1 定理陈述](#11-定理陈述)
     - [1.2 关键定义](#12-关键定义)
@@ -29,9 +30,10 @@
   - [定理 6: 可判定性 (Decidability)](#定理-6-可判定性-decidability)
     - [6.1 定理陈述](#61-定理陈述)
   - [定理间的依赖关系](#定理间的依赖关系)
-  - **最后更新**: 2026-03-05
+  - [**最后更新**: 2026-03-05](#最后更新-2026-03-05)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 定理 1: Borrow Checking 终止性 (Termination)
 >
@@ -97,6 +99,7 @@ Linearizable(Γ) ≜ ∀x ∈ dom(Γ). rank(Γ(x)) > max{ rank(y) | y ∈ fv(Γ(
 ```
 
 ### 1.3 证明草图
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -135,6 +138,7 @@ Linearizable(Γ) ≜ ∀x ∈ dom(Γ). rank(Γ(x)) > max{ rank(y) | y ∈ fv(Γ(
 ```
 
 ### 1.4 形式化证明结构 (Coq)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```coq
@@ -217,9 +221,11 @@ End Termination.
 ---
 
 ## 定理 2: 类型保持 (Preservation)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 2.1 定理陈述
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -237,6 +243,7 @@ Theorem Preservation:
 那么存在更新后的环境 Γ', Θ' 使得 v 具有类型 τ，且结果环境和堆满足类型约束。
 
 ### 2.2 证明结构
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```coq
@@ -291,9 +298,11 @@ Qed.
 ---
 
 ## 定理 3: 进展 (Progress)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 3.1 定理陈述
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -312,9 +321,11 @@ Theorem Progress:
 ---
 
 ## 定理 4: 类型安全 (Type Safety)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 4.1 定理陈述
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -331,9 +342,11 @@ Theorem Type_Safety:
 ---
 
 ## 定理 5: 所有权安全保证内存安全
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 定理陈述
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -353,9 +366,11 @@ Theorem Ownership_Implies_Memory_Safety:
 ---
 
 ## 定理 6: 可判定性 (Decidability)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 定理陈述
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -373,6 +388,7 @@ Theorem Decidability:
 ---
 
 ## 定理间的依赖关系
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -430,6 +446,7 @@ Theorem Decidability:
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [theorems 目录](./README.md)
@@ -545,4 +562,3 @@ Theorem Decidability:
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

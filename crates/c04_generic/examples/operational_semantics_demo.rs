@@ -8,6 +8,7 @@
 //! - Drop 语义：资源释放
 //! - Drop ：
 //! - Drop 语义：资源Release
+//!
 //! 运行: cargo run --example operational_semantics_demo -p c04_generic
 
 use std::collections::HashMap;

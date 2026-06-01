@@ -8,8 +8,11 @@
 //! - searching algorithm to
 //! - 算法选择指南
 //! - algorithm
+//!
 //! 运行方式:
+//!
 //! Run way :
+//!
 //! cargo run --example algorithm_comparison_demo
 //! ```
 use std::time::Instant;

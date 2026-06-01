@@ -4,10 +4,11 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权系统元模型 - 抽象语法](#rust-所有权系统元模型---抽象语法)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [1. 元元语言说明](#1-元元语言说明)
   - [2. 词法元素](#2-词法元素)
     - [2.1 标识符](#21-标识符)
@@ -33,8 +34,10 @@
     - [9.1 简单借用](#91-简单借用)
     - [9.2 可变借用](#92-可变借用)
     - [9.3 函数定义](#93-函数定义)
-  - **最后更新**: 2026-03-05
+  - [**最后更新**: 2026-03-05](#最后更新-2026-03-05)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 1. 元元语言说明
 >
@@ -65,6 +68,7 @@ digit      ::= '0' | ... | '9'
 ```
 
 ### 2.2 关键字
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -72,9 +76,11 @@ let, mut, ref, box, fn, struct, enum, match, if, else, loop, break, continue, re
 ```
 
 ## 3. 类型语法
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 基础类型
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```bnf
@@ -94,6 +100,7 @@ B ::= () | bool | i8 | i16 | i32 | i64 | i128 | isize | u8 | u16 | u32 | u64 | u
 ```
 
 ### 3.2 区域 (Lifetime/Region)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```bnf
@@ -107,9 +114,11 @@ B ::= () | bool | i8 | i16 | i32 | i64 | i128 | isize | u8 | u16 | u32 | u64 | u
 ```
 
 ## 4. 表达式语法
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 4.1 核心表达式
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```bnf
@@ -143,6 +152,7 @@ pattern ::=
 ```
 
 ### 4.2 位置表达式 (Place Expressions)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```bnf
@@ -155,6 +165,7 @@ p ::=                         (* 位置 *)
 ```
 
 ### 4.3 值
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```bnf
@@ -170,9 +181,11 @@ v ::=
 ```
 
 ## 5. 声明语法
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 5.1 函数
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```bnf
@@ -185,6 +198,7 @@ constraints ::=
 ```
 
 ### 5.2 结构体
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```bnf
@@ -193,6 +207,7 @@ struct_decl ::=
 ```
 
 ### 5.3 枚举
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```bnf
@@ -206,6 +221,7 @@ variant ::=
 ```
 
 ### 5.4 Trait
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```bnf
@@ -228,6 +244,7 @@ impl_decl ::=
 ```
 
 ## 6. 程序
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```bnf
@@ -236,6 +253,7 @@ program ::=
 ```
 
 ## 7. 语法范畴总结
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 符号 | 含义 | 英文 |
@@ -251,9 +269,11 @@ program ::=
 | ℓ | 内存位置 | Location |
 
 ## 8. 语法 sugar
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 8.1 可变性简化
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -262,6 +282,7 @@ program ::=
 ```
 
 ### 8.2 生命周期省略
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -269,9 +290,11 @@ program ::=
 ```
 
 ## 9. 示例程序
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 9.1 简单借用
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -281,6 +304,7 @@ let y: &i32 = &x;
 ```
 
 ### 9.2 可变借用
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -325,7 +349,6 @@ fn swap<'a>(x: &'a mut i32, y: &'a mut i32) {
 
 - [meta-model 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 
@@ -375,4 +398,3 @@ fn swap<'a>(x: &'a mut i32, y: &'a mut i32) {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

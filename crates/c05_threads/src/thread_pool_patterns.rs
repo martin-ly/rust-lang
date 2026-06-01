@@ -12,7 +12,9 @@
 //! - 无锁数据结构概念（lock-free vs wait-free、ABA 问题、Treiber 栈、Michael-Scott 队列）
 //! - lock-freedata structureconcept（lock-free vs wait-free、ABA problem、Treiber stack、Michael-Scott 队列）
 //! - lock-freedata structureconcept（lock-free vs wait-free、ABA problem、Treiber stack、Michael-Scott queue）
+//!
 //! 注意：本模块不包含任何 unsafe 代码；无锁数据结构部分以概念和伪代码形式呈现。
+//!
 //! ：this module unsafe ；lock-free data structure part concept and 。
 
 use std::sync::{Arc, Mutex};

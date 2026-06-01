@@ -69,6 +69,10 @@ pub extern "C" fn rust_initialize_sensor(id: u32) -> i32 {
 /// 接受 C 风格字符串的函数
 /// C function
 /// Accept C 风格字符串function
+///
+/// # Safety
+///
+/// `c_str` 必须是指向有效、以 null 结尾的 C 字符串的指针。
 #[unsafe(no_mangle)]
 pub unsafe extern "C" fn rust_process_name(c_str: *const u8) -> i32 {
     if c_str.is_null() {

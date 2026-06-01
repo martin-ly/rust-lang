@@ -26,44 +26,55 @@
 /// attribute example
 /// 1. 序列化/反序列化
 /// 1. sequence /sequence
+///
+/// ```text
 /// #[derive(Serialize, Deserialize)]
 /// struct User {
-///     name: String,
+///    name: String,
 /// }
-/// ```text
+/// ```
 pub struct DeriveExample;
 
 /// 2. 测试属性
 /// 2. attribute
+///
+/// ```text
 /// #[test]
 /// fn my_test() {}
 ///
 /// #\[should_panic\]
 /// fn panicking_test() {}
-/// ```text
+/// ```
 pub struct TestAttributes;
 
 /// 3. 条件编译
 /// 3. condition
+///
+/// ```text
 /// fn linux_only() {}
 ///
 /// #[cfg_attr(feature = "serde", derive(Serialize))]
 /// struct MyStruct;
-/// ```text
+/// ```
 pub struct CfgAttributes;
 
 /// 4. 文档属性
 /// 4. attribute
 /// 4. 文档attribute
+///
+/// ```text
 /// /// 这是一个文档注释
 /// ///
 /// /// 等同于 #[doc = "这是一个文档注释"]
 /// /// etc. #[doc = ""]
 /// #![allow(dead_code)]  // 模块级属性
+/// ```
 pub struct DocAttributes;
 
 /// 5. 内联和优化提示
 /// 5. inside and optimization hint
+///
+/// ```text
 /// fn small_function() {}
 ///
 /// #[inline(always)]

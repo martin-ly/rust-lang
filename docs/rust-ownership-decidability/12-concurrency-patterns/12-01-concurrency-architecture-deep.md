@@ -78,7 +78,7 @@
     - [Creusot for Formal Proof](#creusot-for-formal-proof)
   - [References](#references)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 

@@ -10,10 +10,11 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [75% 里程碑报告](#75-里程碑报告)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [重大进展](#重大进展)
     - [1. 证明策略库 (ProofTactics.v)](#1-证明策略库-prooftacticsv)
     - [2. 填充 Admit 进展](#2-填充-admit-进展)
@@ -32,8 +33,10 @@
     - [中优先级 (7%)](#中优先级-7)
     - [低优先级 (3%)](#低优先级-3)
   - [持续承诺](#持续承诺)
-  - **下次目标**: 90%
+  - [**下次目标**: 90%](#下次目标-90)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 重大进展
 >
@@ -75,6 +78,7 @@ Ltac auto_eval.         (* 自动求值证明 *)
 **总计**: 36 admit → 24 已填充 → 12 剩余
 
 ### 3. 代码统计更新
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -89,9 +93,11 @@ Coq 代码:       2,850 行 (+97 行)
 ---
 
 ## 完成的证明
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Termination.v
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - ✅ `list_max_in` - 列表最大值性质
@@ -101,6 +107,7 @@ Coq 代码:       2,850 行 (+97 行)
 - ✅ `empty_env_linearizable` - 空环境
 
 ### Preservation.v
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - ✅ `value_preservation` - 值保持
@@ -109,6 +116,7 @@ Coq 代码:       2,850 行 (+97 行)
 - ✅ `subtype_preserves_value_type` - 子类型保持
 
 ### Progress.v
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - ✅ `value_progress` - 值不进展
@@ -120,6 +128,7 @@ Coq 代码:       2,850 行 (+97 行)
 ---
 
 ## 文件结构最终版
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -151,9 +160,11 @@ coq-formalization/
 ---
 
 ## 质量提升
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 证明自动化
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - 引入 15 个自定义策略
@@ -161,6 +172,7 @@ coq-formalization/
 - 提高证明可读性
 
 ### 文档完善
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - 所有定理都有完整注释
@@ -168,6 +180,7 @@ coq-formalization/
 - 创建 API 文档
 
 ### 测试覆盖
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - 16 个示例全部验证
@@ -177,6 +190,7 @@ coq-formalization/
 ---
 
 ## 剩余工作 (25%)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 高优先级 (15%)
@@ -252,7 +266,6 @@ coq-formalization/
 - [progress 目录](./README.md)
 - [上级目录](../README.md)
 
-
 ---
 
 ## 权威来源索引
@@ -297,4 +310,3 @@ coq-formalization/
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

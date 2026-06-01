@@ -3,19 +3,22 @@
 //! This module provides Rust 1.92.0 新featureperformancebenchmark，包括：
 //! - 线程池管理器的性能
 //! - thread pool performance
+//!
 //! 运行方式:
+//!
 //! Run way :
+//!
 //! cargo bench --bench rust_192_benchmarks
 //! ```
-use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
+use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
 use std::hint::black_box;
 use std::num::NonZeroUsize;
 use std::sync::Arc;
 use std::thread;
 
 use c05_threads::archive::rust_192_features::{
-    calculate_thread_pool_size, ThreadPoolManager, ThreadPoolTaskQueue, ThreadResourceAllocator,
-    ThreadSafeUninitBuffer, ThreadSchedulingConfig, ThreadTask,
+    ThreadPoolManager, ThreadPoolTaskQueue, ThreadResourceAllocator, ThreadSafeUninitBuffer,
+    ThreadSchedulingConfig, ThreadTask, calculate_thread_pool_size,
 };
 
 fn bench_rotate_right_performance(c: &mut Criterion) {

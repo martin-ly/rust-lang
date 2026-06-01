@@ -4,41 +4,44 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [持续推进报告 - 2026-03-09](#持续推进报告---2026-03-09)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [Continuous Improvement Report](#continuous-improvement-report)
-  - [📊 本次推进概览](#本次推进概览)
+  - [📊 本次推进概览](#-本次推进概览)
     - [新增文档统计](#新增文档统计)
     - [新增内容统计](#新增内容统计)
-  - [🎯 推进内容详情](#推进内容详情)
+  - [🎯 推进内容详情](#-推进内容详情)
     - [1. 高级实践工作坊 (`exercises/ADVANCED_OWNERSHIP_WORKSHOP.md`)](#1-高级实践工作坊-exercisesadvanced_ownership_workshopmd)
     - [2. 交互式学习指南 (`INTERACTIVE_LEARNING_GUIDE.md`)](#2-交互式学习指南-interactive_learning_guidemd)
     - [3. 知识图谱思维导图 (`visualizations/KNOWLEDGE_GRAPH_MINDMAP.md`)](#3-知识图谱思维导图-visualizationsknowledge_graph_mindmapmd)
     - [4. 全面 FAQ (`COMPREHENSIVE_10_faq.md`)](#4-全面-faq-comprehensive_10_faqmd)
     - [5. 错误诊断完全指南 (`ERROR_DIAGNOSTICS_GUIDE.md`)](#5-错误诊断完全指南-error_diagnostics_guidemd)
-  - [📈 项目整体统计更新](#项目整体统计更新)
+  - [📈 项目整体统计更新](#-项目整体统计更新)
     - [文档统计](#文档统计)
     - [内容深度统计](#内容深度统计)
     - [学习资源统计](#学习资源统计)
-  - [🛤️ 学习路径优化](#学习路径优化)
+  - [🛤️ 学习路径优化](#️-学习路径优化)
     - [快速入门路径 (4小时) → 更新](#快速入门路径-4小时--更新)
     - [系统掌握路径 (2周) → 更新](#系统掌握路径-2周--更新)
-  - [✅ 质量保证](#质量保证)
+  - [✅ 质量保证](#-质量保证)
     - [内容检查](#内容检查)
     - [学习体验](#学习体验)
-  - [🎯 下一步计划](#下一步计划)
+  - [🎯 下一步计划](#-下一步计划)
     - [短期目标 (未来 1-2 周)](#短期目标-未来-1-2-周)
     - [中期目标 (未来 1 个月)](#中期目标-未来-1-个月)
     - [长期目标 (未来 3 个月)](#长期目标-未来-3-个月)
-  - [📊 推进成果总结](#推进成果总结)
+  - [📊 推进成果总结](#-推进成果总结)
     - [核心价值提升](#核心价值提升)
     - [独特价值](#独特价值)
-  - [📞 反馈与贡献](#反馈与贡献)
+  - [📞 反馈与贡献](#-反馈与贡献)
     - [如何反馈](#如何反馈)
     - [联系方式](#联系方式)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## Continuous Improvement Report
 >
@@ -65,6 +68,7 @@
 | `ERROR_DIAGNOSTICS_GUIDE.md` | 诊断指南 | 错误处理 | ✅ 100% |
 
 ### 新增内容统计
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -79,9 +83,11 @@
 ---
 
 ## 🎯 推进内容详情
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 1. 高级实践工作坊 (`exercises/ADVANCED_OWNERSHIP_WORKSHOP.md`)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **目标**: 提供高级 Rust 所有权场景的实践练习
@@ -103,6 +109,7 @@
 ---
 
 ### 2. 交互式学习指南 (`INTERACTIVE_LEARNING_GUIDE.md`)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **目标**: 提供问题驱动的交互式学习体验
@@ -124,6 +131,7 @@
 ---
 
 ### 3. 知识图谱思维导图 (`visualizations/KNOWLEDGE_GRAPH_MINDMAP.md`)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **目标**: 提供完整的知识体系可视化
@@ -144,6 +152,7 @@
 ---
 
 ### 4. 全面 FAQ (`COMPREHENSIVE_10_faq.md`)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **目标**: 覆盖从入门到高级的常见问题
@@ -164,6 +173,7 @@
 ---
 
 ### 5. 错误诊断完全指南 (`ERROR_DIAGNOSTICS_GUIDE.md`)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **目标**: 系统化的错误诊断方法
@@ -195,9 +205,11 @@
 ---
 
 ## 📈 项目整体统计更新
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 文档统计
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 类别 | 新增前 | 新增后 | 增量 |
@@ -207,6 +219,7 @@
 | **总计** | **588** | **593** | **+5** |
 
 ### 内容深度统计
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 深度级别 | 新增前 | 新增后 |
@@ -216,6 +229,7 @@
 | 🔴 高级 | 126 | 128 (+2 形式化) |
 
 ### 学习资源统计
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 资源类型 | 数量 | 说明 |
@@ -233,9 +247,11 @@
 ---
 
 ## 🛤️ 学习路径优化
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 快速入门路径 (4小时) → 更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
@@ -252,6 +268,7 @@
 ```
 
 ### 系统掌握路径 (2周) → 更新
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -271,9 +288,11 @@
 ---
 
 ## ✅ 质量保证
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 内容检查
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [x] 所有新增文档包含完整内容 (≥500 行)
@@ -283,6 +302,7 @@
 - [x] 交叉引用已添加
 
 ### 学习体验
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [x] 渐进式难度设计
@@ -294,9 +314,11 @@
 ---
 
 ## 🎯 下一步计划
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 短期目标 (未来 1-2 周)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **视频教程脚本**: 为核心概念创建视频脚本
@@ -305,6 +327,7 @@
 4. **术语表**: 统一术语定义
 
 ### 中期目标 (未来 1 个月)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **在线测验**: 创建自我评估测验
@@ -313,6 +336,7 @@
 4. **社区贡献**: 接受外部贡献
 
 ### 长期目标 (未来 3 个月)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **多语言支持**: 英文版文档
@@ -323,9 +347,11 @@
 ---
 
 ## 📊 推进成果总结
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 核心价值提升
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 1. **学习体验提升**
@@ -344,6 +370,7 @@
    - 完整的练习到理论闭环
 
 ### 独特价值
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -372,9 +399,11 @@
 ---
 
 ## 📞 反馈与贡献
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 如何反馈
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **文档错误**: 提交 Issue，标注文件和行号
@@ -383,6 +412,7 @@
 4. **翻译贡献**: 协助多语言版本
 
 ### 联系方式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - 项目: rust-ownership-decidability
@@ -423,11 +453,11 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [progress 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 
@@ -499,4 +529,3 @@
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

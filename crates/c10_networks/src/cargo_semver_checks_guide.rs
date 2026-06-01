@@ -9,11 +9,11 @@
 //! 6. [CI/CD 集成](#cicd-集成)
 //! 6. [CI/CD ](#cicd-)
 //! flowchart TD
-//!     B -->|否| C\[PATCH\]
-//!     B -->|是| D{是否向后兼容?}
-//!     B -->|| D{after?}
-//!     D -->|否| F\[MAJOR\]
-//!     F --> G[运行 cargo-semver-checks 验证]
+//!    B -->|否| C\[PATCH\]
+//!    B -->|是| D{是否向后兼容?}
+//!    B -->|| D{after?}
+//!    D -->|否| F\[MAJOR\]
+//!    F --> G[运行 cargo-semver-checks 验证]
 
 // ============================================================================
 // 1. 什么是 Semantic Versioning

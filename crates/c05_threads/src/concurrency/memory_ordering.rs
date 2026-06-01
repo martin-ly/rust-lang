@@ -16,9 +16,9 @@
 //! - **x86-64**: 具有强内存模型（TSO, Total Store Order），大多数原子操作隐式带有 Acquire/Release 语义。
 //! - **x86-64**: has memory model （TSO, Total Store Order），atomic operation Acquire/Release 。
 
-use std::sync::atomic::{AtomicBool, AtomicPtr, AtomicUsize, Ordering};
 #[cfg(test)]
 use std::sync::Arc;
+use std::sync::atomic::{AtomicBool, AtomicPtr, AtomicUsize, Ordering};
 #[cfg(test)]
 use std::thread;
 
@@ -256,7 +256,6 @@ impl<T> AtomicNode<T> {
     /// Sets next 指针（Release，发布节点）
     /// next pointer （Release，node ）
     /// # Safety
-    ///
     pub unsafe fn set_next_release(&self, new_next: *mut AtomicNode<T>) {
         self.next.store(new_next, Ordering::Release);
     }
@@ -304,6 +303,8 @@ impl<T> ConceptualLockFreeQueue<T> {
     /// 入队（概念演示，非线程安全的多生产者版本）
     /// （concept demonstration ，thread-safe this ）
     ///
+    /// # Safety
+    ///
     /// 真实实现需要循环 CAS 和内存回收。
     /// real circulation CAS and memory 。
     pub unsafe fn enqueue(&self, value: T) {
@@ -319,6 +320,8 @@ impl<T> ConceptualLockFreeQueue<T> {
 
     /// 出队（概念演示）
     /// （concept demonstration ）
+    ///
+    /// # Safety
     ///
     /// 调用者必须确保队列非空或正确处理并发。
     /// must or concurrency 。

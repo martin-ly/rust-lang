@@ -41,6 +41,8 @@ impl WasmBuffer {
     /// data to buffering
     /// to buffering
     ///
+    /// # Safety
+    ///
     /// 调用者必须确保不会超出缓冲区容量，且写入的数据不会导致未定义行为
     /// must buffering ，and data definition as
     /// must buffering ，and definition as
@@ -56,6 +58,9 @@ impl WasmBuffer {
     /// 读取已初始化的数据
     /// data
     ///
+    /// # Safety
+    ///
+    /// 调用者必须确保 `len` 不超过已初始化数据的长度。
     pub unsafe fn read(&self, len: usize) -> Vec<u8> {
         let read_len = len.min(self.initialized_len);
         let mut result = Vec::with_capacity(read_len);
@@ -98,6 +103,8 @@ impl<T> WasmObjectPool<T> {
     /// 从池中获取对象（如果可用）
     /// from in to （if ）
     ///
+    /// # Safety
+    ///
     /// 调用者必须确保返回的对象在使用前已正确初始化，且不会在同一位置重复读取
     /// must to in before ，and in position
     pub unsafe fn acquire(&mut self) -> Option<T> {
@@ -110,6 +117,8 @@ impl<T> WasmObjectPool<T> {
 
     /// 归还对象到池中
     /// to to in
+    ///
+    /// # Safety
     ///
     /// 调用者必须确保 `obj` 已经完全移动，且不会在池中位置已有有效对象时重复写入
     /// must `obj` ，and in in position effective to

@@ -3,6 +3,7 @@
 //! - slice::as_array - 建造者模式in固定大小Verify
 //! - fmt::from_fn - 自定义格式化器模式
 //! - fmt::from_fn - definition
+//!
 //! 运行: cargo run -p c09_design_pattern --example rust_193_features_demo
 use std::fmt;
 

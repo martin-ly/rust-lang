@@ -9,8 +9,11 @@
 //! - 借用迭代器（Lending Iterator）
 //! - 实际应用场景
 //! - actual application scenario
+//!
 //! 运行方式:
+//!
 //! Run way :
+//!
 //! cargo run --example generic_gat_demo
 //! ```
 

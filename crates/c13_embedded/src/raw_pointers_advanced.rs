@@ -29,6 +29,8 @@ pub mod raw_pointer_basics {
     /// reference allow ，but pointer allow 。
     /// reference ，but pointer 。
     ///
+    /// # Safety
+    ///
     /// 调用者必须确保不会导致数据竞争。
     /// must data 。
     /// must 。
@@ -53,12 +55,20 @@ pub mod volatile_access {
 
     /// 使用 volatile read 读取寄存器
     /// volatile read
+    ///
+    /// # Safety
+    ///
+    /// `addr` 必须是有效的寄存器地址。
     pub unsafe fn read_register(addr: *const u32) -> u32 {
         unsafe { addr.read_volatile() }
     }
 
     /// 使用 volatile write 写入寄存器
     /// volatile write
+    ///
+    /// # Safety
+    ///
+    /// `addr` 必须是有效的寄存器地址。
     pub unsafe fn write_register(addr: *mut u32, value: u32) {
         unsafe {
             addr.write_volatile(value);
@@ -67,6 +77,8 @@ pub mod volatile_access {
 
     /// 修改寄存器的特定位（读-修改-写）
     /// （--）
+    ///
+    /// # Safety
     ///
     /// 地址必须有效。
     /// must effective 。

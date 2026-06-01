@@ -11,8 +11,11 @@
 //! - 信号Handlestrategy
 //! - 跨平台注意事项
 //! - platform
+//!
 //! 运行方式:
+//!
 //! Run way :
+//!
 //! cargo run --example signal_handling_demo
 //! ```
 use c07_process::prelude::*;

@@ -11,33 +11,36 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [最终完成报告 (40% 里程碑)](#最终完成报告-40-里程碑)
-  - [📑 目录](#目录)
-  - [🎉 完成总结](#完成总结)
+  - [📑 目录](#-目录)
+  - [🎉 完成总结](#-完成总结)
     - [核心成果](#核心成果)
-  - [📁 交付物清单](#交付物清单)
+  - [📁 交付物清单](#-交付物清单)
     - [Coq 形式化 (9 文件, 2,353 行)](#coq-形式化-9-文件-2353-行)
     - [文档 (10+ 文件, 2,000+ 行)](#文档-10-文件-2000-行)
-  - [🏆 核心定理](#核心定理)
+  - [🏆 核心定理](#-核心定理)
     - [1. Borrow Checking 终止性 (完成)](#1-borrow-checking-终止性-完成)
     - [2. 类型保持 (框架完成)](#2-类型保持-框架完成)
     - [3. 进展 (框架完成)](#3-进展-框架完成)
     - [4. 类型安全 (组合定理)](#4-类型安全-组合定理)
-  - [✅ 验证的借用模式 (10个)](#验证的借用模式-10个)
-  - [📊 与权威内容的对齐](#与权威内容的对齐)
-  - [🎯 质量保证](#质量保证)
+  - [✅ 验证的借用模式 (10个)](#-验证的借用模式-10个)
+  - [📊 与权威内容的对齐](#-与权威内容的对齐)
+  - [🎯 质量保证](#-质量保证)
     - [代码质量](#代码质量)
     - [理论严谨性](#理论严谨性)
-  - [🚀 持续推进计划](#持续推进计划)
+  - [🚀 持续推进计划](#-持续推进计划)
     - [Phase 2: 可判定性深化 (目标: 55%)](#phase-2-可判定性深化-目标-55)
     - [Phase 3: 扩展完善 (目标: 75%)](#phase-3-扩展完善-目标-75)
     - [Phase 4: 验证发布 (目标: 100%)](#phase-4-验证发布-目标-100)
-  - [📈 进度曲线](#进度曲线)
-  - [🎊 庆祝里程碑](#庆祝里程碑)
-  - **状态**: 🚀 持续推进中
+  - [📈 进度曲线](#-进度曲线)
+  - [🎊 庆祝里程碑](#-庆祝里程碑)
+  - [**状态**: 🚀 持续推进中](#状态--持续推进中)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 🎉 完成总结
 >
@@ -64,6 +67,7 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### Coq 形式化 (9 文件, 2,353 行)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 文件 | 行数 | 内容 | 状态 |
@@ -79,6 +83,7 @@
 | `NestedBorrow.v` | 290 | 5个高级示例 | ✅ |
 
 ### 文档 (10+ 文件, 2,000+ 行)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 文档 | 内容 | 状态 |
@@ -92,9 +97,11 @@
 ---
 
 ## 🏆 核心定理
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 1. Borrow Checking 终止性 (完成)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```coq
@@ -106,6 +113,7 @@ Theorem borrow_checking_termination :
 ```
 
 ### 2. 类型保持 (框架完成)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```coq
@@ -118,6 +126,7 @@ Theorem preservation :
 ```
 
 ### 3. 进展 (框架完成)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```coq
@@ -128,6 +137,7 @@ Theorem progress :
 ```
 
 ### 4. 类型安全 (组合定理)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
@@ -137,6 +147,7 @@ Type Safety = Preservation + Progress
 ---
 
 ## ✅ 验证的借用模式 (10个)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. ✅ 基本不可变借用
@@ -153,6 +164,7 @@ Type Safety = Preservation + Progress
 ---
 
 ## 📊 与权威内容的对齐
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 来源 | 内容 | 对齐度 |
@@ -165,9 +177,11 @@ Type Safety = Preservation + Progress
 ---
 
 ## 🎯 质量保证
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 代码质量
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - ✅ 100% Coq 编译通过
@@ -176,6 +190,7 @@ Type Safety = Preservation + Progress
 - ✅ 详细注释
 
 ### 理论严谨性
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - ✅ 基于权威论文
@@ -186,6 +201,7 @@ Type Safety = Preservation + Progress
 ---
 
 ## 🚀 持续推进计划
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### Phase 2: 可判定性深化 (目标: 55%)
@@ -264,7 +280,6 @@ Week 5-12:          90% → 100% (计划)
 - [progress 目录](./README.md)
 - [上级目录](../README.md)
 
-
 ---
 
 ## 权威来源索引
@@ -309,4 +324,3 @@ Week 5-12:          90% → 100% (计划)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

@@ -4,6 +4,7 @@
 //! - 导出到 Jaeger / OTLP / 标准输出
 //! - to Jaeger / OTLP / standard output
 //! **前置条件**:
+//!
 //! **before condition **:
 //! # 启动本地 Jaeger（All-in-one）
 //!   -p 4317:4317 \

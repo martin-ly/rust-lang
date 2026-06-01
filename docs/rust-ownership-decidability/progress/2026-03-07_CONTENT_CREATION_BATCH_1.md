@@ -10,10 +10,11 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [内容创建批次 1 - 完成报告](#内容创建批次-1---完成报告)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [本次完成内容](#本次完成内容)
     - [1. 新建 17-unsafe-rust/ 目录 (最高优先级)](#1-新建-17-unsafe-rust-目录-最高优先级)
     - [2. 扩展 08-advanced-topics/](#2-扩展-08-advanced-topics)
@@ -30,8 +31,10 @@
   - [下一步建议](#下一步建议)
     - [继续内容创建](#继续内容创建)
     - [质量提升](#质量提升)
-  - *新增内容: ~74 KB*
+  - [*新增内容: ~74 KB*](#新增内容-74-kb)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 本次完成内容
 >
@@ -60,6 +63,7 @@
 **小结**: 填补了系统编程基础内容的缺失。
 
 ### 3. 填充 13-architecture-patterns/
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 文件 | 大小 | 深度 | 描述 |
@@ -70,6 +74,7 @@
 **小结**: 将架构模式从 1 个文档扩展到 3 个。
 
 ### 4. 填充 14-distributed-systems/
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 文件 | 大小 | 深度 | 描述 |
@@ -79,6 +84,7 @@
 **小结**: 添加分布式系统核心内容。
 
 ### 5. 扩展 03-verification-tools/
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 文件 | 大小 | 深度 | 描述 |
@@ -89,6 +95,7 @@
 **小结**: 验证工具从 2 个扩展到 4 个。
 
 ### 6. 扩展 05-comparative-study/
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 文件 | 大小 | 深度 | 描述 |
@@ -101,6 +108,7 @@
 ---
 
 ## 统计
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 新增文件
@@ -199,7 +207,6 @@
 
 - [progress 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

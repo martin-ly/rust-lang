@@ -10,6 +10,7 @@
 //! - System: + （、、）
 //! - Query: 按组件类型筛选实体
 //! - Query: type volume
+//!
 //! 运行: cargo run --example hecs_ecs_demo -p c09_design_pattern
 
 use hecs::{Entity, World};
