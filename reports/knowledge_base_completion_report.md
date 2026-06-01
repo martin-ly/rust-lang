@@ -78,6 +78,7 @@ Top 10 by row count:
 - ✅ Kani 规格 + Miri 动态验证场景
 
 **维护规范**: 每 6 周扫描 Rust stable release；重大 RFC 合并后更新对应维度；来源标注率不低于 15%
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
