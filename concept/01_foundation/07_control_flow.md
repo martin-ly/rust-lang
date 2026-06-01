@@ -719,7 +719,5 @@ fn main() {
 ## 参考来源
 
 > [来源: [The Rust Programming Language, Ch. 3.5](https://doc.rust-lang.org/book/ch03-05-control-flow.html)]
-
 > [来源: [RFC 1210 — `impl Trait`](https://rust-lang.github.io/rfcs/1210-impl-trait-for-all.html)]
-
 > [来源: [RFC 2497 — if let chains](https://rust-lang.github.io/rfcs/2497-if-let-chains.html)]

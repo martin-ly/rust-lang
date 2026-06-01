@@ -188,7 +188,7 @@ pub fn notify_dyn(item: &dyn Summary) {
 
 Trait 可以看作**带约束的接口（constrained interfaces）**或**类型类（type classes）**的 Rust 实现：
 
-```
+```text
 Trait Summary ≈ 类型 T 上的方法族 + 关联类型 + 约束规则
 ```
 

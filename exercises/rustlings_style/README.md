@@ -1,6 +1,6 @@
 # Rustlings 风格交互式练习
 
-> **难度**: 渐进式  
+> **难度**: 渐进式
 > **目标**: 通过修复编译错误的代码来学习 Rust
 
 ---
@@ -8,11 +8,13 @@
 ## 使用方法
 
 1. 进入某一练习的目录：
+
    ```bash
    cd exercises/rustlings_style/ex01_borrow_fix
    ```
 
 2. 尝试编译，观察错误信息：
+
    ```bash
    cargo check
    ```
@@ -20,6 +22,7 @@
 3. 根据编译器提示修复 `src/lib.rs` 中的代码
 
 4. 运行测试验证修复：
+
    ```bash
    cargo test
    ```
@@ -61,6 +64,7 @@
 | ex06–ex07 | `crates/c04_generic` |
 | ex08–ex09 | `crates/c03_control_fn` |
 | ex10 | `crates/c02_type_system` |
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

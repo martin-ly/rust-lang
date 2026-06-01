@@ -1,4 +1,8 @@
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Ferrocene](https://ferrous-systems.com/ferrocene/), [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
+> **权威来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/),
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/),
+> [Ferrocene](https://ferrous-systems.com/ferrocene/),
+> [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
 > **相关概念**: [Option](../../../../concept/01_foundation/04_type_system.md)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
@@ -23,7 +27,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```
+```text
 传统C/C++开发挑战:
 ├── 内存安全漏洞占安全漏洞70%+
 ├── 平均每个缺陷修复成本 $6,000-$15,000
@@ -61,7 +65,7 @@ Rust解决方案:
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```
+```text
 阶段1: 试点项目 (6-12个月)
 ├── 选择低风险新功能模块
 ├── 组建3-5人Rust团队
@@ -115,7 +119,7 @@ Rust解决方案:
 
 #### 初期投资 (Year 1)
 
-```
+```text
 人员培训:
 ├── 外部培训: $50,000 (10人 × $5,000)
 ├── 内部培训开发: $30,000
@@ -138,7 +142,7 @@ Rust解决方案:
 
 #### 年度运营成本 (Year 2+)
 
-```
+```text
 工具链维护:
 ├── Ferrocene续费: $50,000
 ├── CI/CD运维: $30,000
@@ -162,7 +166,7 @@ Rust解决方案:
 
 #### 开发效率提升
 
-```
+```text
 项目规模: 100,000 LOC
 
 C/C++开发:
@@ -182,7 +186,7 @@ Rust开发:
 
 #### 质量成本降低
 
-```
+```text
 C/C++项目缺陷成本:
 ├── 开发阶段: 500缺陷 × $100 = $50,000
 ├── 测试阶段: 200缺陷 × $500 = $100,000
@@ -202,7 +206,7 @@ Rust项目缺陷成本:
 
 #### 认证加速
 
-```
+```text
 C/C++认证周期: 12个月
 Rust认证周期: 8个月 (形式化验证支持)
 节省: 4个月
@@ -213,7 +217,7 @@ Rust认证周期: 8个月 (形式化验证支持)
 
 #### 长期维护
 
-```
+```text
 年度维护成本 (C/C++): $200,000
 年度维护成本 (Rust): $100,000 (-50%)
 
@@ -245,7 +249,7 @@ Rust认证周期: 8个月 (形式化验证支持)
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```
+```text
 评估维度 (1-5分):
 
 技术能力:
@@ -279,7 +283,7 @@ Rust认证周期: 8个月 (形式化验证支持)
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```
+```text
 Month 1-3: 核心团队培养
 ├── 选择3-5名高级工程师
 ├── 外部培训 (40小时)
@@ -326,7 +330,7 @@ Year 2+: 持续优化
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```
+```text
 咨询服务:
 ├── Ferrous Systems (Rust+安全)
 ├── AdaCore (认证+工具)
@@ -350,7 +354,7 @@ Year 2+: 持续优化
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```
+```text
 汽车行业:
 ├── Tesla: 公开Rust使用
 ├── BMW: 试点项目进行中
@@ -376,7 +380,7 @@ Year 2+: 持续优化
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```
+```text
 Rust竞争优势:
 ├── 内存安全保证
 ├── 零成本抽象
@@ -402,7 +406,7 @@ Rust竞争优势:
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```
+```text
 准备阶段 (Month -3 to 0):
 □ 组织能力评估完成
 □ 管理层批准和预算
@@ -435,7 +439,7 @@ Rust竞争优势:
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```
+```text
 技术因素:
 ├── 选择合适的试点项目
 ├── 工具链早期投资
@@ -529,129 +533,3 @@ Rust竞争优势:
 >
 
 ---
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**

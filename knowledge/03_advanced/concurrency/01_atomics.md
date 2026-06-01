@@ -38,11 +38,11 @@
 ---
 
 ## 🧠 核心概念
->
+
 > **[来源: Rust Official Docs]**
 
 ### 模块 1: 概念定义
->
+
 > **[来源: Rust Official Docs]**
 
 #### 1.1 直观定义
@@ -54,9 +54,12 @@ C++20 §31 — Atomics library / ISO/IEC 14882:2020;
 ARMv8 `LDXR`/`STXR` (ARM Architecture Reference Manual DDI 0487F.a §B2.2.1)]。
 从硬件视角，现代 CPU 提供专门的指令来保证对单个内存位置读-改-写的原子性。
 
-但原子性只是基础。**内存序（Memory Ordering）** 才是原子操作的核心复杂度来源 [来源: Rust Atomics and Locks — Mara Bos / 2021; ISO C++20 §31.4 — Memory model / 2020; 核心形式化语义: happens-before 关系构成偏序集，五种内存序定义不同的可见性和重排约束]: 它定义了操作之间的**可见性保证**和**重排约束**。
+但原子性只是基础。
+**内存序（Memory Ordering）** 才是原子操作的核心复杂度来源
+[来源: Rust Atomics and Locks — Mara Bos / 2021; ISO C++20 §31.4 — Memory model / 2020; 核心形式化语义: happens-before 关系构成偏序集，五种内存序定义不同的可见性和重排约束]: 它定义了操作之间的**可见性保证**和**重排约束**。
 
-> 💡 关键直觉：原子操作 = **原子性（Atomicity）** + **可见性（Visibility）** + **有序性（Ordering）**。`Ordering::Relaxed` 仅保证原子性，`Ordering::SeqCst` 保证三者。
+> 💡 关键直觉：原子操作 = **原子性（Atomicity）** + **可见性（Visibility）** + **有序性（Ordering）**。
+> `Ordering::Relaxed` 仅保证原子性，`Ordering::SeqCst` 保证三者。
 
 #### 1.2 操作定义
 >

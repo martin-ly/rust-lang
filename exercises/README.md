@@ -22,7 +22,7 @@
 
 ## 目录结构
 
-```
+```text
 exercises/
 ├── Cargo.toml                    # 练习库 crate 配置
 ├── src/

@@ -1,5 +1,5 @@
 # Async Closures 异步闭包
->
+
 > **相关概念**: [异步闭包](../../../concept/03_advanced/02_async.md)
 > **Bloom 层级**: 理解
 > **📌 简介**: 异步闭包（`async || {}`）是 Rust 1.85 稳定的核心特性 [来源: RFC 3668 — Async Closures / 2024;
@@ -20,7 +20,7 @@
 ---
 
 ## 🎯 学习目标
->
+
 > **[来源: Rust Official Docs]**
 
 完成本章学习后，你将能够：
@@ -34,7 +34,7 @@
 ---
 
 ## 📋 先决条件
->
+
 > **[来源: Rust Official Docs]**
 
 1. **闭包与 Fn 三族** — `Fn`/`FnMut`/`FnOnce` 的捕获语义差异（`02_intermediate/traits.md`）
@@ -45,18 +45,19 @@
 ---
 
 ## 🧠 核心概念
->
+
 > **[来源: Rust Official Docs]**
 
 ### 模块 1: 概念定义
->
+
 > **[来源: Rust Official Docs]**
 
 #### 1.1 直观定义
->
+
 > **[来源: Rust Official Docs]**
 
-**异步闭包** 是一种特殊的闭包，其函数体是异步的：调用它不会立即执行代码，而是返回一个 `Future`。当这个 `Future` 被 `.await` 时，闭包体内的异步代码才开始执行。
+**异步闭包** 是一种特殊的闭包，其函数体是异步的：调用它不会立即执行代码，而是返回一个 `Future`。
+当这个 `Future` 被 `.await` 时，闭包体内的异步代码才开始执行。
 
 Rust 提供三种"异步可调用"形式，它们的捕获语义截然不同：
 
@@ -65,10 +66,12 @@ Rust 提供三种"异步可调用"形式，它们的捕获语义截然不同：
 | **async fn** | `async fn f() -> T` | 按值传参（无闭包捕获） | `impl Future<Output = T>` | 具名函数，复用性强 |
 | **async 块** | `async { ... }` | 按引用捕获环境（默认） | `impl Future<Output = T>` | 局部异步逻辑 |
 | **async move 块** | `async move { ... }` | 按值 move 捕获环境 | `impl Future<Output = T>` | 需要转移所有权时 |
-| **async 闭包** | `async || -> T { ... }` | 按引用捕获（默认），闭包语义 | `impl AsyncFn() -> T` | 高阶异步函数参数 |
-| **async move 闭包** | `async move || -> T { ... }` | 按值 move 捕获，闭包语义 | `impl AsyncFnOnce() -> T` | 需要 move 捕获的高阶场景 |
+| **async 闭包** | `async \|\| -> T { ... }` | 按引用捕获（默认），闭包语义 | `impl AsyncFn() -> T` | 高阶异步函数参数 |
+| **async move 闭包** | `async move \|\| -> T { ... }` | 按值 move 捕获，闭包语义 | `impl AsyncFnOnce() -> T` | 需要 move 捕获的高阶场景 |
 
-> 💡 关键直觉：`async || {}` 不是 `|| async {}` 的简写。前者是**异步闭包**（返回 Future 的闭包），后者是**返回 async 块的普通闭包**（返回 `impl Future` 的普通闭包）。两者的类型系统和捕获语义完全不同。
+> 💡 关键直觉：`async || {}` 不是 `|| async {}` 的简写。
+> 前者是**异步闭包**（返回 Future 的闭包），后者是**返回 async 块的普通闭包**（返回 `impl Future` 的普通闭包）。
+> 两者的类型系统和捕获语义完全不同。
 
 #### 1.2 操作定义
 

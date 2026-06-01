@@ -18,7 +18,7 @@
 > **Rust 异步编程核心：async/await、异步闭包、并发模式**
 
 ## 📚 内容
->
+
 > **[来源: Rust Official Docs]**
 
 | 文档 | 主题 | 难度 | 说明 |
@@ -36,7 +36,7 @@
 3. **快速查阅** → 参考 [async_closures_2024.md](01_async_closures_2024.md)
 
 ## 🚀 相关层
->
+
 > **[来源: Rust Official Docs]**
 
 - [03_advanced/concurrency/](../concurrency/) - 线程、原子操作、同步原语
@@ -45,7 +45,6 @@
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1

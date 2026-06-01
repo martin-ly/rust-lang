@@ -37,9 +37,6 @@
   - [十二、边界测试：数值类型的编译错误](#十二边界测试数值类型的编译错误)
     - [12.1 边界测试：整数溢出在 Debug 与 Release 中的差异（运行时行为）](#121-边界测试整数溢出在-debug-与-release-中的差异运行时行为)
     - [12.2 边界测试：浮点数相等比较（逻辑错误）](#122-边界测试浮点数相等比较逻辑错误)
-  - [十二、边界测试：数值类型的编译错误](#十二边界测试数值类型的编译错误-1)
-    - [12.1 边界测试：整数溢出在 Debug 与 Release 中的差异（运行时行为）](#121-边界测试整数溢出在-debug-与-release-中的差异运行时行为-1)
-    - [12.2 边界测试：浮点数相等比较（逻辑错误）](#122-边界测试浮点数相等比较逻辑错误-1)
     - [12.3 边界测试：`as` 转换的截断风险（编译错误）](#123-边界测试as-转换的截断风险编译错误)
     - [12.4 边界测试：浮点数作为 `match` 条件（编译错误）](#124-边界测试浮点数作为-match-条件编译错误)
     - [10.3 边界测试：`as` 转换的截断与符号变化（逻辑错误）](#103-边界测试as-转换的截断与符号变化逻辑错误)
@@ -50,17 +47,15 @@
 ---
 
 ## 一、核心概念
->
 
 ### 1.1 整数类型全景
->
 
 ```text
 Rust 整数类型:
 
   有符号整数:
   ┌──────────┬────────────┬──────────────────────────────┐
-  │ 类型     │ 大小       │ 范围                         │
+  │ 类型      │ 大小       │ 范围                         │
   ├──────────┼────────────┼──────────────────────────────┤
   │ i8       │ 1 字节     │ -128 ~ 127                   │
   │ i16      │ 2 字节     │ -32,768 ~ 32,767             │
@@ -73,14 +68,14 @@ Rust 整数类型:
 
   无符号整数:
   ┌──────────┬────────────┬──────────────────────────────┐
-  │ 类型     │ 大小       │ 范围                         │
+  │ 类型      │ 大小       │ 范围                         │
   ├──────────┼────────────┼──────────────────────────────┤
   │ u8       │ 1 字节     │ 0 ~ 255                      │
   │ u16      │ 2 字节     │ 0 ~ 65,535                   │
   │ u32      │ 4 字节     │ 0 ~ 4.3e9                    │
   │ u64      │ 8 字节     │ 0 ~ 1.8e19                   │
   │ u128     │ 16 字节    │ 0 ~ 3.4e38                   │
-  │ usize    │ 指针大小   │ 0 ~ 2^N-1                    │
+  │ usize    │ 指针大小    │ 0 ~ 2^N-1                    │
   └──────────┴────────────┴──────────────────────────────┘
 
   字面量表示:
@@ -107,10 +102,10 @@ Rust 整数类型:
 Rust 浮点类型 (IEEE 754 标准):
 
   ┌──────────┬────────────┬─────────────────────────────────┐
-  │ 类型     │ 大小       │ 精度                            │
+  │ 类型      │ 大小       │ 精度                            │
   ├──────────┼────────────┼─────────────────────────────────┤
-  │ f32      │ 4 字节     │ ~7 位十进制数                   │
-  │ f64      │ 8 字节     │ ~15 位十进制数                  │
+  │ f32      │ 4 字节     │ ~7 位十进制数                    │
+  │ f64      │ 8 字节     │ ~15 位十进制数                   │
   └──────────┴────────────┴─────────────────────────────────┘
 
   默认类型: f64（现代 64 位 CPU 上 f64 与 f32 速度相同）
@@ -499,49 +494,6 @@ fn main() {
     let mut x: u8 = 255;
     // Debug 模式: panic! (算术溢出检查开启)
     // Release 模式: 环绕为 0 (two's complement wrapping)
-    // x = x + 1; // ⚠️ 行为取决于编译配置
-
-    // 正确: 显式选择溢出行为
-    let y = x.wrapping_add(1); // ✅ 总是环绕: 255 + 1 = 0
-    let z = x.saturating_add(1); // ✅ 饱和: 255 + 1 = 255
-    let w = x.checked_add(1); // ✅ 返回 Option: None
-    println!("y={} z={} w={:?}", y, z, w);
-}
-```
-
-> **修正**: Rust 整数溢出在 Debug 模式 panic（安全检查），在 Release 模式静默环绕（性能优化）。这不同于 C/C++ 的未定义行为——Rust 明确定义了环绕语义，只是默认在 Debug 时 panic。生产代码应使用显式方法（`wrapping_*`、`saturating_*`、`checked_*`、`overflowing_*`）表达意图，避免依赖编译模式。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-
-### 12.2 边界测试：浮点数相等比较（逻辑错误）
-
-```rust
-fn main() {
-    let a: f64 = 0.1 + 0.2;
-    let b: f64 = 0.3;
-    // ⚠️ 逻辑错误: 直接比较浮点数
-    if a == b {
-        println!("equal"); // 可能不执行！
-    }
-    println!("a={:.20}, b={:.20}", a, b);
-    // 输出: a=0.30000000000000004441, b=0.29999999999999998890
-}
-
-// 正确: 使用 epsilon 比较
-fn approx_eq(a: f64, b: f64, epsilon: f64) -> bool {
-    (a - b).abs() < epsilon // ✅ 近似相等
-}
-```
-
-> **修正**: 浮点数（IEEE 754）不能进行精确相等比较，因为二进制表示无法精确表达大多数十进制小数。Rust 编译器会警告 `a == b`（clippy::float_cmp），但不阻止编译。正确做法是比较差值是否小于某个 epsilon。对于财务计算，考虑使用 `rust_decimal` 或 `bigdecimal` 库避免浮点误差。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-
-## 十二、边界测试：数值类型的编译错误
-
-### 12.1 边界测试：整数溢出在 Debug 与 Release 中的差异（运行时行为）
-
-```rust
-fn main() {
-    let mut x: u8 = 255;
-    // Debug 模式: panic! (算术溢出检查开启)
-    // Release 模式: 环绕为 0 (two's complement wrapping)
     // x = x + 1; // 行为取决于编译配置
 
     // 正确: 显式选择溢出行为
@@ -552,7 +504,11 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 整数溢出在 Debug 模式 panic（安全检查），在 Release 模式静默环绕（性能优化）。这不同于 C/C++ 的未定义行为——Rust 明确定义了环绕语义，只是默认在 Debug 时 panic。生产代码应使用显式方法（`wrapping_*`、`saturating_*`、`checked_*`、`overflowing_*`）表达意图，避免依赖编译模式。这与 Swift 的默认溢出 panic（所有模式）和 C 的未定义行为形成对比。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: Rust 整数溢出在 Debug 模式 panic（安全检查），在 Release 模式静默环绕（性能优化）。
+> 这不同于 C/C++ 的未定义行为——Rust 明确定义了环绕语义，只是默认在 Debug 时 panic。
+> 生产代码应使用显式方法（`wrapping_*`、`saturating_*`、`checked_*`、`overflowing_*`）表达意图，避免依赖编译模式。
+> 这与 Swift 的默认溢出 panic（所有模式）和 C 的未定义行为形成对比。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 12.2 边界测试：浮点数相等比较（逻辑错误）
 
@@ -574,7 +530,10 @@ fn approx_eq(a: f64, b: f64, epsilon: f64) -> bool {
 }
 ```
 
-> **修正**: 浮点数（IEEE 754）不能进行精确相等比较，因为二进制表示无法精确表达大多数十进制小数。Rust 编译器会警告 `a == b`（clippy::float_cmp），但不阻止编译。正确做法是比较差值是否小于某个 epsilon。对于财务计算，考虑使用 `rust_decimal` 或 `bigdecimal` 库避免浮点误差。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: 浮点数（IEEE 754）不能进行精确相等比较，因为二进制表示无法精确表达大多数十进制小数。
+> Rust 编译器会警告 `a == b`（clippy::float_cmp），但不阻止编译。
+> 正确做法是比较差值是否小于某个 epsilon。对于财务计算，考虑使用 `rust_decimal` 或 `bigdecimal` 库避免浮点误差。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 12.3 边界测试：`as` 转换的截断风险（编译错误）
 
@@ -594,7 +553,10 @@ fn fixed() {
 }
 ```
 
-> **修正**: Rust 禁止隐式整数转换，即使是缩小范围（`i32` → `i8`）也需要 `as` 关键字。`as` 执行截断转换（truncating cast），高位丢弃。如需安全检查，使用 `TryInto::try_into()`（返回 `Result`）。这与 C 的隐式转换（`int` → `char` 静默截断）形成对比——Rust 的显式性消除了意外截断 bug。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: Rust 禁止隐式整数转换，即使是缩小范围（`i32` → `i8`）也需要 `as` 关键字。`as` 执行截断转换（truncating cast），高位丢弃。
+> 如需安全检查，使用 `TryInto::try_into()`（返回 `Result`）。
+> 这与 C 的隐式转换（`int` → `char` 静默截断）形成对比——Rust 的显式性消除了意外截断 bug。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 12.4 边界测试：浮点数作为 `match` 条件（编译错误）
 
@@ -617,7 +579,11 @@ fn fixed() {
 }
 ```
 
-> **修正**: Rust 的 `match` 要求模式是**精确匹配**的，浮点数因精度问题不能用于模式。`0.1 + 0.2 != 0.3` 在二进制浮点中是事实，因此 `match 0.3` 可能永远不会匹配。编译器直接拒绝浮点模式，强制开发者使用 epsilon 比较或区间检查。这与 C 的 `switch`（不支持浮点）类似，但 Rust 的错误信息更明确——指出浮点模式的语义问题。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: Rust 的 `match` 要求模式是**精确匹配**的，浮点数因精度问题不能用于模式。
+> `0.1 + 0.2 != 0.3` 在二进制浮点中是事实，因此 `match 0.3` 可能永远不会匹配。
+> 编译器直接拒绝浮点模式，强制开发者使用 epsilon 比较或区间检查。
+> 这与 C 的 `switch`（不支持浮点）类似，但 Rust 的错误信息更明确——指出浮点模式的语义问题。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.3 边界测试：`as` 转换的截断与符号变化（逻辑错误）
 
@@ -635,7 +601,18 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的 `as` 关键字执行**截断/扩展转换**（truncating/widening cast），不检查值是否在目标类型范围内。`i32 → u32` 是位的重新解释（two's complement），`i32 → i8` 截断低 8 位。这些转换永不 panic，但可能产生意外结果。安全替代：1) `try_into()`（返回 `Result`，值越界时 `Err`）；2) `checked_cast`（不稳定）；3) 显式范围检查。Rust 的设计哲学：`as` 是"我知道我在做什么"的低级操作，需要开发者负责正确性。这与 C 的 `(type)value`（相同行为，无替代）或 Swift 的 `Int8(big)`（运行时检查，失败 panic）不同——Rust 在性能和安全性间提供明确选择。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/convert/trait.TryInto.html)]
+> **修正**: Rust 的 `as` 关键字执行**截断/扩展转换**（truncating/widening cast），不检查值是否在目标类型范围内。
+> `i32 → u32` 是位的重新解释（two's complement），`i32 → i8` 截断低 8 位。
+> 这些转换永不 panic，但可能产生意外结果。
+> 安全替代：
+>
+> 1) `try_into()`（返回 `Result`，值越界时 `Err`）；
+> 2) `checked_cast`（不稳定）；
+> 3) 显式范围检查。
+> Rust 的设计哲学：`as` 是"我知道我在做什么"的低级操作，需要开发者负责正确性。
+> 这与 C 的 `(type)value`（相同行为，无替代）或 Swift 的 `Int8(big)`（运行时检查，失败 panic）不同——Rust 在性能和安全性间提供明确选择。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)] ·
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/convert/trait.TryInto.html)]
 
 ### 10.4 边界测试：浮点数的 `NaN` 比较（逻辑错误）
 
@@ -654,7 +631,15 @@ fn main() {
 }
 ```
 
-> **修正**: IEEE 754 规定 `NaN != NaN`，因此 `x == f64::NAN` 总是 `false`。检测 `NaN` 必须使用 `is_nan()`。这是浮点数的常见陷阱：排序、去重、哈希时 `NaN` 破坏常规假设。Rust 的 `HashMap` 和 `BTreeMap` 不直接支持 `f32`/`f64` 作为键，因为 `NaN` 使相等性不满足等价关系（反身性不成立）。`ordered_float` crate 通过将 `NaN` 映射到特定值解决此问题。这与 C/C++ 的 `isnan()` 宏、Python 的 `math.isnan()`、Java 的 `Double.isNaN()` 相同——所有遵循 IEEE 754 的语言都有此问题。Rust 的类型系统不阻止 `NaN` 比较错误，但 `Hash` 限制防止 `NaN` 导致更严重的集合不一致。[来源: [IEEE 754 Standard](https://ieeexplore.ieee.org/document/8766229)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.f64.html)]
+> **修正**: IEEE 754 规定 `NaN != NaN`，因此 `x == f64::NAN` 总是 `false`。
+> 检测 `NaN` 必须使用 `is_nan()`。
+> 这是浮点数的常见陷阱：排序、去重、哈希时 `NaN` 破坏常规假设。
+> Rust 的 `HashMap` 和 `BTreeMap` 不直接支持 `f32`/`f64` 作为键，因为 `NaN` 使相等性不满足等价关系（反身性不成立）。
+> `ordered_float` crate 通过将 `NaN` 映射到特定值解决此问题。
+> 这与 C/C++ 的 `isnan()` 宏、Python 的 `math.isnan()`、Java 的 `Double.isNaN()` 相同——所有遵循 IEEE 754 的语言都有此问题。
+> Rust 的类型系统不阻止 `NaN` 比较错误，但 `Hash` 限制防止 `NaN` 导致更严重的集合不一致。
+> [来源: [IEEE 754 Standard](https://ieeexplore.ieee.org/document/8766229)] ·
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.f64.html)]
 
 ### 10.2 边界测试：`as` 截断与 `From` 语义差异（编译错误）
 
@@ -669,7 +654,18 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的数值转换分三层：1) `From`/`Into`——保证无损转换（`u8::from(5u8)` 合法，`u8::from(1000u32)` 不实现）；2) `TryFrom`/`TryInto`——可能失败，返回 `Result`；3) `as`——强制转换，可能截断/溢出/符号变化，编译期不检查。设计意图：`From` 是"可信转换"，`as` 是"我清楚后果"。`u8::from(x)` 编译错误是因为 `From<u32>` 未为 `u8` 实现。这与 C 的隐式截断（`int` → `char`，静默截断）或 Java 的强制类型转换（`(byte)1000` 截断）不同——Rust 的类型系统区分了"安全但可能失败"和"显式承担风险"两种语义。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/convert/trait.From.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)]
+> **修正**:
+> Rust 的数值转换分三层：
+>
+> 1) `From`/`Into`——保证无损转换（`u8::from(5u8)` 合法，`u8::from(1000u32)` 不实现）；
+> 2) `TryFrom`/`TryInto`——可能失败，返回 `Result`；
+> 3) `as`——强制转换，可能截断/溢出/符号变化，编译期不检查。
+> 设计意图：`From` 是"可信转换"，`as` 是"我清楚后果"。
+> `u8::from(x)` 编译错误是因为 `From<u32>` 未为 `u8` 实现。
+> 这与 C 的隐式截断（`int` → `char`，静默截断）或 Java 的强制类型转换（`(byte)1000` 截断）不同
+> ——Rust 的类型系统区分了"安全但可能失败"和"显式承担风险"两种语义。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/convert/trait.From.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)]
 
 ## 实践
 

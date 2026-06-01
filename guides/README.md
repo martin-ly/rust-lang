@@ -12,7 +12,8 @@
 ### 快速入口
 
 | 指南 | 实际位置 | 说明 |
-| :--- | :--- | :--- || **快速开始** | [docs/README.md](../docs/README.md) | 文档主索引 |
+| :--- | :--- | :--- |
+| **快速开始** | [docs/README.md](../docs/README.md) | 文档主索引 |
 | **学习检查清单** | [LEARNING_CHECKLIST.md](../LEARNING_CHECKLIST.md) | 进度追踪、间隔重复、自测题 |
 | **交互式练习** | [exercises/README.md](../exercises/README.md) | Rustlings、Playground 对接 |
 | **Rustlings 模块映射** | [exercises/RUSTLINGS_MAPPING.md](../exercises/RUSTLINGS_MAPPING.md) | C01–C12 与 Rustlings 习题对应 |
@@ -23,7 +24,8 @@
 ### 使用指南（位于 docs/）
 
 | 指南 | 路径 |
-| :--- | :--- || 异步编程使用指南 | [docs/05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md](../docs/05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md) |
+| :--- | :--- |
+| 异步编程使用指南 | [docs/05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md](../docs/05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md) |
 | 设计模式使用指南 | [docs/05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md](../docs/05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md) |
 | 宏系统使用指南 | [docs/05_guides/MACRO_SYSTEM_USAGE_GUIDE.md](../docs/05_guides/MACRO_SYSTEM_USAGE_GUIDE.md) |
 | 线程并发使用指南 | [docs/05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md](../docs/05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md) |
@@ -34,13 +36,15 @@
 ### 已完善指南
 
 | 指南 | 路径 | 说明 |
-| :--- | :--- | :--- || **AI 辅助编程指南** | [AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md](./AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md) | 提示词模板、RAG、工作流、1.95+ 特性 |
+| :--- | :--- | :--- |
+| **AI 辅助编程指南** | [AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md](./AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md) | 提示词模板、RAG、工作流、1.95+ 特性 |
 | **AI+Rust 生态指南** | [docs/05_guides/AI_RUST_ECOSYSTEM_GUIDE.md](../docs/05_guides/AI_RUST_ECOSYSTEM_GUIDE.md) | Burn/Candle/LLM、用 Rust 构建 AI |
 
 ### 专题指南
 
 | 指南 | 路径 | 说明 |
-| :--- | :--- | :--- || **Unsafe Rust** | [docs/05_guides/UNSAFE_RUST_GUIDE.md](../docs/05_guides/UNSAFE_RUST_GUIDE.md) | Rustonomicon 导航与安全抽象 |
+| :--- | :--- | :--- |
+| **Unsafe Rust** | [docs/05_guides/UNSAFE_RUST_GUIDE.md](../docs/05_guides/UNSAFE_RUST_GUIDE.md) | Rustonomicon 导航与安全抽象 |
 | **CLI 应用开发** | [docs/05_guides/CLI_APPLICATIONS_GUIDE.md](../docs/05_guides/CLI_APPLICATIONS_GUIDE.md) | 对标 Command Line Book |
 | **嵌入式 Rust** | [docs/05_guides/EMBEDDED_RUST_GUIDE.md](../docs/05_guides/EMBEDDED_RUST_GUIDE.md) | 对标 Embedded Book |
 

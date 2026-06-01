@@ -10,7 +10,11 @@
 
 ---
 
-> **来源**: [Rust Reference — Never Type](https://doc.rust-lang.org/reference/types/never.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [RFC 1216](https://rust-lang.github.io/rfcs/1216-bang-type.html)
+> **来源**:
+> [Rust Reference — Never Type](https://doc.rust-lang.org/reference/types/never.html) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
+> [RFC 1216](https://rust-lang.github.io/rfcs/1216-bang-type.html)
 
 ## 目录
 
@@ -83,7 +87,7 @@ fn fatal_error() -> ! {
 | 底类型（bottom type） | `!` | 所有类型的子集 |
 | 空类型 | `enum Void {}` | 无构造器的枚举 |
 
-```
+```text
 类型层级（子类型关系）:
 
         dyn Any / ()
@@ -382,7 +386,11 @@ fn incomplete_match(result: Result<i32, !>) -> i32 {
 
 ---
 
-> **权威来源**: [Rust Reference — Never Type](https://doc.rust-lang.org/reference/types/never.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [RFC 1216](https://rust-lang.github.io/rfcs/1216-bang-type.html)
+> **权威来源**:
+> [Rust Reference — Never Type](https://doc.rust-lang.org/reference/types/never.html) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
+> [RFC 1216](https://rust-lang.github.io/rfcs/1216-bang-type.html)
 >
 > **文档版本**: 1.0
 > **对应 Rust 版本**: 1.96.0+ stable (Edition 2024)

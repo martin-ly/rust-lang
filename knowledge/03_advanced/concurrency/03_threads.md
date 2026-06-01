@@ -2,11 +2,19 @@
 
 > **相关概念**: [线程](../../../concept/03_advanced/01_concurrency.md)
 > **Bloom 层级**: 理解
-> **📌 简介**: Rust 的线程模型建立在 OS 线程之上 [来源: std::thread / Rust Standard Library 2025; POSIX Threads (pthreads) / IEEE Std 1003.1-2017]，但通过 `Send` 和 `Sync` 两个 marker trait，在编译期消除了数据竞争 [来源: RustBelt — Jung et al., POPL 2018; 核心定理: Rust 的类型系统 + `Send`/`Sync` 约束保证数据竞争自由（Data Race Freedom）; Rustonomicon — Send and Sync / 2025]。本章深入形式化语义、内存模型与生产实践。
+> **📌 简介**:
+> Rust 的线程模型建立在 OS 线程之上 [来源: std::thread / Rust Standard Library 2025; POSIX Threads (pthreads) / IEEE Std 1003.1-2017]，
+> 但通过 `Send` 和 `Sync` 两个 marker trait，在编译期消除了数据竞争 [来源: RustBelt — Jung et al., POPL 2018; 核心定理: Rust 的类型系统 + `Send`/`Sync` 约束保证数据竞争自由（Data Race Freedom）; Rustonomicon — Send and Sync / 2025]。
+> 本章深入形式化语义、内存模型与生产实践。
 >
 > **⏱️ 预计学习时间**: 60-90 分钟
 > **📚 难度级别**: ⭐⭐⭐⭐ 高级
-> **权威来源**: [Rust Book Ch16](https://doc.rust-lang.org/book/ch16-00-concurrency.html), [Rustonomicon — Send and Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html), [Rust Reference — Auto traits](https://doc.rust-lang.org/reference/special-types-and-traits.html#auto-traits), [RustBelt (Jung et al., POPL 2018)](https://plv.mpi-sws.org/rustbelt/), [RFC 3151: Scoped Threads](https://rust-lang.github.io/rfcs/3151-scoped-threads.html)
+> **权威来源**:
+> [Rust Book Ch16](https://doc.rust-lang.org/book/ch16-00-concurrency.html),
+> [Rustonomicon — Send and Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html),
+> [Rust Reference — Auto traits](https://doc.rust-lang.org/reference/special-types-and-traits.html#auto-traits),
+> [RustBelt (Jung et al., POPL 2018)](https://plv.mpi-sws.org/rustbelt/),
+> [RFC 3151: Scoped Threads](https://rust-lang.github.io/rfcs/3151-scoped-threads.html)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 `Send`/`Sync` 形式化语义来源标注、RustBelt 数据竞争自由证明引用、scoped threads RFC 设计决策、跨语言并发模型对比矩阵 [来源: Authority Source Sprint Batch 8]
 

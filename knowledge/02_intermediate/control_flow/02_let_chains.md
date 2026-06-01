@@ -2,7 +2,10 @@
 
 > **相关概念**: [变量绑定](../../../concept/01_foundation/07_control_flow.md)
 > **Bloom 层级**: 理解
-> **权威来源**: [RFC 2497 — if-let-chains](https://rust-lang.github.io/rfcs/2497-if-let-chains.html), [Rust Reference — Let expressions](https://doc.rust-lang.org/reference/statements.html#let-statements), [Rust 2024 Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/let-else.html)
+> **权威来源**:
+> [RFC 2497 — if-let-chains](https://rust-lang.github.io/rfcs/2497-if-let-chains.html),
+> [Rust Reference — Let expressions](https://doc.rust-lang.org/reference/statements.html#let-statements),
+> [Rust 2024 Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/let-else.html)
 > **权威来源对齐变更日志**: 2026-05-19 新增 RFC 2497 设计决策来源标注、跨语言对比矩阵（Haskell ViewPatterns / Swift if let / C++17 structured binding） [来源: Authority Source Sprint Batch 8]
 
 ## 概述
@@ -12,7 +15,7 @@
 允许在 `if` 和 `while` 条件中将 `let` 绑定与普通布尔表达式链式组合，大幅简化嵌套的 `if let` 代码。
 
 ## 语法
->
+
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore

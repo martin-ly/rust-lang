@@ -165,7 +165,6 @@ BTreeMap<K, V>:
 ## 二、技术细节
 
 ### 2.1 容量管理与重新分配
->
 
 ```rust
 // Vec 的容量管理
@@ -199,7 +198,6 @@ let boxed: Box<[i32]> = vec.into_boxed_slice();
 ---
 
 ### 2.2 Entry API
->
 
 ```rust,ignore
 use std::collections::HashMap;
@@ -230,7 +228,6 @@ map.entry("key").and_modify(|v| *v += 1).or_insert(0);
 ---
 
 ### 2.3 Drain 与保留模式
->
 
 ```rust,ignore
 // drain: 移除并迭代范围内的元素
@@ -495,7 +492,10 @@ struct PointFixed {
 }
 ```
 
-> **修正**: `HashMap` 的键必须实现 `Hash` 和 `Eq`（以及 `PartialEq`）。`Hash` 用于计算哈希值，`Eq` 保证相等性判断的等价关系（自反、对称、传递）。浮点数（`f32`/`f64`）未实现 `Eq`（因 NaN != NaN），不能作为 `HashMap` 键。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: `HashMap` 的键必须实现 `Hash` 和 `Eq`（以及 `PartialEq`）。
+> `Hash` 用于计算哈希值，`Eq` 保证相等性判断的等价关系（自反、对称、传递）。
+> 浮点数（`f32`/`f64`）未实现 `Eq`（因 NaN != NaN），不能作为 `HashMap` 键。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 14.2 边界测试：迭代器消费后重复使用（编译错误）
 
@@ -518,7 +518,10 @@ fn fixed() {
 }
 ```
 
-> **修正**: `into_iter()` 消耗集合所有权，迭代器只能遍历一次。如需多次遍历，使用 `iter()`（共享引用）或 `iter_mut()`（可变引用）。这体现了 Rust 所有权系统与迭代器模式的紧密结合——编译器通过所有权追踪防止"迭代器失效"和"重复消费"。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: `into_iter()` 消耗集合所有权，迭代器只能遍历一次。
+> 如需多次遍历，使用 `iter()`（共享引用）或 `iter_mut()`（可变引用）。
+> 这体现了 Rust 所有权系统与迭代器模式的紧密结合——编译器通过所有权追踪防止"迭代器失效"和"重复消费"。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.3 边界测试：`Vec::drain` 的范围越界（运行时 panic）
 
@@ -531,7 +534,19 @@ fn main() {
 }
 ```
 
-> **修正**: `Vec::drain(range)` 移除指定范围内的元素并返回迭代器。范围必须满足 `start <= end <= len`，否则 panic。`drain` 是高效的批量移除（O(end - start))，因为只需移动尾部元素填充空洞。这与 `Vec::remove`（逐个移除，每次 O(n)）或 `retain`（按条件过滤）不同。安全使用：1) 先检查 `v.len()`；2) 使用 `v.drain(..)`（全部移除）；3) 使用 `split_off`（分割为两个 Vec）。Rust 的边界检查在 `drain` 等批量操作上同样严格，防止内存越界。这与 C++ 的 `vector::erase(first, last)`（范围无效是 UB）不同——Rust 将 UB 转化为 panic。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/vec/struct.Vec.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: `Vec::drain(range)` 移除指定范围内的元素并返回迭代器。
+> 范围必须满足 `start <= end <= len`，否则 panic。
+> `drain` 是高效的批量移除（O(end - start))，因为只需移动尾部元素填充空洞。
+> 这与 `Vec::remove`（逐个移除，每次 O(n)）或 `retain`（按条件过滤）不同。
+> 安全使用：
+>
+> 1) 先检查 `v.len()`；
+> 2) 使用 `v.drain(..)`（全部移除）；
+> 3) 使用 `split_off`（分割为两个 Vec）。
+> Rust 的边界检查在 `drain` 等批量操作上同样严格，防止内存越界。
+> 这与 C++ 的 `vector::erase(first, last)`（范围无效是 UB）不同——Rust 将 UB 转化为 panic。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/vec/struct.Vec.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.4 边界测试：`HashMap` 的自定义哈希器与 `BuildHasherDefault`（编译错误）
 
@@ -553,7 +568,16 @@ fn main() {
 }
 ```
 
-> **修正**: `HashMap` 的第三个泛型参数是哈希器构建器（`S: BuildHasher`），默认 `RandomState`（使用 SipHash 1-3，防 HashDoS）。自定义哈希器（如 `fnv::FnvHasher` 用于小键高性能、`ahash::AHasher` 用于通用高性能）需实现 `BuildHasher` 和 `Hasher` trait。`BuildHasherDefault<H>` 要求 `H: Default + Hasher`，是标准库提供的便捷包装。常见错误：1) 未引入 crate（`fnv`、`ahash`）；2) 混淆 `Hasher`（状态机，产生哈希值）和 `BuildHasher`（工厂，创建 `Hasher`）；3) 在需要 `Send + Sync` 的环境中使用非线程安全的哈希器。这与 Java 的 `HashMap`（固定哈希算法）或 C++ 的 `std::unordered_map`（模板参数 `Hash` 和 `KeyEqual`）类似——Rust 提供编译期可配置的哈希策略。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/collections/struct.HashMap.html)] · [来源: [fnv Crate](https://docs.rs/fnv/)]
+> **修正**: `HashMap` 的第三个泛型参数是哈希器构建器（`S: BuildHasher`），默认 `RandomState`（使用 SipHash 1-3，防 HashDoS）。
+> 自定义哈希器（如 `fnv::FnvHasher` 用于小键高性能、`ahash::AHasher` 用于通用高性能）需实现 `BuildHasher` 和 `Hasher` trait。
+> `BuildHasherDefault<H>` 要求 `H: Default + Hasher`，是标准库提供的便捷包装。
+> 常见错误：
+>
+> 1) 未引入 crate（`fnv`、`ahash`）；
+> 2) 混淆 `Hasher`（状态机，产生哈希值）和 `BuildHasher`（工厂，创建 `Hasher`）；
+> 3) 在需要 `Send + Sync` 的环境中使用非线程安全的哈希器。
+> 这与 Java 的 `HashMap`（固定哈希算法）或 C++ 的 `std::unordered_map`（模板参数 `Hash` 和 `KeyEqual`）类似——Rust 提供编译期可配置的哈希策略。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/collections/struct.HashMap.html)] · [来源: [fnv Crate](https://docs.rs/fnv/)]
 
 ### 10.3 边界测试：`Vec::drain` 后继续使用原 Vec（编译错误）
 
@@ -569,7 +593,14 @@ fn main() {
 }
 ```
 
-> **修正**: `Vec::drain(range)` 返回一个迭代器，它**可变借用**原 `Vec`（`&mut self`）。在 `drain` 迭代器存活期间，不能对原 `Vec` 进行任何操作（读、写、push、pop）。`drain` 的实现：将指定范围的元素移动到迭代器中，原位置标记为空。迭代器 `drop` 时，压缩剩余元素。这与 `retain`（原地过滤，不返回迭代器）或 `splice`（替换范围）不同——`drain` 是"取出并消费"的操作。常见模式：`for x in v.drain(..) { process(x); }` 完成后 `v` 为空。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/vec/struct.Vec.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**:
+> `Vec::drain(range)` 返回一个迭代器，它**可变借用**原 `Vec`（`&mut self`）。
+> 在 `drain` 迭代器存活期间，不能对原 `Vec` 进行任何操作（读、写、push、pop）。
+> `drain` 的实现：将指定范围的元素移动到迭代器中，原位置标记为空。迭代器 `drop` 时，压缩剩余元素。
+> 这与 `retain`（原地过滤，不返回迭代器）或 `splice`（替换范围）不同——`drain` 是"取出并消费"的操作。
+> 常见模式：`for x in v.drain(..) { process(x); }` 完成后 `v` 为空。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/vec/struct.Vec.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.4 边界测试：不可变借用与可变借用的冲突
 
@@ -598,7 +629,5 @@ fn main() {
 ## 参考来源
 
 > [来源: [Rustonomicon — Collections](https://doc.rust-lang.org/nomicon/vec/vec.html)]
-
 > [来源: [Rust Reference — Generic Collections](https://doc.rust-lang.org/reference/items/generics.html)]
-
 > [来源: [Algorithmica — Rust Collections](https://en.algorithmica.org/hpc/)]

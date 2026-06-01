@@ -1,6 +1,6 @@
 # 提示: 类型转换
 
-实现 From<A> for B 会自动获得 Into<B> for A。注意浮点数精度。
+实现 `From<A>` for B 会自动获得 `Into<B>` for A。注意浮点数精度。
 
 ## 相关阅读
 

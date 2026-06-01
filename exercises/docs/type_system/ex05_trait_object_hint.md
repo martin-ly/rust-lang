@@ -1,6 +1,6 @@
 # 提示: 特质对象
 
-Box<dyn Shape> 允许在运行时动态分发。注意 trait object 有大小限制（object safe）。
+`Box<dyn Shape>` 允许在运行时动态分发。注意 trait object 有大小限制（object safe）。
 
 ## 相关阅读
 

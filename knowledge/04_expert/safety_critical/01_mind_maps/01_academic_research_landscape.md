@@ -28,7 +28,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```
+```text
 Stacked Borrows (2018):
 ├── 作者: Ralf Jung et al.
 ├── 会议: POPL 2019
@@ -72,7 +72,7 @@ Tree Borrows (2023):
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```
+```text
 Prusti (ETH Zurich):
 ├── 技术: Viper验证基础设施
 ├── 方法: 契约式验证
@@ -149,7 +149,7 @@ Aeneas (Inria):
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```
+```text
 研究主题:
 ├── 泛型关联类型 (GAT)
 │   ├── 稳定化: Rust 1.65
@@ -193,7 +193,7 @@ Aeneas (Inria):
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-```
+```text
 增量编译:
 ├── 当前状态: 可用但慢
 ├── 研究方向: 并行化
@@ -214,7 +214,7 @@ MIR优化:
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```
+```text
 λ_Rust (RustBelt):
 ├── 高阶并发分离逻辑
 ├── 支持所有权和借用
@@ -241,7 +241,7 @@ Oxide (Penn):
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```
+```text
 Rust for Linux:
 ├── 状态: Linux 6.1+正式支持
 ├── 维护者: Miguel Ojeda
@@ -268,7 +268,7 @@ Tock (斯坦福):
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```
+```text
 RT-Rust:
 ├── 实时扩展
 ├── 调度分析
@@ -290,7 +290,7 @@ Rust on RTOS:
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```
+```text
 MIT:
 ├── 6.035: 编译器
 ├── Rust组件
@@ -316,7 +316,7 @@ ETH Zurich:
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```
+```text
 Rust Verification Workshop:
 ├── 年度会议
 ├── 工具展示
@@ -338,7 +338,7 @@ Rust Formal Methods Interest Group:
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```
+```text
 Tree Borrows集成:
 ├── rustc集成
 ├── 性能评估
@@ -359,7 +359,7 @@ Tree Borrows集成:
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```
+```text
 效果系统:
 ├── async/const统一
 ├── 语言设计
@@ -386,7 +386,7 @@ Tree Borrows集成:
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```
+```text
 NSF (美国):
 ├── 形式化方法
 ├── 系统安全

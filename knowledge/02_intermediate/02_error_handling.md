@@ -108,9 +108,15 @@ result.err()  // Option<E>
 
 #### 1.3 形式化直觉
 
-> ⚠️ **标注**: 本节与 Rust 类型系统的代数语义对齐 [来源: Wadler — Monads for functional programming / 1990; Rust 错误处理可视为 `Result` monad 在命令式语言中的特化实现，其中 `?` 对应 monadic bind (`>>=`) 的语法糖; RFC 243 §Motivation]。
+> ⚠️ **标注**:
+> 本节与 Rust 类型系统的代数语义对齐 [来源: Wadler — Monads for functional programming / 1990;
+> Rust 错误处理可视为 `Result` monad 在命令式语言中的特化实现，其中 `?` 对应 monadic bind (`>>=`) 的语法糖; RFC 243 §Motivation]。
 >
-> **跨语言对比**: C++ 异常（零开销抽象，但无类型安全保证）[来源: ISO C++20 §14; Itanium ABI — Zero-cost exception handling / 2000]; Haskell `Either` monad（类型系统完备，纯函数式）[来源: Wadler / 1990; GHC Control.Monad.Except]; Go `error` 接口（显式返回，但无泛型约束）[来源: Go Language Specification — Error interface / 2022]; Java checked exception（编译期检查，但破坏函数签名稳定性）[来源: Java Language Specification §11 / 2020]。
+> **跨语言对比**:
+> C++ 异常（零开销抽象，但无类型安全保证）[来源: ISO C++20 §14; Itanium ABI — Zero-cost exception handling / 2000];
+> Haskell `Either` monad（类型系统完备，纯函数式）[来源: Wadler / 1990; GHC Control.Monad.Except];
+> Go `error` 接口（显式返回，但无泛型约束）[来源: Go Language Specification — Error interface / 2022];
+> Java checked exception（编译期检查，但破坏函数签名稳定性）[来源: Java Language Specification §11 / 2020]。
 
 `Result<T, E>` 在类型论中对应**和类型（Sum Type）**：`Result<T, E> ≡ T + E`（ tagged union）。
 
@@ -118,7 +124,7 @@ result.err()  // Option<E>
 
 `?` 运算符的类型规则（简化）：
 
-```
+```text
 expr: Result<T, E>
 ------------------  (where E: From<E>)
 expr?: T

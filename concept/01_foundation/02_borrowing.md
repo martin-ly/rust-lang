@@ -1,5 +1,5 @@
 # Borrowing（借用）
->
+
 > **受众**: [初学者]
 >
 > **层次定位**: L1 基础概念 / 借用子域
@@ -111,13 +111,19 @@
 
 ### 1.1 TRPL 官方定义
 
-> **[TRPL: Ch4.2]** At any given time, you can have **either one mutable reference** or **any number of immutable references**. References must always be valid. These are the rules of references. This is the part that is called *borrowing*.
+> **[TRPL: Ch4.2]** At any given time, you can have **either one mutable reference** or **any number of immutable references**.
+> References must always be valid. These are the rules of references. This is the part that is called *borrowing*.
 
 ### 1.2 Wikipedia 对齐定义
 
-> **[Wikipedia: Reference (computer science)]** A reference is a value that enables a program to indirectly access a particular datum, such as a variable's value or a record, in the computer's memory or in some other storage device. In Rust, references are governed by the borrowing rules which enforce memory safety at compile time.
-> **[Wikipedia: Pointer aliasing]** In computing, pointer aliasing occurs when two or more pointers refer to the same memory location. The Rust borrow checker enforces *aliasing XOR mutation* — mutable aliasing (one mutable and one or more immutable references to the same data) is prohibited at compile time, eliminating a major class of memory errors including data races and iterator invalidation.
-> **[TRPL: Ch19.1]** Unsafe Rust gives you access to five superpowers, including the ability to dereference raw pointers. However, even in unsafe blocks, you must uphold the borrowing rules manually; the compiler cannot enforce them for raw pointers。
+> **[Wikipedia: Reference (computer science)]**
+> A reference is a value that enables a program to indirectly access a particular datum, such as a variable's value or a record, in the computer's memory or in some other storage device.
+> In Rust, references are governed by the borrowing rules which enforce memory safety at compile time.
+> **[Wikipedia: Pointer aliasing]**
+> In computing, pointer aliasing occurs when two or more pointers refer to the same memory location.
+> The Rust borrow checker enforces *aliasing XOR mutation* — mutable aliasing (one mutable and one or more immutable references to the same data) is prohibited at compile time, eliminating a major class of memory errors including data races and iterator invalidation.
+> **[TRPL: Ch19.1]** Unsafe Rust gives you access to five superpowers, including the ability to dereference raw pointers.
+> However, even in unsafe blocks, you must uphold the borrowing rules manually; the compiler cannot enforce them for raw pointers。
 > **unsafe 核心语义**: `unsafe` 不是关闭借用检查器，而是将**证明责任转移给程序员**（proof obligation transfer）
 > ——程序员手动承担编译器无法自动验证的不变量
 > [来源: Rustonomicon — Meet Safe and Unsafe / 2025; RustBelt — unsafe 块的 Iris 形式化 / POPL 2018]
@@ -134,7 +140,6 @@
 ```
 
 > **[来源: RustBelt: POPL 2018]** 借用的形式化语义为"所有权的临时授权"，不改变资源的最终归属（所有权归还）。 ✅
-
 > **过渡**: 权威定义从学术和官方来源确立了借用的语义，而概念属性矩阵则将这些语义转化为可操作的规则对比——&T 与 &mut T 在权限、别名、安全性上的系统性差异。
 
 ---
@@ -278,7 +283,6 @@ Ralf Jung 等人在 POPL 2021 提出的 Stacked Borrows 将内存访问建模为
 
 > **[来源: Ralf Jung, "Tree Borrows: Or, How I Learned to Stop Worrying and Love the Alias", arXiv 2023]** Tree Borrows 用树结构替代栈结构，更精确地建模 Rust 引用的层次化借用关系。 ✅
 > **[来源: Miri - Tree Borrows mode]** Miri 的 `-Zmiri-tree-borrows` 标志已支持 Tree Borrows 模型，用于检测未定义行为。 ✅
-
 > **过渡**: 形式化根基从逻辑公理角度解释了借用系统的正确性，而思维导图则从知识结构角度帮助读者建立概念之间的关联网络。
 
 ---
@@ -317,9 +321,10 @@ graph TD
     F --> F3[Interior mutability]
 ```
 
-> **认知功能**: 此思维导图将借用系统组织为「两种引用类型 + 一条核心规则 + 一个检查器 + 三类高级模式」的四维结构。读者可通过此图快速回答「我现在学的是借用的哪个方面」——是基本的 &T/&mut T 权限差异（B/C），还是编译器如何工作（E），还是自引用/内部可变性等进阶话题（F）。图中 D 分支的「要么 1 个 &mut，要么 N 个 &」是 Rust 借用规则最精炼的口诀，应作为记忆锚点。 [来源: 💡 原创分析]
+> **认知功能**: 此思维导图将借用系统组织为「两种引用类型 + 一条核心规则 + 一个检查器 + 三类高级模式」的四维结构。
+> 读者可通过此图快速回答「我现在学的是借用的哪个方面」——是基本的 &T/&mut T 权限差异（B/C），还是编译器如何工作（E），还是自引用/内部可变性等进阶话题（F）。
+> 图中 D 分支的「要么 1 个 &mut，要么 N 个 &」是 Rust 借用规则最精炼的口诀，应作为记忆锚点。 [来源: 💡 原创分析]
 > [来源: [TRPL — References]]
-
 > **过渡**: 思维导图呈现了借用的静态知识结构，而决策树则将这种知识转化为动态的判断流程——面对具体问题时"该用 &T 还是 &mut T"。
 
 ---
@@ -362,7 +367,6 @@ graph TD
 ```
 
 > **认知功能**: 此图是借用冲突的**错误诊断速查表**。当编译器报错 E0502/E0499/E0503 时，读者可对照此图定位冲突根源：是不可变借用阻碍了可变借用？还是可变借用阻碍了新的借用？还是可变借用期间试图直接使用原变量？底部的 NLL 对比节点特别重要——它提醒读者在 NLL 后，引用的实际生命周期可能比你想象的更短，某些「看似冲突」的代码实际上是合法的。 [来源: 💡 原创分析]
-
 > **过渡**: 决策树回答"怎么做"的问题，而定理推理链回答"为什么能这么做"——通过引理、定理、推论的层层演绎，建立借用系统的形式化保证，特别是分数权限的数学基础。
 
 ---
@@ -421,10 +425,8 @@ graph TD
 > **[来源: Rust Reference: NLL]** T4 — 非词法生命周期基于控制流图的精确存活期分析 (RFC 2094)。 ✅
 > **[来源: RFC 2025]** T6 — Two-Phase Borrows 允许方法调用中的临时不可变借用。 ✅
 > **[来源: 💡 原创分析]** C1 — 内部可变性通过运行时检查替代编译期检查，是公理体系的受控扩展。 💡
-
 > **一致性检查**: L1 ⟹ L2 ⟹ T1(AXM) ⟹ T5(无数据竞争)；T2(引用有效) ⟹ T3(Reborrow) ⟹ T6(两阶段)；C1 是 T1 的受控逆否扩展。全部 9 个定理形成**分层推理网络**。
 > **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.1 "内存安全完备性"
-
 > **过渡**: 定理链提供了自上而下的形式化保证，而示例与反例则提供自下而上的直觉验证——通过正确代码与错误代码的对比，将抽象定理落地为具体可感知的编译器行为。
 
 ---
@@ -557,7 +559,10 @@ graph TD
     style T1 fill:#6f6
 ```
 
-> **认知功能**: 此图展示了「无数据竞争」保证的三层突破路径，按危险性递增排列：UnsafeCell（编译通过但可导致运行时数据竞争）、裸指针（unsafe 直接 UB）、RefCell（运行时 panic 而非数据竞争，属于安全失败）。关键认知：RefCell 的 panic 是「安全地失败」——它阻止了数据竞争的发生，代价是运行时崩溃而非未定义行为。这体现了 Rust「宁可 panic 也不允许 UB」的设计哲学。 [来源: 💡 原创分析]
+> **认知功能**:
+> 此图展示了「无数据竞争」保证的三层突破路径，按危险性递增排列：UnsafeCell（编译通过但可导致运行时数据竞争）、裸指针（unsafe 直接 UB）、RefCell（运行时 panic 而非数据竞争，属于安全失败）。
+> 关键认知：RefCell 的 panic 是「安全地失败」——它阻止了数据竞争的发生，代价是运行时崩溃而非未定义行为。
+> 这体现了 Rust「宁可 panic 也不允许 UB」的设计哲学。 [来源: 💡 原创分析]
 
 #### 命题 2: "&mut T 保证独占访问"
 
@@ -1292,7 +1297,6 @@ fn fixed() {
 ```
 
 > **修正**: Rust 编译器不允许两个可变引用同时指向同一数据（别名规则）。对于数组/切片，使用 `split_at_mut()` 或 `split_first_mut()` 获取不重叠的可变引用，满足编译器的别名分析。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-
 > **相关判定树**: [借用判定树](../00_meta/concept_definition_decision_forest.md#三借用判定树) · [内存安全 FTA](../00_meta/fault_tree_analysis_collection.md#二内存安全失效树)
 > **相关谓词映射**: [shr(κ, ℓ) 谓词](../00_meta/rustbelt_predicate_map.md#三共享谓词-shrκ-ℓ-映射)
 
@@ -1336,7 +1340,16 @@ fn main() {
 }
 ```
 
-> **修正**: `slice::split_at_mut` 是标准库提供的**安全分割**：将可变 slice 分为两个不重叠的可变引用。编译器允许，因为 `split_at_mut` 内部使用 `unsafe` 和指针算术，但对外暴露安全接口。直接使用索引借用：`&mut v[0..2]` 和 `&mut v[2..4]` 在某些情况下可能被 NLL 保守拒绝——因为编译器不分析索引表达式的值是否重叠。Polonius（下一代借用检查器）可能放松此类限制。安全模式：使用 `split_at_mut`、`chunks_mut`、`windows` 等标准库方法，而非手动索引分割。这与 C 的数组（无借用检查，完全信任程序员）或 Swift 的 ArraySlice（类似，但无编译期互斥保证）不同——Rust 的标准库方法封装了经过验证的 unsafe 操作，提供安全抽象。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.slice.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)]
+> **修正**:
+> `slice::split_at_mut` 是标准库提供的**安全分割**：将可变 slice 分为两个不重叠的可变引用。
+> 编译器允许，因为 `split_at_mut` 内部使用 `unsafe` 和指针算术，但对外暴露安全接口。
+> 直接使用索引借用：`&mut v[0..2]` 和 `&mut v[2..4]` 在某些情况下可能被 NLL 保守拒绝——因为编译器不分析索引表达式的值是否重叠。
+> Polonius（下一代借用检查器）可能放松此类限制。
+> 安全模式：使用 `split_at_mut`、`chunks_mut`、`windows` 等标准库方法，而非手动索引分割。
+> 这与 C 的数组（无借用检查，完全信任程序员）或 Swift 的 ArraySlice（类似，但无编译期互斥保证）不同
+> ——Rust 的标准库方法封装了经过验证的 unsafe 操作，提供安全抽象。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.slice.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)]
 
 ## 嵌入式测验
 
@@ -1593,7 +1606,5 @@ data.push(4);            // ✅ 现在可以修改
 ## 参考来源
 
 > [来源: [Rust Reference — References](https://doc.rust-lang.org/reference/types/pointer.html#reference-type)]
-
 > [来源: [Stacked Borrows (Miri)](https://github.com/rust-lang/unsafe-code-guidelines/blob/master/wip/stacked-borrows.md)]
-
 > [来源: [Tree Borrows](https://perso.crans.org/vanille/treebor/)]
