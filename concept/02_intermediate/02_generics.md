@@ -28,11 +28,22 @@
 > **Bloom 层级**: 应用 → 分析 → 评价
 **变更日志**:
 
-- v2.5 (2026-05-14): 深化 min_specialization（default impl 交互、&str/String 优化用例）、泛型编译时间优化（cargo bloat、thin LTO、单态化膨胀成因）、Type-level Programming（typenum UInt/UTerm、与 Const Generics 对比、历史背景）；更新 TODO 列表
-- v2.4 (2026-05-14): 补充 Const Generics 进阶用法——表达式与 generic_const_exprs、where 约束深度分析、与 GATs 交互、固定大小数组数学运算与类型状态机典型应用、与 C++ 模板非类型参数对比；更新 TODO 列表
-- v2.3 (2026-05-13): 补充 min_specialization 状态与限制、泛型编译时间优化策略（Turbofish / dyn Trait / -Zshare-generics）、Type-level Programming（Peano 算术与 typenum）、GATs 完整形式化视角（System F_ω / HKT / Lending Iterator 类型论分析）；更新 TODO 列表
-- v2.2 (2026-05-13): 深度重构——新增 §5.5 参数性定理（Wadler 1989），含3个示例推导、工程意义、反例边界与 Mermaid 推理树；增强 §4.2 单态化语义保持定理与证明草图、dyn Trait 反例、跨 crate ABI 边界；新增 §5.6 三语言实现机制对比表；定理矩阵扩至13条；全章补充 L4 类型论映射标注与过渡段落
-- v2.1 (2026-05-12): 深度重构——定理矩阵扩至11条（含失效条件/错误码/依赖链），反命题决策树增至4个（新增"约束过度"命题），边界极限测试精炼为3个极限场景，认知路径6步递进每步增加正反例对照，全章补充Wikipedia/TRPL/RFC交叉引用与过渡段落
+- v2.5 (2026-05-14):
+  深化 min_specialization（default impl 交互、&str/String 优化用例）、
+  泛型编译时间优化（cargo bloat、thin LTO、单态化膨胀成因）、
+  Type-level Programming（typenum UInt/UTerm、与 Const Generics 对比、历史背景）；
+  更新 TODO 列表
+- v2.4 (2026-05-14):
+  补充 Const Generics 进阶用法——表达式与 generic_const_exprs、where 约束深度分析、与 GATs 交互、固定大小数组数学运算与类型状态机典型应用、与 C++ 模板非类型参数对比；更新 TODO 列表
+- v2.3 (2026-05-13):
+  补充 min_specialization 状态与限制、泛型编译时间优化策略（Turbofish / dyn Trait / -Zshare-generics）、Type-level Programming（Peano 算术与 typenum）、GATs 完整形式化视角（System F_ω / HKT / Lending Iterator 类型论分析）；更新 TODO 列表
+- v2.2 (2026-05-13):
+  深度重构——新增 §5.5 参数性定理（Wadler 1989），含3个示例推导、工程意义、反例边界与 Mermaid 推理树；
+  增强 §4.2 单态化语义保持定理与证明草图、dyn Trait 反例、跨 crate ABI 边界；
+  新增 §5.6 三语言实现机制对比表；定理矩阵扩至13条；
+  全章补充 L4 类型论映射标注与过渡段落
+- v2.1 (2026-05-12):
+  深度重构——定理矩阵扩至11条（含失效条件/错误码/依赖链），反命题决策树增至4个（新增"约束过度"命题），边界极限测试精炼为3个极限场景，认知路径6步递进每步增加正反例对照，全章补充Wikipedia/TRPL/RFC交叉引用与过渡段落
 - v2.0 (2026-05-12): 补充定理推理链（⟹ 标注）、反命题决策树系统、边界极限测试、6步认知路径与章节过渡
 - v1.0 (2026-05-12): 初始版本
 
@@ -141,21 +152,19 @@
 ## 一、权威定义（Definition）
 
 ### 1.1 Wikipedia 对齐定义
->
 
 > **[Wikipedia: Generic programming](https://en.wikipedia.org/wiki/Generic_programming)** Generic programming is a style of computer programming in which algorithms are written in terms of types to-be-specified-later that are then instantiated when needed for specific types provided as parameters. Rust uses monomorphization to implement generics, generating specialized code at compile time for each concrete type used.
 > 关键区分：Rust 的泛型属于**参数多态**（parametric polymorphism），与 C++ 模板（textual substitution）和 Java 泛型（type erasure）在实现语义上存在本质差异。[来源: Wikipedia: Parametric polymorphism]
 
 ### 1.2 TRPL 官方定义
->
 
 > **[TRPL: Ch10.1 — Generic Data Types](https://doc.rust-lang.org/book/ch10-01-syntax.html)** Generics are abstract stand-ins for concrete types or other properties. When we're writing code, we can express the behavior of generics or how they relate to other generics without knowing what will be in their place when compiling and running the code.
 > **[TRPL: Ch10.2 — Traits as Parameters](https://doc.rust-lang.org/book/ch10-02-traits.html)** Trait bounds ensure that the generic type has the necessary behavior. The compiler uses the bound to check that all concrete types used with the generic code provide the correct behavior.
 
 ### 1.3 形式化定义
->
 
-> **[类型论: Girard-Reynolds System F](https://en.wikipedia.org/wiki/System_F)** · **[Pierce 2002, Ch.23](https://www.cis.upenn.edu/~bcpierce/tapl/)** 泛型对应参数多态，Rust 通过单态化实现，对应 System F 的二阶 λ 演算。 ✅ 已验证
+> **[类型论: Girard-Reynolds System F](https://en.wikipedia.org/wiki/System_F)** ·
+> **[Pierce 2002, Ch.23](https://www.cis.upenn.edu/~bcpierce/tapl/)** 泛型对应参数多态，Rust 通过单态化实现，对应 System F 的二阶 λ 演算。 ✅ 已验证
 
 泛型对应**参数多态**（parametric polymorphism），Rust 通过**单态化**（monomorphization）实现：
 
@@ -173,7 +182,9 @@
   ≡  ∀T. Add(T) → (T × T → T)
 ```
 
-> **过渡到属性矩阵**: 从形式化定义出发，泛型系统不仅是"类型参数"的简单概念，而是由类型参数、生命周期参数、常量泛型、关联类型等构成的多维参数空间。下一节通过属性矩阵对这些参数类型及其约束机制进行系统分类，并与 C++ 模板、Java 类型擦除等实现进行正交对比，为后续定理链建立"参数空间 → 约束系统 → 代码生成"的直觉框架。
+> **过渡到属性矩阵**:
+> 从形式化定义出发，泛型系统不仅是"类型参数"的简单概念，而是由类型参数、生命周期参数、常量泛型、关联类型等构成的多维参数空间。
+> 下一节通过属性矩阵对这些参数类型及其约束机制进行系统分类，并与 C++ 模板、Java 类型擦除等实现进行正交对比，为后续定理链建立"参数空间 → 约束系统 → 代码生成"的直觉框架。
 
 ---
 
@@ -247,7 +258,7 @@ graph TD
     C --> C3[HRTB: for<'a>]
 
     D --> D1[<const N: usize>]
-    D --> D2[数组类型: [T; N]]
+    D --> D2["数组类型: [T; N]"]
     D --> D3[类型状态机]
 
     E --> E1[单态化 Monomorphization]
@@ -259,17 +270,19 @@ graph TD
     F --> F3[关联类型约束]
 ```
 
-> **认知功能**: 泛型系统概念拓扑导航图。将分散的语法要素组织为可遍历的知识网络，读者可按分支顺序建立"参数声明→约束施加→代码生成"的完整心智模型。关键洞察：泛型不是单一概念，而是由类型参数、生命周期、常量泛型、约束系统构成的多维参数空间。[来源: 💡 原创分析]
+> **认知功能**:
+> 泛型系统概念拓扑导航图。将分散的语法要素组织为可遍历的知识网络，读者可按分支顺序建立"参数声明→约束施加→代码生成"的完整心智模型。
+> 关键洞察：泛型不是单一概念，而是由类型参数、生命周期、常量泛型、约束系统构成的多维参数空间。[来源: 💡 原创分析]
 > [来源: [TRPL — Generics]]
-
-> **过渡到定理推理链**: 思维导图呈现了泛型系统的概念拓扑，但缺乏严格的逻辑推导关系。下一节通过"⟹"标注的定理链，将参数多态、System F、单态化、零成本抽象、Const Generics 等核心命题形式化为可验证的推理网络，每个定理标注其依赖的引理、推论的下游定理，以及失效条件和编译错误码。
+> **过渡到定理推理链**:
+> 思维导图呈现了泛型系统的概念拓扑，但缺乏严格的逻辑推导关系。
+> 下一节通过"⟹"标注的定理链，将参数多态、System F、单态化、零成本抽象、Const Generics 等核心命题形式化为可验证的推理网络，每个定理标注其依赖的引理、推论的下游定理，以及失效条件和编译错误码。
 
 ---
 
 ## 四、定理推理链（Theorem Chain）
 
 ### 4.1 引理：参数多态 ⟹ System F 类型规则
->
 
 > **[Wikipedia: System F](https://en.wikipedia.org/wiki/System_F)** · **[Pierce 2002, Ch.23](https://www.cis.upenn.edu/~bcpierce/tapl/)** Rust 泛型核心对应 Girard-Reynolds System F（二阶 λ 演算）。 ✅ 已验证
 
@@ -286,9 +299,10 @@ graph TD
 ```
 
 ### 4.2 定理：单态化 ⟹ 零成本抽象 ⟹ 语义保持
->
 
-> **[TRPL: Ch10.1 — Performance of Code Using Generics](https://doc.rust-lang.org/book/ch10-01-syntax.html)** · **[Rust Reference: Monomorphization](https://doc.rust-lang.org/reference/items/generics.html)** · **[Pierce 2002, Ch.23](https://www.cis.upenn.edu/~bcpierce/tapl/)** 单态化生成与手写代码等价的专用实例，LLVM 优化消除额外开销；语义保持性保证单态化不改变程序行为。 ✅ 已验证
+> **[TRPL: Ch10.1 — Performance of Code Using Generics](https://doc.rust-lang.org/book/ch10-01-syntax.html)** ·
+> **[Rust Reference: Monomorphization](https://doc.rust-lang.org/reference/items/generics.html)** ·
+> **[Pierce 2002, Ch.23](https://www.cis.upenn.edu/~bcpierce/tapl/)** 单态化生成与手写代码等价的专用实例，LLVM 优化消除额外开销；语义保持性保证单态化不改变程序行为。 ✅ 已验证
 
 ```text
 前提 1: 泛型函数 <T>fn(x: T) 在编译期为每个具体类型生成专用代码
@@ -408,10 +422,14 @@ fn draw_dyn(d: &dyn Drawable) {
 | **定理**: 参数性 ⟹ 行为由类型决定 | 无 Trait Bound 的纯参数多态 | 函数行为空间仅由类型签名决定 | Reynolds / Wadler 参数性 | API 推理、形式化验证 | `Default` bound / `unsafe` / `transmute` | E0133 |
 | **定理**: 单态化语义保持 | 无 `dyn Trait`，无 `unsafe` | 单态化后行为等价于原泛型代码 | 擦除语义（Erasure Semantics） | 编译正确性证明 | `dyn Trait` 引入动态分发 | E0038 |
 
-> **一致性检查**: 参数多态 ⟹ System F 类型规则 ⟹ 约束可满足性 ⟹ 单态化零成本 ⟹ 语义保持 ⟹ 泛型一致性，形成**从类型规则到代码生成到运行时保证**的完整推理链。参数性定理（Wadler 1989）是单态化语义保持的核心依据——正因泛型函数不能基于类型参数的内部表示做分支，单态化才保持行为等价。Const Generics 是依赖类型的有限形式，HRTB 是全称量词在生命周期上的应用，Sized 默认约束确保单态化所需的静态内存布局。
-> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.2 "类型系统一致性"
-
-> **过渡到示例与反例**: 定理链提供了形式化保证，但工程实践中这些保证的边界在哪里？下一节通过正例展示泛型的正确使用方式，通过反例揭示定理失效的精确条件——特别是 E0277（约束不满足）、E0275（类型递归溢出）、E0310（生命周期不足）等编译错误的触发机制，为反命题决策树建立具体场景。
+> **一致性检查**:
+> 参数多态 ⟹ System F 类型规则 ⟹ 约束可满足性 ⟹ 单态化零成本 ⟹ 语义保持 ⟹ 泛型一致性，形成**从类型规则到代码生成到运行时保证**的完整推理链。
+> 参数性定理（Wadler 1989）是单态化语义保持的核心依据——正因泛型函数不能基于类型参数的内部表示做分支，单态化才保持行为等价。
+> Const Generics 是依赖类型的有限形式，HRTB 是全称量词在生命周期上的应用，Sized 默认约束确保单态化所需的静态内存布局。
+> **跨层映射**:
+> 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.2 "类型系统一致性"
+> **过渡到示例与反例**:
+> 定理链提供了形式化保证，但工程实践中这些保证的边界在哪里？下一节通过正例展示泛型的正确使用方式，通过反例揭示定理失效的精确条件——特别是 E0277（约束不满足）、E0275（类型递归溢出）、E0310（生命周期不足）等编译错误的触发机制，为反命题决策树建立具体场景。
 
 ---
 
@@ -613,7 +631,6 @@ graph TD
 ```
 
 > **认知功能**: 参数性定理适用性判定工具。设计泛型 API 时沿决策树检查"免费定理"是否成立，unsafe 和 Trait Bound 是参数性的两个主要破坏者。关键洞察：只有无约束、无 unsafe 的纯参数多态才能享受"类型签名完全决定行为"的形式化保证。[来源: 💡 原创分析]
-
 > **L4 映射**: 参数性定理对应 **Reynolds 关系语义（relational parametricity）**——在逻辑关系中解释多态类型。`∀T. T → T` 的行为约束来自逻辑关系对所有类型的同时满足性，任何基于具体类型的分支都会破坏关系一致性。
 
 ### 5.6 泛型实现机制对比：单态化 vs 类型擦除 vs 模板
@@ -621,7 +638,7 @@ graph TD
 > **[原创分析]** · **[Wikipedia: Generic programming](https://en.wikipedia.org/wiki/Generic_programming)** 三种主流泛型实现机制在编译期行为、运行时开销、错误信息质量上存在本质差异。 💡 原创分析
 
 | **特性** | **Rust 单态化** | **Java 类型擦除** | **C++ 模板** |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | **实现机制** | 编译期为每个具体类型生成专用代码 | 擦除为 `Object` + 自动插入强制转换 | 文本替换 + 两阶段编译 |
 | **运行时开销** | 零（直接调用，可内联） | 有（装箱/拆箱 + 类型转换检查） | 零（与 Rust 类似） |
 | **二进制大小** | 膨胀（每个实例一份代码） | 紧凑（共享 Object 代码） | 膨胀（与 Rust 类似） |
@@ -633,7 +650,9 @@ graph TD
 ### 5.7 Const Generics 进阶用法
 
 > **Bloom 层级**: 应用 → 分析
-> **[Rust Reference: Const Generics](https://doc.rust-lang.org/reference/items/generics.html)** · **[RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html)** · **[RFC 2920](https://rust-lang.github.io/rfcs/2920-generic-const-exprs.html)** Const Generics 将编译期常量值引入类型参数空间，是依赖类型的有限形式。自 Rust 1.51 稳定以来，表达式求值、where 约束、默认参数等能力逐步开放。✅ 已验证
+> **[Rust Reference: Const Generics](https://doc.rust-lang.org/reference/items/generics.html)** ·
+> **[RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html)** ·
+> **[RFC 2920](https://rust-lang.github.io/rfcs/2920-generic-const-exprs.html)** Const Generics 将编译期常量值引入类型参数空间，是依赖类型的有限形式。自 Rust 1.51 稳定以来，表达式求值、where 约束、默认参数等能力逐步开放。✅ 已验证
 
 #### 5.7.1 常量表达式与 `generic_const_exprs`
 
@@ -651,7 +670,8 @@ fn padded_array<T: Default + Copy, const N: usize>() -> [T; { N + 4 }] {
 }
 ```
 
-然而，上述表达式能力仅限于**简单算术**和**字面量组合**。更复杂的类型级计算（如条件分支、递归常量函数结果作为类型参数、关联类型作为常量参数）需要 `generic_const_exprs` 不稳定特性：[来源: RFC 2920 — generic_const_exprs]
+然而，上述表达式能力仅限于**简单算术**和**字面量组合**。
+更复杂的类型级计算（如条件分支、递归常量函数结果作为类型参数、关联类型作为常量参数）需要 `generic_const_exprs` 不稳定特性：[来源: RFC 2920 — generic_const_exprs]
 
 ```rust,ignore
 #![feature(generic_const_exprs)]
@@ -676,7 +696,7 @@ impl<T, const N: usize> Matrix<T, N, N> {
 `generic_const_exprs`（Tracking Issue [#76560](https://github.com/rust-lang/rust/issues/76560)）解锁的核心能力包括：
 
 | **能力** | **语法示例** | **稳定状态** |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | 常量表达式作为类型参数 | `[T; N + 1]` | ✅ 1.51+ |
 | 块表达式作为类型参数 | `[T; { N * 2 }]` | ✅ 1.79+ |
 | 常量表达式用于 where 子句 | `where [T; N]: Sized` | ✅ 1.51+ |
@@ -684,7 +704,9 @@ impl<T, const N: usize> Matrix<T, N, N> {
 | 类型级条件分支 | `impl<T> Foo for Bar where [(); N - 1]: Sized` | ❌ 需 `generic_const_exprs` |
 | 递归 const fn 驱动类型构造 | `const fn fib(n: usize) -> usize` | ⚠️ `const fn` 稳定，复杂递归受限 |
 
-> **L4 映射**: `generic_const_exprs` 将 Const Generics 从"常量值的类型参数化"扩展为"类型级计算"，对应依赖类型理论中 **索引类型（Indexed Types）** 的有限形式。但与完整依赖类型（如 Coq、Idris）不同，Rust 的常量表达式必须在编译期完全求值，且不能依赖运行时信息。详见 [L4 形式化验证](../04_formal/04_rustbelt.md) §2 "索引类型与依赖类型的边界"。
+> **L4 映射**: `generic_const_exprs` 将 Const Generics 从"常量值的类型参数化"扩展为"类型级计算"，对应依赖类型理论中 **索引类型（Indexed Types）** 的有限形式。
+> 但与完整依赖类型（如 Coq、Idris）不同，Rust 的常量表达式必须在编译期完全求值，且不能依赖运行时信息。
+> 详见 [L4 形式化验证](../04_formal/04_rustbelt.md) §2 "索引类型与依赖类型的边界"。
 
 #### 5.7.2 where 约束中的 const generics
 
@@ -716,7 +738,8 @@ where
 }
 ```
 
-`where [T; N]: Sized` 的语义是：**对于所有满足约束的 T 和 N，数组 [T; N] 必须是 Sized 的**。虽然数组默认就是 Sized，但此约束在更复杂的场景（如泛型关联类型、条件实现）中是必要的显式契约。
+`where [T; N]: Sized` 的语义是：**对于所有满足约束的 T 和 N，数组 [T; N] 必须是 Sized 的**。
+虽然数组默认就是 Sized，但此约束在更复杂的场景（如泛型关联类型、条件实现）中是必要的显式契约。
 
 更进阶的用法是利用 `where` 子句实现**类型级条件实现（Type-level Conditional Impl）**，这是类型状态机的基础：
 
@@ -739,7 +762,8 @@ where
 }
 ```
 
-> **⚠️ 注意**: 上述 `[(); N - 1]: Sized` 技巧依赖 `generic_const_exprs`，且编译器错误信息晦涩（E0080 常量求值失败）。工程实践中应谨慎使用，优先通过枚举或运行时检查处理条件逻辑。
+> **⚠️ 注意**: 上述 `[(); N - 1]: Sized` 技巧依赖 `generic_const_exprs`，且编译器错误信息晦涩（E0080 常量求值失败）。
+> 工程实践中应谨慎使用，优先通过枚举或运行时检查处理条件逻辑。
 
 #### 5.7.3 默认 const generic 参数
 
@@ -2398,7 +2422,16 @@ fn main() {
 }
 ```
 
-> **修正**: Trait **继承**（`trait Drawable: Printable`）要求实现 `Drawable` 的类型**必须**同时实现 `Printable`。这不是 OOP 的类继承，而是**约束传播**：`Drawable` 的 supertrait `Printable` 是 `Drawable` 方法签名的前提（`Drawable` 的方法可能调用 `Printable` 的方法）。`Circle` 实现 `Drawable` 但未实现 `Printable` → 编译错误。修复：`impl Printable for Circle { fn print(&self) { ... } }`。Supertrait 与 trait bound 的关系：`T: Drawable` 自动满足 `T: Printable`（约束推导）。这与 Java 的接口继承（`interface Drawable extends Printable`）或 Haskell 的 type class 约束（`class Printable a => Drawable a`）类似——Rust 的 supertrait 是类型系统的约束传播机制。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html)] · [来源: [Rust Reference — Supertraits](https://doc.rust-lang.org/reference/items/traits.html#supertraits)]
+> **修正**:
+> Trait **继承**（`trait Drawable: Printable`）要求实现 `Drawable` 的类型**必须**同时实现 `Printable`。
+> 这不是 OOP 的类继承，而是**约束传播**：`Drawable` 的 supertrait `Printable` 是 `Drawable` 方法签名的前提（`Drawable` 的方法可能调用 `Printable` 的方法）。
+> `Circle` 实现 `Drawable` 但未实现 `Printable` → 编译错误。
+> 修复：`impl Printable for Circle { fn print(&self) { ... } }`。
+> Supertrait 与 trait bound 的关系：`T: Drawable` 自动满足 `T: Printable`（约束推导）。
+> 这与 Java 的接口继承（`interface Drawable extends Printable`）或 Haskell 的 type class 约束（`class Printable a => Drawable a`）类似
+> ——Rust 的 supertrait 是类型系统的约束传播机制。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html)] ·
+> [来源: [Rust Reference — Supertraits](https://doc.rust-lang.org/reference/items/traits.html#supertraits)]
 
 ### 10.6 边界测试：const generic 的默认参数与数组大小推断（编译错误）
 
@@ -2417,21 +2450,35 @@ fn main() {
 }
 ```
 
-> **修正**: `const generic` 默认值（`const N: usize = 1024`）在 Rust 1.59+ 支持，但**类型推断**有限：编译器不能从 `data: [0; 512]` 推断 `Buffer` 的 `N = 512`（数组大小是表达式，不直接关联到类型参数）。修复：1) 显式标注类型：`Buffer<512>`；2) 构造函数：`Buffer::new()` 返回 `Buffer<1024>`（默认）；3) `From` trait：`[u8; 512].into()` → `Buffer<512>`。`const generic` 的应用：1) 固定大小数组包装；2) 类型级维度（矩阵 `[T; M * N]`）；3) 编译期配置（缓冲区大小、哈希表容量）。这与 C++ 的非类型模板参数（`template<size_t N>`，推断更灵活）或 Ada 的泛型（类似，但语法不同）不同——Rust 的 const generic 保守但类型安全。[来源: [Rust Reference — Const Generics](https://doc.rust-lang.org/reference/items/generics.html#const-generics)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**:
+> `const generic` 默认值（`const N: usize = 1024`）在 Rust 1.59+ 支持，但**类型推断**有限：编译器不能从 `data: [0; 512]` 推断 `Buffer` 的 `N = 512`（数组大小是表达式，不直接关联到类型参数）。
+> 修复：
+>
+> 1) 显式标注类型：`Buffer<512>`；
+> 2) 构造函数：`Buffer::new()` 返回 `Buffer<1024>`（默认）；
+> 3) `From` trait：`[u8; 512].into()` → `Buffer<512>`。
+>
+> `const generic` 的应用：
+>
+> 1) 固定大小数组包装；
+> 2) 类型级维度（矩阵 `[T; M * N]`）；
+> 3) 编译期配置（缓冲区大小、哈希表容量）。
+> 这与 C++ 的非类型模板参数（`template<size_t N>`，推断更灵活）或 Ada 的泛型（类似，但语法不同）不同——Rust 的 const generic 保守但类型安全。
+> [来源: [Rust Reference — Const Generics](https://doc.rust-lang.org/reference/items/generics.html#const-generics)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ## 实践
 
 > **对应 Crate**: [`c04_generic`](../../crates/c04_generic/)
-> **对应练习**: [`exercises/src/generics_traits/`](../../exercises/src/generics_traits/) · [`exercises/rustlings_style/ex07_generic_type_fix.rs`](../../exercises/rustlings_style/ex07_generic_type_fix.rs)
+> **对应练习**:
+> [`exercises/src/generics_traits/`](../../exercises/src/generics_traits/) ·
+> [`exercises/rustlings_style/ex07_generic_type_fix.rs`](../../exercises/rustlings_style/ex07_generic_type_fix.rs)
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。
 
 ## 参考来源
 
 > [来源: [RFC 0195 — Associated Items](https://rust-lang.github.io/rfcs/0195-associated-items.html)]
-
 > [来源: [RFC 0448 — Associated Types](https://rust-lang.github.io/rfcs/0448-associated-types.html)]
-
 > [来源: [JFP 2023 — Rust Generic Type System](https://www.cambridge.org/core/journals/journal-of-functional-programming)]
-
 > [来源: [Rust Reference — Type Parameters](https://doc.rust-lang.org/reference/items/generics.html)]

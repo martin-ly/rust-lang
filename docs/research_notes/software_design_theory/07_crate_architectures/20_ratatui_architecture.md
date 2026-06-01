@@ -66,7 +66,7 @@ graph LR
 
     subgraph App["应用层"]
         STATE[App State<br/>用户定义]
-        UPDATE[update(state, event)]
+        UPDATE["update(state, event)"]
     end
 
     subgraph Ratatui["Ratatui 核心"]

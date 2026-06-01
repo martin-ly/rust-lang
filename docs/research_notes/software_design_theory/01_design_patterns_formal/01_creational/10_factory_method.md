@@ -436,7 +436,7 @@ mindmap
     结构
       Creator trait
       Product trait
-      factory() → Product
+      factory → Product
     行为
       延迟实例化
       子类决定产品类型

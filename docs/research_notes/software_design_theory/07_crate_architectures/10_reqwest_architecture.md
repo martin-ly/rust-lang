@@ -44,12 +44,12 @@ Reqwest 的 API 围绕 Builder 模式分层构建，形成清晰的请求构造�
 
 ```mermaid
 graph LR
-    A[ClientBuilder] -->|build()| B[Client]
+    A[ClientBuilder] -->|"build()"| B[Client]
     B -->|get/post/put...| C[RequestBuilder]
     C -->|header/query/form...| C
     C -->|body/json...| C
-    C -->|build()| D[Request]
-    C -->|send()| E[Response]
+    C -->|"build()"| D[Request]
+    C -->|"send()"| E[Response]
     E -->|text/json/bytes...| F[解析后的载荷]
 ```
 
@@ -205,10 +205,10 @@ let client: ClientWithMiddleware = MiddlewareClientBuilder::new(
 
 ```mermaid
 graph TD
-    A[应用代码] -->|send()| B[TracingMiddleware]
-    B -->|next.run()| C[RetryTransientMiddleware]
-    C -->|next.run()| D[LoggingMiddleware]
-    D -->|next.run()| E[Reqwest Client]
+    A[应用代码] -->|"send()"| B[TracingMiddleware]
+    B -->|"next.run()"| C[RetryTransientMiddleware]
+    C -->|"next.run()"| D[LoggingMiddleware]
+    D -->|"next.run()"| E[Reqwest Client]
     E --> F[Hyper / 网络]
     F --> E
     E --> D
@@ -332,7 +332,7 @@ Reqwest 默认启用 HTTP/2，但对未知服务器会先以 HTTP/1.1 发起请�
 
 ```mermaid
 graph TB
-    A[请求 URL] -->|解析| B[(DNS 解析)]
+    A[请求 URL] -->|解析| B["(DNS 解析)"]
     B --> C{TLS?}
     C -->|https| D[TLS 握手<br/>rustls / native-tls]
     C -->|http| E[TCP 直连]

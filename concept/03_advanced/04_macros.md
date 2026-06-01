@@ -227,14 +227,14 @@ macro_rules! 的模式匹配 = 语法树上的正则表达式:
 
 ```mermaid
 graph TD
-    A[Macros 宏系统] --> B[macro_rules!]
+    A[Macros 宏系统] --> B["macro_rules!"]
     A --> C[过程宏]
     A --> D[编译期执行]
     A --> E[Hygiene]
 
     B --> B1[声明式宏]
     B --> B2[模式匹配]
-    B --> B3[重复 $$(...)*]
+    B --> B3["重复 $$(...)*"]
     B --> B4[递归宏]
 
     C --> C1[Derive 宏]

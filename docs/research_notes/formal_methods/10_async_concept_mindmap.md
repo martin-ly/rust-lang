@@ -75,7 +75,7 @@ mindmap
         回调注册
     类型系统
       Future Trait
-        fn poll()
+        fn poll
         Pin<&mut Self>
         Context<'_>
       Send/Sync边界
@@ -99,7 +99,7 @@ mindmap
         组合使用
     同步原语
       Mutex
-        tokio::sync::Mutex
+        tokio sync Mutex
         跨await保持
         注意事项
       RwLock

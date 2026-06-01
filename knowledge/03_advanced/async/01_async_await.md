@@ -712,12 +712,12 @@ fn good_pin() {
 
 ```mermaid
 stateDiagram-v2
-    [*] --> Created : async fn call
-    Created --> Polling : executor poll()
+    [*] --> Created : "async fn call"
+    Created --> Polling : "executor poll()"
     Polling --> Suspended : poll returns Pending
-    Suspended --> Polling : Waker::wake() called
-    Polling --> Completed : poll returns Ready(T)
-    Completed --> [*] : value consumed
+    Suspended --> Polling : ""Waker wake() called""
+    Polling --> Completed : "poll returns Ready(T)"
+    Completed --> [*] : "value consumed"
     Suspended --> Cancelled : Future dropped
     Cancelled --> [*]
 

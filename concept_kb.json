@@ -154,7 +154,7 @@
       "layer": "L0",
       "title": "Rust 知识体系 A/S/P 三维认知标记规范",
       "positioning": "本文件定义 `concept/` 知识体系中的 **A(应用) / S(结构) / P(程序)** 三维认知标记规范，作为现有 Bloom 层级标注的补充维度。A/S/P 标记连接 **Krathwohl 知识维度** 与 **Bloom 认知过程维度**，将抽象的双维矩阵压缩为可操作的标签系统。",
-      "line_count": 462,
+      "line_count": 465,
       "theorem_chains": [
         {
           "text": "| Rust 知识体系 A/S/P 三维认知标记规范 结构化组织 ⟹ 高效检索 | 理解分类维度与索引关系 | 能快速定位目标概念 | 高 |",
@@ -271,7 +271,7 @@
       "layer": "L0",
       "title": "Rust 安全边界扩展推理树",
       "positioning": "本文件从「安全边界」核心出发，推演向更底层、更通用、更危险领域的扩展路径，标注每条扩展边的条件、风险和补偿机制。",
-      "line_count": 292,
+      "line_count": 295,
       "theorem_chains": [
         {
           "text": "| Rust 安全边界扩展推理树 结构化组织 ⟹ 高效检索 | 理解分类维度与索引关系 | 能快速定位目标概念 | 高 |",
@@ -585,7 +585,7 @@
       "layer": "L0",
       "title": "Rust 语义表达力多视角深化（Multiview Expressiveness Analysis）",
       "positioning": "本文件从**纵向理论视角**（计算/类型/控制/内存/并发/抽象/安全）深化 Rust 的表达能力，与 `semantic_expressiveness.md` 的**横向七维光谱**形成正交互补。前者回答「Rust 能表达什么」，后者回答「Rust 从哪些维度表达」。",
-      "line_count": 716,
+      "line_count": 719,
       "theorem_chains": [
         {
           "text": "| Rust 语义表达力多视角深化（Multiview Expressiveness Analysis） 结构化组织 ⟹ 高效检索 | 理解分类维度与索引关系 | 能快速定位目标概念 | 高 |",
@@ -1367,7 +1367,7 @@
       "layer": "L0",
       "title": "Rust 知识体系问题图谱（Problem Graph）",
       "positioning": "本文件建立 `concept/` 知识体系的**问题分解网络**，将复杂的系统级工程问题逐层分解为概念级子问题，再映射到具体的方法层解决方案。与 `concept_definition_decision_forest.md`（\"如何判定代码是否合法\"）形成互补：问题图谱回答**\"遇到什么问题 → 需要理解什么概念 → 应用什么方法\"**。",
-      "line_count": 426,
+      "line_count": 451,
       "theorem_chains": [
         {
           "text": "| Rust 知识体系问题图谱（Problem Graph） 结构化组织 ⟹ 高效检索 | 理解分类维度与索引关系 | 能快速定位目标概念 | 高 |",
@@ -2290,7 +2290,7 @@
       "layer": "L0",
       "title": "Rust 表征空间（Semantic / Representational Space）",
       "positioning": "本文件是 `concept/` 知识体系的**元层总论**，从表征空间（Representational Space）与语义空间（Semantic Space）的视角，系统分析 Rust 语言\"能表达什么\"、\"不能表达什么\"、\"等价表达的组合关系\"，以及其内部机制的完备性与封闭性。",
-      "line_count": 1273,
+      "line_count": 1276,
       "theorem_chains": [
         {
           "text": "| 断言 | 前提条件 ⟹ 结论 | 反例/边界条件 | 典型场景 | 失效条件 |",
@@ -2508,7 +2508,7 @@
       "layer": "L0",
       "title": "Rust 知识体系定理推理森林",
       "positioning": "本文件建立 L1-L4 核心模型内的「公理 → 引理 → 定理 → 推论」推理链，形成跨模型的定理森林，标注每条推理链的前提、规则、失效条件和反例路径。",
-      "line_count": 459,
+      "line_count": 465,
       "theorem_chains": [
         {
           "text": "> **符号约定**: `⊢` 推导 / `⟹` 蕴含 / `⇐` 依赖 / `⊘` 反例 / `≡` 等价",
@@ -2711,7 +2711,7 @@
       "layer": "L1",
       "title": "Ownership（所有权）",
       "positioning": "",
-      "line_count": 1497,
+      "line_count": 1498,
       "theorem_chains": [
         {
           "text": "> 引理 L1（所有权唯一性）⟹",
@@ -5243,7 +5243,7 @@
       "layer": "L1",
       "title": "引用语义：自动解引用、Deref 强制与类型转换",
       "positioning": "深入分析 Rust 的**引用语义机制**——自动解引用（Auto-deref）、Deref 强制（Deref Coercion）、类型强制（Type Coercion）以及它们与借用检查器的交互，澄清开发者常见的隐式转换困惑。",
-      "line_count": 1364,
+      "line_count": 1366,
       "theorem_chains": [
         {
           "text": "| 引用语义：自动解引用、Deref 强制与类型转换 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -8430,7 +8430,7 @@
       "layer": "L2",
       "title": "Generics（泛型系统）",
       "positioning": "",
-      "line_count": 2438,
+      "line_count": 2485,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 补充定理推理链（⟹ 标注）、反命题决策树系统、边界极限测试、6步认知路径与章节过渡",
@@ -8449,7 +8449,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **过渡到定理推理链**: 思维导图呈现了泛型系统的概念拓扑，但缺乏严格的逻辑推导关系。下一节通过\"⟹\"标注的定理链，将参数多态、System F、单态化、零成本抽象、Const Generics 等核心命题形式化为可验证的推理网络，每个定理标注其依赖的引理、推论的下游定理，以及失效条件和编译错误码。",
+          "text": "> 下一节通过\"⟹\"标注的定理链，将参数多态、System F、单态化、零成本抽象、Const Generics 等核心命题形式化为可验证的推理网络，每个定理标注其依赖的引理、推论的下游定理，以及失效条件和编译错误码。",
           "type": "paragraph"
         },
         {
@@ -8489,7 +8489,7 @@
           "type": "table_row"
         },
         {
-          "text": "> **一致性检查**: 参数多态 ⟹ System F 类型规则 ⟹ 约束可满足性 ⟹ 单态化零成本 ⟹ 语义保持 ⟹ 泛型一致性，形成**从类型规则到代码生成到运行时保证**的完整推理链。参数性定理（Wadler 1989）是单态化语义保持的核心依据——正因泛型函数不能基于类型参数的内部表示做分支，单态化才保持行为等价。Const Generics 是依赖类型的有限形式，HRTB 是全称量词在生命周期上的应用，Sized 默认约束确保单态化所需的静态内存布局。",
+          "text": "> 参数多态 ⟹ System F 类型规则 ⟹ 约束可满足性 ⟹ 单态化零成本 ⟹ 语义保持 ⟹ 泛型一致性，形成**从类型规则到代码生成到运行时保证**的完整推理链。",
           "type": "paragraph"
         },
         {
@@ -9445,7 +9445,7 @@
       "layer": "L2",
       "title": "Error Handling（错误处理）",
       "positioning": "",
-      "line_count": 2356,
+      "line_count": 2355,
       "theorem_chains": [
         {
           "text": "- [4.1 引理：Result\\<T,E\\> ⟹ 和类型强制错误处理](#41-引理resultte--和类型强制错误处理)",
@@ -9994,7 +9994,7 @@
       "layer": "L2",
       "title": "`assert_matches!`：模式匹配断言的形式化语义",
       "positioning": "将 Rust 的**模式匹配**能力从\"表达式求值\"扩展到\"测试断言\"的工程机制，实现编译期模式检查与运行时断言的统一。",
-      "line_count": 589,
+      "line_count": 591,
       "theorem_chains": [
         {
           "text": "| `assert_matches!`：模式匹配断言的形式化语义 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -10160,7 +10160,7 @@
       "layer": "L2",
       "title": "Rust 范围类型语义：`std::ops::Range` → `core::range`",
       "positioning": "探讨 Rust 范围类型从**运行时迭代器**到**编译期可复制的值类型**的语义演进，以及 `IntoIterator` vs `Iterator` 的设计权衡。",
-      "line_count": 517,
+      "line_count": 519,
       "theorem_chains": [
         {
           "text": "| Rust 范围类型语义：`std::ops::Range` → `core::range` 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -10521,7 +10521,7 @@
       "layer": "L2",
       "title": "Serde 序列化模式：Rust 的类型驱动数据转换",
       "positioning": "深入分析 **Serde** —— Rust 生态中主导的序列化/反序列化框架，探讨 `Serialize [来源: [serde::Serialize](https://docs.rs/serde/latest/serde/trait.Serialize.html)]`/`Deserialize` derive 宏、自定义序列化逻辑、以及类型系统如何保障数据转换的安全性。",
-      "line_count": 819,
+      "line_count": 821,
       "theorem_chains": [
         {
           "text": "| Serde 序列化模式：Rust 的类型驱动数据转换 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -12137,7 +12137,7 @@
       "layer": "L2",
       "title": "元编程：Rust 的编译期代码生成与变换",
       "positioning": "深入分析 Rust **元编程（Metaprogramming）**的技术体系——从声明式宏的模式匹配、过程宏的语法树操作，到 derive 宏的代码生成、quote/syn 工具体系，揭示 Rust 如何在编译期实现类型安全的代码变换同时保持宏卫生性（Hygiene）。",
-      "line_count": 728,
+      "line_count": 730,
       "theorem_chains": [
         {
           "text": "| 元编程：Rust 的编译期代码生成与变换 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -12282,7 +12282,7 @@
       "layer": "L3",
       "title": "Concurrency（并发模型）",
       "positioning": "",
-      "line_count": 1337,
+      "line_count": 1331,
       "theorem_chains": [
         {
           "text": "- v1.1 (2026-05-13): 增强定理一致性矩阵（11行 ⟹ 推理链）、反命题决策树、6步认知路径、章节过渡、层次一致性标注",
@@ -13589,7 +13589,7 @@
       "layer": "L3",
       "title": "Unsafe Rust",
       "positioning": "",
-      "line_count": 2820,
+      "line_count": 2814,
       "theorem_chains": [
         {
           "text": "- v1.1 (2026-05-13): 重构增强——定理一致性矩阵扩展至10行（⟹推理链）、反命题决策树×4、认知路径六步递进、章节过渡段落、层次一致性标注",
@@ -14747,7 +14747,7 @@
       "layer": "L3",
       "title": "Rust FFI：与外部代码的安全边界",
       "positioning": "系统分析 Rust 与 C/C++ 等外部代码交互的**Foreign Function Interface (FFI)** 机制，探讨 `extern` 块、ABI 兼容、`unsafe` 边界管理以及 `bindgen`/`cbindgen` 工具链。",
-      "line_count": 603,
+      "line_count": 605,
       "theorem_chains": [
         {
           "text": "| Rust FFI：与外部代码的安全边界 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -14994,7 +14994,7 @@
       "layer": "L3",
       "title": "过程宏：编译期代码生成的元编程工具",
       "positioning": "深入分析 Rust **过程宏（Procedural Macros）**的三种类型（derive、attribute、function-like）——它们的编译期执行模型、TokenStream 操作、卫生性（hygiene）保证，以及与 `macro_rules!` 的本质差异。",
-      "line_count": 659,
+      "line_count": 661,
       "theorem_chains": [
         {
           "text": "| 过程宏：编译期代码生成的元编程工具 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -17228,7 +17228,7 @@
       "layer": "L4",
       "title": "Ownership Formalization（所有权形式化）",
       "positioning": "",
-      "line_count": 1440,
+      "line_count": 1468,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 深度重构。扩展定理一致性矩阵至 10 行并引入 \"⟹\" 推理链；新增反命题决策树 3 组；重构认知路径为 5 步渐进式问答；补充 Wikipedia、Reed 2009、RustBelt 权威引用；全篇强化 L1↔L4 层次一致性标注",
@@ -17275,7 +17275,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **关键洞察**: RustBelt 的 Iris 证明不直接依赖 SB 或 TB，而是建立在更抽象的**来源（provenance）**与**权限**之上。SB/TB 是将这些抽象权限映射到具体内存访问序列的**操作语义模型**。Tree Borrows 成为 Miri 默认意味着：**社区共识的 UB 定义已正式从 Stacked Borrows 的严格栈模型转向 Tree Borrows 的宽松树模型**。这一转变不会影响 RustBelt 的安全性证明，因为任何 TB 接受的程序必然满足 Iris 的权限约束（TB ⟹ Iris 权限模型），且 TB 比 SB 接受更多合法程序（SB ⟹ TB 接受集 ⊆ TB 接受集）。",
+          "text": "> 这一转变不会影响 RustBelt 的安全性证明，因为任何 TB 接受的程序必然满足 Iris 的权限约束（TB ⟹ Iris 权限模型），且 TB 比 SB 接受更多合法程序（SB ⟹ TB 接受集 ⊆ TB 接受集）。",
           "type": "paragraph"
         }
       ],
@@ -18721,7 +18721,7 @@
       "layer": "L4",
       "title": "Hoare 逻辑：程序验证的形式化基础与 Rust 契约",
       "positioning": "系统讲解 **Hoare 逻辑（霍尔逻辑）**——从前置条件、后置条件、循环不变量的经典形式化，到最弱前置条件演算，揭示 Hoare 逻辑如何为 Rust 的 unsafe 代码契约、内部不变量和形式化验证工具提供理论基础。",
-      "line_count": 692,
+      "line_count": 740,
       "theorem_chains": [
         {
           "text": "| Hoare 逻辑：程序验证的形式化基础与 Rust 契约 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -20436,7 +20436,7 @@
       "layer": "L5",
       "title": "Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行",
       "positioning": "本文件从**数学模型同构性**视角系统梳理 Rust 的执行模型（同步/异步/并发/并行），并与 Go、理论模型（CSP/Actor/π 演算/进程代数）建立精确的对应关系。",
-      "line_count": 910,
+      "line_count": 912,
       "theorem_chains": [
         {
           "text": "| Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -21655,7 +21655,7 @@
       "layer": "L6",
       "title": "Toolchain（工具链与 Cargo）",
       "positioning": "",
-      "line_count": 1629,
+      "line_count": 1632,
       "theorem_chains": [
         {
           "text": "| **断言** | **前提** | **结论（⟹ 推理链）** | **工具链组件** | **失效条件** |",
@@ -22409,7 +22409,7 @@
       "layer": "L6",
       "title": "Rust 惯用法谱系全景（Idioms Spectrum）",
       "positioning": "本文件从**纵向抽象层级**梳理 Rust 的惯用法（idioms）——从词法糖到架构模式的高效、等效、简洁表达方式，与 `02_patterns.md` 的设计模式形成互补：后者聚焦「设计模式」（面向问题），本文件聚焦「惯用法」（面向表达）。",
-      "line_count": 1344,
+      "line_count": 1348,
       "theorem_chains": [
         {
           "text": "- **定理**: Rust 惯用法谱系全景（Idioms Spectrum） 定义 ⟹ 类型安全保证",
@@ -23157,7 +23157,7 @@
       "layer": "L6",
       "title": "Blockchain & Smart Contract Security（区块链与智能合约安全）",
       "positioning": "",
-      "line_count": 856,
+      "line_count": 855,
       "theorem_chains": [
         {
           "text": "### 1.1 内存安全 ⟹ 合约无重入/溢出漏洞",
@@ -23327,7 +23327,7 @@
       "layer": "L6",
       "title": "Game Development & ECS Architecture（游戏开发与 ECS 架构）",
       "positioning": "",
-      "line_count": 1229,
+      "line_count": 1228,
       "theorem_chains": [
         {
           "text": "### 3.1 `&mut Component` ⟹ System 独占访问",
@@ -26849,7 +26849,7 @@
       "layer": "L6",
       "title": "CQRS & Event Sourcing（命令查询职责分离与事件溯源）",
       "positioning": "",
-      "line_count": 1380,
+      "line_count": 1385,
       "theorem_chains": [
         {
           "text": "- **定理**: CQRS & Event Sourcing（命令查询职责分离与事件溯源） 定义 ⟹ 类型安全保证",
@@ -30465,7 +30465,7 @@
       "layer": "L7",
       "title": "Formal Methods Industrialization（形式化方法工业化）",
       "positioning": "",
-      "line_count": 1503,
+      "line_count": 1506,
       "theorem_chains": [
         {
           "text": "> **逻辑推演**: 从前提条件到结论的推理链，每条均标注 `⟹`。",
@@ -31018,7 +31018,7 @@
       "layer": "L7",
       "title": "Rust 形式模型演进跟踪（1.79–1.97+）",
       "positioning": "本文件从**形式模型维度**跟踪 Rust 语言特性的演进，而非版本特性清单。仅收录对 Rust 的**所有权模型、类型系统、异步语义、Unsafe 边界**有结构性影响的特性。",
-      "line_count": 1162,
+      "line_count": 1223,
       "theorem_chains": [
         {
           "text": "- **定理**: Rust 形式模型演进跟踪（1.79–1.97+） 定义 ⟹ 类型安全保证",
@@ -31179,7 +31179,7 @@
         },
         {
           "source": "Rust 1.96.0 release notes (GitHub #156512) 2026-05-28; releases.rs",
-          "context": "Rust 1.96.0 已于 2026-05-28 发布 stable。关键稳定化特性：assert_matches!、core::range 类型族、From<T> for LazyCell/LazyLock/AssertUnwindSafe、ManuallyDrop 常量模式、expr metavariable to cfg。"
+          "context": "> Rust 1.96.0 已于 2026-05-28 发布 stable。关键稳定化特性：assert_matches!、core::range 类型族、`From<T>` for LazyCell/LazyLock/AssertUnwindSafe、ManuallyDrop 常量模式、expr metavariable to cfg。"
         },
         {
           "source": "Rust Security Advisory; Ferrous Systems Security Blog; rustsec.org 2026-05",
@@ -31977,8 +31977,8 @@
       "path": "concept\\07_future\\13_unsafe_fields_preview.md",
       "layer": "L7",
       "title": "Unsafe Fields 预研：字段级安全边界的精确标注",
-      "positioning": "探讨 Rust 中引入 **unsafe [来源: [Rust Unsafe](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)] [来源: [Rust Nomicon](https://doc.rust-lang.org/nomicon/)] [来源: [Rust Reference — Unsafe](https://doc.rust-lang.org/reference/unsafe-keyword.html)] field [来源: [Rust RFC - Unsafe Fields](https://github.com/rust-lang/rfcs/pull/3458)]s** 的提案——允许在结构体字段级别标记 `unsafe`，将 `unsafe` 的粒度从**代码块**细化到**字段访问**，提升 unsafe Rust 的局部性和可审计性。",
-      "line_count": 509,
+      "positioning": "> 探讨 Rust 中引入 **unsafe",
+      "line_count": 531,
       "theorem_chains": [
         {
           "text": "- **定理**: Unsafe Fields 预研：字段级安全边界的精确标注 定义 ⟹ 类型安全保证",
@@ -33990,7 +33990,7 @@
       "layer": "L7",
       "title": "Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举",
       "positioning": "探讨 Rust 枚举类型在 API 演进与跨 crate 兼容性维度的**开放性语义**，从现有 `#[non_exhaustive]` 机制延伸到语言级开放枚举的设计空间。",
-      "line_count": 659,
+      "line_count": 663,
       "theorem_chains": [
         {
           "text": "- **定理**: Open Enums 概念预研：从 `` 到可扩展枚举 定义 ⟹ 类型安全保证",

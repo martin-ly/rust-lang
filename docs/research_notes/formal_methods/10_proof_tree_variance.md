@@ -160,7 +160,7 @@ graph TD
 
     R2[&'a mut T] --> R2_Inv[不变: T<br/>协变: 'a]
 
-    R3[fn(A) -> B] --> R3_Contra[逆变: A<br/>协变: B]
+    R3["fn(A) -> B"] --> R3_Contra[逆变: A<br/>协变: B]
 
     R4[Box<T>] --> R4_Co[协变: T]
 

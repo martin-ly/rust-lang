@@ -133,7 +133,7 @@ graph TD
     A[开始] --> B{some_condition?}
     B -->|true| C[vec.push]
     C --> D[结束]
-    B -->|false| E[println!first]
+    B -->|false| E["println!first"]
     E --> D
 
     style C fill:#ffcccc

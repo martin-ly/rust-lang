@@ -83,7 +83,7 @@ pie title WCP Rust 实现状态分布 (43 模式)
 ```mermaid
 xychart-beta
     title "按类别实现进度"
-    x-axis [基础, 高级分支, 多实例, 状态, 取消, 迭代, 终止, 触发器, 鉴别器, 结构]
+    x-axis [Basic, Advanced Branch, Multi Instance, State, Cancel, Iterate, Terminate, Trigger, Discriminator, Structure]
     y-axis "完成率 (%)" 0 --> 100
     bar [100, 72, 25, 67, 20, 33, 50, 0, 0, 0]
 ```

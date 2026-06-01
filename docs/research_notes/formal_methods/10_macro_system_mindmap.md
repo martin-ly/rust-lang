@@ -55,31 +55,31 @@
 
 ```mermaid
 mindmap
-  root((宏系统<br/>Macro System))
+  root((宏系统br/Macro System))
     声明宏
       macro_rules!
         模式匹配
         重复规则
         片段类型
       语法元素
-        匹配器 $name:ty
-        转换器 =>
-        重复 $(...)*
+        匹配器 name:ty
+        转换器 to
+        重复 
       卫生性
         标识符隔离
         避免捕获
         混合上下文
     过程宏
       派生宏
-        #[derive(...)]
+        #derive
         结构体枚举
         自动实现
       属性宏
-        #[custom_attr]
+        #custom_attr
         代码转换
         元编程
       函数宏
-        custom!(...)
+        custom!
         DSL构建
         代码生成
     编译流程

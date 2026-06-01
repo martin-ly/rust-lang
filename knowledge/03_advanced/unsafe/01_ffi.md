@@ -152,8 +152,8 @@ Rust 调用 C 函数:
 graph TD
     A[Unsafe Rust] --> B[Raw Pointers]
     B --> C[FFI Basics]
-    C --> D[extern "C"]
-    C --> E[repr(C)]
+    C --> D["extern 'C'"]
+    C --> E["repr(C)"]
     E --> F[Memory Layout]
     F --> G[Alignment / Padding]
     C --> H[Ownership Transfer]

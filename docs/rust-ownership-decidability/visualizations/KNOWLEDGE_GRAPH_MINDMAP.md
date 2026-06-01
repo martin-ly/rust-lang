@@ -2,17 +2,16 @@
 
 > **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > 完整的知识体系可视化导航
 
 ---
 
 ## 📑 目录
->
+
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
+
 - [Rust 所有权系统 - 知识图谱思维导图](#rust-所有权系统---知识图谱思维导图)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [1. 核心概念思维导图](#1-核心概念思维导图)
   - [2. 定理依赖网络图](#2-定理依赖网络图)
   - [3. 学习路径决策树](#3-学习路径决策树)
@@ -25,12 +24,11 @@
   - [10. 完整知识图谱](#10-完整知识图谱)
   - [使用指南](#使用指南)
     - [如何选择图表](#如何选择图表)
-  - *这些图表使用 Mermaid 语法，可在支持 Mermaid 的 Markdown 查看器中渲染*
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
 ## 1. 核心概念思维导图
->
+
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```mermaid
@@ -93,7 +91,7 @@ mindmap
 ---
 
 ## 2. 定理依赖网络图
->
+
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```mermaid
@@ -206,7 +204,7 @@ graph TD
     H2 --> J2[Semantics]
     H2 --> J3[Typing]
 
-    D1 --> K[完成! 🎉]
+    D1 --> K["完成! 🎉"]
     D4 --> K
     G1 --> K
     I1 --> K
@@ -263,22 +261,22 @@ graph LR
 
 ```mermaid
 stateDiagram-v2
-    [*] --> Owned: let x = T::new()
+    [*] --> Owned : ""let x = T new()""
 
     Owned --> Moved: let y = x
     Owned --> Borrowed: &x
     Owned --> MutBorrowed: &mut x
     Owned --> Dropped: 作用域结束
 
-    Moved --> [*]: 值转移
+    Moved --> [*] : "值转移"
 
     Borrowed --> Owned: 借用结束
     Borrowed --> Borrowed: 多个 &x
 
     MutBorrowed --> Owned: 借用结束
-    MutBorrowed --> [*]: 修改后drop
+    MutBorrowed --> [*] : "修改后drop"
 
-    Dropped --> [*]: 释放资源
+    Dropped --> [*] : "释放资源"
 ```
 
 ---
@@ -549,6 +547,7 @@ graph TB
 ---
 
 *这些图表使用 Mermaid 语法，可在支持 Mermaid 的 Markdown 查看器中渲染*
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -49,7 +49,7 @@
   - [10. 总结](#10-总结)
   - [参考文献](#参考文献)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -224,7 +224,7 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    A[Activity A] --> fork[[fork]]
+    A[Activity A] --> fork["[fork]"]
     fork --> B[Activity B]
     fork --> C[Activity C]
     fork --> D[Activity D]

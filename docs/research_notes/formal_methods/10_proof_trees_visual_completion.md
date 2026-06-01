@@ -94,7 +94,7 @@
 ```mermaid
 graph TD
     subgraph "定理 T1: 所有权唯一性"
-    T1[∀x,t: owns(x,t) → ¬∃t'≠t: owns(x,t')]
+    T1["∀x,t: owns(x,t) → ¬∃t'≠t: owns(x,t')"]
     end
 
     subgraph "证明结构"
@@ -114,7 +114,7 @@ graph TD
     end
 
     subgraph "反证"
-    C1[假设: ∃t'≠t: owns(x,t') ∧ owns(x,t)] --> C2[矛盾 1: 违背栈帧唯一性]
+    C1["假设: ∃t'≠t: owns(x,t') ∧ owns(x,t)"] --> C2[矛盾 1: 违背栈帧唯一性]
     C1 --> C3[矛盾 2: 违背 move 语义]
     C2 --> R[∴ 假设不成立, T1 得证]
     C3 --> R
@@ -175,14 +175,14 @@ graph TD
     end
 
     subgraph "T1 证明"
-    T1 --> T1_D1[Def: borrow_immut(x) 创建 &T]
+    T1 --> T1_D1["Def: borrow_immut(x) 创建 &T"]
     T1 --> T1_D2[Def: 不可变引用 &T 不允许修改]
     T1_D1 --> T1_L1[引理 1.1: &T 生命周期内 T 不可变]
     T1_L1 --> T1_P[归纳证明: 所有程序点满足]
     end
 
     subgraph "T2 证明"
-    T2 --> T2_D1[Def: borrow_mut(x) 创建 &mut T]
+    T2 --> T2_D1["Def: borrow_mut(x) 创建 &mut T"]
     T2 --> T2_D2[Def: 可变引用 &mut T 排他]
     T2_D1 --> T2_L1[引理 2.1: &mut T 存在时无其他引用]
     T2_L1 --> T2_L2[引理 2.2: 借用冲突检测算法]
@@ -279,7 +279,7 @@ graph TD
     subgraph "保持性证明"
     PS_P1[替换引理] --> PS_P1_1["Γ, x:T ⊢ e : U ∧ Γ ⊢ v : T <br/>→ Γ ⊢ [v/x]e : U"]
 
-    PS_P2[求值保持] --> PS_P2_1[β-归约: (λx.e) v → [v/x]e]
+    PS_P2[求值保持] --> PS_P2_1["β-归约: (λx.e) v → [v/x]e"]
     PS_P2_1 --> PS_P2_1_1[由替换引理，类型保持]
 
     PS_P2 --> PS_P2_2[match 归约]

@@ -89,6 +89,9 @@
     - [10.3 边界测试：`cargo` 工作空间的成员路径错误（编译错误）](#103-边界测试cargo-工作空间的成员路径错误编译错误)
     - [10.4 边界测试：`rustc` 的链接时优化（LTO）与动态链接的冲突（编译错误/链接错误）](#104-边界测试rustc-的链接时优化lto与动态链接的冲突编译错误链接错误)
     - [10.3 边界测试：cargo feature 的联合启用与编译错误（编译错误）](#103-边界测试cargo-feature-的联合启用与编译错误编译错误)
+  - [认知路径](#认知路径)
+    - [核心推理链](#核心推理链)
+    - [反命题与边界](#反命题与边界)
 
 ## 一、权威定义
 
@@ -462,10 +465,10 @@ mod no_std_impl {
 graph TD
     A[MyApp] --> B[crate-a]
     A --> C[crate-b]
-    B --> D[serde "1.0"]
+    B --> D["serde 1.0"]
     C --> D
-    B -.->|启用 feature "derive"| D
-    C -.->|启用 feature "alloc"| D
+    B -.->|"启用 feature derive"| D
+    C -.->|"启用 feature alloc"| D
     D -->|实际编译| E[serde with derive + alloc]
 ```
 

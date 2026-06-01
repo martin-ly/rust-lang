@@ -419,7 +419,7 @@ mindmap
     结构
       Element enum
       Visitor trait
-      visit() 方法
+      visit 方法
     行为
       分离操作与结构
       遍历访问

@@ -360,8 +360,8 @@ graph TD
     D --> E[RustBelt 2018]
     E --> F[Rust 所有权系统]
 
-    A --- A1[!A = Copy]<--> F1[Copy trait]
-    A --- A2[A ⊗ B = 资源组合]<--> F2[(A, B)]
+    A --- A1["!A = Copy"]<--> F1[Copy trait]
+    A --- A2[A ⊗ B = 资源组合]<--> F2["(A, B)"]
     A --- A3[A ⊸ B = 线性蕴含]<--> F3[move 语义]
     B --- B1[弱化允许丢弃]<--> F4[mem::forget 安全]
     C --- C1[P * Q = 分离合取]<--> F5[struct 字段独立]

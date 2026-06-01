@@ -204,13 +204,13 @@ graph TD
     C --> C4[⊕ Plus: 内部选择]
     C --> C5[⅋ Par: 交替使用]
 
-    D --> D1[!A Of course: Copy]
+    D --> D1["!A Of course: Copy"]
     D --> D2[?A Why not: Drop]
 
     E --> E1[Ownership = Affine Type]
     E --> E2[Move = Linear Consumption]
     E --> E3[Borrow = 临时授权]
-    E --> E4[Copy = !A 指数模态]
+    E --> E4["Copy = !A 指数模态"]
 
     F --> F1[T1: 切消 ⟹ 一致性]
     F --> F2[T2: 会话类型 ⟹ 协议安全]

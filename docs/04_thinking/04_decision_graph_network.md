@@ -2,7 +2,6 @@
 
 > **分级**: [B]
 > **Bloom 层级**: L4-L5 (分析/评价)
-
 > **创建日期**: 2025-12-11
 > **最后更新**: 2026-05-08
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -15,42 +14,42 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 决策图网 / Decision Graph Network](#rust-决策图网--decision-graph-network)
-  - [📑 目录](#目录)
-  - [🎯 决策图网概述 {#-决策图网概述}](#决策图网概述)
+  - [📑 目录](#-目录)
+  - [🎯 决策图网概述 {#-决策图网概述}](#-决策图网概述--决策图网概述)
     - [核心属性](#核心属性)
     - [应用场景](#应用场景)
-  - [🚀 核心决策流程 {#-核心决策流程}](#核心决策流程)
-  - [📦 模块化决策树 {#-模块化决策树}](#模块化决策树)
+  - [🚀 核心决策流程 {#-核心决策流程}](#-核心决策流程--核心决策流程)
+  - [📦 模块化决策树 {#-模块化决策树}](#-模块化决策树--模块化决策树)
     - [1. 所有权与借用决策树](#1-所有权与借用决策树)
     - [2. 类型系统决策树](#2-类型系统决策树)
     - [3. 控制流决策树](#3-控制流决策树)
     - [4. 异步编程决策树](#4-异步编程决策树)
     - [5. Pin 使用场景决策树](#5-pin-使用场景决策树)
     - [6. 表达能力边界决策树](#6-表达能力边界决策树)
-  - [🔧 技术选型决策树 {#-技术选型决策树}](#技术选型决策树)
+  - [🔧 技术选型决策树 {#-技术选型决策树}](#-技术选型决策树--技术选型决策树)
     - [集合类型选择](#集合类型选择)
     - [错误处理策略选择](#错误处理策略选择)
     - [并发模型选择](#并发模型选择)
     - [序列化库选择](#序列化库选择)
     - [Web框架选择](#web框架选择)
     - [数据库访问选择](#数据库访问选择)
-  - [🐛 调试决策树 {#-调试决策树}](#调试决策树)
+  - [🐛 调试决策树 {#-调试决策树}](#-调试决策树--调试决策树)
     - [编译错误调试](#编译错误调试)
     - [运行时错误调试](#运行时错误调试)
     - [性能问题调试](#性能问题调试)
     - [内存问题调试](#内存问题调试)
-  - [⚡ 优化决策树 {#-优化决策树}](#优化决策树)
+  - [⚡ 优化决策树 {#-优化决策树}](#-优化决策树--优化决策树)
     - [CPU优化决策树](#cpu优化决策树)
     - [内存优化决策树](#内存优化决策树)
     - [I/O优化决策树](#io优化决策树)
     - [编译优化决策树](#编译优化决策树)
-  - [📚 学习路径决策树 {#-学习路径决策树}](#学习路径决策树)
+  - [📚 学习路径决策树 {#-学习路径决策树}](#-学习路径决策树--学习路径决策树)
     - [新手学习路径](#新手学习路径)
     - [有经验开发者路径](#有经验开发者路径)
     - [专项技能提升路径](#专项技能提升路径)
-  - [📊 决策矩阵总结 {#-决策矩阵总结}](#决策矩阵总结)
+  - [📊 决策矩阵总结 {#-决策矩阵总结}](#-决策矩阵总结--决策矩阵总结)
     - [快速决策参考](#快速决策参考)
-  - [🔗 相关文档 {#-相关文档}](#相关文档)
+  - [🔗 相关文档 {#-相关文档}](#-相关文档--相关文档)
     - [设计机制论证](#设计机制论证)
     - [表达能力与边界](#表达能力与边界)
     - [证明与安全](#证明与安全)
@@ -63,7 +62,7 @@
     - [本文档的Rust 1.95+更新要点](#本文档的rust-195更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
+      - [相关文档](#相关文档-1)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -219,7 +218,7 @@ graph TD
     Q1 -->|是| ResultType[Result<T, E>]
     Q1 -->|否| PanicType{严重错误？}
 
-    PanicType -->|是| Panic[panic!]
+    PanicType -->|是| Panic["panic!"]
     PanicType -->|否| Abort[process::abort]
 
     ResultType --> Q2{需要传播？}
@@ -259,7 +258,7 @@ graph TD
 
     Sequential --> Q3{需要错误追踪？}
 
-    Q3 -->|是| TrackCaller[#[track_caller]]
+    Q3 -->|是| TrackCaller["#[track_caller]"]
     Q3 -->|否| NormalAsync[常规异步]
 
     TrackCaller --> Location[Location::caller]
@@ -286,10 +285,10 @@ graph TD
     Q1 -->|是| StackPin[栈固定]
     Q1 -->|否| HeapPin[堆固定]
 
-    StackPin --> StackMethod[Pin::new(&mut t)]
+    StackPin --> StackMethod["Pin::new(&mut t)"]
     StackPin --> ZeroCost[零开销]
 
-    HeapPin --> BoxPin[Box::pin(t)]
+    HeapPin --> BoxPin["Box::pin(t)"]
     HeapPin --> SelfRef[自引用结构]
 
     Start --> Q2{存储位置？}
@@ -370,7 +369,7 @@ graph TD
 
     Start --> Q2{序列类型？}
 
-    Q2 -->|固定大小| Array[数组 [T; N]]
+    Q2 -->|固定大小| Array["数组 [T; N]"]
     Q2 -->|动态增长| VecType{双端操作？}
 
     VecType -->|频繁| VecDeque[VecDeque<T>]
@@ -477,7 +476,7 @@ graph TD
     BinaryLib -->|跨语言| Protobuf[prost/protobuf]
 
     Start --> Q2{派生宏？}
-    Q2 -->|是| SerdeDerive[#[derive(Serialize, Deserialize)]]
+    Q2 -->|是| SerdeDerive["#[derive(Serialize, Deserialize)]"]
 
     Start --> Q3{自定义格式？}
     Q3 -->|是| CustomSer[实现Serializer/Deserializer]
@@ -740,7 +739,7 @@ graph TD
     Simd --> Simd2[packed_simd]
 
     Start --> Q3{热点函数？}
-    Q3 -->|是| Inline[#[inline]]
+    Q3 -->|是| Inline["#[inline]"]
 
     style Start fill:#e1f5ff
     style Algorithm fill:#e1ffe1
@@ -764,7 +763,7 @@ graph TD
     ReduceAlloc --> RA4[避免clone]
 
     ReduceSize --> RS1[使用&str代替String]
-    ReduceSize --> RS2[使用&[T]代替Vec]
+    ReduceSize --> RS2["使用&[T]代替Vec"]
     ReduceSize --> RS3[压缩枚举]
 
     Locality --> L1[连续内存布局]
@@ -775,7 +774,7 @@ graph TD
     Q2 -->|尽量栈| StackAlloc[栈分配]
 
     Start --> Q3{大数组？}
-    Q3 -->|是| BoxSlice[Box<[T]>]
+    Q3 -->|是| BoxSlice["Box<[T]>"]
 
     style Start fill:#e1f5ff
     style ReduceAlloc fill:#e1ffe1

@@ -141,7 +141,7 @@ Matrix<i32, 3, 4> 的 transpose() 返回 Matrix<i32, 4, 3>:
 ```mermaid
 graph TD
     A[Const Generics] --> B[Generic Const Expressions]
-    B --> C[where [T; N * M]: Sized]
+    B --> C["where [T; N * M]: Sized"]
     B --> D[Const Eval in Types]
     D --> E[Compile-time Computation]
     E --> F[Matrix<N, M>]

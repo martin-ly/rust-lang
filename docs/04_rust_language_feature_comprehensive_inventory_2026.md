@@ -325,7 +325,7 @@ graph TD
     M --> M3[ManuallyDrop]
     M --> M4[Pin<&mut T>]
     M --> M5[MaybeUninit 数组互转 1.95 ⭐]
-    M --> M6[Cell<[T; N]> AsRef 1.95 ⭐]
+    M --> M6["Cell<[T; N]> AsRef 1.95 ⭐"]
 ```
 
 ### 01.2 核心概念完备性检查
@@ -957,7 +957,7 @@ fn missing_lifetime<'a>(x: &'a str) -> impl Iterator<Item = char> + use<> {
 graph LR
     A[async fn<br/>1.39] --> B[AFIT<br/>async fn in trait<br/>1.75.0]
     B --> C[AFIDT<br/>async fn in dyn trait<br/>1.97+ Nightly]
-    B --> D[Async Closures<br/>async || {}<br/>1.96 FCP]
+    B --> D["Async Closures<br/>async || {}<br/>1.96 FCP"]
     D --> E[AsyncFn traits<br/>AsyncFn/Mut/Once<br/>1.94 Prelude]
     C --> F[RTN<br/>Return Type Notation<br/>1.97+ RFC 3654]
     F --> G[Send Bound<br/>Problem Solved]
@@ -1281,14 +1281,14 @@ graph TD
     AFIT --> AFIT3[RTN 预研]
     AFIT --> AFIT4[AsyncFn traits in prelude 1.94]
 
-    AC --> AC1[async || {} 语法]
+    AC --> AC1["async || {} 语法"]
     AC --> AC2[AsyncFn / AsyncFnMut / AsyncFnOnce]
     AC --> AC3[CallRefFuture / CallOnceFuture]
-    AC --> AC4[与 Fn() -> impl Future 的区别]
+    AC --> AC4["与 Fn() -> impl Future 的区别"]
 
     S --> S1[futures::Stream]
     S --> S2[StreamExt]
-    S --> S3[pin! macro]
+    S --> S3["pin! macro"]
     S --> S4[Gen blocks 预研]
 ```
 
@@ -1898,8 +1898,8 @@ graph TD
     C11 --> P[Procedural Macros]
     C11 --> C[Compile-time 编译期]
 
-    D --> D1[macro_rules!]
-    D --> D2[Repetition $(...)*]
+    D --> D1["macro_rules!"]
+    D --> D2["Repetition $(...)*"]
     D --> D3[Hygiene]
     D --> D4[expr_2021 fragment 1.83]
 
@@ -1909,9 +1909,9 @@ graph TD
     P --> P4[proc_macro_span API]
 
     C --> C1[const eval]
-    C --> C2[cfg! / #[cfg]]
-    C --> C3[cfg_select! 1.95 ⭐]
-    C --> C4[concat! / include!]
+    C --> C2["cfg! / #[cfg]"]
+    C --> C3["cfg_select! 1.95 ⭐"]
+    C --> C4["concat! / include!"]
 ```
 
 ### 11.2 核心概念完备性检查
@@ -2041,7 +2041,7 @@ graph TD
     T --> T2[wasm-pack]
     T --> T3[ trunk]
 
-    I --> I1[JS ↔ Rust FFI]
+    I --> I1[JS <-> Rust FFI]
     I --> I2[wasm-bindgen types]
 
     W --> W1[wasm32-wasi → wasm32-wasip1 ✅]

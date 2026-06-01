@@ -4,21 +4,22 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录
->
+
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
+
 - [Rust所有权系统 - 思维导图](#rust所有权系统---思维导图)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [Mermaid思维导图](#mermaid思维导图)
   - [文本思维导图](#文本思维导图)
   - [核心关系图](#核心关系图)
   - [概念依赖关系](#概念依赖关系)
-  - **更新日期**: 2026-03-05
+  - [**更新日期**: 2026-03-05](#更新日期-2026-03-05)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## Mermaid思维导图
->
+
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```mermaid
@@ -69,7 +70,7 @@ mindmap
         用一次或丢弃
         所有权转移
       分离逻辑
-        {P} C {Q}
+        P C Q
         框架规则
         并发扩展
       验证工具

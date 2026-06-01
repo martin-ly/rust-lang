@@ -1,6 +1,41 @@
 # 更新日志 (Changelog)
 
-> **最后更新**: 2026-05-30
+> **最后更新**: 2026-06-01
+
+---
+
+## [2.5.1] - 2026-06-01 — Mermaid 全量修复与索引清理
+
+### 🧜 Mermaid 语法全面修复
+
+- **concept/ Mermaid 块**: 574/574 全部通过 `mmdc` 验证 (v11.15.0)
+- **knowledge/ + docs/ Mermaid 块**: 508/508 全部通过验证
+- **全项目总计**: **1,082/1,082** 通过
+- **修复规模**: 涉及 70+ 文件，修复问题类型包括：
+  - `radar` → `xychart-beta` 图表类型替换（2 文件）
+  - 节点标签嵌套 `[]` `()` `{}` `"` 引号包裹修复（50+ 文件）
+  - Edge label 中 `()` `#[]` `&mut` 等特殊字符引号包裹
+  - mindmap 中 `clone()` `fn foo()` `=>` `$` 等代码片段清理（20+ 文件）
+  - `xychart-beta` 中文轴标签 → 英文（Mermaid lexer 限制）
+  - `quadrantChart`（不支持）→ `graph TD` + `subgraph` 重写
+  - Unicode 数学符号 `⊥` `∘` `≡` `∀` `β` `λ` 替换为 ASCII
+  - stateDiagram 自引用循环、`end` 保留关键字冲突修复
+  - `<br/>` 在节点定义外部 → 移入 `[]` 内部
+
+### 📑 INDEX.md 索引修复
+
+- **1.96/1.97 表格互换修复**: `knowledge/INDEX.md` 中两个版本特性表格内容完全颠倒，现已正确归类
+- **1.96 表格**: 7 项 stable 特性（assert_matches!、core::range、LazyLock From<T>、NonZero Step、expr→cfg、ManuallyDrop 常量模式、Never tuple coercion）
+- **1.97 表格**: 5 项预览特性（AFIDT、VecDeque::truncate_front、RefCell::try_map、int_format_into、cargo script）
+- **移除重复表头**: 1.96 表格中重复的 Markdown 表头已清理
+
+### 🔧 编译验证
+
+- `cargo test --workspace`: **全部通过**
+- `cargo clippy --workspace`: **零 lint**
+- `kb_auditor.py`: 死链 **0**，定理链 1,305，认知路径 L0-L7 **100%**
+- `version_fact_check.py`: 版本错误 **0** / 3,878 文件
+- `code_block_compiler.py`: 代码块编译 **1,741/1,741** 通过
 
 ---
 

@@ -115,7 +115,7 @@ let sqlite_pool: sqlx::Pool<sqlx::Sqlite> = SqlitePoolOptions::new()
 
 ```mermaid
 graph TB
-    A[应用代码] -->|acquire().await| B[Pool<DB>]
+    A[应用代码] -->|"acquire().await"| B[Pool<DB>]
     B -->|空闲连接可用| C[返回 PooledConnection]
     B -->|连接池耗尽| D[等待队列]
     D -->|连接归还| C

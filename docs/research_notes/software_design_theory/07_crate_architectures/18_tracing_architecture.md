@@ -55,9 +55,9 @@ Tracing 的架构可分解为**生产者-分发器-消费者**三层：
 ```mermaid
 graph TB
     subgraph Producer["生产者层 (Application Code)"]
-        SPAN[span! / #[instrument]]
-        EVENT[event! / info! / debug!]
-        VAL[#[derive(Value)]]
+        SPAN["span! / #[instrument]"]
+        EVENT["event! / info! / debug!"]
+        VAL["#[derive(Value)]"]
     end
 
     subgraph Dispatcher["分发器层 (Dispatch)"]

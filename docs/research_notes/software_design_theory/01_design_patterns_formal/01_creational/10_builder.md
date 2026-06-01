@@ -520,8 +520,8 @@ mindmap
     结构
       Builder struct
       Target struct
-      set_xxx() → Self
-      build(self) → Result
+      set_xxx → Self
+      build → Result
     行为
       链式配置
       必填校验

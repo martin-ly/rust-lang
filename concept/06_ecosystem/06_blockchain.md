@@ -71,7 +71,7 @@ mindmap
   root((区块链与<br/>智能合约安全))
     Rust 链架构
       Solana[Solana<br/>Sealevel 并行执行]
-      Polkadot[Polkadot<br/>Substrate + ink!]
+      Polkadot["Polkadot<br/>Substrate + ink!"]
       Near[Near<br/>Trie-based + Promise API]
     漏洞类别消除
       重入攻击[重入攻击<br/>所有权 + &mut 独占]
@@ -85,7 +85,7 @@ mindmap
       抵押率[抵押率不变量<br/>数学规约]
     跨链对比
       Move[Move 语言<br/>Ability 系统]
-      RustInk[Rust/ink!<br/>所有权 + Wasm]
+      RustInk["Rust/ink!<br/>所有权 + Wasm"]
       EVM[EVM/Solidity<br/>运行时检查]
 ```
 
@@ -852,4 +852,3 @@ fn panic(_info: &core::panic::PanicInfo) -> ! {
 > **过渡**: Blockchain & Smart Contract Security（区块链与智能合约安全） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Blockchain & Smart Contract Security（区块链与智能合约安全） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Blockchain & Smart Contract Security（区块链与智能合约安全） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-

@@ -727,8 +727,8 @@ graph TD
     E --> E2[async-std]
     E --> E3[smol / embassy]
 
-    F --> F1[join! 并发等待]
-    F --> F2[select! 竞争]
+    F --> F1["join! 并发等待"]
+    F --> F2["select! 竞争"]
     F --> F3[Stream 异步迭代]
 ```
 

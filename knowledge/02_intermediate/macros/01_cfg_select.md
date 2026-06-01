@@ -180,10 +180,10 @@ let runtime_flag = true;
 
 ```mermaid
 graph TD
-    A[Conditional Compilation] --> B[#[cfg] Attribute]
-    A --> C[cfg! Macro]
+    A[Conditional Compilation] --> B["#[cfg] Attribute"]
+    A --> C["cfg! Macro"]
     C --> D[Runtime Branching]
-    A --> E[cfg_select! Macro]
+    A --> E["cfg_select! Macro"]
     E --> F[Compile-time Expression Selection]
     F --> G[Platform Abstraction]
     F --> H[Feature Flags]

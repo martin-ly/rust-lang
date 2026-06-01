@@ -484,8 +484,8 @@ mindmap
   root((Command<br/>命令模式))
     结构
       Command trait
-      execute()
-      undo()
+      execute
+      undo
     行为
       封装请求
       延迟执行

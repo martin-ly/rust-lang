@@ -167,7 +167,7 @@ graph TD
     D --> E[From Trait]
     E --> F[Custom Error Types]
     F --> G[thiserror / anyhow]
-    B --> H[panic!]
+    B --> H["panic!"]
     C --> H
     H --> I[catch_unwind]
     F --> J[Error Trait]

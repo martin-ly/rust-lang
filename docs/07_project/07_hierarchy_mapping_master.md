@@ -186,12 +186,12 @@ graph LR
         F2 -->|定理保证| F1
     end
 
-    subgraph knowledge↔concept
+    subgraph knowledge_concept
         K1[knowledge 直觉] -->|映射| K2[concept 形式]
         K2 -->|反哺| K1
     end
 
-    subgraph docs↔concept
+    subgraph docs_concept
         D1[docs 工程] -->|实践验证| D2[concept 理论]
         D2 -->|指导| D1
     end

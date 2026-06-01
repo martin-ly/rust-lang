@@ -40,7 +40,7 @@
   - [参考文献](#参考文献)
   - [权威来源索引](#权威来源索引)
   - [相关文件](#相关文件)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -66,6 +66,7 @@ $$
 分析维度包括：所有权分裂方式、可变 aliasing 需求、生命周期约束、同步需求与动态性。
 
 ### 分析框架
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 维度 | 说明 | Rust 对应 |
@@ -442,6 +443,7 @@ enum Tree<T> {
 Rust **不保证尾调用优化**（TCO），因为 TCO 与 RAII Drop 顺序冲突。深度递归应使用显式栈或 trampoline。
 
 ### 3.7 终止模式 (WCP11, 43)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **WCP43 Explicit Termination** 映射到 `return` 或 `std::process::exit` / `abort`，返回类型 `!`（never type）精确对应永不返回语义。
@@ -501,6 +503,7 @@ struct InterleavedQueue<T> {
 > **[来源: POPL 2018 - RustBelt]** · **[来源: ACM - Ownership Types]** · **[来源: Rust Reference]**
 
 ### 4.1 定理 1：所有权分裂安全性
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **定理 1（所有权分裂安全性）**: 对于任意工作流模式，如果其将数据上下文 $D$ 分裂为子上下文 $D_1, \ldots, D_n$，且满足 $\forall i \neq j: \text{Dom}(D_i) \cap \text{Dom}(D_j) = \emptyset$，则该模式可在 Rust 安全子系统中实现，无需运行时共享机制。
@@ -508,6 +511,7 @@ struct InterleavedQueue<T> {
 **证明**: 将每个 $D_i$ 的所有权 `move` 到对应分支。由于 $D_i \cap D_j = \emptyset$，各分支持有不相交数据，编译器验证无别名冲突。各分支完成后结果通过 `join` 汇聚。∎
 
 ### 4.2 定理 2：共享可变状态需求
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **定理 2（共享可变状态需求）**: 若模式要求两个以上并发活动同时访问同一数据 $d$，且至少一个活动修改 $d$，则 Rust 实现必须引入内部可变性（`Mutex`、`RefCell`）或消息传递。
@@ -517,6 +521,7 @@ struct InterleavedQueue<T> {
 **应用**: WCP3（Synchronization）、WCP8（Multi Merge）、WCP17（Interleaved Parallel Routing）等所有需要并发修改共享计数器或状态的模式，都落在 🟡 类。
 
 ### 4.3 定理 3：取消模式内存安全
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **定理 3（取消模式内存安全）**: Rust 中基于 `AbortHandle`、`CancellationToken` 或 `scope` 的取消模式是内存安全的，不会导致悬垂指针、双重释放或资源泄漏。
@@ -524,6 +529,7 @@ struct InterleavedQueue<T> {
 **证明**: `abort()` 在任务下次 `.await` 点退出；栈帧值按逆序调用 `Drop`；所有权系统保证每值只 `drop` 一次；`scope` 保证子线程结束前父线程栈数据有效。∎
 
 ### 4.4 定理 4：循环模式安全性边界
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **定理 4（循环模式安全性边界）**: 任意循环（WCP10）若涉及自引用数据结构（节点引用自身），则需要 `Pin` 固定或 `unsafe` 原始指针。
@@ -541,7 +547,7 @@ flowchart TD
     A[工作流模式] --> B{需要并发?}
     B -->|否| C[🟢 let / match / loop]
     B -->|是| D{数据可分?}
-    D -->|是，不相交| E[🟢 thread::scope / join!]
+    D -->|是，不相交| E["🟢 thread::scope / join!"]
     D -->|否| F{只读 or 读写?}
     F -->|只读| G[🟡 Arc<T>]
     F -->|读写| H{互斥 or 消息传递?}
@@ -567,6 +573,7 @@ flowchart TD
 > **[来源: Rustonomicon]** · **[来源: Rust Reference - Unsafe Rust]**
 
 ### 6.1 对简单合并使用 `unsafe`（过度设计）
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 WCP5（Simple Merge）的互斥路径汇合完全可用 `match` / `Option` 表达。引入 `unsafe` 破坏穷尽性检查且无性能收益。**原理**：Simple Merge 的语义是"互斥路径汇合"，Rust 的 `match` 和枚举已精确表达此语义，且编译器自动验证各分支类型一致。
@@ -587,6 +594,7 @@ fn good_simple_merge(a: Option<String>, b: Option<String>) -> String {
 ```
 
 ### 6.2 多路合并中忘记同步（数据竞争）
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 WCP8（Multi Merge）使用非原子共享计数器会导致 UB。必须使用 `AtomicUsize` 或 `Mutex`。
@@ -615,6 +623,7 @@ fn good_multi_merge() {
 ```
 
 ### 6.3 任意循环中创建引用循环而不使用 `Weak`
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 WCP10 中使用 `Rc`/`Arc` 强引用循环导致内存泄漏。图结构循环必须用 `Weak` 引用或索引表示法：
@@ -634,6 +643,7 @@ fn safe_cycle() {
 ```
 
 ### 6.4 `select!` 的 cancel-safe 陷阱
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 WCP16（Deferred Choice）中，`select!` 会轮询所有分支。若某分支在 `.await` 点被挂起后另一分支完成，该分支 Future 可能被部分执行后取消。
@@ -668,6 +678,7 @@ async fn good_deferred_choice(rx: &mut tokio::sync::mpsc::Receiver<i32>) -> i32 
 > **[来源: Rust Reference]** · **[来源: Rust Internals - Polonius]** · **[来源: Workflow Patterns Initiative]**
 
 ### 7.1 核心结论
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 分类 | 数量 | 占比 | 典型模式 |
@@ -685,6 +696,7 @@ async fn good_deferred_choice(rx: &mut tokio::sync::mpsc::Receiver<i32>) -> i32 
 4. **任意循环是唯一需要突破安全边界的模式**。其核心难点不在于循环本身（`loop` 完全安全），而在于自引用数据结构的表示。
 
 ### 7.2 Polonius 与未来改进
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **Polonius**（下一代借用检查器）对工作流模式的潜在影响：
@@ -696,6 +708,7 @@ async fn good_deferred_choice(rx: &mut tokio::sync::mpsc::Receiver<i32>) -> i32 
 但 Polonius **不会改变**：共享可变仍需 `Mutex`/通道；自引用仍需 `Pin`/`unsafe`；动态分支数仍需运行时计数器。
 
 ### 7.3 Rust 工作流引擎设计原则
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **优先结构化**：用类型状态代替动态图遍历
@@ -707,6 +720,7 @@ async fn good_deferred_choice(rx: &mut tokio::sync::mpsc::Receiver<i32>) -> i32 
 ---
 
 ## 参考文献
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. van der Aalst, W. M. P., et al. (2003). "Workflow Patterns." *Distributed and Parallel Databases*, 14(1), 5-51.
@@ -725,6 +739,7 @@ async fn good_deferred_choice(rx: &mut tokio::sync::mpsc::Receiver<i32>) -> i32 
 ---
 
 ## 相关文件
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [工作流模式总览](08-workflow-patterns.md)

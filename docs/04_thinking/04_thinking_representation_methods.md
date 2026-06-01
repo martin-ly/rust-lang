@@ -8,9 +8,9 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 思维表征方式文档 / Thinking Representation Methods Documentation](#rust-思维表征方式文档--thinking-representation-methods-documentation)
-  - [📑 目录](#目录)
-  - [🎯 文档概述](#文档概述)
-  - [🗺️ 1. 思维导图 (Mind Map)](#1-思维导图-mind-map)
+  - [📑 目录](#-目录)
+  - [🎯 文档概述](#-文档概述)
+  - [🗺️ 1. 思维导图 (Mind Map)](#️-1-思维导图-mind-map)
     - [1.1 Rust 1.93.0 核心特性思维导图](#11-rust-1930-核心特性思维导图)
     - [1.2 所有权系统完整思维导图](#12-所有权系统完整思维导图)
     - [1.3 借用系统完整思维导图](#13-借用系统完整思维导图)
@@ -23,12 +23,12 @@
     - [1.10 跨模块概念依赖思维导图](#110-跨模块概念依赖思维导图)
     - [1.11 模块级思维导图索引](#111-模块级思维导图索引)
     - [1.12 学习路径思维导图](#112-学习路径思维导图)
-  - [📊 2. 多维矩阵 (Multidimensional Matrix)](#2-多维矩阵-multidimensional-matrix)
+  - [📊 2. 多维矩阵 (Multidimensional Matrix)](#-2-多维矩阵-multidimensional-matrix)
     - [2.1 Rust 1.93.0 特性对比矩阵](#21-rust-1930-特性对比矩阵)
     - [2.2 版本迁移对比矩阵](#22-版本迁移对比矩阵)
     - [2.3 特性依赖关系矩阵](#23-特性依赖关系矩阵)
     - [2.4 性能影响矩阵](#24-性能影响矩阵)
-  - [🌳 3. 决策树图 (Decision Tree)](#3-决策树图-decision-tree)
+  - [🌳 3. 决策树图 (Decision Tree)](#-3-决策树图-decision-tree)
     - [3.1 Rust 1.93.0 特性使用决策树](#31-rust-1930-特性使用决策树)
     - [3.2 技术选型决策树](#32-技术选型决策树)
     - [3.3 调试决策树](#33-调试决策树)
@@ -44,22 +44,22 @@
       - [3.9.4 泛型约束转换树](#394-泛型约束转换树)
       - [3.9.5 生命周期转换树](#395-生命周期转换树)
       - [3.9.6 错误传播转换树](#396-错误传播转换树)
-  - [🔬 4. 证明树图 (Proof Tree)](#4-证明树图-proof-tree)
+  - [🔬 4. 证明树图 (Proof Tree)](#-4-证明树图-proof-tree)
     - [4.1 定理证明树结构](#41-定理证明树结构)
     - [4.2 内存安全证明树](#42-内存安全证明树)
     - [4.3 类型安全证明树](#43-类型安全证明树)
     - [4.4 并发安全证明树](#44-并发安全证明树)
-  - [📈 5. 概念关系网络图 (Concept Relationship Network)](#5-概念关系网络图-concept-relationship-network)
-  - [🎯 6. 使用指南](#6-使用指南)
+  - [📈 5. 概念关系网络图 (Concept Relationship Network)](#-5-概念关系网络图-concept-relationship-network)
+  - [🎯 6. 使用指南](#-6-使用指南)
     - [6.1 何时使用思维导图](#61-何时使用思维导图)
     - [6.2 何时使用多维矩阵](#62-何时使用多维矩阵)
     - [6.3 何时使用决策树](#63-何时使用决策树)
     - [6.4 何时使用证明树](#64-何时使用证明树)
     - [6.5 何时使用转换树](#65-何时使用转换树)
-  - [💻 代码示例](#代码示例)
+  - [💻 代码示例](#-代码示例)
     - [示例 1: 思维导图生成器](#示例-1-思维导图生成器)
     - [示例 2: 决策树枚举实现](#示例-2-决策树枚举实现)
-  - [📚 7. 参考资源](#7-参考资源)
+  - [📚 7. 参考资源](#-7-参考资源)
     - [7.1 官方资源](#71-官方资源)
     - [7.2 项目资源](#72-项目资源)
     - [7.3 相关文档](#73-相关文档)
@@ -137,7 +137,7 @@ mindmap
         RefCell<T>
     并发编程
       线程
-        thread::spawn
+        thread spawn
         JoinHandle
       消息传递
         mpsc
@@ -189,12 +189,12 @@ mindmap
         资源释放
     所有权转换
       借用 → 所有权
-        clone()
-        to_owned()
-        into()
+        clone
+        to_owned
+        into
       所有权 → 借用
         自动解引用
-        as_ref()
+        as_ref
     应用场景
       资源管理
       内存安全
@@ -405,8 +405,8 @@ mindmap
   root((并发编程))
     线程基础
       创建线程
-        thread::spawn
-        thread::Builder
+        thread spawn
+        thread Builder
         作用域线程
       线程管理
         JoinHandle
@@ -421,7 +421,7 @@ mindmap
         oneshot
         broadcast
       异步通道
-        tokio::sync::mpsc
+        tokio sync mpsc
         背压控制
       模式
         CSP模型
@@ -497,7 +497,7 @@ mindmap
         HTTP
         WebSocket
       文件I/O
-        tokio::fs
+        tokio fs
         异步读写
 ```
 
@@ -806,7 +806,7 @@ graph TD
 
     Start --> Q5{错误处理?}
     Q5 -->|可恢复| Result[Result<T,E>]
-    Q5 -->|不可恢复| Panic[panic!/unwrap]
+    Q5 -->|不可恢复| Panic["panic!/unwrap"]
 
     Result --> Q6{传播?}
     Q6 -->|是| Propagate[?操作符]
@@ -1194,9 +1194,9 @@ flowchart TD
     Q1 -->|多能力| Multi[T: A + B + C]
     Q1 -->|复杂约束| Where[where 子句]
 
-    Trait --> Ex1[fn f<T: Display>(x: T)]
-    Multi --> Ex2[fn f<T: Clone + Send>(x: T)]
-    Where --> Ex3[fn f<T>() where T: Debug]
+    Trait --> Ex1["fn f<T: Display>(x: T)"]
+    Multi --> Ex2["fn f<T: Clone + Send>(x: T)"]
+    Where --> Ex3["fn f<T>() where T: Debug"]
 ```
 
 #### 3.9.5 生命周期转换树
@@ -1213,8 +1213,8 @@ flowchart TD
     Q2 -->|是| R2[输出 <= self 生命周期]
     Q2 -->|否| Explicit[必须显式标注]
 
-    Explicit --> L1[fn f<'a>(x: &'a T) -> &'a U]
-    L1 --> L2[fn f<'a, 'b>(x: &'a T, y: &'b U) -> &'a V]
+    Explicit --> L1["fn f<'a>(x: &'a T) -> &'a U"]
+    L1 --> L2["fn f<'a, 'b>(x: &'a T, y: &'b U) -> &'a V"]
 ```
 
 #### 3.9.6 错误传播转换树
@@ -1225,7 +1225,7 @@ flowchart TD
 flowchart TD
     Start[错误处理策略] --> Q1{可恢复?}
     Q1 -->|是| Result[Result<T, E>]
-    Q1 -->|否| Panic[panic! / unreachable!]
+    Q1 -->|否| Panic["panic! / unreachable!"]
 
     Result --> Q2{需要传播?}
     Q2 -->|是| QOp[? 操作符]

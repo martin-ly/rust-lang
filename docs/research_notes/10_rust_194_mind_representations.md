@@ -408,7 +408,7 @@ graph TD
 graph TD
     A[遇到错误情况?] --> B[错误可恢复?]
 
-    B -->|否| C[panic!<br/>不可恢复]
+    B -->|否| C["panic!<br/>不可恢复"]
     B -->|是| D[需要错误详情?]
 
     D -->|否| E[Option<T><br/>Some/None]

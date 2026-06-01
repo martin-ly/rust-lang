@@ -44,6 +44,9 @@
     - [10.4 边界测试：自定义断言失败消息的类型约束（编译错误）](#104-边界测试自定义断言失败消息的类型约束编译错误)
     - [10.4 边界测试：所有权移动后的再次使用](#104-边界测试所有权移动后的再次使用)
   - [实践](#实践)
+  - [认知路径](#认知路径)
+    - [核心推理链](#核心推理链)
+    - [反命题与边界](#反命题与边界)
 
 ---
 
@@ -170,16 +173,16 @@ debug_assert_matches!(config, Some(true));
 ```mermaid
 graph LR
     subgraph 断言家族["Rust 断言宏家族"]
-        A[assert!] -->|泛化| B[assert_eq!]
-        A -->|模式匹配扩展| C[assert_matches!]
-        B -->|特定类型| D[assert_ne!]
-        C -->|调试模式| E[debug_assert_matches!]
+        A["assert!"] -->|泛化| B["assert_eq!"]
+        A -->|模式匹配扩展| C["assert_matches!"]
+        B -->|特定类型| D["assert_ne!"]
+        C -->|调试模式| E["debug_assert_matches!"]
     end
 
     subgraph 语义差异["核心语义差异"]
-        F[assert!(expr)] -->|expr: bool| G[panic if false]
-        H[assert_eq!(a, b)] -->|a == b| I[panic if unequal]
-        J[assert_matches!(e, p)] -->|e ~ p| K[panic if no match<br/>+ bind variables]
+        F["assert!(expr)"] -->|expr: bool| G[panic if false]
+        H["assert_eq!(a, b)"] -->|a == b| I[panic if unequal]
+        J["assert_matches!(e, p)"] -->|e ~ p| K[panic if no match<br/>+ bind variables]
     end
 ```
 
@@ -585,4 +588,3 @@ fn main() {
 ### 反命题与边界
 
 > **反命题**: "`assert_matches!`：模式匹配断言的形式化语义 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
-

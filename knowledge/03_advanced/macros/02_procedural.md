@@ -171,7 +171,7 @@ graph TD
     A[TokenStream] --> B[syn::parse]
     B --> C[AST: DeriveInput / ItemFn]
     C --> D[分析逻辑]
-    D --> E[quote! / quote_spanned!]
+    D --> E["quote! / quote_spanned!"]
     E --> F[新 TokenStream]
     F --> G[编译器继续处理]
     C --> H[泛型参数]

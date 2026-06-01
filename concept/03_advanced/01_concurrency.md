@@ -432,48 +432,43 @@ stateDiagram-v2
     Release --> SeqCst: 严格协议
     AcqRel --> SeqCst: 最严格同步
 
-    state "Relaxed (最弱)" as Relaxed {
-        note right of Relaxed
-            仅保证原子性
-            无 happens-before
-            成本最低
-        end note
-    }
+    state "Relaxed (最弱)" as RelaxedDetail
+    note right of RelaxedDetail
+        仅保证原子性
+        无 happens-before
+        成本最低
+    end note
 
-    state "Acquire (消费同步)" as Acquire {
-        note right of Acquire
-            load 后插入读屏障
-            消费 sw 边
-        end note
-    }
+    state "Acquire (消费同步)" as AcquireDetail
+    note right of AcquireDetail
+        load 后插入读屏障
+        消费 sw 边
+    end note
 
-    state "Release (产生同步)" as Release {
-        note right of Release
-            store 前插入写屏障
-            产生 sw 边
-        end note
-    }
+    state "Release (产生同步)" as ReleaseDetail
+    note right of ReleaseDetail
+        store 前插入写屏障
+        产生 sw 边
+    end note
 
-    state "AcqRel (RMW 双向)" as AcqRel {
-        note right of AcqRel
-            CAS/fetch_add 同时
-            acquire + release
-        end note
-    }
+    state "AcqRel (RMW 双向)" as AcqRelDetail
+    note right of AcqRelDetail
+        CAS/fetch_add 同时
+        acquire + release
+    end note
 
-    state "SeqCst (最强)" as SeqCst {
-        note right of SeqCst
-            全局全序
-            所有线程一致
-            成本最高
-        end note
-    }
+    state "SeqCst (最强)" as SeqCstDetail
+    note right of SeqCstDetail
+        全局全序
+        所有线程一致
+        成本最高
+    end note
 ```
 
 > **认知功能**: 强度层级导航图，帮助程序员根据同步需求选择"最弱且足够"的 Ordering。从 Relaxed 出发按需升级，避免"SeqCst 最安全所以默认用它"的性能陷阱。核心洞察：内存序选择是性能与正确性的工程权衡，而非安全等级的单向攀升。[来源: 💡 原创分析]
 > [来源: [Rust Reference: Send and Sync](https://doc.rust-lang.org/reference/special-types-and-traits.html)]
-
-> **思维表征说明**: `stateDiagram-v2` 将五种 `Ordering` 建模为**状态层次**而非流程——从 Relaxed（最弱、成本最低）到 SeqCst（最强、成本最高），状态之间的转移对应「何时需要升级内存序」。这帮助程序员建立直觉：不是「SeqCst 最安全所以总是用它」，而是「根据同步需求选择最弱且足够的 Ordering」。 [来源: Rust std::sync::atomic docs; C++ Standard §33.5]
+> **思维表征说明**: `stateDiagram-v2` 将五种 `Ordering` 建模为**状态层次**而非流程——从 Relaxed（最弱、成本最低）到 SeqCst（最强、成本最高），状态之间的转移对应「何时需要升级内存序」。
+> 这帮助程序员建立直觉：不是「SeqCst 最安全所以总是用它」，而是「根据同步需求选择最弱且足够的 Ordering」。 [来源: Rust std::sync::atomic docs; C++ Standard §33.5]
 
 #### SeqCst 的全局序与适用边界
 
@@ -1333,4 +1328,3 @@ fn main() {
 > **过渡**: Concurrency（并发模型） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Concurrency（并发模型） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Concurrency（并发模型） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-

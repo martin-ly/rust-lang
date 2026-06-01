@@ -341,9 +341,9 @@ queue.submit(std::iter::once(encoder.finish()));
 ```mermaid
 graph LR
     A[Entity ID<br/>u8 / u16] --> B[Fixed Archetype Table]
-    B --> C[Component A<br/>[MaybeUninit&lt;T&gt;; MAX]]
-    B --> D[Component B<br/>[MaybeUninit&lt;U&gt;; MAX]]
-    B --> E[Generation<br/>[u8; MAX]]
+    B --> C["Component A<br/>[MaybeUninit&lt;T&gt;; MAX]"]
+    B --> D["Component B<br/>[MaybeUninit&lt;U&gt;; MAX]"]
+    B --> E["Generation<br/>[u8; MAX]"]
 ```
 
 > **认知功能**: 此图揭示了无 `alloc` 环境下 ECS 的静态存储本质——Entity ID 作为索引直接定位固定容量的组件数组，消除了动态分配的不确定性。建议在为掌机/嵌入式设计 ECS 时，用此模式替换桌面端的 HashMap 动态存储。关键洞察：`MaybeUninit` 数组与代际生成号的组合，在零堆分配条件下实现了实体复用与 ABA 问题的防御。[来源: 💡 原创分析]
@@ -1225,4 +1225,3 @@ fn main() {}
 
 - **定理**: Game Development & ECS Architecture（游戏开发与 ECS 架构） 定义 ⟹ 类型安全保证
 - **定理**: Game Development & ECS Architecture（游戏开发与 ECS 架构） 定义 ⟹ 类型安全保证
-

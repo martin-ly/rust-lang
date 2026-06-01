@@ -1,6 +1,6 @@
 # 代码块编译验证报告 (Code Block Compile Report)
 
-> 生成时间: 2026-06-01
+> 生成时间: 2026-06-02
 > 扫描范围: concept/ + knowledge/
 
 ## 摘要
@@ -17,9 +17,9 @@
 
 | 文件 | 行号 | 模式 | 预览 |
 |:---|:---|:---|:---|
-| concept\00_meta\expressiveness_multiview.md | 182 | normal | `// 构造性排中律：不是「T 或 ¬T」，而是「T 或 E」 enum Resu` |
-| concept\00_meta\expressiveness_multiview.md | 441 | normal | `// 参数性保证：id 函数对任何 T 的行为都相同 fn id<T>(x: T` |
-| concept\00_meta\expressiveness_multiview.md | 491 | normal | `// 使用 Newtype + 私有字段编码安全级别 struct High<T` |
+| concept\00_meta\expressiveness_multiview.md | 185 | normal | `// 构造性排中律：不是「T 或 ¬T」，而是「T 或 E」 enum Resu` |
+| concept\00_meta\expressiveness_multiview.md | 444 | normal | `// 参数性保证：id 函数对任何 T 的行为都相同 fn id<T>(x: T` |
+| concept\00_meta\expressiveness_multiview.md | 494 | normal | `// 使用 Newtype + 私有字段编码安全级别 struct High<T` |
 | concept\00_meta\quick_reference.md | 90 | normal | `async fn foo() -> i32 { 42 } // 等价于: fn` |
 | concept\00_meta\quick_reference.md | 164 | normal | `#[derive(Copy, Clone)] struct Point { x:` |
 | concept\00_meta\quick_reference.md | 219 | normal | `enum Option<T> { None, Some(T) } enum Re` |

@@ -31,7 +31,7 @@ graph TB
 
     subgraph MacroExpansion["宏展开层"]
         ME[proc_macro 生成<br/>impl Parser for Args]
-        ME2[quote! 生成<br/>Command::new ... .arg ...]
+        ME2["quote! 生成<br/>Command::new ... .arg ..."]
     end
 
     subgraph CoreRepresentation["核心表示层"]
@@ -169,7 +169,7 @@ graph LR
     A[用户代码<br/>#derive Parser] -->|proc_macro| B[syn::parse<br/>TokenStream → DeriveInput]
     B --> C[属性提取<br/>#arg / #command]
     C --> D[语义分析<br/>字段类型 ↔ ArgType]
-    D --> E[quote! 代码生成<br/>impl Parser/IntoApp/FromArgMatches]
+    D --> E["quote! 代码生成<br/>impl Parser/IntoApp/FromArgMatches"]
     E --> F[编译器继续编译<br/>生成的 TokenStream]
 
     style A fill:#e3f2fd

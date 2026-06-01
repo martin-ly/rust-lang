@@ -56,13 +56,13 @@
 
 | 特性 | 文档 | 状态 |
 |------|------|------|
-| 特性 | 文档 | 状态 |
-|------|------|------|
-| AFIDT (`async fn` in `dyn Trait`) | [06_ecosystem/emerging/06_rust_1_97_preview.md](06_ecosystem/emerging/06_rust_1_97_preview.md) | 🧪 Nightly |
-| `VecDeque::truncate_front` | [06_ecosystem/emerging/06_rust_1_97_preview.md](06_ecosystem/emerging/06_rust_1_97_preview.md) | 🧪 Nightly |
-| `RefCell::try_map` | [06_ecosystem/emerging/06_rust_1_97_preview.md](06_ecosystem/emerging/06_rust_1_97_preview.md) | 🧪 Nightly |
-| `int_format_into` | [06_ecosystem/emerging/06_rust_1_97_preview.md](06_ecosystem/emerging/06_rust_1_97_preview.md) | 🧪 Nightly |
-| `cargo script` / frontmatter | [06_ecosystem/emerging/06_rust_1_97_preview.md](06_ecosystem/emerging/06_rust_1_97_preview.md) | 🧪 完善中 |
+| `assert_matches!` / `debug_assert_matches!` | [06_ecosystem/emerging/05_rust_1_96.md](06_ecosystem/emerging/05_rust_1_96.md) | ✅ |
+| `core::range::{Range, RangeFrom, RangeToInclusive}` | [06_ecosystem/emerging/05_rust_1_96.md](06_ecosystem/emerging/05_rust_1_96.md) | ✅ |
+| `From<T>` for `LazyLock` / `LazyCell` / `AssertUnwindSafe` | [06_ecosystem/emerging/05_rust_1_96.md](06_ecosystem/emerging/05_rust_1_96.md) | ✅ |
+| `NonZero*` 范围迭代 (`Step` trait) | [06_ecosystem/emerging/05_rust_1_96.md](06_ecosystem/emerging/05_rust_1_96.md) | ✅ |
+| `expr` metavariable to `cfg` | [06_ecosystem/emerging/05_rust_1_96.md](06_ecosystem/emerging/05_rust_1_96.md) | ✅ |
+| `ManuallyDrop` 常量模式 | [06_ecosystem/emerging/05_rust_1_96.md](06_ecosystem/emerging/05_rust_1_96.md) | ✅ |
+| Never 类型 tuple coercion | [06_ecosystem/emerging/05_rust_1_96.md](06_ecosystem/emerging/05_rust_1_96.md) | ✅ |
 
 ---
 
@@ -73,13 +73,11 @@
 
 | 特性 | 文档 | 状态 |
 |------|------|------|
-| `assert_matches!` / `debug_assert_matches!` | [06_ecosystem/emerging/05_rust_1_96.md](06_ecosystem/emerging/05_rust_1_96.md) | ✅ Stable |
-| `core::range::{Range, RangeFrom, RangeToInclusive}` | [06_ecosystem/emerging/05_rust_1_96.md](06_ecosystem/emerging/05_rust_1_96.md) | ✅ Stable |
-| `From<T>` for `LazyLock` / `LazyCell` / `AssertUnwindSafe` | [06_ecosystem/emerging/05_rust_1_96.md](06_ecosystem/emerging/05_rust_1_96.md) | ✅ Stable |
-| `NonZero*` 范围迭代 (`Step` trait) | [06_ecosystem/emerging/05_rust_1_96.md](06_ecosystem/emerging/05_rust_1_96.md) | ✅ Stable |
-| `expr` metavariable to `cfg` | [06_ecosystem/emerging/05_rust_1_96.md](06_ecosystem/emerging/05_rust_1_96.md) | ✅ Stable |
-| `ManuallyDrop` 常量模式 | [06_ecosystem/emerging/05_rust_1_96.md](06_ecosystem/emerging/05_rust_1_96.md) | ✅ Stable |
-| Never 类型 tuple coercion | [06_ecosystem/emerging/05_rust_1_96.md](06_ecosystem/emerging/05_rust_1_96.md) | ✅ Stable |
+| AFIDT (`async fn` in `dyn Trait`) | [06_ecosystem/emerging/06_rust_1_97_preview.md](06_ecosystem/emerging/06_rust_1_97_preview.md) | 🧪 Nightly |
+| `VecDeque::truncate_front` | [06_ecosystem/emerging/06_rust_1_97_preview.md](06_ecosystem/emerging/06_rust_1_97_preview.md) | 🧪 Nightly |
+| `RefCell::try_map` | [06_ecosystem/emerging/06_rust_1_97_preview.md](06_ecosystem/emerging/06_rust_1_97_preview.md) | 🧪 Nightly |
+| `int_format_into` | [06_ecosystem/emerging/06_rust_1_97_preview.md](06_ecosystem/emerging/06_rust_1_97_preview.md) | 🧪 Nightly |
+| `cargo script` / frontmatter | [06_ecosystem/emerging/06_rust_1_97_preview.md](06_ecosystem/emerging/06_rust_1_97_preview.md) | 🧪 完善中 |
 
 ---
 

@@ -50,6 +50,10 @@
     - [10.3 边界测试：open enum 的 match 穷尽性检查松弛（编译错误）](#103-边界测试open-enum-的-match-穷尽性检查松弛编译错误)
     - [10.4 边界测试：open enum 的整数转换与有效性检查（运行时 panic）](#104-边界测试open-enum-的整数转换与有效性检查运行时-panic)
     - [10.3 边界测试：open enum 的穷尽匹配与未知变体（编译错误/运行时 panic）](#103-边界测试open-enum-的穷尽匹配与未知变体编译错误运行时-panic)
+    - [补充定理链](#补充定理链)
+  - [认知路径](#认知路径)
+    - [核心推理链](#核心推理链)
+    - [反命题与边界](#反命题与边界)
 
 ---
 
@@ -166,14 +170,14 @@ extend enum Event {
 ```mermaid
 flowchart TD
     subgraph 封闭枚举["封闭枚举穷尽性检查"]
-        C1[match e { A => ..., B => ... }]
+        C1["match e { A => ..., B => ... }"]
         C2["编译器: 变体 A, B — 是否穷尽?"]
         C3["✅ 通过 — 无遗漏"]
         C1 --> C2 --> C3
     end
 
     subgraph non_exhaustive["#[non_exhaustive] 穷尽性检查"]
-        N1[match e { A => ..., B => ... }]
+        N1["match e { A => ..., B => ... }"]
         N2["编译器: 变体 A, B — 是否穷尽?"]
         N3["❌ 错误 — 枚举标记 non_exhaustive"]
         N4["必须添加 _ => ... 分支"]

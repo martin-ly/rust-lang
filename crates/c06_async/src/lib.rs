@@ -26,7 +26,7 @@
 //! - `r#await` - async/await 语义、控制流分析
 //! - [`tokio`] - Tokio 运行时、同步原语、I/O 抽象
 //! - [`smol`] - Smol 轻量级运行时
-//! - [`async_std`] - async-std 运行时
+//! - `async-std` - async-std 运行时（已于 2025-03 停止维护）
 //! - [`async_runtime`] - 运行时对比与选择
 //!
 //! ### Actor 模型与消息传递 (Actor Model)

@@ -424,9 +424,9 @@ mindmap
   root((Template Method<br/>模板方法模式))
     结构
       trait Algorithm
-      template() 默认方法
-      step1() 钩子
-      step2() 钩子
+      template 默认方法
+      step1 钩子
+      step2 钩子
     行为
       算法骨架固定
       钩子可定制

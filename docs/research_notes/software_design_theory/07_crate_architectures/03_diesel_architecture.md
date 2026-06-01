@@ -25,7 +25,7 @@ Diesel 的查询构建采用**类型状态（Typestate）流水线**，每一个
 ```mermaid
 graph LR
     subgraph SchemaLayer["Schema 层"]
-        T[table! 宏定义<br/>users::table]
+        T["table! 宏定义<br/>users::table"]
         C[列定义<br/>users::id / users::name]
     end
 

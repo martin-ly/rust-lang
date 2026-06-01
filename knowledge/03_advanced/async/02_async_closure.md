@@ -203,14 +203,14 @@ pub trait AsyncFnOnce<Args>: AsyncFnMut<Args> {
 graph TD
     A[Closures] --> B[Fn / FnMut / FnOnce]
     B --> C[Captures: by-ref / by-move]
-    C --> D[async || {}]
+    C --> D["async || {}"]
     D --> E[AsyncFn / AsyncFnMut / AsyncFnOnce]
     E --> F[Future<'a>]
     F --> G[Pin<&mut Future>]
     G --> H[.await]
     H --> I[Executor]
 
-    C --> J[async move || {}]
+    C --> J["async move || {}"]
     J --> K[AsyncFnOnce]
     K --> L[Future: 'static]
     L --> M[tokio::spawn]

@@ -299,9 +299,9 @@ graph TD
     B --> B3[bool]
     B --> B4[char]
 
-    C --> C1[数组 [T; N]]
-    C --> C2[元组 (A, B)]
-    C --> C3[切片 [T]]
+    C --> C1["数组 [T; N]"]
+    C --> C2["元组 (A, B)"]
+    C --> C3["切片 [T]"]
 
     D --> D1[struct]
     D --> D2[enum]
@@ -312,8 +312,8 @@ graph TD
     E --> E3[*const T]
     E --> E4[*mut T]
 
-    F --> F1[! Never]
-    F --> F2[() Unit]
+    F --> F1["! Never"]
+    F --> F2["() Unit"]
     F --> F3[dyn Trait]
     F --> F4[impl Trait]
     F --> F5[Fn/FnMut/FnOnce]
@@ -339,15 +339,15 @@ graph TD
     B --> B2[浮点: f32, f64]
     B --> B3[bool, char]
 
-    C --> C1[元组: (T, U)]
-    C --> C2[数组: [T; N]]
+    C --> C1["元组: (T, U)"]
+    C --> C2["数组: [T; N]"]
     C --> C3[结构体: struct]
-    C --> C4[切片: [T]]
+    C --> C4["切片: [T]"]
 
     D --> D1[枚举: enum = Sum Type]
     D --> D2[Option<T> = 1 + T]
     D --> D3[Result<T, E> = T + E]
-    D --> D4[Never: ! = 空类型]
+    D --> D4["Never: ! = 空类型"]
 
     E --> E1[&T: 共享引用]
     E --> E2[&mut T: 可变引用]
@@ -355,7 +355,7 @@ graph TD
 
     F --> F1[impl Trait: 存在类型]
     F --> F2[dyn Trait: 动态分发]
-    F --> F3[!: Never 类型]
+    F --> F3["!: Never 类型"]
     F --> F4[元类型: type/const 泛型]
 ```
 
@@ -1823,15 +1823,15 @@ graph TD
     A[Rust 类型构造] --> B[名义类型]
     A --> C[结构类型]
 
-    B --> B1[struct S { a: A }<br/>记录结构体：无结构对应]
-    B --> B2[struct S(T, U)<br/>元组结构体：有结构对应]
+    B --> B1["struct S { a: A }<br/>记录结构体：无结构对应"]
+    B --> B2["struct S(T, U)<br/>元组结构体：有结构对应"]
     B --> B3[struct S;<br/>单元结构体：有结构对应]
-    B --> B4[enum E { ... }<br/>枚举：无结构对应]
-    B --> B5[trait Tr { ... }<br/>Trait：无结构对应]
+    B --> B4["enum E { ... }<br/>枚举：无结构对应"]
+    B --> B5["trait Tr { ... }<br/>Trait：无结构对应"]
 
-    C --> C1[(T, U)<br/>元组]
-    C --> C2[[T; N]<br/>数组]
-    C --> C3[fn(T) -> U<br/>函数指针]
+    C --> C1["(T, U)<br/>元组"]
+    C --> C2["[T; N]<br/>数组"]
+    C --> C3["fn(T) -> U<br/>函数指针"]
     C --> C4['a, 'static<br/>生命周期]
 
     B1 -.-> D["不对称性<br/>记录无结构 counterpart"]

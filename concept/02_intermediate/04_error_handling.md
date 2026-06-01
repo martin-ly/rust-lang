@@ -210,9 +210,9 @@ graph TD
     A --> D[错误传播]
     A --> E[自定义错误]
 
-    B --> B1[panic!]
-    B --> B2[assert! / debug_assert!]
-    B --> B3[unreachable!]
+    B --> B1["panic!"]
+    B --> B2["assert! / debug_assert!"]
+    B --> B3["unreachable!"]
     B --> B4[Stack unwinding / abort]
 
     C --> C1[Option<T>: 可能为空]
@@ -567,7 +567,7 @@ graph TD
     A -->|否| C[返回裸类型 T]
 
     B -->|可恢复错误| D[返回 Result<T, E>]
-    B -->|不可恢复/程序 bug| E[panic!]
+    B -->|不可恢复/程序 bug| E["panic!"]
     B -->|值可能缺失| F[返回 Option<T>]
 
     D --> G{调用方如何处理?}

@@ -416,8 +416,8 @@ let counter = COUNTER.get_or_init(|| Mutex::new(0));
 mindmap
   root((Singleton<br/>单例模式))
     结构
-      instance() → &'static T
-      init() 惰性执行
+      instance → &'static T
+      init 惰性执行
       once 原子标志
     行为
       首次访问初始化

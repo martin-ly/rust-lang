@@ -1,14 +1,23 @@
 # Rust 形式模型演进跟踪（1.79–1.97+）
->
+
 > **受众**: [专家]
 > **内容分级**: [综述级]
-
 > **定位**: 本文件从**形式模型维度**跟踪 Rust 语言特性的演进，而非版本特性清单。仅收录对 Rust 的**所有权模型、类型系统、异步语义、Unsafe 边界**有结构性影响的特性。
 > **原则**: 琐碎语法糖点到为止，聚焦"形式化语义发生了什么变化"。
 > **更新频率**: 每 6 周对齐 stable release，每季度审计。
-> **状态**: v1.34（2026-05-29 更新，对齐 Rust 1.96.0 stable（2026-05-28 发布），本地 nightly 1.98.0（2026-05-26）。新增 Rust 1.97 beta 特性代码示例与跟踪（14 crates）。新增 Rust 1.98 nightly 前瞻代码示例（4 crates: c02/c06/c08/c13）。核心概念来源标注率 100% 达标。全项目 Bloom 层级标注 1567/1567（100%）。
-> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Generics](../02_intermediate/02_generics.md) · [Async](../03_advanced/02_async.md) · [Unsafe](../03_advanced/03_unsafe.md)
-> **后置概念**: [Formal Methods](./02_formal_methods.md) · [Evolution](./03_evolution.md)
+> **状态**: v1.34（2026-05-29 更新，对齐 Rust 1.96.0 stable（2026-05-28 发布），本地 nightly 1.98.0（2026-05-26）。
+> 新增 Rust 1.97 beta 特性代码示例与跟踪（14 crates）。
+> 新增 Rust 1.98 nightly 前瞻代码示例（4 crates: c02/c06/c08/c13）。
+> 核心概念来源标注率 100% 达标。全项目 Bloom 层级标注 1567/1567（100%）。
+> **前置概念**:
+> [Ownership](../01_foundation/01_ownership.md) ·
+> [Borrowing](../01_foundation/02_borrowing.md) ·
+> [Generics](../02_intermediate/02_generics.md) ·
+> [Async](../03_advanced/02_async.md) ·
+> [Unsafe](../03_advanced/03_unsafe.md)
+> **后置概念**:
+> [Formal Methods](./02_formal_methods.md) ·
+> [Evolution](./03_evolution.md)
 
 ---
 
@@ -49,7 +58,7 @@ mindmap
     Rust 1.98 nightly 前瞻
       gen_blocks_stable[gen blocks 推进<br/>同步协程语法糖]
       async_for_loop[for await 1.98 nightly<br/>异步迭代语法糖]
-      coerce_pointee[derive(CoercePointee) FCP finished<br/>智能指针自动推导]
+      coerce_pointee["derive(CoercePointee) FCP finished<br/>智能指针自动推导"]
       never_type_stable[never_type 稳定化推进<br/>底类型语义闭合]
 ```
 
@@ -407,11 +416,9 @@ unsafe extern "C" {
 ---
 
 ## 七、版本对比矩阵（形式模型视角）
->
->
 
 | 形式模型维度 | 1.79 | 1.82 | 1.85 | 1.88 | 1.95 | 1.96 | 前沿（nightly）|
-|:---|:---|:---|:---|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **所有权/别名** | `bounds on assoc types` | `&raw`, `unsafe extern`, `use<..>` | `extract_if`, `AsyncFn` | `let chains`, `naked` | `if let guards`, `as_ref_unchecked` | `ManuallyDrop` 模式, never 元组强制 | Tree Borrows 演进 |
 | **类型系统** | inline const blocks | precise capturing | async closures, 2024 Ed | `_` infer const generics | mutable insert APIs | `core::range` 完整迭代器 | Effects 系统讨论 |
 | **异步语义** | — | — | async closures 稳定 | let chains | — | — | async gen（RFC）|
@@ -484,10 +491,11 @@ timeline
 
 ### 9.1 Rust 1.96 特性待跟踪表
 
-> **[来源: Rust 1.96.0 release notes (GitHub #156512) 2026-05-28; releases.rs]** Rust 1.96.0 已于 2026-05-28 发布 stable。关键稳定化特性：assert_matches!、core::range 类型族、From<T> for LazyCell/LazyLock/AssertUnwindSafe、ManuallyDrop 常量模式、expr metavariable to cfg。
+> **[来源: Rust 1.96.0 release notes (GitHub #156512) 2026-05-28; releases.rs]**
+> Rust 1.96.0 已于 2026-05-28 发布 stable。关键稳定化特性：assert_matches!、core::range 类型族、`From<T>` for LazyCell/LazyLock/AssertUnwindSafe、ManuallyDrop 常量模式、expr metavariable to cfg。
 
 | 特性 | 当前状态 | 影响维度 | 概念文件 | 优先级 | 1.96 预期 |
-|:---|:---|:---|:---|:---:|:---|
+| :--- | :--- | :--- | :--- | :---: | :--- |
 | `return_type_notation` (RTN) | unstable | D2 类型 | [`concept/07_future/12_return_type_notation_preview.md`](./12_return_type_notation_preview.md) | 中 | 继续演进 |
 | `associated_type_defaults` | unstable | D2 类型 | `02_intermediate/01_traits.md` | 中 | 继续演进 |
 | `generic_const_exprs` | unstable | D1 计算 / D2 类型 | `02_intermediate/02_generics.md` | 中 | 继续演进 |
@@ -503,14 +511,21 @@ timeline
 | `cargo_script` | unstable · RFC 3502+3503 已批准 · nightly 已实现 | D6 生态 | `concept/06_ecosystem/09_cargo_script.md` | 中 | 目标稳定 |
 | **Ferrocene** | 已认证（ISO 26262 ASIL-D） | D7 安全 / D6 生态 | [`concept/07_future/14_ferrocene_preview.md`](./14_ferrocene_preview.md) | **高** | 持续更新 |
 
-> **1.96.0 Stable 已知变更**: `assert_matches!` / `debug_assert_matches!` 稳定；`core::range::{Range, RangeFrom, RangeToInclusive}` 类型族稳定；`From<T>` for `LazyCell` / `LazyLock` / `AssertUnwindSafe`；`NonZero*` 范围迭代（`Step` trait）；`expr` metavariable to `cfg`；Never 类型 tuple coercion；`ManuallyDrop` 常量模式修复。Cargo 修复 CVE-2026-5222（sparse registry URL）和 CVE-2026-5223（symlink 缓存覆盖）。WebAssembly 移除 `--allow-undefined` 默认传递。
+> **1.96.0 Stable 已知变更**:
+> `assert_matches!` / `debug_assert_matches!` 稳定；
+> `core::range::{Range, RangeFrom, RangeToInclusive}` 类型族稳定；
+> `From<T>` for `LazyCell` / `LazyLock` / `AssertUnwindSafe`；
+> `NonZero*` 范围迭代（`Step` trait）；`expr` metavariable to `cfg`；
+> Never 类型 tuple coercion；`ManuallyDrop` 常量模式修复。
+> Cargo 修复 CVE-2026-5222（sparse registry URL）和 CVE-2026-5223（symlink 缓存覆盖）。
+> WebAssembly 移除 `--allow-undefined` 默认传递。
 
 ### 9.2 Rust 1.96.0 Stable 稳定化 API 详情
 
 **标准库稳定化**:
 
 | API | 类型 | 形式化意义 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | `<[T]>::element_offset` | 方法 | 计算元素在切片中的字节偏移，支持指针算术安全抽象 |
 | `LazyCell::get_mut` | 方法 | 无初始化开销的可变访问，单线程懒加载缓存的可变性 |
 | `LazyCell::force_mut` | 方法 | 强制初始化并返回可变引用，支持延迟初始化后的就地修改 |
@@ -565,7 +580,7 @@ timeline
 > **[来源: Rust Security Advisory; Ferrous Systems Security Blog; rustsec.org 2026-05]** 以下漏洞影响 Rust 生态系统的安全性，需在项目依赖审计中关注。
 
 | 漏洞编号 | 影响组件 | 严重性 | 描述 | 修复版本 | 知识库覆盖 |
-|:---|:---|:---:|:---|:---|:---|
+| :--- | :--- | :---: | :--- | :--- | :--- |
 | **CVE-2026-5222** | **Cargo** (sparse registry) | Low | Cargo 错误规范化 sparse registry URL：`.git` 后缀被剥离，攻击者在极特殊的共享域名托管条件下可窃取同一 registry 其他用户的凭证。影响 Cargo 1.68–1.95 | Rust 1.96+ | `concept/06_ecosystem/01_toolchain.md` |
 | **CVE-2026-5223** | **Cargo** | **Medium** | Cargo 错误处理 crate tarball 中的 symlink：恶意 crate 可通过构造特殊 tar 文件将内容提取到自身缓存目录的**下一级**，从而覆盖同注册表中其他 crate 的缓存。crates.io 用户**不受影响**（crates.io 禁止上传含 symlink 的 crate），第三方注册表用户有风险 | Rust 1.96+ | `concept/06_ecosystem/01_toolchain.md` |
 | **CVE-2026-33056** | `tar` (Cargo 依赖) | Medium | 第三方 `tar` crate 漏洞：恶意 crate 可在 Cargo 解压时更改文件系统任意目录权限 | Rust 1.94.1+ | `concept/06_ecosystem/01_toolchain.md` |
@@ -584,7 +599,7 @@ timeline
 **已弃用/未维护依赖**（`cargo audit` 2026-05-23）：
 
 | Crate | 状态 | RUSTSEC ID | 影响 |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | `atomic-polyfill` | 未维护 | RUSTSEC-2023-0089 | 嵌入式 crate 间接依赖 |
 | `bare-metal` | 已弃用 | RUSTSEC-2026-0110 | 嵌入式 crate 间接依赖 |
 | `instant` | 未维护 | RUSTSEC-2024-0384 | WASM/嵌入式间接依赖 |
@@ -599,7 +614,9 @@ timeline
 
 **CVE-2026-31431 "Copy Fail" — AI 辅助发现的 9 年内核 Bug（2026-05）**:
 
-**[Linux Kernel, 2026-05-01]** 一个存在于 Linux 内核 AF_ALG 子系统中 **9 年的 bug**（2017 年引入）被 **AI 辅助发现**。该 bug 允许通过 `copy_from_user()` 的失败路径绕过安全边界。更具标志性的是：漏洞公开后**数日内**，**Rust 和 Go 的 exploit 出现在公开仓库中**——这是首次观察到 Rust exploit 在 Linux 内核漏洞披露后如此快速地公开出现。
+**[Linux Kernel, 2026-05-01]** 一个存在于 Linux 内核 AF_ALG 子系统中 **9 年的 bug**（2017 年引入）被 **AI 辅助发现**。
+该 bug 允许通过 `copy_from_user()` 的失败路径绕过安全边界。
+更具标志性的是：漏洞公开后**数日内**，**Rust 和 Go 的 exploit 出现在公开仓库中**——这是首次观察到 Rust exploit 在 Linux 内核漏洞披露后如此快速地公开出现。
 
 | **维度** | **详情** |
 |:---|:---|
@@ -609,7 +626,12 @@ timeline
 | **公开后影响** | Rust + Go exploit 在 GitHub 上公开出现 |
 | **修复状态** | 已修补，补丁已回传 stable 分支 |
 
-> **深层意义**: 此事件标志着 **AI 辅助漏洞发现** 进入主流，同时也揭示了一个令人担忧的趋势：**内存安全语言（Rust/Go）的 exploit 开发速度正在追赶 C/C++**。Rust 的内存安全保证阻止了 UAF/溢出等"经典"漏洞，但逻辑错误（如 `copy_from_user()` 返回值检查遗漏）仍然可被利用。这要求 Rust 内核开发者不仅关注内存安全，还要关注**逻辑正确性的形式化验证**。[来源: [Linux Kernel Mailing List](https://lore.kernel.org/linux-crypto/)] · [来源: [CVE-2026-31431](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-31431)] · 可信度: ✅
+> **深层意义**:
+> 此事件标志着 **AI 辅助漏洞发现** 进入主流，同时也揭示了一个令人担忧的趋势：**内存安全语言（Rust/Go）的 exploit 开发速度正在追赶 C/C++**。
+> Rust 的内存安全保证阻止了 UAF/溢出等"经典"漏洞，但逻辑错误（如 `copy_from_user()` 返回值检查遗漏）仍然可被利用。
+> 这要求 Rust 内核开发者不仅关注内存安全，还要关注**逻辑正确性的形式化验证**。
+> [来源: [Linux Kernel Mailing List](https://lore.kernel.org/linux-crypto/)] ·
+> [来源: [CVE-2026-31431](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-31431)] · 可信度: ✅
 
 ---
 
@@ -652,7 +674,13 @@ timeline
 | **SM 架构** | 5.0+ (Maxwell/Pascal) | **7.0+ (Volta+)** | Maxwell (SM 5.x) 和 Pascal (SM 6.x) GPU 不再支持 |
 | **最低 GPU** | GTX 750 Ti / GTX 1060 | V100 / RTX 20 系列 | 数据中心和桌面级 Volta+ GPU 成为最低要求 |
 
-**形式模型意义**: PTX 是 NVIDIA GPU 的中间表示（类似 LLVM IR），Rust 通过 `nvptx64-nvidia-cuda` 目标将 Rust MIR 编译为 PTX 指令。基线提升意味着：1) Rust 编译器可以假设 PTX 7.0 的新语义（如独立线程调度、协作组原语）；2) 旧 GPU 的兼容层被移除，减少了目标平台的验证表面积；3) 与 CUDA Toolkit 的基线策略保持一致——NVIDIA 自身也在逐步淘汰旧架构支持。
+**形式模型意义**:
+PTX 是 NVIDIA GPU 的中间表示（类似 LLVM IR），Rust 通过 `nvptx64-nvidia-cuda` 目标将 Rust MIR 编译为 PTX 指令。
+基线提升意味着：
+
+1) Rust 编译器可以假设 PTX 7.0 的新语义（如独立线程调度、协作组原语）；
+2) 1) 旧 GPU 的兼容层被移除，减少了目标平台的验证表面积；
+3) 1) 与 CUDA Toolkit 的基线策略保持一致——NVIDIA 自身也在逐步淘汰旧架构支持。
 
 > **来源**: [Rust Blog — Raising the baseline for nvptx64-nvidia-cuda](https://blog.rust-lang.org/2026/05/01/raising-the-baseline-for-nvptx64-nvidia-cuda.html) · 可信度: ✅
 
@@ -661,14 +689,13 @@ timeline
 ---
 
 ## 十一、1.98 Nightly 前瞻跟踪
->
 
 **Nightly 编译器**: `rustc 1.98.0-nightly (d1fc603d1 2026-05-26)`
 
 **已在本 workspace 验证的前沿特性**:
 
 | 特性 | Feature Gate | Crate | 形式化意义 |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | `gen` 块 | `gen_blocks` + `yield_expr` | c08_algorithms | 同步协程语法糖，惰性迭代器的构造抽象；与 async/await 形成对称的计算效果表达 |
 | `for await` | `async_iterator` + `async_for_loop` | c06_async | 异步迭代的语法糖，效果系统向异步流的自然扩展 |
 | `derive(CoercePointee)` | `derive_coerce_pointee` | c02_type_system | 智能指针强制转换的自动推导，类型系统向用户自定义智能指针的闭合（FCP 已结束） |
@@ -772,9 +799,15 @@ Rust 1.96.0 已按计划进入 stable 通道。详见 [`docs/06_toolchain/06_19_
 - **磁盘空间占用高** — 22.24%
 - **调试体验差** — 19.90%
 
-> **关键洞察**: Rust 已从"爱好者和系统程序员的语言"转变为**结构性市场存在**。最引人注目的趋势是开发者获取帮助方式的转变：开源回复中 ChatGPT、Claude、Gemini 的出现频率与传统资源（TRPL、官方文档）并驾齐驱，社区 meetup/论坛出席率明显下降。这预示着 LLM 正在重塑 Rust 学习路径——从"社区驱动"向"AI 辅助自学"迁移。
-
-> **来源**: [Rust Blog — 2025 State of Rust Survey Results](https://blog.rust-lang.org/2026/03/02/2025-State-Of-Rust-Survey.html) · [The New Stack 分析](https://thenewstack.io/rust-enterprise-developers/) · [InfoWorld 分析](https://www.infoworld.com/article/4139528/rust-developers-have-three-big-worries-survey.html) · 可信度: ✅
+> **关键洞察**:
+> Rust 已从"爱好者和系统程序员的语言"转变为**结构性市场存在**。
+> 最引人注目的趋势是开发者获取帮助方式的转变：
+> 开源回复中 ChatGPT、Claude、Gemini 的出现频率与传统资源（TRPL、官方文档）并驾齐驱，社区 meetup/论坛出席率明显下降。
+> 这预示着 LLM 正在重塑 Rust 学习路径——从"社区驱动"向"AI 辅助自学"迁移。
+> **来源**:
+> [Rust Blog — 2025 State of Rust Survey Results](https://blog.rust-lang.org/2026/03/02/2025-State-Of-Rust-Survey.html) ·
+> [The New Stack 分析](https://thenewstack.io/rust-enterprise-developers/) ·
+> [InfoWorld 分析](https://www.infoworld.com/article/4139528/rust-developers-have-three-big-worries-survey.html) · 可信度: ✅
 
 ### 12.2 WebAssembly 目标重大变更（Rust 1.96）
 
@@ -794,14 +827,15 @@ Rust 1.96.0 已按计划进入 stable 通道。详见 [`docs/06_toolchain/06_19_
 - **影响**: 构建队列等待时间预计减少 ~40%
 - **自定义**: 开发者可在 `Cargo.toml` 中通过 `default-target` 或 `targets` 字段指定所需目标
 
-> **来源**: [Rust Blog — Changes to WebAssembly targets](https://blog.rust-lang.org/2026/04/04/c-abi-changes-for-wasm32-unknown-unknown.html) · [Rust Blog — docs.rs building fewer targets](https://blog.rust-lang.org/2026/04/04/docs-rs-building-fewer-targets-by-default.html) · 可信度: ✅
+> **来源**: [Rust Blog — Changes to WebAssembly targets](https://blog.rust-lang.org/2026/04/04/c-abi-changes-for-wasm32-unknown-unknown.html) ·
+> [Rust Blog — docs.rs building fewer targets](https://blog.rust-lang.org/2026/04/04/docs-rs-building-fewer-targets-by-default.html) · 可信度: ✅
 
 ### 12.3 Rust Foundation 2026–2028 战略发布
 
 **[Rust Foundation, 2026-01-27]** Rust 基金会发布了 2025 年度报告和 2026–2028 三年战略规划，标志着 Rust 从"项目驱动"向"机构化可持续支持"的转型：
 
 | **战略优先领域** | **核心目标** | **与 Project 的关联** |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | 稳定、安全的基础设施 | crates.io、docs.rs、CI 系统的长期可靠运行 | 基础设施团队 2026 Q1/Q2 计划直接承接 |
 | 维护者的可持续支持 | 全职维护者资助、 grants 项目、活动支持 | 2025 年投入 $2.7M（其中 $2.0M 直接用于维护工作） |
 | 负责任的采用增长 | 企业级采纳支持、培训认证生态 | 放弃个人认证课程，优先认证现有培训提供商 |
@@ -816,30 +850,42 @@ Rust 1.96.0 已按计划进入 stable 通道。详见 [`docs/06_toolchain/06_19_
 
 **关键行动**：
 
-- **C++ 互操作倡议**: 基金会聘请 teor 加速互操作问题空间映射，已列出 ~30 个问题陈述和用例；与 ISO WG21（C++ 标准委员会）建立合作，共识方向是为 C++ 提供内存安全机制（预计多年周期）
+- **C++ 互操作倡议**: 基金会聘请 teor 加速互操作问题空间映射，已列出 ~30 个问题陈述和用例；
+- 与 ISO WG21（C++ 标准委员会）建立合作，共识方向是为 C++ 提供内存安全机制（预计多年周期）
 - **Trusted Publishing**: GitLab 支持进入公测；漏洞扫描 RFC 进入最终评议期
 - **Rust-Edu Refresh 2026**: 征集培训提供商认证，替代个人认证课程；2026-05 发布 **Call for Proposals (CFP)**，征集 Rust 教育新倡议 [来源: [Rust Foundation — Rust-Edu Refresh CFP](https://rustfoundation.org/media/guest-post-announcing-the-2026-rust-edu-refresh-and-cfp/)]
 
-> **深层意义**: 基金会的三年战略反映了 Rust 的成熟阶段——不再只是"语言设计"问题，而是**生态可持续性**问题。Cranelift 资金不足、gccrs 的长期投入需求、安全关键认证的工业推动，都需要基金会在企业和社区之间搭建桥梁。2025 年 $5.1M 的筹款规模与 LLVM（Apple/Google/Meta 等数千万美元级资助）相比仍有差距，但方向正确。[来源: [Rust Foundation — 2025 Annual Report & Strategy](https://rustfoundation.org/media/annual-report-strategy-2025/)] · [来源: [Inside Rust — Foundation Annual Report PD Update](https://blog.rust-lang.org/inside-rust/2026/01/27/2025-rust-foundation-annual-report/)] · [来源: [Inside Rust — Program Management Update April 2026](https://blog.rust-lang.org/inside-rust/2026/05/13/program-management-update--april-2026/)] · 可信度: ✅
+> **深层意义**:
+> 基金会的三年战略反映了 Rust 的成熟阶段——不再只是"语言设计"问题，而是**生态可持续性**问题。
+> Cranelift 资金不足、gccrs 的长期投入需求、安全关键认证的工业推动，都需要基金会在企业和社区之间搭建桥梁。
+> 2025 年 $5.1M 的筹款规模与 LLVM（Apple/Google/Meta 等数千万美元级资助）相比仍有差距，但方向正确。
+> [来源: [Rust Foundation — 2025 Annual Report & Strategy](https://rustfoundation.org/media/annual-report-strategy-2025/)] ·
+> [来源: [Inside Rust — Foundation Annual Report PD Update](https://blog.rust-lang.org/inside-rust/2026/01/27/2025-rust-foundation-annual-report/)] ·
+> [来源: [Inside Rust — Program Management Update April 2026](https://blog.rust-lang.org/inside-rust/2026/05/13/program-management-update--april-2026/)] · 可信度: ✅
 
 **包注册表可持续性联盟（2026-05-06）**:
 
 **[Rust Foundation, 2026-05-06]** Rust 基金会作为创始成员加入 Linux Foundation 的 **"Sustainable Package Registry Working Group"**，与 PyPI、npm、Maven Central 等包注册表领导者联合应对开源基础设施的可持续性危机。
 
 | **挑战** | **影响** | **联盟响应** |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | **AI 流量激增** | crates.io 等注册表的自动化下载请求（LLM 训练数据抓取、依赖解析 bot）导致带宽和存储成本急剧上升 | 跨注册表共享流量模式数据，制定差异化计费策略 |
 | **Bot 攻击与滥用** | 恶意上传、名称抢注、加密货币挖矿依赖注入 | 建立集体安全防御机制（共享威胁情报、统一漏洞响应协议） |
 | **治理碎片化** | 各注册表独立制定服务条款、DMCA 政策、内容审核标准 | 共享治理框架和标准条款模板 |
 
-> **深层意义**: 这是首个跨基金会的包注册表基础设施合作。对 Rust 而言，crates.io 的可持续性直接关系到整个语言的生态系统健康——如果注册表因资金不足而服务质量下降，所有 Rust 开发者的日常 workflow（`cargo build`、`cargo update`）都会受到影响。与 PyPI/npm 的联合也意味着 Rust 安全问题可以更快获得跨生态的响应资源。[来源: [Rust Foundation — Package Registry Sustainability Alliance](https://rustfoundation.org/media/rust-foundation-and-package-registry-leaders-unite-to-address-open-source-sustainability-crisis/)] · 可信度: ✅
+> **深层意义**:
+> 这是首个跨基金会的包注册表基础设施合作。
+> 对 Rust 而言，crates.io 的可持续性直接关系到整个语言的生态系统健康——如果注册表因资金不足而服务质量下降，所有 Rust 开发者的日常 workflow（`cargo build`、`cargo update`）都会受到影响。
+> 与 PyPI/npm 的联合也意味着 Rust 安全问题可以更快获得跨生态的响应资源。
+> [来源: [Rust Foundation — Package Registry Sustainability Alliance](https://rustfoundation.org/media/rust-foundation-and-package-registry-leaders-unite-to-address-open-source-sustainability-crisis/)] · 可信度: ✅
 
 ### 12.4 aarch64-pc-windows-msvc 晋升 Tier 1 RFC
 
-**[Rust RFC, 2026-05]** 新 RFC 提案将 `aarch64-pc-windows-msvc`（ARM64 Windows）从 Tier 2 with host tools 晋升为 **Tier 1 with host tools**。这是 Rust 平台支持矩阵的重大扩展，反映了 ARM64 Windows 设备（Surface Pro X、Windows Dev Kit 2023、Copilot+ PC）的市场增长。
+**[Rust RFC, 2026-05]** 新 RFC 提案将 `aarch64-pc-windows-msvc`（ARM64 Windows）从 Tier 2 with host tools 晋升为 **Tier 1 with host tools**。
+这是 Rust 平台支持矩阵的重大扩展，反映了 ARM64 Windows 设备（Surface Pro X、Windows Dev Kit 2023、Copilot+ PC）的市场增长。
 
 | **维度** | `aarch64-pc-windows-msvc` | 对比 `x86_64-pc-windows-msvc` |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | 当前层级 | Tier 2 with host tools | Tier 1 with host tools |
 | 测试覆盖 | 部分 CI 测试 | 每 PR 强制测试 |
 | 安装方式 | `rustup target add` | `rustup` 默认安装 |
@@ -854,14 +900,18 @@ Rust 1.96.0 已按计划进入 stable 通道。详见 [`docs/06_toolchain/06_19_
 
 **背景**: 同期 `i686-pc-windows-gnu` 从 Tier 1 降级为 Tier 2（RFC 3771，Rust 1.88.0），反映 Rust 平台策略的"优胜劣汰"——资源向高价值目标集中，低使用率目标逐步降级。
 
-> **来源**: [Rust RFC — Promote aarch64-pc-windows-msvc to Tier 1](https://github.com/rust-lang/rfcs/pull/...) · [Rust Blog — Demoting i686-pc-windows-gnu](https://blog.rust-lang.org/2025/05/26/demoting-i686-pc-windows-gnu/) · [Rust Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html) · 可信度: 🟡（RFC 编号待稳定后更新）
+> **来源**:
+> [Rust RFC — Promote aarch64-pc-windows-msvc to Tier 1](https://github.com/rust-lang/rfcs/pull/...) ·
+> [Rust Blog — Demoting i686-pc-windows-gnu](https://blog.rust-lang.org/2025/05/26/demoting-i686-pc-windows-gnu/) ·
+> [Rust Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html) · 可信度: 🟡（RFC 编号待稳定后更新）
 
 ### 12.5 Tokio 停止维护与 Async 生态整合
 
-**[async-rs, 2025-03-01]** `Tokio`  crate 在发布 v1.13.1 时正式宣布**停止维护**（discontinued），RUSTSEC-2025-0052 安全公告于 2025-08 发布。这一事件标志着 Rust async 运行时生态从"多极竞争"进入"Tokio 主导 + 细分场景专用运行时"的新阶段。
+**[async-rs, 2025-03-01]** `Tokio`  crate 在发布 v1.13.1 时正式宣布**停止维护**（discontinued），RUSTSEC-2025-0052 安全公告于 2025-08 发布。
+这一事件标志着 Rust async 运行时生态从"多极竞争"进入"Tokio 主导 + 细分场景专用运行时"的新阶段。
 
 | **运行时** | **定位** | **状态** | **适用场景** |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | **Tokio** | 工业级通用异步运行时 | ✅ 活跃，生态主导 | 网络服务、数据库、Web 后端 |
 | **smol** | 轻量级显式运行时 | ✅ 活跃，Tokio 推荐替代 | 嵌入式、低资源环境、库开发 |
 | **Tokio** | 类 std 异步运行时 | ❌ **2025-03-01 停止维护** | 迁移至 smol 或 Tokio |
@@ -874,16 +924,24 @@ Rust 1.96.0 已按计划进入 stable 通道。详见 [`docs/06_toolchain/06_19_
 - 推荐迁移路径：`Tokio` → `smol`（API 更接近）或 `tokio`（生态更丰富）
 - `surf` 等构建在 Tokio 上的库面临维护困境
 
-**深层意义**: Tokio 的落幕并非失败，而是**成功完成了其历史使命**——证明"类 std 的异步 API"是可行且有价值的。其设计理念（接近 std 的 API、显式运行时）已深刻影响了 Rust 标准库的 async 演进方向。Tokio 的主导地位则反映了网络服务领域对成熟生态的刚性需求——正如 Java 的 Netty、Go 的 goroutine 运行时，异步生态最终趋向单一主导 + 边缘细分。
+**深层意义**:
+Tokio 的落幕并非失败，而是**成功完成了其历史使命**——证明"类 std 的异步 API"是可行且有价值的。
+其设计理念（接近 std 的 API、显式运行时）已深刻影响了 Rust 标准库的 async 演进方向。
+Tokio 的主导地位则反映了网络服务领域对成熟生态的刚性需求——正如 Java 的 Netty、Go 的 goroutine 运行时，异步生态最终趋向单一主导 + 边缘细分。
 
-> **来源**: [Tokio v1.13.1 Release Notes](<https://github.com/async-rs/Tokio（async-std> 已于 2025-03 停止维护）/releases) · [RUSTSEC-2025-0052](https://rustsec.org/advisories/RUSTSEC-2025-0052) · [corrode.dev — The State of Async Rust](https://corrode.dev/blog/async/) · [Fedora Change Proposal](<https://fedoraproject.org/wiki/Changes/Deprecate_Tokio（async-std> 已于 2025-03 停止维护）) · 可信度: ✅
+> **来源**:
+> [Tokio v1.13.1 Release Notes](<https://github.com/async-rs/Tokio（async-std> 已于 2025-03 停止维护）/releases) ·
+> [RUSTSEC-2025-0052](https://rustsec.org/advisories/RUSTSEC-2025-0052) ·
+> [corrode.dev — The State of Async Rust](https://corrode.dev/blog/async/) ·
+> [Fedora Change Proposal](<https://fedoraproject.org/wiki/Changes/Deprecate_Tokio（async-std> 已于 2025-03 停止维护）) · 可信度: ✅
 
 ### 12.6 Tonic 正式加入 gRPC 官方项目
 
-**[gRPC Blog, 2026-05-21]** Rust 生态中最重要的 gRPC 实现 **Tonic** 已正式移入 **gRPC 官方项目**（`grpc/grpc-rust`），在 CNCF 治理下运营。这是 Rust 进入主流云原生基础设施治理体系的历史性里程碑。
+**[gRPC Blog, 2026-05-21]** Rust 生态中最重要的 gRPC 实现 **Tonic** 已正式移入 **gRPC 官方项目**（`grpc/grpc-rust`），在 CNCF 治理下运营。
+这是 Rust 进入主流云原生基础设施治理体系的历史性里程碑。
 
 | 维度 | 现状 | 中长期规划 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | **短期维护** | Tonic 继续维护，但仅限 bug 修复 | 保持 API 稳定，不引入重大变更 |
 | **中长期替代** | 计划发布 `grpc` crate | 作为 Tonic 的替代品，支持高级特性（xDS 服务发现、 Proxyless Service Mesh） |
 | **治理模式** | CNCF 下 gRPC 项目统一治理 | 与 Go、Java、C++ 的 gRPC 实现同等级别 |
@@ -901,16 +959,19 @@ Rust 1.96.0 已按计划进入 stable 通道。详见 [`docs/06_toolchain/06_19_
 
 ### 12.7 Rust Project 首次参与 Outreachy（2026-05-04）
 
-**[Rust Blog, 2026-05-04]** Rust Project 首次正式参与 **Outreachy**（开源实习项目，专注于为技术领域代表性不足的群体提供带薪实习机会），指导 **4 名实习生** 参与 2026-05 至 2026-08  cohort。
+**[Rust Blog, 2026-05-04]** Rust Project 首次正式参与 **Outreachy**（开源实习项目，专注于为技术领域代表性不足的群体提供带薪实习机会），
+指导 **4 名实习生** 参与 2026-05 至 2026-08  cohort。
 
 | **实习项目** | **技术领域** | **形式模型意义** |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | **C++ 重载函数从 Rust 调用** | FFI / C++ 互操作 | 解决 Rust-C++ 边界中最复杂的重载解析问题，为 `autocxx`/`cxx` 等工具提供理论基础 |
 | **编译器代码覆盖率规模化** | 编译器测试基础设施 | 提高 rustc 测试覆盖率的可观测性，间接提升形式化验证工具（如 Miri、Kani）的基准测试质量 |
 | **a-mir-formality 类型系统 fuzzing** | 类型系统形式化 | a-mir-formality 是 Rust 类型系统的官方形式化规范；fuzzing 可发现类型检查器与形式化语义之间的不一致 |
 | **Rust Project GitHub Actions 安全** | 供应链安全 | CI/CD 管道的安全加固，防止供应链攻击（如恶意 action、凭证泄露） |
 
-> **深层意义**: Outreachy 参与标志着 Rust Project 在**贡献者多样性**上的主动投入。四个项目中，a-mir-formality fuzzing 直接关联 Rust 类型系统的**形式化正确性**——如果 fuzzing 发现了类型检查器与形式化规约之间的偏差，那将是 Rust 语义基础的重大发现。[来源: [Rust Blog — Outreachy May 2026](https://blog.rust-lang.org/2026/05/04/outreachy-2026-may/)] · 可信度: ✅
+> **深层意义**: Outreachy 参与标志着 Rust Project 在**贡献者多样性**上的主动投入。
+> 四个项目中，a-mir-formality fuzzing 直接关联 Rust 类型系统的**形式化正确性**——如果 fuzzing 发现了类型检查器与形式化规约之间的偏差，那将是 Rust 语义基础的重大发现。
+> [来源: [Rust Blog — Outreachy May 2026](https://blog.rust-lang.org/2026/05/04/outreachy-2026-may/)] · 可信度: ✅
 
 ### 12.8 Toasty 正式发布——Tokio 团队的异步 ORM（2026-04-03）
 

@@ -49,7 +49,7 @@ graph TD
     E -->|是| G[使用 match]
     E -->|否| H[使用 if-else if]
 
-    F -->|是| I[使用 matches! 宏]
+    F -->|是| I["使用 matches! 宏"]
     F -->|否| J[使用 if-else]
 
     D -->|是| K[使用 for]
@@ -244,7 +244,7 @@ graph TD
     C -->|是| E[返回 Result<T, E>]
     C -->|否| F[返回 Option<T>]
 
-    D -->|是| G[使用 panic!]
+    D -->|是| G["使用 panic!"]
     D -->|否| H[使用 unwrap/expect]
 
     E --> I{传播错误?}

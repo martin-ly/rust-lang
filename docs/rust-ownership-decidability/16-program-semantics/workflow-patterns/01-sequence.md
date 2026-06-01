@@ -223,7 +223,7 @@ flowchart LR
     start((●)) --> A[Activity A]
     A --> B[Activity B]
     B --> C[Activity C]
-    C --> end((●))
+    C --> finish[finish]
 ```
 
 ### 3.3 WfMC 标准

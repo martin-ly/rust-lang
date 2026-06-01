@@ -445,14 +445,14 @@ mindmap
   root((Prototype<br/>原型模式))
     结构
       Prototype trait
-      clone(&self) → Self
+      clone → Self
       原对象保留
     行为
       位复制或逻辑复制
       所有权转移给副本
       原对象仍有效
     实现方式
-      #[derive(Clone)]
+      #[derive]
       手动 Clone impl
       Copy trait
     应用场景

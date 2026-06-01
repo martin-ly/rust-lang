@@ -36,7 +36,7 @@ mindmap
       bindgen[bindgen / cbindgen]
       回调[回调 / 闭包传递]
     宏
-      macro_rules[macro_rules!]
+      macro_rules["macro_rules!"]
       过程宏[Procedural Macros]
       DSL[DSL 构建]
 ```
@@ -102,7 +102,7 @@ graph TB
     UN --> UN4[MaybeUninit]
     UN --> UN5[Safety Contracts / Miri]
 
-    MAC --> MAC1[macro_rules!]
+    MAC --> MAC1["macro_rules!"]
     MAC --> MAC2[Procedural Macros]
     MAC --> MAC3[DSL]
 

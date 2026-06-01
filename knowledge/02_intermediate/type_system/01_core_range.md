@@ -165,8 +165,8 @@ graph TD
     A[Range Types] --> B[std::ops::Range]
     A --> C[std::ops::RangeInclusive]
     A --> D[core::range::RangeInclusive]
-    B --> E[Half-open [a, b)]
-    C --> F[Closed [a, b]]
+    B --> E["Half-open [a, b)"]
+    C --> F["Closed [a, b]"]
     D --> F
     F --> G[Iterator]
     F --> H[contains]

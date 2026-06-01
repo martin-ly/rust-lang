@@ -30,6 +30,9 @@
   - [四、边界扩展决策树](#四边界扩展决策树)
   - [五、认知路径（Cognitive Path）](#五认知路径cognitive-path)
   - [五、相关概念链接](#五相关概念链接)
+  - [认知路径](#认知路径)
+    - [核心推理链](#核心推理链)
+    - [反命题与边界](#反命题与边界)
 
 ### 〇、安全边界认知全景
 
@@ -49,10 +52,10 @@ mindmap
       内联汇编[内联汇编]
     FFI边界["🔴 FFI 边界<br/>跨语言调用"]
       externC[extern "C"]
-      no_mangle[#[no_mangle]]
+      no_mangle["#[no_mangle]"]
       C结构体[C 结构体映射]
     内核嵌入式["⚫ 内核/嵌入式<br/>系统级风险"]
-      no_std[#![no_std]]
+      no_std["#![no_std]"]
       裸机目标[裸机目标]
       panic_abort[panic=abort]
       自定义分配器[自定义分配器]
@@ -74,7 +77,7 @@ graph TD
     B -->|extern 声明| C[🔴 FFI 边界<br/>跨语言调用]
     C -->|裸机/无 std| D[⚫ 内核/嵌入式<br/>系统级风险]
 
-    B -->|内联汇编| E[🔴 asm!<br/>架构相关]
+    B -->|内联汇编| E["🔴 asm!<br/>架构相关"]
 
     A -->|safe 抽象包装| B2[🟢 Safe Abstraction<br/>unsafe 内部实现]
     B2 -->|公开 API| A
@@ -208,7 +211,7 @@ graph TD
     F --> G{C 库是否安全?}
     G -->|否| H[使用 Sanitizer + 隔离进程]
 
-    B -->|内核开发| I[#![no_std] + panic=abort]
+    B -->|内核开发| I["#![no_std] + panic=abort"]
     I --> J[自定义分配器 + 静态分析]
 
     B -->|WASM 部署| K[WASI capability 最小化]

@@ -117,31 +117,31 @@ mindmap
         性能优化
         类型系统改进
     标准库 API
-      NonZero::div_ceil
+      NonZero div_ceil
         数学计算
         向上取整除法
-      Location::file_as_c_str
+      Location file_as_c_str
         FFI 互操作
         调试支持
       rotate_right
         切片旋转
         算法优化
-      Box::new_zeroed
+      Box new_zeroed
         零初始化内存分配
-        返回 Box<MaybeUninit<T>>
+        返回 Box<MaybeUninitT>
         需要 assume_init
         类似 C 的 calloc
         性能优化
         内存安全
-      Box::new_zeroed_slice
+      Box new_zeroed_slice
         零初始化切片分配
-        返回 Box<[MaybeUninit<T>]>
+        返回 Box<MaybeUninitT>
         需要 assume_init
         批量零初始化
         性能优化
     性能优化
       迭代器方法特化
-        Iterator::eq 特化
+        Iterator eq 特化
         TrustedLen 迭代器
         批量比较优化
       元组扩展简化

@@ -198,7 +198,7 @@ fn add_health(mut commands: Commands, query: Query<Entity, Without<Health>>) {
 
 ```mermaid
 graph TD
-    A[空 Archetype<br/>[]] -->|+Position| B[Position]
+    A["空 Archetype<br/>[]"] -->|+Position| B[Position]
     A -->|+Camera| C[Camera]
     B -->|+Velocity| D[Position, Velocity]
     B -->|+Sprite| E[Position, Sprite]

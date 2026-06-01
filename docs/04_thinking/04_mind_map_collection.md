@@ -15,9 +15,9 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 思维导图集合](#rust-思维导图集合)
-  - [📑 目录](#目录)
-  - [🎯 文档概述 {#-文档概述}](#文档概述)
-  - [🗺️ 核心概念思维导图 {#️-核心概念思维导图}](#核心概念思维导图)
+  - [📑 目录](#-目录)
+  - [🎯 文档概述 {#-文档概述}](#-文档概述--文档概述)
+  - [🗺️ 核心概念思维导图 {#️-核心概念思维导图}](#️-核心概念思维导图-️-核心概念思维导图)
     - [1. Rust 语言核心思维导图](#1-rust-语言核心思维导图)
     - [2. 所有权系统思维导图](#2-所有权系统思维导图)
     - [3. 借用系统思维导图](#3-借用系统思维导图)
@@ -30,15 +30,15 @@
     - [10. 形式化与语义思维导图](#10-形式化与语义思维导图)
     - [11. 理论体系与论证体系结构思维导图](#11-理论体系与论证体系结构思维导图)
     - [12. 设计机制论证思维导图](#12-设计机制论证思维导图)
-  - [📊 模块知识思维导图 {#-模块知识思维导图}](#模块知识思维导图)
+  - [📊 模块知识思维导图 {#-模块知识思维导图}](#-模块知识思维导图--模块知识思维导图)
     - [1. C01 所有权与借用思维导图](#1-c01-所有权与借用思维导图)
     - [2. C02 类型系统思维导图](#2-c02-类型系统思维导图)
     - [3. C05 线程与并发思维导图](#3-c05-线程与并发思维导图)
     - [4. C06 异步编程思维导图](#4-c06-异步编程思维导图)
     - [5. C07 进程管理思维导图](#5-c07-进程管理思维导图)
     - [6. C08 算法与数据结构思维导图](#6-c08-算法与数据结构思维导图)
-  - [🔗 知识关联思维导图 {#-知识关联思维导图}](#知识关联思维导图)
-  - [📚 相关文档 {#-相关文档}](#相关文档)
+  - [🔗 知识关联思维导图 {#-知识关联思维导图}](#-知识关联思维导图--知识关联思维导图)
+  - [📚 相关文档 {#-相关文档}](#-相关文档--相关文档)
     - [理论基础](#理论基础)
     - [相关文档](#相关文档)
   - [Rust 1.95+ 思维表征更新](#rust-195-思维表征更新)
@@ -48,7 +48,7 @@
     - [本文档的Rust 1.95+更新要点](#本文档的rust-195更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
+      - [相关文档](#相关文档-1)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -120,8 +120,8 @@ mindmap
         链式操作
         零成本抽象
       错误处理
-        Result<T, E>
-        Option<T>
+        ResultT, E
+        OptionT
         ? 操作符
 ```
 
@@ -152,27 +152,27 @@ mindmap
         资源释放
     所有权转换
       借用 → 所有权
-        clone()
-        to_owned()
-        into()
+        clone
+        to_owned
+        into
       所有权 → 借用
         自动解引用
-        as_ref()
+        as_ref
     应用场景
       资源管理
       内存安全
       RAII模式
     智能指针
-      Box<T>
+      BoxT
         堆分配
         单一所有权
-      Rc<T>
+      RcT
         引用计数
         单线程共享
-      Arc<T>
+      ArcT
         原子引用计数
         多线程共享
-      RefCell<T>
+      RefCellT
         内部可变性
         运行时借用检查
 ```
@@ -226,16 +226,16 @@ mindmap
         清晰的位置提示
         解决建议
     内部可变性
-      Cell<T>
+      CellT
         单线程
         Copy类型
-      RefCell<T>
+      RefCellT
         运行时借用检查
         可变引用计数
-      Mutex<T>
+      MutexT
         跨线程
         互斥访问
-      RwLock<T>
+      RwLockT
         读写分离
         多读单写
 ```
@@ -263,7 +263,7 @@ mindmap
         where子句
     高级特性
       高阶生命周期
-        for<'a>
+        for'a
         高阶trait界限
       生命周期子类型
         协变
@@ -279,9 +279,9 @@ mindmap
       自引用结构
     常见模式
       输入输出同生命周期
-        fn foo<'a>(x: &'a T) -> &'a U
+        fn foo U
       多重生命周期
-        fn bar<'a, 'b>(x: &'a T, y: &'b U)
+        fn bar
       生命周期界限
         T: 'static
         T: Clone + 'a
@@ -298,16 +298,16 @@ mindmap
   root((泛型系统))
     泛型基础
       泛型函数
-        fn foo<T>(x: T)
-        多参数: <T, U>
+        fn foo
+        多参数: T, U
         默认类型
       泛型结构体
-        struct Point<T>
+        struct PointT
         多类型参数
         泛型约束
       泛型枚举
-        enum Option<T>
-        enum Result<T, E>
+        enum OptionT
+        enum ResultT, E
     Trait约束
       基本约束
         T: Clone
@@ -326,7 +326,7 @@ mindmap
         数组长度
         编译时计算
       默认泛型参数
-        <T = i32>
+        T = i32
         部分指定
       impl Trait
         参数位置
@@ -366,7 +366,7 @@ mindmap
         方法实现
         关联类型指定
       泛型实现
-        impl<T> Trait for T
+        implT Trait for T
         条件实现
         覆盖实现
       孤儿规则
@@ -418,8 +418,8 @@ mindmap
   root((并发编程))
     线程基础
       创建线程
-        thread::spawn
-        thread::Builder
+        thread spawn
+        thread Builder
         作用域线程
       线程管理
         JoinHandle
@@ -434,7 +434,7 @@ mindmap
         oneshot
         broadcast
       异步通道
-        tokio::sync::mpsc
+        tokio sync mpsc
         背压控制
       模式
         CSP模型
@@ -522,7 +522,7 @@ mindmap
         HTTP
         WebSocket
       文件I/O
-        tokio::fs
+        tokio fs
         异步读写
       定时器
         sleep
@@ -543,7 +543,7 @@ mindmap
   root((系统编程))
     进程管理
       进程创建
-        Process::spawn
+        Process spawn
         进程配置
         环境变量
       进程控制
@@ -612,7 +612,7 @@ mindmap
         Result = ∨, ! = ⊥
         构造性逻辑
       公理语义
-        Hoare 三元组 {P}e{Q}
+        Hoare 三元组 P e Q
         unsafe 契约
         分离逻辑 ↔ 所有权
     表达能力边界
@@ -692,7 +692,7 @@ mindmap
         编译器可验证
         无 UB
       unsafe 边界
-        契约 {P} op {Q}
+        契约 P op Q
       UB 分类
         内存
         类型
@@ -714,8 +714,8 @@ mindmap
         栈仅 Unpin
         堆可任意类型
       形式化
-        StackPin(T)
-        HeapPin(T)
+        StackPin
+        HeapPin
       决策树
         Unpin?→栈固定
         非Unpin→堆固定
@@ -825,14 +825,14 @@ mindmap
         字符: char
       复合类型
         元组 (T1, T2)
-        数组 [T; N]
-        切片 &[T]
+        数组 T; N
+        切片 &T
     泛型编程
       泛型函数
-        fn foo<T>(x: T)
+        fn foo
         单态化
       泛型结构体
-        struct Point<T>
+        struct PointT
       Trait 约束
         T: Clone
         where子句
@@ -863,8 +863,8 @@ mindmap
   root((C05: 线程与并发))
     线程管理
       线程创建
-        thread::spawn
-        thread::Builder
+        thread spawn
+        thread Builder
       线程池
         工作窃取
         任务调度
@@ -873,10 +873,10 @@ mindmap
         借用数据
     消息传递
       通道
-        mpsc::channel
+        mpsc channel
         多生产者单消费者
       异步通道
-        tokio::sync::mpsc
+        tokio sync mpsc
       广播通道
         一对多通信
     共享状态
@@ -907,7 +907,7 @@ mindmap
   root((C06: 异步编程))
     Future Trait
       Poll 状态
-        Ready(T)
+        Ready
         Pending
       执行模型
         轮询机制
@@ -929,9 +929,9 @@ mindmap
         轻量级
     异步 I/O
       文件 I/O
-        tokio::fs
+        tokio fs
       网络 I/O
-        tokio::net
+        tokio net
     并发模式
       Reactor模式
       Actor模式
@@ -947,7 +947,7 @@ mindmap
   root((C07: 进程管理))
     进程管理
       进程创建
-        Process::spawn
+        Process spawn
         Command builder
       进程控制
         终止进程
@@ -1018,32 +1018,32 @@ mindmap
   root((Rust 知识体系))
     基础层 (C01-C03)
       所有权系统 (C01)
-        --[基础]--> 所有其他模块
+        基础 connects 所有其他模块
       类型系统 (C02)
-        --[应用]--> 泛型编程 (C04)
+        应用 connects 泛型编程 (C04)
       控制流 (C03)
-        --[基础]--> 所有编程
+        基础 connects 所有编程
     进阶层 (C04-C06)
       泛型编程 (C04)
-        --[应用]--> 算法 (C08)
+        应用 connects 算法 (C08)
       线程并发 (C05)
-        --[扩展]--> 异步编程 (C06)
+        扩展 connects 异步编程 (C06)
       异步编程 (C06)
-        --[应用]--> 网络编程 (C10)
+        应用 connects 网络编程 (C10)
     应用层 (C07-C10)
       进程管理 (C07)
-        --[结合]--> 网络编程 (C10)
+        结合 connects 网络编程 (C10)
       算法数据结构 (C08)
-        --[应用]--> 设计模式 (C09)
+        应用 connects 设计模式 (C09)
       设计模式 (C09)
-        --[应用]--> 所有模块
+        应用 connects 所有模块
       网络编程 (C10)
-        --[应用]--> WASM (C12)
+        应用 connects WASM (C12)
     专业层 (C11-C12)
       宏系统 (C11)
-        --[应用]--> 所有模块
+        应用 connects 所有模块
       WASM (C12)
-        --[结合]--> 异步编程 (C06)
+        结合 connects 异步编程 (C06)
 ```
 
 ---

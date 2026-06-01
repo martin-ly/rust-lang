@@ -56,6 +56,10 @@
     - [10.2 边界测试：双写不一致导致数据丢失（逻辑错误）](#102-边界测试双写不一致导致数据丢失逻辑错误)
     - [10.3 边界测试：事件模式演化破坏反序列化（编译/运行时错误）](#103-边界测试事件模式演化破坏反序列化编译运行时错误)
   - [相关概念文件](#相关概念文件)
+    - [补充定理链](#补充定理链)
+  - [认知路径](#认知路径)
+    - [核心推理链](#核心推理链)
+    - [反命题与边界](#反命题与边界)
 
 > **Bloom 层级**: 分析 → 评价
 **变更日志**:
@@ -207,13 +211,13 @@ graph TB
         C3 --> C4[Event Generation]
     end
 
-    C4 --> E1[(Event Store<br/>Append-Only)]
+    C4 --> E1["(Event Store<br/>Append-Only)"]
 
     E1 --> P1[Projection Processor]
     E1 --> P2[Snapshot Handler]
     E1 --> P3[Event Publisher]
 
-    P1 --> Q1[(Query Store<br/>Materialized View)]
+    P1 --> Q1["(Query Store<br/>Materialized View)"]
 
     subgraph "查询端 (Query Side)"
         Q2[Query API] --> Q3[Query Handler]
@@ -1346,6 +1350,7 @@ fn good_deserialization() {
 - [架构设计模式](./35_architecture_patterns.md) — 分层/六边形/洋葱/整洁架构
 - [Async/Await](../03_advanced/02_async.md) — 异步编程基础
 - [公理语义](../04_formal/20_axiomatic_semantics.md) — Hoare 逻辑、wp 计算
+
 > **过渡**: CQRS & Event Sourcing（命令查询职责分离与事件溯源） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: CQRS & Event Sourcing（命令查询职责分离与事件溯源） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: CQRS & Event Sourcing（命令查询职责分离与事件溯源） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

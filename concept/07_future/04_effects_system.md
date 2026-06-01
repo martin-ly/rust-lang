@@ -240,7 +240,7 @@ graph TD
         RUST_CUR --> R_SEND[Send/Sync<br/>→ ThreadSafe 效果]
     end
 
-    RUST_IDEAL --> UNIFIED[统一语法<br/>fn foo() -> T effects {Io, Async}]
+    RUST_IDEAL --> UNIFIED["统一语法<br/>fn foo() -> T effects {Io, Async}"]
 
     style KOKA fill:#e1f5fe
     style HASKELL fill:#e8f5e9

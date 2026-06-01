@@ -196,12 +196,12 @@ pub async fn cancellation_safe_async_closure(items: Vec<i32>) -> Vec<i32> {
 
 ```mermaid
 graph TD
-    A[Closures] --> B[Sync Closures ||]
+    A[Closures] --> B["Sync Closures ||"]
     A --> C[Async Closures]
-    C --> D[Traditional: |x| async move {}]
+    C --> D["Traditional: |x| async move {}"]
     D --> E[Nesting Problem]
     E --> F[Async Closures 2024]
-    F --> G[async |x| {}]
+    F --> G["async |x| {}"]
     G --> H[AsyncFn Traits]
     G --> I[Auto Capture Inference]
     G --> J[Cancellation Safety]

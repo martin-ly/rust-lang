@@ -432,8 +432,8 @@ mindmap
       AbstractFactory trait
       ProductA trait
       ProductB trait
-      create_product_a()
-      create_product_b()
+      create_product_a
+      create_product_b
     行为
       创建产品族
       保证族一致性

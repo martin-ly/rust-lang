@@ -463,8 +463,8 @@ graph TB
     S5 ==> I1
     S6 ==> I1
 
-    C6 -.⊥.|互斥| C7
-    C2 -.⊥.|互斥| C3
+    C6 -.-|互斥| C7
+    C2 -.-|互斥| C3
 
     style C6 fill:#e1f5fe
     style C7 fill:#ffebee
@@ -489,7 +489,7 @@ graph LR
     S12 ==> I2[单态化 L4]
     S13 ==> I3[vtable L4]
 
-    C9 -.∘.|组合| C10
+    C9 -.-|组合| C10
 
     style I2 fill:#e8f5e9
     style I3 fill:#fff3e0
@@ -515,8 +515,8 @@ graph TB
 
     S18 ==> I5[Mutex L4]
 
-    S15 -.≡.|等价| S16
-    I4 -.∘.|组合| I5
+    S15 -.-|等价| S16
+    I4 -.-|组合| I5
 
     style S18 fill:#f3e5f5
     style S17 fill:#fff8e1
