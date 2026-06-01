@@ -16,6 +16,7 @@
 //! -
 //! - 健康检查和监控
 //! - health check and
+//!
 //! 运行方式：
 //! Run way ：
 //! cargo run --example real_world_app_demo

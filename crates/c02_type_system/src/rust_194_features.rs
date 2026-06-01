@@ -365,6 +365,7 @@ impl UnicodeCharInfo {
 /// - 改进genericmethodinfer / Improved generic method inference
 /// - improvegenericmethodinfer / Improved generic method inference
 /// - 更智能关联type inference / Smarter associated type inference
+///
 /// 类型处理器 - 演示增强的类型推断
 /// type - demonstration type infer
 pub struct TypeProcessor<T> {
@@ -668,6 +669,7 @@ impl<T> Edition2024Wrapper<T> {
 /// - compile-time sequence
 /// - 高性能数值计算
 /// - performance
+///
 /// 类型安全的滑动窗口分析器
 /// type analyze
 pub struct WindowAnalyzer;

@@ -100,6 +100,7 @@ use tracing::{Level, debug, error, info, instrument, span, warn};
 /// - 因此最终处理所有事件 □
 /// - therefore ultimately all event □
 /// - therefore ultimately all □
+///
 /// **定理 2: 安全性 (Safety)**
 /// **theorem 2: (Safety)**
 /// **theorem 2: 安全性 (Safety)**
@@ -114,6 +115,7 @@ use tracing::{Level, debug, error, info, instrument, span, warn};
 /// -
 /// - 因此不会并发处理 □
 /// - therefore concurrency □
+///
 /// **定理 3: 公平性 (Fairness)**
 /// **theorem 3: (Fairness)**
 /// **theorem 3: 公平性 (Fairness)**

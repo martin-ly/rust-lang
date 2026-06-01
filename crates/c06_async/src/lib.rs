@@ -256,7 +256,10 @@
 //! - 基础示例: `examples/tokio_smoke.rs`, `examples/futures_smoke.rs`
 //! - 工具示例: `examples/utils_strategy_smoke.rs`
 //! - API 网关: `examples/async_api_gateway_2025.rs`
-//! hint ：example `examples/` and module 。
+//!
+//! hint ：
+//!
+//! example `examples/` and module 。
 // ============================================================================
 // 理论基础模块 (Theoretical Foundations)
 // ============================================================================

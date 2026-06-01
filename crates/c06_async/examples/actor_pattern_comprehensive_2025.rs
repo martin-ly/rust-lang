@@ -310,7 +310,6 @@ pub enum SystemMessage {
 impl ActorMessage for SystemMessage {}
 
 /// Actor 引用
-///
 pub struct ActorRef<M: ActorMessage> {
     /// Actor ID
     pub id: String,

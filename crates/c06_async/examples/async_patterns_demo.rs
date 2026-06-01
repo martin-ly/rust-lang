@@ -15,7 +15,9 @@
 //! - 优雅Close
 //! - 错误恢复
 //! - error recovery
+//!
 //! 运行方式：
+//!
 //! Run way ：
 //! cargo run --example async_patterns_demo
 //! ```

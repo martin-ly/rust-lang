@@ -10,6 +10,7 @@
 //! - Smol（轻量级runtime）
 //! - Async-std（标准库风格运行时）
 //! - Async-std（standard library runtime ）
+//!
 //! 运行方式：
 //! Run way ：
 //! cargo run --example runtime_comparison_demo

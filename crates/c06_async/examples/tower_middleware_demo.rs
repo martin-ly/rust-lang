@@ -2,7 +2,9 @@
 //! Tower middleware stack demonstration
 //! - Service trait: 异步请求-响应处理
 //! - Service trait: async -
-//! 运行: cargo run --example tower_middleware_demo -p c06_async
+//!
+//! 运行:
+//! cargo run --example tower_middleware_demo -p c06_async
 
 use std::future::Future;
 use std::pin::Pin;
@@ -58,7 +60,9 @@ impl Service<ApiRequest> for ApiService {
     fn call(&mut self, req: ApiRequest) -> Self::Future {
         let name = self.name.clone();
         let latency = self.latency_ms;
-        let count = self.counter.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
+        let count = self
+            .counter
+            .fetch_add(1, std::sync::atomic::Ordering::SeqCst);
         let fail_every = self.fail_every_n;
 
         Box::pin(async move {
@@ -81,7 +85,9 @@ impl Service<ApiRequest> for ApiService {
 async fn demo_basic_service() {
     println!("=== 基础 Service 调用 ===");
     let mut api = ApiService::new("基础API", 0, 10);
-    let req = ApiRequest { payload: "hello".to_string() };
+    let req = ApiRequest {
+        payload: "hello".to_string(),
+    };
     let res = api.call(req).await.unwrap();
     println!("✅ 直接调用结果: {:?}\n", res);
 }
@@ -124,7 +130,9 @@ async fn demo_timeout() {
         .timeout(Duration::from_millis(100))
         .service(slow_api);
 
-    let req = ApiRequest { payload: "timeout-test".to_string() };
+    let req = ApiRequest {
+        payload: "timeout-test".to_string(),
+    };
     match service.call(req).await {
         Ok(resp) => println!("  意外成功: {:?}", resp),
         Err(e) => println!("  ✅ 预期超时: {}", e),

@@ -225,8 +225,8 @@ impl Default for ConcurrentStats {
 /// ## tree
 /// 有极少执行的错误/边界路径？
 /// /edge ？
-/// ├── 整个函数极少调用？ → #[cold]
-/// ├── function ？ → #[cold]
+/// ├── 整个函数极少调用？ → `#[cold]`
+/// ├── function ？ → `#[cold]`
 /// ├── 函数内某分支极少命中？ → cold_path()
 /// ├── function inside in ？ → cold_path()
 /// ## 反例 / 误用

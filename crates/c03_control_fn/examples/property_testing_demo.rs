@@ -9,8 +9,14 @@
 //! - 回归测试：proptest 自动发现反例并持久化
 //! - ：proptest anti-pattern and
 //! - ：proptest and
-//! 运行: cargo test --example property_testing_demo -p c03_control_fn
-//! 运行示例: cargo run --example property_testing_demo -p c03_control_fn
+//! 
+//! 运行: 
+//! 
+//! cargo test --example property_testing_demo -p c03_control_fn
+//! 
+//! 运行示例: 
+//! 
+//! cargo run --example property_testing_demo -p c03_control_fn
 
 use proptest::prelude::*;
 

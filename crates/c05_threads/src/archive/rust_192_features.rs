@@ -632,6 +632,7 @@ where
 /// # example
 /// // 归档模块示例
 /// // Archived module example
+/// ```
 /// // module example
 /// let tasks = vec![
 ///     ThreadTask::new(1, 10),

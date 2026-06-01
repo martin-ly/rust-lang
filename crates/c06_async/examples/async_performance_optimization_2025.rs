@@ -46,7 +46,7 @@
 //! ## Run way
 //! cargo run --example async_performance_optimization_2025 --release
 //! ```
-//!
+//! 
 //! ## 版本信息
 //! ## this
 //! - Bytes: 1.7+
@@ -450,6 +450,7 @@ impl SimdProcessor {
     /// - `#[inline]`: inside function
     /// - Release 模式: `-C opt-level=3`
     /// - 目标特性: `-C target-cpu=native`
+    ///
     /// 编译器会自动将循环向量化,一次处理 4-8 个元素
     /// will circulation vectorization, 4-8 element
     /// 编译器会自动willcirculationvectorization,一次Handle 4-8 个element

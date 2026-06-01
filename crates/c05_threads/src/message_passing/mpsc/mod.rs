@@ -3,6 +3,7 @@
 //! 用法：
 //! Usage:
 //! ：
+//! ```
 //! let (tx, rx): (Sender<i32>, Receiver<i32>) = unbounded();
 //! tx.send(7).unwrap();
 //! assert_eq!(rx.recv().unwrap(), 7);

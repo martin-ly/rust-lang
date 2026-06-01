@@ -1,8 +1,6 @@
 //! Const Generics 扩展预览
 //! **编译要求**: 需要 nightly Rust + 对应 feature gates
 //! **编译要求**: Requires nightly Rust + to应 feature gates
-//! ```
-//!
 //! **来源**: [Rust Project Goals 2026 — Const Generics](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)
 //! **Source**: [Rust Project Goals 2026 — Const Generics](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)
 
@@ -16,23 +14,19 @@
 /// `adt_const_params` 扩展Allows**struct**and**enum**asgeneric parameter，
 /// 打开了编译期元编程的新维度。
 /// dimension 。
+/// ```text
 /// #![feature(adt_const_params)]
 /// #![feature(generic_const_exprs)] // 常需同时启用
 ///
-///     x: i32,
-///     y: i32,
-/// }
-///
-///     cells: Vec<i32>,
-/// }
+/// struct Point { x: i32, y: i32 }
+/// struct Grid<const ORIGIN: Point> { cells: Vec<i32> }
 ///
 /// impl<const ORIGIN: Point> Grid<ORIGIN> {
 ///     fn describe_origin() -> (i32, i32) {
 ///         (ORIGIN.x, ORIGIN.y)
 ///     }
-///
+/// }
 /// ```
-///
 pub struct AdtConstParamsConcept;
 
 impl AdtConstParamsConcept {
@@ -94,10 +88,10 @@ impl AdtConstParamsConcept {
 ///     data: [u8; T::CAPACITY], // ← 此前 impossible
 /// }
 ///
+/// ```text
 /// type NetworkBuffer = Buffer<NetworkConfig>; // [u8; 4096]
 /// type FileBuffer = Buffer<FileConfig>;       // [u8; 8192]
 /// ```
-///
 pub struct MinGenericConstArgsConcept;
 
 impl MinGenericConstArgsConcept {
@@ -164,6 +158,7 @@ let b: Buffer<{ Config::SIZE }> = ...; // ERROR!
 /// # combination ：ADT + associated constant = structure
 /// 当 `adt_const_params` 和 `min_generic_const_args` 同时使用时：
 /// when `adt_const_params` and `min_generic_const_args` 同时Use时：
+/// ```text
 /// #![feature(adt_const_params)]
 /// #![feature(min_generic_const_args)]
 /// #![feature(generic_const_exprs)]
@@ -171,28 +166,21 @@ let b: Buffer<{ Config::SIZE }> = ...; // ERROR!
 /// use std::marker::ConstParamTy;
 ///
 /// #[derive(ConstParamTy, PartialEq, Eq, Copy, Clone)]
-/// struct Dimensions {
-///     width: usize,
-///     height: usize,
-///     channels: usize,
-/// }
+/// struct Dimensions { width: usize, height: usize, channels: usize }
 ///
-/// trait ImageFormat {
-///     const DIMS: Dimensions;
-/// }
-///
+/// trait ImageFormat { const DIMS: Dimensions; }
 /// struct RgbImage;
 /// impl ImageFormat for RgbImage {
 ///     const DIMS: Dimensions = Dimensions { width: 1920, height: 1080, channels: 3 };
 /// }
 ///
+/// struct PixelBuffer<const F: dyn ImageFormat>
 /// where
 ///     [f32; F::DIMS.width * F::DIMS.height * F::DIMS.channels]: Sized,
 /// {
 ///     pixels: [f32; F::DIMS.width * F::DIMS.height * F::DIMS.channels],
 /// }
 /// ```
-///
 pub struct CombinedPower;
 
 impl CombinedPower {

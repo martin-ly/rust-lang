@@ -56,10 +56,9 @@
 //! ```
 #[cfg(target_os = "linux")]
 fn main() {
-    use glommio::{
-        LocalExecutor, LocalExecutorBuilder, Shares, Task, channels::channel_mesh::MeshBuilder,
-        timer::sleep,
-    };
+    use glommio::channels::channel_mesh::MeshBuilder;
+    use glommio::timer::sleep;
+    use glommio::{LocalExecutor, LocalExecutorBuilder, Shares, Task};
     use std::time::{Duration, Instant};
 
     println!("╔════════════════════════════════════════════════════════════╗");

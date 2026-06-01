@@ -17,7 +17,9 @@
 //! - 常见陷阱和解决方案
 //! - and solution
 //! - 常见陷阱andsolution
+//!
 //! 运行方式：
+//!
 //! Run way ：
 //! cargo run --example async_best_practices
 //! ```

@@ -21,6 +21,7 @@
 //! - AI服务编排
 //! - AIorchestration
 //! - AI服务orchestration
+//!
 //! 运行方式：
 //! Run way ：
 //! cargo run --example ai_integration_demo

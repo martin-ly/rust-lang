@@ -24,6 +24,7 @@
 //! - 异步配置管理器
 //! - async configuration
 //! - async
+//!
 //! 运行方式：
 //! Run way ：
 //! cargo run --example advanced_tools_demo

@@ -16,7 +16,6 @@
 //!                              // or
 //!                              // or
 //!                              foo(&5);  // &i32 → Rc<i32>
-//! ```
 //!
 //! | `Arc<str>` 从 `&str` 构造 | `Arc::from("hello")` | `let s: Arc<str> = "hello";` |
 //! | `Arc<str>` from `&str` 构造 | `Arc::from("hello")` | `let s: Arc<str> = "hello";` |

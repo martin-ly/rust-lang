@@ -17,7 +17,6 @@
  * 所有示例都包含详细的中文注释，展示 Rust 1.89 版本的语言特性
  * 并遵循最佳实践和规范的语言使用方式
  */
-
 // 允许类型复杂性警告，因为泛型示例中复杂类型是必要的
 #![allow(clippy::type_complexity, mismatched_lifetime_syntaxes)]
 // 禁用文档测试，因为这些是示例代码而非可运行测试
@@ -49,8 +48,11 @@ pub mod basic_generic_functions {
     /// Returns相同类型的值
     /// type
     /// # 示例
+    /// ```
     /// # Examples
+    /// ```
     /// # example
+    /// ```
     /// let x = identity(42);
     /// let y = identity("hello");
     /// ```
@@ -74,8 +76,11 @@ pub mod basic_generic_functions {
     /// Returns交换后的元组 (b, a)
     /// exchange after (b, a)
     /// # 示例
+    /// ```
     /// # Examples
+    /// ```
     /// # example
+    /// ```
     /// let (x, y) = swap(1, 2);
     /// assert_eq!(x, 2);
     /// assert_eq!(y, 1);
@@ -103,8 +108,11 @@ pub mod basic_generic_functions {
     /// # Constraints
     /// #
     /// # 示例
+    /// ```
     /// # Examples
+    /// ```
     /// # example
+    /// ```
     /// let max_val = max(10, 20);
     /// assert_eq!(max_val, 20);
     /// ```
@@ -127,6 +135,7 @@ pub mod basic_generic_functions {
     /// # 示例
     /// # Examples
     /// # example
+    /// ```
     /// print_debug(42);
     /// print_debug("hello");
     /// ```
@@ -153,8 +162,11 @@ pub mod basic_generic_functions {
     /// #
     /// T 必须实现 Clone trait
     /// # 示例
+    /// ```
     /// # Examples
+    /// ```
     /// # example
+    /// ```
     /// let original = vec![1, 2, 3];
     /// let cloned = clone_value(original);
     /// ```
@@ -218,8 +230,11 @@ pub mod generic_structs {
     /// * `T` - is type
     /// * `T` - is包装值type
     /// # 示例
+    /// ```
     /// # Examples
+    /// ```
     /// # example
+    /// ```
     /// let wrapper = Wrapper::new(42);
     /// let value = wrapper.get();
     /// ```
@@ -297,8 +312,11 @@ pub mod generic_structs {
     /// * `T` - 节点存储的数据类型
     /// * `T` - node type
     /// # 示例
+    /// ```
     /// # Examples
+    /// ```
     /// # example
+    /// ```
     /// let node = Node::new(42);
     /// ```
     #[derive(Debug, Clone)]
@@ -361,8 +379,11 @@ pub mod generic_structs {
     /// * `U` - 第二个值的类型
     /// * `U` - second type
     /// # 示例
+    /// ```
     /// # Examples
+    /// ```
     /// # example
+    /// ```
     /// let pair = Pair::new(42, "hello");
     /// ```
     #[derive(Debug, Clone, PartialEq)]
@@ -465,8 +486,11 @@ pub mod generic_enums {
     /// * `E` - 错误值type
     /// * `E` - type
     /// # 示例
+    /// ```
     /// # Examples
+    /// ```
     /// # example
+    /// ```
     /// let success: MyResult<i32, String> = MyResult::Ok(42);
     #[derive(Debug, Clone, PartialEq)]
     pub enum MyResult<T, E> {
@@ -543,8 +567,11 @@ pub mod generic_enums {
     /// * `T` - type
     /// * `T` - 值type
     /// # 示例
+    /// ```
     /// # Examples
+    /// ```
     /// # example
+    /// ```
     /// let some: MyOption<i32> = MyOption::Some(42);
     /// let none: MyOption<i32> = MyOption::None;
     /// ```
@@ -679,8 +706,11 @@ pub mod generic_methods {
     /// * `T` - in element type
     /// * `T` - 容器in存储elementtype
     /// # 示例
+    /// ```
     /// # Examples
+    /// ```
     /// # example
+    /// ```
     /// let mut container = Container::new();
     /// container.push(42);
     /// let value = container.pop();
@@ -804,8 +834,11 @@ pub mod generic_methods {
         /// Returns the concatenated string
         /// after
         /// # 示例
+        /// ```
         /// # Examples
+        /// ```
         /// # example
+        /// ```
         /// let mut container = Container::new();
         /// container.push("Hello".to_string());
         /// container.push("World".to_string());
@@ -959,8 +992,11 @@ pub mod lifetime_parameters {
     /// * `T` - 引用的值的类型
     /// * `T` - reference type
     /// # 示例
+    /// ```
     /// # Examples
+    /// ```
     /// # example
+    /// ```
     /// let value = 42;
     /// let wrapper = RefWrapper::new(&value);
     /// ```
@@ -1030,8 +1066,11 @@ pub mod lifetime_parameters {
     /// # Constraints
     /// #
     /// # 示例
+    /// ```
     /// # Examples
+    /// ```
     /// # example
+    /// ```
     /// let x = 10;
     /// let y = 20;
     /// let longer = longer_ref(&x, &y);
@@ -1068,8 +1107,11 @@ pub mod lifetime_parameters {
     /// Returns引用包装器
     /// reference
     /// # 示例
+    /// ```
     /// # Examples
+    /// ```
     /// # example
+    /// ```
     /// let value = 42;
     /// let wrapper = create_wrapper(&value);
     /// ```
@@ -1094,8 +1136,11 @@ pub mod lifetime_parameters {
     /// * `U` - 第二个值的类型
     /// * `U` - second type
     /// # 示例
+    /// ```
     /// # Examples
+    /// ```
     /// # example
+    /// ```
     /// let x = 42;
     /// let y = "hello";
     /// let pair = RefPair::new(&x, &y);
@@ -1277,8 +1322,11 @@ pub mod generic_trait_impls {
     /// #
     /// T 必须实现 `Comparable<T>` trait
     /// # 示例
+    /// ```
     /// # Examples
+    /// ```
     /// # example
+    /// ```
     /// let result = compare_values(10, 20);
     /// ```
     pub fn compare_values<T>(a: &T, b: &T) -> ComparisonResult
@@ -1345,8 +1393,11 @@ pub mod generic_trait_impls {
     /// #
     /// T 必须实现 `Convertible<U>` trait
     /// # 示例
+    /// ```
     /// # Examples
+    /// ```
     /// # example
+    /// ```
     /// let result: String = convert_value(42);
     /// ```
     pub fn convert_value<T, U>(value: T) -> U
@@ -1410,6 +1461,7 @@ pub mod advanced_patterns {
     /// # 示例
     /// # Examples
     /// # example
+    /// ```
     /// let marker = TypeMarker::<String>::new();
     /// ```
     #[derive(Debug, Clone, PartialEq)]
@@ -1453,8 +1505,11 @@ pub mod advanced_patterns {
     /// * `Data` - 数据type
     /// * `Data` - datatype
     /// # 示例
+    /// ```
     /// # Examples
+    /// ```
     /// # example
+    /// ```
     /// let state_machine = StateMachine::<Idle, i32>::new(42);
     /// ```
     #[derive(Debug)]
@@ -1618,6 +1673,7 @@ pub mod advanced_patterns {
     /// # 示例
     /// # Examples
     /// # example
+    /// ```
     /// let builder = Builder::<String>::new();
     /// let result = builder.append("Hello").append(" ").append("World").build();
     /// ```
@@ -1803,8 +1859,11 @@ pub mod rust_189_new_features {
         /// Returns数组元素之和
         /// element 's and
         /// # 示例
+        /// ```
         /// # Examples
+        /// ```
         /// # example
+        /// ```
         /// let arr = [1, 2, 3, 4, 5];
         /// let sum = array_sum::<_>(arr); // 编译器自动推断 N = 5
         /// let sum = array_sum::<_>(arr); // 编译器自动infer N = 5

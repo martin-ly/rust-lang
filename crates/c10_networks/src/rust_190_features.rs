@@ -41,6 +41,7 @@
 /// ，toolchain 。
 /// 若需显式指定链接器，可在 `.cargo/config.toml` 中设置：
 /// ，in `.cargo/config.toml` in ：
+/// ```
 /// linker = "clang"
 /// rustflags = ["-C", "link-arg=-fuse-ld=lld"]
 /// ```

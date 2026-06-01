@@ -605,7 +605,7 @@ mod smol_latest_features {
     /// - 单线程专用 executor
     /// - thread executor
     /// - !Send 任务支持
-    /// -!Send task
+    /// - !Send task
     /// - 更低开销
     /// - low overhead
     /// - overhead

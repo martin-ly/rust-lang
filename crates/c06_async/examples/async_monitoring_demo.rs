@@ -18,7 +18,9 @@
 //! - 告警机制
 //! - mechanism
 //! - 告警mechanism
+//!
 //! 运行方式：
+//!
 //! Run way ：
 //! cargo run --example async_monitoring_demo
 //! ```

@@ -33,7 +33,7 @@
 //! ## Run way
 //! cargo run --example ultimate_async_theory_practice_2025 --features="full"
 //! ```
-//!
+//! 
 //! ## 版本信息
 //! ## this
 //! - Smol: 2.0+
@@ -67,7 +67,7 @@ use tokio::time::sleep;
 /// message :
 /// :
 /// ```
-///
+/// 
 /// ## 不变量 (Invariants)
 /// ## 不variable (Invariants)
 /// 1. 消息顺序性: 同一发送者的消息按发送顺序处理
@@ -215,7 +215,7 @@ mod theory_actor_model {
         ///   response ← await(envelope.response_channel)
         ///   return response
         /// ```
-        ///
+        /// 
         /// # 错误处理
         /// # error handling
         /// - Actor 已停止: 返回 "Actor 已停止"
@@ -569,7 +569,7 @@ mod theory_actor_model {
 /// :
 ///   handler.handle(event)
 /// ```
-///
+/// 
 /// ## Reactor 模式优势
 /// ## Reactor strength
 /// ## Reactor 模式strength
@@ -762,7 +762,7 @@ mod theory_reactor_pattern {
         /// ##
         ///   HandlerRegistry[(source_id, event_type)] ← handler
         /// ```
-        ///
+        /// 
         /// # 参数
         /// # parameter
         /// - `source_id`: 事件源 ID
@@ -1157,7 +1157,7 @@ mod theory_reactor_pattern {
 ///   send(c, v) ≡ c → SKIP
 ///   recv(c) ≡ ?c → SKIP
 /// ```
-///
+/// 
 /// ## CSP vs Actor vs Reactor
 ///
 /// | 特性 | CSP | Actor | Reactor |
@@ -1182,7 +1182,7 @@ mod theory_csp_pattern {
     /// Consumer = recv?ch → consume → Consumer
     /// System = Producer ||| Consumer
     /// ```
-    ///
+    /// 
     /// ## 特点
     /// ## point
     /// ## 特point
@@ -1269,7 +1269,7 @@ mod theory_csp_pattern {
     /// Stage3 = recv?ch2 → aggregate → Stage3
     /// Pipeline = Stage1 ||| Stage2 ||| Stage3
     /// ```
-    ///
+    /// 
     /// ## 应用场景
     /// ## application scenario
     /// - 数据处理流水线
@@ -1355,7 +1355,7 @@ mod theory_csp_pattern {
     /// Collector = (recv?result1 || ... || recv?resultN) → aggregate
     /// System = Distributor ||| Worker1 ||| ... ||| WorkerN ||| Collector
     /// ```
-    ///
+    /// 
     /// ## 应用场景
     /// ## application scenario
     /// - 并行任务处理
@@ -1828,7 +1828,7 @@ mod async_design_patterns {
     /// ## scenario
     /// ## 适用scenario
     /// - 使用已有的类,但接口不符合需求
-    /// -,but
+    /// - but
     /// - 创建可复用的类与不兼容的类协同工作
     /// - and
     pub mod adapter_pattern {

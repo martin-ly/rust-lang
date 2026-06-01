@@ -4,6 +4,7 @@
 //! this example integration Rust database ecosystem core library ：
 //! - **Sea-ORM**: 异步动态 ORM，支持关系映射与迁移
 //! - **Sea-ORM**: async ORM，and
+//!
 //! 使用 SQLite 内存模式，无需安装外部数据库即可运行。
 //! SQLite memory ，outside database Run 。
 //! ## 运行
@@ -63,18 +64,17 @@ async fn demo_01_sqlx_sqlite() -> Result<()> {
     println!("✓ 创建 products 表");
 
     // 插入数据
-    let rows_affected = sqlx::query(
-        "INSERT INTO products (name, price, stock) VALUES (?1, ?2, ?3), (?4, ?5, ?6)",
-    )
-    .bind("Rust 编程语言")
-    .bind(89.50f64)
-    .bind(100i32)
-    .bind("Cargo 指南")
-    .bind(45.00f64)
-    .bind(50i32)
-    .execute(&pool)
-    .await?
-    .rows_affected();
+    let rows_affected =
+        sqlx::query("INSERT INTO products (name, price, stock) VALUES (?1, ?2, ?3), (?4, ?5, ?6)")
+            .bind("Rust 编程语言")
+            .bind(89.50f64)
+            .bind(100i32)
+            .bind("Cargo 指南")
+            .bind(45.00f64)
+            .bind(50i32)
+            .execute(&pool)
+            .await?
+            .rows_affected();
     println!("✓ 插入 {} 行数据", rows_affected);
 
     // 查询数据
@@ -127,14 +127,18 @@ async fn demo_02_sea_orm_crud() -> Result<()> {
     println!("✓ 创建 users 表");
 
     // 插入数据
-    let result = db.execute_unprepared(
-        "INSERT INTO users (username, email) VALUES ('alice', 'alice@example.com')",
-    ).await?;
-    println!("✓ 插入用户 Alice, rows affected = {}", result.rows_affected());
+    let result = db
+        .execute_unprepared(
+            "INSERT INTO users (username, email) VALUES ('alice', 'alice@example.com')",
+        )
+        .await?;
+    println!(
+        "✓ 插入用户 Alice, rows affected = {}",
+        result.rows_affected()
+    );
 
-    db.execute_unprepared(
-        "INSERT INTO users (username, email) VALUES ('bob', 'bob@example.com')",
-    ).await?;
+    db.execute_unprepared("INSERT INTO users (username, email) VALUES ('bob', 'bob@example.com')")
+        .await?;
     println!("✓ 插入用户 Bob");
 
     // 查询所有用户
@@ -155,11 +159,13 @@ async fn demo_02_sea_orm_crud() -> Result<()> {
     // 更新
     db.execute_unprepared(
         "UPDATE users SET email = 'alice.new@example.com' WHERE username = 'alice'",
-    ).await?;
+    )
+    .await?;
     println!("\n✓ 更新 Alice 的邮箱");
 
     // 删除
-    db.execute_unprepared("DELETE FROM users WHERE username = 'bob'").await?;
+    db.execute_unprepared("DELETE FROM users WHERE username = 'bob'")
+        .await?;
     println!("✓ 删除 Bob");
 
     // 最终计数
@@ -261,7 +267,8 @@ async fn demo_04_connection_pool_pattern() -> Result<()> {
     let sqlite_pool = SqlitePool::connect("sqlite::memory:").await?;
 
     sqlx::query(
-        "CREATE TABLE articles (id INTEGER PRIMARY KEY, title TEXT, content TEXT, views INTEGER DEFAULT 0)"
+        "CREATE TABLE articles (id INTEGER PRIMARY KEY, title TEXT, content TEXT, views INTEGER \
+         DEFAULT 0)",
     )
     .execute(&sqlite_pool)
     .await?;

@@ -16,7 +16,9 @@
 //! - and
 //! - 测试工具和辅助函数
 //! - tool and function
+//!
 //! 运行方式：
+//!
 //! Run way ：
 //! cargo test --example async_testing_demo
 //! # 或者运行特定测试
@@ -323,7 +325,9 @@ pub mod test_utils {
     /// 并发执行多个异步操作
     /// concurrency async operation
     /// concurrency async
-    pub async fn run_concurrent<T>(futures: Vec<std::pin::Pin<Box<dyn std::future::Future<Output = T> + Send>>>) -> Vec<T> {
+    pub async fn run_concurrent<T>(
+        futures: Vec<std::pin::Pin<Box<dyn std::future::Future<Output = T> + Send>>>,
+    ) -> Vec<T> {
         futures::future::join_all(futures).await
     }
 

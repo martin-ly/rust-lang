@@ -9,10 +9,10 @@
 //! 6. [CI/CD 集成](#cicd-集成)
 //! 6. [CI/CD ](#cicd-)
 //! flowchart TD
-//!     B -->|否| C[PATCH]
+//!     B -->|否| C\[PATCH\]
 //!     B -->|是| D{是否向后兼容?}
 //!     B -->|| D{after?}
-//!     D -->|否| F[MAJOR]
+//!     D -->|否| F\[MAJOR\]
 //!     F --> G[运行 cargo-semver-checks 验证]
 
 // ============================================================================
@@ -54,6 +54,7 @@ pub struct ApiBreakageConcepts;
 
 /// ## 安装
 /// ##
+/// ```text
 /// cargo install cargo-semver-checks --locked
 /// ```
 ///
@@ -96,11 +97,12 @@ pub struct CargoSemverChecksTool;
 
 /// **解决方案**: 使用 `#[non_exhaustive]` 属性。
 /// **solution **: `#[non_exhaustive]` attribute 。
-/// ```rust
+/// ```text
 /// #[non_exhaustive]
 /// pub enum NetworkEvent {
 ///     Connected,
 ///     Disconnected,
+/// }
 ///
 /// 下游必须写 `_ => {}` 分支，从而允许未来扩展。
 /// under must `_ => {}` ，thereby allow future 。
@@ -119,6 +121,7 @@ pub enum NetworkEvent {
 /// **problem **: `pub trait` required method all outside 。
 /// **解决方案**: 提供默认实现，或使用 sealed trait 模式。
 /// **solution **: default implementation ，or sealed trait 。
+/// ```
 /// pub trait ProtocolHandler {
 ///     fn handle(&self, data: &[u8]);
 ///     // 新增方法时提供默认实现
@@ -204,8 +207,9 @@ impl InternalTrait for String {
 /// - `note = "..."`: or explain 。
 /// ## 示例：函数废弃
 /// ## example ：function
+/// ```text
 /// #[deprecated(since = "0.3.0", note = "请使用 `connect_async` 替代")]
-/// #[deprecated(since = "0.3.0", note = "请Use `connect_async` 替代")]
+/// pub fn old_connect() -> std::io::Result<()> {
 ///     # Ok(())
 /// }
 /// ```

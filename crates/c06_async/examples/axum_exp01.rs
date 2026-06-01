@@ -1,8 +1,6 @@
-use axum::{
-    Json, Router,
-    http::StatusCode,
-    routing::{get, post},
-};
+use axum::http::StatusCode;
+use axum::routing::{get, post};
+use axum::{Json, Router};
 use serde::{Deserialize, Serialize};
 
 #[tokio::main]

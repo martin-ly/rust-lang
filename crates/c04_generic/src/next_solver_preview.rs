@@ -2,6 +2,7 @@
 //! **编译要求**: 需要 nightly Rust + `RUSTFLAGS="-Znext-solver=globally"`
 //! **编译要求**: Requires nightly Rust + `RUSTFLAGS="-Znext-solver=globally"`
 //! ```text
+//! // 需要 nightly Rust + RUSTFLAGS="-Znext-solver=globally"
 //! ```
 //!
 //! **来源**: [Rust Project Goals 2026 — Next-generation trait solver](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)
@@ -18,26 +19,18 @@
 /// **Bloom 层级**: 分析
 /// **Bloom **: analyze
 /// **Bloom 层级**: analysis
+/// ```text
 /// #![allow(incomplete_features)]
 /// #![feature(next_solver)]
 ///
 /// // 旧 solver 会错误拒绝此代码：
-/// // solver this ：
-///     fn process(&self, item: T);
-/// }
-///
-/// struct `Wrapper<T>`(T);
-///
+/// trait SomeTrait<T> { fn process(&self, item: T); }
+/// struct Wrapper<T>(T);
 /// // impl A: 仅当 T: Clone 时实现
-/// // impl A: 仅when T: Clone 时Implementation of
-///         let _ = item.clone();
-///     }
-///
+/// impl<T: Clone> SomeTrait<T> for Wrapper<T> { fn process(&self, item: T) { let _ = item.clone(); } }
 /// // impl B: 仅当 T: Default 时实现
-/// // impl B: 仅when T: Default 时Implementation of
-///         let _ = T::default();
-///     }
-/// ```text
+/// impl<T: Default> SomeTrait<T> for Wrapper<T> { fn process(&self, item: T) { let _ = T::default(); } }
+/// ```
 
 // ============================================================================
 // 2. Implied Bounds 自动推导
@@ -50,22 +43,19 @@
 /// **Bloom 层级**: 应用
 /// **Bloom **: application
 /// **Bloom 层级**: application
+/// ```text
 /// #![allow(incomplete_features)]
 /// #![feature(next_solver)]
 ///
-/// trait Container {
-///     type Item;
-/// }
-///
+/// trait Container { type Item; }
 /// // 旧 solver：需要显式写出 T: Container<Item = U>, U: Clone
 /// // 新 solver：从 `T: Container<Item = U>` 可自动推导 `U` 需满足 `Clone`
-/// // 新 solver：from `T: Container<Item = U>` 可自动推导 `U` 需满足 `Clone`
+/// fn process<T, U>(c: T)
+/// where
 ///     T: Container<Item = U>,
 ///     // 旧 solver 要求此显式标注：U: Clone,
-///     // solver this ：U: Clone,
-///     // if Container<Item = U> 契约隐含 U: Clone，
 ///     // 新 solver 可自动推导
-///     // solver
+/// {}
 /// ```
 
 // ============================================================================
@@ -75,13 +65,13 @@
 /// **Bloom 层级**: 分析
 /// **Bloom **: analyze
 /// **Bloom 层级**: analysis
+/// ```text
 /// #![allow(incomplete_features)]
 /// #![feature(generic_associated_types)]
 /// #![feature(next_solver)]
 ///
-///     where
-///         Self: 'a;
-///
+/// trait LendingIterator {
+///     type Item<'a> where Self: 'a;
 ///     fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
 /// }
 ///
@@ -92,15 +82,15 @@
 /// }
 ///
 /// impl<'a, T> LendingIterator for WindowIter<'a, T> {
-///     // 旧 solver 常在此处失败：无法推导 Item<'b> = &'b [T] 满足 where Self: 'b
-///     // solver in this ： Item<'b> = &'b [T] where Self: 'b
-///         Self: 'b;
+///     // 旧 solver 常在此处失败
+///     type Item<'b> = &'b [T] where Self: 'b;
 ///
 ///     fn next<'b>(&'b mut self) -> Option<Self::Item<'b>> {
 ///         let window = self.slice.get(self.pos..self.pos + self.window_size)?;
 ///         self.pos += 1;
 ///         Some(window)
 ///     }
+/// }
 /// ```
 
 // ============================================================================
