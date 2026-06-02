@@ -2,7 +2,6 @@
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.94.0+ (Edition 2024)
@@ -772,17 +771,11 @@ cargo expand > expanded.rs
 ## 权威来源索引
 
 > **[来源: Wikipedia - Software Development Tool]**
-
 > **[来源: Wikipedia - Integrated Development Environment]**
-
 > **[来源: Rust Tools Team]**
-
 > **[来源: Rust Reference - Compiler]**
-
 > **[来源: ACM - Developer Tooling Survey]**
-
 > **[来源: IEEE - Software Engineering Environment]**
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 > **[来源: TRPL - The Rust Programming Language]**
@@ -791,7 +784,6 @@ cargo expand > expanded.rs
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference]**
 > **[来源: TRPL - The Rust Programming Language]**

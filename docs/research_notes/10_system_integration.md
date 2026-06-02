@@ -2,7 +2,6 @@
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.94.0+ (Edition 2024)
@@ -333,9 +332,8 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 

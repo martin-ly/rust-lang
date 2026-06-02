@@ -47,7 +47,6 @@
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2025-11-15
@@ -487,14 +486,13 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
->
+
 > **[来源: [crates.io](https://crates.io/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -519,13 +517,14 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 #### 相关文档
 
 - Rust 1.94 迁移指南
-- [Rust 1.94 特性速查
+- Rust 1.94 特性速查
 - [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
 
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -542,19 +541,12 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Macro (computer science)]**
-
 > **[来源: TRPL Ch. 19 - Macros]**
-
 > **[来源: Rust Reference - Macros]**
-
 > **[来源: The Little Book of Rust Macros]**
-
 > **[来源: Wikipedia - Program Optimization]**
-
 > **[来源: Criterion.rs]**
-
 > **[来源: ACM - Performance Engineering]**
-
 > **[来源: Rust Performance Book]**
 
 ---

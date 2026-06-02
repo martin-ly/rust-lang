@@ -8,8 +8,16 @@
 ---
 
 ## 目录
->
-> **[来源: Rust Embedded Book - docs.rust-embedded.org]** · **[来源: Wikipedia - Embedded System]** · **[来源: Rust Reference - no_std]** · **[来源: Wikipedia - Internet of Things]** · **[来源: Embassy Framework - embassy.dev]** · **[来源: RTIC Documentation - rtic.rs]** · **[来源: Wikipedia - Real-Time Operating System]** · **[来源: IEEE - Embedded Software Standards]** · **[来源: ACM - Embedded Systems Survey]**
+
+> **[来源: Rust Embedded Book - docs.rust-embedded.org]** ·
+> **[来源: Wikipedia - Embedded System]** ·
+> **[来源: Rust Reference - no_std]** ·
+> **[来源: Wikipedia - Internet of Things]** ·
+> **[来源: Embassy Framework - embassy.dev]** ·
+> **[来源: RTIC Documentation - rtic.rs]** ·
+> **[来源: Wikipedia - Real-Time Operating System]** ·
+> **[来源: IEEE - Embedded Software Standards]** ·
+> **[来源: ACM - Embedded Systems Survey]**
 
 - [Rust 嵌入式/物联网开发完全指南](#rust-嵌入式物联网开发完全指南)
   - [目录](#目录)

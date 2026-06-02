@@ -2,7 +2,6 @@
 
 > **分级**: [B]
 > **Bloom 层级**: L3-L4 (应用/分析)
-
 > **定位**: Web 开发完整场景覆盖
 > **技术栈**: Axum/Tokio/SQLx
 > **完备度**: 100%
@@ -10,21 +9,20 @@
 ---
 
 ## 📑 目录
->
+
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
+
 - [Web 应用开发场景树](#web-应用开发场景树)
   - [📑 目录](#-目录)
   - [🌳 Web 应用场景树](#-web-应用场景树)
   - [📊 RESTful API 场景](#-restful-api-场景)
     - [场景 1: CRUD API](#场景-1-crud-api)
   - [🔗 相关文档](#-相关文档)
-  - [**状态**: ✅ 100% 完成](#状态--100-完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
 ## 🌳 Web 应用场景树
->
+
 > **[来源: Rust Official Docs]**
 
 ```mermaid
@@ -121,7 +119,7 @@ async fn get_user(Path(id): Path<Uuid>) -> Json<User> {
 ---
 
 ## 🔗 相关文档
->
+
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [Axum 深度解析](../../../knowledge/06_ecosystem/deep_dives/01_axum_deep_dive.md)
@@ -131,6 +129,7 @@ async fn get_user(Path(id): Path<Uuid>) -> Json<User> {
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-05-08
 **状态**: ✅ 100% 完成
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -155,13 +154,9 @@ async fn get_user(Path(id): Path<Uuid>) -> Json<User> {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Web Framework]**
-
 > **[来源: axum.rs Documentation]**
-
 > **[来源: actix.rs Documentation]**
-
 > **[来源: RFC 2616 - HTTP]**
-
 > **[来源: Wikipedia - Memory Safety]**
 > **[来源: Wikipedia - Type System]**
 > **[来源: Wikipedia - Concurrency]**

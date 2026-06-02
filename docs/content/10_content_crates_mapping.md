@@ -2,7 +2,6 @@
 
 > **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)
-
 > 连接前沿内容与核心学习模块
 
 ---
@@ -36,7 +35,6 @@
   - [🔍 快速查找](#-快速查找)
     - [按主题查找](#按主题查找)
     - [按难度查找](#按难度查找)
-  - [**状态**: ✅ 100% 完成](#状态--100-完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -302,6 +300,7 @@ representations/ ────────▶  (知识表示)                 ─
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-05-08
 **状态**: ✅ 100% 完成
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -329,15 +328,9 @@ representations/ ────────▶  (知识表示)                 ─
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming Languages]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**

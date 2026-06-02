@@ -61,8 +61,9 @@
     - [定理 4.1 (Profile 支持)](#定理-41-profile-支持)
     - [定理 5.1 (嵌套合并)](#定理-51-嵌套合并)
     - [定理 6.1 (环境变量嵌套)](#定理-61-环境变量嵌套)
-  - *代码示例: 11个完整示例*
+  - [*代码示例: 11个完整示例*](#代码示例-11个完整示例)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -155,6 +156,7 @@ let config: AppConfig = Figment::new()
 ---
 
 ## 2. 配置源系统
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 Provider Trait 设计
@@ -215,6 +217,7 @@ let figment = Figment::new()
 ---
 
 ## 3. 优先级与合并
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 后进优先原理
@@ -313,6 +316,7 @@ hosts = ["server1:8080", "server2:8080"]
 ---
 
 ## 4. Profile 系统
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 多环境配置
@@ -395,6 +399,7 @@ let figment = Figment::new()
 ---
 
 ## 5. 类型安全提取
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 deserialize_into 原理
@@ -508,6 +513,7 @@ config.validate()?;  // 运行 validator 验证
 ---
 
 ## 6. 环境变量集成
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 Env Provider
@@ -592,6 +598,7 @@ let figment = Figment::new()
 ---
 
 ## 7. 配置文件支持
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 7.1 JSON/YAML/TOML 解析
@@ -736,6 +743,7 @@ impl<T: for<'de> Deserialize<'de> + Send + Sync + 'static> ReloadableConfig<T> {
 ---
 
 ## 8. 自定义 Provider
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 8.1 实现自定义配置源
@@ -926,6 +934,7 @@ let figment = Figment::new()
 ---
 
 ## 9. 与 Web 框架集成
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 9.1 Rocket 配置
@@ -1066,6 +1075,7 @@ async fn main() {
 ---
 
 ## 10. 最佳实践
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 10.1 配置结构设计
@@ -1233,6 +1243,7 @@ enum SslMode {
 ---
 
 ## 11. 完整代码示例
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 11.1 复杂配置场景实现
@@ -1774,6 +1785,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 ---
 
 ## 定理汇总
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定理 2.1 (后进优先)
@@ -1906,7 +1918,6 @@ PREFIX_KEY__SUBKEY__VALUE → {"key": {"subkey": {"value": ...}}}
 > **[来源: TRPL Ch. 4 - Ownership]**
 > **[来源: Rustonomicon - Ownership]**
 > **[来源: POPL 2018 - RustBelt]**
-
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 > **[来源: POPL - Programming Languages Research]**
@@ -2546,4 +2557,3 @@ PREFIX_KEY__SUBKEY__VALUE → {"key": {"subkey": {"value": ...}}}
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

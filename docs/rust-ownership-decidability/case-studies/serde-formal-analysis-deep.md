@@ -85,8 +85,9 @@
     - [Appendix B: Custom Deserializer Implementation](#appendix-b-custom-deserializer-implementation)
     - [Appendix C: Performance Benchmarks](#appendix-c-performance-benchmarks)
     - [Appendix D: Quick Reference](#appendix-d-quick-reference)
-  - *Counter-Examples: 15+*
+  - [*Counter-Examples: 15+*](#counter-examples-15)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 

@@ -2,7 +2,6 @@
 
 > **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **主题**: 声明式命令行解析
 > **形式化框架**: 派生宏 + 类型安全参数 + 验证
 > **参考**: Clap Documentation (<https://docs.rs/clap>)
@@ -10,33 +9,32 @@
 ---
 
 ## 目录
->
+
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Clap命令行解析形式化分析](#clap命令行解析形式化分析)
   - [目录](#目录)
   - [1. 引言](#1-引言)
   - [2. 派生宏系统](#2-派生宏系统)
-    - [定义 DERIVE-1 ( 结构体派生 )](#定义-derive-1--结构体派生)
-    - [定义 DERIVE-2 ( 属性映射 )](#定义-derive-2--属性映射)
-    - [定理 DERIVE-T1 ( 完备解析 )](#定理-derive-t1--完备解析)
+    - [定义 DERIVE-1 ( 结构体派生 )](#定义-derive-1--结构体派生-)
+    - [定义 DERIVE-2 ( 属性映射 )](#定义-derive-2--属性映射-)
+    - [定理 DERIVE-T1 ( 完备解析 )](#定理-derive-t1--完备解析-)
   - [3. 参数类型](#3-参数类型)
-    - [定义 ARG-1 ( 位置参数 )](#定义-arg-1--位置参数)
-    - [定义 ARG-2 ( 可选参数 )](#定义-arg-2--可选参数)
-    - [定理 ARG-T1 ( 类型转换安全 )](#定理-arg-t1--类型转换安全)
+    - [定义 ARG-1 ( 位置参数 )](#定义-arg-1--位置参数-)
+    - [定义 ARG-2 ( 可选参数 )](#定义-arg-2--可选参数-)
+    - [定理 ARG-T1 ( 类型转换安全 )](#定理-arg-t1--类型转换安全-)
   - [4. 验证与约束](#4-验证与约束)
-    - [定义 VALIDATE-1 ( 值验证 )](#定义-validate-1--值验证)
-    - [定义 VALIDATE-2 ( 组合约束 )](#定义-validate-2--组合约束)
+    - [定义 VALIDATE-1 ( 值验证 )](#定义-validate-1--值验证-)
+    - [定义 VALIDATE-2 ( 组合约束 )](#定义-validate-2--组合约束-)
   - [5. 子命令](#5-子命令)
-    - [定义 SUBCMD-1 ( 子命令枚举 )](#定义-subcmd-1--子命令枚举)
-    - [定理 SUBCMD-T1 ( 互斥性 )](#定理-subcmd-t1--互斥性)
+    - [定义 SUBCMD-1 ( 子命令枚举 )](#定义-subcmd-1--子命令枚举-)
+    - [定理 SUBCMD-T1 ( 互斥性 )](#定理-subcmd-t1--互斥性-)
   - [6. 定理与证明](#6-定理与证明)
-    - [定理 CLAP-T1 ( 零运行时开销 )](#定理-clap-t1--零运行时开销)
-    - [定理 CLAP-T2 ( 类型安全保证 )](#定理-clap-t2--类型安全保证)
+    - [定理 CLAP-T1 ( 零运行时开销 )](#定理-clap-t1--零运行时开销-)
+    - [定理 CLAP-T2 ( 类型安全保证 )](#定理-clap-t2--类型安全保证-)
   - [7. 代码示例](#7-代码示例)
     - [示例1: 完整CLI](#示例1-完整cli)
     - [示例2: 高级验证](#示例2-高级验证)
-  - **状态**: ✅ 已对齐
   - [权威来源索引](#权威来源索引)
 
 ---
@@ -310,7 +308,7 @@ fn main() {
 ```
 
 ### 示例2: 高级验证
->
+
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -351,6 +349,7 @@ fn validate_host(s: &str) -> Result<String, String> {
 **创建日期**: 2026-03-05
 **Clap版本**: 4.x
 **状态**: ✅ 已对齐
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -371,62 +370,12 @@ fn validate_host(s: &str) -> Result<String, String> {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Memory Safety]**
-
 > **[来源: TRPL Ch. 4 - Ownership]**
-
 > **[来源: Rustonomicon - Ownership]**
-
 > **[来源: POPL 2018 - RustBelt]**
-
 > **[来源: Wikipedia - Formal Methods]**
-
 > **[来源: Coq Reference Manual]**
-
 > **[来源: TLA+ Documentation]**
-
 > **[来源: ACM - Formal Verification]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
->
-> **[来源: [Iris Project](https://iris-project.org/)]**
->
-> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
->
-> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
->
-> **[来源: [Clap Documentation](https://docs.rs/clap/latest/clap/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**

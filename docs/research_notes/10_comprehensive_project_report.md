@@ -2,7 +2,6 @@
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **报告日期**: 2026-02-28
 > **项目**: Rust Formal Methods Research Notes
 > **版本**: 1.0
@@ -11,9 +10,9 @@
 ---
 
 ## 📑 目录
->
+
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
+
 - [综合项目报告](#综合项目报告)
   - [📑 目录](#-目录)
   - [执行摘要](#执行摘要)
@@ -192,7 +191,7 @@ Level 5: 实用资源
 >
 > **[来源: Rust Official Docs]**
 
-```
+```text
 L1: 概念理解 (自然语言)
 L2: 完整证明 (数学推导)
 L3: 机器检查 (Coq骨架)
@@ -357,16 +356,15 @@ L3: 机器检查 (Coq骨架)
 ---
 
 ## 🆕 Rust 1.94 研究更新
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 > **适用版本**: Rust 1.94.0+
 
 ### 核心研究点
->
+
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- rray_windows 的形式化语义
+- array_windows 的形式化语义
 - ControlFlow 的代数结构
 - LazyCell/LazyLock 的延迟语义
 - 与现有理论框架的集成

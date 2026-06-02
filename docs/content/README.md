@@ -2,7 +2,6 @@
 
 > **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)
-
 > **定位**: 核心内容资产的单一入口
 > **架构**: 按主题分层组织
 > **标准**: 每个文档包含概念定义、属性关系、论证、证明、思维表征
@@ -160,6 +159,7 @@ content/
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-05-08
 **状态**: 🔄 持续扩充中
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -186,17 +186,10 @@ content/
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon]**
