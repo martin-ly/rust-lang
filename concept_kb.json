@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 258,
+    "total_files": 260,
     "generated_at": "The system cannot accept the date entered.\nEnter the new date: (yy-mm-dd)"
   },
   "files": [
@@ -10,7 +10,7 @@
       "layer": "L0",
       "title": "Unknown",
       "positioning": "",
-      "line_count": 86,
+      "line_count": 135,
       "theorem_chains": [
         {
           "text": "| 03 Bloom Taxonomy 结构化定义 ⟹ 学习者认知锚点可建立 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |",
@@ -43,7 +43,7 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 2,
+      "matrix_rows": 15,
       "pre_post": {
         "pre": [],
         "post": []
@@ -306,6 +306,40 @@
       "templated_chains": 0
     },
     {
+      "path": "concept\\00_meta\\career_landscape.md",
+      "layer": "L0",
+      "title": "Rust 职业市场全景：2026 年数据与分析",
+      "positioning": "基于权威招聘数据（JetBrains、Stack Overflow、Levels.fyi、Robert Half）的 Rust 职业市场定量分析，覆盖薪资范围、岗位分布、技能需求和地域差异。",
+      "line_count": 186,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 三、反命题"
+        }
+      ],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [
+        "../06_ecosystem/01_toolchain.md",
+        "../06_ecosystem/04_application_domains.md",
+        "./03_bloom_taxonomy.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 36,
+      "pre_post": {
+        "pre": [
+          "[Bloom Taxonomy](./03_bloom_taxonomy.md)"
+        ],
+        "post": [
+          "[Application Domains](../06_ecosystem/04_application_domains.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "concept\\00_meta\\cognitive_dimension_matrix.md",
       "layer": "L0",
       "title": "Rust 知识体系双维认知矩阵（Krathwohl × Bloom）",
@@ -378,6 +412,52 @@
       "templated_chains": 0
     },
     {
+      "path": "concept\\00_meta\\comprehensive_rust_mapping.md",
+      "layer": "L0",
+      "title": "Comprehensive Rust 课程映射",
+      "positioning": "本文件建立 **Comprehensive Rust**（Google 开发的免费 Rust 课程）与本知识体系中 `concept/` 文件的双向映射，帮助学习者将课程章节定位到深层概念文档。",
+      "line_count": 188,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [
+        "../01_foundation/01_ownership.md",
+        "../01_foundation/02_borrowing.md",
+        "../01_foundation/03_lifetimes.md",
+        "../01_foundation/04_type_system.md",
+        "../01_foundation/07_control_flow.md",
+        "../01_foundation/08_collections.md",
+        "../02_intermediate/01_traits.md",
+        "../02_intermediate/02_generics.md",
+        "../02_intermediate/04_error_handling.md",
+        "../02_intermediate/17_macro_patterns.md",
+        "../03_advanced/01_concurrency.md",
+        "../03_advanced/02_async.md",
+        "../03_advanced/03_unsafe.md",
+        "../03_advanced/05_rust_ffi.md",
+        "../06_ecosystem/01_toolchain.md",
+        "../06_ecosystem/04_application_domains.md",
+        "../06_ecosystem/17_cross_compilation.md",
+        "./03_bloom_taxonomy.md",
+        "./learning_guide.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 32,
+      "pre_post": {
+        "pre": [
+          "[Learning Guide](./learning_guide.md) · [Bloom Taxonomy](./03_bloom_taxonomy.md)"
+        ],
+        "post": [
+          "[Application Domains](../06_ecosystem/04_application_domains.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "concept\\00_meta\\concept_definition_decision_forest.md",
       "layer": "L0",
       "title": "Rust 知识体系概念定义判定森林（Concept Definition Decision Forest）",
@@ -426,7 +506,7 @@
       "layer": "L0",
       "title": "全局概念索引（Concept Index）",
       "positioning": "本文件是 `concept/` 知识体系的**倒排索引**，从概念名称快速定位到定义文件、交叉引用位置、Bloom 认知层级和语义链接关系。",
-      "line_count": 707,
+      "line_count": 721,
       "theorem_chains": [
         {
           "text": "| **定理一致性矩阵** | 27 | 每文件的 ⟹ 推理链表格 | 🔷 元结构 |",
@@ -474,24 +554,31 @@
         "../04_formal/03_ownership_formal.md",
         "../04_formal/04_rustbelt.md",
         "../04_formal/16_aerospace_certification_formal_methods.md",
+        "../04_formal/17_operational_semantics.md",
         "../05_comparative/01_rust_vs_cpp.md",
         "../05_comparative/02_rust_vs_go.md",
         "../05_comparative/03_paradigm_matrix.md",
         "../06_ecosystem/02_patterns.md",
         "../06_ecosystem/03_core_crates.md",
         "../06_ecosystem/04_application_domains.md",
+        "../06_ecosystem/11_webassembly.md",
+        "../06_ecosystem/22_embedded_systems.md",
         "../06_ecosystem/29_algorithms_competitive_programming.md",
         "../06_ecosystem/30_system_composability.md",
+        "../06_ecosystem/47_formal_verification_tools.md",
         "../07_future/02_formal_methods.md",
         "../07_future/03_evolution.md",
         "../07_future/29_ebpf_rust.md",
+        "./career_landscape.md",
+        "./comprehensive_rust_mapping.md",
+        "./learning_guide.md",
         "./semantic_expressiveness.md",
         "semantic_space.md"
       ],
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 305,
+      "matrix_rows": 315,
       "pre_post": {
         "pre": [],
         "post": []
@@ -1010,7 +1097,7 @@
       "layer": "L0",
       "title": "Rust 知识体系学习指南（Learning Guide）",
       "positioning": "本文件是 `concept/` 知识体系的**用户手册**，回答三个核心问题——\"我应该从哪里开始？\"\"按什么顺序读？\"\"如何验证自己掌握了？\"",
-      "line_count": 530,
+      "line_count": 616,
       "theorem_chains": [
         {
           "text": "| `methodology.md` | 0.5h | — | 理解本知识体系的组织方法论 | 1. Bloom 层级如何映射到文件层级？2. ⟹ 推理链的格式要求是什么？ |",
@@ -1068,6 +1155,10 @@
         {
           "source": "rustc 错误码大全; Rust Compiler Error Index",
           "context": "本索引将最常见的 Rust 编译错误码映射到概念知识体系中的定义文件和修复路径，实现\"遇到错误 → 定位概念 → 理解原理 → 修复代码\"的闭环。"
+        },
+        {
+          "source": "Niko Matsakis — Teaching Rust Through Errors (RustConf 2023); Rust Compiler Team — Diagnostic UX Guidelines",
+          "context": "本章节基于 Rust 编译器团队的教学研究和认知科学原理，提出\"错误驱动的概念学习\"方法论。"
         }
       ],
       "cross_references": [
@@ -1078,7 +1169,7 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 86,
+      "matrix_rows": 92,
       "pre_post": {
         "pre": [],
         "post": []
@@ -5871,7 +5962,7 @@
       "layer": "L1",
       "title": "集合类型：Rust 标准库的数据结构谱系",
       "positioning": "系统分析 Rust **标准库集合类型**的设计——从 Vec/VecDeque 的顺序容器，到 HashMap/BTreeMap 的关联容器，再到 HashSet/BTreeSet 的集合类型，揭示每种数据结构的所有权语义、性能特征和选型策略。",
-      "line_count": 667,
+      "line_count": 700,
       "theorem_chains": [
         {
           "text": "| 集合类型：Rust 标准库的数据结构谱系 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -5919,6 +6010,12 @@
           "lines": 19,
           "should_fail": false,
           "code_preview": "// drain: 移除并迭代范围内的元素 let mut vec = vec![1, 2, 3, 4, 5]; for x in vec.drain(2..)..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "use std::collections::{LinkedList, VecDeque};  // 单次 collect 拆分到三个不同类型的集合 let (s..."
         },
         {
           "flags": [
@@ -5982,7 +6079,7 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
-      "matrix_rows": 10,
+      "matrix_rows": 15,
       "pre_post": {
         "pre": [
           "[Ownership](./01_ownership.md) ·"
@@ -9299,7 +9396,7 @@
       "layer": "L2",
       "title": "Memory Management（内存管理）",
       "positioning": "",
-      "line_count": 1893,
+      "line_count": 1894,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 深度重构——补充定理推理链（⟹ 标注）、反命题决策树系统、边界极限测试、6步认知路径与章节过渡",
@@ -9747,7 +9844,7 @@
       "layer": "L2",
       "title": "Error Handling（错误处理）",
       "positioning": "",
-      "line_count": 2370,
+      "line_count": 2371,
       "theorem_chains": [
         {
           "text": "- [4.1 引理：Result\\<T,E\\> ⟹ 和类型强制错误处理](#41-引理resultte--和类型强制错误处理)",
@@ -10308,7 +10405,7 @@
       "layer": "L2",
       "title": "`assert_matches!`：模式匹配断言的形式化语义",
       "positioning": "将 Rust 的**模式匹配**能力从\"表达式求值\"扩展到\"测试断言\"的工程机制，实现编译期模式检查与运行时断言的统一。",
-      "line_count": 603,
+      "line_count": 604,
       "theorem_chains": [
         {
           "text": "| `assert_matches!`：模式匹配断言的形式化语义 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -10485,7 +10582,7 @@
       "layer": "L2",
       "title": "Rust 范围类型语义：`std::ops::Range` → `core::range`",
       "positioning": "探讨 Rust 范围类型从**运行时迭代器**到**编译期可复制的值类型**的语义演进，以及 `IntoIterator` vs `Iterator` 的设计权衡。",
-      "line_count": 553,
+      "line_count": 554,
       "theorem_chains": [
         {
           "text": "| Rust 范围类型语义：`std::ops::Range` → `core::range` 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -10625,7 +10722,7 @@
       "layer": "L2",
       "title": "闭包类型系统：Fn、FnMut、FnOnce 的捕获语义",
       "positioning": "深入分析 Rust 闭包的**类型系统**——`Fn`、`FnMut`、`FnOnce` 三者的捕获规则、自动 trait 推导、以及闭包与函数指针的本质区别。",
-      "line_count": 580,
+      "line_count": 581,
       "theorem_chains": [
         {
           "text": "| 闭包类型系统：Fn、FnMut、FnOnce 的捕获语义 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -10749,7 +10846,7 @@
       "layer": "L2",
       "title": "内部可变性：编译期规则的运行时逃逸",
       "positioning": "深入分析 Rust **内部可变性**（Interior Mutability）模式",
-      "line_count": 686,
+      "line_count": 687,
       "theorem_chains": [
         {
           "text": "| 内部可变性：编译期规则的运行时逃逸 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -10879,7 +10976,7 @@
       "layer": "L2",
       "title": "Serde 序列化模式：Rust 的类型驱动数据转换",
       "positioning": "深入分析 **Serde** —— Rust 生态中主导的序列化/反序列化框架，探讨 `Serialize [来源: [serde::Serialize](https://docs.rs/serde/latest/serde/trait.Serialize.html)]`/`Deserialize` derive 宏、自定义序列化逻辑、以及类型系统如何保障数据转换的安全性。",
-      "line_count": 833,
+      "line_count": 834,
       "theorem_chains": [
         {
           "text": "| Serde 序列化模式：Rust 的类型驱动数据转换 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -11007,7 +11104,7 @@
       "layer": "L2",
       "title": "模块系统：Rust 的代码组织与可见性规则",
       "positioning": "深入分析 Rust **模块系统**（module system）的设计——从文件系统映射、可见性规则（pub/use/super/self）、到 crate 边界与 workspace 组织，揭示 Rust 模块系统与 C++/Java/Python 的本质差异。",
-      "line_count": 674,
+      "line_count": 675,
       "theorem_chains": [
         {
           "text": "| 模块系统：Rust 的代码组织与可见性规则 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -11138,7 +11235,7 @@
       "layer": "L2",
       "title": "Cow：写时克隆与零拷贝抽象",
       "positioning": "深入分析 Rust 中 **Cow（Clone [来源: [std::clone::Clone](https://doc.rust-lang.org/std/clone/trait.Clone.html)] on Write）**类型的设计——如何在**借用**（零拷贝）和**拥有**（必要时克隆）之间自动切换，以及它在 API 设计中的广泛应用。",
-      "line_count": 694,
+      "line_count": 695,
       "theorem_chains": [
         {
           "text": "| Cow：写时克隆与零拷贝抽象 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -11258,7 +11355,7 @@
       "layer": "L2",
       "title": "智能指针：堆内存管理与共享语义",
       "positioning": "系统分析 Rust **智能指针**的设计——Box（独占堆分配）、Rc/Arc（引用计数共享）、RefCell/Cell（内部可变性）、以及它们的组合使用模式，揭示每种指针类型的所有权语义和适用场景。",
-      "line_count": 719,
+      "line_count": 720,
       "theorem_chains": [
         {
           "text": "| 智能指针：堆内存管理与共享语义 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -11387,7 +11484,7 @@
       "layer": "L2",
       "title": "DSL 与嵌入 式设计：Rust 中的领域特定语言",
       "positioning": "分析 Rust 中 **DSL（领域特定语言）**的构建方法——从宏驱动的内嵌 DSL（如 html!、sql!）、到外部 DSL 的解析器 [来源: [Parsing in Rust](https://rust-lang.github.io/rustc-dev-guide/grammar.html)]组合子（parser combinators），再到 Rust 作为宿主语言的嵌入策略，揭示类型安全 DSL 的设计模式。",
-      "line_count": 716,
+      "line_count": 717,
       "theorem_chains": [
         {
           "text": "| DSL 与嵌入 式设计：Rust 中的领域特定语言 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -11533,7 +11630,7 @@
       "layer": "L2",
       "title": "Newtype 与包装器模式：类型安全的零成本抽象",
       "positioning": "深入分析 Rust 中 **Newtype 模式**和**包装器类型**的设计——如何通过单字段元组结构体创建语义上不同的类型，实现编译期单位检查、API 封装和安全边界，同时保持零运行时开销。",
-      "line_count": 692,
+      "line_count": 693,
       "theorem_chains": [
         {
           "text": "| Newtype 与包装器模式：类型安全的零成本抽象 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -11670,7 +11767,7 @@
       "layer": "L2",
       "title": "错误处理深入：从 Result 到自定义错误生态",
       "positioning": "深入分析 Rust **错误处理机制**——从 `Result`/`Option` 的组合子到 `?` 运算符、错误转换、自定义错误类型和错误处理框架，揭示 Rust 如何将错误处理融入类型系统实现编译期安全。",
-      "line_count": 702,
+      "line_count": 703,
       "theorem_chains": [
         {
           "text": "| 错误处理深入：从 Result 到自定义错误生态 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -11800,7 +11897,7 @@
       "layer": "L2",
       "title": "Rust 迭代器模式",
       "positioning": "深入探讨 Rust 迭代器模式——从适配器链到自定义迭代器，分析惰性求值、性能特征和最佳实践。",
-      "line_count": 662,
+      "line_count": 663,
       "theorem_chains": [
         {
           "text": "> 迭代器安全 ⟹ 惰性求值 + 消费语义",
@@ -11938,7 +12035,7 @@
       "layer": "L2",
       "title": "迭代器模式：Rust 的惰性计算与零成本抽象",
       "positioning": "深入分析 Rust **迭代器（Iterator trait）**的设计——从惰性计算链、消费者-迭代器分离到自定义迭代器实现，揭示 Rust 如何通过类型系统实现编译期优化的惰性序列处理。",
-      "line_count": 728,
+      "line_count": 729,
       "theorem_chains": [
         {
           "text": "> 迭代器安全 ⟹ 惰性求值 + 消费语义",
@@ -12088,7 +12185,7 @@
       "layer": "L2",
       "title": "宏模式：编译期代码生成的工程实践",
       "positioning": "深入分析 Rust **宏的工程模式**——从 DRY 代码生成、API 设计到编译期计算，揭示如何在不牺牲可读性的前提下利用宏提升代码复用和类型安全。",
-      "line_count": 744,
+      "line_count": 745,
       "theorem_chains": [
         {
           "text": "| 宏模式：编译期代码生成的工程实践 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -12211,7 +12308,7 @@
       "layer": "L2",
       "title": "生命周期高级主题：从 HRTB 到自引用类型",
       "positioning": "深入分析 Rust **生命周期**的高级主题——从高阶生命周期（HRTB）、生命周期省略规则到自引用结构和 Pin，揭示生命周期系统如何处理最复杂的借用场景。",
-      "line_count": 698,
+      "line_count": 699,
       "theorem_chains": [
         {
           "text": "| 生命周期高级主题：从 HRTB 到自引用类型 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -12332,7 +12429,7 @@
       "layer": "L2",
       "title": "高级 Trait 主题：从关联类型到特化",
       "positioning": "深入分析 Rust **Trait 系统的高级特性**——从关联类型、泛型关联类型（GATs）到特化（Specialization）和负实现，揭示 Trait 系统如何支持复杂抽象和零成本多态。",
-      "line_count": 698,
+      "line_count": 699,
       "theorem_chains": [
         {
           "text": "| 高级 Trait 主题：从关联类型到特化 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -12476,7 +12573,7 @@
       "layer": "L2",
       "title": "高级类型系统：从关联类型到类型级编程",
       "positioning": "深入分析 Rust **类型系统的高级特性**——从 GATs、impl Trait 到类型级计算和 const generics，揭示 Rust 如何在保持编译期安全的同时提供强大的抽象能力。",
-      "line_count": 822,
+      "line_count": 823,
       "theorem_chains": [
         {
           "text": "| 高级类型系统：从关联类型到类型级编程 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -12648,7 +12745,7 @@
       "layer": "L2",
       "title": "元编程：Rust 的编译期代码生成与变换",
       "positioning": "深入分析 Rust **元编程（Metaprogramming）**的技术体系——从声明式宏的模式匹配、过程宏的语法树操作，到 derive 宏的代码生成、quote/syn 工具体系，揭示 Rust 如何在编译期实现类型安全的代码变换同时保持宏卫生性（Hygiene）。",
-      "line_count": 741,
+      "line_count": 742,
       "theorem_chains": [
         {
           "text": "| 元编程：Rust 的编译期代码生成与变换 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -13122,7 +13219,7 @@
       "layer": "L3",
       "title": "Async/Await（异步编程）",
       "positioning": "",
-      "line_count": 2913,
+      "line_count": 2914,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 定理一致性矩阵扩展至10行（含⟹推理链）、新增反命题决策树3组、认知路径6步递进、章节过渡段落与层次一致性标注",
@@ -13710,7 +13807,7 @@
       "layer": "L3",
       "title": "Async/Await 高级主题",
       "positioning": "",
-      "line_count": 1375,
+      "line_count": 1376,
       "theorem_chains": [
         {
           "text": "> **定理链编号**: T-053 Waker 活性 ⟹ T-054 Stream 安全性",
@@ -14009,7 +14106,7 @@
       "layer": "L3",
       "title": "异步模式：从 Future 到生产级并发",
       "positioning": "深入分析 Rust **异步编程的高级模式**——从 Future 状态机、Pin 保证到并发执行和取消传播，揭示 Rust async/await 如何在零运行时开销下实现高效并发。",
-      "line_count": 835,
+      "line_count": 836,
       "theorem_chains": [
         {
           "text": "| 异步模式：从 Future 到生产级并发 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -15419,7 +15516,7 @@
       "layer": "L3",
       "title": "Rust FFI：与外部代码的安全边界",
       "positioning": "系统分析 Rust 与 C/C++ 等外部代码交互的**Foreign Function Interface (FFI)** 机制，探讨 `extern` 块、ABI 兼容、`unsafe` 边界管理以及 `bindgen`/`cbindgen` 工具链。",
-      "line_count": 633,
+      "line_count": 634,
       "theorem_chains": [
         {
           "text": "| Rust FFI：与外部代码的安全边界 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -15557,7 +15654,7 @@
       "layer": "L3",
       "title": "Pin 与 Unpin：自引用类型的不动性保证",
       "positioning": "深入分析 Rust 中 **Pin<&mut T>** 和 **Unpin** 的设计动机——解决自引用类型（self-referential structs）在内存移动时的安全问题，探讨 Pin 与 Future、Generator 的交互，以及 async/await 的状态机实现。",
-      "line_count": 668,
+      "line_count": 669,
       "theorem_chains": [
         {
           "text": "| Pin 与 Unpin：自引用类型的不动性保证 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -15695,7 +15792,7 @@
       "layer": "L3",
       "title": "过程宏：编译期代码生成的元编程工具",
       "positioning": "深入分析 Rust **过程宏（Procedural Macros）**的三种类型（derive、attribute、function-like）——它们的编译期执行模型、TokenStream 操作、卫生性（hygiene）保证，以及与 `macro_rules!` 的本质差异。",
-      "line_count": 725,
+      "line_count": 726,
       "theorem_chains": [
         {
           "text": "| 过程宏：编译期代码生成的元编程工具 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -15829,7 +15926,7 @@
       "layer": "L3",
       "title": "NLL 与 Polonius：借用检查器的演进",
       "positioning": "深入分析 Rust **借用检查器**的两个里程碑——Non-Lexical Lifetimes (NLL) 如何放宽词法作用域限制，以及 Polonius 如何通过数据流分析实现更精确的借用检查，揭示 Rust 类型系统的持续演进。",
-      "line_count": 639,
+      "line_count": 640,
       "theorem_chains": [
         {
           "text": "| NLL 与 Polonius：借用检查器的演进 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -16009,7 +16106,7 @@
       "layer": "L3",
       "title": "FFI 高级主题：跨语言边界的安全与性能",
       "positioning": "深入分析 Rust **FFI（外部函数接口）**的高级主题——从复杂类型映射、回调函数、到线程安全和内存布局控制，揭示如何在不安全边界上维持 Rust 的安全保证。",
-      "line_count": 833,
+      "line_count": 834,
       "theorem_chains": [
         {
           "text": "| FFI 高级主题：跨语言边界的安全与性能 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -16168,7 +16265,7 @@
       "layer": "L3",
       "title": "并发 模式：从消息 传递到锁自由的数据结构",
       "positioning": "深入分析 Rust **并发编程的高级模式**——从 Actor 模型、通道模式到无锁数据结构和内存序，揭示 Rust 所有权系统如何为并发安全提供编译期保证。",
-      "line_count": 782,
+      "line_count": 783,
       "theorem_chains": [
         {
           "text": "| 并发 模式：从消息 传递到锁自由的数据结构 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -16309,7 +16406,7 @@
       "layer": "L3",
       "title": "原子操作与内存序：无锁并发的精确控制",
       "positioning": "深入分析 Rust **原子类型（Atomic）**和**内存排序（Memory Ordering [来源: [Atomic Ordering](https://doc.rust-lang.org/std/sync/atomic/enum.Ordering.html)]）**——从基本的 load/store 到 compare-and-swap 和释放-获取语义，揭示无锁编程中硬件内存模型的精确控制。",
-      "line_count": 842,
+      "line_count": 843,
       "theorem_chains": [
         {
           "text": "| 原子操作与内存序：无锁并发的精确控制 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -16453,7 +16550,7 @@
       "layer": "L3",
       "title": "Unsafe Rust 模式：安全抽象的核心技术",
       "positioning": "深入分析 Rust **unsafe 代码的工程模式**——从原始指针操作、内存布局控制到与 C 的互操作，揭示如何在 unsafe 边界内构建安全抽象。",
-      "line_count": 857,
+      "line_count": 858,
       "theorem_chains": [
         {
           "text": "| Unsafe Rust 模式：安全抽象的核心技术 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -16653,7 +16750,7 @@
       "layer": "L3",
       "title": "自定义分配器与内存布局优化",
       "positioning": "深入探讨 Rust 的**自定义分配器**机制——从 `GlobalAlloc` Trait 到 `allocator_api` 不稳定特性，分析内存布局对齐、分配策略与性能优化。",
-      "line_count": 782,
+      "line_count": 783,
       "theorem_chains": [
         {
           "text": "| 自定义分配器与内存布局优化 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -16799,7 +16896,7 @@
       "layer": "L3",
       "title": "零拷贝解析与序列化优化",
       "positioning": "探讨 Rust 中的**零拷贝**（Zero-Copy）技术——从字节切片直接解析结构化数据，无需中间复制，分析内存安全与性能权衡。",
-      "line_count": 746,
+      "line_count": 747,
       "theorem_chains": [
         {
           "text": "| 零拷贝解析与序列化优化 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -16947,7 +17044,7 @@
       "layer": "L3",
       "title": "无锁编程与内存模型",
       "positioning": "深入探讨 Rust 中的**无锁编程**——从原子操作到内存序，分析 lock-free 算法的内存安全保证与性能优势。",
-      "line_count": 779,
+      "line_count": 780,
       "theorem_chains": [
         {
           "text": "| 无锁编程与内存模型 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -17084,7 +17181,7 @@
       "layer": "L3",
       "title": "类型擦除与动态分发",
       "positioning": "深入探讨 Rust 中的**类型擦除**技术——从 trait object 到 vtable，分析动态分发如何在保持类型安全的同时实现运行时多态。",
-      "line_count": 766,
+      "line_count": 767,
       "theorem_chains": [
         {
           "text": "| 类型擦除与动态分发 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -17218,7 +17315,7 @@
       "layer": "L3",
       "title": "Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象",
       "positioning": "系统分析 Rust **网络编程**的核心范式——从 Tokio 运行时下的 TCP/UDP 异步 IO，到 socket 编程的底层细节，再到 Tower 服务抽象的设计哲学，建立从\"怎么写\"到\"为什么这样设计\"的完整认知框架。",
-      "line_count": 880,
+      "line_count": 881,
       "theorem_chains": [
         {
           "text": "| Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -17356,7 +17453,7 @@
       "layer": "L3",
       "title": "并行与分布式模式谱系：从线程池到共识算法",
       "positioning": "",
-      "line_count": 803,
+      "line_count": 804,
       "theorem_chains": [
         {
           "text": "| 并行与分布式模式谱系：从线程池到共识算法 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -17542,7 +17639,7 @@
       "layer": "L3",
       "title": "流处理语义：从 Dataflow Model 到 Differential Dataflow",
       "positioning": "深入分析流处理的核心语义——时间域、窗口、水印、容错、状态管理、背压，并将 Rust 的 timely/differential dataflow 置于国际流处理理论谱系中定位。",
-      "line_count": 753,
+      "line_count": 754,
       "theorem_chains": [
         {
           "text": "| 流处理语义：从 Dataflow Model 到 Differential Dataflow 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -20027,7 +20124,7 @@
       "layer": "L4",
       "title": "操作语义：程序行为的形式化定义",
       "positioning": "介绍 **操作语义（Operational Semantics）**——通过形式化规则定义程序的执行步骤，分析小步语义（Small-Step）与大步语义（Big-Step）的对比，以及 Rust 的所有权、借用和并发操作的形式化建模方法。",
-      "line_count": 938,
+      "line_count": 942,
       "theorem_chains": [
         {
           "text": "| 操作语义：程序行为的形式化定义 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -25567,7 +25664,7 @@
       "layer": "L6",
       "title": "WebAssembly 生态：Rust 的浏览器外运行时",
       "positioning": "> 系统分析 Rust 在 **WebAssembly (Wasm)** 生态中的核心地位，",
-      "line_count": 527,
+      "line_count": 528,
       "theorem_chains": [
         {
           "text": "- **定理**: WebAssembly 生态：Rust 的浏览器外运行时 定义 ⟹ 类型安全保证",
@@ -26967,7 +27064,7 @@
       "layer": "L6",
       "title": "Rust 嵌入式系统开发",
       "positioning": "探讨 Rust 在嵌入式系统领域的应用——从 `no_std` 到裸机编程，分析内存安全如何保证关键系统的可靠性。",
-      "line_count": 706,
+      "line_count": 845,
       "theorem_chains": [
         {
           "text": "- **定理**: Rust 嵌入式系统开发 定义 ⟹ 类型安全保证",
@@ -27006,6 +27103,22 @@
         }
       ],
       "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 18,
+          "should_fail": false,
+          "code_preview": "// Embassy 异步 blink 示例 use embassy_executor::Spawner; use embassy_time::Timer; u..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 28,
+          "should_fail": false,
+          "code_preview": "// embedded-hal-async SPI 示例 use embedded_hal_async::spi::SpiBus; use embedded_h..."
+        },
         {
           "flags": [],
           "lines": 5,
@@ -27079,7 +27192,7 @@
       "transitions": 12,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 11,
+      "matrix_rows": 24,
       "pre_post": {
         "pre": [
           "[Unsafe](../03_advanced/03_unsafe.md) ·",
@@ -27811,7 +27924,7 @@
       "layer": "L6",
       "title": "DevOps 与 CI/CD：Rust 的持续交付工程实践",
       "positioning": "系统分析 Rust **DevOps 工程实践**——从 GitHub Actions 工作流设计、cargo-release 发布自动化、交叉编译 CI 集成，到 Docker 镜像优化、构建缓存策略、CI 测试矩阵与安全审计（cargo-audit、cargo-deny），揭示 Rust 项目如何从代码提交到生产部署实现高可靠持续交付。",
-      "line_count": 804,
+      "line_count": 813,
       "theorem_chains": [
         {
           "text": "- **定理**: DevOps 与 CI/CD：Rust 的持续交付工程实践 定义 ⟹ 类型安全保证",
@@ -31138,7 +31251,7 @@
       "layer": "L6",
       "title": "Formal Verification Tools（形式化验证工具生态）",
       "positioning": "",
-      "line_count": 793,
+      "line_count": 837,
       "theorem_chains": [
         {
           "text": "- **定理**: Formal Verification Tools（形式化验证工具生态） 定义 ⟹ 类型安全保证",
@@ -31270,7 +31383,7 @@
       "transitions": 12,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 55,
+      "matrix_rows": 60,
       "pre_post": {
         "pre": [
           "[类型系统](../01_foundation/04_type_system.md) · [Unsafe Rust](../03_advanced/03_unsafe.md) · [形式化验证](../04_formal/05_verification_toolchain.md) · [生命周期](../01_foundation/03_lifetimes.md)",
@@ -36146,7 +36259,7 @@
       "layer": "L7",
       "title": "Edition 2024 完全指南：新特性与迁移策略",
       "positioning": "全面讲解 Rust **Edition 2024** 的新特性——从 gen blocks、async closures 到 never type 和 lifetime captures，揭示 Edition 机制如何在不破坏兼容性的前提下推进语言演进。",
-      "line_count": 601,
+      "line_count": 636,
       "theorem_chains": [
         {
           "text": "- **定理**: Edition 2024 完全指南：新特性与迁移策略 定义 ⟹ 类型安全保证",
@@ -36208,6 +36321,20 @@
           "lines": 24,
           "should_fail": false,
           "code_preview": "// impl Trait 的精确生命周期捕获 (Rust 2024)  // 2021 Edition: impl Trait 隐式捕获所有生命周期 fn f..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "// Edition 2021: 临时值的生命周期延伸到整个语句 if let Some(x) = get_string().as_ref() {     //..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "> // 自动迁移后的代码: > let temp = get_string(); > if let Some(x) = temp.as_ref() { >  ..."
         },
         {
           "flags": [
@@ -37804,7 +37931,7 @@
       "layer": "L7",
       "title": "Rust 1.97 前沿特性预览",
       "positioning": "",
-      "line_count": 349,
+      "line_count": 346,
       "theorem_chains": [
         {
           "text": "- **定理**: Rust 1.97 前沿特性预览 定义 ⟹ 类型安全保证",

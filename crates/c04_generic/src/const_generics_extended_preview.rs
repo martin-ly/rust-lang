@@ -85,6 +85,7 @@ impl AdtConstParamsConcept {
 ///     const CAPACITY: usize = 8192;
 /// }
 ///
+/// struct Buffer<T: BufferConfig> {
 ///     data: [u8; T::CAPACITY], // ← 此前 impossible
 /// }
 ///

@@ -312,6 +312,7 @@ pub mod select_pattern {
 
     /// Golang select 示例
     /// Golang select example
+    /// ```go
     /// func main() {
     ///     ch1 := make(chan string)
     ///     ch2 := make(chan string)
@@ -429,6 +430,7 @@ pub mod worker_pool {
     use std::sync::Arc;
 
     /// Golang 风格
+    /// ```go
     /// func worker(id int, jobs <-chan int, results chan<- int) {
     ///     for j := range jobs {
     ///         fmt.Printf("worker %d processing job %d\n", id, j)

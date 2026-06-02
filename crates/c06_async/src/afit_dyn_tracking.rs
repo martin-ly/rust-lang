@@ -182,6 +182,7 @@ impl AsyncTraitComparison {
 /// ## ❌ Send bound 问题
 /// AFIDT Future Send in trait bound in express 。
 /// 需要 RTN (Return Type Notation) 解决。
+    /// ```text
 /// // 当前无法表达：返回的 Future 必须是 Send 的
 /// // when before express ： Future must Send
 /// fn spawn_task<T>(source: T)

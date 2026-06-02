@@ -39,6 +39,7 @@
     - [2.1 容量管理与重新分配](#21-容量管理与重新分配)
     - [2.2 Entry API](#22-entry-api)
     - [2.3 Drain 与保留模式](#23-drain-与保留模式)
+    - [2.4 `FromIterator`/`Extend` for Tuples (Rust 1.85+)](#24-fromiteratorextend-for-tuples-rust-185)
   - [三、选型决策矩阵](#三选型决策矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
@@ -263,6 +264,38 @@ map.retain(|k, v| *v > 1);
 
 > **Drain/Retain 洞察**: `drain` 和 `retain` 提供了**高效的条件移除**——避免手动迭代和移除的复杂度。
 > [来源: [Vec::retain](https://doc.rust-lang.org/std/vec/struct.Vec.html#method.retain)]
+
+---
+
+### 2.4 `FromIterator`/`Extend` for Tuples (Rust 1.85+)
+
+> **Rust 版本**: 1.85.0+ Stable · [来源: [Rust 1.85.0 Release Notes](https://blog.rust-lang.org/2025/02/20/Rust-1.85.0.html)]
+
+Rust 1.85.0 将 `FromIterator` 和 `Extend` 支持扩展到 **1-12 元组 arity**，允许单次 `collect()` 将迭代器 fanout 到多个集合：
+
+```rust
+use std::collections::{LinkedList, VecDeque};
+
+// 单次 collect 拆分到三个不同类型的集合
+let (squares, cubes, tesseracts): (Vec<i32>, VecDeque<i32>, LinkedList<i32>) =
+    (0i32..10)
+        .map(|i| (i * i, i.pow(3), i.pow(4)))
+        .collect();
+
+assert_eq!(squares, vec![0, 1, 4, 9, 16, 25, 36, 49, 64, 81]);
+assert_eq!(cubes.into_iter().next(), Some(0));
+```
+
+与 `unzip()` 的对比：
+
+| 特性 | `unzip()` | `collect()` to tuple |
+|:---|:---|:---|
+| 返回类型 | 二元组 `(A, B)` | 支持 1-12 arity 任意元组 |
+| 集合类型 | 两个集合必须相同类型 | 每个位置可以是不同集合类型 |
+| 使用场景 | 简单二元拆分 | 复杂多路 fanout |
+| 性能 | 单次遍历 | 单次遍历（零成本抽象） |
+
+> **设计洞察**: 这是 Rust 2024 Edition 的**零成本抽象**典范——编译期元组展开，运行时无额外开销。
 
 ---
 

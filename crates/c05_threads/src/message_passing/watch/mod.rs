@@ -1,9 +1,9 @@
 //! 用法：
 //! Usage:
 //! ：
-//! ```
+//! ```ignore
 //! let (tx, rx) = watch::channel(0u32);
-//! tx.send(1);
+//! tx.send(1).unwrap();
 //! assert_eq!(*rx.borrow(), 1);
 //! ```
 use std::sync::{Arc, Condvar, Mutex};

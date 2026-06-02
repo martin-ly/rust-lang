@@ -62,10 +62,8 @@ impl ControlIfLetGuardExamples {
 /// 使用 `yield` 关键字可以产生值。
 /// `yield` key can 。
 /// ## 语法
-/// ## Syntax
-/// ##
-///     yield value;
-/// }
+/// ```text
+/// yield value;
 /// ```
 pub mod basic_gen {
     /// 使用 gen 块创建简单的计数器

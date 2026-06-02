@@ -365,6 +365,7 @@ pub mod cps_transformation {
     use super::*;
 
     /// 直接风格 (Direct Style)
+    /// ```text
     /// f : A → B
     /// ```
     pub fn direct_style_add(a: i32, b: i32) -> i32 {
@@ -372,6 +373,7 @@ pub mod cps_transformation {
     }
 
     /// CPS 风格 (Continuation-Passing Style)
+    /// ```text
     /// f_cps : A → (B → R) → R
     /// ```
     ///
@@ -392,6 +394,7 @@ pub mod cps_transformation {
     }
 
     /// 异步风格 (Async Style)
+    /// ```text
     /// f_async : A → Future<B>
     /// ```
     ///

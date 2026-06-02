@@ -357,7 +357,8 @@ Rust Wasm 工具链:
   运行时:
   ├── 浏览器: V8, SpiderMonkey, JavaScriptCore
   ├── 服务端: Wasmtime (Bytecode Alliance), Wasmer, WasmEdge
-  └── 嵌入式: Wasm3, wasm-micro-runtime
+  ├── 嵌入式: Wasm3, wasm-micro-runtime
+  └── 分布式/编排: wasmCloud (WASM  actors + NATS)
 
   测试:
   ├── wasm-bindgen-test: 浏览器内测试

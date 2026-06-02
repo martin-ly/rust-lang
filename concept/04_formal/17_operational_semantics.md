@@ -574,6 +574,10 @@ Rust 语言的形式化验证面临独特的「多维复杂性」挑战。与 C 
 
 **Miri (Tree Borrows)**：Miri 不是传统意义上的「形式化项目」，而是一个基于操作语义的解释器，用于动态检测 UB（Undefined Behavior）。Tree Borrows（PLDI 2025）为 Miri 提供了新的别名模型，替换早期的 Stacked Borrows。Tree Borrows 的语义规则集合是有限且可判定的，这意味着 Miri 的检查过程在理论上是可终止的（受步数限制约束）。从形式化角度看，Tree Borrows 为 Rust 的「动态语义」提供了最接近生产环境的可执行规格。
 
+**Gillian-Rust**：Gillian-Rust 是帝国理工学院开发的 Rust 程序分析工具，基于 **Gillian** 平台——一个用于符号执行和分离逻辑的通用分析框架。与 RustBelt 或 RefinedRust 不同，Gillian-Rust 不生成 Coq 证明，而是使用**符号执行**自动探索程序的所有路径，并通过分离逻辑断言验证内存安全。其核心技术是将 Rust 的所有权规则编码为 Gillian 的「消费性谓词」（consumable predicates），从而在不修改 Rust 编译器的情况下验证 safe Rust 子集。Gillian-Rust 目前支持：所有权转移验证、借用生命周期检查、以及简单的并发原语分析（`Arc`、`Mutex` 的最简模型）。其优势在于**完全自动化**（无需手写规范），劣势在于对复杂泛型和 trait bound 的处理能力有限，且依赖 Gillian 平台的 JVM 运行时，集成成本较高。[来源: [Gillian-Rust Paper — OOPSLA 2024](https://dl.acm.org/doi/10.1145/3689738)] · [来源: [Gillian Platform](https://gillianplatform.github.io/)]
+
+> **Gillian-Rust 的独特定位**：它是 Rust 形式化工具谱系中**唯一基于符号执行 + 分离逻辑**的混合方案。Kani 使用模型检验（CBMC），Miri 使用解释执行，而 Gillian-Rust 使用符号执行——这意味着它能处理未初始化的符号值（如任意整数 `n`），探索所有可能的执行路径，而无需像 Kani 那样设置循环展开界限。
+
 #### 项目活跃度与社区维护状态详析
 
 | 项目 | 最近更新 | 核心维护者 | 社区规模 | 可复现性 |

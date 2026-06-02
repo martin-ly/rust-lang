@@ -184,14 +184,14 @@
 //!
 //! - **[Reactor 模式完整实现](../examples/reactor_pattern_comprehensive_2025.rs)** ⭐⭐⭐
 //!   cargo run --example reactor_pattern_comprehensive_2025
-//!   ```
+
 //!   - 1,800+ 行完整实现，包含形式化定义和性质证明
 //!   - 优先级调度、批处理优化、性能基准测试
 //!   - 网络I/O、定时器、用户输入等实际应用示例
 //!
 //! - **[Actor 模式完整实现](../examples/actor_pattern_comprehensive_2025.rs)** ⭐⭐⭐
 //!   cargo run --example actor_pattern_comprehensive_2025
-//!   ```
+
 //!   - 2,100+ 行完整实现，包含形式化定义和性质证明
 //!   - 银行账户系统应用 (存款、取款、转账、事务回滚)
 //!   - Actor 生命周期管理、监督策略、性能测试
@@ -199,7 +199,7 @@
 //!
 //! - **[终极理论与实践指南 2025](../examples/ultimate_async_theory_practice_2025.rs)** ⭐⭐⭐
 //!   cargo run --example ultimate_async_theory_practice_2025
-//!   ```
+
 //!   - Actor/Reactor/CSP 三种模式的数学模型和完整实现
 //! - Actor/Reactor/CSP patterncomplete implementation
 //!   - 异步设计模式 (Builder, Factory, Adapter, Strategy, Observer)
@@ -207,14 +207,14 @@
 //!
 //! - **[Tokio & Smol 最新特性 2025](../examples/tokio_smol_latest_features_2025.rs)** ⭐⭐⭐
 //!   cargo run --example tokio_smol_latest_features_2025
-//!   ```
+
 //!   - Tokio 1.41+ 新特性: JoinSet, TaskLocal, Runtime Metrics
 //!   - 性能对比和基准测试
 //! - performance test
 //!
 //! - **[异步性能优化完整指南 2025](../examples/async_performance_optimization_2025.rs)** ⭐⭐
 //!   cargo run --example async_performance_optimization_2025 --release
-//!   ```
+
 //!   - 对象池 (减少 50-80% 分配开销)
 //!   - to ( 50-80% overhead )
 //!   - 零拷贝技术 (Bytes 库)
@@ -224,7 +224,7 @@
 //!
 //! - **[异步调试与监控完整指南 2025](../examples/async_debugging_monitoring_2025.rs)** ⭐⭐
 //!   cargo run --example async_debugging_monitoring_2025
-//!   ```
+
 //!   - Tracing 结构化日志
 //!   - Tracing structure
 //!   - 性能指标收集 (Metrics)
@@ -234,7 +234,7 @@
 //!
 //! - **[综合异步模式 2025](../examples/comprehensive_async_patterns_2025.rs)** ⭐⭐
 //!   cargo run --example comprehensive_async_patterns_2025
-//!   ```
+
 //!   - Actor、Reactor、CSP 模式实际应用
 //! - ActorReactorCSP pattern application
 //!   - async design 、architecture
@@ -243,7 +243,7 @@
 //!
 //! - **[CSP 模式完整实现](../examples/csp_pattern_comprehensive_2025.rs)** ⭐⭐⭐
 //!   cargo run --example csp_pattern_comprehensive_2025
-//!   ```
+
 //!   - 1,100+ 行完整实现，包含形式化定义和性质证明
 //!   - 数据处理流水线、分布式任务调度、实时日志聚合
 //!   - pipeline 、distribution task 、aggregation

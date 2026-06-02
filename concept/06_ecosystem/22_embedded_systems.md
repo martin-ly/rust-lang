@@ -43,6 +43,9 @@
   - [三、实时系统](#三实时系统)
     - [3.1 实时约束](#31-实时约束)
     - [3.2 RTIC 框架](#32-rtic-框架)
+    - [3.3 Embassy：嵌入式异步运行时](#33-embassy嵌入式异步运行时)
+    - [3.4 embedded-hal-async：异步硬件抽象](#34-embedded-hal-async异步硬件抽象)
+    - [3.5 Ariel OS：安全 IoT Library OS](#35-ariel-os安全-iot-library-os)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
@@ -386,6 +389,142 @@ RTIC (Real-Time Interrupt-driven Concurrency):
 
 > **RTIC 洞察**: **RTIC 将 Rust 的所有权模型应用于实时调度**——编译期保证资源无冲突，零运行时开销。
 > [来源: [RTIC](https://rtic.rs/)]
+
+---
+
+### 3.3 Embassy：嵌入式异步运行时
+
+> **[Embassy](https://embassy.dev/)** 是专为嵌入式系统设计的 async Rust 运行时，支持 `no_std`/`no_alloc` 环境，提供集成定时器、非阻塞 sleep（WFI）和多种 MCU 的 HAL（ESP32、Nordic、RP2040/RP2350、STM32）。
+> [来源: [Embassy Book](https://embassy.dev/book/)] · [来源: [embedded-hal-async](https://docs.rs/embedded-hal-async/latest/embedded_hal_async/)]
+
+```rust,ignore
+// Embassy 异步 blink 示例
+use embassy_executor::Spawner;
+use embassy_time::Timer;
+use embassy_rp::gpio::{Level, Output};
+
+#[embassy_executor::main]
+async fn main(_spawner: Spawner) {
+    let p = embassy_rp::init(Default::default());
+    let mut led = Output::new(p.PIN_25, Level::Low);
+
+    loop {
+        led.set_high();
+        Timer::after_secs(1).await;  // 非阻塞睡眠
+        led.set_low();
+        Timer::after_secs(1).await;
+    }
+}
+```
+
+> **Embassy 洞察**: Embassy 将 **Tokio 的异步模型带入嵌入式**——`async/await` + 非阻塞 I/O，同时保持 `no_std` 的极简资源占用。
+
+---
+
+### 3.4 embedded-hal-async：异步硬件抽象
+
+> **[embedded-hal-async](https://docs.rs/embedded-hal-async/latest/embedded_hal_async/)** 是 Rust Embedded Working Group 推出的异步硬件抽象层 trait，为 Embassy 和其他嵌入式异步运行时提供统一的 I/O 接口。它是对同步 `embedded-hal` 的 async 扩展，允许驱动 crate 同时支持阻塞和异步模式。
+> [来源: [embedded-hal-async Docs](https://docs.rs/embedded-hal-async/latest/embedded_hal_async/)] · [来源: [Rust Embedded WG HAL Team](https://github.com/rust-embedded/wg)]
+
+```rust,ignore
+// embedded-hal-async SPI 示例
+use embedded_hal_async::spi::SpiBus;
+use embedded_hal_async::delay::DelayNs;
+
+async fn read_sensor<SPI, DELAY>(
+    spi: &mut SPI,
+    delay: &mut DELAY,
+) -> Result<[u8; 6], SPI::Error>
+where
+    SPI: SpiBus<u8>,
+    DELAY: DelayNs,
+{
+    // 异步选择从设备
+    let mut cs = OutputPin::new();
+    cs.set_low().unwrap();
+
+    // 异步传输 + 非阻塞延迟
+    let mut cmd = [0x2B | 0x80, 0, 0]; // 读取寄存器命令
+    spi.transfer_in_place(&mut cmd).await?;
+    delay.delay_ms(10).await;
+
+    let mut buf = [0u8; 6];
+    spi.read(&mut buf).await?;
+
+    cs.set_high().unwrap();
+    Ok(buf)
+}
+```
+
+**embedded-hal-async 与同步 embedded-hal 的对比**:
+
+| 特性 | `embedded-hal` (同步) | `embedded-hal-async` |
+|:---|:---|:---|
+| **API 风格** | 阻塞 I/O | `async/await` 非阻塞 |
+| **运行时依赖** | 无 | 需要异步运行时（Embassy/Tokio-embedded） |
+| **中断集成** | 手动 ISR | WFI + async executor |
+| **驱动复用** | 广泛生态 | 快速增长中 |
+| **内存占用** | 极低 | 略高（Future 状态机） |
+| **CPU 效率** | 忙等/轮询 | 事件驱动，可进入低功耗模式 |
+
+> **设计洞察**: `embedded-hal-async` 的 trait 设计遵循**零成本抽象**原则——`async fn` 在编译后展开为状态机，不引入动态分配。对于不支持 async 的底层硬件，可通过 `embassy-embedded-hal` 适配层桥接。
+
+```text
+embedded-hal-async 生态栈:
+
+  应用层:
+  ├── 传感器驱动 (async): lsm6dsr, bme280, sht4x
+  ├── 无线通信: embassy-net, lorawan, ble-hci
+  └── 文件系统: embedded-fatfs-async
+
+  抽象层:
+  ├── embedded-hal-async (trait 定义)
+  ├── embedded-io-async (字节流 trait)
+  └── embedded-storage-async (存储 trait)
+
+  运行时:
+  ├── Embassy (推荐)
+  └── 其他: rtic-async (实验性)
+
+  HAL 实现:
+  ├── embassy-stm32, embassy-rp, embassy-nrf
+  └── 芯片厂商提供的 async HAL
+```
+
+> **选型建议**: 新项目优先选择 `embedded-hal-async` + Embassy；维护 legacy 代码或资源极度受限（< 16KB RAM）的设备可使用同步 `embedded-hal`。[来源: [Embassy HAL Migration Guide](https://embassy.dev/book/)]
+
+---
+
+### 3.5 Ariel OS：安全 IoT Library OS
+
+> **[Ariel OS](https://github.com/ariel-os/ariel-os)**（原 RIOT-rs）是一个专为安全、低功耗 IoT 设计的 **Library OS**，用 Rust 编写。它将操作系统功能以库的形式链接到应用中，而非作为独立内核运行。
+> [来源: [Ariel OS GitHub](https://github.com/ariel-os/ariel-os)] · [来源: [ariel-os.dev](https://ariel-os.dev/)]
+
+```text
+Ariel OS 架构:
+
+  Library OS 模式:
+  ├── 无独立内核 — OS 功能作为 crate 链接到应用
+  ├── 单地址空间 — 应用与 OS 共享地址空间
+  ├── 编译时配置 — 只包含需要的 OS 功能
+  └── 极小内存占用 — 适合资源受限的 IoT 设备
+
+  安全特性:
+  ├── 内存安全（Rust 所有权）
+  ├── 能力安全（Capability-based security）
+  ├── 网络栈安全（embassy-net + TLS）
+  └── 固件更新安全（secure boot + signed updates）
+```
+
+| 特性 | Ariel OS | Tock | Embassy |
+|:---|:---|:---|:---|
+| **架构** | Library OS | 微内核 | 异步运行时 |
+| **内存占用** | 极小 (~KB) | 小 (~10KB) | 小 (~KB) |
+| **安全模型** | 能力安全 + 类型安全 | 能力安全 | 类型安全 |
+| **网络** | embassy-net | 自定义栈 | embassy-net |
+| **适用场景** | 安全 IoT 终端 | 学术研究/安全关键 | 通用嵌入式 |
+
+> **Ariel OS 洞察**: Library OS 是嵌入式 Rust 的**新兴范式**——将 OS 的抽象成本降至最低，同时保留 Rust 的内存安全保证。
 
 ---
 

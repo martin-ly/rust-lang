@@ -58,6 +58,55 @@ fn main() {
 > [来源: [Rust Learning Path](https://www.rust-lang.org/learn)] ·
 > [来源: Bloom Taxonomy AI 2026 Revision, educational-data-mining.org]
 
+---
+
+## Augmented Cognition Framework (ACF) 2026 集成
+
+> **来源**: [Revising Bloom's Taxonomy for Dual-Mode Cognition in Human-AI Systems](https://arxiv.org/abs/2602.00697) (Ayodele et al., 2026) · [AI-PACE Framework](https://arxiv.org/html/2602.10527v2)
+
+### 双模式认知结构
+
+ACF 提出：在 AI 深度嵌入知识工作的时代，每个传统 Bloom 层级以两种模式运作：
+
+| 层级 | Individual 模式（独立认知） | Distributed 模式（AI 辅助认知） |
+|:---|:---|:---|
+| L1 记忆 | 独立背诵语法、手动查阅文档 | 使用 AI 快速检索 API、生成代码片段 |
+| L2 理解 | 独立解释所有权规则、手绘生命周期图 | 与 AI 对话澄清概念、让 AI 生成解释性图表 |
+| L3 应用 | 独立编写正确代码、手动调试 | AI 辅助代码补全、Copilot 生成骨架代码 |
+| L4 分析 | 独立分析编译器错误、手动性能剖析 | AI 辅助诊断错误根因、自动化性能分析 |
+| L5 评价 | 独立审查 unsafe 安全性、手动架构评估 | AI 辅助安全审计、自动化架构合规检查 |
+| L6 综合 | 独立设计系统架构、手写完整项目 | AI 辅助生成设计文档、协作式系统构建 |
+| L7 创造 | 独立发明新工具/语言 | 与 AI 协作探索设计空间、生成原型 |
+
+> **核心原则**: 有效的 Distributed 认知通常需要 Individual 认知基础作为前提。但**结构化脚手架**（scaffolding）可以在某些情况下逆转这一顺序。
+
+### L8: Orchestration（编排）— 第八层级
+
+ACF 引入的第七层级（在传统 L6-L7 之上），指定管理双模式切换的治理能力：
+
+| 维度 | Individual Orchestration | Distributed Orchestration |
+|:---|:---|:---|
+| **模式切换** | 自主决定何时使用 AI、何时独立思考 | 与 AI 协商工作分配、动态调整人机边界 |
+| **信任校准** | 基于个人经验判断 AI 输出的可靠性 | 建立系统化的 AI 输出验证流程 |
+| **伙伴关系优化** | 选择适合当前任务的 AI 工具 | 设计 AI 集成的工作流、评估长期协作效果 |
+| **元认知监控** | 识别自身的"流畅无能"（fluent incompetence） | 检测 AI 辅助下的能力退化信号 |
+
+> **fluent incompetence（流畅的无能）**: AI 时代最核心的教学风险。学习者在 AI 辅助下能够"流畅地"完成任务，但独立执行时暴露出根本性的能力缺失。ACF 通过将 Individual/Distributed 依赖关系**结构化显式化**来应对这一风险。
+
+### 本知识体系的 ACF 对齐
+
+本项目的 **MVP 40h 学习路径** 已隐含 ACF 的 Individual-first 设计：
+
+- Week 1 强调**独立解决编译错误**（不求助搜索引擎）
+- Week 2 才引入并发/异步等需要复杂推理的主题
+- 扩展路径明确区分"系统编程"（Individual-heavy）与"Web 后端"（Distributed-heavy）
+
+后续改进方向：
+
+1. 为每个概念文件标注 **Recommended Mode**（Individual/Distributed/Hybrid）
+2. 在练习题中增加 **"无 AI 辅助"** 和 **"AI 辅助"** 两种验证标准
+3. 在 L5+ 文件中增加 AI 辅助审查的边界条件说明
+
 ## 相关概念文件
 
 - [概念索引](./README.md) — 知识体系总览与导航

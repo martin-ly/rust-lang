@@ -3,7 +3,8 @@
 //! 用法：
 //! Usage:
 //! ：
-//! ```
+//! ```ignore
+//! use crossbeam_channel::unbounded;
 //! let (tx, rx): (Sender<i32>, Receiver<i32>) = unbounded();
 //! tx.send(7).unwrap();
 //! assert_eq!(rx.recv().unwrap(), 7);

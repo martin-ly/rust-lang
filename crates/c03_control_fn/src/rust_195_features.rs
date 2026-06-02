@@ -30,10 +30,9 @@ use std::ops::ControlFlow;
 /// **let 绑定** 合二为一。
 /// **let ** as 。
 /// ## 语法形式
-/// ##
-///     pattern if let Some(inner) = expr2 => { ... }
-///     //     ^^^^^^^^^^^^^^^^^^^^^^^^^^^ if let guard
-/// }
+/// ```text
+/// pattern if let Some(inner) = expr2 => { ... }
+/// //     ^^^^^^^^^^^^^^^^^^^^^^^^^^^ if let guard
 /// ```
 ///
 /// ## Wikipedia 概念对齐
@@ -358,11 +357,9 @@ impl ControlFlowConstExamples {
 
 /// # `cfg_select!` 宏
 /// ## 语法
-/// ## Syntax
-/// ##
-///     condition => { expression }
-///     _ => { fallback_expression }
-/// }
+/// ```text
+/// condition => { expression }
+/// _ => { fallback_expression }
 /// ```
 ///
 /// ## 与 `cfg!` 的区别

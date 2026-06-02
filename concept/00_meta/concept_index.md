@@ -114,6 +114,7 @@
 | **AFIT (Async Fn In Trait)** | [L3: 异步](../03_advanced/02_async.md) | L2 Trait、L7 演进 | 分析 | ← Trait + async → RPITIT |
 | **Algorithms & Competitive Programming** | [L6: 算法与竞赛编程](../06_ecosystem/29_algorithms_competitive_programming.md) | L1 所有权、L2 泛型、L3 并发 | 应用 | ← 所有权 + 泛型 → 算法验证 |
 | **Alias-XOR-Mutation (AXM)** | [L1: 借用](../01_foundation/02_borrowing.md) | L3 并发、L4 分离逻辑 | 理解 | ← 所有权 → 并发安全 |
+| **Ariel OS** | [L6: 嵌入式系统](../06_ecosystem/22_embedded_systems.md) | L3 Unsafe、L6 IoT | 分析 | ← Library OS → 安全 IoT
 | **Arc** | [L2: 内存管理](../02_intermediate/03_memory_management.md) | L3 并发、L1 所有权 | 应用 | ← Rc + Send/Sync → 跨线程共享 |
 | **Async/Await** | [L3: 异步](../03_advanced/02_async.md) | L2 泛型、L3 Pin、L4 形式化 | 分析 | ← Future + Pin → 运行时 |
 | **Atomic Memory Ordering** | [L3: 并发](../03_advanced/01_concurrency.md) | L1 借用、L4 内存模型 | 评价 | ← Send/Sync → 无锁数据结构 |
@@ -135,6 +136,8 @@
 | **Copy Trait** | [L1: 所有权](../01_foundation/01_ownership.md) | L2 Trait、L4 线性逻辑 | 理解 | ⊘ Move ≡ 线性逻辑 weakening |
 | **Concurrency** | [L3: 并发](../03_advanced/01_concurrency.md) | L1 借用、L2 Send/Sync、L4 CSL | 分析 | ← 借用 + Send/Sync → 异步 |
 | **CSP (Communicating Sequential Processes)** | [L5: Rust vs Go](../05_comparative/02_rust_vs_go.md) | L3 并发、L5 范式矩阵 | 评价 | ⊘ 所有权并发 |
+| **Career Landscape** | [L0: 职业市场](./career_landscape.md) | L0 Bloom、L6 应用领域 | 知道 | ← 市场数据 → 职业决策 |
+| **Comprehensive Rust** | [L0: 课程映射](./comprehensive_rust_mapping.md) | L0 学习指南、L1-L3 | 知道 | ← Google 课程 → 本体系映射
 
 ### D [来源: 概念定义基于 Rust Reference / TRPL / 学术论文]
 
@@ -153,6 +156,8 @@
 | **Elision Rules** | [L1: 生命周期](../01_foundation/03_lifetimes.md) | L2 泛型、L4 区域类型 | 应用 | ← 生命周期标注 → 简化书写 |
 | **enum (Sum Type)** | [L1: 类型系统](../01_foundation/04_type_system.md) | L2 错误处理、L4 代数类型 | 理解 | ≡ 和类型 / 余积 (A + B) |
 | **Error Handling (Result/Option)** | [L2: 错误处理](../02_intermediate/04_error_handling.md) | L1 类型系统、L3 异步 | 应用 | ← Option/Result → ? 运算符 |
+| **Error Pedagogy** | [L0: 学习指南](./learning_guide.md) | L0 Bloom、L1-L3 | 应用 | ← 编译错误 → 概念学习 |
+| **embedded-hal-async** | [L6: 嵌入式系统](../06_ecosystem/22_embedded_systems.md) | L3 async、L6 Embassy | 应用 | ← 异步 trait → 嵌入式 I/O
 
 ### F [来源: 概念定义基于 Rust Reference / TRPL / 学术论文]
 
@@ -169,6 +174,7 @@
 |:---|:---|:---|:---|:---|
 | **GATs (Generic Associated Types)** | [L2: 泛型](../02_intermediate/02_generics.md) | L2 Trait、L4 类型论 | 评价 | ← 关联类型 + 泛型 → HKT |
 | **Generics** | [L2: 泛型](../02_intermediate/02_generics.md) | L1 类型系统、L4 类型论 | 应用 | ← 类型系统 → 单态化 |
+| **Gillian-Rust** | [L4: 操作语义](../04_formal/17_operational_semantics.md) | L4 RustBelt、L4 Miri | 评价 | ← 符号执行 + 分离逻辑 → 自动验证
 
 ### H
 
@@ -176,6 +182,7 @@
 |:---|:---|:---|:---|:---|
 | **HRTB (Higher-Ranked Trait Bounds)** | [L1: 生命周期](../01_foundation/03_lifetimes.md) | L2 Trait、L4 类型论 | 评价 | ← 生命周期 + 泛型 ≡ ∀<'a> |
 | **HM Type Inference** | [L4: 类型论](../04_formal/02_type_theory.md) | L1 类型系统、L2 泛型 | 分析 | → 类型自动推导 |
+| **hax** | [L6: 形式化验证](../06_ecosystem/47_formal_verification_tools.md) | L4 形式化、L6 密码学 | 分析 | ← Rust → F*/Rocq 翻译 → 验证
 
 ### I
 
@@ -189,7 +196,8 @@
 
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
-| **Kani (Verifier)** | [L4: RustBelt](../04_formal/04_rustbelt.md) | L7 形式化方法 | 应用 | ← 模型检测 → unsafe 验证 |
+| **Kani (Verifier)** | [L6: 形式化验证](../06_ecosystem/47_formal_verification_tools.md) | L7 形式化方法 | 应用 | ← 模型检测 → unsafe 验证 |
+| **Kani verify-std** | [L6: 形式化验证](../06_ecosystem/47_formal_verification_tools.md) | L6 Kani、L1 标准库 | 分析 | ← 标准库验证 → 生态可信度
 
 ### L
 
@@ -293,6 +301,12 @@
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
 | **Variance** | [L1: 生命周期](../01_foundation/03_lifetimes.md) | L4 类型论 | 分析 | ← 子类型 → 生命周期安全 |
+
+### W
+
+| 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
+|:---|:---|:---|:---|:---|
+| **wasmcloud** | [L6: WebAssembly](../06_ecosystem/11_webassembly.md) | L6 WASM、L3 async actors | 应用 | ← Wasm 组件 → 分布式 actor 编排 |
 
 ### Z
 

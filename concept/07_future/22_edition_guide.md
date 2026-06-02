@@ -31,6 +31,7 @@
     - [2.1 Gen Blocks](#21-gen-blocks)
     - [2.2 Async Closures](#22-async-closures)
     - [2.3 Lifetime 捕获](#23-lifetime-捕获)
+    - [2.4 `if let` 临时作用域收窄](#24-if-let-临时作用域收窄)
   - [三、新特性矩阵](#三新特性矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
@@ -277,6 +278,40 @@ fn foo<'a, 'b>(x: &'a str, y: &'b str) -> impl Display + use<'a> {
 
 > **Lifetime 捕获洞察**: **精确的 lifetime captures** 是 Rust **类型系统的精细化**——它减少了过度保守的借用检查拒绝。
 > [来源: [impl Trait Lifetime Capture](https://rust-lang.github.io/rfcs/3498-lifetime-capture-of-impl-trait.html)]
+
+---
+
+### 2.4 `if let` 临时作用域收窄
+
+> **RFC**: [Rust Edition Guide — Temporary Scope](https://doc.rust-lang.org/edition-guide/rust-2024/temporary-if-let-scope.html)
+
+```rust,ignore
+// Edition 2021: 临时值的生命周期延伸到整个语句
+if let Some(x) = get_string().as_ref() {
+    // get_string() 的返回值在这里仍然存活
+    println!("{}", x);
+} // get_string() 的返回值在这里才 drop
+
+// Edition 2024: 临时值在 `if let` 条件结束时立即 drop
+if let Some(x) = get_string().as_ref() {
+    // x 指向的临时值已经在条件结束时 drop！
+    // println!("{}", x); // ❌ 编译错误: borrow of dropped temporary
+}
+
+fn get_string() -> String { String::from("hello") }
+```
+
+> **为什么改变**: 2021 Edition 的临时作用域规则（将临时值的生命周期延伸到整个 `let` 语句）在某些情况下允许悬垂引用通过编译。2024 Edition 收窄了 `if let` 和 `while let` 中临时值的作用域，使其在条件表达式结束时立即释放。
+>
+> **迁移影响**: 极少数代码会因此无法编译——通常是依赖了临时值意外长寿的代码。`cargo fix --edition` 可以自动将受影响的代码重构为显式绑定：
+>
+> ```rust
+> // 自动迁移后的代码:
+> let temp = get_string();
+> if let Some(x) = temp.as_ref() {
+>     println!("{}", x);
+> }
+> ```
 
 ---
 

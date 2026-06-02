@@ -149,6 +149,7 @@ impl AsyncFnTraitExamples {
 
 /// # Async Closures 的限制
 /// `AsyncFn` trait 目前不是 dyn-compatible，因此不能构造 `Box<dyn AsyncFn(...)>`。
+    /// ```text
 /// // 错误：AsyncFn 不是 dyn-compatible
 /// fn make_dyn() -> Box<dyn AsyncFn(i32) -> bool> {
 ///     Box::new(async |x| x > 0)

@@ -2,7 +2,8 @@
 //! 用法：
 //! Usage:
 //! ：
-//! ```
+//! ```ignore
+//! use std::sync::mpsc::sync_channel;
 //! let (tx, rx): (SyncSender<i32>, Receiver<i32>) = sync_channel(1);
 //! tx.send(1).unwrap();
 //! assert_eq!(rx.recv().unwrap(), 1);

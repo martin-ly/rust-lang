@@ -20,7 +20,9 @@
 > [Verus — SMT-based Verifier](https://github.com/verus-lang/verus) ·
 > [Flux — Refinement Types](https://github.com/liquid-rust/flux) ·
 > [Aeneas — Rust Verification](https://github.com/AeneasVerif/aeneas) ·
-> [RefinedRust — Iris-based](https://gitlab.mpi-sws.org/lgaeher/refinedrust)
+> [RefinedRust — Iris-based](https://gitlab.mpi-sws.org/lgaeher/refinedrust) ·
+> [hax — Cryspen/Inria](https://github.com/hacspec/hax) ·
+> [Kani verify-std](https://github.com/model-checking/verify-std-rfc)
 
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
 
@@ -50,6 +52,8 @@
   - [七、Rust 形式化验证的前沿](#七rust-形式化验证的前沿)
     - [7.1 RefinedRust：Iris 分离逻辑](#71-refinedrustiris-分离逻辑)
     - [7.2 RustBelt 验证框架](#72-rustbelt-验证框架)
+    - [7.3 hax：翻译到 F\* 和 Rocq 的验证工具链](#73-hax翻译到-f-和-rocq-的验证工具链)
+    - [7.4 Kani verify-std：标准库验证计划](#74-kani-verify-std标准库验证计划)
   - [八、反命题与边界](#八反命题与边界)
     - [8.1 反命题树](#81-反命题树)
     - [8.2 边界极限](#82-边界极限)
@@ -612,6 +616,46 @@ Theorem (RustBelt): 对于任何通过 Rust 借用检查器的程序 P，
 | **RefinedRust** | 用户代码的 Iris 验证 | 研究中（OOPSLA 2024）|
 
 > **来源**: [RustBelt Project](https://plv.mpi-sws.org/rustbelt/) · [RustBelt Logical Relations](https://plv.mpi-sws.org/rustbelt/18/07/types-as-propositions.html) · [Iris Tutorial](https://iris-project.org/tutorial-pdfs/iris-lecture-notes.pdf)
+
+### 7.3 hax：翻译到 F* 和 Rocq 的验证工具链
+
+> **[hax](https://github.com/hacspec/hax)** 是由 Inria 和 Cryspen 开发的开源工具链，将 Rust 程序翻译到 **F/***（用于程序验证）和 **Rocq/Coq**（用于形式化证明）等证明助手后端。hax 是 [hacspec](https://hacspec.org/) 生态的扩展，专注于将 Rust 代码提取为可验证的规范语言。
+> [来源: [hax GitHub](https://github.com/hacspec/hax)] · [来源: [Cryspen hax Blog](https://cybersecurity-news.com/hax-rust-verification/)]
+
+```text
+hax 验证流水线:
+
+Rust 源码 (safe subset)
+   │
+   ▼ (hax 提取器)
+F* / Rocq 规范
+   │
+   ▼ (证明助手验证)
+机器可检查的保证
+
+特点:
+  · 支持 safe Rust 核心子集的自动提取
+  · 与 hacspec 集成：可验证的密码学规范
+  · 生成 F* 代码用于功能正确性验证
+  · 生成 Rocq 代码用于深层形式化证明
+  · 活跃开发中（2024-2025）
+```
+
+> **与 Kani 的对比**: hax 面向**演绎验证**（需要写规范），Kani 面向**有界模型检验**（自动探索路径）。hax 更适合密码学协议的规范验证，Kani 更适合通用代码的 bug 检测。
+
+### 7.4 Kani verify-std：标准库验证计划
+
+> **Kani verify-std** 是 AWS 于 2024 年启动的社区倡议，目标是用 Kani 有界模型检验器**系统性地验证 Rust 标准库**的核心模块。这是 Rust 生态中首个大规模的标准库验证努力。
+> [来源: [VSTTE 2024 Invited Talk](https://www.soundandcomplete.org/vstte2024/vstte2024-invited.pdf)] · [来源: [Kani verify-std RFC](https://github.com/model-checking/verify-std-rfc)]
+
+| 验证目标 | 当前状态 | 挑战 |
+|:---|:---|:---|
+| `core::ptr` | 进行中 | 原始指针的别名模型 |
+| `core::slice` | 进行中 | 边界条件的完整性 |
+| `alloc::vec` | 计划中 | Vec 的容量管理不变式 |
+| `std::collections` | 计划中 | HashMap 的哈希碰撞处理 |
+
+> **战略意义**: 标准库验证是整个 Rust 验证生态的**根基**——第三方 crate 的安全保证依赖于标准库的正确性。verify-std 的成功将显著提升整个生态的可信度。
 
 ---
 

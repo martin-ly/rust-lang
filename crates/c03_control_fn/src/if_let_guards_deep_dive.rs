@@ -27,10 +27,9 @@
 /// # `if let` Guards
 /// # `if let` Guards 语法深度Parse
 /// ## 语法形式
-/// ##
-///     pattern if let P = expr2 && condition => { ... }
-///     //     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ if let guard
-/// }
+/// ```text
+/// pattern if let P = expr2 && condition => { ... }
+/// //     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ if let guard
 /// ```
 ///
 /// ## 核心规则

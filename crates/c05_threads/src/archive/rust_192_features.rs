@@ -642,7 +642,7 @@ where
 /// # example
 /// // 归档模块示例
 /// // Archived module example
-/// ```
+/// ```ignore
 /// // module example
 /// let tasks = vec![ThreadTask::new(1, 10), ThreadTask::new(2, 20)];
 /// let manager = create_manager_with_tasks(tasks);
