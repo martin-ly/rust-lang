@@ -1354,7 +1354,7 @@ graph TD
 
 > **[来源: Rust in Production; Rust Foundation; Ferrous Systems; AWS/Google/Microsoft Rust Blogs]** 应用领域分析基于工业报告和大型企业的 Rust 采用案例。✅
 
-> **[来源: Embassy Book; Rust for Linux; Aya Docs; QUIC RFC 9000; wgpu Docs]** 各方向的深入分析参考了对应领域的权威文档和 RFC。✅
+> **[来源: Embassy Book; Rust for Linux; Aya Docs; QUIC [RFC 9000](https://rust-lang.github.io/rfcs/9000.html); wgpu Docs]** 各方向的深入分析参考了对应领域的权威文档和 RFC。✅
 
 ---
 
@@ -1367,7 +1367,7 @@ graph TD
 
 > **[来源: Rust in Production; Rust Foundation; Ferrous Systems; AWS/Google/Microsoft Rust Blogs]** 应用领域分析基于工业报告和大型企业的 Rust 采用案例。✅
 
-> **[来源: Embassy Book; Rust for Linux; Aya Docs; QUIC RFC 9000; wgpu Docs; egui Docs]** 各方向的深入分析参考了对应领域的权威文档和 RFC。✅
+> **[来源: Embassy Book; Rust for Linux; Aya Docs; QUIC [RFC 9000](https://rust-lang.github.io/rfcs/9000.html); wgpu Docs; egui Docs]** 各方向的深入分析参考了对应领域的权威文档和 RFC。✅
 
 > **[来源: Rust Blockchain Report 2024; Solana Docs; Polkadot Substrate Docs; Near Protocol Docs]** 区块链方向基于公开协议文档和社区报告。✅
 ---

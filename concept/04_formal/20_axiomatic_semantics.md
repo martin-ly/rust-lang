@@ -316,7 +316,7 @@ fn check_invariants() {
 }
 ```
 
-> **形式化表达**: 借用检查器通过**区域约束系统**（Region Constraint System）在编译期验证这三个不变式。NLL（Non-Lexical Lifetimes）将生命周期从词法作用域精确到**使用点**（use-site），使得不变式的验证更加精确。Polonius 进一步将区域约束转化为 Datalog 规则，实现 borrow check 的声明式表达。[来源: [Rust RFC 2094 — NLL](https://rust-lang.github.io/rfcs/2094-nll.html)] · [来源: [Polonius — rust-lang/polonius](https://github.com/rust-lang/polonius)] · [来源: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/items/lifetimes.html)]
+> **形式化表达**: 借用检查器通过**区域约束系统**（Region Constraint System）在编译期验证这三个不变式。NLL（Non-Lexical Lifetimes）将生命周期从词法作用域精确到**使用点**（use-site），使得不变式的验证更加精确。Polonius 进一步将区域约束转化为 Datalog 规则，实现 borrow check 的声明式表达。[来源: [Rust [RFC 2094](https://rust-lang.github.io/rfcs/2094.html) — NLL](https://rust-lang.github.io/rfcs/2094-nll.html)] · [来源: [Polonius — rust-lang/polonius](https://github.com/rust-lang/polonius)] · [来源: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/items/lifetimes.html)]
 
 ### 3.4 unsafe 块的公理边界
 >
@@ -677,7 +677,7 @@ Prusti 将 Rust 翻译为 Viper 中间语言，使用分离逻辑自动验证内
 |:---|:---|:---|:---|:---|
 | **T-120: 霍尔三元组可判定性** | 程序无循环/无递归 | `{P}C{Q}` 可在多项式时间内验证 | `const fn` 的编译期求值 | Hoare 1969 · Cook 1978 |
 | **T-121: wp 计算完备性** | 循环不变式存在 | `wp(C, Q)` 可机械计算 | Creusot 的验证条件生成 | Dijkstra 1975 · Winskel 1993 §7 |
-| **T-122: 所有权不变式可验证性** | 程序为 safe Rust | 借用规则在编译期自动验证 | Rust 编译器借用检查 | RustBelt 2018 · RFC 2094 |
+| **T-122: 所有权不变式可验证性** | 程序为 safe Rust | 借用规则在编译期自动验证 | Rust 编译器借用检查 | RustBelt 2018 · [RFC 2094](https://rust-lang.github.io/rfcs/2094.html) |
 | **T-123: 分离逻辑框架规则** | 命令只访问局部资源 | 未访问资源自动保持 | `&mut T` 的独占性保证 | Reynolds 2002 · Iris |
 | **T-124: unsafe 块公理不可判定** | 允许裸指针别名 | 标准 Hoare 逻辑失效 | `unsafe` 需人工公理 | Rustonomicon · RustBelt |
 | **T-125: 循环不变式自动推断不完备** | Rice 定理 | 存在循环其不变式不可自动推断 | Prusti 对复杂循环的失效 | Rice 1953 · Cousot 1977 |

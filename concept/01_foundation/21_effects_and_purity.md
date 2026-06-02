@@ -532,7 +532,7 @@ fn main() {
 
 > [来源: [Haskell — IO Monad](https://www.haskell.org/tutorial/io.html)]
 
-> [来源: [Rust RFC 2593 — Effects](https://rust-lang.github.io/rfcs/)]
+> [来源: [Rust [RFC 2593](https://rust-lang.github.io/rfcs/2593.html) — Effects](https://rust-lang.github.io/rfcs/)]
 
 > [来源: [Rust Reference — Const Evaluation](https://doc.rust-lang.org/reference/const_eval.html)]
 
@@ -553,6 +553,8 @@ fn main() {
 | 副作用与纯度：从引用透明到 Rust 的所有权效果 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
 | 副作用与纯度：从引用透明到 Rust 的所有权效果 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
+> 副作用可追踪 ⟸ 纯函数标记 ⟸ 效果系统
+> 编译期优化 ⟸ const 求值 ⟸ 无副作用保证
 > **过渡**: 掌握 副作用与纯度：从引用透明到 Rust 的所有权效果 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 副作用与纯度：从引用透明到 Rust 的所有权效果 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。

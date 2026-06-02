@@ -527,7 +527,7 @@ NLL 的实现:
   - 检查借用在整个 live range 内不冲突
 ```
 
-> **来源**: [Rust RFC 2094 — NLL](https://rust-lang.github.io/rfcs/2094-nll.html) · [Niko Matsakis — NLL](https://smallcultfollowing.com/babysteps/blog/2016/04/27/non-lexical-lifetimes-introduction/)
+> **来源**: [Rust [RFC 2094](https://rust-lang.github.io/rfcs/2094.html) — NLL](<https://rust-lang.github.io/rfcs/2094-nll.html>) · [Niko Matsakis — NLL](https://smallcultfollowing.com/babysteps/blog/2016/04/27/non-lexical-lifetimes-introduction/)
 
 ### 7.2 Polonius：基于逻辑的借用检查
 >

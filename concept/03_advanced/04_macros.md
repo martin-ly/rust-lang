@@ -387,7 +387,7 @@ graph TD
 
 宏系统与类型系统之间存在严格的**阶段隔离**：宏展开在类型检查之前完成，这决定了宏无法执行任何需要类型信息的操作。
 
-**不可跨越的边界**（Rust Reference: Macros · RFC 1584）：
+**不可跨越的边界**（Rust Reference: Macros · [RFC 1584](https://rust-lang.github.io/rfcs/1584.html)）：
 
 1. **宏无法做类型推断** — 过程宏接收未类型化的 `TokenStream`；`macro_rules!` 的 `:expr` / `:ty` 只匹配语法形态，不携带语义类型。
 2. **宏无法做重载** — 宏匹配基于语法模式（token 结构），无法像 C++ 模板那样根据类型特化。
@@ -493,7 +493,7 @@ graph TD
 | 编号 | 前提 ⟹ 结论 | 类型 | 依赖定理 | 失效条件 | 典型场景 |
 |:---|:---|:---|:---|:---|:---|
 | **L1** | 声明宏 hygienic ⟹ 避免标识符冲突 | 语法保证 | Kohlbecker 1986 | 过程宏手动构造标识符（`format_ident!`） | `macro_rules!` 局部变量与外部同名变量共存 |
-| **L2** | 过程宏操作 TokenStream ⟹ 编译期元编程 | 阶段隔离 | RFC 1566 | 宏 panic 导致编译中断 | `#[derive(Debug)]` 自动生成 impl |
+| **L2** | 过程宏操作 TokenStream ⟹ 编译期元编程 | 阶段隔离 | [RFC 1566](https://rust-lang.github.io/rfcs/1566.html) | 宏 panic 导致编译中断 | `#[derive(Debug)]` 自动生成 impl |
 | **L3** | 宏重复模式 `$($x:expr),*` ⟹ 零开销抽象 | 语法生成 | TLBORM 模式语义 | 重复模式与尾随逗号不匹配 | `vec![1, 2, 3]` 展开为数组初始化 |
 | **L4** | Token 操作 vs 文本替换 ⟹ 类型安全增强 | 对比定理 | L1 + L2 | C 风格预处理器绕过 Token 层 | Rust 宏避免 C `#define` 优先级陷阱 |
 | **T1** | 宏展开在语义分析前 ⟹ 语法级变换 | 编译阶段 | Rust Reference | 宏依赖类型信息做分支（不可行） | 过程宏无法根据字段类型选择生成逻辑 |
@@ -1240,7 +1240,7 @@ fn main() {
 
 > **[Rust Reference: const fn]** `const fn` 允许在编译期执行计算，生成编译期常量。许多过去必须用 `macro_rules!` 实现的场景（如数组长度计算、类型大小断言）现在可以用纯 Rust 函数完成。✅ 已验证
 
-> **[Rust RFC 2000: const generics]** const generics 允许泛型参数为编译期常量值（如 `Array<T, N>`），消除了对宏生成多态类型的需求。✅ 已验证
+> **[Rust [RFC 2000](https://rust-lang.github.io/rfcs/2000.html): const generics]** const generics 允许泛型参数为编译期常量值（如 `Array<T, N>`），消除了对宏生成多态类型的需求。✅ 已验证
 
 **`const fn` 替代 `macro_rules!` 的场景**
 
@@ -2201,6 +2201,9 @@ fn main() {}
 
 > **修正**: `macro_rules!` 的 **hygiene**（卫生）保护宏生成的标识符不与调用者冲突，但**不保护**调用者传入的标识符。`define_struct!(MyStruct)` 两次传入 `MyStruct` → 重复定义。这与宏内部生成的 `struct Internal`（自动 hygiene 保护）不同。解决方案：1) 过程宏（`proc_macro`）可生成唯一标识符（`__MyStruct_12345`）；2) 使用 `const _: () = { ... }` 匿名作用域隔离；3) 文档说明宏的使用限制（不可重复调用同一标识符）。这与 C 的宏（无 hygiene，传入标识符直接替换，易冲突）或 Scheme 的 hygienic macro（基于语法对象，传入标识符也有 hygiene）不同——Rust 的 `macro_rules!` hygiene 是单向的（保护宏内部，不保护外部传入）。[来源: [Rust Reference — Hygiene](https://doc.rust-lang.org/reference/macros-by-example.html#hygiene)] · [来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)]
 
+> 过程宏健壮 ⟸ TokenStream 解析 ⟸ Span 保留
+> 编译期代码生成 ⟸ derive 宏 ⟸ 元数据结构
+>
 ## 参考来源
 
 > [来源: [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)]

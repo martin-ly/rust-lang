@@ -731,6 +731,8 @@ fn compute_expensive_string() -> String { String::from("expensive") }
 | Panic 与 Abort：不可恢复错误的处理机制 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
 | Panic 与 Abort：不可恢复错误的处理机制 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
+> 程序不异常终止 ⟸ panic 路径受控 ⟸ unwind/abort 选择
+> 安全性保证 ⟸ catch_unwind 隔离 ⟸ 线程边界
 > **过渡**: 掌握 Panic 与 Abort：不可恢复错误的处理机制 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 Panic 与 Abort：不可恢复错误的处理机制 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。

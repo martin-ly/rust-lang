@@ -190,7 +190,7 @@ Step 6: "什么时候会阻塞？"
 >
 > **[RFC 2394]** async/await 语法糖的设计基于生成器（generator）状态机转换，语义等价于显式 Future 组合。 ✅ 已验证
 
-> **[RFC 2592: Futures 0.3]** The `Future` trait and `async/await` syntax were stabilized based on RFC 2394, with the `Pin` type introduced in RFC 2349 to support self-referential async state machines. ✅ 已验证
+> **[RFC 2592: Futures 0.3]** The `Future` trait and `async/await` syntax were stabilized based on [RFC 2394](https://rust-lang.github.io/rfcs/2394.html), with the `Pin` type introduced in [RFC 2349](https://rust-lang.github.io/rfcs/2349.html) to support self-referential async state machines. ✅ 已验证
 
 ### 1.3 形式化定义
 >
@@ -362,7 +362,7 @@ Pin<&mut Self> 的内存布局约束:
 
 ### 3.1b 状态机操作语义（Operational Semantics）
 
-> **[来源: Rust Compiler: rustc_mir_transform::async_lowering; RFC 2394 §3.2; without.boats blog: Pinning in Rust Futures]**
+> **[来源: Rust Compiler: rustc_mir_transform::async_lowering; [RFC 2394](https://rust-lang.github.io/rfcs/2394.html) §3.2; without.boats blog: Pinning in Rust Futures]**
 
 §3.1 展示了编译器变换的**结果**（enum 结构），本节补充变换的**形式化规则**——将 async fn 视为一个受控的、带挂起点的小步操作语义系统。
 
@@ -455,7 +455,7 @@ stateDiagram-v2
 > [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
 > [来源: [Rust Async Book]]
 
-> **思维表征说明**: `stateDiagram-v2` 是 Mermaid 专门用于状态机的语法，与 `graph TD` 流程图不同——它强调**状态**（节点）和**转移条件**（边标注），天然适合表达 Future 的 poll 状态机。每个状态对应编译器生成的 enum 变体，转移标注对应 poll 的返回值。 [来源: Mermaid stateDiagram 文档; RFC 2394 §3.2]
+> **思维表征说明**: `stateDiagram-v2` 是 Mermaid 专门用于状态机的语法，与 `graph TD` 流程图不同——它强调**状态**（节点）和**转移条件**（边标注），天然适合表达 Future 的 poll 状态机。每个状态对应编译器生成的 enum 变体，转移标注对应 poll 的返回值。 [来源: Mermaid stateDiagram 文档; [RFC 2394](https://rust-lang.github.io/rfcs/2394.html) §3.2]
 
 #### .await 的 CPS 变换规则
 
@@ -532,7 +532,7 @@ Pin<P<T>> 保证 T 在内存中不移动:
 
 ### 3.2b Pin 的 LTL 形式化（异步状态机语境）
 
-> **[来源: `04_formal/03_ownership_formal.md` §9.5; RFC 2349 §3; RustBelt Pin 证明; Vardi & Wolper 1986 — LTL]**
+> **[来源: `04_formal/03_ownership_formal.md` §9.5; [RFC 2349](https://rust-lang.github.io/rfcs/2349.html) §3; RustBelt Pin 证明; Vardi & Wolper 1986 — LTL]**
 
 §3.2 给出了 Pin 的直觉定义（"保证不移动"）。本节将其形式化为**线性时序逻辑（LTL）**命题，使其在 async 状态机的挂起-恢复周期中可验证。
 
@@ -1784,7 +1784,7 @@ where
 }
 ```
 
-> **[来源: futures-rs: Sink trait 文档]** `Sink` 的设计灵感来自 `Iterator` 的逆过程，但增加了异步缓冲和刷新阶段。`send` 是 `poll_ready` + `start_send` + `poll_flush` 的组合子，确保每次发送后数据不滞留缓冲。[来源: RFC 2394 附录: Async I/O 抽象]
+> **[来源: futures-rs: Sink trait 文档]** `Sink` 的设计灵感来自 `Iterator` 的逆过程，但增加了异步缓冲和刷新阶段。`send` 是 `poll_ready` + `start_send` + `poll_flush` 的组合子，确保每次发送后数据不滞留缓冲。[来源: [RFC 2394](https://rust-lang.github.io/rfcs/2394.html) 附录: Async I/O 抽象]
 
 **`futures::stream` 与 `tokio_stream` 生态对比**
 
@@ -1993,7 +1993,7 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
                 └── 否 → impl Future（默认最优路径）
 ```
 
-> **[来源: Tokio 文档: Task spawning internals]** Tokio 的任务调度器在内部使用 `Pin<Box<dyn Future + Send + 'static>>` 存储任务，这是类型擦除的必要代价。但 Tokio 的 `spawn` API 接受 `impl Future`，仅在入队时进行一次 Box 包装，用户代码仍享受单态化优化。[来源: RFC 2592: futures 0.3 设计原则]
+> **[来源: Tokio 文档: Task spawning internals]** Tokio 的任务调度器在内部使用 `Pin<Box<dyn Future + Send + 'static>>` 存储任务，这是类型擦除的必要代价。但 Tokio 的 `spawn` API 接受 `impl Future`，仅在入队时进行一次 Box 包装，用户代码仍享受单态化优化。[来源: [RFC 2592](https://rust-lang.github.io/rfcs/2592.html): futures 0.3 设计原则]
 
 > **交叉链接**: 单态化机制见 [../02_intermediate/02_generics.md](../02_intermediate/02_generics.md) §4.5（泛型单态化与代码膨胀）；trait 对象的内存布局见 [../02_intermediate/01_traits.md](../02_intermediate/01_traits.md) §4.3（trait object 与 vtable）。
 
@@ -2549,7 +2549,7 @@ trait DataProvider<'a> {
 
 ---
 
-## 十二、`AsyncFn` Trait 家族：异步闭包的类型化（1.85 stable，RFC 3668）
+## 十二、`AsyncFn` Trait 家族：异步闭包的类型化（1.85 stable，[RFC 3668](https://rust-lang.github.io/rfcs/3668.html)）
 
 > [来源: [Rust Async Book]]
 > **稳定版本**: Rust 1.85 (stable) · **适用 Edition**: 所有 Edition（非 Edition-gated）

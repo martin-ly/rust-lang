@@ -424,7 +424,7 @@ graph TD
 **⬡ 顶事件：Rust 异步程序发生运行时安全违规（Pin 契约违反 / 自引用悬垂 / Future 状态损坏）**
 
 > **定义**: async 程序在运行时出现由于 Pin 不动性被破坏、跨 await 引用悬垂、或 Future 状态机被非法移动导致的安全问题。
-> [来源: Rust Reference — Pin; RFC 2349 — Pin]
+> [来源: Rust Reference — Pin; [RFC 2349](https://rust-lang.github.io/rfcs/2349.html) — Pin]
 
 ### 5.2 故障树 Mermaid
 

@@ -146,7 +146,7 @@ graph TD
 ```
 
 > **生态影响**: `gen` 块不会替代手动 `Iterator` 实现（性能关键场景仍需手动控制），但为**复杂迭代逻辑**提供了一种更直观的表达方式。
-> [来源: [Rust RFC 3513 — Motivation](https://github.com/rust-lang/rfcs/pull/3513)]
+> [来源: [Rust [RFC 3513](https://rust-lang.github.io/rfcs/3513.html) — Motivation](https://github.com/rust-lang/rfcs/pull/3513)]
 
 ---
 
@@ -278,7 +278,7 @@ graph LR
 ```
 
 > **最佳实践**: `gen` 适用于**无法或不宜使用现有组合子**的复杂迭代逻辑；简单场景继续使用 `.map`/`.filter` 等组合子以获得更好的性能和可读性。
-> [来源: [Rust RFC 3513 — Examples](https://github.com/rust-lang/rfcs/pull/3513)]
+> [来源: [Rust [RFC 3513](https://rust-lang.github.io/rfcs/3513.html) — Examples](https://github.com/rust-lang/rfcs/pull/3513)]
 
 ---
 
@@ -335,7 +335,7 @@ graph TD
 ```
 
 > **边界要点**: gen block 的边界与 async fn 高度相似——两者共享状态机实现，因此面临相同的借用检查、Pin 和清理挑战。
-> [来源: [Rust RFC 3513 — Drawbacks](https://github.com/rust-lang/rfcs/pull/3513)]
+> [来源: [Rust [RFC 3513](https://rust-lang.github.io/rfcs/3513.html) — Drawbacks](https://github.com/rust-lang/rfcs/pull/3513)]
 
 ---
 
@@ -415,7 +415,7 @@ fn numbers() -> impl Iterator<Item = i32> {
 }
 ```
 
-> **修正**: `gen` 块（RFC 3513，实验性）是 Rust 的生成器语法糖，编译器将 `yield` 表达式转换为状态机，自动生成 `Iterator` 实现。`gen` 块的返回类型隐式为 `impl Iterator<Item = T>`，其中 `T` 是所有 `yield` 表达式的统一类型。类型不匹配时编译错误，与 `async` 块（所有 `await` 的 future 类型必须统一）类似。这与 Python 的生成器（`yield` 可返回任意类型，动态类型）或 JavaScript 的生成器（同样动态）不同——Rust 保持静态类型安全，生成器的 `Item` 类型在编译期确定。`gen` 块的设计目标：消除手写 `Iterator` 实现的样板代码（`next` 方法 + 手动状态机），同时保持零成本抽象。[来源: [Rust RFC 3513](https://rust-lang.github.io/rfcs/3513-gen-blocks.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: `gen` 块（[RFC 3513](https://rust-lang.github.io/rfcs/3513.html)，实验性）是 Rust 的生成器语法糖，编译器将 `yield` 表达式转换为状态机，自动生成 `Iterator` 实现。`gen` 块的返回类型隐式为 `impl Iterator<Item = T>`，其中 `T` 是所有 `yield` 表达式的统一类型。类型不匹配时编译错误，与 `async` 块（所有 `await` 的 future 类型必须统一）类似。这与 Python 的生成器（`yield` 可返回任意类型，动态类型）或 JavaScript 的生成器（同样动态）不同——Rust 保持静态类型安全，生成器的 `Item` 类型在编译期确定。`gen` 块的设计目标：消除手写 `Iterator` 实现的样板代码（`next` 方法 + 手动状态机），同时保持零成本抽象。[来源: [Rust RFC 3513](https://rust-lang.github.io/rfcs/3513-gen-blocks.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.2 边界测试：`gen` 块与借用生命周期的冲突（编译错误）
 

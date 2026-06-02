@@ -433,7 +433,7 @@
 | P17-T11 | 新增 `06_ecosystem/13_logging_observability.md` | tracing、log、metrics、OpenTelemetry、分布式追踪 | ✅ |
 | P17-T12 | 新增 `02_intermediate/10_module_system.md` | Crate/Module/Package、可见性、use 声明、Workspace | ✅ |
 | P17-T13 | 新增 `04_formal/07_separation_logic.md` | * 算子、帧规则、CSL、Iris、RustBelt 应用映射 | ✅ |
-| P17-T14 | 新增 `07_future/18_async_drop_preview.md` | 异步资源销毁、RFC 3308、Pin 交互、workaround 模式 | ✅ |
+| P17-T14 | 新增 `07_future/18_async_drop_preview.md` | 异步资源销毁、[RFC 3308](https://rust-lang.github.io/rfcs/3308.html)、Pin 交互、workaround 模式 | ✅ |
 | P17-T15 | 新增 `05_comparative/07_rust_vs_python.md` | 静态 vs 动态类型、所有权 vs GC、 fearless vs GIL | ✅ |
 | P17-T16 | 新增 `03_advanced/07_proc_macro.md` | Derive/Attribute/Function-like、TokenStream、syn/quote | ✅ |
 | P17-T17 | 新增 `06_ecosystem/14_documentation.md` | rustdoc、文档测试、API 规范、mdBook、docs.rs | ✅ |

@@ -1181,8 +1181,8 @@ graph TD
 | 参数性定理 | Wadler 1989 · Theorems for Free! | ✅ 学术经典 |
 | 内存模型 | C11 Standard §5.1.2.4 · Rustonomicon | ✅ 标准/官方 |
 | Effects System | Rust Effects Initiative · Yoshua Wuyts 2024 | ✅ 研究阶段 |
-| Const Trait / Generic Const Items | RFC 3762 · rust#113521 | ✅ 官方提案 |
-| Strict Provenance | Rust Reference · RFC 4018 | ✅ 官方文档 |
+| Const Trait / Generic Const Items | [RFC 3762](https://rust-lang.github.io/rfcs/3762.html) · rust#113521 | ✅ 官方提案 |
+| Strict Provenance | Rust Reference · [RFC 4018](https://rust-lang.github.io/rfcs/4018.html) | ✅ 官方文档 |
 | 图灵完备类型系统 | Leffler 2017 · Rust Type System is Turing-Complete | ✅ 技术证明 |
 | 观察等价性 | Reynolds 1983 · relational parametricity | ✅ 学术经典 |
 

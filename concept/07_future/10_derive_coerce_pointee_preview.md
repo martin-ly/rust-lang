@@ -188,7 +188,7 @@ struct SmartPtr<T: ?Sized> {
 | 其他字段与 T 大小无关 | metadata、计数器等字段不能依赖 T: Sized | 编译错误：布局依赖无法自动推导 |
 
 > **边界说明**: 这些约束确保强制转换的**唯一性**——给定源类型和目标类型，转换后的布局是确定的。
-> [来源: [Rust RFC 3621 — 约束章节](https://github.com/rust-lang/rfcs/pull/3621)]
+> [来源: [Rust [RFC 3621](https://rust-lang.github.io/rfcs/3621.html) — 约束章节](https://github.com/rust-lang/rfcs/pull/3621)]
 
 ---
 
@@ -243,7 +243,7 @@ graph LR
 ```
 
 > **安全核心论点**: `CoercePointee` 派生将**智能指针类型强制**这一机械性、易错的 unsafe 操作转化为编译器管理的自动代码生成，显著降低自定义智能指针的安全门槛。
-> [来源: [Rust RFC 3621 — Motivation](https://github.com/rust-lang/rfcs/pull/3621)]
+> [来源: [Rust [RFC 3621](https://rust-lang.github.io/rfcs/3621.html) — Motivation](https://github.com/rust-lang/rfcs/pull/3621)]
 
 ---
 
@@ -294,7 +294,7 @@ graph TD
 ```
 
 > **边界要点**: `CoercePointee` 是**保守的正确性方案**——只在编译器能证明安全的情况下自动生成代码。不满足约束的场景仍需手动 unsafe 实现，这是设计上的有意限制。
-> [来源: [Rust RFC 3621 — Drawbacks](https://github.com/rust-lang/rfcs/pull/3621)]
+> [来源: [Rust [RFC 3621](https://rust-lang.github.io/rfcs/3621.html) — Drawbacks](https://github.com/rust-lang/rfcs/pull/3621)]
 
 ---
 
@@ -302,7 +302,7 @@ graph TD
 
 | 里程碑 | 状态 | 预计时间 | 说明 |
 |:---|:---:|:---|:---|
-| RFC 3621 接受 | ✅ | 2024 | 派生宏方案设计完成 |
+| [RFC 3621](https://rust-lang.github.io/rfcs/3621.html) 接受 | ✅ | 2024 | 派生宏方案设计完成 |
 | 编译器实现 | ✅ nightly | 2025 | `#[derive(CoercePointee)]` 可用 |
 | 稳定化 | 🟡 | 2026-2027 | 等待实际使用反馈 |
 | 标准库采用 | ⬜ | 2027+ | Box/Rc/Arc 内部使用 |
@@ -368,7 +368,7 @@ fn main() {
 }
 ```
 
-> **修正**: `CoercePointee`（RFC 3621，Rust 1.95+）允许自定义智能指针参与**强制点转换**（unsized coercion），如 `MyBox<String>` → `MyBox<str>`（通过 `Deref`）。
+> **修正**: `CoercePointee`（[RFC 3621](https://rust-lang.github.io/rfcs/3621.html)，Rust 1.95+）允许自定义智能指针参与**强制点转换**（unsized coercion），如 `MyBox<String>` → `MyBox<str>`（通过 `Deref`）。
 > 关键约束：智能指针类型必须是 `#[repr(transparent)]`——保证其内存布局与内部指针完全相同。
 > 这是编译器进行强制转换的前提：转换只需修改类型标记，无需调整内存。
 > `Box<T>`、`Rc<T>`、`Arc<T>` 都满足此约束。非透明包装（如包含额外字段的 struct）不能派生 `CoercePointee`，因为强制转换会改变字段布局。

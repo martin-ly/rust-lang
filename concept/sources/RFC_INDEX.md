@@ -15,70 +15,70 @@
 
 | RFC | 标题 | 状态 | 稳定版本 | 概念文件 |
 | :--- | :--- | :---: | :---: | :--- |
-| RFC 0243 | Trait-based exception handling (`Try` trait) | ✅ | 1.26 | `04_error_handling.md` |
-| RFC 1210 | Specialization | 🚧 | nightly | `01_traits.md` §5.7 |
-| RFC 1598 | Generic Associated Types (GATs) | ✅ | 1.65 | `01_traits.md` §4.6 |
-| RFC 2000 | Const Generics | ✅ | 1.51 | `02_generics.md` §5.7 |
-| RFC 2086 | Allow `if let` guards in match arms | ✅ | 1.95 | `05_rust_version_tracking.md` §2.2 |
-| RFC 2094 | Non-lexical lifetimes (NLL) | ✅ | 1.31 | `03_lifetimes.md` §十二 |
-| RFC 2349 | Pin API | ✅ | 1.33 | `06_pin_unpin.md` |
-| RFC 2394 | async/await | ✅ | 1.39 | `02_async.md` |
-| RFC 2497 | if-let chains | ✅ | 1.88 (2024Ed) | `02_borrowing.md` §九 |
-| RFC 2582 | `&raw` operators | ✅ | 1.82 | `05_rust_version_tracking.md` §2.1 |
-| RFC 2585 | `unsafe_op_in_unsafe_fn` lint | ✅ | 1.52 | `03_unsafe.md` §7.3 |
-| RFC 2930 | Readiness and waking for async I/O | ✅ | 1.36 | `02_async.md` §3.4 |
-| RFC 3191 | Destructuring assignment | ✅ | 1.59 | — |
-| RFC 3243 | Collapse `impl Trait` in associated types | 🚧 | — | `01_traits.md` |
-| RFC 3382 | `const` trait bounds | 🚧 | nightly | `01_traits.md` §4.7 |
+| [RFC 0243](https://rust-lang.github.io/rfcs/0243.html) | Trait-based exception handling (`Try` trait) | ✅ | 1.26 | `04_error_handling.md` |
+| [RFC 1210](https://rust-lang.github.io/rfcs/1210.html) | Specialization | 🚧 | nightly | `01_traits.md` §5.7 |
+| [RFC 1598](https://rust-lang.github.io/rfcs/1598.html) | Generic Associated Types (GATs) | ✅ | 1.65 | `01_traits.md` §4.6 |
+| [RFC 2000](https://rust-lang.github.io/rfcs/2000.html) | Const Generics | ✅ | 1.51 | `02_generics.md` §5.7 |
+| [RFC 2086](https://rust-lang.github.io/rfcs/2086.html) | Allow `if let` guards in match arms | ✅ | 1.95 | `05_rust_version_tracking.md` §2.2 |
+| [RFC 2094](https://rust-lang.github.io/rfcs/2094.html) | Non-lexical lifetimes (NLL) | ✅ | 1.31 | `03_lifetimes.md` §十二 |
+| [RFC 2349](https://rust-lang.github.io/rfcs/2349.html) | Pin API | ✅ | 1.33 | `06_pin_unpin.md` |
+| [RFC 2394](https://rust-lang.github.io/rfcs/2394.html) | async/await | ✅ | 1.39 | `02_async.md` |
+| [RFC 2497](https://rust-lang.github.io/rfcs/2497.html) | if-let chains | ✅ | 1.88 (2024Ed) | `02_borrowing.md` §九 |
+| [RFC 2582](https://rust-lang.github.io/rfcs/2582.html) | `&raw` operators | ✅ | 1.82 | `05_rust_version_tracking.md` §2.1 |
+| [RFC 2585](https://rust-lang.github.io/rfcs/2585.html) | `unsafe_op_in_unsafe_fn` lint | ✅ | 1.52 | `03_unsafe.md` §7.3 |
+| [RFC 2930](https://rust-lang.github.io/rfcs/2930.html) | Readiness and waking for async I/O | ✅ | 1.36 | `02_async.md` §3.4 |
+| [RFC 3191](https://rust-lang.github.io/rfcs/3191.html) | Destructuring assignment | ✅ | 1.59 | — |
+| [RFC 3243](https://rust-lang.github.io/rfcs/3243.html) | Collapse `impl Trait` in associated types | 🚧 | — | `01_traits.md` |
+| [RFC 3382](https://rust-lang.github.io/rfcs/3382.html) | `const` trait bounds | 🚧 | nightly | `01_traits.md` §4.7 |
 
 ## 二、类型系统与泛型
 
 | RFC | 标题 | 状态 | 稳定版本 | 概念文件 |
 | :--- | :--- | :---: | :---: | :--- |
-| RFC 0192 | Associated items | ✅ | 1.0 | `01_traits.md` |
-| RFC 0445 | Allow overloading of `*` / `&` | ❌ | — | — |
-| RFC 0738 | Variadic generics | ❌ | — | — |
-| RFC 1023 | Rebalancing coherence / orphan rules | ✅ | 1.0 | `01_traits.md` §4.1 |
-| RFC 1053 | Allow overloading shift operators | ✅ | 1.0 | — |
-| RFC 1156 | Adjust default object bounds | ✅ | 1.17 | `01_traits.md` |
-| RFC 1327 | Dropck eyepatch | ✅ | 1.13 | `03_memory_management.md` |
-| RFC 1951 | Expand `where` clause syntax | ✅ | 1.23 | `02_generics.md` |
-| RFC 2289 | Associated type constructors | 🚧 | — | `01_traits.md` §4.6 |
+| [RFC 0192](https://rust-lang.github.io/rfcs/0192.html) | Associated items | ✅ | 1.0 | `01_traits.md` |
+| [RFC 0445](https://rust-lang.github.io/rfcs/0445.html) | Allow overloading of `*` / `&` | ❌ | — | — |
+| [RFC 0738](https://rust-lang.github.io/rfcs/0738.html) | Variadic generics | ❌ | — | — |
+| [RFC 1023](https://rust-lang.github.io/rfcs/1023.html) | Rebalancing coherence / orphan rules | ✅ | 1.0 | `01_traits.md` §4.1 |
+| [RFC 1053](https://rust-lang.github.io/rfcs/1053.html) | Allow overloading shift operators | ✅ | 1.0 | — |
+| [RFC 1156](https://rust-lang.github.io/rfcs/1156.html) | Adjust default object bounds | ✅ | 1.17 | `01_traits.md` |
+| [RFC 1327](https://rust-lang.github.io/rfcs/1327.html) | Dropck eyepatch | ✅ | 1.13 | `03_memory_management.md` |
+| [RFC 1951](https://rust-lang.github.io/rfcs/1951.html) | Expand `where` clause syntax | ✅ | 1.23 | `02_generics.md` |
+| [RFC 2289](https://rust-lang.github.io/rfcs/2289.html) | Associated type constructors | 🚧 | — | `01_traits.md` §4.6 |
 
 ## 三、内存模型与 Unsafe
 
 | RFC | 标题 | 状态 | 稳定版本 | 概念文件 |
 | :--- | :--- | :---: | :---: | :--- |
-| RFC 0769 | Sound generic drop | ✅ | 1.0 | `03_memory_management.md` |
-| RFC 1861 | Extern types | 🚧 | nightly | `05_rust_ffi.md` |
-| RFC 2581 | `&mut` reborrows for `DerefMut` | ✅ | — | `02_borrowing.md` |
-| RFC 2753 | Union types | ✅ | 1.19 | `04_type_system.md` |
-| RFC 2807 | Target feature support | ✅ | 1.27 | `03_unsafe.md` |
-| RFC 2835 | Type alias enum variants | ✅ | 1.37 | `04_type_system.md` |
+| [RFC 0769](https://rust-lang.github.io/rfcs/0769.html) | Sound generic drop | ✅ | 1.0 | `03_memory_management.md` |
+| [RFC 1861](https://rust-lang.github.io/rfcs/1861.html) | Extern types | 🚧 | nightly | `05_rust_ffi.md` |
+| [RFC 2581](https://rust-lang.github.io/rfcs/2581.html) | `&mut` reborrows for `DerefMut` | ✅ | — | `02_borrowing.md` |
+| [RFC 2753](https://rust-lang.github.io/rfcs/2753.html) | Union types | ✅ | 1.19 | `04_type_system.md` |
+| [RFC 2807](https://rust-lang.github.io/rfcs/2807.html) | Target feature support | ✅ | 1.27 | `03_unsafe.md` |
+| [RFC 2835](https://rust-lang.github.io/rfcs/2835.html) | Type alias enum variants | ✅ | 1.37 | `04_type_system.md` |
 
 ## 四、并发与异步
 
 | RFC | 标题 | 状态 | 稳定版本 | 概念文件 |
 | :--- | :--- | :---: | :---: | :--- |
-| RFC 1299 | Incremental compilation | ✅ | 1.24 | — |
-| RFC 2010 | Integer atomics | ✅ | 1.34 | `01_concurrency.md` §3.1 |
-| RFC 2052 | Epochs (后发展为 Edition) | ⚠️ | — | `05_rust_version_tracking.md` |
-| RFC 2592 | Futures and async/await | ✅ | 1.36 | `02_async.md` §3.1 |
+| [RFC 1299](https://rust-lang.github.io/rfcs/1299.html) | Incremental compilation | ✅ | 1.24 | — |
+| [RFC 2010](https://rust-lang.github.io/rfcs/2010.html) | Integer atomics | ✅ | 1.34 | `01_concurrency.md` §3.1 |
+| [RFC 2052](https://rust-lang.github.io/rfcs/2052.html) | Epochs (后发展为 Edition) | ⚠️ | — | `05_rust_version_tracking.md` |
+| [RFC 2592](https://rust-lang.github.io/rfcs/2592.html) | Futures and async/await | ✅ | 1.36 | `02_async.md` §3.1 |
 
 ## 五、Edition 与工具链
 
 | RFC | 标题 | 状态 | 稳定版本 | 概念文件 |
 | :--- | :--- | :---: | :---: | :--- |
-| RFC 2052 | Epochs (后发展为 Edition) | ⚠️ | — | `22_edition_guide.md` |
-| RFC 3086 | Macro metavariable expressions | ✅ | 1.60 | `04_macros.md` |
-| RFC 3101 | Reserved prefixes | ✅ | 1.53 (2021Ed) | `22_edition_guide.md` |
-| RFC 3501 | Edition 2024 | ✅ | 1.85 | `22_edition_guide.md` |
+| [RFC 2052](https://rust-lang.github.io/rfcs/2052.html) | Epochs (后发展为 Edition) | ⚠️ | — | `22_edition_guide.md` |
+| [RFC 3086](https://rust-lang.github.io/rfcs/3086.html) | Macro metavariable expressions | ✅ | 1.60 | `04_macros.md` |
+| [RFC 3101](https://rust-lang.github.io/rfcs/3101.html) | Reserved prefixes | ✅ | 1.53 (2021Ed) | `22_edition_guide.md` |
+| [RFC 3501](https://rust-lang.github.io/rfcs/3501.html) | Edition 2024 | ✅ | 1.85 | `22_edition_guide.md` |
 
 ## 六、前沿提案（Preview / Unstable）
 
 | RFC/跟踪 | 标题 | 状态 | 目标版本 | 概念文件 |
 | :--- | :--- | :---: | :---: | :--- |
-| RFC 3627 | Return type notation (RTN) | 🚧 | nightly | `12_return_type_notation_preview.md` |
+| [RFC 3627](https://rust-lang.github.io/rfcs/3627.html) | Return type notation (RTN) | 🚧 | nightly | `12_return_type_notation_preview.md` |
 | 无 RFC | `gen` blocks / sync generators | 🔍 | 1.95+ nightly | `15_gen_blocks_preview.md` |
 | 无 RFC | `unsafe` fields | 🔍 | nightly | `13_unsafe_fields_preview.md` |
 | 无 RFC | Effects system / `const` effects | 🔍 | 远期 | `04_effects_system.md` |

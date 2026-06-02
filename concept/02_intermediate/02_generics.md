@@ -679,7 +679,7 @@ fn padded_array<T: Default + Copy, const N: usize>() -> [T; { N + 4 }] {
 ```
 
 然而，上述表达式能力仅限于**简单算术**和**字面量组合**。
-更复杂的类型级计算（如条件分支、递归常量函数结果作为类型参数、关联类型作为常量参数）需要 `generic_const_exprs` 不稳定特性：[来源: RFC 2920 — generic_const_exprs]
+更复杂的类型级计算（如条件分支、递归常量函数结果作为类型参数、关联类型作为常量参数）需要 `generic_const_exprs` 不稳定特性：[来源: [RFC 2920](https://rust-lang.github.io/rfcs/2920.html) — generic_const_exprs]
 
 ```rust,ignore
 #![feature(generic_const_exprs)]
@@ -841,7 +841,7 @@ type RingBuffer256<T> = RingBuffer<T, 256>;
 
 #### 5.7.5 Const Generics 与泛型关联类型的交互
 
-Const Generics 与 GATs（Generic Associated Types，见 §9.5）的交互是 Rust 类型系统向依赖类型演进的显著标志。关联类型可携带生命周期参数，但在稳定 Rust 中**不能直接携带 const generic 参数**：[来源: RFC 2000 / RFC 1598]
+Const Generics 与 GATs（Generic Associated Types，见 §9.5）的交互是 Rust 类型系统向依赖类型演进的显著标志。关联类型可携带生命周期参数，但在稳定 Rust 中**不能直接携带 const generic 参数**：[来源: [RFC 2000](https://rust-lang.github.io/rfcs/2000.html) / RFC 1598]
 
 ```rust
 // ❌ 不稳定: 关联类型不能直接携带 const generic
@@ -906,7 +906,7 @@ fn main() {
 
 #### 5.7.6 典型应用：固定大小数组的数学运算
 
-Const Generics 最核心的工程应用之一是为固定大小数组提供类型安全的数学运算，数组维度作为类型的一部分参与编译期检查：[来源: RFC 2000 — Const Generics]
+Const Generics 最核心的工程应用之一是为固定大小数组提供类型安全的数学运算，数组维度作为类型的一部分参与编译期检查：[来源: [RFC 2000](https://rust-lang.github.io/rfcs/2000.html) — Const Generics]
 
 ```rust
 use std::ops::{Add, Mul};
@@ -988,7 +988,7 @@ C++ 模板自 C++98 起支持非类型模板参数（NTTP, Non-Type Template Par
 | **字符串支持** | ❌ 不支持 | ✅ C++20 起支持字面量类类型 |
 | **编译期调试** | `const_evaluatable_checked`（不稳定） | `static_assert`、`concept` 约束失败 |
 
-**核心差异的语义根源**: [来源: RFC 2000 — Const Generics]
+**核心差异的语义根源**: [来源: [RFC 2000](https://rust-lang.github.io/rfcs/2000.html) — Const Generics]
 
 ```rust,ignore
 // Rust: 类型检查先于单态化，const generic 表达式必须在签名层面可验证
@@ -1517,7 +1517,7 @@ fn print_all(items: impl Iterator<Item = i32>) {
 fn print_all<T: Iterator<Item = i32>>(items: T) { ... }
 ```
 
-**语义**: `print_all` 接受**任何**满足 `Iterator<Item = i32>` 的类型——调用者决定具体传入 `Vec::into_iter()`、`array::into_iter()` 还是自定义迭代器。函数内部只能使用 `Iterator` trait 的方法，无法知道具体类型。[来源: RFC 1951 / Rust Reference: Impl trait]
+**语义**: `print_all` 接受**任何**满足 `Iterator<Item = i32>` 的类型——调用者决定具体传入 `Vec::into_iter()`、`array::into_iter()` 还是自定义迭代器。函数内部只能使用 `Iterator` trait 的方法，无法知道具体类型。[来源: [RFC 1951](https://rust-lang.github.io/rfcs/1951.html) / Rust Reference: Impl trait]
 
 #### 返回位置 `impl Trait` = Existential（存在）
 
@@ -1569,7 +1569,7 @@ impl Factory for WidgetFactory {
 
 #### 与 full specialization 的核心区别
 
-| **维度** | `min_specialization` | Full specialization（RFC 1210） |
+| **维度** | `min_specialization` | Full specialization（[RFC 1210](https://rust-lang.github.io/rfcs/1210.html)） |
 | :--- | :--- | :--- |
 | **稳定性** | nightly only | 未实现 |
 | **特化依据** | 仅参数类型具体度 | 参数类型 + trait bound |
@@ -1617,7 +1617,7 @@ Full specialization 允许基于 trait bound 的特化（如 `impl<T: Display> F
 
 #### 与 `default impl` 的交互
 
-`min_specialization` 与 `default impl`（RFC 1210）协同工作：`default impl` 提供**不完整的默认实现**，允许特化 impl 仅覆盖部分方法，而 `default` 关键字标记的方法可被更具体的 impl 覆盖。
+`min_specialization` 与 `default impl`（[RFC 1210](https://rust-lang.github.io/rfcs/1210.html)）协同工作：`default impl` 提供**不完整的默认实现**，允许特化 impl 仅覆盖部分方法，而 `default` 关键字标记的方法可被更具体的 impl 覆盖。
 
 ```rust,ignore
 #![feature(min_specialization)]
@@ -2080,7 +2080,7 @@ Rust 刻意避免完整 HKT，因为：
 
 #### Lending Iterator 的完整类型论分析
 
-Lending Iterator 是 GATs 的典范用例，其类型签名在标准 `Iterator` 中**无法表达**：[来源: RFC 1598 / TRPL: Ch19.3]
+Lending Iterator 是 GATs 的典范用例，其类型签名在标准 `Iterator` 中**无法表达**：[来源: [RFC 1598](https://rust-lang.github.io/rfcs/1598.html) / TRPL: Ch19.3]
 
 ```rust
 trait LendingIterator {
@@ -2141,7 +2141,7 @@ impl<'t, T> LendingIterator for Windows<'t, T> {
 
 ---
 
-## 十、Rust 2024 Edition：`use<..>` Precise Capturing（RFC 3617）
+## 十、Rust 2024 Edition：`use<..>` Precise Capturing（[RFC 3617](https://rust-lang.github.io/rfcs/3617.html)）
 
 > **稳定版本**: Rust 1.82 (stable) · **2024 Edition 默认行为变更**
 > **形式化意义**: 存在类型的区域参数显化——从"隐式闭包"到"显式契约"

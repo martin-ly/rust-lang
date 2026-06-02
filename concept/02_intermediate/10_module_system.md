@@ -14,7 +14,7 @@
 > **来源**:
 > [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html) ·
 > [TRPL Ch7 — Modules](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) ·
-> [Rust RFC 2126 — Clarify and streamline paths and visibility](https://github.com/rust-lang/rfcs/pull/2126) ·
+> [Rust [RFC 2126](https://rust-lang.github.io/rfcs/2126.html) — Clarify and streamline paths and visibility](<https://github.com/rust-lang/rfcs/pull/2126>) ·
 > [Rust Edition Guide — Path Changes](https://doc.rust-lang.org/edition-guide/rust-2018/module-system.html)
 
 ## 📑 目录
@@ -663,6 +663,8 @@ fn main() {}
 | 模块系统：Rust 的代码组织与可见性规则 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
 | 模块系统：Rust 的代码组织与可见性规则 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
+> crate 接口稳定 ⟸ pub(restricted) 分层 ⟸ 可见性系统
+> 依赖管理正确 ⟸ workspace 隔离 ⟸ 版本解析
 > **过渡**: 掌握 模块系统：Rust 的代码组织与可见性规则 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 模块系统：Rust 的代码组织与可见性规则 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。

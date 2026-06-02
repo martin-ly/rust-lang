@@ -108,7 +108,7 @@ chmod +x csv_filter.rs && ./csv_filter.rs
 
 ## 一、核心概念
 
-Cargo Script（RFC 3502 + RFC 3503）允许在单个 `.rs` 文件中编写完整 Rust 程序并直接执行，**无需 `Cargo.toml` 或项目目录结构**。两个 RFC 均已获批：RFC 3502 定义单文件 manifest 格式，RFC 3503 定义 frontmatter 语法。当前 nightly 已实现核心支持，目标 2026 年稳定化。
+Cargo Script（[RFC 3502](https://rust-lang.github.io/rfcs/3502.html) + [RFC 3503](https://rust-lang.github.io/rfcs/3503.html)）允许在单个 `.rs` 文件中编写完整 Rust 程序并直接执行，**无需 `Cargo.toml` 或项目目录结构**。两个 RFC 均已获批：[RFC 3502](https://rust-lang.github.io/rfcs/3502.html) 定义单文件 manifest 格式，[RFC 3503](https://rust-lang.github.io/rfcs/3503.html) 定义 frontmatter 语法。当前 nightly 已实现核心支持，目标 2026 年稳定化。
 
 ### 1.1 三种执行方式
 
@@ -251,7 +251,7 @@ graph TD
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **思维表征说明**: `graph TD` 流程图将 Cargo Script 的**内部执行机制**可视化——从单文件输入到最终运行的完整管道。
 > 关键洞察：Cargo Script 并非「无需编译」，而是「**隐式管理编译**」——frontmatter 被解析为临时 `Cargo.toml`，编译缓存存储在 `~/.cargo/script-cache/`，第二次执行时若源码未变更则直接复用。
-> 这与传统 `cargo run` 的差异在于「临时项目」的自动化管理。 [来源: RFC 3502 §Execution Model; Cargo Book — Scripts]
+> 这与传统 `cargo run` 的差异在于「临时项目」的自动化管理。 [来源: [RFC 3502](https://rust-lang.github.io/rfcs/3502.html) §Execution Model; Cargo Book — Scripts]
 
 **何时使用 Cargo Script？决策树（Mermaid graph TD）**:
 
@@ -289,7 +289,7 @@ graph TD
 > 此决策树帮助程序员在「Cargo Script」和「传统 Cargo 项目」之间做出**工程化的选择**
 > ——不是「Cargo Script 可以替代所有项目」，而是「根据项目规模、依赖复杂度、构建需求选择适当的工具」。
 > 叶子节点的颜色编码（绿色=传统项目，黄色=Cargo Script）直观传达了推荐倾向。
-> [来源: RFC 3503 §Motivation; Cargo Book — When to use scripts]
+> [来源: [RFC 3503](https://rust-lang.github.io/rfcs/3503.html) §Motivation; Cargo Book — When to use scripts]
 
 ---
 

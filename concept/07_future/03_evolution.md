@@ -27,9 +27,9 @@
 - v1.2 (2026-05-14): 补充完整 Edition 变更清单（2015→2018→2021→2024）、Edition 与 rustc 版本解耦、`cargo fix --edition` 自动迁移机制、跨 Edition 代码示例、未来 Edition 方向（2027+）
 - v1.4 (2026-05-26): 补充 Rust 2026 Project Goals 四大旗舰目标详解（Beyond the &、灵活编译、高阶 Rust、释放沉睡 Trait）及子目标矩阵 [来源: Web Authority Alignment Sprint]
 - v1.3 (2026-05-22): 网络权威内容对齐 Batch 9：补充 Project Goals 2026 年度旗舰目标（Polonius Alpha、Safety-Critical Rust、cargo-script）、Effects 系统 `gen<yield>` 跟踪、Ferrocene ASIL B/SIL 2 认证动态
-- v1.5 (2026-05-26): 权威内容对齐 R16：补充 2025H2 Project Goals 最终状态报告（Rust Blog 2026-05-18）；更新 build-std RFC 3873/3874 已合并状态、Cranelift 资金不足未完成确认 [来源: Rust Blog — Project Goals Update: April 2026]
-- v1.6 (2026-05-26): 权威内容对齐 R18：补充 Project-wide LLM Policy RFC 3936（Rust 首个项目级 AI 使用政策） [来源: TWiR 650]
-- v1.7 (2026-05-26): 权威内容对齐 R24：① 更新 build-std RFC 3874 FCP 完成待合并；② 补充 RFC 3962 Documentation interpolation（FCP 中）；③ 补充 RustWeek 2026 All Hands（Utrecht, 5.18–5.23）关键 RFC 讨论 [来源: Rust Project Goals Update; Rust Internals]
+- v1.5 (2026-05-26): 权威内容对齐 R16：补充 2025H2 Project Goals 最终状态报告（Rust Blog 2026-05-18）；更新 build-std [RFC 3873](https://rust-lang.github.io/rfcs/3873.html)/3874 已合并状态、Cranelift 资金不足未完成确认 [来源: Rust Blog — Project Goals Update: April 2026]
+- v1.6 (2026-05-26): 权威内容对齐 R18：补充 Project-wide LLM Policy [RFC 3936](https://rust-lang.github.io/rfcs/3936.html)（Rust 首个项目级 AI 使用政策） [来源: TWiR 650]
+- v1.7 (2026-05-26): 权威内容对齐 R24：① 更新 build-std [RFC 3874](https://rust-lang.github.io/rfcs/3874.html) FCP 完成待合并；② 补充 [RFC 3962](https://rust-lang.github.io/rfcs/3962.html) Documentation interpolation（FCP 中）；③ 补充 RustWeek 2026 All Hands（Utrecht, 5.18–5.23）关键 RFC 讨论 [来源: Rust Project Goals Update; Rust Internals]
 
 ---
 
@@ -1039,7 +1039,7 @@ graph TD
 > Rust 的演进速度比 C++ 快（无历史包袱），比 Go 慢（需要社区共识）。Edition 系统每 2-3 年发布一次，每个 Edition 都是语言设计的阶段性总结。比较 Rust 与其他语言的演进机制，能揭示 "如何在不破坏生态的前提下推进语言进化"。
 > 演进对比见 [`../05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) 与 [`../05_comparative/02_rust_vs_go.md`](../05_comparative/02_rust_vs_go.md)。
 
-> **[来源: Rust Edition Guide; RFC 2052; RFC 2000; RFC 1598; RFC 1210]** 语言演进分析基于官方 RFC 和 Edition 指南。✅
+> **[来源: Rust Edition Guide; [RFC 2052](https://rust-lang.github.io/rfcs/2052.html); [RFC 2000](https://rust-lang.github.io/rfcs/2000.html); [RFC 1598](https://rust-lang.github.io/rfcs/1598.html); RFC 1210]** 语言演进分析基于官方 RFC 和 Edition 指南。✅
 
 > **[来源: Rust Lang Team Blog; Rust Internals Forum; Lang Team Roadmap]** 未来方向基于语言团队的公开讨论和路线图文档。✅
 
@@ -1209,7 +1209,7 @@ fn fixed() {
 | 旗舰方向 | 关键结果 | 状态 |
 |:---|:---|:---:|
 | **Beyond the `&`** | Pin 人机工程、字段投影、Reborrow Traits 继续推进；lang team 对 Field Representing Types 实验反应积极 | 🟢 继续 |
-| **灵活编译** | Cranelift backend **因资金不足未完成**；build-std RFC 3873/3874 已合并；cargo-script 已在 1.85+ 稳定 | 🟡 部分完成 |
+| **灵活编译** | Cranelift backend **因资金不足未完成**；build-std [RFC 3873](https://rust-lang.github.io/rfcs/3873.html)/3874 已合并；cargo-script 已在 1.85+ 稳定 | 🟡 部分完成 |
 | **高阶 Rust** | Ergonomic ref-counting RFC 决策中；cargo-script 已稳定 | 🟢 继续 |
 | **释放沉睡 Trait** | Polonius 继续推进 nightly 评估；Next-gen Trait Solver 逐步替换旧 solver | 🟢 继续 |
 
@@ -1235,7 +1235,7 @@ fn fixed() {
 
 | 子目标 | 状态 | 形式模型意义 |
 |:---|:---|:---|
-| **build-std** | **RFC 3874 FCP 完成待合并** | RFC 3873（自定义标准库编译目标）已合并，3874（`build-std: always`）FCP 已完成待合并，3875（显式依赖）处理反馈中；允许自定义编译 `core`/`std`，为嵌入式、安全关键和形式化验证提供"可剪裁的标准库" |
+| **build-std** | **[RFC 3874](https://rust-lang.github.io/rfcs/3874.html) FCP 完成待合并** | [RFC 3873](https://rust-lang.github.io/rfcs/3873.html)（自定义标准库编译目标）已合并，3874（`build-std: always`）FCP 已完成待合并，3875（显式依赖）处理反馈中；允许自定义编译 `core`/`std`，为嵌入式、安全关键和形式化验证提供"可剪裁的标准库" |
 | **Cranelift Backend** | ⚠️ **未完成（资金不足）** | 用 Cranelift（Wasmtime 的 JIT 编译器）替代 LLVM 作为 debug 编译后端，编译速度提升 2-5x；不改变语义，但改变**编译期验证与运行时分发的边界**。2025H2 周期因 Trifecta Tech Foundation 资金不足未能完成生产就绪目标，社区正在寻求新的资助渠道 |
 | **Parallel Frontend** | 实现中 | 并行解析和类型检查；对 trait solver 的并发安全提出新要求 |
 | **Relink don't Rebuild** | 设计阶段 | 增量链接优化；通过精确依赖追踪减少全量重编译 |
@@ -1276,11 +1276,11 @@ fn fixed() {
 | **MemorySanitizer / ThreadSanitizer** | 运行时安全 | 将 MSan/TSan 支持稳定化，与 Miri 形成"静态+动态"的 UB 检测双保险 |
 | **Rust Vision Document** | 语言哲学 | 社区驱动的 Rust 长期愿景文档，定义 2030 年的 Rust 应该是什么样 |
 | **SVE / SME on AArch64** | 平台扩展 | 可伸缩向量扩展（SVE）和矩阵扩展（SME）的 Rust 绑定；高性能计算的新前沿 |
-| **Project-wide LLM Policy** (RFC 3936) | 社区治理 | 定义 Rust Project 空间内 LLM/AI 生成贡献的边界，防止 "slop" 污染；首个项目级 AI 使用政策，影响 issue/PR/rfc 的审核标准和知识产权归属 |
-| **Documentation Interpolation** (RFC 3962) | 文档工具 | Rustdoc 文档插值 RFC 进入 Final Comment Period；允许在文档字符串中嵌入动态内容（如版本号、特性状态），减少文档与代码的同步维护成本 |
-| **Cargo Min Publish Age** (RFC 3923) | Cargo 生态 | **已批准**（2026-05-20）：为 Cargo 引入最小发布年龄机制，防止恶意包快速发布和撤销，增强供应链安全 |
-| **Rust Foundation Maintainer Fund** (RFC 3931) | 社区治理 | **已批准**（2026-05-13）：基金会维护者基金的新资金机制，为 Rust 核心维护者提供可持续的资助渠道 |
-| **Inheriting Default-Features** (RFC 3945) | Cargo 生态 | **已批准**（2026-05-13）：允许 Cargo 依赖继承默认特性，简化特性配置和依赖管理 |
+| **Project-wide LLM Policy** ([RFC 3936](https://rust-lang.github.io/rfcs/3936.html)) | 社区治理 | 定义 Rust Project 空间内 LLM/AI 生成贡献的边界，防止 "slop" 污染；首个项目级 AI 使用政策，影响 issue/PR/rfc 的审核标准和知识产权归属 |
+| **Documentation Interpolation** ([RFC 3962](https://rust-lang.github.io/rfcs/3962.html)) | 文档工具 | Rustdoc 文档插值 RFC 进入 Final Comment Period；允许在文档字符串中嵌入动态内容（如版本号、特性状态），减少文档与代码的同步维护成本 |
+| **Cargo Min Publish Age** ([RFC 3923](https://rust-lang.github.io/rfcs/3923.html)) | Cargo 生态 | **已批准**（2026-05-20）：为 Cargo 引入最小发布年龄机制，防止恶意包快速发布和撤销，增强供应链安全 |
+| **Rust Foundation Maintainer Fund** ([RFC 3931](https://rust-lang.github.io/rfcs/3931.html)) | 社区治理 | **已批准**（2026-05-13）：基金会维护者基金的新资金机制，为 Rust 核心维护者提供可持续的资助渠道 |
+| **Inheriting Default-Features** ([RFC 3945](https://rust-lang.github.io/rfcs/3945.html)) | Cargo 生态 | **已批准**（2026-05-13）：允许 Cargo 依赖继承默认特性，简化特性配置和依赖管理 |
 
 > **[来源: [RFC 3936 — Project-wide LLM Policy](https://github.com/rust-lang/rfcs/pull/3936)]** 随着 LLM 生成内容在开源社区激增，Rust Project 正在制定首个项目级 AI 使用政策。核心议题包括：1) AI 生成的代码/文本在 RFC/PR/issue 中的披露义务；2) 训练数据是否包含 Rust 项目内容的知识产权边界；3) "slop"（低质量 AI 生成内容）对技术讨论的稀释效应。这与 Rust 社区此前 State of Rust Survey 2025 发现的"LLM 学习路径迁移"趋势（§12.1）形成呼应——技术政策正在追赶技术现实。[来源: [This Week in Rust 650](https://this-week-in-rust.org/blog/2026/05/06/this-week-in-rust-650/)] · 可信度: 🟡（RFC 审议中）
 

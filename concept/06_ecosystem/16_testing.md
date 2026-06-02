@@ -27,7 +27,7 @@
 > [proptest crate](https://docs.rs/proptest/latest/proptest/) ·
 > [cargo-fuzz](https://github.com/rust-fuzz/cargo-fuzz) ·
 > [Miri](https://github.com/rust-lang/miri) ·
-> [Rust RFC 2318 — Custom Test Frameworks](https://github.com/rust-lang/rfcs/pull/2318)
+> [Rust [RFC 2318](https://rust-lang.github.io/rfcs/2318.html) — Custom Test Frameworks](<https://github.com/rust-lang/rfcs/pull/2318>)
 
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
 

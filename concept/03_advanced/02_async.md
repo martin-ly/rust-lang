@@ -201,7 +201,7 @@ Step 6: "什么时候会阻塞？"
 > **[TRPL: Ch17]** A future is an asynchronous computation that can produce a value. `async fn` returns a future. When you call an `async fn`, it returns a future that is a suspended computation, not the result. Futures are lazy: they don't do any work until you await them.
 > **[Rust Reference: Async await]** `async fn` 被编译器转换为返回 `impl Future<Output = T>` 的函数，`.await` 被转换为对 `Future::poll` 的循环调用。✅ 已验证
 > **[RFC 2394]** async/await 语法糖的设计基于生成器（generator）状态机转换，语义等价于显式 Future 组合。 ✅ 已验证
-> **[RFC 2592: Futures 0.3]** The `Future` trait and `async/await` syntax were stabilized based on RFC 2394, with the `Pin` type introduced in RFC 2349 to support self-referential async state machines. ✅ 已验证
+> **[RFC 2592: Futures 0.3]** The `Future` trait and `async/await` syntax were stabilized based on [RFC 2394](https://rust-lang.github.io/rfcs/2394.html), with the `Pin` type introduced in [RFC 2349](https://rust-lang.github.io/rfcs/2349.html) to support self-referential async state machines. ✅ 已验证
 
 ### 1.3 形式化定义
 
@@ -444,7 +444,7 @@ stateDiagram-v2
 
 > **认知功能**: 状态转移可视化工具——将编译器生成的匿名 enum 状态机映射为可读的状态图。读者可将此图作为阅读 MIR lowering 输出的"导航地图"，每个节点对应一个 enum 变体，每条边对应一次 poll 调用。关键洞察：Pin 约束不是装饰，而是 Suspend 状态期间地址恒定性的形式化保证。[来源: 💡 原创分析]
 > [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
-> **思维表征说明**: `stateDiagram-v2` 是 Mermaid 专门用于状态机的语法，与 `graph TD` 流程图不同——它强调**状态**（节点）和**转移条件**（边标注），天然适合表达 Future 的 poll 状态机。每个状态对应编译器生成的 enum 变体，转移标注对应 poll 的返回值。 [来源: Mermaid stateDiagram 文档; RFC 2394 §3.2]
+> **思维表征说明**: `stateDiagram-v2` 是 Mermaid 专门用于状态机的语法，与 `graph TD` 流程图不同——它强调**状态**（节点）和**转移条件**（边标注），天然适合表达 Future 的 poll 状态机。每个状态对应编译器生成的 enum 变体，转移标注对应 poll 的返回值。 [来源: Mermaid stateDiagram 文档; [RFC 2394](https://rust-lang.github.io/rfcs/2394.html) §3.2]
 
 #### .await 的 CPS 变换规则
 
@@ -2453,7 +2453,7 @@ trait DataProvider<'a> {
 
 ---
 
-## 十二、`AsyncFn` Trait 家族：异步闭包的类型化（1.85 stable，RFC 3668）
+## 十二、`AsyncFn` Trait 家族：异步闭包的类型化（1.85 stable，[RFC 3668](https://rust-lang.github.io/rfcs/3668.html)）
 
 > **稳定版本**: Rust 1.85 (stable) · **适用 Edition**: 所有 Edition（非 Edition-gated）
 > **形式化意义**: 高阶函数的异步扩展——效果系统（Effect System）的原型

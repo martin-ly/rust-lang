@@ -125,7 +125,7 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 对于包含原始指针、手动内存管理字段的结构体，使用 `unsafe` 字段标记；纯安全字段保持普通声明。
 > **关键洞察**: `unsafe` 字段将**不变量文档化**从注释/文档转移到类型系统——字段声明即安全契约声明。
-> [来源: [Rust RFC 3458 — Motivation](https://github.com/rust-lang/rfcs/pull/3458)]
+> [来源: [Rust [RFC 3458](https://rust-lang.github.io/rfcs/3458.html) — Motivation](https://github.com/rust-lang/rfcs/pull/3458)]
 
 ---
 
@@ -331,7 +331,7 @@ graph TD
 ```
 
 > **边界要点**: unsafe fields 是**语法糖级别的改进**，不改变 Rust 的安全模型本质。它只是将"哪个字段不安全"的信息从文档/注释下推到类型声明。
-> [来源: [Rust RFC 3458 — Drawbacks](https://github.com/rust-lang/rfcs/pull/3458)]
+> [来源: [Rust [RFC 3458](https://rust-lang.github.io/rfcs/3458.html) — Drawbacks](https://github.com/rust-lang/rfcs/pull/3458)]
 
 ---
 
@@ -339,7 +339,7 @@ graph TD
 
 | 里程碑 | 状态 | 预计时间 | 说明 |
 |:---|:---:|:---|:---|
-| RFC 3458 提交 | ✅ | 2023 | 初始提案 |
+| [RFC 3458](https://rust-lang.github.io/rfcs/3458.html) 提交 | ✅ | 2023 | 初始提案 |
 | 社区讨论 | ✅ | 2023-2024 | 语法和语义反馈 |
 | 编译器原型 | ⬜ | 2026-2027 | 实现复杂度高，优先级中低 |
 | 与 Safety Tags 集成 | ⬜ | 2027+ | 字段级契约机器可读化 |

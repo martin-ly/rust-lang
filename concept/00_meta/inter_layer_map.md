@@ -536,7 +536,7 @@ L4 结论: 安全 = 编译期保证 ∪ 运行时检查 ∪ 程序员契约
 - [x] **高**: Wave 6 全量深度重构 + 层间映射标注
 - [x] **高**: 为每个 L1-L3 文件添加"定理一致性矩阵"链接回本文件
 - [x] **中**: 绘制 L1 ↔ L4 的双向映射图（哪些 L4 理论未映射到 L1 实践）
-- [x] **高**: 补充 Pin 的形式化语义来源（location stability 的精确对应论文） —— ✅ 已完成，来源：RFC 2349、PLDI 2024 RefinedRust
+- [x] **高**: 补充 Pin 的形式化语义来源（location stability 的精确对应论文） —— ✅ 已完成，来源：[RFC 2349](https://rust-lang.github.io/rfcs/2349.html)、PLDI 2024 RefinedRust
 - [x] **中**: 补充 HRTB 与全称量词（∀）的形式化对应关系 —— ✅ 已完成，参见 `04_formal/02_type_theory.md` §10.4
 - [x] **低**: 追踪 Rust 语言演进对 L4 形式化模型的影响（如 Tree Borrows vs Stacked Borrows） —— ✅ 已完成，参见 `04_formal/03_ownership_formal.md` §11
 - [x] **高**: Wave 11 表征空间元分析（semantic_space.md）+ 索引同步

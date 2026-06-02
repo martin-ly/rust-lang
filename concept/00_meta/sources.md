@@ -144,7 +144,7 @@ graph TD
 | **维护方** | Rust Lang Team |
 | **性质** | 语言演进的设计文档，包含动机、设计、替代方案 |
 | **适用范围** | 理解特定特性为何如此设计（如 Pin、async/await、Edition） |
-| **关键 RFCs** | RFC 200 (ownership/lifetime notation), RFC 769 (SIMD), RFC 2349 (async/await), RFC 2585 (unsafe blocks) |
+| **关键 RFCs** | RFC 200 (ownership/lifetime notation), RFC 769 (SIMD), [RFC 2349](https://rust-lang.github.io/rfcs/2349.html) (async/await), [RFC 2585](https://rust-lang.github.io/rfcs/2585.html) (unsafe blocks) |
 | **引用格式** | `[RFC-编号: 标题]` |
 
 ---

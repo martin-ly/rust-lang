@@ -2636,7 +2636,7 @@
       "layer": "L1",
       "title": "编程语言理论基础（PL Prerequisites）",
       "positioning": "L1 基础层的**前置知识补充**。理解这些通用 PL 概念后，你将能更深刻地回答\"为什么 Rust 要这样设计\"，而非仅仅记忆规则。",
-      "line_count": 430,
+      "line_count": 432,
       "theorem_chains": [
         {
           "text": "| 编程语言理论基础（PL Prerequisites） 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -2754,7 +2754,7 @@
           "[Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -3597,7 +3597,7 @@
         },
         {
           "source": "Rust Reference: NLL",
-          "context": "T4 — 非词法生命周期基于控制流图的精确存活期分析 (RFC 2094)。 ✅"
+          "context": "T4 — 非词法生命周期基于控制流图的精确存活期分析 ([RFC 2094](https://rust-lang.github.io/rfcs/2094.html))。 ✅"
         },
         {
           "source": "RFC 2025",
@@ -3617,7 +3617,7 @@
         },
         {
           "source": "Rust Reference: NLL",
-          "context": "\"NLL: 实际使用期有效\" — 非词法生命周期基于数据流分析 (RFC 2094)。 ✅"
+          "context": "\"NLL: 实际使用期有效\" — 非词法生命周期基于数据流分析 ([RFC 2094](https://rust-lang.github.io/rfcs/2094.html))。 ✅"
         },
         {
           "source": "Boyland 2003 (Fractional Permissions)",
@@ -4059,10 +4059,6 @@
         {
           "source": "Rust Reference: HRTB",
           "context": "HRTB `for<'a>` 对应高阶逻辑中的全称量词 ∀。✅"
-        },
-        {
-          "source": "RFC 1598 (GATs)",
-          "context": "GATs 中 `where Self: 'a` 确保关联类型的生命周期自洽。✅"
         }
       ],
       "cross_references": [
@@ -4094,7 +4090,7 @@
       "layer": "L1",
       "title": "Lifetimes 高级主题",
       "positioning": "Polonius 是 Rust 的下一代借用检查器，以 **Datalog 约束求解** 替代当前的基于集合的区域推断，能编译更多当前系统拒绝的**合法程序**。",
-      "line_count": 1339,
+      "line_count": 1342,
       "theorem_chains": [
         {
           "text": "> **定理链编号**: T-015 Polonius 流敏感安全 ⟹ T-016 Elision 完备性",
@@ -4433,27 +4429,15 @@
         },
         {
           "source": "Rust Reference: `impl Trait` in return position",
-          "context": "RPIT 的生命周期捕获策略在 RFC 2289 中定义：返回类型自动捕获所有在函数体中被实现类型使用且出现在签名中的生命周期。✅"
+          "context": "RPIT 的生命周期捕获策略在 [RFC 2289](https://rust-lang.github.io/rfcs/2289.html) 中定义：返回类型自动捕获所有在函数体中被实现类型使用且出现在签名中的生命周期。✅"
         },
         {
           "source": "Rust Reference: Lifetime bounds on `impl Trait`",
           "context": "`impl Trait + 'a` 的语义等价于\"实现该 trait 的匿名类型，且该类型中所有引用至少存活 'a\"。✅"
         },
         {
-          "source": "RFC 2289 (TAFIT)",
-          "context": "APIT 和 RPIT 的生命周期推断遵循不同的隐式捕获策略：APIT 作为泛型语法糖不引入新的生命周期捕获，RPIT 则自动封装实现类型的生命周期依赖。✅"
-        },
-        {
           "source": "Rust Reference: `impl Trait`; RFC 2289",
           "context": "APIT 于 Rust 1.26 稳定，RPIT 于 Rust 1.26 稳定；RPITIT（trait 中的 RPIT）于 Rust 1.75 稳定。✅"
-        },
-        {
-          "source": "RFC 2289 (TAFIT); Rust 1.75 Release Notes",
-          "context": "RPITIT 的稳定解决了 trait 层面返回抽象类型的表达力缺口，但隐式关联类型的生命周期推断仍遵循\"自动捕获\"原则。✅"
-        },
-        {
-          "source": "RFC 1598 (GATs)",
-          "context": "`where Self: 'a` 约束确保关联类型不会引用比 `Self` 更短的生命周期，构成自引用集合的类型安全基础。✅"
         },
         {
           "source": "Rust Reference; TRPL; Rust RFCs; Academic Papers",
@@ -4534,7 +4518,7 @@
           "[Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -5100,10 +5084,6 @@
           "context": "Rust 的 `struct`、`enum`、`trait` 均为名义类型构造；元组、数组、函数指针、切片为结构类型构造。✅"
         },
         {
-          "source": "RFC 2584: Structural Records (closed)",
-          "context": "Centril 提出的 Structural Records RFC 试图为 Rust 引入匿名记录类型 `{ x: f64, y: f64 }`，但该 RFC 已被关闭（postponed/closed）。这意味着 Rust 设计者**刻意保留了记录结构体的名义性**——记录字段的命名是类型身份的一部分，不可通过结构等价绕过。✅"
-        },
-        {
           "source": "Rust Reference: Subtyping",
           "context": "\"Lifetime parameters are covariant: `'long` is a subtype of `'short` if `'long` outlives `'short`.\" 生命周期参数具有协变性，子类型关系由区域的包含关系（结构特征）决定。✅"
         },
@@ -5130,10 +5110,6 @@
         {
           "source": "Rust Reference: Orphan Rules",
           "context": "\"An impl is valid only if either the trait or the type is local to the current crate.\" ✅"
-        },
-        {
-          "source": "RFC 1023: Rebalancing Coherence",
-          "context": "一致性规则的设计目标是防止「重叠实现（overlapping impls）」，确保 trait 解析在编译期是确定性的。✅"
         },
         {
           "source": "Rust Internals — Blog: \"Coherence in Rust\"",
@@ -5204,7 +5180,7 @@
       "layer": "L1",
       "title": "Never Type (`!`)：底类型与穷尽性",
       "positioning": "系统讲解 Rust 中 `!` (never type) 的形式语义、类型推导规则、控制流应用和穷尽性检查机制。",
-      "line_count": 438,
+      "line_count": 440,
       "theorem_chains": [
         {
           "text": "| Never Type (`!`)：底类型与穷尽性 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -5362,7 +5338,7 @@
           "[泛型](../02_intermediate/02_generics.md) · [Async](../03_advanced/02_async.md) · [形式方法](../04_formal/12_denotational_semantics.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -5370,7 +5346,7 @@
       "layer": "L1",
       "title": "引用语义：自动解引用、Deref 强制与类型转换",
       "positioning": "深入分析 Rust 的**引用语义机制**——自动解引用（Auto-deref）、Deref 强制（Deref Coercion）、类型强制（Type Coercion）以及它们与借用检查器的交互，澄清开发者常见的隐式转换困惑。",
-      "line_count": 1370,
+      "line_count": 1372,
       "theorem_chains": [
         {
           "text": "| 引用语义：自动解引用、Deref 强制与类型转换 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -5671,7 +5647,7 @@
           "[Unsafe Rust](../03_advanced/03_unsafe.md) · [Formal Methods](../04_formal/01_linear_logic.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -5679,7 +5655,7 @@
       "layer": "L1",
       "title": "零成本抽象：Rust 的性能哲学",
       "positioning": "深入分析 Rust **零成本抽象**（Zero-Cost Abstractions）的设计哲学——探讨泛型、迭代器、Trait 对象等高层抽象如何在编译期消除运行时开销，以及与 C++ \"零开销原则\" 的对比。",
-      "line_count": 676,
+      "line_count": 678,
       "theorem_chains": [
         {
           "text": "| 零成本抽象：Rust 的性能哲学 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -5810,7 +5786,7 @@
           "[Rust vs C++](../05_comparative/01_rust_vs_cpp.md) · [Toolchain](../06_ecosystem/01_toolchain.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -5818,7 +5794,7 @@
       "layer": "L1",
       "title": "控制流：表达式导向的流程控制",
       "positioning": "分析 Rust **控制流结构**的设计哲学——从表达式导向（expression-oriented）的 `if`/`match`/`loop`，到 `if let`/`while let` 的模式匹配集成，揭示 Rust 如何将控制流转化为**值生成**而非**副作用执行**。",
-      "line_count": 753,
+      "line_count": 755,
       "theorem_chains": [
         {
           "text": "| 控制流：表达式导向的流程控制 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -5955,7 +5931,7 @@
           "[Generics](../02_intermediate/02_generics.md) · [Async](../03_advanced/02_async.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -5963,7 +5939,7 @@
       "layer": "L1",
       "title": "集合类型：Rust 标准库的数据结构谱系",
       "positioning": "系统分析 Rust **标准库集合类型**的设计——从 Vec/VecDeque 的顺序容器，到 HashMap/BTreeMap 的关联容器，再到 HashSet/BTreeSet 的集合类型，揭示每种数据结构的所有权语义、性能特征和选型策略。",
-      "line_count": 700,
+      "line_count": 702,
       "theorem_chains": [
         {
           "text": "| 集合类型：Rust 标准库的数据结构谱系 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -6089,7 +6065,7 @@
           "[Smart Pointers](../02_intermediate/12_smart_pointers.md) ·"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -6097,7 +6073,7 @@
       "layer": "L1",
       "title": "字符串与文本：Rust 的 Unicode 处理与格式化系统",
       "positioning": "> 系统分析 Rust **字符串类型**的设计——String [来源: [Rust String](https://doc.rust-lang.org/std/string/struct.String.html)] 与",
-      "line_count": 640,
+      "line_count": 642,
       "theorem_chains": [
         {
           "text": "| 字符串与文本：Rust 的 Unicode 处理与格式化系统 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -6222,7 +6198,7 @@
           "[Collections](./08_collections.md) · [FFI](../03_advanced/05_rust_ffi.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -6230,7 +6206,7 @@
       "layer": "L1",
       "title": "Rust 错误处理基础",
       "positioning": "系统讲解 Rust 的错误处理机制——从 `Result` 和 `Option` 到 `?` 运算符，分析 Rust 如何将错误处理融入类型系统，实现编译期安全。",
-      "line_count": 765,
+      "line_count": 767,
       "theorem_chains": [
         {
           "text": "| Rust 错误处理基础 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -6347,7 +6323,7 @@
           "[Error Handling](../02_intermediate/04_error_handling.md) ·"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -6355,7 +6331,7 @@
       "layer": "L1",
       "title": "数值类型与运算：从整数到浮点的完整图景",
       "positioning": "系统讲解 Rust **数值类型**——从整数、浮点、饱和运算到类型转换和溢出行为，揭示 Rust 如何在安全性与性能之间做出精确的设计选择。",
-      "line_count": 709,
+      "line_count": 711,
       "theorem_chains": [
         {
           "text": "| 数值类型与运算：从整数到浮点的完整图景 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -6485,7 +6461,7 @@
           "[Zero Cost Abstractions](./06_zero_cost_abstractions.md) · [Collections](./08_collections.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -6493,7 +6469,7 @@
       "layer": "L1",
       "title": "模块系统与路径：Rust 的代码组织哲学",
       "positioning": "系统讲解 Rust **模块系统**——从 `mod`、`use`、`pub` 的语法到文件系统映射、工作空间组织，揭示 Rust 如何通过模块系统实现代码封装、可见性控制和大型项目组织。",
-      "line_count": 735,
+      "line_count": 737,
       "theorem_chains": [
         {
           "text": "| 模块系统与路径：Rust 的代码组织哲学 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -6615,7 +6591,7 @@
           "[Crate Ecosystem](../06_ecosystem/03_core_crates.md) · [Workspace](../06_ecosystem/01_toolchain.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -6623,7 +6599,7 @@
       "layer": "L1",
       "title": "Rust 数值类型与运算",
       "positioning": "系统讲解 Rust 的**数值类型**——从整数、浮点到 wrapping/saturating 运算，分析类型安全如何防止数值错误。",
-      "line_count": 584,
+      "line_count": 586,
       "theorem_chains": [
         {
           "text": "| Rust 数值类型与运算 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -6725,7 +6701,7 @@
           "[Generics](../02_intermediate/02_generics.md) · [Performance](../06_ecosystem/15_performance_optimization.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -6733,7 +6709,7 @@
       "layer": "L1",
       "title": "属性与声明宏：编译期元编程基础",
       "positioning": "系统讲解 Rust **属性（attributes）**和**声明宏（macro_rules!）**——从编译期元编程的基础语法到模式匹配、递归宏和卫生性，揭示 Rust 如何在编译期生成代码同时保持类型安全。",
-      "line_count": 745,
+      "line_count": 747,
       "theorem_chains": [
         {
           "text": "| 属性与声明宏：编译期元编程基础 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -6854,7 +6830,7 @@
           "[Proc Macros](../03_advanced/07_proc_macro.md) · [DSL](../02_intermediate/13_dsl_and_embedding.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -6862,7 +6838,7 @@
       "layer": "L1",
       "title": "Panic 与 Abort：不可恢复错误的处理机制",
       "positioning": "系统讲解 Rust **panic** 机制——从 panic 与 Result 的哲学分野、panic 传播、到自定义 panic 处理和 abort 模式，揭示 Rust 如何在\"优雅失败\"与\"快速崩溃\"之间做出设计选择。",
-      "line_count": 743,
+      "line_count": 745,
       "theorem_chains": [
         {
           "text": "| Panic 与 Abort：不可恢复错误的处理机制 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -6991,7 +6967,7 @@
           "[Unsafe](../03_advanced/03_unsafe.md) · [FFI](../03_advanced/05_rust_ffi.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -6999,7 +6975,7 @@
       "layer": "L1",
       "title": "类型强制与转换：显式与隐式的边界",
       "positioning": "系统讲解 Rust **类型强制（coercion）**和**类型转换（casting）**——从 deref 强制、子类型强制到显式 `as` 转换，揭示 Rust 如何在安全与灵活性之间精确控制类型变换。",
-      "line_count": 758,
+      "line_count": 760,
       "theorem_chains": [
         {
           "text": "| 类型强制与转换：显式与隐式的边界 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -7139,7 +7115,7 @@
           "[FFI](../03_advanced/05_rust_ffi.md) · [Generics](../02_intermediate/02_generics.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -7147,7 +7123,7 @@
       "layer": "L1",
       "title": "闭包基础：捕获环境与匿名函数",
       "positioning": "系统讲解 Rust **闭包（Closure）**——从环境捕获、Fn/FnMut/FnOnce trait 到闭包作为参数和返回值，揭示 Rust 如何将函数式编程的灵活性与所有权系统的安全性结合。",
-      "line_count": 743,
+      "line_count": 746,
       "theorem_chains": [
         {
           "text": "| 闭包基础：捕获环境与匿名函数 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -7286,7 +7262,7 @@
           "[Iterator](../02_intermediate/16_iterator_patterns.md) · [Async](../03_advanced/02_async.md) · [Functional Patterns](../02_intermediate/07_closure_types.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -7294,7 +7270,7 @@
       "layer": "L1",
       "title": "测试基础：从单元测试到集成测试",
       "positioning": "系统讲解 Rust **测试机制**——从单元测试、集成测试到文档测试和基准测试，揭示 Rust 如何内置测试文化并支持多种测试层级。",
-      "line_count": 665,
+      "line_count": 668,
       "theorem_chains": [
         {
           "text": "| 测试基础：从单元测试到集成测试 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -7406,7 +7382,7 @@
           "[Testing Strategies](../06_ecosystem/16_testing.md) · [Security Practices](../06_ecosystem/19_security_practices.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -7414,7 +7390,7 @@
       "layer": "L1",
       "title": "高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析",
       "positioning": "深入分析 Rust **标准库高级集合类型**的设计权衡——从 BTreeMap/BTreeSet 的有序关联容器，到 HashMap 自定义 hasher，再到 VecDeque 的双端队列与 BinaryHeap 的优先队列，揭示每种数据结构的所有权语义、性能特征、内存布局与选型策略。",
-      "line_count": 895,
+      "line_count": 897,
       "theorem_chains": [
         {
           "text": "| 高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -7544,7 +7520,7 @@
           "[Smart Pointers](../02_intermediate/12_smart_pointers.md) · [Performance](../06_ecosystem/15_performance_optimization.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -7552,7 +7528,7 @@
       "layer": "L1",
       "title": "字符串与编码：Rust 的文本处理类型系统",
       "positioning": "系统分析 Rust **字符串类型体系**的设计——String 与 str 的所有权语义、UTF-8 编码约束、OsString/OsStr 的平台抽象、CString/CStr 的 FFI 互操作，以及 grapheme clusters、unicode normalization 等高级文本处理概念。",
-      "line_count": 716,
+      "line_count": 718,
       "theorem_chains": [
         {
           "text": "| 字符串与编码：Rust 的文本处理类型系统 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -7666,7 +7642,7 @@
           "[Collections](./08_collections.md) · [FFI](../03_advanced/05_rust_ffi.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -7725,7 +7701,7 @@
       "layer": "L1",
       "title": "变量模型：从通用 PL 视角看 Rust 的所有权",
       "positioning": "",
-      "line_count": 520,
+      "line_count": 522,
       "theorem_chains": [
         {
           "text": "| 变量模型：从通用 PL 视角看 Rust 的所有权 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -7861,7 +7837,7 @@
           "[Borrowing](./02_borrowing.md) · [Memory Management](../02_intermediate/03_memory_management.md) · [Evaluation Strategies](../04_formal/18_evaluation_strategies.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -7869,7 +7845,7 @@
       "layer": "L1",
       "title": "副作用与纯度：从引用透明到 Rust 的所有权效果",
       "positioning": "",
-      "line_count": 565,
+      "line_count": 567,
       "theorem_chains": [
         {
           "text": "| 副作用与纯度：从引用透明到 Rust 的所有权效果 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -8049,7 +8025,7 @@
           "[Borrowing](./02_borrowing.md) · [Effects System](../07_future/04_effects_system.md) · [Async](../03_advanced/02_async.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -8057,7 +8033,7 @@
       "layer": "L1",
       "title": "数据抽象谱系：从 C struct 到 Rust enum + trait",
       "positioning": "",
-      "line_count": 602,
+      "line_count": 604,
       "theorem_chains": [
         {
           "text": "| 数据抽象谱系：从 C struct 到 Rust enum + trait 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -8212,7 +8188,7 @@
           "[Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Type Erasure](../03_advanced/17_type_erasure.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -8688,24 +8664,8 @@
           "context": "Go 接口是结构类型（structural typing），隐式实现，无显式 `implements` 关键字。 ✅"
         },
         {
-          "source": "RFC 1023 §3; Rust Reference: Orphan Rules",
-          "context": "Orphan Rule 要求 impl 中至少有一方（类型或 Trait）定义在当前 crate，防止跨 crate 的 impl 冲突，是 Coherence 的工程基础。"
-        },
-        {
-          "source": "RFC 1023; Rust Reference: Coherence",
-          "context": "Orphan Rule 是 Coherence 的工程实现机制，二者共同保证单态化的确定性。"
-        },
-        {
-          "source": "RFC 1023; Rust Reference: Coherence",
-          "context": "Orphan Rule 与 Coherence 的交互确保编译器在全局范围内能唯一确定每个 (Type, Trait) 对的实现。"
-        },
-        {
           "source": "Rust Reference: Coherence; Chakravarty et al. 2005",
           "context": "Coherence 在 Haskell/Rust 中的定义略有差异。"
-        },
-        {
-          "source": "RFC 1023 §3; Rust Reference: Orphan Rules",
-          "context": "covering 条件是 orphan rule 的核心数学表达。"
         },
         {
           "source": "Pierce 2002 TAPL Ch.23; Wadler & Blott 1989",
@@ -8722,14 +8682,6 @@
         {
           "source": "Rust Reference: Auto Traits",
           "context": "结构化归纳推导是编译器对复合类型自动实现 Auto Trait 的标准机制，原始指针因保守策略默认排除。"
-        },
-        {
-          "source": "RFC 1598 §Motivation",
-          "context": "Rust 有意通过 GATs 而非完整 HKT 来平衡表达力与类型系统复杂性，这在工程实践中已覆盖绝大多数类型构造器操作需求。"
-        },
-        {
-          "source": "RFC 1210; Rust Reference: min_specialization",
-          "context": "> Blanket impl 提供默认行为覆盖，specialization 允许为更具体类型提供更高效的实现路径，特化 impl 必须是默认 impl 约束的逻辑子集（always applicable）。"
         },
         {
           "source": "RFC 1210",
@@ -8765,7 +8717,7 @@
         },
         {
           "source": "Rust Reference: Fundamental types; RFC 2451",
-          "context": "`#[fundamental]` 的完整列表和语义由 Rust Reference 和 RFC 2451 定义，用户代码不可自行添加此属性。"
+          "context": "`#[fundamental]` 的完整列表和语义由 Rust Reference 和 [RFC 2451](https://rust-lang.github.io/rfcs/2451.html) 定义，用户代码不可自行添加此属性。"
         },
         {
           "source": "Rust Reference: Auto Traits; RFC 683",
@@ -9397,7 +9349,7 @@
       "layer": "L2",
       "title": "Memory Management（内存管理）",
       "positioning": "",
-      "line_count": 1894,
+      "line_count": 1897,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 深度重构——补充定理推理链（⟹ 标注）、反命题决策树系统、边界极限测试、6步认知路径与章节过渡",
@@ -9837,7 +9789,7 @@
           "[Unsafe Rust](../03_advanced/03_unsafe.md) ·"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -9845,7 +9797,7 @@
       "layer": "L2",
       "title": "Error Handling（错误处理）",
       "positioning": "",
-      "line_count": 2371,
+      "line_count": 2374,
       "theorem_chains": [
         {
           "text": "- [4.1 引理：Result\\<T,E\\> ⟹ 和类型强制错误处理](#41-引理resultte--和类型强制错误处理)",
@@ -10398,7 +10350,7 @@
           "[Concurrency](../03_advanced/01_concurrency.md) ·"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -10406,7 +10358,7 @@
       "layer": "L2",
       "title": "`assert_matches!`：模式匹配断言的形式化语义",
       "positioning": "将 Rust 的**模式匹配**能力从\"表达式求值\"扩展到\"测试断言\"的工程机制，实现编译期模式检查与运行时断言的统一。",
-      "line_count": 604,
+      "line_count": 606,
       "theorem_chains": [
         {
           "text": "| `assert_matches!`：模式匹配断言的形式化语义 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -10575,7 +10527,7 @@
           "[Macros](../03_advanced/04_macros.md) · [Version Tracking](../07_future/05_rust_version_tracking.md)"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -10583,7 +10535,7 @@
       "layer": "L2",
       "title": "Rust 范围类型语义：`std::ops::Range` → `core::range`",
       "positioning": "探讨 Rust 范围类型从**运行时迭代器**到**编译期可复制的值类型**的语义演进，以及 `IntoIterator` vs `Iterator` 的设计权衡。",
-      "line_count": 554,
+      "line_count": 556,
       "theorem_chains": [
         {
           "text": "| Rust 范围类型语义：`std::ops::Range` → `core::range` 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -10715,7 +10667,7 @@
           "[Version Tracking](../07_future/05_rust_version_tracking.md)"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -10723,7 +10675,7 @@
       "layer": "L2",
       "title": "闭包类型系统：Fn、FnMut、FnOnce 的捕获语义",
       "positioning": "深入分析 Rust 闭包的**类型系统**——`Fn`、`FnMut`、`FnOnce` 三者的捕获规则、自动 trait 推导、以及闭包与函数指针的本质区别。",
-      "line_count": 581,
+      "line_count": 583,
       "theorem_chains": [
         {
           "text": "| 闭包类型系统：Fn、FnMut、FnOnce 的捕获语义 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -10839,7 +10791,7 @@
           "[Async](../03_advanced/02_async.md) ·"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -10847,7 +10799,7 @@
       "layer": "L2",
       "title": "内部可变性：编译期规则的运行时逃逸",
       "positioning": "深入分析 Rust **内部可变性**（Interior Mutability）模式",
-      "line_count": 687,
+      "line_count": 689,
       "theorem_chains": [
         {
           "text": "| 内部可变性：编译期规则的运行时逃逸 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -10969,7 +10921,7 @@
           "[Concurrency](../03_advanced/01_concurrency.md) ·"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -10977,7 +10929,7 @@
       "layer": "L2",
       "title": "Serde 序列化模式：Rust 的类型驱动数据转换",
       "positioning": "深入分析 **Serde** —— Rust 生态中主导的序列化/反序列化框架，探讨 `Serialize [来源: [serde::Serialize](https://docs.rs/serde/latest/serde/trait.Serialize.html)]`/`Deserialize` derive 宏、自定义序列化逻辑、以及类型系统如何保障数据转换的安全性。",
-      "line_count": 834,
+      "line_count": 836,
       "theorem_chains": [
         {
           "text": "| Serde 序列化模式：Rust 的类型驱动数据转换 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -11097,7 +11049,7 @@
           "[Core Crates](../06_ecosystem/03_core_crates.md) · [Application Domains](../06_ecosystem/04_application_domains.md)"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -11105,7 +11057,7 @@
       "layer": "L2",
       "title": "模块系统：Rust 的代码组织与可见性规则",
       "positioning": "深入分析 Rust **模块系统**（module system）的设计——从文件系统映射、可见性规则（pub/use/super/self）、到 crate 边界与 workspace 组织，揭示 Rust 模块系统与 C++/Java/Python 的本质差异。",
-      "line_count": 675,
+      "line_count": 677,
       "theorem_chains": [
         {
           "text": "| 模块系统：Rust 的代码组织与可见性规则 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -11228,7 +11180,7 @@
           "[Macros](../03_advanced/04_macros.md) · [Cargo Toolchain](../06_ecosystem/01_toolchain.md)"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -11236,7 +11188,7 @@
       "layer": "L2",
       "title": "Cow：写时克隆与零拷贝抽象",
       "positioning": "深入分析 Rust 中 **Cow（Clone [来源: [std::clone::Clone](https://doc.rust-lang.org/std/clone/trait.Clone.html)] on Write）**类型的设计——如何在**借用**（零拷贝）和**拥有**（必要时克隆）之间自动切换，以及它在 API 设计中的广泛应用。",
-      "line_count": 695,
+      "line_count": 697,
       "theorem_chains": [
         {
           "text": "| Cow：写时克隆与零拷贝抽象 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -11348,7 +11300,7 @@
           "[String Patterns](./09_serde_patterns.md) · [Zero Cost Abstractions](../01_foundation/06_zero_cost_abstractions.md)"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -11356,7 +11308,7 @@
       "layer": "L2",
       "title": "智能指针：堆内存管理与共享语义",
       "positioning": "系统分析 Rust **智能指针**的设计——Box（独占堆分配）、Rc/Arc（引用计数共享）、RefCell/Cell（内部可变性）、以及它们的组合使用模式，揭示每种指针类型的所有权语义和适用场景。",
-      "line_count": 720,
+      "line_count": 722,
       "theorem_chains": [
         {
           "text": "| 智能指针：堆内存管理与共享语义 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -11477,7 +11429,7 @@
           "[Pin](../03_advanced/06_pin_unpin.md) · [Cow](./11_cow_and_borrowed.md)"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -11485,7 +11437,7 @@
       "layer": "L2",
       "title": "DSL 与嵌入 式设计：Rust 中的领域特定语言",
       "positioning": "分析 Rust 中 **DSL（领域特定语言）**的构建方法——从宏驱动的内嵌 DSL（如 html!、sql!）、到外部 DSL 的解析器 [来源: [Parsing in Rust](https://rust-lang.github.io/rustc-dev-guide/grammar.html)]组合子（parser combinators），再到 Rust 作为宿主语言的嵌入策略，揭示类型安全 DSL 的设计模式。",
-      "line_count": 717,
+      "line_count": 719,
       "theorem_chains": [
         {
           "text": "| DSL 与嵌入 式设计：Rust 中的领域特定语言 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -11623,7 +11575,7 @@
           "[Serde Patterns](./09_serde_patterns.md) · [WebAssembly](../06_ecosystem/11_webassembly.md)"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -11631,7 +11583,7 @@
       "layer": "L2",
       "title": "Newtype 与包装器模式：类型安全的零成本抽象",
       "positioning": "深入分析 Rust 中 **Newtype 模式**和**包装器类型**的设计——如何通过单字段元组结构体创建语义上不同的类型，实现编译期单位检查、API 封装和安全边界，同时保持零运行时开销。",
-      "line_count": 693,
+      "line_count": 695,
       "theorem_chains": [
         {
           "text": "| Newtype 与包装器模式：类型安全的零成本抽象 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -11760,7 +11712,7 @@
           "[Typestate](../06_ecosystem/02_patterns.md) · [Smart Pointers](./12_smart_pointers.md)"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -11768,7 +11720,7 @@
       "layer": "L2",
       "title": "错误处理深入：从 Result 到自定义错误生态",
       "positioning": "深入分析 Rust **错误处理机制**——从 `Result`/`Option` 的组合子到 `?` 运算符、错误转换、自定义错误类型和错误处理框架，揭示 Rust 如何将错误处理融入类型系统实现编译期安全。",
-      "line_count": 703,
+      "line_count": 705,
       "theorem_chains": [
         {
           "text": "| 错误处理深入：从 Result 到自定义错误生态 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -11890,7 +11842,7 @@
           "[Async](../03_advanced/02_async.md) · [Logging](../06_ecosystem/13_logging_observability.md)"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -11898,7 +11850,7 @@
       "layer": "L2",
       "title": "Rust 迭代器模式",
       "positioning": "深入探讨 Rust 迭代器模式——从适配器链到自定义迭代器，分析惰性求值、性能特征和最佳实践。",
-      "line_count": 663,
+      "line_count": 665,
       "theorem_chains": [
         {
           "text": "> 迭代器安全 ⟹ 惰性求值 + 消费语义",
@@ -12028,7 +11980,7 @@
           "[Concurrency](../03_advanced/01_concurrency.md) · [Performance](../06_ecosystem/15_performance_optimization.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -12036,7 +11988,7 @@
       "layer": "L2",
       "title": "迭代器模式：Rust 的惰性计算与零成本抽象",
       "positioning": "深入分析 Rust **迭代器（Iterator trait）**的设计——从惰性计算链、消费者-迭代器分离到自定义迭代器实现，揭示 Rust 如何通过类型系统实现编译期优化的惰性序列处理。",
-      "line_count": 729,
+      "line_count": 731,
       "theorem_chains": [
         {
           "text": "> 迭代器安全 ⟹ 惰性求值 + 消费语义",
@@ -12178,7 +12130,7 @@
           "[Async Iterator](../03_advanced/02_async.md) · [Zero Cost](../01_foundation/06_zero_cost_abstractions.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -12186,7 +12138,7 @@
       "layer": "L2",
       "title": "宏模式：编译期代码生成的工程实践",
       "positioning": "深入分析 Rust **宏的工程模式**——从 DRY 代码生成、API 设计到编译期计算，揭示如何在不牺牲可读性的前提下利用宏提升代码复用和类型安全。",
-      "line_count": 745,
+      "line_count": 747,
       "theorem_chains": [
         {
           "text": "| 宏模式：编译期代码生成的工程实践 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -12301,7 +12253,7 @@
           "[Proc Macros](../03_advanced/07_proc_macro.md) · [DSL](./13_dsl_and_embedding.md)"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -12309,7 +12261,7 @@
       "layer": "L2",
       "title": "生命周期高级主题：从 HRTB 到自引用类型",
       "positioning": "深入分析 Rust **生命周期**的高级主题——从高阶生命周期（HRTB）、生命周期省略规则到自引用结构和 Pin，揭示生命周期系统如何处理最复杂的借用场景。",
-      "line_count": 699,
+      "line_count": 701,
       "theorem_chains": [
         {
           "text": "| 生命周期高级主题：从 HRTB 到自引用类型 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -12422,7 +12374,7 @@
           "[Pin](../03_advanced/06_pin_unpin.md) · [NLL](../03_advanced/08_nll_and_polonius.md) · [RustBelt](../04_formal/04_rustbelt.md)"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -12430,7 +12382,7 @@
       "layer": "L2",
       "title": "高级 Trait 主题：从关联类型到特化",
       "positioning": "深入分析 Rust **Trait 系统的高级特性**——从关联类型、泛型关联类型（GATs）到特化（Specialization）和负实现，揭示 Trait 系统如何支持复杂抽象和零成本多态。",
-      "line_count": 699,
+      "line_count": 701,
       "theorem_chains": [
         {
           "text": "| 高级 Trait 主题：从关联类型到特化 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -12566,7 +12518,7 @@
           "[Type Inference](../04_formal/08_type_inference.md) · [RustBelt](../04_formal/04_rustbelt.md)"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -12574,7 +12526,7 @@
       "layer": "L2",
       "title": "高级类型系统：从关联类型到类型级编程",
       "positioning": "深入分析 Rust **类型系统的高级特性**——从 GATs、impl Trait 到类型级计算和 const generics，揭示 Rust 如何在保持编译期安全的同时提供强大的抽象能力。",
-      "line_count": 823,
+      "line_count": 825,
       "theorem_chains": [
         {
           "text": "| 高级类型系统：从关联类型到类型级编程 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -12738,7 +12690,7 @@
           "[RustBelt](../04_formal/04_rustbelt.md) · [Category Theory](../04_formal/10_category_theory.md)"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -12746,7 +12698,7 @@
       "layer": "L2",
       "title": "元编程：Rust 的编译期代码生成与变换",
       "positioning": "深入分析 Rust **元编程（Metaprogramming）**的技术体系——从声明式宏的模式匹配、过程宏的语法树操作，到 derive 宏的代码生成、quote/syn 工具体系，揭示 Rust 如何在编译期实现类型安全的代码变换同时保持宏卫生性（Hygiene）。",
-      "line_count": 742,
+      "line_count": 744,
       "theorem_chains": [
         {
           "text": "| 元编程：Rust 的编译期代码生成与变换 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -12856,7 +12808,7 @@
           "[Proc Macros](../03_advanced/07_proc_macro.md) · [DSL](./13_dsl_and_embedding.md)"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -13808,7 +13760,7 @@
       "layer": "L3",
       "title": "Async/Await 高级主题",
       "positioning": "",
-      "line_count": 1376,
+      "line_count": 1378,
       "theorem_chains": [
         {
           "text": "> **定理链编号**: T-053 Waker 活性 ⟹ T-054 Stream 安全性",
@@ -14099,7 +14051,7 @@
           "[Formal Verification](../04_formal/03_ownership_formal.md)"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -14107,7 +14059,7 @@
       "layer": "L3",
       "title": "异步模式：从 Future 到生产级并发",
       "positioning": "深入分析 Rust **异步编程的高级模式**——从 Future 状态机、Pin 保证到并发执行和取消传播，揭示 Rust async/await 如何在零运行时开销下实现高效并发。",
-      "line_count": 836,
+      "line_count": 838,
       "theorem_chains": [
         {
           "text": "| 异步模式：从 Future 到生产级并发 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -14244,7 +14196,7 @@
           "[Distributed Systems](../06_ecosystem/18_distributed_systems.md) · [Tokio](https://tokio.rs/)"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -14946,7 +14898,7 @@
       "layer": "L3",
       "title": "Macros（宏系统）",
       "positioning": "",
-      "line_count": 2242,
+      "line_count": 2245,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 深度重构——增强定理一致性矩阵至11行（带⟹推理链）、新增3个反命题决策树、重写6步递进认知路径、补充章节过渡段落与层次一致性标注",
@@ -14985,7 +14937,7 @@
           "type": "table_row"
         },
         {
-          "text": "| **L2** | 过程宏操作 TokenStream ⟹ 编译期元编程 | 阶段隔离 | RFC 1566 | 宏 panic 导致编译中断 | `#[derive(Debug)]` 自动生成 impl |",
+          "text": "| **L2** | 过程宏操作 TokenStream ⟹ 编译期元编程 | 阶段隔离 | [RFC 1566](https://rust-lang.github.io/rfcs/1566.html) | 宏 panic 导致编译中断 | `#[derive(Debug)]` 自动生成 impl |",
           "type": "table_row"
         },
         {
@@ -15456,7 +15408,7 @@
           "[DSL Construction] · [Meta-programming]"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -15517,7 +15469,7 @@
       "layer": "L3",
       "title": "Rust FFI：与外部代码的安全边界",
       "positioning": "系统分析 Rust 与 C/C++ 等外部代码交互的**Foreign Function Interface (FFI)** 机制，探讨 `extern` 块、ABI 兼容、`unsafe` 边界管理以及 `bindgen`/`cbindgen` 工具链。",
-      "line_count": 634,
+      "line_count": 636,
       "theorem_chains": [
         {
           "text": "| Rust FFI：与外部代码的安全边界 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -15647,7 +15599,7 @@
           "[Application Domains](../06_ecosystem/04_application_domains.md)"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -15655,7 +15607,7 @@
       "layer": "L3",
       "title": "Pin 与 Unpin：自引用类型的不动性保证",
       "positioning": "深入分析 Rust 中 **Pin<&mut T>** 和 **Unpin** 的设计动机——解决自引用类型（self-referential structs）在内存移动时的安全问题，探讨 Pin 与 Future、Generator 的交互，以及 async/await 的状态机实现。",
-      "line_count": 671,
+      "line_count": 673,
       "theorem_chains": [
         {
           "text": "| Pin 与 Unpin：自引用类型的不动性保证 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -15785,7 +15737,7 @@
           "[Unsafe](./03_unsafe.md) · [Gen Blocks](../07_future/15_gen_blocks_preview.md)"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -15793,7 +15745,7 @@
       "layer": "L3",
       "title": "过程宏：编译期代码生成的元编程工具",
       "positioning": "深入分析 Rust **过程宏（Procedural Macros）**的三种类型（derive、attribute、function-like）——它们的编译期执行模型、TokenStream 操作、卫生性（hygiene）保证，以及与 `macro_rules!` 的本质差异。",
-      "line_count": 726,
+      "line_count": 728,
       "theorem_chains": [
         {
           "text": "| 过程宏：编译期代码生成的元编程工具 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -15919,7 +15871,7 @@
           "[Serde Patterns](../02_intermediate/09_serde_patterns.md) · [Builder Pattern](../06_ecosystem/02_patterns.md)"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -15927,7 +15879,7 @@
       "layer": "L3",
       "title": "NLL 与 Polonius：借用检查器的演进",
       "positioning": "深入分析 Rust **借用检查器**的两个里程碑——Non-Lexical Lifetimes (NLL) 如何放宽词法作用域限制，以及 Polonius 如何通过数据流分析实现更精确的借用检查，揭示 Rust 类型系统的持续演进。",
-      "line_count": 640,
+      "line_count": 642,
       "theorem_chains": [
         {
           "text": "| NLL 与 Polonius：借用检查器的演进 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -16046,7 +15998,7 @@
           "[Unsafe](./03_unsafe.md) · [Formal Methods](../04_formal/04_rustbelt.md)"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -16107,7 +16059,7 @@
       "layer": "L3",
       "title": "FFI 高级主题：跨语言边界的安全与性能",
       "positioning": "深入分析 Rust **FFI（外部函数接口）**的高级主题——从复杂类型映射、回调函数、到线程安全和内存布局控制，揭示如何在不安全边界上维持 Rust 的安全保证。",
-      "line_count": 834,
+      "line_count": 836,
       "theorem_chains": [
         {
           "text": "| FFI 高级主题：跨语言边界的安全与性能 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -16258,7 +16210,7 @@
           "[Cross Compilation](../06_ecosystem/17_cross_compilation.md) · [WASI](../06_ecosystem/08_wasi.md)"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -16266,7 +16218,7 @@
       "layer": "L3",
       "title": "并发 模式：从消息 传递到锁自由的数据结构",
       "positioning": "深入分析 Rust **并发编程的高级模式**——从 Actor 模型、通道模式到无锁数据结构和内存序，揭示 Rust 所有权系统如何为并发安全提供编译期保证。",
-      "line_count": 783,
+      "line_count": 785,
       "theorem_chains": [
         {
           "text": "| 并发 模式：从消息 传递到锁自由的数据结构 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -16399,7 +16351,7 @@
           "[Distributed Systems](../06_ecosystem/18_distributed_systems.md) · [Lockfree](../03_advanced/01_concurrency.md)"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -16407,7 +16359,7 @@
       "layer": "L3",
       "title": "原子操作与内存序：无锁并发的精确控制",
       "positioning": "深入分析 Rust **原子类型（Atomic）**和**内存排序（Memory Ordering [来源: [Atomic Ordering](https://doc.rust-lang.org/std/sync/atomic/enum.Ordering.html)]）**——从基本的 load/store 到 compare-and-swap 和释放-获取语义，揭示无锁编程中硬件内存模型的精确控制。",
-      "line_count": 843,
+      "line_count": 845,
       "theorem_chains": [
         {
           "text": "| 原子操作与内存序：无锁并发的精确控制 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -16543,7 +16495,7 @@
           "[Lockfree Data Structures](https://en.wikipedia.org/wiki/Non-blocking_algorithm) · [Distributed Systems](../06_ecosystem/18_distributed_systems.md)"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -16551,7 +16503,7 @@
       "layer": "L3",
       "title": "Unsafe Rust 模式：安全抽象的核心技术",
       "positioning": "深入分析 Rust **unsafe 代码的工程模式**——从原始指针操作、内存布局控制到与 C 的互操作，揭示如何在 unsafe 边界内构建安全抽象。",
-      "line_count": 858,
+      "line_count": 860,
       "theorem_chains": [
         {
           "text": "| Unsafe Rust 模式：安全抽象的核心技术 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -16692,7 +16644,7 @@
           "[RustBelt](../04_formal/04_rustbelt.md) · [Concurrency Patterns](./10_concurrency_patterns.md)"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -16751,7 +16703,7 @@
       "layer": "L3",
       "title": "自定义分配器与内存布局优化",
       "positioning": "深入探讨 Rust 的**自定义分配器**机制——从 `GlobalAlloc` Trait 到 `allocator_api` 不稳定特性，分析内存布局对齐、分配策略与性能优化。",
-      "line_count": 783,
+      "line_count": 785,
       "theorem_chains": [
         {
           "text": "| 自定义分配器与内存布局优化 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -16889,7 +16841,7 @@
           "[Performance Optimization](../06_ecosystem/15_performance_optimization.md) · [Embedded](../06_ecosystem/04_application_domains.md)"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -16897,7 +16849,7 @@
       "layer": "L3",
       "title": "零拷贝解析与序列化优化",
       "positioning": "探讨 Rust 中的**零拷贝**（Zero-Copy）技术——从字节切片直接解析结构化数据，无需中间复制，分析内存安全与性能权衡。",
-      "line_count": 747,
+      "line_count": 749,
       "theorem_chains": [
         {
           "text": "| 零拷贝解析与序列化优化 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -17037,7 +16989,7 @@
           "> [Performance Optimization](../06_ecosystem/15_performance_optimization.md) ·"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -17045,7 +16997,7 @@
       "layer": "L3",
       "title": "无锁编程与内存模型",
       "positioning": "深入探讨 Rust 中的**无锁编程**——从原子操作到内存序，分析 lock-free 算法的内存安全保证与性能优势。",
-      "line_count": 780,
+      "line_count": 782,
       "theorem_chains": [
         {
           "text": "| 无锁编程与内存模型 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -17174,7 +17126,7 @@
           "> [Concurrent Patterns](./10_concurrency_patterns.md) ·"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -17182,7 +17134,7 @@
       "layer": "L3",
       "title": "类型擦除与动态分发",
       "positioning": "深入探讨 Rust 中的**类型擦除**技术——从 trait object 到 vtable，分析动态分发如何在保持类型安全的同时实现运行时多态。",
-      "line_count": 767,
+      "line_count": 769,
       "theorem_chains": [
         {
           "text": "| 类型擦除与动态分发 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -17308,7 +17260,7 @@
           "> [Performance](../06_ecosystem/15_performance_optimization.md) ·"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -17316,7 +17268,7 @@
       "layer": "L3",
       "title": "Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象",
       "positioning": "系统分析 Rust **网络编程**的核心范式——从 Tokio 运行时下的 TCP/UDP 异步 IO，到 socket 编程的底层细节，再到 Tower 服务抽象的设计哲学，建立从\"怎么写\"到\"为什么这样设计\"的完整认知框架。",
-      "line_count": 881,
+      "line_count": 883,
       "theorem_chains": [
         {
           "text": "| Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -17446,7 +17398,7 @@
           "[Web Frameworks](../06_ecosystem/27_web_frameworks.md) · [Lock-free](./16_lock_free.md)"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -17454,7 +17406,7 @@
       "layer": "L3",
       "title": "并行与分布式模式谱系：从线程池到共识算法",
       "positioning": "",
-      "line_count": 804,
+      "line_count": 806,
       "theorem_chains": [
         {
           "text": "| 并行与分布式模式谱系：从线程池到共识算法 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -17632,7 +17584,7 @@
           "> [Pattern Composition Algebra](../06_ecosystem/35_pattern_composition_algebra.md) ·"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -17640,7 +17592,7 @@
       "layer": "L3",
       "title": "流处理语义：从 Dataflow Model 到 Differential Dataflow",
       "positioning": "深入分析流处理的核心语义——时间域、窗口、水印、容错、状态管理、背压，并将 Rust 的 timely/differential dataflow 置于国际流处理理论谱系中定位。",
-      "line_count": 754,
+      "line_count": 756,
       "theorem_chains": [
         {
           "text": "| 流处理语义：从 Dataflow Model 到 Differential Dataflow 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -17753,7 +17705,7 @@
           "[Stream Processing Ecosystem](../06_ecosystem/36_stream_processing_ecosystem.md) ·"
         ]
       },
-      "backward_chains": 1,
+      "backward_chains": 3,
       "templated_chains": 0
     },
     {
@@ -18233,10 +18185,6 @@
         {
           "source": "Rust 1.89 Release Notes; RFC 2000",
           "context": "Rust 1.89 稳定了 `_` 推断 const generics 参数，使常量参数获得与类型参数同等的 HM 推断能力。"
-        },
-        {
-          "source": "RFC 3762; Tracking Issue #143874",
-          "context": "⚠️ nightly only"
         }
       ],
       "cross_references": [
@@ -24465,16 +24413,8 @@
           "context": "应用领域分析基于工业报告和大型企业的 Rust 采用案例。✅"
         },
         {
-          "source": "Embassy Book; Rust for Linux; Aya Docs; QUIC RFC 9000; wgpu Docs",
-          "context": "各方向的深入分析参考了对应领域的权威文档和 RFC。✅"
-        },
-        {
           "source": "Rust in Production; Rust Foundation; Ferrous Systems; AWS/Google/Microsoft Rust Blogs",
           "context": "应用领域分析基于工业报告和大型企业的 Rust 采用案例。✅"
-        },
-        {
-          "source": "Embassy Book; Rust for Linux; Aya Docs; QUIC RFC 9000; wgpu Docs; egui Docs",
-          "context": "各方向的深入分析参考了对应领域的权威文档和 RFC。✅"
         },
         {
           "source": "Rust Blockchain Report 2024; Solana Docs; Polkadot Substrate Docs; Near Protocol Docs",
@@ -26059,7 +25999,7 @@
       "path": "concept\\06_ecosystem\\14_documentation.md",
       "layer": "L6",
       "title": "文档生态：rustdoc、文档测试与 API 文档规范",
-      "positioning": "覆盖 Rust **文档生态**的核心工具与实践——从 rustdoc 的渲染机制、文档测试（doctest）、到 API 文档规范（RFC 1574）和 mdBook 静态站点生成，分析 Rust 文档文化如何成为语言生态的竞争优势。",
+      "positioning": "覆盖 Rust **文档生态**的核心工具与实践——从 rustdoc 的渲染机制、文档测试（doctest）、到 API 文档规范（[RFC 1574](https://rust-lang.github.io/rfcs/1574.html)）和 mdBook 静态站点生成，分析 Rust 文档文化如何成为语言生态的竞争优势。",
       "line_count": 605,
       "theorem_chains": [
         {
@@ -33305,10 +33245,6 @@
           "context": "📋 推测性内容"
         },
         {
-          "source": "Rust Edition Guide; RFC 2052; RFC 2000; RFC 1598; RFC 1210",
-          "context": "语言演进分析基于官方 RFC 和 Edition 指南。✅"
-        },
-        {
           "source": "Rust Lang Team Blog; Rust Internals Forum; Lang Team Roadmap",
           "context": "未来方向基于语言团队的公开讨论和路线图文档。✅"
         },
@@ -33592,10 +33528,6 @@
         {
           "source": "Plotkin & Pretnar 2009 — Algebraic Effects; Koka Documentation; Eff Language",
           "context": "Effect 系统概念基于代数效应的经典论文和现代语言实现。✅"
-        },
-        {
-          "source": "Rust Lang Team Blog; Rust Internals Discussion; RFC 3668 AsyncFn",
-          "context": "Rust 效果追踪分析基于语言团队的公开讨论和稳定化的 trait 系统。✅"
         },
         {
           "source": "Haskell GHC; Java Checked Exceptions; Type Theory Research",
@@ -34318,7 +34250,7 @@
       "layer": "L7",
       "title": "Const Trait Impl 预研：常量上下文中的 Trait 泛化",
       "positioning": "探讨 Rust 在**常量上下文**（`const fn`）中支持 Trait 调用的演进，分析其对泛型编程、`const fn` 表达能力以及编译期计算的影响。",
-      "line_count": 497,
+      "line_count": 498,
       "theorem_chains": [
         {
           "text": "- **定理**: Const Trait Impl 预研：常量上下文中的 Trait 泛化 定义 ⟹ 类型安全保证",
@@ -35673,7 +35605,7 @@
       "path": "concept\\07_future\\18_async_drop_preview.md",
       "layer": "L7",
       "title": "Async Drop：异步资源的优雅销毁",
-      "positioning": "分析 Rust 中 **异步资源销毁**的设计挑战——`Drop::drop` 是同步的，但异步资源（如数据库连接、网络流）需要 await 才能正确关闭。探讨 `AsyncDrop` trait 的提案（RFC 3308）、设计约束与当前 nightly 实现状态。",
+      "positioning": "分析 Rust 中 **异步资源销毁**的设计挑战——`Drop::drop` 是同步的，但异步资源（如数据库连接、网络流）需要 await 才能正确关闭。探讨 `AsyncDrop` trait 的提案（[RFC 3308](https://rust-lang.github.io/rfcs/3308.html)）、设计约束与当前 nightly 实现状态。",
       "line_count": 628,
       "theorem_chains": [
         {

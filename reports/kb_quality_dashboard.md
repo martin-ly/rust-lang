@@ -1,6 +1,6 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-06-02T21:58:56.905752+00:00
+> 生成时间: 2026-06-02T22:18:11.870650+00:00
 > 扫描文件数: 260
 
 ## 全局指标
@@ -14,7 +14,7 @@
 | 编译验证代码块 | 2642 | ≥150 | ✅ |
 | 定理矩阵总行 | 12611 | — | — |
 | 死链数量 | 0 | 0 | ✅ |
-| 反向推理 (⟸) | 60 | ≥50 | ✅ |
+| 反向推理 (⟸) | 180 | ≥50 | ✅ |
 | 模板化 ⟹ | 0 | 0 | ✅ |
 | 前置概念覆盖率 | 222/222 | 100% | ✅ |
 | 后置概念覆盖率 | 222/222 | 100% | ✅ |
@@ -24,9 +24,9 @@
 | 层级 | 文件数 | 平均 ⟹/文件 | 平均过渡段/文件 | 认知路径 | ⟸/文件 | 模板化 | 前置覆盖 | 后置覆盖 |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|
 | L0 | 38 | 2.4 | 5.7 | 36/38 (94%) | 0.0 | 0 | 7/38 | 6/38 |
-| L1 | 27 | 4.5 | 7.4 | 27/27 (100%) | 0.3 | 0 | 27/27 | 27/27 |
-| L2 | 23 | 4.9 | 6.3 | 23/23 (100%) | 1.0 | 0 | 23/23 | 23/23 |
-| L3 | 26 | 5.4 | 5.8 | 26/26 (100%) | 1.2 | 0 | 26/26 | 26/26 |
+| L1 | 27 | 4.5 | 7.4 | 27/27 (100%) | 1.9 | 0 | 27/27 | 27/27 |
+| L2 | 23 | 4.9 | 6.3 | 23/23 (100%) | 2.7 | 0 | 23/23 | 23/23 |
+| L3 | 26 | 5.4 | 5.8 | 26/26 (100%) | 2.5 | 0 | 26/26 | 26/26 |
 | L4 | 23 | 5.0 | 5.8 | 23/23 (100%) | 0.0 | 0 | 23/23 | 23/23 |
 | L5 | 18 | 3.8 | 6.7 | 18/18 (100%) | 0.0 | 0 | 18/18 | 18/18 |
 | L6 | 61 | 5.8 | 10.9 | 61/61 (100%) | 0.0 | 0 | 61/61 | 61/61 |
@@ -36,66 +36,7 @@
 
 | 文件 | 层级 | 未通过项 |
 |:---|:---|:---|
-| concept\01_foundation\00_pl_prerequisites.md | L1 | 反向推理不足 (⟸ 0 < 2) |
-| concept\01_foundation\03_lifetimes_advanced.md | L1 | 反向推理不足 (⟸ 0 < 2) |
-| concept\01_foundation\05_never_type.md | L1 | 反向推理不足 (⟸ 0 < 2) |
-| concept\01_foundation\05_reference_semantics.md | L1 | 反向推理不足 (⟸ 0 < 2) |
-| concept\01_foundation\06_zero_cost_abstractions.md | L1 | 反向推理不足 (⟸ 0 < 2) |
-| concept\01_foundation\07_control_flow.md | L1 | 反向推理不足 (⟸ 0 < 2) |
-| concept\01_foundation\08_collections.md | L1 | 反向推理不足 (⟸ 0 < 2) |
-| concept\01_foundation\09_strings_and_text.md | L1 | 反向推理不足 (⟸ 0 < 2) |
-| concept\01_foundation\10_error_handling_basics.md | L1 | 反向推理不足 (⟸ 0 < 2) |
-| concept\01_foundation\10_numerics.md | L1 | 反向推理不足 (⟸ 0 < 2) |
-| concept\01_foundation\11_modules_and_paths.md | L1 | 反向推理不足 (⟸ 0 < 2) |
-| concept\01_foundation\11_numeric_types.md | L1 | 反向推理不足 (⟸ 0 < 2) |
-| concept\01_foundation\12_attributes_and_macros.md | L1 | 反向推理不足 (⟸ 0 < 2) |
-| concept\01_foundation\13_panic_and_abort.md | L1 | 反向推理不足 (⟸ 0 < 2) |
-| concept\01_foundation\14_coercion_and_casting.md | L1 | 反向推理不足 (⟸ 0 < 2) |
-| concept\01_foundation\15_closure_basics.md | L1 | 反向推理不足 (⟸ 0 < 2) |
-| concept\01_foundation\16_testing_basics.md | L1 | 反向推理不足 (⟸ 0 < 2) |
-| concept\01_foundation\17_collections_advanced.md | L1 | 反向推理不足 (⟸ 0 < 2) |
-| concept\01_foundation\18_strings_and_encoding.md | L1 | 反向推理不足 (⟸ 0 < 2) |
-| concept\01_foundation\20_variable_model.md | L1 | 反向推理不足 (⟸ 0 < 2) |
-| concept\01_foundation\21_effects_and_purity.md | L1 | 反向推理不足 (⟸ 0 < 2) |
-| concept\01_foundation\22_data_abstraction_spectrum.md | L1 | 反向推理不足 (⟸ 0 < 2) |
-| concept\02_intermediate\03_memory_management.md | L2 | 反向推理不足 (⟸ 1 < 2) |
-| concept\02_intermediate\04_error_handling.md | L2 | 反向推理不足 (⟸ 1 < 2) |
-| concept\02_intermediate\05_assert_matches.md | L2 | 反向推理不足 (⟸ 1 < 2) |
-| concept\02_intermediate\06_range_types.md | L2 | 反向推理不足 (⟸ 1 < 2) |
-| concept\02_intermediate\07_closure_types.md | L2 | 反向推理不足 (⟸ 1 < 2) |
-| concept\02_intermediate\08_interior_mutability.md | L2 | 反向推理不足 (⟸ 1 < 2) |
-| concept\02_intermediate\09_serde_patterns.md | L2 | 反向推理不足 (⟸ 1 < 2) |
-| concept\02_intermediate\10_module_system.md | L2 | 反向推理不足 (⟸ 1 < 2) |
-| concept\02_intermediate\11_cow_and_borrowed.md | L2 | 反向推理不足 (⟸ 1 < 2) |
-| concept\02_intermediate\12_smart_pointers.md | L2 | 反向推理不足 (⟸ 1 < 2) |
-| concept\02_intermediate\13_dsl_and_embedding.md | L2 | 反向推理不足 (⟸ 1 < 2) |
-| concept\02_intermediate\14_newtype_and_wrapper.md | L2 | 反向推理不足 (⟸ 1 < 2) |
-| concept\02_intermediate\15_error_handling_deep_dive.md | L2 | 反向推理不足 (⟸ 1 < 2) |
-| concept\02_intermediate\15_iterator_patterns.md | L2 | 反向推理不足 (⟸ 0 < 2) |
-| concept\02_intermediate\16_iterator_patterns.md | L2 | 反向推理不足 (⟸ 0 < 2) |
-| concept\02_intermediate\17_macro_patterns.md | L2 | 反向推理不足 (⟸ 1 < 2) |
-| concept\02_intermediate\18_lifetimes_advanced.md | L2 | 反向推理不足 (⟸ 1 < 2) |
-| concept\02_intermediate\19_advanced_traits.md | L2 | 反向推理不足 (⟸ 1 < 2) |
-| concept\02_intermediate\20_type_system_advanced.md | L2 | 反向推理不足 (⟸ 1 < 2) |
-| concept\02_intermediate\21_metaprogramming.md | L2 | 反向推理不足 (⟸ 1 < 2) |
-| concept\03_advanced\02_async_advanced.md | L3 | 反向推理不足 (⟸ 1 < 2) |
-| concept\03_advanced\02_async_patterns.md | L3 | 反向推理不足 (⟸ 1 < 2) |
-| concept\03_advanced\04_macros.md | L3 | 反向推理不足 (⟸ 1 < 2) |
-| concept\03_advanced\05_rust_ffi.md | L3 | 反向推理不足 (⟸ 1 < 2) |
-| concept\03_advanced\06_pin_unpin.md | L3 | 反向推理不足 (⟸ 1 < 2) |
-| concept\03_advanced\07_proc_macro.md | L3 | 反向推理不足 (⟸ 1 < 2) |
-| concept\03_advanced\08_nll_and_polonius.md | L3 | 反向推理不足 (⟸ 1 < 2) |
-| concept\03_advanced\09_ffi_advanced.md | L3 | 反向推理不足 (⟸ 1 < 2) |
-| concept\03_advanced\10_concurrency_patterns.md | L3 | 反向推理不足 (⟸ 1 < 2) |
-| concept\03_advanced\11_atomics_and_memory_ordering.md | L3 | 反向推理不足 (⟸ 1 < 2) |
-| concept\03_advanced\12_unsafe_rust_patterns.md | L3 | 反向推理不足 (⟸ 1 < 2) |
-| concept\03_advanced\14_custom_allocators.md | L3 | 反向推理不足 (⟸ 1 < 2) |
-| concept\03_advanced\15_zero_copy_parsing.md | L3 | 反向推理不足 (⟸ 1 < 2) |
-| concept\03_advanced\16_lock_free.md | L3 | 反向推理不足 (⟸ 1 < 2) |
-| concept\03_advanced\17_type_erasure.md | L3 | 反向推理不足 (⟸ 1 < 2) |
-| concept\03_advanced\18_network_programming.md | L3 | 反向推理不足 (⟸ 1 < 2) |
-| concept\03_advanced\19_parallel_distributed_pattern_spectrum.md | L3 | 反向推理不足 (⟸ 1 < 2) |
-| concept\03_advanced\20_stream_processing_semantics.md | L3 | 反向推理不足 (⟸ 1 < 2) |
+| — | — | 所有文件通过质量门 |
 
 ## 文件详细统计
 
@@ -139,82 +80,82 @@
 | concept\00_meta\terminology_glossary.md | L0 | 401 | 1 | 0 | 0 | 1 | 0 | 0 | 6 | ✅ | ❌ | ❌ |
 | concept\00_meta\theorem_inference_forest.md | L0 | 465 | 3 | 0 | 0 | 1 | 3 | 0 | 6 | ✅ | ❌ | ❌ |
 | concept\00_meta\todos.md | L0 | 277 | 1 | 0 | 0 | 1 | 0 | 0 | 6 | ✅ | ❌ | ❌ |
-| concept\01_foundation\00_pl_prerequisites.md | L1 | 430 | 3 | 0 | 0 | 1 | 0 | 12 | 6 | ✅ | ✅ | ✅ |
+| concept\01_foundation\00_pl_prerequisites.md | L1 | 432 | 3 | 2 | 0 | 1 | 0 | 12 | 6 | ✅ | ✅ | ✅ |
 | concept\01_foundation\01_ownership.md | L1 | 1522 | 12 | 2 | 0 | 3 | 7 | 35 | 16 | ✅ | ✅ | ✅ |
 | concept\01_foundation\02_borrowing.md | L1 | 1634 | 4 | 2 | 0 | 3 | 6 | 38 | 20 | ✅ | ✅ | ✅ |
 | concept\01_foundation\03_lifetimes.md | L1 | 1225 | 19 | 2 | 0 | 3 | 5 | 34 | 6 | ✅ | ✅ | ✅ |
-| concept\01_foundation\03_lifetimes_advanced.md | L1 | 1339 | 3 | 0 | 0 | 1 | 0 | 39 | 10 | ✅ | ✅ | ✅ |
+| concept\01_foundation\03_lifetimes_advanced.md | L1 | 1342 | 3 | 2 | 0 | 1 | 0 | 39 | 10 | ✅ | ✅ | ✅ |
 | concept\01_foundation\04_type_system.md | L1 | 2500 | 18 | 2 | 0 | 3 | 12 | 45 | 16 | ✅ | ✅ | ✅ |
-| concept\01_foundation\05_never_type.md | L1 | 438 | 3 | 0 | 0 | 1 | 0 | 14 | 6 | ✅ | ✅ | ✅ |
-| concept\01_foundation\05_reference_semantics.md | L1 | 1370 | 3 | 0 | 0 | 4 | 7 | 35 | 6 | ✅ | ✅ | ✅ |
-| concept\01_foundation\06_zero_cost_abstractions.md | L1 | 676 | 3 | 0 | 0 | 3 | 2 | 11 | 6 | ✅ | ✅ | ✅ |
-| concept\01_foundation\07_control_flow.md | L1 | 753 | 3 | 0 | 0 | 3 | 1 | 11 | 6 | ✅ | ✅ | ✅ |
-| concept\01_foundation\08_collections.md | L1 | 700 | 3 | 0 | 0 | 3 | 2 | 10 | 6 | ✅ | ✅ | ✅ |
-| concept\01_foundation\09_strings_and_text.md | L1 | 640 | 3 | 0 | 0 | 3 | 1 | 10 | 6 | ✅ | ✅ | ✅ |
-| concept\01_foundation\10_error_handling_basics.md | L1 | 765 | 3 | 0 | 0 | 3 | 1 | 9 | 6 | ✅ | ✅ | ✅ |
-| concept\01_foundation\10_numerics.md | L1 | 709 | 3 | 0 | 0 | 3 | 1 | 11 | 6 | ✅ | ✅ | ✅ |
-| concept\01_foundation\11_modules_and_paths.md | L1 | 735 | 3 | 0 | 0 | 3 | 1 | 9 | 6 | ✅ | ✅ | ✅ |
-| concept\01_foundation\11_numeric_types.md | L1 | 584 | 3 | 0 | 0 | 3 | 1 | 7 | 6 | ✅ | ✅ | ✅ |
-| concept\01_foundation\12_attributes_and_macros.md | L1 | 745 | 3 | 0 | 0 | 3 | 1 | 10 | 6 | ✅ | ✅ | ✅ |
-| concept\01_foundation\13_panic_and_abort.md | L1 | 743 | 3 | 0 | 0 | 3 | 1 | 11 | 6 | ✅ | ✅ | ✅ |
-| concept\01_foundation\14_coercion_and_casting.md | L1 | 758 | 3 | 0 | 0 | 3 | 1 | 12 | 6 | ✅ | ✅ | ✅ |
-| concept\01_foundation\15_closure_basics.md | L1 | 743 | 3 | 0 | 0 | 3 | 1 | 12 | 6 | ✅ | ✅ | ✅ |
-| concept\01_foundation\16_testing_basics.md | L1 | 665 | 3 | 0 | 0 | 3 | 1 | 8 | 6 | ✅ | ✅ | ✅ |
-| concept\01_foundation\17_collections_advanced.md | L1 | 895 | 3 | 0 | 0 | 3 | 2 | 11 | 6 | ✅ | ✅ | ✅ |
-| concept\01_foundation\18_strings_and_encoding.md | L1 | 716 | 3 | 0 | 0 | 3 | 2 | 9 | 6 | ✅ | ✅ | ✅ |
+| concept\01_foundation\05_never_type.md | L1 | 440 | 3 | 2 | 0 | 1 | 0 | 14 | 6 | ✅ | ✅ | ✅ |
+| concept\01_foundation\05_reference_semantics.md | L1 | 1372 | 3 | 2 | 0 | 4 | 7 | 35 | 6 | ✅ | ✅ | ✅ |
+| concept\01_foundation\06_zero_cost_abstractions.md | L1 | 678 | 3 | 2 | 0 | 3 | 2 | 11 | 6 | ✅ | ✅ | ✅ |
+| concept\01_foundation\07_control_flow.md | L1 | 755 | 3 | 2 | 0 | 3 | 1 | 11 | 6 | ✅ | ✅ | ✅ |
+| concept\01_foundation\08_collections.md | L1 | 702 | 3 | 2 | 0 | 3 | 2 | 10 | 6 | ✅ | ✅ | ✅ |
+| concept\01_foundation\09_strings_and_text.md | L1 | 642 | 3 | 2 | 0 | 3 | 1 | 10 | 6 | ✅ | ✅ | ✅ |
+| concept\01_foundation\10_error_handling_basics.md | L1 | 767 | 3 | 2 | 0 | 3 | 1 | 9 | 6 | ✅ | ✅ | ✅ |
+| concept\01_foundation\10_numerics.md | L1 | 711 | 3 | 2 | 0 | 3 | 1 | 11 | 6 | ✅ | ✅ | ✅ |
+| concept\01_foundation\11_modules_and_paths.md | L1 | 737 | 3 | 2 | 0 | 3 | 1 | 9 | 6 | ✅ | ✅ | ✅ |
+| concept\01_foundation\11_numeric_types.md | L1 | 586 | 3 | 2 | 0 | 3 | 1 | 7 | 6 | ✅ | ✅ | ✅ |
+| concept\01_foundation\12_attributes_and_macros.md | L1 | 747 | 3 | 2 | 0 | 3 | 1 | 10 | 6 | ✅ | ✅ | ✅ |
+| concept\01_foundation\13_panic_and_abort.md | L1 | 745 | 3 | 2 | 0 | 3 | 1 | 11 | 6 | ✅ | ✅ | ✅ |
+| concept\01_foundation\14_coercion_and_casting.md | L1 | 760 | 3 | 2 | 0 | 3 | 1 | 12 | 6 | ✅ | ✅ | ✅ |
+| concept\01_foundation\15_closure_basics.md | L1 | 746 | 3 | 2 | 0 | 3 | 1 | 12 | 6 | ✅ | ✅ | ✅ |
+| concept\01_foundation\16_testing_basics.md | L1 | 668 | 3 | 2 | 0 | 3 | 1 | 8 | 6 | ✅ | ✅ | ✅ |
+| concept\01_foundation\17_collections_advanced.md | L1 | 897 | 3 | 2 | 0 | 3 | 2 | 11 | 6 | ✅ | ✅ | ✅ |
+| concept\01_foundation\18_strings_and_encoding.md | L1 | 718 | 3 | 2 | 0 | 3 | 2 | 9 | 6 | ✅ | ✅ | ✅ |
 | concept\01_foundation\19_numerics.md | L1 | 46 | 3 | 0 | 0 | 1 | 0 | 0 | 6 | ✅ | ✅ | ✅ |
-| concept\01_foundation\20_variable_model.md | L1 | 520 | 3 | 0 | 0 | 3 | 0 | 12 | 6 | ✅ | ✅ | ✅ |
-| concept\01_foundation\21_effects_and_purity.md | L1 | 565 | 3 | 0 | 0 | 3 | 0 | 17 | 6 | ✅ | ✅ | ✅ |
-| concept\01_foundation\22_data_abstraction_spectrum.md | L1 | 602 | 3 | 0 | 0 | 3 | 0 | 14 | 6 | ✅ | ✅ | ✅ |
+| concept\01_foundation\20_variable_model.md | L1 | 522 | 3 | 2 | 0 | 3 | 0 | 12 | 6 | ✅ | ✅ | ✅ |
+| concept\01_foundation\21_effects_and_purity.md | L1 | 567 | 3 | 2 | 0 | 3 | 0 | 17 | 6 | ✅ | ✅ | ✅ |
+| concept\01_foundation\22_data_abstraction_spectrum.md | L1 | 604 | 3 | 2 | 0 | 3 | 0 | 14 | 6 | ✅ | ✅ | ✅ |
 | concept\02_intermediate\01_traits.md | L2 | 2125 | 15 | 2 | 0 | 7 | 5 | 50 | 10 | ✅ | ✅ | ✅ |
 | concept\02_intermediate\02_generics.md | L2 | 2508 | 16 | 2 | 0 | 7 | 6 | 57 | 8 | ✅ | ✅ | ✅ |
-| concept\02_intermediate\03_memory_management.md | L2 | 1894 | 13 | 1 | 0 | 7 | 5 | 46 | 7 | ✅ | ✅ | ✅ |
-| concept\02_intermediate\04_error_handling.md | L2 | 2371 | 9 | 1 | 0 | 7 | 8 | 50 | 7 | ✅ | ✅ | ✅ |
-| concept\02_intermediate\05_assert_matches.md | L2 | 604 | 3 | 1 | 0 | 3 | 3 | 17 | 6 | ✅ | ✅ | ✅ |
-| concept\02_intermediate\06_range_types.md | L2 | 554 | 3 | 1 | 0 | 3 | 2 | 12 | 6 | ✅ | ✅ | ✅ |
-| concept\02_intermediate\07_closure_types.md | L2 | 581 | 3 | 1 | 0 | 3 | 3 | 9 | 6 | ✅ | ✅ | ✅ |
-| concept\02_intermediate\08_interior_mutability.md | L2 | 687 | 3 | 1 | 0 | 3 | 2 | 10 | 6 | ✅ | ✅ | ✅ |
-| concept\02_intermediate\09_serde_patterns.md | L2 | 834 | 3 | 1 | 0 | 3 | 2 | 9 | 6 | ✅ | ✅ | ✅ |
-| concept\02_intermediate\10_module_system.md | L2 | 675 | 3 | 1 | 0 | 3 | 3 | 10 | 6 | ✅ | ✅ | ✅ |
-| concept\02_intermediate\11_cow_and_borrowed.md | L2 | 695 | 3 | 1 | 0 | 3 | 2 | 8 | 6 | ✅ | ✅ | ✅ |
-| concept\02_intermediate\12_smart_pointers.md | L2 | 720 | 3 | 1 | 0 | 3 | 2 | 9 | 6 | ✅ | ✅ | ✅ |
-| concept\02_intermediate\13_dsl_and_embedding.md | L2 | 717 | 3 | 1 | 0 | 3 | 1 | 11 | 6 | ✅ | ✅ | ✅ |
-| concept\02_intermediate\14_newtype_and_wrapper.md | L2 | 693 | 3 | 1 | 0 | 3 | 1 | 10 | 6 | ✅ | ✅ | ✅ |
-| concept\02_intermediate\15_error_handling_deep_dive.md | L2 | 703 | 3 | 1 | 0 | 3 | 1 | 9 | 6 | ✅ | ✅ | ✅ |
-| concept\02_intermediate\15_iterator_patterns.md | L2 | 663 | 4 | 0 | 0 | 2 | 0 | 11 | 6 | ✅ | ✅ | ✅ |
-| concept\02_intermediate\16_iterator_patterns.md | L2 | 729 | 4 | 0 | 0 | 3 | 1 | 12 | 6 | ✅ | ✅ | ✅ |
-| concept\02_intermediate\17_macro_patterns.md | L2 | 745 | 3 | 1 | 0 | 3 | 1 | 9 | 6 | ✅ | ✅ | ✅ |
-| concept\02_intermediate\18_lifetimes_advanced.md | L2 | 699 | 3 | 1 | 0 | 3 | 1 | 8 | 6 | ✅ | ✅ | ✅ |
-| concept\02_intermediate\19_advanced_traits.md | L2 | 699 | 3 | 1 | 0 | 3 | 1 | 11 | 6 | ✅ | ✅ | ✅ |
-| concept\02_intermediate\20_type_system_advanced.md | L2 | 823 | 3 | 1 | 0 | 3 | 1 | 15 | 6 | ✅ | ✅ | ✅ |
-| concept\02_intermediate\21_metaprogramming.md | L2 | 742 | 3 | 1 | 0 | 3 | 2 | 8 | 6 | ✅ | ✅ | ✅ |
+| concept\02_intermediate\03_memory_management.md | L2 | 1897 | 13 | 3 | 0 | 7 | 5 | 46 | 7 | ✅ | ✅ | ✅ |
+| concept\02_intermediate\04_error_handling.md | L2 | 2374 | 9 | 3 | 0 | 7 | 8 | 50 | 7 | ✅ | ✅ | ✅ |
+| concept\02_intermediate\05_assert_matches.md | L2 | 606 | 3 | 3 | 0 | 3 | 3 | 17 | 6 | ✅ | ✅ | ✅ |
+| concept\02_intermediate\06_range_types.md | L2 | 556 | 3 | 3 | 0 | 3 | 2 | 12 | 6 | ✅ | ✅ | ✅ |
+| concept\02_intermediate\07_closure_types.md | L2 | 583 | 3 | 3 | 0 | 3 | 3 | 9 | 6 | ✅ | ✅ | ✅ |
+| concept\02_intermediate\08_interior_mutability.md | L2 | 689 | 3 | 3 | 0 | 3 | 2 | 10 | 6 | ✅ | ✅ | ✅ |
+| concept\02_intermediate\09_serde_patterns.md | L2 | 836 | 3 | 3 | 0 | 3 | 2 | 9 | 6 | ✅ | ✅ | ✅ |
+| concept\02_intermediate\10_module_system.md | L2 | 677 | 3 | 3 | 0 | 3 | 3 | 10 | 6 | ✅ | ✅ | ✅ |
+| concept\02_intermediate\11_cow_and_borrowed.md | L2 | 697 | 3 | 3 | 0 | 3 | 2 | 8 | 6 | ✅ | ✅ | ✅ |
+| concept\02_intermediate\12_smart_pointers.md | L2 | 722 | 3 | 3 | 0 | 3 | 2 | 9 | 6 | ✅ | ✅ | ✅ |
+| concept\02_intermediate\13_dsl_and_embedding.md | L2 | 719 | 3 | 3 | 0 | 3 | 1 | 11 | 6 | ✅ | ✅ | ✅ |
+| concept\02_intermediate\14_newtype_and_wrapper.md | L2 | 695 | 3 | 3 | 0 | 3 | 1 | 10 | 6 | ✅ | ✅ | ✅ |
+| concept\02_intermediate\15_error_handling_deep_dive.md | L2 | 705 | 3 | 3 | 0 | 3 | 1 | 9 | 6 | ✅ | ✅ | ✅ |
+| concept\02_intermediate\15_iterator_patterns.md | L2 | 665 | 4 | 2 | 0 | 2 | 0 | 11 | 6 | ✅ | ✅ | ✅ |
+| concept\02_intermediate\16_iterator_patterns.md | L2 | 731 | 4 | 2 | 0 | 3 | 1 | 12 | 6 | ✅ | ✅ | ✅ |
+| concept\02_intermediate\17_macro_patterns.md | L2 | 747 | 3 | 3 | 0 | 3 | 1 | 9 | 6 | ✅ | ✅ | ✅ |
+| concept\02_intermediate\18_lifetimes_advanced.md | L2 | 701 | 3 | 3 | 0 | 3 | 1 | 8 | 6 | ✅ | ✅ | ✅ |
+| concept\02_intermediate\19_advanced_traits.md | L2 | 701 | 3 | 3 | 0 | 3 | 1 | 11 | 6 | ✅ | ✅ | ✅ |
+| concept\02_intermediate\20_type_system_advanced.md | L2 | 825 | 3 | 3 | 0 | 3 | 1 | 15 | 6 | ✅ | ✅ | ✅ |
+| concept\02_intermediate\21_metaprogramming.md | L2 | 744 | 3 | 3 | 0 | 3 | 2 | 8 | 6 | ✅ | ✅ | ✅ |
 | concept\02_intermediate\22_iterator_patterns.md | L2 | 55 | 4 | 0 | 0 | 1 | 0 | 0 | 6 | ✅ | ✅ | ✅ |
 | concept\03_advanced\01_concurrency.md | L3 | 1367 | 21 | 2 | 0 | 3 | 10 | 19 | 6 | ✅ | ✅ | ✅ |
 | concept\03_advanced\02_async.md | L3 | 2914 | 17 | 3 | 0 | 6 | 9 | 52 | 3 | ✅ | ✅ | ✅ |
-| concept\03_advanced\02_async_advanced.md | L3 | 1376 | 4 | 1 | 0 | 1 | 1 | 30 | 6 | ✅ | ✅ | ✅ |
-| concept\03_advanced\02_async_patterns.md | L3 | 836 | 3 | 1 | 0 | 3 | 1 | 11 | 6 | ✅ | ✅ | ✅ |
+| concept\03_advanced\02_async_advanced.md | L3 | 1378 | 4 | 3 | 0 | 1 | 1 | 30 | 6 | ✅ | ✅ | ✅ |
+| concept\03_advanced\02_async_patterns.md | L3 | 838 | 3 | 3 | 0 | 3 | 1 | 11 | 6 | ✅ | ✅ | ✅ |
 | concept\03_advanced\02_async_programming.md | L3 | 56 | 3 | 1 | 0 | 1 | 0 | 0 | 6 | ✅ | ✅ | ✅ |
 | concept\03_advanced\03_unsafe.md | L3 | 2856 | 14 | 2 | 0 | 4 | 10 | 45 | 3 | ✅ | ✅ | ✅ |
 | concept\03_advanced\03_unsafe_rust.md | L3 | 52 | 3 | 1 | 0 | 1 | 0 | 0 | 6 | ✅ | ✅ | ✅ |
-| concept\03_advanced\04_macros.md | L3 | 2242 | 22 | 1 | 0 | 8 | 8 | 51 | 8 | ✅ | ✅ | ✅ |
+| concept\03_advanced\04_macros.md | L3 | 2245 | 22 | 3 | 0 | 8 | 8 | 51 | 8 | ✅ | ✅ | ✅ |
 | concept\03_advanced\05_macros.md | L3 | 54 | 3 | 1 | 0 | 1 | 0 | 0 | 6 | ✅ | ✅ | ✅ |
-| concept\03_advanced\05_rust_ffi.md | L3 | 634 | 3 | 1 | 0 | 3 | 3 | 10 | 6 | ✅ | ✅ | ✅ |
-| concept\03_advanced\06_pin_unpin.md | L3 | 671 | 3 | 1 | 0 | 3 | 2 | 10 | 6 | ✅ | ✅ | ✅ |
-| concept\03_advanced\07_proc_macro.md | L3 | 726 | 3 | 1 | 0 | 3 | 2 | 9 | 6 | ✅ | ✅ | ✅ |
-| concept\03_advanced\08_nll_and_polonius.md | L3 | 640 | 3 | 1 | 0 | 3 | 1 | 9 | 6 | ✅ | ✅ | ✅ |
+| concept\03_advanced\05_rust_ffi.md | L3 | 636 | 3 | 3 | 0 | 3 | 3 | 10 | 6 | ✅ | ✅ | ✅ |
+| concept\03_advanced\06_pin_unpin.md | L3 | 673 | 3 | 3 | 0 | 3 | 2 | 10 | 6 | ✅ | ✅ | ✅ |
+| concept\03_advanced\07_proc_macro.md | L3 | 728 | 3 | 3 | 0 | 3 | 2 | 9 | 6 | ✅ | ✅ | ✅ |
+| concept\03_advanced\08_nll_and_polonius.md | L3 | 642 | 3 | 3 | 0 | 3 | 1 | 9 | 6 | ✅ | ✅ | ✅ |
 | concept\03_advanced\08_zero_cost_abstractions.md | L3 | 53 | 3 | 1 | 0 | 1 | 0 | 0 | 6 | ✅ | ✅ | ✅ |
-| concept\03_advanced\09_ffi_advanced.md | L3 | 834 | 3 | 1 | 0 | 3 | 1 | 12 | 6 | ✅ | ✅ | ✅ |
-| concept\03_advanced\10_concurrency_patterns.md | L3 | 783 | 3 | 1 | 0 | 3 | 1 | 10 | 6 | ✅ | ✅ | ✅ |
-| concept\03_advanced\11_atomics_and_memory_ordering.md | L3 | 843 | 3 | 1 | 0 | 3 | 1 | 10 | 6 | ✅ | ✅ | ✅ |
-| concept\03_advanced\12_unsafe_rust_patterns.md | L3 | 858 | 3 | 1 | 0 | 3 | 1 | 11 | 6 | ✅ | ✅ | ✅ |
+| concept\03_advanced\09_ffi_advanced.md | L3 | 836 | 3 | 3 | 0 | 3 | 1 | 12 | 6 | ✅ | ✅ | ✅ |
+| concept\03_advanced\10_concurrency_patterns.md | L3 | 785 | 3 | 3 | 0 | 3 | 1 | 10 | 6 | ✅ | ✅ | ✅ |
+| concept\03_advanced\11_atomics_and_memory_ordering.md | L3 | 845 | 3 | 3 | 0 | 3 | 1 | 10 | 6 | ✅ | ✅ | ✅ |
+| concept\03_advanced\12_unsafe_rust_patterns.md | L3 | 860 | 3 | 3 | 0 | 3 | 1 | 11 | 6 | ✅ | ✅ | ✅ |
 | concept\03_advanced\13_async_patterns.md | L3 | 56 | 3 | 1 | 0 | 1 | 0 | 0 | 6 | ✅ | ✅ | ✅ |
-| concept\03_advanced\14_custom_allocators.md | L3 | 783 | 3 | 1 | 0 | 3 | 1 | 12 | 6 | ✅ | ✅ | ✅ |
-| concept\03_advanced\15_zero_copy_parsing.md | L3 | 747 | 3 | 1 | 0 | 3 | 1 | 12 | 6 | ✅ | ✅ | ✅ |
-| concept\03_advanced\16_lock_free.md | L3 | 780 | 3 | 1 | 0 | 3 | 1 | 10 | 6 | ✅ | ✅ | ✅ |
-| concept\03_advanced\17_type_erasure.md | L3 | 767 | 3 | 1 | 0 | 3 | 1 | 10 | 6 | ✅ | ✅ | ✅ |
-| concept\03_advanced\18_network_programming.md | L3 | 881 | 3 | 1 | 0 | 3 | 2 | 11 | 6 | ✅ | ✅ | ✅ |
-| concept\03_advanced\19_parallel_distributed_pattern_spectrum.md | L3 | 804 | 3 | 1 | 0 | 3 | 0 | 17 | 6 | ✅ | ✅ | ✅ |
-| concept\03_advanced\20_stream_processing_semantics.md | L3 | 754 | 3 | 1 | 0 | 2 | 0 | 8 | 6 | ✅ | ✅ | ✅ |
+| concept\03_advanced\14_custom_allocators.md | L3 | 785 | 3 | 3 | 0 | 3 | 1 | 12 | 6 | ✅ | ✅ | ✅ |
+| concept\03_advanced\15_zero_copy_parsing.md | L3 | 749 | 3 | 3 | 0 | 3 | 1 | 12 | 6 | ✅ | ✅ | ✅ |
+| concept\03_advanced\16_lock_free.md | L3 | 782 | 3 | 3 | 0 | 3 | 1 | 10 | 6 | ✅ | ✅ | ✅ |
+| concept\03_advanced\17_type_erasure.md | L3 | 769 | 3 | 3 | 0 | 3 | 1 | 10 | 6 | ✅ | ✅ | ✅ |
+| concept\03_advanced\18_network_programming.md | L3 | 883 | 3 | 3 | 0 | 3 | 2 | 11 | 6 | ✅ | ✅ | ✅ |
+| concept\03_advanced\19_parallel_distributed_pattern_spectrum.md | L3 | 806 | 3 | 3 | 0 | 3 | 0 | 17 | 6 | ✅ | ✅ | ✅ |
+| concept\03_advanced\20_stream_processing_semantics.md | L3 | 756 | 3 | 3 | 0 | 2 | 0 | 8 | 6 | ✅ | ✅ | ✅ |
 | concept\04_formal\01_linear_logic.md | L4 | 1105 | 14 | 0 | 0 | 4 | 5 | 13 | 3 | ✅ | ✅ | ✅ |
 | concept\04_formal\02_type_theory.md | L4 | 1106 | 27 | 0 | 0 | 4 | 5 | 15 | 3 | ✅ | ✅ | ✅ |
 | concept\04_formal\03_ownership_formal.md | L4 | 1470 | 12 | 0 | 0 | 1 | 5 | 10 | 3 | ✅ | ✅ | ✅ |
@@ -326,7 +267,7 @@
 | concept\07_future\08_safety_tags_preview.md | L7 | 495 | 6 | 0 | 0 | 3 | 3 | 6 | 12 | ✅ | ✅ | ✅ |
 | concept\07_future\09_parallel_frontend_preview.md | L7 | 482 | 6 | 0 | 0 | 3 | 3 | 6 | 12 | ✅ | ✅ | ✅ |
 | concept\07_future\10_derive_coerce_pointee_preview.md | L7 | 497 | 6 | 0 | 0 | 3 | 3 | 7 | 12 | ✅ | ✅ | ✅ |
-| concept\07_future\11_const_trait_impl_preview.md | L7 | 497 | 6 | 0 | 0 | 3 | 2 | 6 | 12 | ✅ | ✅ | ✅ |
+| concept\07_future\11_const_trait_impl_preview.md | L7 | 498 | 6 | 0 | 0 | 3 | 2 | 6 | 12 | ✅ | ✅ | ✅ |
 | concept\07_future\11_stable_abi_preview.md | L7 | 66 | 3 | 0 | 0 | 1 | 0 | 1 | 6 | ✅ | ✅ | ✅ |
 | concept\07_future\12_inline_const_pattern_preview.md | L7 | 69 | 3 | 0 | 0 | 1 | 0 | 1 | 6 | ✅ | ✅ | ✅ |
 | concept\07_future\12_return_type_notation_preview.md | L7 | 470 | 6 | 0 | 0 | 3 | 2 | 5 | 12 | ✅ | ✅ | ✅ |

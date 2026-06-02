@@ -573,7 +573,7 @@ fn filter<'a, 'b>(
 }
 ```
 
-> **[来源: Rust Reference: `impl Trait` in return position]** RPIT 的生命周期捕获策略在 RFC 2289 中定义：返回类型自动捕获所有在函数体中被实现类型使用且出现在签名中的生命周期。✅
+> **[来源: Rust Reference: `impl Trait` in return position]** RPIT 的生命周期捕获策略在 [RFC 2289](https://rust-lang.github.io/rfcs/2289.html) 中定义：返回类型自动捕获所有在函数体中被实现类型使用且出现在签名中的生命周期。✅
 
 ### 14.2 `impl Trait` + `+'a` 的显式生命周期约束
 
@@ -678,7 +678,7 @@ where
 }
 ```
 
-> **[来源: RFC 2289 (TAFIT)]** APIT 和 RPIT 的生命周期推断遵循不同的隐式捕获策略：APIT 作为泛型语法糖不引入新的生命周期捕获，RPIT 则自动封装实现类型的生命周期依赖。✅
+> **[来源: [RFC 2289](https://rust-lang.github.io/rfcs/2289.html) (TAFIT)]** APIT 和 RPIT 的生命周期推断遵循不同的隐式捕获策略：APIT 作为泛型语法糖不引入新的生命周期捕获，RPIT 则自动封装实现类型的生命周期依赖。✅
 
 ### 14.4 RPIT vs APIT：生命周期推断对比矩阵
 
@@ -718,7 +718,7 @@ trait FactoryOld {
 
 RPITIT 的解决方式是让 `impl Trait` 在 trait 方法中等价于一个**隐式关联类型**，其生命周期由实现自动推断，同时通过编译器内部的**规范化（normalization）**机制确保调用方看到的类型签名一致。
 
-> **[来源: RFC 2289 (TAFIT); Rust 1.75 Release Notes]** RPITIT 的稳定解决了 trait 层面返回抽象类型的表达力缺口，但隐式关联类型的生命周期推断仍遵循"自动捕获"原则。✅
+> **[来源: [RFC 2289](https://rust-lang.github.io/rfcs/2289.html) (TAFIT); Rust 1.75 Release Notes]** RPITIT 的稳定解决了 trait 层面返回抽象类型的表达力缺口，但隐式关联类型的生命周期推断仍遵循"自动捕获"原则。✅
 
 **跨层映射**: 本章节 APIT/RPIT 语义 ↔ [`./04_type_system.md`](./04_type_system.md) §11 "类型系统前沿" · [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md) §4.1 "泛型参数推断"
 
@@ -801,7 +801,7 @@ impl<'s> Iterator for Words<'s> {
 
 Lending Iterator 通过 GATs 将 `Item` 参数化为 `Item<'a>`，并用 `where Self: 'a` 确保**迭代器本身至少存活到返回引用的生命周期**，从而安全地表达自引用迭代。这是 GATs 解决表达力鸿沟的经典案例。
 
-> **[来源: RFC 1598 (GATs)]** `where Self: 'a` 约束确保关联类型不会引用比 `Self` 更短的生命周期，构成自引用集合的类型安全基础。✅
+> **[来源: [RFC 1598](https://rust-lang.github.io/rfcs/1598.html) (GATs)]** `where Self: 'a` 约束确保关联类型不会引用比 `Self` 更短的生命周期，构成自引用集合的类型安全基础。✅
 > **[来源: Rust Reference; TRPL; Rust RFCs; Academic Papers]** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
 > **[来源: Wikipedia; POPL/PLDI/ECOOP Papers; RustBelt/Iris Project]** 形式化概念参考了权威学术来源和类型论研究。✅
 
@@ -1323,6 +1323,9 @@ fn main() {
 - **定理**: 引用的生命周期标注 ⟹ 编译器可验证的借用安全
 - **定理**: 生命周期省略规则 ⟹ 代码简洁性与正确性的平衡
 
+> 编译通过 ⟸ 生命周期标注正确 ⟸ 引用有效性
+> 无悬垂引用 ⟸ 生命周期偏序关系 ⟸ 借用规则
+>
 ## 反命题与边界
 
 > **反命题**: "所有 Rust 引用都可以省略生命周期标注" —— 错误。复杂场景（多输入引用、泛型返回、自引用结构）必须显式标注，省略将导致编译失败或意外约束。

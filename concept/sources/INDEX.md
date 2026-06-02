@@ -52,21 +52,21 @@
 
 | RFC 编号 | 标题 | 状态 | 稳定版本 |
 | :--- | :--- | :---: | :--- |
-| RFC 0001 | RFC 流程本身 | Accepted | — |
-| RFC 0243 | Trait-based exception handling (Try trait) | Accepted | 1.26 |
-| RFC 1210 | Specialization | Accepted | nightly (min_specialization) |
-| RFC 1598 | Generic Associated Types (GATs) | Accepted | 1.65 |
-| RFC 2000 | Const Generics | Accepted | 1.51 (基础) |
-| RFC 2094 | Non-lexical lifetimes (NLL) | Accepted | 1.31 |
-| RFC 2349 | Pin API | Accepted | 1.33 |
-| RFC 2394 | async/await | Accepted | 1.39 |
-| RFC 2497 | if-let chains | Accepted | 1.88 |
-| RFC 2582 | raw reference operators (`&raw`) | Accepted | 1.82 |
-| RFC 2592 | futures | Accepted | 1.36 |
-| RFC 2857 | Orphan rules | Accepted | — |
-| RFC 2930 | Readiness and waking for async I/O | Accepted | 1.36 |
-| RFC 3501 | Edition 2024 | Accepted | 1.85 |
-| RFC 3627 | Return type notation (RTN) | Accepted | nightly |
+| [RFC 0001](https://rust-lang.github.io/rfcs/0001.html) | RFC 流程本身 | Accepted | — |
+| [RFC 0243](https://rust-lang.github.io/rfcs/0243.html) | Trait-based exception handling (Try trait) | Accepted | 1.26 |
+| [RFC 1210](https://rust-lang.github.io/rfcs/1210.html) | Specialization | Accepted | nightly (min_specialization) |
+| [RFC 1598](https://rust-lang.github.io/rfcs/1598.html) | Generic Associated Types (GATs) | Accepted | 1.65 |
+| [RFC 2000](https://rust-lang.github.io/rfcs/2000.html) | Const Generics | Accepted | 1.51 (基础) |
+| [RFC 2094](https://rust-lang.github.io/rfcs/2094.html) | Non-lexical lifetimes (NLL) | Accepted | 1.31 |
+| [RFC 2349](https://rust-lang.github.io/rfcs/2349.html) | Pin API | Accepted | 1.33 |
+| [RFC 2394](https://rust-lang.github.io/rfcs/2394.html) | async/await | Accepted | 1.39 |
+| [RFC 2497](https://rust-lang.github.io/rfcs/2497.html) | if-let chains | Accepted | 1.88 |
+| [RFC 2582](https://rust-lang.github.io/rfcs/2582.html) | raw reference operators (`&raw`) | Accepted | 1.82 |
+| [RFC 2592](https://rust-lang.github.io/rfcs/2592.html) | futures | Accepted | 1.36 |
+| [RFC 2857](https://rust-lang.github.io/rfcs/2857.html) | Orphan rules | Accepted | — |
+| [RFC 2930](https://rust-lang.github.io/rfcs/2930.html) | Readiness and waking for async I/O | Accepted | 1.36 |
+| [RFC 3501](https://rust-lang.github.io/rfcs/3501.html) | Edition 2024 | Accepted | 1.85 |
+| [RFC 3627](https://rust-lang.github.io/rfcs/3627.html) | Return type notation (RTN) | Accepted | nightly |
 
 > **完整 RFC 索引**: 见 [./RFC_INDEX.md](./RFC_INDEX.md)（建设中，目标覆盖 50+ 关键 RFC）
 

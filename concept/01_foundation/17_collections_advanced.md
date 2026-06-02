@@ -883,6 +883,8 @@ fn main() {
 | 高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
 | 高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
+> 内存安全数据结构 ⟸ 所有权自动管理 ⟸ Vec/HashMap 实现
+> 迭代器安全 ⟸ 借用检查器验证 ⟸ 集合 API 设计
 > **过渡**: 掌握 高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。

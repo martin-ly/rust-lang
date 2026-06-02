@@ -144,7 +144,7 @@ CI/发布: LLVM → 极致优化
 
 ## 四、build-std（从源码构建标准库）
 
-### 4.1 RFC 3873 核心内容
+### 4.1 [RFC 3873](https://rust-lang.github.io/rfcs/3873.html) 核心内容
 
 `build-std` 允许从源码重新编译 `core`/`std`/`alloc`/`panic_abort`/`panic_unwind`，而非使用预编译的标准库。
 

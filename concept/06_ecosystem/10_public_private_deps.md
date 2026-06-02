@@ -181,7 +181,7 @@ let x = B::SomeType::new();  // 能编译，因为 A 泄漏了 B
 ## 二、核心机制
 >
 
-RFC 3516 引入 `public = true/false` 字段，显式标记依赖的**可见性契约**。该特性已被纳入 Rust 2026 Project Goals，但当前标记为 **Help Wanted** — 需要社区贡献者推动 MVP 实现和稳定化。
+[RFC 3516](https://rust-lang.github.io/rfcs/3516.html) 引入 `public = true/false` 字段，显式标记依赖的**可见性契约**。该特性已被纳入 Rust 2026 Project Goals，但当前标记为 **Help Wanted** — 需要社区贡献者推动 MVP 实现和稳定化。
 
 ```toml
 [dependencies]
@@ -285,7 +285,7 @@ flowchart TD
     style Newtype fill:#ffe0b2
 ```
 
-> **认知功能**: 此决策树将 RFC 3516 的工程实践转化为**可操作的检查清单**。核心原则：**默认私有（principle of least exposure）**，只有类型确实出现在公共 API 中才标记为 public。关键分支点是"未来可能替换实现"——如果答案是"是"，则优先使用 newtype 模式封装，保持依赖隔离的同时提供公共接口。 [来源: [Cargo Book](https://doc.rust-lang.org/cargo/)]
+> **认知功能**: 此决策树将 [RFC 3516](https://rust-lang.github.io/rfcs/3516.html) 的工程实践转化为**可操作的检查清单**。核心原则：**默认私有（principle of least exposure）**，只有类型确实出现在公共 API 中才标记为 public。关键分支点是"未来可能替换实现"——如果答案是"是"，则优先使用 newtype 模式封装，保持依赖隔离的同时提供公共接口。 [来源: [Cargo Book](https://doc.rust-lang.org/cargo/)]
 
 ### 4.2 默认策略
 >
@@ -490,7 +490,7 @@ impl Serializable for MyData {
 // serde = "2.0" // ❌ 编译错误: serde 版本冲突，因为 A 公开暴露了 serde 类型
 ```
 
-> **修正**: Cargo 的 **public dependency**（`public = true`，RFC 3516）标记依赖为 crate API 的一部分：若 crate A 公开返回 `serde::Serialize` 类型，则 serde 是 A 的 public dependency。下游 crate B 若同时依赖不同版本的 serde，编译失败——同一 crate 不能有两个版本出现在公共 API 中。这与私有依赖（`public = false` 或默认）不同：私有依赖的内部使用不传播到下游。设计影响：1) 库作者需谨慎标记 public dependency；2) 频繁出现在 API 中的 crate（`serde`、`tokio`）应保持稳定版本；3) 用 `#[doc(hidden)]` 或新类型模式（newtype）封装，避免暴露外部类型。这与 npm 的 peer dependencies（类似概念）或 Maven 的 optional dependencies（不同语义）不同——Rust 的 public dependency 在编译期强制执行 API 兼容性。[来源: [RFC 3516 — Public & Private Dependencies](https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html)] · [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/reference/features.html)]
+> **修正**: Cargo 的 **public dependency**（`public = true`，[RFC 3516](https://rust-lang.github.io/rfcs/3516.html)）标记依赖为 crate API 的一部分：若 crate A 公开返回 `serde::Serialize` 类型，则 serde 是 A 的 public dependency。下游 crate B 若同时依赖不同版本的 serde，编译失败——同一 crate 不能有两个版本出现在公共 API 中。这与私有依赖（`public = false` 或默认）不同：私有依赖的内部使用不传播到下游。设计影响：1) 库作者需谨慎标记 public dependency；2) 频繁出现在 API 中的 crate（`serde`、`tokio`）应保持稳定版本；3) 用 `#[doc(hidden)]` 或新类型模式（newtype）封装，避免暴露外部类型。这与 npm 的 peer dependencies（类似概念）或 Maven 的 optional dependencies（不同语义）不同——Rust 的 public dependency 在编译期强制执行 API 兼容性。[来源: [RFC 3516 — Public & Private Dependencies](https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html)] · [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/reference/features.html)]
 
 ### 10.3 边界测试：public dependency 的 semver 不兼容传播（编译中断）
 

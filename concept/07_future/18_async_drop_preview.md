@@ -6,7 +6,7 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 Async Drop 预览特性
-> **定位**: 分析 Rust 中 **异步资源销毁**的设计挑战——`Drop::drop` 是同步的，但异步资源（如数据库连接、网络流）需要 await 才能正确关闭。探讨 `AsyncDrop` trait 的提案（RFC 3308）、设计约束与当前 nightly 实现状态。
+> **定位**: 分析 Rust 中 **异步资源销毁**的设计挑战——`Drop::drop` 是同步的，但异步资源（如数据库连接、网络流）需要 await 才能正确关闭。探讨 `AsyncDrop` trait 的提案（[RFC 3308](https://rust-lang.github.io/rfcs/3308.html)）、设计约束与当前 nightly 实现状态。
 > **前置概念**: [Async](../03_advanced/02_async.md) · [Pin](../03_advanced/06_pin_unpin.md)
 > **后置概念**: [Gen Blocks](./15_gen_blocks_preview.md) · [Async Closures](https://github.com/rust-lang/rust/issues/62290)
 
@@ -502,7 +502,7 @@ fn main() {
 } // res 在这里 drop，但 main 是 sync 函数
 ```
 
-> **修正**: `async drop`（RFC 3157）允许析构函数执行异步操作（`.await`），但要求 drop 发生在异步上下文中。同步函数（`fn main()`）中，值在作用域结束时自动 drop，无法 `.await`。解决方案：1) 在 async 函数/块中使用 `AsyncResource`，让编译器在生成的状态机中插入 `.await`；2) 使用 `pin!` 宏确保值在异步上下文中正确 drop；3) 显式调用 `async_drop(res).await`（若 RFC 支持显式调用）。这是 Rust 异步生态的"最后一块拼图"：目前异步资源的清理（如数据库连接池、HTTP 客户端）常通过 `spawn` 后台任务或阻塞 drop 解决，既不优雅也不高效。`async drop` 使资源生命周期与异步执行模型一致。[来源: [Rust RFC 3157](https://rust-lang.github.io/rfcs/3157-async-drop.html)] · [来源: [Tokio Documentation](https://docs.rs/tokio/)]
+> **修正**: `async drop`（[RFC 3157](https://rust-lang.github.io/rfcs/3157.html)）允许析构函数执行异步操作（`.await`），但要求 drop 发生在异步上下文中。同步函数（`fn main()`）中，值在作用域结束时自动 drop，无法 `.await`。解决方案：1) 在 async 函数/块中使用 `AsyncResource`，让编译器在生成的状态机中插入 `.await`；2) 使用 `pin!` 宏确保值在异步上下文中正确 drop；3) 显式调用 `async_drop(res).await`（若 RFC 支持显式调用）。这是 Rust 异步生态的"最后一块拼图"：目前异步资源的清理（如数据库连接池、HTTP 客户端）常通过 `spawn` 后台任务或阻塞 drop 解决，既不优雅也不高效。`async drop` 使资源生命周期与异步执行模型一致。[来源: [Rust RFC 3157](https://rust-lang.github.io/rfcs/3157-async-drop.html)] · [来源: [Tokio Documentation](https://docs.rs/tokio/)]
 
 ### 10.2 边界测试：异步析构与 panic 的交互（运行时 UB）
 

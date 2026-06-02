@@ -194,7 +194,7 @@ NLL 的关键改进:
   求解器: 从基于"作用域嵌套树"变为基于"CFG 数据流分析"
 ```
 
-> **来源**: [rustc NLL RFC 2094 — Non-Lexical Lifetimes] · [Rust Reference: Lifetime resolution] · [rustc borrow_check/src/region_inference/mod.rs]
+> **来源**: [rustc NLL [RFC 2094](https://rust-lang.github.io/rfcs/2094.html) — Non-Lexical Lifetimes] · [Rust Reference: Lifetime resolution] · [rustc borrow_check/src/region_inference/mod.rs]
 
 #### 与 Polonius 的演进关系
 
@@ -445,7 +445,7 @@ graph BT
   ⟹ LendingIterator 等自引用集合可在 Safe Rust 中安全表达
 ```
 
-> **[来源: RFC 1598 (GATs)]** GATs 中 `where Self: 'a` 确保关联类型的生命周期自洽。✅
+> **[来源: [RFC 1598](https://rust-lang.github.io/rfcs/1598.html) (GATs)]** GATs 中 `where Self: 'a` 确保关联类型的生命周期自洽。✅
 
 ### 4.9 定理一致性矩阵
 

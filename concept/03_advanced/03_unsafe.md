@@ -397,7 +397,7 @@ stateDiagram-v2
 > `stateDiagram-v2` 将 Safe/Unsafe 边界建模为**状态转换系统**——Safe 是「编译器保护态」，UnsafeBlock/UnsafeFn/UnsafeTrait 是「人工证明态」，UB 是「不可恢复的错误态」。
 > 关键洞察：从 Safe 进入 Unsafe 的每次转移都必须有**显式标记**（`unsafe` 关键字），且转移条件是「程序员已验证安全契约」。
 > 这与 `graph TD` 流程图（展示知识结构）形成互补——状态机图展示的是**运行时/编码时的状态约束**。
-> [来源: Rustonomicon §1; RFC 2585; Rust Reference §19]
+> [来源: Rustonomicon §1; [RFC 2585](https://rust-lang.github.io/rfcs/2585.html); Rust Reference §19]
 
 ```text
 Rust 区分两种不变式:
@@ -1823,7 +1823,7 @@ unsafe fn swap_via_replace<T>(a: *mut T, b: *mut T) {
 
 ### 补充章节：`NonNull<T>` / `Unique<T>` / `Shared<T>` 的演进
 
-> **权威来源**: [Rust RFC 1184: Rename `Unique` to `NonNull`] · [std::ptr::NonNull docs] · [Rust PR #45207: Introduce NonNull]
+> **权威来源**: [Rust [RFC 1184](https://rust-lang.github.io/rfcs/1184.html): Rename `Unique` to `NonNull`] · [std::ptr::NonNull docs] · [Rust PR #45207: Introduce NonNull]
 > **层级标注**: `L3::指针类型` → `L2::智能指针` Box/Arc 内部实现 · `L1::类型系统` 协变与不变
 
 **历史演进**：Rust 标准库内部指针类型经历了从 `Unique<T>` / `Shared<T>` 到 `NonNull<T>` 的统一化过程，核心动机是**简化内部表示**、**提供稳定的外部 API**，并**统一协变语义**。

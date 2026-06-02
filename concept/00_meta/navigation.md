@@ -130,7 +130,7 @@
 | [07_game_ecs](../06_ecosystem/07_game_ecs.md) | ECS 架构、Bevy、Archetype | 7 |
 | [08_wasi](../06_ecosystem/08_wasi.md) | WASI 四层架构、能力安全、wit-bindgen | 2 |
 | [09_cargo_script](../06_ecosystem/09_cargo_script.md) | Cargo script 执行流程、决策树 | 2 |
-| [10_public_private_deps](../06_ecosystem/10_public_private_deps.md) | 依赖泄漏/隔离、RFC 3516、决策流程 | 2 |
+| [10_public_private_deps](../06_ecosystem/10_public_private_deps.md) | 依赖泄漏/隔离、[RFC 3516](https://rust-lang.github.io/rfcs/3516.html)、决策流程 | 2 |
 
 > **出口层**: L6 是知识体系的"工程化落地"——将理论转化为可维护、可扩展的代码库。
 

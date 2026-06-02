@@ -270,7 +270,7 @@ graph TD
 
 > **[TRPL: Ch9.2] · [Rust Reference: The ? operator]** ? 运算符通过隐式调用 From::from 实现错误的自动转换与传播。 ✅ 已验证
 
-> **[RFC 243: The ? Operator]** The `?` operator was introduced in RFC 243 to provide ergonomic error propagation, later extended by RFC 3058 for the general `Try` trait. ✅ 已验证
+> **[RFC 243: The ? Operator]** The `?` operator was introduced in RFC 243 to provide ergonomic error propagation, later extended by [RFC 3058](https://rust-lang.github.io/rfcs/3058.html) for the general `Try` trait. ✅ 已验证
 
 ```text
 前提 1: ? 运算符展开为 match，Err 分支提前返回
@@ -1660,7 +1660,7 @@ fn main() {
 }
 ```
 
-**代价模型**：隐式 `Location` 参数通常通过寄存器传递（在支持的平台），或在栈上占用一个指针宽度（`usize` 大小）。因此开销为**极低**（亚指令级），但非绝对零成本——与 `Backtrace` 的运行时栈展开相比可忽略。[来源: RFC 2091 — Cost analysis] · [Rust Reference: track_caller ABI]
+**代价模型**：隐式 `Location` 参数通常通过寄存器传递（在支持的平台），或在栈上占用一个指针宽度（`usize` 大小）。因此开销为**极低**（亚指令级），但非绝对零成本——与 `Backtrace` 的运行时栈展开相比可忽略。[来源: [RFC 2091](https://rust-lang.github.io/rfcs/2091.html) — Cost analysis] · [Rust Reference: track_caller ABI]
 
 #### 9.5.2 `Location::caller()` 与 `PanicInfo::location()` 的区别
 
@@ -1872,7 +1872,7 @@ impl AppError {
 | 普通函数 | ✅ 稳定 | Rust 1.46+ |
 | 泛型函数 | ✅ 稳定 | 单态化后隐式参数正确传递 |
 | `const fn` | ✅ 稳定 | 编译期错误定位 |
-| trait 方法 | ✅ 稳定 | RFC 2091 最初因 MIR 传递时机限制而禁止；后实现改为 monomorphization 之后注入，解除限制 [来源: rustc-dev-guide — track_caller in traits] |
+| trait 方法 | ✅ 稳定 | [RFC 2091](https://rust-lang.github.io/rfcs/2091.html) 最初因 MIR 传递时机限制而禁止；后实现改为 monomorphization 之后注入，解除限制 [来源: rustc-dev-guide — track_caller in traits] |
 | `async fn` | ⚠️ 部分支持 | Stable 上为 **no-op**（编译通过但 `Location::caller()` 返回 async fn 自身位置）；完整支持需 nightly `#![feature(async_fn_track_caller)]`（Tracking: [rust-lang/rust#110011]） |
 | 闭包 | ❌ 不稳定 | 需 nightly `#![feature(closure_track_caller)]`（Tracking: [rust-lang/rust#87417]） |
 | `dyn Fn()` / 函数指针 | ❌ 不支持 | 动态分发无法传递隐式 `Location` 参数；通过 trait object 调用时丢失 caller 信息 |
@@ -1907,7 +1907,7 @@ fn ensure_nonzero(x: i32) -> i32 {
 
 ### 9.6 `Try` trait 与自定义 `?` 行为（稳定化中）
 
-`Try` trait（Tracking: RFC 3058）将 `?` 运算符泛化到任意类型：
+`Try` trait（Tracking: [RFC 3058](https://rust-lang.github.io/rfcs/3058.html)）将 `?` 运算符泛化到任意类型：
 
 ```rust,ignore
 // ✅ Try trait 的核心定义（概念等价，稳定化中）
@@ -2359,6 +2359,9 @@ fn main() {
 
 > **修正**: 手动 `map_err` 的错误链：每一步失败只保留当前上下文，丢失之前的信息。`anyhow` 的 `Context` trait 解决：`file.open("config.txt").context("failed to open config")?` — 自动累积上下文，生成错误链。`thiserror` 的 `#[source]` 字段保留原始错误。错误链的设计：1) **底层错误**（`io::Error`）→ 原始原因；2) **中间层**（`context`）→ 操作描述；3) **顶层** → 用户友好消息。这与 Go 的 `fmt.Errorf("%w", err)`（错误包装，Go 1.13+）或 Java 的 `Exception(String msg, Throwable cause)`（异常链）类似——Rust 的错误处理生态提供了类型安全和可读性的平衡。[来源: [anyhow](https://docs.rs/anyhow/)] · [来源: [thiserror](https://docs.rs/thiserror/)]
 
+> 错误传播安全 ⟸ ? 运算符自动转换 ⟸ Try trait
+> 错误类型精确 ⟸ thiserror/anyhow 分层 ⟸ 错误架构
+>
 ## 实践
 
 > **相关资源**:

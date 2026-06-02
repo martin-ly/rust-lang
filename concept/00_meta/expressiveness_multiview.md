@@ -289,7 +289,7 @@ impl<'a> Future for FetchAndProcessFuture<'a> {
 > 1. **直接风格 async/await**（源代码）
 > 2. **显式 Future 状态机**（编译器生成）
 > 3. **CPS 变换**（理论对应）
-> 等价性在「相同的 poll 调用序列产生相同的输出」的意义上成立。 [来源: RFC 2394, *Asynchronous Programming in Rust*; Danvy & Filinski, *Representing Control*, 1990]
+> 等价性在「相同的 poll 调用序列产生相同的输出」的意义上成立。 [来源: [RFC 2394](https://rust-lang.github.io/rfcs/2394.html), *Asynchronous Programming in Rust*; Danvy & Filinski, *Representing Control*, 1990]
 
 ```mermaid
 graph LR

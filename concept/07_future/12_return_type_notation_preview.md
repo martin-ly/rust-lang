@@ -377,7 +377,7 @@ where
 }
 ```
 
-> **修正**: Return Type Notation（RTN，RFC 3654）允许在 trait bound 中约束关联函数的返回类型：`P::foo(..): Send` 表示 `P` 实现的 `foo` 方法的返回类型实现 `Send`。但 RTN 当前不支持带生命周期参数的函数签名——`P::parse(&'a self, &'a str)` 的生命周期参数使 RTN 语法解析复杂化。生命周期在 RTN 中的处理方式仍在设计：是隐式泛化（对任意生命周期约束），还是要求显式指定（`P::parse<'a>(..): Send`）？这与 `async fn` 的 `-> impl Future<Output = T> + Send` 问题相同——异步方法的返回类型（future）是否 `Send` 取决于捕获的生命周期。RTN 的目标是为这一问题提供简洁、通用的语法。[来源: [Rust RFC 3654](https://rust-lang.github.io/rfcs/3654-return-type-notation.html)] · [来源: [Rust Async Working Group](https://rust-lang.github.io/async-fundamentals-initiative/)]
+> **修正**: Return Type Notation（RTN，[RFC 3654](https://rust-lang.github.io/rfcs/3654.html)）允许在 trait bound 中约束关联函数的返回类型：`P::foo(..): Send` 表示 `P` 实现的 `foo` 方法的返回类型实现 `Send`。但 RTN 当前不支持带生命周期参数的函数签名——`P::parse(&'a self, &'a str)` 的生命周期参数使 RTN 语法解析复杂化。生命周期在 RTN 中的处理方式仍在设计：是隐式泛化（对任意生命周期约束），还是要求显式指定（`P::parse<'a>(..): Send`）？这与 `async fn` 的 `-> impl Future<Output = T> + Send` 问题相同——异步方法的返回类型（future）是否 `Send` 取决于捕获的生命周期。RTN 的目标是为这一问题提供简洁、通用的语法。[来源: [Rust RFC 3654](https://rust-lang.github.io/rfcs/3654-return-type-notation.html)] · [来源: [Rust Async Working Group](https://rust-lang.github.io/async-fundamentals-initiative/)]
 
 ### 10.2 边界测试：RTN 与泛型返回类型的边界（编译错误）
 

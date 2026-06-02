@@ -124,7 +124,7 @@ graph TD
 
 **补偿机制**:
 
-- **SAFETY 注释**: 每个 `unsafe` 块必须注释「为什么此操作是安全的」。 [来源: RFC 2585, Rust Style Guide]
+- **SAFETY 注释**: 每个 `unsafe` 块必须注释「为什么此操作是安全的」。 [来源: [RFC 2585](https://rust-lang.github.io/rfcs/2585.html), Rust Style Guide]
 - **Miri 验证**: 动态检测未定义行为。
 - **审计**: `cargo geiger` 统计 unsafe 代码比例。 [来源: cargo-geiger 文档]
 

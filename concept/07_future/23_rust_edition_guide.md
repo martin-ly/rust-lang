@@ -409,7 +409,7 @@ fn main() {
 }
 ```
 
-> **修正**: `impl Trait` 在类型别名位置和静态项中的使用是 Rust 的长期限制。`static` 和 `const` 要求类型在编译期完全已知（单态化），而 `impl Trait` 是**存在类型**（existential type）——隐藏具体实现，只暴露 trait bound。编译器需要知道 `static` 的确切大小和对齐，因此不能是抽象的 `impl Trait`。RFC 2289（`type_alias_impl_trait`）部分解决了类型别名的问题，但 `static`/`const` 仍不支持。Edition 演进可能逐步放宽这些限制。 workaround：使用 trait 对象 `Box<dyn Iterator<Item = i32>>`（有运行时虚函数开销），或手写具体类型（暴露实现细节）。这与 C++ 的 `auto`（不能用于 `static`）或 Java 的接口（可用于 `static`，但需具体实现类）不同——Rust 的 `impl Trait` 设计追求零成本抽象，但静态位置的单态化要求与之冲突。[来源: [Rust RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bound.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: `impl Trait` 在类型别名位置和静态项中的使用是 Rust 的长期限制。`static` 和 `const` 要求类型在编译期完全已知（单态化），而 `impl Trait` 是**存在类型**（existential type）——隐藏具体实现，只暴露 trait bound。编译器需要知道 `static` 的确切大小和对齐，因此不能是抽象的 `impl Trait`。[RFC 2289](https://rust-lang.github.io/rfcs/2289.html)（`type_alias_impl_trait`）部分解决了类型别名的问题，但 `static`/`const` 仍不支持。Edition 演进可能逐步放宽这些限制。 workaround：使用 trait 对象 `Box<dyn Iterator<Item = i32>>`（有运行时虚函数开销），或手写具体类型（暴露实现细节）。这与 C++ 的 `auto`（不能用于 `static`）或 Java 的接口（可用于 `static`，但需具体实现类）不同——Rust 的 `impl Trait` 设计追求零成本抽象，但静态位置的单态化要求与之冲突。[来源: [Rust RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bound.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.2 边界测试：Edition 迁移的宏展开差异（编译错误）
 
