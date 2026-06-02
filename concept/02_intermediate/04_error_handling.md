@@ -108,6 +108,7 @@
   - [十、相关概念链接](#十相关概念链接)
   - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos)
   - [Wikipedia 概念对齐](#wikipedia-概念对齐)
+  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
   - [十、C++ 异常安全 vs Rust 错误处理](#十c-异常安全-vs-rust-错误处理)
     - [10.1 异常安全保证等级](#101-异常安全保证等级)
@@ -2038,7 +2039,6 @@ fn compute() -> Maybe<i32> {
 
 ---
 
-
 ## 逆向推理链（Backward Reasoning）
 
 > **从编译错误反推**：
@@ -2046,6 +2046,7 @@ fn compute() -> Maybe<i32> {
 > ```text
 > 错误恢复 ⟸ Result/Option 穷尽处理
 > ```
+>
 ## 权威来源索引
 
 >

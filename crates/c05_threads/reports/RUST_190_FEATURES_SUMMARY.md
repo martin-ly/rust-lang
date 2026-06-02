@@ -256,7 +256,8 @@ let result: Vec<i32> = struct_instance.process(10).collect();
 - ✅ 性能优化特性
 - ✅ 高级并发特性
 
-项目现在充分利用了 Rust 1.90 的语言特性，提供了更好的性能、更清晰的代码和更强的类型安全性。所有新特性都经过了测试验证，并提供了完整的文档和示例。
+项目现在充分利用了 Rust 1.90 的语言特性，提供了更好的性能、更清晰的代码和更强的类型安全性。所有新特性都经过了测试验证，并提供了完整的文档和示例
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

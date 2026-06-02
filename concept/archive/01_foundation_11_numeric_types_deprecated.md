@@ -5,7 +5,6 @@
 > **定位**: 系统讲解 Rust 的**数值类型**——从整数、浮点到 wrapping/saturating 运算，分析类型安全如何防止数值错误。
 > **前置概念**: [Type System](04_type_system.md) · [Ownership](01_ownership.md)
 > **后置概念**: [Generics](../02_intermediate/02_generics.md) · [Performance](../06_ecosystem/15_performance_optimization.md)
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 

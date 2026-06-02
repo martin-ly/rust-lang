@@ -41,6 +41,7 @@
     - [4.5 边界测试：`Condvar` 虚假唤醒未处理（逻辑错误）](#45-边界测试condvar-虚假唤醒未处理逻辑错误)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
     - [10.3 边界测试：`crossbeam::channel` 的关闭检测与迭代终止（逻辑错误）](#103-边界测试crossbeamchannel-的关闭检测与迭代终止逻辑错误)
     - [10.4 边界测试：Send/Sync 的 auto trait 边界与线程安全（编译错误）](#104-边界测试sendsync-的-auto-trait-边界与线程安全编译错误)
@@ -646,7 +647,6 @@ fn fixed() {
 
 ---
 
-
 ## 逆向推理链（Backward Reasoning）
 
 > **从编译错误反推**：
@@ -654,6 +654,7 @@ fn fixed() {
 > ```text
 > 并发模式安全 ⟸ Send/Sync + 锁协议
 > ```
+>
 ## 权威来源索引
 
 >

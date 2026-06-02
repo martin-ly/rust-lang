@@ -2137,7 +2137,6 @@ mod internal {
 
 ---
 
-
 ## 逆向推理链（Backward Reasoning）
 
 > **从编译错误反推**：
@@ -2145,6 +2144,7 @@ mod internal {
 > ```text
 > 宏安全 ⟸ 卫生性 + 展开可预测
 > ```
+>
 ## 权威来源索引
 
 >

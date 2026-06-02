@@ -40,6 +40,7 @@
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Unsafe Rust 模式的编译错误](#十边界测试unsafe-rust-模式的编译错误)
     - [10.1 边界测试：自定义 `Drop` 中的 `mem::forget` 循环（运行时 UB）](#101-边界测试自定义-drop-中的-memforget-循环运行时-ub)
@@ -536,7 +537,6 @@ graph TD
 
 ---
 
-
 ## 逆向推理链（Backward Reasoning）
 
 > **从编译错误反推**：
@@ -544,6 +544,7 @@ graph TD
 > ```text
 > Unsafe 安全抽象 ⟸ 人工证明 + Miri 验证
 > ```
+>
 ## 权威来源索引
 
 > **补充来源**

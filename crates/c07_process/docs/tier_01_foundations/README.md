@@ -12,7 +12,6 @@
   - [目录](#目录)
   - [📚 文档列表](#-文档列表)
   - [🎯 学习目标](#-学习目标)
-  - [**最后更新**: 2025-10-22](#最后更新-2025-10-22)
 
 ## 📚 文档列表
 
@@ -37,6 +36,7 @@
 
 **维护**: Documentation Team
 **最后更新**: 2025-10-22
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -40,6 +40,7 @@
     - [编译错误示例](#编译错误示例)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
     - [10.5 边界测试：过程宏的 `Span` 与错误定位精度（编译错误/调试困难）](#105-边界测试过程宏的-span-与错误定位精度编译错误调试困难)
     - [10.3 边界测试：过程宏的 hygiene 与路径解析（编译错误）](#103-边界测试过程宏的-hygiene-与路径解析编译错误)
@@ -539,7 +540,6 @@ pub fn my_macro(input: String) -> String {
 
 ---
 
-
 ## 逆向推理链（Backward Reasoning）
 
 > **从编译错误反推**：
@@ -547,6 +547,7 @@ pub fn my_macro(input: String) -> String {
 > ```text
 > 过程宏安全 ⟸ TokenStream 完整性
 > ```
+>
 ## 权威来源索引
 
 >

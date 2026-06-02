@@ -40,6 +40,7 @@
   - [五、来源与延伸阅读](#五来源与延伸阅读)
     - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
+  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：assert\_matches 的编译错误](#十边界测试assert_matches-的编译错误)
     - [10.1 边界测试：`assert_matches!` 在非 Option/Result 上使用（编译错误）](#101-边界测试assert_matches-在非-optionresult-上使用编译错误)
@@ -436,7 +437,6 @@ fn main() {
 
 ---
 
-
 ## 逆向推理链（Backward Reasoning）
 
 > **从编译错误反推**：
@@ -444,6 +444,7 @@ fn main() {
 > ```text
 > 模式匹配穷尽 ⟸ 所有变体被覆盖
 > ```
+>
 ## 权威来源索引
 
 >

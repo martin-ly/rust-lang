@@ -41,6 +41,7 @@
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
     - [10.3 边界测试：取消安全性（Cancellation Safety）的违反（运行时行为）](#103-边界测试取消安全性cancellation-safety的违反运行时行为)
     - [10.4 边界测试：`tokio::spawn` 的 `Send` 约束与 `Rc`（编译错误）](#104-边界测试tokiospawn-的-send-约束与-rc编译错误)
@@ -653,7 +654,6 @@ graph TD
 
 ---
 
-
 ## 逆向推理链（Backward Reasoning）
 
 > **从编译错误反推**：
@@ -661,6 +661,7 @@ graph TD
 > ```text
 > 异步模式安全 ⟸ 取消语义 + Waker 契约
 > ```
+>
 ## 权威来源索引
 
 >

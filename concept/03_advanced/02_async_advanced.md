@@ -31,6 +31,7 @@
     - [10.2 边界测试：`Stream::next()` 与所有权冲突（编译错误）](#102-边界测试streamnext-与所有权冲突编译错误)
     - [10.5 边界测试：`Pin` 与 `Unpin` 的自动实现冲突（编译错误）](#105-边界测试pin-与-unpin-的自动实现冲突编译错误)
     - [10.3 边界测试：类型不匹配的基础错误](#103-边界测试类型不匹配的基础错误)
+  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [参考来源](#参考来源)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -1315,7 +1316,6 @@ fn main() {
 
 > **修正**: **类型不匹配**是 Rust 最常见的编译错误：1) `let x: i32 = "hello"` — `&str` 不能隐式转为 `i32`；2) Rust 无隐式类型转换（C/Java 的自动转换）；3) 需显式转换：`"42".parse::<i32>().unwrap()` 或 `42i32.to_string()`。
 
-
 ## 逆向推理链（Backward Reasoning）
 
 > **从编译错误反推**：
@@ -1323,6 +1323,7 @@ fn main() {
 > ```text
 > 高级异步安全 ⟸ Pin + Send 边界
 > ```
+>
 ## 参考来源
 
 > [来源: [Rust Reference — Async Blocks](https://doc.rust-lang.org/reference/expressions/block-expr.html#async-blocks)]

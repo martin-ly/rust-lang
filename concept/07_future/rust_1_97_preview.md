@@ -2,7 +2,6 @@
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]
-
 > **跟踪版本**: nightly 1.98.0 (2026-06-02)
 > **预计稳定时间**: 2026-07-09（Rust 1.97.0 Beta 计划发布日期，来源: Rust Forge）
 > **当前阶段**: 🧪 Nightly 实验性 / 1.97 已进入 Beta 分支
@@ -13,14 +12,12 @@
 > - [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)
 > - [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
 > - [Rust Internals Forum](https://internals.rust-lang.org/)
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
 ---
 
 > **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
-
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
 
 ## 一、语言特性预览

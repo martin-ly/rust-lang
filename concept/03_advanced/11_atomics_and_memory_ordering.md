@@ -48,6 +48,7 @@
     - [4.5 边界测试：`Ordering::Relaxed` 导致逻辑错误（编译通过但语义错误）](#45-边界测试orderingrelaxed-导致逻辑错误编译通过但语义错误)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
     - [10.5 边界测试：`AtomicPtr` 的 `compare_exchange` ABA 问题（运行时逻辑错误）](#105-边界测试atomicptr-的-compare_exchange-aba-问题运行时逻辑错误)
     - [10.3 边界测试：`Relaxed` 顺序与 happens-before 缺失（逻辑错误/UB）](#103-边界测试relaxed-顺序与-happens-before-缺失逻辑错误ub)
@@ -692,7 +693,6 @@ fn fixed() {
 
 ---
 
-
 ## 逆向推理链（Backward Reasoning）
 
 > **从编译错误反推**：
@@ -700,6 +700,7 @@ fn fixed() {
 > ```text
 > 原子操作安全 ⟸ Ordering + happens-before
 > ```
+>
 ## 权威来源索引
 
 >

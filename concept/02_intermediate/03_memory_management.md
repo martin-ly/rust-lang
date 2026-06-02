@@ -113,6 +113,7 @@
     - [11.6 演进路线与跟踪](#116-演进路线与跟踪)
   - [十二、待补充与演进方向（TODOs）](#十二待补充与演进方向todos)
   - [Wikipedia 概念对齐](#wikipedia-概念对齐)
+  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
   - [十三、边界测试：内存管理的编译错误](#十三边界测试内存管理的编译错误)
     - [13.1 边界测试：Box::into\_raw 后双重释放（运行时 UB）](#131-边界测试boxinto_raw-后双重释放运行时-ub)
@@ -1639,7 +1640,6 @@ Box<MaybeUninit<T>>.field → Box<MaybeUninit<FieldType>>
 
 ---
 
-
 ## 逆向推理链（Backward Reasoning）
 
 > **从编译错误反推**：
@@ -1647,6 +1647,7 @@ Box<MaybeUninit<T>>.field → Box<MaybeUninit<FieldType>>
 > ```text
 > 内存安全 ⟸ 所有权 + 借用检查
 > ```
+>
 ## 权威来源索引
 
 >

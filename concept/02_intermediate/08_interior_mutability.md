@@ -46,6 +46,7 @@
     - [编译错误 5：`RwLock` 读锁升级写锁（死锁风险）](#编译错误-5rwlock-读锁升级写锁死锁风险)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
     - [10.5 边界测试：`RefCell::borrow_mut` 的递归 panic（运行时 panic）](#105-边界测试refcellborrow_mut-的递归-panic运行时-panic)
     - [10.6 边界测试：`Cell::take` 与 `Default` 的隐式要求（编译错误）](#106-边界测试celltake-与-default-的隐式要求编译错误)
@@ -558,7 +559,6 @@ fn correct_upgrade() {
 
 ---
 
-
 ## 逆向推理链（Backward Reasoning）
 
 > **从编译错误反推**：
@@ -566,6 +566,7 @@ fn correct_upgrade() {
 > ```text
 > 内部可变安全 ⟸ RefCell/Cell 运行时检查
 > ```
+>
 ## 权威来源索引
 
 >

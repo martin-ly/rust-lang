@@ -131,6 +131,7 @@
     - [16.4 边界测试：在 async 块中借用局部变量生命周期不足（编译错误）](#164-边界测试在-async-块中借用局部变量生命周期不足编译错误)
     - [16.5 边界测试：`Pin<&mut Self>` 在 async trait 中的误用（编译错误）](#165-边界测试pinmut-self-在-async-trait-中的误用编译错误)
     - [10.4 边界测试：`async fn` 在 trait 中的缺失与 `async_trait` crate（编译错误）](#104-边界测试async-fn-在-trait-中的缺失与-async_trait-crate编译错误)
+  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [参考来源](#参考来源)
   - [导航：下一步去哪？](#导航下一步去哪)
 
