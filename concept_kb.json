@@ -3078,10 +3078,6 @@
           "context": "所有权跟踪的操作语义形式化，堆演进展现代数模型。 ⚠️（非 peer-reviewed 论文，为技术报告）"
         },
         {
-          "source": "Rust Reference: Ownership",
-          "context": "Rust 的所有权系统通过编译期检查实现零成本内存安全。 ✅"
-        },
-        {
           "source": "C++ Reference: std::unique_ptr",
           "context": "C++11 `unique_ptr` 提供运行时所有权管理，但编译器不检查 use-after-move。 ✅"
         },
@@ -3134,10 +3130,6 @@
           "context": "T2/T3 — Safe Rust 不存在 double-free 和 use-after-free 的形式化定理。 ✅"
         },
         {
-          "source": "Rust Reference: Copy",
-          "context": "T6 — 显式标记的按位复制语义。 ✅"
-        },
-        {
           "source": "Rustonomicon",
           "context": "C1/C2 — `mem::forget` 与裸指针突破 Safe Rust 保证。 ⚠️"
         },
@@ -3166,14 +3158,6 @@
           "context": "\"5 条主线的 6 步递进\" — 认知脚手架设计。 💡"
         },
         {
-          "source": "Rust Reference: Pin",
-          "context": "`Pin<T>` 的位置不变性保证自引用结构内部指针的有效性，所有权关系不变。 ✅"
-        },
-        {
-          "source": "Rust Reference: Send",
-          "context": "Send trait 定义跨线程所有权转移的安全性，要求 T 的所有字段都满足 Send 且 Drop 实现线程安全。 ✅"
-        },
-        {
           "source": "💡 原创分析",
           "context": "\"T: Send ⇔ 将 T 的值从线程 A move 到线程 B 是内存安全的\" 是 Send 语义的形式化重述。 💡"
         },
@@ -3184,10 +3168,6 @@
         {
           "source": "Rustonomicon: FFI",
           "context": "FFI 边界处所有权语义必须显式约定，Rust 侧通过 Box::into_raw / Box::from_raw 管理所有权转移。 ✅"
-        },
-        {
-          "source": "Rust Reference: Unsafe",
-          "context": "unsafe 块突破编译器保证，程序员需手动维持所有权不变性。 ⚠️"
         }
       ],
       "cross_references": [
@@ -3536,10 +3516,6 @@
           "context": "借用的形式化语义为\"所有权的临时授权\"，不改变资源的最终归属（所有权归还）。 ✅"
         },
         {
-          "source": "Rust Reference: References",
-          "context": "Rust 引用分 `&T`（共享只读）和 `&mut T`（独占可写），由编译器在类型检查和借用检查阶段强制执行。 ✅"
-        },
-        {
           "source": "C++ Reference: Reference",
           "context": "C++ 引用 `T&` 语义上为别名，编译器不检查别名-可变冲突，use-after-free 和 data race 为未定义行为 (UB)。 ✅"
         },
@@ -3578,10 +3554,6 @@
         {
           "source": "Wright-Felleisen 1994",
           "context": "类型安全保证可推导出并发安全，前提是所有权与别名规则被严格执行。 ✅"
-        },
-        {
-          "source": "Rust Reference: References",
-          "context": "引用有效性由生命周期约束和借用检查器共同保证。 ✅"
         },
         {
           "source": "Tofte & Talpin 1994",
@@ -4029,36 +4001,16 @@
       ],
       "sources": [
         {
-          "source": "Tofte & Talpin 1994, *Implementation of the Typed Call-by-Value λ-Calculus using a Stack of Regions*; Walker 2000, *A Type System for Expressive Security Policies*; Rust Reference: Lifetime elision; rustc NLL design",
-          "context": "Rust 的生命周期系统不是凭空创造的——它直接继承自 Tofte-Talpin 的区域类型理论（Region-based memory management），但进行了关键的命令式适配。"
-        },
-        {
           "source": "Tofte & Talpin 1994",
           "context": "区域类型的核心公理：引用值的有效区域不能超出被引用值的有效区域。✅"
-        },
-        {
-          "source": "Rust Reference: Subtyping",
-          "context": "Rust 中生命周期子类型关系 'static <: 'a 的形式化定义。✅"
-        },
-        {
-          "source": "Rust Reference: Lifetime elision",
-          "context": "三条省略规则基于 Hindley-Milner 风格的模式推导，覆盖 90% 以上函数签名场景。✅"
         },
         {
           "source": "RFC 2094",
           "context": "NLL 将生命周期从词法作用域扩展到基于数据流的实际使用期，减少不必要的借用冲突。✅"
         },
         {
-          "source": "Rust Reference: Variance",
-          "context": "生命周期协变/逆变/不变的类型系统规则基于子类型理论。✅"
-        },
-        {
           "source": "TRPL: Ch10.3",
           "context": "'static 作为最长生命周期，可安全 coercion 为任意较短生命周期。✅"
-        },
-        {
-          "source": "Rust Reference: HRTB",
-          "context": "HRTB `for<'a>` 对应高阶逻辑中的全称量词 ∀。✅"
         }
       ],
       "cross_references": [
@@ -4936,14 +4888,6 @@
           "context": "积与余积的组合构成代数数据类型的完备基。✅"
         },
         {
-          "source": "Rust Reference: Enums",
-          "context": "NPO 利用引用永不为 null 的特性将 Option<&T> 压缩为单个指针。✅"
-        },
-        {
-          "source": "Rust Reference: Patterns",
-          "context": "match 穷尽性检查由编译器验证，确保 enum 的所有变体都被处理。✅"
-        },
-        {
           "source": "TRPL: Ch6.1",
           "context": "`Option<T>` 强制处理 None 情况，消除空指针错误。✅"
         },
@@ -4962,10 +4906,6 @@
         {
           "source": "TRPL: Ch9",
           "context": "Result<T, E> 强制显式错误处理，避免异常带来的隐藏控制流。✅"
-        },
-        {
-          "source": "Rust Reference: Never type",
-          "context": "`!` 是 Rust 的空类型，可与任意类型统一（coerce）。✅"
         },
         {
           "source": "Damas & Milner 1982, *Principal Type-Schemes for Functional Programs*",
@@ -5012,10 +4952,6 @@
           "context": "System F（含显式 ∀ 类型）的类型推断是不可判定的；Rust 的显式泛型参数将类型推断限制在 HM 可判定片段内，确保编译终止。✅"
         },
         {
-          "source": "Rust Reference: Enums",
-          "context": "若未显式指定，discriminant 从 0 开始按定义顺序递增，类型为编译器内部选择的整数类型。✅"
-        },
-        {
           "source": "Rust Reference: std::mem::discriminant",
           "context": "`Discriminant<T>` 的比较等价于判断两个值是否属于同一变体，不触及变体携带的数据。✅"
         },
@@ -5026,10 +4962,6 @@
         {
           "source": "Rust Reference: Type Layout",
           "context": "`align_of::<E>()` 等于所有变体对齐要求的最大值（discriminant 通常对齐为 1）。✅"
-        },
-        {
-          "source": "Rust Reference: Enums",
-          "context": "Niche value optimization 是编译器保证的优化：`Option<&T>` 的内存布局与 `&T` 完全相同。✅"
         },
         {
           "source": "The Rustonomicon: Exotic Sizes",
@@ -7123,7 +7055,7 @@
       "layer": "L1",
       "title": "闭包基础：捕获环境与匿名函数",
       "positioning": "系统讲解 Rust **闭包（Closure）**——从环境捕获、Fn/FnMut/FnOnce trait 到闭包作为参数和返回值，揭示 Rust 如何将函数式编程的灵活性与所有权系统的安全性结合。",
-      "line_count": 746,
+      "line_count": 745,
       "theorem_chains": [
         {
           "text": "| 闭包基础：捕获环境与匿名函数 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -7270,7 +7202,7 @@
       "layer": "L1",
       "title": "测试基础：从单元测试到集成测试",
       "positioning": "系统讲解 Rust **测试机制**——从单元测试、集成测试到文档测试和基准测试，揭示 Rust 如何内置测试文化并支持多种测试层级。",
-      "line_count": 668,
+      "line_count": 667,
       "theorem_chains": [
         {
           "text": "| 测试基础：从单元测试到集成测试 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",

@@ -20,7 +20,7 @@
 > [Concurrency](../03_advanced/01_concurrency.md)
 > [来源: [Wikipedia — Simply Typed Lambda Calculus](https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus)]
 > **后置概念**: [Formal Methods](../07_future/02_formal_methods.md)
-> **主要来源**: [RustBelt: POPL 2018] · [Iris Project] · [Creusot] · [Verus] · [Kani: AWS] · [Aeneas] · [RefinedRust] · [Prusti]
+> **主要来源**: [RustBelt: POPL 2018](https://doi.org/10.1145/3158154) · [Iris Project](https://iris-project.org/) · [Creusot] · [Verus] · [Kani: AWS] · [Aeneas] · [RefinedRust] · [Prusti]
 
 ---
 
@@ -104,9 +104,9 @@
 
 ### 1.2 RustBelt 与 Iris 核心定义
 
-> **[RustBelt: POPL 2018]** RustBelt is the first formal (and machine-checked) foundations for safe and unsafe Rust. It provides a proof technique for verifying that unsafe code respects safe Rust's abstraction boundaries. The paper establishes the core safety theorem: well-typed safe Rust programs are guaranteed to be data-race free and memory-safe (no use-after-free) under the λRust operational semantics [来源: Jung et al., *RustBelt: Securing the Foundations of the Rust Programming Language*, POPL 2018].
+> **[RustBelt: POPL 2018](https://doi.org/10.1145/3158154)** RustBelt is the first formal (and machine-checked) foundations for safe and unsafe Rust. It provides a proof technique for verifying that unsafe code respects safe Rust's abstraction boundaries. The paper establishes the core safety theorem: well-typed safe Rust programs are guaranteed to be data-race free and memory-safe (no use-after-free) under the λRust operational semantics [来源: Jung et al., *RustBelt: Securing the Foundations of the Rust Programming Language*, POPL 2018].
 
-> **[Iris Project]** Iris is a higher-order concurrent separation logic framework implemented in Coq. It provides the logical infrastructure for reasoning about fine-grained concurrency, higher-order ghost state, and atomicity. RustBelt builds directly on Iris to model Rust's ownership and borrowing mechanisms [来源: Jung et al., *Iris from the Ground Up*, JFP 2018; iris-project.org].
+> **[Iris Project](https://iris-project.org/)** Iris is a higher-order concurrent separation logic framework implemented in Coq. It provides the logical infrastructure for reasoning about fine-grained concurrency, higher-order ghost state, and atomicity. RustBelt builds directly on Iris to model Rust's ownership and borrowing mechanisms [来源: Jung et al., *Iris from the Ground Up*, JFP 2018; iris-project.org].
 
 > **[学术来源: 各工具官方论文/文档]** 以下是 Rust 验证工具链的核心定义与来源。
 
@@ -246,7 +246,7 @@ graph BT
 
 ### 3.1 CSL = 分离逻辑 + 资源不变量
 
-并发分离逻辑（Concurrent Separation Logic, CSL）由 O'Hearn 于 2007 年提出，将 Hoare 逻辑的并行规则与分离逻辑的局部推理相结合。其核心扩展在于**资源不变量（resource invariant）**`I`：线程访问共享资源时必须证明该资源满足 `I`，并在释放时恢复 `I`。 [来源: [Iris Project](https://iris-project.org/)]
+并发分离逻辑（Concurrent Separation Logic, CSL）由 O'Hearn 于 2007 年提出，将 Hoare 逻辑的并行规则与分离逻辑的局部推理相结合。其核心扩展在于**资源不变量（resource invariant）**`I`：线程访问共享资源时必须证明该资源满足 `I`，并在释放时恢复 `I`。 [来源: [Iris Project](https://iris-project.org/)(https://iris-project.org/)]
 
 在 RustBelt/Iris 框架中，CSL 被实例化为高阶并发分离逻辑，支持高阶幽灵状态和原子性推理，使得 Rust 的 `std::sync` 原语可被精确形式化规约。
 
@@ -922,7 +922,7 @@ graph TD
 |:---|:---|:---|
 | **[ETH Zurich: RustBelt Project]** | Iris 分离逻辑、λRust 语义 | L1-A, L2-C, 理论基础 |
 | **[CMU 17-350: Safe Systems Programming]** | 形式化验证工具使用 | 工业实践 |
-| **[RustBelt: POPL 2018]** | 类型安全定理、unsafe 封装 | T1, T2, C1, §3 Mutex/Arc 形式化 |
+| **[RustBelt: POPL 2018](https://doi.org/10.1145/3158154)** | 类型安全定理、unsafe 封装 | T1, T2, C1, §3 Mutex/Arc 形式化 |
 | **[Iris: JFP 2018]** | 高阶并发分离逻辑框架 | L1-A, L1-B, L1-C, 逻辑基础 |
 | **[RustHornBelt: PLDI 2022]** | 功能正确性验证（unsafe） | C1 扩展 |
 | **[RefinedRust: PLDI 2024]** | 自动化类型验证 | 工具化 |
@@ -938,7 +938,7 @@ graph TD
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
-| RustBelt 是首个 Rust 形式化基础 | [RustBelt: POPL 2018] · Jung et al. 2017 POPL | ✅ |
+| RustBelt 是首个 Rust 形式化基础 | [RustBelt: POPL 2018](https://doi.org/10.1145/3158154) · Jung et al. 2017 POPL | ✅ |
 | CSL 资源不变量可建模 Mutex/Arc | [RustBelt: POPL 2018 §5–§6] · Ralf Jung PhD Thesis 2020 | ✅ |
 | Kani 用于 AWS Rust 服务验证 | [AWS Kani Blog] · Tautschnig 2023 | ✅ |
 | Verus 由 Microsoft Research 开发 | [Verus GitHub] · Lorch et al. 2024 SOSP | ✅ |
@@ -992,7 +992,7 @@ Option<T>       ⟹    Some(v) ∗ type_interp(v, T) ∨ None
 | 可扩展性 | 灵活（任意协议） | 受限于类型系统表达能力 |
 | 验证工具 | Coq | Rust 类型检查器 + 自动定理证明器 |
 
-> **来源**: [PLDI 2024 · RefinedRust] · [RefinedRust GitHub] · [RustBelt: POPL 2018]
+> **来源**: [PLDI 2024 · RefinedRust] · [RefinedRust GitHub] · [RustBelt: POPL 2018](https://doi.org/10.1145/3158154)
 
 ### 7.7 RustHornBelt：Horn 子句验证与 CHC 求解
 
@@ -1014,7 +1014,7 @@ fn swap(a: &mut i32, b: &mut i32)
 | RustHornBelt | CHC 求解 | 纯函数、递归数据结构 |
 | RefinedRust | 自动分离逻辑推导 | 类型驱动的快速验证 |
 
-> **来源**: [OOPSLA 2022 · RustHornBelt] · [CHC Solver: Z3/Spacer] · [RustBelt: POPL 2018]
+> **来源**: [OOPSLA 2022 · RustHornBelt] · [CHC Solver: Z3/Spacer] · [RustBelt: POPL 2018](https://doi.org/10.1145/3158154)
 
 ### 7.8 CSL 中 `RwLock` 与 `Condvar` 的 Iris 建模
 

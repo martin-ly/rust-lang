@@ -1,6 +1,6 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-06-02T22:18:11.870650+00:00
+> 生成时间: 2026-06-02T22:23:50.478994+00:00
 > 扫描文件数: 260
 
 ## 全局指标
@@ -99,8 +99,8 @@
 | concept\01_foundation\12_attributes_and_macros.md | L1 | 747 | 3 | 2 | 0 | 3 | 1 | 10 | 6 | ✅ | ✅ | ✅ |
 | concept\01_foundation\13_panic_and_abort.md | L1 | 745 | 3 | 2 | 0 | 3 | 1 | 11 | 6 | ✅ | ✅ | ✅ |
 | concept\01_foundation\14_coercion_and_casting.md | L1 | 760 | 3 | 2 | 0 | 3 | 1 | 12 | 6 | ✅ | ✅ | ✅ |
-| concept\01_foundation\15_closure_basics.md | L1 | 746 | 3 | 2 | 0 | 3 | 1 | 12 | 6 | ✅ | ✅ | ✅ |
-| concept\01_foundation\16_testing_basics.md | L1 | 668 | 3 | 2 | 0 | 3 | 1 | 8 | 6 | ✅ | ✅ | ✅ |
+| concept\01_foundation\15_closure_basics.md | L1 | 745 | 3 | 2 | 0 | 3 | 1 | 12 | 6 | ✅ | ✅ | ✅ |
+| concept\01_foundation\16_testing_basics.md | L1 | 667 | 3 | 2 | 0 | 3 | 1 | 8 | 6 | ✅ | ✅ | ✅ |
 | concept\01_foundation\17_collections_advanced.md | L1 | 897 | 3 | 2 | 0 | 3 | 2 | 11 | 6 | ✅ | ✅ | ✅ |
 | concept\01_foundation\18_strings_and_encoding.md | L1 | 718 | 3 | 2 | 0 | 3 | 2 | 9 | 6 | ✅ | ✅ | ✅ |
 | concept\01_foundation\19_numerics.md | L1 | 46 | 3 | 0 | 0 | 1 | 0 | 0 | 6 | ✅ | ✅ | ✅ |

@@ -113,7 +113,7 @@
 
 ### 1.3b Tofte-Talpin 区域推断算法的 Rust 适配
 
-> **[来源: Tofte & Talpin 1994, *Implementation of the Typed Call-by-Value λ-Calculus using a Stack of Regions*; Walker 2000, *A Type System for Expressive Security Policies*; Rust Reference: Lifetime elision; rustc NLL design]** Rust 的生命周期系统不是凭空创造的——它直接继承自 Tofte-Talpin 的区域类型理论（Region-based memory management），但进行了关键的命令式适配。
+> **[来源: Tofte & Talpin 1994, *Implementation of the Typed Call-by-Value λ-Calculus using a Stack of Regions*; Walker 2000, *A Type System for Expressive Security Policies*; [Rust Reference: Lifetime elision](https://doc.rust-lang.org/reference/lifetime-elision.html); rustc NLL design]** Rust 的生命周期系统不是凭空创造的——它直接继承自 Tofte-Talpin 的区域类型理论（Region-based memory management），但进行了关键的命令式适配。
 
 #### 原始算法（ML 语言）
 
@@ -163,7 +163,7 @@ Tofte-Talpin 区域推断的核心思想:
         引用的生命周期是 CFG 上的一组点，而非连续的语法范围
 ```
 
-> **来源**: [Rust Reference: Non-Lexical Lifetimes] · [rustc NLL RFC 2094] · [Rust Internals: NLL design notes]
+> **来源**: [Rust Reference: Non-Lexical Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html) · [rustc NLL RFC 2094] · [Rust Internals: NLL design notes]
 
 #### Rust 中的区域约束生成与求解
 
@@ -337,7 +337,7 @@ graph TD
   ⟹ 编译器可通过约束求解判断任意生命周期组合的有效性
 ```
 
-> **[来源: Rust Reference: Subtyping]** Rust 中生命周期子类型关系 'static <: 'a 的形式化定义。✅
+> **[来源: [Rust Reference: Subtyping](https://doc.rust-lang.org/reference/subtyping.html)]** Rust 中生命周期子类型关系 'static <: 'a 的形式化定义。✅
 
 **生命周期偏序集 Hasse 图（Mermaid）**:
 
@@ -375,7 +375,7 @@ graph BT
   ⟹ Elision 是完备且一致的语法糖，不会引入额外约束或遗漏约束
 ```
 
-> **[来源: Rust Reference: Lifetime elision]** 三条省略规则基于 Hindley-Milner 风格的模式推导，覆盖 90% 以上函数签名场景。✅
+> **[来源: [Rust Reference: Lifetime elision](https://doc.rust-lang.org/reference/lifetime-elision.html)]** 三条省略规则基于 Hindley-Milner 风格的模式推导，覆盖 90% 以上函数签名场景。✅
 
 ### 4.4 定理：NLL 流敏感安全 ⟹ 比词法作用域更精确的存活期
 
@@ -403,7 +403,7 @@ graph BT
   ⟹ 长生命周期引用可安全替代短生命周期引用，无悬垂风险
 ```
 
-> **[来源: Rust Reference: Variance]** 生命周期协变/逆变/不变的类型系统规则基于子类型理论。✅
+> **[来源: [Rust Reference: Variance](https://doc.rust-lang.org/reference/subtyping.html#variance)]** 生命周期协变/逆变/不变的类型系统规则基于子类型理论。✅
 
 ### 4.6 推论：'static 生命周期 ⟹ 全局/泄漏数据的安全性
 
@@ -431,7 +431,7 @@ graph BT
   ⟹ 高阶函数可接受任意生命周期的引用，回调接口的类型表达力完备
 ```
 
-> **[来源: Rust Reference: HRTB]** HRTB `for<'a>` 对应高阶逻辑中的全称量词 ∀。✅
+> **[来源: [Rust Reference: HRTB](https://doc.rust-lang.org/reference/trait-bounds.html#higher-ranked-trait-bounds)]** HRTB `for<'a>` 对应高阶逻辑中的全称量词 ∀。✅
 
 ### 4.8 推论：GATs + where Self: 'a ⟹ 自引用集合的表达能力
 

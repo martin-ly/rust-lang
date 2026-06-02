@@ -11,7 +11,7 @@
 > **双维定位**: C×Ana — 分析线性逻辑到 Rust 的映射
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Type System](../01_foundation/04_type_system.md) [来源: [TAPL — Pierce 2002](https://www.cis.upenn.edu/~bcpierce/tapl/)]
 > **后置概念**: [Ownership Formalization](./03_ownership_formal.md) · [RustBelt](./04_rustbelt.md)
-> **主要来源**: [Wikipedia: Linear logic] · [Wikipedia: Affine logic] · [Girard 1987] · [Pierce 2002, TAPL §15] · [RustBelt: POPL 2018] · [Utrecht: Ownership Types]
+> **主要来源**: [Wikipedia: Linear logic] · [Wikipedia: Affine logic] · [Girard 1987] · [Pierce 2002, TAPL §15] · [RustBelt: POPL 2018](https://doi.org/10.1145/3158154) · [Utrecht: Ownership Types]
 
 ---
 
@@ -23,7 +23,7 @@
 
 ---
 
-> **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+> **来源**: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4) · [Wadler 1990 — Linear types can change the world](https://doi.org/10.1007/3-540-52377-7_30) · [RustBelt: POPL 2018](https://doi.org/10.1145/3158154)
 >
 ## 一、权威定义（Definition）
 >
@@ -42,7 +42,7 @@
 
 ---
 
-> **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+> **来源**: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4) · [Wadler 1990 — Linear types can change the world](https://doi.org/10.1007/3-540-52377-7_30) · [RustBelt: POPL 2018](https://doi.org/10.1145/3158154)
 
 ## 二、概念属性矩阵（Attribute Matrix）
 
@@ -117,7 +117,7 @@ graph TD
 
 ---
 
-> **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+> **来源**: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4) · [Wadler 1990 — Linear types can change the world](https://doi.org/10.1007/3-540-52377-7_30) · [RustBelt: POPL 2018](https://doi.org/10.1145/3158154)
 >
 ## 三、形式化理论根基（Formal Foundation）
 
@@ -183,7 +183,7 @@ Rust 对应:
 
 ---
 
-> **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+> **来源**: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4) · [Wadler 1990 — Linear types can change the world](https://doi.org/10.1007/3-540-52377-7_30) · [RustBelt: POPL 2018](https://doi.org/10.1145/3158154)
 >
 ## 四、思维导图（Mind Map）
 
@@ -223,7 +223,7 @@ graph TD
 
 ---
 
-> **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+> **来源**: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4) · [Wadler 1990 — Linear types can change the world](https://doi.org/10.1007/3-540-52377-7_30) · [RustBelt: POPL 2018](https://doi.org/10.1145/3158154)
 >
 ## 五、反命题决策树（Anti-Proposition Decision Trees）
 
@@ -307,7 +307,7 @@ graph TD
 
 ---
 
-> **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+> **来源**: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4) · [Wadler 1990 — Linear types can change the world](https://doi.org/10.1007/3-540-52377-7_30) · [RustBelt: POPL 2018](https://doi.org/10.1145/3158154)
 >
 ## 六、定理推理链（Theorem Chain）
 
@@ -344,7 +344,7 @@ T1(切消定理) ⟹ L1(线性命题) ⟹ C1(Rust所有权) ⟹ C2(仿射move语
 
 ---
 
-> **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+> **来源**: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4) · [Wadler 1990 — Linear types can change the world](https://doi.org/10.1007/3-540-52377-7_30) · [RustBelt: POPL 2018](https://doi.org/10.1145/3158154)
 >
 ## 七、sequent calculus 完整规则集与 Phase Semantics
 
@@ -432,7 +432,7 @@ Rust 编译期的相位模型:
 
 ---
 
-> **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+> **来源**: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4) · [Wadler 1990 — Linear types can change the world](https://doi.org/10.1007/3-540-52377-7_30) · [RustBelt: POPL 2018](https://doi.org/10.1145/3158154)
 >
 ## 八、示例与反例
 
@@ -508,7 +508,7 @@ fn session_demo() {
 
 ---
 
-> **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+> **来源**: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4) · [Wadler 1990 — Linear types can change the world](https://doi.org/10.1007/3-540-52377-7_30) · [RustBelt: POPL 2018](https://doi.org/10.1145/3158154)
 >
 ## 八、认知路径（Cognitive Path）
 
@@ -597,7 +597,7 @@ fn session_demo() {
 | **[Wikipedia: Linear logic]** | 线性逻辑通用概念；连接词语义 | 权威定义；§1.1 |
 | **[Wikipedia: Affine logic]** | 仿射逻辑定义；与线性逻辑的关系 | 权威定义；§1.1, §5.1 |
 | **[Wikipedia: Substructural type system]** | 子结构类型系统总览 | 类型论定位；§2.3 |
-| **[RustBelt: POPL 2018]** | 线性逻辑 → Rust 所有权；Iris 分离逻辑 | 应用映射；§1.1, §5.3, §7.3 |
+| **[RustBelt: POPL 2018](https://doi.org/10.1145/3158154)** | 线性逻辑 → Rust 所有权；Iris 分离逻辑 | 应用映射；§1.1, §5.3, §7.3 |
 | **[Tofte & Talpin 1994]** | 区域类型系统；堆分配的生命周期管理 | 生命周期形式化；§8 Step 5 |
 | **[Honda 1993: Session Types]** | 会话类型；通道通信的线性协议 | 并发验证；§6 T2, §7.2 |
 
@@ -609,7 +609,7 @@ fn session_demo() {
 |:---|:---|:---|
 | 线性逻辑由 Girard 1987 提出 | [Wikipedia: Linear logic] · Girard 1987, *Linear Logic* (TCS 50:1-102) | ✅ |
 | 仿射逻辑 = 线性逻辑 + weakening | [Wikipedia: Affine logic] · Girard 1987 §1 | ✅ |
-| Rust 是仿射类型系统（非严格线性） | [RustBelt: POPL 2018] · [Utrecht] · Jung et al. 2017 | ✅ |
+| Rust 是仿射类型系统（非严格线性） | [RustBelt: POPL 2018](https://doi.org/10.1145/3158154) · [Utrecht] · Jung et al. 2017 | ✅ |
 | 子结构类型谱系（linear/affine/relevant/ordered） | Pierce 2002, TAPL §15.3 | ✅ |
 | !A 对应 Copy trait | [RustBelt] · Wadler 1990 · 原创分析 | 💡 |
 | ⊗ 对应元组 | [Category Theory for Programmers] · Wadler 1990 | ✅ |
@@ -625,7 +625,7 @@ fn session_demo() {
 > 线性逻辑的 `⊗`（tensor）对应 Rust 的元组所有权，`⊸`（lollipop）对应所有权的转移（move），`!`（exponential）对应 `Copy` trait 的 weakening 规则。从形式化符号到编译器实际行为的映射，是理解 "为什么 Rust 不需要垃圾回收" 的理论根基。
 > 工程实践中的对应见 [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md)（所有权规则）与 [`../01_foundation/02_borrowing.md`](../01_foundation/02_borrowing.md)（借用作为分数权限的弱化形式）。
 
-> **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+> **来源**: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4) · [Wadler 1990 — Linear types can change the world](https://doi.org/10.1007/3-540-52377-7_30) · [RustBelt: POPL 2018](https://doi.org/10.1145/3158154)
 >
 ## 十、相关概念链接
 
@@ -639,7 +639,7 @@ fn session_demo() {
 | Rust vs C++ | [`../05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) | 对比映射；所有权语义差异 |
 | 安全边界 | [`../05_comparative/04_safety_boundaries.md`](../05_comparative/04_safety_boundaries.md) | 边界分析；unsafe 逃逸口 |
 
-> **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+> **来源**: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4) · [Wadler 1990 — Linear types can change the world](https://doi.org/10.1007/3-540-52377-7_30) · [RustBelt: POPL 2018](https://doi.org/10.1145/3158154)
 >
 ## 十一、Proof nets（证明网）与并发程序可视化
 
@@ -725,7 +725,7 @@ Cut 消除规则（线性逻辑核心元定理）:
 
 ---
 
-> **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+> **来源**: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4) · [Wadler 1990 — Linear types can change the world](https://doi.org/10.1007/3-540-52377-7_30) · [RustBelt: POPL 2018](https://doi.org/10.1145/3158154)
 >
 ## 十二、Linear Haskell 与 Rust 的跨语言类型系统对比
 
@@ -884,7 +884,7 @@ Rust 所有权系统（仿射变体）:
 
 ---
 
-> **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+> **来源**: [Girard 1987 — Linear Logic](https://doi.org/10.1016/0304-3975(87)90045-4) · [Wadler 1990 — Linear types can change the world](https://doi.org/10.1007/3-540-52377-7_30) · [RustBelt: POPL 2018](https://doi.org/10.1145/3158154)
 >
 ## 十三、待补充与演进方向（TODOs）
 
