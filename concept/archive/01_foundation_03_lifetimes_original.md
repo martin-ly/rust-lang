@@ -1,5 +1,6 @@
 # Lifetimes（生命周期）
 
+> **受众**: [归档]
 > **层级**: L1 基础概念
 > **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: C×App — 在复杂场景下正确标注生命周期

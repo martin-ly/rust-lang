@@ -1,5 +1,6 @@
 # Rust 语义表达力多视角深化（Multiview Expressiveness Analysis）
 
+> **受众**: [研究者]
 > **定位**: 本文件从**纵向理论视角**（计算/类型/控制/内存/并发/抽象/安全）深化 Rust 的表达能力，与 `semantic_expressiveness.md` 的**横向七维光谱**形成正交互补。前者回答「Rust 能表达什么」，后者回答「Rust 从哪些维度表达」。
 > **原则**: 不做"语法特性列表"，聚焦"每个理论视角下 Rust 的表达边界、与其他语言的等价性、以及形式化基础"。
 > **对齐来源**: [Rust Reference] · [Rust RFCs] · [RustBelt/Oxide] · [Felleisen 表达力理论] · [PL 语义学经典]

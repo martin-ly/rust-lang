@@ -1,4 +1,5 @@
 > **内容分级**: [综述级]
+> **受众**: [研究者]
 
 # 定理分级规范（Theorem Tier Specification）
 

@@ -1,5 +1,6 @@
 # Rust Edition 机制与迁移指南
 
+> **受众**: [归档]
 > **Bloom 层级**: 分析 → 应用
 > **A/S/P 标记**: **A+S** — ApplicationStructure
 > **双维定位**: C×App — 应用 Rust Edition 指南

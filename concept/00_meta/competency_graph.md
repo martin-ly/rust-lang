@@ -1,5 +1,6 @@
 # Rust 知识体系能力图谱（Competency Graph）
 
+> **受众**: [进阶]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **Bloom 层级**: 元（Meta）
 > **定位**: 本文件建立 `concept/` 知识体系的**能力评估与提升框架**，定义 Rust 编程能力的六维雷达模型，提供自评工具、薄弱点诊断和个性化训练路径推荐。与 `problem_graph.md`（"遇到什么问题"）和 `cognitive_dimension_matrix.md`（"认知类型是什么"）形成三角互补。

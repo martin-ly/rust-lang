@@ -1,5 +1,6 @@
 # Rust 编译期可判定性谱系全景（Decidability Spectrum）
 
+> **受众**: [研究者]
 > **定位**: 本文件从**纵向判定链路**梳理 Rust 编译器在全编译流程中的可判定性问题，与 `semantic_expressiveness.md` 的横向七维光谱形成正交互补。
 > **原则**: 不做"编译器实现手册"，聚焦"什么问题 Rust 编译器能在编译期判定、什么不能、不能时的补偿机制是什么"。
 > **对齐来源**: [Rust Reference] · [Rust RFCs] · [RustBelt/Oxide] · [POPL 类型论文] · [计算理论]

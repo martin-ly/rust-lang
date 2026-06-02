@@ -1,9 +1,7 @@
 //! C10 Networks 示例程序
-use c10_networks::{
-    NAME, VERSION,
-    error::{NetworkError, NetworkResult},
-    protocol::http::{HttpMethod, HttpStatusCode, HttpVersion},
-};
+use c10_networks::error::{NetworkError, NetworkResult};
+use c10_networks::protocol::http::{HttpMethod, HttpStatusCode, HttpVersion};
+use c10_networks::{NAME, VERSION};
 use common::RustLangError;
 
 #[tokio::main]

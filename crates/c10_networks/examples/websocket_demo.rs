@@ -35,12 +35,10 @@
 //! - `C10_WS_DEMO_PATH`: Demonstration of路径 (默认: /chat)
 //! - `C10_WS_DEMO_KEY`: 自定义密钥 (可选)
 //! - `C10_WS_DEMO_KEY`: definition ()
-use c10_networks::{
-    error::NetworkResult,
-    protocol::websocket::{
-        WebSocketClient, WebSocketFrame, WebSocketHandshakeRequest, WebSocketHandshakeResponse,
-        WebSocketOpcode,
-    },
+use c10_networks::error::NetworkResult;
+use c10_networks::protocol::websocket::{
+    WebSocketClient, WebSocketFrame, WebSocketHandshakeRequest, WebSocketHandshakeResponse,
+    WebSocketOpcode,
 };
 
 #[tokio::main]

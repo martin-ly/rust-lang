@@ -36,6 +36,7 @@
     - [5.2 Rust 的控制流安全性](#52-rust-的控制流安全性)
     - [5.3 为什么 `goto` 有害？](#53-为什么-goto-有害)
   - [六、总结：这些概念如何支撑 Rust](#六总结这些概念如何支撑-rust)
+  - [实践](#实践)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -393,6 +394,13 @@ unsafe {
 > - [Wadler, 1995 — Monads for Functional Programming](https://doi.org/10.1007/3-540-59451-5_2)
 > - [TRPL Ch13 — Closures and Iterators](https://doc.rust-lang.org/book/ch13-00-closures.html)
 > - [Rust Async Book — Async/Await Primer](https://rust-lang.github.io/async-book/01_getting_started/01_chapter.html)
+
+## 实践
+
+> **对应练习**: [`exercises/rustlings_style/`](../../exercises/rustlings_style/) — 基础语法与所有权练习
+> **推荐阅读顺序**: 完成本节 → [所有权](./01_ownership.md) → [类型系统](./04_type_system.md)
+>
+> **建议**: 本节概念偏理论，建议快速浏览后进入 Rust 核心概念学习，在实践中反向理解这些 PL 基础。
 
 ## 认知路径
 

@@ -1,5 +1,7 @@
 # 跨层知识图谱（Inter-Layer Dependency Map）
 >
+> **受众**: [进阶]
+>
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 
 > **Bloom 层级**: 分析

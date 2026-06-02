@@ -1,5 +1,6 @@
 # AI [来源: [Are We Learning Yet?](https://www.arewelearningyet.com/)] × Rust：生成-验证闭环与确定性容器
 
+> **受众**: [归档]
 > **层级**: L7 前沿趋势
 > **A/S/P 标记**: **P** — Procedure（策略决策）
 > **双维定位**: P×Cre — 设计 AI × Rust 集成策略

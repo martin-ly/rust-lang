@@ -1,5 +1,6 @@
 # 概念一致性检查清单（Concept Consistency Audit Checklist）
 
+> **受众**: [专家]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **Bloom 层级**: 应用
 > **定位**: 本文件定义 `concept/` 知识体系的**质量门禁**，用于定期审计概念文件的一致性、完备性和关系清晰度。

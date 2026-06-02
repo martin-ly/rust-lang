@@ -1,5 +1,7 @@
 # Summary
 
+> **受众**: [初学者]
+
 - [Rust 概念知识体系 —— 全面分析论证与权威对齐](README.md)
 
 - [L0 元信息层索引（Meta Layer Index）](00.md)

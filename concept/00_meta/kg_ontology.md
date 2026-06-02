@@ -1,5 +1,7 @@
 # Rust 知识体系知识图谱本体规范（Knowledge Graph Ontology）
 >
+> **受众**: [研究者]
+>
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 
 > **Bloom 层级**: 元（Meta）

@@ -1,5 +1,7 @@
 # Rust 知识体系学习指南（Learning Guide）
 >
+> **受众**: [初学者]
+>
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 
 > **Bloom 层级**: 应用
