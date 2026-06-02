@@ -6,7 +6,8 @@ use std::net::SocketAddr;
 #[cfg(not(any(feature = "sniff", feature = "offline", feature = "pcap_live")))]
 fn main() {
     eprintln!(
-        "This example requires feature 'sniff' (or 'offline'/'pcap_live').\nRun: cargo run -p c10_networks --features sniff --example udp_custom_server -- 127.0.0.1:9000"
+        "This example requires feature 'sniff' (or 'offline'/'pcap_live').\nRun: cargo run -p \
+         c10_networks --features sniff --example udp_custom_server -- 127.0.0.1:9000"
     );
 }
 

@@ -34,8 +34,7 @@ mod run {
 #[cfg(not(feature = "sniff"))]
 fn main() {
     eprintln!(
-        "This example requires feature 'sniff'.\nTry: cargo run -p c10_networks --features sniff --example udp_custom_demo -- 127.0.0.1:9000"
+        "This example requires feature 'sniff'.\nTry: cargo run -p c10_networks --features sniff \
+         --example udp_custom_demo -- 127.0.0.1:9000"
     );
 }
-
-

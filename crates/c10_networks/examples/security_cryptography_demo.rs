@@ -13,12 +13,10 @@
 //!
 //! [来源: Ring Documentation](https://docs.rs/ring/0.17.14)
 
-use ring::{
-    aead::{self, Aad, Nonce, AES_128_GCM},
-    digest, hmac,
-    rand::SecureRandom,
-    signature::{self, Ed25519KeyPair, KeyPair},
-};
+use ring::aead::{self, AES_128_GCM, Aad, Nonce};
+use ring::rand::SecureRandom;
+use ring::signature::{self, Ed25519KeyPair, KeyPair};
+use ring::{digest, hmac};
 
 fn main() {
     println!("🔐 安全密码学基础演示 —— ring\n");
@@ -155,11 +153,17 @@ fn demo_04_digital_signature() {
 
     let peer_public_key =
         signature::UnparsedPublicKey::new(&signature::ED25519, key_pair.public_key().as_ref());
-    peer_public_key.verify(message, signature.as_ref()).expect("签名验证失败");
+    peer_public_key
+        .verify(message, signature.as_ref())
+        .expect("签名验证失败");
     println!("✓ 签名验证通过");
 
     let tampered = b"Contract: Alice agrees to pay Bob 999 BTC";
-    assert!(peer_public_key.verify(tampered, signature.as_ref()).is_err());
+    assert!(
+        peer_public_key
+            .verify(tampered, signature.as_ref())
+            .is_err()
+    );
     println!("✓ 篡改检测: 修改消息后签名验证失败");
 
     println!();

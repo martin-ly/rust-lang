@@ -102,10 +102,8 @@
 //! # 运行 HTTP 客户端示例
 //! # Run HTTP example
 //! # Run HTTP 客户端Example of
-use c10_networks::{
-    error::NetworkResult,
-    protocol::http::{HttpMethod, HttpStatusCode, HttpVersion},
-};
+use c10_networks::error::NetworkResult;
+use c10_networks::protocol::http::{HttpMethod, HttpStatusCode, HttpVersion};
 use common::RustLangError;
 use std::time::Duration;
 

@@ -220,7 +220,7 @@ async fn risky_operation(should_fail: bool) -> Result<(), &'static str> {
 // ==================== 示例 7: 指标（Metrics）集成概览 ====================
 
 /// - `opentelemetry::metrics` 用于记录 Counter、Histogram、Gauge
-/// 
+///
 /// use opentelemetry::metrics::MeterProvider;
 /// use opentelemetry::global;
 /// let meter = global::meter("my_app");
