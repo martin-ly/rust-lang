@@ -1,6 +1,44 @@
 > **内容分级**: [实验级]
 
-> ⚠️ **[社区贡献欢迎]** [社区贡献欢迎]: 本节需要与主题匹配的可编译 Rust 代码示例。>
+## 代码示例：量子门操作模拟（概念性实现）
+
+以下展示用量子计算核心概念（叠加态、幺正变换）在 Rust 中的数学表达：
+
+```rust,ignore
+use nalgebra::{Matrix2, Vector2, Complex};
+
+// 复数类型简写
+type C = Complex<f64>;
+
+/// 量子比特状态 |ψ⟩ = α|0⟩ + β|1⟩
+struct Qubit {
+    state: Vector2<C>,
+}
+
+impl Qubit {
+    fn new(alpha: C, beta: C) -> Self {
+        let state = Vector2::new(alpha, beta);
+        // 归一化: |α|² + |β|² = 1
+        assert!((state.norm_squared() - 1.0).abs() < 1e-9);
+        Self { state }
+    }
+
+    /// 应用 Hadamard 门: H = 1/√2 [[1, 1], [1, -1]]
+    fn hadamard(&mut self) {
+        let h = C::new(1.0 / 2.0f64.sqrt(), 0.0);
+        let gate = Matrix2::new(h, h, h, -h);
+        self.state = gate * self.state;
+    }
+
+    /// 测量概率: P(|0⟩) = |α|²
+    fn prob_zero(&self) -> f64 {
+        self.state.x.norm_squared()
+    }
+}
+```
+
+> **注意**: 真实量子计算需要使用专用库（如 `qiskit-rust` 或 `qudit`），以上为数学原理演示。
+
 >
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >

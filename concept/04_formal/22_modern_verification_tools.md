@@ -37,6 +37,10 @@
     - [抽象解释原理](#抽象解释原理)
     - [Rust 支持状态](#rust-支持状态)
   - [选型速查表（2026）](#选型速查表2026)
+  - [快速开始：工具安装与运行](#快速开始工具安装与运行)
+    - [Miri（Rust 官方动态分析器）](#mirirust-官方动态分析器)
+    - [Kani（AWS 有界模型检查器）](#kaniaws-有界模型检查器)
+    - [Verus（Microsoft 演绎验证器）](#verusmicrosoft-演绎验证器)
   - [嵌入式测验](#嵌入式测验)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -118,7 +122,7 @@ fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
 
 Kani 传统上需要**展开循环**（unrolling），对循环次数有上界限制。0.65+ 引入类似 Dafny/Verus 的循环契约：
 
-```rust
+```rust,ignore
 #[kani::modifies(a)]
 #[kani::ensures(
     forall|i: usize| (0 <= i && i < a.len()) ==> a[i] == old(a)[i] + 1
@@ -136,7 +140,7 @@ fn increment_all(a: &mut [u32]) {
 
 传统上，Kani 需要人工编写 `#[kani::proof]` 函数来设置测试场景：
 
-```rust
+```rust,ignore
 #[kani::proof]
 fn check_increment() {
     let mut arr = kani::vec::any_vec::<u32, 5>();
@@ -341,6 +345,48 @@ pub fn safe_wrapper(data: &[u8]) -> u32 {
 | 遗留 C 代码审计 | **TrustInSoft** | ESBMC | 商业工具，需许可证 |
 | unsafe API 标准化文档 | **Safety Tags** (未来) | rustdoc + 手写 | RFC 尚未批准 |
 | 编译器本身验证 | **a-mir-formality** | — | 研究工具，非程序验证 |
+
+---
+
+## 快速开始：工具安装与运行
+
+### Miri（Rust 官方动态分析器）
+
+```bash
+# 安装 Miri
+rustup component add miri
+
+# 运行项目中的 Miri 测试（示例）
+MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test --package c01_ownership_borrow_scope miri_tests
+
+# 检查单个文件的未定义行为
+cargo miri run --manifest-path crates/c01_ownership_borrow_scope/Cargo.toml --bin ts
+```
+
+### Kani（AWS 有界模型检查器）
+
+```bash
+# 安装 Kani
+cargo install kani-verifier
+cargo kani setup
+
+# 验证单个函数
+cargo kani --harness verify_vec_push_safety
+
+# Autoharness 自动生成测试
+kani autoharness --function increment_all
+```
+
+### Verus（Microsoft 演绎验证器）
+
+```bash
+# 克隆并安装 Verus
+git clone https://github.com/verus-lang/verus.git
+cd verus/source && ./tools/get-z3.sh && cargo build --release
+
+# 验证 Rust 文件
+./target/release/verus your_file.rs
+```
 
 ---
 

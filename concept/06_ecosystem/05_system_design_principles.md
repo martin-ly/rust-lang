@@ -6,7 +6,6 @@
 > **原则**: 不做"系统设计教程"，聚焦"Rust 的类型系统和所有权模型如何为系统设计提供形式化基础，以及这些基础与国际权威理论的对应关系"。
 > **对齐来源**: [RustBelt] · [SE L4] · [NIST Zero Trust] · [AWS TLA+] · [Erlang OTP] · [CAP Theorem] · [CALM Theorem]
 > **基准版本**: Rust 1.96.0 stable (Edition 2024)
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 

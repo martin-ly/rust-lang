@@ -59,7 +59,7 @@
     - [Practical Takeaways](#practical-takeaways)
     - [Rust 1.94 Considerations](#rust-194-considerations)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 

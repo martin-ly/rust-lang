@@ -21,19 +21,23 @@ scripts/    维护脚本（kb_auditor.py、version_fact_check.py 等）
 
 ### 2. 找到你的第一个任务
 
-| 如果你擅长... | 推荐任务 | 入口 |
-|:---|:---|:---|
-| 写 Rust 代码 | `crates/` 中添加可编译示例 | `crates/c01_ownership_borrow_scope/src/` |
-| 写文档 | 概念文件补充或勘误 | `concept/` 中任意 `.md` 文件 |
-| 翻译/术语 | 术语英中对照表 | `concept/00_meta/terminology_glossary.md` |
-| 测试/QA | 运行验证脚本并修复问题 | `scripts/kb_auditor.py` |
-| 教学 | 在练习题中添加 `// TODO:` 参考答案 | `exercises/src/` |
+| 如果你擅长... | 推荐任务 | 入口 | 难度 |
+|:---|:---|:---|:---:|
+| **写 Rust 代码** | `crates/` 中添加可编译示例 | `crates/c01_ownership_borrow_scope/src/` | ⭐ |
+| **写文档** | 概念文件补充或勘误 | `concept/` 中任意 `.md` 文件 | ⭐ |
+| **翻译/术语** | 术语英中对照表（100 术语，需与 TRPL 一致） | `concept/00_meta/terminology_glossary.md` | ⭐⭐ |
+| **测试/QA** | 运行验证脚本并修复问题 | `scripts/kb_auditor.py` | ⭐⭐ |
+| **教学** | 在练习题中添加 `// TODO:` 参考答案 | `exercises/src/` | ⭐⭐ |
+| **领域专家** | L6 生态层代码示例（量子计算、嵌入式图形、工业案例等） | `concept/06_ecosystem/` 中标记 `[社区贡献欢迎]` 的文件 | ⭐⭐⭐ |
+| **形式化验证** | Kani / Verus / Miri 可运行示例 | `crates/` 新增 `formal_verification_examples.rs` | ⭐⭐⭐⭐ |
 
 **新手友好任务标签**（在文件中查找）：
 
 - `TODO:` — 待补充的内容占位符
 - `FIXME:` — 需要修正的错误
 - `[待完善]` — 内容分级标签，表示需要扩展
+- `[社区贡献欢迎]` — L6 生态文件缺少可编译 Rust 示例，欢迎提交 PR 补充
+- `⚠️ **声明**: 本文件使用形式化符号...` — L4 文件已统一标注，如需更新形式化工具引用（Kani 0.65+ / AutoVerus 等）欢迎 PR
 
 ### 3. 环境准备
 
@@ -145,12 +149,23 @@ mdbook build
 
 ## 当前维护重点
 
-根据 [执行计划](.kimi/EXECUTION_PLAN_CONFIRMED_2026_05_29.md)，当前阶段（Phase 1-2）的维护重点：
+根据 [执行计划](.kimi/EXECUTION_PLAN_CONFIRMED_2026_05_29.md)，**Phase 1-4 已完成**（2026-06-02）。当前进入**维护与持续跟踪期**：
 
-1. **版本事实准确性**: Rust 1.96.0 特性覆盖完整，1.97 Preview 跟踪及时
-2. **死链清零**: `kb_auditor.py` 死链保持 0
-3. **编译通过**: `cargo check --workspace` 零错误
-4. **async-std 清理**: 活跃文件中不再推荐已归档的运行时
+### 常态化维护（每月/每季度）
+
+1. **版本事实准确性**: Rust 1.96.0 特性覆盖完整，1.97 Preview 跟踪及时 → **每 6 周随版本发布更新**
+2. **死链清零**: `kb_auditor.py` 死链保持 0 → **每月运行一次**
+3. **编译通过**: `cargo check --workspace` 零错误 → **每次提交前必做**
+4. **依赖安全**: `cargo audit` 0 高危 → **每季度运行一次**
+
+### 优先缺口（欢迎贡献）
+
+| 缺口 | 位置 | 难度 | 说明 |
+|:---|:---|:---:|:---|
+| L6 代码示例 | `concept/06_ecosystem/` 中 11 个 `[社区贡献欢迎]` 文件 | ⭐⭐⭐ | 量子计算、嵌入式图形、工业案例等领域需要可编译示例 |
+| 形式化工具示例 | `crates/` 新增 / `concept/04_formal/` | ⭐⭐⭐⭐ | Kani 0.65+、AutoVerus、ESBMC 的可运行 Rust 示例 |
+| TRPL 对照更新 | `docs/TRPL_3RD_ED_DIFF.md` | ⭐⭐ | 随 TRPL 在线版更新同步维护对照矩阵 |
+| 新版本特性跟踪 | `crates/*/src/rust_197_features.rs` | ⭐⭐ | Rust 1.97/1.98 新特性示例和文档
 
 ---
 

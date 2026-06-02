@@ -1,6 +1,7 @@
 > **内容分级**: [综述级]
 
 > **本节关键术语**: 范围类型 (Range Type) · core::range · std::ops::Range · 区间运算 · 迭代器范围 (Range Iterator) — [完整对照表](../00_meta/terminology_glossary.md)
+>
 # Rust 范围类型语义：`std::ops::Range` → `core::range`
 >
 > **受众**: [进阶]

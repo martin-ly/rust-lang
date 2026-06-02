@@ -1,4 +1,48 @@
-> ⚠️ **[社区贡献欢迎]** [社区贡献欢迎]: 本节需要与主题匹配的可编译 Rust 代码示例。>
+## 代码示例：Cargo Script 单文件程序
+
+以下是一个完整的 Cargo Script 示例，演示 frontmatter 依赖声明与单文件执行：
+
+```rust,ignore
+#!/usr/bin/env cargo
+```cargo
+[package]
+name = "csv-filter"
+edition = "2024"
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+chrono = "0.4"
+```
+
+use clap::Parser;
+use chrono::Local;
+
+# [derive(Parser)]
+
+struct Args {
+    #[arg(help = "输入 CSV 文件路径")]
+    input: String,
+    #[arg(short, long, default_value = "output.csv")]
+    output: String,
+}
+
+fn main() {
+    let args = Args::parse();
+    println!("[{}] 处理: {} -> {}", Local::now(), args.input, args.output);
+    // 实际过滤逻辑...
+}
+
+```
+
+运行方式：
+```bash
+# 直接执行（Rust 1.79+）
+cargo run --manifest-path csv_filter.rs
+
+# 或赋予执行权限后运行
+chmod +x csv_filter.rs && ./csv_filter.rs
+```
+
 >
 # Cargo Script：单文件 Rust 程序
 
@@ -21,6 +65,7 @@
 
 ## 📑 目录
 
+- [\[derive(Parser)\]](#deriveparser)
 - [Cargo Script：单文件 Rust 程序](#cargo-script单文件-rust-程序)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)

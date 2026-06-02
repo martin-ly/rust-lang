@@ -1,4 +1,38 @@
-> ⚠️ **[社区贡献欢迎]** [社区贡献欢迎]: 本节需要与主题匹配的可编译 Rust 代码示例。>
+## 代码示例：Public/Private Dependencies 配置
+
+以下 `Cargo.toml` 演示如何显式控制依赖可见性，避免"依赖泄漏"：
+
+```toml
+[package]
+name = "my-api"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+# public = true: 下游 crate 可通过本 crate 的公共 API 使用 serde
+serde = { version = "1.0", features = ["derive"], public = true }
+
+# public = false (默认): 仅限内部使用，不暴露给下游
+thiserror = "2.0"
+
+[features]
+default = []
+std = ["serde/std"]
+```
+
+编译器可见性规则效果：
+
+```rust,ignore
+// 下游 crate 使用 my-api
+use my_api::SomeStruct;
+
+// ✅ 可以，因为 serde 被标记为 public
+let _ = serde_json::to_string(&s);
+
+// ❌ 编译错误：thiserror 是 private dependency
+// use my_api::thiserror::Error; // error: thiserror is private
+```
+
 >
 # Public/Private Dependencies：可见性控制的工程化
 

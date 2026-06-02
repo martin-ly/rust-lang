@@ -2,6 +2,7 @@
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 
 > **本节关键术语**: 整数类型 (Integer) · 浮点类型 (Float) · 有符号 (Signed) · 无符号 (Unsigned) · 类型推断 (Type Inference) — [完整对照表](../00_meta/terminology_glossary.md)
+>
 # Rust 数值类型与运算
 
 > **受众**: [初学者]

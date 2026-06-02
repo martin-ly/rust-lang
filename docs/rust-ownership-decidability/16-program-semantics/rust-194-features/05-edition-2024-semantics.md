@@ -8,7 +8,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 2024 Edition 的新借用规则语义](#rust-2024-edition-的新借用规则语义)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [1. 引言](#1-引言)
     - [1.1 什么是 Edition](#11-什么是-edition)
     - [1.2 2024 Edition 的主要变化](#12-2024-edition-的主要变化)

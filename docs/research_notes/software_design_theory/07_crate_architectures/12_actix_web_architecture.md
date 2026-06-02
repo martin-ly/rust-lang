@@ -13,7 +13,9 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-Actix-web 是 Rust 生态中最成熟、生产验证最充分的 Web 框架之一。其独特之处在于：**它并非仅是一个异步 HTTP 框架，而是构建在 Actix actor 框架之上的高层抽象**。这一设计选择赋予了 Actix-web 强大的并发处理能力与清晰的请求隔离模型，同时通过零成本抽象避免了 actor 模型常见的运行时开销。
+Actix-web 是 Rust 生态中最成熟、生产验证最充分的 Web 框架之一。
+其独特之处在于：**它并非仅是一个异步 HTTP 框架，而是构建在 Actix actor 框架之上的高层抽象**。
+这一设计选择赋予了 Actix-web 强大的并发处理能力与清晰的请求隔离模型，同时通过零成本抽象避免了 actor 模型常见的运行时开销。
 
 > [来源: Actix-web 文档 — Architecture Overview]
 

@@ -1,6 +1,44 @@
 > **内容分级**: [专家级]
 
-> ⚠️ **[社区贡献欢迎]** [社区贡献欢迎]: 本节需要与主题匹配的可编译 Rust 代码示例。>
+## 代码示例：自定义过程宏（编译器插件雏形）
+
+以下演示如何通过过程宏实现编译期代码生成，这是深入 Rust 编译器内部的入口：
+
+```rust,ignore
+// proc-macro crate: trace_var
+use proc_macro::TokenStream;
+use quote::quote;
+use syn::{parse_macro_input, ItemFn};
+
+#[proc_macro_attribute]
+pub fn trace_var(_attr: TokenStream, item: TokenStream) -> TokenStream {
+    let input = parse_macro_input!(item as ItemFn);
+    let fn_name = &input.sig.ident;
+    let fn_body = &input.block;
+
+    let expanded = quote! {
+        fn #fn_name() {
+            println!("[TRACE] Entering {}", stringify!(#fn_name));
+            #fn_body
+            println!("[TRACE] Exiting {}", stringify!(#fn_name));
+        }
+    };
+    expanded.into()
+}
+```
+
+使用方式：
+
+```rust,ignore
+use trace_var::trace_var;
+
+#[trace_var]
+fn compute() -> i32 {
+    let x = 1 + 2;
+    x * 3
+}
+```
+
 >
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >

@@ -1,6 +1,45 @@
 > **内容分级**: [专家级]
 
-> ⚠️ **[社区贡献欢迎]** [社区贡献欢迎]: 本节需要与主题匹配的可编译 Rust 代码示例。>
+## 代码示例：最小 `no_std` 内核入口
+
+以下展示一个极简的裸机 Rust 内核启动框架（基于 `riscv64`）：
+
+```rust,ignore
+#![no_std]
+#![no_main]
+
+use core::panic::PanicInfo;
+
+// 内核入口点
+#[no_mangle]
+pub extern "C" fn _start() -> ! {
+    // 初始化 UART 串口输出
+    unsafe {
+        let uart = 0x1000_0000 as *mut u8;
+        for b in b"Hello from Rust kernel!
+" {
+            uart.write_volatile(*b);
+        }
+    }
+    loop {}
+}
+
+#[panic_handler]
+fn panic(_info: &PanicInfo) -> ! {
+    loop {}
+}
+```
+
+对应 `.cargo/config.toml`：
+
+```toml
+[build]
+target = "riscv64gc-unknown-none-elf"
+
+[target.riscv64gc-unknown-none-elf]
+rustflags = ["-C", "link-arg=-Tsrc/linker.ld"]
+```
+
 >
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >

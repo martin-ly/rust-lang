@@ -9,7 +9,8 @@
 
 ## 1. 引言：Rust 无锁并发的工业标准
 
-Crossbeam 是 Rust 生态中**无锁并发原语**的事实标准库，年下载量超过 8000 万次 [来源: crates.io 统计, 2025]。与 `std::sync` 中的阻塞同步原语（`Mutex`、`RwLock`）不同，Crossbeam 专注于**非阻塞算法 (lock-free / wait-free)** 和**基于 epoch 的内存回收**，为 Rust 程序员提供了在标准库之上构建高性能并发系统的底层工具箱。
+Crossbeam 是 Rust 生态中**无锁并发原语**的事实标准库，年下载量超过 8000 万次 [来源: crates.io 统计, 2025]。
+与 `std::sync` 中的阻塞同步原语（`Mutex`、`RwLock`）不同，Crossbeam 专注于**非阻塞算法 (lock-free / wait-free)** 和**基于 epoch 的内存回收**，为 Rust 程序员提供了在标准库之上构建高性能并发系统的底层工具箱。
 
 Crossbeam 的五大核心模块：
 

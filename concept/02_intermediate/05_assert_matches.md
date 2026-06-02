@@ -1,6 +1,7 @@
 > **内容分级**: [综述级]
 
 > **本节关键术语**: assert_matches! · 模式匹配断言 (Pattern Match Assertion) · debug_assert_matches! · 测试断言 (Test Assertion) — [完整对照表](../00_meta/terminology_glossary.md)
+>
 # `assert_matches!`：模式匹配断言的形式化语义
 
 > **受众**: [进阶]

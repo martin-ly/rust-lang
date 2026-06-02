@@ -5,7 +5,9 @@
 
 ## 1. 引言
 
-Tonic 是 Rust 生态中的原生 gRPC 实现，年下载量超过 2000 万次 [来源: crates.io 统计, 2025]。它并非独立的网络框架，而是精密组装了 Tokio（异步运行时）、Hyper（HTTP/2 实现）、Tower（Service/Layer 抽象）和 prost（Protobuf 编解码）等多个生态基石。Tonic 的核心理念可以概括为：**gRPC 即 HTTP/2 + Protobuf + 流语义**，一切抽象都围绕这三者的类型安全组合展开。
+Tonic 是 Rust 生态中的原生 gRPC 实现，年下载量超过 2000 万次 [来源: crates.io 统计, 2025]。
+它并非独立的网络框架，而是精密组装了 Tokio（异步运行时）、Hyper（HTTP/2 实现）、Tower（Service/Layer 抽象）和 prost（Protobuf 编解码）等多个生态基石。
+Tonic 的核心理念可以概括为：**gRPC 即 HTTP/2 + Protobuf + 流语义**，一切抽象都围绕这三者的类型安全组合展开。
 
 与 Go 的 gRPC 实现不同，Tonic 充分利用 Rust 的类型系统，在编译期即保证：服务方法的签名与 `.proto` 定义一致、流类型的方向（服务器流/客户端流/双向流）与 handler 签名匹配、拦截器链的类型正确。
 

@@ -5,9 +5,12 @@
 
 ## 1. 引言
 
-SQLx 是 Rust 生态中的异步 SQL 工具包，年下载量超过 3000 万次 [来源: crates.io 统计, 2025]。与其他 Rust ORM（如 Diesel）不同，SQLx 采用**查询优先（query-first）**哲学：开发者编写原生 SQL，SQLx 在编译期检查查询的语法正确性、类型安全性以及与数据库 schema 的兼容性。这种设计消除了运行时 SQL 语法错误的全部可能性，同时保留了 SQL 的全部表达能力——无需学习 DSL，无需受限于 ORM 的查询生成能力边界。
+SQLx 是 Rust 生态中的异步 SQL 工具包，年下载量超过 3000 万次 [来源: crates.io 统计, 2025]。与其他 Rust ORM（如 Diesel）不同，SQLx 采用**查询优先（query-first）**
+哲学：开发者编写原生 SQL，SQLx 在编译期检查查询的语法正确性、类型安全性以及与数据库 schema 的兼容性。
+这种设计消除了运行时 SQL 语法错误的全部可能性，同时保留了 SQL 的全部表达能力——无需学习 DSL，无需受限于 ORM 的查询生成能力边界。
 
-SQLx 的核心理念可概括为：**SQL 是源语言，Rust 类型是派生产物**。通过宏系统在编译期连接数据库、执行查询计划分析，SQLx 将数据库 schema 的知识静态编码到 Rust 类型系统中，实现真正的编译期验证。
+SQLx 的核心理念可概括为：**SQL 是源语言，Rust 类型是派生产物**。
+通过宏系统在编译期连接数据库、执行查询计划分析，SQLx 将数据库 schema 的知识静态编码到 Rust 类型系统中，实现真正的编译期验证。
 
 > [来源: SQLx 官方文档, https://docs.rs/sqlx/latest/sqlx/]
 > [来源: SQLx GitHub README, https://github.com/launchbadge/sqlx]

@@ -112,7 +112,7 @@
   - [Theorems Index](#theorems-index)
   - [*End of Document*](#end-of-document)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 

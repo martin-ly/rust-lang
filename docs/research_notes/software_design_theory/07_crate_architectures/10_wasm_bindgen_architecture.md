@@ -5,9 +5,11 @@
 
 ## 1. 引言
 
-wasm-bindgen 是 Rust WebAssembly 生态与 JavaScript 运行时之间的核心桥梁，年下载量超过 5000 万次 [来源: crates.io 统计, 2025]。它并非简单的 FFI 封装，而是一套完整的**跨语言绑定系统**：通过过程宏在编译期分析 Rust 代码的公共接口，生成配套的 JavaScript 胶水代码和 WASM 导入/导出表，实现 Rust 与 JS 之间的无缝互调用。
+wasm-bindgen 是 Rust WebAssembly 生态与 JavaScript 运行时之间的核心桥梁，年下载量超过 5000 万次 [来源: crates.io 统计, 2025]。
+它并非简单的 FFI 封装，而是一套完整的**跨语言绑定系统**：通过过程宏在编译期分析 Rust 代码的公共接口，生成配套的 JavaScript 胶水代码和 WASM 导入/导出表，实现 Rust 与 JS 之间的无缝互调用。
 
-wasm-bindgen 的核心理念可以概括为：**JS 拥有对象，Rust 借出能力**。JavaScript 运行时作为垃圾回收环境，持有通过 wasm-bindgen 创建的 Rust 对象的引用；Rust 则通过生成的封装函数，安全地暴露其计算能力，同时避免内存管理冲突。
+wasm-bindgen 的核心理念可以概括为：**JS 拥有对象，Rust 借出能力**。
+JavaScript 运行时作为垃圾回收环境，持有通过 wasm-bindgen 创建的 Rust 对象的引用；Rust 则通过生成的封装函数，安全地暴露其计算能力，同时避免内存管理冲突。
 
 > [来源: wasm-bindgen 官方文档, https://rustwasm.github.io/docs/wasm-bindgen/]
 > [来源: WebAssembly 规范, https://webassembly.github.io/spec/]

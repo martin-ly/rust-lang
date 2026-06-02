@@ -6,7 +6,6 @@
 > **原则**: 每个惯用法必须展示「非惯用写法 → 惯用写法」的等价变换，并标注效率特征与认知负荷。
 > **对齐来源**: [Rust API Guidelines] · [Rust Design Patterns] · [Rust Style Guide] · [Clippy Lints] · [TRPL 惯用章节]
 > **基准版本**: Rust 1.96.0 stable (Edition 2024)
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 

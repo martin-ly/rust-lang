@@ -5,7 +5,6 @@
 > **Bloom 层级**: 评价 → 创造
 > **功能**: 将 L1-L4 的概念知识**综合**为工程决策能力
 > **[来源: Wikipedia - Programming Language Comparison]** · **[来源: Wikipedia - Type System]** · **[来源: PLDI 2023 - Comparative Language Studies]** · **[来源: IEEE Software - Rust Adoption Analysis]**
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 

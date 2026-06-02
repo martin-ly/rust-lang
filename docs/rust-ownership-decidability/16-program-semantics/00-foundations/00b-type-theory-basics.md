@@ -14,7 +14,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [类型理论基础 (Type Theory Foundations)](#类型理论基础-type-theory-foundations)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [1. 引言](#1-引言)
   - [2. 类型作为命题 (Types as Propositions)](#2-类型作为命题-types-as-propositions)
     - [2.1 Curry-Howard 同构](#21-curry-howard-同构)
@@ -46,7 +46,7 @@
   - [**最后更新**: 2026-03-08](#最后更新-2026-03-08)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 1. 引言
 >

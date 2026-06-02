@@ -1,6 +1,7 @@
 > **内容分级**: [综述级]
 
 > **本节关键术语**: 泛型 (Generics) · 类型参数 (Type Parameter) · 约束 (Bound) · where 子句 · 单态化 (Monomorphization) — [完整对照表](../00_meta/terminology_glossary.md)
+>
 # Generics（泛型系统）
 
 > **📎 交叉引用**

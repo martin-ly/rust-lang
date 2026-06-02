@@ -22,9 +22,9 @@
 // 1. C 风格变参函数声明稳定
 // ============================================================================
 
-/// # C 风格变参函数（C Variadic Functions）
+/// # C 风格变参函数(C Variadic Functions)
 /// # C-style Variadic Functions
-/// # C 风格变参function（C Variadic Functions）
+/// # C 风格变参function(C Variadic Functions)
 /// 使用 C ABI 与 C 的 `...` 语法兼容。
 /// Uses C ABI compatible with C's `...` syntax.
 /// C ABI and C `...` 。
@@ -34,12 +34,11 @@
 /// ## way
 /// ## 声明way
 /// ## way
-/// ```
-/// 
+///
 /// ## 使用场景
 /// ## Use Cases
 /// ## scenario
-/// - Implementation of C standardlibraryfunction（如 `printf`、`scanf`） Rust 包装
+/// - Implementation of C standardlibraryfunction(如 `printf`、`scanf`) Rust 包装
 /// - 与使用变参的 C 库直接交互
 /// - and C library
 /// - 编写兼容 C 的插件接口
@@ -57,6 +56,7 @@
 /// 以下代码需要 nightly 工具链才能编译。
 /// The following code requires a nightly toolchain to compile.
 /// under nightly toolchain 。
+/// ```ignore
 /// use std::ffi::{c_char, c_int, VaList};
 ///
 /// unsafe extern "C" fn rust_printf(fmt: *const c_char, mut args: ...) -> c_int {
@@ -94,7 +94,7 @@ fn test_c_variadic_placeholder() {
 /// ## 影响
 /// ## Impact
 /// ## impact
-/// - Windows ARM 设备（如 Surface Pro X、Snapdragon X Elite PC）
+/// - Windows ARM 设备(如 Surface Pro X、Snapdragon X Elite PC)
 /// - Windows ARM devices (e.g., Surface Pro X, Snapdragon X Elite PC)
 ///   可直接使用官方 Rust 工具链，无需交叉编译
 ///   Can use the official Rust toolchain directly without cross-compilation

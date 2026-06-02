@@ -1,6 +1,7 @@
 > **内容分级**: [综述级]
 
 > **本节关键术语**: 编码 (Encoding) · UTF-8 · OsString · CString · 字符串操作 · 字符 (char) — [完整对照表](../00_meta/terminology_glossary.md)
+>
 # 字符串与编码：Rust 的文本处理类型系统
 
 > **受众**: [初学者]

@@ -13,7 +13,8 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-Rayon 是 Rust 生态中数据并行计算的标志性库，其设计哲学极其简洁：**将顺序迭代器调用替换为并行迭代器调用，即可自动获得多核并行加速**。这一承诺的背后，是一个精密的工作窃取 (work-stealing) 线程池与一套零成本类型安全保证。
+Rayon 是 Rust 生态中数据并行计算的标志性库，其设计哲学极其简洁：**将顺序迭代器调用替换为并行迭代器调用，即可自动获得多核并行加速**。
+这一承诺的背后，是一个精密的工作窃取 (work-stealing) 线程池与一套零成本类型安全保证。
 
 > [来源: Rayon README — "Data parallelism library for Rust"](https://github.com/rayon-rs/rayon)
 

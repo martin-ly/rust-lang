@@ -7,11 +7,13 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-Wgpu 是 Rust 生态中 WebGPU 标准的原生实现，提供了一套**跨平台、跨 API 的 GPU 编程抽象**。它允许开发者用统一的 Rust API 编写 GPU 代码，底层自动映射至 Vulkan（Linux/Windows/Android）、Metal（macOS/iOS）、DirectX 12（Windows）或 WebGL（Web 平台）。
+Wgpu 是 Rust 生态中 WebGPU 标准的原生实现，提供了一套**跨平台、跨 API 的 GPU 编程抽象**。
+它允许开发者用统一的 Rust API 编写 GPU 代码，底层自动映射至 Vulkan（Linux/Windows/Android）、Metal（macOS/iOS）、DirectX 12（Windows）或 WebGL（Web 平台）。
 
 > [来源: Wgpu 官方文档](https://docs.rs/wgpu/latest/wgpu/)
 
-Wgpu 的设计目标并非替代底层图形 API，而是提供**类型安全、内存安全、验证充分**的上层抽象，消除直接操作 Vulkan/Metal/DX12 时常见的段错误、内存泄漏与未定义行为。它既是 WebGPU 标准在原生平台的参考实现，也是浏览器外 Rust GPU 应用的首选方案。
+Wgpu 的设计目标并非替代底层图形 API，而是提供**类型安全、内存安全、验证充分**的上层抽象，消除直接操作 Vulkan/Metal/DX12 时常见的段错误、内存泄漏与未定义行为。
+它既是 WebGPU 标准在原生平台的参考实现，也是浏览器外 Rust GPU 应用的首选方案。
 
 ```rust,ignore
 // Wgpu 最简渲染循环的骨架

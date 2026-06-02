@@ -14,7 +14,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Strategy Pattern in Rust](#strategy-pattern-in-rust)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [概念](#概念)
   - [实现方式](#实现方式)
     - [Trait 方式](#trait-方式)
@@ -22,7 +22,7 @@
   - [形式化定义](#形式化定义)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 概念
 >

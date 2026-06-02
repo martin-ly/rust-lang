@@ -271,12 +271,13 @@ impl CollectionMutMethodsExamples {
     /// ## 1.95 之前
     /// ## Before 1.95
     /// ## 1.95 's before
+    /// ```
     /// let mut v = Vec::new();
     /// v.push(String::new());
     /// let last = v.last_mut().unwrap();
     /// last.push_str("hello");
     /// ```
-    /// 
+    ///
     /// ## 1.95 方式
     /// ## 1.95 Approach
     /// ## 1.95 way
@@ -296,12 +297,13 @@ impl CollectionMutMethodsExamples {
     /// ## 1.95 之前
     /// ## Before 1.95
     /// ## 1.95 's before
+    /// ```
     /// let mut v = vec![1, 3];
     /// v.insert(1, 0);
     /// let inserted = v.get_mut(1).unwrap();
     /// *inserted = 2;
     /// ```
-    /// 
+    ///
     /// ## 1.95 方式
     /// ## 1.95 Approach
     /// ## 1.95 way
@@ -320,12 +322,15 @@ impl CollectionMutMethodsExamples {
     /// ## 1.95 之前
     /// ## Before 1.95
     /// ## 1.95 's before
+    /// ```
+    /// use std::collections::VecDeque;
     /// let mut dq = VecDeque::from([2, 3]);
     /// dq.push_front(0);
     /// let head = dq.front_mut().unwrap();
     /// *head += 1;
     /// ```
-    /// 
+    /// use std::collections::VecDeque;
+    ///
     /// ## 1.95 方式
     /// ## 1.95 Approach
     /// ## 1.95 way
@@ -342,12 +347,15 @@ impl CollectionMutMethodsExamples {
     /// ## 1.95 之前
     /// ## Before 1.95
     /// ## 1.95 's before
+    /// ```
+    /// use std::collections::VecDeque;
     /// let mut dq = VecDeque::from([1, 2]);
     /// dq.push_back(3);
     /// let back = dq.back_mut().unwrap();
     /// *back += 1;
     /// ```
-    /// 
+    /// use std::collections::VecDeque;
+    ///
     /// ## 1.95 方式
     /// ## 1.95 Approach
     /// ## 1.95 way
@@ -364,12 +372,15 @@ impl CollectionMutMethodsExamples {
     /// ## 1.95 之前
     /// ## Before 1.95
     /// ## 1.95 's before
+    /// ```
+    /// use std::collections::VecDeque;
     /// let mut dq = VecDeque::from([1, 3]);
     /// dq.insert(1, 2);
     /// let mid = dq.get_mut(1).unwrap();
     /// *mid = 20;
     /// ```
-    /// 
+    /// use std::collections::VecDeque;
+    ///
     /// ## 1.95 方式
     /// ## 1.95 Approach
     /// ## 1.95 way
@@ -386,12 +397,15 @@ impl CollectionMutMethodsExamples {
     /// ## 1.95 之前
     /// ## Before 1.95
     /// ## 1.95 's before
+    /// ```
+    /// use std::collections::LinkedList;
     /// let mut list = LinkedList::from([2, 3]);
     /// list.push_front(1);
     /// let front = list.front_mut().unwrap();
     /// *front += 1;
     /// ```
-    /// 
+    /// use std::collections::LinkedList;
+    ///
     /// ## 1.95 方式
     /// ## 1.95 Approach
     /// ## 1.95 way
@@ -408,12 +422,15 @@ impl CollectionMutMethodsExamples {
     /// ## 1.95 之前
     /// ## Before 1.95
     /// ## 1.95 's before
+    /// ```
+    /// use std::collections::LinkedList;
     /// let mut list = LinkedList::from([1, 2]);
     /// list.push_back(3);
     /// let back = list.back_mut().unwrap();
     /// *back += 1;
     /// ```
-    /// 
+    /// use std::collections::LinkedList;
+    ///
     /// ## 1.95 方式
     /// ## 1.95 Approach
     /// ## 1.95 way

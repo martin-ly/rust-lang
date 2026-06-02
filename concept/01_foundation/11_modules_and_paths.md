@@ -2,11 +2,12 @@
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 
 > **本节关键术语**: 模块 (Module) · 路径 (Path) · use · pub · crate — [完整对照表](../00_meta/terminology_glossary.md)
+>
 # 模块系统与路径：Rust 的代码组织哲学
 
 > **📎 交叉引用**
 >
-> 本主题在 knowledge 中有系统化的知识索引：[模块系统](../../knowledge/02_intermediate/10_module_system.md)
+> 本主题在 knowledge 中有系统化的知识索引：[模块系统](../../concept/02_intermediate/10_module_system.md)
 > **受众**: [初学者]
 > **Bloom 层级**: 记忆 → 应用
 > **A/S/P 标记**: **A** — Application

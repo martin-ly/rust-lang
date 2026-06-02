@@ -1,6 +1,7 @@
 > **内容分级**: [综述级]
 
 > **本节关键术语**: 引用 (Reference) · 借用 (Borrowing) · 解引用 (Dereferencing) · 自动解引用 (Auto Deref) · 强制转换 (Coercion) — [完整对照表](../00_meta/terminology_glossary.md)
+>
 # 引用语义：自动解引用、Deref 强制与类型转换
 
 > **受众**: [初学者]

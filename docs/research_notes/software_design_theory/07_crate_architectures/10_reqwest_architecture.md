@@ -7,11 +7,13 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-Reqwest 是 Rust 生态中最广泛使用的 HTTP 客户端库，以**人体工学设计（ergonomic API）**和**与 Hyper 的深度集成**著称。它封装了 Hyper 的低级 HTTP 协议细节，提供 Fluent API 让开发者能够以极少的代码完成复杂的 HTTP 请求构造、发送与响应处理。
+Reqwest 是 Rust 生态中最广泛使用的 HTTP 客户端库，以**人体工学设计（ergonomic API）**和**与 Hyper 的深度集成**著称。
+它封装了 Hyper 的低级 HTTP 协议细节，提供 Fluent API 让开发者能够以极少的代码完成复杂的 HTTP 请求构造、发送与响应处理。
 
 > [来源: Reqwest 官方文档](https://docs.rs/reqwest/latest/reqwest/)
 
-Reqwest 的设计哲学是**"默认合理，配置灵活"**：开箱即用的体验覆盖 80% 的使用场景，同时通过 Builder 模式暴露底层配置（连接池、超时、TLS、代理等）以满足高级需求。它同时支持异步（async）和同步（blocking）两种 API，使得从原型开发到生产系统的迁移路径平滑。
+Reqwest 的设计哲学是**"默认合理，配置灵活"**：开箱即用的体验覆盖 80% 的使用场景，同时通过 Builder 模式暴露底层配置（连接池、超时、TLS、代理等）以满足高级需求。
+它同时支持异步（async）和同步（blocking）两种 API，使得从原型开发到生产系统的迁移路径平滑。
 
 ```rust,ignore
 // 最简异步 GET 请求

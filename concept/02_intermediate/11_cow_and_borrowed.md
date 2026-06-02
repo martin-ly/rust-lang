@@ -1,6 +1,7 @@
 > **内容分级**: [综述级]
 
 > **本节关键术语**: 写时复制 (Copy-on-Write) · Cow · 借用数据 (Borrowed Data) · 克隆 (Clone) · ToOwned — [完整对照表](../00_meta/terminology_glossary.md)
+>
 # Cow：写时克隆与零拷贝抽象
 
 > **受众**: [进阶]

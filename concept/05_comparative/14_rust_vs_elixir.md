@@ -1,11 +1,9 @@
 > **内容分级**: [综述级]
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Rust vs Elixir
 >
 > **受众**: [进阶]
-
 > **Bloom 层级**: 评价 → 创造
 > **定位**: 对比 Rust 和 Elixir（Erlang VM）在并发模型、错误处理、类型系统和运行时的异同。
 > **前置概念**: [Rust vs Go](02_rust_vs_go.md) · [Rust vs Haskell](03_paradigm_matrix.md) · [Async](../03_advanced/02_async.md)

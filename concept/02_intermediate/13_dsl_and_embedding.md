@@ -1,6 +1,7 @@
 > **内容分级**: [综述级]
 
 > **本节关键术语**: 领域特定语言 (DSL) · 嵌入 DSL · 宏 (Macro) · 流利接口 (Fluent Interface) · Builder 模式 — [完整对照表](../00_meta/terminology_glossary.md)
+>
 # DSL 与嵌入 式设计：Rust 中的领域特定语言
 
 > **受众**: [进阶]

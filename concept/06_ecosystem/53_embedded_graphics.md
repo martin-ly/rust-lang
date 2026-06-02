@@ -1,5 +1,37 @@
 > **内容分级**: [综述级]
-> ⚠️ **[社区贡献欢迎]** [社区贡献欢迎]: 本节需要与主题匹配的可编译 Rust 代码示例。
+>
+## 代码示例：egui 即时模式 GUI（嵌入式场景）
+
+以下演示使用 `egui` 在资源受限环境下构建交互式界面：
+
+```rust,ignore
+use egui::{Context, CentralPanel, Slider};
+
+struct SensorApp {
+    temperature: f32,
+    threshold: f32,
+}
+
+impl eframe::App for SensorApp {
+    fn update(&mut self, ctx: &Context, _frame: &mut eframe::Frame) {
+        CentralPanel::default().show(ctx, |ui| {
+            ui.heading("传感器监控面板");
+            ui.add(Slider::new(&mut self.threshold, 0.0..=100.0)
+                .text("报警阈值 (°C)"));
+
+            let color = if self.temperature > self.threshold {
+                egui::Color32::RED
+            } else {
+                egui::Color32::GREEN
+            };
+            ui.colored_label(color, format!("当前温度: {:.1}°C", self.temperature));
+        });
+    }
+}
+```
+
+> **嵌入式约束**: 在 `no_std` 环境下，可使用 `embedded-graphics` + `lvgl` 替代 egui。
+
 >
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >

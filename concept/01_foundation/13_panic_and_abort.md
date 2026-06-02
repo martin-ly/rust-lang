@@ -1,6 +1,7 @@
 > **内容分级**: [综述级]
 
 > **本节关键术语**: panic · 展开 (Unwind) · 中止 (Abort) · 栈回溯 (Stack Trace) · 不可恢复错误 (Unrecoverable Error) — [完整对照表](../00_meta/terminology_glossary.md)
+>
 # Panic 与 Abort：不可恢复错误的处理机制
 
 > **受众**: [初学者]

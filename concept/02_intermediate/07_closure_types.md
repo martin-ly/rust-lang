@@ -1,6 +1,7 @@
 > **内容分级**: [综述级]
 
 > **本节关键术语**: 闭包类型 (Closure Type) · Fn · FnMut · FnOnce · 捕获模式 (Capture Mode) · move 闭包 — [完整对照表](../00_meta/terminology_glossary.md)
+>
 # 闭包类型系统：Fn、FnMut、FnOnce 的捕获语义
 
 > **受众**: [进阶]

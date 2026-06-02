@@ -1,11 +1,9 @@
 > **内容分级**: [综述级]
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Rust vs TypeScript：静态类型系统的两种哲学 —— 编译期证明与渐进式工程
 >
 > **受众**: [进阶]
-
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 对比分析 **Rust**（编译期内存安全、零成本抽象、所有权系统）与 **TypeScript**（渐进式类型、JavaScript 超集、运行时主导）在类型系统、编译模型、异步生态和 WASM 互操作四个维度的本质差异，建立系统化的选型决策框架。
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Type System](../01_foundation/04_type_system.md) · [Async](../03_advanced/02_async.md)

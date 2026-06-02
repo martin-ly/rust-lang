@@ -5,9 +5,11 @@
 
 ## 1. 引言
 
-Serde（**Ser**ialization / **De**serialization）是 Rust 生态中序列化与反序列化的事实标准库，年下载量超过 2 亿次 [来源: crates.io 统计, 2025]。它通过一套精心设计的 trait 体系，将数据格式的具体细节与 Rust 数据结构的序列化逻辑彻底解耦，使得同一套数据类型可以在 JSON、YAML、TOML、MessagePack、Bincode 等数十种格式间无缝转换，而无需修改数据结构定义本身。
+Serde（**Ser**ialization / **De**serialization）是 Rust 生态中序列化与反序列化的事实标准库，年下载量超过 2 亿次 [来源: crates.io 统计, 2025]。
+它通过一套精心设计的 trait 体系，将数据格式的具体细节与 Rust 数据结构的序列化逻辑彻底解耦，使得同一套数据类型可以在 JSON、YAML、TOML、MessagePack、Bincode 等数十种格式间无缝转换，而无需修改数据结构定义本身。
 
-Serde 的核心理念可以概括为：**数据拥有结构，格式拥有规则**。Rust 的数据结构（struct、enum、元组等）只描述"是什么"，而具体的 `Serializer` / `Deserializer` 实现决定"怎么写"和"怎么读"。这种设计不仅带来了极高的可扩展性，更通过 Rust 的类型系统和单态化（monomorphization）实现了零成本抽象——序列化调用链在编译期完全展开，运行时无任何虚拟分发开销。
+Serde 的核心理念可以概括为：**数据拥有结构，格式拥有规则**。Rust 的数据结构（struct、enum、元组等）只描述"是什么"，而具体的 `Serializer` / `Deserializer` 实现决定"怎么写"和"怎么读"。
+这种设计不仅带来了极高的可扩展性，更通过 Rust 的类型系统和单态化（monomorphization）实现了零成本抽象——序列化调用链在编译期完全展开，运行时无任何虚拟分发开销。
 
 > [来源: Serde 官方文档, https://serde.rs/]
 > [来源: The Rust Programming Language, Trait 与泛型章节, https://doc.rust-lang.org/book/ch10-00-generics.html]

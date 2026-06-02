@@ -1,6 +1,43 @@
 > **内容分级**: [专家级]
 
-> ⚠️ **[社区贡献欢迎]** [社区贡献欢迎]: 本节需要与主题匹配的可编译 Rust 代码示例。>
+## 代码示例：工业级并发流水线（日志 ETL）
+
+以下展示基于通道的无锁并发流水线模式，典型用于工业级日志/数据 ETL：
+
+```rust,ignore
+use std::sync::mpsc::{channel, Sender, Receiver};
+use std::thread;
+
+// Stage 1: 解析原始日志行
+fn parser_stage(input: Receiver<String>, output: Sender<LogEntry>) {
+    for line in input {
+        if let Ok(entry) = parse_log(&line) {
+            let _ = output.send(entry);
+        }
+    }
+}
+
+// Stage 2: 过滤与聚合
+fn filter_stage(input: Receiver<LogEntry>, output: Sender<Metric>) {
+    let mut counter = 0u64;
+    for entry in input {
+        if entry.level == "ERROR" {
+            counter += 1;
+        }
+        if counter % 1000 == 0 {
+            let _ = output.send(Metric::ErrorRate(counter));
+        }
+    }
+}
+
+// Stage 3: 输出到持久化存储
+fn sink_stage(input: Receiver<Metric>) {
+    for metric in input {
+        persist_to_disk(metric);
+    }
+}
+```
+
 >
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >

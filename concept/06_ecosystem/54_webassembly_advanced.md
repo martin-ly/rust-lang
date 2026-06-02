@@ -1,5 +1,46 @@
 > **内容分级**: [专家级]
-> ⚠️ **[社区贡献欢迎]** [社区贡献欢迎]: 本节需要与主题匹配的可编译 Rust 代码示例。
+>
+## 代码示例：wasm-bindgen 高级 FFI 绑定
+
+以下演示 Rust ↔ JavaScript 之间传递复杂数据结构，使用 `wasm-bindgen`：
+
+```rust
+use wasm_bindgen::prelude::*;
+use serde::{Serialize, Deserialize};
+
+#[wasm_bindgen]
+#[derive(Serialize, Deserialize)]
+pub struct Point {
+    pub x: f64,
+    pub y: f64,
+}
+
+#[wasm_bindgen]
+pub struct GeometryEngine;
+
+#[wasm_bindgen]
+impl GeometryEngine {
+    #[wasm_bindgen(constructor)]
+    pub fn new() -> Self { Self }
+
+    /// 计算两点间欧几里得距离
+    pub fn distance(&self, a: &Point, b: &Point) -> f64 {
+        ((b.x - a.x).powi(2) + (b.y - a.y).powi(2)).sqrt()
+    }
+
+    /// 批量处理（避免反复跨边界调用开销）
+    pub fn batch_distances(&self, points_js: JsValue) -> Result<JsValue, JsValue> {
+        let points: Vec<Point> = serde_wasm_bindgen::from_value(&points_js)?;
+        let distances: Vec<f64> = points.windows(2)
+            .map(|w| self.distance(&w[0], &w[1]))
+            .collect();
+        Ok(serde_wasm_bindgen::to_value(&distances)?)
+    }
+}
+```
+
+编译目标：`wasm32-unknown-unknown`
+
 >
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >

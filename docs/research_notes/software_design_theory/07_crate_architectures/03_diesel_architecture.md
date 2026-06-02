@@ -7,9 +7,11 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-Diesel 是 Rust 生态中**类型安全的 SQL ORM 与查询构建器**，其设计核心是将 SQL 的语法正确性验证前移至编译期，实现"无效 SQL 不可表示"（invalid SQL unrepresentable）的强保证。与运行时拼接 SQL 字符串的传统 ORM 不同，Diesel 通过 Rust 的类型系统与单态化（monomorphization），在零运行时开销的前提下，让数据库查询成为编译期可验证的强类型程序。
+Diesel 是 Rust 生态中**类型安全的 SQL ORM 与查询构建器**，其设计核心是将 SQL 的语法正确性验证前移至编译期，实现"无效 SQL 不可表示"（invalid SQL unrepresentable）的强保证。
+与运行时拼接 SQL 字符串的传统 ORM 不同，Diesel 通过 Rust 的类型系统与单态化（monomorphization），在零运行时开销的前提下，让数据库查询成为编译期可验证的强类型程序。
 
-Diesel 的哲学可以概括为：**Schema 即类型，查询即类型变换，数据库交互即类型证明**。这种设计使得诸如 `SELECT * FROM users WHERE id = 'not_a_number'` 之类的错误在编译阶段即被捕获，而非在生产环境的查询执行阶段抛出异常。
+Diesel 的哲学可以概括为：**Schema 即类型，查询即类型变换，数据库交互即类型证明**。
+这种设计使得诸如 `SELECT * FROM users WHERE id = 'not_a_number'` 之类的错误在编译阶段即被捕获，而非在生产环境的查询执行阶段抛出异常。
 
 > [来源: Diesel 官方文档, https://diesel.rs/guides/getting-started]
 > [来源: The Rust Programming Language, 泛型与 Trait 章节, https://doc.rust-lang.org/book/ch10-00-generics.html]
