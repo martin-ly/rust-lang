@@ -350,7 +350,7 @@ tracing = "0.1.44"
 # tracing-subscriber: tracing的订阅者实现，支持多种输出格式
 tracing-subscriber = { version = "0.3.23", features = ["env-filter", "json"] }
 # log: 标准日志库，提供简单的日志记录接口
-log = "0.4.30"
+log = "0.4.31"  # 2026-06-02: cargo update 升级
 # prometheus: Prometheus指标收集库
 prometheus = "0.14.0"
 # tracing-opentelemetry: tracing与OpenTelemetry的集成 - 2025年10月最新版本
@@ -516,7 +516,7 @@ png = "0.18.1"
 # tiff: TIFF图像格式支持
 tiff = "0.11.3"
 # bitflags: 位标志宏 - 2026-02-13: 2.10.0 -> 2.11.0 (cargo update)
-bitflags = "2.11.1"  # 2026-04-23: 同步至实际解析版本
+bitflags = "2.12.1"  # 2026-06-02: cargo update 升级
 # hashbrown: 高性能HashMap实现
 hashbrown = "0.17.1"  # 2026-05-09: cargo update
 # itertools: 迭代器工具库

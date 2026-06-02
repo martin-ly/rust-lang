@@ -355,11 +355,8 @@ Programming Languages (POPL 2026).
 ## 权威来源索引
 
 > **[来源: Wikipedia - Compiler Construction]**
-
 > **[来源: Rust Compiler Team Blog]**
-
 > **[来源: LLVM Documentation]**
-
 > **[来源: ACM - Compiler Design]**
 
 ---

@@ -1,10 +1,8 @@
 # Next-generation Trait Solver 深度研究
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **分级**: [B]
 > **Bloom 层级**: L4-L5 (分析/评价)
-
 > **文档状态**: 活跃维护
 > **创建日期**: 2026-05-08
 > **最后更新**: 2026-05-08
@@ -429,13 +427,9 @@ flowchart TD
 ## 权威来源索引
 
 > **[来源: Wikipedia - Machine Learning]**
-
 > **[来源: Wikipedia - Artificial Intelligence]**
-
 > **[来源: tch-rs Documentation]**
-
 > **[来源: ACM - AI Systems]**
-
 > **[来源: Wikipedia - Machine Learning]**
 > **[来源: Wikipedia - Artificial Intelligence]**
 > **[来源: tch-rs Documentation]**

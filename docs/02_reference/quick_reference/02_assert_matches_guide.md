@@ -1,7 +1,6 @@
 # `assert_matches!` / `debug_assert_matches!` 速查指南
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **分级**: [A]
 > **Rust 版本**: 1.96.0+ Stable
 > **跟踪 Issue**: rust#108099
@@ -246,17 +245,11 @@ assert_matches!(result, Ok(Config { key: "test", .. }));
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming Languages]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ---

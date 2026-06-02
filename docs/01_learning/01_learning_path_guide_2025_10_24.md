@@ -45,7 +45,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```
+```text
 C01 (所有权) → C02 (类型) → C03 (控制流)
      ↓              ↓              ↓
   练习          练习          练习
@@ -57,7 +57,7 @@ C01 (所有权) → C02 (类型) → C03 (控制流)
 >
 > **[来源: Rust Official Docs]**
 
-```
+```text
 C04 (泛型) → C05 (并发) → C06 (异步)
      ↓           ↓           ↓
   项目实战    项目实战    项目实战
@@ -67,7 +67,7 @@ C04 (泛型) → C05 (并发) → C06 (异步)
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```
+```text
 C07 (进程) → C08 (算法) → C10 (网络) → C12 (WASM)
      ↓           ↓            ↓            ↓
    系统工具    数据结构     网络服务     Web 应用
@@ -77,7 +77,7 @@ C07 (进程) → C08 (算法) → C10 (网络) → C12 (WASM)
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```
+```text
 第1周: 核心新特性
 ├── isqrt (≥1.84) - 整数平方根运算
 ├── async Fn trait (≥1.85, Ed 2024) 改进
@@ -166,7 +166,7 @@ async fn use_async_fn_trait() {
 
 结合 Rust 1.95+ 特性构建完整应用：
 
-```
+```text
 项目: 高性能数据处理管道
 ├── 使用 array_windows (1.95+) 进行数据窗口分析
 ├── 使用 isqrt (≥1.84) 进行几何计算
@@ -184,7 +184,7 @@ async fn use_async_fn_trait() {
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```
+```text
 1. C01 (所有权基础) ──┐
 2. C02 (类型系统) ────┼→ Rust 1.96 基础特性
 3. C03 (控制流) ──────┘    (isqrt, 基础 API)
@@ -198,7 +198,7 @@ async fn use_async_fn_trait() {
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-```
+```text
 1. 快速复习 C04 (泛型) + C05 (并发)
       ↓
 2. Rust 1.95+ 特性 (array_windows, ControlFlow, LazyLock)
@@ -212,7 +212,7 @@ async fn use_async_fn_trait() {
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```
+```text
 1. C07 (进程管理) ──┐
 2. C08 (算法) ──────┼→ 1.96 系统编程特性
 3. C10 (网络) ──────┘    (线程高级控制, 底层优化)
@@ -344,19 +344,12 @@ async fn use_async_fn_trait() {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon]**
 
 ---

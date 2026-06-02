@@ -2,7 +2,6 @@
 
 > **分级**: [A]
 > **Bloom 层级**: L2 (理解)
-
 > **最后更新**: 2026-05-08
 > **Rust 版本**: 1.96.0+
 
@@ -30,7 +29,6 @@
     - [数学常量在函数式数值计算中的应用](#数学常量在函数式数值计算中的应用)
     - [生产场景：事件处理系统](#生产场景事件处理系统)
     - [总结](#总结)
-  - [**最后更新**: 2026-05-08 (闭包场景深度整合)](#最后更新-2026-05-08-闭包场景深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -181,7 +179,6 @@ where
 ## Rust 1.95+ 在闭包与函数式编程中的深度应用
 >
 > **[来源: Rust Official Docs]**
-
 > **适用版本**: Rust 1.96.0+ | **实际场景**: 函数式编程模式
 
 ---
@@ -613,6 +610,7 @@ pub fn setup_processor() -> EventProcessor {
 | `f64::consts` | 数值变换、缓动函数 | 精度保证 |
 
 **最后更新**: 2026-05-08 (闭包场景深度整合)
+
 ---
 
 > **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
@@ -638,21 +636,13 @@ pub fn setup_processor() -> EventProcessor {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ---

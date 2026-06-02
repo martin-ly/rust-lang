@@ -75,7 +75,6 @@
   - [Rust 1.95+ 异步模式](#rust-195-异步模式)
     - [ControlFlow 在异步错误处理中的应用](#controlflow-在异步错误处理中的应用)
     - [LazyLock 在异步运行时配置中的应用](#lazylock-在异步运行时配置中的应用)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [权威来源索引](#权威来源索引)
   - [相关概念](#相关概念)
 
@@ -1256,6 +1255,7 @@ pub fn get_async_config() -> Option<&'static AsyncConfig> {
 ---
 
 **状态**: ✅ 深度整合完成
+
 ---
 
 > **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
@@ -1272,23 +1272,14 @@ pub fn get_async_config() -> Option<&'static AsyncConfig> {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Asynchronous I/O]**
-
 > **[来源: Wikipedia - Future/Promise]**
-
 > **[来源: Wikipedia - Coroutine]**
-
 > **[来源: IEEE - Concurrent Language Constructs]**
-
 > **[来源: ACM - Async Programming Patterns]**
-
 > **[来源: Rust Reference - async/await]**
-
 > **[来源: TRPL Ch. 17 - Async and Await]**
-
 > **[来源: Rustonomicon - Async]**
-
 > **[来源: tokio.rs Documentation]**
-
 > **[来源: async-std [已归档].rs Documentation]**
 
 ---
@@ -1308,7 +1299,6 @@ pub fn get_async_config() -> Option<&'static AsyncConfig> {
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
 > **[来源: Wikipedia - Design Pattern]**
 > **[来源: Rust API Guidelines]**
 > **[来源: Gang of Four - Design Patterns]**

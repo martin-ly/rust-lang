@@ -1,10 +1,8 @@
 # Next-gen Trait Solver 跟踪报告
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **分级**: [B]
 > **Bloom 层级**: L4-L5 (分析/评价)
-
 > **最后更新日期**: 2026-05-08
 > **预计下次复查日期**: 2026-07-24
 > **跟踪状态**: 🔬 深度开发中 (nightly 默认已切换)
@@ -521,13 +519,9 @@ Next-gen solver 的设计目标是**向后兼容**，但某些边缘案例可能
 ## 权威来源索引
 
 > **[来源: Wikipedia - Machine Learning]**
-
 > **[来源: Wikipedia - Artificial Intelligence]**
-
 > **[来源: tch-rs Documentation]**
-
 > **[来源: ACM - AI Systems]**
-
 > **[来源: Wikipedia - Machine Learning]**
 > **[来源: Wikipedia - Artificial Intelligence]**
 > **[来源: tch-rs Documentation]**

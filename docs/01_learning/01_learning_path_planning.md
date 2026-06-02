@@ -72,7 +72,6 @@
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-05-08 (Rust 1.95+ 持续更新)](#最后更新-2026-05-08-rust-195-持续更新)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -138,7 +137,6 @@
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-05-08 (Rust 1.95+ 持续更新)](#最后更新-2026-05-08-rust-195-持续更新)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -874,7 +872,6 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 ## Rust 1.95+ 学习路径
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
 > **适用版本**: Rust 1.96.0+
 
 ### 1.95+ 新特性学习要点
@@ -952,7 +949,6 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 ## Rust 1.95+ 持续更新更新
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
@@ -982,13 +978,14 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 #### 相关文档
 
 - Rust 1.95+ 迁移指南
-- [Rust 1.94 特性速查（已归档）
+- Rust 1.94 特性速查（已归档）
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-05-08 (Rust 1.95+ 持续更新)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

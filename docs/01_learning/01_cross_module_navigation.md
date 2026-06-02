@@ -1,10 +1,8 @@
 # 跨模块学习导航图
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **分级**: [A]
 > **Bloom 层级**: L1-L2 (记忆/理解)
-
 > Rust 系统化学习项目 - 模块关联指南
 
 ---
@@ -31,7 +29,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                            新手入门 (Beginner)                               │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -123,7 +121,7 @@
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```
+```text
     理论学习
         │
         ▼
@@ -164,7 +162,7 @@
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```
+```text
 C01 → C02 → C03 → C04 → C06 → content/ecosystem/async_runtimes/
                                     ↓
                            content/ecosystem/web_frameworks/
@@ -176,7 +174,7 @@ C01 → C02 → C03 → C04 → C06 → content/ecosystem/async_runtimes/
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```
+```text
 C01 → C02 → C05 → C07 → C10 → content/production/
                                     ↓
                            content/emerging/
@@ -186,7 +184,7 @@ C01 → C02 → C05 → C07 → C10 → content/production/
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```
+```text
 C01 → C04 → C11 → docs/research_notes/
                          ↓
                   content/academic/
@@ -239,19 +237,12 @@ C01 → C04 → C11 → docs/research_notes/
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
 > **[来源: ACM - Systems Programming Languages]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ---

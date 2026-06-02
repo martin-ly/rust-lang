@@ -43,7 +43,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```
+```text
 C01 → C02 → C03 → 项目
 ```
 
@@ -53,7 +53,7 @@ C01 → C02 → C03 → 项目
 >
 > **[来源: Rust Official Docs]**
 
-```
+```text
 C01 → C04 → C05 → 项目
 ```
 
@@ -61,7 +61,7 @@ C01 → C04 → C05 → 项目
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```
+```text
 C01 → C07 → C08 → C10
 ```
 
@@ -69,7 +69,7 @@ C01 → C07 → C08 → C10
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```
+```text
 C01 → C06 → C10 → C12
 ```
 
@@ -77,7 +77,7 @@ C01 → C06 → C10 → C12
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```
+```text
 isqrt → get_disjoint_mut → async Fn → 综合项目
 ```
 
@@ -216,7 +216,7 @@ fn triangle_inequality(points: &[(f64, f64)]) -> bool {
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-```
+```text
 C02 (类型系统)
     ↓
 C08 (算法基础)
@@ -232,7 +232,7 @@ C08 高级算法 ────────┘
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```
+```text
 C01 (所有权)
     ↓
 C05 (线程基础)
@@ -248,7 +248,7 @@ C05 高级并发模式 ────────────┘
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```
+```text
 C04 (泛型基础)
     ↓
 C06 (异步基础)
@@ -264,7 +264,7 @@ Tokio 生态 ────────────┘
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```
+```text
 C01 (所有权)
     ↓
 C07 (进程管理)
@@ -319,19 +319,12 @@ C07 高级系统编程 ────────────┘
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon]**
 
 ---
