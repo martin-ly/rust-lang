@@ -23,10 +23,8 @@
 //! - performance optimization feature
 use rayon::prelude::*;
 use std::collections::HashMap;
-use std::sync::{
-    Arc, Mutex,
-    atomic::{AtomicUsize, Ordering},
-};
+use std::sync::atomic::{AtomicUsize, Ordering};
+use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::{Duration, Instant};
 
@@ -584,7 +582,8 @@ impl AdvancedThreadPool {
                 let counter = Arc::clone(&counter);
 
                 thread::spawn(move || {
-                    while let Ok(task) = receiver.lock().expect("获取接收器锁不应失败").recv() {
+                    while let Ok(task) = receiver.lock().expect("获取接收器锁不应失败").recv()
+                    {
                         task();
                         counter.increment();
                     }
@@ -603,7 +602,9 @@ impl AdvancedThreadPool {
     where
         F: FnOnce() + Send + 'static,
     {
-        self.task_sender.send(Box::new(task)).expect("发送任务不应失败");
+        self.task_sender
+            .send(Box::new(task))
+            .expect("发送任务不应失败");
     }
 
     pub fn get_completed_tasks(&self) -> usize {

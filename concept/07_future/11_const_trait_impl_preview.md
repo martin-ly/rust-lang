@@ -4,6 +4,8 @@
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)
 > **预计稳定**: 待定（需等待 RFC / MCP 完成）
 >
+> ⚠️ **语法演进声明**: 本文档中使用的 `~const` 语法是 nightly 实验性语法，**不是 Rust 效果系统的最终方向**。Yoshua Wuyts（Rust Effects Initiative 核心维护者）在 2026 年的设计提案中已明确将 `~const` 视为过渡方案，未来可能被 `eff`/`with` 统一效果语法取代。但 `const` 作为**效果语义**（编译期可求值）将持续演进。[来源: [Yoshua Wuyts — "An Effect Notation Based on With-Clauses and Blocks" (2026-03)](https://blog.yoshuawuyts.com/a-with-based-effect-notation/)] · [来源: [Rust Effects System 预研](./04_effects_system.md)]
+>
 > **受众**: [专家]
 > **内容分级**: [实验级]
 
@@ -40,6 +42,7 @@
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
   - [五、演进路线](#五演进路线)
+    - [5.1 当前路线图（基于 `~const` 语法）](#51-当前路线图基于-const-语法)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
@@ -296,14 +299,18 @@ graph TD
 
 ## 五、演进路线
 
+> ⚠️ **重要更新 (2026-06-02)**: `~const` 语法正被重新评估。Const Trait Impl 的核心语义（"编译期效果追踪"）是正确的方向，但语法载体可能从 `~const Trait` bound 转变为统一效果系统中的 `with const` 或 `eff Const` 形式。以下路线图同时标注当前语法和未来可能方向。
+
+### 5.1 当前路线图（基于 `~const` 语法）
+
 | 里程碑 | 状态 | 预计时间 | 说明 |
 |:---|:---:|:---|:---|
 | RFC 2632 接受 | ✅ | 2018 | 初始设计提案 |
 | 编译器原型 | ✅ nightly | 2020-2024 | 多次语法迭代 |
-| `~const` 语法稳定 | 🟡 | 2026-2027 | 当前 nightly 语法 |
+| `~const` 语法稳定 | 🟡 → ❌ | 2026-2027 | **已非最终方向**；语法可能废弃，语义保留 |
 | 标准库 const impl | 🟡 | 2026-2028 | 逐步为 core/std Trait 添加 |
 | 稳定化 | ⬜ | 2028+ | 语法和语义冻结后稳定 |
-| 与 Effects 系统统一 | ⬜ | 2029+ | `~const` 扩展为通用效果限定 |
+| 与 Effects 系统统一 | ⬜ | 2029+ | `const` 效果通过 `eff`/`with` 统一语法整合 |
 
 > **预测**: Const Trait Impl 是 Rust 效果系统的**先驱特性**。`~const` 语法可能在 Effects 系统成熟后被更通用的语法替代，但核心语义（编译期效果追踪）将持续演进。
 > [来源: [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/)]

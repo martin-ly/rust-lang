@@ -14,7 +14,8 @@
 | `rust_effect_system_comprehensive_analysis.md` | 416 | 形式化分析论证 | `concept/07_future/04_effects_system.md` v1.3+ |
 | `rust_effect_system_deepened_broadened_analysis.md` | 596 | 深化广化分析 | `concept/07_future/04_effects_system.md` v1.3+ |
 | `rust_effect_system_boundary_analysis.md` | 282 | 边界分析 | `concept/07_future/04_effects_system.md` v1.3+ |
-| `01.md` | 2136 | 形式系统 vs 机制工程索引 | 待评估归属 |
+| `01.md` | 2136 | 形式系统 vs 机制工程索引 | 核心内容已迁移至 `05_comparative/01_rust_vs_cpp.md` |
+| `Rust vs C++：形式系统模型 vs 机制工程模型 —— 核心论点索引.md` | 145926 | 对话式长文归档 | 结构化版本见 `05_comparative/01_rust_vs_cpp.md` |
 
 ## 整合说明
 

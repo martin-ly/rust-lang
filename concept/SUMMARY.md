@@ -26,7 +26,7 @@
   - [Rust 知识体系定理推理森林](00_meta/theorem_inference_forest.md)
   - [全局待办清单（Global TODO Tracker）](00_meta/todos.md)
 
-- [Rust vs C++：形式系统模型 vs 机制工程模型 —— 核心论点索引](01.md)
+- [Rust vs C++：形式系统模型 vs 机制工程模型](05_comparative/01_rust_vs_cpp.md) · [原始长文归档](../archive/Rust%20vs%20C++%EF%BC%9A%E5%BD%A2%E5%BC%8F%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%9E%8B%20vs%20%E6%9C%BA%E5%88%B6%E5%B7%A5%E7%A8%8B%E6%A8%A1%E5%9E%8B%20%E6%A0%B8%E5%BF%83%E8%AE%BA%E7%82%B9%E7%B4%A2%E5%BC%95.md)
 
 - [L1 基础概念](01_foundation/README.md)
   - [Ownership（所有权）](01_foundation/01_ownership.md)

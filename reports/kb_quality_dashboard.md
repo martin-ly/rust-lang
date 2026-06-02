@@ -1,6 +1,6 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-06-02T20:26:02.941622+00:00
+> 生成时间: 2026-06-02T21:58:56.905752+00:00
 > 扫描文件数: 260
 
 ## 全局指标
@@ -12,7 +12,7 @@
 | 总反命题 | 606 | ≥40 | ✅ |
 | 总 Mermaid 图 | 532 | ≥50 | ✅ |
 | 编译验证代码块 | 2642 | ≥150 | ✅ |
-| 定理矩阵总行 | 12608 | — | — |
+| 定理矩阵总行 | 12611 | — | — |
 | 死链数量 | 0 | 0 | ✅ |
 | 反向推理 (⟸) | 60 | ≥50 | ✅ |
 | 模板化 ⟹ | 0 | 0 | ✅ |
@@ -320,13 +320,13 @@
 | concept\07_future\01_ai_integration.md | L7 | 846 | 3 | 0 | 0 | 2 | 2 | 9 | 6 | ✅ | ✅ | ✅ |
 | concept\07_future\02_formal_methods.md | L7 | 1509 | 9 | 0 | 0 | 1 | 9 | 9 | 3 | ✅ | ✅ | ✅ |
 | concept\07_future\03_evolution.md | L7 | 1338 | 8 | 0 | 0 | 1 | 6 | 19 | 3 | ✅ | ✅ | ✅ |
-| concept\07_future\04_effects_system.md | L7 | 1532 | 6 | 0 | 0 | 1 | 4 | 26 | 12 | ✅ | ✅ | ✅ |
+| concept\07_future\04_effects_system.md | L7 | 1551 | 6 | 0 | 0 | 1 | 4 | 26 | 12 | ✅ | ✅ | ✅ |
 | concept\07_future\05_rust_version_tracking.md | L7 | 1224 | 6 | 0 | 0 | 1 | 3 | 6 | 12 | ✅ | ✅ | ✅ |
 | concept\07_future\07_mcdc_coverage_preview.md | L7 | 453 | 6 | 0 | 0 | 3 | 3 | 5 | 12 | ✅ | ✅ | ✅ |
 | concept\07_future\08_safety_tags_preview.md | L7 | 495 | 6 | 0 | 0 | 3 | 3 | 6 | 12 | ✅ | ✅ | ✅ |
 | concept\07_future\09_parallel_frontend_preview.md | L7 | 482 | 6 | 0 | 0 | 3 | 3 | 6 | 12 | ✅ | ✅ | ✅ |
 | concept\07_future\10_derive_coerce_pointee_preview.md | L7 | 497 | 6 | 0 | 0 | 3 | 3 | 7 | 12 | ✅ | ✅ | ✅ |
-| concept\07_future\11_const_trait_impl_preview.md | L7 | 491 | 6 | 0 | 0 | 3 | 2 | 6 | 12 | ✅ | ✅ | ✅ |
+| concept\07_future\11_const_trait_impl_preview.md | L7 | 497 | 6 | 0 | 0 | 3 | 2 | 6 | 12 | ✅ | ✅ | ✅ |
 | concept\07_future\11_stable_abi_preview.md | L7 | 66 | 3 | 0 | 0 | 1 | 0 | 1 | 6 | ✅ | ✅ | ✅ |
 | concept\07_future\12_inline_const_pattern_preview.md | L7 | 69 | 3 | 0 | 0 | 1 | 0 | 1 | 6 | ✅ | ✅ | ✅ |
 | concept\07_future\12_return_type_notation_preview.md | L7 | 470 | 6 | 0 | 0 | 3 | 2 | 5 | 12 | ✅ | ✅ | ✅ |

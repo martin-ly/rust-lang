@@ -20747,6 +20747,7 @@
         "../02_intermediate/01_traits.md",
         "../02_intermediate/02_generics.md",
         "../05_comparative/01_rust_vs_cpp.md",
+        "../07_future/04_effects_system.md",
         "./02_type_theory.md",
         "./03_ownership_formal.md",
         "./04_rustbelt.md",
@@ -33369,7 +33370,7 @@
       "layer": "L7",
       "title": "Effects System: Concept Pre-study（效果系统：概念预研）",
       "positioning": "本文件是 Rust 效果系统（Effect System）的**概念预研**，跟踪类型系统向显式效果追踪演进的理论动向与工程实践。内容具有推测性，随语言团队决策动态更新。",
-      "line_count": 1532,
+      "line_count": 1551,
       "theorem_chains": [
         {
           "text": "> **⟹ 推理链**: EF1-EF3 证明 Rust **已经实现了效果的隐性追踪**，只是通过不同关键字而非统一语法。EF4 是**效果多态的原型**——证明统一语法在 trait 系统内可行。EF5 是**远期方向**，其最大障碍不是技术可行性，而是**向后兼容性**和**社区共识**。",
@@ -33620,7 +33621,7 @@
       "transitions": 12,
       "has_cognitive_path": true,
       "mermaid_blocks": 4,
-      "matrix_rows": 146,
+      "matrix_rows": 149,
       "pre_post": {
         "pre": [
           "[Async](../03_advanced/02_async.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Type Theory](../04_formal/02_type_theory.md)",
@@ -34317,7 +34318,7 @@
       "layer": "L7",
       "title": "Const Trait Impl 预研：常量上下文中的 Trait 泛化",
       "positioning": "探讨 Rust 在**常量上下文**（`const fn`）中支持 Trait 调用的演进，分析其对泛型编程、`const fn` 表达能力以及编译期计算的影响。",
-      "line_count": 491,
+      "line_count": 497,
       "theorem_chains": [
         {
           "text": "- **定理**: Const Trait Impl 预研：常量上下文中的 Trait 泛化 定义 ⟹ 类型安全保证",
