@@ -1,5 +1,4 @@
 > **内容分级**: [综述级]
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Rust vs Python：系统编程与动态脚本的对照分析
@@ -18,7 +17,6 @@
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
 > [Wikipedia — Python (programming language)](https://en.wikipedia.org/wiki/Python_(programming_language)) ·
 > [Wikipedia — Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))
-
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
 
 ## 📑 目录

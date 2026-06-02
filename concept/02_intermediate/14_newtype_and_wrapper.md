@@ -476,6 +476,14 @@ graph TD
 
 ---
 
+
+## 逆向推理链（Backward Reasoning）
+
+> **从编译错误反推**：
+>
+> ```text
+> Newtype 隔离 ⟸ 零成本抽象
+> ```
 ## 权威来源索引
 
 >

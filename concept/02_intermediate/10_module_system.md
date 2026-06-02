@@ -439,6 +439,14 @@ fn main() {
 
 ---
 
+
+## 逆向推理链（Backward Reasoning）
+
+> **从编译错误反推**：
+>
+> ```text
+> 模块可见性 ⟸ pub/private 路径解析
+> ```
 ## 权威来源索引
 
 >

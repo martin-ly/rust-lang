@@ -554,6 +554,14 @@ graph TD
 
 ---
 
+
+## 逆向推理链（Backward Reasoning）
+
+> **从编译错误反推**：
+>
+> ```text
+> 17 Macro Patterns 正确性 ⟸ 类型系统约束满足
+> ```
 ## 权威来源索引
 
 >

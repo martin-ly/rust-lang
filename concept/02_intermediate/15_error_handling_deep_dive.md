@@ -513,6 +513,14 @@ graph TD
 
 ---
 
+
+## 逆向推理链（Backward Reasoning）
+
+> **从编译错误反推**：
+>
+> ```text
+> 错误恢复 ⟸ Result/Option 穷尽处理
+> ```
 ## 权威来源索引
 
 >

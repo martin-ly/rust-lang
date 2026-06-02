@@ -536,6 +536,14 @@ unsafe fn c_get_buffer<'a>() -> &'a [u8] {
 
 ---
 
+
+## 逆向推理链（Backward Reasoning）
+
+> **从编译错误反推**：
+>
+> ```text
+> FFI 边界安全 ⟸ ABI 兼容 + 所有权转移
+> ```
 ## 权威来源索引
 
 >

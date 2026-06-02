@@ -1,11 +1,9 @@
 > **内容分级**: [专家级]
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # 事件驱动架构 (Event-Driven Architecture)
 >
 > **受众**: [进阶]
-
 > **Bloom 层级**: 应用 → 创造
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Cre — 设计事件驱动架构

@@ -6,7 +6,6 @@
 > **Bloom 层级**: 应用 + 评价
 > **功能**: 将概念知识转化为**工程能力**
 > **[来源: Cargo Book - doc.rust-lang.org/cargo]** · **[来源: crates.io]** · **[来源: Rust RFCs]** · **[来源: The Rust Programming Language (TRPL)]**
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 

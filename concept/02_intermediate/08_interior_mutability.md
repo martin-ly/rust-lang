@@ -558,6 +558,14 @@ fn correct_upgrade() {
 
 ---
 
+
+## 逆向推理链（Backward Reasoning）
+
+> **从编译错误反推**：
+>
+> ```text
+> 内部可变安全 ⟸ RefCell/Cell 运行时检查
+> ```
 ## 权威来源索引
 
 >

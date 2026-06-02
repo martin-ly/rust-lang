@@ -539,6 +539,14 @@ pub fn my_macro(input: String) -> String {
 
 ---
 
+
+## 逆向推理链（Backward Reasoning）
+
+> **从编译错误反推**：
+>
+> ```text
+> 过程宏安全 ⟸ TokenStream 完整性
+> ```
 ## 权威来源索引
 
 >

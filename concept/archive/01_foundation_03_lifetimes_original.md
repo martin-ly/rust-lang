@@ -11,8 +11,8 @@
 > **主要来源**: [TRPL: Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) ·
 > [Wikipedia: Region-based memory management] ·
 > [Rust Reference: Lifetime elision]
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
 ---
 
 > **Bloom 层级**: 理解 → 分析 → 评价

@@ -497,6 +497,14 @@ graph TD
 
 ---
 
+
+## 逆向推理链（Backward Reasoning）
+
+> **从编译错误反推**：
+>
+> ```text
+> Trait 系统一致性 ⟸ Coherence + Orphan Rule
+> ```
 ## 权威来源索引
 
 >

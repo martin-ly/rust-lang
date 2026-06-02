@@ -598,6 +598,14 @@ fn fixed() {
 
 ---
 
+
+## 逆向推理链（Backward Reasoning）
+
+> **从编译错误反推**：
+>
+> ```text
+> 智能指针安全 ⟸ Drop + Deref 协变
+> ```
 ## 权威来源索引
 
 >

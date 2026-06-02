@@ -716,6 +716,14 @@ impl Container for BadWrapper {
 
 ---
 
+
+## 逆向推理链（Backward Reasoning）
+
+> **从编译错误反推**：
+>
+> ```text
+> 高级类型安全 ⟸ GATs + 关联类型归一化
+> ```
 ## 权威来源索引
 
 >

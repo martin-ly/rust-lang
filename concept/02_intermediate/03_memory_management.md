@@ -1639,6 +1639,14 @@ Box<MaybeUninit<T>>.field → Box<MaybeUninit<FieldType>>
 
 ---
 
+
+## 逆向推理链（Backward Reasoning）
+
+> **从编译错误反推**：
+>
+> ```text
+> 内存安全 ⟸ 所有权 + 借用检查
+> ```
 ## 权威来源索引
 
 >

@@ -72,6 +72,7 @@
     - [10.1 边界测试：Tokio Stream 与所有权冲突（编译错误）](#101-边界测试tokio-stream-与所有权冲突编译错误)
     - [10.2 边界测试：背压传播中的类型不匹配（编译错误）](#102-边界测试背压传播中的类型不匹配编译错误)
     - [10.3 边界测试：Stream 的 `fuse` 与重复 poll 后的行为（逻辑错误）](#103-边界测试stream-的-fuse-与重复-poll-后的行为逻辑错误)
+  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [参考来源](#参考来源)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -698,6 +699,14 @@ fn main() {
 > 这与 Tokio 的 `StreamExt` 或 futures-rs 的 `Stream` 实现一致——Rust 的异步流语义比迭代器更复杂，因涉及外部事件源。
 > [来源: [futures-rs Documentation](https://docs.rs/futures/)] · [来源: [Tokio Stream](https://docs.rs/tokio-stream/)]
 
+## 逆向推理链（Backward Reasoning）
+
+> **从编译错误反推**：
+>
+> ```text
+> 流处理安全 ⟸ 背压 + 状态一致性
+> ```
+>
 ## 参考来源
 
 > [来源: [Tokio Streams](https://docs.rs/tokio-stream/)]

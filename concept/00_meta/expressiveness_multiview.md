@@ -707,9 +707,6 @@ graph TD
 
 | 定理 | 前提 | 结论 | 置信度 |
 | :--- | :--- | :--- | :--- |
-| Rust 语义表达力多视角深化（Multiview Expressiveness Analysis） 结构化组织 ⟹ 高效检索 | 理解分类维度与索引关系 | 能快速定位目标概念 | 高 |
-| Rust 语义表达力多视角深化（Multiview Expressiveness Analysis） 质量评估 ⟹ 持续改进 | 建立量化指标与审计流程 | 识别知识缺口并优先修复 | 高 |
-| Rust 语义表达力多视角深化（Multiview Expressiveness Analysis） 跨层映射 ⟹ 系统掌握 | 打通 L0-L7 的关联路径 | 形成完整的 Rust 能力图谱 | 高 |
 
 > **过渡**: 利用本文件的导航结构，读者可以从当前位置快速跃迁到任意概念层级，实现非线性学习。
 > **过渡**: Rust 语义表达力多视角深化（Multiview Expressiveness Analysis） 的维护需要与概念内容同步更新，确保元数据与实际知识体系的一致性。
