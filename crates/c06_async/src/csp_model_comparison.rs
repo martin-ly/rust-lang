@@ -42,7 +42,7 @@
 //!     | P || Q (parallelism combination )
 //!     | P ||| Q                 (交错组合)
 //!     | P ||| Q (combination )
-//! ```
+//!
 //!
 //! ### 1.2 Channel 语义
 //! Channel 是进程间通信的媒介:
@@ -66,7 +66,7 @@
 //! - unbuffered : synchronous (Golang )
 //! - 有缓冲: 异步通信 (容量有限)
 //! - buffering : async ()
-//! ```
+//!
 //! 
 //! ### 1.3 并发组合
 //! ### 1.3 concurrency combination

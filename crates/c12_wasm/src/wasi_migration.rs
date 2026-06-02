@@ -41,6 +41,7 @@
 /// ## 编译命令
 /// ## command
 /// ## 编译command
+/// ```text
 /// cargo build --target wasm32-wasip1
 /// ```
 ///

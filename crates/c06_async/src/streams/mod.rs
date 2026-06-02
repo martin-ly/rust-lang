@@ -404,6 +404,7 @@ pub async fn demo_basic_combinators(n: u32) -> Vec<u32> {
 ///     for result in results {
 ///         match result {
 ///             Ok(len) => println!("响应长度: {}", len),
+///             Err(e) => println!("请求失败: {}", e),
 ///         }
 ///     }
 /// }

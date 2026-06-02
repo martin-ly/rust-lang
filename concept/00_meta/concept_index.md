@@ -38,6 +38,7 @@
     - [T](#t)
     - [U](#u)
     - [V](#v)
+    - [W](#w)
     - [Z](#z)
   - [三、交叉概念一致性审计（🔶） \[来源: 交叉一致性检查方法论参照概念图 (Concept Map) 理论 — Novak \& Cañas, *The Theory Underlying Concept Maps* (2008); 知识网络的连通性验证\]](#三交叉概念一致性审计-来源-交叉一致性检查方法论参照概念图-concept-map-理论--novak--cañas-the-theory-underlying-concept-maps-2008-知识网络的连通性验证)
     - [3.1 Pin（出现在 4+ 个文件中） \[来源: 跨文件概念一致性检查参照 RFC 2349 — Pin / 2018; concept/03\_advanced/02\_async.md 等 4+ 文件中的 Pin 定义一致性验证\]](#31-pin出现在-4-个文件中-来源-跨文件概念一致性检查参照-rfc-2349--pin--2018-concept03_advanced02_asyncmd-等-4-文件中的-pin-定义一致性验证)
@@ -153,6 +154,7 @@
 |:---|:---|:---|:---|:---|
 | **eBPF Rust Mapping** | [L7: eBPF Rust 映射](../07_future/29_ebpf_rust.md) | L3 Unsafe、L6 生态 | 分析 | ← Unsafe + FFI → 内核可编程 |
 | **Edition Mechanism** | [L7: 语言演进](../07_future/03_evolution.md) | 所有层 | 评价 | ← RFC 流程 → 向后兼容演进 |
+| **Effect System (效果系统)** | [L7: Effects System](../07_future/04_effects_system.md) | L2 泛型、L3 async/const/unsafe、L4 类型论 | 评价 | ← async/const/try → 统一效果语法；effects × substructural types × refinement types 三元愿景 |
 | **Elision Rules** | [L1: 生命周期](../01_foundation/03_lifetimes.md) | L2 泛型、L4 区域类型 | 应用 | ← 生命周期标注 → 简化书写 |
 | **enum (Sum Type)** | [L1: 类型系统](../01_foundation/04_type_system.md) | L2 错误处理、L4 代数类型 | 理解 | ≡ 和类型 / 余积 (A + B) |
 | **Error Handling (Result/Option)** | [L2: 错误处理](../02_intermediate/04_error_handling.md) | L1 类型系统、L3 异步 | 应用 | ← Option/Result → ? 运算符 |

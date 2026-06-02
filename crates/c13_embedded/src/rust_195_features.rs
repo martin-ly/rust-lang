@@ -269,7 +269,7 @@ impl PowerPcAsmExamples {
 /// platform inside ，as platform complete `asm!` 。
 /// ## 语法
 /// ## syntax
-/// ##
+/// ```text
 ///     "common_instruction",
 ///     #[cfg(target_arch = "x86_64")]
 ///     "x86_specific_instruction",

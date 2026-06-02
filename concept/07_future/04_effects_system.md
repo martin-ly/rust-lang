@@ -8,7 +8,7 @@
 > **双维定位**: C×Ana — 分析 Effects 系统对 Rust 的潜力
 > **定位**: 本文件是 Rust 效果系统（Effect System）的**概念预研**，跟踪类型系统向显式效果追踪演进的理论动向与工程实践。内容具有推测性，随语言团队决策动态更新。
 > **前置概念**: [Async](../03_advanced/02_async.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Type Theory](../04_formal/02_type_theory.md)
-> **主要来源**: [Plotkin & Pretnar 2009 — Algebraic Effects] · [Lucassen & Gifford 1988 — Polymorphic Effect Systems] · [Koka] · [Eff] · [Rust Keyword Generics Initiative 2024](https://github.com/rust-lang/keyword-generics-initiative) · [Rust Project Goals 2025H1 — const traits](https://rust-lang.github.io/rust-project-goals/2025h1/const-trait.html) · [a-mir-formality](https://github.com/rust-lang/a-mir-formality)
+> **主要来源**: [Plotkin & Pretnar 2009 — Algebraic Effects] · [Lucassen & Gifford 1988 — Polymorphic Effect Systems] · [Koka] · [Eff] · [Rust Keyword Generics Initiative 2024](https://github.com/rust-lang/keyword-generics-initiative) · [Rust Project Goals 2025H1 — const traits](https://rust-lang.github.io/rust-project-goals/2025h1/const-trait.html) · [a-mir-formality](https://github.com/rust-lang/a-mir-formality) · [Yoshua Wuyts — "Why Effects?" (2026-05)](https://blog.yoshuawuyts.com/why-effects/) · [Yoshua Wuyts — "Open and Closed Effect Systems" (2025-05)](https://blog.yoshuawuyts.com/open-and-closed-effect-systems/) · [Yoshua Wuyts — "Syntactic Musings on the Fallibility Effect" (2025-12)](https://blog.yoshuawuyts.com/syntactic-musings-on-the-fallibility-effect/) · [Yoshua Wuyts — "An Effect Notation Based on With-Clauses and Blocks" (2026-03)](https://blog.yoshuawuyts.com/a-with-based-effect-notation/) · [Yoshua Wuyts — "A Grand Vision for Rust" (2026-03)](https://blog.yoshuawuyts.com/a-grand-vision-for-rust/)
 
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
@@ -19,6 +19,7 @@
 - v1.0 (2026-05-13): 初始版本。建立 Effect 系统概念框架、Rust 现有 effect 映射、AsyncFn 作为原型、跨语言对比、演进路线图
 - v1.1 (2026-05-22): 网络权威内容对齐：添加 `gen<yield>` effects 跟踪、Lang Team 2026 季度更新
 - v1.2 (2026-06-02): 补充 Rust Effects Initiative 官方定位、学术谱系（Plotkin & Pretnar 2009 / Lucassen & Gifford 1988）、carried/uncarried 官方分类、effect composition 规则、a-mir-formality 形式化验证关联 [来源: Web Authority Alignment Sprint]
+- v1.3 (2026-06-02): Yoshua Wuyts 2025-2026 核心输出全面整合："Why Effects?" / "Open and Closed Effect Systems" / "Fallibility Effect" / "With-Clauses and Blocks" / "A Grand Vision for Rust"。添加 〇之三 Why Effects? 核心洞察、一之二 开放/封闭效应系统分类、一之三 Fallibility Effect 语法设计、二之二 With-Clauses 效应符号、六更新 Rust 2030+ 愿景（effects + substructural types + refinement types）。标注 `~const` 语法废弃方向，更新学术谱系时间线至 2026。
 
 ---
 
@@ -114,6 +115,16 @@ Rust 的 effect system 并非凭空产生，它延续了编程语言理论中近
        ↓ 明确提出 carried/uncarried effects 分类、effect composition 规则
 2025: Rust Project Goals — const traits stabilization
        ↓ 以 const effect 为突破口，推进 effect-generic trait 的 engineering 落地
+2025-05: Yoshua Wuyts — "Open and Closed Effect Systems"
+       ↓ 明确 Rust 选择封闭效应系统（closed effect system），语言内置 bounded 效果集
+2025-12: Yoshua Wuyts — "Syntactic Musings on the Fallibility Effect"
+       ↓ 提出 `throws`/`throw` 语法替代 `try`/`yeet`，abstract vs concrete fallibility 分析
+2026-03: Yoshua Wuyts — "An Effect Notation Based on With-Clauses and Blocks"
+       ↓ 提出 `with`-clauses + `eff` 别名 + `.do` 传播的完整语法框架
+2026-03: Yoshua Wuyts — "A Grand Vision for Rust"
+       ↓ 将 effects、substructural types、refinement types 并列为 Rust 2030+ 三大方向
+2026-05: Yoshua Wuyts — "Why Effects?"
+       ↓ 效应 = 隐式参数 + 类型化协程 + 语言原语，三合一核心论证
 ```
 
 ### 从理论到 Rust 的映射
@@ -121,12 +132,79 @@ Rust 的 effect system 并非凭空产生，它延续了编程语言理论中近
 | 理论概念 | 学术来源 | Rust 对应实现 | 差距 |
 |:---|:---|:---|:---|
 | **Algebraic Effects** | Plotkin & Pretnar 2009 | 无原生支持；`async`/`try`/`gen` 通过关键字 + trait 模拟 | Rust 拒绝运行时 handler 栈，保持零成本 |
-| **Polymorphic Effect Types** | Lucassen & Gifford 1988 | `AsyncFn` trait (1.85)、`~const Trait` (unstable) | 无显式 effect 变量语法，通过 trait bound 模拟 |
+| **Polymorphic Effect Types** | Lucassen & Gifford 1988 | `AsyncFn` trait (1.85)、`~const Trait` (unstable, **已废弃方向**) | 无显式 effect 变量语法，通过 trait bound 模拟；`~const` 正被 `with`/`eff` 新语法取代 |
 | **Row Polymorphism** | Leijen 2014 (Koka) | 无直接对应；`#[maybe(async)]` 是受限形式 | 不支持开放行类型（open row types）的完整子类型 |
 | **Effect Composition** | Plotkin & Pretnar 2009 | `async fn` + `Result` → `impl Future<Output = Result<T, E>>` | 组合规则硬编码，非通用可扩展 |
 | **Effect Handlers** | Plotkin & Pretnar 2009 | 无；运行时效果处理由 tokio/async-std 等外部运行时承担 | Rust 将 handler 语义外化到库层，语言层只保证类型安全 |
 
 > **认知功能**: 此谱系表揭示 Rust effect system 的**设计取舍**——它不是"缺乏理论深度的工程 hack"，而是**在零成本抽象约束下对理论的有意裁剪**。Rust 选择不实现完整的代数效应（避免运行时 handler 栈开销），而是通过关键字 + trait + 状态机 desugar 在编译期消除效果成本。这与 Koka 的"理论 purity"和 Java 的"弱类型检查"形成三极对比。[来源: [Rust Keyword Generics Initiative](https://github.com/rust-lang/keyword-generics-initiative)]
+
+---
+
+## 〇之三、Why Effects? — 效应系统的三合一论证
+
+> **[来源: Yoshua Wuyts — "Why Effects?" (2026-05)](https://blog.yoshuawuyts.com/why-effects/)** ✅ · **[来源: Yoshua Wuyts — "A Grand Vision for Rust" (2026-03)](https://blog.yoshuawuyts.com/a-grand-vision-for-rust/)** ✅
+
+Yoshua Wuyts 在 2026 年 5 月的核心文章中提出了一个**三合一论证**：效果系统（effect system）不是单一概念，而是三种看似无关的编程语言机制在深层次上的统一。
+
+### 三合一：效应 = 隐式参数 + 类型化协程 + 语言原语
+
+```text
+┌─────────────────────────────────────────────────────────────┐
+│                     Effect System                           │
+│                       （效果系统）                            │
+├─────────────────┬─────────────────┬─────────────────────────┤
+│   隐式参数       │   类型化协程      │      语言原语           │
+│ Implicit Args   │ Typed Coroutines│   Language Primitives   │
+├─────────────────┼─────────────────┼─────────────────────────┤
+│ 函数除了显式参数  │ 函数可以在特定点   │ 效果直接编码语言语义，   │
+│ 外，还隐式接收   │ 挂起和恢复，且    │ 不由其他机制支撑        │
+│ "能力/上下文"   │ 挂起/恢复的类型   │                        │
+│                 │ 被静态追踪        │                        │
+├─────────────────┼─────────────────┼─────────────────────────┤
+│ async fn 隐式   │ async/.await 是  │ const fn 移除堆访问、    │
+│ 接收执行器/轮询  │ 类型化的 yield/  │ 静态变量、非确定性、     │
+│ 能力             │ resume           │ 主机 API 访问——这些     │
+│                 │                 │ 都是编译器级别的语义      │
+├─────────────────┼─────────────────┼─────────────────────────┤
+│ 类比：区域性类型  │ 类比：代数效果    │ 类比： capability-safe  │
+│ 系统（region     │ 处理器（typed    │ 编程中的 primitive      │
+│ types）隐式传递  │ yield）          │ capabilities            │
+│ 内存上下文       │                 │                        │
+└─────────────────┴─────────────────┴─────────────────────────┘
+```
+
+> **关键洞察**: 传统上，"隐式参数"（如 Haskell 的 `Reader` monad、Scala 的 `given`）、"类型化协程"（如代数效果处理器）和"语言原语"（如 `const` 关键字限制）被视为三个独立领域。Wuyts 论证它们是**同一枚硬币的三面**——效果系统提供了一个统一的理论框架，让这三种机制可以被一致地推理和组合。[来源: [Yoshua Wuyts — "Why Effects?" (2026-05)](https://blog.yoshuawuyts.com/why-effects/)]
+
+### 为什么 Rust 特别需要统一效果系统
+
+Rust 当前有 2 个稳定内置效果（`async`、`const`）和 2 个不稳定内置效果（`try`/`gen`）。但随着语言演进，Rust 需要能够表达更多保证：
+
+| 未来效果 | 含义 | 应用场景 |
+|:---|:---|:---|
+| **no-panic** (`!panic`) | 函数保证不 unwind | 嵌入式、实时系统、FFI 边界 |
+| **no-divergence** (`!div`) | 函数保证终止 | 形式化验证、安全关键系统 |
+| **deterministic** (`!ndet`) | 函数保证确定性 | 可重现构建、测试、密码学 |
+| **no-io** (`!io`) | 函数不调用主机 API | 沙箱、WASM、无操作系统环境 |
+
+> **关键洞察**: 单独处理一两个效果是可以接受的（如今天的 `async fn`），但随着效果数量增加，**函数着色问题（Function Coloring Problem）** 呈指数级恶化。没有统一抽象，每种新效果都需要完整的 stdlib 分叉（async-std vs std、fallible-std 等）。效果多态（effect polymorphism）是唯一的出路。[来源: [Yoshua Wuyts — "A Grand Vision for Rust" (2026-03)](https://blog.yoshuawuyts.com/a-grand-vision-for-rust/)]
+
+### 效果系统的最小公倍数
+
+```text
+无效果系统的世界：              有效果系统的世界：
+─────────────────────          ─────────────────────
+async fn foo() {}              fn foo() with async {}
+const fn bar() {}              fn bar() with const {}
+try fn baz() {}                fn baz() with throw(E) {}
+gen fn qux() {}                fn qux() with yield(T) {}
+
+N 种效果 → 2^N 种组合          N 种效果 → 1 种泛型机制
+(async+const, async+try,       fn f<eff Ef>(x: impl Fn() with Ef)
+ const+try, async+const+try...)   → 效果作为泛型参数
+```
+
+> **认知功能**: 此对比揭示效果系统的核心价值——不是添加新能力，而是**消除已有能力的组合爆炸**。`AsyncFn` trait（1.85 stable）是这一原则的原型验证：一个 trait 同时覆盖 sync 和 async 闭包，无需两个版本。[来源: [Yoshua Wuyts — "Why Effects?" (2026-05)](https://blog.yoshuawuyts.com/why-effects/)] · [来源: [Rust Keyword Generics Initiative](https://github.com/rust-lang/keyword-generics-initiative)]
 
 ---
 
@@ -172,6 +250,142 @@ Rust 的 effect system 并非凭空产生，它延续了编程语言理论中近
 
 ---
 
+## 一之二、开放与封闭效应系统（Open vs Closed Effect Systems）
+
+> **[来源: Yoshua Wuyts — "Open and Closed Effect Systems" (2025-05)](https://blog.yoshuawuyts.com/open-and-closed-effect-systems/)** ✅
+
+效果系统按"效果集合是否可由用户扩展"分为**开放（open）**和**封闭（closed）**两类。这是 Rust 效果系统设计的根本决策点。
+
+### 分类矩阵
+
+| 维度 | 开放效应系统 | 封闭效应系统 |
+|:---|:---|:---|
+| **效果来源** | 用户可定义新效果 | 仅语言内置效果 |
+| **效果集合** | 无界（unbounded） | 有界（bounded） |
+| **代表语言** | Koka, Eff, Flix, OCaml 5 | Java（checked exceptions）, Rust（方向） |
+| **类型系统复杂度** | 高（需支持用户定义的效果签名） | 中（固定效果集，可硬编码规则） |
+| **编译器实现难度** | 高（效果签名解析、行多态子类型） | 中-低（效果为枚举或标记集合） |
+| **表达能力** | 强（任意代数效果） | 受限（仅语言设计者预定义的效果） |
+| **向后兼容性** | 难（新效果可能改变现有代码含义） | 易（新效果作为语言版本升级） |
+
+### Rust 选择封闭效应系统
+
+Yoshua Wuyts 在 2025 年 5 月的文章中明确提出：**Rust 将选择封闭效应系统**。这不是技术能力的限制，而是工程哲学的抉择：
+
+```text
+Rust 封闭效应系统的设计约束：
+─────────────────────────────────────────
+1. 效果由语言团队定义，用户不可自定义
+2. 效果集合有界：async, const, try/throw, gen/yield, 以及未来可能的 no-panic, no-div 等
+3. 组合规则可硬编码（如 async + try → Future<Output = Result<T, E>>）
+4. 不引入运行时效果处理器栈（保持零成本抽象）
+5. 效果作为编译期标记，不生成运行时元数据
+```
+
+> **关键洞察**: 开放系统（如 Koka）允许用户定义 `effect State { get(): S; put(s: S): () }`，编译器生成效果处理器调用。封闭系统（如 Rust 方向）只允许使用语言预定义的效果，效果组合规则由编译器内置。Rust 的选择意味着：**效果系统是关于"追踪"而非"处理"**——Rust 不提供 `handle` 表达式拦截效果，只保证效果在类型签名中显式传播。[来源: [Yoshua Wuyts — "Open and Closed Effect Systems" (2025-05)](https://blog.yoshuawuyts.com/open-and-closed-effect-systems/)]
+
+### 为什么 Rust 不能是开放的？
+
+| 开放系统的假设 | Rust 的现实约束 |
+|:---|:---|
+| 效果处理器可在运行时动态组合 | Rust 拒绝运行时开销（handler 栈、动态分派） |
+| 用户定义效果需编译器插件机制 | Rust 编译器架构不支持用户扩展类型系统核心 |
+| 行多态子类型需复杂类型推断 | Rust 已有生命周期推断，再加效果行推断会爆炸 |
+| 效果抽象边界模糊 | Rust 强调零成本抽象，任何运行时成本都需显式 opt-in |
+
+> **重要澄清**: 封闭 ≠ 固定不变。Rust 的封闭效应系统可以随语言版本扩展新效果（如 Edition 2027 可能引入 `no-panic`）。但用户不能在自己的 crate 中定义新效果——这与 Rust 中用户不能定义新关键字、新运算符的约束一致。[来源: [Yoshua Wuyts — "Open and Closed Effect Systems" (2025-05)](https://blog.yoshuawuyts.com/open-and-closed-effect-systems/)]
+
+---
+
+## 一之三、Fallibility Effect：可失败性的语法设计
+
+> **[来源: Yoshua Wuyts — "Syntactic Musings on the Fallibility Effect" (2025-12)](https://blog.yoshuawuyts.com/syntactic-musings-on-the-fallibility-effect/)** ✅
+
+"Fallibility"（可失败性）是 Rust 效果系统中最重要的效果之一——它回答"这个函数可能失败吗？"的问题。当前 Rust 通过 `Result<T, E>` + `?` 运算符表达可失败性，但这是**类型承载**而非**效果标记**。Wuyts 在 2025 年 12 月的文章中系统分析了将可失败性提升为真正效果的语法路径。
+
+### 当前问题：`Result` 是类型，不是效果
+
+```rust
+// 当前 Rust：可失败性编码在返回类型中
+fn read_file(path: &str) -> Result<String, io::Error> { ... }
+
+// 问题 1: 泛化困难
+// 如果我想写一个既适用于 Result 函数、又适用于 "纯" 函数的泛型：
+fn map<F, T, U>(f: F, input: T) -> U
+where
+    F: Fn(T) -> U,  // 这无法涵盖 Fn(T) -> Result<U, E>
+{ ... }
+
+// 问题 2: 组合爆炸
+// async + Result → async fn -> Result<T, E>
+// gen + Result → gen fn -> Result<T, E>
+// 每种组合都需要独立语法
+```
+
+### `throws` 效果：从类型到效果的跃迁
+
+Wuyts 提出借鉴 Java/Swift 的 `throws` 命名，但赋予其效果语义：
+
+```rust
+// 当前（不稳定 try fn）
+try fn foo() -> i32 throws Error { ... }
+
+// 提议的方向：throws 作为效果
+fn foo() -> i32 with throw(Error) { ... }
+
+// 甚至更进一步：throw 作为动词（效果操作）
+fn foo() -> i32 with throw { ... }
+```
+
+| 语法变体 | 来源 | 状态 |
+|:---|:---|:---|
+| `try fn foo() -> Result<T, E>` | Rust nightly | 不稳定，可能废弃 |
+| `fn foo() -> T throws E` | Java/Swift 风格 | Wuyts 2025 提议方向 |
+| `fn foo() -> T with throw(E)` | With-clauses 框架 | Wuyts 2026 统一符号 |
+| `fn foo() -> T with throw` | 默认错误类型（`!`） | 最简形式 |
+
+### Abstract vs Concrete Fallibility
+
+Wuyts 区分了两种可失败性：
+
+```text
+Concrete Fallibility（具体可失败性）:
+────────────────────────────────────
+函数知道它可能以什么错误失败
+例: fn read() -> i32 with throw(io::Error)
+    → 失败类型是具体的 io::Error
+
+Abstract Fallibility（抽象可失败性）:
+─────────────────────────────────────
+函数知道自己可能失败，但不指定错误类型
+例: fn parse<T>() -> T with throw
+    → 错误类型由调用者或实现决定
+    → 类似于泛型参数：fn parse<T, E>() -> Result<T, E>
+```
+
+> **关键洞察**: `throw` 作为效果操作（类似 `await`、`yield`）比 `throws` 作为效果类型更符合 Rust 的设计哲学。原因在于：大多数效果语言使用"名词-动词"命名（效果名是名词如 `Exception`，操作是动词如 `throw`），但对于基于闭包的语法，仅使用动词更自然。这还能减少关键字保留：`throw` 替代 `yeet` + `async` + `try` + `gen`，总体减少一个保留关键字。[来源: [Yoshua Wuyts — "Syntactic Musings on the Fallibility Effect" (2025-12)](https://blog.yoshuawuyts.com/syntactic-musings-on-the-fallibility-effect/)] · [来源: [Yoshua Wuyts — "An Effect Notation Based on With-Clauses and Blocks" (2026-03)](https://blog.yoshuawuyts.com/a-with-based-effect-notation/)]
+
+### `.do`：通用效果传播
+
+```rust
+// 当前：每个效果有自己的传播语法
+async:  .await
+try:    ?
+gen:    yield / for..in
+
+// 未来可能的方向：.do 统一传播
+fn foo<F, eff Ef>(f: F) -> i32
+where
+    F: FnOnce() -> i32 with Ef,
+with Ef {
+    f().do;  // 根据 Ef 的具体效果，插入 .await / ? / yield 等
+}
+```
+
+> **认知功能**: `.do` 的设计哲学是——效果传播（propagation）是通用的，但效果创建（create）和消费（consume）必须特定于效果。`?` 可能返回错误，`.await` 可能不恢复（async cancellation），`yield` 可能结束迭代——它们的共同点是"调用点之后函数可能不继续执行"。`.do` 捕获这一共性。[来源: [Yoshua Wuyts — "An Effect Notation Based on With-Clauses and Blocks" (2026-03)](https://blog.yoshuawuyts.com/a-with-based-effect-notation/)]
+
+---
+
 ## 二、Rust 中的现有 Effect 表达
 >
 >
@@ -185,7 +399,7 @@ Rust 尚未引入统一的 `effect` 关键字，但**已经通过不同机制实
 |:---|:---|:---|:---|:---|
 | **异步** | `async fn` | 可能挂起，返回 `Future` | 关键字 + `Future` trait | `AsyncFn` trait (1.85+) |
 | **Unsafe** | `unsafe fn` | 可能违反 safety invariant | 关键字 + 调用者义务 | ❌ 无多态 |
-| **常量** | `const fn` | 编译期可求值 | 关键字 + MIR const eval | `~const Trait` (unstable) |
+| **常量** | `const fn` | 编译期可求值 | 关键字 + MIR const eval | `~const Trait` (unstable, **已废弃方向**) |
 | **异常** | `Result<T, E>` + `?` | 可能短路/失败 | 类型承载 + `Try` trait | `?` 自动传播 |
 | **泛型约束** | `where T: Send` | 线程安全约束 | Trait bound | 泛型参数多态 |
 
@@ -246,6 +460,8 @@ const {}            // always-const：强制编译期求值
 ```
 
 `const fn` 的"maybe-const"语义正是 effect generics 的核心机制——函数本身不限制调用上下文的效果，效果由调用点决定。这也是为什么 const 能够逐步引入 stdlib 而不破坏向后兼容：**`const fn` 在编译期上下文中自动获得 `const` 效果，在运行期上下文中效果为空集**。
+
+> ⚠️ **语法演进声明**: `~const Trait` bound（nightly 不稳定语法）是向效果泛型探索的**历史步骤**，但**不是最终方向**。Yoshua Wuyts 在 2026 年的 with-clauses 提案中已明确将 `~const` 视为将被 `eff`/`with` 新语法取代的过渡方案。Const trait 的核心语义（编译期效果追踪）将持续演进，但 `~const` 关键字本身可能不会在稳定 Rust 中出现。
 
 > **关键洞察**: Const trait 长期 unstable 的根本原因不是语法设计，而是 compiler 需要重构 const-checking 从 MIR 层上移至 HIR 层，使其可泛化到更多 effects。Rust Project Goals 2025H1 正在推进这一重构。
 
@@ -356,6 +572,109 @@ where
 ```
 
 > **关键洞察**: `AsyncFn` 没有引入完整的 effect 变量语法，而是通过 trait 系统模拟了效果多态。这是 Rust "用类型系统解决问题"设计哲学的延续——不添加新语法，而是用已有机制（trait、关联类型、HRTB）表达新概念。
+
+### 2.4 With-Clauses：统一效果语法的设计提案
+
+> **[来源: Yoshua Wuyts — "An Effect Notation Based on With-Clauses and Blocks" (2026-03)](https://blog.yoshuawuyts.com/a-with-based-effect-notation/)** ✅
+
+2026 年 3 月，Wuyts 提出了目前最完整的 Rust 效果语法提案，核心由三个新关键字组成：`eff`（效果定义/泛型）、`with`（效果子句）、`.do`（效果传播）。
+
+#### 核心语法：`with`-clauses
+
+```rust
+// 效果别名：抽象重复的效果签名
+eff Alias = async + emplace;
+
+// 函数：效果从函数前缀移到 with 子句
+fn foo() -> i32 { .. }                         // 空效果集（total）
+fn foo() -> i32 with async { .. }              // 单一效果
+fn foo() -> i32 with async + emplace { .. }    // 多效果组合
+fn foo() -> i32 with Alias { .. }              // 别名引用
+
+// 闭包：消除 async || {} vs || async {} 的歧义
+let foo = || with async { .. };               // with 统一语法
+
+// 块
+let x = with async { .. };
+
+// trait impl
+impl Foo with async for Bar { .. }
+```
+
+> **关键洞察**: `with`-clauses 消除了当前 Rust 中效果语法的碎片化——`async fn`、`const fn`、`try fn`、`gen fn` 都是前缀形式，组合时变成 `pub const placing try gen fn foo() {}` 的噩梦。`with` 将所有效果统一到一个位置，语法上更清晰，且为任意数量的效果组合提供空间。[来源: [Yoshua Wuyts — "An Effect Notation Based on With-Clauses and Blocks" (2026-03)](https://blog.yoshuawuyts.com/a-with-based-effect-notation/)]
+
+#### 效果泛型：`eff` 关键字
+
+```rust
+// 函数对效果本身泛型
+fn foo<eff Ef>() -> i32 with Ef { .. }
+
+// 参数携带效果
+fn foo<eff Ef>(x: impl Foo with Ef) { .. }
+
+// 数据类型对效果泛型
+struct Foo<eff Ef> { .. }
+impl<eff Ef> Foo with Ef { .. }
+
+// 关联效果（类比关联类型）
+impl Foo for Bar { eff Ef = async; }
+```
+
+#### 效果代数：集合操作
+
+效果不是简单的标记，而是支持集合代数操作：
+
+| 操作 | 语法 | 含义 |
+|:---|:---|:---|
+| **空集** | `fn foo() {}` | 无任何额外效果（total） |
+| **并集** | `Ef3: Ef1 + Ef2` | 合并两个效果集，设下界 |
+| **排除** | `Ef: !Block` | 从集合中排除特定效果，设上界 |
+| **互斥** | `Ef2: !Ef1` | 两个效果集无交集 |
+
+```rust
+// 排除效果：函数保证永不阻塞
+fn on_mouse_pressed<F, eff Ef>(listener: F)
+where
+    F: FnOnce(MouseEvent) with Ef,
+    Ef: !Block  // F 可以有任意效果，除了 Block
+{ .. }
+
+// 互斥效果：两个闭包不能共享除 Network 外的效果
+fn par<A, B, F, G, eff Ef1, eff Ef2>(f: F, g: G)
+where
+    F: FnOnce(A) -> B with Ef1,
+    G: FnOnce(A) -> B with Ef2,
+    Ef1: Network,
+    Ef2: !Ef1 + Network,
+{ .. }
+```
+
+> **关键洞察**: 效果代数直接借鉴了 Flix 团队的 "Programming with Effect Exclusion"（ICFP 2023）论文。Rust 的 `where` 子句除了约束类型变量，还可以约束效果变量。这保持了 Rust 类型系统的统一感——`where` 是约束的统一入口，无论约束的是类型还是效果。[来源: M. Lutze et al., "Programming with Effect Exclusion", ICFP 2023] · [来源: [Yoshua Wuyts — "An Effect Notation Based on With-Clauses and Blocks" (2026-03)](https://blog.yoshuawuyts.com/a-with-based-effect-notation/)]
+
+#### 效果别名与 stdlib 分层
+
+效果别名使 stdlib 分层可以精确定义：
+
+```rust
+// 标准库可能提供的效果别名
+pub eff Pure = panic + diverge;       // 等价于今天的 `const fn`（允许 panic + 无限循环）
+pub eff Core = Pure + static;         // 等价于 `#![no_std]` + `core`
+pub eff Alloc = Core + heap;          // 等价于 `extern crate alloc`
+pub eff Std = Alloc + Host;           // 等价于标准 `std`
+```
+
+```rust
+// 使用别名
+fn foo() {}              // 默认 total（无任何效果）
+fn foo() with Pure {}    // 等价于今天的 `const fn`
+fn foo() with Std {}     // 等价于今天的普通 `std` 函数
+```
+
+> **关键洞察**: 如果 Rust 假设 totality 为默认（而非今天的 "隐式 std 能力"），约 70% 的新代码（据 Koka 经验）将是无效果（total）的。对于剩余的 30%，模块级效果声明 `pub mod bar with Std { ... }` 或文件级 `mod self with Std;` 可以消除重复。这与当前 `#![no_std]` / `extern crate alloc` 的设计哲学一致，但更加统一和显式。[来源: [Yoshua Wuyts — "An Effect Notation Based on With-Clauses and Blocks" (2026-03)](https://blog.yoshuawuyts.com/a-with-based-effect-notation/)]
+
+#### 当前状态：设计提案，非官方路线图
+
+> ⚠️ **重要声明**: `with`-clauses 语法是 Yoshua Wuyts 的个人设计提案，**不是 Rust 语言团队的官方决策**。Rust 语言团队尚未就统一效果语法达成一致。此提案旨在展示"一条合理的路径存在"，而非呼吁立即实施。正如 Wuyts 所言："如果有人告诉我这是第一个他们不主动讨厌的效果符号，那已经算是成功了。"
 
 ---
 
@@ -988,26 +1307,74 @@ Rust 生命周期:  fn foo<'a>(x: &'a T)       // 编译期生命周期
 
 ### 6.3 Rust 效果系统的未来演进
 
+> **[来源: Yoshua Wuyts — "A Grand Vision for Rust" (2026-03)](https://blog.yoshuawuyts.com/a-grand-vision-for-rust/)** ✅
+
+Yoshua Wuyts 在 2026 年 3 月将 **effects**、**substructural types** 和 **refinement types** 并列为 Rust 2030+ 最具潜力的三大方向。这一愿景超越了单一特性，指向 Rust 成为"最安全的工业级生产语言"的长期目标。
+
 ```text
-Rust 效果演进路线（推测）:
+Rust 效果演进路线（推测，基于 Yoshua Wuyts 2025-2026 输出）：
 
-当前（Rust 1.95）:
-  async fn     → Future 状态机（效果: 异步挂起）
-  const fn     → 编译期求值（效果: 无副作用）
-  unsafe fn    → 放弃安全保证（效果: 未定义行为风险）
-  fn -> Result → 可失败（效果: 异常传播）
-  gen blocks   → 生成器（效果: 惰性求值）
+当前（Rust 1.96 / Edition 2024）:
+  async fn     → Future 状态机（效果: 异步挂起）[稳定]
+  const fn     → 编译期求值（效果: 无副作用）[稳定]
+  unsafe fn    → 放弃安全保证（效果: 未定义行为风险）[稳定]
+  fn -> Result → 可失败（效果: 异常传播）[稳定]
+  gen blocks   → 生成器（效果: 惰性求值）[不稳定]
+  ~const Trait → const 效果多态 [nightly, 已废弃方向]
 
-近期（Rust 2027+）:
-  AsyncFn trait  → 效果多态的泛型（fn/afn 统一）
-  gen<yield>     → 统一生成器和协程效果
-  const trait    → trait 的 const 版本（效果约束）
+近期（Rust 2027-2028 / Edition 2027?）:
+  AsyncFn trait      → 效果多态的泛型（fn/afn 统一）[1.85+ stable]
+  gen<yield>         → 统一生成器和协程效果 [推进中]
+  const trait        → trait 的 const 版本（效果约束）[Rust Project Goals 2025H1]
+  throw/throws       → fallibility 作为真正效果 [提案阶段]
+  with-clauses       → 统一效果语法框架 [设计提案]
 
-远期（Rust 2030+）:
-  effect 关键字  → 统一效果系统（? 高度推测性）
-  ```
+中期（Rust 2029-2030）:
+  effect aliases     → `eff Pure = panic + diverge;` 等标准别名
+  no-panic effect    → 函数保证不 unwind
+  no-diverge effect  → 函数保证终止
+  deterministic      → 函数保证确定性
+  no-io effect       → 函数不调用主机 API
+  .do propagation    → 通用效果传播关键字
 
-> **关键洞察**: Rust 语言团队在 2024 年的效果系统讨论中明确表示，**短期内不会引入统一的 `effect` 关键字**，而是通过 trait 系统和关键字扩展逐步演化。这与 Koka 的"从零设计完整效果系统"路径完全不同——Rust 选择增量演进，保持向后兼容。这种工程哲学的差异反映了 Rust 的约束：Koka 是研究语言（可自由实验），Rust 是工业语言（稳定性优先）。[来源: Rust Lang Team Blog 2024] ✅
+远期（Rust 2030+ / Edition 2030?）:
+  统一 effect 语法   → `fn foo() -> T with async + throw(E) {}`
+  封闭效应系统成熟  → 语言内置 bounded 效果集，硬编码组合规则
+  与 substructural 类型协同 → `!Forget` 线性类型 + `!Move` 有序类型
+  与 refinement 类型协同 → pattern types (`usize is 1..`) + view types
+```
+
+#### 三元愿景：Effects × Substructural Types × Refinement Types
+
+Wuyts 明确将这三个方向视为**相互独立但可协同**的长期目标：
+
+| 方向 | 核心概念 | 当前状态 | Rust 目标 |
+|:---|:---|:---|:---|
+| **Effects** | 追踪计算的副作用（async/const/throw/...） | `AsyncFn` stable; `with`-clauses 提案 | 统一效果语法，消除函数着色 |
+| **Substructural Types** | 控制值的使用次数和顺序 | `Move`/`Forget` traits 早期设计 | `!Forget` → 线性类型（无泄漏）; `!Move` → 有序类型（稳定地址） |
+| **Refinement Types** | 为现有类型附加额外约束 | Pattern types 实验性实现 | `usize is 1..` 替代 `NonZeroUsize`; view types 扩展借用检查 |
+
+```text
+Substructural Types 谱系（Rust 方向）：
+─────────────────────────────────────────
+Affine types  (Rust 当前): 最多使用一次 → 消除 use-after-free
+     ↓
+Linear types  (!Forget):   恰好使用一次 → 消除 memory leaks
+     ↓
+Ordered types (!Move):     恰好一次，按序 → 稳定内存地址
+```
+
+```rust
+// Refinement types 愿景（pattern types）
+type NonZeroUsize = usize is 1..;  // 用模式精化类型，自动获得 niche 优化
+
+// View types 愿景
+type PointView = &mut Point { x, y };  // 同一类型的不相交字段可同时可变借用
+```
+
+> **关键洞察**: 这三个方向共享一个深层目标——**让 Rust 的静态保证更强**。当前 Rust 的 borrow checker 保证时间安全（temporal memory safety），但运行时的 bounds check 仍可能失败（空间安全问题）。Refinement types 可以将 bounds check 提升到编译期。Substructural types 可以消除资源泄漏。Effects 可以消除隐式副作用。三者合一是 Rust 向 Ada/SPARK 级别的形式化保证迈进的路径——但保持 Rust 的工程可用性。[来源: [Yoshua Wuyts — "A Grand Vision for Rust" (2026-03)](https://blog.yoshuawuyts.com/a-grand-vision-for-rust/)]
+
+> **工程现实**: Rust 语言团队在 2024 年的效果系统讨论中明确表示，**短期内不会引入统一的 `effect` 关键字**，而是通过 trait 系统和关键字扩展逐步演化。这与 Koka 的"从零设计完整效果系统"路径完全不同——Rust 选择增量演进，保持向后兼容。这种工程哲学的差异反映了 Rust 的约束：Koka 是研究语言（可自由实验），Rust 是工业语言（稳定性优先）。[来源: Rust Lang Team Blog 2024] ✅
 
 ---
 
@@ -1025,10 +1392,10 @@ Rust 效果演进路线（推测）:
 >
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
-**文档版本**: 1.1
+**文档版本**: 1.3
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-05-22
-**状态**: ✅ 权威来源对齐完成 (Batch 9)
+**最后更新**: 2026-06-02
+**状态**: ✅ 权威来源对齐完成 (Batch 10) — Yoshua Wuyts 2025-2026 核心输出全面整合
 
 ---
 

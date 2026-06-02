@@ -506,7 +506,7 @@
       "layer": "L0",
       "title": "全局概念索引（Concept Index）",
       "positioning": "本文件是 `concept/` 知识体系的**倒排索引**，从概念名称快速定位到定义文件、交叉引用位置、Bloom 认知层级和语义链接关系。",
-      "line_count": 721,
+      "line_count": 722,
       "theorem_chains": [
         {
           "text": "| **定理一致性矩阵** | 27 | 每文件的 ⟹ 推理链表格 | 🔷 元结构 |",
@@ -568,6 +568,7 @@
         "../06_ecosystem/47_formal_verification_tools.md",
         "../07_future/02_formal_methods.md",
         "../07_future/03_evolution.md",
+        "../07_future/04_effects_system.md",
         "../07_future/29_ebpf_rust.md",
         "./career_landscape.md",
         "./comprehensive_rust_mapping.md",
@@ -578,7 +579,7 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 315,
+      "matrix_rows": 316,
       "pre_post": {
         "pre": [],
         "post": []
@@ -33368,7 +33369,7 @@
       "layer": "L7",
       "title": "Effects System: Concept Pre-study（效果系统：概念预研）",
       "positioning": "本文件是 Rust 效果系统（Effect System）的**概念预研**，跟踪类型系统向显式效果追踪演进的理论动向与工程实践。内容具有推测性，随语言团队决策动态更新。",
-      "line_count": 1074,
+      "line_count": 1441,
       "theorem_chains": [
         {
           "text": "> **⟹ 推理链**: EF1-EF3 证明 Rust **已经实现了效果的隐性追踪**，只是通过不同关键字而非统一语法。EF4 是**效果多态的原型**——证明统一语法在 trait 系统内可行。EF5 是**远期方向**，其最大障碍不是技术可行性，而是**向后兼容性**和**社区共识**。",
@@ -33401,6 +33402,24 @@
         }
       ],
       "code_blocks": [
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "// 当前 Rust：可失败性编码在返回类型中 fn read_file(path: &str) -> Result<String, io::Error> { ..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// 当前（不稳定 try fn） try fn foo() -> i32 throws Error { ... }  // 提议的方向：throws 作为效果..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "// 当前：每个效果有自己的传播语法 async:  .await try:    ? gen:    yield / for..in  // 未来可能的方向：..."
+        },
         {
           "flags": [],
           "lines": 11,
@@ -33440,6 +33459,36 @@
           "lines": 6,
           "should_fail": false,
           "code_preview": "// AsyncFn: \"我不关心这个闭包是否是 async，只要调用时我能 await 结果\" fn call_any<F, T>(f: F) -> impl..."
+        },
+        {
+          "flags": [],
+          "lines": 18,
+          "should_fail": false,
+          "code_preview": "// 效果别名：抽象重复的效果签名 eff Alias = async + emplace;  // 函数：效果从函数前缀移到 with 子句 fn foo()..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "// 函数对效果本身泛型 fn foo<eff Ef>() -> i32 with Ef { .. }  // 参数携带效果 fn foo<eff Ef>(x:..."
+        },
+        {
+          "flags": [],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "// 排除效果：函数保证永不阻塞 fn on_mouse_pressed<F, eff Ef>(listener: F) where     F: FnOnce..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// 标准库可能提供的效果别名 pub eff Pure = panic + diverge;       // 等价于今天的 `const fn`（允许 pa..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "// 使用别名 fn foo() {}              // 默认 total（无任何效果） fn foo() with Pure {}    // ..."
         },
         {
           "flags": [
@@ -33504,6 +33553,12 @@
           "lines": 15,
           "should_fail": false,
           "code_preview": "async fn bad_capture(data: &mut Vec<i32>) {     let first = &data[0];     some_a..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// Refinement types 愿景（pattern types） type NonZeroUsize = usize is 1..;  // 用模式精..."
         }
       ],
       "sources": [
@@ -33547,7 +33602,7 @@
       "transitions": 12,
       "has_cognitive_path": true,
       "mermaid_blocks": 4,
-      "matrix_rows": 109,
+      "matrix_rows": 141,
       "pre_post": {
         "pre": [
           "[Async](../03_advanced/02_async.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Type Theory](../04_formal/02_type_theory.md)",

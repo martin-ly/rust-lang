@@ -28,11 +28,12 @@
 /// 。
 /// ## 语法形式
 /// ## syntax
-/// ##
+/// ```text
 ///     cfg1 => expr1,
 ///     cfg2 => expr2,
 ///     _ => fallback_expr, // 可选默认分支
 ///     _ => fallback_expr, //
+/// ```
 ///
 /// ## Wikipedia 概念对齐
 /// - **Conditional Compilation**: 根据目标平台/特性选择不同代码路径

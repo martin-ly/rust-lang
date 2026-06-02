@@ -1,6 +1,6 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-06-02T18:07:36.906693+00:00
+> 生成时间: 2026-06-02T19:58:43.897934+00:00
 > 扫描文件数: 260
 
 ## 全局指标
@@ -11,8 +11,8 @@
 | 总定理链 (⟹) | 1232 | ≥270 | ✅ |
 | 总反命题 | 606 | ≥40 | ✅ |
 | 总 Mermaid 图 | 532 | ≥50 | ✅ |
-| 编译验证代码块 | 2630 | ≥150 | ✅ |
-| 定理矩阵总行 | 12570 | — | — |
+| 编译验证代码块 | 2639 | ≥150 | ✅ |
+| 定理矩阵总行 | 12603 | — | — |
 | 死链数量 | 0 | 0 | ✅ |
 | 反向推理 (⟸) | 60 | ≥50 | ✅ |
 | 模板化 ⟹ | 0 | 0 | ✅ |
@@ -113,7 +113,7 @@
 | concept\00_meta\competency_graph.md | L0 | 363 | 1 | 0 | 0 | 1 | 3 | 0 | 6 | ✅ | ❌ | ❌ |
 | concept\00_meta\comprehensive_rust_mapping.md | L0 | 188 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ |
 | concept\00_meta\concept_definition_decision_forest.md | L0 | 1073 | 3 | 0 | 0 | 1 | 10 | 0 | 6 | ✅ | ❌ | ❌ |
-| concept\00_meta\concept_index.md | L0 | 721 | 4 | 0 | 0 | 2 | 0 | 0 | 6 | ✅ | ❌ | ❌ |
+| concept\00_meta\concept_index.md | L0 | 722 | 4 | 0 | 0 | 2 | 0 | 0 | 6 | ✅ | ❌ | ❌ |
 | concept\00_meta\decidability_spectrum.md | L0 | 840 | 1 | 0 | 0 | 1 | 6 | 2 | 6 | ✅ | ❌ | ❌ |
 | concept\00_meta\expressiveness_multiview.md | L0 | 718 | 0 | 0 | 0 | 1 | 7 | 7 | 6 | ✅ | ❌ | ❌ |
 | concept\00_meta\fault_tree_analysis_collection.md | L0 | 725 | 1 | 0 | 0 | 1 | 7 | 0 | 6 | ✅ | ❌ | ❌ |
@@ -320,7 +320,7 @@
 | concept\07_future\01_ai_integration.md | L7 | 846 | 3 | 0 | 0 | 2 | 2 | 9 | 6 | ✅ | ✅ | ✅ |
 | concept\07_future\02_formal_methods.md | L7 | 1509 | 9 | 0 | 0 | 1 | 9 | 9 | 3 | ✅ | ✅ | ✅ |
 | concept\07_future\03_evolution.md | L7 | 1338 | 8 | 0 | 0 | 1 | 6 | 19 | 3 | ✅ | ✅ | ✅ |
-| concept\07_future\04_effects_system.md | L7 | 1074 | 6 | 0 | 0 | 1 | 4 | 14 | 12 | ✅ | ✅ | ✅ |
+| concept\07_future\04_effects_system.md | L7 | 1441 | 6 | 0 | 0 | 1 | 4 | 23 | 12 | ✅ | ✅ | ✅ |
 | concept\07_future\05_rust_version_tracking.md | L7 | 1224 | 6 | 0 | 0 | 1 | 3 | 6 | 12 | ✅ | ✅ | ✅ |
 | concept\07_future\07_mcdc_coverage_preview.md | L7 | 453 | 6 | 0 | 0 | 3 | 3 | 5 | 12 | ✅ | ✅ | ✅ |
 | concept\07_future\08_safety_tags_preview.md | L7 | 495 | 6 | 0 | 0 | 3 | 3 | 6 | 12 | ✅ | ✅ | ✅ |
