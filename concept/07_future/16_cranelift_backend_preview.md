@@ -520,3 +520,63 @@ fn main() {
 ### 反命题与边界
 
 > **反命题**: "Cranelift 后端预研：Rust 编译器的快速调试编译 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
+
+---
+
+## 可运行示例：使用 Cranelift 后端
+
+> **前提**: 需要 nightly Rust 工具链
+
+### 快速体验
+
+```bash
+# 安装 nightly
+rustup install nightly
+
+# 使用 Cranelift 后端编译当前项目
+RUSTFLAGS="-Zcodegen-backend=cranelift" cargo +nightly build
+
+# 或在 .cargo/config.toml 中持久化配置
+```
+
+```toml
+# .cargo/config.toml
+[unstable]
+codegen-backend = true
+
+[build]
+rustflags = ["-Zcodegen-backend=cranelift"]
+```
+
+### 性能对比实测
+
+```rust,ignore
+// 创建测试项目对比 LLVM vs Cranelift 编译时间
+// cargo new cranelift_benchmark && cd cranelift_benchmark
+
+use std::time::Instant;
+
+fn fib(n: u64) -> u64 {
+    match n {
+        0 => 0,
+        1 => 1,
+        _ => fib(n - 1) + fib(n - 2),
+    }
+}
+
+fn main() {
+    let start = Instant::now();
+    let result = fib(40);
+    let elapsed = start.elapsed();
+    println!("fib(40) = {} in {:?}", result, elapsed);
+}
+```
+
+**预期结果**（debug 模式，中型项目）：
+
+| 后端 | 编译时间 | 运行性能 |
+|:---|:---:|:---:|
+| LLVM | 100%（基准） | 100%（基准） |
+| Cranelift | ~75-80% | ~95-100%（debug） |
+
+> **关键洞察**: Cranelift 在 debug 模式下编译更快，但**不应在 release 模式使用**——LLVM 的优化能力远超 Cranelift。

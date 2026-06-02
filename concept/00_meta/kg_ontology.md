@@ -362,3 +362,4 @@ ex:Borrowing rdf:type ex:Concept ;
 ### 反命题与边界
 
 > **反命题**: "元层文档可以替代具体概念学习" —— 错误。Rust 知识体系知识图谱本体规范（Knowledge Graph Ontology） 提供的是导航与评估框架，不能替代对核心概念（L1-L5）的深入理解与实践。
+> **内容分级**: [综述级]

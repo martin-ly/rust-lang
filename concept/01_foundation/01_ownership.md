@@ -107,6 +107,12 @@
     - [Q5: 为什么 `&str` 作为函数参数比 `String` 更灵活？](#q5-为什么-str-作为函数参数比-string-更灵活)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [参考来源](#参考来源)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Move vs Copy（理解层）](#测验-1move-vs-copy理解层)
+    - [测验 2：所有权转移规则（应用层）](#测验-2所有权转移规则应用层)
+    - [测验 3：借用与所有权的关系（分析层）](#测验-3借用与所有权的关系分析层)
+    - [测验 4：Drop 语义（理解层）](#测验-4drop-语义理解层)
+    - [测验 5：反例分析（分析层）](#测验-5反例分析分析层)
 
 ## 一、权威定义（Definition）
 
@@ -1519,3 +1525,204 @@ fn greet_str(s: &str) { }
 > [来源: [Rust Reference — Ownership](https://doc.rust-lang.org/reference/ownership.html)]
 > [来源: [RustBelt: Logical Foundations](https://plv.mpi-sws.org/rustbelt/)]
 > [来源: [POPL 2018 — RustBelt](https://dl.acm.org/doi/10.1145/3158154)]
+
+---
+
+## 嵌入式测验（Embedded Quiz）
+
+> **说明**: 以下测验基于 Bloom 认知层级设计，覆盖记忆→理解→应用→分析。建议先独立完成，再展开答案对照。
+
+---
+
+### 测验 1：Move vs Copy（理解层）
+
+**题目**: 以下代码中，哪些变量在赋值后**仍然可用**？
+
+```rust
+let a = 5;
+let b = a;
+
+let s1 = String::from("hello");
+let s2 = s1;
+```
+
+- A. `a` 可用，`s1` 可用
+- B. `a` 可用，`s1` 不可用
+- C. `a` 不可用，`s1` 可用
+- D. `a` 不可用，`s1` 不可用
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+- `a = 5`：`i32` 实现 `Copy` trait，赋值时按位复制，`a` 仍然可用。
+- `s1 = String::from("hello")`：`String` 未实现 `Copy`，赋值时发生 **move**（所有权转移），`s1` 被置为未初始化状态，后续使用会导致编译错误 E0382。
+
+**核心规则**: 是否实现 `Copy` 决定了赋值语义是 copy 还是 move。
+</details>
+
+---
+
+### 测验 2：所有权转移规则（应用层）
+
+**题目**: 以下代码能否通过编译？如果不能，错误是什么？
+
+```rust
+fn take_ownership(s: String) {
+    println!("{}", s);
+}
+
+fn main() {
+    let s = String::from("hello");
+    take_ownership(s);
+    println!("{}", s);
+}
+```
+
+- A. 编译通过，输出 "hello" 两次
+- B. 编译失败，错误 E0382（use of moved value）
+- C. 编译失败，错误 E0499（cannot borrow mutable more than once）
+- D. 运行时 panic
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+- `take_ownership(s)` 将 `s` 的所有权 move 到函数参数中。
+- 函数返回后，`s` 在 `main` 中的作用域内已无效。
+- `println!("{}", s)` 尝试使用已 move 的变量，触发 **E0382**。
+
+**修复方案**: 改用借用 `take_ownership(s: &String)`，或使用 `.clone()` 保留原变量。
+</details>
+
+---
+
+### 测验 3：借用与所有权的关系（分析层）
+
+**题目**: 以下代码中，哪一行违反了 Rust 的借用规则？
+
+```rust
+let mut v = vec![1, 2, 3];
+let ref1 = &v;
+let ref2 = &v;
+let ref3 = &mut v;
+println!("{}", ref1[0]);
+```
+
+- A. `let ref1 = &v;`
+- B. `let ref2 = &v;`
+- C. `let ref3 = &mut v;`
+- D. `println!("{}", ref1[0]);`
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 C（或 D，取决于编译器版本）**。
+
+Rust 借用规则的核心是：
+
+1. 任意时刻，要么有 **一个可变借用**，要么有 **多个不可变借用**，二者不可共存。
+2. 借用的有效期从其声明点开始，到最后一次使用结束（NLL）。
+
+在较旧编译器中，`ref3 = &mut v` 与 `ref1`、`ref2` 的生命周期重叠，直接报错。
+在 Rust 1.63+（NLL 优化后），如果 `ref1` 在 `ref3` 之后不再使用，编译器可能允许。但此处 `println!("{}", ref1[0])` 在 `ref3` 之后使用 `ref1`，明确违反了规则。
+
+**正确修复**: 将 `println!` 移到 `ref3` 之前，或删除 `ref3`。
+</details>
+
+---
+
+### 测验 4：Drop 语义（理解层）
+
+**题目**: 以下代码的输出顺序是什么？
+
+```rust
+struct LoudDrop(&'static str);
+impl Drop for LoudDrop {
+    fn drop(&mut self) {
+        println!("Drop: {}", self.0);
+    }
+}
+
+fn main() {
+    let a = LoudDrop("a");
+    {
+        let b = LoudDrop("b");
+    }
+    println!("End");
+}
+```
+
+- A. `End` → `Drop: b` → `Drop: a`
+- B. `Drop: b` → `End` → `Drop: a`
+- C. `Drop: a` → `Drop: b` → `End`
+- D. `Drop: b` → `Drop: a` → `End`
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+Rust 的 Drop 遵循 **LIFO（后进先出）** 原则：
+
+1. `b` 在内部作用域中声明，作用域结束时（`}`）立即 drop。
+2. `End` 在 `b` 的作用域之后打印。
+3. `a` 在 `main` 函数结束时 drop。
+
+**输出顺序**: `Drop: b` → `End` → `Drop: a`
+
+这与栈的析构顺序一致，也是 RAII 的核心机制。
+</details>
+
+---
+
+### 测验 5：反例分析（分析层）
+
+**题目**: 以下代码试图实现"从函数返回部分数据"，为什么它无法编译？如何修复？
+
+```rust
+fn get_first_word(s: String) -> String {
+    let bytes = s.as_bytes();
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return String::from(&s[0..i]);
+        }
+    }
+    s
+}
+
+fn main() {
+    let s = String::from("hello world");
+    let word = get_first_word(s);
+    println!("original: {}", s);
+}
+```
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**问题**: `get_first_word(s)` move 了 `s` 的所有权，函数返回后 `s` 已无效，`println!("{}", s)` 触发 E0382。
+
+**根本原因**: 函数签名 `fn get_first_word(s: String) -> String` 按值接收并返回 `String`，全程转移所有权。
+
+**修复方案 1（借用）**:
+
+```rust
+fn get_first_word(s: &str) -> &str { ... }
+let word = get_first_word(&s); // s 仍有效
+```
+
+**修复方案 2（Clone）**:
+
+```rust
+let word = get_first_word(s.clone()); // s 仍有效
+```
+
+**最佳实践**: 优先使用借用（方案 1），避免不必要的所有权转移和内存分配。
+</details>
+
+---
+
+> **测验设计来源**: [Bloom Taxonomy 2001] · [Brown University Interactive Rust Book — Quiz Design](https://rust-book.cs.brown.edu/) · [Cognitive Load Theory — Sweller 1988]

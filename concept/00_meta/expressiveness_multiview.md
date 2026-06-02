@@ -5,7 +5,6 @@
 > **原则**: 不做"语法特性列表"，聚焦"每个理论视角下 Rust 的表达边界、与其他语言的等价性、以及形式化基础"。
 > **对齐来源**: [Rust Reference] · [Rust RFCs] · [RustBelt/Oxide] · [Felleisen 表达力理论] · [PL 语义学经典]
 > **对比语言**: Rust · C++ · Go · Haskell · OCaml · Erlang
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -715,3 +714,4 @@ graph TD
 ### 反命题与边界
 
 > **反命题**: "元层文档可以替代具体概念学习" —— 错误。Rust 语义表达力多视角深化（Multiview Expressiveness Analysis） 提供的是导航与评估框架，不能替代对核心概念（L1-L5）的深入理解与实践。
+> **内容分级**: [综述级]

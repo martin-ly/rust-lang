@@ -773,3 +773,4 @@ fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
 ### 反命题与边界
 
 > **反命题**: "元层文档可以替代具体概念学习" —— 错误。Rust 概念速查卡片（Quick Reference） 提供的是导航与评估框架，不能替代对核心概念（L1-L5）的深入理解与实践。
+> **内容分级**: [综述级]

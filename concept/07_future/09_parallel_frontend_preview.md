@@ -479,3 +479,52 @@ fn main() {}
 ### 反命题与边界
 
 > **反命题**: "并行 前端编译预研：Rust 编译器 的多核扩展 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
+
+---
+
+## 可运行示例：启用并行前端
+
+> **前提**: 需要 nightly Rust 工具链，建议 8+ 核 CPU
+
+### 快速体验
+
+```bash
+# 使用 8 线程并行前端编译
+RUSTFLAGS="-Zthreads=8" cargo +nightly build
+
+# 或在 .cargo/config.toml 中配置
+```
+
+```toml
+# .cargo/config.toml
+[build]
+rustflags = ["-Zthreads=8"]
+```
+
+### 实测效果
+
+```bash
+# 对比单线程 vs 多线程前端编译时间
+time RUSTFLAGS="" cargo +nightly build        # 单线程基准
+time RUSTFLAGS="-Zthreads=8" cargo +nightly build  # 8 线程并行
+```
+
+**预期提速**（基于 Rust Project Goals 数据）：
+
+| CPU 核心数 | 前端编译提速 |
+|:---:|:---:|
+| 4 核 | ~15% |
+| 8 核 | ~20-25% |
+| 16+ 核 | ~25-30% |
+
+### 与 Cranelift 的协同
+
+并行前端 + Cranelift 后端是 Rust 编译时间优化的**黄金组合**：
+
+```bash
+RUSTFLAGS="-Zthreads=8 -Zcodegen-backend=cranelift" cargo +nightly build
+```
+
+**预期效果**: debug 编译时间可减少 **40-50%**（对比单线程 LLVM）。
+
+> **限制**: 目前并行前端不适用于增量编译的某些路径；首次编译收益最大。

@@ -114,6 +114,12 @@
     - [Q5: 以下代码的编译结果是什么？](#q5-以下代码的编译结果是什么)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [参考来源](#参考来源)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：借用规则基础（理解层）](#测验-1借用规则基础理解层)
+    - [测验 2：Reborrow 安全（应用层）](#测验-2reborrow-安全应用层)
+    - [测验 3：Two-Phase Borrow（分析层）](#测验-3two-phase-borrow分析层)
+    - [测验 4：借用与所有权转移（应用层）](#测验-4借用与所有权转移应用层)
+    - [测验 5：Split Borrow（分析层）](#测验-5split-borrow分析层)
 
 ## 一、权威定义（Definition）
 
@@ -1631,3 +1637,158 @@ data.push(4);            // ✅ 现在可以修改
 > [来源: [Rust Reference — References](https://doc.rust-lang.org/reference/types/pointer.html#reference-type)]
 > [来源: [Stacked Borrows (Miri)](https://github.com/rust-lang/unsafe-code-guidelines/blob/master/wip/stacked-borrows.md)]
 > [来源: [Tree Borrows](https://perso.crans.org/vanille/treebor/)]
+
+---
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：借用规则基础（理解层）
+
+以下代码能否编译？
+
+```rust
+let mut x = 5;
+let r1 = &x;
+let r2 = &mut x;
+println!("{}", r1);
+```
+
+- A. 编译通过
+- B. 编译失败：不能同时存在不可变借用和可变借用
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 编译失败**。
+
+Rust 借用规则：任意时刻，要么有一个可变借用，要么有多个不可变借用，二者不可共存。此处 `r1 = &x` 和 `r2 = &mut x` 的生命周期重叠，且 `r1` 在 `r2` 之后仍被使用（`println!`），违反规则。
+</details>
+
+---
+
+### 测验 2：Reborrow 安全（应用层）
+
+以下代码输出什么？
+
+```rust
+fn main() {
+    let mut s = String::from("hello");
+    let r1 = &mut s;
+    let r2 = &mut *r1;
+    r2.push_str(" world");
+    println!("{}", s);
+}
+```
+
+- A. 编译失败
+- B. `hello`
+- C. `hello world`
+- D. 运行时 panic
+
+<details>
+<summary>✅ 答案</summary>
+
+**C. `hello world`**。
+
+`r2 = &mut *r1` 是对 `r1` 的 **reborrow**。`r1` 在 `r2` 活跃期间被"冻结"，不能直接使用，但底层数据仍可通过 `r2` 修改。`r2` 作用域结束后，`r1` 恢复可用。最终 `s` 被修改为 `"hello world"`。
+</details>
+
+---
+
+### 测验 3：Two-Phase Borrow（分析层）
+
+以下代码能否编译？为什么？
+
+```rust
+let mut v = vec![1, 2, 3];
+v.push(v.len());
+```
+
+- A. 编译失败：`v.len()` 不可变借用与 `v.push()` 可变借用冲突
+- B. 编译通过：Two-Phase Borrow 允许
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 编译通过**。
+
+Rust 编译器使用 **Two-Phase Borrow** 优化：
+
+1. `v.push(...)` 首先获取 `v` 的"保留"（reserved）可变借用。
+2. 计算参数 `v.len()` 时，获取 `v` 的不可变借用。
+3. 不可变借用结束后，保留提升为完整可变借用，执行 `push`。
+
+这是 Rust 2018+ 的编译器优化，允许在方法调用参数中短暂共存不可变借用。
+</details>
+
+---
+
+### 测验 4：借用与所有权转移（应用层）
+
+以下代码的错误是什么？如何修复？
+
+```rust
+fn longest(x: &str, y: &str) -> &str {
+    if x.len() > y.len() { x } else { y }
+}
+
+fn main() {
+    let s1 = String::from("hello");
+    let result;
+    {
+        let s2 = String::from("worldwide");
+        result = longest(&s1, &s2);
+    }
+    println!("{}", result);
+}
+```
+
+<details>
+<summary>✅ 答案</summary>
+
+**错误**: `result` 的生命周期与 `s2` 绑定，但 `s2` 在内部作用域结束时被 drop，`result` 成为悬垂引用。
+
+编译器报错：`s2 does not live long enough`（E0597）。
+
+**修复**: 确保返回的引用只指向活得足够长的数据：
+
+```rust
+fn main() {
+    let s1 = String::from("hello");
+    let s2 = String::from("worldwide");
+    let result = longest(&s1, &s2);
+    println!("{}", result);
+}
+```
+
+</details>
+
+---
+
+### 测验 5：Split Borrow（分析层）
+
+以下代码能否编译？为什么？
+
+```rust
+struct Point { x: i32, y: i32 }
+
+fn main() {
+    let mut p = Point { x: 0, y: 0 };
+    let x = &mut p.x;
+    let y = &mut p.y;
+    *x += 1;
+    *y += 2;
+    println!("{}, {}", p.x, p.y);
+}
+```
+
+- A. 编译失败：不能同时可变借用 `p` 的两个字段
+- B. 编译通过：Split Borrow 允许对不相交字段的独立借用
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 编译通过**。
+
+Rust 支持 **Split Borrow**（字段级借用分析）：编译器能识别 `p.x` 和 `p.y` 是不相交的内存位置，允许同时获取它们的可变借用。这是 Rust 借用检查器的重要优化，使得结构体字段可以独立修改而无需 `Cell` 或 `Mutex`。
+</details>

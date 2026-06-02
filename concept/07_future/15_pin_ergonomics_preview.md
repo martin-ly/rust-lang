@@ -1,0 +1,218 @@
+# Pin Ergonomics 与 Reborrow Traits 预研：超越 `Pin::as_mut`
+
+> **状态**: 🧪 Nightly 实验性（MCP 已通过，RFC 推进中）
+> **跟踪版本**: nightly 1.98.0 (2026-05-31)
+> **预计稳定**: 2027+（需等待 RFC 完成及 ecosystem 适配）
+>
+> **受众**: [专家]
+> **内容分级**: [实验级]
+> **Bloom 层级**: 分析 → 评价
+>
+> **定位**: 探讨 Rust 编译器基础设施中最影响异步编程体验的长期痛点 —— `Pin` 的 ergonomics，以及 Project Goals 2026 Flagship "Beyond the `&`" 的解决方案：Reborrow Traits、Pinned Places、Safe Pin Projection。
+> **前置概念**: [Async](../03_advanced/02_async.md) · [Pin/Unpin](../03_advanced/06_pin_unpin.md) · [Traits](../02_intermediate/01_traits.md)
+> **后置概念**: [Version Tracking](./05_rust_version_tracking.md) · [Async Drop](./08_async_drop_preview.md)
+
+> **来源**: [RFC #3709 — Pinned Places](https://github.com/rust-lang/rfcs/issues/3709) · [Rust Project Goals 2026 — Beyond the &](https://rust-lang.github.io/rust-project-goals/2026/) · [withoutboats — Pin and Suffering](https://without.boats/blog/) · [RFC #3627 — Reborrow Traits](https://github.com/rust-lang/rfcs/pull/3627)
+
+---
+
+## 一、核心问题：Pin 的人机工程学危机
+
+### 1.1 当前的五大痛点
+
+| # | 痛点 | 示例 | 影响 |
+|:---:|:---|:---|:---:|
+| 1 | **栈上 Pin 需要宏** | `let mut pinned = pin!(future);` | 初学者困惑：为什么不能 `let pinned = Pin::new(&mut future)` |
+| 2 | **Pinned 引用不能自动 reborrow** | `pinned.as_mut().await` | 每次都需要显式调用 `as_mut()`，代码噪音大 |
+| 3 | **方法签名噪音** | `fn poll(self: Pin<&mut Self>)` | 自定义 Future 必须写冗长的 self 类型 |
+| 4 | **Safe Pin Projection 需要外部 crate** | 必须使用 `pin-project` 或 `pin-project-lite` | 额外依赖、宏魔法、学习曲线 |
+| 5 | **Drop 与 Pin 的交互危险** | 手动实现 pin projection 时可能违反 pinning guarantee | 潜在的内存安全漏洞 |
+
+### 1.2 为什么 Pin 如此重要？
+
+```mermaid
+graph LR
+    subgraph 异步生态
+        A[async/await] --> B[Future 状态机]
+        B --> C[自引用类型]
+        C --> D[Pin&lt;P&gt; 保证内存地址不变]
+        D --> E[async fn in trait<br/>async drop<br/>Stream]
+    end
+```
+
+Rust 的 `async/await` 编译为**自引用状态机**。如果状态机在内存中移动，内部指针将悬空。`Pin` 是 Rust 内存安全模型的关键扩展 —— 但它的人机工程学一直是社区最大痛点之一。
+
+---
+
+## 二、解决方案 1：Reborrow Traits（已推进）
+
+### 2.1 问题：`Pin<&mut T>` 不能自动 reborrow
+
+```rust
+// 当前代码：必须显式调用 as_mut()
+let mut pinned: Pin<&mut MyFuture> = ...;
+pinned.as_mut().poll(cx);   // ✅ 可以
+pinned.poll(cx);            // ❌ 不能自动 reborrow
+```
+
+对比普通引用：
+```rust
+let mut r: &mut T = ...;
+use_ref(r);      // ✅ 自动 reborrow
+use_ref(r);      // ✅ 再次使用
+```
+
+### 2.2 `Reborrow` 和 `CoerceShared` Traits
+
+Project Goals 2026 正在推进两个核心 trait：
+
+```rust
+// 概念性伪代码（nightly 实验中）
+pub trait Reborrow {
+    type Output;
+    fn reborrow(&mut self) -> Self::Output;
+}
+
+pub trait CoerceShared<To> {
+    fn coerce_shared(&self) -> To;
+}
+```
+
+**设计目标**:
+- `Reborrow`：允许 `Pin<&mut T>` 像普通 `&mut T` 一样自动 reborrow
+- `CoerceShared`：允许 `Pin<&mut T>` → `Pin<&T>` 的自动转换
+
+### 2.3 预期效果
+
+```rust
+// Reborrow Traits 稳定后的目标语法
+let mut pinned: Pin<&mut MyFuture> = ...;
+pinned.poll(cx);           // ✅ 自动 reborrow
+let shared: Pin<&MyFuture> = &pinned;  // ✅ 自动 CoerceShared
+```
+
+**当前状态** (2026-06):
+- PR 已开，等待审查和 derive macro 实现
+- Blocker：可能需要对编译器内部 `Rvalue::Ref` / `ExprKind::Ref` 进行大规模重构
+- 详见 [Rust Project Goals 2026 — Reborrow Traits](https://rust-lang.github.io/rust-project-goals/2026/)
+
+---
+
+## 三、解决方案 2：Pinned Places（RFC 讨论中）
+
+### 3.1 核心想法：`pin` 关键字
+
+由 withoutboats 和 Olivier Faure 提出的激进方案：将 `pin` 作为语言关键字。
+
+```rust
+// 栈上 pinned 绑定（无需 pin! 宏）
+let pin mut stream = make_stream();
+
+// 自动 reborrow
+stream.next().await;  // ✅ 无需 as_mut()
+
+// 安全的 pin projection
+let pin mut foo = Foo { bar: Bar::new(), baz: 42 };
+let bar_ref: Pin<&mut Bar> = &pin mut foo.bar;  // ✅ 安全且无需宏
+```
+
+### 3.2 Pinned Fields
+
+```rust
+struct Foo {
+    pub pin bar: Bar,   // 标记字段为 pinned
+    pub baz: Baz,       // 普通字段
+}
+
+let pin mut foo = Foo { ... };
+let bar: Pin<&mut Bar> = &pin mut foo.bar;  // 自动 pin projection
+let baz: &mut Baz = &mut foo.baz;            // 普通借用
+```
+
+**关键约束**: 类型含 pinned fields 时，不能显式实现 `Unpin` —— 只能通过 auto trait 机制推导。
+
+### 3.3 Pinned Drop
+
+```rust
+impl Drop for Foo {
+    fn drop(&pin mut self) {
+        // self 的类型是 Pin<&mut Self>
+        // 防止在 drop 中 move pinned fields
+    }
+}
+```
+
+**兼容性**: `Drop::drop` 不允许直接调用，因此改变签名不会破坏现有代码。
+
+---
+
+## 四、解决方案 3：Field Projections（Project Goals #390）
+
+### 4.1 与 Pinned Places 的关系
+
+Field Projections 是 Rust for Linux 和 Beyond the `&` 的共同需求：
+
+```rust
+// 目标：安全的字段投影（不限于 Pin）
+let dma_buf: &mut DmaBuffer = ...;
+let header: &mut Header = &mut dma_buf.header;  // 当前需要 unsafe
+```
+
+### 4.2 设计空间
+
+| 方案 | 状态 | 适用场景 |
+|:---|:---|:---|
+| `pin` 关键字 + pinned fields | RFC 讨论 | 语言级 Pin ergonomics |
+| `Deref` / `Receiver` 重构 | 推进中 | 通用字段投影 |
+| `Field` trait + 宏 | 实验性 | Rust for Linux 当前方案 |
+
+---
+
+## 五、反命题与边界分析
+
+### 5.1 反命题树
+
+```mermaid
+graph TD
+    ROOT["Pin ergonomics 改进是否必要？"] --> Q1{Reborrow Traits 是否足够？}
+    Q1 -->|是| A1["仅需 Reborrow + CoerceShared<br/>无需 pin 关键字"]
+    Q1 -->|否| Q2{pinned fields 是否有 soundness 风险？}
+    Q2 -->|是| A2["需要更严格的 Unpin 推导规则<br/>或放弃 pinned fields"]
+    Q2 -->|否| A3["pin 关键字是最佳方案<br/>但 edition 迁移成本高"]
+```
+
+### 5.2 关键边界
+
+1. **Edition 兼容性**: `pin` 作为关键字需要在新的 Edition 中引入，不能破坏现有代码中的 `pin` 标识符。
+2. **生态适配成本**: `tokio`、`futures`、`async-trait` 等核心 crate 需要适配新的 Reborrow traits。
+3. **与 `Drop` 的交互**: 改变 `Drop` 签名的条件性（`&mut self` vs `&pin mut self`）需要编译器特殊处理。
+
+---
+
+## 六、演进路线与跟踪
+
+| 里程碑 | 预计时间 | 状态 |
+|:---|:---|:---:|
+| Reborrow Traits PR 合并 | 2026 H2 | 🔄 审查中 |
+| Reborrow derive macro | 2026 H2 | ⏳ 待实现 |
+| Field Projections RFC | 2026 H2 | 🔄 讨论中 |
+| `pin` 关键字 RFC | 2027+ | ⏳ 早期提案 |
+| Pinned Drop 实验 | 2027+ | ⏳ 依赖 pin 关键字 |
+
+---
+
+## 七、实践：当前可用的缓解方案
+
+> 在语言特性稳定之前，开发者可以使用以下 crate：
+
+| Crate | 解决的问题 | 使用场景 |
+|:---|:---|:---|
+| `pin-project` / `pin-project-lite` | Safe pin projection | 自定义 Future / Stream |
+| `pin-utils` | `pin_mut!` 宏 | 栈上 pinning（已被 `std::pin::pin!` 取代）|
+| `futures::FutureExt` | `.poll_unpin()` 等辅助方法 | 通用异步编程 |
+
+---
+
+> **[教学类比]** Pin Ergonomics 的改进类似于给 Rust 的异步编程"解除绑腿"——核心机制（Pin 保证内存安全）不变，但使用方式更自然。Reborrow Traits 让 `Pin<&mut T>` 的行为更接近普通 `&mut T`，而 `pin` 关键字则从根本上简化自引用类型的表达。
+>
+> **来源**: [Rust Project Goals 2026 — Beyond the &](https://rust-lang.github.io/rust-project-goals/2026/) · [withoutboats — "Pin and Suffering"](https://without.boats/blog/pin-and-suffering/) · [RFC #3709](https://github.com/rust-lang/rfcs/issues/3709)

@@ -94,6 +94,12 @@
     - [Q5: 以下代码的编译结果是什么？](#q5-以下代码的编译结果是什么)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [参考来源](#参考来源)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：生命周期省略规则（理解层）](#测验-1生命周期省略规则理解层)
+    - [测验 2：生命周期标注（应用层）](#测验-2生命周期标注应用层)
+    - [测验 3：悬垂引用（分析层）](#测验-3悬垂引用分析层)
+    - [测验 4：HRTB 场景（专家级）](#测验-4hrtb-场景专家级)
+    - [测验 5：NLL 与 Polonius（实验级）](#测验-5nll-与-polonius实验级)
 
 ## 一、权威定义（Definition）
 
@@ -1222,3 +1228,146 @@ fn main() {
 > [来源: [RFC 0387 — Higher-Ranked Trait Bounds](https://rust-lang.github.io/rfcs/0387-higher-ranked-trait-bounds.html)]
 
 > [来源: [PLDI 2023 — Polonius](https://dl.acm.org/doi/10.1145/3591283)]
+
+---
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：生命周期省略规则（理解层）
+
+以下函数签名中，编译器会自动推断生命周期吗？
+
+```rust
+fn first_word(s: &str) -> &str
+```
+
+- A. 不会，必须显式标注 `'a`
+- B. 会，应用生命周期省略规则 1（输入→输出）
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 会**。
+
+生命周期省略规则 1：如果函数有 **一个输入生命周期参数**，该生命周期被自动赋给所有输出生命周期参数。因此 `fn first_word(s: &str) -> &str` 等价于 `fn first_word<'a>(s: &'a str) -> &'a str`。
+</details>
+
+---
+
+### 测验 2：生命周期标注（应用层）
+
+以下代码为什么不能编译？
+
+```rust
+fn longest(x: &str, y: &str) -> &str {
+    if x.len() > y.len() { x } else { y }
+}
+```
+
+- A. `&str` 参数需要显式生命周期标注
+- B. 返回类型的生命周期与输入参数不明确
+- C. `if` 表达式不能返回引用
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 返回类型的生命周期与输入参数不明确**。
+
+函数有两个输入引用 `x` 和 `y`，编译器无法确定返回的引用应该与哪个输入参数的生命周期关联。需要显式标注：
+
+```rust
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
+```
+
+这告诉编译器：返回的引用至少与 `x` 和 `y` 中较短的生命周期一样长。
+</details>
+
+---
+
+### 测验 3：悬垂引用（分析层）
+
+以下代码的错误是什么？
+
+```rust
+fn dangle() -> &String {
+    let s = String::from("hello");
+    &s
+}
+```
+
+- A. `s` 在函数返回后被 drop，返回悬垂引用
+- B. `String` 不能返回引用
+- C. 缺少生命周期标注
+
+<details>
+<summary>✅ 答案</summary>
+
+**A. `s` 在函数返回后被 drop，返回悬垂引用**。
+
+`s` 是函数局部变量，在函数作用域结束时被 drop。返回 `&s` 会创建一个指向已释放内存的引用，违反 Rust 内存安全保证。
+
+**修复**: 直接返回 `String`（转移所有权），或使用 `'static` 生命周期（仅适用于编译期常量）。
+</details>
+
+---
+
+### 测验 4：HRTB 场景（专家级）
+
+以下代码中，`for<'a>` 的含义是什么？
+
+```rust
+fn call_with_ref<F>(f: F)
+where
+    F: for<'a> Fn(&'a i32) -> &'a i32,
+{
+    let x = 1;
+    let r = f(&x);
+    println!("{}", r);
+}
+```
+
+- A. `f` 接受任意生命周期的引用，但返回值的生命周期独立于输入
+- B. `f` 接受任意生命周期的引用，且返回值必须与输入引用同生命周期
+- C. `f` 只能接受 `'static` 引用
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. `f` 接受任意生命周期的引用，且返回值必须与输入引用同生命周期**。
+
+`for<'a>` 是 **Higher-Ranked Trait Bound (HRTB)**，表示 `F` 对**所有**可能的生命周期 `'a` 都满足该 trait bound。这要求 `f` 能接受任意生命周期的 `&i32`，且返回的引用必须具有与输入相同的生命周期——不能偷偷延长或缩短。
+
+这是 `Fn` trait 在处理闭包和引用时的核心约束。
+</details>
+
+---
+
+### 测验 5：NLL 与 Polonius（实验级）
+
+以下代码在 Rust 1.63+ 中能否编译？在 Polonius 之前呢？
+
+```rust
+let mut x = String::from("hello");
+let y = &x;
+println!("{}", y);
+let z = &mut x;
+z.push_str(" world");
+```
+
+- A. 所有版本都能编译：NLL 允许非词法生命周期
+- B. 仅 Polonius+ 能编译：需要数据流敏感分析
+- C. 所有版本都失败：不可变和可变借用不能共存
+
+<details>
+<summary>✅ 答案</summary>
+
+**A. 所有版本都能编译（Rust 1.31+）**。
+
+Rust 1.31 引入的 **Non-Lexical Lifetimes (NLL)** 使借用的有效期基于**最后一次使用**而非词法作用域：
+
+1. `y = &x` 创建不可变借用
+2. `println!("{}", y)` 是 `y` 的最后一次使用，`y` 在此处失效
+3. `z = &mut x` 创建新的可变借用，与已失效的 `y` 不冲突
+
+在 NLL 之前（Rust 2015 edition，1.30 及更早），借用有效期到作用域结束（`}`），此代码会编译失败。
+</details>

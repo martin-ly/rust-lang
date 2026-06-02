@@ -108,7 +108,7 @@ chmod +x csv_filter.rs && ./csv_filter.rs
 
 ## 一、核心概念
 
-Cargo Script（[RFC 3502](https://rust-lang.github.io/rfcs/3502.html) + [RFC 3503](https://rust-lang.github.io/rfcs/3503.html)）允许在单个 `.rs` 文件中编写完整 Rust 程序并直接执行，**无需 `Cargo.toml` 或项目目录结构**。两个 RFC 均已获批：[RFC 3502](https://rust-lang.github.io/rfcs/3502.html) 定义单文件 manifest 格式，[RFC 3503](https://rust-lang.github.io/rfcs/3503.html) 定义 frontmatter 语法。当前 nightly 已实现核心支持，目标 2026 年稳定化。
+Cargo Script（[RFC 3502](https://rust-lang.github.io/rfcs/3502.html) + [RFC 3503](https://rust-lang.github.io/rfcs/3503.html)）允许在单个 `.rs` 文件中编写完整 Rust 程序并直接执行，**无需 `Cargo.toml` 或项目目录结构**。两个 RFC 均已获批：[RFC 3502](https://rust-lang.github.io/rfcs/3502.html) 定义单文件 manifest 格式，[RFC 3503](https://rust-lang.github.io/rfcs/3503.html) 定义 frontmatter 语法。Rust 1.95.0+ 已稳定支持（`cargo <script>` 子命令）。单文件 Rust 脚本正式成为 Rust 工具链的一等公民。
 
 ### 1.1 三种执行方式
 
@@ -587,8 +587,8 @@ fn main() {
 > Cargo script 的 **shebang**（`#!/usr/bin/env cargo`）是 Unix 特性，Windows 不支持。
 > Windows 运行 cargo script：
 >
-> 1) `cargo +nightly run script.rs`（显式调用）；
-> 2) 使用 `cargo-script` crate（已集成到 cargo nightly）；
+> 1) `cargo script.rs`（直接执行，1.95.0+ stable）；
+> 2) `cargo run --manifest-path script.rs`（兼容模式）；
 > 3) 文件关联（将 `.rs` 关联到 cargo）。
 >
 > cargo script 的限制：
