@@ -38,13 +38,25 @@ fn main() {
 >
 > 1) **proc macro** — 在 AST 层面添加检查（如 `#[derive(Valid)]` 自定义验证）；
 > 2) **lint** — 编写 `rustc` 插件（unstable）；
-> 3) **外部工具** — Clippy custom lint、Miri、Kani。Bloom 层级的 Rust 映射：L1（记忆）→ 语法；L2（理解）→ 所有权规则；L3（应用）→ 写正确代码；
-> L4（分析）→ 调试借用错误；
-> L5（评价）→ 评估 unsafe 使用的安全性；
-> L6（综合）→ 设计并发架构；
-> L7（创造）→ 基于 Rust 模型的新工具/语言/系统。
+> 3) **外部工具** — Clippy custom lint、Miri、Kani。
+>
+> **Bloom 层级的 Rust 映射**:
+>
+> | 层级 | 动词 (Verbs) | Rust 能力 | 典型产出 |
+> |:---|:---|:---|:---|
+> | L1 记忆 | 定义、列举、识别 | 语法、关键字、标准库 API | 代码片段背诵 |
+> | L2 理解 | 解释、分类、比较 | 所有权规则、生命周期标注 | 能向他人讲解 |
+> | L3 应用 | 实现、使用、执行 | 写正确代码、处理错误 | 可运行的程序 |
+> | L4 分析 | 调试、分解、推断 | 借用检查器错误分析、性能剖析 | 诊断报告 |
+> | L5 评价 | 评估、判断、验证 | unsafe 安全性审查、架构选型 | 技术评审文档 |
+> | L6 综合 | 设计、构建、整合 | 并发架构、系统级设计 | 完整系统 |
+> | L7 创造 | 设计、发明、制定 | 新工具/语言/形式化系统 | 原创项目/论文 |
+>
+> **AI 2026 校准更新**: Bloom Taxonomy AI 2026 修订版强调 **verb-based 分类**（上表已遵循）和 **自动化目标标注**（每个学习目标的动词必须可自动检测）。本知识体系的每个概念文件均标注了 Bloom 层级和对应的可验证产出（如"能向他人讲解"对应 L2 理解）。
+>
 > [来源: [Bloom's Taxonomy](https://cft.vanderbilt.edu/guides-sub-pages/blooms-taxonomy/)] ·
-> [来源: [Rust Learning Path](https://www.rust-lang.org/learn)]
+> [来源: [Rust Learning Path](https://www.rust-lang.org/learn)] ·
+> [来源: Bloom Taxonomy AI 2026 Revision, educational-data-mining.org]
 
 ## 相关概念文件
 

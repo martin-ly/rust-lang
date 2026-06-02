@@ -18,6 +18,8 @@
 
 > **来源**: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) · [AutoDiff RFC Draft](https://github.com/rust-lang/rfcs/pull/0000-autodiff) · [rustc_autodiff crate](https://github.com/Rust-AutoDiff/rustc_autodiff) · [Burn ADBackend](https://burn.dev/)
 
+> **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
+
 ## 一、核心概念
 
 ### 1.1 自动微分（AD）是什么

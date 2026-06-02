@@ -1,5 +1,4 @@
 > **内容分级**: [综述级]
-
 > **本节关键术语**: 模块系统 (Module System) · 工作空间 (Workspace) · 包 (Package) · Crate · 可见性 (Visibility) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 模块系统：Rust 的代码组织与可见性规则
@@ -84,7 +83,8 @@ graph TB
     end
 ```
 
-> **认知功能**: 此图展示 Rust **代码组织的三层结构**。Package 是 Cargo 的构建单元（对应一个 Cargo.toml），Crate 是编译单元（一个 lib.rs 或 main.rs），Module 是命名空间单元（文件或内联模块）。
+> **认知功能**: 此图展示 Rust **代码组织的三层结构**。
+> Package 是 Cargo 的构建单元（对应一个 Cargo.toml），Crate 是编译单元（一个 lib.rs 或 main.rs），Module 是命名空间单元（文件或内联模块）。
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 理解这三者的区别是掌握 Rust 模块系统的基础——Package 管理依赖，Crate 管理编译，Module 管理命名空间。
 > **关键洞察**: 一个 Package 可包含**多个 Crate**（1 个 lib + 多个 bin + tests + examples + benches），但每个 Crate 是独立编译的单元。
@@ -638,7 +638,7 @@ fn main() {}
 
 ## 实践
 
-> **对应 Crate**: [`c09_design_pattern`](../../crates/c09_design_pattern/) · [`c11_macro_system`](../../crates/c11_macro_system/)
+> **对应 Crate**: [`c09_design_pattern`](../crates/c09_design_pattern/) · [`c11_macro_system`](../crates/c11_macro_system/)
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。
 

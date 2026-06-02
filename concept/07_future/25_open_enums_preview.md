@@ -18,6 +18,10 @@
 
 > **来源**: [RFC 2008 — `non_exhaustive`](https://github.com/rust-lang/rfcs/pull/2008) · [Rust Reference — Enum Types](https://doc.rust-lang.org/reference/items/enumerations.html) · [RFC 3518 — Sealed Traits](https://github.com/rust-lang/rfcs/pull/3518) · [GitHub #156628 — Open Enums Tracking](https://github.com/rust-lang/rust/issues/156628) · [Scala Sealed Traits](https://docs.scala-lang.org/tour/pattern-matching.html) · [Haskell Open Data Types](https://wiki.haskell.org/Open_data_type) · [OCaml Polymorphic Variants](https://ocaml.org/manual/polyvariant.html)
 
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
+> **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
+
 ## 📑 目录
 >
 >

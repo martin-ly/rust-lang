@@ -13,6 +13,8 @@
 > **跨层映射**: L4→L1 类型语义 ↔ 类型直觉 | L4→L2 Trait 系统 ↔ 存在/全称类型
 > **定理链编号**: T-130 进步定理 → T-131 保持定理 → T-132 类型安全完备性
 
+> **后置概念**: [Comparative Studies](../05_comparative/01_rust_vs_cpp.md)
+
 ## 📑 目录
 
 - [Type Semantics（类型语义）](#type-semantics类型语义)

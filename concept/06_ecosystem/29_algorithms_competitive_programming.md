@@ -792,7 +792,7 @@ temp.extend_from_slice(&nums[..]);
 
 | 文件 | 关系 |
 |:---|:---|
-| [`crates/c08_algorithms/`](../../crates/c08_algorithms/) | 132+ LeetCode 问题的 Rust 实现，覆盖本文件全部模式 |
+| [`crates/c08_algorithms/`](../crates/c08_algorithms/) | 132+ LeetCode 问题的 Rust 实现，覆盖本文件全部模式 |
 | [`concept/04_formal/05_verification_toolchain.md`](../04_formal/05_verification_toolchain.md) | Kani / Verus / Creusot 形式验证工具链选型指南 |
 | [`concept/02_intermediate/02_generics.md`](../02_intermediate/02_generics.md) | 泛型与 const generics 的理论基础 |
 | [`concept/01_foundation/06_zero_cost_abstractions.md`](../01_foundation/06_zero_cost_abstractions.md) | 零成本抽象原则的理论根基 |

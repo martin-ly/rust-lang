@@ -30,6 +30,10 @@
 > [Rust Reference — Trait Implementations](https://doc.rust-lang.org/reference/items/implementations.html) ·
 > [Wikipedia — Multiple Dispatch](https://en.wikipedia.org/wiki/Multiple_dispatch)
 
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
+> **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
+
 ## 📑 目录
 
 - [Specialization：Trait 实现的精确化与重叠解析](#specializationtrait-实现的精确化与重叠解析)

@@ -7,6 +7,10 @@
 > **归档原因**: 命名规范化（`13_` → `02_` 与 async 主文件序列对齐）。
 > **状态**: 已归档（2026-05-25 Phase 1 Cleanup）
 
+> **后置概念**: [Formal Verification](../04_formal/03_ownership_formal.md)
+
+> **前置概念**: [Async Programming](../03_advanced/02_async_programming.md)
+
 ## 相关概念文件
 
 - [Async 模式主文件](./02_async_patterns.md) — 异步设计模式（本文件已归档）

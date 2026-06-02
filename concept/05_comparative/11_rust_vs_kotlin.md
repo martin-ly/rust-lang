@@ -13,6 +13,8 @@
 
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Kotlin Documentation](https://kotlinlang.org/docs/home.html) · [Kotlinlang.org](https://kotlinlang.org/) · [Wikipedia — Kotlin](https://en.wikipedia.org/wiki/Kotlin_(programming_language)) · [Wikipedia — Rust](https://en.wikipedia.org/wiki/Rust_(programming_language))
 
+> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+
 ## 📑 目录
 
 - [Rust vs Kotlin：静态安全的两种路径](#rust-vs-kotlin静态安全的两种路径)

@@ -37,6 +37,12 @@ fn main() {}
 
 > **修正**: **Precise capturing**（`use<'lt>` syntax）是 Rust 2024 edition 的关键特性：1) 当前 `impl Trait` 捕获所有输入 lifetime（即使未使用），导致不必要的 lifetime 绑定；2) `use<'a>` 精确声明只捕获 `'a`，其他 lifetime 不隐式捕获；3) 减少 lifetime 传播，使 API 更灵活。应用场景：1) 返回迭代器但只借用部分输入；2) 闭包捕获部分环境；3) 复杂嵌套的 lifetime 关系简化。这与 TypeScript 的泛型（默认全部捕获，无精确控制）或 Swift 的 `@escaping`（控制闭包捕获，但不精确到 lifetime）不同——Rust 的 `use<>` 是类型系统的精确性扩展，解决 impl trait 的 lifetime 泄露问题。[来源: [Precise Capturing RFC](https://rust-lang.github.io/rfcs/3498-lifetime-capture-in-impl-trait.html)] · [来源: [Rust 2024 Edition](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)]
 
+> **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
+
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
+> **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
+
 ## 认知路径
 
 > **认知路径**: 从 Rust 核心语言特性出发，经由 **Lifetime Capture in `impl Trait` Preview** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。

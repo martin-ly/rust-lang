@@ -26,6 +26,8 @@
 > [futures-rs Stream](https://docs.rs/futures/latest/futures/stream/trait.Stream.html) ·
 > [RxRust](https://docs.rs/rxrust/latest/rxrust/)
 
+> **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
+
 ## 📑 目录
 
 - [Reactive Programming \& FRP（响应式编程与函数式响应编程）](#reactive-programming--frp响应式编程与函数式响应编程)

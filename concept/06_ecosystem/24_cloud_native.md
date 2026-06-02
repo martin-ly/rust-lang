@@ -17,6 +17,10 @@
 
 > **来源**: [Tokio](https://tokio.rs/) · [Axum](https://github.com/tokio-rs/axum) · [Actix](https://actix.rs/) · [Rust Cloud Native](https://rust-cloud-native.github.io/) · [Wikipedia — Cloud Native](https://en.wikipedia.org/wiki/Cloud-native_computing)
 
+> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
 ## 📑 目录
 
 - [Rust 云原生生态](#rust-云原生生态)

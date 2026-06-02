@@ -13,6 +13,12 @@
 
 ---
 
+> **后置概念**: [Comparative Studies](../05_comparative/01_rust_vs_cpp.md)
+
+> **前置依赖**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
+
+> **前置依赖**: [Concurrency](../03_advanced/01_concurrency.md)
+
 ## 目录
 
 - [现代 Rust 验证工具生态（2025-2026）](#现代-rust-验证工具生态2025-2026)

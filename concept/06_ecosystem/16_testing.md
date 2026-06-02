@@ -29,6 +29,10 @@
 > [Miri](https://github.com/rust-lang/miri) ·
 > [Rust RFC 2318 — Custom Test Frameworks](https://github.com/rust-lang/rfcs/pull/2318)
 
+> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
 ## 📑 目录
 
 - [测试生态：单元测试、集成测试与验证策略](#测试生态单元测试集成测试与验证策略)

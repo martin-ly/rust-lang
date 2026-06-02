@@ -111,6 +111,7 @@
     - [13.2 边界测试：死锁——嵌套锁顺序不一致（运行时错误 / 逻辑错误）](#132-边界测试死锁嵌套锁顺序不一致运行时错误--逻辑错误)
     - [10.3 边界测试：`Mutex` 的毒化（poisoning）与错误恢复（运行时 panic）](#103-边界测试mutex-的毒化poisoning与错误恢复运行时-panic)
     - [10.4 边界测试：`std::sync::mpsc` 的多生产者单消费者限制（编译错误）](#104-边界测试stdsyncmpsc-的多生产者单消费者限制编译错误)
+  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [参考来源](#参考来源)
   - [导航：下一步去哪？](#导航下一步去哪)
 
@@ -1324,6 +1325,21 @@ fn main() {
 > 3) `flume` — 兼容 sync/async 的通道。这与 Go 的 channel（可多个 goroutine 接收，但值只被一个接收）或 Erlang 的消息邮箱（每个进程一个邮箱，无共享接收）不同——Rust 的通道设计明确区分生产者和消费者角色。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-02-message-passing.html)] ·
 > [来源: [crossbeam-channel](https://docs.rs/crossbeam-channel/)]
+
+## 逆向推理链（Backward Reasoning）
+
+> **从并发错误反推定理链**：
+>
+> ```text
+> T5(Rayon 数据并行) ⟸ T1(类型系统排他性) ⟸ L1(Send/Sync 安全性)
+> T4(Channel 消息安全) ⟸ T2(Arc<T> 共享所有权) ⟸ L1(Send/Sync 安全性)
+> ```
+>
+> **诊断方法**：
+>
+> - E0277 (`Rc<Mutex<T>>` cannot be sent between threads safely) → L1(Send 不满足) → 改用 Arc
+> - E0277 (`&T` cannot be sent between threads safely) → Sync 不满足 → 检查 T 的字段类型
+> - E0499 (cannot borrow data in `Arc` as mutable) → T2(Arc 只共享) 违反 → 使用 Mutex/RwLock 或 Atomic
 
 ## 参考来源
 

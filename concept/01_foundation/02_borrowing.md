@@ -112,6 +112,7 @@
     - [Q3: 什么是悬垂引用（Dangling Reference）？](#q3-什么是悬垂引用dangling-reference)
     - [Q4: 何时应该使用 `clone()` 而非借用？](#q4-何时应该使用-clone-而非借用)
     - [Q5: 以下代码的编译结果是什么？](#q5-以下代码的编译结果是什么)
+  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [参考来源](#参考来源)
 
 ## 一、权威定义（Definition）
@@ -1441,8 +1442,8 @@ fn main() {
 
 ## 实践
 
-> **对应 Crate**: [`c01_ownership_borrow_scope`](../../crates/c01_ownership_borrow_scope/)
-> **对应练习**: [`exercises/src/ownership_borrowing/`](../../exercises/src/ownership_borrowing/)
+> **对应 Crate**: [`c01_ownership_borrow_scope`](../crates/c01_ownership_borrow_scope/)
+> **对应练习**: [`exercises/src/ownership_borrowing/`](../exercises/src/ownership_borrowing/)
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。
 
@@ -1609,6 +1610,21 @@ data.push(4);            // ✅ 现在可以修改
 </details>
 
 ---
+
+## 逆向推理链（Backward Reasoning）
+
+> **从编译错误反推定理链**：
+>
+> ```text
+> T5(借用 ⟹ 无数据竞争) ⟸ T1(AXM) ⟸ L2(&mut T 独占写) + L1(&T 共享读)
+> T6(Two-Phase Borrow 安全) ⟸ T3(Reborrow 安全) ⟸ T2(引用有效性)
+> ```
+>
+> **诊断方法**：
+>
+> - E0501 (cannot borrow `x` as mutable more than once at a time) → L2(&mut 独占写) 违反
+> - E0503 (cannot use `x` because it was mutably borrowed) → T1(AXM) 违反 → 检查 &mut 与使用点的作用域
+> - E0716 (temporary value dropped while borrowed) → T2(引用有效性) 违反 → 生命周期标注不足
 
 ## 参考来源
 

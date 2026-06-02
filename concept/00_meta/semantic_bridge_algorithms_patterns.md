@@ -1,7 +1,6 @@
 # 语义桥：算法、设计模式与工作流模式的统一谱系
->
-> **Rust 版本**: 1.96.0+ (Edition 2024)
 
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **受众**: [专家]
 > **层级**: L0 元信息 — 跨域语义关联
 > **A/S/P 标记**: **S** — Structure
@@ -15,7 +14,6 @@
 > [Wikipedia: Algorithm] ·
 > [Wikipedia: Software design pattern] ·
 > [Wikipedia: Workflow patterns]
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 

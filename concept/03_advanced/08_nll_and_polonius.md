@@ -18,6 +18,8 @@
 > [The Rust Compiler Guide — Borrow Check](https://rustc-dev-guide.rust-lang.org/borrow_check.html) ·
 > [Wikipedia — Data-flow Analysis](https://en.wikipedia.org/wiki/Data-flow_analysis)
 
+> **前置依赖**: [Traits](../02_intermediate/01_traits.md)
+
 ## 📑 目录
 
 - [NLL 与 Polonius：借用检查器的演进](#nll-与-polonius借用检查器的演进)

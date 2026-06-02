@@ -36,6 +36,12 @@ fn main() {}
 
 > **修正**: **`must_not_suspend`** lint（nightly，`-W must_not_suspend`）警告：某些类型（`RefCell`、`MutexGuard`、`RwLockReadGuard`）在 async 函数中跨越 `.await` 点可能导致**运行时 panic** 或**死锁**。原因：1) `RefCell::borrow_mut()` 获取的引用在 await 点仍然持有；2) 其他任务可能在同一线程尝试 `borrow()`/`borrow_mut()` → panic；3) `MutexGuard` 跨 await 可能导致死锁（若 executor 是单线程）。解决：1) 在 `.await` 前 drop guard；2) 使用 `tokio::sync::Mutex`（`async` 锁，可跨 await）；3) 重新设计数据结构避免跨 await 借用。这与 Go 的 defer + 锁（`defer mu.Unlock()`，goroutine 不挂起当前线程）或 Java 的 `synchronized`（阻塞线程，不挂起任务）不同——Rust 的 async/await 是协作式调度，锁跨越 yield 点危险。[来源: [must_not_suspend lint](https://doc.rust-lang.org/nightly/rustc/lints/listing/allowed-by-default.html#must-not-suspend)] · [来源: [Async Rust](https://rust-lang.github.io/async-book/)]
 
+> **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
+
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
+> **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
+
 ## 认知路径
 
 > **认知路径**: 从 Rust 核心语言特性出发，经由 **`must_not_suspend` Lint Preview** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。

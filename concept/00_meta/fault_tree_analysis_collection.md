@@ -1,7 +1,6 @@
 # Rust 知识体系失效分析树集（Fault Tree Analysis Collection）
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **受众**: [专家]
 > **Bloom 层级**: 元（Meta）
 > **定位**:
@@ -14,7 +13,6 @@
 > [The Rustonomicon — What Unsafe Rust Can Do] ·
 > [MIRI 未定义行为检测]
 > **符号约定**: ⬡ 顶事件 / ◇ 中间事件 / ○ 基本事件 / ∧ 与门 / ∨ 或门
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 

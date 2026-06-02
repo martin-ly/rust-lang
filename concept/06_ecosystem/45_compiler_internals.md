@@ -1,5 +1,9 @@
 > **内容分级**: [专家级]
 
+> **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
+
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
 ## 代码示例：自定义过程宏（编译器插件雏形）
 
 以下演示如何通过过程宏实现编译期代码生成，这是深入 Rust 编译器内部的入口：

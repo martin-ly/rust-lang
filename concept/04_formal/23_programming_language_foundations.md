@@ -14,6 +14,8 @@
 
 > **来源**: [TAPL — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [SF — Software Foundations](https://softwarefoundations.cis.upenn.edu/) · [CS 242 Stanford](https://stanford-cs242.github.io/f19/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 
+> **后置概念**: [Comparative Studies](../05_comparative/01_rust_vs_cpp.md)
+
 ## 一、为什么需要 PL 基座
 
 Rust 的独特性（所有权、借用、生命周期）常被描述为"工程创新"，但它们深植于**数十年的 PL 理论研究**。理解这些根基，才能：

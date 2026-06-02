@@ -19,6 +19,8 @@
 > [Wikipedia — Ruby (programming language)](https://en.wikipedia.org/wiki/Ruby_(programming_language)) ·
 > [Wikipedia — Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))
 
+> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+
 ## 📑 目录
 
 - [Rust vs Ruby：性能与表达力的两极](#rust-vs-ruby性能与表达力的两极)

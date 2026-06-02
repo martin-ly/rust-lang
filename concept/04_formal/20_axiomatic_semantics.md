@@ -13,6 +13,8 @@
 > **跨层映射**: L4→L1 公理规约 ↔ 工程直觉 | L4→L3 Unsafe 边界 ↔ 公理失效区域
 > **定理链编号**: T-120 霍尔三元组可判定性 → T-121 wp 计算完备性 → T-122 所有权不变式可验证性
 
+> **后置概念**: [Comparative Studies](../05_comparative/01_rust_vs_cpp.md)
+
 ## 📑 目录
 
 - [Axiomatic Semantics（公理语义）](#axiomatic-semantics公理语义)

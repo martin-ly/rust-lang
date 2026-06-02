@@ -9,6 +9,10 @@
 
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
+> **后置概念**: [Ecosystem](../06_ecosystem/01_toolchain.md)
+
+> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+
 ## 相关概念文件
 
 - [Rust vs Ruby 主文件](./08_rust_vs_ruby.md) — Rust vs Ruby 完整对比（本文件已归档）

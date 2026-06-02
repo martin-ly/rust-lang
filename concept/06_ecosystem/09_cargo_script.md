@@ -63,6 +63,12 @@ chmod +x csv_filter.rs && ./csv_filter.rs
 > [rust-lang/cargo#12207](https://github.com/rust-lang/cargo/issues/12207) ·
 > [rust-lang/rust#136889](https://github.com/rust-lang/rust/issues/136889)
 
+> **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
+
+> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
 ## 📑 目录
 
 - [\[derive(Parser)\]](#deriveparser)

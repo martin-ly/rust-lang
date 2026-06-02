@@ -29,6 +29,12 @@
 > [tonic](https://docs.rs/tonic/latest/tonic/) ·
 > [async-graphql](https://docs.rs/async-graphql/latest/async_graphql/)
 
+> **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
+
+> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
 ## 📑 目录
 
 - [API Design Patterns（API 设计模式）](#api-design-patternsapi-设计模式)

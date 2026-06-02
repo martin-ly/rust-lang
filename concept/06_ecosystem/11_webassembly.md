@@ -23,6 +23,8 @@
 > [Bytecode Alliance](https://bytecodealliance.org/) ·
 > [W3C WebAssembly](https://www.w3.org/wasm/)
 
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
 ## 📑 目录
 
 - [WebAssembly 生态：Rust 的浏览器外运行时](#webassembly-生态rust-的浏览器外运行时)

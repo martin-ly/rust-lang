@@ -25,6 +25,12 @@
 > [来源: [Young — CQRS Documents](https://cqrs.files.wordpress.com/2010/11/cqrs_documents.pdf)] ·
 > [来源: [Axon Framework](https://docs.axoniq.io/reference-guide/)]
 
+> **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
+
+> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
 ## 📑 目录
 
 - [CQRS \& Event Sourcing（命令查询职责分离与事件溯源）](#cqrs--event-sourcing命令查询职责分离与事件溯源)

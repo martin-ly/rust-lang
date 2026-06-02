@@ -18,6 +18,8 @@
 > [Miri Documentation](https://github.com/rust-lang/miri) ·
 > [Kani Documentation](https://model-checking.github.io/kani/)
 
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
 ## 📑 目录
 
 - [Rust 测试策略：从单元测试到属性验证](#rust-测试策略从单元测试到属性验证)

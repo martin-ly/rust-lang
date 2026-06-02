@@ -141,6 +141,7 @@
     - [12.5 边界测试：生命周期省略规则失效（编译错误）](#125-边界测试生命周期省略规则失效编译错误)
     - [10.1 边界测试：类型不匹配的基础错误](#101-边界测试类型不匹配的基础错误)
   - [实践](#实践)
+  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [参考来源](#参考来源)
   - [Never 类型元组强制（Rust 1.96）](#never-类型元组强制rust-196)
 
@@ -2455,10 +2456,25 @@ fn main() {
 
 ## 实践
 
-> **对应 Crate**: [`c02_type_system`](../../crates/c02_type_system/)
-> **对应练习**: [`exercises/src/type_system/`](../../exercises/src/type_system/)
+> **对应 Crate**: [`c02_type_system`](../crates/c02_type_system/)
+> **对应练习**: [`exercises/src/type_system/`](../exercises/src/type_system/)
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。
+
+## 逆向推理链（Backward Reasoning）
+
+> **从类型错误反推定理链**：
+>
+> ```text
+> C1(Option<T> 空指针消除) ⟸ T1(match 穷尽性) + L2(NPO)
+> T3(类型一致性 / Progress + Preservation) ⟸ L1(ADT 代数完备性) + L2(NPO)
+> ```
+>
+> **诊断方法**：
+>
+> - E0004 (non-exhaustive patterns) → T1(match 穷尽性) 违反 → 补全 match 分支或添加 `_`
+> - E0308 (mismatched types) → T3(类型一致性) 违反 → 检查类型转换或添加显式转换
+> - E0277 (the trait bound is not satisfied) → L1(ADT 完备性) + Trait 约束不满足
 
 ## 参考来源
 

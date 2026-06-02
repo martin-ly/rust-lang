@@ -2,6 +2,7 @@
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 
 > **本节关键术语**: 编程语言理论 (PL Theory) · 语法 (Syntax) · 语义 (Semantics) · 求值策略 (Evaluation Strategy) · 副作用 (Side Effect) — [完整对照表](../00_meta/terminology_glossary.md)
+>
 # 编程语言理论基础（PL Prerequisites）
 
 > **受众**: [初学者]
@@ -10,6 +11,8 @@
 > **阅读建议**: 可选阅读。若你已有 Haskell/Scheme/OCaml 背景，可跳过；若你只有 Python/JavaScript 背景，强烈建议先读本文。
 
 ---
+
+> **后置概念**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
 
 ## 📑 目录
 
@@ -398,7 +401,7 @@ unsafe {
 
 ## 实践
 
-> **对应练习**: [`exercises/rustlings_style/`](../../exercises/rustlings_style/) — 基础语法与所有权练习
+> **对应练习**: [`exercises/rustlings_style/`](../exercises/rustlings_style/) — 基础语法与所有权练习
 > **推荐阅读顺序**: 完成本节 → [所有权](./01_ownership.md) → [类型系统](./04_type_system.md)
 >
 > **建议**: 本节概念偏理论，建议快速浏览后进入 Rust 核心概念学习，在实践中反向理解这些 PL 基础。

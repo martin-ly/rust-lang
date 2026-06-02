@@ -15,6 +15,8 @@
 
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
+> **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
+
 ## 10.4 边界测试：Rust 2024 Edition 的语法变更与迁移（编译错误）
 
 ```rust,ignore

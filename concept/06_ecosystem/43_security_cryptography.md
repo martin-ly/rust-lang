@@ -25,6 +25,10 @@
 > [rustls](https://docs.rs/rustls/latest/rustls/) ·
 > [dalek-cryptography](https://docs.rs/ed25519-dalek/latest/ed25519_dalek/)
 
+> **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
+
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
 ## 📑 目录
 
 - [Security \& Cryptography（安全与密码学）](#security--cryptography安全与密码学)

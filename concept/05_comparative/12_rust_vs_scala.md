@@ -13,6 +13,8 @@
 
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Scala Documentation](https://docs.scala-lang.org/) · [Scala Book](https://docs.scala-lang.org/scala3/book/introduction.html) · [Wikipedia — Scala](https://en.wikipedia.org/wiki/Scala_(programming_language)) · [Wikipedia — Rust](https://en.wikipedia.org/wiki/Rust_(programming_language))
 
+> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+
 ## 📑 目录
 
 - [Rust vs Scala：类型系统的两种哲学](#rust-vs-scala类型系统的两种哲学)

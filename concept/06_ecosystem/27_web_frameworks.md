@@ -1,5 +1,4 @@
 > **内容分级**: [综述级]
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Rust Web 框架对比与选型
@@ -7,10 +6,8 @@
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[Web 框架](../../knowledge/06_ecosystem/deep_dives/01_axum_deep_dive.md)
-
 >
 > **受众**: [进阶]
-
 > **Bloom 层级**: 应用 → 评价
 > **A/S/P 标记**: **A+S** — ApplicationStructure
 > **双维定位**: C×App — 应用 Web 框架模式
@@ -20,7 +17,18 @@
 
 ---
 
-> **来源**: [Axum](https://docs.rs/axum/latest/axum/) · [Actix-web](https://actix.rs/) · [Rocket](https://rocket.rs/) · [Poem](https://docs.rs/poem/latest/poem/) · [Tokio](https://tokio.rs/) · [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/) · [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html)
+> **来源**:
+> [Axum](https://docs.rs/axum/latest/axum/) ·
+> [Actix-web](https://actix.rs/) ·
+> [Rocket](https://rocket.rs/) ·
+> [Poem](https://docs.rs/poem/latest/poem/) ·
+> [Tokio](https://tokio.rs/) ·
+> [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/) ·
+> [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html)
+
+> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录
 

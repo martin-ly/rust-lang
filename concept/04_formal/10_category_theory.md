@@ -18,6 +18,10 @@
 > [Haskell Wiki — Typeclassopedia](https://wiki.haskell.org/Typeclassopedia) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/)
 
+> **前置依赖**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
+
+> **前置依赖**: [Concurrency](../03_advanced/01_concurrency.md)
+
 ## 📑 目录
 
 - [范畴论与 Rust：从函子到单子](#范畴论与-rust从函子到单子)

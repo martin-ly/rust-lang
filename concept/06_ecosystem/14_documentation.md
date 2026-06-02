@@ -1,7 +1,6 @@
 > **内容分级**: [综述级]
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
->
+
 # 文档生态：rustdoc、文档测试与 API 文档规范
 
 > **受众**: [进阶]
@@ -20,6 +19,9 @@
 > [mdBook Guide](https://rust-lang.github.io/mdBook/) ·
 > [RFC 1946 — Intra-rustdoc links](https://github.com/rust-lang/rfcs/pull/1946) ·
 > [docs.rs](https://docs.rs/about)
+> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录
 

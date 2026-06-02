@@ -1,5 +1,11 @@
 > **内容分级**: [专家级]
 
+> **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
+
+> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
 ## 代码示例：工业级并发流水线（日志 ETL）
 
 以下展示基于通道的无锁并发流水线模式，典型用于工业级日志/数据 ETL：

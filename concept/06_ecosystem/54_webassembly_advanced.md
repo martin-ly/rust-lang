@@ -1,5 +1,7 @@
 > **内容分级**: [专家级]
 >
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
 ## 代码示例：wasm-bindgen 高级 FFI 绑定
 
 以下演示 Rust ↔ JavaScript 之间传递复杂数据结构，使用 `wasm-bindgen`：

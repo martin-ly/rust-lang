@@ -17,6 +17,10 @@
 > [cbindgen](https://github.com/mozilla/cbindgen) ·
 > [Wikipedia — Foreign Function Interface](https://en.wikipedia.org/wiki/Foreign_function_interface)
 
+> **前置依赖**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md)
+
+> **前置依赖**: [Traits](../02_intermediate/01_traits.md)
+
 ## 📑 目录
 
 - [FFI 高级主题：跨语言边界的安全与性能](#ffi-高级主题跨语言边界的安全与性能)

@@ -19,6 +19,8 @@
 > [tokio/tracing](https://github.com/tokio-rs/tracing) ·
 > [Prometheus Rust Client](https://github.com/prometheus/client_rust)
 
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
 ## 📑 目录
 
 - [日志与可观测性：Rust 服务端监控生态](#日志与可观测性rust-服务端监控生态)

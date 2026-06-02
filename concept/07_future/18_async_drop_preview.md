@@ -19,6 +19,8 @@
 > [Without Boats Blog — Async Drop](https://without.boats/blog/let-futures-be-futures/) ·
 > [TRPL Ch17 — Pin](https://doc.rust-lang.org/book/ch17-04-pin.html)
 
+> **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
+
 ## 📑 目录
 
 - [Async Drop：异步资源的优雅销毁](#async-drop异步资源的优雅销毁)

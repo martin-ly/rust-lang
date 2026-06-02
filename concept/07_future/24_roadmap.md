@@ -22,6 +22,10 @@
 ---
 > **来源**: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/) · [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/) · [RFC 3086 — Portable SIMD](https://github.com/rust-lang/rfcs/pull/3086) · [RFC 1398 — Global Allocators](https://github.com/rust-lang/rfcs/pull/1398) · [RFC 3185 — Static Async Traits](https://github.com/rust-lang/rfcs/pull/3185) · [RFC 2515 — Type Alias Impl Trait](https://github.com/rust-lang/rfcs/pull/2515) · [Rust Internals — 2027 Edition Wishlist](https://internals.rust-lang.org/) · [Rust Foundation Roadmap](https://foundation.rust-lang.org/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [RFC 3516 — gen blocks](https://github.com/rust-lang/rfcs/pull/3516)
 
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
+> **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
+
 ## 📑 目录
 >
 >

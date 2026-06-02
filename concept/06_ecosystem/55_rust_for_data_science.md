@@ -1,5 +1,11 @@
 > **内容分级**: [综述级]
 >
+> **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
+
+> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
 ## 代码示例：ndarray 数值计算与矩阵操作
 
 以下演示 Rust 数据科学核心库 `ndarray` 的典型用法：

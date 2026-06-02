@@ -19,6 +19,8 @@
 > [Wikipedia — Swift (programming language)](https://en.wikipedia.org/wiki/Swift_(programming_language)) ·
 > [Rust vs Swift Comparison](https://www.rust-lang.org/) · [Swift.org](https://www.swift.org/)
 
+> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+
 ## 📑 目录
 
 - [Rust vs Swift：现代系统语言的两种路径](#rust-vs-swift现代系统语言的两种路径)

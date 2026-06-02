@@ -15,6 +15,12 @@
 
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
+> **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
+
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
+> **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
+
 ## 10.4 边界测试：`gen` block 与 `async gen` 的类型推断（编译错误/未来特性）
 
 ```rust,ignore

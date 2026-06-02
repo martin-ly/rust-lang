@@ -32,6 +32,10 @@
 > [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) ·
 > [Rust Internals — Unsafe Field Discussion](https://internals.rust-lang.org/)
 
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
+> **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
+
 ## 📑 目录
 
 - [Unsafe Fields 预研：字段级安全边界的精确标注](#unsafe-fields-预研字段级安全边界的精确标注)

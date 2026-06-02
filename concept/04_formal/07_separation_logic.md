@@ -8,6 +8,12 @@
 > **归档原因**: 与 `11_separation_logic.md` 内容高度重叠（>90%），且 `11` 版本结构更完整（含形式化模式矩阵、反命题与边界分析等）。
 > **状态**: 已归档（2026-05-25 Phase 1 Cleanup）
 
+> **后置概念**: [Comparative Studies](../05_comparative/01_rust_vs_cpp.md)
+
+> **前置依赖**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
+
+> **前置依赖**: [Concurrency](../03_advanced/01_concurrency.md)
+
 ## 相关概念文件
 
 - [分离逻辑主文件](./11_separation_logic.md) — 形式化分离逻辑（本文件已归档）

@@ -1,13 +1,12 @@
 > **内容分级**: [专家级]
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
+
 # 性能优化：Rust 代码的测量与调优
 
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[性能优化](../../knowledge/03_advanced/05_performance_optimization.md)
-
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 评价
 > **A/S/P 标记**: **S+P** — StructureProcedure
@@ -29,6 +28,8 @@
 > [Rust SIMD Guide](https://doc.rust-lang.org/std/simd/index.html) ·
 > [Coherence Cache Lines](https://en.wikipedia.org/wiki/CPU_cache) ·
 > [TRPL — Optimization](https://doc.rust-lang.org/book/ch13-01-closures.html)
+
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录
 

@@ -28,6 +28,12 @@
 > [Rust async-book](https://rust-lang.github.io/async-book/)
 > [来源: [WfMC — Reference Model](https://www.wfmc.org/standards/reference-model)] · [来源: [van der Aalst — Process Mining](https://www.springer.com/gp/book/9783662498507)] · [来源: [Workflow Patterns](http://www.workflowpatterns.com/)]
 
+> **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
+
+> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
 ## 📑 目录
 
 - [Workflow Theory \& Formalization（工作流理论与形式化）](#workflow-theory--formalization工作流理论与形式化)

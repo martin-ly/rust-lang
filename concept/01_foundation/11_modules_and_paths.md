@@ -7,7 +7,7 @@
 
 > **📎 交叉引用**
 >
-> 本主题在 knowledge 中有系统化的知识索引：[模块系统](../../concept/02_intermediate/10_module_system.md)
+> 本主题在 knowledge 中有系统化的知识索引：[模块系统](../02_intermediate/10_module_system.md)
 > **受众**: [初学者]
 > **Bloom 层级**: 记忆 → 应用
 > **A/S/P 标记**: **A** — Application
@@ -705,8 +705,8 @@ fn main() {
 
 > **相关资源**:
 >
-> - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
-> - [exercises/ 练习](../../exercises/) — 动手编程挑战
+> - [crates/ 示例代码](../crates/) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../exercises/) — 动手编程挑战
 > - [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。

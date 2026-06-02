@@ -13,6 +13,12 @@
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 
+> **后置概念**: [Formal Verification](../04_formal/03_ownership_formal.md)
+
+> **前置依赖**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md)
+
+> **前置依赖**: [Traits](../02_intermediate/01_traits.md)
+
 ## 认知路径
 
 > **📎 交叉引用**

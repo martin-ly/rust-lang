@@ -20,6 +20,10 @@
 > [Wikipedia — Hindley-Milner Type System](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system) ·
 > [Rust RFC 438 — Type Inference](https://github.com/rust-lang/rfcs/pull/438)
 
+> **前置依赖**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
+
+> **前置依赖**: [Concurrency](../03_advanced/01_concurrency.md)
+
 ## 📑 目录
 
 - [类型推断：Hindley-Milner 算法与 Rust 的工业实现](#类型推断hindley-milner-算法与-rust-的工业实现)

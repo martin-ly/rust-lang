@@ -23,6 +23,10 @@
 > [Linkerd](https://linkerd.io/) ·
 > [NATS](https://nats.io/)
 
+> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
 ## 📑 目录
 
 - [分布式 系统：Rust 在微服务 与集群中的工程实践](#分布式-系统rust-在微服务-与集群中的工程实践)

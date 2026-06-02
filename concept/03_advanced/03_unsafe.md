@@ -157,6 +157,7 @@
     - [16.5 边界测试：裸指针算术越界（运行时 UB）](#165-边界测试裸指针算术越界运行时-ub)
     - [16.6 边界测试：`std::mem::transmute` 类型大小不匹配（编译错误）](#166-边界测试stdmemtransmute-类型大小不匹配编译错误)
     - [10.4 边界测试：`union` 的字段访问与活跃字段跟踪（运行时 UB）](#104-边界测试union-的字段访问与活跃字段跟踪运行时-ub)
+  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [参考来源](#参考来源)
     - [16.7 前沿方向：Unsafe Fields（字段级 unsafe，Rust 2026 Project Goal）](#167-前沿方向unsafe-fields字段级-unsaferust-2026-project-goal)
   - [Null 指针有效性定义](#null-指针有效性定义)
@@ -2739,6 +2740,21 @@ fn main() {
 > ——Rust 的 union 是底层原语，需 unsafe 使用。
 > [来源: [Rust Reference — Unions](https://doc.rust-lang.org/reference/items/unions.html)] ·
 > [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+## 逆向推理链（Backward Reasoning）
+
+> **从 UB 反推安全条件**：
+>
+> ```text
+> safe 接口可信 ⟸ unsafe 实现正确 + safe 接口封装 + 人工证明
+> Miri 报错 ⟸ 程序违反了 Stacked/Tree Borrows 别名模型
+> ```
+>
+> **诊断方法**：
+>
+> - Miri: error: Undefined Behavior (dangling pointer) → 违反了 T2(引用有效性) → 检查裸指针生命周期
+> - Miri: error: Undefined Behavior (data race) → 违反了 T5(无数据竞争) → 检查 UnsafeCell 使用或原子序数
+> - Miri: error: invalid enum value → Validity Invariant 违反 → 检查 transmute 的目标类型
 
 ## 参考来源
 

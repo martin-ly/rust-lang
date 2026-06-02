@@ -92,6 +92,7 @@
     - [Q3: `'static` 生命周期意味着什么？](#q3-static-生命周期意味着什么)
     - [Q4: 结构体何时需要生命周期参数？](#q4-结构体何时需要生命周期参数)
     - [Q5: 以下代码的编译结果是什么？](#q5-以下代码的编译结果是什么)
+  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [参考来源](#参考来源)
 
 ## 一、权威定义（Definition）
@@ -1026,8 +1027,8 @@ fn print_it<T: Display + 'static>(t: T) { ... }
 
 ## 实践
 
-> **对应 Crate**: [`c01_ownership_borrow_scope`](../../crates/c01_ownership_borrow_scope/)
-> **对应练习**: [`exercises/rustlings_style/ex05_struct_lifetime.rs`](../../exercises/rustlings_style/ex05_struct_lifetime.rs)
+> **对应 Crate**: [`c01_ownership_borrow_scope`](../crates/c01_ownership_borrow_scope/)
+> **对应练习**: [`exercises/rustlings_style/ex05_struct_lifetime.rs`](../exercises/rustlings_style/ex05_struct_lifetime.rs)
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。
 
@@ -1198,6 +1199,21 @@ fn main() {
 </details>
 
 ---
+
+## 逆向推理链（Backward Reasoning）
+
+> **从生命周期错误反推定理链**：
+>
+> ```text
+> T3(Variance 子类型安全) ⟸ L2(生命周期偏序集) ⟸ L1(引用不能比数据活得久)
+> C2(HRTB 全称量化) ⟸ T1(Elision 推导正确性) ⟸ L2(生命周期偏序集)
+> ```
+>
+> **诊断方法**：
+>
+> - E0597 (`x` does not live long enough) → L1(引用不能比数据活得久) 违反 → 检查被引用值的作用域
+> - E0623 (lifetime mismatch) → L2(偏序集约束) 违反 → 显式标注生命周期关系
+> - E0308 (mismatched types involving lifetimes) → T3(Variance) 违反 → 检查协变/逆变/不变位置
 
 ## 参考来源
 

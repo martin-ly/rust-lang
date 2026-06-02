@@ -19,6 +19,8 @@
 > [The rustc Book — Targets](https://doc.rust-lang.org/rustc/targets/index.html) ·
 > [cross crate](https://github.com/cross-rs/cross)
 
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
 ## 📑 目录
 
 - [交叉编译：多目标平台支持与条件编译](#交叉编译多目标平台支持与条件编译)

@@ -19,6 +19,10 @@
 
 > **来源**: [Rust RFC — Const Traits](https://github.com/rust-lang/rfcs/pull/2632) · [Rust Reference — Const Evaluation](https://doc.rust-lang.org/reference/const_eval.html) · [Tracking Issue #67792](https://github.com/rust-lang/rust/issues/67792) · [Const Eval Working Group](https://github.com/rust-lang/const-eval)
 
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
+> **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
+
 ## 📑 目录
 
 - [Const Trait Impl 预研：常量上下文中的 Trait 泛化](#const-trait-impl-预研常量上下文中的-trait-泛化)

@@ -1,14 +1,12 @@
 # MVP 学习路径：从零到多线程 CLI（40 小时）
->
-> **Rust 版本**: 1.96.0+ (Edition 2024)
 
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **受众**: [初学者]
 > **Bloom 层级**: 记忆 → 应用
 > **定位**: 本项目的**最小可行学习路径**（Minimum Viable Path）。无论背景如何，完成本路径即可独立编写带并发/异步的 Rust CLI 工具。
 > **前置依赖**: 无
 > **预期产出**: 一个功能完整的多线程/异步命令行工具（如文件搜索器、日志分析器或端口扫描器）
 > **总时长**: ~40 小时（可拆分为 2 周，每日 3 小时）
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -41,7 +39,7 @@ Week 2: 并发与工程化（20h）
 | 安装 | `rustup` 安装、IDE 配置、Cargo 初识 | 0.5h | `cargo --version` 正常输出 |
 | 阅读 | [concept/01_foundation/01_ownership.md](../01_foundation/01_ownership.md) | 0.5h | 理解 `fn main` 和 `println!` |
 | 阅读 | [concept/01_foundation/20_variable_model.md](../01_foundation/20_variable_model.md) | 0.5h | 区分 `let` / `let mut` / `const` |
-| 练习 | [exercises/rustlings_style/variables.rs](../../exercises/rustlings_style/variables.rs) | 0.5h | 全部编译通过 |
+| 练习 | [exercises/rustlings_style/variables.rs](../exercises/rustlings_style/variables.rs) | 0.5h | 全部编译通过 |
 | 阅读 | [concept/01_foundation/03_control_flow.md](../01_foundation/07_control_flow.md) | 1h | 掌握 `if` / `match` / `for` / `while` |
 | 练习 | 编写猜数字游戏（无错误处理版） | 1h | 能运行，可猜测 1-100 的随机数 |
 
@@ -56,7 +54,7 @@ Week 2: 并发与工程化（20h）
 | 任务 | 内容 | 时长 | 验证标准 |
 |:---|:---|:---:|:---|
 | 阅读 | [concept/01_foundation/01_ownership.md](../01_foundation/01_ownership.md) | 1.5h | 能向他人解释"所有权三规则" |
-| 练习 | [exercises/rustlings_style/move_semantics.rs](../../exercises/rustlings_style/move_semantics.rs) | 1h | 全部编译通过 |
+| 练习 | [exercises/rustlings_style/move_semantics.rs](../exercises/rustlings_style/move_semantics.rs) | 1h | 全部编译通过 |
 | 阅读 | [concept/01_foundation/02_borrowing.md](../01_foundation/02_borrowing.md) | 1.5h | 区分 `&T` / `&mut T`，理解生命周期标注 |
 | 练习 | 修复 5 个编译器借用错误（从错误信息推导修复方案） | 1h | 不使用 `clone()` 或 `Rc` 也能编译 |
 | 测验 | 自测：为什么这段代码编译失败？ | 1h | 能说出"同时存在可变和不可变引用" |
@@ -196,10 +194,26 @@ Week 2: 并发与工程化（20h）
 
 ---
 
-> **文档版本**: 1.0
+## 外部学习路径参考
+
+> **对齐声明**: 本 MVP 路径与以下外部学习资源的三阶段路径一致，可作为交叉验证和补充学习。
+
+| 外部资源 | 阶段划分 | 对应本路径 | 备注 |
+|:---|:---|:---|:---|
+| [Rustify.rs](https://rustify.rs) 三阶段路径 | **基础** (1-2 周) | Week 1 Day 1-6 | 语法 + 所有权 + 类型系统 |
+| | **应用** (3-4 周) | Week 1 Day 7 + Week 2 Day 8-11 | CLI 工具 + 集合/迭代器 + 并发 |
+| | **精通** (5-8 周) | Week 2 Day 12-14 + 扩展路径 | 异步 + 综合项目 + 深入方向 |
+| [Rust Learning Path (官方)](https://www.rust-lang.org/learn) | 入门 → 进阶 | Week 1 → Week 2 | 官方路径更侧重语言本身，本路径增加工程实践 |
+| [Rust by Example](https://doc.rust-lang.org/rust-by-example/) | 主题式学习 | Day 1-6 阅读材料 | 可作为概念文件的代码示例补充 |
+
+> **差异说明**: Rustify.rs 的三阶段路径（基础→应用→精通）将并发和异步放在"精通"阶段，而本 MVP 路径将其提前到 Week 2，以便在 40 小时内完成一个具备生产价值的 CLI 工具。这是**intentional 的设计选择**，适合有一定编程背景的学习者。纯初学者可将 Week 2 扩展为 3 周。
+
+---
+
+> **文档版本**: 1.1
 > **对应 Rust 版本**: 1.96.0 (Edition 2024)
-> **最后更新**: 2026-05-30
-> **状态**: ✅ MVP 路径已创建
+> **最后更新**: 2026-06-02
+> **状态**: ✅ MVP 路径已创建 · 外部学习路径已对齐
 
 ## 认知路径
 

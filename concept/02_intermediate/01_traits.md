@@ -152,6 +152,7 @@
     - [10.5 边界测试：trait 的孤儿规则与 blanket impl 冲突（编译错误）](#105-边界测试trait-的孤儿规则与-blanket-impl-冲突编译错误)
     - [10.6 边界测试：关联常量与泛型参数的交互（编译错误）](#106-边界测试关联常量与泛型参数的交互编译错误)
   - [实践](#实践)
+  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [参考来源](#参考来源)
 
 ## 一、权威定义（Definition）
@@ -2092,10 +2093,25 @@ fn main() {}
 
 ## 实践
 
-> **对应 Crate**: [`c02_type_system`](../../crates/c02_type_system/) · [`c04_generic`](../../crates/c04_generic/)
-> **对应练习**: [`exercises/src/generics_traits/`](../../exercises/src/generics_traits/)
+> **对应 Crate**: [`c02_type_system`](../crates/c02_type_system/) · [`c04_generic`](../crates/c04_generic/)
+> **对应练习**: [`exercises/src/generics_traits/`](../exercises/src/generics_traits/)
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。
+
+## 逆向推理链（Backward Reasoning）
+
+> **从 Trait 错误反推定理链**：
+>
+> ```text
+> 单态化零成本 ⟸ Coherence ⟸ Orphan Rule
+> dyn Trait 可行性 ⟸ Trait 对象安全条件
+> ```
+>
+> **诊断方法**：
+>
+> - E0117 (only traits defined in the current crate can be implemented for arbitrary types) → Orphan Rule 违反
+> - E0038 (trait cannot be made into an object) → Trait 对象安全条件不满足 → 检查 `Self: Sized` 方法
+> - E0283 (type annotations needed) → 单态化类型推断歧义 → 显式指定类型参数
 
 ## 参考来源
 

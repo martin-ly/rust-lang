@@ -24,6 +24,10 @@
 > [Tree Borrows Paper (POPL 2026)](https://perso.crans.org/vanille/treebor/) ·
 > [Stacked Borrows Paper](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)
 
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
+> **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
+
 ## 📑 目录
 
 - [BorrowSanitizer 概念预研：运行时借用检查工业化](#borrowsanitizer-概念预研运行时借用检查工业化)

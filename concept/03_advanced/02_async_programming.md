@@ -7,6 +7,10 @@
 > **归档原因**: 内容碎片化（仅 25 行），已被主文件和模式文件覆盖。
 > **状态**: 已归档（2026-05-25 Phase 1 Cleanup）
 
+> **后置概念**: [Formal Verification](../04_formal/03_ownership_formal.md)
+
+> **前置概念**: [Async Basics](../03_advanced/02_async.md)
+
 ## 相关概念文件
 
 > **📎 交叉引用**

@@ -24,6 +24,8 @@
 
 ---
 
+> **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
+
 ## 一、核心命题
 
 > **[来源: GitHub Copilot Docs; ChatGPT API Docs]** ✅

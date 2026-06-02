@@ -1,5 +1,9 @@
 > **内容分级**: [综述级]
 >
+> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
 ## 代码示例：egui 即时模式 GUI（嵌入式场景）
 
 以下演示使用 `egui` 在资源受限环境下构建交互式界面：

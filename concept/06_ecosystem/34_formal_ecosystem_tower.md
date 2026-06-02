@@ -11,6 +11,10 @@
 
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
+> **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
+
+> **前置概念**: [Formal Verification](../04_formal/03_ownership_formal.md)
+
 ## 相关概念文件
 
 - [Formal Ecosystem Tower 主文件](./05_formal_ecosystem_tower.md) — Rust 生态形式化分层塔（本文件已归档）

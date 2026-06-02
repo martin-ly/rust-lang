@@ -22,6 +22,10 @@
 > [Wikipedia — Lock-free](https://en.wikipedia.org/wiki/Non-blocking_algorithm) ·
 > [Herlihy & Shavit — The Art of Multiprocessor Programming](https://www.amazon.com/Art-Multiprocessor-Programming-Revised-Reprint/dp/0123973376)
 
+> **前置依赖**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md)
+
+> **前置依赖**: [Traits](../02_intermediate/01_traits.md)
+
 ## 📑 目录
 
 - [无锁编程与内存模型](#无锁编程与内存模型)

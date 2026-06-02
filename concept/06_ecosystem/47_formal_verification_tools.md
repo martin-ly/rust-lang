@@ -22,6 +22,10 @@
 > [Aeneas — Rust Verification](https://github.com/AeneasVerif/aeneas) ·
 > [RefinedRust — Iris-based](https://gitlab.mpi-sws.org/lgaeher/refinedrust)
 
+> **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
+
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
 ## 📑 目录
 
 - [Formal Verification Tools（形式化验证工具生态）](#formal-verification-tools形式化验证工具生态)

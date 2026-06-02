@@ -23,6 +23,12 @@
 > [Vulkan Specification](https://www.khronos.org/registry/vulkan/specs/1.3/html/vkspec.html) ·
 > [WGPU Documentation](https://docs.rs/wgpu/latest/wgpu/)
 
+> **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
+
+> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
 ## 📑 目录
 
 - [Game Engine Internals（游戏引擎内部原理）](#game-engine-internals游戏引擎内部原理)

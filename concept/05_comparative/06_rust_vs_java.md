@@ -18,6 +18,8 @@
 > [TRPL — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) ·
 > [Java Memory Model (JMM)](https://docs.oracle.com/javase/specs/jls/se21/html/jls-17.html)
 
+> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+
 ## 📑 目录
 >
 >

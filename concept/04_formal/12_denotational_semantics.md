@@ -14,6 +14,10 @@
 
 > **来源**: [The Semantics of Programming Languages (Winskel)](https://www.cl.cam.ac.uk/~gw104/Semantics.pdf) · [Domain Theory (Abramsky & Jung)](https://www.cs.ox.ac.uk/people/samson.abramsky/dt.ps) · [Wikipedia — Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_semantics) · [Wikipedia — Domain Theory](https://en.wikipedia.org/wiki/Domain_theory)
 
+> **前置依赖**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
+
+> **前置依赖**: [Concurrency](../03_advanced/01_concurrency.md)
+
 ## 📑 目录
 
 - [指称语义与领域理论](#指称语义与领域理论)

@@ -29,6 +29,8 @@ fn main() {
 
 > **修正**: **WASI**（WebAssembly System Interface）的**capability-based security**：1) 程序不能随意访问文件系统，需运行时显式授予（`wasmtime --dir=/tmp`）；2) 类似能力模型：程序持有"capability"（文件描述符），而非拥有全局权限；3) 沙箱化：即使代码被入侵，攻击者只能访问授权资源。对比 POSIX：1) POSIX 进程拥有用户所有权限（一旦运行，可访问用户的全部文件）；2) WASI 的 capability 更细粒度（per-directory、per-file）；3) 未来：网络、环境变量的 capability。Rust 的 WASI target：``wasm32-wasip1` 或 `wasm32-wasip2``（旧）→ ``wasm32-wasip1` 或 `wasm32-wasip2`p1`/``wasm32-wasip1` 或 `wasm32-wasip2`p2`（组件模型）。这与浏览器的同源策略（类似 capability，但基于 origin）或 Android 的权限模型（安装时授予，运行时检查）不同——WASI 的 capability 是传递给运行时的，程序本身声明需要的能力。[来源: [WASI](https://wasi.dev/)] · [来源: [Wasmtime](https://docs.wasmtime.dev/)]
 
+> **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
+
 ## 认知路径
 
 > **认知路径**: 从 Rust 核心语言特性出发，经由 **WASM Target Evolution Preview** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。

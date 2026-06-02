@@ -24,6 +24,10 @@
 > [Wikipedia — Embedded System](https://en.wikipedia.org/wiki/Embedded_system) ·
 > [Ferrous Systems](https://ferrous-systems.com/)
 
+> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
 ## 📑 目录
 
 - [Rust 嵌入式系统开发](#rust-嵌入式系统开发)

@@ -105,6 +105,7 @@
     - [Q3: `i32` 和 `String` 在赋值时的行为有何不同？](#q3-i32-和-string-在赋值时的行为有何不同)
     - [Q4: 函数参数传递后，原变量还能继续使用吗？](#q4-函数参数传递后原变量还能继续使用吗)
     - [Q5: 为什么 `&str` 作为函数参数比 `String` 更灵活？](#q5-为什么-str-作为函数参数比-string-更灵活)
+  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [参考来源](#参考来源)
 
 ## 一、权威定义（Definition）
@@ -1352,8 +1353,8 @@ struct Label { text: String }
 
 ## 实践
 
-> **对应 Crate**: [`c01_ownership_borrow_scope`](../../crates/c01_ownership_borrow_scope/)
-> **对应练习**: [`exercises/src/ownership_borrowing/`](../../exercises/src/ownership_borrowing/)
+> **对应 Crate**: [`c01_ownership_borrow_scope`](../crates/c01_ownership_borrow_scope/)
+> **对应练习**: [`exercises/src/ownership_borrowing/`](../exercises/src/ownership_borrowing/)
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。
 
@@ -1497,6 +1498,21 @@ fn greet_str(s: &str) { }
 </details>
 
 ---
+
+## 逆向推理链（Backward Reasoning）
+
+> **从编译错误反推定理链**：
+>
+> ```text
+> C3(Safe Rust 内存安全完备性) ⟸ T5(无数据竞争) ⟸ T4(&mut 唯一性) ⟸ L1(所有权唯一性)
+> C2(裸指针危险) ⟸ C1(无所有权) ⟸ T1(RAII 失效)
+> ```
+>
+> **诊断方法**：当编译器报告借用检查错误时，从错误类型定位到失效的定理节点，向上追溯至需要修正的前提。
+>
+> - E0382 (use of moved value) → L2(Move 语义) 违反 → 检查是否误用已移动变量
+> - E0499 (cannot borrow `x` as mutable more than once) → T4(&mut 唯一性) 违反 → L1(所有权唯一性) 约束未满足
+> - E0502 (cannot borrow `x` as immutable because it is also borrowed as mutable) → T1(AXM) 违反 → 检查 &mut T 与 &T 的生命周期重叠
 
 ## 参考来源
 

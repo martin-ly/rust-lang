@@ -24,6 +24,10 @@
 
 ---
 
+> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
 ## 权威定义
 
 ### Wikipedia 权威定义

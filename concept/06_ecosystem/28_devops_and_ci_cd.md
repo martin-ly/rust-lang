@@ -18,6 +18,10 @@
 
 > **来源**: [GitHub Actions Docs](https://docs.github.com/en/actions) · [Cargo Book — Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) · [cargo-release](https://github.com/crate-ci/cargo-release) · [Docker — Best Practices](https://docs.docker.com/build/building/multi-stage/) · [cargo-audit](https://github.com/RustSec/rustsec/tree/main/cargo-audit) · [cargo-deny](https://github.com/EmbarkStudios/cargo-deny) · [Cross-rs](https://github.com/cross-rs/cross) · [Rust CI Best Practices](https://pascalhertleif.de/artikel/good-practices-for-writing-rust-libraries/) · [Mozilla Rust CI Guide](https://firefox-source-docs.mozilla.org/build/buildsystem/rust.html)
 
+> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
 ## 📑 目录
 
 - [DevOps 与 CI/CD：Rust 的持续交付工程实践](#devops-与-cicdrust-的持续交付工程实践)

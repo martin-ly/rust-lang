@@ -8,6 +8,12 @@
 > **归档原因**: 与 `17_operational_semantics.md` 内容高度重叠（>90%），且 `17` 版本结构更规范。
 > **状态**: 已归档（2026-05-25 Phase 1 Cleanup）
 
+> **后置概念**: [Comparative Studies](../05_comparative/01_rust_vs_cpp.md)
+
+> **前置依赖**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
+
+> **前置依赖**: [Concurrency](../03_advanced/01_concurrency.md)
+
 ## 相关概念文件
 
 - [操作语义主文件](./17_operational_semantics.md) — 结构化操作语义（本文件已归档）

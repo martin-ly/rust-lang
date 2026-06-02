@@ -19,6 +19,8 @@
 > [Wikipedia — Covariance and Contravariance](https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)) ·
 > [TAPL — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
 
+> **前置依赖**: [Concurrency](../03_advanced/01_concurrency.md)
+
 ## 📑 目录
 
 - [子类型与变型：Rust 类型系统中的协变、逆变与不变](#子类型与变型rust-类型系统中的协变逆变与不变)

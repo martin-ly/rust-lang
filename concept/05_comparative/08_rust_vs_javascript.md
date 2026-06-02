@@ -20,6 +20,8 @@
 > [Rust and WASM](https://rustwasm.github.io/book/) ·
 > [V8 Blog](https://v8.dev/blog)
 
+> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+
 ## 📑 目录
 
 - [Rust vs JavaScript：系统编程与脚本执行的范式差异](#rust-vs-javascript系统编程与脚本执行的范式差异)

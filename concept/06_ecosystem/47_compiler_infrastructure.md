@@ -14,6 +14,12 @@
 
 > **来源**: [Rust Compiler Team](https://rust-lang.github.io/compiler-team/) · [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/) · [Cranelift README](https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/README.md) · [RFC 3873 — build-std](https://github.com/rust-lang/rfcs/pull/3873)
 
+> **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
+
+> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
 ## 一、编译器架构总览
 
 ```text

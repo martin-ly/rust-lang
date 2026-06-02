@@ -17,6 +17,10 @@
 > [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) ·
 > [Wikipedia — Memory Safety](https://en.wikipedia.org/wiki/Memory_safety)
 
+> **前置依赖**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md)
+
+> **前置依赖**: [Traits](../02_intermediate/01_traits.md)
+
 ## 📑 目录
 
 - [Unsafe Rust 模式：安全抽象的核心技术](#unsafe-rust-模式安全抽象的核心技术)

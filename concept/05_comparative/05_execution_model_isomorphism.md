@@ -21,6 +21,10 @@
 
 ---
 
+> **后置概念**: [Ecosystem](../06_ecosystem/01_toolchain.md)
+
+> **前置概念**: [Rust vs Java](../05_comparative/06_rust_vs_java.md)
+
 ## 📑 目录
 >
 

@@ -9,6 +9,8 @@
 
 ---
 
+> **后置概念**: [Formal Verification](../04_formal/03_ownership_formal.md)
+
 ## 📑 目录
 
 - [Async/Await 高级主题](#asyncawait-高级主题)

@@ -1852,7 +1852,7 @@ fn main() {}
 
 ## 实践
 
-> **对应 Crate**: [`c01_ownership_borrow_scope`](../../crates/c01_ownership_borrow_scope/)
+> **对应 Crate**: [`c01_ownership_borrow_scope`](../crates/c01_ownership_borrow_scope/)
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。
 

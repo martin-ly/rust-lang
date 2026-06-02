@@ -9,6 +9,10 @@
 
 > **本节关键术语**: 迭代器模式 (Iterator Pattern) · 适配器 (Adapter) · 消费者 (Consumer) · 惰性求值 (Lazy Evaluation) · 自定义迭代器 — [完整对照表](../00_meta/terminology_glossary.md)
 >
+> **后置概念**: [Concurrency](../03_advanced/01_concurrency.md) · [Async](../03_advanced/02_async.md)
+
+> **前置概念**: [Iterator Patterns](../02_intermediate/15_iterator_patterns.md)
+
 ## 相关概念文件
 
 - [迭代器模式主文件](./15_iterator_patterns.md) — 迭代器模式完整内容（本文件已归档）

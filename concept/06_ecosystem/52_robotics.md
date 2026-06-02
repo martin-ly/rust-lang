@@ -35,6 +35,12 @@
 > [PREEMPT_RT Wiki](https://wiki.linuxfoundation.org/realtime/start) ·
 > [Rust Embedded Book](https://docs.rust-embedded.org/book/)
 
+> **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
+
+> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
 ## 📑 目录
 
 - [Robotics \& ROS2 in Rust（机器人学与 ROS2 Rust 生态）](#robotics--ros2-in-rust机器人学与-ros2-rust-生态)

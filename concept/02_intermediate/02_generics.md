@@ -154,6 +154,7 @@
     - [10.5 边界测试：泛型约束的传递性与 trait bound 推导（编译错误）](#105-边界测试泛型约束的传递性与-trait-bound-推导编译错误)
     - [10.6 边界测试：const generic 的默认参数与数组大小推断（编译错误）](#106-边界测试const-generic-的默认参数与数组大小推断编译错误)
   - [实践](#实践)
+  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [参考来源](#参考来源)
 
 ## 一、权威定义（Definition）
@@ -2476,12 +2477,27 @@ fn main() {
 
 ## 实践
 
-> **对应 Crate**: [`c04_generic`](../../crates/c04_generic/)
+> **对应 Crate**: [`c04_generic`](../crates/c04_generic/)
 > **对应练习**:
-> [`exercises/src/generics_traits/`](../../exercises/src/generics_traits/) ·
-> [`exercises/rustlings_style/ex07_generic_type_fix.rs`](../../exercises/rustlings_style/ex07_generic_type_fix.rs)
+> [`exercises/src/generics_traits/`](../exercises/src/generics_traits/) ·
+> [`exercises/rustlings_style/ex07_generic_type_fix.rs`](../exercises/rustlings_style/ex07_generic_type_fix.rs)
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。
+
+## 逆向推理链（Backward Reasoning）
+
+> **从泛型错误反推定理链**：
+>
+> ```text
+> 语义保持 ⟸ 单态化零成本 ⟸ 参数多态
+> 约束可满足性 ⟸ System F 类型规则
+> ```
+>
+> **诊断方法**：
+>
+> - E0282 (type annotations needed) → 参数多态类型推断不足 → 显式标注类型参数
+> - E0277 (trait bound not satisfied) → 约束可满足性 违反 → 为泛型参数添加 Trait Bound
+> - E0792 (expected generic lifetime parameter) → 生命周期约束未满足 → 显式关联生命周期参数
 
 ## 参考来源
 

@@ -2867,6 +2867,22 @@ fn main() {}
 
 > **修正**: Rust stable **不支持 trait 中的 `async fn`**（RPITIT — Return Position Impl Trait In Traits，1.75.0+ 已稳定！）。`async_trait` crate 提供过程宏 workaround：`// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]` 自动将 `async fn` 转为返回 `Pin<Box<dyn Future>>`。1.75.0+ 后，原生 `async fn` 在 trait 中可用，但需注意：1) `Send` 约束不自动推导（`async_trait` 自动添加）；2) 动态分发（`dyn Trait`）仍需 `async_trait` 或手动 `Box::pin`。异步 trait 是 Rust async 生态的关键里程碑，使 async/await 可用于 trait 抽象。这与 C# 的 `async` 接口方法（原生支持）或 Java 的 `CompletableFuture`（接口中返回 Future，非 async 方法）不同——Rust 的 async trait 支持是语言演进的重要步骤。[来源: [Rust 1.75 Release Notes](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html)] · [来源: [async_trait crate](https://docs.rs/AFIT（async fn in trait，Rust 1.75.0+ 稳定）/)]
 
+## 逆向推理链（Backward Reasoning）
+
+> **从异步错误反推定理链**：
+>
+> ```text
+> T1(async/await 状态机变换) ⟸ L2(Pin<&mut Self> 自引用安全) ⟸ L1(Future trait 语义)
+> T2(Send Future) ⟸ L2(Pin<&mut Self> 自引用安全)
+> C1(!Send 类型跨 await ⟹ 编译错误) ⟸ T2(Send Future)
+> ```
+>
+> **诊断方法**：
+>
+> - E0277 (future cannot be sent between threads safely) → T2(Send Future) 违反 → 检查 async 块内捕获的变量类型
+> - E0769 (awaited future has type `!Send`) → C1(!Send 跨 await) → 将 !Send 变量移出 async 块
+> - E0746 (type contains a self-referential struct) → L2(Pin 安全) 违反 → 使用 `pin!` 或 `Box::pin`
+
 ## 参考来源
 
 > [来源: [Rust Reference — Async/Await](https://doc.rust-lang.org/reference/expressions/await-expr.html)]

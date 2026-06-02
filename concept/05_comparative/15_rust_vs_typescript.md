@@ -13,6 +13,8 @@
 
 > **来源**: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html) · [TypeScript Deep Dive](https://basarat.gitbook.io/typescript/) · [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [TC39 ECMAScript](https://tc39.es/ecma262/) · [WASM Specification](https://webassembly.github.io/spec/) · [Rust and WASM](https://rustwasm.github.io/book/) · [wasm-bindgen](https://rustwasm.github.io/wasm-bindgen/) · [ts-rs crate](https://docs.rs/ts-rs/latest/ts_rs/) · [oxc project](https://oxc.rs/) · [swc project](https://swc.rs/) · [Type System — Wikipedia](https://en.wikipedia.org/wiki/Type_system) · [Structural vs Nominal Typing](https://www.typescriptlang.org/docs/handbook/type-compatibility.html) · [Rustnomicon](https://doc.rust-lang.org/nomicon/) · [Node.js Performance](https://nodejs.org/en/docs/guides/dont-block-the-event-loop)
 
+> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+
 ## 📑 目录
 >
 

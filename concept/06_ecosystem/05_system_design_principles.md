@@ -17,6 +17,10 @@
 
 ---
 
+> **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
+
+> **前置概念**: [Architecture Patterns](../06_ecosystem/35_architecture_patterns.md)
+
 ## 📑 目录
 
 - [Rust 系统设计原则与国际权威对齐](#rust-系统设计原则与国际权威对齐)

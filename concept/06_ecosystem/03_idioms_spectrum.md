@@ -17,6 +17,10 @@
 
 ---
 
+> **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
+
+> **前置概念**: [Patterns](../06_ecosystem/02_patterns.md)
+
 ## 📑 目录
 
 - [Rust 惯用法谱系全景（Idioms Spectrum）](#rust-惯用法谱系全景idioms-spectrum)

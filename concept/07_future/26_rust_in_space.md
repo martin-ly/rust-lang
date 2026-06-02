@@ -36,6 +36,8 @@ fn main() {
 
 > **修正**: **单事件翻转**（SEU, Single Event Upset）是太空辐射导致的位翻转：1) 发生在 SRAM、寄存器、逻辑电路；2) 可翻转指针值 → 指向无效地址；3) 可翻转校验和 → 数据损坏不被检测。Rust 的内存安全在此无效：1) 位翻转不违反 Rust 的引用规则（翻转后的指针仍"合法"，只是指向错误地址）；2) `unsafe` 代码的 raw pointer 更脆弱；3) 需硬件级保护（EDAC、三模冗余）。缓解策略：1) **EDAC**（Error Detection And Correction）内存；2) **CRC** 或 **双校验和**；3) **看门狗定时器**；4) **Rust 的 `no_std` + 自定义 panic handler**（优雅降级）。这与 C 的同样脆弱（无内存安全优势）或 Ada 的 SPARK（形式化验证，但不抗硬件错误）类似——太空软件需多层防护：形式化验证 + 内存安全 + 硬件冗余 + 错误检测。[来源: [Space Software](https://www.nasa.gov/software/)] · [来源: [SEU Mitigation](https://www.sciencedirect.com/topics/engineering/single-event-upset)]
 
+> **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
+
 ## 认知路径
 
 > **认知路径**: 从 Rust 核心语言特性出发，经由 **Rust in Space Preview** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。

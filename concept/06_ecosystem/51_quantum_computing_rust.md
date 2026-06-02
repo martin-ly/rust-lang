@@ -1,5 +1,9 @@
 > **内容分级**: [实验级]
 
+> **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
+
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
 ## 代码示例：量子门操作模拟（概念性实现）
 
 以下展示用量子计算核心概念（叠加态、幺正变换）在 Rust 中的数学表达：

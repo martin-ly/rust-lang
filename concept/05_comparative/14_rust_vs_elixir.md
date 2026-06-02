@@ -13,6 +13,10 @@
 
 > **来源**: [Elixir Official](https://elixir-lang.org/) · [Erlang/OTP](https://www.erlang.org/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Wikipedia — Erlang](https://en.wikipedia.org/wiki/Erlang_(programming_language))
 
+> **前置依赖**: [Concurrency](../03_advanced/01_concurrency.md) · [Unsafe](../03_advanced/03_unsafe.md)
+
+> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+
 ## 📑 目录
 >
 

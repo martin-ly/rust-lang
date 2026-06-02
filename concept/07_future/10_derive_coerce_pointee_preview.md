@@ -22,6 +22,10 @@
 > [The Rustonomicon — Coercions](https://doc.rust-lang.org/nomicon/coercions.html) ·
 > [Tracking Issue #123430](https://github.com/rust-lang/rust/issues/123430)
 
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
+> **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
+
 ## 📑 目录
 
 - [派生 CoercePointee 预研：智能指针的自动类型强制](#派生-coercepointee-预研智能指针的自动类型强制)

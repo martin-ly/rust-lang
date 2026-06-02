@@ -22,6 +22,10 @@
 > [LLVM Atomic Instructions](https://llvm.org/docs/Atomics.html) ·
 > [Wikipedia — Memory Ordering](https://en.wikipedia.org/wiki/Memory_ordering)
 
+> **前置依赖**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md)
+
+> **前置依赖**: [Traits](../02_intermediate/01_traits.md)
+
 ## 📑 目录
 
 - [原子操作与内存序：无锁并发的精确控制](#原子操作与内存序无锁并发的精确控制)

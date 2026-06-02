@@ -23,6 +23,10 @@
 > [OSI Approved Licenses](https://opensource.org/licenses) ·
 > [Wikipedia — Software License](https://en.wikipedia.org/wiki/Software_license)
 
+> **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
+
+> **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+
 ## 📑 目录
 
 - [许可证与合规：Rust 项目的法律工程](#许可证与合规rust-项目的法律工程)

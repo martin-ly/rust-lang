@@ -9,6 +9,10 @@
 
 > **本节关键术语**: 数值运算 (Numeric Operations) · 饱和运算 (Saturating) · 包装运算 (Wrapping) ·  checked 运算 · 类型提升 (Promotion) — [完整对照表](../00_meta/terminology_glossary.md)
 >
+> **后置概念**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
+
+> **前置概念**: [Numeric Types](../01_foundation/11_numeric_types.md)
+
 ## 相关概念文件
 
 - [数值类型主文件](./10_numerics.md) — 数值类型与运算完整图景（本文件已归档）
