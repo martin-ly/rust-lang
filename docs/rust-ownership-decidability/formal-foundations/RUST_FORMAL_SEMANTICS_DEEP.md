@@ -254,7 +254,7 @@
   - [Document Information](#document-information)
   - [*End of Document*](#end-of-document)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 ---
 

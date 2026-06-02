@@ -8,7 +8,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Precise Capturing (+ use\<'lt\>) 的生命周期语义](#precise-capturing--uselt-的生命周期语义)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. 引言](#1-引言)
     - [1.1 什么是 Precise Capturing](#11-什么是-precise-capturing)
   - [2. 语法定义](#2-语法定义)
@@ -57,7 +57,7 @@
   - [通过 `use<'lt>`，开发者可以编写出生命周期约束更精确、API 更灵活的 Rust 代码](#通过-uselt开发者可以编写出生命周期约束更精确api-更灵活的-rust-代码)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. 引言
 >

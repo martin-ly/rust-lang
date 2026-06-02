@@ -87,7 +87,7 @@
     - [Appendix D: Quick Reference](#appendix-d-quick-reference)
   - [*Counter-Examples: 15+*](#counter-examples-15)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 ---
 

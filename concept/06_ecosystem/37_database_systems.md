@@ -1,6 +1,6 @@
 > **内容分级**: [专家级]
 
-> ⚠️ **代码示例待扩充** [社区贡献欢迎]: 本节需要与主题匹配的可编译 Rust 代码示例。>
+>
 # 数据库系统：Rust 在存储引擎中的语义
 >
 > **受众**: [进阶]
@@ -253,6 +253,60 @@ FROM person:tobie;
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 新建 — 工业系统深度对齐
+
+---
+
+## 七、极简键值存储示例
+>
+> 以下是一个不依赖外部数据库 crate、纯 Rust 标准库实现的内存键值存储，展示数据库核心操作的可编译表达：
+
+```rust
+use std::collections::HashMap;
+
+struct KeyValueStore {
+    data: HashMap<String, String>,
+}
+
+impl KeyValueStore {
+    fn new() -> Self {
+        Self {
+            data: HashMap::new(),
+        }
+    }
+
+    fn set(&mut self, key: &str, value: &str) {
+        self.data.insert(key.to_string(), value.to_string());
+    }
+
+    fn get(&self, key: &str) -> Option<&String> {
+        self.data.get(key)
+    }
+
+    fn query_by_prefix(&self, prefix: &str) -> Vec<(&String, &String)> {
+        self.data
+            .iter()
+            .filter(|(k, _)| k.starts_with(prefix))
+            .collect()
+    }
+}
+
+fn main() {
+    let mut db = KeyValueStore::new();
+    db.set("user:1", "{\"name\":\"Alice\",\"age\":30}");
+    db.set("user:2", "{\"name\":\"Bob\",\"age\":25}");
+    db.set("session:abc123", "{\"user_id\":1}");
+
+    println!("Get user:1 = {:?}", db.get("user:1"));
+
+    let users: Vec<_> = db.query_by_prefix("user:");
+    println!("Found {} users", users.len());
+    for (k, v) in users {
+        println!("  {} => {}", k, v);
+    }
+}
+```
+
+> **设计意图**: 此示例展示数据库系统的**数据模型**与**查询接口**核心——`HashMap` 作为最小存储引擎，`query_by_prefix` 模拟索引扫描。Rust 的 `HashMap` 在标准库中已针对缓存局部性优化（Robin Hood 哈希），与生产级嵌入式数据库（如 RocksDB、Sled）的设计哲学一致：数据局部性优先。 [来源: 💡 原创实现]
 
 ---
 

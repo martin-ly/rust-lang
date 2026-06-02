@@ -9,7 +9,7 @@
 
 ## 目录
 
-- [`--remap-path-scope` 完全指南](#--remap-path-scope-完全指南)
+- [`--remap-path-scope` 完全指南](#remap-path-scope-完全指南)
   - [目录](#目录)
   - [一、什么是 `--remap-path-scope`](#一什么是---remap-path-scope)
     - [背景问题](#背景问题)

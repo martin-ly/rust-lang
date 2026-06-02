@@ -16,7 +16,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 12: WebAssembly应用](#实践项目-12-webassembly应用)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [项目目标](#项目目标)
   - [功能需求](#功能需求)
   - [学习要点](#学习要点)

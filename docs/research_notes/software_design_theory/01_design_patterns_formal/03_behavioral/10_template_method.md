@@ -8,7 +8,7 @@
 > **[来源: Rust Official Docs]**
 
 - [Template Method 形式化分析](#template-method-形式化分析)
-  - [� 目录 {#-目录}](#-目录--目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Template Method 结构）](#def-11template-method-结构)
     - [Axiom TM1（骨架不变公理）](#axiom-tm1骨架不变公理)

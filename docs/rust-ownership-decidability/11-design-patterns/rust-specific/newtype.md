@@ -12,7 +12,7 @@
 ## 📑 目录
 >
 - [Newtype Pattern in Rust](#newtype-pattern-in-rust)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [概念](#概念)
   - [基础示例](#基础示例)
   - [为外部类型实现 Trait](#为外部类型实现-trait)

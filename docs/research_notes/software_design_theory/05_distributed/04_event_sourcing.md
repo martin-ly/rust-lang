@@ -13,7 +13,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Event Sourcing 模式形式化定义](#event-sourcing-模式形式化定义)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. 概念定义 (Def)](#1-概念定义-def)
     - [Def ES1: Event Sourcing](#def-es1-event-sourcing)
     - [Def ES2: 事件不变性](#def-es2-事件不变性)
@@ -27,7 +27,7 @@
     - [Theorem ES2: 审计完整性](#theorem-es2-审计完整性)
   - [4. Rust 实现示例](#4-rust-实现示例)
   - [5. 与 CQRS 的关系](#5-与-cqrs-的关系)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)

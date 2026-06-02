@@ -14,7 +14,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [λ演算基础 (Lambda Calculus Foundations)](#λ演算基础-lambda-calculus-foundations)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. 引言](#1-引言)
   - [2. 无类型 λ演算 (Untyped Lambda Calculus)](#2-无类型-λ演算-untyped-lambda-calculus)
     - [2.1 语法定义](#21-语法定义)
@@ -40,7 +40,7 @@
   - [**最后更新**: 2026-03-08](#最后更新-2026-03-08)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. 引言
 >

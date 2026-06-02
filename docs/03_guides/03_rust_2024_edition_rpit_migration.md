@@ -13,7 +13,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 2024 Edition RPIT Lifetime Capture 迁移指南](#rust-2024-edition-rpit-lifetime-capture-迁移指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [概述](#概述)
   - [变化详情](#变化详情)
     - [Rust 2021 及之前](#rust-2021-及之前)

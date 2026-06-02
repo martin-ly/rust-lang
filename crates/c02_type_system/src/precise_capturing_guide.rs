@@ -192,6 +192,7 @@ fn good<'a>(s: &'a str) -> impl Iterator<Item = &'a str> + use<'a> {
 pub struct PreciseCapturingDecisionTree;
 
 impl PreciseCapturingDecisionTree {
+    /// Return a textual explanation of the `use<..>` precise capturing decision tree.
     pub fn explain() -> &'static str {
         r#"
 use<..> Precise Capturing 决策树:

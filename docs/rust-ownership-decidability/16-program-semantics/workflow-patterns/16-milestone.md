@@ -8,7 +8,7 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [16 里程碑模式 (Milestone)](#16-里程碑模式-milestone)
-  - [📋 目录](#-目录)
+  - [📋 目录](#目录)
   - [模式定义与语义](#模式定义与语义)
     - [核心语义](#核心语义)
     - [状态条件语义](#状态条件语义)
@@ -30,7 +30,7 @@
   - [学术参考](#学术参考)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 ## 模式定义与语义
 >

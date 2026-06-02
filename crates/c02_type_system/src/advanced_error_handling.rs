@@ -206,6 +206,7 @@ pub struct ErrorContext {
 }
 
 impl ErrorContext {
+    /// Create a new instance.
     pub fn new(component: String, operation: String) -> Self {
         Self {
             timestamp: SystemTime::now()
@@ -220,16 +221,19 @@ impl ErrorContext {
         }
     }
 
+    /// Set the request id.
     pub fn with_request_id(mut self, request_id: String) -> Self {
         self.request_id = Some(request_id);
         self
     }
 
+    /// Set the user id.
     pub fn with_user_id(mut self, user_id: String) -> Self {
         self.user_id = Some(user_id);
         self
     }
 
+    /// Set the metadata.
     pub fn with_metadata(mut self, key: String, value: String) -> Self {
         self.metadata.insert(key, value);
         self
@@ -246,6 +250,7 @@ pub struct ContextualError {
 }
 
 impl ContextualError {
+    /// Create a new instance.
     pub fn new(error: AppError, context: ErrorContext) -> Self {
         Self {
             error,
@@ -254,11 +259,13 @@ impl ContextualError {
         }
     }
 
+    /// Set the cause.
     pub fn with_cause(mut self, cause: ContextualError) -> Self {
         self.cause = Some(Box::new(cause));
         self
     }
 
+    /// Chain length.
     pub fn chain_length(&self) -> usize {
         let mut length = 1;
         let mut current = &self.cause;
@@ -269,6 +276,7 @@ impl ContextualError {
         length
     }
 
+    /// Get root cause.
     pub fn get_root_cause(&self) -> &AppError {
         let mut current = self;
         while let Some(cause) = &current.cause {
@@ -332,6 +340,7 @@ pub struct ErrorRecovery {
 }
 
 impl ErrorRecovery {
+    /// Create a new instance.
     pub fn new() -> Self {
         Self {
             strategies: HashMap::new(),
@@ -339,11 +348,13 @@ impl ErrorRecovery {
         }
     }
 
+    /// Add strategy.
     pub fn add_strategy(&mut self, error_type: String, strategy: RecoveryStrategy) {
         self.strategies.insert(error_type, strategy);
     }
 
     #[allow(unused_variables)]
+    /// Recover.
     pub fn recover<F, T>(&self, error: &AppError, operation: F) -> Result<T, AppError>
     where
         F: Fn() -> Result<T, AppError>,
@@ -432,6 +443,7 @@ pub struct ErrorTransformer {
 }
 
 impl ErrorTransformer {
+    /// Create a new instance.
     pub fn new() -> Self {
         Self {
             mappings: HashMap::new(),
@@ -439,6 +451,7 @@ impl ErrorTransformer {
     }
 
     #[allow(unused_variables)]
+    /// Add mapping.
     pub fn add_mapping<F>(&mut self, from_type: String, transformer: F)
     where
         F: Fn(AppError) -> AppError + Send + Sync + 'static,
@@ -446,6 +459,7 @@ impl ErrorTransformer {
         self.mappings.insert(from_type, Box::new(transformer));
     }
 
+    /// Transform.
     pub fn transform(&self, error: AppError) -> AppError {
         let error_type = self.get_error_type(&error);
 
@@ -524,6 +538,7 @@ pub struct ErrorMetrics {
 }
 
 impl ErrorMonitor {
+    /// Create a new instance.
     pub fn new() -> Self {
         Self {
             logs: Arc::new(Mutex::new(Vec::new())),
@@ -531,6 +546,7 @@ impl ErrorMonitor {
         }
     }
 
+    /// Log error.
     pub fn log_error(&self, error: AppError, context: ErrorContext, level: ErrorLevel) {
         let entry = ErrorLogEntry {
             timestamp: SystemTime::now()
@@ -574,6 +590,7 @@ impl ErrorMonitor {
         }
     }
 
+    /// Get metrics.
     pub fn get_metrics(&self) -> ErrorMetrics {
         let metrics = self.metrics.lock().expect("指标锁定失败");
         ErrorMetrics {
@@ -585,6 +602,7 @@ impl ErrorMonitor {
         }
     }
 
+    /// Get recent errors.
     pub fn get_recent_errors(&self, limit: usize) -> Vec<ErrorLogEntry> {
         let logs = self.logs.lock().expect("日志锁定失败");
         logs.iter().rev().take(limit).cloned().collect()
@@ -624,6 +642,7 @@ pub struct ErrorHandler {
 }
 
 impl ErrorHandler {
+    /// Create a new instance.
     pub fn new() -> Self {
         Self {
             monitor: ErrorMonitor::new(),

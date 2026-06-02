@@ -79,7 +79,7 @@
   - [Appendix B: Glossary](#appendix-b-glossary)
   - [*Last Updated: 2026-03-06*](#last-updated-2026-03-06)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 ---
 

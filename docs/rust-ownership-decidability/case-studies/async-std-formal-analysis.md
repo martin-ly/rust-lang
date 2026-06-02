@@ -15,7 +15,7 @@
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-- [async-std [已归档] 运行时形式化分析](#async-std [已归档]-运行时形式化分析)
+- [async-std [已归档] 运行时形式化分析](#async-std-已归档-运行时形式化分析)
   - [目录](#目录)
   - [1. 引言](#1-引言)
   - [2. 与std API对应关系](#2-与std-api对应关系)

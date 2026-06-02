@@ -89,7 +89,7 @@
     - [Rust Documentation](#rust-documentation)
     - [Related Documentation in This Project](#related-documentation-in-this-project)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 ---
 

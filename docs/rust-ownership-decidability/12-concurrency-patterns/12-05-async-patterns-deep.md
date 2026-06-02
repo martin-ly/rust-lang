@@ -58,7 +58,7 @@
     - [Related Patterns](#related-patterns)
   - [*This document is part of the Rust Ownership \& Decidability documentation series. For questions or contributions, refer to the project repository.*](#this-document-is-part-of-the-rust-ownership--decidability-documentation-series-for-questions-or-contributions-refer-to-the-project-repository)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 ---
 

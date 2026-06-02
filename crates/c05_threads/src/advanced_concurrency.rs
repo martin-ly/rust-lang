@@ -580,6 +580,7 @@ where
 // 统计信息结构
 // ============================================================================
 
+/// Statistics for tracking thread pool execution metrics.
 #[derive(Debug, Clone)]
 pub struct ThreadPoolStats {
     pub total_tasks: usize,

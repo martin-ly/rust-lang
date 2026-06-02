@@ -15,7 +15,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [AI + Rust 生态指南](#ai--rust-生态指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [文档定位](#文档定位)
   - [一、AI 辅助 Rust 开发](#一ai-辅助-rust-开发)
   - [二、Rust 构建 AI/ML 应用](#二rust-构建-aiml-应用)

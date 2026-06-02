@@ -27,7 +27,7 @@
     - [const\_item\_interior\_mutations lint（warn-by-default）](#const_item_interior_mutations-lintwarn-by-default)
     - [function\_casts\_as\_integer lint（warn-by-default）](#function_casts_as_integer-lintwarn-by-default)
   - [编译器](#编译器)
-    - [-C jump-tables=bool 稳定化](#-c-jump-tablesbool-稳定化)
+    - [-C jump-tables=bool 稳定化](#c-jump-tablesbool-稳定化)
   - [平台支持](#平台支持)
     - [riscv64a23-unknown-linux-gnu Tier 2](#riscv64a23-unknown-linux-gnu-tier-2)
     - [musl 1.2.5](#musl-125)

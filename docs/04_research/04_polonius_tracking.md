@@ -15,7 +15,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Polonius 借用检查器跟踪报告](#polonius-借用检查器跟踪报告)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. 项目背景与动机](#1-项目背景与动机)
     - [1.1 为什么需要 Polonius？](#11-为什么需要-polonius)
   - [2. NLL 的局限](#2-nll-的局限)

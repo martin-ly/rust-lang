@@ -40,6 +40,7 @@ pub mod memory_layout {
     }
 
     impl CacheAlignedData {
+        /// Create a new instance.
         pub fn new(value: u64) -> Self {
             Self {
                 value,
@@ -68,6 +69,7 @@ pub mod memory_layout {
     }
 
     impl OptimizedStruct {
+        /// Create a new instance.
         pub fn new(id: u32, status: u8, flags: u8, data: [u8; 32]) -> Self {
             Self {
                 id,
@@ -126,7 +128,9 @@ pub mod zero_cost_abstractions {
         fn process(&self, data: T) -> T;
     }
 
+    /// A fast processor optimized for throughput.
     pub struct FastProcessor;
+    /// A slow processor for comparison benchmarks.
     pub struct SlowProcessor;
 
     impl Processor<u32> for FastProcessor {
@@ -240,6 +244,7 @@ pub mod inlining_optimization {
     }
 
     impl HotPathOptimizer {
+        /// Create a new instance.
         pub fn new(size: usize) -> Self {
             Self {
                 cache: vec![0; size],
@@ -337,11 +342,13 @@ pub mod branch_prediction {
     }
 
     impl LookupTable {
+        /// Create a new instance.
         pub fn new() -> Self {
             Self::default()
         }
 
         #[inline(always)]
+        /// Lookup.
         pub fn lookup(&self, index: u8) -> u32 {
             self.table[index as usize]
         }
@@ -502,6 +509,7 @@ pub mod compile_time_optimization {
     }
 
     #[cfg(not(target_arch = "x86_64"))]
+    /// Optimized function.
     pub fn optimized_function() -> &'static str {
         "通用版本"
     }
@@ -560,6 +568,7 @@ pub mod profiling_tools {
     }
 
     impl PerformanceTimer {
+        /// Create a new instance.
         pub fn new(name: &str) -> Self {
             Self {
                 start_time: Instant::now(),
@@ -567,6 +576,7 @@ pub mod profiling_tools {
             }
         }
 
+        /// Elapsed.
         pub fn elapsed(&self) -> std::time::Duration {
             self.start_time.elapsed()
         }
@@ -589,15 +599,18 @@ pub mod profiling_tools {
     }
 
     impl MemoryStats {
+        /// Create a new instance.
         pub fn new() -> Self {
             Self::default()
         }
 
+        /// Allocate.
         pub fn allocate(&mut self, size: usize) {
             self.allocated += size;
             self.peak = self.peak.max(self.allocated);
         }
 
+        /// Deallocate.
         pub fn deallocate(&mut self, size: usize) {
             self.allocated = self.allocated.saturating_sub(size);
         }

@@ -14,7 +14,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [操作语义 (Operational Semantics)](#操作语义-operational-semantics)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. 引言](#1-引言)
   - [2. 大步语义 (Big-Step / Natural Semantics)](#2-大步语义-big-step--natural-semantics)
     - [2.1 基本思想](#21-基本思想)
@@ -41,7 +41,7 @@
   - [**最后更新**: 2026-03-08](#最后更新-2026-03-08)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. 引言
 >

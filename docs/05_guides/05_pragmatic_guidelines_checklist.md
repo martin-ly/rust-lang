@@ -16,7 +16,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Microsoft Pragmatic Rust Guidelines 代码审查清单](#microsoft-pragmatic-rust-guidelines-代码审查清单)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [清单使用说明](#清单使用说明)
   - [1. 安全 (Safety)](#1-安全-safety)
     - [1.1 Unsafe 代码管理](#11-unsafe-代码管理)

@@ -293,6 +293,7 @@ Thief::steal() -> Option<Task>:
         "#
     }
 
+    /// Return documentation explaining Rayon's work-stealing scheduler architecture.
     pub fn rayons_work_stealing_scheduler() -> &'static str {
         r#"
 === Rayon 的工作窃取调度器 ===
@@ -452,6 +453,7 @@ thread::scope(|s| {
         data.copy_from_slice(&merged);
     }
 
+    /// Demonstrate a parallel map-filter pattern over a slice of integers.
     pub fn parallel_map_filter(input: &[i32]) -> Vec<i32> {
         if input.is_empty() {
             return Vec::new();

@@ -1,6 +1,6 @@
 > **内容分级**: [专家级]
 
-> ⚠️ **代码示例待扩充** [社区贡献欢迎]: 本节需要与主题匹配的可编译 Rust 代码示例。>
+>
 # 微服务架构模式 (Microservice Architecture Patterns)
 >
 > **受众**: [进阶]
@@ -34,6 +34,8 @@
   - [八、CQRS](#八cqrs)
   - [九、服务网格 Sidecar](#九服务网格-sidecar)
   - [十、综合示例](#十综合示例)
+    - [10.1 极简微服务（标准库实现）](#101-极简微服务标准库实现)
+    - [10.2 生产级微服务骨架（依赖外部 crate）](#102-生产级微服务骨架依赖外部-crate)
   - [十一、反命题与边界](#十一反命题与边界)
   - [十二、常见陷阱](#十二常见陷阱)
   - [十三、来源](#十三来源)
@@ -545,6 +547,47 @@ Rust sidecar 优势:
 ---
 
 ## 十、综合示例
+
+### 10.1 极简微服务（标准库实现）
+>
+> 不依赖外部框架，用 `std::net::TcpListener` 展示微服务的核心请求-响应循环：
+
+```rust
+use std::io::{Read, Write};
+use std::net::{TcpListener, TcpStream};
+
+fn handle_client(mut stream: TcpStream) {
+    let mut buffer = [0; 1024];
+    if let Ok(n) = stream.read(&mut buffer) {
+        let request = String::from_utf8_lossy(&buffer[..n]);
+
+        let response = if request.starts_with("GET /health") {
+            "HTTP/1.1 200 OK\r\nContent-Length: 2\r\n\r\nOK"
+        } else if request.starts_with("GET /users") {
+            "HTTP/1.1 200 OK\r\nContent-Type: application/json\r\nContent-Length: 24\r\n\r\n[{\"id\":1,\"name\":\"Alice\"}]"
+        } else {
+            "HTTP/1.1 404 NOT FOUND\r\nContent-Length: 0\r\n\r\n"
+        };
+
+        let _ = stream.write_all(response.as_bytes());
+    }
+}
+
+fn main() {
+    let listener = TcpListener::bind("127.0.0.1:0").unwrap();
+    let port = listener.local_addr().unwrap().port();
+    println!("Microservice listening on port {}", port);
+
+    // 单连接演示；生产环境需用线程池或 async 运行时
+    if let Ok((stream, _)) = listener.accept() {
+        handle_client(stream);
+    }
+}
+```
+
+> **设计要点**: 此示例展示微服务的最小可行结构——**监听端口** → **解析请求** → **路由分发** → **构造响应**。Rust 的所有权模型天然保证 `TcpStream` 在一次请求处理后被正确关闭。生产环境应升级为 Tokio/Axum 以获得并发、中间件和生态集成。 [来源: 💡 原创实现]
+
+### 10.2 生产级微服务骨架（依赖外部 crate）
 
 ```rust,ignore
 use axum::{routing::post, Router, http::StatusCode, Json};

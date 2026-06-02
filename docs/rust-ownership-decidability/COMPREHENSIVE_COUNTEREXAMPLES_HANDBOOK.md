@@ -6,7 +6,7 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [📑 目录](#-目录)
+- [📑 目录](#目录)
 - [Part 2: Deep Dive Counter-Examples](#part-2-deep-dive-counter-examples)
   - [Extended Ownership Deep Dive](#extended-ownership-deep-dive)
     - [EDO.1 Understanding Move Semantics](#edo1-understanding-move-semantics)

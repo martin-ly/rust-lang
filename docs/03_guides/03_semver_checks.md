@@ -18,7 +18,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [cargo-semver-checks 集成指南](#cargo-semver-checks-集成指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. 什么是 cargo-semver-checks？](#1-什么是-cargo-semver-checks)
     - [为什么需要它？](#为什么需要它)
     - [检测范围](#检测范围)

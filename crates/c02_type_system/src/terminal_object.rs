@@ -1,14 +1,18 @@
-/*
-1. 终对象 (Terminal Object)
-定义:
-    在一个范畴中，终对象是一个对象，对于该对象，所有其他对象都有唯一的态射（箭头）指向它。
-    换句话说，终对象是“接收者”，任何对象都可以通过唯一的态射映射到终对象。
-Rust中的类比:
-    在Rust中，()（单位类型）可以被视为终对象。
-    因为对于任何类型T，都可以通过实现一个函数将T映射到()，这个函数可以返回一个空的元组。
+//! Terminal Object — Category Theory Concept
+//!
+//! In category theory, a terminal object is an object to which there exists
+//! a unique morphism from every other object. It is the "receiver" that any
+//! object can map to via a unique morphism.
+//!
+//! # Rust Analogy
+//!
+//! The unit type `()` can be viewed as a terminal object because for any type `T`,
+//! there exists a unique function `T -> ()` that discards the value and returns
+//! the empty tuple.
 
-任何类型的值都可以通过to_unit函数映射到单位类型()，因此()可以被视为终对象。
-*/
-
+/// Convert any value to the unit type `()`, demonstrating the terminal object concept.
+///
+/// In category-theoretic terms, this is the unique morphism from any object
+/// to the terminal object `()`.
 #[allow(dead_code)]
 pub fn to_unit<T>(_: T) {}

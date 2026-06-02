@@ -653,6 +653,7 @@ impl<T> Container<T> for Vec<T> {
 /// tree （）
 pub struct TreeFamily;
 
+/// A simple tree data structure for demonstrating recursive type definitions.
 pub struct SimpleTree<T> {
     root: Option<T>,
     children: Vec<SimpleTree<T>>,

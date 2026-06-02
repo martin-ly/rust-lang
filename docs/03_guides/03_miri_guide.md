@@ -16,7 +16,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Miri 使用指南：检测 Rust 未定义行为（UB）](#miri-使用指南检测-rust-未定义行为ub)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、什么是 Miri？](#一什么是-miri)
     - [Miri vs 其他工具](#miri-vs-其他工具)
   - [二、安装与基础使用](#二安装与基础使用)

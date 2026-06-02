@@ -1,6 +1,6 @@
 > **内容分级**: [综述级]
 
-> ⚠️ **代码示例待扩充** [社区贡献欢迎]: 本节需要与主题匹配的可编译 Rust 代码示例。>
+>
 # DevOps 与 CI/CD：Rust 的持续交付工程实践
 >
 > **受众**: [进阶]
@@ -22,7 +22,6 @@
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 CI/CD 管道与 Rust 构建特性](#11-cicd-管道与-rust-构建特性)
-    - [1.2 工具链矩阵](#12-工具链矩阵)
     - [1.3 安全审计在 DevOps 中的定位](#13-安全审计在-devops-中的定位)
   - [二、技术细节](#二技术细节)
     - [2.1 GitHub Actions 工作流设计](#21-github-actions-工作流设计)
@@ -78,11 +77,81 @@ Rust CI/CD 核心约束:
   ├── Miri 测试: unsafe 代码 UB 检测
   └── 基准测试: Criterion.rs，统计显著性
 
+### 1.2 CI 配置验证工具（Rust 实现）
+>
+> 以下是一个可编译的 Rust 脚本，模拟 CI/CD 管道中常见的配置解析与验证逻辑：
+
+```rust
+use std::collections::HashMap;
+
+/// 配置验证器：模拟 CI/CD 中的 .env / config 文件检查
+struct ConfigValidator;
+
+impl ConfigValidator {
+    fn parse_key_value_pairs(content: &str) -> HashMap<String, String> {
+        content
+            .lines()
+            .filter(|line| !line.trim().is_empty() && !line.starts_with('#'))
+            .filter_map(|line| {
+                let mut parts = line.splitn(2, '=');
+                let key = parts.next()?.trim();
+                let value = parts.next()?.trim().trim_matches('"');
+                Some((key.to_string(), value.to_string()))
+            })
+            .collect()
+    }
+
+    fn check_required_keys(
+        config: &HashMap<String, String>,
+        required: &[&str],
+    ) -> Vec<String> {
+        required
+            .iter()
+            .filter(|&&key| !config.contains_key(key))
+            .map(|&key| format!("Missing config key: {}", key))
+            .collect()
+    }
+}
+
+fn main() {
+    // 模拟 .env 文件内容
+    let env_content = r#"
+DATABASE_URL="postgres://localhost/myapp"
+REDIS_URL="redis://localhost:6379"
+API_PORT="8080"
+# DEBUG_MODE="true"
+"#;
+
+    let config = ConfigValidator::parse_key_value_pairs(env_content);
+    println!("Parsed {} config entries", config.len());
+
+    let missing = ConfigValidator::check_required_keys(
+        &config,
+        &["DATABASE_URL", "REDIS_URL", "API_PORT", "LOG_LEVEL"],
+    );
+    if missing.is_empty() {
+        println!("✅ All required keys present");
+    } else {
+        for err in &missing {
+            println!("⚠️ {}", err);
+        }
+    }
+
+    println!("\nConfig preview:");
+    for (k, v) in &config {
+        println!("  {} = {}", k, v);
+    }
+}
+```
+
+> **工程价值**: CI/CD 管道常需验证环境配置完整性。Rust 的类型安全（`HashMap<String, String>` 显式标注）和错误处理（`Vec<String>` 收集缺失项）使配置验证比 shell 脚本更可靠——在配置错误进入生产环境前即可捕获。 [来源: 💡 原创实现]
+
   发布特性:
   ├── cargo build --release: 优化构建，编译时间更长
   ├── 符号剥离: strip = true 减小二进制
   ├── LTO: 链接时优化，进一步减小体积
   └── Profile Guided Optimization (PGO): 运行时反馈优化
+
 ```
 
 > **认知功能**: Rust 的**静态链接和零运行时依赖**特性使其在 CI/CD 中具备独特优势——构建产物是自包含的可执行文件，部署无需考虑目标环境的运行时版本。[来源: [TRPL — Building](https://doc.rust-lang.org/book/ch14-01-release-profiles.html)]

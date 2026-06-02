@@ -13,7 +13,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 2024 Edition `Future` in Prelude 影响分析](#rust-2024-edition-future-in-prelude-影响分析)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [概述](#概述)
   - [变化详情](#变化详情)
     - [之前（Rust 2021 及之前）](#之前rust-2021-及之前)

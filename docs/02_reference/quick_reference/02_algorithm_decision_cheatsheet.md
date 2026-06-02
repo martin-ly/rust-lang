@@ -1,10 +1,8 @@
 # 算法选择决策树速查卡
->
-> **Rust 版本**: 1.96.0+ (Edition 2024)
 
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]
 > **Bloom 层级**: L2 (理解)
-
 > **适用场景**: 面试准备、算法选型、性能优化
 > **版本**: 通用
 
@@ -131,19 +129,12 @@
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
 > **[来源: ACM - Systems Programming Languages]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ---

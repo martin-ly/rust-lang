@@ -14,7 +14,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Circuit Breaker 模式形式化定义](#circuit-breaker-模式形式化定义)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. 概念定义 (Def)](#1-概念定义-def)
     - [Def CB1: Circuit Breaker](#def-cb1-circuit-breaker)
     - [Def CB2: 状态转换](#def-cb2-状态转换)
@@ -28,7 +28,7 @@
     - [Theorem CB2: 自恢复](#theorem-cb2-自恢复)
   - [4. Rust 实现示例](#4-rust-实现示例)
   - [5. 配置建议](#5-配置建议)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)

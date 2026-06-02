@@ -8,7 +8,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Const Generics 的依赖类型语义](#const-generics-的依赖类型语义)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. 引言](#1-引言)
     - [1.1 什么是 Const Generics](#11-什么是-const-generics)
   - [2. 语法定义](#2-语法定义)
@@ -56,7 +56,7 @@
   - [Const Generics 使得 Rust 能够表达更精确的类型约束，同时保持零成本抽象](#const-generics-使得-rust-能够表达更精确的类型约束同时保持零成本抽象)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. 引言
 >

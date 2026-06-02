@@ -13,7 +13,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [执行摘要与建议](#执行摘要与建议)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [执行摘要](#执行摘要)
     - [优势 (Strengths)](#优势-strengths)
     - [劣势 (Weaknesses)](#劣势-weaknesses)
