@@ -8,7 +8,7 @@
 > **双维定位**: C×Ana — 分析 Effects 系统对 Rust 的潜力
 > **定位**: 本文件是 Rust 效果系统（Effect System）的**概念预研**，跟踪类型系统向显式效果追踪演进的理论动向与工程实践。内容具有推测性，随语言团队决策动态更新。
 > **前置概念**: [Async](../03_advanced/02_async.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Type Theory](../04_formal/02_type_theory.md)
-> **主要来源**: [Koka] · [Eff] · [Haskell GHC] · [Rust Lang Team Blog] · [类型理论研究]
+> **主要来源**: [Plotkin & Pretnar 2009 — Algebraic Effects] · [Lucassen & Gifford 1988 — Polymorphic Effect Systems] · [Koka] · [Eff] · [Rust Keyword Generics Initiative 2024](https://github.com/rust-lang/keyword-generics-initiative) · [Rust Project Goals 2025H1 — const traits](https://rust-lang.github.io/rust-project-goals/2025h1/const-trait.html) · [a-mir-formality](https://github.com/rust-lang/a-mir-formality)
 
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
@@ -17,7 +17,8 @@
 **变更日志**:
 
 - v1.0 (2026-05-13): 初始版本。建立 Effect 系统概念框架、Rust 现有 effect 映射、AsyncFn 作为原型、跨语言对比、演进路线图
-- v1.1 (2026-05-22): 网络权威内容对齐：添加 `gen<yield>` effects 跟踪、Lang Team 2026 季度更新$entry
+- v1.1 (2026-05-22): 网络权威内容对齐：添加 `gen<yield>` effects 跟踪、Lang Team 2026 季度更新
+- v1.2 (2026-06-02): 补充 Rust Effects Initiative 官方定位、学术谱系（Plotkin & Pretnar 2009 / Lucassen & Gifford 1988）、carried/uncarried 官方分类、effect composition 规则、a-mir-formality 形式化验证关联 [来源: Web Authority Alignment Sprint]
 
 ---
 
@@ -52,6 +53,74 @@ mindmap
 
 > **认知功能**: 此 mindmap 构建 Effect System 的全局认知脚手架。**功能定位**: 将分散的效果机制（async/unsafe/const/Result/Send）整合为"理论-实现-对比-演进"四维分析框架。**使用建议**: 按背景选择入口——类型论背景从"理论基础"切入，工程背景从"Rust 现有实现"切入，策略背景从"演进方向"切入。**关键洞察**: Rust 当前的效果表达是碎片化的（各关键字独立运作），向统一 effect 关键字演进是消除碎片化的长期趋势，最大障碍并非技术可行性，而是向后兼容性与社区共识。[来源: 💡 原创分析]
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
+
+---
+
+## 〇之一、Rust Effects Initiative 官方定位
+
+> **[来源: Rust Keyword Generics Initiative — Extending Rust's Effect System (2024-02-09)](https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md)** ✅ · **[来源: Inside Rust Blog — Keyword Generics Progress Report (2023-02-23)](https://blog.rust-lang.org/inside-rust/2023/02/23/keyword-generics-progress-report-feb-2023.html)** ✅
+
+Rust 语言团队自 2022 年起通过 **Keyword Generics Initiative** 系统性地推进 effect system 的设计。该 initiative 的核心理论洞察由 Yoshua Wuyts 在 2024 年 2 月的官方更新中明确提出：
+
+> **"Rust has unknowingly shipped an effect system as part of the language since Rust 1.0."**
+> — Yoshua Wuyts, Rust Keyword Generics Initiative, 2024-02-09
+
+这意味着 Rust 的 `async`、`const`、`try` (`?`)、`unsafe` 和 generators 并非孤立的语法糖，而是**同一理论框架（effect system）的不同实例**。Initiative 的目标不是引入全新的"effect"关键字，而是让 Rust **能够对已有的 effects 进行泛化（generic over effects）**，从而解决函数着色问题（Function Coloring Problem）导致的 API 重复爆炸。
+
+### Rust Project Goals 2025H1 的核心里程碑
+
+> **[来源: Rust Project Goals 2025H1 — Prepare const traits for stabilization](https://rust-lang.github.io/rust-project-goals/2025h1/const-trait.html)** ✅
+
+Rust 官方 2025 上半年目标将 **"Prepare const traits for stabilization"** 列为语言演进的核心任务。Const trait 是 effect system 在 Rust 中最关键的落地场景之一：
+
+| 目标 | 状态 | 与 Effect System 的关联 |
+|:---|:---:|:---|
+| 形式化 const traits in a-mir-formality | 🔄 进行中 | 在 Rust 官方形式化模型中验证 effect-generic trait 的 soundness |
+| 稳定化 const trait bounds | ⏳ 待 RFC | 允许 `const fn` 调用 trait 方法，使 `const` 成为真正的 effect-generic 能力 |
+| 重构 compiler const-checking to HIR level | 🔄 进行中 | 为推广到更多 effects 奠定编译器基础 |
+
+> **关键洞察**: Const trait 的稳定化不仅是一个独立特性，更是 Rust effect system **从"隐性关键字"向"显性类型系统能力"跃迁的试金石**。一旦 const trait 通过 a-mir-formality 验证并稳定，相同的机制可以推广到 `async`、`try` 等其他效果。
+
+---
+
+## 〇之二、Effects 的学术谱系
+
+> **[来源: Plotkin & Pretnar 2009 — Handlers of Algebraic Effects] · [来源: Lucassen & Gifford 1988 — Polymorphic Effect Systems, POPL]** · [来源: Wadler 1992 — The Essence of Functional Programming]**· [来源: Koka Language Documentation]**
+
+Rust 的 effect system 并非凭空产生，它延续了编程语言理论中近 40 年的研究脉络。理解这一谱系，才能准确判断 Rust 在 effect system 设计空间中的位置。
+
+### 学术谱系时间线
+
+```text
+1988: Lucassen & Gifford — Polymorphic Effect Systems (POPL)
+       ↓ 将效果作为类型约束引入多态类型系统
+1994: Wadler — Monads vs Effect Systems
+       ↓ 论证 effect system 可以作为 monad 的轻量级替代
+2009: Plotkin & Pretnar — Algebraic Effects and Handlers
+       ↓ 建立代数效应的数学基础：操作签名 + 处理器
+2014: Koka (Leijen, Microsoft Research)
+       ↓ 首个将 row-polymorphic effect types 引入主流工程语言
+2015-2020: Eff, Flix, Effekt, OCaml 5
+       ↓ 代数效应在学术界和函数式语言中广泛验证
+2022: Rust Keyword Generics Initiative 成立
+       ↓ 承认 Rust 已隐性实现 effect system，开始显性化设计
+2024: Yoshua Wuyts — "Extending Rust's Effect System"
+       ↓ 明确提出 carried/uncarried effects 分类、effect composition 规则
+2025: Rust Project Goals — const traits stabilization
+       ↓ 以 const effect 为突破口，推进 effect-generic trait 的 engineering 落地
+```
+
+### 从理论到 Rust 的映射
+
+| 理论概念 | 学术来源 | Rust 对应实现 | 差距 |
+|:---|:---|:---|:---|
+| **Algebraic Effects** | Plotkin & Pretnar 2009 | 无原生支持；`async`/`try`/`gen` 通过关键字 + trait 模拟 | Rust 拒绝运行时 handler 栈，保持零成本 |
+| **Polymorphic Effect Types** | Lucassen & Gifford 1988 | `AsyncFn` trait (1.85)、`~const Trait` (unstable) | 无显式 effect 变量语法，通过 trait bound 模拟 |
+| **Row Polymorphism** | Leijen 2014 (Koka) | 无直接对应；`#[maybe(async)]` 是受限形式 | 不支持开放行类型（open row types）的完整子类型 |
+| **Effect Composition** | Plotkin & Pretnar 2009 | `async fn` + `Result` → `impl Future<Output = Result<T, E>>` | 组合规则硬编码，非通用可扩展 |
+| **Effect Handlers** | Plotkin & Pretnar 2009 | 无；运行时效果处理由 tokio/async-std 等外部运行时承担 | Rust 将 handler 语义外化到库层，语言层只保证类型安全 |
+
+> **认知功能**: 此谱系表揭示 Rust effect system 的**设计取舍**——它不是"缺乏理论深度的工程 hack"，而是**在零成本抽象约束下对理论的有意裁剪**。Rust 选择不实现完整的代数效应（避免运行时 handler 栈开销），而是通过关键字 + trait + 状态机 desugar 在编译期消除效果成本。这与 Koka 的"理论 purity"和 Java 的"弱类型检查"形成三极对比。[来源: [Rust Keyword Generics Initiative](https://github.com/rust-lang/keyword-generics-initiative)]
 
 ---
 
@@ -103,6 +172,9 @@ mindmap
 
 Rust 尚未引入统一的 `effect` 关键字，但**已经通过不同机制实现了效果的隐性追踪**。
 
+> **[来源: Rust Keyword Generics Initiative — Extending Rust's Effect System (2024-02-09)](https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md)** ✅
+> Rust 语言团队明确将以下五种关键字识别为 **effect types**：`async`、`.await`、`const`、`try` (`?`)、`unsafe`，以及不稳定的 `yield` (generators)。这些不是独立的语法糖，而是同一理论框架的不同实例。
+
 | 效果类别 | 当前 Rust 语法 | 效果语义 | 追踪方式 | 多态支持 |
 |:---|:---|:---|:---|:---|
 | **异步** | `async fn` | 可能挂起，返回 `Future` | 关键字 + `Future` trait | `AsyncFn` trait (1.85+) |
@@ -111,7 +183,91 @@ Rust 尚未引入统一的 `effect` 关键字，但**已经通过不同机制实
 | **异常** | `Result<T, E>` + `?` | 可能短路/失败 | 类型承载 + `Try` trait | `?` 自动传播 |
 | **泛型约束** | `where T: Send` | 线程安全约束 | Trait bound | 泛型参数多态 |
 
-### 2.2 `async` 作为效果的原型
+### 2.1 Carried vs Uncarried Effects（Rust 官方分类）
+
+> **[来源: Rust Keyword Generics Initiative — Extending Rust's Effect System (2024-02-09)](https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md)** ✅ · **[来源: Inside Rust Blog — Keyword Generics Progress Report (2023-02-23)](https://blog.rust-lang.org/inside-rust/2023/02/23/keyword-generics-progress-report-feb-2023.html)** ✅
+
+Rust 语言团队（由 Yoshua Wuyts 在 2024 年官方更新中明确提出）将效果分为两类，这一分类直接决定了不同效果的泛化难度和技术路径：
+
+| 类别 | 效果 | 类型系统表现 | 泛化难度 | Rust 现状 |
+|:---|:---|:---|:---:|:---|
+| **Carried** | `async`, `try`/`Result`, `gen` | Desugar 为实际类型（`Future`, `Result`, `Iterator`） | **低** | `AsyncFn` (1.85 stable) 已实现效果多态原型；`try` trait 已稳定 |
+| **Uncarried** | `const`, `unsafe` | 仅编译期标记，不体现在类型签名中 | **高** | `const` trait 长期 unstable；`unsafe` 语义上**不是 effect**（见脚注） |
+
+#### Carried Effects：类型系统已承载
+
+Carried effects 的核心特征是**效果信息被编码到类型中**，因此类型系统天然支持效果追踪和多态：
+
+```rust
+// async: 返回类型显式携带 Future
+async fn foo() -> i32 { 42 }
+// desugar 为: fn foo() -> impl Future<Output = i32>
+
+// try: Result 类型显式携带失败可能性
+fn bar() -> Result<i32, Error> { Ok(42) }
+
+// gen: 返回 Iterator 类型
+let iter = gen { yield 1; yield 2; };
+// desugar 为: impl Iterator<Item = i32>
+```
+
+> **关键洞察**: Carried effects 的泛化相对直接，因为效果信息已经在类型签名中。`AsyncFn` 允许闭包是 sync 或 async，编译器通过调用上下文（是否 `.await`）推断具体效果变体。这是 **row-polymorphism** 在 Rust 中的受限工程实现。
+
+#### Uncarried Effects：编译期标记
+
+Uncarried effects 不体现在类型签名中，仅作为编译器的元数据使用：
+
+```rust
+// const: 关键字不改变函数签名类型
+const fn foo() -> i32 { 42 }      // 签名仍是 fn() -> i32
+// 但 const-checking 在 HIR/MIR 层拒绝运行时代码
+
+// unsafe: 语义上不是 effect（见下），但语法上"effect-like"
+unsafe fn bar() -> i32 { 42 }     // 签名仍是 fn() -> i32
+```
+
+> ⚠️ **重要修正**（来自 Yoshua Wuyts 2024 官方更新脚注）："Semantically `unsafe` in Rust is not an effect. But syntactically it would be fair to say that `unsafe` is 'effect-like'. As such any notion of 'maybe-unsafe' would be nonsensical." 这意味着 `unsafe` 不会被纳入 effect generics 的范畴。
+
+#### `const fn` 已是效果泛型的雏形
+
+> **[来源: Rust Keyword Generics Initiative 2024]** ✅
+
+`const fn` 的特殊之处在于它**已经是 maybe-const 的**：
+
+```rust
+const fn meow() {}  // maybe-const：可在编译期调用，也可在运行时调用
+const {}            // always-const：强制编译期求值
+```
+
+`const fn` 的"maybe-const"语义正是 effect generics 的核心机制——函数本身不限制调用上下文的效果，效果由调用点决定。这也是为什么 const 能够逐步引入 stdlib 而不破坏向后兼容：**`const fn` 在编译期上下文中自动获得 `const` 效果，在运行期上下文中效果为空集**。
+
+> **关键洞察**: Const trait 长期 unstable 的根本原因不是语法设计，而是 compiler 需要重构 const-checking 从 MIR 层上移至 HIR 层，使其可泛化到更多 effects。Rust Project Goals 2025H1 正在推进这一重构。
+
+---
+
+### 2.2 Effect Composition：效果的组合规则
+
+> **[来源: Rust Keyword Generics Initiative — Extending Rust's Effect System (2024-02-09)](https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md)** ✅
+
+当函数携带多个 carried effects 时，Rust 需要定义它们的组合顺序。Rust 语言团队明确将 effects 定义为**与顺序无关的集合（order-independent sets）**，但组合规则需要硬编码：
+
+```rust
+// async + try 的组合
+async fn foo() -> Result<i32, Error> { ... }
+// 稳定化决策: 必须是 impl Future<Output = Result<i32, Error>>
+// 而非 Result<impl Future<Output = i32>, Error>
+```
+
+| 效果组合 | Rust 组合结果 | 设计理由 |
+|:---|:---|:---|
+| `async` + `try` | `impl Future<Output = Result<T, E>>` | Future 包裹 Result：先挂起，再可能失败 |
+| `async` + `gen` | 尚未稳定；理论上 `impl Future<Output = impl Iterator>` 或统一 Stream | Stream = async Iterator |
+| `try` + `gen` | 尚未稳定；`impl Iterator<Item = Result<T, E>>` | 每次 yield 可能失败 |
+| `async` + `try` + `gen` | 远期：统一为 `impl Stream<Item = Result<T, E>>` | 三效果合一 |
+
+> **设计原则**: Effects on functions are **order-independent sets**。虽然 Rust 当前要求关键字按固定顺序声明（如 `async unsafe fn`），但 carried effects 的组合方式唯一确定。人们仍可通过手动写函数签名来 opt-out 内置组合规则，但对于绝大多数用例，内置规则是正确的默认选择。
+
+### 2.3 `async` 作为效果的原型
 >
 
 ```rust,ignore
@@ -301,6 +457,42 @@ fn block_on<T>(f: impl Future<Output = T>) -> T effects {} {
     // 将 Async 效果消除，同步返回结果
 }
 ```
+
+### 4.1 a-mir-formality：Rust 效果系统的形式化验证基础
+
+> **[来源: Rust Keyword Generics Initiative — Extending Rust's Effect System (2024-02-09)](https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md)** ✅ · **[来源: a-mir-formality GitHub](https://github.com/rust-lang/a-mir-formality)** ✅
+
+Rust 语言团队通过 **a-mir-formality**（Rust 类型系统的官方形式化模型）来验证 effect generics 的 soundness。这是一个关键的设计决策：**不直接在生产编译器中实现，而是先在形式化模型中证明类型安全**，然后再 engineering 落地。
+
+#### 为什么 effect generics 是 a-mir-formality 的理想测试用例
+
+Yoshua Wuyts 在 2024 年官方更新中明确说明：
+
+> "Because effect generics are relatively straight forward but have far-reaching consequences for the type system, it is an ideal candidate to test as part of the formal model."
+
+| 维度 | 说明 |
+|:---|:---|
+| **理论简洁性** | Effect generics 的语义可大部分表达为 const-generics 的语法糖，理论模型不复杂 |
+| **影响深远性** | 触及 trait system、类型推断、borrow checker 的交互边界 |
+| **验证价值** | 一旦在 a-mir-formality 中验证通过，可为后续 RFC 提供严格的数学保证 |
+
+#### 形式化验证与编译器重构的并行推进
+
+Rust 正在两条线并行推进 effect system：
+
+```text
+形式化线 (a-mir-formality):
+  └─ 在抽象类型系统模型中定义 effect-generic trait 的 typing rules
+  └─ 证明 progress + preservation 定理
+  └─ 验证 effect composition 的组合规则无矛盾
+
+编译器线 (rustc):
+  └─ 重构 const-checking 从 MIR 层 → HIR 层
+  └─ 使 const-checking 机制可泛化到 async/try/gen 等其他效果
+  └─ 为 effect-generic bounds 的实现奠定编译器基础设施
+```
+
+> **关键洞察**: Const trait 的稳定化被设计为 effect system 的**先锋任务**。因为 `const` 是 uncarried effect 中最接近 carried effects 的一个（`const fn` 已有 maybe-const 语义），一旦 const trait 通过形式化验证并成功稳定，证明这套机制可以推广到其他效果的技术风险就大幅降低。[来源: [Rust Project Goals 2025H1](https://rust-lang.github.io/rust-project-goals/2025h1/const-trait.html)]
 
 ### 4.2 Effect Generics：消除 API 重复的关键机制
 >

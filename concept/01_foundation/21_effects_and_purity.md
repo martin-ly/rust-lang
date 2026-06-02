@@ -110,6 +110,10 @@ fn process_unsafe(ptr: *mut i32) {  // unsafe 块表示未定义效果
 > **形式化命题** [Tier 3]: Rust 的类型系统是一种**效果系统（Effect System）的原型**——`&mut T` = write effect, `unsafe` = undefined effect, `async` = async effect, `Result<T, E>` = exception effect。
 >
 > **论证**: 虽然 Rust 目前没有显式的效果类型（如 Koka 的 `fn f(): <io, state> T`），但其类型签名通过参数和返回类型**隐式编码**了效果信息。这与 Moggi 1989 提出的"通过 Monad 结构显式化计算"的思想同构，但实现方式不同：Haskell 用 Monad 组合子，Rust 用所有权约束。[来源: 💡 原创分析] · [Moggi 1989] · [Wadler 1992]
+>
+> **权威来源对齐**: Rust 语言团队通过 [Keyword Generics Initiative](https://github.com/rust-lang/keyword-generics-initiative) 明确承认：Rust 自 1.0 起已隐性实现 effect system（`async`、`const`、`try`/`?`、`unsafe` 均为 effect types）。当前工程目标是通过 effect generics 消除函数着色问题导致的 API 重复爆炸。[来源: [Rust Keyword Generics Initiative 2024](https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md)] · [来源: [Rust Project Goals 2025H1](https://rust-lang.github.io/rust-project-goals/2025h1/const-trait.html)]
+>
+> **延伸阅读**: [L7 Effects System 预研](../07_future/04_effects_system.md) — Rust 效果系统的完整概念框架、学术谱系与演进路线图
 
 ---
 

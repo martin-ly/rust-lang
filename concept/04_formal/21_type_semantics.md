@@ -26,6 +26,7 @@
     - [3.1 借用语义：`&T` 与 `&mut T`](#31-借用语义t-与-mut-t)
     - [3.2 资源管理语义：`Box<T>` / `Rc<T>` / `Arc<T>`](#32-资源管理语义boxt--rct--arct)
     - [3.3 代数效应语义：`Option<T>` / `Result<T, E>`](#33-代数效应语义optiont--resultt-e)
+      - [Row Polymorphism：Effect System 的类型论基础](#row-polymorphismeffect-system-的类型论基础)
     - [3.4 存在与全称类型：`dyn Trait` 与 `impl Trait`](#34-存在与全称类型dyn-trait-与-impl-trait)
   - [四、子类型与变型的语义解释](#四子类型与变型的语义解释)
     - [4.1 生命周期子类型](#41-生命周期子类型)
@@ -309,6 +310,38 @@ fn read_file(path: &str) -> Result<String, io::Error> {
 ```
 
 > **与异常的对比**: Java/C++ 的异常是**隐式的控制流**，类型系统不跟踪哪些函数可能抛出异常。Rust 的 `Result<T, E>` 是**显式的控制流**，函数签名直接声明可能的错误类型 `E`。这使类型语义可以精确追踪错误传播路径——编译器强制调用者处理 `Result`，而非在运行时意外捕获异常。[来源: [Pierce 2002, Ch.11](https://www.cis.upenn.edu/~bcpierce/tapl/)] · [来源: [Rust Reference — Option/Result](https://doc.rust-lang.org/std/option/enum.Option.html)] · [来源: [Hoare's Billion Dollar Mistake](https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/)]
+
+#### Row Polymorphism：Effect System 的类型论基础
+
+> **[来源: Leijen 2014 — Koka: Programming with Row-polymorphic Effect Types] · [来源: Lucassen & Gifford 1988 — Polymorphic Effect Systems, POPL]** · [来源: [Rust Keyword Generics Initiative 2024](https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md)]**
+
+Rust 的 `AsyncFn` trait 和设想的 `#[maybe(async)]` 语法，本质上是 **row-polymorphic effect types** 的工程化受限实现。在 Koka 等完整 effect system 中，效果通过行类型（row type）表达：
+
+```koka
+// Koka: 效果显式声明为行类型
+fun foo(): <io, async> int   // 效果行 {io, async}
+fun bar(): < > int            // 效果行 {}（纯函数）
+```
+
+Rust 的对应机制（通过 trait 模拟）：
+
+```rust,ignore
+// Rust: 效果通过 trait bound 隐式表达
+fn foo() -> impl Future<Output = i32>  // 效果 = {Async}
+fn bar() -> i32                         // 效果 = {}
+
+// AsyncFn: 效果多态 = 行类型的子类型关系
+// F: AsyncFn() -> T  等价于  F: Fn() -> T effect e  where e ⊆ {Async}
+```
+
+| 类型论概念 | Koka 表达 | Rust 工程对应 | 差距 |
+|:---|:---|:---|:---|
+| **效果行** | `<io, async>` | `impl Future<Output = T>` + `?` 传播 | Rust 无统一语法，各效果独立实现 |
+| **行多态** | `fun map(f: a -> e b): e b` | `AsyncFn` / `~const Trait` (unstable) | 无显式效果变量 `e` |
+| **效果子类型** | `<io> <: <io, async>` | 无直接对应 | Rust 未引入效果子类型关系 |
+| **效果消除** | `handle { ... }` | `block_on(future)` / `match result` | Rust 将 handler 外化到库层 |
+
+> **关键洞察**: Rust 的 effect system 设计是一种**有意的理论裁剪**（deliberate theoretical trimming）。它放弃了完整的 row-polymorphic effect types（需要复杂的类型推断和子类型判断），转而通过 trait system + 关键字 + 编译器 desugar 在保持零成本的同时，实现效果追踪的核心能力。这与 Rust "实用主义类型论"的设计哲学一致：从理论中汲取正确性保证，但从工程中裁剪实现成本。[来源: [Rust Keyword Generics Initiative](https://github.com/rust-lang/keyword-generics-initiative)]
 
 ### 3.4 存在与全称类型：`dyn Trait` 与 `impl Trait`
 >

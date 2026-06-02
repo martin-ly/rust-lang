@@ -7,7 +7,6 @@
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[借用](../../knowledge/01_fundamentals/01_borrowing.md)
-
 > **受众**: [初学者]
 >
 > **层次定位**: L1 基础概念 / 借用子域
