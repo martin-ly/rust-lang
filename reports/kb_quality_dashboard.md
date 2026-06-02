@@ -172,7 +172,7 @@ Enter the new date: (yy-mm-dd)
 | concept\04_formal\18_evaluation_strategies.md | L4 | 531 | 3 | 3 | 0 | 14 | 6 | ✅ |
 | concept\04_formal\20_axiomatic_semantics.md | L4 | 888 | 3 | 3 | 0 | 13 | 6 | ✅ |
 | concept\04_formal\21_type_semantics.md | L4 | 819 | 3 | 3 | 0 | 18 | 6 | ✅ |
-| concept\04_formal\22_modern_verification_tools.md | L4 | 397 | 3 | 1 | 0 | 8 | 6 | ✅ |
+| concept\04_formal\22_modern_verification_tools.md | L4 | 443 | 3 | 1 | 0 | 8 | 6 | ✅ |
 | concept\04_formal\23_programming_language_foundations.md | L4 | 328 | 3 | 1 | 0 | 10 | 6 | ✅ |
 | concept\05_comparative\01_rust_vs_cpp.md | L5 | 2071 | 9 | 2 | 10 | 12 | 6 | ✅ |
 | concept\05_comparative\02_cpp_abi_object_model.md | L5 | 724 | 3 | 3 | 0 | 17 | 6 | ✅ |
@@ -202,8 +202,8 @@ Enter the new date: (yy-mm-dd)
 | concept\06_ecosystem\06_blockchain.md | L6 | 855 | 5 | 0 | 3 | 14 | 6 | ✅ |
 | concept\06_ecosystem\07_game_ecs.md | L6 | 1295 | 3 | 0 | 7 | 23 | 6 | ✅ |
 | concept\06_ecosystem\08_wasi.md | L6 | 588 | 6 | 5 | 2 | 11 | 12 | ✅ |
-| concept\06_ecosystem\09_cargo_script.md | L6 | 620 | 4 | 1 | 2 | 10 | 8 | ✅ |
-| concept\06_ecosystem\10_public_private_deps.md | L6 | 555 | 6 | 1 | 2 | 11 | 12 | ✅ |
+| concept\06_ecosystem\09_cargo_script.md | L6 | 623 | 4 | 1 | 2 | 10 | 8 | ✅ |
+| concept\06_ecosystem\10_public_private_deps.md | L6 | 556 | 6 | 1 | 2 | 11 | 12 | ✅ |
 | concept\06_ecosystem\11_webassembly.md | L6 | 525 | 6 | 3 | 3 | 6 | 12 | ✅ |
 | concept\06_ecosystem\12_testing_strategies.md | L6 | 624 | 6 | 3 | 2 | 9 | 12 | ✅ |
 | concept\06_ecosystem\13_logging_observability.md | L6 | 611 | 6 | 3 | 3 | 9 | 12 | ✅ |
@@ -234,12 +234,12 @@ Enter the new date: (yy-mm-dd)
 | concept\06_ecosystem\36_stream_processing_ecosystem.md | L6 | 505 | 6 | 1 | 0 | 10 | 12 | ✅ |
 | concept\06_ecosystem\37_database_systems.md | L6 | 480 | 6 | 1 | 0 | 9 | 12 | ✅ |
 | concept\06_ecosystem\38_network_protocols.md | L6 | 355 | 6 | 1 | 0 | 7 | 12 | ✅ |
-| concept\06_ecosystem\39_os_kernel.md | L6 | 412 | 6 | 1 | 0 | 8 | 12 | ✅ |
+| concept\06_ecosystem\39_os_kernel.md | L6 | 413 | 6 | 1 | 0 | 8 | 12 | ✅ |
 | concept\06_ecosystem\40_reactive_programming.md | L6 | 1012 | 6 | 3 | 0 | 14 | 12 | ✅ |
 | concept\06_ecosystem\41_workflow_theory.md | L6 | 1323 | 6 | 3 | 0 | 17 | 12 | ✅ |
 | concept\06_ecosystem\42_api_design_patterns.md | L6 | 1224 | 6 | 3 | 0 | 19 | 12 | ✅ |
 | concept\06_ecosystem\43_security_cryptography.md | L6 | 868 | 6 | 3 | 0 | 16 | 12 | ✅ |
-| concept\06_ecosystem\45_compiler_internals.md | L6 | 824 | 6 | 3 | 0 | 9 | 12 | ✅ |
+| concept\06_ecosystem\45_compiler_internals.md | L6 | 825 | 6 | 3 | 0 | 9 | 12 | ✅ |
 | concept\06_ecosystem\46_machine_learning_ecosystem.md | L6 | 863 | 6 | 3 | 0 | 14 | 12 | ✅ |
 | concept\06_ecosystem\47_compiler_infrastructure.md | L6 | 305 | 6 | 2 | 0 | 1 | 12 | ✅ |
 | concept\06_ecosystem\47_formal_verification_tools.md | L6 | 789 | 6 | 3 | 0 | 11 | 12 | ✅ |
@@ -249,9 +249,9 @@ Enter the new date: (yy-mm-dd)
 | concept\06_ecosystem\50_distributed_consensus.md | L6 | 753 | 6 | 3 | 0 | 6 | 12 | ✅ |
 | concept\06_ecosystem\51_quantum_computing_rust.md | L6 | 846 | 6 | 3 | 0 | 10 | 12 | ✅ |
 | concept\06_ecosystem\52_robotics.md | L6 | 927 | 6 | 3 | 0 | 15 | 12 | ✅ |
-| concept\06_ecosystem\53_embedded_graphics.md | L6 | 1023 | 6 | 3 | 1 | 4 | 12 | ✅ |
-| concept\06_ecosystem\54_webassembly_advanced.md | L6 | 867 | 6 | 2 | 0 | 13 | 12 | ✅ |
-| concept\06_ecosystem\55_rust_for_data_science.md | L6 | 571 | 6 | 3 | 0 | 9 | 12 | ✅ |
+| concept\06_ecosystem\53_embedded_graphics.md | L6 | 1024 | 6 | 3 | 1 | 4 | 12 | ✅ |
+| concept\06_ecosystem\54_webassembly_advanced.md | L6 | 868 | 6 | 2 | 0 | 13 | 12 | ✅ |
+| concept\06_ecosystem\55_rust_for_data_science.md | L6 | 572 | 6 | 3 | 0 | 9 | 12 | ✅ |
 | concept\06_ecosystem\56_c_to_rust_translation.md | L6 | 389 | 6 | 1 | 0 | 2 | 12 | ✅ |
 | concept\07_future\01_ai_integration.md | L7 | 840 | 3 | 2 | 2 | 9 | 6 | ✅ |
 | concept\07_future\02_formal_methods.md | L7 | 1507 | 9 | 1 | 9 | 9 | 3 | ✅ |
