@@ -14,6 +14,7 @@
 > **后置概念**: [Application Domains](./04_application_domains.md) · [Toolchain](./01_toolchain.md)
 > **主要来源**: [crates.io](https://crates.io) · [lib.rs](https://lib.rs) · [Tokio 文档] · [Tower 文档] · [AWS Kani 博客] · [Microsoft Verus 论文] · [INRIA Creusot 教程]
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **Bloom 层级**: 评价
@@ -27,7 +28,6 @@
 ## 权威定义
 
 ### Wikipedia 权威定义
->
 
 > **[Wikipedia: Software framework]** A software framework is an abstraction in which software providing generic functionality can be selectively changed by additional user-written code, thus providing application-specific software.
 > **来源**: <https://en.wikipedia.org/wiki/Software_framework>

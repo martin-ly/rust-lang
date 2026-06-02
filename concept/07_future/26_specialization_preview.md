@@ -13,6 +13,7 @@
 > **前置概念**: [Trait](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Const Trait Impl](./11_const_trait_impl_preview.md) · [Effects System](./04_effects_system.md)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > ⚠️ **不稳定特性警告**: 本文件包含 `#![feature(...)]` 标注的代码示例，需要 **nightly 工具链** 编译。

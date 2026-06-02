@@ -291,7 +291,12 @@ async fn fixed() {
 }
 ```
 
-> **修正**: `Stream` 和 `Future` 是 Rust 异步生态中的两个核心 trait。`Future` 代表**单次**异步计算，`Stream` 代表**多次**异步值序列。`Stream` 不实现 `Future`，必须通过 `StreamExt::next()` 获取 `Future<Item = Option<T>>`。这与 JavaScript 的 `AsyncIterator`（`for await...of`）类似，但 Rust 的区分更严格——编译器拒绝将 Stream 直接 await。[来源: [futures-rs Documentation](https://docs.rs/futures/)]
+> **修正**:
+> `Stream` 和 `Future` 是 Rust 异步生态中的两个核心 trait。
+> `Future` 代表**单次**异步计算，`Stream` 代表**多次**异步值序列。
+> `Stream` 不实现 `Future`，必须通过 `StreamExt::next()` 获取 `Future<Item = Option<T>>`。
+> 这与 JavaScript 的 `AsyncIterator`（`for await...of`）类似，但 Rust 的区分更严格——编译器拒绝将 Stream 直接 await。
+> [来源: [futures-rs Documentation](https://docs.rs/futures/)]
 
 ### 10.2 边界测试：取消安全（Cancellation Safety）违反（逻辑错误）
 
@@ -324,7 +329,12 @@ async fn fixed() {
 }
 ```
 
-> **修正**: 取消安全（cancellation safety）指 async 操作在 future 被取消后仍保持正确状态。`tokio::sync::mpsc::Receiver::recv` 是取消安全的——若 future 在 `await` 时被丢弃，消息保留在 channel 中。但自定义组合操作可能不 cancel-safe：若在 `await` 前后有状态变更，取消可能导致状态不一致。Tokio 文档明确标注每个 API 的取消安全性，这是 Rust 异步编程相比其他语言更严格的契约。[来源: [Tokio Documentation](https://docs.rs/tokio/)]
+> **修正**:
+> 取消安全（cancellation safety）指 async 操作在 future 被取消后仍保持正确状态。
+> `tokio::sync::mpsc::Receiver::recv` 是取消安全的——若 future 在 `await` 时被丢弃，消息保留在 channel 中。
+> 但自定义组合操作可能不 cancel-safe：若在 `await` 前后有状态变更，取消可能导致状态不一致。
+> Tokio 文档明确标注每个 API 的取消安全性，这是 Rust 异步编程相比其他语言更严格的契约。
+> [来源: [Tokio Documentation](https://docs.rs/tokio/)]
 
 ```rust,ignore
 // 取消和超时控制

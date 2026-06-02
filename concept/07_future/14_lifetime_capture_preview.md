@@ -15,6 +15,8 @@
 
 > **来源**: [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html) · [RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
 ### 10.4 边界测试：impl trait 的精确 lifetime capture（编译错误/未来特性）
 
 ```rust,ignore

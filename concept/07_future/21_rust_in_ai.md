@@ -10,6 +10,7 @@
 > **前置概念**: [Unsafe](../03_advanced/03_unsafe.md) · [Concurrency](../03_advanced/01_concurrency.md) · [WebAssembly](../06_ecosystem/11_webassembly.md)
 > **后置概念**: [AI Integration](./01_ai_integration.md) · [Evolution](./03_evolution.md)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **来源**: [candle [来源: [Candle](https://github.com/huggingface/candle)] (Hugging Face)](<https://github.com/huggingface/candle>) ·

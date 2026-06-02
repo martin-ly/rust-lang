@@ -14,6 +14,7 @@
 > **前置概念**: [Toolchain](../06_ecosystem/01_toolchain.md) · [Formal Methods](./02_formal_methods.md) · [MC/DC Coverage](./07_mcdc_coverage_preview.md)
 > **后置概念**: [Version Tracking](./05_rust_version_tracking.md)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **来源**: [Ferrocene Project](https://ferrocene.dev/) · [Ferrocene Specification](https://spec.ferrocene.dev/) · [ISO 26262 Standard](https://www.iso.org/standard/68383.html) · [DO-178C Standard](https://www.rtca.org/product/do-178c-software-considerations-in-airborne-systems-and-equipment-certification) · [Ferrous Systems Blog](https://ferrous-systems.com/blog/)

@@ -15,6 +15,8 @@
 
 > **来源**: [Rust Reference — ABI](https://doc.rust-lang.org/reference/items/external-blocks.html) · [RFC 2945](https://rust-lang.github.io/rfcs/2945-c-unwind-abi.html)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
 ### 10.4 边界测试：稳定 ABI 与 extern "C" 的符号兼容性（链接错误）
 
 ```rust,compile_fail

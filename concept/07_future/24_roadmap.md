@@ -10,6 +10,7 @@
 > **前置概念**: [Edition Guide](23_rust_edition_guide.md) · [Version Tracking](./05_rust_version_tracking.md) · [Evolution](./03_evolution.md)
 > **后置概念**: [Formal Methods](./02_formal_methods.md) · [Rust in AI](./21_rust_in_ai.md)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > ⚠️ **不稳定特性警告**: 本文件包含 `#![feature(...)]` 标注的代码示例，需要 **nightly 工具链** 编译。

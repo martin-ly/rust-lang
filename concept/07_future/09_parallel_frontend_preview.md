@@ -14,6 +14,7 @@
 > **前置概念**: [Toolchain](../06_ecosystem/01_toolchain.md) · [Version Tracking](./05_rust_version_tracking.md)
 > **后置概念**: [Evolution](./03_evolution.md)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **来源**: [Rust Compiler Team — Parallel Frontend](https://github.com/rust-lang/compiler-team/issues/) ·

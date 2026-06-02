@@ -13,6 +13,8 @@
 > **后置延伸**: [Async Gen](./15_gen_blocks_preview.md)
 > **来源**: [RFC 3513](https://rust-lang.github.io/rfcs/3513-gen-blocks.html)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
 ## 10.4 边界测试：`gen` block 与 `async gen` 的类型推断（编译错误/未来特性）
 
 ```rust,ignore

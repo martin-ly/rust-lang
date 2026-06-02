@@ -11,6 +11,8 @@
 
 > **来源**: [WebAssembly Spec](https://webassembly.github.io/spec/) · [WASI Preview 2](https://github.com/WebAssembly/WASI/blob/main/preview2/README.md)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
 ### 10.4 边界测试：WASI 的 capability-based security 与文件系统访问（运行时拒绝）
 
 ```rust,ignore

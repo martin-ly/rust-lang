@@ -37,7 +37,8 @@
 
 ### 8.8 Waker 契约与活性
 
-> **章节过渡**：取消安全回答了"Future 被丢弃时会发生什么"，而 Waker 契约则回答"Future 被挂起后如何复活"。二者共同构成异步执行的生命周期闭环：从 poll 到 Pending，从 wake 到再 poll，任何一环断裂都会导致活锁或资源泄漏。
+> **章节过渡**：取消安全回答了"Future 被丢弃时会发生什么"，而 Waker 契约则回答"Future 被挂起后如何复活"。
+> 二者共同构成异步执行的生命周期闭环：从 poll 到 Pending，从 wake 到再 poll，任何一环断裂都会导致活锁或资源泄漏。
 
 **Waker 契约（Waker Contract）**：
 
@@ -93,9 +94,12 @@ graph TD
     style T2 fill:#6f6
 ```
 
-> **认知功能**: 活性调试路径图——当 Future 陷入永久 Pending 时，按此决策树定位故障根因。读者可逐层检查 Waker 注册、Reactor 唤醒调用、poll 返回值合法性三个环节。关键洞察：`poll → Pending → wake → poll` 的闭环是异步执行器活性（liveness）的根本保证，任一环节断裂即导致活锁或饥饿。[来源: 💡 原创分析]
+> **认知功能**: 活性调试路径图——当 Future 陷入永久 Pending 时，按此决策树定位故障根因。
+> 读者可逐层检查 Waker 注册、Reactor 唤醒调用、poll 返回值合法性三个环节。
+> 关键洞察：`poll → Pending → wake → poll` 的闭环是异步执行器活性（liveness）的根本保证，任一环节断裂即导致活锁或饥饿。
+> [来源: 💡 原创分析]
 > [来源: [Rust Reference: Pin](https://doc.rust-lang.org/reference/types/pin.html)]
-
+>
 > **[Async Book: Waker]** Waker 是 Future 与 Reactor 之间的桥梁——poll 时将 Waker 传递给底层 I/O 源，I/O 就绪时源通过 Waker 通知执行器重新调度该 Future。✅ 已验证
 >
 > **[without.boats blog]** Waker 的设计刻意与具体执行器解耦：任何实现了 `Wake` trait 的类型均可作为 Waker，这使得同一个 Future 可在不同运行时之间复用。✅ 已验证
@@ -103,14 +107,14 @@ graph TD
 ---
 
 ### 8.9 Waker/Context 的底层机制
->
 
-> **章节过渡**：取消安全与 Waker 契约从语义层面描述了 Future 的生命周期，但 Waker 本身是如何实现的？理解 Waker 的 VTable 机制、Context 与 Waker 的关系，以及自定义 Waker 的实现方式，是手写 Future 和构建自定义运行时的必备知识。
+> **章节过渡**：取消安全与 Waker 契约从语义层面描述了 Future 的生命周期，但 Waker 本身是如何实现的？
+> 理解 Waker 的 VTable 机制、Context 与 Waker 的关系，以及自定义 Waker 的实现方式，是手写 Future 和构建自定义运行时的必备知识。
 
 **Waker 的 VTable 机制**
 
-> **[futures-rs 文档]** `Waker` 是一个不透明句柄，由执行器（executor）创建，通过 `RawWaker` 和 `RawWakerVTable` 实现类型擦除。VTable 包含 `clone`、`wake`、`wake_by_ref` 和 `drop` 四个函数指针。✅ 已验证
-
+> **[futures-rs 文档]** `Waker` 是一个不透明句柄，由执行器（executor）创建，通过 `RawWaker` 和 `RawWakerVTable` 实现类型擦除。
+> VTable 包含 `clone`、`wake`、`wake_by_ref` 和 `drop` 四个函数指针。✅ 已验证
 > **[Tokio 源码]** Tokio 的 Waker 基于 `std::task::Waker`，其底层通过 `Arc<Header>` 引用任务句柄，`wake` 操作将任务重新推入调度队列。✅ 已验证
 
 ```rust,ignore

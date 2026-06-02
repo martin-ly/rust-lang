@@ -9,6 +9,8 @@
 > **归档原因**: 与 `05_formal_ecosystem_tower.md` 内容高度重叠（>90%），且 `05` 版本为 SUMMARY.md 引用主文件。
 > **状态**: 已归档（2026-05-30 重复文件清理）
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
 ## 相关概念文件
 
 - [Formal Ecosystem Tower 主文件](./05_formal_ecosystem_tower.md) — Rust 生态形式化分层塔（本文件已归档）

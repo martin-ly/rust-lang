@@ -14,6 +14,7 @@
 > **前置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Version Tracking](./05_rust_version_tracking.md)
 > **后置概念**: [Formal Methods](./02_formal_methods.md) · [Rust for Linux](../06_ecosystem/04_application_domains.md)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **来源**: [DO-178C [来源: [FAA DO-178C](https://www.faa.gov/aircraft/air_cert/design_approvals/criteria/software)] / ED-12C](<https://www.rtca.org/product/do-178c/>) ·

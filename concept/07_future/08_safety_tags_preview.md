@@ -14,6 +14,7 @@
 > **前置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [BorrowSanitizer](./20_borrowsanitizer_preview.md)
 > **后置概念**: [Formal Methods](./02_formal_methods.md) · [AI Integration](./01_ai_integration.md)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **来源**: [Rust RFC: Safety Tags](https://github.com/rust-lang/rfcs/pull/) ·

@@ -82,7 +82,15 @@
 
 ---
 
-> 导航：返回 [`rust-formal-engineering-system`](../../rust-formal-engineering-system/README.md) · 质量保障 [`10_quality_assurance/00_index.md`](../../rust-formal-engineering-system/10_quality_assurance/00_index.md) · 异步范式 [`02_async/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/02_async/00_index.md) · 同步范式 [`01_synchronous/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/01_synchronous/00_index.md) · 响应式 [`07_reactive/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/07_reactive/00_index.md) · 事件驱动 [`08_event_driven/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/08_event_driven/00_index.md) · Actor [`09_actor_model/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/09_actor_model/00_index.md) · 基准指南 [`11_benchmark_minimal_guide.md`](../../rust-formal-engineering-system/02_programming_paradigms/11_benchmark_minimal_guide.md)
+> 导航：
+> 返回 [`rust-formal-engineering-system`](../../rust-formal-engineering-system/README.md) ·
+> 质量保障 [`10_quality_assurance/00_index.md`](../../rust-formal-engineering-system/10_quality_assurance/00_index.md) ·
+> 异步范式 [`02_async/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/02_async/00_index.md) ·
+> 同步范式 [`01_synchronous/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/01_synchronous/00_index.md) ·
+> 响应式 [`07_reactive/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/07_reactive/00_index.md) ·
+> 事件驱动 [`08_event_driven/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/08_event_driven/00_index.md) ·
+> Actor [`09_actor_model/00_index.md`](../../rust-formal-engineering-system/02_programming_paradigms/09_actor_model/00_index.md) ·
+> 基准指南 [`11_benchmark_minimal_guide.md`](../../rust-formal-engineering-system/02_programming_paradigms/11_benchmark_minimal_guide.md)
 
 [![Rust](https://img.shields.io/badge/rust-1.92.0+-orange.svg)](https://www.rust-lang.org/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](../../LICENSE)

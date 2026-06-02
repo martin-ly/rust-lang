@@ -10,6 +10,7 @@
 > **前置概念**: [Rust 路线图](./24_roadmap.md) · [WebAssembly 生态](../06_ecosystem/11_webassembly.md) · [Web 框架](../06_ecosystem/27_web_frameworks.md)
 > **后置概念**: [WASI 预览](../06_ecosystem/08_wasi.md) · [形式化方法](./02_formal_methods.md)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **来源**: [Rust Wasm Book](https://rustwasm.github.io/book/) ·

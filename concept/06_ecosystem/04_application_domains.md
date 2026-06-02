@@ -9,6 +9,7 @@
 > **后置概念**: [AI Integration](../07_future/01_ai_integration.md) · [Formal Methods](../07_future/02_formal_methods.md)
 > **主要来源**: [Rust in Production] · [Rust Foundation] · [Ferrous Systems] · [RustConf] · [AWS/Google/Microsoft Rust 博客]
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **Bloom 层级**: 分析 → 评价

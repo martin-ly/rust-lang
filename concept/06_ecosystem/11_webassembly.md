@@ -14,6 +14,7 @@
 > **前置概念**: [Toolchain](./01_toolchain.md) · [FFI](../03_advanced/05_rust_ffi.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [WASI](./08_wasi.md)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **来源**: [WebAssembly Specification](https://webassembly.github.io/spec/) ·

@@ -8,6 +8,7 @@
 > **前置概念**: [ECS](07_game_ecs.md) · [Memory](../02_intermediate/03_memory_management.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Ownership](../01_foundation/01_ownership.md)
 > **后置概念**: [WebAssembly](11_webassembly.md) · [Performance](15_performance_optimization.md)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **来源**: [Bevy Engine](https://bevyengine.org/) · [wgpu](https://wgpu.rs/) · [Rust GameDev WG](https://gamedev.rs/) · [Wikipedia — Game Engine](https://en.wikipedia.org/wiki/Game_engine)

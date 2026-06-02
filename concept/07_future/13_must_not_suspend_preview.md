@@ -15,6 +15,8 @@
 
 > **来源**: [RFC 3014](https://rust-lang.github.io/rfcs/3014-must-not-suspend-lint.html) · [Tracking Issue](https://github.com/rust-lang/rust/issues/83310)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
 ### 10.4 边界测试：`must_not_suspend` 与跨 await 点的借用（运行时错误）
 
 ```rust,compile_fail

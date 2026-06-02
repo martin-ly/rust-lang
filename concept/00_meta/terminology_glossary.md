@@ -1,4 +1,5 @@
 > **说明**：本表为最小国际化 efforts（决策 3-C），聚焦高频术语标准化。
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 > 所有英文术语与 [TRPL](https://doc.rust-lang.org/book/) 及 [Rust Reference](https://doc.rust-lang.org/reference/) 保持一致，
 > 确保学习者能顺利对接 crates.io、RFC、GitHub Issue 等英文生态。
 >

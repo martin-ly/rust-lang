@@ -10,6 +10,7 @@
 > **前置概念**: [Unsafe](../03_advanced/03_unsafe.md) · [FFI](../03_advanced/05_rust_ffi.md) · [Cross Compilation](../06_ecosystem/17_cross_compilation.md)
 > **后置概念**: [Formal Methods](../04_formal/04_rustbelt.md) · [Evolution](./03_evolution.md)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **来源**: [Rust for Linux](https://rust-for-linux.com/) ·

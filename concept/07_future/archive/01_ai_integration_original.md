@@ -10,6 +10,7 @@
 > [Formal Methods](../02_formal_methods.md)
 > **主要来源**: [AI Coding Trends 2025-2026] · [Rust AI Ecosystem] · [Verus/Creusot + LLM] · [Wikipedia]
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **Bloom 层级**: 分析 → 创造

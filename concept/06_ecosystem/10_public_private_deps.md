@@ -10,6 +10,7 @@
 > **定位**: 解决 Rust  crate 图中"依赖泄漏"问题的核心机制，使 API 稳定性与依赖演进解耦。 [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **对标**: Java 模块系统 `requires` vs `requires transitive`，C++ 前置声明 vs 完整包含
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > 来源: [RFC 3516 — Public & Private Dependencies](https://github.com/rust-lang/rfcs/pull/3516) ·

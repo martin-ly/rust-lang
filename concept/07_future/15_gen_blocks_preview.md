@@ -14,6 +14,7 @@
 > **前置概念**: [Async](../03_advanced/02_async.md) · [Traits/Iterators](../02_intermediate/01_traits.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Version Tracking](./05_rust_version_tracking.md)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **来源**: [Rust RFC — Gen Blocks](https://github.com/rust-lang/rfcs/pull/3513) · [Rust Reference — Generators](https://doc.rust-lang.org/reference/expressions/generator-expr.html) · [Tracking Issue #93132](https://github.com/rust-lang/rust/issues/93132) · [Iterator RFCs](https://github.com/rust-lang/rfcs/labels/T-libs-api)

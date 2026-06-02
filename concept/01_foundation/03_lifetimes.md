@@ -8,7 +8,6 @@
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[生命周期](../../knowledge/01_fundamentals/03_lifetimes.md)
-
 >
 > **受众**: [初学者]
 > **层级**: L1 基础概念

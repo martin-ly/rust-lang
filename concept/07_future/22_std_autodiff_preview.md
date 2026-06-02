@@ -13,6 +13,7 @@
 > **前置概念**: [Generics](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md) · [Machine Learning Ecosystem](../06_ecosystem/46_machine_learning_ecosystem.md)
 > **后置延伸**: [Rust in AI](./21_rust_in_ai.md) · [Evolution](./03_evolution.md)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **来源**: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) · [AutoDiff RFC Draft](https://github.com/rust-lang/rfcs/pull/0000-autodiff) · [rustc_autodiff crate](https://github.com/Rust-AutoDiff/rustc_autodiff) · [Burn ADBackend](https://burn.dev/)

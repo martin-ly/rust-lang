@@ -349,7 +349,14 @@ fn linear_move() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Pierce TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Harper PFPL](https://www.cs.cmu.edu/~rwh/pfpl/) · [Barendregt — The Lambda Calculus](https://www.amazon.com/Lambda-Calculus-Its-Syntax-Studies/dp/0444875085) · [RustBelt POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **权威来源**:
+>
+> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [Pierce TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
+> [Harper PFPL](https://www.cs.cmu.edu/~rwh/pfpl/) ·
+> [Barendregt — The Lambda Calculus](https://www.amazon.com/Lambda-Calculus-Its-Syntax-Studies/dp/0444875085) ·
+> [RustBelt POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
+>
 > **文档版本**: 1.0
 > **对应 Rust 版本**: 1.90.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
@@ -374,7 +381,16 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的默认参数传递是**按值移动**（move semantics）：未实现 `Copy` 的类型在传参时转移所有权。这与 C 的按值复制（`struct` 按位复制）、Java 的按值引用（对象引用复制，对象共享）、Haskell 的惰性求值（thunk 共享）都不同。`Config` 包含 `Vec<u8>`（堆分配），按值移动只复制栈上的 `Vec` 头（指针、长度、容量），不复制堆数据——这是 Rust 的零成本移动。但移动后原变量失效，若需保留，应传引用（`&Config`）或 `Clone`。Rust 的求值策略可描述为"严格按值 + 移动语义"：参数在调用前求值（严格），传递时移动所有权（非共享）。这与 C++11 的右值引用（`std::move`，显式移动）类似，但 Rust 的移动是默认且自动的。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] · [来源: [Evaluation Strategy](https://en.wikipedia.org/wiki/Evaluation_strategy)]
+> **修正**:
+>
+> Rust 的默认参数传递是**按值移动**（move semantics）：未实现 `Copy` 的类型在传参时转移所有权。
+> 这与 C 的按值复制（`struct` 按位复制）、Java 的按值引用（对象引用复制，对象共享）、Haskell 的惰性求值（thunk 共享）都不同。
+> `Config` 包含 `Vec<u8>`（堆分配），按值移动只复制栈上的 `Vec` 头（指针、长度、容量），不复制堆数据——这是 Rust 的零成本移动。
+> 但移动后原变量失效，若需保留，应传引用（`&Config`）或 `Clone`。
+> Rust 的求值策略可描述为"严格按值 + 移动语义"：参数在调用前求值（严格），传递时移动所有权（非共享）。
+> 这与 C++11 的右值引用（`std::move`，显式移动）类似，但 Rust 的移动是默认且自动的。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] ·
+> [来源: [Evaluation Strategy](https://en.wikipedia.org/wiki/Evaluation_strategy)]
 
 ### 10.4 边界测试：惰性迭代器与严格求值的混合（编译错误/逻辑错误）
 
@@ -395,7 +411,20 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的迭代器适配器（`map`、`filter`、`flat_map`）是**惰性求值**的——它们返回新的迭代器，不立即执行。副作用（`println`、修改外部状态）在迭代器被消费（`collect`、`for_each`、`fold`）时才发生。这是函数式编程的常规模式（Haskell 的惰性列表、Python 的生成器表达式），但 Rust 开发者常误以为 `map` 像 `Vec::map`（立即执行）。严格求值与惰性求值的边界：Rust 的值（非迭代器）是严格求值的，`Iterator` trait 的方法链是惰性求值的。混合时的陷阱：1) 副作用的顺序不确定；2) 迭代器被 `collect` 前，中间状态不反映副作用；3) 多次 `collect` 同一迭代器导致副作用重复执行。这与 C# 的 LINQ（惰性，`ToList()` 触发）或 Java 的 `Stream`（惰性，`collect` 触发）相同。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)] · [来源: [Evaluation Strategy](https://en.wikipedia.org/wiki/Evaluation_strategy)]
+> **修正**:
+> Rust 的迭代器适配器（`map`、`filter`、`flat_map`）是**惰性求值**的——它们返回新的迭代器，不立即执行。
+> 副作用（`println`、修改外部状态）在迭代器被消费（`collect`、`for_each`、`fold`）时才发生。
+> 这是函数式编程的常规模式（Haskell 的惰性列表、Python 的生成器表达式），但 Rust 开发者常误以为 `map` 像 `Vec::map`（立即执行）。
+> 严格求值与惰性求值的边界：Rust 的值（非迭代器）是严格求值的，`Iterator` trait 的方法链是惰性求值的。
+> 混合时的陷阱：
+>
+> 1) 副作用的顺序不确定；
+> 2) 迭代器被 `collect` 前，中间状态不反映副作用；
+> 3) 多次 `collect` 同一迭代器导致副作用重复执行。
+> 这与 C# 的 LINQ（惰性，`ToList()` 触发）或 Java 的 `Stream`（惰性，`collect` 触发）相同。
+>
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)] ·
+> [来源: [Evaluation Strategy](https://en.wikipedia.org/wiki/Evaluation_strategy)]
 
 ### 10.5 边界测试：惰性求值与 panic 的延迟触发（运行时行为差异）
 
@@ -409,7 +438,19 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的核心语言是**严格求值**（eager evaluation），但某些抽象引入惰性：1) 迭代器适配器（`map`、`filter`）惰性执行；2) `lazy_static`、`once_cell` 惰性初始化；3) 宏展开在编译期惰性。惰性求值的风险：副作用（panic、I/O、修改状态）的触发时机不确定。`unwrap_or_else(|| panic!(...))` 在 `None` 时立即 panic，因为 `unwrap_or_else` 是严格的（立即调用闭包）。这与 Haskell 的惰性求值（`error` 可能在不可预期时刻触发）或 Swift 的 `@autoclosure`（延迟求值参数）不同——Rust 的惰性仅限于迭代器和高阶函数，核心表达式是严格的。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)] · [来源: [Evaluation Strategy](https://en.wikipedia.org/wiki/Evaluation_strategy)]
+> **修正**:
+>
+> Rust 的核心语言是**严格求值**（eager evaluation），但某些抽象引入惰性：
+>
+> 1) 迭代器适配器（`map`、`filter`）惰性执行；
+> 2) `lazy_static`、`once_cell` 惰性初始化；
+> 3) 宏展开在编译期惰性。
+>
+> 惰性求值的风险：副作用（panic、I/O、修改状态）的触发时机不确定。
+> `unwrap_or_else(|| panic!(...))` 在 `None` 时立即 panic，因为 `unwrap_or_else` 是严格的（立即调用闭包）。
+> 这与 Haskell 的惰性求值（`error` 可能在不可预期时刻触发）或 Swift 的 `@autoclosure`（延迟求值参数）不同——Rust 的惰性仅限于迭代器和高阶函数，核心表达式是严格的。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)] ·
+> [来源: [Evaluation Strategy](https://en.wikipedia.org/wiki/Evaluation_strategy)]
 
 ### 10.3 边界测试：按值传递与大类型的性能陷阱（编译错误/逻辑问题）
 
@@ -431,7 +472,24 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的**按值传递**（move semantics）对大类型（如 `[u8; 10000]`）可能产生隐式内存复制（memcpy）。虽然 Rust 的所有权系统保证无双重释放，但性能上：1) 大数组按值传递 = memcpy；2) `Box<[u8; 10000]>` 只传递指针（8 字节）；3) `&[u8]` 传递 fat pointer（16 字节）。优化：1) 大类型使用 `Box<T>` 或 `&T`；2) 使用 `#[repr(C)]` 控制布局（但通常无需）；3) 编译器的 NRVO（Named Return Value Optimization）可能消除部分复制。Rust 的 move 语义在抽象层面是"零成本"（不调用拷贝构造函数），但底层仍是 `memcpy`——这是所有值语义语言的共性。这与 C++ 的 RVO/NRVO（类似优化）或 Go 的接口值（隐式指针+堆分配）不同——Rust 的 move 语义是显式的、可预测的。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] · [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
+> **修正**:
+> Rust 的**按值传递**（move semantics）对大类型（如 `[u8; 10000]`）可能产生隐式内存复制（memcpy）。
+> 虽然 Rust 的所有权系统保证无双重释放，但性能上：
+>
+> 1) 大数组按值传递 = memcpy；
+> 2) `Box<[u8; 10000]>` 只传递指针（8 字节）；
+> 3) `&[u8]` 传递 fat pointer（16 字节）。
+>
+> 优化：
+>
+> 1) 大类型使用 `Box<T>` 或 `&T`；
+> 2) 使用 `#[repr(C)]` 控制布局（但通常无需）；
+> 3) 编译器的 NRVO（Named Return Value Optimization）可能消除部分复制。
+>
+> Rust 的 move 语义在抽象层面是"零成本"（不调用拷贝构造函数），但底层仍是 `memcpy`——这是所有值语义语言的共性。
+> 这与 C++ 的 RVO/NRVO（类似优化）或 Go 的接口值（隐式指针+堆分配）不同——Rust 的 move 语义是显式的、可预测的。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] ·
+> [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
 
 ### 10.3 边界测试：const fn 中的非编译期操作
 
@@ -445,7 +503,11 @@ const fn foo(x: i32) -> i32 {
 fn main() {}
 ```
 
-> **修正**: **Const fn**：1) 函数体必须是编译期可计算的；2) `Vec::new()` 在某些 Rust 版本中不是 `const fn`；3) 编译期限制逐步放宽（`const_mut_refs`、`const_vec_string` 等）。
+> **修正**: **Const fn**：
+>
+> 1) 函数体必须是编译期可计算的；
+> 2) `Vec::new()` 在某些 Rust 版本中不是 `const fn`；
+> 3) 编译期限制逐步放宽（`const_mut_refs`、`const_vec_string` 等）。
 
 ## 认知路径
 
@@ -460,9 +522,7 @@ fn main() {}
 | 求值策略：Call-by-Value, Call-by-Name, Call-by-Need 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > **过渡**: 掌握 求值策略：Call-by-Value, Call-by-Name, Call-by-Need 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 求值策略：Call-by-Value, Call-by-Name, Call-by-Need 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: 求值策略：Call-by-Value, Call-by-Name, Call-by-Need 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界

@@ -10,6 +10,7 @@
 > **前置概念**: [Async](../03_advanced/02_async.md) · [Error Handling](../02_intermediate/04_error_handling.md)
 > **后置概念**: [WebAssembly](./11_webassembly.md) · [Rust Version Tracking](../07_future/05_rust_version_tracking.md)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **来源**: [tracing Documentation](https://docs.rs/tracing/latest/tracing/) ·

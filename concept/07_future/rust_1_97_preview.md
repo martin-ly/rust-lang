@@ -14,6 +14,7 @@
 > - [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
 > - [Rust Internals Forum](https://internals.rust-lang.org/)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 ## 一、语言特性预览

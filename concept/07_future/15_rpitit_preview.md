@@ -15,6 +15,8 @@
 
 > **来源**: [Rust Reference — Impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html) · [RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html) · [Rust Blog — AFIT](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
 ### 10.4 边界测试：RPITIT（Return Position Impl Trait In Traits）的实现一致性（编译错误）
 
 ```rust,ignore

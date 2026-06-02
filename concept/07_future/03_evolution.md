@@ -9,6 +9,7 @@
 > **前置概念**: 全部前置层级
 > **主要来源**: [Rust RFCs](https://rust-lang.github.io/rfcs/) · [Rust Blog](https://blog.rust-lang.org/) · [Edition Guide](https://doc.rust-lang.org/edition-guide/) · [Inside Rust](https://blog.rust-lang.org/inside-rust/) · [Wikipedia]
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > ⚠️ **不稳定特性警告**: 本文件包含 `#![feature(...)]` 标注的代码示例，需要 **nightly 工具链** 编译。

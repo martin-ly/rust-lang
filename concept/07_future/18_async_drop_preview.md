@@ -10,6 +10,7 @@
 > **前置概念**: [Async](../03_advanced/02_async.md) · [Pin](../03_advanced/06_pin_unpin.md)
 > **后置概念**: [Gen Blocks](./15_gen_blocks_preview.md) · [Async Closures](https://github.com/rust-lang/rust/issues/62290)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **来源**: [RFC 3308 — Async Drop](https://github.com/rust-lang/rfcs/pull/3308) ·

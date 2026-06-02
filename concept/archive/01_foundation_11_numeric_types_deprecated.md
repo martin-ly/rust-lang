@@ -6,6 +6,7 @@
 > **前置概念**: [Type System](04_type_system.md) · [Ownership](01_ownership.md)
 > **后置概念**: [Generics](../02_intermediate/02_generics.md) · [Performance](../06_ecosystem/15_performance_optimization.md)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html) · [std::num](https://doc.rust-lang.org/std/num/index.html) · [Wikipedia — Integer Overflow](https://en.wikipedia.org/wiki/Integer_overflow) · [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754)

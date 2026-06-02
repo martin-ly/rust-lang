@@ -12,6 +12,7 @@
 > **定位**: 探讨 Rust 中 field projections 的提案——允许安全地从复合类型中"投影"出对字段的引用，而不暴露内部结构。分析其对内核编程、自引用结构和内存安全保证的影响。
 > **前置概念**: [Pin](../03_advanced/06_pin_unpin.md) · [Lifetime](../01_foundation/03_lifetimes.md) · [Unsafe Rust](../03_advanced/03_unsafe.md)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 ## 📑 目录

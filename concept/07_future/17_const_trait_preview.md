@@ -15,6 +15,8 @@
 
 > **来源**: [Rust Reference — Const Eval](https://doc.rust-lang.org/reference/const_eval.html) · [RFC 2632](https://rust-lang.github.io/rfcs/2632-const-trait-impl.html)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
 ### 10.4 边界测试：const trait 与泛型 const 求值（编译错误/未来特性）
 
 ```rust,ignore

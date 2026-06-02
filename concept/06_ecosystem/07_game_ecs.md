@@ -10,6 +10,7 @@
 > **后置概念**: [Application Domains](./04_application_domains.md) · [Formal Ecosystem Tower](./05_formal_ecosystem_tower.md)
 > **主要来源**: [Bevy Book] · [Bevy ECS Docs] · [Fyrox Docs] · [wgpu Documentation] · [Wikipedia: Entity component system] · [Data-Oriented Design Book] · [Niko Matsakis — Rayon Blog]
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > ⚠️ **不稳定特性警告**: 本文件包含 `#![feature(...)]` 标注的代码示例，需要 **nightly 工具链** 编译。

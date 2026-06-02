@@ -14,6 +14,7 @@
 > **前置概念**: [Toolchain](../06_ecosystem/01_toolchain.md) · [Parallel Frontend](./09_parallel_frontend_preview.md)
 > **后置概念**: [Version Tracking](./05_rust_version_tracking.md)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **来源**: [Cranelift Documentation](https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/docs/index.md) · [rustc_codegen_cranelift](https://github.com/rust-lang/rustc_codegen_cranelift) · [Bytecode Alliance](https://bytecodealliance.org/) · [Rust Compiler Team — Cranelift](https://github.com/rust-lang/compiler-team/issues/)

@@ -10,6 +10,7 @@
 > **后置概念**: [CI/CD Integration]
 > **主要来源**: [The Cargo Book](https://doc.rust-lang.org/cargo/) · [Rustup Documentation] · [Clippy Documentation]
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **Bloom 层级**: 应用 → 评价

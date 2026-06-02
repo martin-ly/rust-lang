@@ -9,6 +9,7 @@
 > **对齐来源**: [ACM 多维课程图谱框架] · [Stanford CS520 — 知识图谱教育应用] · [Rutgers CD-Learning — 条件决策学习] · [Microsoft RustTraining — 案例驱动学习]
 > **结构**: 全局层（系统级问题）→ 概念层（Rust 核心概念）→ 方法层（具体工具/模式/代码）
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **来源**: [ACM — *Multidimensional Course Knowledge Graph Framework*, 2024]

@@ -23,6 +23,7 @@
 > [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Safety Tags](./08_safety_tags_preview.md)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **来源**:

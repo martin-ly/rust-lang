@@ -13,6 +13,7 @@
 > **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Traits](../02_intermediate/01_traits.md) · [Error Handling](../02_intermediate/04_error_handling.md) · [Evolution](./03_evolution.md)
 > **后置概念**: [Version Tracking](./05_rust_version_tracking.md) · [Effects System](./04_effects_system.md)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **来源**: [RFC 2008 — `non_exhaustive`](https://github.com/rust-lang/rfcs/pull/2008) · [Rust Reference — Enum Types](https://doc.rust-lang.org/reference/items/enumerations.html) · [RFC 3518 — Sealed Traits](https://github.com/rust-lang/rfcs/pull/3518) · [GitHub #156628 — Open Enums Tracking](https://github.com/rust-lang/rust/issues/156628) · [Scala Sealed Traits](https://docs.scala-lang.org/tour/pattern-matching.html) · [Haskell Open Data Types](https://wiki.haskell.org/Open_data_type) · [OCaml Polymorphic Variants](https://ocaml.org/manual/polyvariant.html)

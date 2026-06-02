@@ -9,6 +9,7 @@
 > **前置概念**: [RustBelt](../04_formal/04_rustbelt.md) · [Ownership Formalization](../04_formal/03_ownership_formal.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Unsafe](../03_advanced/03_unsafe.md)
 > **主要来源**: [AWS Kani] · [Microsoft Verus] · [TLA+] · [P Language] · [POPL/PLDI 2024-2026] · [Wikipedia] · [O'Hearn 2007 — Separation Logic]
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **Bloom 层级**: 评价 → 创造

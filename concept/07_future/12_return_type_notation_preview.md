@@ -14,6 +14,7 @@
 > **前置概念**: [Lifetimes](../01_foundation/03_lifetimes.md) · [Async](../03_advanced/02_async.md) · [Traits](../02_intermediate/01_traits.md)
 > **后置概念**: [Version Tracking](./05_rust_version_tracking.md)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **来源**: [RFC 2289 — Associated Type Bounds](https://github.com/rust-lang/rfcs/pull/2289) · [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html) · [Async Working Group](https://rust-lang.github.io/async-fundamentals-initiative/) · [Tracking Issue #109417](https://github.com/rust-lang/rust/issues/109417)

@@ -14,6 +14,7 @@
 > **前置概念**: [Formal Methods](./02_formal_methods.md) · [RustBelt](../04_formal/04_rustbelt.md) · [Ferrocene](./14_ferrocene_preview.md)
 > **后置概念**: [Version Tracking](./05_rust_version_tracking.md)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Ferrocene Specification](https://spec.ferrocene.dev/) · [Rust Language Specification RFC](https://github.com/rust-lang/rfcs/pull/3355) · [Rust Compiler Team — Specification](https://github.com/rust-lang/compiler-team/issues/)

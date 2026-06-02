@@ -3,6 +3,8 @@
 > **受众**: [专家]
 > **内容分级**: [综述级]
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
 ## 1. 引言
 
 eBPF（extended Berkeley Packet Filter）已从早期的网络包过滤机制演变为 Linux 内核的通用可编程基础设施。它允许在不修改内核源码、不加载内核模块的前提下，向内核注入沙盒化字节码，实现可观测性（tracing）、网络处理（XDP/TC）、安全策略（LSM）等功能 [来源: Linux Kernel Documentation, eBPF, https://docs.kernel.org/bpf/]。

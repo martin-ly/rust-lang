@@ -7,6 +7,7 @@
 > **对齐来源**: [Rust API Guidelines] · [Rust Design Patterns] · [Rust Style Guide] · [Clippy Lints] · [TRPL 惯用章节]
 > **基准版本**: Rust 1.96.0 stable (Edition 2024)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **Bloom 层级**: 应用 → 分析 → 评价

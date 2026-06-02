@@ -19,6 +19,7 @@
 > [Formal Methods](./02_formal_methods.md) ·
 > [Evolution](./03_evolution.md)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **Bloom 层级**: 分析 → 应用

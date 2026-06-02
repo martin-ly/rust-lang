@@ -5,7 +5,7 @@
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[Unsafe Rust](../../knowledge/03_advanced/unsafe)
-
+>
 > **受众**: [专家]
 > **层级**: L3 高级概念
 > **A/S/P 标记**: **S+P** — Structure + Procedure
@@ -387,10 +387,16 @@ stateDiagram-v2
     }
 ```
 
-> **认知功能**: 将 Safe/Unsafe 边界建模为显式状态转换系统，帮助读者建立"编译器保护态→人工证明态→错误态"的三态直觉。建议在编写 unsafe 代码前对照此图确认当前所处状态。关键洞察：所有进入 Unsafe 的转移必须有 `unsafe` 关键字标记，且转移前提是程序员人工验证安全契约。[来源: 💡 原创分析]
+> **认知功能**:
+> 将 Safe/Unsafe 边界建模为显式状态转换系统，帮助读者建立"编译器保护态→人工证明态→错误态"的三态直觉。
+> 建议在编写 unsafe 代码前对照此图确认当前所处状态。
+> 关键洞察：所有进入 Unsafe 的转移必须有 `unsafe` 关键字标记，且转移前提是程序员人工验证安全契约。[来源: 💡 原创分析]
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
-
-> **思维表征说明**: `stateDiagram-v2` 将 Safe/Unsafe 边界建模为**状态转换系统**——Safe 是「编译器保护态」，UnsafeBlock/UnsafeFn/UnsafeTrait 是「人工证明态」，UB 是「不可恢复的错误态」。关键洞察：从 Safe 进入 Unsafe 的每次转移都必须有**显式标记**（`unsafe` 关键字），且转移条件是「程序员已验证安全契约」。这与 `graph TD` 流程图（展示知识结构）形成互补——状态机图展示的是**运行时/编码时的状态约束**。 [来源: Rustonomicon §1; RFC 2585; Rust Reference §19]
+> **思维表征说明**:
+> `stateDiagram-v2` 将 Safe/Unsafe 边界建模为**状态转换系统**——Safe 是「编译器保护态」，UnsafeBlock/UnsafeFn/UnsafeTrait 是「人工证明态」，UB 是「不可恢复的错误态」。
+> 关键洞察：从 Safe 进入 Unsafe 的每次转移都必须有**显式标记**（`unsafe` 关键字），且转移条件是「程序员已验证安全契约」。
+> 这与 `graph TD` 流程图（展示知识结构）形成互补——状态机图展示的是**运行时/编码时的状态约束**。
+> [来源: Rustonomicon §1; RFC 2585; Rust Reference §19]
 
 ```text
 Rust 区分两种不变式:

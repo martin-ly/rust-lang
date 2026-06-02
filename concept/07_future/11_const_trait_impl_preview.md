@@ -14,6 +14,7 @@
 > **前置概念**: [Generics](../02_intermediate/02_generics.md) · [Traits](../02_intermediate/01_traits.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Evolution](./03_evolution.md)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **来源**: [Rust RFC — Const Traits](https://github.com/rust-lang/rfcs/pull/2632) · [Rust Reference — Const Evaluation](https://doc.rust-lang.org/reference/const_eval.html) · [Tracking Issue #67792](https://github.com/rust-lang/rust/issues/67792) · [Const Eval Working Group](https://github.com/rust-lang/const-eval)

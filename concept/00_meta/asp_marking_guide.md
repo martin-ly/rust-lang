@@ -7,6 +7,7 @@
 > **对齐来源**: [Microsoft RustTraining] · [arxiv 2604.06331v1] · [Krathwohl 2002] · [Bloom 修订版 2001]
 > **使用方式**: 每个概念文件的头部标注增加 A/S/P 字段；`concept_index.md` 增加 A/S/P 索引列。
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **来源**: [Microsoft RustTraining — github.com/microsoft/RustTraining]

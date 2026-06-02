@@ -10,6 +10,7 @@
 > **前置概念**: [Rust Version Tracking](./05_rust_version_tracking.md) · [Async](../03_advanced/02_async.md) · [Generics](../02_intermediate/02_generics.md)
 > **后置概念**: [Evolution](./03_evolution.md) · [NLL](../03_advanced/08_nll_and_polonius.md)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **来源**: [Rust Edition Guide — 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) · [Rust Blog — Edition 2024](https://blog.rust-lang.org/) · [RFC 3501 — Edition 2024](https://rust-lang.github.io/rfcs/3501-edition-2024.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Wikipedia — Software Release Life Cycle](https://en.wikipedia.org/wiki/Software_release_life_cycle)

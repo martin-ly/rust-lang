@@ -7,6 +7,7 @@
 > **定位**: 本文件将 RustBelt（Jung et al., POPL 2018）中的核心形式化谓词——**所有权谓词 `own(τ)`** 和 **共享谓词 `shr(κ, ℓ)`**——可视化映射到 Rust 的 L1-L3 工程概念，建立"数学符号 ↔ 代码直觉"的双向桥梁。
 > **对齐来源**: [RustBelt POPL 2018] · [Iris 分离逻辑教程] · [O'Hearn — Separation Logic] · [Rust Reference — Memory Model]
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **来源**: [Jung, R. et al. — *RustBelt: Securing the Foundations of the Rust Programming Language*. POPL 2018]

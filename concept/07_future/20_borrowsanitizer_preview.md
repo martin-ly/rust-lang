@@ -13,6 +13,7 @@
 > **前置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Version Tracking](./05_rust_version_tracking.md)
 > **后置概念**: [Formal Methods](./02_formal_methods.md) · [RustBelt](../04_formal/04_rustbelt.md)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **来源**:

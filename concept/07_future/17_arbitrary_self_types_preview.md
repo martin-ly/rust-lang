@@ -12,6 +12,7 @@
 > **定位**: 探讨 Rust 中 arbitrary self types 的提案——允许 `self` 参数使用任意类型（不仅是 `Self`、`&Self`、`&mut Self`、`Box<Self>`、`Rc<Self>`、`Arc<Self>`、`Pin<P<Self>>`），分析其对嵌入式驱动、内核编程和自定义指针类型的影响。
 > **前置概念**: [Traits](../02_intermediate/01_traits.md) · [Pin](../03_advanced/06_pin_unpin.md) · [Smart Pointers](../02_intermediate/12_smart_pointers.md)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 ## 📑 目录

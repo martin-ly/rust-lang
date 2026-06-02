@@ -10,6 +10,7 @@
 > **前置概念**: [Async](../03_advanced/02_async.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Type Theory](../04_formal/02_type_theory.md)
 > **主要来源**: [Koka] · [Eff] · [Haskell GHC] · [Rust Lang Team Blog] · [类型理论研究]
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **Bloom 层级**: 分析 → 评价

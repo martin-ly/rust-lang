@@ -16,6 +16,7 @@
 > [Wikipedia: Software design pattern] ·
 > [Wikipedia: Workflow patterns]
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **Bloom 层级**: 分析 → 评价 → 创造

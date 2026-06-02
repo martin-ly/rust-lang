@@ -13,6 +13,8 @@
 > **后置延伸**: [Edition Guide](./22_edition_guide.md)
 > **来源**: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
 ## 10.4 边界测试：Rust 2024 Edition 的语法变更与迁移（编译错误）
 
 ```rust,ignore

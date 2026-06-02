@@ -7,6 +7,7 @@
 > **对齐来源**: [Bloom 修订版 2001] · [Krathwohl 知识维度 2002] · [Microsoft RustTraining] · [编程教育 A/S/P 标记 arxiv 2604.06331v1]
 > **与现有体系的关系**: 补充而非替代 — 每个概念文件仍保留 Bloom 层级标注，本矩阵提供额外的**知识类型**维度。
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **来源**: [Bloom, B.S. et al. — *Taxonomy of Educational Objectives: The Classification of Educational Goals*. Handbook I: Cognitive Domain. Longman, 1956 (revised 2001)]

@@ -15,6 +15,8 @@
 
 > **来源**: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html) · [RFC 2920](https://rust-lang.github.io/rfcs/2920-inline-const.html)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
 ### 10.4 边界测试：`const {}` 块在 pattern 中的使用（编译错误/未来特性）
 
 ```rust,ignore

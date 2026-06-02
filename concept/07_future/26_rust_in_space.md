@@ -11,6 +11,8 @@
 
 > **来源**: [Ferrocene](https://ferrocene.dev/) · [Rust Embedded WG](https://github.com/rust-embedded/wg)
 
+> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
 ### 10.4 边界测试：太空环境的单事件翻转（SEU）与 Rust 的内存安全（运行时错误）
 
 ```rust,ignore
