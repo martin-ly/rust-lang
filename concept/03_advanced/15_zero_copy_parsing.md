@@ -5,8 +5,13 @@
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 应用
 > **定位**: 探讨 Rust 中的**零拷贝**（Zero-Copy）技术——从字节切片直接解析结构化数据，无需中间复制，分析内存安全与性能权衡。
-> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Type System](../01_foundation/04_type_system.md)
-> **后置概念**: [Performance Optimization](../06_ecosystem/15_performance_optimization.md) · [Distributed Systems](../06_ecosystem/18_distributed_systems.md)
+> **前置概念**:
+> [Ownership](../01_foundation/01_ownership.md) ·
+> [Borrowing](../01_foundation/02_borrowing.md) ·
+> [Type System](../01_foundation/04_type_system.md)
+> **后置概念**:
+> [Performance Optimization](../06_ecosystem/15_performance_optimization.md) ·
+> [Distributed Systems](../06_ecosystem/18_distributed_systems.md)
 
 ---
 

@@ -8,7 +8,6 @@
 
 >
 > **受众**: [进阶]
-
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 深入探讨 Rust 迭代器模式——从适配器链到自定义迭代器，分析惰性求值、性能特征和最佳实践。
 > **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Generics](../02_intermediate/02_generics.md) · [Closures](../01_foundation/15_closure_basics.md)

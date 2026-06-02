@@ -5,8 +5,13 @@
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 深入探讨 Rust 中的**无锁编程**——从原子操作到内存序，分析 lock-free 算法的内存安全保证与性能优势。
-> **前置概念**: [Concurrency](../03_advanced/01_concurrency.md) · [Atomics](./11_atomics_and_memory_ordering.md) · [Unsafe](../03_advanced/03_unsafe.md)
-> **后置概念**: [Concurrent Patterns](./10_concurrency_patterns.md) · [Performance](../06_ecosystem/15_performance_optimization.md)
+> **前置概念**:
+> [Concurrency](../03_advanced/01_concurrency.md) ·
+> [Atomics](./11_atomics_and_memory_ordering.md) ·
+> [Unsafe](../03_advanced/03_unsafe.md)
+> **后置概念**:
+> [Concurrent Patterns](./10_concurrency_patterns.md) ·
+> [Performance](../06_ecosystem/15_performance_optimization.md)
 
 ---
 

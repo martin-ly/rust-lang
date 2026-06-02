@@ -5,8 +5,13 @@
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 应用
 > **定位**: 深入探讨 Rust 中的**类型擦除**技术——从 trait object 到 vtable，分析动态分发如何在保持类型安全的同时实现运行时多态。
-> **前置概念**: [Trait](../02_intermediate/01_traits.md) · [Type System](../01_foundation/04_type_system.md) · [Generics](../02_intermediate/02_generics.md)
-> **后置概念**: [Performance](../06_ecosystem/15_performance_optimization.md) · [Object Safety](../02_intermediate/01_traits.md)
+> **前置概念**:
+> [Trait](../02_intermediate/01_traits.md) ·
+> [Type System](../01_foundation/04_type_system.md) ·
+> [Generics](../02_intermediate/02_generics.md)
+> **后置概念**:
+> [Performance](../06_ecosystem/15_performance_optimization.md) ·
+> [Object Safety](../02_intermediate/01_traits.md)
 
 ---
 

@@ -1,15 +1,24 @@
 > **内容分级**: [专家级]
 
 # 并行与分布式模式谱系：从线程池到共识算法
->
-> **受众**: [专家]
 
+> **受众**: [专家]
 > **层级**: L3 高级概念 — 并发/分布式系统设计
 > **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: C×Ana — 分析并行与分布式模式的演进谱系与统一框架
-> **前置概念**: [Concurrency](./01_concurrency.md) · [Async](./02_async.md) · [Lock-free](../03_advanced/16_lock_free.md) · [Distributed Systems](../06_ecosystem/18_distributed_systems.md)
-> **后置概念**: [Pattern Composition Algebra](../06_ecosystem/35_pattern_composition_algebra.md) · [System Design Principles](../06_ecosystem/05_system_design_principles.md)
-> **主要来源**: [Herlihy & Shavit — The Art of Multiprocessor Programming] · [Lynch — Distributed Algorithms] · [Tanenbaum — Distributed Systems] · [Amazon Science — Must Framework] · [Rust Atomics and Locks](https://marabos.nl/atomics/)
+> **前置概念**:
+> [Concurrency](./01_concurrency.md) ·
+> [Async](./02_async.md) ·
+> [Lock-free](../03_advanced/16_lock_free.md) ·
+> [Distributed Systems](../06_ecosystem/18_distributed_systems.md)
+> **后置概念**:
+> [Pattern Composition Algebra](../06_ecosystem/35_pattern_composition_algebra.md) ·
+> [System Design Principles](../06_ecosystem/05_system_design_principles.md)
+> **主要来源**:
+> [Herlihy & Shavit — The Art of Multiprocessor Programming] ·
+> [Lynch — Distributed Algorithms] · [Tanenbaum — Distributed Systems] ·
+> [Amazon Science — Must Framework] ·
+> [Rust Atomics and Locks](https://marabos.nl/atomics/)
 
 ---
 
@@ -566,7 +575,13 @@ fn crdt_commutativity() {
 
 ---
 
-> **权威来源**: [Herlihy & Shavit — The Art of Multiprocessor Programming](https://www.cs.brown.edu/~mph/HerlihyShavit/) · [Lynch — Distributed Algorithms](https://mitpress.mit.edu/books/distributed-algorithms) · [Ongaro & Ousterhout — Raft](https://raft.github.io/raft.pdf) · [Shapiro et al. — CRDT](https://hal.inria.fr/hal-00932836/document) · [Rust Atomics and Locks](https://marabos.nl/atomics/)
+> **权威来源**:
+> [Herlihy & Shavit — The Art of Multiprocessor Programming](https://www.cs.brown.edu/~mph/HerlihyShavit/) ·
+> [Lynch — Distributed Algorithms](https://mitpress.mit.edu/books/distributed-algorithms) ·
+> [Ongaro & Ousterhout — Raft](https://raft.github.io/raft.pdf) ·
+> [Shapiro et al. — CRDT](https://hal.inria.fr/hal-00932836/document) ·
+> [Rust Atomics and Locks](https://marabos.nl/atomics/)
+>
 > **文档版本**: 1.0
 > **对应 Rust 版本**: 1.90.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
@@ -641,7 +656,11 @@ struct MessageFixed {
 }
 ```
 
-> **修正**: 分布式系统中的消息传递要求类型可序列化（`Serialize`/`Deserialize`）。Rust 的类型系统通过 trait bound 在编译期强制这一约束——未实现 `Serialize` 的类型不能作为网络消息。这与 Erlang 的动态序列化或 Java 的默认 `Serializable` 不同：Rust 要求显式 opt-in（通过 derive 或手动实现），确保类型变化时序列化格式同步更新，避免版本不兼容导致的运行时错误。[来源: [Serde Documentation](https://serde.rs/)]
+> **修正**:
+> 分布式系统中的消息传递要求类型可序列化（`Serialize`/`Deserialize`）。
+> Rust 的类型系统通过 trait bound 在编译期强制这一约束——未实现 `Serialize` 的类型不能作为网络消息。
+> 这与 Erlang 的动态序列化或 Java 的默认 `Serializable` 不同：Rust 要求显式 opt-in（通过 derive 或手动实现），确保类型变化时序列化格式同步更新，避免版本不兼容导致的运行时错误。
+> [来源: [Serde Documentation](https://serde.rs/)]
 
 ### 10.3 边界测试：`rayon` 的线程池饥饿与任务粒度（运行时性能下降）
 
@@ -658,7 +677,22 @@ fn main() {
 }
 ```
 
-> **修正**: `rayon` 是 Rust 的数据并行库，基于 **work-stealing** 线程池自动并行化迭代器。但**任务粒度**是关键：1) 任务太小（如 `x * 2`）→ 线程调度开销 > 并行收益；2) 任务太大 → 负载不均衡，某些线程空闲。`rayon` 的启发式：通过 `join` 递归分割任务，但无法控制最小分割粒度。优化：1) `par_chunks` 增加每任务工作量；2) `with_min_len(n)` 设置最小长度；3) 只在计算密集型操作中使用 `par_iter`（I/O 密集型用 `tokio`）。这与 Java 的 `ForkJoinPool`（类似 work-stealing）或 C++ 的 `std::execution::par`（C++17，类似抽象）类似——数据并行的性能取决于任务粒度，无万能配置。[来源: [rayon Documentation](https://docs.rs/rayon/)] · [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
+> **修正**:
+> `rayon` 是 Rust 的数据并行库，基于 **work-stealing** 线程池自动并行化迭代器。
+> 但**任务粒度**是关键：
+>
+> 1) 任务太小（如 `x * 2`）→ 线程调度开销 > 并行收益；
+> 2) 任务太大 → 负载不均衡，某些线程空闲。
+>
+> `rayon` 的启发式：通过 `join` 递归分割任务，但无法控制最小分割粒度。
+>
+> 优化：
+>
+> 1) `par_chunks` 增加每任务工作量；
+> 2) `with_min_len(n)` 设置最小长度；
+> 3) 只在计算密集型操作中使用 `par_iter`（I/O 密集型用 `tokio`）。
+> 这与 Java 的 `ForkJoinPool`（类似 work-stealing）或 C++ 的 `std::execution::par`（C++17，类似抽象）类似——数据并行的性能取决于任务粒度，无万能配置。
+> [来源: [rayon Documentation](https://docs.rs/rayon/)] · [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
 
 ### 10.4 边界测试：rayon 的并行迭代与顺序依赖（运行时逻辑错误）
 
@@ -675,7 +709,26 @@ fn main() {
 }
 ```
 
-> **修正**: **`rayon`** 的**并行迭代器**：1) `par_iter()` / `into_par_iter()` — 将工作负载分片到线程池；2) 闭包必须是 `Send`（跨线程安全）和 `Fn`（无 `&mut` 环境捕获）；3) 顺序结果需使用 `reduce`、`fold` + `sum`、或原子变量。正确模式：1) `(0..100).into_par_iter().sum::<i32>()` — 内置求和；2) `fold` + `reduce`（分片累积后合并）；3) `AtomicUsize` / `Mutex`（共享可变状态，但不推荐）。`rayon` 的线程池：1) 全局线程池（默认线程数 = CPU 核心数）；2) `ThreadPoolBuilder` 自定义；3) `join`（分治并行）。这与 OpenMP 的 `parallel for`（编译指令，隐式 reduction）或 C++ 的 `std::execution::par`（类似 rayon，但标准库支持）不同——Rust 的 rayon 是库级并行，类型安全。[来源: [Rayon](https://docs.rs/rayon/)] · [来源: [Data Parallelism](https://doc.rust-lang.org/book/)]
+> **修正**:
+> **`rayon`** 的**并行迭代器**：
+>
+> 1) `par_iter()` / `into_par_iter()` — 将工作负载分片到线程池；
+> 2) 闭包必须是 `Send`（跨线程安全）和 `Fn`（无 `&mut` 环境捕获）；
+> 3) 顺序结果需使用 `reduce`、`fold` + `sum`、或原子变量。
+>
+> 正确模式：
+>
+> 1) `(0..100).into_par_iter().sum::<i32>()` — 内置求和；
+> 2) `fold` + `reduce`（分片累积后合并）；
+> 3) `AtomicUsize` / `Mutex`（共享可变状态，但不推荐）。
+>
+> `rayon` 的线程池：
+>
+> 1) 全局线程池（默认线程数 = CPU 核心数）；
+> 2) `ThreadPoolBuilder` 自定义；
+> 3) `join`（分治并行）。
+> 这与 OpenMP 的 `parallel for`（编译指令，隐式 reduction）或 C++ 的 `std::execution::par`（类似 rayon，但标准库支持）不同——Rust 的 rayon 是库级并行，类型安全。
+> [来源: [Rayon](https://docs.rs/rayon/)] · [来源: [Data Parallelism](https://doc.rust-lang.org/book/)]
 
 ### 10.8 边界测试：生命周期参数的不匹配返回
 
@@ -699,17 +752,11 @@ fn main() {}
 > [来源: [Rust Atomics and Locks](https://marabos.nl/atomics/)]
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
-
 > [来源: [RFC 2349 — Async Closures](https://rust-lang.github.io/rfcs/)]
-
 > [来源: [Data Parallelism in Rust](https://doc.rust-lang.org/std/thread/)]
-
 > [来源: [MPI for Rust](https://docs.rs/mpi/)]
-
 > [来源: [Apache Arrow Rust](https://arrow.apache.org/rust/)]
-
 > [来源: [Rust Concurrency Patterns](https://rust-lang.github.io/async-book/)]
-
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 
@@ -720,15 +767,13 @@ fn main() {}
 ### 核心推理链
 
 | 定理 | 前提 | 结论 | 置信度 |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | 并行与分布式模式谱系：从线程池到共识算法 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
 | 并行与分布式模式谱系：从线程池到共识算法 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
 | 并行与分布式模式谱系：从线程池到共识算法 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > **过渡**: 掌握 并行与分布式模式谱系：从线程池到共识算法 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 并行与分布式模式谱系：从线程池到共识算法 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: 并行与分布式模式谱系：从线程池到共识算法 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界

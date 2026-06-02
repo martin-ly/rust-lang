@@ -10,7 +10,12 @@
 
 ---
 
-> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Rust Reference — Allocation](https://doc.rust-lang.org/reference/memory-allocation.html) · [RFC 1398 — Global Allocators](https://rust-lang.github.io/rfcs/1398-global_allocators.html) · [Wikipedia — Memory Management](https://en.wikipedia.org/wiki/Memory_management)
+> **来源**:
+> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
+> [Rust Reference — Allocation](https://doc.rust-lang.org/reference/memory-allocation.html) ·
+> [RFC 1398 — Global Allocators](https://rust-lang.github.io/rfcs/1398-global_allocators.html) ·
+> [Wikipedia — Memory Management](https://en.wikipedia.org/wiki/Memory_management)
 
 ## 📑 目录
 

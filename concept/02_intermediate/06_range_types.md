@@ -432,7 +432,20 @@ fn main() {
 }
 ```
 
-> **修正**: `Range<T>`（半开区间 `start..end`）实现了 `Copy`（若 `T: Copy`），但 `RangeInclusive<T>`（闭区间 `start..=end`）没有。原因是 `RangeInclusive` 需要追踪是否已迭代到 `end`（一个布尔标志 `is_empty: Option<bool>`），使其大小和语义不适合按位复制。这导致不一致：`1..5` 可复制，`1..=5` 不可复制。解决方案：1) 使用引用 `&range` 迭代；2) 显式 `clone()`；3) 使用 `Range` 替代（若语义允许）。这与 Rust 的"一致性"设计目标冲突——范围类型的 `Copy` 实现不一致是历史遗留，可能在未来版本中修正。开发者的应对：记住 `..=` 的范围需要 `clone` 或引用才能复用。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/ops/struct.RangeInclusive.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**:
+> `Range<T>`（半开区间 `start..end`）实现了 `Copy`（若 `T: Copy`），但 `RangeInclusive<T>`（闭区间 `start..=end`）没有。
+> 原因是 `RangeInclusive` 需要追踪是否已迭代到 `end`（一个布尔标志 `is_empty: Option<bool>`），使其大小和语义不适合按位复制。
+> 这导致不一致：`1..5` 可复制，`1..=5` 不可复制。
+> 解决方案：
+>
+> 1) 使用引用 `&range` 迭代；
+> 2) 显式 `clone()`；
+> 3) 使用 `Range` 替代（若语义允许）。
+> 这与 Rust 的"一致性"设计目标冲突——范围类型的 `Copy` 实现不一致是历史遗留，可能在未来版本中修正。
+>
+> 开发者的应对：记住 `..=` 的范围需要 `clone` 或引用才能复用。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/ops/struct.RangeInclusive.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.4 边界测试：`Iterator::size_hint` 与无限范围（逻辑错误）
 
@@ -449,7 +462,18 @@ fn main() {
 }
 ```
 
-> **修正**: `Iterator::size_hint` 返回 `(usize, Option<usize>)`——长度的下界和上界。无限范围 `0..` 的 `size_hint` 返回 `(usize::MAX, None)`，表示"至少 usize::MAX 个元素，可能无限"。某些代码（如 `Iterator::fold` 的优化、`Vec::with_capacity`）依赖 `size_hint` 预分配内存，对无限范围可能分配失败（OOM）。安全模式：1) 在 `collect` 前使用 `.take(n)` 限制；2) 不依赖 `size_hint` 的精确性；3) 对可能无限的迭代器使用 `try_fold` 并检查内存分配。这与 Python 的 `range`（有限，不支持无限）或 Haskell 的 `[0..]`（惰性无限列表）不同——Rust 的迭代器是惰性的，但 `collect` 等操作是严格的（立即消耗），需要显式限制。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)]
+> **修正**:
+> `Iterator::size_hint` 返回 `(usize, Option<usize>)`——长度的下界和上界。
+> 无限范围 `0..` 的 `size_hint` 返回 `(usize::MAX, None)`，表示"至少 usize::MAX 个元素，可能无限"。
+> 某些代码（如 `Iterator::fold` 的优化、`Vec::with_capacity`）依赖 `size_hint` 预分配内存，对无限范围可能分配失败（OOM）。
+> 安全模式：
+>
+> 1) 在 `collect` 前使用 `.take(n)` 限制；
+> 2) 不依赖 `size_hint` 的精确性；
+> 3) 对可能无限的迭代器使用 `try_fold` 并检查内存分配。
+> 这与 Python 的 `range`（有限，不支持无限）或 Haskell 的 `[0..]`（惰性无限列表）不同——Rust 的迭代器是惰性的，但 `collect` 等操作是严格的（立即消耗），需要显式限制。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)]
 
 ### 10.3 边界测试：范围模式的穷尽性检查（编译错误）
 
@@ -504,15 +528,13 @@ fn main() {
 ### 核心推理链
 
 | 定理 | 前提 | 结论 | 置信度 |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | Rust 范围类型语义：`std::ops::Range` → `core::range` 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
 | Rust 范围类型语义：`std::ops::Range` → `core::range` 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
 | Rust 范围类型语义：`std::ops::Range` → `core::range` 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > **过渡**: 掌握 Rust 范围类型语义：`std::ops::Range` → `core::range` 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 Rust 范围类型语义：`std::ops::Range` → `core::range` 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: Rust 范围类型语义：`std::ops::Range` → `core::range` 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
