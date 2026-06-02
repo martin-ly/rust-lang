@@ -1092,8 +1092,8 @@ pub fn branchless_computation(values: &[i32]) -> i32 {
 
 /// 演示 Rust 1.94.0 控制流特性
 /// Demonstrates Rust 1.94.0 控制流特性
-/// demonstration Rust 1.94.0 stream feature
-/// Demonstration of Rust 1.94.0 控制streamfeature
+/// demonstration Rust 1.94 stream features (stable in 1.96+)
+/// Demonstration of Rust 1.94 控制streamfeatures (stable in 1.96+)
 pub fn demonstrate_rust_194_control_flow() {
     println!("\n=== Rust 1.94.0 控制流特性演示 ===\n");
 
@@ -1236,7 +1236,7 @@ pub fn demonstrate_rust_194_control_flow() {
 
 /// 获取 Rust 1.94.0 控制流特性信息
 /// Gets Rust 1.94.0 控制流特性信息
-/// Rust 1.94.0 stream feature
+/// Rust 1.94 stream features (stable in 1.96+)
 pub fn get_rust_194_control_flow_info() -> String {
     "Rust 1.94.0 控制流特性:\n- Peekable 新方法: next_if_map, next_if_map_mut\n- \
      改进的闭包捕获语义\n- 增强的 match 表达式\n- 函数指针优化\n- Edition 2024 控制流改进\n- \

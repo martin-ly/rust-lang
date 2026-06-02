@@ -1,4 +1,4 @@
-//! # Rust 1.94.0 类型系统特性实现模块 / Rust 1.94.0 Type System Features Implementation Module
+//! # Rust 1.94 引入的类型系统特性（1.96+ 稳定可用） / Rust 1.94.0 Type System Features Implementation Module
 //! - 增强type inference / Enhanced Type Inference
 //! - enhancetype inference / Enhanced Type Inference
 //! - Edition 2024 类型系统集成 / Edition 2024 Type System Integration
@@ -1014,7 +1014,7 @@ impl<T, F> TypeSelect<False, T, F> {
 
 /// 演示 Rust 1.94.0 类型系统特性
 /// Demonstrates Rust 1.94.0 类型系统特性
-/// demonstration Rust 1.94.0 type system feature
+/// demonstration Rust 1.94 type system features (stable in 1.96+)
 pub fn demonstrate_rust_194_type_system_features() {
     println!("\n=== Rust 1.94.0 类型系统特性演示 ===\n");
 
@@ -1122,7 +1122,7 @@ pub fn demonstrate_rust_194_type_system_features() {
 
 /// 获取 Rust 1.94.0 类型系统特性信息
 /// Gets Rust 1.94.0 类型系统特性信息
-/// Rust 1.94.0 type system feature
+/// Rust 1.94 type system features (stable in 1.96+)
 pub fn get_rust_194_type_system_info() -> String {
     "Rust 1.94.0 类型系统特性:\n- 数学常量: EULER_GAMMA, GOLDEN_RATIO\n- char 到 usize 转换\n- \
      增强的类型推断\n- 改进的泛型约束处理\n- 更精确的借用检查器诊断\n- Edition 2024 \

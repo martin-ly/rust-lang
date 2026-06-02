@@ -1,8 +1,8 @@
-//! Rust 1.94.0 异步编程特性实现模块
-//! Rust 1.94.0 asyncfeaturesimplementation module
+//! Rust 1.94 引入的异步编程特性（1.96+ 稳定可用）
+//! Rust 1.94 asyncfeatures (stable in 1.96+)simplementation module
 //!
-//! 本模块展示了 Rust 1.94.0 在异步编程场景中的增强，包括：
-//! This module demonstrates Rust 1.94.0 asyncstrongincluding
+//! 本模块展示了 Rust 1.94 引入、在 1.96+ 中稳定的 在异步编程场景中的增强，包括：
+//! This module demonstrates Rust 1.94 asyncstrongincluding
 //! - 异步上下文中的 LazyLock / LazyLock in Async Context
 //! - Peekable 流处理 / Peekable Stream Processing
 //! - char 转换在异步解析中的应用 / char Conversion in Async Parsing
@@ -12,7 +12,7 @@
 //! - date : 2026-03-06
 //! - 版本: 1.0
 //! - Version: 1.0
-//! - Rust版本: 1.94.0
+//! - 引入版本: 1.94.0 | 稳定版本: 1.96.0+
 //! - Rust Version: 1.94.0
 //! - Edition: 2024
 use std::iter::Peekable;
@@ -652,7 +652,7 @@ pub fn batch_process<T, E>(
 // ==================== 6. 综合应用示例 ====================
 
 /// 演示 Rust 1.94.0 异步编程特性
-/// demonstration Rust 1.94.0 async feature
+/// demonstration Rust 1.94 async features (stable in 1.96+)
 pub async fn demonstrate_rust_194_async_features() {
     println!("\n=== Rust 1.94.0 异步编程特性演示 ===\n");
 
@@ -692,7 +692,7 @@ pub async fn demonstrate_rust_194_async_features() {
 }
 
 /// 获取 Rust 1.94.0 异步编程特性信息
-/// Get Rust 1.94.0 asyncfeaturesinformation
+/// Get Rust 1.94 asyncfeatures (stable in 1.96+)sinformation
 pub fn get_rust_194_async_info() -> String {
     "Rust 1.94.0 异步编程特性:\n- 异步上下文中的 LazyLock (get, get_mut, force_mut)\n- \
      数学常量在异步计算中的应用 (EULER_GAMMA, GOLDEN_RATIO)\n- Peekable 流处理 (next_if_map, \

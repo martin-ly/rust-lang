@@ -167,11 +167,11 @@ impl TokioExamples {
     }
 }
 
-/// 3. async-std 运行时示例
+/// 3. async-std 运行时示例 [历史参考]
 /// 3. async-std runtime example
 ///
-/// 展示 async-std 的标准库风格 API
-/// async-std standard library API
+/// 展示 async-std 的标准库风格 API [历史参考]
+/// async-std standard library API [historical reference]
 pub struct AsyncStdExamples {
     file_cache: Arc<Mutex<HashMap<String, String>>>,
 }
@@ -186,11 +186,11 @@ impl AsyncStdExamples {
     /// 标准库风格的异步文件操作
     /// Standard library style async file operations
     pub async fn file_operations_example(&self) -> Result<()> {
-        println!("📁 async-std 文件操作示例:");
+        println!("📁 async-std 文件操作示例 [历史参考]:");
 
         // 模拟文件操作（使用内存缓存）
         let filename = "example.txt";
-        let content = "这是 async-std 风格的文件内容";
+        let content = "这是 async-std [历史参考] 风格的文件内容";
 
         // 写入文件
         self.write_file(filename, content).await?;

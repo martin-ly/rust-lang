@@ -1,4 +1,4 @@
-//! # Rust 1.94.0 泛型编程特性实现模块 / Rust 1.94.0 Generic Programming Features Implementation Module
+//! # Rust 1.94 引入的泛型编程特性（1.96+ 稳定可用） / Rust 1.94.0 Generic Programming Features Implementation Module
 //! - 改进generictype inference / Improved Generic Type Inference
 //! - improvegenerictype inference / Improved Generic Type Inference
 //! - 更灵活associated type / More Flexible Associated Types
@@ -910,7 +910,7 @@ pub fn batch_process<T, E>(
 
 /// 演示 Rust 1.94.0 泛型编程特性
 /// Demonstrates Rust 1.94.0 泛型编程特性
-/// demonstration Rust 1.94.0 generic feature
+/// demonstration Rust 1.94 generic features (stable in 1.96+)
 pub fn demonstrate_rust_194_generic_features() {
     println!("\n=== Rust 1.94.0 泛型编程特性演示 ===\n");
 
@@ -1010,7 +1010,7 @@ pub fn demonstrate_rust_194_generic_features() {
 
 /// 获取 Rust 1.94.0 泛型编程特性信息
 /// Gets Rust 1.94.0 泛型编程特性信息
-/// Rust 1.94.0 generic feature
+/// Rust 1.94 generic features (stable in 1.96+)
 pub fn get_rust_194_generic_info() -> String {
     "Rust 1.94.0 泛型编程特性:\n\
         - array_windows 泛型应用\n\

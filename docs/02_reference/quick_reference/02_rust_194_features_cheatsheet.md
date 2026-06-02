@@ -1,7 +1,7 @@
-# Rust 1.95+ 特性速查卡 / Rust 1.94 Features Cheatsheet
+# Rust 1.94 引入特性速查卡（1.96+ 稳定可用）/ Rust 1.94 Features Cheatsheet (Stable in 1.96+)
 
 > **分级**: [A]
-> **Rust 版本**: 1.94.0
+> **引入版本**: 1.94.0 | **稳定版本**: 1.96.0+ (项目 MSRV)
 > **最后更新**: 2026-05-08
 > **状态**: ✅ 完整
 
@@ -11,7 +11,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-- [Rust 1.95+ 特性速查卡 / Rust 1.94 Features Cheatsheet](#rust-195-特性速查卡--rust-194-features-cheatsheet)
+- [Rust 1.94 引入特性速查卡（1.96+ 稳定可用）/ Rust 1.94 Features Cheatsheet (Stable in 1.96+)](#rust-194-引入特性速查卡196-稳定可用-rust-194-features-cheatsheet-stable-in-196)
   - [📋 目录](#-目录)
   - [🎯 快速参考](#-快速参考)
   - [1. Array Windows（数组窗口）](#1-array-windows数组窗口)
@@ -381,21 +381,21 @@ impl DataProcessor {
 
 | 资源 | 链接 |
 |------|------|
-| **官方发布说明** | [Rust 1.94.0](https://blog.rust-lang.org/2026/03/05/Rust-1.94.0/) |
+| **官方发布说明** | [Rust 1.94.0 Release Notes](https://blog.rust-lang.org/2026/03/05/Rust-1.94.0/) (1.96+ 稳定) |
 | **完整发布说明** | [16_rust_1.94_release_notes.md |
 | **迁移指南** | RUST_194_MIGRATION_GUIDE.md |
-| **C01 示例** | [c01 rust_194_features.rs](../../../crates/c01_ownership_borrow_scope/src/rust_194_features.rs) |
-| **C02 示例** | [c02 rust_194_features.rs](../../../crates/c02_type_system/src/rust_194_features.rs) |
-| **C03 示例** | [c03 rust_194_features.rs](../../../crates/c03_control_fn/src/rust_194_features.rs) |
-| **C04 示例** | [c04 rust_194_features.rs](../../../crates/c04_generic/src/rust_194_features.rs) |
-| **C05 示例** | [c05 rust_194_features.rs](../../../crates/c05_threads/src/rust_194_features.rs) |
-| **C06 示例** | [c06 rust_194_features.rs](../../../crates/c06_async/src/rust_194_features.rs) |
-| **C07 示例** | [c07 rust_194_features.rs](../../../crates/c07_process/src/rust_194_features.rs) |
-| **C08 示例** | [c08 rust_194_features.rs](../../../crates/c08_algorithms/src/rust_194_features.rs) |
-| **C09 示例** | [c09 rust_194_features.rs](../../../crates/c09_design_pattern/src/rust_194_features.rs) |
-| **C10 示例** | [c10 rust_194_features.rs](../../../crates/c10_networks/src/rust_194_features.rs) |
-| **C11 示例** | [c11 rust_194_features.rs](../../../crates/c11_macro_system/src/rust_194_features.rs) |
-| **C12 示例** | [c12 rust_194_features.rs](../../../crates/c12_wasm/src/rust_194_features.rs) |
+| **C01 示例** | [c01 rust_194_features.rs (1.94引入, 1.96+稳定)](../../../crates/c01_ownership_borrow_scope/src/rust_194_features.rs) |
+| **C02 示例** | [c02 rust_194_features.rs (1.94引入, 1.96+稳定)](../../../crates/c02_type_system/src/rust_194_features.rs) |
+| **C03 示例** | [c03 rust_194_features.rs (1.94引入, 1.96+稳定)](../../../crates/c03_control_fn/src/rust_194_features.rs) |
+| **C04 示例** | [c04 rust_194_features.rs (1.94引入, 1.96+稳定)](../../../crates/c04_generic/src/rust_194_features.rs) |
+| **C05 示例** | [c05 rust_194_features.rs (1.94引入, 1.96+稳定)](../../../crates/c05_threads/src/rust_194_features.rs) |
+| **C06 示例** | [c06 rust_194_features.rs (1.94引入, 1.96+稳定)](../../../crates/c06_async/src/rust_194_features.rs) |
+| **C07 示例** | [c07 rust_194_features.rs (1.94引入, 1.96+稳定)](../../../crates/c07_process/src/rust_194_features.rs) |
+| **C08 示例** | [c08 rust_194_features.rs (1.94引入, 1.96+稳定)](../../../crates/c08_algorithms/src/rust_194_features.rs) |
+| **C09 示例** | [c09 rust_194_features.rs (1.94引入, 1.96+稳定)](../../../crates/c09_design_pattern/src/rust_194_features.rs) |
+| **C10 示例** | [c10 rust_194_features.rs (1.94引入, 1.96+稳定)](../../../crates/c10_networks/src/rust_194_features.rs) |
+| **C11 示例** | [c11 rust_194_features.rs (1.94引入, 1.96+稳定)](../../../crates/c11_macro_system/src/rust_194_features.rs) |
+| **C12 示例** | [c12 rust_194_features.rs (1.94引入, 1.96+稳定)](../../../crates/c12_wasm/src/rust_194_features.rs) |
 
 ---
 

@@ -1,4 +1,3 @@
-> ⚠️ **代码示例待扩充**: 本节目前缺少可编译的 Rust 代码示例。欢迎提交 PR 补充！
 >
 # Game Development & ECS Architecture（游戏开发与 ECS 架构）
 
@@ -124,6 +123,71 @@ erDiagram
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **思维表征说明**: `erDiagram` 是 Mermaid 的**实体关系图**语法，与 `classDiagram` 不同——它强调**实体间的 cardinality（基数）关系**（`||--o{` 表示一对多），天然适合表达 ECS 中「一个 World 包含多个 Entity」「一个 Entity 拥有多个 Component」「一个 System 查询多个 Component」的关系。这与 `graph TD` 层次图（展示概念分类）形成互补——ER 图展示的是**数据模型中的实体关联**。 [来源: Bevy ECS Docs; Chen, *The Entity-Relationship Model*, 1976]
+
+### 1.2 极简 ECS 实现示例
+>
+> 以下是一个不依赖外部引擎、纯 Rust 标准库实现的极简 ECS，展示核心概念的可编译表达：
+
+```rust
+use std::collections::HashMap;
+
+type Entity = u32;
+
+struct World {
+    positions: HashMap<Entity, (f32, f32)>,
+    velocities: HashMap<Entity, (f32, f32)>,
+    next_id: Entity,
+}
+
+impl World {
+    fn new() -> Self {
+        Self {
+            positions: HashMap::new(),
+            velocities: HashMap::new(),
+            next_id: 0,
+        }
+    }
+
+    fn spawn(&mut self) -> Entity {
+        let id = self.next_id;
+        self.next_id += 1;
+        id
+    }
+
+    fn add_position(&mut self, e: Entity, x: f32, y: f32) {
+        self.positions.insert(e, (x, y));
+    }
+
+    fn add_velocity(&mut self, e: Entity, vx: f32, vy: f32) {
+        self.velocities.insert(e, (vx, vy));
+    }
+
+    /// System: 更新所有实体的位置
+    fn update_positions(&mut self) {
+        for (e, (vx, vy)) in &self.velocities {
+            if let Some((x, y)) = self.positions.get_mut(e) {
+                *x += vx;
+                *y += vy;
+            }
+        }
+    }
+}
+
+fn main() {
+    let mut world = World::new();
+    let player = world.spawn();
+    world.add_position(player, 0.0, 0.0);
+    world.add_velocity(player, 1.0, 0.5);
+
+    world.update_positions();
+
+    if let Some((x, y)) = world.positions.get(&player) {
+        println!("Player at ({}, {})", x, y); // (1.0, 0.5)
+    }
+}
+```
+
+> **设计意图**: 此示例刻意保持最小化，以展示 ECS 的**数据与行为分离**核心——`World` 拥有数据（Component 存储），`update_positions` 作为 System 只读取/写入数据，不持有状态。Rust 的借用检查器在此模型下自然保证：同一时刻只有一个 System 能可变访问某一类 Component（若使用真实 ECS 的并行调度器，则通过 `&mut`/`&` 分区实现）。 [来源: 💡 原创实现]
 
 **ECS 类型层次（Mermaid classDiagram）**:
 

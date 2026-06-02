@@ -1,5 +1,5 @@
-//! Rust 1.94.0 宏系统特性实现模块
-//! Rust 1.94.0 system feature module
+//! Rust 1.94 引入的宏系统特性（1.96+ 稳定可用）
+//! Rust 1.94 system features (stable in 1.96+) module
 //! - array_windows - 切片数组窗口迭代器（用于宏解析）
 //! - array_windows - array （）
 //! - array_windows - （）
@@ -953,8 +953,8 @@ impl EscapeSequenceHandler {
 // ==================== 6. 综合应用示例 ====================
 
 /// 演示 Rust 1.94.0 宏系统特性
-/// demonstration Rust 1.94.0 system feature
-/// Demonstration of Rust 1.94.0 宏systemfeature
+/// demonstration Rust 1.94 system features (stable in 1.96+)
+/// Demonstration of Rust 1.94 宏systemfeatures (stable in 1.96+)
 pub fn demonstrate_rust_194_macro_features() {
     println!("\n=== Rust 1.94.0 宏系统特性演示 ===\n");
 
@@ -1039,7 +1039,7 @@ pub fn demonstrate_rust_194_macro_features() {
 }
 
 /// 获取 Rust 1.94.0 宏系统特性信息
-/// Rust 1.94.0 system feature
+/// Rust 1.94 system features (stable in 1.96+)
 pub fn get_rust_194_macro_info() -> String {
     "Rust 1.94.0 宏系统特性:\n- array_windows - 宏标记流处理\n- LazyLock 新方法 - 宏编译缓存\n- \
      数学常量 - 宏扩展优化\n- Peekable 新方法 - 宏标记解析\n- `TryFrom<char>` for usize - 宏编码"

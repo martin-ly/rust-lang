@@ -1,8 +1,8 @@
-//! Rust 1.94.0 设计模式特性实现模块
-//! Rust 1.94.0 designpatternfeaturesimplementation module
+//! Rust 1.94 引入的设计模式特性（1.96+ 稳定可用）
+//! Rust 1.94 designpatternfeatures (stable in 1.96+)simplementation module
 //!
-//! 本模块展示了 Rust 1.94.0 真实特性在设计模式场景中的应用，包括：
-//! This module demonstrates Rust 1.94.0 truefeaturesdesignpatternapplicationincluding
+//! 本模块展示了 Rust 1.94 引入、在 1.96+ 中稳定的 真实特性在设计模式场景中的应用，包括：
+//! This module demonstrates Rust 1.94 truefeatures (stable in 1.96+)sdesignpatternapplicationincluding
 //! - array_windows - 切片数组窗口迭代器
 //! - array_windows - slicearray iterator
 //! - LazyCell/LazyLock 新方法 - get(), get_mut(), force_mut()
@@ -15,7 +15,7 @@
 //! - date : 2026-03-06
 //! - 版本: 1.0
 //! - Version: 1.0
-//! - Rust版本: 1.94.0
+//! - 引入版本: 1.94.0 | 稳定版本: 1.96.0+
 //! - Rust Version: 1.94.0
 //! - Edition: 2024
 use std::sync::LazyLock;
@@ -669,7 +669,7 @@ impl SimpleCharCalculator {
 // ==================== 6. 综合应用示例 ====================
 
 /// 演示 Rust 1.94.0 设计模式特性
-/// demonstration Rust 1.94.0 design feature
+/// demonstration Rust 1.94 design features (stable in 1.96+)
 pub fn demonstrate_rust_194_design_patterns() {
     println!("\n=== Rust 1.94.0 设计模式特性演示 ===\n");
 
@@ -760,7 +760,7 @@ pub fn demonstrate_rust_194_design_patterns() {
 }
 
 /// 获取 Rust 1.94.0 设计模式特性信息
-/// Get Rust 1.94.0 designpatternfeaturesinformation
+/// Get Rust 1.94 designpatternfeatures (stable in 1.96+)sinformation
 pub fn get_rust_194_design_pattern_info() -> String {
     "Rust 1.94.0 设计模式特性:\n- array_windows - 滑动窗口模式\n- LazyLock 新方法 - \
      单例模式优化\n- 数学常量 (EULER_GAMMA, GOLDEN_RATIO) - 工厂模式优化\n- Peekable 新方法 - \

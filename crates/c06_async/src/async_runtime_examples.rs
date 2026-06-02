@@ -182,11 +182,11 @@ impl TokioExamples {
     }
 }
 
-/// 3. async-std 运行时示例
+/// 3. async-std 运行时示例 [历史参考]
 /// 3. async-std runtime example
 ///
-/// 展示 async-std 的标准库风格 API
-/// async-std standard library API
+/// 展示 async-std 的标准库风格 API [历史参考]
+/// async-std standard library API [historical reference]
 #[allow(unused)]
 pub struct AsyncStdExamples {
     file_cache: Arc<Mutex<HashMap<String, String>>>,
@@ -208,11 +208,11 @@ impl AsyncStdExamples {
     /// 标准库风格的异步文件操作
     /// Standard library style async file operations
     pub async fn file_operations_example(&self) -> Result<()> {
-        println!("📁 async-std 文件操作示例:");
+        println!("📁 async-std 文件操作示例 [历史参考]:");
 
         // 模拟文件操作（使用内存缓存）
         let filename = "example.txt";
-        let content = "这是 async-std 风格的文件内容";
+        let content = "这是 async-std [历史参考] 风格的文件内容";
 
         // 写入文件
         self.write_file(filename, content).await?;
@@ -228,7 +228,7 @@ impl AsyncStdExamples {
     /// 网络客户端示例
     /// network example
     pub async fn network_client_example(&self, host: &str, port: u16) -> Result<()> {
-        println!("🌐 async-std 网络客户端示例:");
+        println!("🌐 async-std 网络客户端示例 [历史参考]:");
 
         // 模拟网络连接
         let connection_info = format!("{}:{}", host, port);
@@ -245,7 +245,7 @@ impl AsyncStdExamples {
     /// 任务管理示例
     /// taskmanagement example
     pub async fn task_management_example(&self) -> Result<()> {
-        println!("📋 async-std 任务管理示例:");
+        println!("📋 async-std 任务管理示例 [历史参考]:");
 
         // 创建多个任务
         let tasks = vec![
@@ -264,7 +264,7 @@ impl AsyncStdExamples {
     /// 标准库兼容性示例
     /// Standard library compatibility example
     pub async fn std_compatibility_example(&self) -> Result<()> {
-        println!("🔄 async-std 标准库兼容性示例:");
+        println!("🔄 async-std 标准库兼容性示例 [历史参考]:");
 
         // 展示与标准库 API 的一致性
         let data = vec![1, 2, 3, 4, 5];
@@ -386,7 +386,10 @@ impl SmolExamples {
         let async_std_compatible = self.simulate_async_std_compatibility().await?;
 
         println!("  Tokio 兼容性测试: {}", tokio_compatible);
-        println!("  async-std 兼容性测试: {}", async_std_compatible);
+        println!(
+            "  async-std [历史参考] 兼容性测试: {}",
+            async_std_compatible
+        );
 
         Ok(())
     }
@@ -437,7 +440,7 @@ impl SmolExamples {
     }
 
     async fn simulate_async_std_compatibility(&self) -> Result<String> {
-        // 模拟与 async-std 的兼容性
+        // 模拟与 async-std [历史参考] 的兼容性
         sleep(Duration::from_millis(10)).await;
         Ok("async_std_compatible".to_string())
     }
@@ -524,7 +527,7 @@ impl RuntimeCompositionExamples {
         let smol_data = self.convert_to_smol_format(async_std_data.clone()).await?;
 
         println!("  Tokio 数据: {}", tokio_data);
-        println!("  async-std 数据: {}", async_std_data);
+        println!("  async-std [历史参考] 数据: {}", async_std_data);
         println!("  smol 数据: {}", smol_data);
 
         Ok(())
@@ -600,7 +603,7 @@ pub async fn demonstrate_all_async_runtimes() -> Result<()> {
     // 定时器
     tokio_examples.timer_and_scheduling_example().await?;
 
-    // 3. async-std 示例
+    // 3. async-std 示例 [历史参考]
     println!("\n📁 3. async-std 标准库风格示例:");
     let async_std_examples = AsyncStdExamples::new();
 

@@ -550,7 +550,7 @@ pub fn batch_process<T, E>(
 
 /// 演示 Rust 1.94.0 线程特性
 /// Demonstrates Rust 1.94.0 线程特性
-/// demonstration Rust 1.94.0 thread feature
+/// demonstration Rust 1.94 thread features (stable in 1.96+)
 pub fn demonstrate_rust_194_thread_features() {
     println!("\n=== Rust 1.94.0 线程与并发特性演示 ===\n");
 
@@ -598,7 +598,7 @@ pub fn demonstrate_rust_194_thread_features() {
 
 /// 获取 Rust 1.94.0 线程特性信息
 /// Gets Rust 1.94.0 线程特性信息
-/// Rust 1.94.0 thread feature
+/// Rust 1.94 thread features (stable in 1.96+)
 pub fn get_rust_194_thread_info() -> String {
     "Rust 1.94.0 线程与并发特性:\n- LazyCell 和 LazyLock 新方法 (get, get_mut, force_mut)\n- \
      数学常量 (EULER_GAMMA, GOLDEN_RATIO)\n- Peekable 迭代器新方法 (next_if_map, \

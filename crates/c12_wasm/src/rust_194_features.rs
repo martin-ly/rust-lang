@@ -1,5 +1,5 @@
-//! Rust 1.94.0 WASM 特性实现模块
-//! Rust 1.94.0 WASM feature module
+//! Rust 1.94 引入的WASM 特性（1.96+ 稳定可用）
+//! Rust 1.94 WASM features (stable in 1.96+) module
 //! - array_windows - 切片数组窗口迭代器（用于 WASM 数据处理）
 //! - array_windows - array （ WASM data ）
 //! - array_windows - （ WASM ）
@@ -1212,7 +1212,7 @@ impl CharFrequencyAnalyzer {
 // ==================== 6. 综合应用示例 ====================
 
 /// 演示 Rust 1.94.0 WASM 特性
-/// demonstration Rust 1.94.0 WASM feature
+/// demonstration Rust 1.94 WASM features (stable in 1.96+)
 pub fn demonstrate_rust_194_wasm_features() {
     println!("\n=== Rust 1.94.0 WASM 特性演示 ===\n");
 
@@ -1302,7 +1302,7 @@ pub fn demonstrate_rust_194_wasm_features() {
 }
 
 /// 获取 Rust 1.94.0 WASM 特性信息
-/// Rust 1.94.0 WASM feature
+/// Rust 1.94 WASM features (stable in 1.96+)
 pub fn get_rust_194_wasm_info() -> String {
     "Rust 1.94.0 WASM 特性:\n- array_windows - WASM 数据处理\n- LazyLock 新方法 - WASM 模块管理\n- \
      数学常量 - WASM 图形计算\n- Peekable 新方法 - WASM 文本解析\n- `TryFrom<char>` for usize - \

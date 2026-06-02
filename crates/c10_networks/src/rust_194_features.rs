@@ -1,5 +1,5 @@
-//! Rust 1.94.0 网络编程特性实现模块
-//! Rust 1.94.0 network programming feature module
+//! Rust 1.94 引入的网络编程特性（1.96+ 稳定可用）
+//! Rust 1.94 network programming features (stable in 1.96+) module
 //! - array_windows - 切片数组窗口迭代器（用于协议解析）
 //! - array_windows - array （）
 //! - array_windows - （）
@@ -318,7 +318,9 @@ pub fn get_network_config<F, R>(f: F) -> R
 where
     F: FnOnce(&NetworkConfig) -> R,
 {
-    let config = NETWORK_CONFIG.lock().expect("NETWORK_CONFIG mutex poisoned");
+    let config = NETWORK_CONFIG
+        .lock()
+        .expect("NETWORK_CONFIG mutex poisoned");
     f(&config)
 }
 
@@ -329,7 +331,9 @@ pub fn update_network_config<F>(f: F)
 where
     F: FnOnce(&mut NetworkConfig),
 {
-    let mut config = NETWORK_CONFIG.lock().expect("NETWORK_CONFIG mutex poisoned");
+    let mut config = NETWORK_CONFIG
+        .lock()
+        .expect("NETWORK_CONFIG mutex poisoned");
     f(&mut config);
 }
 
@@ -401,14 +405,18 @@ pub fn register_protocol_handler<F>(name: impl Into<String>, handler: F)
 where
     F: Fn(&[u8]) -> Vec<u8> + Send + 'static,
 {
-    let mut handlers = PROTOCOL_HANDLERS.lock().expect("PROTOCOL_HANDLERS mutex poisoned");
+    let mut handlers = PROTOCOL_HANDLERS
+        .lock()
+        .expect("PROTOCOL_HANDLERS mutex poisoned");
     handlers.insert(name.into(), Box::new(handler));
 }
 
 /// 处理协议数据
 /// data
 pub fn handle_protocol(name: &str, data: &[u8]) -> Option<Vec<u8>> {
-    let handlers = PROTOCOL_HANDLERS.lock().expect("PROTOCOL_HANDLERS mutex poisoned");
+    let handlers = PROTOCOL_HANDLERS
+        .lock()
+        .expect("PROTOCOL_HANDLERS mutex poisoned");
     handlers.get(name).map(|handler| handler(data))
 }
 
@@ -878,7 +886,7 @@ impl MacAddressParser {
 // ==================== 6. 综合应用示例 ====================
 
 /// 演示 Rust 1.94.0 网络编程特性
-/// demonstration Rust 1.94.0 network programming feature
+/// demonstration Rust 1.94 network programming features (stable in 1.96+)
 pub fn demonstrate_rust_194_network_features() {
     println!("\n=== Rust 1.94.0 网络编程特性演示 ===\n");
 
@@ -970,14 +978,11 @@ pub fn demonstrate_rust_194_network_features() {
 }
 
 /// 获取 Rust 1.94.0 网络编程特性信息
-/// Rust 1.94.0 network programming feature
+/// Rust 1.94 network programming features (stable in 1.96+)
 pub fn get_rust_194_network_info() -> String {
-    "Rust 1.94.0 网络编程特性:\n\
-        - array_windows - 协议解析优化\n\
-        - LazyLock 新方法 - 网络配置管理\n\
-        - 数学常量 - 网络算法优化\n\
-        - Peekable 新方法 - 协议流解析\n\
-        - TryFrom<char> for usize - 协议编码"
+    "Rust 1.94.0 网络编程特性:\n- array_windows - 协议解析优化\n- LazyLock 新方法 - \
+     网络配置管理\n- 数学常量 - 网络算法优化\n- Peekable 新方法 - 协议流解析\n- TryFrom<char> for \
+     usize - 协议编码"
         .to_string()
 }
 
@@ -1133,12 +1138,18 @@ mod tests {
     #[test]
     fn test_control_flow_matrix_search() {
         let matrix = vec![vec![1, 2], vec![3, 4]];
-        assert!(matches!(search_in_matrix(&matrix, 3), ControlFlow::Break((1, 0))));
+        assert!(matches!(
+            search_in_matrix(&matrix, 3),
+            ControlFlow::Break((1, 0))
+        ));
     }
 
     #[test]
     fn test_control_flow_validate() {
-        assert!(matches!(validate_data("valid123"), ControlFlow::Continue(())));
+        assert!(matches!(
+            validate_data("valid123"),
+            ControlFlow::Continue(())
+        ));
         assert!(matches!(validate_data(""), ControlFlow::Break(_)));
     }
 
@@ -1206,46 +1217,45 @@ mod tests {
         let boundaries = FrameBoundaryDetector::find_frame_boundaries(&only_start);
         assert_eq!(boundaries.len(), 1, "应该只检测到一个起始定界符");
         assert_eq!(boundaries[0], (0, BoundaryType::Start));
-        
+
         let frames = FrameBoundaryDetector::extract_frames(&only_start);
         assert!(frames.is_empty(), "没有结束定界符应该返回空帧列表");
-        
+
         // 测试只有结束定界符，没有起始定界符
         let only_end = [0x01, 0x02, 0x7F, 0x7F, 0x7F, 0x7F];
         let boundaries = FrameBoundaryDetector::find_frame_boundaries(&only_end);
         assert_eq!(boundaries.len(), 1, "应该只检测到一个结束定界符");
         assert_eq!(boundaries[0], (2, BoundaryType::End));
-        
+
         let frames = FrameBoundaryDetector::extract_frames(&only_end);
         assert!(frames.is_empty(), "没有起始定界符应该返回空帧列表");
-        
+
         // 测试多个起始定界符但没有结束定界符
         let multi_start = [
             0x7E, 0x7E, 0x7E, 0x7E, // 第一个起始
-            0x01, 0x02,
-            0x7E, 0x7E, 0x7E, 0x7E, // 第二个起始（畸形：没有前一个的结束）
+            0x01, 0x02, 0x7E, 0x7E, 0x7E,
+            0x7E, // 第二个起始（畸形：没有前一个的结束）
             0x03, 0x04,
         ];
         let boundaries = FrameBoundaryDetector::find_frame_boundaries(&multi_start);
         assert_eq!(boundaries.len(), 2, "应该检测到两个起始定界符");
-        
+
         let frames = FrameBoundaryDetector::extract_frames(&multi_start);
         assert!(frames.is_empty(), "没有结束定界符应该返回空帧列表");
-        
+
         // 测试结束定界符出现在起始之前
         let end_before_start = [
             0x7F, 0x7F, 0x7F, 0x7F, // 结束
-            0x01, 0x02,
-            0x7E, 0x7E, 0x7E, 0x7E, // 起始
+            0x01, 0x02, 0x7E, 0x7E, 0x7E, 0x7E, // 起始
         ];
         let frames = FrameBoundaryDetector::extract_frames(&end_before_start);
         assert!(frames.is_empty(), "结束在起始之前应该返回空帧列表");
-        
+
         // 测试空数据
         let empty: [u8; 0] = [];
         let boundaries = FrameBoundaryDetector::find_frame_boundaries(&empty);
         assert!(boundaries.is_empty(), "空数据应该返回空边界列表");
-        
+
         // 测试数据长度小于定界符长度
         let short = [0x7E, 0x7E];
         let boundaries = FrameBoundaryDetector::find_frame_boundaries(&short);
@@ -1267,7 +1277,7 @@ mod tests {
             !Http2PreambleDetector::is_valid_preamble_start(&empty),
             "空数据不应该被识别为有效前导码起始"
         );
-        
+
         // 测试部分前导码（少于24字节）
         let partial = b"PRI * HTTP/2.0";
         assert!(
@@ -1278,7 +1288,7 @@ mod tests {
             !Http2PreambleDetector::is_valid_preamble_start(partial),
             "部分数据不应该被识别为有效前导码起始"
         );
-        
+
         // 测试刚好23字节（差1字节）
         let almost_full = b"PRI * HTTP/2.0\r\n\r\nSM\r\n\r";
         assert_eq!(almost_full.len(), 23, "应该正好23字节");
@@ -1286,7 +1296,7 @@ mod tests {
             Http2PreambleDetector::detect_preamble(almost_full).is_none(),
             "23字节数据应该返回 None"
         );
-        
+
         // 测试包含前导码但不从开头开始的数据
         let offset_preamble = b"Some garbage data PRI * HTTP/2.0\r\n\r\nSM\r\n\r\n";
         assert_eq!(
@@ -1294,7 +1304,7 @@ mod tests {
             Some(18),
             "应该在前导码实际开始的位置找到它"
         );
-        
+
         // 测试包含多个潜在前导码模式的数据
         let multi_preamble = b"PRI * HTTP/2.0\r\n\r\nSM\r\n\r\nPRI * HTTP/2.0\r\n\r\nSM\r\n\r\n";
         assert_eq!(
@@ -1302,7 +1312,7 @@ mod tests {
             Some(0),
             "应该返回第一个前导码的位置"
         );
-        
+
         // 测试包含前导码子串但不是完整前导码的数据
         let false_positive = b"PRI * HTTP/2.0\r\n\r\nXX\r\n\r\n";
         assert!(
@@ -1326,7 +1336,7 @@ mod tests {
             // 即使设置了极大值，也应该能读取
             assert_eq!(config.timeout(), Duration::from_secs(u64::MAX));
         });
-        
+
         // 测试零超时
         update_network_config(|config| {
             config.set_timeout(Duration::from_secs(0));
@@ -1334,7 +1344,7 @@ mod tests {
         get_network_config(|config| {
             assert_eq!(config.timeout(), Duration::from_secs(0));
         });
-        
+
         // 测试极大重试次数
         update_network_config(|config| {
             config.set_retry_count(u32::MAX);
@@ -1342,7 +1352,7 @@ mod tests {
         get_network_config(|config| {
             assert_eq!(config.retry_count(), u32::MAX);
         });
-        
+
         // 测试零重试次数
         update_network_config(|config| {
             config.set_retry_count(0);
@@ -1350,7 +1360,7 @@ mod tests {
         get_network_config(|config| {
             assert_eq!(config.retry_count(), 0);
         });
-        
+
         // 恢复默认配置
         update_network_config(|config| {
             config.set_timeout(Duration::from_secs(30));
@@ -1379,8 +1389,11 @@ mod tests {
         assert_eq!(records[0].tag, 0x01);
         assert_eq!(records[0].length, 7);
         // 内层 TLV 作为外层 value 的字节序列
-        assert_eq!(records[0].value, vec![0x02, 0x00, 0x04, 0xAA, 0xBB, 0xCC, 0xDD]);
-        
+        assert_eq!(
+            records[0].value,
+            vec![0x02, 0x00, 0x04, 0xAA, 0xBB, 0xCC, 0xDD]
+        );
+
         // 测试多个连续的 TLV
         let multi_tlv = vec![
             0x01, 0x00, 0x02, 0xAA, 0xBB, // TLV 1
@@ -1390,26 +1403,26 @@ mod tests {
         let mut parser = TlvParser::new(&multi_tlv);
         let records = parser.parse_all();
         assert_eq!(records.len(), 3, "应该解析出3个记录");
-        
+
         // 测试长度为零的 TLV
         let zero_length = vec![0x01, 0x00, 0x00];
         let mut parser = TlvParser::new(&zero_length);
         let record = parser.parse_record();
         assert!(record.is_some(), "应该能解析长度为零的 TLV");
         assert_eq!(record.unwrap().value.len(), 0, "value 应该为空");
-        
+
         // 测试长度超过数据长度的情况（畸形数据）
         let invalid_length = vec![0x01, 0x00, 0x10, 0xAA]; // 声称长度16，但只有1字节数据
         let mut parser = TlvParser::new(&invalid_length);
         let record = parser.parse_record();
         assert!(record.is_none(), "长度超过数据应该返回 None");
-        
+
         // 测试空数据
         let empty: Vec<u8> = vec![];
         let mut parser = TlvParser::new(&empty);
         let records = parser.parse_all();
         assert!(records.is_empty(), "空数据应该返回空记录列表");
-        
+
         // 测试不完整的 TLV 头（只有 tag，没有 length）
         let incomplete = vec![0x01];
         let mut parser = TlvParser::new(&incomplete);
