@@ -347,6 +347,8 @@ graph TD
 ├── gen block（nightly）生成的 Generator 也是 !Unpin
 ├── yield 点可能持有自引用
 ├── Pin 保证生成器在 yield 之间不被移动
+└── async 和 gen 都是"挂起/恢复型效果"，共享自引用状态机 + Pin 机制
+    [参见: Effect System 中的 Effect × Pin 交叉分析](../../07_future/04_effects_system.md#64-effect--pin效果与自引用类型的交叉)
 ```
 
 > **边界要点**: Pin 的边界主要与**内部可变性**和**Drop**交互相关。这些边界反映了 Pin 契约的复杂性——它不仅是一个类型包装器，更是一个**内存地址稳定性的语义保证**。

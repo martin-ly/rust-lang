@@ -506,7 +506,7 @@
       "layer": "L0",
       "title": "全局概念索引（Concept Index）",
       "positioning": "本文件是 `concept/` 知识体系的**倒排索引**，从概念名称快速定位到定义文件、交叉引用位置、Bloom 认知层级和语义链接关系。",
-      "line_count": 722,
+      "line_count": 723,
       "theorem_chains": [
         {
           "text": "| **定理一致性矩阵** | 27 | 每文件的 ⟹ 推理链表格 | 🔷 元结构 |",
@@ -15655,7 +15655,7 @@
       "layer": "L3",
       "title": "Pin 与 Unpin：自引用类型的不动性保证",
       "positioning": "深入分析 Rust 中 **Pin<&mut T>** 和 **Unpin** 的设计动机——解决自引用类型（self-referential structs）在内存移动时的安全问题，探讨 Pin 与 Future、Generator 的交互，以及 async/await 的状态机实现。",
-      "line_count": 669,
+      "line_count": 671,
       "theorem_chains": [
         {
           "text": "| Pin 与 Unpin：自引用类型的不动性保证 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -33369,7 +33369,7 @@
       "layer": "L7",
       "title": "Effects System: Concept Pre-study（效果系统：概念预研）",
       "positioning": "本文件是 Rust 效果系统（Effect System）的**概念预研**，跟踪类型系统向显式效果追踪演进的理论动向与工程实践。内容具有推测性，随语言团队决策动态更新。",
-      "line_count": 1441,
+      "line_count": 1532,
       "theorem_chains": [
         {
           "text": "> **⟹ 推理链**: EF1-EF3 证明 Rust **已经实现了效果的隐性追踪**，只是通过不同关键字而非统一语法。EF4 是**效果多态的原型**——证明统一语法在 trait 系统内可行。EF5 是**远期方向**，其最大障碍不是技术可行性，而是**向后兼容性**和**社区共识**。",
@@ -33559,6 +33559,24 @@
           "lines": 6,
           "should_fail": false,
           "code_preview": "// Refinement types 愿景（pattern types） type NonZeroUsize = usize is 1..;  // 用模式精..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "// async 效果隐式引入的 Pin 约束 trait Future {     type Output;     fn poll(self: Pin<&m..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "// 当前：Pin 是显式的 fn process<F>(f: F) where     F: Future<Output = i32>,  // Future..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "// gen block 也生成自引用状态机 gen {     let x = 42;     yield &x;  // 持有局部变量引用 → Genera..."
         }
       ],
       "sources": [
@@ -33602,7 +33620,7 @@
       "transitions": 12,
       "has_cognitive_path": true,
       "mermaid_blocks": 4,
-      "matrix_rows": 141,
+      "matrix_rows": 146,
       "pre_post": {
         "pre": [
           "[Async](../03_advanced/02_async.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Type Theory](../04_formal/02_type_theory.md)",

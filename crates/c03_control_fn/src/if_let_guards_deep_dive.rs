@@ -18,11 +18,9 @@
 //! # References
 //! # reference
 //! - [RFC 3637: Guard Patterns](https://rust-lang.github.io/rfcs/3637-guard-patterns.html)
-
 // ============================================================================
 // 1. IfLetGuardsSyntax — 语法与核心概念
 // ============================================================================
-
 /// # `if let` Guards 语法深度解析
 /// # `if let` Guards
 /// # `if let` Guards 语法深度Parse
@@ -40,6 +38,7 @@
 /// 2. guard inin arm ****
 /// 3. 可以与常规布尔条件通过 `&&` 组合
 /// 3. can and condition `&&` combination
+///
 /// | 维度 | `if let` guards | `let` chains |
 /// | 位置 | match arm level | expression level |
 /// | 语法上下文 | `match` | `if` / `while` |
