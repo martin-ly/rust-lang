@@ -2,7 +2,6 @@
 
 > **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **Rust的核心优势：Zero-Cost Async Programming**
 
 ---
@@ -42,7 +41,6 @@
   - [后续扩展建议](#后续扩展建议)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
 
 ## 完成情况概览
 >
@@ -350,26 +348,6 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
-
-> **[来源: TRPL Ch. 4 - Ownership]**
-
-> **[来源: Rustonomicon - Ownership]**
-
-> **[来源: POPL 2018 - RustBelt]**
-
-> **[来源: Wikipedia - Asynchronous I/O]**
-
-> **[来源: TRPL Ch. 17 - Async]**
-
-> **[来源: Tokio Documentation]**
-
-> **[来源: RFC 2394 - Async/Await]**
-
----
-
-## 权威来源索引
-
 > **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
 >
 > **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
@@ -388,13 +366,9 @@
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ---
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**

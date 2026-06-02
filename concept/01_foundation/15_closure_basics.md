@@ -2,6 +2,10 @@
 
 # 闭包基础：捕获环境与匿名函数
 
+> **📎 交叉引用**
+>
+> 本主题在 knowledge 中有系统化的知识索引：[闭包](../../knowledge/02_intermediate)
+
 > **受众**: [初学者]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **A+S** — Application + Structure

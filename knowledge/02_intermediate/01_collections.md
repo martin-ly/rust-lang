@@ -1,5 +1,9 @@
 # 集合类型 (Collections)
 
+> **📎 交叉引用**
+>
+> 本主题在 concept 中有深度的概念分析：[集合](../../concept/01_foundation/08_collections.md)
+
 > **相关概念**: [集合](../../concept/01_foundation/08_collections.md)
 > **Bloom 层级**: 理解
 > **📌 简介**: Rust 标准库提供了一组精心设计的泛型数据结构

@@ -418,7 +418,7 @@ memoffset = "0.9.1"
 
 # 2025-12-11: 数据库和存储最新稳定版本
 # sea-orm: 异步动态ORM，支持多种数据库后端
-# 2026-04-24: 2.0.0 仍未发布稳定版，最新 rc.38
+# 2026-06-02: 2.0.0 stable 尚未发布。crates.io 最新预发布版 rc.40，GitHub Releases 最新 rc.38 (2026-04-09)
 sea-orm = { version = "2.0.0-rc.40", features = [
     "sqlx-postgres",      # PostgreSQL支持
     "runtime-tokio-rustls", # tokio运行时和rustls支持

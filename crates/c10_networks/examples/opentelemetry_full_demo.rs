@@ -3,6 +3,7 @@
 //! - on under propagation
 //! - 导出到 Jaeger / OTLP / 标准输出
 //! - to Jaeger / OTLP / standard output
+//!
 //! **前置条件**:
 //!
 //! **before condition **:
@@ -11,7 +12,7 @@
 //!   -p 4318:4318 \
 //!   jaegertracing/all-in-one:latest
 //! ```
-//!
+//! 
 //! Jaeger UI: http://localhost:16686
 //!
 //! 权威来源:
@@ -219,9 +220,9 @@ async fn risky_operation(should_fail: bool) -> Result<(), &'static str> {
 // ==================== 示例 7: 指标（Metrics）集成概览 ====================
 
 /// - `opentelemetry::metrics` 用于记录 Counter、Histogram、Gauge
+/// 
 /// use opentelemetry::metrics::MeterProvider;
 /// use opentelemetry::global;
-///
 /// let meter = global::meter("my_app");
 /// let request_counter = meter.u64_counter("http_requests_total").build();
 /// request_counter.add(1, &[opentelemetry::KeyValue::new("route", "/api/orders")]);

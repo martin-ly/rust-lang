@@ -17,7 +17,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [分布式执行模型形式化](#分布式执行模型形式化)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [形式化定义](#形式化定义)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
     - [gRPC (tonic)](#grpc-tonic)
@@ -43,7 +43,7 @@
     - [Circuit Breaker（熔断器）](#circuit-breaker熔断器)
     - [Bulkhead（舱壁）](#bulkhead舱壁)
     - [CAP/BASE 与 Rust 衔接（D2.3）](#capbase-与-rust-衔接d23)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)

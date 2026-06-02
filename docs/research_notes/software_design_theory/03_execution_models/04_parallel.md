@@ -304,7 +304,6 @@ fn parallel_quicksort<T: Send + Ord>(v: &mut [T]) {
 ## 🆕 Rust 1.94 深度整合更新
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
@@ -372,13 +371,9 @@ fn parallel_quicksort<T: Send + Ord>(v: &mut [T]) {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Parallel Computing]**
-
 > **[来源: ACM - Parallel Programming]**
-
 > **[来源: IEEE - Parallel Algorithms]**
-
 > **[来源: Rust Reference - Parallel Iterators]**
-
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 > **[来源: TRPL - The Rust Programming Language]**
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**

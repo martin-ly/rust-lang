@@ -2,6 +2,10 @@
 
 # Generics（泛型系统）
 
+> **📎 交叉引用**
+>
+> 本主题在 knowledge 中有系统化的知识索引：[泛型](../../knowledge/02_intermediate/03_generics.md)
+
 > **受众**: [进阶]
 > **层次定位**: L2 进阶概念 / 泛型子域
 > **A/S/P 标记**: **A+S** — Application + Structure

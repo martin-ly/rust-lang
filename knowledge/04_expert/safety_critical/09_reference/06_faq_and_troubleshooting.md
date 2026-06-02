@@ -36,7 +36,6 @@
   - [更多资源](#更多资源)
     - [社区支持](#社区支持)
     - [文档](#文档)
-  - [*找不到答案？提交新问题到项目issue跟踪器。*](#找不到答案提交新问题到项目issue跟踪器)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -52,7 +51,7 @@
 
 **A:** 可以，推荐渐进式迁移策略：
 
-```
+```text
 迁移路径:
 Phase 1 (3-6月): 新组件用Rust开发，通过FFI与C集成
 Phase 2 (6-12月): 逐步重写非关键模块
@@ -206,7 +205,7 @@ impl Drop for SafeWrapper {
 
 **A:** 可以，使用认证工具链：
 
-```
+```text
 ASIL D要求:
 ✅ 高诊断覆盖率 (>99%) - Miri + Kani + 测试
 ✅ 故障容错 - Rust类型系统
@@ -244,7 +243,7 @@ ASIL D要求:
 
 **A:** 标准证据包内容：
 
-```
+```text
 evidence_package/
 ├── requirements/
 │   ├── system_requirements.md
@@ -443,7 +442,7 @@ let slice = &buffer[0..10];  // 无运行时开销
 
 **症状:**
 
-```
+```text
 error: failed to select a version for `serde`.
     ...
 versions found: 1.0.150, 1.0.149, 1.0.148
@@ -586,6 +585,7 @@ cargo update -p vulnerable-crate
 ---
 
 *找不到答案？提交新问题到项目issue跟踪器。*
+
 ---
 
 **最后更新**: 2026-05-19
@@ -594,7 +594,7 @@ cargo update -p vulnerable-crate
 ---
 
 ## 相关概念
->
+
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)

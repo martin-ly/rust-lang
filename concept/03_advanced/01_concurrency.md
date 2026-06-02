@@ -2,6 +2,9 @@
 
 # Concurrency（并发模型）
 
+> **📎 交叉引用**
+>
+> 本主题在 knowledge 中有系统化的知识索引：[并发](../../knowledge/03_advanced/concurrency)
 > **受众**: [专家]
 >
 > **层次定位**: L3 高级概念 / 并发子域

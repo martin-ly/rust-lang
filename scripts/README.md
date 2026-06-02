@@ -52,6 +52,8 @@ scripts/
 |------|------|------|
 | `check_links.py` | 链接有效性检查 | 跨平台链接检查（Python） |
 | `fix_anchor_links_v3.py` | 锚点链接修复 | 批量修复 Markdown 损坏锚点（v3 最新版） |
+| `fix_broken_anchors_v4.py` | 损坏锚点降级修复 | 将指向不存在标题的锚点降级为纯文本 |
+| `check_active_anchors.py` | 活跃内容锚点检查 | 检查 concept/knowledge/book 中的同文件锚点 |
 | `fix_code_blocks.py` | 代码块修复 | 修复不完整代码块标记 |
 | `fix_compile_failures.py` | 编译失败修复 | 批量修复编译失败的代码块标记 |
 | `fix_readme_navigation.py` | README 导航修复 | 修复 README 目录导航 |
@@ -98,19 +100,26 @@ scripts/
 ## 子目录说明
 
 ### `fixes/`
+
 针对性问题排查工具：
+
 - `find_cfg_gap.py` — 查找条件编译配置间隙
 - `find_clippy_issue.py` — 定位 Clippy 警告问题
 - `find_issue.py` — 通用问题定位
 
 ### `maintenance/`
+
 项目结构维护工具：
+
 - `analyze_doc_structure.py` — 分析文档结构
 - `auto_add_structure.py` — 自动添加文档结构
+- `add_cross_references.py` — 批量添加 concept ↔ knowledge 交叉引用
 - `cleanup_unused_aliases.py` — 清理未使用的别名
 
 ### `utils/`
+
 通用辅助工具：
+
 - `enhance_placeholder_files.py` — 增强占位文件内容
 
 ---
@@ -149,6 +158,7 @@ scripts/
 ### 迭代开发
 
 如需对现有脚本进行大幅迭代：
+
 1. 将旧版本移入 `archive/2026/` 对应分类目录
 2. 新版本保留在根目录，替换旧版本引用
 3. 在 README 中更新说明

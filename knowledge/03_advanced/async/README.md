@@ -1,5 +1,9 @@
 # Async 异步编程
 >
+> **📎 交叉引用**
+>
+> 本主题在 concept 中有深度的概念分析：[异步编程](../../../concept/03_advanced/02_async.md)
+>
 > **层次定位**: L3 高级概念 / 异步子域索引
 > **前置依赖**: [knowledge 泛型](../../02_intermediate/03_generics.md) · [knowledge Trait](../../02_intermediate/06_traits.md)
 > **后置延伸**: [knowledge Unsafe](../unsafe/README.md) · [concept L3 Async](../../../concept/03_advanced/02_async.md)

@@ -1,5 +1,8 @@
 # Rust 原子操作 (Atomic Operations)
 
+> **📎 交叉引用**
+>
+> 本主题在 concept 中有深度的概念分析：[原子操作](../../../concept/03_advanced/11_atomics_and_memory_ordering.md)
 > **相关概念**: [原子操作](../../../concept/03_advanced/11_atomics_and_memory_ordering.md)
 > **Bloom 层级**: 理解
 > **📌 简介**: 原子操作是 Rust 无锁并发编程的基石。通过 CPU 提供的原子指令和精细的内存序控制，原子操作可以在不使用锁的情况下实现线程安全，但正确使用需要对 happens-before 关系和内存模型有深入理解。
@@ -94,7 +97,7 @@ FLAG.store(true, Ordering::SeqCst);
 
 内存序定义了程序执行中**happens-before** 关系的强度：
 
-```
+```text
 Relaxed:    无 happens-before 关系（仅原子性）
 Acquire:    读操作建立 "synchronizes-with" 的右端
 Release:    写操作建立 "synchronizes-with" 的左端
@@ -304,7 +307,7 @@ fn consumer() -> u64 {
 
 **语义图解**：
 
-```
+```text
 Producer Thread              Consumer Thread
 -------------                ---------------
 DATA = 42                     READY.load(Acquire)
@@ -351,7 +354,7 @@ static FLAG_B: AtomicBool = AtomicBool::new(false);
 
 #### 内存顺序选择决策树
 
-```
+```text
 是否需要同步其他数据？
 ├── 否 → Relaxed（仅计数器、统计）
 └── 是 → 是否涉及多个原子变量？

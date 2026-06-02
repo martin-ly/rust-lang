@@ -1,8 +1,11 @@
 # Specialization：Trait 实现的精确化与重叠解析
+
+> **状态**: 🧪 Nightly 实验性
+> **跟踪版本**: nightly 1.98.0 (2026-05-31)
+> **预计稳定**: 待定（需等待 RFC / MCP 完成）
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]
-
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 Specialization 预览特性
@@ -19,7 +22,12 @@
 > **注意**: 不稳定特性可能在后续版本中变更或移除，生产代码应避免依赖。
 
 ---
-> **来源**: [RFC 1210 — Specialization](https://github.com/rust-lang/rfcs/pull/1210) · [Tracking Issue #31844](https://github.com/rust-lang/rust/issues/31844) · [Rust Blog — Specialization](https://blog.rust-lang.org/inside-rust/2021/09/06/Separating-contract-and-implementation.html) · [Rust Reference — Trait Implementations](https://doc.rust-lang.org/reference/items/implementations.html) · [Wikipedia — Multiple Dispatch](https://en.wikipedia.org/wiki/Multiple_dispatch)
+> **来源**:
+> [RFC 1210 — Specialization](https://github.com/rust-lang/rfcs/pull/1210) ·
+> [Tracking Issue #31844](https://github.com/rust-lang/rust/issues/31844) ·
+> [Rust Blog — Specialization](https://blog.rust-lang.org/inside-rust/2021/09/06/Separating-contract-and-implementation.html) ·
+> [Rust Reference — Trait Implementations](https://doc.rust-lang.org/reference/items/implementations.html) ·
+> [Wikipedia — Multiple Dispatch](https://en.wikipedia.org/wiki/Multiple_dispatch)
 
 ## 📑 目录
 
@@ -489,7 +497,13 @@ impl Display for MyString {
 // 会与 impl Display for String 重叠
 ```
 
-> **修正**: 特化（specialization）允许为泛型类型提供默认实现，并为特定类型提供更优实现。但重叠实现（overlapping impls）必须满足**特化序**（specialization order）：一个实现必须是另一个实现的严格子集。`impl<T> Display for T` 是最通用的（顶层），`impl Display for String` 是特化的。若添加 `impl<T: Deref<Target=str>> Display for T`，它与 `impl Display for String` 重叠（`String: Deref<Target=str>`），且 neither 是对方的子集——编译错误。这与 C++ 的模板特化（允许任意重叠，由偏序规则解决）不同——Rust 的特化更保守，确保始终存在唯一最特化实现，避免歧义。[来源: [Rust RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: 特化（specialization）允许为泛型类型提供默认实现，并为特定类型提供更优实现。
+> 但重叠实现（overlapping impls）必须满足**特化序**（specialization order）：一个实现必须是另一个实现的严格子集。
+> `impl<T> Display for T` 是最通用的（顶层），`impl Display for String` 是特化的。
+> 若添加 `impl<T: Deref<Target=str>> Display for T`，它与 `impl Display for String` 重叠（`String: Deref<Target=str>`），且 neither 是对方的子集——编译错误。
+> 这与 C++ 的模板特化（允许任意重叠，由偏序规则解决）不同——Rust 的特化更保守，确保始终存在唯一最特化实现，避免歧义。
+> [来源: [Rust RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.2 边界测试：`default` 方法与最终实现的冲突（编译错误）
 
@@ -516,7 +530,14 @@ impl Process for i32 {
 }
 ```
 
-> **修正**: 特化中的 `default` 关键字标记"可被覆盖的方法"，但 Rust 目前不提供**显式调用父实现**的语法（类似 C++ 的 `Base::method()` 或 Java 的 `super.method()`）。这是设计决策：鼓励组合（composition）而非继承（inheritance）。若需复用默认逻辑，应将共享代码提取为独立函数，在默认实现和特化实现中都调用。这与 Rust 的整体哲学一致—— trait 是接口 + 默认实现，不是类继承层次。特化的主要用例是性能优化（如 `Iterator::nth` 的默认实现 vs `SliceIter::nth` 的 O(1) 实现），而非代码复用。[来源: [Rust RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html)] · [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]
+> **修正**:
+> 特化中的 `default` 关键字标记"可被覆盖的方法"，但 Rust 目前不提供**显式调用父实现**的语法（类似 C++ 的 `Base::method()` 或 Java 的 `super.method()`）。
+> 这是设计决策：鼓励组合（composition）而非继承（inheritance）。
+> 若需复用默认逻辑，应将共享代码提取为独立函数，在默认实现和特化实现中都调用。
+> 这与 Rust 的整体哲学一致—— trait 是接口 + 默认实现，不是类继承层次。
+> 特化的主要用例是性能优化（如 `Iterator::nth` 的默认实现 vs `SliceIter::nth` 的 O(1) 实现），而非代码复用。
+> [来源: [Rust RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html)] ·
+> [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]
 
 ### 10.3 边界测试：特化与关联类型的冲突（编译错误）
 
@@ -541,7 +562,17 @@ impl Container for Vec<u8> {
 }
 ```
 
-> **修正**: 特化（specialization）允许为特定类型提供更优实现，但**关联类型**的特化是复杂问题：默认实现声明 `type Item = T`，特化实现能否改为 `type Item = &[u8]`？这会破坏依赖 `Container::Item` 的代码——它们假设 `Vec<u8>: Container<Item = u8>`。当前 Rust 的特化设计限制：1) 关联类型在特化中不能改变（或需满足特定约束）；2) 方法签名可以特化，但返回类型的特化受对象安全约束；3) `default` 关键字标记可被覆盖的项。这与 C++ 的模板特化（可完全改变类定义，包括嵌套类型）或 Java 的泛型（类型擦除，无特化概念）不同——Rust 的特化更保守，优先保证类型一致性。[来源: [Rust RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html)] · [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]
+> **修正**:
+> 特化（specialization）允许为特定类型提供更优实现，但**关联类型**的特化是复杂问题：默认实现声明 `type Item = T`，特化实现能否改为 `type Item = &[u8]`？
+> 这会破坏依赖 `Container::Item` 的代码——它们假设 `Vec<u8>: Container<Item = u8>`。
+> 当前 Rust 的特化设计限制：
+>
+> 1) 关联类型在特化中不能改变（或需满足特定约束）；
+> 2) 方法签名可以特化，但返回类型的特化受对象安全约束；
+> 3) `default` 关键字标记可被覆盖的项。
+> 这与 C++ 的模板特化（可完全改变类定义，包括嵌套类型）或 Java 的泛型（类型擦除，无特化概念）不同——Rust 的特化更保守，优先保证类型一致性。
+> [来源: [Rust RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html)] ·
+> [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]
 
 ### 10.4 边界测试：特化的交互与 trait 一致性（编译错误）
 
@@ -570,7 +601,18 @@ fn main() {
 }
 ```
 
-> **修正**: 特化实现之间的**交互**是类型系统的复杂点：`String` 和 `&str` 是不同的类型，各自特化合法。但 `String: Deref<Target=str>` 意味着 `&String` 可自动解引用为 `&str`，在方法调用 `s.run()` 中，编译器选择 `String` 的特化（直接匹配），而非 `&str` 的特化（需 Deref）。若添加 `impl Process for &String`，则方法解析更复杂。Rust 的方法解析规则：1) 直接匹配优先；2) 自动解引用（Deref）次之；3) 特化序决定最具体实现。这与 C++ 的 ADL（Argument Dependent Lookup，类似但无特化序）或 Scala 的 implicit resolution（更复杂的优先级规则）类似——Rust 的特化增加了方法解析的复杂度，但设计目标始终是"有唯一最具体实现"。[来源: [Rust RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: 特化实现之间的**交互**是类型系统的复杂点：`String` 和 `&str` 是不同的类型，各自特化合法。
+> 但 `String: Deref<Target=str>` 意味着 `&String` 可自动解引用为 `&str`，在方法调用 `s.run()` 中，编译器选择 `String` 的特化（直接匹配），而非 `&str` 的特化（需 Deref）。
+> 若添加 `impl Process for &String`，则方法解析更复杂。
+> Rust 的方法解析规则：
+>
+> 1) 直接匹配优先；
+> 2) 自动解引用（Deref）次之；
+> 3) 特化序决定最具体实现。
+> 这与 C++ 的 ADL（Argument Dependent Lookup，类似但无特化序）或 Scala 的 implicit resolution（更复杂的优先级规则）类似
+> ——Rust 的特化增加了方法解析的复杂度，但设计目标始终是"有唯一最具体实现"。
+> [来源: [Rust RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.3 边界测试：特化（specialization）的 soundness 问题与编译错误（编译错误）
 
@@ -597,15 +639,28 @@ fn main() {
 }
 ```
 
-> **修正**: **Specialization** 允许为特定类型提供 trait 的**特化实现**，覆盖 blanket impl（`impl<T> Trait for T`）。设计挑战：1) **Soundness**：特化不能破坏类型安全（如 `impl<T> Trait for T` 承诺的性质被 `impl Trait for Concrete` 违反）；2) **重叠规则**：编译器需确定哪个实现"更具体"；3) **关联类型**：特化时关联类型的确定性。当前状态：`specialization` 特性长期停滞（8+ 年），因 soundness 问题未解决。替代方案：1) `min_specialization`（限制性子集，部分 nightly 可用）；2) 类型级编程（`typenum`、`generic-array`）；3) 宏生成特定实现。这与 C++ 的模板特化（完全支持，但无类型安全保证）或 Haskell 的 overlapping instances（可控制重叠）不同——Rust 对 specialization 极其谨慎，宁可不实现也不牺牲 soundness。[来源: [Specialization RFC](https://rust-lang.github.io/rfcs/1210-impl-specialization.html)] · [来源: [Rust Internals](https://internals.rust-lang.org/)]
+> **修正**:
+> **Specialization** 允许为特定类型提供 trait 的**特化实现**，覆盖 blanket impl（`impl<T> Trait for T`）。
+> 设计挑战：
+>
+> 1) **Soundness**：特化不能破坏类型安全（如 `impl<T> Trait for T` 承诺的性质被 `impl Trait for Concrete` 违反）；
+> 2) **重叠规则**：编译器需确定哪个实现"更具体"；
+> 3) **关联类型**：特化时关联类型的确定性。当前状态：`specialization` 特性长期停滞（8+ 年），因 soundness 问题未解决。
+>
+> 替代方案：
+>
+> 1) `min_specialization`（限制性子集，部分 nightly 可用）；
+> 2) 类型级编程（`typenum`、`generic-array`）；
+> 3) 宏生成特定实现。
+> 这与 C++ 的模板特化（完全支持，但无类型安全保证）或 Haskell 的 overlapping instances（可控制重叠）不同——Rust 对 specialization 极其谨慎，宁可不实现也不牺牲 soundness。
+> [来源: [Specialization RFC](https://rust-lang.github.io/rfcs/1210-impl-specialization.html)] ·
+> [来源: [Rust Internals](https://internals.rust-lang.org/)]
 > **过渡**: Specialization：Trait 实现的精确化与重叠解析 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Specialization：Trait 实现的精确化与重叠解析 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Specialization：Trait 实现的精确化与重叠解析 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ### 补充定理链
 
-- **定理**: Specialization：Trait 实现的精确化与重叠解析 定义 ⟹ 类型安全保证
-- **定理**: Specialization：Trait 实现的精确化与重叠解析 定义 ⟹ 类型安全保证
 - **定理**: Specialization：Trait 实现的精确化与重叠解析 定义 ⟹ 类型安全保证
 
 ## 认知路径
@@ -621,9 +676,7 @@ fn main() {
 | Specialization：Trait 实现的精确化与重叠解析 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 Specialization：Trait 实现的精确化与重叠解析 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 Specialization：Trait 实现的精确化与重叠解析 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: Specialization：Trait 实现的精确化与重叠解析 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

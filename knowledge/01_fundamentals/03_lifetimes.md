@@ -1,8 +1,13 @@
 # Rust 生命周期 (Lifetimes)
 
+> **📎 交叉引用**
+>
+> 本主题在 concept 中有深度的概念分析：[生命周期](../../concept/01_foundation/03_lifetimes.md)
 > **相关概念**: [生命周期](../../concept/01_foundation/03_lifetimes.md)
 > **Bloom 层级**: 理解
-> **📌 简介**: 生命周期是 Rust 借用检查器的核心机制。它不是运行时检查，而是编译期对引用有效范围的**形式化推理**。通过将每个引用标注为一个"生命阶段"，Rust 编译器在编译阶段即可证明：任何引用在被使用时，其指向的数据必然存活。
+> **📌 简介**:
+> 生命周期是 Rust 借用检查器的核心机制。它不是运行时检查，而是编译期对引用有效范围的**形式化推理**。
+> 通过将每个引用标注为一个"生命阶段"，Rust 编译器在编译阶段即可证明：任何引用在被使用时，其指向的数据必然存活。
 >
 > **⏱️ 预计学习时间**: 60-90 分钟
 > **📚 难度级别**: ⭐⭐⭐⭐ 高级
@@ -837,7 +842,11 @@ fn foo(x: &mut Vec<&'static str>, y: &'static str) {
 > **[来源: Rust Reference: Lifetime elision]** 生命周期省略规则由编译器自动推断，减少显式标注负担。 ✅
 > **[来源: Rust Reference: HRTB]** 高阶 trait bound (`for<'a>`) 允许表达"对于所有生命周期"的量化约束。 ✅
 > **[来源: RFC 1598]** Generic Associated Types (GATs) 扩展了生命周期在关联类型中的表达能力。 ✅
-> **权威来源**: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html), [Rustonomicon — Lifetimes](https://doc.rust-lang.org/nomicon/lifetimes.html), [RFC 1414: Lifetime Elision](https://rust-lang.github.io/rfcs/1414-lifetime-elision.html), [RFC 2094: NLL](https://rust-lang.github.io/rfcs/2094-nll.html)
+> **权威来源**:
+> [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html),
+> [Rustonomicon — Lifetimes](https://doc.rust-lang.org/nomicon/lifetimes.html),
+> [RFC 1414: Lifetime Elision](https://rust-lang.github.io/rfcs/1414-lifetime-elision.html),
+> [RFC 2094: NLL](https://rust-lang.github.io/rfcs/2094-nll.html)
 >
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、RFC 1414 Lifetime Elision、RFC 2094 NLL、Rustonomicon） [来源: Authority Source Sprint Batch 8]
 

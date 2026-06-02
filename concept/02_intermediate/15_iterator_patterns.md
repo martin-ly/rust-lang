@@ -2,6 +2,11 @@
 
 # Rust 迭代器模式
 >
+> **📎 交叉引用**
+>
+> 本主题在 knowledge 中有系统化的知识索引：[迭代器](../../knowledge/01_fundamentals/02_iterators.md)
+
+>
 > **受众**: [进阶]
 
 > **Bloom 层级**: 应用 → 分析

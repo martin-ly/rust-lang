@@ -1203,7 +1203,6 @@ dependencies = [
  "env_logger",
  "futures",
  "glommio",
- "http",
  "lru",
  "num_cpus",
  "parking_lot",

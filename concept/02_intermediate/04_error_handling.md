@@ -2,6 +2,10 @@
 
 # Error Handling（错误处理）
 
+> **📎 交叉引用**
+>
+> 本主题在 knowledge 中有系统化的知识索引：[错误处理](../../knowledge/02_intermediate/02_error_handling.md)
+
 > **受众**: [进阶]
 > **层级**: L2 进阶概念
 > **A/S/P 标记**: **A+S** — Application + Structure

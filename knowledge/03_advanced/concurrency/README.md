@@ -1,5 +1,8 @@
 # Concurrency 并发编程
 
+> **📎 交叉引用**
+>
+> 本主题在 concept 中有深度的概念分析：[并发](../../../concept/03_advanced/01_concurrency.md)
 > **层次定位**: L3 高级概念 / 并发子域索引
 > **前置依赖**: [knowledge 泛型](../../02_intermediate/03_generics.md) · [knowledge Trait](../../02_intermediate/06_traits.md)
 > **后置延伸**: [knowledge Async](../async/README.md) · [concept L3 并发](../../../concept/03_advanced/01_concurrency.md)

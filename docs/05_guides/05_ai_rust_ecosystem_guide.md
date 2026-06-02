@@ -15,7 +15,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [AI + Rust 生态指南](#ai--rust-生态指南)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [文档定位](#文档定位)
   - [一、AI 辅助 Rust 开发](#一ai-辅助-rust-开发)
   - [二、Rust 构建 AI/ML 应用](#二rust-构建-aiml-应用)
@@ -729,19 +729,12 @@ pub fn golden_ratio_search_lr(
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming Languages]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Wikipedia - Machine Learning]**
 > **[来源: Wikipedia - Artificial Intelligence]**
 > **[来源: tch-rs Documentation]**

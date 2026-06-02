@@ -8,6 +8,7 @@
 //! 4. [常见 Breaking Changes](#常见-breaking-changes)
 //! 6. [CI/CD 集成](#cicd-集成)
 //! 6. [CI/CD ](#cicd-)
+//!
 //! flowchart TD
 //!    B -->|否| C\[PATCH\]
 //!    B -->|是| D{是否向后兼容?}
@@ -126,7 +127,7 @@ pub enum NetworkEvent {
 ///     fn handle(&self, data: &[u8]);
 ///     // 新增方法时提供默认实现
 ///     // method default implementation
-///     }
+/// }
 /// ```
 pub trait ProtocolHandler {
     fn handle(&self, data: &[u8]);

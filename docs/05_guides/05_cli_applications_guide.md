@@ -15,7 +15,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [CLI 应用开发指南](#cli-应用开发指南)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [文档定位](#文档定位)
   - [官方 CLI Book 入口](#官方-cli-book-入口)
   - [本项目对应模块](#本项目对应模块)

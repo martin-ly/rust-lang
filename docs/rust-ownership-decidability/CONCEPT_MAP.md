@@ -12,7 +12,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [概念映射：从 Rust 代码到形式化理论](#概念映射从-rust-代码到形式化理论)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、核心概念的三层映射](#一核心概念的三层映射)
     - [1.1 所有权（Ownership）](#11-所有权ownership)
     - [1.2 借用（Borrowing）](#12-借用borrowing)

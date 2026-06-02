@@ -1,10 +1,8 @@
 # 实践项目 11: HTTP Web服务器
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **分级**: [A]
 > **Bloom 层级**: L3 (应用)
-
 > **难度**: ⭐⭐⭐ 专家级
 > **所需知识**: c06, c10
 > **预计时间**: 8-10小时
@@ -16,7 +14,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 11: HTTP Web服务器](#实践项目-11-http-web服务器)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [项目目标](#项目目标)
   - [功能需求](#功能需求)
   - [学习要点](#学习要点)
@@ -104,11 +102,8 @@ async fn handle_request(stream: &mut tokio::net::TcpStream) {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Web Framework]**
-
 > **[来源: axum.rs Documentation]**
-
 > **[来源: actix.rs Documentation]**
-
 > **[来源: RFC 2616 - HTTP]**
 
 ---

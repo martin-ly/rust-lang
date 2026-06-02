@@ -1,5 +1,8 @@
 # Unsafe Rust
+
+> **📎 交叉引用**
 >
+> 本主题在 concept 中有深度的概念分析：[Unsafe Rust](../../../concept/03_advanced/03_unsafe.md)
 > **层次定位**: L3 高级概念 / Unsafe 子域索引
 > **前置依赖**: [knowledge 所有权](../../01_fundamentals/04_ownership.md) · [knowledge 借用](../../01_fundamentals/01_borrowing.md)
 > **后置延伸**: [knowledge 专家层](../../04_expert/) · [concept L3 Unsafe](../../../concept/03_advanced/03_unsafe.md)
@@ -16,7 +19,6 @@
   - [🚀 相关层](#-相关层)
 
 > **Bloom 层级**: 理解
-
 > **Unsafe Rust：原始指针、FFI、内联汇编、MaybeUninit**
 
 ## 📚 内容
@@ -42,7 +44,6 @@
 ## ⚠️ 安全提醒
 >
 > **[来源: Rust Official Docs]**
-
 > 所有 unsafe 代码必须经过 Miri 验证和人工审计。每段 `unsafe` 块必须附带 `// SAFETY:` 注释。
 
 ## 🚀 相关层

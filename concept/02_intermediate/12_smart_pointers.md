@@ -2,6 +2,10 @@
 
 # 智能指针：堆内存管理与共享语义
 
+> **📎 交叉引用**
+>
+> 本主题在 knowledge 中有系统化的知识索引：[智能指针](../../knowledge/02_intermediate/04_smart_pointers.md)
+
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **S+P** — Structure + Procedure

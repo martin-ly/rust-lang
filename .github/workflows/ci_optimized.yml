@@ -30,7 +30,7 @@ jobs:
           components: rustfmt, clippy
 
       - name: Setup sccache
-        uses: mozilla-actions/sccache-action@v0.0.4
+        uses: mozilla-actions/sccache-action@v0.0.7
 
       - name: Cache cargo
         uses: actions/cache@v4
@@ -63,7 +63,7 @@ jobs:
           toolchain: "nightly"
 
       - name: Setup sccache
-        uses: mozilla-actions/sccache-action@v0.0.4
+        uses: mozilla-actions/sccache-action@v0.0.7
 
       - name: Cache cargo
         uses: actions/cache@v4
@@ -114,7 +114,7 @@ jobs:
           toolchain: "nightly"
 
       - name: Setup sccache
-        uses: mozilla-actions/sccache-action@v0.0.4
+        uses: mozilla-actions/sccache-action@v0.0.7
 
       - name: Build docs
         run: cargo doc --workspace --no-deps --all-features
@@ -133,7 +133,7 @@ jobs:
           toolchain: "nightly"
 
       - name: Setup sccache
-        uses: mozilla-actions/sccache-action@v0.0.4
+        uses: mozilla-actions/sccache-action@v0.0.7
 
       - name: Run benchmarks
         run: cargo bench --workspace -- --test

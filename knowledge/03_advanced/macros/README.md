@@ -1,4 +1,8 @@
 # Macros 宏系统
+
+> **📎 交叉引用**
+>
+> 本主题在 concept 中有深度的概念分析：[属性与宏](../../../concept/01_foundation/12_attributes_and_macros.md)
 >
 > **层次定位**: L3 高级概念 / 宏子域索引
 > **前置依赖**: [knowledge Trait](../../02_intermediate/06_traits.md) · [knowledge 泛型](../../02_intermediate/03_generics.md)
@@ -15,11 +19,10 @@
   - [🚀 相关层](#-相关层)
 
 > **Bloom 层级**: 理解
-
 > **Rust 宏编程：声明式宏与过程宏**
 
 ## 📚 内容
->
+
 > **[来源: Rust Official Docs]**
 
 | 文档 | 主题 | 难度 |

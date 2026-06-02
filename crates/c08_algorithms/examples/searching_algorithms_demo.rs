@@ -10,6 +10,7 @@
 //! - interpolation search
 //! - 并行搜索
 //! - parallelism
+//!
 //! 运行方式:
 //!
 //! Run way :

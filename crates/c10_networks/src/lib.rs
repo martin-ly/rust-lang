@@ -4,6 +4,7 @@
 //! Network programming: TCP/UDP, HTTP, WebSocket, and async I/O.
 #![allow(clippy::type_complexity)]
 #![allow(clippy::needless_borrows_for_generic_args)]
+#![allow(clippy::doc_lazy_continuation)]
 
 //! # C10 Networks - Rust 网络编程库
 //! - 异步网络通信

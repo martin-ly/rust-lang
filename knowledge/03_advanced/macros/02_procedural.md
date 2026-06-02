@@ -1,4 +1,8 @@
 # 过程宏 (Procedural Macros)
+
+> **📎 交叉引用**
+>
+> 本主题在 concept 中有深度的概念分析：[过程宏](../../../concept/03_advanced/07_proc_macro.md)
 >
 > **相关概念**: [过程宏](../../../concept/03_advanced/07_proc_macro.md)
 > **Bloom 层级**: 理解

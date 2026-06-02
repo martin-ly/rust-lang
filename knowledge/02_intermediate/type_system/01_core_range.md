@@ -1,5 +1,8 @@
 # `core::range` 模块与 `RangeInclusive`（Rust 1.96.0）
 
+> **📎 交叉引用**
+>
+> 本主题在 concept 中有深度的概念分析：[类型系统](../../../concept/01_foundation/04_type_system.md)
 > **Bloom 层级**: 理解
 > **稳定版本**: Rust 1.96.0 (2026-04-16)
 > **Edition**: 2024

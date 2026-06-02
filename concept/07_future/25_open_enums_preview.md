@@ -1,8 +1,11 @@
 # Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举
 >
+> **状态**: 🧪 Nightly 实验性
+> **跟踪版本**: nightly 1.98.0 (2026-05-31)
+> **预计稳定**: 待定（需等待 RFC / MCP 完成）
+>
 > **受众**: [专家]
 > **内容分级**: [实验级]
-
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 Open Enums 预览特性
@@ -543,7 +546,14 @@ fn handle(status: HttpStatus) -> &'static str {
 }
 ```
 
-> **修正**: `#[open_enum]`（实验性特性）标记枚举为"开放"——允许未来添加变体，或允许从整数值构造未知变体（如 `HttpStatus::from_raw(500)`）。这与 C 的枚举（底层是整数，可任意转换）或 Rust 的常规枚举（封闭、穷尽）都不同。开放枚举要求 match 必须包含 `_ => ...` 分支处理未知情况，强制开发者考虑前向兼容性。使用场景：协议解析（HTTP 状态码、错误码）、文件格式（可能包含未来定义的标记）、 FFI（C 枚举的 Rust 映射）。设计权衡：开放枚举丧失编译期穷尽检查的保护，但获得与 evolving 协议的兼容性。这与 `#[non_exhaustive]` 属性（仅影响外部 crate 的匹配）类似，但语义更强：开放枚举在本 crate 内也允许未知变体。[来源: [Open Enums RFC Draft](https://github.com/rust-lang/rfcs/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)]
+> **修正**: `#[open_enum]`（实验性特性）标记枚举为"开放"——允许未来添加变体，或允许从整数值构造未知变体（如 `HttpStatus::from_raw(500)`）。
+> 这与 C 的枚举（底层是整数，可任意转换）或 Rust 的常规枚举（封闭、穷尽）都不同。
+> 开放枚举要求 match 必须包含 `_ => ...` 分支处理未知情况，强制开发者考虑前向兼容性。
+> 使用场景：协议解析（HTTP 状态码、错误码）、文件格式（可能包含未来定义的标记）、 FFI（C 枚举的 Rust 映射）。
+> 设计权衡：开放枚举丧失编译期穷尽检查的保护，但获得与 evolving 协议的兼容性。
+> 这与 `#[non_exhaustive]` 属性（仅影响外部 crate 的匹配）类似，但语义更强：开放枚举在本 crate 内也允许未知变体。
+> [来源: [Open Enums RFC Draft](https://github.com/rust-lang/rfcs/)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)]
 
 ### 10.2 边界测试：开放枚举的整数转换安全（编译错误/运行时 panic）
 
@@ -565,7 +575,17 @@ fn main() {
 }
 ```
 
-> **修正**: 开放枚举的 `from_raw`（或 `try_from`）将整数转换为枚举值。对于未知值，行为由设计决定：1) 创建未知变体（`Priority(5)`，类似 newtype 包装）；2) 返回 `Option<Self>`（`try_from` 模式）；3) panic（`from_raw_unchecked` 模式）。Rust 的类型安全要求：转换操作必须将"可能的无效值"显式化——不能静默允许 `Priority::from_raw(999)` 而不加处理。这与 C 的枚举转换（`(enum Priority)5` 完全合法，无检查）或 Java 的 `Enum.valueOf`（未知名称抛 `IllegalArgumentException`）不同——Rust 倾向于使用类型系统（`Option`、`Result`）而非异常处理无效转换。[来源: [Open Enums RFC Draft](https://github.com/rust-lang/rfcs/)] · [来源: [Rust Reference — Enum Types](https://doc.rust-lang.org/reference/items/enumerations.html)]
+> **修正**:
+> 开放枚举的 `from_raw`（或 `try_from`）将整数转换为枚举值。
+> 对于未知值，行为由设计决定：
+>
+> 1) 创建未知变体（`Priority(5)`，类似 newtype 包装）；
+> 2) 返回 `Option<Self>`（`try_from` 模式）；
+> 3) panic（`from_raw_unchecked` 模式）。
+> Rust 的类型安全要求：转换操作必须将"可能的无效值"显式化——不能静默允许 `Priority::from_raw(999)` 而不加处理。
+> 这与 C 的枚举转换（`(enum Priority)5` 完全合法，无检查）或 Java 的 `Enum.valueOf`（未知名称抛 `IllegalArgumentException`）不同——Rust 倾向于使用类型系统（`Option`、`Result`）而非异常处理无效转换。
+> [来源: [Open Enums RFC Draft](https://github.com/rust-lang/rfcs/)] ·
+> [来源: [Rust Reference — Enum Types](https://doc.rust-lang.org/reference/items/enumerations.html)]
 
 ### 10.3 边界测试：open enum 的 match 穷尽性检查松弛（编译错误）
 
@@ -628,15 +648,26 @@ fn from_raw(val: u8) -> Priority {
 fn main() {}
 ```
 
-> **修正**: **Open enum**（RFC 开放中）允许枚举在**未来版本中添加新变体**，而不破坏现有代码的穷尽匹配。当前 Rust 的枚举是**封闭的**：添加新变体会使所有 `match` 编译错误（非穷尽）。Open enum 的设计：1) `open enum` 关键字；2) 匹配时必须包含 `_ =>` 处理未知变体；3) 未知变体可通过 `as u8` 等转换获取底层值。使用场景：1) C FFI（C enum 可能在未来扩展）；2) 网络协议（HTTP 状态码、错误码）；3) 序列化格式（向后兼容）。这与 Java 的 enum（可添加新常量，但 `switch` 不强制处理 default）或 C 的 enum（整数常量，无穷尽检查）不同——Rust 的 open enum 在类型安全和向后兼容之间寻求平衡。[来源: [Open Enum RFC](https://github.com/rust-lang/rfcs/)] · [来源: [Rust Internals](https://internals.rust-lang.org/)]
-> **过渡**: Open Enums 概念预研：从 `` 到可扩展枚举 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Open Enums 概念预研：从 `` 到可扩展枚举 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **修正**: **Open enum**（RFC 开放中）允许枚举在**未来版本中添加新变体**，而不破坏现有代码的穷尽匹配。
+> 当前 Rust 的枚举是**封闭的**：添加新变体会使所有 `match` 编译错误（非穷尽）。
+> Open enum 的设计：
+>
+> 1) `open enum` 关键字；
+> 2) 匹配时必须包含 `_ =>` 处理未知变体；
+> 3) 未知变体可通过 `as u8` 等转换获取底层值。
+>
+> 使用场景：
+>
+> 1) C FFI（C enum 可能在未来扩展）；
+> 2) 网络协议（HTTP 状态码、错误码）；
+> 3) 序列化格式（向后兼容）。
+> 这与 Java 的 enum（可添加新常量，但 `switch` 不强制处理 default）或 C 的 enum（整数常量，无穷尽检查）不同——Rust 的 open enum 在类型安全和向后兼容之间寻求平衡。
+> [来源: [Open Enum RFC](https://github.com/rust-lang/rfcs/)] ·
+> [来源: [Rust Internals](https://internals.rust-lang.org/)]
 > **过渡**: Open Enums 概念预研：从 `` 到可扩展枚举 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ### 补充定理链
 
-- **定理**: Open Enums 概念预研：从 `` 到可扩展枚举 定义 ⟹ 类型安全保证
-- **定理**: Open Enums 概念预研：从 `` 到可扩展枚举 定义 ⟹ 类型安全保证
 - **定理**: Open Enums 概念预研：从 `` 到可扩展枚举 定义 ⟹ 类型安全保证
 
 ## 认知路径
@@ -646,15 +677,13 @@ fn main() {}
 ### 核心推理链
 
 | 定理 | 前提 | 结论 | 置信度 |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | Open Enums 概念预研：从 `` 到可扩展枚举 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Open Enums 概念预研：从 `` 到可扩展枚举 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Open Enums 概念预研：从 `` 到可扩展枚举 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 Open Enums 概念预研：从 `` 到可扩展枚举 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 Open Enums 概念预研：从 `` 到可扩展枚举 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: Open Enums 概念预研：从 `` 到可扩展枚举 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

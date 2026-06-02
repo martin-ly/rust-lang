@@ -13,8 +13,8 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [🔬 高级主题深度指南](#高级主题深度指南)
-  - [📑 目录](#目录)
+- [🔬 高级主题深度指南](#-高级主题深度指南)
+  - [📑 目录](#-目录)
   - [概述](#概述)
   - [1. 高级所有权模式](#1-高级所有权模式)
     - [1.1 自定义智能指针](#11-自定义智能指针)
@@ -40,7 +40,7 @@
   - [8. 错误处理最佳实践](#8-错误处理最佳实践)
     - [8.1 自定义错误类型](#81-自定义错误类型)
     - [8.2 错误传播模式](#82-错误传播模式)
-  - [📚 相关资源](#相关资源)
+  - [📚 相关资源](#-相关资源)
   - [Rust 1.95+ 高级特性深度解析](#rust-195-高级特性深度解析)
     - [array\_windows 的高级模式](#array_windows-的高级模式)
       - [1. 多重窗口组合](#1-多重窗口组合)
@@ -537,7 +537,6 @@ fn process_file(path: &str) -> Result<Vec<i32>, MyError> {
 ## Rust 1.95+ 高级特性深度解析
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
-
 > **适用版本**: Rust 1.96.0+
 
 ### array_windows 的高级模式
@@ -752,19 +751,12 @@ pub fn log_complexity_analysis(n: usize, base: f64) -> Complexity {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming Languages]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference]**
 > **[来源: TRPL - The Rust Programming Language]**

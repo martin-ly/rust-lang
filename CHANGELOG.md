@@ -4,6 +4,62 @@
 
 ---
 
+## [2.5.3] - 2026-06-02 — Phase C 完成、质量基线全面达标与 1.97 预览跟进
+
+### 🔗 链接与锚点修复
+
+- **`fix_anchor_links_v3.py`**: 修复 896 个文件的 emoji/特殊字符锚点，损坏链接 1,293 → 744（↓42.5%）
+- **`fix_broken_anchors_v4.py`**: 将 docs/ 活跃内容中 109 个指向不存在标题的锚点降级为纯文本
+- **活跃内容锚点清零**: concept/knowledge/book 三大目录同文件锚点问题 **0 处** ✅
+- **LINK_CHECK_REPORT.md** 更新: 活跃内容核心锚点问题已清零，剩余问题集中在 archive/ 等归档目录
+
+### 📝 代码示例补充与标记清理
+
+- **新增 4 个可编译示例**:
+  - `07_game_ecs.md`: 极简 ECS（HashMap + Box<dyn Any>）
+  - `31_microservice_patterns.md`: TcpListener HTTP 微服务
+  - `37_database_systems.md`: HashMap KV 存储
+  - `28_devops_and_ci_cd.md`: 配置验证器
+- **L6 待扩充标记清零**: 17 个文件统一标记为 `[社区贡献欢迎]`，移除 `⚠️ 代码示例待扩充`
+
+### 🌐 Crates 英文 Doc 注释
+
+- **c02_type_system**: `initial_object.rs` / `terminal_object.rs` 双语重写；`advanced_error_handling.rs` / `advanced_macros.rs` / `performance_optimization.rs` 补充英文 `///`
+- **c05_threads**: `advanced_concurrency.rs` / `thread_pool_patterns.rs` / `rust_193_features.rs` 补充结构体/方法英文 `///`
+- **c10_networks**: 添加 `#![allow(clippy::doc_lazy_continuation)]` 修复 clippy 警告
+
+### 🔀 Concept ↔ Knowledge 交叉链接
+
+- **44 个文件**新增双向交叉引用导航块（`> **📎 交叉引用**`）
+- 累计 **68 个文件**已实现 concept/knowledge 双向导航
+- 新增脚本 `scripts/maintenance/add_cross_references.py`
+
+### 📦 归档与版本跟踪
+
+- **docs/archive/**: 85 个 .md 文件新增归档说明头部（`> **归档说明**: 本文档为历史归档文件...`）
+- **Sea-ORM**: Cargo.toml 注释更新为 `2.0.0-rc.40 (crates.io) / rc.38 (GitHub Releases, 2026-04-09)`，stable 2.0.0 待发布
+- **Rust 1.97 预览跟进**:
+  - `concept/07_future/rust_1_97_preview.md` 头部更新（nightly 1.98.0 / 1.97 进入 Beta）
+  - **26 个**预览特性文件新增标准状态头部（🧪 Nightly 实验性）
+  - `knowledge/06_ecosystem/emerging/06_rust_1_97_preview.md` 同步更新
+
+### 🧪 构建与验证基线
+
+- **`cargo check --workspace`**: ✅ 13 crates + common 全部通过
+- **`cargo clippy --workspace -D warnings`**: ✅ 通过
+- **`cargo test --workspace --no-run`**: ✅ 通过
+- **`version_fact_check.py`**: 0 错误 / 3,815 文件
+- **`verify_compile_fail_v3.py`**: 545/545 预期失败, 0 意外通过, 0 语法错误
+- **`mdbook build`**: ✅ 成功（仅搜索索引大小警告）
+
+### 🗂️ 脚本管理
+
+- 根目录脚本 90+ → **38 个活跃**（清理并归档 70 个至 `scripts/archive/2026/`）
+- 新增活跃脚本: `fix_broken_anchors_v4.py`, `check_active_anchors.py`
+- `scripts/README.md` 更新: 新增脚本分类表和使用规范
+
+---
+
 ## [2.5.2] - 2026-06-02 — P0 重复合并、版本对齐与 L6 标记
 
 ### 🗑️ P0 重复合并

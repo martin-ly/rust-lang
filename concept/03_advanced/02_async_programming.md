@@ -10,6 +10,10 @@
 
 ## 相关概念文件
 
+> **📎 交叉引用**
+>
+> 本主题在 knowledge 中有系统化的知识索引：[异步编程](../../knowledge/03_advanced/async)
+
 - [Async/Await 主文件](./02_async.md) — 异步编程核心内容（本文件已归档）
 - [Async 模式](./02_async_patterns.md) — 异步设计模式与最佳实践
 - [并发编程](./01_concurrency.md) — Send/Sync、线程、锁

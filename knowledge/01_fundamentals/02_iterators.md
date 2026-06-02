@@ -1,5 +1,8 @@
 # 迭代器 (Iterators)
 
+> **📎 交叉引用**
+>
+> 本主题在 concept 中有深度的概念分析：[迭代器](../../concept/02_intermediate/15_iterator_patterns.md)
 > **相关概念**: [迭代器](../../concept/02_intermediate/15_iterator_patterns.md)
 > **Bloom 层级**: 理解
 > **版本**: Rust 1.94 引入 (`array_windows`，1.96+ 可用) / 1.80.0 (`Peekable::next_if`)

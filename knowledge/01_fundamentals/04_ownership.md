@@ -1,5 +1,8 @@
 # Rust 所有权系统 (Ownership System)
 
+> **📎 交叉引用**
+>
+> 本主题在 concept 中有深度的概念分析：[所有权](../../concept/01_foundation/01_ownership.md)
 > **层次定位**: L1 基础概念 / 所有权子域
 > **前置依赖**: 无（入门概念）
 > **后置延伸**: [knowledge 借用](01_borrowing.md) · [concept L1 所有权](../../concept/01_foundation/01_ownership.md)

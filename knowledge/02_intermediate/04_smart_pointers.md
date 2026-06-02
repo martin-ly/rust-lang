@@ -1,4 +1,8 @@
 # 智能指针 (Smart Pointers)
+
+> **📎 交叉引用**
+>
+> 本主题在 concept 中有深度的概念分析：[智能指针](../../concept/02_intermediate/12_smart_pointers.md)
 >
 > **相关概念**: [智能指针](../../concept/02_intermediate/03_memory_management.md)
 > **Bloom 层级**: 理解

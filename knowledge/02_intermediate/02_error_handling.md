@@ -1,5 +1,9 @@
 # 错误处理 (Error Handling)
 >
+> **📎 交叉引用**
+>
+> 本主题在 concept 中有深度的概念分析：[错误处理基础](../../concept/01_foundation/10_error_handling_basics.md)
+>
 > **相关概念**: [错误处理](../../concept/02_intermediate/04_error_handling.md)
 > **Bloom 层级**: 理解
 > **📌 简介**:

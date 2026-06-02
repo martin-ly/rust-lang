@@ -1,5 +1,8 @@
 # 02 - 进阶 Rust
 
+> **📎 交叉引用**
+>
+> 本主题在 concept 中有深度的概念分析：[闭包](../../concept/01_foundation/15_closure_basics.md)
 > **Bloom 层级**: 理解
 > **掌握 Rust 的核心抽象能力**
 

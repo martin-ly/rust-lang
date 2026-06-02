@@ -387,23 +387,26 @@ pub fn get_never_type_info() -> String {
 /// ## example
 /// ## 代码Example of
 /// ## codeExample of
-/// };
-///
+/// ```ignore
 /// // Range: 半开区间 [1, 5)
-/// // Range: interval [1, 5)
-/// // Range: 半开interval [1, 5)
+/// let mut iter = (1..5).into_iter();
 /// assert_eq!(iter.next(), Some(1));
 /// assert_eq!(iter.next(), Some(2));
 /// // ... 3, 4, None
 ///
+/// // RangeFrom: [10, ∞)
+/// let mut iter = (10..).into_iter();
 /// assert_eq!(iter.next(), Some(10));
 /// assert_eq!(iter.next(), Some(11));
 /// // ... 无限递增（需配合 take）
-/// //... （ take）
+///
+/// // RangeToInclusive: [0, 5]
+/// let mut iter = (0..=5).into_iter();
+/// assert_eq!(iter.next(), Some(0));
 /// assert_eq!(iter.next(), Some(1));
 /// // ... 2, 3, 4, 5, None
 /// ```
-/// 
+///
 /// ## 与 `std::ops` 的关系
 /// ## and `std::ops`
 /// ## and `std::ops` 关系
@@ -435,6 +438,7 @@ pub fn core_range_demo() {
 // 5. `NonZero` 范围迭代 (1.96 stable)
 // ============================================================================
 
+/// ```
 /// use std::num::NonZeroU32;
 /// use std::ops::Range;
 ///
@@ -446,7 +450,7 @@ pub fn core_range_demo() {
 ///     println!("NonZero: {}", nz.get()); // 1, 2, 3, 4
 /// }
 /// ```
-/// 
+///
 /// **应用场景**:
 /// **application scenario **:
 /// - 数据库 ID 范围扫描（ID 永不为 0）
@@ -475,6 +479,7 @@ pub fn nonzero_range_demo() {
 /// #
 /// `assert_matches!` 允许对表达式进行模式匹配断言，无需展开 `if let`：
 /// `assert_matches!` to express ， `if let`：
+/// ```
 /// use std::assert_matches;
 /// let result: Result<i32, &str> = Ok(42);
 /// assert_matches!(result, Ok(n) if n > 0);
@@ -482,7 +487,7 @@ pub fn nonzero_range_demo() {
 /// let option: Option<String> = Some("hello".to_string());
 /// assert_matches!(option, Some(s) if s.len() > 0);
 /// ```
-/// 
+///
 /// **and `assert!(matches!(...))` 区别**:
 /// **and `assert!(matches!(...))` difference**:
 /// - 错误信息更友好（显示实际值 vs 模式）
@@ -491,6 +496,7 @@ pub fn nonzero_range_demo() {
 /// - support guard condition（`if expr`）
 /// - 支持变量绑定（`Ok(v) => { use v; }`）
 /// - variable （`Ok(v) => { use v; }`）
+///
 /// **来源**: [Rust Standard Library: assert_matches]
 pub fn assert_matches_demo() {
     // assert_matches! 在 Rust 1.96.0+ 稳定

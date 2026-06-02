@@ -5,6 +5,10 @@
 
 # Ownership（所有权）
 
+> **📎 交叉引用**
+>
+> 本主题在 knowledge 中有系统化的知识索引：[所有权](../../knowledge/01_fundamentals/04_ownership.md)
+
 > **受众**: [初学者]
 > **层次定位**: L1 基础概念 / 所有权子域
 > **A/S/P 标记**: **S** — Structure（心智模型）

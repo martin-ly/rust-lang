@@ -2,6 +2,10 @@
 
 ### 边界测试：C 可变参数与 Rust 的 FFI 绑定（运行时 UB）
 
+> **📎 交叉引用**
+>
+> 本主题在 concept 中有深度的概念分析：[FFI](../../concept/03_advanced/05_rust_ffi.md)
+
 ```rust,compile_fail
 use std::os::raw::{c_char, c_int};
 use std::ffi::CString;

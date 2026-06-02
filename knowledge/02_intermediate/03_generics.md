@@ -1,5 +1,8 @@
 # 泛型 (Generics)
 
+> **📎 交叉引用**
+>
+> 本主题在 concept 中有深度的概念分析：[泛型](../../concept/02_intermediate/02_generics.md)
 > **层次定位**: L2 进阶概念 / 泛型子域
 > **前置依赖**: [knowledge Trait](06_traits.md)
 > **后置延伸**: [knowledge 并发](../03_advanced/concurrency/README.md) · [concept L2 泛型](../../concept/02_intermediate/02_generics.md)
@@ -950,7 +953,11 @@ fn process(items: &[&dyn Display]) {
 **文档版本**: 2.1
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
-> **权威来源**: [Rust Reference — Generic parameters](https://doc.rust-lang.org/reference/items/generics.html), [RFC 2000: Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html), [RFC 1598: GATs](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html), [TAPL (Pierce, 2002)](https://www.cis.upenn.edu/~bcpierce/tapl/)
+> **权威来源**:
+> [Rust Reference — Generic parameters](https://doc.rust-lang.org/reference/items/generics.html),
+> [RFC 2000: Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html),
+> [RFC 1598: GATs](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html),
+> [TAPL (Pierce, 2002)](https://www.cis.upenn.edu/~bcpierce/tapl/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（TRPL、Rust Reference、RFC 2000、TAPL、Wadler 1989） [来源: Authority Source Sprint Batch 8]
 

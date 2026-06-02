@@ -1,5 +1,8 @@
 # Databases 数据库
 
+> **📎 交叉引用**
+>
+> 本主题在 concept 中有深度的概念分析：[数据库](../../../concept/06_ecosystem/23_database_systems.md)
 > **Bloom 层级**: 理解
 > **Rust 数据库访问：ORM 与查询构建器**
 

@@ -1,5 +1,9 @@
 # Trait - 定义共享行为
 
+> **📎 交叉引用**
+>
+> 本主题在 concept 中有深度的概念分析：[Trait](../../concept/02_intermediate/01_traits.md)
+
 > **层次定位**: L2 进阶概念 / Trait 子域
 > **前置依赖**: [knowledge 所有权](../01_fundamentals/04_ownership.md) · [knowledge 借用](../01_fundamentals/01_borrowing.md)
 > **后置延伸**: [knowledge 泛型](03_generics.md) · [concept L2 Trait](../../concept/02_intermediate/01_traits.md)

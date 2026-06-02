@@ -1,17 +1,19 @@
 # Rust 2024 Edition Preview
 >
+> **状态**: 🧪 Nightly 实验性
+> **跟踪版本**: nightly 1.98.0 (2026-05-31)
+> **预计稳定**: 待定（需等待 RFC / MCP 完成）
+>
 > **受众**: [专家]
 > **内容分级**: [实验级]
-
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: F×App — 应用 Rust 2024 Edition 的语法变更
 > **前置依赖**: [Edition](../06_ecosystem/01_toolchain.md) · [Async](../03_advanced/02_async.md)
 > **后置延伸**: [Edition Guide](./22_edition_guide.md)
-
 > **来源**: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)
 
-### 10.4 边界测试：Rust 2024 Edition 的语法变更与迁移（编译错误）
+## 10.4 边界测试：Rust 2024 Edition 的语法变更与迁移（编译错误）
 
 ```rust,ignore
 // Rust 2024 的 `gen` 关键字预留
@@ -39,9 +41,7 @@ fn main() {
 | Rust 2024 Edition Preview 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 Rust 2024 Edition Preview 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 Rust 2024 Edition Preview 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: Rust 2024 Edition Preview 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

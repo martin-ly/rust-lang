@@ -1,5 +1,8 @@
 # Axum 深度解析
 
+> **📎 交叉引用**
+>
+> 本主题在 concept 中有深度的概念分析：[Web 框架](../../../concept/06_ecosystem/27_web_frameworks.md)
 > **Bloom 层级**: 理解
 > **版本**: Axum 0.8.x
 > **Rust 版本**: 1.96.0+

@@ -1,19 +1,17 @@
 # 跨模块实战项目指南
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **分级**: [A]
 > **Bloom 层级**: L3 (应用)
-
 > **报告日期**: 2025-10-25
 
 ---
 
 ## 📑 目录
->
+
 - [跨模块实战项目指南](#跨模块实战项目指南)
-  - [📑 目录](#目录)
-  - [🚀 10 个渐进式项目](#10-个渐进式项目)
+  - [📑 目录](#-目录)
+  - [🚀 10 个渐进式项目](#-10-个渐进式项目)
     - [入门级](#入门级)
     - [进阶级](#进阶级)
     - [专家级](#专家级)
@@ -74,19 +72,12 @@
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
 > **[来源: ACM - Systems Programming Languages]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ---

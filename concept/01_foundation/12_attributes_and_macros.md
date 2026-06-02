@@ -3,6 +3,10 @@
 
 # 属性与声明宏：编译期元编程基础
 
+> **📎 交叉引用**
+>
+> 本主题在 knowledge 中有系统化的知识索引：[属性与宏](../../knowledge/03_advanced/macros)
+
 > **受众**: [初学者]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **A+S** — Application + Structure

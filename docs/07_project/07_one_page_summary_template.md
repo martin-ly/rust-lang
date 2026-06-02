@@ -2,7 +2,6 @@
 
 > **分级**: [A]
 > **Bloom 层级**: L4-L5 (分析/评价)
-
 > **说明**: 此文档已迁移至归档目录。
 > **当前入口**: [archive/process_reports/2026_02/project/07_one_page_summary_template.md](./07_one_page_summary_template.md)
 
@@ -17,7 +16,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [一页纸总结模板 - 重定向](#一页纸总结模板---重定向)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [Rust 1.95+ 持续更新更新](#rust-195-持续更新更新)
     - [本文档的Rust 1.95+更新要点](#本文档的rust-195更新要点)
       - [核心特性应用](#核心特性应用)
@@ -94,19 +93,12 @@
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
 > **[来源: ACM - Systems Programming Languages]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ---

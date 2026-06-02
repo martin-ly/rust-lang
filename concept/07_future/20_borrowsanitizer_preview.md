@@ -1,8 +1,11 @@
 # BorrowSanitizer 概念预研：运行时借用检查工业化
 >
+> **状态**: 🧪 Nightly 实验性
+> **跟踪版本**: nightly 1.98.0 (2026-05-31)
+> **预计稳定**: 待定（需等待 RFC / MCP 完成）
+>
 > **受众**: [专家]
 > **内容分级**: [实验级]
-
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 BorrowSanitizer 预览特性
@@ -12,7 +15,13 @@
 
 ---
 
-> **来源**: [Rust Internals — BorrowSanitizer Discussion](https://internals.rust-lang.org/) · [Miri: An Interpreter for Rust's Mid-level IR](https://github.com/rust-lang/miri) · [AddressSanitizer Wiki](https://github.com/google/sanitizers/wiki/AddressSanitizer) · [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) · [Tree Borrows Paper (POPL 2026)](https://perso.crans.org/vanille/treebor/) · [Stacked Borrows Paper](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)
+> **来源**:
+> [Rust Internals — BorrowSanitizer Discussion](https://internals.rust-lang.org/) ·
+> [Miri: An Interpreter for Rust's Mid-level IR](https://github.com/rust-lang/miri) ·
+> [AddressSanitizer Wiki](https://github.com/google/sanitizers/wiki/AddressSanitizer) ·
+> [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) ·
+> [Tree Borrows Paper (POPL 2026)](https://perso.crans.org/vanille/treebor/) ·
+> [Stacked Borrows Paper](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)
 
 ## 📑 目录
 
@@ -371,7 +380,14 @@ fn main() {
 }
 ```
 
-> **修正**: BorrowSanitizer（实验性）是 LLVM 的 sanitizers 家族新成员，专门检测 Rust 风格的借用违规。它与 Miri 类似，但在编译后的二进制中插入检查（类似 AddressSanitizer），因此可检测 FFI 边界和并发场景。关键挑战：**别名分析的精度**。上述代码中，`p1` 和 `p2` 指向不重叠的数组元素，理论上安全，但 Stacked Borrows 模型可能要求每次通过派生指针写入后"重新借用"原始指针。Tree Borrows 模型对此更宽松——允许不重叠区域的独立可变访问。BorrowSanitizer 的设计必须选择内存模型（Stacked Borrows 更严格、更多误报；Tree Borrows 更宽松、可能漏报）。这与 ASan（AddressSanitizer）的 false positive 问题类似——工具开发者需在检测能力和可用性间权衡。[来源: [LLVM Sanitizers](https://clang.llvm.org/docs/AddressSanitizer.html)] · [来源: [Tree Borrows Paper](https://www.ralfj.de/blog/2023/01/31/tree-borrows.html)]
+> **修正**: BorrowSanitizer（实验性）是 LLVM 的 sanitizers 家族新成员，专门检测 Rust 风格的借用违规。
+> 它与 Miri 类似，但在编译后的二进制中插入检查（类似 AddressSanitizer），因此可检测 FFI 边界和并发场景。
+> 关键挑战：**别名分析的精度**。上述代码中，`p1` 和 `p2` 指向不重叠的数组元素，理论上安全，但 Stacked Borrows 模型可能要求每次通过派生指针写入后"重新借用"原始指针。
+> Tree Borrows 模型对此更宽松——允许不重叠区域的独立可变访问。
+> BorrowSanitizer 的设计必须选择内存模型（Stacked Borrows 更严格、更多误报；Tree Borrows 更宽松、可能漏报）。
+> 这与 ASan（AddressSanitizer）的 false positive 问题类似——工具开发者需在检测能力和可用性间权衡。
+> [来源: [LLVM Sanitizers](https://clang.llvm.org/docs/AddressSanitizer.html)] ·
+> [来源: [Tree Borrows Paper](https://www.ralfj.de/blog/2023/01/31/tree-borrows.html)]
 
 ### 10.2 边界测试：Sanitizer 与优化的交互（运行时检测丢失）
 
@@ -389,7 +405,18 @@ fn main() {
 }
 ```
 
-> **修正**: Sanitizer 的检测代码插入在 LLVM IR 层面，后续优化可能：1) 移除"明显冗余"的检查；2) 内联和常量传播改变代码形状，使 sanitizer 的元数据追踪失效；3) 死代码消除删除包含检测点的分支。这是所有动态分析工具的固有问题：**被分析代码的变换改变分析结果**。解决方案：`-C opt-level=0`（禁用优化）用于 sanitizer 构建，或设计 sanitizer 元数据为"优化不可删除"。Rust 的 `-Z sanitizer=borrow`（实验性）将在 debug 构建中工作，与 ASan/MSan 的模式一致。这与形式化验证（不依赖运行时检测）互补：sanitizer 捕获实际执行路径上的违规，形式化验证捕获所有可能路径上的违规。[来源: [LLVM Sanitizer Design](https://llvm.org/docs/HowToSetUpLLVMStyleRTTI.html)] · [来源: [Rust Sanitizer Documentation](https://doc.rust-lang.org/unstable-book/compiler-flags/sanitizer.html)]
+> **修正**:
+> Sanitizer 的检测代码插入在 LLVM IR 层面，后续优化可能：
+>
+> 1) 移除"明显冗余"的检查；
+> 2) 内联和常量传播改变代码形状，使 sanitizer 的元数据追踪失效；
+> 3) 死代码消除删除包含检测点的分支。
+> 这是所有动态分析工具的固有问题：**被分析代码的变换改变分析结果**。
+> 解决方案：`-C opt-level=0`（禁用优化）用于 sanitizer 构建，或设计 sanitizer 元数据为"优化不可删除"。
+> Rust 的 `-Z sanitizer=borrow`（实验性）将在 debug 构建中工作，与 ASan/MSan 的模式一致。
+> 这与形式化验证（不依赖运行时检测）互补：sanitizer 捕获实际执行路径上的违规，形式化验证捕获所有可能路径上的违规。
+> [来源: [LLVM Sanitizer Design](https://llvm.org/docs/HowToSetUpLLVMStyleRTTI.html)] ·
+> [来源: [Rust Sanitizer Documentation](https://doc.rust-lang.org/unstable-book/compiler-flags/sanitizer.html)]
 
 ### 10.3 边界测试：BorrowSanitizer 与 FFI 的交互盲区（运行时漏报）
 
@@ -410,7 +437,24 @@ fn main() {
 }
 ```
 
-> **修正**: BorrowSanitizer 在 Rust 代码的 MIR/LLVM IR 层面插入检查，但**FFI 边界**是盲区：C 代码中的指针操作对 BorrowSanitizer 不可见。若 C 代码：1) 保存 Rust 传递的指针供后续使用；2) 将指针传递给其他 C 函数；3) 通过指针修改数据——Rust 侧的借用检查无法验证这些操作的安全性。这是所有动态分析工具的共同限制：跨语言边界的分析需要双方合作。缓解措施：1) FFI 接口使用 `&T`/`&mut T` 时，C 代码承诺不创建别名；2) 使用 `cbindgen`/`cxx` 生成类型安全的绑定；3) 对关键 FFI 路径使用 Miri（可模拟 C 代码的内存操作，若提供 MIR）。这与 ASan 的 FFI 盲区（C 代码的内存错误不触发 Rust 侧的 ASan）相同——语言边界的分析是开放问题。[来源: [Rust FFI Guidelines](https://rust-lang.github.io/rust-bindgen/)] · [来源: [Miri Foreign Function Interface](https://github.com/rust-lang/miri/)]
+> **修正**:
+> BorrowSanitizer 在 Rust 代码的 MIR/LLVM IR 层面插入检查，但**FFI 边界**是盲区：C 代码中的指针操作对 BorrowSanitizer 不可见。
+> 若 C 代码：
+>
+> 1) 保存 Rust 传递的指针供后续使用；
+> 2) 将指针传递给其他 C 函数；
+> 3) 通过指针修改数据——Rust 侧的借用检查无法验证这些操作的安全性。
+>
+> 这是所有动态分析工具的共同限制：跨语言边界的分析需要双方合作。
+>
+> 缓解措施：
+>
+> 1) FFI 接口使用 `&T`/`&mut T` 时，C 代码承诺不创建别名；
+> 2) 使用 `cbindgen`/`cxx` 生成类型安全的绑定；
+> 3) 对关键 FFI 路径使用 Miri（可模拟 C 代码的内存操作，若提供 MIR）。
+> 这与 ASan 的 FFI 盲区（C 代码的内存错误不触发 Rust 侧的 ASan）相同——语言边界的分析是开放问题。
+> [来源: [Rust FFI Guidelines](https://rust-lang.github.io/rust-bindgen/)] ·
+> [来源: [Miri Foreign Function Interface](https://github.com/rust-lang/miri/)]
 
 ### 10.6 边界测试：BorrowSanitizer 与 `unsafe` 块内的合法别名（运行时误报）
 
@@ -430,7 +474,24 @@ fn main() {
 }
 ```
 
-> **修正**: BorrowSanitizer 基于特定内存模型（可能是 Stacked Borrows 或 Tree Borrows），**误报**（false positive）是设计权衡的一部分。Stacked Borrows 对指针别名更严格：从同一原始指针派生的所有指针共享一个借用标签，任意写入可能使其他派生指针失效。Tree Borrows 更宽松：允许不重叠区域的独立访问。BorrowSanitizer 的选择影响检测结果：1) Stacked Borrows 模式：更多误报，更少漏报；2) Tree Borrows 模式：更少误报，可能漏报某些违规。这与 ASan 的误报（某些合法代码被标记为内存错误）或 TSan 的误报（某些同步模式被标记为数据竞争）类似——动态分析工具的精度受限于底层模型。开发者的应对：1) 理解工具使用的内存模型；2) 对误报使用 `#[cfg(not(sanitize = "borrow"))]` 跳过；3) 用 Miri 交叉验证。[来源: [LLVM Sanitizers](https://clang.llvm.org/docs/AddressSanitizer.html)] · [来源: [Tree Borrows](https://www.ralfj.de/blog/2023/01-31_tree-borrows.html)]
+> **修正**:
+> BorrowSanitizer 基于特定内存模型（可能是 Stacked Borrows 或 Tree Borrows），**误报**（false positive）是设计权衡的一部分。
+> Stacked Borrows 对指针别名更严格：从同一原始指针派生的所有指针共享一个借用标签，任意写入可能使其他派生指针失效。
+> Tree Borrows 更宽松：允许不重叠区域的独立访问。
+>
+> BorrowSanitizer 的选择影响检测结果：
+>
+> 1) Stacked Borrows 模式：更多误报，更少漏报；
+> 2) Tree Borrows 模式：更少误报，可能漏报某些违规。
+> 这与 ASan 的误报（某些合法代码被标记为内存错误）或 TSan 的误报（某些同步模式被标记为数据竞争）类似——动态分析工具的精度受限于底层模型。
+>
+> 开发者的应对：
+>
+> 1) 理解工具使用的内存模型；
+> 2) 对误报使用 `#[cfg(not(sanitize = "borrow"))]` 跳过；
+> 3) 用 Miri 交叉验证。
+>
+> [来源: [LLVM Sanitizers](https://clang.llvm.org/docs/AddressSanitizer.html)] · [来源: [Tree Borrows](https://www.ralfj.de/blog/2023/01-31_tree-borrows.html)]
 
 ### 10.5 边界测试：BorrowSanitizer 与 Miri 的检测范围差异（UB 漏检）
 
@@ -452,7 +513,19 @@ fn alias_violation() {
 // ASan/MSan: 检测内存错误，不检测别名违规
 ```
 
-> **修正**: Rust 的 UB 检测工具谱：1) **Miri**（最全面）：解释执行，跟踪 Stacked Borrows / Tree Borrows 标签，检测所有内存和别名违规，但极慢（10-100x 减速）；2) **BorrowSanitizer**（设想中）：运行时插桩，类似 ASan，检测别名违规，但受优化影响（release 模式可能内联/删除检测点）；3) **ASan/MSan**：检测内存错误（use-after-free、越界），不检测别名。互补策略：开发期用 Miri 全面检查，CI 用 BorrowSanitizer（若存在）快速回归测试，发布用 ASan 检测残余内存问题。当前状态（2025）：BorrowSanitizer 仍是研究概念，无可用实现；社区用 Miri + `cargo fuzz` + ASan 组合覆盖。这与 C/C++ 的 sanitizer 生态（ASan/MSan/UBSan/TSan 成熟可用）不同——Rust 的内存安全保证减少了 sanitizer 的必要性，但 unsafe 代码和 FFI 边界仍需工具支持。[来源: [Miri Documentation](https://github.com/rust-lang/miri)] · [来源: [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)]
+> **修正**:
+> Rust 的 UB 检测工具谱：
+>
+> 1) **Miri**（最全面）：解释执行，跟踪 Stacked Borrows / Tree Borrows 标签，检测所有内存和别名违规，但极慢（10-100x 减速）；
+> 2) **BorrowSanitizer**（设想中）：运行时插桩，类似 ASan，检测别名违规，但受优化影响（release 模式可能内联/删除检测点）；
+> 3) **ASan/MSan**：检测内存错误（use-after-free、越界），不检测别名。
+>
+> 互补策略：开发期用 Miri 全面检查，CI 用 BorrowSanitizer（若存在）快速回归测试，发布用 ASan 检测残余内存问题。
+> 当前状态（2025）：BorrowSanitizer 仍是研究概念，无可用实现；
+> 社区用 Miri + `cargo fuzz` + ASan 组合覆盖。
+> 这与 C/C++ 的 sanitizer 生态（ASan/MSan/UBSan/TSan 成熟可用）不同——Rust 的内存安全保证减少了 sanitizer 的必要性，但 unsafe 代码和 FFI 边界仍需工具支持。
+> [来源: [Miri Documentation](https://github.com/rust-lang/miri)] ·
+> [来源: [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)]
 
 ### 10.3 边界测试：BorrowSanitizer 的插桩盲区与优化代码（UB 漏检）
 
@@ -473,15 +546,21 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的 UB 检测工具谱：1) **Miri**（最全面）：解释执行，跟踪 Stacked Borrows / Tree Borrows 标签，检测所有内存和别名违规，但极慢；2) **BorrowSanitizer**（设想中）：运行时插桩，类似 ASan，检测别名违规，但受优化影响；3) **ASan/MSan**：检测内存错误，不检测别名。互补策略：开发期用 Miri 全面检查，CI 用 BorrowSanitizer 快速回归测试，发布用 ASan 检测残余内存问题。当前状态（2025）：BorrowSanitizer 仍是研究概念，无可用实现；社区用 Miri + `cargo fuzz` + ASan 组合覆盖。这与 C/C++ 的 sanitizer 生态（ASan/MSan/UBSan/TSan 成熟可用）不同——Rust 的内存安全保证减少了 sanitizer 的必要性，但 unsafe 代码和 FFI 边界仍需工具支持。[来源: [Miri Documentation](https://github.com/rust-lang/miri)] · [来源: [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)]
-> **过渡**: BorrowSanitizer 概念预研：运行时借用检查工业化 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: BorrowSanitizer 概念预研：运行时借用检查工业化 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **修正**: Rust 的 UB 检测工具谱：
+>
+> 1) **Miri**（最全面）：解释执行，跟踪 Stacked Borrows / Tree Borrows 标签，检测所有内存和别名违规，但极慢；
+> 2) **BorrowSanitizer**（设想中）：运行时插桩，类似 ASan，检测别名违规，但受优化影响；
+> 3) **ASan/MSan**：检测内存错误，不检测别名。
+>
+> 互补策略：开发期用 Miri 全面检查，CI 用 BorrowSanitizer 快速回归测试，发布用 ASan 检测残余内存问题。
+> 当前状态（2025）：BorrowSanitizer 仍是研究概念，无可用实现；社区用 Miri + `cargo fuzz` + ASan 组合覆盖。
+> 这与 C/C++ 的 sanitizer 生态（ASan/MSan/UBSan/TSan 成熟可用）不同——Rust 的内存安全保证减少了 sanitizer 的必要性，但 unsafe 代码和 FFI 边界仍需工具支持。
+> [来源: [Miri Documentation](https://github.com/rust-lang/miri)] ·
+> [来源: [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)]
 > **过渡**: BorrowSanitizer 概念预研：运行时借用检查工业化 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ### 补充定理链
 
-- **定理**: BorrowSanitizer 概念预研：运行时借用检查工业化 定义 ⟹ 类型安全保证
-- **定理**: BorrowSanitizer 概念预研：运行时借用检查工业化 定义 ⟹ 类型安全保证
 - **定理**: BorrowSanitizer 概念预研：运行时借用检查工业化 定义 ⟹ 类型安全保证
 
 ## 认知路径
@@ -497,9 +576,7 @@ fn main() {
 | BorrowSanitizer 概念预研：运行时借用检查工业化 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 BorrowSanitizer 概念预研：运行时借用检查工业化 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 BorrowSanitizer 概念预研：运行时借用检查工业化 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: BorrowSanitizer 概念预研：运行时借用检查工业化 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

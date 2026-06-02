@@ -5,7 +5,9 @@
 > 本文档追踪已合并至 master 并大概率进入 stable 的前沿特性。
 >
 > **发布日期**: 2026-07-16（预计）
-> **版本状态**: 🧪 Nightly / 即将 Beta
+> **跟踪版本**: nightly 1.98.0 (2026-05-31)
+> **版本状态**: 🧪 Nightly / 1.97 已进入 Beta 分支
+> **说明**: 稳定版发布前特性集可能调整，部分预览特性可能推迟至 1.98
 > **权威来源**:
 > [Rust Internals](https://internals.rust-lang.org/) ·
 > [GitHub rust-lang/rust](https://github.com/rust-lang/rust) ·

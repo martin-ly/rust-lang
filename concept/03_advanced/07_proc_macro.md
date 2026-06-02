@@ -2,6 +2,9 @@
 
 # 过程宏：编译期代码生成的元编程工具
 
+> **📎 交叉引用**
+>
+> 本主题在 knowledge 中有系统化的知识索引：[过程宏](../../knowledge/03_advanced/macros/02_procedural.md)
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 深入分析 Rust **过程宏（Procedural Macros）**的三种类型（derive、attribute、function-like）——它们的编译期执行模型、TokenStream 操作、卫生性（hygiene）保证，以及与 `macro_rules!` 的本质差异。
@@ -569,7 +572,17 @@ pub fn my_debug(input: TokenStream) -> TokenStream {
 }
 ```
 
-> **修正**: 过程宏的错误定位是开发体验的关键挑战。`quote!` 生成的代码默认使用 `Span::call_site()`，错误信息指向宏调用处。改善方法：1) 使用 `Span::mixed_site()` 或输入 token 的 span（保留原始位置）；2) `syn::spanned::Spanned` 为生成的 AST 节点附加 span；3) `proc_macro::Diagnostic`（不稳定）自定义错误消息和位置。Rust 1.64+ 的 `Span::error` 和 `Span::warning` 改善了这一状况。这与 C 的宏（错误指向展开后代码，难以追溯）或 Lisp 的宏（同像性，错误在宏展开后的代码中）不同——Rust 的过程宏有源码映射支持，但需宏作者正确使用。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-06-macros.html)] · [来源: [proc_macro Diagnostic](https://doc.rust-lang.org/proc_macro/struct.Diagnostic.html)]
+> **修正**: 过程宏的错误定位是开发体验的关键挑战。`quote!` 生成的代码默认使用 `Span::call_site()`，错误信息指向宏调用处。
+> 改善方法：
+>
+> 1) 使用 `Span::mixed_site()` 或输入 token 的 span（保留原始位置）；
+> 2) `syn::spanned::Spanned` 为生成的 AST 节点附加 span；
+> 3) `proc_macro::Diagnostic`（不稳定）自定义错误消息和位置。
+>
+> Rust 1.64+ 的 `Span::error` 和 `Span::warning` 改善了这一状况。
+> 这与 C 的宏（错误指向展开后代码，难以追溯）或 Lisp 的宏（同像性，错误在宏展开后的代码中）不同——Rust 的过程宏有源码映射支持，但需宏作者正确使用。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-06-macros.html)] ·
+> [来源: [proc_macro Diagnostic](https://doc.rust-lang.org/proc_macro/struct.Diagnostic.html)]
 
 ### 10.3 边界测试：过程宏的 hygiene 与路径解析（编译错误）
 
@@ -596,7 +609,20 @@ pub fn derive_my_trait(input: TokenStream) -> TokenStream {
 // 但调用者可能重定义了 MyTrait
 ```
 
-> **修正**: 过程宏的**hygiene**（卫生）保证宏生成的标识符不会与调用者的标识符冲突。`quote!` 中的 `MyTrait` 在宏定义 crate 中解析，使用绝对路径（`::my_crate::MyTrait`）可确保正确性。但边缘情况：1) `no_std` 环境中 `std` 不可用，应使用 `::core`；2) 调用者重定义了 `std` 模块；3) 宏生成的代码使用相对路径，可能被调用者的模块结构影响。`proc_macro2::Span::mixed_site()` 提供定义处解析（类似 `macro_rules!` 的 hygiene），`Span::call_site()` 提供调用处解析（可能冲突）。`quote::quote_spanned!` 可指定特定 span。这与 C 的宏（无 hygiene，纯文本替换）或 Scheme 的 hygienic macro（基于语法对象，更强大）不同——Rust 的过程宏 hygiene 是编译器自动处理的，开发者通常使用 `mixed_site` 默认行为。[来源: [The Rust Reference](https://doc.rust-lang.org/reference/procedural-macros.html)] · [来源: [proc-macro2 Documentation](https://docs.rs/proc-macro2/)]
+> **修正**: 过程宏的**hygiene**（卫生）保证宏生成的标识符不会与调用者的标识符冲突。
+> `quote!` 中的 `MyTrait` 在宏定义 crate 中解析，使用绝对路径（`::my_crate::MyTrait`）可确保正确性。
+> 但边缘情况：
+>
+> 1) `no_std` 环境中 `std` 不可用，应使用 `::core`；
+> 2) 调用者重定义了 `std` 模块；
+> 3) 宏生成的代码使用相对路径，可能被调用者的模块结构影响。
+>
+> `proc_macro2::Span::mixed_site()` 提供定义处解析（类似 `macro_rules!` 的 hygiene），`Span::call_site()` 提供调用处解析（可能冲突）。
+> `quote::quote_spanned!` 可指定特定 span。
+> 这与 C 的宏（无 hygiene，纯文本替换）或 Scheme 的 hygienic macro（基于语法对象，更强大）不同
+> ——Rust 的过程宏 hygiene 是编译器自动处理的，开发者通常使用 `mixed_site` 默认行为。
+> [来源: [The Rust Reference](https://doc.rust-lang.org/reference/procedural-macros.html)] ·
+> [来源: [proc-macro2 Documentation](https://docs.rs/proc-macro2/)]
 
 ### 10.4 边界测试：proc_macro 的 TokenStream 与 hygiene 标识符生成（编译错误）
 
@@ -612,7 +638,27 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
 }
 ```
 
-> **修正**: **过程宏**的 crate 类型限制：1) `proc_macro` crate 只能在 `crate-type = ["proc-macro"]` 的 crate 中使用；2) `quote` 和 `syn` 是辅助库（非编译器内置）；3) 过程宏在编译期执行，无运行时开销。TokenStream 的处理：1) `syn::parse` — 将 TokenStream 解析为 AST；2) `quote!` — 从模板生成 TokenStream；3) `proc_macro2::TokenStream` — 可跨线程使用（`proc_macro::TokenStream` 不可 Send）。hygiene：1) `Span::call_site()` — 继承调用方 hygiene；2) `Span::mixed_site()` — 混合 hygiene（宏定义的变量不可被调用方访问）；3) `Span::def_site()` — 定义点 hygiene（最严格）。这与 Lisp 的宏（无 hygiene，易捕获变量）或 C 的宏（纯文本替换）不同——Rust 的过程宏有完善的 hygiene 系统。[来源: [Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html)] · [来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)]
+> **修正**:
+> **过程宏**的 crate 类型限制：
+>
+> 1) `proc_macro` crate 只能在 `crate-type = ["proc-macro"]` 的 crate 中使用；
+> 2) `quote` 和 `syn` 是辅助库（非编译器内置）；
+> 3) 过程宏在编译期执行，无运行时开销。
+>
+> TokenStream 的处理：
+>
+> 1) `syn::parse` — 将 TokenStream 解析为 AST；
+> 2) `quote!` — 从模板生成 TokenStream；
+> 3) `proc_macro2::TokenStream` — 可跨线程使用（`proc_macro::TokenStream` 不可 Send）。
+>
+> hygiene：
+>
+> 1) `Span::call_site()` — 继承调用方 hygiene；
+> 2) `Span::mixed_site()` — 混合 hygiene（宏定义的变量不可被调用方访问）；
+> 3) `Span::def_site()` — 定义点 hygiene（最严格）。
+> 这与 Lisp 的宏（无 hygiene，易捕获变量）或 C 的宏（纯文本替换）不同——Rust 的过程宏有完善的 hygiene 系统。
+> [来源: [Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html)] ·
+> [来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)]
 
 ### 10.6 边界测试：不可变借用与可变借用的冲突
 
@@ -631,13 +677,9 @@ fn main() {
 ## 参考来源
 
 > [来源: [RFC 1566 — Procedural Macros](https://rust-lang.github.io/rfcs/1566-proc-macros.html)]
-
 > [来源: [syn crate](https://docs.rs/syn/)]
-
 > [来源: [quote crate](https://docs.rs/quote/)]
-
 > [来源: [proc-macro2 crate](https://docs.rs/proc-macro2/)]
-
 > [来源: [Rust Compiler Development Guide — Proc Macros](https://rustc-dev-guide.rust-lang.org/)]
 
 ## 认知路径
@@ -653,9 +695,7 @@ fn main() {
 | 过程宏：编译期代码生成的元编程工具 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > **过渡**: 掌握 过程宏：编译期代码生成的元编程工具 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 过程宏：编译期代码生成的元编程工具 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: 过程宏：编译期代码生成的元编程工具 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
@@ -669,7 +709,7 @@ fn main() {
 > **自检**：你当前掌握的核心概念是否已能独立应用？
 
 | 选择 | 条件 | 目标 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | 🔙 巩固基础 | 仍有模糊概念 | 回到 [L2 对应主题](../02_intermediate/) 或 [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) |
 | 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](./README.md) 选择其他主题 |
 | 🎓 进入 L4 形式化 | 想理解"为什么"的数学证明 | [L4 形式化](../04_formal/README.md) |

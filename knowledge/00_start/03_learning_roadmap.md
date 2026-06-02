@@ -10,7 +10,7 @@
 
 > **[来源: Rust Official Docs]**
 
-```
+```text
 Level 1: 基础 (40-60小时)
     │
     ▼

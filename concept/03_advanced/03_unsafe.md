@@ -2,6 +2,10 @@
 
 # Unsafe Rust
 
+> **📎 交叉引用**
+>
+> 本主题在 knowledge 中有系统化的知识索引：[Unsafe Rust](../../knowledge/03_advanced/unsafe)
+
 > **受众**: [专家]
 > **层级**: L3 高级概念
 > **A/S/P 标记**: **S+P** — Structure + Procedure

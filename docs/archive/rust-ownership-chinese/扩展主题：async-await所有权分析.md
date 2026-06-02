@@ -1,3 +1,5 @@
+> **归档说明**: 本文档为历史归档文件，内容可能已过时。最新信息请参考对应活跃文档。
+
 # 扩展主题：async/await所有权分析
 
 > **分级**: [C]
@@ -6,6 +8,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [扩展主题：async/await所有权分析](#扩展主题asyncawait所有权分析)
@@ -46,9 +49,11 @@
 ---
 
 ## async/await基础
+>
 > **[来源: Rust Official Docs]**
 
 ### async函数的本质
+>
 > **[来源: Rust Official Docs]**
 
 ```rust,ignore
@@ -77,6 +82,7 @@ fn f() -> impl Future<Output = T> {
 ```
 
 ### Future trait
+>
 > **[来源: Rust Official Docs]**
 
 ```rust,ignore
@@ -101,9 +107,11 @@ enum Poll<T> {
 ---
 
 ## Future状态机
+>
 > **[来源: Rust Official Docs]**
 
 ### 状态机生成
+>
 > **[来源: Rust Official Docs]**
 
 ```rust,ignore
@@ -153,6 +161,7 @@ impl Future for ExampleFuture {
 ```
 
 ### 状态转换图
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -196,9 +205,11 @@ impl Future for ExampleFuture {
 ---
 
 ## 状态机与所有权
+>
 > **[来源: Rust Official Docs]**
 
 ### 所有权存储
+>
 > **[来源: Rust Official Docs]**
 
 ```rust,ignore
@@ -224,6 +235,7 @@ enum MoveExampleFuture {
 ```
 
 ### 借用存储
+>
 > **[来源: Rust Official Docs]**
 
 ```rust,ignore
@@ -255,6 +267,7 @@ enum BorrowExampleFuture {
 ---
 
 ## 跨await点的借用
+>
 > **[来源: Rust Official Docs]**
 
 ### 问题场景

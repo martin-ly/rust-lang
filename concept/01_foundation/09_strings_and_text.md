@@ -3,6 +3,10 @@
 
 # 字符串与文本：Rust 的 Unicode 处理与格式化系统
 
+> **📎 交叉引用**
+>
+> 本主题在 knowledge 中有系统化的知识索引：[字符串与文本](../../knowledge/02_intermediate/05_strings.md)
+
 > **受众**: [初学者]
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S** — Application + Structure

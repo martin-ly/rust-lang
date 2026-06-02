@@ -2,6 +2,10 @@
 
 # Traits（Trait 系统）
 
+> **📎 交叉引用**
+>
+> 本主题在 knowledge 中有系统化的知识索引：[Trait](../../knowledge/02_intermediate/06_traits.md)
+
 > **受众**: [进阶]
 > **层次定位**: L2 进阶概念 / Trait 子域
 > **A/S/P 标记**: **S** — Structure（心智模型）

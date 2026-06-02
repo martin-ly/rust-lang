@@ -1,5 +1,16 @@
 #![allow(clippy::incompatible_msrv)]
 
+//! Rust 1.93 Thread/Concurrency Features
+//!
+//! This module demonstrates thread-safe initialization patterns introduced
+//! in Rust 1.93, including `MaybeUninit` buffer initialization and
+//! `String::into_raw_parts` for cross-thread ownership transfer.
+//!
+//! # Features Demonstrated
+//! - `MaybeUninit::uninit()` for uninitialized thread-safe buffers
+//! - `String::into_raw_parts` / `from_raw_parts` for zero-copy transfer
+//! - `Arc<Vec<T>>` shared memory layout inspection
+
 use std::mem::MaybeUninit;
 use std::sync::Arc;
 use std::thread;

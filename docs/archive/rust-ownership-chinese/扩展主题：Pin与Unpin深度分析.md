@@ -1,3 +1,5 @@
+> **归档说明**: 本文档为历史归档文件，内容可能已过时。最新信息请参考对应活跃文档。
+
 # 扩展主题：Pin与Unpin深度分析
 
 > **分级**: [C]
@@ -6,6 +8,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [扩展主题：Pin与Unpin深度分析](#扩展主题pin与unpin深度分析)
@@ -20,7 +23,7 @@
     - [创建Pin的方法](#创建pin的方法)
       - [方法1: Box::pin](#方法1-boxpin)
       - [方法2: Pin::new\_unchecked (unsafe)](#方法2-pinnew_unchecked-unsafe)
-      - [方法3: pin! 宏 ( nightly )](#方法3-pin-宏--nightly)
+      - [方法3: pin! 宏 ( nightly )](#方法3-pin-宏--nightly-)
   - [Unpin trait的语义](#unpin-trait的语义)
     - [定义](#定义)
     - [语义解释](#语义解释)
@@ -51,9 +54,11 @@
 ---
 
 ## 问题背景：自引用结构
+>
 > **[来源: Rust Official Docs]**
 
 ### 经典问题
+>
 > **[来源: Rust Official Docs]**
 
 ```rust,ignore
@@ -75,6 +80,7 @@ fn problem() {
 ```
 
 ### 为什么这是问题？
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -96,9 +102,11 @@ fn problem() {
 ---
 
 ## Pin的形式定义
+>
 > **[来源: Rust Official Docs]**
 
 ### 类型定义
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -108,6 +116,7 @@ pub struct Pin<P> {
 ```
 
 ### 核心保证
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -117,6 +126,7 @@ Pin<P<T>> 保证：
 ```
 
 ### 形式化语义
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -126,9 +136,11 @@ Pin<P<T>> 保证：
 ```
 
 ### 创建Pin的方法
+>
 > **[来源: Rust Official Docs]**
 
 #### 方法1: Box::pin
+>
 > **[来源: Rust Official Docs]**
 
 ```rust,ignore
@@ -138,6 +150,7 @@ let data: Pin<Box<T>> = Box::pin(T::new());
 **保证**：Box在堆上，Pin保证不移动。
 
 #### 方法2: Pin::new_unchecked (unsafe)
+>
 > **[来源: Rust Official Docs]**
 
 ```rust,ignore

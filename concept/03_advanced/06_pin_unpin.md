@@ -2,6 +2,10 @@
 
 # Pin 与 Unpin：自引用类型的不动性保证
 
+> **📎 交叉引用**
+>
+> 本主题在 knowledge 中有系统化的知识索引：[Pin/Unpin](../../knowledge/03_advanced/async)
+
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure

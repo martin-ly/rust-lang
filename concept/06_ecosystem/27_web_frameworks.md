@@ -2,6 +2,11 @@
 
 # Rust Web 框架对比与选型
 >
+> **📎 交叉引用**
+>
+> 本主题在 knowledge 中有系统化的知识索引：[Web 框架](../../knowledge/06_ecosystem/deep_dives/01_axum_deep_dive.md)
+
+>
 > **受众**: [进阶]
 
 > **Bloom 层级**: 应用 → 评价

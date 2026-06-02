@@ -23,7 +23,7 @@
 > **[来源: IEEE - Software Engineering Standards]** ·
 > **[来源: Rust Project Guidelines]**
 
-- [Rust 项目最佳实践指南](#rust-项目最佳实践指南)
+- Rust 项目最佳实践指南
   - [📋 目录](#目录)
   - [概述](#概述)
   - [1. 代码质量最佳实践](#1-代码质量最佳实践)

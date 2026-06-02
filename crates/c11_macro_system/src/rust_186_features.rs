@@ -23,6 +23,7 @@
 /// ## scenario
 /// - 插件系统：将特定插件接口转换为通用接口
 /// - system ：will conversion as
+///
 /// 动物 trait 示例
 ///
 /// trait example

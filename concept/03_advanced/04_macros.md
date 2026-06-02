@@ -2,6 +2,10 @@
 
 # Macros（宏系统）
 
+> **📎 交叉引用**
+>
+> 本主题在 knowledge 中有系统化的知识索引：[宏系统](../../knowledge/03_advanced/macros)
+
 > **受众**: [专家]
 > **层级**: L3 高级概念
 > **A/S/P 标记**: **S+P** — Structure + Procedure

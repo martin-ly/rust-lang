@@ -1,5 +1,8 @@
 # 性能优化
 
+> **📎 交叉引用**
+>
+> 本主题在 concept 中有深度的概念分析：[性能优化](../../concept/06_ecosystem/15_performance_optimization.md)
 > **相关概念**: [性能优化](../../concept/06_ecosystem/15_performance_optimization.md)
 > **Bloom 层级**: 理解
 > **📌 简介**: Rust 性能优化涵盖零成本抽象、编译器内联、缓存友好布局、SIMD、内存分配优化和 `unsafe` 性能技巧。Rust 的设计哲学是"零成本抽象"——高级特性不带来运行时开销，但掌握优化技术可以榨取硬件极限性能。
@@ -403,7 +406,11 @@ if likely(normal_condition()) {
 
 ---
 
-> **权威来源**: [The Rust Performance Book](https://nnethercote.github.io/perf-book/), [Rust Reference — Inline attribute](https://doc.rust-lang.org/reference/attributes/codegen.html#the-inline-attribute), [std::simd](https://doc.rust-lang.org/std/simd/index.html), [The rustc Book — Codegen Options](https://doc.rust-lang.org/rustc/codegen-options/index.html)
+> **权威来源**:
+> [The Rust Performance Book](https://nnethercote.github.io/perf-book/),
+> [Rust Reference — Inline attribute](https://doc.rust-lang.org/reference/attributes/codegen.html#the-inline-attribute),
+> [std::simd](https://doc.rust-lang.org/std/simd/index.html),
+> [The rustc Book — Codegen Options](https://doc.rust-lang.org/rustc/codegen-options/index.html)
 >
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rust Performance Book、std::simd） [来源: Authority Source Sprint Batch 8]
 

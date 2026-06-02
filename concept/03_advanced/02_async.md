@@ -2,6 +2,9 @@
 
 # Async/Await（异步编程）
 
+> **📎 交叉引用**
+>
+> 本主题在 knowledge 中有系统化的知识索引：[异步编程](../../knowledge/03_advanced/async)
 > **受众**: [专家]
 > **层次定位**: L3 高级概念 / 异步子域
 > **A/S/P 标记**: **S+P** — Structure + Procedure

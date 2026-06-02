@@ -627,7 +627,7 @@ async fn pipeline() {
 
 > **[来源: futures-rs: StreamExt API 文档]** `buffer_unordered` 是异步编程的核心组合子——它允许在保持背压的同时最大化并发度。与 `tokio::join!` 不同，`buffer_unordered` 按完成顺序产出结果，而非输入顺序。
 
-> **交叉链接**: `Stream` 的异步惰性求值与 [§1.3 形式化定义](#13-形式化定义) 中 Future 的惰性语义一致；`Sink` 的线性状态机与 [../04_formal/03_ownership_formal.md](../04_formal/03_ownership_formal.md) §5.2 的线性类型资源管理形成对偶。
+> **交叉链接**: `Stream` 的异步惰性求值与 1.3 形式化定义 中 Future 的惰性语义一致；`Sink` 的线性状态机与 [../04_formal/03_ownership_formal.md](../04_formal/03_ownership_formal.md) §5.2 的线性类型资源管理形成对偶。
 
 ---
 

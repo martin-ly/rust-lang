@@ -1,10 +1,8 @@
 # 实践项目 13: 简易数据库引擎
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **分级**: [A]
 > **Bloom 层级**: L3 (应用)
-
 > **难度**: ⭐⭐⭐ 专家级
 > **所需知识**: c01-c08
 > **预计时间**: 10-12小时
@@ -16,7 +14,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 13: 简易数据库引擎](#实践项目-13-简易数据库引擎)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [项目目标](#项目目标)
   - [功能需求](#功能需求)
   - [学习要点](#学习要点)
@@ -95,19 +93,12 @@ struct BTreeNode {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
 > **[来源: ACM - Systems Programming Languages]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ---

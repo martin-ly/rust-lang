@@ -15,7 +15,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [嵌入式 Rust 专题指南](#嵌入式-rust-专题指南)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [文档定位](#文档定位)
   - [官方 Embedded 资源入口](#官方-embedded-资源入口)
   - [本项目对应模块](#本项目对应模块)

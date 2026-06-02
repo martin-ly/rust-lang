@@ -17,8 +17,6 @@
   - [📋 目录 {#-目录}](#-目录--目录)
   - [🚀 快速开始 {#-快速开始}](#-快速开始--快速开始)
     - [基本设置](#基本设置)
-  - [📑 目录](#-目录)
-    - [基本函数](#基本函数)
   - [📋 常用 API {#-常用-api}](#-常用-api--常用-api)
     - [JavaScript 互操作](#javascript-互操作)
     - [处理对象](#处理对象)
@@ -52,7 +50,6 @@
     - [array\_windows 在 WASM 图像处理中的应用](#array_windows-在-wasm-图像处理中的应用)
     - [LazyLock 在 WASM 状态管理中的应用](#lazylock-在-wasm-状态管理中的应用)
     - [性能提升总结](#性能提升总结)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -77,70 +74,6 @@ cargo install wasm-pack
 # 创建项目
 wasm-pack new my-wasm-project
 ```
-
-## 📑 目录
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-- WASM 快速参考卡片
-  - [📋 目录 {#-目录}](#目录)
-  - [🚀 快速开始 {#-快速开始}](#快速开始)
-    - [基本设置](#基本设置)
-  - [📑 目录](#目录)
-    - [基本函数](#基本函数)
-  - [📋 常用 API {#-常用-api}](#常用-api)
-    - [JavaScript 互操作](#javascript-互操作)
-    - [处理对象](#处理对象)
-    - [异步函数](#异步函数)
-  - [🔧 编译配置 {#-编译配置}](#编译配置)
-    - [Cargo.toml](#cargotoml)
-    - [编译命令](#编译命令)
-  - [🌐 在浏览器中使用 {#-在浏览器中使用}](#在浏览器中使用)
-  - [⚡ 性能优化 {#-性能优化}](#性能优化)
-    - [减小二进制大小](#减小二进制大小)
-    - [使用 wasm-opt](#使用-wasm-opt)
-  - [🚫 反例速查 {#-反例速查}](#反例速查)
-    - [反例 1: 在 wasm 中使用阻塞 API](#反例-1-在-wasm-中使用阻塞-api)
-    - [反例 2: 忽略 JS 边界开销](#反例-2-忽略-js-边界开销)
-  - [📚 相关文档 {#-相关文档}](#相关文档)
-  - [🧩 相关示例代码 {#-相关示例代码}](#相关示例代码)
-  - [📚 相关资源 {#-相关资源}](#相关资源)
-    - [官方文档](#官方文档)
-    - [项目内部文档](#项目内部文档)
-  - [🎯 使用场景 {#-使用场景}](#使用场景)
-    - [场景 1: 浏览器图像处理器](#场景-1-浏览器图像处理器)
-    - [场景 2: 实时数据可视化](#场景-2-实时数据可视化)
-    - [场景 3: Web Worker 计算密集型任务](#场景-3-web-worker-计算密集型任务)
-  - [📐 形式化方法链接 {#-形式化方法链接}](#形式化方法链接)
-    - [理论基础](#理论基础)
-    - [形式化定理](#形式化定理)
-    - [相关速查卡](#相关速查卡)
-  - [🆕 Rust 1.95+ 特性整合](#rust-195-特性整合)
-    - [核心特性速查](#核心特性速查)
-  - [Rust 1.95+ 在WASM中的深度应用](#rust-195-在wasm中的深度应用)
-    - [array\_windows 在 WASM 图像处理中的应用](#array_windows-在-wasm-图像处理中的应用)
-    - [LazyLock 在 WASM 状态管理中的应用](#lazylock-在-wasm-状态管理中的应用)
-    - [性能提升总结](#性能提升总结)
-  - **状态**: ✅ 深度整合完成
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
-
-### 基本函数
-
-> **[来源: POPL - Programming Languages Research]**
->
-> **[来源: Rust Official Docs]**
-
-```rust,ignore
-use wasm_bindgen::prelude::*;
-
-#[wasm_bindgen]
-pub fn add(a: i32, b: i32) -> i32 {
-    a + b
-}
-```
-
----
 
 ## 📋 常用 API {#-常用-api}
 >
@@ -565,7 +498,6 @@ pub fn process_task(task_json: &str) -> String {
 ## 🆕 Rust 1.95+ 特性整合
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 > **适用版本**: Rust 1.96.0+
 
 ### 核心特性速查
@@ -614,7 +546,6 @@ let gamma = f64::consts::EULER_GAMMA;
 ## Rust 1.95+ 在WASM中的深度应用
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
 > **适用版本**: Rust 1.96.0+ | **实际场景**: WASM开发
 
 ### array_windows 在 WASM 图像处理中的应用
@@ -670,6 +601,7 @@ pub fn get_state() -> String {
 ---
 
 **状态**: ✅ 深度整合完成
+
 ---
 
 > **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
@@ -695,19 +627,12 @@ pub fn get_state() -> String {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming Languages]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference]**
 > **[来源: TRPL - The Rust Programming Language]**

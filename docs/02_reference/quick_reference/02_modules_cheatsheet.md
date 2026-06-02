@@ -1,7 +1,10 @@
 ﻿# 📦 Rust 模块系统速查卡
 
 > **分级**: [A]
-> **快速参考** | [Cargo/包索引](../../../crates/c02_type_system/docs/cargo_package_management/00_INDEX.md) | [Rust 官方模块系统](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) | [代码示例](../../../crates/README.md)
+> **快速参考**
+> | [Cargo/包索引](../../../crates/c02_type_system/docs/cargo_package_management/00_INDEX.md)
+> | [Rust 官方模块系统](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html)
+> | [代码示例](../../../crates/README.md)
 > **创建日期**: 2026-01-27
 > **最后更新**: 2026-05-08
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -77,7 +80,6 @@
     - [形式化理论](#形式化理论)
   - [🆕 Rust 1.95+ 特性整合](#-rust-195-特性整合)
     - [核心特性速查](#核心特性速查)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [权威来源索引](#权威来源索引)
 
 ---
@@ -1137,7 +1139,6 @@ fn main() {
 ## 🆕 Rust 1.95+ 特性整合
 >
 > **[来源: [crates.io](https://crates.io/)]**
-
 > **适用版本**: Rust 1.96.0+
 
 ### 核心特性速查
@@ -1180,6 +1181,7 @@ let gamma = f64::consts::EULER_GAMMA;
 ---
 
 **状态**: ✅ 深度整合完成
+
 ---
 
 > **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
@@ -1196,15 +1198,10 @@ let gamma = f64::consts::EULER_GAMMA;
 ## 权威来源索引
 
 > **[来源: Wikipedia - Modular Programming]**
-
 > **[来源: Wikipedia - Software Component]**
-
 > **[来源: Rust Reference - Modules]**
-
 > **[来源: TRPL Ch. 7 - Packages and Modules]**
-
 > **[来源: ACM - Modular Software Design]**
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 > **[来源: TRPL - The Rust Programming Language]**
@@ -1213,7 +1210,6 @@ let gamma = f64::consts::EULER_GAMMA;
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference]**
 > **[来源: TRPL - The Rust Programming Language]**

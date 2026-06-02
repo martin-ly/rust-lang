@@ -11,7 +11,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 新版本发布追踪 Checklist - 重定向](#rust-新版本发布追踪-checklist---重定向)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [Rust 1.95+ 持续更新更新](#rust-195-持续更新更新)
     - [本文档的Rust 1.95+更新要点](#本文档的rust-195更新要点)
       - [核心特性应用](#核心特性应用)

@@ -1,5 +1,7 @@
 # Rust 借用与引用 (Borrowing and References)
 
+> **📎 交叉引用**
+> 本主题在 concept 中有深度的概念分析：[借用](../../concept/01_foundation/02_borrowing.md)
 > **层次定位**: L1 基础概念 / 借用子域
 > **前置依赖**: [knowledge 所有权](04_ownership.md)
 > **后置延伸**: [knowledge Trait](../02_intermediate/06_traits.md) · [concept L1 借用](../../concept/01_foundation/02_borrowing.md)
@@ -55,7 +57,11 @@
 - **预计学习时间**: 45-60 分钟
 - **前置知识**: 所有权基础
 
-> **权威来源**: [The Rust Programming Language — Ch04](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html), [Rust Reference — References](https://doc.rust-lang.org/reference/types/pointer.html#reference-type), [Rustonomicon — References](https://doc.rust-lang.org/nomicon/references.html), [RustBelt (Jung et al., POPL 2018)](https://plv.mpi-sws.org/rustbelt/)
+> **权威来源**:
+> [The Rust Programming Language — Ch04](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html),
+> [Rust Reference — References](https://doc.rust-lang.org/reference/types/pointer.html#reference-type),
+> [Rustonomicon — References](https://doc.rust-lang.org/nomicon/references.html),
+> [RustBelt (Jung et al., POPL 2018)](https://plv.mpi-sws.org/rustbelt/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（TRPL、Rust Reference、RustBelt、Stacked Borrows / Tree Borrows） [来源: Authority Source Sprint Batch 8]
 
@@ -88,17 +94,16 @@
 ---
 
 ## 🧠 核心概念
->
+
 > **[来源: Rust Official Docs]**
 
 ### 什么是借用
->
+
 > **[来源: Rust Official Docs]**
 
 借用是 Rust 所有权系统的核心特性。当你需要访问某个值但不想获得其所有权时，可以使用**引用**来"借用"它。
 
 > 💡 **借用 vs 所有权**: 所有权转移会改变值的拥有者，而借用只是临时访问，不会转移所有权。
-
 > **[来源: TRPL: Ch4.2]** "References allow you to refer to some value without taking ownership of it." ✅
 > **[来源: Rust Reference: References]** Rust 引用分共享引用 `&T` 和可变引用 `&mut T`，由编译器在借用检查阶段强制执行别名-可变分离规则。 ✅
 

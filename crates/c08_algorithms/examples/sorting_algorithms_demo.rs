@@ -12,6 +12,7 @@
 //! - bubble sort
 //! - 插入排序
 //! - insertion sort
+//!
 //! 运行方式:
 //!
 //! Run way :

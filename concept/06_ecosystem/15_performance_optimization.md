@@ -2,6 +2,10 @@
 
 # 性能优化：Rust 代码的测量与调优
 
+> **📎 交叉引用**
+>
+> 本主题在 knowledge 中有系统化的知识索引：[性能优化](../../knowledge/03_advanced/05_performance_optimization.md)
+
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 评价
 > **A/S/P 标记**: **S+P** — StructureProcedure

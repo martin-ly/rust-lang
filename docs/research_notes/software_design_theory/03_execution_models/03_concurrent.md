@@ -289,7 +289,6 @@ assert_eq!(*data.lock().unwrap(), 10);
 ## 🆕 Rust 1.94 深度整合更新
 >
 > **[来源: [crates.io](https://crates.io/)]**
-
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
@@ -357,13 +356,9 @@ assert_eq!(*data.lock().unwrap(), 10);
 ## 权威来源索引
 
 > **[来源: Wikipedia - Concurrency]**
-
 > **[来源: TRPL Ch. 16 - Fearless Concurrency]**
-
 > **[来源: Rust Reference - std::sync]**
-
 > **[来源: ACM - Concurrent Programming]**
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 > **[来源: TRPL - The Rust Programming Language]**
