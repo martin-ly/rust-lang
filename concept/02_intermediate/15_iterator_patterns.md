@@ -1,5 +1,6 @@
 > **内容分级**: [综述级]
 
+> **本节关键术语**: 迭代器模式 (Iterator Pattern) · 适配器 (Adapter) · 消费者 (Consumer) · 惰性求值 (Lazy Evaluation) · 自定义迭代器 — [完整对照表](../00_meta/terminology_glossary.md)
 # Rust 迭代器模式
 >
 > **📎 交叉引用**

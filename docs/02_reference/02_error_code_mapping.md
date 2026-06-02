@@ -8,7 +8,6 @@
 > **后置延伸**: [docs 性能调优](../05_guides/05_performance_tuning_guide.md) · [concept L3 Unsafe](../../concept/03_advanced/03_unsafe.md)
 > **跨层映射**: docs→concept 诊断映射 | L1-L3 错误→概念
 > **定理链编号**: E0502 ↔ T-010 | E0597 ↔ T-011
-
 > **创建日期**: 2026-02-13
 > **最后更新**: 2026-05-08
 > **Rust 版本**: 1.96.0+ (Edition 2024)

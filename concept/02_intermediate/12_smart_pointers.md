@@ -1,5 +1,6 @@
 > **内容分级**: [综述级]
 
+> **本节关键术语**: 智能指针 (Smart Pointer) · Box · Rc · Arc · RefCell · 自定义智能指针 — [完整对照表](../00_meta/terminology_glossary.md)
 # 智能指针：堆内存管理与共享语义
 
 > **📎 交叉引用**

@@ -1,5 +1,29 @@
 // [来源: Rust Reference / TRPL]
 //! Type system fundamentals: enums, structs, traits, and pattern matching.
+//! # Rust Type System Learning Module
+//!
+//! This crate demonstrates Rust's type system concepts from basic primitives
+//! to advanced variance and composition patterns.
+//!
+//! ## Module Overview
+//!
+//! - `primitive_types`: Scalar and compound type basics
+//! - `type_composition` / `type_decomposition`: Building and breaking down types
+//! - `type_class`: Trait-based polymorphism (type classes)
+//! - `type_variance`: Subtyping relationships in generics
+//! - `type_operation`: Type-level computations and transformations
+//! - `advanced_pattern_matching`: Exhaustive pattern matching techniques
+//! - `r#unsafe`: Safe abstractions over unsafe operations
+//! - `rust_196_features`: Rust 1.96 stable feature demonstrations
+//!
+//! ## Key Concepts Covered
+//!
+//! | Concept | Module | Rust Feature |
+//! |:---|:---|:---|
+//! | Algebraic Data Types | `type_composition` | `enum`, `struct` |
+//! | Parametric Polymorphism | `type_class` | `trait`, `impl` |
+//! | Variance | `type_variance` | `covariant`, `contravariant`, `invariant` |
+//! | Unsafe Abstraction | `r#unsafe` | `unsafe`, `raw pointers` |
 #![allow(clippy::type_complexity)]
 #![feature(never_type)]
 #![feature(derive_coerce_pointee)]

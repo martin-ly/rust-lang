@@ -7,6 +7,7 @@
 > **归档原因**: 与 `10_numerics.md` 内容高度重叠（>85%），且 `10` 版本结构更完整、边界测试覆盖更广。
 > **状态**: 已归档（2026-05-30 重复文件清理）
 
+> **本节关键术语**: 数值运算 (Numeric Operations) · 饱和运算 (Saturating) · 包装运算 (Wrapping) ·  checked 运算 · 类型提升 (Promotion) — [完整对照表](../00_meta/terminology_glossary.md)
 ## 相关概念文件
 
 - [数值类型主文件](./10_numerics.md) — 数值类型与运算完整图景（本文件已归档）

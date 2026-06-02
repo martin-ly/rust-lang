@@ -1,7 +1,6 @@
 # The Rustonomicon 内容对齐
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **分级**: [A]
 > **Bloom 层级**: L2 (理解)
 

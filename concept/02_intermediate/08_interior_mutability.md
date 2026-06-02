@@ -1,5 +1,6 @@
 > **内容分级**: [综述级]
 
+> **本节关键术语**: 内部可变性 (Interior Mutability) · RefCell · Cell · Mutex · RwLock · 运行时借用检查 — [完整对照表](../00_meta/terminology_glossary.md)
 # 内部可变性：编译期规则的运行时逃逸
 
 > **受众**: [进阶]

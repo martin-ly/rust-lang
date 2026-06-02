@@ -1,5 +1,6 @@
 > **内容分级**: [综述级]
 
+> **本节关键术语**: 特征 (Trait) · 实现 (Implement) · 孤儿规则 (Orphan Rule) · 一致性 (Coherence) · 对象安全 (Object Safety) — [完整对照表](../00_meta/terminology_glossary.md)
 # Traits（Trait 系统）
 
 > **📎 交叉引用**

@@ -1,5 +1,29 @@
 // [来源: Rust Standard Library / The Rust Programming Language]
 //! Concurrency primitives: threads, mutexes, channels, and atomic operations.
+//! # Rust Concurrency and Threading Module
+//!
+//! This crate demonstrates safe concurrent programming patterns in Rust,
+//! from basic thread spawning to advanced lock-free data structures.
+//!
+//! ## Module Overview
+//!
+//! - `threads`: Thread spawning and joining basics
+//! - `concurrency`: Shared-state concurrency (Mutex, RwLock, Arc)
+//! - `message_passing`: Channel-based communication (mpsc, oneshot)
+//! - `synchronization`: Barriers, conditions, and memory ordering
+//! - `lock_free_data_structures`: Lock-free queues and stacks
+//! - `thread_pool_patterns`: Worker pool and task scheduling
+//! - `performance_benchmarks`: Concurrent performance measurement
+//! - `rust_196_features`: Rust 1.96 stable concurrency features
+//!
+//! ## Key Concepts Covered
+//!
+//! | Concept | Module | Rust Feature |
+//! |:---|:---|:---|
+//! | Shared Memory | `concurrency` | `Mutex`, `Arc`, `RwLock` |
+//! | Message Passing | `message_passing` | `mpsc`, `crossbeam-channel` |
+//! | Lock-Free | `lock_free_data_structures` | `Atomic*`, `compare_exchange` |
+//! | Memory Ordering | `synchronization` | `Ordering::SeqCst`, `Relaxed` |
 #![allow(clippy::items_after_test_module)]
 #![allow(clippy::absurd_extreme_comparisons)]
 #![allow(clippy::unnecessary_get_then_check)]

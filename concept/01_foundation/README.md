@@ -6,6 +6,7 @@
 > **对应 L4 形式化**: 线性逻辑 ⊗ · 分离逻辑 · 区域类型系统 · 代数类型论
 > **[来源: TRPL Ch. 3–10]** · **[来源: Wikipedia - Ownership (programming)]** · **[来源: Wikipedia - Type System]** · **[来源: Stanford CS242 - Programming Languages]**
 
+> **本节关键术语**: 基础概念 (Foundation) · 所有权 (Ownership) · 借用 (Borrowing) · 生命周期 (Lifetime) · 类型系统 (Type System) — [完整对照表](../00_meta/terminology_glossary.md)
 ---
 
 ## 📑 目录

@@ -24,7 +24,6 @@
     - [路径 B: 系统开发者](#路径-b-系统开发者)
     - [路径 C: 研究者](#路径-c-研究者)
   - [🔗 快速链接](#-快速链接)
-  - [**状态**: ✅ 100% 完成](#状态--100-完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -196,7 +195,7 @@ C01 → C04 → C11 → docs/research_notes/
 ---
 
 ## 🔗 快速链接
->
+
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 资源 | 路径 | 描述 |
@@ -214,6 +213,7 @@ C01 → C04 → C11 → docs/research_notes/
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-05-08
 **状态**: ✅ 100% 完成
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

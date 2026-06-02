@@ -1,6 +1,7 @@
 > **内容分级**: [综述级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 
+> **本节关键术语**: 错误处理 (Error Handling) · Result · Option · 传播运算符 (? ) · 模式匹配错误 (Match on Result) — [完整对照表](../00_meta/terminology_glossary.md)
 # Rust 错误处理基础
 
 > **📎 交叉引用**

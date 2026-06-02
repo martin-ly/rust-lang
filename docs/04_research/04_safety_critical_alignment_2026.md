@@ -13,7 +13,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Safety-Critical Rust 官方路线对齐（2026）](#safety-critical-rust-官方路线对齐2026)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [一、Safety-Critical Rust 生态全景](#一safety-critical-rust-生态全景)
   - [二、官方路线时间线](#二官方路线时间线)
   - [三、FLS (Ferrocene Language Specification) 与项目映射](#三fls-ferrocene-language-specification-与项目映射)

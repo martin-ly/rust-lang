@@ -1,5 +1,6 @@
 > **内容分级**: [综述级]
 
+> **本节关键术语**: 控制流 (Control Flow) · 条件分支 (Conditional) · 循环 (Loop) · 模式匹配 (Pattern Matching) · 守卫条件 (Guard) — [完整对照表](../00_meta/terminology_glossary.md)
 # 控制流：表达式导向的流程控制
 
 > **受众**: [初学者]

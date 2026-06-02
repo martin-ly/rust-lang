@@ -1,5 +1,6 @@
 > **内容分级**: [综述级]
 
+> **本节关键术语**: 闭包 (Closure) · 捕获 (Capture) · Fn · FnMut · FnOnce · 环境 (Environment) — [完整对照表](../00_meta/terminology_glossary.md)
 # 闭包基础：捕获环境与匿名函数
 
 > **📎 交叉引用**

@@ -1,5 +1,6 @@
 > **内容分级**: [综述级]
 
+> **本节关键术语**: 集合 (Collection) · 迭代器 (Iterator) · Vec · HashMap · BTreeMap · 自定义集合 — [完整对照表](../00_meta/terminology_glossary.md)
 # 高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析
 
 > **受众**: [初学者]

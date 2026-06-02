@@ -15,7 +15,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [BorrowSanitizer 预览](#borrowsanitizer-预览)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [概述](#概述)
   - [核心技术](#核心技术)
   - [检测能力](#检测能力)

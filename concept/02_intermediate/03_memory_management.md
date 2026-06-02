@@ -1,5 +1,6 @@
 > **内容分级**: [综述级]
 
+> **本节关键术语**: 内存管理 (Memory Management) · 堆 (Heap) · 栈 (Stack) · Drop · RAII · 内存布局 (Memory Layout) — [完整对照表](../00_meta/terminology_glossary.md)
 # Memory Management（内存管理）
 
 > **受众**: [进阶]

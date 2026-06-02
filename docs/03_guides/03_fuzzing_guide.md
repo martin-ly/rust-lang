@@ -16,7 +16,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [cargo-fuzz 模糊测试入门指南](#cargo-fuzz-模糊测试入门指南)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [1. 什么是模糊测试（Fuzzing）？](#1-什么是模糊测试fuzzing)
     - [为什么 Rust 需要 Fuzzing？](#为什么-rust-需要-fuzzing)
   - [2. 工具链安装](#2-工具链安装)

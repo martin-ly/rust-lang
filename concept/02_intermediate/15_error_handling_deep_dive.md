@@ -1,5 +1,6 @@
 > **内容分级**: [综述级]
 
+> **本节关键术语**: 错误处理深入 (Error Handling Deep Dive) · 错误链 (Error Chain) · 回溯 (Backtrace) · anyhow · 错误转换 — [完整对照表](../00_meta/terminology_glossary.md)
 # 错误处理深入：从 Result 到自定义错误生态
 >
 > **受众**: [进阶]

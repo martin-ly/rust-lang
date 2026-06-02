@@ -6,6 +6,7 @@
 > **对应 L4 形式化**: 类型约束求解 · 参数多态 · 子类型 · 存在类型
 > **[来源: TRPL Ch. 10–15]** · **[来源: Wikipedia - Generic Programming]** · **[来源: Wikipedia - Trait-based Programming]** · **[来源: Microsoft Rust Training - Advanced Topics]**
 
+> **本节关键术语**: 进阶概念 (Intermediate) · 特征 (Trait) · 泛型 (Generics) · 生命周期 (Lifetime) · 智能指针 (Smart Pointer) — [完整对照表](../00_meta/terminology_glossary.md)
 ---
 
 ## 📑 目录

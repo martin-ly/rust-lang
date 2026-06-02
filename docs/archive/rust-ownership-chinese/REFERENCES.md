@@ -3,6 +3,7 @@
 # 参考文献与外部资源
 
 > **分级**: [C]
+>
 ## 目录
 >
 > **[来源: Rust Official Docs]**
@@ -22,7 +23,7 @@
   - [工具与项目](#工具与项目)
     - [Miri](#miri)
     - [Prusti](#prusti)
-    - [Aeneas\*](#aeneas)
+    - [Aeneas\*](#aeneas-1)
     - [Creusot](#creusot)
     - [Kani](#kani)
     - [Flux](#flux)

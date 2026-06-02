@@ -1,5 +1,6 @@
 > **内容分级**: [综述级]
 
+> **本节关键术语**: 宏模式 (Macro Pattern) · 声明宏 (Declarative Macro) · macro_rules! · 卫生宏 (Hygienic Macro) · 重复模式 — [完整对照表](../00_meta/terminology_glossary.md)
 # 宏模式：编译期代码生成的工程实践
 >
 > **📎 交叉引用**
