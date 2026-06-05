@@ -1707,7 +1707,6 @@ impl DecisionEngine {
 ## Rust 1.95+ 持续更新更新
 >
 > **[来源: Rust Official Docs]**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 

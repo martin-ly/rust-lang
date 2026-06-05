@@ -37,7 +37,6 @@
     - [版本兼容性表](#版本兼容性表)
     - [回滚指南](#回滚指南)
   - [参考资源](#参考资源)
-  - [**详细指南**: 2026\_RUST\_ECOSYSTEM\_COMPREHENSIVE\_REVIEW.md](#详细指南-2026_rust_ecosystem_comprehensive_reviewmd)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -463,6 +462,7 @@ git checkout -- .
 - [特性速查表](./02_reference/quick_reference/02_rust_196_features_cheatsheet.md)
 
 **详细指南**: 2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW.md
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -487,19 +487,12 @@ git checkout -- .
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon]**
 
 ---

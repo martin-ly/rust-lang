@@ -1,6 +1,6 @@
 //! Rust 1.92.0 性能基准测试
 //! Rust 1.92.0 Performance benchmark
-use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
+use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
 use std::hint::black_box;
 use std::num::NonZeroUsize;
 

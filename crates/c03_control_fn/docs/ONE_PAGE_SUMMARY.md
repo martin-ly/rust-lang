@@ -12,7 +12,7 @@
 | **条件与循环** | `if`/`else`、`loop`/`while`/`for`；`break`/`continue` 带标签 |
 | **模式匹配** | `match` 穷尽性；`if let`/`while let` 简化 |
 | **Option 与 Result** | `Some`/`None`；`Ok`/`Err`；`?` 错误传播 |
-| **闭包与迭代器** | `|x| x + 1`；`iter()`/`into_iter()`；链式适配器 |
+| **闭包与迭代器** | `\|x\| x + 1`；`iter()`/`into_iter()`；链式适配器 |
 
 ---
 
@@ -50,8 +50,19 @@
 ## 速查与练习
 
 - **速查卡**: [control_flow_functions_cheatsheet](../../../docs/02_reference/quick_reference/control_flow_functions_cheatsheet.md) | [error_handling_cheatsheet](../../../docs/02_reference/quick_reference/error_handling_cheatsheet.md)
-- **RBE 练习**: [Flow Control](https://doc.rust-lang.org/rust-by-example/flow_control.html) · [Option](https://doc.rust-lang.org/rust-by-example/std/option.html) · [Error](https://doc.rust-lang.org/rust-by-example/error.html) · [Iterator](https://doc.rust-lang.org/rust-by-example/trait/iter.html)
-- **Rustlings**: [01_variables](https://github.com/rust-lang/rustlings/tree/main/exercises/01_variables) · [02_functions](https://github.com/rust-lang/rustlings/tree/main/exercises/02_functions) · [03_if](https://github.com/rust-lang/rustlings/tree/main/exercises/03_if) · [12_options](https://github.com/rust-lang/rustlings/tree/main/exercises/12_options) · [13_error_handling](https://github.com/rust-lang/rustlings/tree/main/exercises/13_error_handling) · [18_iterators](https://github.com/rust-lang/rustlings/tree/main/exercises/18_iterators)
+- **RBE 练习**:
+- [Flow Control](https://doc.rust-lang.org/rust-by-example/flow_control.html) ·
+- [Option](https://doc.rust-lang.org/rust-by-example/std/option.html) ·
+- [Error](https://doc.rust-lang.org/rust-by-example/error.html) ·
+- [Iterator](https://doc.rust-lang.org/rust-by-example/trait/iter.html)
+-
+- **Rustlings**:
+- [01_variables](https://github.com/rust-lang/rustlings/tree/main/exercises/01_variables) ·
+- [02_functions](https://github.com/rust-lang/rustlings/tree/main/exercises/02_functions) ·
+- [03_if](https://github.com/rust-lang/rustlings/tree/main/exercises/03_if) ·
+- [12_options](https://github.com/rust-lang/rustlings/tree/main/exercises/12_options) ·
+- [13_error_handling](https://github.com/rust-lang/rustlings/tree/main/exercises/13_error_handling) ·
+- [18_iterators](https://github.com/rust-lang/rustlings/tree/main/exercises/18_iterators)
 
 ---
 

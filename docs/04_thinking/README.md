@@ -139,13 +139,14 @@ fn verify_memory_safety() -> bool {
 #### 相关文档
 
 - Rust 1.94 迁移指南
-- [Rust 1.94 特性速查（已归档）
+- Rust 1.94 特性速查（已归档）
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-05-08 (Rust 1.95+ 持续更新)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
