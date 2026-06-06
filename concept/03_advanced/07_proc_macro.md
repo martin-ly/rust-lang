@@ -20,6 +20,9 @@
 > [quote crate](https://docs.rs/quote/latest/quote/) ·
 > [RFC 1566 — Proc Macro](https://github.com/rust-lang/rfcs/pull/1566)
 
+> **对应 Crate**: [`c11_macro_system_proc`](../../crates/c11_macro_system_proc/)
+> **对应练习**: [`exercises/src/macros/`](../../exercises/src/macros/)
+
 ## 📑 目录
 
 - [过程宏：编译期代码生成的元编程工具](#过程宏编译期代码生成的元编程工具)

@@ -2,7 +2,7 @@
 
 resolver = "3"
 
-    members = [
+members = [
     "crates/c01_ownership_borrow_scope",
     "crates/c02_type_system",
     "crates/c03_control_fn",
@@ -89,6 +89,8 @@ incremental = true
 codegen-units = 256
 # 使用 unwind panic 可以获得更好的调试信息
 panic = "unwind"
+# Rust 1.96: 开发环境使用分割调试信息（减小目标文件体积）
+split-debuginfo = "unpacked"
 
 # 开发环境构建优化 - 构建依赖使用轻量级优化
 [profile.dev.build-override]
@@ -516,7 +518,8 @@ png = "0.18.1"
 # tiff: TIFF图像格式支持
 tiff = "0.11.3"
 # bitflags: 位标志宏 - 2026-02-13: 2.10.0 -> 2.11.0 (cargo update)
-bitflags = "2.12.1"  # 2026-06-02: cargo update 升级
+# 2026-06-06: cargo update 2.12.1 -> 2.13.0
+bitflags = "2.13.0"
 # hashbrown: 高性能HashMap实现
 hashbrown = "0.17.1"  # 2026-05-09: cargo update
 # itertools: 迭代器工具库

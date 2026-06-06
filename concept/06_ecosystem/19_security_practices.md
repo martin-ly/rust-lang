@@ -1,5 +1,4 @@
 > **内容分级**: [专家级]
-
 >
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
@@ -21,9 +20,7 @@
 > [Rust CVEs](https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=rust) ·
 > [ANSSI Rust Guidelines](https://www.ssi.gouv.fr/en/guide/rust-secure-development-guide/) ·
 > [Wikipedia — Defense in Depth](https://en.wikipedia.org/wiki/Defense_in_depth_(computing))
-
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录
@@ -43,7 +40,13 @@
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
+  - [六、供应链安全与 CVE 跟踪](#六供应链安全与-cve-跟踪)
+    - [6.1 Cargo CVE-2026-33055 / CVE-2026-33056（2026-03-26，1.94.1 已修复）](#61-cargo-cve-2026-33055--cve-2026-330562026-03-261941-已修复)
+    - [6.2 Cargo CVE-2026-5222 / CVE-2026-5223（2026-05-25）](#62-cargo-cve-2026-5222--cve-2026-52232026-05-25)
+    - [6.3 crates.io 恶意 crate 与通知政策变更（2026-02-13 起）](#63-cratesio-恶意-crate-与通知政策变更2026-02-13-起)
+    - [6.4 跨生态系统供应链攻击：TrapDoor（2026-05）](#64-跨生态系统供应链攻击trapdoor2026-05)
+    - [6.5 已知传递依赖安全状态（本项目）](#65-已知传递依赖安全状态本项目)
+  - [七、来源与延伸阅读](#七来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：安全实践的编译错误](#十边界测试安全实践的编译错误)
@@ -527,7 +530,139 @@ graph TD
 
 ---
 
-## 六、来源与延伸阅读
+## 六、供应链安全与 CVE 跟踪
+>
+> **[来源: [Rust Security Response Team](https://www.rust-lang.org/policies/security)]** ·
+> **[来源: [RustSec Advisory DB](https://rustsec.org/)]**
+
+### 6.1 Cargo CVE-2026-33055 / CVE-2026-33056（2026-03-26，1.94.1 已修复）
+
+**影响范围**: Cargo tar 提取（第三方 registry）
+
+| CVE | 严重程度 | 攻击向量 | 修复版本 |
+|:---:|:---:|:---|:---:|
+| **CVE-2026-33055** | Medium | Cargo tar crate 提取漏洞 | Rust 1.94.1 |
+| **CVE-2026-33056** | Medium | 同上，相关变种 | Rust 1.94.1 |
+
+**关键说明**:
+
+- crates.io 用户不受影响
+- Rust 1.94.1 将内部 `tar` 依赖更新至 0.4.45 修复此问题
+
+**参考**: [Rust 1.94.1 Release Notes](https://github.com/rust-lang/rust/releases/tag/1.94.1)
+
+### 6.2 Cargo CVE-2026-5222 / CVE-2026-5223（2026-05-25）
+
+**影响范围**: 所有 Rust < 1.96.0 的 Cargo 版本
+
+| CVE | 严重程度 | 攻击向量 | 修复版本 |
+|:---:|:---:|:---|:---:|
+| **CVE-2026-5222** | Low | 第三方 registry URL 规范化错误：攻击者可通过 `.git` 后缀混淆窃取同一域名下其他 registry 的凭据 | Rust 1.96.0 |
+| **CVE-2026-5223** | Medium | 第三方 registry tarball 中的 symlink 可覆盖同 registry 下其他 crate 的缓存 | Rust 1.96.0 |
+
+**关键说明**:
+
+- **crates.io 用户不受影响**：crates.io 已禁止上传含 symlink 的 crate
+- **第三方 registry 用户需升级**：1.96.0 的 Cargo 已拒绝提取 tarball 中的任何 symlink
+- **无法立即升级的用户**：审计 `~/.cargo/registry/cache/` 中的 symlink，联系 registry 管理员禁用 symlink 上传
+
+**参考**:
+
+- [CVE-2026-5222 公告](https://blog.rust-lang.org/2026/05/25/cve-2026-5222/)
+- [CVE-2026-5223 公告](https://blog.rust-lang.org/2026/05/25/cve-2026-5223/)
+
+### 6.3 crates.io 恶意 crate 与通知政策变更（2026-02-13 起）
+
+**政策变更**:
+crates.io 团队于 2026-02-13 宣布[更新恶意 crate 通知政策](https://blog.rust-lang.org/2026/02/13/crates-io-malicious-crate-notification-policy.html)——**不再为每个恶意 crate 发布博客文章**，改为仅发布 RustSec advisory。
+只有实际被利用或存在真实使用证据的恶意 crate 才会同时发布博客文章。
+
+> **建议**: 订阅 [RustSec Advisory RSS](https://rustsec.org/advisories/rss.xml) 以获取实时安全更新。
+
+**近期恶意 crate 案例**:
+
+| 日期 | crate | RUSTSEC | 攻击方式 |
+|:---|:---|:---|:---|
+| 2026-03-03 | `time_calibrator` | RUSTSEC-2026-0030 | 试图上传 `.env` 文件到远程服务器 |
+| 2026-02-26 | `tracings` | RUSTSEC-2026-0027 | typosquat `tracing`，窃取 Polymarket 凭证 |
+| 2026-02-24 | `rpc-check` | RUSTSEC-2026-0018 | typosquat Polymarket 生态，窃取用户凭证 |
+| 2025-12 | `finch_cli_rust`, `finch-rst`, `sha-rst` | RUSTSEC-2025-0150~0152 | 冒充 `finch`/`finch_cli`，窃取凭证 |
+| 2026-02 | `polymarket-clients-sdk`, `polymarket-client-sdks` | RUSTSEC-2026-0010/0011 | 冒充 `polymarket-client-sdk` |
+| 2026-06-03 | `exploration` | RUSTSEC-2026-0155 | 恶意代码 |
+
+**关键洞察**: 2026 年初出现**针对 Polymarket 生态的 typosquat 攻击浪潮**，攻击者通过拼写相似的 crate 名称诱导开发者安装恶意依赖。所有案例均未发现实际使用证据，crate 被快速移除，发布者账户被锁定。
+
+**2026-06 新漏洞速览**（非本项目依赖，生态参考）：
+
+| 日期 | crate | RUSTSEC | 严重程度 | 说明 |
+|:---|:---|:---|:---:|:---|
+| 2026-06-02 | `russh` | RUSTSEC-2026-0154 | **HIGH** | Unbounded 32-bit allocation |
+| 2026-06-02 | `russh-cryptovec` | RUSTSEC-2026-0153 | **HIGH** | Unchecked `CryptoVec` allocation and growth handling |
+| 2026-06-01 | `oneringbuf` | RUSTSEC-2026-0152 | Medium | Use-after-free |
+| 2026-06-03 | `metacall` | RUSTSEC-2026-0156/0157 | Medium | Bad-free / memory corruption via safe APIs |
+| 2026-06-04 | `pqcrypto-classicmceliece` | RUSTSEC-2026-0167 | INFO | unmaintained（上游 PQClean 项目归档） |
+| 2026-06-04 | `pqcrypto-hqc` | RUSTSEC-2026-0168 | INFO | unmaintained（上游 PQClean 项目归档） |
+| 2026-06-04 | `logflux` | RUSTSEC-2026-0171 | — | 恶意代码，已从 crates.io 移除 |
+| 2026-06-04 | `matrix-sdk-ui` | RUSTSEC-2026-0158 | Medium | 不完整的消息编辑验证 |
+| 2026-06-04 | `matrix-sdk-crypto` | RUSTSEC-2026-0159 | — | to-device 消息的 sender-binding 缺失 |
+| 2026-06-05 | `diesel` | RUSTSEC-2026-0172 | INFO | `SqliteConnection::deserialize_readonly_database` 可能的 use-after-free |
+| 2026-06-04 | `surf` | RUSTSEC-2026-0169 | INFO | unmaintained |
+| 2026-06-04 | `tide` | RUSTSEC-2026-0170 | INFO | unmaintained |
+
+> **PQClean 生态归档影响**: 2026-06-04 批量出现 7 个 `pqcrypto-*` crate 被标记 unmaintained（RUSTSEC-2026-0160~0166），上游 PQClean 项目已归档。使用 post-quantum 密码学 Rust 绑定的项目需评估迁移路径。
+
+### 6.4 跨生态系统供应链攻击：TrapDoor（2026-05）
+
+**[ByteIota / Socket.dev, 2026-05-25]** 2026 年 5 月，一个名为 **TrapDoor** 的协同供应链攻击同时命中 **npm、PyPI 和 Crates.io**，共投放 **34 个恶意包、384+ 版本**。这是首次观察到利用**不可见 Unicode 字符污染 AI 配置文件**（`.cursorrules`、`CLAUDE.md`、`AGENTS.md`）的攻击手法。
+
+**Crates.io 相关恶意包**:
+
+| 包名 | 伪装目标 | 攻击方式 |
+|:---|:---|:---|
+| `sui-move-build-helper` | Sui/Move 生态构建工具 | `build.rs` 在 `cargo build` 时自动执行，定位本地密钥库，用硬编码密钥 `cargo-build-helper-2026` XOR 加密后 exfil 到 GitHub Gists |
+| `move-compiler-tools` | Move 语言编译器 | 同上 |
+
+**攻击技术特征**:
+
+1. **AI 配置文件污染**：在 `.cursorrules`、`CLAUDE.md` 中注入零宽 Unicode 字符隐藏的"安全扫描"指令，实际为数据 exfiltration 例程
+2. **上游 PR 投毒**：攻击者向 `langchain-ai/langchain`、`run-llama/llama_index` 等主流 AI 仓库提交 PR，试图将污染的配置文件合并到上游
+3. **跨平台协同**：npm 用 `postinstall` 钩子、PyPI 用 `import` 时远程拉取、Crates.io 用 `build.rs`——每个生态系统使用其原生执行路径
+
+**行业背景**：JFrog 2026 年度报告显示供应链攻击同比增长 **451%**。Socket.dev 对 TrapDoor 的中位检测时间为 5 分 27 秒，但 `cargo install` 通常在检测前已完成。
+
+**防护建议**：
+
+```bash
+# 检测 AI 配置文件中的隐藏 Unicode 字符
+cat -v .cursorrules CLAUDE.md AGENTS.md 2>/dev/null
+
+# 审计 build.rs 的异常网络/文件操作
+cargo deny check advisories
+```
+
+> **来源**: [ByteIota — TrapDoor Supply Chain Attack](https://byteiota.com/trapdoor-supply-chain-attack-npm-pypi-crates/) · [Socket.dev](https://socket.dev/) · [JFrog 2026 Supply Chain Report] · 可信度: ✅
+
+### 6.5 已知传递依赖安全状态（本项目）
+
+| 依赖 | RUSTSEC | 状态 | 影响评估 | 计划 |
+|:---|:---|:---:|:---|:---|
+| `instant` | RUSTSEC-2024-0384 (unmaintained) | 🟡 已知 | 通过 `glommio → futures-lite → fastrand → instant` 传递引入；`glommio` 实验性模块使用 | 跟踪 `glommio`/`futures-lite` 上游升级 |
+| `backoff` | RUSTSEC-2025-0012 (unmaintained) | 🟢 **已修复** | `c06_async` 已改用内部实现，workspace 中无实际依赖 | ✅ 完成 |
+| `sea-orm` | 无 CVE | 🟡 待观察 | 使用 `2.0.0-rc.40` 预发布版，持续跟踪 stable 发布 | 等待上游 2.0.0 stable |
+
+**检查命令**:
+
+```bash
+# 使用 cargo-deny 检查安全公告（推荐，无需额外配置）
+cargo deny check advisories
+
+# 或使用 cargo-audit（需要网络拉取 advisory-db）
+cargo audit
+```
+
+---
+
+## 七、来源与延伸阅读
 >
 
 | 来源 | 可信度 | 说明 |

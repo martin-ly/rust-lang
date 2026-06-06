@@ -13,7 +13,6 @@
 > **定位**: 探讨 Rust 编译器前端从**单线程串行**到**多核并行**的架构演进，分析其对编译时间、增量编译和 IDE 响应性的影响。
 > **前置概念**: [Toolchain](../06_ecosystem/01_toolchain.md) · [Version Tracking](./05_rust_version_tracking.md)
 > **后置概念**: [Evolution](./03_evolution.md)
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -52,6 +51,10 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
+  - [可运行示例：启用并行前端](#可运行示例启用并行前端)
+    - [快速体验](#快速体验)
+    - [实测效果](#实测效果)
+    - [与 Cranelift 的协同](#与-cranelift-的协同)
 
 ---
 
@@ -279,15 +282,19 @@ graph TD
 | rust-analyzer 统一 | ⬜ | 2027+ | 与 rustc 共享并行架构 |
 | 稳定化 | ⬜ | 2028+ | 成为默认行为 |
 
-> **2026 最新动态**: Rust Compiler Team 在 2026-Q1 报告中确认，查询系统并行化（`-Zthreads=N`）已在大型 crate（如 `rustc` 自身）上实现 **1.3-1.5x 编译加速**（4 核），主要瓶颈从线程同步转向 **增量编译缓存失效粒度**。SALSA 3.0 架构（rust-analyzer 使用的查询框架）正在评估向 rustc 迁移的可行性。[来源: [Rust Compiler Team 2026-Q1 Report](https://github.com/rust-lang/compiler-team/)]
-
-> **预测**: 并行前端的稳定化路径参考 Cargo 的并行构建（已稳定）。关键挑战是**保证编译输出的确定性**和**处理边缘情况的正确性**。预期 2027 年可在 nightly 默认启用，2028+ 稳定化。
+> **2026 最新动态**:
+> Rust Compiler Team 在 2026-Q1 报告中确认，查询系统并行化（`-Zthreads=N`）已在大型 crate（如 `rustc` 自身）上实现 **1.3-1.5x 编译加速**（4 核），主要瓶颈从线程同步转向 **增量编译缓存失效粒度**。
+> SALSA 3.0 架构（rust-analyzer 使用的查询框架）正在评估向 rustc 迁移的可行性。
+> [来源: [Rust Compiler Team 2026-Q1 Report](https://github.com/rust-lang/compiler-team/)]
+> **预测**:
+> 并行前端的稳定化路径参考 Cargo 的并行构建（已稳定）。
+> 关键挑战是**保证编译输出的确定性**和**处理边缘情况的正确性**。
+> 预期 2027 年可在 nightly 默认启用，2028+ 稳定化。
 > [来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]
 
 ---
 
 ## 六、来源与延伸阅读
->
 
 | 来源 | 可信度 | 说明 |
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
@@ -326,7 +333,10 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [Rust Compiler Team](https://github.com/rust-lang/compiler-team/), [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)
+> **权威来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/),
+> [Rust Compiler Team](https://github.com/rust-lang/compiler-team/),
+> [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.0+ (Edition 2024)
 
 **文档版本**: 1.1
@@ -337,20 +347,6 @@ fn main() {
 ---
 
 ## 权威来源索引
-
->
->
->
->
->
->
->
-
----
-
----
-
----
 
 > **补充来源**
 
@@ -378,7 +374,14 @@ macro_rules! use_counter {
 }
 ```
 
-> **修正**: Rust 的并行前端（parallel front-end，`-Z threads=N`）将 crate 的解析、宏展开、类型检查并行化。绝大多数 Rust 代码在并行编译下行为一致，但边缘情况可能暴露顺序依赖：宏展开的副作用（如生成全局符号）、过程宏的文件系统访问（读取模板文件）、自定义 `include!` 的路径解析。编译器通过**细粒度锁**和**无状态设计**最小化这些问题，但理论上仍存在非确定性。这与 C++ 的模块（modules）编译（要求严格的编译顺序）或 Go 的编译（天生并行，无宏系统）不同——Rust 的宏系统（尤其是过程宏）增加了并行化的复杂性。调试并行编译问题：`RUSTFLAGS="-Z threads=1"` 回退到单线程，验证问题是否由并行化引起。[来源: [Rust Parallel Compiler Working Group](https://rust-lang.github.io/compiler-team/working-groups/parallel-rustc/)] · [来源: [rustc Developer Guide](https://rustc-dev-guide.rust-lang.org/parallel-rustc.html)]
+> **修正**:
+> Rust 的并行前端（parallel front-end，`-Z threads=N`）将 crate 的解析、宏展开、类型检查并行化。
+> 绝大多数 Rust 代码在并行编译下行为一致，但边缘情况可能暴露顺序依赖：宏展开的副作用（如生成全局符号）、过程宏的文件系统访问（读取模板文件）、自定义 `include!` 的路径解析。
+> 编译器通过**细粒度锁**和**无状态设计**最小化这些问题，但理论上仍存在非确定性。
+> 这与 C++ 的模块（modules）编译（要求严格的编译顺序）或 Go 的编译（天生并行，无宏系统）不同——Rust 的宏系统（尤其是过程宏）增加了并行化的复杂性。
+> 调试并行编译问题：`RUSTFLAGS="-Z threads=1"` 回退到单线程，验证问题是否由并行化引起。
+> [来源: [Rust Parallel Compiler Working Group](https://rust-lang.github.io/compiler-team/working-groups/parallel-rustc/)] ·
+> [来源: [rustc Developer Guide](https://rustc-dev-guide.rust-lang.org/parallel-rustc.html)]
 
 ### 10.2 边界测试：增量编译与宏生成的代码不一致（编译错误）
 
@@ -395,7 +398,15 @@ fn main() {
 }
 ```
 
-> **修正**: 增量编译（incremental compilation）缓存编译单元的中间结果，只重新编译变更的部分。但 `build.rs`（构建脚本）的依赖追踪有限：Cargo 监听 `build.rs` 本身的变更，但不自动监听 `build.rs` 读取的外部文件。若 `build.rs` 解析 `schema.sql` 生成 Rust 代码，`schema.sql` 变更时，Cargo 不会自动重新运行 `build.rs`——除非在 `build.rs` 中显式 `println!("cargo:rerun-if-changed=schema.sql")`。并行前端加剧了此问题：多个编译单元可能同时读取陈旧的生成代码。正确做法：所有外部依赖都通过 `cargo:rerun-if-changed` 声明。这与 Make 的依赖追踪（`Makefile` 显式列出依赖）或 Bazel 的声明式构建（所有输入必须显式声明）理念一致。[来源: [Cargo Build Scripts](https://doc.rust-lang.org/cargo/reference/build-scripts.html)] · [来源: [rustc Developer Guide](https://rustc-dev-guide.rust-lang.org/queries/incremental-compilation.html)]
+> **修正**:
+> 增量编译（incremental compilation）缓存编译单元的中间结果，只重新编译变更的部分。
+> 但 `build.rs`（构建脚本）的依赖追踪有限：Cargo 监听 `build.rs` 本身的变更，但不自动监听 `build.rs` 读取的外部文件。
+> 若 `build.rs` 解析 `schema.sql` 生成 Rust 代码，`schema.sql` 变更时，Cargo 不会自动重新运行 `build.rs`——除非在 `build.rs` 中显式 `println!("cargo:rerun-if-changed=schema.sql")`。
+> 并行前端加剧了此问题：多个编译单元可能同时读取陈旧的生成代码。
+> 正确做法：所有外部依赖都通过 `cargo:rerun-if-changed` 声明。
+> 这与 Make 的依赖追踪（`Makefile` 显式列出依赖）或 Bazel 的声明式构建（所有输入必须显式声明）理念一致。
+> [来源: [Cargo Build Scripts](https://doc.rust-lang.org/cargo/reference/build-scripts.html)] ·
+> [来源: [rustc Developer Guide](https://rustc-dev-guide.rust-lang.org/queries/incremental-compilation.html)]
 
 ### 10.3 边界测试：并行编译的确定性输出（编译错误/链接错误）
 
@@ -411,7 +422,23 @@ fn main() {
 }
 ```
 
-> **修正**: 并行编译要求**确定性**：相同输入应产生相同输出。`build.rs` 生成包含时间戳、随机数、或环境变量的代码时，每次编译输出不同，导致：1) 缓存失效（`sccache`、`ccache`）；2) 增量编译无法复用；3) 分布式编译（`buck2`、`bazel`）不一致。Rust 的并行前端依赖确定性输入生成确定性输出（除调试信息中的路径）。`build.rs` 的最佳实践：1) 使用 `SOURCE_DATE_EPOCH` 环境变量（可复现构建）；2) 通过 `cargo:rerun-if-changed` 精确声明依赖；3) 避免生成非确定性内容。这与 C 的 `__DATE__`/`__TIME__` 宏（同样非确定性）或 Nix 的固定输出 derivation（强制确定性）类似——确定性构建是软件供应链安全的基础（Reproducible Builds 项目）。[来源: [Reproducible Builds](https://reproducible-builds.org/)] · [来源: [Cargo Build Scripts](https://doc.rust-lang.org/cargo/reference/build-scripts.html)]
+> **修正**:
+> 并行编译要求**确定性**：相同输入应产生相同输出。
+> `build.rs` 生成包含时间戳、随机数、或环境变量的代码时，每次编译输出不同，导致：
+>
+> 1) 缓存失效（`sccache`、`ccache`）；
+> 2) 增量编译无法复用；
+> 3) 分布式编译（`buck2`、`bazel`）不一致。
+>
+> Rust 的并行前端依赖确定性输入生成确定性输出（除调试信息中的路径）。
+>
+> `build.rs` 的最佳实践：
+>
+> 1) 使用 `SOURCE_DATE_EPOCH` 环境变量（可复现构建）；
+> 2) 通过 `cargo:rerun-if-changed` 精确声明依赖；
+> 3) 避免生成非确定性内容。这与 C 的 `__DATE__`/`__TIME__` 宏（同样非确定性）或 Nix 的固定输出 derivation（强制确定性）类似——确定性构建是软件供应链安全的基础（Reproducible Builds 项目）。
+> [来源: [Reproducible Builds](https://reproducible-builds.org/)] ·
+> [来源: [Cargo Build Scripts](https://doc.rust-lang.org/cargo/reference/build-scripts.html)]
 
 ### 10.4 边界测试：宏展开的顺序依赖与并行冲突（编译错误）
 
@@ -429,7 +456,21 @@ fn main() {
 }
 ```
 
-> **修正**: 并行前端将 crate 的解析和宏展开分布到多个线程。纯函数式宏（无副作用，输出只依赖输入 token）在并行下是安全的。但副作用宏：1) `include!` 读取文件；2) `include_str!`/`include_bytes!` 读取外部资源；3) 过程宏访问网络或数据库——在并行下可能产生非确定性。`rustc` 通过**细粒度锁**保护共享状态（如文件系统缓存），但外部资源的修改仍可能导致不一致。这与 C 的预处理器（单线程，顺序处理 `#include`）或 Lisp 的宏（通常无副作用）不同——Rust 的并行前端要求宏作者遵循纯函数原则。`cargo` 的 `rerun-if-changed` 机制帮助管理外部依赖，但无法阻止编译期间的外部修改。[来源: [rustc Parallel Front-end](https://rustc-dev-guide.rust-lang.org/parallel-rustc.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-06-macros.html)]
+> **修正**:
+>
+> 并行前端将 crate 的解析和宏展开分布到多个线程。
+> 纯函数式宏（无副作用，输出只依赖输入 token）在并行下是安全的。
+> 但副作用宏：
+>
+> 1) `include!` 读取文件；
+> 2) `include_str!`/`include_bytes!` 读取外部资源；
+> 3) 过程宏访问网络或数据库——在并行下可能产生非确定性。
+>
+> `rustc` 通过**细粒度锁**保护共享状态（如文件系统缓存），但外部资源的修改仍可能导致不一致。
+> 这与 C 的预处理器（单线程，顺序处理 `#include`）或 Lisp 的宏（通常无副作用）不同——Rust 的并行前端要求宏作者遵循纯函数原则。
+> `cargo` 的 `rerun-if-changed` 机制帮助管理外部依赖，但无法阻止编译期间的外部修改。
+> [来源: [rustc Parallel Front-end](https://rustc-dev-guide.rust-lang.org/parallel-rustc.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-06-macros.html)]
 
 ### 10.4 边界测试：并行前端与宏展开的顺序不确定性（编译行为差异）
 
@@ -447,9 +488,27 @@ side_effect_macro!();
 fn main() {}
 ```
 
-> **修正**: Rust 的**并行前端**（parallel frontend，nightly `-Z threads=N`）允许多线程并行解析和宏展开。风险：1) 宏展开的**顺序**可能不确定（虽结果应相同）；2) 副作用宏（生成全局状态）在并行展开时可能冲突；3) 文件系统操作（`include!`）的并发访问。Rust 保证：无论单线程还是多线程前端，**语义等价**（输出相同），但编译时间可能因文件系统竞争而变化。并行前端的收益：大型 crate（如 `rustc` 自身）的编译时间减少 10-30%。挑战：1) 宏展开的确定性；2) 增量编译的并发安全；3) 错误消息的顺序稳定性。这与 C++ 的模块（C++20 modules，类似并行编译挑战）或 Go 的编译器（天然并行 package 编译）不同——Rust 的并行前端是编译器内部优化，不影响语言语义。[来源: [Rust Parallel Frontend](https://blog.rust-lang.org/inside-rust/2023/03/17/parallel-rustc.html)] · [来源: [Rust Compiler Development](https://rustc-dev-guide.rust-lang.org/)]
-> **过渡**: 并行 前端编译预研：Rust 编译器 的多核扩展 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: 并行 前端编译预研：Rust 编译器 的多核扩展 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **修正**:
+>
+> Rust 的**并行前端**（parallel frontend，nightly `-Z threads=N`）允许多线程并行解析和宏展开。
+> 风险：
+>
+> 1) 宏展开的**顺序**可能不确定（虽结果应相同）；
+> 2) 副作用宏（生成全局状态）在并行展开时可能冲突；
+> 3) 文件系统操作（`include!`）的并发访问。
+>
+> Rust 保证：无论单线程还是多线程前端，**语义等价**（输出相同），但编译时间可能因文件系统竞争而变化。
+> 并行前端的收益：大型 crate（如 `rustc` 自身）的编译时间减少 10-30%。
+>
+> 挑战：
+>
+> 1) 宏展开的确定性；
+> 2) 增量编译的并发安全；
+> 3) 错误消息的顺序稳定性。
+>
+> 这与 C++ 的模块（C++20 modules，类似并行编译挑战）或 Go 的编译器（天然并行 package 编译）不同——Rust 的并行前端是编译器内部优化，不影响语言语义。
+> [来源: [Rust Parallel Frontend](https://blog.rust-lang.org/inside-rust/2023/03/17/parallel-rustc.html)] ·
+> [来源: [Rust Compiler Development](https://rustc-dev-guide.rust-lang.org/)]
 > **过渡**: 并行 前端编译预研：Rust 编译器 的多核扩展 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ### 补充定理链
@@ -471,14 +530,13 @@ fn main() {}
 | 并行 前端编译预研：Rust 编译器 的多核扩展 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 并行 前端编译预研：Rust 编译器 的多核扩展 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 并行 前端编译预研：Rust 编译器 的多核扩展 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: 并行 前端编译预研：Rust 编译器 的多核扩展 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界
 
-> **反命题**: "并行 前端编译预研：Rust 编译器 的多核扩展 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
+> **反命题**: "并行 前端编译预研：Rust 编译器 的多核扩展 是万能解决方案，适用于所有场景" —— 错误。
+> 任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
 
 ---
 

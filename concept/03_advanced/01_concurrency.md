@@ -47,6 +47,9 @@
 
 ---
 
+> **对应 Crate**: [`c05_threads`](../../crates/c05_threads/)
+> **对应练习**: [`exercises/src/concurrency/`](../../exercises/src/concurrency/)
+
 ## 📑 目录
 
 - [Concurrency（并发模型）](#concurrency并发模型)

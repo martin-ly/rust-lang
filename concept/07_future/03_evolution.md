@@ -2,13 +2,16 @@
 >
 > **受众**: [专家]
 > **内容分级**: [综述级]
-
 > **层级**: L7 前沿趋势
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价语言演进方向的技术路线
 > **前置概念**: 全部前置层级
-> **主要来源**: [Rust RFCs](https://rust-lang.github.io/rfcs/) · [Rust Blog](https://blog.rust-lang.org/) · [Edition Guide](https://doc.rust-lang.org/edition-guide/) · [Inside Rust](https://blog.rust-lang.org/inside-rust/) · [Wikipedia]
-
+> **主要来源**:
+> [Rust RFCs](https://rust-lang.github.io/rfcs/) ·
+> [Rust Blog](https://blog.rust-lang.org/) ·
+> [Edition Guide](https://doc.rust-lang.org/edition-guide/) ·
+> [Inside Rust](https://blog.rust-lang.org/inside-rust/) ·
+> [Wikipedia]
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -30,13 +33,27 @@
 - v1.5 (2026-05-26): 权威内容对齐 R16：补充 2025H2 Project Goals 最终状态报告（Rust Blog 2026-05-18）；更新 build-std [RFC 3873](https://rust-lang.github.io/rfcs/3873.html)/3874 已合并状态、Cranelift 资金不足未完成确认 [来源: Rust Blog — Project Goals Update: April 2026]
 - v1.6 (2026-05-26): 权威内容对齐 R18：补充 Project-wide LLM Policy [RFC 3936](https://rust-lang.github.io/rfcs/3936.html)（Rust 首个项目级 AI 使用政策） [来源: TWiR 650]
 - v1.7 (2026-05-26): 权威内容对齐 R24：① 更新 build-std [RFC 3874](https://rust-lang.github.io/rfcs/3874.html) FCP 完成待合并；② 补充 [RFC 3962](https://rust-lang.github.io/rfcs/3962.html) Documentation interpolation（FCP 中）；③ 补充 RustWeek 2026 All Hands（Utrecht, 5.18–5.23）关键 RFC 讨论 [来源: Rust Project Goals Update; Rust Internals]
+- v1.8 (2026-06-06): 权威内容对齐：① 修正 cargo-script 状态（非"已稳定"，而是稳定化推进中，Project Goals 2026 Continued，blocker 为 edition policy）；② 新建 `17_ergonomic_ref_counting_preview.md` 跟踪文档（Flagship: Higher-level Rust，Niko Matsakis + Santiago Pastorino 主导）；③ 更新 `13_unsafe_fields_preview.md`（RFC 3458 已接受 2026-02，Clippy #16767 等待 review） [来源: Rust Project Goals 2026 April Update 2026-05-18]
+- v1.9 (2026-06-06): 权威内容对齐 Batch 10：① Rust Foundation Maintainer Fund 正式上线（2026-06-02）；② `rust_1_97_preview.md` 补充 1.97 稳定化候选 API（`float_algebraic` FCP 中、`core::range::RangeFull/RangeTo` FCP 完成、`RandomSource`、`PathBuf::into_string`、`Result::map_or_default`）；③ `19_security_practices.md` 补充 CVE-2026-33055/33056（Cargo tar 提取，1.94.1 已修复） [来源: Rust Blog 2026-06-02; releases.rs 2026-06-06]
+- v1.10 (2026-06-06): 权威内容对齐 Batch 11：① `19_rust_for_linux.md` 补充 Debian 14 Forky MSRV 策略（Debian Stable 是 Rust for Linux 的 MSRV 基准，预计 2027 年夏季发布）；② `rust_1_97_preview.md` 补充 `new_range_remainder`（Tracking Issue #154458）、`core::alloc::Alloc`（PR #157286）、`box_vec_non_null`（PR #157273，PFCP） [来源: Inside Rust Blog 2026-03-27; releases.rs 2026-06-06]
+- v1.11 (2026-06-06): 权威内容对齐 Batch 12：① `19_security_practices.md` 补充 crates.io 恶意 crate 通知政策变更（2026-02-13 起不再为每个恶意 crate 发布博客，仅发 RustSec advisory）及 2026 年恶意 crate 案例（`time_calibrator` RUSTSEC-2026-0030、`tracings` RUSTSEC-2026-0027、`rpc-check` RUSTSEC-2026-0018 等）；② `17_rust_specification_preview.md` 更新 gccrs 2026-03-18 月度报告进展（Rust-for-Linux 25%、测试用例 +347） [来源: Rust Blog 2026-02-13; rust-gcc.github.io 2026-03-18]
+- v1.12 (2026-06-06): 权威内容对齐 Batch 13：`19_security_practices.md` 补充 2026-06 新 RustSec 公告——恶意 crate `exploration`（RUSTSEC-2026-0155）及生态漏洞速览（`russh` RUSTSEC-2026-0154 HIGH、`russh-cryptovec` RUSTSEC-2026-0153 HIGH、`oneringbuf` RUSTSEC-2026-0152 等） [来源: RustSec Advisory DB 2026-06-05]
+- v1.13 (2026-06-06): 权威内容对齐 Batch 14：`19_rust_for_linux.md` 补充不稳定特性依赖边界最新进展——截至 LPC 2025（2025-12），Rust for Linux 仅剩 2 个不稳定特性待稳定化（`arbitrary_self_types` 和 `derive(CoercePointee)`），其他关键特性已稳定 [来源: LPC 2025 Rust for Linux 幻灯片]
+- v1.14 (2026-06-06): 权威内容对齐 Batch 15：① `19_security_practices.md` 补充 TrapDoor 跨生态系统供应链攻击（2026-05-25，含 Crates.io 恶意包 `sui-move-build-helper`、`move-compiler-tools` 及 AI 配置文件污染手法）；② `rust_1_97_preview.md` 补充 Open Enums / Unnamed Enum Variants（RFC 3894，Tracking Issue #156628，2026-04-22 批准为 lang experiment） [来源: ByteIota 2026-05-25; rust-lang/rust#156628]
+- v1.15 (2026-06-08): 权威内容对齐 Batch 16：① `19_security_practices.md` 补充 RustSec 2026-06-04/05 新公告——恶意 crate `logflux`（RUSTSEC-2026-0171）、`diesel` SQLite UAF（RUSTSEC-2026-0172）、`matrix-sdk-ui`/`matrix-sdk-crypto` 漏洞、PQClean 生态批量归档（7 个 `pqcrypto-*` unmaintained）；② `rust_1_97_preview.md` 补充 `VecDeque::retain_back`（PR #151973，FCP 完成） [来源: RustSec Advisory DB 2026-06-05; releases.rs 2026-06-08]
+- v1.16 (2026-06-08): 权威内容对齐 Batch 17：① `05_rust_version_tracking.md` 修复稳定化 PR 编号错误（`Result::map_or_default` #156629 误标为 #156222），补充 `-Zprofile-sample-use`（#156222）和 `c-variadic`（#155942）PFCP 状态；② `06_runtime_comparison_glommio_2025.md` / `02_网络库对比选择.md` 更新 `surf` / `tide` unmaintained 状态标注（RUSTSEC-2026-0169/0170） [来源: releases.rs 2026-06-06; RustSec Advisory DB 2026-06-04]
+- v1.17 (2026-06-08): 内部维护（信息平坦期）：① `04_formal/` L4 纯数学 `[教学类比]` 标注扫查完成（22/22 活跃文件已标注，2 归档文件无需标注）；② L3 概念-代码-练习循环链接补全——16 个活跃高级概念文件新增指向 `crates/` 和 `exercises/src/` 的交叉引用（并发/异步/Unsafe/宏/Pin/类型擦除/零拷贝解析/锁自由等主题）；③ `cargo check --workspace` 验证通过
+- v1.18 (2026-06-08): 内部维护（信息平坦期）：补齐缺失追踪文档——① 新建 `24_cargo_semver_checks_preview.md`（cargo-semver-checks 从社区工具到 Cargo 官方集成跟踪，覆盖 ~245 lint、type-checking lints GSoC 2026、public 依赖标记集成）；② 新建 `25_aarch64_sve_sme_preview.md`（AArch64 SVE/SME 可伸缩向量扩展跟踪，RFC #3838 未接受、Tracking Issue #145052、`sve_zeroinitializer` #157110）
+- v1.19 (2026-06-08): 内部维护（信息平坦期）：嵌入式互动测验试点——新建 `concept/01_foundation/23_quiz_ownership_borrowing.md`，10 道所有权/借用/生命周期互动题，采用 `<details>` 标签实现"自测-展开-核对"闭环，每题链接至对应概念文件、crate 示例和 exercises 练习；已加入 L1 README 索引
+- v1.20 (2026-06-08): 内部维护（信息平坦期）：嵌入式测验扩展——① 新建 `concept/01_foundation/24_quiz_type_system.md`（类型系统 10 题，标量/复合类型、enum、模式匹配、类型转换）；② 新建 `concept/02_intermediate/23_quiz_traits_and_generics.md`（Trait/泛型 10 题，trait bound、关联类型、trait 对象、`impl Trait`）；③ 新建 `concept/01_foundation/25_quiz_error_handling.md`（错误处理 10 题，Result/Option、`?` 运算符、panic、自定义错误）；已全部加入对应层级 README 索引
+- v1.21 (2026-06-08): 内部维护（信息平坦期）：L3 嵌入式测验扩展——① 新建 `concept/03_advanced/21_quiz_concurrency_async.md`（并发/异步 10 题，Send/Sync、Mutex/Arc、channel、Future/Pin、`join!`）；② 新建 `concept/03_advanced/22_quiz_unsafe.md`（Unsafe 10 题，原始指针、MaybeUninit、FFI、`unsafe_op_in_unsafe_fn`、Miri 验证）；③ 新建 `concept/03_advanced/23_quiz_macros.md`（宏系统 10 题，`macro_rules!` 重复模式、卫生性、derive/属性/函数式过程宏）；已全部加入 L3 README 索引
+- v1.22 (2026-06-08): 内部维护（信息平坦期）：跨层级测验扩展——① 新建 `concept/06_ecosystem/57_quiz_toolchain.md`（工具链 10 题，Cargo 依赖解析、Clippy lint、Miri UB 检测、发布流程）；② 新建 `concept/01_foundation/26_quiz_modules_testing.md`（模块/测试 10 题，可见性、集成测试、`should_panic`）；③ 新建 `concept/04_formal/24_quiz_formal_methods.md`（形式化方法 10 题，分离逻辑、RustBelt、验证工具链对比、Tree Borrows）；已全部加入对应层级 README 索引
+- v1.23 (2026-06-08): 内部维护（信息平坦期）：核心概念补全测验——① 新建 `concept/02_intermediate/24_quiz_memory_management.md`（内存管理 10 题，Box/Rc/Arc/RefCell/Cell、Weak、Deref、Drop、内部可变性）；② 新建 `concept/05_comparative/17_quiz_rust_vs_systems.md`（跨语言对比 10 题，Rust vs C/C++/Go 在内存安全、并发、错误处理、零成本抽象、嵌入式场景的对比）；③ 新建 `concept/01_foundation/27_quiz_closures_iterators.md`（闭包/迭代器 10 题，Fn/FnMut/FnOnce、move 闭包、惰性求值、适配器/消费者、fold/find/filter/map 组合）；已全部加入对应层级 README 索引
 
 ---
 
 > **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
-
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
 
 ## 〇、Rust 语言演进认知全景
@@ -70,7 +87,6 @@ mindmap
 
 > **认知功能**: 提供 Rust 语言演进的全景认知框架，将 RFC 流程、火车模型、Edition 机制与各阶段核心主题统一为层级化心智模型。建议作为"地图"使用：首次阅读把握整体节奏，后续按需深入特定 Edition。关键洞察：三个 Edition 的主题递进揭示了 Rust 从语法简化到语义精确的演化逻辑。[来源: 💡 原创分析]
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-
 > **认知路径**: 本 mindmap 将 Rust 演进组织为**机制层**（RFC/火车/Edition）和**内容层**（各 Edition 的核心主题）。读者可按时间轴从中心向外阅读，或按兴趣直接跳转到特定 Edition。2018 的主题是"路径清晰化"，2021 是"精细化所有权"，2024 是"显式化 Unsafe 边界"——三个 Edition 形成从"语法简化"到"语义精确"的递进。
 
 ---
@@ -305,7 +321,10 @@ cargo check -W rust-2024-compatibility
 | **迭代器** | `Box<[T]>` 实现 `IntoIterator<Item = T>` | 盒装切片可按值迭代 | 自动（方法解析隐藏旧行为）|
 | **Cargo** | Rust-version aware resolver | 依赖解析考虑 `rust-version` 字段 | 自动 |
 
-**关键洞察**：Rust 2024 的核心主题是**显式化 Unsafe 边界**与**生命周期精确控制**。`unsafe extern` 块、`unsafe` 属性、`unsafe_op_in_unsafe_fn` 三重变化共同强化了 Rust 的安全契约——"unsafe 的边界必须肉眼可见"。而 RPIT `use<>` 则填补了 `impl Trait` 在生命周期表达上的长期模糊地带，与 [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md) 中的泛型约束理论直接相关。
+**关键洞察**：
+Rust 2024 的核心主题是**显式化 Unsafe 边界**与**生命周期精确控制**。
+`unsafe extern` 块、`unsafe` 属性、`unsafe_op_in_unsafe_fn` 三重变化共同强化了 Rust 的安全契约——"unsafe 的边界必须肉眼可见"。
+而 RPIT `use<>` 则填补了 `impl Trait` 在生命周期表达上的长期模糊地带，与 [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md) 中的泛型约束理论直接相关。
 
 ---
 
@@ -343,7 +362,10 @@ timeline
          : gen 关键字预留
 ```
 
-> **认知功能**: 此 timeline 将四个 Edition 的**数十项变更**浓缩为各自的核心主题。视觉上可以清晰看到演进节奏：2015→2018（3年，模块系统大改）→ 2021（3年，所有权精细化）→ 2024（3年，Unsafe 显式化）。每个 Edition 的变更数量递增，表明语言在保持向后兼容的同时不断清理历史包袱。
+> **认知功能**:
+> 此 timeline 将四个 Edition 的**数十项变更**浓缩为各自的核心主题。
+> 视觉上可以清晰看到演进节奏：2015→2018（3年，模块系统大改）→ 2021（3年，所有权精细化）→ 2024（3年，Unsafe 显式化）。
+> 每个 Edition 的变更数量递增，表明语言在保持向后兼容的同时不断清理历史包袱。
 
 #### 2.3.4 代码示例：同一功能在不同 Edition 中的写法差异
 
@@ -485,7 +507,6 @@ Rust 语言团队已公开表示 Edition 将继续以约 3 年为周期发布。
 ---
 
 ## 三、关键趋势深度分析
->
 
 > **来源**: [Rust RFC: Effects] · [Lang Team Blog] · [类型理论研究]
 
@@ -1079,7 +1100,7 @@ graph TD
 
 **文档版本**: 1.3
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-05-22
+**最后更新**: 2026-06-06
 **状态**: ✅ 权威来源对齐完成 (Batch 9)
 
 ---
@@ -1209,8 +1230,8 @@ fn fixed() {
 | 旗舰方向 | 关键结果 | 状态 |
 |:---|:---|:---:|
 | **Beyond the `&`** | Pin 人机工程、字段投影、Reborrow Traits 继续推进；lang team 对 Field Representing Types 实验反应积极 | 🟢 继续 |
-| **灵活编译** | Cranelift backend **因资金不足未完成**；build-std [RFC 3873](https://rust-lang.github.io/rfcs/3873.html)/3874 已合并；cargo-script 已在 1.85+ 稳定 | 🟡 部分完成 |
-| **高阶 Rust** | Ergonomic ref-counting RFC 决策中；cargo-script 已稳定 | 🟢 继续 |
+| **灵活编译** | Cranelift backend **因资金不足未完成**；build-std [RFC 3873](https://rust-lang.github.io/rfcs/3873.html)/3874 已合并；cargo-script 稳定化推进中（FCP 已结束，blocker 为 edition policy） | 🟡 部分完成 |
+| **高阶 Rust** | Ergonomic ref-counting RFC 决策中；cargo-script 稳定化推进中（Project Goals 2026 Continued） | 🟢 继续 |
 | **释放沉睡 Trait** | Polonius 继续推进 nightly 评估；Next-gen Trait Solver 逐步替换旧 solver | 🟢 继续 |
 
 > **[来源: [Rust Blog — Project Goals Update: April 2026](https://blog.rust-lang.org/2026/05/18/project-goals-2026-04.html)]** 2025H2 是 Rust Project Goals 机制的第一个完整半年周期。41 个目标中，旗舰目标集中在借用系统改进、编译速度、高阶抽象和类型系统解放四个方向。Cranelift backend 的未完成凸显了大型基础设施项目对持续资金支持的依赖——Trifecta Tech Foundation 的资金不足直接影响了生产就绪目标的达成。[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]
@@ -1249,7 +1270,7 @@ fn fixed() {
 | 子目标 | 状态 | 形式模型意义 |
 |:---|:---|:---|
 | **Ergonomic Ref-counting** | RFC 决策中 | 自动识别"廉价克隆"类型（如 `Arc<T>`），允许闭包自动克隆而非移动；本质是**所有权语义的效果推断** |
-| **cargo-script stable** | 1.85+ 已稳定 | 单文件 Rust 脚本（`cargo +nightly -Zscript` 的前身），降低原型开发门槛 |
+| **cargo-script stable** | 🔄 稳定化推进中（FCP 已结束，blocker 为 edition policy） | 单文件 Rust 脚本（nightly `-Zscript` 已可用），降低原型开发门槛；Project Goals 2026 Continued |
 
 > **关键洞察**: Ergonomic ref-counting 是 Rust 向"更高表达力"演进的关键一步。如果编译器能自动推断"这个类型应该克隆而非移动"，则 Rust 的类型系统实际上在进行**轻量级效果推断**——这是 Effects 系统（§6.4）的简化预览。[来源: [Rust Project Goals 2026 — Higher-level Rust](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)]
 
@@ -1279,7 +1300,7 @@ fn fixed() {
 | **Project-wide LLM Policy** ([RFC 3936](https://rust-lang.github.io/rfcs/3936.html)) | 社区治理 | 定义 Rust Project 空间内 LLM/AI 生成贡献的边界，防止 "slop" 污染；首个项目级 AI 使用政策，影响 issue/PR/rfc 的审核标准和知识产权归属 |
 | **Documentation Interpolation** ([RFC 3962](https://rust-lang.github.io/rfcs/3962.html)) | 文档工具 | Rustdoc 文档插值 RFC 进入 Final Comment Period；允许在文档字符串中嵌入动态内容（如版本号、特性状态），减少文档与代码的同步维护成本 |
 | **Cargo Min Publish Age** ([RFC 3923](https://rust-lang.github.io/rfcs/3923.html)) | Cargo 生态 | **已批准**（2026-05-20）：为 Cargo 引入最小发布年龄机制，防止恶意包快速发布和撤销，增强供应链安全 |
-| **Rust Foundation Maintainer Fund** ([RFC 3931](https://rust-lang.github.io/rfcs/3931.html)) | 社区治理 | **已批准**（2026-05-13）：基金会维护者基金的新资金机制，为 Rust 核心维护者提供可持续的资助渠道 |
+| **Rust Foundation Maintainer Fund** ([RFC 3931](https://rust-lang.github.io/rfcs/3931.html)) | 社区治理 | **正式启动**（2026-06-02）：基金会维护者基金的新资金机制上线，为 Rust 核心维护者提供可持续的资助渠道 [来源: [Rust Blog 2026-06-02](https://blog.rust-lang.org/2026/06/02/rust-foundation-maintainers-fund.html)] |
 | **Inheriting Default-Features** ([RFC 3945](https://rust-lang.github.io/rfcs/3945.html)) | Cargo 生态 | **已批准**（2026-05-13）：允许 Cargo 依赖继承默认特性，简化特性配置和依赖管理 |
 
 > **[来源: [RFC 3936 — Project-wide LLM Policy](https://github.com/rust-lang/rfcs/pull/3936)]** 随着 LLM 生成内容在开源社区激增，Rust Project 正在制定首个项目级 AI 使用政策。核心议题包括：1) AI 生成的代码/文本在 RFC/PR/issue 中的披露义务；2) 训练数据是否包含 Rust 项目内容的知识产权边界；3) "slop"（低质量 AI 生成内容）对技术讨论的稀释效应。这与 Rust 社区此前 State of Rust Survey 2025 发现的"LLM 学习路径迁移"趋势（§12.1）形成呼应——技术政策正在追赶技术现实。[来源: [This Week in Rust 650](https://this-week-in-rust.org/blog/2026/05/06/this-week-in-rust-650/)] · 可信度: 🟡（RFC 审议中）
@@ -1321,7 +1342,7 @@ fn fixed() {
 **六大挑战与社区响应**：
 
 | 挑战 | 现状 | 2026 进展 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | **工具链认证** | 需要编译器资质证明 | **Ferrocene Language Specification (FLS)** 已从行业努力转变为 Rust Project 官方维护；Ferrocene 编译器获 ASIL B / SIL 2 认证；**Ferrocene 25.05.0** 新增两个合格目标：`thumbv7em-none-eabi` / `thumbv7em-none-eabihf`（Armv7E-M 裸机软浮点/硬浮点），首个通过 ISO 26262 ASIL D、IEC 61508 SIL 3、IEC 62304 Class C 认证的 Rust 工具链 |
 | **MC/DC 覆盖率** | rustc 不支持修改条件/判定覆盖 | Safety-Critical Rust Consortium 正在推动 2026 Project Goal，与 Rust Project 协作实现 |
 | **MSRV 依赖漂移** | 固定工具链与最新 crate 的冲突 | 社区探索 LTS 发布方案 + 生态范围的 MSRV 约定 |
@@ -1329,9 +1350,20 @@ fn fixed() {
 | **FFI 边界安全** | C/C++ 互操作是安全故事的关键部分 | Rust for Linux 目标中包含 `register_tool`、`-Zdirect-access-external-data` 等编译器特性 |
 | **目标平台支持** | QNX 等 RTOS 支持有限（如 QNX 8.0 仅 `no_std`） | 目标就绪检查清单（readiness checklist）正在由 Safety-Critical Rust Consortium 牵头制定 |
 
-> **来源**: [Rust Blog — What does it take to ship Rust in safety-critical?](https://blog.rust-lang.org/2026/01/14/what-does-it-take-to-ship-rust-in-safety-critical.html) · [Ferrocene](https://ferrocene.dev/) · [Safety-Critical Rust Consortium](https://rustfoundation.org/) · 可信度: ✅
+> **来源**:
+> [Rust Blog — What does it take to ship Rust in safety-critical?](https://blog.rust-lang.org/2026/01/14/what-does-it-take-to-ship-rust-in-safety-critical.html) ·
+> [Ferrocene](https://ferrocene.dev/) ·
+> [Safety-Critical Rust Consortium](https://rustfoundation.org/) · 可信度: ✅
 
-> **权威来源**: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) · [Rust Blog — Project Goals Update 2026-04](https://blog.rust-lang.org/2026/05/18/2026/05/18/project-goals-2026-04.html) · [Polonius Repository](https://github.com/rust-lang/polonius) · [Cranelift Documentation](https://cranelift.dev/) · [Rust Internals Forum](https://internals.rust-lang.org/) · [Rust Blog — Safety-Critical Rust 2026-01-14](https://blog.rust-lang.org/2026/01/14/what-does-it-take-to-ship-rust-in-safety-critical.html)
+> **权威来源**: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) ·
+> [Rust Blog — Project Goals Update 2026-04](https://blog.rust-lang.org/2026/05/18/2026/05/18/project-goals-2026-04.html) ·
+> [Polonius Repository](https://github.com/rust-lang/polonius) ·
+> [Cranelift Documentation](https://cranelift.dev/) ·
+> [Rust Internals Forum](https://internals.rust-lang.org/) ·
+> [Rust Blog — Safety-Critical Rust 2026-01-14](https://blog.rust-lang.org/2026/01/14/what-does-it-take-to-ship-rust-in-safety-critical.html)
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)

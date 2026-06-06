@@ -18,7 +18,6 @@ quote = { workspace = true }
 syn = { workspace = true }
 c11_macro_system_proc = { path = "../c11_macro_system_proc" }
 
-
 [dev-dependencies]
 criterion = { workspace = true }
 

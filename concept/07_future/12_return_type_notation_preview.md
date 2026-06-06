@@ -6,26 +6,25 @@
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]
-
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析返回类型标注预览特性
 > **定位**: 探讨 Rust 1.95+ 中 **Return Type Notation (RTN)** —— `use<..>` 精确捕获语法，分析其对异步 Trait、生命周期推断和 API 稳定性的影响。
 > **前置概念**: [Lifetimes](../01_foundation/03_lifetimes.md) · [Async](../03_advanced/02_async.md) · [Traits](../02_intermediate/01_traits.md)
 > **后置概念**: [Version Tracking](./05_rust_version_tracking.md)
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
 ---
 
-> **来源**: [RFC 2289 — Associated Type Bounds](https://github.com/rust-lang/rfcs/pull/2289) · [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html) · [Async Working Group](https://rust-lang.github.io/async-fundamentals-initiative/) · [Tracking Issue #109417](https://github.com/rust-lang/rust/issues/109417)
-
+> **来源**:
+> [RFC 2289 — Associated Type Bounds](https://github.com/rust-lang/rfcs/pull/2289) ·
+> [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html) ·
+> [Async Working Group](https://rust-lang.github.io/async-fundamentals-initiative/) ·
+> [Tracking Issue #109417](https://github.com/rust-lang/rust/issues/109417)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
-
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
 
 ## 📑 目录
->
->
 
 - [Return Type Notation 预研：精确捕获的显式控制](#return-type-notation-预研精确捕获的显式控制)
   - [📑 目录](#-目录)
@@ -58,11 +57,8 @@
 ---
 
 ## 一、核心概念
->
->
 
 ### 1.1 问题：隐式捕获的生命周期泄漏
->
 
 在 Rust 中，异步函数和返回 `impl Trait` 的函数**隐式捕获**所有输入生命周期：
 
@@ -377,7 +373,18 @@ where
 }
 ```
 
-> **修正**: Return Type Notation（RTN，[RFC 3654](https://rust-lang.github.io/rfcs/3654.html)）允许在 trait bound 中约束关联函数的返回类型：`P::foo(..): Send` 表示 `P` 实现的 `foo` 方法的返回类型实现 `Send`。但 RTN 当前不支持带生命周期参数的函数签名——`P::parse(&'a self, &'a str)` 的生命周期参数使 RTN 语法解析复杂化。生命周期在 RTN 中的处理方式仍在设计：是隐式泛化（对任意生命周期约束），还是要求显式指定（`P::parse<'a>(..): Send`）？这与 `async fn` 的 `-> impl Future<Output = T> + Send` 问题相同——异步方法的返回类型（future）是否 `Send` 取决于捕获的生命周期。RTN 的目标是为这一问题提供简洁、通用的语法。[来源: [Rust RFC 3654](https://rust-lang.github.io/rfcs/3654-return-type-notation.html)] · [来源: [Rust Async Working Group](https://rust-lang.github.io/async-fundamentals-initiative/)]
+> **修正**:
+>
+> Return Type Notation（RTN，[RFC 3654](https://rust-lang.github.io/rfcs/3654.html)）允许在 trait bound 中约束关联函数的返回类型：`P::foo(..): Send` 表示 `P` 实现的 `foo` 方法的返回类型实现 `Send`。
+> 但 RTN 当前不支持带生命周期参数的函数签名——`P::parse(&'a self, &'a str)` 的生命周期参数使 RTN 语法解析复杂化。
+> 生命周期在 RTN 中的处理方式仍在设计：
+>
+> 是隐式泛化（对任意生命周期约束），还是要求显式指定（`P::parse<'a>(..): Send`）？
+> 这与 `async fn` 的 `-> impl Future<Output = T> + Send` 问题相同——异步方法的返回类型（future）是否 `Send` 取决于捕获的生命周期。
+> RTN 的目标是为这一问题提供简洁、通用的语法。
+>
+> [来源: [Rust RFC 3654](https://rust-lang.github.io/rfcs/3654-return-type-notation.html)] ·
+> [来源: [Rust Async Working Group](https://rust-lang.github.io/async-fundamentals-initiative/)]
 
 ### 10.2 边界测试：RTN 与泛型返回类型的边界（编译错误）
 
@@ -395,7 +402,22 @@ where
 }
 ```
 
-> **修正**: RTN 的另一个边界是**泛型方法**（generic methods）：`Factory::create<T>()` 的返回类型依赖于 `T`，RTN 语法 `F::create(..): Send` 未明确指定 `T`，导致歧义。可能的解决方案：1) `F::create::<String>(..): Send` 显式实例化；2) `for<T: Default> F::create<T>(..): Send` 全称量化；3) 仅支持非泛型方法的 RTN（保守方案）。设计挑战：Rust 的 trait system 已有大量复杂度（关联类型、泛型、生命周期、where bound），RTN 必须与现有机制无缝集成。这与 Haskell 的 `forall` 或 C++ 的 `decltype(auto)` 类似——类型系统的表达能力扩展需要谨慎的语法设计。[来源: [Rust RFC 3654](https://rust-lang.github.io/rfcs/3654-return-type-notation.html)] · [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]
+> **修正**:
+>
+> RTN 的另一个边界是**泛型方法**（generic methods）：
+>
+> `Factory::create<T>()` 的返回类型依赖于 `T`，RTN 语法 `F::create(..): Send` 未明确指定 `T`，导致歧义。
+>
+> 可能的解决方案：
+>
+> 1) `F::create::<String>(..): Send` 显式实例化；
+> 2) `for<T: Default> F::create<T>(..): Send` 全称量化；
+> 3) 仅支持非泛型方法的 RTN（保守方案）。
+>
+> 设计挑战：Rust 的 trait system 已有大量复杂度（关联类型、泛型、生命周期、where bound），RTN 必须与现有机制无缝集成。
+> 这与 Haskell 的 `forall` 或 C++ 的 `decltype(auto)` 类似——类型系统的表达能力扩展需要谨慎的语法设计。
+> [来源: [Rust RFC 3654](https://rust-lang.github.io/rfcs/3654-return-type-notation.html)] ·
+> [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]
 
 ### 10.3 边界测试：RTN 与关联类型的返回值约束（编译错误）
 
@@ -413,7 +435,16 @@ where
 }
 ```
 
-> **修正**: RTN（Return Type Notation）当前设计主要针对**trait 方法**的返回类型约束，但对**关联函数**（无 `self`）和**关联类型构造**的支持仍在讨论。`Factory::create` 是 trait 方法，但 `F::create(..): Send` 的语法在 `F` 是具体类型时可能歧义（`F` 可能有多重实现）。RTN 的设计挑战：1) 语法简洁性（`F::foo(..): Send` vs `for<'a> F::foo<'a>(..): Send`）；2) 与现有 where bound 的集成；3) 编译器实现的复杂性（需在 trait resolution 后检查返回类型）。这与 C++ 的 `decltype(auto)`（返回类型推断，类似挑战）或 Swift 的 `some Collection`（不透明返回类型，不直接约束）类似——RTN 是 Rust 类型系统的精细化扩展，目标是解决 async fn 的 `Send` 推断问题。[来源: [Rust RFC 3654](https://rust-lang.github.io/rfcs/3654-return-type-notation.html)] · [来源: [Rust Async Working Group](https://rust-lang.github.io/async-fundamentals-initiative/)]
+> **修正**: RTN（Return Type Notation）当前设计主要针对**trait 方法**的返回类型约束，但对**关联函数**（无 `self`）和**关联类型构造**的支持仍在讨论。`Factory::create` 是 trait 方法，但 `F::create(..): Send` 的语法在 `F` 是具体类型时可能歧义（`F` 可能有多重实现）。
+> RTN 的设计挑战：
+>
+> 1) 语法简洁性（`F::foo(..): Send` vs `for<'a> F::foo<'a>(..): Send`）；
+> 2) 与现有 where bound 的集成；
+> 3) 编译器实现的复杂性（需在 trait resolution 后检查返回类型）。
+>
+> 这与 C++ 的 `decltype(auto)`（返回类型推断，类似挑战）或 Swift 的 `some Collection`（不透明返回类型，不直接约束）类似——RTN 是 Rust 类型系统的精细化扩展，目标是解决 async fn 的 `Send` 推断问题。
+> [来源: [Rust RFC 3654](https://rust-lang.github.io/rfcs/3654-return-type-notation.html)] ·
+> [来源: [Rust Async Working Group](https://rust-lang.github.io/async-fundamentals-initiative/)]
 
 ### 10.4 边界测试：RTN 与默认方法实现的交互（编译错误）
 
@@ -435,15 +466,24 @@ impl Processor for MyProcessor {
 }
 ```
 
-> **修正**: `impl Trait` 在 trait 方法返回类型中的使用（RPITIT，Return Position Impl Trait In Traits）与 RTN 交互复杂：默认实现返回 `impl Send`，要求所有重写也返回 `Send` 类型。但编译器如何验证？1) 在 trait 定义处检查默认实现；2) 在每个 `impl` 处检查重写；3) 通过 RTN `Processor::process(..): Send` 在调用点验证。当前 Rust 1.75+ 支持 RPITIT，但 RTN 仍处于实验阶段。设计决策：返回类型约束应属于 trait 契约（所有实现必须满足）还是调用者约束（特定调用需要）？RTN 倾向于后者，但前者也有需求（如 `Iterator::next` 返回 `Option<Self::Item>`，`Item` 在 trait 定义时约束）。这与 Java 的泛型返回类型（编译期擦除，无此问题）或 C++ 的 `auto` 返回（推断具体类型，无约束）不同——Rust 的 `impl Trait` 是存在类型 + 约束的组合。[来源: [Rust RFC 3654](https://rust-lang.github.io/rfcs/3654-return-type-notation.html)] · [来源: [Rust RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bound.html)]
-> **过渡**: Return Type Notation 预研：精确捕获的显式控制 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Return Type Notation 预研：精确捕获的显式控制 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **修正**:
+> `impl Trait` 在 trait 方法返回类型中的使用（RPITIT，Return Position Impl Trait In Traits）与 RTN 交互复杂：默认实现返回 `impl Send`，要求所有重写也返回 `Send` 类型。
+> 但编译器如何验证？
+>
+> 1) 在 trait 定义处检查默认实现；
+> 2) 在每个 `impl` 处检查重写；
+> 3) 通过 RTN `Processor::process(..): Send` 在调用点验证。
+>
+> 当前 Rust 1.75+ 支持 RPITIT，但 RTN 仍处于实验阶段。
+> 设计决策：返回类型约束应属于 trait 契约（所有实现必须满足）还是调用者约束（特定调用需要）？
+> RTN 倾向于后者，但前者也有需求（如 `Iterator::next` 返回 `Option<Self::Item>`，`Item` 在 trait 定义时约束）。
+> 这与 Java 的泛型返回类型（编译期擦除，无此问题）或 C++ 的 `auto` 返回（推断具体类型，无约束）不同——Rust 的 `impl Trait` 是存在类型 + 约束的组合。
+> [来源: [Rust RFC 3654](https://rust-lang.github.io/rfcs/3654-return-type-notation.html)] ·
+> [来源: [Rust RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bound.html)]
 > **过渡**: Return Type Notation 预研：精确捕获的显式控制 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ### 补充定理链
 
-- **定理**: Return Type Notation 预研：精确捕获的显式控制 定义 ⟹ 类型安全保证
-- **定理**: Return Type Notation 预研：精确捕获的显式控制 定义 ⟹ 类型安全保证
 - **定理**: Return Type Notation 预研：精确捕获的显式控制 定义 ⟹ 类型安全保证
 
 ## 认知路径
@@ -453,15 +493,13 @@ impl Processor for MyProcessor {
 ### 核心推理链
 
 | 定理 | 前提 | 结论 | 置信度 |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | Return Type Notation 预研：精确捕获的显式控制 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Return Type Notation 预研：精确捕获的显式控制 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Return Type Notation 预研：精确捕获的显式控制 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 Return Type Notation 预研：精确捕获的显式控制 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 Return Type Notation 预研：精确捕获的显式控制 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: Return Type Notation 预研：精确捕获的显式控制 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

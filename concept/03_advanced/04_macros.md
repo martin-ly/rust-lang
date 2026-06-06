@@ -36,6 +36,9 @@
 
 <!-- 层级一致性: L3 理论根基 → L2 概念对比 → L1 工程实践 -->
 
+> **对应 Crate**: [`c11_macro_system`](../../crates/c11_macro_system/)
+> **对应练习**: [`exercises/src/macros/`](../../exercises/src/macros/)
+
 ## 一、权威定义（Definition）
 
 ### 1.1 Wikipedia 权威定义

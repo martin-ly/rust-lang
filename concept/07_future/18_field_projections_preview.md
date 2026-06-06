@@ -6,17 +6,14 @@
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]
-
 > **Bloom 层级**: L4 (分析)
 > **A/S/P 标记**: **S** — Structure
 > **定位**: 探讨 Rust 中 field projections 的提案——允许安全地从复合类型中"投影"出对字段的引用，而不暴露内部结构。分析其对内核编程、自引用结构和内存安全保证的影响。
 > **前置概念**: [Pin](../03_advanced/06_pin_unpin.md) · [Lifetime](../01_foundation/03_lifetimes.md) · [Unsafe Rust](../03_advanced/03_unsafe.md)
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
 > **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
-
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
 
 ## 📑 目录
@@ -37,6 +34,8 @@
     - [4.1 与 `offset_of!` 的关系](#41-与-offset_of-的关系)
     - [4.2 设计挑战](#42-设计挑战)
   - [五、演进路线](#五演进路线)
+    - [5.1 2026 年官方三步计划（Rust Project Goals 2026 — Beyond the `&`）](#51-2026-年官方三步计划rust-project-goals-2026--beyond-the-)
+    - [5.2 长期时间轴](#52-长期时间轴)
     - [相关已稳定特性](#相关已稳定特性)
   - [参考](#参考)
     - [补充定理链](#补充定理链)
@@ -247,10 +246,23 @@ let tx_offset = offset_of!(UartRegs, tx); // 编译期常量
 
 ## 五、演进路线
 
+### 5.1 2026 年官方三步计划（Rust Project Goals 2026 — Beyond the `&`）
+
+| 阶段 | 状态 | 说明 |
+|------|------|------|
+| **Step 1: `a-mir-formality`** | 进行中 | 为 borrow checker 变更建立形式化模型，确保正确性；同时编写人类可读的说明文档 |
+| **Step 2: Implementation** | 进行中 | 继续改进 FRTs（Field Representing Types）；从库添加和低级宏开始探索 potential desugarings；待形式化模型成熟后移植到编译器 |
+| **Step 3: Experimentation** | 计划中 | 在 Linux 内核（Benno Lossin）、crubit（Tyler Mandry）和标准库中 stress-test |
+
+> **关键依赖**: Step 1 被 Niko 正在开发的基于 expression 的新语法阻塞。
+> **Rust for Linux 现状**: `dma_read!` / `dma_write!` 宏已切换使用 projection 机制（纯宏实现，无语言特性），修复了一个 soundness issue。
+
+### 5.2 长期时间轴
+
 | 阶段 | 状态 | 预计 |
 |------|------|------|
 | RFC 讨论 | 早期 | 2026-2027 |
-| Nightly 原型 | 无 | — |
+| Nightly 原型 | 依赖形式化模型 | 2027 |
 | 稳定化 | 远未开始 | 2028+ |
 
 ### 相关已稳定特性
@@ -294,9 +306,7 @@ let tx_offset = offset_of!(UartRegs, tx); // 编译期常量
 | Field Projections 预览：安全的字段级投影 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 Field Projections 预览：安全的字段级投影 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 Field Projections 预览：安全的字段级投影 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: Field Projections 预览：安全的字段级投影 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

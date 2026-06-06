@@ -1,4 +1,5 @@
 # RPITIT Preview
+
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)
@@ -6,18 +7,16 @@
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]
-
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: F×App — 应用 RPITIT 于 trait 设计
 > **前置依赖**: [Trait](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
 > **后置延伸**: [Type Alias Impl Trait](./16_type_alias_impl_trait_preview.md)
-
 > **来源**: [Rust Reference — Impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html) · [RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html) · [Rust Blog — AFIT](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html)
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-### 10.4 边界测试：RPITIT（Return Position Impl Trait In Traits）的实现一致性（编译错误）
+
+## 10.4 边界测试：RPITIT（Return Position Impl Trait In Traits）的实现一致性（编译错误）
 
 ```rust,ignore
 trait Factory {

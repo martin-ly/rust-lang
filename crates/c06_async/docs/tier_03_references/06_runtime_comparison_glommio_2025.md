@@ -360,8 +360,9 @@
 ## 6. 生态系统对比
 
 | 库/框架         | Glommio   | Tokio             | Smol           | async-std [已归档]          |
-| :--- | :--- | :--- | :--- | :--- || **HTTP 客户端** | ⚠️ 有限   | ✅ reqwest, hyper | ✅ surf, isahc | ✅ surf            |
-| **HTTP 服务器** | ⚠️ 自定义 | ✅ axum, warp     | ✅ tide        | ✅ tide            |
+| :--- | :--- | :--- | :--- | :--- |
+| **HTTP 客户端** | ⚠️ 有限   | ✅ reqwest, hyper | ⚠️ surf [unmaintained], isahc | ⚠️ surf [unmaintained] |
+| **HTTP 服务器** | ⚠️ 自定义 | ✅ axum, warp     | ⚠️ tide [unmaintained] | ⚠️ tide [unmaintained] |
 | **数据库**      | ❌ 少     | ✅ sqlx, diesel   | ⚠️ 有限        | ✅ sqlx            |
 | **gRPC**        | ❌ 无     | ✅ tonic          | ❌ 无          | ❌ 无              |
 | **消息队列**    | ⚠️ 有限   | ✅ lapin, rdkafka | ⚠️ 有限        | ⚠️ 有限            |

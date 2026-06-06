@@ -6,21 +6,21 @@
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]
-
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 Rust 规范预览特性
 > **定位**: 探讨 Rust 语言从**参考文档**（Rust Reference）向**形式化规范**演进的必要性与路径，分析 Ferrocene、编译器开发和形式化验证社区对规范的不同需求。
 > **前置概念**: [Formal Methods](./02_formal_methods.md) · [RustBelt](../04_formal/04_rustbelt.md) · [Ferrocene](./14_ferrocene_preview.md)
 > **后置概念**: [Version Tracking](./05_rust_version_tracking.md)
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Ferrocene Specification](https://spec.ferrocene.dev/) · [Rust Language Specification RFC](https://github.com/rust-lang/rfcs/pull/3355) · [Rust Compiler Team — Specification](https://github.com/rust-lang/compiler-team/issues/)
-
+> **来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [Ferrocene Specification](https://spec.ferrocene.dev/) ·
+> [Rust Language Specification RFC](https://github.com/rust-lang/rfcs/pull/3355) ·
+> [Rust Compiler Team — Specification](https://github.com/rust-lang/compiler-team/issues/)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
-
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
 
 ## 📑 目录
@@ -342,7 +342,7 @@ graph TD
 | Rust Reference 完善 | 🟡 进行中 | 持续 | 社区驱动，逐步补充缺失内容 |
 | 官方技术规范启动 | ⬜ | 2026-2027 | 可能由 Rust Foundation 资助 |
 | Ferrocene 规范开源贡献 | 🟡 | 2025-2026 | Ferrocene 向社区反馈规范内容 |
-| gccrs 驱动规范需求 | 🟡 | 持续 | 替代实现的需求推动规范明确 |
+| gccrs 驱动规范需求 | 🟡 | 持续 | 替代实现的需求推动规范明确；**2026-03-18 月度报告**：Rust-for-Linux 目标从 16% 提升至 25%，RfL builderror/compilerbuiltins 达 100%，测试用例通过数 +347（10598 → 10945） [来源: [gccrs 2026-03 Monthly Report](https://rust-gcc.github.io/2026/04/13/2026-03-monthly-report.html)] |
 | 形式化语义项目 | ⬜ | 2027+ | 学术/工业合作项目 |
 | 完整规范 v1.0 | ⬜ | 2030+ | 覆盖 stable Rust 的语言规范 |
 
@@ -423,7 +423,15 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 规范（The Rust Specification）正在编写中，目标是精确定义哪些程序是合法的、哪些是未定义行为（UB）。当前 Rust 的 UB 定义分散在 Reference、Nomicon、RFC 和学术 paper 中，存在模糊地带。例如：两个不重叠的 `*mut T` 指向同一对象是否 UB？Stacked Borrows 说"是"（基于借用栈的标签），Tree Borrows 说"可能不是"（更宽松的别名模型）。Rust 规范将最终裁定这些边缘情况。对开发者的影响：避免任何可能触发 UB 的代码，即使 Miri（基于 Stacked Borrows）不报错。这与 C 的 ISO C 标准（明确的 UB 列表）类似，但 Rust 的内存模型更复杂（所有权、借用、内部可变性、Pin）。规范的编写是 Rust 成熟度的重要标志——从"实现定义语言"走向"规范定义语言"。[来源: [Rust Specification Draft](https://spec.rust-lang.org/)] · [来源: [Stacked Borrows vs Tree Borrows](https://www.ralfj.de/blog/2023/01/31/tree-borrows.html)]
+> **修正**:
+> Rust 规范（The Rust Specification）正在编写中，目标是精确定义哪些程序是合法的、哪些是未定义行为（UB）。
+> 当前 Rust 的 UB 定义分散在 Reference、Nomicon、RFC 和学术 paper 中，存在模糊地带。
+> 例如：两个不重叠的 `*mut T` 指向同一对象是否 UB？Stacked Borrows 说"是"（基于借用栈的标签），Tree Borrows 说"可能不是"（更宽松的别名模型）。
+> Rust 规范将最终裁定这些边缘情况。对开发者的影响：避免任何可能触发 UB 的代码，即使 Miri（基于 Stacked Borrows）不报错。
+> 这与 C 的 ISO C 标准（明确的 UB 列表）类似，但 Rust 的内存模型更复杂（所有权、借用、内部可变性、Pin）。
+> 规范的编写是 Rust 成熟度的重要标志——从"实现定义语言"走向"规范定义语言"。
+> [来源: [Rust Specification Draft](https://spec.rust-lang.org/)] ·
+> [来源: [Stacked Borrows vs Tree Borrows](https://www.ralfj.de/blog/2023/01/31/tree-borrows.html)]
 
 ### 10.2 边界测试：规范与编译器实现的差异（编译错误）
 
@@ -441,7 +449,14 @@ fn main() {
 }
 ```
 
-> **修正**: 在某些情况下，规范可能允许比当前编译器更宽松的程序。例如：Polonius（下一代借用检查器）将接受一些 NLL（Non-Lexical Lifetimes）拒绝的合法程序。`maybe_dangle` 的例子中，编译器拒绝是因为 `&y` 的生命周期不能超出函数作用域——即使从语义上看，返回值实际上等价于 `x` 的某个函数（若优化器内联并常量传播）。规范与实现的差距是语言演进的自然现象：规范定义"理想语义"，编译器逐步逼近。Rust 的"规范优先"策略（先写规范，再对齐实现）与 C/C++ 的"实现优先"策略（标准委员会标准化现有实践）不同——Rust 有机会在规范阶段消除历史包袱。但对开发者而言，**以编译器为准**仍是实用原则：编译器拒绝的代码不能用于生产，无论规范是否认为合法。[来源: [Rust Specification Project](https://github.com/rust-lang/spec/)] · [来源: [Polonius Initiative](https://rust-lang.github.io/polonius/)]
+> **修正**: 在某些情况下，规范可能允许比当前编译器更宽松的程序。
+> 例如：Polonius（下一代借用检查器）将接受一些 NLL（Non-Lexical Lifetimes）拒绝的合法程序。
+> `maybe_dangle` 的例子中，编译器拒绝是因为 `&y` 的生命周期不能超出函数作用域——即使从语义上看，返回值实际上等价于 `x` 的某个函数（若优化器内联并常量传播）。
+> 规范与实现的差距是语言演进的自然现象：规范定义"理想语义"，编译器逐步逼近。
+> Rust 的"规范优先"策略（先写规范，再对齐实现）与 C/C++ 的"实现优先"策略（标准委员会标准化现有实践）不同——Rust 有机会在规范阶段消除历史包袱。
+> 但对开发者而言，**以编译器为准**仍是实用原则：编译器拒绝的代码不能用于生产，无论规范是否认为合法。
+> [来源: [Rust Specification Project](https://github.com/rust-lang/spec/)] ·
+> [来源: [Polonius Initiative](https://rust-lang.github.io/polonius/)]
 
 ### 10.6 边界测试：规范与编译器实现的临时不一致（编译错误）
 
@@ -460,7 +475,14 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 规范未最终确定时，编译器实现与形式化模型（Stacked Borrows、Tree Borrows）可能存在不一致。上述代码在**当前稳定编译器**上可能编译通过（NLL 接受），但 Miri（基于 Stacked Borrows）报告 UB。这是过渡状态的表现：1) 编译器更宽松（接受更多程序）；2) 形式化工具更严格（标记潜在 UB）；3) 规范将最终裁定。开发者的务实策略：1) 运行 Miri 测试 unsafe 代码；2) 避免形式化模型标记为 UB 的模式；3) 关注规范进展。这与 C 的 "实现定义行为"（不同编译器行为不同）不同——Rust 的目标是统一规范，但过程需要时间。规范的编写由 Rust 基金会资助，是 Rust 成熟度的重要标志。[来源: [Rust Specification Project](https://github.com/rust-lang/spec/)] · [来源: [Stacked Borrows vs Tree Borrows](https://www.ralfj.de/blog/2023/01-31_tree-borrows.html)]
+> **修正**: Rust 规范未最终确定时，编译器实现与形式化模型（Stacked Borrows、Tree Borrows）可能存在不一致。
+> 上述代码在**当前稳定编译器**上可能编译通过（NLL 接受），但 Miri（基于 Stacked Borrows）报告 UB。
+> 这是过渡状态的表现：1) 编译器更宽松（接受更多程序）；2) 形式化工具更严格（标记潜在 UB）；3) 规范将最终裁定。
+> 开发者的务实策略：1) 运行 Miri 测试 unsafe 代码；2) 避免形式化模型标记为 UB 的模式；3) 关注规范进展。
+> 这与 C 的 "实现定义行为"（不同编译器行为不同）不同——Rust 的目标是统一规范，但过程需要时间。
+> 规范的编写由 Rust 基金会资助，是 Rust 成熟度的重要标志。
+> [来源: [Rust Specification Project](https://github.com/rust-lang/spec/)] ·
+> [来源: [Stacked Borrows vs Tree Borrows](https://www.ralfj.de/blog/2023/01-31_tree-borrows.html)]
 
 ### 10.5 边界测试：规范草案与编译器实现的不一致（编译行为漂移）
 
@@ -478,7 +500,23 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 规范项目（Ferrocene、Rust Specification）的目标是创建**权威参考文档**，但开发中的风险：1) 规范描述的行为与实际编译器（rustc）不一致；2) 规范更新滞后于语言演进（新特性先实现，后规范）；3) 规范与 Miri 的行为定义冲突（Miri 是"理想行为"，但 rustc 可能有 bug）。策略：1) 规范以 rustc 行为为基准（reference implementation）；2) Miri 作为可执行规范验证不一致；3) 发现不一致时，先确定是 rustc bug 还是规范 bug，再修复。这与 C++ 的标准（ISO 标准先行，编译器后实现，导致长期不一致）或 Go 的规范（语言规范与官方编译器同步维护）不同——Rust 选择"实现先行"路径，规范是后验文档，非先验约束。Ferrocene 的安全关键认证需要稳定规范，推动规范与实现的同步。[来源: [Rust Specification Working Group](https://github.com/rust-lang/spec)] · [来源: [Ferrocene](https://ferrous-systems.com/ferrocene/)]
+> **修正**:
+> Rust 规范项目（Ferrocene、Rust Specification）的目标是创建**权威参考文档**，但开发中的风险：
+>
+> 1) 规范描述的行为与实际编译器（rustc）不一致；
+> 2) 规范更新滞后于语言演进（新特性先实现，后规范）；
+> 3) 规范与 Miri 的行为定义冲突（Miri 是"理想行为"，但 rustc 可能有 bug）。
+>
+> 策略：
+>
+> 1) 规范以 rustc 行为为基准（reference implementation）；
+> 2) Miri 作为可执行规范验证不一致；
+> 3) 发现不一致时，先确定是 rustc bug 还是规范 bug，再修复。
+>
+> 这与 C++ 的标准（ISO 标准先行，编译器后实现，导致长期不一致）或 Go 的规范（语言规范与官方编译器同步维护）不同——Rust 选择"实现先行"路径，规范是后验文档，非先验约束。
+> Ferrocene 的安全关键认证需要稳定规范，推动规范与实现的同步。
+> [来源: [Rust Specification Working Group](https://github.com/rust-lang/spec)] ·
+> [来源: [Ferrocene](https://ferrous-systems.com/ferrocene/)]
 
 ### 10.3 边界测试：规范文本与编译器实现的不一致（编译行为差异）
 
@@ -494,9 +532,13 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 规范项目的目标是创建**权威参考文档**，但开发中风险：1) 规范描述的行为与实际编译器不一致；2) 规范更新滞后于语言演进；3) 规范与 Miri 的行为定义冲突。策略：1) 规范以 rustc 行为为基准（reference implementation）；2) Miri 作为可执行规范验证不一致；3) 发现不一致时，先确定是 rustc bug 还是规范 bug，再修复。这与 C++ 的标准（ISO 标准先行，编译器后实现）或 Go 的规范（语言规范与官方编译器同步维护）不同——Rust 选择"实现先行"路径，规范是后验文档。Ferrocene 的安全关键认证需要稳定规范，推动规范与实现的同步。[来源: [Rust Specification Working Group](https://github.com/rust-lang/spec)] · [来源: [Ferrocene](https://ferrous-systems.com/ferrocene/)]
-> **过渡**: Rust 语言规范预研：从参考文档到形式化规范 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Rust 语言规范预研：从参考文档到形式化规范 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **修正**:
+> Rust 规范项目的目标是创建**权威参考文档**，但开发中风险：1) 规范描述的行为与实际编译器不一致；2) 规范更新滞后于语言演进；3) 规范与 Miri 的行为定义冲突。
+> 策略：1) 规范以 rustc 行为为基准（reference implementation）；2) Miri 作为可执行规范验证不一致；3) 发现不一致时，先确定是 rustc bug 还是规范 bug，再修复。
+> 这与 C++ 的标准（ISO 标准先行，编译器后实现）或 Go 的规范（语言规范与官方编译器同步维护）不同——Rust 选择"实现先行"路径，规范是后验文档。
+> Ferrocene 的安全关键认证需要稳定规范，推动规范与实现的同步。
+> [来源: [Rust Specification Working Group](https://github.com/rust-lang/spec)] ·
+> [来源: [Ferrocene](https://ferrous-systems.com/ferrocene/)]
 > **过渡**: Rust 语言规范预研：从参考文档到形式化规范 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ### 补充定理链
@@ -518,9 +560,7 @@ fn main() {
 | Rust 语言规范预研：从参考文档到形式化规范 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 Rust 语言规范预研：从参考文档到形式化规范 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 Rust 语言规范预研：从参考文档到形式化规范 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: Rust 语言规范预研：从参考文档到形式化规范 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

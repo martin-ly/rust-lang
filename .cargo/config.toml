@@ -59,57 +59,29 @@ git-fetch-with-cli = true
 enabled = true
 
 # ============ Profile 优化 ============
-# 注意: 以下 profile 仅补充 Cargo.toml 中未定义或需要本地覆盖的配置。
+# 注意: 所有 profile 已统一由根 Cargo.toml 管理。
+# .cargo/config.toml 中不再重复定义，避免配置覆盖导致的不一致。
+# 如需本地覆盖，请复制 config.toml.local.template 为 config.toml.local 并自定义。
+#
+# 可用 profile 列表:
+#   cargo build --profile dev          (默认，开发编译)
+#   cargo build --profile release      (发布，最大优化)
+#   cargo build --profile release-fast (快速发布，thin LTO)
+#   cargo build --profile size         (最小体积)
+#   cargo check --profile check-fast   (超快速语法检查)
+#   cargo test  --profile test         (测试优化)
+#   cargo bench --profile bench        (基准测试)
+#
 # [profile.release] 已统一由 Cargo.toml 管理，如需本地快速发布构建请使用:
 #   cargo build --profile release-fast
 
-[profile.dev]
-# 增量编译 - 必须启用
-incremental = true
-# 优化级别 0 = 最快编译速度
-opt-level = 0
-# 调试信息 - 1 = line-tables-only (更快)
-debug = 1
-debug-assertions = true
-overflow-checks = true
-# 代码生成单元 - 更多=更快编译
-codegen-units = 256
-# 使用 unwind panic
-panic = "unwind"
-# Rust 1.96: 开发环境也使用分割调试信息
-split-debuginfo = "unpacked"
-
-[profile.dev.build-override]
-# 构建依赖的优化级别
-opt-level = 1
-codegen-units = 16
-
-# 更快的检查 Profile - 用于快速语法检查
-[profile.check-fast]
-inherits = "dev"
-opt-level = 0
-debug = 0
-codegen-units = 1024
-panic = "abort"
-incremental = true
-
-[profile.test]
-# 测试优化 - 平衡速度和调试
-opt-level = 1
-debug = 1
-codegen-units = 256
-incremental = true
-# 注意: test profile 不支持 panic 设置，使用默认 unwind
-
-[profile.bench]
-# 基准测试
-opt-level = 3
-debug = false
-lto = "thin"
-codegen-units = 4
-
-[profile.bench.build-override]
-opt-level = 2
+# 本地 profile 覆盖示例 (如需使用，取消下方注释):
+# [profile.dev]
+# split-debuginfo = "unpacked"
+#
+# [profile.dev.build-override]
+# opt-level = 1
+# codegen-units = 16
 
 # ============ 已稳定特性 ============
 # 注意: 以下特性在较早版本已稳定，无需unstable配置:

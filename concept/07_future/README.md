@@ -2,12 +2,11 @@
 
 > **内容分级**: [综述级]
 > **受众**: [专家]
-
+>
 > **定位**：Rust 在 AI 时代、形式化方法工业化、分布式系统形式化等前沿方向的**演进预测**与**需求驱动**。本层是知识体系的"前锋"，反向约束下层设计。
 > **Bloom 层级**: 评价 → 创造
 > **功能**: 预测演进方向，反向驱动 L1-L6 的更新
 > **[来源: Rust RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Blog - blog.rust-lang.org]** · **[来源: Wikipedia - Artificial Intelligence]** · **[来源: Formal Methods Industry Reports 2026]**
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -176,6 +175,8 @@ graph TB
 - [Rust Edition 机制与迁移指南](./23_rust_edition_guide.md)
 - [Rust 2027 Edition 及未来路线图](./24_roadmap.md)
 - [WASM Target Evolution Preview](./24_wasm_target_evolution.md)
+- [cargo-semver-checks 预览：从社区工具到 Cargo 官方集成](./24_cargo_semver_checks_preview.md)
+- [AArch64 SVE / SME 预览：可伸缩向量扩展](./25_aarch64_sve_sme_preview.md)
 - [Rust in Space Preview](./26_rust_in_space.md)
 - [编译期执行与常量求值](./27_compile_time_execution.md)
 - [Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈](./28_rust_for_webassembly.md)

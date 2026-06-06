@@ -9,7 +9,6 @@
 > **定位**: 深入分析 **Rust for Linux** 项目——如何将 Rust 引入 Linux 内核开发，从驱动程序编写、C 互操作到内核特定的安全保证，揭示系统编程范式的历史性转变。
 > **前置概念**: [Unsafe](../03_advanced/03_unsafe.md) · [FFI](../03_advanced/05_rust_ffi.md) · [Cross Compilation](../06_ecosystem/17_cross_compilation.md)
 > **后置概念**: [Formal Methods](../04_formal/04_rustbelt.md) · [Evolution](./03_evolution.md)
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -349,8 +348,16 @@ Rust for Linux 采用状态 (2024+):
   ├── 性能等价性证明
   ├── 维护者接受度（社区争议升温）
   └── 工具链集成（rustc 版本与内核同步）
+
+  MSRV 策略与 Debian 14 Forky (2027):
+  ├── Debian Stable 是 Rust for Linux 的 MSRV 基准
+  ├── Debian 14 (codename: Forky) 预计 2027 年夏季发布
+  ├── 假设 Debian Forky 包含 Rust 1.104.0，则内核 MSRV 可随之升级
+  └── 当前 Rust for Linux 支持多个稳定工具链，每个工具链可访问不同的不稳定特性子集
 ```
 
+> **MSRV 策略来源**: [Inside Rust — Program Management Update February 2026](https://blog.rust-lang.org/inside-rust/2026/03/27/program-management-update-2026-02/)（2026-03-27）
+> Debian Stable 对 Rust for Linux 至关重要，因为它提供了内核开发所需的最小 Rust 版本基线。MSRV 升级后，内核可以采用新的稳定特性，消除维护多个条件编译路径的负担。
 > **采用矩阵**: Rust for Linux 是**渐进式替换**——从外围驱动开始，逐步向核心子系统推进。
 > [来源: [Rust for Linux — Status](https://rust-for-linux.com/status)]
 
@@ -400,7 +407,12 @@ graph TD
 ├── Rust for Linux 需要某些 nightly 特性
 ├── 内核要求编译器版本固定
 ├── 与 Rust 稳定版发布节奏不同步
-└── 缓解: 维护稳定的编译器分支
+├── **最新进展**: 截至 LPC 2025（2025-12），Linux 内核中 Rust 代码**仅剩 2 个不稳定特性**待稳定化：
+│   ├── `arbitrary_self_types`（允许在 trait 方法中使用 `self: Box<Self>` 等自定义接收器类型）
+│   └── `derive(CoercePointee)`（智能指针自动强制转换推导）
+│   └── 其中仅 `arbitrary_self_types` 被允许在内核中全局使用
+├── 其他已稳定化的关键特性：`asm!`（内联汇编）、`global_asm!`、`const_mut_refs`、裸指针算术等
+└── 缓解: 维护稳定的编译器分支；随着 Rust 稳定化推进，内核将逐步消除对 nightly 的依赖 [来源: [LPC 2025 — Rust for Linux](https://lpc.events/event/19/contributions/2068/)]
 
 边界 4: 调试工具链
 ├── GDB 对 Rust 支持有限
@@ -535,7 +547,13 @@ fn init() -> i32 {
 }
 ```
 
-> **修正**: Linux 内核模块使用 `#![no_std]`，标准库（`std`）不可用，只有核心库（`core`）和分配库（`alloc`）。`Vec`、`String`、`Box` 来自 `alloc`，但要求全局分配器——内核中的全局分配器是 `kmalloc`/`kfree` 的 Rust 封装。进一步限制：内核代码不能 panic（或 panic 必须调用 `BUG()`），不能使用 `unwrap()`，必须处理所有错误路径。`rust-for-linux` 项目提供 `kernel` crate，封装内核 API（`printk`、锁、工作队列、设备驱动抽象）。这与用户空间 Rust 开发截然不同——内核 Rust 是"在更严酷的沙盒中编程"，但类型系统仍提供内存安全和数据竞争自由。[来源: [Rust for Linux](https://rust-for-linux.com/)] · [来源: [Linux Kernel Documentation](https://docs.kernel.org/rust/)]
+> **修正**: Linux 内核模块使用 `#![no_std]`，标准库（`std`）不可用，只有核心库（`core`）和分配库（`alloc`）。
+> `Vec`、`String`、`Box` 来自 `alloc`，但要求全局分配器——内核中的全局分配器是 `kmalloc`/`kfree` 的 Rust 封装。
+> 进一步限制：内核代码不能 panic（或 panic 必须调用 `BUG()`），不能使用 `unwrap()`，必须处理所有错误路径。
+> `rust-for-linux` 项目提供 `kernel` crate，封装内核 API（`printk`、锁、工作队列、设备驱动抽象）。
+> 这与用户空间 Rust 开发截然不同——内核 Rust 是"在更严酷的沙盒中编程"，但类型系统仍提供内存安全和数据竞争自由。
+> [来源: [Rust for Linux](https://rust-for-linux.com/)] ·
+> [来源: [Linux Kernel Documentation](https://docs.kernel.org/rust/)]
 
 ### 10.2 边界测试：内核锁的原子顺序与 `unsafe` 封装（编译错误）
 
@@ -557,7 +575,18 @@ fn increment() {
 }
 ```
 
-> **修正**: `rust-for-linux` 的 `SpinLock` 是内核自旋锁的安全封装：`lock()` 返回 `SpinLockGuard`，实现 `DerefMut` 允许可变访问，Drop 时释放锁。关键约束：1) `SpinLockGuard` 不能跨越 await 点（阻塞上下文）；2) 不能发送到其他 CPU（锁的 CPU 亲和性）；3) 中断上下文中必须使用 `irqsave` 变体（禁用中断防止死锁）。这些约束部分通过类型系统强制（`Send`/`Sync` bound），部分通过文档约定。违反约束不是编译错误，而是运行时死锁或数据损坏——这是内核编程的本质：某些约束无法完全静态检查。与用户空间的 `std::sync::Mutex`（可睡眠、跨线程安全）相比，内核锁更底层、约束更多。[来源: [Rust for Linux](https://rust-for-linux.com/)] · [来源: [Linux Kernel Locking Documentation](https://docs.kernel.org/kernel-hacking/locking.html)]
+> **修正**:
+> `rust-for-linux` 的 `SpinLock` 是内核自旋锁的安全封装：`lock()` 返回 `SpinLockGuard`，实现 `DerefMut` 允许可变访问，Drop 时释放锁。
+> 关键约束：
+>
+> 1) `SpinLockGuard` 不能跨越 await 点（阻塞上下文）；
+> 2) 不能发送到其他 CPU（锁的 CPU 亲和性）；
+> 3) 中断上下文中必须使用 `irqsave` 变体（禁用中断防止死锁）。
+> 这些约束部分通过类型系统强制（`Send`/`Sync` bound），部分通过文档约定。
+> 违反约束不是编译错误，而是运行时死锁或数据损坏——这是内核编程的本质：某些约束无法完全静态检查。
+> 与用户空间的 `std::sync::Mutex`（可睡眠、跨线程安全）相比，内核锁更底层、约束更多。
+> [来源: [Rust for Linux](https://rust-for-linux.com/)] ·
+> [来源: [Linux Kernel Locking Documentation](https://docs.kernel.org/kernel-hacking/locking.html)]
 
 ### 10.3 边界测试：内核模块的 `no_std` 与 `alloc` 的谨慎使用（编译错误）
 
@@ -576,7 +605,17 @@ fn init() -> i32 {
 }
 ```
 
-> **修正**: Linux 内核的 Rust 支持允许使用 `alloc`（`Vec`、`String`、`Box`），但内核环境比用户空间更严格：1) 堆分配可能失败（内存紧张），`alloc` 的 `oom=panic` 策略在 kernel 中不可接受；2) 分配是 GFP（Get Free Pages）标志敏感的（`GFP_KERNEL`、`GFP_ATOMIC`），`alloc` 默认使用 `GFP_KERNEL`（可睡眠），在中断上下文中非法；3) 内存碎片问题（内核无用户空间的 `malloc` 自由）。`rust-for-linux` 提供内核特定的分配 API：`kmalloc`（GFP 敏感）、`kzalloc`（零初始化）、`kfree`（释放）。Rust 代码需使用这些 API 替代标准 `alloc`。这与 C 的内核模块（直接使用 `kmalloc`/`kfree`）或 eBPF 的受限内存（无堆分配，仅栈和 map）类似——内核编程的内存管理是核心技能。[来源: [Rust for Linux](https://rust-for-linux.com/)] · [来源: [Linux Kernel Memory Management](https://docs.kernel.org/core-api/memory-allocation.html)]
+> **修正**:
+>
+> Linux 内核的 Rust 支持允许使用 `alloc`（`Vec`、`String`、`Box`），但内核环境比用户空间更严格：
+>
+> 1) 堆分配可能失败（内存紧张），`alloc` 的 `oom=panic` 策略在 kernel 中不可接受；
+> 2) 分配是 GFP（Get Free Pages）标志敏感的（`GFP_KERNEL`、`GFP_ATOMIC`），`alloc` 默认使用 `GFP_KERNEL`（可睡眠），在中断上下文中非法；
+> 3) 内存碎片问题（内核无用户空间的 `malloc` 自由）。`rust-for-linux` 提供内核特定的分配 API：`kmalloc`（GFP 敏感）、`kzalloc`（零初始化）、`kfree`（释放）。
+> Rust 代码需使用这些 API 替代标准 `alloc`。这与 C 的内核模块（直接使用 `kmalloc`/`kfree`）或 eBPF 的受限内存（无堆分配，仅栈和 map）类似——内核编程的内存管理是核心技能。
+> [来源: [Rust for Linux](https://rust-for-linux.com/)] ·
+> [来源: [Linux Kernel Memory Management](https://docs.kernel.org/core-api/memory-allocation.html)]
+>
 
 ### 10.4 边界测试：内核锁的 `spinlock` 与睡眠的互斥（运行时死锁）
 
@@ -596,7 +635,17 @@ fn buggy_function() {
 }
 ```
 
-> **修正**: Linux 内核的锁类型与使用上下文严格绑定：1) **SpinLock**：忙等待，适用于短临界区、中断上下文、不可睡眠场景；2) **Mutex**：可睡眠，适用于长临界区、进程上下文；3) **RWSem**：读写锁，可睡眠。在持有 `SpinLock` 时睡眠是致命错误：当前 CPU 忙等待，调度器无法切换任务，若高优先级任务需同一锁，系统死锁。Rust 的 `rust-for-linux` 通过类型系统部分防止：`SpinLockGuard` 不实现 `Send`（不能跨线程/CPU），但无法静态检测睡眠操作——这需要更高级的效果系统（effect system）。这与用户空间的 `std::sync::Mutex`（总是可睡眠）或 `spin` crate 的 `Mutex`（用户态忙等待，无调度概念）不同——内核锁的上下文敏感性是底层编程的本质。[来源: [Rust for Linux](https://rust-for-linux.com/)] · [来源: [Linux Kernel Locking](https://docs.kernel.org/kernel-hacking/locking.html)]
+> **修正**:
+> Linux 内核的锁类型与使用上下文严格绑定：
+>
+> 1) **SpinLock**：忙等待，适用于短临界区、中断上下文、不可睡眠场景；
+> 2) **Mutex**：可睡眠，适用于长临界区、进程上下文；
+> 3) **RWSem**：读写锁，可睡眠。在持有 `SpinLock` 时睡眠是致命错误：当前 CPU 忙等待，调度器无法切换任务，若高优先级任务需同一锁，系统死锁。
+>
+> Rust 的 `rust-for-linux` 通过类型系统部分防止：`SpinLockGuard` 不实现 `Send`（不能跨线程/CPU），但无法静态检测睡眠操作——这需要更高级的效果系统（effect system）。
+> 这与用户空间的 `std::sync::Mutex`（总是可睡眠）或 `spin` crate 的 `Mutex`（用户态忙等待，无调度概念）不同——内核锁的上下文敏感性是底层编程的本质。
+> [来源: [Rust for Linux](https://rust-for-linux.com/)] ·
+> [来源: [Linux Kernel Locking](https://docs.kernel.org/kernel-hacking/locking.html)]
 
 ### 10.3 边界测试：内核模块的 `no_std` 与 alloc 限制（编译错误）
 
@@ -615,15 +664,31 @@ fn kernel_function() {
 fn main() {}
 ```
 
-> **修正**: Rust for Linux 项目将 Rust 引入 Linux 内核开发。内核环境的特殊限制：1) **无标准库**：`no_std` + 自定义 `alloc`；2) **分配可能失败**：内核 OOM 处理不同于用户空间，`Vec::push` 可能 panic（内核 panic 是致命的）；3) **无浮点数**：内核代码通常禁用浮点单元；4) **并发原语**：使用内核的 `spinlock_t`、`mutex_t` 而非 Rust 的 `std::sync::Mutex`。Rust 内核模块的优势：1) 内存安全（减少 CVE）；2) 零成本抽象（与 C 代码同等性能）；3) 现代类型系统（减少逻辑错误）。挑战：1) ABI 兼容性（与 C 内核代码互操作）；2) 编译时间（内核代码量大）；3) 社区接受度。这与 Linux 内核的 C 代码（40 年历史，大量遗留代码）或 Windows 内核的 Rust 实验（Microsoft 也在探索）不同——Rust for Linux 是操作系统内核现代化的前沿尝试。[来源: [Rust for Linux](https://rust-for-linux.com/)] · [来源: [Linux Kernel Documentation](https://docs.kernel.org/rust/)]
-> **过渡**: Rust for Linux ：操作系统内核中的内存安全 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Rust for Linux ：操作系统内核中的内存安全 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **修正**:
+> Rust for Linux 项目将 Rust 引入 Linux 内核开发。
+> 内核环境的特殊限制：
+>
+> 1) **无标准库**：`no_std` + 自定义 `alloc`；
+> 2) **分配可能失败**：内核 OOM 处理不同于用户空间，`Vec::push` 可能 panic（内核 panic 是致命的）；
+> 3) **无浮点数**：内核代码通常禁用浮点单元；
+> 4) **并发原语**：使用内核的 `spinlock_t`、`mutex_t` 而非 Rust 的 `std::sync::Mutex`。
+>
+> Rust 内核模块的优势：
+>
+> 1) 内存安全（减少 CVE）；
+> 2) 零成本抽象（与 C 代码同等性能）；
+> 3) 现代类型系统（减少逻辑错误）。
+>
+> 挑战：
+>
+> 1) ABI 兼容性（与 C 内核代码互操作）；
+> 2) 编译时间（内核代码量大）；
+> 3) 社区接受度。这与 Linux 内核的 C 代码（40 年历史，大量遗留代码）或 Windows 内核的 Rust 实验（Microsoft 也在探索）不同——Rust for Linux 是操作系统内核现代化的前沿尝试。
+> [来源: [Rust for Linux](https://rust-for-linux.com/)] · [来源: [Linux Kernel Documentation](https://docs.kernel.org/rust/)]
 > **过渡**: Rust for Linux ：操作系统内核中的内存安全 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ### 补充定理链
 
-- **定理**: Rust for Linux ：操作系统内核中的内存安全 定义 ⟹ 类型安全保证
-- **定理**: Rust for Linux ：操作系统内核中的内存安全 定义 ⟹ 类型安全保证
 - **定理**: Rust for Linux ：操作系统内核中的内存安全 定义 ⟹ 类型安全保证
 
 ## 认知路径
@@ -639,9 +704,7 @@ fn main() {}
 | Rust for Linux ：操作系统内核中的内存安全 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 Rust for Linux ：操作系统内核中的内存安全 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 Rust for Linux ：操作系统内核中的内存安全 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: Rust for Linux ：操作系统内核中的内存安全 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

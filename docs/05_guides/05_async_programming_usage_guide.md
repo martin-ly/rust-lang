@@ -1793,7 +1793,7 @@ async fn create_runtime() -> tokio::runtime::Runtime {
 type HttpClient = cfg_select! {
     feature = "reqwest" => reqwest::Client,
     feature = "hyper" => hyper::Client<hyper::client::HttpConnector>,
-    _ => surf::Client,
+    _ => surf::Client, // ⚠️ surf [unmaintained] (RUSTSEC-2026-0169)，新项目建议使用 reqwest
 };
 
 async fn fetch_data(url: &str) -> Result<String, Box<dyn std::error::Error>> {

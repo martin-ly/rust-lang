@@ -43,6 +43,9 @@
 
 ---
 
+> **对应 Crate**: [`c06_async`](../../crates/c06_async/)
+> **对应练习**: [`exercises/src/async_programming/`](../../exercises/src/async_programming/)
+
 ## 📑 目录
 
 - [Async/Await（异步编程）](#asyncawait异步编程)

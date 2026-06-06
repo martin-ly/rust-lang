@@ -9,7 +9,7 @@
 ## 归档文件清单
 
 | 原文件名 | 行数 | 内容性质 | 整合去向 |
-|:---|:---:|:---|:---|
+| :--- | :---: | :--- | :--- |
 | `rust_effect_system_encyclopedia.md` | 1848 | 百科全书级形式化分析 | `concept/07_future/04_effects_system.md` v1.3+ |
 | `rust_effect_system_comprehensive_analysis.md` | 416 | 形式化分析论证 | `concept/07_future/04_effects_system.md` v1.3+ |
 | `rust_effect_system_deepened_broadened_analysis.md` | 596 | 深化广化分析 | `concept/07_future/04_effects_system.md` v1.3+ |

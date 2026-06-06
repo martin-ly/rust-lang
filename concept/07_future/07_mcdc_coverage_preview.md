@@ -6,14 +6,12 @@
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]
-
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 MCDC 覆盖率预览特性
 > **定位**: 探讨 Modified Condition/Decision Coverage（MC/DC）作为**安全关键软件验证**核心指标的形式化语义，以及 Rust 编译器实现 MC/DC 覆盖率的技术路径。
 > **前置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Version Tracking](./05_rust_version_tracking.md)
 > **后置概念**: [Formal Methods](./02_formal_methods.md) · [Rust for Linux](../06_ecosystem/04_application_domains.md)
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -356,7 +354,19 @@ mod tests {
 }
 ```
 
-> **修正**: MCDC（Modified Condition/Decision Coverage）是 DO-178C（航空软件认证标准）要求的覆盖率级别。它要求：1) 每个决策的所有可能结果至少出现一次；2) 每个条件的所有可能结果至少出现一次；3) 每个条件独立影响决策结果（其他条件固定，仅该条件变化导致决策变化）。`a && b || c` 需要 4 个测试用例满足 MCDC，而简单的分支覆盖（branch coverage）只需 2 个。Rust 的 `grcov` + `llvm-cov` 支持 MCDC 报告（实验性），帮助开发者识别缺失的测试用例。这与常规单元测试（追求路径覆盖）不同——MCDC 是形式化认证的要求，确保逻辑条件的每个独立贡献都被验证。[来源: [DO-178C Standard](https://www.rtca.org/product/do-178c/)] · [来源: [grcov Documentation](https://github.com/mozilla/grcov)]
+> **修正**:
+> MCDC（Modified Condition/Decision Coverage）是 DO-178C（航空软件认证标准）要求的覆盖率级别。
+> 它要求：
+>
+> 1) 每个决策的所有可能结果至少出现一次；
+> 2) 每个条件的所有可能结果至少出现一次；
+> 3) 每个条件独立影响决策结果（其他条件固定，仅该条件变化导致决策变化）。
+>
+> `a && b || c` 需要 4 个测试用例满足 MCDC，而简单的分支覆盖（branch coverage）只需 2 个。
+> Rust 的 `grcov` + `llvm-cov` 支持 MCDC 报告（实验性），帮助开发者识别缺失的测试用例。
+> 这与常规单元测试（追求路径覆盖）不同——MCDC 是形式化认证的要求，确保逻辑条件的每个独立贡献都被验证。
+> [来源: [DO-178C Standard](https://www.rtca.org/product/do-178c/)] ·
+> [来源: [grcov Documentation](https://github.com/mozilla/grcov)]
 
 ### 10.2 边界测试：覆盖率检测的编译器标志冲突（编译错误）
 

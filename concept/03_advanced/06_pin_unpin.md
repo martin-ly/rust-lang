@@ -22,6 +22,9 @@
 > [RFC 2349 — Pin](https://github.com/rust-lang/rfcs/pull/2349) ·
 > [Tracking Issue #55766](https://github.com/rust-lang/rust/issues/55766)
 
+> **对应 Crate**: [`c06_async`](../../crates/c06_async/)
+> **对应练习**: [`exercises/src/async_programming/`](../../exercises/src/async_programming/)
+
 ## 📑 目录
 >
 

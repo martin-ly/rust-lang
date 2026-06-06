@@ -192,6 +192,8 @@ Trait Bounds 是 L2 的"枢纽概念"：
 - [高级类型系统：从关联类型到类型级编程](./20_type_system_advanced.md)
 - [元编程：Rust 的编译期代码生成与变换](./21_metaprogramming.md)
 - [22_iterator_patterns](./22_iterator_patterns.md)
+- [测验：Trait 与泛型（嵌入式互动试点）](./23_quiz_traits_and_generics.md)
+- [测验：内存管理（嵌入式互动试点）](./24_quiz_memory_management.md)
 
 ## 三、学习路径建议
 

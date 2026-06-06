@@ -12,7 +12,6 @@
 > **定位**: 分析 Rust **特化（Specialization）**机制的设计动机——允许为特定类型提供比泛型实现更精确的 Trait 实现，解决当前 Orphan Rule 和 Coherence 规则下的表达能力限制。
 > **前置概念**: [Trait](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Const Trait Impl](./11_const_trait_impl_preview.md) · [Effects System](./04_effects_system.md)
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -29,9 +28,7 @@
 > [Rust Blog — Specialization](https://blog.rust-lang.org/inside-rust/2021/09/06/Separating-contract-and-implementation.html) ·
 > [Rust Reference — Trait Implementations](https://doc.rust-lang.org/reference/items/implementations.html) ·
 > [Wikipedia — Multiple Dispatch](https://en.wikipedia.org/wiki/Multiple_dispatch)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
-
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
 
 ## 📑 目录
@@ -68,11 +65,8 @@
 ---
 
 ## 一、核心概念
->
->
 
 ### 1.1 问题：泛型实现的表达力限制
->
 
 ```text
 当前 Rust 的 Coherence 规则限制:
@@ -119,7 +113,6 @@
 ---
 
 ### 1.2 特化的设计：更精确的实现优先
->
 
 ```text
 特化的核心思想:
@@ -157,7 +150,6 @@
 ---
 
 ### 1.3 与 Coherence 的交互
->
 
 ```mermaid
 graph TD
@@ -189,7 +181,6 @@ graph TD
 ## 二、技术细节
 
 ### 2.1 特化语法与语义
->
 
 ```rust,ignore
 #![feature(specialization)]  // nightly only
@@ -227,7 +218,6 @@ impl<T: Debug> ToDebug for &T {
 ---
 
 ### 2.2 关联类型特化
->
 
 ```rust,ignore
 // 关联类型也可以特化
@@ -260,7 +250,6 @@ impl Container for Vec<u8> {
 ---
 
 ### 2.3 当前实现状态与限制
->
 
 ```text
 特化的当前状态（截至 2026）:
@@ -322,7 +311,6 @@ impl Container for Vec<u8> {
 ## 四、反命题与边界分析
 
 ### 4.1 反命题树
->
 
 ```mermaid
 graph TD
@@ -345,7 +333,6 @@ graph TD
 ---
 
 ### 4.2 边界极限
->
 
 ```text
 边界 1: Orphan Rule 仍然适用
@@ -432,7 +419,7 @@ graph TD
 ## 六、来源与延伸阅读
 
 | 来源 | 可信度 | 说明 |
-|:---|:---:|:---|
+| :--- | :---: | :--- |
 | [RFC 1210 — Specialization](https://github.com/rust-lang/rfcs/pull/1210) | ✅ 一级 | 特化 RFC |
 | [Tracking Issue #31844](https://github.com/rust-lang/rust/issues/31844) | ✅ 一级 | 实现跟踪 |
 | [Chalk Trait Solver](https://github.com/rust-lang/chalk) | ✅ 一级 | 新 Trait 求解器 |
@@ -461,18 +448,6 @@ graph TD
 ---
 
 ## 权威来源索引
-
->
->
->
->
->
-
----
-
----
-
----
 
 ## 十、边界测试：特化（Specialization）的编译错误
 

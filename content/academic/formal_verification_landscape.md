@@ -31,7 +31,8 @@
 
 ## 🎯 概述
 
-Rust 的所有权和类型系统已经排除了大量运行时错误，但**逻辑错误**（如越界索引、算术溢出、算法缺陷）仍需额外验证。形式化验证工具在 Rust 编译器的保证之上，提供数学级别的正确性证明：
+Rust 的所有权和类型系统已经排除了大量运行时错误，但**逻辑错误**（如越界索引、算术溢出、算法缺陷）仍需额外验证。
+形式化验证工具在 Rust 编译器的保证之上，提供数学级别的正确性证明：
 
 ```text
 验证层级金字塔:
@@ -388,7 +389,10 @@ RustBelt 理论框架:
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/),
+> [The Rust Programming Language](https://doc.rust-lang.org/book/),
+> [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 

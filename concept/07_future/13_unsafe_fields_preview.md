@@ -341,9 +341,17 @@ graph TD
 |:---|:---:|:---|:---|
 | [RFC 3458](https://rust-lang.github.io/rfcs/3458.html) 提交 | ✅ | 2023 | 初始提案 |
 | 社区讨论 | ✅ | 2023-2024 | 语法和语义反馈 |
+| **RFC 已接受** | ✅ | 2026-02 | Jack Wrenn 确认 RFC 被接受，开始准备 2026 持续目标 |
+| **Clippy 扩展支持** | 🔄 | 2026-04 | rust-clippy#16767 已开，等待 t-clippy review |
 | 编译器原型 | ⬜ | 2026-2027 | 实现复杂度高，优先级中低 |
 | 与 Safety Tags 集成 | ⬜ | 2027+ | 字段级契约机器可读化 |
 | 稳定化 | ⬜ | 2028+ | 依赖实际使用反馈 |
+
+> **Rust Project Goals 2026 状态**: Continued（持续中）
+>
+> - **负责人**: Jack Wrenn, Jacob Pratt, Luca Versari
+> - **Champions**: compiler (Jack Wrenn), lang (Scott McMurray)
+> - **来源**: [Rust Project Goals 2026 April Update](https://blog.rust-lang.org/2026/05/18/project-goals-2026-04/)
 
 > **预测**: unsafe fields 的推进速度较慢，因为它是一个**语法扩展**而非紧迫的安全修复。预期与 Safety Tags 协同推进，在 2027+ 形成完整的"字段级安全契约"生态。
 > [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]

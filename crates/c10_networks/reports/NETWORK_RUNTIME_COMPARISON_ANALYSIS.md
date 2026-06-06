@@ -166,8 +166,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 **async-std [已归档]生态系统**:
 
-- `surf`: 简化的HTTP客户端
-- `tide`: 异步Web框架
+- `surf`: 简化的HTTP客户端（[unmaintained] RUSTSEC-2026-0169）
+- `tide`: 异步Web框架（[unmaintained] RUSTSEC-2026-0170）
 - `async-h1`: 异步HTTP/1.1实现
 
 #### 1.3.2 数据库连接

@@ -2,7 +2,7 @@
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]
-> **跟踪版本**: nightly 1.98.0 (2026-06-02)
+> **跟踪版本**: nightly 1.98.0 (2026-06-06)
 > **预计稳定时间**: 2026-07-09（Rust 1.97.0 Beta 计划发布日期，来源: Rust Forge）
 > **当前阶段**: 🧪 Nightly 实验性 / 1.97 已进入 Beta 分支
 > **状态**: 部分特性已 MCP 通过，实现中；稳定版发布前特性集可能调整
@@ -95,6 +95,36 @@ where
 
 ---
 
+### 1.4 Unnamed Enum Variants / Open Enums（RFC 3894）
+
+**状态**: 🧪 Lang Experiment，2026-04-22 设计会议非正式批准
+
+**跟踪 Issue**: [rust-lang/rust#156628](https://github.com/rust-lang/rust/issues/156628)
+**Feature gate**: `#![feature(unnamed_enum_variants)]`
+**Lang-team champion**: Josh Triplett
+**Project Goals 2026**: 属于 2026 项目目标（Open Enums / FFI 互操作方向）
+
+**核心问题**: C 的 `enum` 是"开放的"——允许将未命名整数值强制转换为 enum 类型；而 Rust 的 `enum` 是"封闭的"——所有有效值必须在定义中声明。这导致 `bindgen` 默认不生成 `repr(C) enum` 来互操作 C enum，而使用兼容性较差的替代方案。
+
+**提案方向**: 引入匿名变体（unnamed variants），允许 enum 声明自身与未来可能分配的 discriminant 兼容：
+
+```rust,ignore
+#![feature(unnamed_enum_variants)]
+
+#[repr(C)]
+enum CCompatibleEnum {
+    A = 1,
+    B = 2,
+    _  // 匿名变体：允许其他整数值
+}
+```
+
+**意义**: 改善 Rust 与 C FFI 的 enum 互操作性，是 Rust for Linux 等项目的长期需求之一。
+
+> **来源**: [rust-lang/rust#156628](https://github.com/rust-lang/rust/issues/156628) · [RFC 3894](https://rust-lang.github.io/rfcs/3894-unnamed-enum-variants.html) · 可信度: ✅
+
+---
+
 ## 二、编译器基础设施
 
 ### 2.1 并行前端 (Parallel Frontend)
@@ -119,13 +149,14 @@ RUSTFLAGS="-Zthreads=8" cargo build
 
 ### 2.2 Cranelift 后端
 
-**状态**: 🧪 Nightly 预览，debug 构建快 20%
+**状态**: 🧪 Nightly 预览 | ⚠️ **官方因资金不足进展停滞 (2026-05)**
 
 **进展**:
 
 - `cg_clif` 已能通过大部分 rustc 测试
 - 不支持 LTO（设计限制）
-- 适合开发迭代，不适合 release
+- **⚠️ Rust Project Goals 2026 已标记为 Not completed (lack of funding)**：Trifecta Tech Foundation 资金不足，生产就绪目标暂停
+- 适合开发迭代，不适合 release；长期维护存疑
 
 **使用** (nightly):
 
@@ -137,9 +168,9 @@ cargo +nightly build -Zcodegen-backend=cranelift
 
 ---
 
-### 2.3 build-std (RFC #3873)
+### 2.3 build-std (RFC #3873/#3874)
 
-**状态**: ✅ 已合并，向稳定推进
+**状态**: ✅ RFC #3873 已合并 | 🟢 RFC #3874 FCP 已通过（2026-04），等待合并
 
 **核心能力**: 编译时重新构建标准库，允许：
 
@@ -244,6 +275,15 @@ async gen fn counter_stream(max: usize) -> impl Stream<Item = usize> {
 | `int_format_into` | 🧪 Nightly | 整数格式化到现有缓冲区 |
 | `RefCell::try_map` | 🧪 Nightly | 尝试性 RefCell 映射 |
 | `String::into_raw_parts` | 🧪 Nightly | 分解 String 为原始组件 |
+| **`core::range::RangeFull` / `RangeTo`** | 🔄 FCP 完成 | `core::range` 类型补全（PR #156840），`RangeFull` 和 `RangeTo` 作为 `core::ops` 的 re-export；`legacy::*` 为旧类型提供新家 [来源: releases.rs 2026-06-06] |
+| **`float_algebraic`** | 🔄 FCP 中 | 浮点代数优化属性，允许编译器在 `-ffast-math` 语义下重组浮点运算（PR #157168，disposition-merge） [来源: releases.rs 2026-06-06] |
+| **`RandomSource` / `DefaultRandomSource`** | 🔄 等待 libs-api | 可插拔随机数源抽象（PR #157226） [来源: releases.rs 2026-06-06] |
+| **`PathBuf::into_string`** | 🔄 等待 review | `PathBuf` 零成本转换为 `String`（PR #157029） [来源: releases.rs 2026-06-06] |
+| **`Result::map_or_default` / `Option::map_or_default`** | 🔄 等待 review | 便捷映射并返回默认值（PR #156629） [来源: releases.rs 2026-06-06] |
+| **`core::alloc::Alloc`** | 🔄 等待 review | `dyn` subset of `Allocator` 稳定化为 `core::alloc::Alloc` trait（PR #157286，4 days old） [来源: releases.rs 2026-06-06] |
+| **`box_vec_non_null`** | 🔄 PFCP | `Box<Vec<T>>` → `NonNull<T>` 转换优化（PR #157273，5 days old，proposed-final-comment-period） [来源: releases.rs 2026-06-06] |
+| **`new_range_remainder`** | 🧪 Nightly | 新 `core::range` 迭代器类型的 `remainder()` 方法（Tracking Issue #154458，2026-03-27），RFC 3550 的后续扩展 [来源: rust-lang/rust#154458] |
+| **`VecDeque::retain_back`** | 🔄 FCP 完成 | `VecDeque` 反向保留元素（PR #151973，FCP finished，等待最终合并） [来源: releases.rs 2026-06-08] |
 
 ---
 
@@ -256,6 +296,7 @@ async gen fn counter_stream(max: usize) -> impl Stream<Item = usize> {
 | `target.'cfg(..)'.rustdocflags` | ✅ 1.96 已稳定 | 条件 rustdoc 标志 |
 | `cargo lint` 子命令 | 📋 RFC 阶段 | 统一的 lint 管理接口 |
 | 依赖图谱可视化 | 📋 设计阶段 | `cargo tree --graph` |
+| **cargo-script 稳定化** | 🔄 FCP 已结束 | [RFC 3502](https://rust-lang.github.io/rfcs/3502.html)+3503 已批准；blocker 为 edition policy（lang/edition 方面）；Project Goals 2026 Continued [来源: Rust Project Goals 2026 April Update] |
 
 ### 6.2 rustfmt / clippy
 
@@ -311,7 +352,7 @@ async gen fn counter_stream(max: usize) -> impl Stream<Item = usize> {
 
 ---
 
-> **最后更新**: 2026-06-02
+> **最后更新**: 2026-06-06
 > **维护者**: 本项目知识库团队
 > **状态**: 🧪 活跃跟踪中，每 2 周更新一次
 > **过渡**: Rust 1.97 前沿特性预览 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

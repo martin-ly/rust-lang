@@ -189,6 +189,9 @@ graph TB
 - [无锁编程与内存模型](./16_lock_free.md)
 - [类型擦除与动态分发](./17_type_erasure.md)
 - [Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象](./18_network_programming.md)
+- [测验：并发与异步（嵌入式互动试点）](./21_quiz_concurrency_async.md)
+- [测验：Unsafe Rust（嵌入式互动试点）](./22_quiz_unsafe.md)
+- [测验：宏系统（嵌入式互动试点）](./23_quiz_macros.md)
 
 ## 三、学习路径建议
 

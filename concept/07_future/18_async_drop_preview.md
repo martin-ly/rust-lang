@@ -2,14 +2,12 @@
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]
-
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 Async Drop 预览特性
 > **定位**: 分析 Rust 中 **异步资源销毁**的设计挑战——`Drop::drop` 是同步的，但异步资源（如数据库连接、网络流）需要 await 才能正确关闭。探讨 `AsyncDrop` trait 的提案（[RFC 3308](https://rust-lang.github.io/rfcs/3308.html)）、设计约束与当前 nightly 实现状态。
 > **前置概念**: [Async](../03_advanced/02_async.md) · [Pin](../03_advanced/06_pin_unpin.md)
 > **后置概念**: [Gen Blocks](./15_gen_blocks_preview.md) · [Async Closures](https://github.com/rust-lang/rust/issues/62290)
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -18,7 +16,6 @@
 > [Rust Internals — Async Drop Discussion](https://internals.rust-lang.org/t/asynchronous-destructors/11127) ·
 > [Without Boats Blog — Async Drop](https://without.boats/blog/let-futures-be-futures/) ·
 > [TRPL Ch17 — Pin](https://doc.rust-lang.org/book/ch17-04-pin.html)
-
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
 
 ## 📑 目录

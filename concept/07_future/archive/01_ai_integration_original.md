@@ -9,7 +9,6 @@
 > [Traits](../../02_intermediate/01_traits.md) ·
 > [Formal Methods](../02_formal_methods.md)
 > **主要来源**: [AI Coding Trends 2025-2026] · [Rust AI Ecosystem] · [Verus/Creusot + LLM] · [Wikipedia]
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -29,7 +28,6 @@
 ## 一、核心命题
 
 > **[来源: GitHub Copilot Docs; ChatGPT API Docs]** ✅
-
 > **AI 生成代码的本质是统计模式匹配，其输出是高概率正确但不保证逻辑一致性。Rust 的形式系统为 AI 生成提供了不可压缩的语义安全网。**
 
 ---
@@ -37,7 +35,6 @@
 ## 认知路径（Cognitive Path）
 
 > **[来源: Rust Reference; Rustonomicon]** ✅
-
 > **学习递进**: 从直觉出发，逐层深入核心概念。
 
 ### 第 1 步：AI和编程语言的关系？
@@ -86,7 +83,10 @@ candle/burn/llm.rs等原生Rust ML生态
 >
 > **来源**: [Wikipedia — Artificial intelligence](https://en.wikipedia.org/wiki/Artificial_intelligence)
 
-人工智能（AI）是指由机器（尤其是计算机系统）所表现出的智能。AI 研究被定义为对"智能代理"的研究：任何能够感知环境并采取行动以最大化实现其目标的机会的设备。AI 的主要子领域包括：机器学习 [来源: [Rust ML](https://www.arewelearningyet.com/)]（ML）、自然语言处理（NLP）、计算机视觉、机器人学和专家系统。在软件开发语境下，生成式 AI（Generative AI）通过大语言模型（LLM）生成代码、文档和测试。
+人工智能（AI）是指由机器（尤其是计算机系统）所表现出的智能。
+AI 研究被定义为对"智能代理"的研究：任何能够感知环境并采取行动以最大化实现其目标的机会的设备。
+AI 的主要子领域包括：机器学习 [来源: [Rust ML](https://www.arewelearningyet.com/)]（ML）、自然语言处理（NLP）、计算机视觉、机器人学和专家系统。
+在软件开发语境下，生成式 AI（Generative AI）通过大语言模型（LLM）生成代码、文档和测试。
 
 ### 2.2 大语言模型（Large Language Model, LLM）
 >
@@ -94,7 +94,9 @@ candle/burn/llm.rs等原生Rust ML生态
 >
 > **来源**: [Wikipedia — Large language model](https://en.wikipedia.org/wiki/Large_language_model)
 
-大语言模型是一种以自回归或掩码方式训练、具有大量参数（通常数十亿到数万亿）的神经网络，能够理解和生成人类语言。在代码生成领域，LLM 通过在公开代码库（如 GitHub）上的训练，学习了编程语言的语法模式、API 使用习惯和常见算法实现。代表性模型包括 OpenAI GPT-4、Anthropic Claude、Google Gemini 以及专门训练的 Code Llama 和 StarCoder。
+大语言模型是一种以自回归或掩码方式训练、具有大量参数（通常数十亿到数万亿）的神经网络，能够理解和生成人类语言。
+在代码生成领域，LLM 通过在公开代码库（如 GitHub）上的训练，学习了编程语言的语法模式、API 使用习惯和常见算法实现。
+代表性模型包括 OpenAI GPT-4、Anthropic Claude、Google Gemini 以及专门训练的 Code Llama 和 StarCoder。
 
 ### 2.3 强化学习（Reinforcement Learning, RL）
 >
@@ -102,7 +104,9 @@ candle/burn/llm.rs等原生Rust ML生态
 >
 > **来源**: [Wikipedia — Reinforcement learning](https://en.wikipedia.org/wiki/Reinforcement_learning)
 
-强化学习是机器学习的一个范式，其中智能体（agent）通过与环境交互，学习在特定状态下采取动作以最大化累积奖励。与监督学习不同，RL 不需要标注数据集，而是依赖奖励信号。在 AI 辅助编程中，编译错误、测试失败和 linter 警告可以作为自然的奖励信号，驱动模型学习生成更正确的代码。
+强化学习是机器学习的一个范式，其中智能体（agent）通过与环境交互，学习在特定状态下采取动作以最大化累积奖励。
+与监督学习不同，RL 不需要标注数据集，而是依赖奖励信号。
+在 AI 辅助编程中，编译错误、测试失败和 linter 警告可以作为自然的奖励信号，驱动模型学习生成更正确的代码。
 
 ---
 
@@ -256,10 +260,10 @@ Codeium 提供免费的个人版 AI 自动补全和聊天功能：
 > **[来源: [crates.io](https://crates.io/)]**
 >
 > **来源**: [Amazon Kiro](https://www.aboutamazon.com/news/aws/kiro) · [AWS Developer Blog]
-
 > **Bloom 层级**: 应用 → 分析
 
-Kiro 是 Amazon 于 2025 年发布的 **AI 驱动代码审查与安全分析平台**。与以代码生成为核心的 Copilot 不同，Kiro 的核心价值在于**审查（Review）**而非**生成（Generation）**——它通过 AI agent 对企业级代码库进行自动化安全审计、合规检测与质量评估。
+Kiro 是 Amazon 于 2025 年发布的 **AI 驱动代码审查与安全分析平台**。
+与以代码生成为核心的 Copilot 不同，Kiro 的核心价值在于**审查（Review）**而非**生成（Generation）**——它通过 AI agent 对企业级代码库进行自动化安全审计、合规检测与质量评估。
 
 **定位与核心能力**：
 
@@ -321,7 +325,6 @@ graph LR
 > **[来源: [docs.rs](https://docs.rs/)]**
 >
 > **来源**: [Cursor 官方文档](https://cursor.com) · [Cursor Blog]
-
 > **Bloom 层级**: 应用
 
 Cursor 是基于 VS Code 开源代码分支构建的 **AI 原生 IDE**，其设计哲学是将 AI 对话与代码编辑深度融合，而非将 AI 作为插件附加到传统编辑器上。
@@ -1170,7 +1173,6 @@ graph TD
 ## 七、定理一致性矩阵（AI 集成安全层）
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
 > **[来源类型: 原创分析; AI 辅助编程研究]** 以下矩阵梳理 AI 生成 Rust 代码时的安全保证与风险边界。
 
 | 编号 | 保证 / 风险 | 前提 | 结论 | 失效条件 | 后果 |
@@ -1190,15 +1192,10 @@ graph TD
 > AI+Rust 的工具链正在生态中落地：GitHub Copilot 对 Rust 的支持持续改善、Kiro 提供 AI 驱动的代码审查、cargo-ai 实验性插件自动生成 FFI 绑定。这些工具不是替代程序员，而是将程序员的注意力从语法细节转移到架构设计。
 >
 > 生态工具见 [`../06_ecosystem/01_toolchain.md`](../../06_ecosystem/01_toolchain.md)。
-
 > **[来源: GitHub Copilot Docs; ChatGPT/OpenAI API Docs; LLM Code Generation Studies 2024]** AI 辅助编程的分析基于当前主流工具和最新研究成果。✅
-
 > **[来源: Rust Reference; Rustonomicon; Kani AWS Blog]** Rust × AI 的交集分析参考了类型系统文档和形式化验证的工业实践。✅
-
 > **[来源: GitHub Copilot Docs; ChatGPT/OpenAI API Docs; LLM Code Generation Studies 2024]** AI 辅助编程分析基于当前主流工具和最新研究成果。✅
-
 > **[来源: Rust Reference; Rustonomicon; Type System Research; Kani AWS Blog]** Rust × AI 的交集分析参考了类型系统文档和形式化验证工业实践。✅
-
 > **[来源: Deterministic Execution Research; Container Security; Reproducible Builds]** 确定性容器概念基于可复现计算和容器安全的研究。✅
 ---
 
@@ -1227,163 +1224,5 @@ graph TD
 >
 
 ---
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **相关文件**: [能力图谱](../../00_meta/competency_graph.md) · [Unsafe](../../03_advanced/03_unsafe.md) · [Rust in AI](../../07_future/21_rust_in_ai.md)

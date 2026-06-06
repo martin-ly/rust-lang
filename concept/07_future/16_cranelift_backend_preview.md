@@ -1,8 +1,8 @@
 # Cranelift 后端预研：Rust 编译器的快速调试编译
 >
-> **状态**: 🧪 Nightly 实验性
+> **状态**: 🧪 Nightly 实验性 | ⚠️ **官方因资金不足进展停滞 (2026-05)**
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)
-> **预计稳定**: 待定（需等待 RFC / MCP 完成）
+> **预计稳定**: 待定 —— Rust Project Goals 2026 已标记为 **Not completed (lack of funding)**
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]
@@ -13,7 +13,6 @@
 > **定位**: 探讨 **Cranelift** 作为 Rust 编译器（rustc）的替代后端，分析其对**编译时间**、**调试体验**和**开发迭代效率**的影响，以及与 LLVM 后端的互补关系。
 > **前置概念**: [Toolchain](../06_ecosystem/01_toolchain.md) · [Parallel Frontend](./09_parallel_frontend_preview.md)
 > **后置概念**: [Version Tracking](./05_rust_version_tracking.md)
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -51,15 +50,15 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
+  - [可运行示例：使用 Cranelift 后端](#可运行示例使用-cranelift-后端)
+    - [快速体验](#快速体验)
+    - [性能对比实测](#性能对比实测)
 
 ---
 
 ## 一、核心概念
->
->
 
 ### 1.1 问题：LLVM 的编译时间瓶颈
->
 
 Rust 编译器使用 **LLVM** 作为代码生成后端。LLVM 提供卓越的优化能力，但编译时间长：
 
@@ -88,7 +87,6 @@ LLVM 后端编译时间分解（典型中型 crate）:
 ---
 
 ### 1.2 Cranelift 的定位与设计哲学
->
 
 ```mermaid
 graph LR
@@ -297,6 +295,8 @@ graph TD
 | 里程碑 | 状态 | 预计时间 | 说明 |
 |:---|:---:|:---|:---|
 | Cranelift 核心成熟 | ✅ | 2023-2024 | Wasmtime 生产使用 |
+| Rust 后端集成 | ⚠️ | 2024-2025 | `rustc_codegen_cranelift` 可用，但属实验性 |
+| **Project Goal 2026 推进** | 🔴 **停滞** | 2026-05 | **官方标记为 Not completed：Trifecta Tech Foundation 资金不足，后端开发暂停** |
 | rustc_codegen_cranelift 可用 | ✅ | 2024 | rustup 可安装 |
 | 更多平台支持 | 🟡 | 2025-2026 | RISC-V 完善、更多 ARM 变体 |
 | 完整 unwinding 支持 | 🟡 | 2026 | `panic=unwind` 在 Cranelift 后端实现中 |

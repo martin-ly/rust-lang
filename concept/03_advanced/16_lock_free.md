@@ -26,6 +26,9 @@
 
 > **前置依赖**: [Traits](../02_intermediate/01_traits.md)
 
+> **对应 Crate**: [`c05_threads`](../../crates/c05_threads/)
+> **对应练习**: [`exercises/src/concurrency/`](../../exercises/src/concurrency/)
+
 ## 📑 目录
 
 - [无锁编程与内存模型](#无锁编程与内存模型)

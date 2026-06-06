@@ -29,8 +29,8 @@
 //!
 //! ### 兼容性
 //! ###
-//! - **标准异步接口**: 与 tokio、async-std 等运行时兼容
-//! - **standard async **: and tokio、async-std etc. runtime
+//! - **标准异步接口**: 与 tokio [历史: async-std 已于 2025-03 停止维护] 等运行时兼容
+//! - **standard async **: and tokio [history: async-std ended maintenance 2025-03] etc. runtime
 //! - **跨平台支持**: 支持 Windows、Linux、macOS
 //! - ****: environment
 //!

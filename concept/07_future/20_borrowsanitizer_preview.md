@@ -12,7 +12,6 @@
 > **定位**: 探讨 BorrowSanitizer 作为 Rust **运行时借用检查**工具的工业化路径，从 Miri 的纯解释执行扩展到编译后二进制检测的设计空间。
 > **前置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Version Tracking](./05_rust_version_tracking.md)
 > **后置概念**: [Formal Methods](./02_formal_methods.md) · [RustBelt](../04_formal/04_rustbelt.md)
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -23,9 +22,7 @@
 > [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) ·
 > [Tree Borrows Paper (POPL 2026)](https://perso.crans.org/vanille/treebor/) ·
 > [Stacked Borrows Paper](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
-
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
 
 ## 📑 目录
@@ -63,11 +60,8 @@
 ---
 
 ## 一、核心概念
->
->
 
 ### 1.1 问题定义：编译期检查的边界
->
 
 Rust 的所有权系统通过**编译期检查**消除数据竞争和内存安全问题：
 
@@ -91,7 +85,6 @@ fn main() {
 ---
 
 ### 1.2 Miri：解释执行的 UB 检测
->
 
 Miri 是 Rust 的 MIR（Mid-level IR）解释器，通过**逐条指令解释执行**检测未定义行为：
 

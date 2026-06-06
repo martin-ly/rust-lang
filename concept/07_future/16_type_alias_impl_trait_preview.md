@@ -6,18 +6,16 @@
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]
-
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 TAIT 的类型系统影响
 > **前置依赖**: [Generics](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md)
 > **后置延伸**: [RPITIT](./15_rpitit_preview.md)
-
 > **来源**: [Rust Reference — Type Aliases](https://doc.rust-lang.org/reference/items/type-aliases.html) · [RFC 2515](https://rust-lang.github.io/rfcs/2515-type_alias_impl_trait.html)
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-### 10.4 边界测试：TAIT（Type Alias Impl Trait）的递归类型限制（编译错误）
+
+## 10.4 边界测试：TAIT（Type Alias Impl Trait）的递归类型限制（编译错误）
 
 ```rust,compile_fail
 // 概念代码: TAIT 允许类型别名使用 impl trait
@@ -33,11 +31,9 @@ fn main() {}
 ```
 
 > **修正**: **TAIT**（Type Alias Impl Trait，稳定于 1.75）允许：1) `type MyIter = impl Iterator<Item = i32>;` — 类型别名隐藏具体类型；2) 模块边界抽象（库内部使用具体类型，外部只看到 trait bound）；3) 与 GAT 结合实现复杂类型关系。限制：1) TAIT 只能出现在**模块级**（不能在函数内部）；2) concrete type 必须能从所有使用点**唯一确定**；3) 不支持递归（infinite type）。应用场景：1) 库 API 隐藏实现细节；2) 复杂泛型代码的类型简化；3) 与 `impl Trait` 返回类型配合。这与 Haskell 的 `type` synonym（完全透明，不隐藏实现）或 OCaml 的 `module type`（模块签名抽象，类似但不同粒度）不同——Rust 的 TAIT 是类型系统的精确抽象机制。[来源: [TAIT Tracking Issue](https://github.com/rust-lang/rust/issues/63063)] · [来源: [Type Alias Impl Trait](https://rust-lang.github.io/rfcs/2515-type_alias_impl_trait.html)]
-
+>
 > **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
-
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
 
 ## 认知路径
@@ -47,15 +43,13 @@ fn main() {}
 ### 核心推理链
 
 | 定理 | 前提 | 结论 | 置信度 |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | TAIT Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | TAIT Preview 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | TAIT Preview 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 TAIT Preview 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 TAIT Preview 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: TAIT Preview 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

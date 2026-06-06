@@ -6,14 +6,12 @@
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]
-
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析安全标签预览特性
 > **定位**: 探讨 Safety Tags 作为 Rust **unsafe 代码契约**的机器可读标注机制，从人工文档注释演进为编译器可理解、工具可验证的安全契约格式。
 > **前置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [BorrowSanitizer](./20_borrowsanitizer_preview.md)
 > **后置概念**: [Formal Methods](./02_formal_methods.md) · [AI Integration](./01_ai_integration.md)
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -22,9 +20,7 @@
 > [Rust Internals — Safety Annotations](https://internals.rust-lang.org/) ·
 > [Rust for Linux](https://rust-for-linux.com/) ·
 > [Prusti: Deductive Verification for Rust](https://www.pm.inf.ethz.ch/publications/getpdf.php?bibname=Own&id=AstrauskasMuellerPoliSummers21.pdf)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
-
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
 
 ## 📑 目录
@@ -323,7 +319,9 @@ graph TD
 | 工具集成（Miri/Kani） | ⬜ | 2027+ | 契约验证 |
 | 稳定化 | ⬜ | 2028+ | 广泛采用 |
 
-> **预测**: Safety Tags 的演进路径参考 `unsafe_op_in_unsafe_fn`（2024 Edition）——从社区讨论到 RFC 到实现约需 2-3 年。Safety Tags 更复杂，预计需要 3-4 年。与 BorrowSanitizer 形成协同：Safety Tags 标注契约（2027+），BorrowSanitizer 验证契约（2027+），两者共同构成 Rust unsafe 代码的**标注-验证闭环**。
+> **预测**:
+> Safety Tags 的演进路径参考 `unsafe_op_in_unsafe_fn`（2024 Edition）——从社区讨论到 RFC 到实现约需 2-3 年。Safety Tags 更复杂，预计需要 3-4 年。
+> 与 BorrowSanitizer 形成协同：Safety Tags 标注契约（2027+），BorrowSanitizer 验证契约（2027+），两者共同构成 Rust unsafe 代码的**标注-验证闭环**。
 > [来源: 💡 原创分析 · [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]
 
 ---
@@ -351,7 +349,10 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/), [Rust for Linux](https://rust-for-linux.com/)
+> **权威来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/),
+> [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/),
+> [Rust for Linux](https://rust-for-linux.com/)
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.0+ (Edition 2024)
 
 **文档版本**: 1.0
@@ -362,12 +363,6 @@ graph TD
 ---
 
 ## 权威来源索引
-
->
->
->
->
->
 
 ## 十、边界测试：Safety Tags 预览的编译错误
 
@@ -387,7 +382,14 @@ fn safe_use(ptr: *mut u8) {
 }
 ```
 
-> **修正**: Safety Tags（实验性概念）是为 unsafe 代码提供形式化安全契约的元数据系统。函数或模块标记为 `"memory-safe"`、`"thread-safe"`、`"panic-safe"` 等，静态分析工具验证代码行为与标签一致。`safe_alloc` 标记为 `memory-safe` 但返回未初始化的裸指针——使用者必须知道指针的有效性约束，因此实际上不是"安全"的。正确做法：返回 `Vec<u8>` 或 `Box<[u8]>`，将裸指针封装在安全抽象中。这与 Rust 现有的 unsafe 函数契约（文档中描述前置条件）相比，Safety Tags 将非形式化的文档注释提升为可机器检查的声明。挑战：标签语义的精确定义、标签之间的蕴含关系（`memory-safe` ⇒ `thread-safe`?）、与形式化验证工具（Kani、Prusti）的集成。[来源: [Rust Secure Code WG](https://github.com/rust-secure-code/wg)] · [来源: [Safety Dance Blog Series](https://vgatherps.github.io/)]
+> **修正**:
+> Safety Tags（实验性概念）是为 unsafe 代码提供形式化安全契约的元数据系统。
+> 函数或模块标记为 `"memory-safe"`、`"thread-safe"`、`"panic-safe"` 等，静态分析工具验证代码行为与标签一致。
+> `safe_alloc` 标记为 `memory-safe` 但返回未初始化的裸指针——使用者必须知道指针的有效性约束，因此实际上不是"安全"的。
+> 正确做法：返回 `Vec<u8>` 或 `Box<[u8]>`，将裸指针封装在安全抽象中。
+> 这与 Rust 现有的 unsafe 函数契约（文档中描述前置条件）相比，Safety Tags 将非形式化的文档注释提升为可机器检查的声明。
+> 挑战：标签语义的精确定义、标签之间的蕴含关系（`memory-safe` ⇒ `thread-safe`?）、与形式化验证工具（Kani、Prusti）的集成。
+> [来源: [Rust Secure Code WG](https://github.com/rust-secure-code/wg)] · [来源: [Safety Dance Blog Series](https://vgatherps.github.io/)]
 
 ### 10.2 边界测试：标签传播与 unsafe 块边界（编译错误）
 
@@ -405,7 +407,15 @@ fn safe_add(a: i32, b: i32) -> i32 {
 }
 ```
 
-> **修正**: `"no-panic"` 标签要求函数在任何输入下都不 panic。Rust 的许多基本操作在 debug 模式下会 panic（整数溢出、数组越界、除零），在 release 模式下则回绕（wrap）或产生 UB（`get_unchecked`）。`no-panic` 标签强制开发者使用显式的安全替代：`wrapping_add`、`checked_div`、`get`（返回 `Option`）等。`no_panic` crate 通过链接时检查验证最终二进制中无 panic 调用。这与航空、汽车等安全关键领域的需求一致——禁止不可恢复的错误路径。形式化上，`no-panic` 是**全函数**（total function）的近似：对所有定义域输入都有定义输出。完全的 totality 证明需要形式化验证，但 `no-panic` 标签 + 静态分析是实用的工程折中。[来源: [no_panic Crate](https://docs.rs/no-panic/)] · [来源: [Rust Secure Code WG](https://github.com/rust-secure-code/wg)]
+> **修正**:
+> `"no-panic"` 标签要求函数在任何输入下都不 panic。
+> Rust 的许多基本操作在 debug 模式下会 panic（整数溢出、数组越界、除零），在 release 模式下则回绕（wrap）或产生 UB（`get_unchecked`）。
+> `no-panic` 标签强制开发者使用显式的安全替代：`wrapping_add`、`checked_div`、`get`（返回 `Option`）等。
+> `no_panic` crate 通过链接时检查验证最终二进制中无 panic 调用。这与航空、汽车等安全关键领域的需求一致——禁止不可恢复的错误路径。
+> 形式化上，`no-panic` 是**全函数**（total function）的近似：对所有定义域输入都有定义输出。
+> 完全的 totality 证明需要形式化验证，但 `no-panic` 标签 + 静态分析是实用的工程折中。
+> [来源: [no_panic Crate](https://docs.rs/no-panic/)] ·
+> [来源: [Rust Secure Code WG](https://github.com/rust-secure-code/wg)]
 
 ### 10.3 边界测试：安全标签的层级蕴含与工具支持缺失（编译错误/验证失败）
 
@@ -423,7 +433,18 @@ fn main() {
 }
 ```
 
-> **修正**: Safety Tags 是 Rust 安全代码 WG 提出的实验性概念，但目前**无编译器支持**，无标准语义。标签如 `"memory-safe"`、`"thread-safe"`、`"no-panic"` 是声明式的，工具（lint、验证器）可选择性识别。挑战：1) **标签语义**：`"memory-safe"` 是否蕴含 `"no-ub"`、`"no-data-race"`、`"no-use-after-free"`？2) **标签传播**：调用 `"memory-safe"` 函数的函数是否自动 `"memory-safe"`？3) **工具碎片化**：`cargo-geiger` 统计 unsafe，`no_panic` 检查 panic，无统一工具处理所有标签。这与 Java 的 `@Nullable`/`@NonNull`（Checker Framework 支持，但非标准）或 C 的 `__attribute__((nonnull))`（编译器支持有限）类似——标签/注解系统的价值取决于工具生态的成熟度。[来源: [Rust Secure Code WG](https://github.com/rust-secure-code/wg)] · [来源: [Safety Dance Blog](https://vgatherps.github.io/)]
+> **修正**:
+> Safety Tags 是 Rust 安全代码 WG 提出的实验性概念，但目前**无编译器支持**，无标准语义。
+> 标签如 `"memory-safe"`、`"thread-safe"`、`"no-panic"` 是声明式的，工具（lint、验证器）可选择性识别。
+> 挑战：
+>
+> 1) **标签语义**：`"memory-safe"` 是否蕴含 `"no-ub"`、`"no-data-race"`、`"no-use-after-free"`？
+> 2) **标签传播**：调用 `"memory-safe"` 函数的函数是否自动 `"memory-safe"`？
+> 3) **工具碎片化**：`cargo-geiger` 统计 unsafe，`no_panic` 检查 panic，无统一工具处理所有标签。
+>
+> 这与 Java 的 `@Nullable`/`@NonNull`（Checker Framework 支持，但非标准）或 C 的 `__attribute__((nonnull))`（编译器支持有限）类似——标签/注解系统的价值取决于工具生态的成熟度。
+> [来源: [Rust Secure Code WG](https://github.com/rust-secure-code/wg)] ·
+> [来源: [Safety Dance Blog](https://vgatherps.github.io/)]
 
 ### 10.4 边界测试：`unsafe` 代码的安全标签审计与人为遗漏（逻辑错误）
 
@@ -443,7 +464,21 @@ fn main() {
 }
 ```
 
-> **修正**: 安全标签是**信任机制**，非**验证机制**：开发者声明代码满足某些安全属性，但编译器不自动验证（除非结合 Kani/Prusti 等工具）。虚假标签比无标签更危险——它给审查者虚假的安全感。最佳实践：1) 每个 `unsafe` 块配详细注释（输入不变式、输出保证、为何安全）；2) 使用 Miri 在测试套件中运行 unsafe 代码；3) 使用 `cargo vet` 审计依赖的 unsafe 使用。这与航空领域的 DO-178C（"已验证"是认证过程的结果，非自我声明）或网络安全领域的 SOC 2（信任但需审计）类似——标签是起点，非终点。Rust 社区正在探索将标签与形式化验证结合：标签声明 + 工具验证 = 可组合的安全保证。[来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)] · [来源: [Rust Secure Code WG](https://github.com/rust-secure-code/wg)]
+> **修正**:
+>
+> 安全标签是**信任机制**，非**验证机制**：开发者声明代码满足某些安全属性，但编译器不自动验证（除非结合 Kani/Prusti 等工具）。
+> 虚假标签比无标签更危险——它给审查者虚假的安全感。
+>
+> 最佳实践：
+>
+> 1) 每个 `unsafe` 块配详细注释（输入不变式、输出保证、为何安全）；
+> 2) 使用 Miri 在测试套件中运行 unsafe 代码；
+> 3) 使用 `cargo vet` 审计依赖的 unsafe 使用。
+>
+> 这与航空领域的 DO-178C（"已验证"是认证过程的结果，非自我声明）或网络安全领域的 SOC 2（信任但需审计）类似——标签是起点，非终点。
+> Rust 社区正在探索将标签与形式化验证结合：标签声明 + 工具验证 = 可组合的安全保证。
+> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)] ·
+> [来源: [Rust Secure Code WG](https://github.com/rust-secure-code/wg)]
 
 ### 10.4 边界测试：`#[safety::tag]` 的契约验证与工具链支持（编译错误/未来特性）
 
@@ -460,15 +495,29 @@ fn main() {
 fn main() {}
 ```
 
-> **修正**: **Safety Tags** 是 Rust 形式化验证的前沿方向：1) 在 unsafe 函数上标注**安全契约**（前置条件、后置条件、副作用）；2) 静态分析工具验证调用点满足契约；3) 与 Miri、Kani、Prusti 等工具集成。当前状态：讨论阶段，无 RFC。相关努力：1) `contracts` crate（运行时契约检查）；2) 文档约定（`SAFETY:` 注释）；3) `unsafe-code-guidelines` working group 的形式化规范。Safety Tags 若实现，将使 Rust 的 unsafe 代码从"文档化契约"提升到"工具验证契约"，是向"形式化保证 unsafe 安全"迈出的重要一步。这与 Ada/SPARK 的 contracts（`Pre`/`Post` 条件，工具验证）或 Dafny 的 `requires`/`ensures`（编译期验证）类似——Rust 的安全标签将是语言原生支持或标准化注释。[来源: [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)] · [来源: [Rust Safety Research](https://www.rust-lang.org/governance/wgs)]
-> **过渡**: Safety Tags 概念预研：Unsafe 契约的机器可读标注 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Safety Tags 概念预研：Unsafe 契约的机器可读标注 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **修正**:
+>
+> **Safety Tags** 是 Rust 形式化验证的前沿方向：
+>
+> 1) 在 unsafe 函数上标注**安全契约**（前置条件、后置条件、副作用）；
+> 2) 静态分析工具验证调用点满足契约；
+> 3) 与 Miri、Kani、Prusti 等工具集成。
+>
+> 当前状态：讨论阶段，无 RFC。
+> 相关努力：
+>
+> 1) `contracts` crate（运行时契约检查）；
+> 2) 文档约定（`SAFETY:` 注释）；
+> 3) `unsafe-code-guidelines` working group 的形式化规范。
+>
+> Safety Tags 若实现，将使 Rust 的 unsafe 代码从"文档化契约"提升到"工具验证契约"，是向"形式化保证 unsafe 安全"迈出的重要一步。
+> 这与 Ada/SPARK 的 contracts（`Pre`/`Post` 条件，工具验证）或 Dafny 的 `requires`/`ensures`（编译期验证）类似——Rust 的安全标签将是语言原生支持或标准化注释。
+> [来源: [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)] ·
+> [来源: [Rust Safety Research](https://www.rust-lang.org/governance/wgs)]
 > **过渡**: Safety Tags 概念预研：Unsafe 契约的机器可读标注 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ### 补充定理链
 
-- **定理**: Safety Tags 概念预研：Unsafe 契约的机器可读标注 定义 ⟹ 类型安全保证
-- **定理**: Safety Tags 概念预研：Unsafe 契约的机器可读标注 定义 ⟹ 类型安全保证
 - **定理**: Safety Tags 概念预研：Unsafe 契约的机器可读标注 定义 ⟹ 类型安全保证
 
 ## 认知路径
@@ -484,11 +533,11 @@ fn main() {}
 | Safety Tags 概念预研：Unsafe 契约的机器可读标注 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 Safety Tags 概念预研：Unsafe 契约的机器可读标注 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 Safety Tags 概念预研：Unsafe 契约的机器可读标注 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: Safety Tags 概念预研：Unsafe 契约的机器可读标注 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界
 
-> **反命题**: "Safety Tags 概念预研：Unsafe 契约的机器可读标注 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
+> **反命题**:
+> "Safety Tags 概念预研：Unsafe 契约的机器可读标注 是万能解决方案，适用于所有场景" —— 错误。
+> 任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。

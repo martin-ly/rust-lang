@@ -11,6 +11,9 @@
 
 > **后置概念**: [Formal Verification](../04_formal/03_ownership_formal.md)
 
+> **对应 Crate**: [`c06_async`](../../crates/c06_async/)
+> **对应练习**: [`exercises/src/async_programming/`](../../exercises/src/async_programming/)
+
 ## 📑 目录
 
 - [Async/Await 高级主题](#asyncawait-高级主题)

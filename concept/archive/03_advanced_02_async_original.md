@@ -741,9 +741,7 @@ graph TD
 ## 五、定理一致性矩阵（Theorem Consistency Matrix）
 >
 > [来源: [Rust Async Book]]
-
 > **章节过渡**：思维导图提供概念拓扑，而定理矩阵提供严格的推理链条。以下 10 条定理按"语言层（L）→ 变换层（T）→ 约束层（C）→ 运行时层（P）→ 抽象层（A）→ 系统层（S）"递进排列，每行均含"⟹"推理链，展示从前提到结论的必然性。
-
 > **[Rust Reference: Pin]** 一致性检查: Pin 不动性 ⟹ Future 轮询安全 ⟹ async 状态机安全，形成**从内存到状态到控制流**的递进链。注意：async 的完整形式化仍是活跃研究领域。✅ 已验证
 >
 > **[🔍 待验证]** async 的完整形式化（包括 Waker 契约、执行器正确性）仍是活跃研究领域，目前仅有部分片段被形式化验证。
@@ -802,13 +800,11 @@ graph TD
 ## 六、反命题决策树（Counter-proposition Decision Trees）
 >
 > [来源: [Rust Async Book]]
-
 > **章节过渡**：定理矩阵回答"什么必然为真"，反命题决策树则揭示"什么看似为真实则不然"。以下三组反命题分别针对零成本、完成性与等价性三个常见误解，反例节点以红色标注，展示从直觉到谬误再到修正的完整路径。
 
 ### 6.1 反命题: "async/await 总是零成本"
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
 > **误解来源**: 官方宣传"zero-cost abstraction"被简化为"绝对零开销"。
 
 ```mermaid
@@ -845,7 +841,6 @@ graph TD
 ### 6.2 反命题: "Future 一旦 poll 就一定完成"
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
 > **误解来源**: 同步思维惯性——函数调用即执行到返回。
 
 ```mermaid
@@ -882,7 +877,6 @@ Future 的生命周期独立于 poll 调用：
 ### 6.3 反命题: "async fn 等价于返回 Future 的 fn"
 >
 > **[来源: [crates.io](https://crates.io/)]**
-
 > **误解来源**: 语法脱糖后的表面相似性——`async fn foo() -> T` 看起来像 `fn foo() -> impl Future<Output = T>`。
 
 ```mermaid
@@ -922,7 +916,6 @@ graph TD
 ## 七、决策/边界判定树（Decision / Boundary Tree）
 >
 > [来源: [Rust Async Book]]
-
 > **章节过渡**：反命题破除了常见神话，而决策树则提供正向的工程判断框架。以下两棵树分别解决"何时用 async"和"何时用 Pin"的选择问题，为实际编码提供可操作的判定路径。
 
 ### 7.1 "Async vs Thread？" 决策树
@@ -972,7 +965,6 @@ graph TD
 ## 八、示例与反例（Examples & Counter-examples）
 >
 > [来源: [Rust Async Book]]
-
 > **章节过渡**：理论最终需落地为代码。以下示例从正确用法出发，逐步深入到常见陷阱与边界极限测试，覆盖"阻塞误用→Send 约束→取消安全→生命周期"四个维度。
 
 ### 8.1 正确示例：async fn + .await
@@ -1125,7 +1117,6 @@ fn main() {
 ### 8.7 边界极限测试：取消安全系统分析
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
-
 > **章节过渡**：Send 约束确保状态机可安全跨线程迁移，但当 Future 被主动丢弃（如 `select!` 分支落选）时，状态机的局部效应如何处理？取消安全（cancellation safety）是 async 编程中最易被忽视的正确性维度——每个 `.await` 都是一个潜在的取消点。
 
 **取消点（Cancellation Point）的形式化定义**：
@@ -1232,13 +1223,11 @@ async fn graceful_shutdown(token: CancellationToken) {
 ```
 
 > **来源**: [Async Book: Cancellation] · [Tokio Documentation: Cancellation safety] · [RFC 2394 §5: Drop semantics]
-
 > **[Async Book: Cancellation]** 取消安全不是自动保证的——Future 的取消语义等价于在任意 await 点注入 `return`，程序员需显式设计每个 await 边界的状态一致性。✅ 已验证
 
 ### 8.8 Waker 契约与活性
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 > **章节过渡**：取消安全回答了"Future 被丢弃时会发生什么"，而 Waker 契约则回答"Future 被挂起后如何复活"。二者共同构成异步执行的生命周期闭环：从 poll 到 Pending，从 wake 到再 poll，任何一环断裂都会导致活锁或资源泄漏。
 
 **Waker 契约（Waker Contract）**：
@@ -1298,7 +1287,6 @@ graph TD
 > **认知功能**: 活性调试路径图——当 Future 陷入永久 Pending 时，按此决策树定位故障根因。读者可逐层检查 Waker 注册、Reactor 唤醒调用、poll 返回值合法性三个环节。关键洞察：`poll → Pending → wake → poll` 的闭环是异步执行器活性（liveness）的根本保证，任一环节断裂即导致活锁或饥饿。[来源: 💡 原创分析]
 > [来源: [Rust Reference: Pin](https://doc.rust-lang.org/reference/types/pin.html)]
 > [来源: [Rust Async Book]]
-
 > **[Async Book: Waker]** Waker 是 Future 与 Reactor 之间的桥梁——poll 时将 Waker 传递给底层 I/O 源，I/O 就绪时源通过 Waker 通知执行器重新调度该 Future。✅ 已验证
 >
 > **[without.boats blog]** Waker 的设计刻意与具体执行器解耦：任何实现了 `Wake` trait 的类型均可作为 Waker，这使得同一个 Future 可在不同运行时之间复用。✅ 已验证
@@ -1308,13 +1296,11 @@ graph TD
 ### 8.9 Waker/Context 的底层机制
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 > **章节过渡**：取消安全与 Waker 契约从语义层面描述了 Future 的生命周期，但 Waker 本身是如何实现的？理解 Waker 的 VTable 机制、Context 与 Waker 的关系，以及自定义 Waker 的实现方式，是手写 Future 和构建自定义运行时的必备知识。
 
 **Waker 的 VTable 机制**
 
 > **[futures-rs 文档]** `Waker` 是一个不透明句柄，由执行器（executor）创建，通过 `RawWaker` 和 `RawWakerVTable` 实现类型擦除。VTable 包含 `clone`、`wake`、`wake_by_ref` 和 `drop` 四个函数指针。✅ 已验证
-
 > **[Tokio 源码]** Tokio 的 Waker 基于 `std::task::Waker`，其底层通过 `Arc<Header>` 引用任务句柄，`wake` 操作将任务重新推入调度队列。✅ 已验证
 
 ```rust,ignore

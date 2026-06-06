@@ -198,6 +198,7 @@ graph TB
 - [航空航天认证与形式化方法 (Aerospace Certification & Formal Methods)](./16_aerospace_certification_formal_methods.md)
 - [现代 Rust 验证工具生态（2025-2026）](./22_modern_verification_tools.md)
 - [通用程序语言理论基础：Rust 的 PL 基座](./23_programming_language_foundations.md)
+- [测验：形式化方法概念（嵌入式互动试点）](./24_quiz_formal_methods.md)
 
 ## 三、与上层概念的严格映射
 

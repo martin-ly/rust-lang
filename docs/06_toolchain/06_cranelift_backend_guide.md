@@ -6,7 +6,7 @@
 > **创建日期**: 2026-05-08
 > **最后更新**: 2026-05-08
 > **Rust 版本**: nightly (Cranelift 无 stable 版本)
-> **状态**: ⚡ 可用 (unstable)
+> **状态**: ⚠️ **可用但进展停滞** — Rust Project Goals 2026 已标记为 **Not completed (lack of funding)**。Trifecta Tech Foundation 资金不足，生产就绪目标暂停。当前配置仍可实验性使用，但长期维护存疑。
 
 ---
 
@@ -328,6 +328,8 @@ flowchart TD
 ---
 
 ## 🔧 实战配置模板
+>
+> ⚠️ **风险警告**: 以下配置基于 `rustc_codegen_cranelift` 实验性后端。由于 Rust Project Goals 2026 已将 Cranelift 生产就绪目标标记为 **因资金不足停滞**，长期维护存疑。建议仅用于短期实验，生产环境请继续使用 LLVM。
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 

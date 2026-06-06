@@ -21,6 +21,8 @@
 
 > **前置依赖**: [Traits](../02_intermediate/01_traits.md)
 
+> **对应练习**: [`exercises/src/unsafe_rust/`](../../exercises/src/unsafe_rust/)
+
 ## 📑 目录
 
 - [Unsafe Rust 模式：安全抽象的核心技术](#unsafe-rust-模式安全抽象的核心技术)

@@ -2,20 +2,19 @@
 >
 > **受众**: [专家]
 > **内容分级**: [综述级]
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 > **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
-
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
 
 ## 1. 引言
 
-eBPF（extended Berkeley Packet Filter）已从早期的网络包过滤机制演变为 Linux 内核的通用可编程基础设施。它允许在不修改内核源码、不加载内核模块的前提下，向内核注入沙盒化字节码，实现可观测性（tracing）、网络处理（XDP/TC）、安全策略（LSM）等功能 [来源: Linux Kernel Documentation, eBPF, https://docs.kernel.org/bpf/]。
+eBPF（extended Berkeley Packet Filter）已从早期的网络包过滤机制演变为 Linux 内核的通用可编程基础设施。
+它允许在不修改内核源码、不加载内核模块的前提下，向内核注入沙盒化字节码，实现可观测性（tracing）、网络处理（XDP/TC）、安全策略（LSM）等功能 [来源: Linux Kernel Documentation, eBPF, https://docs.kernel.org/bpf/]。
 
-然而，传统 eBPF 开发以 C 语言为主，依赖 llvm 编译器将 C 代码编译为 eBPF 字节码，再经由内核的 eBPF 验证器（verifier）进行安全性检查。这一流程存在显著痛点：
+然而，传统 eBPF 开发以 C 语言为主，依赖 llvm 编译器将 C 代码编译为 eBPF 字节码，再经由内核的 eBPF 验证器（verifier）进行安全性检查。
+这一流程存在显著痛点：
 
 - **验证器黑盒化**：C 代码与验证器错误消息之间的映射晦涩难懂
 - **内存安全缺失**：C 语言的原生漏洞（use-after-free、空指针解引用）在 eBPF 中同样存在
@@ -55,7 +54,9 @@ eBPF 程序类型决定了代码在内核中的挂载点和执行上下文。不
 
 ## 3. Aya 框架深度分析
 
-Aya 是第一个实现**纯 Rust eBPF 工具链**的框架，其核心设计目标是让 eBPF 开发完全融入 Rust/Cargo 生态。[来源: [Aya Documentation](https://aya-rs.dev/)] · [来源: [eBPF.io — Aya](https://ebpf.io/projects/#aya)]
+Aya 是第一个实现**纯 Rust eBPF 工具链**的框架，其核心设计目标是让 eBPF 开发完全融入 Rust/Cargo 生态。
+[来源: [Aya Documentation](https://aya-rs.dev/)] ·
+[来源: [eBPF.io — Aya](https://ebpf.io/projects/#aya)]
 
 ### 3.1 架构概览
 >
@@ -103,7 +104,6 @@ graph TB
 ```
 
 ### 3.2 compile-once-run-anywhere (CO-RE)
->
 
 Aya 利用内核的 **BTF (BPF Type Format)** 和 **libbpf** 的 CO-RE 机制，实现了"编译一次，到处运行"：
 
@@ -123,15 +123,15 @@ pub fn my_kprobe(ctx: ProbeContext) -> u32 {
 CO-RE 的关键依赖：
 
 | 依赖 | 作用 | Rust 侧处理 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | BTF | 内核数据结构的类型和布局信息 | `aya-tool` 自动生成 Rust 绑定 |
 | `vmlinux.h` | 内核类型的 C 头文件 | `aya-tool generate` 转换为 `vmlinux.rs` |
 | Relocation | 运行时的字段偏移调整 | Aya 加载器自动处理 |
 
 ### 3.3 BPF Map 类型与 Rust API
->
 
-BPF Map 是内核态与用户态之间的共享内存通信机制。Aya 为每种 Map 类型提供了类型安全的 Rust 封装：
+BPF Map 是内核态与用户态之间的共享内存通信机制。
+Aya 为每种 Map 类型提供了类型安全的 Rust 封装：
 
 | Map 类型 | 内核 API | Aya 内核态 | Aya 用户态 | 典型用途 |
 |:---|:---|:---|:---|:---|
@@ -726,7 +726,13 @@ pub fn test_prog(ctx: ProbeContext) -> u32 {
 }
 ```
 
-> **修正**: eBPF 程序运行在内核上下文中，资源极其受限：栈大小最大 512 字节（Linux 内核限制），指令数限制 100 万条，无堆分配，无递归，无循环（或有限循环，取决于内核版本）。Rust 的 eBPF 生态（aya、redbpf）在编译期通过编译器插件和验证器检查这些约束。大数组必须使用 `PerCpuArray` 或 `HashMap`（BPF map，驻留在内核内存而非栈），函数调用必须内联（或受限于 BPF-to-BPF call 限制）。这与用户空间 Rust（GB 级内存、递归、动态分配）截然不同——eBPF 是"在极端约束下编程"，Rust 的类型系统和宏在此场景下仍提供内存安全（无空指针、无 use-after-free），但不能防止资源超限。[来源: [aya Documentation](https://aya-rs.dev/)] · [来源: [Linux Kernel eBPF Documentation](https://www.kernel.org/doc/html/latest/bpf/)]
+> **修正**:
+> eBPF 程序运行在内核上下文中，资源极其受限：栈大小最大 512 字节（Linux 内核限制），指令数限制 100 万条，无堆分配，无递归，无循环（或有限循环，取决于内核版本）。
+> Rust 的 eBPF 生态（aya、redbpf）在编译期通过编译器插件和验证器检查这些约束。
+> 大数组必须使用 `PerCpuArray` 或 `HashMap`（BPF map，驻留在内核内存而非栈），函数调用必须内联（或受限于 BPF-to-BPF call 限制）。
+> 这与用户空间 Rust（GB 级内存、递归、动态分配）截然不同——eBPF 是"在极端约束下编程"，Rust 的类型系统和宏在此场景下仍提供内存安全（无空指针、无 use-after-free），但不能防止资源超限。
+> [来源: [aya Documentation](https://aya-rs.dev/)] ·
+> [来源: [Linux Kernel eBPF Documentation](https://www.kernel.org/doc/html/latest/bpf/)]
 
 ### 10.2 边界测试：eBPF 与用户空间的类型布局不匹配（编译错误）
 
@@ -748,7 +754,15 @@ struct UserEvent {
 }
 ```
 
-> **修正**: eBPF 程序与用户空间程序通过 BPF map 和 perf buffer 交换数据，共享数据结构必须**逐字节布局一致**。Rust 的 `#[repr(C)]` 确保 C 兼容布局，但字段类型、顺序、大小必须在两端完全一致。`u32` vs `u64` 的不匹配导致读取时偏移错乱（`uid` 读到 `comm` 的部分数据）。更隐蔽的问题是填充（padding）：`#[repr(C)]` 的 `struct { u8, u32 }` 在 x86-64 上有 3 字节填充，若 eBPF 端和用户空间端编译目标不同（如 eBPF 端是 64 位，用户空间是 32 位），对齐可能不同。最佳实践：使用 `#[repr(C, packed)]` 消除填充，显式指定字段大小，或通过 `aya-tool` 自动生成共享类型。这与网络协议的字节序问题类似——跨边界通信的数据结构需要严格的形式化规范。[来源: [aya Documentation](https://aya-rs.dev/)] · [来源: [Rust Reference — Type Layout](https://doc.rust-lang.org/reference/type-layout.html)]
+> **修正**:
+> eBPF 程序与用户空间程序通过 BPF map 和 perf buffer 交换数据，共享数据结构必须**逐字节布局一致**。
+> Rust 的 `#[repr(C)]` 确保 C 兼容布局，但字段类型、顺序、大小必须在两端完全一致。
+> `u32` vs `u64` 的不匹配导致读取时偏移错乱（`uid` 读到 `comm` 的部分数据）。
+> 更隐蔽的问题是填充（padding）：`#[repr(C)]` 的 `struct { u8, u32 }` 在 x86-64 上有 3 字节填充，若 eBPF 端和用户空间端编译目标不同（如 eBPF 端是 64 位，用户空间是 32 位），对齐可能不同。
+> 最佳实践：使用 `#[repr(C, packed)]` 消除填充，显式指定字段大小，或通过 `aya-tool` 自动生成共享类型。
+> 这与网络协议的字节序问题类似——跨边界通信的数据结构需要严格的形式化规范。
+> [来源: [aya Documentation](https://aya-rs.dev/)] ·
+> [来源: [Rust Reference — Type Layout](https://doc.rust-lang.org/reference/type-layout.html)]
 
 ### 10.3 边界测试：eBPF 的验证器拒绝与 Rust 的抽象泄漏（运行时加载失败）
 
@@ -772,7 +786,31 @@ pub fn trace_handler(ctx: TracePointContext) -> u32 {
 }
 ```
 
-> **修正**: eBPF 程序在加载到内核前需通过**验证器**（verifier）检查：1) 无无限循环；2) 无无效内存访问；3) 栈大小 ≤ 512 字节；4) 指令数 ≤ 100 万。Rust 的高级抽象可能生成验证器难以分析的控制流：1) `panic` 的展开代码（即使不可达）；2) 复杂的 `match` 优化；3) 循环的边界证明不足。`aya` 和 `redbpf` 提供 `#[inline(never)]`、`#[no_panic]` 等属性帮助生成验证器友好的代码。调试方法：1) `bpftool prog load` 查看验证器日志；2) `aya-log` 输出运行时日志；3) 简化 Rust 代码，逐步定位验证器拒绝点。这与 C 的 eBPF（同样需通过验证器，但控制流更简单）或 Go 的 eBPF（通过 `cilium/ebpf` 生成，较少高级抽象）类似——Rust 的类型安全在 eBPF 中仍有效，但验证器的保守性要求代码风格适应。[来源: [aya Documentation](https://aya-rs.dev/)] · [来源: [Linux eBPF Verifier](https://www.kernel.org/doc/html/latest/bpf/verifier.html)]
+> **修正**:
+> eBPF 程序在加载到内核前需通过**验证器**（verifier）检查：
+>
+> 1) 无无限循环；
+> 2) 无无效内存访问；
+> 3) 栈大小 ≤ 512 字节；
+> 4) 指令数 ≤ 100 万。
+>
+> Rust 的高级抽象可能生成验证器难以分析的控制流：
+>
+> 1) `panic` 的展开代码（即使不可达）；
+> 2) 复杂的 `match` 优化；
+> 3) 循环的边界证明不足。
+>
+> `aya` 和 `redbpf` 提供 `#[inline(never)]`、`#[no_panic]` 等属性帮助生成验证器友好的代码。
+>
+> 调试方法：
+>
+> 1) `bpftool prog load` 查看验证器日志；
+> 2) `aya-log` 输出运行时日志；
+> 3) 简化 Rust 代码，逐步定位验证器拒绝点。
+>
+> 这与 C 的 eBPF（同样需通过验证器，但控制流更简单）或 Go 的 eBPF（通过 `cilium/ebpf` 生成，较少高级抽象）类似——Rust 的类型安全在 eBPF 中仍有效，但验证器的保守性要求代码风格适应。
+> [来源: [aya Documentation](https://aya-rs.dev/)] ·
+> [来源: [Linux eBPF Verifier](https://www.kernel.org/doc/html/latest/bpf/verifier.html)]
 
 ### 10.4 边界测试：eBPF 与用户空间的 map 类型共享（编译错误）
 
@@ -791,7 +829,19 @@ fn read_counter(bpf: &mut Bpf) {
 }
 ```
 
-> **修正**: eBPF 的 **map** 是内核中的键值存储，eBPF 程序和用户空间程序通过 map 交换数据。map 的类型（键大小、值大小、最大条目数）在创建时固定，eBPF 侧和用户空间侧必须一致。Rust 的 `aya` 库在编译期通过泛型参数检查类型：`AyaHashMap<_, u32, u64>` 要求键 4 字节、值 8 字节，与 eBPF 的 `HashMap<u32, u64>` 匹配。但类型别名、平台差异（32/64 位）、对齐填充仍可能导致不匹配。安全模式：1) 使用共享类型定义 crate（`#[repr(C)]` struct）；2) 显式 `assert_eq!(std::mem::size_of::<Key>(), 4)`；3) 使用 `aya-tool` 从 eBPF 代码生成 Rust 绑定。这与 C 的 eBPF（手动计算大小，易错）或 Go 的 `cilium/ebpf`（反射检查类型）类似——Rust 的泛型在编译期提供了部分保护，但跨语言边界的类型一致性仍需人工保证。[来源: [aya Documentation](https://aya-rs.dev/)] · [来源: [Linux BPF Maps](https://docs.kernel.org/bpf/maps.html)]
+> **修正**:
+> eBPF 的 **map** 是内核中的键值存储，eBPF 程序和用户空间程序通过 map 交换数据。
+> map 的类型（键大小、值大小、最大条目数）在创建时固定，eBPF 侧和用户空间侧必须一致。
+> Rust 的 `aya` 库在编译期通过泛型参数检查类型：`AyaHashMap<_, u32, u64>` 要求键 4 字节、值 8 字节，与 eBPF 的 `HashMap<u32, u64>` 匹配。
+> 但类型别名、平台差异（32/64 位）、对齐填充仍可能导致不匹配。
+> 安全模式：
+>
+> 1) 使用共享类型定义 crate（`#[repr(C)]` struct）；
+> 2) 显式 `assert_eq!(std::mem::size_of::<Key>(), 4)`；
+> 3) 使用 `aya-tool` 从 eBPF 代码生成 Rust 绑定。
+> 这与 C 的 eBPF（手动计算大小，易错）或 Go 的 `cilium/ebpf`（反射检查类型）类似——Rust 的泛型在编译期提供了部分保护，但跨语言边界的类型一致性仍需人工保证。
+> [来源: [aya Documentation](https://aya-rs.dev/)] ·
+> [来源: [Linux BPF Maps](https://docs.kernel.org/bpf/maps.html)]
 
 ### 10.3 边界测试：eBPF 的栈大小限制与 Rust 的局部变量（编译错误/运行时验证失败）
 
@@ -811,7 +861,28 @@ pub fn my_xdp(ctx: XdpContext) -> u32 {
 }
 ```
 
-> **修正**: eBPF（extended Berkeley Packet Filter）的**内核验证器**限制：1) **栈大小**：最大 512 字节（所有局部变量总和）；2) **指令数**：最大 100 万条；3) **循环**：需证明有界终止；4) **无 null 解引用**：验证器跟踪指针有效性。Rust 的 eBPF 开发（`aya`、`redbpf`）：1) 使用 `no_std` + 自定义宏（`#[xdp]`、`#[tracepoint]`）；2) `aya-tool` 生成内核类型绑定；3) 用户空间程序用标准 Rust 加载 eBPF 程序。挑战：1) Rust 的 panic handler（eBPF 中 panic 是非法的）；2) 浮点数（eBPF 不支持浮点运算）；3) 全局变量（eBPF 的 map 替代）。这与 C 的 eBPF 开发（libbpf，手动管理）或 Go 的 eBPF（via CGo，性能开销）不同——Rust 的 eBPF 生态（aya）提供类型安全的内核编程。[来源: [aya](https://aya-rs.dev/)] · [来源: [eBPF.io](https://ebpf.io/)]
+> **修正**:
+> eBPF（extended Berkeley Packet Filter）的**内核验证器**限制：
+>
+> 1) **栈大小**：最大 512 字节（所有局部变量总和）；
+> 2) **指令数**：最大 100 万条；
+> 3) **循环**：需证明有界终止；
+> 4) **无 null 解引用**：验证器跟踪指针有效性。
+>
+> Rust 的 eBPF 开发（`aya`、`redbpf`）：
+>
+> 1) 使用 `no_std` + 自定义宏（`#[xdp]`、`#[tracepoint]`）；
+> 2) `aya-tool` 生成内核类型绑定；
+> 3) 用户空间程序用标准 Rust 加载 eBPF 程序。
+>
+> 挑战：
+>
+> 1) Rust 的 panic handler（eBPF 中 panic 是非法的）；
+> 2) 浮点数（eBPF 不支持浮点运算）；
+> 3) 全局变量（eBPF 的 map 替代）。
+> 这与 C 的 eBPF 开发（libbpf，手动管理）或 Go 的 eBPF（via CGo，性能开销）不同——Rust 的 eBPF 生态（aya）提供类型安全的内核编程。
+> [来源: [aya](https://aya-rs.dev/)] ·
+> [来源: [eBPF.io](https://ebpf.io/)]
 
 ---
 
@@ -824,8 +895,6 @@ pub fn my_xdp(ctx: XdpContext) -> u32 {
 > [来源: [Linux Kernel — BPF Documentation](https://www.kernel.org/doc/html/latest/bpf/)]
 > [来源: [Aya — eBPF for Rust](https://aya-rs.dev/)]
 > [来源: [Wikipedia — eBPF](https://en.wikipedia.org/wiki/EBPF)]
-> **过渡**: eBPF / Aya / Rex 的 Rust 映射 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: eBPF / Aya / Rex 的 Rust 映射 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: eBPF / Aya / Rex 的 Rust 映射 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ### 补充定理链
@@ -847,9 +916,7 @@ pub fn my_xdp(ctx: XdpContext) -> u32 {
 | eBPF / Aya / Rex 的 Rust 映射 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 eBPF / Aya / Rex 的 Rust 映射 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 eBPF / Aya / Rex 的 Rust 映射 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: eBPF / Aya / Rex 的 Rust 映射 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

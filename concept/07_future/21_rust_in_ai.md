@@ -9,7 +9,6 @@
 > **定位**: 分析 Rust 在**AI/ML 基础设施**中的新兴应用——从张量运算、推理引擎到 ML 管道编排，揭示 Rust 如何在高性能 AI 系统中提供内存安全和低延迟优势。
 > **前置概念**: [Unsafe](../03_advanced/03_unsafe.md) · [Concurrency](../03_advanced/01_concurrency.md) · [WebAssembly](../06_ecosystem/11_webassembly.md)
 > **后置概念**: [AI Integration](./01_ai_integration.md) · [Evolution](./03_evolution.md)
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -140,7 +139,6 @@ Rust ML 生态分层:
 ---
 
 ### 1.3 推理 vs 训练
->
 
 ```text
 Rust 在 AI 流水线中的定位:
@@ -263,7 +261,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 ---
 
 ### 2.3 WebAssembly 推理
->
 
 ```text
 WASM 推理的优势:
@@ -337,7 +334,6 @@ WASM 推理的优势:
 ## 四、反命题与边界分析
 
 ### 4.1 反命题树
->
 
 ```mermaid
 graph TD
@@ -359,7 +355,6 @@ graph TD
 ---
 
 ### 4.2 边界极限
->
 
 ```text
 边界 1: CUDA 生态
@@ -508,7 +503,14 @@ fn matmul_incompatible() {
 }
 ```
 
-> **修正**: 深度学习框架（PyTorch、TensorFlow、candle）中，张量形状不匹配是最常见的错误。Rust 的 candle 库在运行时检查形状兼容性（`a.matmul(&b)` 要求 `a.dims()[1] == b.dims()[0]`），失败时返回 `Result::Err`。这与 Python 的 PyTorch（运行时抛出 Python 异常）类似，但 Rust 的 `Result` 强制显式处理错误。更安全的抽象：使用类型级别形状（如 `nalgebra` 的 `Matrix<M, N>` 或实验性的 `typed-tensor` crate）可在编译期检查矩阵乘法形状。但深度学习的动态形状（batch size 变化、序列长度变化）使静态形状检查困难。Rust AI 生态的设计权衡：静态安全 vs 动态灵活性，目前主流选择运行时检查 + Result 传播。[来源: [candle Documentation](https://github.com/huggingface/candle)] · [来源: [burn-rs](https://burn.dev/)]
+> **修正**:
+> 深度学习框架（PyTorch、TensorFlow、candle）中，张量形状不匹配是最常见的错误。
+> Rust 的 candle 库在运行时检查形状兼容性（`a.matmul(&b)` 要求 `a.dims()[1] == b.dims()[0]`），失败时返回 `Result::Err`。
+> 这与 Python 的 PyTorch（运行时抛出 Python 异常）类似，但 Rust 的 `Result` 强制显式处理错误。
+> 更安全的抽象：使用类型级别形状（如 `nalgebra` 的 `Matrix<M, N>` 或实验性的 `typed-tensor` crate）可在编译期检查矩阵乘法形状。
+> 但深度学习的动态形状（batch size 变化、序列长度变化）使静态形状检查困难。
+> Rust AI 生态的设计权衡：静态安全 vs 动态灵活性，目前主流选择运行时检查 + Result 传播。
+> [来源: [candle Documentation](https://github.com/huggingface/candle)] · [来源: [burn-rs](https://burn.dev/)]
 
 ### 10.2 边界测试：`unsafe` 与 SIMD 的内在函数约束（编译错误）
 
@@ -529,7 +531,15 @@ fn simd_add(a: [f32; 4], b: [f32; 4]) -> [f32; 4] {
 }
 ```
 
-> **修正**: Rust 的 SIMD 支持通过 `std::arch` 模块提供目标架构特定的内在函数（intrinsics）。`_mm_add_ps`（SSE）和 `_mm256_add_ps`（AVX）要求目标 CPU 支持相应指令集。编译期通过 `target_feature` 属性控制：`#[target_feature(enable = "sse2")]` 标记函数需要 SSE2，调用者必须确保在支持 SSE2 的 CPU 上运行。若直接在不支持的 CPU 上调用，是未定义行为（非法指令异常）。安全替代：`std::simd`（实验性，portable SIMD）提供跨平台 SIMD 抽象，编译器自动选择最优指令集。Rust AI 推理框架（candle、burn）广泛使用 SIMD/AVX 优化矩阵运算，通过 `unsafe` 内在函数或 `std::simd` 实现零成本加速。[来源: [Rust SIMD Documentation](https://doc.rust-lang.org/std/simd/index.html)] · [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**:
+> Rust 的 SIMD 支持通过 `std::arch` 模块提供目标架构特定的内在函数（intrinsics）。
+> `_mm_add_ps`（SSE）和 `_mm256_add_ps`（AVX）要求目标 CPU 支持相应指令集。
+> 编译期通过 `target_feature` 属性控制：`#[target_feature(enable = "sse2")]` 标记函数需要 SSE2，调用者必须确保在支持 SSE2 的 CPU 上运行。
+> 若直接在不支持的 CPU 上调用，是未定义行为（非法指令异常）。
+> 安全替代：`std::simd`（实验性，portable SIMD）提供跨平台 SIMD 抽象，编译器自动选择最优指令集。
+> Rust AI 推理框架（candle、burn）广泛使用 SIMD/AVX 优化矩阵运算，通过 `unsafe` 内在函数或 `std::simd` 实现零成本加速。
+> [来源: [Rust SIMD Documentation](https://doc.rust-lang.org/std/simd/index.html)] ·
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.6 边界测试：AI 模型的序列化与版本兼容性（运行时加载失败）
 
@@ -544,7 +554,28 @@ fn load_model(path: &str) -> anyhow::Result<Tensor> {
 }
 ```
 
-> **修正**: AI 模型的序列化格式（ONNX、Safetensors、GGUF、PyTorch pickle）有版本演进。`candle` 库加载模型时：1) **Safetensors** 格式较稳定（Mozilla 设计，无代码执行风险）；2) **GGUF**（llama.cpp 格式）版本频繁变化，新量化类型不断添加；3) **PyTorch 模型**（`.pt`、`.pth`）使用 Python pickle，Rust 中需 `pyo3` 或预转换。版本不匹配的常见错误：1) `InvalidHeader`（魔数不匹配）；2) `UnsupportedQuantization`（量化类型未知）；3) `ShapeMismatch`（张量形状与模型结构不符）。安全模式：1) 锁定模型文件版本（Git LFS、SHA256 校验）；2) 使用格式转换工具（`convert.py`）标准化；3) 运行时捕获加载错误，提供降级路径。这与 TensorFlow 的 SavedModel 版本、ONNX 的 opset 版本类似——AI 生态的快速演进使版本兼容性成为工程挑战。[来源: [candle Documentation](https://github.com/huggingface/candle)] · [来源: [Safetensors Format](https://huggingface.co/docs/safetensors/index)]
+> **修正**:
+> AI 模型的序列化格式（ONNX、Safetensors、GGUF、PyTorch pickle）有版本演进。
+> `candle` 库加载模型时：
+>
+> 1) **Safetensors** 格式较稳定（Mozilla 设计，无代码执行风险）；
+> 2) **GGUF**（llama.cpp 格式）版本频繁变化，新量化类型不断添加；
+> 3) **PyTorch 模型**（`.pt`、`.pth`）使用 Python pickle，Rust 中需 `pyo3` 或预转换。
+>
+> 版本不匹配的常见错误：
+>
+> 1) `InvalidHeader`（魔数不匹配）；
+> 2) `UnsupportedQuantization`（量化类型未知）；
+> 3) `ShapeMismatch`（张量形状与模型结构不符）。
+>
+> 安全模式：
+>
+> 1) 锁定模型文件版本（Git LFS、SHA256 校验）；
+> 2) 使用格式转换工具（`convert.py`）标准化；
+> 3) 运行时捕获加载错误，提供降级路径。
+> 这与 TensorFlow 的 SavedModel 版本、ONNX 的 opset 版本类似——AI 生态的快速演进使版本兼容性成为工程挑战。
+> [来源: [candle Documentation](https://github.com/huggingface/candle)] ·
+> [来源: [Safetensors Format](https://huggingface.co/docs/safetensors/index)]
 
 ### 10.5 边界测试：Rust AI 推理框架的张量生命周期与 GPU 内存管理（运行时 OOM）
 
@@ -563,7 +594,21 @@ fn inference() -> anyhow::Result<()> {
 }
 ```
 
-> **修正**: Rust AI 框架（`candle`、`burn`、`tch-rs`）的张量是**引用计数**的（类似 `Arc`），但 GPU 内存不受 Rust 所有权直接管理——张量 drop 时释放 GPU 内存，但：1) 循环中创建大量中间张量 → 累积至 OOM；2) 克隆张量（`tensor.clone()`）增加引用计数，共享底层数据，不额外分配；3) `.detach()` 断开计算图，但保留数据。优化：1) 使用作用域（`{ let temp = ...; }`）及时 drop；2) 框架特定的内存池（`candle` 的 `Tensor::to_device` 重用时）；3) 批量推理控制 batch size。这与 PyTorch 的自动内存管理（Python GC + CUDA cache）或 TensorFlow 的 graph 模式（静态分配）不同——Rust 的显式生命周期使内存管理更可预测，但需开发者主动控制，尤其 GPU 内存昂贵且有限。[来源: [candle Documentation](https://github.com/huggingface/candle)] · [来源: [burn Documentation](https://burn.dev/)]
+> **修正**:
+>
+> Rust AI 框架（`candle`、`burn`、`tch-rs`）的张量是**引用计数**的（类似 `Arc`），但 GPU 内存不受 Rust 所有权直接管理——张量 drop 时释放 GPU 内存，但：
+>
+> 1) 循环中创建大量中间张量 → 累积至 OOM；
+> 2) 克隆张量（`tensor.clone()`）增加引用计数，共享底层数据，不额外分配；
+> 3) `.detach()` 断开计算图，但保留数据。
+>
+> 优化：
+>
+> 1) 使用作用域（`{ let temp = ...; }`）及时 drop；
+> 2) 框架特定的内存池（`candle` 的 `Tensor::to_device` 重用时）；
+> 3) 批量推理控制 batch size。这与 PyTorch 的自动内存管理（Python GC + CUDA cache）或 TensorFlow 的 graph 模式（静态分配）不同——Rust 的显式生命周期使内存管理更可预测，但需开发者主动控制，尤其 GPU 内存昂贵且有限。
+>
+> [来源: [candle Documentation](https://github.com/huggingface/candle)] · [来源: [burn Documentation](https://burn.dev/)]
 
 ### 10.3 边界测试：Rust AI 框架的张量维度不匹配（运行时 panic）
 

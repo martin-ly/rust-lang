@@ -26,6 +26,9 @@
 
 > **前置依赖**: [Traits](../02_intermediate/01_traits.md)
 
+> **对应 Crate**: [`c05_threads`](../../crates/c05_threads/)
+> **对应练习**: [`exercises/src/concurrency/`](../../exercises/src/concurrency/)
+
 ## 📑 目录
 
 - [原子操作与内存序：无锁并发的精确控制](#原子操作与内存序无锁并发的精确控制)

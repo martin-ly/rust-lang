@@ -2,14 +2,12 @@
 >
 > **受众**: [专家]
 > **内容分级**: [综述级]
-
 > **Bloom 层级**: 应用 → 评价
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Cre — 设计 Rust for WASM 架构
 > **定位**: 深度评价 Rust 在 **WebAssembly (Wasm)** 全栈开发中的技术成熟度——从 wasm-bindgen/wasm-pack 工具链到 Yew/Leptos 前端框架，分析 Rust→Wasm 编译模型、JS 互操作内存模型、性能权衡边界与工程选型决策。
 > **前置概念**: [Rust 路线图](./24_roadmap.md) · [WebAssembly 生态](../06_ecosystem/11_webassembly.md) · [Web 框架](../06_ecosystem/27_web_frameworks.md)
 > **后置概念**: [WASI 预览](../06_ecosystem/08_wasi.md) · [形式化方法](./02_formal_methods.md)
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -391,7 +389,10 @@ pub fn deallocate_vec(ptr: *mut u8, size: usize) {
 }
 ```
 
-> **unsafe 警示**: 上述代码展示了 JS ↔ Wasm 的**手动内存管理**模式。`std::mem::forget` 和 `from_raw_parts` 属于 unsafe 操作，错误使用会导致内存泄漏或 use-after-free。现代 wasm-bindgen 已提供 `#[wasm_bindgen(skip)]` 等安全封装，应避免手动管理。[来源: [TRPL — Unsafe Rust](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)]
+> **unsafe 警示**:
+> 上述代码展示了 JS ↔ Wasm 的**手动内存管理**模式。`std::mem::forget` 和 `from_raw_parts` 属于 unsafe 操作，错误使用会导致内存泄漏或 use-after-free。
+> 现代 wasm-bindgen 已提供 `#[wasm_bindgen(skip)]` 等安全封装，应避免手动管理。
+> [来源: [TRPL — Unsafe Rust](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)]
 
 ---
 
@@ -510,7 +511,10 @@ Wasm 调试工具链:
 └── 结论: 适合性能敏感的新项目，遗留系统迁移成本高昂
 ```
 
-> **评价洞察**: Rust Wasm 前端框架的技术优势明确，但工程 adoption 受生态成熟度、团队技能栈和遗留系统约束限制。理性选型应权衡技术收益与组织成本。[来源: [The State of WebAssembly 2023](https://blog.scottlogic.com/2023/10/18/the-state-of-webassembly-2023.html)]
+> **评价洞察**:
+> Rust Wasm 前端框架的技术优势明确，但工程 adoption 受生态成熟度、团队技能栈和遗留系统约束限制。
+> 理性选型应权衡技术收益与组织成本。
+> [来源: [The State of WebAssembly 2023](https://blog.scottlogic.com/2023/10/18/the-state-of-webassembly-2023.html)]
 
 ---
 
@@ -535,7 +539,10 @@ Wasm 调试工具链:
 // 替代方案: web-sys 绑定 Web Workers
 ```
 
-> **并发边界**: 标准 Rust 线程模型在浏览器 Wasm 中不可用。`wasm-bindgen-rayon` 通过 Web Workers 实现数据并行，但初始化开销显著。这是 [并发模型](../03_advanced/01_concurrency.md) 在 Wasm 目标上的根本限制。[来源: [WebAssembly Specification](https://webassembly.github.io/spec/)]
+> **并发边界**:
+> 标准 Rust 线程模型在浏览器 Wasm 中不可用。`wasm-bindgen-rayon` 通过 Web Workers 实现数据并行，但初始化开销显著。
+> 这是 [并发模型](../03_advanced/01_concurrency.md) 在 Wasm 目标上的根本限制。
+> [来源: [WebAssembly Specification](https://webassembly.github.io/spec/)]
 
 **边界 3: 异常处理与 panic**
 
@@ -547,7 +554,10 @@ Rust panic in Wasm:
 └── 最佳实践: Result<T, E> 为主，避免 panic 作为控制流
 ```
 
-> **可靠性边界**: Wasm MVP 没有标准化异常处理机制。Rust 的 panic 在 Wasm 中表现为实例级终止，而非可捕获异常。健壮的错误处理应遵循 `Result` 传播模式。[来源: [Wasmtime Security](https://docs.wasmtime.dev/security.html)]
+> **可靠性边界**:
+> Wasm MVP 没有标准化异常处理机制。Rust 的 panic 在 Wasm 中表现为实例级终止，而非可捕获异常。
+> 健壮的错误处理应遵循 `Result` 传播模式。
+> [来源: [Wasmtime Security](https://docs.wasmtime.dev/security.html)]
 
 ---
 
@@ -577,7 +587,8 @@ Rust panic in Wasm:
   ✅ 服务端 Wasm → `wasm32-wasip1` 或 `wasm32-wasip2` + Wasmtime/WasmEdge
 ```
 
-> **陷阱总结**: Rust Wasm 开发的常见错误集中在**目标三元组选型**、**panic 处理**、**内存视图生命周期**、**主线程阻塞**和**宿主环境假设**五个维度。[来源: [Rust Wasm Book](https://rustwasm.github.io/book/)]
+> **陷阱总结**: Rust Wasm 开发的常见错误集中在**目标三元组选型**、**panic 处理**、**内存视图生命周期**、**主线程阻塞**和**宿主环境假设**五个维度。
+> [来源: [Rust Wasm Book](https://rustwasm.github.io/book/)]
 
 ---
 
@@ -625,21 +636,6 @@ Rust panic in Wasm:
 
 ## 权威来源索引
 
->
->
->
->
->
->
->
->
-
----
-
----
-
----
-
 > **补充来源**
 
 ## 十、边界测试：WebAssembly 的编译错误
@@ -660,7 +656,14 @@ fn main() {
 }
 ```
 
-> **修正**: WASI（WebAssembly System Interface）是 Wasm 的模块化系统接口，设计原则是**能力安全**（capability-based security）。Wasm 模块默认无权访问任何文件系统路径——运行时（wasmtime、wasmer）必须通过 `--dir=.` 参数**预打开**（preopen）目录，模块才能访问该目录下的文件。这与传统进程的"继承父进程文件描述符"不同——WASI 的权限显式、最小化、可审计。Rust 的 `std::fs` 在 WASI 目标上编译为 WASI 调用，`File::open("/etc/passwd")` 在未预打开时返回 `PermissionDenied`。这是沙箱安全的关键：即使 Wasm 模块包含恶意代码，其影响范围被限制在预打开的能力内。[来源: [WASI Documentation](https://wasi.dev/)] · [来源: [Rust Wasm Book](https://rustwasm.github.io/book/)]
+> **修正**:
+> WASI（WebAssembly System Interface）是 Wasm 的模块化系统接口，设计原则是**能力安全**（capability-based security）。
+> Wasm 模块默认无权访问任何文件系统路径——运行时（wasmtime、wasmer）必须通过 `--dir=.` 参数**预打开**（preopen）目录，模块才能访问该目录下的文件。
+> 这与传统进程的"继承父进程文件描述符"不同——WASI 的权限显式、最小化、可审计。
+> Rust 的 `std::fs` 在 WASI 目标上编译为 WASI 调用，`File::open("/etc/passwd")` 在未预打开时返回 `PermissionDenied`。
+> 这是沙箱安全的关键：即使 Wasm 模块包含恶意代码，其影响范围被限制在预打开的能力内。
+> [来源: [WASI Documentation](https://wasi.dev/)] ·
+> [来源: [Rust Wasm Book](https://rustwasm.github.io/book/)]
 
 ### 10.2 边界测试：`wasm-bindgen` 的类型不匹配（编译错误）
 
@@ -687,7 +690,14 @@ impl Point {
 }
 ```
 
-> **修正**: `wasm-bindgen` 生成 Rust 与 JavaScript 之间的绑定代码，但只支持可映射到 JavaScript 类型的 Rust 类型。不支持的类型包括：裸指针（`*const T`、`*mut T`）、引用（`&T` 在返回中有限支持）、泛型、闭包（有限支持）、大部分标准库类型（`Vec<T>` 支持，`HashMap` 不支持）。编译错误发生在 `wasm-bindgen` 宏展开阶段——它尝试为不支持的类型生成绑定代码并失败。安全替代：将裸指针包装为 `JsValue`，使用 `serde-wasm-bindgen` 序列化复杂类型，或手动编写 JS shim。这与 C 的 Emscripten（编译为 JS 并模拟 POSIX）不同——`wasm-bindgen` 是显式、类型安全的 FFI，而非透明移植。[来源: [wasm-bindgen Documentation](https://rustwasm.github.io/wasm-bindgen/)] · [来源: [Rust Wasm Book](https://rustwasm.github.io/book/)]
+> **修正**:
+> `wasm-bindgen` 生成 Rust 与 JavaScript 之间的绑定代码，但只支持可映射到 JavaScript 类型的 Rust 类型。
+> 不支持的类型包括：裸指针（`*const T`、`*mut T`）、引用（`&T` 在返回中有限支持）、泛型、闭包（有限支持）、大部分标准库类型（`Vec<T>` 支持，`HashMap` 不支持）。
+> 编译错误发生在 `wasm-bindgen` 宏展开阶段——它尝试为不支持的类型生成绑定代码并失败。
+> 安全替代：将裸指针包装为 `JsValue`，使用 `serde-wasm-bindgen` 序列化复杂类型，或手动编写 JS shim。
+> 这与 C 的 Emscripten（编译为 JS 并模拟 POSIX）不同——`wasm-bindgen` 是显式、类型安全的 FFI，而非透明移植。
+> [来源: [wasm-bindgen Documentation](https://rustwasm.github.io/wasm-bindgen/)] ·
+> [来源: [Rust Wasm Book](https://rustwasm.github.io/book/)]
 
 ### 10.3 边界测试：WASM 模块的大小限制与 `wee_alloc`（运行时错误）
 
@@ -709,7 +719,17 @@ fn main() {
 }
 ```
 
-> **修正**: `wee_alloc` 是 WASM 的轻量级分配器（~1KB 代码体积），但采用简单的链表分配策略，容易产生碎片。WASM 的线性内存（Linear Memory）增长是单向的（只能增大，不能缩小），碎片导致内存 footprint 膨胀。替代方案：1) `dlmalloc`（更成熟的分配器，体积较大 ~10KB）；2) 预分配池（`bumpalo` 的 bump allocator，无碎片但不支持释放）；3) 避免动态分配（`no_std` + 固定大小缓冲区）。WASM 模块的大小（代码 + 数据）直接影响加载时间：Rust 的 WASM 输出通常 100KB-1MB，优化后（`wasm-opt`、LTO）可降至 10KB-100KB。`wee_alloc` 的目标是将分配器本身的大小降至最低，但牺牲了分配效率和碎片控制。[来源: [wee_alloc Crate](https://docs.rs/wee_alloc/)] · [来源: [WASM Optimization Guide](https://rustwasm.github.io/book/reference/code-size.html)]
+> **修正**:
+> `wee_alloc` 是 WASM 的轻量级分配器（~1KB 代码体积），但采用简单的链表分配策略，容易产生碎片。
+> WASM 的线性内存（Linear Memory）增长是单向的（只能增大，不能缩小），碎片导致内存 footprint 膨胀。
+> 替代方案：
+>
+> 1) `dlmalloc`（更成熟的分配器，体积较大 ~10KB）；
+> 2) 预分配池（`bumpalo` 的 bump allocator，无碎片但不支持释放）；
+> 3) 避免动态分配（`no_std` + 固定大小缓冲区）。WASM 模块的大小（代码 + 数据）直接影响加载时间：Rust 的 WASM 输出通常 100KB-1MB，优化后（`wasm-opt`、LTO）可降至 10KB-100KB。
+> `wee_alloc` 的目标是将分配器本身的大小降至最低，但牺牲了分配效率和碎片控制。
+> [来源: [wee_alloc Crate](https://docs.rs/wee_alloc/)] ·
+> [来源: [WASM Optimization Guide](https://rustwasm.github.io/book/reference/code-size.html)]
 
 ### 10.3 边界测试：WASM 组件模型（Component Model）的类型映射（编译错误）
 
@@ -733,7 +753,25 @@ fn greet(p: Person) -> String {
 }
 ```
 
-> **修正**: WASM Component Model 是 WebAssembly 的模块化和互操作标准，使用 WIT（WASM Interface Types）定义接口。`wit-bindgen` 将 WIT 文件生成 Rust 绑定代码，包括：1) 数据类型（record、variant、resource）；2) 函数导入/导出；3) 异步支持（`future`、`stream`）。类型映射的挑战：1) WIT 的 `string` 是 UTF-8，但 Rust 的 `String` 也是 UTF-8，映射直接；2) WIT 的 `option<T>` 映射为 Rust 的 `Option<T>`；3) WIT 的 `result<T, E>` 映射为 Rust 的 `Result<T, E>`；4) WIT 的 `resource` 映射为 Rust 的 struct + `Drop`。但 WIT 的某些类型无直接 Rust 等价物（如 `future<T>`），需生成包装代码。这与 gRPC 的 protobuf 生成（`prost`）、Cap'n Proto 的 schema 生成类似——接口定义语言（IDL）到 Rust 的绑定生成是 WASM 组件化的关键。[来源: [WASM Component Model](https://component-model.bytecodealliance.org/)] · [来源: [wit-bindgen](https://github.com/bytecodealliance/wit-bindgen)]
+> **修正**:
+> WASM Component Model 是 WebAssembly 的模块化和互操作标准，使用 WIT（WASM Interface Types）定义接口。
+> `wit-bindgen` 将 WIT 文件生成 Rust 绑定代码，包括：
+>
+> 1) 数据类型（record、variant、resource）；
+> 2) 函数导入/导出；
+> 3) 异步支持（`future`、`stream`）。
+>
+> 类型映射的挑战：
+>
+> 1) WIT 的 `string` 是 UTF-8，但 Rust 的 `String` 也是 UTF-8，映射直接；
+> 2) WIT 的 `option<T>` 映射为 Rust 的 `Option<T>`；
+> 3) WIT 的 `result<T, E>` 映射为 Rust 的 `Result<T, E>`；
+> 4) WIT 的 `resource` 映射为 Rust 的 struct + `Drop`。
+>
+> 但 WIT 的某些类型无直接 Rust 等价物（如 `future<T>`），需生成包装代码。
+> 这与 gRPC 的 protobuf 生成（`prost`）、Cap'n Proto 的 schema 生成类似——接口定义语言（IDL）到 Rust 的绑定生成是 WASM 组件化的关键。
+> [来源: [WASM Component Model](https://component-model.bytecodealliance.org/)] ·
+> [来源: [wit-bindgen](https://github.com/bytecodealliance/wit-bindgen)]
 
 ### 10.4 边界测试：WASI Preview 2 的功能性权限（运行时错误）
 
@@ -751,7 +789,18 @@ fn main() {
 }
 ```
 
-> **修正**: WASI Preview 2 是 WASM 的系统接口新一代标准，基于**组件模型**和**能力安全**（capability-based security）。与 WASI Preview 1 不同：1) 不再使用全局预打开（`--dir=.`)，而是通过组件的 `import` 显式传递能力；2) 文件系统是 `wasi:filesystem` 接口，需从环境中获取 `Descriptor`；3) 网络是 `wasi:sockets` 接口，同样需要显式能力。这改变了 WASM 模块的编写方式：模块不再假设拥有文件系统或网络，而是通过接口声明需求，运行时注入能力。这与 Deno 的权限模型（`--allow-read`、`--allow-net`）或 Cloudflare Workers 的隔离（无文件系统，有 fetch API）类似——WASI Preview 2 将 WASM 从"沙箱中的 POSIX"推向"能力安全的组件"。[来源: [WASI Preview 2](https://github.com/WebAssembly/WASI/tree/main/preview2)] · [来源: [Component Model](https://component-model.bytecodealliance.org/)]
+> **修正**:
+> WASI Preview 2 是 WASM 的系统接口新一代标准，基于**组件模型**和**能力安全**（capability-based security）。
+> 与 WASI Preview 1 不同：
+>
+> 1) 不再使用全局预打开（`--dir=.`)，而是通过组件的 `import` 显式传递能力；
+> 2) 文件系统是 `wasi:filesystem` 接口，需从环境中获取 `Descriptor`；
+> 3) 网络是 `wasi:sockets` 接口，同样需要显式能力。
+>
+> 这改变了 WASM 模块的编写方式：模块不再假设拥有文件系统或网络，而是通过接口声明需求，运行时注入能力。
+> 这与 Deno 的权限模型（`--allow-read`、`--allow-net`）或 Cloudflare Workers 的隔离（无文件系统，有 fetch API）类似——WASI Preview 2 将 WASM 从"沙箱中的 POSIX"推向"能力安全的组件"。
+> [来源: [WASI Preview 2](https://github.com/WebAssembly/WASI/tree/main/preview2)] ·
+> [来源: [Component Model](https://component-model.bytecodealliance.org/)]
 
 ### 10.3 边界测试：WASM 模块的线性内存与 Rust 的 Vec 增长策略（运行时 OOM）
 
@@ -771,15 +820,27 @@ fn main() {
 }
 ```
 
-> **修正**: WebAssembly 的**线性内存**（linear memory）是单一连续的 byte 数组，默认初始大小 1-2 pages（64KB/page），最大 4GB。Rust 的 `Vec` 和 `String` 在 WASM 中运行时：1) `Vec::push` 触发 `memory.grow`（WASM 指令增加内存页数）；2) 若超过环境限制（浏览器可能限制 128MB 或 256MB），`memory.grow` 失败 → `alloc` 返回 null → Rust 的 allocator panic（`alloc_error_handler`）。优化：1) 预分配容量（`Vec::with_capacity(n)`）；2) 使用 `wee_alloc`（小型 allocator，适合 WASM）；3) 数据流处理（不一次性加载全部数据）。WASM 的 `wasm32-unknown-unknown` target 无 `std`，需 `no_std` + `alloc` 或纯 `core`。这与 JavaScript 的 `Array`（V8 自动管理，无显式内存页概念）或 Native 的 `Vec`（操作系统管理虚拟内存）不同——WASM 的内存模型显式且受限。[来源: [WebAssembly Memory](https://webassembly.org/docs/modules/#linear-memory)] · [来源: [WASM Rust](https://rustwasm.github.io/book/)]
-> **过渡**: Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **修正**:
+> WebAssembly 的**线性内存**（linear memory）是单一连续的 byte 数组，默认初始大小 1-2 pages（64KB/page），最大 4GB。
+> Rust 的 `Vec` 和 `String` 在 WASM 中运行时：
+>
+> 1) `Vec::push` 触发 `memory.grow`（WASM 指令增加内存页数）；
+> 2) 若超过环境限制（浏览器可能限制 128MB 或 256MB），`memory.grow` 失败 → `alloc` 返回 null → Rust 的 allocator panic（`alloc_error_handler`）。
+>
+> 优化：
+>
+> 1) 预分配容量（`Vec::with_capacity(n)`）；
+> 2) 使用 `wee_alloc`（小型 allocator，适合 WASM）；
+> 3) 数据流处理（不一次性加载全部数据）。
+>
+> WASM 的 `wasm32-unknown-unknown` target 无 `std`，需 `no_std` + `alloc` 或纯 `core`。
+> 这与 JavaScript 的 `Array`（V8 自动管理，无显式内存页概念）或 Native 的 `Vec`（操作系统管理虚拟内存）不同——WASM 的内存模型显式且受限。
+> [来源: [WebAssembly Memory](https://webassembly.org/docs/modules/#linear-memory)] ·
+> [来源: [WASM Rust](https://rustwasm.github.io/book/)]
 > **过渡**: Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ### 补充定理链
 
-- **定理**: Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈 定义 ⟹ 类型安全保证
-- **定理**: Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈 定义 ⟹ 类型安全保证
 - **定理**: Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈 定义 ⟹ 类型安全保证
 
 ## 认知路径
@@ -795,11 +856,10 @@ fn main() {
 | Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界
 
-> **反命题**: "Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
+> **反命题**: "Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈 是万能解决方案，适用于所有场景" —— 错误。
+> 任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。

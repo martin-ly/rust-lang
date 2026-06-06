@@ -24,6 +24,9 @@
 
 > **Bloom 层级**: 分析 → 评价 → 创造
 
+> **对应 Crate**: [`c05_threads`](../../crates/c05_threads/)
+> **对应练习**: [`exercises/src/concurrency/`](../../exercises/src/concurrency/)
+
 ## 📑 目录
 
 - [并行与分布式模式谱系：从线程池到共识算法](#并行与分布式模式谱系从线程池到共识算法)

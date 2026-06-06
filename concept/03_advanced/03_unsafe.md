@@ -26,6 +26,8 @@
 
 ---
 
+> **对应练习**: [`exercises/src/unsafe_rust/`](../../exercises/src/unsafe_rust/)
+
 ## 📑 目录
 
 - [Unsafe Rust](#unsafe-rust)

@@ -19,6 +19,9 @@
 > [tokio::sync](https://docs.rs/tokio/latest/tokio/sync/index.html) ·
 > [Wikipedia — Non-blocking Algorithm](https://en.wikipedia.org/wiki/Non-blocking_algorithm)
 
+> **对应 Crate**: [`c05_threads`](../../crates/c05_threads/)
+> **对应练习**: [`exercises/src/concurrency/`](../../exercises/src/concurrency/)
+
 ## 📑 目录
 
 - [并发 模式：从消息 传递到锁自由的数据结构](#并发-模式从消息-传递到锁自由的数据结构)

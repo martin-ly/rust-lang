@@ -6,14 +6,12 @@
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]
-
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 Derive CoercePointee 预览特性
 > **定位**: 探讨 Rust 1.95+ 中通过派生宏自动化 `CoerceUnsized` 和 `DispatchFromDyn` 实现，降低自定义智能指针的**样板代码**和**unsafe 实现风险**。
 > **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Generics](../02_intermediate/02_generics.md) · [Unsafe](../03_advanced/03_unsafe.md)
 > **后置概念**: [Evolution](./03_evolution.md)
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -21,9 +19,7 @@
 > [Rust Reference — Coercion](https://doc.rust-lang.org/reference/type-coercions.html) ·
 > [The Rustonomicon — Coercions](https://doc.rust-lang.org/nomicon/coercions.html) ·
 > [Tracking Issue #123430](https://github.com/rust-lang/rust/issues/123430)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
-
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
 
 ## 📑 目录
@@ -421,7 +417,14 @@ fn main() {
 }
 ```
 
-> **修正**: `CoercePointee` 允许智能指针参与 unsized coercion（如 `MyBox<String>` → `MyBox<str>`），但要求目标类型 `T` 的**元数据布局**与编译器期望的一致。标准 DST（`str`、`[T]`、`dyn Trait`）的元数据是编译器内置的（长度或 vtable 指针）。自定义 DST（如 `dyn MyTrait + Send` 的特定组合）的元数据布局可能不同。`CoercePointee` 目前主要针对标准库的智能指针（`Box`、`Rc`、`Arc`）的自定义版本，对完全自定义的 DST 支持有限。这与 C++ 的 `std::shared_ptr<void>`（类型擦除，无元数据）或 Rust 的 `dyn Any`（固定元数据布局）类似——DST 是 Rust 类型系统的高级特性，智能指针的 coercion 需要编译器的深度配合。[来源: [Rust RFC 3621](https://rust-lang.github.io/rfcs/3621-derive-coerce-pointee.html)] · [来源: [Rust Reference — Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html)]
+> **修正**:
+> `CoercePointee` 允许智能指针参与 unsized coercion（如 `MyBox<String>` → `MyBox<str>`），但要求目标类型 `T` 的**元数据布局**与编译器期望的一致。
+> 标准 DST（`str`、`[T]`、`dyn Trait`）的元数据是编译器内置的（长度或 vtable 指针）。
+> 自定义 DST（如 `dyn MyTrait + Send` 的特定组合）的元数据布局可能不同。
+> `CoercePointee` 目前主要针对标准库的智能指针（`Box`、`Rc`、`Arc`）的自定义版本，对完全自定义的 DST 支持有限。
+> 这与 C++ 的 `std::shared_ptr<void>`（类型擦除，无元数据）或 Rust 的 `dyn Any`（固定元数据布局）类似——DST 是 Rust 类型系统的高级特性，智能指针的 coercion 需要编译器的深度配合。
+> [来源: [Rust RFC 3621](https://rust-lang.github.io/rfcs/3621-derive-coerce-pointee.html)] ·
+> [来源: [Rust Reference — Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html)]
 
 ### 10.4 边界测试：`PhantomData` 与 CoercePointee 的生命周期交互（编译错误）
 
@@ -444,7 +447,14 @@ fn main() {
 }
 ```
 
-> **修正**: `CoercePointee` 不仅涉及类型 coercion（`String` → `str`），还涉及**生命周期 coercion**。`Ref<'a, T>` 的 `'a` 是引用的生命周期，`T` 的变化（`String` → `str`）需保持生命周期约束。`Ref<'short, String>` → `Ref<'long, str>` 要求 `'short: 'long`（短生命周期可 coerce 为长生命周期）。若生命周期不匹配，编译错误。这是 Rust 生命周期系统的常规行为，但 `CoercePointee` 增加了复杂度：coercion 现在同时涉及类型和生命周期两个维度。这与 `&'a String` → `&'a str` 的自动 coercion（Deref coercion）类似——`CoercePointee` 将这一能力扩展到自定义智能指针。[来源: [Rust RFC 3621](https://rust-lang.github.io/rfcs/3621-derive-coerce-pointee.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
+> **修正**:
+> `CoercePointee` 不仅涉及类型 coercion（`String` → `str`），还涉及**生命周期 coercion**。
+> `Ref<'a, T>` 的 `'a` 是引用的生命周期，`T` 的变化（`String` → `str`）需保持生命周期约束。
+> `Ref<'short, String>` → `Ref<'long, str>` 要求 `'short: 'long`（短生命周期可 coerce 为长生命周期）。
+> 若生命周期不匹配，编译错误。这是 Rust 生命周期系统的常规行为，但 `CoercePointee` 增加了复杂度：coercion 现在同时涉及类型和生命周期两个维度。
+> 这与 `&'a String` → `&'a str` 的自动 coercion（Deref coercion）类似——`CoercePointee` 将这一能力扩展到自定义智能指针。
+> [来源: [Rust RFC 3621](https://rust-lang.github.io/rfcs/3621-derive-coerce-pointee.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
 
 ### 10.4 边界测试：`CoercePointee` 与智能指针的自动转换（编译错误/未来特性）
 
@@ -462,15 +472,24 @@ fn main() {
 fn main() {}
 ```
 
-> **修正**: **`CoercePointee`** 是 Rust 智能指针生态的重要扩展：1) 允许自定义智能指针（如 `MyBox<T>`）自动转换为 trait object（`MyBox<dyn Trait>`）；2) 当前仅 `Box<T>`、`Rc<T>`、`Arc<T>` 支持此转换（编译器硬编码）；3) `CoercePointee` derive 将此能力扩展到用户定义类型。使用场景：1) 自定义 allocator 的智能指针；2) 领域特定指针类型（`GpuBuffer<T>`）；3) 与 `Pin` 结合的自定义指针。这与 C++ 的隐式转换（`std::shared_ptr<Derived>` → `std::shared_ptr<Base>` 自动）或 Swift 的引用类型（始终支持多态转换）不同——Rust 的 trait object 转换需显式支持，`CoercePointee` 是类型系统的扩展。[来源: [CoercePointee RFC](https://rust-lang.github.io/rfcs/3621-derive-coerce-pointee.html)] · [来源: [Rust Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)]
-> **过渡**: 派生 CoercePointee 预研：智能指针的自动类型强制 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: 派生 CoercePointee 预研：智能指针的自动类型强制 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **修正**:
+> **`CoercePointee`** 是 Rust 智能指针生态的重要扩展：
+>
+> 1) 允许自定义智能指针（如 `MyBox<T>`）自动转换为 trait object（`MyBox<dyn Trait>`）；
+> 2) 当前仅 `Box<T>`、`Rc<T>`、`Arc<T>` 支持此转换（编译器硬编码）；
+> 3) `CoercePointee` derive 将此能力扩展到用户定义类型。
+>
+> 使用场景：
+>
+> 1) 自定义 allocator 的智能指针；
+> 2) 领域特定指针类型（`GpuBuffer<T>`）；
+> 3) 与 `Pin` 结合的自定义指针。这与 C++ 的隐式转换（`std::shared_ptr<Derived>` → `std::shared_ptr<Base>` 自动）或 Swift 的引用类型（始终支持多态转换）不同——Rust 的 trait object 转换需显式支持，`CoercePointee` 是类型系统的扩展。
+> [来源: [CoercePointee RFC](https://rust-lang.github.io/rfcs/3621-derive-coerce-pointee.html)] ·
+> [来源: [Rust Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)]
 > **过渡**: 派生 CoercePointee 预研：智能指针的自动类型强制 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ### 补充定理链
 
-- **定理**: 派生 CoercePointee 预研：智能指针的自动类型强制 定义 ⟹ 类型安全保证
-- **定理**: 派生 CoercePointee 预研：智能指针的自动类型强制 定义 ⟹ 类型安全保证
 - **定理**: 派生 CoercePointee 预研：智能指针的自动类型强制 定义 ⟹ 类型安全保证
 
 ## 认知路径
@@ -486,9 +505,7 @@ fn main() {}
 | 派生 CoercePointee 预研：智能指针的自动类型强制 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 派生 CoercePointee 预研：智能指针的自动类型强制 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 派生 CoercePointee 预研：智能指针的自动类型强制 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: 派生 CoercePointee 预研：智能指针的自动类型强制 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

@@ -11,20 +11,24 @@
 > **双维定位**: C×Ana — 分析 Open Enums 预览特性
 > **定位**: 探讨 Rust 枚举类型在 API 演进与跨 crate 兼容性维度的**开放性语义**，从现有 `#[non_exhaustive]` 机制延伸到语言级开放枚举的设计空间。
 > **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Traits](../02_intermediate/01_traits.md) · [Error Handling](../02_intermediate/04_error_handling.md) · [Evolution](./03_evolution.md)
-> **后置概念**: [Version Tracking](./05_rust_version_tracking.md) · [Effects System](./04_effects_system.md)
-
+> **后置概念**:
+> [Version Tracking](./05_rust_version_tracking.md) ·
+> [Effects System](./04_effects_system.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
-> **来源**: [RFC 2008 — `non_exhaustive`](https://github.com/rust-lang/rfcs/pull/2008) · [Rust Reference — Enum Types](https://doc.rust-lang.org/reference/items/enumerations.html) · [RFC 3518 — Sealed Traits](https://github.com/rust-lang/rfcs/pull/3518) · [GitHub #156628 — Open Enums Tracking](https://github.com/rust-lang/rust/issues/156628) · [Scala Sealed Traits](https://docs.scala-lang.org/tour/pattern-matching.html) · [Haskell Open Data Types](https://wiki.haskell.org/Open_data_type) · [OCaml Polymorphic Variants](https://ocaml.org/manual/polyvariant.html)
-
+> **来源**:
+> [RFC 2008 — `non_exhaustive`](https://github.com/rust-lang/rfcs/pull/2008) ·
+> [Rust Reference — Enum Types](https://doc.rust-lang.org/reference/items/enumerations.html) ·
+> [RFC 3518 — Sealed Traits](https://github.com/rust-lang/rfcs/pull/3518) ·
+> [GitHub #156628 — Open Enums Tracking](https://github.com/rust-lang/rust/issues/156628) ·
+> [Scala Sealed Traits](https://docs.scala-lang.org/tour/pattern-matching.html) ·
+> [Haskell Open Data Types](https://wiki.haskell.org/Open_data_type) ·
+> [OCaml Polymorphic Variants](https://ocaml.org/manual/polyvariant.html)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
-
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
 
 ## 📑 目录
->
->
 
 - [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举](#open-enums-概念预研从-non_exhaustive-到可扩展枚举)
   - [📑 目录](#-目录)
@@ -611,7 +615,19 @@ fn handle(status: Status) -> &'static str {
 }
 ```
 
-> **修正**: Open enum 的核心设计是**允许未知变体**，因此 `match` 必须包含 `_ => ...` 分支。这与常规 enum 的穷尽检查不同：常规 enum 无 `_` 分支是编译错误（遗漏变体），open enum 无 `_` 分支也是编译错误（未处理未知）。但 open enum 的编译错误信息应明确提示"open enum 需要通配分支"，避免开发者困惑。这与 `#[non_exhaustive]` 属性（仅对外部 crate 强制非穷尽）不同——open enum 在本 crate 内也允许未知变体。使用场景：1) 网络协议的状态码（HTTP 可能有未来定义的状态码）；2) 文件格式的标记（版本升级可能增加新标记）；3) FFI 的 C enum（C 侧可能传递未定义值）。这与 TypeScript 的 string literal unions（可扩展，但无编译期穷尽检查）或 Swift 的 `@unknown default`（类似 open enum 的 `_` 分支）类似。[来源: [Open Enums RFC Draft](https://github.com/rust-lang/rfcs/)] · [来源: [Swift Unknown Case](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/enumerations/#Associated-Values)]
+> **修正**:
+> Open enum 的核心设计是**允许未知变体**，因此 `match` 必须包含 `_ => ...` 分支。这与常规 enum 的穷尽检查不同：
+> 常规 enum 无 `_` 分支是编译错误（遗漏变体），open enum 无 `_` 分支也是编译错误（未处理未知）。
+> 但 open enum 的编译错误信息应明确提示"open enum 需要通配分支"，避免开发者困惑。
+> 这与 `#[non_exhaustive]` 属性（仅对外部 crate 强制非穷尽）不同——open enum 在本 crate 内也允许未知变体。
+> 使用场景：
+>
+> 1) 网络协议的状态码（HTTP 可能有未来定义的状态码）；
+> 2) 文件格式的标记（版本升级可能增加新标记）；
+> 3) FFI 的 C enum（C 侧可能传递未定义值）。
+> 这与 TypeScript 的 string literal unions（可扩展，但无编译期穷尽检查）或 Swift 的 `@unknown default`（类似 open enum 的 `_` 分支）类似。
+> [来源: [Open Enums RFC Draft](https://github.com/rust-lang/rfcs/)] ·
+> [来源: [Swift Unknown Case](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/enumerations/#Associated-Values)]
 
 ### 10.4 边界测试：open enum 的整数转换与有效性检查（运行时 panic）
 
@@ -630,7 +646,21 @@ fn from_raw(val: u8) -> Priority {
 }
 ```
 
-> **修正**: Open enum 的 `from_raw` 转换是设计难点：1) `from_raw(5)` 创建未知变体，是 safe 的（不 panic），但后续 `match` 需处理 `_`；2) `from_raw` 是否应返回 `Option<Self>`（`try_from` 模式），拒绝未知值？3) 未知变体的内部表示：存储原始整数值（`Priority(5)`），还是不存储（仅标记"未知"）？设计决策影响：1) 内存布局（是否需要额外字段存储原始值）；2) `Debug` 输出（能否打印 `"Priority(5)"`）；3) 序列化（未知变体如何 JSON 化）。这与 C 的 enum（整数可任意转换，无检查）或 Java 的 `Enum.valueOf`（字符串名查找，未找到抛异常）不同——Rust 的 open enum 设计需在类型安全、灵活性和性能间权衡。[来源: [Open Enums RFC Draft](https://github.com/rust-lang/rfcs/)] · [来源: [Rust Reference — Enum Types](https://doc.rust-lang.org/reference/items/enumerations.html)]
+> **修正**:
+> Open enum 的 `from_raw` 转换是设计难点：
+>
+> 1) `from_raw(5)` 创建未知变体，是 safe 的（不 panic），但后续 `match` 需处理 `_`；
+> 2) `from_raw` 是否应返回 `Option<Self>`（`try_from` 模式），拒绝未知值？
+> 3) 未知变体的内部表示：存储原始整数值（`Priority(5)`），还是不存储（仅标记"未知"）？
+>
+> 设计决策影响：
+>
+> 1) 内存布局（是否需要额外字段存储原始值）；
+> 2) `Debug` 输出（能否打印 `"Priority(5)"`）；
+> 3) 序列化（未知变体如何 JSON 化）。
+> 这与 C 的 enum（整数可任意转换，无检查）或 Java 的 `Enum.valueOf`（字符串名查找，未找到抛异常）不同——Rust 的 open enum 设计需在类型安全、灵活性和性能间权衡。
+> [来源: [Open Enums RFC Draft](https://github.com/rust-lang/rfcs/)] ·
+> [来源: [Rust Reference — Enum Types](https://doc.rust-lang.org/reference/items/enumerations.html)]
 
 ### 10.3 边界测试：open enum 的穷尽匹配与未知变体（编译错误/运行时 panic）
 

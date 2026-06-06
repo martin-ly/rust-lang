@@ -56,6 +56,7 @@ pinned.poll(cx);            // ❌ 不能自动 reborrow
 ```
 
 对比普通引用：
+
 ```rust
 let mut r: &mut T = ...;
 use_ref(r);      // ✅ 自动 reborrow
@@ -79,6 +80,7 @@ pub trait CoerceShared<To> {
 ```
 
 **设计目标**:
+
 - `Reborrow`：允许 `Pin<&mut T>` 像普通 `&mut T` 一样自动 reborrow
 - `CoerceShared`：允许 `Pin<&mut T>` → `Pin<&T>` 的自动转换
 
@@ -92,6 +94,7 @@ let shared: Pin<&MyFuture> = &pinned;  // ✅ 自动 CoerceShared
 ```
 
 **当前状态** (2026-06):
+
 - PR 已开，等待审查和 derive macro 实现
 - Blocker：可能需要对编译器内部 `Rvalue::Ref` / `ExprKind::Ref` 进行大规模重构
 - 详见 [Rust Project Goals 2026 — Reborrow Traits](https://rust-lang.github.io/rust-project-goals/2026/)

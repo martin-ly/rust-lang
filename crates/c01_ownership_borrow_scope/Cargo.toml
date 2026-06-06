@@ -15,7 +15,6 @@ common = { workspace = true, features = ["serde", "error-trait", "async"] }
 tokio = { workspace = true }
 thiserror = { workspace = true }
 
-
 [lints.rust]
 unsafe_code = "allow"
 missing_docs = "allow"

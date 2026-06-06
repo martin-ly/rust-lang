@@ -11,7 +11,6 @@
 > [Traits](../02_intermediate/01_traits.md) ·
 > [Formal Methods](./02_formal_methods.md)
 > **主要来源**: [AI Coding Trends 2025-2026] · [Rust AI Ecosystem] · [Verus/Creusot + LLM] · [Wikipedia]
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -27,9 +26,7 @@
 ---
 
 > **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
-
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
 
 ## 一、核心命题
@@ -47,25 +44,29 @@
 ---
 
 ### 2.1 人工智能（Artificial Intelligence）
->
->
+
 > **来源**: [Wikipedia — Artificial intelligence](https://en.wikipedia.org/wiki/Artificial_intelligence)
 
-人工智能（AI）是指由机器（尤其是计算机系统）所表现出的智能。AI 研究被定义为对"智能代理"的研究：任何能够感知环境并采取行动以最大化实现其目标的机会的设备。AI 的主要子领域包括：机器学习 [来源: [Rust ML](https://www.arewelearningyet.com/)]（ML）、自然语言处理（NLP）、计算机视觉、机器人学和专家系统。在软件开发语境下，生成式 AI（Generative AI）通过大语言模型（LLM）生成代码、文档和测试。
+人工智能（AI）是指由机器（尤其是计算机系统）所表现出的智能。
+AI 研究被定义为对"智能代理"的研究：任何能够感知环境并采取行动以最大化实现其目标的机会的设备。
+AI 的主要子领域包括：机器学习 [来源: [Rust ML](https://www.arewelearningyet.com/)]（ML）、自然语言处理（NLP）、计算机视觉、机器人学和专家系统。
+在软件开发语境下，生成式 AI（Generative AI）通过大语言模型（LLM）生成代码、文档和测试。
 
 ### 2.2 大语言模型（Large Language Model, LLM）
->
->
+
 > **来源**: [Wikipedia — Large language model](https://en.wikipedia.org/wiki/Large_language_model)
 
-大语言模型是一种以自回归或掩码方式训练、具有大量参数（通常数十亿到数万亿）的神经网络，能够理解和生成人类语言。在代码生成领域，LLM 通过在公开代码库（如 GitHub）上的训练，学习了编程语言的语法模式、API 使用习惯和常见算法实现。代表性模型包括 OpenAI GPT-4、Anthropic Claude、Google Gemini 以及专门训练的 Code Llama 和 StarCoder。
+大语言模型是一种以自回归或掩码方式训练、具有大量参数（通常数十亿到数万亿）的神经网络，能够理解和生成人类语言。
+在代码生成领域，LLM 通过在公开代码库（如 GitHub）上的训练，学习了编程语言的语法模式、API 使用习惯和常见算法实现。
+代表性模型包括 OpenAI GPT-4、Anthropic Claude、Google Gemini 以及专门训练的 Code Llama 和 StarCoder。
 
 ### 2.3 强化学习（Reinforcement Learning, RL）
->
->
+
 > **来源**: [Wikipedia — Reinforcement learning](https://en.wikipedia.org/wiki/Reinforcement_learning)
 
-强化学习是机器学习的一个范式，其中智能体（agent）通过与环境交互，学习在特定状态下采取动作以最大化累积奖励。与监督学习不同，RL 不需要标注数据集，而是依赖奖励信号。在 AI 辅助编程中，编译错误、测试失败和 linter 警告可以作为自然的奖励信号，驱动模型学习生成更正确的代码。
+强化学习是机器学习的一个范式，其中智能体（agent）通过与环境交互，学习在特定状态下采取动作以最大化累积奖励。
+与监督学习不同，RL 不需要标注数据集，而是依赖奖励信号。
+在 AI 辅助编程中，编译错误、测试失败和 linter 警告可以作为自然的奖励信号，驱动模型学习生成更正确的代码。
 
 ---
 
@@ -95,9 +96,9 @@ graph TD
 > **关键洞察**：确定性编译器不仅是语义过滤器，更是RL环境的理想critic，驱动策略收敛。[来源: 💡 原创分析]
 
 ### 3.1 第一层：Prompt-Level（规约层）
->
 
-**技术细节**：人类架构师使用形式化规约或强类型约束作为 AI 的"护栏"。在 Rust 语境下，这表现为：
+**技术细节**：人类架构师使用形式化规约或强类型约束作为 AI 的"护栏"。
+在 Rust 语境下，这表现为：
 
 - **Trait 边界**：通过 `trait` 定义行为契约，AI 生成的实现必须满足这些边界
 - **类型签名**：精确的输入输出类型限制了 AI 的生成空间
@@ -107,7 +108,6 @@ graph TD
 **工具链**：ChatGPT/Claude with System Prompt、LangChain、LLM 编排框架
 
 ### 3.2 第二层：Code-Level（代码层）
->
 
 **技术细节**：AI 在 Rust 语法空间内生成代码，编译器作为第一道防线：
 
@@ -119,7 +119,6 @@ graph TD
 **工具链**：GitHub Copilot、Codeium、Kiro、Cursor、Zed AI
 
 ### 3.3 第三层：System-Level（系统层）
->
 
 **技术细节**：对超越单函数的协议和分布式属性进行验证：
 
@@ -434,7 +433,10 @@ Rust 编译器（`rustc --error-format=json`）输出的 JSON 结构化诊断，
 | **多轮修复** | 天然支持：episode 内迭代优化 | 需显式 prompt engineering（"请修复编译错误"） |
 | **语义保证** | 可通过测试/Miri 验证 | 需人工审查，易生成"表面正确"的补丁 |
 
-> **关键洞察**：RL 与 LLM 不是竞争关系，而是**互补层次**。LLM 负责生成候选修复（探索），RL 负责在编译器反馈下精炼修复（利用）。最新研究方向（如 Compiler-Guided Fine-Tuning）将两者结合：LLM 生成 token，编译器在解码过程中过滤类型不合法的候选（constrained decoding），实现"神经生成 + 符号验证"的闭环。[来源: PLDI 2024/2025 Compiler-Guided Code Generation] · [Yasunaga & Liang, ICML 2021]
+> **关键洞察**：
+> RL 与 LLM 不是竞争关系，而是**互补层次**。LLM 负责生成候选修复（探索），RL 负责在编译器反馈下精炼修复（利用）。
+> 最新研究方向（如 Compiler-Guided Fine-Tuning）将两者结合：LLM 生成 token，编译器在解码过程中过滤类型不合法的候选（constrained decoding），实现"神经生成 + 符号验证"的闭环。
+> [来源: PLDI 2024/2025 Compiler-Guided Code Generation] · [Yasunaga & Liang, ICML 2021]
 
 ### 6.6 最新研究进展（2024-2026）
 
@@ -705,7 +707,11 @@ fn correct_fix(s: &str) -> String {
 }
 ```
 
-> **关键洞察**: 生命周期错误（E0716、E0515）是 AI 生成 Rust 代码的**最大弱点**之一。RustRepair-RL 报告显示，RL 模型在修复 `E0382`（use of moved value）上达到 78% 准确率，但 `E0716`（lifetime mismatch）仅 45%。这表明生命周期推理需要更深层的语义理解，而非单纯的模式匹配。[来源: RustRepair-RL, 2024] ⚠️ 前沿
+> **关键洞察**:
+> 生命周期错误（E0716、E0515）是 AI 生成 Rust 代码的**最大弱点**之一。
+> RustRepair-RL 报告显示，RL 模型在修复 `E0382`（use of moved value）上达到 78% 准确率，但 `E0716`（lifetime mismatch）仅 45%。
+> 这表明生命周期推理需要更深层的语义理解，而非单纯的模式匹配。
+> [来源: RustRepair-RL, 2024] ⚠️ 前沿
 
 ---
 
@@ -723,7 +729,14 @@ fn correct_fix(s: &str) -> String {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [PLDI 2024/2025 Compiler-Guided Code Generation] · [RustRepair-RL, ETH Zurich, 2024]
+> **权威来源**:
+>
+> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [TRPL](https://doc.rust-lang.org/book/) ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
+> [PLDI 2024/2025 Compiler-Guided Code Generation] ·
+> [RustRepair-RL, ETH Zurich, 2024]
+>
 > **文档版本**: 2.0
 > **对应 Rust 版本**: 1.90.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
@@ -751,7 +764,13 @@ fn predict_safe(model: &dyn Fn(&Array2<f32>) -> Array2<f32>, input: Array2<f32>)
 }
 ```
 
-> **修正**: Rust 的类型系统目前无法在编译期验证张量形状（tensor shape）。`ndarray::Array2<f32>` 只保证二维，不保证具体维度大小。这与 Idris 的依赖类型或 Rust 的未来"const generics 扩展"形成对比——目前形状验证必须在运行时进行（`assert_eq!` 或返回 `Result`）。`candle` 等 ML 框架在加载模型时验证形状，但输入数据的形状仍需应用层保证。[来源: [ndarray Documentation](https://docs.rs/ndarray/)]
+> **修正**:
+>
+> Rust 的类型系统目前无法在编译期验证张量形状（tensor shape）。
+> `ndarray::Array2<f32>` 只保证二维，不保证具体维度大小。
+> 这与 Idris 的依赖类型或 Rust 的未来"const generics 扩展"形成对比——目前形状验证必须在运行时进行（`assert_eq!` 或返回 `Result`）。
+> `candle` 等 ML 框架在加载模型时验证形状，但输入数据的形状仍需应用层保证。
+> [来源: [ndarray Documentation](https://docs.rs/ndarray/)]
 
 ### 10.2 边界测试：不安全模型加载与所有权（编译错误）
 
@@ -784,7 +803,13 @@ fn fixed() {
 }
 ```
 
-> **修正**: AI 模型（权重、配置）在加载后通常是只读的。使用 `Arc<T>`（而非 `Arc<Mutex<T>>`）共享模型实例，编译器在类型层面保证不可变性。若需模型微调（fine-tuning），则必须使用 `Arc<RwLock<T>>` 或显式克隆后修改。Rust 的所有权系统帮助区分"推理"（只读）和"训练"（可变）两种模式，防止运行时数据竞争。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**:
+>
+> AI 模型（权重、配置）在加载后通常是只读的。
+> 使用 `Arc<T>`（而非 `Arc<Mutex<T>>`）共享模型实例，编译器在类型层面保证不可变性。
+> 若需模型微调（fine-tuning），则必须使用 `Arc<RwLock<T>>` 或显式克隆后修改。
+> Rust 的所有权系统帮助区分"推理"（只读）和"训练"（可变）两种模式，防止运行时数据竞争。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 10.5 边界测试：AI 生成代码的 unsafe 误用与形式化保证缺失（运行时 UB）
 
@@ -799,7 +824,29 @@ fn ai_generated_parse(data: &[u8]) -> &[u8] {
 }
 ```
 
-> **修正**: AI 辅助编程工具（Copilot、CodeWhisperer、ChatGPT）生成 Rust 代码时，**unsafe 块的错误率显著高于 safe 代码**：1) 边界检查遗漏（`slice::from_raw_parts` 的指针算术）；2) 别名规则违反（`&mut` 和 `*mut` 混用）；3) 生命周期误标注（`'static` 滥用）。缓解策略：1) **禁止 AI 生成 unsafe**——人工审核所有 unsafe 代码；2) 使用 `#[forbid(unsafe_code)]` 在 crate 级别禁止；3) 对 AI 生成的代码运行 Miri、Kani、Clippy 的 `undocumented_unsafe_blocks`。这与人类编写的 unsafe 代码同样需要审核，但 AI 的"自信错误"（plausible-looking but wrong）更难发现。未来方向：1) 用形式化工具验证 AI 生成代码（合约生成 + 自动验证）；2) 训练数据中加入 Miri 和 Kani 的反馈，强化学习安全 Rust。这与传统的代码审查或静态分析类似——AI 是加速工具，不是替代人类判断。[来源: [AI-Assisted Rust Programming](https://arxiv.org/)] · [来源: [GitHub Copilot](https://github.com/features/copilot)]
+> **修正**:
+>
+> AI 辅助编程工具（Copilot、CodeWhisperer、ChatGPT）生成 Rust 代码时，**unsafe 块的错误率显著高于 safe 代码**：
+>
+> 1) 边界检查遗漏（`slice::from_raw_parts` 的指针算术）；
+> 2) 别名规则违反（`&mut` 和 `*mut` 混用）；
+> 3) 生命周期误标注（`'static` 滥用）。
+>
+> 缓解策略：
+>
+> 1) **禁止 AI 生成 unsafe**——人工审核所有 unsafe 代码；
+> 2) 使用 `#[forbid(unsafe_code)]` 在 crate 级别禁止；
+> 3) 对 AI 生成的代码运行 Miri、Kani、Clippy 的 `undocumented_unsafe_blocks`。
+>
+> 这与人类编写的 unsafe 代码同样需要审核，但 AI 的"自信错误"（plausible-looking but wrong）更难发现。
+>
+> 未来方向：
+>
+> 1) 用形式化工具验证 AI 生成代码（合约生成 + 自动验证）；
+> 2) 训练数据中加入 Miri 和 Kani 的反馈，强化学习安全 Rust。
+> 这与传统的代码审查或静态分析类似——AI 是加速工具，不是替代人类判断。
+> [来源: [AI-Assisted Rust Programming](https://arxiv.org/)] ·
+> [来源: [GitHub Copilot](https://github.com/features/copilot)]
 
 ### 10.3 边界测试：AI 生成 unsafe 代码的 Miri 验证失败（运行时 UB）
 
@@ -817,7 +864,28 @@ fn main() {
 }
 ```
 
-> **修正**: AI 辅助编程工具生成 Rust 代码时，**unsafe 块的错误率显著高于 safe 代码**：1) 边界检查遗漏（`slice::from_raw_parts` 的指针算术）；2) 别名规则违反（`&mut` 和 `*mut` 混用）；3) 生命周期误标注（`'static` 滥用）。缓解策略：1) **禁止 AI 生成 unsafe**——人工审核所有 unsafe 代码；2) 使用 `#[forbid(unsafe_code)]` 在 crate 级别禁止；3) 对 AI 生成的代码运行 Miri、Kani、Clippy。这与人类编写的 unsafe 代码同样需要审核，但 AI 的"自信错误"（plausible-looking but wrong）更难发现。未来方向：1) 用形式化工具验证 AI 生成代码（合约生成 + 自动验证）；2) 训练数据中加入 Miri 和 Kani 的反馈，强化学习安全 Rust。[来源: [GitHub Copilot](https://github.com/features/copilot)] · [来源: [Miri](https://github.com/rust-lang/miri)]
+> **修正**:
+>
+> AI 辅助编程工具生成 Rust 代码时，**unsafe 块的错误率显著高于 safe 代码**：
+>
+> 1) 边界检查遗漏（`slice::from_raw_parts` 的指针算术）；
+> 2) 别名规则违反（`&mut` 和 `*mut` 混用）；
+> 3) 生命周期误标注（`'static` 滥用）。
+>
+> 缓解策略：
+>
+> 1) **禁止 AI 生成 unsafe**——人工审核所有 unsafe 代码；
+> 2) 使用 `#[forbid(unsafe_code)]` 在 crate 级别禁止；
+> 3) 对 AI 生成的代码运行 Miri、Kani、Clippy。
+>
+> 这与人类编写的 unsafe 代码同样需要审核，但 AI 的"自信错误"（plausible-looking but wrong）更难发现。
+>
+> 未来方向：
+>
+> 1) 用形式化工具验证 AI 生成代码（合约生成 + 自动验证）；
+> 2) 训练数据中加入 Miri 和 Kani 的反馈，强化学习安全 Rust。
+> [来源: [GitHub Copilot](https://github.com/features/copilot)] ·
+> [来源: [Miri](https://github.com/rust-lang/miri)]
 
 ### 10.4 边界测试：AI 生成代码的所有权与生命周期错误（编译错误）
 
@@ -834,12 +902,24 @@ fn main() {
 }
 ```
 
-> **修正**: AI 工具（Copilot、ChatGPT）生成 Rust 代码时，**所有权和生命周期**是最常见的错误类型：1) 返回局部引用（悬垂引用）；2) 在闭包中错误捕获引用（非 `'static`）；3) 借用冲突（`&mut` 与 `&` 重叠）。AI 的训练数据包含大量 C/Java/Python 代码，这些语言的引用语义与 Rust 不同，导致生成"看起来像正确 Rust"但实际编译错误的代码。缓解：1) **始终编译 AI 生成的代码**；2) 使用 `cargo check` + `cargo clippy`；3) 对关键代码运行 Miri；4) 不依赖 AI 生成 unsafe 代码。这与人类初学者的错误模式类似——Rust 的所有权系统是独特的，需要专门学习，AI 也无法从其他语言的训练中自动掌握。[来源: [GitHub Copilot](https://github.com/features/copilot)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
-> **过渡**: AI × Rust：生成-验证闭环与确定性容器 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: AI × Rust：生成-验证闭环与确定性容器 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **修正**: AI 工具（Copilot、ChatGPT）生成 Rust 代码时，**所有权和生命周期**是最常见的错误类型：
+>
+> 1) 返回局部引用（悬垂引用）；
+> 2) 在闭包中错误捕获引用（非 `'static`）；
+> 3) 借用冲突（`&mut` 与 `&` 重叠）。
+>
+> AI 的训练数据包含大量 C/Java/Python 代码，这些语言的引用语义与 Rust 不同，导致生成"看起来像正确 Rust"但实际编译错误的代码。
+> 缓解：
+>
+> 1) **始终编译 AI 生成的代码**；
+> 2) 使用 `cargo check` + `cargo clippy`；
+> 3) 对关键代码运行 Miri；
+> 4) 不依赖 AI 生成 unsafe 代码。这与人类初学者的错误模式类似——Rust 的所有权系统是独特的，需要专门学习，AI 也无法从其他语言的训练中自动掌握。
+>
+> [来源: [GitHub Copilot](https://github.com/features/copilot)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > **过渡**: AI × Rust：生成-验证闭环与确定性容器 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ### 补充定理链
 
-- **定理**: AI × Rust：生成-验证闭环与确定性容器 定义 ⟹ 类型安全保证
 - **定理**: AI × Rust：生成-验证闭环与确定性容器 定义 ⟹ 类型安全保证

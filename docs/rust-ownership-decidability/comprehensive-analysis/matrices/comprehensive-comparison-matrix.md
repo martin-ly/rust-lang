@@ -8,7 +8,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [综合概念对比矩阵](#综合概念对比矩阵)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [1. 并发模型对比矩阵](#1-并发模型对比矩阵)
   - [2. 同步原语对比矩阵](#2-同步原语对比矩阵)
   - [3. 智能指针对比矩阵](#3-智能指针对比矩阵)
@@ -24,7 +24,6 @@
     - [常见决策路径](#常见决策路径)
   - [**更新日期**: 2026-03-05](#更新日期-2026-03-05)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引)
 
 ## 1. 并发模型对比矩阵
@@ -95,7 +94,7 @@
 | Rocket | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | 低 | 声明式宏 |
 | poem | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | 中 | 模块化设计 |
 | salvo | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | 中 | 简化版Axum |
-| tide | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐ | 低 | 异步初学者 |
+| tide [unmaintained] | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐ | 低 | 异步初学者 |
 
 ## 6. 形式化验证工具对比矩阵
 >
@@ -210,29 +209,9 @@
 ## 权威来源索引
 
 > **[来源: Wikipedia - Memory Safety]**
-
 > **[来源: TRPL Ch. 4 - Ownership]**
-
 > **[来源: Rustonomicon - Ownership]**
-
 > **[来源: POPL 2018 - RustBelt]**
-
----
-
-## 权威来源索引
-
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
->
-> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 

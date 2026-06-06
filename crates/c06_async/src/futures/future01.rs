@@ -19,8 +19,8 @@
 //!
 //! 调度机制负责管理 Future 的执行：
 //! mechanism Future ：
-//! - Rust 的异步运行时（如 Tokio 或 async-std）会在适当的时候调用 `poll` 方法
-//! - Rust asyncruntime Tokio async-std `poll` method
+//! - Rust 的异步运行时（如 Tokio）会在适当的时候调用 `poll` 方法 [历史: async-std 已于 2025-03 停止维护]
+//! - Rust asyncruntime Tokio `poll` method [history: async-std ended maintenance 2025-03]
 //! - 检查 Future 的状态并决定何时继续执行
 //! - Future state and
 //! - 使用 `Waker` 机制来通知运行时何时重新调度 Future

@@ -2,13 +2,11 @@
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]
-
 > **层级**: L7 前沿趋势
 > **A/S/P 标记**: **P** — Procedure（策略决策）
 > **双维定位**: P×Eva — 评估形式化验证的工业 ROI
 > **前置概念**: [RustBelt](../04_formal/04_rustbelt.md) · [Ownership Formalization](../04_formal/03_ownership_formal.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Unsafe](../03_advanced/03_unsafe.md)
 > **主要来源**: [AWS Kani] · [Microsoft Verus] · [TLA+] · [P Language] · [POPL/PLDI 2024-2026] · [Wikipedia] · [O'Hearn 2007 — Separation Logic]
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -25,70 +23,66 @@
 > **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
 
 ## 一、基础定义
->
 
 ### 1.1 形式化验证（Formal Verification）
->
->
+
 > **来源**: [Wikipedia — Formal verification](https://en.wikipedia.org/wiki/Formal_verification)
 
-形式化验证是使用形式化数学方法证明或反驳系统（硬件或软件）相对于特定规范或属性的正确性的过程。与测试（只能证明错误存在）不同，形式化验证可以提供系统无错误的数学保证。主要技术包括：模型检测（Model Checking）、定理证明（Theorem Proving）、抽象解释（Abstract Interpretation）和符号执行（Symbolic Execution）。
+形式化验证是使用形式化数学方法证明或反驳系统（硬件或软件）相对于特定规范或属性的正确性的过程。
+与测试（只能证明错误存在）不同，形式化验证可以提供系统无错误的数学保证。
+主要技术包括：模型检测（Model Checking）、定理证明（Theorem Proving）、抽象解释（Abstract Interpretation）和符号执行（Symbolic Execution）。
 
 ### 1.2 模型检测（Model Checking）
->
->
+
 > **来源**: [Wikipedia — Model checking](https://en.wikipedia.org/wiki/Model_checking)
 
-模型检测是一种全自动的形式化验证技术，通过穷举系统所有可能的状态空间来验证时序逻辑属性。其核心优势是全自动：用户只需提供系统模型和待验证属性，工具自动完成验证或生成反例。限制在于状态空间爆炸问题——系统状态数随变量数指数增长。现代模型检测器通过符号模型检测（BDD）、有界模型检测（BMC）和抽象精炼（CEGAR）来缓解。
+模型检测是一种全自动的形式化验证技术，通过穷举系统所有可能的状态空间来验证时序逻辑属性。
+其核心优势是全自动：用户只需提供系统模型和待验证属性，工具自动完成验证或生成反例。
+限制在于状态空间爆炸问题——系统状态数随变量数指数增长。
+现代模型检测器通过符号模型检测（BDD）、有界模型检测（BMC）和抽象精炼（CEGAR）来缓解。
 
 ### 1.3 定理证明（Theorem Proving）
 >
 >
 > **来源**: [Wikipedia — Automated theorem proving](https://en.wikipedia.org/wiki/Automated_theorem_proving)
 
-定理证明是使用计算机程序辅助构造数学证明的过程。交互式定理证明器（如 Coq、Isabelle/HOL、Lean）需要人类指导证明策略，而全自动定理证明器（如 Z3、CVC5）通过 SMT 决策过程自动求解约束。在程序验证中，定理证明器用于验证带循环和递归的程序满足前置条件、后置条件和不变式。
+定理证明是使用计算机程序辅助构造数学证明的过程。
+交互式定理证明器（如 Coq、Isabelle/HOL、Lean）需要人类指导证明策略，而全自动定理证明器（如 Z3、CVC5）通过 SMT 决策过程自动求解约束。
+在程序验证中，定理证明器用于验证带循环和递归的程序满足前置条件、后置条件和不变式。
 
 ---
 
 ## 认知路径（Cognitive Path）
->
 
 > **学习递进**: 从直觉出发，逐层深入核心概念。
 
 ### 第 1 步：什么是形式化方法？
->
 
 用数学方法严格证明程序正确性
 
 ### 第 2 步：为什么 Rust 需要形式化方法？
->
 
 unsafe 边界 / 并发正确性 / 安全关键系统
 
 ### 第 3 步：Rust 已有的形式化成果？
->
 
 RustBelt / Iris / Stacked Borrows / Miri
 
 ### 第 4 步：形式化方法的实际局限？
->
 
 规格编写困难 / 状态空间爆炸 / 时间成本
 
 ### 第 5 步：轻量级形式化在 Rust 中的应用？
->
 
 类型即证明 / 契约编程 / 模糊测试
 
 ### 第 6 步：未来：形式化方法的普及路径？
->
 
 自动化工具 / 教育 / 工业标准采纳
 
 ---
 
 ## 二、五层扩展模型
->
 
 五层扩展模型将 Rust 的形式化保证从编译器原生层级向上延伸至系统级运行时验证：
 
@@ -736,7 +730,10 @@ flowchart TD
 4. **nightly 异步**：深度验证失败不阻塞 PR 合并，但需在 24h 内修复
 5. **自托管 Runner**：Kani/Verus 需要大内存，GitHub 免费 runner（7GB）可能不足，建议使用自托管 runner
 
-> **来源**: [Kani CI Best Practices](https://model-checking.github.io/kani/ci.html) · [GitHub Actions Pricing](https://docs.github.com/en/billing/managing-billing-for-github-actions) · [AWS CodePipeline Docs]
+> **来源**:
+> [Kani CI Best Practices](https://model-checking.github.io/kani/ci.html) ·
+> [GitHub Actions Pricing](https://docs.github.com/en/billing/managing-billing-for-github-actions) ·
+> [AWS CodePipeline Docs]
 
 ---
 
@@ -1081,16 +1078,23 @@ flowchart LR
     P1 -->|比对 TLA+ 规约| T1
 ```
 
-> **认知功能**: 展示 TLA+ 规约工具与 Rust 实现工具如何协同，而非相互替代。建议在设计阶段并行使用 TLA+ Toolbox 和 VS Code，实现规约与代码的交叉导航。关键洞察：协议验证和代码验证之间存在「实现鸿沟」，PObserve 的轨迹比对是弥合这一鸿沟的关键技术。
-
-> **来源**: [TLA+ Home Page](https://lamport.azurewebsites.net/tla/tla.html) · [Apalache GitHub](https://github.com/apalache-mc/apalache) · [stateright crate](https://docs.rs/stateright) · [VS Code TLA+](https://marketplace.visualstudio.com/items?itemName=alygin.vscode-tlaplus)
+> **认知功能**:
+> 展示 TLA+ 规约工具与 Rust 实现工具如何协同，而非相互替代。
+> 建议在设计阶段并行使用 TLA+ Toolbox 和 VS Code，实现规约与代码的交叉导航。
+> 关键洞察：协议验证和代码验证之间存在「实现鸿沟」，PObserve 的轨迹比对是弥合这一鸿沟的关键技术。
+> **来源**:
+>
+> [TLA+ Home Page](https://lamport.azurewebsites.net/tla/tla.html) ·
+> [Apalache GitHub](https://github.com/apalache-mc/apalache) ·
+> [stateright crate](https://docs.rs/stateright) ·
+> [VS Code TLA+](https://marketplace.visualstudio.com/items?itemName=alygin.vscode-tlaplus)
 
 #### 8.5.5 TLA+ 与 Kani/Verus 的对比：协议设计 vs 代码实现
 
 TLA+ 和 Kani/Verus 处于形式化验证光谱的不同位置，二者是**互补**而非竞争关系：
 
 | 维度 | TLA+ | Kani | Verus |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | **验证层级** | L3 协议级（设计） | L1 代码级（实现） | L1 代码级（实现） |
 | **抽象目标** | 状态机、时序属性、分布式协议 | unsafe 代码安全属性 | 功能正确性、算法规约 |
 | **形式化方法** | 时序逻辑 + 集合论 + 模型检测 | 有界模型检测 + 符号执行 | SMT 求解 + 演绎验证 |
@@ -1326,12 +1330,10 @@ graph TD
 ```
 
 > **认知功能**: 用工业实例反驳「形式化不实用」的偏见，建立从学术到工业的连续谱认知。建议在推动团队采纳 Miri/Kani 时引用此图，降低对新工具的心理抗拒。关键洞察：形式化方法已经深度嵌入 Rust 的基础设施——Miri 检测标准库、Kani 验证 AWS 生产服务、RustBelt 影响语言设计——它不再是未来的选项，而是当下的实践。
-
 > **过渡: L7 → L4**
 >
 > 形式化方法不是"写完后验证"的附加步骤——它是语言设计的内在组成部分。Rust 的所有权系统本身就是形式化语义（Oxide、RustBelt）的工程化实现。理解形式化方法的历史，就是理解 Rust 为什么选择了这条设计路径。
 > 形式化根基见 [`../04_formal/03_ownership_formal.md`](../04_formal/03_ownership_formal.md) 与 [`../04_formal/04_rustbelt.md`](../04_formal/04_rustbelt.md)。
-
 > **过渡: L7 → L3**
 > 形式化验证工具（Kani、Miri、Prusti）的实际使用场景集中在 unsafe 边界和并发协议。这些工具不验证"业务逻辑正确"，而是验证"内存安全"和"无数据竞争"——这正是 Rust 编译器已经保证 safe Rust 的部分，但 unsafe 和并发复杂场景需要额外验证。
 > 工程边界见 [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) 与 [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md)。
@@ -1343,7 +1345,7 @@ graph TD
 > **[来源类型: 原创分析; AWS Kani; Microsoft Verus; RustBelt]** 以下矩阵梳理形式化验证工具链的工业适用性与成本边界。
 
 | 编号 | 工具 / 方法 | 保证范围 | 前提 | 失效条件 | 工业适用性 |
-|:---|:---|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | **F1** | `rustc` 类型检查 | 内存安全 + 线程安全（safe） | 纯 safe Rust | `unsafe` 块；FFI | ⭐⭐⭐⭐⭐ 所有项目 |
 | **F2** | `Miri` 动态检测 | UB 检测（别名/未初始化） | 可执行测试路径 | FFI 不透明；未覆盖路径 | ⭐⭐⭐⭐⭐ 含 unsafe 项目 |
 | **F3** | `Kani` 模型检测 | 有界属性验证 | `#[kani::proof]` harness | 状态空间爆炸 | ⭐⭐⭐⭐ 安全关键模块 |
@@ -1359,23 +1361,20 @@ graph TD
 > | **F8** | **AutoVerus** | 神经符号验证：LLM 生成循环不变式候选 + SMT 自动验证 | OOPSLA 2025 |
 > | **F9** | **Vest** | 可验证网络协议实现（TLS/QUIC），基于 Verus 证明协议消息处理正确性 | USENIX Security 2025 |
 > | **F10** | **Rustlantis** | 随机程序生成器，用于发现 Miri/Kani 等验证工具的 soundness 漏洞 | OOPSLA 2024 |
-
-> **⟹ 推理链**: F1-F6 的**覆盖强度递增，但适用性递减**。工业最佳实践是组合策略：F1+F2 覆盖日常开发，F3 覆盖安全关键模块，F4-F6 仅在极少数核心组件中使用。形式化验证不是替代测试，而是**在测试无法覆盖的边界上提供数学保证**。
+>
+> **⟹ 推理链**: F1-F6 的**覆盖强度递增，但适用性递减**。
+> 工业最佳实践是组合策略：F1+F2 覆盖日常开发，F3 覆盖安全关键模块，F4-F6 仅在极少数核心组件中使用。
+> 形式化验证不是替代测试，而是**在测试无法覆盖的边界上提供数学保证**。
 
 ---
 
 > **过渡: L7 → L6**
 > 形式化验证正在从学术研究走向工业实践：AWS 用 Kani 验证 s2n-tls、Microsoft 用 Verus 验证 Hyper-V 组件、Rust 标准库用 Miri 持续回归检测。这些案例证明形式化方法不再是"玩具"，而是关键基础设施的必需品。
 > 工业实践见 [`../06_ecosystem/03_core_crates.md`](../06_ecosystem/03_core_crates.md)（验证工具生态）。
-
 > **[来源: AWS Kani Blog 2023; Microsoft Verus Docs; Creusot Tutorial; Prusti GitHub; Aeneas Docs]** 形式化工具的分析基于各工具的官方文档和公开发表的论文。✅
-
 > **[来源: RustBelt: POPL 2018; Iris JFP 2018; O'Hearn 2007 — Separation Logic]** 理论基础参考了 RustBelt 系列论文和分离逻辑的经典文献。✅
-
 > **[来源: RustBelt: POPL 2018; Iris JFP 2018; O'Hearn 2007 — Separation Logic]** 形式化理论基础参考了 RustBelt 系列论文和分离逻辑经典文献。✅
-
 > **[来源: AWS Kani Blog 2023; Microsoft Verus Docs; Creusot Tutorial; Prusti GitHub]** 工业工具分析基于各工具的官方文档和公开发表的论文。✅
-
 > **[来源: TLA+ Spec; P Language Docs; Spin Documentation]** 协议验证工具参考了形式化方法领域的成熟工具文档。✅
 ---
 
@@ -1391,23 +1390,7 @@ graph TD
 
 ## 权威来源索引
 
->
->
->
->
->
->
->
->
-
----
-
----
-
----
-
 > **补充来源**
-
 > **相关文件**: [RustBelt 谓词映射](../00_meta/rustbelt_predicate_map.md) · [能力图谱](../00_meta/competency_graph.md#五形式化能力) · [RustBelt](../04_formal/04_rustbelt.md)
 
 ## 十、边界测试：形式化方法的编译错误
@@ -1441,7 +1424,16 @@ fn verify_any_deref() {
 }
 ```
 
-> **修正**: Kani（Rust 的模型检查器）通过符号执行验证 `unsafe` 代码的安全性。在上述例子中，`unchecked_deref` 本身 unsafe，其安全性前提（ptr 非空、已对齐、已初始化）由调用者保证。Kani 自动生成反例（counterexample）展示违反前提的情况（如空指针）。这与 Miri（运行时检测）互补：Miri 在 concrete 输入上执行，Kani 在符号输入上验证所有路径。形式化方法的价值在于将"信任但验证"（trust but verify）应用于 unsafe Rust——开发者声明不变量（invariant），工具机械验证。这与 C 的完全信任开发者或 Java 的无 unsafe 代码不同——Rust 在 unsafe 边界上建立了可验证的契约。[来源: [Kani Documentation](https://model-checking.github.io/kani/)] · [来源: [Rust Verification Tools](https://alastairreid.github.io/rust-verification-tools/)]
+> **修正**:
+>
+> Kani（Rust 的模型检查器）通过符号执行验证 `unsafe` 代码的安全性。
+> 在上述例子中，`unchecked_deref` 本身 unsafe，其安全性前提（ptr 非空、已对齐、已初始化）由调用者保证。
+> Kani 自动生成反例（counterexample）展示违反前提的情况（如空指针）。
+> 这与 Miri（运行时检测）互补：Miri 在 concrete 输入上执行，Kani 在符号输入上验证所有路径。
+> 形式化方法的价值在于将"信任但验证"（trust but verify）应用于 unsafe Rust——开发者声明不变量（invariant），工具机械验证。
+> 这与 C 的完全信任开发者或 Java 的无 unsafe 代码不同——Rust 在 unsafe 边界上建立了可验证的契约。
+> [来源: [Kani Documentation](https://model-checking.github.io/kani/)] ·
+> [来源: [Rust Verification Tools](https://alastairreid.github.io/rust-verification-tools/)]
 
 ### 10.2 边界测试：Prusti 的前置条件违反（编译错误/验证失败）
 
@@ -1460,7 +1452,18 @@ fn main() {
 }
 ```
 
-> **修正**: Prusti 允许在 Rust 函数上标注契约（contract）：`requires`（前置条件）、`ensures`（后置条件）、`pure`（无副作用）。验证器在编译期检查所有调用点是否满足前置条件，所有返回路径是否满足后置条件。`sqrt(-1.0)` 违反 `x > 0` 的前提，Prusti 报告验证错误。这与 Rust 的类型系统形成层次化保障：类型系统防止内存不安全（始终启用），Prusti 防止逻辑错误（可选启用）。设计挑战：契约的编写成本、验证时间（指数级路径爆炸）、与标准库的集成。但长期来看，形式化契约是"编译期错误"哲学的终极延伸——不仅检查类型正确，还检查语义正确。[来源: [Prusti Project](https://www.pm.inf.ethz.ch/research/prusti.html)] · [来源: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)]
+> **修正**:
+>
+> Prusti 允许在 Rust 函数上标注契约（contract）：`requires`（前置条件）、`ensures`（后置条件）、`pure`（无副作用）。
+> 验证器在编译期检查所有调用点是否满足前置条件，所有返回路径是否满足后置条件。
+> `sqrt(-1.0)` 违反 `x > 0` 的前提，Prusti 报告验证错误。
+> 这与 Rust 的类型系统形成层次化保障：类型系统防止内存不安全（始终启用），Prusti 防止逻辑错误（可选启用）。
+>
+> 设计挑战：
+> 契约的编写成本、验证时间（指数级路径爆炸）、与标准库的集成。
+> 但长期来看，形式化契约是"编译期错误"哲学的终极延伸——不仅检查类型正确，还检查语义正确。
+> [来源: [Prusti Project](https://www.pm.inf.ethz.ch/research/prusti.html)] ·
+> [来源: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)]
 
 ### 10.3 边界测试：形式化规格与实现的不一致（验证失败）
 
@@ -1477,7 +1480,17 @@ fn add(a: u32, b: u32) -> u32 {
 // }
 ```
 
-> **修正**: 形式化验证的关键挑战：**规格是否正确**？上述规格要求"永不应溢出"，但实现使用普通 `+`，在 `u32` 上会溢出。Kani 或 Prusti 验证此规格时会报告失败。但修正规格（返回 `Option<u32>`）改变了 API 契约——调用者需处理 `None`。形式化验证不保证"程序正确"，只保证"程序满足规格"。规格本身可能有漏洞：遗漏边界条件、错误的前置条件、不完整的后置条件。这与数学证明（公理的正确性决定定理的正确性）或法律合同（条款的精确性决定权利义务）类似——形式化方法将"信任"从代码转移到规格。企业应用形式化方法时，需投入大量资源确保规格完整正确。[来源: [Kani Documentation](https://model-checking.github.io/kani/)] · [来源: [Prusti Project](https://www.pm.inf.ethz.ch/research/prusti.html)]
+> **修正**:
+>
+> 形式化验证的关键挑战：**规格是否正确**？上述规格要求"永不应溢出"，但实现使用普通 `+`，在 `u32` 上会溢出。
+> Kani 或 Prusti 验证此规格时会报告失败。
+> 但修正规格（返回 `Option<u32>`）改变了 API 契约——调用者需处理 `None`。
+> 形式化验证不保证"程序正确"，只保证"程序满足规格"。
+> 规格本身可能有漏洞：遗漏边界条件、错误的前置条件、不完整的后置条件。
+> 这与数学证明（公理的正确性决定定理的正确性）或法律合同（条款的精确性决定权利义务）类似——形式化方法将"信任"从代码转移到规格。
+> 企业应用形式化方法时，需投入大量资源确保规格完整正确。
+> [来源: [Kani Documentation](https://model-checking.github.io/kani/)] ·
+> [来源: [Prusti Project](https://www.pm.inf.ethz.ch/research/prusti.html)]
 
 ### 10.4 边界测试：形式化工具的编译器版本锁定（编译错误）
 
@@ -1492,7 +1505,20 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的形式化工具（Miri、Kani、Prusti、Crucible）紧密依赖编译器内部（MIR、HIR、LLVM IR），因此通常**锁定到特定 nightly 版本**。升级编译器可能导致：1) 不稳定特性语法变化；2) 内部 API 变更；3) 工具本身未适配新版本。这与 Clippy、`rustfmt` 等工具类似——它们也需跟随编译器更新。企业采用形式化工具的代价：需维护锁定的工具链版本，或等待工具更新。这与 C 的 static analyzer（如 Coverity，独立于编译器）或 Java 的 SpotBugs（基于字节码，编译器无关）不同——Rust 的形式化生态年轻，尚未建立稳定的跨版本接口。`rustup` 的 toolchain 管理缓解了部分痛苦（`rustup run nightly-2024-01-01 miri`）。[来源: [Miri Documentation](https://github.com/rust-lang/miri)] · [来源: [Rustup Toolchains](https://rust-lang.github.io/rustup/concepts/toolchains.html)]
+> **修正**:
+>
+> Rust 的形式化工具（Miri、Kani、Prusti、Crucible）紧密依赖编译器内部（MIR、HIR、LLVM IR），因此通常**锁定到特定 nightly 版本**。
+> 升级编译器可能导致：
+>
+> 1) 不稳定特性语法变化；
+> 2) 内部 API 变更；
+> 3) 工具本身未适配新版本。
+> 这与 Clippy、`rustfmt` 等工具类似——它们也需跟随编译器更新。
+> 企业采用形式化工具的代价：需维护锁定的工具链版本，或等待工具更新。
+> 这与 C 的 static analyzer（如 Coverity，独立于编译器）或 Java 的 SpotBugs（基于字节码，编译器无关）不同——Rust 的形式化生态年轻，尚未建立稳定的跨版本接口。
+> `rustup` 的 toolchain 管理缓解了部分痛苦（`rustup run nightly-2024-01-01 miri`）。
+> [来源: [Miri Documentation](https://github.com/rust-lang/miri)] ·
+> [来源: [Rustup Toolchains](https://rust-lang.github.io/rustup/concepts/toolchains.html)]
 
 ---
 

@@ -35,6 +35,5 @@ serde = ["dep:serde", "dep:serde_json"]
 error-trait = ["dep:thiserror", "dep:anyhow"]
 async = ["dep:tokio"]
 
-
 [package.metadata.cargo-machete]
 ignored = ["anyhow", "serde_json"]

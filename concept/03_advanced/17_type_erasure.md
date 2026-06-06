@@ -22,6 +22,8 @@
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
 > [TRPL — Trait Objects](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)
 
+> **对应 Crate**: [`c04_generic`](../../crates/c04_generic/)
+
 ## 📑 目录
 
 - [类型擦除与动态分发](#类型擦除与动态分发)

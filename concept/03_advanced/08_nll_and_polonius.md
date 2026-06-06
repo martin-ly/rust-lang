@@ -17,8 +17,9 @@
 > [Polonius Repository](https://github.com/rust-lang/polonius) ·
 > [The Rust Compiler Guide — Borrow Check](https://rustc-dev-guide.rust-lang.org/borrow_check.html) ·
 > [Wikipedia — Data-flow Analysis](https://en.wikipedia.org/wiki/Data-flow_analysis)
-
 > **前置依赖**: [Traits](../02_intermediate/01_traits.md)
+> **对应 Crate**: [`c01_ownership_borrow_scope`](../../crates/c01_ownership_borrow_scope/)
+> **对应练习**: [`exercises/src/ownership_borrowing/`](../../exercises/src/ownership_borrowing/)
 
 ## 📑 目录
 
@@ -150,10 +151,11 @@ Polonius: 下一代借用检查器
   ├── 使用 Datalog 表达约束
   └── 在 CFG 的每个点上传播借用信息
 
-  当前状态 (2024+):
-  ├── 已实现为 rustc 的实验性选项
-  ├── -Zpolonius 标志启用
-  └── 预计最终成为默认
+  当前状态 (2026-06):
+  ├── ✅ #150551 已落地 — Polonius 核心实现完成
+  ├── 🧪 `-Zpolonius` 标志在 nightly 可用
+  ├── 📋 官方计划 **2026 年内稳定化**（Rust Project Goals 2026 目标）
+  └── 🎯 预计最终成为默认借用检查器
 
   Polonius 能编译的额外代码:
   ├── 某些条件借用模式
@@ -583,7 +585,18 @@ fn main() {
 }
 ```
 
-> **修正**: Polonius 是 Rust 的下一代借用检查器，基于**数据流分析**而非 NLL 的**基于位置的分析**。Polonius 能精确追踪引用的"最后使用点"：上述代码中 `r` 在 `*r = 1` 后不再使用，因此 `p = &x` 应合法。但 NLL 保守地拒绝（`r` 的作用域延伸到块结束）。Polonius 接受更多合法程序，但：1) 编译时间可能更长（分析更复杂）；2) 某些边缘情况的行为仍在定义；3) 尚未稳定（`-Zpolonius` 实验标志）。这与 C++ 的 borrow checker（无此概念，完全信任开发者）或 Swift 的内存安全（ARC，无编译期借用检查）不同——Rust 的借用检查器在持续精确化，逐步减少保守拒绝。[来源: [Polonius Initiative](https://rust-lang.github.io/polonius/)] · [来源: [NLL RFC 2094](https://rust-lang.github.io/rfcs/2094-nll.html)]
+> **修正**: Polonius 是 Rust 的下一代借用检查器，基于**数据流分析**而非 NLL 的**基于位置的分析**。
+> Polonius 能精确追踪引用的"最后使用点"：
+> 上述代码中 `r` 在 `*r = 1` 后不再使用，因此 `p = &x` 应合法。
+> 但 NLL 保守地拒绝（`r` 的作用域延伸到块结束）。
+> Polonius 接受更多合法程序，但：
+>
+> 1) 编译时间可能更长（分析更复杂）；
+> 2) 某些边缘情况的行为仍在定义；
+> 3) 尚未稳定（`-Zpolonius` 实验标志）。
+> 这与 C++ 的 borrow checker（无此概念，完全信任开发者）或 Swift 的内存安全（ARC，无编译期借用检查）不同——Rust 的借用检查器在持续精确化，逐步减少保守拒绝。
+> [来源: [Polonius Initiative](https://rust-lang.github.io/polonius/)] ·
+> [来源: [NLL RFC 2094](https://rust-lang.github.io/rfcs/2094-nll.html)]
 
 ### 10.4 边界测试：NLL 的保守拒绝与 Polonius 的改进（编译错误/未来修复）
 
@@ -598,9 +611,24 @@ fn main() {
 }
 ```
 
-> **修正**: NLL（Non-Lexical Lifetimes）已大幅改进 Rust 的借用检查：引用的生命周期基于**最后使用点**而非词法作用域。但 NLL 仍**保守**：某些情况下编译器无法证明安全，选择拒绝。Polonius（下一代借用检查器）基于**数据流分析**和**关系推理**，可处理更复杂的场景：1) 路径敏感分析（不同分支的借用不同）；2) 循环中的可变借用；3) 部分借用（`&mut v[0]` 与 `&mut v[1]` 不冲突）。Polonius 当前在 nightly 可用（`-Z polonius`），预计在未来 stable 中取代 NLL。这与 C++ 的借用检查（无，完全信任程序员）或 Swift 的 exclusivity enforcement（运行时检查，非编译期）不同——Rust 的借用检查器持续演进，目标是允许更多合法程序同时保持安全保证。[来源: [Polonius](https://github.com/rust-lang/polonius)] · [来源: [NLL](https://doc.rust-lang.org/edition-guide/rust-2018/ownership-and-lifetimes/non-lexical-lifetimes.html)]
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **修正**:
+> NLL（Non-Lexical Lifetimes）已大幅改进 Rust 的借用检查：引用的生命周期基于**最后使用点**而非词法作用域。
+> 但 NLL 仍**保守**：某些情况下编译器无法证明安全，选择拒绝。
+> Polonius（下一代借用检查器）基于**数据流分析**和**关系推理**，可处理更复杂的场景：
+>
+> 1) 路径敏感分析（不同分支的借用不同）；
+> 2) 循环中的可变借用；
+> 3) 部分借用（`&mut v[0]` 与 `&mut v[1]` 不冲突）。
+>
+> Polonius 当前在 nightly 可用（`-Z polonius`），预计在未来 stable 中取代 NLL。
+> 这与 C++ 的借用检查（无，完全信任程序员）或 Swift 的 exclusivity enforcement（运行时检查，非编译期）不同——Rust 的借用检查器持续演进，目标是允许更多合法程序同时保持安全保证。
+> [来源: [Polonius](https://github.com/rust-lang/polonius)] ·
+> [来源: [NLL](https://doc.rust-lang.org/edition-guide/rust-2018/ownership-and-lifetimes/non-lexical-lifetimes.html)]
+>
+> **权威来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 
 ## 认知路径
@@ -618,9 +646,7 @@ fn main() {
 > 借用检查精确 ⟸ NLL 流敏感分析 ⟸ 数据流方程
 > 未来借用检查 ⟸ Polonius 起源分析 ⟸ 借用图
 > **过渡**: 掌握 NLL 与 Polonius：借用检查器的演进 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 NLL 与 Polonius：借用检查器的演进 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: NLL 与 Polonius：借用检查器的演进 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
