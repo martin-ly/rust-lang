@@ -2,7 +2,6 @@
 
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
-
 > **创建日期**: 2026-02-15
 > **最后更新**: 2026-05-08
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -48,7 +47,6 @@
   - [Rust 1.95+ 在 Unsafe Rust 中的应用](#rust-195-在-unsafe-rust-中的应用)
     - [LazyLock 在 Unsafe 全局状态管理中的应用](#lazylock-在-unsafe-全局状态管理中的应用)
     - [ControlFlow 在 Unsafe 边界检查中的应用](#controlflow-在-unsafe-边界检查中的应用)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -919,8 +917,11 @@ Miri 可以检测：
 ## 🔗 推荐学习路径
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **对应 Nomicon 阅读顺序**: [Meet Safe and Unsafe](https://doc.rust-lang.org/nomicon/meet-safe-and-unsafe.html) → [How Safe and Unsafe Interact](https://doc.rust-lang.org/nomicon/safe-unsafe-meaning.html) → [What Unsafe Rust Can Do](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) → [Working with Unsafe](https://doc.rust-lang.org/nomicon/working-with-unsafe.html)
+> **对应 Nomicon 阅读顺序**:
+> [Meet Safe and Unsafe](https://doc.rust-lang.org/nomicon/meet-safe-and-unsafe.html) →
+> [How Safe and Unsafe Interact](https://doc.rust-lang.org/nomicon/safe-unsafe-meaning.html) →
+> [What Unsafe Rust Can Do](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) →
+> [Working with Unsafe](https://doc.rust-lang.org/nomicon/working-with-unsafe.html)
 
 1. **通读 Nomicon 前 4 节**（Meet Safe、Interact、What Unsafe Does、Working with Unsafe）
 2. 学习 C01 的零成本抽象与高级所有权
@@ -954,9 +955,9 @@ Miri 可以检测：
 > **官方入口**: [The Rustonomicon](https://doc.rust-lang.org/nomicon/) · 与 Rust 1.93 对应见 [09_rust_1.93_compatibility_deep_dive](../06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md)
 
 ## 🆕 Rust 1.95+ 特性
+
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
-
 > **适用版本**: Rust 1.96.0+
 
 ### 新特性概览
@@ -965,19 +966,18 @@ Miri 可以检测：
 
 Rust 1.95+ 带来了以下重要更新：
 
-- **rray_windows** - 固定大小的数组窗口迭代器
+- **array_windows** - 固定大小的数组窗口迭代器
 - **ControlFlow** - 控制流抽象类型
 - **LazyCell/LazyLock 新方法** - get(), get_mut(),
 orce_mut()
 - **Peekable::next_if_map** - 条件映射迭代
-- **TryFrom<char> for usize** - Unicode 标量值转换
+- **`TryFrom<char>` for usize** - Unicode 标量值转换
 
 ### 代码示例
 
 > **[来源: POPL - Programming Languages Research]**
 
-`
-ust
+```rust
 // array_windows 示例
 let data = [1, 2, 3, 4, 5];
 let sums: Vec<i32> = data.array_windows::<2>()
@@ -990,7 +990,7 @@ let result = items.iter().try_for_each(|&n| {
     if n < 0 { ControlFlow::Break(n) }
     else { ControlFlow::Continue(()) }
 });
-`
+```
 
 **最后更新**: 2026-05-08 (添加 Rust 1.95+ 特性)
 
@@ -1005,7 +1005,6 @@ let result = items.iter().try_for_each(|&n| {
 ## Rust 1.95+ 在 Unsafe Rust 中的应用
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 > **适用版本**: Rust 1.96.0+
 
 ### LazyLock 在 Unsafe 全局状态管理中的应用
@@ -1063,6 +1062,7 @@ fn validate_pointer_range<T>(
 
 **维护者**: Rust 学习项目团队
 **状态**: ✅ 深度整合完成
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -1088,17 +1088,11 @@ fn validate_pointer_range<T>(
 ## 权威来源索引
 
 > **[来源: Wikipedia - Memory Safety]**
-
 > **[来源: Wikipedia - Undefined Behavior]**
-
 > **[来源: Rustonomicon]**
-
 > **[来源: Rust Reference - Unsafe Rust]**
-
 > **[来源: RFC 2585 - Unsafe Code Guidelines]**
-
 > **[来源: ACM - Safe Use of Unsafe]**
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 > **[来源: TRPL - The Rust Programming Language]**
@@ -1107,7 +1101,6 @@ fn validate_pointer_range<T>(
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 > **[来源: ACM - Systems Programming Languages]**
 > **[来源: IEEE - Programming Language Standards]**

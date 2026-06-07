@@ -347,13 +347,9 @@ graph TD
 ## 权威来源索引
 
 > **[来源: ISO 26262 - Functional Safety]**
-
 > **[来源: IEC 61508 - Safety Standards]**
-
 > **[来源: MISRA Rust Guidelines]**
-
 > **[来源: Ferrocene Language Specification]**
-
 > **[来源: Ferrocene 26.02.0 Release Notes](https://ferrocene.dev/)** — ISO 26262 ASIL B + IEC 61508 SIL 2 core 子集认证 [来源: Authority Source Sprint Batch 9]
 
 ---

@@ -1,10 +1,8 @@
 # Microsoft Pragmatic Rust Guidelines 代码审查清单
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
-
 > **创建日期**: 2026-04-24
 > **来源**: Microsoft Pragmatic Rust Guidelines
 > **用途**: 将指南要点转化为可执行的代码审查清单，每条附带项目内示例链接
@@ -313,17 +311,11 @@
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming Languages]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ---

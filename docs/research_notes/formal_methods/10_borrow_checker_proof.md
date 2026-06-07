@@ -96,7 +96,6 @@
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [权威来源索引](#权威来源索引)
 
 ## 🎯 研究目标 {#-研究目标}
@@ -1899,14 +1898,17 @@ Theorem 1: Check(P) = Pass → DataRaceFree(P)
 - 添加了概念定义-属性关系-解释论证 汇总表
 - 新增定理/证明数量: 4个定理（含完整证明）+ 5个引理 + 2个推论
 
-**国际权威对标**：[Stacked Borrows POPL 2020](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)、[Tree Borrows PLDI 2025](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)、Polonius；[FLS Ch. 15.4 Borrowing](https://spec.ferrocene.dev/ownership-and-deconstruction.html#borrowing)、[Ch. 19 Unsafety](https://spec.ferrocene.dev/unsafety.html)；Miri 实现 Stacked Borrows。
+**国际权威对标**：
+[Stacked Borrows POPL 2020](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)、
+[Tree Borrows PLDI 2025](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)、
+Polonius；[FLS Ch. 15.4 Borrowing](https://spec.ferrocene.dev/ownership-and-deconstruction.html#borrowing)、
+[Ch. 19 Unsafety](https://spec.ferrocene.dev/unsafety.html)；Miri 实现 Stacked Borrows。
 
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
 >
 > **[来源: [crates.io](https://crates.io/)]**
-
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
@@ -1942,13 +1944,14 @@ Theorem 1: Check(P) = Pass → DataRaceFree(P)
 > **[来源: ACM - Systems Programming Languages]**
 
 - Rust 1.94 迁移指南
-- [Rust 1.94 特性速查
+- Rust 1.94 特性速查
 - [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
 
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -1969,19 +1972,12 @@ Theorem 1: Check(P) = Pass → DataRaceFree(P)
 ## 权威来源索引
 
 > **[来源: Wikipedia - Borrow Checker]**
-
 > **[来源: Wikipedia - Memory Safety]**
-
 > **[来源: Rust Reference - Lifetimes]**
-
 > **[来源: Rustonomicon - Lifetimes]**
-
 > **[来源: POPL 2018 - RustBelt]**
-
 > **[来源: ACM - Ownership Types]**
-
 > **[来源: IEEE - Safe Systems Programming]**
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 > **[来源: TRPL - The Rust Programming Language]**
@@ -1992,7 +1988,6 @@ Theorem 1: Check(P) = Pass → DataRaceFree(P)
 > **[来源: POPL - Programming Languages Research]**
 > **[来源: PLDI - Programming Language Design and Implementation]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 > **[来源: TRPL - The Rust Programming Language]**
@@ -2001,7 +1996,6 @@ Theorem 1: Check(P) = Pass → DataRaceFree(P)
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference]**
 > **[来源: TRPL - The Rust Programming Language]**
@@ -2010,7 +2004,6 @@ Theorem 1: Check(P) = Pass → DataRaceFree(P)
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rustonomicon]**
-
 > **[来源: IEEE - Programming Language Standards]**
 
 ---

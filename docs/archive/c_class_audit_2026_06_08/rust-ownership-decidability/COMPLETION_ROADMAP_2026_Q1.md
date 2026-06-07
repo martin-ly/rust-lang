@@ -2,7 +2,6 @@
 
 > **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **目标日期**: 2026-06-30 (100% 完成)
 > **当前日期**: 2026-03-07
 > **剩余时间**: ~16 周
@@ -46,7 +45,6 @@
   - [七、可持续维护建议](#七可持续维护建议)
     - [7.1 长期维护机制](#71-长期维护机制)
     - [7.2 质量保证](#72-质量保证)
-  - [*目标: 2026-06-30 100% 完成*](#目标-2026-06-30-100-完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -368,6 +366,7 @@
 *路线图制定: 2026-03-07*
 *计划周期: 16 周*
 *目标: 2026-06-30 100% 完成*
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -397,11 +396,8 @@
 ## 权威来源索引
 
 > **[来源: Wikipedia - Memory Safety]**
-
 > **[来源: TRPL Ch. 4 - Ownership]**
-
 > **[来源: Rustonomicon - Ownership]**
-
 > **[来源: POPL 2018 - RustBelt]**
 
 ---

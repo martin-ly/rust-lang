@@ -591,7 +591,13 @@ pub fn get_iter(data: &[i32]) -> impl Iterator<Item = &i32> {
 
 ---
 
-> **权威来源**: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [RFC 3501](https://rust-lang.github.io/rfcs/3501-edition-2024.html) · [RFC 3617](https://rust-lang.github.io/rfcs/3617-precise-capturing.html)
+> **权威来源**:
+>
+> [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [RFC 3501](https://rust-lang.github.io/rfcs/3501-edition-2024.html) ·
+> [RFC 3617](https://rust-lang.github.io/rfcs/3617-precise-capturing.html)
 >
 > **文档版本**: 1.0
 > **对应 Rust 版本**: 1.85.0+ stable (Edition 2024)

@@ -9,7 +9,10 @@
 > **层级**: L6 生态工具
 > **前置概念**: [Cargo](../../concept/06_ecosystem/01_toolchain.md) · [Build Systems](../../concept/07_future/)
 > **Bloom 层级**: 应用
-> **[来源: Rust Compiler Team]** · **[来源: rustc_parallel_frontend 跟踪 Issue]** · **[来源: Rust Compiler Development Guide]** · **[来源: Nicholas Nethercote - How to Speed Up the Rust Compiler]** ✅ · **[来源: Wikipedia - Parallel Computing]** · **[来源: Wikipedia - Compiler Optimization]** · **[来源: ACM - Parallel Compilation Techniques]** · **[来源: IEEE - Multi-Core Software Standards]**
+> **[来源: Rust Compiler Team]** · **[来源: rustc_parallel_frontend 跟踪 Issue]** ·
+> **[来源: Rust Compiler Development Guide]** · **[来源: Nicholas Nethercote - How to Speed Up the Rust Compiler]** ✅ ·
+> **[来源: Wikipedia - Parallel Computing]** · **[来源: Wikipedia - Compiler Optimization]** ·
+> **[来源: ACM - Parallel Compilation Techniques]** · **[来源: IEEE - Multi-Core Software Standards]**
 
 ---
 
@@ -87,7 +90,6 @@ $env:RUSTFLAGS = "-Z threads=$env:NUMBER_OF_PROCESSORS"
   - [思维导图：并行前端编译](#思维导图并行前端编译)
   - [决策树：并行前端启用策略](#决策树并行前端启用策略)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
 
 ### 性能预期
 
@@ -210,35 +212,13 @@ graph TD
 ## 权威来源索引
 
 > **[来源: Wikipedia - Parallel Computing]**
-
 > **[来源: ACM - Parallel Programming]**
-
 > **[来源: IEEE - Parallel Algorithms]**
-
 > **[来源: Rust Reference - Parallel Iterators]**
-
 > **[来源: Wikipedia - Compiler Construction]**
-
 > **[来源: Rust Compiler Team Blog]**
-
 > **[来源: LLVM Documentation]**
-
 > **[来源: ACM - Compiler Design]**
-
----
-
-## 权威来源索引
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
->
-> **[来源: [Rayon Documentation](https://docs.rs/rayon/latest/rayon/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
 > **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]
@@ -246,7 +226,6 @@ graph TD
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ---

@@ -2,7 +2,6 @@
 
 > **分级**: [A]
 > **Bloom 层级**: L3 (应用)
-
 > **创建日期**: 2026-02-15
 > **最后更新**: 2026-05-08
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -1361,13 +1360,9 @@ pub fn x86_64_optimized() -> i32 {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Machine Learning]**
-
 > **[来源: Wikipedia - Artificial Intelligence]**
-
 > **[来源: tch-rs Documentation]**
-
 > **[来源: ACM - AI Systems]**
-
 > **[来源: Wikipedia - Compiler Construction]**
 > **[来源: Rust Compiler Team Blog]**
 > **[来源: LLVM Documentation]**

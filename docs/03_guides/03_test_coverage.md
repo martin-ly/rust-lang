@@ -7,7 +7,6 @@
 # 代码覆盖率测试指南
 
 > **Bloom 层级**: L2-L3 (理解/应用)
-
 > 本文档对应 Rust 生产级工程实践体系阶段三 —— 代码覆盖率集成。
 > 参考: Microsoft Azure 测试策略、Rust Foundation 质量倡议。
 
@@ -297,17 +296,11 @@ A: 这是已知问题。尝试：
 ## 权威来源索引
 
 > **[来源: Wikipedia - Code Coverage]**
-
 > **[来源: Wikipedia - Software Testing]**
-
 > **[来源: ACM - Test Coverage Metrics]**
-
 > **[来源: IEEE - Software Quality Standards]**
-
 > **[来源: Rust Book - Testing]**
-
 > **[来源: Rust Reference - Test Attributes]**
-
 > **[来源: Martin Fowler - Test Coverage]**
 
 ---

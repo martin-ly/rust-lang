@@ -32,7 +32,6 @@
     - [相关模块](#相关模块)
   - [📝 文档贡献](#-文档贡献)
   - [📞 获取帮助](#-获取帮助)
-  - [_总文档数：30+_](#总文档数30)
 
 本文档提供 c03_control_fn 模块所有文档的完整索引和导航指南。
 
@@ -309,6 +308,7 @@ _最后更新：2025年12月_
 _文档版本：v3.0_
 _Rust 版本：1.92.0+_
 _总文档数：30+_
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

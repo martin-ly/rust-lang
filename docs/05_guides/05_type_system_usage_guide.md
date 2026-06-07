@@ -302,11 +302,8 @@ fn robust_operation() -> Result<(), ContextualError> {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Type System]**
-
 > **[来源: Pierce 2002 - TAPL]**
-
 > **[来源: Rust Reference - Type System]**
-
 > **[来源: ACM - Type Systems]**
 
 ---

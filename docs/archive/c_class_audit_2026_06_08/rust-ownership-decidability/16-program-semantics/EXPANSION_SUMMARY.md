@@ -25,7 +25,6 @@
   - [质量保证](#质量保证)
   - [扩展后目录结构](#扩展后目录结构)
   - [总字数统计](#总字数统计)
-  - [**状态**: ✅ 100% 完成](#状态--100-完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -151,7 +150,7 @@
 
 ## 扩展后目录结构
 
-```
+```text
 16-program-semantics/
 ├── README.md                          # 主索引 (更新)
 ├── 00-semantic-framework.md           # 语义框架
@@ -190,6 +189,7 @@
 **扩展完成时间**: 2026-03-07
 **维护者**: Rust-Ownership-Decidability Team
 **状态**: ✅ 100% 完成
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -217,11 +217,8 @@
 ## 权威来源索引
 
 > **[来源: Wikipedia - Memory Safety]**
-
 > **[来源: TRPL Ch. 4 - Ownership]**
-
 > **[来源: Rustonomicon - Ownership]**
-
 > **[来源: POPL 2018 - RustBelt]**
 
 ---

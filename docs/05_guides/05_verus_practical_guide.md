@@ -892,19 +892,12 @@ spec fn spec_sum(arr: &[i32], n: int) -> int
 ## 权威来源索引
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
->
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
->
 > **[来源: [Verus Documentation](https://verus-lang.github.io/verus/)]**
->
 > **[来源: [Microsoft Verus Blog](https://www.microsoft.com/en-us/research/project/verus/)]**
->
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
 > **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]

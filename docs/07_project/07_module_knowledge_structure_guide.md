@@ -65,7 +65,6 @@
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-05-08 (Rust 1.95+ 持续更新)](#最后更新-2026-05-08-rust-195-持续更新)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -924,13 +923,14 @@ fn main() {
 #### 相关文档
 
 - Rust 1.95+ 迁移指南
-- [Rust 1.94 特性速查（已归档）
+- Rust 1.94 特性速查（已归档）
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-05-08 (Rust 1.95+ 持续更新)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -956,15 +956,10 @@ fn main() {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Modular Programming]**
-
 > **[来源: Wikipedia - Software Component]**
-
 > **[来源: Rust Reference - Modules]**
-
 > **[来源: TRPL Ch. 7 - Packages and Modules]**
-
 > **[来源: ACM - Modular Software Design]**
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 > **[来源: TRPL - The Rust Programming Language]**

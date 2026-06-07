@@ -7,7 +7,6 @@
 > **后置延伸**: [docs 指南](../03_guides/) · [docs 参考](../02_reference/) · [concept L1-L2](../../concept/)
 > **跨层映射**: docs→concept 工程映射 | L1-L2 概念索引
 > **定理链编号**: T-001 → T-010 → T-020 → T-030
-
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 TRPL、Rust Reference、Rustonomicon 来源标注 [来源: Authority Source Sprint Batch 8]
 

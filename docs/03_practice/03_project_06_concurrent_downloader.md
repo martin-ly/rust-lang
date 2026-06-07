@@ -23,7 +23,6 @@
     - [多线程下载](#多线程下载)
     - [异步下载](#异步下载)
   - [参考实现](#参考实现)
-  - [完整参考实现位于: `examples/concurrent-downloader/`](#完整参考实现位于-examplesconcurrent-downloader)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -98,6 +97,7 @@ async fn download_async(url: &str) -> Result<Vec<u8>, reqwest::Error> {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 完整参考实现位于: `examples/concurrent-downloader/`
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -127,11 +127,8 @@ async fn download_async(url: &str) -> Result<Vec<u8>, reqwest::Error> {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Concurrency]**
-
 > **[来源: TRPL Ch. 16 - Fearless Concurrency]**
-
 > **[来源: crossbeam Documentation]**
-
 > **[来源: ACM - Concurrent Programming]**
 
 ---

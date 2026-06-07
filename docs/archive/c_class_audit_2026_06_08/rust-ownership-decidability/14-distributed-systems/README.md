@@ -7,7 +7,6 @@
 # 13 - 分布式系统
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **Rust中的分布式系统模式**
 
 ---
@@ -43,6 +42,7 @@
 ---
 
 **维护者**: Rust Distributed Systems Team
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -69,9 +69,6 @@
 ## 权威来源索引
 
 > **[来源: Wikipedia - Memory Safety]**
-
 > **[来源: TRPL Ch. 4 - Ownership]**
-
 > **[来源: Rustonomicon - Ownership]**
-
 > **[来源: POPL 2018 - RustBelt]**

@@ -9,7 +9,8 @@
 
 ## 概述
 
-Async closures 是 Rust 1.85+ 中稳定化的重要特性 [来源: RFC 3668 — Async Closures / 2024; Rust Reference — Async closures / 2025; Rust 1.85 Release Notes / 2025]，
+Async closures 是 Rust 1.85+ 中稳定化的重要特性
+[来源: RFC 3668 — Async Closures / 2024; Rust Reference — Async closures / 2025; Rust 1.85 Release Notes / 2025]，
 允许直接使用 `async || { }` 语法创建异步闭包。
 相比传统的 `async move { }` 闭包，新语法更简洁、语义更清晰。
 

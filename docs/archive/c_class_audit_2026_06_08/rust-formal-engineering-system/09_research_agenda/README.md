@@ -60,6 +60,7 @@
 | 本README | research_notes/10_research_roadmap.md | 索引/重定向 |
 
 [返回主索引](../00_master_index.md)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -76,9 +77,6 @@
 ## 权威来源索引
 
 > **[来源: Wikipedia - Formal Methods]**
-
 > **[来源: Coq Reference Manual]**
-
 > **[来源: TLA+ Documentation]**
-
 > **[来源: ACM - Formal Verification]**

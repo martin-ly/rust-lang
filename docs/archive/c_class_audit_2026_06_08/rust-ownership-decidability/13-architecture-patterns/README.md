@@ -7,7 +7,6 @@
 # 13 - 架构模式
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **基于Rust所有权系统的软件架构模式**
 
 ---
@@ -51,6 +50,7 @@
 ---
 
 **维护者**: Rust Architecture Patterns Team
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -69,17 +69,10 @@
 ## 权威来源索引
 
 > **[来源: Wikipedia - Memory Safety]**
-
 > **[来源: TRPL Ch. 4 - Ownership]**
-
 > **[来源: Rustonomicon - Ownership]**
-
 > **[来源: POPL 2018 - RustBelt]**
-
 > **[来源: Wikipedia - Design Pattern]**
-
 > **[来源: Rust API Guidelines]**
-
 > **[来源: Gang of Four - Design Patterns]**
-
 > **[来源: ACM - Software Design Patterns]**

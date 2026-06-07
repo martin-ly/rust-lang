@@ -2,7 +2,6 @@
 
 > **分级**: [A]
 > **Bloom 层级**: L3 (应用)
-
 > **创建日期**: 2026-05-08
 > **最后更新**: 2026-05-08
 > **Rust 版本**: nightly (Cranelift 无 stable 版本)
@@ -440,19 +439,12 @@ test-dev:
 ## 权威来源索引
 
 > **[来源: Wikipedia - Compiler Construction]**
-
 > **[来源: Rust Compiler Team Blog]**
-
 > **[来源: LLVM Documentation]**
-
 > **[来源: ACM - Compiler Design]**
-
 > **[来源: Wikipedia - Machine Learning]**
-
 > **[来源: Wikipedia - Artificial Intelligence]**
-
 > **[来源: tch-rs Documentation]**
-
 > **[来源: ACM - AI Systems]**
 
 ---

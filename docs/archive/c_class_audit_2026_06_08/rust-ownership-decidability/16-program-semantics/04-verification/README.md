@@ -7,7 +7,6 @@
 # 形式验证 (Formal Verification)
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **难度**: 🔴 高级
 > **预计阅读时间**: 8-10 小时
 > **覆盖范围**: 分离逻辑、Iris 框架、RustBelt、并发验证
@@ -65,19 +64,12 @@
 ## 权威来源索引
 
 > **[来源: Wikipedia - Memory Safety]**
-
 > **[来源: TRPL Ch. 4 - Ownership]**
-
 > **[来源: Rustonomicon - Ownership]**
-
 > **[来源: POPL 2018 - RustBelt]**
-
 > **[来源: Wikipedia - Formal Methods]**
-
 > **[来源: Coq Reference Manual]**
-
 > **[来源: TLA+ Documentation]**
-
 > **[来源: ACM - Formal Verification]**
 
 ---

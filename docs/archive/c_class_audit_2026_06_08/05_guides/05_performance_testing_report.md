@@ -2,7 +2,6 @@
 
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
-
 > **创建日期**: 2026-02-15
 > **最后更新**: 2026-05-08
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -43,7 +42,6 @@
     - [array\_windows 性能基准](#array_windows-性能基准)
     - [LazyLock 并发性能](#lazylock-并发性能)
     - [测试总结](#测试总结)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -313,6 +311,7 @@ cargo bench --workspace
 
 **维护者**: Rust 学习项目团队
 **状态**: ✅ 深度整合完成
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -338,15 +337,10 @@ cargo bench --workspace
 ## 权威来源索引
 
 > **[来源: Wikipedia - Software Performance Testing]**
-
 > **[来源: Wikipedia - Benchmark (computing)]**
-
 > **[来源: ACM - Performance Engineering]**
-
 > **[来源: IEEE - Software Performance Standards]**
-
 > **[来源: Criterion.rs Documentation]**
-
 > **[来源: Wikipedia - Software Testing]**
 > **[来源: TRPL Ch. 11 - Testing]**
 > **[来源: Rust Reference - Test Attributes]**

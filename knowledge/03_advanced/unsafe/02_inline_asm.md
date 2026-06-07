@@ -1,14 +1,16 @@
 # 内联汇编 (Inline Assembly)
 >
 > **相关概念**: [位置](../../../concept/01_foundation/13_panic_and_abort.md)
-
 > **Bloom 层级**: 理解
-
 > **📌 简介**: Rust 的内联汇编 (`asm!` 宏) 允许在 Rust 代码中直接嵌入汇编指令 [来源: Rust Reference — Inline Assembly / 2025; RFC 2873 — Inline Assembly / 2020; 核心设计决策: 基于 LLVM 内联汇编基础设施，提供与 C 语言 `asm` 关键字等价的表达能力，但通过 Rust 的类型系统和约束系统保证安全边界]，用于实现编译器无法生成的底层操作、访问特权指令、与硬件直接交互，或优化极致性能的热路径。
 >
 > **⏱️ 预计学习时间**: 2-3 小时
 > **📚 难度级别**: ⭐⭐⭐⭐⭐ 专家
-> **权威来源**: [Rust Reference — Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html), [std::arch::asm](https://doc.rust-lang.org/core/arch/macro.asm.html), [LLVM Inline Assembler](https://llvm.org/docs/LangRef.html#inline-assembler-expressions), [RFC 2873: Inline Assembly](https://rust-lang.github.io/rfcs/2873-inline-assembly.html)
+> **权威来源**:
+> [Rust Reference — Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html),
+> [std::arch::asm](https://doc.rust-lang.org/core/arch/macro.asm.html),
+> [LLVM Inline Assembler](https://llvm.org/docs/LangRef.html#inline-assembler-expressions),
+> [RFC 2873: Inline Assembly](https://rust-lang.github.io/rfcs/2873-inline-assembly.html)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 RFC 2873 设计决策来源标注、LLVM 内联汇编语义引用、x86_64/AArch64/RISC-V 架构官方文档来源 [来源: Authority Source Sprint Batch 8]
 

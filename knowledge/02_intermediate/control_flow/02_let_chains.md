@@ -10,7 +10,8 @@
 
 ## 概述
 
-`let chains` 是 Rust 2024 Edition 中稳定化的重要特性 [来源: RFC 2497 — if-let-chains / 2022; Rust Reference — Let expressions / 2025; 核心设计决策:
+`let chains` 是 Rust 2024 Edition 中稳定化的重要特性 [来源: RFC 2497 — if-let-chains / 2022; Rust Reference — Let expressions / 2025;
+核心设计决策:
 允许在 `if` 和 `while` 条件中将 `let` 绑定与普通布尔表达式链式组合，使用短路求值语义，大幅简化嵌套的 `if let` 代码]，
 允许在 `if` 和 `while` 条件中将 `let` 绑定与普通布尔表达式链式组合，大幅简化嵌套的 `if let` 代码。
 

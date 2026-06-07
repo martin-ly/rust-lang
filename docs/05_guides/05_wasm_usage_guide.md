@@ -49,7 +49,6 @@
   - [Rust 1.95+ 在 WASM 开发中的应用](#rust-195-在-wasm-开发中的应用)
     - [array\_windows 在图像处理中的应用](#array_windows-在图像处理中的应用)
     - [LazyLock 在 WASM 状态管理中的应用](#lazylock-在-wasm-状态管理中的应用)
-  - [**最后更新**: 2026-05-08](#最后更新-2026-05-08)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -522,6 +521,7 @@ pub fn get_state_json() -> String {
 **维护者**: Rust 学习项目团队
 **状态**: ✅ 完整实现
 **最后更新**: 2026-05-08
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -547,19 +547,12 @@ pub fn get_state_json() -> String {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon]**
 
 ---

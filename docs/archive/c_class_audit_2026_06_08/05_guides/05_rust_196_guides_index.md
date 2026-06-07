@@ -25,7 +25,6 @@
       - [迁移注意事项](#迁移注意事项)
       - [迁移注意事项](#迁移注意事项-1)
     - [检查 1.96 特性覆盖](#检查-196-特性覆盖)
-  - [**负责人**: 系统化梳理团队](#负责人-系统化梳理团队)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -222,6 +221,7 @@ grep -r "isqrt\|get_disjoint_mut\|if let guards\|async Fn" docs/05_guides/ | wc 
 **最后更新**: 2026-05-08
 **下次更新**: Rust 1.97 发布时
 **负责人**: 系统化梳理团队
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -247,19 +247,12 @@ grep -r "isqrt\|get_disjoint_mut\|if let guards\|async Fn" docs/05_guides/ | wc 
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon]**
 
 ---

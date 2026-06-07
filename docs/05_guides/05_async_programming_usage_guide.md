@@ -1893,19 +1893,12 @@ graph TD
 ## 权威来源索引
 
 > **[来源: Wikipedia - Asynchronous I/O]**
-
 > **[来源: Wikipedia - Cooperative Multitasking]**
-
 > **[来源: TRPL Ch. 17 - Async]**
-
 > **[来源: Rust Reference - async/await]**
-
 > **[来源: Tokio Documentation]**
-
 > **[来源: ACM - Async Programming Models]**
-
 > **[来源: RFC 2394 - Async/Await]**
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 > **[来源: TRPL - The Rust Programming Language]**
@@ -1914,12 +1907,10 @@ graph TD
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
 > **[来源: Wikipedia - Asynchronous I/O]**
 > **[来源: TRPL Ch. 17 - Async]**
 > **[来源: Tokio Documentation]**
 > **[来源: RFC 2394 - Async/Await]**
-
 > **[来源: ACM - Systems Programming Languages]**
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**

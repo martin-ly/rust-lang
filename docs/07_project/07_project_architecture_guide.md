@@ -45,8 +45,6 @@
     - [3. 可维护性原则](#3-可维护性原则)
   - [🔧 技术栈](#-技术栈)
     - [核心依赖](#核心依赖)
-  - [📑 目录](#-目录-1)
-    - [开发工具](#开发工具)
   - [📊 性能考虑](#-性能考虑)
     - [1. 编译优化](#1-编译优化)
     - [2. 运行时优化](#2-运行时优化)
@@ -60,7 +58,6 @@
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-05-08 (Rust 1.95+ 持续更新)](#最后更新-2026-05-08-rust-195-持续更新)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -723,80 +720,6 @@ tracing = "0.1"
 tracing-subscriber = "0.3"
 ```
 
-## 📑 目录
->
-> **[来源: [docs.rs](https://docs.rs/)]**
->
-- 项目架构指南
-  - [📋 目录](#目录)
-  - [代码示例](#代码示例)
-    - [项目结构验证脚本](#项目结构验证脚本)
-    - [模块依赖关系分析器](#模块依赖关系分析器)
-    - [测试覆盖率报告生成器](#测试覆盖率报告生成器)
-  - [形式化链接](#形式化链接)
-    - [研究笔记关联](#研究笔记关联)
-    - [实施场景](#实施场景)
-  - [📋 概述](#概述)
-  - [🏗️ 项目结构](#项目结构)
-    - [整体架构](#整体架构)
-  - [📦 模块设计](#模块设计)
-    - [模块分层](#模块分层)
-      - [Tier 1: 基础层（C01-C03）](#tier-1-基础层c01-c03)
-      - [Tier 2: 进阶层（C04-C06）](#tier-2-进阶层c04-c06)
-      - [Tier 3: 应用层（C07-C10）](#tier-3-应用层c07-c10)
-      - [Tier 4: 专业层（C11-C12）](#tier-4-专业层c11-c12)
-  - [🔗 模块依赖关系](#模块依赖关系)
-    - [依赖图](#依赖图)
-    - [依赖原则](#依赖原则)
-  - [📚 文档架构](#文档架构)
-    - [4-Tier 文档体系](#4-tier-文档体系)
-      - [Tier 1: 基础文档（Foundations）](#tier-1-基础文档foundations)
-      - [Tier 2: 指南文档（Guides）](#tier-2-指南文档guides)
-      - [Tier 3: 参考文档（References）](#tier-3-参考文档references)
-      - [Tier 4: 高级文档（Advanced）](#tier-4-高级文档advanced)
-  - [🎯 设计原则](#设计原则)
-    - [1. 模块化原则](#1-模块化原则)
-    - [2. 可扩展性原则](#2-可扩展性原则)
-    - [3. 可维护性原则](#3-可维护性原则)
-  - [🔧 技术栈](#技术栈)
-    - [核心依赖](#核心依赖)
-  - [📑 目录](#目录)
-    - [开发工具](#开发工具)
-  - [📊 性能考虑](#性能考虑)
-    - [1. 编译优化](#1-编译优化)
-    - [2. 运行时优化](#2-运行时优化)
-    - [3. 内存管理](#3-内存管理)
-  - [🧪 测试策略](#测试策略)
-    - [测试层次](#测试层次)
-    - [测试覆盖率目标](#测试覆盖率目标)
-  - [📚 相关文档](#相关文档)
-  - [Rust 1.95+ 持续更新更新](#rust-195-持续更新更新)
-    - [本文档的Rust 1.95+更新要点](#本文档的rust-195更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - **最后更新**: 2026-05-08 (Rust 1.95+ 持续更新)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
-
-### 开发工具
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-```toml
-[dev-dependencies]
-# 测试框架
-criterion = "0.5"  # 基准测试
-tokio-test = "0.4"  # 异步测试
-
-# 代码质量
-clippy = "0.1"
-rustfmt = "0.1"
-```
-
----
-
 ## 📊 性能考虑
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -874,7 +797,6 @@ codegen-units = 1
 ## Rust 1.95+ 持续更新更新
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
@@ -904,13 +826,14 @@ codegen-units = 1
 #### 相关文档
 
 - Rust 1.95+ 迁移指南
-- [Rust 1.94 特性速查（已归档）
+- Rust 1.94 特性速查（已归档）
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-05-08 (Rust 1.95+ 持续更新)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -936,19 +859,12 @@ codegen-units = 1
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming Languages]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference]**
 > **[来源: TRPL - The Rust Programming Language]**

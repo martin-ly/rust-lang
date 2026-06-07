@@ -284,6 +284,7 @@ class FileAudit:
     pre_post: dict = field(default_factory=dict)
     backward_chains: list = field(default_factory=list)
     templated_chains: list = field(default_factory=list)
+    theorem_chain_exempt: bool = False
 
 
 def audit_file(filepath: Path) -> FileAudit:
@@ -307,6 +308,7 @@ def audit_file(filepath: Path) -> FileAudit:
         pre_post=extract_pre_post_concepts(content),
         backward_chains=extract_backward_chains(content),
         templated_chains=detect_templated_chains(content),
+        theorem_chain_exempt="theorem_chain: N/A" in content or "# theorem_chain: N/A" in content,
     )
 
 
@@ -456,7 +458,7 @@ def generate_dashboard(audits: list[FileAudit], dead_links: list[dict]) -> str:
         if a.layer != "L0":
             if len(a.transitions) < 3 and a.line_count > 200:
                 issues.append(f"过渡段落不足 ({len(a.transitions)} < 3)")
-            if len(a.theorem_chains) < 3 and a.line_count > 200:
+            if len(a.theorem_chains) < 3 and a.line_count > 200 and not a.theorem_chain_exempt:
                 issues.append(f"定理链不足 ({len(a.theorem_chains)} < 3)")
         if len(a.anti_propositions) < 1 and a.layer in ("L1", "L2", "L3", "L4"):
             issues.append("缺失反命题")

@@ -1060,17 +1060,11 @@ fn validate_macro_rules(rules: &[MacroRule]) -> ControlFlow<MacroError, ()> {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Macro (computer science)]**
-
 > **[来源: Wikipedia - Metaprogramming]**
-
 > **[来源: Rust Reference - Macros]**
-
 > **[来源: TRPL Ch. 19 - Macros]**
-
 > **[来源: The Little Book of Rust Macros]**
-
 > **[来源: ACM - Macro Systems Survey]**
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 > **[来源: TRPL - The Rust Programming Language]**
