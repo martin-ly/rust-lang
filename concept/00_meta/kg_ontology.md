@@ -1,7 +1,7 @@
 # Rust 知识体系知识图谱本体规范（Knowledge Graph Ontology）
 >
 > **EN**: Rust 知识体系知识图谱本体规范（Knowledge Graph Ontology） (Chinese)
-> **Summary**: - [Rust 知识体系知识图谱本体规范（Knowledge Graph Ontology）](#rust-知识体系知识图谱本体规范knowledge-graph-ontology) - [📑 目录](#-目录) - [〇、本体认知全景](#〇本体认知全景) - [一、本体设计原则](#一本体设计原则) - [二、实体types（Node Types）](#二实体typesnode-types) - [三、关系types（Edge Types）](#三关系typesedge-types) - [关系types矩阵](#关系types矩阵) - [四、三元组实例](#四三元组实例) - [L1 基础概念层三元组](#l1-基础概念
+> **Summary**: Rust 知识体系知识图谱本体规范. Core Rust concept covering FFI interoperability.
 >
 > **受众**: [研究者]
 >

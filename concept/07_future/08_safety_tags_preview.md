@@ -1,7 +1,7 @@
 # Safety Tags 概念预研：Unsafe 契约的机器可读标注
 >
 > **EN**: Unsafe Rust
-> **Summary**: - [Safety Tags 概念预研：Unsafe 契约的机器可读标注](#safety-tags-概念预研unsafe-契约的机器可读标注) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 问题定义：Unsafe 契约的表达缺口](#11-问题定义unsafe-契约的表达缺口) - [1.2 Safety Tags 的设计目标](#12-safety-tags-的设计目标) - [1.3 与 `#[safety]` 属性的关系](#13-与-safety-属性的关系) - [二、formal methods语义](#二formal methods语义) - [2.1 契约的谓词逻辑表示](#21-契
+> **Summary**: Unsafe Rust. Core Rust concept covering practical examples, mechanism analysis.
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

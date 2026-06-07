@@ -3,8 +3,7 @@
 # Unsafe Rust
 >
 > **EN**: Unsafe Rust
-> **Summary**: **变更日志**: - v1.0 (2026-05-12): 初始版本，完成权威定义、unsafe 操作矩阵、UB 分类、Safety Contract 规范、思维导图、示例反例 - v1.1 (2026-05-13): 重构增强——定理一致性矩阵扩展至10行（⟹推理链）、反命题决策树×4、认知路径六步递进、章节过渡段落、层次一致性标注 - v1.3 (2026-05-13): Phase BC formal methods深化——新增§2.2b Unsafe Code Guidelines 完整 UB 分类（memory访问/types系统/concurrency/其他四大类 15 子类 + UB 检测不可判定性定理）；新增§7.2b Miri
-
+> **Summary**: Unsafe Rust. Core Rust concept with theoretical foundations and practical applications.
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[Unsafe Rust](../../knowledge/03_advanced/unsafe)

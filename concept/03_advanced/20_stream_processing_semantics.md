@@ -3,8 +3,7 @@
 # 流处理语义：从 Dataflow Model 到 Differential Dataflow
 >
 > **EN**: 流处理语义：从 Dataflow Model 到 Differential Dataflow (Chinese)
-> **Summary**: - [流处理语义：从 Dataflow Model 到 Differential Dataflow](#流处理语义从-dataflow-model-到-differential-dataflow) - [📑 目录](#-目录) - [一、核心命题：流处理的本质](#一核心命题流处理的本质) - [二、时间域：事件时间 vs 处理时间 vs 摄取时间](#二时间域事件时间-vs-处理时间-vs-摄取时间) - [2.1 三种时间语义](#21-三种时间语义) - [2.2 事件时间的不可替代性](#22-事件时间的不可替代性) - [三、窗口语义：在事件时间中划界](#三窗口语义在事件时间中划界
-
+> **Summary**: 流处理语义：从 Dataflow Model 到 Differential Dataflow (Chinese). Core Rust concept covering mechanism analysis.
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure

@@ -5,8 +5,7 @@
 # 安全 实践：Rust 代码的防御性编程
 >
 > **EN**: Security Practices
-> **Summary**: - [安全 实践：Rust 代码的防御性编程](#安全-实践rust-代码的防御性编程) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 Rust 的安全基础](#11-rust-的安全基础) - [1.2 不安全边界的管理](#12-不安全边界的管理) - [1.3 供应链安全](#13-供应链安全) - [二、技术细节](#二技术细节) - [2.1 输入验证与清洗](#21-输入验证与清洗) - [2.2 加密与安全原语](#22-加密与安全原语) - [2.3 审计工具链](#23-审计工具链) - [三、安全模式矩阵](#三安全模式矩阵) - [四、
-
+> **Summary**: Security Practices. Core Rust concept covering practical examples, memory safety and UB prevention, testing and verification.
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 评价
 > **A/S/P 标记**: **S+P** — StructureProcedure

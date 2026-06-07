@@ -4,8 +4,7 @@
 # 分布式 系统：Rust 在微服务 与集群中的工程实践
 >
 > **EN**: 分布式 系统：Rust 在微服务 与集群中的工程实践 (Chinese)
-> **Summary**: - [分布式 系统：Rust 在微服务 与集群中的工程实践](#分布式-系统rust-在微服务-与集群中的工程实践) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 Rust 在分布式系统中的定位](#11-rust-在分布式系统中的定位) - [1.2 async运行时作为分布式基础](#12-async运行时作为分布式基础) - [1.3 服务发现与负载均衡](#13-服务发现与负载均衡) - [二、技术细节](#二技术细节) - [2.1 gRPC 与 Protocol Buffers](#21-grpc-与-protocol-buffers) - [2.2 分布式
-
+> **Summary**: 分布式 系统：Rust 在微服务 与集群中的工程实践 (Chinese). Core Rust concept covering mental model building, mechanism analysis.
 > **受众**: [进阶]
 >
 > **Bloom 层级**: 应用 → 评价

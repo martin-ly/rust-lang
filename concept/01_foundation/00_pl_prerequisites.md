@@ -6,8 +6,7 @@
 # 编程语言理论基础（PL Prerequisites）
 >
 > **EN**: 编程语言理论基础（PL Prerequisites） (Chinese)
-> **Summary**: - [编程语言理论基础（PL Prerequisites）](#编程语言理论基础pl-prerequisites) - [📑 目录](#-目录) - [一、求值策略（Evaluation Strategies）](#一求值策略evaluation-strategies) - [1.1 为什么需要了解求值策略？](#11-为什么需要了解求值策略) - [1.2 三种核心求值策略](#12-三种核心求值策略) - [1.3 对比表](#13-对比表) - [二、副作用模型（Side Effects Model）](#二副作用模型side-effects-model) - [2.1 什么是副作用？]
-
+> **Summary**: 编程语言理论基础. Core Rust concept with theoretical foundations and practical applications.
 > **受众**: [初学者]
 > **Bloom 层级**: 记忆 → 理解
 > **定位**: L1 基础层的**前置知识补充**。理解这些通用 PL 概念后，你将能更深刻地回答"为什么 Rust 要这样设计"，而非仅仅记忆规则。

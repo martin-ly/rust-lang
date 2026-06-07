@@ -3,8 +3,7 @@
 # 过程宏：编译期代码生成的元编程工具
 >
 > **EN**: Macros
-> **Summary**: - [过程宏：编译期代码生成的元编程工具](#过程宏编译期代码生成的元编程工具) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 过程宏 vs macro\_rules](#11-过程宏-vs-macro_rules) - [1.2 三种过程宏types](#12-三种过程宏types) - [1.3 编译期执行模型](#13-编译期执行模型) - [二、技术细节](#二技术细节) - [2.1 TokenStream 操作](#21-tokenstream-操作) - [2.2 syn + quote 工作流](#22-syn--quote-工作流) - [2.3 卫生
-
+> **Summary**: Macros. Core Rust concept covering mental model building, mechanism analysis.
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[过程宏](../../knowledge/03_advanced/macros/02_procedural.md)

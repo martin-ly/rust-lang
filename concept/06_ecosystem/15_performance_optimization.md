@@ -5,8 +5,7 @@
 # 性能优化：Rust 代码的测量与调优
 >
 > **EN**: Performance Optimization
-> **Summary**: - [性能优化：Rust 代码的测量与调优](#性能优化rust-代码的测量与调优) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 测量优先原则](#11-测量优先原则) - [1.2 compiler优化层级](#12-compiler优化层级) - [1.3 零成本抽象的验证](#13-零成本抽象的验证) - [二、技术细节](#二技术细节) - [2.1 Criterion：统计性基准测试](#21-criterion统计性基准测试) - [2.2 Flamegraph：可视化性能分析](#22-flamegraph可视化性能分析) - [2.3 缓存友好性与memory布局](
-
+> **Summary**: Performance Optimization. Core Rust concept covering performance optimization, testing and verification.
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[性能优化](../../knowledge/03_advanced/05_performance_optimization.md)

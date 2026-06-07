@@ -1,8 +1,7 @@
 # Lifetime Capture in `impl Trait` Preview
 >
 > **EN**: Traits
-> **Summary**: ```rust,ignore fn make_iter<'a>(s: &'a str) -> impl Iterator<Item = char> + 'a { s.chars() } // ❌ 编译错误: impl trait 默认 capture 所有输入 lifetime // 若需精确控制 capture 哪些 lifetime，当前语法有限制 // 未来语法（提案）: // fn make_iter<'a>(s: &'a str) -> impl Iterator<Item = char> + use<'a> { //     s.chars() // } fn main() {}
-
+> **Summary**: Traits. Emerging Rust feature or ecosystem trend: Traits.
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)
 > **预计稳定**: 待定（需等待 RFC / MCP 完成）

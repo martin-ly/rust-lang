@@ -322,6 +322,7 @@
 **掌握程度**: ⚠️ 部分 (85%)
 
 ### 映射文件
+
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -329,14 +330,15 @@
 | :--- | :--- | :--- | :--- |
 | 闭包 | `crates/c03_control_fn/src/closure/` | 捕获方式、Fn/FnMut/FnOnce | ✅ |
 | 迭代器 | `docs/02_reference/quick_reference/02_collections_iterators_cheatsheet.md` | 适配器、消费者 | ✅ |
-| Box<T> | `crates/c01_ownership_borrow_scope/src/ownership/` | 堆分配 | ✅ |
-| Rc<T> | `crates/c01_ownership_borrow_scope/src/internal_mut/refcell/` | 引用计数 | ✅ |
-| RefCell<T> | `crates/c01_ownership_borrow_scope/src/internal_mut/refcell/` | 运行时借用检查 | ✅ |
-| Arc<T> | `crates/c05_threads/src/synchronization/arc/` | 线程安全 Rc | ✅ |
-| Cow<T> | — | 写时克隆 | ❌ 缺失 |
+| `Box<T>` | `crates/c01_ownership_borrow_scope/src/ownership/` | 堆分配 | ✅ |
+| `Rc<T>` | `crates/c01_ownership_borrow_scope/src/internal_mut/refcell/` | 引用计数 | ✅ |
+| `RefCell<T>` | `crates/c01_ownership_borrow_scope/src/internal_mut/refcell/` | 运行时借用检查 | ✅ |
+| `Arc<T>` | `crates/c05_threads/src/synchronization/arc/` | 线程安全 Rc | ✅ |
+| `Cow<T>` | — | 写时克隆 | ❌ 缺失 |
 | 自定义智能指针 | — | Deref/Drop 实现 | ❌ 缺失 |
 
 ### 补充计划
+
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -344,6 +346,7 @@
 - 增加 `exercises/src/ownership_borrowing/ex07_custom_smart_pointer.rs` (Deref/Drop)
 
 ### 练习验证
+
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -360,6 +363,7 @@
 **掌握程度**: ⚠️ 部分 (90%)
 
 ### 映射文件
+
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -385,6 +389,7 @@
 - 更系统的 async 错误处理模式专题
 
 ### 练习验证
+
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 

@@ -1,7 +1,7 @@
 # Const Trait Preview
 >
 > **EN**: Traits
-> **Summary**: ```rust,ignore // 概念代码: const trait（开发中） // const trait Compute { //     const fn compute() -> i32; // } // ❌ 编译错误: const trait 不是当前稳定特性 // 它允许在 const context 中使用 trait bounds fn main() { // 当前限制: 不能在 const fn 中使用 trait 方法 // const fn double<T: std::ops::Add>(x: T) -> T { x + x } // 错误 }``` | 定理 |
+> **Summary**: Traits. Emerging Rust feature or ecosystem trend: Traits.
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

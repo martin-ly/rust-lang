@@ -5,8 +5,7 @@
 # 闭包基础：捕获环境与匿名函数
 >
 > **EN**: Closures
-> **Summary**: - [闭包基础：捕获环境与匿名函数](#闭包基础捕获环境与匿名函数) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 闭包的语法与捕获](#11-闭包的语法与捕获) - [1.2 Fn / FnMut / FnOnce](#12-fn--fnmut--fnonce) - [1.3 闭包与ownership](#13-闭包与ownership) - [二、技术细节](#二技术细节) - [2.1 闭包作为函数参数](#21-闭包作为函数参数) - [2.2 闭包与types推断](#22-闭包与types推断) - [2.3 move 闭包](#23-move-闭包) - [三、闭包模式矩阵](#
-
+> **Summary**: Closures. Core Rust concept covering type system mechanics, ownership and borrowing, AI/ML integration patterns.
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[闭包](../../knowledge/02_intermediate)

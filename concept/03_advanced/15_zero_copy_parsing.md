@@ -3,8 +3,7 @@
 # 零拷贝解析与序列化优化
 >
 > **EN**: 零拷贝解析与序列化优化 (Chinese)
-> **Summary**: - [零拷贝解析与序列化优化](#零拷贝解析与序列化优化) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 零拷贝原理](#11-零拷贝原理) - [1.2 lifetimes约束](#12-lifetimes约束) - [二、关键技术](#二关键技术) - [2.1 bytes crate](#21-bytes-crate) - [2.2 zerocopy crate](#22-zerocopy-crate) - [2.3 memmap2](#23-memmap2) - [三、序列化优化](#三序列化优化) - [3.1 rkyv](#31-rkyv) - [3.2 flatb
-
+> **Summary**: 零拷贝解析与序列化优化 (Chinese). Core Rust concept covering mechanism analysis.
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 应用
 > **定位**: 探讨 Rust 中的**零拷贝**（Zero-Copy）技术——从字节切片直接解析结构化数据，无需中间复制，分析内存安全与性能权衡。

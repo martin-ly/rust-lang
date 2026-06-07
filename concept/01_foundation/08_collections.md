@@ -6,8 +6,7 @@
 # 集合类型：Rust 标准库的数据结构谱系
 >
 > **EN**: 集合类型：Rust 标准库的数据结构谱系 (Chinese)
-> **Summary**: - [集合types：Rust 标准库的数据结构谱系](#集合typesrust-标准库的数据结构谱系) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 集合types谱系](#11-集合types谱系) - [1.2 Vec：动态数组](#12-vec动态数组) - [1.3 HashMap vs BTreeMap](#13-hashmap-vs-btreemap) - [二、技术细节](#二技术细节) - [2.1 容量管理与重新分配](#21-容量管理与重新分配) - [2.2 Entry API](#22-entry-api) - [2.3 Drain 与保留模式](#23-
-
+> **Summary**: 集合类型：Rust 标准库的数据结构谱系 (Chinese). Core Rust concept covering mechanism analysis.
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[集合](../../knowledge/02_intermediate/01_collections.md)

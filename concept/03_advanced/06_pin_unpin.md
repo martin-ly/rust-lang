@@ -3,8 +3,7 @@
 # Pin 与 Unpin：自引用类型的不动性保证
 >
 > **EN**: Pin and Unpin
-> **Summary**: - [Pin 与 Unpin：自引用types的不动性保证](#pin-与-unpin自引用types的不动性保证) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 问题：自引用types的移动陷阱](#11-问题自引用types的移动陷阱) - [1.2 Pin 的设计：承诺不再移动](#12-pin-的设计承诺不再移动) - [1.3 Unpin：大多数types的默认](#13-unpin大多数types的默认) - [二、技术细节](#二技术细节) - [2.1 Pin API 的契约](#21-pin-api-的契约) - [2.2 自引用结构体的安全构建](#22-自引用结构体的安全
-
+> **Summary**: Pin and Unpin. Core Rust concept covering mechanism analysis.
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[Pin/Unpin](../../knowledge/03_advanced/async)

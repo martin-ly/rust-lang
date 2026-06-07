@@ -3,8 +3,7 @@
 # Concurrency（并发模型）
 >
 > **EN**: Concurrency
-> **Summary**: **变更日志**: - v1.0 (2026-05-12): 初始版本，完成权威定义、Send/Sync 矩阵、同步原语对比、fearless concurrency formal methods论证、思维导图、示例反例 - v1.1 (2026-05-13): 增强定理一致性矩阵（11行 ⟹ 推理链）、反命题决策树、6步认知路径、章节过渡、层次一致性标注 - v1.3 (2026-05-13): Phase B formal methods深化——新增§3.1b C11 memory模型精确映射（happens-before/synchronizes-with、AtomicOrdering 四种模式精确语义、Release-Acquire 配
-
+> **Summary**: Concurrency. Safe concurrent programming in Rust using threads, message passing (channels), shared-state synchronization (Mutex, Arc), and Send/Sync trait guarantees. Covers deadlock prevention and parallel patterns.
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[并发](../../knowledge/03_advanced/concurrency)

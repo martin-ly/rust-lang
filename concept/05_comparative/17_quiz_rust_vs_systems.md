@@ -19,7 +19,7 @@
 >
 > **前置概念**:
 > [Rust vs C++](./01_rust_vs_cpp.md) ·
-> [Rust vs Go](./03_rust_vs_go.md)
+> [Rust vs Go](./02_rust_vs_go.md)
 
 ---
 
@@ -139,7 +139,7 @@ fn main() {
 | 解引用 Optional | N/A（无此概念） | `unwrap()` panic；`if let`/`match` 安全处理 |
 | 默认安全 | 运行期检查 | 编译期强制处理所有情况 |
 
-**核心差异**：Go 的 `nil` 是**十亿美元错误**（C.A.R. Hoare）的现代延续。Rust 通过 `Option<T>` 将"可能缺失"显式编码到类型系统中。[→ Rust vs Go 详解](./03_rust_vs_go.md)
+**核心差异**：Go 的 `nil` 是**十亿美元错误**（C.A.R. Hoare）的现代延续。Rust 通过 `Option<T>` 将"可能缺失"显式编码到类型系统中。[→ Rust vs Go 详解](./02_rust_vs_go.md)
 
 </details>
 
@@ -291,7 +291,7 @@ async fn main() {
 | 取消机制 | 通过 context 手动传递 | 内置 `AbortHandle` |
 | 调试 | goroutine dump | `tokio-console` 运行时检查 |
 
-**知识点**：Rust 的所有权系统为并发原语提供了编译期保证，而 Go 依赖运行时检测和程序员纪律。[→ Rust vs Go 详解](./03_rust_vs_go.md)
+**知识点**：Rust 的所有权系统为并发原语提供了编译期保证，而 Go 依赖运行时检测和程序员纪律。[→ Rust vs Go 详解](./02_rust_vs_go.md)
 
 </details>
 
@@ -517,7 +517,7 @@ pub extern "C" fn _start() {
 - Debian 14 预计采用 Rust 作为内核开发语言之一
 - Ferrocene 提供 ASIL B/SIL 2 认证工具链
 
-**知识点**：Rust 正在从"系统编程语言"向"所有层次编程语言"扩展，从嵌入式到 Web 都有成熟的生态。[→ Rust for Linux 详解](../06_ecosystem/19_rust_for_linux.md)
+**知识点**：Rust 正在从"系统编程语言"向"所有层次编程语言"扩展，从嵌入式到 Web 都有成熟的生态。[→ Rust for Linux 详解](../07_future/19_rust_for_linux.md)
 
 </details>
 
@@ -653,7 +653,7 @@ fn read_config() -> Result<i32, Box<dyn std::error::Error>> {
 |:---:|:---|:---|
 | 10/10 | 🏆 跨语言对比已内化 | 阅读 [Rustonomicon](https://doc.rust-lang.org/nomicon/) 深入 FFI 和兼容层 |
 | 7–9/10 | ✅ 核心差异掌握 | 用 Rust 重写一个 C/Go 项目，对比实现差异 |
-| 4–6/10 | 🔄 需巩固基础 | 重读 [Rust vs C++](./01_rust_vs_cpp.md) · [Rust vs Go](./03_rust_vs_go.md) |
+| 4–6/10 | 🔄 需巩固基础 | 重读 [Rust vs C++](./01_rust_vs_cpp.md) · [Rust vs Go](./02_rust_vs_go.md) |
 | 0–3/10 | 📚 建议重新开始 | 从 [Ownership](../01_foundation/01_ownership.md) 确认 Rust 核心，再读对比分析 |
 
 ---

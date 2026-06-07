@@ -4,8 +4,7 @@
 # 模块系统：Rust 的代码组织与可见性规则
 >
 > **EN**: Modules
-> **Summary**: - [模块系统：Rust 的代码组织与可见性规则](#模块系统rust-的代码组织与可见性规则) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 Crate、Module、Package 的三层结构](#11-cratemodulepackage-的三层结构) - [1.2 文件系统映射](#12-文件系统映射) - [1.3 可见性规则](#13-可见性规则) - [二、技术细节](#二技术细节) - [2.1 use 声明与路径解析](#21-use-声明与路径解析) - [2.2 Edition 2018 路径规则变更](#22-edition-2018
-
+> **Summary**: Modules. Core Rust concept covering mechanism analysis.
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 深入分析 Rust **模块系统**（module system）的设计——从文件系统映射、可见性规则（pub/use/super/self）、到 crate 边界与 workspace 组织，揭示 Rust 模块系统与 C++/Java/Python 的本质差异。

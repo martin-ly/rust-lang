@@ -4,8 +4,7 @@
 # 交叉编译：多目标平台支持与条件编译
 >
 > **EN**: 交叉编译：多目标平台支持与条件编译 (Chinese)
-> **Summary**: - [交叉编译：多目标平台支持与条件编译](#交叉编译多目标平台支持与条件编译) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 Target Triple 的语义](#11-target-triple-的语义) - [1.2 条件编译与 cfg](#12-条件编译与-cfg) - [1.3 std 与 no\_std](#13-std-与-no_std) - [二、技术细节](#二技术细节) - [2.1 交叉编译工具链](#21-交叉编译工具链) - [2.2 自定义 Target](#22-自定义-target) - [2.3 嵌入式目标](#23-嵌入
-
+> **Summary**: 交叉编译：多目标平台支持与条件编译 (Chinese). Core Rust concept covering practical examples, mechanism analysis.
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A** — Application

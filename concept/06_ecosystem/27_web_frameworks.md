@@ -4,7 +4,7 @@
 # Rust Web 框架对比与选型
 >
 > **EN**: Rust Web 框架对比与选型 (Chinese)
-> **Summary**: - [Rust Web 框架对比与选型](#rust-web-框架对比与选型) - [📑 目录](#-目录) - [一、权威定义与概述](#一权威定义与概述) - [1.1 Web 框架的职能定义](#11-web-框架的职能定义) - [1.2 Rust Web 框架演进史](#12-rust-web-框架演进史) - [1.3 框架架构生态图](#13-框架架构生态图) - [二、框架核心架构对比](#二框架核心架构对比) - [2.1 Axum：Tokio 生态的原生扩展](#21-axumtokio-生态的原生扩展) - [2.2 Actix-web：Actor 模型的工业级实现](#
+> **Summary**: Rust Web 框架对比与选型 (Chinese). Core Rust concept covering cross-language comparison, mechanism analysis.
 >
 > **📎 交叉引用**
 >

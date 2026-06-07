@@ -1,7 +1,7 @@
 # Rust 范式转换模式矩阵（Paradigm Transition Matrix）
 >
 > **EN**: Rust 范式转换模式矩阵（Paradigm Transition Matrix） (Chinese)
-> **Summary**: - [Rust 范式转换模式矩阵（Paradigm Transition Matrix）](#rust-范式转换模式矩阵paradigm-transition-matrix) - [📑 目录](#-目录) - [〇、范式转换认知全景](#〇范式转换认知全景) - [一、C++ → Rust 转换矩阵](#一c--rust-转换矩阵) - [1.1 核心转换模式](#11-核心转换模式) - [1.2 转换决策树](#12-转换决策树) - [二、Java → Rust 转换矩阵](#二java--rust-转换矩阵) - [三、Go → Rust 转换矩阵](#三go--rust-转换矩阵)
+> **Summary**: Rust 范式转换模式矩阵. Core Rust concept covering cross-language comparison.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 >

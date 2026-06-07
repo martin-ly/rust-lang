@@ -3,8 +3,7 @@
 # 线性逻辑在 Rust 中的工程应用
 >
 > **EN**: Linear Logic
-> **Summary**: - [线性逻辑在 Rust 中的工程应用](#线性逻辑在-rust-中的工程应用) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 从线性逻辑到ownership](#11-从线性逻辑到ownership) - [1.2 资源作为types](#12-资源作为types) - [1.3 Session Types 与通信协议](#13-session-types-与通信协议) - [二、技术细节](#二技术细节) - [2.1 ownership即线性types](#21-ownership即线性types) - [2.2 仿射types与 Drop](#22-仿射types与-drop) - [2.3 types状态模式](#23-types状态模式)
-
+> **Summary**: Linear Logic. Core Rust concept covering formal methods foundations, mechanism analysis.
 > **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >

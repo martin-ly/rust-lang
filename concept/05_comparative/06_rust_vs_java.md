@@ -5,8 +5,7 @@
 # Rust vs Java：系统编程与托管运行时的范式对比
 >
 > **EN**: Rust vs Java：系统编程与托管运行时的范式对比 (Chinese)
-> **Summary**: - [Rust vs Java：系统编程与托管运行时的范式对比](#rust-vs-java系统编程与托管运行时的范式对比) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 memory管理：ownership vs GC](#11-memory管理ownership-vs-gc) - [1.2 types系统：静态显式 vs 静态推断](#12-types系统静态显式-vs-静态推断) - [1.3 concurrency模型：ownership约束 vs JMM](#13-concurrency模型ownership约束-vs-jmm) - [二、技术细节](#二技术细节) - [2.1 运行时架构对比](#21-运行时架构对比) - [2.2 异常处理哲学](#2
-
+> **Summary**: Rust vs Java：系统编程与托管运行时的范式对比 (Chinese). Core Rust concept covering cross-language comparison, mental model building, mechanism analysis.
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 从**内存模型**、**并发语义**、**类型系统**和**运行时架构**四个维度，系统对比 Rust 与 Java 的设计哲学差异，分析两种范式在系统编程、云原生和嵌入式场景的适用边界。

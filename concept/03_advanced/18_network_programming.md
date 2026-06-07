@@ -3,8 +3,7 @@
 # Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象
 >
 > **EN**: Async Programming
-> **Summary**: - [Rust 网络编程：Tokio TCP/UDP、async IO 与 Tower 服务抽象](#rust-网络编程tokio-tcpudpasync-io-与-tower-服务抽象) - [📑 目录](#-目录) - [一、权威定义与核心概念](#一权威定义与核心概念) - [1.1 async网络 IO 模型](#11-async网络-io-模型) - [1.2 Tokio Runtime 架构](#12-tokio-runtime-架构) - [1.3 TCP vs UDP 语义差异](#13-tcp-vs-udp-语义差异) - [1.4 Tower Service 抽象](#14-tower-servi
-
+> **Summary**: Async Programming. Core Rust concept covering mechanism analysis.
 > **受众**: [专家]
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 系统分析 Rust **网络编程**的核心范式——从 Tokio 运行时下的 TCP/UDP 异步 IO，到 socket 编程的底层细节，再到 Tower 服务抽象的设计哲学，建立从"怎么写"到"为什么这样设计"的完整认知框架。

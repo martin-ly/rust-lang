@@ -1,8 +1,7 @@
 # Rust 惯用法谱系全景（Idioms Spectrum）
 >
 > **EN**: Rust 惯用法谱系全景（Idioms Spectrum） (Chinese)
-> **Summary**: **变更日志**: - v1.0 (2026-05-21): 初始版本——七层惯用法谱系 + 等价变换 + 反惯用法判定树 + Clippy 对齐 - [Rust 惯用法谱系全景（Idioms Spectrum）](#rust-惯用法谱系全景idioms-spectrum) - [📑 目录](#-目录) - [〇、惯用法谱系认知全景](#〇惯用法谱系认知全景) - [零、TL;DR —— 惯用法速查](#零tldr--惯用法速查) - [一、权威来源与谱系方法论](#一权威来源与谱系方法论) - [1.1 惯用法的定义与判别标准](#11-惯用法的定义与判别标准) - [1.2 与 Clipp
-
+> **Summary**: Rust 惯用法谱系全景. Core Rust concept covering design patterns.
 > **受众**: [进阶]
 > **内容分级**: [专家级]
 > **定位**: 本文件从**纵向抽象层级**梳理 Rust 的惯用法（idioms）——从词法糖到架构模式的高效、等效、简洁表达方式，与 `02_patterns.md` 的设计模式形成互补：后者聚焦「设计模式」（面向问题），本文件聚焦「惯用法」（面向表达）。

@@ -5,8 +5,7 @@
 # Formal Verification Tools（形式化验证工具生态）
 >
 > **EN**: Formal Methods
-> **Summary**: - [Formal Verification Tools（formal methods验证工具生态）](#formal-verification-toolsformal methods验证工具生态) - [📑 目录](#-目录) - [一、权威定义（Definition）](#一权威定义definition) - [1.1 formal methods验证的层次模型](#11-formal methods验证的层次模型) - [1.2 Rust formal methods验证的独特挑战](#12-rust-formal methods验证的独特挑战) - [二、概念属性矩阵](#二概念属性矩阵) - [三、模型检验工具](#三模型检验工具) - [3.1 Kani：基于 CBMC 的 Rust 验证器](#31-kani
-
+> **Summary**: Formal Methods. Core Rust concept with theoretical foundations and practical applications.
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure

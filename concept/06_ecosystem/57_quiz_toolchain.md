@@ -20,7 +20,7 @@
 >
 > **前置概念**:
 > [Toolchain](./01_toolchain.md) ·
-> [Cargo Workspaces](./02_cargo_workspace.md)
+> Cargo Workspaces
 
 ---
 
@@ -142,7 +142,7 @@ tokio = { workspace = true, features = ["rt-multi-thread"] }
 - 更好的 dev-dependency 处理
 - 与 Edition 2024 对齐
 
-**知识点**：Workspace 是大型 Rust 项目的标准组织方式。集中依赖管理避免了版本漂移（version drift）。[→ Cargo Workspace 详解](./02_cargo_workspace.md)
+**知识点**：Workspace 是大型 Rust 项目的标准组织方式。集中依赖管理避免了版本漂移（version drift）。→ Cargo Workspace 详解
 
 </details>
 

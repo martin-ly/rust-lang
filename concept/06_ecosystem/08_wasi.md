@@ -1,8 +1,7 @@
 # WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型）
 >
 > **EN**: WebAssembly
-> **Summary**: **变更日志**: - v1.0 (2026-05-13): 初始版本——覆盖 WASI 定位、Component Model 架构、`wit-bindgen`、能力安全、Rust ``wasm32-wasip1` 或 `wasm32-wasip2`` 目标 $entry WebAssembly 最初为浏览器设计，但**沙箱化**使其成为服务端和嵌入式的理想目标——前提是有安全的系统接口。WASI 提供了这个接口，且核心设计原则是**能力安全（Capability Security）**：程序只能访问显式被授予的能力。 传统 Wasm 模块是**扁平的**——导入/导出通过低级的整数索引。Co
-
+> **Summary**: WebAssembly. Core Rust concept with theoretical foundations and practical applications.
 > **受众**: [进阶]
 > **内容分级**: [综述级]
 > **层级**: L6 应用主题

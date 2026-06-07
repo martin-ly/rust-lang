@@ -3,8 +3,7 @@
 # NLL 与 Polonius：借用检查器的演进
 >
 > **EN**: Borrowing
-> **Summary**: - [NLL 与 Polonius：borrowing检查器的演进](#nll-与-poloniusborrowing检查器的演进) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 词法lifetimes的问题](#11-词法lifetimes的问题) - [1.2 NLL 的解决方案](#12-nll-的解决方案) - [1.3 Polonius 的进一步精确化](#13-polonius-的进一步精确化) - [二、技术细节](#二技术细节) - [2.1 NLL 的实现机制](#21-nll-的实现机制) - [2.2 Polonius 的约束传播](#22-polonius-的约束传播) - [2.
-
+> **Summary**: Borrowing. Core Rust concept covering mechanism analysis.
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure

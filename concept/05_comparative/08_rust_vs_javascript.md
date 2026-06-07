@@ -5,8 +5,7 @@
 # Rust vs JavaScript：系统编程与脚本执行的范式差异
 >
 > **EN**: Rust vs JavaScript：系统编程与脚本执行的范式差异 (Chinese)
-> **Summary**: - [Rust vs JavaScript：系统编程与脚本执行的范式差异](#rust-vs-javascript系统编程与脚本执行的范式差异) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 运行时模型：编译 vs 解释](#11-运行时模型编译-vs-解释) - [1.2 types系统：静态 vs 动态](#12-types系统静态-vs-动态) - [1.3 memory模型：ownership vs GC](#13-memory模型ownership-vs-gc) - [二、技术细节](#二技术细节) - [2.1 async模型对比](#21-async模型对比) - [2.2 错误处理：Result vs T
-
+> **Summary**: Rust vs JavaScript：系统编程与脚本执行的范式差异 (Chinese). Core Rust concept covering cross-language comparison, mental model building, mechanism analysis.
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 对比分析 **Rust**（编译型、强类型、内存安全）与 **JavaScript**（解释型、动态类型、事件驱动）在语言语义、运行时模型、异步处理和生态工具链四个维度的本质差异，特别关注 WASM 作为两者交汇点的作用。

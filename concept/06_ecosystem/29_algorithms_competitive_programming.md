@@ -5,7 +5,7 @@
 # 算法与竞赛编程 (Algorithms & Competitive Programming)
 >
 > **EN**: 算法与竞赛编程 (Algorithms & Competitive Programming) (Chinese)
-> **Summary**: **变更日志**: - v1.0 (2026-05-22): 初始版本——覆盖算法范式 Rust 实现、竞赛编程惯用法、LeetCode 模式矩阵、形式验证与算法正确性 编译期borrowing检查、显式lifetimes、没有垃圾回收——这些特性在快速原型阶段似乎增加了认知负担。但换来的零成本抽象和无运行时错误，在复杂数据结构和图算法中反而是**可靠性倍增器**。 链表反转不再担心 use-after-free，图遍历不再担心缓冲区溢出，线段树的下标访问由编译期边界检查守护。Rust 的 `Option<T>` 和 `Result<T, E>` 强制处理所有边界条件。 Fast I/O、memory池复用、零分配算法、位运
+> **Summary**: 算法与竞赛编程 (Algorithms & Competitive Programming) (Chinese). Core Rust concept with theoretical foundations and practical applications.
 >
 > **受众**: [进阶]
 

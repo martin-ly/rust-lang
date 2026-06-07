@@ -5,8 +5,7 @@
 # Lifetimes 高级主题
 >
 > **EN**: Lifetimes 高级主题 (Chinese)
-> **Summary**: 从直觉到formal methods的过渡需要六步递进的认知脚手架。 每一步不仅提供新知识，还解释"为什么这一步必须接在上一步之后"。 - [Lifetimes 高级主题](#lifetimes-高级主题) - [📑 目录](#-目录) - [Step 1: 直觉困惑（Intuitive Confusion）](#step-1-直觉困惑intuitive-confusion) - [Step 2: 具体场景（Concrete Scenario）](#step-2-具体场景concrete-scenario) - [Step 3: 模式抽象（Pattern Abstraction）](#step-3-模式抽象patt
-
+> **Summary**: Lifetimes 高级主题 (Chinese). Core Rust concept with theoretical foundations and practical applications.
 > **受众**: [初学者]
 > **层次定位**: L1-L3 进阶 / 生命周期高级主题
 > **前置依赖**: [Lifetimes 基础](./03_lifetimes.md)

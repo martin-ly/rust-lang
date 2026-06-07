@@ -6,8 +6,7 @@
 # 数值类型与运算：从整数到浮点的完整图景
 >
 > **EN**: 数值类型与运算：从整数到浮点的完整图景 (Chinese)
-> **Summary**: - [数值types与运算：从整数到浮点的完整图景](#数值types与运算从整数到浮点的完整图景) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 整数types全景](#11-整数types全景) - [1.2 浮点types与 IEEE 754](#12-浮点types与-ieee-754) - [1.3 溢出行为与饱和运算](#13-溢出行为与饱和运算) - [二、技术细节](#二技术细节) - [2.1 types转换与 as](#21-types转换与-as) - [2.2 Wrapping、Saturating、Checked、Overflowing](#22-wrappingsaturati
-
+> **Summary**: 数值类型与运算：从整数到浮点的完整图景 (Chinese). Core Rust concept covering performance optimization.
 > **受众**: [初学者]
 > **Bloom 层级**: 记忆 → 理解
 > **定位**: 系统讲解 Rust **数值类型**——从整数、浮点、饱和运算到类型转换和溢出行为，揭示 Rust 如何在安全性与性能之间做出精确的设计选择。

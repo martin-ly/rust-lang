@@ -20,7 +20,6 @@
   - [学习要点](#学习要点)
     - [Raft算法](#raft算法)
   - [参考实现](#参考实现)
-  - [完整参考实现位于: `examples/distributed-kv/`](#完整参考实现位于-examplesdistributed-kv)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -73,6 +72,7 @@ struct RaftNode {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 完整参考实现位于: `examples/distributed-kv/`
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

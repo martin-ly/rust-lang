@@ -3,8 +3,7 @@
 # 操作语义：程序行为的形式化定义
 >
 > **EN**: Formal Methods
-> **Summary**: - [操作语义：程序行为的formal methods定义](#操作语义程序行为的formal methods定义) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 为什么需要操作语义](#11-为什么需要操作语义) - [1.2 小步语义 vs 大步语义](#12-小步语义-vs-大步语义) - [1.3 求值上下文（Evaluation Contexts）](#13-求值上下文evaluation-contexts) - [二、技术细节](#二技术细节) - [2.1 配置与转换规则](#21-配置与转换规则) - [2.2 环境与存储](#22-环境与存储) - [2.3 Rust 操作语义的特殊
-
+> **Summary**: Formal Methods. Core Rust concept covering formal methods foundations, cross-language comparison, mechanism analysis.
 > **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >

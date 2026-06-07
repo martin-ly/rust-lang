@@ -5,7 +5,7 @@
 # Rust 嵌入式系统开发
 >
 > **EN**: Embedded Systems
-> **Summary**: - [Rust 嵌入式系统开发](#rust-嵌入式系统开发) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 no\_std](#11-no_std) - [1.2 裸机编程](#12-裸机编程) - [1.3 memory布局](#13-memory布局) - [二、硬件抽象层](#二硬件抽象层) - [2.1 PAC — 外设访问 crate](#21-pac--外设访问-crate) - [2.2 HAL — 硬件抽象层](#22-hal--硬件抽象层) - [2.3 BSP — 板级支持包](#23-bsp--板级支持包) - [三、实时系统](#三实时系统) -
+> **Summary**: Embedded Systems. Core Rust concept covering mechanism analysis.
 >
 > **受众**: [进阶]
 

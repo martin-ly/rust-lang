@@ -1,8 +1,7 @@
 # Rust 形式模型演进跟踪（1.79–1.97+）
 >
 > **EN**: Rust 形式模型演进跟踪（1.79–1.97+） (Chinese)
-> **Summary**: ```mermaid mindmap root((Rust 形式模型演进<br/>1.79 → 1.97+)) ownership与别名模型 raw_op[&raw 操作符 1.82<br/>消除中间引用 UB] if_let_guards[if-let guards 1.95<br/>模式匹配条件细化] let_chains[let chains 1.88<br/>逻辑合取与模式绑定] get_disjoint[get_disjoint_mut 1.85<br/>编译期证明索引不重叠] types系统扩展 precise_capturing[use&lt;..&gt; precise capturing 1.
-
+> **Summary**: 形式模型演进跟踪. Emerging Rust feature or ecosystem trend: 形式模型演进跟踪.
 > **受众**: [专家]
 > **内容分级**: [综述级]
 > **定位**: 本文件从**形式模型维度**跟踪 Rust 语言特性的演进，而非版本特性清单。仅收录对 Rust 的**所有权模型、类型系统、异步语义、Unsafe 边界**有结构性影响的特性。

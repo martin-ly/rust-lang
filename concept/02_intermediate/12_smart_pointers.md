@@ -5,8 +5,7 @@
 # 智能指针：堆内存管理与共享语义
 >
 > **EN**: Smart Pointers
-> **Summary**: - [智能指针：堆memory管理与共享语义](#智能指针堆memory管理与共享语义) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 智能指针谱系](#11-智能指针谱系) - [1.2 Box：独占堆分配](#12-box独占堆分配) - [1.3 Rc 与 Arc：引用计数共享](#13-rc-与-arc引用计数共享) - [二、技术细节](#二技术细节) - [2.1 RefCell 与 Cell：内部可变性](#21-refcell-与-cell内部可变性) - [2.2 智能指针的组合模式](#22-智能指针的组合模式) - [2.3 性能特征对比](#23-性
-
+> **Summary**: Smart Pointers. Core Rust concept covering mechanism analysis.
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[智能指针](../../knowledge/02_intermediate/04_smart_pointers.md)

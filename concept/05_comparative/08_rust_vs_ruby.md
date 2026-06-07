@@ -5,8 +5,7 @@
 # Rust vs Ruby：性能与表达力的两极
 >
 > **EN**: Rust vs Ruby：性能与表达力的两极 (Chinese)
-> **Summary**: - [Rust vs Ruby：性能与表达力的两极](#rust-vs-ruby性能与表达力的两极) - [📑 目录](#-目录) - [一、核心对比](#一核心对比) - [1.1 types系统对比](#11-types系统对比) - [1.2 memory管理对比](#12-memory管理对比) - [1.3 元编程与 DSL](#13-元编程与-dsl) - [二、工程实践差异](#二工程实践差异) - [2.1 Web 开发生态](#21-web-开发生态) - [2.2 性能基准](#22-性能基准) - [2.3 开发速度权衡](#23-开发速度权衡) - [三、互补使用场景](#三互补使用场景) - [
-
+> **Summary**: Rust vs Ruby：性能与表达力的两极 (Chinese). Core Rust concept covering cross-language comparison, mechanism analysis.
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 对比分析 **Rust** 与 **Ruby** 的设计哲学——从动态类型的极致表达力到静态类型的编译期安全，揭示两种语言在Web开发、脚本编写和系统编程中的互补定位。

@@ -50,7 +50,6 @@
     - [概念性问题](#概念性问题)
     - [代码修复题](#代码修复题)
     - [开放设计题](#开放设计题)
-  - [**最后更新**: 2026-05-09](#最后更新-2026-05-09)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -376,6 +375,7 @@ fn broken() {}
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.0+
 **最后更新**: 2026-05-09
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -401,17 +401,10 @@ fn broken() {}
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon]**

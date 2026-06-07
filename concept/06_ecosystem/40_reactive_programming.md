@@ -5,7 +5,7 @@
 # Reactive Programming & FRP（响应式编程与函数式响应编程）
 >
 > **EN**: Reactive Programming & FRP（响应式编程与函数式响应编程） (Chinese)
-> **Summary**: - [Reactive Programming \& FRP（响应式编程与函数式响应编程）](#reactive-programming--frp响应式编程与函数式响应编程) - [📑 目录](#-目录) - [一、权威定义（Definition）](#一权威定义definition) - [1.1 Reactive Manifesto：响应式系统的四大特质](#11-reactive-manifesto响应式系统的四大特质) - [1.2 Reactive Streams：背压感知的async数据流](#12-reactive-streams背压感知的async数据流) - [1.3 FRP：函数式响应
+> **Summary**: Reactive Programming & FRP. Core Rust concept with theoretical foundations and practical applications.
 >
 > **受众**: [进阶]
 

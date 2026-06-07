@@ -1,8 +1,7 @@
 # Rust 表征空间（Semantic / Representational Space）
 >
 > **EN**: Rust 表征空间（Semantic / Representational Space） (Chinese)
-> **Summary**: - [Rust 表征空间（Semantic / Representational Space）](#rust-表征空间semantic--representational-space) - [📑 目录](#-目录) - [变更日志](#变更日志) - [〇、表征空间认知全景](#〇表征空间认知全景) - [〇、认知路径（Cognitive Path）](#〇认知路径cognitive-path) - [第 1 步：什么是表征空间？](#第-1-步什么是表征空间) - [第 2 步：Rust 的表征空间为什么是这些算子？](#第-2-步rust-的表征空间为什么是这些算子) - [第 3 步：能
-
+> **Summary**: Rust 表征空间. Core Rust concept with theoretical foundations and practical applications.
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **受众**: [研究者]
 > **Bloom 层级**: 分析 → 评价

@@ -5,8 +5,7 @@
 # Error Handling（错误处理）
 >
 > **EN**: Error Handling
-> **Summary**: **变更日志**: - v2.1 (2026-05-14): 扩展 §9.4——补充 `miette` / `snafu` 生态库详解，六库综合对比矩阵与决策树 - v2.0 (2026-05-12): 深度重构——定理推理链、反命题决策树、边界极限测试、6步认知路径与章节过渡 - v1.0 (2026-05-12): 初始版本 - [Error Handling（错误处理）](#error-handling错误处理) - [📑 目录](#-目录) - [一、权威定义（Definition）](#一权威定义definition) - [1.1 Wikipedia 对齐定义](#11-wikip
-
+> **Summary**: Error Handling. Core Rust concept with theoretical foundations and practical applications.
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[错误处理](../../knowledge/02_intermediate/02_error_handling.md)

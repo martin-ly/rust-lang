@@ -1,8 +1,7 @@
 # Ergonomic Ref-Counting 预研：人机工学引用计数
 >
 > **EN**: Ergonomic Ref-Counting 预研：人机工学引用计数 (Chinese)
-> **Summary**: 当前 Rust 中，共享ownership的标准做法是 `Rc<T>` / `Arc<T>`，但它们的 API 相比 GC 语言显得繁琐： ```rust use std::sync::Arc; // 当前做法：显式 clone let data = Arc::new(vec![1, 2, 3]); let data2 = Arc::clone(&data); // 必须显式调用 clone``` 对比 Kotlin / Swift / 现代 C++ 的隐式引用计数，Rust 要求**每次传递共享ownership时显式 `clone`**，这在高阶函数、闭包捕获、async任务分发等场景下成为**人机工学瓶颈**。 E
-
+> **Summary**: Ergonomic Ref-Counting 预研：人机工学引用计数 (Chinese). Emerging Rust feature or ecosystem trend: Ergonomic Ref-Counting 预研：人机工学引用计数 (Chinese).
 > **状态**: 🧪 RFC 决策与预览阶段
 > **跟踪版本**: nightly 1.98.0 (2026-06-02)
 > **预计稳定**: 待定（RFC 决策阶段，2026 持续推进）
@@ -21,7 +20,7 @@
 >
 > **前置概念**:
 > [Ownership](../01_foundation/01_ownership.md) ·
-> [Smart Pointers](../02_intermediate/05_smart_pointers.md) ·
+> [Smart Pointers](../02_intermediate/12_smart_pointers.md) ·
 > [Unsafe](../03_advanced/03_unsafe.md)
 > **后置概念**: [Rust for Linux](./19_rust_for_linux.md)
 
@@ -163,7 +162,7 @@ Ergonomic ref-counting 可显著降低内核绑定的样板代码量，提升可
 
 ## 六、相关概念文件
 
-- [Smart Pointers](../02_intermediate/05_smart_pointers.md) — `Rc`/`Arc`/`Weak` 详解
+- [Smart Pointers](../02_intermediate/12_smart_pointers.md) — `Rc`/`Arc`/`Weak` 详解
 - [Ownership](../01_foundation/01_ownership.md) — 所有权模型基础
 - [Rust for Linux](./19_rust_for_linux.md) — 内核开发跟踪
 - [Version Tracking](./05_rust_version_tracking.md) — 版本特性演进

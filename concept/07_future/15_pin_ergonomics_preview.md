@@ -1,8 +1,7 @@
 # Pin Ergonomics 与 Reborrow Traits 预研：超越 `Pin::as_mut`
 >
 > **EN**: Traits
-> **Summary**: | # | 痛点 | 示例 | 影响 | |:---:|:---|:---|:---:| | 1 | **栈上 Pin 需要宏** | `let mut pinned = pin!(future);` | 初学者困惑：为什么不能 `let pinned = Pin::new(&mut future)` | | 2 | **Pinned 引用不能自动 reborrow** | `pinned.as_mut().await` | 每次都需要显式调用 `as_mut()`，代码噪音大 | | 3 | **方法签名噪音** | `fn poll(self: Pin<&mut Self>)` | 自定义
-
+> **Summary**: Traits. Emerging Rust feature or ecosystem trend: Traits.
 > **状态**: 🧪 Nightly 实验性（MCP 已通过，RFC 推进中）
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)
 > **预计稳定**: 2027+（需等待 RFC 完成及 ecosystem 适配）
@@ -13,7 +12,7 @@
 >
 > **定位**: 探讨 Rust 编译器基础设施中最影响异步编程体验的长期痛点 —— `Pin` 的 ergonomics，以及 Project Goals 2026 Flagship "Beyond the `&`" 的解决方案：Reborrow Traits、Pinned Places、Safe Pin Projection。
 > **前置概念**: [Async](../03_advanced/02_async.md) · [Pin/Unpin](../03_advanced/06_pin_unpin.md) · [Traits](../02_intermediate/01_traits.md)
-> **后置概念**: [Version Tracking](./05_rust_version_tracking.md) · [Async Drop](./08_async_drop_preview.md)
+> **后置概念**: [Version Tracking](./05_rust_version_tracking.md) · [Async Drop](./18_async_drop_preview.md)
 
 > **来源**: [RFC #3709 — Pinned Places](https://github.com/rust-lang/rfcs/issues/3709) · [Rust Project Goals 2026 — Beyond the &](https://rust-lang.github.io/rust-project-goals/2026/) · [withoutboats — Pin and Suffering](https://without.boats/blog/) · [RFC #3627 — Reborrow Traits](https://github.com/rust-lang/rfcs/pull/3627)
 

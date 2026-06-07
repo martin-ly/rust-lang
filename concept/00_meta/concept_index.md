@@ -1,7 +1,7 @@
 # 全局概念索引（Concept Index）
 >
 > **EN**: 全局概念索引（Concept Index） (Chinese)
-> **Summary**: - [全局概念索引（Concept Index）](#全局概念索引concept-index) - [📑 目录](#-目录) - [一、索引使用说明 \[来源: 倒排索引方法论参照信息检索标准 — Manning, Raghavan \& Schütze, *Introduction to Information Retrieval* (Cambridge, 2008); 语义链接网络参照 Knowledge Graph 构建方法论\]](#一索引使用说明-来源-倒排索引方法论参照信息检索标准--manning-raghavan--schütze-introduction-to-informa
+> **Summary**: 全局概念索引. Core Rust concept with theoretical foundations and practical applications.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **受众**: [进阶]

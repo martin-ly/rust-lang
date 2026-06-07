@@ -5,7 +5,7 @@
 # Data Engineering（数据工程）
 >
 > **EN**: Data Engineering（数据工程） (Chinese)
-> **Summary**: - [Data Engineering（数据工程）](#data-engineering数据工程) - [📑 目录](#-目录) - [一、权威定义（Definition）](#一权威定义definition) - [1.1 数据工程的分层架构](#11-数据工程的分层架构) - [1.2 ETL 与 ELT 范式](#12-etl-与-elt-范式) - [二、概念属性矩阵](#二概念属性矩阵) - [三、数据摄取层（Ingestion）](#三数据摄取层ingestion) - [3.1 批处理摄取](#31-批处理摄取) - [3.2 流处理摄取](#32-流处理摄取) - [3.3 变
+> **Summary**: Data Engineering. Core Rust concept with theoretical foundations and practical applications.
 >
 > **受众**: [进阶]
 

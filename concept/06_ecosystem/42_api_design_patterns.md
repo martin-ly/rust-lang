@@ -5,7 +5,7 @@
 # API Design Patterns（API 设计模式）
 >
 > **EN**: Design Patterns
-> **Summary**: - [API Design Patterns（API 设计模式）](#api-design-patternsapi-设计模式) - [📑 目录](#-目录) - [一、权威定义（Definition）](#一权威定义definition) - [1.1 REST：表述性状态转移](#11-rest表述性状态转移) - [1.2 GraphQL：查询语言与运行时](#12-graphql查询语言与运行时) - [1.3 gRPC：高性能 RPC 框架](#13-grpc高性能-rpc-框架) - [二、概念属性矩阵](#二概念属性矩阵) - [三、API 设计原则](#三api-设计原则) -
+> **Summary**: Design Patterns. Core Rust concept with theoretical foundations and practical applications.
 >
 > **受众**: [进阶]
 

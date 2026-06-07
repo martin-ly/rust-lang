@@ -5,8 +5,7 @@
 # 闭包类型系统：Fn、FnMut、FnOnce 的捕获语义
 >
 > **EN**: Type System
-> **Summary**: - [闭包types系统：Fn、FnMut、FnOnce 的捕获语义](#闭包types系统fnfnmutfnonce-的捕获语义) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 闭包的本质：匿名结构体](#11-闭包的本质匿名结构体) - [1.2 三种闭包 Trait](#12-三种闭包-trait) - [1.3 捕获方式：引用 vs 移动](#13-捕获方式引用-vs-移动) - [二、技术细节](#二技术细节) - [2.1 compiler自动推导规则](#21-compiler自动推导规则) - [2.2 闭包与函数指针](#22-闭包与函数指针) - [2.3 move 关
-
+> **Summary**: Type System. Core Rust concept covering mechanism analysis.
 > **受众**: [进阶]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **S** — Structure

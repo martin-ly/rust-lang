@@ -5,7 +5,7 @@
 # 错误处理深入：从 Result 到自定义错误生态
 >
 > **EN**: Error Handling
-> **Summary**: - [错误处理深入：从 Result 到自定义错误生态](#错误处理深入从-result-到自定义错误生态) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 Result 与 Option 的组合代数](#11-result-与-option-的组合代数) - [1.2 ? 运算符与错误传播](#12--运算符与错误传播) - [1.3 Error Trait 与错误types](#13-error-trait-与错误types) - [二、技术细节](#二技术细节) - [2.1 错误转换与 From Trait](#21-错误转换与-from-trait) - [2.
+> **Summary**: Error Handling. Core Rust concept covering mechanism analysis.
 >
 > **受众**: [进阶]
 

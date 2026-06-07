@@ -1,8 +1,7 @@
 # Rust 知识体系全局思维导图（Knowledge Mindmap）
 >
 > **EN**: Rust 知识体系全局思维导图（Knowledge Mindmap） (Chinese)
-> **Summary**: **变更日志**: - v1.0 (2026-05-21): 初始版本——L0-L7 全局 mindmap + 五维主线 mindmap - [Rust 知识体系全局思维导图（Knowledge Mindmap）](#rust-知识体系全局思维导图knowledge-mindmap) - [📑 目录](#-目录) - [一、L0-L7 全局知识体系 Mindmap](#一l0-l7-全局知识体系-mindmap) - [二、五维主线 Mindmap](#二五维主线-mindmap) - [三、Mindmap 与四层关系图谱的关联](#三mindmap-与四层关系图谱的关联) - [四、相关概念
-
+> **Summary**: Rust 知识体系全局思维导图. Core Rust concept covering AI/ML integration patterns.
 > **受众**: [进阶]
 > **定位**: 本文件是 `concept/` 知识体系的**认知入口**——用 Mermaid `mindmap` 语法将整个 L0-L7 知识体系浓缩为一张可导航的思维导图，帮助学习者建立全局认知地图。
 > **原则**: 不做"内容重复"，聚焦"结构导航"——每个节点链接到对应的具体文件。

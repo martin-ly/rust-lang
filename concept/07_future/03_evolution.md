@@ -1,7 +1,7 @@
 # Language Evolution（语言演进）
 >
 > **EN**: Language Evolution（语言演进） (Chinese)
-> **Summary**: **变更日志**: - v1.0 (2026-05-12): 初始版本$entry - v1.1 (2026-05-12): Wave 3 扩展——补充定义、关键趋势、Edition 机制、RFC 流程、演进路线图、官方来源 - v1.2 (2026-05-14): 补充完整 Edition 变更清单（2015→2018→2021→2024）、Edition 与 rustc 版本解耦、`cargo fix --edition` 自动迁移机制、跨 Edition 代码示例、未来 Edition 方向（2027+） - v1.4 (2026-05-26): 补充 Rust 2026 Project
+> **Summary**: Language Evolution. Core Rust concept with theoretical foundations and practical applications.
 >
 > **受众**: [专家]
 > **内容分级**: [综述级]

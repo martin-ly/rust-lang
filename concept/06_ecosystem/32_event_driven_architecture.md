@@ -4,7 +4,7 @@
 # 事件驱动架构 (Event-Driven Architecture)
 >
 > **EN**: 事件驱动架构 (Event-Driven Architecture) (Chinese)
-> **Summary**: - [事件驱动架构 (Event-Driven Architecture)](#事件驱动架构-event-driven-architecture) - [📑 目录](#-目录) - [一、引言](#一引言) - [二、发布-订阅](#二发布-订阅) - [2.1 tokio::sync::broadcast](#21-tokiosyncbroadcast) - [2.2 bus crate](#22-bus-crate) - [2.3 Redis Pub/Sub](#23-redis-pubsub) - [三、事件总线](#三事件总线) - [四、消息队列](#四消息队列) - [4.1 la
+> **Summary**: 事件驱动架构 (Event-Driven Architecture) (Chinese). Core Rust concept covering mechanism analysis.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 创造

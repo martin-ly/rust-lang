@@ -4,7 +4,7 @@
 # Rust vs C#：托管与原生之路
 >
 > **EN**: Rust vs C#：托管与原生之路 (Chinese)
-> **Summary**: - [Rust vs C#：托管与原生之路](#rust-vs-c托管与原生之路) - [📑 目录](#-目录) - [一、核心对比](#一核心对比) - [1.1 memory管理](#11-memory管理) - [1.2 generics系统](#12-generics系统) - [1.3 async模型](#13-async模型) - [二、语言特性差异](#二语言特性差异) - [2.1 模式匹配](#21-模式匹配) - [2.2 错误处理](#22-错误处理) - [2.3 unsafe 与不安全代码](#23-unsafe-与不安全代码) - [三、工程实践差异](#三工程实践差异) - [3.1 构建系统](#31-构建系统)
+> **Summary**: Rust vs C#：托管与原生之路 (Chinese). Core Rust concept covering cross-language comparison, mental model building, mechanism analysis.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价

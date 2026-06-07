@@ -4,8 +4,7 @@
 # Paradigm Matrix: Multi-Language Formal Comparison（多语言范式对比矩阵）
 >
 > **EN**: Paradigm Matrix: Multi-Language Formal Comparison（多语言范式对比矩阵） (Chinese)
-> **Summary**: **变更日志**: - v1.0 (2026-05-12): 初始版本，完成多语言formal methods对比矩阵、设计哲学谱系、适用域决策树 - v1.1 (2026-05-12): 补充 Wikipedia 权威定义、课程引用、学术论文、跨文件链接 - v2.0 (2026-05-13): 重构——添加认知路径、⟹推理链、反命题决策树、章节过渡、层次一致性标注 ```text Step 1: 为什么需要范式矩阵？ └─⟹ 语言特性不是孤立存在的，需要系统化的对比框架来理解设计权衡 Step 2: 命令式 vs 函数式的本质区别？ └─⟹ 状态可变性与执行顺序的根本分歧 → 直接影响concurrency模型与可预测性 Ste
-
+> **Summary**: Paradigm Matrix: Multi-Language Formal Comparison. Core Rust concept with theoretical foundations and practical applications.
 > **受众**: [进阶]
 > **层级**: L5 对比分析
 > **A/S/P 标记**: **S** — Structure（心智模型）

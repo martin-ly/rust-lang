@@ -1,8 +1,7 @@
 # L6 生态工程层（Ecosystem & Engineering）
 >
 > **EN**: L6 生态工程层（Ecosystem & Engineering） (Chinese)
-> **Summary**: - [L6 生态工程层（Ecosystem \& Engineering）](#l6-生态工程层ecosystem--engineering) - [📑 目录](#-目录) - [〇、L6 认知入口](#〇l6-认知入口) - [一、本层概念关系图（完整版）](#一本层概念关系图完整版) - [1.1 概念间语义链接](#11-概念间语义链接) - [二、文件索引与关系](#二文件索引与关系) - [补充文件索引](#补充文件索引) - [三、L1-L5 → L6 的工程映射](#三l1-l5--l6-的工程映射) - [四、认知路径](#四认知路径) - [五、跨层出口](#五跨层出口) `
-
+> **Summary**: L6 生态工程层. Core Rust concept with theoretical foundations and practical applications.
 > **内容分级**: [综述级]
 > **受众**: [进阶]
 > **定位**：Rust 的工程实践、工具链、设计模式和生态协作机制。本层是 L1-L5 知识的**工程化落地**，将理论转化为可维护、可扩展的代码库。

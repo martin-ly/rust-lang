@@ -4,7 +4,7 @@
 # Rust vs Zig：现代系统语言的两种哲学
 >
 > **EN**: Rust vs Zig：现代系统语言的两种哲学 (Chinese)
-> **Summary**: - [Rust vs Zig：现代系统语言的两种哲学](#rust-vs-zig现代系统语言的两种哲学) - [📑 目录](#-目录) - [一、核心对比](#一核心对比) - [1.1 编译期计算](#11-编译期计算) - [1.2 错误处理哲学](#12-错误处理哲学) - [1.3 memory管理](#13-memory管理) - [二、工程实践差异](#二工程实践差异) - [2.1 构建系统](#21-构建系统) - [2.2 交叉编译](#22-交叉编译) - [2.3 C 互操作](#23-c-互操作) - [三、互补使用场景](#三互补使用场景) - [四、反命题与边界分析](#四反命题与
+> **Summary**: Rust vs Zig：现代系统语言的两种哲学 (Chinese). Core Rust concept covering cross-language comparison, mechanism analysis.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价

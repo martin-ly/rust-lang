@@ -1,10 +1,8 @@
 # 实践项目 09: 日志分析器
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **分级**: [A]
 > **Bloom 层级**: L3 (应用)
-
 > **难度**: ⭐⭐ 进阶级
 > **所需知识**: c01-c06
 > **预计时间**: 4-5小时
@@ -22,7 +20,6 @@
   - [学习要点](#学习要点)
     - [流式处理](#流式处理)
   - [参考实现](#参考实现)
-  - [完整参考实现位于: `examples/log-parser/`](#完整参考实现位于-exampleslog-parser)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -76,6 +73,7 @@ fn process_log_file(path: &str) -> std::io::Result<()> {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 完整参考实现位于: `examples/log-parser/`
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

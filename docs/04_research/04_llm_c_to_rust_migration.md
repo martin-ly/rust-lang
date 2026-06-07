@@ -1,10 +1,8 @@
 # LLM 辅助 C to Rust 迁移工具评估报告
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **分级**: [B]
 > **Bloom 层级**: L4-L5 (分析/评价)
-
 > **最后更新日期**: 2026-05-22
 > **预计下次复查日期**: 2026-10-24
 > **评估范围**: C/C++ → Rust 自动/半自动迁移工具
@@ -543,19 +541,12 @@ c2rust transpile compile_commands.json
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon]**
 
 ---

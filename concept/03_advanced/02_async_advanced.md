@@ -3,8 +3,7 @@
 # Async/Await 高级主题
 >
 > **EN**: Async/Await 高级主题 (Chinese)
-> **Summary**: - [Async/Await 高级主题](#asyncawait-高级主题) - [📑 目录](#-目录) - [8.8 Waker 契约与活性](#88-waker-契约与活性) - [8.9 Waker/Context 的底层机制](#89-wakercontext-的底层机制) - [8.10 `Stream` / `Sink` trait 完整分析](#810-stream--sink-trait-完整分析) - [8.11 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异](#811-pinboxdyn-future-vs-impl-futu
-
+> **Summary**: Async/Await 高级主题 (Chinese). Core Rust concept with theoretical foundations and practical applications.
 > **受众**: [专家]
 > **层次定位**: L3 高级概念 / 异步子域 — 高级主题
 > **前置依赖**: [Async/Await 基础](./02_async.md)

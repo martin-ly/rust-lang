@@ -5,8 +5,7 @@
 # Never Type (`!`)：底类型与穷尽性
 >
 > **EN**: Never Type (`!`)：底类型与穷尽性 (Chinese)
-> **Summary**: - [Never Type (`!`)：底types与穷尽性](#never-type-底types与穷尽性) - [目录](#目录) - [一、核心概念](#一核心概念) - [1.1 什么是 `!`](#11-什么是-) - [1.2 形式语义：底types](#12-形式语义底types) - [1.3 Coercion 规则](#13-coercion-规则) - [二、控制流应用](#二控制流应用) - [2.1 发散函数](#21-发散函数) - [2.2 `Result<T, !>` — 不可能失败](#22-resultt---不可能失败) - [2.3 `Option<!>` — 不可能存在](#2
-
+> **Summary**: Never Type (`!`)：底类型与穷尽性 (Chinese). Core Rust concept covering mechanism analysis.
 > **受众**: [初学者]
 > **Bloom 层级**: L3-L4 (应用/分析)
 > **A/S/P 标记**: **S** — Structure

@@ -1,7 +1,7 @@
 # Gen Blocks Preview
 >
 > **EN**: Gen Blocks Preview (Chinese)
-> **Summary**: ```rust,ignore // 概念代码: gen block（提案中，与 generator 相关） // let iter = gen { //     yield 1; //     yield 2; // }; // ❌ 编译错误: gen block 不是当前稳定特性 // 它是 generator 的语法糖，用于创建惰性迭代器 fn main() {}``` | 定理 | 前提 | 结论 | 置信度 | |:---|:---|:---|:---| | Gen Blocks Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 |
+> **Summary**: Gen Blocks Preview (Chinese). Emerging Rust feature or ecosystem trend: Gen Blocks Preview (Chinese).
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

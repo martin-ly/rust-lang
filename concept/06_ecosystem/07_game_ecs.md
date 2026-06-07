@@ -2,8 +2,7 @@
 # Game Development & ECS Architecture（游戏开发与 ECS 架构）
 >
 > **EN**: Game Development
-> **Summary**: **变更日志**: - v1.0 (2026-05-13): 初始版本——覆盖 ECS 架构、Rust 游戏引擎生态、ownership与 DOD 协同、concurrency渲染安全 继承层次导致的**缓存不友好**、虚函数调用的**分支预测失败**、状态同步的**数据竞争**——这些问题在大型场景中迫使引擎转向数据导向设计（DOD）。 数据（Component）与行为（System）分离，Entity 只是组件的标识符。这种**结构扁平化**使 CPU 缓存命中率最大化，且天然适配 Rust 的ownership模型。 `&mut Component` 的独占语义直接映射到 System 对组件的独占访问权。在 Bevy 中，`Q
-
+> **Summary**: Game Development. Core Rust concept with theoretical foundations and practical applications.
 > **受众**: [进阶]
 > **内容分级**: [专家级]
 > **层级**: L6 应用主题

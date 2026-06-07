@@ -5,8 +5,7 @@
 # Serde 序列化模式：Rust 的类型驱动数据转换
 >
 > **EN**: Serde 序列化模式：Rust 的类型驱动数据转换 (Chinese)
-> **Summary**: - [Serde 序列化模式：Rust 的types驱动数据转换](#serde-序列化模式rust-的types驱动数据转换) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 Serde 的设计哲学](#11-serde-的设计哲学) - [1.2 Serialize 与 Deserialize Trait](#12-serialize-与-deserialize-trait) - [1.3 数据格式解耦](#13-数据格式解耦) - [二、技术细节](#二技术细节) - [2.1 Derive 宏的展开逻辑](#21-derive-宏的展开逻辑) - [2.2 自定义
-
+> **Summary**: Serde 序列化模式：Rust 的类型驱动数据转换 (Chinese). Core Rust concept covering mechanism analysis.
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S** — Application + Structure

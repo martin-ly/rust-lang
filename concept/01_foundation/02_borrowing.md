@@ -5,8 +5,7 @@
 # Borrowing（借用）
 >
 > **EN**: Borrowing
-> **Summary**: **变更日志**: - v1.0 (2026-05-12): 初始版本，完成权威定义、borrowing规则矩阵、formal methods视角、思维导图、示例反例 - [Borrowing（borrowing）](#borrowingborrowing) - [📑 目录](#-目录) - [一、权威定义（Definition）](#一权威定义definition) - [1.1 TRPL 官方定义](#11-trpl-官方定义) - [1.2 Wikipedia 对齐定义](#12-wikipedia-对齐定义) - [1.3 formal methods视角](#13-formal methods视角) - [二、概念属性矩阵（Attribute Matrix）](#二概念属性矩阵attrib
-
+> **Summary**: Borrowing. Rust's mechanism for temporary, non-owning access to data through shared (&T) and mutable (&mut T) references, governed by the aliasing-XOR-mutability rule. Covers lifetime interactions, reborrowing, and practical patterns.
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[借用](../../knowledge/01_fundamentals/01_borrowing.md)

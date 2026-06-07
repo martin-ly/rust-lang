@@ -3,8 +3,7 @@
 # Ownership Formalization（所有权形式化）
 >
 > **EN**: Ownership
-> **Summary**: - [Ownership Formalization（ownershipformal methods）](#ownership-formalizationownershipformal methods) - [📑 目录](#-目录) - [零、认知路径（Cognitive Path）](#零认知路径cognitive-path) - [路径总览](#路径总览) - [Step 1: 为什么需要formal methodsownership？](#step-1-为什么需要formal methodsownership) - [Step 2: 权限和borrowing的数学模型？](#step-2-权限和borrowing的数学模型) - [Step 3: 怎么证明没有悬垂指针？](#step-3-怎么证明没有悬垂指针) - [Step 4: 和实际 Rus
-
+> **Summary**: Ownership. Core Rust concept with theoretical foundations and practical applications.
 > **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >

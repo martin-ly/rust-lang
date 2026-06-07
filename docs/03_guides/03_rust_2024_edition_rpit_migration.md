@@ -250,19 +250,12 @@ where
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference - Editions]**
-
 > **[来源: Rust Edition Guide]**
-
 > **[来源: RFCs - Edition RFCs]**
-
 > **[来源: TRPL - Appendix: Editions]**
-
 > **[来源: ACM - Language Evolution Patterns]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: Rust Reference - impl Trait]**
 
 ---

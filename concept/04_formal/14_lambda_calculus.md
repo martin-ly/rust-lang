@@ -3,7 +3,7 @@
 # Lambda 演算与 Rust 计算模型
 >
 > **EN**: Lambda 演算与 Rust 计算模型 (Chinese)
-> **Summary**: - [Lambda 演算与 Rust 计算模型](#lambda-演算与-rust-计算模型) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 无types Lambda 演算](#11-无types-lambda-演算) - [1.2 types化 Lambda 演算](#12-types化-lambda-演算) - [1.3 Rust 闭包与 Lambda](#13-rust-闭包与-lambda) - [二、计算能力](#二计算能力) - [2.1 Church 编码](#21-church-编码) - [2.2 Y 组合子](#22-y-组合子) - [三、反命题与边界分析]
+> **Summary**: Lambda 演算与 Rust 计算模型 (Chinese). Core Rust concept covering mechanism analysis.
 >
 > **受众**: [研究者]
 

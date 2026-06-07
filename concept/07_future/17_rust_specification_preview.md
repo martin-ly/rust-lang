@@ -1,7 +1,7 @@
 # Rust 语言规范预研：从参考文档到形式化规范
 >
 > **EN**: Formal Methods
-> **Summary**: - [Rust 语言规范预研：从参考文档到formal methods规范](#rust-语言规范预研从参考文档到formal methods规范) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 问题：参考文档的局限性](#11-问题参考文档的局限性) - [1.2 规范的多层次需求](#12-规范的多层次需求) - [1.3 Ferrocene 规范的先行探索](#13-ferrocene-规范的先行探索) - [二、技术细节](#二技术细节) - [2.1 规范的内容层次](#21-规范的内容层次) - [2.2 与formal methods验证的衔接](#22-与formal methods验证的衔接) - [2.3 维护挑战](#23
+> **Summary**: Formal Methods. Core Rust concept covering formal methods foundations, mechanism analysis.
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

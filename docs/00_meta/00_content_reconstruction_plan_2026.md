@@ -42,7 +42,6 @@
     - [交付 3: `unsafe_rust.md` 重构](#交付-3-unsafe_rustmd-重构)
   - [五、风险与应对](#五风险与应对)
   - [六、立即行动项（Next Steps）](#六立即行动项next-steps)
-  - [**状态**: 待确认](#状态-待确认)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -223,7 +222,7 @@ graph TD
 | P1 | `02_intermediate/traits.md` | 298 | 550+ | 关联类型vs泛型参数、trait对象vtable布局、coherence/orphan规则论证、auto trait、marker trait | 矩阵+推理树 |
 | P1 | `02_intermediate/generics.md` | 294 | 550+ | GAT、高阶类型直觉、const generics、impl trait in argument/return、单态化成本量化 | 依赖图+对比表 |
 | P1 | `01_fundamentals/lifetimes.md` | ~? | 500+ | 区域推理、reborrow机制、HRTB、lifetime variance、NLL与Polonius演进 | 推理树+状态图 |
-| P1 | `02_intermediate/smart_pointers.md` | ~? | 500+ | Box/Rc/Arc/RefCell内部可变性矩阵、Pin<Box<Self>>、Weak引用循环 | 矩阵+内存图 |
+| P1 | `02_intermediate/smart_pointers.md` | ~? | 500+ | `Box/Rc/Arc/RefCell`内部可变性矩阵、`Pin<Box<Self>>`、Weak引用循环 | 矩阵+内存图 |
 
 #### Phase A3: 高级层补全（第 5-6 周）
 
@@ -428,6 +427,7 @@ graph TD
 
 **计划编制**: Kimi Code CLI
 **状态**: 待确认
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -454,17 +454,10 @@ graph TD
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon]**

@@ -5,8 +5,7 @@
 # Rust vs Go：线性所有权 vs CSP 过程逻辑
 >
 > **EN**: Ownership
-> **Summary**: **变更日志**: - v1.0 (2026-05-12): 初始版本，完成本体论对比、concurrency模型对比、memory模型对比、决策树 | **维度** | **Rust** | **Go** | |:---|:---|:---| | **设计起点** | 如何用types论消除整类错误 | 如何用简单机制构建可扩展系统 | | **信任对象** | compiler（数学证明） | 程序员（简单代码+运行时） | | **memory安全** | 编译期保证（ownership） | 运行时 GC | | **concurrency模型** | ownership + Send/Sync | Goroutine + Channel (CSP) | | **formal methods基础*
-
+> **Summary**: Ownership. Core Rust concept with theoretical foundations and practical applications.
 > **受众**: [进阶]
 > **层级**: L5 对比分析
 > **A/S/P 标记**: **S+P** — Structure + Procedure

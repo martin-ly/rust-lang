@@ -20,7 +20,6 @@
   - [学习要点](#学习要点)
     - [WASM绑定](#wasm绑定)
   - [参考实现](#参考实现)
-  - [完整参考实现位于: `examples/wasm-app/`](#完整参考实现位于-exampleswasm-app)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -71,6 +70,7 @@ extern "C" {
 ## 参考实现
 
 完整参考实现位于: `examples/wasm-app/`
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

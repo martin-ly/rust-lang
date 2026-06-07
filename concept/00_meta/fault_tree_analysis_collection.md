@@ -1,7 +1,7 @@
 # Rust 知识体系失效分析树集（Fault Tree Analysis Collection）
 >
 > **EN**: Rust 知识体系失效分析树集（Fault Tree Analysis Collection） (Chinese)
-> **Summary**: - [Rust 知识体系失效分析树集（Fault Tree Analysis Collection）](#rust-知识体系失效分析树集fault-tree-analysis-collection) - [📑 目录](#-目录) - [〇、FTA 体系认知全景](#〇fta-体系认知全景) - [一、FTA 格式规范](#一fta-格式规范) - [1.1 符号系统](#11-符号系统) - [1.2 分析流程](#12-分析流程) - [二、memory安全失效树](#二memory安全失效树) - [2.1 顶事件](#21-顶事件) - [2.2 故障树 Mermaid](#22-故障树-mermaid
+> **Summary**: Rust 知识体系失效分析树集. Core Rust concept covering mechanism analysis.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **受众**: [专家]

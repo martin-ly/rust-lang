@@ -1,8 +1,7 @@
 # Rust 知识体系概念定义判定森林（Concept Definition Decision Forest）
 >
 > **EN**: Rust 知识体系概念定义判定森林（Concept Definition Decision Forest） (Chinese)
-> **Summary**: - [Rust 知识体系概念定义判定森林（Concept Definition Decision Forest）](#rust-知识体系概念定义判定森林concept-definition-decision-forest) - [📑 目录](#-目录) - [〇、判定森林认知全景](#〇判定森林认知全景) - [一、判定树格式规范](#一判定树格式规范) - [二、ownership判定树](#二ownership判定树) - [2.1 判定链](#21-判定链) - [2.2 Mermaid 可视化](#22-mermaid-可视化) - [2.3 失效条件矩阵](#23-失效条件矩阵) - [三、borrowing判定树](#
-
+> **Summary**: Rust 知识体系概念定义判定森林. Core Rust concept covering practical examples.
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **受众**: [专家]
 > **Bloom 层级**: 元（Meta）

@@ -5,7 +5,7 @@
 # Architecture Patterns（架构设计模式）
 >
 > **EN**: Design Patterns
-> **Summary**: - [Architecture Patterns（架构设计模式）](#architecture-patterns架构设计模式) - [📑 目录](#-目录) - [一、权威定义（Definition）](#一权威定义definition) - [1.1 分层架构（Layered Architecture）](#11-分层架构layered-architecture) - [1.2 六边形架构 / 端口与适配器（Hexagonal / Ports \& Adapters）](#12-六边形架构--端口与适配器hexagonal--ports--adapters) - [1.3 洋葱架构（Onio
+> **Summary**: Design Patterns. Core Rust concept with theoretical foundations and practical applications.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 创造

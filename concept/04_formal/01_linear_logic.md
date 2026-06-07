@@ -3,8 +3,7 @@
 # Linear Logic & Affine Logic（线性逻辑与仿射逻辑）
 >
 > **EN**: Linear Logic
-> **Summary**: **变更日志**: - v1.0 (2026-05-12): 初始版本，完成 Girard 原始定义、结构规则矩阵、Rust 映射、命题-types对应、思维导图、示例反例$entry - v2.0 (2026-05-13): 深度重构——定理矩阵扩展至10行并引入⟹推理链、新增3组反命题决策树、5步认知路径、层次一致性标注（L1-L3精确对应）、补充Pierce TAPL引用 | **结构规则** | **经典逻辑** | **直觉主义逻辑** | **线性逻辑** | **仿射逻辑** | **Rust** | |:---|:---|:---|:---|:---|:---| | **Weaken
-
+> **Summary**: Linear Logic. Core Rust concept with theoretical foundations and practical applications.
 > **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >

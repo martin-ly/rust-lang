@@ -6,8 +6,7 @@
 # Rust 数值类型与运算
 >
 > **EN**: Rust 数值类型与运算 (Chinese)
-> **Summary**: - [Rust 数值types与运算](#rust-数值types与运算) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 整数types](#11-整数types) - [1.2 浮点types](#12-浮点types) - [1.3 types转换](#13-types转换) - [二、运算模式](#二运算模式) - [2.1 溢出检查](#21-溢出检查) - [2.2 Wrapping 与 Saturating](#22-wrapping-与-saturating) - [2.3 SIMD](#23-simd) - [三、反命题与边界分析](#三反命题与边界分析) - [3.1 反命题树](#31
-
+> **Summary**: Rust 数值类型与运算 (Chinese). Core Rust concept covering mechanism analysis.
 > **受众**: [初学者]
 > **Bloom 层级**: 理解 → 应用
 > **定位**: 系统讲解 Rust 的**数值类型**——从整数、浮点到 wrapping/saturating 运算，分析类型安全如何防止数值错误。

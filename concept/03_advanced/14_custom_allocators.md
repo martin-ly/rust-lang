@@ -3,8 +3,7 @@
 # 自定义分配器与内存布局优化
 >
 > **EN**: 自定义分配器与内存布局优化 (Chinese)
-> **Summary**: - [自定义分配器与memory布局优化](#自定义分配器与memory布局优化) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 GlobalAlloc Trait](#11-globalalloc-trait) - [1.2 分配器属性](#12-分配器属性) - [二、实践模式](#二实践模式) - [2.1 bumpalo — Bump 分配器](#21-bumpalo--bump-分配器) - [2.2 jemalloc / mimalloc](#22-jemalloc--mimalloc) - [2.3 arena 分配器](#23-arena-分配器) - [三
-
+> **Summary**: 自定义分配器与内存布局优化 (Chinese). Core Rust concept covering mechanism analysis.
 > **受众**: [专家]
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 深入探讨 Rust 的**自定义分配器**机制——从 `GlobalAlloc` Trait 到 `allocator_api` 不稳定特性，分析内存布局对齐、分配策略与性能优化。

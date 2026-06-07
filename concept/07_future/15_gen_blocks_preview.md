@@ -1,7 +1,7 @@
 # Gen Blocks 预研：超越异步的泛化生成器
 >
 > **EN**: Async Programming
-> **Summary**: - [Gen Blocks 预研：超越async的泛化生成器](#gen-blocks-预研超越async的泛化生成器) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 从 async 到 gen 的泛化](#11-从-async-到-gen-的泛化) - [1.2 Gen Blocks 语法与语义](#12-gen-blocks-语法与语义) - [1.3 与现有迭代器生态的关系](#13-与现有迭代器生态的关系) - [二、技术细节](#二技术细节) - [2.1 生成器状态机](#21-生成器状态机) - [2.2 与 Stream 的协同](#22-与-strea
+> **Summary**: Async Programming. Core Rust concept covering mechanism analysis.
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

@@ -3,8 +3,7 @@
 # FFI 高级主题：跨语言边界的安全与性能
 >
 > **EN**: Foreign Function Interface (FFI)
-> **Summary**: - [FFI 高级主题：跨语言边界的安全与性能](#ffi-高级主题跨语言边界的安全与性能) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 FFI 的安全契约](#11-ffi-的安全契约) - [1.2 memory布局控制](#12-memory布局控制) - [1.3 回调与闭包](#13-回调与闭包) - [二、技术细节](#二技术细节) - [2.1 复杂types映射](#21-复杂types映射) - [2.2 线程安全边界](#22-线程安全边界) - [2.3 错误处理与 Panic 安全](#23-错误处理与-panic-安全) - [三、FFI 模式矩阵](#三f
-
+> **Summary**: Foreign Function Interface (FFI). Core Rust concept covering mechanism analysis.
 > **受众**: [专家]
 >
 > **Bloom 层级**: 分析 → 评价

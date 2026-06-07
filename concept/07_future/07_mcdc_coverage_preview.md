@@ -1,7 +1,7 @@
 # MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证
 >
 > **EN**: Security Practices
-> **Summary**: - [MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证](#mcdc-coverage-概念预研安全关键-rust-的覆盖率验证) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 覆盖率等级的层次结构](#11-覆盖率等级的层次结构) - [1.2 MC/DC 的数学定义](#12-mcdc-的数学定义) - [1.3 Rust compiler实现路径](#13-rust-compiler实现路径) - [二、formal methods语义](#二formal methods语义) - [2.1 独立影响的formal methods](#21-独立影响的formal methods) - [2.2 与compiler优化的冲突](#22-与compiler
+> **Summary**: Security Practices. Core Rust concept covering formal methods foundations.
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

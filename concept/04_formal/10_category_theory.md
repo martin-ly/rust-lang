@@ -3,8 +3,7 @@
 # 范畴论与 Rust：从函子到单子
 >
 > **EN**: 范畴论与 Rust：从函子到单子 (Chinese)
-> **Summary**: - [范畴论与 Rust：从函子到单子](#范畴论与-rust从函子到单子) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 范畴的基本直觉](#11-范畴的基本直觉) - [1.2 函子（Functor）](#12-函子functor) - [1.3 单子（Monad）](#13-单子monad) - [二、技术细节](#二技术细节) - [2.1 Option 作为单子](#21-option-作为单子) - [2.2 Result 与错误处理](#22-result-与错误处理) - [十、边界测试：范畴论视角的编译错误](#十边界测试范畴论视角的编译错
-
+> **Summary**: 范畴论与 Rust：从函子到单子 (Chinese). Core Rust concept covering mechanism analysis.
 > **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >

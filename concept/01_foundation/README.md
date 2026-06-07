@@ -1,8 +1,7 @@
 # L1 基础概念层（Foundation）
 >
 > **EN**: L1 基础概念层（Foundation） (Chinese)
-> **Summary**: - [L1 基础概念层（Foundation）](#l1-基础概念层foundation) - [📑 目录](#-目录) - [〇、L1 认知入口](#〇l1-认知入口) - [一、本层概念关系图（完整版）](#一本层概念关系图完整版) - [1.1 概念间语义链接](#11-概念间语义链接) - [1.2 学习路径的严格依赖](#12-学习路径的严格依赖) - [二、文件索引与关系](#二文件索引与关系) - [补充文件索引](#补充文件索引) - [三、课程对齐路径](#三课程对齐路径) - [四、formal methods层级定位（理论-模型-实践）](#四formal methods层级定位理论-模型-实践) - [五、本层定
-
+> **Summary**: L1 基础概念层. Core Rust concept with theoretical foundations and practical applications.
 > **受众**: [初学者]
 > **定位**：Rust 最核心的基础性概念，是所有进阶内容的**必要前提**。本层内容对齐 TRPL 第 3-10 章、Wikipedia 核心词条、Stanford/CMU 基础课程。
 > **Bloom 层级**: 记忆 → 理解

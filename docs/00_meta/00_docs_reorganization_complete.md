@@ -35,7 +35,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```
+```text
 docs/
 ├── 📄 核心文档 (12个)
 │   ├── 10_00_master_index.md                          # 文档总索引

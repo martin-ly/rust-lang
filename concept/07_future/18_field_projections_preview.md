@@ -1,7 +1,7 @@
 # Field Projections 预览：安全的字段级投影
 >
 > **EN**: Security Practices
-> **Summary**: - [Field Projections 预览：安全的字段级投影](#field-projections-预览安全的字段级投影) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 问题背景](#11-问题背景) - [1.2 Field Projections 提案](#12-field-projections-提案) - [二、技术细节](#二技术细节) - [2.1 投影types系统](#21-投影types系统) - [2.2 与 `Pin` 的协同](#22-与-pin-的协同) - [三、使用场景](#三使用场景) - [场景 1：MMIO 寄存器访问（嵌入式/
+> **Summary**: Security Practices. Core Rust concept covering mechanism analysis.
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

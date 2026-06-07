@@ -3,8 +3,7 @@
 # 类型擦除与动态分发
 >
 > **EN**: 类型擦除与动态分发 (Chinese)
-> **Summary**: - [types擦除与动态分发](#types擦除与动态分发) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 Trait Object](#11-trait-object) - [1.2 VTable](#12-vtable) - [1.3 对象安全](#13-对象安全) - [二、types擦除模式](#二types擦除模式) - [2.1 Box](#21-box) - [2.2 自定义types擦除](#22-自定义types擦除) - [三、性能权衡](#三性能权衡) - [3.1 静态 vs 动态分发](#31-静态-vs-动态分发) - [四、反命题与边界分析](#四反命题与边界分
-
+> **Summary**: 类型擦除与动态分发 (Chinese). Core Rust concept covering mechanism analysis.
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 应用
 > **定位**: 深入探讨 Rust 中的**类型擦除**技术——从 trait object 到 vtable，分析动态分发如何在保持类型安全的同时实现运行时多态。

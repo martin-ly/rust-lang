@@ -1,10 +1,8 @@
 # 实践项目 03: 表达式计算器
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **分级**: [A]
 > **Bloom 层级**: L3 (应用)
-
 > **难度**: ⭐ 入门级
 > **所需知识**: c01-c04
 > **预计时间**: 3-4小时
@@ -22,7 +20,6 @@
   - [学习要点](#学习要点)
     - [递归下降解析](#递归下降解析)
   - [参考实现](#参考实现)
-  - [完整参考实现位于: `examples/calculator/`](#完整参考实现位于-examplescalculator)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -76,6 +73,7 @@ fn eval(expr: &Expr) -> f64 {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 完整参考实现位于: `examples/calculator/`
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

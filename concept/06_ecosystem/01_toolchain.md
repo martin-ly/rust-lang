@@ -1,8 +1,7 @@
 # Toolchain（工具链与 Cargo）
 >
 > **EN**: Toolchain
-> **Summary**: **变更日志**: - v1.0 (2026-05-12): 初始版本 - v1.1 (2026-05-12): Wave 3 扩展——Wikipedia 定义、Clippy/优化矩阵、Cargo 深层机制、交叉编译、工具详解、LLVM IR - v1.2 (2026-05-26): 权威内容对齐：新增 §7.4 gccrs（GCC 前端替代实现，RustConf 2026 演讲已接受，目标编译 Linux 内核）和 §7.5 `rustc_codegen_gcc`（GCC 后端集成，已实现自举 Rust compiler） - [Toolchain（工具链与 Cargo）](#toolchain工具链
-
+> **Summary**: Toolchain. Core Rust concept with theoretical foundations and practical applications.
 > **受众**: [进阶]
 > **内容分级**: [综述级]
 >

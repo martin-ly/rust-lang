@@ -6,8 +6,7 @@
 # 字符串与文本：Rust 的 Unicode 处理与格式化系统
 >
 > **EN**: 字符串与文本：Rust 的 Unicode 处理与格式化系统 (Chinese)
-> **Summary**: - [字符串与文本：Rust 的 Unicode 处理与格式化系统](#字符串与文本rust-的-unicode-处理与格式化系统) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 String vs str：ownership谱系](#11-string-vs-strownership谱系) - [1.2 UTF-8：Rust 的编码选择](#12-utf-8rust-的编码选择) - [1.3 格式化系统的types安全](#13-格式化系统的types安全) - [二、技术细节](#二技术细节) - [2.1 字符串切片与索引](#21-字符串切片与索引) - [2.2 OS 字符串与路径
-
+> **Summary**: 字符串与文本：Rust 的 Unicode 处理与格式化系统 (Chinese). Core Rust concept covering mechanism analysis.
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[字符串与文本](../../knowledge/02_intermediate/05_strings.md)

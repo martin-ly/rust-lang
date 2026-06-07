@@ -3,8 +3,7 @@
 # 无锁编程与内存模型
 >
 > **EN**: Locking Primitives
-> **Summary**: - [无锁编程与memory模型](#无锁编程与memory模型) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 无锁 vs 无等待](#11-无锁-vs-无等待) - [1.2 ABA 问题](#12-aba-问题) - [1.3 memory序选择](#13-memory序选择) - [二、关键数据结构](#二关键数据结构) - [2.1 Treiber Stack](#21-treiber-stack) - [2.2 Michael-Scott Queue](#22-michael-scott-queue) - [2.3 Hazard Pointer](#23-hazard-poin
-
+> **Summary**: Locking Primitives. Core Rust concept covering mechanism analysis.
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 深入探讨 Rust 中的**无锁编程**——从原子操作到内存序，分析 lock-free 算法的内存安全保证与性能优势。

@@ -5,7 +5,7 @@
 # Game Engine Internals（游戏引擎内部原理）
 >
 > **EN**: Game Engine Internals（游戏引擎内部原理） (Chinese)
-> **Summary**: - [Game Engine Internals（游戏引擎内部原理）](#game-engine-internals游戏引擎内部原理) - [📑 目录](#-目录) - [一、权威定义（Definition）](#一权威定义definition) - [1.1 游戏引擎的定义与边界](#11-游戏引擎的定义与边界) - [1.2 游戏引擎核心子系统](#12-游戏引擎核心子系统) - [二、概念属性矩阵](#二概念属性矩阵) - [三、引擎架构模式](#三引擎架构模式) - [3.1 主循环与更新阶段](#31-主循环与更新阶段) - [3.2 子系统管理](#32-子系统管理) - [3.3
+> **Summary**: Game Engine Internals. Core Rust concept with theoretical foundations and practical applications.
 >
 > **受众**: [进阶]
 

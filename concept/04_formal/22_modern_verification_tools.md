@@ -3,8 +3,7 @@
 # 现代 Rust 验证工具生态（2025-2026）
 >
 > **EN**: 现代 Rust 验证工具生态（2025-2026） (Chinese)
-> **Summary**: - [现代 Rust 验证工具生态（2025-2026）](#现代-rust-验证工具生态2025-2026) - [目录](#目录) - [AutoVerus：LLM 辅助自动证明合成](#autoverusllm-辅助自动证明合成) - [核心思想](#核心思想) - [能力边界](#能力边界) - [概念示例（伪代码）](#概念示例伪代码) - [Kani 0.65+：循环契约与 Autoharness](#kani-065循环契约与-autoharness) - [新特性 1：循环契约](#新特性-1循环契约) - [新特性 2：Autoharness](#新特性-2autoharne
-
+> **Summary**: 现代 Rust 验证工具生态. Core Rust concept covering formal methods foundations, mental model building.
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >
 > **受众**: [研究者]

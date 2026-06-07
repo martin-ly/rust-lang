@@ -1,10 +1,8 @@
 # 实践项目 07: 聊天服务器
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **分级**: [A]
 > **Bloom 层级**: L3 (应用)
-
 > **难度**: ⭐⭐ 进阶级
 > **所需知识**: c05-c06, c10
 > **预计时间**: 5-7小时
@@ -22,7 +20,6 @@
   - [学习要点](#学习要点)
     - [TCP服务器](#tcp服务器)
   - [参考实现](#参考实现)
-  - [完整参考实现位于: `examples/chat-server/`](#完整参考实现位于-exampleschat-server)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -75,6 +72,7 @@ async fn run_server() -> tokio::io::Result<()> {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 完整参考实现位于: `examples/chat-server/`
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

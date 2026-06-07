@@ -1,10 +1,8 @@
 # Miri 使用指南：检测 Rust 未定义行为（UB）
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/应用)
-
 > **工具**: Miri（Rust 的解释型 UB 检测器）
 > **适用版本**: Rust nightly（`rustup component add miri`）
 > **权威来源**: [rustc-dev-guide Miri 章节](https://rustc-dev-guide.rust-lang.org/miri.html) | [Miri README](https://github.com/rust-lang/miri)

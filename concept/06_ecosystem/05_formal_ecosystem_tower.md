@@ -1,8 +1,7 @@
 # Formal Ecosystem Tower（Rust 生态形式化分层塔）
 >
 > **EN**: Formal Methods
-> **Summary**: **变更日志**: - v1.0 (2026-05-13): 初始版本——从归档文件 `02.md` 结构化重组，纳入 L6 生态层规范体系 - v1.1 (2026-05-13): 补充层级标记、来源标注、知识来源关系、待补充方向 工程选型不仅看功能和性能，还要看**组合性**（能否与其他组件代数组合）和**可验证性**（能否超越compiler保证功能正确）。 Rust 生态从 L0 compiler安全到 L4 功能正确性证明，形成了清晰的层级。理解这个层级，才能做出符合项目可靠性需求的选型。 工业采用度 ≠ formal methods深度。某些库虽 stars 不高，但在可组合性或可验证性维度上处于生态顶端。 不是选"最好的
-
+> **Summary**: Formal Methods. Core Rust concept with theoretical foundations and practical applications.
 > **受众**: [进阶]
 > **内容分级**: [专家级]
 > **层级**: L6 生态工程

@@ -5,7 +5,7 @@
 # Workflow Theory & Formalization（工作流理论与形式化）
 >
 > **EN**: Formal Methods
-> **Summary**: - [Workflow Theory \& Formalization（工作流理论与formal methods）](#workflow-theory--formalization工作流理论与formal methods) - [📑 目录](#-目录) - [一、权威定义（Definition）](#一权威定义definition) - [1.1 工作流管理联盟（WfMC）定义](#11-工作流管理联盟wfmc定义) - [1.2 工作流模型分类](#12-工作流模型分类) - [1.3 BPMN 与formal methods语义](#13-bpmn-与formal methods语义) - [二、概念属性矩阵](#二概念属性矩阵) - [三、formal methods表示](#三formal methods表示) -
+> **Summary**: Formal Methods. Core Rust concept with theoretical foundations and practical applications.
 >
 > **受众**: [进阶]
 

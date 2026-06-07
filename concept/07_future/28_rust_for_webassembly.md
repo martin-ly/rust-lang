@@ -1,7 +1,7 @@
 # Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈
 >
 > **EN**: WebAssembly
-> **Summary**: **变更日志**: - v1.0 (2026-05-22): 初始版本——覆盖 wasm-bindgen/wasm-pack 工具链、Yew/Leptos 框架对比、Wasm memory模型、JS 互操作性能分析、选型决策树、Mermaid 架构图 - [Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈](#rust-for-webassembly从-wasm-bindgen-到前端框架的深度技术栈) - [📑 目录](#-目录) - [一、权威定义与核心概念](#一权威定义与核心概念) - [1.1 Rust → Wasm 的编译模型](#11-rus
+> **Summary**: WebAssembly. Core Rust concept covering mental model building, mechanism analysis.
 >
 > **受众**: [专家]
 > **内容分级**: [综述级]

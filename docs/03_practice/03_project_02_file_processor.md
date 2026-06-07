@@ -1,10 +1,8 @@
 # 实践项目 02: 文件处理器
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **分级**: [A]
 > **Bloom 层级**: L3 (应用)
-
 > **难度**: ⭐ 入门级
 > **所需知识**: c01-c03
 > **预计时间**: 2-3小时
@@ -72,6 +70,7 @@ fn list_files(dir: &str) -> std::io::Result<Vec<String>> {
 ## 参考实现
 
 完整参考实现位于: `examples/file-processor/`
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

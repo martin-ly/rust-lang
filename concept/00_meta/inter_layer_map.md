@@ -1,7 +1,7 @@
 # 跨层知识图谱（Inter-Layer Dependency Map）
 >
 > **EN**: 跨层知识图谱（Inter-Layer Dependency Map） (Chinese)
-> **Summary**: - [跨层知识图谱（Inter-Layer Dependency Map）](#跨层知识图谱inter-layer-dependency-map) - [📑 目录](#-目录) - [一、全局层级依赖图](#一全局层级依赖图) - [1.1 层间定理传递链可视化](#11-层间定理传递链可视化) - [二、语义链接types定义](#二语义链接types定义) - [三、层间映射矩阵](#三层间映射矩阵) - [3.1 L1-L4 formal methods映射（核心）](#31-l1-l4-formal methods映射核心) - [3.2 L4-L3-L2 定理传递链](#32-l4-l3-l2-定理传递链) - [3.3 反向依赖（上层需
+> **Summary**: 跨层知识图谱. Core Rust concept with theoretical foundations and practical applications.
 >
 > **受众**: [进阶]
 >

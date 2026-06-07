@@ -3,8 +3,7 @@
 # 并发 模式：从消息 传递到锁自由的数据结构
 >
 > **EN**: Concurrency
-> **Summary**: - [concurrency 模式：从消息 传递到锁自由的数据结构](#concurrency-模式从消息-传递到锁自由的数据结构) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 ownership与concurrency的统一](#11-ownership与concurrency的统一) - [1.2 Send 与 Sync：编译期concurrency安全](#12-send-与-sync编译期concurrency安全) - [1.3 共享状态 vs 消息传递](#13-共享状态-vs-消息传递) - [二、技术细节](#二技术细节) - [2.1 通道模式](#21-通道模式) - [2.2 无锁数据结构](#22-无锁数据结构) - [2.3 memory顺序](#23-memory顺序) -
-
+> **Summary**: Concurrency. Core Rust concept covering mental model building, mechanism analysis.
 > **受众**: [专家]
 >
 > **Bloom 层级**: 分析 → 评价

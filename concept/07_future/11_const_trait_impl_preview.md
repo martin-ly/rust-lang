@@ -1,7 +1,7 @@
 # Const Trait Impl 预研：常量上下文中的 Trait 泛化
 >
 > **EN**: Traits
-> **Summary**: - [Const Trait Impl 预研：常量上下文中的 Trait 泛化](#const-trait-impl-预研常量上下文中的-trait-泛化) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 问题：常量上下文中的 Trait 鸿沟](#11-问题常量上下文中的-trait-鸿沟) - [1.2 `const impl` 方案概览](#12-const-impl-方案概览) - [1.3 `~const` 限定与效果系统](#13-const-限定与效果系统) - [二、技术细节](#二技术细节) - [2.1 常量 Trait 的约束继承](#2
+> **Summary**: Traits. Core Rust concept covering mechanism analysis.
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

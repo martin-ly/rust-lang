@@ -1,7 +1,7 @@
 # Rust 1.97 前沿特性预览
 >
 > **EN**: Rust 1.97 前沿特性预览 (Chinese)
-> **Summary**: **状态**: 🧪 Nightly 实验性，MCP 已通过 **核心问题**: 当前 Rust 中 `drop` 是同步的，无法 `await` async清理操作（如关闭网络连接、刷新文件缓冲区）。 **1.97 进展**: - `AsyncDrop` trait 设计已确定 - `async fn drop(&mut self)` 语法支持 - compiler已能生成async析构状态机 **影响**: 解决async资源释放的核心痛点，不再需要手动 `flush()`/`close()` 后丢弃。 **代码示例** (nightly): ```rust,ignore use std::async_drop::As
+> **Summary**: 1.97 前沿特性预览 (Chinese). Emerging Rust feature or ecosystem trend: 1.97 前沿特性预览 (Chinese).
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]
@@ -87,14 +87,40 @@ where
 
 ### 1.3 Pin Ergonomics / Safe Pin Projection
 
-**状态**: 📋 RFC 讨论阶段
+**状态**: 📋 RFC 讨论阶段，Project Goals 2026 明确目标
 
-**核心问题**: `Pin<&mut Self>` 的字段投影需要 `unsafe` 或 `pin-project` crate，学习曲线陡峭。
+**跟踪 Issue**: [rust-lang/rust#125153](https://github.com/rust-lang/rust/issues/125153)
+**Lang-team champion**: nrc
+
+**核心问题**: `Pin<&mut Self>` 的字段投影需要 `unsafe` 或 `pin-project` crate，学习曲线陡峭。自固定（self-referential）结构是异步运行时、无锁数据结构和内存映射 I/O 的核心抽象，但当前实现方式要求每个开发者理解 pinning contract。
+
+**当前痛点** (需要 `unsafe` 或外部 crate):
+
+```rust,ignore
+// 当前：需要 pin-project crate 或手动 unsafe
+use std::pin::Pin;
+
+struct MyFuture {
+    buf: Vec<u8>,
+    ptr: *const u8, // 指向 buf 内部
+}
+
+impl MyFuture {
+    // 手动 unsafe：开发者必须保证 ptr 始终指向 buf 内部
+    unsafe fn get_ptr(self: Pin<&mut Self>) -> &mut *const u8 {
+        let this = self.get_unchecked_mut();
+        &mut this.ptr
+    }
+}
+```
 
 **可能方向**:
 
-- 编译器自动生成安全的 pin projection
-- 或提供派生宏 `#[derive(PinProject)]` 进入标准库
+- **编译器派生**: `#[derive(PinProject)]` 进入标准库或 core，自动为 `!Unpin` 字段生成安全的投影
+- **Safe API**: `Pin::map_unchecked` 的 safe 变体，编译器验证投影路径的结构性固定
+- **Field projection 语法**: `pin.field` 直接获取 `Pin<&mut field>`，无需宏介入
+
+**Project Goals 2026 关联**: 被列为 "Better pin ergonomics" 子目标，属于异步 Rust 生态系统成熟度的关键路径。
 
 ---
 
@@ -125,6 +151,31 @@ enum CCompatibleEnum {
 **意义**: 改善 Rust 与 C FFI 的 enum 互操作性，是 Rust for Linux 等项目的长期需求之一。
 
 > **来源**: [rust-lang/rust#156628](https://github.com/rust-lang/rust/issues/156628) · [RFC 3894](https://rust-lang.github.io/rfcs/3894-unnamed-enum-variants.html) · 可信度: ✅
+
+---
+
+### 1.5 Reborrow Traits (`DerefPin`, `AsPinRef`)
+
+**状态**: 📋 早期设计讨论
+
+**核心问题**: 当前 `Pin<&mut T>` 无法通过 trait 边界优雅地重新借用为 `Pin<&mut U>`，导致泛型代码中固定语义传递困难。
+
+**场景示例**:
+
+```rust,ignore
+// 希望：通过 trait 约束实现 Pin 的隐式 reborrow
+fn process<P>(pin: Pin<&mut P>)
+where
+    P: DerefPin<Target = Buffer>, // 假设的 trait
+{
+    // pin 自动 reborrow 为 Pin<&mut Buffer>
+    pin.fill(0);
+}
+```
+
+**关联**: Pin Ergonomics 的底层基础设施之一。若 Pin projection 进入标准库，reborrow trait 将提供泛型层面的语义支撑。
+
+**资源**: [rust-lang/rust#125153](https://github.com/rust-lang/rust/issues/125153) (Pin ergonomics umbrella issue)
 
 ---
 
@@ -224,6 +275,48 @@ cargo +nightly build -Zbuild-std=core,alloc,std --target x86_64-unknown-linux-gn
 **核心能力**: 基于有界模型检查的 Rust 标准库验证，已加入标准库验证 CI。
 
 **资源**: [rustfoundation.org/media/expanding-the-rust-formal-verification-ecosystem-welcoming-esbmc](https://rustfoundation.org/media/expanding-the-rust-formal-verification-ecosystem-welcoming-esbmc)
+
+---
+
+### 3.4 BorrowSanitizer (BSan)
+
+**状态**: 🧪 Nightly 实验性
+
+**跟踪 Issue**: [rust-lang/rust#126567](https://github.com/rust-lang/rust/issues/126567)
+**Feature gate**: `-Zsanitizer=borrow`
+**核心作者**: Gankra (Aria Beingessner)
+
+**核心能力**: 动态检测 stacked borrows / tree borrows 违规，是 Miri 的"生产环境"版本。与 Miri 相比：
+
+| 维度 | Miri | BorrowSanitizer |
+|:---|:---|:---|
+| 运行方式 | 解释执行 | 编译期插桩，原生速度 |
+| 性能开销 | 100-1000x | 2-5x |
+| 适用场景 | 测试/CI | 生产环境压力测试 |
+| 覆盖规则 | Tree Borrows (可配置) | Tree Borrows |
+| 内存模型验证 | 完整 | 别名规则子集 |
+
+**使用** (nightly):
+
+```bash
+RUSTFLAGS="-Zsanitizer=borrow" cargo +nightly test
+```
+
+**意义**: 使 Tree Borrows 规则从理论验证工具走向工程实践，可在大型代码库中检测 `unsafe` 代码的别名违规。与 Kani (静态) 形成互补：BSan 动态发现实际执行路径上的违规，Kani 穷举所有可能路径。
+
+**深度文档**: [04_formal/22_modern_verification_tools.md](../04_formal/22_modern_verification_tools.md)
+
+---
+
+### 3.5 Safety Tags (RFC #3842)
+
+**状态**: 📋 RFC 草案阶段
+
+**核心能力**: 将 `# Safety` 注释提升为机器可读的安全契约，作为形式化验证工具与 Rust 编译器之间的桥梁。
+
+**与 BSan/Kani 的关系**: Safety Tags 提供安全规约的标准化语法，BSan/Kani 可据此生成验证目标。三者共同构成 "注释 → 检查 → 证明" 的验证流水线。
+
+**深度文档**: [04_formal/22_modern_verification_tools.md](../04_formal/22_modern_verification_tools.md)
 
 ---
 
@@ -334,9 +427,12 @@ async gen fn counter_stream(max: usize) -> impl Stream<Item = usize> {
 | :--- | :--- | :--- |
 | Async Drop | c06_async 需要新增示例 | 跟踪 nightly 进展，稳定后补充 |
 | RTN | c02_type_system trait 章节需更新 | 1.97 stable 后补充 |
+| Pin Ergonomics | c06_async / c04_generic 需更新 | 跟踪 RFC 进展 |
+| Reborrow Traits | c04_generic 需更新 | 与 Pin Ergonomics 同步 |
 | 并行前端 | docs/ 编译器基础设施需覆盖 | Phase 4 执行 |
 | Cranelift | docs/ 编译器基础设施需覆盖 | Phase 4 执行 |
 | build-std | c13_embedded 需补充示例 | Phase 4 执行 |
+| BorrowSanitizer | c07_process / 04_formal 需覆盖 | 跟踪 nightly 进展，与 Miri/Tree Borrows 文档对齐 |
 | AutoVerus | L4/L7 形式化工具需覆盖 | Phase 3 执行 |
 | ESBMC | L4/L7 形式化工具需覆盖 | Phase 3 执行 |
 
@@ -355,7 +451,7 @@ async gen fn counter_stream(max: usize) -> impl Stream<Item = usize> {
 
 ---
 
-> **最后更新**: 2026-06-06
+> **最后更新**: 2026-06-08
 > **维护者**: 本项目知识库团队
 > **状态**: 🧪 活跃跟踪中，每 2 周更新一次
 > **过渡**: Rust 1.97 前沿特性预览 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

@@ -5,7 +5,7 @@
 # 迭代器模式：Rust 的惰性计算与零成本抽象
 >
 > **EN**: Iterators
-> **Summary**: - [迭代器模式：Rust 的惰性计算与零成本抽象](#迭代器模式rust-的惰性计算与零成本抽象) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 Iterator Trait 的设计](#11-iterator-trait-的设计) - [1.2 惰性计算链](#12-惰性计算链) - [1.3 消费者与适配器](#13-消费者与适配器) - [二、技术细节](#二技术细节) - [2.1 自定义迭代器](#21-自定义迭代器) - [2.2 迭代器优化](#22-迭代器优化) - [2.3 IntoIterator 与 for 循环](#23-intoi
+> **Summary**: Iterators. Core Rust concept covering mechanism analysis.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析

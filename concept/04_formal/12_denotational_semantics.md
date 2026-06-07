@@ -3,8 +3,7 @@
 # 指称语义与领域理论
 >
 > **EN**: 指称语义与领域理论 (Chinese)
-> **Summary**: - [指称语义与领域理论](#指称语义与领域理论) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 指称语义原理](#11-指称语义原理) - [1.2 完备偏序（CPO）](#12-完备偏序cpo) - [1.3 不动点定理](#13-不动点定理) - [二、Rust 的指称解释](#二rust-的指称解释) - [2.1 types即域](#21-types即域) - [十、边界测试：指称语义的编译错误](#十边界测试指称语义的编译错误) - [10.1 边界测试：非终止计算与 `loop {}` 的types（编译错误）](#101-边界测试非终止计算与-loop--的类
-
+> **Summary**: 指称语义与领域理论 (Chinese). Core Rust concept covering mechanism analysis.
 > **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >

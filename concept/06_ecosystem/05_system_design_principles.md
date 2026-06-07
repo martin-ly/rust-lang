@@ -1,8 +1,7 @@
 # Rust 系统设计原则与国际权威对齐
 >
 > **EN**: Rust 系统设计原则与国际权威对齐 (Chinese)
-> **Summary**: **变更日志**: - v1.0 (2026-05-21): 初始版本——七项设计原则 + 国际权威对齐 + 帕累托前沿决策矩阵 + 五层formal methods扩展 - [Rust 系统设计原则与国际权威对齐](#rust-系统设计原则与国际权威对齐) - [📑 目录](#-目录) - [零、TL;DR —— 系统设计原则速查](#零tldr--系统设计原则速查) - [一、权威来源与设计原则分类学](#一权威来源与设计原则分类学) - [二、七项核心设计原则](#二七项核心设计原则) - [2.1 memory安全：Capability-Based Security](#21-memory安全capability-base
-
+> **Summary**: Rust 系统设计原则与国际权威对齐 (Chinese). Core Rust concept covering formal methods foundations.
 > **受众**: [进阶]
 > **内容分级**: [专家级]
 > **定位**: 本文件从**系统架构设计**视角梳理 Rust 的核心设计原则，并与国际权威内容（形式化方法、分布式系统理论、安全工程、容错计算）建立对齐关系。

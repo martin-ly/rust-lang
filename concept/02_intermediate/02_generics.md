@@ -5,8 +5,7 @@
 # Generics（泛型系统）
 >
 > **EN**: Generics
-> **Summary**: **变更日志**: - v2.5 (2026-05-14): 深化 min_specialization（default impl 交互、&str/String 优化用例）、 generics编译时间优化（cargo bloat、thin LTO、单态化膨胀成因）、 Type-level Programming（typenum UInt/UTerm、与 Const Generics 对比、历史背景）； 更新 TODO 列表 - v2.4 (2026-05-14): 补充 Const Generics 进阶用法——表达式与 generic_const_exprs、where 约束深度分析、与 GATs 交互
-
+> **Summary**: Generics. Parametric polymorphism in Rust enabling type-safe, reusable code across types. Covers generic functions, structs, trait bounds, and monomorphization trade-offs.
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[泛型](../../knowledge/02_intermediate/03_generics.md)
