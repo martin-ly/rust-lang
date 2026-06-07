@@ -1,6 +1,7 @@
 > **内容分级**: [专家级]
 
 # Axiomatic Semantics（公理语义）
+>
 > **EN**: Axiomatic Semantics（公理语义） (Chinese)
 > **Summary**: - [Axiomatic Semantics（公理语义）](#axiomatic-semantics公理语义) - [📑 目录](#-目录) - [一、权威定义（Definition）](#一权威定义definition) - [1.1 Hoare 逻辑与霍尔三元组](#11-hoare-逻辑与霍尔三元组) - [1.2 最弱前置条件（Weakest Precondition）](#12-最弱前置条件weakest-precondition) - [1.3 最强后置条件（Strongest Postcondition）](#13-最强后置条件strongest-postcondition) -
 

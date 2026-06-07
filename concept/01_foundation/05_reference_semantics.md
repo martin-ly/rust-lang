@@ -3,6 +3,7 @@
 > **本节关键术语**: 引用 (Reference) · 借用 (Borrowing) · 解引用 (Dereferencing) · 自动解引用 (Auto Deref) · 强制转换 (Coercion) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 引用语义：自动解引用、Deref 强制与类型转换
+>
 > **EN**: 引用语义：自动解引用、Deref 强制与类型转换 (Chinese)
 > **Summary**: - [引用语义：自动解引用、Deref 强制与types转换](#引用语义自动解引用deref-强制与types转换) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 引用的多重含义](#11-引用的多重含义) - [1.2 自动解引用机制](#12-自动解引用机制) - [1.3 Deref 强制](#13-deref-强制) - [二、技术细节](#二技术细节) - [2.1 方法调用的自动引用](#21-方法调用的自动引用) - [2.2 types强制规则](#22-types强制规则) - [2.3 与borrowing检查的交互](#23-与borrowing检查的交互) - [三、使用模式](#三
 

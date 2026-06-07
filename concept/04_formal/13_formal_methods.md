@@ -1,6 +1,7 @@
 > **内容分级**: [专家级]
 
 # 形式化方法在 Rust 中的应用
+>
 > **EN**: Formal Methods
 > **Summary**: - [formal methods方法在 Rust 中的应用](#formal methods方法在-rust-中的应用) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 formal methods验证层次](#11-formal methods验证层次) - [1.2 验证方法分类](#12-验证方法分类) - [二、关键工具](#二关键工具) - [2.1 Kani — 模型检查](#21-kani--模型检查) - [2.2 Creusot — 演绎验证](#22-creusot--演绎验证) - [2.3 Miri — 未定义行为检测](#23-miri--未定义行为检测) - [三、应用模式](#三应用模式) - [3.1 安全边界验
 >

@@ -46,6 +46,7 @@ rustflags = ["-C", "link-arg=-Tsrc/linker.ld"]
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # 操作系统与内核：Rust 的系统级编程
+>
 > **EN**: Operating Systems
 > **Summary**: 以下展示一个极简的裸机 Rust 内核启动框架（基于 `riscv64`）： ```rust,ignore use core::panic::PanicInfo; // 内核入口点 pub extern "C" fn _start() -> ! { // 初始化 UART 串口输出 unsafe { let uart = 0x1000_0000 as *mut u8; for b in b"Hello from Rust kernel! " { uart.write_volatile(*b); } } loop {} } fn panic(_info: &PanicInfo) -> ! { l
 >

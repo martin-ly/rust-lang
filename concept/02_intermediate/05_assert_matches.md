@@ -3,8 +3,9 @@
 > **本节关键术语**: assert_matches! · 模式匹配断言 (Pattern Match Assertion) · debug_assert_matches! · 测试断言 (Test Assertion) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # `assert_matches!`：模式匹配断言的形式化语义
+>
 > **EN**: Formal Methods
-> **Summary**: - [`assert_matches!`：模式匹配断言的formal methods语义](#assert_matches模式匹配断言的formal methods语义) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 `matches!`：模式匹配的布尔化](#11-matches模式匹配的布尔化) - [1.2 `assert_matches!`：从判断到断言](#12-assert_matches从判断到断言) - [1.3 `debug_assert_matches!`：编译期条件断言](#13-debug_assert_matches编译期条件断言) - [二、formal methods语义](#二formal methods语义) 
+> **Summary**: - [`assert_matches!`：模式匹配断言的formal methods语义](#assert_matches模式匹配断言的formal methods语义) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 `matches!`：模式匹配的布尔化](#11-matches模式匹配的布尔化) - [1.2 `assert_matches!`：从判断到断言](#12-assert_matches从判断到断言) - [1.3 `debug_assert_matches!`：编译期条件断言](#13-debug_assert_matches编译期条件断言) - [二、formal methods语义](#二formal methods语义)
 
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析

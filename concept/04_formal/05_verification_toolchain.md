@@ -1,6 +1,7 @@
 > **内容分级**: [专家级]
 
 # Verification Toolchain Selection Guide（验证工具链选择指南）
+>
 > **EN**: Toolchain
 > **Summary**: **变更日志**: - v1.2 (2026-05-26): 补充 VerusBelt (PLDI 2026 Distinguished Paper)、Miri POPL 2026 论文、Miri 深度原理章节（7.3）、验证工具对比矩阵扩展 Miri 列 [来源: Web Authority Alignment Sprint] - v1.3 (2026-05-26): 权威内容对齐 R22：补充 Rusted Types (ICSE 2026) — Rust types混淆漏洞静态检测 [来源: ICSE 2026] - v1.3 (2026-05-26): 权威内容对齐：补充 Ravenchec
 

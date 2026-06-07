@@ -1,6 +1,7 @@
 > **内容分级**: [专家级]
 
 # Async/Await（异步编程）
+>
 > **EN**: Async Programming
 > **Summary**: **变更日志**: - v4.2 (2026-05-13): Phase B 验证实践——新增§8.13 Miri 动态验证场景（悬垂指针检测、无效 bool 检测、async 状态机未初始化memory检测，含实际 Miri 输出截图） - v4.1 (2026-05-13): Phase B formal methods深化——新增§3.1b 状态机操作语义（小步语义、poll 状态转移函数、.await CPS 变换、Pin 约束在操作语义中的体现）；新增§3.2b Pin LTL formal methods（不动性公理 A1-A3、Unpin 豁免、poll 递归调用链验证、与§3.1b 操作语义衔接） - v4.0 (2026-05
 

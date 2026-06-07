@@ -1,4 +1,5 @@
 # 派生 CoercePointee 预研：智能指针的自动类型强制
+>
 > **EN**: Smart Pointers
 > **Summary**: - [派生 CoercePointee 预研：智能指针的自动types强制](#派生-coercepointee-预研智能指针的自动types强制) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 问题：自定义智能指针的样板代码](#11-问题自定义智能指针的样板代码) - [1.2 CoerceUnsized 与 DispatchFromDyn](#12-coerceunsized-与-dispatchfromdyn) - [1.3 `#[derive(CoercePointee)]` 方案](#13-derivecoercepointee-方案) - [二、技术细节]
 >

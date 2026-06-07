@@ -3,6 +3,7 @@
 > **本节关键术语**: 写时复制 (Copy-on-Write) · Cow · 借用数据 (Borrowed Data) · 克隆 (Clone) · ToOwned — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # Cow：写时克隆与零拷贝抽象
+>
 > **EN**: Cow：写时克隆与零拷贝抽象 (Chinese)
 > **Summary**: - [Cow：写时克隆与零拷贝抽象](#cow写时克隆与零拷贝抽象) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 问题：borrowing与拥有的选择困境](#11-问题borrowing与拥有的选择困境) - [1.2 Cow 的设计：延迟克隆](#12-cow-的设计延迟克隆) - [1.3 两种变体：Borrowed vs Owned](#13-两种变体borrowed-vs-owned) - [二、技术细节](#二技术细节) - [2.1 Cow 的核心操作](#21-cow-的核心操作) - [2.2 常见使用模式](#22-常见使用模式) - [2.3 与 AsRef/T
 

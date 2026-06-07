@@ -4,6 +4,7 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Security & Cryptography（安全与密码学）
+>
 > **EN**: Security Practices
 > **Summary**: - [Security \& Cryptography（安全与密码学）](#security--cryptography安全与密码学) - [📑 目录](#-目录) - [一、权威定义（Definition）](#一权威定义definition) - [1.1 Kerckhoffs 原则](#11-kerckhoffs-原则) - [1.2 密码学原语分类](#12-密码学原语分类) - [1.3 威胁模型](#13-威胁模型) - [二、概念属性矩阵](#二概念属性矩阵) - [三、对称加密](#三对称加密) - [3.1 AES-GCM](#31-aes-gcm) - [3.2 ChaCh
 >

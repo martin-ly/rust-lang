@@ -1,6 +1,7 @@
 > **内容分级**: [专家级]
 
 # 自定义分配器与内存布局优化
+>
 > **EN**: 自定义分配器与内存布局优化 (Chinese)
 > **Summary**: - [自定义分配器与memory布局优化](#自定义分配器与memory布局优化) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 GlobalAlloc Trait](#11-globalalloc-trait) - [1.2 分配器属性](#12-分配器属性) - [二、实践模式](#二实践模式) - [2.1 bumpalo — Bump 分配器](#21-bumpalo--bump-分配器) - [2.2 jemalloc / mimalloc](#22-jemalloc--mimalloc) - [2.3 arena 分配器](#23-arena-分配器) - [三
 

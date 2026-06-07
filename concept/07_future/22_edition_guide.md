@@ -1,4 +1,5 @@
 # Edition 2024 完全指南：新特性与迁移策略
+>
 > **EN**: Edition 2024 完全指南：新特性与迁移策略 (Chinese)
 > **Summary**: - [Edition 2024 完全指南：新特性与迁移策略](#edition-2024-完全指南新特性与迁移策略) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 Edition 机制回顾](#11-edition-机制回顾) - [1.2 Edition 2024 主要特性](#12-edition-2024-主要特性) - [1.3 迁移策略](#13-迁移策略) - [二、技术细节](#二技术细节) - [2.1 Gen Blocks](#21-gen-blocks) - [2.2 Async Closures](#22-async-closures)
 >

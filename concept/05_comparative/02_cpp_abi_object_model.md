@@ -3,6 +3,7 @@
 >
 
 # Rust vs C++：ABI、对象模型与内存布局
+>
 > **EN**: Rust vs C++：ABI、对象模型与内存布局 (Chinese)
 > **Summary**: ABI 定义了程序在二进制层面的交互规则： - **调用约定**: 参数如何传递（寄存器/栈）、返回值如何处理 - **types布局**: 结构体/枚举在memory中的表示（大小、对齐、padding） - **名称修饰**: compiler如何编码函数签名到符号名 - **虚表结构**: 动态分发的实现机制 - **异常处理**: 栈展开（stack unwinding）的元数据格式 C++ **没有标准 ABI**。不同compiler（GCC、Clang、MSVC）、不同版本、不同平台使用不同的 ABI： | compiler/平台 | ABI 名称 | 特征 | | :--- | :--- | :--- | | GCC /
 

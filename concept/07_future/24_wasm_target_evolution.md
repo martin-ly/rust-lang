@@ -1,6 +1,7 @@
 # WASM Target Evolution Preview
+>
 > **EN**: WASM Target Evolution Preview (Chinese)
-> **Summary**: ```rust,ignore // WASI 程序需要显式 capability use std::fs; fn main() { // ❌ 运行时拒绝: WASI 默认无文件系统访问权限 // 需运行时用 --dir 参数授予目录权限 let contents = fs::read_to_string("/etc/passwd").unwrap(); println!("{}", contents); } ``` | 定理 | 前提 | 结论 | 置信度 | |:---|:---|:---|:---| | WASM Target Evolution Preview 基础原理 ⟹ 正确选型 |
+> **Summary**: ```rust,ignore // WASI 程序需要显式 capability use std::fs; fn main() { // ❌ 运行时拒绝: WASI 默认无文件系统访问权限 // 需运行时用 --dir 参数授予目录权限 let contents = fs::read_to_string("/etc/passwd").unwrap(); println!("{}", contents); }``` | 定理 | 前提 | 结论 | 置信度 | |:---|:---|:---|:---| | WASM Target Evolution Preview 基础原理 ⟹ 正确选型 |
 
 >
 > **受众**: [专家]

@@ -341,11 +341,7 @@ mod property_tests {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Formal Methods]**
-
 > **[来源: Coq Reference Manual]**
-
 > **[来源: TLA+ Documentation]**
-
 > **[来源: ACM - Formal Verification]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**

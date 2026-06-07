@@ -2,7 +2,6 @@
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -172,9 +171,6 @@ fn render<T: Drawable>(item: T) {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Formal Methods]**
-
 > **[来源: Coq Reference]**
-
 > **[来源: TLA+]**
-
 > **[来源: ACM - Formal Verification]**

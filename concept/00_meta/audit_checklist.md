@@ -1,4 +1,5 @@
 # 概念一致性检查清单（Concept Consistency Audit Checklist）
+>
 > **EN**: 概念一致性检查清单（Concept Consistency Audit Checklist） (Chinese)
 > **Summary**: - [概念一致性检查清单（Concept Consistency Audit Checklist）](#概念一致性检查清单concept-consistency-audit-checklist) - [📑 目录](#-目录) - [〇、质量门禁流程](#〇质量门禁流程) - [一、关系清晰度检查（Inter-File Consistency） \[来源: 跨文件一致性审计方法论 — 确保概念定义在不同层级文件中保持逻辑等价; 参照 IEEE 1012 验证标准\]](#一关系清晰度检查inter-file-consistency-来源-跨文件一致性审计方法论--确保概念定义在不同层级文件中保持
 

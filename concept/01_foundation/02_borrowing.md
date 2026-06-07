@@ -3,6 +3,7 @@
 > **本节关键术语**: 借用 (Borrowing) · 引用 (Reference) · 可变引用 (&mut T) · 不可变引用 (&T) · 悬垂引用 (Dangling Reference) — [完整对照表](../00_meta/terminology_glossary.md)
 
 # Borrowing（借用）
+>
 > **EN**: Borrowing
 > **Summary**: **变更日志**: - v1.0 (2026-05-12): 初始版本，完成权威定义、borrowing规则矩阵、formal methods视角、思维导图、示例反例 - [Borrowing（borrowing）](#borrowingborrowing) - [📑 目录](#-目录) - [一、权威定义（Definition）](#一权威定义definition) - [1.1 TRPL 官方定义](#11-trpl-官方定义) - [1.2 Wikipedia 对齐定义](#12-wikipedia-对齐定义) - [1.3 formal methods视角](#13-formal methods视角) - [二、概念属性矩阵（Attribute Matrix）](#二概念属性矩阵attrib
 

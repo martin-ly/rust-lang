@@ -1,4 +1,5 @@
 # Formal Methods Industrialization（形式化方法工业化）
+>
 > **EN**: Formal Methods
 > **Summary**: **变更日志**: - v1.0 (2026-05-12): 初始版本 - v1.1 (2026-05-12): Wave 3 扩展——补充定义、五层模型、工具对比、CI/CD、工业案例、分布式验证 - v1.2 (2026-05-13): 深度重构——新增"从types系统到定理证明的光谱"、新增"types即证明"系统论述、增强工具链决策树、补全 L3 Unsafe 映射 - v1.3 (2026-05-22): 网络权威内容对齐 Batch 9：补充 KVerus、AutoVerus、Vest、Rustlantis 等 2025–2026 新兴工具到定理一致性矩阵；添加与 concept/04_fo
 >

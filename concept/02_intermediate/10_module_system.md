@@ -2,6 +2,7 @@
 > **本节关键术语**: 模块系统 (Module System) · 工作空间 (Workspace) · 包 (Package) · Crate · 可见性 (Visibility) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 模块系统：Rust 的代码组织与可见性规则
+>
 > **EN**: Modules
 > **Summary**: - [模块系统：Rust 的代码组织与可见性规则](#模块系统rust-的代码组织与可见性规则) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 Crate、Module、Package 的三层结构](#11-cratemodulepackage-的三层结构) - [1.2 文件系统映射](#12-文件系统映射) - [1.3 可见性规则](#13-可见性规则) - [二、技术细节](#二技术细节) - [2.1 use 声明与路径解析](#21-use-声明与路径解析) - [2.2 Edition 2018 路径规则变更](#22-edition-2018
 

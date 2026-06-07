@@ -3,6 +3,7 @@
 > **本节关键术语**: 泛型 (Generics) · 类型参数 (Type Parameter) · 约束 (Bound) · where 子句 · 单态化 (Monomorphization) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # Generics（泛型系统）
+>
 > **EN**: Generics
 > **Summary**: **变更日志**: - v2.5 (2026-05-14): 深化 min_specialization（default impl 交互、&str/String 优化用例）、 generics编译时间优化（cargo bloat、thin LTO、单态化膨胀成因）、 Type-level Programming（typenum UInt/UTerm、与 Const Generics 对比、历史背景）； 更新 TODO 列表 - v2.4 (2026-05-14): 补充 Const Generics 进阶用法——表达式与 generic_const_exprs、where 约束深度分析、与 GATs 交互
 

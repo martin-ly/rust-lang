@@ -1,4 +1,5 @@
 # Rust 知识体系 A/S/P 三维认知标记规范
+>
 > **EN**: Rust 知识体系 A/S/P 三维认知标记规范 (Chinese)
 > **Summary**: - [Rust 知识体系 A/S/P 三维认知标记规范](#rust-知识体系-asp-三维认知标记规范) - [📑 目录](#-目录) - [〇、A/S/P 认知全景](#〇asp-认知全景) - [一、标记定义与理论根基](#一标记定义与理论根基) - [1.1 A — Application（应用）](#11-a--application应用) - [1.2 S — Structure（结构）](#12-s--structure结构) - [1.3 P — Procedure（程序）](#13-p--procedure程序) - [1.4 三标记与 Bloom/Krathwohl 的映射
 

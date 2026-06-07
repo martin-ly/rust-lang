@@ -4,6 +4,7 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # 微服务架构模式 (Microservice Architecture Patterns)
+>
 > **EN**: 微服务架构模式 (Microservice Architecture Patterns) (Chinese)
 > **Summary**: - [微服务架构模式 (Microservice Architecture Patterns)](#微服务架构模式-microservice-architecture-patterns) - [📑 目录](#-目录) - [一、引言](#一引言) - [二、服务发现与注册](#二服务发现与注册) - [2.1 Consul / etcd 客户端集成](#21-consul--etcd-客户端集成) - [2.2 Tower::discover 动态服务列表](#22-towerdiscover-动态服务列表) - [三、API 网关模式](#三api-网关模式) - [四、熔断器](#四熔断器
 >

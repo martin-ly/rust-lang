@@ -43,6 +43,7 @@ fn main() {
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Rust for Data Science（Rust 数据科学）
+>
 > **EN**: Rust for Data Science（Rust 数据科学） (Chinese)
 > **Summary**: 以下演示 Rust 数据科学核心库 `ndarray` 的典型用法： ```rust use ndarray::{Array2, Axis, array}; fn main() { // 创建 3×3 矩阵 let a = array![[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [7.0, 8.0, 9.0]]; // 按行求和 let row_sums = a.sum_axis(Axis(1)); println!("行和: {:?}", row_sums); // [6.0, 15.0, 24.0] // 逐元素乘法 let b = array![[0.5, 1.
 

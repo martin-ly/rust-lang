@@ -8,6 +8,7 @@
 > **状态**: 术语表覆盖 100 个高频术语，L1 → L5+ 分层
 
 # Rust 核心术语英中对照表
+>
 > **EN**: Rust 核心术语英中对照表 (Chinese)
 > **Summary**: 本表按认知复杂度将术语分为五个层级，对应 Bloom 分类法从记忆到分析的不同阶段： - **L1 基础**：入门必读概念，出现在 TRPL 前 10 章，任何 Rust 学习者第一周就会遇到。 - **L2 进阶**：日常编码高频使用，涉及 trait 系统、智能指针、concurrency原语与错误处理。 - **L3 高级**：涉及 unsafe、async运行时、宏系统、memory模型与types系统深层机制。 - **L4 formal methods**：程序验证、分离逻辑、types论及 Rust 官方formal methods项目（RustBelt、Miri 等）。 - **L5+ 生态/专家**：生产环境主流 crate、嵌入式、WebAssembly 及跨
 

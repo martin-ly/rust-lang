@@ -1,6 +1,7 @@
 > **内容分级**: [实验级]
 
 # cargo-semver-checks：从社区工具到 Cargo 官方集成
+>
 > **EN**: Cargo
 > **Summary**: `cargo-semver-checks` 是 Rust 生态中最重要的 API 兼容性验证工具之一，截至 2026-06-06： | 指标 | 数值 | |:---|:---| | GitHub Stars | ~1,632 | | 可检测破坏变更types | ~245 种 | | Open Issues | 174 | | 最后更新 | 2026-06-06 | | Cargo 官方集成状态 | 🟡 跟踪中（非阻塞性 blocker 持续解决中） | - **基于 rustdoc JSON**：利用 `rustdoc --output-format json` 提取 crate 的公开 API
 

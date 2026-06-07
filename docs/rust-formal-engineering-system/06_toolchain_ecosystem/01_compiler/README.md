@@ -229,17 +229,10 @@ impl<T, const N: usize> Array<T, N> {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Formal Methods]**
-
 > **[来源: Wikipedia - Model Checking]**
-
 > **[来源: ACM - Formal Verification Survey]**
-
 > **[来源: IEEE - Formal Specification Standards]**
-
 > **[来源: POPL - Automated Verification]**
-
 > **[来源: RustBelt - Rust Formal Semantics]**
-
 > **[来源: TLA+ Documentation]**
-
 > **[来源: IEEE - Programming Language Standards]**

@@ -294,7 +294,11 @@ mod sync_impl {
 
 ---
 
-[返回主索引](../../00_master_index.md) | [返回工具链索引](../README.md) | [编译器理论](../01_compiler/README.md) | [包管理器理论](../02_package_manager/README.md)
+[返回主索引](../../00_master_index.md) |
+[返回工具链索引](../README.md) |
+[编译器理论](../01_compiler/README.md) |
+[包管理器理论](../02_package_manager/README.md)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -311,21 +315,13 @@ mod sync_impl {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Compiler Construction]**
-
 > **[来源: Rust Compiler Team Blog]**
-
 > **[来源: LLVM Documentation]**
-
 > **[来源: ACM - Compiler Design]**
-
 > **[来源: Wikipedia - Machine Learning]**
-
 > **[来源: Wikipedia - Artificial Intelligence]**
-
 > **[来源: tch-rs Documentation]**
-
 > **[来源: ACM - AI Systems]**
-
 > **[来源: Wikipedia - Type System]**
 > **[来源: Wikipedia - Concurrency]**
 > **[来源: Wikipedia - Asynchronous I/O]**

@@ -1,8 +1,9 @@
 > **内容分级**: [综述级]
 
 # 测验：闭包与迭代器（L1 试点扩展）
+>
 > **EN**: Closures
-> **Summary**: ```rust fn main() { let add = |a, b| a + b; println!("{}", add(2, 3)); println!("{}", add(2.5, 3.5)); } ``` <details> <summary>💡 点击展开答案与解析</summary> **答案**：❌ 不能编译。 **错误信息**：`expected integer, found floating-point number` **解析**：Rust 闭包**没有generics参数**，types在第一次使用时被推断并固定。 ```rust let add = |a, b| a + b; // 第一
+> **Summary**: ```rust fn main() { let add = |a, b| a + b; println!("{}", add(2, 3)); println!("{}", add(2.5, 3.5)); }``` <details> <summary>💡 点击展开答案与解析</summary> **答案**：❌ 不能编译。 **错误信息**：`expected integer, found floating-point number` **解析**：Rust 闭包**没有generics参数**，types在第一次使用时被推断并固定。 ```rust let add = |a, b| a + b; // 第一
 
 > **受众**: [初学者]
 > **内容分级**: [综述级]
@@ -31,7 +32,7 @@
 
 ## 一、闭包基础
 
-### Q1. 以下代码能否编译？解释闭包的类型推断。
+### Q1. 以下代码能否编译？解释闭包的类型推断
 
 ```rust
 fn main() {
@@ -88,7 +89,7 @@ impl Fn(i32) -> i32 for Closure { ... }
 
 ---
 
-### Q2. 以下代码的输出是什么？解释闭包捕获环境的方式。
+### Q2. 以下代码的输出是什么？解释闭包捕获环境的方式
 
 ```rust
 fn main() {
@@ -109,6 +110,7 @@ fn main() {
 <summary>💡 点击展开答案与解析</summary>
 
 **答案**：
+
 ```
 1
 2
@@ -192,7 +194,7 @@ move |y| x + y
 
 ## 二、迭代器基础
 
-### Q4. 以下代码的输出是什么？解释迭代器的惰性求值。
+### Q4. 以下代码的输出是什么？解释迭代器的惰性求值
 
 ```rust
 fn main() {
@@ -211,6 +213,7 @@ fn main() {
 <summary>💡 点击展开答案与解析</summary>
 
 **答案**：
+
 ```
 mapping 1
 mapping 2
@@ -346,7 +349,7 @@ for val in counter { println!("{}", val); } // ❌ 编译错误：counter 已被
 
 ## 三、迭代器适配器
 
-### Q6. 以下代码的输出是什么？解释 `filter`、`map` 和 `collect` 的组合。
+### Q6. 以下代码的输出是什么？解释 `filter`、`map` 和 `collect` 的组合
 
 ```rust
 fn main() {
@@ -402,7 +405,7 @@ fn main() {
 
 ---
 
-### Q7. 以下代码的输出是什么？`fold` 与 `reduce` 的区别。
+### Q7. 以下代码的输出是什么？`fold` 与 `reduce` 的区别
 
 ```rust
 fn main() {
@@ -462,7 +465,7 @@ v.iter().all(|x| x > 0);   // 是否所有元素满足条件
 
 ## 四、综合应用
 
-### Q8. 以下代码能否编译？解释 `Iterator::find` 和 `position` 的区别。
+### Q8. 以下代码能否编译？解释 `Iterator::find` 和 `position` 的区别
 
 ```rust
 fn main() {
@@ -515,7 +518,7 @@ v.iter().find_map(|&x| if x > 3 { Some(x * 2) } else { None }); // Some(8)
 
 ---
 
-### Q9. 以下代码的输出是什么？这是闭包与迭代器的经典组合。
+### Q9. 以下代码的输出是什么？这是闭包与迭代器的经典组合
 
 ```rust
 fn main() {
@@ -570,7 +573,7 @@ nums.iter()                          // &i32
 
 ---
 
-### Q10. 以下代码能否编译？如何修复？这是 `move` 闭包与迭代器的经典陷阱。
+### Q10. 以下代码能否编译？如何修复？这是 `move` 闭包与迭代器的经典陷阱
 
 ```rust
 fn make_filter(min: i32) -> impl Fn(&i32) -> bool {

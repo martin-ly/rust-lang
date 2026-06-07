@@ -1,4 +1,5 @@
 # L7 前沿趋势层（Future & Trends）
+>
 > **EN**: Futures
 > **Summary**: ```mermaid mindmap root((L7 前沿趋势层<br/>Future & Trends)) AI 集成 代码生成[AI 生成 + Rust 验证] 确定性容器[Deterministic Containers] 三层闭环[生成-验证-部署] Unsafe边界[AI 生成代码的 unsafe 标注] formal methods方法 工具工业化[Creusot / Verus / Kani] 系统验证[TLA+ / P / PObserve] 运行时检查[Trace-Checking] RustBelt工具化[Iris → 工具实现] 语言演进 Edition机制[Edition 机制] RFC流
 

@@ -3,6 +3,7 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # 数据库系统：Rust 在存储引擎中的语义
+>
 > **EN**: Database Access
 > **Summary**: Rust 在数据库领域的渗透呈现"基础设施层优先"的特征： ```text Rust 数据库生态谱系: │ ├── 分布式 OLTP/OLAP │   ├── TiKV — 分布式 KV 存储（Percolator 事务） │   ├── CockroachDB — 分布式 SQL（部分 Rust 组件） │   └── Materialize — 流式 SQL 物化视图 │ ├── 搜索引擎 │   ├── Meilisearch — 轻量级全文搜索 │   ├── Tantivy — Lucene 风格搜索引擎库 │   └── Quickwit — 云原生日志搜索 │ ├── 多模型数据
 >

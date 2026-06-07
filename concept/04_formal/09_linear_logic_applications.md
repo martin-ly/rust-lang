@@ -1,6 +1,7 @@
 > **内容分级**: [专家级]
 
 # 线性逻辑在 Rust 中的工程应用
+>
 > **EN**: Linear Logic
 > **Summary**: - [线性逻辑在 Rust 中的工程应用](#线性逻辑在-rust-中的工程应用) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 从线性逻辑到ownership](#11-从线性逻辑到ownership) - [1.2 资源作为types](#12-资源作为types) - [1.3 Session Types 与通信协议](#13-session-types-与通信协议) - [二、技术细节](#二技术细节) - [2.1 ownership即线性types](#21-ownership即线性types) - [2.2 仿射types与 Drop](#22-仿射types与-drop) - [2.3 types状态模式](#23-types状态模式)
 

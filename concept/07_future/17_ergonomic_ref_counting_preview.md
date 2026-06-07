@@ -1,6 +1,7 @@
 # Ergonomic Ref-Counting 预研：人机工学引用计数
+>
 > **EN**: Ergonomic Ref-Counting 预研：人机工学引用计数 (Chinese)
-> **Summary**: 当前 Rust 中，共享ownership的标准做法是 `Rc<T>` / `Arc<T>`，但它们的 API 相比 GC 语言显得繁琐： ```rust use std::sync::Arc; // 当前做法：显式 clone let data = Arc::new(vec![1, 2, 3]); let data2 = Arc::clone(&data); // 必须显式调用 clone ``` 对比 Kotlin / Swift / 现代 C++ 的隐式引用计数，Rust 要求**每次传递共享ownership时显式 `clone`**，这在高阶函数、闭包捕获、async任务分发等场景下成为**人机工学瓶颈**。 E
+> **Summary**: 当前 Rust 中，共享ownership的标准做法是 `Rc<T>` / `Arc<T>`，但它们的 API 相比 GC 语言显得繁琐： ```rust use std::sync::Arc; // 当前做法：显式 clone let data = Arc::new(vec![1, 2, 3]); let data2 = Arc::clone(&data); // 必须显式调用 clone``` 对比 Kotlin / Swift / 现代 C++ 的隐式引用计数，Rust 要求**每次传递共享ownership时显式 `clone`**，这在高阶函数、闭包捕获、async任务分发等场景下成为**人机工学瓶颈**。 E
 
 > **状态**: 🧪 RFC 决策与预览阶段
 > **跟踪版本**: nightly 1.98.0 (2026-06-02)

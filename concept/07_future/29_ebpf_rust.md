@@ -1,4 +1,5 @@
 # eBPF / Aya / Rex 的 Rust 映射
+>
 > **EN**: eBPF / Aya / Rex 的 Rust 映射 (Chinese)
 > **Summary**: eBPF（extended Berkeley Packet Filter）已从早期的网络包过滤机制演变为 Linux 内核的通用可编程基础设施。 它允许在不修改内核源码、不加载内核模块的前提下，向内核注入沙盒化字节码，实现可观测性（tracing）、网络处理（XDP/TC）、安全策略（LSM）等功能 [来源: Linux Kernel Documentation, eBPF, https://docs.kernel.org/bpf/]。 然而，传统 eBPF 开发以 C 语言为主，依赖 llvm compiler将 C 代码编译为 eBPF 字节码，再经由内核的 eBPF 验证器（verifier）进行
 >

@@ -3,6 +3,7 @@
 > **本节关键术语**: Never 类型 (!) · 发散函数 (Diverging Function) · 类型归一 (Type Unification) · 空类型 (Empty Type) · 穷尽匹配 (Exhaustiveness) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # Never Type (`!`)：底类型与穷尽性
+>
 > **EN**: Never Type (`!`)：底类型与穷尽性 (Chinese)
 > **Summary**: - [Never Type (`!`)：底types与穷尽性](#never-type-底types与穷尽性) - [目录](#目录) - [一、核心概念](#一核心概念) - [1.1 什么是 `!`](#11-什么是-) - [1.2 形式语义：底types](#12-形式语义底types) - [1.3 Coercion 规则](#13-coercion-规则) - [二、控制流应用](#二控制流应用) - [2.1 发散函数](#21-发散函数) - [2.2 `Result<T, !>` — 不可能失败](#22-resultt---不可能失败) - [2.3 `Option<!>` — 不可能存在](#2
 

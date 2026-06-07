@@ -1,8 +1,9 @@
 > **内容分级**: [综述级]
 
 # 测验：内存管理（L2 试点扩展）
+>
 > **EN**: Memory Management
-> **Summary**: ```rust fn main() { let b = Box::new(5); println!("{}", b); } ``` <details> <summary>💡 点击展开答案与解析</summary> **答案**：✅ 能编译，输出 `5`。 **解析**： | 特性 | 栈分配 | `Box::new`（堆分配） | |:---|:---|:---| | 存储位置 | 栈 | 堆 | | 大小限制 | 栈大小限制（通常 ~8MB） | 仅受可用memory限制 | | lifetimes | 作用域结束自动释放 | 离开作用域时 `Box` 被 drop，堆memory释放 | | 性能 | 快速（单指令
+> **Summary**: ```rust fn main() { let b = Box::new(5); println!("{}", b); }``` <details> <summary>💡 点击展开答案与解析</summary> **答案**：✅ 能编译，输出 `5`。 **解析**： | 特性 | 栈分配 | `Box::new`（堆分配） | |:---|:---|:---| | 存储位置 | 栈 | 堆 | | 大小限制 | 栈大小限制（通常 ~8MB） | 仅受可用memory限制 | | lifetimes | 作用域结束自动释放 | 离开作用域时 `Box` 被 drop，堆memory释放 | | 性能 | 快速（单指令
 
 > **受众**: [进阶]
 > **内容分级**: [综述级]
@@ -59,6 +60,7 @@ fn main() {
 **`Box<T>` 的核心语义**：`Box` 是拥有堆内存所有权的智能指针。`Box` 本身在栈上（只有一个指针大小），但指向的数据在堆上。
 
 **使用场景**：
+
 - 递归类型（如链表、树节点）
 - 大对象转移所有权时避免拷贝
 - trait 对象（`Box<dyn Trait>`）
@@ -69,7 +71,7 @@ fn main() {
 
 ---
 
-### Q2. 以下代码能否编译？解释递归类型为什么需要 `Box`。
+### Q2. 以下代码能否编译？解释递归类型为什么需要 `Box`
 
 ```rust
 enum List {
@@ -87,7 +89,7 @@ fn main() {
 
 **答案**：❌ 不能编译。
 
-**错误信息**：`recursive type `List` has infinite size`
+**错误信息**：`recursive type`List`has infinite size`
 
 **解析**：Rust 需要编译期确定所有类型的大小。`List::Cons(i32, List)` 包含自身，大小无限递归。
 
@@ -145,6 +147,7 @@ fn main() {
 <summary>💡 点击展开答案与解析</summary>
 
 **答案**：✅ 能编译，输出：
+
 ```
 3 3 3
 3
@@ -304,7 +307,7 @@ let cell = Cell::new(vec![1, 2, 3]);
 
 ---
 
-### Q6. 以下代码存在什么问题？这是 `Mutex` 使用的经典陷阱。
+### Q6. 以下代码存在什么问题？这是 `Mutex` 使用的经典陷阱
 
 ```rust
 use std::sync::Mutex;
@@ -365,7 +368,7 @@ println!("{}", *m.lock().unwrap());
 
 ## 四、Drop 与资源管理
 
-### Q7. 以下代码的输出是什么？解释自定义 `Drop` 的行为。
+### Q7. 以下代码的输出是什么？解释自定义 `Drop` 的行为
 
 ```rust
 struct HasDrop {
@@ -392,6 +395,7 @@ fn main() {
 <summary>💡 点击展开答案与解析</summary>
 
 **答案**：
+
 ```
 Inner scope
 Dropping b
@@ -428,7 +432,7 @@ Dropping a
 
 ---
 
-### Q8. 以下代码能否编译？`std::mem::drop` 与 `Drop::drop` 的区别。
+### Q8. 以下代码能否编译？`std::mem::drop` 与 `Drop::drop` 的区别
 
 ```rust
 struct MyStruct;
@@ -488,7 +492,7 @@ println!("{:?}", s); // ❌ 编译错误：use of moved value: s
 
 ## 五、综合应用
 
-### Q9. 以下代码能否编译？这是 `Weak` 指针的经典用例。
+### Q9. 以下代码能否编译？这是 `Weak` 指针的经典用例
 
 ```rust
 use std::rc::{Rc, Weak};
@@ -518,6 +522,7 @@ fn main() {
 <summary>💡 点击展开答案与解析</summary>
 
 **答案**：✅ 能编译，输出：
+
 ```
 leaf strong = 1, weak = 0
 ```
@@ -560,7 +565,7 @@ let maybe_rc = weak.upgrade();    // Weak → Option<Rc>
 
 ---
 
-### Q10. 以下代码的输出是什么？解释 `Deref` 和 `DerefMut` 的作用。
+### Q10. 以下代码的输出是什么？解释 `Deref` 和 `DerefMut` 的作用
 
 ```rust
 use std::ops::Deref;

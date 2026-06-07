@@ -1,6 +1,7 @@
 > **内容分级**: [专家级]
 
 # Hoare 逻辑：程序验证的形式化基础与 Rust 契约
+>
 > **EN**: Formal Methods
 > **Summary**: - [Hoare 逻辑：程序验证的formal methods基础与 Rust 契约](#hoare-逻辑程序验证的formal methods基础与-rust-契约) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 Hoare 三元组](#11-hoare-三元组) - [1.2 最弱前置条件（Weakest Precondition）](#12-最弱前置条件weakest-precondition) - [1.3 循环不变量](#13-循环不变量) - [二、技术细节](#二技术细节) - [2.1 Hoare 逻辑推理规则](#21-hoare-逻辑推理规则) - [2.2 从 Hoare 逻辑到
 

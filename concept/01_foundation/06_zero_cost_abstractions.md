@@ -3,6 +3,7 @@
 > **本节关键术语**: 零成本抽象 (Zero-Cost Abstraction) · 内联 (Inlining) · 单态化 (Monomorphization) · 编译期优化 (Compile-Time Optimization) · 抽象开销 (Abstraction Overhead) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 零成本抽象：Rust 的性能哲学
+>
 > **EN**: 零成本抽象：Rust 的性能哲学 (Chinese)
 > **Summary**: - [零成本抽象：Rust 的性能哲学](#零成本抽象rust-的性能哲学) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 零成本抽象的定义](#11-零成本抽象的定义) - [1.2 单态化：generics的零成本实现](#12-单态化generics的零成本实现) - [1.3 迭代器与循环消除](#13-迭代器与循环消除) - [二、技术细节](#二技术细节) - [2.1 编译期优化管道](#21-编译期优化管道) - [2.2 Trait 对象的运行时开销](#22-trait-对象的运行时开销) - [2.3 闭包的零成本实现](#23-闭包的零成本实现) - [三、
 

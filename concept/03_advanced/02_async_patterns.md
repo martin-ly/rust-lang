@@ -1,6 +1,7 @@
 > **内容分级**: [专家级]
 
 # 异步模式：从 Future 到生产级并发
+>
 > **EN**: Concurrency
 > **Summary**: - [async模式：从 Future 到生产级concurrency](#async模式从-future-到生产级concurrency) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 Future 与状态机](#11-future-与状态机) - [1.2 Pin 与自引用](#12-pin-与自引用) - [1.3 Waker 与执行器](#13-waker-与执行器) - [二、技术细节](#二技术细节) - [2.1 concurrency执行模式](#21-concurrency执行模式) - [2.2 取消与超时](#22-取消与超时) - [十、边界测试：async模式的编译错误](#十边界测试async模式的编译错误) - [10.1
 

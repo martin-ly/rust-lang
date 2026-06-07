@@ -1,5 +1,6 @@
 >
 # WebAssembly 生态：Rust 的浏览器外运行时
+>
 > **EN**: WebAssembly
 > **Summary**: - [WebAssembly 生态：Rust 的浏览器外运行时](#webassembly-生态rust-的浏览器外运行时) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 WebAssembly 的设计哲学](#11-webassembly-的设计哲学) - [1.2 Rust → Wasm 的编译模型](#12-rust--wasm-的编译模型) - [1.3 为什么 Rust 是 Wasm 的首选语言](#13-为什么-rust-是-wasm-的首选语言) - [二、技术细节](#二技术细节) - [2.1 wasm32 目标三元组](#21-wasm3
 

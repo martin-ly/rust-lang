@@ -1,6 +1,7 @@
 > **内容分级**: [专家级]
 
 # Macros（宏系统）
+>
 > **EN**: Macros
 > **Summary**: **变更日志**: - v4.1 (2026-05-14): 增强 §5 属性宏修改函数体——新增 `#[trace]` 完整实现（含 `proc_macro_error2` 友好错误）、AST 遍历三策略（quote 包装 / `Fold` trait / 手动 `stmts` 替换）、声明宏能力边界对比、跨层链接 - v4.0 (2026-05-13): Phase 4 TODO 清理——新增 proc_macro2/syn/quote 最佳实践、macro_rules! 重复模式完整语法、const fn + const generics 替代宏趋势、编译期内置宏完整列表、属性宏修改函数
 

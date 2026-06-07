@@ -1,6 +1,7 @@
 > **内容分级**: [专家级]
 
 # 无锁编程与内存模型
+>
 > **EN**: Locking Primitives
 > **Summary**: - [无锁编程与memory模型](#无锁编程与memory模型) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 无锁 vs 无等待](#11-无锁-vs-无等待) - [1.2 ABA 问题](#12-aba-问题) - [1.3 memory序选择](#13-memory序选择) - [二、关键数据结构](#二关键数据结构) - [2.1 Treiber Stack](#21-treiber-stack) - [2.2 Michael-Scott Queue](#22-michael-scott-queue) - [2.3 Hazard Pointer](#23-hazard-poin
 

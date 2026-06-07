@@ -1,4 +1,5 @@
 # Rust in Space Preview
+>
 > **EN**: Rust in Space Preview (Chinese)
 > **Summary**: ```rust,ignore // 概念代码: 太空辐射导致的位翻转 fn critical_checksum(data: &[u8]) -> u32 { let mut sum: u32 = 0; for &byte in data { sum = sum.wrapping_add(byte as u32); } sum } fn main() { let data = b"important data"; let checksum = critical_checksum(data); // ❌ 运行时错误: 太空辐射可能翻转 checksum 或 data 的某一位 // Rust 的memory
 >

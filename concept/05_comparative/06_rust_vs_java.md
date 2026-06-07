@@ -3,6 +3,7 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Rust vs Java：系统编程与托管运行时的范式对比
+>
 > **EN**: Rust vs Java：系统编程与托管运行时的范式对比 (Chinese)
 > **Summary**: - [Rust vs Java：系统编程与托管运行时的范式对比](#rust-vs-java系统编程与托管运行时的范式对比) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 memory管理：ownership vs GC](#11-memory管理ownership-vs-gc) - [1.2 types系统：静态显式 vs 静态推断](#12-types系统静态显式-vs-静态推断) - [1.3 concurrency模型：ownership约束 vs JMM](#13-concurrency模型ownership约束-vs-jmm) - [二、技术细节](#二技术细节) - [2.1 运行时架构对比](#21-运行时架构对比) - [2.2 异常处理哲学](#2
 

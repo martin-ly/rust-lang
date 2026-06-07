@@ -4,6 +4,7 @@
 > **本节关键术语**: 整数类型 (Integer) · 浮点类型 (Float) · 有符号 (Signed) · 无符号 (Unsigned) · 类型推断 (Type Inference) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # Rust 数值类型与运算
+>
 > **EN**: Rust 数值类型与运算 (Chinese)
 > **Summary**: - [Rust 数值types与运算](#rust-数值types与运算) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 整数types](#11-整数types) - [1.2 浮点types](#12-浮点types) - [1.3 types转换](#13-types转换) - [二、运算模式](#二运算模式) - [2.1 溢出检查](#21-溢出检查) - [2.2 Wrapping 与 Saturating](#22-wrapping-与-saturating) - [2.3 SIMD](#23-simd) - [三、反命题与边界分析](#三反命题与边界分析) - [3.1 反命题树](#31
 

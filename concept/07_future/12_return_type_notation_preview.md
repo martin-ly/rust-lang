@@ -1,4 +1,5 @@
 # Return Type Notation 预研：精确捕获的显式控制
+>
 > **EN**: Return Type Notation 预研：精确捕获的显式控制 (Chinese)
 > **Summary**: - [Return Type Notation 预研：精确捕获的显式控制](#return-type-notation-预研精确捕获的显式控制) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 问题：隐式捕获的lifetimes泄漏](#11-问题隐式捕获的lifetimes泄漏) - [1.2 `use<..>` 精确捕获语法](#12-use-精确捕获语法) - [1.3 RPITIT 与 AFIT 的上下文](#13-rpitit-与-afit-的上下文) - [二、技术细节](#二技术细节) - [2.1 语法形式与语义](#21-语法形式与语义) - [2.2 与生命周
 >

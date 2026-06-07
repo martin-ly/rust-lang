@@ -4,6 +4,7 @@
 > **本节关键术语**: 数值类型 (Numeric Types) · 整数溢出 (Integer Overflow) · 浮点数 (Floating Point) · 类型转换 (Type Conversion) · 字面值后缀 (Literal Suffix) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 数值类型与运算：从整数到浮点的完整图景
+>
 > **EN**: 数值类型与运算：从整数到浮点的完整图景 (Chinese)
 > **Summary**: - [数值types与运算：从整数到浮点的完整图景](#数值types与运算从整数到浮点的完整图景) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 整数types全景](#11-整数types全景) - [1.2 浮点types与 IEEE 754](#12-浮点types与-ieee-754) - [1.3 溢出行为与饱和运算](#13-溢出行为与饱和运算) - [二、技术细节](#二技术细节) - [2.1 types转换与 as](#21-types转换与-as) - [2.2 Wrapping、Saturating、Checked、Overflowing](#22-wrappingsaturati
 

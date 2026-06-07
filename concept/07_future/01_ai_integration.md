@@ -1,4 +1,5 @@
 # AI × Rust：生成-验证闭环与确定性容器
+>
 > **EN**: AI × Rust：生成-验证闭环与确定性容器 (Chinese)
 > **Summary**: **变更日志**: - v1.0 (2026-05-12): 初始版本 - v1.1 (2026-05-12): Wave 3 扩展——补充定义、工具链、RL研究、确定性容器、生态图、学术论文 - v1.2 (2026-05-14): 深度扩展 §6 RL on Compiler Errors——补充 Getafix/Graph2Diff/DeepDelta/Break-It-Fix-It/DeepFix/Prophet 代表性研究、状态空间与奖励函数formal methods定义、RL vs LLM 对比矩阵、Rust compiler结构化诊断优势分析 - v1.3 (2026-05-14): 补充 Kiro 深度分析
 >

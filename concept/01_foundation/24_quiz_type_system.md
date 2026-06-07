@@ -1,8 +1,9 @@
 > **内容分级**: [综述级]
 
 # 测验：类型系统（试点扩展）
+>
 > **EN**: Type System
-> **Summary**: ```rust fn main() { let x: u8 = 255; let y = x.wrapping_add(1); println!("{y}"); } ``` <details> <summary>💡 点击展开答案与解析</summary> **答案**：`0` **解析**：`u8` 范围为 0–255。`255 + 1` 在数学上溢出，但 `.wrapping_add()` 执行**环绕运算**（wrap around），结果回到 0。 **对比**： | 方法 | 行为 | 溢出 255+1 时 | |:---|:---|:---| | `+` | debug 模式 pan
+> **Summary**: ```rust fn main() { let x: u8 = 255; let y = x.wrapping_add(1); println!("{y}"); }``` <details> <summary>💡 点击展开答案与解析</summary> **答案**：`0` **解析**：`u8` 范围为 0–255。`255 + 1` 在数学上溢出，但 `.wrapping_add()` 执行**环绕运算**（wrap around），结果回到 0。 **对比**： | 方法 | 行为 | 溢出 255+1 时 | |:---|:---|:---| | `+` | debug 模式 pan
 
 > **受众**: [初学者]
 > **内容分级**: [综述级]

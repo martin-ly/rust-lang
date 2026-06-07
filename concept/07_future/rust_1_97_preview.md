@@ -1,4 +1,5 @@
 # Rust 1.97 前沿特性预览
+>
 > **EN**: Rust 1.97 前沿特性预览 (Chinese)
 > **Summary**: **状态**: 🧪 Nightly 实验性，MCP 已通过 **核心问题**: 当前 Rust 中 `drop` 是同步的，无法 `await` async清理操作（如关闭网络连接、刷新文件缓冲区）。 **1.97 进展**: - `AsyncDrop` trait 设计已确定 - `async fn drop(&mut self)` 语法支持 - compiler已能生成async析构状态机 **影响**: 解决async资源释放的核心痛点，不再需要手动 `flush()`/`close()` 后丢弃。 **代码示例** (nightly): ```rust,ignore use std::async_drop::As
 >

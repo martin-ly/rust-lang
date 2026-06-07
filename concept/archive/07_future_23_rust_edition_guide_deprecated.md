@@ -7,7 +7,6 @@
 > **定位**: 深入探讨 Rust 的 **Edition 机制**——从 2015 到 2024，分析 Edition 如何实现语言演进而不破坏兼容性，以及迁移策略。
 > **前置概念**: [Toolchain](../06_ecosystem/01_toolchain.md) · [Macros](../03_advanced/04_macros.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Evolution](./03_evolution.md) · [Version Tracking](./05_rust_version_tracking.md)
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 

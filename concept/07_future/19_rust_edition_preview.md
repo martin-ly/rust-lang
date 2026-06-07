@@ -1,6 +1,7 @@
 # Rust 2024 Edition Preview
+>
 > **EN**: Rust 2024 Edition Preview (Chinese)
-> **Summary**: ```rust,ignore // Rust 2024 的 `gen` 关键字预留 fn gen() -> i32 { 42 } fn main() { // ❌ 编译错误: 在 Edition 2024 中，`gen` 是保留关键字（用于 generator） // 旧代码中使用 `gen` 作为标识符需重命名 let _x = gen(); } ``` | 定理 | 前提 | 结论 | 置信度 | | :--- | :--- | :--- | :--- | | Rust 2024 Edition Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理
+> **Summary**: ```rust,ignore // Rust 2024 的 `gen` 关键字预留 fn gen() -> i32 { 42 } fn main() { // ❌ 编译错误: 在 Edition 2024 中，`gen` 是保留关键字（用于 generator） // 旧代码中使用 `gen` 作为标识符需重命名 let _x = gen(); }``` | 定理 | 前提 | 结论 | 置信度 | | :--- | :--- | :--- | :--- | | Rust 2024 Edition Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

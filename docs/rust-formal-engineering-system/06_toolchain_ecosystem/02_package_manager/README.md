@@ -269,7 +269,11 @@ utils = { path = "crates/utils" }
 
 ---
 
-[返回主索引](../../00_master_index.md) | [返回工具链索引](../README.md) | [编译器理论](../01_compiler/README.md) | [构建工具理论](../03_build_tools/README.md)
+[返回主索引](../../00_master_index.md) |
+[返回工具链索引](../README.md) |
+[编译器理论](../01_compiler/README.md) |
+[构建工具理论](../03_build_tools/README.md)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -286,17 +290,10 @@ utils = { path = "crates/utils" }
 ## 权威来源索引
 
 > **[来源: Wikipedia - Formal Methods]**
-
 > **[来源: Wikipedia - Model Checking]**
-
 > **[来源: ACM - Formal Verification Survey]**
-
 > **[来源: IEEE - Formal Specification Standards]**
-
 > **[来源: POPL - Automated Verification]**
-
 > **[来源: RustBelt - Rust Formal Semantics]**
-
 > **[来源: TLA+ Documentation]**
-
 > **[来源: PLDI - Programming Language Design]**

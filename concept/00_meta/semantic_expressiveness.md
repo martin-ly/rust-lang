@@ -1,4 +1,5 @@
 # Rust Semantic Expressiveness: A Panoramic Survey（Rust 语义表达力全景梳理）
+>
 > **EN**: Rust Semantic Expressiveness: A Panoramic Survey（Rust 语义表达力全景梳理） (Chinese)
 > **Summary**: **变更日志**: - v1.0 (2026-05-13): 初始版本——7 维度框架 + D1-D3 完整填充 + 四语言对比矩阵 - [Rust Semantic Expressiveness: A Panoramic Survey（Rust 语义表达力全景梳理）](#rust-semantic-expressiveness-a-panoramic-surveyrust-语义表达力全景梳理) - [📑 目录](#-目录) - [零、TL;DR —— Rust 语义表达力速查](#零tldr--rust-语义表达力速查) - [一、权威来源与梳理方法论](#一权威来源与梳理方法论) - [1
 >

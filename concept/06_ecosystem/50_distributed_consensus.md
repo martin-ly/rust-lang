@@ -3,6 +3,7 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Distributed Consensus（分布式共识）
+>
 > **EN**: Distributed Consensus（分布式共识） (Chinese)
 > **Summary**: - [Distributed Consensus（分布式共识）](#distributed-consensus分布式共识) - [📑 目录](#-目录) - [一、权威定义（Definition）](#一权威定义definition) - [1.1 共识问题的formal methods定义](#11-共识问题的formal methods定义) - [1.2 FLP 不可能结果](#12-flp-不可能结果) - [1.3 容错模型](#13-容错模型) - [二、概念属性矩阵](#二概念属性矩阵) - [三、Paxos 与 Multi-Paxos](#三paxos-与-multi-paxos) - [3.1 Paxos 核心协议](
 >

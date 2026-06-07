@@ -40,6 +40,7 @@ impl eframe::App for SensorApp {
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Rust 嵌入式图形系统开发
+>
 > **EN**: Embedded Systems
 > **Summary**: 以下演示使用 `egui` 在资源受限环境下构建交互式界面： ```rust,ignore use egui::{Context, CentralPanel, Slider}; struct SensorApp { temperature: f32, threshold: f32, } impl eframe::App for SensorApp { fn update(&mut self, ctx: &Context, _frame: &mut eframe::Frame) { CentralPanel::default().show(ctx, |ui| { ui.heading("传感器监
 

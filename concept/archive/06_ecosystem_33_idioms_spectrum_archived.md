@@ -8,13 +8,10 @@
 > 原文件保留用于历史追溯。请勿独立编辑本文件。
 > **归档原因**: 与 `03_idioms_spectrum.md` 内容高度重叠（>90%），且 `03` 版本为 SUMMARY.md 引用主文件、内容更完整。
 > **状态**: 已归档（2026-05-30 重复文件清理）
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
-
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 相关概念文件

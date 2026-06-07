@@ -1,8 +1,9 @@
 > **内容分级**: [元层]
 >
 # Comprehensive Rust 课程映射
+>
 > **EN**: Comprehensive Rust 课程映射 (Chinese)
-> **Summary**: - [Comprehensive Rust 课程映射](#comprehensive-rust-课程映射) - [📑 目录](#-目录) - [一、课程概览](#一课程概览) - [1.1 Comprehensive Rust 是什么](#11-comprehensive-rust-是什么) - [1.2 课程结构](#12-课程结构) - [二、章节映射表](#二章节映射表) - [2.1 Day 1 — Rust 基础](#21-day-1--rust-基础) - [2.2 Day 2 — ownership与types系统](#22-day-2--ownership与types系统) - [2.3 Day 3 — generics与 
+> **Summary**: - [Comprehensive Rust 课程映射](#comprehensive-rust-课程映射) - [📑 目录](#-目录) - [一、课程概览](#一课程概览) - [1.1 Comprehensive Rust 是什么](#11-comprehensive-rust-是什么) - [1.2 课程结构](#12-课程结构) - [二、章节映射表](#二章节映射表) - [2.1 Day 1 — Rust 基础](#21-day-1--rust-基础) - [2.2 Day 2 — ownership与types系统](#22-day-2--ownership与types系统) - [2.3 Day 3 — generics与
 
 > **受众**: [初学者 → 进阶]
 > **Bloom 层级**: 知道 → 应用

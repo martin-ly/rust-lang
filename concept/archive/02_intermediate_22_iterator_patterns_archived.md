@@ -6,11 +6,9 @@
 > 原文件保留用于历史追溯。请勿独立编辑本文件。
 > **归档原因**: 与 `15_iterator_patterns.md` 内容高度重叠（>85%），且 `15` 版本边界测试覆盖更完整。
 > **状态**: 已归档（2026-05-30 重复文件清理）
-
 > **本节关键术语**: 迭代器模式 (Iterator Pattern) · 适配器 (Adapter) · 消费者 (Consumer) · 惰性求值 (Lazy Evaluation) · 自定义迭代器 — [完整对照表](../00_meta/terminology_glossary.md)
 >
 > **后置概念**: [Concurrency](../03_advanced/01_concurrency.md) · [Async](../03_advanced/02_async.md)
-
 > **前置概念**: [Iterator Patterns](../02_intermediate/15_iterator_patterns.md)
 
 ## 相关概念文件

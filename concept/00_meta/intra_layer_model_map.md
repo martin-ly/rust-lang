@@ -1,4 +1,5 @@
 # Rust 知识体系层次内模型间映射图
+>
 > **EN**: Rust 知识体系层次内模型间映射图 (Chinese)
 > **Summary**: **变更日志**: - v1.0 (2026-05-21): 初始版本——L1-L4 层内模型映射矩阵 + Mermaid 关系图 - [Rust 知识体系层次内模型间映射图](#rust-知识体系层次内模型间映射图) - [📑 目录](#-目录) - [一、L1 基础概念层：ownership · borrowing · lifetimes · types系统](#一l1-基础概念层ownership--borrowing--lifetimes--types系统) - [1.1 四元关系拓扑](#11-四元关系拓扑) - [1.2 四元关系矩阵](#12-四元关系矩阵) - [二、L2 进阶概念层：Trait · generics · memory管理 · 错误处理](#二l2-进阶概念层tr
 >

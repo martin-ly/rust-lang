@@ -4,6 +4,7 @@
 > **本节关键术语**: 所有权 (Ownership) · 移动 (Move) · 借用 (Borrow) · 引用 (Reference) · 生命周期 (Lifetime) — [完整对照表](../00_meta/terminology_glossary.md)
 
 # Ownership（所有权）
+>
 > **EN**: Ownership
 > **Summary**: **变更日志**: - v1.0 (2026-05-12): 初始版本，完成权威定义、属性矩阵、formal methods根基、思维导图、示例反例 - [Ownership（ownership）](#ownershipownership) - [📑 目录](#-目录) - [一、权威定义（Definition）](#一权威定义definition) - [1.1 Wikipedia 定义](#11-wikipedia-定义) - [1.2 TRPL 官方定义](#12-trpl-官方定义) - [1.3 formal methods定义（RustBelt / COR）](#13-formal methods定义rustbelt--cor) - [二、概念属性矩阵（Attribut
 

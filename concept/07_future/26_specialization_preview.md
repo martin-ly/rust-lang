@@ -1,4 +1,5 @@
 # Specialization：Trait 实现的精确化与重叠解析
+>
 > **EN**: Traits
 > **Summary**: - [Specialization：Trait 实现的精确化与重叠解析](#specializationtrait-实现的精确化与重叠解析) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 问题：generics实现的表达力限制](#11-问题generics实现的表达力限制) - [1.2 特化的设计：更精确的实现优先](#12-特化的设计更精确的实现优先) - [1.3 与 Coherence 的交互](#13-与-coherence-的交互) - [二、技术细节](#二技术细节) - [2.1 特化语法与语义](#21-特化语法与语义) - [2.2 关联types特化](#22-关
 

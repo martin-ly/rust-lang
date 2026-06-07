@@ -2,6 +2,7 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Rust vs TypeScript：静态类型系统的两种哲学 —— 编译期证明与渐进式工程
+>
 > **EN**: Type System
 > **Summary**: - [Rust vs TypeScript：静态types系统的两种哲学 —— 编译期证明与渐进式工程](#rust-vs-typescript静态types系统的两种哲学--编译期证明与渐进式工程) - [📑 目录](#-目录) - [一、权威定义与核心概念](#一权威定义与核心概念) - [1.1 TypeScript 权威定义](#11-typescript-权威定义) - [1.2 types系统哲学对比](#12-types系统哲学对比) - [1.3 编译模型差异](#13-编译模型差异) - [1.4 memory模型：ownership vs GC](#14-memory模型ownership-vs-gc) - [二、技术细节](#二技术细
 >

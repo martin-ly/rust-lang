@@ -4,8 +4,9 @@
 >
 
 # 定理分级规范（Theorem Tier Specification）
+>
 > **EN**: 定理分级规范（Theorem Tier Specification） (Chinese)
-> **Summary**: **定义**: 有同行评审的学术论文、官方规范或formal methods验证工具给出的完整证明。 **标注格式**: ```markdown ``` **适用场景**: - RustBelt (POPL 2018) 证明的 Safe Rust memory安全定理 - Ralf Jung 论文中证明的 Stacked Borrows / Tree Borrows 操作语义性质 - Pierce TAPL 中给出的types系统元定理（Progress + Preservation） - Wadler 1989 参数性定理的formal methods陈述 **判断标准**: - [ ] 存在完整的、可检查的数学证明（非直觉论证） - [ ] 已发
+> **Summary**: **定义**: 有同行评审的学术论文、官方规范或formal methods验证工具给出的完整证明。 **标注格式**: ```markdown``` **适用场景**: - RustBelt (POPL 2018) 证明的 Safe Rust memory安全定理 - Ralf Jung 论文中证明的 Stacked Borrows / Tree Borrows 操作语义性质 - Pierce TAPL 中给出的types系统元定理（Progress + Preservation） - Wadler 1989 参数性定理的formal methods陈述 **判断标准**: - [ ] 存在完整的、可检查的数学证明（非直觉论证） - [ ] 已发
 
 > **定位**: 统一所有 `concept/` 文件中"定理/引理/推论"的可信度标注标准。
 > **原则**: 消除"伪形式化"——定理编号必须有对应的分级，证明深度必须与分级匹配。

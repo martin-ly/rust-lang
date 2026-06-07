@@ -3,6 +3,7 @@
 > **本节关键术语**: 元编程 (Metaprogramming) · 宏 (Macro) · 编译期计算 (Compile-Time Computation) · const generics · 类型操作 — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 元编程：Rust 的编译期代码生成与变换
+>
 > **EN**: 元编程：Rust 的编译期代码生成与变换 (Chinese)
 > **Summary**: - [元编程：Rust 的编译期代码生成与变换](#元编程rust-的编译期代码生成与变换) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 元编程的抽象层次](#11-元编程的抽象层次) - [1.2 声明宏：模式匹配驱动](#12-声明宏模式匹配驱动) - [1.3 过程宏：语法树操作](#13-过程宏语法树操作) - [二、技术细节](#二技术细节) - [2.1 syn/quote/proc-macro2 工具体系](#21-synquoteproc-macro2-工具体系) - [2.2 Derive 宏的实现机制](#22-derive-宏的实现机
 >

@@ -4,6 +4,7 @@
 >
 
 # C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态）
+>
 > **EN**: C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态） (Chinese)
 > **Summary**: **变更日志**: - v1.0 (2026-05-26): 初始创建。覆盖 DARPA TRACTOR、Scylla、&inator、His2Trans、C2Rust 生态等最新权威来源 [来源: Web Authority Alignment Sprint] - v1.1 (2026-05-26): 权威内容对齐：补充 Hayroll (PLDI 2026) — C 宏与条件编译的模块化翻译，符号执行驱动配置覆盖，翻译器无关设计 [来源: Web Authority Alignment Batch 14] - [C-to-Rust Translation Ecosystem（C 到 Rus
 

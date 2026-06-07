@@ -3,6 +3,7 @@
 > **本节关键术语**: 编码 (Encoding) · UTF-8 · OsString · CString · 字符串操作 · 字符 (char) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 字符串与编码：Rust 的文本处理类型系统
+>
 > **EN**: Type System
 > **Summary**: - [字符串与编码：Rust 的文本处理types系统](#字符串与编码rust-的文本处理types系统) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 String vs \&str：ownership谱系](#11-string-vs-strownership谱系) - [1.2 UTF-8：Rust 的编码选择](#12-utf-8rust-的编码选择) - [1.3 平台字符串：OsString 与 CString](#13-平台字符串osstring-与-cstring) - [二、技术细节](#二技术细节) - [2.1 字符串切片与字符边界](#21-字符串切片与字符边界) -
 

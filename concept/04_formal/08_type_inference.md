@@ -1,6 +1,7 @@
 > **内容分级**: [专家级]
 
 # 类型推断：Hindley-Milner 算法与 Rust 的工业实现
+>
 > **EN**: 类型推断：Hindley-Milner 算法与 Rust 的工业实现 (Chinese)
 > **Summary**: - [types推断：Hindley-Milner 算法与 Rust 的工业实现](#types推断hindley-milner-算法与-rust-的工业实现) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 从显式types到隐式推断](#11-从显式types到隐式推断) - [1.2 Hindley-Milner 算法](#12-hindley-milner-算法) - [1.3 Rust 的types推断扩展](#13-rust-的types推断扩展) - [二、技术细节](#二技术细节) - [2.1 统一（Unification）](#21-统一unification) - [十、边
 

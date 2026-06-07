@@ -1,6 +1,7 @@
 # `must_not_suspend` Lint Preview
+>
 > **EN**: `must_not_suspend` Lint Preview (Chinese)
-> **Summary**: ```rust,compile_fail use std::cell::RefCell; async fn bad_async() { let data = RefCell::new(42); let borrow = data.borrow_mut(); // ❌ 运行时 panic: 若 .await 后其他任务尝试borrowing data // async 函数可能在 await 点挂起，RefCell 的 borrow 跨越 await tokio::task::yield_now().await; println!("{}", borrow); } fn main() {} ``` | 定理 
+> **Summary**: ```rust,compile_fail use std::cell::RefCell; async fn bad_async() { let data = RefCell::new(42); let borrow = data.borrow_mut(); // ❌ 运行时 panic: 若 .await 后其他任务尝试borrowing data // async 函数可能在 await 点挂起，RefCell 的 borrow 跨越 await tokio::task::yield_now().await; println!("{}", borrow); } fn main() {}``` | 定理
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

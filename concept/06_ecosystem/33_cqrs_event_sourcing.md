@@ -3,6 +3,7 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # CQRS & Event Sourcing（命令查询职责分离与事件溯源）
+>
 > **EN**: CQRS & Event Sourcing（命令查询职责分离与事件溯源） (Chinese)
 > **Summary**: - [CQRS \& Event Sourcing（命令查询职责分离与事件溯源）](#cqrs--event-sourcing命令查询职责分离与事件溯源) - [📑 目录](#-目录) - [一、权威定义（Definition）](#一权威定义definition) - [1.1 CQRS：命令与查询的分离](#11-cqrs命令与查询的分离) - [1.2 事件溯源：不可变事件流](#12-事件溯源不可变事件流) - [1.3 CQRS+ES 的协同关系](#13-cqrses-的协同关系) - [二、概念属性矩阵](#二概念属性矩阵) - [2.1 CQRS+ES 模式对比矩阵](#21-
 >

@@ -1,4 +1,5 @@
 # Rust 知识体系思维表征覆盖率仪表板（Quality Dashboard v2）
+>
 > **EN**: Rust 知识体系思维表征覆盖率仪表板（Quality Dashboard v2） (Chinese)
 > **Summary**: - [Rust 知识体系思维表征覆盖率仪表板（Quality Dashboard v2）](#rust-知识体系思维表征覆盖率仪表板quality-dashboard-v2) - [📑 目录](#-目录) - [一、全局概览](#一全局概览) - [二、思维表征types覆盖矩阵](#二思维表征types覆盖矩阵) - [三、新增思维表征统计（Wave 2026-05-23）](#三新增思维表征统计wave-2026-05-23) - [3.1 新增文件清单](#31-新增文件清单) - [3.2 新增表征types定义](#32-新增表征types定义) - [四、来源对齐率追踪](#四来源对齐率追踪) - [五、
 

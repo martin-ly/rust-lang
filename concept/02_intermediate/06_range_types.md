@@ -3,6 +3,7 @@
 > **本节关键术语**: 范围类型 (Range Type) · core::range · std::ops::Range · 区间运算 · 迭代器范围 (Range Iterator) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # Rust 范围类型语义：`std::ops::Range` → `core::range`
+>
 > **EN**: Rust 范围类型语义：`std::ops::Range` → `core::range` (Chinese)
 > **Summary**: - [Rust 范围types语义：`std::ops::Range` → `core::range`](#rust-范围types语义stdopsrange--corerange) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 范围types的数学语义](#11-范围types的数学语义) - [1.2 `std::ops::Range`：运行时迭代器语义](#12-stdopsrange运行时迭代器语义) - [1.3 `core::range`：编译期值语义](#13-corerange编译期值语义) - [1.4 `IntoIterator` vs `Iterator`：设
 >

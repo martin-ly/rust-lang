@@ -1,6 +1,7 @@
 # L3 高级概念层（Advanced）
+>
 > **EN**: L3 高级概念层（Advanced） (Chinese)
-> **Summary**: ```mermaid mindmap root((L3 高级概念层<br/>Advanced)) concurrency SendSync[Send / Sync] MutexRwLock[Mutex / RwLock] 原子操作[Atomics & Memory Ordering] Channel[Channel / Message Passing] async Future[Future / Poll] async_await[async / await] Pin[Pin<&mut T>] AFIT[AFIT / RPITIT] Runtime[Runtime: Tokio] Unsafe 裸指针[*const 
+> **Summary**: ```mermaid mindmap root((L3 高级概念层<br/>Advanced)) concurrency SendSync[Send / Sync] MutexRwLock[Mutex / RwLock] 原子操作[Atomics & Memory Ordering] Channel[Channel / Message Passing] async Future[Future / Poll] async_await[async / await] Pin[Pin<&mut T>] AFIT[AFIT / RPITIT] Runtime[Runtime: Tokio] Unsafe 裸指针[*const
 
 > **受众**: [专家]
 > **定位**：Rust 的高级特性，涉及并发、异步、Unsafe 和元编程。本层是 L1-L2 概念在**复杂场景**中的组合应用与边界突破。

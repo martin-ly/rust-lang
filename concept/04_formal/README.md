@@ -1,4 +1,5 @@
 # L4 形式化理论层（Formal Methods）
+>
 > **EN**: Formal Methods
 > **Summary**: 进入 L4 之前，你需要确认已掌握以下基础。L4 不是"更难的 Rust"，而是**用数学语言重新表达你已理解的 Rust 概念**。 | 前置能力 | 验证标准 | 学习资源 | |:---|:---|:---| | ownership直觉 | 能向新手解释"为什么 `&mut` 不能别名" | [L1 ownership](../01_foundation/01_ownership.md) | | borrowing规则 | 能独立标注含 3+ 引用的函数签名 | [L2 lifetimes](../02_intermediate/18_lifetimes_advanced.md) | | types系统 | 理解 `enum`/`struc
 

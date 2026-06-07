@@ -1,8 +1,9 @@
 > **内容分级**: [专家级]
 
 # 测验：Unsafe Rust（L3 试点扩展）
+>
 > **EN**: Unsafe Rust
-> **Summary**: ```rust fn main() { let mut num = 5; let r1 = &num as *const i32; let r2 = &mut num as *mut i32; unsafe { println!("r1 is: {}", *r1); println!("r2 is: {}", *r2); } } ``` <details> <summary>💡 点击展开答案与解析</summary> **答案**：✅ 能编译，但 **Miri 会报告 Undefined Behavior**。 **输出**： ``` r1 is: 5 r2 is: 5 ``` **解析**：
+> **Summary**: ```rust fn main() { let mut num = 5; let r1 = &num as *const i32; let r2 = &mut num as *mut i32; unsafe { println!("r1 is: {}", *r1); println!("r2 is: {}", *r2); } }``` <details> <summary>💡 点击展开答案与解析</summary> **答案**：✅ 能编译，但 **Miri 会报告 Undefined Behavior**。 **输出**： ``` r1 is: 5 r2 is: 5 ``` **解析**：
 
 > **受众**: [专家]
 > **内容分级**: [专家级]

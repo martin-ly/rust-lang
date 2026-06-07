@@ -1,11 +1,12 @@
 > **内容分级**: [专家级]
-
+>
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Rust 编译器基础设施深度解析
+>
 > **EN**: Compiler Internals
-> **Summary**: ```text Rust compiler（rustc）流水线: ┌─────────────────────────────────────────────────────────────────┐ │  源代码 (.rs)                                                   │ │     ↓                                                           │ │  词法分析 (Lexer)                                               │ │     ↓
-
+> **Summary**:
+>
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 系统梳理 Rust 编译器（rustc）的核心基础设施——并行前端、Cranelift 后端、build-std、Sanitizer——分析其对编译速度、目标平台和开发体验的影响。
@@ -17,9 +18,7 @@
 > **来源**: [Rust Compiler Team](https://rust-lang.github.io/compiler-team/) · [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/) · [Cranelift README](https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/README.md) · [RFC 3873 — build-std](https://github.com/rust-lang/rfcs/pull/3873)
 
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
-
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 一、编译器架构总览

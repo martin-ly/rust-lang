@@ -1,4 +1,5 @@
 # Application Domains（软件工程应用主题）
+>
 > **EN**: Application Domains（软件工程应用主题） (Chinese)
 > **Summary**: **变更日志**: - v1.0 (2026-05-12): 初始版本，覆盖 8 大应用领域、工业案例、技术栈矩阵、L1-L5 概念映射 - v1.1 (2026-05-26): 权威内容对齐：补充 esp-hal 1.0.0（首个厂商官方支持 Rust SDK，Espressif 付费团队维护）、Linux 内核 v7.0-rc4 pin-init 安全修复（InitOk token、未对齐字段初始化移除） [来源: Web Authority Alignment Batch 15] [来源: [Async Book](https://rust-lang.github.io/async-bo
 
