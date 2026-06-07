@@ -1,4 +1,6 @@
 # Design Patterns（设计模式）
+> **EN**: Design Patterns
+> **Summary**: **变更日志**: - v1.0 (2026-05-12): 初始版本 - v1.1 (2026-05-12): Wave 3 扩展——新增模式、反模式、语言对比、学术来源 [来源: [TRPL](https://doc.rust-lang.org/book/)] [来源: [Wikipedia](https://en.wikipedia.org/)] | **模式** | **分类** | **问题** | **Rust 实现** | **关键特性** | |:---|:---|:---|:---|:---| | **RAII** | 结构型/资源 | 资源自动释放 | `Drop` tra
 
 > **受众**: [进阶]
 > **内容分级**: [专家级]

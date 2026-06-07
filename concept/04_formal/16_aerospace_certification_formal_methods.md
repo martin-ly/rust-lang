@@ -1,6 +1,8 @@
 > **内容分级**: [专家级]
 
 # 航空航天认证与形式化方法 (Aerospace Certification & Formal Methods)
+> **EN**: Formal Methods
+> **Summary**: - [航空航天认证与formal methods方法 (Aerospace Certification \& Formal Methods)](#航空航天认证与formal methods方法-aerospace-certification--formal-methods) - [📑 目录](#-目录) - [一、引言](#一引言) - [1.1 DO-178C 航空软件标准](#11-do-178c-航空软件标准) - [1.2 DO-333 Formal Methods Supplement](#12-do-333-formal-methods-supplement) - [二、DO-178C 等级要求矩阵](#二do-178c-等
 
 > **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。

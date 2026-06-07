@@ -3,6 +3,8 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态）
+> **EN**: Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） (Chinese)
+> **Summary**: - [Robotics \& ROS2 in Rust（机器人学与 ROS2 Rust 生态）](#robotics--ros2-in-rust机器人学与-ros2-rust-生态) - [📑 目录](#-目录) - [一、权威定义（Definition）](#一权威定义definition) - [1.1 机器人软件栈](#11-机器人软件栈) - [1.2 实时约束与确定性](#12-实时约束与确定性) - [1.3 ROS2 架构](#13-ros2-架构) - [二、概念属性矩阵](#二概念属性矩阵) - [三、ROS2 Rust 生态](#三ros2-rust-生态) - [3.1 
 
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价

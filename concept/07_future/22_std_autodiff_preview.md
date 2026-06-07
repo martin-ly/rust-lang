@@ -1,4 +1,6 @@
 # `std::autodiff`：Rust 官方自动微分前沿追踪
+> **EN**: `std::autodiff`：Rust 官方自动微分前沿追踪 (Chinese)
+> **Summary**: 自动微分是计算函数导数的**精确数值方法**，区别于： | 方法 | 原理 | 精度 | 适用场景 | | :--- | :--- | :--- | :--- | | **符号微分** | 代数公式推导 | 精确 | 简单函数，公式化场景 | | **数值微分** | `(f(x+h) - f(x)) / h` | 近似（截断/舍入误差）| 快速验证、黑盒函数 | | **自动微分** | 链式法则 + 程序结构追踪 | **精确到机器精度** | 深度学习、科学计算 | 当前 Rust ML 生态的梯度计算依赖框架层实现： ```text Burn:   自定义 ADBackend trai
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)
@@ -12,12 +14,15 @@
 > **定位**: 追踪 Rust 语言层面的自动微分（Automatic Differentiation, AD）实验进展，分析其对 AI/ML 生态的潜在影响。
 > **前置概念**: [Generics](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md) · [Machine Learning Ecosystem](../06_ecosystem/46_machine_learning_ecosystem.md)
 > **后置延伸**: [Rust in AI](./21_rust_in_ai.md) · [Evolution](./03_evolution.md)
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
-> **来源**: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) · [AutoDiff RFC Draft](https://github.com/rust-lang/rfcs/pull/0000-autodiff) · [rustc_autodiff crate](https://github.com/Rust-AutoDiff/rustc_autodiff) · [Burn ADBackend](https://burn.dev/)
-
+> **来源**:
+>
+> [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) ·
+> [AutoDiff RFC Draft](https://github.com/rust-lang/rfcs/pull/0000-autodiff) ·
+> [rustc_autodiff crate](https://github.com/Rust-AutoDiff/rustc_autodiff) ·
+> [Burn ADBackend](https://burn.dev/)
 > **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
 
 ## 一、核心概念
@@ -27,7 +32,7 @@
 自动微分是计算函数导数的**精确数值方法**，区别于：
 
 | 方法 | 原理 | 精度 | 适用场景 |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | **符号微分** | 代数公式推导 | 精确 | 简单函数，公式化场景 |
 | **数值微分** | `(f(x+h) - f(x)) / h` | 近似（截断/舍入误差）| 快速验证、黑盒函数 |
 | **自动微分** | 链式法则 + 程序结构追踪 | **精确到机器精度** | 深度学习、科学计算 |

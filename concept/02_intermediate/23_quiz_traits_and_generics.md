@@ -1,6 +1,8 @@
 > **内容分级**: [综述级]
 
 # 测验：Trait 与泛型（试点扩展）
+> **EN**: Generics
+> **Summary**: ```rust trait Summary { fn summarize(&self) -> String; } struct Article { headline: String, } fn main() { let article = Article { headline: String::from("News") }; println!("{}", article.summarize()); } ``` <details> <summary>💡 点击展开答案与解析</summary> **答案**：❌ 不能编译。 **错误信息**：`no method named summarize f
 
 > **受众**: [进阶]
 > **内容分级**: [综述级]

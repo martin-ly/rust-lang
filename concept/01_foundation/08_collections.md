@@ -4,6 +4,8 @@
 > **本节关键术语**: 集合 (Collection) · 向量 (Vec) · 哈希映射 (HashMap) · 哈希集合 (HashSet) · 二叉堆 (BinaryHeap) — [完整对照表](../00_meta/terminology_glossary.md)
 
 # 集合类型：Rust 标准库的数据结构谱系
+> **EN**: 集合类型：Rust 标准库的数据结构谱系 (Chinese)
+> **Summary**: - [集合types：Rust 标准库的数据结构谱系](#集合typesrust-标准库的数据结构谱系) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 集合types谱系](#11-集合types谱系) - [1.2 Vec：动态数组](#12-vec动态数组) - [1.3 HashMap vs BTreeMap](#13-hashmap-vs-btreemap) - [二、技术细节](#二技术细节) - [2.1 容量管理与重新分配](#21-容量管理与重新分配) - [2.2 Entry API](#22-entry-api) - [2.3 Drain 与保留模式](#23-
 
 > **📎 交叉引用**
 >

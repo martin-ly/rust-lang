@@ -18,6 +18,8 @@ use clap::Parser;
 use chrono::Local;
 
 # [derive(Parser)]
+> **EN**: [derive(Parser)] (Chinese)
+> **Summary**: 以下是一个完整的 Cargo Script 示例，演示 frontmatter 依赖声明与单文件执行： ```rust,ignore ```cargo [package] name = "csv-filter" edition = "2024" [dependencies] clap = { version = "4", features = ["derive"] } chrono = "0.4" ``` use clap::Parser; use chrono::Local; struct Args { #[arg(help = "输入 CSV 文件路径")] input: String, 
 
 struct Args {
     #[arg(help = "输入 CSV 文件路径")]

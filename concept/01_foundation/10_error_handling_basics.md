@@ -4,6 +4,8 @@
 > **本节关键术语**: 错误处理 (Error Handling) · Result · Option · 传播运算符 (? ) · 模式匹配错误 (Match on Result) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # Rust 错误处理基础
+> **EN**: Error Handling
+> **Summary**: - [Rust 错误处理基础](#rust-错误处理基础) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 Result types](#11-result-types) - [1.2 Option types](#12-option-types) - [1.3 ? 运算符](#13--运算符) - [二、错误转换与组合](#二错误转换与组合) - [2.1 From trait](#21-from-trait) - [2.2 map 与 and\_then](#22-map-与-and_then) - [2.3 组合模式](#23-组合模式) - [三、Panic 与不可恢复错误]
 
 > **📎 交叉引用**
 >

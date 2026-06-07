@@ -3,6 +3,8 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Rust 数据库访问生态
+> **EN**: Database Access
+> **Summary**: - [Rust 数据库访问生态](#rust-数据库访问生态) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 SQLx — 编译期检查](#11-sqlx--编译期检查) - [1.2 Diesel — types安全 ORM](#12-diesel--types安全-orm) - [1.3 SeaORM — async ORM](#13-seaorm--async-orm) - [1.4 Toasty — Tokio 团队的async ORM](#14-toasty--tokio-团队的async-orm) - [二、查询模式](#二查询模式) - [2.1 原始 SQL](#21-原始-s
 >
 > **受众**: [进阶]
 

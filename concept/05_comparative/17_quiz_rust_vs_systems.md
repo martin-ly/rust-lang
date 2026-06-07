@@ -1,6 +1,8 @@
 > **内容分级**: [综述级]
 
 # 测验：Rust vs 系统编程语言（L5 试点扩展）
+> **EN**: 测验：Rust vs 系统编程语言（L5 试点扩展） (Chinese)
+> **Summary**: ```c // C 代码 char* greet() { char msg[] = "Hello"; return msg;  // 返回局部变量地址！ } int main() { char* s = greet(); printf("%s\n", s); return 0; } ``` <details> <summary>💡 点击展开答案与解析</summary> **答案**：C 代码有**悬垂指针（dangling pointer）**——`msg` 是局部数组，函数返回后栈帧被销毁，`s` 指向无效memory。 **Rust 的等效代码**： ```rust fn greet() -> 
 
 > **受众**: [进阶]
 > **内容分级**: [综述级]

@@ -1,6 +1,8 @@
 > **内容分级**: [专家级]
 
 # RustBelt & Verification Toolchain（RustBelt 与验证工具链）
+> **EN**: Toolchain
+> **Summary**: **变更日志**: - v3.0 (2026-05-13): 新增 §3 Concurrent Separation Logic（CSL）含 Mutex/Arc formal methods；新增 §6 标准库原语验证矩阵；新增 §8 formal methods验证工具链映射（含光谱图）；扩展层次一致性标注至 L3 Unsafe / L3 concurrency / L7 formal methods方法；补充章节过渡段落$entry - v2.0 (2026-05-13): 重构定理一致性矩阵至 11 行，新增反命题决策树 3 组，扩展认知路径 5 步，补充层次一致性标注（L1–L3），强化 Wikipedia / POPL 2018 / Iris 引用 - v1.0 (
 
 > **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。

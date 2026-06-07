@@ -1,6 +1,8 @@
 > **内容分级**: [专家级]
 
 # 测验：并发与异步（L3 试点扩展）
+> **EN**: Concurrency
+> **Summary**: ```rust use std::rc::Rc; use std::thread; fn main() { let data = Rc::new(42); let handle = thread::spawn(move || { println!("{}", *data); }); handle.join().unwrap(); } ``` <details> <summary>💡 点击展开答案与解析</summary> **答案**：❌ 不能编译。 **错误信息**：`Rc<i32> cannot be sent between threads safely` **解析**：`Rc<T>` 
 
 > **受众**: [专家]
 > **内容分级**: [专家级]

@@ -1,4 +1,6 @@
 # Stable ABI Preview
+> **EN**: Stable ABI Preview (Chinese)
+> **Summary**: ```rust,compile_fail // Rust 的默认 ABI 不稳定（随compiler版本变化） pub extern "C" fn rust_function(x: i32) -> i32 { x * 2 } // ❌ 链接错误: 若 C 代码按 Rust 默认 ABI 调用（而非 extern "C"） // C 代码: // int rust_function(int x); // 声明匹配 extern "C" // // 但 C++ 的 name mangling 可能与 Rust 的 #[no_mangle] 冲突 fn main() {} ``` | 定理 | 前提 | 结论
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)
@@ -66,7 +68,7 @@ fn main() {}
 ### 核心推理链
 
 | 定理 | 前提 | 结论 | 置信度 |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | Stable ABI Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Stable ABI Preview 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Stable ABI Preview 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |

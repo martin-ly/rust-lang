@@ -3,6 +3,8 @@
 > **本节关键术语**: 高级生命周期 (Advanced Lifetimes) · HRTB · 生命周期省略规则 (Elision) · 子类型 (Subtyping) · 变型 (Variance) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 生命周期高级主题：从 HRTB 到自引用类型
+> **EN**: Lifetimes
+> **Summary**: - [lifetimes高级主题：从 HRTB 到自引用types](#lifetimes高级主题从-hrtb-到自引用types) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 高阶lifetimes（HRTB）](#11-高阶lifetimeshrtb) - [1.2 lifetimes省略规则](#12-lifetimes省略规则) - [1.3 变型（Variance）](#13-变型variance) - [二、技术细节](#二技术细节) - [2.1 HRTB 的实际应用](#21-hrtb-的实际应用) - [2.2 自引用与 Pin](#22-自引用与-pin) - [2.3 lifetimes与闭包](#23-lifetimes与
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价

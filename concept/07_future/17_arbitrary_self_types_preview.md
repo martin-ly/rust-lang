@@ -1,4 +1,6 @@
 # Arbitrary Self Types 预览：自定义方法接收器
+> **EN**: Arbitrary Self Types 预览：自定义方法接收器 (Chinese)
+> **Summary**: - [Arbitrary Self Types 预览：自定义方法接收器](#arbitrary-self-types-预览自定义方法接收器) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 当前限制](#11-当前限制) - [1.2 Arbitrary Self Types 提案](#12-arbitrary-self-types-提案) - [二、技术细节](#二技术细节) - [2.1 `DispatchFromDyn` Trait](#21-dispatchfromdyn-trait) - [2.2 与 `Deref` 的关系](#22-与-deref
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

@@ -1,6 +1,8 @@
 > **内容分级**: [专家级]
 
 # Concurrency（并发模型）
+> **EN**: Concurrency
+> **Summary**: **变更日志**: - v1.0 (2026-05-12): 初始版本，完成权威定义、Send/Sync 矩阵、同步原语对比、fearless concurrency formal methods论证、思维导图、示例反例 - v1.1 (2026-05-13): 增强定理一致性矩阵（11行 ⟹ 推理链）、反命题决策树、6步认知路径、章节过渡、层次一致性标注 - v1.3 (2026-05-13): Phase B formal methods深化——新增§3.1b C11 memory模型精确映射（happens-before/synchronizes-with、AtomicOrdering 四种模式精确语义、Release-Acquire 配
 
 > **📎 交叉引用**
 >
@@ -116,6 +118,9 @@
     - [10.4 边界测试：`std::sync::mpsc` 的多生产者单消费者限制（编译错误）](#104-边界测试stdsyncmpsc-的多生产者单消费者限制编译错误)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [参考来源](#参考来源)
+  - [实践](#实践)
+    - [对应代码示例](#对应代码示例)
+    - [建议练习](#建议练习)
   - [导航：下一步去哪？](#导航下一步去哪)
 
 ## 零、认知路径（Cognitive Path）
@@ -1354,6 +1359,25 @@ fn main() {
 > **过渡**: Concurrency（并发模型） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Concurrency（并发模型） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Concurrency（并发模型） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+
+---
+
+---
+
+## 实践
+
+> 将本节概念转化为可编译代码。
+
+### 对应代码示例
+
+- **[crates/c05_threads](../../../crates/c05_threads/)** — 与本节概念对应的可编译 crate 示例
+- **[exercises/src/concurrency/](../../../exercises/src/concurrency/)** — 配套练习题
+
+### 建议练习
+
+1. 阅读 `crates/c05_threads/` 中与"多线程与并发编程"相关的源码和示例
+2. 运行 `cargo test -p c05_threads` 验证理解
+3. 完成 `exercises/src/concurrency/` 中的练习任务
 
 ---
 

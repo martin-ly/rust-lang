@@ -1,4 +1,6 @@
 # Pin Ergonomics 与 Reborrow Traits 预研：超越 `Pin::as_mut`
+> **EN**: Traits
+> **Summary**: | # | 痛点 | 示例 | 影响 | |:---:|:---|:---|:---:| | 1 | **栈上 Pin 需要宏** | `let mut pinned = pin!(future);` | 初学者困惑：为什么不能 `let pinned = Pin::new(&mut future)` | | 2 | **Pinned 引用不能自动 reborrow** | `pinned.as_mut().await` | 每次都需要显式调用 `as_mut()`，代码噪音大 | | 3 | **方法签名噪音** | `fn poll(self: Pin<&mut Self>)` | 自定义
 
 > **状态**: 🧪 Nightly 实验性（MCP 已通过，RFC 推进中）
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

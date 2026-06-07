@@ -1,15 +1,15 @@
 # Rust 2027 Edition 及未来路线图
+> **EN**: Rust 2027 Edition 及未来路线图 (Chinese)
+> **Summary**: - [Rust 2027 Edition 及未来路线图](#rust-2027-edition-及未来路线图) - [📑 目录](#-目录) - [一、核心概念：Edition 2027 的设计空间](#一核心概念edition-2027-的设计空间) - [1.1 Edition 演进节奏与政策](#11-edition-演进节奏与政策) - [1.2 候选特性概览](#12-候选特性概览) - [1.3 特性依赖与 Edition 2027 关联图](#13-特性依赖与-edition-2027-关联图) - [二、types系统前沿](#二types系统前沿) - [2.1 Specializati
 >
 > **受众**: [专家]
 > **内容分级**: [综述级]
-
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S+P** — StructureProcedure
 > **双维定位**: C×Eva — 评价 Rust 技术路线图
 > **定位**: 分析 Rust **2027 Edition 及更远期**的潜在特性集合——从 gen/kw、特化稳定化、可移植 SIMD、自定义分配器到异步 Trait、TAIT 等前沿议题，评价其技术成熟度与生态影响。
 > **前置概念**: [Edition Guide](23_rust_edition_guide.md) · [Version Tracking](./05_rust_version_tracking.md) · [Evolution](./03_evolution.md)
 > **后置概念**: [Formal Methods](./02_formal_methods.md) · [Rust in AI](./21_rust_in_ai.md)
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -83,11 +83,8 @@
 ---
 
 ## 一、核心概念：Edition 2027 的设计空间
->
->
 
 ### 1.1 Edition 演进节奏与政策
->
 
 ```text
 Rust Edition 时间线:
@@ -813,7 +810,19 @@ fn main() {
 }
 ```
 
-> **修正**: `!`（never type）是 Rust 的类型系统核心：表示"永不返回"的计算。`!` 可强制转换（coerce）为任意类型，因此 `if cond { 42 } else { panic!() }` 的类型为 `i32`。但 `!` 的稳定化过程漫长：从实验性到部分稳定（`Infallible` 别名）到完全稳定，跨越多个 Rust 版本。编译器在类型推断 `!` 时的边缘情况：1) `match` 分支类型统一；2) 闭包返回类型推断；3) `Result<T, !>` 的 `?` 运算符行为。`!` 的稳定化是 Rust 类型系统成熟度的重要里程碑——它使"不可恢复错误"在类型层面得到精确表达，而非使用占位类型（`std::convert::Infallible`）。这与 Haskell 的 `Void`（需显式 `absurd` 转换）或 TypeScript 的 `never`（类似语义，但无运行时对应）类似。[来源: [Rust RFC 1216](https://rust-lang.github.io/rfcs/1216-bang-type.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**:
+> `!`（never type）是 Rust 的类型系统核心：表示"永不返回"的计算。
+> `!` 可强制转换（coerce）为任意类型，因此 `if cond { 42 } else { panic!() }` 的类型为 `i32`。
+> 但 `!` 的稳定化过程漫长：从实验性到部分稳定（`Infallible` 别名）到完全稳定，跨越多个 Rust 版本。
+> 编译器在类型推断 `!` 时的边缘情况：
+>
+> 1) `match` 分支类型统一；
+> 2) 闭包返回类型推断；
+> 3) `Result<T, !>` 的 `?` 运算符行为。
+>
+> `!` 的稳定化是 Rust 类型系统成熟度的重要里程碑——它使"不可恢复错误"在类型层面得到精确表达，而非使用占位类型（`std::convert::Infallible`）。
+> 这与 Haskell 的 `Void`（需显式 `absurd` 转换）或 TypeScript 的 `never`（类似语义，但无运行时对应）类似。
+> [来源: [Rust RFC 1216](https://rust-lang.github.io/rfcs/1216-bang-type.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.2 边界测试：GAT（泛型关联类型）的递归约束（编译错误）
 
@@ -836,7 +845,15 @@ impl Iterable for Vec<i32> {
 }
 ```
 
-> **修正**: GAT（Generic Associated Types，Rust 1.65 稳定）允许关联类型带有自己的泛型参数（通常是生命周期），解决了返回"借用迭代器"等长期问题。但 GAT 的使用引入了新的复杂度：**递归约束**和**高阶 trait bound（HRTB）**。上述代码中，`fn iter` 的实现递归调用自身（无限循环），但编译错误可能首先由生命周期约束引起——`Self::Iter<'a>` 的定义要求 `'a` 与 `self` 的借用生命周期匹配。GAT 的正确使用模式：标准库中的 `LendingIterator`（实验性）、自定义集合的借用视图、类型状态机（type-state machines）。Rust 的 GAT 设计与 Haskell 的 type families、C++ 的模板模板参数类似，但集成在 trait system 中，保持零成本抽象。[来源: [Rust RFC 1598](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**:
+>
+> GAT（Generic Associated Types，Rust 1.65 稳定）允许关联类型带有自己的泛型参数（通常是生命周期），解决了返回"借用迭代器"等长期问题。
+> 但 GAT 的使用引入了新的复杂度：**递归约束**和**高阶 trait bound（HRTB）**。
+> 上述代码中，`fn iter` 的实现递归调用自身（无限循环），但编译错误可能首先由生命周期约束引起——`Self::Iter<'a>` 的定义要求 `'a` 与 `self` 的借用生命周期匹配。
+> GAT 的正确使用模式：标准库中的 `LendingIterator`（实验性）、自定义集合的借用视图、类型状态机（type-state machines）。
+> Rust 的 GAT 设计与 Haskell 的 type families、C++ 的模板模板参数类似，但集成在 trait system 中，保持零成本抽象。
+> [来源: [Rust RFC 1598](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.6 边界测试：`impl Trait` 在 `let` 绑定中的类型推断限制（编译错误）
 
@@ -855,7 +872,19 @@ fn main() {
 }
 ```
 
-> **修正**: `impl Trait`（存在类型）可在**函数返回类型**和**函数参数**中使用（RPIT、APIT），但不能在**let 绑定的类型注解**中使用。原因是 `impl Trait` 隐藏具体类型，编译器需要知道变量的确切大小和对齐，而 `impl Trait` 不提供这些信息（它只保证实现了某 trait）。这与类型别名 `type MyIter = impl Iterator<Item = i32>`（不稳定，`type_alias_impl_trait`）不同——类型别名在定义点固定具体类型，可在 let 中使用。`impl Trait` 的设计权衡：1) 函数返回：隐藏实现细节，允许变更；2) 函数参数：接受任何实现者；3) let 绑定：不提供额外价值，增加复杂性。这与 Swift 的 `some Collection`（类似 `impl Trait`，同样限制）或 Haskell 的 `exists a. Show a => a`（存在类型，用法更灵活）类似——Rust 的 `impl Trait` 是受限但实用的存在类型。[来源: [Rust RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bound.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-02-traits.html)]
+> **修正**:
+> `impl Trait`（存在类型）可在**函数返回类型**和**函数参数**中使用（RPIT、APIT），但不能在**let 绑定的类型注解**中使用。
+> 原因是 `impl Trait` 隐藏具体类型，编译器需要知道变量的确切大小和对齐，而 `impl Trait` 不提供这些信息（它只保证实现了某 trait）。
+> 这与类型别名 `type MyIter = impl Iterator<Item = i32>`（不稳定，`type_alias_impl_trait`）不同——类型别名在定义点固定具体类型，可在 let 中使用。
+> `impl Trait` 的设计权衡：
+>
+> 1) 函数返回：隐藏实现细节，允许变更；
+> 2) 函数参数：接受任何实现者；
+> 3) let 绑定：不提供额外价值，增加复杂性。
+>
+> 这与 Swift 的 `some Collection`（类似 `impl Trait`，同样限制）或 Haskell 的 `exists a. Show a => a`（存在类型，用法更灵活）类似——Rust 的 `impl Trait` 是受限但实用的存在类型。
+> [来源: [Rust RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bound.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-02-traits.html)]
 
 ### 10.5 边界测试：语言特性稳定化的时间预估偏差（工程规划风险）
 
@@ -874,7 +903,28 @@ where
 }
 ```
 
-> **修正**: Rust 的**特性稳定化**遵循严格流程：nightly → 实现完善 → FCP（Final Comment Period）→ 稳定。但某些复杂特性长期停滞：1) `generic_const_exprs`：依赖类型级计算，设计困难；2) `specialization`：类型系统 soundness 问题；3) `unsized_locals`：实现复杂。工程风险：1) 项目启动时依赖 nightly 特性，预期 6 个月稳定化，实际 3 年未完成；2) nightly 编译器版本漂移，特性语义变更，代码不兼容；3) 无法发布到 crates.io（限制 nightly 依赖）。缓解策略：1) 生产代码只用稳定特性；2) nightly 特性用 feature flag 隔离，提供稳定回退；3) 跟踪 [Rust Lang Team 的优先级](https://github.com/rust-lang/lang-team/) 和 [RFC 合并状态](https://rust-lang.github.io/rfcs/)。这与 Go 的"无 nightly，所有特性直接进入稳定版"或 Java 的 JEP 流程（长期但可预测）不同——Rust 的 nightly/stable 双轨制提供早期实验能力，但稳定化时间表不确定性是工程风险。[来源: [Rust Lang Team Roadmap](https://github.com/rust-lang/lang-team/)] · [来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]
+> **修正**:
+>
+> Rust 的**特性稳定化**遵循严格流程：nightly → 实现完善 → FCP（Final Comment Period）→ 稳定。
+> 但某些复杂特性长期停滞：
+>
+> 1) `generic_const_exprs`：依赖类型级计算，设计困难；
+> 2) `specialization`：类型系统 soundness 问题；
+> 3) `unsized_locals`：实现复杂。
+>
+> 工程风险：
+>
+> 1) 项目启动时依赖 nightly 特性，预期 6 个月稳定化，实际 3 年未完成；
+> 2) nightly 编译器版本漂移，特性语义变更，代码不兼容；
+> 3) 无法发布到 crates.io（限制 nightly 依赖）。
+>
+> 缓解策略：
+>
+> 1) 生产代码只用稳定特性；
+> 2) nightly 特性用 feature flag 隔离，提供稳定回退；
+> 3) 跟踪 [Rust Lang Team 的优先级](https://github.com/rust-lang/lang-team/) 和 [RFC 合并状态](https://rust-lang.github.io/rfcs/)。
+> 这与 Go 的"无 nightly，所有特性直接进入稳定版"或 Java 的 JEP 流程（长期但可预测）不同——Rust 的 nightly/stable 双轨制提供早期实验能力，但稳定化时间表不确定性是工程风险。
+> [来源: [Rust Lang Team Roadmap](https://github.com/rust-lang/lang-team/)] · [来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]
 
 ### 10.3 边界测试：nightly 特性在 production 中的不可预测性（编译中断）
 
@@ -896,9 +946,27 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的**特性稳定化**遵循严格流程：nightly → 实现完善 → FCP → 稳定。但某些复杂特性长期停滞：1) `generic_const_exprs`：依赖类型级计算，设计困难；2) `specialization`：类型系统 soundness 问题；3) `unsized_locals`：实现复杂。工程风险：1) 项目启动时依赖 nightly 特性，预期 6 个月稳定化，实际 3 年未完成；2) nightly 编译器版本漂移，特性语义变更，代码不兼容；3) 无法发布到 crates.io（限制 nightly 依赖）。缓解策略：1) 生产代码只用稳定特性；2) nightly 特性用 feature flag 隔离，提供稳定回退；3) 跟踪 Rust Lang Team 的优先级和 RFC 合并状态。[来源: [Rust Lang Team Roadmap](https://github.com/rust-lang/lang-team/)] · [来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]
-> **过渡**: Rust 2027 Edition 及未来路线图 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Rust 2027 Edition 及未来路线图 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **修正**:
+>
+> Rust 的**特性稳定化**遵循严格流程：nightly → 实现完善 → FCP → 稳定。
+> 但某些复杂特性长期停滞：
+>
+> 1) `generic_const_exprs`：依赖类型级计算，设计困难；
+> 2) `specialization`：类型系统 soundness 问题；
+> 3) `unsized_locals`：实现复杂。
+>
+> 工程风险：
+>
+> 1) 项目启动时依赖 nightly 特性，预期 6 个月稳定化，实际 3 年未完成；
+> 2) nightly 编译器版本漂移，特性语义变更，代码不兼容；
+> 3) 无法发布到 crates.io（限制 nightly 依赖）。
+>
+> 缓解策略：
+>
+> 1) 生产代码只用稳定特性；
+> 2) nightly 特性用 feature flag 隔离，提供稳定回退；
+> 3) 跟踪 Rust Lang Team 的优先级和 RFC 合并状态。
+> [来源: [Rust Lang Team Roadmap](https://github.com/rust-lang/lang-team/)] · [来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]
 > **过渡**: Rust 2027 Edition 及未来路线图 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ### 补充定理链
@@ -914,15 +982,13 @@ fn main() {
 ### 核心推理链
 
 | 定理 | 前提 | 结论 | 置信度 |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | Rust 2027 Edition 及未来路线图 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Rust 2027 Edition 及未来路线图 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Rust 2027 Edition 及未来路线图 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 Rust 2027 Edition 及未来路线图 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 Rust 2027 Edition 及未来路线图 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: Rust 2027 Edition 及未来路线图 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

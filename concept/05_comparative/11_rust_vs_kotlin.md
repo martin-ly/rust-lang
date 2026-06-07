@@ -2,6 +2,8 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Rust vs Kotlin：静态安全的两种路径
+> **EN**: Security Practices
+> **Summary**: - [Rust vs Kotlin：静态安全的两种路径](#rust-vs-kotlin静态安全的两种路径) - [📑 目录](#-目录) - [一、核心对比](#一核心对比) - [1.1 空安全机制](#11-空安全机制) - [1.2 concurrency模型](#12-concurrency模型) - [1.3 平台与生态](#13-平台与生态) - [二、语言特性差异](#二语言特性差异) - [2.1 types推断与generics](#21-types推断与generics) - [2.2 扩展函数与 Trait](#22-扩展函数与-trait) - [2.3 协程与 async/await](#23-协程与-asyncawait) - [三、
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价

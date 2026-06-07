@@ -1,4 +1,6 @@
 # MVP 学习路径：从零到多线程 CLI（40 小时）
+> **EN**: MVP 学习路径：从零到多线程 CLI（40 小时） (Chinese)
+> **Summary**: ```text Week 1: 基础能力构建（20h） ├─ Day 1-2: Hello World + 基础语法      [4h] ├─ Day 3-4: ownership与borrowing                [6h] ├─ Day 5-6: types系统与错误处理          [6h] └─ Day 7:   第一个 CLI 工具（无concurrency）    [4h] Week 2: concurrency与工程化（20h） ├─ Day 8-9:  集合与迭代器               [4h] ├─ Day 10-11: 多线程与concurrency              [6h] ├─ Day 12-13: async基础    
 
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **受众**: [初学者]

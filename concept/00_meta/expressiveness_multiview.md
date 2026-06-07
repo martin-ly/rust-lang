@@ -1,4 +1,6 @@
 # Rust 语义表达力多视角深化（Multiview Expressiveness Analysis）
+> **EN**: Rust 语义表达力多视角深化（Multiview Expressiveness Analysis） (Chinese)
+> **Summary**: **变更日志**: - v1.0 (2026-05-21): 初始版本——七视角表达力深化 + Curry-Howard 对应 + CPS/async 等价性 + π 演算映射 + 参数性 + IFC - [Rust 语义表达力多视角深化（Multiview Expressiveness Analysis）](#rust-语义表达力多视角深化multiview-expressiveness-analysis) - [📑 目录](#-目录) - [零、TL;DR —— 七视角表达力速查](#零tldr--七视角表达力速查) - [一、权威来源与梳理方法论](#一权威来源与梳理方法论) - [1.
 
 > **受众**: [研究者]
 > **定位**: 本文件从**纵向理论视角**（计算/类型/控制/内存/并发/抽象/安全）深化 Rust 的表达能力，与 `semantic_expressiveness.md` 的**横向七维光谱**形成正交互补。前者回答「Rust 能表达什么」，后者回答「Rust 从哪些维度表达」。

@@ -3,6 +3,8 @@
 > **本节关键术语**: 强制转换 (Coercion) · 显式转换 (Casting) · as · Deref 强制转换 · 类型推断 — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 类型强制与转换：显式与隐式的边界
+> **EN**: 类型强制与转换：显式与隐式的边界 (Chinese)
+> **Summary**: - [types强制与转换：显式与隐式的边界](#types强制与转换显式与隐式的边界) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 强制（Coercion）与转换（Cast）的区别](#11-强制coercion与转换cast的区别) - [1.2 Deref 强制](#12-deref-强制) - [1.3 子types强制](#13-子types强制) - [二、技术细节](#二技术细节) - [2.1 as 转换的完整矩阵](#21-as-转换的完整矩阵) - [2.2 From/Into 与 TryFrom/TryInto](#22-frominto-与-tryfrom
 
 > **受众**: [初学者]
 > **Bloom 层级**: 理解 → 应用

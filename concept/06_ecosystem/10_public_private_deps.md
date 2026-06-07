@@ -10,6 +10,8 @@ edition = "2024"
 
 [dependencies]
 # public = true: 下游 crate 可通过本 crate 的公共 API 使用 serde
+> **EN**: public = true: 下游 crate 可通过本 crate 的公共 API 使用 serde (Chinese)
+> **Summary**: 以下 `Cargo.toml` 演示如何显式控制依赖可见性，避免"依赖泄漏"： ```toml [package] name = "my-api" version = "0.1.0" edition = "2024" [dependencies] serde = { version = "1.0", features = ["derive"], public = true } thiserror = "2.0" [features] default = [] std = ["serde/std"] ``` compiler可见性规则效果： ```rust,ignore // 下游 crate 使用 my
 serde = { version = "1.0", features = ["derive"], public = true }
 
 # public = false (默认): 仅限内部使用，不暴露给下游

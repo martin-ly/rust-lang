@@ -1,4 +1,6 @@
 # Blockchain & Smart Contract Security（区块链与智能合约安全）
+> **EN**: Security Practices
+> **Summary**: **变更日志**: - v1.0 (2026-05-13): 初始版本——覆盖 Rust 区块链生态、合约安全formal methods、Kani 验证与 L1-L4 映射$entry 智能合约一旦部署即不可篡改，漏洞意味着**不可逆的资金损失**（The DAO、Parity 多签冻结等事件）。传统 EVM/Solidity 合约依赖运行时检查和人工审计，而 Rust 的编译期保证可消除整类漏洞。 Solana/Polkadot/Near 等 Rust 链将**合约执行模型**从"单线程状态机"推进到"并行交易处理"（Sealevel）或"异构分片"（Substrate）。Rust 的ownership模型天然匹配这种并行
 
 > **受众**: [进阶]
 > **内容分级**: [专家级]

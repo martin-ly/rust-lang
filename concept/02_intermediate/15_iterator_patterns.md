@@ -3,6 +3,8 @@
 > **本节关键术语**: 迭代器模式 (Iterator Pattern) · 适配器 (Adapter) · 消费者 (Consumer) · 惰性求值 (Lazy Evaluation) · 自定义迭代器 — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # Rust 迭代器模式
+> **EN**: Iterators
+> **Summary**: - [Rust 迭代器模式](#rust-迭代器模式) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 Iterator Trait](#11-iterator-trait) - [1.2 适配器链](#12-适配器链) - [1.3 惰性求值](#13-惰性求值) - [二、常用模式](#二常用模式) - [2.1 map-filter-collect](#21-map-filter-collect) - [2.2 fold 与归约](#22-fold-与归约) - [2.3 zip 与并行迭代](#23-zip-与并行迭代) - [三、自定义迭代器](#三
 >
 > **📎 交叉引用**
 >

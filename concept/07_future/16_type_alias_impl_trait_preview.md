@@ -1,4 +1,6 @@
 # TAIT Preview
+> **EN**: TAIT Preview (Chinese)
+> **Summary**: ```rust,compile_fail // 概念代码: TAIT 允许types别名使用 impl trait type Recursive = impl std::fmt::Display; fn make_recursive() -> Recursive { // ❌ 编译错误: TAIT 的 concrete type 必须是"确定"的 // 递归types（如包含自身）不被允许 "hello" } fn main() {} ``` | 定理 | 前提 | 结论 | 置信度 | | :--- | :--- | :--- | :--- | | TAIT Preview 基础原理 ⟹ 正确选型 | 
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

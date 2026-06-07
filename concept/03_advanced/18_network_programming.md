@@ -1,6 +1,8 @@
 > **内容分级**: [专家级]
 
 # Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象
+> **EN**: Async Programming
+> **Summary**: - [Rust 网络编程：Tokio TCP/UDP、async IO 与 Tower 服务抽象](#rust-网络编程tokio-tcpudpasync-io-与-tower-服务抽象) - [📑 目录](#-目录) - [一、权威定义与核心概念](#一权威定义与核心概念) - [1.1 async网络 IO 模型](#11-async网络-io-模型) - [1.2 Tokio Runtime 架构](#12-tokio-runtime-架构) - [1.3 TCP vs UDP 语义差异](#13-tcp-vs-udp-语义差异) - [1.4 Tower Service 抽象](#14-tower-servi
 
 > **受众**: [专家]
 > **Bloom 层级**: 应用 → 分析
@@ -64,6 +66,9 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
+  - [实践](#实践)
+    - [对应代码示例](#对应代码示例)
+    - [建议练习](#建议练习)
 
 ---
 
@@ -880,3 +885,20 @@ fn main() {
 ### 反命题与边界
 
 > **反命题**: "Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+
+---
+
+## 实践
+
+> 将本节概念转化为可编译代码。
+
+### 对应代码示例
+
+- **[crates/c10_networks](../../../crates/c10_networks/)** — 与本节概念对应的可编译 crate 示例
+
+### 建议练习
+
+1. 阅读 `crates/c10_networks/` 中与"网络编程"相关的源码和示例
+2. 运行 `cargo test -p c10_networks` 验证理解
+
+---

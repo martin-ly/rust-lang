@@ -1,6 +1,8 @@
 > **内容分级**: [综述级]
 
 # 测验：错误处理（试点扩展）
+> **EN**: Error Handling
+> **Summary**: ```rust fn main() { let x: Result<i32, &str> = Ok(5); let y: Result<i32, &str> = Err("error"); println!("{:?} {:?}", x.is_ok(), y.is_err()); } ``` <details> <summary>💡 点击展开答案与解析</summary> **答案**：`true true` **解析**： - `x.is_ok()` → `true`（`x` 是 `Ok`） - `y.is_err()` → `true`（`y` 是 `Err`） **`Result<T, 
 
 > **受众**: [初学者]
 > **内容分级**: [综述级]

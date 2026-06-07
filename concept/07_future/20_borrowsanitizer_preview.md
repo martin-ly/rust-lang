@@ -1,4 +1,6 @@
 # BorrowSanitizer 概念预研：运行时借用检查工业化
+> **EN**: Borrowing
+> **Summary**: - [BorrowSanitizer 概念预研：运行时borrowing检查工业化](#borrowsanitizer-概念预研运行时borrowing检查工业化) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 问题定义：编译期检查的边界](#11-问题定义编译期检查的边界) - [1.2 Miri：解释执行的 UB 检测](#12-miri解释执行的-ub-检测) - [1.3 BorrowSanitizer 的设计目标](#13-borrowsanitizer-的设计目标) - [1.4 Shadow Stack 与 Lock-and-Key 策略](#14-shadow-stac
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

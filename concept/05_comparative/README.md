@@ -1,4 +1,6 @@
 # L5 对比分析层（Comparative Analysis）
+> **EN**: L5 对比分析层（Comparative Analysis） (Chinese)
+> **Summary**: ```mermaid mindmap root((L5 对比分析层<br/>Comparative Analysis)) Rust vs C++ ownership对比[ownership vs 智能指针] borrowing对比[编译期检查 vs 无检查] formal methods对比[形式系统 vs 机制工程] AI时代[AI 时代的 Rust] Rust vs Go memory管理[ownership vs GC] concurrency模型[ownershipconcurrency vs CSP] 工程权衡[确定性 vs 工程性] 范式矩阵 types系统谱系[多语言types系统对比] memory模型[memory模型对比矩阵] concurrency模型[concurrency模型对比矩阵] 设计哲学[设计哲学谱系] ``` ```mermaid graph T
 
 > **受众**: [进阶]
 > **定位**：将 Rust 置于更广泛的编程语言范式和技术栈语境中，通过**多维对比**揭示其设计本体论、形式化优势与工程权衡。本层是原有 `01.md` 核心内容的结构化重组与扩展。

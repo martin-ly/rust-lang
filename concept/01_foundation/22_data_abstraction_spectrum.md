@@ -3,6 +3,8 @@
 > **本节关键术语**: 数据抽象 (Data Abstraction) · 封装 (Encapsulation) · 信息隐藏 (Information Hiding) · 模块边界 (Module Boundary) · API 设计 — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 数据抽象谱系：从 C struct 到 Rust enum + trait
+> **EN**: 数据抽象谱系：从 C struct 到 Rust enum + trait (Chinese)
+> **Summary**: C 的 `struct` 是**最底层的数据抽象**——仅定义memory中字段的顺序和types： ```c struct Point { double x; double y; }; // 抽象层级: memory地址 + 偏移量 // 无行为封装、无访问控制、无types安全保证 ``` **特征**: - 抽象单位 = memory布局 - 行为 = 独立函数（`distance(struct Point a, struct Point b)`） - 封装 = 无（所有字段公开） - 多态 = 无 C++ 将数据与行为绑定，引入访问控制和构造函数： ```cpp class Point { private: double
 
 > **受众**: [初学者]
 > **层级**: L1 基础概念 — 通用编程语言机制

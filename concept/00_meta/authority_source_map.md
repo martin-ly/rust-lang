@@ -1,4 +1,6 @@
 # 权威来源映射表（Authority Source Map）
+> **EN**: 权威来源映射表（Authority Source Map） (Chinese)
+> **Summary**: | 概念 | 官方来源 | 学术来源 | 社区权威 | C++ 对标 | Haskell 对标 | Go 对标 | 备注 | | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | | **Ownership** | TRPL Ch4 · Reference § Ownership Types | Ralf Jung *"RustBelt: Securing the Foundations of the Rust Programming Language"* (POPL 2018) · Clarke *"Ownership Types
 
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **受众**: [进阶]

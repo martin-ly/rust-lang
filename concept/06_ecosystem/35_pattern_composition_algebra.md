@@ -2,6 +2,8 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # 模式组合代数：设计模式的结构化关联与冲突分析
+> **EN**: Design Patterns
+> **Summary**: 借鉴范畴论的态射复合思想，定义模式组合的四种基本操作：[来源: [Milewski — Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)] ```text 模式组合代数: ⊗ (张量积/并行):  Pattern A ⊗ Pattern B = 两个模式同时作用，互不干扰 ∘ (复合/串行):    Pattern A ∘ Pattern B = B 的输出作为 A 的输入 ⊕ (和/选择):      Pat
 >
 > **受众**: [进阶]
 > **层级**: L6 生态工程 — 系统设计模式

@@ -4,6 +4,8 @@
 > **本节关键术语**: 生命周期 (Lifetime) · 生命周期注解 (Lifetime Annotation) · 静态生命周期 ('static) · 省略规则 (Elision) — [完整对照表](../00_meta/terminology_glossary.md)
 
 # Lifetimes（生命周期）
+> **EN**: Lifetimes
+> **Summary**: **变更日志**: - v1.0 (2026-05-12): 初始版本，完成权威定义、lifetimes规则矩阵、formal methods视角、NLL 分析、示例反例 - v2.2 (2026-05-14): 完成 TODO 双项——§13 Lifetime Elision 完整formal methods（三条规则 ∀/⇒ formal methods、正例+反例、Rust Reference 来源）；§14 `impl Trait` 与lifetimes推断交互（RPIT 捕获、APIT 差异、`+'a` 显式约束、where 对比、来源标注） - v2.2 (2026-05-19): 补全权威来源标注——新增跨语言lifetimes对比矩阵（C++ / Haskell / Go
 >
 > **📎 交叉引用**
 >

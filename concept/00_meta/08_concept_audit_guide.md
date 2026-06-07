@@ -1,4 +1,6 @@
 # Concept Audit Guide（概念审计指南）
+> **EN**: Concept Audit Guide（概念审计指南） (Chinese)
+> **Summary**: ```rust,ignore /// ```rust,compile_fail /// // 这段代码应该编译失败 /// let x: i32 = "hello"; // types不匹配 /// ``` fn documented() {} fn main() {} ``` - [概念索引](./README.md) — 知识体系总览 - [Bloom 分类法](./03_bloom_taxonomy.md) — 认知层级标准 - [交叉引用矩阵](./05_cross_reference_matrix.md) — 概念关联映射 - [学习指南](./learning_guide.md) — 分
 
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **受众**: [专家]

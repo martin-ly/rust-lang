@@ -1,6 +1,8 @@
 > **内容分级**: [专家级]
 
 # Async/Await 高级主题
+> **EN**: Async/Await 高级主题 (Chinese)
+> **Summary**: - [Async/Await 高级主题](#asyncawait-高级主题) - [📑 目录](#-目录) - [8.8 Waker 契约与活性](#88-waker-契约与活性) - [8.9 Waker/Context 的底层机制](#89-wakercontext-的底层机制) - [8.10 `Stream` / `Sink` trait 完整分析](#810-stream--sink-trait-完整分析) - [8.11 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异](#811-pinboxdyn-future-vs-impl-futu
 
 > **受众**: [专家]
 > **层次定位**: L3 高级概念 / 异步子域 — 高级主题
@@ -39,6 +41,9 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
+  - [实践](#实践)
+    - [对应代码示例](#对应代码示例)
+    - [建议练习](#建议练习)
   - [导航：下一步去哪？](#导航下一步去哪)
 
 ### 8.8 Waker 契约与活性
@@ -1365,6 +1370,25 @@ fn main() {
 ### 反命题与边界
 
 > **反命题**: "Async/Await 高级主题 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+
+---
+
+---
+
+## 实践
+
+> 将本节概念转化为可编译代码。
+
+### 对应代码示例
+
+- **[crates/c06_async](../../../crates/c06_async/)** — 与本节概念对应的可编译 crate 示例
+- **[exercises/src/async_programming/](../../../exercises/src/async_programming/)** — 配套练习题
+
+### 建议练习
+
+1. 阅读 `crates/c06_async/` 中与"高级异步模式"相关的源码和示例
+2. 运行 `cargo test -p c06_async` 验证理解
+3. 完成 `exercises/src/async_programming/` 中的练习任务
 
 ---
 

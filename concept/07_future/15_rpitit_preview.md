@@ -1,4 +1,6 @@
 # RPITIT Preview
+> **EN**: RPITIT Preview (Chinese)
+> **Summary**: ```rust,ignore trait Factory { fn create() -> impl Iterator<Item = i32>; } struct MyFactory; impl Factory for MyFactory { // ❌ 编译错误: RPITIT 要求所有实现返回"相同"types // fn create() -> impl Iterator<Item = i32> { //     vec![1, 2, 3].into_iter() // 与另一个实现返回的types不同 // } fn create() -> std::vec::IntoIter<i32> { vec
 
 >
 > **状态**: 🧪 Nightly 实验性

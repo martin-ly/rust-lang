@@ -47,6 +47,8 @@ fn compute() -> i32 {
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Compiler Internals（Rust 编译器内部原理）
+> **EN**: Compiler Internals
+> **Summary**: 以下演示如何通过过程宏实现编译期代码生成，这是深入 Rust compiler内部的入口： ```rust,ignore // proc-macro crate: trace_var use proc_macro::TokenStream; use quote::quote; use syn::{parse_macro_input, ItemFn}; pub fn trace_var(_attr: TokenStream, item: TokenStream) -> TokenStream { let input = parse_macro_input!(item as ItemFn); let fn_
 >
 > **受众**: [进阶]
 

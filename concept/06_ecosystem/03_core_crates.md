@@ -1,4 +1,6 @@
 # Core Crates（核心开源库谱系）
+> **EN**: Core Crates（核心开源库谱系） (Chinese)
+> **Summary**: **变更日志**: - v1.0 (2026-05-12): 初始版本，覆盖 12 个功能域、40+ 核心 crate、选型矩阵、L1-L5 概念映射 Rust的强大来自于生态，核心crate是基石 std提供基础，serde/tokio等扩展能力 下载量/维护状态/文档/测试覆盖/安全审计 零成本抽象/组合优于继承/types驱动API tokio/Tokio/futures/smol的比较和选择 supply chain/版本兼容性/维护者疲劳 | **功能域** | **核心 Crate** | **下载量级** | **L1-L5 概念依赖** | **unsafe 需求** | **成熟度
 
 > **受众**: [进阶]
 > **内容分级**: [综述级]

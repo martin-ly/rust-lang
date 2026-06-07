@@ -1,4 +1,6 @@
 # Async Drop：异步资源的优雅销毁
+> **EN**: Async Programming
+> **Summary**: - [Async Drop：async资源的优雅销毁](#async-dropasync资源的优雅销毁) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 问题：同步 Drop 与async资源的冲突](#11-问题同步-drop-与async资源的冲突) - [1.2 AsyncDrop Trait 设计](#12-asyncdrop-trait-设计) - [1.3 与 Pin 的交互](#13-与-pin-的交互) - [二、技术细节](#二技术细节) - [2.1 当前 Workaround 模式](#21-当前-workaround-模式) - [2.2 AsyncDrop 
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]

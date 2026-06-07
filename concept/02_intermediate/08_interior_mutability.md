@@ -3,6 +3,8 @@
 > **本节关键术语**: 内部可变性 (Interior Mutability) · RefCell · Cell · Mutex · RwLock · 运行时借用检查 — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 内部可变性：编译期规则的运行时逃逸
+> **EN**: 内部可变性：编译期规则的运行时逃逸 (Chinese)
+> **Summary**: - [内部可变性：编译期规则的运行时逃逸](#内部可变性编译期规则的运行时逃逸) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 外部可变性与内部可变性的对比](#11-外部可变性与内部可变性的对比) - [1.2 内部可变性的types谱系](#12-内部可变性的types谱系) - [1.3 运行时borrowing检查](#13-运行时borrowing检查) - [二、技术细节](#二技术细节) - [2.1 `Cell<T>`：无borrowing语义的复制](#21-cellt无borrowing语义的复制) - [2.2 `RefCell<T>`：动态borrowing规则](#22-refcellt动态borrowing规则) - [2.
 
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 应用

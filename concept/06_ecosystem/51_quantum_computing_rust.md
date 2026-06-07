@@ -47,6 +47,8 @@ impl Qubit {
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Quantum Computing in Rust（量子计算与 Rust）
+> **EN**: Quantum Computing in Rust（量子计算与 Rust） (Chinese)
+> **Summary**: 以下展示用量子计算核心概念（叠加态、幺正变换）在 Rust 中的数学表达： ```rust,ignore use nalgebra::{Matrix2, Vector2, Complex}; // 复数types简写 type C = Complex<f64>; /// 量子比特状态 |ψ⟩ = α|0⟩ + β|1⟩ struct Qubit { state: Vector2<C>, } impl Qubit { fn new(alpha: C, beta: C) -> Self { let state = Vector2::new(alpha, beta); // 归一化: |α|² + |β|
 >
 > **受众**: [进阶]
 

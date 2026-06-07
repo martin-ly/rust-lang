@@ -1,6 +1,8 @@
 > **内容分级**: [专家级]
 
 # Type Theory（类型论基础）
+> **EN**: Type Theory
+> **Summary**: **变更日志**: - v2.0 (2026-05-13): 深度重构——定理一致性矩阵扩展至11行（带⟹推理链），新增3个反命题决策树，认知路径重构为5步递进，全章补充Wikipedia/Pierce TAPL/Cardelli引用与L1-L3层次一致性标注 - v1.0 (2026-05-12): 初始版本 Rust 的types系统是 **Hindley-Milner + ownership约束 + 子types（lifetimes）** 的扩展： ```text HM 核心:          Γ ⊢ e : τ  （上下文 Γ 下表达式 e 具有types τ） [来源: Pierce 2002, Ch.22] ✅ Rus
 
 > **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
@@ -21,6 +23,13 @@
 - v1.0 (2026-05-12): 初始版本
 
 ---
+
+> 🚨 **纯数学内容警告**
+> 
+> 本文档包含大量形式化符号（⊗, ⊸, λ, ∀, ∃ 等）和纯数学推导，属于 **[研究者级]** 内容。
+> **99.9% 的 Rust 开发者不需要理解这些内容即可编写生产级代码。**
+> 如果你只想学习 Rust 工程实践，请直接跳过本文，前往 [L5 生态层](../06_ecosystem/) 或 [L3 高级层](../03_advanced/)。
+> 本文的数学内容仅服务于：PL 研究者、编译器开发者、形式化验证工程师。
 
 ## 一、权威定义（Definition）
 

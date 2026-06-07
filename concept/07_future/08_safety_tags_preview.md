@@ -1,4 +1,6 @@
 # Safety Tags 概念预研：Unsafe 契约的机器可读标注
+> **EN**: Unsafe Rust
+> **Summary**: - [Safety Tags 概念预研：Unsafe 契约的机器可读标注](#safety-tags-概念预研unsafe-契约的机器可读标注) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 问题定义：Unsafe 契约的表达缺口](#11-问题定义unsafe-契约的表达缺口) - [1.2 Safety Tags 的设计目标](#12-safety-tags-的设计目标) - [1.3 与 `#[safety]` 属性的关系](#13-与-safety-属性的关系) - [二、formal methods语义](#二formal methods语义) - [2.1 契约的谓词逻辑表示](#21-契
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)
@@ -119,12 +121,11 @@ graph LR
 ---
 
 ### 1.3 与 `#[safety]` 属性的关系
->
 
 Rust 社区已存在 `#[safety]` 相关的实验性讨论：
 
 | 概念 | 当前状态 | 说明 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | `/// # Safety` 文档注释 | ✅ 稳定 | 纯文本，人阅读 |
 | `#[safety]` 属性 | 🟡 RFC 讨论中 | 机器可读契约标注 |
 | `unsafe_op_in_unsafe_fn` | ✅ 2024 Edition | 调用者/实现者权限分离 |
@@ -138,7 +139,6 @@ Rust 社区已存在 `#[safety]` 相关的实验性讨论：
 ## 二、形式化语义
 
 ### 2.1 契约的谓词逻辑表示
->
 
 Safety Tags 的核心是**霍尔逻辑**（Hoare Logic）的三元组：
 
@@ -157,12 +157,12 @@ Safety Tags 的核心是**霍尔逻辑**（Hoare Logic）的三元组：
 > - `ensures:` → 后置条件 Q
 > - `modifies:` → 帧条件（frame condition）
 > - `invariant:` → 循环不变式
-> [来源: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic) · [Prusti Paper](https://www.pm.inf.ethz.ch/publications/getpdf.php?bibname=Own&id=AstrauskasMuellerPoliSummers21.pdf)]
+> [来源: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic) ·
+> [Prusti Paper](https://www.pm.inf.ethz.ch/publications/getpdf.php?bibname=Own&id=AstrauskasMuellerPoliSummers21.pdf)]
 
 ---
 
 ### 2.2 与 BorrowSanitizer 的互补
->
 
 ```mermaid
 graph TD
@@ -187,7 +187,6 @@ graph TD
 ## 三、使用场景
 
 ### 3.1 AI 生成代码的安全标注
->
 
 ```text
 AI 代码生成场景:
@@ -207,7 +206,6 @@ AI 代码生成场景:
 ---
 
 ### 3.2 Rust for Linux 内核契约
->
 
 Linux 内核中的 Rust 代码需要与大量 C 代码交互：
 

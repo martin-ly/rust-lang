@@ -1,22 +1,25 @@
 # Edition 2024 完全指南：新特性与迁移策略
+> **EN**: Edition 2024 完全指南：新特性与迁移策略 (Chinese)
+> **Summary**: - [Edition 2024 完全指南：新特性与迁移策略](#edition-2024-完全指南新特性与迁移策略) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 Edition 机制回顾](#11-edition-机制回顾) - [1.2 Edition 2024 主要特性](#12-edition-2024-主要特性) - [1.3 迁移策略](#13-迁移策略) - [二、技术细节](#二技术细节) - [2.1 Gen Blocks](#21-gen-blocks) - [2.2 Async Closures](#22-async-closures)
 >
 > **受众**: [专家]
 > **内容分级**: [综述级]
-
 > **Bloom 层级**: 应用 → 评价
 > **A/S/P 标记**: **A+S** — ApplicationStructure
 > **双维定位**: C×App — 应用 Edition 指南
 > **定位**: 全面讲解 Rust **Edition 2024** 的新特性——从 gen blocks、async closures 到 never type 和 lifetime captures，揭示 Edition 机制如何在不破坏兼容性的前提下推进语言演进。
 > **前置概念**: [Rust Version Tracking](./05_rust_version_tracking.md) · [Async](../03_advanced/02_async.md) · [Generics](../02_intermediate/02_generics.md)
 > **后置概念**: [Evolution](./03_evolution.md) · [NLL](../03_advanced/08_nll_and_polonius.md)
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
-> **来源**: [Rust Edition Guide — 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) · [Rust Blog — Edition 2024](https://blog.rust-lang.org/) · [RFC 3501 — Edition 2024](https://rust-lang.github.io/rfcs/3501-edition-2024.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Wikipedia — Software Release Life Cycle](https://en.wikipedia.org/wiki/Software_release_life_cycle)
-
+> **来源**:
+> [Rust Edition Guide — 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) ·
+> [Rust Blog — Edition 2024](https://blog.rust-lang.org/) ·
+> [RFC 3501 — Edition 2024](https://rust-lang.github.io/rfcs/3501-edition-2024.html) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [Wikipedia — Software Release Life Cycle](https://en.wikipedia.org/wiki/Software_release_life_cycle)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
-
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
 
 ## 📑 目录
@@ -625,9 +628,7 @@ fn main() {
 | Edition 2024 完全指南：新特性与迁移策略 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 Edition 2024 完全指南：新特性与迁移策略 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 Edition 2024 完全指南：新特性与迁移策略 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: Edition 2024 完全指南：新特性与迁移策略 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

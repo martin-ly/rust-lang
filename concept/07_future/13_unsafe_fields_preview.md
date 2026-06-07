@@ -1,28 +1,33 @@
 # Unsafe Fields 预研：字段级安全边界的精确标注
+> **EN**: Unsafe Rust
+> **Summary**: - [Unsafe Fields 预研：字段级安全边界的精确标注](#unsafe-fields-预研字段级安全边界的精确标注) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 问题：unsafe 块的过度扩张](#11-问题unsafe-块的过度扩张) - [1.2 `unsafe` 字段提案](#12-unsafe-字段提案) - [1.3 与现有 unsafe 模型的对比](#13-与现有-unsafe-模型的对比) - [二、技术细节](#二技术细节) - [2.1 语法与语义](#21-语法与语义) - [2.2 不变量契约](#22-不变量契约) 
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)
 > **预计稳定**: 待定（需等待 RFC / MCP 完成）
 >
-
 > **受众**: [专家]
 > **内容分级**: [实验级]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 Unsafe Fields 预览特性
+>
 > **定位**:
+>
 > 探讨 Rust 中引入 **unsafe
 > [来源: [Rust Unsafe](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)]
 > [来源: [Rust Nomicon](https://doc.rust-lang.org/nomicon/)]
 > [来源: [Rust Reference — Unsafe](https://doc.rust-lang.org/reference/unsafe-keyword.html)]
 > field [来源: [Rust RFC - Unsafe Fields](https://github.com/rust-lang/rfcs/pull/3458)]** 的提案
+>
 > ——允许在结构体字段级别标记 `unsafe`，将 `unsafe` 的粒度从**代码块**细化到**字段访问**，提升 unsafe Rust 的局部性和可审计性。
 > **前置概念**:
+>
 > [Unsafe](../03_advanced/03_unsafe.md) ·
 > [Ownership](../01_foundation/01_ownership.md) ·
 > [Type System](../01_foundation/04_type_system.md)
+>
 > **后置概念**: [Safety Tags](./08_safety_tags_preview.md)
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -31,9 +36,7 @@
 > [Rustonomicon — Unsafe Rust](https://doc.rust-lang.org/nomicon/) ·
 > [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) ·
 > [Rust Internals — Unsafe Field Discussion](https://internals.rust-lang.org/)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
-
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
 
 ## 📑 目录
@@ -352,7 +355,6 @@ graph TD
 > - **负责人**: Jack Wrenn, Jacob Pratt, Luca Versari
 > - **Champions**: compiler (Jack Wrenn), lang (Scott McMurray)
 > - **来源**: [Rust Project Goals 2026 April Update](https://blog.rust-lang.org/2026/05/18/project-goals-2026-04/)
-
 > **预测**: unsafe fields 的推进速度较慢，因为它是一个**语法扩展**而非紧迫的安全修复。预期与 Safety Tags 协同推进，在 2027+ 形成完整的"字段级安全契约"生态。
 > [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]
 
@@ -538,9 +540,7 @@ impl Buffer {
 | Unsafe Fields 预研：字段级安全边界的精确标注 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 Unsafe Fields 预研：字段级安全边界的精确标注 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 Unsafe Fields 预研：字段级安全边界的精确标注 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: Unsafe Fields 预研：字段级安全边界的精确标注 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

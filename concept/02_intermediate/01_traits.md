@@ -3,6 +3,8 @@
 >
 
 # Traits（Trait 系统）
+> **EN**: Traits
+> **Summary**: **变更日志**: - v2.3 (2026-05-14): 深化 Const Trait（impl const Trait vs ~const 区别、macro_rules! 替代方案）、 - #[fundamental]（`Pin<P>` 修正、透明性原理、与 non_exhaustive 对比）；更新 TODO 列表 - v2.2 (2026-05-13): Phase A-2 formal methods深化——新增§4.1b Coherence 的formal methods逻辑基础（types论一致性公理、Orphan Rule [来源: [RFC 1023](https://rust-lang.github.io/rfcs/10
 
 > **📎 交叉引用**
 >

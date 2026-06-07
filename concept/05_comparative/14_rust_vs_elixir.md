@@ -2,6 +2,8 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Rust vs Elixir
+> **EN**: Rust vs Elixir (Chinese)
+> **Summary**: - [Rust vs Elixir](#rust-vs-elixir) - [📑 目录](#-目录) - [一、设计哲学对比](#一设计哲学对比) - [1.1 错误处理哲学](#11-错误处理哲学) - [1.2 concurrency模型对比](#12-concurrency模型对比) - [二、concurrency模型](#二concurrency模型) - [2.1 BEAM concurrency模型](#21-beam-concurrency模型) - [2.2 Rust concurrency模型](#22-rust-concurrency模型) - [三、types系统](#三types系统) - [3.1 静态 vs 动态](#31-静态-vs-动态) - [3.2 模式匹配](#32-模式匹配) - [四、运行时与部署](#
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 评价 → 创造

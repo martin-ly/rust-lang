@@ -1,4 +1,6 @@
 # Inline Const Pattern Preview
+> **EN**: Inline Const Pattern Preview (Chinese)
+> **Summary**: ```rust,ignore fn main() { let x = 42; match x { // ❌ 编译错误: 当前稳定 Rust 不支持 const 块 in pattern // const { 40 + 2 } => println!("forty-two"), _ => println!("other"), } // 正确: 使用字面量或 const item const ANSWER: i32 = 42; match x { ANSWER => println!("forty-two"), _ => println!("other"), } } ``` | 定理 | 前提 |
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)
@@ -66,7 +68,7 @@ fn main() {
 ### 核心推理链
 
 | 定理 | 前提 | 结论 | 置信度 |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | Inline Const Pattern Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Inline Const Pattern Preview 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Inline Const Pattern Preview 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |

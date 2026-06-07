@@ -1,4 +1,6 @@
 # Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举
+> **EN**: Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举 (Chinese)
+> **Summary**: - [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举](#open-enums-概念预研从-non_exhaustive-到可扩展枚举) - [📑 目录](#-目录) - [一、核心概念：封闭 vs 开放枚举](#一核心概念封闭-vs-开放枚举) - [1.1 封闭枚举（Closed Enums）](#11-封闭枚举closed-enums) - [1.2 `#[non_exhaustive]`：兼容性层面的开放](#12-non_exhaustive兼容性层面的开放) - [1.3 开放枚举（Open Enums）的设计空间](#13-开放枚举ope
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

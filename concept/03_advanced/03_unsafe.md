@@ -1,6 +1,8 @@
 > **内容分级**: [专家级]
 
 # Unsafe Rust
+> **EN**: Unsafe Rust
+> **Summary**: **变更日志**: - v1.0 (2026-05-12): 初始版本，完成权威定义、unsafe 操作矩阵、UB 分类、Safety Contract 规范、思维导图、示例反例 - v1.1 (2026-05-13): 重构增强——定理一致性矩阵扩展至10行（⟹推理链）、反命题决策树×4、认知路径六步递进、章节过渡段落、层次一致性标注 - v1.3 (2026-05-13): Phase BC formal methods深化——新增§2.2b Unsafe Code Guidelines 完整 UB 分类（memory访问/types系统/concurrency/其他四大类 15 子类 + UB 检测不可判定性定理）；新增§7.2b Miri
 
 > **📎 交叉引用**
 >
@@ -163,6 +165,9 @@
   - [参考来源](#参考来源)
     - [16.7 前沿方向：Unsafe Fields（字段级 unsafe，Rust 2026 Project Goal）](#167-前沿方向unsafe-fields字段级-unsaferust-2026-project-goal)
   - [Null 指针有效性定义](#null-指针有效性定义)
+  - [实践](#实践)
+    - [对应代码示例](#对应代码示例)
+    - [建议练习](#建议练习)
   - [导航：下一步去哪？](#导航下一步去哪)
 
 <!-- L3::权威定义 -->
@@ -2842,6 +2847,25 @@ assert!(!raw.is_null());  // alloc 返回的指针保证 non-null
 > 3. **dangling 指针在特定条件下 valid** — 只要偏移计算不越界，dangling pointer 的算术运算仍合法
 >
 > 这为 Miri 的严格检查、 unsafe 代码指南和形式化验证工具（如 RustBelt）提供了统一基础。[来源: [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/)] · [来源: [Rust Reference — Pointer Validity](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)]
+
+---
+
+---
+
+## 实践
+
+> 将本节概念转化为可编译代码。
+
+### 对应代码示例
+
+- **[crates/c01_ownership_borrow_scope](../../../crates/c01_ownership_borrow_scope/)** — 与本节概念对应的可编译 crate 示例
+- **[exercises/src/unsafe_rust/](../../../exercises/src/unsafe_rust/)** — 配套练习题
+
+### 建议练习
+
+1. 阅读 `crates/c01_ownership_borrow_scope/` 中与"Unsafe Rust"相关的源码和示例
+2. 运行 `cargo test -p c01_ownership_borrow_scope` 验证理解
+3. 完成 `exercises/src/unsafe_rust/` 中的练习任务
 
 ---
 

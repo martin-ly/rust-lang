@@ -3,6 +3,8 @@
 > **本节关键术语**: 新类型模式 (Newtype Pattern) · 包装类型 (Wrapper Type) · 类型安全 (Type Safety) · 零成本抽象 · Deref — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # Newtype 与包装器模式：类型安全的零成本抽象
+> **EN**: Security Practices
+> **Summary**: - [Newtype 与包装器模式：types安全的零成本抽象](#newtype-与包装器模式types安全的零成本抽象) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 Newtype 模式的本质](#11-newtype-模式的本质) - [1.2 单位types与物理量](#12-单位types与物理量) - [1.3 与types别名（type alias）的区别](#13-与types别名type-alias的区别) - [二、技术细节](#二技术细节) - [2.1 Deref 与自动解引用](#21-deref-与自动解引用) - [2.2 孤儿规则与 Newtype](#22-
 >
 > **受众**: [进阶]
 >

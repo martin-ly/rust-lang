@@ -1,6 +1,8 @@
 > **内容分级**: [专家级]
 
 # Lambda 演算与 Rust 计算模型
+> **EN**: Lambda 演算与 Rust 计算模型 (Chinese)
+> **Summary**: - [Lambda 演算与 Rust 计算模型](#lambda-演算与-rust-计算模型) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 无types Lambda 演算](#11-无types-lambda-演算) - [1.2 types化 Lambda 演算](#12-types化-lambda-演算) - [1.3 Rust 闭包与 Lambda](#13-rust-闭包与-lambda) - [二、计算能力](#二计算能力) - [2.1 Church 编码](#21-church-编码) - [2.2 Y 组合子](#22-y-组合子) - [三、反命题与边界分析]
 >
 > **受众**: [研究者]
 
@@ -15,6 +17,13 @@
 ---
 
 > **来源**: [Types and Programming Languages (Pierce)](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Wikipedia — Lambda Calculus](https://en.wikipedia.org/wiki/Lambda_calculus) · [Wikipedia — Simply Typed Lambda Calculus](https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus) · [TRPL — Closures](https://doc.rust-lang.org/book/ch13-01-closures.html)
+
+> 🚨 **纯数学内容警告**
+> 
+> 本文档包含大量形式化符号（⊗, ⊸, λ, ∀, ∃ 等）和纯数学推导，属于 **[研究者级]** 内容。
+> **99.9% 的 Rust 开发者不需要理解这些内容即可编写生产级代码。**
+> 如果你只想学习 Rust 工程实践，请直接跳过本文，前往 [L5 生态层](../06_ecosystem/) 或 [L3 高级层](../03_advanced/)。
+> 本文的数学内容仅服务于：PL 研究者、编译器开发者、形式化验证工程师。
 
 ## 📑 目录
 

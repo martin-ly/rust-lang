@@ -2,6 +2,8 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 
 # Rust 安全保证的边界条件全景（Safety Boundary Panorama）
+> **EN**: Security Practices
+> **Summary**: **变更日志**: - v1.0 (2026-05-12): 初始版本 - v1.1 (2026-05-12): 补充 Wikipedia 权威定义、课程引用、学术论文、跨文件链接 - v1.2 (2026-05-13): 修复章节编号错误；新增"跨系统信任边界对比"（从 PostgreSQL 零信任分析中提取 Rust 同构映射）；补充 PG MVCC ↔ Rust ownership、borrowing检查器 ↔ Repeatable Read、多系统信任矩阵 safe和unsafe Rust之间的分界线 FFI/裸指针/特定优化/底层硬件访问 外部：compiler保证；内部：程序员保证不变量 Miri/审查/模糊测试/形
 
 > **受众**: [进阶]
 > **定位**: 本文件汇总 Rust 所有**编译期安全保证**的边界条件、失效场景和反例，形成完整的"安全 ⇄ 不安全"边界地图。

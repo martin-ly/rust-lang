@@ -1,4 +1,6 @@
 # Effects System: Concept Pre-study（效果系统：概念预研）
+> **EN**: Effect System
+> **Summary**: **变更日志**: - v1.0 (2026-05-13): 初始版本。建立 Effect 系统概念框架、Rust 现有 effect 映射、AsyncFn 作为原型、跨语言对比、演进路线图 - v1.1 (2026-05-22): 网络权威内容对齐：添加 `gen<yield>` effects 跟踪、Lang Team 2026 季度更新 - v1.2 (2026-06-02): 补充 Rust Effects Initiative 官方定位、学术谱系（Plotkin & Pretnar 2009 / Lucassen & Gifford 1988）、carried/uncarried 官
 >
 > **受众**: [专家]
 > **内容分级**: [综述级]
@@ -1573,7 +1575,7 @@ where
 ```
 
 | 场景 | 当前 Rust | 效果系统愿景 | Pin 角色变化 |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | `async fn` | 编译器自动生成 `Future` + 处理 Pin | `fn foo() with async {}` | Pin 完全隐藏 |
 | 手动 `Future` impl | 必须写 `self: Pin<&mut Self>` | 仍需 Pin，但可能通过 derive/宏简化 | Pin 部分隐藏 |
 | `gen` blocks | `Generator` 也是 `!Unpin` | `fn foo() with yield {}` | 与 async 对称 |

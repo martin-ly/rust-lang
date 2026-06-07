@@ -1,6 +1,8 @@
 > **内容分级**: [综述级]
 
 # 测验：内存管理（L2 试点扩展）
+> **EN**: Memory Management
+> **Summary**: ```rust fn main() { let b = Box::new(5); println!("{}", b); } ``` <details> <summary>💡 点击展开答案与解析</summary> **答案**：✅ 能编译，输出 `5`。 **解析**： | 特性 | 栈分配 | `Box::new`（堆分配） | |:---|:---|:---| | 存储位置 | 栈 | 堆 | | 大小限制 | 栈大小限制（通常 ~8MB） | 仅受可用memory限制 | | lifetimes | 作用域结束自动释放 | 离开作用域时 `Box` 被 drop，堆memory释放 | | 性能 | 快速（单指令
 
 > **受众**: [进阶]
 > **内容分级**: [综述级]

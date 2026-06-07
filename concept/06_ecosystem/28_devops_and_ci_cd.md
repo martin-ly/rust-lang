@@ -4,6 +4,8 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # DevOps 与 CI/CD：Rust 的持续交付工程实践
+> **EN**: DevOps and CI/CD
+> **Summary**: - [DevOps 与 CI/CD：Rust 的持续交付工程实践](#devops-与-cicdrust-的持续交付工程实践) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 CI/CD 管道与 Rust 构建特性](#11-cicd-管道与-rust-构建特性) - [1.3 安全审计在 DevOps 中的定位](#13-安全审计在-devops-中的定位) - [二、技术细节](#二技术细节) - [2.1 GitHub Actions 工作流设计](#21-github-actions-工作流设计) - [2.2 Docker 多阶段构建优化](#22-
 >
 > **受众**: [进阶]
 

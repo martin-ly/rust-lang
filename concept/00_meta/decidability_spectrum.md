@@ -1,4 +1,6 @@
 # Rust 编译期可判定性谱系全景（Decidability Spectrum）
+> **EN**: Rust 编译期可判定性谱系全景（Decidability Spectrum） (Chinese)
+> **Summary**: **变更日志**: - v1.0 (2026-05-21): 初始版本——全链路可判定性谱系 + 9 层判定边界 + Rice 定理映射 + Rust 1.95 特性判定映射 - [Rust 编译期可判定性谱系全景（Decidability Spectrum）](#rust-编译期可判定性谱系全景decidability-spectrum) - [📑 目录](#-目录) - [零、TL;DR —— 可判定性速查](#零tldr--可判定性速查) - [一、权威来源与梳理方法论](#一权威来源与梳理方法论) - [1.1 来源分级](#11-来源分级) - [1.2 可判定性的formal methods定义](#1
 
 > **受众**: [研究者]
 > **定位**: 本文件从**纵向判定链路**梳理 Rust 编译器在全编译流程中的可判定性问题，与 `semantic_expressiveness.md` 的横向七维光谱形成正交互补。

@@ -1,4 +1,6 @@
 # 派生 CoercePointee 预研：智能指针的自动类型强制
+> **EN**: Smart Pointers
+> **Summary**: - [派生 CoercePointee 预研：智能指针的自动types强制](#派生-coercepointee-预研智能指针的自动types强制) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 问题：自定义智能指针的样板代码](#11-问题自定义智能指针的样板代码) - [1.2 CoerceUnsized 与 DispatchFromDyn](#12-coerceunsized-与-dispatchfromdyn) - [1.3 `#[derive(CoercePointee)]` 方案](#13-derivecoercepointee-方案) - [二、技术细节]
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)
@@ -177,7 +179,7 @@ struct SmartPtr<T: ?Sized> {
 ### 2.2 约束条件
 
 | 约束 | 说明 | 违反后果 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | `#[pointee(T)]` 必须存在 | 标记参与强制的类型参数 | 编译错误：无法确定哪个参数是 pointee |
 | T 必须是 `?Sized` | 只有 ?Sized 类型才能强制为 dyn Trait | 编译错误：类型参数必须支持动态大小 |
 | 单一 pointee 字段 | 结构体中只能有一个字段使用 T | 编译错误：多个字段的偏移计算不明确 |

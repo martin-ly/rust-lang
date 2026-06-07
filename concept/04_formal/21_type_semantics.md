@@ -1,6 +1,8 @@
 > **内容分级**: [专家级]
 
 # Type Semantics（类型语义）
+> **EN**: Type Semantics（类型语义） (Chinese)
+> **Summary**: - [Type Semantics（types语义）](#type-semanticstypes语义) - [📑 目录](#-目录) - [一、权威定义（Definition）](#一权威定义definition) - [1.1 types作为规约：进步与保持](#11-types作为规约进步与保持) - [1.2 types安全到memory安全](#12-types安全到memory安全) - [二、概念属性矩阵](#二概念属性矩阵) - [2.1 types语义方法对比矩阵](#21-types语义方法对比矩阵) - [三、Rust 特有types的语义](#三rust-特有types的语义) - [3.1 borrowing语义：`&T` 与 `&mut T`](#31-借
 
 > **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。

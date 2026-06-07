@@ -1,4 +1,6 @@
 # MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证
+> **EN**: Security Practices
+> **Summary**: - [MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证](#mcdc-coverage-概念预研安全关键-rust-的覆盖率验证) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 覆盖率等级的层次结构](#11-覆盖率等级的层次结构) - [1.2 MC/DC 的数学定义](#12-mcdc-的数学定义) - [1.3 Rust compiler实现路径](#13-rust-compiler实现路径) - [二、formal methods语义](#二formal methods语义) - [2.1 独立影响的formal methods](#21-独立影响的formal methods) - [2.2 与compiler优化的冲突](#22-与compiler
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)
@@ -15,7 +17,8 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
-> **来源**: [DO-178C [来源: [FAA DO-178C](https://www.faa.gov/aircraft/air_cert/design_approvals/criteria/software)] / ED-12C](<https://www.rtca.org/product/do-178c/>) ·
+> **来源**:
+> [DO-178C [来源: [FAA DO-178C](https://www.faa.gov/aircraft/air_cert/design_approvals/criteria/software)] / ED-12C](<https://www.rtca.org/product/do-178c/>) ·
 > [ISO 26262](https://www.iso.org/standard/68383.html) ·
 > [Rust Tracking Issue #124656](https://github.com/rust-lang/rust/issues/124656) ·
 > [MCDC [来源: [FAA MC/DC](https://www.faa.gov/aircraft/air_cert/design_approvals/criteria/software)] Wikipedia](<https://en.wikipedia.org/wiki/Code_coverage>) ·
@@ -387,7 +390,18 @@ fn main() {
 }
 ```
 
-> **修正**: LLVM 的覆盖率插桩（`-C instrument-coverage`）在编译期插入计数器代码，生成 `.profraw` 文件。该功能与某些编译器标志冲突：1) `-C link-dead-code` 可能产生重复符号；2) LTO（链接时优化）可能内联被插桩函数，导致覆盖率数据丢失；3) `-C opt-level=3` 的激进优化可能删除"不可达"的覆盖计数器。正确配置：使用 `cargo llvm-cov`（自动处理标志），或在 CI 中使用独立的 coverage profile（`[profile.coverage]`）。Rust 的覆盖率基础设施正在快速成熟，目标是达到 C/C++ `gcov`/`lcov` 的成熟度，同时利用 Rust 的元数据生成更精确的源码映射。[来源: [Rust Coverage Documentation](https://doc.rust-lang.org/rustc/instrument-coverage.html)] · [来源: [cargo-llvm-cov](https://github.com/taiki-e/cargo-llvm-cov)]
+> **修正**:
+> LLVM 的覆盖率插桩（`-C instrument-coverage`）在编译期插入计数器代码，生成 `.profraw` 文件。
+> 该功能与某些编译器标志冲突：
+>
+> 1) `-C link-dead-code` 可能产生重复符号；
+> 2) LTO（链接时优化）可能内联被插桩函数，导致覆盖率数据丢失；
+> 3) `-C opt-level=3` 的激进优化可能删除"不可达"的覆盖计数器。
+>
+> 正确配置：使用 `cargo llvm-cov`（自动处理标志），或在 CI 中使用独立的 coverage profile（`[profile.coverage]`）。
+> Rust 的覆盖率基础设施正在快速成熟，目标是达到 C/C++ `gcov`/`lcov` 的成熟度，同时利用 Rust 的元数据生成更精确的源码映射。
+> [来源: [Rust Coverage Documentation](https://doc.rust-lang.org/rustc/instrument-coverage.html)] ·
+> [来源: [cargo-llvm-cov](https://github.com/taiki-e/cargo-llvm-cov)]
 
 ### 10.3 边界测试：MCDC 与短路求值的复杂交互（逻辑错误）
 
@@ -409,7 +423,13 @@ fn test_mcdc_full() {
 }
 ```
 
-> **修正**: MC/DC 分析在短路逻辑下更复杂：条件 `c` 和 `d` 仅在 `a && b` 为假时求值，因此 `c` 的独立影响测试需要 `a = false`（或 `b = false`）且 `d = true`。`complex_decision(false, false, false, true)` 返回 `false`，`complex_decision(false, false, true, true)` 返回 `true`——`c` 独立变化影响了结果。完整的 MC/DC 覆盖需要仔细设计测试用例，考虑短路路径。航空软件认证中，MC/DC 是 DO-178C 的 B 级（Level B）要求，测试用例设计需文档化每个条件的独立影响证明。这与 C 的相同代码（相同短路语义）或 Ada 的 `and then`/`or else`（显式短路操作符）相同——MC/DC 是语言无关的覆盖准则，但语言的操作符语义影响测试设计。[来源: [DO-178C Standard](https://www.rtca.org/product/do-178c/)] · [来源: [MC/DC Analysis](https://en.wikipedia.org/wiki/Modified_condition/decision_coverage)]
+> **修正**:
+> MC/DC 分析在短路逻辑下更复杂：条件 `c` 和 `d` 仅在 `a && b` 为假时求值，因此 `c` 的独立影响测试需要 `a = false`（或 `b = false`）且 `d = true`。
+> `complex_decision(false, false, false, true)` 返回 `false`，`complex_decision(false, false, true, true)` 返回 `true`——`c` 独立变化影响了结果。
+> 完整的 MC/DC 覆盖需要仔细设计测试用例，考虑短路路径。航空软件认证中，MC/DC 是 DO-178C 的 B 级（Level B）要求，测试用例设计需文档化每个条件的独立影响证明。
+> 这与 C 的相同代码（相同短路语义）或 Ada 的 `and then`/`or else`（显式短路操作符）相同——MC/DC 是语言无关的覆盖准则，但语言的操作符语义影响测试设计。
+> [来源: [DO-178C Standard](https://www.rtca.org/product/do-178c/)] ·
+> [来源: [MC/DC Analysis](https://en.wikipedia.org/wiki/Modified_condition/decision_coverage)]
 
 ### 10.4 边界测试：覆盖率工具的 LLVM IR 级别插桩（编译错误/性能下降）
 
@@ -428,15 +448,28 @@ fn main() {
 }
 ```
 
-> **修正**: LLVM 的 `instrument-coverage` 在 IR 级别插入计数器，对每个基本块（basic block）计数。`#[inline(always)]` 函数在每个调用点展开，每个展开实例都有独立的计数器。高频调用路径上的覆盖率插桩导致：1) 指令缓存（icache）污染；2) 分支预测表压力；3) 运行时 10-30% 的性能下降。生产环境通常禁用覆盖率，仅在 CI 的测试构建中启用。优化：1) `#[inline(never)]` 关键函数（减少计数器数量）；2) 使用 `thin-lto`（部分内联，平衡性能和覆盖粒度）；3) 对性能测试使用独立的 `profile.bench`（无插桩）。这与 C/C++ 的 `gcov`（同样 IR 插桩，同样性能影响）或 Java 的 JaCoCo（字节码插桩，运行时 overhead）类似——覆盖率收集的精确性与性能是权衡。[来源: [Rust Coverage Documentation](https://doc.rust-lang.org/rustc/instrument-coverage.html)] · [来源: [LLVM Coverage](https://clang.llvm.org/docs/SourceBasedCodeCoverage.html)]
-> **过渡**: MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **修正**:
+> LLVM 的 `instrument-coverage` 在 IR 级别插入计数器，对每个基本块（basic block）计数。
+> `#[inline(always)]` 函数在每个调用点展开，每个展开实例都有独立的计数器。
+> 高频调用路径上的覆盖率插桩导致：
+>
+> 1) 指令缓存（icache）污染；
+> 2) 分支预测表压力；
+> 3) 运行时 10-30% 的性能下降。生产环境通常禁用覆盖率，仅在 CI 的测试构建中启用。
+>
+> 优化：
+>
+> 1) `#[inline(never)]` 关键函数（减少计数器数量）；
+> 2) 使用 `thin-lto`（部分内联，平衡性能和覆盖粒度）；
+> 3) 对性能测试使用独立的 `profile.bench`（无插桩）。
+>
+> 这与 C/C++ 的 `gcov`（同样 IR 插桩，同样性能影响）或 Java 的 JaCoCo（字节码插桩，运行时 overhead）类似——覆盖率收集的精确性与性能是权衡。
+> [来源: [Rust Coverage Documentation](https://doc.rust-lang.org/rustc/instrument-coverage.html)] ·
+> [来源: [LLVM Coverage](https://clang.llvm.org/docs/SourceBasedCodeCoverage.html)]
 > **过渡**: MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ### 补充定理链
 
-- **定理**: MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证 定义 ⟹ 类型安全保证
-- **定理**: MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证 定义 ⟹ 类型安全保证
 - **定理**: MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证 定义 ⟹ 类型安全保证
 
 ## 认知路径
@@ -452,9 +485,7 @@ fn main() {
 | MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

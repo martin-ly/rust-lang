@@ -1,6 +1,8 @@
 > **内容分级**: [综述级]
 
 # 测验：闭包与迭代器（L1 试点扩展）
+> **EN**: Closures
+> **Summary**: ```rust fn main() { let add = |a, b| a + b; println!("{}", add(2, 3)); println!("{}", add(2.5, 3.5)); } ``` <details> <summary>💡 点击展开答案与解析</summary> **答案**：❌ 不能编译。 **错误信息**：`expected integer, found floating-point number` **解析**：Rust 闭包**没有generics参数**，types在第一次使用时被推断并固定。 ```rust let add = |a, b| a + b; // 第一
 
 > **受众**: [初学者]
 > **内容分级**: [综述级]

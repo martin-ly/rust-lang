@@ -1,4 +1,6 @@
 # RustBelt 谓词映射图（RustBelt Predicate Map）
+> **EN**: RustBelt
+> **Summary**: - [RustBelt 谓词映射图（RustBelt Predicate Map）](#rustbelt-谓词映射图rustbelt-predicate-map) - [📑 目录](#-目录) - [〇、谓词映射认知全景](#〇谓词映射认知全景) - [一、RustBelt 核心谓词定义](#一rustbelt-核心谓词定义) - [二、ownership谓词 own(τ) 映射](#二ownership谓词-ownτ-映射) - [2.1 数学定义](#21-数学定义) - [2.2 到 Rust 的映射](#22-到-rust-的映射) - [2.3 谓词状态转换](#23-谓词状态转换) - [三、共享谓词 s
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 

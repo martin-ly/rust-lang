@@ -1,4 +1,6 @@
 # Ferrocene 预研：Rust 的安全关键认证之路
+> **EN**: Security Practices
+> **Summary**: - [Ferrocene 预研：Rust 的安全关键认证之路](#ferrocene-预研rust-的安全关键认证之路) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 安全关键软件的认证挑战](#11-安全关键软件的认证挑战) - [1.2 Ferrocene 的定位](#12-ferrocene-的定位) - [1.3 认证范围与限制](#13-认证范围与限制) - [二、技术细节](#二技术细节) - [2.1 认证工具链的构成](#21-认证工具链的构成) - [2.2 与上游 Rust 的关系](#22-与上游-rust-的关系) - [2.3 证据
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)
@@ -13,11 +15,15 @@
 > **定位**: 探讨 **Ferrocene** —— Rust 的**安全关键认证工具链**，分析其对汽车（ISO 26262 [来源: [ISO 26262](https://www.iso.org/standard/68383.html)]）、航空（DO-178C）和工业控制等安全关键领域的影响，以及 Rust 语言在形式化验证与工业认证之间的桥梁作用。
 > **前置概念**: [Toolchain](../06_ecosystem/01_toolchain.md) · [Formal Methods](./02_formal_methods.md) · [MC/DC Coverage](./07_mcdc_coverage_preview.md)
 > **后置概念**: [Version Tracking](./05_rust_version_tracking.md)
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
-> **来源**: [Ferrocene Project](https://ferrocene.dev/) · [Ferrocene Specification](https://spec.ferrocene.dev/) · [ISO 26262 Standard](https://www.iso.org/standard/68383.html) · [DO-178C Standard](https://www.rtca.org/product/do-178c-software-considerations-in-airborne-systems-and-equipment-certification) · [Ferrous Systems Blog](https://ferrous-systems.com/blog/)
+> **来源**:
+> [Ferrocene Project](https://ferrocene.dev/) ·
+> [Ferrocene Specification](https://spec.ferrocene.dev/) ·
+> [ISO 26262 Standard](https://www.iso.org/standard/68383.html) ·
+> [DO-178C Standard](https://www.rtca.org/product/do-178c-software-considerations-in-airborne-systems-and-equipment-certification) ·
+> [Ferrous Systems Blog](https://ferrous-systems.com/blog/)
 
 ## 📑 目录
 
@@ -52,11 +58,8 @@
 ---
 
 ## 一、核心概念
->
->
 
 ### 1.1 安全关键软件的认证挑战
->
 
 安全关键系统（汽车 ECU、航空飞控、医疗设备）要求软件通过严格的**功能安全认证**：
 
@@ -76,13 +79,14 @@
 └── 认证成本高昂（占项目成本 30-50%）
 ```
 
-> **核心痛点**: 传统安全关键开发使用 C/C++，内存安全缺陷（use-after-free、缓冲区溢出）是认证中的**主要风险源**。Rust 的所有权模型从源头上消除了这类缺陷，但 Rust 工具链本身需要通过认证才能用于安全关键项目。
+> **核心痛点**:
+> 传统安全关键开发使用 C/C++，内存安全缺陷（use-after-free、缓冲区溢出）是认证中的**主要风险源**。
+> Rust 的所有权模型从源头上消除了这类缺陷，但 Rust 工具链本身需要通过认证才能用于安全关键项目。
 > [来源: [ISO 26262-6:2018](https://www.iso.org/standard/68383.html)]
 
 ---
 
 ### 1.2 Ferrocene 的定位
->
 
 ```mermaid
 graph TD
@@ -116,7 +120,6 @@ graph TD
 ---
 
 ### 1.3 认证范围与限制
->
 
 ```text
 Ferrocene 的认证范围（当前）:
@@ -133,7 +136,9 @@ Ferrocene 的认证范围（当前）:
 └── 非选定目标平台（如 RISC-V、Wasm）
 ```
 
-> **范围说明**: Ferrocene 采取**保守的认证策略**——先认证最小可用子集（core + 无 OS 目标），逐步扩展。这与安全关键领域的"先证明核心正确，再扩展边界"原则一致。
+> **范围说明**:
+> Ferrocene 采取**保守的认证策略**——先认证最小可用子集（core + 无 OS 目标），逐步扩展。
+> 这与安全关键领域的"先证明核心正确，再扩展边界"原则一致。
 > [来源: [Ferrocene Specification](https://spec.ferrocene.dev/)]
 
 ---
@@ -141,10 +146,9 @@ Ferrocene 的认证范围（当前）:
 ## 二、技术细节
 
 ### 2.1 认证工具链的构成
->
 
 | 组件 | 上游来源 | 认证状态 | 说明 |
-|:---|:---|:---:|:---|
+| :--- | :--- | :---: | :--- |
 | `rustc` | rust-lang/rust | ✅ 认证 | 特定版本冻结，完整测试覆盖 |
 | `core` | rust-lang/rust | ✅ 认证 | 无堆、无 OS 依赖的安全子集 |
 | `alloc` | rust-lang/rust | 🟡 部分认证 | 排除 `Vec::spare_capacity_mut` 等不稳定 API |
@@ -159,7 +163,6 @@ Ferrocene 的认证范围（当前）:
 ---
 
 ### 2.2 与上游 Rust 的关系
->
 
 ```mermaid
 graph LR
@@ -188,7 +191,6 @@ graph LR
 ---
 
 ### 2.3 证据包与审计追踪
->
 
 ```text
 Ferrocene 证据包构成:
@@ -218,14 +220,16 @@ Ferrocene 证据包构成:
 ## 三、行业应用分析
 
 | 行业 | 标准 | Rust/Ferrocene 价值 | 当前状态 |
-|:---|:---|:---|:---:|
+| :--- | :--- | :--- | :---: |
 | **汽车** | ISO 26262 ASIL-D | 所有权模型消除内存安全类缺陷（占汽车软件缺陷 70%） | 🟡 早期采用（BMW、Volvo 试点） |
 | **航空** | DO-178C Level-A/B | 形式化友好的类型系统，支持 A 级软件的 MC/DC 要求 | 🟡 评估阶段 |
 | **工业控制** | IEC 61508 SIL 3/4 | no_std 支持适合嵌入式 PLC/RTU | 🟡 概念验证 |
 | **医疗** | IEC 62304 Class C | 高完整性要求与 Rust 的安全保证匹配 | ⬜ 待探索 |
 | **航天** | ECSS-Q-ST-80C | 长周期任务需要确定性内存管理 | ⬜ 待探索 |
 
-> **行业洞察**: 汽车行业是 Ferrocene 的**首要目标市场**——现代汽车有 100+ ECU，软件复杂度超过 1 亿行代码，传统 C/C++ 的内存安全缺陷是召回的主要原因。Rust 的所有权模型直接针对这一痛点。
+> **行业洞察**:
+> 汽车行业是 Ferrocene 的**首要目标市场**——现代汽车有 100+ ECU，软件复杂度超过 1 亿行代码，传统 C/C++ 的内存安全缺陷是召回的主要原因。
+> Rust 的所有权模型直接针对这一痛点。
 > [来源: [Ferrous Systems — Industry Reports](https://ferrous-systems.com/blog/)]
 
 ---
@@ -262,7 +266,6 @@ graph TD
 ---
 
 ### 4.2 边界极限
->
 
 ```text
 边界 1: 认证不等于无缺陷
@@ -286,7 +289,9 @@ graph TD
 └── 最高完整性等级可能需要 Ferrocene + 形式化验证的组合
 ```
 
-> **边界要点**: Ferrocene 是 Rust 进入安全关键领域的**第一步**，但不是终点。未来的方向是"Ferrocene + 形式化验证"的组合，在工具链认证的基础上为关键模块提供数学级保证。
+> **边界要点**:
+> Ferrocene 是 Rust 进入安全关键领域的**第一步**，但不是终点。
+> 未来的方向是"Ferrocene + 形式化验证"的组合，在工具链认证的基础上为关键模块提供数学级保证。
 > [来源: [Ferrocene Risk Assessment](https://ferrocene.dev/)]
 
 ---
@@ -294,7 +299,7 @@ graph TD
 ## 五、演进路线
 
 | 里程碑 | 状态 | 预计时间 | 说明 |
-|:---|:---:|:---|:---|
+| :--- | :---: | :--- | :--- |
 | Ferrocene 首个认证版本 | ✅ | 2023 | 基于 Rust 1.68，ISO 26262 ASIL-D |
 | 扩展目标平台 | ✅ | 2024 | 新增 AArch64、x86_64 |
 | 扩展标准库覆盖 | 🟡 | 2025-2026 | 更多 alloc API 纳入认证 |
@@ -388,7 +393,15 @@ fn process(data: &[u8]) -> u32 {
 }
 ```
 
-> **修正**: Ferrocene 是 Rust 的 ISO 26262（汽车功能安全）和 IEC 61508（工业功能安全）认证工具链。它定义了**安全关键子集**（safety-critical subset）：禁止 `unsafe` 代码、禁止某些标准库 API（如 `std::mem::transmute`）、要求确定性执行（无 panic、无分配失败）。在安全关键子集中，所有操作都必须在编译期验证为安全。这与 Rust 的常规开发（允许 unsafe 封装底层操作）截然不同——Ferrocene 的目标领域（刹车系统、转向控制、安全气囊）要求最高级别的保证。开发者必须使用纯 safe Rust 实现功能，或将有 unsafe 的代码隔离在非安全关键组件中（通过严格接口契约）。这与 MISRA C（C 的安全关键子集）类似，但 Ferrocene 的约束由 Rust 的类型系统和 borrow checker 强制执行，减少人为审查负担。[来源: [Ferrocene Documentation](https://spec.ferrocene.dev/)] · [来源: [ISO 26262 Standard](https://www.iso.org/standard/68383.html)]
+> **修正**:
+> Ferrocene 是 Rust 的 ISO 26262（汽车功能安全）和 IEC 61508（工业功能安全）认证工具链。
+> 它定义了**安全关键子集**（safety-critical subset）：禁止 `unsafe` 代码、禁止某些标准库 API（如 `std::mem::transmute`）、要求确定性执行（无 panic、无分配失败）。
+> 在安全关键子集中，所有操作都必须在编译期验证为安全。
+> 这与 Rust 的常规开发（允许 unsafe 封装底层操作）截然不同——Ferrocene 的目标领域（刹车系统、转向控制、安全气囊）要求最高级别的保证。
+> 开发者必须使用纯 safe Rust 实现功能，或将有 unsafe 的代码隔离在非安全关键组件中（通过严格接口契约）。
+> 这与 MISRA C（C 的安全关键子集）类似，但 Ferrocene 的约束由 Rust 的类型系统和 borrow checker 强制执行，减少人为审查负担。
+> [来源: [Ferrocene Documentation](https://spec.ferrocene.dev/)] ·
+> [来源: [ISO 26262 Standard](https://www.iso.org/standard/68383.html)]
 
 ### 10.2 边界测试：确定性执行与 `HashMap` 的禁用（编译错误）
 
@@ -405,7 +418,15 @@ fn lookup() -> i32 {
 }
 ```
 
-> **修正**: `HashMap` 的默认哈希算法（SipHash 1-3）使用随机种子防止 HashDoS 攻击，但导致迭代顺序非确定性——每次运行可能不同。在安全关键系统中，非确定性使测试覆盖率和形式化验证困难：无法保证所有执行路径都被测试。Ferrocene 子集禁止非确定性 API，要求使用 `BTreeMap`（有序、确定性）或固定种子的 `HashMap`（`BuildHasherDefault`）。这与实时系统（RTOS）的确定性要求一致：执行时间、内存使用、行为路径都必须可预测。Rust 的 `BTreeMap` 提供 O(log n) 的确定性操作，是安全关键场景的首选。形式化验证工具也更易处理有序数据结构（状态空间更小）。[来源: [Ferrocene Documentation](https://spec.ferrocene.dev/)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/collections/struct.BTreeMap.html)]
+> **修正**:
+> `HashMap` 的默认哈希算法（SipHash 1-3）使用随机种子防止 HashDoS 攻击，但导致迭代顺序非确定性——每次运行可能不同。
+> 在安全关键系统中，非确定性使测试覆盖率和形式化验证困难：无法保证所有执行路径都被测试。
+> Ferrocene 子集禁止非确定性 API，要求使用 `BTreeMap`（有序、确定性）或固定种子的 `HashMap`（`BuildHasherDefault`）。
+> 这与实时系统（RTOS）的确定性要求一致：执行时间、内存使用、行为路径都必须可预测。
+> Rust 的 `BTreeMap` 提供 O(log n) 的确定性操作，是安全关键场景的首选。
+> 形式化验证工具也更易处理有序数据结构（状态空间更小）。
+> [来源: [Ferrocene Documentation](https://spec.ferrocene.dev/)] ·
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/collections/struct.BTreeMap.html)]
 
 ### 10.3 边界测试：Ferrocene 子集与标准库的不完全覆盖（编译错误）
 
@@ -422,7 +443,16 @@ fn main() {
 }
 ```
 
-> **修正**: Ferrocene 的安全关键子集排除某些标准库类型和函数，原因包括：1) **非确定性**：`HashMap` 的迭代顺序依赖哈希种子和插入顺序；2) **panic 风险**：`Vec::swap_remove`、`String::from_utf8` 等可能 panic；3) **堆分配失败**：`Box::new`、`Vec::push` 在内存不足时 panic（或返回 `Result`，视配置而定）。安全关键代码需使用确定性替代：`BTreeMap`（有序）、数组（固定大小）、`Option` 传播错误。这与 MISRA C 的规则（如禁止动态内存分配）或 SPARK Ada 的 Ravenscar profile（限制任务和调度）类似——安全关键子集通过限制语言特性简化验证。Ferrocene 的目标是让 Rust 通过 ISO 26262 工具认证，使汽车制造商可使用 Rust 开发安全关键 ECU。[来源: [Ferrocene Documentation](https://spec.ferrocene.dev/)] · [来源: [ISO 26262 Standard](https://www.iso.org/standard/68383.html)]
+> **修正**:
+> Ferrocene 的安全关键子集排除某些标准库类型和函数，原因包括：
+>
+> 1) **非确定性**：`HashMap` 的迭代顺序依赖哈希种子和插入顺序；
+> 2) **panic 风险**：`Vec::swap_remove`、`String::from_utf8` 等可能 panic；
+> 3) **堆分配失败**：`Box::new`、`Vec::push` 在内存不足时 panic（或返回 `Result`，视配置而定）。
+> 安全关键代码需使用确定性替代：`BTreeMap`（有序）、数组（固定大小）、`Option` 传播错误。
+> 这与 MISRA C 的规则（如禁止动态内存分配）或 SPARK Ada 的 Ravenscar profile（限制任务和调度）类似——安全关键子集通过限制语言特性简化验证。
+> Ferrocene 的目标是让 Rust 通过 ISO 26262 工具认证，使汽车制造商可使用 Rust 开发安全关键 ECU。
+> [来源: [Ferrocene Documentation](https://spec.ferrocene.dev/)] · [来源: [ISO 26262 Standard](https://www.iso.org/standard/68383.html)]
 
 ### 10.4 边界测试：Ferrocene 的确定性执行与浮点数（逻辑错误）
 
@@ -436,9 +466,23 @@ fn compute(x: f64) -> f64 {
 }
 ```
 
-> **修正**: 浮点数的**确定性执行**是形式化验证的难点：1) `x86` 的 80 位扩展精度寄存器与 `arm` 的 64 位寄存器导致中间结果不同；2) FMA（fused multiply-add）指令改变舍入行为；3) `-ffast-math` 等优化破坏 IEEE 754 语义。Ferrocene 可能要求：1) 禁用 FMA（`rustc` 的 `-C target-feature=-fma`）；2) 使用 `strict` 浮点模式；3) 对关键计算使用定点数或有理数（`fixed` crate、`num-rational`）。航空软件（DO-178C）通常禁止浮点数用于安全关键计算，或要求严格的范围分析和精度证明。这与 Ada 的 `Safe_Float`（范围约束）或 MATLAB 的 Fixed-Point Designer（定点转换）类似——浮点数的非确定性使形式化验证复杂化。[来源: [Ferrocene Documentation](https://spec.ferrocene.dev/)] · [来源: [IEEE 754 Standard](https://ieeexplore.ieee.org/document/8766229)]
-> **过渡**: Ferrocene 预研：Rust 的安全关键认证之路 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Ferrocene 预研：Rust 的安全关键认证之路 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **修正**:
+> 浮点数的**确定性执行**是形式化验证的难点：
+>
+> 1) `x86` 的 80 位扩展精度寄存器与 `arm` 的 64 位寄存器导致中间结果不同；
+> 2) FMA（fused multiply-add）指令改变舍入行为；
+> 3) `-ffast-math` 等优化破坏 IEEE 754 语义。
+>
+> Ferrocene 可能要求：
+>
+> 1) 禁用 FMA（`rustc` 的 `-C target-feature=-fma`）；
+> 2) 使用 `strict` 浮点模式；
+> 3) 对关键计算使用定点数或有理数（`fixed` crate、`num-rational`）。
+>
+> 航空软件（DO-178C）通常禁止浮点数用于安全关键计算，或要求严格的范围分析和精度证明。
+> 这与 Ada 的 `Safe_Float`（范围约束）或 MATLAB 的 Fixed-Point Designer（定点转换）类似——浮点数的非确定性使形式化验证复杂化。
+> [来源: [Ferrocene Documentation](https://spec.ferrocene.dev/)] ·
+> [来源: [IEEE 754 Standard](https://ieeexplore.ieee.org/document/8766229)]
 > **过渡**: Ferrocene 预研：Rust 的安全关键认证之路 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ### 补充定理链
@@ -454,15 +498,13 @@ fn compute(x: f64) -> f64 {
 ### 核心推理链
 
 | 定理 | 前提 | 结论 | 置信度 |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | Ferrocene 预研：Rust 的安全关键认证之路 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Ferrocene 预研：Rust 的安全关键认证之路 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Ferrocene 预研：Rust 的安全关键认证之路 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 Ferrocene 预研：Rust 的安全关键认证之路 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 Ferrocene 预研：Rust 的安全关键认证之路 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: Ferrocene 预研：Rust 的安全关键认证之路 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

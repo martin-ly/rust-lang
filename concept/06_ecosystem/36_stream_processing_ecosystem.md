@@ -3,6 +3,8 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # 流处理生态：Rust 实现与工业系统全景
+> **EN**: 流处理生态：Rust 实现与工业系统全景 (Chinese)
+> **Summary**: Rust 流处理生态可分为三层：底层执行引擎、中间抽象层、应用框架层。 ```text Rust Stream Processing Ecosystem │ ├── 底层执行引擎 │   ├── timely-dataflow — 分布式数据流计算引擎 │   └── differential-dataflow — 增量计算框架（基于 timely） │ ├── 中间抽象层 │   ├── tokio-stream — Tokio async流抽象 │   ├── async-stream — async生成器流 │   ├── futures::Stream — 标准async流 trait │   └── 
 >
 > **受众**: [进阶]
 

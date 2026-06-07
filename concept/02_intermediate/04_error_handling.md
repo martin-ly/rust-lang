@@ -3,6 +3,8 @@
 > **本节关键术语**: 错误处理 (Error Handling) · Result · Option · ? 运算符 · 自定义错误类型 · thiserror — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # Error Handling（错误处理）
+> **EN**: Error Handling
+> **Summary**: **变更日志**: - v2.1 (2026-05-14): 扩展 §9.4——补充 `miette` / `snafu` 生态库详解，六库综合对比矩阵与决策树 - v2.0 (2026-05-12): 深度重构——定理推理链、反命题决策树、边界极限测试、6步认知路径与章节过渡 - v1.0 (2026-05-12): 初始版本 - [Error Handling（错误处理）](#error-handling错误处理) - [📑 目录](#-目录) - [一、权威定义（Definition）](#一权威定义definition) - [1.1 Wikipedia 对齐定义](#11-wikip
 
 > **📎 交叉引用**
 >

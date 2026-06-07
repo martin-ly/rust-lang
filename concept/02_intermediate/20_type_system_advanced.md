@@ -3,6 +3,8 @@
 > **本节关键术语**: 高级类型系统 (Advanced Type System) · 类型推断 (Type Inference) · 高阶类型 (Higher-Kinded Type) · 类型族 (Type Family) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 高级类型系统：从关联类型到类型级编程
+> **EN**: Type System
+> **Summary**: - [高级types系统：从关联types到types级编程](#高级types系统从关联types到types级编程) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 impl Trait 的演进](#11-impl-trait-的演进) - [1.2 Const Generics](#12-const-generics) - [1.3 types推断与约束求解](#13-types推断与约束求解) - [二、技术细节](#二技术细节) - [2.1 impl Trait 在参数位置](#21-impl-trait-在参数位置) - [2.2 Const Generics 实战](#22-const-ge
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价

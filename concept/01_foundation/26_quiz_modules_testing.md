@@ -1,6 +1,8 @@
 > **内容分级**: [综述级]
 
 # 测验：模块系统与测试（L1 试点扩展）
+> **EN**: Modules
+> **Summary**: ```rust // src/main.rs mod front_of_house { pub mod hosting { pub fn add_to_waitlist() {} } } fn main() { front_of_house::hosting::add_to_waitlist(); } ``` <details> <summary>💡 点击展开答案与解析</summary> **答案**：✅ 能编译。 **解析**： | 关键字 | 作用 | |:---|:---| | `mod` | 声明一个模块，Rust 根据模块位置查找对应文件 | | `pub` | 使项对外部可见；默
 
 > **受众**: [初学者]
 > **内容分级**: [综述级]

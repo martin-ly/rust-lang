@@ -3,6 +3,8 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # 权威来源索引库
+> **EN**: 权威来源索引库 (Chinese)
+> **Summary**: | 标识符 | 全称 | 根 URL | 更新频率 | 建议引用格式 | | :--- | :--- | :--- | :--- | :--- | | `REF` | Rust Reference | <https://doc.rust-lang.org/reference/> | 与 stable 同步 | `[来源: REF — §章节]` | | `TRPL` | The Rust Programming Language | <https://doc.rust-lang.org/book/> | 每 Edition 更新 | `[来源: TRPL — 第X章]` | | `NOM` |
 
 > **定位**: 本项目所有 `[来源: ...]` 标注的**单一真相源（Single Source of Truth）**。
 > **原则**: 每个来源必须指向**具体章节或锚点**，禁止仅使用根 URL。

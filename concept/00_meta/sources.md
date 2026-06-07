@@ -1,4 +1,6 @@
 # 权威来源清单与知识来源关系分析
+> **EN**: 权威来源清单与知识来源关系分析 (Chinese)
+> **Summary**: - [权威来源清单与知识来源关系分析](#权威来源清单与知识来源关系分析) - [📑 目录](#-目录) - [〇、来源分级认知全景](#〇来源分级认知全景) - [一、来源分级体系](#一来源分级体系) - [二、一级来源：规范级（Primary Sources）](#二一级来源规范级primary-sources) - [2.1 The Rust Programming Language (TRPL / "The Book")](#21-the-rust-programming-language-trpl--the-book) - [2.2 The Rust Reference](#22-
 
 > **受众**: [进阶]
 > **内容分级**: [研究者级]

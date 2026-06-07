@@ -47,6 +47,8 @@ impl GeometryEngine {
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Advanced WebAssembly in Rust（高级 WebAssembly 与 Rust）
+> **EN**: WebAssembly
+> **Summary**: 以下演示 Rust ↔ JavaScript 之间传递复杂数据结构，使用 `wasm-bindgen`： ```rust use wasm_bindgen::prelude::*; use serde::{Serialize, Deserialize}; pub struct Point { pub x: f64, pub y: f64, } pub struct GeometryEngine; impl GeometryEngine { #[wasm_bindgen(constructor)] pub fn new() -> Self { Self } /// 计算两点间欧几里得距离 pub
 
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价

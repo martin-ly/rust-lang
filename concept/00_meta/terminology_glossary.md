@@ -8,6 +8,8 @@
 > **状态**: 术语表覆盖 100 个高频术语，L1 → L5+ 分层
 
 # Rust 核心术语英中对照表
+> **EN**: Rust 核心术语英中对照表 (Chinese)
+> **Summary**: 本表按认知复杂度将术语分为五个层级，对应 Bloom 分类法从记忆到分析的不同阶段： - **L1 基础**：入门必读概念，出现在 TRPL 前 10 章，任何 Rust 学习者第一周就会遇到。 - **L2 进阶**：日常编码高频使用，涉及 trait 系统、智能指针、concurrency原语与错误处理。 - **L3 高级**：涉及 unsafe、async运行时、宏系统、memory模型与types系统深层机制。 - **L4 formal methods**：程序验证、分离逻辑、types论及 Rust 官方formal methods项目（RustBelt、Miri 等）。 - **L5+ 生态/专家**：生产环境主流 crate、嵌入式、WebAssembly 及跨
 
 > **受众**: [初学者]
 ---
@@ -130,6 +132,26 @@
 
 - **Eq / PartialEq** (Eq / PartialEq) [L2] — 定义等价关系的比较 trait 组合 — [std](https://doc.rust-lang.org/std/cmp/trait.Eq.html)
 
+- **impl Trait** (impl Trait) [L2] — 在参数或返回位置声明匿名但具体类型的语法糖，编译器自动推导具体类型 — [Reference](https://doc.rust-lang.org/reference/types/impl-trait.html)
+
+- **对象安全性** (Object Safety) [L2] — trait 能否作为 dyn Trait 对象使用的判定条件，涉及 Sized  Self 等约束 — [Reference](https://doc.rust-lang.org/reference/items/traits.html#object-safety)
+
+- **动态大小类型** (DST) [L2] — 编译期大小未知的类型（如 `[T]`、`dyn Trait`），只能通过指针或引用使用 — [Reference](https://doc.rust-lang.org/reference/dynamically-sized-types.html)
+
+- **胖指针** (Fat Pointer) [L2] — 携带额外元数据（如长度或 vtable 指针）的宽指针，用于 DST — [Reference](https://doc.rust-lang.org/reference/pointer-types.html)
+
+- **关联常量** (Associated Constants) [L2] — 在 trait 或 impl 块中定义的常量，与类型相关联 — [Reference](https://doc.rust-lang.org/reference/items/associated-items.html#associated-constants)
+
+- **自动 trait** (Auto Trait) [L2] — 编译器自动为符合条件的类型实现的标记 trait（如 Send、Sync、Unpin）— [Reference](https://doc.rust-lang.org/reference/special-types-and-traits.html#auto-traits)
+
+- **TryFrom / TryInto** (TryFrom / TryInto) [L2] — 可能失败的类型转换 trait，返回 Result 而非 panic — [std](https://doc.rust-lang.org/std/convert/trait.TryFrom.html)
+
+- **AsRef** (AsRef) [L2] — 提供廉价引用转换的 trait，用于泛型参数接受多种引用类型 — [std](https://doc.rust-lang.org/std/convert/trait.AsRef.html)
+
+- **Default** (Default) [L2] — 提供类型默认值构造的 trait，常用于配置结构体初始化 — [std](https://doc.rust-lang.org/std/default/trait.Default.html)
+
+- **ToOwned** (ToOwned) [L2] — 从借用数据创建拥有型副本的 trait，是 Clone 的泛化 — [std](https://doc.rust-lang.org/std/borrow/trait.ToOwned.html)
+
 ## L3 高级（Advanced）
 
 - **不安全 Rust** (Unsafe Rust) [L3] — 使用 `unsafe` 关键字绕过编译器安全检查 — [TRPL](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html)
@@ -182,6 +204,36 @@
 
 - **SeqCst** (Sequentially Consistent) [L3] — 最强顺序一致性，所有线程观察顺序一致 — [std](https://doc.rust-lang.org/std/sync/atomic/enum.Ordering.html)
 
+- **原始唤醒器** (Raw Waker) [L3] — Waker 的底层非安全表示，由 vtable 指针和数据指针组成 — [std](https://doc.rust-lang.org/std/task/struct.RawWaker.html)
+
+- **本地任务集** (LocalSet) [L3] — Tokio 中管理 !Send 任务的本地执行上下文，绑定到创建线程 — [Tokio](https://docs.rs/tokio/latest/tokio/task/struct.LocalSet.html)
+
+- **生成阻塞任务** (spawn_blocking) [L3] — 在独立线程池中运行阻塞代码的 Tokio API，避免阻塞异步执行器 — [Tokio](https://docs.rs/tokio/latest/tokio/task/fn.spawn_blocking.html)
+
+- **工作窃取** (Work Stealing) [L3] — 多线程运行时中空闲线程从其他线程队列窃取任务的负载均衡策略 — [Rayon](https://docs.rs/rayon/latest/rayon/)
+
+- **内存布局** (Layout) [L3] — 描述内存分配大小和对齐要求的类型，unsafe 代码中用于 raw alloc — [std](https://doc.rust-lang.org/std/alloc/struct.Layout.html)
+
+- **全局分配器** (GlobalAlloc) [L3] — 自定义 Rust 全局内存分配器的 trait，通过 #[global_allocator] 注册 — [std](https://doc.rust-lang.org/std/alloc/trait.GlobalAlloc.html)
+
+- **对齐** (Alignment) [L3] — 类型或值在内存中的地址约束，必须是 2 的幂 — [Reference](https://doc.rust-lang.org/reference/type-layout.html#size-and-alignment)
+
+- **属性宏** (Attribute Macro) [L3] — 以 #[...] 形式附加到项的过程宏，可重写或包装被标注代码 — [Reference](https://doc.rust-lang.org/reference/procedural-macros.html#attribute-macros)
+
+- **派生宏** (Derive Macro) [L3] — 通过 #[derive(...)] 自动为类型生成 trait 实现的过程宏 — [Reference](https://doc.rust-lang.org/reference/procedural-macros.html#derive-macros)
+
+- **MPSC** (MPSC) [L3] — Multi-Producer Single-Consumer 通道，std::sync::mpsc 提供的线程间通信原语 — [std](https://doc.rust-lang.org/std/sync/mpsc/index.html)
+
+- **作用域线程** (Scoped Thread) [L3] — 生命周期受限于作用域的线程，可安全借用栈数据 — [std](https://doc.rust-lang.org/std/thread/fn.scope.html)
+
+- **虚表** (VTable) [L3] — 动态分发使用的函数指针表，dyn Trait 的胖指针携带 vtable 地址 — [Reference](https://doc.rust-lang.org/reference/items/traits.html#dyn-trait-object-type-layout)
+
+- **动态分发** (Dynamic Dispatch) [L3] — 运行时通过 vtable 解析 trait 方法调用的机制，dyn Trait 使用 — [TRPL](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)
+
+- **静态分发** (Static Dispatch) [L3] — 编译期通过单态化将泛型替换为具体类型的调用机制 — [TRPL](https://doc.rust-lang.org/book/ch10-01-syntax.html)
+
+- **单态化** (Monomorphization) [L3] — 编译器为每个泛型具体类型生成独立代码实例的过程 — [Reference](https://doc.rust-lang.org/reference/items/generics.html#monomorphization)
+
 ## L4 形式化（Formal Methods）
 
 - **分离逻辑** (Separation Logic) [L4] — 扩展 Hoare 逻辑以推理共享可变状态 — [Reynolds 2002](https://www.cs.cmu.edu/~jcr/seplogic.pdf)
@@ -214,6 +266,10 @@
 
 - **Tree Borrows** (Tree Borrows) [L4] — Miri 采用的内存别名模型 — [Miri](https://github.com/rust-lang/miri)
 
+- **高级中间表示** (HIR) [L4] — High-level IR，Rust 编译器中经过类型推断和宏展开后的高级中间表示 — [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/hir.html)
+
+- **抽象语法树** (AST) [L4] — Abstract Syntax Tree，源代码解析后的树形结构表示，编译器前端输出 — [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/syntax-intro.html)
+
 ## L5+ 生态/专家（Ecosystem & Expert）
 
 - **Tokio** (Tokio) [L5+] — 异步 Rust 的运行时与网络 IO 生态核心 — [Tokio](https://tokio.rs/)
@@ -237,6 +293,40 @@
 - **no_std** (no_std) [L5+] — 不链接标准库，仅使用 `core` 的运行环境 — [Reference](https://doc.rust-lang.org/reference/crates-and-source-files.html#prelude)
 
 ---
+
+- **执行器** (Executor) [L5+] — 异步运行时中调度和执行 Future 的核心组件，如 Tokio runtime — [Tokio](https://docs.rs/tokio/latest/tokio/runtime/struct.Runtime.html)
+
+- **反应器** (Reactor) [L5+] — 异步运行时中监听 OS IO 事件并唤醒对应任务的底层组件 — [mio](https://docs.rs/mio/latest/mio/)
+
+- **不固定** (Unpin) [L5+] — 标记类型在内存中可被安全移动的 auto trait，大多数类型自动实现 — [std](https://doc.rust-lang.org/std/marker/trait.Unpin.html)
+
+- **特性门控** (Feature Gate) [L5+] — 通过 #![feature(...)] 启用编译器不稳定 nightly 特性的机制 — [Unstable Book](https://doc.rust-lang.org/unstable-book/index.html)
+
+- **交叉编译** (Cross-compilation) [L5+] — 在一种架构/OS 上编译生成另一种架构/OS 可执行文件的过程 — [Cargo Book](https://doc.rust-lang.org/cargo/reference/config.html#target)
+
+- **构建脚本** (Build Script) [L5+] — Cargo 在编译主 crate 前执行的 build.rs，用于代码生成或 C 库链接 — [Cargo Book](https://doc.rust-lang.org/cargo/reference/build-scripts.html)
+
+- **零成本抽象** (Zero-Cost Abstraction) [L5+] — 高级语言特性编译后不产生运行时开销的设计原则 — [C++ Origins](https://www.stroustrup.com/FSM/0cost.pdf) · [Rust Blog](https://blog.rust-lang.org/2015/05/11/traits.html)
+
+- **Clap** (Clap) [L5+] — Rust 生态最流行的命令行参数解析库，支持派生宏和构建器模式 — [docs.rs](https://docs.rs/clap/latest/clap/)
+
+- **Anyhow** (Anyhow) [L5+] — 基于 dyn Error 的灵活错误处理库，简化 ? 传播和错误上下文 — [docs.rs](https://docs.rs/anyhow/latest/anyhow/)
+
+- **serde_json** (serde_json) [L5+] — Serde 生态的 JSON 序列化/反序列化后端，零拷贝解析支持 — [docs.rs](https://docs.rs/serde_json/latest/serde_json/)
+
+- **Reqwest** (Reqwest) [L5+] — 基于 hyper 和 tokio 的高级异步 HTTP 客户端库 — [docs.rs](https://docs.rs/reqwest/latest/reqwest/)
+
+- **Tracing** (Tracing) [L5+] — 结构化的异步感知日志与分布式追踪框架，Tokio 生态核心 — [docs.rs](https://docs.rs/tracing/latest/tracing/)
+
+- **作用域守卫** (Scope Guard) [L3] — 在作用域退出时自动执行清理逻辑的 RAII 模式（如 defer、guard）— [Scopeguard crate](https://docs.rs/scopeguard/latest/scopeguard/)
+
+- **新类型模式** (Newtype Pattern) [L2] — 通过单字段元组结构体为现有类型创建强类型包装，实现 orphan rule 规避和类型安全 — [API Guidelines](https://rust-lang.github.io/api-guidelines/type-safety.html#c-newtype)
+
+- **孤儿规则** (Orphan Rule) [L3] — 禁止为外部类型实现外部 trait 的一致性规则，确保 trait 解析全局唯一 — [Reference](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)
+
+- **Cargo Workspace** (Cargo Workspace) [L5+] — 共享 Cargo.lock 和输出目录的多 crate 项目管理机制 — [Cargo Book](https://doc.rust-lang.org/cargo/reference/workspaces.html)
+
+- **内联汇编** (Inline Assembly) [L3] — 通过 `asm!` 宏在 Rust 中直接嵌入目标架构汇编指令 — [Reference](https://doc.rust-lang.org/reference/inline-assembly.html)
 
 ## 验证记录
 
@@ -386,13 +476,11 @@
 ### 核心推理链
 
 | 定理 | 前提 | 结论 | 置信度 |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | 术语标准化 ⟹ 跨文档理解一致性 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |
 
 > **过渡**: 利用本文件的导航结构，读者可以从当前位置快速跃迁到任意概念层级，实现非线性学习。
-
 > **过渡**: Rust 核心术语英中对照表 的维护需要与概念内容同步更新，确保元数据与实际知识体系的一致性。
-
 > **过渡**: 将 Rust 核心术语英中对照表 作为学习起点或复习锚点，有助于建立全局视野，避免陷入局部细节而忽视整体架构。
 
 ### 反命题与边界

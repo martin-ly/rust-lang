@@ -1,6 +1,8 @@
 > **内容分级**: [专家级]
 
 # Async/Await（异步编程）
+> **EN**: Async Programming
+> **Summary**: **变更日志**: - v4.2 (2026-05-13): Phase B 验证实践——新增§8.13 Miri 动态验证场景（悬垂指针检测、无效 bool 检测、async 状态机未初始化memory检测，含实际 Miri 输出截图） - v4.1 (2026-05-13): Phase B formal methods深化——新增§3.1b 状态机操作语义（小步语义、poll 状态转移函数、.await CPS 变换、Pin 约束在操作语义中的体现）；新增§3.2b Pin LTL formal methods（不动性公理 A1-A3、Unpin 豁免、poll 递归调用链验证、与§3.1b 操作语义衔接） - v4.0 (2026-05
 
 > **📎 交叉引用**
 >
@@ -136,6 +138,9 @@
     - [10.4 边界测试：`async fn` 在 trait 中的缺失与 `async_trait` crate（编译错误）](#104-边界测试async-fn-在-trait-中的缺失与-async_trait-crate编译错误)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [参考来源](#参考来源)
+  - [实践](#实践)
+    - [对应代码示例](#对应代码示例)
+    - [建议练习](#建议练习)
   - [导航：下一步去哪？](#导航下一步去哪)
 
 ## 〇、认知路径（Cognitive Path）
@@ -2901,6 +2906,25 @@ fn main() {}
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
+---
+
+---
+
+## 实践
+
+> 将本节概念转化为可编译代码。
+
+### 对应代码示例
+
+- **[crates/c06_async](../../../crates/c06_async/)** — 与本节概念对应的可编译 crate 示例
+- **[exercises/src/async_programming/](../../../exercises/src/async_programming/)** — 配套练习题
+
+### 建议练习
+
+1. 阅读 `crates/c06_async/` 中与"异步编程基础"相关的源码和示例
+2. 运行 `cargo test -p c06_async` 验证理解
+3. 完成 `exercises/src/async_programming/` 中的练习任务
 
 ---
 

@@ -1,4 +1,6 @@
 # Cranelift 后端预研：Rust 编译器的快速调试编译
+> **EN**: Compiler Internals
+> **Summary**: - [Cranelift 后端预研：Rust compiler的快速调试编译](#cranelift-后端预研rust-compiler的快速调试编译) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 问题：LLVM 的编译时间瓶颈](#11-问题llvm-的编译时间瓶颈) - [1.2 Cranelift 的定位与设计哲学](#12-cranelift-的定位与设计哲学) - [1.3 rustc\_codegen\_cranelift](#13-rustc_codegen_cranelift) - [二、技术细节](#二技术细节) - [2.1 架构对比：LLVM vs Cr
 >
 > **状态**: 🧪 Nightly 实验性 | ⚠️ **官方因资金不足进展停滞 (2026-05)**
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

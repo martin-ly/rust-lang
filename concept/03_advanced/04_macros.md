@@ -1,6 +1,8 @@
 > **内容分级**: [专家级]
 
 # Macros（宏系统）
+> **EN**: Macros
+> **Summary**: **变更日志**: - v4.1 (2026-05-14): 增强 §5 属性宏修改函数体——新增 `#[trace]` 完整实现（含 `proc_macro_error2` 友好错误）、AST 遍历三策略（quote 包装 / `Fold` trait / 手动 `stmts` 替换）、声明宏能力边界对比、跨层链接 - v4.0 (2026-05-13): Phase 4 TODO 清理——新增 proc_macro2/syn/quote 最佳实践、macro_rules! 重复模式完整语法、const fn + const generics 替代宏趋势、编译期内置宏完整列表、属性宏修改函数
 
 > **📎 交叉引用**
 >
@@ -2232,6 +2234,25 @@ macro_rules! conditional_feature {
 ```
 
 > **语义**: 此前 `cfg` 属性中的元变量仅限 `literal` 和 `path` 片段类型。1.96 扩展了 `expr` 的支持范围，使宏生成条件编译代码时更灵活，减少字符串拼接的 unsafe 模式。这是宏系统向更完整表达式支持演进的一步。[来源: [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/)] · [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)]
+
+---
+
+---
+
+## 实践
+
+> 将本节概念转化为可编译代码。
+
+### 对应代码示例
+
+- **[crates/c11_macro_system](../../../crates/c11_macro_system/)** — 与本节概念对应的可编译 crate 示例
+- **[exercises/src/macros/](../../../exercises/src/macros/)** — 配套练习题
+
+### 建议练习
+
+1. 阅读 `crates/c11_macro_system/` 中与"声明宏与过程宏"相关的源码和示例
+2. 运行 `cargo test -p c11_macro_system` 验证理解
+3. 完成 `exercises/src/macros/` 中的练习任务
 
 ---
 

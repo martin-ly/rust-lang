@@ -48,6 +48,8 @@ fn sink_stage(input: Receiver<Metric>) {
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Rust 工业级案例研究
+> **EN**: Rust 工业级案例研究 (Chinese)
+> **Summary**: 以下展示基于通道的无锁concurrency流水线模式，典型用于工业级日志/数据 ETL： ```rust,ignore use std::sync::mpsc::{channel, Sender, Receiver}; use std::thread; // Stage 1: 解析原始日志行 fn parser_stage(input: Receiver<String>, output: Sender<LogEntry>) { for line in input { if let Ok(entry) = parse_log(&line) { let _ = output.send(entry); } } } 
 
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价 → 创造

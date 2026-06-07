@@ -1,4 +1,6 @@
 # Rust Edition 机制与迁移指南
+> **EN**: Rust Edition 机制与迁移指南 (Chinese)
+> **Summary**: - [Rust Edition 机制与迁移指南](#rust-edition-机制与迁移指南) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 Edition 机制](#11-edition-机制) - [1.2 版本兼容性](#12-版本兼容性) - [1.3 2024 Edition 关键变更](#13-2024-edition-关键变更) - [二、迁移策略](#二迁移策略) - [2.1 cargo fix](#21-cargo-fix) - [2.2 手动迁移](#22-手动迁移) - [三、反命题与边界分析](#三反命题与边界分析) - [3.1 
 >
 > **受众**: [专家]
 > **内容分级**: [综述级]
@@ -11,11 +13,14 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
-> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/) · [RFC 2052 — Epochs](https://rust-lang.github.io/rfcs/2052-epochs.html) · [Rust Blog — Edition 2024](https://blog.rust-lang.org/) · [Wikipedia — Software Versioning](https://en.wikipedia.org/wiki/Software_versioning)
+> **来源**:
+> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/) ·
+> [RFC 2052 — Epochs](https://rust-lang.github.io/rfcs/2052-epochs.html) ·
+> [Rust Blog — Edition 2024](https://blog.rust-lang.org/) ·
+> [Wikipedia — Software Versioning](https://en.wikipedia.org/wiki/Software_versioning)
 
 ## 📑 目录
->
->
 
 - [Rust Edition 机制与迁移指南](#rust-edition-机制与迁移指南)
   - [📑 目录](#-目录)
@@ -47,11 +52,8 @@
 ---
 
 ## 一、核心概念
->
->
 
 ### 1.1 Edition 机制
->
 
 ```text
 Edition 机制:
@@ -86,7 +88,6 @@ Edition 机制:
 ---
 
 ### 1.2 版本兼容性
->
 
 ```text
 兼容性承诺:
@@ -109,12 +110,12 @@ Edition 机制:
 
   对比其他语言:
   ┌─────────────────┬─────────────────┬─────────────────┐
-  │ 语言            │ 版本策略        │ 兼容性          │
+  │ 语言             │ 版本策略        │ 兼容性           │
   ├─────────────────┼─────────────────┼─────────────────┤
   │ Rust            │ Edition + SemVer│ 强              │
-  │ C++             │ 标准周期        │ 中              │
-  │ Python          │ 重大版本        │ 弱（2→3）       │
-  │ JavaScript      │ 年度更新        │ 强              │
+  │ C++             │ 标准周期        │ 中               │
+  │ Python          │ 重大版本        │ 弱（2→3）        │
+  │ JavaScript      │ 年度更新        │ 强               │
   │ Go              │ SemVer          │ 强              │
   └─────────────────┴─────────────────┴─────────────────┘
 ```
@@ -407,7 +408,15 @@ fn main() {
 }
 ```
 
-> **修正**: `impl Trait` 在类型别名位置和静态项中的使用是 Rust 的长期限制。`static` 和 `const` 要求类型在编译期完全已知（单态化），而 `impl Trait` 是**存在类型**（existential type）——隐藏具体实现，只暴露 trait bound。编译器需要知道 `static` 的确切大小和对齐，因此不能是抽象的 `impl Trait`。[RFC 2289](https://rust-lang.github.io/rfcs/2289.html)（`type_alias_impl_trait`）部分解决了类型别名的问题，但 `static`/`const` 仍不支持。Edition 演进可能逐步放宽这些限制。 workaround：使用 trait 对象 `Box<dyn Iterator<Item = i32>>`（有运行时虚函数开销），或手写具体类型（暴露实现细节）。这与 C++ 的 `auto`（不能用于 `static`）或 Java 的接口（可用于 `static`，但需具体实现类）不同——Rust 的 `impl Trait` 设计追求零成本抽象，但静态位置的单态化要求与之冲突。[来源: [Rust RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bound.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**:
+> `impl Trait` 在类型别名位置和静态项中的使用是 Rust 的长期限制。
+> `static` 和 `const` 要求类型在编译期完全已知（单态化），而 `impl Trait` 是**存在类型**（existential type）——隐藏具体实现，只暴露 trait bound。
+> 编译器需要知道 `static` 的确切大小和对齐，因此不能是抽象的 `impl Trait`。
+> [RFC 2289](https://rust-lang.github.io/rfcs/2289.html)（`type_alias_impl_trait`）部分解决了类型别名的问题，但 `static`/`const` 仍不支持。
+> Edition 演进可能逐步放宽这些限制。 workaround：使用 trait 对象 `Box<dyn Iterator<Item = i32>>`（有运行时虚函数开销），或手写具体类型（暴露实现细节）。
+> 这与 C++ 的 `auto`（不能用于 `static`）或 Java 的接口（可用于 `static`，但需具体实现类）不同——Rust 的 `impl Trait` 设计追求零成本抽象，但静态位置的单态化要求与之冲突。
+> [来源: [Rust RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bound.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.2 边界测试：Edition 迁移的宏展开差异（编译错误）
 
@@ -429,7 +438,12 @@ fn use_macro() {
 }
 ```
 
-> **修正**: Rust 的 Edition 是 crate 级别的，但宏展开继承调用点的 Edition。这意味着定义在 Edition 2021 crate 中的宏，在 Edition 2024 crate 中调用时，按 Edition 2024 规则展开。若宏生成的代码依赖特定 Edition 语义（如 `async` 块的生命周期捕获、`match` 的移动语义），跨 Edition 使用可能导致意外行为。`cargo fix` 的 Edition 迁移工具检查这些风险，但复杂宏可能需手动审查。这与 C 预处理器宏（纯文本替换，无 Edition 概念）或 Lisp 宏（同像性，环境继承）不同——Rust 的宏系统既有 hygiene（避免命名冲突）又有 Edition 敏感性，增加了复杂性。最佳实践：避免在宏中生成依赖 Edition 边缘语义的代码，使用显式、可移植的写法。[来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)] · [来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)]
+> **修正**:
+> Rust 的 Edition 是 crate 级别的，但宏展开继承调用点的 Edition。
+> 这意味着定义在 Edition 2021 crate 中的宏，在 Edition 2024 crate 中调用时，按 Edition 2024 规则展开。
+> 若宏生成的代码依赖特定 Edition 语义（如 `async` 块的生命周期捕获、`match` 的移动语义），跨 Edition 使用可能导致意外行为。
+> `cargo fix` 的 Edition 迁移工具检查这些风险，但复杂宏可能需手动审查。这与 C 预处理器宏（纯文本替换，无 Edition 概念）或 Lisp 宏（同像性，环境继承）不同——Rust 的宏系统既有 hygiene（避免命名冲突）又有 Edition 敏感性，增加了复杂性。最佳实践：避免在宏中生成依赖 Edition 边缘语义的代码，使用显式、可移植的写法。
+> [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)] · [来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)]
 
 ### 10.6 边界测试：Edition 2024 的 `gen` 关键字保留与现有标识符冲突（编译错误）
 
@@ -446,7 +460,19 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 2024 Edition 将 `gen` 设为保留关键字（为 `gen` 块特性预留）。现有代码中使用 `gen` 作为标识符（变量、函数、结构体字段）的需重命名。`cargo fix --edition` 自动处理大部分冲突，但某些边缘情况需手动修复：1) 宏生成的代码包含 `gen`；2) 外部 crate 的公开 API 使用 `gen`（需等待上游修复）；3) `include!` 或 `include_str!` 引入的文件中的 `gen`。这与 Python 3 的 `print` 变为关键字（破坏性变更）或 C 的 `_Bool`/`bool`（C99 引入，可能冲突）类似——语言演进需要"征用"标识符空间。Rust 的 Edition 机制缓解了这一痛苦：旧 Edition 代码继续编译，迁移时工具辅助重命名。[来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)] · [来源: [Rust RFC 2052](https://rust-lang.github.io/rfcs/2052-epochs.html)]
+> **修正**:
+> Rust 2024 Edition 将 `gen` 设为保留关键字（为 `gen` 块特性预留）。
+> 现有代码中使用 `gen` 作为标识符（变量、函数、结构体字段）的需重命名。
+> `cargo fix --edition` 自动处理大部分冲突，但某些边缘情况需手动修复：
+>
+> 1) 宏生成的代码包含 `gen`；
+> 2) 外部 crate 的公开 API 使用 `gen`（需等待上游修复）；
+> 3) `include!` 或 `include_str!` 引入的文件中的 `gen`。
+>
+> 这与 Python 3 的 `print` 变为关键字（破坏性变更）或 C 的 `_Bool`/`bool`（C99 引入，可能冲突）类似——语言演进需要"征用"标识符空间。
+> Rust 的 Edition 机制缓解了这一痛苦：旧 Edition 代码继续编译，迁移时工具辅助重命名。
+> [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)] ·
+> [来源: [Rust RFC 2052](https://rust-lang.github.io/rfcs/2052-epochs.html)]
 
 ### 10.5 边界测试：多 Edition workspace 的依赖解析冲突（编译错误）
 
@@ -460,7 +486,26 @@ fn main() {
 // 且 crate_2024 的 proc-macro 使用 syn 2.0，可能导致版本冲突
 ```
 
-> **修正**: Workspace 中**多 edition 共存**是常见场景（逐步迁移），但依赖解析的复杂性：1) proc-macro crate 的 edition 影响宏展开代码的解析；2) `resolver = "3"`（2024 edition 默认）改变依赖特征解析，可能影响旧 crate；3) 某些 crate 的 `build.rs` 依赖特定 edition 行为。最佳实践：1) workspace 统一 `resolver = "2"` 或 `"3"`（不混用）；2) proc-macro crate 优先升级到新 edition（影响所有依赖者）；3) 使用 `cargo tree` 检查依赖图中 edition 分布。`cargo` 的依赖解析保证：同一 crate 的多个版本可在依赖图中共存（不同版本视为不同 crate），但 proc-macro 只能有一个版本（编译期加载）。这与 npm 的 workspaces（类似多包管理）或 Java 的 Maven multi-module（版本统一强制）不同——Rust 的 workspace 更灵活，但 edition 交互是高级话题。[来源: [The Cargo Book](https://doc.rust-lang.org/cargo/reference/resolver.html)] · [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)]
+> **修正**:
+>
+> Workspace 中**多 edition 共存**是常见场景（逐步迁移），但依赖解析的复杂性：
+>
+> 1) proc-macro crate 的 edition 影响宏展开代码的解析；
+> 2) `resolver = "3"`（2024 edition 默认）改变依赖特征解析，可能影响旧 crate；
+> 3) 某些 crate 的 `build.rs` 依赖特定 edition 行为。
+>
+> 最佳实践：
+>
+> 1) workspace 统一 `resolver = "2"` 或 `"3"`（不混用）；
+> 2) proc-macro crate 优先升级到新 edition（影响所有依赖者）；
+> 3) 使用 `cargo tree` 检查依赖图中 edition 分布。
+>
+> `cargo` 的依赖解析保证：
+>
+> 同一 crate 的多个版本可在依赖图中共存（不同版本视为不同 crate），但 proc-macro 只能有一个版本（编译期加载）。
+> 这与 npm 的 workspaces（类似多包管理）或 Java 的 Maven multi-module（版本统一强制）不同——Rust 的 workspace 更灵活，但 edition 交互是高级话题。
+> [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/reference/resolver.html)] ·
+> [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)]
 
 ### 10.3 边界测试：多 Edition workspace 的 resolver 冲突（编译错误）
 
@@ -475,15 +520,28 @@ fn main() {
 // ❌ 编译错误: 若 syn 版本冲突且 proc-macro 只能有一个版本
 ```
 
-> **修正**: Workspace 中**多 edition 共存**是常见场景（逐步迁移），但依赖解析复杂：1) proc-macro crate 的 edition 影响宏展开代码的解析；2) `resolver = "3"`（2024 edition 默认）改变依赖特征解析；3) 某些 crate 的 `build.rs` 依赖特定 edition 行为。最佳实践：1) workspace 统一 `resolver = "2"` 或 `"3"`（不混用）；2) proc-macro crate 优先升级到新 edition（影响所有依赖者）；3) 使用 `cargo tree` 检查依赖图中 edition 分布。`cargo` 的依赖解析保证：同一 crate 的多个版本可在依赖图中共存，但 proc-macro 只能有一个版本（编译期加载）。这与 npm 的 workspaces（类似多包管理）或 Java 的 Maven multi-module（版本统一强制）不同——Rust 的 workspace 更灵活，但 edition 交互是高级话题。[来源: [The Cargo Book](https://doc.rust-lang.org/cargo/reference/resolver.html)] · [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)]
-> **过渡**: Rust Edition 机制与迁移指南 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Rust Edition 机制与迁移指南 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **修正**:
+>
+> Workspace 中**多 edition 共存**是常见场景（逐步迁移），但依赖解析复杂：
+>
+> 1) proc-macro crate 的 edition 影响宏展开代码的解析；
+> 2) `resolver = "3"`（2024 edition 默认）改变依赖特征解析；
+> 3) 某些 crate 的 `build.rs` 依赖特定 edition 行为。
+>
+> 最佳实践：
+>
+> 1) workspace 统一 `resolver = "2"` 或 `"3"`（不混用）；
+> 2) proc-macro crate 优先升级到新 edition（影响所有依赖者）；
+> 3) 使用 `cargo tree` 检查依赖图中 edition 分布。
+>
+> `cargo` 的依赖解析保证：同一 crate 的多个版本可在依赖图中共存，但 proc-macro 只能有一个版本（编译期加载）。
+> 这与 npm 的 workspaces（类似多包管理）或 Java 的 Maven multi-module（版本统一强制）不同——Rust 的 workspace 更灵活，但 edition 交互是高级话题。
+> [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/reference/resolver.html)] ·
+> [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)]
 > **过渡**: Rust Edition 机制与迁移指南 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ### 补充定理链
 
-- **定理**: Rust Edition 机制与迁移指南 定义 ⟹ 类型安全保证
-- **定理**: Rust Edition 机制与迁移指南 定义 ⟹ 类型安全保证
 - **定理**: Rust Edition 机制与迁移指南 定义 ⟹ 类型安全保证
 
 ## 认知路径
@@ -499,9 +557,7 @@ fn main() {
 | Rust Edition 机制与迁移指南 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 Rust Edition 机制与迁移指南 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 Rust Edition 机制与迁移指南 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: Rust Edition 机制与迁移指南 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

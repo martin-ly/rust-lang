@@ -1,6 +1,8 @@
 > **内容分级**: [专家级]
 
 # 分离逻辑：Rust 所有权的形式化根基
+> **EN**: Ownership
+> **Summary**: - [分离逻辑：Rust ownership的formal methods根基](#分离逻辑rust-ownership的formal methods根基) - [📑 目录](#-目录) - [一、核心概念](#一核心概念) - [1.1 从霍尔逻辑到分离逻辑](#11-从霍尔逻辑到分离逻辑) - [1.2 分离合取与资源ownership](#12-分离合取与资源ownership) - [1.3 框架规则与局部推理](#13-框架规则与局部推理) - [二、技术细节](#二技术细节) - [2.1 分离逻辑的基本断言](#21-分离逻辑的基本断言) - [2.2 Rust ownership的formal methods映射](#22-rust-ownership的formal methods映射) - [2.3 Iris 与更高阶分离逻辑](#
 
 > **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。

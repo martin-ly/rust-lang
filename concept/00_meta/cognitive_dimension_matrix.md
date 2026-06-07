@@ -1,4 +1,6 @@
 # Rust 知识体系双维认知矩阵（Krathwohl × Bloom）
+> **EN**: Rust 知识体系双维认知矩阵（Krathwohl × Bloom） (Chinese)
+> **Summary**: - [Rust 知识体系双维认知矩阵（Krathwohl × Bloom）](#rust-知识体系双维认知矩阵krathwohl--bloom) - [📑 目录](#-目录) - [〇、双维矩阵认知全景](#〇双维矩阵认知全景) - [一、理论框架](#一理论框架) - [1.1 Krathwohl 知识维度（纵轴）](#11-krathwohl-知识维度纵轴) - [1.2 Bloom 认知过程维度（横轴）](#12-bloom-认知过程维度横轴) - [1.3 双维交叉的认知目标语法](#13-双维交叉的认知目标语法) - [二、Rust 知识体系全局双维矩阵](#二rust-知识体系全局
 
 > **受众**: [研究者]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
