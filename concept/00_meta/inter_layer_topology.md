@@ -272,7 +272,7 @@ graph LR
 - [L0 边界扩展树](boundary_extension_tree.md) —— 安全边界推演
 - [L1 所有权](../01_foundation/01_ownership.md) —— 所有权唯一性定理
 - [L1 借用](../01_foundation/02_borrowing.md) —— AXM 定理
-- [PLAN.md](../PLAN.md) —— 项目演进计划
+- [历史演进计划](../archive/PLAN_concept_knowledge_system_v2.md) —— 项目演进计划（已归档）
 
 ## 六、跨层认知路径（导航指南）
 

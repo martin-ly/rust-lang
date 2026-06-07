@@ -46,7 +46,7 @@ impl eframe::App for SensorApp {
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×App — 设计嵌入式图形系统架构
 > **定位**: 覆盖 Rust **嵌入式图形**的核心技术栈——从 `embedded-graphics` 的 2D 原语绘制到 `lvgl-rs` 的 widget 系统，从 `slint-ui` 的声明式 UI 到 `egui` 的即时模式 GUI，建立显示驱动、字体渲染、触摸输入与 `no_std` 环境的完整知识体系。
-> **前置概念**: [Embedded Systems](./22_embedded_systems.md) · [Unsafe Rust](../03_advanced/03_unsafe_rust.md) · [Type System](../01_foundation/04_type_system.md)
+> **前置概念**: [Embedded Systems](./22_embedded_systems.md) · [Unsafe Rust](../03_advanced/03_unsafe.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Performance Optimization](./15_performance_optimization.md) · [Async/Await](../03_advanced/02_async.md)
 
 ---
@@ -887,7 +887,7 @@ graph TD
 
 - [Embedded Systems](./22_embedded_systems.md) — 嵌入式系统基础
 - [Performance Optimization](./15_performance_optimization.md) — 性能优化
-- [Unsafe Rust](../03_advanced/03_unsafe_rust.md) — unsafe Rust 模式
+- [Unsafe Rust](../03_advanced/03_unsafe.md) — unsafe Rust 模式
 - [Async/Await](../03_advanced/02_async.md) — 异步编程
 
 ---

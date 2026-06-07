@@ -136,7 +136,7 @@ Week 2: 并发与工程化（20h）
 | 阅读 | [concept/03_advanced/02_async.md](../03_advanced/02_async.md)（前半部分） | 2h | 理解 `async fn` 返回 `Future` |
 | 环境 | 添加 `tokio = { version = "1", features = ["full"] }` | 0.5h | `cargo build` 成功 |
 | 练习 | 用 `tokio::spawn` 并行执行多个 HTTP 请求 | 1.5h | 并发请求总时间 < 串行时间 |
-| 阅读 | [concept/03_advanced/02_async_programming.md](../03_advanced/02_async_programming.md)（基础部分） | 1.5h | 理解 `await` 的挂起语义 |
+| 阅读 | [concept/03_advanced/02_async.md](../03_advanced/02_async.md)（基础部分） | 1.5h | 理解 `await` 的挂起语义 |
 | 练习 | 实现异步文件读取 + 内容搜索 | 0.5h | 使用 `tokio::fs` |
 
 **产出**: 异步 HTTP 客户端工具 `async_fetch`

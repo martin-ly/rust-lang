@@ -7,7 +7,7 @@
 > **层级**: L6 生态工程 — 系统设计模式
 > **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: C×Eva — 评价模式组合的正确性与一致性
-> **前置概念**: [Patterns](./02_patterns.md) · [Concurrency Patterns](../03_advanced/10_concurrency_patterns.md) · [Async Patterns](../03_advanced/13_async_patterns.md) · [Type System](../01_foundation/04_type_system.md)
+> **前置概念**: [Patterns](./02_patterns.md) · [Concurrency Patterns](../03_advanced/10_concurrency_patterns.md) · [Async Patterns](../03_advanced/02_async_patterns.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Distributed Systems](./18_distributed_systems.md) · [System Design Principles](./05_system_design_principles.md)
 > **主要来源**: [GoF — Design Patterns] · [POSA — Pattern-Oriented Software Architecture] · [Category Theory for Programmers, Bartosz Milewski] · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 

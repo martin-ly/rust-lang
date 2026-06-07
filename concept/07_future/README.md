@@ -181,7 +181,6 @@ graph TB
 - [编译期执行与常量求值](./27_compile_time_execution.md)
 - [Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈](./28_rust_for_webassembly.md)
 - [eBPF / Aya / Rex 的 Rust 映射](./29_ebpf_rust.md)
-- [AI × Rust：生成-验证闭环与确定性容器](./archive/01_ai_integration_original.md)
 - [Rust 1.97 前沿特性预览](./rust_1_97_preview.md)
 
 ## 三、前沿方向与下层关联

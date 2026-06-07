@@ -143,7 +143,6 @@ L1-L4 知识                L5 综合                L6-L7 决策
 - [Rust vs C#：托管与原生之路](./13_rust_vs_csharp.md)
 - [Rust vs Elixir](./14_rust_vs_elixir.md)
 - [Rust vs TypeScript：静态类型系统的两种哲学 —— 编译期证明与渐进式工程](./15_rust_vs_typescript.md)
-- [16_rust_vs_ruby](./16_rust_vs_ruby.md)
 - [测验：Rust vs 系统编程语言（嵌入式互动试点）](./17_quiz_rust_vs_systems.md)
 
 ## 三、原 `01.md` 的结构化索引

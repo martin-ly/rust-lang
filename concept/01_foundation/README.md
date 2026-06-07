@@ -177,7 +177,6 @@ Type System（理解"类型即证明"）
 - [测试基础：从单元测试到集成测试](./16_testing_basics.md)
 - [高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析](./17_collections_advanced.md)
 - [字符串与编码：Rust 的文本处理类型系统](./18_strings_and_encoding.md)
-- [19_numerics](./19_numerics.md)
 - [测验：所有权、借用与生命周期（嵌入式互动试点）](./23_quiz_ownership_borrowing.md)
 - [测验：类型系统（嵌入式互动试点）](./24_quiz_type_system.md)
 - [测验：错误处理（嵌入式互动试点）](./25_quiz_error_handling.md)

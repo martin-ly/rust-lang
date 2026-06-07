@@ -5,7 +5,7 @@
 >
 > **定位**：Rust 概念体系的**数学根基**与形式化验证。本层为 L1-L3 的所有安全保证提供严格的数学证明，是知识体系的"地基"。
 > **Bloom 层级**: 分析 → 评价
-> **核心功能**: 为上层概念提供**可机械验证的**安全性证明
+> **核心功能**: 为上层概念提供**形式化直觉**与**教学类比**的安全性解释；指向可机械验证证明的权威来源（RustBelt、Iris、Coq）
 > **[来源: POPL 2018 - RustBelt]** · **[来源: Wikipedia - Separation Logic]** · **[来源: Wikipedia - Linear Logic]** · **[来源: Iris Project - iris-project.org]**
 
 ---
@@ -171,26 +171,24 @@ graph TB
 
 | 文件 | 概念 | 核心内容 | 状态 | 映射的上层概念 | 工具化输出 |
 |:---|:---|:---|:---|:---|:---|
-| [01_linear_logic.md](./01_linear_logic.md) | 线性/仿射逻辑 | 资源敏感逻辑、⊗/⅋/⊸、Girard 1987、 weakening | ✅ v1.0 | L1 Ownership (唯一性), L1 Move/Copy | — |
-| [02_type_theory.md](./02_type_theory.md) | 类型论基础 | ADT、HM 推断、子类型、Variance、System F | ✅ v1.0 | L1 Type System, L2 Generics | L6 编译器类型检查 |
+| [01_linear_logic.md](./01_linear_logic.md) | 线性/仿射逻辑 [教学类比] | 资源敏感逻辑、⊗/⅋/⊸、Girard 1987、 weakening | ✅ v1.0 | L1 Ownership (唯一性), L1 Move/Copy | — |
+| [02_type_theory.md](./02_type_theory.md) | 类型论基础 [教学类比] | ADT、HM 推断、子类型、Variance、System F | ✅ v1.0 | L1 Type System, L2 Generics | L6 编译器类型检查 |
 | [03_ownership_formal.md](./03_ownership_formal.md) | 所有权形式化 | COR、区域类型、分数权限、操作语义 | ✅ v1.0 | L1 Ownership + Borrowing + Lifetimes | — |
 | [04_rustbelt.md](./04_rustbelt.md) | RustBelt 与验证 | Iris 分离逻辑、验证工具链、工业应用 | ✅ v1.0 | L3 Concurrency + Unsafe | L7 Creusot/Verus/Kani |
 | [05_verification_toolchain.md](./05_verification_toolchain.md) | 验证工具链选型 | ROI 分析、决策树、a-mir-formality、分层验证策略 | ✅ v1.2 | L3-L6 验证实践 | L7 a-mir-formality |
 | [06_subtype_variance.md](./06_subtype_variance.md) | 子类型与变型 | 协变/逆变/不变、生命周期子类型、类型安全边界 | ✅ v1.0 | L2 Generics, L1 Lifetimes | 编译器类型检查 |
 | [11_separation_logic.md](./11_separation_logic.md) | 分离逻辑 | * 算子、帧规则、CSL、Iris、RustBelt 应用映射 | ✅ v1.0 | L3 Concurrency, L1 Ownership | 形式化验证工具 |
 | [08_type_inference.md](./08_type_inference.md) | 类型推断 | HM 算法、统一、Rust 扩展、Trait 约束推断 | ✅ v1.0 | L2 Generics, L2 Trait | 编译器类型检查 |
-| [17_operational_semantics.md](./17_operational_semantics.md) | 操作语义 | 小步/大步语义、求值上下文、Rust 形式化 | ✅ v1.0 | L1 Ownership, L3 Unsafe | RustBelt, Miri |
-| [20_axiomatic_semantics.md](./20_axiomatic_semantics.md) | 公理语义 | Hoare 逻辑、wp/sp 计算、Rust 所有权公理化 | ✅ v1.0 | L4 形式化理论, L3 Unsafe | Prusti, Creusot, Kani |
-| [21_type_semantics.md](./21_type_semantics.md) | 类型语义 | 进步/保持定理、Rust 特有类型语义、子类型与变型 | ✅ v1.0 | L2 Type System, L4 形式化理论 | Pierce TAPL, RustBelt |
-| [18_evaluation_strategies.md](./18_evaluation_strategies.md) | 求值策略 | CBV/CBN/CBR、归约策略、Rust 的 CBV+Move 定位 | ✅ v1.0 | L1 Type System, L2 Generics | Lambda Calculus |
+| [17_operational_semantics.md](./17_operational_semantics.md) | 操作语义 [教学类比] | 小步/大步语义、求值上下文、Rust 形式化 | ✅ v1.0 | L1 Ownership, L3 Unsafe | RustBelt, Miri |
+| [20_axiomatic_semantics.md](./20_axiomatic_semantics.md) | 公理语义 [教学类比] | Hoare 逻辑、wp/sp 计算、Rust 所有权公理化 | ✅ v1.0 | L4 形式化理论, L3 Unsafe | Prusti, Creusot, Kani |
+| [21_type_semantics.md](./21_type_semantics.md) | 类型语义 [教学类比] | 进步/保持定理、Rust 特有类型语义、子类型与变型 | ✅ v1.0 | L2 Type System, L4 形式化理论 | Pierce TAPL, RustBelt |
+| [18_evaluation_strategies.md](./18_evaluation_strategies.md) | 求值策略 [教学类比] | CBV/CBN/CBR、归约策略、Rust 的 CBV+Move 定位 | ✅ v1.0 | L1 Type System, L2 Generics | Lambda Calculus |
 
 ---
 
 ### 补充文件索引
 
-- [07_separation_logic](./07_separation_logic.md)
 - [线性逻辑在 Rust 中的工程应用](./09_linear_logic_applications.md)
-- [09_operational_semantics](./09_operational_semantics.md)
 - [范畴论与 Rust：从函子到单子](./10_category_theory.md)
 - [指称语义与领域理论](./12_denotational_semantics.md)
 - [形式化方法在 Rust 中的应用](./13_formal_methods.md)
