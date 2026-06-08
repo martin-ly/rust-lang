@@ -24,3 +24,4 @@ pub mod macros;
 pub mod unsafe_rust;
 pub mod rust_195_feature_exercises;
 pub mod rust_196_feature_exercises;
+pub mod rust_197_feature_exercises;

@@ -66,12 +66,11 @@
 
 ### 🏷️ Content Marking Strategy（决策 3.C）
 
-- **5 个核心 preview 文件**添加 `#[experimental]` `#[nightly_only]` Rust 属性标记：
-  - `borrow_sanitizer.md`
-  - `08_safety_tags_preview.md`
-  - `10_derive_coerce_pointee_preview.md`
-  - `11_const_trait_impl_preview.md`
-  - `16_cranelift_backend_preview.md`
+- **30 个 L7 preview 文件**批量添加 `#[experimental]` `#[nightly_only]` Rust 属性标记：
+  - 核心: `borrow_sanitizer.md`, `08_safety_tags_preview.md`, `10_derive_coerce_pointee_preview.md`, `11_const_trait_impl_preview.md`, `16_cranelift_backend_preview.md`
+  - 批量: `07_mcdc_coverage`, `09_parallel_frontend`, `11_stable_abi`, `12_inline_const_pattern`, `12_return_type_notation`, `13_must_not_suspend`, `13_unsafe_fields`, `14_ferrocene`, `14_lifetime_capture`, `15_gen_blocks`, `15_pin_ergonomics`, `15_rpitit`, `16_type_alias_impl_trait`, `17_arbitrary_self_types`, `17_const_trait`, `17_rust_specification`, `18_field_projections`, `19_rust_edition`, `20_borrowsanitizer`, `22_gen_blocks`, `22_std_autodiff`, `25_open_enums`, `26_specialization`, `rust_1_97_preview`
+- **`concept/07_future/README.md`**: 添加标记说明，提示读者 `*_preview.md` 均为前沿预研内容
+- **`exercises/src/rust_197_feature_exercises.rs`**: 新建 6.4KB 1.97 特性练习，含 4 个主题（truncate_front、retain_back、box_vec_non_null、int_format_into）+ 6 道测试全部通过
 
 ---
 

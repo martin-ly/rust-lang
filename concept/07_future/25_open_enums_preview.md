@@ -4,6 +4,7 @@
 > **Summary**: Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举 (Chinese). Core Rust concept covering mechanism analysis, aerospace and fault-tolerant systems.
 >
 > **状态**: 🧪 Nightly 实验性
+> **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)
 > **预计稳定**: 待定（需等待 RFC / MCP 完成）
 >

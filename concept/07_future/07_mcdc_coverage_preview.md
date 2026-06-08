@@ -4,6 +4,7 @@
 > **Summary**: Security Practices. Core Rust concept covering formal methods foundations, verification techniques, compiler internals.
 >
 > **状态**: 🧪 Nightly 实验性
+> **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)
 > **预计稳定**: 待定（需等待 RFC / MCP 完成）
 >

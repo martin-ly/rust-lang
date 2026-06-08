@@ -132,6 +132,8 @@ graph TB
 
 ## 二、文件索引与关系
 
+> **标记说明**: 本层 `*_preview.md` 文件均为前沿预研内容，带有 `#[experimental]` `#[nightly_only]` 标记。这些特性尚未稳定，可能在未来版本中变更或移除。稳定特性请参见 [Rust 版本跟踪](./05_rust_version_tracking.md)。
+
 | 文件 | 概念 | 核心内容 | 状态 | 依赖的 L1-L6 | 反向驱动 |
 |:---|:---|:---|:---|:---|:---|
 | [01_ai_integration.md](./01_ai_integration.md) | AI × Rust | 生成-验证闭环、AI 语义安全网、确定性容器 | ✅ v1.0 | L3 Unsafe, L4 RustBelt, L6 工具链 | L3 Unsafe 契约精确化 |

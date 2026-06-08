@@ -284,13 +284,14 @@ fn main() -> Result<(), Box<dyn Error>> {
 
 **扩展路径选择**（根据兴趣选一个方向）：
 
-| 方向 | 下一步 | 预计时间 |
-|:---|:---|:---:|
-| **系统编程** | 学习 Unsafe + FFI，尝试调用 C 库 | +20h |
-| **Web 后端** | 学习 Axum/Tokio，将 `fastwc` 改为 Web 服务 | +20h |
-| **嵌入式** | 学习 `no_std`，在 microcontroller 上运行 Rust | +30h |
-| **形式化验证** | 进入 [L4 形式化](./concept/04_formal/README.md)，理解所有权证明 | +40h |
-| **开源贡献** | 为 [rust-lang/rust](https://github.com/rust-lang/rust) 或 [tokio](https://github.com/tokio-rs/tokio) 提交文档 PR | 持续 |
+| 方向 | 下一步 | 核心文件 | 预计时间 |
+|:---|:---|:---|:---:|
+| **系统编程** | 学习 Unsafe + FFI，尝试调用 C 库 | [Unsafe Rust](./concept/03_advanced/03_unsafe.md) · [FFI](./concept/03_advanced/05_rust_ffi.md) · [内联汇编](./concept/03_advanced/13_inline_assembly.md) | +20h `[选修]` |
+| **Web 后端** | 学习 Axum/Tokio，将 `fastwc` 改为 Web 服务 | [Async/Await](./concept/03_advanced/02_async.md) · [网络编程](./concept/03_advanced/18_network_programming.md) | +20h `[选修]` |
+| **嵌入式** | 学习 `no_std`，在 microcontroller 上运行 Rust | [嵌入式 Rust](./concept/06_ecosystem/17_embedded_rust.md) · [Real-Time Systems](./concept/06_ecosystem/18_real_time_systems.md) | +30h `[选修]` |
+| **形式化验证** | 理解所有权证明，使用 Kani/Verus | [RustBelt](./concept/04_formal/04_rustbelt.md) · [验证工具生态](./concept/04_formal/22_modern_verification_tools.md) | +40h `[选修]` |
+| **编译器开发** | 理解借用检查器演进，尝试 Miri/BSan | [NLL 与 Polonius](./concept/03_advanced/08_nll_and_polonius.md) · [BorrowSanitizer](./concept/07_future/borrow_sanitizer.md) | +30h `[选修]` |
+| **开源贡献** | 为 rust-lang/rust 或 tokio 提交文档 PR | [Rust 版本跟踪](./concept/07_future/05_rust_version_tracking.md) · [Edition 机制](./concept/07_future/22_edition_guide.md) | 持续 `[选修]` |
 
 ---
 

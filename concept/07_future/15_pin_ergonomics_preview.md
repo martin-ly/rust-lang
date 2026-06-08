@@ -3,6 +3,7 @@
 > **EN**: Traits
 > **Summary**: Traits. Emerging Rust feature or ecosystem trend: Traits.
 > **状态**: 🧪 Nightly 实验性（MCP 已通过，RFC 推进中）
+> **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)
 > **预计稳定**: 2027+（需等待 RFC 完成及 ecosystem 适配）
 >
