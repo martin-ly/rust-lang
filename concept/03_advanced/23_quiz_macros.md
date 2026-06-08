@@ -3,8 +3,10 @@
 # 测验：宏系统（L3 试点扩展）
 >
 > **EN**: Macros
-> **Summary**: <details> <summary>💡 点击展开答案与解析</summary> **答案**： ```rust // vec![1, 2, 3] 展开为： { let mut temp_vec = Vec::new(); temp_vec.push(1); temp_vec.push(2); temp_vec.push(3); temp_vec }``` **解析**：`vec!` 是 Rust 标准库中的**声明宏**（declarative macro），使用 `macro_rules!` 定义。 **声明宏的核心特征**： | 特性 | 说明 | |:---|:---| | 调用语法
-
+> **Summary**: <details> <summary>💡 点击展开答案与解析</summary>
+> **答案**： ```rust // vec![1, 2, 3] 展开为： { let mut temp_vec = Vec::new(); temp_vec.push(1); temp_vec.push(2); temp_vec.push(3); temp_vec }```
+> **解析**：`vec!` 是 Rust 标准库中的**声明宏**（declarative macro），使用 `macro_rules!` 定义。
+> **声明宏的核心特征**： | 特性 | 说明 | |:---|:---| | 调用语法
 > **受众**: [专家]
 > **内容分级**: [专家级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)

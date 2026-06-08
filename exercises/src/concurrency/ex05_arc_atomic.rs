@@ -1,17 +1,19 @@
-//! # 练习 5: Arc + Atomic
+//! # 练习 5: Arc + Atomic / Exercise 5: Arc + Atomic
 //!
-//! **难度**: Medium  
-//! **考点**: Arc、AtomicUsize、无锁并发
+//! **难度 / Difficulty**: Medium  
+//! **考点 / Focus**: Arc、AtomicUsize、无锁并发
+//!   Arc, AtomicUsize, lock-free concurrency
 //!
-//! ## 题目描述
+//! ## 题目描述 / Problem Description
 //!
 //! 使用 Atomic 类型实现无锁计数器，避免 Mutex 的开销。
+//! Use Atomic types to implement a lock-free counter, avoiding Mutex overhead.
 
-use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Arc;
+use std::sync::atomic::{AtomicUsize, Ordering};
 use std::thread;
 
-/// 无锁计数器
+/// 无锁计数器 / Lock-free counter
 #[derive(Debug)]
 pub struct AtomicCounter {
     count: AtomicUsize,
@@ -25,27 +27,32 @@ impl AtomicCounter {
     }
 
     /// 原子递增并返回新值
+    /// Atomically increments and returns the new value
     pub fn increment(&self) -> usize {
         self.count.fetch_add(1, Ordering::SeqCst) + 1
     }
 
     /// 获取当前值
+    /// Gets the current value
     pub fn get(&self) -> usize {
         self.count.load(Ordering::SeqCst)
     }
 
     /// 批量递增
+    /// Adds n atomically
     pub fn add(&self, n: usize) -> usize {
         self.count.fetch_add(n, Ordering::SeqCst) + n
     }
 }
 
 /// 创建共享的无锁计数器
+/// Creates a shared lock-free counter
 pub fn create_atomic_counter(initial: usize) -> Arc<AtomicCounter> {
     Arc::new(AtomicCounter::new(initial))
 }
 
 /// 多线程并发递增
+/// Concurrently increments from multiple threads
 pub fn atomic_concurrent_increment(
     counter: &Arc<AtomicCounter>,
     per_thread: usize,

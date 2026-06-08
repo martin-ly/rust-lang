@@ -5,7 +5,7 @@
 # Rust 数据库访问生态
 >
 > **EN**: Database Access
-> **Summary**: Database Access. Core Rust concept covering mechanism analysis.
+> **Summary**: Database Access. Core Rust concept covering mechanism analysis, ecosystem and tooling, HTTP and web services.
 >
 > **受众**: [进阶]
 

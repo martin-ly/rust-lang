@@ -1,7 +1,7 @@
 # Field Projections 预览：安全的字段级投影
 >
 > **EN**: Security Practices
-> **Summary**: Security Practices. Core Rust concept covering mechanism analysis.
+> **Summary**: Security Practices. Core Rust concept covering mechanism analysis, memory safety guarantees, security practices.
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

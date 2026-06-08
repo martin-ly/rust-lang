@@ -1,7 +1,7 @@
 # 权威来源清单与知识来源关系分析
 >
 > **EN**: 权威来源清单与知识来源关系分析 (Chinese)
-> **Summary**: 权威来源清单与知识来源关系分析 (Chinese). Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: 权威来源清单与知识来源关系分析 (Chinese). Authoritative source mapping and citation management for Rust concepts.
 > **受众**: [进阶]
 > **内容分级**: [研究者级]
 > **Bloom 层级**: 应用

@@ -1,7 +1,7 @@
 # Edition 2024 完全指南：新特性与迁移策略
 >
 > **EN**: Edition 2024 完全指南：新特性与迁移策略 (Chinese)
-> **Summary**: Edition 2024 完全指南：新特性与迁移策略 (Chinese). Core Rust concept covering mechanism analysis.
+> **Summary**: Edition 2024 完全指南：新特性与迁移策略 (Chinese). Core Rust concept covering mechanism analysis, lifetime semantics, Rust edition mechanism.
 >
 > **受众**: [专家]
 > **内容分级**: [综述级]

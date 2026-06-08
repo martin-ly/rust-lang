@@ -1,7 +1,7 @@
 # 方法论：思维表征与知识结构规范
 >
 > **EN**: 方法论：思维表征与知识结构规范 (Chinese)
-> **Summary**: 方法论：思维表征与知识结构规范 (Chinese). Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: 方法论：思维表征与知识结构规范 (Chinese). Methodology for knowledge representation and structural organization.
 >
 > **受众**: [研究者]
 >

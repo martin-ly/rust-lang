@@ -4,7 +4,7 @@
 # Paradigm Matrix: Multi-Language Formal Comparison（多语言范式对比矩阵）
 >
 > **EN**: Paradigm Matrix: Multi-Language Formal Comparison（多语言范式对比矩阵） (Chinese)
-> **Summary**: Paradigm Matrix: Multi-Language Formal Comparison. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Paradigm Matrix: Multi-Language Formal Comparison. Paradigm Matrix: Multi-Language Formal Comparison（多语言范式对比矩阵）.
 > **受众**: [进阶]
 > **层级**: L5 对比分析
 > **A/S/P 标记**: **S** — Structure（心智模型）

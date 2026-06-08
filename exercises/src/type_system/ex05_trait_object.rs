@@ -1,30 +1,33 @@
-//! # 练习 5: 特质对象
+//! # 练习 5: 特质对象 / Exercise 5: Trait Objects
 //!
-//! **难度**: Medium  
-//! **考点**: trait、dyn Trait、动态分发
+//! **难度 / Difficulty**: Medium  
+//! **考点 / Focus**: trait、dyn Trait、动态分发
+//!   Traits, dyn Trait, dynamic dispatch
 //!
-//! ## 题目描述
+//! ## 题目描述 / Problem Description
 //!
 //! 定义一个 `Shape` 特质，为 Circle 和 Rectangle 实现它，
 //! 然后使用特质对象进行多态调用。
+//! Define a `Shape` trait, implement it for Circle and Rectangle,
+//! then use trait objects for polymorphic calls.
 
 use std::f64::consts::PI;
 
-/// 可绘制的形状
+/// 可绘制的形状 / Drawable shape
 pub trait Shape {
-    /// 计算面积
+    /// 计算面积 / Calculates area
     fn area(&self) -> f64;
-    /// 返回形状名称
+    /// 返回形状名称 / Returns shape name
     fn name(&self) -> &'static str;
 }
 
-/// 圆形
+/// 圆形 / Circle
 #[derive(Debug, Clone, Copy)]
 pub struct Circle {
     pub radius: f64,
 }
 
-/// 矩形
+/// 矩形 / Rectangle
 #[derive(Debug, Clone, Copy)]
 pub struct Rect {
     pub width: f64,
@@ -52,11 +55,13 @@ impl Shape for Rect {
 }
 
 /// 计算所有形状的总面积
+/// Calculates the total area of all shapes
 pub fn total_area(shapes: &[Box<dyn Shape>]) -> f64 {
     shapes.iter().map(|s| s.area()).sum()
 }
 
 /// 返回面积最大的形状名称
+/// Returns the name of the largest shape by area
 pub fn largest_shape_name(shapes: &[Box<dyn Shape>]) -> Option<&'static str> {
     shapes
         .iter()

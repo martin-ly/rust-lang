@@ -1,7 +1,7 @@
 # Safety Tags 概念预研：Unsafe 契约的机器可读标注
 >
 > **EN**: Unsafe Rust
-> **Summary**: Unsafe Rust. Core Rust concept covering practical examples, mechanism analysis.
+> **Summary**: Unsafe Rust. Core Rust concept covering verification techniques, practical examples, mechanism analysis.
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

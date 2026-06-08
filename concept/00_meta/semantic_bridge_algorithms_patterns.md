@@ -1,7 +1,7 @@
 # 语义桥：算法、设计模式与工作流模式的统一谱系
 >
 > **EN**: Design Patterns
-> **Summary**: Design Patterns. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Design Patterns. Semantic bridge connecting algorithms to design patterns.
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **受众**: [专家]
 > **层级**: L0 元信息 — 跨域语义关联

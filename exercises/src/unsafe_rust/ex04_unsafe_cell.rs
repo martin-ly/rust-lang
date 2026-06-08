@@ -1,46 +1,55 @@
-//! # 练习 4: UnsafeCell 与内部可变性
+//! # 练习 4: UnsafeCell 与内部可变性 / Exercise 4: UnsafeCell and Interior Mutability
 //!
-//! **难度**: Medium  
-//! **考点**: `UnsafeCell<T>`、内部可变性、`*const`/`*mut` 转换、编译期 vs 运行期检查
+//! **难度 / Difficulty**: Medium  
+//! **考点 / Focus**: `UnsafeCell<T>`、内部可变性、`*const`/`*mut` 转换、编译期 vs 运行期检查
+//!   Interior mutability, `*const`/`*mut` conversion, compile-time vs runtime checks
 //!
-//! ## 题目描述
+//! ## 题目描述 / Problem Description
 //!
 //! `Cell<T>` 是 Rust 标准库中提供内部可变性的重要类型，它允许你在拥有 `&Cell<T>`
 //! （不可变引用）的情况下修改内部值——代价是 `T` 不能存在指向自身的引用（即 `T: Copy`）。
+//! `Cell<T>` is a key std type providing interior mutability, allowing modification through `&Cell<T>`
+//! (immutable reference) — at the cost that `T` cannot have self-referential pointers (i.e., `T: Copy`).
 //!
 //! 请使用 `UnsafeCell<T>` 从零实现一个简化版的 `MyCell<T>`，支持：
+//! Please implement a simplified `MyCell<T>` from scratch using `UnsafeCell<T>`, supporting:
 //! - `new(value: T) -> MyCell<T>`
-//! - `get(&self) -> T`（要求 `T: Copy`）
+//! - `get(&self) -> T`（要求 `T: Copy` / requires `T: Copy`）
 //! - `set(&self, value: T)`
 //! - `replace(&self, value: T) -> T`
 //!
-//! ## 要求
+//! ## 要求 / Requirements
 //!
-//! - 内部使用 `UnsafeCell<T>` 存储值
-//! - `get` 和 `set` 使用原始指针进行读写
-//! - 所有 unsafe 操作限制在方法内部
-//! - 公开 API 是 safe 的
+//! - 内部使用 `UnsafeCell<T>` 存储值 / Use `UnsafeCell<T>` internally
+//! - `get` 和 `set` 使用原始指针进行读写 / Use raw pointers for get/set
+//! - 所有 unsafe 操作限制在方法内部 / Confine unsafe operations within methods
+//! - 公开 API 是 safe 的 / Public API is safe
 //!
-//! ## 提示
+//! ## 提示 / Hints
 //!
 //! - `UnsafeCell::get()` 返回 `*mut T`
 //! - 对于 `get()`，你需要 `T: Copy` 来避免返回引用导致的别名问题
-//! - `ptr::read` 和 `ptr::write` 是关键操作
-//! - `replace` 可以先读取旧值，再写入新值
+//!   For `get()`, you need `T: Copy` to avoid aliasing issues from returning references
+//! - `ptr::read` 和 `ptr::write` 是关键操作 / `ptr::read` and `ptr::write` are key operations
+//! - `replace` 可以先读取旧值，再写入新值 / `replace` can read old value then write new value
 
 use std::cell::UnsafeCell;
 
 /// 简化版 Cell，基于 UnsafeCell 实现内部可变性
+/// Simplified Cell implementing interior mutability via UnsafeCell
 pub struct MyCell<T> {
     value: UnsafeCell<T>,
 }
 
 // SAFETY: MyCell 可以安全地在线程间传递（如果 T 可以）
+// SAFETY: MyCell can be safely sent between threads (if T can)
 // 但不像标准库 Cell，我们不实现 Sync，因为内部可变性 + 非原子操作 = 线程不安全
+// But unlike std Cell, we don't implement Sync because interior mutability + non-atomic ops = not thread-safe
 unsafe impl<T: Send> Send for MyCell<T> {}
 
 impl<T> MyCell<T> {
     /// 创建一个新的 MyCell
+    /// Creates a new MyCell
     pub const fn new(value: T) -> MyCell<T> {
         MyCell {
             value: UnsafeCell::new(value),
@@ -48,31 +57,40 @@ impl<T> MyCell<T> {
     }
 
     /// 获取内部值的副本（要求 T: Copy）
+    /// Gets a copy of the internal value (requires T: Copy)
     ///
-    /// # 为什么需要 Copy？
+    /// # 为什么需要 Copy？/ Why Copy?
     ///
     /// 因为我们返回的是值的副本而非引用，避免创建与内部存储重叠的引用。
+    /// Because we return a copy of the value rather than a reference, avoiding references overlapping internal storage.
     pub fn get(&self) -> T
     where
         T: Copy,
     {
         // SAFETY: 我们持有 &self，且 UnsafeCell 保证内部数据有效
+        // SAFETY: We hold &self and UnsafeCell guarantees valid internal data
         // 由于 T: Copy，读取不会转移所有权
+        // Since T: Copy, reading does not transfer ownership
         unsafe { *self.value.get() }
     }
 
     /// 设置内部值
+    /// Sets the internal value
     pub fn set(&self, value: T) {
         // SAFETY: 我们持有 &self，拥有对内部数据的独占访问权
+        // SAFETY: We hold &self, having exclusive access to internal data
         // （从 Cell 的语义来看，set 操作不会与 get 并发，因为单线程）
+        // (From Cell semantics, set does not race with get because single-threaded)
         unsafe {
             *self.value.get() = value;
         }
     }
 
     /// 替换内部值，返回旧值
+    /// Replaces internal value, returning the old one
     pub fn replace(&self, value: T) -> T {
         // SAFETY: 读取旧值后立即写入新值，不会存在悬垂引用
+        // SAFETY: Read old value then immediately write new value, no dangling references
         unsafe {
             let old = std::ptr::read(self.value.get());
             std::ptr::write(self.value.get(), value);
@@ -81,10 +99,12 @@ impl<T> MyCell<T> {
     }
 
     /// 获取内部原始指针（unsafe 原始操作出口）
+    /// Gets internal raw pointer (unsafe raw operation outlet)
     ///
     /// # Safety
     ///
     /// 调用者必须确保不会违反 Rust 的别名规则。
+    /// Caller must ensure Rust's aliasing rules are not violated.
     pub const fn as_ptr(&self) -> *mut T {
         self.value.get()
     }
@@ -121,6 +141,7 @@ mod tests {
         let ref_to_cell = &cell;
 
         // 通过不可变引用修改内部值——这是内部可变性的核心
+        // Modifying internal value through immutable reference — core of interior mutability
         ref_to_cell.set(2);
         assert_eq!(ref_to_cell.get(), 2);
     }
@@ -128,11 +149,14 @@ mod tests {
     #[test]
     fn test_my_cell_with_non_copy_type_replace() {
         // replace 不需要 Copy，因为它转移所有权
+        // replace doesn't need Copy because it transfers ownership
         let cell = MyCell::new(String::from("hello"));
         let old = cell.replace(String::from("world"));
         assert_eq!(old, "hello");
         // 注意：get() 需要 Copy，所以不能直接对 String 调用 get()
+        // Note: get() requires Copy, so cannot call get() directly on String
         // 但我们可以通过 replace 来操作
+        // But we can manipulate via replace
         let current = cell.replace(String::from("!"));
         assert_eq!(current, "world");
     }

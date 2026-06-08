@@ -5,7 +5,7 @@
 # Architecture Patterns（架构设计模式）
 >
 > **EN**: Design Patterns
-> **Summary**: Design Patterns. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Design Patterns. Guide to 35 Architecture Patterns.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 创造

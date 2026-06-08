@@ -4,7 +4,7 @@
 # Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证>
 >
 > **EN**: Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证> (Chinese)
-> **Summary**: Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证> (Chinese). Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证> (Chinese). Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证>.
 > **受众**: [进阶]
 ---
 

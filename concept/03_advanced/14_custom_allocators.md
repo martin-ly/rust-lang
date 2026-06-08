@@ -3,7 +3,7 @@
 # 自定义分配器与内存布局优化
 >
 > **EN**: 自定义分配器与内存布局优化 (Chinese)
-> **Summary**: 自定义分配器与内存布局优化 (Chinese). Core Rust concept covering mechanism analysis.
+> **Summary**: 自定义分配器与内存布局优化 (Chinese). Core Rust concept covering mechanism analysis, in-depth analysis, performance optimization.
 > **受众**: [专家]
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 深入探讨 Rust 的**自定义分配器**机制——从 `GlobalAlloc` Trait 到 `allocator_api` 不稳定特性，分析内存布局对齐、分配策略与性能优化。
@@ -507,14 +507,8 @@ fn main() {
 > ```text
 > 自定义分配器安全 ⟸ GlobalAlloc + 对齐约束
 > ```
->
-## 权威来源索引
 
->
->
->
->
->
+## 权威来源索引
 
 ---
 

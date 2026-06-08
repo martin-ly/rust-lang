@@ -5,7 +5,7 @@
 # 智能指针：堆内存管理与共享语义
 >
 > **EN**: Smart Pointers
-> **Summary**: Smart Pointers. Core Rust concept covering mechanism analysis.
+> **Summary**: Smart Pointers. Core Rust concept covering mechanism analysis, design patterns, ownership and borrowing.
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[智能指针](../../knowledge/02_intermediate/04_smart_pointers.md)

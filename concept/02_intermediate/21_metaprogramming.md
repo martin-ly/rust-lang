@@ -5,7 +5,7 @@
 # 元编程：Rust 的编译期代码生成与变换
 >
 > **EN**: 元编程：Rust 的编译期代码生成与变换 (Chinese)
-> **Summary**: 元编程：Rust 的编译期代码生成与变换 (Chinese). Core Rust concept covering practical examples, mechanism analysis.
+> **Summary**: 元编程：Rust 的编译期代码生成与变换 (Chinese). Core Rust concept covering practical examples, mechanism analysis, in-depth analysis.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价

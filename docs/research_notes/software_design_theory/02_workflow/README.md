@@ -2,7 +2,6 @@
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **状态**: 🚧 持续完善中
 > **创建日期**: 2026-03-08
 > **目标**: 为工作流引擎核心概念提供形式化定义
@@ -71,13 +70,14 @@ Proof  :=  L2 级自然语言证明
 #### 相关文档
 
 - Rust 1.94 迁移指南
-- [Rust 1.94 特性速查
+- Rust 1.94 特性速查
 - [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -94,17 +94,10 @@ Proof  :=  L2 级自然语言证明
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
 > **[来源: ACM - Systems Programming Languages]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**

@@ -1,7 +1,7 @@
 # Rust Semantic Expressiveness: A Panoramic Survey（Rust 语义表达力全景梳理）
 >
 > **EN**: Rust Semantic Expressiveness: A Panoramic Survey（Rust 语义表达力全景梳理） (Chinese)
-> **Summary**: Rust Semantic Expressiveness: A Panoramic Survey. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Rust Semantic Expressiveness: A Panoramic Survey. Guide to Semantic Expressiveness.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 

@@ -557,21 +557,13 @@ graph LR
 ## 权威来源索引
 
 > **[来源: Wikipedia - Design Pattern]**
-
 > **[来源: Rust API Guidelines]**
-
 > **[来源: Gang of Four]**
-
 > **[来源: ACM - Software Design Patterns]**
-
 > **[来源: Wikipedia - Formal Methods]**
-
 > **[来源: Coq Reference]**
-
 > **[来源: TLA+]**
-
 > **[来源: ACM - Formal Verification]**
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 > **[来源: TRPL - The Rust Programming Language]**

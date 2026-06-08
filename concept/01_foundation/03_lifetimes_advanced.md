@@ -5,7 +5,7 @@
 # Lifetimes 高级主题
 >
 > **EN**: Lifetimes 高级主题 (Chinese)
-> **Summary**: Lifetimes 高级主题 (Chinese). Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Lifetimes 高级主题 (Chinese). Guide to 03 Lifetimes Advanced.
 > **受众**: [初学者]
 > **层次定位**: L1-L3 进阶 / 生命周期高级主题
 > **前置依赖**: [Lifetimes 基础](./03_lifetimes.md)

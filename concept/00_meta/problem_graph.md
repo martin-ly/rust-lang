@@ -1,7 +1,7 @@
 # Rust 知识体系问题图谱（Problem Graph）
 >
 > **EN**: Rust 知识体系问题图谱（Problem Graph） (Chinese)
-> **Summary**: Rust 知识体系问题图谱. Core Rust concept covering practical examples.
+> **Summary**: Rust 知识体系问题图谱. Core Rust concept covering practical examples, network programming.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 >

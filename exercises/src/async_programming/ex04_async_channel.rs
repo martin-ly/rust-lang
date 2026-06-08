@@ -1,15 +1,18 @@
-//! # 练习 4: 异步通道
+//! # 练习 4: 异步通道 / Exercise 4: Async Channels
 //!
-//! **难度**: Medium  
-//! **考点**: tokio::sync::mpsc、异步消息传递
+//! **难度 / Difficulty**: Medium  
+//! **考点 / Focus**: tokio::sync::mpsc、异步消息传递
+//!   tokio::sync::mpsc, async message passing
 //!
-//! ## 题目描述
+//! ## 题目描述 / Problem Description
 //!
 //! 使用 Tokio 的异步通道进行任务间通信。
+//! Use Tokio's async channels for inter-task communication.
 
 use tokio::sync::mpsc;
 
 /// 使用异步通道发送和接收消息
+/// Sends and receives messages using an async channel
 pub async fn async_channel_example(items: Vec<i32>) -> Vec<i32> {
     let (tx, mut rx) = mpsc::channel::<i32>(16);
 
@@ -29,6 +32,7 @@ pub async fn async_channel_example(items: Vec<i32>) -> Vec<i32> {
 }
 
 /// 多生产者单消费者
+/// Multiple producers, single consumer
 pub async fn multi_producer(values: Vec<Vec<i32>>) -> Vec<i32> {
     let (tx, mut rx) = mpsc::channel::<i32>(32);
 
@@ -42,6 +46,7 @@ pub async fn multi_producer(values: Vec<Vec<i32>>) -> Vec<i32> {
     }
 
     // 关闭原始发送端，当所有克隆都结束时通道会关闭
+    // Drop original sender; channel closes when all clones are dropped
     drop(tx);
 
     let mut results = Vec::new();

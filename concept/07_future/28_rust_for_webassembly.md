@@ -1,7 +1,7 @@
 # Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈
 >
 > **EN**: WebAssembly
-> **Summary**: WebAssembly. Core Rust concept covering mental model building, mechanism analysis.
+> **Summary**: WebAssembly. Core Rust concept covering mental model building, mechanism analysis, performance optimization.
 >
 > **受众**: [专家]
 > **内容分级**: [综述级]

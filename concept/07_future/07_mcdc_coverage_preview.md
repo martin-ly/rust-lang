@@ -1,7 +1,7 @@
 # MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证
 >
 > **EN**: Security Practices
-> **Summary**: Security Practices. Core Rust concept covering formal methods foundations.
+> **Summary**: Security Practices. Core Rust concept covering formal methods foundations, verification techniques, compiler internals.
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

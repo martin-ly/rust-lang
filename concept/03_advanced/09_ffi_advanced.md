@@ -3,7 +3,7 @@
 # FFI 高级主题：跨语言边界的安全与性能
 >
 > **EN**: Foreign Function Interface (FFI)
-> **Summary**: Foreign Function Interface (FFI). Core Rust concept covering mechanism analysis.
+> **Summary**: Foreign Function Interface (FFI). Core Rust concept covering mechanism analysis, in-depth analysis, threading and synchronization.
 > **受众**: [专家]
 >
 > **Bloom 层级**: 分析 → 评价

@@ -4,7 +4,10 @@
 > **Bloom 层级**: L3 (应用)
 >
 > **层次定位**: L3 高级 / Edition 迁移工程实践
-> **前置依赖**: [concept Edition 2024 完全指南](../../concept/07_future/22_edition_guide.md) · [concept Rust Edition 机制](../../concept/07_future/23_rust_edition_guide.md) · [docs RPIT 迁移指南](../03_guides/03_rust_2024_edition_rpit_migration.md)
+> **前置依赖**:
+> [concept Edition 2024 完全指南](../../concept/07_future/22_edition_guide.md) ·
+> [concept Rust Edition 机制](../../concept/07_future/23_rust_edition_guide.md) ·
+> [docs RPIT 迁移指南](../03_guides/03_rust_2024_edition_rpit_migration.md)
 > **后置延伸**: [docs 异步编程指南](./05_async_programming_usage_guide.md) · [docs Unsafe Rust 指南](./05_unsafe_rust_guide.md)
 > **Rust 版本**: 1.85.0+ (Edition 2024 起始版本) / 当前 1.96.0+
 > **状态**: ✅ 已完成

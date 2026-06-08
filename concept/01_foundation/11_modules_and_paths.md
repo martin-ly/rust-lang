@@ -6,7 +6,7 @@
 # 模块系统与路径：Rust 的代码组织哲学
 >
 > **EN**: Modules
-> **Summary**: Modules. Core Rust concept covering practical examples.
+> **Summary**: Modules. Core Rust concept covering practical examples, aerospace and fault-tolerant systems.
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[模块系统](../02_intermediate/10_module_system.md)

@@ -1,19 +1,22 @@
-//! # 练习 3: 错误传播
+//! # 练习 3: 错误传播 / Exercise 3: Error Propagation
 //!
-//! **难度**: Medium  
-//! **考点**: ? 运算符、map_err、错误转换
+//! **难度 / Difficulty**: Medium  
+//! **考点 / Focus**: ? 运算符、map_err、错误转换
+//!   ? operator, map_err, error conversion
 //!
-//! ## 题目描述
+//! ## 题目描述 / Problem Description
 //!
 //! 在多层调用中优雅地传播错误。
+//! Propagate errors gracefully across multiple call layers.
 
 use std::fs;
 use std::num::ParseIntError;
 
 /// 读取文件并解析第一行为整数
+/// Reads a file and parses the first line as an integer
 pub fn read_first_line_as_int(path: &str) -> Result<i32, String> {
     let content = fs::read_to_string(path).map_err(|e| format!("读取失败: {}", e))?;
-    let first_line = content.lines().next().ok_or("文件为空")?;
+    let first_line = content.lines().next().ok_or("文件为空 / File is empty")?;
     let num = first_line
         .trim()
         .parse::<i32>()
@@ -22,16 +25,20 @@ pub fn read_first_line_as_int(path: &str) -> Result<i32, String> {
 }
 
 /// 链式计算：先解析字符串，再计算平方根，最后加倍
+/// Chained calculation: parse string, compute square root, then double
 pub fn complex_calculation(input: &str) -> Result<f64, &'static str> {
-    let n: f64 = input.parse().map_err(|_| "无法解析为数字")?;
+    let n: f64 = input
+        .parse()
+        .map_err(|_| "无法解析为数字 / Cannot parse as number")?;
     if n < 0.0 {
-        return Err("不能对负数开方");
+        return Err("不能对负数开方 / Cannot square root a negative number");
     }
     let sqrt = n.sqrt();
     Ok(sqrt * 2.0)
 }
 
 /// 收集所有错误而不是提前返回
+/// Collects all errors instead of early returning
 pub fn parse_all(inputs: &[&str]) -> (Vec<i32>, Vec<String>) {
     let mut successes = Vec::new();
     let mut errors = Vec::new();
@@ -66,7 +73,10 @@ mod tests {
 
     #[test]
     fn test_complex_calculation_negative() {
-        assert_eq!(complex_calculation("-4"), Err("不能对负数开方"));
+        assert_eq!(
+            complex_calculation("-4"),
+            Err("不能对负数开方 / Cannot square root a negative number")
+        );
     }
 
     #[test]

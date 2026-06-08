@@ -1,7 +1,7 @@
 # BorrowSanitizer 概念预研：运行时借用检查工业化
 >
 > **EN**: Borrowing
-> **Summary**: Borrowing. Core Rust concept covering ownership and borrowing, testing and verification.
+> **Summary**: Borrowing. Core Rust concept covering dynamic verification with Miri, ownership and borrowing, aerospace and fault-tolerant systems.
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

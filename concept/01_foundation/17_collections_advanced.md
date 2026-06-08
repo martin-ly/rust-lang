@@ -5,7 +5,7 @@
 # 高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析
 >
 > **EN**: 高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析 (Chinese)
-> **Summary**: 高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析 (Chinese). Core Rust concept covering mechanism analysis.
+> **Summary**: 高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析 (Chinese). Core Rust concept covering mechanism analysis, in-depth analysis, performance optimization.
 > **受众**: [初学者]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 深入分析 Rust **标准库高级集合类型**的设计权衡——从 BTreeMap/BTreeSet 的有序关联容器，到 HashMap 自定义 hasher，再到 VecDeque 的双端队列与 BinaryHeap 的优先队列，揭示每种数据结构的所有权语义、性能特征、内存布局与选型策略。

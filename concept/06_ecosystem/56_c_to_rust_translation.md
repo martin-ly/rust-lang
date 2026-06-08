@@ -6,7 +6,7 @@
 # C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态）
 >
 > **EN**: C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态） (Chinese)
-> **Summary**: C-to-Rust Translation Ecosystem. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: C-to-Rust Translation Ecosystem. C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态）.
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **P** — Procedure

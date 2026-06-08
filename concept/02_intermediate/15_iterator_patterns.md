@@ -5,7 +5,7 @@
 # Rust 迭代器模式
 >
 > **EN**: Iterators
-> **Summary**: Iterators. Core Rust concept covering mechanism analysis.
+> **Summary**: Iterators. Core Rust concept covering practical applications, mechanism analysis, in-depth analysis.
 >
 > **📎 交叉引用**
 >

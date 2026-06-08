@@ -5,7 +5,7 @@
 # Machine Learning Ecosystem（机器学习生态）
 >
 > **EN**: Machine Learning Ecosystem（机器学习生态） (Chinese)
-> **Summary**: Machine Learning Ecosystem. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Machine Learning Ecosystem. Guide to 46 Machine Learning Ecosystem.
 >
 > **受众**: [进阶]
 

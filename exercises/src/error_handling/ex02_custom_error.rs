@@ -1,16 +1,18 @@
-//! # 练习 2: 自定义错误类型
+//! # 练习 2: 自定义错误类型 / Exercise 2: Custom Error Types
 //!
-//! **难度**: Medium  
-//! **考点**: 自定义 Error 类型、thiserror、 anyhow
+//! **难度 / Difficulty**: Medium  
+//! **考点 / Focus**: 自定义 Error 类型、thiserror、anyhow
+//!   Custom Error types, thiserror, anyhow
 //!
-//! ## 题目描述
+//! ## 题目描述 / Problem Description
 //!
 //! 为领域逻辑定义专门的错误类型。
+//! Define dedicated error types for domain logic.
 
 use std::error::Error;
 use std::fmt;
 
-/// 配置错误
+/// 配置错误 / Configuration error
 #[derive(Debug, PartialEq)]
 pub enum ConfigError {
     MissingField(String),
@@ -33,6 +35,7 @@ impl fmt::Display for ConfigError {
 impl Error for ConfigError {}
 
 /// 验证配置项
+/// Validates configuration items
 pub fn validate_config(port: Option<u16>, host: Option<&str>) -> Result<(), ConfigError> {
     let port = port.ok_or(ConfigError::MissingField("port".to_string()))?;
     if port == 0 {
@@ -54,6 +57,7 @@ pub fn validate_config(port: Option<u16>, host: Option<&str>) -> Result<(), Conf
 }
 
 /// 将错误转换为用户友好的消息
+/// Converts an error to a user-friendly message
 pub fn format_error(err: &dyn Error) -> String {
     let mut msg = err.to_string();
     if let Some(source) = err.source() {

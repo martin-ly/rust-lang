@@ -5,7 +5,7 @@
 # 算法与竞赛编程 (Algorithms & Competitive Programming)
 >
 > **EN**: 算法与竞赛编程 (Algorithms & Competitive Programming) (Chinese)
-> **Summary**: 算法与竞赛编程 (Algorithms & Competitive Programming) (Chinese). Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: 算法与竞赛编程 (Algorithms & Competitive Programming) (Chinese). 算法与竞赛编程 Algorithms & Competitive Programming.
 >
 > **受众**: [进阶]
 

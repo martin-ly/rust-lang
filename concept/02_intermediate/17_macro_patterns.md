@@ -5,7 +5,7 @@
 # 宏模式：编译期代码生成的工程实践
 >
 > **EN**: Macros
-> **Summary**: Macros. Core Rust concept covering practical examples, mechanism analysis.
+> **Summary**: Macros. Core Rust concept covering practical examples, mechanism analysis, in-depth analysis.
 >
 > **📎 交叉引用**
 >

@@ -1,13 +1,16 @@
-//! # 练习 1: 声明宏
+//! # 练习 1: 声明宏 / Exercise 1: Declarative Macros
 //!
-//! **难度**: Medium  
-//! **考点**: macro_rules!、重复模式、递归宏
+//! **难度 / Difficulty**: Medium  
+//! **考点 / Focus**: macro_rules!、重复模式、递归宏
+//!   macro_rules!, repetition patterns, recursive macros
 //!
-//! ## 题目描述
+//! ## 题目描述 / Problem Description
 //!
 //! 编写实用的声明宏，简化常见代码模式。
+//! Write practical declarative macros to simplify common code patterns.
 
 /// 类似 vec!，但创建 HashSet
+/// Like vec!, but creates a HashSet
 #[macro_export]
 macro_rules! set {
     ($($item:expr),* $(,)?) => {{
@@ -19,6 +22,7 @@ macro_rules! set {
 }
 
 /// 便捷创建 Result::Ok 或返回 Err
+/// Convenience macro for Result::Ok or early Err return
 #[macro_export]
 macro_rules! ok_or_return {
     ($expr:expr) => {
@@ -30,13 +34,14 @@ macro_rules! ok_or_return {
 }
 
 /// 测量代码块执行时间
+/// Measures execution time of a code block
 #[macro_export]
 macro_rules! timed {
     ($name:expr, $block:block) => {{
         let start = ::std::time::Instant::now();
         let result = $block;
         let elapsed = start.elapsed();
-        println!("[{}] 耗时: {:?}", $name, elapsed);
+        println!("[{}] 耗时: {:?} / Elapsed: {:?}", $name, elapsed, elapsed);
         result
     }};
 }

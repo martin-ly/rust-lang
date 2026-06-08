@@ -1,7 +1,7 @@
 # Concept Audit Guide（概念审计指南）
 >
 > **EN**: Concept Audit Guide（概念审计指南） (Chinese)
-> **Summary**: Concept Audit Guide. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Concept Audit Guide. 10.4 边界测试：代码块标记的 compile_fail 与 no_run 的误用（读者误导）.
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **受众**: [专家]
 > **Bloom 层级**: 应用 → 评价

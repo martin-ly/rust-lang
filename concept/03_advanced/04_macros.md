@@ -3,18 +3,23 @@
 # Macros（宏系统）
 >
 > **EN**: Macros
-> **Summary**: Macros. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Macros. Guide to 04 Macros.
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[宏系统](../../knowledge/03_advanced/macros)
-
 > **受众**: [专家]
 > **层级**: L3 高级概念
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: P×Cre — 设计元编程抽象
-> **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
+> **前置概念**:
+> [Type System](../01_foundation/04_type_system.md) ·
+> [Traits](../02_intermediate/01_traits.md) ·
+> [Generics](../02_intermediate/02_generics.md)
 > **后置概念**: [DSL Construction] · [Meta-programming]
-> **主要来源**: [TRPL: Ch19.5](https://doc.rust-lang.org/book/ch19-06-macros.html) · [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/) · [Rust Reference: Macros]
+> **主要来源**:
+> [TRPL: Ch19.5](https://doc.rust-lang.org/book/ch19-06-macros.html) ·
+> [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/) ·
+> [Rust Reference: Macros]
 
 ---
 
@@ -95,7 +100,7 @@ Rust 宏 hygiene:
 >
 
 | **语言** | **机制** | **卫生性** | **类型安全** | **操作层面** |
-|:---|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- | :--- |
 | **Rust** | `macro_rules!` + 过程宏 | ✅ 完全卫生 | ✅ 展开后类型检查 | AST / Token |
 | **C** | `#define` | ❌ 文本替换 | ❌ 无 | 文本 |
 | **C++** | 模板 + 宏 | ⚠️ 部分 | ⚠️ 复杂错误 | AST（模板） |
@@ -116,7 +121,7 @@ Rust 宏 hygiene:
 3. **宏展开后进入类型检查** ⟹ 宏生成的类型错误在展开后才被捕获，错误信息通常指向宏调用处。
 
 | 阶段 | C 预处理器 | Rust 宏系统 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | 操作对象 | 纯文本 | Token / AST 节点 |
 | 展开时机 | 编译前独立阶段 | Parse AST 之后 |
 | 类型感知 | ❌ 无 | ❌ 无（展开后才类型检查） |
@@ -130,14 +135,14 @@ Rust 宏 hygiene:
 
 ## 三、形式化理论根基（Formal Foundation）
 
-> **[Rust Reference: Hygiene]** Rust 的 macro_rules! 和过程宏是卫生的：宏内部定义的标识符不与外部冲突，形式化为 α-等价在宏展开中保持。✅ 已验证
-> **[Scheme 卫生宏论文 (Kohlbecker et al. 1986)]** 卫生宏的原始理论：宏展开应保持 α-重命名等价，内部绑定不泄露、外部绑定不捕获。Rust 的 hygiene 机制受此理论启发。 ✅ 已验证
-
+> **[Rust Reference: Hygiene]**
+> Rust 的 macro_rules! 和过程宏是卫生的：宏内部定义的标识符不与外部冲突，形式化为 α-等价在宏展开中保持。✅ 已验证
+> **[Scheme 卫生宏论文 (Kohlbecker et al. 1986)]**
+> 卫生宏的原始理论：宏展开应保持 α-重命名等价，内部绑定不泄露、外部绑定不捕获。Rust 的 hygiene 机制受此理论启发。 ✅ 已验证
 > **[Kohlbecker et al. 1986 — Hygienic Macro Expansion, POPL]** Scheme's hygienic macro system, implemented via implicit identifier renaming (gensym), is the direct theoretical ancestor of Rust's macro hygiene. ✅ 已验证
 
 ### 3.1 Hygienic Macro 的形式化
 >
-
 > **[Wikipedia: Hygienic macro]** Hygienic macros are macros whose expansion is guaranteed not to cause the accidental capture of identifiers. ✅ 已验证
 > **[Rust Reference: Hygiene]** Rust 的 macro_rules! 和过程宏是卫生的：宏内部定义的标识符不与外部冲突。✅ 已验证
 
@@ -209,7 +214,6 @@ fn main() {
 
 > **[The Little Book of Rust Macros (TLBORM)]** macro_rules! 的模式匹配可视为语法树上的正则表达式：片段分类器（expr/ident/ty 等）匹配对应语法节点，重复模式 $($x:expr),*对应零或多次匹配。✅ 已验证
 > **[Rust Reference: Macro matchers]** 展开过程 = 模式变量替换 + 重复展开；vec![1, 2, 3] 匹配 $($x:expr),* 并展开为对应的数组初始化代码。 ✅ 已验证
-
 > **[TRPL: Ch19.5]** `macro_rules!` performs compile-time pattern matching on token trees, with fragment specifiers matching syntactic categories (`expr`, `ty`, `ident`) rather than semantic types. ✅ 已验证
 
 ### 3.2 声明宏的模式匹配语义

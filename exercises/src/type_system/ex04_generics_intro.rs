@@ -1,15 +1,18 @@
-//! # 练习 4: 泛型入门
+//! # 练习 4: 泛型入门 / Exercise 4: Generics Introduction
 //!
-//! **难度**: Medium  
-//! **考点**: 泛型函数、类型约束
+//! **难度 / Difficulty**: Medium  
+//! **考点 / Focus**: 泛型函数、类型约束
+//!   Generic functions, type constraints
 //!
-//! ## 题目描述
+//! ## 题目描述 / Problem Description
 //!
 //! 实现泛型函数，使其适用于多种类型。
+//! Implement generic functions that work with multiple types.
 
 use std::cmp::Ordering;
 
 /// 泛型二分查找
+/// Generic binary search
 pub fn binary_search<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
     let mut left = 0usize;
     let mut right = arr.len();
@@ -26,11 +29,13 @@ pub fn binary_search<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
 }
 
 /// 交换两个可变引用指向的值
+/// Swaps the values of two mutable references
 pub fn swap<T>(a: &mut T, b: &mut T) {
     std::mem::swap(a, b);
 }
 
 /// 返回切片中的最大元素
+/// Returns the maximum element in a slice
 pub fn max_in_slice<T: Ord>(slice: &[T]) -> Option<&T> {
     slice.iter().max()
 }

@@ -14,12 +14,18 @@
 
 ---
 
-> **来源**: [The Semantics of Programming Languages (Winskel)](https://www.cl.cam.ac.uk/~gw104/Semantics.pdf) · [Domain Theory (Abramsky & Jung)](https://www.cs.ox.ac.uk/people/samson.abramsky/dt.ps) · [Wikipedia — Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_semantics) · [Wikipedia — Domain Theory](https://en.wikipedia.org/wiki/Domain_theory)
-
-> **前置依赖**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
-
+> **来源**:
+>
+> [The Semantics of Programming Languages (Winskel)](https://www.cl.cam.ac.uk/~gw104/Semantics.pdf) ·
+> [Domain Theory (Abramsky & Jung)](https://www.cs.ox.ac.uk/people/samson.abramsky/dt.ps) ·
+> [Wikipedia — Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_semantics) ·
+> [Wikipedia — Domain Theory](https://en.wikipedia.org/wiki/Domain_theory)
+>
+> **前置依赖**:
+>
+> [Traits](../02_intermediate/01_traits.md) ·
+> [Generics](../02_intermediate/02_generics.md)
 > **前置依赖**: [Concurrency](../03_advanced/01_concurrency.md)
-
 > 🚨 **纯数学内容警告**
 >
 > 本文档包含大量形式化符号（⊗, ⊸, λ, ∀, ∃ 等）和纯数学推导，属于 **[研究者级]** 内容。
@@ -182,7 +188,13 @@ fn call_diverges() -> i32 {
 }
 ```
 
-> **修正**: 在指称语义中，类型 `T` 的指称是一个数学域（domain），包含所有可能的值。`!`（never type）的指称是**底部元素** `⊥`，表示非终止或 panic。`⊥` 是任何域的子集（因为 `⊥ ⊑ v` 对所有 `v` 成立），因此 `!` 可被强制转换为任何类型。这与 Haskell 的 `undefined :: a` 或 Scala 的 `Nothing` 类似——底部类型是所有类型的子类型。Rust 的 `!` 类型目前仍在部分特性中不稳定，但核心语义已稳定。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**:
+> 在指称语义中，类型 `T` 的指称是一个数学域（domain），包含所有可能的值。
+> `!`（never type）的指称是**底部元素** `⊥`，表示非终止或 panic。
+> `⊥` 是任何域的子集（因为 `⊥ ⊑ v` 对所有 `v` 成立），因此 `!` 可被强制转换为任何类型。
+> 这与 Haskell 的 `undefined :: a` 或 Scala 的 `Nothing` 类似——底部类型是所有类型的子类型。
+> Rust 的 `!` 类型目前仍在部分特性中不稳定，但核心语义已稳定。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.2 边界测试：`panic!` 的指称与 `Result` 的指称分离（编译错误）
 
@@ -204,7 +216,13 @@ fn main() {
 }
 ```
 
-> **修正**: 在指称语义中，`panic!` 和 `Result::Err` 有完全不同的指称。`panic!` 的指称是 `⊥`（底部）——表示计算失败，栈展开释放资源，通常不应恢复。`Result::Err` 的指称是 `Ok(v) ⊑ Err(e)` 域中的一个正常元素——错误是值空间的一部分，可被匹配、传播、转换。Rust 强制区分这两种错误模式：`panic` 用于不可恢复错误（bug），`Result` 用于可恢复错误（文件不存在、网络超时）。这与 Java 的异常（Exception vs Error）或 Haskell 的 `Either`（无 panic 机制）形成对比。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**:
+> 在指称语义中，`panic!` 和 `Result::Err` 有完全不同的指称。
+> `panic!` 的指称是 `⊥`（底部）——表示计算失败，栈展开释放资源，通常不应恢复。
+> `Result::Err` 的指称是 `Ok(v) ⊑ Err(e)` 域中的一个正常元素——错误是值空间的一部分，可被匹配、传播、转换。
+> Rust 强制区分这两种错误模式：`panic` 用于不可恢复错误（bug），`Result` 用于可恢复错误（文件不存在、网络超时）。
+> 这与 Java 的异常（Exception vs Error）或 Haskell 的 `Either`（无 panic 机制）形成对比。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ```text
 Rust 类型的指称:
@@ -463,7 +481,16 @@ fn main() {
 }
 ```
 
-> **修正**: 在指称语义中，**底**（bottom，⊥）表示非终止或错误的计算。Rust 的 `!` 类型（never type）是 ⊥ 的类型论对应：没有值的类型。`diverges() -> !` 的语义是"此函数永不返回"，其"返回值"是 ⊥。`!` 可 coerce 为任意类型（ex falso quodlibet），因此 `let y: i32 = diverges()` 合法——但 `diverges()` 永不执行到赋值点，所以 `y` 永远不会被使用。这与 Haskell 的 `undefined :: a`（值层面的 ⊥，有类型但运行时错误）或 Scala 的 `Nothing`（类型层面的 ⊥，无值）类似——Rust 的 `!` 更接近 Scala 的 `Nothing`，是空类型（uninhabited type）。`!` 的稳定化使 Rust 的类型系统在理论上更完整，支持更精确的控制流分析。[来源: [Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_semantics)] · [来源: [Rust RFC 1216](https://rust-lang.github.io/rfcs/1216-bang-type.html)]
+> **修正**:
+>
+> 在指称语义中，**底**（bottom，⊥）表示非终止或错误的计算。
+> Rust 的 `!` 类型（never type）是 ⊥ 的类型论对应：没有值的类型。
+> `diverges() -> !` 的语义是"此函数永不返回"，其"返回值"是 ⊥。
+> `!` 可 coerce 为任意类型（ex falso quodlibet），因此 `let y: i32 = diverges()` 合法——但 `diverges()` 永不执行到赋值点，所以 `y` 永远不会被使用。
+> 这与 Haskell 的 `undefined :: a`（值层面的 ⊥，有类型但运行时错误）或 Scala 的 `Nothing`（类型层面的 ⊥，无值）类似——Rust 的 `!` 更接近 Scala 的 `Nothing`，是空类型（uninhabited type）。
+> `!` 的稳定化使 Rust 的类型系统在理论上更完整，支持更精确的控制流分析。
+> [来源: [Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_semantics)] ·
+> [来源: [Rust RFC 1216](https://rust-lang.github.io/rfcs/1216-bang-type.html)]
 
 ### 10.4 边界测试：`unsafe` 代码的语义鸿沟（运行时 UB）
 
@@ -478,7 +505,15 @@ fn main() {
 }
 ```
 
-> **修正**: 指称语义为 safe Rust 提供了精确的数学模型，但 `unsafe` 代码打破了这一模型。Safe Rust 的语义保证：没有数据竞争、没有悬垂指针、没有类型混淆。`unsafe` 块允许开发者绕过这些保证，但要求手动维护语义不变式。上述代码中，`r.add(1)` 指向 `x` 之后的内存（未分配），写入是未定义行为——指称语义无法描述 `unsafe` 代码的行为，因为 `unsafe` 进入了实现定义的领域。形式化验证工具（Miri、Kani、RustBelt）试图为 `unsafe` 代码建立安全边界：Miri 解释执行检测 UB，Kani 符号验证断言，RustBelt 在分离逻辑中证明 unsafe 抽象的安全性。但完全的形式化覆盖仍是开放问题——`unsafe` 是 Rust 语义中的"已知未知"。[来源: [RustBelt Paper](https://doi.org/10.1145/3158154)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**:
+>
+> 指称语义为 safe Rust 提供了精确的数学模型，但 `unsafe` 代码打破了这一模型。Safe Rust 的语义保证：没有数据竞争、没有悬垂指针、没有类型混淆。
+> `unsafe` 块允许开发者绕过这些保证，但要求手动维护语义不变式。
+> 上述代码中，`r.add(1)` 指向 `x` 之后的内存（未分配），写入是未定义行为——指称语义无法描述 `unsafe` 代码的行为，因为 `unsafe` 进入了实现定义的领域。
+> 形式化验证工具（Miri、Kani、RustBelt）试图为 `unsafe` 代码建立安全边界：Miri 解释执行检测 UB，Kani 符号验证断言，RustBelt 在分离逻辑中证明 unsafe 抽象的安全性。
+> 但完全的形式化覆盖仍是开放问题——`unsafe` 是 Rust 语义中的"已知未知"。
+> [来源: [RustBelt Paper](https://doi.org/10.1145/3158154)] ·
+> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.3 边界测试：不动点语义与递归类型的无限展开（编译错误）
 
@@ -498,7 +533,18 @@ fn main() {
 }
 ```
 
-> **修正**: 指称语义（Denotational Semantics）使用**域论**（domain theory）处理递归：递归类型 `μX.F(X)` 定义为 `F` 的最小不动点，包含有限和无限值（惰性求值）。Rust 是**严格求值**语言，不支持直接表达无限值（如 Haskell 的无限列表 `[1..]`）。Rust 中的无限结构：1) **trait object**：`Box<dyn Iterator<Item = i32>>`（运行时延迟计算）；2) **生成器/协程**：`async fn` 或 `gen` 块（2024+）；3) **手动状态机**：`Stream` 实现。递归类型（`List<T>`）在 Rust 中必须间接（`Box` 或 `Rc`），因为编译器需要确定类型大小。这与 Haskell 的惰性递归类型（`data List a = Nil | Cons a (List a)`，可无限）或 ML 的惰性 `datatype` 不同——Rust 的严格语义和静态大小要求排除了直接的不动点类型。[来源: [Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_semantics)] · [来源: [Domain Theory](https://en.wikipedia.org/wiki/Domain_theory)]
+> **修正**:
+> 指称语义（Denotational Semantics）使用**域论**（domain theory）处理递归：递归类型 `μX.F(X)` 定义为 `F` 的最小不动点，包含有限和无限值（惰性求值）。
+> Rust 是**严格求值**语言，不支持直接表达无限值（如 Haskell 的无限列表 `[1..]`）。
+> Rust 中的无限结构：
+>
+> 1) **trait object**：`Box<dyn Iterator<Item = i32>>`（运行时延迟计算）；
+> 2) **生成器/协程**：`async fn` 或 `gen` 块（2024+）；
+> 3) **手动状态机**：`Stream` 实现。递归类型（`List<T>`）在 Rust 中必须间接（`Box` 或 `Rc`），因为编译器需要确定类型大小。
+>
+> 这与 Haskell 的惰性递归类型（`data List a = Nil | Cons a (List a)`，可无限）或 ML 的惰性 `datatype` 不同——Rust 的严格语义和静态大小要求排除了直接的不动点类型。
+> [来源: [Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_semantics)] ·
+> [来源: [Domain Theory](https://en.wikipedia.org/wiki/Domain_theory)]
 
 ## 认知路径
 
@@ -513,11 +559,11 @@ fn main() {
 | 指称语义与领域理论 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > **过渡**: 掌握 指称语义与领域理论 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 指称语义与领域理论 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: 指称语义与领域理论 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 
-> **反命题**: "指称语义与领域理论 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+> **反命题**:
+> "指称语义与领域理论 在所有场景下都是最佳选择" —— 错误。
+> 需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。

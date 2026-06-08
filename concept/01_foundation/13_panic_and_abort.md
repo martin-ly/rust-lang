@@ -5,7 +5,7 @@
 # Panic 与 Abort：不可恢复错误的处理机制
 >
 > **EN**: Panic 与 Abort：不可恢复错误的处理机制 (Chinese)
-> **Summary**: Panic 与 Abort：不可恢复错误的处理机制 (Chinese). Core Rust concept covering mechanism analysis.
+> **Summary**: Panic 与 Abort：不可恢复错误的处理机制 (Chinese). Core Rust concept covering mechanism analysis, design patterns, error handling strategies.
 > **受众**: [初学者]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **S+P** — Structure + Procedure

@@ -3,7 +3,7 @@
 # 并行与分布式模式谱系：从线程池到共识算法
 >
 > **EN**: 并行与分布式模式谱系：从线程池到共识算法 (Chinese)
-> **Summary**: 并行与分布式模式谱系：从线程池到共识算法 (Chinese). Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: 并行与分布式模式谱系：从线程池到共识算法 (Chinese). Guide to 19 Parallel Distributed Pattern Spectrum.
 > **受众**: [专家]
 > **层级**: L3 高级概念 — 并发/分布式系统设计
 > **A/S/P 标记**: **S+A** — Structure + Application

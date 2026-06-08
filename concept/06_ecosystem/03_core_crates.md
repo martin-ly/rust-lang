@@ -1,7 +1,7 @@
 # Core Crates（核心开源库谱系）
 >
 > **EN**: Core Crates（核心开源库谱系） (Chinese)
-> **Summary**: Core Crates. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Core Crates. Guide to 03 Core Crates.
 > **受众**: [进阶]
 > **内容分级**: [综述级]
 > **层级**: L6 生态工程

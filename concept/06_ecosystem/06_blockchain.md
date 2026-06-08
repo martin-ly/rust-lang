@@ -1,7 +1,7 @@
 # Blockchain & Smart Contract Security（区块链与智能合约安全）
 >
 > **EN**: Security Practices
-> **Summary**: Security Practices. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Security Practices. Guide to 06 Blockchain.
 > **受众**: [进阶]
 > **内容分级**: [专家级]
 > **层级**: L6 应用主题

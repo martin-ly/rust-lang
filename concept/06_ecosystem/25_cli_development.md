@@ -6,7 +6,7 @@
 # Rust CLI 开发生态
 >
 > **EN**: Rust CLI 开发生态 (Chinese)
-> **Summary**: Rust CLI 开发生态 (Chinese). Core Rust concept covering mechanism analysis.
+> **Summary**: Rust CLI 开发生态 (Chinese). Core Rust concept covering mechanism analysis, ecosystem and tooling.
 >
 > **受众**: [进阶]
 

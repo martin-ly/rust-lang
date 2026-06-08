@@ -1,7 +1,7 @@
 # Gen Blocks 预研：超越异步的泛化生成器
 >
 > **EN**: Async Programming
-> **Summary**: Async Programming. Core Rust concept covering mechanism analysis.
+> **Summary**: Async Programming. Core Rust concept covering mechanism analysis, design patterns, async/await patterns.
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

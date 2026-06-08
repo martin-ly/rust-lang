@@ -1,7 +1,7 @@
 # WASM Target Evolution Preview
 >
 > **EN**: WASM Target Evolution Preview (Chinese)
-> **Summary**: WASM Target Evolution Preview (Chinese). Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: WASM Target Evolution Preview (Chinese). 10.4 边界测试：WASI 的 capability-based security 与文件系统访问（运行时拒绝）.
 >
 > **受众**: [专家]
 > **内容分级**: [综述级]

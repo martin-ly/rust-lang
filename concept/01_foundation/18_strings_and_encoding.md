@@ -5,7 +5,7 @@
 # 字符串与编码：Rust 的文本处理类型系统
 >
 > **EN**: Type System
-> **Summary**: Type System. Core Rust concept covering mechanism analysis.
+> **Summary**: Type System. Core Rust concept covering mechanism analysis, ownership and borrowing, FFI interoperability.
 > **受众**: [初学者]
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 系统分析 Rust **字符串类型体系**的设计——String 与 str 的所有权语义、UTF-8 编码约束、OsString/OsStr 的平台抽象、CString/CStr 的 FFI 互操作，以及 grapheme clusters、unicode normalization 等高级文本处理概念。

@@ -4,7 +4,7 @@
 # 系统可组合性 (System Composability)
 >
 > **EN**: 系统可组合性 (System Composability) (Chinese)
-> **Summary**: 系统可组合性 (System Composability) (Chinese). Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: 系统可组合性 (System Composability) (Chinese). Guide to 30 System Composability.
 >
 > **受众**: [进阶]
 > **层级**: L6 生态工程

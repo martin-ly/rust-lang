@@ -3,7 +3,7 @@
 # 过程宏：编译期代码生成的元编程工具
 >
 > **EN**: Macros
-> **Summary**: Macros. Core Rust concept covering mental model building, mechanism analysis.
+> **Summary**: Macros. Core Rust concept covering mental model building, mechanism analysis, in-depth analysis.
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[过程宏](../../knowledge/03_advanced/macros/02_procedural.md)

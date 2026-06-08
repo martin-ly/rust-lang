@@ -3,7 +3,7 @@
 # NLL 与 Polonius：借用检查器的演进
 >
 > **EN**: Borrowing
-> **Summary**: Borrowing. Core Rust concept covering mechanism analysis.
+> **Summary**: Borrowing. Core Rust concept covering mechanism analysis, in-depth analysis, type system mechanics.
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure

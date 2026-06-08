@@ -135,7 +135,8 @@ let (device, queue) = adapter
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-Wgpu 在 GPU 资源绑定上强制执行编译期/创建期的类型检查。`BindGroupLayout` 定义了着色器期望的资源接口，`BindGroup` 是具体的资源实例，两者在 `PipelineLayout` 中关联：
+Wgpu 在 GPU 资源绑定上强制执行编译期/创建期的类型检查。
+`BindGroupLayout` 定义了着色器期望的资源接口，`BindGroup` 是具体的资源实例，两者在 `PipelineLayout` 中关联：
 
 ```rust,ignore
 // 1. 定义绑定组布局（着色器接口契约）
@@ -238,7 +239,8 @@ fn fs_main(in: VertexOutput) -> @location(0) vec4<f32> {
 }
 ```
 
-Naga 在 `create_shader_module` 时执行完整的静态分析：类型检查、接口匹配验证、控制流分析。如果 WGSL 代码存在类型错误（如将 `vec3<f32>` 赋值给 `vec2<f32>` 的接口）、未初始化变量或无效的资源绑定索引，CPU 侧即刻收到详细的验证错误，**不会在 GPU 驱动层面触发未定义行为**。
+Naga 在 `create_shader_module` 时执行完整的静态分析：类型检查、接口匹配验证、控制流分析。
+如果 WGSL 代码存在类型错误（如将 `vec3<f32>` 赋值给 `vec2<f32>` 的接口）、未初始化变量或无效的资源绑定索引，CPU 侧即刻收到详细的验证错误，**不会在 GPU 驱动层面触发未定义行为**。
 
 > [来源: Naga 文档](https://docs.rs/naga/latest/naga/)
 
@@ -295,7 +297,8 @@ let depth_texture = device.create_texture(&wgpu::TextureDescriptor {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-Wgpu 的同步模型基于**显式管线阶段跟踪**而非手动内存屏障。`CommandEncoder` 记录的所有命令在 `submit()` 时由 Wgpu 运行时自动推导所需的资源状态转换（texture layouts、buffer barriers）：
+Wgpu 的同步模型基于**显式管线阶段跟踪**而非手动内存屏障。
+`CommandEncoder` 记录的所有命令在 `submit()` 时由 Wgpu 运行时自动推导所需的资源状态转换（texture layouts、buffer barriers）：
 
 ```mermaid
 sequenceDiagram
@@ -384,7 +387,8 @@ fn render(&mut self) -> Result<(), wgpu::SurfaceError> {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-Wgpu 的初始化 API（`request_adapter`、`request_device`）均为 `async`，因为某些平台（尤其是 Web/WASM）的 GPU 枚举是异步操作。在原生平台，这些函数实际会立即返回 `Poll::Ready`，但统一使用 async 接口保持了跨平台一致性。
+Wgpu 的初始化 API（`request_adapter`、`request_device`）均为 `async`，因为某些平台（尤其是 Web/WASM）的 GPU 枚举是异步操作。
+在原生平台，这些函数实际会立即返回 `Poll::Ready`，但统一使用 async 接口保持了跨平台一致性。
 
 ```rust,ignore
 // 原生平台：使用 pollster 阻塞等待
@@ -465,7 +469,8 @@ graph LR
     F --> J[OpenGL ES / WebGL Driver]
 ```
 
-`wgpu-core` 提供与硬件无关的资源管理和验证逻辑，`wgpu-hal` 是对各底层 API 的统一抽象。这种分层使得新增后端只需实现 `hal` trait，上层应用代码完全不受影响。
+`wgpu-core` 提供与硬件无关的资源管理和验证逻辑，`wgpu-hal` 是对各底层 API 的统一抽象。
+这种分层使得新增后端只需实现 `hal` trait，上层应用代码完全不受影响。
 
 > [来源: Wgpu 源码架构](https://github.com/gfx-rs/wgpu/tree/trunk/wgpu-core)
 
@@ -569,15 +574,10 @@ compute_pass.dispatch_workgroups(256, 1, 1);
 ## 权威来源索引
 
 > **[来源: [crates.io](https://crates.io/)]**
->
 > **[来源: [docs.rs](https://docs.rs/)]**
->
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
 > **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]

@@ -5,7 +5,7 @@
 # CQRS & Event Sourcing（命令查询职责分离与事件溯源）
 >
 > **EN**: CQRS & Event Sourcing（命令查询职责分离与事件溯源） (Chinese)
-> **Summary**: CQRS & Event Sourcing. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: CQRS & Event Sourcing. Guide to 33 Cqrs Event Sourcing.
 >
 > **受众**: [进阶]
 

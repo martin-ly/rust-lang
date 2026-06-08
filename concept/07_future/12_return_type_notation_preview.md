@@ -1,7 +1,7 @@
 # Return Type Notation 预研：精确捕获的显式控制
 >
 > **EN**: Return Type Notation 预研：精确捕获的显式控制 (Chinese)
-> **Summary**: Return Type Notation 预研：精确捕获的显式控制 (Chinese). Core Rust concept covering mechanism analysis.
+> **Summary**: Return Type Notation 预研：精确捕获的显式控制 (Chinese). Core Rust concept covering mechanism analysis, async/await patterns, trait system mechanics.
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

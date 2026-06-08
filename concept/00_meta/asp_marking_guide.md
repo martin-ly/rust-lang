@@ -1,7 +1,7 @@
 # Rust 知识体系 A/S/P 三维认知标记规范
 >
 > **EN**: Rust 知识体系 A/S/P 三维认知标记规范 (Chinese)
-> **Summary**: Rust 知识体系 A/S/P 三维认知标记规范 (Chinese). Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Rust 知识体系 A/S/P 三维认知标记规范 (Chinese). Core Rust concept covering language specification.
 > **受众**: [专家]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **Bloom 层级**: 元（Meta）

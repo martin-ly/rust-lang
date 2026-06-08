@@ -1,7 +1,7 @@
 # Cranelift 后端预研：Rust 编译器的快速调试编译
 >
 > **EN**: Compiler Internals
-> **Summary**: Compiler Internals. Core Rust concept covering mechanism analysis.
+> **Summary**: Compiler Internals. Core Rust concept covering mechanism analysis, compiler internals, compiler backend.
 >
 > **状态**: 🧪 Nightly 实验性 | ⚠️ **官方因资金不足进展停滞 (2026-05)**
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

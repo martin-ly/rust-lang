@@ -8,9 +8,9 @@
     {
       "path": "concept\\00_meta\\03_bloom_taxonomy.md",
       "layer": "L0",
-      "title": "Unknown",
+      "title": "Bloom Taxonomy（Bloom 分类法）",
       "positioning": "",
-      "line_count": 136,
+      "line_count": 140,
       "theorem_chains": [
         {
           "text": "| 03 Bloom Taxonomy 结构化定义 ⟹ 学习者认知锚点可建立 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |",
@@ -15922,7 +15922,7 @@
       "layer": "L3",
       "title": "Macros（宏系统）",
       "positioning": "",
-      "line_count": 2269,
+      "line_count": 2273,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 深度重构——增强定理一致性矩阵至11行（带⟹推理链）、新增3个反命题决策树、重写6步递进认知路径、补充章节过渡段落与层次一致性标注",
@@ -16426,7 +16426,7 @@
       "matrix_rows": 145,
       "pre_post": {
         "pre": [
-          "[Type System](../01_foundation/04_type_system.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)"
+          "> [Type System](../01_foundation/04_type_system.md) ·"
         ],
         "post": [
           "[DSL Construction] · [Meta-programming]"
@@ -17570,7 +17570,7 @@
       "layer": "L3",
       "title": "自定义分配器与内存布局优化",
       "positioning": "深入探讨 Rust 的**自定义分配器**机制——从 `GlobalAlloc` Trait 到 `allocator_api` 不稳定特性，分析内存布局对齐、分配策略与性能优化。",
-      "line_count": 807,
+      "line_count": 801,
       "theorem_chains": [
         {
           "text": "| 自定义分配器与内存布局优化 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -18893,7 +18893,7 @@
       "layer": "L3",
       "title": "测验：宏系统（L3 试点扩展）",
       "positioning": "L3 嵌入式互动测验——验证宏系统核心概念（声明宏 `macro_rules!`、重复模式、卫生性、过程宏）的掌握程度。",
-      "line_count": 624,
+      "line_count": 626,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -18901,11 +18901,11 @@
           "flags": [
             "// vec![1",
             "2",
-            "3] 展开为： { let mut temp_vec = Vec::new(); temp_vec.push(1); temp_vec.push(2); temp_vec.push(3); temp_vec }``` **解析**：`vec!` 是 Rust 标准库中的**声明宏**（declarative macro），使用 `macro_rules!` 定义。 **声明宏的核心特征**： | 特性 | 说明 | |:---|:---| | 调用语法"
+            "3] 展开为： { let mut temp_vec = Vec::new(); temp_vec.push(1); temp_vec.push(2); temp_vec.push(3); temp_vec }```"
           ],
-          "lines": 39,
+          "lines": 40,
           "should_fail": false,
-          "code_preview": " > **受众**: [专家] > **内容分级**: [专家级] > **Rust 版本**: 1.96.0+ (Edition 2024) > **定理链*..."
+          "code_preview": "> **解析**：`vec!` 是 Rust 标准库中的**声明宏**（declarative macro），使用 `macro_rules!` 定义。 > *..."
         },
         {
           "flags": [],
@@ -19296,7 +19296,7 @@
       "layer": "L4",
       "title": "Type Theory（类型论基础）",
       "positioning": "",
-      "line_count": 1115,
+      "line_count": 1148,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 深度重构——定理一致性矩阵扩展至11行（带⟹推理链），新增3个反命题决策树，认知路径重构为5步递进，全章补充Wikipedia/Pierce TAPL/Cardelli引用与L1-L3层次一致性标注",
@@ -19562,10 +19562,10 @@
       "matrix_rows": 120,
       "pre_post": {
         "pre": [
-          "[Type System](../01_foundation/04_type_system.md) · [Generics](../02_intermediate/02_generics.md) · [Traits](../02_intermediate/01_traits.md) [来源: [Wikipedia — Hindley-Milner](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system)]"
+          "> [Type System](../01_foundation/04_type_system.md) ·"
         ],
         "post": [
-          "[Ownership Formalization](./03_ownership_formal.md) · [RustBelt](./04_rustbelt.md)"
+          "> [Ownership Formalization](./03_ownership_formal.md) · [RustBelt](./04_rustbelt.md)"
         ]
       },
       "backward_chains": 0,
@@ -20668,7 +20668,7 @@
       "layer": "L4",
       "title": "分离逻辑：Rust 所有权的形式化根基",
       "positioning": "深入讲解**分离逻辑（Separation Logic）**——从霍尔逻辑到分离合取、框架规则，揭示 Rust 所有权系统如何建立在严格的数学基础之上，并连接形式化验证工具如 Iris 和 Viper。",
-      "line_count": 652,
+      "line_count": 693,
       "theorem_chains": [
         {
           "text": "| 分离逻辑：Rust 所有权的形式化根基 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -20776,7 +20776,7 @@
       "layer": "L4",
       "title": "指称语义与领域理论",
       "positioning": "探讨 Rust 的**指称语义**（Denotational Semantics）基础——从 Scott-Strachey 方法到完备偏序（CPO）、不动点理论，分析 Rust 类型如何通过数学对象赋予意义。",
-      "line_count": 524,
+      "line_count": 552,
       "theorem_chains": [
         {
           "text": "| 指称语义与领域理论 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -20874,7 +20874,7 @@
       "pre_post": {
         "pre": [
           "[Type Theory](./02_type_theory.md) · [Operational Semantics](./17_operational_semantics.md) · [Linear Logic](./01_linear_logic.md)",
-          "[Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)",
+          "> [Traits](../02_intermediate/01_traits.md) ·",
           "[Concurrency](../03_advanced/01_concurrency.md)"
         ],
         "post": [
@@ -22200,7 +22200,7 @@
       "layer": "L4",
       "title": "测验：形式化方法概念（L4 试点扩展）",
       "positioning": "L4 嵌入式互动测验——验证形式化方法核心概念（分离逻辑、RustBelt、类型安全、验证工具链）的概念掌握程度。",
-      "line_count": 538,
+      "line_count": 540,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [

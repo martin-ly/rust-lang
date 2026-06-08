@@ -1,7 +1,6 @@
 # Kani 实战指南 —— Rust 的 bounded model checker
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **分级**: [A]
 > **Bloom 层级**: L4-L5 (形式化验证入门 → 工程实践)
 > **对应 Rust 版本**: 1.80.0+
@@ -16,12 +15,12 @@
 
 Kani 是 Amazon Web Services (AWS) 开发的 Rust 专用**有界模型检查器 (bounded model checker, BMC)**。其核心工作流为：
 
-```
+```text
 Rust 源码 → MIR (Mid-level IR) → Goto-C → CBMC (C Bounded Model Checker)
 ```
 
 | 层级 | 组件 | 职责 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | 前端 | `rustc` | 将 Rust 代码编译为 MIR |
 | 中间层 | `kani-compiler` | 将 MIR 翻译为 Goto-C (C-like 中间表示) |
 | 后端 | CBMC | 基于 SAT/SMT 求解器进行符号执行，检查所有可达状态 |

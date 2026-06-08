@@ -6,7 +6,7 @@
 # 编程语言理论基础（PL Prerequisites）
 >
 > **EN**: 编程语言理论基础（PL Prerequisites） (Chinese)
-> **Summary**: 编程语言理论基础. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: 编程语言理论基础. Clarifies core mechanisms and common misconceptions.
 > **受众**: [初学者]
 > **Bloom 层级**: 记忆 → 理解
 > **定位**: L1 基础层的**前置知识补充**。理解这些通用 PL 概念后，你将能更深刻地回答"为什么 Rust 要这样设计"，而非仅仅记忆规则。

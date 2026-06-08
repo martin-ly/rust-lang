@@ -6,7 +6,7 @@
 # 集合类型：Rust 标准库的数据结构谱系
 >
 > **EN**: 集合类型：Rust 标准库的数据结构谱系 (Chinese)
-> **Summary**: 集合类型：Rust 标准库的数据结构谱系 (Chinese). Core Rust concept covering mechanism analysis.
+> **Summary**: 集合类型：Rust 标准库的数据结构谱系 (Chinese). Core Rust concept covering mechanism analysis, performance optimization, ownership and borrowing.
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[集合](../../knowledge/02_intermediate/01_collections.md)

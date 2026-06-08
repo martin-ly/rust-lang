@@ -26,7 +26,8 @@ Rayon 的核心 API 仅三个入口：
 | `join(f, g)` | 分叉-汇合并行：同时执行两个闭包 | `rayon::join(\|\| compute_a(), \|\| compute_b())` |
 | `scope()` | 创建作用域，支持嵌套并行任务 | `rayon::scope(\|s\| { s.spawn(\|\| ...); })` |
 
-Rayon 不引入新的并发原语（如锁或通道），而是**复用 Rust 已有的所有权与类型系统**，在编译期杜绝数据竞争。这是 "Fearless Concurrency" 理念在数据并行领域的最佳实践。
+Rayon 不引入新的并发原语（如锁或通道），而是**复用 Rust 已有的所有权与类型系统**，在编译期杜绝数据竞争。
+这是 "Fearless Concurrency" 理念在数据并行领域的最佳实践。
 
 ---
 
@@ -68,7 +69,8 @@ pub trait ParallelIterator: Sized + Send {
 
 > [来源: Rayon 源码 — `rayon/src/iter/mod.rs`]
 
-关键观察：`ParallelIterator` 要求 `Item: Send`，这意味着迭代产生的每个元素都必须是线程安全的。这不是运行时检查，而是编译期由 Rust 类型系统强制保证的。
+关键观察：`ParallelIterator` 要求 `Item: Send`，这意味着迭代产生的每个元素都必须是线程安全的。
+这不是运行时检查，而是编译期由 Rust 类型系统强制保证的。
 
 ### 2.2 从 `Iterator` 到 `ParallelIterator`
 >
@@ -377,7 +379,7 @@ pool.install(|| {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 特性 | Rayon `par_iter()` | 标准库 `iter()` |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | **执行方式** | 工作窃取线程池，多核并行 | 单线程顺序执行 |
 | **确定性** | `find_any` 等操作不保证顺序；`collect` 保持输入顺序 | 完全确定性顺序 |
 | **类型约束** | 要求 `Send` / `Sync` | 无额外约束 |
@@ -392,7 +394,7 @@ pool.install(|| {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 来源 | 类型 | 引用位置 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | [Rayon 官方文档](https://docs.rs/rayon/latest/rayon/) | 一级 | 全文 |
 | [Rayon GitHub Repository](https://github.com/rayon-rs/rayon) | 一级 | 第 1 节 |
 | [Rust Reference — Send and Sync](https://doc.rust-lang.org/reference/special-types-and-traits.html) | 一级 | 第 4 节 |
@@ -421,15 +423,10 @@ pool.install(|| {
 ## 权威来源索引
 
 > **[来源: [crates.io](https://crates.io/)]**
->
 > **[来源: [docs.rs](https://docs.rs/)]**
->
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
 > **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]

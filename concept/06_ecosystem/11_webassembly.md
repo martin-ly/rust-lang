@@ -2,7 +2,7 @@
 # WebAssembly 生态：Rust 的浏览器外运行时
 >
 > **EN**: WebAssembly
-> **Summary**: WebAssembly. Core Rust concept covering mechanism analysis.
+> **Summary**: WebAssembly. Core Rust concept covering mechanism analysis, ecosystem and tooling, web and network programming.
 > **受众**: [进阶]
 > **内容分级**: [综述级]
 > **Bloom 层级**: 应用 → 分析

@@ -1,7 +1,7 @@
 # Rust 测试策略：从单元测试到属性验证
 >
 > **EN**: Testing
-> **Summary**: Testing. Core Rust concept covering formal methods foundations, mechanism analysis.
+> **Summary**: Testing. Core Rust concept covering formal methods foundations, verification techniques, testing strategies.
 > **受众**: [进阶]
 > **内容分级**: [专家级]
 > **Bloom 层级**: 应用 → 分析

@@ -1,15 +1,19 @@
-//! # 练习 1: 枚举与模式匹配
+//! # 练习 1: 枚举与模式匹配 / Exercise 1: Enums and Pattern Matching
 //!
-//! **难度**: Easy  
-//! **考点**: 枚举定义、`Option<T>`、match 表达式
+//! **难度 / Difficulty**: Easy  
+//! **考点 / Focus**: 枚举定义、`Option<T>`、match 表达式
+//!   Enum definitions, `Option<T>`, match expressions
 //!
-//! ## 题目描述
+//! ## 题目描述 / Problem Description
 //!
 //! 定义一个 `TrafficLight` 枚举，包含红、黄、绿三种状态。
 //! 实现函数返回每种灯持续的时间（秒）。
 //! 同时实现一个函数，使用 `Option<u8>` 来描述可能缺失的年龄。
+//! Define a `TrafficLight` enum with Red, Yellow, and Green states.
+//! Implement functions returning the duration (seconds) for each light.
+//! Also implement a function using `Option<u8>` to describe a possibly missing age.
 
-/// 交通信号灯
+/// 交通信号灯 / Traffic light
 #[derive(Debug, PartialEq, Clone, Copy)]
 pub enum TrafficLight {
     Red,
@@ -18,6 +22,7 @@ pub enum TrafficLight {
 }
 
 /// 返回每种灯的持续时间（秒）
+/// Returns the duration (seconds) for each light
 pub fn duration(light: TrafficLight) -> u8 {
     match light {
         TrafficLight::Red => 30,
@@ -27,6 +32,7 @@ pub fn duration(light: TrafficLight) -> u8 {
 }
 
 /// 如果年龄大于 0 且小于 150，返回 Some(age)，否则返回 None
+/// Returns Some(age) if age is between 1 and 149, otherwise None
 pub fn validate_age(age: i32) -> Option<u8> {
     if age > 0 && age < 150 {
         Some(age as u8)
@@ -36,6 +42,7 @@ pub fn validate_age(age: i32) -> Option<u8> {
 }
 
 /// 对 Option 值进行加倍，如果是 None 则返回 None
+/// Doubles an Option value, returning None if input is None
 pub fn double_option(x: Option<i32>) -> Option<i32> {
     x.map(|v| v * 2)
 }

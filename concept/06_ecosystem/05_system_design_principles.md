@@ -1,7 +1,7 @@
 # Rust 系统设计原则与国际权威对齐
 >
 > **EN**: Rust 系统设计原则与国际权威对齐 (Chinese)
-> **Summary**: Rust 系统设计原则与国际权威对齐 (Chinese). Core Rust concept covering formal methods foundations.
+> **Summary**: Rust 系统设计原则与国际权威对齐 (Chinese). Core Rust concept covering formal methods foundations, security practices.
 > **受众**: [进阶]
 > **内容分级**: [专家级]
 > **定位**: 本文件从**系统架构设计**视角梳理 Rust 的核心设计原则，并与国际权威内容（形式化方法、分布式系统理论、安全工程、容错计算）建立对齐关系。

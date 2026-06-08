@@ -1,7 +1,7 @@
 # Effects System: Concept Pre-study（效果系统：概念预研）
 >
 > **EN**: Effect System
-> **Summary**: Effect System. Core Rust concept covering practical examples, type system mechanics.
+> **Summary**: Effect System. Core Rust concept covering practical applications, type system mechanics.
 >
 > **受众**: [专家]
 > **内容分级**: [综述级]

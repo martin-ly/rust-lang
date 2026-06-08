@@ -1,14 +1,17 @@
-//! # 练习 4: Default 特质
+//! # 练习 4: Default 特质 / Exercise 4: Default Trait
 //!
-//! **难度**: Easy  
-//! **考点**: Default trait、struct update syntax
+//! **难度 / Difficulty**: Easy  
+//! **考点 / Focus**: Default trait、struct update syntax
+//!   Default trait, struct update syntax
 //!
-//! ## 题目描述
+//! ## 题目描述 / Problem Description
 //!
 //! 为自定义配置结构体实现 Default 特质，
 //! 并提供使用默认值创建实例的方法。
+//! Implement the Default trait for a custom config struct,
+//! and provide methods to create instances with defaults.
 
-/// 服务器配置
+/// 服务器配置 / Server configuration
 #[derive(Debug, Clone, PartialEq)]
 pub struct ServerConfig {
     pub host: String,
@@ -32,6 +35,7 @@ impl Default for ServerConfig {
 
 impl ServerConfig {
     /// 使用默认配置，但指定端口
+    /// Uses default config with a specified port
     pub fn with_port(port: u16) -> Self {
         Self {
             port,
@@ -40,6 +44,7 @@ impl ServerConfig {
     }
 
     /// 创建生产环境配置
+    /// Creates a production environment config
     pub fn production() -> Self {
         Self {
             host: String::from("0.0.0.0"),

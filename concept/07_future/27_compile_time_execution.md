@@ -1,7 +1,7 @@
 # 编译期执行与常量求值
 >
 > **EN**: 编译期执行与常量求值 (Chinese)
-> **Summary**: 编译期执行与常量求值 (Chinese). Core Rust concept covering mechanism analysis.
+> **Summary**: 编译期执行与常量求值 (Chinese). Core Rust concept covering mechanism analysis, in-depth analysis, generic programming.
 >
 > **受众**: [专家]
 > **内容分级**: [综述级]

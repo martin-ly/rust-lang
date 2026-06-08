@@ -1,7 +1,7 @@
 # Rust 知识体系自测题库（Self-Assessment）
 >
 > **EN**: Rust 知识体系自测题库（Self-Assessment） (Chinese)
-> **Summary**: Rust 知识体系自测题库. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Rust 知识体系自测题库. Self-assessment quizzes to gauge Rust proficiency across Bloom levels.
 >
 > **受众**: [初学者]
 >

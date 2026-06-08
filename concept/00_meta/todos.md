@@ -1,7 +1,7 @@
 # 全局待办清单（Global TODO Tracker）
 >
 > **EN**: 全局待办清单（Global TODO Tracker） (Chinese)
-> **Summary**: 全局待办清单. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: 全局待办清单. Global task tracking and content development roadmap.
 >
 > **受众**: [专家]
 >

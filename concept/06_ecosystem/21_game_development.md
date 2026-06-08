@@ -5,7 +5,7 @@
 # Rust 游戏开发生态
 >
 > **EN**: Game Development
-> **Summary**: Game Development. Core Rust concept covering mechanism analysis.
+> **Summary**: Game Development. Core Rust concept covering mechanism analysis, memory safety guarantees, performance optimization.
 >
 > **受众**: [进阶]
 

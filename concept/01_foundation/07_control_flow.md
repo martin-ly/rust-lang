@@ -5,7 +5,7 @@
 # 控制流：表达式导向的流程控制
 >
 > **EN**: 控制流：表达式导向的流程控制 (Chinese)
-> **Summary**: 控制流：表达式导向的流程控制 (Chinese). Core Rust concept covering mechanism analysis.
+> **Summary**: 控制流：表达式导向的流程控制 (Chinese). Core Rust concept covering mechanism analysis, design patterns.
 > **受众**: [初学者]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **A+S** — Application + Structure

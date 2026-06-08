@@ -6,18 +6,29 @@
 > **Summary**: Formal Methods. Core Rust concept covering formal methods foundations, practical examples, mental model building, mechanism analysis.
 >
 > **受众**: [研究者]
-
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >
-
 > **Bloom 层级**: 评价 → 创造
 > **定位**: 探讨形式化验证工具在 Rust 生态中的应用——从 Kani 的模型检查到 Creusot 的演绎验证，分析如何用数学方法证明 Rust 代码正确性。
-> **前置概念**: [Verification Toolchain](05_verification_toolchain.md) · [RustBelt](04_rustbelt.md) · [Separation Logic](11_separation_logic.md)
-> **后置概念**: [Unsafe](../03_advanced/03_unsafe.md) · [Concurrency](../03_advanced/01_concurrency.md)
+> **前置概念**:
+>
+> [Verification Toolchain](05_verification_toolchain.md) ·
+> [RustBelt](04_rustbelt.md) ·
+> [Separation Logic](11_separation_logic.md)
+> **后置概念**:
+>
+> [Unsafe](../03_advanced/03_unsafe.md) ·
+> [Concurrency](../03_advanced/01_concurrency.md)
 
 ---
 
-> **来源**: [Kani](https://github.com/model-checking/kani) · [Creusot](https://github.com/creusot-rs/creusot) · [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html) · [Aeneas](https://github.com/AeneasVerif/aeneas) · [Wikipedia — Formal Verification](https://en.wikipedia.org/wiki/Formal_verification)
+> **来源**:
+>
+> [Kani](https://github.com/model-checking/kani) ·
+> [Creusot](https://github.com/creusot-rs/creusot) ·
+> [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html) ·
+> [Aeneas](https://github.com/AeneasVerif/aeneas) ·
+> [Wikipedia — Formal Verification](https://en.wikipedia.org/wiki/Formal_verification)
 
 ## 📑 目录
 
@@ -93,7 +104,6 @@
 ---
 
 ### 1.2 验证方法分类
->
 
 ```text
 验证方法:
@@ -495,19 +505,6 @@ fn main() {
 
 ## 权威来源索引
 
->
->
->
->
->
->
-
----
-
----
-
----
-
 ## 十、边界测试：形式化方法的编译错误
 
 ### 10.1 边界测试：`unsafe` 块的形式化验证边界（编译错误）
@@ -531,7 +528,12 @@ fn fixed() {
 }
 ```
 
-> **修正**: 形式化验证工具（Kani、Miri、Prusti）的目标是证明 Rust 代码的安全性。对于 safe Rust，编译器已保证无 UB；对于 unsafe Rust，形式化工具验证 unsafe 块的前置条件是否满足。Kani 使用模型检查（CBMC）验证所有执行路径，Miri 解释执行并检测 UB（Stacked Borrows / Tree Borrows 违规）。 unsafe 块是形式化方法的边界——工具假设 unsafe 块内的操作是正确的，验证其外部接口的安全性。[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)]
+> **修正**:
+> 形式化验证工具（Kani、Miri、Prusti）的目标是证明 Rust 代码的安全性。
+> 对于 safe Rust，编译器已保证无 UB；对于 unsafe Rust，形式化工具验证 unsafe 块的前置条件是否满足。
+> Kani 使用模型检查（CBMC）验证所有执行路径，Miri 解释执行并检测 UB（Stacked Borrows / Tree Borrows 违规）。
+> unsafe 块是形式化方法的边界——工具假设 unsafe 块内的操作是正确的，验证其外部接口的安全性。
+> [来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)]
 
 ### 10.2 边界测试：循环不变量与编译期验证（逻辑错误）
 
@@ -554,7 +556,12 @@ fn main() {
 }
 ```
 
-> **修正**: 形式化方法中的 **Hoare 逻辑** 使用 `{P} C {Q}` 三元组描述程序正确性——前置条件 `P` 下执行命令 `C`，结果满足后置条件 `Q`。循环需要 **循环不变量**（loop invariant）——在每次迭代前后保持为真的断言。对于 `sum` 函数，循环不变量是 `total = sum(0..i)`。Prusti（基于 Viper）和 Creusot（基于 Why3）等工具要求开发者标注循环不变量，然后自动验证其保持性和终止性。这是将数学证明引入软件工程的典范。[来源: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)]
+> **修正**:
+> 形式化方法中的 **Hoare 逻辑** 使用 `{P} C {Q}` 三元组描述程序正确性——前置条件 `P` 下执行命令 `C`，结果满足后置条件 `Q`。
+> 循环需要 **循环不变量**（loop invariant）——在每次迭代前后保持为真的断言。
+> 对于 `sum` 函数，循环不变量是 `total = sum(0..i)`。Prusti（基于 Viper）和 Creusot（基于 Why3）等工具要求开发者标注循环不变量，然后自动验证其保持性和终止性。
+> 这是将数学证明引入软件工程的典范。
+> [来源: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)]
 
 ### 10.3 边界测试：`contracts` crate 的运行时断言开销（逻辑错误）
 
@@ -574,7 +581,19 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的契约（contracts）生态（`contracts` crate、实验性的内置契约）提供运行时前置/后置条件检查。与形式化验证（编译期证明）不同，运行时契约有性能开销，且只在实际执行路径上检查（不保证所有路径）。使用模式：1) debug 构建启用，release 禁用（`#[cfg(debug_assertions)]`）；2) 对关键函数永久启用（安全关键代码）；3) 结合模糊测试（fuzzing）增加路径覆盖。这与 Eiffel 的 Design by Contract（原生语言特性，可配置断言级别）、D 的 `in`/`out` 契约、或 Python 的 `deal`/`icontract` 类似。Rust 的设计趋势：契约作为宏/属性，最终可能集成到编译器（如 `rustc_contracts` 实验），支持编译期证明和运行时检查的双模式。[来源: [contracts Crate](https://docs.rs/contracts/)] · [来源: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)]
+> **修正**:
+> Rust 的契约（contracts）生态（`contracts` crate、实验性的内置契约）提供运行时前置/后置条件检查。
+> 与形式化验证（编译期证明）不同，运行时契约有性能开销，且只在实际执行路径上检查（不保证所有路径）。
+> 使用模式：
+>
+> 1) debug 构建启用，release 禁用（`#[cfg(debug_assertions)]`）；
+> 2) 对关键函数永久启用（安全关键代码）；
+> 3) 结合模糊测试（fuzzing）增加路径覆盖。
+>
+> 这与 Eiffel 的 Design by Contract（原生语言特性，可配置断言级别）、D 的 `in`/`out` 契约、或 Python 的 `deal`/`icontract` 类似。
+> Rust 的设计趋势：契约作为宏/属性，最终可能集成到编译器（如 `rustc_contracts` 实验），支持编译期证明和运行时检查的双模式。
+> [来源: [contracts Crate](https://docs.rs/contracts/)] ·
+> [来源: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)]
 
 ### 10.4 边界测试：Kani 的循环展开限制（验证失败）
 
@@ -589,7 +608,20 @@ fn verify_loop() {
 }
 ```
 
-> **修正**: Kani（模型检查器）通过**有界模型检查**（bounded model checking）验证 Rust 代码：将循环展开为固定次数的迭代，检查所有路径。若循环边界太大（如 `0..1000`），展开导致状态空间爆炸（符号变量数量指数增长），Kani 超时或内存耗尽。解决方案：1) 使用 `#[kani::unwind(10)]` 限制展开次数（验证部分行为）；2) 提取循环不变量（loop invariant），用归纳法证明而非展开；3) 将复杂循环改写为递归（若尾递归优化适用）。这与 Coq/Isabelle 的交互式证明（手动提供不变量）或 CBMC（C 的模型检查器，同样受限于循环展开）相同——自动化验证的瓶颈在于处理循环和递归。Rust 的所有权系统简化了部分不变量（无别名 = 无意外修改），但循环逻辑仍需人工或半自动处理。[来源: [Kani Documentation](https://model-checking.github.io/kani/)] · [来源: [Bounded Model Checking](https://en.wikipedia.org/wiki/Model_checking#Bounded_model_checking)]
+> **修正**:
+>
+> Kani（模型检查器）通过**有界模型检查**（bounded model checking）验证 Rust 代码：将循环展开为固定次数的迭代，检查所有路径。
+> 若循环边界太大（如 `0..1000`），展开导致状态空间爆炸（符号变量数量指数增长），Kani 超时或内存耗尽。
+> 解决方案：
+>
+> 1) 使用 `#[kani::unwind(10)]` 限制展开次数（验证部分行为）；
+> 2) 提取循环不变量（loop invariant），用归纳法证明而非展开；
+> 3) 将复杂循环改写为递归（若尾递归优化适用）。
+>
+> 这与 Coq/Isabelle 的交互式证明（手动提供不变量）或 CBMC（C 的模型检查器，同样受限于循环展开）相同——自动化验证的瓶颈在于处理循环和递归。
+> Rust 的所有权系统简化了部分不变量（无别名 = 无意外修改），但循环逻辑仍需人工或半自动处理。
+> [来源: [Kani Documentation](https://model-checking.github.io/kani/)] ·
+> [来源: [Bounded Model Checking](https://en.wikipedia.org/wiki/Model_checking#Bounded_model_checking)]
 
 ### 10.5 边界测试：形式化验证的时间复杂度与路径爆炸（验证失败/超时）
 

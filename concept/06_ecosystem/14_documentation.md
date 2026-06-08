@@ -4,7 +4,7 @@
 # 文档生态：rustdoc、文档测试与 API 文档规范
 >
 > **EN**: Testing
-> **Summary**: Testing. Core Rust concept covering mechanism analysis.
+> **Summary**: Testing. Core Rust concept covering testing strategies, practical applications, mechanism analysis.
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A** — Application

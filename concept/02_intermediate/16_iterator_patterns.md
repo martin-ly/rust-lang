@@ -5,7 +5,7 @@
 # 迭代器模式：Rust 的惰性计算与零成本抽象
 >
 > **EN**: Iterators
-> **Summary**: Iterators. Core Rust concept covering mechanism analysis.
+> **Summary**: Iterators. Core Rust concept covering mechanism analysis, in-depth analysis, performance optimization.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析

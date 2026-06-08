@@ -1,7 +1,7 @@
 # L2 进阶概念层（Intermediate）
 >
 > **EN**: L2 进阶概念层（Intermediate） (Chinese)
-> **Summary**: L2 进阶概念层. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: L2 进阶概念层. L2 Intermediate layer overview and navigation hub.
 >
 > **受众**: [进阶]
 > **定位**：在掌握 L1 基础后，理解 Rust 的模块化、泛型、内存管理和错误处理等进阶机制。本层内容对齐 TRPL 第 10-15 章、Microsoft RustTraining 进阶部分。

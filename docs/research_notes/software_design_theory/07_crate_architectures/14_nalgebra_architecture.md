@@ -13,10 +13,11 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-Rust 的科学计算生态虽然在成熟度上不及 Python 的 NumPy/SciPy，但在**类型安全与性能可预测性**方面具有独特优势。`nalgebra` 和 `ndarray` 是这一领域的两大基石库：
+Rust 的科学计算生态虽然在成熟度上不及 Python 的 NumPy/SciPy，但在**类型安全与性能可预测性**方面具有独特优势。
+`nalgebra` 和 `ndarray` 是这一领域的两大基石库：
 
 | 库 | 定位 | 核心抽象 | 最佳场景 |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | **nalgebra** | 线性代数 | `Matrix<T, R, C, S>` — 类型级维度 | 固定维度的几何/物理计算（3D 图形、机器人学） |
 | **ndarray** | N 维数组 | `ArrayBase<S, D>` — 泛型存储与维度 | 通用数值计算、图像处理、与 BLAS 集成 |
 

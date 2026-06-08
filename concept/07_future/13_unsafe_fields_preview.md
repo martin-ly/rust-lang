@@ -1,7 +1,7 @@
 # Unsafe Fields 预研：字段级安全边界的精确标注
 >
 > **EN**: Unsafe Rust
-> **Summary**: Unsafe Rust. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Unsafe Rust. Guide to 13 Unsafe Fields Preview.
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

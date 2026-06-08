@@ -1,11 +1,12 @@
-//! # 类型系统练习
+//! # 类型系统练习 / Type System Exercises
 //!
-//! 本模块包含 10 道练习题（当前完成 6 道），涵盖：
-//! - 枚举与模式匹配
-//! - 结构体与方法
-//! - 类型转换
-//! - 泛型入门
-//! - 特质对象
+//! 本模块包含练习题，涵盖：
+//! This module contains exercises covering:
+//! - 枚举与模式匹配 / Enums and pattern matching
+//! - 结构体与方法 / Structs and methods
+//! - 类型转换 / Type conversions
+//! - 泛型入门 / Generics introduction
+//! - 特质对象 / Trait objects
 //! - `if let` guards (Rust 1.95)
 
 pub mod ex01_enum_pattern_match;

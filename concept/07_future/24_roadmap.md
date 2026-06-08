@@ -1,7 +1,7 @@
 # Rust 2027 Edition 及未来路线图
 >
 > **EN**: Rust 2027 Edition 及未来路线图 (Chinese)
-> **Summary**: Rust 2027 Edition 及未来路线图 (Chinese). Core Rust concept covering mechanism analysis.
+> **Summary**: Rust 2027 Edition 及未来路线图 (Chinese). Core Rust concept covering mechanism analysis, async/await patterns, trait system mechanics.
 >
 > **受众**: [专家]
 > **内容分级**: [综述级]

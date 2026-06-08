@@ -5,7 +5,7 @@
 # 闭包类型系统：Fn、FnMut、FnOnce 的捕获语义
 >
 > **EN**: Type System
-> **Summary**: Type System. Core Rust concept covering mechanism analysis.
+> **Summary**: Type System. Core Rust concept covering mechanism analysis, in-depth analysis, type system mechanics.
 > **受众**: [进阶]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **S** — Structure

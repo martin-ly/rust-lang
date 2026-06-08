@@ -6,7 +6,7 @@
 # 字符串与文本：Rust 的 Unicode 处理与格式化系统
 >
 > **EN**: 字符串与文本：Rust 的 Unicode 处理与格式化系统 (Chinese)
-> **Summary**: 字符串与文本：Rust 的 Unicode 处理与格式化系统 (Chinese). Core Rust concept covering mechanism analysis.
+> **Summary**: 字符串与文本：Rust 的 Unicode 处理与格式化系统 (Chinese). Core Rust concept covering mechanism analysis, HTTP and web services.
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[字符串与文本](../../knowledge/02_intermediate/05_strings.md)

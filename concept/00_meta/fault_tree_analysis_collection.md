@@ -1,7 +1,7 @@
 # Rust 知识体系失效分析树集（Fault Tree Analysis Collection）
 >
 > **EN**: Rust 知识体系失效分析树集（Fault Tree Analysis Collection） (Chinese)
-> **Summary**: Rust 知识体系失效分析树集. Core Rust concept covering mechanism analysis.
+> **Summary**: Rust 知识体系失效分析树集. Core Rust concept covering mechanism analysis, security practices.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **受众**: [专家]

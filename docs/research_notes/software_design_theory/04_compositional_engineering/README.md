@@ -568,21 +568,13 @@ L4 跨进程/跨网络（分布式、微服务）
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon]**
-
 > **[来源: Wikipedia - Type System]**
 > **[来源: Wikipedia - Concurrency]**
 > **[来源: Wikipedia - Asynchronous I/O]**

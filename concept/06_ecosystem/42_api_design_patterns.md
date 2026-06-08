@@ -5,7 +5,7 @@
 # API Design Patterns（API 设计模式）
 >
 > **EN**: Design Patterns
-> **Summary**: Design Patterns. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Design Patterns. Guide to 42 Api Design Patterns.
 >
 > **受众**: [进阶]
 

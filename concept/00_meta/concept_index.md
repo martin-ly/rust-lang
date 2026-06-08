@@ -1,7 +1,7 @@
 # 全局概念索引（Concept Index）
 >
 > **EN**: 全局概念索引（Concept Index） (Chinese)
-> **Summary**: 全局概念索引. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: 全局概念索引. Global concept index providing cross-layer navigation and topic lookup.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **受众**: [进阶]

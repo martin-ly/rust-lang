@@ -1,7 +1,7 @@
 # Rust 安全边界扩展推理树
 >
 > **EN**: Security Practices
-> **Summary**: Security Practices. Core Rust concept covering mechanism analysis.
+> **Summary**: Security Practices. Core Rust concept covering mechanism analysis, security practices.
 > **受众**: [专家]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **定位**: 本文件从「安全边界」核心出发，推演向更底层、更通用、更危险领域的扩展路径，标注每条扩展边的条件、风险和补偿机制。

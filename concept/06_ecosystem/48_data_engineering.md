@@ -5,7 +5,7 @@
 # Data Engineering（数据工程）
 >
 > **EN**: Data Engineering（数据工程） (Chinese)
-> **Summary**: Data Engineering. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Data Engineering. Guide to 48 Data Engineering.
 >
 > **受众**: [进阶]
 

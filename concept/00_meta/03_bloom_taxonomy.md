@@ -1,5 +1,9 @@
+# Bloom Taxonomy（Bloom 分类法）
+>
+> **EN**: Bloom Taxonomy
+> **Summary**: Bloom's taxonomy adapted for Rust cognitive skill assessment, mapping remembering to creation across knowledge dimensions.
+>
 > **受众**: [进阶]
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 ### 10.4 边界测试：Bloom 层级 L5-L7 的形式化定义与 Rust 概念映射（认知陷阱）

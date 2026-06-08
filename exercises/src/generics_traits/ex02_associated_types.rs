@@ -1,25 +1,28 @@
-//! # 练习 2: 关联类型
+//! # 练习 2: 关联类型 / Exercise 2: Associated Types
 //!
-//! **难度**: Medium  
-//! **考点**: associated type、Iterator trait 模式
+//! **难度 / Difficulty**: Medium  
+//! **考点 / Focus**: associated type、Iterator trait 模式
+//!   Associated types, Iterator trait pattern
 //!
-//! ## 题目描述
+//! ## 题目描述 / Problem Description
 //!
 //! 定义一个 Container 特质，使用关联类型表示元素类型，
 //! 为 Vec 和自定义结构体实现该特质。
+//! Define a Container trait using an associated type for the element type,
+//! and implement it for Vec and a custom struct.
 
-/// 容器特质
+/// 容器特质 / Container trait
 pub trait Container {
-    /// 容器中元素的类型
+    /// 容器中元素的类型 / Element type in the container
     type Item;
 
-    /// 添加元素
+    /// 添加元素 / Adds an element
     fn add(&mut self, item: Self::Item);
 
-    /// 返回元素数量
+    /// 返回元素数量 / Returns the number of elements
     fn len(&self) -> usize;
 
-    /// 判断是否为空
+    /// 判断是否为空 / Checks if empty
     fn is_empty(&self) -> bool {
         self.len() == 0
     }
@@ -37,7 +40,7 @@ impl<T> Container for Vec<T> {
     }
 }
 
-/// 固定容量的栈
+/// 固定容量的栈 / Fixed-capacity stack
 #[derive(Debug)]
 pub struct FixedStack<T, const N: usize> {
     data: [Option<T>; N],

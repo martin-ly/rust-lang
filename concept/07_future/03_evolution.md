@@ -1,7 +1,7 @@
 # Language Evolution（语言演进）
 >
 > **EN**: Language Evolution（语言演进） (Chinese)
-> **Summary**: Language Evolution. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Language Evolution. Guide to 03 Evolution.
 >
 > **受众**: [专家]
 > **内容分级**: [综述级]

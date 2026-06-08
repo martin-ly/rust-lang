@@ -5,7 +5,7 @@
 # Rust 嵌入式系统开发
 >
 > **EN**: Embedded Systems
-> **Summary**: Embedded Systems. Core Rust concept covering mechanism analysis.
+> **Summary**: Embedded Systems. Core Rust concept covering mechanism analysis, memory safety guarantees, embedded systems programming.
 >
 > **受众**: [进阶]
 

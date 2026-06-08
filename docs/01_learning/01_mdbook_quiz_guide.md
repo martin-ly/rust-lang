@@ -52,7 +52,6 @@
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-05-08 (Rust 1.95+ 持续更新)](#最后更新-2026-05-08-rust-195-持续更新)
   - [权威来源索引](#权威来源索引)
 
 ## 快速开始
@@ -481,6 +480,7 @@ A: 目前 mdbook-quiz 不支持直接导出。可以通过浏览器的 Local Sto
 
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-05-08 (Rust 1.95+ 持续更新)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

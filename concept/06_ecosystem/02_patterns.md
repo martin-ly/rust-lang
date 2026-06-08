@@ -1,7 +1,7 @@
 # Design Patterns（设计模式）
 >
 > **EN**: Design Patterns
-> **Summary**: Design Patterns. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Design Patterns. Guide to 02 Patterns.
 > **受众**: [进阶]
 > **内容分级**: [专家级]
 > **层级**: L6 生态工程

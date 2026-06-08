@@ -5,7 +5,7 @@
 # 高级类型系统：从关联类型到类型级编程
 >
 > **EN**: Type System
-> **Summary**: Type System. Core Rust concept covering mechanism analysis.
+> **Summary**: Type System. Core Rust concept covering mechanism analysis, in-depth analysis, type system mechanics.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价

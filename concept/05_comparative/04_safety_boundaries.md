@@ -4,7 +4,7 @@
 # Rust 安全保证的边界条件全景（Safety Boundary Panorama）
 >
 > **EN**: Security Practices
-> **Summary**: Security Practices. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Security Practices. Core Rust concept covering security practices.
 > **受众**: [进阶]
 > **定位**: 本文件汇总 Rust 所有**编译期安全保证**的边界条件、失效场景和反例，形成完整的"安全 ⇄ 不安全"边界地图。
 > **方法论对齐**: 反事实推理 · 边界测试 · 知识库一致性 (Torchiano et al. 2018)

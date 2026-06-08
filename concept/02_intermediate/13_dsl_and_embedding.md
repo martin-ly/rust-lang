@@ -5,7 +5,7 @@
 # DSL 与嵌入 式设计：Rust 中的领域特定语言
 >
 > **EN**: DSL 与嵌入 式设计：Rust 中的领域特定语言 (Chinese)
-> **Summary**: DSL 与嵌入 式设计：Rust 中的领域特定语言 (Chinese). Core Rust concept covering mechanism analysis.
+> **Summary**: DSL 与嵌入 式设计：Rust 中的领域特定语言 (Chinese). Core Rust concept covering mechanism analysis, design patterns, metaprogramming techniques.
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 分析 Rust 中 **DSL（领域特定语言）**的构建方法——从宏驱动的内嵌 DSL（如 html!、sql!）、到外部 DSL 的解析器 [来源: [Parsing in Rust](https://rust-lang.github.io/rustc-dev-guide/grammar.html)]组合子（parser combinators），再到 Rust 作为宿主语言的嵌入策略，揭示类型安全 DSL 的设计模式。

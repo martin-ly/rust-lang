@@ -5,7 +5,7 @@
 # 类型强制与转换：显式与隐式的边界
 >
 > **EN**: 类型强制与转换：显式与隐式的边界 (Chinese)
-> **Summary**: 类型强制与转换：显式与隐式的边界 (Chinese). Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: 类型强制与转换：显式与隐式的边界 (Chinese). Core Rust concept covering security practices.
 > **受众**: [初学者]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **S** — Structure

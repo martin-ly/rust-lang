@@ -1,27 +1,31 @@
-//! # 练习 5: 超时与重试
+//! # 练习 5: 超时与重试 / Exercise 5: Timeout and Retry
 //!
-//! **难度**: Hard  
-//! **考点**: tokio::time::timeout、重试策略
+//! **难度 / Difficulty**: Hard  
+//! **考点 / Focus**: tokio::time::timeout、重试策略
+//!   tokio::time::timeout, retry strategies
 //!
-//! ## 题目描述
+//! ## 题目描述 / Problem Description
 //!
 //! 实现带有超时和重试机制的异步操作。
+//! Implement async operations with timeout and retry mechanisms.
 
 use std::future::Future;
 use std::time::Duration;
 
 /// 带超时的异步操作
+/// Async operation with timeout
 pub async fn with_timeout<T, F>(duration: Duration, f: F) -> Result<T, &'static str>
 where
     F: Future<Output = T>,
 {
     match tokio::time::timeout(duration, f).await {
         Ok(result) => Ok(result),
-        Err(_) => Err("操作超时"),
+        Err(_) => Err("操作超时 / Operation timed out"),
     }
 }
 
 /// 简单重试：如果失败则重试指定次数
+/// Simple retry: retries up to max_attempts on failure
 pub async fn retry<F, Fut, T>(mut f: F, max_attempts: usize) -> Result<T, &'static str>
 where
     F: FnMut() -> Fut,
@@ -33,7 +37,7 @@ where
             Err(_) => continue,
         }
     }
-    Err("所有重试均失败")
+    Err("所有重试均失败 / All retries failed")
 }
 
 #[cfg(test)]
@@ -53,7 +57,7 @@ mod tests {
             42
         })
         .await;
-        assert_eq!(result, Err("操作超时"));
+        assert_eq!(result, Err("操作超时 / Operation timed out"));
     }
 
     #[tokio::test]
@@ -79,6 +83,6 @@ mod tests {
     #[tokio::test]
     async fn test_retry_exhausted() {
         let result = retry(|| async { Err::<i32, _>("always fails") }, 3).await;
-        assert_eq!(result, Err("所有重试均失败"));
+        assert_eq!(result, Err("所有重试均失败 / All retries failed"));
     }
 }

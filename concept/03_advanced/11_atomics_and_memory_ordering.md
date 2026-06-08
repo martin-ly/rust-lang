@@ -3,7 +3,7 @@
 # 原子操作与内存序：无锁并发的精确控制
 >
 > **EN**: Concurrency
-> **Summary**: Concurrency. Core Rust concept covering mental model building, mechanism analysis.
+> **Summary**: Concurrency. Core Rust concept covering mental model building, mechanism analysis, in-depth analysis.
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[原子操作](../../knowledge/03_advanced/concurrency/01_atomics.md)

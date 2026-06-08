@@ -3,7 +3,8 @@
 # Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象
 >
 > **EN**: Async Programming
-> **Summary**: Async Programming. Core Rust concept covering mechanism analysis.
+> **Summary**:
+> Async Programming. Core Rust concept covering mechanism analysis, async/await patterns, network programming.
 > **受众**: [专家]
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 系统分析 Rust **网络编程**的核心范式——从 Tokio 运行时下的 TCP/UDP 异步 IO，到 socket 编程的底层细节，再到 Tower 服务抽象的设计哲学，建立从"怎么写"到"为什么这样设计"的完整认知框架。

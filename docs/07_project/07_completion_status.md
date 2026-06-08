@@ -25,7 +25,6 @@
       - [academic/](#academic)
   - [📝 Docs 完成度](#-docs-完成度)
   - [⚠️ 已知问题](#️-已知问题)
-  - [**更新流程**: 每轮扩展后由执行代理同步更新](#更新流程-每轮扩展后由执行代理同步更新)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -156,6 +155,7 @@
 
 **维护者**: Rust 学习项目团队
 **更新流程**: 每轮扩展后由执行代理同步更新
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -185,19 +185,12 @@
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
 > **[来源: ACM - Systems Programming Languages]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ---

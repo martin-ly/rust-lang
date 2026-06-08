@@ -5,7 +5,7 @@
 # Cow：写时克隆与零拷贝抽象
 >
 > **EN**: Cow：写时克隆与零拷贝抽象 (Chinese)
-> **Summary**: Cow：写时克隆与零拷贝抽象 (Chinese). Core Rust concept covering mechanism analysis.
+> **Summary**: Cow：写时克隆与零拷贝抽象 (Chinese). Core Rust concept covering mechanism analysis, in-depth analysis, trait system mechanics.
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **S+P** — Structure + Procedure

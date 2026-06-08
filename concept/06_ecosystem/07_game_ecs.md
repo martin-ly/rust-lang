@@ -2,7 +2,7 @@
 # Game Development & ECS Architecture（游戏开发与 ECS 架构）
 >
 > **EN**: Game Development
-> **Summary**: Game Development. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Game Development. Game Development & ECS Architecture（游戏开发与 ECS 架构）.
 > **受众**: [进阶]
 > **内容分级**: [专家级]
 > **层级**: L6 应用主题

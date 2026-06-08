@@ -5,7 +5,7 @@
 # Game Engine Internals（游戏引擎内部原理）
 >
 > **EN**: Game Engine Internals（游戏引擎内部原理） (Chinese)
-> **Summary**: Game Engine Internals. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Game Engine Internals. Guide to 49 Game Engine Internals.
 >
 > **受众**: [进阶]
 

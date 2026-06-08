@@ -5,7 +5,7 @@
 # Distributed Consensus（分布式共识）
 >
 > **EN**: Distributed Consensus（分布式共识） (Chinese)
-> **Summary**: Distributed Consensus. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Distributed Consensus. Guide to 50 Distributed Consensus.
 >
 > **受众**: [进阶]
 

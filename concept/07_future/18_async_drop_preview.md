@@ -1,7 +1,7 @@
 # Async Drop：异步资源的优雅销毁
 >
 > **EN**: Async Programming
-> **Summary**: Async Programming. Core Rust concept covering mechanism analysis.
+> **Summary**: Async Programming. Core Rust concept covering mechanism analysis, synchronization primitives, async/await patterns.
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]

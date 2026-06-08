@@ -1,7 +1,7 @@
 # Formal Ecosystem Tower（Rust 生态形式化分层塔）
 >
 > **EN**: Formal Methods
-> **Summary**: Formal Methods. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Formal Methods. Guide to 05 Formal Ecosystem Tower.
 > **受众**: [进阶]
 > **内容分级**: [专家级]
 > **层级**: L6 生态工程

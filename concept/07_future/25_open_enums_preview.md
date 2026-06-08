@@ -1,7 +1,7 @@
 # Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举
 >
 > **EN**: Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举 (Chinese)
-> **Summary**: Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举 (Chinese). Core Rust concept covering mechanism analysis.
+> **Summary**: Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举 (Chinese). Core Rust concept covering mechanism analysis, aerospace and fault-tolerant systems.
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

@@ -1,26 +1,31 @@
-//! # 练习 1: 特质约束
+//! # 练习 1: 特质约束 / Exercise 1: Trait Bounds
 //!
-//! **难度**: Easy  
-//! **考点**: trait bound、where 子句
+//! **难度 / Difficulty**: Easy  
+//! **考点 / Focus**: trait bound、where 子句
+//!   Trait bounds, where clauses
 //!
-//! ## 题目描述
+//! ## 题目描述 / Problem Description
 //!
 //! 实现一个泛型函数，要求类型必须实现 Display 和 PartialOrd，
 //! 返回格式化后的最大值描述字符串。
+//! Implement a generic function requiring Display + PartialOrd,
+//! returning a formatted description of the maximum value.
 
 #![allow(clippy::approx_constant)]
 use std::fmt::Display;
 
 /// 返回两个值中较大者的描述
+/// Returns a description of the larger of two values
 pub fn describe_max<T: Display + PartialOrd>(a: T, b: T) -> String {
     if a > b {
-        format!("较大值是: {}", a)
+        format!("较大值是: {} / Larger value is: {}", a, a)
     } else {
-        format!("较大值是: {}", b)
+        format!("较大值是: {} / Larger value is: {}", b, b)
     }
 }
 
 /// 使用 where 子句的泛型函数：检查切片是否全部相等
+/// Generic function using where clause: checks if all elements in a slice are equal
 pub fn all_equal<T>(slice: &[T]) -> bool
 where
     T: PartialEq,
@@ -33,6 +38,7 @@ where
 }
 
 /// 约束类型必须实现 Clone，返回克隆的副本
+/// Requires Clone bound, returns cloned pair
 pub fn cloned_pair<T: Clone>(value: T) -> (T, T) {
     (value.clone(), value)
 }
@@ -43,8 +49,11 @@ mod tests {
 
     #[test]
     fn test_describe_max() {
-        assert_eq!(describe_max(10, 5), "较大值是: 10");
-        assert_eq!(describe_max(3.14, 2.71), "较大值是: 3.14");
+        assert_eq!(describe_max(10, 5), "较大值是: 10 / Larger value is: 10");
+        assert_eq!(
+            describe_max(3.14, 2.71),
+            "较大值是: 3.14 / Larger value is: 3.14"
+        );
     }
 
     #[test]

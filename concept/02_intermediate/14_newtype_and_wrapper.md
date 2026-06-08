@@ -5,7 +5,7 @@
 # Newtype 与包装器模式：类型安全的零成本抽象
 >
 > **EN**: Security Practices
-> **Summary**: Security Practices. Core Rust concept covering mechanism analysis.
+> **Summary**: Security Practices. Core Rust concept covering mechanism analysis, in-depth analysis, design patterns.
 >
 > **受众**: [进阶]
 >

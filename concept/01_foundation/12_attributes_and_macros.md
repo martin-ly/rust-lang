@@ -6,7 +6,7 @@
 # 属性与声明宏：编译期元编程基础
 >
 > **EN**: Macros
-> **Summary**: Macros. Core Rust concept covering practical examples.
+> **Summary**: Macros. Core Rust concept covering practical examples, design patterns, metaprogramming techniques.
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[属性与宏](../../knowledge/03_advanced/macros)

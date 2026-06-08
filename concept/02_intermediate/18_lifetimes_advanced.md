@@ -5,7 +5,7 @@
 # 生命周期高级主题：从 HRTB 到自引用类型
 >
 > **EN**: Lifetimes
-> **Summary**: Lifetimes. Core Rust concept covering mechanism analysis.
+> **Summary**: Lifetimes. Core Rust concept covering mechanism analysis, in-depth analysis, lifetime semantics.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价

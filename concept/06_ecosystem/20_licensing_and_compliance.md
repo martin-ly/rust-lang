@@ -5,7 +5,7 @@
 # 许可证与合规：Rust 项目的法律工程
 >
 > **EN**: 许可证与合规：Rust 项目的法律工程 (Chinese)
-> **Summary**: 许可证与合规：Rust 项目的法律工程 (Chinese). Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: 许可证与合规：Rust 项目的法律工程 (Chinese). Guide to 20 Licensing And Compliance.
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 评价
 > **A/S/P 标记**: **A+P** — ApplicationProcedure

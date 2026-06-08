@@ -44,7 +44,8 @@
 >
 > **[来源: Rust Official Docs]**
 
-**Cranelift** 是 Rust 编译器的替代代码生成后端（`codegen backend`），最初由 Mozilla 的 Wasmtime 团队开发。与 Rust 默认使用的 LLVM 后端不同，Cranelift 专注于**快速编译**而非极致的运行时性能优化。
+**Cranelift** 是 Rust 编译器的替代代码生成后端（`codegen backend`），最初由 Mozilla 的 Wasmtime 团队开发。
+与 Rust 默认使用的 LLVM 后端不同，Cranelift 专注于**快速编译**而非极致的运行时性能优化。
 
 ```text
 Rust 编译器后端对比:

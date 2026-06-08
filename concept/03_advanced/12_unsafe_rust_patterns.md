@@ -3,7 +3,7 @@
 # Unsafe Rust 模式：安全抽象的核心技术
 >
 > **EN**: Unsafe Rust
-> **Summary**: Unsafe Rust. Core Rust concept covering practical examples, mechanism analysis.
+> **Summary**: Unsafe Rust. Core Rust concept covering practical examples, mechanism analysis, in-depth analysis.
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 深入分析 Rust **unsafe 代码的工程模式**——从原始指针操作、内存布局控制到与 C 的互操作，揭示如何在 unsafe 边界内构建安全抽象。

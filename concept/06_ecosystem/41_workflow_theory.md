@@ -5,7 +5,7 @@
 # Workflow Theory & Formalization（工作流理论与形式化）
 >
 > **EN**: Formal Methods
-> **Summary**: Formal Methods. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Formal Methods. Guide to 41 Workflow Theory.
 >
 > **受众**: [进阶]
 

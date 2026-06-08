@@ -1,7 +1,7 @@
 # Specialization：Trait 实现的精确化与重叠解析
 >
 > **EN**: Traits
-> **Summary**: Traits. Core Rust concept covering mechanism analysis.
+> **Summary**: Traits. Core Rust concept covering mechanism analysis, generic programming, trait system mechanics.
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)
 > **预计稳定**: 待定（需等待 RFC / MCP 完成）

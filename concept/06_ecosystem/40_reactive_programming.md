@@ -5,7 +5,7 @@
 # Reactive Programming & FRP（响应式编程与函数式响应编程）
 >
 > **EN**: Reactive Programming & FRP（响应式编程与函数式响应编程） (Chinese)
-> **Summary**: Reactive Programming & FRP. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Reactive Programming & FRP. Guide to 40 Reactive Programming.
 >
 > **受众**: [进阶]
 

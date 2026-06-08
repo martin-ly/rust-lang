@@ -4,7 +4,7 @@
 # 分布式 系统：Rust 在微服务 与集群中的工程实践
 >
 > **EN**: 分布式 系统：Rust 在微服务 与集群中的工程实践 (Chinese)
-> **Summary**: 分布式 系统：Rust 在微服务 与集群中的工程实践 (Chinese). Core Rust concept covering mental model building, mechanism analysis.
+> **Summary**: 分布式 系统：Rust 在微服务 与集群中的工程实践 (Chinese). Core Rust concept covering mental model building, mechanism analysis, performance optimization.
 > **受众**: [进阶]
 >
 > **Bloom 层级**: 应用 → 评价

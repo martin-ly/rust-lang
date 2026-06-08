@@ -1,6 +1,6 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-06-07T22:31:33.865709+00:00
+> 生成时间: 2026-06-08T01:37:06.499642+00:00
 > 扫描文件数: 267
 
 ## 全局指标
@@ -57,7 +57,7 @@
 
 | 文件 | 层级 | 行数 | ⟹ | ⟸ | 模板 | 反命题 | Mermaid | 代码块 | 过渡段 | 认知路径 | 前置 | 后置 |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
-| concept\00_meta\03_bloom_taxonomy.md | L0 | 136 | 1 | 0 | 0 | 1 | 0 | 1 | 6 | ✅ | ❌ | ❌ |
+| concept\00_meta\03_bloom_taxonomy.md | L0 | 140 | 1 | 0 | 0 | 1 | 0 | 1 | 6 | ✅ | ❌ | ❌ |
 | concept\00_meta\05_cross_reference_matrix.md | L0 | 80 | 1 | 0 | 0 | 1 | 0 | 1 | 6 | ✅ | ❌ | ❌ |
 | concept\00_meta\08_concept_audit_guide.md | L0 | 69 | 1 | 0 | 0 | 1 | 0 | 1 | 6 | ✅ | ❌ | ❌ |
 | concept\00_meta\asp_marking_guide.md | L0 | 467 | 1 | 0 | 0 | 1 | 3 | 0 | 6 | ✅ | ✅ | ✅ |
@@ -157,7 +157,7 @@
 | concept\03_advanced\02_async_advanced.md | L3 | 1405 | 4 | 3 | 0 | 1 | 1 | 30 | 6 | ✅ | ✅ | ✅ |
 | concept\03_advanced\02_async_patterns.md | L3 | 865 | 3 | 3 | 0 | 3 | 1 | 11 | 6 | ✅ | ✅ | ✅ |
 | concept\03_advanced\03_unsafe.md | L3 | 2882 | 14 | 2 | 0 | 4 | 10 | 45 | 3 | ✅ | ✅ | ✅ |
-| concept\03_advanced\04_macros.md | L3 | 2269 | 22 | 3 | 0 | 8 | 8 | 51 | 8 | ✅ | ✅ | ✅ |
+| concept\03_advanced\04_macros.md | L3 | 2273 | 22 | 3 | 0 | 8 | 8 | 51 | 8 | ✅ | ✅ | ✅ |
 | concept\03_advanced\05_rust_ffi.md | L3 | 660 | 3 | 3 | 0 | 3 | 3 | 10 | 6 | ✅ | ✅ | ✅ |
 | concept\03_advanced\06_pin_unpin.md | L3 | 698 | 3 | 3 | 0 | 3 | 2 | 10 | 6 | ✅ | ✅ | ✅ |
 | concept\03_advanced\07_proc_macro.md | L3 | 753 | 3 | 3 | 0 | 3 | 2 | 9 | 6 | ✅ | ✅ | ✅ |
@@ -166,7 +166,7 @@
 | concept\03_advanced\10_concurrency_patterns.md | L3 | 810 | 3 | 3 | 0 | 3 | 1 | 10 | 6 | ✅ | ✅ | ✅ |
 | concept\03_advanced\11_atomics_and_memory_ordering.md | L3 | 870 | 3 | 3 | 0 | 3 | 1 | 10 | 6 | ✅ | ✅ | ✅ |
 | concept\03_advanced\12_unsafe_rust_patterns.md | L3 | 886 | 3 | 3 | 0 | 3 | 1 | 11 | 6 | ✅ | ✅ | ✅ |
-| concept\03_advanced\14_custom_allocators.md | L3 | 807 | 3 | 3 | 0 | 3 | 1 | 12 | 6 | ✅ | ✅ | ✅ |
+| concept\03_advanced\14_custom_allocators.md | L3 | 801 | 3 | 3 | 0 | 3 | 1 | 12 | 6 | ✅ | ✅ | ✅ |
 | concept\03_advanced\15_zero_copy_parsing.md | L3 | 773 | 3 | 3 | 0 | 3 | 1 | 12 | 6 | ✅ | ✅ | ✅ |
 | concept\03_advanced\16_lock_free.md | L3 | 807 | 3 | 3 | 0 | 3 | 1 | 10 | 6 | ✅ | ✅ | ✅ |
 | concept\03_advanced\17_type_erasure.md | L3 | 793 | 3 | 3 | 0 | 3 | 1 | 10 | 6 | ✅ | ✅ | ✅ |
@@ -175,9 +175,9 @@
 | concept\03_advanced\20_stream_processing_semantics.md | L3 | 781 | 3 | 3 | 0 | 2 | 0 | 8 | 6 | ✅ | ✅ | ✅ |
 | concept\03_advanced\21_quiz_concurrency_async.md | L3 | 661 | 0 | 0 | 0 | 0 | 0 | 19 | 0 | ❌ | ✅ | ❌ |
 | concept\03_advanced\22_quiz_unsafe.md | L3 | 567 | 0 | 0 | 0 | 0 | 0 | 21 | 0 | ❌ | ✅ | ❌ |
-| concept\03_advanced\23_quiz_macros.md | L3 | 624 | 0 | 0 | 0 | 0 | 0 | 23 | 0 | ❌ | ✅ | ❌ |
+| concept\03_advanced\23_quiz_macros.md | L3 | 626 | 0 | 0 | 0 | 0 | 0 | 23 | 0 | ❌ | ✅ | ❌ |
 | concept\04_formal\01_linear_logic.md | L4 | 1114 | 14 | 0 | 0 | 4 | 5 | 13 | 3 | ✅ | ✅ | ✅ |
-| concept\04_formal\02_type_theory.md | L4 | 1115 | 27 | 0 | 0 | 4 | 5 | 15 | 3 | ✅ | ✅ | ✅ |
+| concept\04_formal\02_type_theory.md | L4 | 1148 | 27 | 0 | 0 | 4 | 5 | 15 | 3 | ✅ | ✅ | ✅ |
 | concept\04_formal\03_ownership_formal.md | L4 | 1472 | 12 | 0 | 0 | 1 | 5 | 10 | 3 | ✅ | ✅ | ✅ |
 | concept\04_formal\04_rustbelt.md | L4 | 1299 | 5 | 0 | 0 | 1 | 5 | 16 | 10 | ✅ | ✅ | ✅ |
 | concept\04_formal\05_verification_toolchain.md | L4 | 1411 | 3 | 0 | 0 | 1 | 4 | 17 | 6 | ✅ | ✅ | ✅ |
@@ -185,8 +185,8 @@
 | concept\04_formal\08_type_inference.md | L4 | 638 | 3 | 0 | 0 | 3 | 2 | 8 | 6 | ✅ | ✅ | ✅ |
 | concept\04_formal\09_linear_logic_applications.md | L4 | 682 | 3 | 0 | 0 | 3 | 1 | 10 | 6 | ✅ | ✅ | ✅ |
 | concept\04_formal\10_category_theory.md | L4 | 652 | 3 | 0 | 0 | 3 | 1 | 8 | 6 | ✅ | ✅ | ✅ |
-| concept\04_formal\11_separation_logic.md | L4 | 652 | 3 | 0 | 0 | 3 | 1 | 7 | 6 | ✅ | ✅ | ✅ |
-| concept\04_formal\12_denotational_semantics.md | L4 | 524 | 3 | 0 | 0 | 3 | 1 | 7 | 6 | ✅ | ✅ | ✅ |
+| concept\04_formal\11_separation_logic.md | L4 | 693 | 3 | 0 | 0 | 3 | 1 | 7 | 6 | ✅ | ✅ | ✅ |
+| concept\04_formal\12_denotational_semantics.md | L4 | 552 | 3 | 0 | 0 | 3 | 1 | 7 | 6 | ✅ | ✅ | ✅ |
 | concept\04_formal\13_formal_methods.md | L4 | 645 | 3 | 0 | 0 | 3 | 1 | 7 | 6 | ✅ | ✅ | ✅ |
 | concept\04_formal\14_lambda_calculus.md | L4 | 598 | 3 | 0 | 0 | 3 | 1 | 9 | 6 | ✅ | ✅ | ✅ |
 | concept\04_formal\15_hoare_logic.md | L4 | 744 | 3 | 0 | 0 | 3 | 2 | 6 | 6 | ✅ | ✅ | ✅ |
@@ -197,7 +197,7 @@
 | concept\04_formal\21_type_semantics.md | L4 | 823 | 3 | 0 | 0 | 3 | 0 | 18 | 6 | ✅ | ✅ | ✅ |
 | concept\04_formal\22_modern_verification_tools.md | L4 | 451 | 3 | 0 | 0 | 1 | 0 | 8 | 6 | ✅ | ✅ | ✅ |
 | concept\04_formal\23_programming_language_foundations.md | L4 | 333 | 3 | 0 | 0 | 1 | 0 | 10 | 6 | ✅ | ✅ | ✅ |
-| concept\04_formal\24_quiz_formal_methods.md | L4 | 538 | 0 | 0 | 0 | 0 | 0 | 10 | 0 | ❌ | ✅ | ❌ |
+| concept\04_formal\24_quiz_formal_methods.md | L4 | 540 | 0 | 0 | 0 | 0 | 0 | 10 | 0 | ❌ | ✅ | ❌ |
 | concept\05_comparative\01_rust_vs_cpp.md | L5 | 2072 | 9 | 0 | 0 | 2 | 10 | 12 | 6 | ✅ | ✅ | ✅ |
 | concept\05_comparative\02_cpp_abi_object_model.md | L5 | 728 | 3 | 0 | 0 | 3 | 0 | 17 | 6 | ✅ | ✅ | ✅ |
 | concept\05_comparative\02_rust_vs_go.md | L5 | 918 | 3 | 0 | 0 | 3 | 6 | 11 | 6 | ✅ | ✅ | ✅ |

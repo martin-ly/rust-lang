@@ -1,15 +1,17 @@
-//! # 练习 3: 运算符重载
+//! # 练习 3: 运算符重载 / Exercise 3: Operator Overloading
 //!
-//! **难度**: Medium  
-//! **考点**: std::ops 特质、运算符重载
+//! **难度 / Difficulty**: Medium  
+//! **考点 / Focus**: std::ops 特质、运算符重载
+//!   std::ops traits, operator overloading
 //!
-//! ## 题目描述
+//! ## 题目描述 / Problem Description
 //!
 //! 实现一个简单的二维向量类型，支持加法和减法运算。
+//! Implement a simple 2D vector type supporting addition and subtraction.
 
 use std::ops::{Add, Sub};
 
-/// 二维向量
+/// 二维向量 / 2D vector
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Vec2 {
     pub x: f64,
@@ -22,11 +24,13 @@ impl Vec2 {
     }
 
     /// 计算长度
+    /// Calculates the magnitude
     pub fn magnitude(&self) -> f64 {
         (self.x * self.x + self.y * self.y).sqrt()
     }
 
     /// 点积
+    /// Computes the dot product
     pub fn dot(self, other: Self) -> f64 {
         self.x * other.x + self.y * other.y
     }

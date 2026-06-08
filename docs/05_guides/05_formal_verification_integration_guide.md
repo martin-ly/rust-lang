@@ -2,7 +2,6 @@
 
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
-
 > **版本**: Rust 1.96.0+
 > **工具**: Miri, Kani, Prusti, Creusot, Aeneas
 > **最后更新**: 2026-05-08

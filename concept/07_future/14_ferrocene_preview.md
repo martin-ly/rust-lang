@@ -1,7 +1,7 @@
 # Ferrocene 预研：Rust 的安全关键认证之路
 >
 > **EN**: Security Practices
-> **Summary**: Security Practices. Core Rust concept covering formal methods foundations, mechanism analysis.
+> **Summary**: Security Practices. Core Rust concept covering formal methods foundations, verification techniques, mechanism analysis.
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

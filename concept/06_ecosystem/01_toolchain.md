@@ -1,7 +1,7 @@
 # Toolchain（工具链与 Cargo）
 >
 > **EN**: Toolchain
-> **Summary**: Toolchain. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Toolchain. Guide to 01 Toolchain.
 > **受众**: [进阶]
 > **内容分级**: [综述级]
 >

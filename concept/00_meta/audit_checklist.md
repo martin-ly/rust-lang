@@ -1,7 +1,7 @@
 # 概念一致性检查清单（Concept Consistency Audit Checklist）
 >
 > **EN**: 概念一致性检查清单（Concept Consistency Audit Checklist） (Chinese)
-> **Summary**: 概念一致性检查清单. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: 概念一致性检查清单. Quality assurance checklist for maintaining knowledge base consistency.
 > **受众**: [专家]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **Bloom 层级**: 应用

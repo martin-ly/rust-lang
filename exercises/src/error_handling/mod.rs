@@ -1,9 +1,10 @@
-//! # 错误处理练习
+//! # 错误处理练习 / Error Handling Exercises
 //!
-//! 本模块包含 5 道练习题（当前完成 3 道），涵盖：
-//! - Result 与 Option
-//! - 自定义错误类型
-//! - 错误传播
+//! 本模块包含练习题，涵盖：
+//! This module contains exercises covering:
+//! - Result 与 Option / Result and Option
+//! - 自定义错误类型 / Custom error types
+//! - 错误传播 / Error propagation
 
 pub mod ex01_result_option;
 pub mod ex02_custom_error;

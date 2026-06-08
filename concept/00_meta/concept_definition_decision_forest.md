@@ -1,7 +1,7 @@
 # Rust 知识体系概念定义判定森林（Concept Definition Decision Forest）
 >
 > **EN**: Rust 知识体系概念定义判定森林（Concept Definition Decision Forest） (Chinese)
-> **Summary**: Rust 知识体系概念定义判定森林. Core Rust concept covering practical examples.
+> **Summary**: Rust 知识体系概念定义判定森林. Core Rust concept covering theorem proving foundations, practical examples, design patterns.
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **受众**: [专家]
 > **Bloom 层级**: 元（Meta）

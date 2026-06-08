@@ -1,7 +1,7 @@
 # Rust 表征空间（Semantic / Representational Space）
 >
 > **EN**: Rust 表征空间（Semantic / Representational Space） (Chinese)
-> **Summary**: Rust 表征空间. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Rust 表征空间. Semantic expressiveness analysis and representation space mapping.
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **受众**: [研究者]
 > **Bloom 层级**: 分析 → 评价

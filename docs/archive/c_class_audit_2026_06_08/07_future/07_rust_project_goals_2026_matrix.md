@@ -2,7 +2,6 @@
 
 > **分级**: [A]
 > **Bloom 层级**: L4-L5 (分析/评价)
-
 > **文档定位**: 本文件建立 Rust 官方 2026 Project Goals 与项目知识体系的**双向映射**，确保 L7 前沿层的内容基于官方路线图而非猜测。
 > **更新频率**: 每月对照 [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/) 月度报告更新状态。
 > **创建日期**: 2026-05-18

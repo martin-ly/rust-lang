@@ -1,21 +1,25 @@
-//! # 练习 2: Mutex 计数器
+//! # 练习 2: Mutex 计数器 / Exercise 2: Mutex Counter
 //!
-//! **难度**: Medium  
-//! **考点**: Mutex、Arc、线程间共享可变状态
+//! **难度 / Difficulty**: Medium  
+//! **考点 / Focus**: Mutex、Arc、线程间共享可变状态
+//!   Mutex, Arc, sharing mutable state across threads
 //!
-//! ## 题目描述
+//! ## 题目描述 / Problem Description
 //!
 //! 使用 `Arc<Mutex<T>>` 实现线程安全的计数器。
+//! Use `Arc<Mutex<T>>` to implement a thread-safe counter.
 
 use std::sync::{Arc, Mutex};
 use std::thread;
 
 /// 创建线程安全的计数器
+/// Creates a thread-safe counter
 pub fn create_counter(initial: i32) -> Arc<Mutex<i32>> {
     Arc::new(Mutex::new(initial))
 }
 
 /// 多个线程同时递增计数器
+/// Increments the counter concurrently from multiple threads
 pub fn increment_concurrently(counter: &Arc<Mutex<i32>>, increments: usize, threads: usize) {
     let mut handles = Vec::new();
 
@@ -36,6 +40,7 @@ pub fn increment_concurrently(counter: &Arc<Mutex<i32>>, increments: usize, thre
 }
 
 /// 获取当前计数器值
+/// Gets the current counter value
 pub fn get_count(counter: &Arc<Mutex<i32>>) -> i32 {
     *counter.lock().unwrap()
 }

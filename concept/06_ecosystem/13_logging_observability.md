@@ -2,7 +2,7 @@
 # 日志与可观测性：Rust 服务端监控生态
 >
 > **EN**: 日志与可观测性：Rust 服务端监控生态 (Chinese)
-> **Summary**: 日志与可观测性：Rust 服务端监控生态 (Chinese). Core Rust concept covering mechanism analysis.
+> **Summary**: 日志与可观测性：Rust 服务端监控生态 (Chinese). Core Rust concept covering mechanism analysis, ecosystem and tooling, HTTP and web services.
 > **受众**: [进阶]
 > **内容分级**: [综述级]
 > **Bloom 层级**: 应用 → 分析

@@ -3,7 +3,7 @@
 # 类型擦除与动态分发
 >
 > **EN**: 类型擦除与动态分发 (Chinese)
-> **Summary**: 类型擦除与动态分发 (Chinese). Core Rust concept covering mechanism analysis.
+> **Summary**: 类型擦除与动态分发 (Chinese). Core Rust concept covering mechanism analysis, in-depth analysis, trait system mechanics.
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 应用
 > **定位**: 深入探讨 Rust 中的**类型擦除**技术——从 trait object 到 vtable，分析动态分发如何在保持类型安全的同时实现运行时多态。

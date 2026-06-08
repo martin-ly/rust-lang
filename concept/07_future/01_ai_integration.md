@@ -1,7 +1,7 @@
 # AI × Rust：生成-验证闭环与确定性容器
 >
 > **EN**: AI × Rust：生成-验证闭环与确定性容器 (Chinese)
-> **Summary**: AI × Rust：生成-验证闭环与确定性容器 (Chinese). Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: AI × Rust：生成-验证闭环与确定性容器 (Chinese). Guide to 01 Ai Integration.
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]

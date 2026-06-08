@@ -37,7 +37,8 @@ SQLx 支持 PostgreSQL、MySQL、SQLite 三大主流数据库，通过 `sqlx::Da
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-SQLx 的核心魔法在于两个过程宏 —— `query!()` 和 `query_as!()`。它们并非简单的文本替换，而是在编译期执行实际的数据库连接与查询分析：
+SQLx 的核心魔法在于两个过程宏 —— `query!()` 和 `query_as!()`。
+它们并非简单的文本替换，而是在编译期执行实际的数据库连接与查询分析：
 
 | 宏 | 用途 | 返回类型 |
 |---|---|---|
@@ -192,7 +193,8 @@ sequenceDiagram
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-在线验证在 CI/CD 环境中往往不切实际 —— 构建服务器通常无法访问生产数据库。SQLx 提供**离线模式**解决此问题：
+在线验证在 CI/CD 环境中往往不切实际 —— 构建服务器通常无法访问生产数据库。
+SQLx 提供**离线模式**解决此问题：
 
 ```bash
 # 开发环境：生成查询元数据缓存
@@ -216,7 +218,8 @@ export SQLX_OFFLINE=true
 cargo build --release
 ```
 
-此时宏展开不再尝试连接数据库，而是直接从 `sqlx-data.json` 中读取元数据进行类型校验。如果代码中的查询与缓存不匹配，编译失败并提示 `cargo sqlx prepare`。
+此时宏展开不再尝试连接数据库，而是直接从 `sqlx-data.json` 中读取元数据进行类型校验。
+如果代码中的查询与缓存不匹配，编译失败并提示 `cargo sqlx prepare`。
 
 ```rust,ignore
 // 离线模式下依然完全类型安全
@@ -270,7 +273,8 @@ struct User {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-`#[derive(sqlx::FromRow)]` 自动生成从数据库行到结构体的映射逻辑。该过程宏会：
+`#[derive(sqlx::FromRow)]` 自动生成从数据库行到结构体的映射逻辑。
+该过程宏会：
 
 1. 检查结构体字段名与查询结果列名的匹配（支持 `#[sqlx(rename = "column_name")]` 覆盖）
 2. 为每个字段调用 `sqlx::Decode` trait 的反序列化方法
@@ -362,7 +366,9 @@ stateDiagram-v2
     Closed --> [*]: 释放资源
 ```
 
-连接回收通过 `Drop` trait 实现：`PoolConnection<DB>` 被丢弃时，若连接仍有效，则归还至空闲队列；若已失效，则关闭并可能触发新连接的创建（若当前连接数低于 `min_connections`）。
+连接回收通过 `Drop` trait 实现：
+`PoolConnection<DB>` 被丢弃时，若连接仍有效，则归还至空闲队列；
+若已失效，则关闭并可能触发新连接的创建（若当前连接数低于 `min_connections`）。
 
 > [来源: SQLx源码 — pool/mod.rs](https://github.com/launchbadge/sqlx/tree/main/sqlx-core/src/pool)
 
@@ -474,17 +480,11 @@ tx.commit().await?;
 ## 权威来源索引
 
 > **[来源: [crates.io](https://crates.io/)]**
->
 > **[来源: [docs.rs](https://docs.rs/)]**
->
 > **[来源: [Rust Database Ecosystem](https://www.areweadyet.org/topics/database/)]**
->
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
 > **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]

@@ -1,15 +1,18 @@
-//! # 练习 1: 创建线程
+//! # 练习 1: 创建线程 / Exercise 1: Spawning Threads
 //!
-//! **难度**: Easy  
-//! **考点**: std::thread::spawn、join
+//! **难度 / Difficulty**: Easy  
+//! **考点 / Focus**: std::thread::spawn、join
+//!   std::thread::spawn, join
 //!
-//! ## 题目描述
+//! ## 题目描述 / Problem Description
 //!
 //! 创建线程并发执行任务，收集结果。
+//! Spawn threads to execute tasks concurrently and collect results.
 
 use std::thread;
 
 /// 创建多个线程计算数字的平方
+/// Spawns multiple threads to compute squares of numbers
 pub fn parallel_squares(numbers: Vec<i32>) -> Vec<i32> {
     let mut handles = Vec::new();
 
@@ -26,6 +29,7 @@ pub fn parallel_squares(numbers: Vec<i32>) -> Vec<i32> {
 }
 
 /// 使用线程计算从 1 到 n 的和
+/// Uses a thread to compute the sum from 1 to n
 pub fn threaded_sum(n: u64) -> u64 {
     let handle = thread::spawn(move || (1..=n).sum());
     handle.join().unwrap()
@@ -39,7 +43,7 @@ mod tests {
     fn test_parallel_squares() {
         let nums = vec![1, 2, 3, 4, 5];
         let mut result = parallel_squares(nums);
-        result.sort(); // 线程完成顺序不确定
+        result.sort(); // 线程完成顺序不确定 / Completion order is non-deterministic
         assert_eq!(result, vec![1, 4, 9, 16, 25]);
     }
 

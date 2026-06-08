@@ -4,7 +4,7 @@
 # 交叉编译：多目标平台支持与条件编译
 >
 > **EN**: 交叉编译：多目标平台支持与条件编译 (Chinese)
-> **Summary**: 交叉编译：多目标平台支持与条件编译 (Chinese). Core Rust concept covering practical examples, mechanism analysis.
+> **Summary**: 交叉编译：多目标平台支持与条件编译 (Chinese). Core Rust concept covering practical examples, mechanism analysis, embedded systems programming.
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A** — Application

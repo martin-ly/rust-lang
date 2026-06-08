@@ -1,16 +1,19 @@
-//! # 练习 3: MPSC 通道
+//! # 练习 3: MPSC 通道 / Exercise 3: MPSC Channels
 //!
-//! **难度**: Easy  
-//! **考点**: mpsc::channel、多生产者单消费者
+//! **难度 / Difficulty**: Easy  
+//! **考点 / Focus**: mpsc::channel、多生产者单消费者
+//!   mpsc::channel, multiple producers single consumer
 //!
-//! ## 题目描述
+//! ## 题目描述 / Problem Description
 //!
 //! 使用通道在线程间传递消息。
+//! Use channels to pass messages between threads.
 
 use std::sync::mpsc;
 use std::thread;
 
 /// 创建多个生产者线程，发送数字，收集所有结果
+/// Creates multiple producer threads, sends numbers, collects all results
 pub fn collect_from_workers(num_workers: usize, items_per_worker: usize) -> Vec<usize> {
     let (tx, rx) = mpsc::channel();
 
@@ -24,12 +27,14 @@ pub fn collect_from_workers(num_workers: usize, items_per_worker: usize) -> Vec<
     }
 
     // 丢弃原始发送者，这样当所有克隆都结束时通道会关闭
+    // Drop original sender so channel closes when all clones are dropped
     drop(tx);
 
     rx.iter().collect()
 }
 
 /// 发送一批工作并确认收到所有结果
+/// Sends a batch of work and confirms all results are received
 pub fn send_and_confirm(values: Vec<i32>) -> Vec<i32> {
     let (tx, rx) = mpsc::channel();
 

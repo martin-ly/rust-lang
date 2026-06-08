@@ -3,7 +3,7 @@
 # Async/Await 高级主题
 >
 > **EN**: Async/Await 高级主题 (Chinese)
-> **Summary**: Async/Await 高级主题 (Chinese). Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Async/Await 高级主题 (Chinese). Guide to 02 Async Advanced.
 > **受众**: [专家]
 > **层次定位**: L3 高级概念 / 异步子域 — 高级主题
 > **前置依赖**: [Async/Await 基础](./02_async.md)

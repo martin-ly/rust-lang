@@ -39,7 +39,6 @@
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -524,13 +523,14 @@ graph LR
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - Rust 1.94 迁移指南
-- [Rust 1.94 特性速查
+- Rust 1.94 特性速查
 - [性能调优指南](../../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -556,21 +556,13 @@ graph LR
 ## 权威来源索引
 
 > **[来源: Wikipedia - Design Pattern]**
-
 > **[来源: Rust API Guidelines]**
-
 > **[来源: Gang of Four]**
-
 > **[来源: ACM - Software Design Patterns]**
-
 > **[来源: Wikipedia - Formal Methods]**
-
 > **[来源: Coq Reference]**
-
 > **[来源: TLA+]**
-
 > **[来源: ACM - Formal Verification]**
-
 > **[来源: POPL - Programming Languages Research]**
 > **[来源: PLDI - Programming Language Design]**
 > **[来源: Wikipedia - Memory Safety]**

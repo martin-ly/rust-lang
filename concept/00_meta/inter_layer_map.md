@@ -1,7 +1,7 @@
 # 跨层知识图谱（Inter-Layer Dependency Map）
 >
 > **EN**: 跨层知识图谱（Inter-Layer Dependency Map） (Chinese)
-> **Summary**: 跨层知识图谱. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: 跨层知识图谱. Cross-layer knowledge graph mapping concept dependencies.
 >
 > **受众**: [进阶]
 >

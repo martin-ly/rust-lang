@@ -1,7 +1,7 @@
 # Concept 元层
 >
 > **EN**: Concept 元层 (Chinese)
-> **Summary**: Concept 元层 (Chinese). Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Concept 元层 (Chinese). Meta layer overview and navigation hub.
 > **受众**: [初学者]
 > 本目录包含学习工具、质量基础设施和元数据。
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链

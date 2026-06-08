@@ -6,7 +6,7 @@
 # Security & Cryptography（安全与密码学）
 >
 > **EN**: Security Practices
-> **Summary**: Security Practices. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Security Practices. Guide to 43 Security Cryptography.
 >
 > **受众**: [进阶]
 

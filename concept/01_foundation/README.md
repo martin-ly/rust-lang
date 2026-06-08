@@ -1,7 +1,7 @@
 # L1 基础概念层（Foundation）
 >
 > **EN**: L1 基础概念层（Foundation） (Chinese)
-> **Summary**: L1 基础概念层. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: L1 基础概念层. L1 Foundation layer overview and navigation hub.
 > **受众**: [初学者]
 > **定位**：Rust 最核心的基础性概念，是所有进阶内容的**必要前提**。本层内容对齐 TRPL 第 3-10 章、Wikipedia 核心词条、Stanford/CMU 基础课程。
 > **Bloom 层级**: 记忆 → 理解

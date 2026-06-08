@@ -3,7 +3,7 @@
 # Unsafe Rust
 >
 > **EN**: Unsafe Rust
-> **Summary**: Unsafe Rust. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Unsafe Rust. Guide to 03 Unsafe.
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[Unsafe Rust](../../knowledge/03_advanced/unsafe)

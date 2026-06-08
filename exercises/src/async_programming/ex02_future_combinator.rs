@@ -1,15 +1,18 @@
-//! # 练习 2: Future 组合
+//! # 练习 2: Future 组合 / Exercise 2: Future Combinators
 //!
-//! **难度**: Medium  
-//! **考点**: futures::future::join、并发执行
+//! **难度 / Difficulty**: Medium  
+//! **考点 / Focus**: futures::future::join、并发执行
+//!   futures::future::join, concurrent execution
 //!
-//! ## 题目描述
+//! ## 题目描述 / Problem Description
 //!
 //! 使用 Future 组合子并发执行多个异步任务。
+//! Use Future combinators to execute multiple async tasks concurrently.
 
 use std::future::Future;
 
 /// 并发执行两个 Future，返回结果元组
+/// Runs two Futures concurrently, returning a tuple of results
 pub async fn run_two<T1, T2, F1, F2>(f1: F1, f2: F2) -> (T1, T2)
 where
     F1: Future<Output = T1>,
@@ -19,6 +22,7 @@ where
 }
 
 /// 并发计算多个数字的平方
+/// Concurrently computes squares of multiple numbers
 pub async fn concurrent_squares(values: Vec<i32>) -> Vec<i32> {
     let futures: Vec<_> = values.into_iter().map(async_square).collect();
     futures::future::join_all(futures).await
@@ -29,6 +33,7 @@ async fn async_square(n: i32) -> i32 {
 }
 
 /// 返回先完成的 Future 的结果
+/// Returns the result of the Future that completes first
 pub async fn race_futures<T, F1, F2>(f1: F1, f2: F2) -> T
 where
     F1: Future<Output = T> + Unpin,

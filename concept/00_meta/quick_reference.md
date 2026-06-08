@@ -1,7 +1,7 @@
 # Rust 概念速查卡片（Quick Reference）
 >
 > **EN**: Rust 概念速查卡片（Quick Reference） (Chinese)
-> **Summary**: Rust 概念速查卡片. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Rust 概念速查卡片. Quick-reference cards for Rust syntax, patterns, and standard library.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 

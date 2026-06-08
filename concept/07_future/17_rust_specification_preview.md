@@ -1,7 +1,7 @@
 # Rust 语言规范预研：从参考文档到形式化规范
 >
 > **EN**: Formal Methods
-> **Summary**: Formal Methods. Core Rust concept covering formal methods foundations, mechanism analysis.
+> **Summary**: Formal Methods. Core Rust concept covering formal methods foundations, verification techniques, mechanism analysis.
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

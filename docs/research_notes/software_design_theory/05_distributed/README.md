@@ -32,7 +32,7 @@
 
 每个模式包含以下形式化要素：
 
-```
+```text
 Def [模式名]  :=  核心概念定义
 Axiom [A编号]  :=  基本假设
 Theorem [T编号]  :=  可证明的性质
@@ -48,7 +48,6 @@ Proof  :=  L2 级自然语言证明
 ## 🆕 Rust 1.94 深度整合更新
 >
 > **[来源: Rust Official Docs]**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
@@ -76,13 +75,14 @@ Proof  :=  L2 级自然语言证明
 #### 相关文档
 
 - Rust 1.94 迁移指南
-- [Rust 1.94 特性速查
+- Rust 1.94 特性速查
 - [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -99,17 +99,10 @@ Proof  :=  L2 级自然语言证明
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
 > **[来源: ACM - Systems Programming Languages]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**

@@ -6,7 +6,7 @@
 # Rust 错误处理基础
 >
 > **EN**: Error Handling
-> **Summary**: Error Handling. Core Rust concept covering mechanism analysis.
+> **Summary**: Error Handling. Core Rust concept covering mechanism analysis, type system mechanics, error handling strategies.
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[错误处理基础](../../knowledge/02_intermediate/02_error_handling.md)

@@ -1,7 +1,7 @@
 # Rust for Linux ：操作系统内核中的内存安全
 >
 > **EN**: Operating Systems
-> **Summary**: Operating Systems. Core Rust concept covering mechanism analysis.
+> **Summary**: Operating Systems. Core Rust concept covering mechanism analysis, in-depth analysis, FFI interoperability.
 >
 > **受众**: [专家]
 > **内容分级**: [综述级]

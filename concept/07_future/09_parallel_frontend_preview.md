@@ -1,7 +1,7 @@
 # 并行 前端编译预研：Rust 编译器 的多核扩展
 >
 > **EN**: Compiler Internals
-> **Summary**: Compiler Internals. Core Rust concept covering mechanism analysis.
+> **Summary**: Compiler Internals. Core Rust concept covering mechanism analysis, parallel programming, threading and synchronization.
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

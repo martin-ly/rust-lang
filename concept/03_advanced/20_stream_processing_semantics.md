@@ -3,7 +3,7 @@
 # 流处理语义：从 Dataflow Model 到 Differential Dataflow
 >
 > **EN**: 流处理语义：从 Dataflow Model 到 Differential Dataflow (Chinese)
-> **Summary**: 流处理语义：从 Dataflow Model 到 Differential Dataflow (Chinese). Core Rust concept covering mechanism analysis.
+> **Summary**: 流处理语义：从 Dataflow Model 到 Differential Dataflow (Chinese). Core Rust concept covering mechanism analysis, in-depth analysis.
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure

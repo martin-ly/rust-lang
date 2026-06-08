@@ -6,7 +6,7 @@
 >
 > **EN**: Compiler Internals
 > **Summary**:
-Compiler Internals. Core Rust concept covering mechanism analysis.
+Compiler Internals. Core Rust concept covering mechanism analysis, parallel programming, compiler internals.
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 系统梳理 Rust 编译器（rustc）的核心基础设施——并行前端、Cranelift 后端、build-std、Sanitizer——分析其对编译速度、目标平台和开发体验的影响。

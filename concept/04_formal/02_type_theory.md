@@ -3,16 +3,25 @@
 # Type Theory（类型论基础）
 >
 > **EN**: Type Theory
-> **Summary**: Type Theory. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Type Theory. Guide to 02 Type Theory.
 > **受众**: [研究者]
-> ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
+> ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。
+> 如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >
 > **层级**: L4 形式化理论
 > **A/S/P 标记**: **S** — Structure（心智模型）
 > **双维定位**: C×Ana — 分析 Rust 类型系统的形式化边界
-> **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Generics](../02_intermediate/02_generics.md) · [Traits](../02_intermediate/01_traits.md) [来源: [Wikipedia — Hindley-Milner](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system)]
-> **后置概念**: [Ownership Formalization](./03_ownership_formal.md) · [RustBelt](./04_rustbelt.md)
-> **主要来源**: [Wikipedia: Type theory](https://en.wikipedia.org/wiki/Type_theory) · [Pierce 2002, *Types and Programming Languages*](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Cardelli 1996, *Type Systems* (ACM Computing Surveys)](https://dl.acm.org/doi/10.1145/6041.6042)
+> **前置概念**:
+> [Type System](../01_foundation/04_type_system.md) ·
+> [Generics](../02_intermediate/02_generics.md) ·
+> [Traits](../02_intermediate/01_traits.md)
+> [来源: [Wikipedia — Hindley-Milner](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system)]
+> **后置概念**:
+> [Ownership Formalization](./03_ownership_formal.md) · [RustBelt](./04_rustbelt.md)
+> **主要来源**:
+> [Wikipedia: Type theory](https://en.wikipedia.org/wiki/Type_theory) ·
+> [Pierce 2002, *Types and Programming Languages*](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
+> [Cardelli 1996, *Type Systems* (ACM Computing Surveys)](https://dl.acm.org/doi/10.1145/6041.6042)
 
 ---
 
@@ -196,10 +205,18 @@ classDiagram
     note for HMInference "Rust 局部类型推断的理论基础"
 ```
 
-> **认知功能**: 本类图将类型论八十年演进压缩为一张层次地图——从 λ→ 到 Dependent Types 的每一步扩展都清晰可见。建议对照 Rust 实际特性（泛型、GATs、所有权）定位其理论根基。关键洞察：Rust 刻意选择位于 `System F + HM + 线性类型` 的交集，排除了不可判定的 Dependent Types 和推断困难的完整 `System Fω`。 [来源: 💡 原创分析]
+> **认知功能**:
+> 本类图将类型论八十年演进压缩为一张层次地图——从 λ→ 到 Dependent Types 的每一步扩展都清晰可见。
+> 建议对照 Rust 实际特性（泛型、GATs、所有权）定位其理论根基。
+> 关键洞察：Rust 刻意选择位于 `System F + HM + 线性类型` 的交集，排除了不可判定的 Dependent Types 和推断困难的完整 `System Fω`。
+> [来源: 💡 原创分析]
 > [来源: [TAPL — Pierce 2002]]
-
-> **思维表征说明**: `classDiagram` 将类型论中的**层次扩展关系**可视化——每个类型系统不是孤立的存在，而是在前一级基础上增加新能力。箭头方向表示「继承/扩展」：`λ→` 在无类型 λ 上添加类型，`System F` 在 `λ→` 上添加参数多态，`System Fω` 在 `System F` 上添加类型构造子抽象。Rust 的设计哲学是「选择足够表达力但可判定的子集」——因此 Rust 位于 `System F` + `HM` + `线性类型` 的交集，刻意排除了 `Dependent Types`（不可判定）和完整 `System Fω`（推断困难）。 [来源: Pierce 2002, *TAPL* Ch.11-30; Cardelli 1996, *Type Systems*]
+> **思维表征说明**:
+>
+> `classDiagram` 将类型论中的**层次扩展关系**可视化——每个类型系统不是孤立的存在，而是在前一级基础上增加新能力。
+> 箭头方向表示「继承/扩展」：`λ→` 在无类型 λ 上添加类型，`System F` 在 `λ→` 上添加参数多态，`System Fω` 在 `System F` 上添加类型构造子抽象。
+> Rust 的设计哲学是「选择足够表达力但可判定的子集」——因此 Rust 位于 `System F` + `HM` + `线性类型` 的交集，刻意排除了 `Dependent Types`（不可判定）和完整 `System Fω`（推断困难）。
+> [来源: Pierce 2002, *TAPL* Ch.11-30; Cardelli 1996, *Type Systems*]
 
 ---
 
@@ -214,7 +231,6 @@ Preservation: 若 ⊢ e : τ 且 e → e'，则 ⊢ e' : τ                    [
 ```
 
 ### 4.1 定理一致性矩阵（11行，带⟹推理链）
->
 
 > **[学术来源: Pierce 2002, *TAPL*; Cardelli 1996; Wright & Felleisen 1994]** 以下矩阵建立从 λ→ 到 Rust 扩展的完整定理依赖网络。
 
@@ -247,7 +263,8 @@ Preservation: 若 ⊢ e : τ 且 e → e'，则 ⊢ e' : τ                    [
 
 ### 5.1 反命题 1: "类型安全保证无运行时错误"
 
-> 语义/运行时层 — 类型安全排除的是**类型错误**和**未定义行为**，不保证终止性、资源充足性或 FFI 安全。 [来源: [RustBelt Project](https://plv.mpi-sws.org/rustbelt/)]
+> 语义/运行时层 — 类型安全排除的是**类型错误**和**未定义行为**，不保证终止性、资源充足性或 FFI 安全。
+> [来源: [RustBelt Project](https://plv.mpi-sws.org/rustbelt/)]
 
 ```mermaid
 graph TD
@@ -268,7 +285,10 @@ graph TD
     style T1 fill:#6f6
 ```
 
-> **认知功能**: 此决策树将「类型安全」的边界逐层剥离，训练读者区分「类型错误」与「非类型错误」（非终止、资源耗尽、unsafe）。建议遇到 panic 时沿树回溯，判断问题是否属于类型系统管辖范围。关键洞察：Progress + Preservation 仅保证良类型程序「不卡住」，不保证终止性、资源充足或 FFI 安全。 [来源: 💡 原创分析]
+> **认知功能**:
+> 此决策树将「类型安全」的边界逐层剥离，训练读者区分「类型错误」与「非类型错误」（非终止、资源耗尽、unsafe）。
+> 建议遇到 panic 时沿树回溯，判断问题是否属于类型系统管辖范围。关键洞察：Progress + Preservation 仅保证良类型程序「不卡住」，不保证终止性、资源充足或 FFI 安全。
+> [来源: 💡 原创分析]
 
 **四层分析**:
 
@@ -280,9 +300,9 @@ graph TD
 | 工程 | `unwrap()` panic | Safe Rust 内的受控崩溃，非 UB 但属错误 |
 
 ### 5.2 反命题 2: "所有类型系统都是 sound 的"
->
 
-> 历史/理论层 — 类型系统的 soundness 是元定理，需证明，非天然成立。Curry 悖论等历史案例展示了无类型或弱类型系统的内在不一致性。
+> 历史/理论层 — 类型系统的 soundness 是元定理，需证明，非天然成立。
+> Curry 悖论等历史案例展示了无类型或弱类型系统的内在不一致性。
 
 ```mermaid
 graph TD
@@ -303,7 +323,11 @@ graph TD
     style T1 fill:#6f6
 ```
 
-> **认知功能**: 该决策树以四个历史/理论反例说明 soundness 不是天然属性，而是需证明的元定理。建议在设计或评估新类型系统扩展时，逐一排查自指构造、任意递归类型和 `null` 子类型三类风险。关键洞察：Curry 悖论与 billion-dollar mistake 是类型论教科书级漏洞——它们解释了为什么现代语言必须限制自指并消除 null。 [来源: 💡 原创分析]
+> **认知功能**:
+> 该决策树以四个历史/理论反例说明 soundness 不是天然属性，而是需证明的元定理。
+> 建议在设计或评估新类型系统扩展时，逐一排查自指构造、任意递归类型和 `null` 子类型三类风险。
+> 关键洞察：Curry 悖论与 billion-dollar mistake 是类型论教科书级漏洞——它们解释了为什么现代语言必须限制自指并消除 null。
+> [来源: 💡 原创分析]
 
 **历史反例对照**:
 
@@ -315,7 +339,6 @@ graph TD
 | pre-NLL Rust | 借用检查安全 | 某些合法模式被错误拒绝（不完备），存在悬垂借用误放过 | 生命周期算法需持续验证 |
 
 ### 5.3 反命题 3: "子类型总是安全的"
->
 
 > 类型论层 — 子类型的安全性高度依赖 Variance 的正确标注。协变/逆变/不变的混淆是真实类型系统漏洞的常见来源。
 
@@ -338,7 +361,11 @@ graph TD
     style T2 fill:#6f6
 ```
 
-> **认知功能**: 此决策树将协变/逆变/不变理论转化为可操作的类型安全检查清单。建议在设计泛型容器或阅读标准库源码时，据此验证 Variance 标注是否与内部可变性一致。关键洞察：协变加可变写入等于类型污染（Java 数组的设计缺陷），而 `Cell<T>` 和 `&mut T` 的不变性正是 Rust 为此付出的安全成本。 [来源: 💡 原创分析]
+> **认知功能**:
+> 此决策树将协变/逆变/不变理论转化为可操作的类型安全检查清单。
+> 建议在设计泛型容器或阅读标准库源码时，据此验证 Variance 标注是否与内部可变性一致。
+> 关键洞察：协变加可变写入等于类型污染（Java 数组的设计缺陷），而 `Cell<T>` 和 `&mut T` 的不变性正是 Rust 为此付出的安全成本。
+> [来源: 💡 原创分析]
 
 **Variance 安全性分析**:
 
@@ -369,7 +396,12 @@ graph TD
 
 ### Step 2: "类型和集合的关系？"
 
-**L1-L2 映射**: [`../01_foundation/04_type_system.md`](../01_foundation/04_type_system.md) §2 ADT 代数语义 · [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md) §1 Type Class [来源: [PLDI 2025 — Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]
+**L1-L2 映射**:
+
+[`../01_foundation/04_type_system.md`](../01_foundation/04_type_system.md) §2 ADT 代数语义 ·
+[`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md)
+
+§1 Type Class [来源: [PLDI 2025 — Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]
 
 ```text
 直觉: 类型 ≈ 值的集合（粗略类比）
@@ -390,7 +422,8 @@ graph TD
 
 ### Step 4: "多态是什么意思？"
 
-**L2-L4 映射**: [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md) §4.1 System F · 本节 L2
+**L2-L4 映射**: [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md)
+§4.1 System F · 本节 L2
 
 ```text
 System F 形式化:  identity = ΛT. λx:T. x : ∀T. T → T

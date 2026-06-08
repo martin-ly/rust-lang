@@ -1,7 +1,7 @@
 # Rust 知识体系学习指南（Learning Guide）
 >
 > **EN**: Rust 知识体系学习指南（Learning Guide） (Chinese)
-> **Summary**: Rust 知识体系学习指南. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Rust 知识体系学习指南. Structured learning path from beginner to expert Rust concepts.
 >
 > **受众**: [初学者]
 >

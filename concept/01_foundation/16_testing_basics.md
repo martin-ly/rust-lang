@@ -5,7 +5,7 @@
 # 测试基础：从单元测试到集成测试
 >
 > **EN**: Testing
-> **Summary**: Testing. Core Rust concept covering mechanism analysis.
+> **Summary**: Testing. Core Rust concept covering testing strategies, mechanism analysis.
 > **受众**: [初学者]
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+P** — Application + Procedure

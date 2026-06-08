@@ -4,7 +4,7 @@
 # 事件驱动架构 (Event-Driven Architecture)
 >
 > **EN**: 事件驱动架构 (Event-Driven Architecture) (Chinese)
-> **Summary**: 事件驱动架构 (Event-Driven Architecture) (Chinese). Core Rust concept covering mechanism analysis.
+> **Summary**: 事件驱动架构 (Event-Driven Architecture) (Chinese). Core Rust concept covering mechanism analysis, design patterns, ownership and borrowing.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 创造

@@ -1,7 +1,7 @@
 # Const Trait Impl 预研：常量上下文中的 Trait 泛化
 >
 > **EN**: Traits
-> **Summary**: Traits. Core Rust concept covering mechanism analysis.
+> **Summary**: Traits. Core Rust concept covering mechanism analysis, generic programming, trait system mechanics.
 >
 > **状态**: 🧪 Nightly 实验性
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)

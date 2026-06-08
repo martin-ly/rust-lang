@@ -2,7 +2,6 @@
 
 > **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **对齐日期**: 2026-05-12+ (Edition 2024)
 > **难度级别**: 🔴 高级
@@ -29,7 +28,6 @@
     - [推荐阅读顺序](#推荐阅读顺序)
     - [前置知识](#前置知识)
     - [关联阅读](#关联阅读)
-  - [**状态**: ✅ 完成](#状态--完成)
   - [权威来源索引](#权威来源索引)
 
 ---
@@ -160,6 +158,7 @@ Stack ≜ Frame*                    调用栈
 
 **最后更新**: 2026-03-07
 **状态**: ✅ 完成
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -176,9 +175,6 @@ Stack ≜ Frame*                    调用栈
 ## 权威来源索引
 
 > **[来源: Wikipedia - Memory Safety]**
-
 > **[来源: TRPL Ch. 4 - Ownership]**
-
 > **[来源: Rustonomicon - Ownership]**
-
 > **[来源: POPL 2018 - RustBelt]**

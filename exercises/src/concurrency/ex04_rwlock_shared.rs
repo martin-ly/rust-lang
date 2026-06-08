@@ -1,20 +1,23 @@
-//! # 练习 4: RwLock 共享状态
+//! # 练习 4: RwLock 共享状态 / Exercise 4: RwLock Shared State
 //!
-//! **难度**: Medium  
-//! **考点**: RwLock、读写锁、读多写少场景
+//! **难度 / Difficulty**: Medium  
+//! **考点 / Focus**: RwLock、读写锁、读多写少场景
+//!   RwLock, read-write lock, read-heavy scenarios
 //!
-//! ## 题目描述
+//! ## 题目描述 / Problem Description
 //!
 //! 使用 RwLock 实现一个缓存，支持并发读取和独占写入。
+//! Use RwLock to implement a cache supporting concurrent reads and exclusive writes.
 
 use std::collections::HashMap;
 use std::sync::{Arc, RwLock};
 use std::thread;
 
-/// 线程安全的缓存
+/// 线程安全的缓存 / Thread-safe cache
 pub type SharedCache<K, V> = Arc<RwLock<HashMap<K, V>>>;
 
 /// 创建共享缓存
+/// Creates a shared cache
 pub fn create_cache<K, V>() -> SharedCache<K, V>
 where
     K: Eq + std::hash::Hash,
@@ -23,6 +26,7 @@ where
 }
 
 /// 插入键值对
+/// Inserts a key-value pair
 pub fn cache_insert<K, V>(cache: &SharedCache<K, V>, key: K, value: V)
 where
     K: Eq + std::hash::Hash,
@@ -32,6 +36,7 @@ where
 }
 
 /// 读取键值
+/// Reads a value by key
 pub fn cache_get<K, V>(cache: &SharedCache<K, V>, key: &K) -> Option<V>
 where
     K: Eq + std::hash::Hash,
@@ -42,6 +47,7 @@ where
 }
 
 /// 并发读取缓存
+/// Reads cache concurrently
 pub fn concurrent_reads<K, V>(cache: &SharedCache<K, V>, keys: Vec<K>) -> Vec<Option<V>>
 where
     K: Eq + std::hash::Hash + Send + Sync + 'static,

@@ -3,7 +3,7 @@
 # Rust 职业市场全景：2026 年数据与分析
 >
 > **EN**: Rust 职业市场全景：2026 年数据与分析 (Chinese)
-> **Summary**: Rust 职业市场全景：2026 年数据与分析 (Chinese). Core Rust concept covering mechanism analysis.
+> **Summary**: Rust 职业市场全景：2026 年数据与分析 (Chinese). Core Rust concept covering mechanism analysis, AI/ML integration patterns.
 > **受众**: [入门 → 进阶]
 > **Bloom 层级**: 知道 → 分析
 > **A/S/P 标记**: **A** — Application

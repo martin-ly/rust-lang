@@ -1,17 +1,19 @@
-//! # 练习 3: 类型转换
+//! # 练习 3: 类型转换 / Exercise 3: Type Conversions
 //!
-//! **难度**: Easy  
-//! **考点**: From/Into 特质、类型安全转换
+//! **难度 / Difficulty**: Easy  
+//! **考点 / Focus**: From/Into 特质、类型安全转换
+//!   From/Into traits, type-safe conversions
 //!
-//! ## 题目描述
+//! ## 题目描述 / Problem Description
 //!
 //! 为自定义类型实现 From 和 Into 特质，实现类型之间的安全转换。
+//! Implement From and Into traits for custom types to enable safe conversions.
 
-/// 温度单位：摄氏度
+/// 温度单位：摄氏度 / Temperature unit: Celsius
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Celsius(pub f64);
 
-/// 温度单位：华氏度
+/// 温度单位：华氏度 / Temperature unit: Fahrenheit
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Fahrenheit(pub f64);
 
@@ -28,6 +30,7 @@ impl From<Celsius> for Fahrenheit {
 }
 
 /// 包装一个可能很大的数字，提供安全的 i32 转换
+/// Wraps a potentially large number, providing a safe i32 conversion
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct SafeNumber(pub i64);
 

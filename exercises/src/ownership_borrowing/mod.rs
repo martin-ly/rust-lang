@@ -1,11 +1,12 @@
-//! # 所有权与借用练习
+//! # 所有权与借用练习 / Ownership and Borrowing Exercises
 //!
-//! 本模块包含 10 道练习题（当前完成 5 道），涵盖：
-//! - 借用检查器规则
-//! - 字符串 slice 与所有权
-//! - 可变引用规则
-//! - 生命周期标注
-//! - 智能指针共享所有权
+//! 本模块包含练习题，涵盖：
+//! This module contains exercises covering:
+//! - 借用检查器规则 / Borrow checker rules
+//! - 字符串 slice 与所有权 / String slices and ownership
+//! - 可变引用规则 / Mutable reference rules
+//! - 生命周期标注 / Lifetime annotations
+//! - 智能指针共享所有权 / Smart pointers for shared ownership
 
 pub mod ex01_borrow_checker_fix;
 pub mod ex02_string_slice;

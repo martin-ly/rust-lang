@@ -5,7 +5,7 @@
 # Error Handling（错误处理）
 >
 > **EN**: Error Handling
-> **Summary**: Error Handling. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Error Handling. Guide to 04 Error Handling.
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[错误处理](../../knowledge/02_intermediate/02_error_handling.md)

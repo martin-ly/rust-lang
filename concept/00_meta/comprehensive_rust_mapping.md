@@ -3,7 +3,7 @@
 # Comprehensive Rust 课程映射
 >
 > **EN**: Comprehensive Rust 课程映射 (Chinese)
-> **Summary**: Comprehensive Rust 课程映射 (Chinese). Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: Comprehensive Rust 课程映射 (Chinese). Builds conceptual foundations for Rust developers.
 > **受众**: [初学者 → 进阶]
 > **Bloom 层级**: 知道 → 应用
 > **A/S/P 标记**: **A** — Application

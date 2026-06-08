@@ -5,7 +5,7 @@
 # 错误处理深入：从 Result 到自定义错误生态
 >
 > **EN**: Error Handling
-> **Summary**: Error Handling. Core Rust concept covering mechanism analysis.
+> **Summary**: Error Handling. Core Rust concept covering mechanism analysis, in-depth analysis, type system mechanics.
 >
 > **受众**: [进阶]
 

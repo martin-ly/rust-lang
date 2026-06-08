@@ -1,12 +1,13 @@
-//! # 异步编程练习
+//! # 异步编程练习 / Async Programming Exercises
 //!
-//! 本模块包含 10 道练习题（当前完成 6 道），涵盖：
-//! - 基础 async/await
-//! - Future 组合
-//! - Tokio 任务
-//! - 异步通道
-//! - 超时与重试
-//! - AsyncFn trait 家族 (Rust 1.95)
+//! 本模块包含练习题，涵盖：
+//! This module contains exercises covering:
+//! - 基础 async/await / Basic async/await
+//! - Future 组合 / Future combinators
+//! - Tokio 任务 / Tokio tasks
+//! - 异步通道 / Async channels
+//! - 超时与重试 / Timeout and retry
+//! - AsyncFn trait 家族 (Rust 1.95) / AsyncFn trait family (Rust 1.95)
 
 pub mod ex01_basic_async;
 pub mod ex02_future_combinator;

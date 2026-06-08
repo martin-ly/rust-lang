@@ -6,7 +6,7 @@
 # DevOps 与 CI/CD：Rust 的持续交付工程实践
 >
 > **EN**: DevOps and CI/CD
-> **Summary**: DevOps and CI/CD. Core Rust concept covering practical examples, mechanism analysis.
+> **Summary**: DevOps and CI/CD. Core Rust concept covering testing strategies, practical examples, practical applications.
 >
 > **受众**: [进阶]
 

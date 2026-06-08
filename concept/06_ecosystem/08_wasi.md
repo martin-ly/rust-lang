@@ -1,7 +1,7 @@
 # WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型）
 >
 > **EN**: WebAssembly
-> **Summary**: WebAssembly. Core Rust concept with theoretical foundations and practical applications.
+> **Summary**: WebAssembly. Guide to 08 Wasi.
 > **受众**: [进阶]
 > **内容分级**: [综述级]
 > **层级**: L6 应用主题
