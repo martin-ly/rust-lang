@@ -182,6 +182,7 @@ graph TB
 - [并发 模式：从消息 传递到锁自由的数据结构](./10_concurrency_patterns.md)
 - [原子操作与内存序：无锁并发的精确控制](./11_atomics_and_memory_ordering.md)
 - [Unsafe Rust 模式：安全抽象的核心技术](./12_unsafe_rust_patterns.md)
+- [内联汇编：`asm!` 宏与跨平台 SIMD](./13_inline_assembly.md)
 - [自定义分配器与内存布局优化](./14_custom_allocators.md)
 - [零拷贝解析与序列化优化](./15_zero_copy_parsing.md)
 - [无锁编程与内存模型](./16_lock_free.md)

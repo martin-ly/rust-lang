@@ -17,6 +17,7 @@
 
 - **BorrowSanitizer** (`concept/07_future/borrow_sanitizer.md`): 新建 9.3KB 深度文档，涵盖 Shadow Stack 机制、Miri/ASan/MSan 对比、Project Goals 2026 跟踪、RustConf 2026 演讲接收
 - **Field Projections** (`crates/c04_generic/src/field_projections_preview.rs`): 新建 6.8KB nightly 预览代码，`field_of!` 宏、泛型字段操作、`PinnableField` 安全 Pin 投影
+- **内联汇编** (`concept/03_advanced/13_inline_assembly.md`): 新建 15KB 深度文档，涵盖 `asm!` 语法、约束系统、x86_64/aarch64/RISC-V/s390x 平台差异，重点覆盖 Rust 1.96 s390x 向量寄存器支持
 
 ### 📦 1.97 Crate 代码覆盖补全
 

@@ -21,9 +21,7 @@
 > [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/type-inference.html) ·
 > [Wikipedia — Hindley-Milner Type System](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system) ·
 > [Rust RFC 438 — Type Inference](https://github.com/rust-lang/rfcs/pull/438)
-
 > **前置依赖**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
-
 > **前置依赖**: [Concurrency](../03_advanced/01_concurrency.md)
 
 ## 📑 目录

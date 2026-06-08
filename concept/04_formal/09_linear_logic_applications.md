@@ -20,9 +20,7 @@
 > [RustBelt Paper](https://plv.mpi-sws.org/rustbelt/popl18/) ·
 > [Wadler — Propositions as Sessions](https://homepages.inf.ed.ac.uk/wadler/papers/linearsubtypes/linearsubtypes.pdf) ·
 > [Wikipedia — Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)
-
 > **前置依赖**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
-
 > **前置依赖**: [Concurrency](../03_advanced/01_concurrency.md)
 
 ## 📑 目录

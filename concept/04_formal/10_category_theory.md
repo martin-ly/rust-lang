@@ -19,11 +19,8 @@
 > [Rust RFC — Monad](https://github.com/rust-lang/rfcs/issues/1815) ·
 > [Haskell Wiki — Typeclassopedia](https://wiki.haskell.org/Typeclassopedia) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/)
-
 > **前置依赖**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
-
 > **前置依赖**: [Concurrency](../03_advanced/01_concurrency.md)
-
 > 🚨 **纯数学内容警告**
 >
 > 本文档包含大量形式化符号（⊗, ⊸, λ, ∀, ∃ 等）和纯数学推导，属于 **[研究者级]** 内容。
