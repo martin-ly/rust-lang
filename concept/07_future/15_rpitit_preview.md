@@ -41,12 +41,27 @@ impl Factory for MyFactory {
 fn main() {}
 ```
 
-> **修正**: **RPITIT**（Return Position Impl Trait In Traits，稳定于 1.75.0）允许 trait 方法返回 `impl Trait`：1) 调用方无需知道具体类型，只依赖 trait bound；2) 不同实现可返回不同具体类型（但 API 签名统一）。限制：1) trait 定义中的 `impl Trait` 在实现时不能替换为具体类型名（必须保持 `impl Trait`）；2) `async fn` in trait 是 RPITIT 的特例（返回 `impl Future`）。RPITIT 与 GAT 的关系：1) RPITIT 是 GAT 的语法糖（`fn foo() -> impl Trait` ≈ `type Foo: Trait; fn foo() -> Self::Foo`）；2) GAT 更灵活但语法更冗长。这与 Java 的接口默认方法（返回具体类型，无抽象返回类型）或 C++ 的虚函数（返回类型必须完全相同，不支持协变返回）不同——Rust 的 RPITIT 是类型系统的创新，平衡了抽象和实现灵活性。[来源: [RPITIT RFC](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html)] · [来源: [Async Fn In Traits](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html)]
+> **修正**:
+> **RPITIT**（Return Position Impl Trait In Traits，稳定于 1.75.0）允许 trait 方法返回 `impl Trait`：
+>
+> 1) 调用方无需知道具体类型，只依赖 trait bound；
+> 2) 不同实现可返回不同具体类型（但 API 签名统一）。
+>
+> 限制：
+>
+> 1) trait 定义中的 `impl Trait` 在实现时不能替换为具体类型名（必须保持 `impl Trait`）；
+> 2) `async fn` in trait 是 RPITIT 的特例（返回 `impl Future`）。
+>
+> RPITIT 与 GAT 的关系：
+>
+> 1) RPITIT 是 GAT 的语法糖（`fn foo() -> impl Trait` ≈ `type Foo: Trait; fn foo() -> Self::Foo`）；
+> 2) GAT 更灵活但语法更冗长。这与 Java 的接口默认方法（返回具体类型，无抽象返回类型）或 C++ 的虚函数（返回类型必须完全相同，不支持协变返回）不同——Rust 的 RPITIT 是类型系统的创新，平衡了抽象和实现灵活性。
+>
+> [来源: [RPITIT RFC](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html)] ·
+> [来源: [Async Fn In Traits](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html)]
 
 > **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
-
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
 
 ## 认知路径
@@ -62,9 +77,7 @@ fn main() {}
 | RPITIT Preview 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 RPITIT Preview 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 RPITIT Preview 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: RPITIT Preview 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

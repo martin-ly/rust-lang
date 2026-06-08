@@ -14,7 +14,8 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
-> **来源**: [RFC 3308 — Async Drop](https://github.com/rust-lang/rfcs/pull/3308) ·
+> **来源**:
+> [RFC 3308 — Async Drop](https://github.com/rust-lang/rfcs/pull/3308) ·
 > [Tracking Issue #126482](https://github.com/rust-lang/rust/issues/126482) ·
 > [Rust Internals — Async Drop Discussion](https://internals.rust-lang.org/t/asynchronous-destructors/11127) ·
 > [Without Boats Blog — Async Drop](https://without.boats/blog/let-futures-be-futures/) ·
@@ -502,7 +503,17 @@ fn main() {
 } // res 在这里 drop，但 main 是 sync 函数
 ```
 
-> **修正**: `async drop`（[RFC 3157](https://rust-lang.github.io/rfcs/3157.html)）允许析构函数执行异步操作（`.await`），但要求 drop 发生在异步上下文中。同步函数（`fn main()`）中，值在作用域结束时自动 drop，无法 `.await`。解决方案：1) 在 async 函数/块中使用 `AsyncResource`，让编译器在生成的状态机中插入 `.await`；2) 使用 `pin!` 宏确保值在异步上下文中正确 drop；3) 显式调用 `async_drop(res).await`（若 RFC 支持显式调用）。这是 Rust 异步生态的"最后一块拼图"：目前异步资源的清理（如数据库连接池、HTTP 客户端）常通过 `spawn` 后台任务或阻塞 drop 解决，既不优雅也不高效。`async drop` 使资源生命周期与异步执行模型一致。[来源: [Rust RFC 3157](https://rust-lang.github.io/rfcs/3157-async-drop.html)] · [来源: [Tokio Documentation](https://docs.rs/tokio/)]
+> **修正**:
+> `async drop`（[RFC 3157](https://rust-lang.github.io/rfcs/3157.html)）允许析构函数执行异步操作（`.await`），但要求 drop 发生在异步上下文中。
+> 同步函数（`fn main()`）中，值在作用域结束时自动 drop，无法 `.await`。
+> 解决方案：
+>
+> 1) 在 async 函数/块中使用 `AsyncResource`，让编译器在生成的状态机中插入 `.await`；
+> 2) 使用 `pin!` 宏确保值在异步上下文中正确 drop；
+> 3) 显式调用 `async_drop(res).await`（若 RFC 支持显式调用）。
+> 这是 Rust 异步生态的"最后一块拼图"：目前异步资源的清理（如数据库连接池、HTTP 客户端）常通过 `spawn` 后台任务或阻塞 drop 解决，既不优雅也不高效。
+> `async drop` 使资源生命周期与异步执行模型一致。
+> [来源: [Rust RFC 3157](https://rust-lang.github.io/rfcs/3157-async-drop.html)] · [来源: [Tokio Documentation](https://docs.rs/tokio/)]
 
 ### 10.2 边界测试：异步析构与 panic 的交互（运行时 UB）
 
@@ -521,7 +532,18 @@ impl AsyncDrop for Guard {
 async fn some_condition() -> bool { true }
 ```
 
-> **修正**: 异步析构中的 panic 处理比同步析构更复杂。同步 `Drop::drop` 中 panic 导致双重 panic → `abort`，这是 Rust 的现有行为。异步析构增加了状态机挂起/恢复的可能性：若 async drop 在 `.await` 点被取消（task aborted），析构可能未完成。`async drop` 的设计必须明确：1) 取消安全性（cancellation safety）——drop 是否可安全中断；2) 双重 panic 行为——与同步 drop 一致（abort）；3) 与 `pin` 的交互——异步 drop 要求值被固定（pinned）。这些约束使 `async drop` 的实现极具挑战性，也是该特性迟迟未稳定的主要原因。[来源: [Rust RFC 3157](https://rust-lang.github.io/rfcs/3157-async-drop.html)] · [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**:
+> 异步析构中的 panic 处理比同步析构更复杂。同步 `Drop::drop` 中 panic 导致双重 panic → `abort`，这是 Rust 的现有行为。
+> 异步析构增加了状态机挂起/恢复的可能性：若 async drop 在 `.await` 点被取消（task aborted），析构可能未完成。
+>
+> `async drop` 的设计必须明确：
+>
+> 1) 取消安全性（cancellation safety）——drop 是否可安全中断；
+> 2) 双重 panic 行为——与同步 drop 一致（abort）；
+> 3) 与 `pin` 的交互——异步 drop 要求值被固定（pinned）。
+> 这些约束使 `async drop` 的实现极具挑战性，也是该特性迟迟未稳定的主要原因。
+> [来源: [Rust RFC 3157](https://rust-lang.github.io/rfcs/3157-async-drop.html)] ·
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.3 边界测试：async drop 与 `std::mem::forget` 的交互（内存泄漏）
 
@@ -543,7 +565,16 @@ fn main() {
 }
 ```
 
-> **修正**: `std::mem::forget` 故意阻止值的析构，是安全的（不 unsafe），但导致资源泄漏。对 `AsyncResource` 使用 `forget` 意味着 async drop 永不执行——网络连接不关闭、文件不刷新、内存不释放。这与同步 `Drop` 的 `forget` 行为相同，但 async drop 的泄漏更隐蔽（开发者可能期望"异步清理会在后台完成"）。`AsyncDrop` 的设计必须明确：`forget` 是泄漏的合法方式，async drop 不例外。这与 `ManuallyDrop`（同样阻止自动 drop，但允许显式调用）或 `Rc` 循环引用（类似泄漏）相同——Rust 不保证无泄漏，只保证无 use-after-free。`async drop` 的生态系统影响：某些库（如数据库连接池）可能要求 `async drop` 完成，开发者需注意避免 `forget` 和循环引用。[来源: [Rust RFC 3157](https://rust-lang.github.io/rfcs/3157-async-drop.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-03-drop.html)]
+> **修正**:
+>
+> `std::mem::forget` 故意阻止值的析构，是安全的（不 unsafe），但导致资源泄漏。
+> 对 `AsyncResource` 使用 `forget` 意味着 async drop 永不执行——网络连接不关闭、文件不刷新、内存不释放。
+> 这与同步 `Drop` 的 `forget` 行为相同，但 async drop 的泄漏更隐蔽（开发者可能期望"异步清理会在后台完成"）。
+> `AsyncDrop` 的设计必须明确：`forget` 是泄漏的合法方式，async drop 不例外。
+> 这与 `ManuallyDrop`（同样阻止自动 drop，但允许显式调用）或 `Rc` 循环引用（类似泄漏）相同——Rust 不保证无泄漏，只保证无 use-after-free。
+> `async drop` 的生态系统影响：某些库（如数据库连接池）可能要求 `async drop` 完成，开发者需注意避免 `forget` 和循环引用。
+> [来源: [Rust RFC 3157](https://rust-lang.github.io/rfcs/3157-async-drop.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-03-drop.html)]
 
 ### 10.4 边界测试：async drop 在 panic 时的双重取消（运行时 UB）
 
@@ -569,7 +600,21 @@ fn main() {
 }
 ```
 
-> **修正**: `AsyncDrop` 中的 panic 处理比同步 `Drop` 更复杂：1) 同步 `Drop` 中 panic 导致双重 panic → `abort`（已有行为）；2) `AsyncDrop` 在 `.await` 点可能被取消（任务 abort），取消后是否继续执行 drop 逻辑？3) 若 `AsyncDrop` 在栈展开中被调用，但当前无 async 上下文（无法 `.await`），如何处理？这些问题的答案将决定 `AsyncDrop` 的语义：1) `abort-on-panic`（与同步一致）；2) `ignore-cancel`（drop 必须完成，即使任务取消）；3) `require-async-context`（`AsyncDrop` 只能在 async 上下文中调用）。`async drop` 的实现极具挑战性，是 Rust 语言演进中最复杂的特性之一。[来源: [Rust RFC 3157](https://rust-lang.github.io/rfcs/3157-async-drop.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**:
+> `AsyncDrop` 中的 panic 处理比同步 `Drop` 更复杂：
+>
+> 1) 同步 `Drop` 中 panic 导致双重 panic → `abort`（已有行为）；
+> 2) `AsyncDrop` 在 `.await` 点可能被取消（任务 abort），取消后是否继续执行 drop 逻辑？
+> 3) 若 `AsyncDrop` 在栈展开中被调用，但当前无 async 上下文（无法 `.await`），如何处理？
+>
+> 这些问题的答案将决定 `AsyncDrop` 的语义：
+>
+> 1) `abort-on-panic`（与同步一致）；
+> 2) `ignore-cancel`（drop 必须完成，即使任务取消）；
+> 3) `require-async-context`（`AsyncDrop` 只能在 async 上下文中调用）。
+> `async drop` 的实现极具挑战性，是 Rust 语言演进中最复杂的特性之一。
+> [来源: [Rust RFC 3157](https://rust-lang.github.io/rfcs/3157-async-drop.html)] ·
+> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.3 边界测试：async drop 与同步 Drop 的语义冲突（编译错误/设计问题）
 
@@ -593,9 +638,24 @@ async fn use_resource() {
 fn main() {}
 ```
 
-> **修正**: Rust 当前**不支持 async drop**：`Drop::drop` 是同步方法，不能 `await`。异步清理的 workaround：1) **显式 async 方法**：`resource.close().await` + `mem::forget(resource)` 跳过同步 drop；2) **`AsyncDrop` trait**（讨论中）：`async fn drop(&mut self)`，编译器在值离开作用域时生成异步 drop 代码；3) **`scopeguard` crate**：`defer!` 和 `ScopeGuard` 提供可控的清理逻辑。`async drop` 的设计挑战：1) 析构顺序（与同步 drop 相同？）；2) panic 时的行为；3) 与 `Pin` 的交互（`Pin<&mut T>` 的 async drop）。这与 C++ 的析构函数（同步，但可用 `co_await` 在 C++20 协程中）或 Java 的 `AutoCloseable`（`close()` 是同步的，`try-with-resources` 不支持 async）不同——Rust 的 async drop 是活跃的设计领域。[来源: [Async Drop RFC](https://rust-lang.github.io/rfcs/3184-async-drop.html)] · [来源: [Rust Async Working Group](https://rust-lang.github.io/wg-async/)]
-> **过渡**: Async Drop：异步资源的优雅销毁 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Async Drop：异步资源的优雅销毁 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **修正**:
+>
+> Rust 当前**不支持 async drop**：`Drop::drop` 是同步方法，不能 `await`。
+> 异步清理的 workaround：
+>
+> 1) **显式 async 方法**：`resource.close().await` + `mem::forget(resource)` 跳过同步 drop；
+> 2) **`AsyncDrop` trait**（讨论中）：`async fn drop(&mut self)`，编译器在值离开作用域时生成异步 drop 代码；
+> 3) **`scopeguard` crate**：`defer!` 和 `ScopeGuard` 提供可控的清理逻辑。
+>
+> `async drop` 的设计挑战：
+>
+> 1) 析构顺序（与同步 drop 相同？）；
+> 2) panic 时的行为；
+> 3) 与 `Pin` 的交互（`Pin<&mut T>` 的 async drop）。
+>
+> 这与 C++ 的析构函数（同步，但可用 `co_await` 在 C++20 协程中）或 Java 的 `AutoCloseable`（`close()` 是同步的，`try-with-resources` 不支持 async）不同——Rust 的 async drop 是活跃的设计领域。
+> [来源: [Async Drop RFC](https://rust-lang.github.io/rfcs/3184-async-drop.html)] ·
+> [来源: [Rust Async Working Group](https://rust-lang.github.io/wg-async/)]
 > **过渡**: Async Drop：异步资源的优雅销毁 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ### 补充定理链
@@ -617,9 +677,7 @@ fn main() {}
 | Async Drop：异步资源的优雅销毁 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 Async Drop：异步资源的优雅销毁 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 Async Drop：异步资源的优雅销毁 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: Async Drop：异步资源的优雅销毁 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

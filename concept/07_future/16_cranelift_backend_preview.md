@@ -19,7 +19,11 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
-> **来源**: [Cranelift Documentation](https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/docs/index.md) · [rustc_codegen_cranelift](https://github.com/rust-lang/rustc_codegen_cranelift) · [Bytecode Alliance](https://bytecodealliance.org/) · [Rust Compiler Team — Cranelift](https://github.com/rust-lang/compiler-team/issues/)
+> **来源**:
+> [Cranelift Documentation](https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/docs/index.md) ·
+> [rustc_codegen_cranelift](https://github.com/rust-lang/rustc_codegen_cranelift) ·
+> [Bytecode Alliance](https://bytecodealliance.org/) ·
+> [Rust Compiler Team — Cranelift](https://github.com/rust-lang/compiler-team/issues/)
 
 ## 📑 目录
 
@@ -390,7 +394,20 @@ fn main() {
 }
 ```
 
-> **修正**: Cranelift 是 Rust 的替代代码生成后端（`rustc_codegen_cranelift`），目标是为 debug 构建提供更快的编译速度。与 LLVM 相比，Cranelift 优化更少但编译更快，某些边缘情况的语义可能有细微差异：1) 整数溢出检查（debug 模式）；2) 未初始化内存的读取行为；3) `panic=abort` 与 `panic=unwind` 的代码生成。Rust 保证所有合法代码在 LLVM 和 Cranelift 下行为一致，但`unsafe`代码或依赖特定 LLVM 行为的代码可能暴露差异。测试策略：CI 中同时使用两个后端运行测试，确保行为一致。这与 GCC 和 Clang 的兼容性测试类似——多后端验证增加了生态的健壮性。[来源: [Cranelift Documentation](https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/docs/index.md)] · [来源: [rustc_codegen_cranelift](https://github.com/rust-lang/rustc_codegen_cranelift)]
+> **修正**:
+>
+> Cranelift 是 Rust 的替代代码生成后端（`rustc_codegen_cranelift`），目标是为 debug 构建提供更快的编译速度。
+> 与 LLVM 相比，Cranelift 优化更少但编译更快，某些边缘情况的语义可能有细微差异：
+>
+> 1) 整数溢出检查（debug 模式）；
+> 2) 未初始化内存的读取行为；
+> 3) `panic=abort` 与 `panic=unwind` 的代码生成。
+>
+> Rust 保证所有合法代码在 LLVM 和 Cranelift 下行为一致，但`unsafe`代码或依赖特定 LLVM 行为的代码可能暴露差异。
+> 测试策略：CI 中同时使用两个后端运行测试，确保行为一致。
+> 这与 GCC 和 Clang 的兼容性测试类似——多后端验证增加了生态的健壮性。
+> [来源: [Cranelift Documentation](https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/docs/index.md)] ·
+> [来源: [rustc_codegen_cranelift](https://github.com/rust-lang/rustc_codegen_cranelift)]
 
 ### 10.2 边界测试：Cranelift 不支持的平台特定内联汇编（编译错误）
 
@@ -410,7 +427,21 @@ fn cpuid() {
 }
 ```
 
-> **修正**: Cranelift 的内联汇编支持正在开发中，某些复杂约束（如特定寄存器分配、内存操作数、标志位读写）可能不被支持或生成次优代码。`std::arch::asm!` 的标准化语法以 LLVM 为参考实现，Cranelift 需要独立实现汇编解析和寄存器分配。对于不支持的指令，Cranelift 回退到外部汇编器（`nasm`、`gas`）或报告编译错误。开发者的应对：1) 优先使用可移植的 Rust 代码或 `core::intrinsics`；2) 对必须使用内联汇编的代码，限制在 release 构建（LLVM）中使用，debug 构建使用模拟实现；3) 向 Cranelift 项目报告缺失的功能。这与 Rust 的多后端战略一致：Cranelift 负责快速迭代，LLVM 负责生产优化。[来源: [Cranelift Inline Assembly Tracking](https://github.com/rust-lang/rustc_codegen_cranelift/issues/...)] · [来源: [Rust Reference — Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html)]
+> **修正**:
+>
+> Cranelift 的内联汇编支持正在开发中，某些复杂约束（如特定寄存器分配、内存操作数、标志位读写）可能不被支持或生成次优代码。
+> `std::arch::asm!` 的标准化语法以 LLVM 为参考实现，Cranelift 需要独立实现汇编解析和寄存器分配。
+> 对于不支持的指令，Cranelift 回退到外部汇编器（`nasm`、`gas`）或报告编译错误。
+>
+> 开发者的应对：
+>
+> 1) 优先使用可移植的 Rust 代码或 `core::intrinsics`；
+> 2) 对必须使用内联汇编的代码，限制在 release 构建（LLVM）中使用，debug 构建使用模拟实现；
+> 3) 向 Cranelift 项目报告缺失的功能。
+>
+> 这与 Rust 的多后端战略一致：Cranelift 负责快速迭代，LLVM 负责生产优化。
+> [来源: [Cranelift Inline Assembly Tracking](https://github.com/rust-lang/rustc_codegen_cranelift/issues/...)] ·
+> [来源: [Rust Reference — Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html)]
 
 ### 10.3 边界测试：Cranelift 的尾调用优化缺失（运行时栈溢出）
 
@@ -430,7 +461,16 @@ fn main() {
 }
 ```
 
-> **修正**: 尾调用优化（TCO）将尾递归转换为循环，避免栈增长。LLVM 在某些情况下执行 TCO（`-C opt-level=2`），但 Cranelift 当前不支持。这对于函数式编程风格（递归遍历、状态机）是限制。Rust 不保证 TCO（语言层面无尾调用语义），因此递归深度大的代码应改写为迭代。Wasmtime 团队正在开发 Cranelift 的 TCO 支持（用于 WebAssembly 的 tail call proposal），但尚未完成。这与 Scheme 的 guaranteed TCO（语言要求）或 JavaScript 的引擎优化（V8 做 TCO，但 ES6 未标准化）不同——Rust 明确不保证 TCO，鼓励迭代写法。这是系统编程语言的务实选择：栈帧用于调试和异常展开，TCO 使栈追踪丢失信息。[来源: [Cranelift Tail Call Tracking](https://github.com/bytecodealliance/wasmtime/issues/...)] · [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**:
+>
+> 尾调用优化（TCO）将尾递归转换为循环，避免栈增长。LLVM 在某些情况下执行 TCO（`-C opt-level=2`），但 Cranelift 当前不支持。
+> 这对于函数式编程风格（递归遍历、状态机）是限制。
+> Rust 不保证 TCO（语言层面无尾调用语义），因此递归深度大的代码应改写为迭代。
+> Wasmtime 团队正在开发 Cranelift 的 TCO 支持（用于 WebAssembly 的 tail call proposal），但尚未完成。
+> 这与 Scheme 的 guaranteed TCO（语言要求）或 JavaScript 的引擎优化（V8 做 TCO，但 ES6 未标准化）不同——Rust 明确不保证 TCO，鼓励迭代写法。
+> 这是系统编程语言的务实选择：栈帧用于调试和异常展开，TCO 使栈追踪丢失信息。
+> [来源: [Cranelift Tail Call Tracking](https://github.com/bytecodealliance/wasmtime/issues/...)] ·
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.4 边界测试：Cranelift 的 SIMD 向量类型宽度限制（编译错误）
 
@@ -449,7 +489,21 @@ fn simd_operation() {
 }
 ```
 
-> **修正**: Cranelift 的 SIMD 支持覆盖 SSE、SSE2、SSE4.1、AVX、AVX2，但 AVX-512（512 位向量）的支持仍在开发中。AVX-512 有复杂的掩码寄存器（`k0-k7`）和指令子集（`F`、`VL`、`BW`、`DQ`、`CD` 等），代码生成复杂。在 Cranelift 不支持的平台上使用 AVX-512 内在函数会导致编译错误。Rust 的 `std::arch` 模块在编译期检查 `target_feature`，但 Cranelift 作为后端，其支持集可能与 LLVM 不同。应对策略：1) 使用 `std::simd`（portable SIMD），让编译器选择最优指令集；2) 运行时检测 CPU 特性（`is_x86_feature_detected!("avx512f")`），在支持时使用快速路径；3) 限制 AVX-512 代码只在 LLVM 后端编译。这与 C 的 `__attribute__((target("avx512f")))` 或编译器 intrinsic 类似——底层代码生成依赖后端能力。[来源: [Cranelift SIMD Tracking](https://github.com/bytecodealliance/wasmtime/issues/...)] · [来源: [Rust SIMD Documentation](https://doc.rust-lang.org/std/simd/index.html)]
+> **修正**:
+>
+> Cranelift 的 SIMD 支持覆盖 SSE、SSE2、SSE4.1、AVX、AVX2，但 AVX-512（512 位向量）的支持仍在开发中。
+> AVX-512 有复杂的掩码寄存器（`k0-k7`）和指令子集（`F`、`VL`、`BW`、`DQ`、`CD` 等），代码生成复杂。
+> 在 Cranelift 不支持的平台上使用 AVX-512 内在函数会导致编译错误。Rust 的 `std::arch` 模块在编译期检查 `target_feature`，但 Cranelift 作为后端，其支持集可能与 LLVM 不同。
+>
+> 应对策略：
+>
+> 1) 使用 `std::simd`（portable SIMD），让编译器选择最优指令集；
+> 2) 运行时检测 CPU 特性（`is_x86_feature_detected!("avx512f")`），在支持时使用快速路径；
+> 3) 限制 AVX-512 代码只在 LLVM 后端编译。
+>
+> 这与 C 的 `__attribute__((target("avx512f")))` 或编译器 intrinsic 类似——底层代码生成依赖后端能力。
+> [来源: [Cranelift SIMD Tracking](https://github.com/bytecodealliance/wasmtime/issues/...)] ·
+> [来源: [Rust SIMD Documentation](https://doc.rust-lang.org/std/simd/index.html)]
 
 ### 10.6 边界测试：Cranelift 的 debug 信息生成与 GDB 兼容性（调试困难）
 
@@ -462,7 +516,25 @@ fn main() {
 }
 ```
 
-> **修正**: Cranelift 的 debug 信息生成（DWARF）是正在开发的功能。与 LLVM 相比：1) 变量位置信息可能不准确（优化后变量被分配到寄存器，debug info 未更新）；2) 内联函数的步进可能跳跃；3) 某些平台（Windows）的 debug 格式（PDB）支持有限。影响：使用 Cranelift 进行 debug 构建时，调试体验可能下降。缓解：1) 关键调试回退到 LLVM（`RUSTFLAGS="-C codegen-backend=llvm"`）；2) 使用 `println!` 调试（Rust 社区的常见实践）；3) 等待 Cranelift 的 debug info 成熟。这与 GCC vs Clang 的 debug 信息质量差异类似——不同后端的 debug 生成能力不同，但随时间趋同。Cranelift 的目标不是替代 LLVM 的 release 构建，而是提供更快的 debug 迭代。[来源: [Cranelift Debug Info](https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/docs/ir.md)] · [来源: [rustc Developer Guide](https://rustc-dev-guide.rust-lang.org/backend/)]
+> **修正**: Cranelift 的 debug 信息生成（DWARF）是正在开发的功能。
+> 与 LLVM 相比：
+>
+> 1) 变量位置信息可能不准确（优化后变量被分配到寄存器，debug info 未更新）；
+> 2) 内联函数的步进可能跳跃；
+> 3) 某些平台（Windows）的 debug 格式（PDB）支持有限。
+>
+> 影响：使用 Cranelift 进行 debug 构建时，调试体验可能下降。
+>
+> 缓解：
+>
+> 1) 关键调试回退到 LLVM（`RUSTFLAGS="-C codegen-backend=llvm"`）；
+> 2) 使用 `println!` 调试（Rust 社区的常见实践）；
+> 3) 等待 Cranelift 的 debug info 成熟。这与 GCC vs Clang 的 debug 信息质量差异类似——不同后端的 debug 生成能力不同，但随时间趋同。
+>
+> Cranelift 的目标不是替代 LLVM 的 release 构建，而是提供更快的 debug 迭代。
+>
+> [来源: [Cranelift Debug Info](https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/docs/ir.md)] ·
+> [来源: [rustc Developer Guide](https://rustc-dev-guide.rust-lang.org/backend/)]
 
 ### 10.5 边界测试：Cranelift 的调试构建与发布构建行为差异（运行时性能/语义差异）
 
@@ -478,7 +550,29 @@ fn main() {
 }
 ```
 
-> **修正**: Cranelift 作为 Rust 的替代代码生成后端，设计目标：1) **调试构建速度**：编译比 LLVM 快 5-10 倍；2) **开发体验**：快速迭代，即时反馈。与 LLVM 的差异：1) 优化级别低（等同 `opt-level = 0` 或 `1`）；2) 不支持某些 LLVM 特有的优化（LTO、PGO、某些向量化）；3) 发布构建仍需 LLVM（`cargo build --release` 默认 LLVM）。使用场景：`cranelift = true` 在 `.cargo/config.toml` 中设置，仅影响 dev profile。注意：1) 某些 unsafe 代码依赖 LLVM 的特定行为（如内联汇编的精确语义），Cranelift 可能不同；2) `wasm32` target 的 Cranelift 支持（wasmtime 使用）比 native 更成熟。这与 Go 的 gc 编译器（自研，简单快速）vs gccgo（GCC 后端，优化强）或 Java 的 C1（客户端编译器，快）vs C2（服务器编译器，优化强）的分层策略类似——Rust 的双后端策略提供开发/生产的最优组合。[来源: [Cranelift Documentation](https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/docs/)] · [来源: [Rust Compiler Explorer](https://rustc-dev-guide.rust-lang.org/backend/codegen.html)]
+> **修正**:
+>
+> Cranelift 作为 Rust 的替代代码生成后端，设计目标：
+>
+> 1) **调试构建速度**：编译比 LLVM 快 5-10 倍；
+> 2) **开发体验**：快速迭代，即时反馈。
+>
+> 与 LLVM 的差异：
+>
+> 1) 优化级别低（等同 `opt-level = 0` 或 `1`）；
+> 2) 不支持某些 LLVM 特有的优化（LTO、PGO、某些向量化）；
+> 3) 发布构建仍需 LLVM（`cargo build --release` 默认 LLVM）。
+>
+> 使用场景：`cranelift = true` 在 `.cargo/config.toml` 中设置，仅影响 dev profile。
+> 注意：
+>
+> 1) 某些 unsafe 代码依赖 LLVM 的特定行为（如内联汇编的精确语义），Cranelift 可能不同；
+> 2) `wasm32` target 的 Cranelift 支持（wasmtime 使用）比 native 更成熟。
+>
+> 这与 Go 的 gc 编译器（自研，简单快速）vs gccgo（GCC 后端，优化强）或 Java 的 C1（客户端编译器，快）vs C2（服务器编译器，优化强）的分层策略类似——Rust 的双后端策略提供开发/生产的最优组合。
+>
+> [来源: [Cranelift Documentation](https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/docs/)] ·
+> [来源: [Rust Compiler Explorer](https://rustc-dev-guide.rust-lang.org/backend/codegen.html)]
 
 ### 10.3 边界测试：Cranelift 与 LLVM 的调试信息质量差异（运行时行为差异）
 
@@ -491,9 +585,29 @@ fn main() {
 }
 ```
 
-> **修正**: Cranelift 作为 Rust 的替代代码生成后端，设计目标：1) **调试构建速度**：编译比 LLVM 快 5-10 倍；2) **开发体验**：快速迭代，即时反馈。与 LLVM 的差异：1) 优化级别低（等同 `opt-level = 0` 或 `1`）；2) 调试信息质量（DWARF 生成）不如 LLVM 成熟；3) 不支持某些 LLVM 特有的优化（LTO、PGO、某些向量化）。使用场景：`cranelift = true` 在 `.cargo/config.toml` 中设置，仅影响 dev profile。注意：1) 某些 unsafe 代码依赖 LLVM 的特定行为（如内联汇编的精确语义），Cranelift 可能不同；2) `wasm32` target 的 Cranelift 支持（wasmtime 使用）比 native 更成熟。这与 Go 的 gc 编译器 vs gccgo 或 Java 的 C1 vs C2 类似——Rust 的双后端策略提供开发/生产的最优组合。[来源: [Cranelift](https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/docs/)] · [来源: [Rust Compiler Explorer](https://rustc-dev-guide.rust-lang.org/backend/codegen.html)]
-> **过渡**: Cranelift 后端预研：Rust 编译器的快速调试编译 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Cranelift 后端预研：Rust 编译器的快速调试编译 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **修正**:
+> Cranelift 作为 Rust 的替代代码生成后端，设计目标：
+>
+> 1) **调试构建速度**：编译比 LLVM 快 5-10 倍；
+> 2) **开发体验**：快速迭代，即时反馈。
+>
+> 与 LLVM 的差异：
+>
+> 1) 优化级别低（等同 `opt-level = 0` 或 `1`）；
+> 2) 调试信息质量（DWARF 生成）不如 LLVM 成熟；
+> 3) 不支持某些 LLVM 特有的优化（LTO、PGO、某些向量化）。
+>
+> 使用场景：`cranelift = true` 在 `.cargo/config.toml` 中设置，仅影响 dev profile。
+>
+> 注意：
+>
+> 1) 某些 unsafe 代码依赖 LLVM 的特定行为（如内联汇编的精确语义），Cranelift 可能不同；
+> 2) `wasm32` target 的 Cranelift 支持（wasmtime 使用）比 native 更成熟。
+>
+> 这与 Go 的 gc 编译器 vs gccgo 或 Java 的 C1 vs C2 类似——Rust 的双后端策略提供开发/生产的最优组合。
+> [来源: [Cranelift](https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/docs/)] ·
+> [来源: [Rust Compiler Explorer](https://rustc-dev-guide.rust-lang.org/backend/codegen.html)]
+>
 > **过渡**: Cranelift 后端预研：Rust 编译器的快速调试编译 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ### 补充定理链
@@ -515,9 +629,7 @@ fn main() {
 | Cranelift 后端预研：Rust 编译器的快速调试编译 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 Cranelift 后端预研：Rust 编译器的快速调试编译 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 Cranelift 后端预研：Rust 编译器的快速调试编译 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: Cranelift 后端预研：Rust 编译器的快速调试编译 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

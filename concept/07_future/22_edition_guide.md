@@ -535,7 +535,17 @@ fn main() {
 }
 ```
 
-> **修正**: Rust Edition 2024 引入了**尾表达式作用域**（tail expression scope）的变更：块（`{}`）的尾表达式必须是有值表达式，`if` 无 `else` 分支时类型为 `()`，不能作为非 `()` 上下文的尾表达式。这是 Rust 类型系统的一致性改进——旧版 Edition 中某些边缘情况允许无意义类型推导。Edition 机制保证向后兼容性：使用 `edition = "2021"` 的项目不受影响，迁移到 `"2024"` 时 `cargo fix` 自动建议修复。这与 C++ 的标准版本（`-std=c++17`、`-std=c++20`，允许混合链接）或 Java 的版本（字节码兼容）不同——Rust 的 Edition 是 crate 级别的，同一二进制可混合多个 Edition 的 crate。Edition 的设计目标：在保持生态兼容的前提下，逐步改进语言和标准库。[来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)] · [来源: [Rust RFC 2052](https://rust-lang.github.io/rfcs/2052-epochs.html)]
+> **修正**:
+>
+> Rust Edition 2024 引入了**尾表达式作用域**（tail expression scope）的变更：块（`{}`）的尾表达式必须是有值表达式，`if` 无 `else` 分支时类型为 `()`，不能作为非 `()` 上下文的尾表达式。
+> 这是 Rust 类型系统的一致性改进——旧版 Edition 中某些边缘情况允许无意义类型推导。
+> Edition 机制保证向后兼容性：
+>
+> 使用 `edition = "2021"` 的项目不受影响，迁移到 `"2024"` 时 `cargo fix` 自动建议修复。
+> 这与 C++ 的标准版本（`-std=c++17`、`-std=c++20`，允许混合链接）或 Java 的版本（字节码兼容）不同——Rust 的 Edition 是 crate 级别的，同一二进制可混合多个 Edition 的 crate。
+> Edition 的设计目标：在保持生态兼容的前提下，逐步改进语言和标准库。
+> [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)] ·
+> [来源: [Rust RFC 2052](https://rust-lang.github.io/rfcs/2052-epochs.html)]
 
 ### 10.2 边界测试：`gen` 关键字保留与宏解析冲突（编译错误）
 
@@ -550,7 +560,20 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 2024 Edition 将 `gen` 设为保留关键字（为 `gen` 块特性预留）。使用 `gen` 作为标识符（变量名、函数名、宏名）的代码在迁移到 Edition 2024 时编译错误。`cargo fix --edition` 自动重命名这些标识符（如 `gen_`）。这与 Python 2→3 的 `print` 关键字变化（破坏性）或 JavaScript 的严格模式（`let`、`const` 保留）类似，但 Rust 的 Edition 机制更平滑：旧代码继续编译（只要 Edition 不变），迁移工具自动处理大部分变更。宏系统尤其敏感：宏名 `gen!` 在语法解析阶段就与关键字冲突，即使宏从未在 Edition 2024 代码中使用。这是保留关键字策略的代价：语言扩展需要"征用"标识符空间。[来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)] · [来源: [Rust RFC 2052](https://rust-lang.github.io/rfcs/2052-epochs.html)]
+> **修正**:
+>
+> Rust 2024 Edition 将 `gen` 设为保留关键字（为 `gen` 块特性预留）。
+> 使用 `gen` 作为标识符（变量名、函数名、宏名）的代码在迁移到 Edition 2024 时编译错误。
+> `cargo fix --edition` 自动重命名这些标识符（如 `gen_`）。
+> 这与 Python 2→3 的 `print` 关键字变化（破坏性）或 JavaScript 的严格模式（`let`、`const` 保留）类似，但 Rust 的 Edition 机制更平滑：
+>
+> 旧代码继续编译（只要 Edition 不变），迁移工具自动处理大部分变更。
+> 宏系统尤其敏感：
+>
+> 宏名 `gen!` 在语法解析阶段就与关键字冲突，即使宏从未在 Edition 2024 代码中使用。
+> 这是保留关键字策略的代价：语言扩展需要"征用"标识符空间。
+> [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)] ·
+> [来源: [Rust RFC 2052](https://rust-lang.github.io/rfcs/2052-epochs.html)]
 
 ### 10.6 边界测试：Edition 迁移后的 `cargo fix` 残留问题（编译错误）
 
@@ -568,7 +591,24 @@ fn main() {
 // ❌ 编译错误: 某些情况下自动修复不完整
 ```
 
-> **修正**: `cargo fix --edition` 自动应用大多数 Edition 变更，但边缘情况需手动处理：1) 闭包捕获规则变化（`r` 从借用变为移动）；2) `impl Trait` 的生命周期捕获变化；3) `match` 的临时值生命周期变化。`cargo fix` 的自动修复基于模式匹配，无法处理所有语义变化。手动审查清单：1) 检查所有闭包的使用（尤其是 `move` 关键字）；2) 检查 `async` 块的生命周期；3) 检查 `macro_rules!` 的 hygiene 变化。这与 Python 的 `2to3`（自动迁移后需大量手动修复）或 JavaScript 的 Babel（语法转换，但语义不变）不同——Rust 的 Edition 变更涉及语义，自动化有限。Rust 的 Edition 设计目标是最小化手动工作，但完全自动化是长期目标。[来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)] · [来源: [cargo fix Documentation](https://doc.rust-lang.org/cargo/commands/cargo-fix.html)]
+> **修正**:
+>
+> `cargo fix --edition` 自动应用大多数 Edition 变更，但边缘情况需手动处理：
+>
+> 1) 闭包捕获规则变化（`r` 从借用变为移动）；
+> 2) `impl Trait` 的生命周期捕获变化；
+> 3) `match` 的临时值生命周期变化。`cargo fix` 的自动修复基于模式匹配，无法处理所有语义变化。
+>
+> 手动审查清单：
+>
+> 1) 检查所有闭包的使用（尤其是 `move` 关键字）；
+> 2) 检查 `async` 块的生命周期；
+> 3) 检查 `macro_rules!` 的 hygiene 变化。
+>
+> 这与 Python 的 `2to3`（自动迁移后需大量手动修复）或 JavaScript 的 Babel（语法转换，但语义不变）不同——Rust 的 Edition 变更涉及语义，自动化有限。
+> Rust 的 Edition 设计目标是最小化手动工作，但完全自动化是长期目标。
+> [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)] ·
+> [来源: [cargo fix Documentation](https://doc.rust-lang.org/cargo/commands/cargo-fix.html)]
 
 ### 10.7 边界测试：Edition 迁移的自动修复遗漏（编译中断/语义变更）
 
@@ -585,7 +625,27 @@ mod inner {
 use inner::helper; // 可能在某些嵌套模块中失效
 ```
 
-> **修正**: Rust 的 **Edition** 机制允许语言演进而不破坏现有代码，但**迁移**（`cargo fix --edition`）的局限：1) 纯语法变更（`async fn`、统一路径）→ 自动修复；2) 语义变更（`panic!` 宏的 `panic_any` 行为、闭包捕获规则）→ 需人工审查；3) 依赖库未升级 → 无法使用新 edition 特性。迁移策略：1) 先升级所有依赖到兼容版本；2) `cargo fix --edition` 自动处理；3) 运行测试 + clippy 检查语义变更；4) 逐步迁移 workspace 成员（允许多 edition 共存）。2024 Edition 的关键变更：1) `gen` 关键字保留；2) `if let` 临时作用域缩短；3) `impl Trait` 生命周期捕获规则。这与 C++ 的"无 edition，每次标准全量迁移"或 Java 的"LTS 版本"不同——Rust 的 edition 提供可控的、可选的语言演进节奏，但迁移成本仍需管理。[来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)] · [来源: [cargo fix](https://doc.rust-lang.org/cargo/commands/cargo-fix.html)]
+> **修正**: Rust 的 **Edition** 机制允许语言演进而不破坏现有代码，但**迁移**（`cargo fix --edition`）的局限：
+>
+> 1) 纯语法变更（`async fn`、统一路径）→ 自动修复；
+> 2) 语义变更（`panic!` 宏的 `panic_any` 行为、闭包捕获规则）→ 需人工审查；
+> 3) 依赖库未升级 → 无法使用新 edition 特性。
+>
+> 迁移策略：
+>
+> 1) 先升级所有依赖到兼容版本；
+> 2) `cargo fix --edition` 自动处理；
+> 3) 运行测试 + clippy 检查语义变更；
+> 4) 逐步迁移 workspace 成员（允许多 edition 共存）。
+>
+> 2024 Edition 的关键变更：
+>
+> 1) `gen` 关键字保留；
+> 2) `if let` 临时作用域缩短；
+> 3) `impl Trait` 生命周期捕获规则。
+> 这与 C++ 的"无 edition，每次标准全量迁移"或 Java 的"LTS 版本"不同——Rust 的 edition 提供可控的、可选的语言演进节奏，但迁移成本仍需管理。
+> [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)] ·
+> [来源: [cargo fix](https://doc.rust-lang.org/cargo/commands/cargo-fix.html)]
 
 ### 10.3 边界测试：Edition 迁移中的宏 hygiene 变更（编译错误）
 
@@ -605,15 +665,28 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 2021 Edition 引入了 **macros 的 `mixed_site` hygiene**（默认），与 2018 Edition 的 `call_site` 不同。影响：1) 宏生成的 `let` 绑定在宏定义处解析，不与调用者冲突；2) 某些依赖 hygiene 行为的宏可能需要调整；3) `Span::mixed_site()` 和 `Span::call_site()` 显式控制。迁移策略：`cargo fix --edition` 自动处理大部分变更，但复杂宏（尤其 `proc_macro`）需人工审查。2024 Edition 的关键变更：1) `gen` 关键字保留；2) `if let` 临时作用域缩短；3) `impl Trait` 生命周期捕获规则。这与 C++ 的"无 edition，每次标准全量迁移"或 Java 的 LTS 版本不同——Rust 的 edition 提供可控的、可选的语言演进节奏。[来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)] · [来源: [cargo fix](https://doc.rust-lang.org/cargo/commands/cargo-fix.html)]
-> **过渡**: Edition 2024 完全指南：新特性与迁移策略 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Edition 2024 完全指南：新特性与迁移策略 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **修正**:
+> Rust 2021 Edition 引入了 **macros 的 `mixed_site` hygiene**（默认），与 2018 Edition 的 `call_site` 不同。
+> 影响：
+>
+> 1) 宏生成的 `let` 绑定在宏定义处解析，不与调用者冲突；
+> 2) 某些依赖 hygiene 行为的宏可能需要调整；
+> 3) `Span::mixed_site()` 和 `Span::call_site()` 显式控制。
+>
+> 迁移策略：`cargo fix --edition` 自动处理大部分变更，但复杂宏（尤其 `proc_macro`）需人工审查。
+> 2024 Edition 的关键变更：
+>
+> 1) `gen` 关键字保留；
+> 2) `if let` 临时作用域缩短；
+> 3) `impl Trait` 生命周期捕获规则。
+>
+> 这与 C++ 的"无 edition，每次标准全量迁移"或 Java 的 LTS 版本不同——Rust 的 edition 提供可控的、可选的语言演进节奏。
+> [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)] ·
+> [来源: [cargo fix](https://doc.rust-lang.org/cargo/commands/cargo-fix.html)]
 > **过渡**: Edition 2024 完全指南：新特性与迁移策略 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ### 补充定理链
 
-- **定理**: Edition 2024 完全指南：新特性与迁移策略 定义 ⟹ 类型安全保证
-- **定理**: Edition 2024 完全指南：新特性与迁移策略 定义 ⟹ 类型安全保证
 - **定理**: Edition 2024 完全指南：新特性与迁移策略 定义 ⟹ 类型安全保证
 
 ## 认知路径

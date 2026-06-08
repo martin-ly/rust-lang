@@ -19,10 +19,12 @@
 ---
 
 > **来源**:
+>
 > [Rust Reference](https://doc.rust-lang.org/reference/) ·
 > [Ferrocene Specification](https://spec.ferrocene.dev/) ·
 > [Rust Language Specification RFC](https://github.com/rust-lang/rfcs/pull/3355) ·
 > [Rust Compiler Team — Specification](https://github.com/rust-lang/compiler-team/issues/)
+>
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
 

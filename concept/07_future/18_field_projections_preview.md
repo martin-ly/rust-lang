@@ -287,13 +287,9 @@ let tx_offset = offset_of!(UartRegs, tx); // 编译期常量
 | Rust for Linux 需求 | <https://rust-lang.github.io/rust-project-goals/2026/> |
 
 > **过渡**: Field Projections 预览：安全的字段级投影 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Field Projections 预览：安全的字段级投影 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Field Projections 预览：安全的字段级投影 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ### 补充定理链
 
-- **定理**: Field Projections 预览：安全的字段级投影 定义 ⟹ 类型安全保证
-- **定理**: Field Projections 预览：安全的字段级投影 定义 ⟹ 类型安全保证
 - **定理**: Field Projections 预览：安全的字段级投影 定义 ⟹ 类型安全保证
 
 ## 认知路径
