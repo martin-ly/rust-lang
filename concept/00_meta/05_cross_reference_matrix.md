@@ -2,15 +2,14 @@
 >
 > **EN**: Cross Reference Matrix（交叉引用矩阵） (Chinese)
 > **Summary**: ```rust,compile_fail // 概念: 交叉引用的反向验证 // 若文件 A 引用文件 B 的概念，但文件 B 不存在或重命名，读者会看到死链 // 模拟: 假设引用了一个不存在的文件 // [不存在的概念](./README.md) fn main() { // 这不是 Rust 编译错误，而是文档维护问题 // 但 Rust 的compiler错误信息模式类似： // "cannot find value `x` in this scope" — 类似于 "cannot find file" let_y = x; // ❌ 编译错误: cannot find value `x` }
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: P×Eva — 评价概念间引用完整性
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
+
 ## 10.4 边界测试：交叉引用的循环依赖与 markdown 链接死链（文档问题）
 
 ```rust,compile_fail

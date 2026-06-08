@@ -4,13 +4,11 @@
 > **Summary**: Rust Semantic Expressiveness: A Panoramic Survey. Guide to Semantic Expressiveness.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **受众**: [研究者]
 > **定位**: 本文件从**横向语义维度**梳理 Rust 语言的表达能力光谱，与 L0-L7 纵向概念体系形成正交互补。
 > **原则**: 不做"语法手册"，聚焦"Rust 能表达什么、不能表达什么、为什么选择这样的边界"。
 > **对齐来源**: [Rust Reference] · [Rust RFCs] · [Rust Internals Forum] · [RustBelt/Oxide] · [KRust]
 > **对比语言**: Rust · C++ · Go · Haskell
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 

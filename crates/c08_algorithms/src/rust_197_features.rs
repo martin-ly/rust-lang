@@ -10,32 +10,41 @@ use std::collections::VecDeque;
 // 1. VecDeque::truncate_front / retain_back
 // ============================================================================
 
-/// `VecDeque::truncate_front(n)` — 从头部截断 `n` 个元素
+/// `VecDeque::truncate_front(n)` — 截断前部，保留后部 `n` 个元素
 ///
-/// 与 `truncate`（从尾部截断）互补，实现双端队列的对称操作。
+/// 与 `truncate(n)`（保留前部 `n` 个，截断后部）互补，实现双端队列的对称操作。
+///
+/// ```text
+/// 原始: [1, 2, 3, 4, 5]
+/// truncate(2)       → [1, 2]      (保留前 2)
+/// truncate_front(2) → [4, 5]      (保留后 2)
+/// ```
 pub fn demo_vecdeque_truncate_front() {
     let mut deque: VecDeque<i32> = [1, 2, 3, 4, 5].into_iter().collect();
 
-    // 1.97+: 从头部移除 2 个元素
+    // 1.97+: 截断前部，保留后部 2 个元素
     // deque.truncate_front(2);
-    // assert_eq!(deque, [3, 4, 5]);
+    // assert_eq!(deque.make_contiguous(), &[4, 5]);
 
-    // 注意: truncate_front 在 1.97 beta 中，若未稳定则使用以下等效实现:
-    for _ in 0..2 {
+    // 当前等效实现:
+    while deque.len() > 2 {
         deque.pop_front();
     }
-    assert_eq!(deque.make_contiguous(), &[3, 4, 5]);
+    assert_eq!(deque.make_contiguous(), &[4, 5]);
 }
 
 /// `VecDeque::retain_back(f)` — 从尾部开始保留满足条件的元素
 ///
 /// 与 `retain`（从头部开始）互补，在某些场景下能更早终止遍历。
+///
+/// ⚠️ 状态更新 (2026-06-08): `retain_back` 在 nightly 1.98.0 中尚未出现，
+/// 可能推迟至 1.98+。下方等效实现仍具教学价值。
 pub fn demo_vecdeque_retain_back() {
     let mut deque: VecDeque<i32> = [1, 2, 3, 4, 5].into_iter().collect();
 
     // 1.97+: 从尾部保留偶数（结果: [2, 4]，从头部视角）
     // deque.retain_back(|x| x % 2 == 0);
-    // assert_eq!(deque, [2, 4]);
+    // assert_eq!(deque.make_contiguous(), &[2, 4]);
 
     // 当前等效实现（从尾部遍历）:
     let len = deque.len();
@@ -169,7 +178,10 @@ pub fn demo_int_format_into() {
     let s = n.to_string();
     let bytes = s.as_bytes();
     buf[..bytes.len()].copy_from_slice(bytes);
-    println!("formatted: {:?}", std::str::from_utf8(&buf[..bytes.len()]).unwrap());
+    println!(
+        "formatted: {:?}",
+        std::str::from_utf8(&buf[..bytes.len()]).unwrap()
+    );
 }
 
 // ============================================================================
@@ -203,5 +215,23 @@ mod tests {
     #[test]
     fn test_vecdeque_retain_back() {
         demo_vecdeque_retain_back();
+    }
+}
+
+/// Nightly 预览测试 — 使用 `cargo test -- --ignored` 运行
+///
+/// 这些测试需要 nightly toolchain 和对应的 feature gate。
+/// 在 1.97 稳定后，将取消注释的代码移入主测试模块并删除等效实现。
+#[cfg(test)]
+#[cfg(nightly)]
+mod nightly_tests {
+    use std::collections::VecDeque;
+
+    #[test]
+    #[ignore = "nightly-only: requires #![feature(vec_deque_truncate_front)]"]
+    fn test_truncate_front_nightly() {
+        let mut deque: VecDeque<i32> = VecDeque::from([1, 2, 3, 4, 5]);
+        deque.truncate_front(2);
+        assert_eq!(deque.make_contiguous(), &[4, 5]);
     }
 }

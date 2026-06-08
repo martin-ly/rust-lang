@@ -4,12 +4,10 @@
 > **Summary**: Rust 概念速查卡片. Quick-reference cards for Rust syntax, patterns, and standard library.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **受众**: [进阶]
 > **Bloom 层级**: 记忆 → 应用
 > **定位**：面试前/编码时的快速查阅手册。每个核心概念"一页纸"——定义 + 代码 + 错误码 + 关联概念。
 > **使用方式**：按 Ctrl+F 搜索概念名，或按字母序浏览。
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 

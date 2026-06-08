@@ -79,9 +79,9 @@ cargo flamegraph --dtrace --bin myapp
 │  main  │  tokio::runtime  │  parse_json │
 ├────────┴──────────────────┴─────────────┤
 │  ████████████████████████████  35%      │
-│  │  serde_json::from_str  18%          │
-│  │  │  core::str::parse  12%          │
-│  │  std::io::read_to_end  17%          │
+│  │  serde_json::from_str  18%           │
+│  │  │  core::str::parse  12%            │
+│  │  std::io::read_to_end  17%           │
 └─────────────────────────────────────────┘
 ```
 

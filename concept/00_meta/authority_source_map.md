@@ -1,8 +1,12 @@
 # 权威来源映射表（Authority Source Map）
 >
 > **EN**: 权威来源映射表（Authority Source Map） (Chinese)
-> **Summary**: | 概念 | 官方来源 | 学术来源 | 社区权威 | C++ 对标 | Haskell 对标 | Go 对标 | 备注 | | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | | **Ownership** | TRPL Ch4 · Reference § Ownership Types | Ralf Jung *"RustBelt: Securing the Foundations of the Rust Programming Language"* (POPL 2018) · Clarke *"Ownership Types
-
+> **Summary**:
+>
+> | 概念 | 官方来源 | 学术来源 | 社区权威 | C++ 对标 | Haskell 对标 | Go 对标 | 备注 |
+> | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+>
+> | **Ownership** | TRPL Ch4 · Reference § Ownership Types | Ralf Jung *"RustBelt: Securing the Foundations of the Rust Programming Language"* (POPL 2018) · Clarke *"Ownership Types
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
@@ -12,7 +16,6 @@
 > **对齐语言**: C++ / Haskell / Go
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Bloom 标注、跨文件链接、来源索引格式统一 [来源: Authority Source Sprint Batch 8]
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 

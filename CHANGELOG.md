@@ -35,6 +35,16 @@
 - **"valid for read/write" ptr 语义** (`knowledge/06_ecosystem/emerging/05_rust_1_96.md`): 内存模型定义调整说明
 - **Internal changes I1-I2** (`knowledge/06_ecosystem/emerging/05_rust_1_96.md`): aarch64 softfloat JSON target spec、LLVM ABI 严格验证
 
+### 📚 术语表扩展 (Phase 2 前置)
+
+- **`concept/00_meta/terminology_glossary.md`**: 116 → **173 术语**（+57），新增 1.96/1.97 特性术语：
+  - L1: `assert_matches!`, `NonZero`
+  - L3: `BorrowSanitizer`, `Field Projections`, `Polonius`, `NLL`, `valid for read/write`, `RandomSource`, `float_algebraic`, `c_variadic`, `proc_macro_value`, `size_of_val_raw`, `stack-protector`, `alignment_type`, `breakpoint`, `supertrait_item_shadowing`
+  - L4: `Tree Borrows`, `Stacked Borrows`, `Safety Tags`, `Prusti`, `Creusot`
+  - L5+: `cargo-script`, `Cranelift`, `cargo-audit`, `cargo-expand`, `sccache`, `cross`, `rustdoc`, `rustfmt`
+- **LEARNING_MVP_PATH.md 精化**: 添加 `[必修]` / `[推荐]` / `[选修]` 三层标记体系，路径概览 + 15 个学习阶段全部标注
+- **1.97 稳定化准备清单** (`.kimi/plan_rust_1_97_stabilization.md`): 新建执行清单，覆盖 crate 代码激活、文档更新、练习补全、术语表更新、CHANGELOG 更新、风险预案
+
 ---
 
 ## [2.5.3] - 2026-06-02 — Phase C 完成、质量基线全面达标与 1.97 预览跟进

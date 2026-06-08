@@ -48,6 +48,7 @@
   - [快速开始：工具安装与运行](#快速开始工具安装与运行)
     - [Miri（Rust 官方动态分析器）](#mirirust-官方动态分析器)
     - [Kani（AWS 有界模型检查器）](#kaniaws-有界模型检查器)
+    - [BorrowSanitizer（运行时借用检查 Sanitizer）](#borrowsanitizer运行时借用检查-sanitizer)
     - [Verus（Microsoft 演绎验证器）](#verusmicrosoft-演绎验证器)
   - [嵌入式测验](#嵌入式测验)
   - [认知路径](#认知路径)
@@ -352,6 +353,7 @@ pub fn safe_wrapper(data: &[u8]) -> u32 {
 | C/Rust FFI 混合验证 | **ESBMC** | TrustInSoft | Rust 前端成熟度有限 |
 | 遗留 C 代码审计 | **TrustInSoft** | ESBMC | 商业工具，需许可证 |
 | unsafe API 标准化文档 | **Safety Tags** (未来) | rustdoc + 手写 | RFC 尚未批准 |
+| 生产环境借用检查（运行时） | **BorrowSanitizer** (BSan) | Miri | 2-5x 性能开销，需 nightly |
 | 编译器本身验证 | **a-mir-formality** | — | 研究工具，非程序验证 |
 
 ---
@@ -384,6 +386,24 @@ cargo kani --harness verify_vec_push_safety
 # Autoharness 自动生成测试
 kani autoharness --function increment_all
 ```
+
+### BorrowSanitizer（运行时借用检查 Sanitizer）
+
+```bash
+# 编译并运行带 BorrowSanitizer 检查的程序
+RUSTFLAGS="-Zsanitizer=borrow" cargo run --target x86_64-unknown-linux-gnu
+
+# 注意: BSan 需要 nightly toolchain 和目标平台的 sanitizer 运行时支持
+```
+
+**适用场景**: 生产环境部署前的借用安全检查，Miri 太慢（100-1000x）时的替代方案。
+
+**关键限制**: 仅检测运行时可达路径；静态分析覆盖不如 Miri 全面。
+
+> **与 Miri 的对比**: Miri 解释执行 MIR（100-1000x  slowdown），BSan 编译期插桩（2-5x slowdown）。BSan 适合 CI 集成，Miri 适合深度调试。
+> **深度文档**: [BorrowSanitizer 深度解析](../07_future/borrow_sanitizer.md)
+
+---
 
 ### Verus（Microsoft 演绎验证器）
 

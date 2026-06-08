@@ -1,3 +1,5 @@
+> **⚠️ 已更新**: 本文件的深度内容已迁移至 [borrow_sanitizer.md](./borrow_sanitizer.md)（2026-06-08 新建，9.3KB）。本文件保留为历史参考。
+
 # BorrowSanitizer 概念预研：运行时借用检查工业化
 >
 > **EN**: Borrowing

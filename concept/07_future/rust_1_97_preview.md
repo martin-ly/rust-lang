@@ -379,7 +379,7 @@ async gen fn counter_stream(max: usize) -> impl Stream<Item = usize> {
 | **`core::alloc::Alloc`** | 🔄 等待 review | `dyn` subset of `Allocator` 稳定化为 `core::alloc::Alloc` trait（PR #157286，4 days old） [来源: releases.rs 2026-06-06] |
 | **`box_vec_non_null`** | 🔄 PFCP | `Box<Vec<T>>` → `NonNull<T>` 转换优化（PR #157273，5 days old，proposed-final-comment-period） [来源: releases.rs 2026-06-06] |
 | **`new_range_remainder`** | 🧪 Nightly | 新 `core::range` 迭代器类型的 `remainder()` 方法（Tracking Issue #154458，2026-03-27），RFC 3550 的后续扩展 [来源: rust-lang/rust#154458] |
-| **`VecDeque::retain_back`** | 🔄 FCP 完成 | `VecDeque` 反向保留元素（PR #151973，FCP finished，等待最终合并） [来源: releases.rs 2026-06-08] |
+| **`VecDeque::retain_back`** | 🔄 FCP 完成 | `VecDeque` 反向保留元素（PR #151973，FCP finished）。⚠️ **nightly 1.98.0 验证中未出现**，可能推迟至 1.98+ [来源: releases.rs 2026-06-08] |
 | **`supertrait_item_shadowing`** | 🔄 PFCP | 允许子 trait 覆盖父 trait 的关联项（PR #150055，proposed-final-comment-period） [来源: releases.rs 2026-06-08] |
 | **`alignment_type` / `ptr_alignment_type`** | 🔄 PFCP | 类型级对齐抽象，部分稳定化为 `alignment_type`（PR #154065，proposed-final-comment-period） [来源: releases.rs 2026-06-08] |
 | **`stack-protector`** | 🔄 PFCP | 栈保护编译器选项（PR #148051，proposed-final-comment-period） [来源: releases.rs 2026-06-08] |

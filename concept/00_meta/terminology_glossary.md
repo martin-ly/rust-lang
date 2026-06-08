@@ -61,6 +61,10 @@
 
 - **闭包** (Closures) [L1] — 可捕获其环境变量的匿名函数 — [TRPL](https://doc.rust-lang.org/book/ch13-01-closures.html)
 
+- **`assert_matches!`** (assert_matches!) [L1] — Rust 1.96 稳定的模式匹配断言宏，检查值是否匹配给定模式 — [std](https://doc.rust-lang.org/std/macro.assert_matches.html)
+
+- **`NonZero`** (NonZero) [L1] — 保证值不为零的整数类型族（`NonZeroU32` 等），Rust 1.96 新增 `Step` trait 支持范围迭代 — [std](https://doc.rust-lang.org/std/num/struct.NonZeroU32.html)
+
 - **迭代器** (Iterator) [L1] — 按顺序惰性产生元素的 trait — [TRPL](https://doc.rust-lang.org/book/ch13-02-iterators.html)
 
 - **模块** (Module) [L1] — 通过 `mod` 组织的代码命名空间单元 — [TRPL](https://doc.rust-lang.org/book/ch07-02-defining-modules-to-control-scope-and-privacy.html)
@@ -227,6 +231,34 @@
 
 - **作用域线程** (Scoped Thread) [L3] — 生命周期受限于作用域的线程，可安全借用栈数据 — [std](https://doc.rust-lang.org/std/thread/fn.scope.html)
 
+- **BorrowSanitizer** (BorrowSanitizer / BSan) [L3] — 运行时借用检查 sanitizer，通过 Shadow Stack 检测内存安全问题，Miri 的生产级补充 — [Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/polonius.html)
+
+- **Field Projections** (Field Projections) [L3] — 通过 `field_of!` 宏和 `Field` trait 实现的泛型字段投影，支持安全 Pin 投影 — [Tracking Issue](https://github.com/rust-lang/rust/issues/154909)
+
+- **Polonius** (Polonius) [L3] — 基于 Datalog 约束求解的新一代借用检查器，比 NLL 更精确，目标 2026 年内稳定化 alpha — [RustConf 2018](https://www.youtube.com/watch?v=_8X69Kw0EhY)
+
+- **NLL** (Non-Lexical Lifetimes) [L3] — 非词法生命周期，基于数据流分析放宽词法作用域限制，Rust 1.31+ 默认启用 — [RFC 2094](https://rust-lang.github.io/rfcs/2094-nll.html)
+
+- **`valid for read/write`** (Valid for Read/Write) [L3] — Rust 1.96 重构的指针有效性语义，明确 null 指针不被视为 valid，统一 Miri/文档/编译器行为 — [Rust Reference](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)
+
+- **`RandomSource`** (RandomSource) [L3] — 可插拔随机数源抽象 trait，允许 `rand::thread_rng()`、`getrandom` 等通过统一接口接入标准库 API — [PR #157226](https://github.com/rust-lang/rust/pull/157226)
+
+- **`float_algebraic`** (float_algebraic) [L3] — 浮点代数优化属性，允许编译器在 `-ffast-math` 语义下重组浮点运算（FCP 中） — [PR #157168](https://github.com/rust-lang/rust/pull/157168)
+
+- **`c_variadic`** (C-variadic) [L3] — C 可变参数函数定义，允许在 Rust 中直接定义 `extern "C" fn foo(fmt: *const u8, ...)`（PFCP 中） — [RFC 2137](https://rust-lang.github.io/rfcs/2137-variadic.html)
+
+- **`proc_macro_value`** (proc_macro_value) [L3] — 允许过程宏在编译期产生值而不仅是 token 流，为 const 泛型提供更强大的元编程能力（等待 review） — [PR #152092](https://github.com/rust-lang/rust/pull/152092)
+
+- **`size_of_val_raw`** (size_of_val_raw) [L3] — 计算裸值（`dyn Trait` 等）的尺寸而不需要已知类型，配合 `align_of_val_raw` 和 `Layout::for_value_raw`（等待 review） — [PR #157572](https://github.com/rust-lang/rust/pull/157572)
+
+- **`stack-protector`** (Stack Protector) [L3] — 栈保护编译器选项，在函数入口插入 canary 检测栈溢出攻击（PFCP 中） — [PR #148051](https://github.com/rust-lang/rust/pull/148051)
+
+- **`alignment_type`** (alignment_type) [L3] — 类型级对齐抽象，允许在类型系统中表达和传递对齐要求（PFCP 中） — [PR #154065](https://github.com/rust-lang/rust/pull/154065)
+
+- **`breakpoint`** (breakpoint) [L3] — 标准库断点函数，跨平台触发调试器断点（PFCP 中） — [PR #142824](https://github.com/rust-lang/rust/pull/142824)
+
+- **`supertrait_item_shadowing`** (Supertrait Item Shadowing) [L3] — 允许子 trait 覆盖父 trait 的关联项，解决 trait 层次中的命名冲突（PFCP 中） — [PR #150055](https://github.com/rust-lang/rust/pull/150055)
+
 - **虚表** (VTable) [L3] — 动态分发使用的函数指针表，dyn Trait 的胖指针携带 vtable 地址 — [Reference](https://doc.rust-lang.org/reference/items/traits.html#dyn-trait-object-type-layout)
 
 - **动态分发** (Dynamic Dispatch) [L3] — 运行时通过 vtable 解析 trait 方法调用的机制，dyn Trait 使用 — [TRPL](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)
@@ -261,11 +293,19 @@
 
 - **Kani** (Kani) [L4] — Rust 代码的自动模型检测工具 — [Kani Docs](https://model-checking.github.io/kani/)
 
+- **Tree Borrows** (Tree Borrows) [L4] — 比 Stacked Borrows 更宽松的别名分析模型，允许某些合法的重叠借用模式 — [RFC](https://github.com/rust-lang/rfcs/pull/3367)
+
+- **Stacked Borrows** (Stacked Borrows) [L4] — Rust 的严格别名分析模型，Miri 默认使用以检测 UB，但比 Tree Borrows 更保守 — [Stacked Borrows Paper](https://plv.mpi-sws.org/rust-belt/stacked-borrows/)
+
+- **Safety Tags** (Safety Tags) [L4] — 编译器自动为 unsafe 代码块生成的形式化安全契约标记，用于静态验证和文档生成 — [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/2026/safety-tags.html)
+
+- **Prusti** (Prusti) [L4] — 基于 Viper 验证器基础设施的 Rust 静态验证工具，支持前置/后置条件规范 — [Prusti Project](https://www.pm.inf.ethz.ch/research/prusti.html)
+
+- **Creusot** (Creusot) [L4] — 基于 Why3 验证平台的 Rust 形式化验证工具，使用 ML 风格规范语言 — [Creusot Docs](https://creusot-rs.github.io/)
+
 - **Verus** (Verus) [L4] — 支持 Rust 的演绎验证与证明助手 — [Verus Docs](https://verus-lang.github.io/verus/)
 
 - **Miri** (Miri) [L4] — 检测未定义行为的 Rust 中间表示解释器 — [Miri](https://github.com/rust-lang/miri)
-
-- **Tree Borrows** (Tree Borrows) [L4] — Miri 采用的内存别名模型 — [Miri](https://github.com/rust-lang/miri)
 
 - **高级中间表示** (HIR) [L4] — High-level IR，Rust 编译器中经过类型推断和宏展开后的高级中间表示 — [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/hir.html)
 
@@ -310,6 +350,22 @@
 - **零成本抽象** (Zero-Cost Abstraction) [L5+] — 高级语言特性编译后不产生运行时开销的设计原则 — [C++ Origins](https://www.stroustrup.com/FSM/0cost.pdf) · [Rust Blog](https://blog.rust-lang.org/2015/05/11/traits.html)
 
 - **Clap** (Clap) [L5+] — Rust 生态最流行的命令行参数解析库，支持派生宏和构建器模式 — [docs.rs](https://docs.rs/clap/latest/clap/)
+
+- **`cargo-script`** (cargo-script) [L5+] — 直接运行单个 Rust 文件而无需 Cargo.toml，FCP 已结束但被 edition policy 阻塞 — [RFC 3503](https://rust-lang.github.io/rfcs/3503-cargo-script.html)
+
+- **Cranelift** (Cranelift) [L5+] — Wasmtime 项目开发的替代后端编译器，Rust 编译器的实验性后端，因资金不足进展停滞（2026-05） — [GitHub](https://github.com/bytecodealliance/wasmtime/tree/main/cranelift)
+
+- **cargo-audit** (cargo-audit) [L5+] — 扫描 Cargo.lock 中的已知安全漏洞（RUSTSEC），与 `cargo-deny` 配合使用 — [GitHub](https://github.com/RustSec/rustsec/tree/main/cargo-audit)
+
+- **cargo-expand** (cargo-expand) [L5+] — 展开宏并显示生成的代码，调试宏和检查派生宏输出的必备工具 — [GitHub](https://github.com/dtolnay/cargo-expand)
+
+- **sccache** (sccache) [L5+] — Mozilla 开发的共享编译缓存，支持本地磁盘和云存储（S3、Redis 等），加速 CI 构建 — [GitHub](https://github.com/mozilla/sccache)
+
+- **cross** (cross) [L5+] — 基于 Docker/QEMU 的零配置交叉编译工具，简化多目标平台构建 — [GitHub](https://github.com/cross-rs/cross)
+
+- **rustdoc** (rustdoc) [L5+] — Rust 内置文档生成工具，支持 Markdown、文档测试、交叉引用和搜索索引 — [Rustdoc Book](https://doc.rust-lang.org/rustdoc/)
+
+- **rustfmt** (rustfmt) [L5+] — Rust 官方代码格式化工具，基于 `rustfmt.toml` 配置统一代码风格 — [GitHub](https://github.com/rust-lang/rustfmt)
 
 - **Anyhow** (Anyhow) [L5+] — 基于 dyn Error 的灵活错误处理库，简化 ? 传播和错误上下文 — [docs.rs](https://docs.rs/anyhow/latest/anyhow/)
 

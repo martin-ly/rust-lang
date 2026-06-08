@@ -74,8 +74,7 @@
   - [17. 形式化文档资源](#17-形式化文档资源)
     - [Rust 形式化规范](#rust-形式化规范)
     - [类型理论与形式化方法](#类型理论与形式化方法)
-  - [Rust 1.95+ 更新](#rust-195-更新)
-  - [**最后更新**: 2026-05-08 (添加 1.95+ 引用)](#最后更新-2026-05-08-添加-195-引用)
+  - [Rust 1.96+ 更新](#rust-196-更新)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -1324,17 +1323,19 @@ pub fn x86_64_optimized() -> i32 {
 
 ---
 
-## Rust 1.95+ 更新
+## Rust 1.96+ 更新
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **最新版本**: Rust 1.96.0+ (2026-03-05)
+> **最新版本**: Rust 1.96.0+ (2026-05-28)
 
-本文档基于 Rust 1.93/1.92，最新版本请参见：
+本文档基于 Rust 1.96.0，涵盖 1.93–1.96 关键特性。历史版本请参见：
 
+- [Rust 1.96 稳定特性全景](./06_19_rust_1_96_features.md)
 - [Rust 历史版本文档索引](../README.md)
 
-**最后更新**: 2026-05-08 (添加 1.95+ 引用)
+**最后更新**: 2026-06-08 (对齐 1.96 稳定版内容)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

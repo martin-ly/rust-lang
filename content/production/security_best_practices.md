@@ -70,7 +70,7 @@ cargo audit --deny warnings
 
 **输出示例**:
 
-```
+```text
 Crate:     regex
 Version:   1.5.4
 Title:     Regexes with large repetitions on empty sub-expressions take a very long time
