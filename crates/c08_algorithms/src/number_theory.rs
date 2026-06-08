@@ -23,11 +23,7 @@ pub fn egcd(a: i128, b: i128) -> (i128, i128, i128) {
 
 pub fn mod_inv(a: i128, m: i128) -> Option<i128> {
     let (g, x, _) = egcd(a, m);
-    if g != 1 {
-        None
-    } else {
-        Some((x % m + m) % m)
-    }
+    if g != 1 { None } else { Some((x % m + m) % m) }
 }
 
 fn is_probable_prime_u64(n: u64) -> bool {
@@ -78,8 +74,8 @@ pub fn pollard_rho(n: u128) -> u128 {
     if n.is_multiple_of(2) {
         return 2;
     }
-    use rand::rngs::ThreadRng;
     use rand::RngExt;
+    use rand::rngs::ThreadRng;
     let mut rng = ThreadRng::default();
     loop {
         let c = rng.random::<u128>() % (n - 1) + 1;

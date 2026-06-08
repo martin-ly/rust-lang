@@ -141,7 +141,7 @@ cargo test --workspace
 
 ## 项目结构
 
-```
+```text
 rust-lang/
 ├── concept/                    # 📚 知识体系核心（280+ 个 md 文件）
 │   ├── 00_meta/                # L0: 学习工具 + 质量基础设施

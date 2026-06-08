@@ -562,11 +562,11 @@ proc-macro-error2 = "2.0.1"
 is-terminal = "0.4.17"
 # wasm-bindgen: WebAssembly绑定生成器，支持WebAssembly 2.0 - 版本 0.2+ (字母索引)
 # 2026-04-24: Rust 1.96.0 同步更新
-wasm-bindgen = "0.2.122"
+wasm-bindgen = "0.2.123"
 # js-sys: WebAssembly 与 JavaScript 的绑定
-js-sys = "0.3.99"
+js-sys = "0.3.100"
 # wasm-bindgen-futures: WebAssembly 异步 Future 支持
-wasm-bindgen-futures = "0.4.72"
+wasm-bindgen-futures = "0.4.73"
 # wasm-bindgen-test: WebAssembly 测试框架
 wasm-bindgen-test = "0.3.72"
 # nix: 系统调用安全封装库
