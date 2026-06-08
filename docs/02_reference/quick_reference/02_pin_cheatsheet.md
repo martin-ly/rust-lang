@@ -23,7 +23,6 @@
     - [安全投影规则](#安全投影规则)
   - [📊 Pin 使用决策树](#-pin-使用决策树)
   - [🔗 参考](#-参考)
-  - [**最后更新**: 2026-05-08](#最后更新-2026-05-08)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -133,6 +132,7 @@ impl MyStruct {
 
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-05-08
+
 ---
 
 > **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
@@ -162,19 +162,12 @@ impl MyStruct {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
 > **[来源: ACM - Systems Programming Languages]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ---

@@ -1,4 +1,5 @@
-> **权威来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/),
+> **权威来源**:
+> [The Rust Programming Language](https://doc.rust-lang.org/book/),
 > **分级**: [A]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > [Rust Reference — Ownership](https://doc.rust-lang.org/reference/ownership.html),

@@ -58,6 +58,13 @@ git-fetch-with-cli = true
 [pipeline]
 enabled = true
 
+# ============ Resolver 配置 ============
+# 允许 cargo update 选择需要更高 Rust 版本的依赖版本
+# 注意: 开发时使用 nightly toolchain，不限制为 rust-version 声明的 MSRV
+# 如需严格遵守 MSRV，注释掉此行即可恢复默认行为
+[resolver]
+incompatible-rust-versions = "allow"
+
 # ============ Profile 优化 ============
 # 注意: 所有 profile 已统一由根 Cargo.toml 管理。
 # .cargo/config.toml 中不再重复定义，避免配置覆盖导致的不一致。
