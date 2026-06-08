@@ -45,6 +45,34 @@
 - **LEARNING_MVP_PATH.md 精化**: 添加 `[必修]` / `[推荐]` / `[选修]` 三层标记体系，路径概览 + 15 个学习阶段全部标注
 - **1.97 稳定化准备清单** (`.kimi/plan_rust_1_97_stabilization.md`): 新建执行清单，覆盖 crate 代码激活、文档更新、练习补全、术语表更新、CHANGELOG 更新、风险预案
 
+### 🔬 形式化工具生态补全（方向 1）
+
+- **`concept/04_formal/22_modern_verification_tools.md`**: 选型速查表新增 BorrowSanitizer 条目，快速开始指南新增 BSan 安装运行说明
+- **`concept/07_future/08_safety_tags_preview.md`**: 更新 BorrowSanitizer 引用链接指向 `borrow_sanitizer.md`
+- **`concept/07_future/20_borrowsanitizer_preview.md`**: 顶部添加指向 `borrow_sanitizer.md` 的迁移提示
+
+### 🧪 1.97 Nightly 验证与修正（方向 2）
+
+- **`crates/c08_algorithms/src/rust_197_features.rs`**:
+  - `truncate_front` 行为修正：保留**后部** `n` 个元素（`[1,2,3,4,5]` → `[4,5]`），与 `truncate(n)` 对称
+  - `retain_back` 状态更新：nightly 1.98.0 验证中**不存在**，可能推迟至 1.98+
+  - 新增 `nightly_tests` 模块，含 `#[ignore = "nightly-only"]` 测试
+- **`.kimi/plan_rust_1_97_stabilization.md`**: 更新清单反映 nightly 验证发现
+
+### 🔧 依赖与版本维护
+
+- **Cargo.toml**: `wasm-bindgen` 0.2.122→0.2.123, `js-sys` 0.3.99→0.3.100, `wasm-bindgen-futures` 0.4.72→0.4.73
+- **版本信息修复**: `06_14_rust_1_95_nightly_preview.md` 对齐至 1.96.0
+
+### 🏷️ Content Marking Strategy（决策 3.C）
+
+- **5 个核心 preview 文件**添加 `#[experimental]` `#[nightly_only]` Rust 属性标记：
+  - `borrow_sanitizer.md`
+  - `08_safety_tags_preview.md`
+  - `10_derive_coerce_pointee_preview.md`
+  - `11_const_trait_impl_preview.md`
+  - `16_cranelift_backend_preview.md`
+
 ---
 
 ## [2.5.3] - 2026-06-02 — Phase C 完成、质量基线全面达标与 1.97 预览跟进

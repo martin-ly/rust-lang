@@ -4,6 +4,7 @@
 > **Summary**: Compiler Internals. Core Rust concept covering mechanism analysis, compiler internals, compiler backend.
 >
 > **状态**: 🧪 Nightly 实验性 | ⚠️ **官方因资金不足进展停滞 (2026-05)**
+> **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)
 > **预计稳定**: 待定 —— Rust Project Goals 2026 已标记为 **Not completed (lack of funding)**
 >

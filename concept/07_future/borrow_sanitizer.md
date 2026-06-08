@@ -11,6 +11,7 @@
 >
 > **跟踪版本**: nightly 1.98.0
 > **状态**: 🧪 Nightly 实验性 | **Rust Project Goals 2026 重点目标**（取代 "Emit Retags in Codegen"）
+> **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
 > **RustConf 2026**: 演讲已接受（2026-09）
 >
 > **权威来源**:

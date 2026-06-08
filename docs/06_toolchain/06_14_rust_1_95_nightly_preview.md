@@ -400,19 +400,19 @@ cargo build --timings -Zsection-timings
 
 ---
 
-## Rust 1.95+ 更新
+## Rust 1.96+ 更新
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **最新版本**: Rust 1.96.0+ (2026-03-05)
+> **最新版本**: Rust 1.96.0+ (2026-05-28)
 
-本文档基于 Rust 1.93/1.92，最新版本请参见：
+本文档基于 Rust 1.96.0，涵盖 1.93–1.96 关键特性。历史版本请参见：
 
+- [Rust 1.96 稳定特性全景](./06_19_rust_1_96_features.md)
 - Rust 1.94 完整发布说明（已归档）
-- Rust 1.94 采用指南（已归档）
 - Rust 1.93 vs 1.94 对比（已归档）
 
-**最后更新**: 2026-05-08 (添加 1.95+ 引用)
+**最后更新**: 2026-06-08 (对齐 1.96 稳定版内容)
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
