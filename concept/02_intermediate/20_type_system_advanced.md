@@ -1,6 +1,9 @@
 > **内容分级**: [综述级]
-
-> **本节关键术语**: 高级类型系统 (Advanced Type System) · 类型推断 (Type Inference) · 高阶类型 (Higher-Kinded Type) · 类型族 (Type Family) — [完整对照表](../00_meta/terminology_glossary.md)
+> **本节关键术语**:
+>
+> 高级类型系统 (Advanced Type System) · 类型推断 (Type Inference) ·
+> 高阶类型 (Higher-Kinded Type) · 类型族 (Type Family)
+> — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 高级类型系统：从关联类型到类型级编程
 >

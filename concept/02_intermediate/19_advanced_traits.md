@@ -1,5 +1,4 @@
 > **内容分级**: [综述级]
-
 > **本节关键术语**: 高级特征 (Advanced Traits) · 关联类型 (Associated Type) · GAT · 特化 (Specialization) · 负实现 (Negative Impl) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 高级 Trait 主题：从关联类型到特化

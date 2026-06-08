@@ -587,7 +587,11 @@ impl SelfRefFixed {
 }
 ```
 
-> **修正**: 自引用结构体（字段引用同一结构体的其他字段）在 Rust 的生命周期系统中无法表达，因为结构体的生命周期参数只能引用外部数据。解决方案是使用裸指针（无生命周期约束）+ `Pin`（防止移动）+ `PhantomPinned`（标记为 !Unpin）。这是 Rust 安全边界的典型突破——编译器无法证明的安全属性，由 unsafe 代码承担证明义务。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**:
+> 自引用结构体（字段引用同一结构体的其他字段）在 Rust 的生命周期系统中无法表达，因为结构体的生命周期参数只能引用外部数据。
+> 解决方案是使用裸指针（无生命周期约束）+ `Pin`（防止移动）+ `PhantomPinned`（标记为 !Unpin）。
+> 这是 Rust 安全边界的典型突破——编译器无法证明的安全属性，由 unsafe 代码承担证明义务。
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.2 边界测试：生命周期边界中的 `for<'a>` HRTB（编译错误）
 
@@ -616,7 +620,11 @@ where
 }
 ```
 
-> **修正**: 高阶 trait bound（HRTB）`for<'a>` 要求实现对所有可能的生命周期 `'a` 有效。当闭包作为参数传递时，默认的生命周期推断可能过于具体（绑定到特定作用域），导致无法满足泛型函数的 trait bound。HRTB 在回调函数、比较器、迭代器适配器等高阶函数场景中至关重要，是 Rust 类型系统表达"多态生命周期"的关键机制。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**:
+> 高阶 trait bound（HRTB）`for<'a>` 要求实现对所有可能的生命周期 `'a` 有效。
+> 当闭包作为参数传递时，默认的生命周期推断可能过于具体（绑定到特定作用域），
+> 导致无法满足泛型函数的 trait bound。HRTB 在回调函数、比较器、迭代器适配器等高阶函数场景中至关重要，是 Rust 类型系统表达"多态生命周期"的关键机制。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.5 边界测试：闭包捕获引用与 `Fn` trait 的生命周期约束（编译错误）
 
@@ -637,7 +645,14 @@ fn main() {
 }
 ```
 
-> **修正**: `impl Fn() + 'a` 表示闭包本身的生命周期为 `'a`——闭包捕获的引用不能超越 `'a`。`make_callback(&s)` 返回的闭包与 `s` 同生命周期，因此 `s` 释放后闭包失效。若需长生命周期的回调，必须拥有数据：`move || println!("{}", s.clone())` 或 `Arc<str>`。这是 Rust 异步和事件驱动编程的核心约束：回调、future、stream 的生命周期与捕获数据绑定。这与 C++ 的 `std::function`（可捕获引用，但悬垂是 UB）或 Java 的匿名类（捕获 final 引用，GC 管理生命周期）不同——Rust 在编译期防止了回调的悬垂引用。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html)]
+> **修正**:
+> `impl Fn() + 'a` 表示闭包本身的生命周期为 `'a`——闭包捕获的引用不能超越 `'a`。
+> `make_callback(&s)` 返回的闭包与 `s` 同生命周期，因此 `s` 释放后闭包失效。
+> 若需长生命周期的回调，必须拥有数据：`move || println!("{}", s.clone())` 或 `Arc<str>`。
+> 这是 Rust 异步和事件驱动编程的核心约束：回调、future、stream 的生命周期与捕获数据绑定。
+> 这与 C++ 的 `std::function`（可捕获引用，但悬垂是 UB）或 Java 的匿名类（捕获 final 引用，GC 管理生命周期）不同——Rust 在编译期防止了回调的悬垂引用。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] ·
+> [来源: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html)]
 
 ### 10.6 边界测试：`impl Trait` 返回类型的生命周期捕获（编译错误）
 
@@ -648,7 +663,19 @@ fn make_ref<'a>(s: &'a str) -> impl Iterator<Item = &'a char> + 'a {
 }
 ```
 
-> **修正**: `impl Trait` 返回类型可捕获输入参数的生命周期（`+ 'a`），但不能延长局部变量的生命周期。上述代码中，`Vec<char>` 在函数内创建，`iter()` 返回的 `&char` 与 `Vec` 同生命周期——函数返回后 `Vec` 被释放，引用悬垂。解决方案：1) 返回拥有数据的类型（`Vec<char>` 本身，或 `Chars` 迭代器）；2) 让调用者提供缓冲区；3) 使用 `unsafe` 和 `ManuallyDrop`（不推荐）。这与 `async fn` 的生命周期捕获类似：返回的 future 可引用输入参数，但不能引用局部变量。`impl Trait` 的生命周期规则是 Rust 类型系统的核心——它确保返回的抽象不依赖已释放的数据。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)] · [来源: [Rust Reference — Impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html)]
+> **修正**:
+> `impl Trait` 返回类型可捕获输入参数的生命周期（`+ 'a`），但不能延长局部变量的生命周期。
+> 上述代码中，`Vec<char>` 在函数内创建，`iter()` 返回的 `&char` 与 `Vec` 同生命周期——函数返回后 `Vec` 被释放，引用悬垂。
+> 解决方案：
+>
+> 1) 返回拥有数据的类型（`Vec<char>` 本身，或 `Chars` 迭代器）；
+> 2) 让调用者提供缓冲区；
+> 3) 使用 `unsafe` 和 `ManuallyDrop`（不推荐）。
+>
+> 这与 `async fn` 的生命周期捕获类似：返回的 future 可引用输入参数，但不能引用局部变量。
+> `impl Trait` 的生命周期规则是 Rust 类型系统的核心——它确保返回的抽象不依赖已释放的数据。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)] ·
+> [来源: [Rust Reference — Impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html)]
 
 ### 10.3 边界测试：lifetime bounds 与 trait object 的交互（编译错误）
 
@@ -666,7 +693,18 @@ fn use_processor(p: &dyn Processor<'static>) {
 fn main() {}
 ```
 
-> **修正**: Trait object `dyn Trait<'a>` 将生命周期参数**固化**为具体值。`dyn Processor<'static>` 要求所有输入输出都是 `'static`，不能处理临时字符串。修复：1) `fn use_processor<'a>(p: &dyn Processor<'a>, data: &'a str)` — 泛型生命周期；2) `dyn for<'a> Processor<'a>` — HRTB（Higher-Ranked Trait Bounds），接受任意生命周期。HRTB 的语法：`dyn for<'a> Fn(&'a str) -> &'a str` 表示闭包对所有 `'a` 有效。这与 Java 的泛型通配符（`? extends T`）或 C++ 的模板（无显式生命周期参数）不同——Rust 的 HRTB 允许 trait object 保持生命周期泛型，是高级类型系统的核心特性。[来源: [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-02-advanced-lifetimes.html)]
+> **修正**:
+>
+> Trait object `dyn Trait<'a>` 将生命周期参数**固化**为具体值。
+> `dyn Processor<'static>` 要求所有输入输出都是 `'static`，不能处理临时字符串。
+> 修复：
+>
+> 1) `fn use_processor<'a>(p: &dyn Processor<'a>, data: &'a str)` — 泛型生命周期；
+> 2) `dyn for<'a> Processor<'a>` — HRTB（Higher-Ranked Trait Bounds），接受任意生命周期。
+> HRTB 的语法：`dyn for<'a> Fn(&'a str) -> &'a str` 表示闭包对所有 `'a` 有效。
+> 这与 Java 的泛型通配符（`? extends T`）或 C++ 的模板（无显式生命周期参数）不同——Rust 的 HRTB 允许 trait object 保持生命周期泛型，是高级类型系统的核心特性。
+> [来源: [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-02-advanced-lifetimes.html)]
 
 ## 实践
 
@@ -693,9 +731,7 @@ fn main() {}
 > 编译通过 ⟸ 生命周期标注正确 ⟸ 引用有效性
 > 无悬垂引用 ⟸ 生命周期偏序关系 ⟸ 借用规则
 > **过渡**: 掌握 生命周期高级主题：从 HRTB 到自引用类型 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 生命周期高级主题：从 HRTB 到自引用类型 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: 生命周期高级主题：从 HRTB 到自引用类型 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界

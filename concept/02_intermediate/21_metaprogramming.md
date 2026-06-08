@@ -1,6 +1,6 @@
 > **内容分级**: [综述级]
-
-> **本节关键术语**: 元编程 (Metaprogramming) · 宏 (Macro) · 编译期计算 (Compile-Time Computation) · const generics · 类型操作 — [完整对照表](../00_meta/terminology_glossary.md)
+> **本节关键术语**: 元编程 (Metaprogramming) · 宏 (Macro) · 编译期计算 (Compile-Time Computation) · const generics · 类型操作
+> — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 元编程：Rust 的编译期代码生成与变换
 >
