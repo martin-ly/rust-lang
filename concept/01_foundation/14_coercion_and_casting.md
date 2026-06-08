@@ -1,5 +1,4 @@
 > **内容分级**: [综述级]
-
 > **本节关键术语**: 强制转换 (Coercion) · 显式转换 (Casting) · as · Deref 强制转换 · 类型推断 — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 类型强制与转换：显式与隐式的边界
@@ -719,11 +718,17 @@ fn main() {}
 > 1) 函数体必须是编译期可计算的；
 > 2) `Vec::new()` 在某些 Rust 版本中不是 `const fn`；
 > 3) 编译期限制逐步放宽（`const_mut_refs`、`const_vec_string` 等）。
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rust RFCs](https://rust-lang.github.io/rfcs/)
+>
+> **权威来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [Rust Standard Library](https://doc.rust-lang.org/std/) ·
+> [Rust RFCs](https://rust-lang.github.io/rfcs/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 
 ## 实践
@@ -743,7 +748,7 @@ fn main() {}
 ### 核心推理链
 
 | 定理 | 前提 | 结论 | 置信度 |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | 类型强制与转换：显式与隐式的边界 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
 | 类型强制与转换：显式与隐式的边界 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
 | 类型强制与转换：显式与隐式的边界 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
@@ -751,9 +756,7 @@ fn main() {}
 > 类型转换安全 ⟸ Deref/From/Into 自动 ⟸ 编译期检查
 > 显式转换正确 ⟸ as / try_from 语义 ⟸ 类型系统
 > **过渡**: 掌握 类型强制与转换：显式与隐式的边界 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 类型强制与转换：显式与隐式的边界 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: 类型强制与转换：显式与隐式的边界 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界

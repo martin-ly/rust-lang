@@ -44,7 +44,7 @@ Week 3: 并发与 CLI 项目（12h）
 **学习目标**：安装 Rust，运行第一个程序，理解 Cargo 基本操作。
 
 | 任务 | 内容 | 预计时间 | 验证标准 |
-|:---|:---|:---:|:---|
+| :--- | :--- | :---: | :--- |
 | 安装 | `rustup` 安装，配置 VS Code + rust-analyzer | 30min | `rustc --version` 输出 1.96+ |
 | 阅读 | [concept/01_foundation/00_start](./concept/01_foundation/00_start.md) | 20min | — |
 | 代码 | 运行 `cargo new hello` 并修改打印内容 | 15min | 程序成功运行 |

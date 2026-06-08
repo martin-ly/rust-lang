@@ -111,7 +111,7 @@
 
 ## 3. 快速决策树
 
-```
+```text
 你想找什么？
 ├── Rust 所有权/借用/生命周期的完整形式化理论
 │   └── → rust-ownership-decidability/01-core-concepts/

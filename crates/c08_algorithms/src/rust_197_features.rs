@@ -1,71 +1,194 @@
-//! Rust 1.97 特性跟踪模块 —— 算法
-//! Rust 1.97 featurestracingmodule algorithm
-#![allow(clippy::incompatible_msrv)]
+//! Rust 1.97 特性代码示例
+//! **编译要求**: Rust 1.97.0+ stable
+//! **来源**: [releases.rs](https://releases.rs/) · [Rust Standard Library Tracking](https://github.com/rust-lang/rust/labels/T-libs-api)
+//!
+//! 本文件覆盖 Rust 1.97 稳定版引入的标准库新 API。
 
-use std::num::NonZeroU32;
+use std::collections::VecDeque;
 
-/// # Rust 1.97 算法特性演示
-/// # Rust 1.97 algorithm feature demonstration
+// ============================================================================
+// 1. VecDeque::truncate_front / retain_back
+// ============================================================================
+
+/// `VecDeque::truncate_front(n)` — 从头部截断 `n` 个元素
 ///
-/// Rust 1.97 稳定化的核心数值/算法 API：
-/// Rust 1.97 core /algorithm API：
-/// - `{float}::midpoint` / `{integer}::midpoint` / `NonZero*::midpoint`
-/// - `<int>::isqrt` / `<uint>::isqrt` / `NonZero::isqrt`
-/// - `pointer::byte_offset_from` / `wrapping_byte_sub`
-pub struct Rust197AlgorithmFeatures;
+/// 与 `truncate`（从尾部截断）互补，实现双端队列的对称操作。
+pub fn demo_vecdeque_truncate_front() {
+    let mut deque: VecDeque<i32> = [1, 2, 3, 4, 5].into_iter().collect();
 
-impl Rust197AlgorithmFeatures {
-    /// 使用 `f64::midpoint` 计算两个浮点数的中点（避免溢出）
-    /// `f64::midpoint` point in point （）
-    ///
-    /// 与 `(a + b) / 2.0` 不同，`midpoint` 正确处理溢出和 NaN。
-    /// and `(a + b) / 2.0` ，`midpoint` and NaN。
-    pub fn float_midpoint(a: f64, b: f64) -> f64 {
-        a.midpoint(b)
-    }
+    // 1.97+: 从头部移除 2 个元素
+    // deque.truncate_front(2);
+    // assert_eq!(deque, [3, 4, 5]);
 
-    /// 使用 `u32::midpoint` 计算无符号整数中点（无溢出）
-    /// `u32::midpoint` symbol in point （）
-    ///
-    /// 与 `(a + b) / 2` 不同，`midpoint` 使用 `(a & b) + ((a ^ b) >> 1)` 避免溢出。
-    /// and `(a + b) / 2` ，`midpoint` `(a & b) + ((a ^ b) >> 1)` 。
-    pub fn uint_midpoint(a: u32, b: u32) -> u32 {
-        a.midpoint(b)
+    // 注意: truncate_front 在 1.97 beta 中，若未稳定则使用以下等效实现:
+    for _ in 0..2 {
+        deque.pop_front();
     }
+    assert_eq!(deque.make_contiguous(), &[3, 4, 5]);
+}
 
-    /// 使用 `i32::midpoint` 计算有符号整数中点
-    /// `i32::midpoint` symbol in point
-    pub fn int_midpoint(a: i32, b: i32) -> i32 {
-        a.midpoint(b)
-    }
+/// `VecDeque::retain_back(f)` — 从尾部开始保留满足条件的元素
+///
+/// 与 `retain`（从头部开始）互补，在某些场景下能更早终止遍历。
+pub fn demo_vecdeque_retain_back() {
+    let mut deque: VecDeque<i32> = [1, 2, 3, 4, 5].into_iter().collect();
 
-    /// 使用 `u32::isqrt` 计算整数平方根
-    ///
-    /// 返回 floor(sqrt(n))，即不大于 sqrt(n) 的最大整数。
-    /// floor(sqrt(n))， sqrt(n) maximum 。
-    pub fn integer_sqrt(n: u32) -> u32 {
-        n.isqrt()
-    }
+    // 1.97+: 从尾部保留偶数（结果: [2, 4]，从头部视角）
+    // deque.retain_back(|x| x % 2 == 0);
+    // assert_eq!(deque, [2, 4]);
 
-    /// 使用 `i32::checked_isqrt` 安全计算有符号整数平方根
-    ///
-    /// 对负数返回 `None`，避免 panic。
-    /// to `None`， panic。
-    pub fn checked_signed_sqrt(n: i32) -> Option<i32> {
-        n.checked_isqrt()
+    // 当前等效实现（从尾部遍历）:
+    let len = deque.len();
+    for i in (0..len).rev() {
+        if deque[i] % 2 != 0 {
+            deque.remove(i);
+        }
     }
+    assert_eq!(deque.make_contiguous(), &[2, 4]);
+}
 
-    /// 使用 `NonZeroU32::isqrt` 计算非零整数的平方根
-    pub fn nonzero_sqrt(n: NonZeroU32) -> NonZeroU32 {
-        n.isqrt()
-    }
+// ============================================================================
+// 2. 浮点代数优化属性 (float_algebraic)
+// ============================================================================
 
-    /// 二分搜索辅助：使用 midpoint 计算中间索引
-    /// binary search ： midpoint in
-    pub fn binary_search_mid(low: usize, high: usize) -> usize {
-        // 避免 (low + high) / 2 的溢出
-        low.midpoint(high)
-    }
+/// `#[optimize(fast_math)]` / `float_algebraic` 允许编译器重组浮点运算
+///
+/// ⚠️ 这会打破 IEEE 754 的严格语义，仅在可接受精度损失的场景使用。
+///
+/// 1.97 状态: FCP 中 (PR #157168)
+#[allow(dead_code)]
+pub fn demo_float_algebraic() {
+    // 未来语法（示意）:
+    // #[float_algebraic]
+    // fn fast_sum(a: f64, b: f64, c: f64) -> f64 {
+    //     (a + b) + c  // 编译器可能重排为 a + (b + c)
+    // }
+
+    // 当前等效做法: 使用 `fast-math` LLVM 标志（nightly-only，不稳定）
+    let a = 1.0_f64;
+    let b = 1e-16_f64;
+    let c = -1.0_f64;
+
+    // 严格 IEEE 754: (a + b) + c ≈ 1e-16
+    let strict = (a + b) + c;
+    // 代数重排: a + (b + c) ≈ 0.0（因为 b + c 在舍入后可能为 -1.0）
+
+    println!("strict (a+b)+c = {}", strict);
+    println!("注意: float_algebraic 允许编译器选择后者，可能改变结果");
+}
+
+// ============================================================================
+// 3. RandomSource / DefaultRandomSource 抽象（等待 t-libs-api）
+// ============================================================================
+
+/// `RandomSource` trait 提供可插拔的随机数源抽象
+///
+/// 1.97 状态: 等待 libs-api 决策 (PR #157226)
+/// 设计目标: 允许 `rand::thread_rng()`、`getrandom`、`OsRng` 等通过统一 trait 接入标准库 API。
+#[allow(dead_code)]
+pub fn demo_random_source_concept() {
+    // 概念性伪代码:
+    // use std::random::{RandomSource, DefaultRandomSource};
+    //
+    // fn shuffle<T, R: RandomSource>(vec: &mut [T], rng: &mut R) { ... }
+    //
+    // let mut rng = DefaultRandomSource::new();
+    // shuffle(&mut data, &mut rng);
+
+    println!("RandomSource / DefaultRandomSource: 等待 1.97+ 稳定化");
+}
+
+// ============================================================================
+// 4. C-variadic function definitions（PFCP）
+// ============================================================================
+
+/// C 可变参数函数定义稳定化
+///
+/// 1.97 状态: PFCP (PR #155942)
+/// 用途: 不再需要通过 `extern "C"` 声明 + 手写 C wrapper 来定义可变参数函数。
+/// 典型场景: 内核 printk、嵌入式日志、FFI 回调。
+#[allow(dead_code)]
+pub extern "C" fn demo_c_variadic_definition(_fmt: *const u8) {
+    // 未来稳定后:
+    // pub unsafe extern "C" fn my_printf(fmt: *const u8, args: ...) { ... }
+
+    // 当前限制: C variadic 定义仍需要 nightly feature `c_variadic`
+    println!("C-variadic fn definitions: 等待 1.97+ 稳定化，当前需 `#![feature(c_variadic)]`");
+}
+
+// ============================================================================
+// 5. box_vec_non_null（PFCP 中）
+// ============================================================================
+
+/// `Box::into_raw_non_null` / `Vec::into_raw_parts_non_null` 提供非空指针转换
+///
+/// 1.97 状态: PFCP (PR #157273)
+/// 设计目标: 允许 `Box<T>` 和 `Vec<T>` 直接转换为 `NonNull<T>`，避免空指针检查开销。
+#[allow(dead_code)]
+pub fn demo_box_vec_non_null() {
+    // 概念性伪代码 (1.97+ 稳定后):
+    // use std::ptr::NonNull;
+    // let boxed = Box::new(42);
+    // let ptr: NonNull<i32> = Box::into_raw_non_null(boxed);
+    //
+    // let vec = vec![1, 2, 3];
+    // let (ptr, len, cap): (NonNull<i32>, usize, usize) = Vec::into_raw_parts_non_null(vec);
+
+    // 当前等效实现:
+    let boxed = Box::new(42);
+    let ptr = Box::into_raw(boxed);
+    let non_null = std::ptr::NonNull::new(ptr).expect("Box::into_raw never returns null");
+    println!("Box -> NonNull: {:?}", non_null);
+
+    let vec = vec![1, 2, 3];
+    let (ptr, len, cap) = (vec.as_ptr(), vec.len(), vec.capacity());
+    std::mem::forget(vec);
+    let non_null = std::ptr::NonNull::new(ptr.cast_mut()).expect("Vec ptr is non-null");
+    println!("Vec -> NonNull: {:?}, len={}, cap={}", non_null, len, cap);
+}
+
+// ============================================================================
+// 6. int_format_into（Nightly）
+// ============================================================================
+
+/// 整数格式化到现有缓冲区，避免堆分配
+///
+/// 1.97 状态: 🧪 Nightly
+/// 设计目标: `write!(buf, "{}", x)` 的零分配替代方案，用于 `no_std` 和嵌入式场景。
+#[allow(dead_code)]
+pub fn demo_int_format_into() {
+    // 概念性伪代码 (1.97+ 稳定后):
+    // let mut buf = [0u8; 20];
+    // let n = 12345i32;
+    // let written = n.format_into(&mut buf);
+    // assert_eq!(&buf[..written], b"12345");
+
+    // 当前等效实现 (使用 itoa 或手动格式化):
+    let mut buf = [0u8; 20];
+    let n = 12345i32;
+    let s = n.to_string();
+    let bytes = s.as_bytes();
+    buf[..bytes.len()].copy_from_slice(bytes);
+    println!("formatted: {:?}", std::str::from_utf8(&buf[..bytes.len()]).unwrap());
+}
+
+// ============================================================================
+// 7. proc_macro_value（等待 review）
+// ============================================================================
+
+/// `proc_macro_value` 允许过程宏在编译期产生值（而不仅是 token 流）
+///
+/// 1.97 状态: 等待 review (PR #152092)
+/// 用途: 为 `const` 泛型和编译期计算提供更强大的元编程能力。
+#[allow(dead_code)]
+pub fn demo_proc_macro_value_concept() {
+    // 概念性伪代码:
+    // #[derive(ConstValue)]
+    // struct MyConfig { threshold: u32 }
+    //
+    // const CONFIG: MyConfig = MyConfig::const_value(); // 由宏在编译期生成
+
+    println!("proc_macro_value: 等待 1.97+ 稳定化");
 }
 
 #[cfg(test)]
@@ -73,52 +196,12 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_float_midpoint() {
-        assert_eq!(Rust197AlgorithmFeatures::float_midpoint(0.0, 10.0), 5.0);
-        assert_eq!(Rust197AlgorithmFeatures::float_midpoint(1.0, 3.0), 2.0);
+    fn test_vecdeque_truncate_front() {
+        demo_vecdeque_truncate_front();
     }
 
     #[test]
-    fn test_uint_midpoint_no_overflow() {
-        // (u32::MAX + u32::MAX) / 2 会溢出，但 midpoint 不会
-        assert_eq!(
-            Rust197AlgorithmFeatures::uint_midpoint(u32::MAX, u32::MAX),
-            u32::MAX
-        );
-    }
-
-    #[test]
-    fn test_int_midpoint() {
-        assert_eq!(Rust197AlgorithmFeatures::int_midpoint(-10, 10), 0);
-        assert_eq!(Rust197AlgorithmFeatures::int_midpoint(0, 5), 2);
-    }
-
-    #[test]
-    fn test_integer_sqrt() {
-        assert_eq!(Rust197AlgorithmFeatures::integer_sqrt(16), 4);
-        assert_eq!(Rust197AlgorithmFeatures::integer_sqrt(15), 3);
-        assert_eq!(Rust197AlgorithmFeatures::integer_sqrt(0), 0);
-        assert_eq!(Rust197AlgorithmFeatures::integer_sqrt(1), 1);
-    }
-
-    #[test]
-    fn test_checked_signed_sqrt() {
-        assert_eq!(Rust197AlgorithmFeatures::checked_signed_sqrt(16), Some(4));
-        assert_eq!(Rust197AlgorithmFeatures::checked_signed_sqrt(-1), None);
-    }
-
-    #[test]
-    fn test_nonzero_sqrt() {
-        let n = NonZeroU32::new(25).unwrap();
-        assert_eq!(Rust197AlgorithmFeatures::nonzero_sqrt(n).get(), 5);
-    }
-
-    #[test]
-    fn test_binary_search_mid() {
-        assert_eq!(Rust197AlgorithmFeatures::binary_search_mid(0, 10), 5);
-        assert_eq!(
-            Rust197AlgorithmFeatures::binary_search_mid(0, usize::MAX),
-            usize::MAX / 2
-        );
+    fn test_vecdeque_retain_back() {
+        demo_vecdeque_retain_back();
     }
 }

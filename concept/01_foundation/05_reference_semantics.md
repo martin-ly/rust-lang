@@ -1,6 +1,7 @@
 > **内容分级**: [综述级]
-
-> **本节关键术语**: 引用 (Reference) · 借用 (Borrowing) · 解引用 (Dereferencing) · 自动解引用 (Auto Deref) · 强制转换 (Coercion) — [完整对照表](../00_meta/terminology_glossary.md)
+>
+> **本节关键术语**:
+> 引用 (Reference) · 借用 (Borrowing) · 解引用 (Dereferencing) · 自动解引用 (Auto Deref) · 强制转换 (Coercion) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 引用语义：自动解引用、Deref 强制与类型转换
 >
@@ -1158,7 +1159,7 @@ let s: &mut &Secret = &mut &Secret(String::from("x"));
 ## 来源与延伸阅读（本节）
 
 | 来源 | 可信度 | 说明 |
-|:---|:---:|:---|
+| :--- | :---: | :--- |
 | [Rust Reference — Reference Types](https://doc.rust-lang.org/reference/types/pointer.html) | ✅ 一级 | 引用类型的语法与语义 |
 | [Rust Reference — Type Coercions](https://doc.rust-lang.org/reference/type-coercions.html) | ✅ 一级 | 类型强制与引用弱化 |
 | [Rust Reference — Method Call Expressions](https://doc.rust-lang.org/reference/expressions/method-call-expr.html) | ✅ 一级 | 自动解引用规则 |
@@ -1363,9 +1364,7 @@ fn main() {}
 > 内存安全 ⟸ 引用有效性保证 ⟸ 所有权与借用规则
 > 别名分析正确 ⟸ &T 共享读 / &mut T 独占写 ⟸ 类型系统
 > **过渡**: 掌握 引用语义：自动解引用、Deref 强制与类型转换 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 引用语义：自动解引用、Deref 强制与类型转换 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: 引用语义：自动解引用、Deref 强制与类型转换 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界

@@ -1,5 +1,4 @@
 > **内容分级**: [综述级]
-
 > **本节关键术语**: panic · 展开 (Unwind) · 中止 (Abort) · 栈回溯 (Stack Trace) · 不可恢复错误 (Unrecoverable Error) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # Panic 与 Abort：不可恢复错误的处理机制
@@ -736,9 +735,7 @@ fn compute_expensive_string() -> String { String::from("expensive") }
 > 程序不异常终止 ⟸ panic 路径受控 ⟸ unwind/abort 选择
 > 安全性保证 ⟸ catch_unwind 隔离 ⟸ 线程边界
 > **过渡**: 掌握 Panic 与 Abort：不可恢复错误的处理机制 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 Panic 与 Abort：不可恢复错误的处理机制 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: Panic 与 Abort：不可恢复错误的处理机制 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界

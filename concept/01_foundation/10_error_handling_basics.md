@@ -1,6 +1,5 @@
 > **内容分级**: [综述级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **本节关键术语**: 错误处理 (Error Handling) · Result · Option · 传播运算符 (? ) · 模式匹配错误 (Match on Result) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # Rust 错误处理基础
@@ -666,7 +665,11 @@ fn main_fixed() -> Result<(), String> {
 }
 ```
 
-> **修正**: `?` 运算符只能在返回 `Result`、`Option` 或实现 `Try` trait 的类型的函数中使用。它会将错误值自动转换为函数返回类型（通过 `From` trait）。在 `main` 中如需使用 `?`，将 `main` 的返回类型改为 `Result<(), E>`。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**:
+> `?` 运算符只能在返回 `Result`、`Option` 或实现 `Try` trait 的类型的函数中使用。
+> 它会将错误值自动转换为函数返回类型（通过 `From` trait）。
+> 在 `main` 中如需使用 `?`，将 `main` 的返回类型改为 `Result<(), E>`。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.3 边界测试：`Result` 与 `Option` 的混用（编译错误）
 
@@ -682,7 +685,17 @@ fn main() {
 }
 ```
 
-> **修正**: `?` 运算符在 `Result` 上下文中传播 `Err`，在 `Option` 上下文中传播 `None`，二者不能自动转换。`Result<T, E>` → `Option<T>` 丢失错误信息，`Option<T>` → `Result<T, E>` 需要构造错误值。解决方案：1) `may_fail().ok()?`（`Result` → `Option`）；2) `Some(may_fail()?).transpose()?`（复杂转换）；3) 统一错误类型（`Result<T, E>` 或 `Option<T>`）。这与 Go 的 `if err != nil`（总是显式处理）或 Swift 的 `try?`（自动转换抛出的错误为 `Optional`）不同——Rust 要求显式选择转换策略。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/result/)]
+> **修正**:
+> `?` 运算符在 `Result` 上下文中传播 `Err`，在 `Option` 上下文中传播 `None`，二者不能自动转换。
+> `Result<T, E>` → `Option<T>` 丢失错误信息，`Option<T>` → `Result<T, E>` 需要构造错误值。
+> 解决方案：
+>
+> 1) `may_fail().ok()?`（`Result` → `Option`）；
+> 2) `Some(may_fail()?).transpose()?`（复杂转换）；
+> 3) 统一错误类型（`Result<T, E>` 或 `Option<T>`）。
+> 这与 Go 的 `if err != nil`（总是显式处理）或 Swift 的 `try?`（自动转换抛出的错误为 `Optional`）不同——Rust 要求显式选择转换策略。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)] ·
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/result/)]
 
 ### 10.4 边界测试：`catch_unwind` 与 `UnwindSafe`（编译错误）
 
@@ -699,7 +712,18 @@ fn main() {
 }
 ```
 
-> **修正**: `catch_unwind` 捕获 panic 并恢复执行，但要求闭包实现 `UnwindSafe`——保证 panic 不会破坏共享状态。`&mut T` 不是 `UnwindSafe`，因为 panic 可能在 `push` 中途发生（`Vec` 内部指针已更新但长度未更新），导致 `Vec` 处于不一致状态。解决方案：1) 使用 `AssertUnwindSafe` 包装（承诺手动保证安全）；2) 在闭包内 `clone` 数据；3) 使用 `std::panic::resume_unwind`。`UnwindSafe` 不是内存安全边界（unsafe 代码仍需保证 panic safety），而是防止逻辑不一致的标记 trait。这与 C++ 的异常安全（basic guarantee、strong guarantee、no-throw guarantee）理念相同，但 Rust 通过类型系统部分自动化。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/panic/trait.UnwindSafe.html)]
+> **修正**:
+>
+> `catch_unwind` 捕获 panic 并恢复执行，但要求闭包实现 `UnwindSafe`——保证 panic 不会破坏共享状态。
+> `&mut T` 不是 `UnwindSafe`，因为 panic 可能在 `push` 中途发生（`Vec` 内部指针已更新但长度未更新），导致 `Vec` 处于不一致状态。
+> 解决方案：
+>
+> 1) 使用 `AssertUnwindSafe` 包装（承诺手动保证安全）；
+> 2) 在闭包内 `clone` 数据；
+> 3) 使用 `std::panic::resume_unwind`。`UnwindSafe` 不是内存安全边界（unsafe 代码仍需保证 panic safety），而是防止逻辑不一致的标记 trait。
+> 这与 C++ 的异常安全（basic guarantee、strong guarantee、no-throw guarantee）理念相同，但 Rust 通过类型系统部分自动化。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html)] ·
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/panic/trait.UnwindSafe.html)]
 
 ### 10.5 边界测试：`Result` 的 `unwrap_unchecked` 与 release 模式（运行时 UB）
 
@@ -712,7 +736,19 @@ fn main() {
 }
 ```
 
-> **修正**: `Result::unwrap_unchecked` 和 `Option::unwrap_unchecked` 是 `unsafe` 方法：调用者必须保证值是 `Ok`/`Some`，否则是 UB。与 `unwrap`（Err 时 panic）不同，`unwrap_unchecked` 无检查、无分支，是零成本的"信任但验证"操作。使用场景：1) 热路径上已通过前置检查确保成功；2) 编译器无法推断但开发者确知的状态；3) 与 C 代码交互（C 函数返回错误码，但 Rust 侧已处理）。风险：错误使用导致任意行为（可能读取无效内存、可能崩溃、可能静默错误）。这与 C 的 `*(int*)NULL`（同样 UB，但编译器可能不警告）或 Swift 的 `try!`（运行时 panic，非 UB）不同——Rust 的 `unwrap_unchecked` 是真正的"无安全网"操作。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/result/enum.Result.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**:
+>
+> `Result::unwrap_unchecked` 和 `Option::unwrap_unchecked` 是 `unsafe` 方法：调用者必须保证值是 `Ok`/`Some`，否则是 UB。
+> 与 `unwrap`（Err 时 panic）不同，`unwrap_unchecked` 无检查、无分支，是零成本的"信任但验证"操作。
+> 使用场景：
+>
+> 1) 热路径上已通过前置检查确保成功；
+> 2) 编译器无法推断但开发者确知的状态；
+> 3) 与 C 代码交互（C 函数返回错误码，但 Rust 侧已处理）。
+> 风险：错误使用导致任意行为（可能读取无效内存、可能崩溃、可能静默错误）。
+> 这与 C 的 `*(int*)NULL`（同样 UB，但编译器可能不警告）或 Swift 的 `try!`（运行时 panic，非 UB）不同——Rust 的 `unwrap_unchecked` 是真正的"无安全网"操作。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/result/enum.Result.html)] ·
+> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.5 边界测试：生命周期参数的不匹配返回
 
@@ -725,12 +761,24 @@ fn longest<'a, 'b>(x: &'a str, y: &'b str) -> &'a str {
 fn main() {}
 ```
 
-> **修正**: **生命周期标注**：1) `&'a str` 表示引用至少存活 `'a`；2) 返回 `'a` 要求数据存活至少 `'a`；3) `y` 的 lifetime `'b` 可能短于 `'a`，返回会导致悬垂引用。
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rust RFCs](https://rust-lang.github.io/rfcs/)
+> **修正**:
+> **生命周期标注**：
+>
+> 1) `&'a str` 表示引用至少存活 `'a`；
+> 2) 返回 `'a` 要求数据存活至少 `'a`；
+> 3) `y` 的 lifetime `'b` 可能短于 `'a`，返回会导致悬垂引用。
+>
+> **权威来源**:
+>
+> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [Rust Standard Library](https://doc.rust-lang.org/std/) ·
+> [Rust RFCs](https://rust-lang.github.io/rfcs/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 
 ## 实践
@@ -750,7 +798,7 @@ fn main() {}
 ### 核心推理链
 
 | 定理 | 前提 | 结论 | 置信度 |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | Rust 错误处理基础 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
 | Rust 错误处理基础 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
 | Rust 错误处理基础 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
@@ -758,9 +806,7 @@ fn main() {}
 > 错误传播安全 ⟸ ? 运算符自动转换 ⟸ Try trait
 > 错误类型精确 ⟸ thiserror/anyhow 分层 ⟸ 错误架构
 > **过渡**: 掌握 Rust 错误处理基础 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 Rust 错误处理基础 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: Rust 错误处理基础 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界

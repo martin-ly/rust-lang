@@ -1,5 +1,4 @@
 > **内容分级**: [综述级]
-
 > **本节关键术语**: 集合 (Collection) · 迭代器 (Iterator) · Vec · HashMap · BTreeMap · 自定义集合 — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析
@@ -788,7 +787,18 @@ fn main() {
 }
 ```
 
-> **修正**: `BTreeMap::range` 返回不可变迭代器，因为遍历过程中修改树结构会破坏迭代器状态（节点指针悬垂）。这与 C++ 的 `std::map` 相同（遍历中 `insert` 可能使迭代器失效），但 Rust 在编译期阻止。`BTreeMap` 的 sorted 性质使其适合范围查询，但修改必须在遍历前或遍历后完成。安全模式：1) `collect` 需要修改的键值对，遍历后再批量插入；2) 使用 `retain`（若支持）；3) 使用 `Cursor` API（不稳定，`BTreeMap::cursor_mut`）。Rust 的标准库设计优先考虑安全而非便利——遍历中修改是常见需求，但 Rust 要求显式处理，避免隐式迭代器失效。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/collections/struct.BTreeMap.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**:
+>
+> `BTreeMap::range` 返回不可变迭代器，因为遍历过程中修改树结构会破坏迭代器状态（节点指针悬垂）。
+> 这与 C++ 的 `std::map` 相同（遍历中 `insert` 可能使迭代器失效），但 Rust 在编译期阻止。`BTreeMap` 的 sorted 性质使其适合范围查询，但修改必须在遍历前或遍历后完成。
+> 安全模式：
+>
+> 1) `collect` 需要修改的键值对，遍历后再批量插入；
+> 2) 使用 `retain`（若支持）；
+> 3) 使用 `Cursor` API（不稳定，`BTreeMap::cursor_mut`）。
+> Rust 的标准库设计优先考虑安全而非便利——遍历中修改是常见需求，但 Rust 要求显式处理，避免隐式迭代器失效。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/collections/struct.BTreeMap.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.5 边界测试：`HashSet` 的自定义哈希与 `Hash` 一致性（运行时逻辑错误）
 
@@ -818,7 +828,18 @@ fn main() {
 }
 ```
 
-> **修正**: `Hash` trait 的实现必须满足**一致性**：若 `a == b`，则 `hash(a) == hash(b)`，且同一对象的哈希值在对象不变时应恒定。违反一致性导致 `HashMap`/`HashSet` 行为异常：插入后查找不到、重复元素、内存泄漏。常见错误：1) 哈希中包含随机数或时间戳；2) 哈希中包含未实现 `Hash` 的字段的指针地址；3) `PartialEq` 和 `Hash` 基于不同字段（如 `Eq` 比较 `id`，`Hash` 哈希 `name`）。这与 Java 的 `hashCode`/`equals` 契约（同样要求一致）或 Python 的 `__hash__`/`__eq__`（同样要求一致）相同——哈希表的正确性依赖哈希函数的一致性。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/hash/trait.Hash.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**:
+>
+> `Hash` trait 的实现必须满足**一致性**：若 `a == b`，则 `hash(a) == hash(b)`，且同一对象的哈希值在对象不变时应恒定。
+> 违反一致性导致 `HashMap`/`HashSet` 行为异常：插入后查找不到、重复元素、内存泄漏。
+> 常见错误：
+>
+> 1) 哈希中包含随机数或时间戳；
+> 2) 哈希中包含未实现 `Hash` 的字段的指针地址；
+> 3) `PartialEq` 和 `Hash` 基于不同字段（如 `Eq` 比较 `id`，`Hash` 哈希 `name`）。
+> 这与 Java 的 `hashCode`/`equals` 契约（同样要求一致）或 Python 的 `__hash__`/`__eq__`（同样要求一致）相同——哈希表的正确性依赖哈希函数的一致性。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/hash/trait.Hash.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.5 边界测试：`HashMap` 的 `Entry` API 与借用冲突（编译错误）
 
@@ -836,7 +857,14 @@ fn main() {
 }
 ```
 
-> **修正**: `HashMap::entry` 返回 `Entry` enum，它**可变借用**整个 map（`&mut self`）。在 `entry` 调用期间，不能有任何对 map 的其他借用（无论是可变还是不可变）。`Entry` API 的设计：`Occupied`（键存在）和 `Vacant`（键不存在），统一了插入和更新的语义。常见模式：`map.entry(key).and_modify(|v| v.push(4)).or_insert(vec![4])`。这与 C++ 的 `std::map::operator[]`（自动插入默认值，但返回引用不解决借用冲突）或 Java 的 `Map.compute`（类似，但无编译期借用检查）不同——Rust 的 `Entry` API 在类型系统层面保证操作的原子性（从调用者视角）。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/collections/hash_map/enum.Entry.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**:
+> `HashMap::entry` 返回 `Entry` enum，它**可变借用**整个 map（`&mut self`）。
+> 在 `entry` 调用期间，不能有任何对 map 的其他借用（无论是可变还是不可变）。
+> `Entry` API 的设计：`Occupied`（键存在）和 `Vacant`（键不存在），统一了插入和更新的语义。
+> 常见模式：`map.entry(key).and_modify(|v| v.push(4)).or_insert(vec![4])`。
+> 这与 C++ 的 `std::map::operator[]`（自动插入默认值，但返回引用不解决借用冲突）或 Java 的 `Map.compute`（类似，但无编译期借用检查）不同——Rust 的 `Entry` API 在类型系统层面保证操作的原子性（从调用者视角）。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/collections/hash_map/enum.Entry.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.6 边界测试：`BTreeMap` 的键修改与排序不变性破坏（逻辑错误/UB）
 
@@ -861,7 +889,12 @@ fn main() {
 }
 ```
 
-> **修正**: `BTreeMap` 基于**排序键**维护平衡二叉搜索树。键的排序位置决定树结构，若键被修改，排序不变性破坏，树操作可能产生错误结果或 panic。Rust 的 API 设计禁止键修改：`keys()` 返回不可变引用，`values_mut()` 只返回值的可变引用。`HashMap` 同理：键的哈希值决定桶位置，修改键会破坏哈希表。这与 C++ 的 `std::map`（`iterator->first` 是 const，不能修改键）或 Java 的 `TreeMap`（`Map.Entry.setValue` 只允许修改值）类似——Rust 的编译期不可变性保证更严格。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/collections/struct.BTreeMap.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**:
+> `BTreeMap` 基于**排序键**维护平衡二叉搜索树。键的排序位置决定树结构，若键被修改，排序不变性破坏，树操作可能产生错误结果或 panic。
+> Rust 的 API 设计禁止键修改：`keys()` 返回不可变引用，`values_mut()` 只返回值的可变引用。
+> `HashMap` 同理：键的哈希值决定桶位置，修改键会破坏哈希表。这与 C++ 的 `std::map`（`iterator->first` 是 const，不能修改键）或 Java 的 `TreeMap`（`Map.Entry.setValue` 只允许修改值）类似——Rust 的编译期不可变性保证更严格。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/collections/struct.BTreeMap.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ## 实践
 
@@ -888,9 +921,7 @@ fn main() {
 > 内存安全数据结构 ⟸ 所有权自动管理 ⟸ Vec/HashMap 实现
 > 迭代器安全 ⟸ 借用检查器验证 ⟸ 集合 API 设计
 > **过渡**: 掌握 高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: 高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界

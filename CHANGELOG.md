@@ -1,6 +1,38 @@
 # 更新日志 (Changelog)
 
-> **最后更新**: 2026-06-02
+> **最后更新**: 2026-06-08
+
+---
+
+## [2.5.4] - 2026-06-08 — Phase 1: Rust 1.96/1.97 深度对齐
+
+### 🎯 1.96 文档状态修复
+
+- **`assert_matches!`** (`concept/02_intermediate/05_assert_matches.md`): 明确标注 **Rust 1.96.0 stable**，修正此前隐含的 nightly/experimental 暗示
+- **`cargo-script`** (`concept/07_future/rust_1_97_preview.md`): 修正为 "FCP 已结束，但被 edition policy 阻塞"
+- **Cranelift** (`concept/07_future/rust_1_97_preview.md`): 修正为 "未完成（缺乏资金）"，引用 Project Goals April 2026 更新
+- **Polonius** (`concept/03_advanced/08_nll_and_polonius.md`): 更新状态 — #150551 已落地，"感觉可稳定化（stabilizable）"，目标 2026 年内稳定化 alpha
+
+### 🆕 新文档与代码
+
+- **BorrowSanitizer** (`concept/07_future/borrow_sanitizer.md`): 新建 9.3KB 深度文档，涵盖 Shadow Stack 机制、Miri/ASan/MSan 对比、Project Goals 2026 跟踪、RustConf 2026 演讲接收
+- **Field Projections** (`crates/c04_generic/src/field_projections_preview.rs`): 新建 6.8KB nightly 预览代码，`field_of!` 宏、泛型字段操作、`PinnableField` 安全 Pin 投影
+
+### 📦 1.97 Crate 代码覆盖补全
+
+- **`crates/c08_algorithms/src/rust_197_features.rs`**:
+  - `box_vec_non_null` (PFCP): `Box`/`Vec` → `NonNull` 转换的等效实现与概念伪代码
+  - `int_format_into` (Nightly): 整数零分配格式化的等效实现与概念伪代码
+  - 修复编译兼容性：移除函数内 `#![allow(unstable_features)]`，C-variadic 示例改用兼容签名
+
+### ✅ 已有覆盖确认（无需新增）
+
+- **Rustdoc 1.96 改进** (`docs/06_toolchain/06_20_rustdoc_196_improvements.md`): 228 行完整覆盖 R1-R3（Deprecation notes、missing_doc_code_examples lint、Sidebar 分离）
+- **NonZero 范围迭代练习** (`exercises/src/rust_196_feature_exercises.rs`): 2 个练习 + 测试通过
+- **AssertUnwindSafe From 练习** (`exercises/src/rust_196_feature_exercises.rs`): 2 个练习 + 测试通过
+- **s390x inline asm** (`knowledge/06_ecosystem/emerging/05_rust_1_96.md`): 含向量寄存器代码示例
+- **"valid for read/write" ptr 语义** (`knowledge/06_ecosystem/emerging/05_rust_1_96.md`): 内存模型定义调整说明
+- **Internal changes I1-I2** (`knowledge/06_ecosystem/emerging/05_rust_1_96.md`): aarch64 softfloat JSON target spec、LLVM ABI 严格验证
 
 ---
 
@@ -16,7 +48,7 @@
 ### 📝 代码示例补充与标记清理
 
 - **新增 4 个可编译示例**:
-  - `07_game_ecs.md`: 极简 ECS（HashMap + Box<dyn Any>）
+  - `07_game_ecs.md`: 极简 ECS（HashMap + `Box<dyn Any>`）
   - `31_microservice_patterns.md`: TcpListener HTTP 微服务
   - `37_database_systems.md`: HashMap KV 存储
   - `28_devops_and_ci_cd.md`: 配置验证器

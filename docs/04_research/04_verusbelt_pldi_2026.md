@@ -1,10 +1,8 @@
 # VerusBelt (PLDI 2026) 研究笔记
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **分级**: [B]
 > **Bloom 层级**: L4-L5 (分析/评价)
-
 > **创建日期**: 2026-05-08
 > **最后更新**: 2026-05-22
 > **会议**: PLDI 2026 (Programming Language Design and Implementation)
@@ -190,13 +188,14 @@ RustBelt (POPL 2018) ── 证明 Rust 所有权系统内存安全
 > **[来源: KVerus arXiv 2026; AutoVerus OOPSLA 2025; Vest USENIX Security 2025]** Verus 验证框架的周边工具链在 2025–2026 年快速扩展，降低了证明门槛并扩展了验证覆盖。
 
 | 工具 | 会议/来源 | 与 VerusBelt 的关系 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | **KVerus** | arXiv 2026-05 | RAG-based 自动证明生成，将自然语言规格转换为 Verus 证明脚本，减少手写 proof 负担 |
 | **AutoVerus** | OOPSLA 2025 | 神经符号验证：LLM 生成循环不变式 + SMT 验证，可与 VerusBelt 的分层语义结合 |
 | **Vest** | USENIX Security 2025 | 基于 Verus 的可验证网络协议框架（TLS/QUIC），证明消息解析与状态机正确性 |
 | **Rustlantis** | OOPSLA 2024 | 随机程序生成器用于发现 Verus/Miri 的 soundness 漏洞，提升验证工具可靠性 |
 
-> **⟹ 洞察**: VerusBelt 提供了 Verus 扩展的语义基础，而 KVerus/AutoVerus 正在将这一基础转化为**半自动化的工业实践**——从手写 proof 到 AI 辅助证明生成。[来源: [concept/04_formal/05_verification_toolchain.md](../../concept/04_formal/05_verification_toolchain.md) §7]
+> **⟹ 洞察**: VerusBelt 提供了 Verus 扩展的语义基础，而 KVerus/AutoVerus 正在将这一基础转化为**半自动化的工业实践**——从手写 proof 到 AI 辅助证明生成。
+> [来源: [concept/04_formal/05_verification_toolchain.md](../../concept/04_formal/05_verification_toolchain.md) §7]
 
 ---
 

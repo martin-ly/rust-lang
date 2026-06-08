@@ -111,7 +111,7 @@ chmod +x csv_filter.rs && ./csv_filter.rs
 
 ## 一、核心概念
 
-Cargo Script（[RFC 3502](https://rust-lang.github.io/rfcs/3502.html) + [RFC 3503](https://rust-lang.github.io/rfcs/3503.html)）允许在单个 `.rs` 文件中编写完整 Rust 程序并直接执行，**无需 `Cargo.toml` 或项目目录结构**。两个 RFC 均已获批：[RFC 3502](https://rust-lang.github.io/rfcs/3502.html) 定义单文件 manifest 格式，[RFC 3503](https://rust-lang.github.io/rfcs/3503.html) 定义 frontmatter 语法。Rust 1.95.0+ 已稳定支持（`cargo <script>` 子命令）。单文件 Rust 脚本正式成为 Rust 工具链的一等公民。
+Cargo Script（[RFC 3502](https://rust-lang.github.io/rfcs/3502.html) + [RFC 3503](https://rust-lang.github.io/rfcs/3503.html)）允许在单个 `.rs` 文件中编写完整 Rust 程序并直接执行，**无需 `Cargo.toml` 或项目目录结构**。两个 RFC 均已获批：[RFC 3502](https://rust-lang.github.io/rfcs/3502.html) 定义单文件 manifest 格式，[RFC 3503](https://rust-lang.github.io/rfcs/3503.html) 定义 frontmatter 语法。RFC 3502/3503 已获批，**Cargo Script FCP 已结束**，但当前被 **edition policy（lang/edition 方面）block**，尚未完全稳定。当前 nightly 可通过 `-Zscript` 使用，frontmatter 支持亦在积极推进中。
 
 ### 1.1 三种执行方式
 
@@ -408,7 +408,7 @@ Cargo Script:  File = Crate (单模块，无子模块)
 
 ## 七、来源与延伸阅读
 
-- **一级**: [RFC 3503 — Cargo Script](https://github.com/rust-lang/rfcs/pull/3503)（FCP 完成，目标 2026 稳定）
+- **一级**: [RFC 3503 — Cargo Script](https://github.com/rust-lang/rfcs/pull/3503)（FCP 已结束，被 edition policy block；Project Goals 2026 Continued）
 - **一级**: [Cargo Book — Unstable Features / Script](https://doc.rust-lang.org/cargo/reference/unstable.html#script)
 - **二级**: [rust-lang/cargo#12207](https://github.com/rust-lang/cargo/issues/12207) — Cargo Script Tracking Issue
 - **二级**: [rust-lang/rust#136889](https://github.com/rust-lang/rust/issues/136889) — `frontmatter` 语言特性跟踪 issue

@@ -1,9 +1,10 @@
 > **内容分级**: [综述级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **本节关键术语**: 模块 (Module) · 路径 (Path) · use · pub · crate — [完整对照表](../00_meta/terminology_glossary.md)
 >
+
 # 模块系统与路径：Rust 的代码组织哲学
+
 >
 > **EN**: Modules
 > **Summary**: Modules. Core Rust concept covering practical examples, aerospace and fault-tolerant systems.
@@ -728,9 +729,7 @@ fn main() {
 > 命名空间隔离 ⟸ 模块树结构 ⟸ use/pub 可见性
 > 编译单元独立 ⟸ crate 边界 ⟸ 模块系统封装
 > **过渡**: 掌握 模块系统与路径：Rust 的代码组织哲学 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 模块系统与路径：Rust 的代码组织哲学 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: 模块系统与路径：Rust 的代码组织哲学 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界

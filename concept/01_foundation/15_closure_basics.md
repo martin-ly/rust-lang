@@ -1,5 +1,4 @@
 > **内容分级**: [综述级]
-
 > **本节关键术语**: 闭包 (Closure) · 捕获 (Capture) · Fn · FnMut · FnOnce · 环境 (Environment) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 闭包基础：捕获环境与匿名函数
@@ -709,7 +708,22 @@ fn main() {
 }
 ```
 
-> **修正**: 闭包的 trait 自动实现：1) `Fn` — 不修改捕获状态；2) `FnMut` — 修改捕获状态（`mut` 绑定）；3) `FnOnce` — 消耗捕获状态（move）。`apply_twice` 要求 `F: Fn`（可多次调用不修改状态），但 `closure` 是 `FnMut`（修改 `counter`）。修复：1) 改用 `FnMut` 约束 + `mut` 参数；2) 重构闭包避免修改状态（用返回值传递状态）；3) 使用 `Cell`/`RefCell` 内部可变性（使闭包变为 `Fn`）。这与 C++ 的 lambda（按值/按引用捕获显式指定，无 Fn/FnMut/FnOnce 区分）或 Java 的 lambda（隐式 final 变量捕获，只能读取）不同——Rust 的闭包推断是自动的，但开发者需理解捕获模式对调用次数的限制。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Reference — Closure Traits](https://doc.rust-lang.org/reference/types/closure.html)]
+> **修正**:
+> 闭包的 trait 自动实现：
+>
+> 1) `Fn` — 不修改捕获状态；
+> 2) `FnMut` — 修改捕获状态（`mut` 绑定）；
+> 3) `FnOnce` — 消耗捕获状态（move）。
+> `apply_twice` 要求 `F: Fn`（可多次调用不修改状态），但 `closure` 是 `FnMut`（修改 `counter`）。
+>
+> 修复：
+>
+> 1) 改用 `FnMut` 约束 + `mut` 参数；
+> 2) 重构闭包避免修改状态（用返回值传递状态）；
+> 3) 使用 `Cell`/`RefCell` 内部可变性（使闭包变为 `Fn`）。
+> 这与 C++ 的 lambda（按值/按引用捕获显式指定，无 Fn/FnMut/FnOnce 区分）或 Java 的 lambda（隐式 final 变量捕获，只能读取）不同——Rust 的闭包推断是自动的，但开发者需理解捕获模式对调用次数的限制。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] ·
+> [来源: [Rust Reference — Closure Traits](https://doc.rust-lang.org/reference/types/closure.html)]
 
 ## 实践
 
@@ -736,9 +750,7 @@ fn main() {
 > 高阶函数安全 ⟸ 环境捕获类型检查 ⟸ Fn/FnMut/FnOnce
 > 回调正确性 ⟸ 闭包生命周期推断 ⟸ 借用规则
 > **过渡**: 掌握 闭包基础：捕获环境与匿名函数 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 闭包基础：捕获环境与匿名函数 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: 闭包基础：捕获环境与匿名函数 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界

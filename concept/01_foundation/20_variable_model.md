@@ -1,12 +1,19 @@
 > **内容分级**: [综述级]
-
 > **本节关键术语**: 变量绑定 (Variable Binding) · 可变性 (Mutability) · 遮蔽 (Shadowing) · 常量 (Constant) · 静态变量 (Static) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 变量模型：从通用 PL 视角看 Rust 的所有权
 >
 > **EN**: Ownership
-> **Summary**: 在环境模型中，变量绑定将**名字**映射到**值**。 赋值操作改变的是变量在当前环境中的绑定关系。 ```text 环境 E: 名字 → 值 赋值: E[x] := v  （改变环境中 x 的映射）``` **典型语言**: Scheme、Python、JavaScript **特征**: - 变量是环境的条目，不是存储位置 - 赋值 = 重新绑定名字到新的值 - 多个名字可以引用同一个值（共享/别名） 在存储模型中，变量绑定将**名字**映射到**存储地址**，存储地址再指向**值**。 赋值操作改变的是存储中的内容。 ```text 环境 E: 名字 → 存储地址 存储 S: 地址 →
-
+> **Summary**:
+>
+> 在环境模型中，变量绑定将**名字**映射到**值**。
+> 赋值操作改变的是变量在当前环境中的绑定关系。
+> ```text 环境 E: 名字 → 值 赋值: E[x] := v  （改变环境中 x 的映射）``` **典型语言**:
+> Scheme、Python、JavaScript **特征**: - 变量是环境的条目，不是存储位置 - 赋值 = 重新绑定名字到新的值 - 多个名字可以引用同一个值（共享/别名） 在存储模型中，
+> 变量绑定将**名字**映射到**存储地址**，存储地址再指向**值**。
+> 赋值操作改变的是存储中的内容。
+>
+> ```text 环境 E: 名字 → 存储地址 存储 S: 地址 →
 > **受众**: [初学者]
 > **层级**: L1 基础概念 — 通用编程语言机制
 > **A/S/P 标记**: **S** — Structure
@@ -394,7 +401,9 @@ const CONST_RES: Resource = Resource {
 }; // ❌ 编译错误: `String` 未实现 `Copy`
 // const 要求值是编译期可求值的，且不能包含非 Copy 的 Drop 类型
 
-// 正确: static 允许非 Copy 类型（但需 unsafe 初始化）
+// ⚠️ 警告: `static mut` 在 Rust 2024 Edition 中 `static_mut_refs` 已升级为 deny-by-default。
+//    生产代码应优先使用 `std::sync::OnceLock` 或 `std::sync::LazyLock`。
+//    此处保留仅作为历史用法演示。
 static mut STATIC_RES: Option<Resource> = None;
 
 fn init() {
@@ -402,6 +411,9 @@ fn init() {
         STATIC_RES = Some(Resource { data: String::from("hello") });
     }
 }
+
+// ✅ 2024 Edition 推荐写法（无需 unsafe）:
+// static STATIC_RES_NEW: std::sync::OnceLock<Resource> = std::sync::OnceLock::new();
 ```
 
 > **修正**: `const` 变量在编译期求值并内联到使用处，要求值实现 `Copy` 或 `'static` 且不含运行时分配。`static` 变量在数据段分配，允许非 `Copy` 类型，但初始化必须是编译期常量（Rust 1.83+ 的 `const {}` 块放宽了部分限制）。`String`、`Vec` 等堆分配类型不能作为 `const`。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

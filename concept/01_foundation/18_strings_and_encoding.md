@@ -1,5 +1,4 @@
 > **内容分级**: [综述级]
-
 > **本节关键术语**: 编码 (Encoding) · UTF-8 · OsString · CString · 字符串操作 · 字符 (char) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 字符串与编码：Rust 的文本处理类型系统
@@ -598,7 +597,12 @@ fn main() {
 }
 ```
 
-> **修正**: `std::str::from_utf8` 验证字节序列是否为有效 UTF-8，返回 `Result<&str, Utf8Error>`。这与 `from_utf8_unchecked`（unsafe，假设输入有效）形成对比。Rust 的标准字符串类型 `String`/`str` **始终**是有效 UTF-8，任何创建无效 UTF-8 字符串的尝试都被编译器或运行时阻止。这与 C/C++ 的 `char*`（无编码保证）和 Python 的透明编码处理形成鲜明对比。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**:
+> `std::str::from_utf8` 验证字节序列是否为有效 UTF-8，返回 `Result<&str, Utf8Error>`。
+> 这与 `from_utf8_unchecked`（unsafe，假设输入有效）形成对比。
+> Rust 的标准字符串类型 `String`/`str` **始终**是有效 UTF-8，任何创建无效 UTF-8 字符串的尝试都被编译器或运行时阻止。
+> 这与 C/C++ 的 `char*`（无编码保证）和 Python 的透明编码处理形成鲜明对比。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 12.2 边界测试：`OsStr` 与 `str` 的跨平台差异（编译错误）
 
@@ -625,7 +629,13 @@ fn fixed() {
 }
 ```
 
-> **修正**: `OsStr`/`OsString` 是平台相关的字符串类型，用于文件路径、环境变量等系统接口。Unix 上它是任意字节序列（可能非 UTF-8），Windows 上是 WTF-8（兼容 UTF-8 的变体）。`OsStr` 不能直接转为 `&str`（可能失败），也不能直接与 `&str` 比较。必须使用 `to_str()`（返回 `Option<&str>`）或 `to_string_lossy()`（替换无效字符）进行显式转换。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**:
+>
+> `OsStr`/`OsString` 是平台相关的字符串类型，用于文件路径、环境变量等系统接口。
+> Unix 上它是任意字节序列（可能非 UTF-8），Windows 上是 WTF-8（兼容 UTF-8 的变体）。
+> `OsStr` 不能直接转为 `&str`（可能失败），也不能直接与 `&str` 比较。
+> 必须使用 `to_str()`（返回 `Option<&str>`）或 `to_string_lossy()`（替换无效字符）进行显式转换。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 10.3 边界测试：`String` 与 `OsString` 的编码差异（编译错误）
 
@@ -640,7 +650,15 @@ fn main() {
 }
 ```
 
-> **修正**: `String` 要求严格 UTF-8，而 `OsString` 是平台相关的字符串类型：Unix 上是任意字节序列（非 NUL），Windows 上是 WTF-8（兼容 UTF-8 的扩展，允许未配对的代理项）。`OsString` → `String` 的转换必须显式处理编码错误：`os.into_string()` 返回 `Result<String, OsString>`，失败时保留原值。这与 Go 的 `string`（UTF-8）和 `[]byte`（任意字节，隐式转换）或 Python 3 的 `str`（Unicode）和 `bytes`（显式 `decode`）类似。Rust 的分离更彻底：`String` 和 `OsString` 是完全不同的类型，无隐式转换，强制开发者在系统边界（文件路径、环境变量、命令行参数）显式处理编码。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/ffi/struct.OsString.html)]
+> **修正**:
+> `String` 要求严格 UTF-8，而 `OsString` 是平台相关的字符串类型：
+> Unix 上是任意字节序列（非 NUL），Windows 上是 WTF-8（兼容 UTF-8 的扩展，允许未配对的代理项）。
+>
+> `OsString` → `String` 的转换必须显式处理编码错误：`os.into_string()` 返回 `Result<String, OsString>`，失败时保留原值。
+> 这与 Go 的 `string`（UTF-8）和 `[]byte`（任意字节，隐式转换）或 Python 3 的 `str`（Unicode）和 `bytes`（显式 `decode`）类似。
+> Rust 的分离更彻底：`String` 和 `OsString` 是完全不同的类型，无隐式转换，强制开发者在系统边界（文件路径、环境变量、命令行参数）显式处理编码。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html)] ·
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/ffi/struct.OsString.html)]
 
 ### 10.4 边界测试：字符串切片的字符边界（运行时 panic）
 
@@ -653,7 +671,18 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的字符串切片 `&s[begin..end]` 按字节索引，但要求 `begin` 和 `end` 都落在 UTF-8 字符边界处。违反此规则是 panic（debug 和 release 都检查），因为非边界切片会产生无效的 UTF-8 子串，破坏 `str` 的不变式。安全替代：1) `s.chars().nth(i)`（按字符索引，O(n)）；2) `s.char_indices()`（获取字符边界）；3) `s.is_char_boundary(i)`（检查边界）。这与 Python 的 `s[i]`（按 Unicode code point，O(1) 因为内部 UCS-2/UTF-32）或 JavaScript 的 `s[i]`（按 UTF-16 code unit）不同——Rust 的字符串是紧凑的 UTF-8 字节序列，索引语义与底层存储一致，牺牲随机访问换取内存效率。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.str.html)]
+> **修正**:
+>
+> Rust 的字符串切片 `&s[begin..end]` 按字节索引，但要求 `begin` 和 `end` 都落在 UTF-8 字符边界处。
+> 违反此规则是 panic（debug 和 release 都检查），因为非边界切片会产生无效的 UTF-8 子串，破坏 `str` 的不变式。
+> 安全替代：
+>
+> 1) `s.chars().nth(i)`（按字符索引，O(n)）；
+> 2) `s.char_indices()`（获取字符边界）；
+> 3) `s.is_char_boundary(i)`（检查边界）。
+> 这与 Python 的 `s[i]`（按 Unicode code point，O(1) 因为内部 UCS-2/UTF-32）或 JavaScript 的 `s[i]`（按 UTF-16 code unit）不同——Rust 的字符串是紧凑的 UTF-8 字节序列，索引语义与底层存储一致，牺牲随机访问换取内存效率。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html)] ·
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.str.html)]
 
 ### 10.5 边界测试：`from_utf8_unchecked` 的无效 UTF-8（运行时 UB）
 
@@ -666,7 +695,17 @@ fn main() {
 }
 ```
 
-> **修正**: `String::from_utf8_unchecked` 是 `unsafe` 方法：它假设输入字节是有效的 UTF-8，不做任何验证。无效 UTF-8 导致 UB：Rust 的 `String` 类型 invariant 要求内容始终为有效 UTF-8，违反此 invariant 可能导致后续操作（索引、切片、正则匹配）产生任意结果。安全替代：1) `String::from_utf8`（返回 `Result`，失败时保留原 `Vec<u8>`）；2) `String::from_utf8_lossy`（用 `�` 替换无效序列）；3) 使用 `Vec<u8>` 存储非文本二进制数据。这与 C++ 的 `std::string`（可包含任意字节，无 UTF-8 保证）或 Python 3 的 `bytes.decode()`（类似 `from_utf8`，默认严格模式）不同——Rust 的 `String` 类型 invariant 是强保证，但 `unsafe` 允许打破。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/string/struct.String.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**:
+> `String::from_utf8_unchecked` 是 `unsafe` 方法：它假设输入字节是有效的 UTF-8，不做任何验证。
+> 无效 UTF-8 导致 UB：Rust 的 `String` 类型 invariant 要求内容始终为有效 UTF-8，违反此 invariant 可能导致后续操作（索引、切片、正则匹配）产生任意结果。
+> 安全替代：
+>
+> 1) `String::from_utf8`（返回 `Result`，失败时保留原 `Vec<u8>`）；
+> 2) `String::from_utf8_lossy`（用 `�` 替换无效序列）；
+> 3) 使用 `Vec<u8>` 存储非文本二进制数据。
+> 这与 C++ 的 `std::string`（可包含任意字节，无 UTF-8 保证）或 Python 3 的 `bytes.decode()`（类似 `from_utf8`，默认严格模式）不同——Rust 的 `String` 类型 invariant 是强保证，但 `unsafe` 允许打破。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/string/struct.String.html)] ·
+> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.3 边界测试：`OsStr` 与 `str` 的隐式转换边界（编译错误）
 
@@ -682,7 +721,14 @@ fn main() {
 }
 ```
 
-> **修正**: `OsStr`/`OsString` 是平台相关的字符串类型，可能包含非 UTF-8 序列（Windows 的 WTF-8、Unix 的字节序列）。`str`/`String` 要求严格 UTF-8。两者不能直接比较或转换：`OsStr` → `str` 需 `to_str()`（返回 `Option<&str>`，可能失败）；`str` → `OsStr` 通过 `OsStr::new()`（总是成功，因为 UTF-8 是平台字符串的子集）。设计原因：Rust 强制处理平台字符串的编码不确定性，避免假设所有路径/环境变量都是 UTF-8。这与 Go 的 `string`（底层是字节切片，可能非 UTF-8）或 Python 3 的 `str`（强制 Unicode）不同——Rust 的分离类型系统显式标记了编码风险。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/ffi/struct.OsStr.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html)]
+> **修正**:
+> `OsStr`/`OsString` 是平台相关的字符串类型，可能包含非 UTF-8 序列（Windows 的 WTF-8、Unix 的字节序列）。
+> `str`/`String` 要求严格 UTF-8。两者不能直接比较或转换：`OsStr` → `str` 需 `to_str()`（返回 `Option<&str>`，可能失败）；
+> `str` → `OsStr` 通过 `OsStr::new()`（总是成功，因为 UTF-8 是平台字符串的子集）。
+> 设计原因：Rust 强制处理平台字符串的编码不确定性，避免假设所有路径/环境变量都是 UTF-8。
+> 这与 Go 的 `string`（底层是字节切片，可能非 UTF-8）或 Python 3 的 `str`（强制 Unicode）不同——Rust 的分离类型系统显式标记了编码风险。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/ffi/struct.OsStr.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html)]
 
 ## 实践
 
@@ -709,9 +755,7 @@ fn main() {
 > 跨编码安全 ⟸ OsStr/CString 区分 ⟸ 平台抽象
 > 零拷贝解析 ⟸ 字符串切片 ⟸ 生命周期借用
 > **过渡**: 掌握 字符串与编码：Rust 的文本处理类型系统 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 字符串与编码：Rust 的文本处理类型系统 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: 字符串与编码：Rust 的文本处理类型系统 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界

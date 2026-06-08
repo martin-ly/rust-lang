@@ -1,5 +1,4 @@
 > **内容分级**: [综述级]
-
 > **本节关键术语**: 测试 (Testing) · 单元测试 (Unit Test) · 集成测试 (Integration Test) · assert · #[cfg(test)] — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 测试基础：从单元测试到集成测试

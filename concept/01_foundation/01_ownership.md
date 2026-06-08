@@ -6,7 +6,9 @@
 # Ownership（所有权）
 >
 > **EN**: Ownership
-> **Summary**: Ownership. Rust's core memory management model enforcing unique ownership, move semantics, and deterministic deallocation. Covers linear/affine logic foundations, cross-language comparisons, and common ownership traps.
+> **Summary**:
+> Ownership. Rust's core memory management model enforcing unique ownership, move semantics, and deterministic deallocation.
+> Covers linear/affine logic foundations, cross-language comparisons, and common ownership traps.
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[所有权](../../knowledge/01_fundamentals/04_ownership.md)
@@ -120,7 +122,8 @@
 
 ### 1.1 Wikipedia 定义
 
-> **[Wikipedia: Ownership type]** Ownership types are a form of type systems that control aliasing and access to mutable state in object-oriented programming languages. They organize objects into hierarchies called *ownership contexts* or *ownership domains*, enforcing that an object may only be modified through its owner.
+> **[Wikipedia: Ownership type]** Ownership types are a form of type systems that control aliasing and access to mutable state in object-oriented programming languages.
+> They organize objects into hierarchies called *ownership contexts* or *ownership domains*, enforcing that an object may only be modified through its owner.
 
 ### 1.2 TRPL 官方定义
 
@@ -324,7 +327,6 @@ graph TD
 ```
 
 > **unsafe 语义**: `unsafe` 不是关闭借用检查器，而是将编译期证明责任转移给程序员——程序员需手动维护内存安全不变量 [来源: Rustonomicon / 2025]
-
 > **认知功能**: 此图建立了**「违规模式 → 编译错误/运行时后果」的快速查错映射**。当读者遇到 E0382、E0499、E0502 等错误时，可直接回查此图定位自己违反了哪条所有权规则。关键洞察：前四项是编译期拦截（安全），最后一项是运行时 UB（危险），这强化了「unsafe 是责任转移而非权限开放」的核心认知。 [来源: 💡 原创分析]
 > **过渡**: 决策树回答"怎么做"的问题，而定理推理链回答"为什么能这么做"——通过引理、定理、推论的层层演绎，建立所有权系统的形式化保证。
 
@@ -515,7 +517,9 @@ graph TD
     style T2 fill:#6f6
 ```
 
-> **认知功能**: 此图区分了三种看似突破 Move 语义的情形：**真正反例**（unsafe ptr::read，可导致 double-free）、**设计例外**（Copy 类型，仿射逻辑 weakening 的合法扩展）、**安全原语**（mem::replace，所有权仍唯一）。读者常混淆这三类，此决策树通过条件分支强制分类，帮助建立「Move 不可突破，但存在安全例外和设计例外」的精确认知。 [来源: 💡 原创分析]
+> **认知功能**:
+> 此图区分了三种看似突破 Move 语义的情形：**真正反例**（unsafe ptr::read，可导致 double-free）、**设计例外**（Copy 类型，仿射逻辑 weakening 的合法扩展）、**安全原语**（mem::replace，所有权仍唯一）。
+> 读者常混淆这三类，此决策树通过条件分支强制分类，帮助建立「Move 不可突破，但存在安全例外和设计例外」的精确认知。 [来源: 💡 原创分析]
 
 #### 命题 3（语义层）: "所有权 = RAII = 自动释放"
 
@@ -555,7 +559,11 @@ graph TD
     style T4 fill:#6f6
 ```
 
-> **认知功能**: 此图精确界定了「零成本」的范围。关键洞察：纯所有权转移（move）和借用（&T/&mut T）确实是零运行时成本——这些成本在编译期支付。反例中的 Rc、RefCell、Mutex 不是所有权本身的开销，而是为了获得「共享所有权」或「内部可变性」等额外语义而自愿支付的运行时代价。此图帮助读者区分「核心机制零成本」与「扩展机制有成本」的边界，避免将所有权系统整体误判为「有运行时开销」。 [来源: 💡 原创分析]
+> **认知功能**:
+>
+> 此图精确界定了「零成本」的范围。关键洞察：纯所有权转移（move）和借用（&T/&mut T）确实是零运行时成本——这些成本在编译期支付。
+> 反例中的 Rc、RefCell、Mutex 不是所有权本身的开销，而是为了获得「共享所有权」或「内部可变性」等额外语义而自愿支付的运行时代价。
+> 此图帮助读者区分「核心机制零成本」与「扩展机制有成本」的边界，避免将所有权系统整体误判为「有运行时开销」。 [来源: 💡 原创分析]
 
 ---
 
@@ -843,7 +851,11 @@ let w4 = Widget::from(42); // 显式转换（From trait）
 | **顺序控制** | 成员按声明逆序析构 | 成员按声明逆序析构（相同） |
 | **虚析构** | `virtual ~T()`（多态基类必需） | 无继承，无需虚析构 |
 
-> **关键洞察**: C++ 的构造函数体系是**语法驱动的**——`T()`、`T(const T&)`、`T(T&&)` 是编译器识别的特殊签名。Rust 的初始化是**Trait 驱动的**——`Default`、`Clone`、`From` 是普通 Trait，没有特殊语法地位。这种统一性减少了语言复杂性，但也意味着 Rust 缺少 C++ 的"构造函数"概念（特别是拷贝/移动构造函数的统一语义）。[来源: 💡 原创分析] · [Rust Reference — §4.1.8] ✅
+> **关键洞察**:
+> C++ 的构造函数体系是**语法驱动的**——`T()`、`T(const T&)`、`T(T&&)` 是编译器识别的特殊签名。
+> Rust 的初始化是**Trait 驱动的**——`Default`、`Clone`、`From` 是普通 Trait，没有特殊语法地位。
+> 这种统一性减少了语言复杂性，但也意味着 Rust 缺少 C++ 的"构造函数"概念（特别是拷贝/移动构造函数的统一语义）。
+> [来源: 💡 原创分析] · [Rust Reference — §4.1.8] ✅
 
 ---
 

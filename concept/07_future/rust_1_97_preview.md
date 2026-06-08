@@ -380,6 +380,14 @@ async gen fn counter_stream(max: usize) -> impl Stream<Item = usize> {
 | **`box_vec_non_null`** | 🔄 PFCP | `Box<Vec<T>>` → `NonNull<T>` 转换优化（PR #157273，5 days old，proposed-final-comment-period） [来源: releases.rs 2026-06-06] |
 | **`new_range_remainder`** | 🧪 Nightly | 新 `core::range` 迭代器类型的 `remainder()` 方法（Tracking Issue #154458，2026-03-27），RFC 3550 的后续扩展 [来源: rust-lang/rust#154458] |
 | **`VecDeque::retain_back`** | 🔄 FCP 完成 | `VecDeque` 反向保留元素（PR #151973，FCP finished，等待最终合并） [来源: releases.rs 2026-06-08] |
+| **`supertrait_item_shadowing`** | 🔄 PFCP | 允许子 trait 覆盖父 trait 的关联项（PR #150055，proposed-final-comment-period） [来源: releases.rs 2026-06-08] |
+| **`alignment_type` / `ptr_alignment_type`** | 🔄 PFCP | 类型级对齐抽象，部分稳定化为 `alignment_type`（PR #154065，proposed-final-comment-period） [来源: releases.rs 2026-06-08] |
+| **`stack-protector`** | 🔄 PFCP | 栈保护编译器选项（PR #148051，proposed-final-comment-period） [来源: releases.rs 2026-06-08] |
+| **`breakpoint` function** | 🔄 PFCP | 标准库断点函数（PR #142824，proposed-final-comment-period） [来源: releases.rs 2026-06-08] |
+| **`proc_macro_value`** | 🔄 等待 review | 过程宏值类型支持（PR #152092，等待 review） [来源: releases.rs 2026-06-08] |
+| **C-variadic function definitions** | 🔄 PFCP | C 可变参数函数定义稳定化（PR #155942，proposed-final-comment-period） [来源: releases.rs 2026-06-08] |
+| **`size_of_val_raw` / `align_of_val_raw` / `Layout::for_value_raw`** | 🔄 等待 review | 裸值尺寸/对齐计算（PR #157572，1 day old，等待 review） [来源: releases.rs 2026-06-08] |
+| **`#[optimize]` attribute** | 🔄 Blocked | 函数级优化属性（PR #157273，blocked，needs-fcp） [来源: releases.rs 2026-06-08] |
 
 ---
 
@@ -392,7 +400,11 @@ async gen fn counter_stream(max: usize) -> impl Stream<Item = usize> {
 | `target.'cfg(..)'.rustdocflags` | ✅ 1.96 已稳定 | 条件 rustdoc 标志 |
 | `cargo lint` 子命令 | 📋 RFC 阶段 | 统一的 lint 管理接口 |
 | 依赖图谱可视化 | 📋 设计阶段 | `cargo tree --graph` |
-| **cargo-script 稳定化** | 🔄 FCP 已结束 | [RFC 3502](https://rust-lang.github.io/rfcs/3502.html)+3503 已批准；blocker 为 edition policy（lang/edition 方面）；Project Goals 2026 Continued [来源: Rust Project Goals 2026 April Update] |
+| **cargo-script 稳定化** | 🔄 FCP 已结束 | [RFC 3502](https://rust-lang.github.io/rfcs/3502.html)+3503 已批准；**blocker 为 edition policy（lang/edition 方面）**；Project Goals 2026 Continued [来源: Rust Project Goals 2026 April Update] |
+| **Cargo `-m` shorthand** | 🟢 1.97 已确认 | `cargo -m <path>` 作为 `--manifest-path` 的简写（Cargo #16858） [来源: Cargo CHANGELOG 1.97] |
+| **Cargo improved `-p` errors** | 🟢 1.97 已确认 | 拼写错误的 `-p` 参数将提示相似的 workspace member 名称（Cargo #16844） [来源: Cargo CHANGELOG 1.97] |
+| **Cargo `-Zscript` edition pinning** | 🧪 Nightly | 教育用户如何为脚本固定 edition（Cargo #16851） [来源: Cargo CHANGELOG 1.97] |
+| **Cargo `-Zcargo-lints`** | 🧪 Nightly | 优先使用定义的 lint 级别而非默认值；`unused_dependencies` 忽略 rustc 的 `unused_crate_dependencies` 状态（Cargo #16879, #16877） [来源: Cargo CHANGELOG 1.97] |
 
 ### 6.2 rustfmt / clippy
 

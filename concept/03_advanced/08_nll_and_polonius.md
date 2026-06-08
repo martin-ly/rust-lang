@@ -159,7 +159,8 @@ Polonius: 下一代借用检查器
   当前状态 (2026-06):
   ├── ✅ #150551 已落地 — Polonius 核心实现完成
   ├── 🧪 `-Zpolonius` 标志在 nightly 可用
-  ├── 📋 官方计划 **2026 年内稳定化**（Rust Project Goals 2026 目标）
+  ├── 📋 **感觉可稳定化（stabilizable）** — Project Goals 2026 最新评估
+  ├── 📅 目标 **2026 年内稳定化 alpha 版本**（Rust Project Goals 2026 一级目标）
   └── 🎯 预计最终成为默认借用检查器
 
   Polonius 能编译的额外代码:

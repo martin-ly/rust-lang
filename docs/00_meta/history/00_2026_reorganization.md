@@ -37,7 +37,6 @@
     - [短期行动（本周）](#短期行动本周)
     - [长期行动](#长期行动)
   - [参考](#参考)
-  - [**状态**: ✅ 重组完成](#状态--重组完成)
   - [权威来源索引](#权威来源索引)
 
 ## 重组背景
@@ -57,7 +56,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```
+```text
 清晰层级 + 单一真相源 + 权威引用 + 易于导航
 ```
 
@@ -67,7 +66,7 @@
 
 ### 新目录结构
 
-```
+```text
 rust-lang/
 ├── 00_meta/              # 元数据与项目治理（新增）
 ├── 01_docs/              # 核心文档（重组）
@@ -218,6 +217,7 @@ rust-lang/
 **记录者**: Rust学习项目团队
 **日期**: 2026-03-18
 **状态**: ✅ 重组完成
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

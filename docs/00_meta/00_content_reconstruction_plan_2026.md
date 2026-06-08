@@ -355,7 +355,7 @@ graph TD
 2. **属性清单**：
    - Send 的传递性、逆否命题（!Send 的封闭性）
    - Sync 与 &T: Send 的等价关系（证明直觉）
-   - Rc<!Send> vs Arc<Send> 的矩阵
+   - `Rc<!Send> vs Arc<Send>` 的矩阵
 3. **依赖图**：threads → Send/Sync → ownership → borrowing → lifetimes
 4. **机制解释**：
    - 类型系统：Send/Sync 作为 auto trait 的推导规则

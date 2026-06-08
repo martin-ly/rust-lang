@@ -1,6 +1,5 @@
 > **内容分级**: [综述级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **本节关键术语**: 字符串 (String) · 字符串切片 (str) · UTF-8 · 所有权转移 (Move) · 格式化 (Formatting) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 字符串与文本：Rust 的 Unicode 处理与格式化系统
@@ -523,7 +522,12 @@ fn get_static() -> &'static str {
 }
 ```
 
-> **修正**: `String` 拥有堆分配的 UTF-8 字节数组，`&str` 是对其内部数据的借用。返回 `&str` 意味着返回一个引用，但被引用的 `String` 在函数返回时释放。这与悬垂引用问题相同——生命周期系统阻止返回指向局部 `String` 的 `&str`。正确做法是返回 `String`（转移所有权）或返回 `'static str`（字符串字面量）。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**:
+> `String` 拥有堆分配的 UTF-8 字节数组，`&str` 是对其内部数据的借用。
+> 返回 `&str` 意味着返回一个引用，但被引用的 `String` 在函数返回时释放。
+> 这与悬垂引用问题相同——生命周期系统阻止返回指向局部 `String` 的 `&str`。
+> 正确做法是返回 `String`（转移所有权）或返回 `'static str`（字符串字面量）。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 12.2 边界测试：字符串索引操作（编译错误）
 
@@ -565,7 +569,18 @@ fn main() {
 }
 ```
 
-> **修正**: `str::split` 接受实现 `Pattern` trait 的参数：`char`、`&str`、`&[char]`、`FnMut(char) -> bool`。`Vec<char>` 未实现 `Pattern`，因此不能作为 `split` 参数。Rust 的 `Pattern` trait 是稳定的内部 trait（`std::str::pattern::Pattern`），不对外公开实现，因此不能为自定义类型实现 `Pattern`。这是标准库的封闭 trait 设计：防止外部类型破坏 `split` 的内部优化。替代方案：1) 将 `Vec<char>` 转为 `&[char]`（`vec.as_slice()`）；2) 使用闭包 `|c| vec.contains(&c)`；3) 使用 `regex` crate 处理复杂分割模式。这与 Python 的 `str.split`（接受 `str` 或 `None`）或 JavaScript 的 `String.prototype.split`（接受字符串或正则）不同——Rust 的 `split` 参数类型在编译期严格检查，但灵活性较低。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.str.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**:
+> `str::split` 接受实现 `Pattern` trait 的参数：`char`、`&str`、`&[char]`、`FnMut(char) -> bool`。`Vec<char>` 未实现 `Pattern`，因此不能作为 `split` 参数。
+> Rust 的 `Pattern` trait 是稳定的内部 trait（`std::str::pattern::Pattern`），不对外公开实现，因此不能为自定义类型实现 `Pattern`。
+> 这是标准库的封闭 trait 设计：防止外部类型破坏 `split` 的内部优化。
+> 替代方案：
+>
+> 1) 将 `Vec<char>` 转为 `&[char]`（`vec.as_slice()`）；
+> 2) 使用闭包 `|c| vec.contains(&c)`；
+> 3) 使用 `regex` crate 处理复杂分割模式。
+> 这与 Python 的 `str.split`（接受 `str` 或 `None`）或 JavaScript 的 `String.prototype.split`（接受字符串或正则）不同——Rust 的 `split` 参数类型在编译期严格检查，但灵活性较低。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.str.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.4 边界测试：字符串拼接的 `+` 运算符消耗左操作数（编译错误）
 
@@ -579,7 +594,15 @@ fn main() {
 }
 ```
 
-> **修正**: `String + &str` 的实现消耗左边的 `String`（取得所有权），追加右边的 `&str`，返回新的 `String`。这是效率优化：若 `s1` 有足够容量，直接在其缓冲区后追加 `s2` 的内容，无需新分配。代价：`s1` 被移动。若需保留 `s1`，应使用 `format!("{}{}", s1, s2)` 或 `s1.clone() + &s2`。多次拼接时，`+` 链的效率差（每次可能重新分配），应使用 `String::with_capacity` + `push_str` 或 `format!`。这与 Java 的 `String +`（创建新 `String`，不修改原对象）或 C++ 的 `std::string +`（创建新字符串）不同——Rust 的 `+` 是变异操作（mutating），利用已有分配。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/string/struct.String.html)]
+> **修正**:
+>
+> `String + &str` 的实现消耗左边的 `String`（取得所有权），追加右边的 `&str`，返回新的 `String`。
+> 这是效率优化：若 `s1` 有足够容量，直接在其缓冲区后追加 `s2` 的内容，无需新分配。
+> 代价：`s1` 被移动。若需保留 `s1`，应使用 `format!("{}{}", s1, s2)` 或 `s1.clone() + &s2`。
+> 多次拼接时，`+` 链的效率差（每次可能重新分配），应使用 `String::with_capacity` + `push_str` 或 `format!`。
+> 这与 Java 的 `String +`（创建新 `String`，不修改原对象）或 C++ 的 `std::string +`（创建新字符串）不同——Rust 的 `+` 是变异操作（mutating），利用已有分配。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html)] ·
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/string/struct.String.html)]
 
 ### 10.5 边界测试：字符串索引与 UTF-8 编码边界（编译错误）
 
@@ -593,7 +616,19 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的 `String`/`str` **不支持整数索引**，因为 UTF-8 是变长编码：ASCII 字符占 1 字节，中文占 3 字节，`s[0]` 的语义不明确（是第 0 个字节还是第 0 个 Unicode 标量值？）。访问方式：1) `s.chars().nth(i)` — 第 i 个 Unicode 标量值（O(n)）；2) `s.as_bytes()[i]` — 第 i 个字节（unsafe，可能切分多字节字符）；3) `s.get(i..j)` — 安全子串切片（返回 `Option<&str>`，检查边界完整性）。设计哲学：禁止可能产生无效 UTF-8 的操作。这与 Python 3 的 `s[0]`（返回 Unicode 码点）或 JavaScript 的 `s[0]`（返回 UTF-16 码元）不同——Rust 强制开发者明确索引语义。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/string/struct.String.html)]
+> **修正**:
+> Rust 的 `String`/`str` **不支持整数索引**，因为 UTF-8 是变长编码：ASCII 字符占 1 字节，中文占 3 字节，`s[0]` 的语义不明确（是第 0 个字节还是第 0 个 Unicode 标量值？）。
+> 访问方式：
+>
+> 1) `s.chars().nth(i)` — 第 i 个 Unicode 标量值（O(n)）；
+> 2) `s.as_bytes()[i]` — 第 i 个字节（unsafe，可能切分多字节字符）；
+> 3) `s.get(i..j)` — 安全子串切片（返回 `Option<&str>`，检查边界完整性）。
+>
+> 设计哲学：
+> 禁止可能产生无效 UTF-8 的操作。
+> 这与 Python 3 的 `s[0]`（返回 Unicode 码点）或 JavaScript 的 `s[0]`（返回 UTF-16 码元）不同——Rust 强制开发者明确索引语义。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html)] ·
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/string/struct.String.html)]
 
 ### 10.6 边界测试：`String::from_utf8` 的无效序列与损失转换（运行时 panic）
 
@@ -606,7 +641,17 @@ fn main() {
 }
 ```
 
-> **修正**: `String::from_utf8` 将 `Vec<u8>` 转为 `String`，要求严格 UTF-8。无效序列时：1) `unwrap()` → panic；2) `from_utf8_lossy` → 用 `U+FFFD`（�）替换无效字节，返回 `Cow<'_, str>`；3) `from_utf8` 返回 `Result<String, FromUtf8Error>`，可恢复原始 `Vec`。`String::from_utf8` 的所有权语义：成功时消耗 `Vec<u8>`（无额外分配），失败时返回 `Err` 包含原始 `Vec`。这与 `str::from_utf8`（`&[u8]` → `&str`，不消耗输入）或 Python 的 `bytes.decode('utf-8', errors='replace')` 类似——Rust 提供严格转换和损失转换两种选择。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/string/struct.String.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html)]
+> **修正**:
+> `String::from_utf8` 将 `Vec<u8>` 转为 `String`，要求严格 UTF-8。
+> 无效序列时：
+>
+> 1) `unwrap()` → panic；
+> 2) `from_utf8_lossy` → 用 `U+FFFD`（�）替换无效字节，返回 `Cow<'_, str>`；
+> 3) `from_utf8` 返回 `Result<String, FromUtf8Error>`，可恢复原始 `Vec`。
+> `String::from_utf8` 的所有权语义：成功时消耗 `Vec<u8>`（无额外分配），失败时返回 `Err` 包含原始 `Vec`。
+> 这与 `str::from_utf8`（`&[u8]` → `&str`，不消耗输入）或 Python 的 `bytes.decode('utf-8', errors='replace')` 类似——Rust 提供严格转换和损失转换两种选择。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/string/struct.String.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html)]
 
 ## 实践
 
@@ -633,9 +678,7 @@ fn main() {
 > UTF-8 安全性 ⟸ String/str 边界检查 ⟸ 所有权与借用
 > 文本处理正确性 ⟸ 编码一致性保证 ⟸ 类型系统约束
 > **过渡**: 掌握 字符串与文本：Rust 的 Unicode 处理与格式化系统 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 字符串与文本：Rust 的 Unicode 处理与格式化系统 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: 字符串与文本：Rust 的 Unicode 处理与格式化系统 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界

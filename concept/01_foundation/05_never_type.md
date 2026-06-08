@@ -1,7 +1,7 @@
 > **内容分级**: [综述级]
-
 > **本节关键术语**: Never 类型 (!) · 发散函数 (Diverging Function) · 类型归一 (Type Unification) · 空类型 (Empty Type) · 穷尽匹配 (Exhaustiveness) — [完整对照表](../00_meta/terminology_glossary.md)
 >
+
 # Never Type (`!`)：底类型与穷尽性
 >
 > **EN**: Never Type (`!`)：底类型与穷尽性 (Chinese)
@@ -17,6 +17,7 @@
 ---
 
 > **来源**:
+>
 > [Rust Reference — Never Type](https://doc.rust-lang.org/reference/types/never.html) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
@@ -431,9 +432,7 @@ fn incomplete_match(result: Result<i32, !>) -> i32 {
 > 控制流完整性 ⟸ 穷尽性匹配 ⟸ ! 类型包含无值
 > 类型系统一致性 ⟸ 底类型 ⊥ ⟸ 任何类型的子类型
 > **过渡**: 掌握 Never Type (`!`)：底类型与穷尽性 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 Never Type (`!`)：底类型与穷尽性 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: Never Type (`!`)：底类型与穷尽性 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界

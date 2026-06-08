@@ -1,12 +1,15 @@
 > **内容分级**: [综述级]
-
 > **本节关键术语**: 副作用 (Side Effect) · 纯函数 (Pure Function) · 引用透明 (Referential Transparency) · 效果系统 (Effect System) · IO — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 副作用与纯度：从引用透明到 Rust 的所有权效果
 >
 > **EN**: Ownership
-> **Summary**: 一个表达式是**引用透明**的，当且仅当：在程序的任何位置，该表达式都可以被其计算结果替换，而不改变程序的行为。 ```text 引用透明: expr ≡ value_of(expr) 在任何上下文中成立``` **引用透明的表达式**: - 纯数学函数：`2 + 3` ≡ `5` - 无副作用的函数：`square(4)` ≡ `16` **非引用透明的表达式**: - `rand()` — 每次调用结果不同 - `println!("hello")` — 有 IO 副作用 - `x += 1` — 修改存储状态 | 特性 | 引用透明代码 | 非引用透明代码 | |:---|:---|:
-
+> **Summary**:
+> 一个表达式是**引用透明**的，当且仅当：在程序的任何位置，该表达式都可以被其计算结果替换，而不改变程序的行为。
+> ```text 引用透明: expr ≡ value_of(expr) 在任何上下文中成立```
+> **引用透明的表达式**:- 纯数学函数：`2 + 3` ≡ `5` - 无副作用的函数：`square(4)` ≡ `16`
+> **非引用透明的表达式**: - `rand()` — 每次调用结果不同 - `println!("hello")` — 有 IO 副作用 - `x += 1` — 修改存储状态 | 特性 | 引用透明代码 | 非引用透明代码 |
+> |:---|:---|:
 > **受众**: [初学者]
 > **层级**: L1 基础概念 — 通用编程语言机制
 > **A/S/P 标记**: **S** — Structure
@@ -114,9 +117,16 @@ fn process_unsafe(ptr: *mut i32) {  // unsafe 块表示未定义效果
 
 > **形式化命题** [Tier 3]: Rust 的类型系统是一种**效果系统（Effect System）的原型**——`&mut T` = write effect, `unsafe` = undefined effect, `async` = async effect, `Result<T, E>` = exception effect。
 >
-> **论证**: 虽然 Rust 目前没有显式的效果类型（如 Koka 的 `fn f(): <io, state> T`），但其类型签名通过参数和返回类型**隐式编码**了效果信息。这与 Moggi 1989 提出的"通过 Monad 结构显式化计算"的思想同构，但实现方式不同：Haskell 用 Monad 组合子，Rust 用所有权约束。[来源: 💡 原创分析] · [Moggi 1989] · [Wadler 1992]
+> **论证**:
+> 虽然 Rust 目前没有显式的效果类型（如 Koka 的 `fn f(): <io, state> T`），但其类型签名通过参数和返回类型**隐式编码**了效果信息。
+> 这与 Moggi 1989 提出的"通过 Monad 结构显式化计算"的思想同构，但实现方式不同：Haskell 用 Monad 组合子，Rust 用所有权约束。
+> [来源: 💡 原创分析] · [Moggi 1989] · [Wadler 1992]
 >
-> **权威来源对齐**: Rust 语言团队通过 [Keyword Generics Initiative](https://github.com/rust-lang/keyword-generics-initiative) 明确承认：Rust 自 1.0 起已隐性实现 effect system（`async`、`const`、`try`/`?`、`unsafe` 均为 effect types）。当前工程目标是通过 effect generics 消除函数着色问题导致的 API 重复爆炸。[来源: [Rust Keyword Generics Initiative 2024](https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md)] · [来源: [Rust Project Goals 2025H1](https://rust-lang.github.io/rust-project-goals/2025h1/const-trait.html)]
+> **权威来源对齐**:
+> Rust 语言团队通过 [Keyword Generics Initiative](https://github.com/rust-lang/keyword-generics-initiative) 明确承认：Rust 自 1.0 起已隐性实现 effect system（`async`、`const`、`try`/`?`、`unsafe` 均为 effect types）。
+> 当前工程目标是通过 effect generics 消除函数着色问题导致的 API 重复爆炸。
+> [来源: [Rust Keyword Generics Initiative 2024](https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md)] ·
+> [来源: [Rust Project Goals 2025H1](https://rust-lang.github.io/rust-project-goals/2025h1/const-trait.html)]
 >
 > **延伸阅读**: [L7 Effects System 预研](../07_future/04_effects_system.md) — Rust 效果系统的完整概念框架、学术谱系与演进路线图
 
@@ -425,7 +435,12 @@ fn closure_effect() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Moggi 1989 — Computational Lambda-Calculus and Monads](https://www.disi.unige.it/person/MoggiE/ftp/ic.pdf) · [Wadler 1992 — The Essence of Functional Programming](https://dl.acm.org/doi/10.1145/143165.143169) · [RustBelt POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **权威来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
+> [Moggi 1989 — Computational Lambda-Calculus and Monads](https://www.disi.unige.it/person/MoggiE/ftp/ic.pdf) ·
+> [Wadler 1992 — The Essence of Functional Programming](https://dl.acm.org/doi/10.1145/143165.143169) ·
+> [RustBelt POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
 > **文档版本**: 1.0
 > **对应 Rust 版本**: 1.90.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
@@ -491,7 +506,11 @@ fn safe_wrapper_fixed(size: usize) -> Vec<u8> {
 }
 ```
 
-> **修正**: `unsafe` 效果具有"传染性"——调用 `unsafe fn` 或解引用裸指针必须在 `unsafe` 块内进行。但 `unsafe` 块**不自动**使周围代码变为 unsafe；它只是告诉编译器"程序员已验证此处的安全性"。将 unsafe 操作包装为安全 API 时，必须确保所有 unsafe 前置条件在函数体内被满足（如空指针检查、长度验证、生命周期保证）。这是 Rust 安全抽象的核心契约。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**:
+> `unsafe` 效果具有"传染性"——调用 `unsafe fn` 或解引用裸指针必须在 `unsafe` 块内进行。
+> 但 `unsafe` 块**不自动**使周围代码变为 unsafe；它只是告诉编译器"程序员已验证此处的安全性"。
+> 将 unsafe 操作包装为安全 API 时，必须确保所有 unsafe 前置条件在函数体内被满足（如空指针检查、长度验证、生命周期保证）。这是 Rust 安全抽象的核心契约。
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.3 边界测试：`const fn` 中的堆分配尝试（编译错误）
 
@@ -506,7 +525,18 @@ fn main() {
 }
 ```
 
-> **修正**: `const fn` 有严格的**编译期求值**限制：1) 不能分配堆内存（`Vec::new()`、`Box::new()`）；2) 不能调用非 `const fn`；3) 不能进行 I/O 或随机数生成；4) 不能有 `unsafe` 块。但 1.83+ 中 `const fn` 已支持 `mut` 绑定、循环、`if let`、解构赋值等。未来演进：`const fn` 可能支持有限的堆分配（`const Heap` 提案），但当前受限。这与 C++ 的 `constexpr`（C++20 支持堆分配和虚函数）或 D 的 `enum` 强制编译期求值不同——Rust 的 `const` 系统保守但逐步扩展，每次扩展需确保编译期求值的可判定性。[来源: [Rust Reference — const fn](https://doc.rust-lang.org/reference/items/functions.html#const-functions)] · [来源: [Rust Const Eval](https://doc.rust-lang.org/nightly/unstable-book/language-features/const-fn.html)]
+> **修正**:
+> `const fn` 有严格的**编译期求值**限制：
+>
+> 1) 不能分配堆内存（`Vec::new()`、`Box::new()`）；
+> 2) 不能调用非 `const fn`；
+> 3) 不能进行 I/O 或随机数生成；
+> 4) 不能有 `unsafe` 块。但 1.83+ 中 `const fn` 已支持 `mut` 绑定、循环、`if let`、解构赋值等。
+>
+> 未来演进：`const fn` 可能支持有限的堆分配（`const Heap` 提案），但当前受限。
+> 这与 C++ 的 `constexpr`（C++20 支持堆分配和虚函数）或 D 的 `enum` 强制编译期求值不同——Rust 的 `const` 系统保守但逐步扩展，每次扩展需确保编译期求值的可判定性。
+> [来源: [Rust Reference — const fn](https://doc.rust-lang.org/reference/items/functions.html#const-functions)] ·
+> [来源: [Rust Const Eval](https://doc.rust-lang.org/nightly/unstable-book/language-features/const-fn.html)]
 
 ### 10.2 边界测试：类型不匹配的基础错误
 
@@ -517,7 +547,12 @@ fn main() {
 }
 ```
 
-> **修正**: **类型不匹配**是 Rust 最常见的编译错误：1) `let x: i32 = "hello"` — `&str` 不能隐式转为 `i32`；2) Rust 无隐式类型转换（C/Java 的自动转换）；3) 需显式转换：`"42".parse::<i32>().unwrap()` 或 `42i32.to_string()`。
+> **修正**:
+> **类型不匹配**是 Rust 最常见的编译错误：
+>
+> 1) `let x: i32 = "hello"` — `&str` 不能隐式转为 `i32`；
+> 2) Rust 无隐式类型转换（C/Java 的自动转换）；
+> 3) 需显式转换：`"42".parse::<i32>().unwrap()` 或 `42i32.to_string()`。
 
 ## 实践
 
@@ -532,16 +567,15 @@ fn main() {
 ## 参考来源
 
 > [来源: [ICFP 2014 — Extensible Effects](https://dl.acm.org/doi/10.1145/2628136.2628161)]
-
 > [来源: [Haskell — IO Monad](https://www.haskell.org/tutorial/io.html)]
-
 > [来源: [Rust [RFC 2593](https://rust-lang.github.io/rfcs/2593.html) — Effects](https://rust-lang.github.io/rfcs/)]
-
 > [来源: [Rust Reference — Const Evaluation](https://doc.rust-lang.org/reference/const_eval.html)]
-
 > [来源: [Rust Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)]
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rust RFCs](https://rust-lang.github.io/rfcs/)
+> **权威来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [Rust Standard Library](https://doc.rust-lang.org/std/) ·
+> [Rust RFCs](https://rust-lang.github.io/rfcs/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 
 ## 认知路径
@@ -559,9 +593,7 @@ fn main() {
 > 副作用可追踪 ⟸ 纯函数标记 ⟸ 效果系统
 > 编译期优化 ⟸ const 求值 ⟸ 无副作用保证
 > **过渡**: 掌握 副作用与纯度：从引用透明到 Rust 的所有权效果 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 副作用与纯度：从引用透明到 Rust 的所有权效果 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: 副作用与纯度：从引用透明到 Rust 的所有权效果 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界

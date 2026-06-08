@@ -161,6 +161,12 @@ let config = Some(true);
 debug_assert_matches!(config, Some(true));
 ```
 
+> ⚠️ **重要**: `assert_matches!` 和 `debug_assert_matches!`**未加入标准 prelude**。这是因为它们与流行的第三方 crate（如 `assert_matches` crate）存在命名冲突。使用时需显式导入：
+> ```rust
+> use std::assert_matches; // 或 core::assert_matches
+> ```
+> [来源: [Rust 1.96 Release Notes — Assert matching patterns](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)]
+
 | 宏 | debug 模式 | release 模式 | 用例 |
 |:---|:---:|:---:|:---|
 | `assert_matches!` | ✅ 执行 | ✅ 执行 | 不变量检查、测试 |

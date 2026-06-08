@@ -1,12 +1,12 @@
 > **内容分级**: [综述级]
-
 > **本节关键术语**: 数据抽象 (Data Abstraction) · 封装 (Encapsulation) · 信息隐藏 (Information Hiding) · 模块边界 (Module Boundary) · API 设计 — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 数据抽象谱系：从 C struct 到 Rust enum + trait
 >
 > **EN**: 数据抽象谱系：从 C struct 到 Rust enum + trait (Chinese)
-> **Summary**: C 的 `struct` 是**最底层的数据抽象**——仅定义memory中字段的顺序和types： ```c struct Point { double x; double y; }; // 抽象层级: memory地址 + 偏移量 // 无行为封装、无访问控制、无types安全保证``` **特征**: - 抽象单位 = memory布局 - 行为 = 独立函数（`distance(struct Point a, struct Point b)`） - 封装 = 无（所有字段公开） - 多态 = 无 C++ 将数据与行为绑定，引入访问控制和构造函数： ```cpp class Point { private: double
-
+> **Summary**: C 的 `struct` 是**最底层的数据抽象**——仅定义memory中字段的顺序和types：
+> ```c struct Point { double x; double y; }; // 抽象层级: memory地址 + 偏移量 // 无行为封装、无访问控制、无types安全保证```
+> **特征**: - 抽象单位 = memory布局 - 行为 = 独立函数（`distance(struct Point a, struct Point b)`） - 封装 = 无（所有字段公开） - 多态 = 无 C++ 将数据与行为绑定，引入访问控制和构造函数：
 > **受众**: [初学者]
 > **层级**: L1 基础概念 — 通用编程语言机制
 > **A/S/P 标记**: **S** — Structure
@@ -430,7 +430,7 @@ impl std::fmt::Display for MyVec {
 ## 七、知识来源关系
 
 | **论断** | **来源** | **可信度** | **Tier** |
-|:---|:---|:---:|:---:|
+| :--- | :--- | :---: | :---: |
 | 代数数据类型定义 | [Pierce TAPL §11] · [Cardelli & Wegner 1985] | ✅ | Tier 1 |
 | C++ class 模型 | [Stroustrup — C++PL] · [C++ Standard §11.4] | ✅ | Tier 1 |
 | Java 接口模型 | [JLS Ch.9] | ✅ | Tier 1 |
@@ -440,7 +440,12 @@ impl std::fmt::Display for MyVec {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Pierce TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Cardelli & Wegner 1985](https://dl.acm.org/doi/10.1145/6041.6042) · [Stroustrup — The C++ Programming Language](https://www.stroustrup.com/4th.html) · [JLS](https://docs.oracle.com/javase/specs/jls/se17/html/index.html)
+> **权威来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [Pierce TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
+> [Cardelli & Wegner 1985](https://dl.acm.org/doi/10.1145/6041.6042) ·
+> [Stroustrup — The C++ Programming Language](https://www.stroustrup.com/4th.html) ·
+> [JLS](https://docs.oracle.com/javase/specs/jls/se17/html/index.html)
 > **文档版本**: 1.0
 > **对应 Rust 版本**: 1.90.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
@@ -471,7 +476,10 @@ fn fixed() {
 }
 ```
 
-> **修正**: 零大小类型（ZST，如 `()`、`PhantomData<T>`、空结构体）不占用内存，其引用可能指向同一虚拟地址。依赖 ZST 指针唯一性（如哈希表键）是未定义行为。ZST 的正确用途是类型级标记（phantom type）、编译期常量、状态机状态标签——利用类型系统传递信息，无运行时开销。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**:
+> 零大小类型（ZST，如 `()`、`PhantomData<T>`、空结构体）不占用内存，其引用可能指向同一虚拟地址。
+> 依赖 ZST 指针唯一性（如哈希表键）是未定义行为。ZST 的正确用途是类型级标记（phantom type）、编译期常量、状态机状态标签——利用类型系统传递信息，无运行时开销。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.2 边界测试：枚举变体内存布局的不可变性（逻辑错误）
 
@@ -499,7 +507,10 @@ fn fixed() {
 }
 ```
 
-> **修正**: 枚举变体的字段默认不可变。即使枚举实例是 `mut`，通过模式匹配获取的可变引用仍需显式 `ref mut`。枚举的内存布局由编译器优化（discriminant 可能内联、 niche optimization），应用代码不应假设枚举的具体内存表示（除非 `#[repr(C)]` 或 `#[repr(u8)]` 显式标记）。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**:
+> 枚举变体的字段默认不可变。即使枚举实例是 `mut`，通过模式匹配获取的可变引用仍需显式 `ref mut`。
+> 枚举的内存布局由编译器优化（discriminant 可能内联、 niche optimization），应用代码不应假设枚举的具体内存表示（除非 `#[repr(C)]` 或 `#[repr(u8)]` 显式标记）。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.3 边界测试：零大小类型的 `Box` 分配（编译错误/运行时差异）
 
@@ -515,7 +526,13 @@ fn main() {
 }
 ```
 
-> **修正**: 零大小类型（ZST，如 `()`、`PhantomData<T>`、空 struct）的大小为 0，不占用内存。`Box<ZST>` 的 `into_raw` 返回的指针不指向有效堆内存——它是悬垂指针（dangling pointer），但对 ZST 解引用是安全的（不读取任何字节）。这是 Rust 类型系统的边缘情况：内存安全保证不依赖指针的有效性，而依赖访问的字节数。`Box::new(ZeroSized)` 可能不调用分配器（优化为无操作），`Box::from_raw(ptr)` 可能不调用 deallocator。这与 C 的 `malloc(0)`（实现定义行为，可能返回 NULL 或有效指针）不同——Rust 的 ZST 处理是类型系统层面的，不依赖分配器行为。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-04-advanced-types.html)] · [来源: [Rust Reference — Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html)]
+> **修正**:
+> 零大小类型（ZST，如 `()`、`PhantomData<T>`、空 struct）的大小为 0，不占用内存。
+> `Box<ZST>` 的 `into_raw` 返回的指针不指向有效堆内存——它是悬垂指针（dangling pointer），但对 ZST 解引用是安全的（不读取任何字节）。
+> 这是 Rust 类型系统的边缘情况：内存安全保证不依赖指针的有效性，而依赖访问的字节数。`Box::new(ZeroSized)` 可能不调用分配器（优化为无操作），`Box::from_raw(ptr)` 可能不调用 deallocator。
+> 这与 C 的 `malloc(0)`（实现定义行为，可能返回 NULL 或有效指针）不同——Rust 的 ZST 处理是类型系统层面的，不依赖分配器行为。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-04-advanced-types.html)] ·
+> [来源: [Rust Reference — Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html)]
 
 ### 10.4 边界测试：`ManuallyDrop` 的内存泄漏风险（逻辑错误）
 
@@ -533,7 +550,19 @@ fn main() {
 }
 ```
 
-> **修正**: `ManuallyDrop<T>` 包装类型，阻止编译器自动调用 `Drop::drop`。使用场景：1) 在 `union` 中（编译器不知道哪个变体活跃，不能自动 drop）；2) 自定义内存布局（如自引用结构）；3) 提前手动释放（如 `Vec::set_len(0)` 后手动 dealloc）。风险：忘记显式 `drop` 导致内存泄漏——不是 UB，但资源浪费。Rust 的类型系统不阻止内存泄漏（`Rc` 循环引用、`Mem::forget`、`ManuallyDrop` 都是安全的），但工具（`cargo leak`）和模式（`scopeguard::defer`）可帮助检测。这与 C++ 的 `std::unique_ptr`（必须释放，否则泄漏）或 Java 的 GC（自动回收循环引用... eventually）不同——Rust 的所有权系统通常防止泄漏，但显式控制时责任回归开发者。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-03-drop.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/mem/struct.ManuallyDrop.html)]
+> **修正**:
+> `ManuallyDrop<T>` 包装类型，阻止编译器自动调用 `Drop::drop`。
+> 使用场景：
+>
+> 1) 在 `union` 中（编译器不知道哪个变体活跃，不能自动 drop）；
+> 2) 自定义内存布局（如自引用结构）；
+> 3) 提前手动释放（如 `Vec::set_len(0)` 后手动 dealloc）。
+>
+> 风险：忘记显式 `drop` 导致内存泄漏——不是 UB，但资源浪费。
+> Rust 的类型系统不阻止内存泄漏（`Rc` 循环引用、`Mem::forget`、`ManuallyDrop` 都是安全的），但工具（`cargo leak`）和模式（`scopeguard::defer`）可帮助检测。
+> 这与 C++ 的 `std::unique_ptr`（必须释放，否则泄漏）或 Java 的 GC（自动回收循环引用... eventually）不同——Rust 的所有权系统通常防止泄漏，但显式控制时责任回归开发者。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-03-drop.html)] ·
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/mem/struct.ManuallyDrop.html)]
 
 ### 10.5 边界测试：单元类型 `()` 的 `Default` 与 `Clone` 的特殊性（编译错误/逻辑错误）
 
@@ -551,7 +580,16 @@ fn main() {
 }
 ```
 
-> **修正**: `()`（单元类型）是零大小类型（ZST），`size_of::<()>() == 0`。`Vec<()>` 的每个元素不占用字节，因此 `vec![(); N]` 不分配堆内存（或分配 0 字节），但 `len()` 报告 `N`。这是合法的 Rust，但可能导致意外：1) `v.push(())` 永不分配；2) `v.iter()` 产生 N 个 `&()`，但所有引用可能指向同一地址；3) 内存报告工具显示 `Vec` 占用 0 字节，但逻辑上有 N 个元素。这与 C 的 `void`（不完整类型，不能用于变量）或 Haskell 的 `()`（同样单元类型，但无大小概念）不同——Rust 的 ZST 是完整的类型系统特性，有明确的语义和优化规则。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)] · [来源: [Rust Reference — Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html)]
+> **修正**:
+> `()`（单元类型）是零大小类型（ZST），`size_of::<()>() == 0`。`Vec<()>` 的每个元素不占用字节，因此 `vec![(); N]` 不分配堆内存（或分配 0 字节），但 `len()` 报告 `N`。
+> 这是合法的 Rust，但可能导致意外：
+>
+> 1) `v.push(())` 永不分配；
+> 2) `v.iter()` 产生 N 个 `&()`，但所有引用可能指向同一地址；
+> 3) 内存报告工具显示 `Vec` 占用 0 字节，但逻辑上有 N 个元素。
+> 这与 C 的 `void`（不完整类型，不能用于变量）或 Haskell 的 `()`（同样单元类型，但无大小概念）不同——Rust 的 ZST 是完整的类型系统特性，有明确的语义和优化规则。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)] ·
+> [来源: [Rust Reference — Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html)]
 
 ### 10.3 边界测试：部分移动后使用未移动字段（编译错误）
 
@@ -569,7 +607,16 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的**部分移动**（partial move）允许从 struct 中移动单个字段，但移动后原变量**部分失效**。`p.name` 被移动后，`p` 仍可使用未移动的字段（`p.age`），但不能作为整体使用（如 `drop(p)` 或 `let q = p`）。但 `println!("{}", p.age)` 实际上**可以编译**——部分移动后未移动字段仍可用。真正的编译错误：`let q = p;`（试图整体移动已部分移动的变量）或 `println!("{:?}", p)`（使用已移动字段）。部分移动使 Rust 的所有权系统更灵活：无需为单个字段移动而拆分整个 struct。这与 C++ 的默认拷贝（无移动语义）或 Swift 的拷贝语义不同——Rust 的部分移动是零成本抽象，编译期跟踪每个字段的所有权状态。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] · [来源: [Rust Reference — Moved Values](https://doc.rust-lang.org/reference/ownership.html)]
+> **修正**:
+>
+> Rust 的**部分移动**（partial move）允许从 struct 中移动单个字段，但移动后原变量**部分失效**。
+> `p.name` 被移动后，`p` 仍可使用未移动的字段（`p.age`），但不能作为整体使用（如 `drop(p)` 或 `let q = p`）。
+> 但 `println!("{}", p.age)` 实际上**可以编译**——部分移动后未移动字段仍可用。
+> 真正的编译错误：`let q = p;`（试图整体移动已部分移动的变量）或 `println!("{:?}", p)`（使用已移动字段）。
+> 部分移动使 Rust 的所有权系统更灵活：无需为单个字段移动而拆分整个 struct。
+> 这与 C++ 的默认拷贝（无移动语义）或 Swift 的拷贝语义不同——Rust 的部分移动是零成本抽象，编译期跟踪每个字段的所有权状态。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] ·
+> [来源: [Rust Reference — Moved Values](https://doc.rust-lang.org/reference/ownership.html)]
 
 ## 实践
 
@@ -588,7 +635,7 @@ fn main() {
 ### 核心推理链
 
 | 定理 | 前提 | 结论 | 置信度 |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | 数据抽象谱系：从 C struct 到 Rust enum + trait 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
 | 数据抽象谱系：从 C struct 到 Rust enum + trait 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
 | 数据抽象谱系：从 C struct 到 Rust enum + trait 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
@@ -596,9 +643,7 @@ fn main() {
 > API 稳定性 ⟸ 封装边界清晰 ⟸ pub/private 分层
 > 零成本抽象 ⟸ 泛型与 trait ⟸ 编译期分发
 > **过渡**: 掌握 数据抽象谱系：从 C struct 到 Rust enum + trait 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 数据抽象谱系：从 C struct 到 Rust enum + trait 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: 数据抽象谱系：从 C struct 到 Rust enum + trait 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
