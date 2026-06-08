@@ -397,6 +397,7 @@ c08_algorithms/
 **维护状态**: ✅ 活跃维护
 
 🎉 **文档重组圆满完成！欢迎使用新的文档体系！**
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

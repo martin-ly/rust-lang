@@ -46,7 +46,6 @@
   - [📖 图表说明](#-图表说明)
     - [Mermaid图表类型](#mermaid图表类型)
     - [颜色编码](#颜色编码)
-  - [_本思维导图旨在提供清晰的学习路径和决策支持，帮助开发者系统化掌握Rust设计模式。_](#本思维导图旨在提供清晰的学习路径和决策支持帮助开发者系统化掌握rust设计模式)
 
 ## 🧠 文档概览
 
@@ -1055,6 +1054,7 @@ mindmap
 ---
 
 _本思维导图旨在提供清晰的学习路径和决策支持，帮助开发者系统化掌握Rust设计模式。_
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

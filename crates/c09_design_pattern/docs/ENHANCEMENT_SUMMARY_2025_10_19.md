@@ -34,7 +34,6 @@
     - [文档统计](#文档统计)
     - [性能数据](#性能数据)
   - [✨ 总结](#-总结)
-  - [_感谢使用 Rust 设计模式学习模块！如有任何问题或建议，欢迎反馈。_](#感谢使用-rust-设计模式学习模块如有任何问题或建议欢迎反馈)
 
 **完成时间**: 2025-10-19
 **模块**: `crates/c09_design_pattern`
@@ -349,6 +348,7 @@ OnceLock 访问:     1 ns
 ---
 
 _感谢使用 Rust 设计模式学习模块！如有任何问题或建议，欢迎反馈。_
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

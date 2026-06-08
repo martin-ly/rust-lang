@@ -56,7 +56,6 @@
   - [8. 结论](#8-结论)
     - [核心要点](#核心要点)
     - [选择指南](#选择指南)
-  - [**Rust版本**: 1.90+ (Edition 2024)](#rust版本-190-edition-2024)
 
 ---
 
@@ -944,6 +943,7 @@ pub async fn run_actor_http_server(addr: &str, actor: ActorAddr) -> std::io::Res
 **文档版本**: 1.0
 **最后更新**: 2025-10-02
 **Rust版本**: 1.90+ (Edition 2024)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

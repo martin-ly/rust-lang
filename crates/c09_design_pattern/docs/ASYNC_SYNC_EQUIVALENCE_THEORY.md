@@ -60,7 +60,6 @@
     - [形式化验证清单](#形式化验证清单)
     - [进一步研究方向](#进一步研究方向)
   - [参考文献](#参考文献)
-  - [**Rust版本**: 1.90+ (Edition 2024)](#rust版本-190-edition-2024)
 
 ---
 
@@ -778,6 +777,7 @@ tokio::spawn(async move { *x2.lock().await += 1; });
 **文档版本**: 1.0
 **最后更新**: 2025-10-02
 **Rust版本**: 1.90+ (Edition 2024)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

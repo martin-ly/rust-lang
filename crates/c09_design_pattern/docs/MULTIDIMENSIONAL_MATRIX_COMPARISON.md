@@ -46,7 +46,6 @@
   - [🔍 使用指南](#-使用指南)
     - [如何使用本对比矩阵](#如何使用本对比矩阵)
   - [📚 参考资源](#-参考资源)
-  - [_本矩阵基于Rust 1.92.0及以上版本（兼容 Rust 1.90+ 特性），随着语言演进持续更新。_](#本矩阵基于rust-1920及以上版本兼容-rust-190-特性随着语言演进持续更新)
 
 ## 📊 文档概览
 
@@ -747,6 +746,7 @@ graph TD
 ---
 
 _本矩阵基于Rust 1.92.0及以上版本（兼容 Rust 1.90+ 特性），随着语言演进持续更新。_
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

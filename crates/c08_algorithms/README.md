@@ -54,7 +54,6 @@
     - [使用指南](#使用指南-1)
     - [项目文档](#项目文档)
   - [📞 联系方式](#-联系方式)
-  - [**项目状态**: 🟢 活跃开发中](#项目状态--活跃开发中)
 
 ## 🎯 最新更新 (2025-11-15) ✨
 
@@ -537,6 +536,7 @@ cargo llvm-cov test --workspace --html
 **最后更新**: 2025-12-11
 **Rust版本**: 1.93.0
 **项目状态**: 🟢 活跃开发中
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -26,7 +26,6 @@
     - [分布式追踪](#分布式追踪)
     - [指标收集](#指标收集)
   - [相关资源](#相关资源)
-  - [**最后更新**: 2025-10-24](#最后更新-2025-10-24)
 
 ## 目标
 
@@ -418,6 +417,7 @@ criterion_main!(benches);
 
 **文档状态**: ✅ 已完成
 **最后更新**: 2025-10-24
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

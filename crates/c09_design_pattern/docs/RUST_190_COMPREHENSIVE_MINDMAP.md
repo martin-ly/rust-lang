@@ -22,7 +22,6 @@
     - [Week 3-4: 并发模式](#week-3-4-并发模式)
     - [Week 5-6: Rust特有](#week-5-6-rust特有)
   - [⚖️ 模式选择决策树](#️-模式选择决策树)
-  - [🗺️ **掌握设计模式，编写优雅Rust代码！** 🚀✨](#️-掌握设计模式编写优雅rust代码-)
 
 ---
 
@@ -127,6 +126,7 @@ Builder Adapter CSP  MVU  Newtype Builder
 ---
 
 🗺️ **掌握设计模式，编写优雅Rust代码！** 🚀✨
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

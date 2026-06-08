@@ -46,7 +46,6 @@
     - [9.2 代码质量检查](#92-代码质量检查)
   - [🔗 相关文档](#-相关文档)
   - [🚀 快速开始](#-快速开始)
-  - [_本知识图谱持续更新，反映最新的Rust设计模式实践和研究成果。所有示例代码均可运行，包含完整的注释和测试用例。_](#本知识图谱持续更新反映最新的rust设计模式实践和研究成果所有示例代码均可运行包含完整的注释和测试用例)
 
 ## 📊 文档概览
 
@@ -453,13 +452,14 @@ graph TB
 
 **特性适配矩阵**：
 
-| Rust 1.92.0 特性  | 最佳适配模式  | 适配度     | 性能提升 | 示例位置                              | 完整示例                                                                                 |
-| :--- | :--- | :--- | :--- | :--- | :--- || **OnceLock**      | 单例          | ⭐⭐⭐⭐⭐ | 100%     | `creational/singleton/`               | [`oncelock_singleton_comprehensive.rs`](../examples/oncelock_singleton_comprehensive.rs) |
-| **GATs**          | 观察者        | ⭐⭐⭐⭐⭐ | 零拷贝   | `behavioral/observer/`                | [`gats_observer_advanced.rs`](../examples/gats_observer_advanced.rs)                     |
-| **async trait**   | 异步模式      | ⭐⭐⭐⭐⭐ | 简化代码 | `concurrency/asynchronous/`           | [`native_async_trait_app.rs`](../examples/native_async_trait_app.rs)                     |
-| **RPITIT**        | 迭代器/流水线 | ⭐⭐⭐⭐   | 零开销   | `parallel/pipeline/`                  | [`rpitit_pipeline_advanced.rs`](../examples/rpitit_pipeline_advanced.rs)                 |
-| **let-else**      | 责任链        | ⭐⭐⭐⭐   | 可读性↑  | `behavioral/chain_of_responsibility/` | [`let_else_chain_advanced.rs`](../examples/let_else_chain_advanced.rs)                   |
-| **dyn upcasting** | 适配器        | ⭐⭐⭐     | 灵活性↑  | `structural/adapter/`                 | [`dyn_upcasting_adapter.rs`](../examples/dyn_upcasting_adapter.rs)                       |
+| Rust 1.92.0 特性  | 最佳适配模式  | 适配度 | 性能提升 | 示例位置  | 完整示例  |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **OnceLock** | 单例  | ⭐⭐⭐⭐⭐ | 100%  | `creational/singleton/` | [`oncelock_singleton_comprehensive.rs`](../examples/oncelock_singleton_comprehensive.rs) |
+| **GATs**  | 观察者 | ⭐⭐⭐⭐⭐ | 零拷贝 | `behavioral/observer/` | [`gats_observer_advanced.rs`](../examples/gats_observer_advanced.rs)                     |
+| **async trait** | 异步模式  | ⭐⭐⭐⭐⭐ | 简化代码 | `concurrency/asynchronous/` | [`native_async_trait_app.rs`](../examples/native_async_trait_app.rs)                     |
+| **RPITIT** | 迭代器/流水线 | ⭐⭐⭐⭐   | 零开销   | `parallel/pipeline/` | [`rpitit_pipeline_advanced.rs`](../examples/rpitit_pipeline_advanced.rs) |
+| **let-else** | 责任链 | ⭐⭐⭐⭐ | 可读性↑  | `behavioral/chain_of_responsibility/` | [`let_else_chain_advanced.rs`](../examples/let_else_chain_advanced.rs)                   |
+| **dyn upcasting** | 适配器 | ⭐⭐⭐ | 灵活性↑  | `structural/adapter/` | [`dyn_upcasting_adapter.rs`](../examples/dyn_upcasting_adapter.rs)  |
 
 ---
 
@@ -764,6 +764,7 @@ cargo run --example dyn_upcasting_adapter
 ---
 
 _本知识图谱持续更新，反映最新的Rust设计模式实践和研究成果。所有示例代码均可运行，包含完整的注释和测试用例。_
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

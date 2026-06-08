@@ -30,7 +30,6 @@
     - [并行模式基准](#并行模式基准)
     - [完整示例](#完整示例)
   - [相关资源](#相关资源)
-  - [**最后更新**: 2025-10-24](#最后更新-2025-10-24)
 
 ## 目标
 
@@ -441,6 +440,7 @@ cargo flamegraph --bench pattern_benchmarks
 
 **文档状态**: ✅ 已完成
 **最后更新**: 2025-10-24
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

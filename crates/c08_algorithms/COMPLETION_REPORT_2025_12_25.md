@@ -222,6 +222,7 @@
 ---
 
 **感谢使用 c08_algorithms！** 🎉
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

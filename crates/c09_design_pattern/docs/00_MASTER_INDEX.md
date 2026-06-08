@@ -66,7 +66,6 @@
   - [📞 获取帮助](#-获取帮助)
     - [问题解决](#问题解决)
     - [社区支持](#社区支持)
-  - [**Rust 版本**: 1.92.0+ (Edition 2024)](#rust-版本-1920-edition-2024)
 
 **最后更新**: 2025-12-25
 **适用版本**: Rust 1.92.0+ (Edition 2024)
@@ -436,6 +435,7 @@ cargo bench -p c09_design_pattern
 **更新频率**: 跟随项目进度持续更新
 **文档版本**: v1.0
 **Rust 版本**: 1.92.0+ (Edition 2024)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
