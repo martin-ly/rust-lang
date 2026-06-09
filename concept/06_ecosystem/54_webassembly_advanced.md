@@ -112,6 +112,12 @@ impl GeometryEngine {
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：WASM 的"组件模型"（Component Model）解决了什么问题？（理解层）](#测验-1wasm-的组件模型component-model解决了什么问题理解层)
+    - [测验 2：`wasmtime` 与浏览器中的 WASM 运行时有什么区别？（理解层）](#测验-2wasmtime-与浏览器中的-wasm-运行时有什么区别理解层)
+    - [测验 3：WASM 的"WASI Preview 2"相比 Preview 1 有什么重大改进？（理解层）](#测验-3wasm-的wasi-preview-2相比-preview-1-有什么重大改进理解层)
+    - [测验 4：`wit-bindgen` 在组件模型开发中起什么作用？（理解层）](#测验-4wit-bindgen-在组件模型开发中起什么作用理解层)
+    - [测验 5：Rust 编译为 WASM 时，`wasm-bindgen` 与 `wit-bindgen` 分别适用于什么场景？（理解层）](#测验-5rust-编译为-wasm-时wasm-bindgen-与-wit-bindgen-分别适用于什么场景理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -848,6 +854,66 @@ fn main() {
 - **定理**: Advanced WebAssembly in Rust（高级 WebAssembly 与 Rust） 定义 ⟹ 类型安全保证
 - **定理**: Advanced WebAssembly in Rust（高级 WebAssembly 与 Rust） 定义 ⟹ 类型安全保证
 - **定理**: Advanced WebAssembly in Rust（高级 WebAssembly 与 Rust） 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：WASM 的"组件模型"（Component Model）解决了什么问题？（理解层）
+
+**题目**: WASM 的"组件模型"（Component Model）解决了什么问题？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+允许不同语言编译的 WASM 模块通过标准化的接口类型（WIT）互操作，消除了之前每个语言对都需要自定义胶水代码的问题。
+</details>
+
+---
+
+### 测验 2：`wasmtime` 与浏览器中的 WASM 运行时有什么区别？（理解层）
+
+**题目**: `wasmtime` 与浏览器中的 WASM 运行时有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`wasmtime` 是独立、可嵌入的 WASM 运行时（JIT/AOT），支持 WASI 系统调用，可在服务端运行 WASM。浏览器运行时限于 Web API，不支持文件/网络系统调用。
+</details>
+
+---
+
+### 测验 3：WASM 的"WASI Preview 2"相比 Preview 1 有什么重大改进？（理解层）
+
+**题目**: WASM 的"WASI Preview 2"相比 Preview 1 有什么重大改进？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+引入组件模型、标准化资源类型（如 `wasi:http`）、更完善的权限模型（capabilities）。使 WASM 更适合生产环境的微服务和插件系统。
+</details>
+
+---
+
+### 测验 4：`wit-bindgen` 在组件模型开发中起什么作用？（理解层）
+
+**题目**: `wit-bindgen` 在组件模型开发中起什么作用？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+从 WIT（WASM Interface Types）接口定义生成宿主语言和 guest 语言的绑定代码，实现类型安全的跨语言函数调用。
+</details>
+
+---
+
+### 测验 5：Rust 编译为 WASM 时，`wasm-bindgen` 与 `wit-bindgen` 分别适用于什么场景？（理解层）
+
+**题目**: Rust 编译为 WASM 时，`wasm-bindgen` 与 `wit-bindgen` 分别适用于什么场景？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`wasm-bindgen` 用于浏览器环境（与 JS 互操作）。`wit-bindgen` 用于组件模型/WASI 环境（与其他 WASM 模块或宿主运行时互操作）。
+</details>
 
 ## 认知路径
 

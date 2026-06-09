@@ -338,6 +338,66 @@ async fn fixed_udp2(socket: &UdpSocket) {
 - **定理**: 网络协议：QUIC/HTTP-3 与 Rust 实现 定义 ⟹ 类型安全保证
 - **定理**: 网络协议：QUIC/HTTP-3 与 Rust 实现 定义 ⟹ 类型安全保证
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`tokio::io::AsyncReadExt` 和 `AsyncWriteExt` 在协议解析中起什么作用？（理解层）
+
+**题目**: `tokio::io::AsyncReadExt` 和 `AsyncWriteExt` 在协议解析中起什么作用？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+提供异步字节流读取方法（`read`、`read_exact`、`read_buf`）和写入方法。协议解析器通过它们从 TCP/Unix socket 异步读取原始字节并解析为消息帧。
+</details>
+
+---
+
+### 测验 2：什么是"帧"（Framing）？为什么 TCP 流需要显式帧协议？（理解层）
+
+**题目**: 什么是"帧"（Framing）？为什么 TCP 流需要显式帧协议？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+TCP 是字节流，不保留消息边界。帧协议（如长度前缀、分隔符、固定大小）将流分割为独立消息。没有帧协议会导致粘包和半包问题。
+</details>
+
+---
+
+### 测验 3：Rust 中常用的序列化协议有哪些？各自适合什么场景？（理解层）
+
+**题目**: Rust 中常用的序列化协议有哪些？各自适合什么场景？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+JSON（可读、调试方便）、MessagePack（紧凑二进制）、Protobuf（强 schema、跨语言）、Cap'n Proto（零拷贝）。选择取决于性能、兼容性和可读性需求。
+</details>
+
+---
+
+### 测验 4：`quinn` 在 Rust 网络生态中提供什么功能？（理解层）
+
+**题目**: `quinn` 在 Rust 网络生态中提供什么功能？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`quinn` 是 QUIC 协议的 Rust 实现，基于 `tokio` 提供异步 QUIC 客户端和服务器。QUIC 基于 UDP，支持多路复用、0-RTT 握手和连接迁移。
+</details>
+
+---
+
+### 测验 5：为什么 HTTP/3 基于 QUIC 而非 TCP？Rust 的 HTTP/3 生态现状如何？（理解层）
+
+**题目**: 为什么 HTTP/3 基于 QUIC 而非 TCP？Rust 的 HTTP/3 生态现状如何？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+QUIC 解决了 TCP 队头阻塞（head-of-line blocking），支持更快的连接建立和连接迁移。Rust 的 `h3` crate + `quinn` 提供实验性 HTTP/3 支持，生态正在成熟。
+</details>
+
 ## 认知路径
 
 > **认知路径**: 从 Rust 核心语言特性出发，经由 **网络协议：QUIC/HTTP-3 与 Rust 实现** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。

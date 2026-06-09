@@ -67,3 +67,63 @@ fn main() {
 ### 反命题与边界
 
 > **反命题**: "WASM Target Evolution Preview 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：WASM 的 target 命名为什么从 `wasm32-unknown-unknown` 演进为更多变体？（理解层）
+
+**题目**: WASM 的 target 命名为什么从 `wasm32-unknown-unknown` 演进为更多变体？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+随着 WASM 能力扩展（线程、SIMD、GC、异常处理），需要不同的 target 来启用/禁用这些特性，如 `wasm32-wasi` 和未来的 `wasm64-unknown-unknown`。
+</details>
+
+---
+
+### 测验 2：WASM 的多线程提案（Threads）对 Rust 有什么意义？（理解层）
+
+**题目**: WASM 的多线程提案（Threads）对 Rust 有什么意义？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+允许 Rust 的 `std::thread` 在 WASM 中运行，共享内存通过 `SharedArrayBuffer` 实现。这使 Rust 可以编译使用真正并行的应用到 WASM。
+</details>
+
+---
+
+### 测验 3：WASM GC 提案对 Rust 的 `Rc<T>` / `Arc<T>` 有什么潜在影响？（理解层）
+
+**题目**: WASM GC 提案对 Rust 的 `Rc<T>` / `Arc<T>` 有什么潜在影响？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+WASM GC 提供托管对象支持。Rust 目前不使用 WASM GC（线性内存 + 手动管理），未来可能选择性集成以减少二进制体积。
+</details>
+
+---
+
+### 测验 4：WASM 的 Exception Handling 提案如何影响 Rust 的 panic 处理？（理解层）
+
+**题目**: WASM 的 Exception Handling 提案如何影响 Rust 的 panic 处理？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+允许 WASM 使用零成本异常机制传递 panic，替代当前的 `unwind` 库实现。可能减小二进制体积并提高 panic 处理性能。
+</details>
+
+---
+
+### 测验 5：Rust 编译器如何跟踪 WASM 提案的稳定化状态？（理解层）
+
+**题目**: Rust 编译器如何跟踪 WASM 提案的稳定化状态？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+通过 target feature flags（`-C target-feature=+simd128`）和 `wasm-bindgen` 的功能检测。随着提案成熟，feature 逐渐默认启用。
+</details>

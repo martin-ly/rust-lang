@@ -48,6 +48,12 @@
     - [10.3 边界测试：C# 的 async/await 与 Rust 的 `?` 在 async 中的交互（编译错误）](#103-边界测试c-的-asyncawait-与-rust-的--在-async-中的交互编译错误)
     - [10.4 边界测试：C# 的属性与 Rust 的派生宏的编译期差异（编译错误）](#104-边界测试c-的属性与-rust-的派生宏的编译期差异编译错误)
     - [10.3 边界测试：C# 的 async/await 与 Rust 的 Future 语义差异（运行时行为差异）](#103-边界测试c-的-asyncawait-与-rust-的-future-语义差异运行时行为差异)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：C# 的 async/await 与 Rust 的 async/await 在运行时模型上有什么根本区别？（理解层）](#测验-1c-的-asyncawait-与-rust-的-asyncawait-在运行时模型上有什么根本区别理解层)
+    - [测验 2：C# 的 LINQ 与 Rust 的迭代器适配器（`Iterator` trait）在功能上有什么对应关系？（理解层）](#测验-2c-的-linq-与-rust-的迭代器适配器iterator-trait在功能上有什么对应关系理解层)
+    - [测验 3：C# 的 `unsafe` 块与 Rust 的 `unsafe` 块在使用频率上有什么不同？（理解层）](#测验-3c-的-unsafe-块与-rust-的-unsafe-块在使用频率上有什么不同理解层)
+    - [测验 4：C# 的属性和事件（Property/Event）在 Rust 中如何实现？（理解层）](#测验-4c-的属性和事件propertyevent在-rust-中如何实现理解层)
+    - [测验 5：.NET 的 CLR JIT 优化与 Rust 的 LLVM AOT 编译各有什么优势？（理解层）](#测验-5net-的-clr-jit-优化与-rust-的-llvm-aot-编译各有什么优势理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -725,6 +731,66 @@ fn main() {
 ```
 
 > **修正**: Rust 的 `async fn` 是**惰性**的：调用时不执行函数体，只创建一个 `Future` 状态机。执行在 `.await` 或 `tokio::spawn` 时开始。C# 的 `async` 方法是**立即执行**的：调用时立即执行到第一个 `await`，然后返回 `Task`。语义差异影响：1) Rust 的 `async fn` 可组合（`future::join(t1, t2).await`）而不立即执行；2) C# 的 `Task.WhenAll` 组合已运行的任务；3) Rust 的 `Drop` 在 Future 被取消时执行（异步清理），C# 的 `IDisposable` 需显式 `using`。这与 JavaScript 的 Promise（立即执行，类似 C#）或 Kotlin 的 suspend function（惰性，类似 Rust）不同——Rust 的惰性 async 提供更多控制，但需注意意外未执行。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-01-futures-and-syntax.html)] · [来源: [Async Rust](https://rust-lang.github.io/async-book/)]
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：C# 的 async/await 与 Rust 的 async/await 在运行时模型上有什么根本区别？（理解层）
+
+**题目**: C# 的 async/await 与 Rust 的 async/await 在运行时模型上有什么根本区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+C# async 基于 Task 和线程池调度，由 .NET runtime 管理。Rust async 基于零成本状态机，需显式选择 runtime（tokio/async-std），无默认全局调度器。
+</details>
+
+---
+
+### 测验 2：C# 的 LINQ 与 Rust 的迭代器适配器（`Iterator` trait）在功能上有什么对应关系？（理解层）
+
+**题目**: C# 的 LINQ 与 Rust 的迭代器适配器（`Iterator` trait）在功能上有什么对应关系？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+两者都支持链式数据转换（map/filter/reduce）。LINQ 更强大（支持表达式树和延迟查询到 SQL）。Rust 迭代器是零成本抽象，编译为高效循环。
+</details>
+
+---
+
+### 测验 3：C# 的 `unsafe` 块与 Rust 的 `unsafe` 块在使用频率上有什么不同？（理解层）
+
+**题目**: C# 的 `unsafe` 块与 Rust 的 `unsafe` 块在使用频率上有什么不同？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+C# `unsafe` 较少见，主要用于指针和 P/Invoke。Rust `unsafe` 在系统编程中更常见，用于 FFI、原始指针、内联汇编，但 Rust 通过 unsafe 边界最小化不安全代码面积。
+</details>
+
+---
+
+### 测验 4：C# 的属性和事件（Property/Event）在 Rust 中如何实现？（理解层）
+
+**题目**: C# 的属性和事件（Property/Event）在 Rust 中如何实现？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 没有语言级属性和事件。属性通过 getter/setter 方法或 `Deref` 模拟。事件通过观察者模式（channel、回调 Vec）或 pub/sub 库（如 `tokio::sync::broadcast`）实现。
+</details>
+
+---
+
+### 测验 5：.NET 的 CLR JIT 优化与 Rust 的 LLVM AOT 编译各有什么优势？（理解层）
+
+**题目**: .NET 的 CLR JIT 优化与 Rust 的 LLVM AOT 编译各有什么优势？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+CLR JIT 可根据运行时 profile 动态优化（如去虚拟化）。Rust LLVM AOT 在编译期完成所有优化，启动无 JIT 开销，适合无运行时环境的部署（容器、嵌入式）。
+</details>
 
 ## 认知路径
 

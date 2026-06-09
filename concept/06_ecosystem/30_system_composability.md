@@ -740,3 +740,63 @@ fn main() {}
 - **定理**: 系统可组合性 (System Composability) 定义 ⟹ 类型安全保证
 - **定理**: 系统可组合性 (System Composability) 定义 ⟹ 类型安全保证
 - **定理**: 系统可组合性 (System Composability) 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：什么是"系统可组合性"（System Composability）？（理解层）
+
+**题目**: 什么是"系统可组合性"（System Composability）？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+指系统组件可以灵活组合、替换和扩展，而无需修改现有代码。Rust 的 trait 系统、泛型和模块系统天然支持高可组合性。
+</details>
+
+---
+
+### 测验 2：`tower` 的 Service trait 如何体现可组合性？（理解层）
+
+**题目**: `tower` 的 Service trait 如何体现可组合性？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`Service` 统一了请求处理接口，限流、超时、重试、认证等中间件都是独立的 `Service` 实现，可以任意顺序组合成处理管道。
+</details>
+
+---
+
+### 测验 3：Rust 的 `serde` 如何支持数据格式的可组合性？（理解层）
+
+**题目**: Rust 的 `serde` 如何支持数据格式的可组合性？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+通过统一的 `Serialize`/`Deserialize` trait，数据结构可以与任何序列化格式（JSON、MessagePack、TOML、YAML）组合，无需修改数据定义。
+</details>
+
+---
+
+### 测验 4：插件系统（Plugin System）在 Rust 中通常如何实现？（理解层）
+
+**题目**: 插件系统（Plugin System）在 Rust 中通常如何实现？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+通过 `libloading` 动态加载 DLL/so，或使用 WASM 沙箱运行插件。Rust 的 ABI 不稳定，插件接口通常使用 C ABI 或 WASM 接口。
+</details>
+
+---
+
+### 测验 5：Rust 的类型系统如何防止"组合爆炸"（Combinatorial Explosion）？（理解层）
+
+**题目**: Rust 的类型系统如何防止"组合爆炸"（Combinatorial Explosion）？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+泛型和 trait bounds 将组合从运行时转移到编译期，无效组合在编译期被拒绝。`Option<T>` 和 `Result<T, E>` 的显式处理避免了隐式 null/exception 的复杂交互。
+</details>

@@ -47,6 +47,12 @@
     - [10.3 边界测试：Kotlin 的协程与 Rust 的 async 的调度模型差异（运行时死锁）](#103-边界测试kotlin-的协程与-rust-的-async-的调度模型差异运行时死锁)
     - [10.4 边界测试：Kotlin 的 null safety 与 Rust 的 `Option` 的语法差异（编译错误）](#104-边界测试kotlin-的-null-safety-与-rust-的-option-的语法差异编译错误)
     - [10.3 边界测试：Kotlin 的 nullable 类型与 Rust 的 Option 显式处理（编译错误）](#103-边界测试kotlin-的-nullable-类型与-rust-的-option-显式处理编译错误)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Kotlin 的 null safety 与 Rust 的 `Option<T>` 在设计上有什么异同？（理解层）](#测验-1kotlin-的-null-safety-与-rust-的-optiont-在设计上有什么异同理解层)
+    - [测验 2：Kotlin 的协程（Coroutines）与 Rust 的 `async/await` 在实现上有什么区别？（理解层）](#测验-2kotlin-的协程coroutines与-rust-的-asyncawait-在实现上有什么区别理解层)
+    - [测验 3：Kotlin 运行在 JVM 上，Rust 编译为原生代码。这对启动时间和内存占用有什么影响？（理解层）](#测验-3kotlin-运行在-jvm-上rust-编译为原生代码这对启动时间和内存占用有什么影响理解层)
+    - [测验 4：Kotlin 的扩展函数与 Rust 的 trait impl 有什么区别？（理解层）](#测验-4kotlin-的扩展函数与-rust-的-trait-impl-有什么区别理解层)
+    - [测验 5：在 Android 开发中，Google 为什么同时支持 Kotlin 和 Rust？各自负责什么层？（理解层）](#测验-5在-android-开发中google-为什么同时支持-kotlin-和-rust各自负责什么层理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -708,6 +714,66 @@ fn main() {
 ```
 
 > **修正**: Kotlin 的 **nullable 类型**（`String?`）在类型系统中标记可能为 null，但运行时与 `String` 相同（JVM 的引用类型）。`?.`（安全调用）和 `?:`（Elvis 运算符）是语法糖，编译为 null 检查。Rust 的 `Option<T>` 是**枚举**：`Some(T)` 或 `None`，占用额外空间（discriminant），但编译器优化（Niche Value Optimization）可使 `Option<&T>` 与 `&T` 同大小（用 null 指针表示 `None`）。Kotlin 的优势：与 Java 互操作、语法简洁；Rust 的优势：无 null 指针（`Option` 是显式枚举）、模式匹配穷尽检查、零成本抽象（`Option<&T>` 无额外开销）。这与 TypeScript 的 `string | null`（联合类型，编译期检查）或 Haskell 的 `Maybe a`（类似 `Option`）相同——Rust 的 `Option` 是代数数据类型，非语言特殊的 null。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)] · [来源: [Kotlin Null Safety](https://kotlinlang.org/docs/null-safety.html)]
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Kotlin 的 null safety 与 Rust 的 `Option<T>` 在设计上有什么异同？（理解层）
+
+**题目**: Kotlin 的 null safety 与 Rust 的 `Option<T>` 在设计上有什么异同？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+两者都在类型层面区分可空与不可空。Kotlin 在语言语法层面内建（`T?`），运行时仍是 JVM 的 null。Rust 的 `Option` 是标准库枚举，无运行时 null，更泛型化。
+</details>
+
+---
+
+### 测验 2：Kotlin 的协程（Coroutines）与 Rust 的 `async/await` 在实现上有什么区别？（理解层）
+
+**题目**: Kotlin 的协程（Coroutines）与 Rust 的 `async/await` 在实现上有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Kotlin 协程由编译器转换为状态机，运行在 JVM 线程池上（可挂起和恢复）。Rust async 也是状态机，但更底层，与特定 runtime（tokio/async-std）绑定，无默认调度器。
+</details>
+
+---
+
+### 测验 3：Kotlin 运行在 JVM 上，Rust 编译为原生代码。这对启动时间和内存占用有什么影响？（理解层）
+
+**题目**: Kotlin 运行在 JVM 上，Rust 编译为原生代码。这对启动时间和内存占用有什么影响？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 原生二进制启动更快、内存占用更小（无 JVM 运行时开销）。Kotlin 有 JIT 优化后的峰值性能，但冷启动和容器化场景下 Rust 更有优势。
+</details>
+
+---
+
+### 测验 4：Kotlin 的扩展函数与 Rust 的 trait impl 有什么区别？（理解层）
+
+**题目**: Kotlin 的扩展函数与 Rust 的 trait impl 有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Kotlin 扩展函数是静态分派，可为任何类型添加方法（包括第三方类）。Rust trait impl 也静态分派，但需遵守 orphan rules（trait 或类型至少一个属于当前 crate）。
+</details>
+
+---
+
+### 测验 5：在 Android 开发中，Google 为什么同时支持 Kotlin 和 Rust？各自负责什么层？（理解层）
+
+**题目**: 在 Android 开发中，Google 为什么同时支持 Kotlin 和 Rust？各自负责什么层？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Kotlin 负责应用层（UI、业务逻辑），利用 JVM 生态和快速开发。Rust 负责系统层/NDK（性能关键、安全敏感的底层库，如蓝牙、加密、媒体编解码）。
+</details>
 
 ## 认知路径
 

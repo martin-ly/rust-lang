@@ -93,6 +93,12 @@ impl eframe::App for SensorApp {
     - [10.2 边界测试：绘制超出帧缓冲边界（内存损坏）](#102-边界测试绘制超出帧缓冲边界内存损坏)
     - [10.3 边界测试：中断上下文中阻塞 SPI 传输（实时性违例）](#103-边界测试中断上下文中阻塞-spi-传输实时性违例)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：`embedded-graphics` crate 在 Rust 嵌入式显示中提供什么功能？（理解层）](#测验-1embedded-graphics-crate-在-rust-嵌入式显示中提供什么功能理解层)
+    - [测验 2：为什么嵌入式图形库需要支持 `no_std`？（理解层）](#测验-2为什么嵌入式图形库需要支持-no_std理解层)
+    - [测验 3：`lvgl`（LittlevGL）的 Rust 绑定如何在资源受限设备上实现丰富 UI？（理解层）](#测验-3lvgllittlevgl的-rust-绑定如何在资源受限设备上实现丰富-ui理解层)
+    - [测验 4：帧缓冲（Frame Buffer）驱动在嵌入式图形中如何工作？（理解层）](#测验-4帧缓冲frame-buffer驱动在嵌入式图形中如何工作理解层)
+    - [测验 5：`probe-run` 和 `defmt` 如何配合调试嵌入式图形应用？（理解层）](#测验-5probe-run-和-defmt-如何配合调试嵌入式图形应用理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -1006,6 +1012,66 @@ unsafe extern "C" fn touch_isr() {
 - **定理**: Rust 嵌入式图形系统开发 定义 ⟹ 类型安全保证
 - **定理**: Rust 嵌入式图形系统开发 定义 ⟹ 类型安全保证
 - **定理**: Rust 嵌入式图形系统开发 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`embedded-graphics` crate 在 Rust 嵌入式显示中提供什么功能？（理解层）
+
+**题目**: `embedded-graphics` crate 在 Rust 嵌入式显示中提供什么功能？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+提供 2D 图形基元（点、线、矩形、圆、文本、图像）和绘制目标（Display）抽象。支持 `no_std`，可在没有操作系统的小型 MCU 上运行。
+</details>
+
+---
+
+### 测验 2：为什么嵌入式图形库需要支持 `no_std`？（理解层）
+
+**题目**: 为什么嵌入式图形库需要支持 `no_std`？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+许多嵌入式设备（如 Arduino、STM32）没有操作系统或标准库。`no_std` 使库可在裸机环境中运行，只依赖 `core` 和分配器。
+</details>
+
+---
+
+### 测验 3：`lvgl`（LittlevGL）的 Rust 绑定如何在资源受限设备上实现丰富 UI？（理解层）
+
+**题目**: `lvgl`（LittlevGL）的 Rust 绑定如何在资源受限设备上实现丰富 UI？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`lvgl` 是 C 编写的轻量级 GUI 库，Rust 绑定通过 FFI 调用。它提供按钮、滑块、列表、动画等控件，内存占用小（~64KB Flash + 8KB RAM）。
+</details>
+
+---
+
+### 测验 4：帧缓冲（Frame Buffer）驱动在嵌入式图形中如何工作？（理解层）
+
+**题目**: 帧缓冲（Frame Buffer）驱动在嵌入式图形中如何工作？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+帧缓冲是内存中的像素数组，驱动将其内容发送到显示控制器（SPI、I2C、并行接口）。双缓冲（Double Buffering）可避免绘制过程中的闪烁。
+</details>
+
+---
+
+### 测验 5：`probe-run` 和 `defmt` 如何配合调试嵌入式图形应用？（理解层）
+
+**题目**: `probe-run` 和 `defmt` 如何配合调试嵌入式图形应用？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`probe-run` 通过调试探针（如 ST-Link、J-Link）将日志通过 RTT（Real-Time Transfer）传输到主机。`defmt` 压缩日志数据，主机端解压缩格式化，极大减少目标端开销。
+</details>
 
 ## 认知路径
 

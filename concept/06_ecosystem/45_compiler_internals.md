@@ -101,6 +101,12 @@ fn compute() -> i32 {
     - [11.3 边界测试：unsafe 代码在 Miri 中触发 UB（运行时错误）](#113-边界测试unsafe-代码在-miri-中触发-ub运行时错误)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Rust 编译器 `rustc` 的前端（Frontend）主要做什么？（理解层）](#测验-1rust-编译器-rustc-的前端frontend主要做什么理解层)
+    - [测验 2：MIR（Mid-level IR）在 Rust 编译管道中的作用是什么？（理解层）](#测验-2mirmid-level-ir在-rust-编译管道中的作用是什么理解层)
+    - [测验 3：LLVM 在 Rust 编译中扮演什么角色？为什么 Rust 选择 LLVM 而非自己写后端？（理解层）](#测验-3llvm-在-rust-编译中扮演什么角色为什么-rust-选择-llvm-而非自己写后端理解层)
+    - [测验 4：什么是"单态化"（Monomorphization）？它对编译时间和二进制体积有什么影响？（理解层）](#测验-4什么是单态化monomorphization它对编译时间和二进制体积有什么影响理解层)
+    - [测验 5：Rust 的增量编译（Incremental Compilation）如何工作？（理解层）](#测验-5rust-的增量编译incremental-compilation如何工作理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -807,6 +813,66 @@ fn undefined_behavior() {
 - **定理**: Compiler Internals（Rust 编译器内部原理） 定义 ⟹ 类型安全保证
 - **定理**: Compiler Internals（Rust 编译器内部原理） 定义 ⟹ 类型安全保证
 - **定理**: Compiler Internals（Rust 编译器内部原理） 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Rust 编译器 `rustc` 的前端（Frontend）主要做什么？（理解层）
+
+**题目**: Rust 编译器 `rustc` 的前端（Frontend）主要做什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+解析源代码为 AST，进行名称解析、类型检查、借用检查、trait 解析。输出中间表示（HIR -> MIR），这是与后端解耦的关键。
+</details>
+
+---
+
+### 测验 2：MIR（Mid-level IR）在 Rust 编译管道中的作用是什么？（理解层）
+
+**题目**: MIR（Mid-level IR）在 Rust 编译管道中的作用是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+MIR 是简化的控制流图表示，用于：借用检查（NLL/Borrow Checker）、常量求值、优化（如内联、常量传播）。它将高级 Rust 语义降维到更易分析的表示。
+</details>
+
+---
+
+### 测验 3：LLVM 在 Rust 编译中扮演什么角色？为什么 Rust 选择 LLVM 而非自己写后端？（理解层）
+
+**题目**: LLVM 在 Rust 编译中扮演什么角色？为什么 Rust 选择 LLVM 而非自己写后端？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+LLVM 负责代码生成、优化（SSA 形式、寄存器分配、指令选择）。Rust 复用 LLVM 避免重复造轮子，获得跨平台支持和工业级优化。
+</details>
+
+---
+
+### 测验 4：什么是"单态化"（Monomorphization）？它对编译时间和二进制体积有什么影响？（理解层）
+
+**题目**: 什么是"单态化"（Monomorphization）？它对编译时间和二进制体积有什么影响？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+为每个泛型具体类型生成独立代码。好处是运行时零开销。代价是编译时间更长、二进制体积更大（代码膨胀）。`dyn Trait` 是避免单态化的替代方案。
+</details>
+
+---
+
+### 测验 5：Rust 的增量编译（Incremental Compilation）如何工作？（理解层）
+
+**题目**: Rust 的增量编译（Incremental Compilation）如何工作？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+编译器将 crate 划分为细粒度单元，缓存每个单元的编译结果。修改代码时只重新编译受影响的单元，而非整个 crate。通过 `-Cincremental` 启用。
+</details>
 
 ## 认知路径
 

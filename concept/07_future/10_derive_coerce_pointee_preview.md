@@ -53,6 +53,12 @@
     - [10.4 边界测试：`PhantomData` 与 CoercePointee 的生命周期交互（编译错误）](#104-边界测试phantomdata-与-coercepointee-的生命周期交互编译错误)
     - [10.4 边界测试：`CoercePointee` 与智能指针的自动转换（编译错误/未来特性）](#104-边界测试coercepointee-与智能指针的自动转换编译错误未来特性)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：`CoercePointee` trait 的作用是什么？它解决了智能指针的什么问题？（理解层）](#测验-1coercepointee-trait-的作用是什么它解决了智能指针的什么问题理解层)
+    - [测验 2：为什么自定义智能指针默认不能强制转换为 `dyn Trait`？（理解层）](#测验-2为什么自定义智能指针默认不能强制转换为-dyn-trait理解层)
+    - [测验 3：`#[derive(CoercePointee)]` 需要满足什么条件？（理解层）](#测验-3derivecoercepointee-需要满足什么条件理解层)
+    - [测验 4：`CoercePointee` 与 `CoerceUnsized` 有什么关系？（理解层）](#测验-4coercepointee-与-coerceunsized-有什么关系理解层)
+    - [测验 5：这个特性对 Rust 生态有什么长期影响？（理解层）](#测验-5这个特性对-rust-生态有什么长期影响理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -495,6 +501,66 @@ fn main() {}
 ### 补充定理链
 
 - **定理**: 派生 CoercePointee 预研：智能指针的自动类型强制 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`CoercePointee` trait 的作用是什么？它解决了智能指针的什么问题？（理解层）
+
+**题目**: `CoercePointee` trait 的作用是什么？它解决了智能指针的什么问题？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+允许智能指针（如 `Box<T>`、`Rc<T>`）自动强制转换到 `dyn Trait`，无需手动实现 `CoerceUnsized`。简化了自定义智能指针的 trait object 支持。
+</details>
+
+---
+
+### 测验 2：为什么自定义智能指针默认不能强制转换为 `dyn Trait`？（理解层）
+
+**题目**: 为什么自定义智能指针默认不能强制转换为 `dyn Trait`？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+因为编译器不知道如何在自定义类型上执行 unsized coercion。`CoercePointee` 为编译器提供了标准化接口，使其知道如何提取内部数据指针并进行强制转换。
+</details>
+
+---
+
+### 测验 3：`#[derive(CoercePointee)]` 需要满足什么条件？（理解层）
+
+**题目**: `#[derive(CoercePointee)]` 需要满足什么条件？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+智能指针必须是 `#[repr(transparent)]` 的 struct，且字段中包含一个实现了 `CoercePointee` 的类型（如 `*const T` 或另一个智能指针）。
+</details>
+
+---
+
+### 测验 4：`CoercePointee` 与 `CoerceUnsized` 有什么关系？（理解层）
+
+**题目**: `CoercePointee` 与 `CoerceUnsized` 有什么关系？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`CoerceUnsized` 是手动实现的方式，`CoercePointee` 是更自动化的替代方案。 derive 宏自动生成 `CoerceUnsized` 的实现，减少了样板代码。
+</details>
+
+---
+
+### 测验 5：这个特性对 Rust 生态有什么长期影响？（理解层）
+
+**题目**: 这个特性对 Rust 生态有什么长期影响？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+降低了实现自定义智能指针的门槛，鼓励更多库提供与标准库智能指针相同的行为一致性，减少用户遇到"我的智能指针为什么不能转 dyn Trait"的困惑。
+</details>
 
 ## 认知路径
 

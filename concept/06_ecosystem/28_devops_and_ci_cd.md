@@ -63,6 +63,12 @@
     - [10.7 边界测试：缓存键未包含 Cargo.lock 导致的不一致构建（CI 非确定性）](#107-边界测试缓存键未包含-cargolock-导致的不一致构建ci-非确定性)
     - [10.3 边界测试：CI 缓存键不匹配导致的依赖重建（构建时间回归）](#103-边界测试ci-缓存键不匹配导致的依赖重建构建时间回归)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：为什么 Rust 项目的 CI 构建时间通常比 Go/Node.js 长？（理解层）](#测验-1为什么-rust-项目的-ci-构建时间通常比-gonodejs-长理解层)
+    - [测验 2：`sccache` 在 Rust CI 中的作用是什么？（理解层）](#测验-2sccache-在-rust-ci-中的作用是什么理解层)
+    - [测验 3：Rust 的 `cross` 工具如何简化 CI 中的交叉编译？（理解层）](#测验-3rust-的-cross-工具如何简化-ci-中的交叉编译理解层)
+    - [测验 4：在 Rust 项目的 CI 中，为什么建议同时运行 `clippy`、`rustfmt` 和 `cargo test`？（理解层）](#测验-4在-rust-项目的-ci-中为什么建议同时运行-clippyrustfmt-和-cargo-test理解层)
+    - [测验 5：`cargo-release` 或 `release-plz` 在 Rust 发布工作流中有什么作用？（理解层）](#测验-5cargo-release-或-release-plz-在-rust-发布工作流中有什么作用理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -791,6 +797,66 @@ fn test_b() {
 - **定理**: DevOps 与 CI/CD：Rust 的持续交付工程实践 定义 ⟹ 类型安全保证
 - **定理**: DevOps 与 CI/CD：Rust 的持续交付工程实践 定义 ⟹ 类型安全保证
 - **定理**: DevOps 与 CI/CD：Rust 的持续交付工程实践 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：为什么 Rust 项目的 CI 构建时间通常比 Go/Node.js 长？（理解层）
+
+**题目**: 为什么 Rust 项目的 CI 构建时间通常比 Go/Node.js 长？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 编译器进行大量优化和类型检查（LLVM 后端、单态化）。依赖也需要从源码编译（无预编译二进制分发）。增量编译和 `sccache` 可缓解。
+</details>
+
+---
+
+### 测验 2：`sccache` 在 Rust CI 中的作用是什么？（理解层）
+
+**题目**: `sccache` 在 Rust CI 中的作用是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+分布式编译缓存，缓存 LLVM IR 和编译产物。在 CI 中共享缓存可显著减少重复编译时间，尤其是依赖不变的构建。
+</details>
+
+---
+
+### 测验 3：Rust 的 `cross` 工具如何简化 CI 中的交叉编译？（理解层）
+
+**题目**: Rust 的 `cross` 工具如何简化 CI 中的交叉编译？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`cross` 使用 Docker 容器封装交叉编译环境，CI 中只需安装 `cross` 即可编译到 ARM、WASM 等目标，无需手动配置链接器和系统库。
+</details>
+
+---
+
+### 测验 4：在 Rust 项目的 CI 中，为什么建议同时运行 `clippy`、`rustfmt` 和 `cargo test`？（理解层）
+
+**题目**: 在 Rust 项目的 CI 中，为什么建议同时运行 `clippy`、`rustfmt` 和 `cargo test`？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`rustfmt` 保证代码风格一致。`clippy` 捕获常见反模式和潜在 bug。`cargo test` 验证功能正确性。三者结合保证代码质量和可维护性。
+</details>
+
+---
+
+### 测验 5：`cargo-release` 或 `release-plz` 在 Rust 发布工作流中有什么作用？（理解层）
+
+**题目**: `cargo-release` 或 `release-plz` 在 Rust 发布工作流中有什么作用？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+自动化版本管理：更新 Cargo.toml 版本号、生成 changelog、创建 git tag、发布到 crates.io。减少人工操作错误，规范发布流程。
+</details>
 
 ## 认知路径
 

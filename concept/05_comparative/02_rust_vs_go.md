@@ -915,3 +915,63 @@ fn main() {
 ```
 
 > **修正**: Go 的**接口 nil 陷阱**：接口值由（类型，值）对组成，nil 指针赋值给接口后，接口值不为 nil（类型信息存在）。这导致 `if r != nil` 为 true，但底层指针为 nil，解引用 panic。Rust 的 `Option<&T>` 是**显式空值**：`None` 和 `Some(&T)` 是不同的变体，编译器强制处理所有情况（`match`、`if let`、`unwrap`）。Rust 无 "nil 指针但非 None" 的概念——空值是显式的、类型安全的。这与 Haskell 的 `Maybe a`（`Nothing` / `Just a`）或 Swift 的 `Optional<T>`（`nil` / `T`）相同——Rust 的 `Option` 是代数数据类型，空值状态在类型系统中显式编码。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)] · [来源: [Go Interface Nil](https://golang.org/doc/faq#nil_error)]
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Go 和 Rust 在设计哲学上有什么根本差异？（理解层）
+
+**题目**: Go 和 Rust 在设计哲学上有什么根本差异？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Go 追求简单性和快速开发，语言特性少，GC 简化内存管理。Rust 追求性能和安全性，通过复杂类型系统在编译期消除错误，无 GC 但学习曲线陡。
+</details>
+
+---
+
+### 测验 2：Go 的 goroutine 与 Rust 的 `tokio::spawn` 在实现上有什么区别？（理解层）
+
+**题目**: Go 的 goroutine 与 Rust 的 `tokio::spawn` 在实现上有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+goroutine 是 Go runtime 管理的轻量级线程（M:N 模型），栈动态增长，调度器自动处理阻塞。Rust async 任务是编译期状态机，需显式 runtime 调度，更轻量但需避免阻塞。
+</details>
+
+---
+
+### 测验 3：Go 的错误处理（`if err != nil`）与 Rust 的 `Result<T, E>` 各有什么优劣？（理解层）
+
+**题目**: Go 的错误处理（`if err != nil`）与 Rust 的 `Result<T, E>` 各有什么优劣？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Go 错误处理简单显式，但容易遗漏检查，错误传播模板代码多。Rust `?` 运算符简化传播，类型系统强制处理，但类型签名更复杂。
+</details>
+
+---
+
+### 测验 4：为什么 Go 没有泛型（直到 1.18），而 Rust 从设计之初就有？（理解层）
+
+**题目**: 为什么 Go 没有泛型（直到 1.18），而 Rust 从设计之初就有？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Go 设计者优先 simplicity，认为泛型增加复杂性。Rust 作为系统语言，需要泛型实现零成本抽象和类型安全容器。Go 1.18 引入泛型后两者差距缩小。
+</details>
+
+---
+
+### 测验 5：在构建网络服务时，Go 和 Rust 各适合什么场景？（理解层）
+
+**题目**: 在构建网络服务时，Go 和 Rust 各适合什么场景？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Go 适合快速开发、团队规模大、IO 密集型服务（goroutine 易用）。Rust 适合性能敏感、延迟要求严格、资源受限或安全关键的服务。
+</details>

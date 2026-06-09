@@ -51,6 +51,12 @@
     - [10.3 边界测试：MCDC 与短路求值的复杂交互（逻辑错误）](#103-边界测试mcdc-与短路求值的复杂交互逻辑错误)
     - [10.4 边界测试：覆盖率工具的 LLVM IR 级别插桩（编译错误/性能下降）](#104-边界测试覆盖率工具的-llvm-ir-级别插桩编译错误性能下降)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：MCDC（Modified Condition/Decision Coverage）是什么级别的代码覆盖标准？（理解层）](#测验-1mcdcmodified-conditiondecision-coverage是什么级别的代码覆盖标准理解层)
+    - [测验 2：Rust 编译器为什么难以直接支持 MCDC 覆盖报告？（理解层）](#测验-2rust-编译器为什么难以直接支持-mcdc-覆盖报告理解层)
+    - [测验 3：`tarpaulin` 和 `cargo-llvm-cov` 在覆盖率收集上有什么区别？（理解层）](#测验-3tarpaulin-和-cargo-llvm-cov-在覆盖率收集上有什么区别理解层)
+    - [测验 4：MCDC 对 Rust 的安全关键应用（如汽车、航空）有什么意义？（理解层）](#测验-4mcdc-对-rust-的安全关键应用如汽车航空有什么意义理解层)
+    - [测验 5：目前 Rust 社区如何 workaround MCDC 覆盖的缺失？（理解层）](#测验-5目前-rust-社区如何-workaround-mcdc-覆盖的缺失理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -473,6 +479,66 @@ fn main() {
 ### 补充定理链
 
 - **定理**: MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：MCDC（Modified Condition/Decision Coverage）是什么级别的代码覆盖标准？（理解层）
+
+**题目**: MCDC（Modified Condition/Decision Coverage）是什么级别的代码覆盖标准？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+MCDC 是介于分支覆盖（Branch Coverage）和路径覆盖（Path Coverage）之间的标准，要求每个条件的独立影响都被测试到。常用于航空电子等安全关键领域（DO-178C）。
+</details>
+
+---
+
+### 测验 2：Rust 编译器为什么难以直接支持 MCDC 覆盖报告？（理解层）
+
+**题目**: Rust 编译器为什么难以直接支持 MCDC 覆盖报告？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 的布尔表达式经过 LLVM 优化后可能改变结构（短路求值、常量折叠），使得源代码条件与生成代码的映射变得复杂。需要编译器前端保留足够的源信息。
+</details>
+
+---
+
+### 测验 3：`tarpaulin` 和 `cargo-llvm-cov` 在覆盖率收集上有什么区别？（理解层）
+
+**题目**: `tarpaulin` 和 `cargo-llvm-cov` 在覆盖率收集上有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`tarpaulin` 使用 ptrace 在运行时跟踪代码执行。`cargo-llvm-cov` 使用 LLVM 的 Source-Based Code Coverage 基础设施，更精确且支持分支覆盖。
+</details>
+
+---
+
+### 测验 4：MCDC 对 Rust 的安全关键应用（如汽车、航空）有什么意义？（理解层）
+
+**题目**: MCDC 对 Rust 的安全关键应用（如汽车、航空）有什么意义？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+满足功能安全标准（ISO 26262、DO-178C）的覆盖要求，证明测试充分性。Rust 进入这些领域需要工具链支持 MCDC 报告。
+</details>
+
+---
+
+### 测验 5：目前 Rust 社区如何 workaround MCDC 覆盖的缺失？（理解层）
+
+**题目**: 目前 Rust 社区如何 workaround MCDC 覆盖的缺失？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+通过 `cargo-llvm-cov` 获取分支覆盖作为近似，或手动设计测试用例确保每个条件独立变化。社区正在推动 rustc 支持 Source-Based Coverage 的 MCDC 扩展。
+</details>
 
 ## 认知路径
 

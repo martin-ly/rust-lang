@@ -59,6 +59,12 @@
     - [10.5 边界测试：BorrowSanitizer 与 Miri 的检测范围差异（UB 漏检）](#105-边界测试borrowsanitizer-与-miri-的检测范围差异ub-漏检)
     - [10.3 边界测试：BorrowSanitizer 的插桩盲区与优化代码（UB 漏检）](#103-边界测试borrowsanitizer-的插桩盲区与优化代码ub-漏检)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：BorrowSanitizer 是什么？它与 Miri 有什么区别？（理解层）](#测验-1borrowsanitizer-是什么它与-miri-有什么区别理解层)
+    - [测验 2：BorrowSanitizer 基于什么技术实现？（理解层）](#测验-2borrowsanitizer-基于什么技术实现理解层)
+    - [测验 3：BorrowSanitizer 对生产环境代码有什么意义？（理解层）](#测验-3borrowsanitizer-对生产环境代码有什么意义理解层)
+    - [测验 4：为什么需要 BorrowSanitizer 而不是仅依赖编译器的借用检查器？（理解层）](#测验-4为什么需要-borrowsanitizer-而不是仅依赖编译器的借用检查器理解层)
+    - [测验 5：BorrowSanitizer 预计何时可用？（理解层）](#测验-5borrowsanitizer-预计何时可用理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -566,6 +572,66 @@ fn main() {
 ### 补充定理链
 
 - **定理**: BorrowSanitizer 概念预研：运行时借用检查工业化 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：BorrowSanitizer 是什么？它与 Miri 有什么区别？（理解层）
+
+**题目**: BorrowSanitizer 是什么？它与 Miri 有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+BorrowSanitizer 是运行时检测工具（类似 AddressSanitizer），检测借用规则违规。Miri 是解释器，检测更广泛的 UB。BorrowSanitizer 速度更快，适合大型代码库。
+</details>
+
+---
+
+### 测验 2：BorrowSanitizer 基于什么技术实现？（理解层）
+
+**题目**: BorrowSanitizer 基于什么技术实现？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+基于 LLVM 的 sanitizer 基础设施，在编译时注入检查代码，运行时追踪借用状态，检测悬垂引用、非法别名等违规。
+</details>
+
+---
+
+### 测验 3：BorrowSanitizer 对生产环境代码有什么意义？（理解层）
+
+**题目**: BorrowSanitizer 对生产环境代码有什么意义？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+可在 CI 中运行（比 Miri 快得多），作为借用检查器的补充验证。特别适用于 `unsafe` 代码和 FFI 边界的自动化测试。
+</details>
+
+---
+
+### 测验 4：为什么需要 BorrowSanitizer 而不是仅依赖编译器的借用检查器？（理解层）
+
+**题目**: 为什么需要 BorrowSanitizer 而不是仅依赖编译器的借用检查器？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+借用检查器是静态分析，保守且可能拒绝合法代码。BorrowSanitizer 是动态分析，可以验证运行时实际行为，补充静态检查的不足。
+</details>
+
+---
+
+### 测验 5：BorrowSanitizer 预计何时可用？（理解层）
+
+**题目**: BorrowSanitizer 预计何时可用？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+作为 Rust Project Goals 的一部分正在开发中。预计 2026-2027 年在 nightly 中提供实验性支持。
+</details>
 
 ## 认知路径
 

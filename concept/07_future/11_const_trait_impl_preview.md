@@ -61,6 +61,12 @@
     - [10.5 边界测试：const trait 的默认实现与泛型约束（编译错误）](#105-边界测试const-trait-的默认实现与泛型约束编译错误)
     - [10.3 边界测试：`~const` 边界的语法演进与兼容性（编译错误）](#103-边界测试const-边界的语法演进与兼容性编译错误)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：`const trait` 与 `const fn` 有什么区别？（理解层）](#测验-1const-trait-与-const-fn-有什么区别理解层)
+    - [测验 2：为什么 `Vec::new()` 在 Rust 1.96 中还不是 `const fn`？（理解层）](#测验-2为什么-vecnew-在-rust-196-中还不是-const-fn理解层)
+    - [测验 3：`~const Trait` 语法是什么意思？（理解层）](#测验-3const-trait-语法是什么意思理解层)
+    - [测验 4：`const trait` 对嵌入式开发有什么意义？（理解层）](#测验-4const-trait-对嵌入式开发有什么意义理解层)
+    - [测验 5：`const trait` 的实现目前有什么限制？（理解层）](#测验-5const-trait-的实现目前有什么限制理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -530,6 +536,66 @@ fn main() {
 - **定理**: Const Trait Impl 预研：常量上下文中的 Trait 泛化 定义 ⟹ 类型安全保证
 - **定理**: Const Trait Impl 预研：常量上下文中的 Trait 泛化 定义 ⟹ 类型安全保证
 - **定理**: Const Trait Impl 预研：常量上下文中的 Trait 泛化 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`const trait` 与 `const fn` 有什么区别？（理解层）
+
+**题目**: `const trait` 与 `const fn` 有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`const fn` 是单个函数可在编译期执行。`const trait` 允许 trait 的所有方法在常量上下文中使用，使泛型常量代码成为可能。
+</details>
+
+---
+
+### 测验 2：为什么 `Vec::new()` 在 Rust 1.96 中还不是 `const fn`？（理解层）
+
+**题目**: 为什么 `Vec::new()` 在 Rust 1.96 中还不是 `const fn`？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+因为 `Vec` 的分配需要堆内存，而常量上下文 historically 不支持分配。`const_mut_refs` 和 `const_heap` 功能逐步放宽这些限制。
+</details>
+
+---
+
+### 测验 3：`~const Trait` 语法是什么意思？（理解层）
+
+**题目**: `~const Trait` 语法是什么意思？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+它是 `const trait` 的边界标记，表示"这个泛型参数可以是 const 或非 const 的 trait 实现"。允许函数同时服务于 const 和运行时上下文。
+</details>
+
+---
+
+### 测验 4：`const trait` 对嵌入式开发有什么意义？（理解层）
+
+**题目**: `const trait` 对嵌入式开发有什么意义？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+允许在编译期构造复杂数据结构（如查找表、配置结构），无需运行时初始化代码，减少二进制体积和启动时间。
+</details>
+
+---
+
+### 测验 5：`const trait` 的实现目前有什么限制？（理解层）
+
+**题目**: `const trait` 的实现目前有什么限制？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+不能包含 `dyn`、`async`、浮点运算（部分情况）、某些原子操作。随着功能稳定化，限制逐步减少。
+</details>
 
 ## 认知路径
 

@@ -1294,3 +1294,63 @@ fn main() {}
 
 - **定理**: Game Development & ECS Architecture（游戏开发与 ECS 架构） 定义 ⟹ 类型安全保证
 - **定理**: Game Development & ECS Architecture（游戏开发与 ECS 架构） 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：ECS（Entity-Component-System）架构的三个核心概念是什么？（理解层）
+
+**题目**: ECS（Entity-Component-System）架构的三个核心概念是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Entity（实体）：唯一标识符；Component（组件）：纯数据；System（系统）：处理具有特定组件组合的实体的逻辑。
+</details>
+
+---
+
+### 测验 2：ECS 相比传统 OOP 继承树在缓存性能上有什么优势？（理解层）
+
+**题目**: ECS 相比传统 OOP 继承树在缓存性能上有什么优势？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+相同组件类型的数据在内存中连续存储（SoA），系统迭代时顺序访问，cache hit rate 高。OOP 的对象分散在堆上，随机访问 cache 效率低。
+</details>
+
+---
+
+### 测验 3：`bevy_ecs` 的 `Query<&Position, &Velocity>` 在编译期做什么优化？（理解层）
+
+**题目**: `bevy_ecs` 的 `Query<&Position, &Velocity>` 在编译期做什么优化？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+编译器通过单态化为每种查询组合生成专门代码，直接计算组件偏移量，运行时无动态查找开销。这是 ECS 零成本抽象的关键。
+</details>
+
+---
+
+### 测验 4：`Commands` 队列在 ECS 中解决什么问题？（理解层）
+
+**题目**: `Commands` 队列在 ECS 中解决什么问题？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+在系统执行期间不能立即修改 ECS 世界（会违反迭代器借用规则）。`Commands` 将创建/删除/修改操作排队，在当前系统阶段结束后批量执行。
+</details>
+
+---
+
+### 测验 5：为什么 ECS 特别适合多线程游戏循环？（理解层）
+
+**题目**: 为什么 ECS 特别适合多线程游戏循环？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+系统只读取/写入特定组件类型，ECS 调度器可以自动分析依赖关系，无冲突的系统并行执行。Rust 的借用检查在编译期保证这种并行是安全的。
+</details>

@@ -72,6 +72,12 @@
     - [10.4 边界测试：WASI Preview 2 的功能性权限（运行时错误）](#104-边界测试wasi-preview-2-的功能性权限运行时错误)
     - [10.3 边界测试：WASM 模块的线性内存与 Rust 的 Vec 增长策略（运行时 OOM）](#103-边界测试wasm-模块的线性内存与-rust-的-vec-增长策略运行时-oom)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Rust 在 WASM 生态中的长期愿景是什么？（理解层）](#测验-1rust-在-wasm-生态中的长期愿景是什么理解层)
+    - [测验 2：WASI Preview 2 的组件模型对 Rust 开发有什么影响？（理解层）](#测验-2wasi-preview-2-的组件模型对-rust-开发有什么影响理解层)
+    - [测验 3：`wasm32-wasi` 与 `wasm32-unknown-unknown` target 有什么区别？（理解层）](#测验-3wasm32-wasi-与-wasm32-unknown-unknown-target-有什么区别理解层)
+    - [测验 4：Rust 如何通过 `wasmtime` 嵌入到现有应用中作为插件系统？（理解层）](#测验-4rust-如何通过-wasmtime-嵌入到现有应用中作为插件系统理解层)
+    - [测验 5：WASM 的 64 位内存提案（Memory64）对 Rust 有什么意义？（理解层）](#测验-5wasm-的-64-位内存提案memory64对-rust-有什么意义理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -845,6 +851,66 @@ fn main() {
 ### 补充定理链
 
 - **定理**: Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Rust 在 WASM 生态中的长期愿景是什么？（理解层）
+
+**题目**: Rust 在 WASM 生态中的长期愿景是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+成为 WASM 的首选系统语言：从浏览器前端到服务端边缘计算，提供类型安全、高性能、小体积的跨平台二进制。
+</details>
+
+---
+
+### 测验 2：WASI Preview 2 的组件模型对 Rust 开发有什么影响？（理解层）
+
+**题目**: WASI Preview 2 的组件模型对 Rust 开发有什么影响？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+允许 Rust 模块与其他语言（Python、JS、C#）编译的 WASM 模块通过标准化接口互操作，无需自定义 FFI 胶水代码。
+</details>
+
+---
+
+### 测验 3：`wasm32-wasi` 与 `wasm32-unknown-unknown` target 有什么区别？（理解层）
+
+**题目**: `wasm32-wasi` 与 `wasm32-unknown-unknown` target 有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`wasm32-wasi` 支持 WASI 系统调用（文件、网络、时钟），适合服务端 WASM。`wasm32-unknown-unknown` 无任何系统接口，用于浏览器环境。
+</details>
+
+---
+
+### 测验 4：Rust 如何通过 `wasmtime` 嵌入到现有应用中作为插件系统？（理解层）
+
+**题目**: Rust 如何通过 `wasmtime` 嵌入到现有应用中作为插件系统？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+将 Rust 编译为 WASM 模块，通过 `wasmtime` 嵌入 C++/Python/Go 应用。WASM 沙箱保证插件安全，Rust 提供高性能实现。
+</details>
+
+---
+
+### 测验 5：WASM 的 64 位内存提案（Memory64）对 Rust 有什么意义？（理解层）
+
+**题目**: WASM 的 64 位内存提案（Memory64）对 Rust 有什么意义？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+突破当前 4GB 内存限制，使 Rust 可以编译需要大内存的应用（如数据库、游戏引擎）到 WASM。预计 2026-2027 年支持。
+</details>
 
 ## 认知路径
 

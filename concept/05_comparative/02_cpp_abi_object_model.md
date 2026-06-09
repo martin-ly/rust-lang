@@ -704,6 +704,66 @@ fn main() {
 > [来源: [Wikipedia — Name Mangling](https://en.wikipedia.org/wiki/Name_mangling)]
 > [来源: [Wikipedia — Virtual Method Table](https://en.wikipedia.org/wiki/Virtual_method_table)]
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：C++ 的 vtable 与 Rust 的 `dyn Trait` vtable 在布局上有什么主要区别？（理解层）
+
+**题目**: C++ 的 vtable 与 Rust 的 `dyn Trait` vtable 在布局上有什么主要区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+C++ vtable 通常位于对象头部或尾部，含类型信息、虚析构函数等。Rust 的 `dyn Trait` vtable 与数据指针分离（胖指针），vtable 只含 trait 方法指针和 drop 函数，布局更紧凑。
+</details>
+
+---
+
+### 测验 2：`#[repr(C)]` 对 Rust struct 的字段布局有什么保证？与 C++ 的默认布局是否完全一致？（理解层）
+
+**题目**: `#[repr(C)]` 对 Rust struct 的字段布局有什么保证？与 C++ 的默认布局是否完全一致？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`#[repr(C)]` 保证字段按声明顺序排列，对齐遵循 C ABI。但 C++ 的 `padding` 和 `pack` 编译器相关，不完全一致。与 C++ 交互时需注意 `#pragma pack` 和虚表指针。
+</details>
+
+---
+
+### 测验 3：Rust 的 ABI 为什么默认不稳定（unstable）？这对动态链接有什么影响？（理解层）
+
+**题目**: Rust 的 ABI 为什么默认不稳定（unstable）？这对动态链接有什么影响？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 编译器优化可能改变结构体布局、枚举表示和调用约定。不稳定 ABI 意味着不同编译器版本编译的动态库可能不兼容。跨版本动态链接需使用 C ABI（`#[repr(C)]` + `extern "C"`）。
+</details>
+
+---
+
+### 测验 4：C++ 的 RAII 与 Rust 的所有权系统在资源释放时机上有什么异同？（理解层）
+
+**题目**: C++ 的 RAII 与 Rust 的所有权系统在资源释放时机上有什么异同？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+两者都在作用域结束时释放资源。C++ 依赖析构函数调用，可能因异常或早期返回遗漏。Rust 的 drop 由编译器静态保证，更可靠。
+</details>
+
+---
+
+### 测验 5：为什么 Rust 没有 C++ 那样的"构造函数"和"继承"？这对 ABI 有什么简化？（理解层）
+
+**题目**: 为什么 Rust 没有 C++ 那样的"构造函数"和"继承"？这对 ABI 有什么简化？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 使用关联函数（`new` 约定）和组合替代构造/继承。这消除了 C++ 中虚继承、构造顺序、多态构造等复杂 ABI 问题，使跨语言边界更简单。
+</details>
+
 ## 认知路径
 
 > **认知路径**: 从 L0 基础概念出发，经由本节的 **Rust vs C++：ABI、对象模型与内存布局** 核心原理，通向 L2 进阶模式与 L3 工程实践。

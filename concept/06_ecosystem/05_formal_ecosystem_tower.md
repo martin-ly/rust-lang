@@ -539,3 +539,64 @@ fn main() {
 
 - **定理**: Formal Ecosystem Tower（Rust 生态形式化分层塔） 定义 ⟹ 类型安全保证
 - **定理**: Formal Ecosystem Tower（Rust 生态形式化分层塔） 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1："形式化生态塔"（Formal Ecosystem Tower）是什么概念？（理解层）
+
+**题目**: "形式化生态塔"（Formal Ecosystem Tower）是什么概念？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+指从底层形式化工具（SMT 求解器、证明助手）到中层验证库（分离逻辑框架）再到上层应用验证（Prusti、Kani）的层次化架构。
+</details>
+
+---
+
+### 测验 2：为什么 Rust 的形式化验证工具需要独立的生态，而不是直接复用 C 的工具？（理解层）
+
+**题目**: 为什么 Rust 的形式化验证工具需要独立的生态，而不是直接复用 C 的工具？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 的所有权、生命周期和 trait 系统需要专门的建模。C 的工具不理解这些语义，直接复用会丢失 Rust 的安全保证信息。
+</details>
+
+---
+
+### 测验 3：`rust-verification-tools` 元项目在生态整合中起什么作用？（理解层）
+
+**题目**: `rust-verification-tools` 元项目在生态整合中起什么作用？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+协调不同验证工具（Kani、Prusti、Creusot、Miri）的共享基础设施，如统一的测试套件、基准测试和文档标准。
+</details>
+
+---
+
+### 测验 4：形式化生态塔对 Rust 进入安全关键行业有什么意义？（理解层）
+
+**题目**: 形式化生态塔对 Rust 进入安全关键行业有什么意义？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+提供从"编译器保证"到"数学证明"的完整证据链，满足不同安全等级（SIL、ASIL、DAL）的认证要求。
+</details>
+
+---
+
+### 测验 5：目前 Rust 形式化生态面临的最大挑战是什么？（理解层）
+
+**题目**: 目前 Rust 形式化生态面临的最大挑战是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+1) 验证时间随代码规模指数增长；2) 需要形式化方法专家；3) 不支持所有 Rust 特性（async、部分 unsafe 模式）；4) 与快速演进的语言特性保持同步。
+
+</details>

@@ -960,3 +960,64 @@ fn main() {
 ```
 
 > **修正**: `unsafe` 函数的**契约**（contract）是调用者和实现者之间的协议：1) 调用者保证前置条件（指针有效、生命周期足够、无数据竞争）；2) 实现者保证后置条件（返回值有效、不破坏内存安全）。文档化：`/// SAFETY: ptr must be non-null and properly aligned.`。标准库的 unsafe 函数都有详细的 `SAFETY` 注释。违反契约：调用者责任（即使 unsafe 块内部 panic，也是调用者提供了无效输入）。这与 C 的函数（无契约概念，无编译期检查）或 Java 的 `native` 方法（JNI 边界，JVM 不验证 native 代码）不同——Rust 的 `unsafe` 是显式的契约标记，社区强烈鼓励文档化。[来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/safe-unsafe-meaning.html)] · [来源: [Rust Reference — Unsafe Functions](https://doc.rust-lang.org/reference/items/functions.html#unsafe-functions)]
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Rust 的 `unsafe` 块定义了什么边界？（理解层）
+
+**题目**: Rust 的 `unsafe` 块定义了什么边界？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`unsafe` 块是安全边界：块内编译器暂停部分安全检查，程序员需手动保证内存安全、生命周期和类型一致性。块外编译器恢复完整检查。
+</details>
+
+---
+
+### 测验 2：为什么 `unsafe` 代码应该被限制在最小面积？（理解层）
+
+**题目**: 为什么 `unsafe` 代码应该被限制在最小面积？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`unsafe` 代码是 bug 和漏洞的主要来源。最小化 unsafe 面积减少了需要人工验证的代码量，使安全审计更集中、更有效。
+</details>
+
+---
+
+### 测验 3：`unsafe fn` 与 `unsafe` 块有什么区别？（理解层）
+
+**题目**: `unsafe fn` 与 `unsafe` 块有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`unsafe fn` 声明函数包含 unsafe 操作，调用者必须在 `unsafe` 块中调用。`unsafe` 块是实际的 unsafe 操作边界。两者配合：声明 + 使用。
+</details>
+
+---
+
+### 测验 4：在审计 unsafe 代码时，应该关注哪些核心问题？（理解层）
+
+**题目**: 在审计 unsafe 代码时，应该关注哪些核心问题？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+1) 原始指针是否有效？2) 是否有数据竞争？3) 类型转换是否正确？4) 生命周期是否足够？5) 是否违反任何安全 invariant？
+
+</details>
+
+---
+
+### 测验 5：Rust 的 `SAFETY` 注释约定有什么作用？（理解层）
+
+**题目**: Rust 的 `SAFETY` 注释约定有什么作用？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+在 `unsafe` 块前用 `// SAFETY: ...` 注释说明为什么这段代码是安全的。这是代码审查和后续维护的重要文档，也是 unsafe 代码审计的起点。
+</details>

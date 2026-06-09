@@ -78,3 +78,63 @@ fn main() {}
 ### 反命题与边界
 
 > **反命题**: "`must_not_suspend` Lint Preview 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`must_not_suspend`  lint 的作用是什么？（理解层）
+
+**题目**: `must_not_suspend`  lint 的作用是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+警告在异步上下文中持有不应该跨越 await 点的类型（如 `MutexGuard`、`RwLockReadGuard`）。防止因挂起导致的死锁或语义错误。
+</details>
+
+---
+
+### 测验 2：为什么 `MutexGuard` 不应该跨越 await 点？（理解层）
+
+**题目**: 为什么 `MutexGuard` 不应该跨越 await 点？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+若 async 任务在持有锁时挂起，其他任务无法获取该锁，可能导致死锁或严重的性能退化。锁的持有时间应尽可能短。
+</details>
+
+---
+
+### 测验 3：`must_not_suspend` 与 `Send` trait 有什么关系？（理解层）
+
+**题目**: `must_not_suspend` 与 `Send` trait 有什么关系？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`Send` 保证类型可以跨线程。`must_not_suspend` 更严格：即使类型是 `Send`，也不应该跨越 await 点。两者是正交的约束。
+</details>
+
+---
+
+### 测验 4：这个 lint 对异步代码质量有什么帮助？（理解层）
+
+**题目**: 这个 lint 对异步代码质量有什么帮助？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+在编译期捕获常见的 async 反模式，减少运行时死锁和性能问题。特别适用于代码审查和大型团队的异步代码规范。
+</details>
+
+---
+
+### 测验 5：`must_not_suspend` 目前的状态是什么？（理解层）
+
+**题目**: `must_not_suspend` 目前的状态是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+已在 nightly 中作为实验性 lint 提供。预计在未来版本中稳定化，可能成为默认启用的警告。
+</details>

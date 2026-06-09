@@ -43,6 +43,12 @@
     - [相关已稳定特性](#相关已稳定特性)
   - [参考](#参考)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Pinned field projections 解决的是什么问题？（理解层）](#测验-1pinned-field-projections-解决的是什么问题理解层)
+    - [测验 2：为什么自引用结构体的字段投影是 unsafe 的？（理解层）](#测验-2为什么自引用结构体的字段投影是-unsafe-的理解层)
+    - [测验 3：`pin-project` crate 目前如何解决这个问题？（理解层）](#测验-3pin-project-crate-目前如何解决这个问题理解层)
+    - [测验 4：语言级 field projection 支持对 `async fn` 有什么帮助？（理解层）](#测验-4语言级-field-projection-支持对-async-fn-有什么帮助理解层)
+    - [测验 5：这个特性目前的实现状态如何？（理解层）](#测验-5这个特性目前的实现状态如何理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -292,6 +298,66 @@ let tx_offset = offset_of!(UartRegs, tx); // 编译期常量
 ### 补充定理链
 
 - **定理**: Field Projections 预览：安全的字段级投影 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Pinned field projections 解决的是什么问题？（理解层）
+
+**题目**: Pinned field projections 解决的是什么问题？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+允许安全地将 `Pin<&mut Struct>` 投影到其字段（如 `Pin<&mut Struct>` -> `Pin<&mut field>`）。目前这需要 `unsafe` 代码手动实现 `Unpin` 条件判断。
+</details>
+
+---
+
+### 测验 2：为什么自引用结构体的字段投影是 unsafe 的？（理解层）
+
+**题目**: 为什么自引用结构体的字段投影是 unsafe 的？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+如果字段被单独 `Pin` 后移动，自引用可能失效。投影需要保证：1) 只有 `Unpin` 字段才能被投影；2) 投影后原 struct 不能再被访问。
+</details>
+
+---
+
+### 测验 3：`pin-project` crate 目前如何解决这个问题？（理解层）
+
+**题目**: `pin-project` crate 目前如何解决这个问题？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+通过过程宏自动生成安全的投影代码。`pin-project-lite` 是声明宏版本，无 proc-macro 依赖。两者都是社区 workaround。
+</details>
+
+---
+
+### 测验 4：语言级 field projection 支持对 `async fn` 有什么帮助？（理解层）
+
+**题目**: 语言级 field projection 支持对 `async fn` 有什么帮助？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`async fn` 生成的状态机包含自引用字段。语言级支持可以简化编译器生成的代码，减少 unsafe 使用，并可能优化性能。
+</details>
+
+---
+
+### 测验 5：这个特性目前的实现状态如何？（理解层）
+
+**题目**: 这个特性目前的实现状态如何？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+已在 Rust Project Goals 2026 中列为重点目标，相关 RFC 讨论中。预计在未来 1-2 年内稳定化。
+</details>
 
 ## 认知路径
 

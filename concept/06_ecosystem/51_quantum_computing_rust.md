@@ -109,6 +109,12 @@ impl Qubit {
     - [8.3 边界测试：使用非厄米算符进行量子演化（类型/逻辑错误）](#83-边界测试使用非厄米算符进行量子演化类型逻辑错误)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：量子计算中的"量子比特"（Qubit）与经典比特有什么根本区别？（理解层）](#测验-1量子计算中的量子比特qubit与经典比特有什么根本区别理解层)
+    - [测验 2：Rust 在量子计算生态中目前主要扮演什么角色？（理解层）](#测验-2rust-在量子计算生态中目前主要扮演什么角色理解层)
+    - [测验 3：什么是"量子纠错"（Quantum Error Correction）？为什么它对大规模量子计算至关重要？（理解层）](#测验-3什么是量子纠错quantum-error-correction为什么它对大规模量子计算至关重要理解层)
+    - [测验 4：QIR（Quantum Intermediate Representation）是什么？Rust 如何生成 QIR？（理解层）](#测验-4qirquantum-intermediate-representation是什么rust-如何生成-qir理解层)
+    - [测验 5：为什么量子模拟器（Simulator）需要高性能计算，Rust 在这方面的优势是什么？（理解层）](#测验-5为什么量子模拟器simulator需要高性能计算rust-在这方面的优势是什么理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -828,6 +834,66 @@ fn main() {
 - **定理**: Quantum Computing in Rust（量子计算与 Rust） 定义 ⟹ 类型安全保证
 - **定理**: Quantum Computing in Rust（量子计算与 Rust） 定义 ⟹ 类型安全保证
 - **定理**: Quantum Computing in Rust（量子计算与 Rust） 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：量子计算中的"量子比特"（Qubit）与经典比特有什么根本区别？（理解层）
+
+**题目**: 量子计算中的"量子比特"（Qubit）与经典比特有什么根本区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+经典比特是 0 或 1。量子比特可处于叠加态（同时是 0 和 1），n 个量子比特可同时表示 2^n 个状态。测量时坍缩为确定值。
+</details>
+
+---
+
+### 测验 2：Rust 在量子计算生态中目前主要扮演什么角色？（理解层）
+
+**题目**: Rust 在量子计算生态中目前主要扮演什么角色？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+量子计算栈中，Rust 主要用于：经典控制软件（量子处理器控制脉冲生成）、模拟器（`qcgpu`）、编译器基础设施（QIR 生成），而非直接在量子硬件上运行。
+</details>
+
+---
+
+### 测验 3：什么是"量子纠错"（Quantum Error Correction）？为什么它对大规模量子计算至关重要？（理解层）
+
+**题目**: 什么是"量子纠错"（Quantum Error Correction）？为什么它对大规模量子计算至关重要？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+量子比特极易受环境噪声影响而退相干。量子纠错通过将逻辑量子比特编码到多个物理量子比特中，检测和纠正错误，是实现容错量子计算的前提。
+</details>
+
+---
+
+### 测验 4：QIR（Quantum Intermediate Representation）是什么？Rust 如何生成 QIR？（理解层）
+
+**题目**: QIR（Quantum Intermediate Representation）是什么？Rust 如何生成 QIR？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+QIR 是基于 LLVM IR 的量子程序中间表示，用于连接高级量子语言和量子硬件后端。Rust 可通过 `qir-rs` 等库生成 QIR 字节码。
+</details>
+
+---
+
+### 测验 5：为什么量子模拟器（Simulator）需要高性能计算，Rust 在这方面的优势是什么？（理解层）
+
+**题目**: 为什么量子模拟器（Simulator）需要高性能计算，Rust 在这方面的优势是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+模拟 n 个量子比特需要操作 2^n 维的复数向量，计算量指数增长。Rust 的性能接近 C++， fearless 并发可安全利用多核/GPU 加速，且无 GC 停顿影响长时间模拟。
+</details>
 
 ## 认知路径
 

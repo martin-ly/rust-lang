@@ -906,6 +906,66 @@ pub fn my_xdp(ctx: XdpContext) -> u32 {
 - **定理**: eBPF / Aya / Rex 的 Rust 映射 定义 ⟹ 类型安全保证
 - **定理**: eBPF / Aya / Rex 的 Rust 映射 定义 ⟹ 类型安全保证
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：eBPF 是什么？它为什么需要一门安全的语言来编写？（理解层）
+
+**题目**: eBPF 是什么？它为什么需要一门安全的语言来编写？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+eBPF 是在 Linux 内核中运行的沙箱字节码，用于可观测性、网络和安全。由于运行在内核态，任何 bug 都可能导致系统崩溃，因此需要内存安全保证。
+</details>
+
+---
+
+### 测验 2：Rust 为什么适合编写 eBPF 程序？（理解层）
+
+**题目**: Rust 为什么适合编写 eBPF 程序？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 的内存安全消除了 eBPF 程序中的缓冲区溢出和 use-after-free 风险。 fearless 并发防止了内核中的数据竞争。性能接近 C。
+</details>
+
+---
+
+### 测验 3：`aya` 在 Rust eBPF 生态中提供什么功能？（理解层）
+
+**题目**: `aya` 在 Rust eBPF 生态中提供什么功能？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`aya` 是 Rust 的 eBPF 开发框架，提供：1) eBPF 程序加载和管理；2) 用户态与内核态通信（maps、perf buffers）；3) 类型安全的 eBPF 编程接口。
+</details>
+
+---
+
+### 测验 4：eBPF 的验证器（Verifier）对 Rust 编译输出有什么要求？（理解层）
+
+**题目**: eBPF 的验证器（Verifier）对 Rust 编译输出有什么要求？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+eBPF 验证器要求程序无循环（或有限循环）、无未初始化内存访问、栈大小有限制。Rust 编译器需要配合这些约束生成合法 eBPF 字节码。
+</details>
+
+---
+
+### 测验 5：Rust eBPF 目前的主要应用场景有哪些？（理解层）
+
+**题目**: Rust eBPF 目前的主要应用场景有哪些？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+网络过滤和负载均衡（替代 iptables）、可观测性（跟踪系统调用、性能分析）、安全策略执行（运行时威胁检测）、设备驱动。
+</details>
+
 ## 认知路径
 
 > **认知路径**: 从 Rust 核心语言特性出发，经由 **eBPF / Aya / Rex 的 Rust 映射** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。

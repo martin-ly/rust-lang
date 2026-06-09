@@ -52,6 +52,12 @@
     - [10.5 边界测试：断路器模式的半开状态竞态条件（运行时雪崩）](#105-边界测试断路器模式的半开状态竞态条件运行时雪崩)
     - [10.3 边界测试：断路器模式的半开状态竞态条件（运行时雪崩）](#103-边界测试断路器模式的半开状态竞态条件运行时雪崩)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Rust 微服务中常用的服务发现机制有哪些？（理解层）](#测验-1rust-微服务中常用的服务发现机制有哪些理解层)
+    - [测验 2：在 Rust 微服务中，如何处理分布式事务？（理解层）](#测验-2在-rust-微服务中如何处理分布式事务理解层)
+    - [测验 3：Rust 的 `tower` 中间件栈如何实现微服务的横切关注点（日志、认证、限流）？（理解层）](#测验-3rust-的-tower-中间件栈如何实现微服务的横切关注点日志认证限流理解层)
+    - [测验 4：gRPC 在 Rust 微服务中的优势是什么？`tonic` 提供了哪些核心功能？（理解层）](#测验-4grpc-在-rust-微服务中的优势是什么tonic-提供了哪些核心功能理解层)
+    - [测验 5：Rust 微服务的健康检查（Health Check）通常如何设计？（理解层）](#测验-5rust-微服务的健康检查health-check通常如何设计理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -883,6 +889,67 @@ fn main() {}
 - **定理**: 微服务架构模式 (Microservice Architecture Patterns) 定义 ⟹ 类型安全保证
 - **定理**: 微服务架构模式 (Microservice Architecture Patterns) 定义 ⟹ 类型安全保证
 - **定理**: 微服务架构模式 (Microservice Architecture Patterns) 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Rust 微服务中常用的服务发现机制有哪些？（理解层）
+
+**题目**: Rust 微服务中常用的服务发现机制有哪些？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+1) Consul/etcd 客户端直接注册；2) Kubernetes DNS + Service；3) 服务网格（Linkerd/Istio）自动注入 sidecar 处理服务发现。
+
+</details>
+
+---
+
+### 测验 2：在 Rust 微服务中，如何处理分布式事务？（理解层）
+
+**题目**: 在 Rust 微服务中，如何处理分布式事务？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+常用 Saga 模式（通过事件/消息协调多个本地事务）或 TCC（Try-Confirm-Cancel）。Rust 的强类型有助于在编译期保证 Saga 状态机的完整性。
+</details>
+
+---
+
+### 测验 3：Rust 的 `tower` 中间件栈如何实现微服务的横切关注点（日志、认证、限流）？（理解层）
+
+**题目**: Rust 的 `tower` 中间件栈如何实现微服务的横切关注点（日志、认证、限流）？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`Service` trait 统一请求处理接口，`tower::ServiceBuilder` 链式组合中间件。每个中间件实现 `Service`，可拦截、修改请求/响应或短路返回。
+</details>
+
+---
+
+### 测验 4：gRPC 在 Rust 微服务中的优势是什么？`tonic` 提供了哪些核心功能？（理解层）
+
+**题目**: gRPC 在 Rust 微服务中的优势是什么？`tonic` 提供了哪些核心功能？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+强类型接口契约（Protobuf）、HTTP/2 多路复用、流式支持、跨语言互操作。`tonic` 提供异步服务端/客户端、中间件、拦截器和健康检查。
+</details>
+
+---
+
+### 测验 5：Rust 微服务的健康检查（Health Check）通常如何设计？（理解层）
+
+**题目**: Rust 微服务的健康检查（Health Check）通常如何设计？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+通过 HTTP 端点（如 `/healthz`）返回依赖状态（数据库连接、消息队列）。`tonic` 支持 gRPC Health Checking Protocol。Kubernetes 通过 readiness/liveness probe 调用。
+</details>
 
 ## 认知路径
 

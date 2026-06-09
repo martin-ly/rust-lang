@@ -50,6 +50,12 @@
     - [10.4 边界测试：编译期堆分配的 `const Heap` 展望（编译错误）](#104-边界测试编译期堆分配的-const-heap-展望编译错误)
     - [10.3 边界测试：`const fn` 中的浮点运算精度与确定性（编译错误/运行时差异）](#103-边界测试const-fn-中的浮点运算精度与确定性编译错误运行时差异)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Rust 的常量求值（const evaluation）目前已支持到什么程度？（理解层）](#测验-1rust-的常量求值const-evaluation目前已支持到什么程度理解层)
+    - [测验 2：`const fn` 与 C++ 的 `constexpr` 有什么相似之处？（理解层）](#测验-2const-fn-与-c-的-constexpr-有什么相似之处理解层)
+    - [测验 3：为什么 Rust 对 `const fn` 的能力限制比 C++ `constexpr` 更严格？（理解层）](#测验-3为什么-rust-对-const-fn-的能力限制比-c-constexpr-更严格理解层)
+    - [测验 4：编译期执行对嵌入式开发有什么特别价值？（理解层）](#测验-4编译期执行对嵌入式开发有什么特别价值理解层)
+    - [测验 5：Rust 编译期执行的未来方向是什么？（理解层）](#测验-5rust-编译期执行的未来方向是什么理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -649,6 +655,66 @@ fn main() {
 ### 补充定理链
 
 - **定理**: 编译期执行与常量求值 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Rust 的常量求值（const evaluation）目前已支持到什么程度？（理解层）
+
+**题目**: Rust 的常量求值（const evaluation）目前已支持到什么程度？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`const fn` 支持基本运算、控制流、部分标准库调用。`const_mut_refs` 和 `const_heap` 逐步放宽了historical限制。
+</details>
+
+---
+
+### 测验 2：`const fn` 与 C++ 的 `constexpr` 有什么相似之处？（理解层）
+
+**题目**: `const fn` 与 C++ 的 `constexpr` 有什么相似之处？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+两者都允许在编译期执行函数，用于常量初始化、数组大小计算、查找表生成等。减少运行时开销和启动时间。
+</details>
+
+---
+
+### 测验 3：为什么 Rust 对 `const fn` 的能力限制比 C++ `constexpr` 更严格？（理解层）
+
+**题目**: 为什么 Rust 对 `const fn` 的能力限制比 C++ `constexpr` 更严格？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 更保守以确保声音性。C++ `constexpr` 已扩展为几乎完整的 C++ 子集，但带来了复杂的编译期语义和实现负担。
+</details>
+
+---
+
+### 测验 4：编译期执行对嵌入式开发有什么特别价值？（理解层）
+
+**题目**: 编译期执行对嵌入式开发有什么特别价值？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+可以在编译期计算查找表、配置结构、校验和，减少运行时代码量和初始化时间。对资源受限设备尤为重要。
+</details>
+
+---
+
+### 测验 5：Rust 编译期执行的未来方向是什么？（理解层）
+
+**题目**: Rust 编译期执行的未来方向是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+逐步支持更多标准库功能（`Vec`、`String` 在 const 上下文）、用户自定义类型的 const 构造函数、更强大的 const 泛型计算。
+</details>
 
 ## 认知路径
 

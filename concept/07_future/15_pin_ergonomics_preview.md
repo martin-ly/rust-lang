@@ -230,3 +230,63 @@ graph TD
 > **[教学类比]** Pin Ergonomics 的改进类似于给 Rust 的异步编程"解除绑腿"——核心机制（Pin 保证内存安全）不变，但使用方式更自然。Reborrow Traits 让 `Pin<&mut T>` 的行为更接近普通 `&mut T`，而 `pin` 关键字则从根本上简化自引用类型的表达。
 >
 > **来源**: [Rust Project Goals 2026 — Beyond the &](https://rust-lang.github.io/rust-project-goals/2026/) · [withoutboats — "Pin and Suffering"](https://without.boats/blog/pin-and-suffering/) · [RFC #3709](https://github.com/rust-lang/rfcs/issues/3709)
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`Pin` 的人机工程学危机指什么？（理解层）
+
+**题目**: `Pin` 的人机工程学危机指什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+自引用类型（如异步状态机）需要 `Pin` 保证内存不移动，但 `Pin<&mut T>` 不能自由重新借用，导致大量模板代码和不直观的错误信息。
+</details>
+
+---
+
+### 测验 2：`Pin::as_mut()` 和普通的 `&mut` 重新借用有什么区别？（理解层）
+
+**题目**: `Pin::as_mut()` 和普通的 `&mut` 重新借用有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`Pin::as_mut()` 保持 `Pin` 包装，返回 `Pin<&mut T>`。普通 `&mut` 重新借用会丢失 `Pin` 语义，可能破坏自引用类型的内存安全。
+</details>
+
+---
+
+### 测验 3：`pin!` 宏在 Rust 1.96+ 中提供了什么便利？（理解层）
+
+**题目**: `pin!` 宏在 Rust 1.96+ 中提供了什么便利？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`pin!` 宏在栈上创建 pinned 值，无需 `Box::pin` 的堆分配。简化了测试和局部异步代码中的 pinning 操作。
+</details>
+
+---
+
+### 测验 4：Reborrow Traits 提案试图解决什么问题？（理解层）
+
+**题目**: Reborrow Traits 提案试图解决什么问题？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+让 `Pin<&mut T>` 的行为更接近普通 `&mut T`，允许自动重新借用和模式匹配，减少显式的 `as_mut()` 调用。
+</details>
+
+---
+
+### 测验 5：如果 `pin` 关键字被引入 Rust，它可能如何简化自引用类型？（理解层）
+
+**题目**: 如果 `pin` 关键字被引入 Rust，它可能如何简化自引用类型？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`pin` 关键字可能允许直接声明自引用字段（`pin field: T`），编译器自动生成必要的 pinning 保证，无需手动 `Pin` 包装和 unsafe 投影。
+</details>

@@ -854,3 +854,63 @@ fn panic(_info: &core::panic::PanicInfo) -> ! {
 > **过渡**: Blockchain & Smart Contract Security（区块链与智能合约安全） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Blockchain & Smart Contract Security（区块链与智能合约安全） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Blockchain & Smart Contract Security（区块链与智能合约安全） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：为什么 Rust 是区块链开发的热门语言？（理解层）
+
+**题目**: 为什么 Rust 是区块链开发的热门语言？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+内存安全（防止重入攻击等常见漏洞）、无 GC（确定性资源使用）、高性能（高吞吐共识）、强类型（序列化安全）。Solana、Polkadot、Near 等主流链使用 Rust。
+</details>
+
+---
+
+### 测验 2：Solidity 与 Rust 在智能合约开发中的主要区别是什么？（理解层）
+
+**题目**: Solidity 与 Rust 在智能合约开发中的主要区别是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Solidity 是专为 EVM 设计的高级语言，有内置的合约和事件概念。Rust 是通用系统语言，通过框架（如 `ink!`、`anchor`）提供合约抽象，更灵活但学习曲线更陡。
+</details>
+
+---
+
+### 测验 3：什么是"重入攻击"（Reentrancy Attack）？Rust 如何帮助防止它？（理解层）
+
+**题目**: 什么是"重入攻击"（Reentrancy Attack）？Rust 如何帮助防止它？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+合约在发送以太币时回调自身，递归执行未完成的逻辑。Rust 的所有权系统在编译期防止了共享可变状态的不安全访问，从根本上消除了重入漏洞的底层机制。
+</details>
+
+---
+
+### 测验 4：Rust 的 `no_std` 在区块链中有什么用途？（理解层）
+
+**题目**: Rust 的 `no_std` 在区块链中有什么用途？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+智能合约运行环境（如 WASM 虚拟机）通常没有完整操作系统。`no_std` 使合约代码可以在轻量级运行时中执行，减少二进制体积。
+</details>
+
+---
+
+### 测验 5：`Substrate` 框架与 Rust 有什么关系？（理解层）
+
+**题目**: `Substrate` 框架与 Rust 有什么关系？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Substrate 是 Parity 开发的区块链开发框架，完全用 Rust 编写。它提供模块化组件（共识、P2P、存储），使开发者可以用 Rust 快速构建自定义区块链。
+</details>

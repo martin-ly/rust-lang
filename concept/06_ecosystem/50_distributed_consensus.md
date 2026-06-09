@@ -65,6 +65,12 @@
     - [9.3 边界测试：拜占庭节点发送矛盾消息（安全性违反）](#93-边界测试拜占庭节点发送矛盾消息安全性违反)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Raft 共识算法的核心状态有哪三种？（理解层）](#测验-1raft-共识算法的核心状态有哪三种理解层)
+    - [测验 2：为什么分布式共识需要"多数派"（Quorum）确认？（理解层）](#测验-2为什么分布式共识需要多数派quorum确认理解层)
+    - [测验 3：Rust 的 `tikv` / `openraft` 在共识实现中有什么优势？（理解层）](#测验-3rust-的-tikv--openraft-在共识实现中有什么优势理解层)
+    - [测验 4："脑裂"（Split-Brain）是什么？Raft 如何防止它？（理解层）](#测验-4脑裂split-brain是什么raft-如何防止它理解层)
+    - [测验 5：在 Rust 中实现分布式共识时，为什么通常使用 `serde` + `tokio` 组合？（理解层）](#测验-5在-rust-中实现分布式共识时为什么通常使用-serde--tokio-组合理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -737,6 +743,66 @@ async fn query_tendermint_consensus() -> anyhow::Result<()> {
 - **定理**: Distributed Consensus（分布式共识） 定义 ⟹ 类型安全保证
 - **定理**: Distributed Consensus（分布式共识） 定义 ⟹ 类型安全保证
 - **定理**: Distributed Consensus（分布式共识） 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Raft 共识算法的核心状态有哪三种？（理解层）
+
+**题目**: Raft 共识算法的核心状态有哪三种？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Follower（跟随者，接收日志）、Candidate（候选者，发起选举）、Leader（领导者，处理客户端请求并复制日志）。
+</details>
+
+---
+
+### 测验 2：为什么分布式共识需要"多数派"（Quorum）确认？（理解层）
+
+**题目**: 为什么分布式共识需要"多数派"（Quorum）确认？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+保证任何两个多数派集合至少有一个节点交集，确保已提交的日志不会被覆盖。这是线性一致性和安全性的基础。
+</details>
+
+---
+
+### 测验 3：Rust 的 `tikv` / `openraft` 在共识实现中有什么优势？（理解层）
+
+**题目**: Rust 的 `tikv` / `openraft` 在共识实现中有什么优势？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+内存安全消除了 C++ 共识实现中的缓冲区溢出和 use-after-free 风险。 fearless 并发使多线程日志复制和状态机应用更安全。
+</details>
+
+---
+
+### 测验 4："脑裂"（Split-Brain）是什么？Raft 如何防止它？（理解层）
+
+**题目**: "脑裂"（Split-Brain）是什么？Raft 如何防止它？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+脑裂指网络分区导致两个节点都认为自己是 leader。Raft 通过任期（Term）机制和选举超时随机化防止：旧任期的 leader 收到更高任期时自动降级。
+</details>
+
+---
+
+### 测验 5：在 Rust 中实现分布式共识时，为什么通常使用 `serde` + `tokio` 组合？（理解层）
+
+**题目**: 在 Rust 中实现分布式共识时，为什么通常使用 `serde` + `tokio` 组合？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`serde` 保证消息序列化的类型安全（日志条目、投票请求）。`tokio` 提供异步网络 IO 和超时管理，处理 leader 选举和心跳的并发需求。
+</details>
 
 ## 认知路径
 

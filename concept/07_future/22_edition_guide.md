@@ -51,6 +51,12 @@
     - [10.7 边界测试：Edition 迁移的自动修复遗漏（编译中断/语义变更）](#107-边界测试edition-迁移的自动修复遗漏编译中断语义变更)
     - [10.3 边界测试：Edition 迁移中的宏 hygiene 变更（编译错误）](#103-边界测试edition-迁移中的宏-hygiene-变更编译错误)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：什么是 Rust 的"Edition"？它与语义版本（SemVer）有什么关系？（理解层）](#测验-1什么是-rust-的edition它与语义版本semver有什么关系理解层)
+    - [测验 2：Rust 2024 Edition 引入了哪些主要变化？（理解层）](#测验-2rust-2024-edition-引入了哪些主要变化理解层)
+    - [测验 3：为什么 Rust 可以同时支持多个 Edition？（理解层）](#测验-3为什么-rust-可以同时支持多个-edition理解层)
+    - [测验 4：Edition 迁移工具 `cargo fix --edition` 的作用是什么？（理解层）](#测验-4edition-迁移工具-cargo-fix---edition-的作用是什么理解层)
+    - [测验 5：预计下一个 Edition（2027/2028）可能包含什么特性？（理解层）](#测验-5预计下一个-edition20272028可能包含什么特性理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -688,6 +694,66 @@ fn main() {
 ### 补充定理链
 
 - **定理**: Edition 2024 完全指南：新特性与迁移策略 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：什么是 Rust 的"Edition"？它与语义版本（SemVer）有什么关系？（理解层）
+
+**题目**: 什么是 Rust 的"Edition"？它与语义版本（SemVer）有什么关系？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Edition 是 Rust 的阶段性语言更新（如 2015、2018、2021、2024），允许引入不向后兼容的语法改进。Edition 间的 crate 可以无缝互操作。
+</details>
+
+---
+
+### 测验 2：Rust 2024 Edition 引入了哪些主要变化？（理解层）
+
+**题目**: Rust 2024 Edition 引入了哪些主要变化？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`gen` 块、`if let` 临时生命周期延长、`unsafe_op_in_unsafe_fn` 默认启用、`lifetime_capture_rules` 改进、模式匹配中的 `|` 或操作符等。
+</details>
+
+---
+
+### 测验 3：为什么 Rust 可以同时支持多个 Edition？（理解层）
+
+**题目**: 为什么 Rust 可以同时支持多个 Edition？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+编译器根据 crate 的 `edition = '...'` 配置选择对应的解析和语义规则。这使得生态系统可以逐步迁移，无需一次性全局更新。
+</details>
+
+---
+
+### 测验 4：Edition 迁移工具 `cargo fix --edition` 的作用是什么？（理解层）
+
+**题目**: Edition 迁移工具 `cargo fix --edition` 的作用是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+自动分析代码并应用必要的语法更新（如添加 `unsafe` 块、调整生命周期标注）。极大降低了 Edition 迁移的人工成本。
+</details>
+
+---
+
+### 测验 5：预计下一个 Edition（2027/2028）可能包含什么特性？（理解层）
+
+**题目**: 预计下一个 Edition（2027/2028）可能包含什么特性？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+可能包括：更完整的 effect 系统、稳定化的 `gen` 块、`async_drop`、`field projections`、`pin` 语法改进、更灵活的 `self` 类型等。
+</details>
 
 ## 认知路径
 

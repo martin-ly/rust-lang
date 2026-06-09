@@ -1400,3 +1400,65 @@ fn fixed() {
 > [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Rust 语言演进的核心原则是什么？（理解层）
+
+**题目**: Rust 语言演进的核心原则是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+1) 稳定性（Stability without stagnation）；2) 零成本抽象；3) 内存安全；4) 开发者体验。新特性不破坏现有代码，Edition 机制允许受控演进。
+
+</details>
+
+---
+
+### 测验 2：什么是"Edition"机制？它如何平衡创新与稳定？（理解层）
+
+**题目**: 什么是"Edition"机制？它如何平衡创新与稳定？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Edition 是编译器配置，允许不向后兼容的语法改进。不同 Edition 的 crate 可以无缝互操作，生态系统逐步迁移而非一次性全局更新。
+</details>
+
+---
+
+### 测验 3：Rust 的 RFC 流程在语言演进中起什么作用？（理解层）
+
+**题目**: Rust 的 RFC 流程在语言演进中起什么作用？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+RFC（Request for Comments）是重大变更的标准化提案流程，确保设计经过社区充分讨论。所有用户可见的变更通常需要 RFC。
+</details>
+
+---
+
+### 测验 4：Rust 的核心团队如何决定哪些特性优先开发？（理解层）
+
+**题目**: Rust 的核心团队如何决定哪些特性优先开发？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+基于 Project Goals（年度目标）、社区反馈、工业需求（如安全关键领域）和语言设计一致性。平衡短期实用性和长期愿景。
+</details>
+
+---
+
+### 测验 5：Rust 未来 5 年的主要发展方向是什么？（理解层）
+
+**题目**: Rust 未来 5 年的主要发展方向是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+1) 编译器性能（并行前端、Cranelift）；2) 语言成熟（规范、特化、效果系统）；3) 生态扩展（AI/ML、嵌入式、WASM）；4) 安全关键认证（Ferrocene）。
+
+</details>

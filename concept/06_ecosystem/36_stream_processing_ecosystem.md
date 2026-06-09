@@ -488,6 +488,66 @@ fn windowed_sum(events: Stream<Event>) -> Stream<WindowResult> {
 - **定理**: 流处理生态：Rust 实现与工业系统全景 定义 ⟹ 类型安全保证
 - **定理**: 流处理生态：Rust 实现与工业系统全景 定义 ⟹ 类型安全保证
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Rust 的 `futures::Stream` 与 Apache Kafka 的 consumer 在概念上有什么对应关系？（理解层）
+
+**题目**: Rust 的 `futures::Stream` 与 Apache Kafka 的 consumer 在概念上有什么对应关系？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+两者都是数据流抽象：`Stream` 是内存中的异步数据流，`poll_next` 获取下一条。Kafka consumer 是分布式持久化流，通过 `poll()` 拉取消息，需管理 offset 提交。
+</details>
+
+---
+
+### 测验 2：在流处理中，"恰好一次"（Exactly-Once）语义为什么难以实现？（理解层）
+
+**题目**: 在流处理中，"恰好一次"（Exactly-Once）语义为什么难以实现？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+需要同时保证：1) 消息不丢失；2) 消息不重复处理。通常通过幂等消费者 + 事务性 offset 提交实现。网络分区和重试使 exactly-once 成为分布式系统难题。
+</details>
+
+---
+
+### 测验 3：`timely-dataflow` 和 `differential-dataflow` 在 Rust 流处理生态中有什么独特之处？（理解层）
+
+**题目**: `timely-dataflow` 和 `differential-dataflow` 在 Rust 流处理生态中有什么独特之处？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+它们支持增量计算和递归查询，通过逻辑时间戳追踪数据版本，只重计算变化的部分。适合复杂图计算、增量视图维护等场景。
+</details>
+
+---
+
+### 测验 4：窗口操作（Windowing）在流处理中解决什么问题？Rust 中如何实现？（理解层）
+
+**题目**: 窗口操作（Windowing）在流处理中解决什么问题？Rust 中如何实现？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+无界流需要切分为有限块才能做聚合（如每 5 分钟统计访问量）。Rust 中通过 `tokio::time::interval` 或流处理库（如 `fenris`）按时间/计数触发窗口。
+</details>
+
+---
+
+### 测验 5：背压（Backpressure）在流处理管道中为什么重要？（理解层）
+
+**题目**: 背压（Backpressure）在流处理管道中为什么重要？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+防止生产者速度超过消费者导致内存无限增长（OOM）。有界 channel、Rate Limiter 和动态窗口调整都是背压机制，确保系统稳定运行。
+</details>
+
 ## 认知路径
 
 > **认知路径**: 从 Rust 核心语言特性出发，经由 **流处理生态：Rust 实现与工业系统全景** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。

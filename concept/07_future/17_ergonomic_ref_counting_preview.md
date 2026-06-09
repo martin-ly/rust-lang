@@ -172,3 +172,63 @@ Ergonomic ref-counting 可显著降低内核绑定的样板代码量，提升可
 
 > **权威来源**: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/), [rust-project-goals#107](https://github.com/rust-lang/rust-project-goals/issues/107)
 > **权威来源对齐变更日志**: 2026-06-06 创建，对齐 Rust Project Goals 2026 April Update
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1："人机工程学的引用计数"指什么？（理解层）
+
+**题目**: "人机工程学的引用计数"指什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+改进 `Rc<T>` 和 `Arc<T>` 的使用体验，减少显式 `clone()` 调用和 `Weak` 指针的模板代码，使引用计数更像其他语言的自动内存管理。
+</details>
+
+---
+
+### 测验 2：`Arc::clone(&arc)` 与 `arc.clone()` 在语义上有什么区别？（理解层）
+
+**题目**: `Arc::clone(&arc)` 与 `arc.clone()` 在语义上有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+语义相同，但社区推荐 `Arc::clone(&arc)` 以明确这是引用计数增加而非深拷贝。这是显式哲学的体现。
+</details>
+
+---
+
+### 测验 3：为什么 Rust 不直接提供类似 Swift 的自动引用计数（ARC）？（理解层）
+
+**题目**: 为什么 Rust 不直接提供类似 Swift 的自动引用计数（ARC）？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Swift ARC 由编译器自动插入 retain/release，但循环引用仍需手动处理（`weak`/`unowned`）。Rust 的所有权系统更安全，但引用计数只是众多所有权策略之一。
+</details>
+
+---
+
+### 测验 4：`Weak` 指针在 Rust 中解决什么问题？（理解层）
+
+**题目**: `Weak` 指针在 Rust 中解决什么问题？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+打破 `Rc`/`Arc` 的循环引用。`Weak` 不增加强引用计数，当所有强引用消失时对象被释放，`Weak` 升级返回 `None`。
+</details>
+
+---
+
+### 测验 5：这个提案对 Rust 的 GC 讨论有什么影响？（理解层）
+
+**题目**: 这个提案对 Rust 的 GC 讨论有什么影响？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+更 ergonomic 的引用计数可能减少社区对 GC 的需求。但真正的 GC（如 cycle collection）仍可能在未来作为可选 crate 出现。
+</details>

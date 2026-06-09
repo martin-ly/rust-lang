@@ -74,6 +74,12 @@
     - [10.3 边界测试：API 版本化破坏向后兼容（逻辑错误）](#103-边界测试api-版本化破坏向后兼容逻辑错误)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Rust API 设计中，" consuming builder" 与"非 consuming builder"有什么区别？（理解层）](#测验-1rust-api-设计中-consuming-builder-与非-consuming-builder有什么区别理解层)
+    - [测验 2：`IntoIterator` trait 在 API 设计中有什么用途？（理解层）](#测验-2intoiterator-trait-在-api-设计中有什么用途理解层)
+    - [测验 3：为什么 Rust 的公共 API 中通常避免返回 `impl Trait`，而更倾向于显式类型？（理解层）](#测验-3为什么-rust-的公共-api-中通常避免返回-impl-trait而更倾向于显式类型理解层)
+    - [测验 4：`sealed trait` 模式在 Rust API 设计中有什么用途？（理解层）](#测验-4sealed-trait-模式在-rust-api-设计中有什么用途理解层)
+    - [测验 5：Rust API 的"零成本抽象"原则如何体现在集合 API 设计中？（理解层）](#测验-5rust-api-的零成本抽象原则如何体现在集合-api-设计中理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -1208,6 +1214,66 @@ struct UserV2 {
 - **定理**: API Design Patterns（API 设计模式） 定义 ⟹ 类型安全保证
 - **定理**: API Design Patterns（API 设计模式） 定义 ⟹ 类型安全保证
 - **定理**: API Design Patterns（API 设计模式） 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Rust API 设计中，" consuming builder" 与"非 consuming builder"有什么区别？（理解层）
+
+**题目**: Rust API 设计中，" consuming builder" 与"非 consuming builder"有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Consuming builder 的 `build()` 方法消耗 `self`（`fn build(self) -> T`），防止构建后修改。非 consuming builder 允许链式调用后继续使用，但可能产生部分构建状态。
+</details>
+
+---
+
+### 测验 2：`IntoIterator` trait 在 API 设计中有什么用途？（理解层）
+
+**题目**: `IntoIterator` trait 在 API 设计中有什么用途？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+允许函数接受任何可迭代类型（`Vec`、`&[T]`、`HashSet` 等），提高 API 灵活性。调用方无需显式转换，编译器自动处理。
+</details>
+
+---
+
+### 测验 3：为什么 Rust 的公共 API 中通常避免返回 `impl Trait`，而更倾向于显式类型？（理解层）
+
+**题目**: 为什么 Rust 的公共 API 中通常避免返回 `impl Trait`，而更倾向于显式类型？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`impl Trait` 隐藏了具体类型，调用方无法存储在 struct 中或进一步组合。公共 API 使用显式类型或 `dyn Trait` 提供更大的灵活性，内部实现使用 `impl Trait` 简化。
+</details>
+
+---
+
+### 测验 4：`sealed trait` 模式在 Rust API 设计中有什么用途？（理解层）
+
+**题目**: `sealed trait` 模式在 Rust API 设计中有什么用途？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+通过将 trait 的 supertrait 设为私有模块中的 trait，阻止外部 crate 实现该 trait。这允许库作者在后续版本中安全地添加新方法，而不会破坏用户代码。
+</details>
+
+---
+
+### 测验 5：Rust API 的"零成本抽象"原则如何体现在集合 API 设计中？（理解层）
+
+**题目**: Rust API 的"零成本抽象"原则如何体现在集合 API 设计中？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`Iterator` 适配器链编译为与手写循环等价的机器码。`Vec::push` 内联展开，`HashMap` 查找通过 SIMD 优化。用户获得高级 API，运行时无额外开销。
+</details>
 
 ## 认知路径
 

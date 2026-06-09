@@ -926,3 +926,64 @@ fn main() {
 ### 补充定理链
 
 - **定理**: AI × Rust：生成-验证闭环与确定性容器 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Rust 如何与现有的 AI/ML Python 生态集成？（理解层）
+
+**题目**: Rust 如何与现有的 AI/ML Python 生态集成？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+通过 `PyO3` 将 Rust 编译为 Python 扩展模块，或通过 Arrow 格式零拷贝交换数据。Rust 负责性能热点，Python 负责研究和编排。
+</details>
+
+---
+
+### 测验 2：`candle` 框架的核心设计原则是什么？（理解层）
+
+**题目**: `candle` 框架的核心设计原则是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+纯 Rust 实现、无需 Python 运行时、支持 CPU 和 CUDA、WASM 部署友好。目标是成为 Rust 生态的"PyTorch 替代品"。
+</details>
+
+---
+
+### 测验 3：为什么 AI 推理服务特别适合用 Rust 编写？（理解层）
+
+**题目**: 为什么 AI 推理服务特别适合用 Rust 编写？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+推理需要低延迟、高吞吐、确定性资源使用。Rust 的无 GC 特性避免了 Python 服务的 GC 停顿，内存安全防止了处理用户输入时的安全漏洞。
+</details>
+
+---
+
+### 测验 4：Rust 在 AI 训练领域目前的主要障碍是什么？（理解层）
+
+**题目**: Rust 在 AI 训练领域目前的主要障碍是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+1) 动态图和自动微分生态不如 PyTorch 成熟；2) GPU 内核编写工具链复杂；3) 研究者社区更熟悉 Python。
+
+</details>
+
+---
+
+### 测验 5：`burn` 框架的"后端抽象"（Backend Abstraction）有什么独特之处？（理解层）
+
+**题目**: `burn` 框架的"后端抽象"（Backend Abstraction）有什么独特之处？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+允许同一模型代码编译到不同后端（CPU、CUDA、WGPU、WebGPU），通过泛型参数选择。这是 Rust 零成本抽象在 ML 领域的体现。
+</details>

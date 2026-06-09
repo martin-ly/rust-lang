@@ -72,6 +72,12 @@
     - [10.3 边界测试：Serverless 超时导致状态不一致（运行时错误）](#103-边界测试serverless-超时导致状态不一致运行时错误)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Rust 中常用的分层架构（Layered Architecture）如何划分？（理解层）](#测验-1rust-中常用的分层架构layered-architecture如何划分理解层)
+    - [测验 2：六边形架构（Hexagonal Architecture / Ports and Adapters）在 Rust 中如何体现？（理解层）](#测验-2六边形架构hexagonal-architecture--ports-and-adapters在-rust-中如何体现理解层)
+    - [测验 3：Rust 的强类型系统对洋葱架构（Onion Architecture）有什么天然支持？（理解层）](#测验-3rust-的强类型系统对洋葱架构onion-architecture有什么天然支持理解层)
+    - [测验 4：什么是"依赖倒置原则"（DIP）？Rust 的 trait 如何帮助实现它？（理解层）](#测验-4什么是依赖倒置原则diprust-的-trait-如何帮助实现它理解层)
+    - [测验 5：在 Rust 中，为什么 Repository 模式比直接在 Service 中调用 SQL 更受推荐？（理解层）](#测验-5在-rust-中为什么-repository-模式比直接在-service-中调用-sql-更受推荐理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -1123,6 +1129,66 @@ async fn risky_handler(event: LambdaEvent<OrderRequest>) -> Result<Value, Error>
 - **定理**: Architecture Patterns（架构设计模式） 定义 ⟹ 类型安全保证
 - **定理**: Architecture Patterns（架构设计模式） 定义 ⟹ 类型安全保证
 - **定理**: Architecture Patterns（架构设计模式） 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Rust 中常用的分层架构（Layered Architecture）如何划分？（理解层）
+
+**题目**: Rust 中常用的分层架构（Layered Architecture）如何划分？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+通常分为：表现层（HTTP/gRPC 处理器）、应用层（用例/服务协调）、领域层（核心业务逻辑、实体、值对象）、基础设施层（数据库、外部 API、消息队列）。
+</details>
+
+---
+
+### 测验 2：六边形架构（Hexagonal Architecture / Ports and Adapters）在 Rust 中如何体现？（理解层）
+
+**题目**: 六边形架构（Hexagonal Architecture / Ports and Adapters）在 Rust 中如何体现？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+核心业务逻辑通过 trait（端口）定义依赖，具体实现（适配器）在 infrastructure 层。例如 `trait UserRepository` 由 `PostgresUserRepository` 实现，便于测试替换为 mock。
+</details>
+
+---
+
+### 测验 3：Rust 的强类型系统对洋葱架构（Onion Architecture）有什么天然支持？（理解层）
+
+**题目**: Rust 的强类型系统对洋葱架构（Onion Architecture）有什么天然支持？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+洋葱架构依赖方向指向领域核心。Rust 的模块系统和可见性（`pub(crate)`、`pub`）可强制分层依赖方向，编译器阻止外层直接绕过内层抽象。
+</details>
+
+---
+
+### 测验 4：什么是"依赖倒置原则"（DIP）？Rust 的 trait 如何帮助实现它？（理解层）
+
+**题目**: 什么是"依赖倒置原则"（DIP）？Rust 的 trait 如何帮助实现它？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+高层模块不应依赖低层模块，两者都应依赖抽象。Rust trait 定义抽象接口，高层通过 `dyn Trait` 或泛型参数依赖接口，而非具体实现。
+</details>
+
+---
+
+### 测验 5：在 Rust 中，为什么 Repository 模式比直接在 Service 中调用 SQL 更受推荐？（理解层）
+
+**题目**: 在 Rust 中，为什么 Repository 模式比直接在 Service 中调用 SQL 更受推荐？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Repository 将数据访问逻辑隔离，便于：1) 切换存储后端（Postgres -> Redis）；2) 单元测试 mock；3) 集中处理查询优化和缓存策略。
+</details>
 
 ## 认知路径
 

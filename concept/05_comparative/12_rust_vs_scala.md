@@ -46,6 +46,12 @@
     - [10.3 边界测试：Scala 的隐式转换与 Rust 的显式 `From`/`Into`（编译错误）](#103-边界测试scala-的隐式转换与-rust-的显式-frominto编译错误)
     - [10.4 边界测试：Scala 的 actor 模型与 Rust 的 async/channel 的并发模型差异（运行时死锁）](#104-边界测试scala-的-actor-模型与-rust-的-asyncchannel-的并发模型差异运行时死锁)
     - [10.3 边界测试：Scala 的隐式转换与 Rust 的显式类型安全（编译错误）](#103-边界测试scala-的隐式转换与-rust-的显式类型安全编译错误)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Scala 的"混合面向对象与函数式"与 Rust 的" mostly 函数式"有什么设计哲学差异？（理解层）](#测验-1scala-的混合面向对象与函数式与-rust-的-mostly-函数式有什么设计哲学差异理解层)
+    - [测验 2：Scala 的隐式参数（Implicits）与 Rust 的 trait bounds 在类型类机制上有什么区别？（理解层）](#测验-2scala-的隐式参数implicits与-rust-的-trait-bounds-在类型类机制上有什么区别理解层)
+    - [测验 3：Scala 运行在 JVM 上，Rust 编译为原生。这对 GC 和实时性有什么影响？（理解层）](#测验-3scala-运行在-jvm-上rust-编译为原生这对-gc-和实时性有什么影响理解层)
+    - [测验 4：Scala 的 case class 与 Rust 的 `#[derive(Debug, Clone)]` struct 有什么对应关系？（理解层）](#测验-4scala-的-case-class-与-rust-的-derivedebug-clone-struct-有什么对应关系理解层)
+    - [测验 5：为什么 Rust 的类型推断比 Scala 更保守？（理解层）](#测验-5为什么-rust-的类型推断比-scala-更保守理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -678,6 +684,66 @@ fn main() {
 ```
 
 > **修正**: Rust **禁止隐式类型转换**（除少数自动强制：`&T` → `&U` 若 `T: U`、`&mut T` → `&T`、`T` → `U` 若 `T: Into<U>` 但在特定上下文）。`Meters` 和 `Feet` 是不同的类型，即使语义相关，也不能直接赋值。显式转换：1) `impl From<Meters> for Feet` + `let f: Feet = m.into()`；2) `impl Into<Feet> for Meters`；3) 解构：`let Feet(f) = m.into()`。Scala 的隐式转换（`implicit def` / `given` / `using`）允许库作者定义自动转换，但可能导致"隐式解析地狱"（编译时间长、错误信息难读）。Rust 的设计哲学：**显式优于隐式**。这与 C++ 的转换构造函数（单参数构造函数隐式调用）或 Go 的接口实现（隐式满足接口）不同——Rust 的显式转换使代码更易读、错误更易定位。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Scala 的"混合面向对象与函数式"与 Rust 的" mostly 函数式"有什么设计哲学差异？（理解层）
+
+**题目**: Scala 的"混合面向对象与函数式"与 Rust 的" mostly 函数式"有什么设计哲学差异？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Scala 保留完整的 OOP（继承、多态、可变状态），函数式是可选风格。Rust 强制所有权和不可变引用，函数式是默认，OOP 通过 trait 实现且不支持继承。
+</details>
+
+---
+
+### 测验 2：Scala 的隐式参数（Implicits）与 Rust 的 trait bounds 在类型类机制上有什么区别？（理解层）
+
+**题目**: Scala 的隐式参数（Implicits）与 Rust 的 trait bounds 在类型类机制上有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Scala implicits 自动搜索作用域内的实例，灵活但可能产生晦涩错误。Rust trait bounds 显式声明，编译器在编译期解析，更严格但更易于理解和调试。
+</details>
+
+---
+
+### 测验 3：Scala 运行在 JVM 上，Rust 编译为原生。这对 GC 和实时性有什么影响？（理解层）
+
+**题目**: Scala 运行在 JVM 上，Rust 编译为原生。这对 GC 和实时性有什么影响？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Scala 受 JVM GC 影响，可能出现不可预测的停顿。Rust 无 GC，内存释放是确定性的，适合实时系统和延迟敏感应用。
+</details>
+
+---
+
+### 测验 4：Scala 的 case class 与 Rust 的 `#[derive(Debug, Clone)]` struct 有什么对应关系？（理解层）
+
+**题目**: Scala 的 case class 与 Rust 的 `#[derive(Debug, Clone)]` struct 有什么对应关系？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+两者都提供不可变数据结构和自动派生方法。Scala case class 自动提供 `copy`、`equals`、`hashCode`、模式匹配。Rust 需显式 derive，但控制权更大。
+</details>
+
+---
+
+### 测验 5：为什么 Rust 的类型推断比 Scala 更保守？（理解层）
+
+**题目**: 为什么 Rust 的类型推断比 Scala 更保守？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 要求函数签名通常显式标注类型（生命周期和泛型）。Scala 支持更激进的局部类型推断（如 Hindley-Milner 扩展）。Rust 的保守性是为了编译速度和明确的接口契约。
+</details>
 
 ## 认知路径
 

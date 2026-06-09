@@ -70,6 +70,12 @@
     - [10.3 边界测试：事件模式演化破坏反序列化（编译/运行时错误）](#103-边界测试事件模式演化破坏反序列化编译运行时错误)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：CQRS（命令查询职责分离）的核心思想是什么？与传统 CRUD 架构有什么区别？（理解层）](#测验-1cqrs命令查询职责分离的核心思想是什么与传统-crud-架构有什么区别理解层)
+    - [测验 2：Event Sourcing（事件溯源）中，系统状态如何重建？（理解层）](#测验-2event-sourcing事件溯源中系统状态如何重建理解层)
+    - [测验 3：Rust 的强类型系统对实现 CQRS/Event Sourcing 有什么帮助？（理解层）](#测验-3rust-的强类型系统对实现-cqrsevent-sourcing-有什么帮助理解层)
+    - [测验 4：在 Event Sourcing 中，如何处理"事件 schema 演进"（Event Schema Evolution）？（理解层）](#测验-4在-event-sourcing-中如何处理事件-schema-演进event-schema-evolution理解层)
+    - [测验 5：CQRS + Event Sourcing 相比传统架构增加了什么复杂度？什么场景下不值得使用？（理解层）](#测验-5cqrs--event-sourcing-相比传统架构增加了什么复杂度什么场景下不值得使用理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -1373,6 +1379,66 @@ fn good_deserialization() {
 - **定理**: CQRS & Event Sourcing（命令查询职责分离与事件溯源） 定义 ⟹ 类型安全保证
 - **定理**: CQRS & Event Sourcing（命令查询职责分离与事件溯源） 定义 ⟹ 类型安全保证
 - **定理**: CQRS & Event Sourcing（命令查询职责分离与事件溯源） 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：CQRS（命令查询职责分离）的核心思想是什么？与传统 CRUD 架构有什么区别？（理解层）
+
+**题目**: CQRS（命令查询职责分离）的核心思想是什么？与传统 CRUD 架构有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+将写操作（Command）和读操作（Query）分离到不同模型。写模型优化一致性，读模型优化查询性能。传统 CRUD 用同一数据模型处理读写，可能相互制约。
+</details>
+
+---
+
+### 测验 2：Event Sourcing（事件溯源）中，系统状态如何重建？（理解层）
+
+**题目**: Event Sourcing（事件溯源）中，系统状态如何重建？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+状态是当前所有事件的累积结果。通过重放事件流（从第一个事件到最新）重建任意时间点的状态。快照（Snapshot）用于优化重放性能。
+</details>
+
+---
+
+### 测验 3：Rust 的强类型系统对实现 CQRS/Event Sourcing 有什么帮助？（理解层）
+
+**题目**: Rust 的强类型系统对实现 CQRS/Event Sourcing 有什么帮助？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Command 和 Event 可定义为枚举/struct，编译期保证处理器只接受有效命令、只产生有效事件。序列化/反序列化通过 Serde 保证 schema 兼容。
+</details>
+
+---
+
+### 测验 4：在 Event Sourcing 中，如何处理"事件 schema 演进"（Event Schema Evolution）？（理解层）
+
+**题目**: 在 Event Sourcing 中，如何处理"事件 schema 演进"（Event Schema Evolution）？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+通过向上转换（Upcasting）：读取旧事件时转换为新 schema 再应用。或版本化事件类型（`V1OrderCreated`、`V2OrderCreated`），`match` 处理所有版本。
+</details>
+
+---
+
+### 测验 5：CQRS + Event Sourcing 相比传统架构增加了什么复杂度？什么场景下不值得使用？（理解层）
+
+**题目**: CQRS + Event Sourcing 相比传统架构增加了什么复杂度？什么场景下不值得使用？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+增加了事件存储、投影（Projection）重建、最终一致性理解、schema 演进等复杂度。简单 CRUD 应用、无审计需求、读写过高的场景通常不值得使用。
+</details>
 
 ## 认知路径
 

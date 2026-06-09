@@ -40,6 +40,12 @@
   - [五、演进路线](#五演进路线)
   - [参考](#参考)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Arbitrary Self Types 允许什么目前不允许的操作？（理解层）](#测验-1arbitrary-self-types-允许什么目前不允许的操作理解层)
+    - [测验 2：这个特性对自定义智能指针有什么意义？（理解层）](#测验-2这个特性对自定义智能指针有什么意义理解层)
+    - [测验 3：`Receiver` trait 在这个特性中起什么作用？（理解层）](#测验-3receiver-trait-在这个特性中起什么作用理解层)
+    - [测验 4：Arbitrary Self Types 与 `Deref` 有什么关系？（理解层）](#测验-4arbitrary-self-types-与-deref-有什么关系理解层)
+    - [测验 5：这个特性目前的状态是什么？（理解层）](#测验-5这个特性目前的状态是什么理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -258,6 +264,66 @@ impl<T> TaggedPtr<T> {
 - **定理**: Arbitrary Self Types 预览：自定义方法接收器 定义 ⟹ 类型安全保证
 - **定理**: Arbitrary Self Types 预览：自定义方法接收器 定义 ⟹ 类型安全保证
 - **定理**: Arbitrary Self Types 预览：自定义方法接收器 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Arbitrary Self Types 允许什么目前不允许的操作？（理解层）
+
+**题目**: Arbitrary Self Types 允许什么目前不允许的操作？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+允许方法的 `self` 参数为非标准类型（目前仅支持 `self`、`&self`、`&mut self`、`Box<Self>`、`Rc<Self>`、`Arc<Self>`、`Pin<...>`）。例如 `self: MySmartPointer<T>`。
+</details>
+
+---
+
+### 测验 2：这个特性对自定义智能指针有什么意义？（理解层）
+
+**题目**: 这个特性对自定义智能指针有什么意义？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+自定义智能指针可以直接作为方法接收器，无需先解引用为引用。使 API 更自然，例如 `my_ptr.method()` 而非 `(*my_ptr).method()`。
+</details>
+
+---
+
+### 测验 3：`Receiver` trait 在这个特性中起什么作用？（理解层）
+
+**题目**: `Receiver` trait 在这个特性中起什么作用？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`Receiver` 标记一个类型可以作为方法接收器。实现 `Receiver for MyType` 后，该类型可用于 `self: MyType` 的方法签名。
+</details>
+
+---
+
+### 测验 4：Arbitrary Self Types 与 `Deref` 有什么关系？（理解层）
+
+**题目**: Arbitrary Self Types 与 `Deref` 有什么关系？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`Deref` 允许自动解引用（`my_ptr.method()` 解引用后调用）。Arbitrary Self Types 允许直接以智能指针类型作为接收器，无需解引用，保留更多类型信息。
+</details>
+
+---
+
+### 测验 5：这个特性目前的状态是什么？（理解层）
+
+**题目**: 这个特性目前的状态是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+已在 nightly 中实现，部分功能稳定化中。是 Rust 类型系统扩展的重要一步，使自定义类型更像一等公民。
+</details>
 
 ## 认知路径
 

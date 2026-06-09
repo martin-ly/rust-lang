@@ -242,6 +242,66 @@ std::autodiff 适合所有 Rust 数值计算?
 - **定理**: `std::autodiff`：Rust 官方自动微分前沿追踪 定义 ⟹ 类型安全保证
 - **定理**: `std::autodiff`：Rust 官方自动微分前沿追踪 定义 ⟹ 类型安全保证
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：什么是自动微分（AutoDiff）？它在机器学习中有什么作用？（理解层）
+
+**题目**: 什么是自动微分（AutoDiff）？它在机器学习中有什么作用？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+自动计算函数对输入的导数。机器学习训练需要梯度下降，自动微分消除了手动求导的工作，支持复杂计算图的高效梯度计算。
+</details>
+
+---
+
+### 测验 2：Rust 目前为什么缺少标准的自动微分库？（理解层）
+
+**题目**: Rust 目前为什么缺少标准的自动微分库？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 的所有权系统使反向传播的状态管理复杂（需要记录前向传播的中间值）。社区已有 `autodiff`、`dfdx`、`burn` 等实验性库，但尚未形成标准。
+</details>
+
+---
+
+### 测验 3：`dfdx` 如何在 Rust 的类型系统中编码神经网络架构？（理解层）
+
+**题目**: `dfdx` 如何在 Rust 的类型系统中编码神经网络架构？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+使用 const generics 将张量形状编码到类型中（如 `Tensor<(B, C, H, W)>`），编译期检查矩阵乘法维度匹配，消除运行时形状错误。
+</details>
+
+---
+
+### 测验 4：如果 Rust 标准库引入自动微分支持，可能以什么形式出现？（理解层）
+
+**题目**: 如果 Rust 标准库引入自动微分支持，可能以什么形式出现？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+可能作为标准库外的官方 crate（类似 `std::future` 最初在 `futures` crate 中孵化），或作为语言特性（如 Swift 的 differentiable programming）。
+</details>
+
+---
+
+### 测验 5：Rust 的自动微分与 PyTorch 的动态图相比有什么潜在优势？（理解层）
+
+**题目**: Rust 的自动微分与 PyTorch 的动态图相比有什么潜在优势？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+编译期优化（算子融合、内存规划）、类型安全（形状检查）、无 GIL 并行、WASM 部署。劣势是灵活性和生态成熟度。
+</details>
+
 ## 认知路径
 
 > **认知路径**: 从 Rust 核心语言特性出发，经由 **`std::autodiff`：Rust 官方自动微分前沿追踪** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。

@@ -54,6 +54,12 @@
     - [10.3 边界测试：RTN 与关联类型的返回值约束（编译错误）](#103-边界测试rtn-与关联类型的返回值约束编译错误)
     - [10.4 边界测试：RTN 与默认方法实现的交互（编译错误）](#104-边界测试rtn-与默认方法实现的交互编译错误)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Return Type Notation（RTN）解决的是什么问题？（理解层）](#测验-1return-type-notationrtn解决的是什么问题理解层)
+    - [测验 2：`impl Trait + use<'a>` 语法中的 `use<'a>` 表示什么？（理解层）](#测验-2impl-trait--usea-语法中的-usea-表示什么理解层)
+    - [测验 3：为什么 `async fn` 目前存在"生命周期过度捕获"问题？（理解层）](#测验-3为什么-async-fn-目前存在生命周期过度捕获问题理解层)
+    - [测验 4：RTN 与 `impl Trait + 'static` 有什么区别？（理解层）](#测验-4rtn-与-impl-trait--static-有什么区别理解层)
+    - [测验 5：这个特性对 API 设计有什么影响？（理解层）](#测验-5这个特性对-api-设计有什么影响理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -489,6 +495,66 @@ impl Processor for MyProcessor {
 ### 补充定理链
 
 - **定理**: Return Type Notation 预研：精确捕获的显式控制 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Return Type Notation（RTN）解决的是什么问题？（理解层）
+
+**题目**: Return Type Notation（RTN）解决的是什么问题？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+精确控制 `impl Trait` 返回类型中隐式捕获的生命周期。允许开发者显式指定返回的 Future/闭包捕获哪些生命周期，解决过度捕获导致的编译错误。
+</details>
+
+---
+
+### 测验 2：`impl Trait + use<'a>` 语法中的 `use<'a>` 表示什么？（理解层）
+
+**题目**: `impl Trait + use<'a>` 语法中的 `use<'a>` 表示什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+表示返回类型只捕获生命周期 `'a`，不捕获其他隐式生命周期。这缩小了返回类型的生命周期依赖，使其更灵活。
+</details>
+
+---
+
+### 测验 3：为什么 `async fn` 目前存在"生命周期过度捕获"问题？（理解层）
+
+**题目**: 为什么 `async fn` 目前存在"生命周期过度捕获"问题？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`async fn` 返回的 Future 隐式捕获所有输入生命周期，即使函数体只使用了部分。这导致某些合法的代码因生命周期冲突而编译失败。
+</details>
+
+---
+
+### 测验 4：RTN 与 `impl Trait + 'static` 有什么区别？（理解层）
+
+**题目**: RTN 与 `impl Trait + 'static` 有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`'static` 要求返回类型不引用任何非静态数据。`use<'a>` 允许引用特定生命周期 `'a` 的数据，比 `'static` 更灵活。
+</details>
+
+---
+
+### 测验 5：这个特性对 API 设计有什么影响？（理解层）
+
+**题目**: 这个特性对 API 设计有什么影响？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+允许编写更精确、更灵活的泛型 API，特别是涉及异步和闭包时。减少了因生命周期推断保守性导致的不必要的 `Box` 或显式生命周期标注。
+</details>
 
 ## 认知路径
 

@@ -60,6 +60,12 @@
     - [9.3 边界测试：模型输入维度不匹配导致 panic（逻辑错误）](#93-边界测试模型输入维度不匹配导致-panic逻辑错误)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Rust 在机器学习领域目前的主要定位是什么？（理解层）](#测验-1rust-在机器学习领域目前的主要定位是什么理解层)
+    - [测验 2：`candle`（Hugging Face）与 `PyTorch` 在设计哲学上有什么区别？（理解层）](#测验-2candlehugging-face与-pytorch-在设计哲学上有什么区别理解层)
+    - [测验 3：为什么 ML 推理引擎常用 Rust 重写（如 `llama.cpp` 的 Rust 绑定、`mistral.rs`）？（理解层）](#测验-3为什么-ml-推理引擎常用-rust-重写如-llamacpp-的-rust-绑定mistralrs理解层)
+    - [测验 4：`ndarray` 在 Rust ML 生态中扮演什么角色？（理解层）](#测验-4ndarray-在-rust-ml-生态中扮演什么角色理解层)
+    - [测验 5：`ort`（ONNX Runtime Rust bindings）在模型部署中有什么优势？（理解层）](#测验-5ortonnx-runtime-rust-bindings在模型部署中有什么优势理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -847,6 +853,66 @@ fn safe_inference(model: &impl Module<B>, input: Tensor<B, 2>) {
 - **定理**: Machine Learning Ecosystem（机器学习生态） 定义 ⟹ 类型安全保证
 - **定理**: Machine Learning Ecosystem（机器学习生态） 定义 ⟹ 类型安全保证
 - **定理**: Machine Learning Ecosystem（机器学习生态） 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Rust 在机器学习领域目前的主要定位是什么？（理解层）
+
+**题目**: Rust 在机器学习领域目前的主要定位是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 主要定位为 ML 基础设施（推理引擎、数据管道、特征存储），而非研究原型。`candle`、`burn` 等框架提供类型安全的训练和推理。
+</details>
+
+---
+
+### 测验 2：`candle`（Hugging Face）与 `PyTorch` 在设计哲学上有什么区别？（理解层）
+
+**题目**: `candle`（Hugging Face）与 `PyTorch` 在设计哲学上有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`candle` 纯 Rust 实现，无 Python 依赖，支持 WASM 部署。API 更简洁、类型安全。`PyTorch` 生态更成熟、研究支持更好，但依赖 Python 运行时。
+</details>
+
+---
+
+### 测验 3：为什么 ML 推理引擎常用 Rust 重写（如 `llama.cpp` 的 Rust 绑定、`mistral.rs`）？（理解层）
+
+**题目**: 为什么 ML 推理引擎常用 Rust 重写（如 `llama.cpp` 的 Rust 绑定、`mistral.rs`）？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+推理需要低延迟、高吞吐、确定性的内存使用。Rust 的无 GC 特性避免了 Python 推理服务中的 GC 停顿，同时内存安全防止了 C++ 引擎的崩溃风险。
+</details>
+
+---
+
+### 测验 4：`ndarray` 在 Rust ML 生态中扮演什么角色？（理解层）
+
+**题目**: `ndarray` 在 Rust ML 生态中扮演什么角色？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`ndarray` 是 Rust 的多维数组库，提供类似 NumPy 的 N 维数组操作。它是许多 Rust ML 库（`candle`、`linfa`）的基础数据结构。
+</details>
+
+---
+
+### 测验 5：`ort`（ONNX Runtime Rust bindings）在模型部署中有什么优势？（理解层）
+
+**题目**: `ort`（ONNX Runtime Rust bindings）在模型部署中有什么优势？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+允许 Rust 加载和运行 ONNX 格式的模型（从 PyTorch/TensorFlow 导出），获得跨框架兼容性和硬件加速（CUDA/TensorRT/CoreML）支持。
+</details>
 
 ## 认知路径
 

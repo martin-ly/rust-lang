@@ -53,6 +53,12 @@
     - [10.4 边界测试：async drop 在 panic 时的双重取消（运行时 UB）](#104-边界测试async-drop-在-panic-时的双重取消运行时-ub)
     - [10.3 边界测试：async drop 与同步 Drop 的语义冲突（编译错误/设计问题）](#103-边界测试async-drop-与同步-drop-的语义冲突编译错误设计问题)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：`async_drop` 解决的是什么问题？（理解层）](#测验-1async_drop-解决的是什么问题理解层)
+    - [测验 2：为什么不能在 `Drop::drop` 中直接调用 `.await`？（理解层）](#测验-2为什么不能在-dropdrop-中直接调用-await理解层)
+    - [测验 3：`async_drop` 的设计挑战是什么？（理解层）](#测验-3async_drop-的设计挑战是什么理解层)
+    - [测验 4：`pin` 与 `async_drop` 有什么关系？（理解层）](#测验-4pin-与-async_drop-有什么关系理解层)
+    - [测验 5：目前有什么 workaround 可以在没有 `async_drop` 的情况下执行异步清理？（理解层）](#测验-5目前有什么-workaround-可以在没有-async_drop-的情况下执行异步清理理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -667,6 +673,67 @@ fn main() {}
 - **定理**: Async Drop：异步资源的优雅销毁 定义 ⟹ 类型安全保证
 - **定理**: Async Drop：异步资源的优雅销毁 定义 ⟹ 类型安全保证
 - **定理**: Async Drop：异步资源的优雅销毁 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`async_drop` 解决的是什么问题？（理解层）
+
+**题目**: `async_drop` 解决的是什么问题？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+允许异步类型在销毁时执行异步清理操作（如关闭网络连接、刷新缓冲区到远程存储）。目前 `Drop::drop` 是同步的，无法在 drop 中 `.await`。
+</details>
+
+---
+
+### 测验 2：为什么不能在 `Drop::drop` 中直接调用 `.await`？（理解层）
+
+**题目**: 为什么不能在 `Drop::drop` 中直接调用 `.await`？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`drop` 在编译器生成的代码中同步调用，没有异步上下文（没有 executor 来轮询 Future）。允许 `.await` 需要改变 Rust 的对象销毁语义。
+</details>
+
+---
+
+### 测验 3：`async_drop` 的设计挑战是什么？（理解层）
+
+**题目**: `async_drop` 的设计挑战是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+1) 需要确保所有路径都执行 async drop（不能遗漏）；2) 与现有的同步 `Drop` 交互；3) 在 panic/unwind 时的行为；4) 性能开销。
+
+</details>
+
+---
+
+### 测验 4：`pin` 与 `async_drop` 有什么关系？（理解层）
+
+**题目**: `pin` 与 `async_drop` 有什么关系？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+自引用异步类型通常被 `Pin`。`async_drop` 需要正确处理 `Pin<&mut Self>`，确保在异步销毁过程中内存位置保持稳定。
+</details>
+
+---
+
+### 测验 5：目前有什么 workaround 可以在没有 `async_drop` 的情况下执行异步清理？（理解层）
+
+**题目**: 目前有什么 workaround 可以在没有 `async_drop` 的情况下执行异步清理？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+显式调用 `async fn cleanup()` 并在返回前 `.await`。或使用 `scopeguard` 模式配合显式的异步作用域退出。`tokio::io::AsyncWriteExt::shutdown` 需要手动调用。
+</details>
 
 ## 认知路径
 

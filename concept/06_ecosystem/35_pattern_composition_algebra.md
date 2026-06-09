@@ -644,6 +644,66 @@ fn option_j(_: i32) -> Option<i32> { Some(10) }
 - **定理**: 模式组合代数：设计模式的结构化关联与冲突分析 定义 ⟹ 类型安全保证
 - **定理**: 模式组合代数：设计模式的结构化关联与冲突分析 定义 ⟹ 类型安全保证
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：什么是"组合子"（Combinator）？在 Rust 中常见于哪些地方？（理解层）
+
+**题目**: 什么是"组合子"（Combinator）？在 Rust 中常见于哪些地方？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+组合子是将简单函数组合成复杂函数的高阶函数。Rust 中常见于：迭代器适配器（`map`、`filter`）、parser combinator（`nom`）、future 组合（`and_then`）。
+</details>
+
+---
+
+### 测验 2：`Iterator` 的 `fold` 为什么是"catamorphism"（折叠）的具体实现？（理解层）
+
+**题目**: `Iterator` 的 `fold` 为什么是"catamorphism"（折叠）的具体实现？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`fold` 将数据结构（迭代器）递归地归约为单个值，这是函数式编程中 catamorphism 的定义。它揭示了迭代器操作的代数结构。
+</details>
+
+---
+
+### 测验 3：`Option` 和 `Result` 为什么可以被视为"幺半群"（Monoid）？（理解层）
+
+**题目**: `Option` 和 `Result` 为什么可以被视为"幺半群"（Monoid）？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+它们都有关联的二元操作（`and_then` / `or`）和单位元（`Some` / `Ok`）。这种代数结构允许它们被安全地组合和链式调用。
+</details>
+
+---
+
+### 测验 4：Rust 的 `?` 运算符在单子（Monad）理论中对应什么操作？（理解层）
+
+**题目**: Rust 的 `?` 运算符在单子（Monad）理论中对应什么操作？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`?` 对应 monadic bind（`>>=`）：从 `Result<T, E>` 中提取 `T`，若失败则提前返回 `Err`。它使错误处理代码呈线性流动，避免了嵌套 `match`。
+</details>
+
+---
+
+### 测验 5：设计模式中的"装饰器模式"（Decorator）在 Rust 中通常如何表达？（理解层）
+
+**题目**: 设计模式中的"装饰器模式"（Decorator）在 Rust 中通常如何表达？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+通过组合 + trait 实现：新类型包装原类型并实现相同 trait，在方法调用前后添加行为。`tower` 的中间件栈是装饰器模式的典型 Rust 表达。
+</details>
+
 ## 认知路径
 
 > **认知路径**: 从 Rust 核心语言特性出发，经由 **模式组合代数：设计模式的结构化关联与冲突分析** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。

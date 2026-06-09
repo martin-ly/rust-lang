@@ -49,6 +49,12 @@
     - [10.1 边界测试：Elixir 的动态类型与 Rust 的静态模式（编译错误）](#101-边界测试elixir-的动态类型与-rust-的静态模式编译错误-1)
     - [10.2 边界测试：Elixir 的进程邮箱与 Rust 的 channel（编译错误）](#102-边界测试elixir-的进程邮箱与-rust-的-channel编译错误)
     - [10.5 边界测试：Elixir 的进程隔离与 Rust 的共享内存并发（编译错误）](#105-边界测试elixir-的进程隔离与-rust-的共享内存并发编译错误)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Elixir 的 Actor 模型（进程隔离）与 Rust 的共享内存并发有什么根本区别？（理解层）](#测验-1elixir-的-actor-模型进程隔离与-rust-的共享内存并发有什么根本区别理解层)
+    - [测验 2：Elixir 的"容错设计"（Let it crash）与 Rust 的"编译期预防"有什么哲学差异？（理解层）](#测验-2elixir-的容错设计let-it-crash与-rust-的编译期预防有什么哲学差异理解层)
+    - [测验 3：Elixir 运行在 BEAM 上，为什么能达到极高的并发数（百万进程）？（理解层）](#测验-3elixir-运行在-beam-上为什么能达到极高的并发数百万进程理解层)
+    - [测验 4：Rust 的 `match` 穷尽性检查与 Elixir 的 pattern matching 在编译期行为上有什么区别？（理解层）](#测验-4rust-的-match-穷尽性检查与-elixir-的-pattern-matching-在编译期行为上有什么区别理解层)
+    - [测验 5：在需要高并发和容错的后端系统中，Elixir 和 Rust 如何互补使用？（理解层）](#测验-5在需要高并发和容错的后端系统中elixir-和-rust-如何互补使用理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -731,6 +737,66 @@ fn main() {
 ```
 
 > **修正**: Elixir/Erlang 的 **Actor 模型** 中，进程完全隔离——不共享内存，所有通信通过异步消息传递。Rust 支持 Actor 模型（`actix`），但默认是**共享内存并发**：线程共享地址空间，通过锁/原子同步。Elixir 的优势：1) 无数据竞争（无共享内存）；2) 容错（进程崩溃不影响其他进程，supervisor 重启）；3) 热代码升级。Rust 的优势：1) 性能（无消息序列化开销）；2) 细粒度控制（可选择共享或无共享）；3) 类型安全（编译期防止数据竞争）。从 Elixir 迁移到 Rust 时，需注意：1) 不再有进程隔离的保护；2) 共享状态需 `Mutex`/`RwLock`；3) 错误处理从"let it crash"变为显式 `Result` 传播。这与 Go 的 goroutine + channel（可选择共享或通信）类似——Rust 提供两种并发模型，但共享内存是默认和最高效的。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-01-threads.html)] · [来源: [Elixir Processes](https://elixir-lang.org/getting-started/processes.html)]
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Elixir 的 Actor 模型（进程隔离）与 Rust 的共享内存并发有什么根本区别？（理解层）
+
+**题目**: Elixir 的 Actor 模型（进程隔离）与 Rust 的共享内存并发有什么根本区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Elixir 进程完全隔离，只能通过异步消息传递通信，无共享内存，因此无数据竞争。Rust 允许共享内存，通过所有权和 `Send`/`Sync` 在编译期保证安全。
+</details>
+
+---
+
+### 测验 2：Elixir 的"容错设计"（Let it crash）与 Rust 的"编译期预防"有什么哲学差异？（理解层）
+
+**题目**: Elixir 的"容错设计"（Let it crash）与 Rust 的"编译期预防"有什么哲学差异？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Elixir 接受运行时错误，通过 supervisor 树重启失败进程恢复。Rust 在编译期尽可能消除错误类别（内存安全、类型错误），panic 是不可恢复状态。
+</details>
+
+---
+
+### 测验 3：Elixir 运行在 BEAM 上，为什么能达到极高的并发数（百万进程）？（理解层）
+
+**题目**: Elixir 运行在 BEAM 上，为什么能达到极高的并发数（百万进程）？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+BEAM 使用极轻量的用户态进程（~300 bytes），由 VM 调度，非 OS 线程。上下文切换无需内核参与，且 GC 按进程独立进行，无全局停顿。
+</details>
+
+---
+
+### 测验 4：Rust 的 `match` 穷尽性检查与 Elixir 的 pattern matching 在编译期行为上有什么区别？（理解层）
+
+**题目**: Rust 的 `match` 穷尽性检查与 Elixir 的 pattern matching 在编译期行为上有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust `match` 必须穷尽所有情况，遗漏会导致编译错误。Elixir pattern matching 在运行时进行，无编译期穷尽性检查，未匹配情况会导致运行时错误。
+</details>
+
+---
+
+### 测验 5：在需要高并发和容错的后端系统中，Elixir 和 Rust 如何互补使用？（理解层）
+
+**题目**: 在需要高并发和容错的后端系统中，Elixir 和 Rust 如何互补使用？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Elixir 负责高并发连接管理、容错编排、业务工作流。Rust 负责性能热点（如协议解析、加密、数据处理）作为 NIF（Erlang NIF）或独立服务通过 gRPC 通信。
+</details>
 
 ## 认知路径
 

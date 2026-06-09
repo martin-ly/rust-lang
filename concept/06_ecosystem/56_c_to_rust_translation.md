@@ -50,6 +50,12 @@
   - [五、挑战与未来方向](#五挑战与未来方向)
   - [可编译示例：使用 `bindgen` 生成 C FFI 绑定](#可编译示例使用-bindgen-生成-c-ffi-绑定)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：将 C 代码迁移到 Rust 的常见策略有哪些？（理解层）](#测验-1将-c-代码迁移到-rust-的常见策略有哪些理解层)
+    - [测验 2：`c2rust` 工具能自动完成哪些工作？它的局限性是什么？（理解层）](#测验-2c2rust-工具能自动完成哪些工作它的局限性是什么理解层)
+    - [测验 3：C 的 `void*` 与 Rust 的 `*mut c_void` 在 FFI 边界上如何对应？（理解层）](#测验-3c-的-void-与-rust-的-mut-c_void-在-ffi-边界上如何对应理解层)
+    - [测验 4：为什么 C 到 Rust 的迁移中，" unsafe 边界最小化"是最重要的原则？（理解层）](#测验-4为什么-c-到-rust-的迁移中-unsafe-边界最小化是最重要的原则理解层)
+    - [测验 5：Linux 内核的 Rust 驱动开发采用了什么增量迁移策略？（理解层）](#测验-5linux-内核的-rust-驱动开发采用了什么增量迁移策略理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -367,6 +373,67 @@ pub fn call_c_function() {
 - **定理**: C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态） 定义 ⟹ 类型安全保证
 - **定理**: C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态） 定义 ⟹ 类型安全保证
 - **定理**: C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态） 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：将 C 代码迁移到 Rust 的常见策略有哪些？（理解层）
+
+**题目**: 将 C 代码迁移到 Rust 的常见策略有哪些？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+1) 逐步替换：用 Rust 重写模块，通过 FFI 与遗留 C 代码交互；2) 完全重写：一次性替换整个项目；3) 自动翻译：`c2rust` 工具自动转换语法，再手动重构为安全 Rust。
+
+</details>
+
+---
+
+### 测验 2：`c2rust` 工具能自动完成哪些工作？它的局限性是什么？（理解层）
+
+**题目**: `c2rust` 工具能自动完成哪些工作？它的局限性是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`c2rust` 可将 C 代码语法翻译为等价的 Rust（包括指针、结构体、宏）。局限性：翻译后的代码使用大量 `unsafe` 和原始指针，仍需手动重构为安全 Rust。
+</details>
+
+---
+
+### 测验 3：C 的 `void*` 与 Rust 的 `*mut c_void` 在 FFI 边界上如何对应？（理解层）
+
+**题目**: C 的 `void*` 与 Rust 的 `*mut c_void` 在 FFI 边界上如何对应？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`c2rust` / `bindgen` 将 `void*` 映射为 `*mut c_void`。在 Rust 中通常需要将其转换为具体类型指针（通过 `as *mut T`），这需要在 `unsafe` 块中进行。
+</details>
+
+---
+
+### 测验 4：为什么 C 到 Rust 的迁移中，" unsafe 边界最小化"是最重要的原则？（理解层）
+
+**题目**: 为什么 C 到 Rust 的迁移中，" unsafe 边界最小化"是最重要的原则？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+自动翻译产生大量 `unsafe`。应通过封装将 unsafe 限制在最底层，向上提供安全的 Rust API。这允许借用检查器保护大部分代码，同时与 C 遗留代码互操作。
+</details>
+
+---
+
+### 测验 5：Linux 内核的 Rust 驱动开发采用了什么增量迁移策略？（理解层）
+
+**题目**: Linux 内核的 Rust 驱动开发采用了什么增量迁移策略？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+在现有 C 内核框架中逐步引入 Rust 驱动。Rust 代码通过安全的 FFI 包装调用 C 内核 API，利用 Rust 的内存安全保证降低驱动漏洞风险，同时保持与 C 子系统的兼容。
+</details>
 
 ## 认知路径
 

@@ -48,6 +48,12 @@
     - [10.4 边界测试：内核锁的 `spinlock` 与睡眠的互斥（运行时死锁）](#104-边界测试内核锁的-spinlock-与睡眠的互斥运行时死锁)
     - [10.3 边界测试：内核模块的 `no_std` 与 alloc 限制（编译错误）](#103-边界测试内核模块的-no_std-与-alloc-限制编译错误)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Rust for Linux 项目的核心目标是什么？（理解层）](#测验-1rust-for-linux-项目的核心目标是什么理解层)
+    - [测验 2：为什么 Linus Torvalds 对在内核中引入 Rust 持谨慎但开放的态度？（理解层）](#测验-2为什么-linus-torvalds-对在内核中引入-rust-持谨慎但开放的态度理解层)
+    - [测验 3：Rust 驱动如何与 Linux 内核的 C API 交互？（理解层）](#测验-3rust-驱动如何与-linux-内核的-c-api-交互理解层)
+    - [测验 4：目前 Linux 内核中已有哪些 Rust 代码？（理解层）](#测验-4目前-linux-内核中已有哪些-rust-代码理解层)
+    - [测验 5：Rust for Linux 对 Rust 语言本身有什么反馈影响？（理解层）](#测验-5rust-for-linux-对-rust-语言本身有什么反馈影响理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -693,6 +699,66 @@ fn main() {}
 ### 补充定理链
 
 - **定理**: Rust for Linux ：操作系统内核中的内存安全 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Rust for Linux 项目的核心目标是什么？（理解层）
+
+**题目**: Rust for Linux 项目的核心目标是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+允许在 Linux 内核中编写 Rust 驱动和模块，利用 Rust 的内存安全保证减少内核漏洞，同时保持与现有 C 代码的互操作性。
+</details>
+
+---
+
+### 测验 2：为什么 Linus Torvalds 对在内核中引入 Rust 持谨慎但开放的态度？（理解层）
+
+**题目**: 为什么 Linus Torvalds 对在内核中引入 Rust 持谨慎但开放的态度？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+支持引入更安全语言减少漏洞，但担心：1) 编译器依赖和构建复杂度；2) 维护者学习成本；3) 与 C 的 FFI 边界安全性。
+</details>
+
+---
+
+### 测验 3：Rust 驱动如何与 Linux 内核的 C API 交互？（理解层）
+
+**题目**: Rust 驱动如何与 Linux 内核的 C API 交互？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+通过 `bindgen` 生成 C 头文件的 Rust FFI 绑定，再编写安全的 Rust 包装层。`rust-for-linux` 项目提供了内核特有的 safe abstractions。
+</details>
+
+---
+
+### 测验 4：目前 Linux 内核中已有哪些 Rust 代码？（理解层）
+
+**题目**: 目前 Linux 内核中已有哪些 Rust 代码？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+截至 2026 年，已有 Rust 编写的驱动（如 Android Binder、NVIDIA GPU 驱动的部分组件）和内核子系统。数量在稳步增长。
+</details>
+
+---
+
+### 测验 5：Rust for Linux 对 Rust 语言本身有什么反馈影响？（理解层）
+
+**题目**: Rust for Linux 对 Rust 语言本身有什么反馈影响？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+推动了 `unsafe` 字段、更灵活的 FFI、更稳定的 ABI 等语言特性的优先级。内核需求正在塑造 Rust 的演进方向。
+</details>
 
 ## 认知路径
 

@@ -53,6 +53,12 @@
     - [10.5 边界测试：Kubernetes 探针配置不当导致的级联重启（运行时可用性下降）](#105-边界测试kubernetes-探针配置不当导致的级联重启运行时可用性下降)
     - [10.3 边界测试：Kubernetes 的 readiness 与 liveness 探针混淆（运行时可用性下降）](#103-边界测试kubernetes-的-readiness-与-liveness-探针混淆运行时可用性下降)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：为什么 Rust 特别适合构建容器化和云原生应用？（理解层）](#测验-1为什么-rust-特别适合构建容器化和云原生应用理解层)
+    - [测验 2：Rust 的 `tokio` runtime 与 Go 的 goroutine 在构建微服务时各有什么优劣？（理解层）](#测验-2rust-的-tokio-runtime-与-go-的-goroutine-在构建微服务时各有什么优劣理解层)
+    - [测验 3：`kube-rs` 在 Rust Kubernetes 生态中提供什么功能？（理解层）](#测验-3kube-rs-在-rust-kubernetes-生态中提供什么功能理解层)
+    - [测验 4：在 Serverless（如 AWS Lambda）环境中，Rust 相比 Python/Node.js 有什么优势和劣势？（理解层）](#测验-4在-serverless如-aws-lambda环境中rust-相比-pythonnodejs-有什么优势和劣势理解层)
+    - [测验 5：Service Mesh（如 Linkerd）为什么选择用 Rust 实现数据平面？（理解层）](#测验-5service-mesh如-linkerd为什么选择用-rust-实现数据平面理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -650,6 +656,66 @@ async fn health_check() -> &'static str {
 - **定理**: Rust 云原生生态 定义 ⟹ 类型安全保证
 - **定理**: Rust 云原生生态 定义 ⟹ 类型安全保证
 - **定理**: Rust 云原生生态 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：为什么 Rust 特别适合构建容器化和云原生应用？（理解层）
+
+**题目**: 为什么 Rust 特别适合构建容器化和云原生应用？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+二进制小（静态链接可 <10MB）、启动快（无 JVM/.NET 启动开销）、内存占用低（无 GC）、无依赖运行时，完美契合容器镜像大小和冷启动优化需求。
+</details>
+
+---
+
+### 测验 2：Rust 的 `tokio` runtime 与 Go 的 goroutine 在构建微服务时各有什么优劣？（理解层）
+
+**题目**: Rust 的 `tokio` runtime 与 Go 的 goroutine 在构建微服务时各有什么优劣？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Tokio 任务切换成本极低，适合数百万并发连接，但对阻塞操作敏感。Go goroutine 更易用，对阻塞代码更宽容（runtime 会调度 OS 线程），但 goroutine 栈内存开销更大。
+</details>
+
+---
+
+### 测验 3：`kube-rs` 在 Rust Kubernetes 生态中提供什么功能？（理解层）
+
+**题目**: `kube-rs` 在 Rust Kubernetes 生态中提供什么功能？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 的 Kubernetes 客户端库，支持 CRD（自定义资源定义）操作、Informer（事件监听）、Controller 运行时。类型安全的 K8s API 访问。
+</details>
+
+---
+
+### 测验 4：在 Serverless（如 AWS Lambda）环境中，Rust 相比 Python/Node.js 有什么优势和劣势？（理解层）
+
+**题目**: 在 Serverless（如 AWS Lambda）环境中，Rust 相比 Python/Node.js 有什么优势和劣势？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+优势：冷启动极快、内存占用小、执行速度快。劣势：编译时间长、调试困难（需交叉编译到 Linux）、生态库不如动态语言丰富。
+</details>
+
+---
+
+### 测验 5：Service Mesh（如 Linkerd）为什么选择用 Rust 实现数据平面？（理解层）
+
+**题目**: Service Mesh（如 Linkerd）为什么选择用 Rust 实现数据平面？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+数据平面需要处理所有服务间流量，对延迟极度敏感。Rust 的零成本抽象和无 GC 保证了稳定的低延迟，同时内存安全避免了 C++ 中常见的缓冲区溢出漏洞。
+</details>
 
 ## 认知路径
 

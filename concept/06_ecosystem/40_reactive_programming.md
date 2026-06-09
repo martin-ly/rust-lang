@@ -68,6 +68,12 @@
     - [9.3 边界测试：FRP 信号循环引用导致死锁（运行时错误）](#93-边界测试frp-信号循环引用导致死锁运行时错误)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：响应式编程（Reactive Programming）的核心抽象是什么？（理解层）](#测验-1响应式编程reactive-programming的核心抽象是什么理解层)
+    - [测验 2：Rust 的 `futures::Stream` 与响应式编程中的 Observable 有什么对应关系？（理解层）](#测验-2rust-的-futuresstream-与响应式编程中的-observable-有什么对应关系理解层)
+    - [测验 3：`tokio::sync::watch` 在响应式状态中有什么用途？（理解层）](#测验-3tokiosyncwatch-在响应式状态中有什么用途理解层)
+    - [测验 4：为什么 Rust 的响应式 UI 框架（如 `iced`、`egui`）通常使用立即模式（Immediate Mode）或 retained 模式？（理解层）](#测验-4为什么-rust-的响应式-ui-框架如-icedegui通常使用立即模式immediate-mode或-retained-模式理解层)
+    - [测验 5：响应式编程中的"冷流"（Cold Stream）与"热流"（Hot Stream）有什么区别？（理解层）](#测验-5响应式编程中的冷流cold-stream与热流hot-stream有什么区别理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -992,6 +998,66 @@ fn circular_signal_deadlock() {
 - **定理**: Reactive Programming & FRP（响应式编程与函数式响应编程） 定义 ⟹ 类型安全保证
 - **定理**: Reactive Programming & FRP（响应式编程与函数式响应编程） 定义 ⟹ 类型安全保证
 - **定理**: Reactive Programming & FRP（响应式编程与函数式响应编程） 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：响应式编程（Reactive Programming）的核心抽象是什么？（理解层）
+
+**题目**: 响应式编程（Reactive Programming）的核心抽象是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+数据流（Data Streams）和变化传播（Change Propagation）。当数据源变化时，依赖它的计算自动重新执行，形成声明式的数据依赖图。
+</details>
+
+---
+
+### 测验 2：Rust 的 `futures::Stream` 与响应式编程中的 Observable 有什么对应关系？（理解层）
+
+**题目**: Rust 的 `futures::Stream` 与响应式编程中的 Observable 有什么对应关系？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`Stream` 是拉取模型（pull-based）的异步数据流，消费者轮询下一个值。Observable 是推送模型（push-based），数据到达时回调订阅者。两者可通过适配器转换。
+</details>
+
+---
+
+### 测验 3：`tokio::sync::watch` 在响应式状态中有什么用途？（理解层）
+
+**题目**: `tokio::sync::watch` 在响应式状态中有什么用途？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`watch` channel 保存单个值的最新版本，多个接收者可以订阅变化。适合配置热更新、主题切换等"一写多读"的响应式状态场景。
+</details>
+
+---
+
+### 测验 4：为什么 Rust 的响应式 UI 框架（如 `iced`、`egui`）通常使用立即模式（Immediate Mode）或 retained 模式？（理解层）
+
+**题目**: 为什么 Rust 的响应式 UI 框架（如 `iced`、`egui`）通常使用立即模式（Immediate Mode）或 retained 模式？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+立即模式每帧重新构建 UI（简单、状态少），如 `egui`。Retained 模式维护 UI 树（如 `iced`），支持更复杂的动画和布局，但状态管理更复杂。
+</details>
+
+---
+
+### 测验 5：响应式编程中的"冷流"（Cold Stream）与"热流"（Hot Stream）有什么区别？（理解层）
+
+**题目**: 响应式编程中的"冷流"（Cold Stream）与"热流"（Hot Stream）有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+冷流为每个订阅者独立生成数据（如文件读取）。热流广播数据给所有当前订阅者（如 WebSocket、广播 channel），新订阅者错过之前的数据。
+</details>
 
 ## 认知路径
 

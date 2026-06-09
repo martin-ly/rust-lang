@@ -1487,3 +1487,63 @@ async fn handler() -> String {
 > 解决方案：1) 使用异步版本的 API（`tokio::fs`、`tokio::time`）；2) 将阻塞操作放到 `spawn_blocking` 线程池；3) 使用 `tokio::task::yield_now().await` 手动 yield。
 > 这与 Node.js 的 event loop（单线程，阻塞操作冻结整个应用）或 Go 的 goroutine（阻塞操作挂起 goroutine，调度器切换到其他 goroutine）不同——Rust 的 async 任务不自动处理阻塞，需要开发者显式选择。
 > [来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Rust 在哪些应用领域表现特别突出？（理解层）
+
+**题目**: Rust 在哪些应用领域表现特别突出？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+系统编程（OS、浏览器引擎）、网络服务（高并发后端）、嵌入式（裸机、IoT）、区块链（智能合约、节点）、游戏引擎、CLI 工具、WebAssembly。
+</details>
+
+---
+
+### 测验 2：为什么 Rust 目前不是数据科学/机器学习的主流语言？（理解层）
+
+**题目**: 为什么 Rust 目前不是数据科学/机器学习的主流语言？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Python 拥有更成熟的生态（Jupyter、PyTorch、NumPy）、研究者熟悉度和快速原型能力。Rust 正在通过 `polars`、`candle` 等库进入 ML 基础设施层。
+</details>
+
+---
+
+### 测验 3：Rust 在 Web 开发中的定位是什么？（理解层）
+
+**题目**: Rust 在 Web 开发中的定位是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+高性能后端（API 服务、网关）、WebAssembly 前端计算密集型模块。全栈 Rust 框架（Leptos、Yew）正在发展，但生态成熟度不如 JS/React。
+</details>
+
+---
+
+### 测验 4：嵌入式开发中选择 Rust 而不是 C 的主要理由是什么？（理解层）
+
+**题目**: 嵌入式开发中选择 Rust 而不是 C 的主要理由是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+内存安全（消除悬垂指针和缓冲区溢出）、 fearless 并发（编译期防止数据竞争）、现代工具链（cargo、测试）。许多嵌入式bug在编译期就被消除。
+</details>
+
+---
+
+### 测验 5：Rust 的 `no_std` 对应用领域有什么扩展？（理解层）
+
+**题目**: Rust 的 `no_std` 对应用领域有什么扩展？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+使 Rust 可用于没有操作系统的环境（裸机、引导加载程序、固件）。结合 `alloc` 可在无标准库但有堆分配的环境中运行。
+</details>

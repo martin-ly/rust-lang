@@ -459,6 +459,66 @@ fn main() {}
 - **定理**: 数据库系统：Rust 在存储引擎中的语义 定义 ⟹ 类型安全保证
 - **定理**: 数据库系统：Rust 在存储引擎中的语义 定义 ⟹ 类型安全保证
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Rust 中为什么很少使用传统 ORM（如 Django ORM/Hibernate）的"隐式查询"模式？（理解层）
+
+**题目**: Rust 中为什么很少使用传统 ORM（如 Django ORM/Hibernate）的"隐式查询"模式？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 的显式哲学和数据所有权使延迟加载（lazy loading）难以安全实现。Rust ORM 如 `diesel` 显式声明查询，编译期检查 N+1 和类型安全。
+</details>
+
+---
+
+### 测验 2：`sled` 和 `rocksdb` 在 Rust 嵌入式数据库中各有什么特点？（理解层）
+
+**题目**: `sled` 和 `rocksdb` 在 Rust 嵌入式数据库中各有什么特点？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`sled` 是纯 Rust 编写的 Bw-Tree 嵌入式 KV 存储，API 简单。`rocksdb` 是 Facebook 的 LSM-Tree 存储，通过 FFI 绑定，性能更高、功能更丰富（列族、事务）。
+</details>
+
+---
+
+### 测验 3：Rust 的数据库连接池为什么通常基于 `deadpool` 或 `bb8` 而非自己实现？（理解层）
+
+**题目**: Rust 的数据库连接池为什么通常基于 `deadpool` 或 `bb8` 而非自己实现？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+连接池需要处理并发获取、超时、健康检查、优雅关闭等复杂逻辑。成熟库经过社区验证，避免自己实现中的竞态条件和资源泄漏。
+</details>
+
+---
+
+### 测验 4：在 Rust 中实现数据库迁移（Migration）通常使用什么工具？（理解层）
+
+**题目**: 在 Rust 中实现数据库迁移（Migration）通常使用什么工具？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`sqlx-cli` 的 `migrate` 子命令或 `diesel_cli`。两者都支持版本化迁移文件、回滚、运行状态追踪，将 schema 变更纳入版本控制。
+</details>
+
+---
+
+### 测验 5：Rust 的强类型如何帮助防止 SQL 注入？（理解层）
+
+**题目**: Rust 的强类型如何帮助防止 SQL 注入？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+参数化查询（prepared statements）将用户输入作为参数绑定，而非字符串拼接。`sqlx` 在编译期验证查询语法和参数类型，从根本上消除注入可能。
+</details>
+
 ## 认知路径
 
 > **认知路径**: 从 Rust 核心语言特性出发，经由 **数据库系统：Rust 在存储引擎中的语义** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。

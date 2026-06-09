@@ -94,6 +94,12 @@ fn main() {
     - [8.3 边界测试：未处理 CSV 解析中的畸形数据](#83-边界测试未处理-csv-解析中的畸形数据)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Rust 在数据科学领域的定位与 Python 有什么不同？（理解层）](#测验-1rust-在数据科学领域的定位与-python-有什么不同理解层)
+    - [测验 2：`polars` 相比 `pandas` 在性能上的主要优势来源是什么？（理解层）](#测验-2polars-相比-pandas-在性能上的主要优势来源是什么理解层)
+    - [测验 3：为什么数据科学工作流中的 ETL 步骤特别适合用 Rust 重写？（理解层）](#测验-3为什么数据科学工作流中的-etl-步骤特别适合用-rust-重写理解层)
+    - [测验 4：`plotters` 在 Rust 数据可视化中与 Python 的 `matplotlib` 有什么对应关系？（理解层）](#测验-4plotters-在-rust-数据可视化中与-python-的-matplotlib-有什么对应关系理解层)
+    - [测验 5：Rust 如何通过 Arrow FFI 与 Python 的 `pyarrow` / `pandas` 零拷贝交换数据？（理解层）](#测验-5rust-如何通过-arrow-ffi-与-python-的-pyarrow--pandas-零拷贝交换数据理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -556,6 +562,67 @@ fn robust_csv_read() -> Result<DataFrame, PolarsError> {
 - **定理**: Rust for Data Science（Rust 数据科学） 定义 ⟹ 类型安全保证
 - **定理**: Rust for Data Science（Rust 数据科学） 定义 ⟹ 类型安全保证
 - **定理**: Rust for Data Science（Rust 数据科学） 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Rust 在数据科学领域的定位与 Python 有什么不同？（理解层）
+
+**题目**: Rust 在数据科学领域的定位与 Python 有什么不同？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 定位为高性能基础设施（数据管道、特征工程、模型推理服务），Python 定位为探索性分析、原型设计和模型训练。两者通过 PyO3/Arrow 互补。
+</details>
+
+---
+
+### 测验 2：`polars` 相比 `pandas` 在性能上的主要优势来源是什么？（理解层）
+
+**题目**: `polars` 相比 `pandas` 在性能上的主要优势来源是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+1) Rust 实现无 GIL，真正的多线程查询；2) Apache Arrow 列式内存格式，SIMD 向量化；3) 查询优化器（谓词下推、投影下推）。
+
+</details>
+
+---
+
+### 测验 3：为什么数据科学工作流中的 ETL 步骤特别适合用 Rust 重写？（理解层）
+
+**题目**: 为什么数据科学工作流中的 ETL 步骤特别适合用 Rust 重写？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+ETL 是 I/O 和 CPU 密集型，处理大量数据。Rust 的性能和内存效率可将 ETL 时间从小时缩短到分钟，同时类型安全防止数据类型漂移。
+</details>
+
+---
+
+### 测验 4：`plotters` 在 Rust 数据可视化中与 Python 的 `matplotlib` 有什么对应关系？（理解层）
+
+**题目**: `plotters` 在 Rust 数据可视化中与 Python 的 `matplotlib` 有什么对应关系？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`plotters` 是 Rust 的绘图库，支持折线图、散点图、直方图、热力图等。API 更底层但更灵活，支持 WASM 渲染和自定义后端。
+</details>
+
+---
+
+### 测验 5：Rust 如何通过 Arrow FFI 与 Python 的 `pyarrow` / `pandas` 零拷贝交换数据？（理解层）
+
+**题目**: Rust 如何通过 Arrow FFI 与 Python 的 `pyarrow` / `pandas` 零拷贝交换数据？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Arrow 的列式内存格式是语言无关的。Rust `arrow-rs` 和 Python `pyarrow` 共享同一内存布局，通过 C 指针传递数据，无需序列化/反序列化。
+</details>
 
 ## 认知路径
 

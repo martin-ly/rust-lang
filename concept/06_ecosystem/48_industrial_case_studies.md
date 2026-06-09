@@ -331,6 +331,66 @@ Firecracker 是 AWS 开发的**微虚拟机监视器 (MicroVMM)**，用于 AWS L
 - **定理**: Rust 工业级案例研究 定义 ⟹ 类型安全保证
 - **定理**: Rust 工业级案例研究 定义 ⟹ 类型安全保证
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Dropbox 为什么将核心文件同步引擎从 Go 迁移到 Rust？（理解层）
+
+**题目**: Dropbox 为什么将核心文件同步引擎从 Go 迁移到 Rust？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Go 的 GC 在同步大量小文件时引入不可预测的延迟和内存占用。Rust 的无 GC 特性和确定性内存使用使同步引擎性能更稳定、资源占用更可预测。
+</details>
+
+---
+
+### 测验 2：Discord 为什么将其消息路由服务从 Go 重写为 Rust？（理解层）
+
+**题目**: Discord 为什么将其消息路由服务从 Go 重写为 Rust？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Go 的 GC 在处理数百万并发连接和大量小对象时产生显著停顿。Rust 消除了 GC 停顿，延迟 tail（P99）降低了几个数量级。
+</details>
+
+---
+
+### 测验 3：AWS Firecracker 为什么选择 Rust 作为实现语言？（理解层）
+
+**题目**: AWS Firecracker 为什么选择 Rust 作为实现语言？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Firecracker 是轻量级虚拟化（MicroVM），需要极高的安全隔离和快速启动。Rust 的内存安全消除了 hypervisor 中的常见漏洞类别，同时性能接近 C。
+</details>
+
+---
+
+### 测验 4：Cloudflare 在哪些基础设施组件中使用了 Rust？（理解层）
+
+**题目**: Cloudflare 在哪些基础设施组件中使用了 Rust？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Workers（边缘计算运行时）、QUIC 协议栈（Quiche）、HTTP 代理、TLS 证书管理。Rust 的安全性和性能适合处理海量网络流量。
+</details>
+
+---
+
+### 测验 5：这些工业案例的共同点是什么？它们选择 Rust 的核心驱动力是什么？（理解层）
+
+**题目**: 这些工业案例的共同点是什么？它们选择 Rust 的核心驱动力是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+核心驱动力：1) 内存安全降低漏洞风险；2) 无 GC 保证确定性的性能和资源使用；3)  fearless 并发利用多核；4) 现代工具链提升开发效率。共同点是都运行在性能和安全关键的生产环境。
+</details>
+
 ## 认知路径
 
 > **认知路径**: 从 Rust 核心语言特性出发，经由 **Rust 工业级案例研究** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。

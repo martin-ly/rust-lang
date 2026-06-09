@@ -75,6 +75,12 @@
     - [10.4 边界测试：CPS 变换与 Rust 的 `?` 运算符（编译错误）](#104-边界测试cps-变换与-rust-的--运算符编译错误)
     - [10.5 边界测试：CPS 变换中的栈溢出（运行时 panic）](#105-边界测试cps-变换中的栈溢出运行时-panic)
     - [10.3 边界测试：尾递归与 Rust 的 TCO 缺失（运行时栈溢出）](#103-边界测试尾递归与-rust-的-tco-缺失运行时栈溢出)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：什么是"执行模型同构"（Execution Model Isomorphism）？为什么这个概念对理解 Rust 很重要？（理解层）](#测验-1什么是执行模型同构execution-model-isomorphism为什么这个概念对理解-rust-很重要理解层)
+    - [测验 2：Rust 的 OS 线程（`std::thread`）与 goroutine 在调度模型上有什么根本区别？（理解层）](#测验-2rust-的-os-线程stdthread与-goroutine-在调度模型上有什么根本区别理解层)
+    - [测验 3：Rust 的 `async/await` 状态机与 Erlang/Elixir 的 Actor 模型有什么本质区别？（理解层）](#测验-3rust-的-asyncawait-状态机与-erlangelixir-的-actor-模型有什么本质区别理解层)
+    - [测验 4：为什么说回调地狱（Callback Hell）与 `async/await` 在表达能力上是同构的？（理解层）](#测验-4为什么说回调地狱callback-hell与-asyncawait-在表达能力上是同构的理解层)
+    - [测验 5：Rust 的 `Future` trait 的 `poll` 模型与 JavaScript Promise 的推送模型有什么不同？（理解层）](#测验-5rust-的-future-trait-的-poll-模型与-javascript-promise-的推送模型有什么不同理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -897,6 +903,66 @@ fn main() {
 > 2024 年 Rust 社区讨论过 `become` 关键字（显式尾调用），但尚未稳定。
 > [来源: [Rust Reference — Tail Expressions](https://doc.rust-lang.org/reference/expressions.html#tail-expressions)] ·
 > [来源: [Rust Internals](https://internals.rust-lang.org/)]
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：什么是"执行模型同构"（Execution Model Isomorphism）？为什么这个概念对理解 Rust 很重要？（理解层）
+
+**题目**: 什么是"执行模型同构"（Execution Model Isomorphism）？为什么这个概念对理解 Rust 很重要？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+指不同语言/运行时（OS 线程、绿色线程、async 任务、回调）在表达能力上的等价性。理解同构帮助选择最适合场景的实现而不损失能力。
+</details>
+
+---
+
+### 测验 2：Rust 的 OS 线程（`std::thread`）与 goroutine 在调度模型上有什么根本区别？（理解层）
+
+**题目**: Rust 的 OS 线程（`std::thread`）与 goroutine 在调度模型上有什么根本区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+OS 线程由内核调度，切换成本高（~1µs），适合 CPU 密集型。goroutine 由 Go runtime 在用户态调度（M:N 模型），切换成本低（~100ns），适合高并发 IO。
+</details>
+
+---
+
+### 测验 3：Rust 的 `async/await` 状态机与 Erlang/Elixir 的 Actor 模型有什么本质区别？（理解层）
+
+**题目**: Rust 的 `async/await` 状态机与 Erlang/Elixir 的 Actor 模型有什么本质区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+async 状态机是协作式调度，任务间共享地址空间，需编译期保证无数据竞争。Actor 模型是消息传递隔离内存，每个 actor 串行处理消息，天然无共享状态。
+</details>
+
+---
+
+### 测验 4：为什么说回调地狱（Callback Hell）与 `async/await` 在表达能力上是同构的？（理解层）
+
+**题目**: 为什么说回调地狱（Callback Hell）与 `async/await` 在表达能力上是同构的？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`async/await` 是回调的语法糖，编译器将异步函数转换为状态机（本质是回调链）。`await` 点对应状态转换，两者表达能力等价，但 `async/await` 可读性更好。
+</details>
+
+---
+
+### 测验 5：Rust 的 `Future` trait 的 `poll` 模型与 JavaScript Promise 的推送模型有什么不同？（理解层）
+
+**题目**: Rust 的 `Future` trait 的 `poll` 模型与 JavaScript Promise 的推送模型有什么不同？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`poll` 是拉取模型（lazy）：Future 不执行直到被 executor 轮询。Promise 是推送模型（eager）：创建后立即开始执行。`poll` 模型更灵活，支持取消和组合。
+</details>
 
 ## 认知路径
 

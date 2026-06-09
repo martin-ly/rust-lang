@@ -76,6 +76,12 @@
     - [8.3 边界测试：多线程 ROS2 节点共享可变状态（数据竞争）](#83-边界测试多线程-ros2-节点共享可变状态数据竞争)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：为什么 Rust 在机器人学（Robotics）领域越来越受关注？（理解层）](#测验-1为什么-rust-在机器人学robotics领域越来越受关注理解层)
+    - [测验 2：`ROS 2`（机器人操作系统）对 Rust 的支持现状如何？（理解层）](#测验-2ros-2机器人操作系统对-rust-的支持现状如何理解层)
+    - [测验 3：实时系统（Real-Time）中，为什么 Rust 比 Python/Java 更适合？（理解层）](#测验-3实时系统real-time中为什么-rust-比-pythonjava-更适合理解层)
+    - [测验 4：`nalgebra` 和 `nphysics` 在 Rust 机器人学中分别提供什么功能？（理解层）](#测验-4nalgebra-和-nphysics-在-rust-机器人学中分别提供什么功能理解层)
+    - [测验 5：机器人学中的"传感器融合"（Sensor Fusion）在 Rust 中通常如何实现？（理解层）](#测验-5机器人学中的传感器融合sensor-fusion在-rust-中通常如何实现理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -910,6 +916,66 @@ impl GoodNode {
 - **定理**: Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 定义 ⟹ 类型安全保证
 - **定理**: Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 定义 ⟹ 类型安全保证
 - **定理**: Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：为什么 Rust 在机器人学（Robotics）领域越来越受关注？（理解层）
+
+**题目**: 为什么 Rust 在机器人学（Robotics）领域越来越受关注？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+实时性要求（确定性延迟、无 GC 停顿）、内存安全（避免机器人失控）、并发安全（传感器、控制器、规划器并行）。DARPA 和 NASA 已资助 Rust 机器人项目。
+</details>
+
+---
+
+### 测验 2：`ROS 2`（机器人操作系统）对 Rust 的支持现状如何？（理解层）
+
+**题目**: `ROS 2`（机器人操作系统）对 Rust 的支持现状如何？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+通过 `rclrs` crate 提供 Rust 客户端库，支持节点、发布/订阅、服务、参数等 ROS 2 核心功能。Rust 节点可与 C++/Python 节点互操作。
+</details>
+
+---
+
+### 测验 3：实时系统（Real-Time）中，为什么 Rust 比 Python/Java 更适合？（理解层）
+
+**题目**: 实时系统（Real-Time）中，为什么 Rust 比 Python/Java 更适合？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+实时系统要求最坏情况执行时间（WCET）可预测。Python/Java 的 GC 引入不可预测停顿。Rust 无 GC，内存分配可控，满足硬实时约束。
+</details>
+
+---
+
+### 测验 4：`nalgebra` 和 `nphysics` 在 Rust 机器人学中分别提供什么功能？（理解层）
+
+**题目**: `nalgebra` 和 `nphysics` 在 Rust 机器人学中分别提供什么功能？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`nalgebra` 提供线性代数（向量、矩阵、变换）。`nphysics` 提供物理模拟（刚体动力学、碰撞检测）。两者都是纯 Rust，类型安全且无 FFI 开销。
+</details>
+
+---
+
+### 测验 5：机器人学中的"传感器融合"（Sensor Fusion）在 Rust 中通常如何实现？（理解层）
+
+**题目**: 机器人学中的"传感器融合"（Sensor Fusion）在 Rust 中通常如何实现？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+使用卡尔曼滤波器（`kalman` crate）或粒子滤波器融合多传感器数据（IMU、激光雷达、摄像头）。Rust 的类型系统帮助确保数据时间戳和单位一致性。
+</details>
 
 ## 认知路径
 

@@ -49,6 +49,12 @@
     - [10.2 边界测试：JavaScript 的闭包变量捕获与 Rust 的所有权（编译错误）](#102-边界测试javascript-的闭包变量捕获与-rust-的所有权编译错误)
     - [10.3 边界测试：JavaScript 的 `this` 动态绑定与 Rust 的方法调用（编译错误）](#103-边界测试javascript-的-this-动态绑定与-rust-的方法调用编译错误)
     - [10.4 边界测试：JavaScript 的弱类型与 Rust 的强制类型（编译错误）](#104-边界测试javascript-的弱类型与-rust-的强制类型编译错误)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Rust 和 JavaScript 在内存管理上的根本区别是什么？（理解层）](#测验-1rust-和-javascript-在内存管理上的根本区别是什么理解层)
+    - [测验 2：JavaScript 的 `Promise` 与 Rust 的 `Future` 在语义上有什么区别？（理解层）](#测验-2javascript-的-promise-与-rust-的-future-在语义上有什么区别理解层)
+    - [测验 3：为什么 Rust 编译为 WebAssembly 后可以与 JavaScript 互操作？WASM 在这两种语言间扮演什么角色？（理解层）](#测验-3为什么-rust-编译为-webassembly-后可以与-javascript-互操作wasm-在这两种语言间扮演什么角色理解层)
+    - [测验 4：JavaScript 的"原型继承"与 Rust 的 `trait` 系统在代码复用上有什么区别？（理解层）](#测验-4javascript-的原型继承与-rust-的-trait-系统在代码复用上有什么区别理解层)
+    - [测验 5：Node.js 的 `require`/`import` 模块系统与 Rust 的 `crate`/`mod` 系统有什么主要区别？（理解层）](#测验-5nodejs-的-requireimport-模块系统与-rust-的-cratemod-系统有什么主要区别理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -588,6 +594,66 @@ fn main() {
 ```
 
 > **修正**: JavaScript 的**弱类型**系统允许大量隐式转换：`"5" + 3` → `"53"`、`"5" - 3` → `2`、`true + 1` → `2`。这些规则复杂且易错（`[] + {}` → `"[object Object]"`）。Rust 是**强类型**的：几乎所有操作都要求操作数类型匹配，无隐式转换（`i32` → `u32` 需 `as`，`String` → `&str` 需 `&` 或 `Deref`）。这是设计哲学的根本差异：JavaScript 追求灵活和快速开发，Rust 追求安全和可维护。从 JavaScript 迁移到 Rust 的开发者常感"繁琐"，但类型错误在编译期被捕获，而非运行期成为 Heisenbug。这与 Python 的隐式转换（类似 JavaScript）或 Go 的强类型（类似 Rust，但有隐式接口实现）类似——Rust 在强类型谱系中属于最严格的一端。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)] · [来源: [JavaScript Type Coercion](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Type_coercion)]
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Rust 和 JavaScript 在内存管理上的根本区别是什么？（理解层）
+
+**题目**: Rust 和 JavaScript 在内存管理上的根本区别是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 编译期所有权系统，无 GC，内存释放确定。JavaScript 垃圾回收，自动管理但可能有停顿和内存泄漏（循环引用）。
+</details>
+
+---
+
+### 测验 2：JavaScript 的 `Promise` 与 Rust 的 `Future` 在语义上有什么区别？（理解层）
+
+**题目**: JavaScript 的 `Promise` 与 Rust 的 `Future` 在语义上有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Promise 是立即执行且不可变的（eager）。`Future` 是惰性计算的（lazy），需 executor 轮询才推进，可取消和组合。
+</details>
+
+---
+
+### 测验 3：为什么 Rust 编译为 WebAssembly 后可以与 JavaScript 互操作？WASM 在这两种语言间扮演什么角色？（理解层）
+
+**题目**: 为什么 Rust 编译为 WebAssembly 后可以与 JavaScript 互操作？WASM 在这两种语言间扮演什么角色？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+WASM 是低级别字节码，两者都可编译为目标。JS 调用 WASM 导出的函数，WASM 通过 `wasm-bindgen` 调用 JS API。WASM 作为安全沙箱桥梁。
+</details>
+
+---
+
+### 测验 4：JavaScript 的"原型继承"与 Rust 的 `trait` 系统在代码复用上有什么区别？（理解层）
+
+**题目**: JavaScript 的"原型继承"与 Rust 的 `trait` 系统在代码复用上有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+JS 原型继承是运行时的对象链接，可动态修改。Rust trait 是编译期的静态接口，实现后不可变，类型检查在编译期完成。
+</details>
+
+---
+
+### 测验 5：Node.js 的 `require`/`import` 模块系统与 Rust 的 `crate`/`mod` 系统有什么主要区别？（理解层）
+
+**题目**: Node.js 的 `require`/`import` 模块系统与 Rust 的 `crate`/`mod` 系统有什么主要区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 模块系统是编译期静态的，路径和可见性由编译器解析。Node.js 模块解析在运行时，支持动态 `require()` 和循环依赖。
+</details>
 
 ## 认知路径
 

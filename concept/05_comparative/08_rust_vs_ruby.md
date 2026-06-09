@@ -1,5 +1,4 @@
 > **内容分级**: [综述级]
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Rust vs Ruby：性能与表达力的两极
@@ -50,6 +49,12 @@
     - [10.3 边界测试：Ruby 的 duck typing 与 Rust 的 trait bound（编译错误）](#103-边界测试ruby-的-duck-typing-与-rust-的-trait-bound编译错误)
     - [10.4 边界测试：Ruby 的 open classes 与 Rust 的孤儿规则（编译错误）](#104-边界测试ruby-的-open-classes-与-rust-的孤儿规则编译错误)
     - [10.3 边界测试：Ruby 的开放类与 Rust 的孤儿规则冲突（编译错误）](#103-边界测试ruby-的开放类与-rust-的孤儿规则冲突编译错误)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Ruby 的"鸭子类型"与 Rust 的 trait 系统在运行时行为上有什么不同？（理解层）](#测验-1ruby-的鸭子类型与-rust-的-trait-系统在运行时行为上有什么不同理解层)
+    - [测验 2：Ruby 的 GIL（全局解释器锁）与 Rust 的并发模型有什么根本区别？（理解层）](#测验-2ruby-的-gil全局解释器锁与-rust-的并发模型有什么根本区别理解层)
+    - [测验 3：Ruby on Rails 的"约定优于配置"与 Rust 的显式哲学有什么对比？（理解层）](#测验-3ruby-on-rails-的约定优于配置与-rust-的显式哲学有什么对比理解层)
+    - [测验 4：为什么 Ruby 适合快速原型，而 Rust 更适合长期维护的基础设施？（理解层）](#测验-4为什么-ruby-适合快速原型而-rust-更适合长期维护的基础设施理解层)
+    - [测验 5：Rust 如何通过 `rutie` 或 `helix` 与 Ruby 互操作？（理解层）](#测验-5rust-如何通过-rutie-或-helix-与-ruby-互操作理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -647,6 +652,66 @@ fn main() {
 
 > **修正**: Rust 的**孤儿规则**（orphan rules）要求：为类型 `T` 实现 trait `Trait` 时，`T` 或 `Trait` 至少有一个定义在当前 crate 中。这防止了：1) 两个 crate 为同一类型实现同一 trait（冲突实现）；2) 远程 crate 的类型被意外添加行为。Ruby 的**开放类**（open classes）允许任意扩展：`class String; def greet; ...; end; end`。Rust 的替代方案：1) **newtype 模式**：`struct MyString(String); impl Greet for MyString`；2) **wrapper trait**：`trait StringExt { fn greet(&self); } impl StringExt for String`。这与 Haskell 的孤儿实例（允许但警告，或需 `{-# OVERLAPPABLE #-}`）或 Swift 的 extension（允许为外部类型添加 protocol 实现，但需导入）不同——Rust 的孤儿规则在编译期强制执行，避免链接期冲突。[来源: [Rust Reference — Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-02-traits.html)]
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Ruby 的"鸭子类型"与 Rust 的 trait 系统在运行时行为上有什么不同？（理解层）
+
+**题目**: Ruby 的"鸭子类型"与 Rust 的 trait 系统在运行时行为上有什么不同？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Ruby 在运行时检查方法是否存在，找不到方法时抛出 `NoMethodError`。Rust 在编译期通过 trait bound 检查，错误在编译期捕获。
+</details>
+
+---
+
+### 测验 2：Ruby 的 GIL（全局解释器锁）与 Rust 的并发模型有什么根本区别？（理解层）
+
+**题目**: Ruby 的 GIL（全局解释器锁）与 Rust 的并发模型有什么根本区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Ruby 的 GIL 阻止多线程真正并行执行 CPU 代码。Rust 无 GIL，线程可真正并行，`Send`/`Sync` trait 在编译期防止数据竞争。
+</details>
+
+---
+
+### 测验 3：Ruby on Rails 的"约定优于配置"与 Rust 的显式哲学有什么对比？（理解层）
+
+**题目**: Ruby on Rails 的"约定优于配置"与 Rust 的显式哲学有什么对比？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rails 通过隐式约定减少代码量。Rust 强调显式：所有类型、所有权、错误处理都需显式声明，编译器据此保证安全，牺牲了部分开发速度换取可靠性。
+</details>
+
+---
+
+### 测验 4：为什么 Ruby 适合快速原型，而 Rust 更适合长期维护的基础设施？（理解层）
+
+**题目**: 为什么 Ruby 适合快速原型，而 Rust 更适合长期维护的基础设施？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Ruby 动态类型和元编程允许快速迭代。Rust 的静态类型和编译期检查在大规模代码库中更能防止重构引入 bug，性能也更适合基础设施。
+</details>
+
+---
+
+### 测验 5：Rust 如何通过 `rutie` 或 `helix` 与 Ruby 互操作？（理解层）
+
+**题目**: Rust 如何通过 `rutie` 或 `helix` 与 Ruby 互操作？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+通过 Ruby C API 将 Rust 编译为 Ruby 原生扩展（`.so`/`.dll`）。Rust 负责性能热点，Ruby 负责业务逻辑和快速迭代。
+</details>
+
 ## 认知路径
 
 > **认知路径**: 从 L0 基础概念出发，经由本节的 **Rust vs Ruby：性能与表达力的两极** 核心原理，通向 L2 进阶模式与 L3 工程实践。
@@ -660,9 +725,7 @@ fn main() {
 | Rust vs Ruby：性能与表达力的两极 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > **过渡**: 掌握 Rust vs Ruby：性能与表达力的两极 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 Rust vs Ruby：性能与表达力的两极 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: Rust vs Ruby：性能与表达力的两极 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界

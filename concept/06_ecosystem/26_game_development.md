@@ -50,6 +50,12 @@
     - [10.5 边界测试：ECS 的 archetype 变更与迭代器失效（运行时 panic/UB）](#105-边界测试ecs-的-archetype-变更与迭代器失效运行时-panicub)
     - [10.3 边界测试：Bevy ECS 的 system 参数顺序与冲突（编译错误）](#103-边界测试bevy-ecs-的-system-参数顺序与冲突编译错误)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Rust 游戏开发中，`bevy_ecs` 的 archetype-based 存储相比传统 ECS 有什么优势？（理解层）](#测验-1rust-游戏开发中bevy_ecs-的-archetype-based-存储相比传统-ecs-有什么优势理解层)
+    - [测验 2：`winit` 在 Rust 游戏生态中提供什么功能？（理解层）](#测验-2winit-在-rust-游戏生态中提供什么功能理解层)
+    - [测验 3：Rust 的 `gltf` crate 在游戏资产管道中有什么用途？（理解层）](#测验-3rust-的-gltf-crate-在游戏资产管道中有什么用途理解层)
+    - [测验 4：为什么游戏开发中的"热重载"（Hot Reloading）在 Rust 中比 C# 更难实现？（理解层）](#测验-4为什么游戏开发中的热重载hot-reloading在-rust-中比-c-更难实现理解层)
+    - [测验 5：`hecs` 与 `bevy_ecs` 在 ECS 设计上有什么区别？（理解层）](#测验-5hecs-与-bevy_ecs-在-ecs-设计上有什么区别理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -634,6 +640,66 @@ fn main() {
 - **定理**: Rust 游戏开发 定义 ⟹ 类型安全保证
 - **定理**: Rust 游戏开发 定义 ⟹ 类型安全保证
 - **定理**: Rust 游戏开发 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Rust 游戏开发中，`bevy_ecs` 的 archetype-based 存储相比传统 ECS 有什么优势？（理解层）
+
+**题目**: Rust 游戏开发中，`bevy_ecs` 的 archetype-based 存储相比传统 ECS 有什么优势？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+相同 archetype（相同组件组合）的实体在内存中连续存储，极大提升 cache locality 和系统迭代速度。传统 ECS 用稀疏集或哈希表，缓存效率较低。
+</details>
+
+---
+
+### 测验 2：`winit` 在 Rust 游戏生态中提供什么功能？（理解层）
+
+**题目**: `winit` 在 Rust 游戏生态中提供什么功能？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+跨平台窗口创建和事件循环抽象。处理键盘、鼠标、游戏手柄输入，以及窗口管理（创建、缩放、全屏）。是大多数 Rust 游戏引擎的底层依赖。
+</details>
+
+---
+
+### 测验 3：Rust 的 `gltf` crate 在游戏资产管道中有什么用途？（理解层）
+
+**题目**: Rust 的 `gltf` crate 在游戏资产管道中有什么用途？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+加载 glTF 2.0 格式的 3D 模型（网格、材质、动画、场景图）。glTF 是 Khronos 标准，被誉为"3D 界的 JPEG"，是游戏资产交换的标准格式。
+</details>
+
+---
+
+### 测验 4：为什么游戏开发中的"热重载"（Hot Reloading）在 Rust 中比 C# 更难实现？（理解层）
+
+**题目**: 为什么游戏开发中的"热重载"（Hot Reloading）在 Rust 中比 C# 更难实现？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 编译为原生机器码且静态链接，没有 CLR/JVM 的动态加载能力。热重载通常通过动态库（`dylib`）+ 状态序列化/反序列化实现，工具链更复杂。
+</details>
+
+---
+
+### 测验 5：`hecs` 与 `bevy_ecs` 在 ECS 设计上有什么区别？（理解层）
+
+**题目**: `hecs` 与 `bevy_ecs` 在 ECS 设计上有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`hecs` 是轻量极简 ECS 库，无渲染/音频等功能，可嵌入任何项目。`bevy_ecs` 是 Bevy 引擎的一部分，功能更全面（系统图、渲染提取、反射），但耦合度更高。
+</details>
 
 ## 认知路径
 

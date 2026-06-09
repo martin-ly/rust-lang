@@ -394,6 +394,66 @@ fn open_resource_fixed(url: &str) -> Result<Resource, Error> {
 - **定理**: 操作系统与内核：Rust 的系统级编程 定义 ⟹ 类型安全保证
 - **定理**: 操作系统与内核：Rust 的系统级编程 定义 ⟹ 类型安全保证
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Rust 为什么适合编写操作系统内核？相比 C 有什么优势？（理解层）
+
+**题目**: Rust 为什么适合编写操作系统内核？相比 C 有什么优势？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+内存安全（消除 use-after-free、缓冲区溢出）、 fearless 并发（编译期防止数据竞争）、现代工具链（cargo、测试）。Redox OS 和 Linux 内核 Rust 驱动验证了这一点。
+</details>
+
+---
+
+### 测验 2：`no_std` + `alloc` 在操作系统开发中意味着什么？（理解层）
+
+**题目**: `no_std` + `alloc` 在操作系统开发中意味着什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+不使用标准库（无文件系统、网络、线程等 OS 抽象），但可使用分配器（`alloc` crate）进行堆分配。裸机环境中需自行实现 `GlobalAlloc`。
+</details>
+
+---
+
+### 测验 3：Rust 的 `volatile` 读写（`core::ptr::read_volatile`）在设备驱动中有什么用途？（理解层）
+
+**题目**: Rust 的 `volatile` 读写（`core::ptr::read_volatile`）在设备驱动中有什么用途？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+内存映射 I/O（MMIO）寄存器可能被硬件异步修改，编译器不能优化掉读取操作。`volatile` 保证每次读写都实际访问内存地址。
+</details>
+
+---
+
+### 测验 4：为什么在操作系统上下文中，`unsafe` 的使用比用户态程序更频繁？（理解层）
+
+**题目**: 为什么在操作系统上下文中，`unsafe` 的使用比用户态程序更频繁？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+内核需要直接操作硬件（端口 I/O、页表、中断描述符表），这些操作无法被 Rust 的安全抽象覆盖。但通过最小化 unsafe 边界和封装安全 API，可降低风险。
+</details>
+
+---
+
+### 测验 5：Redox OS 的微内核设计相比 Linux 的宏内核有什么优势和挑战？（理解层）
+
+**题目**: Redox OS 的微内核设计相比 Linux 的宏内核有什么优势和挑战？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+优势：驱动在用户态运行，崩溃不会导致整个系统宕机，安全性更高。挑战：IPC 开销更大，性能优化更复杂，驱动生态需要重新构建。
+</details>
+
 ## 认知路径
 
 > **认知路径**: 从 Rust 核心语言特性出发，经由 **操作系统与内核：Rust 的系统级编程** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。

@@ -66,6 +66,12 @@
     - [10.3 边界测试：低迭代次数 KDF 导致暴力破解（安全漏洞）](#103-边界测试低迭代次数-kdf-导致暴力破解安全漏洞)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Rust 的 `ring` crate 在密码学中提供什么功能？（理解层）](#测验-1rust-的-ring-crate-在密码学中提供什么功能理解层)
+    - [测验 2：为什么密码学代码中绝对不应该使用 `unsafe` 或原始指针？（理解层）](#测验-2为什么密码学代码中绝对不应该使用-unsafe-或原始指针理解层)
+    - [测验 3：Rust 的常量时间比较（Constant-Time Comparison）为什么对密码学重要？（理解层）](#测验-3rust-的常量时间比较constant-time-comparison为什么对密码学重要理解层)
+    - [测验 4：`rustls` 与 OpenSSL 相比在安全性上有什么优势？（理解层）](#测验-4rustls-与-openssl-相比在安全性上有什么优势理解层)
+    - [测验 5：在 Rust 中存储密码时，为什么必须使用 Argon2 / bcrypt / scrypt 而非 SHA-256？（理解层）](#测验-5在-rust-中存储密码时为什么必须使用-argon2--bcrypt--scrypt-而非-sha-256理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -850,6 +856,66 @@ fn weak_hash_password(password: &str) -> String {
 - **定理**: Security & Cryptography（安全与密码学） 定义 ⟹ 类型安全保证
 - **定理**: Security & Cryptography（安全与密码学） 定义 ⟹ 类型安全保证
 - **定理**: Security & Cryptography（安全与密码学） 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Rust 的 `ring` crate 在密码学中提供什么功能？（理解层）
+
+**题目**: Rust 的 `ring` crate 在密码学中提供什么功能？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`ring` 是基于 BoringSSL 的安全密码学库，提供：AEAD（AES-GCM/ChaCha20-Poly1305）、ECDSA/Ed25519 签名、HKDF、PBKDF2、随机数生成等。优先选择 `ring` 而非自己实现。
+</details>
+
+---
+
+### 测验 2：为什么密码学代码中绝对不应该使用 `unsafe` 或原始指针？（理解层）
+
+**题目**: 为什么密码学代码中绝对不应该使用 `unsafe` 或原始指针？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+密码学实现 slightest 的内存错误（如时序攻击、密钥泄露到 swap）都可能导致安全崩溃。应使用经过审计的库（`ring`、`rustls`），它们已通过形式化验证和侧信道分析。
+</details>
+
+---
+
+### 测验 3：Rust 的常量时间比较（Constant-Time Comparison）为什么对密码学重要？（理解层）
+
+**题目**: Rust 的常量时间比较（Constant-Time Comparison）为什么对密码学重要？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+标准 `==` 可能在第一个不同字节处短路返回，泄露密码长度信息。常量时间比较（如 `subtle::ConstantTimeEq`）遍历所有字节，时间只与长度相关，防止时序攻击。
+</details>
+
+---
+
+### 测验 4：`rustls` 与 OpenSSL 相比在安全性上有什么优势？（理解层）
+
+**题目**: `rustls` 与 OpenSSL 相比在安全性上有什么优势？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`rustls` 是纯 Rust 实现，无缓冲区溢出和内存泄漏风险。代码量更小（审计更容易），默认禁用不安全协议（SSLv3、TLS 1.0/1.1），证书验证严格。
+</details>
+
+---
+
+### 测验 5：在 Rust 中存储密码时，为什么必须使用 Argon2 / bcrypt / scrypt 而非 SHA-256？（理解层）
+
+**题目**: 在 Rust 中存储密码时，为什么必须使用 Argon2 / bcrypt / scrypt 而非 SHA-256？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+SHA-256 设计为快速计算，易被 GPU/ASIC 暴力破解。Argon2 等是"密钥派生函数"（KDF），故意慢且内存硬，大幅增加暴力破解成本。
+</details>
 
 ## 认知路径
 

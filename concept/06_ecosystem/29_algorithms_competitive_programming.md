@@ -972,3 +972,64 @@ fn main() {
 - **定理**: 算法与竞赛编程 (Algorithms & Competitive Programming) 定义 ⟹ 类型安全保证
 - **定理**: 算法与竞赛编程 (Algorithms & Competitive Programming) 定义 ⟹ 类型安全保证
 - **定理**: 算法与竞赛编程 (Algorithms & Competitive Programming) 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：为什么 Rust 在算法竞赛中不如 C++ 流行？（理解层）
+
+**题目**: 为什么 Rust 在算法竞赛中不如 C++ 流行？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+1) 输入输出速度 historically 较慢（`stdin` 锁）；2) 标准库没有内置的平衡树、线段树等竞赛常用数据结构；3) 代码模板更长。
+
+</details>
+
+---
+
+### 测验 2：Rust 在算法竞赛中的输入输出如何优化到与 C++ 竞争？（理解层）
+
+**题目**: Rust 在算法竞赛中的输入输出如何优化到与 C++ 竞争？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+使用 `BufReader` + 手动解析（`bytes().map(|b| b - b'0')`），或使用 `proconio` 等竞赛专用 IO 库。避免 `println!` 的同步锁开销。
+</details>
+
+---
+
+### 测验 3：Rust 的 `BinaryHeap` 在竞赛中适合什么场景？（理解层）
+
+**题目**: Rust 的 `BinaryHeap` 在竞赛中适合什么场景？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Dijkstra 算法、Prim 算法、A* 搜索、贪心问题。`BinaryHeap` 是标准库内置的优先队列，无需额外库。
+</details>
+
+---
+
+### 测验 4：为什么 Rust 的所有权系统在某些竞赛动态规划问题中显得繁琐？（理解层）
+
+**题目**: 为什么 Rust 的所有权系统在某些竞赛动态规划问题中显得繁琐？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+DP 问题常需要修改多维数组的多个元素。Rust 的借用规则可能阻止同时修改数组的不同部分（即使逻辑上安全），需要 unsafe 或 `split_at_mut` workaround。
+</details>
+
+---
+
+### 测验 5：`cargo-compete` 工具在竞赛中提供什么功能？（理解层）
+
+**题目**: `cargo-compete` 工具在竞赛中提供什么功能？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+自动下载竞赛题目、生成模板代码、运行样例测试、提交答案。简化了 Rust 竞赛者的工作流，与 `atcoder`/`codeforces` 等平台集成。
+</details>

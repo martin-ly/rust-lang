@@ -267,6 +267,67 @@ RUSTFLAGS="-Z sanitizer=memory -Z build-std" \
 - **定理**: Rust 编译器基础设施深度解析 定义 ⟹ 类型安全保证
 - **定理**: Rust 编译器基础设施深度解析 定义 ⟹ 类型安全保证
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`syn` crate 在 Rust 过程宏开发中起什么作用？（理解层）
+
+**题目**: `syn` crate 在 Rust 过程宏开发中起什么作用？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`syn` 将 `proc_macro::TokenStream` 解析为 AST（如 `DeriveInput`、`Expr`），使过程宏可以操作结构化语法而非原始 token。是几乎所有 derive 宏的基础依赖。
+</details>
+
+---
+
+### 测验 2：`quote!` 宏在过程宏中的用途是什么？（理解层）
+
+**题目**: `quote!` 宏在过程宏中的用途是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`quote!` 从模板生成 `TokenStream`，支持变量插值（`#var`）。它是过程宏输出代码的主要方式，比手动拼接 token 更安全、更易读。
+</details>
+
+---
+
+### 测验 3：为什么过程宏必须在独立的 crate 中定义？（理解层）
+
+**题目**: 为什么过程宏必须在独立的 crate 中定义？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+过程宏在编译器解析阶段运行，必须在依赖它的 crate 之前编译完成。Rust 的编译模型要求 proc macro crate 是独立的编译单元。
+</details>
+
+---
+
+### 测验 4：`proc-macro2` 与标准库 `proc_macro` 有什么区别？（理解层）
+
+**题目**: `proc-macro2` 与标准库 `proc_macro` 有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`proc_macro` 只能在 proc macro crate 中使用。`proc-macro2` 提供相同的 API 但可在任何 crate 中使用，支持测试和工具开发，且跨平台行为更一致。
+</details>
+
+---
+
+### 测验 5：编译期代码生成（Code Generation）在 Rust 中有哪些常见应用场景？（理解层）
+
+**题目**: 编译期代码生成（Code Generation）在 Rust 中有哪些常见应用场景？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+1) `derive` 宏自动生成 trait 实现；2) 构建脚本（`build.rs`）生成绑定代码；3) 常量求值计算查找表；4) 过程宏从 schema 生成类型（如 `prost` 从 protobuf 生成 Rust 代码）。
+
+</details>
+
 ## 认知路径
 
 > **认知路径**: 从 Rust 核心语言特性出发，经由 **Rust 编译器基础设施深度解析** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。

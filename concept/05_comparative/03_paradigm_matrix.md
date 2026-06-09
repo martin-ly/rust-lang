@@ -913,3 +913,63 @@ fn main() {
 ```
 
 > **修正**: Rust 支持**命令式**和**函数式**风格的混合，但编译器强制所有权规则：闭包捕获 `&mut v` 后，`v` 被借用，不能同时在 `iter()` 中使用（`iter()` 也需要 `&v`）。设计选择：1) **命令式**：`for` 循环 + `mut` 变量，直接修改状态；2) **函数式**：迭代器适配器 + 不可变数据，生成新集合；3) **混合**：`fold` 累积状态（`v.iter().fold(0, |acc, x| acc + x)`）。Rust 不强制纯度（如 Haskell），但类型系统使副作用显式（`mut` 标记、IO 返回 `Result`）。这与 Haskell 的 `IO` Monad（强制显式标记副作用）或 C 的隐式全局状态修改（无任何检查）不同——Rust 在中间地带：允许副作用，但要求显式控制。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)] · [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Rust 支持哪些主要编程范式？（理解层）
+
+**题目**: Rust 支持哪些主要编程范式？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+命令式（变量、循环、赋值）、函数式（闭包、迭代器、模式匹配）、面向对象（封装、多态通过 trait，无继承）、并发（async/await、线程、消息传递）。
+</details>
+
+---
+
+### 测验 2：为什么说 Rust 的 trait 系统是"面向对象编程"的替代而非实现？（理解层）
+
+**题目**: 为什么说 Rust 的 trait 系统是"面向对象编程"的替代而非实现？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+trait 提供多态和接口抽象，但无继承、无基类、无运行时类型信息（默认）。组合优先于继承，避免了传统 OOP 的层次复杂性和钻石问题。
+</details>
+
+---
+
+### 测验 3：Rust 的迭代器模式体现了什么函数式编程特征？（理解层）
+
+**题目**: Rust 的迭代器模式体现了什么函数式编程特征？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+惰性求值、不可变数据转换、高阶函数（`map`、`filter`、`fold`）。迭代器链组合声明式地表达数据转换，而非命令式循环。
+</details>
+
+---
+
+### 测验 4：Rust 的 `match` 表达式与 Haskell 的 pattern matching 有什么相似之处？（理解层）
+
+**题目**: Rust 的 `match` 表达式与 Haskell 的 pattern matching 有什么相似之处？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+两者都支持代数数据类型的解构、守卫条件（guard）、穷尽性检查。Rust 的 `match` 编译期强制穷尽，Haskell 在运行时警告非穷尽。
+</details>
+
+---
+
+### 测验 5：在 Rust 中，什么时候应该使用命令式风格，什么时候使用函数式风格？（理解层）
+
+**题目**: 在 Rust 中，什么时候应该使用命令式风格，什么时候使用函数式风格？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+性能关键的内层循环、需要可变状态累积时用命令式。数据转换、过滤、映射链用函数式。Rust 允许两者混合，根据场景选择。
+</details>

@@ -477,6 +477,66 @@ async gen fn counter_stream(max: usize) -> impl Stream<Item = usize> {
 - **定理**: Rust 1.97 前沿特性预览 定义 ⟹ 类型安全保证
 - **定理**: Rust 1.97 前沿特性预览 定义 ⟹ 类型安全保证
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Rust 1.97 预计会包含哪些主要特性？（理解层）
+
+**题目**: Rust 1.97 预计会包含哪些主要特性？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`gen` 块稳定化、`if let` 临时值生命周期延长、`unsafe_op_in_unsafe_fn` 默认启用、部分 `const trait` 支持、`lifetime_capture_rules` 改进等。
+</details>
+
+---
+
+### 测验 2：`if let` 临时值生命周期延长解决了什么问题？（理解层）
+
+**题目**: `if let` 临时值生命周期延长解决了什么问题？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+允许 `if let Some(x) = get_lock().lock().as_ref()` 这样的代码编译通过，临时值的生命周期延长到 `if` 块结束。
+</details>
+
+---
+
+### 测验 3：`unsafe_op_in_unsafe_fn` 默认启用有什么影响？（理解层）
+
+**题目**: `unsafe_op_in_unsafe_fn` 默认启用有什么影响？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+在 `unsafe fn` 中调用 `unsafe` 操作需要显式 `unsafe` 块。这提高了 unsafe 代码的可读性，明确区分函数声明和内部 unsafe 操作。
+</details>
+
+---
+
+### 测验 4：Rust 的版本发布节奏是怎样的？（理解层）
+
+**题目**: Rust 的版本发布节奏是怎样的？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+每 6 周发布一个 stable 版本（如 1.95、1.96、1.97）。 nightly -> beta -> stable 的三轨道模型确保新特性经过充分测试。
+</details>
+
+---
+
+### 测验 5：如何提前体验 Rust 1.97 的特性？（理解层）
+
+**题目**: 如何提前体验 Rust 1.97 的特性？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+安装 nightly 工具链：`rustup install nightly`。使用 `cargo +nightly build` 编译。关注 `#![feature(...)]` 的 stabilized 状态。
+</details>
+
 ## 认知路径
 
 > **认知路径**: 从 Rust 核心语言特性出发，经由 **Rust 1.97 前沿特性预览** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。

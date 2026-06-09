@@ -139,3 +139,63 @@ pub fn example(x: String) {}
 ---
 
 > **后置概念**: [Public/Private Dependencies](../06_ecosystem/10_public_private_deps.md) · [Rust 工具链](../06_ecosystem/01_toolchain.md)
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`cargo-semver-checks` 如何检测 breaking change？（理解层）
+
+**题目**: `cargo-semver-checks` 如何检测 breaking change？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+分析 `rustdoc` 生成的 JSON 输出，检查公共 API 的变更：删除项、改变类型签名、修改 trait 实现、调整泛型约束等。
+</details>
+
+---
+
+### 测验 2：为什么 SemVer 检查对 crates.io 生态如此重要？（理解层）
+
+**题目**: 为什么 SemVer 检查对 crates.io 生态如此重要？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+crates.io 有超过 15 万个 crate，依赖关系复杂。SemVer 违规可能导致大量下游 crate 编译失败，破坏生态稳定性。
+</details>
+
+---
+
+### 测验 3：`cargo-semver-checks` 目前支持哪些类别的检查？（理解层）
+
+**题目**: `cargo-semver-checks` 目前支持哪些类别的检查？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+函数删除、结构体字段变更、enum 变体变更、trait 方法添加（默认 impl 除外）、泛型参数变更、可见性变更等。持续扩展中。
+</details>
+
+---
+
+### 测验 4：如何在 CI 中集成 SemVer 检查？（理解层）
+
+**题目**: 如何在 CI 中集成 SemVer 检查？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+在发布工作流中运行 `cargo semver-checks`，与最新发布的版本比较。若检测到 breaking change 但版本号未升级 major，则阻断发布。
+</details>
+
+---
+
+### 测验 5：这个工具对 Rust 生态的长期影响是什么？（理解层）
+
+**题目**: 这个工具对 Rust 生态的长期影响是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+降低"依赖地狱"风险，提高 crates.io 的整体质量。使库维护者更自信地演进 API，用户更放心地升级依赖。
+</details>

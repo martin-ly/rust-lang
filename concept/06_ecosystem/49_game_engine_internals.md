@@ -69,6 +69,12 @@
     - [10.3 边界测试：资源加载 panic 导致游戏状态不一致（运行时错误）](#103-边界测试资源加载-panic-导致游戏状态不一致运行时错误)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：游戏引擎的"渲染管线"（Render Pipeline）通常分为哪几个阶段？（理解层）](#测验-1游戏引擎的渲染管线render-pipeline通常分为哪几个阶段理解层)
+    - [测验 2：`wgpu` 的渲染通道（Render Pass）概念与 Vulkan 的有什么对应关系？（理解层）](#测验-2wgpu-的渲染通道render-pass概念与-vulkan-的有什么对应关系理解层)
+    - [测验 3：为什么游戏引擎中的"实体变换层级"（Transform Hierarchy）通常使用扁平数组而非树结构？（理解层）](#测验-3为什么游戏引擎中的实体变换层级transform-hierarchy通常使用扁平数组而非树结构理解层)
+    - [测验 4：Rust 的所有权如何影响游戏引擎中的"资源管理"（Asset Management）？（理解层）](#测验-4rust-的所有权如何影响游戏引擎中的资源管理asset-management理解层)
+    - [测验 5：`SPIR-V` 在 Rust 图形管线中扮演什么角色？（理解层）](#测验-5spir-v-在-rust-图形管线中扮演什么角色理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -1045,6 +1051,66 @@ enum AssetState {
 - **定理**: Game Engine Internals（游戏引擎内部原理） 定义 ⟹ 类型安全保证
 - **定理**: Game Engine Internals（游戏引擎内部原理） 定义 ⟹ 类型安全保证
 - **定理**: Game Engine Internals（游戏引擎内部原理） 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：游戏引擎的"渲染管线"（Render Pipeline）通常分为哪几个阶段？（理解层）
+
+**题目**: 游戏引擎的"渲染管线"（Render Pipeline）通常分为哪几个阶段？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+应用阶段（CPU 逻辑）→ 几何阶段（顶点着色、变换、裁剪）→ 光栅化阶段（片元着色、深度测试、混合）→ 输出到帧缓冲。
+</details>
+
+---
+
+### 测验 2：`wgpu` 的渲染通道（Render Pass）概念与 Vulkan 的有什么对应关系？（理解层）
+
+**题目**: `wgpu` 的渲染通道（Render Pass）概念与 Vulkan 的有什么对应关系？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`wgpu` 的 `RenderPass` 是对 Vulkan `VkRenderPass` 和 Metal `MTLRenderPassDescriptor` 的跨平台抽象，描述一组 Attachment（颜色/深度缓冲）和子通道依赖。
+</details>
+
+---
+
+### 测验 3：为什么游戏引擎中的"实体变换层级"（Transform Hierarchy）通常使用扁平数组而非树结构？（理解层）
+
+**题目**: 为什么游戏引擎中的"实体变换层级"（Transform Hierarchy）通常使用扁平数组而非树结构？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+扁平数组（SoA）配合 archetype 存储具有更好的 cache locality。层级关系通过 `Parent` 索引编码，系统迭代时顺序访问更高效。
+</details>
+
+---
+
+### 测验 4：Rust 的所有权如何影响游戏引擎中的"资源管理"（Asset Management）？（理解层）
+
+**题目**: Rust 的所有权如何影响游戏引擎中的"资源管理"（Asset Management）？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`Handle<T>` 作为资源的弱引用，`AssetServer` 拥有实际资源。引用计数（`Arc`）或 ECS 资源存储管理生命周期，避免 use-after-free 和重复加载。
+</details>
+
+---
+
+### 测验 5：`SPIR-V` 在 Rust 图形管线中扮演什么角色？（理解层）
+
+**题目**: `SPIR-V` 在 Rust 图形管线中扮演什么角色？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+SPIR-V 是 Vulkan 的标准中间着色器语言。Rust 的 `rust-gpu` 项目允许用 Rust 编写着色器并编译为 SPIR-V，或使用 `naga` 从 WGSL 翻译为 SPIR-V。
+</details>
 
 ## 认知路径
 

@@ -55,6 +55,12 @@
     - [10.5 边界测试：Cranelift 的调试构建与发布构建行为差异（运行时性能/语义差异）](#105-边界测试cranelift-的调试构建与发布构建行为差异运行时性能语义差异)
     - [10.3 边界测试：Cranelift 与 LLVM 的调试信息质量差异（运行时行为差异）](#103-边界测试cranelift-与-llvm-的调试信息质量差异运行时行为差异)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Cranelift 与 LLVM 在 Rust 编译中分别扮演什么角色？（理解层）](#测验-1cranelift-与-llvm-在-rust-编译中分别扮演什么角色理解层)
+    - [测验 2：为什么 Cranelift 的 debug 构建速度比 LLVM 快？（理解层）](#测验-2为什么-cranelift-的-debug-构建速度比-llvm-快理解层)
+    - [测验 3：`cargo build -Z codegen-backend=cranelift` 有什么使用限制？（理解层）](#测验-3cargo-build--z-codegen-backendcranelift-有什么使用限制理解层)
+    - [测验 4：Cranelift 对 Rust 开发体验的预期改善是什么？（理解层）](#测验-4cranelift-对-rust-开发体验的预期改善是什么理解层)
+    - [测验 5：Cranelift 是由谁开发的？它还可以用于什么场景？（理解层）](#测验-5cranelift-是由谁开发的它还可以用于什么场景理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -616,6 +622,66 @@ fn main() {
 - **定理**: Cranelift 后端预研：Rust 编译器的快速调试编译 定义 ⟹ 类型安全保证
 - **定理**: Cranelift 后端预研：Rust 编译器的快速调试编译 定义 ⟹ 类型安全保证
 - **定理**: Cranelift 后端预研：Rust 编译器的快速调试编译 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Cranelift 与 LLVM 在 Rust 编译中分别扮演什么角色？（理解层）
+
+**题目**: Cranelift 与 LLVM 在 Rust 编译中分别扮演什么角色？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+LLVM 是默认后端，提供工业级优化和代码生成。Cranelift 是替代后端，设计目标是更快的编译速度，牺牲部分优化能力。
+</details>
+
+---
+
+### 测验 2：为什么 Cranelift 的 debug 构建速度比 LLVM 快？（理解层）
+
+**题目**: 为什么 Cranelift 的 debug 构建速度比 LLVM 快？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Cranelift 采用更简单的指令选择和寄存器分配算法，专为快速代码生成设计。LLVM 的优化管道复杂，即使 debug 模式也有大量 passes。
+</details>
+
+---
+
+### 测验 3：`cargo build -Z codegen-backend=cranelift` 有什么使用限制？（理解层）
+
+**题目**: `cargo build -Z codegen-backend=cranelift` 有什么使用限制？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Cranelift 目前不支持某些平台（如部分嵌入式 target），优化能力较弱，不建议用于 release 构建。主要用于开发时的快速迭代。
+</details>
+
+---
+
+### 测验 4：Cranelift 对 Rust 开发体验的预期改善是什么？（理解层）
+
+**题目**: Cranelift 对 Rust 开发体验的预期改善是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+大型项目的 debug 构建时间可能减少 20-30%。结合增量编译，可实现接近解释型语言的"保存即运行"体验。
+</details>
+
+---
+
+### 测验 5：Cranelift 是由谁开发的？它还可以用于什么场景？（理解层）
+
+**题目**: Cranelift 是由谁开发的？它还可以用于什么场景？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+由 Bytecode Alliance 开发，是 Wasmtime 的默认代码生成后端。除了 Rust，也用于 WebAssembly 的 JIT 编译。
+</details>
 
 ## 认知路径
 

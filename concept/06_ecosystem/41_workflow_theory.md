@@ -71,6 +71,12 @@
     - [8.3 边界测试：工作流循环缺乏终止条件导致无限执行（运行时错误）](#83-边界测试工作流循环缺乏终止条件导致无限执行运行时错误)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：工作流编排（Workflow Orchestration）与事件驱动架构（EDA）有什么区别？（理解层）](#测验-1工作流编排workflow-orchestration与事件驱动架构eda有什么区别理解层)
+    - [测验 2：Rust 中实现状态机工作流时，`enum` 和 `match` 有什么优势？（理解层）](#测验-2rust-中实现状态机工作流时enum-和-match-有什么优势理解层)
+    - [测验 3：什么是" Saga 模式"的补偿事务（Compensating Transaction）？（理解层）](#测验-3什么是-saga-模式的补偿事务compensating-transaction理解层)
+    - [测验 4：在 Rust 中，`tokio::task::JoinSet` 如何帮助实现并行工作流步骤？（理解层）](#测验-4在-rust-中tokiotaskjoinset-如何帮助实现并行工作流步骤理解层)
+    - [测验 5：为什么长时间运行的工作流需要"持久化状态"（Durable State）？（理解层）](#测验-5为什么长时间运行的工作流需要持久化状态durable-state理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -1307,6 +1313,66 @@ async fn unbounded_backoff() -> Result<Output> {
 - **定理**: Workflow Theory & Formalization（工作流理论与形式化） 定义 ⟹ 类型安全保证
 - **定理**: Workflow Theory & Formalization（工作流理论与形式化） 定义 ⟹ 类型安全保证
 - **定理**: Workflow Theory & Formalization（工作流理论与形式化） 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：工作流编排（Workflow Orchestration）与事件驱动架构（EDA）有什么区别？（理解层）
+
+**题目**: 工作流编排（Workflow Orchestration）与事件驱动架构（EDA）有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+工作流编排显式定义任务顺序、分支、并行和依赖，由中央协调器控制。EDA 是松散耦合的，服务自主响应事件，无中央协调。
+</details>
+
+---
+
+### 测验 2：Rust 中实现状态机工作流时，`enum` 和 `match` 有什么优势？（理解层）
+
+**题目**: Rust 中实现状态机工作流时，`enum` 和 `match` 有什么优势？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`enum` 编码所有可能状态，`match` 强制处理每个状态的转移。编译器确保没有遗漏的状态转换，消除了非法状态转换的 bug。
+</details>
+
+---
+
+### 测验 3：什么是" Saga 模式"的补偿事务（Compensating Transaction）？（理解层）
+
+**题目**: 什么是" Saga 模式"的补偿事务（Compensating Transaction）？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+ Saga 将长事务拆分为多个本地事务，每个本地事务有对应的补偿操作。若某步失败， Saga 协调器按相反顺序执行补偿，撤销已完成的步骤。
+</details>
+
+---
+
+### 测验 4：在 Rust 中，`tokio::task::JoinSet` 如何帮助实现并行工作流步骤？（理解层）
+
+**题目**: 在 Rust 中，`tokio::task::JoinSet` 如何帮助实现并行工作流步骤？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`JoinSet` 管理一组动态任务，支持并发执行和统一等待。工作流协调器可以将并行步骤加入 `JoinSet`，然后 `await` 所有步骤完成或处理第一个错误。
+</details>
+
+---
+
+### 测验 5：为什么长时间运行的工作流需要"持久化状态"（Durable State）？（理解层）
+
+**题目**: 为什么长时间运行的工作流需要"持久化状态"（Durable State）？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+进程可能崩溃或重启。持久化状态允许工作流从中断点恢复，而非从头开始。通常结合事件日志和快照实现，如 Temporal / Cadence 的工作流引擎。
+</details>
 
 ## 认知路径
 

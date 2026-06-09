@@ -49,6 +49,12 @@
     - [10.5 边界测试：Rust AI 推理框架的张量生命周期与 GPU 内存管理（运行时 OOM）](#105-边界测试rust-ai-推理框架的张量生命周期与-gpu-内存管理运行时-oom)
     - [10.3 边界测试：Rust AI 框架的张量维度不匹配（运行时 panic）](#103-边界测试rust-ai-框架的张量维度不匹配运行时-panic)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Rust 在 AI 生态中目前主要扮演什么角色？（理解层）](#测验-1rust-在-ai-生态中目前主要扮演什么角色理解层)
+    - [测验 2：为什么 AI 推理服务特别需要 Rust 的性能和安全性？（理解层）](#测验-2为什么-ai-推理服务特别需要-rust-的性能和安全性理解层)
+    - [测验 3：`candle` 与 `PyTorch` 在部署上有什么区别？（理解层）](#测验-3candle-与-pytorch-在部署上有什么区别理解层)
+    - [测验 4：Rust 如何通过 `ort` 与 ONNX 生态集成？（理解层）](#测验-4rust-如何通过-ort-与-onnx-生态集成理解层)
+    - [测验 5：Rust 在 AI 领域取代 Python 的主要障碍是什么？（理解层）](#测验-5rust-在-ai-领域取代-python-的主要障碍是什么理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -654,6 +660,67 @@ fn main() {}
 - **定理**: Rust 在 AI 与机器学习中的新兴角色 定义 ⟹ 类型安全保证
 - **定理**: Rust 在 AI 与机器学习中的新兴角色 定义 ⟹ 类型安全保证
 - **定理**: Rust 在 AI 与机器学习中的新兴角色 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Rust 在 AI 生态中目前主要扮演什么角色？（理解层）
+
+**题目**: Rust 在 AI 生态中目前主要扮演什么角色？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+基础设施层：推理引擎（`candle`、`burn`）、数据管道（`polars`）、模型部署服务（`tract`）。训练和 research 仍以 Python 为主。
+</details>
+
+---
+
+### 测验 2：为什么 AI 推理服务特别需要 Rust 的性能和安全性？（理解层）
+
+**题目**: 为什么 AI 推理服务特别需要 Rust 的性能和安全性？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+推理服务需要低延迟、高吞吐、稳定运行。Rust 的无 GC 特性避免了 Python 服务的 GC 停顿，内存安全防止了处理用户输入时的安全漏洞。
+</details>
+
+---
+
+### 测验 3：`candle` 与 `PyTorch` 在部署上有什么区别？（理解层）
+
+**题目**: `candle` 与 `PyTorch` 在部署上有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`candle` 是 Rust 原生框架，无需 Python 运行时，二进制小，支持 WASM 部署。`PyTorch` 生态更成熟，但部署依赖 Python/C++ 运行时。
+</details>
+
+---
+
+### 测验 4：Rust 如何通过 `ort` 与 ONNX 生态集成？（理解层）
+
+**题目**: Rust 如何通过 `ort` 与 ONNX 生态集成？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`ort` 是 ONNX Runtime 的 Rust 绑定，允许 Rust 加载和运行从 PyTorch/TensorFlow 导出的 ONNX 模型，利用硬件加速（CUDA/TensorRT）。
+</details>
+
+---
+
+### 测验 5：Rust 在 AI 领域取代 Python 的主要障碍是什么？（理解层）
+
+**题目**: Rust 在 AI 领域取代 Python 的主要障碍是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+1) 研究和原型生态（Jupyter、Hugging Face）仍以 Python 为中心；2) Rust 学习曲线陡峭；3) 动态图和自动微分的灵活性不如 PyTorch。
+
+</details>
 
 ## 认知路径
 

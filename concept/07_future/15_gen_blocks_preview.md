@@ -53,6 +53,12 @@
     - [10.3 边界测试：gen 块与 `Pin` 的隐式需求（编译错误）](#103-边界测试gen-块与-pin-的隐式需求编译错误)
     - [10.4 边界测试：gen 块与异常控制流（`return`、`break`）的语义（编译错误）](#104-边界测试gen-块与异常控制流returnbreak的语义编译错误)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：`gen` 块与 `async` 块有什么相似之处？（理解层）](#测验-1gen-块与-async-块有什么相似之处理解层)
+    - [测验 2：`gen` 块解决了 Rust 中哪些现有问题？（理解层）](#测验-2gen-块解决了-rust-中哪些现有问题理解层)
+    - [测验 3：`gen` 块中的 `yield` 与 Python/JavaScript 的 `yield` 有什么区别？（理解层）](#测验-3gen-块中的-yield-与-pythonjavascript-的-yield-有什么区别理解层)
+    - [测验 4：`gen` 块对 `Stream` 的实现有什么帮助？（理解层）](#测验-4gen-块对-stream-的实现有什么帮助理解层)
+    - [测验 5：目前 `gen` 块的实现状态如何？（理解层）](#测验-5目前-gen-块的实现状态如何理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -500,6 +506,67 @@ fn early_return() -> impl Iterator<Item = i32> {
 ### 补充定理链
 
 - **定理**: Gen Blocks 预研：超越异步的泛化生成器 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`gen` 块与 `async` 块有什么相似之处？（理解层）
+
+**题目**: `gen` 块与 `async` 块有什么相似之处？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+两者都是惰性计算的语法糖，编译为状态机。`async` 块返回 `Future`，`gen` 块返回 `Iterator`（或更一般的 `Generator`）。
+</details>
+
+---
+
+### 测验 2：`gen` 块解决了 Rust 中哪些现有问题？（理解层）
+
+**题目**: `gen` 块解决了 Rust 中哪些现有问题？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+1) 手写迭代器状态机繁琐；2) `async fn` 不能 `yield`；3) 生成器（Generator）语法不稳定。`gen` 提供类似 Python generator 的简洁语法。
+
+</details>
+
+---
+
+### 测验 3：`gen` 块中的 `yield` 与 Python/JavaScript 的 `yield` 有什么区别？（理解层）
+
+**题目**: `gen` 块中的 `yield` 与 Python/JavaScript 的 `yield` 有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+语义相似：暂停执行并返回值给调用者。Rust 的 `yield` 会被编译器转换为状态机转移，保证内存安全（无悬垂引用）。
+</details>
+
+---
+
+### 测验 4：`gen` 块对 `Stream` 的实现有什么帮助？（理解层）
+
+**题目**: `gen` 块对 `Stream` 的实现有什么帮助？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`gen` 块可以自然地表达异步流：`gen { yield fetch_page(1).await; yield fetch_page(2).await; }`，比手动实现 `Stream` trait 简洁得多。
+</details>
+
+---
+
+### 测验 5：目前 `gen` 块的实现状态如何？（理解层）
+
+**题目**: 目前 `gen` 块的实现状态如何？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+已在 nightly 中可用（`feature(gen_blocks)`），预计在未来几个版本内稳定化。是 Rust 2024+ 的重要语言特性之一。
+</details>
 
 ## 认知路径
 

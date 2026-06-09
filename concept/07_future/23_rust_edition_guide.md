@@ -46,6 +46,12 @@
     - [10.5 边界测试：多 Edition workspace 的依赖解析冲突（编译错误）](#105-边界测试多-edition-workspace-的依赖解析冲突编译错误)
     - [10.3 边界测试：多 Edition workspace 的 resolver 冲突（编译错误）](#103-边界测试多-edition-workspace-的-resolver-冲突编译错误)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：`cargo-semver-checks` 在 Rust 生态中解决什么问题？（理解层）](#测验-1cargo-semver-checks-在-rust-生态中解决什么问题理解层)
+    - [测验 2：为什么 SemVer 在 Rust 中特别重要？（理解层）](#测验-2为什么-semver-在-rust-中特别重要理解层)
+    - [测验 3：`cargo-semver-checks` 与手动审查 API 变更相比有什么优势？（理解层）](#测验-3cargo-semver-checks-与手动审查-api-变更相比有什么优势理解层)
+    - [测验 4：`cargo-public-api` 与 `cargo-semver-checks` 有什么区别？（理解层）](#测验-4cargo-public-api-与-cargo-semver-checks-有什么区别理解层)
+    - [测验 5：这些工具对 Rust 生态系统稳定性的意义是什么？（理解层）](#测验-5这些工具对-rust-生态系统稳定性的意义是什么理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -544,6 +550,66 @@ fn main() {
 ### 补充定理链
 
 - **定理**: Rust Edition 机制与迁移指南 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`cargo-semver-checks` 在 Rust 生态中解决什么问题？（理解层）
+
+**题目**: `cargo-semver-checks` 在 Rust 生态中解决什么问题？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+自动检测 crate 的版本升级是否违反了语义化版本控制（SemVer）规则，如删除公共 API、改变 trait 实现、修改泛型约束等。
+</details>
+
+---
+
+### 测验 2：为什么 SemVer 在 Rust 中特别重要？（理解层）
+
+**题目**: 为什么 SemVer 在 Rust 中特别重要？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 的强类型系统和 trait 系统使 API 变更影响透明。违反 SemVer 的更新可能导致下游 crate 编译失败。`cargo` 的依赖解析依赖 SemVer。
+</details>
+
+---
+
+### 测验 3：`cargo-semver-checks` 与手动审查 API 变更相比有什么优势？（理解层）
+
+**题目**: `cargo-semver-checks` 与手动审查 API 变更相比有什么优势？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+基于 Rustdoc JSON 和 MIR 自动分析，覆盖所有公共 API 变更，不受人类审查遗漏的影响。可在 CI 中自动运行，阻断违规发布。
+</details>
+
+---
+
+### 测验 4：`cargo-public-api` 与 `cargo-semver-checks` 有什么区别？（理解层）
+
+**题目**: `cargo-public-api` 与 `cargo-semver-checks` 有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`cargo-public-api` 只生成公共 API 差异报告（增删改）。`cargo-semver-checks` 进一步判断这些差异是否违反 SemVer 规则。
+</details>
+
+---
+
+### 测验 5：这些工具对 Rust 生态系统稳定性的意义是什么？（理解层）
+
+**题目**: 这些工具对 Rust 生态系统稳定性的意义是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+降低"依赖地狱"风险，鼓励库作者自信地发布新版本。使整个生态的升级路径更可预测，减少因 breaking change 导致的连锁编译失败。
+</details>
 
 ## 认知路径
 

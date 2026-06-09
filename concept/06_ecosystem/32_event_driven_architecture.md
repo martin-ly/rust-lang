@@ -62,6 +62,12 @@
     - [10.4 边界测试：事件处理顺序与生命周期管理（运行时悬垂引用）](#104-边界测试事件处理顺序与生命周期管理运行时悬垂引用)
     - [10.3 边界测试：事件溯源的序列化版本兼容（运行时反序列化失败）](#103-边界测试事件溯源的序列化版本兼容运行时反序列化失败)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：事件驱动架构（EDA）与请求-响应架构的核心区别是什么？（理解层）](#测验-1事件驱动架构eda与请求-响应架构的核心区别是什么理解层)
+    - [测验 2：`tokio::sync::broadcast` 与 `tokio::sync::mpsc` 在事件分发上有什么区别？（理解层）](#测验-2tokiosyncbroadcast-与-tokiosyncmpsc-在事件分发上有什么区别理解层)
+    - [测验 3：事件溯源（Event Sourcing）与 CQRS 有什么关系？（理解层）](#测验-3事件溯源event-sourcing与-cqrs-有什么关系理解层)
+    - [测验 4：在 Rust 中实现 Saga 模式时，如何补偿（compensate）已完成的本地事务？（理解层）](#测验-4在-rust-中实现-saga-模式时如何补偿compensate已完成的本地事务理解层)
+    - [测验 5：为什么事件驱动系统中需要"事件 schema 治理"（Schema Governance）？（理解层）](#测验-5为什么事件驱动系统中需要事件-schema-治理schema-governance理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -907,6 +913,66 @@ fn main() {
 - **定理**: 事件驱动架构 (Event-Driven Architecture) 定义 ⟹ 类型安全保证
 - **定理**: 事件驱动架构 (Event-Driven Architecture) 定义 ⟹ 类型安全保证
 - **定理**: 事件驱动架构 (Event-Driven Architecture) 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：事件驱动架构（EDA）与请求-响应架构的核心区别是什么？（理解层）
+
+**题目**: 事件驱动架构（EDA）与请求-响应架构的核心区别是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+EDA 中服务通过异步事件通信，发布者不知道谁消费事件，耦合更低。请求-响应是同步点对点调用，调用方等待响应，耦合更高。
+</details>
+
+---
+
+### 测验 2：`tokio::sync::broadcast` 与 `tokio::sync::mpsc` 在事件分发上有什么区别？（理解层）
+
+**题目**: `tokio::sync::broadcast` 与 `tokio::sync::mpsc` 在事件分发上有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`broadcast` 是多播：一个发送者，多个接收者，每个接收者独立消费。`mpsc` 是单播：只有一个接收者消费每条消息。EDA 中 `broadcast` 更适合事件广播。
+</details>
+
+---
+
+### 测验 3：事件溯源（Event Sourcing）与 CQRS 有什么关系？（理解层）
+
+**题目**: 事件溯源（Event Sourcing）与 CQRS 有什么关系？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+两者常一起使用：Event Sourcing 用事件流作为真实数据源，CQRS 将读写分离。读模型通过订阅事件流构建投影（Projection），写模型追加事件。
+</details>
+
+---
+
+### 测验 4：在 Rust 中实现 Saga 模式时，如何补偿（compensate）已完成的本地事务？（理解层）
+
+**题目**: 在 Rust 中实现 Saga 模式时，如何补偿（compensate）已完成的本地事务？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+为每个正向操作定义对应的补偿操作（如 `create_order` 对应 `cancel_order`）。Saga 协调器在失败时按相反顺序调用补偿操作，通过枚举状态机建模。
+</details>
+
+---
+
+### 测验 5：为什么事件驱动系统中需要"事件 schema 治理"（Schema Governance）？（理解层）
+
+**题目**: 为什么事件驱动系统中需要"事件 schema 治理"（Schema Governance）？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+事件是服务间的契约，schema 变更会影响所有消费者。需要版本管理、兼容性检查（向后/向前兼容）和文档化，避免"隐式接口"导致的意外破坏。
+</details>
 
 ## 认知路径
 

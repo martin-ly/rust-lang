@@ -64,6 +64,12 @@
     - [9.3 边界测试：ETL 管道中类型推断失败导致运行时 panic（类型错误）](#93-边界测试etl-管道中类型推断失败导致运行时-panic类型错误)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：`polars` 在 Rust 数据工程中与 `pandas` 有什么对应关系？（理解层）](#测验-1polars-在-rust-数据工程中与-pandas-有什么对应关系理解层)
+    - [测验 2：`arrow-rs` 在数据生态中扮演什么角色？（理解层）](#测验-2arrow-rs-在数据生态中扮演什么角色理解层)
+    - [测验 3：为什么列式存储（Columnar Storage）比行式存储更适合分析查询？（理解层）](#测验-3为什么列式存储columnar-storage比行式存储更适合分析查询理解层)
+    - [测验 4：`datafusion` 在 Rust 中提供什么功能？（理解层）](#测验-4datafusion-在-rust-中提供什么功能理解层)
+    - [测验 5：Rust 的内存安全如何帮助数据管道避免生产事故？（理解层）](#测验-5rust-的内存安全如何帮助数据管道避免生产事故理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -854,6 +860,66 @@ fn good_csv_parse() -> PolarsResult<DataFrame> {
 - **定理**: Data Engineering（数据工程） 定义 ⟹ 类型安全保证
 - **定理**: Data Engineering（数据工程） 定义 ⟹ 类型安全保证
 - **定理**: Data Engineering（数据工程） 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`polars` 在 Rust 数据工程中与 `pandas` 有什么对应关系？（理解层）
+
+**题目**: `polars` 在 Rust 数据工程中与 `pandas` 有什么对应关系？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`polars` 是 Rust 的高性能 DataFrame 库，API 设计受 `pandas` 启发，但基于 Rust 实现，无 GIL 限制，多线程查询性能显著提升。
+</details>
+
+---
+
+### 测验 2：`arrow-rs` 在数据生态中扮演什么角色？（理解层）
+
+**题目**: `arrow-rs` 在数据生态中扮演什么角色？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Apache Arrow 的 Rust 实现，提供列式内存格式标准。`polars`、`datafusion` 等库基于 Arrow 格式互操作，实现零拷贝数据传输。
+</details>
+
+---
+
+### 测验 3：为什么列式存储（Columnar Storage）比行式存储更适合分析查询？（理解层）
+
+**题目**: 为什么列式存储（Columnar Storage）比行式存储更适合分析查询？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+分析查询通常只读取少数列。列式存储将同列数据连续存放，压缩率更高、cache 局部性更好、可向量化（SIMD）处理。行式存储适合事务性随机读写。
+</details>
+
+---
+
+### 测验 4：`datafusion` 在 Rust 中提供什么功能？（理解层）
+
+**题目**: `datafusion` 在 Rust 中提供什么功能？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+嵌入式 SQL 查询引擎，基于 Arrow 和 Ballista。支持标准 SQL 查询 DataFrame 和 Parquet 文件，可嵌入 Rust 应用作为轻量级分析引擎。
+</details>
+
+---
+
+### 测验 5：Rust 的内存安全如何帮助数据管道避免生产事故？（理解层）
+
+**题目**: Rust 的内存安全如何帮助数据管道避免生产事故？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+数据管道常处理外部不可信数据（CSV、JSON、Parquet）。Rust 的边界检查和类型安全防止了解析过程中的缓冲区溢出和数据损坏，避免了 C/C++ 解析器中常见的安全漏洞。
+</details>
 
 ## 认知路径
 

@@ -58,6 +58,12 @@
     - [10.3 边界测试：游戏循环中的固定时间步长与渲染解耦（运行时卡顿）](#103-边界测试游戏循环中的固定时间步长与渲染解耦运行时卡顿)
     - [10.4 边界测试：WGPU 的着色器编译与平台支持差异（运行时 panic）](#104-边界测试wgpu-的着色器编译与平台支持差异运行时-panic)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：为什么 Rust 在游戏开发中越来越受到关注？与传统 C++ 相比有什么优势？（理解层）](#测验-1为什么-rust-在游戏开发中越来越受到关注与传统-c-相比有什么优势理解层)
+    - [测验 2：`Bevy` 引擎的 ECS（Entity-Component-System）架构与传统 OOP 继承树有什么区别？（理解层）](#测验-2bevy-引擎的-ecsentity-component-system架构与传统-oop-继承树有什么区别理解层)
+    - [测验 3：Rust 的所有权系统对游戏开发中的"场景图"（Scene Graph）设计有什么影响？（理解层）](#测验-3rust-的所有权系统对游戏开发中的场景图scene-graph设计有什么影响理解层)
+    - [测验 4：`wgpu` 在 Rust 图形生态中扮演什么角色？（理解层）](#测验-4wgpu-在-rust-图形生态中扮演什么角色理解层)
+    - [测验 5：Rust 的游戏开发生态目前相比 Unity/Unreal 的主要短板是什么？（理解层）](#测验-5rust-的游戏开发生态目前相比-unityunreal-的主要短板是什么理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -611,6 +617,66 @@ fn create_render_pipeline(device: &wgpu::Device) {
 - **定理**: Rust 游戏开发生态 定义 ⟹ 类型安全保证
 - **定理**: Rust 游戏开发生态 定义 ⟹ 类型安全保证
 - **定理**: Rust 游戏开发生态 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：为什么 Rust 在游戏开发中越来越受到关注？与传统 C++ 相比有什么优势？（理解层）
+
+**题目**: 为什么 Rust 在游戏开发中越来越受到关注？与传统 C++ 相比有什么优势？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+内存安全（消除崩溃和未定义行为）、 fearless 并发（利用多核）、现代工具链（cargo、crates.io）。避免了 C++ 中常见的悬垂指针和数据竞争问题。
+</details>
+
+---
+
+### 测验 2：`Bevy` 引擎的 ECS（Entity-Component-System）架构与传统 OOP 继承树有什么区别？（理解层）
+
+**题目**: `Bevy` 引擎的 ECS（Entity-Component-System）架构与传统 OOP 继承树有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+ECS 将数据（Component）和行为（System）分离，通过 archetype 紧凑存储同类型实体，缓存友好且并行化简单。OOP 继承将数据和行为耦合，多态有虚表开销。
+</details>
+
+---
+
+### 测验 3：Rust 的所有权系统对游戏开发中的"场景图"（Scene Graph）设计有什么影响？（理解层）
+
+**题目**: Rust 的所有权系统对游戏开发中的"场景图"（Scene Graph）设计有什么影响？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+所有权要求明确父节点和子节点的关系。常用方案：`Entity` ID + `Parent`/`Children` component（ECS 方式），或 `Rc<RefCell<Node>>`（传统树），或 arena allocator + 索引。
+</details>
+
+---
+
+### 测验 4：`wgpu` 在 Rust 图形生态中扮演什么角色？（理解层）
+
+**题目**: `wgpu` 在 Rust 图形生态中扮演什么角色？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`wgpu` 是跨平台的现代图形 API（基于 WebGPU 标准），抽象了 Vulkan/Metal/DX12/OpenGL，提供类型安全的 GPU 编程接口，是 Bevy 等引擎的底层渲染后端。
+</details>
+
+---
+
+### 测验 5：Rust 的游戏开发生态目前相比 Unity/Unreal 的主要短板是什么？（理解层）
+
+**题目**: Rust 的游戏开发生态目前相比 Unity/Unreal 的主要短板是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+编辑器工具链、可视化脚本、资产商店生态、平台支持广度（如主机平台 SDK 访问）仍有差距。Rust 更适合渲染引擎、工具链底层或独立游戏的技术栈。
+</details>
 
 ## 认知路径
 
