@@ -71,3 +71,8 @@ harness = false
 
 [[example]]
 name = "ai_ml_ecosystem_demo"
+
+[lints.rust]
+# 声明 nightly cfg 条件名，消除 unexpected_cfgs 警告
+# 用于 rust_197_features.rs 中 nightly-only 测试的条件编译
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(nightly)'] }
