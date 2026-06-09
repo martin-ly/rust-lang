@@ -54,6 +54,12 @@
     - [10.7 边界测试：ANSI 颜色代码与 Windows 旧版控制台兼容性问题（运行时显示异常）](#107-边界测试ansi-颜色代码与-windows-旧版控制台兼容性问题运行时显示异常)
     - [10.3 边界测试：`clap` 的 derive 宏与字段类型不匹配（编译错误）](#103-边界测试clap-的-derive-宏与字段类型不匹配编译错误)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：`clap` crate 在 Rust CLI 开发中提供什么功能？（理解层）](#测验-1clap-crate-在-rust-cli-开发中提供什么功能理解层)
+    - [测验 2：`indicatif` 和 `console` crate 在 CLI 中分别有什么用途？（理解层）](#测验-2indicatif-和-console-crate-在-cli-中分别有什么用途理解层)
+    - [测验 3：为什么 Rust 的 CLI 二进制文件通常比 Python/Node.js 脚本启动更快？（理解层）](#测验-3为什么-rust-的-cli-二进制文件通常比-pythonnodejs-脚本启动更快理解层)
+    - [测验 4：`shell completion`（命令自动补全）在 Rust CLI 中通常如何生成？（理解层）](#测验-4shell-completion命令自动补全在-rust-cli-中通常如何生成理解层)
+    - [测验 5：`cargo install` 与系统包管理器（apt/brew）安装 Rust CLI 工具各有什么优劣？（理解层）](#测验-5cargo-install-与系统包管理器aptbrew安装-rust-cli-工具各有什么优劣理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -697,6 +703,66 @@ fn main() {
 - **定理**: Rust CLI 开发生态 定义 ⟹ 类型安全保证
 - **定理**: Rust CLI 开发生态 定义 ⟹ 类型安全保证
 - **定理**: Rust CLI 开发生态 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`clap` crate 在 Rust CLI 开发中提供什么功能？（理解层）
+
+**题目**: `clap` crate 在 Rust CLI 开发中提供什么功能？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+命令行参数解析：自动生成 `--help`、子命令、位置参数、标志、验证。`clap` 4.x 支持 derive 宏，通过 `#[derive(Parser)]` 从 struct 定义自动生成 CLI。
+</details>
+
+---
+
+### 测验 2：`indicatif` 和 `console` crate 在 CLI 中分别有什么用途？（理解层）
+
+**题目**: `indicatif` 和 `console` crate 在 CLI 中分别有什么用途？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`indicatif` 提供进度条（progress bar）和旋转动画。`console` 提供跨平台的终端颜色、样式、清空屏幕、光标控制等 ANSI 转义序列封装。
+</details>
+
+---
+
+### 测验 3：为什么 Rust 的 CLI 二进制文件通常比 Python/Node.js 脚本启动更快？（理解层）
+
+**题目**: 为什么 Rust 的 CLI 二进制文件通常比 Python/Node.js 脚本启动更快？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 编译为原生机器码，无解释器/JIT 启动开销。单二进制文件可静态链接，无需运行时依赖（如 Python 解释器或 node_modules）。
+</details>
+
+---
+
+### 测验 4：`shell completion`（命令自动补全）在 Rust CLI 中通常如何生成？（理解层）
+
+**题目**: `shell completion`（命令自动补全）在 Rust CLI 中通常如何生成？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`clap` 可通过 `ValueHint` 和内置生成器输出 bash/zsh/fish/powershell 的补全脚本。通常在 build.rs 或 CLI 子命令中生成并安装到系统目录。
+</details>
+
+---
+
+### 测验 5：`cargo install` 与系统包管理器（apt/brew）安装 Rust CLI 工具各有什么优劣？（理解层）
+
+**题目**: `cargo install` 与系统包管理器（apt/brew）安装 Rust CLI 工具各有什么优劣？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`cargo install` 简单统一，自动处理 crates.io 依赖，但无自动更新。系统包管理器与 OS 集成更好（自动更新、依赖冲突管理），但版本可能滞后。
+</details>
 
 ## 认知路径
 

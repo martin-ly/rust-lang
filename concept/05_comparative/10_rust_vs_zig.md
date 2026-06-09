@@ -45,6 +45,12 @@
     - [10.3 边界测试：Zig 的 `comptime` 与 Rust 的 `const fn` 的能力差异（编译错误）](#103-边界测试zig-的-comptime-与-rust-的-const-fn-的能力差异编译错误)
     - [10.4 边界测试：Zig 的显式内存分配与 Rust 的全局分配器（编译错误）](#104-边界测试zig-的显式内存分配与-rust-的全局分配器编译错误)
     - [10.3 边界测试：Zig 的 `comptime` 与 Rust 的 `const fn` 能力差距（编译错误）](#103-边界测试zig-的-comptime-与-rust-的-const-fn-能力差距编译错误)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Rust 和 Zig 的设计哲学有什么根本差异？（理解层）](#测验-1rust-和-zig-的设计哲学有什么根本差异理解层)
+    - [测验 2：Zig 的 `comptime` 与 Rust 的宏系统（`macro_rules!` / proc macro）有什么区别？（理解层）](#测验-2zig-的-comptime-与-rust-的宏系统macro_rules--proc-macro有什么区别理解层)
+    - [测验 3：Zig 没有隐式内存分配的策略对系统编程有什么意义？（理解层）](#测验-3zig-没有隐式内存分配的策略对系统编程有什么意义理解层)
+    - [测验 4：Rust 的所有权系统与 Zig 的显式生命周期管理相比，哪种更适合大型团队协作？（理解层）](#测验-4rust-的所有权系统与-zig-的显式生命周期管理相比哪种更适合大型团队协作理解层)
+    - [测验 5：在已有 C 代码库的项目中，Zig 的 C 互操作与 Rust 的 FFI 相比有什么特点？（理解层）](#测验-5在已有-c-代码库的项目中zig-的-c-互操作与-rust-的-ffi-相比有什么特点理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -676,6 +682,66 @@ fn main() {
 ```
 
 > **修正**: Rust 的 `const fn` 支持**编译期求值**，但能力有限：1) 不能堆分配（`Vec`、`Box`、`String`）；2) 不能调用非 `const fn`；3) 不能有 `unsafe` 块。Zig 的 `comptime` 更强大：可在编译期执行任意代码（包括内存分配、I/O、网络请求），编译失败时提供堆栈跟踪。Rust 的 `const` 系统保守但安全：保证编译期求值终止（无无限循环），避免编译期副作用。未来演进：`const Heap`（提案中，允许编译期堆分配）、`const_mut_refs`（已稳定，允许 `&mut` 在 const fn 中）。这与 C++ 的 `constexpr`（C++20 支持堆分配和虚函数）或 D 的 CTFE（Compile-Time Function Execution，类似 Zig）不同——Rust 的 const 系统逐步扩展，每次需形式化验证安全性。[来源: [Rust Reference — const fn](https://doc.rust-lang.org/reference/items/functions.html#const-functions)] · [来源: [Zig Documentation](https://ziglang.org/documentation/master/)]
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Rust 和 Zig 的设计哲学有什么根本差异？（理解层）
+
+**题目**: Rust 和 Zig 的设计哲学有什么根本差异？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 通过类型系统强制安全（"编译期证明"）。Zig 相信程序员的能力，提供安全工具但不强制使用，更强调简单性和显式控制（"无隐藏控制流"）。
+</details>
+
+---
+
+### 测验 2：Zig 的 `comptime` 与 Rust 的宏系统（`macro_rules!` / proc macro）有什么区别？（理解层）
+
+**题目**: Zig 的 `comptime` 与 Rust 的宏系统（`macro_rules!` / proc macro）有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`comptime` 是 Zig 语言内建的编译期执行能力，任何函数可加 `comptime` 修饰在编译期运行。Rust 宏是独立于语言的元编程系统，声明宏基于模式匹配，过程宏操作 TokenStream。
+</details>
+
+---
+
+### 测验 3：Zig 没有隐式内存分配的策略对系统编程有什么意义？（理解层）
+
+**题目**: Zig 没有隐式内存分配的策略对系统编程有什么意义？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Zig 要求显式传递分配器（Allocator），使内存使用完全可见。Rust 的分配通常隐式（如 `Vec::push` 使用全局分配器），虽然安全但可能隐藏分配点。
+</details>
+
+---
+
+### 测验 4：Rust 的所有权系统与 Zig 的显式生命周期管理相比，哪种更适合大型团队协作？（理解层）
+
+**题目**: Rust 的所有权系统与 Zig 的显式生命周期管理相比，哪种更适合大型团队协作？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 的所有权系统在编译期消除整类错误，更适合大型团队（降低代码审查负担）。Zig 更灵活但需要更强的团队纪律和审查来避免内存错误。
+</details>
+
+---
+
+### 测验 5：在已有 C 代码库的项目中，Zig 的 C 互操作与 Rust 的 FFI 相比有什么特点？（理解层）
+
+**题目**: 在已有 C 代码库的项目中，Zig 的 C 互操作与 Rust 的 FFI 相比有什么特点？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Zig 可直接导入 C 头文件（`@cImport`），无需 bindgen 等工具。Rust 需要 `bindgen` 或手动写 `extern` 声明，工具链更复杂但类型安全更强。
+</details>
 
 ## 认知路径
 

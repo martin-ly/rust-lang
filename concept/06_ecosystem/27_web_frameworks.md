@@ -72,6 +72,12 @@
     - [10.5 边界测试：Axum 的 extractor 顺序与请求体消耗（运行时 panic）](#105-边界测试axum-的-extractor-顺序与请求体消耗运行时-panic)
     - [10.4 边界测试：Axum 的 extractor 顺序与请求体消耗（运行时 panic）](#104-边界测试axum-的-extractor-顺序与请求体消耗运行时-panic)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：`axum` 框架的核心设计特点是什么？（理解层）](#测验-1axum-框架的核心设计特点是什么理解层)
+    - [测验 2：`actix-web` 与 `axum` 在架构上有什么主要区别？（理解层）](#测验-2actix-web-与-axum-在架构上有什么主要区别理解层)
+    - [测验 3：`rocket` 框架的"守卫"（Guards）和"响应者"（Responders）是什么意思？（理解层）](#测验-3rocket-框架的守卫guards和响应者responders是什么意思理解层)
+    - [测验 4：在 Rust Web 开发中，为什么通常选择 `serde` + `json` 而非动态类型语言中常用的随意字典结构？（理解层）](#测验-4在-rust-web-开发中为什么通常选择-serde--json-而非动态类型语言中常用的随意字典结构理解层)
+    - [测验 5：`tower` 的 `Service` trait 如何使不同 Web 框架的中间件可以复用？（理解层）](#测验-5tower-的-service-trait-如何使不同-web-框架的中间件可以复用理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -917,6 +923,66 @@ fn main() {}
 - **定理**: Rust Web 框架对比与选型 定义 ⟹ 类型安全保证
 - **定理**: Rust Web 框架对比与选型 定义 ⟹ 类型安全保证
 - **定理**: Rust Web 框架对比与选型 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`axum` 框架的核心设计特点是什么？（理解层）
+
+**题目**: `axum` 框架的核心设计特点是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+基于 `tokio` 和 `tower` 服务抽象，强调类型安全的路由（通过提取器 Extractor）、中间件组合和错误处理。无全局状态，依赖注入通过处理器参数实现。
+</details>
+
+---
+
+### 测验 2：`actix-web` 与 `axum` 在架构上有什么主要区别？（理解层）
+
+**题目**: `actix-web` 与 `axum` 在架构上有什么主要区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`actix-web` 使用 Actor 模型处理请求，有更强的状态隔离和并发模型。`axum` 基于 `tower` 服务 trait，更函数式、更轻量，与 Tokio 生态更紧密集成。
+</details>
+
+---
+
+### 测验 3：`rocket` 框架的"守卫"（Guards）和"响应者"（Responders）是什么意思？（理解层）
+
+**题目**: `rocket` 框架的"守卫"（Guards）和"响应者"（Responders）是什么意思？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Guards 是请求预处理器（如认证检查、参数验证），失败时自动返回错误响应。Responders 是将自定义类型转换为 HTTP 响应的 trait 实现。
+</details>
+
+---
+
+### 测验 4：在 Rust Web 开发中，为什么通常选择 `serde` + `json` 而非动态类型语言中常用的随意字典结构？（理解层）
+
+**题目**: 在 Rust Web 开发中，为什么通常选择 `serde` + `json` 而非动态类型语言中常用的随意字典结构？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+强类型保证 API 契约：编译期检查字段名和类型，自动生成 OpenAPI 文档，反序列化失败时明确错误位置。避免运行时"KeyError"和类型不匹配。
+</details>
+
+---
+
+### 测验 5：`tower` 的 `Service` trait 如何使不同 Web 框架的中间件可以复用？（理解层）
+
+**题目**: `tower` 的 `Service` trait 如何使不同 Web 框架的中间件可以复用？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`Service` 统一了 `call(Request) -> Future<Response>` 接口，`tower` 提供的限流、超时、重试等中间件可通用于任何实现 `Service` 的框架（包括 `axum` 和自定义服务）。
+</details>
 
 ## 认知路径
 

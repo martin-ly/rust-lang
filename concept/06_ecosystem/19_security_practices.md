@@ -59,6 +59,12 @@
     - [10.7 边界测试：secret 在内存中的残留与 `zeroize`（运行时信息泄露）](#107-边界测试secret-在内存中的残留与-zeroize运行时信息泄露)
     - [10.3 边界测试：secret 在日志中的意外泄露（运行时信息泄露）](#103-边界测试secret-在日志中的意外泄露运行时信息泄露)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：`cargo audit` 工具的主要功能是什么？（理解层）](#测验-1cargo-audit-工具的主要功能是什么理解层)
+    - [测验 2：为什么在 Rust 中处理密码时，建议使用 `secrecy` crate 而非普通 `String`？（理解层）](#测验-2为什么在-rust-中处理密码时建议使用-secrecy-crate-而非普通-string理解层)
+    - [测验 3：Rust 的所有权系统如何帮助防御缓冲区溢出攻击？（理解层）](#测验-3rust-的所有权系统如何帮助防御缓冲区溢出攻击理解层)
+    - [测验 4：`#[forbid(unsafe_code)]` 属性有什么作用？（理解层）](#测验-4forbidunsafe_code-属性有什么作用理解层)
+    - [测验 5：在 Rust Web 应用中，如何防御 SQL 注入攻击？（理解层）](#测验-5在-rust-web-应用中如何防御-sql-注入攻击理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -830,6 +836,66 @@ fn main() {
 - **定理**: 安全 实践：Rust 代码的防御性编程 定义 ⟹ 类型安全保证
 - **定理**: 安全 实践：Rust 代码的防御性编程 定义 ⟹ 类型安全保证
 - **定理**: 安全 实践：Rust 代码的防御性编程 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`cargo audit` 工具的主要功能是什么？（理解层）
+
+**题目**: `cargo audit` 工具的主要功能是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+扫描 Cargo.lock 中的依赖，检查已知的安全漏洞（通过 RustSec Advisory Database）。建议在 CI 中集成，自动阻止引入有漏洞的依赖版本。
+</details>
+
+---
+
+### 测验 2：为什么在 Rust 中处理密码时，建议使用 `secrecy` crate 而非普通 `String`？（理解层）
+
+**题目**: 为什么在 Rust 中处理密码时，建议使用 `secrecy` crate 而非普通 `String`？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`secrecy` 类型在 `Drop` 时主动清零内存（防止交换分区/核心转储泄露），并禁止直接 `Debug`/`Display` 输出，减少意外日志泄露风险。
+</details>
+
+---
+
+### 测验 3：Rust 的所有权系统如何帮助防御缓冲区溢出攻击？（理解层）
+
+**题目**: Rust 的所有权系统如何帮助防御缓冲区溢出攻击？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+所有权和借用检查在编译期阻止越界访问和 use-after-free。`Vec` 和切片索引有边界检查，无法像 C 那样通过指针算术绕过。
+</details>
+
+---
+
+### 测验 4：`#[forbid(unsafe_code)]` 属性有什么作用？（理解层）
+
+**题目**: `#[forbid(unsafe_code)]` 属性有什么作用？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+禁止当前 crate 及其依赖中使用 `unsafe` 代码。适用于安全敏感项目，确保所有代码都在编译器的安全检查范围内。
+</details>
+
+---
+
+### 测验 5：在 Rust Web 应用中，如何防御 SQL 注入攻击？（理解层）
+
+**题目**: 在 Rust Web 应用中，如何防御 SQL 注入攻击？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+使用参数化查询（prepared statements），如 `sqlx` 的 `query!` 宏在编译期检查 SQL 语法和参数类型，从根本上消除字符串拼接 SQL 的风险。
+</details>
 
 ## 认知路径
 

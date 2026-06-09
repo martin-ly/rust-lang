@@ -92,6 +92,12 @@ let _ = serde_json::to_string(&s);
     - [10.7 边界测试：public dependency 的 semver 传播（编译中断）](#107-边界测试public-dependency-的-semver-传播编译中断)
     - [10.3 边界测试：public dependency 的 semver 不兼容传播（编译中断）](#103-边界测试public-dependency-的-semver-不兼容传播编译中断)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Cargo 的 `public = true/false` 依赖声明（RFC 3516）解决了什么问题？（理解层）](#测验-1cargo-的-public--truefalse-依赖声明rfc-3516解决了什么问题理解层)
+    - [测验 2：如果 crate A 依赖 `regex = "1.0"`（public），而 crate B 依赖 A 和 `regex = "2.0"`，会发生什么？（理解层）](#测验-2如果-crate-a-依赖-regex--10public而-crate-b-依赖-a-和-regex--20会发生什么理解层)
+    - [测验 3：`dev-dependencies` 与 `dependencies` 在依赖传递上有什么区别？（理解层）](#测验-3dev-dependencies-与-dependencies-在依赖传递上有什么区别理解层)
+    - [测验 4：`[patch]` 段落在 Cargo.toml 中有什么作用？（理解层）](#测验-4patch-段落在-cargotoml-中有什么作用理解层)
+    - [测验 5：为什么大型 Rust workspace 中建议使用统一版本管理（如 `workspace.dependencies`）？（理解层）](#测验-5为什么大型-rust-workspace-中建议使用统一版本管理如-workspacedependencies理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -539,6 +545,66 @@ fn main() {
 - **定理**: Public/Private Dependencies：可见性控制的工程化 定义 ⟹ 类型安全保证
 - **定理**: Public/Private Dependencies：可见性控制的工程化 定义 ⟹ 类型安全保证
 - **定理**: Public/Private Dependencies：可见性控制的工程化 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Cargo 的 `public = true/false` 依赖声明（RFC 3516）解决了什么问题？（理解层）
+
+**题目**: Cargo 的 `public = true/false` 依赖声明（RFC 3516）解决了什么问题？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+区分依赖是否在库的公共 API 中暴露。`public = false` 的依赖不会泄漏到下游，允许主 crate 和下游使用不同版本的同一依赖，避免"钻石依赖"冲突。
+</details>
+
+---
+
+### 测验 2：如果 crate A 依赖 `regex = "1.0"`（public），而 crate B 依赖 A 和 `regex = "2.0"`，会发生什么？（理解层）
+
+**题目**: 如果 crate A 依赖 `regex = "1.0"`（public），而 crate B 依赖 A 和 `regex = "2.0"`，会发生什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+由于 `regex` 是 A 的公共依赖，其类型出现在 A 的 API 中，B 无法同时使用两个不兼容版本的 `regex`。Cargo 会报版本冲突错误。
+</details>
+
+---
+
+### 测验 3：`dev-dependencies` 与 `dependencies` 在依赖传递上有什么区别？（理解层）
+
+**题目**: `dev-dependencies` 与 `dependencies` 在依赖传递上有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`dev-dependencies` 只在测试、示例和 benchmark 中可用，不会传递给下游 crate。`dependencies` 会随 crate 发布并影响下游。
+</details>
+
+---
+
+### 测验 4：`[patch]` 段落在 Cargo.toml 中有什么作用？（理解层）
+
+**题目**: `[patch]` 段落在 Cargo.toml 中有什么作用？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+允许临时替换某个依赖为本地路径或特定版本，无需修改所有直接依赖它的 crate 的 Cargo.toml。常用于测试未发布的 bug 修复。
+</details>
+
+---
+
+### 测验 5：为什么大型 Rust workspace 中建议使用统一版本管理（如 `workspace.dependencies`）？（理解层）
+
+**题目**: 为什么大型 Rust workspace 中建议使用统一版本管理（如 `workspace.dependencies`）？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+避免不同 crate 使用同一依赖的不同版本，减少编译时间、二进制体积和潜在的兼容性问题。Workspace 级别的统一依赖声明强制所有成员使用相同版本。
+</details>
 
 ## 认知路径
 

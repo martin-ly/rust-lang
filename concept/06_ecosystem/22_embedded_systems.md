@@ -62,6 +62,12 @@
     - [10.4 边界测试：`no_std` 中的 `panic` 处理与固件大小（编译错误/链接错误）](#104-边界测试no_std-中的-panic-处理与固件大小编译错误链接错误)
     - [10.4 边界测试：裸机（`no_std`）中的 `alloc` 与全局分配器缺失（编译错误）](#104-边界测试裸机no_std中的-alloc-与全局分配器缺失编译错误)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：`no_std` 在 Rust 嵌入式开发中意味着什么？（理解层）](#测验-1no_std-在-rust-嵌入式开发中意味着什么理解层)
+    - [测验 2：Rust 的 `embedded-hal`（硬件抽象层）项目解决了什么问题？（理解层）](#测验-2rust-的-embedded-hal硬件抽象层项目解决了什么问题理解层)
+    - [测验 3：为什么在嵌入式系统中，`static mut` 被认为是不安全的？有什么替代方案？（理解层）](#测验-3为什么在嵌入式系统中static-mut-被认为是不安全的有什么替代方案理解层)
+    - [测验 4：`defmt`（deferred formatting）相比传统 `rtt-target`/`semihosting` 日志有什么优势？（理解层）](#测验-4defmtdeferred-formatting相比传统-rtt-targetsemihosting-日志有什么优势理解层)
+    - [测验 5：Rust 的 panic handler 在嵌入式系统中通常如何配置？（理解层）](#测验-5rust-的-panic-handler-在嵌入式系统中通常如何配置理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -862,6 +868,66 @@ fn main() {
 - **定理**: Rust 嵌入式系统开发 定义 ⟹ 类型安全保证
 - **定理**: Rust 嵌入式系统开发 定义 ⟹ 类型安全保证
 - **定理**: Rust 嵌入式系统开发 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`no_std` 在 Rust 嵌入式开发中意味着什么？（理解层）
+
+**题目**: `no_std` 在 Rust 嵌入式开发中意味着什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+表示不使用标准库（`std`），只使用 `core`（无分配）和可选的 `alloc`（有分配）。适用于没有操作系统或内存受限的裸机环境。
+</details>
+
+---
+
+### 测验 2：Rust 的 `embedded-hal`（硬件抽象层）项目解决了什么问题？（理解层）
+
+**题目**: Rust 的 `embedded-hal`（硬件抽象层）项目解决了什么问题？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+为不同 MCU 提供统一的 trait 接口（GPIO、UART、SPI、I2C 等），使驱动代码可跨硬件平台复用，类似 Linux 的 device tree 抽象。
+</details>
+
+---
+
+### 测验 3：为什么在嵌入式系统中，`static mut` 被认为是不安全的？有什么替代方案？（理解层）
+
+**题目**: 为什么在嵌入式系统中，`static mut` 被认为是不安全的？有什么替代方案？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`static mut` 允许多处可变访问，编译器无法证明其安全性，使用需 `unsafe`。替代方案：`RefCell`、`Mutex`、原子类型，或 `cortex-m-rtic` 的任务资源管理。
+</details>
+
+---
+
+### 测验 4：`defmt`（deferred formatting）相比传统 `rtt-target`/`semihosting` 日志有什么优势？（理解层）
+
+**题目**: `defmt`（deferred formatting）相比传统 `rtt-target`/`semihosting` 日志有什么优势？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`defmt` 在主机端进行格式化，只传输原始数据到调试器，极大减少目标端的二进制体积和运行时开销。适合资源极受限的嵌入式场景。
+</details>
+
+---
+
+### 测验 5：Rust 的 panic handler 在嵌入式系统中通常如何配置？（理解层）
+
+**题目**: Rust 的 panic handler 在嵌入式系统中通常如何配置？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+通过 `#[cfg(not(test))]` 下实现 `#[panic_handler]` 函数，自定义 panic 行为（如 LED 闪烁、串口输出错误码、复位）。不能使用标准库的默认 panic。
+</details>
 
 ## 认知路径
 

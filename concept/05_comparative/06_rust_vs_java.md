@@ -51,6 +51,12 @@
     - [10.4 边界测试：Java 的 GC 与 Rust 的所有权的资源管理差异（编译错误）](#104-边界测试java-的-gc-与-rust-的所有权的资源管理差异编译错误)
     - [10.3 边界测试：Java 的泛型擦除与 Rust 的单态化（编译后差异）](#103-边界测试java-的泛型擦除与-rust-的单态化编译后差异)
     - [10.4 边界测试：Java 的 null 安全与 Rust 的 Option 编译期检查（编译错误）](#104-边界测试java-的-null-安全与-rust-的-option-编译期检查编译错误)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Rust 和 Java 在内存管理上的最根本区别是什么？（理解层）](#测验-1rust-和-java-在内存管理上的最根本区别是什么理解层)
+    - [测验 2：Java 的泛型（Generics）使用类型擦除，Rust 的泛型使用单态化。这对运行时性能和类型安全有什么影响？（理解层）](#测验-2java-的泛型generics使用类型擦除rust-的泛型使用单态化这对运行时性能和类型安全有什么影响理解层)
+    - [测验 3：为什么 Rust 没有 Java 那样的"受检异常"（Checked Exceptions）？Rust 如何处理错误？（理解层）](#测验-3为什么-rust-没有-java-那样的受检异常checked-exceptionsrust-如何处理错误理解层)
+    - [测验 4：Rust 的 `async/await` 与 Java 的 `CompletableFuture`/`Virtual Threads` 在并发模型上有什么区别？（理解层）](#测验-4rust-的-asyncawait-与-java-的-completablefuturevirtual-threads-在并发模型上有什么区别理解层)
+    - [测验 5：在需要与大量现有 Java 生态集成的场景下，Rust 通常如何与 Java 交互？（理解层）](#测验-5在需要与大量现有-java-生态集成的场景下rust-通常如何与-java-交互理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -521,6 +527,66 @@ fn main() {
 ```
 
 > **修正**: Rust 的 `Option<T>` 消除了 **null 指针异常**：1) `None` 和 `Some(T)` 是不同的变体，编译器强制处理；2) `unwrap()` 在 `None` 时 panic（显式选择）；3) `?` 运算符传播 `None`（在返回 `Option` 的函数中）。Java 8+ 的 `Optional<T>` 类似，但：1) `Optional` 可仍为 `null`（`Optional` 本身是引用类型）；2) 不强制使用（编译器不检查）；3) 序列化问题。Kotlin 的 `T?`（可空类型）与 Rust 的 `Option<T>` 更接近，但 Kotlin 在 JVM 上运行时仍有 null（与 Java 互操作）。这与 Swift 的 `Optional<T>`（类似 Rust，但语法糖 `?`/`!`）或 Haskell 的 `Maybe a`（同样编译期强制处理）相同——Rust 的 `Option` 是类型系统的核心，非可选特性。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)] · [来源: [Rust Reference — Option](https://doc.rust-lang.org/std/option/enum.Option.html)]
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Rust 和 Java 在内存管理上的最根本区别是什么？（理解层）
+
+**题目**: Rust 和 Java 在内存管理上的最根本区别是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 使用编译期所有权系统（无 GC），内存释放由编译器静态确定。Java 使用垃圾回收器（GC），内存释放由运行时自动管理，可能引入停顿。
+</details>
+
+---
+
+### 测验 2：Java 的泛型（Generics）使用类型擦除，Rust 的泛型使用单态化。这对运行时性能和类型安全有什么影响？（理解层）
+
+**题目**: Java 的泛型（Generics）使用类型擦除，Rust 的泛型使用单态化。这对运行时性能和类型安全有什么影响？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 单态化为每种具体类型生成独立代码，运行时无类型检查开销，性能更高。Java 类型擦除保留一个通用实现，运行时可能需要类型转换，但有更小的二进制体积。
+</details>
+
+---
+
+### 测验 3：为什么 Rust 没有 Java 那样的"受检异常"（Checked Exceptions）？Rust 如何处理错误？（理解层）
+
+**题目**: 为什么 Rust 没有 Java 那样的"受检异常"（Checked Exceptions）？Rust 如何处理错误？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 使用 `Result<T, E>` 作为返回值显式传播错误，由类型系统强制处理。Java 的受检异常在方法签名中声明，可能破坏接口稳定性且增加模板代码。
+</details>
+
+---
+
+### 测验 4：Rust 的 `async/await` 与 Java 的 `CompletableFuture`/`Virtual Threads` 在并发模型上有什么区别？（理解层）
+
+**题目**: Rust 的 `async/await` 与 Java 的 `CompletableFuture`/`Virtual Threads` 在并发模型上有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust async 是协作式调度、零成本抽象，基于状态机。Java Virtual Threads 是 JVM 管理的轻量级线程，由 OS 线程支持，调度更灵活但有一定运行时开销。
+</details>
+
+---
+
+### 测验 5：在需要与大量现有 Java 生态集成的场景下，Rust 通常如何与 Java 交互？（理解层）
+
+**题目**: 在需要与大量现有 Java 生态集成的场景下，Rust 通常如何与 Java 交互？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+通过 JNI（Java Native Interface）或 Panama 项目（FFI）调用 Rust 编译的动态库。也可用 gRPC/HTTP 等网络协议进行跨语言服务通信。
+</details>
 
 ## 认知路径
 

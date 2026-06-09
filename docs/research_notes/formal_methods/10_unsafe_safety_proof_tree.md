@@ -37,7 +37,6 @@
     - [编写 Unsafe 代码前](#编写-unsafe-代码前)
     - [代码审查清单](#代码审查清单)
   - [🔗 相关文档](#-相关文档)
-  - [**状态**: ✅ 100% 完成](#状态--100-完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -442,6 +441,7 @@ impl<T> Drop for UniquePtr<T> {
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-03-15
 **状态**: ✅ 100% 完成
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

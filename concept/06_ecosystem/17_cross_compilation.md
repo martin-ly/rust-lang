@@ -49,6 +49,12 @@
     - [10.3 边界测试：交叉编译的链接器缺失（编译错误）](#103-边界测试交叉编译的链接器缺失编译错误)
     - [10.4 边界测试：`cfg` 条件与目标平台的不一致（编译错误/逻辑错误）](#104-边界测试cfg-条件与目标平台的不一致编译错误逻辑错误)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Rust 的 target triple 格式是什么？请举例说明。（理解层）](#测验-1rust-的-target-triple-格式是什么请举例说明理解层)
+    - [测验 2：`rustup target add aarch64-unknown-linux-gnu` 命令安装的是什么？（理解层）](#测验-2rustup-target-add-aarch64-unknown-linux-gnu-命令安装的是什么理解层)
+    - [测验 3：`cargo build --target <triple>` 时，Cargo 如何选择链接器？（理解层）](#测验-3cargo-build---target-triple-时cargo-如何选择链接器理解层)
+    - [测验 4：为什么在 Windows 上交叉编译到 Linux 比在 Linux 上交叉编译到 Windows 更困难？（理解层）](#测验-4为什么在-windows-上交叉编译到-linux-比在-linux-上交叉编译到-windows-更困难理解层)
+    - [测验 5：`cross` 工具与 `cargo` 内置的交叉编译支持有什么区别？（理解层）](#测验-5cross-工具与-cargo-内置的交叉编译支持有什么区别理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -575,6 +581,66 @@ fn main() {
 - **定理**: 交叉编译：多目标平台支持与条件编译 定义 ⟹ 类型安全保证
 - **定理**: 交叉编译：多目标平台支持与条件编译 定义 ⟹ 类型安全保证
 - **定理**: 交叉编译：多目标平台支持与条件编译 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Rust 的 target triple 格式是什么？请举例说明。（理解层）
+
+**题目**: Rust 的 target triple 格式是什么？请举例说明。
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`arch-vendor-os-abi`，如 `x86_64-unknown-linux-gnu`（x86_64 Linux）、`aarch64-apple-darwin`（Apple Silicon Mac）、`wasm32-unknown-unknown`（WASM 无系统接口）。
+</details>
+
+---
+
+### 测验 2：`rustup target add aarch64-unknown-linux-gnu` 命令安装的是什么？（理解层）
+
+**题目**: `rustup target add aarch64-unknown-linux-gnu` 命令安装的是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+安装交叉编译所需的 target 标准库（`libcore`、`libstd` 等）和链接器配置。还需安装对应平台的链接器（如 `aarch64-linux-gnu-gcc`）。
+</details>
+
+---
+
+### 测验 3：`cargo build --target <triple>` 时，Cargo 如何选择链接器？（理解层）
+
+**题目**: `cargo build --target <triple>` 时，Cargo 如何选择链接器？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Cargo 通过 `.cargo/config.toml` 中的 `[target.<triple>].linker` 配置指定链接器。未配置时尝试使用默认的系统链接器（可能不支持交叉编译）。
+</details>
+
+---
+
+### 测验 4：为什么在 Windows 上交叉编译到 Linux 比在 Linux 上交叉编译到 Windows 更困难？（理解层）
+
+**题目**: 为什么在 Windows 上交叉编译到 Linux 比在 Linux 上交叉编译到 Windows 更困难？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Linux 工具链通常自带 MinGW（交叉编译到 Windows）。Windows 上缺少原生的 Linux 系统头文件和 glibc，通常需要 WSL、Docker 或 MSYS2 环境。
+</details>
+
+---
+
+### 测验 5：`cross` 工具与 `cargo` 内置的交叉编译支持有什么区别？（理解层）
+
+**题目**: `cross` 工具与 `cargo` 内置的交叉编译支持有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`cross` 使用 Docker 容器封装完整的交叉编译环境（包括链接器、系统库），避免了手动配置工具链的麻烦。`cargo` 需要手动安装和配置所有依赖。
+</details>
 
 ## 认知路径
 

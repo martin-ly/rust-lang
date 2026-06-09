@@ -50,6 +50,12 @@
     - [10.2 边界测试：`rustdoc` 的链接解析失败（编译错误）](#102-边界测试rustdoc-的链接解析失败编译错误)
     - [10.4 边界测试：`doctest` 的 `compile_fail` 与 `ignore` 的误用（测试失败）](#104-边界测试doctest-的-compile_fail-与-ignore-的误用测试失败)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：`rustdoc` 如何运行文档中的代码示例（doctests）？（理解层）](#测验-1rustdoc-如何运行文档中的代码示例doctests理解层)
+    - [测验 2：`///` 和 `//!` 在 Rust 文档注释中有什么区别？（理解层）](#测验-2-和--在-rust-文档注释中有什么区别理解层)
+    - [测验 3：为什么建议在公共 API 的文档示例中使用 `assert!` 或 `assert_eq!`？（理解层）](#测验-3为什么建议在公共-api-的文档示例中使用-assert-或-assert_eq理解层)
+    - [测验 4：`cargo doc` 生成的文档中，`[dependencies]` 的文档链接是如何自动生成的？（理解层）](#测验-4cargo-doc-生成的文档中dependencies-的文档链接是如何自动生成的理解层)
+    - [测验 5：`#[doc(hidden)]` 属性有什么用途？（理解层）](#测验-5dochidden-属性有什么用途理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -583,6 +589,66 @@ fn main() {}
 ### 补充定理链
 
 - **定理**: 文档生态：rustdoc、文档测试与 API 文档规范 定义 ⟹ 类型安全保证
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`rustdoc` 如何运行文档中的代码示例（doctests）？（理解层）
+
+**题目**: `rustdoc` 如何运行文档中的代码示例（doctests）？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`rustdoc` 提取 Markdown 代码块中标记为 `rust` 的示例，将其包装为 `main` 函数后编译运行。失败会导致 `cargo test` 报错。
+</details>
+
+---
+
+### 测验 2：`///` 和 `//!` 在 Rust 文档注释中有什么区别？（理解层）
+
+**题目**: `///` 和 `//!` 在 Rust 文档注释中有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`///` 为紧随其后的项（函数、结构体等）添加文档。`//!` 为包含它的模块或 crate 添加模块级/ crate 级文档。
+</details>
+
+---
+
+### 测验 3：为什么建议在公共 API 的文档示例中使用 `assert!` 或 `assert_eq!`？（理解层）
+
+**题目**: 为什么建议在公共 API 的文档示例中使用 `assert!` 或 `assert_eq!`？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+因为 doctests 会实际执行这些断言。通过断言可以验证示例代码的正确性，确保文档不会随代码更新而过时（文档即测试）。
+</details>
+
+---
+
+### 测验 4：`cargo doc` 生成的文档中，`[dependencies]` 的文档链接是如何自动生成的？（理解层）
+
+**题目**: `cargo doc` 生成的文档中，`[dependencies]` 的文档链接是如何自动生成的？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`rustdoc` 自动为类型和 trait 生成交叉引用链接。通过 `#[doc(inline)]`、`#[doc(no_inline)]` 和 `intra-doc links`（如 `[MyType](crate::module::MyType)`）控制链接行为。
+</details>
+
+---
+
+### 测验 5：`#[doc(hidden)]` 属性有什么用途？（理解层）
+
+**题目**: `#[doc(hidden)]` 属性有什么用途？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+隐藏某项不出现在公共文档中。常用于：1) 内部实现细节；2) 已废弃但需向后兼容的 API；3) 宏展开产生的中间项。
+</details>
 
 ## 认知路径
 

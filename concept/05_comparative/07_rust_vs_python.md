@@ -48,6 +48,12 @@
     - [10.2 边界测试：Python 的 GIL 与 Rust 的所有权并发（编译错误）](#102-边界测试python-的-gil-与-rust-的所有权并发编译错误)
     - [10.5 边界测试：Python 的 GIL 与 Rust 的 `Arc<Mutex<T>>` 的性能对比（运行时开销）](#105-边界测试python-的-gil-与-rust-的-arcmutext-的性能对比运行时开销)
     - [10.3 边界测试：Python 式动态类型在 Rust 中的不可表达（编译错误）](#103-边界测试python-式动态类型在-rust-中的不可表达编译错误)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Rust 和 Python 在类型系统上的核心区别是什么？（理解层）](#测验-1rust-和-python-在类型系统上的核心区别是什么理解层)
+    - [测验 2：Python 的 GIL（全局解释器锁）对并发有什么限制？Rust 有类似限制吗？（理解层）](#测验-2python-的-gil全局解释器锁对并发有什么限制rust-有类似限制吗理解层)
+    - [测验 3：为什么 Rust 常被用来重写 Python 的性能瓶颈模块（如 `numpy`、`cryptography`）？（理解层）](#测验-3为什么-rust-常被用来重写-python-的性能瓶颈模块如-numpycryptography理解层)
+    - [测验 4：Python 的"鸭子类型"（Duck Typing）与 Rust 的 Trait 系统有什么异同？（理解层）](#测验-4python-的鸭子类型duck-typing与-rust-的-trait-系统有什么异同理解层)
+    - [测验 5：在数据科学/ML 领域，Rust 目前为什么还不能完全替代 Python？（理解层）](#测验-5在数据科学ml-领域rust-目前为什么还不能完全替代-python理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -597,6 +603,66 @@ fn main() {
 ```
 
 > **修正**: Python 是**动态类型**：变量无固定类型，`x = 42` 后 `x = "hello"` 完全合法。Rust 是**静态类型**：变量类型在编译期确定且不可变（但值可变，若绑定为 `mut`）。Rust 模拟动态类型的方案：1) `enum`（代数数据类型）：`enum Value { Int(i32), Str(String) }`；2) `Box<dyn Any>`（运行时类型擦除）；3) `serde_json::Value`（通用 JSON 值）。代价：代码膨胀、运行时开销、模式匹配噪音。这与 Go 的 `interface{}`（类似动态类型，但需类型断言）或 TypeScript 的 `any`（编译期绕过检查）不同——Rust 的静态类型是核心设计语言，动态类型是额外抽象。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html)] · [来源: [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html)]
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Rust 和 Python 在类型系统上的核心区别是什么？（理解层）
+
+**题目**: Rust 和 Python 在类型系统上的核心区别是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 是静态强类型，类型错误在编译期捕获。Python 是动态类型，类型错误在运行时暴露。Python 3.5+ 的类型提示是可选的，不影响运行时行为。
+</details>
+
+---
+
+### 测验 2：Python 的 GIL（全局解释器锁）对并发有什么限制？Rust 有类似限制吗？（理解层）
+
+**题目**: Python 的 GIL（全局解释器锁）对并发有什么限制？Rust 有类似限制吗？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+GIL 阻止 Python 线程真正并行执行 CPU 密集型任务。Rust 没有 GIL，原生线程可真正并行，且 `Send`/`Sync` trait 在编译期防止数据竞争。
+</details>
+
+---
+
+### 测验 3：为什么 Rust 常被用来重写 Python 的性能瓶颈模块（如 `numpy`、`cryptography`）？（理解层）
+
+**题目**: 为什么 Rust 常被用来重写 Python 的性能瓶颈模块（如 `numpy`、`cryptography`）？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 性能接近 C/C++，且内存安全。通过 PyO3 等工具将 Rust 编译为 Python 扩展模块，可在保留 Python 易用性的同时大幅提升热点性能。
+</details>
+
+---
+
+### 测验 4：Python 的"鸭子类型"（Duck Typing）与 Rust 的 Trait 系统有什么异同？（理解层）
+
+**题目**: Python 的"鸭子类型"（Duck Typing）与 Rust 的 Trait 系统有什么异同？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+两者都基于行为而非继承。Python 在运行时检查方法存在性（可能失败）。Rust 在编译期通过 trait bound 检查，错误在编译期捕获。
+</details>
+
+---
+
+### 测验 5：在数据科学/ML 领域，Rust 目前为什么还不能完全替代 Python？（理解层）
+
+**题目**: 在数据科学/ML 领域，Rust 目前为什么还不能完全替代 Python？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Python 拥有更成熟的 ML 生态（PyTorch、TensorFlow、Jupyter）。Rust 的 ML 库正在发展，但 API 成熟度、社区规模和研究者熟悉度仍有差距。
+</details>
 
 ## 认知路径
 

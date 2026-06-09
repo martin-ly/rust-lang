@@ -9,6 +9,46 @@
 
 ---
 
+## 📑 目录
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+- [L3机器可检查证明实施指南](#l3机器可检查证明实施指南)
+  - [📑 目录](#-目录)
+  - [一、L3证明概述](#一l3证明概述)
+    - [1.1 证明深度层级](#11-证明深度层级)
+    - [1.2 L3证明目标](#12-l3证明目标)
+  - [二、工具链选择](#二工具链选择)
+    - [2.1 推荐方案: Coq + Iris](#21-推荐方案-coq--iris)
+    - [2.2 环境搭建](#22-环境搭建)
+  - [三、T-OW2所有权唯一性L3证明](#三t-ow2所有权唯一性l3证明)
+    - [3.1 定理回顾](#31-定理回顾)
+    - [3.2 Iris中的状态表示](#32-iris中的状态表示)
+    - [3.3 状态转移规则](#33-状态转移规则)
+    - [3.4 主定理证明骨架](#34-主定理证明骨架)
+  - [四、T-BR1数据竞争自由L3证明](#四t-br1数据竞争自由l3证明)
+    - [4.1 定理回顾](#41-定理回顾)
+    - [4.2 并发模型形式化](#42-并发模型形式化)
+    - [4.3 主定理证明骨架](#43-主定理证明骨架)
+  - [五、T-TY3类型安全L3证明](#五t-ty3类型安全l3证明)
+    - [5.1 类型系统形式化](#51-类型系统形式化)
+    - [5.2 进展性定理](#52-进展性定理)
+  - [六、与Aeneas工具链对接](#六与aeneas工具链对接)
+    - [6.1 安装Aeneas](#61-安装aeneas)
+    - [6.2 Rust到Lean翻译示例](#62-rust到lean翻译示例)
+  - [七、验证与测试](#七验证与测试)
+    - [7.1 Coq文件编译验证](#71-coq文件编译验证)
+    - [7.2 证明完整性检查](#72-证明完整性检查)
+  - [八、里程碑](#八里程碑)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
+
 ## 一、L3证明概述
 >
 > **[来源: Rust Official Docs]**
@@ -80,47 +120,6 @@ coqtop --version
 ```
 
 ---
-
-## 📑 目录
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-- L3机器可检查证明实施指南
-  - [一、L3证明概述](#一l3证明概述)
-    - [1.1 证明深度层级](#11-证明深度层级)
-    - [1.2 L3证明目标](#12-l3证明目标)
-  - [二、工具链选择](#二工具链选择)
-    - [2.1 推荐方案: Coq + Iris](#21-推荐方案-coq--iris)
-    - [2.2 环境搭建](#22-环境搭建)
-  - [📑 目录](#目录)
-  - [三、T-OW2所有权唯一性L3证明](#三t-ow2所有权唯一性l3证明)
-    - [3.1 定理回顾](#31-定理回顾)
-    - [3.2 Iris中的状态表示](#32-iris中的状态表示)
-    - [3.3 状态转移规则](#33-状态转移规则)
-    - [3.4 主定理证明骨架](#34-主定理证明骨架)
-  - [四、T-BR1数据竞争自由L3证明](#四t-br1数据竞争自由l3证明)
-    - [4.1 定理回顾](#41-定理回顾)
-    - [4.2 并发模型形式化](#42-并发模型形式化)
-    - [4.3 主定理证明骨架](#43-主定理证明骨架)
-  - [五、T-TY3类型安全L3证明](#五t-ty3类型安全l3证明)
-    - [5.1 类型系统形式化](#51-类型系统形式化)
-    - [5.2 进展性定理](#52-进展性定理)
-  - [六、与Aeneas工具链对接](#六与aeneas工具链对接)
-    - [6.1 安装Aeneas](#61-安装aeneas)
-    - [6.2 Rust到Lean翻译示例](#62-rust到lean翻译示例)
-  - [七、验证与测试](#七验证与测试)
-    - [7.1 Coq文件编译验证](#71-coq文件编译验证)
-    - [7.2 证明完整性检查](#72-证明完整性检查)
-  - [八、里程碑](#八里程碑)
-  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
 
 ## 三、T-OW2所有权唯一性L3证明
 >
@@ -547,13 +546,9 @@ grep -r "Qed" *.v | wc -l
 ## 权威来源索引
 
 > **[来源: Wikipedia - Formal Methods]**
-
 > **[来源: Coq Reference]**
-
 > **[来源: TLA+]**
-
 > **[来源: ACM - Formal Verification]**
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference]**
 > **[来源: TRPL - The Rust Programming Language]**
@@ -564,112 +559,3 @@ grep -r "Qed" *.v | wc -l
 > **[来源: Rustonomicon]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**

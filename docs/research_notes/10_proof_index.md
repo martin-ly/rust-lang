@@ -69,9 +69,7 @@
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
 
 ## 🔢 公理编号规范 (Axiom Numbering Convention) {#-公理编号规范-axiom-numbering-convention}
 >
@@ -945,13 +943,14 @@
 #### 相关文档
 
 - Rust 1.94 迁移指南
-- [Rust 1.94 特性速查
+- Rust 1.94 特性速查
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -971,39 +970,5 @@
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
-
----
-
-## 权威来源索引
-
-> **[来源: Wikipedia - Mathematical Proof]**
-
-> **[来源: Wikipedia - Formal Methods]**
-
-> **[来源: ACM - Proof Assistant Survey]**
-
-> **[来源: IEEE - Verification Standards]**
-
-> **[来源: RustBelt - Rust Formal Verification]**
-
-> **[来源: TLA+ Documentation]**
-
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
 
 ---

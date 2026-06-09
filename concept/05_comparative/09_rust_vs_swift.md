@@ -50,6 +50,12 @@
     - [10.3 边界测试：Swift 的 ARC 与 Rust 的所有权的循环引用差异（运行时内存泄漏）](#103-边界测试swift-的-arc-与-rust-的所有权的循环引用差异运行时内存泄漏)
     - [10.4 边界测试：Swift 的 Optional 链与 Rust 的 `?` 运算符（编译错误）](#104-边界测试swift-的-optional-链与-rust-的--运算符编译错误)
     - [10.3 边界测试：Swift 的 ARC 与 Rust 的所有权内存管理对比（运行时差异）](#103-边界测试swift-的-arc-与-rust-的所有权内存管理对比运行时差异)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Rust 和 Swift 在设计目标上有什么根本不同？（理解层）](#测验-1rust-和-swift-在设计目标上有什么根本不同理解层)
+    - [测验 2：Swift 使用自动引用计数（ARC），Rust 使用所有权系统。两者在内存管理上有什么本质区别？（理解层）](#测验-2swift-使用自动引用计数arcrust-使用所有权系统两者在内存管理上有什么本质区别理解层)
+    - [测验 3：Swift 的 `Optional<T>` 与 Rust 的 `Option<T>` 在语义和使用上是否相同？（理解层）](#测验-3swift-的-optionalt-与-rust-的-optiont-在语义和使用上是否相同理解层)
+    - [测验 4：Swift 的协议（Protocol）与 Rust 的 trait 有什么主要区别？（理解层）](#测验-4swift-的协议protocol与-rust-的-trait-有什么主要区别理解层)
+    - [测验 5：在跨平台开发中，Rust 相比 Swift 有什么优势？（理解层）](#测验-5在跨平台开发中rust-相比-swift-有什么优势理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -639,6 +645,66 @@ fn main() {
 ```
 
 > **修正**: Swift 的 **ARC**（Automatic Reference Counting）在运行时管理内存：赋值时引用计数 +1，超出作用域时 -1，为 0 时释放。循环引用用 `weak`（可 nil）或 `unowned`（不可 nil，但可能悬垂）打破。Rust 的**所有权系统**在编译期跟踪：1) `let s2 = s` 是 move（无运行时开销，只是指针复制）；2) 编译器保证无双重释放和 use-after-free；3) `Rc`/`Arc` 是显式的运行时引用计数（可选）。性能对比：Swift ARC 有原子操作开销（线程安全），Rust 的 move 是零成本。Swift 的优势：与 Objective-C 互操作、更灵活的引用语义；Rust 的优势：编译期保证、零成本抽象、无循环引用风险（`Box` 无循环，`Rc` 循环需 `Weak` 打破，但编译器不强制）。这与 Python 的 GC（引用计数 + 循环检测）或 C++ 的 `shared_ptr`（类似 ARC）不同——Rust 的所有权是编译期机制，非运行时。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] · [来源: [Swift ARC](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/automaticreferencecounting/)]
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Rust 和 Swift 在设计目标上有什么根本不同？（理解层）
+
+**题目**: Rust 和 Swift 在设计目标上有什么根本不同？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 目标是系统编程（操作系统、浏览器引擎、嵌入式），追求零成本抽象和最大控制。Swift 目标是应用开发（iOS/macOS），追求开发效率和与 Apple 生态集成。
+</details>
+
+---
+
+### 测验 2：Swift 使用自动引用计数（ARC），Rust 使用所有权系统。两者在内存管理上有什么本质区别？（理解层）
+
+**题目**: Swift 使用自动引用计数（ARC），Rust 使用所有权系统。两者在内存管理上有什么本质区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+ARC 在运行时插入 retain/release 调用，有引用计数开销和循环引用风险。Rust 的所有权在编译期静态确定内存生命周期，无运行时开销和循环引用风险。
+</details>
+
+---
+
+### 测验 3：Swift 的 `Optional<T>` 与 Rust 的 `Option<T>` 在语义和使用上是否相同？（理解层）
+
+**题目**: Swift 的 `Optional<T>` 与 Rust 的 `Option<T>` 在语义和使用上是否相同？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+语义相同（都表示可能有值），但 Swift `Optional` 是语言内建语法糖（`T?`），与 Objective-C 的 `nil` 互通。Rust `Option` 是标准库枚举，更泛型化，无特殊语法。
+</details>
+
+---
+
+### 测验 4：Swift 的协议（Protocol）与 Rust 的 trait 有什么主要区别？（理解层）
+
+**题目**: Swift 的协议（Protocol）与 Rust 的 trait 有什么主要区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Swift 协议支持动态分发（`any Protocol`）和关联类型默认值。Rust trait 更严格，不支持默认泛型参数，但支持更强大的类型级编程和零成本抽象。
+</details>
+
+---
+
+### 测验 5：在跨平台开发中，Rust 相比 Swift 有什么优势？（理解层）
+
+**题目**: 在跨平台开发中，Rust 相比 Swift 有什么优势？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 原生支持 Windows/Linux/macOS/嵌入式等多种平台，工具链跨平台一致。Swift 虽然开源，但主要优化于 Apple 生态，在其他平台支持和工具链成熟度上较弱。
+</details>
 
 ## 认知路径
 

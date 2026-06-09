@@ -50,6 +50,12 @@
     - [10.3 边界测试：TypeScript 的结构类型与 Rust 的名义类型的互操作（编译错误）](#103-边界测试typescript-的结构类型与-rust-的名义类型的互操作编译错误)
     - [10.4 边界测试：TypeScript 的 `any` 与 Rust 的 `unsafe` 的语义鸿沟（编译错误/运行时 UB）](#104-边界测试typescript-的-any-与-rust-的-unsafe-的语义鸿沟编译错误运行时-ub)
     - [10.3 边界测试：TypeScript 的结构性类型与 Rust 的名义类型（编译错误）](#103-边界测试typescript-的结构性类型与-rust-的名义类型编译错误)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Rust 和 TypeScript 的静态类型检查最根本的区别是什么？（理解层）](#测验-1rust-和-typescript-的静态类型检查最根本的区别是什么理解层)
+    - [测验 2：TypeScript 的渐进类型系统（Gradual Typing）与 Rust 的强制类型系统各有什么优劣？（理解层）](#测验-2typescript-的渐进类型系统gradual-typing与-rust-的强制类型系统各有什么优劣理解层)
+    - [测验 3：Rust 的 `enum`（代数数据类型）与 TypeScript 的 Discriminated Unions 有什么区别？（理解层）](#测验-3rust-的-enum代数数据类型与-typescript-的-discriminated-unions-有什么区别理解层)
+    - [测验 4：为什么 TypeScript 的类型系统不能防止运行时类型错误（如 API 返回不符合预期的数据）？（理解层）](#测验-4为什么-typescript-的类型系统不能防止运行时类型错误如-api-返回不符合预期的数据理解层)
+    - [测验 5：在前后端同构项目中，Rust 能否替代 TypeScript？目前的限制是什么？（理解层）](#测验-5在前后端同构项目中rust-能否替代-typescript目前的限制是什么理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -831,6 +837,66 @@ fn main() {
 ```
 
 > **修正**: Rust 使用**名义类型系统**（nominal typing）：类型的同一性由名称决定，而非结构。`Point` 和 `Coordinate` 有相同字段但不同名称，是完全不同的类型。TypeScript 使用**结构性类型系统**（structural typing）：`{ x: number, y: number }` 与 `Point` 兼容，只要结构匹配。Rust 的名义类型：优势——重构安全（重命名字段不影响其他类型）、清晰的错误信息；劣势——需显式转换（`From` trait）。TypeScript 的结构类型：优势——灵活、易于接口组合；劣势——意外兼容（两个不相关的类型因结构相同而混用）。Rust 的 newtype 模式（`struct Meters(u32)`）利用名义类型创建零成本抽象。这与 Go 的接口（结构性满足）或 Haskell 的 `newtype`（名义类型包装）类似——Rust 在名义类型的基础上提供结构化的模式匹配（`match`）。
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Rust 和 TypeScript 的静态类型检查最根本的区别是什么？（理解层）
+
+**题目**: Rust 和 TypeScript 的静态类型检查最根本的区别是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 类型检查在编译期进行，类型错误阻止编译。TypeScript 的类型检查只在编译期，运行的是无类型的 JavaScript，类型错误可能在运行时被忽略。
+</details>
+
+---
+
+### 测验 2：TypeScript 的渐进类型系统（Gradual Typing）与 Rust 的强制类型系统各有什么优劣？（理解层）
+
+**题目**: TypeScript 的渐进类型系统（Gradual Typing）与 Rust 的强制类型系统各有什么优劣？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+渐进类型允许逐步迁移已有 JS 代码，降低采用门槛。Rust 的强制类型在编译期保证类型安全，但要求所有代码一开始就类型正确，学习曲线更陡。
+</details>
+
+---
+
+### 测验 3：Rust 的 `enum`（代数数据类型）与 TypeScript 的 Discriminated Unions 有什么区别？（理解层）
+
+**题目**: Rust 的 `enum`（代数数据类型）与 TypeScript 的 Discriminated Unions 有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+语义相似，但 Rust 的 `match` 要求穷尽性检查（编译器强制处理所有变体）。TypeScript 的 `switch` 不强制穷尽，遗漏分支仅在编译期警告（可配置）。
+</details>
+
+---
+
+### 测验 4：为什么 TypeScript 的类型系统不能防止运行时类型错误（如 API 返回不符合预期的数据）？（理解层）
+
+**题目**: 为什么 TypeScript 的类型系统不能防止运行时类型错误（如 API 返回不符合预期的数据）？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+因为 TS 类型在编译后完全擦除，运行时无类型信息。若外部数据（API、localStorage）不符合类型声明，TS 无法检测。Rust 的类型在运行时通过 enum/struct 布局保持。
+</details>
+
+---
+
+### 测验 5：在前后端同构项目中，Rust 能否替代 TypeScript？目前的限制是什么？（理解层）
+
+**题目**: 在前后端同构项目中，Rust 能否替代 TypeScript？目前的限制是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 可通过 WASM 运行在浏览器中，但 DOM 操作需通过 JS 桥接，工具链较复杂。TypeScript 在前端生态成熟度、开发体验（HMR、调试）上仍有明显优势。
+</details>
 
 ## 认知路径
 
