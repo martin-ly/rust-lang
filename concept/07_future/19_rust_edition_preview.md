@@ -78,3 +78,63 @@ fn main() {
 ### 反命题与边界
 
 > **反命题**: "Rust 2024 Edition Preview 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Rust Edition 2024 相比 2021 有哪些主要变化？（理解层）
+
+**题目**: Rust Edition 2024 相比 2021 有哪些主要变化？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`gen` 块、`if let` 临时生命周期延长、`unsafe_op_in_unsafe_fn` 默认启用、`lifetime_capture_rules` 改进、模式匹配 `|` 操作符等。
+</details>
+
+---
+
+### 测验 2：Edition 迁移工具 `cargo fix --edition` 如何工作？（理解层）
+
+**题目**: Edition 迁移工具 `cargo fix --edition` 如何工作？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+自动分析代码并应用必要的语法更新，如添加 `unsafe` 块、调整生命周期标注。极大降低了 Edition 迁移的人工成本。
+</details>
+
+---
+
+### 测验 3：为什么 Rust 可以同时支持多个 Edition？（理解层）
+
+**题目**: 为什么 Rust 可以同时支持多个 Edition？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+编译器根据 `edition = '...'` 配置选择解析规则。不同 Edition 的 crate 可以无缝互操作，生态逐步迁移。
+</details>
+
+---
+
+### 测验 4：Edition 与 SemVer 有什么关系？（理解层）
+
+**题目**: Edition 与 SemVer 有什么关系？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Edition 变化不改变 crate 的 SemVer，因为不同 Edition 可以互操作。但如果 API 本身有 breaking change，仍需升级 major version。
+</details>
+
+---
+
+### 测验 5：下一个 Edition（2027/2028）可能包含什么？（理解层）
+
+**题目**: 下一个 Edition（2027/2028）可能包含什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+可能包括：更完整的 effect 系统、稳定化的 `gen` 块、`async_drop`、`field projections`、`pin` 语法改进、更灵活的 `self` 类型等。
+</details>

@@ -84,3 +84,63 @@ fn main() {}
 ### 反命题与边界
 
 > **反命题**: "RPITIT Preview 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：RPITIT（Return Position Impl Trait In Traits）是什么？（理解层）
+
+**题目**: RPITIT（Return Position Impl Trait In Traits）是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+允许在 trait 定义中使用 `impl Trait` 作为返回类型。之前 `impl Trait` 只能在自由函数和 inherent impl 中使用，不能在 trait 方法中。
+</details>
+
+---
+
+### 测验 2：RPITIT 与关联类型（Associated Type）有什么关系？（理解层）
+
+**题目**: RPITIT 与关联类型（Associated Type）有什么关系？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+RPITIT 是关联类型的语法糖。编译器将 `fn method() -> impl Trait` 自动转换为带有隐式关联类型的形式，简化了 trait 定义。
+</details>
+
+---
+
+### 测验 3：这个特性对 `async fn` 在 trait 中的支持有什么帮助？（理解层）
+
+**题目**: 这个特性对 `async fn` 在 trait 中的支持有什么帮助？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`async fn` 在 trait 中的本质就是 RPITIT（返回 `impl Future`）。RPITIT 的稳定化是 `async fn` in trait 的基础。
+</details>
+
+---
+
+### 测验 4：RPITIT 在 Rust 1.75 中已稳定，但在 1.96 中有什么后续改进？（理解层）
+
+**题目**: RPITIT 在 Rust 1.75 中已稳定，但在 1.96 中有什么后续改进？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+后续改进包括生命周期捕获规则的精确控制（`use<'a>` 语法），解决了返回类型隐式捕获过多生命周期的问题。
+</details>
+
+---
+
+### 测验 5：RPITIT 对 API 设计有什么影响？（理解层）
+
+**题目**: RPITIT 对 API 设计有什么影响？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+简化了 trait 定义，减少了显式关联类型的样板代码。使 trait 方法可以像自由函数一样使用 `impl Trait`，提高了表达能力。
+</details>

@@ -78,3 +78,63 @@ fn main() {}
 ### 反命题与边界
 
 > **反命题**: "Gen Blocks Preview 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`gen` 块与 `async` 块有什么相似之处？（理解层）
+
+**题目**: `gen` 块与 `async` 块有什么相似之处？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+两者都是惰性计算的语法糖，编译为状态机。`async` 返回 `Future`，`gen` 返回 `Iterator`（或更一般的 `Generator`）。
+</details>
+
+---
+
+### 测验 2：`gen` 块中的 `yield` 与 Python/JavaScript 的 `yield` 有什么区别？（理解层）
+
+**题目**: `gen` 块中的 `yield` 与 Python/JavaScript 的 `yield` 有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+语义相似：暂停执行并返回值给调用者。Rust 的 `yield` 编译为状态机转移，保证内存安全（无悬垂引用）。
+</details>
+
+---
+
+### 测验 3：`gen` 块对 `Stream` 的实现有什么帮助？（理解层）
+
+**题目**: `gen` 块对 `Stream` 的实现有什么帮助？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+可以自然地表达异步流：`gen { yield fetch_page(1).await; }`，比手动实现 `Stream` trait 简洁得多。
+</details>
+
+---
+
+### 测验 4：`gen` 块目前的状态是什么？（理解层）
+
+**题目**: `gen` 块目前的状态是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+已在 nightly 中可用（`feature(gen_blocks)`），预计在未来几个版本内稳定化。是 Rust 2024+ 的重要特性。
+</details>
+
+---
+
+### 测验 5：`gen` 块与现有迭代器适配器（`map`、`filter`）有什么关系？（理解层）
+
+**题目**: `gen` 块与现有迭代器适配器（`map`、`filter`）有什么关系？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`gen` 块提供了更灵活、更直观的迭代器定义方式，与适配器互补。复杂逻辑用 `gen` 块，简单转换用适配器链。
+</details>

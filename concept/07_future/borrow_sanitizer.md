@@ -231,3 +231,63 @@ Safety Tags (RFC #3842)        BorrowSanitizer
 > **维护者**: 本项目知识库团队
 > **状态**: 🧪 活跃跟踪中
 > **下次复核**: 2026-06-22（BSan 月度更新发布后）
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：BorrowSanitizer 与 Miri 在检测能力上有什么区别？（理解层）
+
+**题目**: BorrowSanitizer 与 Miri 在检测能力上有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Miri 是解释器，检测广泛的 UB（越界、未对齐、数据竞争）。BorrowSanitizer 是运行时 sanitizer，专注于借用规则违规，速度更快，适合 CI。
+</details>
+
+---
+
+### 测验 2：BorrowSanitizer 基于什么 LLVM 基础设施？（理解层）
+
+**题目**: BorrowSanitizer 基于什么 LLVM 基础设施？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+基于 LLVM 的 sanitizer 框架，编译时插入检查代码，运行时通过 shadow memory 追踪引用状态，检测悬垂引用和非法别名。
+</details>
+
+---
+
+### 测验 3：为什么需要 BorrowSanitizer 而不是仅依赖编译器借用检查？（理解层）
+
+**题目**: 为什么需要 BorrowSanitizer 而不是仅依赖编译器借用检查？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+借用检查器是静态分析，保守且可能拒绝合法代码。BorrowSanitizer 动态验证运行时实际行为，补充静态检查的不足。
+</details>
+
+---
+
+### 测验 4：BorrowSanitizer 对 `unsafe` 代码审计有什么帮助？（理解层）
+
+**题目**: BorrowSanitizer 对 `unsafe` 代码审计有什么帮助？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+可在 CI 中自动化检测 `unsafe` 代码的借用违规，减少人工审计负担。特别适用于 FFI 边界和手动内存管理代码。
+</details>
+
+---
+
+### 测验 5：这个工具预计何时可用？（理解层）
+
+**题目**: 这个工具预计何时可用？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+作为 Rust Project Goals 2026 的一部分正在开发中。预计 2026-2027 年在 nightly 中提供实验性支持。
+</details>

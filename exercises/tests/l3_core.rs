@@ -62,6 +62,8 @@ fn test_raw_pointer_deref_requires_unsafe() {
 /// 测验2: Unsafe Trait 实现需要 unsafe impl
 #[test]
 fn test_unsafe_trait_requires_unsafe_impl() {
+    /// # Safety
+    /// 实现此 trait 的类型必须能安全地用全零字节初始化。
     unsafe trait Zeroable {
         fn zero() -> Self;
     }

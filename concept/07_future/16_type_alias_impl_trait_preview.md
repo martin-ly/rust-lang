@@ -80,3 +80,63 @@ fn main() {}
 ### 反命题与边界
 
 > **反命题**: "TAIT Preview 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Type Alias Impl Trait（TAIT）是什么？（理解层）
+
+**题目**: Type Alias Impl Trait（TAIT）是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+允许在类型别名中使用 `impl Trait`，如 `type MyIter = impl Iterator<Item = i32>`。隐藏具体类型同时提供命名抽象。
+</details>
+
+---
+
+### 测验 2：TAIT 与 `impl Trait` 在函数返回位置有什么区别？（理解层）
+
+**题目**: TAIT 与 `impl Trait` 在函数返回位置有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`impl Trait` 在函数返回位置是匿名的、局部的。TAIT 提供了命名，可在多个函数间共享同一隐藏类型，实现模块化抽象。
+</details>
+
+---
+
+### 测验 3：TAIT 对递归类型和状态机有什么帮助？（理解层）
+
+**题目**: TAIT 对递归类型和状态机有什么帮助？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+允许命名递归类型（如 `type TreeNode = impl Node`），简化自引用结构体和复杂状态机的类型签名。
+</details>
+
+---
+
+### 测验 4：TAIT 目前的限制是什么？（理解层）
+
+**题目**: TAIT 目前的限制是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+只能在模块级或关联类型中使用，不能用于局部变量。编译器需要确保所有使用位置的底层类型一致。
+</details>
+
+---
+
+### 测验 5：这个特性预计何时完全稳定？（理解层）
+
+**题目**: 这个特性预计何时完全稳定？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+部分功能已在 stable 中可用（关联类型位置）。完整的 TAIT 预计在 2026-2027 年间逐步稳定化。
+</details>

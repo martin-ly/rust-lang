@@ -78,3 +78,63 @@ fn main() {
 ### 反命题与边界
 
 > **反命题**: "Const Trait Preview 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`const trait` 与 `const fn` 有什么区别？（理解层）
+
+**题目**: `const trait` 与 `const fn` 有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`const fn` 是单个函数可在编译期执行。`const trait` 允许 trait 的方法在常量上下文中使用，使泛型常量代码成为可能。
+</details>
+
+---
+
+### 测验 2：为什么 `Vec::new()`  historically 不是 `const fn`？（理解层）
+
+**题目**: 为什么 `Vec::new()`  historically 不是 `const fn`？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+因为 `Vec` 的分配需要堆内存，而常量上下文 historically 不支持分配。`const_mut_refs` 和 `const_heap` 功能逐步放宽限制。
+</details>
+
+---
+
+### 测验 3：`~const Trait` 语法是什么意思？（理解层）
+
+**题目**: `~const Trait` 语法是什么意思？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+表示"这个泛型参数可以是 const 或非 const 的 trait 实现"。允许函数同时服务于 const 和运行时上下文。
+</details>
+
+---
+
+### 测验 4：`const trait` 对嵌入式开发有什么意义？（理解层）
+
+**题目**: `const trait` 对嵌入式开发有什么意义？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+允许在编译期构造复杂数据结构（如查找表、配置结构），无需运行时初始化代码，减少二进制体积和启动时间。
+</details>
+
+---
+
+### 测验 5：这个特性目前的实现状态如何？（理解层）
+
+**题目**: 这个特性目前的实现状态如何？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+已在 nightly 中实验性提供，部分功能（如 `~const`）正在稳定化讨论中。是 Rust 常量求值能力扩展的重要一步。
+</details>

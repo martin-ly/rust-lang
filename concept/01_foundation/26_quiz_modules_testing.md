@@ -659,3 +659,39 @@ cargo test -- --test-threads=1  # 单线程运行测试
 ---
 
 > **权威来源**: [The Rust Programming Language — Ch7](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) · [The Rust Programming Language — Ch11](https://doc.rust-lang.org/book/ch11-00-testing.html) · [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html)
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：本文件是 测验：模块系统与测试（L1 试点扩展） 的专项测验集。这类测验文件的主要作用是什么？（理解层）
+
+**题目**: 本文件是 测验：模块系统与测试（L1 试点扩展） 的专项测验集。这类测验文件的主要作用是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+集中提供大量针对特定主题的练习题，帮助学习者系统检验和巩固对该主题的掌握程度，补充概念文件中的嵌入式测验。
+</details>
+
+---
+
+### 测验 2：在 测验：模块系统与测试（L1 试点扩展） 的测验中，若遇到不确定答案的题目，最佳的学习策略是什么？（理解层）
+
+**题目**: 在 测验：模块系统与测试（L1 试点扩展） 的测验中，若遇到不确定答案的题目，最佳的学习策略是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+先尝试独立作答，然后对照答案解析理解错误原因，最后回到对应的概念文件重新阅读相关章节，形成"测验-反馈-复习"的闭环。
+</details>
+
+---
+
+### 测验 3：专项测验与概念文件末尾的嵌入式测验有什么区别？（理解层）
+
+**题目**: 专项测验与概念文件末尾的嵌入式测验有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+专项测验题量更大、覆盖更全面，通常按难度分层；嵌入式测验更精简，直接关联刚阅读的概念内容，用于即时检验理解。
+</details>

@@ -264,3 +264,39 @@
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 > **内容分级**: [综述级]
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：《Summary》是一份归档文件。归档文件在知识体系中有什么作用？（理解层）
+
+**题目**: 《Summary》是一份归档文件。归档文件在知识体系中有什么作用？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+保留历史版本的内容，便于追溯概念演变、对比新旧表述，同时避免活跃学习路径被过时信息干扰。
+</details>
+
+---
+
+### 测验 2：阅读归档文件时应该注意什么？（理解层）
+
+**题目**: 阅读归档文件时应该注意什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+注意文件顶部的归档说明和最后更新日期，理解其历史上下文，不要将其中的过时信息当作当前最佳实践。
+</details>
+
+---
+
+### 测验 3：归档文件与活跃概念文件的主要区别是什么？（理解层）
+
+**题目**: 归档文件与活跃概念文件的主要区别是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+归档文件不再维护更新，反映的是历史状态；活跃概念文件持续迭代，包含最新的语言特性和最佳实践。
+</details>

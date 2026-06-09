@@ -79,3 +79,63 @@ fn main() {
 ### 反命题与边界
 
 > **反命题**: "Rust in Space Preview 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：为什么航天领域对 Rust 感兴趣？（理解层）
+
+**题目**: 为什么航天领域对 Rust 感兴趣？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+航天软件需要极高的可靠性、确定性的资源使用和内存安全。Rust 的编译期保证减少了运行时的故障模式，适合卫星和探测器软件。
+</details>
+
+---
+
+### 测验 2：Rust 在航天领域相比 Ada/SPARK 有什么优势？（理解层）
+
+**题目**: Rust 在航天领域相比 Ada/SPARK 有什么优势？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 有更现代的生态（crates.io、cargo）、更活跃的社区和更好的 C 互操作。Ada/SPARK 在形式化验证方面更成熟，但工具链较老。
+</details>
+
+---
+
+### 测验 3：欧洲航天局（ESA）对 Rust 有什么态度？（理解层）
+
+**题目**: 欧洲航天局（ESA）对 Rust 有什么态度？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+ESA 正在评估 Rust 用于未来任务，关注其内存安全保证和 Ferrocene 认证路径。Rust 被视为 Ada 的潜在补充。
+</details>
+
+---
+
+### 测验 4：`no_std` 在航天嵌入式系统中有什么用途？（理解层）
+
+**题目**: `no_std` 在航天嵌入式系统中有什么用途？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+航天设备通常使用裸机或 RTOS，无完整操作系统。`no_std` 使 Rust 可以在这些环境中运行，结合 `alloc` 提供有限的堆分配。
+</details>
+
+---
+
+### 测验 5：辐射硬化（Radiation Hardening）对 Rust 程序有什么特殊要求？（理解层）
+
+**题目**: 辐射硬化（Radiation Hardening）对 Rust 程序有什么特殊要求？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+辐射可能导致位翻转（bit flip）。需要使用 ECC 内存、三模冗余（TMR）和错误检测代码。Rust 的类型安全不能防止硬件级错误，但减少了软件漏洞。
+</details>

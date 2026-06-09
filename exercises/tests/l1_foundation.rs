@@ -59,7 +59,7 @@ fn test_borrow_instead_of_move() {
     assert_eq!(s, "hello");
 }
 
-fn borrow_string(s: &String) -> usize {
+fn borrow_string(s: &str) -> usize {
     s.len()
 }
 
@@ -253,7 +253,7 @@ fn test_as_cast_truncation() {
 #[test]
 fn test_nan_not_equal() {
     let x: f64 = f64::NAN;
-    assert!(!(x == f64::NAN)); // NaN != NaN
+    assert_ne!(x, x); // NaN != NaN：任何 NaN 与自身都不相等
     assert!(x.is_nan()); // 必须使用 is_nan() 检测
 }
 

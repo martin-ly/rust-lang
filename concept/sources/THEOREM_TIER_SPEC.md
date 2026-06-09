@@ -256,3 +256,39 @@ def check_theorem_tier(file_path):
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：《定理分级规范（Theorem Tier Specification）》是知识体系的来源文档。来源文档的作用是什么？（理解层）
+
+**题目**: 《定理分级规范（Theorem Tier Specification）》是知识体系的来源文档。来源文档的作用是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+记录和规范化所有概念文件的权威引用来源，确保知识的可追溯性和学术严谨性，便于读者深入查证。
+</details>
+
+---
+
+### 测验 2：为什么来源文档需要区分一级来源和二级来源？（理解层）
+
+**题目**: 为什么来源文档需要区分一级来源和二级来源？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+一级来源（如 Rust Reference、RFC）是权威定义，二级来源（如博客、教程）是解释和补充。区分帮助读者判断信息的可靠性。
+</details>
+
+---
+
+### 测验 3：在引用来源时，为什么建议精确到具体章节而非只写根 URL？（理解层）
+
+**题目**: 在引用来源时，为什么建议精确到具体章节而非只写根 URL？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+精确到章节便于读者快速定位相关内容，避免因文档庞大而找不到对应信息，也便于后续审核和更新引用。
+</details>

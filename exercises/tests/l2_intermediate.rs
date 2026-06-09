@@ -257,7 +257,9 @@ use std::mem;
 
 #[test]
 fn test_newtype_zero_cost() {
+    #[allow(dead_code)]
     struct Kilometers(f64);
+    #[allow(dead_code)]
     struct Miles(f64);
 
     assert_eq!(mem::size_of::<Kilometers>(), mem::size_of::<f64>());
