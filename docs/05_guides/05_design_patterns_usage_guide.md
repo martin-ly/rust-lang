@@ -62,14 +62,13 @@
     - [4. Builder 模式（消耗型 vs 非消耗型）](#4-builder-模式消耗型-vs-非消耗型)
   - [📚 相关文档](#-相关文档)
   - [🆕 Rust 1.95+ 特性在设计模式中的应用](#-rust-195-特性在设计模式中的应用)
-    - [1. rray\_windows() 在滑动窗口模式中的应用](#1-rray_windows-在滑动窗口模式中的应用)
+    - [1. Array\_windows() 在滑动窗口模式中的应用](#1-array_windows-在滑动窗口模式中的应用)
       - [传统实现 vs Rust 1.95+ 实现](#传统实现-vs-rust-195-实现)
       - [生产示例：股票价格趋势检测](#生产示例股票价格趋势检测)
     - [2. ControlFlow 在责任链模式中的应用](#2-controlflow-在责任链模式中的应用)
     - [3. LazyLock 在单例模式中的应用](#3-lazylock-在单例模式中的应用)
     - [4. 数学常量在算法模式中的应用](#4-数学常量在算法模式中的应用)
     - [特性对比总结](#特性对比总结)
-  - [**最后更新**: 2026-05-08](#最后更新-2026-05-08)
   - [权威来源索引](#权威来源索引)
   - [思维导图：Rust 设计模式体系](#思维导图rust-设计模式体系)
   - [决策树：设计模式选择](#决策树设计模式选择)
@@ -2264,7 +2263,7 @@ Rust 1.95+ 引入的新特性为设计模式实现提供了更优雅、更高效
 
 ---
 
-### 1. rray_windows() 在滑动窗口模式中的应用
+### 1. Array_windows() 在滑动窗口模式中的应用
 
 > **[来源: TRPL - The Rust Programming Language]**
 
@@ -2403,11 +2402,10 @@ where
 
 | 设计模式 | 传统实现 | Rust 1.95+ 实现 | 优势 |
 |----------|---------|---------------|------|
-| 滑动窗口 | windows(n) | rray_windows::<N>() | 零分配，15-30% 性能提升 |
+| 滑动窗口 | windows(n) | `Array_windows::<N>()` | 零分配，15-30% 性能提升 |
 | 责任链 | Result | ControlFlow | 语义清晰 |
 | 单例 | LazyLock 直接访问 | LazyLock::get() | 热路径优化 |
-| 策略模式 | 硬编码常量 |
-64::consts::* | 标准库提供 |
+| 策略模式 | 硬编码常量 | 64::consts::* | 标准库提供 |
 
 **最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 设计模式应用)
 
@@ -2416,6 +2414,7 @@ where
 **维护者**: Rust 学习项目团队
 **状态**: ✅ 完整实现
 **最后更新**: 2026-05-08
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -2436,23 +2435,14 @@ where
 ## 权威来源索引
 
 > **[来源: Wikipedia - Software Design Pattern]**
-
 > **[来源: Wikipedia - Gang of Four]**
-
 > **[来源: Wikipedia - Anti-pattern]**
-
 > **[来源: IEEE - Software Architecture Patterns]**
-
 > **[来源: ACM - Design Patterns in Rust]**
-
 > **[来源: Gamma et al. 1994 - Design Patterns]**
-
 > **[来源: Rust API Guidelines]**
-
 > **[来源: Rust Reference - Traits]**
-
 > **[来源: Rust Cookbook]**
-
 > **[来源: RFC 1210 - impl Specialization]**
 
 ---

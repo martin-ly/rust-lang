@@ -661,6 +661,66 @@ fn main() {
 - **定理**: 性能优化：Rust 代码的测量与调优 定义 ⟹ 类型安全保证
 - **定理**: 性能优化：Rust 代码的测量与调优 定义 ⟹ 类型安全保证
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：在优化 Rust 代码前，第一步应该做什么？（理解层）
+
+**题目**: 在优化 Rust 代码前，第一步应该做什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+测量（Profile）。使用 `cargo flamegraph`、perf、criterion 等工具找出真正的热点，避免基于假设进行无效优化。
+</details>
+
+---
+
+### 测验 2：`cargo bench` 与 `cargo test` 在运行方式上有什么区别？（理解层）
+
+**题目**: `cargo bench` 与 `cargo test` 在运行方式上有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`cargo bench` 运行 benchmark 并统计多次运行的平均/中位数性能，使用统计方法消除噪声。`cargo test` 只验证正确性，不关心性能数据。
+</details>
+
+---
+
+### 测验 3：`#[inline]` 和 `#[inline(always)]` 有什么区别？滥用内联有什么风险？（理解层）
+
+**题目**: `#[inline]` 和 `#[inline(always)]` 有什么区别？滥用内联有什么风险？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`#[inline]` 建议编译器内联，最终由编译器决定。`#[inline(always)]` 强制内联。滥用会导致代码膨胀（instruction cache miss），反而降低性能。
+</details>
+
+---
+
+### 测验 4：为什么 `Box::pin` 有时比栈上分配更 cache-friendly？（理解层）
+
+**题目**: 为什么 `Box::pin` 有时比栈上分配更 cache-friendly？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+大型结构体在栈上分配可能导致栈帧过大、cache line 利用率低。`Box::pin` 将数据放在堆上，配合预分配和更好的局部性控制，在某些场景下提升 cache 性能。
+</details>
+
+---
+
+### 测验 5：`cargo build --release` 与 debug 构建在性能上为什么可能有数量级差异？（理解层）
+
+**题目**: `cargo build --release` 与 debug 构建在性能上为什么可能有数量级差异？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Release 开启优化：内联、循环展开、LTO、向量化等。Debug 关闭优化以保留调试信息、变量可见性和快速编译。性能敏感代码必须在 release 模式下测量。
+</details>
+
 ## 认知路径
 
 > **认知路径**: 从 Rust 核心语言特性出发，经由 **性能优化：Rust 代码的测量与调优** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。

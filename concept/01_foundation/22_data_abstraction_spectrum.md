@@ -618,6 +618,66 @@ fn main() {
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] ·
 > [来源: [Rust Reference — Moved Values](https://doc.rust-lang.org/reference/ownership.html)]
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：C 的 `struct`、Java 的 `class`、Rust 的 `struct + impl` 在数据抽象上的核心区别是什么？（理解层）
+
+**题目**: C 的 `struct`、Java 的 `class`、Rust 的 `struct + impl` 在数据抽象上的核心区别是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+C 只有数据聚合，无方法绑定；Java class 将数据和行为耦合，支持继承；Rust 分离数据（struct）和行为（impl/trait），用组合替代继承。
+</details>
+
+---
+
+### 测验 2：Rust 的 `enum` 为什么比 C 的 `union` 更安全？（理解层）
+
+**题目**: Rust 的 `enum` 为什么比 C 的 `union` 更安全？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust `enum`（代数数据类型）带有标签（tag），编译器知道当前是哪个变体，防止访问错误的字段。C `union` 无标签，容易因误读变体导致 UB。
+</details>
+
+---
+
+### 测验 3：`trait` 在 Rust 数据抽象中扮演什么角色？它解决了什么问题？（理解层）
+
+**题目**: `trait` 在 Rust 数据抽象中扮演什么角色？它解决了什么问题？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`trait` 定义共享行为接口，实现解耦和复用。它解决了多态问题，同时避免了传统 OOP 继承的层次复杂性和钻石问题。
+</details>
+
+---
+
+### 测验 4：Rust 的零大小类型（ZST，如 `()`）有什么实际用途？（理解层）
+
+**题目**: Rust 的零大小类型（ZST，如 `()`）有什么实际用途？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+ZST 不占用内存，可用于类型级标记（phantom types）、空迭代器、`Result<(), Error>` 表示"成功但无返回值"等场景。
+</details>
+
+---
+
+### 测验 5：为什么说 Rust 的 `enum` + `match` 组合是"穷尽性检查"的典范？（理解层）
+
+**题目**: 为什么说 Rust 的 `enum` + `match` 组合是"穷尽性检查"的典范？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`match` 要求覆盖 `enum` 的所有变体，遗漏会导致编译错误。这保证了对所有可能情况的处理，消除了未处理分支的 bug。
+</details>
+
 ## 实践
 
 > **相关资源**:

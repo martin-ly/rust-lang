@@ -619,6 +619,66 @@ fn undefined_behavior() {
 
 ---
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Hoare 三元组 `{P} C {Q}` 中，P、C、Q 分别代表什么？（理解层）
+
+**题目**: Hoare 三元组 `{P} C {Q}` 中，P、C、Q 分别代表什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`P` 是前置条件（precondition），`C` 是命令/程序片段，`Q` 是后置条件（postcondition）。含义：若执行前 `P` 成立且 `C` 终止，则执行后 `Q` 成立。
+</details>
+
+---
+
+### 测验 2：什么是"最弱前置条件"（Weakest Precondition, wp）？它在程序验证中的作用是什么？（理解层）
+
+**题目**: 什么是"最弱前置条件"（Weakest Precondition, wp）？它在程序验证中的作用是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+wp(C, Q) 是使命令 C 执行后 Q 成立的最弱（最一般）前置条件。它是自动验证的核心：给定后置条件 Q，计算所需前置条件，检查实际前置条件是否蕴含它。
+</details>
+
+---
+
+### 测验 3：Rust 的 `unsafe` 块为什么特别需要形式化验证？（理解层）
+
+**题目**: Rust 的 `unsafe` 块为什么特别需要形式化验证？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+因为 `unsafe` 块绕过了编译器的安全检查，可能引入悬垂指针、数据竞争、类型混淆等 UB。形式化验证可证明 `unsafe` 代码在特定契约下仍然是内存安全的。
+</details>
+
+---
+
+### 测验 4：分离逻辑（Separation Logic）的"框架规则"（Frame Rule）为什么对 Rust 所有权建模特别重要？（理解层）
+
+**题目**: 分离逻辑（Separation Logic）的"框架规则"（Frame Rule）为什么对 Rust 所有权建模特别重要？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+框架规则允许验证局部资源时自动忽略不相关的资源。这恰好对应 Rust 的所有权局部性：修改一个所有权不影响其他无关的所有权。
+</details>
+
+---
+
+### 测验 5：Creusot 和 Prusti 在验证 Rust 程序时分别依赖什么后端？（理解层）
+
+**题目**: Creusot 和 Prusti 在验证 Rust 程序时分别依赖什么后端？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Creusot 依赖 Why3 平台和 SMT 求解器（如 Alt-Ergo、Z3）。Prusti 依赖 Viper 验证基础设施，使用其内置的符号执行和权限系统。
+</details>
+
 ## 零、认知路径（Cognitive Path）
 >
 

@@ -12,6 +12,7 @@
 ---
 
 ## 文件说明
+>
 > **[来源: Rust Official Docs]**
 
 | 文件 | 对应定理 | 状态 |
@@ -23,6 +24,7 @@
 ---
 
 ## 编译
+>
 > **[来源: Rust Official Docs]**
 
 **前置**: 安装 Coq（建议 8.18+）
@@ -37,9 +39,11 @@ coqc TYPE_SAFETY.v
 ---
 
 ## 代码示例
+>
 > **[来源: Rust Official Docs]**
 
 ### 示例 1: 所有权唯一性定理 (T-OW2)
+>
 > **[来源: Rust Official Docs]**
 
 ```coq
@@ -87,6 +91,7 @@ Admitted.
 ```
 
 ### 示例 2: 数据竞争自由定理 (T-BR1)
+>
 > **[来源: Rust Official Docs]**
 
 ```coq
@@ -152,6 +157,7 @@ Qed.
 ```
 
 ### 示例 3: 类型安全定理 (T-TY3)
+>
 > **[来源: Rust Official Docs]**
 
 ```coq
@@ -289,9 +295,11 @@ Admitted.
 ---
 
 ## 补全路线
+>
 > **[来源: Rust Official Docs]**
 
 ### 步骤 1: 细化 State 定义
+>
 > **[来源: Rust Official Docs]**
 
 ```coq
@@ -318,6 +326,7 @@ Inductive reachable : State -> Prop :=
 ```
 
 ### 步骤 2: 归纳证明
+>
 > **[来源: Rust Official Docs]**
 
 ```coq
@@ -341,6 +350,7 @@ Qed.
 ```
 
 ### 步骤 3: 扩展其他定理
+>
 > **[来源: Rust Official Docs]**
 
 1. **T-BR1**: 完成 `BORROW_DATARACE_FREE.v` - 借用规则 → 数据竞争自由
@@ -349,6 +359,7 @@ Qed.
 ---
 
 ## 研究场景
+>
 > **[来源: Rust Official Docs]**
 
 ### 场景 1: 验证 `Vec<T>` 的所有权唯一性

@@ -609,6 +609,66 @@ fn main() {
 
 - **定理**: Cargo Script：单文件 Rust 程序 定义 ⟹ 类型安全保证
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Cargo Script（单文件 Rust 程序）相比传统 `cargo new` 项目有什么优势？（理解层）
+
+**题目**: Cargo Script（单文件 Rust 程序）相比传统 `cargo new` 项目有什么优势？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+无需创建完整项目目录结构，适合快速原型、脚本、自动化任务。文件内可声明依赖（`cargo` 自动管理），可直接用 `cargo run script.rs` 执行。
+</details>
+
+---
+
+### 测验 2：在 Cargo Script 文件中，如何声明外部依赖？（理解层）
+
+**题目**: 在 Cargo Script 文件中，如何声明外部依赖？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+在文件顶部使用 `//! ```cargo` 代码块或 `// cargo-deps:` 注释声明依赖及版本，如 `// cargo-deps: regex = "1.0"`。
+</details>
+
+---
+
+### 测验 3：Cargo Script 适合替代哪些传统脚本语言（如 Python/Bash）的场景？（理解层）
+
+**题目**: Cargo Script 适合替代哪些传统脚本语言（如 Python/Bash）的场景？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+需要类型安全、高性能、复杂数据结构处理的脚本任务，如日志分析、数据转换、构建自动化、CLI 工具原型。不适合极简单的单行 shell 操作。
+</details>
+
+---
+
+### 测验 4：Cargo Script 的编译产物会被缓存吗？（理解层）
+
+**题目**: Cargo Script 的编译产物会被缓存吗？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+是的，Cargo 会缓存编译结果，相同依赖和代码的后续运行会直接使用缓存，启动速度逐步接近原生二进制。
+</details>
+
+---
+
+### 测验 5：Cargo Script 与 `rustc` 直接编译单文件有什么区别？（理解层）
+
+**题目**: Cargo Script 与 `rustc` 直接编译单文件有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Cargo Script 自动处理依赖解析、下载和链接，而 `rustc` 只编译单个文件，不管理 crates.io 依赖。Cargo Script 提供更接近完整项目的开发体验。
+</details>
+
 ## 认知路径
 
 > **认知路径**: 从 Rust 核心语言特性出发，经由 **Cargo Script：单文件 Rust 程序** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。

@@ -506,6 +506,66 @@ fn main() {
 - **定理**: WebAssembly 生态：Rust 的浏览器外运行时 定义 ⟹ 类型安全保证
 - **定理**: WebAssembly 生态：Rust 的浏览器外运行时 定义 ⟹ 类型安全保证
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：WebAssembly（WASM）相比 JavaScript 在性能上的主要优势是什么？（理解层）
+
+**题目**: WebAssembly（WASM）相比 JavaScript 在性能上的主要优势是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+WASM 是低级别字节码，解析和编译速度更快，执行性能接近原生（通过 JIT/AOT 编译）。没有 JS 引擎的垃圾回收开销和动态类型检查成本。
+</details>
+
+---
+
+### 测验 2：Rust 编译为 WASM 时，为什么需要 `wasm-bindgen`？（理解层）
+
+**题目**: Rust 编译为 WASM 时，为什么需要 `wasm-bindgen`？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`wasm-bindgen` 生成 Rust 与 JavaScript 之间的胶水代码，处理类型转换（如字符串、数组、Promise）、内存管理和 JS API 调用。
+</details>
+
+---
+
+### 测验 3：`wasm-pack` 在 Rust/WASM 工作流中扮演什么角色？（理解层）
+
+**题目**: `wasm-pack` 在 Rust/WASM 工作流中扮演什么角色？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`wasm-pack` 是 Rust 官方的 WASM 构建工具，负责编译 Rust 为 WASM、运行 `wasm-bindgen`、生成 `package.json`，并发布到 npm。
+</details>
+
+---
+
+### 测验 4：WASM 的线性内存（Linear Memory）模型是什么意思？Rust 的所有权系统如何与之交互？（理解层）
+
+**题目**: WASM 的线性内存（Linear Memory）模型是什么意思？Rust 的所有权系统如何与之交互？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+WASM 使用单一的连续字节数组作为内存，通过偏移量访问。Rust 编译器将所有权和借用检查转化为安全的内存偏移计算，WASM 沙箱进一步隔离了越界访问的影响。
+</details>
+
+---
+
+### 测验 5：WASM 目前有哪些主要限制，使得它还不能完全替代原生应用？（理解层）
+
+**题目**: WASM 目前有哪些主要限制，使得它还不能完全替代原生应用？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+1) 无直接 DOM/系统 API 访问（需 JS 桥接或 WASI）；2) 无多线程（WASM Threads 提案推进中）；3) 无垃圾回收（WASM GC 提案推进中）；4) 文件体积优化仍需注意。
+</details>
+
 ## 认知路径
 
 > **认知路径**: 从 Rust 核心语言特性出发，经由 **WebAssembly 生态：Rust 的浏览器外运行时** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。

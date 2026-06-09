@@ -632,6 +632,66 @@ fn main() {
 
 > **修正**: **Match 表达式**：1) 所有 arm 必须返回相同类型；2) `Some(n) => n`（`i32`）与 `None => "none"`（`&str`）冲突；3) 解决：统一类型或使用 `Option` 包装。
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`Iterator::map` 和 `Iterator::filter` 返回的是新迭代器还是立即执行计算？（理解层）
+
+**题目**: `Iterator::map` 和 `Iterator::filter` 返回的是新迭代器还是立即执行计算？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+都返回新迭代器（惰性求值）。实际计算在调用消耗性方法（如 `collect`、`for_each`、`fold`）时才发生。
+</details>
+
+---
+
+### 测验 2：`iter.next()` 返回 `Option<Self::Item>`。`None` 表示什么？（理解层）
+
+**题目**: `iter.next()` 返回 `Option<Self::Item>`。`None` 表示什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`None` 表示迭代已结束，没有更多元素。`Some(item)` 返回下一个元素。
+</details>
+
+---
+
+### 测验 3：`Iterator::fold` 与 `Iterator::reduce` 的主要区别是什么？（理解层）
+
+**题目**: `Iterator::fold` 与 `Iterator::reduce` 的主要区别是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`fold` 接受初始累加器值，适用于空迭代器。`reduce` 用第一个元素作为初始值，空迭代器返回 `None`。
+</details>
+
+---
+
+### 测验 4：如何实现自定义迭代器？至少需要实现哪个方法？（理解层）
+
+**题目**: 如何实现自定义迭代器？至少需要实现哪个方法？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+需要为类型实现 `Iterator` trait，至少实现 `fn next(&mut self) -> Option<Self::Item>`。其他方法（`map`、`filter` 等）有默认实现。
+</details>
+
+---
+
+### 测验 5：`iter.take(n)` 和 `iter.skip(n)` 分别对迭代器做什么？（理解层）
+
+**题目**: `iter.take(n)` 和 `iter.skip(n)` 分别对迭代器做什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`take(n)` 限制最多消费 n 个元素后返回 `None`。`skip(n)` 丢弃前 n 个元素，从第 n+1 个开始消费。两者都返回新迭代器，惰性执行。
+</details>
+
 ## 实践
 
 > **相关资源**:

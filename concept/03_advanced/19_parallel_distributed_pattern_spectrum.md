@@ -777,6 +777,66 @@ fn main() {}
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`std::thread::spawn` 与 `tokio::spawn` 创建的"任务"有什么本质区别？（理解层）
+
+**题目**: `std::thread::spawn` 与 `tokio::spawn` 创建的"任务"有什么本质区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`std::thread::spawn` 创建 OS 线程，由操作系统调度，切换成本高。`tokio::spawn` 创建异步任务（绿色线程/协程），由 Tokio runtime 在用户态调度，切换成本极低。
+</details>
+
+---
+
+### 测验 2：Rayon 的 `par_iter()` 与标准库的 `iter()` 在 API 使用上有什么区别？（理解层）
+
+**题目**: Rayon 的 `par_iter()` 与标准库的 `iter()` 在 API 使用上有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+API 几乎相同（得益于相同的 `Iterator`/`ParallelIterator` 接口），但 `par_iter()` 自动将工作负载分发到线程池并行执行。无需手动管理线程。
+</details>
+
+---
+
+### 测验 3：Actor 模型在 Rust 中的典型实现方式是什么？（理解层）
+
+**题目**: Actor 模型在 Rust 中的典型实现方式是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+通常通过 `tokio::sync::mpsc` 通道实现消息传递，每个 actor 是一个异步任务 + 一个接收端，通过消息循环处理 mailbox。也可用 `actix` 等框架。
+</details>
+
+---
+
+### 测验 4：分布式系统中，Rust 的 Serde + 强类型系统在消息序列化上有什么优势？（理解层）
+
+**题目**: 分布式系统中，Rust 的 Serde + 强类型系统在消息序列化上有什么优势？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+编译期保证消息结构与 schema 一致，反序列化失败在类型层面可处理。相比动态语言，消除了"字段名拼写错误导致运行时错误"的问题。
+</details>
+
+---
+
+### 测验 5：`crossbeam::channel` 与 `std::sync::mpsc` 的主要改进是什么？（理解层）
+
+**题目**: `crossbeam::channel` 与 `std::sync::mpsc` 的主要改进是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`crossbeam` 提供更高效的 MP/MC（多生产者多消费者）通道、支持 select 操作（`Select`）、无锁/低锁实现，性能通常优于标准库通道。
+</details>
+
 ## 认知路径
 
 > **认知路径**: 从 L0 基础概念出发，经由本节的 **并行与分布式模式谱系：从线程池到共识算法** 核心原理，通向 L2 进阶模式与 L3 工程实践。

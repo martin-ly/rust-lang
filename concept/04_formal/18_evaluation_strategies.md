@@ -512,6 +512,66 @@ fn main() {}
 > 2) `Vec::new()` 在某些 Rust 版本中不是 `const fn`；
 > 3) 编译期限制逐步放宽（`const_mut_refs`、`const_vec_string` 等）。
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Rust 默认使用什么求值策略？函数参数在调用前还是调用后求值？（理解层）
+
+**题目**: Rust 默认使用什么求值策略？函数参数在调用前还是调用后求值？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 使用 Call-by-Value（严格求值）。函数参数在进入函数体之前被求值（eager evaluation）。
+</details>
+
+---
+
+### 测验 2：Call-by-Name 和 Call-by-Need 有什么共同点和区别？（理解层）
+
+**题目**: Call-by-Name 和 Call-by-Need 有什么共同点和区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+共同点：都是惰性求值，参数只在需要时才求值。区别：Call-by-Name 每次使用参数都重新求值；Call-by-Need（如 Haskell）第一次求值后缓存结果，后续直接使用缓存。
+</details>
+
+---
+
+### 测验 3：`&&` 和 `||` 的短路求值（short-circuit evaluation）属于哪种求值策略的体现？（理解层）
+
+**题目**: `&&` 和 `||` 的短路求值（short-circuit evaluation）属于哪种求值策略的体现？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+属于非严格/惰性求值的一种受限形式：若左操作数已能决定结果，右操作数不求值。这是大多数严格语言中的例外。
+</details>
+
+---
+
+### 测验 4：Rust 的 `Iterator` 惰性求值与 Haskell 的全局惰性求值有什么区别？（理解层）
+
+**题目**: Rust 的 `Iterator` 惰性求值与 Haskell 的全局惰性求值有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 的惰性是局部的（仅在迭代器适配器链中），最终必须通过消耗方法触发。Haskell 的惰性是全局的，所有表达式默认延迟求值直到需要。
+</details>
+
+---
+
+### 测验 5：为什么严格求值语言通常比惰性求值语言更容易预测内存和性能行为？（理解层）
+
+**题目**: 为什么严格求值语言通常比惰性求值语言更容易预测内存和性能行为？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+严格求值的求值时机和顺序是显式的（调用时立即执行），便于分析时间/空间复杂度。惰性求值可能因延迟链过长导致空间泄漏（space leak），性能分析更困难。
+</details>
+
 ## 认知路径
 
 > **认知路径**: 从 L0 基础概念出发，经由本节的 **求值策略：Call-by-Value, Call-by-Name, Call-by-Need** 核心原理，通向 L2 进阶模式与 L3 工程实践。

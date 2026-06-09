@@ -44,7 +44,6 @@
     - [LazyLock 在硬件抽象层中的应用](#lazylock-在硬件抽象层中的应用)
     - [ControlFlow 在错误恢复中的应用](#controlflow-在错误恢复中的应用)
     - [内存优化：array\_windows 的零分配特性](#内存优化array_windows-的零分配特性)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -610,6 +609,7 @@ fn median_filter(a: u8, b: u8, c: u8) -> u8 {
 
 **维护者**: Rust 学习项目团队
 **状态**: ✅ 深度整合完成
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

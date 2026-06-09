@@ -491,6 +491,66 @@ fn main() {
 
 > **修正**: Rust 的 **drop 顺序**：1) 变量按**声明顺序的逆序** drop（LIFO）；2) struct 字段按声明顺序 drop；3) tuple 元素按声明顺序 drop；4) 数组/vec 元素按索引顺序 drop；5) 闭包捕获变量按未指定顺序 drop。依赖 drop 顺序的代码是脆弱的：不同 Rust 版本可能改变闭包捕获的 drop 顺序。安全模式：1) 使 drop 相互独立（不依赖其他变量的状态）；2) 使用 `ManuallyDrop` 显式控制；3) 用 `scopeguard` crate 的 `defer!` 明确清理顺序。这与 C++ 的析构顺序（局部变量逆序、成员按声明顺序）类似——但 Rust 的 `Drop::drop` 不接收参数，不能基于其他对象的状态进行条件清理。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-03-drop.html)] · [来源: [Rust Reference — Destructor Order](https://doc.rust-lang.org/reference/destructors.html)]
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：在 Rust 中，`let x = 5;` 之后 `x` 绑定到值 `5`。从变量模型角度看，`x` 是值的名称还是内存位置的名称？（理解层）
+
+**题目**: 在 Rust 中，`let x = 5;` 之后 `x` 绑定到值 `5`。从变量模型角度看，`x` 是值的名称还是内存位置的名称？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`x` 是值的名称（binding）。Rust 变量绑定到值，而非内存位置。所有权系统决定值何时被释放。
+</details>
+
+---
+
+### 测验 2：`let mut x = 5; x = 6;` 中，`x = 6` 是修改了原有内存，还是重新绑定了一个新值？（理解层）
+
+**题目**: `let mut x = 5; x = 6;` 中，`x = 6` 是修改了原有内存，还是重新绑定了一个新值？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+对于基本类型如 `i32`，是修改了绑定的值（覆盖）。对于非 `Copy` 类型如 `String`，`x = String::from("a")` 会先 drop 旧值，再绑定新值。
+</details>
+
+---
+
+### 测验 3：Rust 的变量绑定在离开作用域时会发生什么？谁负责释放资源？（理解层）
+
+**题目**: Rust 的变量绑定在离开作用域时会发生什么？谁负责释放资源？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+绑定拥有的值会在作用域结束时通过 `Drop::drop` 自动释放。编译器插入 drop 调用，无需手动 free。
+</details>
+
+---
+
+### 测验 4：`Copy` trait 对变量模型有什么影响？实现 `Copy` 的类型在赋值时行为有何不同？（理解层）
+
+**题目**: `Copy` trait 对变量模型有什么影响？实现 `Copy` 的类型在赋值时行为有何不同？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`Copy` 类型赋值时按位复制（bitwise copy），原变量仍然有效。未实现 `Copy` 的类型赋值时发生 move，原变量失效。
+</details>
+
+---
+
+### 测验 5：为什么 Rust 没有 C/C++ 意义上的"未初始化变量"读取？（理解层）
+
+**题目**: 为什么 Rust 没有 C/C++ 意义上的"未初始化变量"读取？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 编译器要求所有变量在使用前必须初始化。读取未初始化变量是编译错误，消除了使用野值的风险。
+</details>
+
 ## 实践
 
 > **相关资源**:

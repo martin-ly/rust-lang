@@ -656,6 +656,66 @@ fn main() {
 
 > **修正**: Rust 的 `std::mem::forget` 是**safe 函数**：它阻止值的 `drop` 被调用，但不触发 UB。这是 Rust "**leak safety**" 哲学的一部分：标准库不保证防泄漏，但泄漏不应导致内存不安全。`forget` 的合法用途：1) 将值的所有权转移给外部系统（如 FFI 的 C 代码负责释放）；2) 手动管理内存生命周期；3) 创建循环引用（`Rc` 的 leak）。资源泄漏的风险：文件描述符耗尽、内存泄漏、锁未释放（导致死锁）。缓解：`ManuallyDrop<T>` 是更安全的替代——显式控制 drop 时机，不调用则编译器警告。这与 C++ 的 `std::unique_ptr::release`（放弃所有权，责任转移）或 Java 的 finalize（已废弃，不可靠）不同——Rust 的 `forget` 是显式的、有文档的安全操作。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/mem/fn.forget.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：线性逻辑中的"线性"（linearity）指什么？与 Rust 的所有权有什么对应关系？（理解层）
+
+**题目**: 线性逻辑中的"线性"（linearity）指什么？与 Rust 的所有权有什么对应关系？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+线性指资源必须恰好使用一次，不能复制也不能丢弃。对应 Rust：值有唯一所有者，move 后原变量失效，离开作用域自动 drop。
+</details>
+
+---
+
+### 测验 2：在线性逻辑中，`A ⊗ B`（张量积）和 `A & B`（with）分别对应 Rust 的什么概念？（理解层）
+
+**题目**: 在线性逻辑中，`A ⊗ B`（张量积）和 `A & B`（with）分别对应 Rust 的什么概念？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`A ⊗ B` 对应同时拥有两个资源（如 `(T, U)` 元组）。`A & B` 对应选择权（如 `enum` 的选择，或外部选择）。
+</details>
+
+---
+
+### 测验 3：Rust 的 `clone()` 在线性逻辑视角下是什么操作？（理解层）
+
+**题目**: Rust 的 `clone()` 在线性逻辑视角下是什么操作？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`clone()` 对应从线性资源到非线性资源的转换，通过显式复制创建一个独立副本，原资源仍然可用。
+</details>
+
+---
+
+### 测验 4：为什么 Rust 的借用（`&T` 和 `&mut T`）可以在线性逻辑框架中被建模？（理解层）
+
+**题目**: 为什么 Rust 的借用（`&T` 和 `&mut T`）可以在线性逻辑框架中被建模？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`&T` 对应只读共享（affine/逻辑中的 `!A` 或共享上下文），`&mut T` 对应独占访问（线性资源的暂时出借，保证原所有者在使用结束后收回唯一所有权）。
+</details>
+
+---
+
+### 测验 5：线性逻辑对 Rust 类型系统设计的影响主要体现在哪个编译器组件中？（理解层）
+
+**题目**: 线性逻辑对 Rust 类型系统设计的影响主要体现在哪个编译器组件中？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+主要体现在借用检查器（borrow checker）中，它确保资源按线性/affine 规则使用：不重复释放、不悬垂引用、不 use-after-move。
+</details>
+
 ## 认知路径
 
 > **认知路径**: 从 L0 基础概念出发，经由本节的 **线性逻辑在 Rust 中的工程应用** 核心原理，通向 L2 进阶模式与 L3 工程实践。

@@ -400,6 +400,66 @@ unsafe {
 > - [TRPL Ch13 — Closures and Iterators](https://doc.rust-lang.org/book/ch13-00-closures.html)
 > - [Rust Async Book — Async/Await Primer](https://rust-lang.github.io/async-book/01_getting_started/01_chapter.html)
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：静态类型检查与动态类型检查的核心区别是什么？Rust 属于哪一类？（理解层）
+
+**题目**: 静态类型检查与动态类型检查的核心区别是什么？Rust 属于哪一类？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+静态类型检查在编译期验证类型正确性，运行时无类型错误；动态类型检查在运行时进行。Rust 属于静态类型语言，编译期强制类型检查。
+</details>
+
+---
+
+### 测验 2：什么是"语法"（Syntax）和"语义"（Semantics）？编译错误通常属于哪一类问题？（理解层）
+
+**题目**: 什么是"语法"（Syntax）和"语义"（Semantics）？编译错误通常属于哪一类问题？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+语法是程序的形式结构规则；语义是程序的含义。编译错误通常属于语法或静态语义问题（类型不匹配、未定义变量等）。
+</details>
+
+---
+
+### 测验 3："引用透明"（Referential Transparency）对程序优化有什么意义？（理解层）
+
+**题目**: "引用透明"（Referential Transparency）对程序优化有什么意义？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+引用透明允许编译器安全地进行表达式替换和重排，因为表达式的值不依赖于求值时机和上下文，这对内联、常量折叠、并行化等优化至关重要。
+</details>
+
+---
+
+### 测验 4：什么是"副作用"（Side Effect）？为什么副作用使程序推理更困难？（理解层）
+
+**题目**: 什么是"副作用"（Side Effect）？为什么副作用使程序推理更困难？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+副作用指函数/表达式在返回值之外修改了程序状态（如修改全局变量、IO）。副作用使函数行为依赖于外部状态，破坏了局部推理能力，增加了并发错误风险。
+</details>
+
+---
+
+### 测验 5：类型系统的主要目标是什么？Rust 的类型系统额外提供了什么保证？（理解层）
+
+**题目**: 类型系统的主要目标是什么？Rust 的类型系统额外提供了什么保证？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+主要目标是防止运行时类型错误、提供抽象。Rust 额外通过所有权和生命周期系统保证内存安全（无悬垂指针、无数据竞争）无需垃圾回收。
+</details>
+
 ## 实践
 
 > **对应练习**: [`exercises/rustlings_style/`](../exercises/rustlings_style/) — 基础语法与所有权练习

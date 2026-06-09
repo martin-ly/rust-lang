@@ -725,6 +725,66 @@ fn main() {
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`Stream` trait 与 `Iterator` trait 的核心区别是什么？（理解层）
+
+**题目**: `Stream` trait 与 `Iterator` trait 的核心区别是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`Iterator` 同步拉取元素（`next()` 立即返回）。`Stream` 异步拉取（`next().await` 可能挂起等待数据到达）。
+</details>
+
+---
+
+### 测验 2：`futures::StreamExt::buffered(n)` 的作用是什么？（理解层）
+
+**题目**: `futures::StreamExt::buffered(n)` 的作用是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+限制并发执行的 Future 数量为 n。当 stream 产生大量 future 时，确保同时最多 n 个在运行，防止资源耗尽。
+</details>
+
+---
+
+### 测验 3：背压（Backpressure）在流处理中是什么意思？Tokio 的 channel 如何实现背压？（理解层）
+
+**题目**: 背压（Backpressure）在流处理中是什么意思？Tokio 的 channel 如何实现背压？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+背压指下游消费速度慢时，上游自动减速避免内存无限增长。Tokio 的有界 channel（`mpsc::channel(capacity)`）在满时让发送者 `await` 或返回 `Err`，自然实现背压。
+</details>
+
+---
+
+### 测验 4：`Stream::merge` 与 `Stream::chain` 有什么区别？（理解层）
+
+**题目**: `Stream::merge` 与 `Stream::chain` 有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`merge` 交错合并多个 stream，按元素到达顺序输出。`chain` 顺序连接：先消费完第一个 stream，再消费第二个。
+</details>
+
+---
+
+### 测验 5：在流处理中，为什么通常使用 `tokio::sync::mpsc` 而不是无界通道（`unbounded_channel`）？（理解层）
+
+**题目**: 在流处理中，为什么通常使用 `tokio::sync::mpsc` 而不是无界通道（`unbounded_channel`）？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+无界通道在消费者慢于生产者时会导致内存无限增长（OOM）。有界通道通过阻塞/等待实现背压，保证内存可控。
+</details>
+
 ## 认知路径
 
 > **认知路径**: 从 L0 基础概念出发，经由本节的 **流处理语义：从 Dataflow Model 到 Differential Dataflow** 核心原理，通向 L2 进阶模式与 L3 工程实践。

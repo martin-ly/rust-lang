@@ -591,6 +591,66 @@ fn main() {
 - **定理**: 日志与可观测性：Rust 服务端监控生态 定义 ⟹ 类型安全保证
 - **定理**: 日志与可观测性：Rust 服务端监控生态 定义 ⟹ 类型安全保证
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`tracing` crate 相比传统 `log` crate 的主要优势是什么？（理解层）
+
+**题目**: `tracing` crate 相比传统 `log` crate 的主要优势是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`tracing` 支持结构化日志、span（请求生命周期跟踪）、异步场景下的上下文传播。`log` 只提供简单的日志级别和消息接口。
+</details>
+
+---
+
+### 测验 2：OpenTelemetry 在 Rust 可观测性生态中扮演什么角色？（理解层）
+
+**题目**: OpenTelemetry 在 Rust 可观测性生态中扮演什么角色？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+提供跨语言的分布式追踪、指标和日志标准。Rust 的 `opentelemetry` crate 允许应用导出 telemetry 数据到 Jaeger、Prometheus 等后端。
+</details>
+
+---
+
+### 测验 3：为什么在高性能 Rust 服务端，结构化日志（Structured Logging）比纯文本日志更受推荐？（理解层）
+
+**题目**: 为什么在高性能 Rust 服务端，结构化日志（Structured Logging）比纯文本日志更受推荐？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+结构化日志（如 JSON）便于机器解析和查询（ELK/Loki），支持字段过滤和聚合分析。纯文本日志需要正则解析，效率低且易出错。
+</details>
+
+---
+
+### 测验 4：`RUST_LOG` 环境变量如何控制日志级别？（理解层）
+
+**题目**: `RUST_LOG` 环境变量如何控制日志级别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+格式为 `RUST_LOG=module=level`，如 `RUST_LOG=info` 或 `RUST_LOG=my_crate::module=debug`。支持层级过滤和通配符。
+</details>
+
+---
+
+### 测验 5：在异步 Rust 程序中，为什么 `tracing` 的 `span` 比手动记录日志更适合跟踪请求生命周期？（理解层）
+
+**题目**: 在异步 Rust 程序中，为什么 `tracing` 的 `span` 比手动记录日志更适合跟踪请求生命周期？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`span` 自动在异步任务切换时传播上下文（通过 `Instrument` trait），保证跨 await 点的日志关联到同一请求。手动日志在异步上下文中容易丢失请求关联。
+</details>
+
 ## 认知路径
 
 > **认知路径**: 从 Rust 核心语言特性出发，经由 **日志与可观测性：Rust 服务端监控生态** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。

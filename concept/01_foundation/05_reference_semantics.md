@@ -1333,6 +1333,66 @@ fn main() {}
 
 > **修正**: **悬垂引用**是 Rust borrow checker 的核心防护：1) 局部变量在函数结束时 drop；2) 返回其引用 → 引用指向已释放内存；3) 解决：返回所有权（`i32` 而非 `&i32`）或使用 `Box::leak` 获取 `'static` 引用。
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`Deref` 强制转换（Deref Coercion）允许什么类型的自动转换？（理解层）
+
+**题目**: `Deref` 强制转换（Deref Coercion）允许什么类型的自动转换？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+允许实现 `Deref` 的类型自动解引用为目标类型。例如 `&String` 自动转为 `&str`，`&Vec<T>` 自动转为 `&[T]`，减少显式转换。
+</details>
+
+---
+
+### 测验 2：`&mut T` 是否自动实现 `Deref` 到 `&T`？这种转换在什么情况下发生？（理解层）
+
+**题目**: `&mut T` 是否自动实现 `Deref` 到 `&T`？这种转换在什么情况下发生？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+是的，`&mut T` 可通过强制转换变为 `&T`，但不可逆。这在传可变引用给只读参数时自动发生。
+</details>
+
+---
+
+### 测验 3：为什么 `Box<T>` 可以像 `&T` 一样被解引用使用？这是语言内建行为吗？（理解层）
+
+**题目**: 为什么 `Box<T>` 可以像 `&T` 一样被解引用使用？这是语言内建行为吗？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+因为 `Box<T>` 实现了 `Deref<Target=T>`。不是内建行为，而是标准库实现，体现零成本抽象。
+</details>
+
+---
+
+### 测验 4：`DerefMut` 与 `Deref` 的关系是什么？什么情况下需要实现 `DerefMut`？（理解层）
+
+**题目**: `DerefMut` 与 `Deref` 的关系是什么？什么情况下需要实现 `DerefMut`？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`DerefMut` 继承 `Deref`，提供可变解引用 `deref_mut`。当自定义智能指针需要支持 `&mut` 解引用到可变目标时需要实现。
+</details>
+
+---
+
+### 测验 5：自动解引用在编译期有运行时开销吗？（理解层）
+
+**题目**: 自动解引用在编译期有运行时开销吗？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+没有。`Deref::deref` 返回引用，所有转换在编译期完成，是零成本抽象。
+</details>
+
 ## 实践
 
 > **相关资源**:

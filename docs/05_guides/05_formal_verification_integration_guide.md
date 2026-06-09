@@ -30,7 +30,6 @@
   - [🔗 综合示例](#-综合示例)
     - [完整的验证套件](#完整的验证套件)
   - [📊 验证覆盖率目标](#-验证覆盖率目标)
-  - [**状态**: ✅ 生产就绪](#状态--生产就绪)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -568,6 +567,7 @@ mod miri_tests {
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-05-08
 **状态**: ✅ 生产就绪
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

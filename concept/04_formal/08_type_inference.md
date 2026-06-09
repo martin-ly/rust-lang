@@ -612,6 +612,66 @@ fn main() {
 
 > **修正**: **类型不匹配**是 Rust 最常见的编译错误：1) `let x: i32 = "hello"` — `&str` 不能隐式转为 `i32`；2) Rust 无隐式类型转换（C/Java 的自动转换）；3) 需显式转换：`"42".parse::<i32>().unwrap()` 或 `42i32.to_string()`。
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Hindley-Milner（HM）类型推断的核心算法是什么？它的时间复杂度如何？（理解层）
+
+**题目**: Hindley-Milner（HM）类型推断的核心算法是什么？它的时间复杂度如何？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+核心是统一（unification）算法，通过求解类型约束方程组推断最一般类型。标准 HM 是接近线性的，但支持 let-多态性和子类型的扩展会变复杂。
+</details>
+
+---
+
+### 测验 2：Rust 的类型推断与 Haskell 的 HM 推断有什么主要区别？（理解层）
+
+**题目**: Rust 的类型推断与 Haskell 的 HM 推断有什么主要区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 不支持全局 HM 推断：1) 函数签名通常需显式标注（除简单单表达式函数）；2) 不支持高阶类型的完整推断；3) 生命周期是显式标注或基于规则的推断。
+</details>
+
+---
+
+### 测验 3：`let x = vec![1, 2, 3];` 中 `x` 的类型是如何推断出来的？（理解层）
+
+**题目**: `let x = vec![1, 2, 3];` 中 `x` 的类型是如何推断出来的？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+从 `vec!` 宏返回 `Vec<T>`，元素 `1` 推断为 `i32`（默认整数类型），因此 `x: Vec<i32>`。
+</details>
+
+---
+
+### 测验 4：为什么 Rust 有时需要显式类型标注（如 `collect::<Vec<_>>()`），而 Haskell 通常不需要？（理解层）
+
+**题目**: 为什么 Rust 有时需要显式类型标注（如 `collect::<Vec<_>>()`），而 Haskell 通常不需要？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 的 trait 系统（尤其是关联类型和重载）可能导致歧义。`collect` 可以返回任意实现了 `FromIterator` 的类型，编译器无法在没有上下文时确定具体类型。
+</details>
+
+---
+
+### 测验 5：Rust 1.x 之后的类型推断相比早期版本有什么改进？（理解层）
+
+**题目**: Rust 1.x 之后的类型推断相比早期版本有什么改进？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+早期 Rust 要求更多显式标注（如闭包参数类型）。后续版本改进了闭包类型推断、关联类型推断和 `impl Trait` 推断，减少了不必要的标注。
+</details>
+
 ## 认知路径
 
 > **认知路径**: 从 L0 基础概念出发，经由本节的 **类型推断：Hindley-Milner 算法与 Rust 的工业实现** 核心原理，通向 L2 进阶模式与 L3 工程实践。

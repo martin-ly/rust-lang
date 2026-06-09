@@ -642,6 +642,66 @@ fn main() {
 
 ---
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：什么是"类型安全性"（Type Safety）？它通常包含哪两个核心性质？（理解层）
+
+**题目**: 什么是"类型安全性"（Type Safety）？它通常包含哪两个核心性质？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+类型安全指程序不会将值用于与其类型不兼容的操作。核心性质：1) 进展（Progress）—— 良类型的程序不会卡住；2) 保持（Preservation）—— 求值保持类型。
+</details>
+
+---
+
+### 测验 2：`&mut T` 在类型语义上如何区别于 `&T`？这种区别如何映射到分离逻辑？（理解层）
+
+**题目**: `&mut T` 在类型语义上如何区别于 `&T`？这种区别如何映射到分离逻辑？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`&mut T` 提供独占访问（exclusive/read-write），`&T` 提供共享只读访问。在分离逻辑中，`&mut T` 对应独占权限（full permission），`&T` 对应分数权限（fractional permission）。
+</details>
+
+---
+
+### 测验 3：Rust 的生命周期 `'a` 在类型语义中扮演什么角色？（理解层）
+
+**题目**: Rust 的生命周期 `'a` 在类型语义中扮演什么角色？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+生命周期是引用类型的组成部分，编码了引用有效性的时间范围。它防止了悬垂引用，确保借用不超过被借数据的生命周期。
+</details>
+
+---
+
+### 测验 4：什么是"类型擦除"（Type Erasure）？`dyn Trait` 在语义上如何实现类型擦除？（理解层）
+
+**题目**: 什么是"类型擦除"（Type Erasure）？`dyn Trait` 在语义上如何实现类型擦除？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+类型擦除是将具体类型隐藏为统一接口的过程。`dyn Trait` 通过虚表（vtable）在运行时分派方法调用，隐藏了具体类型但保留了行为契约。
+</details>
+
+---
+
+### 测验 5：Rust 的 `Option<T>` 和 `Result<T, E>` 在类型语义上分别对应什么数学概念？（理解层）
+
+**题目**: Rust 的 `Option<T>` 和 `Result<T, E>` 在类型语义上分别对应什么数学概念？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`Option<T>` 对应可能为空的部分函数（partiality），`Result<T, E>` 对应带有错误信息的计算（either/effect）。两者都是通过类型系统强制处理所有可能情况。
+</details>
+
 ## 六、认知路径（Cognitive Path）
 >
 

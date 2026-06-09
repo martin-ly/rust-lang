@@ -685,6 +685,66 @@ fn main() {
 
 > **修正**: `macro_rules!` 的**规则顺序**：从上到下依次尝试匹配，第一个匹配的规则被使用。长模式（含 WHERE）应放在短模式之前，否则短模式提前匹配导致错误。`macro_rules!` 的限制：1) 无优先级/结合性控制（不像 yacc/bison）；2) 无左递归（规则不能自引用左部）；3) 模式是 token 树（`tt`），不是完整表达式。复杂 DSL 建议：1) 过程宏（`proc_macro`）解析完整语法；2) `syn` crate 解析 Rust 表达式；3) 外部 DSL parser（`nom`、`pest`）。这与 Lisp 的宏（代码即数据，无模式匹配限制）或 Template Haskell（编译期元编程，类型安全）不同——Rust 的 `macro_rules!` 是受限但高效的文本替换机制。[来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)] · [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros-by-example.html)]
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：在 Rust 中嵌入 DSL 的常见技术有哪些？（理解层）
+
+**题目**: 在 Rust 中嵌入 DSL 的常见技术有哪些？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+1) 宏（`macro_rules!` / 过程宏）—— 编译期语法扩展；2) Builder 模式 —— 链式 API；3) 类型状态模式 —— 用类型编码 DSL 状态机；4) 运算符重载 —— 自定义 `+`、`|` 等。
+</details>
+
+---
+
+### 测验 2：Builder 模式在 Rust 中为什么特别受欢迎？与构造函数相比有什么优势？（理解层）
+
+**题目**: Builder 模式在 Rust 中为什么特别受欢迎？与构造函数相比有什么优势？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+优势：1) 处理大量可选参数时清晰；2) 每步可验证前置条件；3) 类型状态模式可在编译期禁止非法调用顺序。
+</details>
+
+---
+
+### 测验 3：过程宏（proc macro）与声明宏（`macro_rules!`）在 DSL 设计上各有什么优劣？（理解层）
+
+**题目**: 过程宏（proc macro）与声明宏（`macro_rules!`）在 DSL 设计上各有什么优劣？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+声明宏适合简单模式匹配和代码模板，编译快。过程宏可解析任意语法树，适合复杂 DSL（如 `tokio::main`、`derive`），但需要单独 crate。
+</details>
+
+---
+
+### 测验 4：类型状态模式（Type State Pattern）如何实现"编译期状态机"？（理解层）
+
+**题目**: 类型状态模式（Type State Pattern）如何实现"编译期状态机"？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+将状态编码为泛型参数（如 `Connection<Connected>` vs `Connection<Disconnected>`），只有特定状态才实现某些方法，非法状态转换在编译期被拒绝。
+</details>
+
+---
+
+### 测验 5：Rust 的 `?` 运算符可以被看作一种小型 DSL 吗？为什么？（理解层）
+
+**题目**: Rust 的 `?` 运算符可以被看作一种小型 DSL 吗？为什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+可以。`?` 是一种控制流 DSL，自动展开 `Result`/`Option` 并在 `Err`/`None` 时提前返回，比手写 `match` 更简洁、意图更清晰。
+</details>
+
 ## 实践
 
 > **相关资源**:

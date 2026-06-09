@@ -851,6 +851,66 @@ fn main() {}
 > 2) trait 方法可同名（通过 trait 区分）；
 > 3) 重载（overloading）不支持（除 trait 外）。
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：关联类型（Associated Type）与泛型参数的区别是什么？什么时候更适合用关联类型？（理解层）
+
+**题目**: 关联类型（Associated Type）与泛型参数的区别是什么？什么时候更适合用关联类型？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+关联类型在 trait 定义中声明，每个实现只能指定一个具体类型（如 `Iterator::Item`）。适合一对一映射。泛型参数允许多个实现，适合多对多关系。
+</details>
+
+---
+
+### 测验 2：`type Output = i32;` 这种语法出现在哪里？它有什么约束？（理解层）
+
+**题目**: `type Output = i32;` 这种语法出现在哪里？它有什么约束？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+出现在 `impl Trait for Type` 中，用于为关联类型指定具体类型。每个实现必须提供且只能提供一种类型。
+</details>
+
+---
+
+### 测验 3：Higher-Ranked Trait Bounds（HRTB）`for<'a>` 的用途是什么？（理解层）
+
+**题目**: Higher-Ranked Trait Bounds（HRTB）`for<'a>` 的用途是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+表示某个 trait bound 对所有可能的生命周期都成立。典型用例是要求闭包能处理任意生命周期的引用：`F: for<'a> Fn(&'a str) -> &'a str`。
+</details>
+
+---
+
+### 测验 4：类型级编程（Type-Level Programming）在 Rust 中主要通过什么机制实现？（理解层）
+
+**题目**: 类型级编程（Type-Level Programming）在 Rust 中主要通过什么机制实现？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+主要通过泛型、关联类型、const 泛型和 trait 系统。Rust 的类型系统足够强大以编码部分编译期计算，但不如 Haskell 的类型族或 Idris 的依赖类型灵活。
+</details>
+
+---
+
+### 测验 5：`impl Trait` 在函数参数位置和返回位置各有什么语义？（理解层）
+
+**题目**: `impl Trait` 在函数参数位置和返回位置各有什么语义？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+参数位置：`impl Trait` 是匿名泛型的语法糖（如 `fn f(x: impl Display)` 等价于 `fn f<T: Display>(x: T)`）。返回位置：表示返回一个实现了该 trait 的具体类型（存在类型），隐藏实现细节。
+</details>
+
 ## 实践
 
 > **相关资源**:

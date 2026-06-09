@@ -711,6 +711,66 @@ fn main() {
 
 > **修正**: Rust 编译器的**宏递归限制**：默认 128 层展开，防止无限递归导致编译器栈溢出。`count!` 宏递归计数 token 数量，大量 token 会超出限制。增加限制：`#![recursion_limit = "256"]`（crate 级别）。但过度递归增加编译时间。替代方案：1) 使用 `const fn` 替代宏递归（若逻辑可在 const 中表达）；2) 使用过程宏（无递归限制，但复杂度更高）；3) 减少 token 数量（批量处理）。这与 C 的预处理器（无递归限制，可能无限展开）或 Template Haskell（编译期执行 Haskell 代码，受运行时栈限制）不同——Rust 的宏递归限制是编译期的安全阀。[来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros-by-example.html)] · [来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)]
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`macro_rules!` 与过程宏（proc macro）在元编程中的根本区别是什么？（理解层）
+
+**题目**: `macro_rules!` 与过程宏（proc macro）在元编程中的根本区别是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`macro_rules!` 基于模式匹配和代码模板替换，在编译早期展开。过程宏是外部 crate 中的 Rust 函数，接收 TokenStream 并输出 TokenStream，可操作更复杂的语法。
+</details>
+
+---
+
+### 测验 2：声明宏的"卫生性"（hygiene）意味着什么？（理解层）
+
+**题目**: 声明宏的"卫生性"（hygiene）意味着什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+意味着宏内部定义的变量、标签等标识符不会与调用方作用域中的同名标识符冲突。Rust 的宏系统默认是卫生的。
+</details>
+
+---
+
+### 测验 3：`compile_error!("msg")` 宏的作用是什么？（理解层）
+
+**题目**: `compile_error!("msg")` 宏的作用是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+在编译期触发错误并显示消息。常用于 `cfg` 条件编译中，当检测到不支持的配置组合时给出清晰错误。
+</details>
+
+---
+
+### 测验 4：`concat!` 和 `stringify!` 宏分别做什么？（理解层）
+
+**题目**: `concat!` 和 `stringify!` 宏分别做什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`concat!` 将多个字面量（字符串、数字等）在编译期连接成一个字符串字面量。`stringify!` 将 Rust 表达式/标识符转换为字符串字面量（如 `stringify!(1 + 2)` → `"1 + 2"`）。
+</details>
+
+---
+
+### 测验 5：为什么过程宏必须放在独立的 crate 中，而不能与使用它的代码在同一 crate？（理解层）
+
+**题目**: 为什么过程宏必须放在独立的 crate 中，而不能与使用它的代码在同一 crate？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+因为过程宏在编译器解析阶段运行，必须在被依赖 crate 编译之前就已经编译完成。Rust 的编译模型要求 proc macro crate 先于使用方 crate 编译。
+</details>
+
 ## 实践
 
 > **相关资源**:

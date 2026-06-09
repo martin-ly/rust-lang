@@ -546,6 +546,66 @@ fn main() {
 > [来源: [Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_semantics)] ·
 > [来源: [Domain Theory](https://en.wikipedia.org/wiki/Domain_theory)]
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：指称语义（Denotational Semantics）的核心思想是什么？与操作语义有什么区别？（理解层）
+
+**题目**: 指称语义（Denotational Semantics）的核心思想是什么？与操作语义有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+核心思想：程序的含义是数学对象（函数、域元素），语义的组合是数学函数的组合。操作语义描述"如何执行"，指称语义描述"意味着什么"。
+</details>
+
+---
+
+### 测验 2：什么是"域"（Domain）？为什么需要引入 ⊥（bottom）元素？（理解层）
+
+**题目**: 什么是"域"（Domain）？为什么需要引入 ⊥（bottom）元素？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+域是带有偏序关系的数学结构，用于建模计算的近似信息。⊥ 表示"无信息/发散"，使无限计算（如递归、循环）有合法的数学表示。
+</details>
+
+---
+
+### 测验 3：Rust 的严格求值（strict/eager evaluation）在指称语义中如何体现？（理解层）
+
+**题目**: Rust 的严格求值（strict/eager evaluation）在指称语义中如何体现？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+函数参数在进入函数体前被求值，对应域语义中函数是严格函数：f(⊥) = ⊥。非严格语言允许 f(⊥) ≠ ⊥。
+</details>
+
+---
+
+### 测验 4：不动点定理（Knaster-Tarski）在递归函数语义中起什么作用？（理解层）
+
+**题目**: 不动点定理（Knaster-Tarski）在递归函数语义中起什么作用？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+保证连续函数在完备格上有最小不动点，从而使递归定义（如 `fn fact(n) { if n==0 {1} else {n*fact(n-1)}}`）有良定义的数学含义。
+</details>
+
+---
+
+### 测验 5：为什么 Rust 不允许直接递归类型（如 `struct List { head: i32, tail: List }`）？这与指称语义中的域有什么关系？（理解层）
+
+**题目**: 为什么 Rust 不允许直接递归类型（如 `struct List { head: i32, tail: List }`）？这与指称语义中的域有什么关系？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+直接递归类型大小无限，Rust 要求编译期确定大小。需用间接层（`Box<List>`）引入延迟/指针，对应域论中通过展开近似序列构造不动点解。
+</details>
+
 ## 认知路径
 
 > **认知路径**: 从 L0 基础概念出发，经由本节的 **指称语义与领域理论** 核心原理，通向 L2 进阶模式与 L3 工程实践。

@@ -698,6 +698,66 @@ fn main() {}
 
 > **修正**: **Const fn**：1) 函数体必须是编译期可计算的；2) `Vec::new()` 在某些 Rust 版本中不是 `const fn`；3) 编译期限制逐步放宽（`const_mut_refs`、`const_vec_string` 等）。
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`Iterator::fuse()` 的作用是什么？在什么场景下需要使用它？（理解层）
+
+**题目**: `Iterator::fuse()` 的作用是什么？在什么场景下需要使用它？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`fuse()` 将迭代器包装为一旦返回 `None` 后永远返回 `None` 的迭代器。用于需要保证迭代器在结束后不再"复活"的场景，如与 `select!` 或其他状态机组合时。
+</details>
+
+---
+
+### 测验 2：`peekable()` 迭代器与标准迭代器的主要区别是什么？（理解层）
+
+**题目**: `peekable()` 迭代器与标准迭代器的主要区别是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`Peekable` 允许通过 `.peek()` 查看下一个元素而不消费它。标准 `next()` 消费元素。适用于需要预读一个元素做决策的场景（如词法分析器）。
+</details>
+
+---
+
+### 测验 3：`iter.cycle()` 对迭代器有什么要求？如果原始迭代器为空会发生什么？（理解层）
+
+**题目**: `iter.cycle()` 对迭代器有什么要求？如果原始迭代器为空会发生什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+要求迭代器元素实现 `Clone`，因为 `cycle` 需要缓存所有元素。若原始迭代器为空，`cycle` 也立即返回 `None`。
+</details>
+
+---
+
+### 测验 4：`flat_map` 与 `map` 后接 `flatten` 有什么区别？（理解层）
+
+**题目**: `flat_map` 与 `map` 后接 `flatten` 有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+语义等价，`flat_map(f)` = `map(f).flatten()`。`flat_map` 更高效，因为避免了中间嵌套迭代器的创建，直接返回展平后的迭代器。
+</details>
+
+---
+
+### 测验 5：`by_ref()` 在迭代器链中的作用是什么？（理解层）
+
+**题目**: `by_ref()` 在迭代器链中的作用是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`by_ref()` 借用迭代器，允许在部分消费后继续在外部使用原迭代器。没有 `by_ref()` 的话，适配器会消耗迭代器所有权，无法再次使用。
+</details>
+
 ## 实践
 
 > **相关资源**:

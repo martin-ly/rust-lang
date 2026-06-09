@@ -47,7 +47,6 @@
     - [LazyLock 在汇编优化缓存中的应用](#lazylock-在汇编优化缓存中的应用)
     - [ControlFlow 在汇编错误处理中的应用](#controlflow-在汇编错误处理中的应用)
     - [数学常量在 SIMD 优化中的应用](#数学常量在-simd-优化中的应用)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [权威来源索引](#权威来源索引)
 
 ---
@@ -811,6 +810,7 @@ pub fn aligned_buffer_size(min_size: usize) -> usize {
 
 **维护者**: Rust 学习项目团队
 **状态**: ✅ 深度整合完成
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

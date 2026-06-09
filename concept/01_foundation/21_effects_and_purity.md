@@ -554,6 +554,66 @@ fn main() {
 > 2) Rust 无隐式类型转换（C/Java 的自动转换）；
 > 3) 需显式转换：`"42".parse::<i32>().unwrap()` 或 `42i32.to_string()`。
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：什么是"引用透明"（Referential Transparency）？纯函数必须具备这一性质吗？（理解层）
+
+**题目**: 什么是"引用透明"（Referential Transparency）？纯函数必须具备这一性质吗？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+引用透明指表达式可被其值替换而不改变程序行为。纯函数必须具备：给定相同输入，总产生相同输出且无副作用。
+</details>
+
+---
+
+### 测验 2：Rust 的 `fn` 函数默认是纯函数吗？为什么 `println!` 会让函数不纯？（理解层）
+
+**题目**: Rust 的 `fn` 函数默认是纯函数吗？为什么 `println!` 会让函数不纯？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+不是。Rust 不强制函数纯度。`println!` 产生 IO 副作用（向标准输出写数据），破坏了引用透明性。
+</details>
+
+---
+
+### 测验 3：`const fn` 在副作用方面有什么限制？（理解层）
+
+**题目**: `const fn` 在副作用方面有什么限制？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`const fn` 在编译期求值，不能执行 IO、不能分配堆内存、不能调用非 `const` 函数，因此天然无副作用。
+</details>
+
+---
+
+### 测验 4：在 Rust 中，"效果系统"（Effect System）主要体现在哪些语言特性上？（理解层）
+
+**题目**: 在 Rust 中，"效果系统"（Effect System）主要体现在哪些语言特性上？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+主要体现在 `unsafe`（标记不安全效果）、`async`（标记异步效果）、`const`（标记编译期效果），通过类型系统显式标记效果。
+</details>
+
+---
+
+### 测验 5：`Iterator::map` 是惰性的还是急切的？这与纯度和副作用有什么关系？（理解层）
+
+**题目**: `Iterator::map` 是惰性的还是急切的？这与纯度和副作用有什么关系？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`map` 是惰性的，返回新迭代器而不立即执行。副作用（如闭包中的 `println!`）直到迭代被消费时才发生，可能导致意外的执行顺序。
+</details>
+
 ## 实践
 
 > **相关资源**:

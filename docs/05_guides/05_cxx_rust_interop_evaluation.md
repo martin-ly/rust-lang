@@ -28,7 +28,6 @@
     - [9.2 C++ 调用 Rust](#92-c-调用-rust)
   - [10. 总结](#10-总结)
   - [📋 复查记录](#-复查记录)
-  - [**相关文档**: Rust for Linux 工具链指南](#相关文档-rust-for-linux-工具链指南)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -319,6 +318,7 @@ C++ ↔ Rust 互操作是 Rust 2026 的核心目标之一。当前社区以 `cxx
 **维护者**: Rust 学习项目团队
 **下次审查**: 2026-06-08
 **相关文档**: [Rust for Linux 工具链指南](../06_toolchain/06_rust_for_linux_tooling_guide.md)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

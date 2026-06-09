@@ -566,6 +566,66 @@ fn main() {
 - **定理**: WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型） 定义 ⟹ 类型安全保证
 - **定理**: WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型） 定义 ⟹ 类型安全保证
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：WASI（WebAssembly System Interface）的核心目标是什么？（理解层）
+
+**题目**: WASI（WebAssembly System Interface）的核心目标是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+为 WebAssembly 提供可移植、安全的系统接口标准（文件、网络、时钟等），使 WASM 模块能在浏览器外运行（服务端、边缘计算、嵌入式）。
+</details>
+
+---
+
+### 测验 2：WASI 的"能力安全"（Capability-Based Security）模型是什么意思？（理解层）
+
+**题目**: WASI 的"能力安全"（Capability-Based Security）模型是什么意思？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+程序只能访问显式授予的能力（capabilities），如打开特定文件需传入对应文件描述符权限。这防止了 WASM 沙箱内的代码越权访问主机资源。
+</details>
+
+---
+
+### 测验 3：Rust 的 `wasm32-wasi` target 与普通 `wasm32-unknown-unknown` 有什么区别？（理解层）
+
+**题目**: Rust 的 `wasm32-wasi` target 与普通 `wasm32-unknown-unknown` 有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`wasm32-wasi` 支持 WASI 系统调用（文件、环境变量等），可编译为独立可执行的 CLI WASM 模块。`wasm32-unknown-unknown` 无任何系统接口，主要用于浏览器环境。
+</details>
+
+---
+
+### 测验 4：Component Model 中的 `wit-bindgen` 在 Rust/WASI 开发中起什么作用？（理解层）
+
+**题目**: Component Model 中的 `wit-bindgen` 在 Rust/WASI 开发中起什么作用？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+从 WIT（WASM Interface Types）接口定义生成 Rust 绑定代码，实现跨语言组件互操作（如 Rust 调用 Python 组件或反之）。
+</details>
+
+---
+
+### 测验 5：为什么 Rust 是 WASI 和 WebAssembly 生态中最活跃的语言之一？（理解层）
+
+**题目**: 为什么 Rust 是 WASI 和 WebAssembly 生态中最活跃的语言之一？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Rust 无运行时、二进制小、性能高，且所有权系统与 WASM 的沙箱安全模型天然契合。`cargo` 对 WASM target 支持成熟，工具链完善。
+</details>
+
 ## 认知路径
 
 > **认知路径**: 从 Rust 核心语言特性出发，经由 **WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型）** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。

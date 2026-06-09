@@ -654,6 +654,66 @@ fn main() {
 
 > **修正**: newtype 模式（`struct Meters(u32)`）创建语义不同的类型，但 `Deref` 自动解引用使 newtype 像底层类型一样行为。这导致**方法解析困惑**：`m.saturating_add(50)` 调用 `u32::saturating_add`，而非 `Meters` 的方法（若存在）。设计原则：newtype 用于**类型安全**（防止混淆 Meters 和 Seconds），但 `Deref` 削弱了这一优势。替代方案：1) 不显式实现 `Deref`，只提供必要方法；2) 使用 `From`/`Into` 显式转换；3) 使用 `as_ref()` / `into_inner()` 访问内部值。这与 Haskell 的 `newtype`（无运行时开销，无 Deref 等价物，需显式解包）或 Ada 的派生类型（类似 newtype，无隐式转换）相同——Rust 的 newtype 最纯粹的形式是不实现 `Deref`，完全通过显式 API 交互。[来源: [Newtype Pattern](https://rust-unofficial.github.io/patterns/patterns/behavioural/newtype.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Newtype 模式的核心目的是什么？它如何实现"零成本"？（理解层）
+
+**题目**: Newtype 模式的核心目的是什么？它如何实现"零成本"？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+目的是为已有类型赋予新的语义/约束（如 `Meters(u32)` 与 `Seconds(u32)`），避免混淆。零成本：包装器在运行时不占用额外内存，编译后等同于底层类型。
+</details>
+
+---
+
+### 测验 2：`struct Wrapper(String)` 与 `type Wrapper = String;` 在类型安全上有什么区别？（理解层）
+
+**题目**: `struct Wrapper(String)` 与 `type Wrapper = String;` 在类型安全上有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Newtype 是全新类型，不自动继承底层类型的 trait 实现。`type` 别名与原始类型完全等价，无额外类型安全保护。
+</details>
+
+---
+
+### 测验 3：如何为 Newtype 实现底层类型的 trait（如 `Display`、`Deref`）？（理解层）
+
+**题目**: 如何为 Newtype 实现底层类型的 trait（如 `Display`、`Deref`）？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+手动 `impl Display for Wrapper` 或 `impl Deref<Target=String> for Wrapper`。也可使用 `derive_more` 等 crate 自动派生。
+</details>
+
+---
+
+### 测验 4：PhantomData 在 Newtype/包装器模式中有什么用途？（理解层）
+
+**题目**: PhantomData 在 Newtype/包装器模式中有什么用途？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`PhantomData<T>` 用于在类型中携带不占用运行时的泛型参数，如标记生命周期、所有权关系或与未存储数据的类型关联。
+</details>
+
+---
+
+### 测验 5：Newtype 模式与类型别名（type alias）相比，在什么场景下 Newtype 不可替代？（理解层）
+
+**题目**: Newtype 模式与类型别名（type alias）相比，在什么场景下 Newtype 不可替代？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+需要为类型提供不同 trait 实现、需要隐藏内部表示、需要编译期区分不同语义单位（如用户 ID 与订单 ID）时，Newtype 不可替代。
+</details>
+
 ## 实践
 
 > **相关资源**:

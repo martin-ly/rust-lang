@@ -1330,6 +1330,66 @@ fn main() {
 - **定理**: Rust 惯用法谱系全景（Idioms Spectrum） 定义 ⟹ 类型安全保证
 - **定理**: Rust 惯用法谱系全景（Idioms Spectrum） 定义 ⟹ 类型安全保证
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`Default` trait 的用途是什么？如何为自定义类型实现它？（理解层）
+
+**题目**: `Default` trait 的用途是什么？如何为自定义类型实现它？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+提供类型的默认值。实现 `impl Default for MyType { fn default() -> Self { ... } }`，或使用 `#[derive(Default)]`（要求所有字段都实现 Default）。
+</details>
+
+---
+
+### 测验 2：`AsRef` 与 `Borrow` trait 在语义上有什么区别？（理解层）
+
+**题目**: `AsRef` 与 `Borrow` trait 在语义上有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`AsRef<T>` 用于廉价引用转换（如 `&String -> &str`），关注转换本身。`Borrow<T>` 要求转换后的引用与原始值在哈希/比较上一致，主要用于集合键查找。
+</details>
+
+---
+
+### 测验 3：什么是"早返回"（Early Return）模式？Rust 中通常如何实现？（理解层）
+
+**题目**: 什么是"早返回"（Early Return）模式？Rust 中通常如何实现？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+在函数条件满足时提前返回，避免深层嵌套。Rust 中通过 `?` 运算符、`if let Some(x) = opt { return x; }` 或 `match` 实现。
+</details>
+
+---
+
+### 测验 4：`todo!()` 和 `unimplemented!()` 宏在开发中有什么用途？（理解层）
+
+**题目**: `todo!()` 和 `unimplemented!()` 宏在开发中有什么用途？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+作为占位符标记尚未实现的分支/函数，编译通过但运行时 panic。`todo!()` 语义上更轻，常用于快速原型；`unimplemented!()` 语义更正式，表示计划实现但还未完成。
+</details>
+
+---
+
+### 测验 5：Rust 的 `must_use` 属性有什么作用？什么类型的返回值通常应该标记它？（理解层）
+
+**题目**: Rust 的 `must_use` 属性有什么作用？什么类型的返回值通常应该标记它？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+警告调用方不要忽略返回值。通常用于 `Result`（错误处理）、`Iterator`（惰性计算未执行）和表示重要副作用结果的类型。
+</details>
+
 ## 认知路径
 
 > **认知路径**: 从 Rust 核心语言特性出发，经由 **Rust 惯用法谱系全景（Idioms Spectrum）** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。

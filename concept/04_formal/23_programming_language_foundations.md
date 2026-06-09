@@ -309,6 +309,66 @@ fn example() {
 
 > **权威来源**: [TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/), [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Lambda 演算（Lambda Calculus）为什么被称为"编程语言的汇编语言"？（理解层）
+
+**题目**: Lambda 演算（Lambda Calculus）为什么被称为"编程语言的汇编语言"？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+因为它是最小化的计算模型，只包含变量、抽象和应用三种构造。任何可计算函数都能用 Lambda 演算表达，是函数式编程语言（包括 Rust 的闭包）的理论基础。
+</details>
+
+---
+
+### 测验 2：什么是"柯里化"（Currying）？Rust 的闭包支持柯里化吗？（理解层）
+
+**题目**: 什么是"柯里化"（Currying）？Rust 的闭包支持柯里化吗？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+柯里化是将多参数函数转换为一系列单参数函数的技术，如 `f(x, y)` → `f(x)(y)`。Rust 闭包可以手动实现柯里化（返回嵌套闭包），但语言不自动提供。
+</details>
+
+---
+
+### 测验 3：系统 F（System F）是什么？Rust 的泛型与它有什么关系？（理解层）
+
+**题目**: 系统 F（System F）是什么？Rust 的泛型与它有什么关系？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+系统 F 是带参数多态（泛型）的 Lambda 演算。Rust 的泛型是系统 F 的工业实现，但额外加入了 trait bounds（受限量化）和生命周期。
+</details>
+
+---
+
+### 测验 4：什么是"停机问题"（Halting Problem）？它对程序验证有什么实际影响？（理解层）
+
+**题目**: 什么是"停机问题"（Halting Problem）？它对程序验证有什么实际影响？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+停机问题证明不存在通用算法能判定任意程序是否终止。这意味着完全自动化的程序正确性验证是不可能的，实际工具只能处理受限子集或需要人工辅助规约。
+</details>
+
+---
+
+### 测验 5：类型论中的"依赖类型"（Dependent Types）是什么？Rust 目前支持依赖类型吗？（理解层）
+
+**题目**: 类型论中的"依赖类型"（Dependent Types）是什么？Rust 目前支持依赖类型吗？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+依赖类型允许类型依赖于值（如 `Vec<n>` 表示长度为 n 的向量）。Rust 目前不完全支持，但 `const generics`（如 `[T; N]`）是其受限形式。
+</details>
+
 ## 认知路径
 
 > **认知路径**: 从 L0 基础概念出发，经由本节的 **通用程序语言理论基础：Rust 的 PL 基座** 核心原理，通向 L2 进阶模式与 L3 工程实践。
