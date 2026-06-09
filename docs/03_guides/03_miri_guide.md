@@ -6,6 +6,9 @@
 > **工具**: Miri（Rust 的解释型 UB 检测器）
 > **适用版本**: Rust nightly（`rustup component add miri`）
 > **权威来源**: [rustc-dev-guide Miri 章节](https://rustc-dev-guide.rust-lang.org/miri.html) | [Miri README](https://github.com/rust-lang/miri)
+>
+> **受众**: [初学者] / [进阶]
+> **内容分级**: [实验级]
 
 ---
 

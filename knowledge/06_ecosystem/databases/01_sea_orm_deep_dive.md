@@ -8,6 +8,9 @@
 > **权威来源**: [Sea-ORM 官方文档](https://www.sea-ql.org/SeaORM/), [Sea-ORM GitHub](https://github.com/SeaQL/sea-orm)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Sea-ORM 官方文档来源标注 [来源: Authority Source Sprint Batch 8]
+>
+> **受众**: [初学者] / [进阶]
+> **内容分级**: [综述级]
 
 ---
 

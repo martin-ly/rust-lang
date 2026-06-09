@@ -8,6 +8,9 @@
 > **后置延伸**: [knowledge Async](../async/README.md) · [concept L3 并发](../../../concept/03_advanced/01_concurrency.md)
 > **跨层映射**: knowledge→concept 直觉映射 | L3 系统编程
 > **定理链编号**: T-040 Send 类型安全 → T-041 Sync 数据竞争自由
+>
+> **受众**: [初学者] / [进阶]
+> **内容分级**: [专家级]
 
 ## 📑 目录
 

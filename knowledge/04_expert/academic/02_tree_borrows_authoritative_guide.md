@@ -10,6 +10,9 @@
 > **权威来源**: [Tree Borrows Paper (Villani et al., PLDI 2025)](https://pldi25.sigplan.org/), [Miri Tree Borrows](https://github.com/rust-lang/miri), [Rust Reference — Aliasing Rules](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 PLDI 2025 Distinguished Paper 来源标注、Miri 实现引用、Rust Reference 别名规则来源 [来源: Authority Source Sprint Batch 8]
+>
+> **受众**: [初学者] / [进阶]
+> **内容分级**: [综述级]
 
 ---
 

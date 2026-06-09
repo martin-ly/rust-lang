@@ -6,6 +6,9 @@
 > 本文档对应 Rust 生产级工程实践体系阶段三 —— 模糊测试。
 > 参考: Google OSS-Fuzz、Cloudflare 模糊测试实践、Rust Fuzzing Book。
 > **[来源: Wikipedia - Fuzzing]** · **[来源: AFL - American Fuzzy Lop]** · **[来源: LLVM libFuzzer]** · **[来源: Rust Fuzzing Book - fuzzingbook.com]**
+>
+> **受众**: [初学者] / [进阶]
+> **内容分级**: [综述级]
 
 ---
 

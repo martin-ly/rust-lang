@@ -10,6 +10,9 @@
 > **⏱️ 预计学习时间**: 3-4 小时
 > **📚 难度级别**: ⭐⭐⭐⭐ 高级
 > **权威来源**: [The Rust Performance Book](https://nnethercote.github.io/perf-book/)
+>
+> **受众**: [进阶] / [专家]
+> **内容分级**: [专家级]
 
 **变更日志**:
 

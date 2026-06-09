@@ -8,6 +8,9 @@
 > **权威来源**: [Coq 官方文档](https://coq.inria.fr/documentation), [Software Foundations](https://softwarefoundations.cis.upenn.edu/), [Iris 教程](https://iris-project.org/tutorial.html), [RustBelt (Jung et al., POPL 2018)](https://plv.mpi-sws.org/rustbelt/popl18/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Coq/Iris 形式化验证来源标注、RustBelt 论文引用 [来源: Authority Source Sprint Batch 8]
+>
+> **受众**: [专家] / [研究者]
+> **内容分级**: [研究者级]
 
 ---
 

@@ -8,6 +8,9 @@
 > **后置延伸**: [knowledge 并发](../03_advanced/concurrency/README.md) · [concept L2 泛型](../../concept/02_intermediate/02_generics.md)
 > **跨层映射**: knowledge→concept 直觉映射 | L2 抽象机制
 > **定理链编号**: T-030 参数多态保持
+>
+> **受众**: [专家] / [研究者]
+> **内容分级**: [研究者级]
 
 ## 📑 目录
 

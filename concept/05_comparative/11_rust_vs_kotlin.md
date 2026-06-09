@@ -736,7 +736,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-Kotlin 协程由编译器转换为状态机，运行在 JVM 线程池上（可挂起和恢复）。Rust async 也是状态机，但更底层，与特定 runtime（tokio/async-std）绑定，无默认调度器。
+Kotlin 协程由编译器转换为状态机，运行在 JVM 线程池上（可挂起和恢复）。Rust async 也是状态机，但更底层，与特定 runtime（tokio 为主流，async-std `[已归档 2025-03]`）绑定，无默认调度器。
 </details>
 
 ---

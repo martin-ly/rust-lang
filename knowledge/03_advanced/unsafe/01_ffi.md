@@ -20,6 +20,9 @@
 > [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 ABI 边界形式化语义来源标注、`repr(C)` 内存布局标准引用、bindgen 自动生成绑定方法论、panic 跨越 FFI 边界的 UB 分析来源 [来源: Authority Source Sprint Batch 8]
+>
+> **受众**: [专家] / [研究者]
+> **内容分级**: [研究者级]
 
 ---
 

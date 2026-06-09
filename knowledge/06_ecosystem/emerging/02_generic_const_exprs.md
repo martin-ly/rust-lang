@@ -6,6 +6,9 @@
 > **状态**: 🧪 不稳定 (Unstable)
 > **预计稳定**: TBD (nightly-only，稳定时间未定)
 > **跟踪 Issue**: [#76560](https://github.com/rust-lang/rust/issues/76560)
+>
+> **受众**: [专家] / [研究者]
+> **内容分级**: [实验级]
 
 ---
 

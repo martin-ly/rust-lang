@@ -6,6 +6,9 @@
 > **预计时间**: 30 分钟
 > **权威来源**: [Rust Language FAQ](https://www.rust-lang.org/faq), [Rust Book Ch00](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust 设计决策来源标注、零成本抽象学术引用、内存安全形式化语义来源 [来源: Authority Source Sprint Batch 8]
+>
+> **受众**: [初学者] / [进阶]
+> **内容分级**: [综述级]
 
 ## 🎯 学习目标
 

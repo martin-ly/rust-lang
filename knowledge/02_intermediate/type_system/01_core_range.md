@@ -10,6 +10,9 @@
 > **权威来源**: [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/), [RFC 3550: Rangeful](https://rust-lang.github.io/rfcs/3550-rangeful.html), [std::ops::Range](https://doc.rust-lang.org/std/ops/struct.Range.html)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 RFC 3550 设计决策来源标注、Range 类型形式化语义引用 [来源: Authority Source Sprint Batch 8]
+>
+> **受众**: [专家] / [研究者]
+> **内容分级**: [实验级]
 
 ---
 

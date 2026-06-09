@@ -11,6 +11,9 @@
 > - `isqrt`、`get_disjoint_mut`、`Vec::pop_if` 等 API 在更早版本（如 1.84–1.88）已稳定，不属于 1.95/1.96 新特性。
 > - `PinCoerceUnsized` 是 **nightly-only** 实验性特性，当前 stable 不支持。
 > - `gen` blocks 是 **nightly-only** 实验性特性，当前 stable 不支持。
+>
+> **受众**: [初学者] / [进阶]
+> **内容分级**: [实验级]
 
 ---
 

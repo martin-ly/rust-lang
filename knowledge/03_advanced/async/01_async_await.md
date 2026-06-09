@@ -16,6 +16,9 @@
 > RFC 2349 `Pin` 形式化定义、
 > 跨语言异步对比矩阵（C++20 Coroutines / Haskell `async` / Go Goroutine）
 > [来源: Authority Source Sprint Batch 8]
+>
+> **受众**: [专家] / [研究者]
+> **内容分级**: [实验级]
 
 ---
 

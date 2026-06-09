@@ -5,6 +5,9 @@
 > **状态**: Frontmatter 仍在 nightly 中稳定化进程中，尚未进入 stable。当前可用方式：`cargo +nightly -Zscript`。
 > **RFC**: [Frontmatter Stabilization PR #148605](https://github.com/rust-lang/rust/pull/148605)
 > **最后更新**: 2026-05-08
+>
+> **受众**: [进阶]
+> **内容分级**: [实验级]
 
 ---
 

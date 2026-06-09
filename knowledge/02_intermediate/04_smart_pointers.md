@@ -21,6 +21,9 @@
 > `Deref`/`Drop` trait 自动调用机制来源标注、
 > 智能指针跨语言对比矩阵（C++ `std::unique_ptr`/`shared_ptr` vs Haskell `STRef` vs Go 无智能指针）
 > [来源: Authority Source Sprint Batch 8]
+>
+> **受众**: [专家] / [研究者]
+> **内容分级**: [实验级]
 
 ---
 

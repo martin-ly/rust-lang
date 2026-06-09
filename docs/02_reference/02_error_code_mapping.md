@@ -14,6 +14,9 @@
 > **状态**: ✅ 已完成
 > **用途**: 常见 Rust 编译器错误码快速定位、理解与修复
 > **权威源**: [Compiler Error Index](https://doc.rust-lang.org/error-index.html)
+>
+> **受众**: [进阶] / [专家]
+> **内容分级**: [专家级]
 
 ---
 

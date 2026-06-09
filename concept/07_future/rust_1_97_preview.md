@@ -5,7 +5,7 @@
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]
-> **跟踪版本**: nightly 1.98.0 (2026-06-06)
+> **跟踪版本**: nightly 1.98.0 (2026-06-10)
 > **预计稳定时间**: 2026-07-09（Rust 1.97.0 Beta 计划发布日期，来源: Rust Forge）
 > **当前阶段**: 🧪 Nightly 实验性 / 1.97 已进入 Beta 分支
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
@@ -39,6 +39,8 @@
 - 编译器已能生成异步析构状态机
 
 **影响**: 解决异步资源释放的核心痛点，不再需要手动 `flush()`/`close()` 后丢弃。
+
+**深度文档**: [18_async_drop_preview.md](18_async_drop_preview.md)
 
 **代码示例** (nightly):
 
@@ -84,6 +86,8 @@ where
 }
 ```
 
+**深度文档**: [12_return_type_notation_preview.md](12_return_type_notation_preview.md)
+
 ---
 
 ### 1.3 Pin Ergonomics / Safe Pin Projection
@@ -123,6 +127,8 @@ impl MyFuture {
 
 **Project Goals 2026 关联**: 被列为 "Better pin ergonomics" 子目标，属于异步 Rust 生态系统成熟度的关键路径。
 
+**深度文档**: [18_field_projections_preview.md](18_field_projections_preview.md)（字段级安全投影）
+
 ---
 
 ### 1.4 Unnamed Enum Variants / Open Enums（RFC 3894）
@@ -150,6 +156,8 @@ enum CCompatibleEnum {
 ```
 
 **意义**: 改善 Rust 与 C FFI 的 enum 互操作性，是 Rust for Linux 等项目的长期需求之一。
+
+**深度文档**: [25_open_enums_preview.md](25_open_enums_preview.md)
 
 > **来源**: [rust-lang/rust#156628](https://github.com/rust-lang/rust/issues/156628) · [RFC 3894](https://rust-lang.github.io/rfcs/3894-unnamed-enum-variants.html) · 可信度: ✅
 
@@ -305,7 +313,7 @@ RUSTFLAGS="-Zsanitizer=borrow" cargo +nightly test
 
 **意义**: 使 Tree Borrows 规则从理论验证工具走向工程实践，可在大型代码库中检测 `unsafe` 代码的别名违规。与 Kani (静态) 形成互补：BSan 动态发现实际执行路径上的违规，Kani 穷举所有可能路径。
 
-**深度文档**: [04_formal/22_modern_verification_tools.md](../04_formal/22_modern_verification_tools.md)
+**深度文档**: [20_borrowsanitizer_preview.md](20_borrowsanitizer_preview.md) · [04_formal/22_modern_verification_tools.md](../04_formal/22_modern_verification_tools.md)
 
 ---
 
@@ -390,6 +398,159 @@ async gen fn counter_stream(max: usize) -> impl Stream<Item = usize> {
 | **`size_of_val_raw` / `align_of_val_raw` / `Layout::for_value_raw`** | 🔄 等待 review | 裸值尺寸/对齐计算（PR #157572，1 day old，等待 review） [来源: releases.rs 2026-06-08] |
 | **`#[optimize]` attribute** | 🔄 Blocked | 函数级优化属性（PR #157273，blocked，needs-fcp） [来源: releases.rs 2026-06-08] |
 
+> **代码示例来源**: [`crates/c08_algorithms/src/rust_197_features.rs`](../../../crates/c08_algorithms/src/rust_197_features.rs) 包含以下 API 的等效实现和 nightly 测试。
+
+---
+
+### 5.2 VecDeque::truncate_front
+
+**状态**: 🧪 Nightly
+
+**说明**: 从双端队列**前部**截断，保留后部 `n` 个元素。与 `truncate(n)`（保留前部 `n` 个）形成对称操作。
+
+```rust,ignore
+#![feature(vec_deque_truncate_front)]
+
+use std::collections::VecDeque;
+
+let mut deque = VecDeque::from([1, 2, 3, 4, 5]);
+deque.truncate_front(2);
+assert_eq!(deque.make_contiguous(), &[4, 5]); // 保留后部 2 个
+```
+
+---
+
+### 5.3 VecDeque::retain_back
+
+**状态**: 🔄 FCP 完成（⚠️ nightly 1.98.0 验证中未出现，可能推迟至 1.98+）
+
+**说明**: 从双端队列**尾部**开始保留满足条件的元素，与 `retain`（从头部开始）互补。
+
+```rust,ignore
+#![feature(vec_deque_retain_back)] // feature gate 可能不存在，需跟踪 PR #151973
+
+use std::collections::VecDeque;
+
+let mut deque = VecDeque::from([1, 2, 3, 4, 5]);
+deque.retain_back(|x| x % 2 == 0);
+assert_eq!(deque.make_contiguous(), &[2, 4]); // 保留偶数
+```
+
+---
+
+### 5.4 RefCell::try_map
+
+**状态**: 🧪 Nightly
+
+**说明**: 在 `RefCell` 借用期间进行条件性映射，若闭包返回 `None` 则保持原值不变。
+
+```rust,ignore
+#![feature(refcell_try_map)]
+
+use std::cell::RefCell;
+
+let cell = RefCell::new(Some(42));
+let borrowed = cell.borrow();
+let mapped = RefCell::try_map(borrowed, |opt| opt.as_ref()).ok();
+// 若值为 None，try_map 返回 Err，原 borrow 保持不变
+```
+
+---
+
+### 5.5 int_format_into
+
+**状态**: 🧪 Nightly
+
+**说明**: 将整数直接格式化到预分配缓冲区，避免 `to_string()` 的堆分配。关键优化用于 `no_std` 和嵌入式场景。
+
+```rust,ignore
+#![feature(int_format_into)]
+
+let mut buf = [0u8; 20];
+let n = 12345i32;
+let written = n.format_into(&mut buf);
+assert_eq!(&buf[..written], b"12345");
+```
+
+---
+
+### 5.6 float_algebraic
+
+**状态**: 🔄 FCP 中
+
+**说明**: 允许编译器在代数等价的前提下重组浮点运算（类似 `-ffast-math`），可能改变舍入行为。
+
+```rust,ignore
+#![feature(float_algebraic)]
+
+#[float_algebraic]
+fn fast_sum(a: f64, b: f64, c: f64) -> f64 {
+    (a + b) + c  // 编译器可能重排为 a + (b + c)
+}
+```
+
+> ⚠️ 这会打破 IEEE 754 严格语义，仅在可接受精度损失的场景使用。
+
+---
+
+### 5.7 RandomSource / DefaultRandomSource
+
+**状态**: 🔄 等待 libs-api
+
+**说明**: 可插拔随机数源抽象，允许 `rand::thread_rng()`、`getrandom`、`OsRng` 等通过统一 trait 接入标准库 API。
+
+```rust,ignore
+#![feature(random_source)]
+
+use std::random::{RandomSource, DefaultRandomSource};
+
+fn shuffle<T, R: RandomSource>(vec: &mut [T], rng: &mut R) { /* ... */ }
+
+let mut rng = DefaultRandomSource::new();
+shuffle(&mut data, &mut rng);
+```
+
+---
+
+### 5.8 box_vec_non_null
+
+**状态**: 🔄 PFCP
+
+**说明**: 允许 `Box<T>` 和 `Vec<T>` 直接转换为 `NonNull<T>`，避免空指针检查开销。
+
+```rust,ignore
+#![feature(box_vec_non_null)]
+
+use std::ptr::NonNull;
+
+let boxed = Box::new(42);
+let ptr: NonNull<i32> = Box::into_raw_non_null(boxed);
+
+let vec = vec![1, 2, 3];
+let (ptr, len, cap): (NonNull<i32>, usize, usize) = Vec::into_raw_parts_non_null(vec);
+```
+
+---
+
+### 5.9 C-variadic function definitions
+
+**状态**: 🔄 PFCP
+
+**说明**: 在 Rust 中直接定义 C 风格可变参数函数，不再需要通过 `extern "C"` 声明 + 手写 C wrapper。
+
+```rust,ignore
+#![feature(c_variadic)]
+
+use std::ffi::{c_char, c_int};
+
+pub unsafe extern "C" fn my_printf(fmt: *const c_char, mut args: ...) -> c_int {
+    // 可变参数处理...
+    0
+}
+```
+
+**典型场景**: 内核 printk、嵌入式日志、FFI 回调。
+
 ---
 
 ## 六、Cargo 与工具链
@@ -401,7 +562,7 @@ async gen fn counter_stream(max: usize) -> impl Stream<Item = usize> {
 | `target.'cfg(..)'.rustdocflags` | ✅ 1.96 已稳定 | 条件 rustdoc 标志 |
 | `cargo lint` 子命令 | 📋 RFC 阶段 | 统一的 lint 管理接口 |
 | 依赖图谱可视化 | 📋 设计阶段 | `cargo tree --graph` |
-| **cargo-script 稳定化** | 🔄 FCP 已结束 | [RFC 3502](https://rust-lang.github.io/rfcs/3502.html)+3503 已批准；**blocker 为 edition policy（lang/edition 方面）**；Project Goals 2026 Continued [来源: Rust Project Goals 2026 April Update] |
+| **cargo-script 稳定化** | 🔄 FCP 已结束 | [RFC 3502](https://rust-lang.github.io/rfcs/3502.html)+3503 已批准；frontmatter（脚本顶部 `---` 元数据块）格式同步推进；**blocker 为 edition policy（lang/edition 方面）**；Project Goals 2026 Continued [来源: Rust Project Goals 2026 April Update] |
 | **Cargo `-m` shorthand** | 🟢 1.97 已确认 | `cargo -m <path>` 作为 `--manifest-path` 的简写（Cargo #16858） [来源: Cargo CHANGELOG 1.97] |
 | **Cargo improved `-p` errors** | 🟢 1.97 已确认 | 拼写错误的 `-p` 参数将提示相似的 workspace member 名称（Cargo #16844） [来源: Cargo CHANGELOG 1.97] |
 | **Cargo `-Zscript` edition pinning** | 🧪 Nightly | 教育用户如何为脚本固定 edition（Cargo #16851） [来源: Cargo CHANGELOG 1.97] |
@@ -464,7 +625,7 @@ async gen fn counter_stream(max: usize) -> impl Stream<Item = usize> {
 
 ---
 
-> **最后更新**: 2026-06-08
+> **最后更新**: 2026-06-10
 > **维护者**: 本项目知识库团队
 > **状态**: 🧪 活跃跟踪中，每 2 周更新一次
 > **过渡**: Rust 1.97 前沿特性预览 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

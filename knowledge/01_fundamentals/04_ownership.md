@@ -8,6 +8,9 @@
 > **后置延伸**: [knowledge 借用](01_borrowing.md) · [concept L1 所有权](../../concept/01_foundation/01_ownership.md)
 > **跨层映射**: knowledge→concept 直觉映射 | L1 工程实践
 > **定理链编号**: T-001 所有权唯一性
+>
+> **受众**: [初学者] / [进阶]
+> **内容分级**: [综述级]
 
 ## 📑 目录
 

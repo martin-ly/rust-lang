@@ -17,6 +17,9 @@
 > [The Art of Multiprocessor Programming](https://www.elsevier.com/books/the-art-of-multiprocessor-programming/herlihy/978-0-12-415950-1) (Herlihy & Shavit)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 `Mutex`/`RwLock` 守卫模式形式化语义来源标注、poisoning 机制设计决策引用、死锁预防策略学术来源 [来源: Authority Source Sprint Batch 8]
+>
+> **受众**: [专家] / [研究者]
+> **内容分级**: [研究者级]
 
 ---
 

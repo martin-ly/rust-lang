@@ -8,6 +8,9 @@
 > **后置延伸**: [docs Rust for Linux](./03_rust_for_linux_guide.md) · [knowledge Unsafe](../../knowledge/03_advanced/unsafe/README.md)
 > **跨层映射**: L3→L6 工程映射 | 理论→实践
 > **定理链编号**: T-050 Pin 安全性 → T-060 unsafe 抽象
+>
+> **受众**: [进阶] / [专家]
+> **内容分级**: [专家级]
 
 ## 📑 目录
 >

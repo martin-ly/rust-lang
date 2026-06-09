@@ -6,6 +6,9 @@
 > **权威来源**: [RFC 3668 — Async Closures](https://rust-lang.github.io/rfcs/3668-async-closures.html), [Rust Reference — Async closures](https://doc.rust-lang.org/reference/expressions/closure-expr.html#async-closures), [Rust 1.85 Release Notes](https://releases.rs/docs/1.85.0/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 RFC 3668 设计决策来源标注、Rust Reference 异步闭包语义引用 [来源: Authority Source Sprint Batch 8]
+>
+> **受众**: [专家] / [研究者]
+> **内容分级**: [实验级]
 
 ## 概述
 

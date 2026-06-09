@@ -7,6 +7,9 @@
 > **用途**: 将 LFRS 认证的 10 大考点映射到本项目内容，建立可量化的学习验证体系
 > **认证官网**: <https://www.linuxfoundation.org/certification/linux-foundation-certified-rust-programmer>
 > **[来源: Linux Foundation]** · **[来源: Rust Reference]** · **[来源: TRPL]** · **[来源: Rust Standard Library]**
+>
+> **受众**: [初学者] / [进阶]
+> **内容分级**: [综述级]
 
 ---
 

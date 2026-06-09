@@ -8,6 +8,9 @@
 > **权威来源**: [SQLx 官方文档](https://docs.rs/sqlx/latest/sqlx/), [SQLx GitHub](https://github.com/launchbadge/sqlx)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 SQLx 官方文档来源标注 [来源: Authority Source Sprint Batch 8]
+>
+> **受众**: [初学者] / [进阶]
+> **内容分级**: [综述级]
 
 ---
 

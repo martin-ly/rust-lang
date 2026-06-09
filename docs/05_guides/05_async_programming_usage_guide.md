@@ -8,6 +8,9 @@
 > **后置延伸**: [docs 嵌入式](05_embedded_rust_guide.md) · [knowledge Async](../../knowledge/03_advanced/async/README.md)
 > **跨层映射**: L3→L6 运行时映射 | 语义→实现
 > **定理链编号**: T-050 Pin 安全性 → T-051 轮询一致性 → Tokio 调度正确性
+>
+> **受众**: [专家] / [研究者]
+> **内容分级**: [研究者级]
 
 ## 📑 目录
 >

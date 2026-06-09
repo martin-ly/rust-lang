@@ -3033,8 +3033,8 @@ async fn process() {
 | 场景 | 最佳选择 |
 |:---|:---|
 | 高并发 HTTP 服务器，10k+ 连接 | A. `tokio` |
-| 嵌入式设备，资源极度受限 | B. `async-std` |
-| 需要与现有 `async-std` 生态集成 | C. `smol` |
+| 嵌入式设备，资源极度受限 | B. `smol` |
+| 需要与现有 `async-std` 生态集成 | C. `async-std` `[已归档 2025-03]` |
 | 轻量级、可组合的运行时 | D. `embassy` |
 
 - A. 1-A, 2-B, 3-C, 4-D
@@ -3051,7 +3051,7 @@ async fn process() {
 |:---|:---|:---|
 | 高并发 HTTP 服务器 | **Tokio** | 生态最成熟，`tokio::net`、`tokio::fs`、`hyper`、`axum` 等 |
 | 嵌入式设备 | **Embassy** | 专为 `no_std` 嵌入式设计，资源占用极小 |
-| 与 `async-std` 集成 | **async-std** | API 与标准库对齐，适合已有代码迁移 |
+| 与 `async-std` 集成 | **async-std** `[已归档 2025-03]` | 项目已停止维护，建议迁移至 Tokio 或 smol |
 | 轻量级可组合 | **smol** | 核心仅 5k 行，模块化设计，易于嵌入 |
 
 **Tokio 的生态系统**:

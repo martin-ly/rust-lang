@@ -3,6 +3,9 @@
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]
 > **Bloom 层级**: L2 (理解)
+>
+> **受众**: [初学者] / [进阶]
+> **内容分级**: [综述级]
 
 本文件对照 [The Rustonomicon](https://doc.rust-lang.org/nomicon/) 的章节，列出本项目已覆盖和未覆盖的内容，并标注对应的 crate 位置。
 

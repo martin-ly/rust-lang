@@ -5,7 +5,7 @@
 
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-02-28
-> **Rust 版本**: 1.93.1+ (Edition 2024)
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > 内容已整合至： [c05_threads/](../../../../crates/c05_threads/README.md)、[c06_async/](../../../../crates/c06_async/README.md)
 

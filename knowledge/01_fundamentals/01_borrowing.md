@@ -7,6 +7,9 @@
 > **后置延伸**: [knowledge Trait](../02_intermediate/06_traits.md) · [concept L1 借用](../../concept/01_foundation/02_borrowing.md)
 > **跨层映射**: knowledge→concept 直觉映射 | L1 工程实践
 > **定理链编号**: T-010 借用唯一性 → T-011 生命周期包含
+>
+> **受众**: [初学者] / [进阶]
+> **内容分级**: [综述级]
 
 ## 📑 目录
 

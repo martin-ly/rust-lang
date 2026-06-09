@@ -6,6 +6,9 @@
 >
 > **Rust 版本**: 1.96.0+
 > **权威来源**: [std::f64::consts](https://doc.rust-lang.org/std/f64/consts/index.html)
+>
+> **受众**: [初学者] / [进阶]
+> **内容分级**: [综述级]
 
 **变更日志**:
 

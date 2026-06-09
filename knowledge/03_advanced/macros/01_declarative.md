@@ -17,6 +17,9 @@
 > [RFC 1584: Macros](https://rust-lang.github.io/rfcs/1584-macros.html)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增卫生宏（Hygienic Macro）学术来源标注、Kohlbecker et al. (1986) 原始论文引用、macro_rules! 与 C 预处理器跨语言对比 [来源: Authority Source Sprint Batch 8]
+>
+> **受众**: [进阶] / [专家]
+> **内容分级**: [实验级]
 
 ---
 

@@ -9,6 +9,9 @@
 > **后置延伸**: [knowledge 编译器内部](../../04_expert/01_compiler_internals.md) · [concept L3 宏](../../../concept/03_advanced/04_macros.md)
 > **跨层映射**: knowledge→concept 直觉映射 | L3 元编程
 > **定理链编号**: T-070 宏卫生性 → T-071 展开正确性
+>
+> **受众**: [进阶] / [专家]
+> **内容分级**: [专家级]
 
 ## 📑 目录
 

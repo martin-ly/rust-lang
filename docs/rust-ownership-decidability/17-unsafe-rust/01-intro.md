@@ -2,6 +2,7 @@
 > **归档日期**: 2026-06-09
 > **归档原因**: 与主轨 concept/ 完全重复（相似度 1.00），维护价值集中于主轨。
 > **原始位置**: `docs/rust-ownership-decidability/17-unsafe-rust/01-intro.md`
+> **内容分级**: [归档级]
 
 ---
 

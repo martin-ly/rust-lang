@@ -13,6 +13,9 @@
 > [Rust Atomics and Locks](https://marabos.nl/atomics/) (Mara Bos),
 > [The Art of Multiprocessor Programming](https://www.elsevier.com/books/the-art-of-multiprocessor-programming/herlihy/978-0-12-415950-1) (Herlihy & Shavit)
 > **权威来源对齐变更日志**: 2026-05-19 新增 C++20 memory_order 形式化语义对照、五种内存序的 happens-before 关系精确定义来源标注、Mara Bos *Rust Atomics and Locks* 核心论证引用 [来源: Authority Source Sprint Batch 8]
+>
+> **受众**: [专家] / [研究者]
+> **内容分级**: [研究者级]
 
 ---
 

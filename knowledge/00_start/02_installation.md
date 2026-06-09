@@ -7,6 +7,9 @@
 > **权威来源**: [Rust 官方安装指南](https://www.rust-lang.org/tools/install), [rustup 文档](https://rust-lang.github.io/rustup/), [The Rust Programming Language — Ch1](https://doc.rust-lang.org/book/ch01-01-installation.html)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 rustup 官方文档来源标注、工具链管理权威引用 [来源: Authority Source Sprint Batch 8]
+>
+> **受众**: [初学者] / [进阶]
+> **内容分级**: [综述级]
 
 ## 🎯 学习目标
 >

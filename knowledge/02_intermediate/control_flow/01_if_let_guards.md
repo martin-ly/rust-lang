@@ -7,6 +7,9 @@
 > **前置知识**: 模式匹配（match）、if let、match guards
 > **权威来源**: [Rust Reference: Match Guards](https://doc.rust-lang.org/reference/expressions/match-expr.html), [Rust 1.95 Release Notes](https://releases.rs/docs/1.95.0/), [RFC 2294: if-let-guard](https://rust-lang.github.io/rfcs/2294-if-let-guard.html)
 > **权威来源对齐变更日志**: 2026-05-19 新增 if-let-guard RFC 设计决策来源标注、match 守卫形式化语义引用 [来源: Authority Source Sprint Batch 8]
+>
+> **受众**: [专家] / [研究者]
+> **内容分级**: [实验级]
 
 ---
 

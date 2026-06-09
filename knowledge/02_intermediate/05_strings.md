@@ -20,6 +20,9 @@
 > `String`/`&str` 所有权语义的形式化引用、
 > 跨语言字符串对比（C++ `std::string` / Go `string` / Haskell `String`/`Text`）
 > [来源: Authority Source Sprint Batch 8]
+>
+> **受众**: [专家] / [研究者]
+> **内容分级**: [实验级]
 
 ---
 

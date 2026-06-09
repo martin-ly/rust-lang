@@ -8,6 +8,9 @@
 > **权威来源**: [Rust 1.95 Release Notes](https://releases.rs/docs/1.95.0/), [core::macros::cfg_select](https://doc.rust-lang.org/core/macro.cfg_select.html), [rust-lang/rust#131038](https://github.com/rust-lang/rust/pull/131038)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 cfg_select 编译期条件选择语义来源标注 [来源: Authority Source Sprint Batch 8]
+>
+> **受众**: [专家] / [研究者]
+> **内容分级**: [研究者级]
 
 ---
 

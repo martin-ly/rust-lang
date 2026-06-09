@@ -9,6 +9,9 @@
 > **后置延伸**: [knowledge Unsafe](../unsafe/README.md) · [concept L3 Async](../../../concept/03_advanced/02_async.md)
 > **跨层映射**: knowledge→concept 直觉映射 | L3 系统编程
 > **定理链编号**: T-050 Pin 安全性 → T-051 轮询一致性
+>
+> **受众**: [进阶] / [专家]
+> **内容分级**: [专家级]
 
 ## 📑 目录
 

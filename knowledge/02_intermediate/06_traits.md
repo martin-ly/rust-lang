@@ -3,6 +3,9 @@
 > **📎 交叉引用**
 >
 > 本主题在 concept 中有深度的概念分析：[Trait](../../concept/02_intermediate/01_traits.md)
+>
+> **受众**: [专家] / [研究者]
+> **内容分级**: [研究者级]
 
 > **层次定位**: L2 进阶概念 / Trait 子域
 > **前置依赖**: [knowledge 所有权](../01_fundamentals/04_ownership.md) · [knowledge 借用](../01_fundamentals/01_borrowing.md)

@@ -1,3 +1,8 @@
+> **内容分级**: [归档级]
+> **说明**: 本文档为历史研究材料，最新内容请参阅 [concept/03_advanced/03_unsafe.md](../../../concept/03_advanced/03_unsafe.md)
+
+---
+
 # Unsafe Rust 安全证明树
 
 > **分级**: [B]

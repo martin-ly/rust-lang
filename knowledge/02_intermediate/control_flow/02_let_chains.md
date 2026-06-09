@@ -7,6 +7,9 @@
 > [Rust Reference — Let expressions](https://doc.rust-lang.org/reference/statements.html#let-statements),
 > [Rust 2024 Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/let-else.html)
 > **权威来源对齐变更日志**: 2026-05-19 新增 RFC 2497 设计决策来源标注、跨语言对比矩阵（Haskell ViewPatterns / Swift if let / C++17 structured binding） [来源: Authority Source Sprint Batch 8]
+>
+> **受众**: [专家] / [研究者]
+> **内容分级**: [实验级]
 
 ## 概述
 

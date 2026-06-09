@@ -8,6 +8,9 @@
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: 📝 评估草案
 > **相关目标**: Rust 2026 Project Goal — C++ ↔ Rust Interoperability
+>
+> **受众**: [进阶]
+> **内容分级**: [专家级]
 
 ---
 

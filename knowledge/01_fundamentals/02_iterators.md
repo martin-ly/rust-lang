@@ -9,6 +9,9 @@
 > **特性**: `array_windows`, `Peekable::next_if`
 > **权威来源**: [Rust 官方文档 — Iterator trait](https://doc.rust-lang.org/std/iter/trait.Iterator.html), [Rust 1.94 Release Notes](https://releases.rs/docs/1.94.0/), [Rust 1.80 Release Notes](https://releases.rs/docs/1.80.0/)
 > **权威来源对齐变更日志**: 2026-05-19 新增 array_windows 与 next_if 的来源标注、Iterator  trait 形式化语义引用 [来源: Authority Source Sprint Batch 8]
+>
+> **受众**: [初学者] / [进阶]
+> **内容分级**: [综述级]
 
 ## 📑 目录
 

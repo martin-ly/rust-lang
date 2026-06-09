@@ -6,6 +6,9 @@
 > **最后更新**: 2026-05-08
 > **Rust 版本**: nightly (Cranelift 无 stable 版本)
 > **状态**: ⚠️ **可用但进展停滞** — Rust Project Goals 2026 已标记为 **Not completed (lack of funding)**。Trifecta Tech Foundation 资金不足，生产就绪目标暂停。当前配置仍可实验性使用，但长期维护存疑。
+>
+> **受众**: [进阶]
+> **内容分级**: [实验级]
 
 ---
 

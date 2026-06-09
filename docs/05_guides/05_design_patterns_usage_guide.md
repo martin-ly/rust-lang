@@ -8,6 +8,9 @@
 > **后置延伸**: [docs 异步编程](./05_async_programming_usage_guide.md) · [concept L6 设计模式](../../concept/06_ecosystem/02_patterns.md)
 > **跨层映射**: L2→L6 抽象映射 | Trait→模式
 > **定理链编号**: T-020 特质一致性 → 模式可组合性
+>
+> **受众**: [进阶]
+> **内容分级**: [专家级]
 
 ## 📑 目录
 >

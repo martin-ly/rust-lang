@@ -741,7 +741,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-C# async 基于 Task 和线程池调度，由 .NET runtime 管理。Rust async 基于零成本状态机，需显式选择 runtime（tokio/async-std），无默认全局调度器。
+C# async 基于 Task 和线程池调度，由 .NET runtime 管理。Rust async 基于零成本状态机，需显式选择 runtime（tokio 为主流，async-std `[已归档 2025-03]`），无默认全局调度器。
 </details>
 
 ---

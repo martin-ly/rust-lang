@@ -13,6 +13,9 @@
 > **[来源: Rust Compiler Development Guide]** · **[来源: Nicholas Nethercote - How to Speed Up the Rust Compiler]** ✅ ·
 > **[来源: Wikipedia - Parallel Computing]** · **[来源: Wikipedia - Compiler Optimization]** ·
 > **[来源: ACM - Parallel Compilation Techniques]** · **[来源: IEEE - Multi-Core Software Standards]**
+>
+> **受众**: [专家] / [研究者]
+> **内容分级**: [研究者级]
 
 ---
 

@@ -8,6 +8,9 @@
 > **后置延伸**: [knowledge 专家层](../../04_expert/) · [concept L3 Unsafe](../../../concept/03_advanced/03_unsafe.md)
 > **跨层映射**: knowledge→concept 直觉映射 | L3 底层控制
 > **定理链编号**: T-060 unsafe 块 ↔ safe 抽象层可靠性
+>
+> **受众**: [进阶] / [专家]
+> **内容分级**: [专家级]
 
 ## 📑 目录
 

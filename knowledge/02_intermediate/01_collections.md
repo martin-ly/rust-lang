@@ -3,6 +3,9 @@
 > **📎 交叉引用**
 >
 > 本主题在 concept 中有深度的概念分析：[集合](../../concept/01_foundation/08_collections.md)
+>
+> **受众**: [专家] / [研究者]
+> **内容分级**: [研究者级]
 
 > **相关概念**: [集合](../../concept/01_foundation/08_collections.md)
 > **Bloom 层级**: 理解

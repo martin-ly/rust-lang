@@ -6,6 +6,9 @@
 > **前置概念**: [Unsafe Rust](../../concept/03_advanced/03_unsafe.md) · [Safety-Critical](../04_research/04_safety_critical_alignment_2026.md)
 > **Bloom 层级**: 评价 → 创造
 > **[来源: Rust Project Goals 2026 — Safety-Critical]** · **[来源: Rust-for-Linux Mailing List]** ✅
+>
+> **受众**: [专家] / [研究者]
+> **内容分级**: [研究者级]
 
 ---
 

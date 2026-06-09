@@ -7,6 +7,9 @@
 > **权威来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Reference](https://doc.rust-lang.org/reference/), [Rust By Example](https://doc.rust-lang.org/rust-by-example/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 TRPL、Rust Reference 来源标注 [来源: Authority Source Sprint Batch 8]
+>
+> **受众**: [初学者] / [进阶]
+> **内容分级**: [综述级]
 
 ---
 

@@ -7,6 +7,9 @@
 > [Rust Reference: Macros](https://doc.rust-lang.org/reference/macros.html)
 >
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Standard Library 文档、Rust Reference） [来源: Authority Source Sprint Batch 8]
+>
+> **受众**: [进阶] / [专家]
+> **内容分级**: [实验级]
 
 **变更日志**:
 

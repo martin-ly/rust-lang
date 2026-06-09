@@ -1,3 +1,8 @@
+> **内容分级**: [归档级]
+> **说明**: 本文档为历史研究材料，最新 Edition 2024 内容请参阅 [knowledge/06_ecosystem/02_edition_2024.md](../../../../knowledge/06_ecosystem/02_edition_2024.md) 与 [concept/07_future/19_rust_edition_preview.md](../../../../concept/07_future/19_rust_edition_preview.md)
+
+---
+
 > **[主轨引用]**: 教学视角参见 [concept/07_future/19_rust_edition_preview.md](../../../../concept/07_future/19_rust_edition_preview.md)。本文档侧重形式化语义分析（操作语义、类型规则、安全定理）。
 
 ---

@@ -1,3 +1,8 @@
+> **内容分级**: [归档级]
+> **说明**: 本文档为历史研究材料，最新对比分析请参阅 [concept/05_comparative/](../../../concept/05_comparative/) 对应主题
+
+---
+
 > **[主轨引用]**: 教学视角参见 [concept/05_comparative/01_rust_vs_cpp.md](../../../concept/05_comparative/01_rust_vs_cpp.md)。本文档侧重工程视角（性能基准、代码示例对比）。
 
 ---

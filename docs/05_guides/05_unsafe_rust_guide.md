@@ -2,10 +2,19 @@
 
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
+> **深度**: [专家级] — 聚焦工程实践与代码示例；形式化语义与安全契约的完整论述请参阅 [concept/03_advanced/03_unsafe.md](../../concept/03_advanced/03_unsafe.md)
 > **创建日期**: 2026-02-15
-> **最后更新**: 2026-05-08
+> **最后更新**: 2026-06-10
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 已完成
+>
+> **🔗 交叉引用**:
+>
+> - 完整语义与安全规则: [concept/03_advanced/03_unsafe.md](../../concept/03_advanced/03_unsafe.md)
+> - Unsafe 模式与封装技术: [concept/03_advanced/12_unsafe_rust_patterns.md](../../concept/03_advanced/12_unsafe_rust_patterns.md)
+>
+> **受众**: [专家] / [研究者]
+> **内容分级**: [研究者级]
 
 ---
 

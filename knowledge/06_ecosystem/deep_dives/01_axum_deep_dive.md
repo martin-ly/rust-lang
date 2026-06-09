@@ -11,6 +11,9 @@
 > **权威来源**: [Axum 官方文档](https://docs.rs/axum/latest/axum/), [Tower 文档](https://docs.rs/tower/latest/tower/), [Hyper 文档](https://docs.rs/hyper/latest/hyper/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Axum/Tower/Hyper 官方文档来源标注 [来源: Authority Source Sprint Batch 8]
+>
+> **受众**: [初学者] / [进阶]
+> **内容分级**: [综述级]
 
 ---
 

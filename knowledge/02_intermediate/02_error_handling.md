@@ -24,6 +24,9 @@
 > `?` 运算符形式化语义（Rust Reference）、
 > Rust vs C++ vs Haskell 错误处理对比矩阵、
 > 错误处理代数语义来源标注 [来源: Authority Source Sprint Batch 8]
+>
+> **受众**: [专家] / [研究者]
+> **内容分级**: [实验级]
 
 ---
 

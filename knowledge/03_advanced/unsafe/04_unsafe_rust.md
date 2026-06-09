@@ -19,6 +19,9 @@
 > Tree Borrows 别名规则学术引用、Miri UB 检测工具来源、
 > 跨语言 unsafe 对比（C/C++ / Haskell `unsafePerformIO`）
 > [来源: Authority Source Sprint Batch 8]
+>
+> **受众**: [专家] / [研究者]
+> **内容分级**: [实验级]
 
 ---
 

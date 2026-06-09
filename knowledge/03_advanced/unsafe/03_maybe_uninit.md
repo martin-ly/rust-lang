@@ -14,6 +14,9 @@
 > [RFC 1892: MaybeUninit](https://rust-lang.github.io/rfcs/1892-maybe-uninit.html)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 MaybeUninit 形式化语义来源标注、validity invariant 学术引用、mem::uninitialized 弃用演进说明 [来源: Authority Source Sprint Batch 8]
+>
+> **受众**: [专家] / [研究者]
+> **内容分级**: [实验级]
 
 ---
 

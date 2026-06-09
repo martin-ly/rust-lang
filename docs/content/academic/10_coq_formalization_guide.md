@@ -1,3 +1,8 @@
+> **内容分级**: [归档级]
+> **说明**: 本文档内容已整合至知识轨道，最新内容请参阅 [knowledge/04_expert/academic/01_coq_formalization_guide.md](../../../knowledge/04_expert/academic/01_coq_formalization_guide.md)
+
+---
+
 # Coq 形式化验证指南
 
 > **分级**: [B]

@@ -4,6 +4,9 @@
 > **Bloom 层级**: L2 (理解)
 > **稳定版本**: Rust 1.95.0 (2026-04-16)
 > **权威来源**: [Rust Blog](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) | [releases.rs](https://releases.rs/docs/1.95.0/)
+>
+> **受众**: [进阶] / [专家]
+> **内容分级**: [专家级]
 
 ---
 

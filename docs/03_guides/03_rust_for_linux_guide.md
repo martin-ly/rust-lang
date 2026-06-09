@@ -2,12 +2,16 @@
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]
+> **深度**: [专家级] — 聚焦内核开发实践与工具链；操作系统内存安全架构的完整论述请参阅 [concept/07_future/19_rust_for_linux.md](../../concept/07_future/19_rust_for_linux.md)
 >
 > **层次定位**: L3-L7 高级-前沿 / 内核开发应用域
 > **前置依赖**: [concept L3 Unsafe](../../concept/03_advanced/03_unsafe.md) · [docs 嵌入式](03_embedded_rust_guide.md)
 > **后置延伸**: [docs Safety-Critical](../04_research/04_safety_critical_alignment_2026.md) · [knowledge FFI](../../knowledge/03_advanced/unsafe/01_ffi.md)
 > **跨层映射**: L3→L7 前沿映射 | 系统编程边界
 > **定理链编号**: T-060 unsafe 块 ↔ T-110 内核抽象可靠性
+>
+> **受众**: [进阶] / [专家]
+> **内容分级**: [专家级]
 
 ## 📑 目录
 >

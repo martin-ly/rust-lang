@@ -2,6 +2,9 @@
 
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **最后更新**: 2026-06-09
+>
+> **受众**: [初学者] / [进阶]
+> **内容分级**: [综述级]
 
 本文件映射 [Google Comprehensive Rust](https://google.github.io/comprehensive-rust/) 课程与本项目资源的对应关系。
 

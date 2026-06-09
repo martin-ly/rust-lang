@@ -6,6 +6,9 @@
 > **前置概念**: [Async](../../concept/03_advanced/02_async.md) · [Network Programming](../../crates/c10_networks/)
 > **Bloom 层级**: 应用 → 分析
 > **[来源: RFC 9000 (QUIC)]** · **[来源: RFC 9114 (HTTP/3)]** · **[来源: quinn crate]** ✅
+>
+> **受众**: [进阶]
+> **内容分级**: [实验级]
 
 ---
 

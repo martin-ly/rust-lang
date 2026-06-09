@@ -5,6 +5,9 @@
 > **总预计时间**: 200-400 小时
 > **权威来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust by Example](https://doc.rust-lang.org/rust-by-example/), [Rustlings](https://github.com/rust-lang/rustlings)
 > **权威来源对齐变更日志**: 2026-05-19 新增学习路径来源标注、Bloom 认知层级学术引用、前置依赖设计方法论来源 [来源: Authority Source Sprint Batch 8]
+>
+> **受众**: [初学者] / [进阶]
+> **内容分级**: [综述级]
 
 ## 🎯 学习阶段总览
 

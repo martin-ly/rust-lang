@@ -7,6 +7,9 @@
 > **权威来源**: [The Rust Programming Language — Ch1](https://doc.rust-lang.org/book/ch01-00-getting-started.html), [Cargo Guide](https://doc.rust-lang.org/cargo/guide/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 TRPL 官方教程来源标注、Cargo 项目结构来源引用 [来源: Authority Source Sprint Batch 8]
+>
+> **受众**: [初学者] / [进阶]
+> **内容分级**: [综述级]
 
 ## 🎯 学习目标
 >
