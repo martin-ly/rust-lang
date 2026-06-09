@@ -1,6 +1,13 @@
+> **🗄️ ARCHIVED**: 本文档内容已完全覆盖于 [concept/07_future/19_rust_for_linux.md](../../../concept/07_future/19_rust_for_linux.md)。
+> **归档日期**: 2026-06-09
+> **归档原因**: 与主轨 concept/ 完全重复（相似度 1.00），维护价值集中于主轨。
+> **原始位置**: `docs/rust-ownership-decidability/extensions/rust-for-linux.md`
+
+---
+
 # Rust for Linux
 
-> **分级**: [C]
+> **分级**: [C] [已归档]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 Rust for Linux 是一个将 Rust 编程语言引入 Linux 内核的开源项目。
@@ -1041,18 +1048,13 @@ Rust for Linux 为内核开发带来了新的可能性。关键要点：
 ## 权威来源索引
 
 > **[来源: Wikipedia - Memory Safety]**
-
 > **[来源: TRPL Ch. 4 - Ownership]**
-
 > **[来源: Rustonomicon - Ownership]**
-
 > **[来源: POPL 2018 - RustBelt]**
-
 > **[来源: Wikipedia - Memory Safety]**
 > **[来源: TRPL Ch. 4 - Ownership]**
 > **[来源: Rustonomicon - Ownership]**
 > **[来源: POPL 2018 - RustBelt]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 > **[来源: POPL - Programming Languages Research]**

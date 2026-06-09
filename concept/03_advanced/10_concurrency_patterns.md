@@ -58,6 +58,11 @@
     - [对应代码示例](#对应代码示例)
     - [建议练习](#建议练习)
   - [导航：下一步去哪？](#导航下一步去哪)
+  - [嵌入式测验](#嵌入式测验)
+    - [测验 1：并发模式识别（记忆层）](#测验-1并发模式识别记忆层)
+    - [测验 2：Arc 引用计数（理解层）](#测验-2arc-引用计数理解层)
+    - [测验 3：工作窃取模式（应用层）](#测验-3工作窃取模式应用层)
+    - [测验 4：死锁预防（分析层）](#测验-4死锁预防分析层)
 
 ---
 
@@ -807,3 +812,330 @@ fn main() {
 | 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](./README.md) 选择其他主题 |
 | 🎓 进入 L4 形式化 | 想理解"为什么"的数学证明 | [L4 形式化](../04_formal/README.md) |
 | 🏗️ 进入 L6 生态 | 想掌握生产工具链 | [L6 生态](../06_ecosystem/README.md) |
+
+---
+
+## 嵌入式测验
+
+### 测验 1：并发模式识别（记忆层）
+
+**题目**: 以下场景最适合哪种并发模式？
+
+| 场景 | 最佳模式 |
+|:---|:---|
+| 多个线程读取共享配置，偶尔更新 | A. `Mutex<T>` |
+| 多个线程同时读取和写入共享缓存 | B. `RwLock<T>` |
+| 一个线程生产任务，多个线程消费 | C. `mpsc::channel` |
+| 多个线程竞争执行一次性初始化 | D. `std::sync::OnceLock` |
+
+- A. 1-A, 2-B, 3-C, 4-D
+- B. 1-B, 2-A, 3-C, 4-D
+- C. 1-B, 2-B, 3-C, 4-D
+- D. 1-D, 2-A, 3-B, 4-C
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+| 场景 | 最佳模式 | 原因 |
+|:---|:---|:---|
+| 多线程读取、偶尔更新 | **`RwLock<T>`** | 读操作可并发，写操作独占 |
+| 同时读写共享缓存 | **`Mutex<T>`** | 读写都频繁时，`RwLock` 的升级/降级开销反而更差 |
+| 生产者-消费者 | **`mpsc::channel`** | 天然的消息传递，无锁竞争 |
+| 一次性初始化 | **`OnceLock`** | 线程安全的惰性初始化，初始化后零开销 |
+
+**RwLock vs Mutex 的选择指南**：
+
+```rust
+use std::sync::{Mutex, RwLock};
+
+// 场景1: 读多写少 → RwLock
+let config: RwLock<Config> = RwLock::new(Config::default());
+{
+    let _guard = config.read().unwrap();  // 多个读锁可并发
+}
+{
+    let mut _guard = config.write().unwrap();  // 写锁独占
+}
+
+// 场景2: 读写都频繁 → Mutex（更简单，无死锁风险）
+let cache: Mutex<Cache> = Mutex::new(Cache::default());
+```
+
+> **陷阱**: `RwLock` 在写操作频繁时会**饿死读者**或**饿死写者**（取决于实现）。Tokio 的 `RwLock` 是公平锁，但 std 的 `RwLock` 平台依赖。
+</details>
+
+---
+
+### 测验 2：Arc 引用计数（理解层）
+
+**题目**: 以下代码能否编译？如果不能，为什么？
+
+```rust
+use std::sync::Arc;
+use std::thread;
+
+fn main() {
+    let data = Arc::new(vec![1, 2, 3]);
+
+    let handle = thread::spawn(move || {
+        println!("{:?}", data);
+    });
+
+    println!("{:?}", data);  // 还能用吗？
+    handle.join().unwrap();
+}
+```
+
+- A. 可以编译，`Arc` 自动实现了 `Copy`
+- B. 不能编译，`move` 将 `data` 移入闭包，主线程无法再使用
+- C. 可以编译，`Arc` 的 `clone()` 在 `move` 闭包中自动调用
+- D. 不能编译，需要先 `let data2 = Arc::clone(&data)` 再 `move`
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+**问题**：`move ||` 闭包会将捕获的变量**所有权移入**闭包。`Arc` 没有实现 `Copy`，所以 `data` 被移动后，主线程无法再使用。
+
+**修复方案**：
+
+```rust
+use std::sync::Arc;
+use std::thread;
+
+fn main() {
+    let data = Arc::new(vec![1, 2, 3]);
+
+    // 关键：先 clone Arc，增加引用计数
+    let data_clone = Arc::clone(&data);
+
+    let handle = thread::spawn(move || {
+        println!("线程: {:?}", data_clone);
+    });
+
+    // 主线程仍可使用原始 data
+    println!("主线程: {:?}", data);
+    handle.join().unwrap();
+
+    // 两个 Arc 都 drop 后，内部数据才被释放
+}
+```
+
+**`Arc::clone(&data)` 的本质**：
+
+```rust
+// 不是深拷贝！只是增加引用计数
+impl<T> Clone for Arc<T> {
+    fn clone(&self) -> Self {
+        // 原子操作: ref_count += 1
+        self.inner().ref_count.fetch_add(1, Relaxed);
+        Arc { ptr: self.ptr }
+    }
+}
+```
+
+**常见模式**：
+
+```rust
+// N 个线程共享同一数据
+let data = Arc::new(Mutex::new(0));
+let mut handles = vec![];
+
+for _ in 0..10 {
+    let d = Arc::clone(&data);
+    handles.push(thread::spawn(move || {
+        let mut num = d.lock().unwrap();
+        *num += 1;
+    }));
+}
+
+for h in handles { h.join().unwrap(); }
+assert_eq!(*data.lock().unwrap(), 10);
+```
+
+> **关键洞察**: `Arc` 解决"数据该由谁释放"的问题，`Mutex`/`RwLock` 解决"数据如何安全访问"的问题。两者常配合使用，但职责不同。
+</details>
+
+---
+
+### 测验 3：工作窃取模式（应用层）
+
+**题目**: 以下代码使用 Rayon 的 `join` 实现了并行快速排序。`rayon::join` 的核心优势是什么？
+
+```rust
+use rayon::prelude::*;
+
+fn quicksort(arr: &mut [i32]) {
+    if arr.len() <= 1 { return; }
+
+    let pivot = partition(arr);
+    let (left, right) = arr.split_at_mut(pivot);
+
+    rayon::join(
+        || quicksort(left),
+        || quicksort(right),
+    );
+}
+```
+
+- A. `join` 自动选择更快的分支先执行
+- B. `join` 将两个闭包分发到不同线程，利用工作窃取调度器平衡负载
+- C. `join` 保证左分支总是先于右分支完成
+- D. `join` 只是语法糖，等价于顺序执行两个闭包
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+**Rayon 的工作窃取调度器**：
+
+```
+线程1: [taskA] [taskB] [taskC] ← 本地队列
+线程2: [taskD] ← 队列为空时，从线程1"窃取"任务
+```
+
+| 特性 | 说明 |
+|:---|:---|
+| **工作窃取** | 空闲线程从忙碌线程的队列尾部"偷"任务，避免负载不均 |
+| **fork-join** | `rayon::join` 创建子任务，完成后自动汇合 |
+| **线程池复用** | Rayon 全局线程池（默认 = CPU 核心数），避免频繁创建线程 |
+| **无锁队列** | 每个线程的双端队列：本地 push/pop（无锁），窃取端（CAS）|
+
+**为什么不用 `thread::spawn`**：
+
+```rust
+// 错误示范：每次递归都创建新线程，开销巨大
+thread::spawn(|| quicksort(left));
+thread::spawn(|| quicksort(right));
+// 1000 个元素的快速排序可能创建 1000+ 个线程！
+
+// Rayon 的优化：
+// - 小任务内联执行（不创建线程）
+// - 大任务才分发给线程池
+// - 任务粒度由调度器自动决定
+```
+
+**Rayon 的阈值优化**：
+
+```rust
+fn quicksort(arr: &mut [i32]) {
+    if arr.len() <= 10_000 {
+        // 小数组：顺序排序更快（避免线程切换开销）
+        arr.sort_unstable();
+        return;
+    }
+    // 大数组：并行分治
+    let pivot = partition(arr);
+    let (left, right) = arr.split_at_mut(pivot);
+    rayon::join(|| quicksort(left), || quicksort(right));
+}
+```
+
+> **核心洞察**: 并行不是越多越好。Rayon 的调度器自动处理任务粒度、负载平衡和线程管理，开发者只需关注"哪些任务可以并行"。
+</details>
+
+---
+
+### 测验 4：死锁预防（分析层）
+
+**题目**: 以下代码存在死锁风险。问题在哪里？如何修复？
+
+```rust
+use std::sync::Mutex;
+
+struct Account {
+    balance: Mutex<i32>,
+}
+
+fn transfer(from: &Account, to: &Account, amount: i32) {
+    let mut from_balance = from.balance.lock().unwrap();
+    let mut to_balance = to.balance.lock().unwrap();
+
+    *from_balance -= amount;
+    *to_balance += amount;
+}
+
+fn main() {
+    let a = Account { balance: Mutex::new(100) };
+    let b = Account { balance: Mutex::new(100) };
+
+    std::thread::scope(|s| {
+        s.spawn(|| transfer(&a, &b, 10));
+        s.spawn(|| transfer(&b, &a, 20));  // 潜在死锁！
+    });
+}
+```
+
+- A. 没有死锁风险，`Mutex` 会自动处理
+- B. 线程1先锁a再锁b，线程2先锁b再锁a，形成循环等待 → 死锁
+- C. 应该用 `RwLock` 替代 `Mutex` 避免死锁
+- D. 应该用 `std::sync::atomic::AtomicI32` 替代 `Mutex`
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+**死锁四条件（Coffman 条件）**：
+
+| 条件 | 本例 |
+|:---|:---|
+| 互斥 | `Mutex` 保证 |
+| 占有且等待 | 线程1持有 `a.lock()`，等待 `b.lock()` |
+| 不可抢占 | `Mutex` 不支持强制释放 |
+| 循环等待 | 线程1: a→b，线程2: b→a |
+
+**修复方案 — 统一加锁顺序**：
+
+```rust
+use std::sync::Mutex;
+
+fn transfer(from: &Account, to: &Account, amount: i32) {
+    // 方案1: 按内存地址排序加锁
+    let (first, second) = if from as *const _ < to as *const _ {
+        (from, to)
+    } else {
+        (to, from)
+    };
+
+    let mut first_balance = first.balance.lock().unwrap();
+    let mut second_balance = second.balance.lock().unwrap();
+
+    // 现在锁顺序总是按地址升序，无循环等待
+    // ... 执行转账
+}
+```
+
+**或者使用 `parking_lot::deadlock` 检测**（开发环境）：
+
+```rust
+// parking_lot 提供死锁检测功能
+parking_lot::deadlock::check();
+```
+
+**更优方案 — 无锁转账**：
+
+```rust
+use std::sync::atomic::{AtomicI32, Ordering};
+
+struct Account {
+    balance: AtomicI32,
+}
+
+fn transfer(from: &Account, to: &Account, amount: i32) {
+    from.balance.fetch_sub(amount, Ordering::Relaxed);
+    to.balance.fetch_add(amount, Ordering::Relaxed);
+}
+// 无锁 = 无死锁！但无法保证原子性（中间状态可见）
+```
+
+> **生产环境法则**: 多锁场景必须定义全局顺序（如资源ID升序）。如果无法定义顺序，考虑：a) 使用无锁结构 b) 使用 `try_lock` 超时重试 c) 使用事务内存（如 `stm` crate）。
+</details>
+
+---
+
+> **测验设计来源**: [Bloom Taxonomy 2001] · [TRPL Ch16](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [Rayon Docs](https://docs.rs/rayon/) · [Brown University Interactive TRPL](https://rust-book.cs.brown.edu/)

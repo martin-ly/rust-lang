@@ -51,6 +51,12 @@
     - [10.7 边界测试：`core::intrinsics::abort` 与 `std::process::abort` 的差异（运行时行为）](#107-边界测试coreintrinsicsabort-与-stdprocessabort-的差异运行时行为)
     - [10.5 边界测试：`catch_unwind` 与 `UnwindSafe` 边界（编译错误）](#105-边界测试catch_unwind-与-unwindsafe-边界编译错误)
     - [10.6 边界测试：`panic!` 与 `assert!` 的消息格式化开销（运行时性能）](#106-边界测试panic-与-assert-的消息格式化开销运行时性能)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Panic vs Result（理解层）](#测验-1panic-vs-result理解层)
+    - [测验 2：panic=unwind vs panic=abort（应用层）](#测验-2panicunwind-vs-panicabort应用层)
+    - [测验 3：catch\_unwind 的边界（应用层）](#测验-3catch_unwind-的边界应用层)
+    - [测验 4：Drop 中 panic 的危险性（分析层）](#测验-4drop-中-panic-的危险性分析层)
+    - [测验 5：UnwindSafe 与 AssertUnwindSafe（分析层）](#测验-5unwindsafe-与-assertunwindsafe分析层)
   - [实践](#实践)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -709,6 +715,133 @@ fn compute_expensive_string() -> String { String::from("expensive") }
 ```
 
 > **修正**: `assert!` 的格式参数在**断言失败时**求值，但 `compute_expensive_string()` 是否在断言通过时求值？实际上，Rust 的 `assert!` 宏展开后，格式参数在 panic 时才求值（通过 `format_args!` 的惰性），但闭包捕获可能意外触发求值。更安全的模式：`assert!(x > 0, "value is not positive")`，或延迟格式化：`assert!(x > 0, "value {x} is not positive")`（1.58+ 的捕获格式化）。`debug_assert!` 在 release 模式下完全消除（无运行时开销），适合开发期检查。这与 C 的 `assert`（宏，条件为假时打印消息并 abort）或 Java 的 `assert`（类似，但可启用/禁用）不同——Rust 的 `assert!` 是宏，可格式化消息，且 `debug_assert!` 在 release 中零成本。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html)] · [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/panic-macro.html)]
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Panic vs Result（理解层）
+
+以下哪种情况应该使用 `panic!` 而不是 `Result`？
+
+- A. 用户输入了无效的文件路径
+- B. 程序遭遇了不可能发生的内部状态（如数组索引越界的前置条件被破坏）
+- C. 网络请求超时
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 程序遭遇了不可能发生的内部状态**。
+
+Rust 的错误处理哲学：
+
+- **`Result<T, E>`**：用于**可预期的失败**（文件不存在、网络超时、解析失败）
+- **`panic!`**：用于**不可恢复的内部错误**（不变量被破坏、不可达代码被执行）
+
+用户输入错误和网络超时都是可预期的外部失败，应使用 `Result`。`panic` 意味着"这是一个 bug"，调用者通常无法合理处理。
+</details>
+
+---
+
+### 测验 2：panic=unwind vs panic=abort（应用层）
+
+在 `Cargo.toml` 中设置 `panic = "abort"` 后，以下哪项是正确的？
+
+- A. `catch_unwind` 仍能捕获 panic
+- B. panic 发生时直接终止进程，不调用 `Drop`
+- C. panic 发生时仍会展开栈并调用 `Drop`
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. panic 发生时直接终止进程，不调用 `Drop`**。
+
+| 模式 | 行为 | 适用场景 |
+|:---|:---|:---|
+| `panic = "unwind"` | 展开栈，调用各作用域的 `Drop` | 默认模式，需要 `catch_unwind` |
+| `panic = "abort"` | 立即终止进程 | 嵌入式、wasm、追求最小二进制 |
+
+`panic = "abort"` 与 `catch_unwind` 不兼容，因为不再展开栈。选择 abort 意味着放弃清理资源的机会，但可减小二进制体积。
+</details>
+
+---
+
+### 测验 3：catch_unwind 的边界（应用层）
+
+`std::panic::catch_unwind` 不能捕获哪种 panic？
+
+- A. 由 `panic!("msg")` 触发的 panic
+- B. 由 `assert_eq!` 触发的 panic
+- C. 由 `std::process::abort()` 触发的进程终止
+
+<details>
+<summary>✅ 答案</summary>
+
+**C. 由 `std::process::abort()` 触发的进程终止**。
+
+`catch_unwind` 只能捕获**栈展开（unwind）**类型的 panic。它不能捕获：
+
+- `std::process::abort()`（直接终止进程）
+- `core::intrinsics::abort()`（内禀终止）
+- 致命信号（SIGSEGV、SIGILL）
+- `panic = "abort"` 模式下的 panic
+
+`catch_unwind` 的主要用途：隔离 FFI 边界或线程池中的 panic，防止整个进程崩溃。
+</details>
+
+---
+
+### 测验 4：Drop 中 panic 的危险性（分析层）
+
+在 `Drop::drop` 中调用 `panic!()` 会发生什么？
+
+- A. 正常触发栈展开
+- B. 若已在 panic 展开过程中，会导致双重 panic并立即 abort
+- C. 编译错误
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 若已在 panic 展开过程中，会导致双重 panic 并立即 abort**。
+
+Rust 的运行时规则：
+
+- 若 `drop` 在正常情况下被调用，其中的 panic 会触发正常的栈展开
+- 若 `drop` 已经在 panic 展开过程中被调用，再次 panic 会形成**双重 panic（double panic）**
+- 双重 panic 无法安全恢复，Rust 会直接调用 `abort()` 终止进程
+
+因此，`Drop` 实现应该避免 panic，或使用 `catch_unwind` 包装可能失败的操作。
+</details>
+
+---
+
+### 测验 5：UnwindSafe 与 AssertUnwindSafe（分析层）
+
+以下代码为什么需要 `AssertUnwindSafe`？
+
+```rust
+use std::panic::{catch_unwind, AssertUnwindSafe};
+
+let mut x = 0;
+catch_unwind(AssertUnwindSafe(|| {
+    x += 1;
+    panic!("boom");
+}));
+```
+
+- A. 闭包修改了外部变量，可能留下不一致状态
+- B. `catch_unwind` 只接受无参数函数
+- C. `x` 没有实现 `Copy`
+
+<details>
+<summary>✅ 答案</summary>
+
+**A. 闭包修改了外部变量，可能留下不一致状态**。
+
+`catch_unwind` 要求捕获的闭包实现 `UnwindSafe` —— 即在 panic 后不会留下破损的不变量。修改外部可变引用（`&mut x`）的闭包**不是** `UnwindSafe`，因为 panic 可能在 `x += 1` 之后发生，导致外部状态部分更新。
+
+`AssertUnwindSafe` 是一个**显式承诺**："我保证这个闭包在 panic 后是安全的"。这是 unsafe 的一种形式（虽然不需要 `unsafe` 关键字），应谨慎使用。
+</details>
+
+---
 
 ## 实践
 

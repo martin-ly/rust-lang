@@ -51,6 +51,12 @@
     - [10.3 边界测试：全局分配器与 `#[global_allocator]` 重复定义（编译错误）](#103-边界测试全局分配器与-global_allocator-重复定义编译错误)
     - [10.4 边界测试：自定义分配器的 Layout 不匹配与内存安全（运行时 UB）](#104-边界测试自定义分配器的-layout-不匹配与内存安全运行时-ub)
     - [10.3 边界测试：函数重复定义](#103-边界测试函数重复定义)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：`GlobalAlloc` trait 需要实现哪两个核心方法？（理解层）](#测验-1globalalloc-trait-需要实现哪两个核心方法理解层)
+    - [测验 2：`#[global_allocator]` 属性的作用是什么？使用时有什么限制？（理解层）](#测验-2global_allocator-属性的作用是什么使用时有什么限制理解层)
+    - [测验 3：`Layout` 结构体描述内存分配的哪些属性？（理解层）](#测验-3layout-结构体描述内存分配的哪些属性理解层)
+    - [测验 4：`Allocator` trait 与 `GlobalAlloc` trait 的主要区别是什么？（理解层）](#测验-4allocator-trait-与-globalalloc-trait-的主要区别是什么理解层)
+    - [测验 5：自定义分配器在释放内存时若传入了错误的 `Layout` 可能导致什么问题？（理解层）](#测验-5自定义分配器在释放内存时若传入了错误的-layout-可能导致什么问题理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -744,6 +750,66 @@ fn main() {}
 > **修正**: **名称唯一性**：1) 同一作用域内不能有两个同名函数；2) trait 方法可同名（通过 trait 区分）；3) 重载（overloading）不支持（除 trait 外）。
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`GlobalAlloc` trait 需要实现哪两个核心方法？（理解层）
+
+**题目**: `GlobalAlloc` trait 需要实现哪两个核心方法？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`alloc(layout: Layout) -> *mut u8` 分配内存，`dealloc(ptr: *mut u8, layout: Layout)` 释放内存。
+</details>
+
+---
+
+### 测验 2：`#[global_allocator]` 属性的作用是什么？使用时有什么限制？（理解层）
+
+**题目**: `#[global_allocator]` 属性的作用是什么？使用时有什么限制？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+替换整个程序的全局堆分配器。整个 crate 树中只能有一个 `#[global_allocator]`。
+</details>
+
+---
+
+### 测验 3：`Layout` 结构体描述内存分配的哪些属性？（理解层）
+
+**题目**: `Layout` 结构体描述内存分配的哪些属性？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+描述分配区域的大小（size）和对齐要求（align），对齐必须是 2 的幂。
+</details>
+
+---
+
+### 测验 4：`Allocator` trait 与 `GlobalAlloc` trait 的主要区别是什么？（理解层）
+
+**题目**: `Allocator` trait 与 `GlobalAlloc` trait 的主要区别是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`GlobalAlloc` 是全局单例接口，用于替换默认分配器；`Allocator` 支持多个分配器实例，可为单个集合（如 `Vec`）指定局部分配器。
+</details>
+
+---
+
+### 测验 5：自定义分配器在释放内存时若传入了错误的 `Layout` 可能导致什么问题？（理解层）
+
+**题目**: 自定义分配器在释放内存时若传入了错误的 `Layout` 可能导致什么问题？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+导致未定义行为（UB）。分配器可能依赖 `Layout` 追踪块大小和对齐，错误的 `Layout` 会造成重复释放、内存损坏或崩溃。
+</details>
 
 ## 认知路径
 

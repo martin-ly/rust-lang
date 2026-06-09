@@ -50,6 +50,12 @@
     - [10.3 边界测试：`assert_matches!` 与嵌套模式的绑定（编译错误）](#103-边界测试assert_matches-与嵌套模式的绑定编译错误)
     - [10.4 边界测试：自定义断言失败消息的类型约束（编译错误）](#104-边界测试自定义断言失败消息的类型约束编译错误)
     - [10.4 边界测试：所有权移动后的再次使用](#104-边界测试所有权移动后的再次使用)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：`assert_matches!(value, pattern)` 的主要用途是什么？与 `assert!(matches!(value, pattern))` 相比有什么优势？（理解层）](#测验-1assert_matchesvalue-pattern-的主要用途是什么与-assertmatchesvalue-pattern-相比有什么优势理解层)
+    - [测验 2：`assert_matches!` 是否可以在模式中绑定变量？绑定后的变量在测试体中可用吗？（理解层）](#测验-2assert_matches-是否可以在模式中绑定变量绑定后的变量在测试体中可用吗理解层)
+    - [测验 3：如果 `assert_matches!` 在你的 stable Rust 版本中不可用，最简单的替代方案是什么？（理解层）](#测验-3如果-assert_matches-在你的-stable-rust-版本中不可用最简单的替代方案是什么理解层)
+    - [测验 4：`assert_matches!(x, Some(_))` 与 `assert!(x.is_some())` 在语义上有区别吗？（理解层）](#测验-4assert_matchesx-some_-与-assertxis_some-在语义上有区别吗理解层)
+    - [测验 5：`assert_matches!` 对测试枚举变体有什么特别便利之处？（理解层）](#测验-5assert_matches-对测试枚举变体有什么特别便利之处理解层)
   - [实践](#实践)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -162,9 +168,11 @@ debug_assert_matches!(config, Some(true));
 ```
 
 > ⚠️ **重要**: `assert_matches!` 和 `debug_assert_matches!`**未加入标准 prelude**。这是因为它们与流行的第三方 crate（如 `assert_matches` crate）存在命名冲突。使用时需显式导入：
+>
 > ```rust
 > use std::assert_matches; // 或 core::assert_matches
 > ```
+>
 > [来源: [Rust 1.96 Release Notes — Assert matching patterns](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)]
 
 | 宏 | debug 模式 | release 模式 | 用例 |
@@ -577,6 +585,66 @@ fn main() {
 ```
 
 > **修正**: **Move 语义**：1) `String` 非 `Copy`，赋值时 move 所有权；2) move 后原变量无效；3) 解决：使用 `.clone()` 或引用 `&s`。
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`assert_matches!(value, pattern)` 的主要用途是什么？与 `assert!(matches!(value, pattern))` 相比有什么优势？（理解层）
+
+**题目**: `assert_matches!(value, pattern)` 的主要用途是什么？与 `assert!(matches!(value, pattern))` 相比有什么优势？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+它断言值匹配给定模式。失败时 `assert_matches!` 通常能显示不匹配值的具体内容，调试信息比 `assert!(matches!(...))` 更丰富。
+</details>
+
+---
+
+### 测验 2：`assert_matches!` 是否可以在模式中绑定变量？绑定后的变量在测试体中可用吗？（理解层）
+
+**题目**: `assert_matches!` 是否可以在模式中绑定变量？绑定后的变量在测试体中可用吗？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+可以在模式中绑定变量（如 `assert_matches!(x, Ok(v))` 中的 `v`），绑定变量在 `assert_matches!` 宏展开后的作用域中可用。
+</details>
+
+---
+
+### 测验 3：如果 `assert_matches!` 在你的 stable Rust 版本中不可用，最简单的替代方案是什么？（理解层）
+
+**题目**: 如果 `assert_matches!` 在你的 stable Rust 版本中不可用，最简单的替代方案是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+使用 `assert!(matches!(value, pattern))`。`matches!` 宏在 stable Rust 中可用。
+</details>
+
+---
+
+### 测验 4：`assert_matches!(x, Some(_))` 与 `assert!(x.is_some())` 在语义上有区别吗？（理解层）
+
+**题目**: `assert_matches!(x, Some(_))` 与 `assert!(x.is_some())` 在语义上有区别吗？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+语义等价，但 `assert_matches!` 更通用，可以匹配任意模式；`is_some()` 仅适用于 `Option`。
+</details>
+
+---
+
+### 测验 5：`assert_matches!` 对测试枚举变体有什么特别便利之处？（理解层）
+
+**题目**: `assert_matches!` 对测试枚举变体有什么特别便利之处？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+可以直接写模式匹配枚举的具体变体及其内部结构，避免先 `unwrap` 再 `assert_eq`，更简洁且安全。
+</details>
 
 ## 实践
 

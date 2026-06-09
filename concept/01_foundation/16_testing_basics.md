@@ -45,6 +45,12 @@
     - [10.4 边界测试：集成测试的模块可见性（编译错误）](#104-边界测试集成测试的模块可见性编译错误)
     - [10.5 边界测试：`#[should_panic]` 的预期消息匹配（测试失败）](#105-边界测试should_panic-的预期消息匹配测试失败)
     - [10.6 边界测试：集成测试的模块可见性与 `pub` 要求（编译错误）](#106-边界测试集成测试的模块可见性与-pub-要求编译错误)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：单元测试通常放在哪里？集成测试又应该放在项目的哪个目录？（理解层）](#测验-1单元测试通常放在哪里集成测试又应该放在项目的哪个目录理解层)
+    - [测验 2：`assert_eq!(a, b)` 与 `assert!(a == b)` 在测试失败时的输出有什么区别？（理解层）](#测验-2assert_eqa-b-与-asserta--b-在测试失败时的输出有什么区别理解层)
+    - [测验 3：如何编写一个期望测试函数 panic 的测试？如何进一步检查 panic 消息是否包含特定子串？（理解层）](#测验-3如何编写一个期望测试函数-panic-的测试如何进一步检查-panic-消息是否包含特定子串理解层)
+    - [测验 4：集成测试能否访问 crate 中的私有类型和函数？如果不能，有哪些替代方案？（理解层）](#测验-4集成测试能否访问-crate-中的私有类型和函数如果不能有哪些替代方案理解层)
+    - [测验 5：运行 `cargo test` 时，测试默认是并行还是串行执行？如何强制串行执行？（理解层）](#测验-5运行-cargo-test-时测试默认是并行还是串行执行如何强制串行执行理解层)
   - [实践](#实践)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -631,6 +637,66 @@ fn main() {}
 ```
 
 > **修正**: Rust 的**集成测试**（`tests/` 目录）将 crate 作为外部依赖使用，只能访问 `pub` API。`InternalStruct` 不是 `pub`，集成测试无法导入。测试私有代码的方法：1) `#[cfg(test)] mod tests { use super::*; }` — 单元测试在同一文件中，可访问私有项；2) `pub(crate)` — 使项在 crate 内可见（包括单元测试）；3) `pub` — 完全公开（集成测试可用）。设计权衡：集成测试验证公共 API 的行为，单元测试验证内部实现。过度公开内部类型（仅为测试）破坏封装。这与 Java 的 `package-private`（同包内可访问，类似 `pub(crate)`）或 Python 的 `_prefix`（约定私有，但测试可导入）不同——Rust 的可见性是编译期强制的。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch11-03-test-organization.html)] · [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/reference/workspaces.html)]
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：单元测试通常放在哪里？集成测试又应该放在项目的哪个目录？（理解层）
+
+**题目**: 单元测试通常放在哪里？集成测试又应该放在项目的哪个目录？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+单元测试通常放在被测试文件内的 `#[cfg(test)] mod tests { ... }` 中。集成测试放在 crate 根目录的 `tests/` 文件夹中，每个文件编译成独立的测试 crate。
+</details>
+
+---
+
+### 测验 2：`assert_eq!(a, b)` 与 `assert!(a == b)` 在测试失败时的输出有什么区别？（理解层）
+
+**题目**: `assert_eq!(a, b)` 与 `assert!(a == b)` 在测试失败时的输出有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`assert_eq!` 失败时会打印左右两个表达式的实际值，便于调试；`assert!(a == b)` 只输出整个布尔表达式为 false，不显示具体值。
+</details>
+
+---
+
+### 测验 3：如何编写一个期望测试函数 panic 的测试？如何进一步检查 panic 消息是否包含特定子串？（理解层）
+
+**题目**: 如何编写一个期望测试函数 panic 的测试？如何进一步检查 panic 消息是否包含特定子串？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+使用 `#[should_panic]` 属性。检查消息子串：`#[should_panic(expected = "substring")]`，要求 panic 消息包含该子串。
+</details>
+
+---
+
+### 测验 4：集成测试能否访问 crate 中的私有类型和函数？如果不能，有哪些替代方案？（理解层）
+
+**题目**: 集成测试能否访问 crate 中的私有类型和函数？如果不能，有哪些替代方案？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+不能。集成测试只能访问 `pub` API。替代方案：1) 使用单元测试访问私有项；2) 使用 `pub(crate)` 扩大可见性；3) 为测试暴露专门模块。
+</details>
+
+---
+
+### 测验 5：运行 `cargo test` 时，测试默认是并行还是串行执行？如何强制串行执行？（理解层）
+
+**题目**: 运行 `cargo test` 时，测试默认是并行还是串行执行？如何强制串行执行？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+默认并行执行。使用 `cargo test -- --test-threads=1` 强制串行，或设置环境变量 `RUST_TEST_THREADS=1`。
+</details>
 
 ## 实践
 

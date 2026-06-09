@@ -46,6 +46,11 @@
     - [4.2 常见错误模式](#42-常见错误模式)
   - [五、来源与延伸阅读](#五来源与延伸阅读)
   - [权威来源索引](#权威来源索引)
+  - [嵌入式测验](#嵌入式测验)
+    - [测验 1：asm! 宏基本语法（记忆层）](#测验-1asm-宏基本语法记忆层)
+    - [测验 2：操作数约束（理解层）](#测验-2操作数约束理解层)
+    - [测验 3：用内联汇编实现原子操作（应用层）](#测验-3用内联汇编实现原子操作应用层)
+    - [测验 4：clobber 与内存屏障（分析层）](#测验-4clobber-与内存屏障分析层)
 
 ---
 
@@ -443,3 +448,317 @@ mod tests {
     }
 }
 ```
+
+---
+
+## 嵌入式测验
+
+### 测验 1：asm! 宏基本语法（记忆层）
+
+**题目**: 以下 `asm!` 宏调用中，哪个是正确的 x86_64 内联汇编？
+
+- A. `asm!("mov rax, {0}", in(reg) 42)`
+- B. `unsafe { asm!("mov %rax, $0", in(reg) 42) }`
+- C. `unsafe { asm!("mov rax, {val}", val = in(reg) 42) }`
+- D. `asm!("mov rax, 42")`
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 C**。
+
+Rust 内联汇编语法规则：
+
+```rust
+unsafe {
+    asm!(
+        "汇编模板",                    // 汇编指令模板
+        named_operand = in(reg) value,  // 命名操作数
+        lateout(reg) _                 // 输出/ clobber
+    );
+}
+```
+
+**语法要求**：
+
+| 要求 | 说明 |
+|:---|:---|
+| `unsafe` 块 | `asm!` 是 unsafe 的（可能破坏内存安全）|
+| 命名操作数 | `{name}` 或 `name = in(reg) value` |
+| 寄存器约束 | `in(reg)` / `out(reg)` / `lateout(reg)` |
+
+**选项分析**：
+
+- **A**: 缺少 `unsafe` 块
+- **B**: 使用 AT&T 语法 (`%rax`, `$0`)，Rust 默认使用 Intel 语法
+- **C**: ✅ 正确。`{val}` 引用命名操作数，`in(reg)` 指定输入寄存器
+- **D**: 硬编码立即数绕过 Rust 的类型系统，不安全
+
+**完整示例**：
+
+```rust
+// x86_64: 读取 CPU 时间戳计数器 (RDTSC)
+unsafe {
+    let lo: u32;
+    let hi: u32;
+    asm!(
+        "rdtsc",
+        out("eax") lo,
+        out("edx") hi,
+    );
+    let tsc = ((hi as u64) << 32) | (lo as u64);
+}
+```
+
+> **注意**: 从 Rust 1.59 开始，`asm!` 是稳定功能（无需 nightly）。之前需要使用 `llvm_asm!`（已废弃）。
+</details>
+
+---
+
+### 测验 2：操作数约束（理解层）
+
+**题目**: `lateout` 与 `out` 有什么区别？以下代码为什么要用 `lateout`？
+
+```rust
+unsafe {
+    let mut x: u64 = 1;
+    asm!(
+        "add {x}, {y}",
+        x = inout(reg) x,
+        y = in(reg) 2,
+    );
+}
+```
+
+- A. `lateout` 表示输出值会在汇编代码**之后**才写入，允许编译器复用输入寄存器
+- B. `lateout` 和 `out` 没有区别，可以互换
+- C. `lateout` 表示寄存器在汇编代码**之前**被读取
+- D. 应该使用 `inlateout` 替代 `inout`
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 A**。
+
+**操作数约束类型**：
+
+| 约束 | 含义 | 使用场景 |
+|:---|:---|:---|
+| `in(reg)` | 输入，汇编前写入 | 只读参数 |
+| `out(reg)` | 输出，汇编后读取 | 纯输出（汇编前寄存器值不被使用）|
+| `inout(reg)` | 输入+输出 | 读取-修改-写入（如计数器递增）|
+| `lateout(reg)` | 延迟输出 | 输出值仅在汇编**末尾**写入，允许复用输入寄存器 |
+| `inlateout(reg)` | 输入+延迟输出 | 输入被读取，输出在末尾写入 |
+
+**`out` vs `lateout` 的关键区别**：
+
+```rust
+// 场景: x = x + y
+unsafe {
+    let mut x: u64 = 1;
+    asm!(
+        "add {x}, {y}",
+        x = inlateout(reg) x,   // ✅ x 先作为输入，最后作为输出
+        y = in(reg) 2,
+    );
+    assert_eq!(x, 3);
+}
+
+// 如果用 out：
+// asm!("add {x}, {y}", x = out(reg) _, y = in(reg) 2);
+// ❌ x 在汇编前未初始化，add 读取的是垃圾值！
+```
+
+**寄存器复用优化**：
+
+```rust
+// 使用 lateout 允许编译器将输出放入输入寄存器
+// 节省一个寄存器！
+unsafe {
+    let x: u64 = 1;
+    let y: u64;
+    asm!(
+        "mov {y}, {x}",
+        x = in(reg) x,
+        y = lateout(reg) y,   // y 可能复用 x 的寄存器
+    );
+}
+```
+
+> **选择指南**: 如果汇编代码**不会读取**输出寄存器的旧值 → 用 `out`。如果汇编代码**会读取**旧值 → 用 `inout` 或 `inlateout`。
+</details>
+
+---
+
+### 测验 3：用内联汇编实现原子操作（应用层）
+
+**题目**: 在 `no_std` 环境下，如何用 x86_64 内联汇编实现一个原子自增？
+
+```rust
+unsafe fn atomic_inc(ptr: *mut u64) -> u64 {
+    let result: u64;
+    asm!(
+        // 填写汇编代码
+        inout("reg") ptr => _,
+        out("reg") result,
+    );
+    result
+}
+```
+
+- A. `"inc qword ptr [{0}]"` — 直接递增内存
+- B. `"lock inc qword ptr [{ptr}]"` — 加 `lock` 前缀的原子递增
+- C. `"xadd [{ptr}], {result}"` — 交换并相加
+- D. `"lock xadd qword ptr [{ptr}], {result}"` — `lock` + `xadd`
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 D**。
+
+**x86_64 原子操作指令**：
+
+```rust
+unsafe fn atomic_fetch_add(ptr: *mut u64, value: u64) -> u64 {
+    let mut old = value;
+    asm!(
+        "lock xadd qword ptr [{ptr}], {old}",  // 原子交换并相加
+        ptr = in(reg) ptr,
+        old = inlateout(reg) old,  // 输入=value，输出=旧值
+        options(nostack, preserves_flags),
+    );
+    old  // 返回旧值
+}
+```
+
+**关键指令解析**：
+
+| 指令 | 作用 | 原子性 |
+|:---|:---|:---:|
+| `inc [mem]` | 内存值 +1 | ❌ 非原子 |
+| `lock inc [mem]` | 原子 +1 | ✅ |
+| `xadd [mem], reg` | 交换 `[mem]` 和 `reg`，然后相加 | ❌ 非原子 |
+| `lock xadd [mem], reg` | 原子交换-相加 | ✅ |
+
+**为什么需要 `lock` 前缀**：
+
+```asm
+; 无 lock：CPU 可能将 inc 拆分为 读-修改-写 三个微操作
+; 其他 CPU 可能在"读"和"写"之间修改内存 → 丢失更新
+
+; 有 lock：CPU 锁定内存总线，确保读-修改-写不可中断
+lock xadd qword ptr [rdi], rax
+```
+
+**与 `AtomicUsize::fetch_add` 的对比**：
+
+```rust
+// Rust 标准库实现（概念上等价）：
+std::sync::atomic::AtomicUsize::fetch_add(1, Ordering::SeqCst);
+
+// 底层在 x86_64 上就是：
+// lock xadd [ptr], 1
+```
+
+> **生产环境**: 永远优先使用 `std::sync::atomic`，不要手写汇编。内联汇编只在 `no_std` + 特殊指令（如 RDTSC、CPUID）时才需要。
+</details>
+
+---
+
+### 测验 4：clobber 与内存屏障（分析层）
+
+**题目**: 以下代码没有使用 `options(nomem)`，编译器会做出什么假设？如果加上 `options(nomem)` 会有什么问题？
+
+```rust
+let mut x = 0;
+unsafe {
+    asm!(
+        "mov {tmp}, 1",
+        tmp = out(reg) _,
+    );
+    x = 1;
+}
+assert_eq!(x, 1);
+```
+
+- A. 没有区别，`options(nomem)` 只是优化提示
+- B. 不加 `nomem`：编译器假设汇编可能访问内存，不会在汇编前后重排内存操作。加 `nomem`：编译器可能将 `x = 1` 重排到汇编之前！
+- C. 必须加 `nomem`，否则编译器会生成错误的代码
+- D. `nomem` 表示汇编代码不使用任何寄存器
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+**`asm!` 的 options 控制编译器假设**：
+
+```rust
+unsafe {
+    asm!(...,
+        options(
+            pure,        // 汇编无副作用（同输入总是同输出）
+            nomem,       // 汇编不读写内存
+            nostack,     // 汇编不修改栈指针
+            preserves_flags,  // 汇编不修改标志寄存器
+        )
+    );
+}
+```
+
+**不加 `nomem` 时**：
+
+```rust
+let mut x = 0;
+unsafe {
+    asm!("syscall", ...);  // 编译器假设可能读写内存
+    x = 1;  // 不会重排到 syscall 之前
+}
+```
+
+**加 `nomem` 后的危险**：
+
+```rust
+static mut FLAG: bool = false;
+static mut DATA: u64 = 0;
+
+unsafe {
+    DATA = 42;
+    asm!(
+        "mov byte ptr [{flag}], 1",
+        flag = in(reg) &mut FLAG,
+        options(nomem),  // ❌ 错误：汇编确实访问了内存！
+    );
+}
+
+// 编译器可能重排：
+// asm!()      // FLAG = 1（但 DATA 可能还是 0！）
+// DATA = 42   // 被重排到汇编之后
+```
+
+**正确的内存屏障使用**：
+
+```rust
+unsafe {
+    DATA = 42;
+    asm!(
+        "sfence",  // 存储屏障
+        options(nomem, preserves_flags),
+    );
+    FLAG = true;  // sfence 保证 DATA=42 在 FLAG=true 之前可见
+}
+```
+
+| option | 含义 | 不加时的默认 |
+|:---|:---|:---|
+| `pure` | 无副作用 + 确定性 | 可能有副作用 |
+| `nomem` | 不访问内存 | 可能读写任意内存 |
+| `nostack` | 不修改栈 | 可能使用栈 |
+| `preserves_flags` | 保留 EFLAGS | 可能修改标志位 |
+
+> **关键原则**: 不要过度使用 `options`。只有当**确定**汇编代码满足条件时才添加。错误的 option 会导致编译器优化破坏程序正确性。
+</details>
+
+---
+
+> **测验设计来源**: [Bloom Taxonomy 2001] · [Rust Reference - Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html) · [Rust By Example - Assembly](https://doc.rust-lang.org/rust-by-example/unsafe/asm.html)

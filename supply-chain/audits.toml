@@ -1,0 +1,11 @@
+# cargo-vet 审计记录
+#
+# 此文件记录团队成员对 crate 版本的审计结果。
+# 格式:
+#   [[audits.crate-name]]
+#   who = "auditor-name"
+#   criteria = "safe-to-deploy"
+#   version = "1.0.0"
+#   notes = "Audit notes..."
+#
+# 初始状态：空，等待 cargo vet 运行后填充

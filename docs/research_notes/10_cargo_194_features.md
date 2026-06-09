@@ -2,8 +2,8 @@
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-> **Cargo 版本**: 1.94.0
-> **Rust 版本**: 1.94.0
+> **Cargo 版本**: 1.94.0 [历史声明]
+> **Rust 版本**: 1.94.0 [历史声明]
 > **发布日期**: 2026-03-05
 > **最后更新**: 2026-03-13
 > **状态**: ✅ 活跃维护
@@ -213,7 +213,7 @@ tokio = {
 [package]
 name = "my-crate"
 version = "0.1.0"
-rust-version = "1.94"  # 需要 1.94+ 来解析 TOML 1.1
+rust-version = "1.96"  # 需要 1.94+ 来解析 TOML 1.1
 ```
 
 ---
@@ -395,7 +395,7 @@ protocol = "sparse"
 ## 🆕 Rust 1.94 更新
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-> **最新版本**: Rust 1.94.0 (2026-03-05)
+> **最新版本**: Rust 1.96.0 (2026-03-05)
 
 - TOML 1.1 支持
 - Cargo.toml 多行内联表
@@ -410,7 +410,7 @@ protocol = "sparse"
 ## 🆕 Rust 1.94 深度整合更新
 
 > **[来源: [crates.io](https://crates.io/)]**
-> **适用版本**: Rust 1.94.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点

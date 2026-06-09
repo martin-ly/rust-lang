@@ -366,7 +366,7 @@ Week 13-14: 工具实践
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **适用版本**: Rust 1.94.0+
+> **适用版本**: Rust 1.96.0+
 
 详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
 

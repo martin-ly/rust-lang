@@ -713,7 +713,7 @@ fn use_contravariant_callback() {
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-> **适用版本**: Rust 1.94.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点

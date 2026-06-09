@@ -60,6 +60,11 @@
     - [对应代码示例](#对应代码示例)
     - [建议练习](#建议练习)
   - [导航：下一步去哪？](#导航下一步去哪)
+  - [嵌入式测验](#嵌入式测验)
+    - [测验 1：tokio::select!（记忆层）](#测验-1tokioselect记忆层)
+    - [测验 2：Backpressure（理解层）](#测验-2backpressure理解层)
+    - [测验 3：Actor 模式（应用层）](#测验-3actor-模式应用层)
+    - [测验 4：取消安全（分析层）](#测验-4取消安全分析层)
 
 ---
 
@@ -862,3 +867,278 @@ fn main() {}
 | 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](./README.md) 选择其他主题 |
 | 🎓 进入 L4 形式化 | 想理解"为什么"的数学证明 | [L4 形式化](../04_formal/README.md) |
 | 🏗️ 进入 L6 生态 | 想掌握生产工具链 | [L6 生态](../06_ecosystem/README.md) |
+
+---
+
+## 嵌入式测验
+
+### 测验 1：tokio::select!（记忆层）
+
+**题目**: `tokio::select!` 宏的核心作用是什么？
+
+- A. 同时运行多个异步任务并等待全部完成
+- B. 同时等待多个异步操作，**其中一个**完成时立即返回
+- C. 按顺序执行多个异步操作
+- D. 创建一个新的 Tokio 运行时
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+`tokio::select!` 是 Rust 异步编程中的**竞争等待（race）**原语：
+
+```rust
+use tokio::sync::mpsc;
+use tokio::time::{sleep, Duration};
+
+async fn example() {
+    let (tx, mut rx) = mpsc::channel::<i32>(10);
+
+    tokio::select! {
+        // 分支1: 等待 channel 消息
+        Some(msg) = rx.recv() => {
+            println!("收到消息: {}", msg);
+        }
+        // 分支2: 等待超时
+        _ = sleep(Duration::from_secs(5)) => {
+            println!("超时！");
+        }
+    }
+    // 只有一个分支会被执行，先完成的那个
+}
+```
+
+**与 `join!` 的区别**：
+
+| 宏 | 行为 | 使用场景 |
+|:---|:---|:---|
+| `select!` | 等待**第一个**完成的 Future | 超时控制、竞争条件、取消信号 |
+| `join!` | 等待**所有** Future 完成 | 并行发起多个独立请求 |
+| `try_join!` | 等待所有完成，任一 Err 提前返回 | 并行验证，失败快速退出 |
+
+> **陷阱**: `select!` 中未完成的 Future 会被**取消**（drop）。如果某个分支正在写入文件，被取消可能导致数据不一致。这种情况需要 `AsyncWrite` 的取消安全保证。
+</details>
+
+---
+
+### 测验 2：Backpressure（理解层）
+
+**题目**: 以下代码中的 channel 设计存在什么问题？
+
+```rust
+use tokio::sync::mpsc;
+
+async fn producer(tx: mpsc::Sender<i32>) {
+    for i in 0..1_000_000 {
+        tx.send(i).await.unwrap();  // 发送100万个整数
+    }
+}
+
+async fn consumer(mut rx: mpsc::Receiver<i32>) {
+    while let Some(i) = rx.recv().await {
+        tokio::time::sleep(tokio::time::Duration::from_millis(10)).await;
+        println!("处理: {}", i);
+    }
+}
+```
+
+- A. 代码正确，tokio channel 会自动处理流量控制
+- B. 生产者远快于消费者，应使用**有界 channel**实现 backpressure
+- C. 应使用 `unbounded_channel` 替代 `channel` 避免阻塞
+- D. 应将 `sleep` 移至生产者以减速
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+**问题分析**：
+
+生产者每秒可发送数百万消息，消费者每秒仅处理100条。使用**无界 channel**（或容量极大的 channel）时，内存会无限增长，最终导致 OOM。
+
+```rust
+// 当前代码：tx.send(i).await 在 channel 满时会阻塞
+// 但如果 channel 容量是 100_000，内存中可能堆积 100_000 条消息
+```
+
+**修复方案 — Backpressure**：
+
+```rust
+// 使用有界 channel，容量 = 消费者处理能力 × 缓冲系数
+let (tx, rx) = mpsc::channel::<i32>(100);  // 仅缓冲100条
+
+// 当 channel 满时，tx.send().await 会阻塞生产者
+// 生产者自然减速，与消费者同步 — 这就是 backpressure
+```
+
+**Backpressure 模式的核心**：
+
+| 组件 | 无 Backpressure | 有 Backpressure |
+|:---|:---|:---|
+| Channel | `unbounded_channel()` | `channel(capacity)` |
+| 生产者 | 全速发送，内存无限增长 | channel 满时阻塞，自动降速 |
+| 消费者 | 处理不过来，消息堆积 | 按自身节奏处理，内存稳定 |
+| 风险 | OOM、延迟不可控 | 短暂阻塞，系统稳定 |
+
+> **生产环境法则**: 永远使用有界 channel。`unbounded_channel` 只在极少数场景使用（如启动时的一次性配置加载）。
+</details>
+
+---
+
+### 测验 3：Actor 模式（应用层）
+
+**题目**: 以下代码实现了一个简单的 Actor 模式。`Actor` 结构体的 `handle` 方法被谁调用？
+
+```rust
+use tokio::sync::mpsc;
+
+struct Actor {
+    rx: mpsc::Receiver<Command>,
+    counter: i32,
+}
+
+enum Command {
+    Increment,
+    GetCount(tokio::sync::oneshot::Sender<i32>),
+}
+
+impl Actor {
+    async fn run(mut self) {
+        while let Some(cmd) = self.rx.recv().await {
+            self.handle(cmd).await;
+        }
+    }
+
+    async fn handle(&mut self, cmd: Command) {
+        match cmd {
+            Command::Increment => self.counter += 1,
+            Command::GetCount(tx) => { let _ = tx.send(self.counter); }
+        }
+    }
+}
+```
+
+- A. 任何线程都可以直接调用 `actor.handle(cmd)`
+- B. 只有 Actor 自己的 `run` 循环调用 `handle`，保证单线程串行执行
+- C. Tokio 运行时自动调度 `handle` 到可用线程
+- D. `handle` 是 `async fn`，可以被多个调用者并发调用
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+这是 **Actor 模式**的核心设计：
+
+```rust
+// Actor 的所有状态修改都通过 channel 消息串行化
+// 无论多少客户端并发发送消息，handle() 始终单线程串行执行
+
+let (tx, rx) = mpsc::channel(100);
+let actor = Actor { rx, counter: 0 };
+
+// 启动 Actor 任务
+tokio::spawn(actor.run());
+
+// 客户端通过 channel 发送消息（而非直接调用方法）
+tx.send(Command::Increment).await?;
+let (resp_tx, resp_rx) = tokio::sync::oneshot::channel();
+tx.send(Command::GetCount(resp_tx)).await?;
+let count = resp_rx.await?;
+```
+
+**为什么不用 `Mutex<Actor>`**：
+
+| 方案 | 优点 | 缺点 |
+|:---|:---|:---|
+| `Mutex<Actor>` | 简单直接 | 锁竞争、死锁风险、跨 await 持有锁导致性能问题 |
+| Actor 模式 | 无锁、天然串行、可跨线程 | 需要消息封装、稍微复杂 |
+
+**Actor 模式的扩展**：
+
+- `tokio::sync::mpsc` = 多生产者单消费者（适合 Actor inbox）
+- `tokio::sync::oneshot` = 请求-响应模式（GetCount 的返回通道）
+- `tokio::sync::broadcast` = 发布-订阅（事件通知）
+
+> **关键洞察**: Actor 模式将**共享状态 + 锁**转换为**消息传递 + 串行处理**，消除了数据竞争的可能性，是 Rust 并发设计的首选模式之一。
+</details>
+
+---
+
+### 测验 4：取消安全（分析层）
+
+**题目**: 以下代码使用 `select!` 实现了一个带超时的文件写入操作。存在什么取消安全问题？
+
+```rust
+use tokio::fs::File;
+use tokio::io::AsyncWriteExt;
+use tokio::time::{sleep, Duration};
+
+async fn write_with_timeout(file: &mut File, data: &[u8]) -> std::io::Result<()> {
+    tokio::select! {
+        result = file.write_all(data) => result,
+        _ = sleep(Duration::from_secs(5)) => {
+            Err(std::io::Error::new(std::io::ErrorKind::TimedOut, "timeout"))
+        }
+    }
+}
+```
+
+- A. 没有问题，`write_all` 是取消安全的
+- B. 超时发生时，`write_all` 可能只写了一部分数据，导致文件处于不一致状态
+- C. 应使用 `file.write(data).await?` 替代 `write_all`
+- D. `select!` 不能用于文件 I/O，应使用 `tokio::time::timeout`
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+**取消安全问题**：
+
+`file.write_all(data)` 的契约：要么写完所有数据，要么返回 Err。但如果 `select!` 在 `write_all` 写到一半时取消它，`file` 的内部缓冲区可能已部分写入，但 `write_all` 没有机会完成或回滚。
+
+```rust
+// 危险场景：
+// 1. write_all 开始写入 1024 字节
+// 2. 写到 512 字节时，sleep(5s) 先完成
+// 3. select! 取消 write_all，返回 Timeout 错误
+// 4. 文件现在包含 512 字节的半写数据 — 数据损坏！
+```
+
+**修复方案**：
+
+```rust
+use tokio::time::timeout;
+
+async fn write_with_timeout(file: &mut File, data: &[u8]) -> std::io::Result<()> {
+    // timeout() 包装整个 Future，不会中途取消 write_all
+    match timeout(Duration::from_secs(5), file.write_all(data)).await {
+        Ok(result) => result,  // write_all 要么全写完，要么 Err
+        Err(_) => Err(std::io::Error::new(
+            std::io::ErrorKind::TimedOut, "timeout"
+        )),
+    }
+}
+```
+
+**`timeout` vs `select!` 的本质区别**：
+
+| 方式 | 取消行为 | 安全性 |
+|:---|:---|:---|
+| `select!` | 取消未完成的 Future（drop） | 依赖各 Future 的取消安全保证 |
+| `timeout()` | 等待 Future 完成或超时，不中途取消 | 更安全，但无法提前终止 |
+
+**Tokio 的取消安全文档**：
+
+- ✅ 取消安全: `sleep`, `yield_now`, `channel::recv`（未消费时）
+- ⚠️ 需小心: `write_all`, `flush`, `send`（已部分发送时）
+- ❌ 不安全: 自定义状态机未处理 drop
+
+> **黄金法则**: 涉及**副作用**（I/O、状态修改）的操作，优先使用 `timeout()` 而非 `select!`。`select!` 更适合纯计算或接收操作。
+</details>
+
+---
+
+> **测验设计来源**: [Bloom Taxonomy 2001] · [TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Tokio Docs](https://tokio.rs/) · [Brown University Interactive TRPL](https://rust-book.cs.brown.edu/)

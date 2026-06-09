@@ -3,7 +3,7 @@
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
-> **Rust 版本**: 1.94.0+
+> **Rust 版本**: 1.96.0+
 > **最后更新**: 2026-03-12
 > **状态**: ✅ 活跃维护
 
@@ -285,7 +285,7 @@ impl RateLimiter {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **适用版本**: Rust 1.94.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点

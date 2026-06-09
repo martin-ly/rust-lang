@@ -54,6 +54,12 @@
     - [10.6 边界测试：`Cell::take` 与 `Default` 的隐式要求（编译错误）](#106-边界测试celltake-与-default-的隐式要求编译错误)
   - [实践](#实践)
   - [参考来源](#参考来源)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Cell vs RefCell（理解层）](#测验-1cell-vs-refcell理解层)
+    - [测验 2：RefCell 的运行时借用规则（应用层）](#测验-2refcell-的运行时借用规则应用层)
+    - [测验 3：内部可变性的适用场景（应用层）](#测验-3内部可变性的适用场景应用层)
+    - [测验 4：`Rc<RefCell<T>>` 模式（分析层）](#测验-4rcrefcellt-模式分析层)
+    - [测验 5：内部可变性与 Send/Sync（专家级）](#测验-5内部可变性与-sendsync专家级)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -664,6 +670,148 @@ fn main() {
 > [Rust Standard Library](https://doc.rust-lang.org/std/) ·
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Cell vs RefCell（理解层）
+
+`Cell<T>` 和 `RefCell<T>` 的核心区别是什么？
+
+- A. `Cell` 线程安全，`RefCell` 不是
+- B. `Cell` 只能存储 `Copy` 类型，`RefCell` 提供动态借用检查
+- C. `Cell` 允许多个可变引用同时存在
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. `Cell` 只能存储 `Copy` 类型，`RefCell` 提供动态借用检查**。
+
+| 类型 | 核心机制 | 限制 |
+|:---|:---|:---|
+| `Cell<T>` | 通过 `get/set` 整体替换值 | `T: Copy`（或配合 `take` 使用 `Default`） |
+| `RefCell<T>` | 运行时借用检查（类似编译期借用规则的动态版） | 违反规则时 panic |
+| `Mutex<T>` | 线程安全的 `RefCell`（操作系统原语） | 可能死锁 |
+| `RwLock<T>` | 多读单写锁 | 读锁升级写锁导致死锁 |
+
+`Cell` 和 `RefCell` 都是**单线程**内部可变性原语。
+</details>
+
+---
+
+### 测验 2：RefCell 的运行时借用规则（应用层）
+
+以下代码运行时会发生什么？
+
+```rust
+use std::cell::RefCell;
+
+fn main() {
+    let data = RefCell::new(42);
+    let b1 = data.borrow();
+    let b2 = data.borrow_mut();
+    println!("{}", b1);
+}
+```
+
+- A. 编译错误
+- B. 运行时 panic
+- C. 正常输出 42
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 运行时 panic**。
+
+`RefCell` 在运行时强制执行借用规则：
+
+- `borrow()` 获取不可变引用
+- `borrow_mut()` 获取可变引用
+- 两者不能同时存在，违反时在**运行时 panic**
+
+这与编译期借用检查不同：编译器无法在运行时跟踪 `RefCell` 的借用状态，因此将检查推迟到运行时。若需要线程安全版本，使用 `Mutex`（同样运行时检查）。
+</details>
+
+---
+
+### 测验 3：内部可变性的适用场景（应用层）
+
+以下哪种场景最适合使用 `RefCell<T>`？
+
+- A. 多线程共享可变状态
+- B. 单线程中需要绕过编译期借用规则（如实现自引用或回调）
+- C. 需要原子操作保证无锁并发
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 单线程中需要绕过编译期借用规则**。
+
+`RefCell` 的设计目标：当编译器过于保守（如自引用结构、观察者模式回调）时，允许在**单线程**中以运行时检查换取灵活性。
+
+不适用场景：
+
+- 多线程共享 → 使用 `Mutex<T>`/`RwLock<T>`（需 `Send`）
+- 原子操作 → 使用 `AtomicUsize` 等（无锁，更快）
+- 性能关键路径 → `RefCell` 有运行时开销
+
+</details>
+
+---
+
+### 测验 4：`Rc<RefCell<T>>` 模式（分析层）
+
+`Rc<RefCell<T>>` 提供了什么组合能力？
+
+- A. 单所有权 + 编译期可变借用
+- B. 多所有权 + 运行时可变借用
+- C. 线程安全共享 + 编译期不可变借用
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 多所有权 + 运行时可变借用**。
+
+组合语义：
+
+- `Rc<T>`：多所有权引用计数（单线程）
+- `RefCell<T>`：运行时借用检查
+- `Rc<RefCell<T>>` = "多个所有者共享同一可变数据"
+
+这是 Rust 中实现**图结构**、**双向链表**等复杂数据结构的经典模式。但需注意：
+
+- 仅单线程（`Rc` 不是 `Send`）
+- 可能形成循环引用 → 配合 `Weak<T>` 使用
+- 运行时 panic 风险 → 避免 `borrow_mut()` 嵌套
+
+</details>
+
+---
+
+### 测验 5：内部可变性与 Send/Sync（专家级）
+
+为什么 `RefCell<T>` 不是 `Sync`？
+
+- A. 因为它使用操作系统锁
+- B. 因为它的借用计数器不是原子操作，多线程同时访问会导致数据竞争
+- C. 因为它只允许不可变借用
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 因为它的借用计数器不是原子操作，多线程同时访问会导致数据竞争**。
+
+`RefCell` 的借用状态（当前有多少个 `borrow`/是否有 `borrow_mut`）存储在普通整型中，非线程安全。如果两个线程同时调用 `borrow()`，计数器更新会产生数据竞争。
+
+对比：
+
+- `RefCell<T>: !Sync`（即使 `T: Sync`）
+- `Mutex<T>: Sync if T: Send`（使用 OS 锁保护内部状态）
+- `AtomicUsize: Sync`（CPU 原子指令）
+
+这是内部可变性类型设计的关键安全属性。
+</details>
+
+---
 
 ## 认知路径
 

@@ -1305,6 +1305,141 @@ fn main() {
 - **定理**: Rust 形式模型演进跟踪（1.79–1.97+） 定义 ⟹ 类型安全保证
 - **定理**: Rust 形式模型演进跟踪（1.79–1.97+） 定义 ⟹ 类型安全保证
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：MSRV 的定义（理解层）
+
+MSRV（Minimum Supported Rust Version）是指？
+
+- A. Rust 编译器的最新稳定版本
+- B. 项目承诺支持的最低 Rust 版本
+- C. Rust 发布周期的固定版本
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 项目承诺支持的最低 Rust 版本**。
+
+MSRV 是库作者对用户的兼容性承诺：
+
+- `"rust-version = "1.70.0"` 表示该 crate 至少需要 Rust 1.70
+- 使用 `cargo-msrv` 可自动检测实际 MSRV
+- 企业项目通常落后 2-3 个 stable 版本
+
+MSRV 管理是 Rust 生态的重要实践，因为语言每 6 周发布新版本，过早使用新特性会限制用户群体。
+</details>
+
+---
+
+### 测验 2：Stable / Beta / Nightly（应用层）
+
+以下哪个通道适合生产环境？
+
+- A. Nightly（每晚构建，含实验特性）
+- B. Beta（预发布测试）
+- C. Stable（每 6 周发布，保证向后兼容）
+
+<details>
+<summary>✅ 答案</summary>
+
+**C. Stable**。
+
+Rust 的三个发布通道：
+
+- **Stable**：每 6 周发布，保证向后兼容，适合生产
+- **Beta**：下一个 stable 的预发布，用于测试
+- **Nightly**：每晚构建，含 `#![feature(...)]` 实验特性，可能不稳定
+
+生产代码应使用 Stable。只有在需要实验特性（如 `generic_const_exprs`）时才使用 Nightly，但需承担特性变更/移除的风险。
+</details>
+
+---
+
+### 测验 3：Edition 的含义（应用层）
+
+Rust 2021 Edition 与 2024 Edition 的区别是什么？
+
+- A. 2024 Edition 引入不兼容的语法变化，需显式升级
+- B. 2024 Edition 是全新语言，与 2021 不兼容
+- C. Edition 只影响编译器版本，不影响代码
+
+<details>
+<summary>✅ 答案</summary>
+
+**A. 2024 Edition 引入不兼容的语法变化，需显式升级**。
+
+Rust Edition 是**有意识的、不兼容的语法变更**：
+
+- 2015 → 2018 → 2021 → 2024
+- 每个 Edition 可引入破坏向后兼容的变化
+- 同一代码库可混合使用不同 Edition 的 crate
+- 升级 Edition 需显式修改 `Cargo.toml` 的 `edition` 字段
+
+例如 2024 Edition 要求 `unsafe extern "C"` 块、改进了匹配语义等。
+</details>
+
+---
+
+### 测验 4：条件编译处理版本差异（分析层）
+
+如何处理"新 Rust 版本有某个 API，旧版本没有"的情况？
+
+- A. 直接要求用户使用最新 nightly
+- B. 使用 `#[cfg]` 或 `rustversion` crate 进行条件编译
+- C. 复制标准库实现到自己的 crate
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 使用 `#[cfg]` 或 `rustversion` crate 进行条件编译**。
+
+常见策略：
+
+```rust
+#[rustversion::since(1.76)]
+fn use_new_api() { /* 使用 1.76+ API */ }
+
+#[rustversion::before(1.76)]
+fn use_new_api() { /* 降级实现 */ }
+```
+
+或基于特性：
+
+```rust
+#[cfg(has_stable_api)]
+```
+
+这允许库在支持新特性的同时保持较宽的 MSRV。
+</details>
+
+---
+
+### 测验 5：跟踪 Rust 演进的最佳实践（评价层）
+
+引入一个新的 Rust stable 特性到生产代码前，应首先做什么？
+
+- A. 立即在所有代码中使用
+- B. 评估 MSRV 影响、生态支持度和团队学习成本
+- C. 等待下一个 Edition 发布
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 评估 MSRV 影响、生态支持度和团队学习成本**。
+
+新特性引入 checklist：
+
+- 该特性是否 stable？（避免 nightly-only）
+- 是否提高 MSRV？会影响多少用户/依赖？
+- 主要依赖库是否已支持？
+- 团队是否需要额外培训？
+- 是否有明确收益（可读性、性能、安全性）？
+
+Rust 的快速发布是优势，但生产环境需要审慎评估，避免"为了新特性而新特性"。
+</details>
+
+---
+
 ## 认知路径
 
 > **认知路径**: 从 Rust 核心语言特性出发，经由 **Rust 形式模型演进跟踪（1.79–1.97+）** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。

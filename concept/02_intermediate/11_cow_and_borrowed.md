@@ -50,6 +50,12 @@
     - [10.4 边界测试：`Cow` 在 `match` 中的所有权转移（编译错误）](#104-边界测试cow-在-match-中的所有权转移编译错误)
     - [10.2 边界测试：`Cow` 的生命周期与所有权转换（编译错误）](#102-边界测试cow-的生命周期与所有权转换编译错误)
     - [10.4 边界测试：Cow 的生命周期与泛型约束不匹配（编译错误）](#104-边界测试cow-的生命周期与泛型约束不匹配编译错误)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：`Cow<'a, str>` 的两种变体是什么？各自代表什么语义？（理解层）](#测验-1cowa-str-的两种变体是什么各自代表什么语义理解层)
+    - [测验 2：`Cow::Borrowed(s).to_mut()` 在什么情况下会触发克隆？（理解层）](#测验-2cowborrowedsto_mut-在什么情况下会触发克隆理解层)
+    - [测验 3：函数签名 `fn greet<'a>(s: Cow<'a, str>) -> Cow<'a, str>` 有什么设计优势？（理解层）](#测验-3函数签名-fn-greetas-cowa-str---cowa-str-有什么设计优势理解层)
+    - [测验 4：`Cow` 适合解决什么场景的问题？（理解层）](#测验-4cow-适合解决什么场景的问题理解层)
+    - [测验 5：为什么不能将 `Cow<'a, str>` 直接赋值给需要 `Cow<'static, str>` 的地方？（理解层）](#测验-5为什么不能将-cowa-str-直接赋值给需要-cowstatic-str-的地方理解层)
   - [实践](#实践)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -662,6 +668,66 @@ fn main() {}
 ```
 
 > **修正**: `Cow<'a, B>` 的**生命周期参数**：1) `'a` 是借用的最长期限；2) `Cow::Borrowed(&'a B)` 要求引用至少存活 `'a`；3) 返回 `Cow<'static, str>` 要求数据是 `'static`（如 `String` 或字面量）。解决：1) 返回 `Cow<'a, str>` 而非 `'static`；2) 若必须 `'static`，使用 `Cow::Owned(s.to_string())`；3) 使用 `Into<Cow<'static, str>>` 让调用方决定。这与 C++ 的 `std::variant`（无生命周期，存储值或引用）或 Swift 的 `copy-on-write`（隐式，无生命周期标记）不同——Rust 的 `Cow` 显式跟踪所有权和借用生命周期。[来源: [Cow Documentation](https://doc.rust-lang.org/std/borrow/enum.Cow.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`Cow<'a, str>` 的两种变体是什么？各自代表什么语义？（理解层）
+
+**题目**: `Cow<'a, str>` 的两种变体是什么？各自代表什么语义？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`Borrowed(&'a str)` 表示借用已有字符串，不分配；`Owned(String)` 表示拥有堆上字符串副本。
+</details>
+
+---
+
+### 测验 2：`Cow::Borrowed(s).to_mut()` 在什么情况下会触发克隆？（理解层）
+
+**题目**: `Cow::Borrowed(s).to_mut()` 在什么情况下会触发克隆？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+当 `Cow` 处于 `Borrowed` 状态且调用 `to_mut()` 需要可变引用时，会克隆底层数据并转为 `Owned`。
+</details>
+
+---
+
+### 测验 3：函数签名 `fn greet<'a>(s: Cow<'a, str>) -> Cow<'a, str>` 有什么设计优势？（理解层）
+
+**题目**: 函数签名 `fn greet<'a>(s: Cow<'a, str>) -> Cow<'a, str>` 有什么设计优势？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+调用者可以传入 `&str`（零拷贝）或 `String`（转移所有权），函数按需选择借用或拥有，提供灵活性。
+</details>
+
+---
+
+### 测验 4：`Cow` 适合解决什么场景的问题？（理解层）
+
+**题目**: `Cow` 适合解决什么场景的问题？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+适合"读多写少"的场景：大多数情况下只是读取借用数据，偶尔需要修改时才克隆，实现写时复制优化。
+</details>
+
+---
+
+### 测验 5：为什么不能将 `Cow<'a, str>` 直接赋值给需要 `Cow<'static, str>` 的地方？（理解层）
+
+**题目**: 为什么不能将 `Cow<'a, str>` 直接赋值给需要 `Cow<'static, str>` 的地方？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`'a` 生命周期可能比 `'static` 短，若允许则返回的引用可能悬垂。解决方式是 `Cow::Owned(s.to_string())` 或让函数也返回 `Cow<'a, str>`。
+</details>
 
 ## 实践
 

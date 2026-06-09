@@ -55,6 +55,12 @@
     - [10.3 边界测试：`MaybeUninit` 的未初始化读取（运行时 UB）](#103-边界测试maybeuninit-的未初始化读取运行时-ub)
     - [10.4 边界测试：MaybeUninit 的未初始化内存读取（运行时 UB）](#104-边界测试maybeuninit-的未初始化内存读取运行时-ub)
     - [10.1 边界测试：const fn 中的非编译期操作](#101-边界测试const-fn-中的非编译期操作)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：unsafe 的语义边界（理解层）](#测验-1unsafe-的语义边界理解层)
+    - [测验 2：原始指针 vs 引用（应用层）](#测验-2原始指针-vs-引用应用层)
+    - [测验 3：`MaybeUninit<T>` 的用途（应用层）](#测验-3maybeuninitt-的用途应用层)
+    - [测验 4：安全抽象层设计（分析层）](#测验-4安全抽象层设计分析层)
+    - [测验 5：UB 检测工具（评价层）](#测验-5ub-检测工具评价层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -827,6 +833,141 @@ fn main() {}
 > [Rust Standard Library](https://doc.rust-lang.org/std/) ·
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：unsafe 的语义边界（理解层）
+
+`unsafe` 块的作用是什么？
+
+- A. 关闭所有编译器检查
+- B. 告诉编译器"程序员保证这段代码满足 Rust 安全契约"
+- C. 允许代码运行时更快
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 告诉编译器"程序员保证这段代码满足 Rust 安全契约"**。
+
+`unsafe` 不是"狂野西部"，它有精确的语义边界：
+
+- 允许解引用原始指针
+- 允许调用 `unsafe` 函数或访问 `unsafe` trait
+- 允许实现 `unsafe trait`
+- 允许读写 `static mut` 变量
+- 允许使用 `union` 字段
+
+编译器仍然进行类型检查、生命周期检查。`unsafe` 只是将某些安全责任从编译器转移到程序员。
+</details>
+
+---
+
+### 测验 2：原始指针 vs 引用（应用层）
+
+`*const T` 和 `&T` 的核心区别是什么？
+
+- A. 原始指针不能为 null
+- B. 原始指针不受借用检查器管理，可存在多个 `*mut` 指向同一数据
+- C. 原始指针自动解引用
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 原始指针不受借用检查器管理，可存在多个 `*mut` 指向同一数据**。
+
+| 特性 | `&T` / `&mut T` | `*const T` / `*mut T` |
+|:---|:---|:---|
+| 借用检查 | ✅ 受管理 | ❌ 不受管理 |
+| 可为 null | ❌ 不可 | ✅ 可以 |
+| 多个可变 | ❌ 禁止 | ✅ 允许（但通常 UB）|
+| 自动解引用 | ✅ 是 | ❌ 需 `unsafe` 解引用 |
+
+原始指针用于与 C 互操作、实现底层数据结构等场景，但使用时要手动维护安全不变量。
+</details>
+
+---
+
+### 测验 3：`MaybeUninit<T>` 的用途（应用层）
+
+`MaybeUninit<T>` 解决了什么问题？
+
+- A. 允许 `T` 为 null
+- B. 允许分配未初始化的 `T` 内存，避免先构造再移动的开销
+- C. 使 `T` 线程安全
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 允许分配未初始化的 `T` 内存，避免先构造再移动的开销**。
+
+`MaybeUninit<T>` 是 Rust 中处理未初始化内存的安全抽象：
+
+- `MaybeUninit::uninit()` 分配 `T` 大小的内存，但不调用构造函数
+- `write(val)` 在内存中构造值
+- `assume_init()` 将 `MaybeUninit<T>` 转换为 `T`（unsafe，需确保已初始化）
+
+应用场景：
+
+- 批量分配数组元素后逐个初始化
+- 与 C API 交互时接收未初始化的输出缓冲区
+- 避免 `T` 的默认构造 + 赋值开销
+
+</details>
+
+---
+
+### 测验 4：安全抽象层设计（分析层）
+
+设计 unsafe 抽象时的核心原则是什么？
+
+- A. 尽可能多用 `unsafe` 以获得灵活性
+- B. 将 `unsafe` 封装在最小模块中，对外暴露 safe API
+- C. 只在测试中使用 `unsafe`
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 将 `unsafe` 封装在最小模块中，对外暴露 safe API**。
+
+Rust unsafe 代码的最佳实践：
+
+1. **最小化 unsafe 范围**：只在必要的地方使用 `unsafe` 块
+2. **封装不变量**：模块内部维护安全契约，对外暴露无法违反契约的 API
+3. **文档化契约**：用 `SAFETY:` 注释说明为什么这段代码是安全的
+4. **用 Miri 验证**：检测 Stacked Borrows/Tree Borrows 违规
+
+标准库是典范：`Vec`、`HashMap`、`BTreeMap` 内部使用大量 `unsafe`，但对外提供完全 safe 的 API。
+</details>
+
+---
+
+### 测验 5：UB 检测工具（评价层）
+
+Miri 能检测哪些 unsafe 代码问题？
+
+- A. 所有逻辑错误
+- B. 数据竞争、use-after-free、未初始化内存读取、违反 Stacked Borrows
+- C. 性能瓶颈
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 数据竞争、use-after-free、未初始化内存读取、违反 Stacked Borrows**。
+
+Miri 是 Rust 的动态 UB 检测器：
+
+- ✅ 检测 use-after-free
+- ✅ 检测数据竞争
+- ✅ 检测未初始化内存读取
+- ✅ 检测 Stacked Borrows / Tree Borrows 违规
+- ✅ 检测对齐违规
+- ❌ 不能检测逻辑错误（如算法不正确）
+- ❌ 不能检测未触发的 UB（因为是有界执行）
+
+Miri 是 unsafe 代码开发者的必备工具，但不能替代形式化验证或全面测试。
+</details>
+
+---
 
 ## 认知路径
 

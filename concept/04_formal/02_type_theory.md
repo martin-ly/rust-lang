@@ -1128,7 +1128,24 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的枚举是**代数数据类型**（ADT），但不是**GADT**（Generalized Algebraic Data Type）。GADT 允许类型参数在构造器中变化：`Expr<Int>` 和 `Expr<Bool>` 是不同的类型。Rust 的替代方案：1) **phantom 类型**：`struct Lit<T>(i32, PhantomData<T>)`；2) **类型状态模式**：用泛型参数编码状态；3) **关联类型**：`trait Expr { type Output; }`。Rust 不原生支持 GADT 是因为：1) 类型推断更复杂（GADT 的 unification 是半可判定的）；2) 模式匹配 exhaustiveness 检查需考虑类型约束；3) 与当前类型系统的交互（lifetime、trait bound）尚未完全设计。这与 Haskell 的 GADT（`data Expr a where ...`）或 OCaml 的 GADT（`type _ expr = ...`）不同——Rust 的 phantom 类型是轻量替代，但语法噪音更大。[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)] · [来源: [GADT](https://en.wikipedia.org/wiki/Generalized_algebraic_data_type)]
+> **修正**:
+>
+> Rust 的枚举是**代数数据类型**（ADT），但不是**GADT**（Generalized Algebraic Data Type）。
+> GADT 允许类型参数在构造器中变化：`Expr<Int>` 和 `Expr<Bool>` 是不同的类型。
+> Rust 的替代方案：
+>
+> 1) **phantom 类型**：`struct Lit<T>(i32, PhantomData<T>)`；
+> 2) **类型状态模式**：用泛型参数编码状态；
+> 3) **关联类型**：`trait Expr { type Output; }`。
+>
+> Rust 不原生支持 GADT 是因为：
+>
+> 1) 类型推断更复杂（GADT 的 unification 是半可判定的）；
+> 2) 模式匹配 exhaustiveness 检查需考虑类型约束；
+> 3) 与当前类型系统的交互（lifetime、trait bound）尚未完全设计。
+>
+> 这与 Haskell 的 GADT（`data Expr a where ...`）或 OCaml 的 GADT（`type _ expr = ...`）不同——Rust 的 phantom 类型是轻量替代，但语法噪音更大。
+> [来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)] · [来源: [GADT](https://en.wikipedia.org/wiki/Generalized_algebraic_data_type)]
 
 ### 10.4 边界测试：Rust 的类型系统与 HKT（高阶类型）的缺失（编译错误）
 
@@ -1144,4 +1161,328 @@ trait Functor<F<_>> {
 fn main() {}
 ```
 
-> **修正**: **HKT**（Higher-Kinded Types）允许类型构造器（如 `Vec`、`Option`）作为类型参数：`Functor<Vec>` 表示"Vec 是一个 Functor"。Rust **不原生支持 HKT**，因为：1) 类型系统复杂度（HKT 的类型推断是半可判定的）；2) 与当前 trait 系统的交互（关联类型、生命周期）；3) 工程优先级（GAT 已解决大部分用例）。替代方案：1) **GAT**（泛型关联类型）：`trait Functor { type Map<T>; fn map<A, B>(...) -> Self::Map<B>; }`；2) **`typenum`** 和 **generic-array**：类型级编程；3) **宏**：生成特定实例化。HKT 的应用：1) Monad（`bind`、`return`）；2) Functor/Applicative 抽象；3) 类型级列表。这与 Haskell（原生 HKT，`Functor f => f a`）或 Scala（类型构造器作为更高阶类型参数）不同——Rust 通过 GAT 和宏近似 HKT，但表达能力有限。[来源: [GAT RFC](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html)] · [来源: [Higher-Kinded Types](https://en.wikipedia.org/wiki/Kind_(type_theory))]
+> **修正**:
+>
+> **HKT**（Higher-Kinded Types）允许类型构造器（如 `Vec`、`Option`）作为类型参数：`Functor<Vec>` 表示"Vec 是一个 Functor"。
+> Rust **不原生支持 HKT**，因为：
+>
+> 1) 类型系统复杂度（HKT 的类型推断是半可判定的）；
+> 2) 与当前 trait 系统的交互（关联类型、生命周期）；
+> 3) 工程优先级（GAT 已解决大部分用例）。
+>
+> 替代方案：
+>
+> 1) **GAT**（泛型关联类型）：`trait Functor { type Map<T>; fn map<A, B>(...) -> Self::Map<B>; }`；
+> 2) **`typenum`** 和 **generic-array**：类型级编程；
+> 3) **宏**：生成特定实例化。
+>
+> HKT 的应用：
+>
+> 1) Monad（`bind`、`return`）；
+> 2) Functor/Applicative 抽象；
+> 3) 类型级列表。
+> 这与 Haskell（原生 HKT，`Functor f => f a`）或 Scala（类型构造器作为更高阶类型参数）不同——Rust 通过 GAT 和宏近似 HKT，但表达能力有限。
+> [来源: [GAT RFC](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html)] ·
+> [来源: [Higher-Kinded Types](https://en.wikipedia.org/wiki/Kind_(type_theory))]
+
+---
+
+## 嵌入式测验
+
+### 测验 1：类型系统的分类（记忆层）
+
+**题目**: Rust 的类型系统属于以下哪种分类？
+
+- A. 动态类型 + 弱类型
+- B. 静态类型 + 弱类型
+- C. 静态类型 + 强类型
+- D. 动态类型 + 强类型
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 C**。
+
+**类型系统的两个维度**：
+
+```
+          静态类型          动态类型
+         ┌─────────┬─────────┐
+    强类型 │  Rust   │  Python │
+         │   Haskell│  Ruby   │
+         ├─────────┼─────────┤
+    弱类型 │   C     │  JavaScript│
+         │  C++    │   PHP   │
+         └─────────┴─────────┘
+```
+
+| 维度 | 定义 | Rust 的表现 |
+|:---|:---|:---|
+| **静态/动态** | 类型检查在编译期还是运行期 | Rust: 编译期（`rustc` 类型检查）|
+| **强/弱** | 是否允许隐式类型转换 | Rust: 强类型（必须显式转换 `as` / `From`）|
+
+**Rust 的强类型示例**：
+
+```rust
+let x: i32 = 42;
+let y: u32 = x;        // ❌ 编译错误: 不允许隐式转换
+let y: u32 = x as u32; // ✅ 显式转换
+
+let s = "hello";
+let n = s + 1;         // ❌ 编译错误: String 不支持 + i32
+// JavaScript 中: "hello" + 1 → "hello1"（弱类型）
+```
+
+**为什么不是弱类型**：
+
+C/C++ 允许 `void*` 隐式转换为任意指针、整数隐式截断等，这些都是弱类型的表现。Rust 禁止所有隐式转换，必须通过 trait（`From`/`Into`/`TryFrom`）显式声明。
+
+> Rust 的强类型不是负担，而是**安全网**。编译器在编译期拒绝的类型错误，不会在运行期变成崩溃或安全漏洞。
+</details>
+
+---
+
+### 测验 2：参数多态 vs 特设多态（理解层）
+
+**题目**: `fn identity<T>(x: T) -> T { x }` 和 `fn add(x: i32, y: i32) -> i32 { x + y }` 分别对应哪种多态？
+
+- A. 都是参数多态（Parametric Polymorphism）
+- B. 都是特设多态（Ad-hoc Polymorphism）
+- C. `identity` 是参数多态，`add` 是特设多态
+- D. `identity` 是特设多态，`add` 是参数多态
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 C**。
+
+**多态的分类（Cardelli-Wegner）**：
+
+| 类型 | 说明 | Rust 示例 |
+|:---|:---|:---|
+| **参数多态** | 对**所有**类型统一实现，不特殊处理任何类型 | `identity<T>(x: T) -> T` |
+| **特设多态** | 对**不同**类型有不同实现 | `impl Add for i32` / `impl Add for String` |
+| **子类型多态** | 子类型可替代父类型 | `dyn Trait`（Rust 的 trait object）|
+
+**参数多态的本质**：
+
+```rust
+// 一个实现，适用于所有类型
+fn identity<T>(x: T) -> T { x }
+
+// 编译后等价于（单态化）：
+fn identity_i32(x: i32) -> i32 { x }
+fn identity_string(x: String) -> String { x }
+// ... 每个使用的类型生成一个副本
+
+// 关键: 函数体不"知道" T 是什么，不能调用 T 的方法
+// 除非 T 有 trait bound: fn identity<T: Clone>(x: T) -> T { x.clone() }
+```
+
+**特设多态的本质**：
+
+```rust
+// 不同的类型有不同的实现
+impl Add for i32 {
+    fn add(self, rhs: i32) -> i32 { self + rhs }  // CPU add 指令
+}
+
+impl Add for String {
+    fn add(self, rhs: &str) -> String {
+        self.push_str(rhs);  // 堆分配 + 内存拷贝
+        self
+    }
+}
+
+// 关键: `+` 运算符对 i32 和 String 有完全不同的实现
+```
+
+**Rust 的 Add trait 为什么是特设多态**：
+
+```rust
+fn sum<T: Add<Output = T>>(a: T, b: T) -> T {
+    a + b  // 这里 `+` 调用的是 T 的特定实现
+}
+
+// sum(1, 2)      → i32::add
+// sum("a", "b")  → String::add（但参数类型不匹配，需要 &str）
+```
+
+> **核心洞察**: 参数多态 = "对所有类型一视同仁"；特设多态 = "每个类型有自己的实现"。Rust 的泛型 + trait bound 同时支持两者。
+</details>
+
+---
+
+### 测验 3：生命周期作为类型（应用层）
+
+**题目**: 以下代码中的 `'a` 在类型系统的视角下是什么？
+
+```rust
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+    if x.len() > y.len() { x } else { y }
+}
+```
+
+- A. `'a` 是一个运行时变量，编译器在运行期检查生命周期
+- B. `'a` 是类型参数，与泛型参数 `T` 地位相同，但在编译期被擦除
+- C. `'a` 是一个特殊的注释，不影响代码生成
+- D. `'a` 是引用计数器的名称
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+**生命周期 = 类型参数**：
+
+```rust
+// longest 函数有两个参数:
+// 1. 类型参数 'a（生命周期参数）
+// 2. 值参数 x: &'a str（借用 'a 的字符串切片）
+// 3. 值参数 y: &'a str
+
+// 编译期单态化后（概念上）:
+fn longest_lt0(x: &lt0 str, y: &lt0 str) -> &lt0 str { ... }
+// lt0 是一个"编译期标签"，标记所有相关引用的有效范围
+```
+
+**生命周期擦除（Lifetime Erasure）**：
+
+```rust
+// 编译后的机器码中，生命周期完全不存在！
+// 'a 只存在于编译期的类型检查中
+
+// 编译前:
+fn borrow<'a>(x: &'a i32) -> &'a i32 { x }
+
+// 编译后（LLVM IR）:
+// define i32* @borrow(i32* %x) { ret i32* %x }
+// 没有 'a 的痕迹！
+```
+
+**生命周期 vs 泛型类型的对比**：
+
+| 特性 | 类型参数 `T` | 生命周期参数 `'a` |
+|:---|:---|:---|
+| 声明位置 | `<T>` | `<'a>` |
+| 约束方式 | `T: Trait` | `'a: 'b`（outlives）|
+| 擦除时机 | 编译期（单态化）| 编译期（借用检查后）|
+| 运行时开销 | 零 | 零 |
+| 推断 | 通常显式标注或部分推断 | 通常自动推断（lifetime elision）|
+
+**Lifetime Elision（省略规则）**：
+
+```rust
+// 编译器自动推断的三种情况:
+fn foo(x: &str) -> &str;           // 输入 lifetime = 输出 lifetime
+fn foo(x: &str, y: &str) -> &str;  // 输出 lifetime = 第一个输入 lifetime
+fn foo(&self) -> &T;               // 输出 lifetime = self 的 lifetime
+
+// 等价于:
+fn foo<'a>(x: &'a str) -> &'a str;
+fn foo<'a, 'b>(x: &'a str, y: &'b str) -> &'a str;
+fn foo<'a>(&'a self) -> &'a T;
+```
+
+> **关键洞察**: 生命周期是**编译期的证明工具**，不是运行期的机制。理解这一点是掌握 Rust 借用检查器的关键。
+</details>
+
+---
+
+### 测验 4：类型推断与 Hindley-Milner（分析层）
+
+**题目**: Rust 的类型推断与 Haskell 的 Hindley-Milner (HM) 算法有什么本质区别？以下代码在 Rust 和 Haskell 中的行为有何不同？
+
+```rust
+let v = Vec::new();  // Rust
+v.push(42);
+```
+
+```haskell
+v = []  -- Haskell
+v = 42 : v  -- 无限列表
+```
+
+- A. 没有区别，两者使用完全相同的类型推断算法
+- B. Rust 无法推断 `Vec::new()` 的类型（需要显式标注），Haskell 可以推断 `[]` 为 `[a]`
+- C. Rust 的类型推断是局部的（基于表达式上下文），Haskell 的 HM 是全局的（基于整个程序）
+- D. Rust 和 Haskell 都无法推断这段代码的类型
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 C**。
+
+**Hindley-Milner (HM) vs Rust 类型推断**：
+
+| 特性 | Haskell (HM) | Rust |
+|:---|:---|:---|
+| **范围** | 全局（整个模块/程序）| 局部（单个函数体）|
+| **多态** | let-绑定多态（全称量化）| 仅泛型参数多态 |
+| **约束求解** | 统一算法（unification）| 双向类型检查（bidirectional）|
+| **隐式参数** | 类型类推导（自动选择实例）| 无（必须显式传递 trait bound）|
+
+**Rust 代码的问题**：
+
+```rust
+let v = Vec::new();  // ❌ 编译错误: 无法推断 T
+v.push(42);
+
+// 原因: Rust 的类型推断是"前向"的
+// Vec::new() 返回 Vec<T>，但 T 在此时没有约束
+// v.push(42) 在后面，Rust 不"回头看"
+
+// 修复:
+let v: Vec<i32> = Vec::new();  // ✅ 显式标注
+// 或
+let v = vec![];  // ✅ 宏推断: vec![] 等效于 Vec::new()，但允许后续推断
+```
+
+**Haskell 代码的行为**：
+
+```haskell
+v = []          -- 类型: [a]（多态列表）
+v = 42 : v      -- 类型统一: a = Int, 所以 v :: [Int]
+
+-- HM 算法的全局推断:
+-- 1. v = []          → v: [a]
+-- 2. v = 42 : v      → 42: Int, v: [Int], 所以 [a] = [Int], a = Int
+-- 3. 全局统一成功！
+```
+
+**为什么 Rust 不采用 HM**：
+
+```rust
+// HM 的全局推断在 Rust 中会导致问题:
+
+fn foo() {
+    let v = Vec::new();    // v: Vec<?T>
+    bar(&v);               // bar 期望 Vec<i32>？还是 Vec<String>？
+}
+
+fn bar(x: &Vec<i32>) { ... }
+fn bar(x: &Vec<String>) { ... }  // Rust 不支持重载！
+
+// 在 Haskell 中: 类型类会选择正确的实例
+// 在 Rust 中: 必须显式标注，避免歧义
+```
+
+**Rust 的推断策略 — 双向类型检查**：
+
+```rust
+// 从上下文"向下"推断
+fn make_vec() -> Vec<i32> {
+    Vec::new()  // ✅ 从返回类型推断 T = i32
+}
+
+// 从参数"向上"推断
+fn process(v: Vec<i32>) { ... }
+process(Vec::new());  // ✅ 从参数类型推断 T = i32
+```
+
+> **核心洞察**: Rust 的类型推断是**工程性折中**——牺牲了 HM 的全局推断能力，换取了与 trait system、lifetime、方法解析的兼容性。理解这个限制有助于避免"为什么 Rust 不能推断这个？"的困惑。
+</details>
+
+---
+
+> **测验设计来源**: [Bloom Taxonomy 2001] · [Types and Programming Languages (Pierce)](https://www.cis.upenn.edu/~bcpierce/tapl/) · [TRPL Ch10](https://doc.rust-lang.org/book/ch10-00-generics.html) · [Rust Reference - Type System](https://doc.rust-lang.org/reference/types.html)

@@ -5,7 +5,7 @@
 
 > **创建日期**: 2026-02-14
 > **最后更新**: 2026-02-20
-> **Rust 版本**: 1.94.0+ (Edition 2024)
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 单一入口的完整总结、全项目知识地图、论证脉络总览；解决「无完整总结综合、无论证脉络关系」的缺口
 > **上位文档**: [00_ORGANIZATION_AND_NAVIGATION](./10_00_organization_and_navigation.md)、[AUTHORITATIVE_ALIGNMENT_GUIDE](./10_authoritative_alignment_guide.md)
@@ -203,7 +203,7 @@
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **适用版本**: Rust 1.94.0+
+> **适用版本**: Rust 1.96.0+
 
 ### 核心研究点
 
@@ -224,7 +224,7 @@
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-> **适用版本**: Rust 1.94.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点

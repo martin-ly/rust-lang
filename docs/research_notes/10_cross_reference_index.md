@@ -44,7 +44,7 @@
 
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-02-28
-> **Rust 版本**: 1.94.0+ (Edition 2024)
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 全文档双向链接表、概念跨文档定义映射、定理跨文档引用中心
 > **上位文档**: [00_COMPREHENSIVE_SUMMARY](./10_00_comprehensive_summary.md)、[HIERARCHICAL_MAPPING_AND_SUMMARY](./10_hierarchical_mapping_and_summary.md)
@@ -480,7 +480,7 @@ graph TD
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-> **适用版本**: Rust 1.94.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点

@@ -5,7 +5,7 @@
 
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-02-20
-> **Rust 版本**: 1.94.0+ (Edition 2024)
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 100% 完成（修订后验收标准，见 DOCS_100_PERCENT_PROGRESS）
 > **目标**: 全面梳理 research_notes 所有内容，识别缺口，制定100%完成的可持续推进计划
 
@@ -961,7 +961,7 @@ verification_pipeline:
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **适用版本**: Rust 1.94.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点

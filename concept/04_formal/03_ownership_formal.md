@@ -85,6 +85,11 @@
     - [10.3 边界测试：形式化所有权与编译器实现的差距（编译错误）](#103-边界测试形式化所有权与编译器实现的差距编译错误)
     - [10.4 边界测试：形式化所有权与编译器实现的偏差（运行时 UB）](#104-边界测试形式化所有权与编译器实现的偏差运行时-ub)
     - [10.2 边界测试：const fn 中的非编译期操作](#102-边界测试const-fn-中的非编译期操作)
+  - [嵌入式测验](#嵌入式测验)
+    - [测验 1：所有权的形式化直觉（记忆层）](#测验-1所有权的形式化直觉记忆层)
+    - [测验 2：借用作为能力（理解层）](#测验-2借用作为能力理解层)
+    - [测验 3：Hoare 三元组与 Unsafe（应用层）](#测验-3hoare-三元组与-unsafe应用层)
+    - [测验 4：分离逻辑与并发（分析层）](#测验-4分离逻辑与并发分析层)
 
 > **层级**: L4 形式化理论
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Lifetimes](../01_foundation/03_lifetimes.md) · [Linear Logic](./01_linear_logic.md) · [Type Theory](./02_type_theory.md)
@@ -1469,3 +1474,264 @@ fn main() {}
 ```
 
 > **修正**: **Const fn**：1) 函数体必须是编译期可计算的；2) `Vec::new()` 在某些 Rust 版本中不是 `const fn`；3) 编译期限制逐步放宽（`const_mut_refs`、`const_vec_string` 等）。
+
+---
+
+## 嵌入式测验
+
+### 测验 1：所有权的形式化直觉（记忆层）
+
+**题目**: 在形式化语义中，Rust 的所有权规则对应于线性逻辑的哪个核心概念？
+
+- A. 排中律（Law of Excluded Middle）
+- B. 资源的一次性消费（Linear Implication / ⊗）
+- C. 模态逻辑中的必然性（Necessity / □）
+- D. 高阶类型（Higher-Kinded Types）
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+**线性逻辑 ↔ Rust 所有权映射**：
+
+```
+线性逻辑              Rust 所有权
+------------         ------------
+A ⊗ B   (张量积)      (T, U)      — 元组：同时拥有两个资源
+A ⊸ B   (线性蕴涵)    fn(T) -> U  — 函数：消耗 T，产生 U
+!A      (当然模态)    &T / Clone  — 复制：从资源生成无限副本
+1       (单位元)      ()          — 单位类型：不消耗资源
+A & B   (内部选择)    enum { A, B } — 枚举：拥有其中之一
+A ⊕ B   (外部选择)    trait Bound  — 约束：满足 A 或 B 之一
+```
+
+**核心洞察**：
+
+在线性逻辑中，假设**必须恰好使用一次**。这与 Rust 的所有权规则完全对应：
+
+- 变量绑定 → 资源的线性引入
+- move → 资源的线性传递（ ⊗ 左规则）
+- drop → 资源的线性消解（1 规则）
+- borrow → 暂时将资源"出借"而不转移所有权
+
+```rust
+let s = String::from("hello");  // 引入资源: s: String
+let t = s;                       // 线性传递: s ⊗ String ⊢ t: String
+// s 不再可用 — 线性逻辑禁止重复使用
+```
+
+> 这一对应不是偶然的。Rust 的核心开发者之一 Aaron Turon 在设计所有权系统时，明确参考了线性类型理论。
+</details>
+
+---
+
+### 测验 2：借用作为能力（理解层）
+
+**题目**: 在 RustBelt 的 Iris 框架中，`&mut T` 和 `&T` 分别对应什么分离逻辑断言？
+
+- A. `&mut T` → `own(T)`，`&T` → `share(T)`
+- B. `&mut T` → `▷ own(T)`，`&T` → `□ share(T)`
+- C. `&mut T` → `∃γ. γ ↦ T ∗ token(γ)`，`&T` → `□ ∃γ. γ ↦ T`
+- D. `&mut T` → `Box<T>`，`&T` → `Arc<T>`
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 C**（简化理解版）。
+
+**RustBelt 的形式化模型**：
+
+```
+RustBelt (Iris 分离逻辑框架) 将引用建模为"协议"。
+
+&mut T: 独占协议（Exclusive Protocol）
+  - 断言: ∃γ. γ ↦ T ∗ token(γ)
+  - 含义: 存在一个幽灵状态 γ，它指向 T，且当前线程持有 token
+  - 关键: token 不可复制，保证只有一个 &mut 存在
+
+&T: 共享协议（Shared Protocol）
+  - 断言: □ (∃γ. γ ↦ T)
+  - 含义: 持久断言（□ = "永远真"），多个线程可同时持有
+  - 关键: □ 表示不可变，保证读安全
+```
+
+**与 Rust 编译器的对应**：
+
+| Rust 类型 | 编译器检查 | Iris 断言 | 保证 |
+|:---|:---|:---|:---|
+| `T` | move 语义 | `own(T)` | 唯一所有权 |
+| `&mut T` | 无别名 + 无读 | `token(γ)` | 独占访问 |
+| `&T` | 无写 | `□ read(γ)` | 共享只读 |
+| `Box<T>` | 堆分配 | `own(T) ∗ T ↦ _` | 堆所有权 |
+
+**直观类比**：
+
+```rust
+let mut data = vec![1, 2, 3];
+let r1 = &mut data;  // 借出"房屋钥匙"（token）
+// let r2 = &mut data; // ❌ 错误：token 已被借出
+let r3 = &data;       // ❌ 错误：token 在借用期间，不能共享读
+```
+
+在 Iris 中，`token(γ)` 是一个**独占资源**（不可复制、不可共享），这直接对应 `&mut T` 的独占性。
+
+> **注意**: RustBelt 的实际形式化远比这个简化模型复杂，涉及 lifetime 的 step-indexed 语义、ghost state、invariant 等。但这足以建立直觉。
+</details>
+
+---
+
+### 测验 3：Hoare 三元组与 Unsafe（应用层）
+
+**题目**: 以下 `unsafe` 函数的形式化规约应该如何写？
+
+```rust
+/// 将 `*const T` 转换为 `&T`，要求指针非空且对齐
+unsafe fn as_ref_unchecked<T>(ptr: *const T) -> &T {
+    &*ptr
+}
+```
+
+- A. `{ true } as_ref_unchecked(ptr) { result: &T }`
+- B. `{ ptr != null ∧ aligned(ptr) } as_ref_unchecked(ptr) { result: &T ∧ valid(result) }`
+- C. `{ ptr: *const T } as_ref_unchecked(ptr) { result: &T }`
+- D. `{ unsafe } as_ref_unchecked(ptr) { result: &T }`
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+**Hoare 三元组 `{ P } C { Q }`**：
+
+| 组件 | 含义 | 本例 |
+|:---|:---|:---|
+| `P`（前置条件）| 执行前必须为真的断言 | `ptr != null ∧ aligned(ptr)` |
+| `C`（命令）| 执行的代码 | `as_ref_unchecked(ptr)` |
+| `Q`（后置条件）| 执行后为真的断言 | `result: &T ∧ valid(result)` |
+
+**为什么前置条件必须包含非空和对齐**：
+
+```rust
+// Rust 引用 &T 的不变性（编译器假设永远为真）：
+// 1. 非空: &T 永远不能为 null（与 C 指针不同）
+// 2. 对齐: &T 必须按 align_of::<T>() 对齐
+// 3. 有效: &T 指向的内存必须是有效的 T
+// 4. 别名规则: &mut T 无别名，&T 可共享
+
+// 如果前置条件不满足：
+unsafe {
+    let ptr: *const i32 = std::ptr::null();
+    let r = as_ref_unchecked(ptr);  // UB! 解引用 null
+}
+```
+
+**完整形式化规约**：
+
+```rust
+// { ptr ≠ null ∧ aligned(ptr, align_of::<T>()) ∧ size_valid(ptr) }
+//   as_ref_unchecked(ptr)
+// { result: &T ∧ result.ptr = ptr ∧ valid_for_read(result, sizeof::<T>()) }
+```
+
+**与 Safe Rust 的区别**：
+
+| 特性 | Safe Rust | Unsafe Rust（形式化视角）|
+|:---|:---|:---|
+| 前置条件 | 编译器自动证明 | 程序员手动保证 |
+| 后置条件 | 类型系统保证 | 程序员手动保证 |
+| 验证工具 | `rustc` | `rustc` + `miri` + `kani` / `creusot` |
+
+> **核心原则**: `unsafe` 不是"绕过规则"，而是"程序员承担证明责任"。形式化规约明确了这份责任的边界。
+</details>
+
+---
+
+### 测验 4：分离逻辑与并发（分析层）
+
+**题目**: 以下代码为什么能在无锁的情况下保证线程安全？用分离逻辑解释。
+
+```rust
+use std::sync::atomic::{AtomicUsize, Ordering};
+
+static COUNTER: AtomicUsize = AtomicUsize::new(0);
+
+fn increment() {
+    COUNTER.fetch_add(1, Ordering::SeqCst);
+}
+```
+
+- A. `SeqCst` 创建了一个全局锁，所以是线程安全的
+- B. 分离逻辑中的 **Frame Rule** 允许每个线程独立拥有资源的一部分，原子操作保证这部分的不可分性
+- C. `AtomicUsize` 内部使用了 `Mutex`，只是隐藏了
+- D. 编译器自动将这段代码转换为单线程执行
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+**分离逻辑的 Frame Rule**：
+
+```
+{ P } C { Q }
+----------------  (Frame Rule)
+{ P ∗ R } C { Q ∗ R }
+```
+
+含义：如果命令 `C` 在资源 `P` 上执行，将 `P` 变为 `Q`，那么 `C` 在 `P ∗ R`（`P` 加上不相关的资源 `R`）上执行时，只改变 `P` 部分，`R` 保持不变。
+
+**应用到并发**：
+
+```
+线程1: { COUNTER ↦ 0 } fetch_add(1) { COUNTER ↦ 1 }
+线程2: { COUNTER ↦ 0 } fetch_add(1) { COUNTER ↦ 1 }
+
+// 但两个线程不能同时拥有 COUNTER ↦ 0！
+// 原子操作保证：*恰好一个*线程成功获取 COUNTER 的当前值
+```
+
+**原子操作的形式化语义**：
+
+```rust
+// fetch_add(n) 的原子性 = 读取-修改-写入是一个不可分的"大步骤"
+// 分离逻辑中: 这个"大步骤"持有 COUNTER 资源的独占权
+
+// 线程1 的视角:
+{ COUNTER ↦ v }       // 独占持有 COUNTER 的当前值 v
+  fetch_add(1)        // 原子操作：将 v 替换为 v+1
+{ COUNTER ↦ v+1 }     // 释放 COUNTER
+
+// 线程2 必须等待线程1释放后才能获取 COUNTER
+// 这是通过 CPU 的缓存一致性协议实现的（如 MESI），不是软件锁
+```
+
+**为什么不是全局锁**：
+
+| 特性 | `Mutex` | `Atomic` + `SeqCst` |
+|:---|:---|:---|
+| 实现 | 软件锁（futex/临界区）| 硬件支持（缓存行锁定）|
+| 争用 | 线程阻塞/唤醒 | 自旋重试 |
+| 开销 | 大（上下文切换）| 小（CPU 流水线停顿）|
+| 适用 | 临界区长 | 临界区极短（单指令）|
+
+**SeqCst 的真正含义**：
+
+```
+SeqCst = "Sequentially Consistent"
+
+所有线程以相同的顺序看到所有 SeqCst 操作。
+
+线程1: A=1(SeqCst)  B=2(SeqCst)
+线程2: 读B=2        读A=1
+
+保证: 如果线程2看到 B=2，则一定看到 A=1
+（不会看到 B=2 但 A=0 的"未来依赖过去"异常）
+```
+
+> **关键洞察**: Lock-Free 不是"无同步"，而是"同步由硬件而非软件实现"。分离逻辑的 Frame Rule 形式化了"每个线程独立操作不相关资源"的直觉。
+</details>
+
+---
+
+> **测验设计来源**: [Bloom Taxonomy 2001] · [RustBelt Paper (POPL 2018)](https://plv.mpi-sws.org/rustbelt/) · [Software Foundations (SF)](https://softwarefoundations.cis.upenn.edu/) · [Iris Tutorial](https://iris-project.org/tutorial-pdfs/iris-lecture-notes.pdf)

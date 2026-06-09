@@ -127,6 +127,12 @@
     - [11.7 边界测试：`panic!` 在 `const fn` 中的限制（编译错误）](#117-边界测试panic-在-const-fn-中的限制编译错误)
     - [10.5 边界测试：`?` 运算符与 `From` 转换的失败（编译错误）](#105-边界测试-运算符与-from-转换的失败编译错误)
     - [10.6 边界测试：`Result` 的 `map_err` 与错误链的累积（逻辑错误）](#106-边界测试result-的-map_err-与错误链的累积逻辑错误)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：`?` 运算符的转换（理解层）](#测验-1-运算符的转换理解层)
+    - [测验 2：自定义错误类型（应用层）](#测验-2自定义错误类型应用层)
+    - [测验 3：忽略 `Result` 的危险（分析层）](#测验-3忽略-result-的危险分析层)
+    - [测验 4：`Option` 与 `Result` 转换（应用层）](#测验-4option-与-result-转换应用层)
+    - [测验 5：错误处理的哲学（评价层）](#测验-5错误处理的哲学评价层)
   - [实践](#实践)
 
 ## 一、权威定义（Definition）
@@ -2364,6 +2370,144 @@ fn main() {
 > 错误传播安全 ⟸ ? 运算符自动转换 ⟸ Try trait
 > 错误类型精确 ⟸ thiserror/anyhow 分层 ⟸ 错误架构
 >
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`?` 运算符的转换（理解层）
+
+`?` 运算符如何处理错误类型不匹配？
+
+- A. 编译错误，必须手动 map_err
+- B. 自动通过 `From` trait 转换
+- C. 运行时 panic
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 自动通过 `From` trait 转换**。
+
+`?` 运算符的语义：
+
+- 若 `Result<T, E>` 是 `Ok(v)`，解包 `v`
+- 若 `Result<T, E>` 是 `Err(e)`，调用 `From::from(e)` 将 `E` 转换为函数返回的错误类型，然后返回
+
+这要求 `E` 实现了 `From<内部错误类型>`。标准库为许多常见错误类型提供了 `From` 实现（如 `io::Error`、`ParseIntError`）。
+</details>
+
+---
+
+### 测验 2：自定义错误类型（应用层）
+
+以下哪种方式最推荐实现自定义错误类型？
+
+- A. 手动实现 `std::error::Error` trait
+- B. 使用 `thiserror` derive 宏
+- C. 使用 `String` 作为错误类型
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 使用 `thiserror` derive 宏**。
+
+`thiserror` 是最常用的错误类型库：
+
+- 自动生成 `Display`、`Error`、`From` 实现
+- 零运行时开销（编译期展开）
+- 支持错误源链（`#[source]`）和透明包装（`#[from]`）
+
+`String` 作为错误类型简单但不结构化；手动实现 `Error` 繁琐且易错。
+</details>
+
+---
+
+### 测验 3：忽略 `Result` 的危险（分析层）
+
+以下代码的问题是什么？
+
+```rust
+fn main() {
+    let f = std::fs::File::open("not_exist.txt");
+    // 后续代码假设文件已打开
+    println!("file opened");
+}
+```
+
+- A. 编译错误
+- B. 运行时 panic（未处理 Err）
+- C. 逻辑错误 — `f` 是 `Result`，未检查是否成功
+
+<details>
+<summary>✅ 答案</summary>
+
+**C. 逻辑错误 — `f` 是 `Result`，未检查是否成功**。
+
+`File::open` 返回 `Result<File, io::Error>`。忽略它不会导致编译错误或 panic，但后续若假设 `f` 是已打开的文件会编译失败。
+
+Rust 编译器会对未使用的 `Result` 发出 `unused_must_use` 警告。正确做法：
+
+```rust
+let f = std::fs::File::open("not_exist.txt")?; // 传播错误
+// 或
+let f = std::fs::File::open("not_exist.txt").expect("open file");
+```
+
+</details>
+
+---
+
+### 测验 4：`Option` 与 `Result` 转换（应用层）
+
+将 `Option<T>` 转换为 `Result<T, E>` 应使用哪个方法？
+
+- A. `.unwrap()`
+- B. `.ok_or(E)`
+- C. `.map(|x| x)`
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. `.ok_or(E)`**。
+
+`Option::ok_or` 和 `ok_or_else` 是标准转换方法：
+
+- `Some(v) -> Ok(v)`
+- `None -> Err(E)`
+
+`ok_or_else` 接收闭包，延迟构造错误值（推荐用于复杂错误）。
+
+```rust
+let opt: Option<i32> = Some(42);
+let res: Result<i32, &str> = opt.ok_or("missing value");
+```
+
+</details>
+
+---
+
+### 测验 5：错误处理的哲学（评价层）
+
+Rust 为什么不用异常（Exception）而用 `Result`？
+
+- A. `Result` 是函数返回类型的一部分，错误路径显式且可组合
+- B. 异常机制在 Rust 中无法实现
+- C. `Result` 比异常运行更快
+
+<details>
+<summary>✅ 答案</summary>
+
+**A. `Result` 是函数返回类型的一部分，错误路径显式且可组合**。
+
+Rust 的设计选择：
+
+- **显式**：`Result<T, E>` 在类型签名中，调用者必须处理错误
+- **可组合**：`map`、`and_then`、`?` 等组合子构建错误传播链
+- **零成本**：成功路径与直接返回值性能相同
+- **类型安全**：编译器强制区分正常/错误路径
+
+虽然异常在某些语言中更方便，但 Rust 认为显式错误处理是系统编程语言的安全基石。
+</details>
+
+---
+
 ## 实践
 
 > **相关资源**:

@@ -58,6 +58,12 @@
     - [10.3 边界测试：关联类型在 trait 边界中的不一致（编译错误）](#103-边界测试关联类型在-trait-边界中的不一致编译错误)
     - [10.4 边界测试：GAT（泛型关联类型）的缺失约束（编译错误）](#104-边界测试gat泛型关联类型的缺失约束编译错误)
   - [实践](#实践)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：关联类型 vs 泛型参数（理解层）](#测验-1关联类型-vs-泛型参数理解层)
+    - [测验 2：GAT（泛型关联类型）（应用层）](#测验-2gat泛型关联类型应用层)
+    - [测验 3：Trait Alias（应用层）](#测验-3trait-alias应用层)
+    - [测验 4：Orphan Rule（分析层）](#测验-4orphan-rule分析层)
+    - [测验 5：关联常量（分析层）](#测验-5关联常量分析层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -676,6 +682,166 @@ fn main() {
 > - [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：关联类型 vs 泛型参数（理解层）
+
+`Iterator` trait 为什么使用关联类型 `Item` 而不是泛型参数 `Item`？
+
+```rust
+trait Iterator {
+    type Item;
+    fn next(&mut self) -> Option<Self::Item>;
+}
+```
+
+- A. 关联类型运行更快
+- B. 每个实现只能指定一个 `Item`，避免 trait bound 爆炸
+- C. 泛型参数不能用于返回值
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 每个实现只能指定一个 `Item`，避免 trait bound 爆炸**。
+
+关联类型与泛型参数的关键区别：
+
+- **关联类型**：`type Item;` —— 每个类型实现 trait 时**唯一确定**
+- **泛型参数**：`trait Foo<T>` —— 一个类型可多次实现（`Foo<A>`、`Foo<B>`）
+
+`Iterator` 使用关联类型，因为给定类型作为迭代器时，其元素类型是唯一的。若用泛型，每次使用都要写 `Iterator<Item=T>`，且可能出现歧义。
+</details>
+
+---
+
+### 测验 2：GAT（泛型关联类型）（应用层）
+
+GAT 解决了什么问题？
+
+```rust
+trait LendingIterator {
+    type Item<'a> where Self: 'a;
+    fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
+}
+```
+
+- A. 允许 trait 有多个关联类型
+- B. 允许关联类型自身带生命周期/泛型参数
+- C. 允许 trait 有默认实现
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 允许关联类型自身带生命周期/泛型参数**。
+
+GAT（Generic Associated Types）是 Rust 1.65 稳定化的重要特性。它允许关联类型有自己的泛型参数：
+
+- `type Item<'a>;` —— 关联类型带生命周期参数
+- 用于实现"出借迭代器"（lending iterator），返回引用而非值
+- 解决传统 `Iterator` 无法返回自引用数据的限制
+
+没有 GAT 时，返回生命周期依赖于 `&mut self` 的元素非常困难。
+</details>
+
+---
+
+### 测验 3：Trait Alias（应用层）
+
+以下 `trait alias` 的作用是什么？
+
+```rust
+trait Numeric = PartialOrd + Add<Output = Self> + Copy;
+```
+
+- A. 定义一个新的 trait 并要求手动实现
+- B. 为 trait bound 组合创建别名，简化泛型约束
+- C. 运行时自动实现这些 trait
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 为 trait bound 组合创建别名，简化泛型约束**。
+
+Trait alias 是 nightly 特性（截至 Rust 1.96 尚未稳定），用于给复杂的 trait bound 组合起短名：
+
+```rust
+fn sum<T: Numeric>(a: T, b: T) -> T { a + b }
+// 等价于
+fn sum<T: PartialOrd + Add<Output = Self> + Copy>(a: T, b: T) -> T { a + b }
+```
+
+注意：trait alias 不创建新 trait，只是语法糖。稳定替代方案：使用 `where` 从句或自定义 trait 加 blanket impl。
+</details>
+
+---
+
+### 测验 4：Orphan Rule（分析层）
+
+以下代码为什么编译失败？
+
+```rust,compile_fail
+impl std::fmt::Display for String {}
+```
+
+- A. `String` 已经实现了 `Display`
+- B. 违反了孤儿规则：trait 和类型都来自外部 crate
+- C. `Display` 不是本地 trait
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 违反了孤儿规则**。
+
+Rust 的 Orphan Rule：
+
+- 允许为外部类型实现本地 trait
+- 允许为本地类型实现外部 trait
+- **禁止**为外部类型实现外部 trait
+
+`String` 和 `Display` 都来自标准库（外部 crate），因此当前 crate 不能为 `String` 实现 `Display`。这防止了两个 crate 独立实现相同组合时产生冲突。
+</details>
+
+---
+
+### 测验 5：关联常量（分析层）
+
+以下代码的输出是什么？
+
+```rust
+trait Config {
+    const MAX_SIZE: usize;
+}
+
+struct Small;
+impl Config for Small {
+    const MAX_SIZE: usize = 100;
+}
+
+fn main() {
+    println!("{}", Small::MAX_SIZE);
+}
+```
+
+- A. 编译错误
+- B. 100
+- C. 0
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 100**。
+
+关联常量（Associated Constants）允许 trait 为每个实现类型定义常量：
+
+- `trait Config { const MAX_SIZE: usize; }` 声明关联常量
+- `impl Config for Small { const MAX_SIZE: usize = 100; }` 提供具体值
+- 通过 `Small::MAX_SIZE` 或 `<Small as Config>::MAX_SIZE` 访问
+
+这与泛型参数不同：关联常量属于 trait 实现的一部分，编译期确定。
+</details>
+
+---
 
 ## 认知路径
 

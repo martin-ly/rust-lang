@@ -5,7 +5,7 @@
 
 > **创建日期**: 2026-02-14
 > **最后更新**: 2026-02-20
-> **Rust 版本**: 1.94.0+ (Edition 2024)
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 映射完成
 > **用途**: 按三大支柱的文档树、概念族↔文档↔Def/Axiom/定理映射、文档↔思维表征映射；支撑层次化检索与双向追溯
 > **上位文档**: [00_COMPREHENSIVE_SUMMARY](./10_00_comprehensive_summary.md)、RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN
@@ -225,7 +225,7 @@ research_notes/
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **适用版本**: Rust 1.94.0+
+> **适用版本**: Rust 1.96.0+
 
 详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
 
@@ -237,7 +237,7 @@ research_notes/
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **适用版本**: Rust 1.94.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点

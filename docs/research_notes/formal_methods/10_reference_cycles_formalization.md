@@ -4,7 +4,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **创建日期**: 2026-03-05
-> **Rust版本**: 1.94.0+
+> **Rust版本**: 1.96.0+
 > **Rust Book对应**: Ch 15.6 Reference Cycles Can Leak Memory
 > **修复**: GAP-CYCLE-01
 
@@ -540,7 +540,7 @@ struct Node {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **适用版本**: Rust 1.94.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点

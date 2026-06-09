@@ -52,6 +52,12 @@
     - [10.4 边界测试：proc\_macro 的 TokenStream 与 hygiene 标识符生成（编译错误）](#104-边界测试proc_macro-的-tokenstream-与-hygiene-标识符生成编译错误)
     - [10.6 边界测试：不可变借用与可变借用的冲突](#106-边界测试不可变借用与可变借用的冲突)
   - [参考来源](#参考来源)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：过程宏的类型（理解层）](#测验-1过程宏的类型理解层)
+    - [测验 2：过程宏的执行时机（应用层）](#测验-2过程宏的执行时机应用层)
+    - [测验 3：syn + quote 工作流（应用层）](#测验-3syn--quote-工作流应用层)
+    - [测验 4：卫生性（Hygiene）（分析层）](#测验-4卫生性hygiene分析层)
+    - [测验 5：Derive 宏的限制（分析层）](#测验-5derive-宏的限制分析层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -698,6 +704,147 @@ fn main() {
 > [来源: [quote crate](https://docs.rs/quote/)]
 > [来源: [proc-macro2 crate](https://docs.rs/proc-macro2/)]
 > [来源: [Rust Compiler Development Guide — Proc Macros](https://rustc-dev-guide.rust-lang.org/)]
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：过程宏的类型（理解层）
+
+以下哪种不属于 Rust 的过程宏？
+
+- A. Derive 宏（`#[derive(Debug)]`）
+- B. Attribute 宏（`#[route("/")]`）
+- C. Function-like 宏（`sql!(SELECT * FROM users)`）
+- D. 声明宏（`macro_rules!`）
+
+<details>
+<summary>✅ 答案</summary>
+
+**D. 声明宏（`macro_rules!`）**。
+
+Rust 有两种宏系统：
+
+- **声明宏（Declarative Macros）**：`macro_rules!`，基于模式匹配和文本替换
+- **过程宏（Procedural Macros）**：Rust 函数，接收 `TokenStream` 并输出 `TokenStream`
+
+过程宏又分为三种：
+
+1. **Derive 宏**：为类型自动生成 trait 实现
+2. **Attribute 宏**：附加到项上，可修改或替换该项
+3. **Function-like 宏**：看起来像函数调用，但由宏处理
+
+</details>
+
+---
+
+### 测验 2：过程宏的执行时机（应用层）
+
+过程宏在编译的哪个阶段执行？
+
+- A. 链接阶段
+- B. 类型检查阶段
+- C. 解析阶段，将 TokenStream 转换为新的 TokenStream
+
+<details>
+<summary>✅ 答案</summary>
+
+**C. 解析阶段，将 TokenStream 转换为新的 TokenStream**。
+
+过程宏在编译早期执行：
+
+1. 源代码被解析为 `TokenStream`
+2. 过程宏接收 `TokenStream`，输出新的 `TokenStream`
+3. 编译器继续处理展开后的代码（宏展开后的代码仍需通过类型检查）
+
+这意味着过程宏**不能**访问类型信息、语义分析结果，只能操作语法树（token）。
+</details>
+
+---
+
+### 测验 3：syn + quote 工作流（应用层）
+
+`syn` 和 `quote` crate 在过程宏中分别负责什么？
+
+- A. `syn` 生成 token，`quote` 解析 Rust 代码
+- B. `syn` 解析 TokenStream 为 AST，`quote` 从模板生成 TokenStream
+- C. 两者都负责代码格式化
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. `syn` 解析 TokenStream 为 AST，`quote` 从模板生成 TokenStream**。
+
+过程宏的标准工作流：
+
+```rust
+// 1. syn 解析输入
+let input = parse_macro_input!(input as DeriveInput);
+
+// 2. 处理 AST（遍历字段、生成代码等）
+let name = &input.ident;
+
+// 3. quote 生成输出
+let expanded = quote! {
+    impl HelloMacro for #name { ... }
+};
+
+// 4. 返回 TokenStream
+proc_macro::TokenStream::from(expanded)
+```
+
+`syn` 让解析输入更简单，`quote!` 让生成代码更直观。
+</details>
+
+---
+
+### 测验 4：卫生性（Hygiene）（分析层）
+
+过程宏生成的标识符是否会意外捕获用户代码中的变量？
+
+- A. 会，过程宏是纯文本替换
+- B. 不会，proc_macro 有独立的命名空间（hygiene）
+- C. 只有在 `quote!` 中使用 `format_ident!` 时才不会
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 不会，proc_macro 有独立的命名空间（hygiene）**。
+
+Rust 过程宏具有**卫生性（hygiene）**：
+
+- 宏生成的标识符与调用处的标识符隔离
+- 宏不能意外引用或遮蔽用户变量
+- 用户也不能意外引用宏内部的私有标识符
+
+这与 C 预处理器不同，C 的 `#define` 是纯文本替换，常导致命名冲突。
+
+例外：使用 `Span::call_site()` 创建的标识符会继承调用处的 hygiene，可能捕获外部名称。
+</details>
+
+---
+
+### 测验 5：Derive 宏的限制（分析层）
+
+Derive 宏能为外部 crate 的类型添加 trait 实现吗？
+
+- A. 能，Derive 宏不受孤儿规则限制
+- B. 不能，Derive 宏只是生成代码，生成的实现仍需遵守孤儿规则
+- C. 能，只要 trait 是本地定义的
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 不能，Derive 宏只是生成代码，生成的实现仍需遵守孤儿规则**。
+
+Derive 宏不是"魔法"——它只是自动编写你本来可以手写的 `impl` 块。因此：
+
+- 生成的 `impl` 必须遵守与普通代码相同的规则
+- 不能为外部类型实现外部 trait（Orphan Rule）
+- 不能绕过借用检查、生命周期规则
+
+例如，`#[derive(Debug)]` 为你的本地类型生成 `impl Debug for YourType`，这是合法的（类型在本地）。
+</details>
+
+---
 
 ## 认知路径
 

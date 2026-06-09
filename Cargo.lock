@@ -2980,6 +2980,7 @@ name = "exercises"
 version = "0.1.0"
 dependencies = [
  "futures",
+ "rayon",
  "tempfile",
  "tokio",
 ]

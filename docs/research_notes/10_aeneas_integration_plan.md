@@ -7,7 +7,7 @@
 > **版本**: v1.0
 > **描述**: Aeneas 验证工具在 Rust 学习项目中的集成计划
 > **状态**: ✅ 已完成
-> **Rust 版本**: 1.94.0+ (Edition 2024)
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 
 ---
 
@@ -398,7 +398,7 @@ Aeneas 工具生态
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **适用版本**: Rust 1.94.0+
+> **适用版本**: Rust 1.96.0+
 
 ### 核心研究点
 >
@@ -419,7 +419,7 @@ Aeneas 工具生态
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-> **适用版本**: Rust 1.94.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点

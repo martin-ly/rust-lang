@@ -4,7 +4,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-28
-> **Rust 版本**: 1.94.0+ (Edition 2024)
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ **100% 完成**（含实质内容判断、形式化衔接指引）
 
 ---
@@ -463,7 +463,7 @@
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **适用版本**: Rust 1.94.0+
+> **适用版本**: Rust 1.96.0+
 
 详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
 
@@ -475,7 +475,7 @@
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-> **适用版本**: Rust 1.94.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点

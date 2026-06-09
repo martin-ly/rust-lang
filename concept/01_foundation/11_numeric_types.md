@@ -45,6 +45,12 @@
     - [10.3 边界测试：`Wrapping` 与 `Saturating` 的语义选择（逻辑错误）](#103-边界测试wrapping-与-saturating-的语义选择逻辑错误)
     - [10.4 边界测试：`NonZeroU32` 的构造与优化假设（编译错误/运行时 panic）](#104-边界测试nonzerou32-的构造与优化假设编译错误运行时-panic)
     - [10.3 边界测试：`Wrapping<T>` 与 `T` 的混用陷阱（编译错误）](#103-边界测试wrappingt-与-t-的混用陷阱编译错误)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：在 Rust 中，`u8` 能表示的最大值是多少？如果执行 `255u8 + 1u8` 的 debug 构建会发生什么？（理解层）](#测验-1在-rust-中u8-能表示的最大值是多少如果执行-255u8--1u8-的-debug-构建会发生什么理解层)
+    - [测验 2：`as` 转换和 `try_into()` 在处理数值溢出时有什么区别？（理解层）](#测验-2as-转换和-try_into-在处理数值溢出时有什么区别理解层)
+    - [测验 3：`Wrapping<u8>(255) + Wrapping<u8>(1)` 的结果是什么？`Wrapping<u8>` 与 `u8` 能直接相加吗？（理解层）](#测验-3wrappingu8255--wrappingu81-的结果是什么wrappingu8-与-u8-能直接相加吗理解层)
+    - [测验 4：为什么 `f64::NAN == f64::NAN` 的值为 `false`？如何判断一个浮点数是否为 NAN？（理解层）](#测验-4为什么-f64nan--f64nan-的值为-false如何判断一个浮点数是否为-nan理解层)
+    - [测验 5：`usize` 的大小由什么决定？在写跨平台代码时，将 `usize` 直接与固定大小的整数类型混用有什么风险？（理解层）](#测验-5usize-的大小由什么决定在写跨平台代码时将-usize-直接与固定大小的整数类型混用有什么风险理解层)
   - [实践](#实践)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -550,6 +556,66 @@ fn main() {
 > 这与 C 的"始终环绕"（UB 仅在 signed overflow）或 Swift 的"默认 panic"不同——Rust 显式区分了两种语义。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/num/struct.Wrapping.html)] ·
 > [来源: [Rust Reference — Integer Overflow](https://doc.rust-lang.org/reference/expressions/operator-expr.html#overflow)]
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：在 Rust 中，`u8` 能表示的最大值是多少？如果执行 `255u8 + 1u8` 的 debug 构建会发生什么？（理解层）
+
+**题目**: 在 Rust 中，`u8` 能表示的最大值是多少？如果执行 `255u8 + 1u8` 的 debug 构建会发生什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`u8` 最大值是 255。debug 构建中整数溢出会触发 panic（panic-on-overflow）；release 构建或使用 `Wrapping(255u8)` 时才会环绕为 0。
+</details>
+
+---
+
+### 测验 2：`as` 转换和 `try_into()` 在处理数值溢出时有什么区别？（理解层）
+
+**题目**: `as` 转换和 `try_into()` 在处理数值溢出时有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`as` 会进行截断转换（例如 `300i32 as u8` 得到 44），静默丢弃高位。`try_into()` 在溢出时返回 `Err`，要求调用方显式处理失败。
+</details>
+
+---
+
+### 测验 3：`Wrapping<u8>(255) + Wrapping<u8>(1)` 的结果是什么？`Wrapping<u8>` 与 `u8` 能直接相加吗？（理解层）
+
+**题目**: `Wrapping<u8>(255) + Wrapping<u8>(1)` 的结果是什么？`Wrapping<u8>` 与 `u8` 能直接相加吗？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+结果是 `Wrapping(0)`（环绕）。`Wrapping<u8>` 与 `u8` 不能直接相加，因为 `Wrapping<T>` 是 newtype，需要 `Wrapping(255u8) + Wrapping(1u8)`。
+</details>
+
+---
+
+### 测验 4：为什么 `f64::NAN == f64::NAN` 的值为 `false`？如何判断一个浮点数是否为 NAN？（理解层）
+
+**题目**: 为什么 `f64::NAN == f64::NAN` 的值为 `false`？如何判断一个浮点数是否为 NAN？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+IEEE 754 规定 NAN 与任何值（包括自身）都不相等。应使用 `f64::is_nan(x)` 判断，而不是 `==`。
+</details>
+
+---
+
+### 测验 5：`usize` 的大小由什么决定？在写跨平台代码时，将 `usize` 直接与固定大小的整数类型混用有什么风险？（理解层）
+
+**题目**: `usize` 的大小由什么决定？在写跨平台代码时，将 `usize` 直接与固定大小的整数类型混用有什么风险？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`usize` 大小由目标平台指针宽度决定（32 位平台 4 字节，64 位平台 8 字节）。与 `u32`/`u64` 混用可能因平台不同导致溢出或类型不匹配。
+</details>
 
 ## 实践
 

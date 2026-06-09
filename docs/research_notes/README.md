@@ -586,7 +586,7 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 
 ## 🆕 Rust 1.94 更新
 
-> **最新版本**: Rust 1.94.0 (2026-03-05)
+> **最新版本**: Rust 1.96.0 (2026-03-05)
 
 - TOML 1.1 支持
 - Cargo.toml 多行内联表

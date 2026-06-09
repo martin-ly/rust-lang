@@ -4,7 +4,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **创建日期**: 2026-03-05
-> **Rust版本**: 1.94.0+
+> **Rust版本**: 1.96.0+
 > **Rust Book对应**: Ch 4.3 The Slice Type
 > **状态**: ✅ 新增 (修复GAP-SLICE-01)
 
@@ -355,7 +355,7 @@ fn dangling_slice() -> &str {
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **适用版本**: Rust 1.94.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点

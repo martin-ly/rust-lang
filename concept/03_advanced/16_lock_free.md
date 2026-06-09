@@ -67,6 +67,11 @@
     - [对应代码示例](#对应代码示例)
     - [建议练习](#建议练习)
   - [导航：下一步去哪？](#导航下一步去哪)
+  - [嵌入式测验](#嵌入式测验)
+    - [测验 1：CAS 循环（记忆层）](#测验-1cas-循环记忆层)
+    - [测验 2：ABA 问题（理解层）](#测验-2aba-问题理解层)
+    - [测验 3：Treiber Stack 实现（应用层）](#测验-3treiber-stack-实现应用层)
+    - [测验 4：Hazard Pointer vs Epoch-Based（分析层）](#测验-4hazard-pointer-vs-epoch-based分析层)
 
 ---
 
@@ -804,3 +809,386 @@ fn main() {}
 | 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](./README.md) 选择其他主题 |
 | 🎓 进入 L4 形式化 | 想理解"为什么"的数学证明 | [L4 形式化](../04_formal/README.md) |
 | 🏗️ 进入 L6 生态 | 想掌握生产工具链 | [L6 生态](../06_ecosystem/README.md) |
+
+---
+
+## 嵌入式测验
+
+### 测验 1：CAS 循环（记忆层）
+
+**题目**: `compare_exchange` 返回 `Ok` 和 `Err` 分别代表什么？
+
+```rust
+let result = atomic.compare_exchange(current, new, Ordering::Acquire, Ordering::Relaxed);
+```
+
+- A. `Ok` 表示交换成功，`Err` 表示交换失败且返回当前值
+- B. `Ok` 表示交换失败，`Err` 表示交换成功
+- C. `Ok` 和 `Err` 都表示交换成功，只是内存序不同
+- D. `compare_exchange` 只返回 `bool`
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 A**。
+
+**`compare_exchange` 语义**：
+
+```rust
+// 原子操作：如果当前值 == expected，则替换为 new，返回 Ok(old)
+//          如果当前值 != expected，返回 Err(actual_current)
+
+match atomic.compare_exchange(expected, new, success_order, failure_order) {
+    Ok(old) => {
+        // 交换成功！old == expected
+        println!("成功替换，旧值: {}", old);
+    }
+    Err(actual) => {
+        // 交换失败，当前值已被其他线程修改为 actual
+        println!("失败，当前值: {}", actual);
+    }
+}
+```
+
+**CAS 循环模式（Lock-Free 核心）**：
+
+```rust
+fn cas_loop(atomic: &AtomicUsize, f: impl Fn(usize) -> usize) {
+    loop {
+        let current = atomic.load(Ordering::Relaxed);
+        let new = f(current);
+
+        match atomic.compare_exchange(current, new, Ordering::Release, Ordering::Relaxed) {
+            Ok(_) => break,  // 成功！
+            Err(_) => continue,  // 失败，重试
+        }
+    }
+}
+```
+
+**为什么叫 "Compare-And-Swap"**：
+
+1. **Compare**: 比较当前值与期望值
+2. **And**: 如果相等
+3. **Swap**: 原子替换为新值
+
+> **关键洞察**: CAS 是 Lock-Free 算法的基石。所有 Lock-Free 数据结构（栈、队列、链表）都基于 CAS 循环实现。
+</details>
+
+---
+
+### 测验 2：ABA 问题（理解层）
+
+**题目**: 以下代码实现了一个 Lock-Free 栈（Treiber Stack）。在注释标记处可能存在什么经典问题？
+
+```rust
+use std::sync::atomic::{AtomicPtr, Ordering};
+use std::ptr;
+
+struct Node<T> {
+    data: T,
+    next: *mut Node<T>,
+}
+
+struct LockFreeStack<T> {
+    head: AtomicPtr<Node<T>>,
+}
+
+impl<T> LockFreeStack<T> {
+    fn pop(&self) -> Option<T> {
+        loop {
+            let head = self.head.load(Ordering::Acquire);
+            if head.is_null() { return None; }
+
+            let next = unsafe { (*head).next };  // ① 读取 next
+
+            // ② CAS：如果 head 没变，更新为 next
+            match self.head.compare_exchange(
+                head, next, Ordering::Release, Ordering::Relaxed
+            ) {
+                Ok(_) => {
+                    return Some(unsafe { ptr::read(&(*head).data) });
+                }
+                Err(_) => continue,
+            }
+        }
+    }
+}
+```
+
+- A. 没有内存泄漏，代码完全正确
+- B. **ABA 问题**: ① 和 ② 之间，head 可能被 pop→push→pop 回到相同地址，但内容已变
+- C. 存在 use-after-free，因为 `ptr::read` 后 node 未释放
+- D. 应该用 `Mutex<Box<Node<T>>>` 替代 `AtomicPtr`
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+**ABA 问题详解**：
+
+```
+时间线:
+  线程A                    线程B                    线程C
+  pop():                  pop():                   push(99):
+  head = Node(1)@0x1000   head = Node(1)@0x1000
+  next = Node(2)@0x2000   next = Node(2)@0x2000
+                           CAS 成功！
+                           head → Node(2)@0x2000
+                           free(Node(1)@0x1000)
+                                                    alloc() → Node(99)@0x1000
+                                                    head → Node(99)@0x1000
+  CAS(head=0x1000, next=0x2000)
+  → 成功！但 head 现在是 Node(99)，不是 Node(1)！
+  → next = Node(2)，但 Node(99).next 可能是任何东西！
+```
+
+**ABA 的危害**：
+
+| 场景 | 结果 |
+|:---|:---|
+| 栈 | `head` 指向已回收内存，导致 use-after-free |
+| 队列 | `tail` 指针跳过有效节点，导致数据丢失 |
+| 链表 | 指针链断裂，遍历到无效内存 |
+
+**解决方案**：
+
+```rust
+// 方案1: 带标签的指针（Tagged Pointer）
+// 高16位作为计数器，每次 CAS 时递增
+struct TaggedPtr<T> {
+    ptr: *mut T,
+    tag: u16,
+}
+
+// 方案2: Hazard Pointer（线程声明"我正在使用这个指针"）
+// 其他线程不能回收被声明的内存
+
+// 方案3: 使用 crossbeam_epoch（Rust 生态标准方案）
+use crossbeam_epoch::{self as epoch, Atomic, Owned};
+
+struct LockFreeStack<T> {
+    head: Atomic<Node<T>>,
+}
+```
+
+> **现实检查**: 手写 Lock-Free 代码极易出错。生产环境优先使用成熟库：`crossbeam`（Rust 标准方案）、`lockfree`（纯 Rust）、`conc`（并发集合）。
+</details>
+
+---
+
+### 测验 3：Treiber Stack 实现（应用层）
+
+**题目**: 使用 `crossbeam_epoch` 实现一个正确的 Lock-Free 栈，以下代码缺少了什么？
+
+```rust
+use crossbeam_epoch::{self as epoch, Atomic, Owned, Shared};
+use std::sync::atomic::Ordering;
+
+struct Node<T> {
+    data: T,
+    next: Atomic<Node<T>>,
+}
+
+struct Stack<T> {
+    head: Atomic<Node<T>>,
+}
+
+impl<T> Stack<T> {
+    fn push(&self, data: T) {
+        let guard = &epoch::pin();
+        let new = Owned::new(Node {
+            data,
+            next: Atomic::null(),
+        });
+        let new = unsafe { new.into_shared(guard) };
+
+        loop {
+            let head = self.head.load(Ordering::Relaxed, guard);
+            unsafe { (*new.as_raw()).next.store(head, Ordering::Relaxed); }
+
+            match self.head.compare_exchange(
+                head, new, Ordering::Release, Ordering::Relaxed, guard
+            ) {
+                Ok(_) => break,
+                Err(_) => continue,
+            }
+        }
+    }
+
+    fn pop(&self) -> Option<T> {
+        let guard = &epoch::pin();
+
+        loop {
+            let head = self.head.load(Ordering::Acquire, guard);
+            if head.is_null() { return None; }
+
+            let next = unsafe { head.deref().next.load(Ordering::Relaxed, guard) };
+
+            match self.head.compare_exchange(
+                head, next, Ordering::Release, Ordering::Relaxed, guard
+            ) {
+                Ok(_) => {
+                    // 问题在这里！
+                    return Some(unsafe { ptr::read(&head.deref().data) });
+                }
+                Err(_) => continue,
+            }
+        }
+    }
+}
+```
+
+- A. 代码正确，没有缺失
+- B. `pop` 后需要使用 `guard.defer_destroy(head)` 延迟释放内存
+- C. 缺少 `Send` / `Sync` 实现
+- D. 应该用 `Mutex` 替代 `Atomic`
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+**Epoch-Based Memory Reclamation（EBR）原理**：
+
+```rust
+// 问题：pop 后 node 内存立即释放，但其他线程可能还在读取它！
+// 解决方案：延迟释放，直到确认没有线程在访问
+
+Ok(_) => {
+    // 标记 node 为待删除，但不是立即 free
+    unsafe { guard.defer_destroy(head); }
+    return Some(unsafe { ptr::read(&head.deref().data) });
+}
+```
+
+**EBR 的三阶段**：
+
+```
+Epoch 0: 线程A push(1), push(2)
+         head → 2 → 1 → null
+
+Epoch 1: 线程B pop() → 返回 2
+         head → 1 → null
+         线程B: defer_destroy(node_2)  // 不立即释放！
+
+Epoch 2: 所有线程推进 epoch
+         确认没有线程在 Epoch 0/1 读取过 node_2
+         安全回收 node_2
+```
+
+**完整修复后的 `pop`**：
+
+```rust
+fn pop(&self) -> Option<T> {
+    let guard = &epoch::pin();
+
+    loop {
+        let head = self.head.load(Ordering::Acquire, guard);
+        if head.is_null() { return None; }
+
+        let next = unsafe { head.deref().next.load(Ordering::Relaxed, guard) };
+
+        match self.head.compare_exchange(
+            head, next, Ordering::Release, Ordering::Relaxed, guard
+        ) {
+            Ok(_) => {
+                unsafe {
+                    // ① 提取数据
+                    let data = ptr::read(&head.deref().data);
+                    // ② 延迟释放节点内存（关键！）
+                    guard.defer_destroy(head);
+                    return Some(data);
+                }
+            }
+            Err(_) => continue,
+        }
+    }
+}
+```
+
+**为什么 `defer_destroy` 安全**：
+
+| 机制 | 说明 |
+|:---|:---|
+| `epoch::pin()` | 线程"钉住"当前 epoch，声明"我正在访问共享数据" |
+| `defer_destroy` | 将内存加入"待释放列表"，绑定到当前 epoch |
+| 全局 epoch 推进 | 当所有线程离开旧 epoch，旧 epoch 的内存安全释放 |
+
+> **crossbeam_epoch 是 Rust Lock-Free 的标准方案**。它处理了 ABA、内存回收、Hazard Pointer 等所有复杂问题，且 API 安全（不需要 unsafe）。
+</details>
+
+---
+
+### 测验 4：Hazard Pointer vs Epoch-Based（分析层）
+
+**题目**: 在高并发场景（100+ 线程，大量 push/pop）下，`crossbeam_epoch` 的 EBR 和手动 Hazard Pointer 相比，各有什么优劣？
+
+- A. EBR 总是更好，没有缺点
+- B. Hazard Pointer 内存回收更及时，EBR 可能内存膨胀
+- C. EBR 需要全局 epoch 同步，线程数多时成为瓶颈
+- D. B 和 C 都正确
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 D**。
+
+**EBR vs Hazard Pointer 对比**：
+
+| 特性 | Epoch-Based (crossbeam) | Hazard Pointer |
+|:---|:---|:---|
+| **内存回收延迟** | 可能延迟多个 epoch（毫秒级） | 几乎即时（线程释放 HP 后立即可回收）|
+| **线程扩展性** | 全局 epoch 计数器，线程多时竞争 | 无全局状态，完全线程本地 |
+| **实现复杂度** | 简单（库已封装） | 复杂（需手动管理 HP 数组）|
+| **内存开销** | 每个线程一个 epoch 记录 | 每个线程一个 HP 数组（通常 2-4 个槽位）|
+| **最坏情况** | 某线程长期 pin，导致内存不释放 | 某线程不释放 HP，导致对应内存不释放 |
+
+**EBR 的内存膨胀问题**：
+
+```rust
+// 极端场景：100 个线程，每个线程每秒 1M 操作
+// 某个线程因 GC 停顿长期 pin 在 epoch N
+// 所有 epoch N 的内存都无法释放 → 内存泄漏（伪）
+
+// 解决方案：
+// 1. 限制每个 epoch 的待释放列表大小
+// 2. 定期强制推进 epoch（即使有线程 pinned）
+// 3. 使用自适应 epoch 间隔
+```
+
+**Hazard Pointer 的实现要点**：
+
+```rust
+// 每个线程维护一个 HP 数组
+thread_local! {
+    static HAZARD_POINTERS: RefCell<Vec<AtomicPtr<u8>>> = ...;
+}
+
+// 读取共享指针前：
+hp[0].store(ptr as *mut u8, Ordering::SeqCst);
+// 再次验证 ptr 是否仍有效
+if ptr != atomic.load(Ordering::Acquire) { retry; }
+
+// 使用完成后：
+hp[0].store(null_mut(), Ordering::SeqCst);
+
+// 回收线程扫描所有 HP 数组，只释放不在任何 HP 中的内存
+```
+
+**Rust 生态选择指南**：
+
+| 场景 | 推荐方案 |
+|:---|:---|
+| 通用 Lock-Free 数据结构 | `crossbeam_epoch` |
+| 内存敏感、延迟要求低 | `crossbeam_epoch` + 调参 |
+| 极高并发、内存回收延迟敏感 | `conc` (Hazard Pointer) |
+| 简单计数器/标志位 | `std::sync::atomic`（无需 EBR/HP）|
+
+> **核心洞察**: Lock-Free 不等于无成本。EBR 和 HP 都有内存开销和延迟。在 99% 的场景下，`Mutex` 或 `RwLock` 的性能已经足够好，且代码简单安全。只在"锁争用极高 + 延迟敏感"时才需要 Lock-Free。
+</details>
+
+---
+
+> **测验设计来源**: [Bloom Taxonomy 2001] · [Rust Atomics and Locks](https://marabos.nl/atomics/) · [crossbeam docs](https://docs.rs/crossbeam/) · [1024cores - Lock-Free Algorithms](https://www.1024cores.net/)

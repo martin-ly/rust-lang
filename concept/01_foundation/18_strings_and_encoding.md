@@ -52,6 +52,12 @@
     - [10.4 边界测试：字符串切片的字符边界（运行时 panic）](#104-边界测试字符串切片的字符边界运行时-panic)
     - [10.5 边界测试：`from_utf8_unchecked` 的无效 UTF-8（运行时 UB）](#105-边界测试from_utf8_unchecked-的无效-utf-8运行时-ub)
     - [10.3 边界测试：`OsStr` 与 `str` 的隐式转换边界（编译错误）](#103-边界测试osstr-与-str-的隐式转换边界编译错误)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：`String` 与 `&str` 在所有权和可变性上的核心区别是什么？（理解层）](#测验-1string-与-str-在所有权和可变性上的核心区别是什么理解层)
+    - [测验 2：`String::from("hello")` 和 `"hello".to_string()` 功能是否相同？（理解层）](#测验-2stringfromhello-和-helloto_string-功能是否相同理解层)
+    - [测验 3：`OsStr`/`OsString` 与 `str`/`String` 的主要区别是什么？为什么不能直接比较它们？（理解层）](#测验-3osstrosstring-与-strstring-的主要区别是什么为什么不能直接比较它们理解层)
+    - [测验 4：`CString` 与 `String` 在用途上有什么不同？为什么 FFI 中常用 `CString`？（理解层）](#测验-4cstring-与-string-在用途上有什么不同为什么-ffi-中常用-cstring理解层)
+    - [测验 5：对 `String` 进行索引（如 `s[0]`）在 Rust 中合法吗？为什么？如何安全地获取字符串中的字符？（理解层）](#测验-5对-string-进行索引如-s0在-rust-中合法吗为什么如何安全地获取字符串中的字符理解层)
   - [实践](#实践)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -729,6 +735,66 @@ fn main() {
 > 这与 Go 的 `string`（底层是字节切片，可能非 UTF-8）或 Python 3 的 `str`（强制 Unicode）不同——Rust 的分离类型系统显式标记了编码风险。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/ffi/struct.OsStr.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html)]
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`String` 与 `&str` 在所有权和可变性上的核心区别是什么？（理解层）
+
+**题目**: `String` 与 `&str` 在所有权和可变性上的核心区别是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`String` 拥有堆上分配的可变 UTF-8 缓冲区；`&str` 是借用某处 UTF-8 数据的切片，不可变，不拥有数据。
+</details>
+
+---
+
+### 测验 2：`String::from("hello")` 和 `"hello".to_string()` 功能是否相同？（理解层）
+
+**题目**: `String::from("hello")` 和 `"hello".to_string()` 功能是否相同？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+功能相同，都会从 `&str` 创建一个拥有的 `String`。性能上也基本相同。
+</details>
+
+---
+
+### 测验 3：`OsStr`/`OsString` 与 `str`/`String` 的主要区别是什么？为什么不能直接比较它们？（理解层）
+
+**题目**: `OsStr`/`OsString` 与 `str`/`String` 的主要区别是什么？为什么不能直接比较它们？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`OsStr` 是平台相关字符串，可能包含非 UTF-8 字节；`str` 要求严格 UTF-8。两者类型不同，不能直接比较，转换需用 `to_str()` 返回 `Option`。
+</details>
+
+---
+
+### 测验 4：`CString` 与 `String` 在用途上有什么不同？为什么 FFI 中常用 `CString`？（理解层）
+
+**题目**: `CString` 与 `String` 在用途上有什么不同？为什么 FFI 中常用 `CString`？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`CString` 保证以 NUL 字节结尾且内部不含额外 NUL，用于与 C 语言交互。`String` 不保证结尾有 NUL。
+</details>
+
+---
+
+### 测验 5：对 `String` 进行索引（如 `s[0]`）在 Rust 中合法吗？为什么？如何安全地获取字符串中的字符？（理解层）
+
+**题目**: 对 `String` 进行索引（如 `s[0]`）在 Rust 中合法吗？为什么？如何安全地获取字符串中的字符？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+不合法，因为 UTF-8 是多字节编码，字节索引不对应字符边界。应使用 `s.chars().nth(n)` 或按字节切片 `&s[byte_start..byte_end]` 且确保在字符边界。
+</details>
 
 ## 实践
 

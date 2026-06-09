@@ -19,7 +19,7 @@
 > - 添加类型约束生成和求解详细算法
 > - 增强 Curry-Howard 对应（依赖类型、const 泛型关联）
 > - 添加 8 个详细反例分析
-> **Rust 版本**: 1.94.0+ (Edition 2024)
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 已增强论证深度 | 理论完整性提升
 
 ---
@@ -124,7 +124,7 @@
     - [类型系统改进](#类型系统改进)
     - [Rust 1.93.0 补充](#rust-1930-补充)
     - [低优先级扩展（形式化占位）](#低优先级扩展形式化占位)
-  - [🆕 Rust 1.94.0 更新内容 {#-rust-1940-更新内容}](#-rust-1940-更新内容--rust-1940-更新内容)
+  - [🆕 Rust 1.96.0 更新内容 {#-rust-1940-更新内容}](#-rust-1940-更新内容--rust-1940-更新内容)
     - [1. ControlFlow::ok() - 控制流与Option转换](#1-controlflowok---控制流与option转换)
     - [2. RangeToInclusive 类型](#2-rangetoinclusive-类型)
     - [3. int\_format\_into - 高性能整数格式化](#3-int_format_into---高性能整数格式化)
@@ -2957,7 +2957,7 @@ $。
 
 **Def DEREF-NULL1（deref_nullptr deny）**：1.93 中 `deref_nullptr` lint 默认 deny；对 `*const T`/`*mut T` 解引用需非空保证；与类型系统衔接：裸指针解引用 $*p$ 在 $p$ 可能为 null 时产生 lint 错误。
 
-## 🆕 Rust 1.94.0 更新内容 {#-rust-1940-更新内容}
+## 🆕 Rust 1.96.0 更新内容 {#-rust-1940-更新内容}
 
 > **[来源: POPL - Type Theory Advances]**
 > **发布日期**: 2026-03-05
@@ -3224,7 +3224,7 @@ fn truncate_front(&mut self, len: usize)
 
 **维护者**: Rust Type Theory Research Group
 **最后更新**: 2026-03-11
-**Rust 版本**: 1.94.0
+**Rust 版本**: 1.96.0
 **状态**: ✅ **已增强论证深度**
 
 ---
@@ -3266,7 +3266,7 @@ fn truncate_front(&mut self, len: usize)
 ## 🆕 Rust 1.94 深度整合更新
 
 > **[来源: Wikipedia - Type System]**
-> **适用版本**: Rust 1.94.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点

@@ -1691,6 +1691,158 @@ fn main() {
 
 > **修正**: Builder 模式的**链式调用**在 Rust 中需处理所有权：`fn name(mut self, ...)` 消耗 `self` 并返回新的 `Self`，旧的 `self` 不可用。修复：1) `fn name(&mut self, ...)` — 借用，支持链式但不返回 `Self`（需分开调用：`builder.name(...); builder.age(...);`）；2) `fn name(mut self, ...) -> Self` — 消耗式，但要求一次性链式调用：`Builder::new().name(...).age(...).build()`；3) `fn name(self, ...) -> Self` — 无 `mut`，在函数内重新绑定。Rust 的 builder 模式通常采用**消耗式**（`mut self`），因为构建完成后 builder 不再需要。这与 Java 的 builder（总是返回 `this`，无所有权问题）或 Python 的 builder（同样无所有权）不同——Rust 的 builder 需显式处理移动语义。[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/creational/builder.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：RAII 模式（理解层）
+
+RAII 在 Rust 中最直接的体现是什么？
+
+- A. 使用 `try/finally` 块确保资源释放
+- B. `Drop` trait 在值离开作用域时自动调用
+- C. 手动调用 `free()` 释放内存
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. `Drop` trait 在值离开作用域时自动调用**。
+
+RAII（Resource Acquisition Is Initialization）是 Rust 资源管理的核心：
+
+- 资源在构造时获取（如 `File::open`）
+- 资源在析构时释放（`Drop::drop` 自动关闭文件描述符）
+- 无论正常返回还是 panic，都会保证调用 `drop`
+
+与 Java 的 `try-with-resources` 或 Go 的 `defer` 不同，Rust 的 RAII 是**编译期保证**的，无需显式语法。
+</details>
+
+---
+
+### 测验 2：Typestate 模式（应用层）
+
+Typestate 模式利用 Rust 的什么特性来编码状态机？
+
+- A. 运行时反射
+- B. 所有权和类型系统
+- C. 全局变量
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 所有权和类型系统**。
+
+Typestate 将对象的不同状态编码为不同的类型：
+
+```rust
+struct DoorClosed;
+struct DoorOpen;
+
+impl DoorClosed { fn open(self) -> DoorOpen { DoorOpen } }
+impl DoorOpen { fn close(self) -> DoorClosed { DoorClosed } }
+```
+
+- 只有 `DoorClosed` 能调用 `open`
+- 只有 `DoorOpen` 能调用 `close`
+- 错误的状态转换在编译期被拒绝
+
+这是 Rust 类型系统替代运行时状态检查的典范。
+</details>
+
+---
+
+### 测验 3：Builder 模式与所有权（应用层）
+
+Rust 中 Builder 模式最常用的消费方式是什么？
+
+- A. `fn name(&self, ...) -> &Self`（借用并返回引用）
+- B. `fn name(mut self, ...) -> Self`（消耗式链式调用）
+- C. `fn name(self, ...) -> Self`（不修改 self）
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. `fn name(mut self, ...) -> Self`（消耗式链式调用）**。
+
+Rust Builder 的经典写法：
+
+```rust
+impl Builder {
+    fn name(mut self, name: String) -> Self {
+        self.name = name;
+        self
+    }
+}
+
+let person = Builder::new().name("Alice".into()).age(30).build();
+```
+
+`mut self` 允许修改字段，返回 `Self` 支持链式调用。Builder 被消费（move）不是问题，因为构建完成后不再需要它。
+</details>
+
+---
+
+### 测验 4：Newtype 模式（分析层）
+
+Newtype 模式的主要目的是什么？
+
+```rust
+struct UserId(u64);
+struct ProductId(u64);
+```
+
+- A. 减少内存占用
+- B. 在编译期区分不同语义，防止单位混淆
+- C. 让类型实现更多方法
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 在编译期区分不同语义，防止单位混淆**。
+
+Newtype 模式：
+
+- `UserId` 和 `ProductId` 运行时都是 `u64`（零成本）
+- 编译器视它们为完全不同的类型
+- 防止 `process_user(product_id)` 这类错误
+
+其他用途：
+
+- 为外部类型实现本地 trait（绕过 Orphan Rule）
+- 限制 API（如 `NonZeroU32`）
+- 添加类型安全的不变量
+
+</details>
+
+---
+
+### 测验 5：状态机 vs Typestate（评价层）
+
+以下哪种情况更适合传统枚举状态机而非 Typestate？
+
+- A. 状态数量固定，转换规则严格
+- B. 运行时状态动态变化，转换规则复杂且依赖外部输入
+- C. 需要在编译期消除所有非法状态转换
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 运行时状态动态变化，转换规则复杂且依赖外部输入**。
+
+Typestate 最适合：
+
+- 状态少、转换规则清晰
+- 非法转换可在编译期消除
+
+传统枚举状态机更适合：
+
+- 状态多、转换复杂、依赖运行时输入
+- 需要运行时反序列化状态
+- 状态转换图需要动态修改
+
+实践中两者常结合：Typestate 编码核心不变量，枚举处理运行时变体。
+</details>
+
+---
+
 ## 认知路径
 
 > **认知路径**: 从 Rust 核心语言特性出发，经由 **Design Patterns（设计模式）** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。

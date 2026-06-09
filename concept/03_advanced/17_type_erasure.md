@@ -55,6 +55,12 @@
     - [10.3 边界测试：`dyn Trait` 与 `Sized` 边界的冲突（编译错误）](#103-边界测试dyn-trait-与-sized-边界的冲突编译错误)
     - [10.4 边界测试：dyn Trait 的 Sized 要求与泛型约束（编译错误）](#104-边界测试dyn-trait-的-sized-要求与泛型约束编译错误)
     - [10.6 边界测试：所有权移动后的再次使用](#106-边界测试所有权移动后的再次使用)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：`dyn Trait` 的大小为什么在编译时未知？它如何被实际使用？（理解层）](#测验-1dyn-trait-的大小为什么在编译时未知它如何被实际使用理解层)
+    - [测验 2：`&dyn Trait` 在内存中的布局是什么？（理解层）](#测验-2dyn-trait-在内存中的布局是什么理解层)
+    - [测验 3：一个 trait 要成为"对象安全"（object-safe）需要避免哪些特征？（理解层）](#测验-3一个-trait-要成为对象安全object-safe需要避免哪些特征理解层)
+    - [测验 4：`Box<dyn Any>` 如何安全地向下转换回原始类型？（理解层）](#测验-4boxdyn-any-如何安全地向下转换回原始类型理解层)
+    - [测验 5：类型擦除的主要优势是什么？代价又是什么？（理解层）](#测验-5类型擦除的主要优势是什么代价又是什么理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -736,6 +742,66 @@ fn main() {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`dyn Trait` 的大小为什么在编译时未知？它如何被实际使用？（理解层）
+
+**题目**: `dyn Trait` 的大小为什么在编译时未知？它如何被实际使用？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+因为实现了 Trait 的具体类型大小各异。使用时通常放在指针后面：`Box<dyn Trait>`、`&dyn Trait` 或 `Arc<dyn Trait>`。
+</details>
+
+---
+
+### 测验 2：`&dyn Trait` 在内存中的布局是什么？（理解层）
+
+**题目**: `&dyn Trait` 在内存中的布局是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+胖指针：一个指向数据的指针和一个指向 vtable 的指针。vtable 包含 trait 方法的实现和类型元数据。
+</details>
+
+---
+
+### 测验 3：一个 trait 要成为"对象安全"（object-safe）需要避免哪些特征？（理解层）
+
+**题目**: 一个 trait 要成为"对象安全"（object-safe）需要避免哪些特征？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+通常不能有泛型方法（含 `<T>` 的方法）、关联常量、返回 `Self` 的方法，除非使用 `where Self: Sized` 排除。
+</details>
+
+---
+
+### 测验 4：`Box<dyn Any>` 如何安全地向下转换回原始类型？（理解层）
+
+**题目**: `Box<dyn Any>` 如何安全地向下转换回原始类型？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+使用 `downcast_ref::<T>()` 或 `downcast::<T>()`，它们依赖 `TypeId` 在运行时检查类型是否匹配，失败返回 `None` 或 `Err`。
+</details>
+
+---
+
+### 测验 5：类型擦除的主要优势是什么？代价又是什么？（理解层）
+
+**题目**: 类型擦除的主要优势是什么？代价又是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+优势是统一接口、解耦代码、支持运行时多态。代价是动态分发开销和失去静态类型信息，可能降低内联优化机会。
+</details>
 
 ## 认知路径
 

@@ -350,7 +350,7 @@ $$
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **适用版本**: Rust 1.94.0+
+> **适用版本**: Rust 1.96.0+
 
 详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
 
@@ -362,7 +362,7 @@ $$
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **适用版本**: Rust 1.94.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点

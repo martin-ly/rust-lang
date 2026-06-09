@@ -4,7 +4,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2025-12-25
 > **最后更新**: 2026-02-20
-> **Rust 版本**: 1.94.0+ (Edition 2024) ✅
+> **Rust 版本**: 1.96.0+ (Edition 2024) ✅
 > **状态**: ✅ **证明索引 100% 完成**（105+ 证明已收录，formal_methods Phase 1–6 全部补全）
 
 ---
@@ -900,7 +900,7 @@
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **最新版本**: Rust 1.94.0 (2026-03-05)
+> **最新版本**: Rust 1.96.0 (2026-03-05)
 
 - TOML 1.1 支持
 - Cargo.toml 多行内联表
@@ -916,7 +916,7 @@
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **适用版本**: Rust 1.94.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点

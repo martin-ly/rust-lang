@@ -50,6 +50,12 @@
     - [10.5 边界测试：`serde` 的 `skip_serializing_if` 与 `Option` 的交互（逻辑错误）](#105-边界测试serde-的-skip_serializing_if-与-option-的交互逻辑错误)
     - [10.3 边界测试：serde 的私有字段与反序列化失败（运行时错误）](#103-边界测试serde-的私有字段与反序列化失败运行时错误)
     - [10.4 边界测试：`serde` 的枚举标签与外部标签冲突（运行时反序列化失败）](#104-边界测试serde-的枚举标签与外部标签冲突运行时反序列化失败)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：如何让 Serde 在序列化时将 Rust 字段名 `user_name` 映射为 JSON 中的 `userName`？（理解层）](#测验-1如何让-serde-在序列化时将-rust-字段名-user_name-映射为-json-中的-username理解层)
+    - [测验 2：枚举的 `#[serde(tag = "type")]` 属性会产生怎样的 JSON 结构？（理解层）](#测验-2枚举的-serdetag--type-属性会产生怎样的-json-结构理解层)
+    - [测验 3：`#[serde(untagged)]` 的序列化/反序列化行为有什么风险和适用场景？（理解层）](#测验-3serdeuntagged-的序列化反序列化行为有什么风险和适用场景理解层)
+    - [测验 4：如果希望字段在 JSON 中缺失时使用默认值，应该如何配置？（理解层）](#测验-4如果希望字段在-json-中缺失时使用默认值应该如何配置理解层)
+    - [测验 5：`serde_json::to_string` 和 `serde_json::to_string_pretty` 输出有什么区别？（理解层）](#测验-5serde_jsonto_string-和-serde_jsonto_string_pretty-输出有什么区别理解层)
   - [实践](#实践)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -801,6 +807,66 @@ fn main() {
 > [Rust Standard Library](https://doc.rust-lang.org/std/) ·
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：如何让 Serde 在序列化时将 Rust 字段名 `user_name` 映射为 JSON 中的 `userName`？（理解层）
+
+**题目**: 如何让 Serde 在序列化时将 Rust 字段名 `user_name` 映射为 JSON 中的 `userName`？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+使用 `#[serde(rename = "userName")]` 属性标注字段。
+</details>
+
+---
+
+### 测验 2：枚举的 `#[serde(tag = "type")]` 属性会产生怎样的 JSON 结构？（理解层）
+
+**题目**: 枚举的 `#[serde(tag = "type")]` 属性会产生怎样的 JSON 结构？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+产生内部标签结构，如 `Message::Text { content }` 序列化为 `{"type":"Text","content":"..."}`。
+</details>
+
+---
+
+### 测验 3：`#[serde(untagged)]` 的序列化/反序列化行为有什么风险和适用场景？（理解层）
+
+**题目**: `#[serde(untagged)]` 的序列化/反序列化行为有什么风险和适用场景？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+无标签表示按变体顺序依次尝试匹配。风险是顺序敏感、可能错误匹配；适用场景是与没有类型标签的弱类型 JSON 交互。
+</details>
+
+---
+
+### 测验 4：如果希望字段在 JSON 中缺失时使用默认值，应该如何配置？（理解层）
+
+**题目**: 如果希望字段在 JSON 中缺失时使用默认值，应该如何配置？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+使用 `#[serde(default)]`。若需要具体默认值，可用 `#[serde(default = "path")]` 或 `#[default = ...]` 配合 Default trait。
+</details>
+
+---
+
+### 测验 5：`serde_json::to_string` 和 `serde_json::to_string_pretty` 输出有什么区别？（理解层）
+
+**题目**: `serde_json::to_string` 和 `serde_json::to_string_pretty` 输出有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`to_string` 输出紧凑 JSON（无多余空白），`to_string_pretty` 输出格式化后的易读 JSON。
+</details>
 
 ## 实践
 

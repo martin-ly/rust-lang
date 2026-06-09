@@ -5,7 +5,7 @@
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-27
 > **更新内容**: 添加数据竞争完整定义 (Def 1.6)；添加同步原语定义 (Def 1.7)
-> **Rust 版本**: 1.94.0+ (Edition 2024)
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 已完成 (Week 1 任务 P1-W1-T2)
 > **六篇并表**: [README §formal_methods 六篇并表](README.md#formal_methods-六篇并表) 第 2 行（借用）
 
@@ -1909,7 +1909,7 @@ Polonius；[FLS Ch. 15.4 Borrowing](https://spec.ferrocene.dev/ownership-and-dec
 ## 🆕 Rust 1.94 深度整合更新
 >
 > **[来源: [crates.io](https://crates.io/)]**
-> **适用版本**: Rust 1.94.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点

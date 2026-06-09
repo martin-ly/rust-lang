@@ -473,7 +473,7 @@ TODO    和相关定义    命名规范  Rust测试  填写描述
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **最新版本**: Rust 1.94.0 (2026-03-05)
+> **最新版本**: Rust 1.96.0 (2026-03-05)
 
 - TOML 1.1 支持
 - Cargo.toml 多行内联表
@@ -489,7 +489,7 @@ TODO    和相关定义    命名规范  Rust测试  填写描述
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **适用版本**: Rust 1.94.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点

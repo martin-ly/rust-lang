@@ -66,6 +66,11 @@
     - [对应代码示例](#对应代码示例)
     - [建议练习](#建议练习)
   - [导航：下一步去哪？](#导航下一步去哪)
+  - [嵌入式测验](#嵌入式测验)
+    - [测验 1：原子操作基础（记忆层）](#测验-1原子操作基础记忆层)
+    - [测验 2：内存序（理解层）](#测验-2内存序理解层)
+    - [测验 3：自旋锁实现（应用层）](#测验-3自旋锁实现应用层)
+    - [测验 4：SeqCst 的必要性（分析层）](#测验-4seqcst-的必要性分析层)
 
 ---
 
@@ -867,3 +872,343 @@ fn main() {
 | 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](./README.md) 选择其他主题 |
 | 🎓 进入 L4 形式化 | 想理解"为什么"的数学证明 | [L4 形式化](../04_formal/README.md) |
 | 🏗️ 进入 L6 生态 | 想掌握生产工具链 | [L6 生态](../06_ecosystem/README.md) |
+
+---
+
+## 嵌入式测验
+
+### 测验 1：原子操作基础（记忆层）
+
+**题目**: `AtomicUsize::fetch_add(1, Ordering::Relaxed)` 与 `load()` + `store()` 的组合有什么区别？
+
+- A. 没有区别，两者都保证原子性
+- B. `fetch_add` 是原子操作，`load` + `store` 组合在多线程下可能丢失更新
+- C. `load` + `store` 更快，应该优先使用
+- D. `fetch_add` 只能用于整数类型，`load`/`store` 可用于所有类型
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+**非原子组合的"丢失更新"问题**：
+
+```rust
+use std::sync::atomic::{AtomicUsize, Ordering};
+use std::thread;
+
+// 错误示范：非原子递增
+let counter = AtomicUsize::new(0);
+let c = &counter;
+
+thread::scope(|s| {
+    for _ in 0..10 {
+        s.spawn(|| {
+            let val = c.load(Ordering::Relaxed);  // ① 读取: 0
+            // ② 此处其他线程可能已修改值！
+            c.store(val + 1, Ordering::Relaxed);  // ③ 写入: 1（覆盖了其他线程的更新）
+        });
+    }
+});
+
+// 结果可能 < 10，因为更新被覆盖！
+```
+
+**正确的原子递增**：
+
+```rust
+// fetch_add 是单一原子操作：读取-修改-写入不可中断
+counter.fetch_add(1, Ordering::Relaxed);  // 保证结果 = 10
+```
+
+**Rust 原子类型**：
+
+| 类型 | 适用场景 |
+|:---|:---|
+| `AtomicBool` | 标志位、开关 |
+| `AtomicUsize`/`AtomicIsize` | 计数器、索引 |
+| `AtomicU32`/`AtomicI32` 等 | 精确大小的计数器 |
+| `AtomicPtr<T>` | 无锁数据结构（指针交换）|
+
+> **核心原则**: "读取-修改-写入"必须在一个原子操作中完成，否则必然出现 race condition。
+</details>
+
+---
+
+### 测验 2：内存序（理解层）
+
+**题目**: 以下代码中，如果线程1使用 `Relaxed` 而线程2使用 `Acquire`，可能出什么问题？
+
+```rust
+use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
+
+static READY: AtomicBool = AtomicBool::new(false);
+static DATA: AtomicUsize = AtomicUsize::new(0);
+
+// 线程1
+fn producer() {
+    DATA.store(42, Ordering::Relaxed);
+    READY.store(true, Ordering::Relaxed);  // Relaxed！
+}
+
+// 线程2
+fn consumer() {
+    while !READY.load(Ordering::Acquire) {}  // Acquire
+    println!("{}", DATA.load(Ordering::Relaxed));
+}
+```
+
+- A. 没有问题，Relaxed + Acquire 组合是安全的
+- B. 可能打印 0，因为 `DATA.store` 可能重排到 `READY.store` 之后（对消费者可见）
+- C. 会死锁，因为 `Relaxed` 不能保证 `READY` 的修改被其他线程看到
+- D. 编译错误，Relaxed 和 Acquire 不能混用
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+**内存序的可见性问题**：
+
+```
+线程1 (生产者)                线程2 (消费者)
+------------                 ------------
+DATA = 42                    while !READY: spin
+READY = true  ← 但编译器/CPU  看到 READY = true
+可能重排为:                     读取 DATA → 可能是 0！
+READY = true
+DATA = 42
+```
+
+**为什么 `Relaxed` 会出问题**：
+
+`Relaxed` 只保证原子性，不保证**操作顺序**对其他线程可见。编译器和 CPU 可以重排 `DATA.store` 和 `READY.store`。
+
+**修复方案 — Release/Acquire 配对**：
+
+```rust
+fn producer() {
+    DATA.store(42, Ordering::Relaxed);
+    READY.store(true, Ordering::Release);  // Release: 之前的写入不会重排到之后
+}
+
+fn consumer() {
+    while !READY.load(Ordering::Acquire) {}  // Acquire: 之后的读取不会重排到之前
+    println!("{}", DATA.load(Ordering::Relaxed));  // 保证看到 42
+}
+```
+
+**内存序速查表**：
+
+```mermaid
+graph LR
+    A[Relaxed] --> B[Acquire]
+    A --> C[Release]
+    B --> D[AcqRel]
+    C --> D
+    D --> E[SeqCst]
+
+    style A fill:#ffcccc
+    style E fill:#ccffcc
+```
+
+| 内存序 | 保证 | 性能 | 场景 |
+|:---|:---|:---:|:---|
+| `Relaxed` | 仅原子性 | ⚡ 最快 | 独立计数器（无数据依赖）|
+| `Acquire` | 后续读不提前 | 🔒 | 锁的获取端 |
+| `Release` | 之前写不延后 | 🔒 | 锁的释放端 |
+| `AcqRel` | Acquire + Release | 🔒 | CAS 循环（同时读写）|
+| `SeqCst` | 全局顺序一致 | 🐢 最慢 | 多原子变量间有复杂依赖 |
+
+> **90% 法则**: 使用 `Release`/`Acquire` 配对处理 90% 的场景。`SeqCst` 只在"多个独立原子变量间有逻辑依赖"时才需要。
+</details>
+
+---
+
+### 测验 3：自旋锁实现（应用层）
+
+**题目**: 以下是一个基于 `AtomicBool` 的自旋锁实现。它有什么问题？
+
+```rust
+use std::sync::atomic::{AtomicBool, Ordering};
+use std::cell::UnsafeCell;
+
+struct SpinLock<T> {
+    locked: AtomicBool,
+    data: UnsafeCell<T>,
+}
+
+unsafe impl<T> Sync for SpinLock<T> {}
+
+impl<T> SpinLock<T> {
+    fn lock(&self) -> LockGuard<T> {
+        while self.locked.compare_exchange(
+            false, true,
+            Ordering::Relaxed,  // success
+            Ordering::Relaxed   // failure
+        ).is_err() {
+            // 自旋等待
+        }
+        LockGuard { lock: self }
+    }
+}
+```
+
+- A. 没有问题，这是一个正确的自旋锁
+- B. `compare_exchange` 的两个 `Relaxed` 导致锁释放时数据不可见
+- C. 缺少 `Send` 实现
+- D. `UnsafeCell` 使用不安全，应该用 `Mutex` 替代
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+**内存序问题**：
+
+```rust
+// 线程1: 释放锁
+self.locked.store(false, Ordering::Relaxed);
+// Relaxed 不保证 data 的修改对其他线程可见！
+
+// 线程2: 获取锁
+while self.locked.compare_exchange_weak(
+    false, true,
+    Ordering::Acquire,   // ✅ 获取锁时 Acquire：保证看到之前释放锁的写入
+    Ordering::Relaxed
+).is_err() {}
+// 读取 data → 可能看到旧值！
+```
+
+**修复方案**：
+
+```rust
+impl<T> SpinLock<T> {
+    fn lock(&self) -> LockGuard<T> {
+        while self.locked.compare_exchange_weak(
+            false, true,
+            Ordering::Acquire,    // 获取锁: Acquire
+            Ordering::Relaxed
+        ).is_err() {
+            std::hint::spin_loop();  // 提示 CPU 这是自旋等待
+        }
+        LockGuard { lock: self }
+    }
+
+    fn unlock(&self) {
+        self.locked.store(false, Ordering::Release);  // 释放锁: Release
+    }
+}
+
+impl<T> Drop for LockGuard<T> {
+    fn drop(&mut self) {
+        self.lock.locked.store(false, Ordering::Release);
+    }
+}
+```
+
+**为什么用 `compare_exchange_weak`**：
+
+- `compare_exchange`：强保证，可能多一次重试
+- `compare_exchange_weak`：允许"伪失败"（spurious failure），在自旋循环中更高效
+
+> **自旋锁适用场景**: 锁持有时间极短（< 1μs）、线程数 ≈ CPU 核心数。否则应使用 `std::sync::Mutex`（阻塞，不消耗 CPU）。
+</details>
+
+---
+
+### 测验 4：SeqCst 的必要性（分析层）
+
+**题目**: 以下代码使用三个 `AtomicUsize` 实现了一个"票据锁"（ticket lock）。为什么必须使用 `SeqCst`？
+
+```rust
+use std::sync::atomic::{AtomicUsize, Ordering};
+
+struct TicketLock {
+    next_ticket: AtomicUsize,
+    now_serving: AtomicUsize,
+}
+
+impl TicketLock {
+    fn lock(&self) {
+        let my_ticket = self.next_ticket.fetch_add(1, Ordering::SeqCst);
+        while self.now_serving.load(Ordering::SeqCst) != my_ticket {
+            std::hint::spin_loop();
+        }
+    }
+
+    fn unlock(&self) {
+        self.now_serving.fetch_add(1, Ordering::SeqCst);
+    }
+}
+```
+
+- A. `SeqCst` 是原子操作的默认内存序，不需要理由
+- B. `Release`/`Acquire` 不够，因为 `next_ticket` 和 `now_serving` 之间需要全局顺序保证
+- C. 可以用 `Relaxed` 替代，因为 CAS 循环会自动重试
+- D. 编译错误，fetch_add 不支持 SeqCst
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+**为什么需要 `SeqCst`**：
+
+```
+线程1              线程2              线程3
+-----              -----              -----
+next_ticket++      next_ticket++      next_ticket++
+// ticket=0        // ticket=1        // ticket=2
+
+// 如果只用 Release/Acquire：
+// 线程3 可能看到 now_serving=0 但 next_ticket=3 的异常状态
+// （因为两个变量的更新在不同线程，没有全局顺序）
+```
+
+**多原子变量的全局顺序问题**：
+
+| 场景 | 所需内存序 |
+|:---|:---|
+| 单变量读写（如计数器） | `Relaxed` |
+| 一写多读（如标志位+数据） | `Release`/`Acquire` |
+| 多变量间有逻辑顺序依赖 | `SeqCst` |
+
+**Ticket Lock 的原理**：
+
+```rust
+// 类似银行叫号系统
+next_ticket  = 下一个号码（ fetch_add 原子分配）
+now_serving  = 当前叫到的号码
+
+// 线程获取 ticket=5，等待 now_serving == 5
+// 当前 serving=4 的线程释放时，serving 变为 5
+// 线程5 看到匹配，进入临界区
+```
+
+**SeqCst 的代价**：
+
+```rust
+// 在 x86_64 上：
+// Relaxed  → 普通 mov（零额外开销）
+// Acquire  → mfence（或隐式保证）
+// SeqCst   → 强 fence（可能阻塞 CPU 流水线）
+
+// 性能对比（粗略）：
+// Relaxed : SeqCst ≈ 10:1
+```
+
+**优化方案 — 大多数情况不需要 Ticket Lock**：
+
+```rust
+// 简单互斥场景：std::sync::Mutex 性能更好
+// 读多写少场景：RwLock 或 RCU
+// 计数器场景：AtomicUsize + Relaxed
+```
+
+> **关键洞察**: `SeqCst` 是"核武器"——它保证**所有线程以相同顺序看到所有原子操作**。只在"多个原子变量间有复杂逻辑依赖"时使用。绝大多数并发场景 `Release`/`Acquire` 足够。
+</details>
+
+---
+
+> **测验设计来源**: [Bloom Taxonomy 2001] · [Rust Atomics and Locks](https://marabos.nl/atomics/) · [TRPL Ch16](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [Rust Reference - Memory Model](https://doc.rust-lang.org/reference/memory-model.html)

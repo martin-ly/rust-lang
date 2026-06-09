@@ -54,6 +54,12 @@
     - [10.3 边界测试：`Functor` 与 Rust 迭代器的映射（编译错误）](#103-边界测试functor-与-rust-迭代器的映射编译错误)
     - [10.4 边界测试：`Monad` 与 Rust 的 `?` 运算符（编译错误）](#104-边界测试monad-与-rust-的--运算符编译错误)
     - [10.7 边界测试：所有权移动后的再次使用](#107-边界测试所有权移动后的再次使用)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：范畴论的基本直觉（理解层）](#测验-1范畴论的基本直觉理解层)
+    - [测验 2：函子（Functor）（应用层）](#测验-2函子functor应用层)
+    - [测验 3：单子（Monad）的核心操作（应用层）](#测验-3单子monad的核心操作应用层)
+    - [测验 4：Rust 中的 Monad 替代（分析层）](#测验-4rust-中的-monad-替代分析层)
+    - [测验 5：`?` 运算符与单子（评价层）](#测验-5-运算符与单子评价层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -624,6 +630,157 @@ fn main() {
 ```
 
 > **修正**: **Move 语义**：1) `String` 非 `Copy`，赋值时 move 所有权；2) move 后原变量无效；3) 解决：使用 `.clone()` 或引用 `&s`。
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：范畴论的基本直觉（理解层）
+
+范畴论中"范畴"的基本组成是什么？
+
+- A. 仅对象（Objects）
+- B. 对象 + 对象之间的态射（Morphisms/Arrows）
+- C. 仅函数
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 对象 + 对象之间的态射（Morphisms/Arrows）**。
+
+一个范畴由以下部分组成：
+
+- **对象**（Objects）：如类型、集合、程序状态
+- **态射**（Morphisms）：对象之间的箭头，如函数、类型转换
+- **复合规则**：态射可组合（`g ∘ f`）
+- **单位态射**：每个对象有恒等箭头
+
+在编程中，类型可视为对象，函数可视为态射。Rust 的类型系统（尤其是 trait system）可部分用范畴论建模。
+</details>
+
+---
+
+### 测验 2：函子（Functor）（应用层）
+
+在 Rust 中，哪个类型构造器最符合函子的直觉？
+
+- A. `Box<T>`
+- B. `Option<T>`（`map` 方法）
+- C. `Rc<T>`
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. `Option<T>`（`map` 方法）**。
+
+函子（Functor）的核心操作是 `map`：
+
+- 将范畴中的一个态射（函数 `A -> B`）提升为另一个范畴中的态射（`F<A> -> F<B>`）
+- `Option::map(f)`：`Option<A> -> Option<B>`
+- `Iterator::map(f)`：`Iterator<A> -> Iterator<B>`
+- `Result::map(f)`：`Result<A, E> -> Result<B, E>`
+
+函子定律：
+
+1. `map(id) == id`
+2. `map(g ∘ f) == map(g) ∘ map(f)`
+
+Rust 的 `Option`、`Result`、`Iterator`、`Vec` 都满足函子定律。
+</details>
+
+---
+
+### 测验 3：单子（Monad）的核心操作（应用层）
+
+单子的两个核心操作是什么？
+
+- A. `map` 和 `filter`
+- B. `return`（pure/单位）和 `bind`（`>>=` / flat_map）
+- C. `clone` 和 `drop`
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. `return`（pure/单位）和 `bind`（`>>=` / flat_map）**。
+
+单子（Monad）是函子的扩展，增加两个操作：
+
+- **`return` / `pure`**：将普通值包装进单子上下文（`A -> M<A>`）
+  - Rust 对应：`Some(x)`、`Ok(x)`、`vec![x]`
+- **`bind` / `>>=` / `flat_map`**：序列化两个单子计算
+  - Rust 对应：`Option::and_then`、`Result::and_then`、`Iterator::flat_map`
+
+单子定律保证了这些操作可以安全组合，是函数式编程错误处理、异步、列表推导的基础。
+</details>
+
+---
+
+### 测验 4：Rust 中的 Monad 替代（分析层）
+
+Rust 为什么不提供原生的 `Monad` trait？
+
+- A. Rust 不支持泛型
+- B. Monad 的 `bind` 需要高阶类型，而 Rust 类型系统有限制
+- C. Rust 社区反对函数式编程
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. Monad 的 `bind` 需要高阶类型，而 Rust 类型系统有限制**。
+
+定义通用 `Monad` trait 需要：
+
+```rust
+trait Monad<M<A>> {  // Rust 不支持 M<A> 这种高阶类型参数
+    fn bind<B, F>(self, f: F) -> M<B> where F: Fn(A) -> M<B>;
+}
+```
+
+Rust 不支持"类型构造器作为类型参数"（Higher-Kinded Types, HKT），因此无法直接定义跨 `Option`、`Result`、`Vec` 等类型的通用 `Monad` trait。
+
+实际中：
+
+- 每个类型单独实现 `and_then`/`flat_map`
+- 使用 `?` 运算符作为特殊的单子绑定语法
+- nightly 的 `generic_associated_types` 可部分缓解，但 HKT 仍未完全支持
+
+</details>
+
+---
+
+### 测验 5：`?` 运算符与单子（评价层）
+
+`?` 运算符与单子的 `bind` 操作有何关系？
+
+- A. 完全无关
+- B. `?` 是 Rust 中对 `Result`/`Option` 的专用语法糖，等价于 monadic bind
+- C. `?` 只能用于 `Option`
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. `?` 是 Rust 中对 `Result`/`Option` 的专用语法糖，等价于 monadic bind**。
+
+```rust
+let x = some_operation()?;
+```
+
+等价于（概念上）：
+
+```rust
+let x = match some_operation() {
+    Ok(v) => v,
+    Err(e) => return Err(e.into()),
+};
+```
+
+这正是 monadic bind 的语义：
+
+- 若成功，解包值并继续
+- 若失败，将错误"提升"到当前计算上下文
+
+`?` 不支持任意 monad（如 `Vec` 或自定义 monad），只支持 `Result`、`Option` 和 `Poll<Result/Option>`。这是 Rust 在实用主义和函数式纯度之间的折中。
+</details>
+
+---
 
 ## 认知路径
 

@@ -691,7 +691,7 @@
 
 ## 🆕 Rust 1.94 更新
 
-> **适用版本**: Rust 1.94.0+
+> **适用版本**: Rust 1.96.0+
 
 详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
 

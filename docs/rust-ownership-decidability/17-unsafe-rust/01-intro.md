@@ -1,6 +1,13 @@
+> **🗄️ ARCHIVED**: 本文档内容已完全覆盖于 [concept/03_advanced/03_unsafe.md](../../../concept/03_advanced/03_unsafe.md)。
+> **归档日期**: 2026-06-09
+> **归档原因**: 与主轨 concept/ 完全重复（相似度 1.00），维护价值集中于主轨。
+> **原始位置**: `docs/rust-ownership-decidability/17-unsafe-rust/01-intro.md`
+
+---
+
 # Unsafe Rust 概述
 
-> **分级**: [C]
+> **分级**: [C] [已归档]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **权威来源**: The Rustonomicon, The Rust Reference Chapter 16

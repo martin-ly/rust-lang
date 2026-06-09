@@ -45,6 +45,11 @@
     - [对应代码示例](#对应代码示例)
     - [建议练习](#建议练习)
   - [导航：下一步去哪？](#导航下一步去哪)
+  - [嵌入式测验](#嵌入式测验)
+    - [测验 1：async fn in trait（记忆层）](#测验-1async-fn-in-trait记忆层)
+    - [测验 2：Stream trait（理解层）](#测验-2stream-trait理解层)
+    - [测验 3：spawn\_blocking 的使用场景（应用层）](#测验-3spawn_blocking-的使用场景应用层)
+    - [测验 4：async 递归（分析层）](#测验-4async-递归分析层)
 
 ### 8.8 Waker 契约与活性
 
@@ -1402,3 +1407,284 @@ fn main() {
 | 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](./README.md) 选择其他主题 |
 | 🎓 进入 L4 形式化 | 想理解"为什么"的数学证明 | [L4 形式化](../04_formal/README.md) |
 | 🏗️ 进入 L6 生态 | 想掌握生产工具链 | [L6 生态](../06_ecosystem/README.md) |
+
+---
+
+## 嵌入式测验
+
+### 测验 1：async fn in trait（记忆层）
+
+**题目**: `async fn` 在 trait 中可以直接使用吗？Rust 1.75+ 的解决方案是什么？
+
+- A. 可以，任何版本的 Rust 都支持 `async fn` in trait
+- B. 不可以，必须使用返回 `Box<dyn Future>` 的函数
+- C. Rust 1.75+ 支持 `async fn` in trait，通过返回位置 impl Trait（RPITIT）实现
+- D. 必须使用 `#[async_trait]` 宏，这是唯一方案
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 C**。
+
+`async fn` in trait 的历史演进：
+
+| 版本 | 方案 | 说明 |
+|:---|:---|:---|
+| < 1.75 | `#[async_trait]` 宏 | 将 `async fn` 展开为返回 `Pin<Box<dyn Future>>` 的函数，有堆分配开销 |
+| ≥ 1.75 | 原生 `async fn` in trait | 使用 RPITIT（Return Position Impl Trait In Traits），零成本抽象 |
+
+**Rust 1.75+ 代码**：
+
+```rust
+trait HttpClient {
+    async fn fetch(&self, url: &str) -> Result<String, Error>;
+}
+
+// 编译器展开后等价于：
+// trait HttpClient {
+//     fn fetch(&self, url: &str) -> impl Future<Output = Result<String, Error>> + '_;
+// }
+```
+
+**为什么不再需要 `#[async_trait]`**：
+
+- 原生实现没有 `Box` 堆分配
+- 支持 `Send` 边界自动推导
+- 编译器可以内联和优化
+
+> `#[async_trait]` 仍然有用：需要动态分发（`dyn HttpClient`）时，因为 `impl Future` 是静态分发。
+</details>
+
+---
+
+### 测验 2：Stream trait（理解层）
+
+**题目**: 以下代码试图实现一个产生定时事件的 Stream，但无法编译。问题是什么？
+
+```rust
+use std::pin::Pin;
+use std::task::{Context, Poll};
+
+struct Interval {
+    period: std::time::Duration,
+}
+
+impl futures::Stream for Interval {
+    type Item = std::time::Instant;
+
+    fn poll_next(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Option<Self::Item>> {
+        // 模拟：检查定时器是否到期
+        Poll::Ready(Some(std::time::Instant::now()))
+    }
+}
+```
+
+- A. `Stream` trait 需要 `#[pin_project]` 或手动 `Pin` 处理
+- B. `self` 参数应为 `&mut self` 而非 `Pin<&mut Self>`
+- C. Stream 已经稳定于标准库，应使用 `std::stream::Stream`
+- D. 代码正确，可以编译
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 A**。
+
+`Stream::poll_next` 要求 `self: Pin<&mut Self>` 的原因：
+
+Stream 通常是自引用的（包含定时器、I/O 句柄等），需要通过 `Pin` 保证内存位置不变。如果 Stream 包含需要 `Pin` 的字段（如 `Sleep` future），必须正确处理 `Pin` 投影。
+
+**修复方案**：
+
+```rust
+use std::pin::Pin;
+use std::task::{Context, Poll};
+use std::time::{Duration, Instant};
+use tokio::time::{interval, Interval as TokioInterval};
+use tokio_stream::Stream;
+
+// 方案1: 使用 pin_project 宏（推荐）
+pin_project_lite::pin_project! {
+    struct MyInterval {
+        #[pin]
+        inner: TokioInterval,
+    }
+}
+
+impl Stream for MyInterval {
+    type Item = Instant;
+
+    fn poll_next(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Option<Self::Item>> {
+        let this = self.project();
+        this.inner.poll_tick(cx).map(|_| Some(Instant::now()))
+    }
+}
+
+// 方案2: 使用 tokio_stream::wrappers::IntervalStream（生产环境推荐）
+// let stream = tokio_stream::wrappers::IntervalStream::new(interval(Duration::from_secs(1)));
+```
+
+> **关键洞察**: `Pin<&mut Self>` 是 async/await 生态的基石。任何包含 `.await` 点的结构体都需要 `Pin` 保证，因为编译器生成的状态机可能自引用。
+</details>
+
+---
+
+### 测验 3：spawn_blocking 的使用场景（应用层）
+
+**题目**: 以下代码在一个 Tokio 异步任务中执行 CPU 密集型计算，有什么问题？如何修复？
+
+```rust
+#[tokio::main]
+async fn main() {
+    let result = compute_hash("large_data").await;
+    println!("{}", result);
+}
+
+async fn compute_hash(data: &str) -> String {
+    // 模拟 CPU 密集型计算
+    let mut result = String::new();
+    for i in 0..1_000_000 {
+        result.push_str(&format!("{}", i));
+    }
+    result
+}
+```
+
+- A. 没有问题，Tokio 会自动调度 CPU 密集型任务
+- B. `compute_hash` 会阻塞当前线程的 async 任务，应使用 `tokio::spawn_blocking`
+- C. 应该将 `for` 循环替换为 `rayon::join`
+- D. 代码在编译时会报错，因为 `String` 不能在 async fn 中构建
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+**问题分析**：
+
+Tokio 使用协作式调度：一个线程驱动多个 `Future`。如果某个 `Future` 长时间占用线程（不做 `.await`），其他 `Future` 无法执行，导致**整个运行时饿死**。
+
+```rust
+// 错误示范：compute_hash 占用线程 100ms，期间其他任务无法运行
+async fn bad(data: &str) -> String {
+    // 100ms 的纯 CPU 计算，没有 .await 点
+    expensive_cpu_work(data)  // 阻塞！
+}
+```
+
+**修复方案**：
+
+```rust
+use tokio::task;
+
+async fn compute_hash(data: &str) -> String {
+    let data = data.to_string();
+    task::spawn_blocking(move || {
+        // 在独立线程池中运行 CPU 密集型计算
+        let mut result = String::new();
+        for i in 0..1_000_000 {
+            result.push_str(&format!("{}", i));
+        }
+        result
+    })
+    .await
+    .expect("spawn_blocking failed")
+}
+```
+
+**spawn_blocking 内部机制**：
+
+- Tokio 维护一个独立线程池（默认 512 线程）
+- CPU 密集型任务在独立线程运行，不占用 async 执行线程
+- 通过 `oneshot::channel` 将结果返回给 async 上下文
+
+> **黄金法则**: 任何可能阻塞超过 10μs 的操作（CPU 计算、同步 I/O、锁等待）都应使用 `spawn_blocking` 或等价机制。
+</details>
+
+---
+
+### 测验 4：async 递归（分析层）
+
+**题目**: 以下代码试图实现一个异步递归的目录遍历函数，但无法编译。为什么？如何修复？
+
+```rust
+async fn traverse_dir(path: &std::path::Path) -> Vec<String> {
+    let mut files = vec![];
+    let mut entries = tokio::fs::read_dir(path).await.unwrap();
+
+    while let Some(entry) = entries.next_entry().await.unwrap() {
+        if entry.file_type().await.unwrap().is_dir() {
+            files.extend(traverse_dir(&entry.path()).await);  // 递归调用！
+        } else {
+            files.push(entry.path().to_string_lossy().into_owned());
+        }
+    }
+
+    files
+}
+```
+
+- A. 递归 async fn 需要 `Box::pin`，因为编译器无法确定返回类型大小
+- B. `tokio::fs::read_dir` 不支持嵌套调用
+- C. 应使用 `loop` 替代递归，避免栈溢出
+- D. 代码正确，编译失败是 Tokio 版本问题
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 A**。
+
+**编译错误根源**：
+
+`async fn` 编译后返回 `impl Future<Output = Vec<String>>`。递归调用时，返回类型包含自身，形成**无限大小的类型**——编译器无法计算其大小。
+
+```rust
+// 编译器视角：
+// traverse_dir 返回一个状态机，状态机的一个变体包含 "正在等待子 traverse_dir"
+// 这个子 traverse_dir 也是一个状态机，可能还包含孙子 traverse_dir...
+// 类型大小 = 无限！
+```
+
+**修复方案 — 使用 `Box::pin`**：
+
+```rust
+use std::future::Future;
+use std::pin::Pin;
+use std::path::Path;
+
+// 将返回类型显式 Box 化，使大小固定
+fn traverse_dir(path: &Path) -> Pin<Box<dyn Future<Output = Vec<String>> + Send + '_>> {
+    Box::pin(async move {
+        let mut files = vec![];
+        let mut entries = tokio::fs::read_dir(path).await.unwrap();
+
+        while let Some(entry) = entries.next_entry().await.unwrap() {
+            if entry.file_type().await.unwrap().is_dir() {
+                files.extend(traverse_dir(&entry.path()).await);  // 递归调用
+            } else {
+                files.push(entry.path().to_string_lossy().into_owned());
+            }
+        }
+
+        files
+    })
+}
+```
+
+**或者使用 `async_recursion` 宏**（简化版）：
+
+```rust
+use async_recursion::async_recursion;
+
+#[async_recursion]
+async fn traverse_dir(path: &Path) -> Vec<String> {
+    // 宏自动展开为 Box::pin 版本
+    // ...
+}
+```
+
+> **核心洞察**: `async fn` 的递归 = 返回类型的递归 = 需要 `Box` 消除无限大小。这是 Rust 类型系统的根本限制，不是 Tokio 的问题。
+</details>
+
+---
+
+> **测验设计来源**: [Bloom Taxonomy 2001] · [TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Async Book](https://rust-lang.github.io/async-book/) · [Brown University Interactive TRPL](https://rust-book.cs.brown.edu/)

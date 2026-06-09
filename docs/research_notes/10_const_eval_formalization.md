@@ -5,7 +5,7 @@
 
 > **创建日期**: 2026-02-28
 > **文档类型**: 形式化研究
-> **Rust 版本**: 1.94.0+
+> **Rust 版本**: 1.96.0+
 
 ---
 
@@ -216,7 +216,7 @@ const fn with_const_eval_select<T>(x: T) -> T {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **适用版本**: Rust 1.94.0+
+> **适用版本**: Rust 1.96.0+
 
 ### 核心研究点
 >
@@ -237,7 +237,7 @@ const fn with_const_eval_select<T>(x: T) -> T {
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-> **适用版本**: Rust 1.94.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点

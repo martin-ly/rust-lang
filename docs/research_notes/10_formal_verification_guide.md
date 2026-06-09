@@ -5,7 +5,7 @@
 
 > **创建日期**: 2025-12-25
 > **最后更新**: 2026-01-26
-> **Rust 版本**: 1.94.0+ (Edition 2024)
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ **指南 100% 完成**
 
 ---
@@ -589,7 +589,7 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **适用版本**: Rust 1.94.0+
+> **适用版本**: Rust 1.96.0+
 
 详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
 
@@ -601,7 +601,7 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **适用版本**: Rust 1.94.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点

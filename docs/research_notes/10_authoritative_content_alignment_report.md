@@ -4,7 +4,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **检查日期**: 2026-03-05
 > **Rust Book版本**: 2024 Edition (1.90.0+)
-> **Rust版本**: 1.94.0
+> **Rust版本**: 1.96.0
 > **检查状态**: ✅ 完成
 
 ---
@@ -264,10 +264,10 @@
 
 | 文档 | 声明版本 | 实际状态 | 需更新 |
 | :--- | :--- | :--- | :--- |
-| 10_ownership_model.md | 1.94.0+ | ✅ | 无 |
-| 10_type_system_foundations.md | 1.94.0+ | ✅ | 无 |
-| 10_borrow_checker_proof.md | 1.94.0+ | ⚠️ | 更新至1.94 |
-| 10_lifetime_formalization.md | 1.94.0+ | ⚠️ | 更新至1.94 |
+| 10_ownership_model.md | 1.96.0+ | ✅ | 无 |
+| 10_type_system_foundations.md | 1.96.0+ | ✅ | 无 |
+| 10_borrow_checker_proof.md | 1.96.0+ | ⚠️ | 更新至1.94 |
+| 10_lifetime_formalization.md | 1.96.0+ | ⚠️ | 更新至1.94 |
 
 ---
 
@@ -313,7 +313,7 @@
 ## 🆕 Rust 1.94 深度整合更新
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-> **适用版本**: Rust 1.94.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点

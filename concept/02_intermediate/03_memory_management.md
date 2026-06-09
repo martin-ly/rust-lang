@@ -1864,6 +1864,161 @@ fn main() {}
 > 无内存泄漏 ⟸ Drop/RAII 自动 ⟸ 所有权系统
 > 堆分配安全 ⟸ Box/Rc/Arc 区分 ⟸ 引用计数正确性
 >
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Stack vs Heap（理解层）
+
+以下哪种数据分配在栈上？
+
+- A. `Box::new(42)` 返回的 `Box<i32>` 本身
+- B. `String::from("hello")` 的字符串内容
+- C. 函数局部变量 `let x = 5;`
+
+<details>
+<summary>✅ 答案</summary>
+
+**C. 函数局部变量 `let x = 5;`**。
+
+Rust 内存分配规则：
+
+- **栈**：固定大小的局部变量（`i32`、数组、结构体值）、函数调用帧
+- **堆**：动态大小或生命周期超出当前作用域的数据（`Box`、`String` 的内容、`Vec` 的元素）
+
+注意：`Box<i32>` 变量本身在栈上（它只是一个指针），但它指向的数据在堆上。`String` 变量在栈上（包含指针、长度、容量），字符串内容在堆上。
+</details>
+
+---
+
+### 测验 2：Drop 与 RAII（应用层）
+
+以下代码的输出顺序是什么？
+
+```rust
+struct Loud(&'static str);
+impl Drop for Loud { fn drop(&mut self) { println!("{}", self.0); } }
+
+fn main() {
+    let a = Loud("a");
+    let b = Box::new(Loud("b"));
+    let c = Loud("c");
+}
+```
+
+- A. a → b → c
+- B. c → b → a
+- C. b → c → a
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. c → b → a**。
+
+Rust 的 `Drop` 按**LIFO（后进先出）**顺序执行：
+
+1. `c` 最后声明，最先 drop
+2. `b` 是 `Box<Loud>`，drop 时先释放堆上的 `Loud("b")`，再释放堆内存
+3. `a` 最先声明，最后 drop
+
+这是 RAII（资源获取即初始化）的核心机制。
+</details>
+
+---
+
+### 测验 3：Box 与递归类型（应用层）
+
+为什么递归枚举必须使用 `Box`？
+
+```rust
+enum List {
+    Cons(i32, Box<List>),
+    Nil,
+}
+```
+
+- A. 因为 `List` 的大小在编译期无法确定
+- B. 因为递归类型只能存储在堆上
+- C. 因为 `Box` 提供了额外的方法
+
+<details>
+<summary>✅ 答案</summary>
+
+**A. 因为 `List` 的大小在编译期无法确定**。
+
+Rust 要求在编译期知道所有类型的大小。`Cons(i32, List)` 会导致无限递归的大小计算：`size(List) = size(i32) + size(List) + ...`，无法求解。
+
+`Box<List>` 是一个固定大小的指针（在 64 位平台为 8 字节），打破了无限递归，使 `List` 的大小可计算。
+</details>
+
+---
+
+### 测验 4：内存布局对齐（分析层）
+
+在 64 位平台上，`struct S { a: u8, b: u64 }` 占用多少字节？
+
+- A. 9 字节
+- B. 16 字节
+- C. 24 字节
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 16 字节**。
+
+内存布局：
+
+- `u8` 占 1 字节，但 `u64` 要求 8 字节对齐
+- 编译器在 `a` 后插入 7 字节填充（padding）
+- 结构体总大小 = 1 + 7 (padding) + 8 = 16 字节
+
+字段重排可减少填充：`struct S { b: u64, a: u8 }` 仍为 16 字节（尾部填充到对齐），但某些布局可优化到 8 字节若使用 `#[repr(packed)]`（但会牺牲性能）。
+</details>
+
+---
+
+### 测验 5：内存泄漏与 `Rc` 循环（分析层）
+
+以下代码会导致内存泄漏吗？
+
+```rust
+use std::rc::Rc;
+use std::cell::RefCell;
+
+struct Node {
+    next: Option<Rc<RefCell<Node>>>,
+}
+
+fn main() {
+    let a = Rc::new(RefCell::new(Node { next: None }));
+    let b = Rc::new(RefCell::new(Node { next: Some(a.clone()) }));
+    a.borrow_mut().next = Some(b.clone());
+}
+```
+
+- A. 不会，Rust 有垃圾回收
+- B. 会，`a` 和 `b` 形成循环引用
+- C. 不会，`Rc` 会自动检测循环
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 会，`a` 和 `b` 形成循环引用**。
+
+`Rc` 使用引用计数，只有当强引用计数归零时才释放。`a` 引用 `b`，`b` 引用 `a`，形成循环，计数永远不会归零。
+
+解决方案：使用 `Weak<T>` 打破循环：
+
+```rust
+struct Node {
+    next: Option<Rc<RefCell<Node>>>,
+    prev: Option<Weak<RefCell<Node>>>,
+}
+```
+
+这是 Rust 中手动内存管理的经典陷阱——没有 GC，开发者需自行避免循环引用。
+</details>
+
+---
+
 ## 实践
 
 > **对应 Crate**: [`c01_ownership_borrow_scope`](../crates/c01_ownership_borrow_scope/)

@@ -356,7 +356,7 @@ Week 5: 交叉引用 + 格式检查 ────── 12h
 ## 🆕 Rust 1.94 深度整合更新
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-> **适用版本**: Rust 1.94.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点

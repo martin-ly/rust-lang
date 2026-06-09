@@ -86,6 +86,12 @@
   - [权威来源索引](#权威来源索引)
     - [10.3 边界测试：Kani 的循环展开限制与验证失败（验证失败/超时）](#103-边界测试kani-的循环展开限制与验证失败验证失败超时)
     - [10.4 边界测试：Kani 的假设与 Rust 代码的验证边界（验证失败）](#104-边界测试kani-的假设与-rust-代码的验证边界验证失败)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：验证工具分类（理解层）](#测验-1验证工具分类理解层)
+    - [测验 2：Miri 的检测范围（应用层）](#测验-2miri-的检测范围应用层)
+    - [测验 3：验证 ROI 决策（评价层）](#测验-3验证-roi-决策评价层)
+    - [测验 4：a-mir-formality 的作用（理解层）](#测验-4a-mir-formality-的作用理解层)
+    - [测验 5：验证工具互斥性（分析层）](#测验-5验证工具互斥性分析层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -1386,6 +1392,129 @@ fn main() {}
 >
 > 这与 Prusti（基于 Viper，支持更复杂的规范）或 Miri（解释执行，非模型检查）不同——Kani 是 bounded model checking，适合验证特定属性。
 > [来源: [Kani](https://github.com/model-checking/kani)] · [来源: [Rust Verification Tools](https://alastairreid.github.io/rust-verification-tools/)]
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：验证工具分类（理解层）
+
+Miri、Kani、Prusti 分别属于哪类验证方法？
+
+- A. Miri-静态分析, Kani-动态执行, Prusti-模型检测
+- B. Miri-动态解释, Kani-模型检测, Prusti-演绎验证
+- C. Miri-模型检测, Kani-演绎验证, Prusti-动态解释
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. Miri-动态解释, Kani-模型检测, Prusti-演绎验证**。
+
+验证方法光谱：
+
+- **动态方法**：Miri（解释执行检测 UB）、测试（随机/模糊）
+- **有界方法**：Kani（CBMC 模型检测，覆盖所有可能路径但有界）、Crux-MIR
+- **演绎方法**：Prusti（Viper 分离逻辑）、Creusot（Why3）、Verus（Z3 SMT）
+- **交互式证明**：Coq、Isabelle（RustBelt 使用）
+
+覆盖强度从左到右递增，自动化程度从左到右递减。
+</details>
+
+---
+
+### 测验 2：Miri 的检测范围（应用层）
+
+以下哪种错误 Miri **无法**检测？
+
+- A. 数据竞争（Data Race）
+- B. 整数溢出（Integer Overflow）
+- C. 逻辑错误（如排序算法结果不正确）
+
+<details>
+<summary>✅ 答案</summary>
+
+**C. 逻辑错误（如排序算法结果不正确）**。
+
+Miri 是动态 UB 检测器，基于 Tree Borrows 模型：
+
+- ✅ 可检测： use-after-free、数据竞争、对齐违规、未初始化内存读取
+- ✅ 可检测：Staked Borrows/Tree Borrows 违规（别名规则违反）
+- ❌ 不可检测：逻辑正确性（如算法是否排序正确）、性能问题、未触发的 UB（因为是有界执行）
+
+ Miri 与测试互补：测试验证"是否做了正确的事"，Miri 验证"是否以安全的方式做"。
+</details>
+
+---
+
+### 测验 3：验证 ROI 决策（评价层）
+
+你的团队正在开发 TLS/QUIC 网络协议实现，应该采用哪种验证策略？
+
+- A. 仅单元测试（成本最低）
+- B. 单元测试 + Miri + Kani 有界验证 + Prusti 关键函数契约
+- C. 全代码 Coq 形式化证明
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 单元测试 + Miri + Kani 有界验证 + Prusti 关键函数契约**。
+
+AWS s2n-quic 的分层验证策略：
+
+1. **L1 基础层**：单元测试 + 集成测试（覆盖率 >80%）
+2. **L2 安全层**：Miri 检测 unsafe 代码 UB
+3. **L3 有界层**：Kani 验证关键状态机的所有可能转换（有界展开）
+4. **L4 契约层**：Prusti/Creusot 对核心加密原语添加前置/后置条件
+
+全代码 Coq 证明（选项 C）成本过高（数万行证明代码），不适合工业项目的时间/人力约束。
+</details>
+
+---
+
+### 测验 4：a-mir-formality 的作用（理解层）
+
+`a-mir-formality` 项目的核心目标是什么？
+
+- A. 替代 rustc 编译器
+- B. 提供 Rust 类型系统的可执行形式化规范
+- C. 自动生成 unsafe 代码的安全证明
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 提供 Rust 类型系统的可执行形式化规范**。
+
+`a-mir-formality` 使用 Prolog/Datalog 风格规则编码 Rust 类型系统：
+
+- 将类型检查规则写成可执行的逻辑程序
+- 用于验证类型系统实现的正确性（与 rustc 对比）
+- 作为形式化验证工具的"参考规范"
+
+它不替代编译器，也不自动生成证明，而是提供**可测试的类型系统规范**。
+</details>
+
+---
+
+### 测验 5：验证工具互斥性（分析层）
+
+以下哪个说法是错误的？
+
+- A. "Kani 可以替代 Miri，因为模型检测覆盖所有路径"
+- B. "Miri 和 Kani 可以互补使用：Miri 检测实际触发的 UB，Kani 验证有界范围内的所有可能"
+- C. "Prusti 的分离逻辑契约可以编译期检查，无需运行时开销"
+
+<details>
+<summary>✅ 答案</summary>
+
+**A. "Kani 可以替代 Miri，因为模型检测覆盖所有路径"** —— 这是错误的。
+
+Kani 的"所有路径"是**有界**的（循环展开深度、数据结构大小受限）。对于无界递归或无限状态空间，Kani 无法完全覆盖。此外：
+
+- Kani 不执行实际代码，无法检测与具体运行时行为相关的 UB（如与操作系统交互）
+- Miri 执行实际字节码，能发现 Kani 抽象层面遗漏的问题
+- 两者互补：Miri 验证"实际发生了什么"，Kani 验证"在有界假设下所有可能发生了什么"
+
+</details>
+
+---
 
 ## 认知路径
 

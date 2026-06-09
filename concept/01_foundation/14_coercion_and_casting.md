@@ -51,6 +51,12 @@
     - [10.6 边界测试：函数指针到闭包的类型不兼容（编译错误）](#106-边界测试函数指针到闭包的类型不兼容编译错误)
     - [10.8 边界测试：const fn 中的非编译期操作](#108-边界测试const-fn-中的非编译期操作)
   - [实践](#实践)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Deref 强制转换（理解层）](#测验-1deref-强制转换理解层)
+    - [测验 2：`as` 与 `TryFrom`（应用层）](#测验-2as-与-tryfrom应用层)
+    - [测验 3：From/Into 的孤儿规则（分析层）](#测验-3frominto-的孤儿规则分析层)
+    - [测验 4：指针转换的安全性（分析层）](#测验-4指针转换的安全性分析层)
+    - [测验 5：强制 vs 转换的选择（评价层）](#测验-5强制-vs-转换的选择评价层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -740,6 +746,148 @@ fn main() {}
 > - [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Deref 强制转换（理解层）
+
+以下代码为什么能编译？
+
+```rust
+fn greet(name: &str) {}
+
+fn main() {
+    let s = String::from("hello");
+    greet(&s);
+}
+```
+
+- A. `String` 是 `&str` 的子类型
+- B. `String` 实现了 `Deref<Target = str>`，编译器自动解引用
+- C. `&String` 可以隐式转换为 `&str` 是因为两者大小相同
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. `String` 实现了 `Deref<Target = str>`，编译器自动解引用**。
+
+这是 **Deref 强制转换（Deref coercion）**：
+
+- `String` 实现 `Deref<Target = str>`
+- 当函数期望 `&str` 但传入 `&String` 时，编译器自动插入 `.deref()` 调用
+- 结果：`greet(&s)` 等价于 `greet(s.deref())`，即 `greet(&**s)`
+
+类似的：`Box<T>` → `&T`，`Rc<T>` → `&T`，`Vec<T>` → `&[T]`。
+</details>
+
+---
+
+### 测验 2：`as` 与 `TryFrom`（应用层）
+
+以下哪种转换在越界时会返回 `Err` 而不是截断？
+
+- A. `let x: i8 = 300i32 as i8;`
+- B. `let x: i8 = 300i32.try_into().unwrap();`
+- C. 两者都会 panic
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. `300i32.try_into().unwrap()`**。
+
+- `as` 执行截断转换（truncating cast），永远不 panic：`300i32 as i8 = 44`
+- `TryFrom` 在转换失败时返回 `Err`：`300i32.try_into::<i8>()` 返回 `Err(TryFromIntError)`
+- 对 `unwrap()` 会 panic，但这是显式选择处理错误的方式
+
+安全建议：优先使用 `TryFrom/TryInto`，只在明确需要位模式重解释时使用 `as`。
+</details>
+
+---
+
+### 测验 3：From/Into 的孤儿规则（分析层）
+
+以下代码能否编译？
+
+```rust
+struct Wrapper(i32);
+impl From<i32> for Wrapper {
+    fn from(x: i32) -> Self { Wrapper(x) }
+}
+
+fn main() {
+    let w: Wrapper = 42.into();
+}
+```
+
+- A. 编译失败：不能为自定义类型实现 `From`
+- B. 编译失败：`into()` 需要显式类型标注
+- C. 编译通过
+
+<details>
+<summary>✅ 答案</summary>
+
+**C. 编译通过**。
+
+`From<T>` 是标准库 trait，`Wrapper` 是自定义类型。为自定义类型实现外部 trait 满足孤儿规则（Orphan Rule）。实现 `From<i32> for Wrapper` 后，编译器自动提供 `Into<Wrapper> for i32` 的 blanket impl，因此 `42.into()` 合法。
+
+注意：`into()` 需要目标类型可推断，此处通过 `let w: Wrapper` 显式标注。
+</details>
+
+---
+
+### 测验 4：指针转换的安全性（分析层）
+
+以下代码的问题是什么？
+
+```rust,ignore
+let raw_ptr: *const i32 = &42;
+let ref_ptr: &i32 = unsafe { &*raw_ptr };
+```
+
+- A. 裸指针不能转换为引用
+- B. 引用指向的数据生命周期不够长（字面量 `42` 是临时值）
+- C. 代码完全安全
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 引用指向的数据生命周期不够长**。
+
+`&42` 创建一个临时 `i32`，在语句结束后即被销毁。`raw_ptr` 成为悬垂指针，后续通过 `&*raw_ptr` 解引用是未定义行为（UB）。
+
+安全使用裸指针转引用的条件：
+
+1. 裸指针确实指向有效、已初始化的内存
+2. 指向的数据在引用使用期间保持有效
+3. 不违反别名规则（`&mut` 独占，`&` 共享）
+
+</details>
+
+---
+
+### 测验 5：强制 vs 转换的选择（评价层）
+
+函数参数类型为 `&str`，传入 `&String` 时发生什么？
+
+- A. 显式 `as` 转换
+- B. 隐式 Deref 强制转换
+- C. 编译错误，必须手动写 `&*s`
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 隐式 Deref 强制转换**。
+
+Deref 强制转换是 Rust 的隐式转换机制之一：
+
+- 发生在函数调用、方法调用、赋值等场景
+- 只适用于实现了 `Deref`/`DerefMut` 的类型
+- 不改变值的实际类型，只是临时借用为另一种引用
+
+这与 `as` 不同：`as` 是显式、可能改变值表示的转换（如整数截断、指针重解释）。
+</details>
+
+---
 
 ## 认知路径
 

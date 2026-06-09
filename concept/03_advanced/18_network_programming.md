@@ -64,6 +64,12 @@
     - [10.3 边界测试：`TcpStream` 的 `set_nonblocking` 与 async 混用（运行时错误）](#103-边界测试tcpstream-的-set_nonblocking-与-async-混用运行时错误)
     - [10.4 边界测试：TcpStream 的同步读写与 async 混用（编译错误/运行时死锁）](#104-边界测试tcpstream-的同步读写与-async-混用编译错误运行时死锁)
     - [10.7 边界测试：不可变借用与可变借用的冲突](#107-边界测试不可变借用与可变借用的冲突)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：`tokio::net::TcpListener::bind(...).await` 与 `std::net::TcpListener::bind(...)` 在阻塞行为上有什么区别？（理解层）](#测验-1tokionettcplistenerbindawait-与-stdnettcplistenerbind-在阻塞行为上有什么区别理解层)
+    - [测验 2：在 async 函数中直接调用 `std::thread::sleep` 会有什么后果？（理解层）](#测验-2在-async-函数中直接调用-stdthreadsleep-会有什么后果理解层)
+    - [测验 3：`tokio::spawn` 返回什么？任务返回值如何获取？（理解层）](#测验-3tokiospawn-返回什么任务返回值如何获取理解层)
+    - [测验 4：`async fn` 与同步函数在返回类型上有什么本质区别？（理解层）](#测验-4async-fn-与同步函数在返回类型上有什么本质区别理解层)
+    - [测验 5：Tower 的 `Service` trait 抽象了什么样的网络组件？（理解层）](#测验-5tower-的-service-trait-抽象了什么样的网络组件理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -862,6 +868,66 @@ fn main() {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`tokio::net::TcpListener::bind(...).await` 与 `std::net::TcpListener::bind(...)` 在阻塞行为上有什么区别？（理解层）
+
+**题目**: `tokio::net::TcpListener::bind(...).await` 与 `std::net::TcpListener::bind(...)` 在阻塞行为上有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Tokio 版本是异步的，`bind` 本身通常不阻塞，但 `accept` 会返回 Future；std 版本是同步阻塞的，`accept` 会阻塞当前线程直到有连接。
+</details>
+
+---
+
+### 测验 2：在 async 函数中直接调用 `std::thread::sleep` 会有什么后果？（理解层）
+
+**题目**: 在 async 函数中直接调用 `std::thread::sleep` 会有什么后果？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+会阻塞当前 executor 线程，导致该线程上的其他异步任务无法推进，降低并发性能。应使用 `tokio::time::sleep`。
+</details>
+
+---
+
+### 测验 3：`tokio::spawn` 返回什么？任务返回值如何获取？（理解层）
+
+**题目**: `tokio::spawn` 返回什么？任务返回值如何获取？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+返回 `JoinHandle<T>`。通过 `.await` 该 handle 获取 `Result<T, JoinError>`，其中 `JoinError` 表示任务 panic。
+</details>
+
+---
+
+### 测验 4：`async fn` 与同步函数在返回类型上有什么本质区别？（理解层）
+
+**题目**: `async fn` 与同步函数在返回类型上有什么本质区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`async fn` 返回一个实现了 `Future` 的匿名类型，并不会立即执行函数体；同步函数调用时立即执行到返回。
+</details>
+
+---
+
+### 测验 5：Tower 的 `Service` trait 抽象了什么样的网络组件？（理解层）
+
+**题目**: Tower 的 `Service` trait 抽象了什么样的网络组件？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+抽象了"接受请求并返回响应"的组件，包括 HTTP 处理函数、中间件、负载均衡器等，统一为 `call(Request) -> Future<Response>` 的接口。
+</details>
 
 ## 认知路径
 

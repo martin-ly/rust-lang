@@ -1,0 +1,59 @@
+# cargo-vet 供应链审计配置
+# 
+# cargo-vet 用于验证 crate 的来源和审计状态
+# 用法:
+#   cargo vet init      # 初始化（已配置，无需运行）
+#   cargo vet           # 检查所有依赖是否已审计
+#   cargo vet suggest   # 建议需要审计的 crate
+#   cargo vet certify   # 审计一个 crate
+#
+# 参考: https://mozilla.github.io/cargo-vet/
+
+[imports.mozilla]
+url = "https://raw.githubusercontent.com/mozilla/supply-chain/main/imports.lock"
+
+[criteria.license]
+description = "Licensed under a permissive open-source license (MIT/Apache-2.0)"
+
+[criteria.safe-to-deploy]
+description = "Safe to deploy in production — code reviewed for security vulnerabilities"
+
+[criteria.safe-to-run]
+description = "Safe to run in CI/development — no obvious malicious code"
+
+[policy.default]
+criteria = ["license", "safe-to-deploy"]
+
+# 本地 crate 免检
+[policy.c01_ownership_borrow_scope]
+criteria = []
+[policy.c02_type_system]
+criteria = []
+[policy.c03_control_fn]
+criteria = []
+[policy.c04_generic]
+criteria = []
+[policy.c05_threads]
+criteria = []
+[policy.c06_async]
+criteria = []
+[policy.c07_process]
+criteria = []
+[policy.c08_algorithms]
+criteria = []
+[policy.c09_design_pattern]
+criteria = []
+[policy.c10_networks]
+criteria = []
+[policy.c11_macro_system]
+criteria = []
+[policy.c12_wasm]
+criteria = []
+[policy.c13_embedded]
+criteria = []
+[policy.common]
+criteria = []
+[policy.exercises]
+criteria = []
+[policy.integration_tests]
+criteria = []

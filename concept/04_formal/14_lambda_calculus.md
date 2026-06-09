@@ -51,6 +51,12 @@
     - [10.3 边界测试：Y 组合子在 Rust 中的实现（编译错误）](#103-边界测试y-组合子在-rust-中的实现编译错误)
     - [10.4 边界测试：λ 演算中的变量捕获与闭包（编译错误）](#104-边界测试λ-演算中的变量捕获与闭包编译错误)
     - [10.3 边界测试：Y 组合子在 Rust 中的不可表达性（编译错误）](#103-边界测试y-组合子在-rust-中的不可表达性编译错误)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：β-归约（理解层）](#测验-1β-归约理解层)
+    - [测验 2：Rust 闭包的捕获模式（应用层）](#测验-2rust-闭包的捕获模式应用层)
+    - [测验 3：Church 编码（应用层）](#测验-3church-编码应用层)
+    - [测验 4：Y 组合子在 Rust 中的限制（分析层）](#测验-4y-组合子在-rust-中的限制分析层)
+    - [测验 5：类型化 Lambda 演算 ↔ Rust 类型系统（评价层）](#测验-5类型化-lambda-演算--rust-类型系统评价层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -573,6 +579,160 @@ fn main() {}
 ```
 
 > **修正**: Y 组合子（Y Combinator）是**无类型 λ 演算**中实现递归的固定点组合子：`Y f = f (Y f)`。它在有类型系统中**不可直接表达**，因为自应用 `x x` 要求 `x` 同时是函数和其参数的类型，导致类型 `X = X -> X`，这在简单类型系统中无解（不是 well-founded 类型）。Rust 中实现递归：1) `fn` 的显式递归（`fn factorial(n: u64) -> u64`）；2) `fix` 组合子使用 trait object（`Box<dyn Fn(Box<dyn Any>) -> Box<dyn Any>>`）；3) 高阶 trait（HRTB + 关联类型）。这与 Haskell 的 `fix`（`fix f = let x = f x in x`，惰性求值允许无限展开）或 Scheme 的 `letrec`（语言原生支持递归绑定）不同——Rust 的严格求值和类型系统排除了无类型的 Y 组合子，但显式递归更安全和高效。[来源: [Y Combinator](https://en.wikipedia.org/wiki/Fixed-point_combinator)] · [来源: [Lambda Calculus](https://en.wikipedia.org/wiki/Lambda_calculus)]
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：β-归约（理解层）
+
+Lambda 表达式 `(λx. x x) (λy. y)` 的 β-归约结果是什么？
+
+- A. `λy. y`
+- B. `(λy. y) (λy. y)`
+- C. `λx. x x`
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. `(λy. y) (λy. y)`**。
+
+β-归约规则：`(λx. t) u → t[x := u]`（将 u 替换 t 中所有自由出现的 x）。
+
+步骤：
+
+1. `(λx. x x) (λy. y)` —— 应用恒等函数
+2. → `(λy. y) (λy. y)` —— 将 x 替换为 `(λy. y)`
+3. → `λy. y` —— 再次 β-归约
+
+最终结果是恒等函数 `λy. y`（或 `λx. x`）。
+
+这与 Rust 闭包的调用对应：`(|x| x(x))(|y| y)`。
+</details>
+
+---
+
+### 测验 2：Rust 闭包的捕获模式（应用层）
+
+以下 Rust 闭包分别对应 Lambda 演算的哪种抽象？
+
+```rust
+let x = 5;
+let f = |y| x + y;  // 闭包 A
+let g = move |y| x + y;  // 闭包 B
+```
+
+- A. A-值捕获（by value），B-引用捕获（by reference）
+- B. A-引用捕获（借用环境），B-值捕获（移动环境）
+- C. 两者都是值捕获
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. A-引用捕获（借用环境），B-值捕获（移动环境）**。
+
+Rust 闭包与 Lambda 演算的对应：
+
+- `|y| x + y` —— 默认捕获模式：按最小需求借用（`&x`）
+- `move |y| x + y` —— 强制按值捕获：将 `x` 的所有权 move 进闭包
+
+类型系统实现：
+
+- 闭包 A 实现 `Fn`（可多次不可变调用）
+- 闭包 B 若 `x` 实现 `Copy` 仍可实现 `Fn`，否则仅实现 `FnOnce`
+
+这是 Rust 将 Lambda 演算的"捕获语义"编译为具体内存管理的例子。
+</details>
+
+---
+
+### 测验 3：Church 编码（应用层）
+
+Church 布尔值 `true = λt. λf. t`，`false = λt. λf. f`。`and true false` 的结果是什么？
+
+- A. `true`
+- B. `false`
+- C. `λt. λf. f t`
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. `false`**。
+
+Church `and` 的定义：`and = λp. λq. p q p`
+
+计算 `and true false`：
+
+1. `(λp. λq. p q p) (λt. λf. t) (λt. λf. f)`
+2. → `(λq. (λt. λf. t) q (λt. λf. t)) (λt. λf. f)`
+3. → `(λt. λf. t) (λt. λf. f) (λt. λf. t)`
+4. → `λf. (λt. λf. f)` —— 选择第一个参数（即 `false`）
+5. = `false`
+
+Rust 中无法直接表达无类型 Church 编码（需要递归类型），但类型化的版本可以用 trait 模拟。
+</details>
+
+---
+
+### 测验 4：Y 组合子在 Rust 中的限制（分析层）
+
+为什么无类型 Y 组合子 `Y = λf. (λx. f (x x)) (λx. f (x x))` 不能直接在 Rust 中表达？
+
+- A. Rust 不支持高阶函数
+- B. Rust 要求所有类型在编译期已知，无类型 Y 组合子需要无限类型
+- C. Rust 的借用检查器阻止递归
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. Rust 要求所有类型在编译期已知，无类型 Y 组合子需要无限类型**。
+
+Y 组合子的类型推导：
+
+- `x x` 要求 `x` 的类型既是 `A → B` 又是 `A`，即无限类型 `A = A → B`
+- Rust 的类型系统基于 System Fω（有秩多态），禁止无限类型
+- 解决方案：使用显式的 fixpoint 组合子（如 `fn fix<F, T>(f: F) -> T where F: Fn(&dyn Fn() -> T) -> T`），或直接使用具名递归函数
+
+Rust 的 `fn` 声明本身就是 fixpoint：
+
+```rust
+fn factorial(n: u64) -> u64 {
+    if n == 0 { 1 } else { n * factorial(n - 1) }
+}
+```
+
+这是语言层面的 fixpoint，无需 Y 组合子。
+</details>
+
+---
+
+### 测验 5：类型化 Lambda 演算 ↔ Rust 类型系统（评价层）
+
+简单类型 Lambda 演算（Simply Typed Lambda Calculus, STLC）与 Rust 函数类型的对应关系是？
+
+- A. STLC 的 `τ₁ → τ₂` 对应 Rust 的 `fn(τ₁) -> τ₂`
+- B. STLC 的 `τ₁ → τ₂` 对应 Rust 的 `Fn(τ₁) -> τ₂` trait
+- C. 两者都正确，但处于不同抽象层次
+
+<details>
+<summary>✅ 答案</summary>
+
+**C. 两者都正确，但处于不同抽象层次**。
+
+对应关系：
+
+- **STLC `τ₁ → τ₂`** 是**类型**层面的函数类型（与具体调用约定无关）
+- **Rust `fn(τ₁) -> τ₂`** 是函数指针类型（有具体调用约定、ABI）
+- **Rust `Fn(τ₁) -> τ₂`** 是 trait（涵盖函数指针、闭包、函数项类型）
+
+更精确的映射：
+
+- STLC 的函数项 → Rust 的 `fn` 项（零大小类型，单例）
+- STLC 的函数变量 → Rust 的 `fn` 指针或 `Box<dyn Fn>` trait 对象
+- STLC 的高阶函数 → Rust 的泛型 `F: Fn(A) -> B`
+
+Rust 的类型系统比 STLC 丰富得多（有泛型、生命周期、trait、关联类型），但核心函数抽象同源。
+</details>
+
+---
 
 ## 认知路径
 

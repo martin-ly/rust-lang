@@ -53,6 +53,12 @@
     - [10.4 边界测试：宏生成的 `unsafe` 块边界（编译错误）](#104-边界测试宏生成的-unsafe-块边界编译错误)
     - [10.2 边界测试：宏递归深度限制（编译错误）](#102-边界测试宏递归深度限制编译错误)
     - [10.4 边界测试：宏中的 `tt` 与 `expr` 的匹配差异（编译错误）](#104-边界测试宏中的-tt-与-expr-的匹配差异编译错误)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：`macro_rules!` 中的 `$x:expr` 与 `$x:tt` 有什么区别？（理解层）](#测验-1macro_rules-中的-xexpr-与-xtt-有什么区别理解层)
+    - [测验 2：声明宏的"卫生性"（hygiene）主要解决什么问题？（理解层）](#测验-2声明宏的卫生性hygiene主要解决什么问题理解层)
+    - [测验 3：`macro_rules!` 宏可以递归调用自身吗？有什么限制？（理解层）](#测验-3macro_rules-宏可以递归调用自身吗有什么限制理解层)
+    - [测验 4：过程宏（proc macro）分为哪三类？它们分别用于什么场景？（理解层）](#测验-4过程宏proc-macro分为哪三类它们分别用于什么场景理解层)
+    - [测验 5：`macro_rules!` 与过程宏的主要区别是什么？（理解层）](#测验-5macro_rules-与过程宏的主要区别是什么理解层)
   - [实践](#实践)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -713,6 +719,66 @@ fn main() {
 ```
 
 > **修正**: `macro_rules!` 的**片段分类器**（fragment specifiers）：1) `expr` — 匹配完整表达式（不含顶层逗号）；2) `tt` — 匹配 token tree（任何括号对的内容，最灵活）；3) `stmt` — 匹配语句；4) `pat` — 匹配模式；5) `ty` — 匹配类型。`expr` 的限制：不能匹配 `foo(1, 2)`（逗号被视为宏参数分隔符），需用 `tt` 或嵌套宏。复杂宏设计：1) 内部宏（`macro_rules! internal { ... }`）处理递归；2) `tt` 作为通用匹配器，再进一步解析；3) 过程宏（`proc_macro`）替代 `macro_rules!` 处理复杂语法。这与 C 的宏（无分类器，纯文本替换，逗号无特殊含义）或 Scheme 的宏（语法对象，结构化匹配）不同——Rust 的 `macro_rules!` 在灵活性和类型安全之间取得平衡。[来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)] · [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros-by-example.html)]
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`macro_rules!` 中的 `$x:expr` 与 `$x:tt` 有什么区别？（理解层）
+
+**题目**: `macro_rules!` 中的 `$x:expr` 与 `$x:tt` 有什么区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`:expr` 匹配完整表达式，但不能匹配含顶层逗号的参数列表；`:tt` 匹配任意 token tree，最灵活但不做语法检查。
+</details>
+
+---
+
+### 测验 2：声明宏的"卫生性"（hygiene）主要解决什么问题？（理解层）
+
+**题目**: 声明宏的"卫生性"（hygiene）主要解决什么问题？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+防止宏内部引入的标识符与调用方作用域中的标识符意外冲突，宏内的局部变量不会污染外部。
+</details>
+
+---
+
+### 测验 3：`macro_rules!` 宏可以递归调用自身吗？有什么限制？（理解层）
+
+**题目**: `macro_rules!` 宏可以递归调用自身吗？有什么限制？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+可以递归，但 Rust 对宏展开深度有递归限制（默认约 128），可用 `#![recursion_limit = "..."]` 调整。
+</details>
+
+---
+
+### 测验 4：过程宏（proc macro）分为哪三类？它们分别用于什么场景？（理解层）
+
+**题目**: 过程宏（proc macro）分为哪三类？它们分别用于什么场景？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+derive 宏（为 struct/enum 派生 trait）、属性宏（修饰 item，可改变其内容）、函数式宏（像 `macro_rules!` 一样调用，但更强大）。
+</details>
+
+---
+
+### 测验 5：`macro_rules!` 与过程宏的主要区别是什么？（理解层）
+
+**题目**: `macro_rules!` 与过程宏的主要区别是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`macro_rules!` 基于模式匹配和代码模板，在编译早期展开；过程宏是外部 crate 中运行的 Rust 函数，可操作 TokenStream，功能更强大但更复杂。
+</details>
 
 ## 实践
 

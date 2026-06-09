@@ -821,7 +821,7 @@ cargo --version   # 应该显示 cargo 1.93.0
 ```toml
 # Cargo.toml
 [package]
-rust-version = "1.93"  # 更新版本要求
+rust-version = "1.93"  # [历史声明] 1.93 发布时的版本要求，当前 MSRV 请见项目根目录 Cargo.toml
 ```
 
 #### 步骤 3：检查依赖兼容性

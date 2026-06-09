@@ -1111,3 +1111,132 @@ fn main() {
 ```
 
 > **修正**: **Match 表达式**：1) 所有 arm 必须返回相同类型；2) `Some(n) => n`（`i32`）与 `None => "none"`（`&str`）冲突；3) 解决：统一类型或使用 `Option` 包装。
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：线性逻辑 vs 仿射逻辑（理解层）
+
+Rust 的所有权系统更接近线性逻辑还是仿射逻辑？
+
+- A. 线性逻辑 — 值必须恰好使用一次，不能丢弃
+- B. 仿射逻辑 — 值可使用零次或一次，允许丢弃
+- C. 经典逻辑 — 值可无限复制和使用
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 仿射逻辑 — 值可使用零次或一次，允许丢弃**。
+
+Rust 的所有权系统是**仿射类型系统**（affine types）：
+
+- 非 `Copy` 类型：可使用一次（move）或零次（drop）
+- `Copy` 类型：可多次使用（按位复制）
+- 纯线性类型（如 Linear Haskell）要求值**必须**使用恰好一次，不能丢弃
+
+Rust 的 `Drop` trait 允许自定义丢弃逻辑，`mem::forget` 可有意泄漏资源。这比纯线性类型更实用，但牺牲了一些形式化保证。
+</details>
+
+---
+
+### 测验 2：⊗（张量积）与 Rust 元组（应用层）
+
+线性逻辑中的 `A ⊗ B` 对应 Rust 中的什么类型？
+
+- A. `Result<A, B>` — 二者取其一
+- B. `(A, B)` — 元组，同时拥有 A 和 B
+- C. `fn() -> A` — 函数类型
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. `(A, B)` — 元组，同时拥有 A 和 B**。
+
+线性逻辑连接词与 Rust 类型的对应：
+
+| 线性逻辑 | Rust 类型 | 含义 |
+|:---|:---|:---|
+| `A ⊗ B` | `(A, B)` | 同时拥有 A 和 B（资源组合） |
+| `A ⊸ B` | `fn(A) -> B` | 消耗 A 产生 B（线性函数） |
+| `A & B` | 无直接对应 | 选择拥有 A 或 B（内部选择） |
+| `A ⊕ B` | `enum { A, B }` | 二者取其一（外部选择） |
+| `!A` | `A`（+ `Clone`） | 可复制/可丢弃的资源 |
+
+`⊗` 的分离逻辑版本要求 A 和 B 的内存不重叠，这与 Rust 的所有权系统天然契合。
+</details>
+
+---
+
+### 测验 3：线性蕴涵 ⊸ 与函数类型（应用层）
+
+以下哪个 Rust 函数签名最符合线性逻辑中的 `String ⊸ usize`？
+
+- A. `fn len(s: &String) -> usize`
+- B. `fn len(s: String) -> usize`
+- C. `fn len(s: String) -> (String, usize)`
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. `fn len(s: String) -> usize`**。
+
+`A ⊸ B` 表示"消耗 A 产生 B"：
+
+- `fn len(s: String) -> usize`：接收 `String`（消耗所有权），返回 `usize`
+- 调用后 `s` 不可用（被 move 进函数）
+- 这与 `String ⊸ usize` 的语义完全一致
+
+选项 A 是借用（`&String`），不消耗所有权，对应经典逻辑的 `A → B` 而非线性蕴涵。
+选项 C 返回 `(String, usize)`，保留了输入，不符合消耗语义。
+</details>
+
+---
+
+### 测验 4：!A（of-course）与 `Clone` trait（分析层）
+
+线性逻辑中的 `!A`（"of course A"）允许资源被复制或丢弃。这与 Rust 的哪个机制对应？
+
+- A. `Copy` trait — 隐式按位复制
+- B. `Clone` trait — 显式深拷贝
+- C. `Drop` trait — 自定义析构
+- D. 以上都是 `!A` 的部分对应
+
+<details>
+<summary>✅ 答案</summary>
+
+**D. 以上都是 `!A` 的部分对应**。
+
+`!A` 的指数规则：
+
+- **弱化（Weakening）**：`!A` 可丢弃 → 对应 `Drop`（允许资源被销毁而不使用）
+- **收缩（Contraction）**：`!A` 可复制 → 对应 `Clone`/`Copy`（允许资源被复制）
+- **推导（Dereliction）**：`!A` 可降级为 `A` → 对应从 `T` 到 `&T` 的借用
+
+Rust 中没有任何单一机制完全对应 `!A`，但 `Copy` + `Clone` + `Drop` 的组合实现了类似效果。这与 Idris 的 `LinearTypes` 不同——Idris 有原生的 `Multiplicity` 系统（1/0/ω）直接表达线性/仿射/无限制。
+</details>
+
+---
+
+### 测验 5：Proof Nets 与 Rust 并发通道（专家级）
+
+在 proof net 视角下，`mpsc::channel()` 的 `send`/`recv` 对应什么结构？
+
+- A. Axiom（公理边）— 直接连接
+- B. Cut（割）— 资源转移的桥梁
+- C. ⊗-⅋ 对 — 并行组合
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. Cut（割）— 资源转移的桥梁**。
+
+`mpsc::channel` 的 proof net 建模：
+
+- 发送端持有 `A`（资源），接收端等待 `A⊥`（对偶）
+- `send(data)` + `recv()` = **Cut 边**连接 `A` 和 `A⊥`
+- Cut 消除定理保证这条边可被安全归约为直接资源转移
+- `move` 语义确保资源线性转移（发送后 data 不可用）
+
+这与 Go 的 channel（无所有权，共享内存）或 Erlang 的消息传递（复制语义）不同——Rust 的 channel 是**线性逻辑 Cut 规则**的运行时实现。
+</details>
+
+---

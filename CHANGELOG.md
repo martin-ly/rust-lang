@@ -4,6 +4,113 @@
 
 ---
 
+## [2.5.9] - 2026-06-09 — Week 4 全面推进：L4 形式化 + 国际化 + cargo vet + mdBook 升级
+
+### 🎓 L4 形式化入门测验（新增 8 道）
+
+- **`concept/04_formal/03_ownership_formal.md`**: 新增 4 道嵌入式测验
+  - 所有权 ↔ 线性逻辑映射（⊗ / ⊸ / !A）
+  - RustBelt Iris 框架: `&mut T` = `token(γ)` / `&T` = `□ read(γ)`
+  - Hoare 三元组与 Unsafe: `{ P } C { Q }` 形式化规约
+  - 分离逻辑 Frame Rule 与 Lock-Free 并发
+- **`concept/04_formal/02_type_theory.md`**: 新增 4 道嵌入式测验
+  - 静态强类型系统分类
+  - 参数多态 vs 特设多态（Cardelli-Wegner）
+  - 生命周期作为类型参数（编译期擦除）
+  - Rust 局部推断 vs Haskell HM 全局推断
+- **累计覆盖**: L1-L4 已有 16 个文件含嵌入式测验
+
+### 🌍 国际化
+
+- **`LEARNING_MVP_PATH_EN.md`**: 英文版最小可行学习路径
+  - 3 周 × 6 天结构，35–45 小时总时长
+  - 每日任务表（阅读 + 练习 + 验证标准）
+  - 配套资源索引（速查表、练习来源、自评清单）
+  - 扩展路径：系统编程 / Web 后端 / 形式化验证
+
+### 🔒 供应链审计初始化
+
+- **`supply-chain/config.toml`**: cargo-vet 配置
+  - 导入 Mozilla 官方审计数据库
+  - 定义 `license` / `safe-to-deploy` / `safe-to-run` 三级审计标准
+  - 本地 workspace crate 免检策略
+- **`supply-chain/audits.toml`**: 审计记录（待填充）
+- **`supply-chain/imports.lock`**: 外部导入锁（自动生成）
+
+### 📖 mdBook 升级检查
+
+- **`book/book.js`**: 验证 edition 检测逻辑支持 2024
+  - `className.startsWith('edition')` + `edition = className.slice(7)`
+  - 已支持 `edition2015` / `edition2018` / `edition2021` / `edition2024`
+  - 无需修改，兼容性确认 ✅
+
+---
+
+## [2.5.8] - 2026-06-09 — Week 2-3 全面推进：L3 高价值主题 + 1.96 文档刷新 + CI 集成
+
+### 🧩 L3 高价值主题测验扩展（新增 12 道 + 可运行化）
+
+- **`concept/03_advanced/11_atomics_and_memory_ordering.md`**: 新增 4 道嵌入式测验（原子操作基础、内存序 Relaxed→SeqCst、自旋锁 CAS、Ticket Lock 分析）+ 内存序 Mermaid 图
+- **`concept/03_advanced/13_inline_assembly.md`**: 新增 4 道嵌入式测验（asm! 语法、操作数约束 lateout、lock xadd 原子操作、options 内存屏障）
+- **`concept/03_advanced/16_lock_free.md`**: 新增 4 道嵌入式测验（CAS 循环、ABA 问题、crossbeam_epoch Treiber Stack、EBR vs Hazard Pointer）
+- **`exercises/tests/l3_advanced_systems.rs`**: 8 个可运行测试全部通过（x86_64 CPUID/RDTSC、自旋锁、Release/Acquire 可见性、CAS 循环）
+- **累计覆盖**: L3 已有 14 个文件含嵌入式测验，exercises 可运行测试总计 **39 个**
+
+### 🗄️ ROD 治理 Week 2 推进
+
+- **对比分析文件引用标记**: `comparative-analysis/rust-vs-{cpp,java,python,go}.md` 4 个文件添加 `[主轨引用]` 标记
+  - 评估结论: ROD 版本侧重工程视角（性能基准、代码示例），concept/ 侧重形式化论据，双轨互补保留
+- **Edition 语义引用标记**: `16-program-semantics/rust-194-features/05-edition-2024-semantics.md` 添加 `[形式化视角]` 标记
+  - 评估结论: 含 unique 形式化语义、安全定理、借用图分析，保留
+
+### 🆕 Rust 1.96.0 文档刷新
+
+- **`docs/02_reference/quick_reference/02_collections_iterators_cheatsheet.md`**: 新增 `core::range::*` 章节（Range/RangeFrom/RangeToInclusive/RangeIter 等，1.96 stable）
+- **`concept/02_intermediate/20_type_system_advanced.md`**: 新增 `From<T>` 1.96 实现（AssertUnwindSafe/LazyCell/LazyLock）
+
+### 🔧 CI 集成
+
+- **`.github/workflows/ci.yml`**: 新增 `quiz-tests` job
+  - 运行 `l3_async_concurrency.rs` / `l3_core.rs` / `l3_advanced_systems.rs` 三个测验测试文件
+  - 确保嵌入式测验的可运行代码持续验证
+
+---
+
+## [2.5.7] - 2026-06-09 — L3 可运行测验 + ROD 归档治理（Week 1 Day 1-5 冲刺）
+
+### 🧩 L3 嵌入式测验扩展（新增 12 道 + 可运行化）
+
+- **`concept/03_advanced/02_async_advanced.md`**: 新增 4 道嵌入式测验（async fn in trait、Stream trait、spawn_blocking、async 递归）
+- **`concept/03_advanced/02_async_patterns.md`**: 新增 4 道嵌入式测验（tokio::select!、backpressure、Actor 模式、取消安全）
+- **`concept/03_advanced/10_concurrency_patterns.md`**: 新增 4 道嵌入式测验（模式识别、Arc+Mutex、工作窃取、死锁预防）
+- **累计覆盖**: L3 已有 11 个文件含嵌入式测验
+
+### 🧪 exercises 测验可运行化（对齐 Brown University 交互式学习模型）
+
+- **`exercises/tests/l3_async_concurrency.rs`**: 13 个可运行测试全部通过（tokio + rayon）
+  - 覆盖: async fn Future、.await 非阻塞、select! 竞争、backpressure、Actor 模式、Arc+Mutex、RwLock、Rayon 工作窃取、死锁预防
+- **`exercises/tests/l3_core.rs`**: 10 个可运行测试全部通过
+  - 覆盖: async 控制流、Unsafe 原始指针、macro_rules! 递归、宏卫生性、extern "C"、CString 往返、#[repr(C)] 布局
+- **`exercises/Cargo.toml`**: 新增 `rayon` dev-dependency
+
+### 🗄️ rust-ownership-decidability/ 归档治理（Week 1 P0）
+
+- **评估清单**: `reports/ROD_HIGH_OVERLAP_INVENTORY_2026_06_09.md`
+  - 完全重复 3 对、高度重复 5 对、中度重复 2 对
+- **归档执行**: 3 个完全重复文件添加 `[ARCHIVED]` 标记
+  - `17-unsafe-rust/01-intro.md` → 参见 concept/03_advanced/03_unsafe.md
+  - `extensions/unsafe-rust-patterns.md` → 参见 concept/03_advanced/03_unsafe.md
+  - `extensions/rust-for-linux.md` → 参见 concept/07_future/19_rust_for_linux.md
+- **原始副本**: 归档至 `archive/rust-ownership-decidability/`
+
+### 📋 四轨执行计划
+
+- **新建**: `reports/EXECUTION_PLAN_2026_06_09_WEEK1_4.md`
+  - Week 1-4 详细任务分解、每日节奏、验收标准
+  - 对齐国际化最佳实践: Brown University 交互式 TRPL、100 Exercises To Learn Rust、Cargo workspace RFC 1525
+
+---
+
 ## [2.5.6] - 2026-06-09 — L3 测验扩展 + docs/ 链接清零冲刺
 
 ### 🧩 L3 嵌入式测验扩展（新增 8 道）

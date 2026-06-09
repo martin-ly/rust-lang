@@ -2,7 +2,7 @@
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-> **版本**: Rust 1.94.0 (rustc 1.94.0, 4a4ef493e 2026-03-02)
+> **版本**: Rust 1.96.0 (rustc 1.96.0, 4a4ef493e 2026-03-02)
 > **梳理日期**: 2026-03-14
 > **梳理范围**: 全项目 12 模块 (C01-C12)
 > **语义基准**: 权威源对齐 (Rust Book, Reference, RFCs, Std Docs)
@@ -80,7 +80,7 @@
 ║ The Rust Book             │ 2026-03, doc.rust-lang.org  │  100%  │ ✅ 已对齐  ║
 ║ The Rust Reference        │ 2026-03, doc.rust-lang.org  │   98%  │ ✅ 已对齐  ║
 ║ Rust By Example           │ 2026-03, doc.rust-lang.org  │  100%  │ ✅ 已对齐  ║
-║ Standard Library API      │ 1.94.0, doc.rust-lang.org   │  100%  │ ✅ 已对齐  ║
+║ Standard Library API      │ 1.96.0, doc.rust-lang.org   │  100%  │ ✅ 已对齐  ║
 ║ Rust 1.94 Release Notes   │ 2026-03-05                  │  100%  │ ✅ 已对齐  ║
 ║ The Cargo Book            │ 2026-03, doc.rust-lang.org  │   95%  │ ✅ 已对齐  ║
 ║ RFCs                      │ rust-lang.github.io/rfcs    │   90%  │ ⚠️ 部分   ║
@@ -959,7 +959,7 @@ fn lazy_semantic() {
 
 **文档版本**: v1.0
 **最后更新**: 2026-03-14
-**对齐版本**: Rust 1.94.0
+**对齐版本**: Rust 1.96.0
 **维护者**: 系统化梳理团队
 
 ---
@@ -967,7 +967,7 @@ fn lazy_semantic() {
 ## 🆕 Rust 1.94 深度整合更新
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-> **适用版本**: Rust 1.94.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点

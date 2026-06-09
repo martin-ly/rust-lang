@@ -55,6 +55,12 @@
     - [10.4 边界测试：`Arc<RefCell<T>>` 的线程安全幻觉（编译错误）](#104-边界测试arcrefcellt-的线程安全幻觉编译错误)
   - [实践](#实践)
   - [参考来源](#参考来源)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Box 的用途（理解层）](#测验-1box-的用途理解层)
+    - [测验 2：Rc vs Arc（应用层）](#测验-2rc-vs-arc应用层)
+    - [测验 3：Weak 指针的作用（应用层）](#测验-3weak-指针的作用应用层)
+    - [测验 4：Deref 与智能指针（分析层）](#测验-4deref-与智能指针分析层)
+    - [测验 5：Drop 顺序（分析层）](#测验-5drop-顺序分析层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -697,6 +703,146 @@ fn main() {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Box<T> 的用途（理解层）
+
+`Box<T>` 最主要的作用是什么？
+
+- A. 引用计数，允许多个所有者
+- B. 在堆上分配数据，使类型大小确定（如递归枚举）
+- C. 提供运行时借用检查
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 在堆上分配数据，使类型大小确定（如递归枚举）**。
+
+`Box<T>` 是最简单的智能指针：
+
+- 在堆上分配 `T`，栈上只保留指针
+- 实现 `Deref` 和 `Drop`，使用体验接近普通引用
+- 使递归类型（如链表、树节点）的大小在编译期确定
+
+`Box` 是**唯一所有权**，不同于 `Rc`（共享所有权）或 `RefCell`（运行时借用检查）。
+</details>
+
+---
+
+### 测验 2：Rc vs Arc（应用层）
+
+以下场景应该选择 `Rc<T>` 还是 `Arc<T>`？
+
+```rust
+// 场景 A: 单线程图遍历，节点间共享子节点
+// 场景 B: 多线程共享配置数据
+```
+
+- A. A-Arc, B-Rc
+- B. A-Rc, B-Arc
+- C. 两者都用 Arc
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. A-Rc, B-Arc**。
+
+| 类型 | 线程安全 | 开销 | 场景 |
+|:---|:---|:---|:---|
+| `Rc<T>` | ❌ 单线程 | 较低（非原子计数） | 单线程数据结构 |
+| `Arc<T>` | ✅ 多线程 | 较高（原子计数） | 跨线程共享 |
+
+`Arc` 使用原子操作维护引用计数，因此是 `Send + Sync`（当 `T` 满足条件时）。单线程场景优先使用 `Rc` 以获得更好性能。
+</details>
+
+---
+
+### 测验 3：Weak 指针的作用（应用层）
+
+`Weak<T>` 在 `Rc<T>`/`Arc<T>` 中解决什么问题？
+
+- A. 提供不可变共享访问
+- B. 打破循环引用，避免内存泄漏
+- C. 提供可变借用能力
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 打破循环引用，避免内存泄漏**。
+
+`Rc`/`Arc` 的强引用计数归零时才释放内存。若两个对象互相强引用（A→B, B→A），计数永远不会归零，导致内存泄漏。
+
+`Weak<T>` 是**不增加强引用计数**的弱引用：
+
+- `Rc::downgrade(&rc)` 创建 `Weak<T>`
+- `weak.upgrade()` 返回 `Option<Rc<T>>`（若原对象已被释放则返回 `None`）
+- 常用于父节点引用子节点，子节点弱引用父节点
+
+</details>
+
+---
+
+### 测验 4：Deref 与智能指针（分析层）
+
+智能指针为什么能实现 `*box_value` 这样的解引用语法？
+
+- A. 编译器对智能指针有特殊处理
+- B. 实现了 `Deref` trait，`*` 运算符自动调用 `deref()`
+- C. `Box` 内置了解引用操作
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 实现了 `Deref` trait，`*` 运算符自动调用 `deref()`**。
+
+`Deref` trait 定义：
+
+```rust
+trait Deref {
+    type Target: ?Sized;
+    fn deref(&self) -> &Self::Target;
+}
+```
+
+`*box_value` 会被编译器展开为 `*(box_value.deref())`。这是 Rust 中"自定义解引用"的通用机制，不仅限于 `Box`，也适用于 `Rc`、`Arc`、`Vec` 等。
+</details>
+
+---
+
+### 测验 5：Drop 顺序（分析层）
+
+以下代码的输出顺序是什么？
+
+```rust
+struct LoudDrop(&'static str);
+impl Drop for LoudDrop {
+    fn drop(&mut self) { println!("Drop: {}", self.0); }
+}
+
+fn main() {
+    let a = LoudDrop("a");
+    let b = Rc::new(LoudDrop("b"));
+    let c = b.clone();
+    drop(c);
+}
+```
+
+- A. `Drop: c` → `Drop: b` → `Drop: a`
+- B. `Drop: a` → `Drop: b`
+- C. `Drop: a` → （无其他输出）
+
+<details>
+<summary>✅ 答案</summary>
+
+答案取决于具体实现。`drop(c)` 减少 `b` 的引用计数，但由于 `b` 仍持有强引用，不会立即释放。`a` 在函数结束时按 LIFO 顺序 drop。
+
+因此输出是：**`Drop: a`**（仅一个）。若将 `b` 也 `drop`，则 `LoudDrop("b")` 才会释放。
+
+这考察 `Rc` 的引用计数语义：`drop` 智能指针只是减计数，不是立即销毁内部值。
+</details>
+
+---
 
 ## 认知路径
 

@@ -1,3 +1,7 @@
+> **[主轨引用]**: 教学视角参见 [concept/07_future/19_rust_edition_preview.md](../../../../concept/07_future/19_rust_edition_preview.md)。本文档侧重形式化语义分析（操作语义、类型规则、安全定理）。
+
+---
+
 # Rust 2024 Edition 的新借用规则语义
 
 > **分级**: [C]

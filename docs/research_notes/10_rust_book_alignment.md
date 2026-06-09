@@ -4,7 +4,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-03-05
 > **Rust Book 版本**: 2024 Edition
-> **Rust 版本**: 1.94.0+
+> **Rust 版本**: 1.96.0+
 > **状态**: 🔄 进行中
 > **用途**: 将本项目文档与 The Rust Book 逐章对齐，确保权威来源全覆盖
 
@@ -250,7 +250,7 @@ Week 3
 ## 🆕 Rust 1.94 深度整合更新
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-> **适用版本**: Rust 1.94.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点

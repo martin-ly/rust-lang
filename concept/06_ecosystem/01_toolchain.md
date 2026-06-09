@@ -91,6 +91,12 @@
     - [10.3 边界测试：`cargo` 工作空间的成员路径错误（编译错误）](#103-边界测试cargo-工作空间的成员路径错误编译错误)
     - [10.4 边界测试：`rustc` 的链接时优化（LTO）与动态链接的冲突（编译错误/链接错误）](#104-边界测试rustc-的链接时优化lto与动态链接的冲突编译错误链接错误)
     - [10.3 边界测试：cargo feature 的联合启用与编译错误（编译错误）](#103-边界测试cargo-feature-的联合启用与编译错误编译错误)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Cargo.toml vs package.json（理解层）](#测验-1cargotoml-vs-packagejson理解层)
+    - [测验 2：Feature 统一机制（应用层）](#测验-2feature-统一机制应用层)
+    - [测验 3：Clippy lint 级别（应用层）](#测验-3clippy-lint-级别应用层)
+    - [测验 4：交叉编译目标三元组（分析层）](#测验-4交叉编译目标三元组分析层)
+    - [测验 5：Cargo profile 优化级别（评价层）](#测验-5cargo-profile-优化级别评价层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -1609,6 +1615,143 @@ fn main() {
 ```
 
 > **修正**: Cargo feature 是**累加**的：依赖树中任何 crate 启用 feature，该 feature 对整棵树生效。互斥 feature 的设计：1) `cfg_mutually_exclusive!`（第三方宏）；2) 运行时检查（`panic!("feat-a and feat-b are mutually exclusive")`）；3) 文档明确说明（但不强制）。Cargo 的 feature resolver v2（2021+）改进了特性解析：dev-dependencies 不激活 features，弱依赖（`dep-name?/feature-name`）按需启用。feature 滥用是 Rust 生态的常见问题：1) 过多 feature 导致测试矩阵爆炸；2) 隐式 feature 依赖（`tokio/rt` 启用 `tokio/rt-multi-thread`）；3) 编译时间增加（每个 feature 组合可能触发重新编译）。这与 npm 的 `optionalDependencies` 或 Python 的 `extras_require` 类似——Rust 的 feature 系统是编译期的条件编译，影响代码包含和依赖解析。[来源: [The Cargo Book](https://doc.rust-lang.org/cargo/reference/features.html)] · [来源: [RFC 2957 — Weak Dependencies](https://rust-lang.github.io/rfcs/2957-cargo-features-2.html)]
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Cargo.toml vs package.json（理解层）
+
+Cargo 的 `Cargo.toml` 与 npm 的 `package.json` 最关键的区别是什么？
+
+- A. `Cargo.toml` 可以定义编译期条件，`package.json` 不能
+- B. `Cargo.toml` 明确指定 SemVer 兼容范围，`package.json` 默认使用更宽松的 `^`
+- C. `Cargo.toml` 不支持 workspaces
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. `Cargo.toml` 明确指定 SemVer 兼容范围，`package.json` 默认使用更宽松的 `^`**。
+
+Cargo 的依赖语义：
+
+- `serde = "1.0"` 表示 `>=1.0.0, <2.0.0`（SemVer 兼容）
+- `serde = "=1.0.100"` 表示严格等于该版本
+- `serde = ">=1.0, <1.1"` 可自定义范围
+
+npm 的 `^1.0.0` 等价于 Cargo 的 `"1.0"`，但 npm 生态中对 minor 版本破坏兼容性更常见。Rust 生态更严格遵循 SemVer，Cargo 的 resolver 也基于此假设。
+</details>
+
+---
+
+### 测验 2：Feature 统一机制（应用层）
+
+工作区中 Crate A 启用 `tokio/rt`，Crate B 启用 `tokio/macros`，最终 `tokio` 会编译哪些 feature？
+
+- A. 仅 `rt`
+- B. 仅 `macros`
+- C. `rt` 和 `macros`（feature 统一）
+
+<details>
+<summary>✅ 答案</summary>
+
+**C. `rt` 和 `macros`（feature 统一）**。
+
+Cargo 的 **Feature Unification** 机制：
+
+- 同一 crate 在工作区中只编译一次
+- 所有依赖该 crate 的 feature 需求被**统一（union）**
+- 因此 `tokio` 会同时启用 `rt` 和 `macros`
+
+这意味着：无法在同一个工作区中让 crate A 使用 "轻量版 tokio" 而 crate B 使用 "完整版 tokio"。若需要这种隔离，必须拆分为独立工作区。
+</details>
+
+---
+
+### 测验 3：Clippy lint 级别（应用层）
+
+`#[deny(clippy::unwrap_used)]` 与 `#[forbid(clippy::unwrap_used)]` 的区别是什么？
+
+- A. 没有区别
+- B. `deny` 视为错误但可被 `allow` 覆盖，`forbid` 不可覆盖
+- C. `forbid` 只影响当前函数
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. `deny` 视为错误但可被 `allow` 覆盖，`forbid` 不可覆盖**。
+
+Rust lint 级别：
+
+- `allow`：允许
+- `warn`：警告但不阻止编译
+- `deny`：视为错误，但后续 `allow` 可覆盖
+- `forbid`：视为错误，且**禁止**后续用 `allow` 覆盖
+
+`forbid` 用于严格安全策略（如禁止 `unsafe_code`），确保子模块无法绕过。
+</details>
+
+---
+
+### 测验 4：交叉编译目标三元组（分析层）
+
+`x86_64-unknown-linux-gnu` 中 `gnu` 表示什么？
+
+- A. 编译器品牌
+- B. 使用的 C 库/ABI（glibc）
+- C. 目标操作系统的发行版
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 使用的 C 库/ABI（glibc）**。
+
+Rust 目标三元组：`arch-vendor-os-abi`
+
+- `x86_64`：架构
+- `unknown`：供应商（通常省略）
+- `linux`：操作系统
+- `gnu`：ABI/C 库（glibc）
+
+常见变体：
+
+- `x86_64-unknown-linux-gnu`：使用 glibc，动态链接
+- `x86_64-unknown-linux-musl`：使用 musl libc，可静态链接
+- `x86_64-pc-windows-msvc`：Windows + MSVC 工具链
+- `wasm32-unknown-unknown`：WebAssembly，无 OS/ABI
+
+</details>
+
+---
+
+### 测验 5：Cargo profile 优化级别（评价层）
+
+`dev` profile 与 `release` profile 的默认优化级别分别是？
+
+- A. `opt-level = 0` 和 `opt-level = 3`
+- B. `opt-level = 1` 和 `opt-level = 2`
+- C. `opt-level = 3` 和 `opt-level = 3`
+
+<details>
+<summary>✅ 答案</summary>
+
+**A. `opt-level = 0` 和 `opt-level = 3`**。
+
+Cargo 默认 profile：
+
+- **`dev`**：`opt-level = 0`，编译最快，适合开发调试
+- **`release`**：`opt-level = 3`，最大优化，适合生产部署
+
+可在 `Cargo.toml` 中自定义：
+
+```toml
+[profile.release]
+opt-level = "z"     # 优化体积
+lto = true          # 链接时优化
+strip = true        # 去除符号
+```
+
+</details>
+
+---
 
 ## 认知路径
 

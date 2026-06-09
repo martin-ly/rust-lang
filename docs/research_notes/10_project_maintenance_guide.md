@@ -207,7 +207,7 @@ TUTORIAL_<topic>.md
 当新Rust版本发布时：
 
 ```markdown
-## Rust 1.94.0 更新检查清单
+## Rust 1.96.0 更新检查清单
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [ ] 检查新特性对形式化定义的影响
@@ -361,7 +361,7 @@ echo "=== 检查完成 ==="
 ### [1.1.0] - 2026-03-15
 > **[来源: [docs.rs](https://docs.rs/)]**
 - 新增：异步编程高级主题
-- 更新：Rust 1.94.0 特性对齐
+- 更新：Rust 1.96.0 特性对齐
 - 修复：生命周期示例错误
 
 ### [1.0.0] - 2026-02-28
@@ -420,7 +420,7 @@ echo "=== 检查完成 ==="
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **适用版本**: Rust 1.94.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点

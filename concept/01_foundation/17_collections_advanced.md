@@ -62,6 +62,12 @@
     - [10.5 边界测试：`HashSet` 的自定义哈希与 `Hash` 一致性（运行时逻辑错误）](#105-边界测试hashset-的自定义哈希与-hash-一致性运行时逻辑错误)
     - [10.5 边界测试：`HashMap` 的 `Entry` API 与借用冲突（编译错误）](#105-边界测试hashmap-的-entry-api-与借用冲突编译错误)
     - [10.6 边界测试：`BTreeMap` 的键修改与排序不变性破坏（逻辑错误/UB）](#106-边界测试btreemap-的键修改与排序不变性破坏逻辑错误ub)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：`BTreeMap` 与 `HashMap` 在键的遍历顺序上有什么本质区别？（理解层）](#测验-1btreemap-与-hashmap-在键的遍历顺序上有什么本质区别理解层)
+    - [测验 2：`VecDeque` 相比 `Vec` 在哪些操作上具有明显优势？（理解层）](#测验-2vecdeque-相比-vec-在哪些操作上具有明显优势理解层)
+    - [测验 3：`BinaryHeap<T>` 默认是大顶堆还是小顶堆？如果需要小顶堆，通常怎么做？（理解层）](#测验-3binaryheapt-默认是大顶堆还是小顶堆如果需要小顶堆通常怎么做理解层)
+    - [测验 4：`HashMap` 的键类型必须实现哪些 trait？如果自定义类型想作为键，需要做什么？（理解层）](#测验-4hashmap-的键类型必须实现哪些-trait如果自定义类型想作为键需要做什么理解层)
+    - [测验 5：在 `HashMap` 的 `entry` API 中，`or_insert` 与 `or_insert_with` 的区别是什么？（理解层）](#测验-5在-hashmap-的-entry-api-中or_insert-与-or_insert_with-的区别是什么理解层)
   - [实践](#实践)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -895,6 +901,66 @@ fn main() {
 > `HashMap` 同理：键的哈希值决定桶位置，修改键会破坏哈希表。这与 C++ 的 `std::map`（`iterator->first` 是 const，不能修改键）或 Java 的 `TreeMap`（`Map.Entry.setValue` 只允许修改值）类似——Rust 的编译期不可变性保证更严格。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/collections/struct.BTreeMap.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`BTreeMap` 与 `HashMap` 在键的遍历顺序上有什么本质区别？（理解层）
+
+**题目**: `BTreeMap` 与 `HashMap` 在键的遍历顺序上有什么本质区别？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`BTreeMap` 按键的排序顺序遍历（基于 Ord）；`HashMap` 按键的哈希值顺序遍历，不保证任何稳定顺序。
+</details>
+
+---
+
+### 测验 2：`VecDeque` 相比 `Vec` 在哪些操作上具有明显优势？（理解层）
+
+**题目**: `VecDeque` 相比 `Vec` 在哪些操作上具有明显优势？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`VecDeque` 在头部插入/删除（`push_front`/`pop_front`）和尾部操作都是均摊 O(1)；`Vec` 头部插入/删除需要 O(n) 移动元素。
+</details>
+
+---
+
+### 测验 3：`BinaryHeap<T>` 默认是大顶堆还是小顶堆？如果需要小顶堆，通常怎么做？（理解层）
+
+**题目**: `BinaryHeap<T>` 默认是大顶堆还是小顶堆？如果需要小顶堆，通常怎么做？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+默认是大顶堆（最大元素在顶部）。实现小顶堆常用 `std::cmp::Reverse<T>` 包装键，或自定义 `Ord` 实现。
+</details>
+
+---
+
+### 测验 4：`HashMap` 的键类型必须实现哪些 trait？如果自定义类型想作为键，需要做什么？（理解层）
+
+**题目**: `HashMap` 的键类型必须实现哪些 trait？如果自定义类型想作为键，需要做什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+需要实现 `Eq` 和 `Hash`。通常添加 `#[derive(Eq, PartialEq, Hash)]`。
+</details>
+
+---
+
+### 测验 5：在 `HashMap` 的 `entry` API 中，`or_insert` 与 `or_insert_with` 的区别是什么？（理解层）
+
+**题目**: 在 `HashMap` 的 `entry` API 中，`or_insert` 与 `or_insert_with` 的区别是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`or_insert` 总是立即计算值（传入已构造的值），`or_insert_with` 只在键不存在时才调用闭包构造值，避免不必要的计算。
+</details>
 
 ## 实践
 

@@ -577,6 +577,23 @@ let b: i32 = a.into();          // ✅ 显式: MyInt → i32
 // let c: MyInt = a + MyInt(3); // ❌ MyInt 未实现 Add
 ```
 
+> **Rust 1.96.0 新增 `From` 实现**：
+>
+> ```rust
+> // From<T> for AssertUnwindSafe<T>: 任意值包装为 panic 安全断言
+> let safe: std::panic::AssertUnwindSafe<i32> = 42.into();
+>
+> // From<T> for LazyCell<T, F>: 从值直接创建已初始化的 LazyCell
+> let cell: std::cell::LazyCell<i32> = 42.into();
+> // 等价于 LazyCell::new(|| 42)，但无需闭包开销
+>
+> // From<T> for LazyLock<T, F>: 从值直接创建已初始化的 LazyLock
+> let lock: std::sync::LazyLock<i32> = 42.into();
+> // 线程安全的惰性初始化，但此处立即初始化
+> ```
+>
+> 这些实现消除了"必须为简单值创建闭包"的语法噪音，使 `LazyCell`/`LazyLock` 的使用更自然。
+
 ### 7.3 重载决议 vs Trait 解析
 
 | 维度 | C++ 重载决议 | Rust Trait 解析 |
@@ -587,7 +604,11 @@ let b: i32 = a.into();          // ✅ 显式: MyInt → i32
 | **二元运算符对称性** | 需定义 `operator+(T, U)` 和 `operator+(U, T)` | 只需 `impl Add<U> for T`（Add 默认覆盖反向） |
 | **编译错误信息** | 复杂（候选函数列表） | 简洁（缺失 trait impl） |
 
-> **关键洞察**: C++ 的运算符重载是**语法层面的重载**——`operator+` 是函数名，遵循 C++ 重载决议规则。Rust 的运算符是**语法糖层面的 Trait 调用**——`a + b` 是 `Add::add(a, b)` 的语法糖，遵循 Trait 解析规则。Rust 的设计消除了 C++ 运算符重载的歧义性（如 `*` 的一元/二元），但牺牲了 C++ 的灵活性（如自定义隐式转换链）。[来源: 💡 原创分析] · [Rust Reference — §4.2.3] ✅
+> **关键洞察**:
+> C++ 的运算符重载是**语法层面的重载**——`operator+` 是函数名，遵循 C++ 重载决议规则。
+> Rust 的运算符是**语法糖层面的 Trait 调用**——`a + b` 是 `Add::add(a, b)` 的语法糖，遵循 Trait 解析规则。
+> Rust 的设计消除了 C++ 运算符重载的歧义性（如 `*` 的一元/二元），但牺牲了 C++ 的灵活性（如自定义隐式转换链）。
+> [来源: 💡 原创分析] · [Rust Reference — §4.2.3] ✅
 
 ### 编译错误示例
 
@@ -760,7 +781,20 @@ fn spawn_task() {
 fn main() {}
 ```
 
-> **修正**: `impl Trait` 的**自动 trait 捕获**：返回类型不自动实现 `Send`、`Sync`、`Unpin` 等 auto trait，即使底层类型实现了。Rust 1.75+ 的 `impl Trait` 生命周期捕获规则变更：返回类型可能捕获更少的生命周期。修复：1) `fn async_fn() -> impl Future<Output = i32> + Send` — 显式约束；2) `async fn async_fn() -> i32` — 自动添加 `Send` 约束（若所有捕获都是 `Send`）；3) `Box<dyn Future<Output = i32> + Send>` — 类型擦除 + 显式约束。`impl Trait` 在返回位置（RPIT）和参数位置（AFIT, `async fn`）的语义略有不同。这与 TypeScript 的 `Promise<T>`（自动推断）或 C# 的 `IAsyncEnumerable<T>`（接口约束）不同——Rust 的 `impl Trait` 是编译期抽象，不暴露具体类型，但约束需显式声明。[来源: [Rust Reference — impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html)] · [来源: [RFC 2289 — Associated Type Constructors](https://rust-lang.github.io/rfcs/2289-associated-type-constructors.html)]
+> **修正**:
+> `impl Trait` 的**自动 trait 捕获**：返回类型不自动实现 `Send`、`Sync`、`Unpin` 等 auto trait，即使底层类型实现了。
+> Rust 1.75+ 的 `impl Trait` 生命周期捕获规则变更：返回类型可能捕获更少的生命周期。
+> 修复：
+>
+> 1) `fn async_fn() -> impl Future<Output = i32> + Send` — 显式约束；
+> 2) `async fn async_fn() -> i32` — 自动添加 `Send` 约束（若所有捕获都是 `Send`）；
+> 3) `Box<dyn Future<Output = i32> + Send>` — 类型擦除 + 显式约束。
+>
+> `impl Trait` 在返回位置（RPIT）和参数位置（AFIT, `async fn`）的语义略有不同。
+>
+> 这与 TypeScript 的 `Promise<T>`（自动推断）或 C# 的 `IAsyncEnumerable<T>`（接口约束）不同——Rust 的 `impl Trait` 是编译期抽象，不暴露具体类型，但约束需显式声明。
+> [来源: [Rust Reference — impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html)] ·
+> [来源: [RFC 2289 — Associated Type Constructors](https://rust-lang.github.io/rfcs/2289-associated-type-constructors.html)]
 
 ### 10.4 边界测试：关联类型的默认实现与具体化冲突（编译错误）
 
@@ -782,7 +816,25 @@ impl Container for MyContainer {
 fn main() {}
 ```
 
-> **修正**: Rust 的**关联类型默认值**：1) `type Item = i32;` 在 trait 定义中提供默认值；2) `impl` 中可省略 `type Item = ...`（使用默认值）；3) 但不能指定不同的具体类型（不能覆盖默认值）。这与 C++20 的 `using` alias（无默认值概念）或 Haskell 的 associated type synonyms（可覆盖）不同——Rust 的默认关联类型是"fallback"而非"可覆盖的默认值"。未来可能的扩展：`default type Item = i32;` 语法（允许覆盖）。当前替代方案：1) 使用泛型参数而非关联类型；2) 使用多个 trait（一个含默认，一个不含）。这与类型类的默认方法（可覆盖）不同——Rust 的关联类型默认值不可覆盖是设计决策。[来源: [Associated Types](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html)] · [来源: [Rust Reference](https://doc.rust-lang.org/reference/items/associated-items.html)]
+> **修正**:
+>
+> Rust 的**关联类型默认值**：
+>
+> 1) `type Item = i32;` 在 trait 定义中提供默认值；
+> 2) `impl` 中可省略 `type Item = ...`（使用默认值）；
+> 3) 但不能指定不同的具体类型（不能覆盖默认值）。
+>
+> 这与 C++20 的 `using` alias（无默认值概念）或 Haskell 的 associated type synonyms（可覆盖）不同——Rust 的默认关联类型是"fallback"而非"可覆盖的默认值"。
+> 未来可能的扩展：`default type Item = i32;` 语法（允许覆盖）。
+>
+> 当前替代方案：
+>
+> 1) 使用泛型参数而非关联类型；
+> 2) 使用多个 trait（一个含默认，一个不含）。
+>
+> 这与类型类的默认方法（可覆盖）不同——Rust 的关联类型默认值不可覆盖是设计决策。
+> [来源: [Associated Types](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html)] ·
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/items/associated-items.html)]
 
 ### 10.2 边界测试：函数重复定义
 
@@ -793,7 +845,11 @@ fn duplicate() {}
 fn main() {}
 ```
 
-> **修正**: **名称唯一性**：1) 同一作用域内不能有两个同名函数；2) trait 方法可同名（通过 trait 区分）；3) 重载（overloading）不支持（除 trait 外）。
+> **修正**: **名称唯一性**：
+>
+> 1) 同一作用域内不能有两个同名函数；
+> 2) trait 方法可同名（通过 trait 区分）；
+> 3) 重载（overloading）不支持（除 trait 外）。
 
 ## 实践
 
@@ -820,9 +876,7 @@ fn main() {}
 > 模式匹配穷尽性 ⟸ 代数数据类型完备 ⟸ 类型安全
 > 零成本抽象 ⟸ 编译期类型擦除 ⟸ 泛型单态化
 > **过渡**: 掌握 高级类型系统：从关联类型到类型级编程 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 高级类型系统：从关联类型到类型级编程 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: 高级类型系统：从关联类型到类型级编程 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界

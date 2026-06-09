@@ -72,6 +72,12 @@
     - [10.3 边界测试：HRTB 与闭包生命周期不匹配（编译错误）](#103-边界测试hrtb-与闭包生命周期不匹配编译错误)
   - [定理链补充](#定理链补充)
   - [反命题与边界](#反命题与边界)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：生命周期省略的边界（理解层）](#测验-1生命周期省略的边界理解层)
+    - [测验 2：HRTB 的适用场景（应用层）](#测验-2hrtb-的适用场景应用层)
+    - [测验 3：自引用结构（分析层）](#测验-3自引用结构分析层)
+    - [测验 4：生命周期子类型（分析层）](#测验-4生命周期子类型分析层)
+    - [测验 5：悬垂引用的编译器防护（理解层）](#测验-5悬垂引用的编译器防护理解层)
   - [实践](#实践)
 
 ### Step 1: 直觉困惑（Intuitive Confusion）
@@ -1331,6 +1337,151 @@ fn main() {
 ## 反命题与边界
 
 > **反命题**: "所有 Rust 引用都可以省略生命周期标注" —— 错误。复杂场景（多输入引用、泛型返回、自引用结构）必须显式标注，省略将导致编译失败或意外约束。
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：生命周期省略的边界（理解层）
+
+以下函数签名中，哪些必须显式标注生命周期？
+
+```rust
+fn foo(x: &str, y: &str) -> &str
+fn bar(x: &str) -> &str
+fn baz<'a>(x: &'a str, y: &str) -> &'a str
+```
+
+- A. `foo` 和 `bar`
+- B. 仅 `foo`
+- C. 仅 `baz`
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 仅 `foo`**。
+
+生命周期省略规则：
+
+- `bar(x: &str) -> &str`：只有一个输入生命周期，自动赋给输出 → 可省略
+- `foo(x: &str, y: &str) -> &str`：两个输入引用，编译器无法确定输出与哪个关联 → 必须显式标注
+- `baz<'a>(x: &'a str, y: &str) -> &'a str`：已经显式标注，无需讨论
+
+这是 Rust 生命周期省略规则（lifetime elision）的核心边界。
+</details>
+
+---
+
+### 测验 2：HRTB 的适用场景（应用层）
+
+以下代码中 `for<'a>` 的作用是什么？
+
+```rust
+fn apply<F>(f: F)
+where
+    F: for<'a> Fn(&'a str) -> &'a str,
+{
+    let s = String::from("hello");
+    let r = f(&s);
+    println!("{}", r);
+}
+```
+
+- A. 限制 F 只能接受 `'static` 引用
+- B. 要求 F 能接受任意生命周期的引用，且返回的引用不超出输入
+- C. 要求 F 返回的引用必须比输入活得更长
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 要求 F 能接受任意生命周期的引用，且返回的引用不超出输入**。
+
+`for<'a>` 是 Higher-Ranked Trait Bound（高阶 trait bound），表示 `F` 对所有可能的生命周期 `'a` 都满足该约束。这要求闭包不能"偷偷"延长引用生命周期——返回值必须和输入同生命周期。
+
+常见应用：`std::str::pattern::Pattern`、`serde::Deserialize` 等需要处理任意生命周期引用的 trait。
+</details>
+
+---
+
+### 测验 3：自引用结构（分析层）
+
+以下代码为什么无法编译？
+
+```rust,compile_fail
+struct SelfRef {
+    data: String,
+    ptr: &str,
+}
+```
+
+- A. `&str` 不能作为结构体字段
+- B. 自引用结构需要显式生命周期标注，但即使标注也无法安全实现
+- C. `String` 和 `&str` 类型不匹配
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 自引用结构需要显式生命周期标注，但即使标注也无法安全实现**。
+
+自引用结构（self-referential struct）是 Rust 生命周期系统的经典难题：
+
+- 结构体移动时，`data` 的地址改变，但 `ptr` 仍指向旧地址
+- 编译器无法验证 `ptr` 在结构体生命周期内始终有效
+- 解决方案：使用 `Pin<Box<T>>` + 不安全代码，或改用索引代替指针
+
+这是 Rust 借用检查器有意阻止的不安全模式。
+</details>
+
+---
+
+### 测验 4：生命周期子类型（分析层）
+
+`'static` 与任意生命周期 `'a` 的关系是什么？
+
+- A. `'static: 'a`（`'static` 比 `'a` 活得更长）
+- B. `'a: 'static`（`'a` 比 `'static` 活得更长）
+- C. 两者无子类型关系
+
+<details>
+<summary>✅ 答案</summary>
+
+**A. `'static: 'a`**。
+
+Rust 中 `'a: 'b` 读作"`'a` outlives `'b`"（`'a` 至少和 `'b` 一样长）。`'static` 是最大生命周期（整个程序运行期间），因此 `'static: 'a` 对任意 `'a` 都成立。
+
+这意味着：
+
+- 可将 `&'static str` 赋值给 `&'a str`（子类型协变）
+- 但不可将 `&'a str` 赋值给 `&'static str`（除非 `'a` 确实是 `'static`）
+
+</details>
+
+---
+
+### 测验 5：悬垂引用的编译器防护（理解层）
+
+以下代码的编译错误属于哪一类生命周期问题？
+
+```rust,compile_fail
+fn dangle() -> &String {
+    let s = String::from("hello");
+    &s
+}
+```
+
+- A. 生命周期标注缺失
+- B. 返回局部变量的引用，形成悬垂引用
+- C. 借用规则冲突（可变 + 不可变同时存在）
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 返回局部变量的引用，形成悬垂引用**。
+
+`s` 是函数局部变量，在函数返回时被 drop。返回 `&s` 会创建一个指向已释放内存的引用。Rust 编译器通过生命周期检查阻止此类代码。
+
+修复方案：返回 `String`（转移所有权）或返回 `'static` 字面量（`"hello"`）。
+</details>
+
+---
 
 ## 实践
 

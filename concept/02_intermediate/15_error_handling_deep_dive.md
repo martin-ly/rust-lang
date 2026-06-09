@@ -49,6 +49,12 @@
     - [10.5 边界测试：`thiserror` 的 `#[from]` 与类型歧义（编译错误）](#105-边界测试thiserror-的-from-与类型歧义编译错误)
     - [10.6 边界测试：`eyre` 与 `anyhow` 的混用导致上下文丢失（编译错误）](#106-边界测试eyre-与-anyhow-的混用导致上下文丢失编译错误)
     - [10.4 边界测试：错误类型的 `source()` 链与 `Display` 的循环（运行时栈溢出）](#104-边界测试错误类型的-source-链与-display-的循环运行时栈溢出)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：`?` 运算符可以自动进行错误类型转换，它依赖哪个 trait？（理解层）](#测验-1-运算符可以自动进行错误类型转换它依赖哪个-trait理解层)
+    - [测验 2：`thiserror` 和 `anyhow` 在错误处理中各自适合什么场景？（理解层）](#测验-2thiserror-和-anyhow-在错误处理中各自适合什么场景理解层)
+    - [测验 3：`Error::source()` 方法返回什么？错误链遍历有什么用途？（理解层）](#测验-3errorsource-方法返回什么错误链遍历有什么用途理解层)
+    - [测验 4：`Box<dyn Error>` 在函数返回类型中起什么作用？有什么限制？（理解层）](#测验-4boxdyn-error-在函数返回类型中起什么作用有什么限制理解层)
+    - [测验 5：如果想让自定义类型支持 `?` 从 `io::Error` 自动转换，需要做什么？（理解层）](#测验-5如果想让自定义类型支持--从-ioerror-自动转换需要做什么理解层)
   - [实践](#实践)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -671,6 +677,66 @@ fn main() {
 ```
 
 > **修正**: `Error::source()` 返回错误链的**下一个错误**。标准库的 `Error::chain()` 遍历 source 链。循环引用（`A.source = B, B.source = A`）导致无限循环。虽然 Rust 的类型系统（`&dyn Error` 是引用，不能拥有循环所有权）使直接循环困难，但 `Arc` 或自定义实现可能创建逻辑循环。安全模式：1) 错误链应为**线性**（无分支、无循环）；2) `source` 指向**原始错误**（底层原因），非同一级别的包装；3) 使用 `anyhow`/`eyre` 自动管理错误链。这与 Java 的 `Throwable.getCause()`（同样可能循环，但 JVM 不检测）或 Go 的 `errors.Unwrap`（Go 1.13+ 的链式错误，手动管理）不同——Rust 的 `Error` trait 提供标准化错误链接口。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/error/trait.Error.html)] · [来源: [anyhow](https://docs.rs/anyhow/)]
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`?` 运算符可以自动进行错误类型转换，它依赖哪个 trait？（理解层）
+
+**题目**: `?` 运算符可以自动进行错误类型转换，它依赖哪个 trait？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+依赖 `From<E>` trait。`?` 会调用 `From::from` 将内部错误转换为外层函数的返回错误类型。
+</details>
+
+---
+
+### 测验 2：`thiserror` 和 `anyhow` 在错误处理中各自适合什么场景？（理解层）
+
+**题目**: `thiserror` 和 `anyhow` 在错误处理中各自适合什么场景？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`thiserror` 适合库：定义结构化的枚举错误类型，便于调用方匹配。`anyhow` 适合应用：快速传播错误，减少模板代码。
+</details>
+
+---
+
+### 测验 3：`Error::source()` 方法返回什么？错误链遍历有什么用途？（理解层）
+
+**题目**: `Error::source()` 方法返回什么？错误链遍历有什么用途？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+返回导致当前错误的下一个错误（`Option<&dyn Error>`）。遍历错误链可以打印根因或进行结构化日志记录。
+</details>
+
+---
+
+### 测验 4：`Box<dyn Error>` 在函数返回类型中起什么作用？有什么限制？（理解层）
+
+**题目**: `Box<dyn Error>` 在函数返回类型中起什么作用？有什么限制？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+实现类型擦除，允许返回任何实现了 `Error` trait 的类型。限制是调用方无法通过 `downcast` 以外的手段知道具体错误类型。
+</details>
+
+---
+
+### 测验 5：如果想让自定义类型支持 `?` 从 `io::Error` 自动转换，需要做什么？（理解层）
+
+**题目**: 如果想让自定义类型支持 `?` 从 `io::Error` 自动转换，需要做什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+为自定义错误类型实现 `From<io::Error> for MyError`，`?` 会自动使用它。使用 `thiserror` 时可用 `#[from]` 派生。
+</details>
 
 ## 实践
 

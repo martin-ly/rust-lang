@@ -58,6 +58,12 @@
     - [4.1 命题一："RustBelt 证明了 Rust 完全安全"](#41-命题一rustbelt-证明了-rust-完全安全)
     - [4.2 命题二："形式化验证可以替代测试"](#42-命题二形式化验证可以替代测试)
     - [4.3 命题三："Iris 逻辑适用于所有语言"](#43-命题三iris-逻辑适用于所有语言)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：RustBelt 的安全保证范围（理解层）](#测验-1rustbelt-的安全保证范围理解层)
+    - [测验 2：Iris 逻辑中的权限断言（应用层）](#测验-2iris-逻辑中的权限断言应用层)
+    - [测验 3：Concurrent Separation Logic (CSL) 的核心思想（分析层）](#测验-3concurrent-separation-logic-csl-的核心思想分析层)
+    - [测验 4：验证工具选择（评价层）](#测验-4验证工具选择评价层)
+    - [测验 5：RustBelt 的局限性（分析层）](#测验-5rustbelt-的局限性分析层)
   - [五、认知路径（Cognitive Path）](#五认知路径cognitive-path)
   - [六、RustBelt 验证的标准库原语](#六rustbelt-验证的标准库原语)
     - [6.1 已验证 / 待验证矩阵](#61-已验证--待验证矩阵)
@@ -504,6 +510,126 @@ graph TD
 
 > **过渡**: 反命题决策树澄清了 RustBelt 的能力边界。从定理证明到工业落地，需要一系列验证工具链的桥接——下一节给出标准库原语验证现状，随后 §8 建立完整工具链光谱。 [来源: [POPL 2019 — Stacked Borrows](https://dl.acm.org/doi/10.1145/3290380)]
 
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：RustBelt 的安全保证范围（理解层）
+
+RustBelt 证明了 Rust 的哪个子集是内存安全的？
+
+- A. 包括所有 `unsafe` 代码在内的完整 Rust 语言
+- B. 仅 safe Rust 子集，且 `unsafe` 代码若满足契约则不破坏安全保证
+- C. 仅标准库实现，不包括用户代码
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 仅 safe Rust 子集，且 `unsafe` 代码若满足契约则不破坏安全保证**。
+
+RustBelt 的核心贡献：证明 Rust 的 **safe 子集** 是内存安全的，且 **unsafe 代码若满足契约** 则不破坏安全保证。unsafe 契约要求：
+
+1. `&mut T` 必须独占（无其他活跃引用）
+2. `&T` 必须有效（指向已初始化且未变性的内存）
+3. `*const T`/`*mut T` 的使用必须恢复上述不变量后再创建 safe 引用
+
+这与 C 的"信任程序员"（无任何验证）或 Java 的 JVM（运行时检查，无形式化内存模型）不同——Rust 提供从类型系统到形式化验证的多层安全网。
+</details>
+
+---
+
+### 测验 2：Iris 逻辑中的权限断言（应用层）
+
+RustBelt 使用 Iris 分离逻辑建模所有权。以下哪个断言表示"位置 ℓ 拥有类型 τ 的值"？
+
+- A. `shr(κ, ℓ)` — 共享权限
+- B. `own(τ, ℓ)` — 独占所有权
+- C. `na(τ, ℓ)` — `UnsafeCell` 的非原子权限
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. `own(τ, ℓ)` — 独占所有权**。
+
+RustBelt 使用 Iris 分离逻辑的三个核心断言：
+
+- `own(τ, ℓ)` — 位置 ℓ 拥有类型 τ 的值（独占所有权）
+- `shr(κ, ℓ)` — 共享权限，允许多个读者（对应 `&T`）
+- `na(τ, ℓ)` — `UnsafeCell` 的非原子权限，允许内部可变（对应 `UnsafeCell<T>`）
+
+</details>
+
+---
+
+### 测验 3：Concurrent Separation Logic (CSL) 的核心思想（分析层）
+
+CSL 如何扩展分离逻辑以处理并发？
+
+- A. 通过全局锁保护所有共享资源
+- B. 通过资源不变量（resource invariant）将共享资源的所有权转移给同步原语
+- C. 通过禁止任何共享状态
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 通过资源不变量（resource invariant）将共享资源的所有权转移给同步原语**。
+
+CSL = 分离逻辑 + 资源不变量：
+
+- 线程在获取锁时获得资源的所有权，释放锁时归还
+- `Mutex<T>` 的资源不变量：`mutex_inv(ℓ, P) ≜ ∃v. ℓ ↦ v * P(v)`
+- `Arc<T>` 使用引用计数 + 分离逻辑的共享权限拆分
+
+这使得并发程序验证可以在局部推理的基础上进行，无需考虑全局状态。
+</details>
+
+---
+
+### 测验 4：验证工具选择（评价层）
+
+以下场景分别适合哪种验证工具？
+
+1. 检查 `unsafe` 代码中的未定义行为（UB）
+2. 证明函数满足前置/后置条件契约
+3. 验证并发算法的无数据竞争性质
+
+- A. 1-Miri, 2-Prusti, 3-Kani
+- B. 1-Kani, 2-Miri, 3-Prusti
+- C. 1-Prusti, 2-Kani, 3-Miri
+
+<details>
+<summary>✅ 答案</summary>
+
+**A. 1-Miri, 2-Prusti, 3-Kani**。
+
+- **Miri**：动态解释器，检测 Stacked Borrows/Tree Borrows 违规、数据竞争、UB
+- **Prusti**：基于 Viper 的分离逻辑验证，支持 `#[requires]`/`#[ensures]` 契约
+- **Kani**：基于 CBMC 的有界模型检测，适合验证并发安全属性
+
+其他工具：Verus（SMT 演绎验证）、Creusot（Why3 分离逻辑）、Aeneas（借用函数式翻译）。
+</details>
+
+---
+
+### 测验 5：RustBelt 的局限性（分析层）
+
+以下哪个命题是**错误**的？
+
+- A. "RustBelt 证明了 Rust 类型系统的 soundness"
+- B. "RustBelt 证明了所有 unsafe 代码都是内存安全的"
+- C. "RustBelt 使用 Iris 高阶并发分离逻辑作为元理论"
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. "RustBelt 证明了所有 unsafe 代码都是内存安全的"** —— 这是错误的。
+
+RustBelt **不**证明所有 unsafe 代码安全。它证明的是：
+
+- Safe Rust 子集在类型系统下是内存安全的
+- Unsafe 代码若满足其声明的契约（通过逻辑断言编码），则不破坏 safe 代码的安全保证
+
+unsafe 代码的正确性仍然依赖程序员的正确实现和额外验证（如 Miri、Kani、人工审查）。
+</details>
+
 ---
 
 ## 五、认知路径（Cognitive Path）
@@ -775,6 +901,12 @@ jobs:
     - [4.1 命题一："RustBelt 证明了 Rust 完全安全"](#41-命题一rustbelt-证明了-rust-完全安全)
     - [4.2 命题二："形式化验证可以替代测试"](#42-命题二形式化验证可以替代测试)
     - [4.3 命题三："Iris 逻辑适用于所有语言"](#43-命题三iris-逻辑适用于所有语言)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：RustBelt 的安全保证范围（理解层）](#测验-1rustbelt-的安全保证范围理解层)
+    - [测验 2：Iris 逻辑中的权限断言（应用层）](#测验-2iris-逻辑中的权限断言应用层)
+    - [测验 3：Concurrent Separation Logic (CSL) 的核心思想（分析层）](#测验-3concurrent-separation-logic-csl-的核心思想分析层)
+    - [测验 4：验证工具选择（评价层）](#测验-4验证工具选择评价层)
+    - [测验 5：RustBelt 的局限性（分析层）](#测验-5rustbelt-的局限性分析层)
   - [五、认知路径（Cognitive Path）](#五认知路径cognitive-path)
   - [六、RustBelt 验证的标准库原语](#六rustbelt-验证的标准库原语)
     - [6.1 已验证 / 待验证矩阵](#61-已验证--待验证矩阵)

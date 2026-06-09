@@ -4,7 +4,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **文档类型**: 研究笔记 / 深度语义分析
-> **Rust 版本**: 1.94.0 (rustc 1.94.0, 4a4ef493e 2026-03-02)
+> **Rust 版本**: 1.96.0 (rustc 1.96.0, 4a4ef493e 2026-03-02)
 > **分析日期**: 2026-03-14
 > **权威来源**: Rust官方Release、Standard Library API、RFCs
 
@@ -707,7 +707,7 @@ include = [
 name = "my-project"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.94"
+rust-version = "1.96"
 
 # 多行依赖配置 (更清晰)
 [dependencies]
@@ -733,7 +733,7 @@ include = [
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-1. [Rust 1.94.0 Release Notes](https://blog.rust-lang.org/2026/03/05/Rust-1.94.0/)
+1. [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/03/05/Rust-1.96.0/)
 2. [Standard Library API - array_windows](https://doc.rust-lang.org/std/primitive.slice.html#method.array_windows)
 3. [Standard Library API - ControlFlow](https://doc.rust-lang.org/std/ops/enum.ControlFlow.html)
 4. [TOML 1.1 Specification](https://toml.io/en/v1.1.0)
@@ -751,7 +751,7 @@ include = [
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-> **适用版本**: Rust 1.94.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点

@@ -37,6 +37,7 @@
   - [🔄 迭代器基础](#-迭代器基础)
     - [三种迭代方式](#三种迭代方式)
     - [手动迭代](#手动迭代)
+    - [范围类型（Rust 1.96+ stable）](#范围类型rust-196-stable)
   - [🔧 迭代器适配器](#-迭代器适配器)
     - [转换适配器](#转换适配器)
     - [选择适配器](#选择适配器)
@@ -560,6 +561,43 @@ while let Some(item) = iter.next() {
     println!("{}", item);
 }
 ```
+
+---
+
+### 范围类型（Rust 1.96+ stable）
+
+> **[来源: [Rust 1.96 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0.html)]**
+
+```rust
+use core::range::{Range, RangeFrom, RangeToInclusive};
+use core::range::{RangeIter, RangeFromIter, RangeToInclusiveIter};
+
+// Range: start..end（标准范围）
+let r = Range { start: 1, end: 5 };
+assert_eq!(r.collect::<Vec<_>>(), vec![1, 2, 3, 4]);
+
+// RangeFrom: start..（无限范围）
+let r = RangeFrom { start: 10 };
+let mut iter = r.iter();
+assert_eq!(iter.next(), Some(10));
+assert_eq!(iter.next(), Some(11));
+
+// RangeToInclusive: ..=end（包含结束）
+let r = RangeToInclusive { end: 3 };
+let iter = r.iter();
+assert_eq!(iter.collect::<Vec<_>>(), vec![0, 1, 2, 3]);
+```
+
+| 类型 | 语法糖 | 说明 |
+|:---|:---|:---|
+| `Range` | `start..end` | 左闭右开 |
+| `RangeFrom` | `start..` | 无限迭代 |
+| `RangeToInclusive` | `..=end` | 左闭右闭 |
+| `RangeIter` | — | `Range` 的迭代器 |
+| `RangeFromIter` | — | `RangeFrom` 的迭代器 |
+| `RangeToInclusiveIter` | — | `RangeToInclusive` 的迭代器 |
+
+> **注意**: 这些类型在 `core::range` 模块中稳定于 Rust 1.96.0，之前仅在 `std::ops` 中作为不稳定 trait 存在。
 
 ---
 
