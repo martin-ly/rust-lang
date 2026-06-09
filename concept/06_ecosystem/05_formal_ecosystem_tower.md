@@ -1,4 +1,7 @@
 # Formal Ecosystem Tower（Rust 生态形式化分层塔）
+
+> **代码状态**: ✅ 含可编译示例
+
 >
 > **EN**: Formal Methods
 > **Summary**: Formal Methods. Guide to 05 Formal Ecosystem Tower.

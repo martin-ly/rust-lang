@@ -1,4 +1,7 @@
 # Lifetime Capture in `impl Trait` Preview
+
+> **代码状态**: [综述级 — 待补充代码]
+
 >
 > **EN**: Traits
 > **Summary**: Traits. Emerging Rust feature or ecosystem trend: Traits.

@@ -1,5 +1,7 @@
 # Rust 1.94 vs 1.93: Comprehensive Comparison for Ownership and Borrow Checking
 
+> **内容分级**: [归档级]
+>
 > **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
@@ -14,7 +16,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 1.94 vs 1.93: Comprehensive Comparison for Ownership and Borrow Checking](#rust-194-vs-193-comprehensive-comparison-for-ownership-and-borrow-checking)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [Executive Summary](#executive-summary)
   - [1. Language Changes Affecting Ownership](#1-language-changes-affecting-ownership)
     - [1.1 Borrow Checker Improvements](#11-borrow-checker-improvements)
@@ -65,7 +67,7 @@
   - [*This document was generated based on official Rust release notes and verified against the actual compiler behavior.*](#this-document-was-generated-based-on-official-rust-release-notes-and-verified-against-the-actual-compiler-behavior)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## Executive Summary
 >

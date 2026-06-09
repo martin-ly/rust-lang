@@ -1,4 +1,7 @@
 # WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型）
+
+> **代码状态**: ✅ 含可编译示例
+
 >
 > **EN**: WebAssembly
 > **Summary**: WebAssembly. Guide to 08 Wasi.

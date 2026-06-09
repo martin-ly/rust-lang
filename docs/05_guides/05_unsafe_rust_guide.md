@@ -1,5 +1,6 @@
 # Unsafe Rust 专题指南
 
+> **相关文档**: 请参阅 [knowledge/03_advanced/unsafe/04_unsafe_rust.md](../../knowledge/03_advanced/unsafe/04_unsafe_rust.md)
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
 > **深度**: [专家级] — 聚焦工程实践与代码示例；形式化语义与安全契约的完整论述请参阅 [concept/03_advanced/03_unsafe.md](../../concept/03_advanced/03_unsafe.md)
@@ -12,7 +13,6 @@
 >
 > - 完整语义与安全规则: [concept/03_advanced/03_unsafe.md](../../concept/03_advanced/03_unsafe.md)
 > - Unsafe 模式与封装技术: [concept/03_advanced/12_unsafe_rust_patterns.md](../../concept/03_advanced/12_unsafe_rust_patterns.md)
->
 > **受众**: [专家] / [研究者]
 > **内容分级**: [研究者级]
 

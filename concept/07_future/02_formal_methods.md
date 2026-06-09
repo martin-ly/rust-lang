@@ -1,4 +1,7 @@
 # Formal Methods Industrialization（形式化方法工业化）
+
+> **代码状态**: ✅ 含可编译示例
+
 >
 > **EN**: Formal Methods
 > **Summary**: Formal Methods. Core Rust concept covering practical examples.

@@ -1,4 +1,7 @@
 # Gen Blocks 预研：超越异步的泛化生成器
+
+> **代码状态**: [综述级 — 待补充代码]
+
 >
 > **EN**: Async Programming
 > **Summary**: Async Programming. Core Rust concept covering mechanism analysis, design patterns, async/await patterns.

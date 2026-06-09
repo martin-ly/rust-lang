@@ -1,8 +1,8 @@
-# Rust 分层概念知识体系 v2.5
+# Rust 分层概念知识体系 v3.0
 
 > **Rust版本**: 1.96.0 stable (2026-05-28)
 > **Edition**: 2024
-> **状态**: v2.5.3 活跃维护 | 286 concept 文件 | 1,677 Markdown | 1,447 Rust 源文件 | 100% Bloom 覆盖 | Phase A/B/C 完成 | 活跃锚点 0 | 编译全绿
+> **状态**: v3.0 正式发布 | 317 concept 文件 | 1,677 Markdown | 1,447 Rust 源文件 | 100% Bloom 覆盖 | Phase 1-5 完成 | 活跃锚点 0 | 编译全绿 | 双标签覆盖率 96.5%+
 
 [![Rust](https://img.shields.io/badge/rust-1.96.0+-blue.svg)](https://www.rust-lang.org)
 [![Edition](https://img.shields.io/badge/edition-2024-purple.svg)](https://doc.rust-lang.org/edition-guide/rust-2024/)

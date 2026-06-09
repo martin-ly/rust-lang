@@ -307,9 +307,6 @@ pub mod prelude {
         concurrency::semaphore::ProcessSemaphore,
     };
 
-    // Rust 1.90 新特性
-    pub use super::archive::rust_190_features::{AsyncTaskDemo, Rust190Features, TaskStatus};
-
     // 增强的异步功能
     #[cfg(feature = "async")]
     pub use super::async_runtime::enhanced::{

@@ -1,4 +1,7 @@
 # `std::autodiff`：Rust 官方自动微分前沿追踪
+
+> **代码状态**: [综述级 — 待补充代码]
+
 >
 > **EN**: `std::autodiff`：Rust 官方自动微分前沿追踪 (Chinese)
 > **Summary**: `std::autodiff`：Rust 官方自动微分前沿追踪 (Chinese). Emerging Rust feature or ecosystem trend: `std::autodiff`：Rust 官方自动微分前沿追踪 (Chinese).

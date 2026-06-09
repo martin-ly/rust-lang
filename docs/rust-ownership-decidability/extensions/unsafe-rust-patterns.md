@@ -4,6 +4,8 @@
 > **原始位置**: `docs/rust-ownership-decidability/extensions/unsafe-rust-patterns.md`
 > **内容分级**: [归档级]
 
+> **说明**: 本文档为历史研究材料，最新内容请参阅 [knowledge/03_advanced/unsafe/04_unsafe_rust.md](../../../knowledge/03_advanced/unsafe/04_unsafe_rust.md)
+
 ---
 
 # Unsafe Rust 模式

@@ -1,4 +1,7 @@
 # Rust Edition 机制与迁移指南
+
+> **代码状态**: ✅ 含可编译示例
+
 >
 > **EN**: Rust Edition 机制与迁移指南 (Chinese)
 > **Summary**: Rust Edition 机制与迁移指南 (Chinese). Core Rust concept covering mechanism analysis, in-depth analysis, Rust edition mechanism.

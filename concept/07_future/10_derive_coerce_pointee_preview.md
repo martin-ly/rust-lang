@@ -1,4 +1,7 @@
 # 派生 CoercePointee 预研：智能指针的自动类型强制
+
+> **代码状态**: [综述级 — 待补充代码]
+
 >
 > **EN**: Smart Pointers
 > **Summary**: Smart Pointers. Core Rust concept covering practical examples, unsafe Rust and memory safety, metaprogramming techniques.

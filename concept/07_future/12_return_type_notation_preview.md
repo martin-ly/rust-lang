@@ -1,4 +1,7 @@
 # Return Type Notation 预研：精确捕获的显式控制
+
+> **代码状态**: ✅ 含可编译示例
+
 >
 > **EN**: Return Type Notation 预研：精确捕获的显式控制 (Chinese)
 > **Summary**: Return Type Notation 预研：精确捕获的显式控制 (Chinese). Core Rust concept covering mechanism analysis, async/await patterns, trait system mechanics.

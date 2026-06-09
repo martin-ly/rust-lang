@@ -1,4 +1,7 @@
 # Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举
+
+> **代码状态**: ✅ 含可编译示例
+
 >
 > **EN**: Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举 (Chinese)
 > **Summary**: Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举 (Chinese). Core Rust concept covering mechanism analysis, aerospace and fault-tolerant systems.

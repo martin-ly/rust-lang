@@ -1,5 +1,7 @@
 # Rust 2024 Edition 迁移实操指南
 
+> **相关文档**: 请参阅 [knowledge/03_advanced/async/01_async_closures_2024.md](../../knowledge/03_advanced/async/01_async_closures_2024.md)
+> **相关文档**: 请参阅 [knowledge/02_intermediate/control_flow/02_let_chains.md](../../knowledge/02_intermediate/control_flow/02_let_chains.md)
 > **分级**: [A]
 > **Bloom 层级**: L3 (应用)
 > **深度**: [专家级] — 聚焦迁移实操与工具链配置；Edition 设计动机与语义变更的完整论述请参阅 [concept/07_future/22_edition_guide.md](../../concept/07_future/22_edition_guide.md) 与 [concept/07_future/23_rust_edition_guide.md](../../concept/07_future/23_rust_edition_guide.md)
@@ -12,7 +14,6 @@
 > **后置延伸**: [docs 异步编程指南](./05_async_programming_usage_guide.md) · [docs Unsafe Rust 指南](./05_unsafe_rust_guide.md)
 > **Rust 版本**: 1.85.0+ (Edition 2024 起始版本) / 当前 1.96.0+
 > **状态**: ✅ 已完成
->
 > **受众**: [专家] / [研究者]
 > **内容分级**: [实验级]
 

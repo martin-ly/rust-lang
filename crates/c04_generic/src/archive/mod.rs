@@ -6,6 +6,5 @@ pub mod rust_189_comprehensive;
 pub mod rust_189_features;
 pub mod rust_189_gat_hrtbs;
 pub mod rust_190_features;
-pub mod rust_190_real_generics;
 pub mod rust_191_features;
 pub mod rust_192_features;

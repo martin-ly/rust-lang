@@ -225,6 +225,22 @@ def extract_pre_post_concepts(content: str) -> dict:
     return {"pre": pre, "post": post}
 
 
+def extract_dual_labels(content: str) -> dict:
+    """提取双标签 (受众 + 内容分级)"""
+    labels = {"audience": None, "content_level": None}
+    # 受众: > **受众**: [初学者] 或 > **受众**: [初学者] / [进阶]
+    audience_match = re.search(r">\s*\*\*受众\*\*[:：]\s*\[([^\]]+)\](?:\s*/\s*\[([^\]]+)\])?", content)
+    if audience_match:
+        labels["audience"] = audience_match.group(1).strip()
+        if audience_match.group(2):
+            labels["audience_secondary"] = audience_match.group(2).strip()
+    # 内容分级: > **内容分级**: [综述级]
+    level_match = re.search(r">\s*\*\*内容分级\*\*[:：]\s*\[([^\]]+)\]", content)
+    if level_match:
+        labels["content_level"] = level_match.group(1).strip()
+    return labels
+
+
 def extract_backward_chains(content: str) -> list[dict]:
     """提取 ⟸ 反向推理标记（排除代码块内）"""
     chains = []
@@ -285,6 +301,7 @@ class FileAudit:
     backward_chains: list = field(default_factory=list)
     templated_chains: list = field(default_factory=list)
     theorem_chain_exempt: bool = False
+    dual_labels: dict = field(default_factory=dict)
 
 
 def audit_file(filepath: Path) -> FileAudit:
@@ -309,6 +326,7 @@ def audit_file(filepath: Path) -> FileAudit:
         backward_chains=extract_backward_chains(content),
         templated_chains=detect_templated_chains(content),
         theorem_chain_exempt="theorem_chain: N/A" in content or "# theorem_chain: N/A" in content,
+        dual_labels=extract_dual_labels(content),
     )
 
 
@@ -423,6 +441,7 @@ def generate_dashboard(audits: list[FileAudit], dead_links: list[dict]) -> str:
 
     # 前置/后置概念覆盖率统计
     pre_post_stats = {"has_pre": 0, "has_post": 0, "total": 0}
+    dual_label_stats = {"has_both": 0, "total": 0, "illegal": 0}
     for a in audits:
         if a.layer in ("L1", "L2", "L3", "L4", "L5", "L6", "L7"):
             pre_post_stats["total"] += 1
@@ -430,13 +449,22 @@ def generate_dashboard(audits: list[FileAudit], dead_links: list[dict]) -> str:
                 pre_post_stats["has_pre"] += 1
             if a.pre_post.get("post"):
                 pre_post_stats["has_post"] += 1
+            # 双标签统计
+            dual_label_stats["total"] += 1
+            dl = a.dual_labels
+            if dl.get("audience") and dl.get("content_level"):
+                dual_label_stats["has_both"] += 1
+            audience = dl.get("audience", "")
+            level = dl.get("content_level", "")
+            if "初学者" in audience and level == "研究者级":
+                dual_label_stats["illegal"] += 1
 
     # 按层级统计
     layer_stats = {}
     for a in audits:
         layer = a.layer
         if layer not in layer_stats:
-            layer_stats[layer] = {"files": 0, "chains": 0, "transitions": 0, "cog": 0, "backward": 0, "templated": 0, "has_pre": 0, "has_post": 0}
+            layer_stats[layer] = {"files": 0, "chains": 0, "transitions": 0, "cog": 0, "backward": 0, "templated": 0, "has_pre": 0, "has_post": 0, "dual_both": 0}
         layer_stats[layer]["files"] += 1
         layer_stats[layer]["chains"] += len(a.theorem_chains)
         layer_stats[layer]["transitions"] += len(a.transitions)
@@ -447,6 +475,9 @@ def generate_dashboard(audits: list[FileAudit], dead_links: list[dict]) -> str:
             layer_stats[layer]["has_pre"] += 1
         if a.pre_post.get("post"):
             layer_stats[layer]["has_post"] += 1
+        dl = a.dual_labels
+        if dl.get("audience") and dl.get("content_level"):
+            layer_stats[layer]["dual_both"] += 1
 
     # 风险文件
     risk_files = []
@@ -471,6 +502,17 @@ def generate_dashboard(audits: list[FileAudit], dead_links: list[dict]) -> str:
         # 反向推理检查 (L1-L3 核心文件)
         if a.layer in ("L1", "L2", "L3") and a.line_count > 200 and len(a.backward_chains) < 2:
             issues.append(f"反向推理不足 (⟸ {len(a.backward_chains)} < 2)")
+        # 双标签检查 (L1-L7 非归档文件)
+        if a.layer in ("L1", "L2", "L3", "L4", "L5", "L6", "L7"):
+            dl = a.dual_labels
+            if not dl.get("audience"):
+                issues.append("缺失受众标签")
+            if not dl.get("content_level"):
+                issues.append("缺失内容分级标签")
+            audience = dl.get("audience", "")
+            level = dl.get("content_level", "")
+            if "初学者" in audience and level == "研究者级":
+                issues.append("非法标签组合: 初学者 + 研究者级")
         # 模板化 ⟹ 检查
         if len(a.templated_chains) > 0:
             issues.append(f"含 {len(a.templated_chains)} 个模板化 ⟹ 待重构")
@@ -502,11 +544,13 @@ def generate_dashboard(audits: list[FileAudit], dead_links: list[dict]) -> str:
         f"| 模板化 ⟹ | {total_templated} | 0 | {'✅' if total_templated == 0 else '❌'} |",
         f"| 前置概念覆盖率 | {pre_post_stats['has_pre']}/{pre_post_stats['total']} | 100% | {'✅' if pre_post_stats['has_pre'] == pre_post_stats['total'] else '⚠️'} |",
         f"| 后置概念覆盖率 | {pre_post_stats['has_post']}/{pre_post_stats['total']} | 100% | {'✅' if pre_post_stats['has_post'] == pre_post_stats['total'] else '⚠️'} |",
+        f"| 双标签覆盖率 | {dual_label_stats['has_both']}/{dual_label_stats['total']} | >=95% | {'✅' if dual_label_stats['has_both'] >= dual_label_stats['total'] * 0.95 else '⚠️'} |",
+        f"| 非法标签组合 | {dual_label_stats['illegal']} | 0 | {'✅' if dual_label_stats['illegal'] == 0 else '❌'} |",
         "",
         "## 按层级分布",
         "",
-        "| 层级 | 文件数 | 平均 ⟹/文件 | 平均过渡段/文件 | 认知路径 | ⟸/文件 | 模板化 | 前置覆盖 | 后置覆盖 |",
-        "|:---|:---|:---|:---|:---|:---|:---|:---|:---|",
+        "| 层级 | 文件数 | 平均 ⟹/文件 | 平均过渡段/文件 | 认知路径 | ⟸/文件 | 模板化 | 前置覆盖 | 后置覆盖 | 双标签 |",
+        "|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|",
     ]
 
     for layer in sorted(layer_stats.keys()):
@@ -517,7 +561,8 @@ def generate_dashboard(audits: list[FileAudit], dead_links: list[dict]) -> str:
         avg_backward = s["backward"] / s["files"] if s["files"] > 0 else 0
         pre_rate = f"{s['has_pre']}/{s['files']}" if s["files"] > 0 else "-"
         post_rate = f"{s['has_post']}/{s['files']}" if s["files"] > 0 else "-"
-        lines.append(f"| {layer} | {s['files']} | {avg_chains:.1f} | {avg_trans:.1f} | {cog_rate} | {avg_backward:.1f} | {s['templated']} | {pre_rate} | {post_rate} |")
+        dual_rate = f"{s['dual_both']}/{s['files']}" if s["files"] > 0 else "-"
+        lines.append(f"| {layer} | {s['files']} | {avg_chains:.1f} | {avg_trans:.1f} | {cog_rate} | {avg_backward:.1f} | {s['templated']} | {pre_rate} | {post_rate} | {dual_rate} |")
 
     lines.extend([
         "",
@@ -549,18 +594,21 @@ def generate_dashboard(audits: list[FileAudit], dead_links: list[dict]) -> str:
         "",
         "## 文件详细统计",
         "",
-        "| 文件 | 层级 | 行数 | ⟹ | ⟸ | 模板 | 反命题 | Mermaid | 代码块 | 过渡段 | 认知路径 | 前置 | 后置 |",
-        "|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|",
+        "| 文件 | 层级 | 行数 | ⟹ | ⟸ | 模板 | 反命题 | Mermaid | 代码块 | 过渡段 | 认知路径 | 前置 | 后置 | 受众 | 分级 |",
+        "|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|",
     ])
 
     for a in audits:
         pre_mark = "✅" if a.pre_post.get("pre") else "❌"
         post_mark = "✅" if a.pre_post.get("post") else "❌"
+        dl = a.dual_labels
+        audience_mark = dl.get("audience", "—")
+        level_mark = dl.get("content_level", "—")
         lines.append(
             f"| {a.path} | {a.layer} | {a.line_count} | {len(a.theorem_chains)} | "
             f"{len(a.backward_chains)} | {len(a.templated_chains)} | {len(a.anti_propositions)} | "
             f"{len(a.mermaid_blocks)} | {len(a.code_blocks)} | {len(a.transitions)} | "
-            f"{'✅' if a.has_cognitive_path else '❌'} | {pre_mark} | {post_mark} |"
+            f"{'✅' if a.has_cognitive_path else '❌'} | {pre_mark} | {post_mark} | {audience_mark} | {level_mark} |"
         )
 
     lines.append("")

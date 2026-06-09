@@ -4,13 +4,14 @@
 > **原始位置**: `docs/rust-ownership-decidability/17-unsafe-rust/01-intro.md`
 > **内容分级**: [归档级]
 
+> **说明**: 本文档为历史研究材料，最新内容请参阅 [knowledge/03_advanced/unsafe/04_unsafe_rust.md](../../../knowledge/03_advanced/unsafe/04_unsafe_rust.md)
+
 ---
 
 # Unsafe Rust 概述
 
 > **分级**: [C] [已归档]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **权威来源**: The Rustonomicon, The Rust Reference Chapter 16
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **对齐日期**: 2026-05-12.0

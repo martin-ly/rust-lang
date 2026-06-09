@@ -5,7 +5,9 @@
 >
 > **标准来源**: TRPL · Rust Reference · std API Docs · Rustnomicon · Async Book · Cargo Book · Edition Guide
 > **对应 Rust 版本**: 1.96.0 (Edition 2024)
-> **状态**: 术语表覆盖 100 个高频术语，L1 → L5+ 分层
+> **状态**: ✅ v3.0 已冻结 — 覆盖 100 个高频术语，L1 → L5+ 分层
+> **冻结日期**: 2026-06-10
+> **维护规则**: 仅当 Rust 官方术语变更或新增核心语言关键字时才更新，常规生态术语不扩展
 
 # Rust 核心术语英中对照表
 >

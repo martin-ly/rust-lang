@@ -1,4 +1,7 @@
 # Stable ABI Preview
+
+> **代码状态**: [综述级 — 待补充代码]
+
 >
 > **EN**: Stable ABI Preview (Chinese)
 > **Summary**: Stable ABI Preview (Chinese). Emerging Rust feature or ecosystem trend: Stable ABI Preview (Chinese).

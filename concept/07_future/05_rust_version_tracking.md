@@ -1,4 +1,7 @@
 # Rust 形式模型演进跟踪（1.79–1.97+）
+
+> **代码状态**: ✅ 含可编译示例
+
 >
 > **EN**: Rust 形式模型演进跟踪（1.79–1.97+） (Chinese)
 > **Summary**: 形式模型演进跟踪. Emerging Rust feature or ecosystem trend: 形式模型演进跟踪.

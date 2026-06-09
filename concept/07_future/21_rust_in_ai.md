@@ -1,4 +1,7 @@
 # Rust 在 AI 与机器学习中的新兴角色
+
+> **代码状态**: ✅ 含可编译示例
+
 >
 > **EN**: Rust 在 AI 与机器学习中的新兴角色 (Chinese)
 > **Summary**: Rust 在 AI 与机器学习中的新兴角色 (Chinese). Core Rust concept covering mechanism analysis, memory safety guarantees, performance optimization.

@@ -1,4 +1,7 @@
 # 并行 前端编译预研：Rust 编译器 的多核扩展
+
+> **代码状态**: ✅ 含可编译示例
+
 >
 > **EN**: Compiler Internals
 > **Summary**: Compiler Internals. Core Rust concept covering mechanism analysis, parallel programming, threading and synchronization.

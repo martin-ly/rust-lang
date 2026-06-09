@@ -1,4 +1,7 @@
 # Rust 1.97 前沿特性预览
+
+> **代码状态**: [综述级 — 待补充代码]
+
 >
 > **EN**: Rust 1.97 前沿特性预览 (Chinese)
 > **Summary**: 1.97 前沿特性预览 (Chinese). Emerging Rust feature or ecosystem trend: 1.97 前沿特性预览 (Chinese).

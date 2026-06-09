@@ -1,5 +1,7 @@
 # Cross-Reference Verification Summary
 
+> **内容分级**: [归档级]
+>
 > **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
@@ -14,7 +16,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Cross-Reference Verification Summary](#cross-reference-verification-summary)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [Work Completed](#work-completed)
     - [1. Link Verification](#1-link-verification)
     - [2. Files Fixed (14 files)](#2-files-fixed-14-files)
@@ -39,7 +41,7 @@
   - [*Completed: 2026-03-06*](#completed-2026-03-06)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## Work Completed
 >

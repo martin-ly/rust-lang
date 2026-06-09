@@ -1,5 +1,7 @@
 ## 代码示例：Cargo Script 单文件程序
 
+> **代码状态**: [综述级 — 待补充代码]
+
 以下是一个完整的 Cargo Script 示例，演示 frontmatter 依赖声明与单文件执行：
 
 ```rust,ignore
@@ -103,6 +105,12 @@ chmod +x csv_filter.rs && ./csv_filter.rs
     - [10.7 边界测试：cargo script 的依赖解析与版本冲突（运行时/编译错误）](#107-边界测试cargo-script-的依赖解析与版本冲突运行时编译错误)
     - [10.3 边界测试：cargo script 的 shebang 与 Windows 兼容性（运行时错误）](#103-边界测试cargo-script-的-shebang-与-windows-兼容性运行时错误)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Cargo Script（单文件 Rust 程序）相比传统 `cargo new` 项目有什么优势？（理解层）](#测验-1cargo-script单文件-rust-程序相比传统-cargo-new-项目有什么优势理解层)
+    - [测验 2：在 Cargo Script 文件中，如何声明外部依赖？（理解层）](#测验-2在-cargo-script-文件中如何声明外部依赖理解层)
+    - [测验 3：Cargo Script 适合替代哪些传统脚本语言（如 Python/Bash）的场景？（理解层）](#测验-3cargo-script-适合替代哪些传统脚本语言如-pythonbash的场景理解层)
+    - [测验 4：Cargo Script 的编译产物会被缓存吗？（理解层）](#测验-4cargo-script-的编译产物会被缓存吗理解层)
+    - [测验 5：Cargo Script 与 `rustc` 直接编译单文件有什么区别？（理解层）](#测验-5cargo-script-与-rustc-直接编译单文件有什么区别理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)

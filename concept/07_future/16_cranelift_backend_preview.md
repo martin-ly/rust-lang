@@ -1,4 +1,7 @@
 # Cranelift 后端预研：Rust 编译器的快速调试编译
+
+> **代码状态**: ✅ 含可编译示例
+
 >
 > **EN**: Compiler Internals
 > **Summary**: Compiler Internals. Core Rust concept covering mechanism analysis, compiler internals, compiler backend.

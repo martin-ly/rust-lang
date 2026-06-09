@@ -1,5 +1,7 @@
 # Rust 形式化工程系统 - 主索引
 
+> **内容分级**: [归档级]
+> **说明**: 本文档为历史研究材料，最新内容请参阅 [knowledge/04_expert/safety_critical/02_rust_safety_critical_ecosystem_master_index.md](../../knowledge/04_expert/safety_critical/02_rust_safety_critical_ecosystem_master_index.md)
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 

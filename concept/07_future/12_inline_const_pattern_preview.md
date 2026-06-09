@@ -1,4 +1,7 @@
 # Inline Const Pattern Preview
+
+> **代码状态**: [综述级 — 待补充代码]
+
 >
 > **EN**: Inline Const Pattern Preview (Chinese)
 > **Summary**: Inline Const Pattern Preview (Chinese). Emerging Rust feature or ecosystem trend: Inline Const Pattern Preview (Chinese).

@@ -1,4 +1,7 @@
 # Arbitrary Self Types 预览：自定义方法接收器
+
+> **代码状态**: [综述级 — 待补充代码]
+
 >
 > **EN**: Arbitrary Self Types 预览：自定义方法接收器 (Chinese)
 > **Summary**: Arbitrary Self Types 预览：自定义方法接收器 (Chinese). Core Rust concept covering mechanism analysis, embedded systems programming, kernel development.

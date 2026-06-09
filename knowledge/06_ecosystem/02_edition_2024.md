@@ -1,7 +1,9 @@
 # Rust Edition 2024 完整指南
 
-> **相关概念**: [Edition](../../concept/06_ecosystem/01_toolchain.md)
 > **深度**: [综述级]
+> **相关概念**: [Edition](../../concept/06_ecosystem/01_toolchain.md)
+> **主轨引用**: 概念级深度分析请参阅 [concept/07_future/23_rust_edition_guide.md](../../concept/07_future/23_rust_edition_guide.md)
+> **主轨引用**: 概念级深度分析请参阅 [concept/07_future/22_edition_guide.md](../../concept/07_future/22_edition_guide.md)
 > **主轨引用**: 概念级深度分析请参阅 [concept/07_future/19_rust_edition_preview.md](../../concept/07_future/19_rust_edition_preview.md)
 > **Bloom 层级**: 理解
 > **版本**: Edition 2024

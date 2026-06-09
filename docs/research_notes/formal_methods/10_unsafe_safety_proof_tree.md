@@ -1,4 +1,7 @@
 > **内容分级**: [归档级]
+
+> **说明**: 本文档为历史研究材料，最新内容请参阅 [knowledge/03_advanced/unsafe/04_unsafe_rust.md](../../../knowledge/03_advanced/unsafe/04_unsafe_rust.md)
+
 > **说明**: 本文档为历史研究材料，最新内容请参阅 [concept/03_advanced/03_unsafe.md](../../../concept/03_advanced/03_unsafe.md)
 
 ---
@@ -7,7 +10,6 @@
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **模块**: Unsafe Rust / FFI
 > **用途**: Unsafe 代码安全边界形式化证明
 > **完备度**: 100%

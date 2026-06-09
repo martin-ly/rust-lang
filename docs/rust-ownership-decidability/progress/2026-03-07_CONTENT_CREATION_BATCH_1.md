@@ -1,8 +1,10 @@
 # 内容创建批次 1 - 完成报告
 
+> **内容分级**: [归档级]
+> **说明**: 本文档为历史研究材料，最新内容请参阅 [knowledge/04_expert/safety_critical/09_reference/04_comprehensive_international_alignment_completion_report.md](../../../knowledge/04_expert/safety_critical/09_reference/04_comprehensive_international_alignment_completion_report.md)
+>
 > **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **日期**: 2026-03-07
 > **批次**: 1
 > **状态**: ✅ 完成

@@ -1,4 +1,7 @@
 # Language Evolution（语言演进）
+
+> **代码状态**: ✅ 含可编译示例
+
 >
 > **EN**: Language Evolution（语言演进） (Chinese)
 > **Summary**: Language Evolution. Guide to 03 Evolution.

@@ -1,4 +1,7 @@
 # Rust 测试策略：从单元测试到属性验证
+
+> **代码状态**: ✅ 含可编译示例
+
 >
 > **EN**: Testing
 > **Summary**: Testing. Core Rust concept covering formal methods foundations, verification techniques, testing strategies.
@@ -50,6 +53,12 @@
     - [10.5 边界测试：属性测试的 shrink 陷阱（测试覆盖盲区）](#105-边界测试属性测试的-shrink-陷阱测试覆盖盲区)
     - [10.3 边界测试：mockall 的期望设置与调用顺序验证（测试失败）](#103-边界测试mockall-的期望设置与调用顺序验证测试失败)
     - [补充定理链](#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：`cargo test` 默认并行运行测试。如果测试间有共享状态冲突，该怎么办？（理解层）](#测验-1cargo-test-默认并行运行测试如果测试间有共享状态冲突该怎么办理解层)
+    - [测验 2：属性测试（Property-Based Testing，如 `proptest`）与单元测试的根本区别是什么？（理解层）](#测验-2属性测试property-based-testing如-proptest与单元测试的根本区别是什么理解层)
+    - [测验 3：模糊测试（Fuzzing，如 `cargo-fuzz`）适合发现什么类型的 bug？（理解层）](#测验-3模糊测试fuzzing如-cargo-fuzz适合发现什么类型的-bug理解层)
+    - [测验 4：集成测试应该验证什么？与单元测试的分工原则是什么？（理解层）](#测验-4集成测试应该验证什么与单元测试的分工原则是什么理解层)
+    - [测验 5：`miri` 在测试中的主要用途是什么？（理解层）](#测验-5miri-在测试中的主要用途是什么理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)

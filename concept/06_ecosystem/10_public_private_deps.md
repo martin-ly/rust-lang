@@ -1,5 +1,7 @@
 ## 代码示例：Public/Private Dependencies 配置
 
+> **代码状态**: [综述级 — 待补充代码]
+
 以下 `Cargo.toml` 演示如何显式控制依赖可见性，避免"依赖泄漏"：
 
 ```toml

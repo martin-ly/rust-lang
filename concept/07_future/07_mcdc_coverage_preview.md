@@ -1,4 +1,7 @@
 # MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证
+
+> **代码状态**: ✅ 含可编译示例
+
 >
 > **EN**: Security Practices
 > **Summary**: Security Practices. Core Rust concept covering formal methods foundations, verification techniques, compiler internals.

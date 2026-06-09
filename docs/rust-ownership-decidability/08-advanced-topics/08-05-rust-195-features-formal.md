@@ -1,5 +1,7 @@
 # Rust 1.95 特性形式化分析
 
+> **内容分级**: [归档级]
+>
 > **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
@@ -17,7 +19,7 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust 1.95 特性形式化分析](#rust-195-特性形式化分析)
-  - [� 目录](#-目录)
+  - [📋 目录](#-目录)
   - [1. 概述](#1-概述)
   - [2. if let guards 的形式化语义](#2-if-let-guards-的形式化语义)
     - [2.1 语法扩展](#21-语法扩展)

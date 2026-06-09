@@ -1,5 +1,7 @@
 # 13 多实例先验设计时知识模式 (Multiple Instances With a priori Design-Time Knowledge) - 完整形式化语义
 
+> **内容分级**: [归档级]
+>
 > **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 

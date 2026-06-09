@@ -1,4 +1,7 @@
 # Pin Ergonomics 与 Reborrow Traits 预研：超越 `Pin::as_mut`
+
+> **代码状态**: ✅ 含可编译示例
+
 >
 > **EN**: Traits
 > **Summary**: Traits. Emerging Rust feature or ecosystem trend: Traits.

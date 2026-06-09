@@ -1,5 +1,6 @@
 # Miri Tree Borrows 深度解析
 
+> **相关文档**: 请参阅 [docs/content/academic/10_tree_borrows_guide.md](../../../docs/content/academic/10_tree_borrows_guide.md)
 > **Bloom 层级**: 理解
 > **📌 简介**: Tree Borrows 是 Rust 的下一代内存模型，由 Villani 等人在 PLDI 2025 以 Distinguished Paper 发表。
 > 它用**树形权限模型**替代了 Stacked Borrows 的线性栈模型，将 Miri 的误报率降低了 54%，同时保持对真实未定义行为（UB）的检测能力。
@@ -7,7 +8,6 @@
 > **⏱️ 预计学习时间**: 60-90 分钟
 > **📚 难度级别**: ⭐⭐⭐⭐⭐ 专家级
 > **权威来源**: "Tree Borrows" - Villani et al., PLDI 2025 Distinguished Paper
->
 > **受众**: [专家] / [研究者]
 > **内容分级**: [研究者级]
 

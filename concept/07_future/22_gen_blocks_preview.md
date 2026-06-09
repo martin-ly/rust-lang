@@ -1,4 +1,7 @@
 # Gen Blocks Preview
+
+> **代码状态**: [综述级 — 待补充代码]
+
 >
 > **EN**: Gen Blocks Preview (Chinese)
 > **Summary**: Gen Blocks Preview (Chinese). Emerging Rust feature or ecosystem trend: Gen Blocks Preview (Chinese).

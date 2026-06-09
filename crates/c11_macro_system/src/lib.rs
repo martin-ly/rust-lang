@@ -67,19 +67,6 @@ pub mod rust_196_features;
 // 重新导出常用项
 pub use declarative::*;
 
-// 重新导出 Rust 1.91 特性
-pub use archive::rust_191_features::{
-    demonstrate_all_rust_191_macro_features,
-    // 主要功能函数
-    demonstrate_rust_191_macro_features,
-    // 改进的错误消息
-    improved_macro_errors,
-    // 宏展开缓存
-    macro_expansion_cache,
-    // 过程宏编译优化
-    proc_macro_compilation_optimization,
-};
-
 // 重新导出 Rust 1.92 特性
 pub use archive::rust_192_features::{
     MacroExpansionItem,

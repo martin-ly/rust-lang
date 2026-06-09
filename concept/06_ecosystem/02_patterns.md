@@ -1,4 +1,7 @@
 # Design Patterns（设计模式）
+
+> **代码状态**: ✅ 含可编译示例
+
 >
 > **EN**: Design Patterns
 > **Summary**: Design Patterns. Guide to 02 Patterns.

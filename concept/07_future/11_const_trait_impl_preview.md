@@ -1,4 +1,7 @@
 # Const Trait Impl 预研：常量上下文中的 Trait 泛化
+
+> **代码状态**: [综述级 — 待补充代码]
+
 >
 > **EN**: Traits
 > **Summary**: Traits. Core Rust concept covering mechanism analysis, generic programming, trait system mechanics.

@@ -1,4 +1,7 @@
 # Core Crates（核心开源库谱系）
+
+> **代码状态**: ✅ 含可编译示例
+
 >
 > **EN**: Core Crates（核心开源库谱系） (Chinese)
 > **Summary**: Core Crates. Guide to 03 Core Crates.

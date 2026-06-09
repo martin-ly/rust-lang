@@ -1,4 +1,7 @@
 # RPITIT Preview
+
+> **代码状态**: [综述级 — 待补充代码]
+
 >
 > **EN**: RPITIT Preview (Chinese)
 > **Summary**: RPITIT Preview (Chinese). Emerging Rust feature or ecosystem trend: RPITIT Preview (Chinese).

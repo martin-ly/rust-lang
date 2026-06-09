@@ -1,4 +1,7 @@
 # AI × Rust：生成-验证闭环与确定性容器
+
+> **代码状态**: ✅ 含可编译示例
+
 >
 > **EN**: AI × Rust：生成-验证闭环与确定性容器 (Chinese)
 > **Summary**: AI × Rust：生成-验证闭环与确定性容器 (Chinese). Guide to 01 Ai Integration.

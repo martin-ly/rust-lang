@@ -1,4 +1,7 @@
 # Blockchain & Smart Contract Security（区块链与智能合约安全）
+
+> **代码状态**: ✅ 含可编译示例
+
 >
 > **EN**: Security Practices
 > **Summary**: Security Practices. Guide to 06 Blockchain.

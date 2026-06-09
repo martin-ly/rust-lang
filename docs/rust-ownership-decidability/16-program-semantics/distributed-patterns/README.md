@@ -1,5 +1,7 @@
 # 分布式系统模式语义 (Distributed Systems Patterns Semantics)
 
+> **内容分级**: [归档级]
+>
 > **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 

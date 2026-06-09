@@ -1,4 +1,7 @@
 # Safety Tags 概念预研：Unsafe 契约的机器可读标注
+
+> **代码状态**: ✅ 含可编译示例
+
 >
 > **EN**: Unsafe Rust
 > **Summary**: Unsafe Rust. Core Rust concept covering verification techniques, practical examples, mechanism analysis.

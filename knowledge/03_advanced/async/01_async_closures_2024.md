@@ -1,12 +1,15 @@
 # Rust 2024 Edition Async Closures 完整指南
+
+> **相关文档**: 请参阅 [docs/rust-ownership-decidability/16-program-semantics/rust-194-features/05-edition-2024-semantics.md](../../../docs/rust-ownership-decidability/16-program-semantics/rust-194-features/05-edition-2024-semantics.md)
+> **相关文档**: 请参阅 [docs/05_guides/06_rust_2024_edition_migration_guide.md](../../../docs/05_guides/06_rust_2024_edition_migration_guide.md)
+> **深度**: [综述级]
+> **主轨引用**: 概念级深度分析请参阅 [concept/07_future/19_rust_edition_preview.md](../../../concept/07_future/19_rust_edition_preview.md)
 >
 > **相关概念**: [异步闭包](../../../concept/03_advanced/02_async.md)
 > **Bloom 层级**: 理解
 > **提示**: 本文档为快速参考。如需完整教学（概念定义、反例集、自我检测等），请参阅 [async_closure.md](02_async_closure.md)。
 > **权威来源**: [RFC 3668 — Async Closures](https://rust-lang.github.io/rfcs/3668-async-closures.html), [Rust Reference — Async closures](https://doc.rust-lang.org/reference/expressions/closure-expr.html#async-closures), [Rust 1.85 Release Notes](https://releases.rs/docs/1.85.0/)
->
 > **权威来源对齐变更日志**: 2026-05-19 新增 RFC 3668 设计决策来源标注、Rust Reference 异步闭包语义引用 [来源: Authority Source Sprint Batch 8]
->
 > **受众**: [专家] / [研究者]
 > **内容分级**: [实验级]
 

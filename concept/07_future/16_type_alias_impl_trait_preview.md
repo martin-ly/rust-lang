@@ -1,4 +1,7 @@
 # TAIT Preview
+
+> **代码状态**: [综述级 — 待补充代码]
+
 >
 > **EN**: TAIT Preview (Chinese)
 > **Summary**: TAIT Preview (Chinese). Emerging Rust feature or ecosystem trend: TAIT Preview (Chinese).

@@ -1,5 +1,7 @@
 # BorrowSanitizer：动态别名规则验证工具
 
+> **代码状态**: [综述级 — 待补充代码]
+
 > **EN**: BorrowSanitizer (BSan) — Dynamic aliasing rule verification for Rust
 > **Summary**: BorrowSanitizer 是 Rust 编译器的运行时 sanitizer，用于动态检测 Stacked Borrows / Tree Borrows 别名违规。作为 Miri 的互补工具，它以 2-5x 性能开销在生产环境压力测试中验证 `unsafe` 代码的内存安全。
 >

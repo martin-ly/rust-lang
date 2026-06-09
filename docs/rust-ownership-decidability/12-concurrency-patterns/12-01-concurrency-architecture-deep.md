@@ -1,5 +1,7 @@
 # Concurrency Architecture: Formal Deep Dive
 
+> **内容分级**: [归档级]
+>
 > **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
@@ -78,7 +80,7 @@
     - [Creusot for Formal Proof](#creusot-for-formal-proof)
   - [References](#references)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 

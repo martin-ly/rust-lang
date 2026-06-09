@@ -1,4 +1,7 @@
 # eBPF / Aya / Rex 的 Rust 映射
+
+> **代码状态**: ✅ 含可编译示例
+
 >
 > **EN**: eBPF / Aya / Rex 的 Rust 映射 (Chinese)
 > **Summary**: eBPF / Aya / Rex 的 Rust 映射 (Chinese). Emerging Rust feature or ecosystem trend: eBPF / Aya / Rex 的 Rust 映射 (Chinese).

@@ -1,5 +1,7 @@
 > **内容分级**: [专家级]
 
+> **代码状态**: [综述级 — 待补充代码]
+
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
 
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)

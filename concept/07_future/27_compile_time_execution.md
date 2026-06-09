@@ -1,4 +1,7 @@
 # 编译期执行与常量求值
+
+> **代码状态**: ✅ 含可编译示例
+
 >
 > **EN**: 编译期执行与常量求值 (Chinese)
 > **Summary**: 编译期执行与常量求值 (Chinese). Core Rust concept covering mechanism analysis, in-depth analysis, generic programming.

@@ -1,4 +1,7 @@
 # Unsafe Fields 预研：字段级安全边界的精确标注
+
+> **代码状态**: [综述级 — 待补充代码]
+
 >
 > **EN**: Unsafe Rust
 > **Summary**: Unsafe Rust. Guide to 13 Unsafe Fields Preview.

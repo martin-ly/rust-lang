@@ -1,8 +1,20 @@
 # Rust vs Swift: 现代系统语言深度对比
 
+> **内容分级**: [归档级]
+> **说明**: 本文档为历史研究材料，最新内容请参阅 [concept/05_comparative/14_rust_vs_elixir.md](../../../concept/05_comparative/14_rust_vs_elixir.md)
+> **说明**: 本文档为历史研究材料，最新内容请参阅 [concept/05_comparative/13_rust_vs_csharp.md](../../../concept/05_comparative/13_rust_vs_csharp.md)
+> **说明**: 本文档为历史研究材料，最新内容请参阅 [concept/05_comparative/12_rust_vs_scala.md](../../../concept/05_comparative/12_rust_vs_scala.md)
+> **说明**: 本文档为历史研究材料，最新内容请参阅 [concept/05_comparative/11_rust_vs_kotlin.md](../../../concept/05_comparative/11_rust_vs_kotlin.md)
+> **说明**: 本文档为历史研究材料，最新内容请参阅 [concept/05_comparative/10_rust_vs_zig.md](../../../concept/05_comparative/10_rust_vs_zig.md)
+> **说明**: 本文档为历史研究材料，最新内容请参阅 [concept/05_comparative/09_rust_vs_swift.md](../../../concept/05_comparative/09_rust_vs_swift.md)
+> **说明**: 本文档为历史研究材料，最新内容请参阅 [concept/05_comparative/08_rust_vs_ruby.md](../../../concept/05_comparative/08_rust_vs_ruby.md)
+> **说明**: 本文档为历史研究材料，最新内容请参阅 [concept/05_comparative/08_rust_vs_javascript.md](../../../concept/05_comparative/08_rust_vs_javascript.md)
+> **说明**: 本文档为历史研究材料，最新内容请参阅 [concept/05_comparative/07_rust_vs_python.md](../../../concept/05_comparative/07_rust_vs_python.md)
+> **说明**: 本文档为历史研究材料，最新内容请参阅 [concept/05_comparative/06_rust_vs_java.md](../../../concept/05_comparative/06_rust_vs_java.md)
+> **说明**: 本文档为历史研究材料，最新内容请参阅 [concept/05_comparative/02_cpp_abi_object_model.md](../../../concept/05_comparative/02_cpp_abi_object_model.md)
+>
 > **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **对比维度**: 内存安全模型、所有权系统、类型系统、并发模型、应用场景
 > **目标读者**: Swift 开发者学习 Rust，跨平台开发者技术选型
 > **文档版本**: 2.0.0 (L2+ 深度)

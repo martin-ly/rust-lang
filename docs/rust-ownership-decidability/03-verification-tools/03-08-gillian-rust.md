@@ -1,8 +1,10 @@
 # Gillian-Rust: 混合方法验证 Unsafe Rust
 
+> **内容分级**: [归档级]
+> **说明**: 本文档为历史研究材料，最新内容请参阅 [concept/03_advanced/12_unsafe_rust_patterns.md](../../../concept/03_advanced/12_unsafe_rust_patterns.md)
+>
 > **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **来源**: Rust Formal Methods Interest Group (RFMIG) 2024年5月会议
 > **方法**: 符号执行 + 分离逻辑混合验证
 > **项目**: Gillian 框架的 Rust 扩展

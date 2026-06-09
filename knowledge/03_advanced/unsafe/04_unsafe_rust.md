@@ -1,5 +1,7 @@
 # Unsafe Rust - 不安全 Rust
 
+> **深度**: [综述级]
+> **主轨引用**: 概念级深度分析请参阅 [concept/03_advanced/12_unsafe_rust_patterns.md](../../../concept/03_advanced/12_unsafe_rust_patterns.md)
 > **Bloom 层级**: 理解
 > **📌 简介**: Unsafe Rust 不是"糟糕的 Rust"，而是**编译器将证明责任转移给程序员**的显式契约机制
 > [来源: Rustonomicon — Meet Safe and Unsafe / 2025;
@@ -13,15 +15,18 @@
 > [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-blocks.html),
 > [RFC 2585: unsafe blocks in unsafe fn](https://rust-lang.github.io/rfcs/2585-unsafe-block-in-unsafe-fn.html),
 > [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/), [Miri](https://github.com/rust-lang/miri)
->
 > **权威来源对齐变更日志**:
 > 2026-05-19 新增 `unsafe` 作为 proof obligation transfer 的形式化语义来源标注、
 > Tree Borrows 别名规则学术引用、Miri UB 检测工具来源、
 > 跨语言 unsafe 对比（C/C++ / Haskell `unsafePerformIO`）
 > [来源: Authority Source Sprint Batch 8]
->
 > **受众**: [专家] / [研究者]
 > **内容分级**: [实验级]
+> **相关文档**: 请参阅 [docs/rust-ownership-decidability/extensions/unsafe-rust-patterns.md](../../../docs/rust-ownership-decidability/extensions/unsafe-rust-patterns.md)
+> **相关文档**: 请参阅 [docs/rust-ownership-decidability/17-unsafe-rust/01-intro.md](../../../docs/rust-ownership-decidability/17-unsafe-rust/01-intro.md)
+> **相关文档**: 请参阅 [docs/research_notes/formal_methods/10_unsafe_safety_proof_tree.md](../../../docs/research_notes/formal_methods/10_unsafe_safety_proof_tree.md)
+> **相关文档**: 请参阅 [docs/research_notes/formal_methods/10_unsafe_concept_mindmap.md](../../../docs/research_notes/formal_methods/10_unsafe_concept_mindmap.md)
+> **相关文档**: 请参阅 [docs/05_guides/05_unsafe_rust_guide.md](../../../docs/05_guides/05_unsafe_rust_guide.md)
 
 ---
 

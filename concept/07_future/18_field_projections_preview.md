@@ -1,4 +1,7 @@
 # Field Projections 预览：安全的字段级投影
+
+> **代码状态**: ✅ 含可编译示例
+
 >
 > **EN**: Security Practices
 > **Summary**: Security Practices. Core Rust concept covering mechanism analysis, memory safety guarantees, security practices.

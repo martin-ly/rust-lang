@@ -1,4 +1,7 @@
 >
+
+> **代码状态**: ✅ 含可编译示例
+
 # Game Development & ECS Architecture（游戏开发与 ECS 架构）
 >
 > **EN**: Game Development

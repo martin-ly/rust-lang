@@ -1,4 +1,7 @@
 # Application Domains（软件工程应用主题）
+
+> **代码状态**: ✅ 含可编译示例
+
 >
 > **EN**: Application Domains（软件工程应用主题） (Chinese)
 > **Summary**: Application Domains. Core Rust concept covering mental model building.

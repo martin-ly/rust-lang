@@ -1,5 +1,7 @@
 # Workflow 控制流模式完整索引 (Workflow Control-Flow Patterns Master Index)
 
+> **内容分级**: [归档级]
+>
 > **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 

@@ -1,10 +1,11 @@
 # Rust for Linux：从实验到生产
+
+> **深度**: [专家级]
+> **主轨引用**: 概念级深度分析请参阅 [concept/07_future/19_rust_for_linux.md](../../concept/07_future/19_rust_for_linux.md)
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **分级**: [B]
 > **Bloom 层级**: L4-L5 (分析/评价)
-
 > **里程碑时间**: 2025 年底 – 2026 年初（实验阶段正式结束）
 > **权威来源**: [Linux Kernel Mailing List (LKML)](https://lore.kernel.org/lkml/) | [Rust for Linux 官方仓库](https://github.com/Rust-for-Linux/linux) | [Rust Foundation Blog](https://foundation.rust-lang.org/)
 

@@ -1,4 +1,7 @@
 # Rust 语言规范预研：从参考文档到形式化规范
+
+> **代码状态**: ✅ 含可编译示例
+
 >
 > **EN**: Formal Methods
 > **Summary**: Formal Methods. Core Rust concept covering formal methods foundations, verification techniques, mechanism analysis.

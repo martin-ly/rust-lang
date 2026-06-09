@@ -1,11 +1,11 @@
 # Rust 1.95 预览特性
 
+> **相关文档**: 请参阅 [docs/06_toolchain/06_14_rust_1_95_nightly_preview.md](../../../docs/06_toolchain/06_14_rust_1_95_nightly_preview.md)
 > **Bloom 层级**: 理解
 > **⚠️ 本文档已过时**
 >
 > Rust 1.95.0 已于 **2026 年 4 月 16 日**正式发布。
 > 请参阅最新文档：[Rust 1.95 新特性](03_rust_1_95.md)
->
 > **受众**: [进阶] / [专家]
 > **内容分级**: [实验级]
 

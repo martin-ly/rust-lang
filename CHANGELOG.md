@@ -1,6 +1,42 @@
 # 更新日志 (Changelog)
 
-> **最后更新**: 2026-06-09
+> **最后更新**: 2026-06-10
+
+---
+
+## [3.0.0] - 2026-06-10 — v3.0 正式发布：五阶段全面升级完成
+
+### 🏗️ 架构升级
+
+- **四级分级标签体系**: `[综述级]` / `[实验级]` / `[专家级]` / `[研究者级]` — 全项目 1,200+ 文件覆盖
+- **双标签强制执行**: `concept/` 96.5% + `knowledge/` 100% + `docs/` 活跃目录 100%
+- **L3→L4 认知悬崖缓冲带**: `00_before_formal.md` 决策树，帮助学习者判断是否需读形式化内容
+- **概念-代码-练习闭环**: L1-L3 全部文件底部链接至 `crates/` + `exercises/`
+
+### 🔧 依赖与安全
+
+- **Cargo 依赖对齐**: `generic-array` / `matchit` 版本声明与 Cargo.lock 一致化
+- **async-std 全局清理**: 全部 66+ 文件标记 `[已归档 2025-03]`
+- **历史版本精简**: `crates/archive/` 33 个 rust_190/191 文件精简为占位符
+
+### 📚 内容质量
+
+- **三轨重复治理**: 146 对潜在重复全部处理，高相似度文件添加交叉引用或归档标记
+- **L4 形式化层改革**: 全部 23 个文件标注 `[教学类比]`，工程形式化补全（Tree Borrows PLDI 2025、Kani、BorrowSanitizer、Safety Tags、AutoVerus）
+- **L6-L7 代码示例审查**: 108 个文件添加代码状态标记
+- **docs/ C 类归档**: 782 个研究笔记/形式化文档标记 `[归档级]`
+
+### 🚀 前沿特性
+
+- **Rust 1.97 Preview**: 完整跟踪（Async Drop、VecDeque::truncate_front、RefCell::try_map、int_format_into、RFC 3550 Range 类型）
+- **Pin Ergonomics + Reborrow Traits**: 295 行深度文档 + 8 个可编译示例
+- **RTN / Field Projections / Cranelift / Parallel Frontend**: 全部覆盖
+
+### 📋 项目治理
+
+- **MVP 路径精化**: 40 小时学习路径标注必修/选修
+- **术语表冻结**: v3.0 标准，100 高频术语
+- **LEARNING_MVP_PATH_EN.md**: 英文版最小可行学习路径
 
 ---
 

@@ -1,4 +1,7 @@
 # Rust for Linux ：操作系统内核中的内存安全
+
+> **代码状态**: [综述级 — 待补充代码]
+
 >
 > **EN**: Operating Systems
 > **Summary**: Operating Systems. Core Rust concept covering mechanism analysis, in-depth analysis, FFI interoperability.

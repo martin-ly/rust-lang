@@ -1,4 +1,7 @@
 # Safety Tags 预研指南
+
+> **深度**: [专家级]
+> **主轨引用**: 概念级深度分析请参阅 [concept/07_future/08_safety_tags_preview.md](../../concept/07_future/08_safety_tags_preview.md)
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]
@@ -6,7 +9,6 @@
 > **前置概念**: [Unsafe Rust](../../concept/03_advanced/03_unsafe.md) · [Safety-Critical](../04_research/04_safety_critical_alignment_2026.md)
 > **Bloom 层级**: 评价 → 创造
 > **[来源: Rust Project Goals 2026 — Safety-Critical]** · **[来源: Rust-for-Linux Mailing List]** ✅
->
 > **受众**: [专家] / [研究者]
 > **内容分级**: [研究者级]
 

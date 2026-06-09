@@ -1,4 +1,7 @@
 # `must_not_suspend` Lint Preview
+
+> **代码状态**: [综述级 — 待补充代码]
+
 >
 > **EN**: `must_not_suspend` Lint Preview (Chinese)
 > **Summary**: `must_not_suspend` Lint Preview (Chinese). Emerging Rust feature or ecosystem trend: `must_not_suspend` Lint Preview (Chinese).

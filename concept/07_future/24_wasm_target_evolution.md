@@ -1,4 +1,7 @@
 # WASM Target Evolution Preview
+
+> **代码状态**: [综述级 — 待补充代码]
+
 >
 > **EN**: WASM Target Evolution Preview (Chinese)
 > **Summary**: WASM Target Evolution Preview (Chinese). 10.4 边界测试：WASI 的 capability-based security 与文件系统访问（运行时拒绝）.

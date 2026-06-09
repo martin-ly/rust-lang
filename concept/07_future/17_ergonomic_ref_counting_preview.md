@@ -1,4 +1,7 @@
 # Ergonomic Ref-Counting 预研：人机工学引用计数
+
+> **代码状态**: ✅ 含可编译示例
+
 >
 > **EN**: Ergonomic Ref-Counting 预研：人机工学引用计数 (Chinese)
 > **Summary**: Ergonomic Ref-Counting 预研：人机工学引用计数 (Chinese). Emerging Rust feature or ecosystem trend: Ergonomic Ref-Counting 预研：人机工学引用计数 (Chinese).

@@ -1,5 +1,7 @@
 # Rust 所有权系统 - 全面 FAQ
 
+> **内容分级**: [归档级]
+>
 > **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
@@ -12,7 +14,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权系统 - 全面 FAQ](#rust-所有权系统---全面-faq)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [基础知识](#基础知识)
     - [Q1: 为什么 Rust 需要所有权系统？](#q1-为什么-rust-需要所有权系统)
     - [Q2: Copy trait 和 Clone trait 有什么区别？](#q2-copy-trait-和-clone-trait-有什么区别)
