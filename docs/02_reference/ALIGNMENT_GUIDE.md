@@ -365,7 +365,7 @@ struct CacheLinePadded {
 
 > **说明**：此处「对齐」指项目文档与官方发布的一致性，与内存对齐无技术关联。技术读者可跳过。
 
-版本追踪与权威来源： [RUST_RELEASE_TRACKING_CHECKLIST](../07_project/07_rust_release_tracking_checklist.md)、[INCREMENTAL_UPDATE_FLOW](../research_notes/10_incremental_update_flow.md)。
+版本追踪与权威来源： [版本对齐检查清单](../00_meta/00_rust_version_alignment_checklist.md)、[INCREMENTAL_UPDATE_FLOW](../research_notes/10_incremental_update_flow.md)。
 
 ---
 
@@ -432,7 +432,7 @@ struct CacheLinePadded {
 
 **维护**: 对齐知识随 Rust 版本更新。新版本发布时检查 [Rust Reference - Type layout](https://doc.rust-lang.org/reference/type-layout.html)。发现错误或遗漏请提 issue。
 
-**批判性评估与推进计划**: [07_alignment_knowledge_critical_evaluation_2026_02.md](../07_project/07_alignment_knowledge_critical_evaluation_2026_02.md)
+**批判性评估与推进计划**: [完成状态报告](../07_project/07_completion_status.md)
 
 ---
 

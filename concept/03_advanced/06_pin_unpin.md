@@ -61,6 +61,11 @@
     - [对应代码示例](#对应代码示例)
     - [建议练习](#建议练习)
   - [导航：下一步去哪？](#导航下一步去哪)
+  - [嵌入式测验](#嵌入式测验)
+    - [测验 1：Pin 的设计动机（记忆层）](#测验-1pin-的设计动机记忆层)
+    - [测验 2：Unpin 自动实现（理解层）](#测验-2unpin-自动实现理解层)
+    - [测验 3：Pin::new 的使用限制（应用层）](#测验-3pinnew-的使用限制应用层)
+    - [测验 4：async/await 与 Pin（分析层）](#测验-4asyncawait-与-pin分析层)
 
 ---
 
@@ -695,3 +700,184 @@ fn main() {
 | 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](./README.md) 选择其他主题 |
 | 🎓 进入 L4 形式化 | 想理解"为什么"的数学证明 | [L4 形式化](../04_formal/README.md) |
 | 🏗️ 进入 L6 生态 | 想掌握生产工具链 | [L6 生态](../06_ecosystem/README.md) |
+
+---
+
+## 嵌入式测验
+
+### 测验 1：Pin 的设计动机（记忆层）
+
+**题目**: `Pin` 的核心设计目的是什么？
+
+- A. 优化内存布局，减少缓存未命中
+- B. 保证自引用类型在内存中**不再被移动**，防止悬垂指针
+- C. 实现线程间的零拷贝数据传输
+- D. 替代 `Box`，提供更轻量的堆分配
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+`Pin<P>` 是一个**包装器**，它承诺被包装的值在内存中的位置不会改变（除非该类型实现了 `Unpin`）。
+
+核心场景：**自引用结构体**（self-referential structs）。例如：
+
+```rust
+struct SelfRef {
+    data: String,
+    ptr: *const String, // 指向 data
+}
+```
+
+如果 `SelfRef` 被 move，`data` 的地址改变，但 `ptr` 仍指向旧地址 → **悬垂指针**。
+
+`Pin` 通过禁止移动（对 `!Unpin` 类型）来解决这个问题。
+</details>
+
+---
+
+### 测验 2：Unpin 自动实现（理解层）
+
+**题目**: 以下代码中，`Test` 是否自动实现 `Unpin`？
+
+```rust
+struct Test {
+    data: String,
+    ptr: *const String,
+}
+```
+
+- A. 是，因为 `String` 实现了 `Unpin`
+- B. 否，因为包含原始指针 `*const String`
+- C. 是，但仅当 `ptr` 为 `null` 时
+- D. 否，但可以通过 `unsafe impl Unpin for Test {}` 手动实现
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 A**。
+
+Rust 的 **auto trait** 机制：
+
+- `Unpin` 是 auto trait，默认所有类型都实现 `Unpin`
+- 只有当结构体包含 `!Unpin` 的字段时，它才自动变为 `!Unpin`
+- 原始指针 `*const T` 本身实现 `Unpin`，因此 `Test` 也自动实现 `Unpin`
+
+**陷阱**: 包含原始指针**不**会使类型变为 `!Unpin`。要使类型真正 `!Unpin`，需要显式声明：
+
+```rust
+use std::marker::PhantomPinned;
+struct ReallySelfRef {
+    data: String,
+    _pin: PhantomPinned, // 使类型 !Unpin
+}
+```
+
+或使用 nightly 的 `impl !Unpin for Test {}`（需要 `negative_impls` feature）。
+</details>
+
+---
+
+### 测验 3：Pin::new 的使用限制（应用层）
+
+**题目**: 以下代码能否编译？为什么？
+
+```rust
+use std::pin::Pin;
+
+struct NoMove {
+    _marker: std::marker::PhantomPinned,
+}
+
+fn main() {
+    let mut value = NoMove { _marker: std::marker::PhantomPinned };
+    let pinned = Pin::new(&mut value);
+}
+```
+
+- A. 能编译，`Pin::new` 可以固定任何值
+- B. 编译错误，`NoMove` 是 `!Unpin`，不能用 `Pin::new`
+- C. 编译错误，`PhantomPinned` 不能在栈上创建
+- D. 能编译，但运行时 panic
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+`Pin::new` 的签名：
+
+```rust
+impl<'a, T: Unpin> Pin<&'a mut T> {
+    pub fn new(pointer: &'a mut T) -> Pin<&'a mut T>;
+}
+```
+
+**关键约束**: `Pin::new` 要求 `T: Unpin`。
+
+`NoMove` 包含 `PhantomPinned`，而 `PhantomPinned` 是 `!Unpin`，因此 `NoMove` 也是 `!Unpin`。
+
+**正确做法**: 使用 `Box::pin`（不要求 `Unpin`）：
+
+```rust
+let pinned = Box::pin(NoMove { _marker: std::marker::PhantomPinned });
+```
+
+或使用 `unsafe` 的 `Pin::new_unchecked`（需要保证值不会被移动）。
+</details>
+
+---
+
+### 测验 4：async/await 与 Pin（分析层）
+
+**题目**: 为什么 `Future::poll` 的签名使用 `Pin<&mut Self>` 而不是 `&mut Self`？
+
+```rust
+fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
+```
+
+- A. 为了提高性能，避免额外的间接层
+- B. 因为 async 状态机可能包含自引用字段，必须保证不被移动
+- C. 为了与 `Box<dyn Future>` 兼容
+- D. 因为 `Pin` 是 `Send` 的必要条件
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+`async fn` 编译后的状态机可能包含**自引用字段**：
+
+```rust
+async fn example() {
+    let local = String::from("hello");
+    let ref_to_local = &local;  // 自引用！
+    await_something().await;     // 可能 yield，状态机被 Pin 固定
+    println!("{}", ref_to_local);
+}
+```
+
+编译后的状态机结构类似：
+
+```rust
+struct ExampleFuture {
+    local: String,
+    ref_to_local: *const String, // 指向 local
+    state: u8,
+}
+```
+
+如果状态机被 move（例如从一个线程传递到另一个线程），`local` 的地址改变，但 `ref_to_local` 仍指向旧地址 → **UB**。
+
+`Pin<&mut Self>` 保证：
+
+1. 状态机一旦被 poll，内存位置不再改变
+2. 自引用字段始终有效
+
+这是 Rust async/await **零成本抽象**的安全基础。
+</details>
+
+---
+
+> **测验设计来源**: [Bloom Taxonomy 2001] · [Rust Async Book — Pin](https://rust-lang.github.io/async-book/04_pinning/01_chapter.html) · [TRPL Ch17](https://doc.rust-lang.org/book/ch17-04-pin.html)

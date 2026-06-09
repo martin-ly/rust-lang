@@ -1,4 +1,5 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
+> **最后更新**: 2026-06-09
 
 > **分级**: [C]
 >
@@ -6,7 +7,7 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [📑 目录](#目录)
+- [📑 目录](#-目录)
 - [Part 2: Deep Dive Counter-Examples](#part-2-deep-dive-counter-examples)
   - [Extended Ownership Deep Dive](#extended-ownership-deep-dive)
     - [EDO.1 Understanding Move Semantics](#edo1-understanding-move-semantics)

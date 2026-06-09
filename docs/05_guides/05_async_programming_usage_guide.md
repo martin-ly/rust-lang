@@ -338,7 +338,7 @@ async fn main() {
 
 > **[来源: POPL - Programming Languages Research]**
 
-> **Rust 版本**: 1.85.0+ Stable
+> **Rust 版本**: 1.96.0+ Stable
 > **相关文档**: [Async Closures 深度指南](../../crates/c06_async/docs/ASYNC_CLOSURES_GUIDE.md)
 
 Rust 1.85 稳定了 async closures，引入了 `AsyncFn`、`AsyncFnMut`、`AsyncFnOnce` trait family，

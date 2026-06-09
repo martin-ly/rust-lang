@@ -144,7 +144,6 @@ graph TD
 
 - [特性跟踪模板](./00_rust_feature_tracking_template.md)
 - [概念文档模板](./00_template_concept_doc.md)
-- [矩阵模板](./00_template_matrix.md)
 - [docs 总览](../README.md)
 
 ---

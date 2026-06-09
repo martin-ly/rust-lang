@@ -2271,3 +2271,220 @@ macro_rules! conditional_feature {
 | 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](./README.md) 选择其他主题 |
 | 🎓 进入 L4 形式化 | 想理解"为什么"的数学证明 | [L4 形式化](../04_formal/README.md) |
 | 🏗️ 进入 L6 生态 | 想掌握生产工具链 | [L6 生态](../06_ecosystem/README.md) |
+
+---
+
+## 嵌入式测验
+
+### 测验 1：声明宏 vs 过程宏（记忆层）
+
+**题目**: 以下哪种宏属于**过程宏（proc macro）**？
+
+- A. `macro_rules! say_hello { () => { println!("hello"); }; }`
+- B. `#[derive(Debug)]`
+- C. `println!("{}", 42)`
+- D. `vec![1, 2, 3]`
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+Rust 宏的两大类别：
+
+| 类型 | 定义方式 | 使用场景 | 展开时机 |
+|:---|:---|:---|:---|
+| **声明宏** | `macro_rules!` | 代码复用、DSL | 编译早期（语法树之前）|
+| **过程宏** | `proc_macro` crate | `derive` 属性、自定义属性、`macro` 函数式宏 | 编译中期（Token 流级别）|
+
+选项分析：
+
+- **A**: `macro_rules!` — **声明宏**
+- **B**: `#[derive(Debug)]` — **派生宏（过程宏的一种）**，编译器调用 `proc_macro_derive` 生成 `Debug` trait 实现
+- **C**: `println!` — 标准库提供的**声明宏**
+- **D**: `vec!` — 标准库提供的**声明宏**
+
+> 过程宏运行在编译器中，可以访问和操作 Token 流，但不能直接访问类型信息（需要借助 `syn` + `quote` 库解析）。
+</details>
+
+---
+
+### 测验 2：`macro_rules!` 模式匹配（理解层）
+
+**题目**: 以下宏定义能否正确编译？如果不能，问题在哪里？
+
+```rust
+macro_rules! count_args {
+    () => { 0 };
+    ($x:expr) => { 1 };
+    ($x:expr, $($rest:expr),+) => {
+        1 + count_args!($($rest),+)
+    };
+}
+```
+
+- A. 可以正确编译，支持 0 个、1 个、多个参数
+- B. 不能编译，递归调用中逗号分隔符不匹配
+- C. 不能编译，`$($rest),+` 在递归调用时应写为 `$($rest),*`
+- D. 可以编译，但对 2 个参数会无限递归
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+递归调用中的分隔符不匹配：
+
+```rust
+count_args!(1, 2, 3)
+// 匹配第三个分支: $x=1, $rest=[2, 3]
+// 递归调用: count_args!(2, 3)  ← 注意：逗号被剥离了！
+```
+
+问题：在模式 `$($rest:expr),+` 中，`$rest` 捕获的是**不带逗号**的表达式序列。递归调用时写 `count_args!($($rest),+)` 才对。
+
+**正确写法**：
+
+```rust
+macro_rules! count_args {
+    () => { 0 };
+    ($x:expr) => { 1 };
+    ($x:expr, $($rest:expr),+) => {
+        1 + count_args!($($rest),+)  // 注意：用 ,+ 保持分隔符
+    };
+}
+```
+
+> **关键洞察**: `macro_rules!` 的模式匹配是**基于 Token 树**的。`$($rest),+` 中的逗号是模式的一部分，递归时必须保持一致的重复模式。
+</details>
+
+---
+
+### 测验 3：派生宏实战（应用层）
+
+**题目**: 你想为一个结构体自动实现 `Builder` 模式（每个字段都有 setter 方法）。应该使用哪种宏？
+
+```rust
+struct User {
+    name: String,
+    age: u32,
+}
+
+// 目标：自动生成
+// impl UserBuilder { fn name(self, v: String) -> Self { ... } }
+```
+
+- A. 声明宏 `macro_rules!`
+- B. 派生宏 `#[derive(Builder)]`
+- C. 属性宏 `#[builder]`
+- D. 函数式宏 `builder!{...}`
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B 或 C**，但最佳实践是 **B（派生宏）**。
+
+| 选项 | 可行性 | 评价 |
+|:---|:---|:---|
+| A | ❌ | 声明宏无法访问结构体字段的 Token 流，只能做文本替换 |
+| B | ✅ | **最佳方案**。`#[derive(Builder)]` 是标准做法，`derive_builder` crate 就是这种方式 |
+| C | ✅ | 可行，但通常用于更复杂的变换（如 `#[tokio::main]`）|
+| D | ✅ | 可行，但使用方式笨拙：`builder!(struct User { ... })` |
+
+**派生宏的优势**：
+
+- 与类型定义紧密耦合，语义清晰
+- 不需要修改结构体定义语法
+- 生态成熟（`derive_builder`、`structopt` → `clap`）
+
+```rust
+use derive_builder::Builder;
+
+#[derive(Builder)]
+struct User {
+    name: String,
+    age: u32,
+}
+
+let user = UserBuilder::default()
+    .name("Alice".to_string())
+    .age(30)
+    .build()?;
+```
+
+> 派生宏通过 `proc_macro_derive` 接收 `TokenStream`，使用 `syn` 解析结构体定义，再使用 `quote` 生成实现代码。
+</details>
+
+---
+
+### 测验 4：宏卫生性（分析层）
+
+**题目**: 以下代码的输出是什么？为什么？
+
+```rust
+macro_rules! declare_var {
+    ($name:ident, $value:expr) => {
+        let $name = $value;
+    };
+}
+
+fn main() {
+    let x = 10;
+    declare_var!(x, 20);
+    println!("{}", x);
+}
+```
+
+- A. 编译错误：`x` 重复定义
+- B. 输出 `10` — 宏内部变量不影响外部
+- C. 输出 `20` — 宏展开后覆盖外部变量
+- D. 编译错误：宏卫生性阻止了变量名冲突
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 C** — 输出 `20`。
+
+Rust 的 `macro_rules!` **不完全卫生**：
+
+```rust
+fn main() {
+    let x = 10;          // 外部 x
+    let x = 20;          // 宏展开后：覆盖外部 x
+    println!("{}", x);   // 输出 20
+}
+```
+
+**卫生性规则**：
+
+| 元素 | 卫生性 | 说明 |
+|:---|:---|:---|
+| **局部变量** | ❌ 不卫生 | `let $name` 会捕获/覆盖外部同名变量 |
+| **`$name:ident`** | ⚠️ 半卫生 | 从调用处解析，但在宏内部使用时不隔离 |
+| **`$name:tt`** | 同上 | Token 树的处理方式相同 |
+| **标签（labels）** | ✅ 卫生 | `'label` 在宏内部是隔离的 |
+| **局部宏名** | ✅ 卫生 | `macro_rules!` 内部定义的宏不影响外部 |
+
+**修复方案** — 使用显式作用域：
+
+```rust
+macro_rules! declare_var_safe {
+    ($name:ident, $value:expr) => {{
+        let $name = $value;
+        $name  // 返回，不污染外部作用域
+    }};
+}
+
+fn main() {
+    let x = 10;
+    let y = declare_var_safe!(x, 20);  // x 仍然是 10
+    println!("{} {}", x, y);  // 输出 "10 20"
+}
+```
+
+> **关键区别**: Rust 的声明宏卫生性不如 Scheme 的 `syntax-rules`。生产代码中应避免宏定义与外部变量同名，或使用显式作用域隔离。
+</details>
+
+---
+
+> **测验设计来源**: [Bloom Taxonomy 2001] · [TRPL Ch19](https://doc.rust-lang.org/book/ch19-06-macros.html) · [Rust Reference - Macros](https://doc.rust-lang.org/reference/macros.html)

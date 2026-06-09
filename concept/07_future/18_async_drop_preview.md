@@ -13,6 +13,10 @@
 > **后置概念**: [Gen Blocks](./15_gen_blocks_preview.md) · [Async Closures](https://github.com/rust-lang/rust/issues/62290)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
+> **状态**: 🧪 Nightly 实验性
+> **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
+> **跟踪版本**: nightly 1.98.0
+> **预计稳定**: 待定
 
 > **来源**:
 > [RFC 3308 — Async Drop](https://github.com/rust-lang/rfcs/pull/3308) ·

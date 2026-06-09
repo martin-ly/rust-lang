@@ -218,6 +218,16 @@ mod tests {
     fn test_vecdeque_retain_back() {
         demo_vecdeque_retain_back();
     }
+
+    #[test]
+    fn test_box_vec_non_null() {
+        demo_box_vec_non_null();
+    }
+
+    #[test]
+    fn test_int_format_into() {
+        demo_int_format_into();
+    }
 }
 
 /// Nightly 预览测试 — 使用 `cargo test -- --ignored` 运行

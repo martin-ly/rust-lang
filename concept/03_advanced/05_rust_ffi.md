@@ -55,6 +55,11 @@
     - [对应代码示例](#对应代码示例)
     - [建议练习](#建议练习)
   - [导航：下一步去哪？](#导航下一步去哪)
+  - [嵌入式测验](#嵌入式测验)
+    - [测验 1：FFI 边界安全性（记忆层）](#测验-1ffi-边界安全性记忆层)
+    - [测验 2：`extern "C"` 与 ABI（理解层）](#测验-2extern-c-与-abi理解层)
+    - [测验 3：FFI 类型映射（应用层）](#测验-3ffi-类型映射应用层)
+    - [测验 4：跨语言所有权转移（分析层）](#测验-4跨语言所有权转移分析层)
 
 ---
 
@@ -657,3 +662,218 @@ fn main() {
 | 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](./README.md) 选择其他主题 |
 | 🎓 进入 L4 形式化 | 想理解"为什么"的数学证明 | [L4 形式化](../04_formal/README.md) |
 | 🏗️ 进入 L6 生态 | 想掌握生产工具链 | [L6 生态](../06_ecosystem/README.md) |
+
+---
+
+## 嵌入式测验
+
+### 测验 1：FFI 边界安全性（记忆层）
+
+**题目**: 在 Rust 中调用 C 函数时，以下哪个**不是** `unsafe` 的必要原因？
+
+- A. C 函数可能产生空指针解引用
+- B. C 函数不遵守 Rust 的所有权规则
+- C. C 函数的参数类型需要在 Rust 中声明为 `unsafe fn`
+- D. C 函数可能违反 Rust 的内存安全假设
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 C**。
+
+FFI 调用需要 `unsafe` 的根本原因：
+
+| 原因 | 说明 |
+|:---|:---|
+| **A** | C 代码不保证指针有效性，Rust 编译器无法验证 |
+| **B** | C 没有所有权系统，可能双重释放或泄露内存 |
+| **D** | C 可能产生数据竞争、使用已释放内存等 UB |
+
+**C 是错的**：`unsafe fn` 只是 Rust 的语法标记，不是 FFI 需要 `unsafe` 的根本原因。实际上，FFI 函数在 Rust 侧通常声明为 `extern "C" { fn foo(); }`，调用时才需要 `unsafe` 块。
+
+> **核心原则**: `unsafe` 不是惩罚，而是标记"编译器无法验证此处安全"的边界。所有 FFI 调用都跨越了 Rust 的安全边界。
+</details>
+
+---
+
+### 测验 2：`extern "C"` 与 ABI（理解层）
+
+**题目**: 为什么 Rust FFI 通常使用 `extern "C"` 而不是默认的 `extern "Rust"`？
+
+- A. `extern "C"` 比 `extern "Rust"` 更快
+- B. C 编译器不认识 Rust 的 ABI，必须使用 C 的调用约定
+- C. `extern "Rust"` 不支持指针类型
+- D. `extern "C"` 是 Rust 的默认设置，不需要理由
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+**ABI（Application Binary Interface）** 定义了：
+
+- 函数参数如何传递（寄存器 vs 栈）
+- 返回值如何处理
+- 栈帧布局
+- 名字修饰（name mangling）规则
+
+| ABI | 用途 | 兼容性 |
+|:---|:---|:---|
+| `extern "Rust"` | Rust 内部调用 | 仅 Rust，且不稳定（可能随版本变化）|
+| `extern "C"` | C 兼容调用 | 所有支持 C ABI 的语言 |
+| `extern "stdcall"` | Windows API | Windows 系统调用 |
+| `extern "system"` | 平台默认系统 ABI | Windows=`stdcall`，其他=`C` |
+
+**关键区别**:
+
+- `extern "Rust"` 的名字修饰包含 crate 和模块路径（如 `_ZN4mycrate3foo17h...`）
+- `extern "C"` 的名字修饰简单（如 `foo`），C 编译器可以直接链接
+
+```rust
+// Rust 侧
+extern "C" {
+    fn c_function(x: i32) -> i32;  // 使用 C 调用约定
+}
+
+// C 侧
+int c_function(int x) { ... }  // 相同的调用约定
+```
+
+> 如果不指定 `extern "C"`，Rust 和 C 对栈的操作方式不同，会导致崩溃或数据损坏。
+</details>
+
+---
+
+### 测验 3：FFI 类型映射（应用层）
+
+**题目**: 以下 C 结构体在 Rust 中应该如何正确声明？
+
+```c
+typedef struct {
+    char name[32];
+    uint32_t age;
+    float score;
+} Student;
+```
+
+- A. `struct Student { name: String, age: u32, score: f32 }`
+- B. `struct Student { name: [u8; 32], age: u32, score: f32 }`
+- C. `#[repr(C)] struct Student { name: [u8; 32], age: u32, score: f32 }`
+- D. `#[repr(packed)] struct Student { name: [c_char; 32], age: u32, score: f32 }`
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 C**。
+
+FFI 类型映射的关键原则：
+
+| C 类型 | Rust 类型 | 注意 |
+|:---|:---|:---|
+| `char name[32]` | `[u8; 32]` 或 `[c_char; 32]` | C 的 `char` 可能是 signed 或 unsigned |
+| `uint32_t` | `u32` | 固定大小整数直接对应 |
+| `float` | `f32` | IEEE 754 单精度 |
+| `double` | `f64` | IEEE 754 双精度 |
+
+**为什么必须 `#[repr(C)]`**：
+
+Rust 默认的 `#[repr(Rust)]` 允许编译器重排字段以优化内存布局。但 C 结构体的字段顺序是固定的。如果不用 `#[repr(C)]`，Rust 和 C 对同一结构体的内存布局可能完全不同，导致数据错乱。
+
+```rust
+#[repr(C)]  // 强制使用 C 布局规则
+pub struct Student {
+    pub name: [u8; 32],  // 或 [std::os::raw::c_char; 32]
+    pub age: u32,
+    pub score: f32,
+}
+```
+
+**为什么不选 D**：
+
+- `#[repr(packed)]` 禁用所有填充（padding），可能导致未对齐访问，在 ARM 等架构上引发崩溃
+- 除非 C 代码明确使用 `__attribute__((packed))`，否则不应使用
+
+> **验证技巧**: 使用 `std::mem::size_of::<Student>()` 对比 C 的 `sizeof(Student)`，确保两者相等。
+</details>
+
+---
+
+### 测验 4：跨语言所有权转移（分析层）
+
+**题目**: 以下代码存在什么潜在问题？
+
+```rust
+use std::ffi::CString;
+use std::os::raw::c_char;
+
+extern "C" {
+    fn process_string(s: *mut c_char);
+}
+
+fn call_process(input: &str) {
+    let c_string = CString::new(input).unwrap();
+    let ptr = c_string.into_raw();
+    unsafe { process_string(ptr); }
+    // 问题在这里！
+}
+```
+
+- A. `CString::new` 可能 panic，应该使用 `expect`
+- B. `into_raw()` 转移了所有权给 C，但 C 可能不释放内存，导致泄露
+- C. `process_string` 之后应该调用 `CString::from_raw(ptr)` 回收所有权
+- D. B 和 C 都正确
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 D**。
+
+这是 FFI 中最常见的**所有权转移陷阱**：
+
+```rust
+fn call_process(input: &str) {
+    let c_string = CString::new(input).unwrap();
+    let ptr = c_string.into_raw();  // 所有权转移给 C
+    unsafe { process_string(ptr); }
+
+    // 必须回收所有权，否则内存泄露！
+    let _ = unsafe { CString::from_raw(ptr) };
+}
+```
+
+**关键规则**：
+
+| 方法 | 作用 | 风险 |
+|:---|:---|:---|
+| `CString::into_raw()` | 将 `CString` 转换为原始指针，**释放 Rust 的所有权管理** | 如果不回收，内存泄露 |
+| `CString::from_raw(ptr)` | 从原始指针重新创建 `CString`，**恢复 Rust 的所有权管理** | 如果 C 已释放，double free |
+
+**正确模式**：
+
+```rust
+fn call_process(input: &str) {
+    let c_string = CString::new(input).unwrap();
+    let ptr = c_string.into_raw();
+
+    unsafe {
+        process_string(ptr);
+        // 假设 C 没有释放 ptr（如果 C 释放了，这里会 double free）
+        let _ = CString::from_raw(ptr);  // 回收所有权，由 Rust drop
+    }
+}
+```
+
+**如果 C 会释放内存**：
+
+```rust
+// C 侧承诺：process_string 会释放传入的指针
+unsafe { process_string(ptr); }
+// 不要调用 from_raw！C 已经释放了
+```
+
+> **核心原则**: FFI 边界上的所有权必须**文档化并严格遵守**。Rust 和 C 的内存管理协议不一致是崩溃和泄露的主要来源。
+</details>
+
+---
+
+> **测验设计来源**: [Bloom Taxonomy 2001] · [TRPL Ch19](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) · [Rustonomicon - FFI](https://doc.rust-lang.org/nomicon/ffi.html)

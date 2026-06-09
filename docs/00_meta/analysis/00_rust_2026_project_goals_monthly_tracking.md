@@ -387,8 +387,8 @@
 
 ### 7.2 本项目相关报告
 
-- [2026-05 对称差分析报告](./00_rust_global_alignment_symmetric_difference_analysis_2026_05.md)
-- [2026-04 对称差分析报告](./00_rust_global_alignment_symmetric_difference_analysis_2026.md)
+- [2026-05 对称差分析报告](../../archive/c_class_audit_2026_06_08/00_meta/analysis/00_rust_global_alignment_symmetric_difference_analysis_2026_05.md)
+- [2026-04 对称差分析报告](../../archive/c_class_audit_2026_06_08/00_meta/analysis/00_rust_global_alignment_symmetric_difference_analysis_2026.md)
 - [编译优化报告](../../../reports/COMPILATION_OPTIMIZATION_REPORT.md)
 - [sccache 基准测试](../../../reports/sccache-benchmark.md)
 

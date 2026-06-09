@@ -387,7 +387,8 @@ time = { version = "0.3.47", features = ["serde", "macros"] }
 
 # 2025-12-11: 其他常用库最新稳定版本
 # uuid: UUID生成和解析库，支持多种UUID版本
-uuid = { version = "1.23.1", features = ["v4", "serde"] }
+# 2026-06-09: cargo update 1.23.1 -> 1.23.3
+uuid = { version = "1.23.3", features = ["v4", "serde"] }
 # url: URL解析和操作库
 url = "2.5.8"
 # bytes: 字节缓冲区处理库，提供高效的字节操作

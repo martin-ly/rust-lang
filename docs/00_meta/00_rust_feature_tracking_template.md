@@ -141,7 +141,6 @@
 
 - [概念文档模板](./00_template_concept_doc.md)
 - [决策树模板](./00_template_decision_tree.md)
-- [矩阵模板](./00_template_matrix.md)
 - [docs 总览](../README.md)
 
 ---

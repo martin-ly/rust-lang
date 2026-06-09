@@ -501,7 +501,7 @@ fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
 ## 相关概念
 
 - [Coq 形式化指南](./10_coq_formalization_guide.md)
-- [Tree Borrows 权威指南](./10_tree_borrows_authoritative_guide.md)
+- [Tree Borrows 指南](./10_tree_borrows_guide.md)
 
 ---
 

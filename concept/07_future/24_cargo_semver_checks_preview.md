@@ -1,4 +1,8 @@
 > **内容分级**: [实验级]
+> **状态**: 🧪 Nightly 实验性
+> **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
+> **跟踪版本**: nightly 1.98.0
+> **预计稳定**: 待定
 
 # cargo-semver-checks：从社区工具到 Cargo 官方集成
 >

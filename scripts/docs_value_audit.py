@@ -43,30 +43,59 @@ def check_version_declaration(content, filepath):
     issues = []
 
     # 查找版本声明模式
+    # 注意：顺序很重要，先匹配更具体的模式
     version_patterns = [
-        r"> \*\*Rust 版本\*\*:\s*([\d.]+)",
-        r"\*\*对应 Rust 版本\*\*:\s*([\d.]+)",
-        r"\*\*Rust 版本\*\*:\s*([\d.]+)",
-        r"rust-version\s*=\s*\"([\d.]+)\"",
-        r"> \*\*版本\*\*:\s*Rust ([\d.]+)",
+        (r"> \*\*Rust 版本\*\*:\s*([\d.]+)", "文档版本头"),
+        (r"\*\*对应 Rust 版本\*\*:\s*([\d.]+)", "文档版本尾"),
+        (r"\*\*Rust 版本\*\*:\s*([\d.]+)", "文档版本尾"),
+        (r"rust-version\s*=\s*\"([\d.]+)\"", "Cargo MSRV"),
+    ]
+
+    # 历史事实性版本声明模式（通常不需要更新）
+    historical_patterns = [
         r"> \*\*稳定版本\*\*:\s*Rust ([\d.]+)",
+        r"> \*\*版本\*\*:\s*Rust ([\d.]+)",
         r"> \*\*适用版本\*\*:\s*([\d.]+)",
     ]
 
-    found_versions = []
-    for pattern in version_patterns:
-        for match in re.finditer(pattern, content):
-            found_versions.append((match.group(1), match.start(), match.group(0)))
+    # 历史上下文关键词
+    historical_keywords = [
+        "引入", "稳定化于", "稳定版", "release notes", "tracking issue",
+        "FCP", "RFC", "behavior", "行为变更", "历史", "回顾", "对比",
+        "introduced", "stabilized", "release", "changelog", "版本发布",
+        "起始版本", "起始", "edition", "起始", "对比", "comparison",
+        "vs", "versus", "比较", "迁移", "migration",
+    ]
 
-    for ver, pos, text in found_versions:
-        # 排除历史版本引用（如 "Rust 1.93 行为变更"）
-        if any(kw in text for kw in ["变更", "引入", "历史", "回顾", "对比", "vs"]):
+    found_versions = []
+    for pattern, _ in version_patterns:
+        for match in re.finditer(pattern, content):
+            found_versions.append((match.group(1), match.start(), match.group(0), "msrv"))
+
+    for pattern in historical_patterns:
+        for match in re.finditer(pattern, content):
+            found_versions.append((match.group(1), match.start(), match.group(0), "historical"))
+
+    for ver, pos, text, kind in found_versions:
+        # 获取匹配位置前后 120 个字符的上下文
+        context_start = max(0, pos - 120)
+        context_end = min(len(content), pos + len(text) + 120)
+        context = content[context_start:context_end]
+
+        # 如果上下文包含历史关键词，视为历史事实引用，跳过
+        if any(kw in context for kw in historical_keywords):
             continue
-        # 排除"1.90–1.93"范围引用
-        if "–" in text or "-" in text:
+
+        # 如果是明确的历史声明模式，跳过
+        if kind == "historical":
             continue
-        # 排除 nightly 预览
-        if "Nightly" in text or "nightly" in text:
+
+        # 排除"1.90–1.93"范围引用（注意使用 en dash，不是 hyphen）
+        if "–" in context:
+            continue
+
+        # 排除 nightly 预览上下文
+        if "Nightly" in context or "nightly" in context or "preview" in context.lower():
             continue
 
         # 比较版本号
@@ -115,10 +144,16 @@ def check_internal_links(content, filepath):
     """检查内部链接是否指向存在的文件"""
     issues = []
 
+    # 移除代码块内容，避免代码示例中的方括号被误匹配
+    # 使用非贪婪匹配移除 ```...``` 代码块
+    content_without_codeblocks = re.sub(r"```[\s\S]*?```", "", content)
+    # 移除行内代码 ``...``
+    content_without_codeblocks = re.sub(r"`[^`]+`", "", content_without_codeblocks)
+
     # Markdown 链接模式: [text](path)
     link_pattern = r"\[([^\]]+)\]\(([^)]+)\)"
 
-    for match in re.finditer(link_pattern, content):
+    for match in re.finditer(link_pattern, content_without_codeblocks):
         text, link = match.groups()
 
         # 跳过外部链接
@@ -129,15 +164,21 @@ def check_internal_links(content, filepath):
         if link.startswith("#"):
             continue
 
-        # 处理相对路径
-        if link.startswith("./") or link.startswith("../"):
+        # 跳过 rustdoc 内部链接（Self::method, crate::path, super::path）
+        if link.startswith("Self::") or link.startswith("crate::") or link.startswith("super::"):
+            continue
+
+        # 跳过特殊协议
+        if link.startswith("mailto:") or link.startswith("tel:"):
+            continue
+
+        # 处理相对路径（Markdown 链接总是相对于当前文件所在目录）
+        if link.startswith("/"):
+            # 以 / 开头的路径：从项目根开始
+            target = PROJECT_ROOT / link.lstrip("/").split("#")[0]
+        elif not link.startswith("#"):
+            # 相对路径：从当前文件所在目录解析
             target = filepath.parent / link.split("#")[0]
-        elif "/" not in link and not link.startswith("#"):
-            # 同目录下的文件
-            target = filepath.parent / link.split("#")[0]
-        else:
-            # 从项目根开始的绝对路径
-            target = PROJECT_ROOT / link.split("#")[0]
 
         # 规范化路径
         try:

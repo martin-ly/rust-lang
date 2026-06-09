@@ -169,6 +169,11 @@
     - [对应代码示例](#对应代码示例)
     - [建议练习](#建议练习)
   - [导航：下一步去哪？](#导航下一步去哪)
+  - [嵌入式测验](#嵌入式测验)
+    - [测验 1：unsafe 块的能力（记忆层）](#测验-1unsafe-块的能力记忆层)
+    - [测验 2：unsafe fn 与 unsafe 块的区别（理解层）](#测验-2unsafe-fn-与-unsafe-块的区别理解层)
+    - [测验 3：裸指针安全解引用（应用层）](#测验-3裸指针安全解引用应用层)
+    - [测验 4：unsafe impl 的契约（分析层）](#测验-4unsafe-impl-的契约分析层)
 
 <!-- L3::权威定义 -->
 
@@ -2880,3 +2885,179 @@ assert!(!raw.is_null());  // alloc 返回的指针保证 non-null
 | 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](./README.md) 选择其他主题 |
 | 🎓 进入 L4 形式化 | 想理解"为什么"的数学证明 | [L4 形式化](../04_formal/README.md) |
 | 🏗️ 进入 L6 生态 | 想掌握生产工具链 | [L6 生态](../06_ecosystem/README.md) |
+
+---
+
+## 嵌入式测验
+
+### 测验 1：unsafe 块的能力（记忆层）
+
+**题目**: 在 Rust 中，`unsafe` 块允许执行以下哪些操作？（多选）
+
+- A. 解引用裸指针
+- B. 调用 `unsafe` 函数或方法
+- C. 实现 `unsafe` trait
+- D. 修改全局可变静态变量
+- E. 访问 `union` 的字段
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 A、B、C、D、E**（全部）。
+
+Rust 中 `unsafe` 块的 **5 种能力** [来源: Rust Reference]：
+
+1. **解引用裸指针**（`let x = *raw_ptr;`）
+2. **调用 `unsafe` 函数或方法**（包括 FFI 函数）
+3. **实现 `unsafe` trait**（`unsafe impl Foo for Bar {}`）
+4. **访问或修改可变静态变量**（`static mut`）
+5. **访问 `union` 的字段**（需要知道当前激活的变体）
+
+**关键理解**: `unsafe` 不是"关闭借用检查器"，而是将**证明安全性的责任**从编译器转移给程序员。`unsafe` 块内的操作仍需要满足 Rust 的安全不变量。
+</details>
+
+---
+
+### 测验 2：unsafe fn 与 unsafe 块的区别（理解层）
+
+**题目**: 以下代码的输出是什么？为什么？
+
+```rust
+unsafe fn dangerous() {
+    println!("called");
+}
+
+fn main() {
+    dangerous();
+}
+```
+
+- A. 输出 "called"
+- B. 编译错误：调用 `unsafe fn` 需要 `unsafe` 块
+- C. 运行时 panic
+- D. 编译错误：`dangerous` 不能在 `main` 中调用
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+在 Rust 中：
+
+- **`unsafe fn`**: 函数体内部可以执行 unsafe 操作，但调用者也必须在 `unsafe` 块中调用
+- **`unsafe` 块**: 允许在其中执行 unsafe 操作
+
+正确写法：
+
+```rust
+fn main() {
+    unsafe {
+        dangerous();
+    }
+}
+```
+
+**设计意图**: `unsafe fn` 的声明是一种**契约**——"这个函数有前置条件，调用者负责满足"。调用处必须使用 `unsafe` 块，明确标记"我承担了这个责任"。
+</details>
+
+---
+
+### 测验 3：裸指针安全解引用（应用层）
+
+**题目**: 以下代码有什么问题？如何修复？
+
+```rust
+fn main() {
+    let x = 5;
+    let r = &x as *const i32;
+    let val = unsafe { *r };
+    println!("{}", val);
+}
+```
+
+- A. 没有使用 `unsafe` 块
+- B. 代码是正确的，输出 5
+- C. `r` 可能成为悬垂指针，因为 `x` 在作用域结束时释放
+- D. 应该使用 `Box::into_raw` 而不是引用转裸指针
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+这个代码是**正确的**：
+
+- `x` 在 `main` 的作用域内有效
+- `r` 指向 `x`
+- 在 `x` 仍有效时解引用 `r` 是安全的
+
+输出：`5`
+
+但如果代码改成：
+
+```rust
+fn get_dangling() -> *const i32 {
+    let x = 5;
+    &x as *const i32  // ❌ x 在函数返回后释放
+}
+```
+
+就会返回悬垂指针。**裸指针不保证生命周期正确性**，这是使用 `unsafe` 时需要手动保证的。
+
+**安全替代**: 尽可能使用引用（`&T` / `&mut T`），它们有编译器检查的生命周期。
+</details>
+
+---
+
+### 测验 4：unsafe impl 的契约（分析层）
+
+**题目**: 以下代码试图为一个自定义类型实现 `Send`，为什么这是 `unsafe` 的？何时是安全的？
+
+```rust
+struct MyType {
+    data: *const u8,
+}
+
+unsafe impl Send for MyType {}
+
+fn main() {
+    let x = MyType { data: std::ptr::null() };
+    std::thread::spawn(move || {
+        // 使用 x
+    });
+}
+```
+
+- A. 编译错误：`*const u8` 未实现 `Send`
+- B. `unsafe impl Send` 总是安全的，因为 `Send` 只是标记 trait
+- C. 仅当 `data` 指向的内存可以安全地跨线程共享时才安全
+- D. 仅当 `MyType` 不包含任何字段时才安全
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 C**。
+
+`Send` 和 `Sync` 是 **unsafe auto trait**，它们的实现需要程序员手动保证线程安全：
+
+- **`Send`**: 类型可以安全地转移到另一个线程
+- **`Sync`**: 类型可以安全地在多个线程间共享引用
+
+`MyType` 包含 `*const u8`，而原始指针默认不实现 `Send`。`unsafe impl Send for MyType {}` 是**将证明责任转移给程序员**——你必须确保 `data` 指向的内存在跨线程移动后仍然有效且没有数据竞争。
+
+**安全条件**:
+
+1. `data` 指向的内存有有效的生命周期
+2. 多个线程不会同时读写同一块内存（或适当的同步）
+3. 目标类型遵循 `Send` 的语义契约
+
+**常见正确做法**:
+
+- 如果 `data` 实际上是一个 `Arc<T>` 的内部指针，通常不应该手动实现 `Send`
+- 如果 `data` 指向的是线程局部或全局只读内存，可能可以安全实现
+
+</details>
+
+---
+
+> **测验设计来源**: [Bloom Taxonomy 2001] · [Rust Reference — Unsafe Operations](https://doc.rust-lang.org/reference/unsafe-op.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)

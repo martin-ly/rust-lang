@@ -9,10 +9,10 @@
 
 | Google 课程章节 | 本项目对应资源 |
 |:---|:---|
-| Day 1: Basics | [concept/01_foundation/](../concept/01_foundation/) |
-| Day 2: Ownership & Borrows | [concept/01_foundation/01_ownership.md](../concept/01_foundation/01_ownership.md) · [02_borrowing.md](../concept/01_foundation/02_borrowing.md) |
-| Day 3: Structs, Enums, Pattern Matching | [concept/01_foundation/04_type_system.md](../concept/01_foundation/04_type_system.md) |
-| Day 4: Generics & Traits | [concept/02_intermediate/02_generics.md](../concept/02_intermediate/02_generics.md) · [01_traits.md](../concept/02_intermediate/01_traits.md) |
-| Day 5: Error Handling | [concept/01_foundation/10_error_handling_basics.md](../concept/01_foundation/10_error_handling_basics.md) |
+| Day 1: Basics | [concept/01_foundation/](../../concept/01_foundation/) |
+| Day 2: Ownership & Borrows | [concept/01_foundation/01_ownership.md](../../concept/01_foundation/01_ownership.md) · [02_borrowing.md](../../concept/01_foundation/02_borrowing.md) |
+| Day 3: Structs, Enums, Pattern Matching | [concept/01_foundation/04_type_system.md](../../concept/01_foundation/04_type_system.md) |
+| Day 4: Generics & Traits | [concept/02_intermediate/02_generics.md](../../concept/02_intermediate/02_generics.md) · [01_traits.md](../../concept/02_intermediate/01_traits.md) |
+| Day 5: Error Handling | [concept/01_foundation/10_error_handling_basics.md](../../concept/01_foundation/10_error_handling_basics.md) |
 
 > 注：本映射为简化版，完整映射请参阅 [01_lfrs_certification_mapping.md](./01_lfrs_certification_mapping.md)。

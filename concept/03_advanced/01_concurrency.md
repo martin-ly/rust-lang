@@ -122,6 +122,11 @@
     - [对应代码示例](#对应代码示例)
     - [建议练习](#建议练习)
   - [导航：下一步去哪？](#导航下一步去哪)
+  - [嵌入式测验](#嵌入式测验)
+    - [测验 1：Send 与 Sync 的定义（记忆层）](#测验-1send-与-sync-的定义记忆层)
+    - [测验 2：Rc 与 Arc 的区别（理解层）](#测验-2rc-与-arc-的区别理解层)
+    - [测验 3：Mutex 与共享可变状态（应用层）](#测验-3mutex-与共享可变状态应用层)
+    - [测验 4：死锁分析（分析层）](#测验-4死锁分析分析层)
 
 ## 零、认知路径（Cognitive Path）
 
@@ -1392,3 +1397,220 @@ fn main() {
 | 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](./README.md) 选择其他主题 |
 | 🎓 进入 L4 形式化 | 想理解"为什么"的数学证明 | [L4 形式化](../04_formal/README.md) |
 | 🏗️ 进入 L6 生态 | 想掌握生产工具链 | [L6 生态](../06_ecosystem/README.md) |
+
+---
+
+## 嵌入式测验
+
+### 测验 1：Send 与 Sync 的定义（记忆层）
+
+**题目**: 以下关于 `Send` 和 `Sync` 的描述，哪个是正确的？
+
+- A. `Send` 表示类型可以在多个线程间共享引用；`Sync` 表示类型可以移动到另一个线程
+- B. `Send` 表示类型可以移动到另一个线程；`Sync` 表示类型可以在多个线程间共享引用
+- C. `Send` 和 `Sync` 都表示类型可以安全地在多个线程间共享引用
+- D. `Send` 和 `Sync` 都只与原子操作相关
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+Rust 并发安全的两个核心 marker trait：
+
+- **`Send`**: 类型 `T` 实现 `Send` 意味着 **T 的所有权可以安全地 transfer 到另一个线程**。
+  - 例如：`i32`、`String`、`Vec<T>`（若 T: Send）都是 `Send`
+  - 反例：`Rc<T>` 不是 `Send`（引用计数非原子）
+
+- **`Sync`**: 类型 `T` 实现 `Sync` 意味着 **&T 可以安全地在多个线程间共享**。
+  - 等价定义：`T: Sync` 当且仅当 `&T: Send`
+  - 例如：`i32`、`Mutex<T>`（若 T: Send）都是 `Sync`
+  - 反例：`RefCell<T>` 不是 `Sync`（内部可变性非线程安全）
+
+**记忆口诀**: Send = **move** 到另一线程；Sync = **share** 引用给多线程。
+</details>
+
+---
+
+### 测验 2：Rc 与 Arc 的区别（理解层）
+
+**题目**: 以下代码能否编译？如果不能，应该如何修复？
+
+```rust
+use std::rc::Rc;
+use std::thread;
+
+fn main() {
+    let data = Rc::new(42);
+    let handle = thread::spawn(move || {
+        println!("{}", *data);
+    });
+    handle.join().unwrap();
+}
+```
+
+- A. 能编译，输出 42
+- B. 编译错误：`Rc<i32>` 未实现 `Send`，应改为 `Arc<i32>`
+- C. 编译错误：`Rc<i32>` 未实现 `Sync`
+- D. 编译错误：需要用 `Mutex<Rc<i32>>`
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+`Rc<T>` 使用**非原子**引用计数，因此它既不是 `Send` 也不是 `Sync`。`thread::spawn` 要求闭包捕获的值实现 `Send`，以便将所有权 move 到新线程。
+
+**错误信息**（类似）：
+
+```
+`Rc<i32>` cannot be sent between threads safely
+  the trait `Send` is not implemented for `Rc<i32>`
+```
+
+**修复方案**: 将 `Rc::new(42)` 改为 `Arc::new(42)`：
+
+```rust
+use std::sync::Arc;
+use std::thread;
+
+fn main() {
+    let data = Arc::new(42);
+    let handle = thread::spawn(move || {
+        println!("{}", *data);
+    });
+    handle.join().unwrap();
+}
+```
+
+`Arc<T>` 使用**原子**引用计数，若 `T: Send + Sync`，则 `Arc<T>: Send + Sync`。
+</details>
+
+---
+
+### 测验 3：Mutex 与共享可变状态（应用层）
+
+**题目**: 以下代码的输出是什么？
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+fn main() {
+    let counter = Arc::new(Mutex::new(0));
+    let mut handles = vec![];
+
+    for _ in 0..10 {
+        let counter = Arc::clone(&counter);
+        let handle = thread::spawn(move || {
+            let mut num = counter.lock().unwrap();
+            *num += 1;
+        });
+        handles.push(handle);
+    }
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+
+    println!("Result: {}", *counter.lock().unwrap());
+}
+```
+
+- A. 输出 `Result: 0` 到 `Result: 10` 之间的随机值
+- B. 输出 `Result: 10`
+- C. 编译错误：多个线程不能共享 `Mutex`
+- D. 运行时 panic：死锁
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+代码分析：
+
+1. `Arc<Mutex<i32>>` 允许多个线程共享同一个 `Mutex`
+2. `counter.lock().unwrap()` 获取锁，保证一次只有一个线程能修改 `num`
+3. 每个线程将计数器加 1，10 个线程共加 10 次
+4. 最终输出 `Result: 10`
+
+**关键点**:
+
+- `Arc` 提供**共享所有权**
+- `Mutex` 提供**互斥访问**
+- `Arc<Mutex<T>>` 是 Rust 中最常见的"共享可变状态"模式
+
+**注意**: 如果忘记 `Arc::clone`，第一个线程会 move `counter`，后续循环编译错误（E0382）。
+</details>
+
+---
+
+### 测验 4：死锁分析（分析层）
+
+**题目**: 以下代码存在什么并发问题？
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+fn main() {
+    let m1 = Arc::new(Mutex::new(0));
+    let m2 = Arc::new(Mutex::new(0));
+
+    let m1_clone = Arc::clone(&m1);
+    let m2_clone = Arc::clone(&m2);
+
+    let h1 = thread::spawn(move || {
+        let _a = m1.lock().unwrap();
+        let _b = m2.lock().unwrap();
+        println!("thread 1");
+    });
+
+    let h2 = thread::spawn(move || {
+        let _b = m2_clone.lock().unwrap();
+        let _a = m1_clone.lock().unwrap();
+        println!("thread 2");
+    });
+
+    h1.join().unwrap();
+    h2.join().unwrap();
+}
+```
+
+- A. 数据竞争：`Mutex` 不能保证互斥
+- B. 死锁：线程 1 持有 m1 等待 m2，线程 2 持有 m2 等待 m1
+- C. 编译错误：`Mutex` 不能跨线程共享
+- D. 代码正确，每次运行都会输出 "thread 1" 和 "thread 2"
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+这是经典的**死锁**场景：
+
+| 时间线 | 线程 1 | 线程 2 |
+|:---|:---|:---|
+| t1 | 获取 m1 | 获取 m2 |
+| t2 | 等待 m2（被线程 2 持有） | 等待 m1（被线程 1 持有） |
+| t3 | 永久阻塞 | 永久阻塞 |
+
+**死锁条件**（Coffman 条件）：
+
+1. 互斥
+2. 持有并等待
+3. 非抢占
+4. 循环等待
+
+**修复方案**:
+
+1. **统一加锁顺序**：两个线程都先获取 m1，再获取 m2
+2. **使用 `try_lock`**：获取失败时释放已持有的锁，稍后重试
+3. **减少锁粒度**：避免同时持有多个锁
+
+> **重要**: Rust 的类型系统可以**防止数据竞争**，但**不能防止死锁**。死锁是逻辑错误，需要程序员通过设计避免。
+</details>
+
+---
+
+> **测验设计来源**: [Bloom Taxonomy 2001] · [TRPL Ch16](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [Rust Atomics and Locks](https://marabos.nl/atomics/)

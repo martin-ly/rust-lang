@@ -603,6 +603,6 @@ pub fn get_iter(data: &[i32]) -> impl Iterator<Item = &i32> {
 > [RFC 3617](https://rust-lang.github.io/rfcs/3617-precise-capturing.html)
 >
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.85.0+ stable (Edition 2024)
+> **对应 Rust 版本**: 1.96.0+ stable (Edition 2024)
 > **最后更新**: 2026-05-29
 > **状态**: ✅ 已完成

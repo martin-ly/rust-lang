@@ -393,7 +393,6 @@ fn broken() {}
 
 - [特性跟踪模板](./00_rust_feature_tracking_template.md)
 - [决策树模板](./00_template_decision_tree.md)
-- [矩阵模板](./00_template_matrix.md)
 - [docs 总览](../README.md)
 
 ---

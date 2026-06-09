@@ -1,6 +1,43 @@
 # 更新日志 (Changelog)
 
-> **最后更新**: 2026-06-08
+> **最后更新**: 2026-06-09
+
+---
+
+## [2.5.6] - 2026-06-09 — L3 测验扩展 + docs/ 链接清零冲刺
+
+### 🧩 L3 嵌入式测验扩展（新增 8 道）
+
+- **`concept/03_advanced/02_async.md`**: 新增 4 道嵌入式测验（Future 本质、`.await` 语义、运行时选择、取消安全）
+- **`concept/03_advanced/04_macros.md`**: 新增 4 道嵌入式测验（声明宏 vs 过程宏、`macro_rules!` 模式匹配、派生宏实战、宏卫生性）
+- **累计覆盖**: L3 已有 6 个文件含嵌入式测验（01_concurrency, 02_async, 03_unsafe, 04_macros, 06_pin_unpin 等）
+
+### 🔧 docs/ 价值审计基线改善
+
+- **A类问题**: 3 → 1（-67%），剩余 1 个为历史声明（1.85.0 Edition 起始版本），属合理保留
+- **B类问题**: 27 → 23（-15%），修复核心目录中真正损坏的链接
+- **损坏链接修复**:
+  - `docs/02_reference/ALIGNMENT_GUIDE.md`: `07_rust_release_tracking_checklist.md` → `00_rust_version_alignment_checklist.md`
+  - `docs/00_meta/history/00_2026_reorganization.md`: 移除不存在的 `00_project_reorganization_plan.md` 链接
+  - `docs/00_meta/`: 三个模板文件中移除不存在的 `00_template_matrix.md` 链接
+  - `docs/content/academic/README.md`: `10_tree_borrows_authoritative_guide.md` → `10_tree_borrows_guide.md`
+- **缺失 README 新建**:
+  - `docs/content/README.md` — Content 目录总览
+  - `docs/content/representations/README.md` — 知识表示索引
+  - `docs/content/scenarios/README.md` — 应用场景索引
+
+### 🔧 docs/ 审计脚本改进
+
+- **链接解析修复**: Markdown 相对路径从文件所在目录解析（而非项目根），消除大量目录链接误报
+- **历史声明过滤增强**: 新增 "起始版本" / "comparison" / "迁移" 等关键词，减少历史事实声明的误报
+
+### 📊 三轨内容重复检测
+
+- **扫描文件数**: 1,334
+- **潜在重复对**: 146（相似度 > 0.6）
+- **核心发现**: concept/05_comparative/ 与 rust-ownership-decidability/comparative-analysis/ 存在多对 >0.75 相似度
+- **策略**: concept/ 为主轨，C类目录长期治理，知识分层设计（concept/ 教学 ↔ knowledge/ 卡片）的重复属预期内
+- **治理文档**: 新建 `reports/C_CLASS_OVERLAP_GOVERNANCE_STRATEGY_2026_06_09.md`（P0/P1/P2 三级优先级）
 
 ---
 
@@ -112,6 +149,9 @@
 - **`concept/03_advanced/02_async.md`**: 末尾添加指向 [L3 并发与异步测验](./21_quiz_concurrency_async.md) 的链接
 - **`concept/03_advanced/03_unsafe.md`**: 末尾添加指向 [L3 Unsafe Rust 测验](./22_quiz_unsafe.md) 的链接
 - **`concept/03_advanced/04_macros.md`**: 末尾添加指向 [L3 宏系统测验](./23_quiz_macros.md) 的链接
+- **`concept/03_advanced/06_pin_unpin.md`**: 新增 4 道嵌入式测验（Pin 设计动机/Unpin 自动实现/`Pin::new` 限制/async 状态机自引用）
+- **`concept/03_advanced/03_unsafe.md`**: 新增 4 道嵌入式测验（`unsafe` 块 5 种能力/`unsafe fn` 调用契约/裸指针安全解引用/`unsafe impl Send` 契约）
+- **`concept/03_advanced/01_concurrency.md`**: 新增 4 道嵌入式测验（Send/Sync 定义/Rc vs Arc/`Arc<Mutex<T>>` 共享状态/死锁分析）
 
 ---
 

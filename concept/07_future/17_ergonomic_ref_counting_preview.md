@@ -3,6 +3,7 @@
 > **EN**: Ergonomic Ref-Counting 预研：人机工学引用计数 (Chinese)
 > **Summary**: Ergonomic Ref-Counting 预研：人机工学引用计数 (Chinese). Emerging Rust feature or ecosystem trend: Ergonomic Ref-Counting 预研：人机工学引用计数 (Chinese).
 > **状态**: 🧪 RFC 决策与预览阶段
+> **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
 > **跟踪版本**: nightly 1.98.0 (2026-06-02)
 > **预计稳定**: 待定（RFC 决策阶段，2026 持续推进）
 > **受众**: [专家]

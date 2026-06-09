@@ -142,6 +142,11 @@
     - [对应代码示例](#对应代码示例)
     - [建议练习](#建议练习)
   - [导航：下一步去哪？](#导航下一步去哪)
+  - [嵌入式测验](#嵌入式测验)
+    - [测验 1：async fn 的本质（记忆层）](#测验-1async-fn-的本质记忆层)
+    - [测验 2：`.await` 的语义（理解层）](#测验-2await-的语义理解层)
+    - [测验 3：运行时选择（应用层）](#测验-3运行时选择应用层)
+    - [测验 4：取消安全（分析层）](#测验-4取消安全分析层)
 
 ## 〇、认知路径（Cognitive Path）
 
@@ -2939,3 +2944,201 @@ fn main() {}
 | 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](./README.md) 选择其他主题 |
 | 🎓 进入 L4 形式化 | 想理解"为什么"的数学证明 | [L4 形式化](../04_formal/README.md) |
 | 🏗️ 进入 L6 生态 | 想掌握生产工具链 | [L6 生态](../06_ecosystem/README.md) |
+
+---
+
+## 嵌入式测验
+
+### 测验 1：async fn 的本质（记忆层）
+
+**题目**: `async fn` 在编译后本质上是什么？
+
+- A. 一个普通的同步函数，只是语法糖
+- B. 一个返回 `Future` 的匿名状态机结构体
+- C. 一个在新线程中运行的函数
+- D. 一个绿色线程（green thread）
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+`async fn foo() -> i32` 编译后等价于：
+
+```rust
+fn foo() -> impl Future<Output = i32> {
+    // 编译器生成的状态机
+    FooFuture { state: 0, /* 捕获的局部变量 */ }
+}
+```
+
+编译器将 `async fn` 转换为**状态机**（state machine）：
+
+- 每个 `.await` 点对应一个状态转换
+- `poll()` 方法驱动状态机前进
+- 状态机实现了 `Future` trait
+
+**关键点**: `async fn` **不会**自动在新线程中运行。它只是返回一个惰性（lazy）的 `Future`，需要 executor（如 Tokio）来驱动执行。
+
+这与 Kotlin 的协程、Go 的 goroutine 不同——Rust 的 async 是**零成本抽象**，状态机在编译期生成，无运行时开销。
+</details>
+
+---
+
+### 测验 2：`.await` 的语义（理解层）
+
+**题目**: 以下代码中，`let result = read_file().await;` 的作用是什么？
+
+```rust
+async fn read_file() -> String { ... }
+
+async fn process() {
+    let result = read_file().await;
+    println!("{}", result);
+}
+```
+
+- A. 阻塞当前线程，直到文件读取完成
+- B. 将当前函数的控制权交还给 executor，在文件读取完成后恢复执行
+- C. 创建一个新线程来读取文件
+- D. 立即返回一个 `Future`，不执行任何操作
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+`.await` 的核心语义：
+
+1. **调用 `poll()`**: `read_file()` 返回的 `Future` 被驱动
+2. **检查状态**:
+   - 如果 `Future` 已完成（`Poll::Ready`），恢复当前函数，继续执行下一行
+   - 如果 `Future` 未完成（`Poll::Pending`），**将当前 async 函数的状态保存到状态机**，将控制权交还给 caller/executor
+3. **非阻塞**: 当前线程可以去执行其他任务，不会空等
+
+**与线程阻塞的区别**:
+
+- `std::thread::sleep` → 阻塞线程，CPU 无法做其他事
+- `.await` → 非阻塞，线程可以执行其他 `Future`
+
+这是 Rust async 高性能的关键：**协作式调度**，一个线程可以驱动成千上万个 `Future`。
+</details>
+
+---
+
+### 测验 3：运行时选择（应用层）
+
+**题目**: 以下场景应该选择哪种异步运行时？
+
+| 场景 | 最佳选择 |
+|:---|:---|
+| 高并发 HTTP 服务器，10k+ 连接 | A. `tokio` |
+| 嵌入式设备，资源极度受限 | B. `async-std` |
+| 需要与现有 `async-std` 生态集成 | C. `smol` |
+| 轻量级、可组合的运行时 | D. `embassy` |
+
+- A. 1-A, 2-B, 3-C, 4-D
+- B. 1-A, 2-D, 3-B, 4-C
+- C. 1-B, 2-D, 3-A, 4-C
+- D. 1-C, 2-A, 3-B, 4-D
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+| 场景 | 最佳选择 | 原因 |
+|:---|:---|:---|
+| 高并发 HTTP 服务器 | **Tokio** | 生态最成熟，`tokio::net`、`tokio::fs`、`hyper`、`axum` 等 |
+| 嵌入式设备 | **Embassy** | 专为 `no_std` 嵌入式设计，资源占用极小 |
+| 与 `async-std` 集成 | **async-std** | API 与标准库对齐，适合已有代码迁移 |
+| 轻量级可组合 | **smol** | 核心仅 5k 行，模块化设计，易于嵌入 |
+
+**Tokio 的生态系统**:
+
+- `tokio::net` — 异步 TCP/UDP
+- `tokio::fs` — 异步文件系统
+- `tokio::time` — 异步定时器
+- `tokio::sync` — 异步锁、channel
+- `hyper` / `axum` — HTTP 框架
+- `tonic` — gRPC
+- `sqlx` — 异步数据库
+
+> 生产环境首选 **Tokio**，除非有特殊需求（嵌入式用 Embassy，极简用 smol）。
+</details>
+
+---
+
+### 测验 4：取消安全（分析层）
+
+**题目**: 以下代码存在什么潜在问题？
+
+```rust
+use tokio::time::{sleep, Duration};
+
+async fn risky_operation() {
+    let mut file = tokio::fs::File::create("temp.txt").await.unwrap();
+
+    sleep(Duration::from_secs(1)).await;  // 可能被取消！
+
+    file.write_all(b"data").await.unwrap();
+    file.flush().await.unwrap();
+}
+
+#[tokio::main]
+async fn main() {
+    let handle = tokio::spawn(risky_operation());
+    sleep(Duration::from_millis(100)).await;
+    handle.abort();  // 取消任务
+}
+```
+
+- A. 文件可能未正确关闭，导致数据丢失
+- B. `abort()` 不会立即停止任务，代码总是正常完成
+- C. `File::create` 是同步操作，不应该在 async 中调用
+- D. 编译错误：`abort()` 不能在 `JoinHandle` 上调用
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 A**。
+
+这是**取消安全（Cancellation Safety）**问题：
+
+1. `handle.abort()` 发送取消信号
+2. 当 `risky_operation` 在 `sleep().await` 点被唤醒时，`.await` 返回 `Err(Cancelled)`
+3. 函数立即返回，**不会执行后续的 `write_all` 和 `flush`**
+4. `file` 在 `main` 返回时 drop，但由于没有显式 flush，数据可能未写入磁盘
+
+**更严重的后果**: 如果 `risky_operation` 在 `write_all` 和 `flush` **之间**被取消，文件可能处于不一致状态。
+
+**修复方案** — 使用 `tokio::select!` + `Drop` 保证清理：
+
+```rust
+use tokio::io::AsyncWriteExt;
+
+async fn safe_operation() -> std::io::Result<()> {
+    let mut file = tokio::fs::File::create("temp.txt").await?;
+
+    tokio::select! {
+        _ = sleep(Duration::from_secs(1)) => {},
+        _ = tokio::signal::ctrl_c() => {
+            file.flush().await?;  // 取消前 flush
+            return Ok(());
+        }
+    }
+
+    file.write_all(b"data").await?;
+    file.flush().await?;
+    Ok(())
+}
+```
+
+或使用 `tokio::task::spawn_blocking` 将关键 I/O 移到不会被取消的上下文。
+
+> **核心原则**: `.await` 点可能被取消，必须确保资源在取消时正确释放（RAII + `Drop`）。
+</details>
+
+---
+
+> **测验设计来源**: [Bloom Taxonomy 2001] · [TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Async Book](https://rust-lang.github.io/async-book/)
