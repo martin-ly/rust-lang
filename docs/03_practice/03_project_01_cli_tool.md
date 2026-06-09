@@ -318,7 +318,7 @@ cargo build --release
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [03_practice 目录](./README.md)
-- [上级目录](../README.md)
+- [docs 索引](../README.md)
 
 ---
 

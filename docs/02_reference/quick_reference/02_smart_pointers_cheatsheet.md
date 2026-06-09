@@ -1418,7 +1418,7 @@ impl Unmovable {
 
 **最后更新**: 2026-05-08
 **维护者**: 文档团队
-**状态**: ✅ **Rust 1.93.0 更新完成**
+**状态**: ✅ **Rust 1.96.0 更新完成**
 
 🎯 **掌握智能指针，灵活管理内存！**
 ---
@@ -1443,7 +1443,7 @@ impl Unmovable {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [quick_reference 目录](./README.md)
-- [上级目录](../README.md)
+- [速查表索引](./README.md)
 
 ---
 

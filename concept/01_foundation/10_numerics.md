@@ -53,6 +53,11 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
+  - [嵌入式测验](#嵌入式测验)
+    - [测验 1：整数溢出行为（记忆层）](#测验-1整数溢出行为记忆层)
+    - [测验 2：`as` 与 `TryFrom` 的区别（理解层）](#测验-2as-与-tryfrom-的区别理解层)
+    - [测验 3：NonZero 类型优化（应用层）](#测验-3nonzero-类型优化应用层)
+    - [测验 4：浮点数陷阱（分析层）](#测验-4浮点数陷阱分析层)
 
 ---
 
@@ -708,3 +713,144 @@ fn main() {
 ### 反命题与边界
 
 > **反命题**: "数值类型与运算：从整数到浮点的完整图景 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+
+---
+
+## 嵌入式测验
+
+### 测验 1：整数溢出行为（记忆层）
+
+**题目**: 在 Rust 中，`let x: u8 = 255; x + 1` 在不同编译模式下的行为是什么？
+
+- A. Debug 和 Release 模式下都 panic
+- B. Debug 模式下 panic，Release 模式下 wrapping（回绕为 0）
+- C. Debug 模式下 wrapping，Release 模式下 panic
+- D. 两种模式都静默 wrapping（与 C 相同）
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+Rust 的整数溢出行为取决于编译模式：
+
+- **Debug 模式**: 开启溢出检查，溢出时 `panic!`
+- **Release 模式**: 不检查溢出，使用 two's complement wrapping（回绕）
+
+这与 C/C++ 的未定义行为不同——Rust 明确定义了 wrapping 语义，只是 Debug 时额外安全检查。
+
+**生产代码应使用显式方法**: `wrapping_add`、`saturating_add`、`checked_add` 或 `overflowing_add`，避免依赖编译模式。
+</details>
+
+---
+
+### 测验 2：`as` 与 `TryFrom` 的区别（理解层）
+
+**题目**: 以下代码的输出是什么？
+
+```rust
+fn main() {
+    let a: i32 = -1;
+    let b = a as u32;
+    println!("b = {}", b);
+
+    let c: i32 = 300;
+    let d = c as i8;
+    println!("d = {}", d);
+}
+```
+
+- A. `b = -1`, `d = 300`
+- B. `b = 4294967295`, `d = 44`
+- C. 编译错误
+- D. `b = 0`, `d = 44`
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+Rust 的 `as` 执行**截断/重新解释转换**（truncating/reinterpreting cast）：
+
+1. `i32 → u32`: 位的重新解释。`-1` 的 two's complement 表示全为 `1`， reinterpret 为 `u32` 得到 `4294967295`（`u32::MAX`）。
+2. `i32 → i8`: 截断低 8 位。`300` 的二进制低 8 位是 `44`。
+
+`as` 永远不会 panic，但可能产生意外结果。安全替代：
+
+- `try_into()` 返回 `Result`，值越界时返回 `Err`
+- `checked_add` 等系列方法进行安全算术运算
+
+</details>
+
+---
+
+### 测验 3：NonZero 类型优化（应用层）
+
+**题目**: 在 64 位平台上，`Option<NonZeroU32>` 占用多少字节？为什么？
+
+- A. 8 字节（tag + 值）
+- B. 4 字节（niche value optimization）
+- C. 12 字节（对齐填充）
+- D. 16 字节（与 `Option<u64>` 相同）
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+`NonZeroU32` 保证值不为 0，编译器利用这个**niche value**（零值）来压缩 `Option<T>` 的表示：
+
+- `0` 表示 `None`
+- 非零值表示 `Some(value)`
+
+因此 `Option<NonZeroU32>` 只需 4 字节（一个 `u32`），不需要额外的 tag。
+
+同理：
+
+- `Option<&T>` 使用 null 指针表示 `None`（也是 niche optimization）
+- `Option<NonNull<T>>` 同样压缩为指针大小
+
+这是 Rust **类型系统与内存布局**结合的经典优化案例。
+</details>
+
+---
+
+### 测验 4：浮点数陷阱（分析层）
+
+**题目**: 以下代码的输出是什么？为什么？
+
+```rust
+fn main() {
+    let x: f64 = f64::NAN;
+    if x == f64::NAN {
+        println!("equal");
+    } else {
+        println!("not equal");
+    }
+
+    if x.is_nan() {
+        println!("is_nan");
+    }
+}
+```
+
+- A. `equal` → `is_nan`
+- B. `not equal` → `is_nan`
+- C. `equal` → （无输出）
+- D. 编译错误
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+根据 IEEE 754 标准，`NaN != NaN`——NaN 与任何值（包括自身）比较都返回 `false`。因此 `x == f64::NAN` 永远为 `false`，输出 `not equal`。
+
+检测 NaN 必须使用 `is_nan()` 方法。
+
+这也是 `HashMap` 和 `BTreeMap` 不支持 `f32`/`f64` 作为键的原因：`NaN` 破坏了等价关系（反身性不成立）。如需使用浮点作为键，可考虑 `ordered_float` crate。
+</details>
+
+---
+
+> **测验设计来源**: [Bloom Taxonomy 2001] · [Brown University Interactive Rust Book — Quiz Design](https://rust-book.cs.brown.edu/) · [IEEE 754 Standard](https://ieeexplore.ieee.org/document/8766229)

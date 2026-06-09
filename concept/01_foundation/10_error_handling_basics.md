@@ -1,4 +1,5 @@
 > **内容分级**: [综述级]
+>
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **本节关键术语**: 错误处理 (Error Handling) · Result · Option · 传播运算符 (? ) · 模式匹配错误 (Match on Result) — [完整对照表](../00_meta/terminology_glossary.md)
 >
@@ -60,6 +61,12 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Result 与 ? 运算符（理解层）](#测验-1result-与--运算符理解层)
+    - [测验 2：Option 与 Result 的转换（应用层）](#测验-2option-与-result-的转换应用层)
+    - [测验 3：unwrap vs expect（分析层）](#测验-3unwrap-vs-expect分析层)
+    - [测验 4：错误传播链（应用层）](#测验-4错误传播链应用层)
+    - [测验 5：panic! 的适用场景（评价层）](#测验-5panic-的适用场景评价层)
 
 ---
 
@@ -812,3 +819,157 @@ fn main() {}
 ### 反命题与边界
 
 > **反命题**: "Rust 错误处理基础 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+
+---
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Result 与 ? 运算符（理解层）
+
+以下函数能否通过 `?` 传播错误？
+
+```rust
+fn read_file(path: &str) -> Result<String, std::io::Error> {
+    let content = std::fs::read_to_string(path)?;
+    Ok(content)
+}
+```
+
+- A. 能，`?` 自动将 `std::io::Error` 转换为返回类型中的错误
+- B. 不能，`?` 只能用于返回 `Option` 的函数
+- C. 不能，`read_to_string` 返回的是 `Result`，但类型不匹配
+
+<details>
+<summary>✅ 答案</summary>
+
+**A. 能**。
+
+`?` 运算符在 `Result<T, E>` 上工作时，若值为 `Err(e)`，则自动从当前函数返回 `Err(e)`（类型需匹配或可通过 `From` trait 转换）。
+
+此处 `read_to_string` 返回 `Result<String, std::io::Error>`，与函数返回类型中的错误类型一致，因此 `?` 可直接使用。
+</details>
+
+---
+
+### 测验 2：Option 与 Result 的转换（应用层）
+
+以下代码的输出是什么？
+
+```rust
+fn main() {
+    let s = "42";
+    let result: Result<i32, _> = s.parse();
+    match result {
+        Ok(n) => println!("number: {}", n),
+        Err(e) => println!("error: {}", e),
+    }
+}
+```
+
+- A. `number: 42`
+- B. `error: ...`
+- C. 编译错误
+
+<details>
+<summary>✅ 答案</summary>
+
+**A. `number: 42`**。
+
+`"42".parse::<i32>()` 成功将字符串解析为整数 `42`，返回 `Ok(42)`。
+
+若输入为 `"abc"`，则返回 `Err(ParseIntError { ... })`，匹配 `Err` 分支。
+</details>
+
+---
+
+### 测验 3：unwrap vs expect（分析层）
+
+生产代码中，以下哪种写法更推荐？
+
+```rust
+// 选项 A
+let port = config.get("PORT").unwrap();
+
+// 选项 B
+let port = config.get("PORT").expect("PORT must be set in config");
+```
+
+<details>
+<summary>✅ 答案</summary>
+
+**选项 B 更推荐**。
+
+`unwrap()` 在失败时只输出通用 panic 信息，调试困难。`expect("msg")` 在失败时输出自定义消息 `"msg"`，更利于定位问题。
+
+**最佳实践**: 仅在以下情况使用 `unwrap`/`expect`：
+
+- 测试代码
+- 编译期可证明不会失败的场景（如 `"hello".parse::<String>()` 实际上不会失败，但 `"42".parse::<i32>()` 会）
+- 程序启动时的必需配置读取（失败后直接退出）
+
+其他场景优先使用 `match`、`if let` 或 `?`。
+</details>
+
+---
+
+### 测验 4：错误传播链（应用层）
+
+以下代码能否编译？
+
+```rust,compile_fail
+fn may_fail() -> Result<i32, String> {
+    let x: Result<i32, std::num::ParseIntError> = "abc".parse();
+    let y = x?;
+    Ok(y)
+}
+```
+
+<details>
+<summary>✅ 答案</summary>
+
+**编译错误**。
+
+`?` 运算符要求错误类型可通过 `From` 自动转换。此处 `ParseIntError` 不能自动转换为 `String`，因此编译失败。
+
+修复方案 1（显式映射错误）：
+
+```rust
+let y = x.map_err(|e| e.to_string())?;
+```
+
+修复方案 2（使用统一的错误类型，如 `anyhow::Error`）：
+
+```rust
+fn may_fail() -> Result<i32, anyhow::Error> {
+    let y: i32 = "abc".parse()?;
+    Ok(y)
+}
+```
+
+</details>
+
+---
+
+### 测验 5：panic! 的适用场景（评价层）
+
+以下哪种场景**适合**使用 `panic!`？
+
+1. 用户输入了无效的文件路径
+2. 数组索引越界（已确认不可能发生）
+3. 网络请求超时
+4. 内部状态出现逻辑矛盾（不变量被破坏）
+
+<details>
+<summary>✅ 答案</summary>
+
+**适合使用 `panic!` 的场景：2 和 4**。
+
+| 场景 | 处理方式 | 原因 |
+|:---|:---|:---|
+| 1. 无效文件路径 | `Result` / `Option` | 用户输入错误是预期内事件 |
+| 2. 数组索引越界（不可能发生） | `panic!` / 直接使用索引 `[i]` | 若已通过逻辑证明不可能越界，`panic!` 作为最后的保险 |
+| 3. 网络超时 | `Result` | 外部依赖失败是预期内事件 |
+| 4. 内部状态矛盾 | `panic!` | 不变量被破坏意味着程序存在 bug，继续运行可能导致更严重的数据损坏 |
+
+> **原则**: `panic!` 用于**程序 bug**（不可恢复的内部错误），`Result` 用于**预期内的失败**（可恢复的外部错误）。
+</details>

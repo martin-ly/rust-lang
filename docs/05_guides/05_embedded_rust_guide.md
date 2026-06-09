@@ -628,7 +628,7 @@ fn median_filter(a: u8, b: u8, c: u8) -> u8 {
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [05_guides 目录](./README.md)
-- [上级目录](../README.md)
+- [docs 索引](../README.md)
 
 ---
 

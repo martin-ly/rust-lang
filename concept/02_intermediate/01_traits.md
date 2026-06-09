@@ -156,6 +156,12 @@
   - [实践](#实践)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [参考来源](#参考来源)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Trait 定义与实现（理解层）](#测验-1trait-定义与实现理解层)
+    - [测验 2：Trait Bound（应用层）](#测验-2trait-bound应用层)
+    - [测验 3：默认实现（应用层）](#测验-3默认实现应用层)
+    - [测验 4：Orphan Rule（分析层）](#测验-4orphan-rule分析层)
+    - [测验 5：Trait 对象（分析层）](#测验-5trait-对象分析层)
 
 ## 一、权威定义（Definition）
 
@@ -2124,3 +2130,170 @@ fn main() {}
 > [来源: [RFC 0443 — Derive](https://rust-lang.github.io/rfcs/0443-derives.html)]
 
 > [来源: [PLDI 2023 — Rust Traits Formalization](https://dl.acm.org/doi/10.1145/3591285)]
+
+---
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Trait 定义与实现（理解层）
+
+以下代码能否编译？
+
+```rust,compile_fail
+trait Greet {
+    fn greet(&self);
+}
+
+struct Person;
+
+fn main() {
+    let p = Person;
+    p.greet();
+}
+```
+
+<details>
+<summary>✅ 答案</summary>
+
+**编译错误**。
+
+定义了 `trait Greet`，但没有为 `Person` 实现它。需要添加 `impl Greet for Person { ... }`。
+
+修复：
+
+```rust
+impl Greet for Person {
+    fn greet(&self) {
+        println!("Hello!");
+    }
+}
+```
+
+</details>
+
+---
+
+### 测验 2：Trait Bound（应用层）
+
+以下函数签名要求 `T` 满足什么条件？
+
+```rust
+fn print_debug<T: std::fmt::Debug>(value: T) {
+    println!("{:?}", value);
+}
+```
+
+- A. `T` 必须实现 `Display`
+- B. `T` 必须实现 `Debug`
+- C. `T` 必须实现 `Clone`
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. `T` 必须实现 `Debug`**。
+
+`<T: std::fmt::Debug>` 是 Trait Bound，要求类型参数 `T` 实现 `Debug` trait。这使得函数体内可以使用 `{:?}` 格式化。
+</details>
+
+---
+
+### 测验 3：默认实现（应用层）
+
+以下代码的输出是什么？
+
+```rust
+trait Counter {
+    fn count(&self) -> i32;
+    fn count_twice(&self) -> i32 {
+        self.count() * 2
+    }
+}
+
+struct Three;
+impl Counter for Three {
+    fn count(&self) -> i32 { 3 }
+}
+
+fn main() {
+    let t = Three;
+    println!("{}", t.count_twice());
+}
+```
+
+<details>
+<summary>✅ 答案</summary>
+
+**输出 `6`**。
+
+`Counter` trait 为 `count_twice` 提供了默认实现（调用 `self.count() * 2`）。`Three` 只实现了 `count`，但继承了默认的 `count_twice`，因此 `3 * 2 = 6`。
+
+`Three` 也可以选择覆盖 `count_twice` 提供自定义行为。
+</details>
+
+---
+
+### 测验 4：Orphan Rule（分析层）
+
+以下代码为什么编译失败？
+
+```rust,compile_fail
+trait MyTrait {}
+impl MyTrait for String {}
+```
+
+<details>
+<summary>✅ 答案</summary>
+
+**编译通过**！这是一个陷阱题。
+
+实际上这段代码**可以编译**。Orphan Rule 的限制是：**不能为外部 crate 的类型实现外部 crate 的 trait**。此处 `MyTrait` 定义在当前 crate，`String` 来自标准库，满足 "trait 或类型至少一个在当前 crate" 的条件。
+
+以下代码才会编译失败：
+
+```rust,compile_fail
+// 都为外部类型/trait
+impl std::fmt::Display for String {}  // E0117
+```
+
+</details>
+
+---
+
+### 测验 5：Trait 对象（分析层）
+
+以下代码能否编译？
+
+```rust,compile_fail
+trait Drawable {
+    fn draw(&self);
+    fn create() -> Self;
+}
+
+fn render(item: &dyn Drawable) {
+    item.draw();
+}
+```
+
+<details>
+<summary>✅ 答案</summary>
+
+**编译错误**。
+
+`create() -> Self` 方法返回 `Self`，这使得 trait 不是**对象安全**的（object-safe），因为 `dyn Drawable` 在编译时不知道具体类型的大小。
+
+对象安全的 trait 不能有以下方法：
+
+- 返回 `Self`
+- 使用 `Self: Sized` 之外的泛型参数
+- 有 `where Self: Sized` 的方法除外（会被排除在 vtable 外）
+
+修复方案：将 `create` 移入单独的 `DrawableFactory` trait，或添加 `where Self: Sized`：
+
+```rust
+trait Drawable {
+    fn draw(&self);
+    fn create() -> Self where Self: Sized;
+}
+```
+
+</details>

@@ -5,7 +5,7 @@
 ## 摘要
 
 | 状态 | 数量 |
-|:---|:---|
+| :--- | :--- |
 | expected_fail | 333 |
 | unexpected_pass | 284 |
 | skipped | 100 |
@@ -14,7 +14,7 @@
 ## 问题代码块
 
 | 文件 | 行号 | 状态 | 预览 | 错误信息 |
-|:---|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- | :--- |
 | concept\01_foundation\02_borrowing.md | 1552 | unexpected_pass | `fn main() {     let mut s = String::from` | warning: unused variable: `r1`  --> target\tmp\verify_compile_fail\02_borrowing_ |
 | concept\01_foundation\02_borrowing.md | 1625 | unexpected_pass | `fn main() {     let mut data = vec![1, 2` | warning: unused variable: `r1`  --> target\tmp\verify_compile_fail\02_borrowing_ |
 | concept\01_foundation\03_lifetimes.md | 801 | unexpected_pass | `// ❌ 编译错误: missing lifetime specifier fn` | warning: function `first_word` is never used  --> target\tmp\verify_compile_fail |

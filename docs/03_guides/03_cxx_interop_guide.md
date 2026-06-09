@@ -214,7 +214,7 @@ cxx_interop::explain_bindgen_workflow();
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [上级目录](../README.md)
+- [docs 索引](../README.md)
 
 ---
 

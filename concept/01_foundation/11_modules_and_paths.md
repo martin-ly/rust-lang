@@ -58,6 +58,11 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
+  - [嵌入式测验](#嵌入式测验)
+    - [测验 1：可见性修饰符（记忆层）](#测验-1可见性修饰符记忆层)
+    - [测验 2：路径解析（理解层）](#测验-2路径解析理解层)
+    - [测验 3：文件系统映射（应用层）](#测验-3文件系统映射应用层)
+    - [测验 4：`pub use` 重导出（分析层）](#测验-4pub-use-重导出分析层)
 
 ---
 
@@ -735,3 +740,148 @@ fn main() {
 ### 反命题与边界
 
 > **反命题**: "模块系统与路径：Rust 的代码组织哲学 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+
+---
+
+## 嵌入式测验
+
+### 测验 1：可见性修饰符（记忆层）
+
+**题目**: 在 Rust 中，`pub(crate)` 和 `pub(super)` 的可见范围分别是什么？
+
+- A. `pub(crate)`: 仅当前模块；`pub(super)`: 父模块
+- B. `pub(crate)`: 整个 crate；`pub(super)`: 父模块
+- C. `pub(crate)`: 整个工作空间；`pub(super)`: 整个 crate
+- D. `pub(crate)`: 父模块；`pub(super)`: 当前模块
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+Rust 的可见性修饰符精确控制作用域：
+
+| 修饰符 | 可见范围 |
+|:---|:---|
+| （无） | 当前模块 + 所有子模块 |
+| `pub` | 任何地方 |
+| `pub(crate)` | 当前 crate 内所有模块 |
+| `pub(super)` | 仅直接父模块 |
+| `pub(in path)` | 指定的模块路径 |
+
+常见错误：用 `pub(super)` 代替 `pub(crate)` 导致兄弟模块无法访问。Rust 默认私有，遵循**最小权限原则**。
+</details>
+
+---
+
+### 测验 2：路径解析（理解层）
+
+**题目**: 在 2021 Edition 中，以下 `use` 语句哪些是合法的？
+
+```rust
+// 假设 crate 结构:
+// crate root
+// └── front_of_house
+//     └── hosting
+//         └── add_to_waitlist()
+
+use front_of_house::hosting::add_to_waitlist;  // ①
+use self::front_of_house::hosting::add_to_waitlist;  // ②
+use crate::front_of_house::hosting::add_to_waitlist;  // ③
+use super::front_of_house::hosting::add_to_waitlist;  // ④
+```
+
+- A. 仅 ① 和 ③
+- B. 仅 ② 和 ③
+- C. ①、②、③ 都合法（取决于上下文）
+- D. 全部合法
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 C**。
+
+三种路径形式的含义：
+
+1. **① 相对路径**（无前缀）：从当前模块开始解析。如果在 crate root 中使用，合法。
+2. **② `self::`**：显式相对路径，从当前模块开始。与 ① 等价，只是显式。
+3. **③ `crate::`**：绝对路径，从 crate root 开始。总是合法（只要路径正确）。
+4. **④ `super::`**：指向父模块。仅在当前模块有父模块（非 root）时合法。
+
+**关键区别**: `crate::` 是绝对路径（从 root），`self::` 是相对路径（从当前）。在 crate root 中，`self::` 与 `crate::` 等价；在深层模块中不同。
+</details>
+
+---
+
+### 测验 3：文件系统映射（应用层）
+
+**题目**: 在 Rust 2021 Edition 中，`mod front_of_house;` 在 `src/lib.rs` 中会查找哪些文件？以下哪种结构是**错误**的？
+
+- A. `src/front_of_house.rs`
+- B. `src/front_of_house/mod.rs`
+- C. 同时存在 `src/front_of_house.rs` 和 `src/front_of_house/mod.rs`
+- D. `src/lib.rs` 中内联定义 `mod front_of_house { ... }`
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 C**。
+
+Rust 2021 Edition 的模块文件映射规则：
+
+1. `mod foo;` → 查找 `foo.rs` 或 `foo/mod.rs`（**不能同时存在**）
+2. `mod foo { ... }` → 内联模块定义
+3. 同时存在 `foo.rs` 和 `foo/mod.rs` → 编译错误（歧义）
+
+2021 Edition 新增：`foo.rs` 可以直接存在，其同级目录 `foo/` 下的文件作为子模块（无需 `foo/mod.rs`）。
+
+传统方式（2018 Edition）：目录模块需要 `foo/mod.rs`。
+</details>
+
+---
+
+### 测验 4：`pub use` 重导出（分析层）
+
+**题目**: 以下代码中，`external_user` 模块能访问哪些项？
+
+```rust
+mod internal {
+    pub fn public_fn() {}
+    fn private_fn() {}
+}
+
+mod api {
+    pub use super::internal::public_fn;
+    // pub use super::internal::private_fn; // 若取消注释会怎样？
+}
+
+mod external_user {
+    fn test() {
+        // 这里能调用什么？
+    }
+}
+```
+
+- A. `internal::public_fn` 和 `internal::private_fn`
+- B. 仅 `api::public_fn`
+- C. `api::public_fn` 和 `internal::public_fn`
+- D. 全部无法访问（需要 `pub mod api`）
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 C**。
+
+分析可见性：
+
+1. `internal::public_fn` 是 `pub`，任何模块都可以访问（通过完整路径）。
+2. `api::public_fn` 是通过 `pub use` 重导出的，因此 `external_user` 可以通过 `api::public_fn` 访问。
+3. `private_fn` 不是 `pub`，即使通过 `pub use` 也无法重导出（编译错误）。
+4. `api` 模块本身在 crate root 中是私有的，但 `external_user` 与 `api` 同级，可以访问 `api` 的公共项。
+
+**`pub use` 的核心用途**: 重构内部模块结构的同时，对外保持简洁的 API 表面（facade 模式）。
+</details>
+
+---
+
+> **测验设计来源**: [Bloom Taxonomy 2001] · [Brown University Interactive Rust Book — Quiz Design](https://rust-book.cs.brown.edu/) · [RFC 2126 — Path Clarity](https://rust-lang.github.io/rfcs/2126-path-clarity.html)

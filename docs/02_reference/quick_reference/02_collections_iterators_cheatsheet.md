@@ -1376,7 +1376,7 @@ let map: BTreeMap<i32, &str> = [(1, "a"), (2, "b")].into_iter().collect();
 
 **最后更新**: 2026-05-08
 **维护者**: 文档团队
-**状态**: ✅ **Rust 1.93.1 更新完成**
+**状态**: ✅ **Rust 1.96.0 更新完成**
 
 🎯 **掌握集合与迭代器，高效处理数据！**
 ---
@@ -1401,7 +1401,7 @@ let map: BTreeMap<i32, &str> = [(1, "a"), (2, "b")].into_iter().collect();
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [quick_reference 目录](./README.md)
-- [上级目录](../README.md)
+- [速查表索引](./README.md)
 
 ---
 

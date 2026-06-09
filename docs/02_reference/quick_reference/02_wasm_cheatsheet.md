@@ -490,7 +490,7 @@ pub fn process_task(task_json: &str) -> String {
 ---
 
 **最后更新**: 2026-05-08
-**Rust 版本**: 1.93.1+ (Edition 2024)
+**Rust 版本**: 1.96.0+ (Edition 2024)
 **提示**: 使用 `cargo doc --open` 查看完整 API 文档
 
 ---
@@ -620,7 +620,7 @@ pub fn get_state() -> String {
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [quick_reference 目录](./README.md)
-- [上级目录](../README.md)
+- [速查表索引](./README.md)
 
 ---
 

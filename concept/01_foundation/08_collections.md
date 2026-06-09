@@ -62,6 +62,12 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Vec 与容量（理解层）](#测验-1vec-与容量理解层)
+    - [测验 2：HashMap 所有权（应用层）](#测验-2hashmap-所有权应用层)
+    - [测验 3：迭代器与借用（分析层）](#测验-3迭代器与借用分析层)
+    - [测验 4：BTreeMap vs HashMap（评价层）](#测验-4btreemap-vs-hashmap评价层)
+    - [测验 5： draining 与内存（应用层）](#测验-5-draining-与内存应用层)
 
 ---
 
@@ -699,3 +705,150 @@ fn main() {
 ### 反命题与边界
 
 > **反命题**: "集合类型：Rust 标准库的数据结构谱系 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+
+---
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：Vec 与容量（理解层）
+
+以下代码的输出是什么？
+
+```rust
+fn main() {
+    let mut v = Vec::with_capacity(10);
+    v.push(1);
+    v.push(2);
+    println!("len={}, cap={}", v.len(), v.capacity());
+}
+```
+
+- A. `len=2, cap=2`
+- B. `len=2, cap=10`
+- C. `len=10, cap=10`
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. `len=2, cap=10`**。
+
+`Vec::with_capacity(10)` 预先分配可容纳 10 个元素的空间，但 `len` 仍为 0。`push` 两个元素后，`len=2`，`cap=10`。
+
+`with_capacity` 用于避免多次重新分配，提高性能。
+</details>
+
+---
+
+### 测验 2：HashMap 所有权（应用层）
+
+以下代码能否编译？
+
+```rust,compile_fail
+fn main() {
+    let mut map = HashMap::new();
+    map.insert("key".to_string(), vec![1, 2, 3]);
+    let value = map.get("key").unwrap();
+    map.insert("other".to_string(), vec![4, 5, 6]);
+    println!("{:?}", value);
+}
+```
+
+<details>
+<summary>✅ 答案</summary>
+
+**编译错误**。
+
+`map.get("key")` 返回对 HashMap 内部值的不可变引用 `&Vec<i32>`。随后 `map.insert(...)` 需要可变借用 `&mut self`，与之前的不可变引用冲突。
+
+修复方案：
+
+```rust
+let value = map.get("key").unwrap().clone();
+map.insert("other".to_string(), vec![4, 5, 6]);
+println!("{:?}", value);
+```
+
+</details>
+
+---
+
+### 测验 3：迭代器与借用（分析层）
+
+以下代码能否编译？
+
+```rust
+fn main() {
+    let mut v = vec![1, 2, 3];
+    for i in &v {
+        v.push(*i);
+    }
+}
+```
+
+<details>
+<summary>✅ 答案</summary>
+
+**编译错误**。
+
+`for i in &v` 创建了对 `v` 的不可变借用。循环体内 `v.push(*i)` 尝试获取 `v` 的可变借用，冲突。
+
+这是 Rust 借用检查器防止迭代器失效的经典保护。
+
+修复方案（若需扩展 vec）：先收集再扩展：
+
+```rust
+let to_add: Vec<_> = v.iter().copied().collect();
+v.extend(to_add);
+```
+
+</details>
+
+---
+
+### 测验 4：BTreeMap vs HashMap（评价层）
+
+需要按 key 排序遍历，应该选择哪种集合？
+
+- A. `HashMap` — 遍历顺序不确定，但平均 O(1) 查找
+- B. `BTreeMap` — key 有序，遍历按排序顺序
+- C. `Vec<(K, V)>` — 手动排序后遍历
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. `BTreeMap`**。
+
+`BTreeMap` 基于 B 树实现，key 按顺序存储，遍历自然按 key 的 `Ord` 顺序。查找复杂度为 O(log n)。
+
+`HashMap` 遍历顺序是任意的（基于哈希值），即使插入顺序相同，不同运行可能产生不同遍历顺序。
+
+若同时需要 O(1) 查找和有序遍历，可考虑维护两个结构（`HashMap` + `BTreeSet`），但增加内存开销。
+</details>
+
+---
+
+### 测验 5： draining 与内存（应用层）
+
+以下代码后，`v` 的状态是什么？
+
+```rust
+fn main() {
+    let mut v = vec![1, 2, 3, 4, 5];
+    let drained: Vec<_> = v.drain(1..4).collect();
+    println!("v={:?}, drained={:?}", v, drained);
+}
+```
+
+- A. `v=[1, 2, 3, 4, 5], drained=[]`
+- B. `v=[1, 5], drained=[2, 3, 4]`
+- C. `v=[1, 5], drained=[2, 3, 4, 5]`
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. `v=[1, 5], drained=[2, 3, 4]`**。
+
+`drain(range)` 移除指定范围的元素并返回迭代器。范围 `1..4` 包含索引 1, 2, 3（不包含 4），因此移除 `[2, 3, 4]`，保留 `[1, 5]`。
+
+`drain` 不会释放底层内存，`v` 的 `capacity` 保持不变。
+</details>

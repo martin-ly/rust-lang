@@ -62,6 +62,12 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：String vs \&str（理解层）](#测验-1string-vs-str理解层)
+    - [测验 2：UTF-8 索引（应用层）](#测验-2utf-8-索引应用层)
+    - [测验 3：String 修改（应用层）](#测验-3string-修改应用层)
+    - [测验 4：format! 宏（应用层）](#测验-4format-宏应用层)
+    - [测验 5：字符串切片边界（分析层）](#测验-5字符串切片边界分析层)
 
 ---
 
@@ -684,3 +690,154 @@ fn main() {
 ### 反命题与边界
 
 > **反命题**: "字符串与文本：Rust 的 Unicode 处理与格式化系统 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+
+---
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：String vs &str（理解层）
+
+以下代码能否编译？
+
+```rust
+fn greet(name: &str) {
+    println!("Hello, {name}!");
+}
+
+fn main() {
+    let s = String::from("Alice");
+    greet(&s);
+    greet("Bob");
+}
+```
+
+<details>
+<summary>✅ 答案</summary>
+
+**编译通过**。
+
+`greet` 接收 `&str`，但 `String` 可以自动解引用为 `&str`（`Deref` trait），因此 `greet(&s)` 合法。
+
+`"Bob"` 是字符串字面量，类型本身就是 `&str`。
+
+这是 Rust 中常见的模式：函数参数使用 `&str` 以接受 `String` 和 `&str` 两种输入。
+</details>
+
+---
+
+### 测验 2：UTF-8 索引（应用层）
+
+以下代码能否编译？如果能，输出什么？
+
+```rust
+fn main() {
+    let s = "你好";
+    println!("{}", s[0]);
+}
+```
+
+<details>
+<summary>✅ 答案</summary>
+
+**编译错误**。
+
+Rust 字符串不支持直接索引 `s[0]`，因为 UTF-8 是多字节编码，索引位置可能落在字符中间。
+
+安全替代方案：
+
+```rust
+let s = "你好";
+println!("{}", s.chars().next().unwrap());  // '你'
+// 或获取字节（但通常不是你想要的）：
+println!("{}", s.as_bytes()[0]);  // 228 — "你" 的第一个 UTF-8 字节
+```
+
+</details>
+
+---
+
+### 测验 3：String 修改（应用层）
+
+以下代码能否编译？
+
+```rust
+fn main() {
+    let mut s = String::from("hello");
+    let r = &s;
+    s.push_str(" world");
+    println!("{}", r);
+}
+```
+
+<details>
+<summary>✅ 答案</summary>
+
+**编译错误**。
+
+`r` 是对 `s` 的不可变借用，`s.push_str` 需要可变借用。两者不能同时存在。
+
+修复方案：确保不可变借用在使用后才释放：
+
+```rust
+let mut s = String::from("hello");
+{
+    let r = &s;
+    println!("{}", r);  // r 在此处最后一次使用
+}
+s.push_str(" world");  // 现在可以可变借用
+```
+
+</details>
+
+---
+
+### 测验 4：format! 宏（应用层）
+
+以下代码的输出是什么？
+
+```rust
+fn main() {
+    let name = "Rust";
+    let version = 1.96;
+    let s = format!("{} {}", name, version);
+    println!("{}", s);
+}
+```
+
+<details>
+<summary>✅ 答案</summary>
+
+**输出 `Rust 1.96`**。
+
+`format!` 宏返回 `String`，与 `println!` 使用相同的格式化语法。`{}` 使用 `Display` trait 格式化。
+
+`format!` 不会打印到 stdout，而是返回格式化后的字符串，适合构造消息、日志、文件路径等。
+</details>
+
+---
+
+### 测验 5：字符串切片边界（分析层）
+
+以下代码在运行时会发生什么？
+
+```rust
+fn main() {
+    let s = "hello";
+    let slice = &s[0..10];
+    println!("{}", slice);
+}
+```
+
+<details>
+<summary>✅ 答案</summary>
+
+**运行时 panic**。
+
+字符串切片 `&s[0..10]` 的结束索引 `10` 超出了字符串长度 `5`。Rust 在运行时检查切片边界，越界触发 panic：
+
+```text
+thread 'main' panicked at 'byte index 10 is out of bounds of `hello`'
+```
+
+字符串切片使用字节索引而非字符索引。对于 ASCII 字符串，两者相同；对于多字节 UTF-8 字符，需要特别小心。
+</details>

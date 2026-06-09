@@ -387,7 +387,7 @@ Rust 1.95.0 发布时，Rust 2024 Edition 已稳定 3 个月（自 1.85.0）。1
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [quick_reference 目录](./README.md)
-- [上级目录](../README.md)
+- [速查表索引](./README.md)
 
 ---
 

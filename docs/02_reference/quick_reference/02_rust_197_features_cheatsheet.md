@@ -3,7 +3,7 @@
 > **分级**: [A]
 > **Bloom 层级**: L2 (理解)
 > **版本**: Rust 1.97
-> **更新日期**: 2026-05-29
+> **更新日期**: 2026-06-09
 > **适用版本**: stable (预计 2026-07-XX 发布)
 > **MSRV 注意**: 本项目当前 MSRV 为 1.96.0。1.97 API 使用 `#![allow(clippy::incompatible_msrv)]` 标注，
 > 需要 nightly 1.98.0 编译器或 1.97+ stable 编译器才能实际使用。
@@ -156,6 +156,7 @@ match err.kind() {
 |-----|------|
 | `Extend` for tuples (1-12) | 并行扩展多个集合 |
 | `FromIterator<(A, B, ...)>` for tuples | 一次 collect，多个容器 |
+| `VecDeque::truncate_front` | 截断前部，保留后部 `n` 个元素 |
 | `BufRead` for `VecDeque<u8>` | 无锁缓冲读取 |
 | `Option::as_slice` / `as_mut_slice` | Option → 切片视图 |
 | `From<&mut [T]>` for `Box/Rc/Arc<[T]>` | 可变切片转换 |
@@ -164,6 +165,11 @@ match err.kind() {
 // 元组 Extend
 let mut result: (Vec<i32>, Vec<String>) = (Vec::new(), Vec::new());
 result.extend([(1, "a".to_string()), (2, "b".to_string())]);
+
+// VecDeque::truncate_front
+let mut buf = VecDeque::from([1, 2, 3, 4, 5]);
+buf.truncate_front(2);  // 保留后部 2 个
+assert_eq!(buf.make_contiguous(), &[4, 5]);
 
 // Option as_slice
 let opt = Some(42);

@@ -51,6 +51,12 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：`mod` 声明（理解层）](#测验-1mod-声明理解层)
+    - [测验 2：`pub` 可见性（应用层）](#测验-2pub-可见性应用层)
+    - [测验 3：`use` 与路径（应用层）](#测验-3use-与路径应用层)
+    - [测验 4：`pub(crate)` 与 `pub(super)`（分析层）](#测验-4pubcrate-与-pubsuper分析层)
+    - [测验 5：模块与文件分离（应用层）](#测验-5模块与文件分离应用层)
 
 ---
 
@@ -676,3 +682,154 @@ fn main() {}
 ### 反命题与边界
 
 > **反命题**: "模块系统：Rust 的代码组织与可见性规则 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+
+---
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`mod` 声明（理解层）
+
+以下项目结构中，`src/main.rs` 如何正确引用 `src/utils/math.rs`？
+
+```text
+src/
+├── main.rs
+└── utils/
+    └── math.rs
+```
+
+- A. `use math::add;`
+- B. `mod utils::math;`
+- C. `mod utils;` 并在 `utils.rs` 或 `utils/mod.rs` 中声明 `mod math;`
+
+<details>
+<summary>✅ 答案</summary>
+
+**C. `mod utils;` 并在 `utils.rs` 或 `utils/mod.rs` 中声明 `mod math;`**。
+
+Rust 的模块系统基于文件系统：
+
+- `mod utils;` 告诉编译器查找 `utils.rs` 或 `utils/mod.rs`
+- 在 `utils/mod.rs` 中声明 `mod math;`，编译器查找 `utils/math.rs`
+
+`mod` 声明是**告诉编译器去加载文件**，不是路径引用。
+</details>
+
+---
+
+### 测验 2：`pub` 可见性（应用层）
+
+以下代码中，`secret` 能否从其他 crate 访问？
+
+```rust
+pub mod api {
+    pub fn public_fn() {}
+    fn secret() {}
+}
+```
+
+<details>
+<summary>✅ 答案</summary>
+
+**不能**。
+
+`secret` 没有 `pub` 修饰，是私有的。虽然它位于 `pub mod api` 中，但自身不可见。
+
+要从外部访问，需要：
+
+```rust
+pub mod api {
+    pub fn public_fn() {}
+    pub fn secret() {}  // 添加 pub
+}
+```
+
+Rust 的可见性规则：**默认私有，显式公开**。父模块的 `pub` 不会递归传递给子项。
+</details>
+
+---
+
+### 测验 3：`use` 与路径（应用层）
+
+以下代码的输出是什么？
+
+```rust
+mod inner {
+    pub const VALUE: i32 = 42;
+}
+
+fn main() {
+    use inner::VALUE;
+    println!("{}", VALUE);
+}
+```
+
+<details>
+<summary>✅ 答案</summary>
+
+**输出 `42`**。
+
+`use inner::VALUE;` 将 `inner::VALUE` 引入当前作用域，可直接使用 `VALUE`。
+
+等效写法：
+
+```rust
+println!("{}", inner::VALUE);  // 完整路径
+```
+
+</details>
+
+---
+
+### 测验 4：`pub(crate)` 与 `pub(super)`（分析层）
+
+以下哪种可见性允许同一 crate 的其他模块访问，但不允许外部 crate 访问？
+
+- A. `pub`
+- B. `pub(crate)`
+- C. `pub(super)`
+- D. `pub(self)`
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. `pub(crate)`**。
+
+| 可见性 | 范围 |
+|:---|:---|
+| `pub` | 任何位置（外部 crate 也可）|
+| `pub(crate)` | 当前 crate 内任意位置 |
+| `pub(super)` | 父模块及其子模块 |
+| `pub(self)` | 仅当前模块（等价于私有）|
+
+`pub(crate)` 是组织大型 crate 内部 API 的常用工具——模块间可共享，但不暴露为公共 API。
+</details>
+
+---
+
+### 测验 5：模块与文件分离（应用层）
+
+以下项目结构中，`src/lib.rs` 的内容应该是什么？
+
+```text
+mylib/
+├── Cargo.toml
+└── src/
+    ├── lib.rs
+    ├── parser.rs
+    └── evaluator.rs
+```
+
+<details>
+<summary>✅ 答案</summary>
+
+```rust
+// src/lib.rs
+pub mod parser;
+pub mod evaluator;
+```
+
+`lib.rs` 是 crate 的根模块。`mod parser;` 告诉编译器加载 `src/parser.rs` 作为 `parser` 模块，`mod evaluator;` 同理。
+
+`pub` 修饰使得这两个模块对外部可见。若省略 `pub`，则模块仅在 crate 内部可用。
+</details>

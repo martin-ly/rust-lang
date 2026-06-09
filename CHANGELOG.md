@@ -4,6 +4,30 @@
 
 ---
 
+## [2.5.5] - 2026-06-09 — Phase 2 核心学习体验：测验覆盖 100% + docs/ 价值审计启动
+
+### 🧩 L1-L2 嵌入式测验覆盖完成（15/15 文件 = 100%）
+
+- **`concept/01_foundation/10_numerics.md`**: 新增 4 道嵌入式测验（整数溢出 Debug/Release 差异、`as` 截断转换、NonZero niche optimization、NaN 比较陷阱）
+- **`concept/01_foundation/11_modules_and_paths.md`**: 新增 4 道嵌入式测验（可见性修饰符、路径解析、文件系统映射、`pub use` 重导出）
+- **`concept/01_foundation/12_attributes_and_macros.md`**: 新增 4 道嵌入式测验（属性分类、`cfg` 条件编译、宏卫生性、模式匹配重复、`derive` 与浮点数限制）
+- **累计覆盖**: 15 个 L1-L2 核心概念文件，每文件 3–5 道测验，覆盖 Bloom 记忆→理解→应用→分析全层级
+
+### 📋 LEARNING_MVP_PATH.md 扩展路径精化
+
+- **新增「扩展路径详细任务」章节**: 系统编程（+20h）/ Web 后端（+20h）/ 形式化验证（+40h）三个方向的阶段化任务表
+- 每个方向含 4–5 个阶段，明确阅读内容、验证标准和产出物
+
+### 🔧 docs/ 目录价值审计与修复
+
+- **速查表版本声明批量更新**（9 个文件）: `1.93.0/1.93.1+` → `1.96.0+`
+  - `02_wasm_cheatsheet.md`, `02_type_system.md`, `02_threads_concurrency_cheatsheet.md`, `02_testing_cheatsheet.md`, `02_strings_formatting_cheatsheet.md`, `02_smart_pointers_cheatsheet.md`, `02_collections_iterators_cheatsheet.md`, `02_control_flow_functions_cheatsheet.md`, `02_modules_cheatsheet.md`
+- **`docs/06_toolchain/06_jump_tables_guide.md`**: 版本声明更新为 `1.93.0+ (MSRV 1.96.0)`
+- **速查表损坏链接批量修复**（24 个文件）: `[上级目录](../README.md)` → `[速查表索引](./README.md)`
+- **审计脚本**: 新建 `scripts/docs_value_audit.py`，自动扫描 docs/ 中版本声明、最后更新日期和内部链接损坏
+
+---
+
 ## [2.5.4] - 2026-06-08 — Phase 1: Rust 1.96/1.97 深度对齐
 
 ### 🎯 1.96 文档状态修复
@@ -71,6 +95,23 @@
   - 批量: `07_mcdc_coverage`, `09_parallel_frontend`, `11_stable_abi`, `12_inline_const_pattern`, `12_return_type_notation`, `13_must_not_suspend`, `13_unsafe_fields`, `14_ferrocene`, `14_lifetime_capture`, `15_gen_blocks`, `15_pin_ergonomics`, `15_rpitit`, `16_type_alias_impl_trait`, `17_arbitrary_self_types`, `17_const_trait`, `17_rust_specification`, `18_field_projections`, `19_rust_edition`, `20_borrowsanitizer`, `22_gen_blocks`, `22_std_autodiff`, `25_open_enums`, `26_specialization`, `rust_1_97_preview`
 - **`concept/07_future/README.md`**: 添加标记说明，提示读者 `*_preview.md` 均为前沿预研内容
 - **`exercises/src/rust_197_feature_exercises.rs`**: 新建 6.4KB 1.97 特性练习，含 4 个主题（truncate_front、retain_back、box_vec_non_null、int_format_into）+ 6 道测试全部通过
+- **`concept/01_foundation/04_type_system.md`**: 新增 5 道嵌入式测验（结构体/枚举/Option/类型推断/类型转换）
+- **`concept/01_foundation/10_error_handling_basics.md`**: 新增 5 道嵌入式测验（? 运算符/parse/unwrap vs expect/错误传播链/panic 适用场景）
+- **`concept/01_foundation/08_collections.md`**: 新增 5 道嵌入式测验（Vec 容量/HashMap 所有权/迭代器借用/BTreeMap vs HashMap/drain）
+- **`concept/02_intermediate/01_traits.md`**: 新增 5 道嵌入式测验（Trait 实现/Bound/默认实现/Orphan Rule/Trait 对象）
+- **`concept/02_intermediate/02_generics.md`**: 新增 5 道嵌入式测验（泛型函数/结构体/Trait Bound/单态化/关联类型）
+- **`concept/02_intermediate/10_module_system.md`**: 新增 5 道嵌入式测验（mod/pub/use/pub(crate)/文件分离）
+- **`concept/01_foundation/07_control_flow.md`**: 新增 5 道嵌入式测验（if 表达式/match 穷尽性/loop 返回值/if let/break 标签）
+- **`concept/01_foundation/15_closure_basics.md`**: 新增 4 道嵌入式测验（捕获模式/move/Fn 家族/生命周期）
+- **`concept/01_foundation/09_strings_and_text.md`**: 新增 5 道嵌入式测验（String vs &str/UTF-8 索引/借用/format!/切片边界）
+- **`concept/01_foundation/00_start.md`**: 新建 1.8KB 初学者起步指南（安装、Hello World、Cargo 基本操作、VS Code 配置）
+
+### 🔗 L3 概念 ↔ 测验闭环
+
+- **`concept/03_advanced/01_concurrency.md`**: 末尾添加指向 [L3 并发与异步测验](./21_quiz_concurrency_async.md) 的链接
+- **`concept/03_advanced/02_async.md`**: 末尾添加指向 [L3 并发与异步测验](./21_quiz_concurrency_async.md) 的链接
+- **`concept/03_advanced/03_unsafe.md`**: 末尾添加指向 [L3 Unsafe Rust 测验](./22_quiz_unsafe.md) 的链接
+- **`concept/03_advanced/04_macros.md`**: 末尾添加指向 [L3 宏系统测验](./23_quiz_macros.md) 的链接
 
 ---
 

@@ -230,7 +230,7 @@ C01 → C04 → C11 → docs/research_notes/
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [01_learning 目录](./README.md)
-- [上级目录](../README.md)
+- [学习路径索引](./README.md)
 
 ---
 

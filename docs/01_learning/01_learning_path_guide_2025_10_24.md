@@ -337,7 +337,7 @@ async fn use_async_fn_trait() {
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [01_learning 目录](./README.md)
-- [上级目录](../README.md)
+- [学习路径索引](./README.md)
 
 ---
 

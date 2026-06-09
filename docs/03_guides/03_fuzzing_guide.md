@@ -1,10 +1,8 @@
 # cargo-fuzz 模糊测试入门指南
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/应用)
-
 > 本文档对应 Rust 生产级工程实践体系阶段三 —— 模糊测试。
 > 参考: Google OSS-Fuzz、Cloudflare 模糊测试实践、Rust Fuzzing Book。
 > **[来源: Wikipedia - Fuzzing]** · **[来源: AFL - American Fuzzy Lop]** · **[来源: LLVM libFuzzer]** · **[来源: Rust Fuzzing Book - fuzzingbook.com]**
@@ -314,26 +312,19 @@ fuzzing:
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [上级目录](../README.md)
+- [docs 索引](../README.md)
 
 ---
 
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon]**
 
 ---

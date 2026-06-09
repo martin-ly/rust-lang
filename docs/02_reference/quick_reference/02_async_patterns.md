@@ -1289,7 +1289,7 @@ pub fn get_async_config() -> Option<&'static AsyncConfig> {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [quick_reference 目录](./README.md)
-- [上级目录](../README.md)
+- [速查表索引](./README.md)
 
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**

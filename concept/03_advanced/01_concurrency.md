@@ -1378,6 +1378,7 @@ fn main() {
 1. 阅读 `crates/c05_threads/` 中与"多线程与并发编程"相关的源码和示例
 2. 运行 `cargo test -p c05_threads` 验证理解
 3. 完成 `exercises/src/concurrency/` 中的练习任务
+4. 完成 [L3 并发与异步测验](./21_quiz_concurrency_async.md) 验证理解程度
 
 ---
 

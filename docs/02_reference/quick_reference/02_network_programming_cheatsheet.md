@@ -738,7 +738,7 @@ pub fn get_connection() -> Option<Connection> {
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [quick_reference 目录](./README.md)
-- [上级目录](../README.md)
+- [速查表索引](./README.md)
 
 ---
 

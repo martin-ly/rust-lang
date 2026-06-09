@@ -94,7 +94,7 @@ fn eval(expr: &Expr) -> f64 {
 ## 相关概念
 
 - [03_practice 目录](./README.md)
-- [上级目录](../README.md)
+- [docs 索引](../README.md)
 
 ---
 

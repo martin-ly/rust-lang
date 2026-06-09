@@ -2257,6 +2257,7 @@ macro_rules! conditional_feature {
 1. 阅读 `crates/c11_macro_system/` 中与"声明宏与过程宏"相关的源码和示例
 2. 运行 `cargo test -p c11_macro_system` 验证理解
 3. 完成 `exercises/src/macros/` 中的练习任务
+4. 完成 [L3 宏系统测验](./23_quiz_macros.md) 验证理解程度
 
 ---
 

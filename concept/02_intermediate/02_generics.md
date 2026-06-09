@@ -158,6 +158,12 @@
   - [实践](#实践)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [参考来源](#参考来源)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：泛型函数（理解层）](#测验-1泛型函数理解层)
+    - [测验 2：泛型结构体（应用层）](#测验-2泛型结构体应用层)
+    - [测验 3：多个 Trait Bound（应用层）](#测验-3多个-trait-bound应用层)
+    - [测验 4：单态化与代码膨胀（分析层）](#测验-4单态化与代码膨胀分析层)
+    - [测验 5：关联类型（分析层）](#测验-5关联类型分析层)
 
 ## 一、权威定义（Definition）
 
@@ -2507,3 +2513,172 @@ fn main() {
 > [来源: [RFC 0448 — Associated Types](https://rust-lang.github.io/rfcs/0448-associated-types.html)]
 > [来源: [JFP 2023 — Rust Generic Type System](https://www.cambridge.org/core/journals/journal-of-functional-programming)]
 > [来源: [Rust Reference — Type Parameters](https://doc.rust-lang.org/reference/items/generics.html)]
+
+---
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：泛型函数（理解层）
+
+以下代码能否编译？
+
+```rust
+fn largest<T>(a: T, b: T) -> T {
+    if a > b { a } else { b }
+}
+```
+
+<details>
+<summary>✅ 答案</summary>
+
+**编译错误**。
+
+`T` 没有任何约束，编译器不知道 `T` 是否支持 `>` 比较。需要添加 `PartialOrd` trait bound：
+
+```rust
+fn largest<T: PartialOrd>(a: T, b: T) -> T {
+    if a > b { a } else { b }
+}
+```
+
+</details>
+
+---
+
+### 测验 2：泛型结构体（应用层）
+
+以下代码中，`p1` 和 `p2` 的类型是否相同？
+
+```rust
+struct Point<T> {
+    x: T,
+    y: T,
+}
+
+fn main() {
+    let p1 = Point { x: 1, y: 2 };
+    let p2 = Point { x: 1.0, y: 2.0 };
+}
+```
+
+<details>
+<summary>✅ 答案</summary>
+
+**类型不同**。
+
+- `p1` 的类型是 `Point<i32>`
+- `p2` 的类型是 `Point<f64>`
+
+Rust 编译器为每个具体类型生成独立的代码实例（单态化）。`Point<i32>` 和 `Point<f64>` 是两个完全不同的类型，不能互相赋值。
+</details>
+
+---
+
+### 测验 3：多个 Trait Bound（应用层）
+
+以下函数签名要求 `T` 满足什么条件？
+
+```rust
+fn process<T: Clone + PartialOrd + std::fmt::Debug>(item: T) {
+    let copy = item.clone();
+    println!("{:?}", copy);
+}
+```
+
+<details>
+<summary>✅ 答案</summary>
+
+`T` 必须同时实现三个 trait：
+
+- `Clone` — 允许 `.clone()` 调用
+- `PartialOrd` — 允许比较（虽然此函数体内未使用，但签名要求）
+- `Debug` — 允许 `{:?}` 格式化输出
+
+多个 bound 用 `+` 连接，表示"同时满足"。等价写法：
+
+```rust
+fn process<T>(item: T)
+where
+    T: Clone + PartialOrd + std::fmt::Debug,
+{
+    ...
+}
+```
+
+</details>
+
+---
+
+### 测验 4：单态化与代码膨胀（分析层）
+
+以下代码会产生多少个 `largest` 函数的机器码实例？
+
+```rust
+fn largest<T: PartialOrd>(a: T, b: T) -> T {
+    if a > b { a } else { b }
+}
+
+fn main() {
+    largest(1, 2);
+    largest(3, 4);
+    largest(1.0, 2.0);
+}
+```
+
+- A. 1 个
+- B. 2 个
+- C. 3 个
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 2 个**。
+
+单态化为每个**不同的具体类型**生成一个实例：
+
+- `largest<i32>` — 用于 `largest(1, 2)` 和 `largest(3, 4)`
+- `largest<f64>` — 用于 `largest(1.0, 2.0)`
+
+两次 `i32` 调用共享同一个实例。这是 Rust "零成本抽象"的核心——泛型在运行时不存在，编译后与普通函数一样高效。
+</details>
+
+---
+
+### 测验 5：关联类型（分析层）
+
+以下代码的输出是什么？
+
+```rust
+trait Container {
+    type Item;
+    fn get(&self) -> Option<&Self::Item>;
+}
+
+struct Box<T>(T);
+impl<T> Container for Box<T> {
+    type Item = T;
+    fn get(&self) -> Option<&T> {
+        Some(&self.0)
+    }
+}
+
+fn main() {
+    let b = Box(42);
+    println!("{:?}", b.get());
+}
+```
+
+<details>
+<summary>✅ 答案</summary>
+
+**输出 `Some(42)`**。
+
+关联类型 `type Item = T;` 为每个实现指定了具体的类型。对于 `Box<i32>`，`Item` 就是 `i32`。
+
+关联类型 vs 泛型参数：
+
+- 关联类型：一个类型只能有一种实现（`Box<T>` 的 `Item` 固定为 `T`）
+- 泛型参数：一个类型可以有多种实现（`Container<T>` 可以有 `Container<i32>` 和 `Container<String>`）
+
+关联类型更适合"一个类型对应一个输出类型"的场景，如迭代器的 `Item`。
+</details>

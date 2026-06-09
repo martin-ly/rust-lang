@@ -1000,7 +1000,7 @@ fn main() {
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [quick_reference 目录](./README.md)
-- [上级目录](../README.md)
+- [速查表索引](./README.md)
 
 ---
 

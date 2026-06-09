@@ -312,7 +312,7 @@ C07 高级系统编程 ────────────┘
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [01_learning 目录](./README.md)
-- [上级目录](../README.md)
+- [学习路径索引](./README.md)
 
 ---
 

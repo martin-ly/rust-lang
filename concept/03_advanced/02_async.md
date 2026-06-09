@@ -2925,6 +2925,7 @@ fn main() {}
 1. 阅读 `crates/c06_async/` 中与"异步编程基础"相关的源码和示例
 2. 运行 `cargo test -p c06_async` 验证理解
 3. 完成 `exercises/src/async_programming/` 中的练习任务
+4. 完成 [L3 并发与异步测验](./21_quiz_concurrency_async.md) 验证理解程度
 
 ---
 

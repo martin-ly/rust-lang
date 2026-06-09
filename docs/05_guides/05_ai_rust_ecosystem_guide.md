@@ -722,7 +722,7 @@ pub fn golden_ratio_search_lr(
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [05_guides 目录](./README.md)
-- [上级目录](../README.md)
+- [docs 索引](../README.md)
 
 ---
 

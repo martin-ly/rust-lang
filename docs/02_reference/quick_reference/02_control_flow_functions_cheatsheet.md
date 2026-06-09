@@ -1084,7 +1084,7 @@ fn main() {
 
 **最后更新**: 2026-05-08
 **维护者**: 文档团队
-**状态**: ✅ **Rust 1.93.0 更新完成**
+**状态**: ✅ **Rust 1.96.0 更新完成**
 
 🎯 **掌握控制流，编写清晰代码！**
 
@@ -1154,7 +1154,7 @@ let gamma = f64::consts::EULER_GAMMA;
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [quick_reference 目录](./README.md)
-- [上级目录](../README.md)
+- [速查表索引](./README.md)
 
 ---
 

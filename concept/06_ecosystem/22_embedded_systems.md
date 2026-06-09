@@ -1,5 +1,4 @@
 > **内容分级**: [综述级]
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Rust 嵌入式系统开发
@@ -8,7 +7,6 @@
 > **Summary**: Embedded Systems. Core Rust concept covering mechanism analysis, memory safety guarantees, embedded systems programming.
 >
 > **受众**: [进阶]
-
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Cre — 设计嵌入式系统架构
@@ -738,7 +736,11 @@ fn fixed() {
 }
 ```
 
-> **修正**: 嵌入式系统（ARM Cortex-M、RISC-V）通常无操作系统，因此 `#![no_std]` 禁用 `std` 库。`println!`、`Vec`、`String` 等需要 OS 支持的 API 不可用。替代方案：使用 `cortex-m-semihosting`（通过调试器输出）、`rtt-target`（实时传输）、或 UART HAL（硬件串口）。这与 Arduino 的 `Serial.println` 或 ESP-IDF 的 `ESP_LOG` 类似，但 Rust 的嵌入式生态通过 trait 抽象硬件（`embedded-hal`），实现跨平台可移植性。[来源: [The Rust Embedded Book](https://docs.rust-embedded.org/book/)]
+> **修正**:
+> 嵌入式系统（ARM Cortex-M、RISC-V）通常无操作系统，因此 `#![no_std]` 禁用 `std` 库。`println!`、`Vec`、`String` 等需要 OS 支持的 API 不可用。
+> 替代方案：使用 `cortex-m-semihosting`（通过调试器输出）、`rtt-target`（实时传输）、或 UART HAL（硬件串口）。
+> 这与 Arduino 的 `Serial.println` 或 ESP-IDF 的 `ESP_LOG` 类似，但 Rust 的嵌入式生态通过 trait 抽象硬件（`embedded-hal`），实现跨平台可移植性。
+> [来源: [The Rust Embedded Book](https://docs.rust-embedded.org/book/)]
 
 ### 10.2 边界测试：中断处理器的 `static mut`（编译错误）
 
@@ -754,7 +756,13 @@ extern "C" fn timer_interrupt() {
 }
 ```
 
-> **修正**: 嵌入式中断处理器共享全局状态时必须处理并发——中断可能随时抢占主循环。`static mut` 需要 `unsafe` 块访问，且存在数据竞争风险。正确做法：使用 `critical_section`（关中断）、原子类型（`AtomicU32`）、或 RTIC（Real-Time Interrupt-driven Concurrency）框架。RTIC 利用 Rust 的所有权系统，在编译期验证中断与主任务之间的资源分配，消除运行时竞争。这与 C 的 `volatile` + 关中断手动管理不同——Rust 的类型系统提供更高级别的并发安全保证。[来源: [RTIC Documentation](https://rtic.rs/)]
+> **修正**:
+> 嵌入式中断处理器共享全局状态时必须处理并发——中断可能随时抢占主循环。
+> `static mut` 需要 `unsafe` 块访问，且存在数据竞争风险。
+> 正确做法：使用 `critical_section`（关中断）、原子类型（`AtomicU32`）、或 RTIC（Real-Time Interrupt-driven Concurrency）框架。
+> RTIC 利用 Rust 的所有权系统，在编译期验证中断与主任务之间的资源分配，消除运行时竞争。
+> 这与 C 的 `volatile` + 关中断手动管理不同——Rust 的类型系统提供更高级别的并发安全保证。
+> [来源: [RTIC Documentation](https://rtic.rs/)]
 
 ### 10.3 边界测试：临界区的中断禁用与 `unsafe` 的误用（运行时数据竞争）
 
@@ -775,7 +783,18 @@ unsafe extern "C" fn isr() {
 }
 ```
 
-> **修正**: 嵌入式系统中，**中断服务程序**（ISR）可能随时抢占主代码，共享数据需要临界区保护。`unsafe` 块不保证原子性——`COUNTER += 1` 在 ARM Cortex-M 上是"读-改-写"三指令，ISR 可能在中间插入，导致更新丢失。解决方案：1) 使用 `cortex-m::interrupt::free`（禁用中断的临界区）；2) 使用原子类型（`core::sync::atomic::AtomicU32`）；3) 使用 RTIC（Real-Time Interrupt-driven Concurrency）框架（编译期检查资源冲突）。Rust 的嵌入式生态（`cortex-m`、`embedded-hal`、`rtic`）将并发安全引入裸机编程。这与 C 的 `__disable_irq()`/`__enable_irq()`（手动开关中断，易遗漏）或 FreeRTOS 的互斥量（ heavier，需 OS 支持）不同——Rust 的类型系统可帮助管理临界区（如 RTIC 的任务优先级分析）。[来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/)] · [来源: [RTIC Documentation](https://rtic.rs/)]
+> **修正**:
+> 嵌入式系统中，**中断服务程序**（ISR）可能随时抢占主代码，共享数据需要临界区保护。
+> `unsafe` 块不保证原子性——`COUNTER += 1` 在 ARM Cortex-M 上是"读-改-写"三指令，ISR 可能在中间插入，导致更新丢失。
+> 解决方案：
+>
+> 1) 使用 `cortex-m::interrupt::free`（禁用中断的临界区）；
+> 2) 使用原子类型（`core::sync::atomic::AtomicU32`）；
+> 3) 使用 RTIC（Real-Time Interrupt-driven Concurrency）框架（编译期检查资源冲突）。
+>
+> Rust 的嵌入式生态（`cortex-m`、`embedded-hal`、`rtic`）将并发安全引入裸机编程。
+> 这与 C 的 `__disable_irq()`/`__enable_irq()`（手动开关中断，易遗漏）或 FreeRTOS 的互斥量（ heavier，需 OS 支持）不同——Rust 的类型系统可帮助管理临界区（如 RTIC 的任务优先级分析）。
+> [来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/)] · [来源: [RTIC Documentation](https://rtic.rs/)]
 
 ### 10.4 边界测试：`no_std` 中的 `panic` 处理与固件大小（编译错误/链接错误）
 
@@ -796,7 +815,18 @@ fn main() {
 // }
 ```
 
-> **修正**: `#![no_std]` 环境中，标准库的 panic 处理（栈展开、错误消息打印）不可用。必须提供自定义的 `#[panic_handler]`：1) `loop {}`（最小化，无限循环，适合硬实时系统）；2) 重启系统（`cortex_m::peripheral::SCB::sys_reset()`）；3) 日志记录后 halt（需 UART 驱动）。panic handler 的选择影响固件大小：`panic = "abort"` 比 `panic = "unwind"` 小（无展开代码），自定义 handler 比默认 `core::panicking` 更小。嵌入式开发中，固件大小常受限（如 64KB Flash），每个字节都重要。这与 C 的 `assert`（调用 `abort()`，依赖 libc）或 Arduino 的 `Serial.println` + `while(1)`（类似 Rust 的自定义 handler）类似——Rust 的 `panic_handler` 是显式、可定制的错误终止机制。[来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/)] · [来源: [Rust Reference — Panic Handler](https://doc.rust-lang.org/reference/runtime.html#the-panic_handler-attribute)]
+> **修正**:
+> `#![no_std]` 环境中，标准库的 panic 处理（栈展开、错误消息打印）不可用。
+> 必须提供自定义的 `#[panic_handler]`：
+>
+> 1) `loop {}`（最小化，无限循环，适合硬实时系统）；
+> 2) 重启系统（`cortex_m::peripheral::SCB::sys_reset()`）；
+> 3) 日志记录后 halt（需 UART 驱动）。
+>
+> panic handler 的选择影响固件大小：`panic = "abort"` 比 `panic = "unwind"` 小（无展开代码），自定义 handler 比默认 `core::panicking` 更小。
+> 嵌入式开发中，固件大小常受限（如 64KB Flash），每个字节都重要。这与 C 的 `assert`（调用 `abort()`，依赖 libc）或 Arduino 的 `Serial.println` + `while(1)`（类似 Rust 的自定义 handler）类似——Rust 的 `panic_handler` 是显式、可定制的错误终止机制。
+> [来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/)] ·
+> [来源: [Rust Reference — Panic Handler](https://doc.rust-lang.org/reference/runtime.html#the-panic_handler-attribute)]
 
 ### 10.4 边界测试：裸机（`no_std`）中的 `alloc` 与全局分配器缺失（编译错误）
 
@@ -813,9 +843,18 @@ fn main() {
 }
 ```
 
-> **修正**: `#![no_std]` 禁用标准库，但可通过 `extern crate alloc` 使用 `Vec`、`String`、`Box` 等堆分配类型。**必须**提供全局分配器：1) 使用 `linked_list_allocator`（简单链表分配器）；2) 使用 `embedded-alloc`（Cortex-M 的 TLSF 分配器）；3) 自定义分配器（实现 `GlobalAlloc` trait）。裸机环境无操作系统提供的堆，需手动管理内存区域（定义 `.bss` 或特定 RAM 区域为堆）。`#[global_allocator]` 标记静态分配器实例。这与 C 的 `malloc`（依赖 libc 或自定义实现）或 FreeRTOS 的 `pvPortMalloc`（RTOS 提供）类似——Rust 的 `alloc` crate 提供标准接口，但底层分配器需嵌入式开发者提供。[来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/)] · [来源: [alloc crate](https://doc.rust-lang.org/alloc/index.html)]
-> **过渡**: Rust 嵌入式系统开发 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Rust 嵌入式系统开发 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+> **修正**:
+> `#![no_std]` 禁用标准库，但可通过 `extern crate alloc` 使用 `Vec`、`String`、`Box` 等堆分配类型。
+> **必须**提供全局分配器：
+>
+> 1) 使用 `linked_list_allocator`（简单链表分配器）；
+> 2) 使用 `embedded-alloc`（Cortex-M 的 TLSF 分配器）；
+> 3) 自定义分配器（实现 `GlobalAlloc` trait）。
+>
+> 裸机环境无操作系统提供的堆，需手动管理内存区域（定义 `.bss` 或特定 RAM 区域为堆）。
+> `#[global_allocator]` 标记静态分配器实例。
+> 这与 C 的 `malloc`（依赖 libc 或自定义实现）或 FreeRTOS 的 `pvPortMalloc`（RTOS 提供）类似——Rust 的 `alloc` crate 提供标准接口，但底层分配器需嵌入式开发者提供。
+> [来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/)] · [来源: [alloc crate](https://doc.rust-lang.org/alloc/index.html)]
 > **过渡**: Rust 嵌入式系统开发 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ### 补充定理链
@@ -831,15 +870,13 @@ fn main() {
 ### 核心推理链
 
 | 定理 | 前提 | 结论 | 置信度 |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | Rust 嵌入式系统开发 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
 | Rust 嵌入式系统开发 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Rust 嵌入式系统开发 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 Rust 嵌入式系统开发 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 Rust 嵌入式系统开发 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: Rust 嵌入式系统开发 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

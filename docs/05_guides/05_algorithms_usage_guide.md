@@ -340,7 +340,7 @@ fn verified_algorithms() {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [05_guides 目录](./README.md)
-- [上级目录](../README.md)
+- [docs 索引](../README.md)
 
 ---
 

@@ -53,6 +53,12 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：`if` 作为表达式（理解层）](#测验-1if-作为表达式理解层)
+    - [测验 2：`match` 穷尽性（应用层）](#测验-2match-穷尽性应用层)
+    - [测验 3：`loop` 返回值（应用层）](#测验-3loop-返回值应用层)
+    - [测验 4：`if let` 语法（应用层）](#测验-4if-let-语法应用层)
+    - [测验 5：`break` 标签（分析层）](#测验-5break-标签分析层)
 
 ---
 
@@ -751,3 +757,185 @@ fn main() {
 ### 反命题与边界
 
 > **反命题**: "控制流：表达式导向的流程控制 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+
+---
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：`if` 作为表达式（理解层）
+
+以下代码能否编译？
+
+```rust
+fn main() {
+    let x = if true { 5 } else { 6.0 };
+    println!("{}", x);
+}
+```
+
+<details>
+<summary>✅ 答案</summary>
+
+**编译错误**。
+
+Rust 的 `if` 是表达式，要求所有分支返回**相同类型**。此处 `if` 分支返回 `i32`，`else` 分支返回 `f64`，类型不匹配。
+
+修复方案：
+
+```rust
+let x = if true { 5.0 } else { 6.0 };  // 统一为 f64
+// 或
+let x: f64 = if true { 5.0 } else { 6.0 };
+```
+
+</details>
+
+---
+
+### 测验 2：`match` 穷尽性（应用层）
+
+以下代码能否编译？
+
+```rust,compile_fail
+fn main() {
+    let x: Option<i32> = Some(5);
+    match x {
+        Some(n) if n > 0 => println!("positive"),
+        None => println!("none"),
+    }
+}
+```
+
+<details>
+<summary>✅ 答案</summary>
+
+**编译错误**。
+
+`match` 必须覆盖所有可能的变体。此处缺少 `Some(n) where n <= 0` 的处理。
+
+守卫（`if n > 0`）不改变穷尽性分析——编译器仍要求显式覆盖所有基础模式。
+
+修复方案：
+
+```rust
+match x {
+    Some(n) if n > 0 => println!("positive"),
+    Some(_) => println!("non-positive"),
+    None => println!("none"),
+}
+// 或: _ => println!("other"),
+```
+
+</details>
+
+---
+
+### 测验 3：`loop` 返回值（应用层）
+
+以下代码的输出是什么？
+
+```rust
+fn main() {
+    let mut count = 0;
+    let result = loop {
+        count += 1;
+        if count == 3 {
+            break count * 2;
+        }
+    };
+    println!("{}", result);
+}
+```
+
+<details>
+<summary>✅ 答案</summary>
+
+**输出 `6`**。
+
+Rust 的 `loop` 可以通过 `break value;` 返回一个值。此处：
+
+- `count` 递增到 3 时，`break count * 2` 返回 6
+- `result` 被赋值为 6
+
+这是 Rust 控制流表达式化的体现——`loop`、`if`、`match` 都可以返回值。
+</details>
+
+---
+
+### 测验 4：`if let` 语法（应用层）
+
+以下两段代码是否等价？
+
+```rust
+// 版本 A
+match x {
+    Some(v) => println!("{}", v),
+    _ => (),
+}
+
+// 版本 B
+if let Some(v) = x {
+    println!("{}", v);
+}
+```
+
+<details>
+<summary>✅ 答案</summary>
+
+**等价**。
+
+`if let` 是 `match` 的语法糖，专门用于只关心一个模式、忽略其他模式的场景。版本 B 更简洁，是 Rust 惯用写法。
+
+Rust 1.95+ 还引入了 `if let` 守卫：
+
+```rust
+if let Some(v) = x && v > 0 {
+    println!("positive: {}", v);
+}
+```
+
+</details>
+
+---
+
+### 测验 5：`break` 标签（分析层）
+
+以下代码的输出是什么？
+
+```rust
+fn main() {
+    let mut count = 0;
+    'outer: loop {
+        'inner: loop {
+            count += 1;
+            if count == 3 {
+                break 'outer;
+            }
+            if count == 2 {
+                break 'inner;
+            }
+        }
+        println!("after inner");
+    }
+    println!("after outer, count={}", count);
+}
+```
+
+<details>
+<summary>✅ 答案</summary>
+
+**输出**：
+
+```text
+after inner
+after outer, count=3
+```
+
+执行流程：
+
+1. `count = 1`：`break 'inner` 不触发，继续
+2. `count = 2`：`break 'inner` 触发，回到 `outer` 循环，打印 `after inner`
+3. `count = 3`：`break 'outer` 触发，完全退出外层循环，打印 `after outer, count=3`
+
+标签化的 `break` 允许从内层循环直接退出到指定的外层循环，避免使用额外的标志变量。
+</details>

@@ -5,7 +5,7 @@
 ## 摘要
 
 | 状态 | 数量 |
-|:---|:---|
+| :--- | :--- |
 | expected_fail | 573 |
 | skipped | 100 |
 | unexpected_pass | 69 |
@@ -14,7 +14,7 @@
 ## 问题代码块
 
 | 文件 | 行号 | 状态 | 编译模式 | 预览 | 错误信息 |
-|:---|:---|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | concept\01_foundation\02_borrowing.md | 1566 | syntax_error | bin_wrapped | `fn longest(x: &str, y: &str) -> &st` | error: unexpected closing delimiter: `}`   --> target\tmp\verify_compi |
 | concept\01_foundation\02_borrowing.md | 1583 | syntax_error | bin_wrapped | `fn dangle() -> &String {     let s` | error: unexpected closing delimiter: `}`   --> target\tmp\verify_compi |
 | concept\01_foundation\03_lifetimes.md | 801 | unexpected_pass | all_pass | `// ❌ 编译错误: missing lifetime specifi` | warning: struct `Parser` is never constructed  --> target\tmp\verify_c |

@@ -147,6 +147,12 @@
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [参考来源](#参考来源)
   - [Never 类型元组强制（Rust 1.96）](#never-类型元组强制rust-196)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：结构体与元组结构体（理解层）](#测验-1结构体与元组结构体理解层)
+    - [测验 2：枚举与模式匹配穷尽性（应用层）](#测验-2枚举与模式匹配穷尽性应用层)
+    - [测验 3：Option 与 unwrap（分析层）](#测验-3option-与-unwrap分析层)
+    - [测验 4：类型推断边界（应用层）](#测验-4类型推断边界应用层)
+    - [测验 5：类型转换与 as（分析层）](#测验-5类型转换与-as分析层)
 
 ## 一、权威定义（Definition）
 
@@ -2485,3 +2491,175 @@ let pair: (i32, String) = (42, diverge());  // ! 强制为 String
 > 此特性填补了类型系统一致性的一块拼图，尤其在宏生成代码和泛型抽象中减少显式转换。
 > [来源: [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/)] ·
 > [来源: [RFC 1216 — `!` type](https://rust-lang.github.io/rfcs/1216-bang-type.html)]
+
+---
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：结构体与元组结构体（理解层）
+
+以下代码能否编译？
+
+```rust
+struct Point(i32, i32);
+struct Point2D { x: i32, y: i32 }
+
+fn main() {
+    let p1 = Point(1, 2);
+    let p2 = Point2D { x: 1, y: 2 };
+    println!("{}", p1.0);
+    println!("{}", p2.x);
+}
+```
+
+- A. 编译通过
+- B. 编译失败：`Point` 不能按 `.0` 访问
+- C. 编译失败：`Point2D` 不能按 `.x` 访问
+
+<details>
+<summary>✅ 答案</summary>
+
+**A. 编译通过**。
+
+- 元组结构体 `Point` 通过索引 `.0`、`.1` 访问字段
+- 命名字段结构体 `Point2D` 通过字段名 `.x`、`.y` 访问
+- 两者都是合法的结构体变体
+
+</details>
+
+---
+
+### 测验 2：枚举与模式匹配穷尽性（应用层）
+
+以下代码为什么编译失败？
+
+```rust,compile_fail
+enum Direction {
+    North,
+    South,
+    East,
+    West,
+}
+
+fn main() {
+    let d = Direction::North;
+    match d {
+        Direction::North => println!("N"),
+        Direction::South => println!("S"),
+    }
+}
+```
+
+<details>
+<summary>✅ 答案</summary>
+
+**编译错误：非穷尽模式匹配**。
+
+Rust 要求 `match` 表达式覆盖枚举的所有变体。此处缺少 `East` 和 `West` 的处理。
+
+修复方案：
+
+```rust
+match d {
+    Direction::North => println!("N"),
+    Direction::South => println!("S"),
+    Direction::East => println!("E"),
+    Direction::West => println!("W"),
+}
+// 或使用通配符: _ => println!("Other"),
+```
+
+</details>
+
+---
+
+### 测验 3：Option 与 unwrap（分析层）
+
+以下代码在运行时会发生什么？
+
+```rust
+fn main() {
+    let x: Option<i32> = None;
+    println!("{}", x.unwrap());
+}
+```
+
+- A. 打印 `0`
+- B. 打印 `None`
+- C. 编译错误
+- D. 运行时 panic
+
+<details>
+<summary>✅ 答案</summary>
+
+**D. 运行时 panic**。
+
+`Option::unwrap()` 在 `None` 时会触发 panic：`"called`Option::unwrap()` on a `None`value"`。
+
+安全替代方案：
+
+```rust
+if let Some(v) = x {
+    println!("{}", v);
+} else {
+    println!("no value");
+}
+// 或: println!("{}", x.unwrap_or(0));
+```
+
+</details>
+
+---
+
+### 测验 4：类型推断边界（应用层）
+
+以下代码中，编译器能否推断出 `v` 的类型？
+
+```rust
+let v = Vec::new();
+v.push(42);
+```
+
+- A. 能，`Vec<i32>`
+- B. 能，`Vec<{integer}>`
+- C. 不能，需要显式标注类型
+
+<details>
+<summary>✅ 答案</summary>
+
+**A. 能，`Vec<i32>`**。
+
+Rust 编译器通过后续使用推断类型。`v.push(42)` 中的 `42` 是 `i32` 字面量，因此编译器推断 `v: Vec<i32>`。
+
+如果后续没有使用，则必须显式标注：`let v: Vec<i32> = Vec::new();`
+</details>
+
+---
+
+### 测验 5：类型转换与 as（分析层）
+
+以下代码的输出是什么？
+
+```rust
+fn main() {
+    let x: i32 = 256;
+    let y: i8 = x as i8;
+    println!("{}", y);
+}
+```
+
+- A. 256
+- B. 0
+- C. 编译错误
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 0**。
+
+`i8` 的范围是 `-128..=127`。`256` 超出范围，`as` 执行**截断转换**（wrapping/truncating）。
+
+`256` 的二进制是 `1_0000_0000`，取低 8 位得到 `0000_0000` = 0。
+
+> **警告**: `as` 转换在溢出时不报错，是潜在 bug 来源。Rust 1.45+ 推荐使用 `TryInto` 进行可失败转换。
+</details>

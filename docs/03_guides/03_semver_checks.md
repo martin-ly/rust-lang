@@ -261,7 +261,7 @@ pub fn __internal_helper() {} // semver-checks 会忽略此项
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [上级目录](../README.md)
+- [docs 索引](../README.md)
 
 ---
 

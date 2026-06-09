@@ -1268,7 +1268,7 @@ fn pgo_workflow() {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [06_toolchain 目录](./README.md)
-- [上级目录](../README.md)
+- [docs 索引](../README.md)
 
 ---
 

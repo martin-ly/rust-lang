@@ -452,7 +452,7 @@ cargo run --manifest-path script.rs --release
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [上级目录](../README.md)
+- [docs 索引](../README.md)
 
 ---
 

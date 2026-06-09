@@ -308,7 +308,7 @@ kademlia.get_record(Key::from(vec![1, 2, 3]));
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [上级目录](../README.md)
+- [docs 索引](../README.md)
 
 ---
 

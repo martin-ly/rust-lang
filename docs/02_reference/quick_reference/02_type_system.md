@@ -1306,7 +1306,7 @@ const REF: &i32 = &VALUE;  // ✅ 现在支持
 ---
 
 **最后更新**: 2026-05-08
-**Rust 版本**: 1.93.1+ (Edition 2024)
+**Rust 版本**: 1.96.0+ (Edition 2024)
 
 🔷 **Rust 类型系统，安全与表达力的极致！**
 
@@ -1348,7 +1348,7 @@ Rust 1.95+ 重要更新：
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [quick_reference 目录](./README.md)
-- [上级目录](../README.md)
+- [速查表索引](./README.md)
 
 ---
 

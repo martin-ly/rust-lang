@@ -2866,6 +2866,7 @@ assert!(!raw.is_null());  // alloc 返回的指针保证 non-null
 1. 阅读 `crates/c01_ownership_borrow_scope/` 中与"Unsafe Rust"相关的源码和示例
 2. 运行 `cargo test -p c01_ownership_borrow_scope` 验证理解
 3. 完成 `exercises/src/unsafe_rust/` 中的练习任务
+4. 完成 [L3 Unsafe Rust 测验](./22_quiz_unsafe.md) 验证理解程度
 
 ---
 

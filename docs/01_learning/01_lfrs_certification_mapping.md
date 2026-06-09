@@ -475,7 +475,7 @@
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [01_learning 目录](./README.md)
-- [上级目录](../README.md)
+- [学习路径索引](./README.md)
 
 ---
 

@@ -938,7 +938,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [01_learning 目录](./README.md)
-- [上级目录](../README.md)
+- [学习路径索引](./README.md)
 
 ---
 

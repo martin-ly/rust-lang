@@ -37,8 +37,10 @@ pub fn demo_vecdeque_truncate_front() {
 ///
 /// 与 `retain`（从头部开始）互补，在某些场景下能更早终止遍历。
 ///
-/// ⚠️ 状态更新 (2026-06-08): `retain_back` 在 nightly 1.98.0 中尚未出现，
-/// 可能推迟至 1.98+。下方等效实现仍具教学价值。
+/// ⚠️ 状态更新 (2026-06-09): PR #151973 "Stabilize retain_back from truncate_front"
+/// 的 FCP 已完成，但 nightly 1.98.0 验证中 `retain_back` 方法尚不存在
+///（feature gate `vec_deque_retain_back` 亦不存在）。可能从该 PR 中
+/// 被移除或推迟至 1.98+。下方等效实现仍具教学价值。
 pub fn demo_vecdeque_retain_back() {
     let mut deque: VecDeque<i32> = [1, 2, 3, 4, 5].into_iter().collect();
 

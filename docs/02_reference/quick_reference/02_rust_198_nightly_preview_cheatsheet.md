@@ -207,7 +207,8 @@ pub fn debug_pause() {
 | #155499 | `never_type` 稳定化 | blocked |
 | #154170 | `fN::BITS` | waiting-on-crater |
 | #153261 | `ptr_alignment_type` as `alignment_type` | PFCP |
-| #151379 | `VecDeque::retain_back` / `truncate_front` | FCP finished |
+| #151973 | `VecDeque::truncate_front` | FCP finished ✅ nightly 验证通过 |
+| #151973 | `VecDeque::retain_back` | **推迟** — nightly 1.98.0 中方法和 feature gate 均不存在，可能从 PR 中移除 |
 | #148605 | `supertrait_item_shadowing` | PFCP |
 | #148051 | `frontmatter` | FCP finished |
 | #139673 | `derive(CoercePointee)` | **FCP finished** 🔥 |

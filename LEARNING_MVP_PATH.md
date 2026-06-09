@@ -288,7 +288,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 |:---|:---|:---|:---:|
 | **系统编程** | 学习 Unsafe + FFI，尝试调用 C 库 | [Unsafe Rust](./concept/03_advanced/03_unsafe.md) · [FFI](./concept/03_advanced/05_rust_ffi.md) · [内联汇编](./concept/03_advanced/13_inline_assembly.md) | +20h `[选修]` |
 | **Web 后端** | 学习 Axum/Tokio，将 `fastwc` 改为 Web 服务 | [Async/Await](./concept/03_advanced/02_async.md) · [网络编程](./concept/03_advanced/18_network_programming.md) | +20h `[选修]` |
-| **嵌入式** | 学习 `no_std`，在 microcontroller 上运行 Rust | [嵌入式 Rust](./concept/06_ecosystem/17_embedded_rust.md) · [Real-Time Systems](./concept/06_ecosystem/18_real_time_systems.md) | +30h `[选修]` |
+| **嵌入式** | 学习 `no_std`，在 microcontroller 上运行 Rust | [嵌入式 Rust](./concept/06_ecosystem/17_embedded_rust.md) · [嵌入式系统](./concept/06_ecosystem/22_embedded_systems.md) | +30h `[选修]` |
 | **形式化验证** | 理解所有权证明，使用 Kani/Verus | [RustBelt](./concept/04_formal/04_rustbelt.md) · [验证工具生态](./concept/04_formal/22_modern_verification_tools.md) | +40h `[选修]` |
 | **编译器开发** | 理解借用检查器演进，尝试 Miri/BSan | [NLL 与 Polonius](./concept/03_advanced/08_nll_and_polonius.md) · [BorrowSanitizer](./concept/07_future/borrow_sanitizer.md) | +30h `[选修]` |
 | **开源贡献** | 为 rust-lang/rust 或 tokio 提交文档 PR | [Rust 版本跟踪](./concept/07_future/05_rust_version_tracking.md) · [Edition 机制](./concept/07_future/22_edition_guide.md) | 持续 `[选修]` |
@@ -362,3 +362,39 @@ fn main() -> Result<(), Box<dyn Error>> {
 > **最后更新**: 2026-05-31
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: 🧪 活跃维护中，欢迎反馈
+
+---
+
+## 扩展路径详细任务
+
+> 以下任务为 `[选修]` 内容，完成 MVP 路径后根据个人兴趣选择。
+
+### 方向 A：系统编程（+20h）
+
+| 阶段 | 任务 | 内容 | 验证标准 |
+|:---|:---|:---|:---|
+| A1 | 阅读 Unsafe Rust | [03_unsafe.md](./concept/03_advanced/03_unsafe.md) 第 1–4 节 | 能解释 `unsafe` 块的 5 种能力 |
+| A2 | 裸指针操作 | [crates/c01_ownership_borrow_scope](../../crates/c01_ownership_borrow_scope/) 运行 raw pointer 示例 | 全部编译通过 |
+| A3 | FFI 调用 C 标准库 | [05_rust_ffi.md](./concept/03_advanced/05_rust_ffi.md) 第 1–3 节 | 成功调用 `libc::getpid()` 并打印 |
+| A4 | 内联汇编初体验 | [13_inline_assembly.md](./concept/03_advanced/13_inline_assembly.md) 第 1–2 节 | 在 x86_64 上运行 `rdtsc` 示例 |
+| A5 | 小项目 | 编写一个读取 `/proc/self/maps`（Linux）或系统信息（Windows）的 CLI 工具 | 使用 `unsafe` 调用平台 API，输出格式化 |
+
+### 方向 B：Web 后端（+20h）
+
+| 阶段 | 任务 | 内容 | 验证标准 |
+|:---|:---|:---|:---|
+| B1 | 阅读 Async/Await | [02_async.md](./concept/03_advanced/02_async.md) 第 1–4 节 | 能画出 Future 状态机转换图 |
+| B2 | 运行 Tokio 示例 | [crates/c06_async](../../crates/c06_async/) 运行 hello_tokio | 成功运行异步 HTTP 客户端 |
+| B3 | Axum 入门 | 使用 Axum 创建带路由的 Web 服务 | `curl http://localhost:3000/` 返回 JSON |
+| B4 | 将 fastwc 改为 Web 服务 | 接受 HTTP POST 上传文件，返回统计结果 | 使用 `reqwest` 或 `curl` 测试通过 |
+
+### 方向 C：形式化验证（+40h）
+
+| 阶段 | 任务 | 内容 | 验证标准 |
+|:---|:---|:---|:---|
+| C1 | 阅读 RustBelt 直觉 | [04_rustbelt.md](./concept/04_formal/04_rustbelt.md) 第 1–3 节 | 能解释分离逻辑的基本思想 |
+| C2 | Kani 安装与运行 | [22_modern_verification_tools.md](./concept/04_formal/22_modern_verification_tools.md) 快速开始 | `cargo kani --harness` 成功验证一个函数 |
+| C3 | 验证 Vec::push | 为 `Vec::push` 编写 Kani harness，验证无越界 | Kani 报告 "successful" |
+| C4 | Miri 运行 | `cargo miri test` 运行 c01_ownership_borrow_scope 测试 | 无 UB 报告 |
+
+---

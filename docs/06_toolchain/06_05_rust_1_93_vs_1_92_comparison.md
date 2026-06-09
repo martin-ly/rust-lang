@@ -1265,7 +1265,7 @@ mod tests {
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [06_toolchain 目录](./README.md)
-- [上级目录](../README.md)
+- [docs 索引](../README.md)
 
 ---
 

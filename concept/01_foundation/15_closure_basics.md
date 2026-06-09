@@ -55,6 +55,11 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：闭包捕获模式（理解层）](#测验-1闭包捕获模式理解层)
+    - [测验 2：`move` 关键字（应用层）](#测验-2move-关键字应用层)
+    - [测验 3：Fn/FnMut/FnOnce（分析层）](#测验-3fnfnmutfnonce分析层)
+    - [测验 4：闭包与生命周期（分析层）](#测验-4闭包与生命周期分析层)
 
 ---
 
@@ -756,3 +761,127 @@ fn main() {
 ### 反命题与边界
 
 > **反命题**: "闭包基础：捕获环境与匿名函数 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+
+---
+
+## 嵌入式测验（Embedded Quiz）
+
+### 测验 1：闭包捕获模式（理解层）
+
+以下代码能否编译？
+
+```rust
+fn main() {
+    let mut count = 0;
+    let mut inc = || { count += 1; };
+    inc();
+    println!("{}", count);
+}
+```
+
+- A. 能，输出 `1`
+- B. 能，输出 `0`
+- C. 不能，闭包不能修改外部变量
+
+<details>
+<summary>✅ 答案</summary>
+
+**A. 能，输出 `1`**。
+
+闭包自动以可变引用捕获 `count`（`&mut count`），因为闭包体内修改了它。`count` 的类型是 `i32`，实现了 `Copy`，但闭包优先选择最少权限的捕获方式——此处需要 `&mut`，因此使用可变引用。
+
+注意：调用 `inc()` 后，`count` 被闭包的可变借用锁定，直到闭包最后一次使用后才能再次直接访问 `count`。
+</details>
+
+---
+
+### 测验 2：`move` 关键字（应用层）
+
+以下代码能否编译？
+
+```rust
+fn main() {
+    let s = String::from("hello");
+    let f = move || println!("{}", s);
+    f();
+    println!("{}", s);
+}
+```
+
+<details>
+<summary>✅ 答案</summary>
+
+**编译错误**。
+
+`move` 关键字强制闭包**按值捕获**环境变量。`s` 被 move 进闭包，`f()` 之后 `s` 已无效，因此 `println!("{}", s)` 触发 E0382（use of moved value）。
+
+修复方案：在闭包中借用而非拥有：
+
+```rust
+let f = || println!("{}", s);  // 默认按引用捕获
+f();
+println!("{}", s);  // OK
+```
+
+</details>
+
+---
+
+### 测验 3：Fn/FnMut/FnOnce（分析层）
+
+以下闭包实现了哪些 trait？
+
+```rust
+let s = String::from("hi");
+let f = || drop(s);
+```
+
+- A. `Fn`, `FnMut`, `FnOnce`
+- B. 仅 `FnOnce`
+- C. 仅 `Fn` 和 `FnMut`
+
+<details>
+<summary>✅ 答案</summary>
+
+**B. 仅 `FnOnce`**。
+
+`drop(s)` 消费了 `s`（按值捕获），因此闭包只能被调用一次。它实现 `FnOnce`，但不实现 `FnMut` 或 `Fn`（后两者要求能多次调用）。
+
+| Trait | 捕获方式 | 调用次数 |
+|:---|:---|:---|
+| `Fn` | `&T` | 多次 |
+| `FnMut` | `&mut T` | 多次 |
+| `FnOnce` | `T` | 一次 |
+
+</details>
+
+---
+
+### 测验 4：闭包与生命周期（分析层）
+
+以下代码能否编译？
+
+```rust,compile_fail
+fn make_closure() -> impl Fn() -> i32 {
+    let x = 5;
+    || x
+}
+```
+
+<details>
+<summary>✅ 答案</summary>
+
+**编译错误**。
+
+闭包捕获了局部变量 `x` 的引用，但尝试返回闭包时，`x` 已经离开作用域（悬垂引用）。
+
+修复方案：使用 `move` 强制按值捕获：
+
+```rust
+fn make_closure() -> impl Fn() -> i32 {
+    let x = 5;
+    move || x  // x 被 copy（i32 实现 Copy）
+}
+```
+
+</details>

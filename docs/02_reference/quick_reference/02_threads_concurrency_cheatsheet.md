@@ -894,7 +894,7 @@ let shared_map: Arc<HashMap<i32, String>> = Arc::new(HashMap::new());
 ---
 
 **最后更新**: 2026-05-08
-**Rust 版本**: 1.93.1+ (Edition 2024)
+**Rust 版本**: 1.96.0+ (Edition 2024)
 
 ---
 
@@ -956,7 +956,7 @@ fn parallel_window_process(data: &[i32]) -> Vec<i32> {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [quick_reference 目录](./README.md)
-- [上级目录](../README.md)
+- [速查表索引](./README.md)
 
 ---
 
