@@ -366,8 +366,6 @@ pub mod rust_186_features;
 pub mod rust_187_features;
 pub mod rust_188_features;
 pub mod rust_189_features;
-pub mod rust_190_features;
-pub mod rust_191_features;
 pub mod rust_192_features;
 pub mod rust_193_features;
 /// Rust 1.95.0 异步特性 (if let guards 场景)

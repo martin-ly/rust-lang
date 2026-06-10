@@ -112,7 +112,6 @@
     - [ControlFlow 在测试验证管道中的应用](#controlflow-在测试验证管道中的应用)
     - [LazyLock 在测试固件中的应用](#lazylock-在测试固件中的应用)
     - [性能提升总结](#性能提升总结)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [权威来源索引](#权威来源索引)
 
 ---
@@ -1754,7 +1753,6 @@ fn broken_test() {
 ## 🆕 Rust 1.95+ 特性整合
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 > **适用版本**: Rust 1.96.0+
 
 ### 核心特性速查
@@ -1803,7 +1801,6 @@ let gamma = f64::consts::EULER_GAMMA;
 ## Rust 1.95+ 在测试中的深度应用
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
 > **适用版本**: Rust 1.96.0+ | **实际场景**: 测试开发
 
 ### ControlFlow 在测试验证管道中的应用
@@ -1862,6 +1859,7 @@ pub fn get_test_db() -> Option<&'static TestDatabase> {
 ---
 
 **状态**: ✅ 深度整合完成
+
 ---
 
 > **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
@@ -1882,17 +1880,11 @@ pub fn get_test_db() -> Option<&'static TestDatabase> {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Software Testing]**
-
 > **[来源: Wikipedia - Unit Testing]**
-
 > **[来源: Rust Reference - Test Attributes]**
-
 > **[来源: TRPL Ch. 11 - Testing]**
-
 > **[来源: ACM - Software Testing Methods]**
-
 > **[来源: IEEE - Test Coverage Standards]**
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 > **[来源: TRPL - The Rust Programming Language]**
@@ -1903,7 +1895,6 @@ pub fn get_test_db() -> Option<&'static TestDatabase> {
 > **[来源: POPL - Programming Languages Research]**
 > **[来源: PLDI - Programming Language Design and Implementation]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 > **[来源: TRPL - The Rust Programming Language]**
@@ -1912,7 +1903,6 @@ pub fn get_test_db() -> Option<&'static TestDatabase> {
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
 > **[来源: Wikipedia - Software Testing]**
 > **[来源: TRPL Ch. 11 - Testing]**
 > **[来源: Rust Reference - Test Attributes]**

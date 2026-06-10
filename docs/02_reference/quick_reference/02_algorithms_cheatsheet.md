@@ -65,7 +65,6 @@
     - [数学常量在数值算法中的应用](#数学常量在数值算法中的应用)
     - [生产场景：实时数据处理管道](#生产场景实时数据处理管道)
     - [总结](#总结)
-  - [**最后更新**: 2026-05-08 (算法场景深度整合)](#最后更新-2026-05-08-算法场景深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -890,7 +889,6 @@ fn fib(n: usize) -> usize {
 ## Rust 1.95+ 在算法中的深度应用
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
 > **适用版本**: Rust 1.96.0+ | **实际场景**: 算法优化与数值计算
 
 ---
@@ -1306,6 +1304,7 @@ impl StreamProcessor {
 | `f64::consts` | 黄金搜索、对数、调和级数 | 精度保证，收敛快 |
 
 **最后更新**: 2026-05-08 (算法场景深度整合)
+
 ---
 
 > **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
@@ -1331,19 +1330,12 @@ impl StreamProcessor {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming Languages]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 > **[来源: TRPL - The Rust Programming Language]**

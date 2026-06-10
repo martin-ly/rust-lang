@@ -5,6 +5,4 @@
 //!
 //! ## 版本历史
 //! - `rust_192_features`: Rust 1.92 特性 (2024年7月)
-pub mod rust_190_features;
-pub mod rust_191_features;
 pub mod rust_192_features;

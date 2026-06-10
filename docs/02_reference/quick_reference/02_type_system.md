@@ -79,7 +79,6 @@
     - [项目内部文档](#项目内部文档)
     - [相关速查卡](#相关速查卡)
   - [Rust 1.95+ 更新](#rust-195-更新)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -164,7 +163,6 @@
     - [项目内部文档](#项目内部文档)
     - [相关速查卡](#相关速查卡)
   - [Rust 1.95+ 更新](#rust-195-更新)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -1318,7 +1316,6 @@ const REF: &i32 = &VALUE;  // ✅ 现在支持
 ## Rust 1.95+ 更新
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
 > **适用版本**: Rust 1.96.0+
 
 Rust 1.95+ 重要更新：
@@ -1333,6 +1330,7 @@ Rust 1.95+ 重要更新：
 ---
 
 **状态**: ✅ 深度整合完成
+
 ---
 
 > **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
@@ -1358,21 +1356,13 @@ Rust 1.95+ 重要更新：
 ## 权威来源索引
 
 > **[来源: Wikipedia - Type System]**
-
 > **[来源: Wikipedia - Type Theory]**
-
 > **[来源: Wikipedia - Hindley-Milner Type System]**
-
 > **[来源: Rust Reference - Type System]**
-
 > **[来源: TRPL Ch. 3 - Common Programming Concepts]**
-
 > **[来源: ACM - Advanced Type System Features]**
-
 > **[来源: IEEE - Type Safety Verification]**
-
 > **[来源: Pierce 2002 - Types and Programming Languages]**
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 > **[来源: TRPL - The Rust Programming Language]**
@@ -1381,7 +1371,6 @@ Rust 1.95+ 重要更新：
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
 > **[来源: Wikipedia - Type System]**
 > **[来源: Pierce 2002 - TAPL]**
 > **[来源: Rust Reference - Type System]**

@@ -69,7 +69,6 @@
     - [相关速查卡](#相关速查卡)
   - [🆕 Rust 1.95+ 特性整合](#-rust-195-特性整合)
     - [核心特性速查](#核心特性速查)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -456,7 +455,6 @@ writeln!(s, "Line 2").unwrap();
 ### 对齐和填充
 
 > **[来源: Wikipedia - Type System]**
-
 > **扩展**: 内存对齐见 [ALIGNMENT_GUIDE](../ALIGNMENT_GUIDE.md)；此处为**格式化**对齐（文本排版）。
 
 ```rust
@@ -1152,7 +1150,6 @@ fn process_logs(logs: &[LogEntry]) -> String {
 ## 🆕 Rust 1.95+ 特性整合
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 > **适用版本**: Rust 1.96.0+
 
 ### 核心特性速查
@@ -1195,6 +1192,7 @@ let gamma = f64::consts::EULER_GAMMA;
 ---
 
 **状态**: ✅ 深度整合完成
+
 ---
 
 > **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
@@ -1224,13 +1222,9 @@ let gamma = f64::consts::EULER_GAMMA;
 ## 权威来源索引
 
 > **[来源: Wikipedia - String (computer science)]**
-
 > **[来源: TRPL Ch. 8 - Strings]**
-
 > **[来源: Rust Reference - str]**
-
 > **[来源: Unicode Standard]**
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 > **[来源: TRPL - The Rust Programming Language]**
@@ -1239,7 +1233,6 @@ let gamma = f64::consts::EULER_GAMMA;
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
 > **[来源: Wikipedia - String (computer science)]**
 > **[来源: TRPL Ch. 8 - Strings]**
 > **[来源: Rust Reference - str]**

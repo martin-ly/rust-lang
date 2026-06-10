@@ -49,7 +49,6 @@
     - [进阶路径](#进阶路径)
     - [研究路径](#研究路径)
   - [🔗 相关资源](#-相关资源)
-  - [**维护者**: Rust 所有权可判定性研究项目](#维护者-rust-所有权可判定性研究项目)
   - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引-1)
 
@@ -430,6 +429,7 @@
 
 **最后更新**: 2026-03-04
 **维护者**: Rust 所有权可判定性研究项目
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

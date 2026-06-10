@@ -1,5 +1,4 @@
 //! WASM模块错误路径测试套件 / WASM Module Error Paths Test Suite
-use c12_wasm::rust_191_features::wasm_std_new_apis;
 use c12_wasm::{basic_examples, error_examples};
 
 /// 测试错误输入情况
@@ -39,15 +38,6 @@ fn test_exception_cases() {
     // validate_string 的边界值：刚好等于 min/max
     assert!(error_examples::validate_string("a", 1, 1).is_ok());
     assert!(error_examples::validate_string("ab", 1, 2).is_ok());
-}
-
-/// 测试资源耗尽情况
-/// situation
-#[test]
-#[ignore] // 部分环境栈溢出
-fn test_resource_exhaustion() {
-    // 尝试分配一个极大的缓冲区，应优雅失败（TryReserveError）
-    assert!(wasm_std_new_apis::allocate_wasm_buffer(usize::MAX).is_err());
 }
 
 /// 测试并发安全

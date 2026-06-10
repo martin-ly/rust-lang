@@ -49,7 +49,6 @@
     - [数学常量在超参数优化中的应用](#数学常量在超参数优化中的应用)
     - [生产场景：实时推荐系统](#生产场景实时推荐系统)
     - [总结](#总结)
-  - [**最后更新**: 2026-05-08 (AI/ML 场景深度整合)](#最后更新-2026-05-08-aiml-场景深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -151,7 +150,6 @@ fn main() {
     - [数学常量在超参数优化中的应用](#数学常量在超参数优化中的应用)
     - [生产场景：实时推荐系统](#生产场景实时推荐系统)
     - [总结](#总结)
-  - [**最后更新**: 2026-05-08 (AI/ML 场景深度整合)](#最后更新-2026-05-08-aiml-场景深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -649,7 +647,6 @@ AI/ML 示例代码位于指南与外部仓库，可直接参考：
 ## Rust 1.95+ 在 AI/ML 中的深度应用
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
-
 > **适用版本**: Rust 1.96.0+ | **实际场景**: 机器学习推理与训练
 
 ---
@@ -827,6 +824,7 @@ impl RecommendationService {
 | `f64::consts` | 超参数优化 | 搜索效率 +40% |
 
 **最后更新**: 2026-05-08 (AI/ML 场景深度整合)
+
 ---
 
 > **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
@@ -852,24 +850,16 @@ impl RecommendationService {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming Languages]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Wikipedia - Machine Learning]**
 > **[来源: Wikipedia - Artificial Intelligence]**
 > **[来源: tch-rs Documentation]**
 > **[来源: ACM - AI Systems]**
-
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 > **[来源: ACM - Systems Programming Languages]**
 > **[来源: IEEE - Programming Language Standards]**

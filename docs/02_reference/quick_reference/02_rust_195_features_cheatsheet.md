@@ -177,7 +177,9 @@ counter.update(Ordering::Relaxed, Ordering::Relaxed, |current| current + 1);
 
 > **[来源: PLDI - Programming Language Design]**
 > **[来源: Rust Official Docs]**
-> 📎 可运行示例: [`crates/c02_type_system/examples/vec_push_mut_demo.rs`](../../../crates/c02_type_system/examples/vec_push_mut_demo.rs) (Vec) | [`crates/c08_algorithms/examples/collections_mut_ref_demo.rs`](../../../crates/c08_algorithms/examples/collections_mut_ref_demo.rs) (VecDeque/LinkedList)
+> 📎 可运行示例:
+> [`crates/c02_type_system/examples/vec_push_mut_demo.rs`](../../../crates/c02_type_system/examples/vec_push_mut_demo.rs) (Vec) |
+> [`crates/c08_algorithms/examples/collections_mut_ref_demo.rs`](../../../crates/c08_algorithms/examples/collections_mut_ref_demo.rs) (VecDeque/LinkedList)
 
 ```rust,ignore
 use std::collections::{VecDeque, LinkedList};

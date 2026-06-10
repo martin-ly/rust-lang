@@ -5,7 +5,10 @@
 > **Rust 版本**: 1.96.0+ Stable
 > **跟踪 Issue**: rust#108099
 > **Bloom 层级**: 应用
-> **[来源: Rust Standard Library]** · **[来源: RFC 未正式发布，社区长期需求]** · **[来源: Rust Reference - Patterns]** · **[来源: TRPL Ch. 18 - Patterns and Matching]** ✅
+> **[来源: Rust Standard Library]** ·
+> **[来源: RFC 未正式发布，社区长期需求]** ·
+> **[来源: Rust Reference - Patterns]** ·
+> **[来源: TRPL Ch. 18 - Patterns and Matching]** ✅
 >
 > **受众**: [进阶]
 > **内容分级**: [实验级]

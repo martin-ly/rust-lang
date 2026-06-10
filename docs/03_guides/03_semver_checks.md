@@ -1,4 +1,9 @@
-> **权威来源**: [SemVer 2.0.0](https://semver.org/lang/zh-CN/), [cargo-semver-checks 文档](https://github.com/obi1kenobi/cargo-semver-checks), [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+> **权威来源**:
+>
+> [SemVer 2.0.0](https://semver.org/lang/zh-CN/),
+> [cargo-semver-checks 文档](https://github.com/obi1kenobi/cargo-semver-checks),
+> [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+>
 > **分级**: [A]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 >

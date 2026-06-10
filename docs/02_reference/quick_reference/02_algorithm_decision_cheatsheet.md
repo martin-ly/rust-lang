@@ -22,7 +22,6 @@
   - [📊 图算法](#-图算法)
   - [📊 动态规划](#-动态规划)
   - [🔗 参考](#-参考)
-  - [**最后更新**: 2026-05-08](#最后更新-2026-05-08)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -103,6 +102,7 @@
 
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-05-08
+
 ---
 
 > **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)

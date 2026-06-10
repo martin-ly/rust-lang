@@ -55,10 +55,8 @@
     - [ControlFlow 在请求处理管道中的应用](#controlflow-在请求处理管道中的应用)
     - [LazyLock 在连接池管理中的应用](#lazylock-在连接池管理中的应用)
     - [性能提升总结](#性能提升总结)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
 
 > **快速参考** | [完整文档](../../../crates/c10_networks/docs/README.md) | [代码示例](../../../crates/c10_networks/examples/README.md)
 > **创建日期**: 2026-01-27
@@ -619,7 +617,6 @@ async fn proxy_server() -> io::Result<()> {
 ## 🆕 Rust 1.95+ 特性整合
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
 > **适用版本**: Rust 1.96.0+
 
 ### 核心特性速查
@@ -668,7 +665,6 @@ let gamma = f64::consts::EULER_GAMMA;
 ## Rust 1.95+ 在网络编程中的深度应用
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
 > **适用版本**: Rust 1.96.0+ | **实际场景**: 网络编程开发
 
 ### ControlFlow 在请求处理管道中的应用
@@ -723,6 +719,7 @@ pub fn get_connection() -> Option<Connection> {
 ---
 
 **状态**: ✅ 深度整合完成
+
 ---
 
 > **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
@@ -748,37 +745,15 @@ pub fn get_connection() -> Option<Connection> {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming Languages]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Wikipedia - Network Programming]**
 > **[来源: Tokio Documentation]**
 > **[来源: Rust Reference - std::net]**
 > **[来源: IEEE - Network Protocols]**
-
----
-
-## 权威来源索引
-
-> **[来源: [Tokio Documentation](https://docs.rs/tokio/latest/tokio/)]**
->
-> **[来源: [Hyper Documentation](https://hyper.rs/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
 
 ---

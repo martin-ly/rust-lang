@@ -4,12 +4,16 @@
 >
 > **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **目的**: 通过多维矩阵可视化Rust所有权与可判定性的核心概念关系
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: Rust Reference]** ·
+> **[来源: Wikipedia - Rust (programming language)]** ·
+> **[来源: Rustonomicon]** ·
+> **[来源: TRPL]** ·
+> **[来源: RFCs - github.com/rust-lang/rfcs]** ·
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [概念多维矩阵对比](#概念多维矩阵对比)
   - [目录](#目录)
@@ -31,7 +35,6 @@
   - [6. 错误类型与检查阶段矩阵](#6-错误类型与检查阶段矩阵)
   - [使用说明](#使用说明)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
 
 ## 1. 类型系统谱系矩阵
 >
@@ -314,50 +317,8 @@
 ## 权威来源索引
 
 > **[来源: Wikipedia - Memory Safety]**
-
 > **[来源: TRPL Ch. 4 - Ownership]**
-
 > **[来源: Rustonomicon - Ownership]**
-
 > **[来源: POPL 2018 - RustBelt]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
->
-> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**

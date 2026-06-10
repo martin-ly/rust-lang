@@ -1,4 +1,8 @@
-> **权威来源**: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/future-in-prelude.html), [RFC 2052](https://rust-lang.github.io/rfcs/2052-epochs.html)
+> **权威来源**:
+>
+> [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/future-in-prelude.html),
+> [RFC 2052](https://rust-lang.github.io/rfcs/2052-epochs.html)
+>
 > **分级**: [A]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 >

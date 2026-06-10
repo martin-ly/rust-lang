@@ -77,7 +77,7 @@ pub mod fork;
 pub mod async_runtime;
 
 pub mod archive;
-pub use archive::{rust_190_features, rust_191_features, rust_192_features};
+pub use archive::rust_192_features;
 pub mod rust_186_features;
 pub mod rust_187_features;
 pub mod rust_188_features;

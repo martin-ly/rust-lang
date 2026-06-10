@@ -11,7 +11,16 @@
 
 ## 目录结构
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: Wikipedia - Advanced Programming Language Features]** · **[来源: Wikipedia - Metaprogramming]** · **[来源: ACM - Advanced Type System Features]** · **[来源: IEEE - Language Extension Mechanisms]**
+> **[来源: Rust Reference]** ·
+> **[来源: Wikipedia - Rust (programming language)]** ·
+> **[来源: Rustonomicon]** ·
+> **[来源: TRPL]** ·
+> **[来源: RFCs - github.com/rust-lang/rfcs]** ·
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]** ·
+> **[来源: Wikipedia - Advanced Programming Language Features]** ·
+> **[来源: Wikipedia - Metaprogramming]** ·
+> **[来源: ACM - Advanced Type System Features]** ·
+> **[来源: IEEE - Language Extension Mechanisms]**
 
 ```text
 08-advanced-topics/
@@ -1087,13 +1096,9 @@ impl<T, const N: usize> Drop for RingBuffer<T, N> {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Memory Safety]**
-
 > **[来源: TRPL Ch. 4 - Ownership]**
-
 > **[来源: Rustonomicon - Ownership]**
-
 > **[来源: POPL 2018 - RustBelt]**
-
 > **[来源: Wikipedia - Memory Safety]**
 > **[来源: TRPL Ch. 4 - Ownership]**
 > **[来源: Rustonomicon - Ownership]**

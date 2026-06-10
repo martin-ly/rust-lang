@@ -818,7 +818,6 @@ fn main() {
 ## 🆕 Rust 1.95+ 特性整合
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
-
 > **适用版本**: Rust 1.96.0+
 
 ### 核心特性速查
@@ -867,7 +866,6 @@ let gamma = f64::consts::EULER_GAMMA;
 ## Rust 1.95+ 在泛型中的深度应用
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 > **适用版本**: Rust 1.96.0+ | **实际场景**: 泛型开发
 
 ### ControlFlow 在泛型约束中的应用
@@ -950,19 +948,12 @@ static TYPE_CACHE: LazyLock<HashMap<TypeId, String>> = LazyLock::new(|| {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming Languages]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 > **[来源: TRPL - The Rust Programming Language]**

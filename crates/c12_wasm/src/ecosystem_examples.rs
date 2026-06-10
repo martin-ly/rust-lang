@@ -1,31 +1,5 @@
-//! # Rust 1.90 生态库示例代码
-//! # Rust 1.90 ecosystem library example
-
-/// Rust 1.90 新特性示例
-/// Rust 1.90 feature example
-pub mod rust_190_features {
-    /// let-else 模式示例
-    /// let-else example
-    /// let-else 模式Example of
-    /// Rust 1.90: 使用 let-else 简化错误处理
-    /// Rust 1.90: let-else error handling
-    /// Rust 1.90: Use let-else 简化error handling
-    pub fn process_data_with_let_else(data: Option<String>) -> Result<String, String> {
-        // let-else 模式：如果匹配失败，执行 else 分支
-        let Some(value) = data else {
-            return Err("No data provided".to_string());
-        };
-
-        Ok(value.to_uppercase())
-    }
-
-    /// return-position impl Trait 示例
-    /// Rust 1.90: 函数可以直接返回 impl Trait
-    /// Rust 1.90: function can impl Trait
-    pub fn get_filtered_numbers(numbers: &[i32]) -> impl Iterator<Item = &i32> {
-        numbers.iter().filter(|&&x| x > 0)
-    }
-}
+//! # WASM 生态库示例代码
+//! # WASM ecosystem library example
 
 /// 设计模式示例
 /// design example

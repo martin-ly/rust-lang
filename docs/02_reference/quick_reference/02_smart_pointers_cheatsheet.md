@@ -75,7 +75,6 @@
     - [项目内部文档](#项目内部文档)
     - [形式化理论与类型系统](#形式化理论与类型系统)
     - [相关速查卡](#相关速查卡)
-  - [🎯 **掌握智能指针，灵活管理内存！**](#-掌握智能指针灵活管理内存)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -1424,6 +1423,7 @@ impl Unmovable {
 **状态**: ✅ **Rust 1.96.0 更新完成**
 
 🎯 **掌握智能指针，灵活管理内存！**
+
 ---
 
 > **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
@@ -1453,19 +1453,12 @@ impl Unmovable {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming Languages]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 > **[来源: TRPL - The Rust Programming Language]**
@@ -1474,7 +1467,6 @@ impl Unmovable {
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference]**
 > **[来源: TRPL - The Rust Programming Language]**

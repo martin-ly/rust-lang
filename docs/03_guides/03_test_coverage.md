@@ -1,4 +1,8 @@
-> **权威来源**: [The Rust Programming Language — Ch11](https://doc.rust-lang.org/book/ch11-00-testing.html), [cargo test 文档](https://doc.rust-lang.org/cargo/commands/cargo-test.html), [cargo-tarpaulin 文档](https://github.com/xd009642/tarpaulin)
+> **权威来源**:
+>
+> [The Rust Programming Language — Ch11](https://doc.rust-lang.org/book/ch11-00-testing.html),
+> [cargo test 文档](https://doc.rust-lang.org/cargo/commands/cargo-test.html),
+> [cargo-tarpaulin 文档](https://github.com/xd009642/tarpaulin)
 > **分级**: [A]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 >

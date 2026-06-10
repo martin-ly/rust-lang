@@ -1,4 +1,8 @@
-> **权威来源**: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/rpit-lifetime-capture.html), [RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html)
+> **权威来源**:
+>
+> [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/rpit-lifetime-capture.html),
+> [RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html)
+>
 > **分级**: [A]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 >

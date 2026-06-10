@@ -4,7 +4,6 @@
 >
 > **受众**: [进阶]
 > **内容分级**: [专家级]
-
 > **分级**: [A]
 > **层级**: L6 生态工具
 > **前置概念**: [Async](../../concept/03_advanced/02_async.md) · [Concurrency](../../concept/03_advanced/01_concurrency.md)
@@ -316,19 +315,12 @@ cargo bench -p c10_networks --bench async_ecosystem_benchmarks
 ## 权威来源索引
 
 > **[来源: Wikipedia - io_uring]**
-
 > **[来源: Wikipedia - Asynchronous I/O]**
-
 > **[来源: Linux Kernel Documentation - io_uring]**
-
 > **[来源: ACM - High-Performance Async I/O]**
-
 > **[来源: IEEE - Operating System I/O Optimization]**
-
 > **[来源: tokio-rs - tokio-uring]**
-
 > **[来源: Rust Reference - Async I/O]**
-
 > **[来源: PLDI - Programming Language Design]**
 
 ---

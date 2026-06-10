@@ -14,7 +14,11 @@
 
 ## 📋 目录
 >
-> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Modular Programming]** · **[来源: Wikipedia - Namespace]** · **[来源: ACM - Module System Design]** · **[来源: IEEE - Software Modularity Standards]**
+> **[来源: Rust Official Docs]** ·
+> **[来源: Wikipedia - Modular Programming]** ·
+> **[来源: Wikipedia - Namespace]** ·
+> **[来源: ACM - Module System Design]** ·
+> **[来源: IEEE - Software Modularity Standards]**
 
 - [📦 Rust 模块系统速查卡](#-rust-模块系统速查卡)
   - [📋 目录](#-目录)

@@ -4,7 +4,6 @@
 >
 > **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **目的**: 通过决策树可视化Rust所有权检查、类型推断和验证过程中的推理路径
 
 ## 目录
@@ -28,7 +27,6 @@
     - [6.1 借用检查错误分类](#61-借用检查错误分类)
   - [使用说明](#使用说明)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
 
 ## 1. 借用检查决策树
 >
@@ -55,17 +53,17 @@
             │             │             │
             ▼             ▼             ▼
     ┌───────────────┐ ┌───────────────┐ ┌───────────────┐
-    │ 检查活跃借用  │ │ 检查活跃借用  │ │ 检查所有权    │
-    │ - 允许任意   │ │ - 必须无      │ │ - 必须拥有    │
-    │   数量 &T   │ │   &mut        │ │ - 不能已移动  │
-    │ - 不允许    │ │ - 允许 &T     │ │               │
-    │   &mut T    │ │   (但会冲突)  │ │               │
+    │ 检查活跃借用   │ │ 检查活跃借用   │ │ 检查所有权    │
+    │ - 允许任意     │ │ - 必须无      │ │ - 必须拥有    │
+    │   数量 &T      │ │   &mut        │ │ - 不能已移动  │
+    │ - 不允许       │ │ - 允许 &T     │ │               │
+    │   &mut T      │ │   (但会冲突)   │ │               │
     └───────┬───────┘ └───────┬───────┘ └───────┬───────┘
             │                 │                 │
             ▼                 ▼                 ▼
     ┌───────────────┐ ┌───────────────┐ ┌───────────────┐
-    │ 存在冲突的    │ │ 存在冲突的    │ │ 所有权是否    │
-    │ &mut T借用？  │ │ 任何借用？    │ │ 仍然有效？    │
+    │ 存在冲突的     │ │ 存在冲突的     │ │ 所有权是否    │
+    │ &mut T借用？   │ │ 任何借用？     │ │ 仍然有效？    │
     └───────┬───────┘ └───────┬───────┘ └───────┬───────┘
             │                 │                 │
          是/否             是/否             是/否
@@ -102,8 +100,8 @@
                               │
                               ▼
                     ┌─────────────────────┐
-                    │ 检查约束集是否蕴含  │
-                    │ 'a: 'b               │
+                    │ 检查约束集是否蕴含    │
+                    │ 'a: 'b              │
                     └──────────┬──────────┘
                                │
                             是/否
@@ -139,10 +137,10 @@ HM类型推断过程
     │                │                │
     ▼                ▼                ▼
 ┌─────────┐    ┌─────────────┐   ┌───────────────┐
-│查找Γ(x) │    │ 新类型变量  │   │ 推断e₁的类型  │
-│返回类型 │    │ α, β        │   │ 必须是函数    │
-│或创建新 │    │ 推断e: β    │   │ τ₁ → τ₂       │
-│类型变量 │    │ 结果: α → β │   │ 推断e₂: τ₁'   │
+│查找Γ(x)  │    │ 新类型变量  │   │ 推断e₁的类型   │
+│返回类型  │    │ α, β        │   │ 必须是函数     │
+│或创建新  │    │ 推断e: β    │   │ τ₁ → τ₂       │
+│类型变量  │    │ 结果: α → β │   │ 推断e₂: τ₁'   │
 └────┬────┘    └──────┬──────┘   │ 统一τ₁ = τ₁'  │
      │                │          │ 返回τ₂        │
      │                │          └───────┬───────┘
@@ -151,7 +149,7 @@ HM类型推断过程
                       │
                       ▼
             ┌─────────────────┐
-            │ 需要统一约束？  │
+            │ 需要统一约束？   │
             └────────┬────────┘
                      │
                   是/否
@@ -419,104 +417,8 @@ E0505(移动后使用)  E0502(冲突借用)    E0597(悬垂引用)
 ## 权威来源索引
 
 > **[来源: Wikipedia - Memory Safety]**
-
 > **[来源: TRPL Ch. 4 - Ownership]**
-
 > **[来源: Rustonomicon - Ownership]**
-
 > **[来源: POPL 2018 - RustBelt]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
->
-> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**

@@ -4,7 +4,6 @@
 >
 > **受众**: [进阶] / [专家]
 > **内容分级**: [专家级]
-
 > **分级**: [A]
 > **层次定位**: L3-L6 高级-生态 / 嵌入式异步系统
 > **前置依赖**: [concept L3 Async](../../concept/03_advanced/02_async.md) · [concept L3 Unsafe](../../concept/03_advanced/03_unsafe.md) · [EMBEDDED_RUST_GUIDE](03_embedded_rust_guide.md)
@@ -45,7 +44,12 @@
   - [权威来源索引](#权威来源索引)
 
 > **Bloom 层级**: 应用 → 评价 → 创造
-> **[来源: Embassy Book]** · **[来源: embedded-hal 文档]** · **[来源: svd2rust 文档]** · **[来源: defmt 文档]** · **[来源: Rust Embedded Book]** · **[来源: Rustonomicon]** ✅
+> **[来源: Embassy Book]** ·
+> **[来源: embedded-hal 文档]** ·
+> **[来源: svd2rust 文档]** ·
+> **[来源: defmt 文档]** ·
+> **[来源: Rust Embedded Book]** ·
+> **[来源: Rustonomicon]** ✅
 
 ---
 

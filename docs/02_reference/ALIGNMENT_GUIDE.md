@@ -3,7 +3,11 @@
 > **分级**: [A]
 > **Bloom 层级**: L2 (理解)
 > **创建日期**: 2026-02-13
-> > **权威来源**: [Rust Reference — Type Layout](https://doc.rust-lang.org/reference/type-layout.html), [Rustonomicon — Data Layout](https://doc.rust-lang.org/nomicon/data.html), [The Rust Programming Language — Ch04](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
+> > **权威来源**:
+>
+> [Rust Reference — Type Layout](https://doc.rust-lang.org/reference/type-layout.html),
+> [Rustonomicon — Data Layout](https://doc.rust-lang.org/nomicon/data.html),
+> [The Rust Programming Language — Ch04](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference 类型布局来源标注、Rustonomicon 数据布局引用 [来源: Authority Source Sprint Batch 8]
 >
@@ -17,7 +21,10 @@
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **文档定位**: 全面覆盖 Rust 中「对齐」相关的各类知识
-> **关联**: [02_type_system.md](./quick_reference/02_type_system.md) | [02_strings_formatting_cheatsheet.md](./quick_reference/02_strings_formatting_cheatsheet.md)
+> **关联**:
+>
+> [02_type_system.md](./quick_reference/02_type_system.md) |
+> [02_strings_formatting_cheatsheet.md](./quick_reference/02_strings_formatting_cheatsheet.md)
 
 ---
 
@@ -365,7 +372,6 @@ struct CacheLinePadded {
 ## 六、权威来源（非技术对齐）
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
 > **说明**：此处「对齐」指项目文档与官方发布的一致性，与内存对齐无技术关联。技术读者可跳过。
 
 版本追踪与权威来源： [版本对齐检查清单](../00_meta/00_rust_version_alignment_checklist.md)、[INCREMENTAL_UPDATE_FLOW](../research_notes/10_incremental_update_flow.md)。
@@ -442,10 +448,9 @@ struct CacheLinePadded {
 ## Rust 1.95+ 更新
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
 > **适用版本**: Rust 1.96.0+
 
-详见 [Rust 1.94 发布说明
+详见 Rust 1.94 发布说明
 
 **最后更新**: 2026-05-08
 

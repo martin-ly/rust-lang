@@ -56,7 +56,6 @@
   - [Rust 1.95+ 并发特性](#rust-195-并发特性)
     - [LazyLock 在并发状态管理中的应用](#lazylock-在并发状态管理中的应用)
     - [array\_windows 在并发数据处理中的应用](#array_windows-在并发数据处理中的应用)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -941,6 +940,7 @@ fn parallel_window_process(data: &[i32]) -> Vec<i32> {
 ---
 
 **状态**: ✅ 深度整合完成
+
 ---
 
 > **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
@@ -966,15 +966,10 @@ fn parallel_window_process(data: &[i32]) -> Vec<i32> {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Thread (computing)]**
-
 > **[来源: Wikipedia - Concurrency]**
-
 > **[来源: Rust Reference - Threads]**
-
 > **[来源: TRPL Ch. 16 - Fearless Concurrency]**
-
 > **[来源: ACM - Concurrent Programming]**
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 > **[来源: TRPL - The Rust Programming Language]**

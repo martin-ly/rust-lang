@@ -6,6 +6,4 @@
 //! 当前活跃版本为 Rust 1.94，请使用最新模块获取最新特性。
 //! Currently active version is Rust 1.94, please use the latest module for the newest features.
 pub mod rust_189_features;
-pub mod rust_190_features;
-pub mod rust_191_features;
 pub mod rust_192_features;

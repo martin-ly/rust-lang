@@ -50,7 +50,6 @@ pub mod proc;
 
 // Rust 1.91 新特性模块
 pub mod archive;
-pub use archive::rust_191_features;
 
 // Rust 1.92 新特性模块
 pub use archive::rust_192_features;
@@ -58,7 +57,6 @@ pub mod rust_186_features;
 pub mod rust_187_features;
 pub mod rust_188_features;
 pub mod rust_189_features;
-pub mod rust_190_features;
 pub mod rust_193_features;
 pub mod rust_194_features;
 pub mod rust_195_features; // Rust 1.95 特性 (cfg_select!)

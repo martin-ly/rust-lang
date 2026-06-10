@@ -110,7 +110,6 @@
     - [形式化理论](#形式化理论)
   - [故障排查建议](#故障排查建议)
   - [Rust 1.95+ 更新说明](#rust-195-更新说明)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [权威来源索引](#权威来源索引)
   - [思维导图：Rust 错误码体系](#思维导图rust-错误码体系)
   - [决策树：编译错误诊断流程](#决策树编译错误诊断流程)
@@ -2573,9 +2572,8 @@ fn main() {
 ---
 
 ## Rust 1.95+ 更新说明
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 > **适用版本**: Rust 1.96.0+
 
 Rust 1.94 对错误诊断进行了多项改进：
@@ -2584,12 +2582,11 @@ Rust 1.94 对错误诊断进行了多项改进：
 - **异步错误改进**: 更好的 async/await 错误定位
 - **类型推断增强**: 更好的类型推断失败提示
 
-详见 [Rust 1.94 发布说明
-
 ---
 
 **最后更新**: 2026-05-08
 **状态**: ✅ 深度整合完成
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -2610,23 +2607,14 @@ Rust 1.94 对错误诊断进行了多项改进：
 ## 权威来源索引
 
 > **[来源: Wikipedia - Compiler Construction]**
-
 > **[来源: Wikipedia - Error Message]**
-
 > **[来源: Wikipedia - Diagnostic (medicine)]**
-
 > **[来源: IEEE - Programming Language Diagnostics]**
-
 > **[来源: ACM - Compiler Error Message Design]**
-
 > **[来源: Rust Reference - Error Codes]**
-
 > **[来源: Rust Compiler Error Index]**
-
 > **[来源: rustc --explain Documentation]**
-
 > **[来源: LLVM - Error Handling]**
-
 > **[来源: ISO/IEC 14882 - C++ Standard Diagnostics]**
 
 ---

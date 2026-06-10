@@ -1,4 +1,10 @@
-> **权威来源**: [ISO C++20](https://isocpp.org/std/the-standard), [cppreference](https://en.cppreference.com/), [cxx crate 文档](https://cxx.rs/), [Rust FFI 文档](https://doc.rust-lang.org/nomicon/ffi.html)
+> **权威来源**:
+>
+> [ISO C++20](https://isocpp.org/std/the-standard),
+> [cppreference](https://en.cppreference.com/),
+> [cxx crate 文档](https://cxx.rs/),
+> [Rust FFI 文档](https://doc.rust-lang.org/nomicon/ffi.html)
+>
 > **分级**: [A]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 >

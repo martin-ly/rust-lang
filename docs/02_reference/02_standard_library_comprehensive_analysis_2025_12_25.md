@@ -1,4 +1,8 @@
-> **权威来源**: [Rust Standard Library 文档](https://doc.rust-lang.org/std/), [Rust Reference](https://doc.rust-lang.org/reference/)
+> **权威来源**:
+>
+> [Rust Standard Library 文档](https://doc.rust-lang.org/std/),
+> [Rust Reference](https://doc.rust-lang.org/reference/)
+>
 > **分级**: [A]
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Standard Library 官方文档来源标注 [来源: Authority Source Sprint Batch 8]
@@ -1473,10 +1477,9 @@ fn main() {
 ## Rust 1.95+ 更新
 >
 > **[来源: Rust Official Docs]**
-
 > **适用版本**: Rust 1.96.0+
 
-详见 [Rust 1.94 发布说明
+详见 Rust 1.94 发布说明
 
 **最后更新**: 2026-05-08
 

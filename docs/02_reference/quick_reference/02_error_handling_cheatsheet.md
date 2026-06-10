@@ -57,7 +57,6 @@
     - [边界 1: 错误类型转换](#边界-1-错误类型转换)
     - [边界 2:  panic 恢复](#边界-2--panic-恢复)
     - [形式化理论](#形式化理论)
-  - [**Rust 版本**: 1.96.0+ (Edition 2024)](#rust-版本-1960-edition-2024)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -985,6 +984,7 @@ fn main() {
 
 **最后更新**: 2026-05-08
 **Rust 版本**: 1.96.0+ (Edition 2024)
+
 ---
 
 > **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
@@ -1010,19 +1010,12 @@ fn main() {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming Languages]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Wikipedia - Exception Handling]**
 > **[来源: TRPL Ch. 9 - Error Handling]**
 > **[来源: Rust Reference - Result]**
