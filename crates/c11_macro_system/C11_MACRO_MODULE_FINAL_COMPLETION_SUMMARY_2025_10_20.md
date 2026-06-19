@@ -56,7 +56,6 @@
     - [A. 快速命令](#a-快速命令)
     - [B. 学习资源](#b-学习资源)
     - [C. 联系方式](#c-联系方式)
-  - [**🎉 再次祝贺C11宏系统模块的圆满成功！**](#-再次祝贺c11宏系统模块的圆满成功)
 
 ## 🎊 项目完成声明
 
@@ -538,6 +537,7 @@ cargo doc --package C11_macro_system --open
 ---
 
 **🎉 再次祝贺C11宏系统模块的圆满成功！**
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

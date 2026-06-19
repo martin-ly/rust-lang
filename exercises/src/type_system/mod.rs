@@ -8,6 +8,8 @@
 //! - 泛型入门 / Generics introduction
 //! - 特质对象 / Trait objects
 //! - `if let` guards (Rust 1.95)
+//! - Builder 模式 / Builder pattern
+//! - Luhn 算法 / Luhn algorithm
 
 pub mod ex01_enum_pattern_match;
 pub mod ex02_struct_methods;
@@ -15,3 +17,5 @@ pub mod ex03_type_conversion;
 pub mod ex04_generics_intro;
 pub mod ex05_trait_object;
 pub mod ex06_if_let_guards;
+pub mod ex07_builder_pattern;
+pub mod ex08_luhn_algorithm;

@@ -412,15 +412,18 @@ graph TD
 ├── 大页面可能有性能问题
 └── 替代方案: 预渲染 Mermaid 为 SVG（mdbook-mermaid 插件）
 
-边界 5: docs.rs 资源限制
+边界 5: docs.rs 资源限制与默认目标策略
 ├── docs.rs 对 crate 构建有时间限制
 ├── 非常大的 crate 可能构建失败
 ├── 自定义构建脚本可能被限制
+├── 2026-05-01 起，docs.rs 默认仅构建 **1 个目标**（x86_64-unknown-linux-gnu）
+│   └── 此前默认构建 5 个目标；需多目标文档时须在 Cargo.toml 显式声明
 └── 解决方案: 使用 docs.rs metadata 配置构建设项
 ```
 
-> **边界要点**: 文档生态的边界主要与**编译时间**、**同步维护**、**工具限制**和**托管平台约束**相关。
-> [来源: [docs.rs Build Limits](https://docs.rs/about/builds)]
+> **边界要点**: 文档生态的边界主要与**编译时间**、**同步维护**、**工具限制**和**托管平台约束**相关。2026-05-01 的默认目标变更意味着跨平台 crate 需要主动配置 `[package.metadata.docs.rs]`，否则 Windows/macOS 等目标文档将不再自动生成。
+> [来源: [docs.rs Build Limits](https://docs.rs/about/builds)] ·
+> [来源: [Rust Blog — docs.rs: building fewer targets by default](https://blog.rust-lang.org/2026/04/04/docsrs-only-default-targets/)]
 
 ---
 

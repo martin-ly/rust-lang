@@ -1,3 +1,12 @@
+> **⚠️ 历史文档提示**：本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用。
+> 其中技术观点反映了对应时间点的社区状态，可能与当前（Rust 1.96+）推荐实践不一致。
+> 学习时请以 `concept/`、`knowledge/` 及官方文档为准。
+>
+> - `async-std` 已进入维护模式，新项目建议优先考虑 Tokio / smol。
+> - `wasm32-wasi` 已重命名为 `wasm32-wasip1`；WASI Preview 2 目标为 `wasm32-wasip2`。
+
+---
+
 # async-std [已归档] 运行时形式化分析
 
 > **内容分级**: [归档级]
@@ -17,7 +26,7 @@
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-- [async-std [已归档] 运行时形式化分析](#async-std-已归档-运行时形式化分析)
+- [async-std \[已归档\] 运行时形式化分析](#async-std-已归档-运行时形式化分析)
   - [目录](#目录)
   - [1. 引言](#1-引言)
   - [2. 与std API对应关系](#2-与std-api对应关系)
@@ -57,8 +66,9 @@
     - [反例 8.1 (阻塞操作)](#反例-81-阻塞操作)
     - [反例 8.2 (运行时混用)](#反例-82-运行时混用)
   - [参考文献](#参考文献)
-  - *最后更新: 2026-03-04*
+  - [*最后更新: 2026-03-04*](#最后更新-2026-03-04)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 

@@ -48,9 +48,12 @@
   - [六、供应链安全与 CVE 跟踪](#六供应链安全与-cve-跟踪)
     - [6.1 Cargo CVE-2026-33055 / CVE-2026-33056（2026-03-26，1.94.1 已修复）](#61-cargo-cve-2026-33055--cve-2026-330562026-03-261941-已修复)
     - [6.2 Cargo CVE-2026-5222 / CVE-2026-5223（2026-05-25）](#62-cargo-cve-2026-5222--cve-2026-52232026-05-25)
-    - [6.3 crates.io 恶意 crate 与通知政策变更（2026-02-13 起）](#63-cratesio-恶意-crate-与通知政策变更2026-02-13-起)
-    - [6.4 跨生态系统供应链攻击：TrapDoor（2026-05）](#64-跨生态系统供应链攻击trapdoor2026-05)
-    - [6.5 已知传递依赖安全状态（本项目）](#65-已知传递依赖安全状态本项目)
+      - [CVE-2026-5222 细节](#cve-2026-5222-细节)
+      - [CVE-2026-5223 细节](#cve-2026-5223-细节)
+    - [6.3 crates.io 恶意 crate 与通知政策变更（2026-02-13 起，2026-06-19 澄清）](#63-cratesio-恶意-crate-与通知政策变更2026-02-13-起2026-06-19-澄清)
+    - [6.4 crates.io 平台安全能力演进（2026-01-21）](#64-cratesio-平台安全能力演进2026-01-21)
+    - [6.5 跨生态系统供应链攻击：TrapDoor（2026-05）](#65-跨生态系统供应链攻击trapdoor2026-05)
+    - [6.6 已知传递依赖安全状态（本项目）](#66-已知传递依赖安全状态本项目)
   - [七、来源与延伸阅读](#七来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
@@ -560,33 +563,66 @@ graph TD
 - crates.io 用户不受影响
 - Rust 1.94.1 将内部 `tar` 依赖更新至 0.4.45 修复此问题
 
-**参考**: [Rust 1.94.1 Release Notes](https://github.com/rust-lang/rust/releases/tag/1.94.1)
+**参考**:
+
+- [Rust Blog — Security advisory for Cargo (CVE-2026-33056)](https://blog.rust-lang.org/2026/03/21/cve-2026-33056/)
+- [Rust 1.94.1 Release Notes](https://github.com/rust-lang/rust/releases/tag/1.94.1)
 
 ### 6.2 Cargo CVE-2026-5222 / CVE-2026-5223（2026-05-25）
 
 **影响范围**: 所有 Rust < 1.96.0 的 Cargo 版本
 
-| CVE | 严重程度 | 攻击向量 | 修复版本 |
-|:---:|:---:|:---|:---:|
-| **CVE-2026-5222** | Low | 第三方 registry URL 规范化错误：攻击者可通过 `.git` 后缀混淆窃取同一域名下其他 registry 的凭据 | Rust 1.96.0 |
-| **CVE-2026-5223** | Medium | 第三方 registry tarball 中的 symlink 可覆盖同 registry 下其他 crate 的缓存 | Rust 1.96.0 |
+| CVE | 严重程度 | 攻击向量 | 修复版本 | 发现者 |
+|:---:|:---:|:---|:---:|:---:|
+| **CVE-2026-5222** | Low | 第三方 sparse registry URL 规范化错误：攻击者可通过 `.git` 后缀混淆窃取同一域名下其他 registry 的凭据 | Rust 1.96.0 | Christos Papakonstantinou |
+| **CVE-2026-5223** | Medium | 第三方 registry tarball 中的 symlink 可覆盖同 registry 下其他 crate 的本地缓存 | Rust 1.96.0 | Christos Papakonstantinou |
 
-**关键说明**:
+#### CVE-2026-5222 细节
 
-- **crates.io 用户不受影响**：crates.io 已禁止上传含 symlink 的 crate
-- **第三方 registry 用户需升级**：1.96.0 的 Cargo 已拒绝提取 tarball 中的任何 symlink
-- **无法立即升级的用户**：审计 `~/.cargo/registry/cache/` 中的 symlink，联系 registry 管理员禁用 symlink 上传
+**漏洞根因**：Cargo 早期仅支持 git 协议索引。多数 git 托管服务允许带或不带 `.git` 后缀访问仓库，因此 Cargo 在规范化 registry URL 时也会把 `https://example.com/index` 与 `https://example.com/index.git` 视为同一凭证域。该规则被**无意沿用到了 sparse 索引协议**。
+
+**攻击条件**（极为苛刻）：
+
+1. `https://example.com/index` 是 sparse 索引
+2. 该 registry 允许 crate 依赖其他 registry 的 crate
+3. 攻击者能在 `https://example.com/index` 发布 crate
+4. 攻击者能在 `https://example.com/index.git` 上传任意文件
+
+**攻击链**：攻击者将 `https://example.com/index.git` 配置为需要认证下载的 Cargo sparse registry，下载指向记录凭证的服务器；然后发布恶意 crate `foo` 依赖该 registry 下的 `bar`；受害者下载 `foo` 时，Cargo 误认为两个 registry 共享同一凭证，把 Cargo token 发送给恶意服务器。
+
+**修复**：Rust 1.96.0 仅对 **git 协议** 的 registry URL 剥离 `.git` 后缀；sparse 索引不再进行此规范化。
+
+**影响版本**：Rust 1.68（sparse registry 稳定）至 1.95 的所有 Cargo 版本。
+
+#### CVE-2026-5223 细节
+
+**漏洞根因**：Cargo 从 tarball 提取 crate 源码到 `~/.cargo` 本地缓存时会校验"不能提取到 crate 自身缓存目录之外"，但存在绕过：恶意 tarball 可把文件写到**crate 缓存目录的上一层**，从而覆盖同一 registry 下其他 crate 的缓存。
+
+**攻击结果**：受害者构建依赖被污染缓存的 crate 时，会执行攻击者注入的代码。
+
+**修复**：Rust 1.96.0 的 Cargo **拒绝提取任何 symlink**，无论 tarball 来自 crates.io 还是第三方 registry。由于 `cargo package` / `cargo publish` 本就不会打包 symlink，实际影响极小。
+
+**缓解措施（无法立即升级时）**：
+
+- 审计 `~/.cargo/registry/cache/` 与 `~/.cargo/registry/src/` 中的 symlink
+- 联系第三方 registry 管理员，在上传阶段禁用 symlink
+- 优先升级至 Rust 1.96.0+
 
 **参考**:
 
 - [CVE-2026-5222 公告](https://blog.rust-lang.org/2026/05/25/cve-2026-5222/)
 - [CVE-2026-5223 公告](https://blog.rust-lang.org/2026/05/25/cve-2026-5223/)
+- [Rust Security Response Team](https://www.rust-lang.org/policies/security)
 
-### 6.3 crates.io 恶意 crate 与通知政策变更（2026-02-13 起）
+### 6.3 crates.io 恶意 crate 与通知政策变更（2026-02-13 起，2026-06-19 澄清）
 
 **政策变更**:
 crates.io 团队于 2026-02-13 宣布[更新恶意 crate 通知政策](https://blog.rust-lang.org/2026/02/13/crates-io-malicious-crate-notification-policy.html)——**不再为每个恶意 crate 发布博客文章**，改为仅发布 RustSec advisory。
-只有实际被利用或存在真实使用证据的恶意 crate 才会同时发布博客文章。
+2026-06-19，官方再次[澄清该政策](https://blog.rust-lang.org/2026/06/19/clarifying-cratesios-malicious-crate-notification-policy.html)，明确以下原则：
+
+1. **始终发布 RustSec advisory**：每个确认的恶意 crate 都会录入 [RustSec Advisory Database](https://rustsec.org/)，并通过 crates.io 自身机制（crate 下架、发布者账户锁定）处理。
+2. **博客文章仅用于有实际使用/利用证据的 case**：只有当存在该 crate 被真实下载、使用或造成实际影响的证据时，才会额外发布 rust-lang.org 博客文章。
+3. **不再为纯 typosquat/无使用证据的恶意 crate 发博客**：大量未被实际使用的 typosquat 包不会触发博客公告。
 
 > **建议**: 订阅 [RustSec Advisory RSS](https://rustsec.org/advisories/rss.xml) 以获取实时安全更新。
 
@@ -622,7 +658,26 @@ crates.io 团队于 2026-02-13 宣布[更新恶意 crate 通知政策](https://b
 
 > **PQClean 生态归档影响**: 2026-06-04 批量出现 7 个 `pqcrypto-*` crate 被标记 unmaintained（RUSTSEC-2026-0160~0166），上游 PQClean 项目已归档。使用 post-quantum 密码学 Rust 绑定的项目需评估迁移路径。
 
-### 6.4 跨生态系统供应链攻击：TrapDoor（2026-05）
+### 6.4 crates.io 平台安全能力演进（2026-01-21）
+
+**[Rust Blog, 2026-01-21]** crates.io 团队发布[半年度开发更新](https://blog.rust-lang.org/2026/01/21/crates-io-development-update.html)，多项改进直接影响供应链安全与依赖评估：
+
+| 功能 | 说明 | 安全/审计意义 |
+| :--- | :--- | :--- |
+| **Security Tab** | crate 页面新增"Security"标签，展示 RustSec  advisories 及受影响版本范围 | 选依赖前可快速查看已知漏洞 |
+| **Trusted Publishing Only Mode** | crate 拥有者可强制仅通过 Trusted Publishing 发布，禁用传统 API token | 防止泄露的 API token 被用于未授权发布 |
+| **GitLab CI/CD Trusted Publishing** | 除 GitHub Actions 外，Trusted Publishing 现支持 GitLab.com（暂不支持 self-hosted） | 多平台 CI 生态的无 token 发布 |
+| **Blocked Triggers** | 阻止 `pull_request_target` 和 `workflow_run` 触发 Trusted Publishing | 关闭两类已知高风险 GitHub Actions 触发器 |
+| **Source Lines of Code (SLOC)** | crate 页面展示代码行数指标（通过 `tokei` 计算） | 评估依赖规模与审计成本 |
+| **`pubtime` 字段** | crate index 新增版本发布时间字段 | 支持未来 Cargo cooldown、历史依赖重放、Renovate 等工具 |
+| **Cargo user agent filtering** | 下载统计仅计入 Cargo 请求，过滤 bot/scraper/mirror | 使下载量更真实反映实际采用 |
+| **Encrypted GitHub tokens** | 数据库中的 GitHub OAuth token 静态加密 | 降低数据库泄露后的凭证暴露风险 |
+| **Svelte 前端公测（2026-04-17）** | crates.io 前端从 Ember.js 迁移到 Svelte 5，公测地址 `https://crates.io/svelte/` | 前后端共享 session，UI 测试/视觉回归已通过；未来将成默认前端 |
+
+> **关键洞察**: crates.io 正在从"被动托管"转向"主动安全基础设施"——Security Tab、Trusted Publishing Only、token 加密等功能共同降低供应链攻击面。对于企业用户，建议优先启用 **Trusted Publishing Only Mode** 并定期审计依赖的 Security Tab。
+> [来源: [Inside Rust — crates.io: Help test our new web frontend](https://blog.rust-lang.org/inside-rust/2026/04/17/crates-io-svelte-public-testing.html)] · 可信度: ✅
+
+### 6.5 跨生态系统供应链攻击：TrapDoor（2026-05）
 
 **[ByteIota / Socket.dev, 2026-05-25]** 2026 年 5 月，一个名为 **TrapDoor** 的协同供应链攻击同时命中 **npm、PyPI 和 Crates.io**，共投放 **34 个恶意包、384+ 版本**。这是首次观察到利用**不可见 Unicode 字符污染 AI 配置文件**（`.cursorrules`、`CLAUDE.md`、`AGENTS.md`）的攻击手法。
 
@@ -653,7 +708,7 @@ cargo deny check advisories
 
 > **来源**: [ByteIota — TrapDoor Supply Chain Attack](https://byteiota.com/trapdoor-supply-chain-attack-npm-pypi-crates/) · [Socket.dev](https://socket.dev/) · [JFrog 2026 Supply Chain Report] · 可信度: ✅
 
-### 6.5 已知传递依赖安全状态（本项目）
+### 6.6 已知传递依赖安全状态（本项目）
 
 | 依赖 | RUSTSEC | 状态 | 影响评估 | 计划 |
 |:---|:---|:---:|:---|:---|

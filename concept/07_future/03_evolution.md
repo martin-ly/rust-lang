@@ -57,6 +57,8 @@
 - v1.23 (2026-06-08): 内部维护（信息平坦期）：核心概念补全测验——① 新建 `concept/02_intermediate/24_quiz_memory_management.md`（内存管理 10 题，Box/Rc/Arc/RefCell/Cell、Weak、Deref、Drop、内部可变性）；② 新建 `concept/05_comparative/17_quiz_rust_vs_systems.md`（跨语言对比 10 题，Rust vs C/C++/Go 在内存安全、并发、错误处理、零成本抽象、嵌入式场景的对比）；③ 新建 `concept/01_foundation/27_quiz_closures_iterators.md`（闭包/迭代器 10 题，Fn/FnMut/FnOnce、move 闭包、惰性求值、适配器/消费者、fold/find/filter/map 组合）；已全部加入对应层级 README 索引
 - v1.24 (2026-06-08): Phase 3 内容瘦身启动：① 从 L1-L6 各层级 README 索引中移除 13 个已归档文件链接（`01_foundation/19_numerics.md`、`02_intermediate/22_iterator_patterns.md`、L3 的 6 个归档文件、`04_formal/07_separation_logic.md` 和 `09_operational_semantics.md`、`05_comparative/16_rust_vs_ruby.md`、L6 的 2 个归档文件）；② 清理 `07_future/README.md` 中指向 `archive/01_ai_integration_original.md` 的历史链接；③ 更新 `04_formal/README.md` 核心功能描述（"可机械验证"→"形式化直觉与教学类比"），为 6 个高形式化密度文件在索引表格中追加 `[教学类比]` 标注
 - v1.25 (2026-06-08): Phase 3 深度瘦身完成：① 迁移 12 个活跃层级中的"已归档-in-place"重复文件至 `concept/archive/`（L3 新增 5 个：02_async_programming、03_unsafe_rust、05_macros、08_zero_cost_abstractions、13_async_patterns；此前 L1/L2/L4/L5/L6 共 7 个）；② 归档/删除 8 个根目录级旧版索引（`00.md`/`03-07.md` 归档，`01.md` 已归档、`02.md` 0 字节占位符已删除）；③ 归档 3 个历史规划文件（`PLAN.md`、`PLAN_Semantic_Space_Wave.md`、`SUMMARY.md`）；④ 新建 `archive/ARCHIVE_INDEX.md` 统一索引；⑤ 修复 7 处指向已归档文件的活跃链接（`README.md` / `inter_layer_topology.md` / `LEARNING_MVP_PATH.md` / `53_embedded_graphics.md` / `17_quiz_rust_vs_systems.md` / `25_aarch64_sve_sme_preview.md` / `35_pattern_composition_algebra.md`），清理 `05_formal_ecosystem_tower.md` 变更日志 stray `$entry` 字符
+- v1.26 (2026-06-19): 权威内容对齐 Batch 22：① 新增 §6.9 维护者成长案例（Tiffany Pek Yuan）与 §6.10 跨仓库工程工具 Josh；② 新增 §6.11 Rust Foundation 3 月董事会治理动态。详见 `05_rust_version_tracking.md` §12.14–§12.16 [来源: Inside Rust 2026-05/06]
+- v1.27 (2026-06-19): 权威内容对齐 Batch 23：新增 §6.12 Leadership Council 与基金会 1–2 月治理动态（Project Priorities Budget、AI 贡献政策、代表选举）。详见 `05_rust_version_tracking.md` §12.17–§12.19 [来源: Inside Rust 2026-02/03/04]
 
 ---
 
@@ -1403,6 +1405,94 @@ fn fixed() {
 > [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
+### 6.8 维护者基金的哲学：什么是维护？（2026-01-12）
+
+**[Inside Rust, 2026-01-12]** 在 Rust Foundation Maintainer Fund 筹备期间，Rust Project 发表了[《What is maintenance, anyway?》](https://blog.rust-lang.org/inside-rust/2026/01/12/what-is-maintenance-anyway.html)，界定"维护者"与"维护工作"的范围，为基金的资金方向提供概念基础。
+
+**维护的两层含义**：
+
+| 层面 | 内容 | 为何难以衡量 |
+| :--- | :--- | :--- |
+| **Keeping the lights on** | issue triage、bug 修复、CI 故障、安全响应、性能回退、依赖更新、文档同步 | 成功表现为"无事发生"，缺乏显性成果 |
+| **Enabling evolution** | 代码重构、PR review、mentor 新贡献者、为特性铺路 | 成果是二阶的——让别人能更快落地改进 |
+
+**关键洞察**：
+
+- 维护工作具有**乘数效应**：维护者通过 review/mentor/重构，使其他贡献者能更高效地改进 Rust，最终惠及所有用户。
+- 维护者难以一夜成名，需要长期积累代码库专业知识并赢得其他维护者的信任。
+- Maintainer Fund 的目标正是**支持这类常被忽视但至关重要的工作**，防止志愿者因维护负担过重而倦怠。
+
+> **来源**: [Inside Rust — What is maintenance, anyway?](https://blog.rust-lang.org/inside-rust/2026/01/12/what-is-maintenance-anyway.html) · 可信度: ✅
+
+### 6.9 维护者成长案例：Tiffany Pek Yuan（2026-06-03）
+
+**[Inside Rust, 2026-06-03]** Rust Content 团队启动维护者聚光灯系列，首篇聚焦 **Tiffany Pek Yuan**（[@tiif](https://github.com/tiif)）。她从 2024 年 GSoC 实习生起步，两年内进入 Compiler 与 Formality 团队，并开始在 Outreachy 担任导师，是 Rust **贡献者管道**的典型样本。
+
+| **阶段** | **关键动作** | **对演进的启示** |
+| :--- | :--- | :--- |
+| 入门 | 通过 GSoC 为 Miri 添加 tokio 非阻塞 I/O syscall 支持 | 带薪实习降低了首次贡献的门槛 |
+| 深入 | 参与新 trait solver 与 a-mir-formality 形式化 borrow checker 语义 | 从工具贡献者成长为语言语义建模者 |
+| 回馈 | 担任 Outreachy 导师，同时受雇于 RustNL Maintainers Team | 社区网络将"受助者"转化为"助人者" |
+
+Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完全一致，因此需要治理机制缓解利益冲突。这一观点将 6.8 节的"维护哲学"与 6.7 节的"资金可持续性"联系起来。
+
+> **来源**: [Inside Rust — Maintainer spotlight: Tiffany Pek Yuan](https://blog.rust-lang.org/inside-rust/2026/06/03/maintainer-spotlight-tiffany-pek-yuan-tiif/) · 可信度: ✅
+
+### 6.10 跨仓库工程：Josh 与 Rust 子项目同步（2026-06-04）
+
+**[Inside Rust, 2026-06-04]** Rust 项目使用 [**Josh**](https://github.com/josh-project/josh) 解决 `rust-lang/rust` 与 Miri、Rust Analyzer、compiler-builtins、stdarch、Rust Compiler Development Guide 等子项目之间的代码同步问题。
+
+**三种方案对比**：
+
+| **方案** | **优点** | **Rust 项目遇到的问题** |
+| :--- | :--- | :--- |
+| Monorepo | 原子修改、统一历史 | 仓库过大、CI 过慢、权限与流程以编译器团队为中心 |
+| git submodules | 设置简单 | 无法原子修改父仓库+子项目；易出现脏 submodule 误提交 |
+| git subtree | 可原子修改 | 官方实现对 Rust 仓库规模极慢，Miri 同步数小时无法完成；`git blame` 异常、commit 重复 |
+
+**Josh 的定位**：Josh 是 Rust 编写的高性能 git 过滤器，提供可逆的代数过滤操作，使 `pull`/`push` 同步比 git subtree 快一个数量级，并减少历史污染。Rust 项目在其之上封装了 `josh-sync`，并配备 GitHub Actions 自动同步与 Zulip 告警。
+
+> **关键洞察**: 当语言生态规模达到 Rust 级别时，**版本控制工程**本身成为治理基础设施的一部分。Josh 不仅是工具选择，也是"如何在独立仓库与统一演进之间取得平衡"的制度答案。
+> **来源**: [Inside Rust — How Josh helps Rust manage code across multiple repositories](https://blog.rust-lang.org/inside-rust/2026/06/04/how-josh-helps-rust-manage-code-across-multiple-repositories/) · 可信度: ✅
+
+### 6.11 Rust Foundation 治理动态：3 月董事会（2026-05-04）
+
+**[Inside Rust, 2026-05-04]** 3 月项目董事更新披露 Rust 基金会 3 月 10 日董事会要点，显示基金会在**技术战略**、**会员扩展**与**可持续运营**三方面的最新动向。
+
+**要点速览**：
+
+- **AI 研究倡议**: Futurewei 提出在基金会内设立 AI 聚焦研究倡议的草案，待后续讨论。
+- **互操作生态**: Symposium 项目加入 RIL；teor 以 contractor 身份加入 C++ Interop Initiative。
+- **可持续运营**: 讨论 crates.io 长期运营模式与 Rust Ecosystem Fund 设想，尚无最终决策。
+- **会员**: Processing Foundation 成为 associate member，Canonical 成为 Gold member。
+- **基础设施**: 加入 DataDog Open Source Program 提升可观测性；安全与基础设施团队联合处理 crates.io typosquatting 攻击。
+
+> **来源**: [Inside Rust — March 2026 Project Director Update](https://blog.rust-lang.org/inside-rust/2026/05/04/project-director-update/) · 可信度: ✅
+
+### 6.12 Leadership Council 与 1–2 月基金会治理动态（2026-02/03/04）
+
+**[Inside Rust, 2026-04-06 / 2026-03-25 / 2026-02-13]** 2026 年第一季度，Rust 的领导治理层完成代表轮换、预算分配，并启动多项政策讨论。
+
+**Leadership Council 3 月更新**：
+
+- **代表变动**：Josh Triplett 接任 Libs 代表、Rémy Rakic 接任 Compiler 代表、Mara Bos 转任 Launching Pad 代表、Eric Huss 留任 Devtools 代表。
+- **Project Priorities Budget**：2026 年初始资金约 $412k，已批准用于旅行补助、PM 项目、Outreachy、compiler-ops；讨论中包括 Content Team 视频、grants 重启（RFC#3919）、crates.io 网页设计。
+- **AI 贡献政策**：因低质量 AI 生成提交（"slop"）增加，RFC#3936 进入项目级讨论，同时有临时仓库级措施 #273。
+- **维护者基金**：RFMF 使用方案由 2024-12 成立的委员会推进，RFC#3931 公开征求意见。
+
+**1–2 月 Project Director Update**：
+
+- **人员**：Sovereign Tech Agency 资助的 Infra Engineer Ubiratan Soares 入职；Teor 加入 C++ 互操作。
+- **工程交付**：`cargo-capslock`、crates.io Security Tab 上线、前端 Svelte 迁移、docs.rs 监控迁至 Datadog、AWS 额度捐赠。
+- **治理设计**：Rust Innovation Lab 入会资格、End User Group 结构、RustConf 2026 筹备。
+
+**2 月代表选举启动**：
+
+- Compiler、Devtools、Launching Pad 三团队选举新代表；规则包括公司 affiliation 上限（同一实体最多 2 人）、任期软限制（建议最多三届）、团队可自定流程。
+
+> **关键洞察**: Rust 治理在 2026 年初同时处理**人员可持续性**（Maintainer Fund、代表轮换）、**资金分配**（Project Priorities Budget）和**新型风险**（AI slop）。这些制度演进共同塑造了语言长期健康发展的治理基础设施。
+> [来源: [Leadership Council update — March 2026](https://blog.rust-lang.org/inside-rust/2026/04/06/leadership-council-update/) · [Jan & Feb PD Update](https://blog.rust-lang.org/inside-rust/2026/03/25/project-director-update/) · [LC Rep Selections](https://blog.rust-lang.org/inside-rust/2026/02/13/leadership-council-repr-selection/)] · 可信度: ✅
 
 ## 嵌入式测验（Embedded Quiz）
 

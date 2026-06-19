@@ -17,7 +17,7 @@
 ---
 
 > **来源**: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html) ·
-> [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/) · [std::assert_matches](https://doc.rust-lang.org/std/assert_matches/macro.assert_matches.html) ·
+> [Rust 1.96 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) · [releases.rs 1.96.0](https://releases.rs/docs/1.96.0/) · [std::assert_matches](https://doc.rust-lang.org/std/assert_matches/macro.assert_matches.html) ·
 > [RFC 2005 — `matches!`](https://github.com/rust-lang/rfcs/pull/2005) ·
 > [std::matches](https://doc.rust-lang.org/std/macro.matches.html)
 
@@ -446,10 +446,10 @@ fn main() {
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [std::assert_matches](https://doc.rust-lang.org/std/assert_matches/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.0 (Edition 2024)
 
-**文档版本**: 1.0
+**文档版本**: 1.1
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-05-21
-**状态**: ✅ 概念文件创建完成
+**最后更新**: 2026-06-19
+**状态**: ✅ 已对齐 Rust 1.96.0 稳定版发布内容
 
 ---
 

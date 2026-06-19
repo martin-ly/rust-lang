@@ -13,7 +13,7 @@
 > **双维定位**: P×Eva — 评估 WASM 与 Rust 的集成策略
 > **定位**:
 > 系统分析 Rust 在 **WebAssembly (Wasm)** 生态中的核心地位，
-> 探讨 `wasm32-unknown-unknown` / ``wasm32-wasip1` 或 `wasm32-wasip2`` 目标、
+> 探讨 `wasm32-unknown-unknown` / `wasm32-wasip1` 或 `wasm32-wasip2` 目标、
 > `wasm-bindgen [来源: [wasm-bindgen](https://github.com/rustwasm/wasm-bindgen)]`、
 > 组件模型以及 Rust 作为 Wasm 首选语言的工程原因。
 > **前置概念**: [Toolchain](./01_toolchain.md) · [FFI](../03_advanced/05_rust_ffi.md) · [Type System](../01_foundation/04_type_system.md)
@@ -42,6 +42,7 @@
     - [2.1 wasm32 目标三元组](#21-wasm32-目标三元组)
     - [2.2 wasm-bindgen 与 JS 互操作](#22-wasm-bindgen-与-js-互操作)
     - [2.3 Wasm 组件模型](#23-wasm-组件模型)
+    - [2.4 Rust 1.96 链接器行为变更：`--allow-undefined` 默认移除](#24-rust-196-链接器行为变更--allow-undefined-默认移除)
   - [三、应用场景分析](#三应用场景分析)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
@@ -192,7 +193,7 @@ Rust 的 Wasm 目标:
   └── 用途: 兼容 Emscripten 的编译（逐渐被淘汰）
 ```
 
-> **目标选择**: 浏览器场景用 `wasm32-unknown-unknown` + `wasm-bindgen`；服务端/边缘用 ``wasm32-wasip1` 或 `wasm32-wasip2`` + `wasmtime`。
+> **目标选择**: 浏览器场景用 `wasm32-unknown-unknown` + `wasm-bindgen`；服务端/边缘用 `wasm32-wasip1` 或 `wasm32-wasip2` + `wasmtime`。
 > [来源: [Rust Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html)]
 
 ---
@@ -268,6 +269,52 @@ graph TD
 > **使用建议**: 当前项目使用模块级 Wasm + wasm-bindgen；面向未来的组件化系统开始评估 wit-bindgen。
 > **关键洞察**: 组件模型是 Wasm 的**"跨语言 ABI"**——类似于 COM 或 gRPC，但基于 Wasm 沙箱和 WIT 类型系统。
 > [来源: [Bytecode Alliance — Component Model](https://component-model.bytecodealliance.org/)]
+
+---
+
+### 2.4 Rust 1.96 链接器行为变更：`--allow-undefined` 默认移除
+>
+
+> **生态状态提示**：本小节涉及 2026-05-28 发布的 Rust 1.96 中的 **breaking change**。
+
+Rust 1.96 起，所有 WebAssembly 目标在链接时**不再默认**向 `wasm-ld` 传递 `--allow-undefined`。此前，Rust 代码中未定义的 `extern "C"` 符号会被 wasm-ld 静默转换为 Wasm 模块的导入（通常来自 `"env"` 模块）；现在，未定义符号将像原生平台一样产生**链接错误**。
+
+**典型影响**（Rust 1.96 之前可编译，之后报错）：
+
+```rust,ignore
+// ❌ Rust 1.96 起产生链接错误：undefined symbol: js_log
+unsafe extern "C" {
+    fn js_log(n: u32);
+}
+```
+
+**推荐迁移方案**：使用 `#[link(wasm_import_module = "env")]` 显式声明导入模块。该写法在 Rust 1.96 之前和之后行为一致：
+
+```rust,ignore
+// ✅ 显式声明从宿主环境导入
+#[link(wasm_import_module = "env")]
+unsafe extern "C" {
+    fn js_log(n: u32);
+}
+```
+
+JS 侧实例化保持不变：
+
+```javascript
+let instance = await WebAssembly.instantiate(module, {
+    env: { js_log: n => console.log(n) }
+});
+```
+
+**临时回退方案**：若需快速恢复旧行为，可在 `RUSTFLAGS` 中传递：
+
+```bash
+RUSTFLAGS="-Clink-arg=--allow-undefined" cargo build --target wasm32-unknown-unknown
+```
+
+> **认知功能**：这一变更是 Rust WebAssembly 目标与原生平台行为对齐的重要一步，能提前捕获函数名拼写错误、依赖缺失等“幽灵导入”问题。
+> [来源: [Rust Blog — Changes to WebAssembly targets and handling undefined symbols](https://blog.rust-lang.org/2026/04/04/changes-to-webassembly-targets-and-handling-undefined-symbols/)] ·
+> [来源: [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/)] · 可信度: ✅
 
 ---
 
@@ -458,7 +505,7 @@ fn main() {
 // 或使用 Web Workers（通过 js-sys）
 ```
 
-> **修正**: `wasm32-unknown-unknown` 目标没有操作系统支持，因此 `std::thread`、`std::fs`、`std::net` 等模块不可用。WebAssembly 的线程支持通过 ``wasm32-wasip1` 或 `wasm32-wasip2`` 或 `wasm32-unknown-emscripten` 目标实现，或浏览器的 Web Workers。Rust 编译器在编译期拒绝 wasm32 上不支持的 API，防止运行时错误。这与 C/C++ 的 WASM 编译（可能链接失败或运行时崩溃）不同——Rust 在类型系统层面保证目标平台兼容性。[来源: [Rust and WebAssembly](https://rustwasm.github.io/book/)]
+> **修正**: `wasm32-unknown-unknown` 目标没有操作系统支持，因此 `std::thread`、`std::fs`、`std::net` 等模块不可用。WebAssembly 的线程支持通过 `wasm32-wasip1` 或 `wasm32-wasip2` 或 `wasm32-unknown-emscripten` 目标实现，或浏览器的 Web Workers。Rust 编译器在编译期拒绝 wasm32 上不支持的 API，防止运行时错误。这与 C/C++ 的 WASM 编译（可能链接失败或运行时崩溃）不同——Rust 在类型系统层面保证目标平台兼容性。[来源: [Rust and WebAssembly](https://rustwasm.github.io/book/)]
 
 ### 10.2 边界测试：`wasm-bindgen` 的类型映射（编译错误）
 
@@ -504,7 +551,7 @@ fn main() {
 }
 ```
 
-> **修正**: `wasm32-unknown-unknown` 目标无默认 panic handler（`no_std` 环境）。panic 时调用 `core::panicking::panic`，默认实现是 `loop {}`（无限循环）或 `unreachable`（WASM 陷阱）。调试困难：浏览器控制台显示 `RuntimeError: unreachable`，无 Rust panic 消息。解决方案：1) 使用 `console_error_panic_hook` crate（将 panic 消息输出到浏览器 console）；2) 自定义 panic handler `#![feature(panic_handler)]` + `#[panic_handler]`；3) 使用 ``wasm32-wasip1` 或 `wasm32-wasip2`` 目标（有标准 panic 输出）。这与 C 的 WASM（`abort()` 同样产生陷阱）或 AssemblyScript（有内置 panic 处理）类似——`wasm32-unknown-unknown` 是最小化目标，需手动配置错误处理。[来源: [console_error_panic_hook](https://github.com/rustwasm/console_error_panic_hook)] · [来源: [Rust WASM Book](https://rustwasm.github.io/book/)]
+> **修正**: `wasm32-unknown-unknown` 目标无默认 panic handler（`no_std` 环境）。panic 时调用 `core::panicking::panic`，默认实现是 `loop {}`（无限循环）或 `unreachable`（WASM 陷阱）。调试困难：浏览器控制台显示 `RuntimeError: unreachable`，无 Rust panic 消息。解决方案：1) 使用 `console_error_panic_hook` crate（将 panic 消息输出到浏览器 console）；2) 自定义 panic handler `#![feature(panic_handler)]` + `#[panic_handler]`；3) 使用 `wasm32-wasip1` 或 `wasm32-wasip2` 目标（有标准 panic 输出）。这与 C 的 WASM（`abort()` 同样产生陷阱）或 AssemblyScript（有内置 panic 处理）类似——`wasm32-unknown-unknown` 是最小化目标，需手动配置错误处理。[来源: [console_error_panic_hook](https://github.com/rustwasm/console_error_panic_hook)] · [来源: [Rust WASM Book](https://rustwasm.github.io/book/)]
 > **过渡**: WebAssembly 生态：Rust 的浏览器外运行时 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: WebAssembly 生态：Rust 的浏览器外运行时 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: WebAssembly 生态：Rust 的浏览器外运行时 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

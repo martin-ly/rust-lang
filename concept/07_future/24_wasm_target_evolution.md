@@ -1,3 +1,10 @@
+> **生态状态提示**：本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
+>
+> - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
+> - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
+
+---
+
 # WASM Target Evolution Preview
 
 > **代码状态**: [综述级 — 待补充代码]
@@ -44,7 +51,7 @@ fn main() {
 > 2) WASI 的 capability 更细粒度（per-directory、per-file）；
 > 3) 未来：网络、环境变量的 capability。
 >
-> Rust 的 WASI target：``wasm32-wasip1` 或 `wasm32-wasip2``（旧）→ ``wasm32-wasip1` 或 `wasm32-wasip2`p1`/``wasm32-wasip1` 或 `wasm32-wasip2`p2`（组件模型）。
+> Rust 的 WASI target：`wasm32-wasip1`（旧名 `wasm32-wasi`）→ `wasm32-wasip2`（组件模型）。
 > 这与浏览器的同源策略（类似 capability，但基于 origin）或 Android 的权限模型（安装时授予，运行时检查）不同——WASI 的 capability 是传递给运行时的，程序本身声明需要的能力。
 > [来源: [WASI](https://wasi.dev/)] ·
 > [来源: [Wasmtime](https://docs.wasmtime.dev/)]
@@ -80,7 +87,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-随着 WASM 能力扩展（线程、SIMD、GC、异常处理），需要不同的 target 来启用/禁用这些特性，如 `wasm32-wasi` 和未来的 `wasm64-unknown-unknown`。
+随着 WASM 能力扩展（线程、SIMD、GC、异常处理），需要不同的 target 来启用/禁用这些特性，如 `wasm32-wasip1` 和未来的 `wasm64-unknown-unknown`。
 </details>
 
 ---

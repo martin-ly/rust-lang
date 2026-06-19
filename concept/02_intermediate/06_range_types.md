@@ -16,7 +16,8 @@
 ---
 
 > **来源**: [RFC 3550 — New Range Types](https://github.com/rust-lang/rfcs/pull/3550) ·
-> [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/) ·
+> [Rust 1.96 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) ·
+> [releases.rs 1.96.0](https://releases.rs/docs/1.96.0/) ·
 > [std::ops::Range](https://doc.rust-lang.org/std/ops/struct.Range.html) ·
 > [core::range](https://doc.rust-lang.org/core/range/index.html) ·
 > [Iterator Trait](https://doc.rust-lang.org/std/iter/trait.Iterator.html) ·
@@ -351,10 +352,10 @@ let rev = 10..0;
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [RFC 3550](https://github.com/rust-lang/rfcs/pull/3550), [The Rust Programming Language](https://doc.rust-lang.org/book/)
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.0 (Edition 2024)
 
-**文档版本**: 1.0
+**文档版本**: 1.1
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-05-21
-**状态**: ✅ 概念文件创建完成
+**最后更新**: 2026-06-19
+**状态**: ✅ 已对齐 Rust 1.96.0 稳定版发布内容
 
 ---
 

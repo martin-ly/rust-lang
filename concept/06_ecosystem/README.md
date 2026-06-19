@@ -52,6 +52,7 @@ mindmap
       区块链[Blockchain / Smart Contract]
       游戏ECS[Game ECS]
       WASI[WASI / Wasm]
+      平台集成[AOSP / Chromium / Bare Metal]
       形式化塔[Formal Ecosystem Tower]
 ```
 
@@ -186,6 +187,7 @@ graph TB
 - [Rust 编译器基础设施深度解析](./47_compiler_infrastructure.md)
 - [Formal Verification Tools（形式化验证工具生态）](./47_formal_verification_tools.md)
 - [Data Engineering（数据工程）](./48_data_engineering.md)
+- [Rust 平台集成：AOSP、Chromium 与 Bare Metal](./58_platform_rust_integration.md)
 - [Rust 工业级案例研究](./48_industrial_case_studies.md)
 - [Game Engine Internals（游戏引擎内部原理）](./49_game_engine_internals.md)
 - [Distributed Consensus（分布式共识）](./50_distributed_consensus.md)

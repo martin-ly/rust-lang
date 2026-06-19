@@ -1,6 +1,135 @@
 # 更新日志 (Changelog)
 
-> **最后更新**: 2026-06-10
+> **最后更新**: 2026-06-19
+
+---
+
+## [3.0.1] - 2026-06-19 — 权威内容对齐冲刺（Rust 1.96 / 1.97 / Project Goals 2026）
+
+### 📡 权威来源对齐
+
+- **Rust 1.96.0（2026-05-28）**
+  - `concept/02_intermediate/05_assert_matches.md` / `06_range_types.md`: 更新最后更新时间，补充官方博客来源，标记为 1.96 stable 对齐
+  - `crates/c02_type_system/src/rust_196_features.rs`: 修复 `core::range` 示例（`RangeInclusive` 字段为 `last`），将 `ignore` doctest 转为可编译 doctest，新增 `test_core_range_demo` / `test_assert_matches_demo`
+- **Rust 1.97 Beta 冲刺（2026-07-09）**
+  - `concept/07_future/rust_1_97_preview.md`: 更新跟踪版本至 nightly 1.98.0 (2026-06-17)，同步 releases.rs 2026-06-19 的 ongoing stabilization PRs，新增 `never` type / `derive(CoercePointee)` / ATPIT / `proc_macro_hygiene` / `local_key_cell_update` 等状态
+  - `concept/07_future/05_rust_version_tracking.md`: 状态 v1.34 → v1.35，记录本次对齐来源
+- **Rust 生态与治理**
+  - Rust Foundation Maintainers Fund 正式发布（2026-06-02）：RFC #3931 通过，设立 Funding team 与 Maintainer in Residence 计划，为 Rust 核心维护者提供稳定长期资助。来源: [Rust Blog](https://blog.rust-lang.org/2026/06/02/launching-the-rust-foundation-maintainers-fund.html)
+- Aquascope 可视化集成调研与 POC：完成 `reports/AQUASCOPE_INTEGRATION_RESEARCH_2026_06_19.md`；实测 `mdbook-aquascope v0.4.0` 可在当前 nightly 安装，但 `aquascope_front` 因 rustc 内部 API / miri 不兼容无法在当前 nightly 编译，且其锁定的 `nightly-2026-05-01` 已从 rustup 移除，因此本地 Aquascope 生成当前不可行；建议改用外部链接引用 Brown University Interactive Book 的可视化
+- **Project Goals 2026**
+  - `concept/07_future/borrow_sanitizer.md`: 修复全部占位 URL，补充 April 2026 架构更新（shadow stack、retag intrinsics）、RustConf 2026 演讲接受状态
+  - `concept/07_future/20_borrowsanitizer_preview.md`: 明确标注为历史参考文件
+- **CVE-2026-5222 / CVE-2026-5223**
+  - `concept/06_ecosystem/19_security_practices.md`: 大幅扩展安全公告细节，包括攻击条件、影响版本、修复根因、缓解措施
+- **Rust 1.96 WebAssembly / docs.rs 重大变更（2026-04-04）**
+  - `concept/06_ecosystem/11_webassembly.md`: 新增 §2.4，说明 Rust 1.96 移除 `wasm-ld --allow-undefined` 默认标志，提供 `#[link(wasm_import_module = "env")]` 推荐迁移方案与 `-Clink-arg=--allow-undefined` 临时回退方案
+  - `concept/06_ecosystem/14_documentation.md`: 在 docs.rs 边界说明中补充 2026-05-01 默认构建目标从 5 个缩减为 1 个的变更，以及 `[package.metadata.docs.rs]` 配置要点
+  - `concept/07_future/05_rust_version_tracking.md`: 修正 WebAssembly / docs.rs 官方博客 URL，补充 `#[link(wasm_import_module = "env")]` 推荐做法
+- **Rust 社区挑战洞察（2026-03-20）**
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §13，系统整理 Rust Vision Doc group 发布的通用挑战（编译性能、借用检查、Async、生态 crates）与领域特定挑战（嵌入式、安全关键、GUI），并映射到本项目对应章节
+- **工具链更新：rustup 1.29.0（2026-03-05）**
+  - `concept/06_ecosystem/01_toolchain.md`: 新增 §2.6，覆盖并发下载/解压、`RUSTUP_CONCURRENT_DOWNLOADS`、新增 Solaris host 平台、tcsh/xonsh shell 支持、rust-analyzer 代理、空环境变量处理、`rustup check` 退出码等
+- **Cargo Build Dir Layout v2 测试征集（2026-03-13）**
+  - `concept/06_ecosystem/01_toolchain.md`: 新增 §2.7，说明 `build-dir` 中间产物布局变更、已知影响模式（从 test 推断 bin 路径、build script 查找 target-dir、直接读取 deps/ 中间产物）以及 `-Zbuild-dir-new-layout` 测试方法；评估本项目 CI 与脚本暂不受影响
+- **2025 State of Rust Survey 补充**
+  - `concept/07_future/05_rust_version_tracking.md`: 修正官方博客 URL，补充最受期待特性（generic const expressions、improved trait methods）、编辑器趋势（Zed/agentic 编辑器上升）与稳定/nightly 使用趋势
+- **crates.io 恶意 crate 通知政策澄清（2026-06-19）**
+  - `concept/06_ecosystem/19_security_practices.md`: 更新 §6.3，明确"始终发布 RustSec advisory、博客仅用于有实际使用/利用证据的 case"原则，保持 typosquat 案例表
+- **Google Summer of Code 2026（2026-02-19 / 2026-04-30）**
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.7，记录 Rust Project 参与 GSoC 2026、提案截止日期及 13 个入选项目（GPU offloading、Wild 链接器、Miri 调试器、a-mir-formality fuzzing 等）
+- **Rust Project 首次 Outreachy（2026-05-04）**
+  - `concept/07_future/05_rust_version_tracking.md`: 原 §12.7 → §12.8，补充 4 名实习生项目详情
+- **Rust 调试体验调查 2026（2026-02-23）**
+  - `concept/06_ecosystem/01_toolchain.md`: 新增 §5.7，梳理理想调试体验四目标（多调试器/类型可视化/async 调试/表达式求值）及现状挑战
+- **安全关键系统 Vision Doc 洞察（2026-01-14）**
+  - `concept/07_future/14_ferrocene_preview.md`: 新增 §3.1，整理 Rust 在汽车/航空/医疗/工业领域落地的真实张力、已部署案例与六大建议
+- **crates.io 平台安全能力演进（2026-01-21）**
+  - `concept/06_ecosystem/19_security_practices.md`: 新增 §6.4，覆盖 Security Tab、Trusted Publishing Only Mode、GitLab CI/CD 支持、Blocked Triggers、SLOC、`pubtime`、下载量过滤、token 加密等
+- **Project Goals 2025H2 收官更新（2026-01-05）**
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 2025H2 收官段落，覆盖 "Beyond the &" / Reborrow traits / Cranelift 资金关闭 / Higher-level Rust / Unblocking dormant traits / a-mir-formality / Const Generics / FLS / BorrowSanitizer / autodiff/offload / Sized hierarchy 等 13 个方向
+- **Cargo 1.93 / 1.94 开发周期（2026-01-07 / 2026-02-18）**
+  - `concept/06_ecosystem/01_toolchain.md`: 新增 §5.8，梳理 Build Dir Layout v2、Target Dir 细粒度锁、Structured Logging、`pubtime`、Config Include 稳定化、TOML 1.1、`cargo-cargofmt`、`lockfile-path`、Unicode 诊断等进展
+- **crates.io Svelte 前端公测（2026-04-17）**
+  - `concept/06_ecosystem/19_security_practices.md`: 在 §6.4 表中补充 Svelte 5 迁移与公测入口
+- **Rust Foundation 2025 年度报告与战略（2026-01-27）**
+  - `concept/07_future/05_rust_version_tracking.md`: 为 §12.3 战略表补充年度报告与战略计划官方链接
+- **2026 Project Goals 流程草图（2026-02-03）**
+  - `concept/07_future/05_rust_version_tracking.md`: 在 Project Goals 段落补充年度制流程、旗舰主题、Team Ask 分级、Champion 机制
+- **维护者基金哲学（2026-01-12）**
+  - `concept/07_future/03_evolution.md`: 新增 §6.8，界定维护工作的两层含义（Keeping the lights on / Enabling evolution）及乘数效应
+- **基础设施团队 2026 Q1 复盘与 Q2 计划（2026-04-14）**
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.11，覆盖 GitHub Rulesets、CI 安全（Renovate/zizmor）、dev desktop、docs.rs 扩容、SAML SSO、Triagebot 增强、YubiKey 等
+- **项目管理更新 — March 2026（2026-04-09）**
+  - `05_rust_version_tracking.md`: 新增 §12.12，覆盖项目管理看板公开、2026 Goals RFC、FLS release notes、可验证镜像原型、RFMF RFC、Outreachy、Rust for Linux/CPython 进展
+- **项目管理更新 — May 2026（2026-06-11）**
+  - `05_rust_version_tracking.md`: 新增 §12.13，覆盖 RustWeek/All Hands、RFMF RFC 合并与 Maintainer in Residence、镜像 YubiKey/TUF、Rust for Linux 可恢复整数溢出、Goals 替代 MCP/ACP/experiments
+- **March 2026 Project Director Update（2026-05-04）**
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.14，覆盖 Rust 基金会 3 月董事会要点（AI 研究倡议、RIL 新成员、crates.io 可持续性、Rust Ecosystem Fund、Canonical Gold、typosquatting 响应、RustConf 品牌重塑）
+- **Maintainer spotlight: Tiffany Pek Yuan（2026-06-03）**
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.15，记录 Tiffany 从 GSoC 实习生到 Compiler/Formality 团队成员、再到 Outreachy 导师的成长路径，以及对维护者资助与社区留存的看法
+- **Josh 跨仓库代码管理工具（2026-06-04）**
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.16，梳理 Rust 项目为何放弃 git subtree、引入 Josh（Just One Single History）实现 `rust-lang/rust` 与 Miri/RA/compiler-builtins/stdarch/dev guide 等子项目的高速双向同步
+- **Leadership Council 更新 — March 2026（2026-04-06）**
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.17，覆盖代表变动（Josh Triplett / Rémy Rakic / Mara Bos）、2026 Project Priorities Budget 分配、RFMF RFC#3931、AI 贡献政策 RFC#3936 / #273、校友政策与 All-Hands 嘉宾邀请
+- **January & February 2026 Project Director Update（2026-03-25）**
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.18，覆盖 Ubiratan Soares 入职、cargo-capslock、crates.io Security Tab 上线与 Svelte 前端迁移、C++ 互操作行动计划、Rust Innovation Lab / End User Group、AWS 额度捐赠
+- **Leadership Council March 2026 Representative Selections（2026-02-13）**
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.19，记录 Compiler / Devtools / Launching Pad 三团队代表选举规则、任期限制与公司 affiliation 上限
+- **项目管理更新 — April 2026（2026-05-13）**
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.20，覆盖 2026 goals RFC 接受、RustWeek/All Hands、C++ 互操作 `splat` lang experiment、Rust for Linux `NoCell`/`ptr_metadata`/null-ptr-deref/edition 迁移工具、Content team $15k 资金
+- **项目管理更新 — February 2026（2026-03-27）**
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.21，覆盖 Nurzhan Saken 入职、PM backlog/board 与 `program-team` 仓库、T-program alias、Style 团队工作模式、Rust for Linux MSRV 与待稳定特性
+- **项目管理更新 — January 2026（2026-02-11）**
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.22，覆盖 ~60 目标提案与 Roadmaps/Application areas、cargo-script 接近稳定、crates.io TUF 镜像验证、Rust for CPython 协作
+- **January 2026 Project Director Update（2026-02-09）**
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.23，覆盖 2026–2028 战略批准、2026 预算、GitLab Trusted Publishing 公测、Capslock 原型、crates.io 漏洞扫描 RFC FCP、RustConf 提前筹备、培训提供商认证
+- **基础设施团队 2025 Q4 复盘与 Q1 2026 计划（2026-01-13）**
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.24，覆盖 Fastly CDN、新 Bors 合并 `rust-lang/rust` PR、rustc-perf 并行 benchmark、默认分支 master→main、Triagebot 增强、Google Workspace SAML、GitHub Rulesets 迁移
+- **Rust 1.96.0 预发布测试（2026-05-26）**
+  - `concept/07_future/05_rust_version_tracking.md`: 在 §十二 补充预发布测试命令、索引链接与 Release team 流程改进征集
+
+### 🏗️ 平台集成与练习扩展
+
+- **Google Comprehensive Rust 平台专题对齐**
+  - 新建 `concept/06_ecosystem/58_platform_rust_integration.md`：系统覆盖 Android AOSP（`Android.bp`、AIDL、Binder、C/C++/Java 互操作）、Chromium（GN 构建、`cxx`、第三方 crate 审计）、Bare Metal（`no_std`/PAC/HAL/UART 驱动）
+  - 更新 `concept/06_ecosystem/README.md`：在 mindmap 与补充文件索引中加入平台集成入口
+- **Google 课程练习本地化**
+  - 新增 `exercises/src/type_system/ex07_builder_pattern.rs`：HTTP Request Builder 模式练习
+  - 新增 `exercises/src/type_system/ex08_luhn_algorithm.rs`：Luhn 校验算法练习
+  - 新增 `exercises/src/concurrency/ex06_link_checker.rs`：多线程链接检查器练习（使用 thread + mpsc + Arc/Mutex）
+  - 更新对应 `mod.rs` 入口与模块文档
+
+### 📚 Google Comprehensive Rust 对齐
+
+- 完成映射报告 `reports/GOOGLE_COMPREHENSIVE_RUST_MAPPING_2026_06_19.md`，覆盖 Day 1-4 基础路径与 Android / Chromium / Bare Metal / Concurrency / Idiomatic Rust / Unsafe 六个专题轨道
+- 识别核心缺口：**API 命名约定**系统整理缺失、Android/Chromium 平台实操覆盖较轻
+- 新建 `concept/02_intermediate/22_api_naming_conventions.md`：系统整理 `new` / `with_` / `try_` / `is_` / `as_` / `to_` / `into_` / `from` / `mut_` / `by` 等命名模式，含可编译示例与练习题
+- `concept/00_meta/LEARNING_MVP_PATH.md`: 在「外部学习路径参考」表中新增 Google Comprehensive Rust 入口，链接到映射报告
+
+### 🧹 生态过时内容清理
+
+- 确认代码层清理已完成：`async-std` 无实际依赖（仅注释归档），`backoff` 无实际依赖（仅根 Cargo.toml 注释），`c10_networks` 已迁移至原生 AFIT，`c12_wasm` 已迁移至 `wasm32-wasip1/p2`
+- 文档层批量治理完成（详见 `reports/ARCHIVED_ECOSYSTEM_REFERENCES_CLEANUP_PLAN_2026_06_19.md`）：
+  - 77 个活跃文档顶部添加生态状态提示，正文 `wasm32-wasi` 替换为 `wasm32-wasip1`
+  - 97 个归档/报告/研究文档顶部添加历史文档警告头
+  - 修复 `concept/06_ecosystem/` 与 `concept/07_future/28_rust_for_webassembly.md` 中早期 `wasm32-wasi` → `` `wasm32-wasip1` 或 `wasm32-wasip2` `` 批量替换导致的 Markdown 反引号嵌套异常（6 个文件），并修复 2 个损坏的 Rust Platform Support URL
+
+### 📚 TRPL 3rd Ed / Brown University Interactive Book 对齐
+
+- 生成审计报告 `reports/TRPL_3RD_ED_BROWN_BOOK_ALIGNMENT_AUDIT_2026_06_19.md`
+- `concept/00_meta/LEARNING_MVP_PATH.md`: 在「外部学习路径参考」中补充 TRPL 3rd Ed 与 Brown 书，并为每个 Day 标注对应 TRPL 章节
+- `concept/01_foundation/01_ownership.md` / `02_borrowing.md`: 主要来源升级为 TRPL 3rd Ed + Brown University Interactive Book，引用 OOPSLA 2023/2024 研究
+- `concept/01_foundation/02_borrowing.md`: 新增「借用检查器错误修复模式（Fixing Ownership Errors）」一节，整合 Brown 书的 5 种常见错误修复案例
+- `concept/03_advanced/02_async.md`: 主要来源补充 Brown University Interactive Book: Ch17
+- Brown University「Ownership Inventory」概念清单：新建 `reports/BROWN_BOOK_OWNERSHIP_INVENTORY_MAPPING_2026_06_19.md` 与 `concept/01_foundation/28_ownership_inventories_brown_book.md`；在 `01_ownership.md` / `02_borrowing.md` / `03_lifetimes.md` / `08_collections.md` / `LEARNING_MVP_PATH.md` 添加 Inventory 自测入口；新增 `exercises/src/ownership_borrowing/ex06`~`ex12` 共 7 个可编译练习覆盖 Inventory 核心场景；修正 `LEARNING_MVP_PATH.md` 中 Inventory #3 的错误章节映射
+
+### ✅ 质量基线
+
+- `cargo check --workspace --all-features`: 通过
+- `cargo clippy --workspace --all-features`: 通过
+- `cargo test --workspace`: 通过（含新增 doctest）
+- `cargo audit`: 通过（仅 4 条已允许警告，网络恢复后 advisory-db 拉取成功）
 
 ---
 

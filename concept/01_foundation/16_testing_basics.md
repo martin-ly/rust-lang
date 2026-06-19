@@ -1,3 +1,10 @@
+> **生态状态提示**：本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
+>
+> - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
+> - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
+
+---
+
 > **内容分级**: [综述级]
 > **本节关键术语**: 测试 (Testing) · 单元测试 (Unit Test) · 集成测试 (Integration Test) · assert · #[cfg(test)] — [完整对照表](../00_meta/terminology_glossary.md)
 >

@@ -1,3 +1,10 @@
+> **生态状态提示**：本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
+>
+> - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
+> - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
+
+---
+
 > ⚠️ **归档说明**: async-std [已归档] 已于 2025年3月停止维护。本文档中 async-std [已归档] 相关内容仅作历史参考，新项目请使用 Tokio 或 smol。
 >
 # Rust 异步运行时深度对比 2025: Glommio vs Tokio vs Smol

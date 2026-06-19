@@ -1372,3 +1372,12 @@ Rust 1.31 引入的 **Non-Lexical Lifetimes (NLL)** 使借用的有效期基于*
 
 在 NLL 之前（Rust 2015 edition，1.30 及更早），借用有效期到作用域结束（`}`），此代码会编译失败。
 </details>
+
+---
+
+## 十二、延伸阅读与自测
+
+> 学完生命周期后，建议通过 **Ownership Inventory #3** 检验对「引用有效期、函数签名生命周期、结构体生命周期」的理解：
+>
+> - 本地映射与样题：[所有权清单自测：Brown University Ownership Inventory](./28_ownership_inventories_brown_book.md)
+> - Brown Book 交互式题目：[Ownership Inventory #3](https://rust-book.cs.brown.edu/ch10-04-inventory.html)

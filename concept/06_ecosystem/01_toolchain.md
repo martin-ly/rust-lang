@@ -1,3 +1,10 @@
+> **生态状态提示**：本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
+>
+> - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
+> - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
+
+---
+
 # Toolchain（工具链与 Cargo）
 
 > **代码状态**: ✅ 含可编译示例
@@ -219,6 +226,64 @@ graph LR
 | 增量编译缓存命中 | 依赖图与源码未变更 | ⟹ 缩短反馈循环 | `rustc` / `sccache` | 缓存失效 / 全量重建 |
 
 > **层次一致性**：上表将 L6 工具链行为映射到 L1-L3 的具体保证；失效条件揭示"工具链不是银弹"的工程边界。
+
+### 2.6 rustup 1.29.0 工具链管理更新（2026-03-05）
+>
+
+> **生态状态提示**：本小节涉及 2026-03-05 发布的 rustup 1.29.0。
+
+rustup 1.29.0 是 Rust 工具链管理器的一次重要更新，主要聚焦**安装性能**与**开发者体验**：
+
+| 特性 | 说明 | 与本项目关联 |
+|:---|:---|:---|
+| **并发下载与解压** | `rustup update` / `rustup toolchain` 现在可并发下载组件，并在下载过程中同步解压 | 显著减少 CI/新成员环境搭建时间 |
+| `RUSTUP_CONCURRENT_DOWNLOADS` | 环境变量控制并发下载数（默认 `2`；设为 `1` 恢复顺序下载） | 网络受限环境可手动调优 |
+| **并发检查更新** | `rustup check` 并发检查各工具链更新 | 日常更新检查更快 |
+| **新增 host 平台** | `sparcv9-sun-solaris`、`x86_64-pc-solaris` | 扩展 Solaris 生态支持 |
+| **新增 Shell 支持** | `rustup-init` 自动为 `tcsh`、`xonsh` 配置 `$PATH` | 覆盖更多开发环境 |
+| **rust-analyzer 代理** | 若 rustup 管理的 `rust-analyzer` 不存在，会使用 `PATH` 中的版本 | 方便 Neovim/Helix 用户自定义 rust-analyzer |
+| **空环境变量处理** | 空环境变量被视为未设置，便于重置配置覆盖 | 避免 `RUSTFLAGS=""` 等隐式覆盖 |
+| **`rustup check` 退出码** | 有更新返回 `100`，无更新返回 `0` | 便于脚本/CI 判断是否需要更新 |
+
+> **来源**: [rustup CHANGELOG — 1.29.0](https://github.com/rust-lang/rustup/blob/main/CHANGELOG.md) · [Rust Blog — Announcing rustup 1.29.0](https://blog.rust-lang.org/2026/03/12/Rustup-1.29.0/) · 可信度: ✅
+
+---
+
+### 2.7 Cargo Build Dir Layout v2 测试征集（2026-03-13）
+>
+
+> **生态状态提示**：本小节涉及 Cargo 正在评估的 **breaking internal change**。`target/` 中最终产物的布局**不变**；变化的是 `build-dir`（中间构建产物）的组织方式。
+
+自 Cargo 1.91 起，开发者可通过 `CARGO_BUILD_BUILD_DIR` 将**中间构建产物**（`build-dir`）与**最终产物**（`target-dir`）分离存放。2026-03-13，Cargo 团队宣布正在改变 `build-dir` 的目录布局，并征集社区测试：
+
+| 当前布局 | 新布局 v2 | 影响 |
+|:---|:---|:---|
+| 按内容类型组织（`.fingerprint/`、`build/`、`deps/` 等） | 按包名 + 构建单元哈希分目录 | 中间产物路径发生结构性变化 |
+| build script 的 `OUT_DIR` 路径可预测性高 | 路径嵌套变深，按包/哈希隔离 | 依赖固定路径的脚本/工具可能失效 |
+
+**已知可能受影响的模式**：
+
+1. **从 `[[test]]` 路径推断 `[[bin]]` 路径**：应改用 `std::env::var_os("CARGO_BIN_EXE_*")` 或 `env!("CARGO_BIN_EXE_*")`。
+2. **build script 通过 `OUT_DIR` 查找 `target-dir`**：需更新为支持新布局。
+3. **用户脚本直接读取 `deps/` 中的中间产物**：应改用 Cargo 提供的稳定接口。
+
+**如何测试**：
+
+```bash
+# 需要 nightly 2026-03-10+
+cargo test -Zbuild-dir-new-layout
+# 或单独验证 build-dir 分离
+cargo test  # 同时设置 CARGO_BUILD_BUILD_DIR=build
+```
+
+> **对本项目的意义**：
+> - 当前 CI 使用 `target/doc`、`target/release/`、`target/criterion/` 等**最终产物路径**，不受 `build-dir` 布局变化影响。
+> - 脚本 `scripts/code_block_compiler.py` 与 `scripts/verify_compile_fail_v3.py` 使用 `target/tmp/...`，也在 `target-dir` 下，暂不受影响。
+> - 若未来启用 `CARGO_BUILD_BUILD_DIR=build` 以加速 CI 缓存，需重新验证 build script 与测试辅助脚本。
+
+> **来源**: [Rust Blog — Call for Testing: Build Dir Layout v2](https://blog.rust-lang.org/2026/03/13/call-for-testing-build-dir-layout-v2/) · 可信度: ✅
+
+---
 
 > **过渡**：以上矩阵回答了"工具有什么"和"工具保证什么"，接下来深入 Cargo 的 Workspace、Features 和 SemVer 机制，理解"工具如何协作"。
 
@@ -994,7 +1059,45 @@ repotoire analyze --path ./src --format json
 
 > **repotoire 洞察**: **repotoire 代表了 Rust 在开发者工具链中的新前沿**——利用 Rust 的性能和内存安全构建大规模代码分析基础设施。其图驱动的架构（代码即图）与 Rust 的所有权模型天然契合：图节点的生命周期由分析引擎精确管理，避免传统 C/C++ 代码分析工具中常见的内存泄漏和悬垂指针问题。[来源: [repotoire GitHub](https://github.com/Zach-hammad/repotoire)] · 可信度: 🟡（项目早期，快速发展中）
 
+### 5.7 Rust 调试生态与 2026 调试体验调查
+
+**[Rust Blog, 2026-02-23]** Rust Project 启动了 **Rust Debugging Survey 2026**，目标是识别当前 Rust 开发者在调试体验上的具体痛点，为后续调试基础设施投资提供数据支撑。调查持续至 2026-03-13，结果将在博客公布。
+
+**理想调试体验的四个目标**：
+
+| 目标 | 现状挑战 | 相关工具/工作 |
+| :--- | :--- | :--- |
+| 多调试器、多版本、多 OS 支持 | GDB/LLDB/CDB 支持质量不一致 | `rust-gdb`、`rust-lldb`、Windows 调试器集成 |
+| 高质量类型可视化 | 复杂类型（enum、async state machine）展示不友好 | debugger visualizers（`natvis`、`lldb` 类型摘要） |
+| `async` 代码一流调试 | async/await 状态机展开困难 | `tokio-console`、`-Zinstrument-mcount`、Miri |
+| 调试器中评估 Rust 表达式 | 表达式求语法/语义支持有限 | `rustc` debuginfo 生成改进 |
+
+> **关键洞察**: 调试体验是 Rust 企业采用的隐性门槛。虽然内存安全消除了大量"调试野指针"场景，但 async 状态机、复杂 enum 和跨 OS 调试器差异仍是生产力瓶颈。2026 年调查表明 Rust Project 已将"世界级调试支持"纳入正式路线图。
+> [来源: [Rust Blog — Rust Debugging Survey 2026](https://blog.rust-lang.org/2026/02/23/rust-debugging-survey-2026.html)] · 可信度: ✅
+
 > **过渡**：工具的价值最终体现在从源码到二进制的高效、正确转换。下图可视化 Rust 编译器从 `.rs` 文件到可执行文件的完整管线。
+
+### 5.8 Cargo 1.93 / 1.94 开发周期亮点（2026-01-07 / 2026-02-18）
+
+Cargo 团队在 2026 年初的两个开发周期中推进了多项基础设施改进：
+
+| 主题 | 1.93 状态 | 1.94 状态 | 形式模型 / 工程意义 |
+| :--- | :--- | :--- | :--- |
+| **Build Dir Layout v2** | 过渡计划提出，crater / 测试套件 / 手动测试 | 内部文档更新，crater 二次运行，`CARGO_BIN_EXE_*` 运行时可用性推进 | 中间产物布局从"按类型"到"按构建单元"，影响依赖 `target/` 内部路径的工具 |
+| **Target Dir 细粒度锁** | 设计探索：拆分 build dir 与 artifacts dir 锁 | `#16155` 已合并；`cargo check` 与 `cargo clippy`/`cargo test` 并行度提升，proc-macro/build script 仍 contention | 减少 rust-analyzer 与命令行 cargo 的相互阻塞 |
+| **Structured Logging / Build Analysis** | `cargo report timings` 初版；`[build.analysis] enabled = true` | `cargo report rebuild`、`cargo report sessions`、man pages；移除 `--timings=FMT` | 从"单次构建可见"到"历史构建可审计"，支持"为什么重建"的追溯 |
+| **`pubtime` / 时间旅行解析** | Cargo 支持 Summary `pubtime`；crates.io staging 实现 | `cargo generate-lockfile --publish-time` 可探索；`minimumReleaseAge` 需求讨论中 | 为渐进式版本回滚（gradual rollout）奠基 |
+| **Config Include** | 支持数组/数组表形式；讨论未来 optional/template/glob | **已在 #16284 稳定化** | 大型仓库/团队可复用 `.cargo/config.toml` 片段 |
+| **TOML 1.1** | — | Cargo 已合并 TOML 1.1 支持（#16415）；注意 `cargo package` 会重写为 TOML 0.5 | 允许 inline table 内换行，但需关注 MSRV |
+| **`cargo-cargofmt`** | — | 实验性 `Cargo.toml` 格式化工具，探索 style guide | 未来可能统一 Cargo.toml 风格 |
+| **`lockfile-path`** | 不稳定 `--lockfile-path` | 改为 `resolver.lockfile-path` 配置字段（#16510），CLI flag 后续移除 | 更灵活地指定 lockfile 位置 |
+| **诊断渲染** | `-Zrustc-unicode` 加入 Cargo；annotate-snippets 风格诊断 | — | Unicode 框线诊断，提升可读性 |
+| **Linting** | `implicit_minimum_version_req` lint | — | 推动精确的依赖版本声明 |
+| **`cargo clean --workspace`** | `--workspace` 支持；`-p` 加速 | 持续优化 | 大型 workspace 清理效率 |
+
+> **关键洞察**: Cargo 正在从"构建执行器"演进为"构建可观测平台"——结构化日志、`pubtime`、细粒度锁共同支持大规模 Rust monorepo 和企业 CI 的可预测性。Build Dir Layout v2 与 Target Dir 细粒度锁是这场演进的基础设施层。
+> [来源: [Inside Rust — This Development-cycle in Cargo: 1.93](https://blog.rust-lang.org/inside-rust/2026/01/07/this-development-cycle-in-cargo-1.93.html)] ·
+> [Inside Rust — This Development-cycle in Cargo: 1.94](https://blog.rust-lang.org/inside-rust/2026/02/18/this-development-cycle-in-cargo-1.94.html)] · 可信度: ✅
 
 ---
 

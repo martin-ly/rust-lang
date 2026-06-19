@@ -243,6 +243,38 @@ Ferrocene 证据包构成:
 > Rust 的所有权模型直接针对这一痛点。
 > [来源: [Ferrous Systems — Industry Reports](https://ferrous-systems.com/blog/)]
 
+### 3.1 2026 Vision Doc：安全关键 Rust 的真实落地洞察
+
+**[Rust Blog, 2026-01-14]** Rust Project 通过 Vision Doc 用户研究访谈，系统梳理了 Rust 在**安全关键系统**（汽车、航空、医疗、工业自动化）落地时的真实张力：编译器保证与生态系统支持之间的差距。
+
+**核心发现**：
+
+| 维度 | 低关键性（QM / ASIL A） | 高关键性（ASIL B+ / SIL 2+） |
+| :--- | :--- | :--- |
+| **第三方 crate 使用** | 可自由使用 crates.io，后期加固 | 难以论证，通常重写、内部化或加抽象隔离层 |
+| **工具链选择** | 跟随最新稳定版 | 固定版本，但面临依赖漂移（crate 要求最新编译器） |
+| **目标平台** | 选择丰富 | QNX 等目标仅有 `no_std` 支持，Tier 3 目标稳定性不可接受 |
+| **async 运行时** | 可用 Tokio 等生态运行时 | 缺少可认证/可qualify的 async 运行时 |
+| **C/C++ 互操作** | `cxx`/`autocxx` 可用 | FFI 边界是安全论证难点，需严格审计 |
+
+**已部署案例**（来自访谈）：
+
+- **移动机器人**：通过 IEC 61508 SIL 2 认证，开发者估计约 **90% 传统静态分析检查已被 Rust 编译器覆盖**。
+- **医疗设备 ICU 软件**：IEC 62304 Class B，Rust 组件替换 Python 后实现约 **100 倍性能提升**。
+- **汽车 OEM**：在 QM 级别使用 crates.io，ASIL D 目标部分通过抽象层预留替换路径。
+
+**六大建议**：
+
+1. **帮助安全关键社区自助**：以 Ferrocene Language Specification (FLS) 为成功模式，企业投入 + Rust Project 维护。
+2. **建立生态级 MSRV/LTS 约定**：减少"固定工具链 vs. 依赖要求最新版"的冲突。
+3. **将 target tier policy 转化为安全关键入场清单**：明确各目标的 `no_std`/std 状态、最后验证版本、主要阻塞项。
+4. **文档化依赖生命周期模式**：QM 阶段"先用后清"、ASIL B+"避免或隔离第三方 crate"。
+5. **定义安全案例友好的 async 运行时需求**：与 async wg/libs 团队合作。
+6. **将 C/C++ 互操作视为安全故事的一部分**：提供可审计、可同步的 FFI 边界指导与工具。
+
+> **关键洞察**：安全关键 Rust 的最大障碍**不是语言本身**，而是**证据友好的软件栈组装能力**——包括认证工具链、稳定目标、可控依赖和可论证的 FFI 边界。Ferrocene 解决了编译器认证，但生态其余部分仍需社区与行业共建。
+> [来源: [Rust Blog — What does it take to ship Rust in safety-critical?](https://blog.rust-lang.org/2026/01/14/what-does-it-take-to-ship-rust-in-safety-critical.html)] · 可信度: ✅
+
 ---
 
 ## 四、反命题与边界分析

@@ -1,3 +1,12 @@
+> **⚠️ 历史文档提示**：本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用。
+> 其中技术观点反映了对应时间点的社区状态，可能与当前（Rust 1.96+）推荐实践不一致。
+> 学习时请以 `concept/`、`knowledge/` 及官方文档为准。
+>
+> - `async-std` 已进入维护模式，新项目建议优先考虑 Tokio / smol。
+> - `wasm32-wasi` 已重命名为 `wasm32-wasip1`；WASI Preview 2 目标为 `wasm32-wasip2`。
+
+---
+
 # c06_async 语义对齐分析与修正报告 2025
 
 ## 📊 目录

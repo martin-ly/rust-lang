@@ -219,7 +219,7 @@ pub fn process_image_data(data: &[u8], width: u32, height: u32) -> Vec<u8> {
 | AOT 编译 | ✅ | ✅ | ✅ |
 | 许可 | Apache-2.0 | MIT | Apache-2.0 |
 
-> **关键洞察**: 独立运行时的核心价值是 **"沙箱化 + 可移植 + 低启动延迟"**。Rust 程序编译为 ``wasm32-wasip1` 或 `wasm32-wasip2`` 后，可在任何支持 WASI 的运行时上执行，无需重新编译。这比 Docker 镜像更轻（无操作系统层），比原生二进制更安全（沙箱默认启用）。
+> **关键洞察**: 独立运行时的核心价值是 **"沙箱化 + 可移植 + 低启动延迟"**。Rust 程序编译为 `wasm32-wasip1` 或 `wasm32-wasip2` 后，可在任何支持 WASI 的运行时上执行，无需重新编译。这比 Docker 镜像更轻（无操作系统层），比原生二进制更安全（沙箱默认启用）。
 > [来源: [Wasmtime Security](https://docs.wasmtime.dev/security.html)]
 
 ---
@@ -480,7 +480,7 @@ fn main() {
 }
 ```
 
-> **来源**: [Rust `wasm32-wasip1` 或 `wasm32-wasip2` Target](<https://doc.rust-lang.org/rustc/platform-support/`wasm32-wasip1`> 或 `wasm32-wasip2`p1.html)
+> **来源**: [Rust `wasm32-wasip1` 或 `wasm32-wasip2` Target](https://doc.rust-lang.org/rustc/platform-support/wasm32-wasip1.html)
 
 ---
 
@@ -609,9 +609,9 @@ pub fn rgba_to_grayscale_simd(rgba: &[u8], gray: &mut [u8]) {
 
 ### 7.2 wasm32-unknown-unknown 与 `wasm32-wasip1` 或 `wasm32-wasip2` 的安全边界
 
-> **[Rust Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html)** `wasm32-unknown-unknown` 是纯浏览器 Wasm 目标：无操作系统、无系统调用、无文件系统。``wasm32-wasip1` 或 `wasm32-wasip2`` 暴露 WASI 系统接口，但每项能力必须由宿主显式注入。[来源: [Rust Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html)]
+> **[Rust Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html)** `wasm32-unknown-unknown` 是纯浏览器 Wasm 目标：无操作系统、无系统调用、无文件系统。`wasm32-wasip1` 或 `wasm32-wasip2` 暴露 WASI 系统接口，但每项能力必须由宿主显式注入。[来源: [Rust Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html)]
 
-| 特性 | `wasm32-unknown-unknown` | ``wasm32-wasip1` 或 `wasm32-wasip2`` |
+| 特性 | `wasm32-unknown-unknown` | `wasm32-wasip1` 或 `wasm32-wasip2` |
 |:---|:---|:---|
 | **标准库** | `core` + `alloc` | `core` + `alloc` + 部分 `std` |
 | **文件系统** | ❌ 无 | ✅ WASI（能力控制） |
@@ -635,7 +635,7 @@ pub fn hash_data(input: &[u8]) -> [u8; 32] {
 }
 ```
 
-> **来源**: [Rust `wasm32-wasip1` 或 `wasm32-wasip2` Target Docs](<https://doc.rust-lang.org/rustc/platform-support/`wasm32-wasip1`> 或 `wasm32-wasip2`p1.html)
+> **来源**: [Rust `wasm32-wasip1` 或 `wasm32-wasip2` Target Docs](https://doc.rust-lang.org/rustc/platform-support/wasm32-wasip1.html)
 
 ---
 
@@ -785,7 +785,7 @@ fn main() {
 
 ## 十、概念属性矩阵
 
-| **维度** | `wasm32-unknown-unknown` | ``wasm32-wasip1` 或 `wasm32-wasip2`` | `cargo-component` | `wasm-bindgen` |
+| **维度** | `wasm32-unknown-unknown` | `wasm32-wasip1` 或 `wasm32-wasip2` | `cargo-component` | `wasm-bindgen` |
 |:---|:---|:---|:---|:---|
 | **目标平台** | 浏览器/JS 宿主 | 独立运行时/边缘 | 组件模型运行时 | 浏览器/JS 宿主 |
 | **系统接口** | 无 | WASI Preview 2 | WASI Preview 2 + WIT | JS API（DOM/Window） |
@@ -798,7 +798,7 @@ fn main() {
 | **主要工具** | cargo, wasm-pack | cargo, wasmtime | cargo-component | wasm-pack, wasm-bindgen |
 | **Rust 生态位** | 浏览器计算、游戏前端 | 服务端 Wasm、CLI、插件 | 跨语言微组件、插件系统 | 浏览器库、npm 包 |
 
-> **矩阵洞察**: `wasm32-unknown-unknown` 和 ``wasm32-wasip1` 或 `wasm32-wasip2`` 代表了 Wasm 的两种基本安全模型——前者是"纯计算沙箱"，后者是"能力安全沙箱"。`cargo-component` 增加了**跨语言类型安全**，`wasm-bindgen` 专注于**JS 互操作性**。选择工具链时，首要判断是"宿主是谁"——JS 引擎选 `wasm-bindgen`，独立运行时选 ``wasm32-wasip1` 或 `wasm32-wasip2`` + `cargo-component`。
+> **矩阵洞察**: `wasm32-unknown-unknown` 和 `wasm32-wasip1` 或 `wasm32-wasip2` 代表了 Wasm 的两种基本安全模型——前者是"纯计算沙箱"，后者是"能力安全沙箱"。`cargo-component` 增加了**跨语言类型安全**，`wasm-bindgen` 专注于**JS 互操作性**。选择工具链时，首要判断是"宿主是谁"——JS 引擎选 `wasm-bindgen`，独立运行时选 `wasm32-wasip1` 或 `wasm32-wasip2` + `cargo-component`。
 > [来源: [Rust Wasm Book — Project Setup](https://rustwasm.github.io/book/game-of-life/setup.html)] · [来源: [cargo-component Motivation](https://github.com/bytecodealliance/cargo-component/blob/main/docs/design/motivation.md)]
 
 ---

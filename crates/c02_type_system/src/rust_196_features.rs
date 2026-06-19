@@ -372,65 +372,65 @@ pub fn get_never_type_info() -> String {
 // 4. `core::range` 模块补齐 — `Range` / `RangeFrom` / `RangeToInclusive` (1.96.0 stable)
 // ============================================================================
 
-/// # `core::range` 模块完整类型族
-/// # `core::range` module complete type
-/// | 类型 | 语法 | 含义 | 对应迭代器 |
-/// | type | | | to |
-/// | type | 语法 | 含义 | to应iterator |
-/// **来源**: [Rust Standard Library: core::range] · [RFC 3550]
-/// ## 设计目标
-/// ## design goal
-/// 1. **模块统一**: 所有 range 类型集中到 `core::range`
-/// 1. **module **: all range type in to `core::range`
+/// # `core::range` 模块（Rust 1.96.0 stable）
+///
+/// Rust 1.96.0 将范围类型从 `std::ops` 下沉到 `core::range`，并使其在元素类型为 `Copy` 时实现 `Copy`。
+/// 当前稳定版包含 `Range`、`RangeFrom`、`RangeInclusive` 等核心类型。
+///
+/// **来源**: [Rust Standard Library: core::range] · [RFC 3550] · [Rust 1.96 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)
+///
 /// ## 代码示例
-/// ## codeexample
-/// ## example
-/// ## 代码Example of
-/// ## codeExample of
-/// ```ignore
+///
+/// ```rust
+/// use core::range::{Range, RangeFrom, RangeInclusive};
+///
 /// // Range: 半开区间 [1, 5)
-/// let mut iter = (1..5).into_iter();
-/// assert_eq!(iter.next(), Some(1));
-/// assert_eq!(iter.next(), Some(2));
-/// // ... 3, 4, None
+/// let r = Range { start: 1, end: 5 };
+/// let sum: i32 = r.into_iter().sum();
+/// assert_eq!(sum, 10);
+///
+/// // 因 Range<i32>: Copy，可多次迭代而无需 clone
+/// let v: Vec<i32> = r.into_iter().collect();
+/// assert_eq!(v, vec![1, 2, 3, 4]);
 ///
 /// // RangeFrom: [10, ∞)
-/// let mut iter = (10..).into_iter();
-/// assert_eq!(iter.next(), Some(10));
-/// assert_eq!(iter.next(), Some(11));
-/// // ... 无限递增（需配合 take）
+/// let rf = RangeFrom { start: 10 };
+/// let tenth = rf.into_iter().nth(10).unwrap();
+/// assert_eq!(tenth, 20);
 ///
-/// // RangeToInclusive: [0, 5]
-/// let mut iter = (0..=5).into_iter();
-/// assert_eq!(iter.next(), Some(0));
-/// assert_eq!(iter.next(), Some(1));
-/// // ... 2, 3, 4, 5, None
+/// // RangeInclusive: [0, 5]
+/// let ri = RangeInclusive { start: 0, last: 5 };
+/// let v: Vec<i32> = ri.into_iter().collect();
+/// assert_eq!(v, vec![0, 1, 2, 3, 4, 5]);
 /// ```
 ///
 /// ## 与 `std::ops` 的关系
-/// ## and `std::ops`
-/// ## and `std::ops` 关系
-/// std::ops::Range<T>        ↔  core::range::Range<T>
-/// std::ops::RangeFrom<T>    ↔  core::range::RangeFrom<T>
-/// std::ops::RangeToInclusive<T> ↔  core::range::RangeToInclusive<T>
 ///
-/// 推荐：新代码使用 core::range 以保持一致性
-/// ： core::range consistency
-/// 推荐：新代码Use core::range 以保持consistency
+/// | `std::ops` 旧类型 | `core::range` 新类型 | 说明 |
+/// |:---|:---|:---|
+/// | `std::ops::Range<T>` | `core::range::Range<T>` | 半开区间，1.96 起 `Copy` |
+/// | `std::ops::RangeFrom<T>` | `core::range::RangeFrom<T>` | 无限起始区间，1.96 起 `Copy` |
+/// | `std::ops::RangeInclusive<T>` | `core::range::RangeInclusive<T>` | 闭区间，1.96 起 `Copy` |
+///
+/// 推荐：新代码优先使用 `core::range` 以保持一致性。
 pub fn core_range_demo() {
-    use core::range::{Range, RangeFrom, RangeToInclusive};
+    use core::range::{Range, RangeFrom, RangeInclusive};
 
     let r = Range { start: 1, end: 5 };
     let sum: i32 = r.into_iter().sum();
     assert_eq!(sum, 1 + 2 + 3 + 4); // 10
 
+    // Range<T>: Copy 保证可复用
+    let v1: Vec<i32> = r.into_iter().collect();
+    let v2: Vec<i32> = r.into_iter().collect();
+    assert_eq!(v1, v2);
+
     let rf = RangeFrom { start: 10 };
     let tenth: i32 = rf.into_iter().nth(10).unwrap();
     assert_eq!(tenth, 20); // 10 + 10
 
-    let rt = RangeToInclusive { last: 4 };
-    // RangeToInclusive 的迭代需要起始点，通常与 0..=end 配合使用
-    let count = (0..=rt.last).count();
+    let ri = RangeInclusive { start: 0, last: 4 };
+    let count = ri.into_iter().count();
     assert_eq!(count, 5); // 0, 1, 2, 3, 4
 }
 
@@ -579,6 +579,16 @@ mod tests {
         assert!(config.is_ok());
         let config = config.unwrap();
         assert_eq!(config.name, "MyApp");
+    }
+
+    #[test]
+    fn test_core_range_demo() {
+        core_range_demo();
+    }
+
+    #[test]
+    fn test_assert_matches_demo() {
+        assert_matches_demo();
     }
 
     #[test]

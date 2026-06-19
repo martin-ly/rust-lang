@@ -1,3 +1,10 @@
+> **生态状态提示**：本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
+>
+> - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
+> - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
+
+---
+
 # Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈
 
 > **代码状态**: ✅ 含可编译示例
@@ -78,7 +85,7 @@
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Rust 在 WASM 生态中的长期愿景是什么？（理解层）](#测验-1rust-在-wasm-生态中的长期愿景是什么理解层)
     - [测验 2：WASI Preview 2 的组件模型对 Rust 开发有什么影响？（理解层）](#测验-2wasi-preview-2-的组件模型对-rust-开发有什么影响理解层)
-    - [测验 3：`wasm32-wasi` 与 `wasm32-unknown-unknown` target 有什么区别？（理解层）](#测验-3wasm32-wasi-与-wasm32-unknown-unknown-target-有什么区别理解层)
+    - [测验 3：`wasm32-wasip1` 与 `wasm32-unknown-unknown` target 有什么区别？（理解层）](#测验-3wasm32-wasip1-与-wasm32-unknown-unknown-target-有什么区别理解层)
     - [测验 4：Rust 如何通过 `wasmtime` 嵌入到现有应用中作为插件系统？（理解层）](#测验-4rust-如何通过-wasmtime-嵌入到现有应用中作为插件系统理解层)
     - [测验 5：WASM 的 64 位内存提案（Memory64）对 Rust 有什么意义？（理解层）](#测验-5wasm-的-64-位内存提案memory64对-rust-有什么意义理解层)
   - [认知路径](#认知路径)
@@ -458,7 +465,7 @@ Rust Wasm 目标三元组对比:
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-> **配置要点**: `wasm32-unknown-unknown` 是 Rust 前端框架（Yew/Leptos）的标准目标；``wasm32-wasip1` 或 `wasm32-wasip2`` 是服务端 Wasm 的首选。两者 ABI 不兼容，不可混用。[来源: [Rustc Platform Support](https://doc.rust-lang.org/rustc/platform-support.html)]
+> **配置要点**: `wasm32-unknown-unknown` 是 Rust 前端框架（Yew/Leptos）的标准目标；`wasm32-wasip1` 或 `wasm32-wasip2` 是服务端 Wasm 的首选。两者 ABI 不兼容，不可混用。[来源: [Rustc Platform Support](https://doc.rust-lang.org/rustc/platform-support.html)]
 
 ---
 
@@ -881,14 +888,14 @@ fn main() {
 
 ---
 
-### 测验 3：`wasm32-wasi` 与 `wasm32-unknown-unknown` target 有什么区别？（理解层）
+### 测验 3：`wasm32-wasip1` 与 `wasm32-unknown-unknown` target 有什么区别？（理解层）
 
-**题目**: `wasm32-wasi` 与 `wasm32-unknown-unknown` target 有什么区别？
+**题目**: `wasm32-wasip1` 与 `wasm32-unknown-unknown` target 有什么区别？
 
 <details>
 <summary>✅ 答案与解析</summary>
 
-`wasm32-wasi` 支持 WASI 系统调用（文件、网络、时钟），适合服务端 WASM。`wasm32-unknown-unknown` 无任何系统接口，用于浏览器环境。
+`wasm32-wasip1` 支持 WASI 系统调用（文件、网络、时钟），适合服务端 WASM。`wasm32-unknown-unknown` 无任何系统接口，用于浏览器环境。
 </details>
 
 ---

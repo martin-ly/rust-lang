@@ -1,3 +1,12 @@
+> **⚠️ 历史文档提示**：本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用。
+> 其中技术观点反映了对应时间点的社区状态，可能与当前（Rust 1.96+）推荐实践不一致。
+> 学习时请以 `concept/`、`knowledge/` 及官方文档为准。
+>
+> - `async-std` 已进入维护模式，新项目建议优先考虑 Tokio / smol。
+> - `wasm32-wasi` 已重命名为 `wasm32-wasip1`；WASI Preview 2 目标为 `wasm32-wasip2`。
+
+---
+
 # Async/Await（异步 [来源: [Async Rust](https://rust-lang.github.io/async-book/)]编程）
 
 > **受众**: [归档]
@@ -110,6 +119,10 @@
   - [相关概念链接](#相关概念链接)
   - [Wikipedia 概念对齐](#wikipedia-概念对齐)
   - [权威来源索引](#权威来源索引)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：《Async/Await（异步 \[来源: Async Rust\]编程）》是一份归档文件。归档文件在知识体系中有什么作用？（理解层）](#测验-1asyncawait异步-来源-async-rust编程是一份归档文件归档文件在知识体系中有什么作用理解层)
+    - [测验 2：阅读归档文件时应该注意什么？（理解层）](#测验-2阅读归档文件时应该注意什么理解层)
+    - [测验 3：归档文件与活跃概念文件的主要区别是什么？（理解层）](#测验-3归档文件与活跃概念文件的主要区别是什么理解层)
 
 ## 〇、认知路径（Cognitive Path）
 

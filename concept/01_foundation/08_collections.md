@@ -852,3 +852,12 @@ fn main() {
 
 `drain` 不会释放底层内存，`v` 的 `capacity` 保持不变。
 </details>
+
+---
+
+## 十二、延伸阅读与自测
+
+> 学完常见集合后，建议通过 **Ownership Inventory #2** 检验对「Vec/String/HashMap 与所有权、借用、迭代器」的理解：
+>
+> - 本地映射与样题：[所有权清单自测：Brown University Ownership Inventory](./28_ownership_inventories_brown_book.md)
+> - Brown Book 交互式题目：[Ownership Inventory #2](https://rust-book.cs.brown.edu/ch08-04-inventory.html)

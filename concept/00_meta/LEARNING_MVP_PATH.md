@@ -45,6 +45,8 @@ Week 2: 并发与工程化（20h）
 
 **目标**: 安装 Rust，理解变量、函数、控制流，能编写简单程序。
 
+> 📚 **TRPL 3rd Ed 参考**: Ch 1 (Getting Started) · Ch 3 (Common Programming Concepts)
+
 | 任务 | 内容 | 时长 | 类型 | 验证标准 |
 |:---|:---|:---:|:---:|:---|
 | 安装 | `rustup` 安装、IDE 配置、Cargo 初识 | 0.5h | **必修** | `cargo --version` 正常输出 |
@@ -61,6 +63,10 @@ Week 2: 并发与工程化（20h）
 ### Day 3-4: 所有权与借用 [6h]
 
 **目标**: 理解 Rust 最核心的内存管理规则，能独立解决借用检查器错误。
+
+> 📚 **TRPL 3rd Ed 参考**: Ch 4 (Understanding Ownership) · Ch 19.2 (Refutability)
+> 🎓 **Brown 书强化**: [Understanding Ownership](https://rust-book.cs.brown.edu/ch04-00-understanding-ownership.html) — Aquascope 可视化 + Fixing Ownership Errors 小节
+> 📝 **自测**: [所有权清单自测（Brown University Ownership Inventory）](../01_foundation/28_ownership_inventories_brown_book.md) — Inventory #1 本地映射与样题
 
 | 任务 | 内容 | 时长 | 类型 | 验证标准 |
 |:---|:---|:---:|:---:|:---|
@@ -80,6 +86,8 @@ Week 2: 并发与工程化（20h）
 
 **目标**: 掌握 Rust 的类型系统核心，能用 `Result`/`Option` 处理错误。
 
+> 📚 **TRPL 3rd Ed 参考**: Ch 5 (Structs) · Ch 6 (Enums) · Ch 9 (Error Handling)
+
 | 任务 | 内容 | 时长 | 类型 | 验证标准 |
 |:---|:---|:---:|:---:|:---|
 | 阅读 | [concept/01_foundation/04_type_system.md](../01_foundation/04_type_system.md) | 1.5h | **必修** | 区分 `struct` / `enum` / `tuple` |
@@ -95,6 +103,8 @@ Week 2: 并发与工程化（20h）
 ### Day 7: 第一个 CLI 工具（无并发） [4h]
 
 **目标**: 综合运用 Week 1 知识，完成一个真实可用的 CLI 程序。
+
+> 📚 **TRPL 3rd Ed 参考**: Ch 2 (Guessing Game) · Ch 12 (An I/O Project)
 
 | 任务 | 内容 | 时长 | 类型 | 验证标准 |
 |:---|:---|:---:|:---:|:---|
@@ -112,6 +122,8 @@ Week 2: 并发与工程化（20h）
 
 **目标**: 熟练使用 Rust 标准库集合和迭代器，写出惯用代码。
 
+> 📚 **TRPL 3rd Ed 参考**: Ch 8 (Common Collections) · Ch 13 (Iterators and Closures)
+
 | 任务 | 内容 | 时长 | 类型 | 验证标准 |
 |:---|:---|:---:|:---:|:---|
 | 阅读 | [concept/02_intermediate/04_collections.md](../01_foundation/08_collections.md) | 1h | **必修** | 知道何时用 `Vec` / `HashMap` / `BTreeMap` |
@@ -126,6 +138,10 @@ Week 2: 并发与工程化（20h）
 ### Day 10-11: 多线程与并发 [6h]
 
 **目标**: 理解 `Send`/`Sync`，能用 `std::thread` 和通道编写并发程序。
+
+> 📚 **TRPL 3rd Ed 参考**: Ch 16 (Fearless Concurrency)
+> 🎓 **Brown 书强化**: [Fearless Concurrency](https://rust-book.cs.brown.edu/ch16-00-concurrency.html) — 并发中的所有权转移可视化
+> 📝 **自测**: 生命周期相关 Inventory 见 [所有权清单自测](../01_foundation/28_ownership_inventories_brown_book.md) Inventory #3
 
 | 任务 | 内容 | 时长 | 类型 | 验证标准 |
 |:---|:---|:---:|:---:|:---|
@@ -142,6 +158,8 @@ Week 2: 并发与工程化（20h）
 
 **目标**: 理解 `Future`/`async`/`await`，能用 Tokio 编写简单异步程序。
 
+> 📚 **TRPL 3rd Ed 参考**: Ch 17 (Fundamentals of Asynchronous Programming) — 3rd Ed 新增完整 async 章
+
 | 任务 | 内容 | 时长 | 类型 | 验证标准 |
 |:---|:---|:---:|:---:|:---|
 | 阅读 | [concept/03_advanced/02_async.md](../03_advanced/02_async.md)（前半部分） | 2h | **选修** | 理解 `async fn` 返回 `Future` |
@@ -157,6 +175,8 @@ Week 2: 并发与工程化（20h）
 ### Day 14: 综合项目：多线程/异步 CLI [4h]
 
 **目标**: 整合两周知识，完成一个可展示的 CLI 项目。
+
+> 📚 **TRPL 3rd Ed 参考**: Ch 12 (I/O Project) · Ch 21 (Multithreaded Web Server)
 
 **项目选项**（三选一）：
 
@@ -216,14 +236,17 @@ Week 2: 并发与工程化（20h）
 | | **精通** (5-8 周) | Week 2 Day 12-14 + 扩展路径 | 异步 + 综合项目 + 深入方向 |
 | [Rust Learning Path (官方)](https://www.rust-lang.org/learn) | 入门 → 进阶 | Week 1 → Week 2 | 官方路径更侧重语言本身，本路径增加工程实践 |
 | [Rust by Example](https://doc.rust-lang.org/rust-by-example/) | 主题式学习 | Day 1-6 阅读材料 | 可作为概念文件的代码示例补充 |
+| [TRPL 3rd Ed](https://doc.rust-lang.org/book/) | 官方教程 | 全路径 | Rust 1.90.0+ / Edition 2024 基准；Ch 17 为完整异步编程入门 |
+| [Brown University Interactive Book](https://rust-book.cs.brown.edu/) | 交互式教程 | Day 3-4 / Day 10-11 | Aquascope 所有权可视化 + 嵌入式测验；OOPSLA 2023/2024 研究支撑；本地映射见 [`28_ownership_inventories_brown_book.md`](../01_foundation/28_ownership_inventories_brown_book.md) |
+| [Google Comprehensive Rust](https://google.github.io/comprehensive-rust/) | 工业级课程 | Week 1 Day 1-6 + 扩展专题 | Google Android 团队维护；4 天基础 + Android/Chromium/Bare Metal/Concurrency/Idiomatic/Unsafe 专题；本地映射见 [`GOOGLE_COMPREHENSIVE_RUST_MAPPING_2026_06_19.md`](../../../reports/GOOGLE_COMPREHENSIVE_RUST_MAPPING_2026_06_19.md) |
 
-> **差异说明**: Rustify.rs 的三阶段路径（基础→应用→精通）将并发和异步放在"精通"阶段，而本 MVP 路径将其提前到 Week 2，以便在 40 小时内完成一个具备生产价值的 CLI 工具。这是**intentional 的设计选择**，适合有一定编程背景的学习者。纯初学者可将 Week 2 扩展为 3 周。
+> **差异说明**: Rustify.rs 的三阶段路径（基础→应用→精通）将并发和异步放在"精通"阶段，而本 MVP 路径将其提前到 Week 2，以便在 40 小时内完成一个具备生产价值的 CLI 工具。这是**intentional 的设计选择**，适合有一定编程背景的学习者。纯初学者可将 Week 2 扩展为 3 周。注意：TRPL 3rd Ed 将 Async 放在 Ch 17（位于 OOP/Patterns/Advanced 之前），强调 async 是 Rust 中级核心能力，而非边缘高级主题。
 
 ---
 
-> **文档版本**: 1.1
+> **文档版本**: 1.2
 > **对应 Rust 版本**: 1.96.0 (Edition 2024)
-> **最后更新**: 2026-06-02
+> **最后更新**: 2026-06-19
 > **状态**: ✅ MVP 路径已创建 · 外部学习路径已对齐
 
 ## 认知路径

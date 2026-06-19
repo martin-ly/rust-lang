@@ -1,3 +1,10 @@
+> **生态状态提示**：本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
+>
+> - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
+> - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
+
+---
+
 # Rust 语言特性全量梳理与对称差分析 2026
 
 > **分级**: [B]
@@ -250,7 +257,7 @@ B = 本项目现有知识集合
 | 内容 | 位置 | 问题 | 处理建议 |
 |------|------|------|---------|
 | async-std [已归档] 运行时示例 | c06_async/src/async_std/ | 2025年3月已归档 | ✅ 已有归档说明+迁移对照表 |
-| 旧 WASI 目标 | c12_wasm | `wasm32-wasi` → `wasm32-wasip1` 已全量替换 | ✅ 代码/脚本/文档已更新 |
+| 旧 WASI 目标 | c12_wasm | `wasm32-wasip1` → `wasm32-wasip1` 已全量替换 | ✅ 代码/脚本/文档已更新 |
 | `static mut` 引用示例 | c05_threads, c13_embedded | 2024 Edition deny-by-default | ✅ 已迁移至 AtomicUsize/UnsafeCell |
 | 旧版 `async_trait` 依赖 | c10_networks | Axum 0.8+ 已不需要 | ⏳ 待评估（c10已有AFIT示例） |
 | 虚构 API `spawn_unchecked` | 审计报告提及 | 不存在于 stdlib | ✅ 代码中不存在，已确认 |
@@ -2044,7 +2051,7 @@ graph TD
     I --> I1[JS <-> Rust FFI]
     I --> I2[wasm-bindgen types]
 
-    W --> W1[wasm32-wasi → wasm32-wasip1 ✅]
+    W --> W1[wasm32-wasip1 → wasm32-wasip1 ✅]
     W --> W2[wasm32-wasip1 1.84+ ⭐]
     W --> W3[wasm32-wasip2 预研]
     W --> W4[Component Model]
@@ -2059,19 +2066,19 @@ graph TD
 | wasm32-unknown-unknown | ✅ 完善 | 80% | — |
 | wasm-bindgen | ✅ 完善 | 75% | — |
 | JS FFI | ✅ 完善 | 70% | — |
-| **WASI 目标** | 🟢 已完成 | 100% | **wasm32-wasi → wasm32-wasip1 全量替换** |
+| **WASI 目标** | 🟢 已完成 | 100% | **wasm32-wasip1 → wasm32-wasip1 全量替换** |
 | **Component Model** | 🔴 缺失 | 0% | **完全缺失** |
 
 ### 12.3 修复项：WASI 目标迁移
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-**What**: `wasm32-wasi` 目标在 Rust 1.84.0 中已被移除，替换为 `wasm32-wasip1` (preview1) 和 `wasm32-wasip2` (preview2)。本项目已完成全量替换。
+**What**: `wasm32-wasip1` 目标在 Rust 1.84.0 中已被移除，替换为 `wasm32-wasip1` (preview1) 和 `wasm32-wasip2` (preview2)。本项目已完成全量替换。
 
 **迁移策略**:
 
 ```text
-旧: rustup target add wasm32-wasi（已移除）
+旧: rustup target add wasm32-wasip1（已移除）
 新: rustup target add wasm32-wasip1   # 1.84+
     rustup target add wasm32-wasip2   # 组件模型 (实验性)
 ```
@@ -2079,7 +2086,7 @@ graph TD
 **项目修复点**:
 
 1. `c12_wasm/Cargo.toml`: 更新 target 配置
-2. ✅ 所有文档中的 `wasm32-wasi` 引用已替换为 `wasm32-wasip1`
+2. ✅ 所有文档中的 `wasm32-wasip1` 引用已替换为 `wasm32-wasip1`
 3. 新增 `wasm32-wasip2` + Component Model 预研内容
 
 ### 12.4 权威来源对齐

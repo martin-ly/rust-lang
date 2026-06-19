@@ -1,3 +1,10 @@
+> **生态状态提示**：本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
+>
+> - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
+> - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
+
+---
+
 > **内容分级**: [专家级]
 
 # Async/Await（异步编程）
@@ -27,7 +34,7 @@
 > [Error Handling](../02_intermediate/04_error_handling.md)
 > **后置概念**: [Pin/Unpin] · [Streams]
 > **主要来源**:
-> [TRPL: Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) ·
+> [TRPL 3rd Ed: Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Brown University Interactive Book: Ch17](https://rust-book.cs.brown.edu/ch17-00-async-await.html) ·
 > [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/) ·
 > [RFC 2394] · [RFC 2349]
 
