@@ -2,7 +2,11 @@
 
 > **报告日期**: 2026-06-19
 > **调研目标**: 评估将 Brown University Cognitive Engineering Lab 的 Aquascope 所有权/借用可视化工具集成到本项目的可行性、成本与路径
-> **对应权威来源**: [Aquascope GitHub](https://github.com/cognitive-engineering-lab/aquascope) · [Brown University Interactive Book](https://rust-book.cs.brown.edu/) · OOPSLA 2023 paper *A Grounded Conceptual Model for Ownership Types in Rust*
+> **对应权威来源**:
+>
+> [Aquascope GitHub](https://github.com/cognitive-engineering-lab/aquascope) ·
+> [Brown University Interactive Book](https://rust-book.cs.brown.edu/) ·
+> OOPSLA 2023 paper *A Grounded Conceptual Model for Ownership Types in Rust*
 
 ---
 
