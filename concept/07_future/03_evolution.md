@@ -67,6 +67,7 @@
 - v1.33 (2026-06-20): 权威内容对齐 Batch 31：新增 §6.16 会员表 Astral & adorsys Silver；§6.23 WhatsApp Rust at Scale 客户端媒体安全；§6.24 Rust Trademark Policy 更新；更新 `14_ferrocene_preview.md` §3.2 Safety-Critical Rust Consortium 进展。来源：Rust Foundation 2026-01/02；Meta Engineering 2026-01；Rust Foundation 2024-11
 - v1.34 (2026-06-20): 权威内容对齐 Batch 32：新增 §6.25–§6.30，覆盖 Rust Foundation 2025 Technology Report、Microsoft $1M Donation、Arm Platinum Member、Rust Global 2025、Project Director Jan/Feb 2026 更新、2024 Fellows。来源：Rust Foundation 2024/2025/2026
 - v1.35 (2026-06-20): 权威内容对齐 Batch 33：新增 §6.31–§6.34，覆盖 Rust Foundation 2025 年度报告与 2026-2028 战略、RustConf 2026 早期信息/CFP/Program Committee。来源：Rust Foundation 2025/2026
+- v1.36 (2026-06-20): 权威内容对齐 Batch 34：新增 §6.35–§6.40，覆盖 Compiler Team 七名新成员、Clippy 功能冻结复盘、基础设施团队 2025 Q3 复盘与 Q4 计划、Rust All Hands 2026、`hint-mostly-unused` 测试征集、Project Directors 2025 选举。来源：Inside Rust Blog 2025-07 至 2025-10
 
 ---
 
@@ -1980,6 +1981,119 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 
 > **关键洞察**: 程序委员会的地理与背景多元化是 RustConf 作为全球旗舰会议的核心信号——它不仅是技术议程的把关者，也是 Rust 社区“谁的声音值得被放大”的治理实践。
 > **来源**: [Rust Foundation — Announcing the RustConf 2026 Program Committee](https://rustfoundation.org/media/announcing-the-rustconf-2026-program-committee/) · 可信度: ✅
+
+### 6.35 Compiler Team 新增七名成员（2025-10-28）
+
+**[Inside Rust, 2025-10-28]** Rust 编译器团队宣布七名新成员，进一步扩大团队在度量、构建性能、Rustdoc/GCC 后端、底层语言特性、测试套件、模式匹配与属性系统等方向的能力。
+
+| 成员 | 角色 | 近期重点贡献 |
+|:---|:---|:---|
+| Jane Lusby (yaahc) | team member | Metrics Initiative（量化不稳定特性使用）与 “Relink Don't Rebuild” 项目目标，加速依赖树未变更时的重新编译 |
+| Guillaume Gomez (GuillameGomez) | team member | Rustdoc 团队负责人，长期贡献 Rustdoc 与 rustc GCC 后端 |
+| Amanieu d'Antras (Amanieu) | team member | Library 团队负责人，精通内联汇编与目标相关特性 |
+| Martin Nordholts (Enselic) | team member | 多年 issue triage，近期着力振兴与改进编译器集成测试套件 |
+| Dianne Hackborn (dianne) | team member | 改进 match ergonomics、实现 deref patterns、修复临时生命周期相关 bug |
+| Jonathan Brouwer (JonathanBrouwer) | team member | 重构编译器属性处理，增加属性参数校验 |
+| tiif | team member | 修复各类 bug、实现不稳定 trait impls、改进 const generics |
+
+> **关键洞察**: 编译器团队的新陈代谢反映了 Rust 项目的工程重点——编译性能（RDR）、测试基础设施与底层语言特性仍是 2025–2026 年的核心投资领域。
+> **来源**: [Inside Rust — Announcing seven new members of the compiler team](https://blog.rust-lang.org/inside-rust/2025/10/28/compiler-team-new-members/) · 可信度: ✅
+
+### 6.36 Clippy 功能冻结复盘（2025-10-22）
+
+**[Inside Rust, 2025-10-22]** Clippy 团队结束了为期数月的功能冻结（feature freeze），期间只接受 bug 修复与现有 lint 改进，不接受新 lint/新功能。复盘显示结果积极，团队认为未来可能再次进行类似冻结。
+
+主要数据：
+
+- 冻结结束后（6 月 26 日起）共打开 **326 个 PR**；
+- 其中新增 lint 的 PR 有 **18 个**；
+- 新增贡献者 **47 人**，合计提交 **195 个 PR**；
+- 单名新贡献者 Ada (ada4a) 提交了其中 **114 个 PR**，团队专门与其开会梳理代码库与流程。
+
+> **关键洞察**: 功能冻结通过降低新功能门槛、集中 review 资源，成功吸引了一大批首次贡献者；Clippy 作为“编译器生态的入口项目”，其贡献者漏斗效应对整个 Rust 项目的人才储备具有杠杆意义。
+> **来源**: [Inside Rust — What we learned with Clippy's feature freeze](https://blog.rust-lang.org/inside-rust/2025/10/22/clippys-feature-warming-up/) · 可信度: ✅
+
+### 6.37 基础设施团队 2025 Q3 复盘与 Q4 计划（2025-10-16）
+
+**[Inside Rust, 2025-10-16]** Rust Infrastructure Team 发布 2025 年第三季度成果与第四季度计划，覆盖发布安全、CI、CDN、网站托管、GitHub 治理与性能基准等多个子系统。
+
+**Q3 主要成果**：
+
+- **crates-io-auth-action**：支持通过 Trusted Publishing 获取 crates.io 发布 token 的 GitHub Action；
+- **关键数据资产异地备份**：在 Google Cloud Platform 建立 Rust 发布与 crates 的每日增量备份，账户由非 AWS 管理员的两名基金会员工持有，降低单点被攻破风险；
+- **CDN 告警**：在 Datadog 中为 AWS CloudFront 与 Fastly 配置流量阈值告警；
+- **rust-lang.org 静态化**：从 Heroku 上的 Rust web 服务迁移到 GitHub Pages 静态站点，减少攻击面与成本；
+- **GitHub 组织成员清理**：自动移除未属于任何团队的组织成员；
+- **新 Bors 接管 try 构建**：自 2025-07 起所有 `@bors try` 通过新 Bors（Rust 编写）运行，计划数月内完全替代 Homu；
+- **force-push range-diff**：triagebot 在检测到 rebase force-push 后自动发布 range-diff 链接；
+- **GitHub PR 评审增强**：自动在顶层 review 评论中添加自上次评审以来的对比链接；
+- **可选 CI jobs**：支持按需运行针对 tier 2/3 目标的测试；
+- **rustc-josh-sync**：统一 Josh 子树同步工具，已迁移 miri、rust-analyzer 等子树；
+- **rustc-perf 多机器支持**：支持多 collector 并行跑 benchmark，未来可覆盖 ARM、Windows 等架构。
+
+**Q4 计划**：
+
+- 招聘新的 Rust Foundation 基础设施工程师（JD 转志愿者）；
+- docs.rs 基础设施现代化；
+- 制定外部硬件 CI 政策；
+- 使用 Google 捐赠的 GCP 额度提供 dev desktops。
+
+> **关键洞察**: 基础设施团队的工作重心正从“维持服务可用”转向“韧性工程与成本治理”——异地备份、静态化、CI 可选化与多架构 benchmark 都是为了支撑 Rust 项目在更大规模下的可持续运维。
+> **来源**: [Inside Rust — Infrastructure Team 2025 Q3 Recap and Q4 Plan](https://blog.rust-lang.org/inside-rust/2025/10/16/infrastructure-team-q3-recap-and-q4-plan/) · 可信度: ✅
+
+### 6.38 Rust All Hands 2026（2025-09-30）
+
+**[Inside Rust, 2025-09-30]** Rust All Hands 2026 定于 **2026-05-21 至 05-23** 在荷兰乌得勒支（Utrecht）举行，作为 Rust Week 2026 的一部分。
+
+关键信息：
+
+- **Rust Week 2026**：5 月 19–20 日为 RustWeek 会议（周二、周三），5 月 21–23 日为 All Hands（周四至周六）；
+- **Project Track**：RustWeek 第二天（5 月 20 日）继续设有 Rust Project Track，项目成员可向其他贡献者做报告；
+- **参与方式**：目前开放注册兴趣（register interest），正式邀请稍后发出；
+- **2025 反馈**：All Hands 2025 平均评分 9.5/10，150+ 项目成员与嘉宾参加。
+
+> **关键洞察**: All Hands 是 Rust 项目最大的面对面协作事件，其议程设置与反馈机制直接影响年度目标推进、跨团队冲突解决与新 idea 孵化，是治理与工程的双重枢纽。
+> **来源**: [Inside Rust — The next Rust All Hands](https://blog.rust-lang.org/inside-rust/2025/09/30/all-hands-2026/) · 可信度: ✅
+
+### 6.39 编译加速测试征集：`hint-mostly-unused`（2025-07-15）
+
+**[Inside Rust, 2025-07-15]** Josh Triplett 发布 `-Zhint-mostly-unused` 与 Cargo 对应 nightly 特性的测试征集，旨在通过延迟生成依赖中未被使用条目的代码来缩短编译时间。
+
+机制与用法：
+
+- **rustc**：`-Zhint-mostly-unused`，提示某 crate 的 API 表面大部分不会被使用；
+- **Cargo profile**：针对特定依赖设置 `hint-mostly-unused = true`；
+- **Cargo hints**：crate 作者可在 `Cargo.toml` 中声明 `[hints]\nmostly-unused = true`，供下游 nightly 用户自动受益且不影响 MSRV。
+
+部分测试结果（clean release 构建）：
+
+| 依赖 | 优化前 | 优化后 | 降幅 |
+|:---|:---|:---|:---|
+| `windows`（全部 Graphics/UI 特性） | 18.3 s | 10.7 s | -42 % |
+| `windows`（全部特性） | 3 m 48 s | 2 m 55 s | -23 % |
+| `rustix`（all-apis） | 5.9 s | 4.3 s | -27 % |
+| `x11rb` + `x11rb-protocol` | 5.3 s | 2.6 s | -51 % |
+| `aws-sdk-ec2` | 4 m 07 s | 2 m 04 s | -50 % |
+
+> **关键洞察**: `hint-mostly-unused` 代表了 Cargo/rustc 从“全量代码生成 + 链接器丢弃”向“按需代码生成”演进的重要尝试。它并非万能：对 API 使用比例高的 crate 或多次被不同 binary 使用的 crate 可能适得其反，因此强调基于 `cargo --timings` 的 selective 应用。
+> **来源**: [Inside Rust — Call for Testing: Speeding up compilation with `hint-mostly-unused`](https://blog.rust-lang.org/inside-rust/2025/07/15/call-for-testing-hint-mostly-unused/) · 可信度: ✅
+
+### 6.40 Project Directors 2025 选举启动（2025-08-20）
+
+**[Inside Rust, 2025-08-20]** Leadership Council 启动 2025 年 Rust Foundation Board Project Directors 选举，将选出 **3 名** Project Directors，接替 Santiago Pastorino、Scott McMurray、Jakob Degen 的席位。
+
+流程要点：
+
+- **两阶段**：候选人征集（candidate gathering）→ Council 选举；
+- **提名截止**：2025-09-18；
+- **候选人公布**：2025-09-19，随后开放项目成员反馈至 10-02；
+- **Council 选举会议**：2025-10-03，通过一致同意原则确定三人名单；
+- **新任期首次董事会**：2025-10-14。
+
+当前 Project Directors 为 Carol Nichols、Ryan Levick、Santiago Pastorino、Scott McMurray、Jakob Degen；本届开放后三个席位。
+
+> **关键洞察**: Project Directors 是 Rust Project 在基金会董事会的直接代表，其选举过程体现了 Leadership Council 作为项目治理枢纽的角色——既要保证董事会声音反映项目整体，又要通过反馈机制维护透明度。
+> **来源**: [Inside Rust — Electing new Project Directors 2025](https://blog.rust-lang.org/inside-rust/2025/08/20/electing-new-project-directors-2025/) · 可信度: ✅
 
 ## 嵌入式测验（Embedded Quiz）
 

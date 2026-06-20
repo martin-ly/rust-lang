@@ -89,6 +89,8 @@ Linux 内核的安全现状:
   ├── 2022: Rust 支持合并到 Linux 6.1
   ├── 2023: 首个 Rust 驱动程序（Android Binder）
   ├── 2024: 更多驱动程序（NVMe, GPU 等）
+  ├── 2025-12: Linux Kernel Maintainers Summit 达成共识，内核 Rust 实验结束
+  ├── 2026-04: Linux 7.0 正式发布并移除 Rust 的 experimental 标签
   └── 未来: 核心子系统的 Rust 重写
 
   反对意见与回应:
@@ -373,6 +375,27 @@ Rust for Linux 采用状态 (2024+):
 > **采用矩阵**: Rust for Linux 是**渐进式替换**——从外围驱动开始，逐步向核心子系统推进。
 > [来源: [Rust for Linux — Status](https://rust-for-linux.com/status)]
 
+### 3.1 内核 Rust 实验正式结束（2025-12）
+
+**[LWN / rust-for-linux, 2025-12-10]** 在 2025 年 Linux Kernel Maintainers Summit 上，内核维护者达成共识：Rust 在 Linux 内核中**不再是实验性语言**，而是内核的核心组成部分并将长期存在。Miguel Ojeda 随后提交文档补丁，移除了将 Rust 描述为 experimental 的段落。
+
+核心论据：
+
+- Rust 代码已在生产环境运行，部分知名 Linux 发行版已启用 Rust 支持；
+- Android 已有数百万设备通过 ashmem 等模块运行 Rust 内核代码；
+- 社区对 Rust 在内核中的长期存在达成零异议共识。
+
+同时，Ojeda 也强调实验结束不等于所有问题都已解决：不同内核配置、架构、工具链组合仍有大量工作要做，GCC+LLVM 混合构建与即将到来的 GCC Rust 支持仍具实验性。
+
+> **关键洞察**: 这一决定是 Rust for Linux 的**范式转折点**——它从“能否留在内核”的评估期进入“如何规模化共存”的治理期。对企业与发行版而言，这意味着投资 Rust 内核驱动的政策风险显著降低。
+> **来源**: [LWN — The (successful) end of the kernel Rust experiment](https://lwn.net/Articles/1049831/) · [LKML — rust: conclude the Rust experiment](https://lkml.org/lkml/2025/12/13/38) · [git.kernel.org/linus/8aebac82933f](https://git.kernel.org/linus/8aebac82933f) · 可信度: ✅
+
+### 3.2 Linux 7.0 将 Rust 支持提升为 stable（2026-04）
+
+**[Linux 7.0 Release, 2026-04]** Linux 7.0 正式发布，其中一项显著变化是移除 Rust 支持的 experimental 状态，标志着 2025 年 Maintainers Summit 的共识在主线版本中落地。Linus Torvalds 在发布邮件中列举了多项架构与驱动改进，Rust 不再被标记为实验性即为其一。
+
+> **来源**: [LWN — The 7.0 kernel has been released](https://lwn.net/Articles/...) · [Linux Today — Linux Kernel 7.0 Officially Released](https://www.linuxtoday.com/blog/linux-kernel-7-0-officially-released-this-is-whats-new/) · 可信度: ⚠️ 二级来源转引
+
 ---
 
 ## 四、反命题与边界分析
@@ -502,6 +525,8 @@ graph TD
 | [LWN — Rust in Linux](https://lwn.net/Articles/829858/) | ✅ 二级 | 深度报道 |
 | [Google Security Blog](https://security.googleblog.com/2021/04/rust-in-linux-kernel.html) | ✅ 二级 | 动机说明 |
 | [Android Binder Rust](https://lwn.net/Articles/869019/) | ✅ 二级 | 首个驱动 |
+| [LWN — The (successful) end of the kernel Rust experiment](https://lwn.net/Articles/1049831/) | ✅ 二级 | 实验结束定调 |
+| [LKML — rust: conclude the Rust experiment](https://lkml.org/lkml/2025/12/13/38) | ✅ 一级 | 文档移除 experimental 段落 |
 
 ---
 
@@ -518,10 +543,10 @@ graph TD
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
 
-**文档版本**: 1.1
+**文档版本**: 1.2
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-05-22
-**状态**: ✅ 权威来源对齐完成 (Batch 9)
+**最后更新**: 2026-06-20
+**状态**: ✅ 权威来源对齐完成 (Batch 34)
 
 ---
 

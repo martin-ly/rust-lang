@@ -142,6 +142,27 @@
 - **RustConf 2026 程序委员会亮相（2026-01-15）**
   - `concept/07_future/03_evolution.md`: 新增 §6.34，介绍来自五大洲的 10 名委员会成员、4+4+2 的组成机制与多元化目标
   - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.48 记录 Program Committee
+- **Rust for Linux 实验结束（2025-12）**
+  - `concept/07_future/19_rust_for_linux.md`: 新增 §3.1 说明 2025 Linux Kernel Maintainers Summit 达成共识、移除 experimental 标签，补充 §3.2 Linux 7.0 stable 报道；更新关键里程碑与来源索引
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.49 记录该里程碑
+- **Compiler Team 新增七名成员（2025-10-28）**
+  - `concept/07_future/03_evolution.md`: 新增 §6.35，列出 yaahc/GuillameGomez/Amanieu/Enselic/dianne/JonathanBrouwer/tiif 及各自重点贡献
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.50
+- **Clippy 功能冻结复盘（2025-10-22）**
+  - `concept/07_future/03_evolution.md`: 新增 §6.36，整理 326 PR / 18 lint PR / 47 新贡献者 / 195 PR 等数据与未来冻结可能
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.51
+- **基础设施团队 2025 Q3 复盘与 Q4 计划（2025-10-16）**
+  - `concept/07_future/03_evolution.md`: 新增 §6.37，覆盖关键数据备份、CDN 告警、rust-lang.org 静态化、新 Bors、可选 CI jobs、rustc-josh-sync、rustc-perf 多机器等
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.52
+- **Rust All Hands 2026（2025-09-30）**
+  - `concept/07_future/03_evolution.md`: 新增 §6.38，说明 2026-05-21 至 05-23 Utrecht、RustWeek 2026 与 Project Track
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.53
+- **编译加速 `hint-mostly-unused` 测试征集（2025-07-15）**
+  - `concept/07_future/03_evolution.md`: 新增 §6.39，说明 nightly rustc/Cargo profile/hints 用法及部分 crate 构建时间降幅
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.54
+- **Project Directors 2025 选举启动（2025-08-20）**
+  - `concept/07_future/03_evolution.md`: 新增 §6.40，说明三席位空缺、候选人征集与选举时间线
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.55
 - **crates.io Svelte 前端公测（2026-04-17）**
   - `concept/06_ecosystem/19_security_practices.md`: 在 §6.4 表中补充 Svelte 5 迁移与公测入口
 - **Rust Foundation 2025 年度报告与战略（2026-01-27）**
