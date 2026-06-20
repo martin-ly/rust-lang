@@ -57,6 +57,7 @@
     - [6.7 已知传递依赖安全状态（本项目）](#67-已知传递依赖安全状态本项目)
     - [6.8 AI 安全工程师驻场计划：Alpha-Omega × Rust Foundation（2026-06-16）](#68-ai-安全工程师驻场计划alpha-omega--rust-foundation2026-06-16)
     - [6.9 开源基础设施可持续 stewardship 联合声明（2025-09）](#69-开源基础设施可持续-stewardship-联合声明2025-09)
+    - [6.10 Rust Foundation 安全工程师当选 OpenSSF Ambassador（2026-05-28）](#610-rust-foundation-安全工程师当选-openssf-ambassador2026-05-28)
   - [七、来源与延伸阅读](#七来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
@@ -813,6 +814,32 @@ cargo audit
 > **关键洞察**: 这份联合声明是 Rust 基础设施从“捐赠驱动”向“共同责任治理”转型的早期信号。它与 2026-05 的 Sustaining Package Registries Working Group 形成前后衔接：前者提出原则与对话框架，后者进入具体的跨注册表工作组执行。
 > **来源**: [Rust Foundation — Joint Statement on Sustainable Stewardship](https://rustfoundation.org/media/rust-foundation-signs-joint-statement-on-open-source-infrastructure-stewardship/) · 可信度: ✅
 
+### 6.10 Rust Foundation 安全工程师当选 OpenSSF Ambassador（2026-05-28）
+
+**[Rust Foundation, 2026-05-28]** Rust Foundation 安全工程师 **Walter Pearce** 入选 **OpenSSF Ambassador Program** 首届 cohort，成为全球 13 位开源安全倡导者之一。Ambassador Program 旨在表彰“体现 OpenSSF‘默认安全’愿景的社区领袖”。
+
+**Walter Pearce 背景**：
+
+- 14 年以上安全经验，过去七年专注于游戏行业的 offensive security
+- 曾在 Epic Games 与 Blizzard Entertainment 领导漏洞发现与缓解工作，保护数千万玩家
+- 此前为安全顾问，为财富 100 强公司提供渗透测试、红队与代码审计服务
+- 开源游戏引擎 Amethyst 的贡献者与成员
+
+**在 Rust Foundation 的工作**：
+
+- 主导 **Rust Foundation Security Initiative**， funded in large part by OpenSSF's Alpha-Omega Project
+- 推动 crates.io 发布流水线加固、主动威胁响应与供应链安全改进
+- 2025-09 针对流行 crate 的大规模钓鱼攻击即由其团队参与响应
+
+**意义**：
+
+- Rust 安全团队的工作获得 OpenSSF 最高层级的社区认可
+- 强化了 Rust 安全倡议与 OpenSSF 在全球开源供应链安全中的协同
+- 与 2026-06 的 AI Security Engineer in Residence 形成“人员 + 流程 + 产业合作”的安全投资矩阵
+
+> **关键洞察**: 当开源软件成为关键基础设施，安全不再只是技术问题，也是**社区领导力与跨组织信任**问题。Walter Pearce 当选 OpenSSF Ambassador，标志着 Rust 的安全实践者开始在全球开源安全治理中扮演代表角色。
+> **来源**: [Rust Foundation — Congratulations, Walter Pearce: OpenSSF Ambassador!](https://rustfoundation.org/media/congratulations-walter-pearce-openssf-ambassador/) · 可信度: ✅
+
 ---
 
 ## 七、来源与延伸阅读
@@ -852,9 +879,9 @@ cargo audit
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
 
-**文档版本**: 1.0
+**文档版本**: 1.1
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-05-22
+**最后更新**: 2026-06-20
 **状态**: ✅ 概念文件创建完成
 
 ---

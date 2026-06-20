@@ -63,6 +63,7 @@
 - v1.29 (2026-06-19): 权威内容对齐 Batch 25：新增 §6.14 Rust Innovation Lab 下一阶段（入选标准、rustls / Symposium 案例、基金会孵化模式）。来源：Rust Foundation Blog 2026-03-30
 - v1.30 (2026-06-20): 权威内容对齐 Batch 26：新增 §6.15 OpenAI 以铂金会员身份加入 Rust Foundation 并捐赠 $600k 支持维护者、Project Goals 与 RIL；补充 RFMF 筹款渠道（GitHub Sponsors、rust-lang.org/funding）。来源：Rust Foundation 2026-06
 - v1.31 (2026-06-20): 权威内容对齐 Batch 27：新增 §6.16 2026 年 Rust Foundation 会员动态（Canonical Gold、Meilisearch & Doulos Silver、OpenAI Platinum）。来源：Rust Foundation 2026-01/03/06
+- v1.32 (2026-06-20): 权威内容对齐 Batch 30：新增 §6.17 Rust Foundation 加入 Datadog Open Source Program；§6.18 Walter Pearce 当选 OpenSSF Ambassador；§6.19 MWC + Talent Arena 2026；§6.20 FOSDEM 2026 Rust Devroom 回顾；§6.21 Symposium 入驻 Rust Innovation Lab；§6.22 Mainmatter 巴塞罗那 Rust 实训。来源：Rust Foundation 2026-02/03/04/05/06
 
 ---
 
@@ -1617,6 +1618,118 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 
 > **关键洞察**: 2026 年的会员结构变化勾勒出 Rust 的三条采纳曲线：**基础设施/系统软件**（Canonical、Ubuntu）、**数据密集型应用与 AI 工具**（Meilisearch、OpenAI）、**教育与人才输送**（Doulos）。基金会通过会员费将这些采纳曲线转化为维护者资助、基础设施投资和教育倡议，形成“采纳—反馈—投资”的闭环。
 > **来源**: [Canonical Gold](https://rustfoundation.org/media/canonical-joins-the-rust-foundation-as-a-gold-member/) · [Meilisearch & Doulos Silver](https://rustfoundation.org/media/rust-foundation-member-announcement-meilisearch-doulos/) · [OpenAI Platinum](https://rustfoundation.org/media/rust-foundation-welcomes-openai-as-platinum-member-announces-donation-to-rust-project/) · 可信度: ✅
+
+### 6.17 Rust Foundation 加入 Datadog Open Source Program（2026-03-25）
+
+**[Rust Foundation, 2026-03-25]** Rust Foundation 宣布加入 [Datadog Open Source Program](https://www.datadoghq.com/blog/datadog-open-source-program/)，获得 Datadog 统一可观测性平台的支持，用于监控和管理 Rust 生态基础设施。
+
+**平台能力**：
+
+- 基础设施监控、应用性能监控（APM）、日志管理、真实用户监控（RUM）集成于统一 SaaS 平台
+- 将指标、日志、链路追踪汇聚到单一环境，帮助基础设施团队快速检测问题、理解系统行为、缩短恢复时间
+
+**对 Rust 生态的意义**：
+
+- 提升 crates.io、docs.rs、rust-lang.org 等关键服务的可靠性与性能
+- 为安全事件响应提供更清晰、可操作的实时数据
+- 与 2026 年基础设施团队 Q1/Q2 计划（Renovate/zizmor、GitHub Rulesets、SAML SSO、YubiKey）共同构成“可观测 + 安全 + 自动化”的基础设施现代化三角
+
+> **关键洞察**: 可观测性是现代开源基础设施的“神经系统”。Datadog 的赞助使 Rust Foundation 能够以接近企业级 SRE 的能力运营社区关键服务，这是 Rust 从项目基础设施向全球关键基础设施演进的又一标志。
+> **来源**: [Rust Foundation — Rust Foundation Joins Datadog’s Open Source Program](https://rustfoundation.org/media/rust-foundation-joins-datadogs-open-source-program/) · 可信度: ✅
+
+### 6.18 Walter Pearce 当选 OpenSSF Ambassador（2026-05-28）
+
+**[Rust Foundation, 2026-05-28]** Rust Foundation 安全工程师 **Walter Pearce** 入选 **OpenSSF Ambassador Program** 首届 cohort，成为全球 13 位开源安全倡导者之一。该计划表彰“体现 OpenSSF‘默认安全’愿景的社区领袖”。
+
+**背景与贡献**：
+
+- 14 年以上安全经验，曾在 Epic Games、Blizzard Entertainment 领导漏洞发现与缓解
+- 主导由 OpenSSF Alpha-Omega 资助的 **Rust Foundation Security Initiative**
+- 推动 crates.io 发布流水线加固，并参与 2025-09 针对流行 crate 的大规模钓鱼攻击响应
+
+**治理意义**：
+
+- Rust 安全实践者获得全球开源安全治理层面的正式认可
+- 与 2026-06 的 AI Security Engineer in Residence 形成“社区安全领袖 + 专职安全工程师”的双轨安全投资
+
+> **关键洞察**: 开源供应链安全的有效性取决于跨组织协调。Walter Pearce 当选 OpenSSF Ambassador，意味着 Rust 的安全经验将更直接地影响全球开源安全最佳实践，同时也把外部安全资源更顺畅地引入 Rust 生态。
+> **来源**: [Rust Foundation — Congratulations, Walter Pearce: OpenSSF Ambassador!](https://rustfoundation.org/media/congratulations-walter-pearce-openssf-ambassador/) · 可信度: ✅
+
+### 6.19 MWC + Talent Arena 2026（2026-02-25）
+
+**[Rust Foundation, 2026-02-25]** Rust Foundation 将亮相巴塞罗那 **Talent Arena**（与 Mobile World Congress 同址举办）的 XPro 舞台与工作坊，展示 Rust 在汽车、航空、电信、嵌入式与 AI 基础设施中的定位。
+
+**活动安排**：
+
+| **时间** | **环节** | **内容** |
+| :--- | :--- | :--- |
+| 2026-03-02 | XPro 主题演讲 | Rebecca Rumbul: “Building the Future in Rust”——内存安全、性能、可持续性与治理正成为核心设计要求 |
+| 2026-03-04 | 工作坊 | Fledgio 创始人 Lawrence Freeman 主讲两场 Rust 技能工作坊（Intro to Rust / Advanced Rust），Ernest Kissiedu 协助 |
+| 同期 | 社区聚会 | Ernest Kissiedu 与 Rust BCN 共同主办 Rust 社区 meetup |
+
+**创新点**：
+
+- 首次发放 **Rust Foundation Workshop Completion Badge**（通过 Credly 验证），完成者可获得公开可验证的技能凭证
+- 将 Rust 从“系统编程语言”叙事扩展到“关键基础设施 deliberate choice”的产业叙事
+
+> **关键洞察**: MWC/Talent Arena 的观众覆盖电信、汽车、半导体与 AI 基础设施决策者。Rebecca Rumbul 将 Rust 定位为这些行业的长期基础设施选择，说明 Rust 的市场沟通正从开发者社区向 CTO/架构师层迁移。
+> **来源**: [Rust Foundation — The Rust Foundation is Headed to MWC + Talent Arena 2026!](https://rustfoundation.org/media/the-rust-foundation-is-headed-to-mwc-talent-arena-2026/) · 可信度: ✅
+
+### 6.20 FOSDEM 2026 Rust Devroom 回顾（2026-02-17）
+
+**[FOSDEM Rust Devroom Organizers, 2026-02-17]** 2026 年 2 月 1 日，FOSDEM Rust Devroom 在布鲁塞尔 ULB Solbosch 校区举办。作为欧洲开源生态的核心活动，Rust Devroom 展示了 Rust 在多个技术栈中的渗透。
+
+**数据速览**：
+
+- 16 场正式演讲，涵盖嵌入式、游戏开发、服务端、数据仓库、性能分析、Python 集成、版本控制系统等
+- 收到 40+ 提案，约 60% 因时间限制被拒绝
+- 首次获得 500+ 座位的大会议室，避免排队
+
+**社区信号**：
+
+- Rust 已成为多个邻近社区的核心部分：Bevy 拥有独立 BoF，Graphite 进入 Graphics devroom
+- 演讲主题分布显示 Rust 正从系统层向上渗透到数据、工具链与应用层
+
+> **关键洞察**: FOSDEM Rust Devroom 的“溢出效应”——独立 BoF 与跨 devroom 演讲——是 Rust 社区成熟度的领先指标。当 Rust 不再需要一个专属房间也能被讨论时，说明它已真正进入主流开源技术栈。
+> **来源**: [Rust Foundation Guest Blog — FOSDEM 2026 Rust Devroom in Review](https://rustfoundation.org/media/guest-blog-fosdem-2026-rust-devroom-in-review/) · 可信度: ✅
+
+### 6.21 Symposium 入驻 Rust Innovation Lab（2026-04-21）
+
+**[Rust Foundation, 2026-04-21]** Rust Innovation Lab（RIL）宣布第二个董事会批准项目 **Symposium** 正式入驻。Symposium 是一款面向 **agentic 开发**的工具：根据 crate 的依赖自动安装 skills、MCP servers 或其他扩展，帮助 AI agent 更好地理解和使用 Rust crate。
+
+**设计理念**：
+
+- **crate 作者最懂 crate**：由 crate 作者或社区定义推荐扩展， teach agents how to use Rust crates
+- **去中心化与互操作**：通过集中式 recommendations repo 起步，支持自定义 repo，最终允许 crate 直接打包 plugin
+- **目标**：让 agentic 开发更互操作、更可靠、更 token-efficient
+
+**与 RIL 的协同**：
+
+- RIL 为 Symposium 提供资金、治理、安全最佳实践、营销与行政支持
+- Symposium 与 rustls 共同成为 RIL 早期范例：前者展示 Rust 在 AI 工具链中的创新潜力，后者展示 Rust 在关键系统组件中的安全优势
+
+> **关键洞察**: Symposium 是 Rust 生态对“AI 原生开发工具”潮流的回应。它尝试把 Rust 的互操作、扩展性与 vendor-neutral 原则引入 agentic 开发，避免 AI 编码助手被单一平台锁定。
+> **来源**: [Rust Foundation — Welcoming Symposium to the Rust Innovation Lab](https://rustfoundation.org/media/welcoming-symposium-to-the-rust-innovation-lab/) · 可信度: ✅
+
+### 6.22 Mainmatter 巴塞罗那 Rust 实训（2026-06-18）
+
+**[Rust Foundation, 2026-06-18]** Rust Foundation Silver Member **Mainmatter**（欧洲活跃的 Rust 培训机构之一）将在巴塞罗那首届 **Upskilling Week**（2026-06-29 至 2026-07-02）举办为期两天的 “Learn Rust from Scratch” 实训。
+
+**实训信息**：
+
+- **时间**：Day 1 为 6 月 29 日 15:00–20:00，Day 2 为 6 月 30 日 15:00–20:00
+- **地点**：Cibernàrium 22@, Barcelona Activa 技术培训枢纽
+- **讲师**：Magnus Markling（Mainmatter）
+- **认证**：完成者可获得 **Rust Foundation Workshop Completion Badge**（Credly 公开验证）
+
+**Upskilling Week 背景**：
+
+- 由 Mobile World Capital Foundation 与 Barcelona Activa 合作发起
+- 主题覆盖 AI、软件开发、网络安全、云计算、区块链、Edge AI，强调应用学习与真实项目
+- Rust 作为系统编程与基础设施安全的关键技能被纳入首期课程
+
+> **关键洞察**: Rust 教育正从线上自学与会议工作坊，向城市级、认证化的技能培训延伸。Mainmatter 与 Foundation 的 Credly 徽章机制，为 Rust 技能提供了可验证的社会信号，这对企业招聘与个人职业转型都具有实际价值。
+> **来源**: [Rust Foundation — Mainmatter Is Bringing Hands-On Rust Training to “Upskilling Week” in Barcelona!](https://rustfoundation.org/media/mainmatter-is-bringing-hands-on-rust-training-to-upskilling-week-in-barcelona/) · 可信度: ✅
 
 ## 嵌入式测验（Embedded Quiz）
 

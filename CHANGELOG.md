@@ -1,6 +1,6 @@
 # 更新日志 (Changelog)
 
-> **最后更新**: 2026-06-19
+> **最后更新**: 2026-06-20
 
 ---
 
@@ -82,6 +82,25 @@
   - `concept/07_future/03_evolution.md`: 新增 §6.16，总览 Canonical Gold、Meilisearch & Doulos Silver、OpenAI Platinum 三笔会员动态及其对治理与资源的影响
 - **Rust 1.97 beta / 1.96.x 点版本状态**
   - `concept/07_future/05_rust_version_tracking.md`: 在 §十 新增 1.97 Beta 状态速览（分支日期、预计稳定、已合并 beta 的 9 项变更），并说明截至 2026-06-20 尚无 1.96.x 点版本
+- **Rust Foundation 安全工程师当选 OpenSSF Ambassador（2026-05-28）**
+  - `concept/06_ecosystem/19_security_practices.md`: 新增 §6.10，介绍 Walter Pearce 背景、Rust Foundation Security Initiative 工作、OpenSSF Ambassador 首届 cohort 意义
+  - `concept/07_future/03_evolution.md`: 新增 §6.18，从治理与跨组织协调角度解读该荣誉
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.30，记录该安全人事动态
+- **Rust Foundation 加入 Datadog Open Source Program（2026-03-25）**
+  - `concept/07_future/03_evolution.md`: 新增 §6.17，说明 Datadog 可观测性平台对 Rust 生态基础设施监控、APM、日志、链路追踪的支持
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.31，记录该基础设施合作
+- **MWC + Talent Arena 2026（2026-02-25）**
+  - `concept/07_future/03_evolution.md`: 新增 §6.19，梳理 Rebecca Rumbul XPro 演讲、Fledgio 工作坊、Rust Foundation Workshop Completion Badge 与 Rust BCN meetup
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.32，记录 Rust 在巴塞罗那产业活动中的露出
+- **FOSDEM 2026 Rust Devroom 回顾（2026-02-17）**
+  - `concept/07_future/03_evolution.md`: 新增 §6.20，整理 16 场演讲、40+ 提案、500+ 座位大会议室、Bevy BoF 与跨 devroom 溢出信号
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.33，记录欧洲开源核心活动中 Rust 社区的成熟度
+- **Symposium 入驻 Rust Innovation Lab（2026-04-21）**
+  - `concept/07_future/03_evolution.md`: 新增 §6.21，介绍 Symposium 作为 agentic 开发工具的定位、recommendations repo、去中心化 plugin 路线
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.34，记录 RIL 第二个董事会批准项目
+- **Mainmatter 巴塞罗那 Rust 实训（2026-06-18）**
+  - `concept/07_future/03_evolution.md`: 新增 §6.22，说明 Upskilling Week、两天 “Learn Rust from Scratch” 课程、Credly 徽章与 Rust 教育制度化趋势
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.35，记录该培训活动
 - **crates.io Svelte 前端公测（2026-04-17）**
   - `concept/06_ecosystem/19_security_practices.md`: 在 §6.4 表中补充 Svelte 5 迁移与公测入口
 - **Rust Foundation 2025 年度报告与战略（2026-01-27）**
