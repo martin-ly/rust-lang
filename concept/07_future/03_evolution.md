@@ -62,6 +62,7 @@
 - v1.28 (2026-06-19): 权威内容对齐 Batch 24：新增 §6.13 Rust-C++ 互操作倡议进展（从研究转向实施、WG21 长期路线、Teor 受聘推进问题空间映射）。来源：Rust Foundation Interop Initiative Update 2026
 - v1.29 (2026-06-19): 权威内容对齐 Batch 25：新增 §6.14 Rust Innovation Lab 下一阶段（入选标准、rustls / Symposium 案例、基金会孵化模式）。来源：Rust Foundation Blog 2026-03-30
 - v1.30 (2026-06-20): 权威内容对齐 Batch 26：新增 §6.15 OpenAI 以铂金会员身份加入 Rust Foundation 并捐赠 $600k 支持维护者、Project Goals 与 RIL；补充 RFMF 筹款渠道（GitHub Sponsors、rust-lang.org/funding）。来源：Rust Foundation 2026-06
+- v1.31 (2026-06-20): 权威内容对齐 Batch 27：新增 §6.16 2026 年 Rust Foundation 会员动态（Canonical Gold、Meilisearch & Doulos Silver、OpenAI Platinum）。来源：Rust Foundation 2026-01/03/06
 
 ---
 
@@ -1586,6 +1587,36 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 
 > **关键洞察**: 当 Rust 进入 Linux 内核、Android、关键基础设施和 AI 系统栈时，其可持续性已从社区自发行为演变为**产业共同责任**。OpenAI 的加入标志着 AI 行业开始将 Rust 维护者资助视为自身供应链安全投资的一部分。
 > **来源**: [Rust Foundation — OpenAI Platinum Member](https://rustfoundation.org/media/rust-foundation-welcomes-openai-as-platinum-member-announces-donation-to-rust-project/) · [On OpenAI’s Support for Rust](https://rustfoundation.org/media/on-openais-support-for-rust/) · [Help Fund the People Who Build Rust](https://rustfoundation.org/media/help-fund-the-people-who-build-rust/) · 可信度: ✅
+
+### 6.16 2026 年 Rust Foundation 会员动态：Canonical Gold、Meilisearch & Doulos Silver、OpenAI Platinum
+
+**[Rust Foundation, 2026-01–06]** 2026 年上半年，Rust Foundation 会员结构呈现从“系统软件巨头”向“应用层与教育机构”扩展的趋势，反映出 Rust 影响力的行业纵深。
+
+| **时间** | **会员** | **级别** | **关键意义** |
+| :--- | :--- | :--- | :--- |
+| 2026-01-29 | **Meilisearch** | Silver | Rust 编写的开源搜索引擎，展示 Rust 在搜索/AI 检索领域的生产级能力 |
+| 2026-01-29 | **Doulos** | Silver | 35 年技术培训机构，带来 Rust 教育与嵌入式培训渠道 |
+| 2026-03-23 | **Canonical** | Gold | Ubuntu 发行商，Rust 已重写 coreutils/sudo；强调 crates.io 供应链安全 |
+| 2026-06-17 | **OpenAI** | Platinum | 首家主要 AI 公司作为 Platinum Member，捐赠 $600k 支持维护者与 Project Goals |
+
+**Canonical 加入的特殊信号**：
+
+- Ubuntu 25.10/26.04 LTS 已将 `coreutils`、`sudo` 等核心系统组件替换为 Rust 实现，并由 Canonical 提供 15 年支持承诺
+- Canonical VP Jon Seager 特别关注 crates.io 的**供应链安全**，希望减少 async、HTTP、密码学等核心 concern 的未知依赖数量
+- 这代表 Linux 发行版层面将 Rust 视为**操作系统韧性**的关键技术，而不仅是应用开发语言
+
+**Meilisearch & Doulos 的互补价值**：
+
+- **Meilisearch**：证明 Rust 在搜索与 AI 检索场景的性能与开发者体验优势
+- **Doulos**：将 Rust 培训嵌入工程师教育体系，加速产业人才供给
+
+**与治理的关系**：
+
+- OpenAI 代表 Predrag Gruevski（`cargo-semver-checks` 维护者）进入董事会，增强了工具链/ semver 治理视角
+- 会员增长为 Foundation 提供了更多资源，但 Foundation 反复强调：**Rust Project 的技术决策仍由项目自身治理结构独立做出**
+
+> **关键洞察**: 2026 年的会员结构变化勾勒出 Rust 的三条采纳曲线：**基础设施/系统软件**（Canonical、Ubuntu）、**数据密集型应用与 AI 工具**（Meilisearch、OpenAI）、**教育与人才输送**（Doulos）。基金会通过会员费将这些采纳曲线转化为维护者资助、基础设施投资和教育倡议，形成“采纳—反馈—投资”的闭环。
+> **来源**: [Canonical Gold](https://rustfoundation.org/media/canonical-joins-the-rust-foundation-as-a-gold-member/) · [Meilisearch & Doulos Silver](https://rustfoundation.org/media/rust-foundation-member-announcement-meilisearch-doulos/) · [OpenAI Platinum](https://rustfoundation.org/media/rust-foundation-welcomes-openai-as-platinum-member-announces-donation-to-rust-project/) · 可信度: ✅
 
 ## 嵌入式测验（Embedded Quiz）
 

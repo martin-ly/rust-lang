@@ -72,6 +72,16 @@
   - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.27，记录会议时间地点（9.8–9.11 Montreal）、Jon Seager 主题演讲、Rebecca Rumbul & Deb Nicholson 闭幕炉边对话、新增 Lightning Talks / Project Updates 环节
 - **Rust Commercial Network 成立（2026-06-16）**
   - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.28，说明 RCN 作为生产用户产业协作网络的定位、Steering Committee、Network Services Working Group 创始成员（AWS/Microsoft/JetBrains/F5/Databricks）、预期产出（采用手册、参考架构、项目反馈）
+- **AI 安全工程师驻场计划（2026-06-16）**
+  - `concept/06_ecosystem/19_security_practices.md`: 新增 §6.8，整理 Alpha-Omega 资助的 AI Security Engineer in Residence（Jacob Finkelman）、LLM 安全报告分流、与 Rust Project Security Response WG / RustSec 的协作机制
+- **开源基础设施可持续 stewardship 联合声明（2025-09）**
+  - `concept/06_ecosystem/19_security_practices.md`: 新增 §6.9，说明 Joint Statement on Sustainable Stewardship 的背景、三条探索路径、6–12 个月咨询期、已有支持者
+- **Rust-Edu Refresh & CFP 2026（2026-05-07）**
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.29，记录 Rust-Edu 重启、Organizing Committee、CFP、与 Doulos/Futurewei/Foundation 教育战略的衔接
+- **2026 年 Rust Foundation 会员动态**
+  - `concept/07_future/03_evolution.md`: 新增 §6.16，总览 Canonical Gold、Meilisearch & Doulos Silver、OpenAI Platinum 三笔会员动态及其对治理与资源的影响
+- **Rust 1.97 beta / 1.96.x 点版本状态**
+  - `concept/07_future/05_rust_version_tracking.md`: 在 §十 新增 1.97 Beta 状态速览（分支日期、预计稳定、已合并 beta 的 9 项变更），并说明截至 2026-06-20 尚无 1.96.x 点版本
 - **crates.io Svelte 前端公测（2026-04-17）**
   - `concept/06_ecosystem/19_security_practices.md`: 在 §6.4 表中补充 Svelte 5 迁移与公测入口
 - **Rust Foundation 2025 年度报告与战略（2026-01-27）**

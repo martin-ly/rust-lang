@@ -55,6 +55,8 @@
     - [6.5 跨生态系统供应链攻击：TrapDoor（2026-05）](#65-跨生态系统供应链攻击trapdoor2026-05)
     - [6.6 包注册表可持续性：Sustaining Package Registries Working Group（2026-05-06）](#66-包注册表可持续性sustaining-package-registries-working-group2026-05-06)
     - [6.7 已知传递依赖安全状态（本项目）](#67-已知传递依赖安全状态本项目)
+    - [6.8 AI 安全工程师驻场计划：Alpha-Omega × Rust Foundation（2026-06-16）](#68-ai-安全工程师驻场计划alpha-omega--rust-foundation2026-06-16)
+    - [6.9 开源基础设施可持续 stewardship 联合声明（2025-09）](#69-开源基础设施可持续-stewardship-联合声明2025-09)
   - [七、来源与延伸阅读](#七来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
@@ -754,6 +756,62 @@ cargo deny check advisories
 # 或使用 cargo-audit（需要网络拉取 advisory-db）
 cargo audit
 ```
+
+### 6.8 AI 安全工程师驻场计划：Alpha-Omega × Rust Foundation（2026-06-16）
+
+**[Rust Foundation / Alpha-Omega, 2026-06-16]** Rust Foundation 宣布，在 Alpha-Omega 资助下设立 **AI Security Engineer in Residence** 全职岗位，任命 **Jacob Finkelman**（网名 Eh2406，Cargo Team 成员、`pubgrub-rs` 维护者）担任首任工程师。
+
+**背景：LLM 给安全报告带来的双刃剑**：
+
+- AI 驱动的自动化工具已能快速、大规模地发现真实漏洞，多个大型 Rust 项目已据此修复过可信问题
+- 但同样工具也产生了大量**看起来可信、实则无效**的漏洞报告，维护者需要花费大量时间筛选“噪音中的信号”
+- 这一问题已超出单个维护者的承受能力，需要制度化的分流与验证机制
+
+**岗位目标与职责**：
+
+| **职责** | **说明** |
+| :--- | :--- |
+| 主动审查 | 采用“人工主导 + AI 辅助”方法，主动审查 Rust 编译器本身及生态高依赖 crate |
+| 信号过滤 | 在报告到达维护者之前，区分真实可利用漏洞与误报/低质量报告 |
+| 协调修复 | 与 Rust Project Security Response Working Group 合作，评估严重性、协助开发补丁、协调负责任披露 |
+| 公告发布 | 通过 RustSec 数据库发布合适的安全公告 |
+| 对接入口 | 作为外部报告（包括 Project Glasswing 等 initiative）的统一联系点 |
+
+**制度意义**：
+
+- 任期初步为 **6 个月全职**，视效果与资金可延长
+- 工作方法、playbook 与 prompt 将文档化，确保经验不因合同结束而流失
+- Alpha-Omega 同时对 PHP Foundation、Drupal Association 等生态提供同类资助，Rust 可共享工具与分流实践
+
+> **关键洞察**: AI 安全工程师驻场计划是 Rust 生态对“AI 既放大攻击面也放大噪音”这一新现实的制度回应。它将 LLM 从“直接向维护者倾泻报告”的工具，转化为“经过验证后再进入人工流程”的预处理层，从而降低维护者倦怠并提升真实漏洞响应速度。
+> **来源**: [Rust Foundation — An AI Security Engineer in Residence for the Rust Ecosystem](https://rustfoundation.org/media/an-ai-security-engineer-in-residence-for-the-rust-ecosystem/) · [Alpha-Omega](https://alpha-omega.dev/) · 可信度: ✅
+
+### 6.9 开源基础设施可持续 stewardship 联合声明（2025-09）
+
+**[Rust Foundation, 2025-09]** Rust Foundation 与其他开源基础设施管理者共同签署 [《Joint Statement on Sustainable Stewardship》](https://rustfoundation.org/media/rust-foundation-signs-joint-statement-on-open-source-infrastructure-stewardship/)，开启关于关键开源基础设施长期可持续性的行业对话。
+
+**问题意识**：
+
+- crates.io 月下载量达数十亿次，支撑全球数百万开发者；docs.rs、CI/CD、CDN 等同理
+- 这些基础设施依赖带宽、算力、存储、员工与志愿者时间，成本真实且在上升
+- 许多大规模商业用户（包括从 Rust 中获得巨大价值的企业）免费使用 crates.io 而未贡献可持续性
+
+**Rust Foundation 支持探索的路径**：
+
+| **方向** | **说明** |
+| :--- | :--- |
+| **商业与机构合作** | 按使用量比例资助基础设施，或换取战略利益的合作伙伴关系 |
+| **分层访问模式** | 对个人/普通用户保持开放，同时为高容量消费者提供扩展性能或可靠性选项 |
+| **增值能力** | 商业实体可能看重的功能，例如使用统计、高级审计日志等 |
+
+**承诺与时间表**：
+
+- **不会立即改变** crates.io 的运作方式；任何未来调整都需要广泛的社区输入
+- 未来 6–12 个月将举办社区论坛、咨询维护者与生态领袖、研究其他注册表方案
+- 已有支持者包括 Fastly、Microsoft、Google、Meta、Huawei、AWS
+
+> **关键洞察**: 这份联合声明是 Rust 基础设施从“捐赠驱动”向“共同责任治理”转型的早期信号。它与 2026-05 的 Sustaining Package Registries Working Group 形成前后衔接：前者提出原则与对话框架，后者进入具体的跨注册表工作组执行。
+> **来源**: [Rust Foundation — Joint Statement on Sustainable Stewardship](https://rustfoundation.org/media/rust-foundation-signs-joint-statement-on-open-source-infrastructure-stewardship/) · 可信度: ✅
 
 ---
 
