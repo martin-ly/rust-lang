@@ -43,6 +43,7 @@
     - [2.2 与上游 Rust 的关系](#22-与上游-rust-的关系)
     - [2.3 证据包与审计追踪](#23-证据包与审计追踪)
   - [三、行业应用分析](#三行业应用分析)
+    - [3.2 Safety-Critical Rust Consortium](#32-safety-critical-rust-consortium)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
@@ -275,6 +276,35 @@ Ferrocene 证据包构成:
 > **关键洞察**：安全关键 Rust 的最大障碍**不是语言本身**，而是**证据友好的软件栈组装能力**——包括认证工具链、稳定目标、可控依赖和可论证的 FFI 边界。Ferrocene 解决了编译器认证，但生态其余部分仍需社区与行业共建。
 > [来源: [Rust Blog — What does it take to ship Rust in safety-critical?](https://blog.rust-lang.org/2026/01/14/what-does-it-take-to-ship-rust-in-safety-critical.html)] · 可信度: ✅
 
+### 3.2 Safety-Critical Rust Consortium
+
+**[Rust Foundation / Rust Blog, 2024-06 / 2025-12 / 2026-01]** Rust Foundation 与 AdaCore、Arm、Ferrous Systems、HighTec、Lynx Software Technologies、OxidOS、TECHFUND、TrustInSoft、Veecle、Woven by Toyota 于 2024 年 6 月共同发起 [Safety-Critical Rust Consortium（SCRC）](https://rustfoundation.org/safety-critical-rust-consortium/)，目标是支持 Rust 在安全关键软件中的负责任使用。
+
+**治理与参与模式**：
+
+- **成员资格免费**：任何 Rust Foundation 会员组织或受邀的行业、学术、法律专家均可申请，通过 GitHub issue 提交
+- **公开透明**：在 Zulip 设有公开频道 `#safety-critical-consortium`；会议遵循 Chatham House Rule，禁止录音/转录
+- **三个子委员会**：
+  - **Coding Guidelines**：回答“安全关键 Rust 必须如何编写”
+  - **Tooling**：回答“安全关键 Rust 开发需要哪些工具”
+  - **Liaison**：负责与语言社区、安全标准社区对接
+
+**2025–2026 关键进展**：
+
+- 截至 2025 年底，成员约 **180 人**（较 Utrecht 会议后增长 29%），Coding Guidelines 子委员会约 50 人、Liaison 约 15 人、Tooling 约 30 人
+- 2025 年在伦敦与 Utrecht 举行两次线下全体会议，每次约 30 名成员参与
+- 2026 年，SCRC 正推动将 **MC/DC 覆盖率支持** 建立为 Rust Project Goal，采用“共享需求所有权 + 企业主导实现与维护”的模式，避免给 rustc 覆盖率基础设施带来无主维护负担
+- 同步推进 [Safety-Critical Rust coding guidelines](https://github.com/rustfoundation/safety-critical-rust-consortium/tree/main/subcommittee/coding-guidelines) 草案，为安全关键子集提供行业共识
+
+**与 Ferrocene 的关系**：
+
+- Ferrocene 提供**已认证的编译器工具链**，解决“编译器可信”问题
+- SCRC 解决**生态与标准对接**问题：需求定义、编码规范、工具链认证、async 运行时需求、FFI 边界指导
+- 两者共同构成 Rust 进入汽车/航空/医疗/工业安全关键市场的“工具链 + 行业治理”双支柱
+
+> **关键洞察**: 安全关键 Rust 的成熟不能仅靠单个产品（Ferrocene）或单个组织完成。SCRC 通过免费会员、子委员会分工和公开会议，把行业需求聚合为 Rust Project 可执行的目标，这是开源语言进入受监管行业的制度创新。
+> **来源**: [Safety-Critical Rust Consortium](https://rustfoundation.org/safety-critical-rust-consortium/) · [GitHub — rustfoundation/safety-critical-rust-consortium](https://github.com/rustfoundation/safety-critical-rust-consortium) · [Rust Blog — What does it take to ship Rust in safety-critical?](https://blog.rust-lang.org/2026/01/14/what-does-it-take-to-ship-rust-in-safety-critical.html) · 可信度: ✅
+
 ---
 
 ## 四、反命题与边界分析
@@ -400,9 +430,9 @@ fn main() {
 >
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.0+ (Edition 2024)
 
-**文档版本**: 1.0
+**文档版本**: 1.1
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-05-21
+**最后更新**: 2026-06-20
 **状态**: ✅ 概念文件创建完成
 
 ---

@@ -64,6 +64,7 @@
 - v1.30 (2026-06-20): 权威内容对齐 Batch 26：新增 §6.15 OpenAI 以铂金会员身份加入 Rust Foundation 并捐赠 $600k 支持维护者、Project Goals 与 RIL；补充 RFMF 筹款渠道（GitHub Sponsors、rust-lang.org/funding）。来源：Rust Foundation 2026-06
 - v1.31 (2026-06-20): 权威内容对齐 Batch 27：新增 §6.16 2026 年 Rust Foundation 会员动态（Canonical Gold、Meilisearch & Doulos Silver、OpenAI Platinum）。来源：Rust Foundation 2026-01/03/06
 - v1.32 (2026-06-20): 权威内容对齐 Batch 30：新增 §6.17 Rust Foundation 加入 Datadog Open Source Program；§6.18 Walter Pearce 当选 OpenSSF Ambassador；§6.19 MWC + Talent Arena 2026；§6.20 FOSDEM 2026 Rust Devroom 回顾；§6.21 Symposium 入驻 Rust Innovation Lab；§6.22 Mainmatter 巴塞罗那 Rust 实训。来源：Rust Foundation 2026-02/03/04/05/06
+- v1.33 (2026-06-20): 权威内容对齐 Batch 31：新增 §6.16 会员表 Astral & adorsys Silver；§6.23 WhatsApp Rust at Scale 客户端媒体安全；§6.24 Rust Trademark Policy 更新；更新 `14_ferrocene_preview.md` §3.2 Safety-Critical Rust Consortium 进展。来源：Rust Foundation 2026-01/02；Meta Engineering 2026-01；Rust Foundation 2024-11
 
 ---
 
@@ -1597,6 +1598,8 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 | :--- | :--- | :--- | :--- |
 | 2026-01-29 | **Meilisearch** | Silver | Rust 编写的开源搜索引擎，展示 Rust 在搜索/AI 检索领域的生产级能力 |
 | 2026-01-29 | **Doulos** | Silver | 35 年技术培训机构，带来 Rust 教育与嵌入式培训渠道 |
+| 2026-02-21 | **Astral** | Silver | Ruff / uv 等 Python 工具链背后的 Rust 团队，月下载量数千万，代表 Rust 在开发者工具领域的统治力 |
+| 2026-02-21 | **adorsys** | Silver | 爱尔兰金融科技咨询公司，强调 Rust 在安全、效率与可持续软件中的催化作用 |
 | 2026-03-23 | **Canonical** | Gold | Ubuntu 发行商，Rust 已重写 coreutils/sudo；强调 crates.io 供应链安全 |
 | 2026-06-17 | **OpenAI** | Platinum | 首家主要 AI 公司作为 Platinum Member，捐赠 $600k 支持维护者与 Project Goals |
 
@@ -1730,6 +1733,66 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 
 > **关键洞察**: Rust 教育正从线上自学与会议工作坊，向城市级、认证化的技能培训延伸。Mainmatter 与 Foundation 的 Credly 徽章机制，为 Rust 技能提供了可验证的社会信号，这对企业招聘与个人职业转型都具有实际价值。
 > **来源**: [Rust Foundation — Mainmatter Is Bringing Hands-On Rust Training to “Upskilling Week” in Barcelona!](https://rustfoundation.org/media/mainmatter-is-bringing-hands-on-rust-training-to-upskilling-week-in-barcelona/) · 可信度: ✅
+
+### 6.23 Rust at Scale：WhatsApp 客户端媒体安全实践（2026-01-27）
+
+**[Meta Engineering / Rust Foundation, 2026-01-27]** Meta 发布工程博客 [《Rust at Scale: An Added Layer of Security for WhatsApp》](https://engineering.fb.com/2026/01/27/security/rust-at-scale-security-whatsapp/)，披露 WhatsApp 用 Rust 重建客户端媒体处理核心组件，替代约 **16 万行 C++**（不含测试），成为目前全球规模最大的 Rust 客户端安全部署之一。
+
+**背景：从 Stagefright 到 Kaleidoscope**
+
+- 2015 年 Android **Stagefright** 漏洞让 WhatsApp 意识到：操作系统级媒体库漏洞无法由应用单独修补，必须在应用层增加防护
+- WhatsApp 早期用 C++ 开发了跨平台媒体一致性库 **wamedia**，用于检测不符合 MP4 标准的文件，防止触发 OS 库漏洞
+- 由于媒体检查自动运行且处理不可信输入，wamedia 成为迁移到内存安全语言的理想目标
+
+**Rust 迁移成果**：
+
+| **维度** | **C++ wamedia** | **Rust wamedia** |
+| :--- | :--- | :--- |
+| 代码行数 | ~160,000 行（不含测试） | ~90,000 行（含测试） |
+| 覆盖平台 | 原 C++ 实现 | Android、iOS、Mac、Web、Wearables 等 |
+| 性能/内存 | 基准 | 运行性能和内存使用优于 C++ |
+| 验证手段 | — | 差分模糊测试（differential fuzzing）+ 大量集成/单元测试 |
+
+**Kaleidoscope 多层防护**：
+
+- 检测非标准文件结构，防御解析差异型漏洞
+- 对 PDF 等高风险文件类型检测嵌入文件、脚本元素等风险指标
+- 识别伪装文件类型（伪造扩展名 / MIME 类型）
+- 统一标记可执行文件等危险类型，在应用 UX 中特殊处理
+
+**Meta 的安全语言策略**：
+
+- 产品设计最小化攻击面
+- 对剩余 C/C++ 代码投入安全保证（CFI、安全分配器、安全 buffer API、开发者培训、严格 SLA）
+- **新代码默认选择内存安全语言而非 C/C++**
+
+> **关键洞察**: WhatsApp 的案例把 Rust 从“服务端/基础设施语言”扩展到“客户端安全关键库语言”。它证明 Rust 不仅能运行在数十亿终端设备上，还能在性能、跨平台能力和内存安全之间取得平衡，为移动/Web 客户端大规模采用 Rust 提供了可信先例。
+> **来源**: [Meta Engineering — Rust at Scale: An Added Layer of Security for WhatsApp](https://engineering.fb.com/2026/01/27/security/rust-at-scale-security-whatsapp/) · [Rust Foundation — Rust at Scale: What WhatsApp’s Security Journey Tells Us](https://rustfoundation.org/media/rust-at-scale-what-whatsapps-security-journey-tells-us-about-the-future-of-safer-software/) · 可信度: ✅
+
+### 6.24 Rust Trademark Policy 更新（2024-11-06）
+
+**[Rust Foundation, 2024-11-06]** Rust Foundation 董事会（含独立 Project Directors）投票批准了更新版 [Rust Language Trademark Policy](https://rustfoundation.org/policy/rust-trademark-policy/)，这是在 2023 年公开草案咨询、社区反馈和 Leadership Council 协作后的最终版本。
+
+**核心变化与澄清**：
+
+| **关注点** | **更新前草案** | **正式版** |
+| :--- | :--- | :--- |
+| 非法律摘要 | 存在“Plain English summary” | 移除，改为在全文中尽量清晰表述 |
+| “Rust” 一词使用范围 | 社区担心博客/社交媒体/演讲受限 | 明确商标仅覆盖**编程语言相关技术语境** |
+| crate / repo 命名 | 限制使用 “rust-” / “cargo-” 前缀 | **取消限制**：在指代 Rust 兼容性时允许使用 |
+| Logo 修改 | 规则较严 | **允许颜色修改**，但仍需遵守商标规则 |
+| 周边商品 | 限制较多 | 通常允许社区限量使用，商业销售需书面许可 |
+| 非背书声明 | 要求“主动声明” | 改为管理**感知上的官方关联**，本质主观 |
+| 执法方式 | 担忧过度执法 | 主要依赖社区报告，无意投入有限资源监管小创作者 |
+
+**对生态的影响**：
+
+- 降低了社区项目、教程、博客、meetup 使用 Rust 品牌的法律顾虑
+- 保留了防止恶意冒用/误导性官方关联的保护能力
+- Foundation 同步更新了官方网站 Logo，减少 Rust 语言与 Rust Foundation 之间的视觉混淆
+
+> **关键洞察**: 商标政策是开源项目治理中“信任基础设施”的一部分。Rust Foundation 此次更新在保护商标法律效力和释放社区创造力之间取得了更清晰的平衡，是 Rust 从工程项目成长为全球公共品过程中的必要制度调整。
+> **来源**: [Rust Foundation — Rust Language Trademark Policy](https://rustfoundation.org/policy/rust-trademark-policy/) · [Rust Foundation — Rust Trademark Policy Updates, Explained](https://rustfoundation.org/media/rust-language-trademark-policy-updates-explained/) · [Inside Rust — Trademark update](https://blog.rust-lang.org/2024/11/06/trademark-update.html) · 可信度: ✅
 
 ## 嵌入式测验（Embedded Quiz）
 

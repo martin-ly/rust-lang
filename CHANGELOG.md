@@ -101,6 +101,18 @@
 - **Mainmatter 巴塞罗那 Rust 实训（2026-06-18）**
   - `concept/07_future/03_evolution.md`: 新增 §6.22，说明 Upskilling Week、两天 “Learn Rust from Scratch” 课程、Credly 徽章与 Rust 教育制度化趋势
   - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.35，记录该培训活动
+- **Safety-Critical Rust Consortium 2025–2026 进展**
+  - `concept/07_future/14_ferrocene_preview.md`: 新增 §3.2，系统整理 SCRC 发起方、免费会员制、Coding Guidelines / Tooling / Liaison 三个子委员会、约 180 名成员规模、2026 年 MC/DC Rust Project Goal 推动模式，以及与 Ferrocene 的互补关系
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.36，记录 SCRC 最新动态
+- **WhatsApp Rust at Scale 客户端媒体安全（2026-01-27）**
+  - `concept/07_future/03_evolution.md`: 新增 §6.23，梳理 WhatsApp 用 Rust 替代 16 万行 C++ 的 wamedia 库、Stagefright 背景、Kaleidoscope 多层检查、差分模糊测试、数十亿终端部署规模
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.37，记录 Meta Engineering 权威案例
+- **Rust Trademark Policy 更新（2024-11-06）**
+  - `concept/07_future/03_evolution.md`: 新增 §6.24，说明正式版商标政策对 “rust-”/“cargo-” 前缀、logo 颜色修改、社区周边商品、非背书声明等关键调整
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.38，记录该治理更新
+- **Astral & adorsys 加入 Rust Foundation Silver Member（2026-02-21）**
+  - `concept/07_future/03_evolution.md`: 在 §6.16 会员动态表中新增 Astral（Ruff / uv）与 adorsys 两行，扩展 2026 年会员结构分析
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.39，记录该会员动态
 - **crates.io Svelte 前端公测（2026-04-17）**
   - `concept/06_ecosystem/19_security_practices.md`: 在 §6.4 表中补充 Svelte 5 迁移与公测入口
 - **Rust Foundation 2025 年度报告与战略（2026-01-27）**
