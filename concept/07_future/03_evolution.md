@@ -59,6 +59,9 @@
 - v1.25 (2026-06-08): Phase 3 深度瘦身完成：① 迁移 12 个活跃层级中的"已归档-in-place"重复文件至 `concept/archive/`（L3 新增 5 个：02_async_programming、03_unsafe_rust、05_macros、08_zero_cost_abstractions、13_async_patterns；此前 L1/L2/L4/L5/L6 共 7 个）；② 归档/删除 8 个根目录级旧版索引（`00.md`/`03-07.md` 归档，`01.md` 已归档、`02.md` 0 字节占位符已删除）；③ 归档 3 个历史规划文件（`PLAN.md`、`PLAN_Semantic_Space_Wave.md`、`SUMMARY.md`）；④ 新建 `archive/ARCHIVE_INDEX.md` 统一索引；⑤ 修复 7 处指向已归档文件的活跃链接（`README.md` / `inter_layer_topology.md` / `LEARNING_MVP_PATH.md` / `53_embedded_graphics.md` / `17_quiz_rust_vs_systems.md` / `25_aarch64_sve_sme_preview.md` / `35_pattern_composition_algebra.md`），清理 `05_formal_ecosystem_tower.md` 变更日志 stray `$entry` 字符
 - v1.26 (2026-06-19): 权威内容对齐 Batch 22：① 新增 §6.9 维护者成长案例（Tiffany Pek Yuan）与 §6.10 跨仓库工程工具 Josh；② 新增 §6.11 Rust Foundation 3 月董事会治理动态。详见 `05_rust_version_tracking.md` §12.14–§12.16 [来源: Inside Rust 2026-05/06]
 - v1.27 (2026-06-19): 权威内容对齐 Batch 23：新增 §6.12 Leadership Council 与基金会 1–2 月治理动态（Project Priorities Budget、AI 贡献政策、代表选举）。详见 `05_rust_version_tracking.md` §12.17–§12.19 [来源: Inside Rust 2026-02/03/04]
+- v1.28 (2026-06-19): 权威内容对齐 Batch 24：新增 §6.13 Rust-C++ 互操作倡议进展（从研究转向实施、WG21 长期路线、Teor 受聘推进问题空间映射）。来源：Rust Foundation Interop Initiative Update 2026
+- v1.29 (2026-06-19): 权威内容对齐 Batch 25：新增 §6.14 Rust Innovation Lab 下一阶段（入选标准、rustls / Symposium 案例、基金会孵化模式）。来源：Rust Foundation Blog 2026-03-30
+- v1.30 (2026-06-20): 权威内容对齐 Batch 26：新增 §6.15 OpenAI 以铂金会员身份加入 Rust Foundation 并捐赠 $600k 支持维护者、Project Goals 与 RIL；补充 RFMF 筹款渠道（GitHub Sponsors、rust-lang.org/funding）。来源：Rust Foundation 2026-06
 
 ---
 
@@ -1493,6 +1496,96 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 
 > **关键洞察**: Rust 治理在 2026 年初同时处理**人员可持续性**（Maintainer Fund、代表轮换）、**资金分配**（Project Priorities Budget）和**新型风险**（AI slop）。这些制度演进共同塑造了语言长期健康发展的治理基础设施。
 > [来源: [Leadership Council update — March 2026](https://blog.rust-lang.org/inside-rust/2026/04/06/leadership-council-update/) · [Jan & Feb PD Update](https://blog.rust-lang.org/inside-rust/2026/03/25/project-director-update/) · [LC Rep Selections](https://blog.rust-lang.org/inside-rust/2026/02/13/leadership-council-repr-selection/)] · 可信度: ✅
+
+### 6.13 Rust-C++ 互操作倡议：从研究到实施（2026-Q2）
+
+**[Rust Foundation, 2026]** Rust Foundation 发布 [Rust/C++ Interop Initiative 阶段性更新](https://rustfoundation.org/media/rust-foundation-interop-initiative-update-from-research-to-implementation/)，明确该倡议从**问题空间研究**进入**工程实施准备**阶段。
+
+**第一阶段成果（2024–Q1 2026）**：
+
+- 完成混合语言开发生态研究，识别 ABI 边界、语义差异、构建系统、长期维护等跨语言摩擦点
+- 发布 [Rust–C++ Interoperability Problem Statement](https://rustfoundation.org/media/rust-foundation-releases-problem-statement-on-c-rust-interoperability/)，并据此设立 Rust Project Goal
+- 与 WG21（ISO C++ 标准委员会）建立联系，推动内存安全 C++ 的长期共识
+
+**长期战略判断**：
+
+- Foundation 押注“更安全的 C++”是高性能、人体工学 Rust/C++ 互操作的最佳长期基础
+- 即使 WG21 在 2026 年批准相关工作，C++ 3 年发布周期也意味着**最早 2029 年**才能在生产环境落地
+- 因此，标准层面的内存安全是“长游戏”，不能解决当下的互操作痛点
+
+**近期重心转移**：
+
+- 聘请 **Teor** 作为承包商，推进 **Rust/C++ Interop Problem Space Mapping** 目标
+- 将高层研究转化为清晰的问题陈述与可执行用例（如字符串互操作、异常/栈展开、不兼容分配器、重载函数调用等）
+- 与 Rust Project 团队、C++ 社区及产业利益相关方协调，定义具体技术倡议
+
+**与 Rust Project 的衔接**：
+
+- 该 Foundation 倡议与 PM April 更新中提到的 `splat` lang experiment、Rust for Linux edition 迁移工具等项目共同构成 2026 年互操作工作组合
+- 它标志着 Rust 生态从“单语言替代”叙事转向“**在现有 C/C++ 系统中安全、渐进地集成 Rust**”的工业级路径
+
+> **关键洞察**: Rust/C++ 互操作不是单一语言特性问题，而是跨越 ABI、类型系统、构建系统、错误处理、内存分配器和标准政治的多层基础设施问题。Foundation 的阶段性策略——长期推动 C++ 内存安全标准化，近期聚焦问题映射与具体工程——体现了在“理想终点”与“当下可用性”之间取得平衡的治理智慧。
+> **来源**: [Rust Foundation — Interop Initiative Update: From Research to Implementation](https://rustfoundation.org/media/rust-foundation-interop-initiative-update-from-research-to-implementation/) · 可信度: ✅
+
+### 6.14 Rust Innovation Lab：孵化 Rust 生态的下一个项目（2026-03-30）
+
+**[Rust Foundation, 2026-03-30]** Rust Foundation 发布 [《What's Next for the Rust Innovation Lab?》](https://rustfoundation.org/media/whats-next-for-the-rust-innovation-lab/)，明确 RIL 的入选标准与孵化哲学。RIL 于 RustConf 2025 宣布成立，首个入驻项目是 **rustls**（内存安全 TLS 实现），2026 年 3 月董事会又批准 **Symposium** 项目加入。
+
+**RIL 的定位**：
+
+- 为 Rust 生态填补空白或展示 Rust 能力的项目提供**资金、管理、安全最佳实践、营销与行政支持**
+- 既可以是实验性项目的临时家园，也可以是成熟项目的长期归属
+- 项目成功路径多元：独立拆分、在实验室内持续成长、转向、暂停或回归
+
+**项目入选的三条标准**：
+
+| **标准** | **说明** |
+| :--- | :--- |
+| **Showcases Rust's strengths** | 展示 Rust 的能力与价值主张，成为有影响力的范例 |
+| **Fills a gap for Rust developers** | 解决 Rust 开发者在工具、库、基础设施、规范等方面的真实需求 |
+| **RIL adds unique value** | Foundation 的连接、生态专业知识与资源能为项目提供别处难以获得的独特价值 |
+
+**rustls 作为范例**：
+
+- **展示 Rust 优势**：内存安全 TLS 实现，生产环境已广泛部署
+- **填补生态空白**：现代安全系统的重要基础组件
+- **RIL 独特价值**：帮助 rustls 吸引关注内存安全的组织资助
+
+**对 Rust 演进的启示**：
+
+- RIL 将 Foundation 的角色从“资金提供者”扩展为**生态孵化基础设施运营者**
+- 它与 Maintainer Fund（维护者可持续性）、Interop Initiative（跨语言互操作）共同构成 Foundation 2026 年的三大支柱投资
+- 对于工业界，RIL 提供了将内部 Rust 项目或研究原型推向生态的通道
+
+> **关键洞察**: 当语言生态成熟到一定规模，**项目孵化**成为治理工具：RIL 通过降低优秀项目的行政、资金与推广门槛，放大社区创新成果。这本质上是把 Rust 的“零成本抽象”理念扩展到**组织与制度层面**。
+> **来源**: [Rust Foundation — What's Next for the Rust Innovation Lab?](https://rustfoundation.org/media/whats-next-for-the-rust-innovation-lab/) · 可信度: ✅
+
+### 6.15 OpenAI 加入 Rust Foundation 与维护者资助生态成形（2026-06）
+
+**[Rust Foundation, 2026-06-17]** OpenAI 以 **Platinum Member** 身份加入 Rust Foundation，承诺总计贡献 **$600,000**（会员费 + 额外支持），用于 Rust 语言生态的维护者、技术优先事项和关键项目。长期 Rust 社区成员、**cargo-semver-checks** 维护者 **Predrag Gruevski** 将出任 OpenAI 在基金会的董事会代表。
+
+**资金用途**：
+
+- 支持 Rust Project Goals（年度目标）
+- 支持 Rust Innovation Lab（生态孵化）
+- 为广泛依赖的 Rust 项目维护者提供直接、结构化的支持
+
+**与维护者资助体系的衔接**：
+
+- 2026-06-02，Foundation 发布 [《Help Fund the People Who Build Rust》](https://rustfoundation.org/media/help-fund-the-people-who-build-rust/)，正式开放个人与机构资助渠道：
+  - **GitHub Sponsors**: `github.com/sponsors/rustfoundation`
+  - **Rust Project 直接资助**: `rust-lang.org/funding`（赞助具体维护者）
+  - **企业联系**: `maintainers-fund@rustfoundation.org`
+- 资金由 Rust Project Funding Team 与基金会共同管理，通过现有项目和新的 **Maintainer in Residence** 合同分配给维护者
+
+**治理意义**：
+
+- OpenAI 的入会成为首家主要 AI 公司作为 Platinum Member 支持 Rust 可持续维护
+- Foundation 强调：Rust Project 的决策仍由项目自身治理结构独立做出，会员身份不赋予技术决策权
+- 这笔资金与 Maintainer Fund、RIL、Interop Initiative 共同构成 Foundation 2026 年的**资源投入矩阵**
+
+> **关键洞察**: 当 Rust 进入 Linux 内核、Android、关键基础设施和 AI 系统栈时，其可持续性已从社区自发行为演变为**产业共同责任**。OpenAI 的加入标志着 AI 行业开始将 Rust 维护者资助视为自身供应链安全投资的一部分。
+> **来源**: [Rust Foundation — OpenAI Platinum Member](https://rustfoundation.org/media/rust-foundation-welcomes-openai-as-platinum-member-announces-donation-to-rust-project/) · [On OpenAI’s Support for Rust](https://rustfoundation.org/media/on-openais-support-for-rust/) · [Help Fund the People Who Build Rust](https://rustfoundation.org/media/help-fund-the-people-who-build-rust/) · 可信度: ✅
 
 ## 嵌入式测验（Embedded Quiz）
 

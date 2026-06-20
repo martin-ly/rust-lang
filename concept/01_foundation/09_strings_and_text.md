@@ -1,4 +1,5 @@
 > **内容分级**: [综述级]
+>
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **本节关键术语**: 字符串 (String) · 字符串切片 (str) · UTF-8 · 所有权转移 (Move) · 格式化 (Formatting) — [完整对照表](../00_meta/terminology_glossary.md)
 >

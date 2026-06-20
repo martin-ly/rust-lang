@@ -50,6 +50,28 @@
   - `concept/07_future/05_rust_version_tracking.md`: 新增 2025H2 收官段落，覆盖 "Beyond the &" / Reborrow traits / Cranelift 资金关闭 / Higher-level Rust / Unblocking dormant traits / a-mir-formality / Const Generics / FLS / BorrowSanitizer / autodiff/offload / Sized hierarchy 等 13 个方向
 - **Cargo 1.93 / 1.94 开发周期（2026-01-07 / 2026-02-18）**
   - `concept/06_ecosystem/01_toolchain.md`: 新增 §5.8，梳理 Build Dir Layout v2、Target Dir 细粒度锁、Structured Logging、`pubtime`、Config Include 稳定化、TOML 1.1、`cargo-cargofmt`、`lockfile-path`、Unicode 诊断等进展
+- **Rust 1.93.0/1.93.1/1.94.0/1.94.1/1.95.0 稳定版发布笔记**
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.x 近期稳定版回顾，整理 `array_windows`、Cargo config include / TOML 1.1、musl 1.2.5、`cfg` on `asm!` lines、`cfg_select!`、原子更新、CVE-2026-33055/33056 修复等要点
+  - `concept/06_ecosystem/19_security_practices.md`: 补充 CVE-2026-33056 官方博客来源与 1.94.1 修复说明
+- **NVIDIA GPU 目标基线提升（2026-05-01）**
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.2.1，说明 Rust 1.97 将 `nvptx64-nvidia-cuda` 基线提升至 PTX ISA 7.0 / SM 7.0（Volta），旧 Maxwell/Pascal 不再支持，提供迁移建议
+  - `concept/07_future/21_rust_in_ai.md`: 新增 §2.4，从 AI/ML GPU 推理与训练视角解读该变更对 `candle`/`cust`/`rust-gpu` 等栈的影响
+- **2025 State of Rust Survey 结果细化（2026-03-02）**
+  - `concept/07_future/05_rust_version_tracking.md`: 在 §12.1 补充调查方法背景（完成率 76.2%、浏览量 20,397）、nightly 使用动因、git 依赖普遍性、离开者态度等细节
+- **Rust-C++ 互操作倡议阶段性更新（2026-Q2）**
+  - `concept/07_future/03_evolution.md`: 新增 §6.13，梳理 Rust Foundation Interop Initiative 从研究到实施的转向、WG21 长期路线、Teor 受聘推进问题空间映射、与 `splat` lang experiment / Rust for Linux 迁移工具的衔接
+- **Rust Innovation Lab 下一阶段与入选标准（2026-03-30）**
+  - `concept/07_future/03_evolution.md`: 新增 §6.14，说明 RIL 三条入选标准（展示 Rust 优势、填补开发者空白、RIL 提供独特价值），rustls / Symposium 案例，以及 RIL 与 Maintainer Fund、Interop Initiative 的协同
+- **开源包注册表可持续性联合声明（2026-05-06）**
+  - `concept/06_ecosystem/19_security_practices.md`: 新增 §6.6，整理 Sustaining Package Registries Working Group 的四大目标（经济可持续性、集体防御、治理赋能、生态教育），以及 10 万亿次下载、AI 驱动流量、注册表滥用等背景压力
+- **2026 Rust Project Goals 目录与旗舰主题**
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.26，系统整理 2026 年度目标的 11 个稳定化目标与 8 大旗舰主题（Just Add Async / Beyond the & / Unblocking dormant traits / Constify all the things / Higher-level Rust / Secure your supply chain / Safety-Critical Rust / Building blocks），并补充 BorrowSanitizer、C++ Interop Problem Space Mapping、Rust Vision Document 等重点非稳定化目标
+- **OpenAI 加入 Rust Foundation 与维护者资助生态（2026-06-17）**
+  - `concept/07_future/03_evolution.md`: 新增 §6.15，梳理 OpenAI 以 Platinum Member 身份加入、$600k 捐赠用途（Project Goals / RIL / 维护者支持）、Predrag Gruevski 进入董事会，以及 RFMF 个人/企业资助渠道（GitHub Sponsors、rust-lang.org/funding）
+- **RustConf 2026 演讲阵容与注册开放（2026-04-08）**
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.27，记录会议时间地点（9.8–9.11 Montreal）、Jon Seager 主题演讲、Rebecca Rumbul & Deb Nicholson 闭幕炉边对话、新增 Lightning Talks / Project Updates 环节
+- **Rust Commercial Network 成立（2026-06-16）**
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.28，说明 RCN 作为生产用户产业协作网络的定位、Steering Committee、Network Services Working Group 创始成员（AWS/Microsoft/JetBrains/F5/Databricks）、预期产出（采用手册、参考架构、项目反馈）
 - **crates.io Svelte 前端公测（2026-04-17）**
   - `concept/06_ecosystem/19_security_practices.md`: 在 §6.4 表中补充 Svelte 5 迁移与公测入口
 - **Rust Foundation 2025 年度报告与战略（2026-01-27）**

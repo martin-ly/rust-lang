@@ -1,4 +1,5 @@
 > **内容分级**: [综述级]
+>
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 >
 > **本节关键术语**: 集合 (Collection) · 向量 (Vec) · 哈希映射 (HashMap) · 哈希集合 (HashSet) · 二叉堆 (BinaryHeap) — [完整对照表](../00_meta/terminology_glossary.md)
@@ -68,6 +69,7 @@
     - [测验 3：迭代器与借用（分析层）](#测验-3迭代器与借用分析层)
     - [测验 4：BTreeMap vs HashMap（评价层）](#测验-4btreemap-vs-hashmap评价层)
     - [测验 5： draining 与内存（应用层）](#测验-5-draining-与内存应用层)
+  - [十二、延伸阅读与自测](#十二延伸阅读与自测)
 
 ---
 

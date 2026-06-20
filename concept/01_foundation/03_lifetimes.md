@@ -1,4 +1,5 @@
 > **内容分级**: [综述级]
+>
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 >
 > **本节关键术语**: 生命周期 (Lifetime) · 生命周期注解 (Lifetime Annotation) · 静态生命周期 ('static) · 省略规则 (Elision) — [完整对照表](../00_meta/terminology_glossary.md)
@@ -103,6 +104,7 @@
     - [测验 3：悬垂引用（分析层）](#测验-3悬垂引用分析层)
     - [测验 4：HRTB 场景（专家级）](#测验-4hrtb-场景专家级)
     - [测验 5：NLL 与 Polonius（实验级）](#测验-5nll-与-polonius实验级)
+  - [十二、延伸阅读与自测](#十二延伸阅读与自测)
 
 ## 一、权威定义（Definition）
 

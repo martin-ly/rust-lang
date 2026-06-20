@@ -1,4 +1,7 @@
-> **内容分级**: [综述级]
+> **内容分级**:
+>
+> [综述级]
+>
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 >
 > **本节关键术语**: 所有权 (Ownership) · 移动 (Move) · 借用 (Borrow) · 引用 (Reference) · 生命周期 (Lifetime) — [完整对照表](../00_meta/terminology_glossary.md)
@@ -23,7 +26,12 @@
 > **层级**: L1 基础概念
 > **前置概念**: [Stack vs Heap](../01_foundation/04_type_system.md) · [Scope and Drop](../01_foundation/04_type_system.md)
 > **后置概念**: [Borrowing](./02_borrowing.md) · [Lifetimes](./03_lifetimes.md) · [Smart Pointers](../02_intermediate/03_memory_management.md)
-> **主要来源**: [TRPL 3rd Ed: Ch4](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) · [Brown University Interactive Book: Ch4](https://rust-book.cs.brown.edu/ch04-00-understanding-ownership.html) · [Wikipedia: Ownership type](https://en.wikipedia.org/wiki/Ownership_type) · [Utrecht: Ownership Types]
+> **主要来源**:
+>
+> [TRPL 3rd Ed: Ch4](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) ·
+> [Brown University Interactive Book: Ch4](https://rust-book.cs.brown.edu/ch04-00-understanding-ownership.html) ·
+> [Wikipedia: Ownership type](https://en.wikipedia.org/wiki/Ownership_type) ·
+> [Utrecht: Ownership Types]
 
 ---
 
@@ -118,6 +126,7 @@
     - [测验 3：借用与所有权的关系（分析层）](#测验-3借用与所有权的关系分析层)
     - [测验 4：Drop 语义（理解层）](#测验-4drop-语义理解层)
     - [测验 5：反例分析（分析层）](#测验-5反例分析分析层)
+  - [十二、延伸阅读与自测](#十二延伸阅读与自测)
 
 ## 一、权威定义（Definition）
 

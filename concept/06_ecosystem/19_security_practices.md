@@ -1,11 +1,11 @@
 > **内容分级**: [专家级]
-
 > **代码状态**: ✅ 含可编译示例
-
 >
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
+
 # 安全 实践：Rust 代码的防御性编程
+
 >
 > **EN**: Security Practices
 > **Summary**: Security Practices. Core Rust concept covering practical examples, memory safety and UB prevention, testing and verification.
@@ -53,7 +53,8 @@
     - [6.3 crates.io 恶意 crate 与通知政策变更（2026-02-13 起，2026-06-19 澄清）](#63-cratesio-恶意-crate-与通知政策变更2026-02-13-起2026-06-19-澄清)
     - [6.4 crates.io 平台安全能力演进（2026-01-21）](#64-cratesio-平台安全能力演进2026-01-21)
     - [6.5 跨生态系统供应链攻击：TrapDoor（2026-05）](#65-跨生态系统供应链攻击trapdoor2026-05)
-    - [6.6 已知传递依赖安全状态（本项目）](#66-已知传递依赖安全状态本项目)
+    - [6.6 包注册表可持续性：Sustaining Package Registries Working Group（2026-05-06）](#66-包注册表可持续性sustaining-package-registries-working-group2026-05-06)
+    - [6.7 已知传递依赖安全状态（本项目）](#67-已知传递依赖安全状态本项目)
   - [七、来源与延伸阅读](#七来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
@@ -708,7 +709,35 @@ cargo deny check advisories
 
 > **来源**: [ByteIota — TrapDoor Supply Chain Attack](https://byteiota.com/trapdoor-supply-chain-attack-npm-pypi-crates/) · [Socket.dev](https://socket.dev/) · [JFrog 2026 Supply Chain Report] · 可信度: ✅
 
-### 6.6 已知传递依赖安全状态（本项目）
+### 6.6 包注册表可持续性：Sustaining Package Registries Working Group（2026-05-06）
+
+**[Rust Foundation / Linux Foundation, 2026-05-06]** Rust Foundation 作为创始成员加入 Linux Foundation 新成立的 **Sustaining Package Registries Working Group**，与 Maven Central、npm、PyPI 等注册表管理者共同应对公共包注册表在全球规模下的可持续性问题。
+
+**背景压力**：
+
+- 2025 年全球开源下载量接近 **10 万亿次**，注册表从“开发者规模”进入“机器规模”
+- AI 驱动的流量、机器人/镜像抓取、自动化发布、安全报告量与注册表滥用同步上升
+- 这些压力暴露出**可持续性缺口**，已成为软件供应链安全与韧性的系统性风险
+
+**工作组四大目标**：
+
+| **目标** | **说明** |
+| :--- | :--- |
+| **经济可持续性** | 为注册表设计可覆盖基础设施、运营、维护者和治理成本的资助模式 |
+| **集体防御** | 促进跨注册表协调的安全实践与信息共享，提升威胁检测与响应效率 |
+| **治理赋能** | 制定共享政策框架与标准化条款，支持可持续资助模式落地 |
+| **生态教育与透明** | 创建一致的沟通与教育内容，帮助生态理解注册表可持续性努力 |
+
+**对 Rust 生态的意义**：
+
+- crates.io 是 Rust 安全承诺的关键基础设施；其可信度与资源充足性直接影响语言在关键基础设施和 AI 工具链中的采用
+- Rust Foundation 将注册表可持续性定位为**跨行业共同责任**，而非单一平台负担
+- 该声明与 2026-02-13 crates.io 恶意 crate 通知政策澄清、2026-01-21 平台安全能力演进共同构成 Rust 供应链安全治理的三条主线
+
+> **关键洞察**: 当注册表成为软件供应链的“前线基础设施”时，其经济可持续性就是安全属性。Sustaining Package Registries Working Group 的成立标志着行业开始将注册表从“被动分发点”重新定义为需要共同投资、治理和防御的**关键运营系统**。
+> **来源**: [Rust Foundation — Package Registry Leaders Unite to Address Open Source Sustainability Crisis](https://rustfoundation.org/media/rust-foundation-and-package-registry-leaders-unite-to-address-open-source-sustainability-crisis/) · [Linux Foundation — Sustaining Package Registries Working Group](https://www.linuxfoundation.org/press/press-release/sustaining-package-registries-working-group) · 可信度: ✅
+
+### 6.7 已知传递依赖安全状态（本项目）
 
 | 依赖 | RUSTSEC | 状态 | 影响评估 | 计划 |
 |:---|:---|:---:|:---|:---|

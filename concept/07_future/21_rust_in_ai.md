@@ -37,6 +37,7 @@
     - [2.1 Candle：纯 Rust ML 框架](#21-candle纯-rust-ml-框架)
     - [2.2 ONNX Runtime 集成](#22-onnx-runtime-集成)
     - [2.3 WebAssembly 推理](#23-webassembly-推理)
+    - [2.4 NVIDIA GPU 目标基线提升（Rust 1.97）](#24-nvidia-gpu-目标基线提升rust-197)
   - [三、应用场景矩阵](#三应用场景矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
@@ -304,6 +305,34 @@ WASM 推理的优势:
 
 > **WASM 洞察**: **WASM + Rust** 使**客户端 AI**成为可能——数据不离开设备，保护隐私。
 > [来源: [Rust WASM Book](https://rustwasm.github.io/book/)]
+
+### 2.4 NVIDIA GPU 目标基线提升（Rust 1.97）
+
+Rust 的 `nvptx64-nvidia-cuda` 目标允许将 Rust 代码编译为 NVIDIA GPU 可用的 PTX 中间码，是 Rust 进入 GPU 计算（尤其是 AI 训练/推理加速器生态）的关键入口。Rust 1.97（2026-07-09 稳定）将**提高该目标的最低基线**：
+
+| **基线项** | **新基线** | **最低要求** |
+| :--- | :--- | :--- |
+| PTX ISA 版本 | **PTX ISA 7.0** | CUDA 11 驱动或更新 |
+| GPU 架构（SM） | **SM 7.0（Volta）** | 计算能力 7.0 及以上 |
+
+**对 AI/ML 项目的影响**:
+
+- 使用 `candle` / `cust` / `rust-gpu` 等栈生成 PTX 时，需确保目标 GPU 为 Volta（2017）或更新架构
+- 默认 `-C target-cpu` 将变为 `sm_70`；显式指定旧架构（如 `sm_60`）的构建脚本需要更新
+- 不再支持 Maxwell / Pascal 等旧 GPU，减少编译器为兼容旧架构而产生的错误编译风险
+
+**迁移建议**:
+
+```bash
+# 推荐：不指定 target-cpu，使用 1.97 默认 sm_70
+rustc --target nvptx64-nvidia-cuda ...
+
+# 或显式指定 sm_70 及更新版本
+rustc -C target-cpu=sm_70 --target nvptx64-nvidia-cuda ...
+```
+
+> **GPU 洞察**: Rust 在 AI 加速器领域仍属前沿生态。基线提升虽然牺牲了对旧硬件的支持，但换来编译器正确性和性能优化空间，符合 Rust "为当前主流硬件提供可靠抽象" 的一贯取舍。
+> **来源**: [Rust Blog — Raising the baseline for the nvptx64-nvidia-cuda target](https://blog.rust-lang.org/2026/05/01/nvptx-baseline-update/) · 可信度: ✅
 
 ---
 

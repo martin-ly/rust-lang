@@ -1,4 +1,5 @@
 > **内容分级**: [综述级]
+>
 > **本节关键术语**: 零成本抽象 (Zero-Cost Abstraction) · 内联 (Inlining) · 单态化 (Monomorphization) · 编译期优化 (Compile-Time Optimization) · 抽象开销 (Abstraction Overhead) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 零成本抽象：Rust 的性能哲学

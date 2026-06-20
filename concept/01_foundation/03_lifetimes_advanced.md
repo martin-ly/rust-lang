@@ -1,5 +1,6 @@
-> **内容分级**: [综述级]
-
+> **内容分级**:
+>
+> [综述级]
 > **本节关键术语**: 生命周期省略 (Lifetime Elision) · HRTB (Higher-Ranked Trait Bounds) · 协变 (Covariance) · 逆变 (Contravariance) · 不变 (Invariance) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # Lifetimes 高级主题
