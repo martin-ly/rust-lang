@@ -130,6 +130,18 @@
 - **Rust Foundation 2024 Fellows 公布（2024-10-14）**
   - `concept/07_future/03_evolution.md`: 新增 §6.30，整理 19 名 Fellows 的三类结构（Community / Project Goal / Project）与代表性项目目标
   - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.44 记录 2024 Fellowship cohort
+- **Rust Foundation 2025 年度报告与 2026-2028 战略（2026-01-27）**
+  - `concept/07_future/03_evolution.md`: 新增 §6.31，梳理 2025 年筹款 $5.1M、$2.7M 直接投入 Rust Project 与社区、$2.0M 全职维护与基础设施，以及 2026-2028 五大战略优先领域
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.45 记录该财务与战略发布
+- **RustConf 2026：回归蒙特利尔与早期安排（2025-12-03）**
+  - `concept/07_future/03_evolution.md`: 新增 §6.32，覆盖 2026-09-08 至 09-11 蒙特利尔 Palais des Congrès、线上线下混合、签证邀请函、CFP/赞助/注册时间线、RustConf 2025 参会数据
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.46 记录 RustConf 2026 早期信息
+- **RustConf 2026 演讲征集（CFP）开放（2025-12-16）**
+  - `concept/07_future/03_evolution.md`: 新增 §6.33，说明 2025-12-16 至 2026-02-16 提交窗口、匿名初评、八大主题类别、差旅津贴与 UnConference 预报名
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.47 记录 CFP 机制
+- **RustConf 2026 程序委员会亮相（2026-01-15）**
+  - `concept/07_future/03_evolution.md`: 新增 §6.34，介绍来自五大洲的 10 名委员会成员、4+4+2 的组成机制与多元化目标
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.48 记录 Program Committee
 - **crates.io Svelte 前端公测（2026-04-17）**
   - `concept/06_ecosystem/19_security_practices.md`: 在 §6.4 表中补充 Svelte 5 迁移与公测入口
 - **Rust Foundation 2025 年度报告与战略（2026-01-27）**

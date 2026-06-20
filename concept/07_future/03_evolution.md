@@ -66,6 +66,7 @@
 - v1.32 (2026-06-20): 权威内容对齐 Batch 30：新增 §6.17 Rust Foundation 加入 Datadog Open Source Program；§6.18 Walter Pearce 当选 OpenSSF Ambassador；§6.19 MWC + Talent Arena 2026；§6.20 FOSDEM 2026 Rust Devroom 回顾；§6.21 Symposium 入驻 Rust Innovation Lab；§6.22 Mainmatter 巴塞罗那 Rust 实训。来源：Rust Foundation 2026-02/03/04/05/06
 - v1.33 (2026-06-20): 权威内容对齐 Batch 31：新增 §6.16 会员表 Astral & adorsys Silver；§6.23 WhatsApp Rust at Scale 客户端媒体安全；§6.24 Rust Trademark Policy 更新；更新 `14_ferrocene_preview.md` §3.2 Safety-Critical Rust Consortium 进展。来源：Rust Foundation 2026-01/02；Meta Engineering 2026-01；Rust Foundation 2024-11
 - v1.34 (2026-06-20): 权威内容对齐 Batch 32：新增 §6.25–§6.30，覆盖 Rust Foundation 2025 Technology Report、Microsoft $1M Donation、Arm Platinum Member、Rust Global 2025、Project Director Jan/Feb 2026 更新、2024 Fellows。来源：Rust Foundation 2024/2025/2026
+- v1.35 (2026-06-20): 权威内容对齐 Batch 33：新增 §6.31–§6.34，覆盖 Rust Foundation 2025 年度报告与 2026-2028 战略、RustConf 2026 早期信息/CFP/Program Committee。来源：Rust Foundation 2025/2026
 
 ---
 
@@ -1899,6 +1900,86 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 
 > **关键洞察**: 2024 Fellowship 的结构化分类（Community / Project Goal / Project）体现了 Rust 社区资助从“奖励个人贡献”向“对齐项目目标 + 地域多元化”演进的策略，使 Fellowship 成为连接年度目标、地域扩展与维护者可持续性的杠杆。
 > **来源**: [Rust Foundation — 2024 Fellows](https://rustfoundation.org/media/announcing-the-rust-foundations-2024-fellows/) · 可信度: ✅
+
+### 6.31 Rust Foundation 2025 年度报告与 2026-2028 战略（2026-01-27）
+
+**[Rust Foundation, 2026-01-27]** 基金会同步发布 [2025 Annual Report](https://rustfoundation.org/media/2025-annual-report/) 与 [2026-2028 Strategy](https://rustfoundation.org/media/2026-2028-strategy/)，从财务与战略两个维度展示其对 Rust 生态的投入与未来三年方向。
+
+**2025 财务概况**：
+
+| 指标 | 金额 | 说明 |
+|:---|:---|:---|
+| 全年筹款 | $5.1M | 会员费与捐赠合计 |
+| 直接投入 Rust Project 与社区 | $2.7M | 工程、基础设施、资助、活动等 |
+| 全职维护工作与相关成本 | $2.0M | 支持全职 Rust 维护者、工具、基础设施 |
+| 治理/运营/安全/合规 | 剩余部分 | 非工程人员、审计、合同、活动等 |
+
+**2026-2028 五大战略优先领域**：
+
+1. **Stable, secure infrastructure** — 稳定、安全的基础设施
+2. **Sustainable support for maintainers** — 维护者的可持续支持
+3. **Responsible growth in adoption** — 负责任的采用增长
+4. **Meaningful engagement from organizations that rely on Rust** — 依赖 Rust 的组织的深度参与
+5. **Strong, connected global communities** — 强大且互联的全球社区
+
+**战略定位**：从“基金会已经建成什么”转向“如何支持 Rust 下一阶段的影响与增长”。
+
+> **关键洞察**: 2025 年度报告将项目进展与员工焦点从年度报告中剥离，集中到 [rustfoundation.org/2025](https://rustfoundation.org/2025/)，使报告更聚焦于财务影响；2026-2028 战略则明确把“维护者可持续性”和“组织参与”并列为基础设施同等重要的支柱。
+> **来源**: [Rust Foundation — How We Invested in Rust in 2025 — and What Comes Next](https://rustfoundation.org/media/annual-report-strategy-2025/) · [2025 Annual Report](https://rustfoundation.org/media/2025-annual-report/) · [2026-2028 Strategy](https://rustfoundation.org/media/2026-2028-strategy/) · 可信度: ✅
+
+### 6.32 RustConf 2026：回归蒙特利尔与早期安排（2025-12-03）
+
+**[Rust Foundation, 2025-12-03]** RustConf 2026 将于 **2026-09-08 至 09-11** 在蒙特利尔 **Palais des Congrès** 举行，同时提供线上参与选项。
+
+**关键安排**：
+
+- **选址**：回归 2024 年备受好评的蒙特利尔；新场地更现代、可达性更好、空间更大
+- **形式**：四天活动，线下 + 线上混合
+- **签证支持**：已开放官方邀请函申请，帮助国际参会者办理签证
+- **CFP**：2025 年 12 月内开放
+- **赞助**：2026 年赞助方案即将发布
+- **注册**：2026 年初开放
+
+**RustConf 2025 回顾**：630+ 线下参会者、2000+ 线上参会者、30+ 位演讲者，是迄今规模最大的一届。
+
+> **来源**: [Rust Foundation — RustConf 2026: Early Details and What’s Coming Next](https://rustfoundation.org/media/rustconf-2026-early-details/) · 可信度: ✅
+
+### 6.33 RustConf 2026 演讲征集（CFP）开放（2025-12-16）
+
+**[Rust Foundation, 2025-12-16]** RustConf 2026 CFP 正式开放，提交窗口为 **2025-12-16 至 2026-02-16**。
+
+**评审与包容机制**：
+
+- **匿名初评**：初轮评审不显示姓名与简介，聚焦想法、洞察与创意
+- **不限身份**：欢迎实验者、爱好者、社区故事讲述者，无需全职 Rust 专家或资深演讲者
+- **多类别**：Practical Rust Insights、Community Interest Stories、Design & Architecture、Skills & Tooling、Rust in New & Exciting Places、Experiments & Wild Ideas、Learning & Teaching Rust、Rust Global
+- **格式**：完整演讲与闪电 talk 均可；可提交多个提案
+- **支持**：为线下演讲者提供差旅津贴，远程演讲者也可获得指导
+- **UnConference**：今年需提前报名，名额有限
+
+> **来源**: [Rust Foundation — The RustConf 2026 Call for Proposals Is Open!](https://rustfoundation.org/media/the-rustconf-2026-call-for-proposals-is-open/) · 可信度: ✅
+
+### 6.34 RustConf 2026 程序委员会亮相（2026-01-15）
+
+**[Rust Foundation, 2026-01-15]** RustConf 2026 Program Committee 公布，由来自五大洲的全球社区成员组成，旨在打造反映 Rust 在全球使用、教学与推进方向的均衡议程。
+
+**委员会成员**（按原文顺序）：
+
+- **Jakub Beránek** — Rust Infrastructure / Compiler 团队成员，基础设施团队 Leadership Council 代表
+- **Lisa Crossman** — 生物信息学家，microBioRust 创始人，Rust Project Grant 获得者
+- **Alex Celeste** — Safety-Critical Rust Consortium Guidelines / FLS / Liaison 团队成员，ISO WG14 / MISRA C 活跃成员
+- **Hernán Gabriel González** — Oxidar 创始人，阿根廷 Rust meetup 组织者
+- **Conrad Ludgate** — Databricks 工程师，专注 async 与密码学
+- **Adefemi Adeoye** — This Week in Rust 编辑
+- **Aida Getoeva** — Meta 首个大型 Rust 项目与源代码控制服务器团队成员
+- **Jacob Pratt** — `time` crate 维护者，std 贡献者
+- **Lori Lorusso** — Rust Foundation Director of Outreach
+- **Adam Harvey** — Rust Foundation 安全工程师，crates.io 团队成员
+
+**组成机制**：4 位由基金会直接邀请（基于 RustConf/活动组织经验），4 位通过 Rust Project Zulip 自荐选出，2 位来自基金会内部。遴选强调整体平衡而非个人资历。
+
+> **关键洞察**: 程序委员会的地理与背景多元化是 RustConf 作为全球旗舰会议的核心信号——它不仅是技术议程的把关者，也是 Rust 社区“谁的声音值得被放大”的治理实践。
+> **来源**: [Rust Foundation — Announcing the RustConf 2026 Program Committee](https://rustfoundation.org/media/announcing-the-rustconf-2026-program-committee/) · 可信度: ✅
 
 ## 嵌入式测验（Embedded Quiz）
 
