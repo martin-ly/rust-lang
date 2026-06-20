@@ -113,6 +113,23 @@
 - **Astral & adorsys 加入 Rust Foundation Silver Member（2026-02-21）**
   - `concept/07_future/03_evolution.md`: 在 §6.16 会员动态表中新增 Astral（Ruff / uv）与 adorsys 两行，扩展 2026 年会员结构分析
   - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.39，记录该会员动态
+- **Rust Foundation 2025 Technology Report（2025-08-05）**
+  - `concept/07_future/03_evolution.md`: 新增 §6.25，梳理 Trusted Publishing、TUF crate 签名、FLS 并入 Rust Project、CI 成本降低 75%、Safety-Critical Rust Consortium、C++ 互操作等工程进展
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.40 记录该年度技术报告要点
+- **Microsoft $1M Donation 支持 Rust Foundation & Project Priorities（2024-05-07）**
+  - `concept/07_future/03_evolution.md`: 新增 §6.26，说明 $350K 基础设施工程师与 $650K Project 自主优先事项的资金分配
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.41 记录该捐赠及其对 Leadership Council 治理地位的意义
+- **Arm 升级为 Rust Foundation Platinum Member（2025-09-03）**
+  - `concept/07_future/03_evolution.md`: 在 §6.16 会员动态表中追加 Arm Platinum 升级记录，并新增 §6.27 解读 Arm 对 Rust 作为 AI/云/嵌入式/IoT 基础设施语言的判断
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.42 记录该会员升级
+- **Rust Global 2025：伦敦与 RustChinaConf 全球轨道（2025-01-13 / 2025-08-14）**
+  - `concept/07_future/03_evolution.md`: 新增 §6.28，覆盖伦敦生产案例会议与杭州 RustChinaConf 全球轨道
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.43 记录 Rust Global 活动系列扩展
+- **Project Director Update — January & February 2026（2026-03-25）**
+  - `concept/07_future/03_evolution.md`: 新增 §6.29，梳理 cargo-capslock、crates.io Security Tab/Svelte 迁移、C++ 互操作行动计划、Rust Innovation Lab 入选标准、End User Group 规划等董事会工程动态
+- **Rust Foundation 2024 Fellows 公布（2024-10-14）**
+  - `concept/07_future/03_evolution.md`: 新增 §6.30，整理 19 名 Fellows 的三类结构（Community / Project Goal / Project）与代表性项目目标
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.44 记录 2024 Fellowship cohort
 - **crates.io Svelte 前端公测（2026-04-17）**
   - `concept/06_ecosystem/19_security_practices.md`: 在 §6.4 表中补充 Svelte 5 迁移与公测入口
 - **Rust Foundation 2025 年度报告与战略（2026-01-27）**

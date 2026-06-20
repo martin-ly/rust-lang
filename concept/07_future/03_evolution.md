@@ -65,6 +65,7 @@
 - v1.31 (2026-06-20): 权威内容对齐 Batch 27：新增 §6.16 2026 年 Rust Foundation 会员动态（Canonical Gold、Meilisearch & Doulos Silver、OpenAI Platinum）。来源：Rust Foundation 2026-01/03/06
 - v1.32 (2026-06-20): 权威内容对齐 Batch 30：新增 §6.17 Rust Foundation 加入 Datadog Open Source Program；§6.18 Walter Pearce 当选 OpenSSF Ambassador；§6.19 MWC + Talent Arena 2026；§6.20 FOSDEM 2026 Rust Devroom 回顾；§6.21 Symposium 入驻 Rust Innovation Lab；§6.22 Mainmatter 巴塞罗那 Rust 实训。来源：Rust Foundation 2026-02/03/04/05/06
 - v1.33 (2026-06-20): 权威内容对齐 Batch 31：新增 §6.16 会员表 Astral & adorsys Silver；§6.23 WhatsApp Rust at Scale 客户端媒体安全；§6.24 Rust Trademark Policy 更新；更新 `14_ferrocene_preview.md` §3.2 Safety-Critical Rust Consortium 进展。来源：Rust Foundation 2026-01/02；Meta Engineering 2026-01；Rust Foundation 2024-11
+- v1.34 (2026-06-20): 权威内容对齐 Batch 32：新增 §6.25–§6.30，覆盖 Rust Foundation 2025 Technology Report、Microsoft $1M Donation、Arm Platinum Member、Rust Global 2025、Project Director Jan/Feb 2026 更新、2024 Fellows。来源：Rust Foundation 2024/2025/2026
 
 ---
 
@@ -1602,6 +1603,7 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 | 2026-02-21 | **adorsys** | Silver | 爱尔兰金融科技咨询公司，强调 Rust 在安全、效率与可持续软件中的催化作用 |
 | 2026-03-23 | **Canonical** | Gold | Ubuntu 发行商，Rust 已重写 coreutils/sudo；强调 crates.io 供应链安全 |
 | 2026-06-17 | **OpenAI** | Platinum | 首家主要 AI 公司作为 Platinum Member，捐赠 $600k 支持维护者与 Project Goals |
+| 2025-09-03 | **Arm** | Platinum（自 Silver 升级） | 创始成员升级，强调 AI/云/嵌入式/IoT 时代 Rust 作为基础设施核心语言 |
 
 **Canonical 加入的特殊信号**：
 
@@ -1793,6 +1795,110 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 
 > **关键洞察**: 商标政策是开源项目治理中“信任基础设施”的一部分。Rust Foundation 此次更新在保护商标法律效力和释放社区创造力之间取得了更清晰的平衡，是 Rust 从工程项目成长为全球公共品过程中的必要制度调整。
 > **来源**: [Rust Foundation — Rust Language Trademark Policy](https://rustfoundation.org/policy/rust-trademark-policy/) · [Rust Foundation — Rust Trademark Policy Updates, Explained](https://rustfoundation.org/media/rust-language-trademark-policy-updates-explained/) · [Inside Rust — Trademark update](https://blog.rust-lang.org/2024/11/06/trademark-update.html) · 可信度: ✅
+
+### 6.25 Rust Foundation 2025 Technology Report：安全、韧性与战略伙伴关系（2025-08-05）
+
+**[Rust Foundation, 2025-08-05]** 基金会发布第二年综合技术报告（覆盖 Q3 2024–Q3 2025），系统总结其技术团队在供应链安全、关键基础设施、安全关键就绪、C++ 互操作等领域的工程投入。
+
+**技术与工程亮点**：
+
+| 领域 | 进展 |
+|:---|:---|
+| 可信发布 | crates.io **Trusted Publishing** 全面上线，集成 GitHub Secret Scanning、自动事件响应与改进的发布流水线 |
+| Crate 签名 | 基于 **TUF** 的 crate 签名完成三个完整仓库实现，达成利益相关者共识，准备全生态推广 |
+| 形式规范 | **Ferrocene Language Specification（FLS）** 并入 Rust Project，向官方 Rust 语言规范迈出关键一步 |
+| CI 成本 | 优化工作流并迁移到高性价比 runner，CI 基础设施成本降低 **75%** |
+| 安全关键 | Safety-Critical Rust Consortium 扩展，在蒙特利尔/伦敦/乌得勒支举行国际会议，推进对齐 MISRA 等标准的编码指南 |
+| C++ 互操作 | 完成战略路线图，参与 ISO WG21 会议，启动跨语言工具与文档规划 |
+| 基础设施即代码 | 所有 Rust 仓库通过 IaC 管理，提高可维护性与安全性 |
+| 漏洞呈现 | crates.io 漏洞呈现能力开始集成，Security Tab 后续上线 |
+
+**资金与支持**：OpenSSF Alpha-Omega 持续资助安全倡议；AWS、GitHub、Mullvad VPN 等捐赠基础设施。
+
+> **关键洞察**: 2025 Technology Report 显示 Rust Foundation 正从“支持 Rust Project 的财务与行政后台”转向“直接承担关键工程交付”的角色——在 crate 签名、可信发布、CI 成本、FLS 等领域形成了可度量的工程产出。
+> **来源**: [Rust Foundation — 2025 Technology Report](https://rustfoundation.org/media/rust-foundations-2025-technology-report-showcases-year-of-rust-security-advancements-ecosystem-resilience-strategic-partnerships/) · 可信度: ✅
+
+### 6.26 Microsoft 捐赠 $1M 支持 Rust Foundation 与 Project 优先事项（2024-05-07）
+
+**[Rust Foundation, 2024-05-07]** 作为 Platinum Member，Microsoft 于 2023-12 提供 $1M 无限制捐赠，2024 年 5 月基金会公布资金用途：两年周期内资助额外基础设施工程师、Fellowship 项目及减轻维护者负担的新系统。
+
+**资金分配**：
+
+| 用途 | 金额 | 说明 |
+|:---|:---|:---|
+| 新增基础设施工程师 | $350K | 两年期聘用，加强 Technology Team 对关键基础设施的支持 |
+| Rust Project 自主优先事项 | $650K | 由 Leadership Council 两年内按 Project 需求分配，首批 $325K 用于流程改进与维护者工作流效率工具 |
+
+**意义**：这是 Rust Foundation 首次大规模将企业会员资金直接对齐到 Project 自选优先事项，强化了 Leadership Council 作为 Rust Project 代言人的治理地位。
+
+> **来源**: [Rust Foundation — $1M Microsoft Donation](https://rustfoundation.org/media/1m-microsoft-donation-to-fund-key-rust-foundation-project-priorities/) · 可信度: ✅
+
+### 6.27 Arm 升级为 Rust Foundation Platinum Member（2025-09-03）
+
+**[Rust Foundation, 2025-09-03]** 在 RustConf 2025 上，Arm 宣布将其 Rust Foundation 会员级别从 Silver 提升至 Platinum。Arm 是 Rust Foundation 创始成员之一，长期贡献 Rust 项目，此次升级反映其将 Rust 视为 AI、云、嵌入式与 IoT 时代基础设施核心语言的判断。
+
+**Arm 声明要点**：
+- 在 AI 时代，为开发者提供稳健可靠的创新基础比以往更重要
+- 加深对 Rust Foundation 使命的支持，帮助强化、保障并扩大 Rust 的影响力
+
+**与基金会战略的衔接**：Platinum 支持帮助基金会扩展现有计划并孵化新倡议，例如同期宣布的 Rust Innovation Lab。
+
+> **来源**: [Rust Foundation — Arm as Platinum Member](https://rustfoundation.org/media/rust-foundation-announces-arm-as-a-platinum-member/) · 可信度: ✅
+
+### 6.28 Rust Global 2025：伦敦与 RustChinaConf 全球轨道（2025-01-13 / 2025-08-14）
+
+**[Rust Foundation, 2025]** Rust Global 是基金会面向 Rust 在企业和公共部门规模化应用的活动系列。2025 年扩展至伦敦并首次在中国 RustChinaConf 设置全球轨道。
+
+- **Rust Global 2025: London（2025-02-21）**：与 Rust Nation UK 联办，TrueLayer 赞助主办，议题包括 SAP OData V2 集成、Prime Video UI 的 Rust + WebAssembly 重构、Serverless Rust 生产入门等。
+- **RustChinaConf 2025 Rust Global Track（2025-09-13/14，杭州）**：全球视角讲座无缝融入主议程，标记为 “Rust Global”，无需单独注册；Rebecca Rumbul 等基金会成员到场参与。
+
+**定位**：Rust Global 强调“真实生产案例、全球领导力与产业协作”，与社区技术会议形成互补。
+
+> **来源**: [Rust Foundation — Rust Global 2025: London](https://rustfoundation.org/media/announcing-rust-global-2025-london/) · [Rust Foundation — Rust Global Track at RustChinaConf 2025](https://rustfoundation.org/media/announcing-the-rust-global-track-at-rustchinaconf-2025/) · 可信度: ✅
+
+### 6.29 Project Director Update — 2026 年 1–2 月董事会动态（2026-03-25）
+
+**[Rust Foundation / Inside Rust Blog, 2026-03-25]** Carol Nichols 与 David Wood 发布 1–2 月董事会合并更新，披露基金会工程团队在多个关键项目上的进展。
+
+**工程与安全**：
+- `cargo-capslock`：已开发用于对 Rust 二进制执行静态与运行时能力分析
+- crates.io Security Tab：漏洞呈现功能已接受、合并并上线；计划补充 CVSS 评分信息
+- crates.io 前端：从 EmberJS 迁移到 Svelte
+- C++ 互操作：2026 年行动计划聚焦“C++ 内存安全子集”与问题空间映射
+
+**治理与运营**：
+- 新任 Infra Engineer Ubiratan Soares 于 1 月 19 日入职（Sovereign Tech Agency 资助）
+- 讨论并明确 Rust Innovation Lab 入选标准
+- 规划 End User Group，加强商业用户、基金会与 Project 之间的互惠关系
+- AWS 追加额度捐赠，缓解 2026 年基础设施预算压力
+- Alexandru Radovici 连任 Silver Member 董事会代表
+
+> **来源**: [Rust Foundation — Project Director Update — January & February 2026](https://rustfoundation.org/media/project-director-update-january-february-2026/) · 可信度: ✅
+
+### 6.30 Rust Foundation 2024 Fellows 公布（2024-10-14）
+
+**[Rust Foundation, 2024-10-14]** 基金会通过 Community Grants Program 公布 2024 Fellowship cohort，共 19 人，分为三类：
+
+| 类别 | 人数 | 定位 |
+|:---|:---|:---|
+| Community Fellowships | 3 | 在西欧与北美之外建设 Rust 社区、组织活动与制作本地内容 |
+| Project Goal Fellowships | 6 | 围绕 Rust Project 已确认年度目标（及子目标）工作，6 个月可续期 |
+| Project Fellowships | 10 | 支持 Rust Project 团队与工作组的常规贡献 |
+
+**代表性项目目标**：
+- 减少 Clippy 误报（Jason Newcomb）
+- 推进 rust-analyzer 稳定性与重构（Jiayan / roife）
+- 稳定 `adt_const_params` 与改进 `generic_const_exprs`（Boxy）
+- crates.io 性能与搜索体验优化（@eth3lbert）
+- Polonius 2024H2 目标与编译器性能（Rémy Rakic）
+- 标准库与 rustup Windows 支持（Chris Denton）
+- 推进 const traits 到功能完整（Deadbeef）
+- Cargo 团队领导与多个 Rust 项目维护（Eric Huss）
+
+**配套支持**：除每月津贴外，还包括培训资助与参会差旅支持；Hardship Grants 与 Event Support Grants 全年开放。
+
+> **关键洞察**: 2024 Fellowship 的结构化分类（Community / Project Goal / Project）体现了 Rust 社区资助从“奖励个人贡献”向“对齐项目目标 + 地域多元化”演进的策略，使 Fellowship 成为连接年度目标、地域扩展与维护者可持续性的杠杆。
+> **来源**: [Rust Foundation — 2024 Fellows](https://rustfoundation.org/media/announcing-the-rust-foundations-2024-fellows/) · 可信度: ✅
 
 ## 嵌入式测验（Embedded Quiz）
 
