@@ -1,4 +1,5 @@
 === Rust Knowledge Base Completion Report ===
+
 Total files: 63
 Total lines: 45878
 Average source rate: 27.7%

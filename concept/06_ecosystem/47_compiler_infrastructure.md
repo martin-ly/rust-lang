@@ -82,9 +82,9 @@ rustc 传统上是**单线程**的，编译大型 crate 时瓶颈明显。并行
 ### 2.3 启用方式
 
 ```bash
-# 当前状态: 1.96 默认启用（逐步 rollout）
-# 手动控制（如需要）:
-RUSTFLAGS="-Z threads=8" cargo build
+# 当前状态: nightly 实验性，稳定版 1.96 未默认启用
+# 需要 nightly 工具链并通过 -Z threads 手动开启:
+cargo +nightly build -Z threads=8
 
 # 查看是否使用了并行前端:
 CARGO_BUILD_RUSTC_WRAPPER="" RUSTFLAGS="-Z threads=8" cargo build --verbose

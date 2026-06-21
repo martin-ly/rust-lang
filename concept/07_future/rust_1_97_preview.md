@@ -658,7 +658,10 @@ pub unsafe extern "C" fn my_printf(fmt: *const c_char, mut args: ...) -> c_int {
 <details>
 <summary>✅ 答案与解析</summary>
 
-`gen` 块稳定化、`if let` 临时值生命周期延长、`unsafe_op_in_unsafe_fn` 默认启用、部分 `const trait` 支持、`lifetime_capture_rules` 改进等。
+截至 2026-06-21，Rust 1.97.0 仍处于 Beta 阶段，最终稳定的特性集可能调整。
+当前跟踪的前沿方向包括：async drop、Return Type Notation (RTN)、Pin ergonomics、BorrowSanitizer、`core::range` 类型补全、VecDeque 新 API 等。
+`gen` 块、`const trait`、`effects system` 仍处于 nightly 实验或 RFC 阶段，**不应假设它们会在 1.97 稳定**；
+`unsafe_op_in_unsafe_fn` 已在 Rust 2024 Edition（1.85.0）中默认 warn，不属于 1.97 新特性。
 </details>
 
 ---

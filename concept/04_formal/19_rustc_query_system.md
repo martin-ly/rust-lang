@@ -1,0 +1,275 @@
+> **内容分级**: [综述级]
+
+> **本节关键术语**: Query System · `TyCtxt` · Dep Graph · Red-Green Algorithm · Incremental Compilation · Salsa · `rustc_middle` — [完整对照表](../00_meta/terminology_glossary.md)
+>
+# Rustc 查询系统与增量编译
+
+> **EN**: The Rustc Query System and Incremental Compilation
+> **Summary**: Explains how `rustc` uses a demand-driven query system (`TyCtxt`), dependency graphs, and the red-green algorithm to enable fine-grained incremental compilation.
+> **受众**: [专家 / 研究者]
+> **Bloom 层级**: 理解 → 分析
+> **A/S/P 标记**: **F** — Formal / Infrastructure
+> **双维定位**: F×Inf — 编译器基础设施与形式化方法
+> **定位**: 将 `rustc` 从“顺序 pass 流水线”还原为“按需查询 + 缓存”的真实架构，理解增量编译的底层机制。
+> **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Type Inference](./08_type_inference.md) · [NLL and Polonius](../03_advanced/08_nll_and_polonius.md)
+> **后置概念**: [Compiler Internals](../06_ecosystem/45_compiler_internals.md) · [Compiler Infrastructure](../06_ecosystem/47_compiler_infrastructure.md)
+
+---
+
+> **来源**: [Rustc Dev Guide — Queries](https://rustc-dev-guide.rust-lang.org/query.html) ·
+> [Rustc Dev Guide — Incremental Compilation](https://rustc-dev-guide.rust-lang.org/incremental-compilation.html) ·
+> [Rustc Dev Guide — Overview](https://rustc-dev-guide.rust-lang.org/overview.html) ·
+> [Salsa](https://salsa-rs.github.io/salsa/)
+
+## 📑 目录
+
+- [Rustc 查询系统与增量编译](#rustc-查询系统与增量编译)
+  - [一、为什么需要查询系统](#一为什么需要查询系统)
+  - [二、查询系统的核心抽象](#二查询系统的核心抽象)
+  - [三、依赖图与 Red-Green 算法](#三依赖图与-red-green-算法)
+  - [四、增量编译实战](#四增量编译实战)
+  - [五、局限与边界](#五局限与边界)
+  - [六、与 Salsa 的关系](#六与-salsa-的关系)
+  - [嵌入式测验](#嵌入式测验)
+  - [权威来源索引](#权威来源索引)
+
+---
+
+## 一、为什么需要查询系统
+
+传统编译器通常按**顺序 pass** 组织：词法分析 → 语法分析 → 类型检查 → 优化 → 代码生成。每次修改源码后，整个流水线几乎要重新运行。
+
+`rustc` 采用了不同的设计：它把编译过程拆分为大量**查询（query）**。每个查询回答一个具体的问题，例如：
+
+- `type_of(def_id)`：某个定义的类型是什么？
+- `mir_borrowck(def_id)`：某个函数的借用检查结果是什么？
+- `optimized_mir(def_id)`：某个函数优化后的 MIR 是什么？
+- `collect_and_partition_mono_items(crate)`：整个 crate 需要为哪些单态化项生成代码？
+
+> **关键洞察**: 查询系统是 `rustc` 实现**增量编译**的基础设施。通过记录查询之间的依赖关系，`rustc` 可以判断“上次编译后，哪些结果仍然有效”。
+>
+> [来源: Rustc Dev Guide — Queries](https://rustc-dev-guide.rust-lang.org/query.html)
+
+---
+
+## 二、查询系统的核心抽象
+
+### 2.1 `TyCtxt`
+
+`TyCtxt<'tcx>` 是 `rustc` 中几乎所有编译器状态的**入口**。它持有：
+
+- 当前 crate 的 HIR/MIR 数据；
+- 类型上下文（`Ty<'tcx>`、生命周期、trait 约束）；
+- 查询缓存；
+- interning 池（保证相同类型/表达式只存一份内存）。
+
+```text
+TyCtxt<'tcx>
+├── HIR Map
+├── Type Interner
+├── Query Engine
+│   ├── On-Disk Cache (incremental)
+│   └── In-Memory Cache
+└── Dep Graph
+```
+
+> **定理**: 在 `rustc` 内部，几乎所有编译信息都可以通过 `tcx.query_name(key)` 获取。
+> **证明**: `TyCtxt` 为每个查询生成了对应的方法，编译器代码通过 `tcx.typeck(def_id)`、`tcx.optimized_mir(def_id)` 等方式按需调用。
+
+### 2.2 查询的三种形态
+
+| 形态 | 说明 | 示例 |
+|:---|:---|:---|
+| **纯查询** | 只读、无副作用、结果可缓存 | `type_of`、`generics_of` |
+| **修改器查询** | 会产生副作用（如写入文件、报错） | `mir_borrowck`（会 emit borrow-check 错误） |
+| **非查询代码** | 不属于查询系统，通常跑在整个 crate 上 | codegen 后端调用、链接 |
+
+> **注意**: 即使 `mir_borrowck` 会报错，它仍然是查询，因为错误本身也是结果的一部分。但某些查询为了保证所有函数的错误都被报告，会在 codegen 之前被强制预先执行。
+>
+> [来源: Rustc Dev Guide — Queries](https://rustc-dev-guide.rust-lang.org/query.html)
+
+---
+
+## 三、依赖图与 Red-Green 算法
+
+### 3.1 Dep Graph（依赖图）
+
+每次查询执行时，`rustc` 会记录：
+
+- 当前查询节点（`DepNode`）；
+- 它读取了哪些其他查询节点（边）。
+
+这些节点和边构成一张有向无环图，即 **Dep Graph**。它被序列化到 `target/<crate>/incremental/` 目录下。
+
+```mermaid
+graph LR
+    A[parse_crate] --> B[hir_crate]
+    B --> C[type_of_fn]
+    C --> D[mir_borrowck]
+    D --> E[optimized_mir]
+    E --> F[codegen]
+```
+
+### 3.2 Red-Green 算法
+
+增量编译的核心算法：
+
+1. **Green（绿色）**: 如果某个 `DepNode` 的输入（依赖）与上次完全相同，则它的输出也一定相同，可以直接复用上次结果。  
+2. **Red（红色）**: 如果输入发生变化，或者该节点本身依赖了红色节点，则需要重新计算。  
+
+```mermaid
+graph TD
+    subgraph 上一次编译
+        A1[parse: green] --> B1[type_of: green]
+    end
+    subgraph 本次编译
+        A2[parse: green] --> B2[type_of: green]
+        B2 --> C2[mir_borrowck: red]
+        C2 --> D2[optimized_mir: red]
+    end
+```
+
+> **关键洞察**: Red-Green 不是“按文件”增量，而是**按查询结果**增量。即使一个文件被修改，只要它不影响某个查询的输入，该查询的结果仍可复用。
+>
+> [来源: Rustc Dev Guide — Incremental Compilation](https://rustc-dev-guide.rust-lang.org/incremental-compilation.html)
+
+### 3.3 哈希与序列化
+
+- 每个查询结果必须能被**哈希**（Fingerprint）。
+- 结果可以被序列化到磁盘（`rustc` 使用自定义二进制格式）。
+- 下次编译时，`rustc` 先比较输入 fingerprint，再决定复用或重算。
+
+---
+
+## 四、增量编译实战
+
+### 4.1 开启与观察
+
+```bash
+# 默认情况下 Cargo 会启用增量编译
+CARGO_INCREMENTAL=1 cargo build
+
+# 查看 rustc 内部增量统计（verbose）
+RUSTFLAGS="-Z incremental-info" cargo +nightly build
+```
+
+### 4.2 典型输出解读
+
+```text
+incremental: reusing 28 out of 30 modules
+incremental: 1245 nodes in dep-graph; 23 marked dirty
+incremental: process 23 dirty nodes
+```
+
+- **reusing modules**: 多少 codegen unit 未改变；
+- **dirty nodes**: 需要重新计算的 `DepNode` 数量；
+- 脏节点越少，增量编译越快。
+
+### 4.3 增量编译不生效的常见原因
+
+| 原因 | 说明 |
+|:---|:---|
+| 修改了 crate root 的 `#![feature]` | 影响整个 crate 的 feature gate 查询 |
+| 修改了泛型/宏 | 单态化集合可能大幅变化 |
+| 修改了 `Cargo.toml` | resolver/workspace 变化导致全量重编 |
+| 使用了 `RUSTFLAGS` 变化 | 编译配置变化会破坏缓存 |
+| 缓存损坏 | 可执行 `cargo clean` 后重试 |
+
+---
+
+## 五、局限与边界
+
+1. **并非所有查询都磁盘缓存**：某些查询（如部分 lint）为了正确性每次都会执行。  
+2. **borrow checker 目前会全量跑**：`mir_borrowck` 查询在 codegen 前会被强制触发所有函数，以便报告所有错误。  
+3. **跨 crate 增量有限**：crate 边界是增量编译的天然边界；依赖 crate 改变通常会导致下游重编。  
+4. **缓存占用空间**：`target/` 下的增量缓存可能很大，CI 中常关闭增量编译以节省空间。  
+
+```rust,ignore
+// 示例：在 CI 中关闭增量编译
+std::env::set_var("CARGO_INCREMENTAL", "0");
+```
+
+---
+
+## 六、与 Salsa 的关系
+
+`rustc` 的查询系统与 [Salsa](https://salsa-rs.github.io/salsa/) 库共享相同的设计思想：
+
+- 函数式、无副作用的查询；
+- 依赖追踪；
+- 增量重算。
+
+Salsa 本身是从 `rustc` 查询系统中提取出来的通用框架，被 `rust-analyzer` 等工具使用。
+
+| 维度 | `rustc` Query System | Salsa |
+|:---|:---|:---|
+| 用途 | 编译器内部 | 通用 IDE/分析工具 |
+| 持久化 | 磁盘缓存 + 内存缓存 |  mainly 内存 |
+| 稳定性 | nightly 内部 API | 稳定库 |
+
+---
+
+## 嵌入式测验
+
+### 测验 1：`rustc` 的查询系统主要解决什么问题？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+主要解决增量编译问题。通过把编译过程拆分为可缓存、可追踪依赖的查询，`rustc` 可以在源码修改后只重算受影响的部分，而不是重新跑整个编译流水线。
+
+</details>
+
+---
+
+### 测验 2：什么是 Red-Green 算法中的 "Green" 节点？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+"Green" 节点表示其输入与上次编译完全相同，因此输出可以直接复用，无需重新计算。
+
+</details>
+
+---
+
+### 测验 3：增量编译的粒度是“文件”还是“查询结果”？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+粒度是**查询结果**。即使一个文件被修改，只要不影响某个查询的输入，该查询仍可复用上次结果。
+
+</details>
+
+---
+
+### 测验 4：为什么 borrow checker 目前会全量执行？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+为了确保所有函数（包括不可达函数）的借用检查错误都能被报告，`mir_borrowck` 查询在 codegen 前会被强制触发所有函数，而不是按需 lazy 执行。
+
+</details>
+
+---
+
+## 权威来源索引
+
+| 来源 | 可信度 | 说明 |
+|:---|:---:|:---|
+| [Rustc Dev Guide — Queries](https://rustc-dev-guide.rust-lang.org/query.html) | ✅ 一级 | 查询系统官方文档 |
+| [Rustc Dev Guide — Incremental Compilation](https://rustc-dev-guide.rust-lang.org/incremental-compilation.html) | ✅ 一级 | 增量编译官方文档 |
+| [Rustc Dev Guide — Overview](https://rustc-dev-guide.rust-lang.org/overview.html) | ✅ 一级 | 编译流程总览 |
+| [Salsa Book](https://salsa-rs.github.io/salsa/) | ✅ 一级 | 查询系统通用框架 |
+
+---
+
+> **权威来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/), [The Rust Reference](https://doc.rust-lang.org/reference/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.96.0 编译器架构
+
+**文档版本**: 1.0
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-06-21
+**状态**: ✅ 已对齐 Rust 1.96.0 编译器内部文档

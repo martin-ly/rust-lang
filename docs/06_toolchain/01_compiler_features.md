@@ -176,14 +176,14 @@ rustc --version
 # 查看详细版本信息
 rustc --version --verbose
 
-# 输出示例:
-# rustc 1.90.0 (2024-10-22)
+# 输出示例 (Rust 1.96.0):
+# rustc 1.96.0 (2026-05-28)
 # binary: rustc
 # commit-hash: abc123...
-# commit-date: 2024-10-22
+# commit-date: 2026-05-28
 # host: x86_64-unknown-linux-gnu
-# release: 1.90.0
-# LLVM version: 18.1.0
+# release: 1.96.0
+# LLVM version: 21.0.0  (minimum external LLVM for building rustc from source is 21)
 ```
 
 **查看编译器支持的目标平台**:

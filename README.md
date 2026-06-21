@@ -2,12 +2,12 @@
 
 > **Rust版本**: 1.96.0 stable (2026-05-28)
 > **Edition**: 2024
-> **状态**: v3.0 正式发布 | 317 concept 文件 | 1,677 Markdown | 1,447 Rust 源文件 | 100% Bloom 覆盖 | Phase 1-5 完成 | 活跃锚点 0 | 编译全绿 | 双标签覆盖率 96.5%+
+> **状态**: v3.0 正式发布 | 288 concept 文件（共 322） | 2,890 Markdown | 1,524 Rust 源文件 | Bloom 双标签覆盖率 99.6% | Phase 1-5 完成 | 活跃锚点 0 | 代码块编译通过率 90.7%
 
 [![Rust](https://img.shields.io/badge/rust-1.96.0+-blue.svg)](https://www.rust-lang.org)
 [![Edition](https://img.shields.io/badge/edition-2024-purple.svg)](https://doc.rust-lang.org/edition-guide/rust-2024/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![KB Quality](https://img.shields.io/badge/kb_quality-0_risk_files-brightgreen.svg)](reports/kb_quality_dashboard.md)
+[![KB Quality](https://img.shields.io/badge/kb_quality-23_risk_files-yellow.svg)](reports/kb_quality_dashboard.md)
 
 ---
 
@@ -66,11 +66,11 @@ cargo test --workspace
 
 | 文件 | 用途 | 规模 |
 |:---|:---|:---|
-| [`learning_guide.md`](concept/00_meta/learning_guide.md) | 4条学习路径 + 每级关键概念 + 前置依赖 | ~300行 |
-| [`quick_reference.md`](concept/00_meta/quick_reference.md) | A-Z概念速查 + 17个错误码 + 模式决策树 | ~630行 |
-| [`self_assessment.md`](concept/00_meta/self_assessment.md) | **80道自测题**（L1-L6，含折叠答案） | ~850行 |
-| [`semantic_space.md`](concept/00_meta/semantic_space.md) | 表征空间理论 + 等价表达 + 机制组合代数 | ~1000行 |
-| [`terminology_glossary.md`](concept/00_meta/terminology_glossary.md) | 101个核心术语中英对照 + 定义 | ~400行 |
+| [`learning_guide.md`](concept/00_meta/learning_guide.md) | 4条学习路径 + 每级关键概念 + 前置依赖 | ~657行 |
+| [`quick_reference.md`](concept/00_meta/quick_reference.md) | A-Z概念速查 + ~27个错误码 + 模式决策树 | ~817行 |
+| [`self_assessment.md`](concept/00_meta/self_assessment.md) | **80道自测题**（L1-L6，含折叠答案） | ~2,210行 |
+| [`semantic_space.md`](concept/00_meta/semantic_space.md) | 表征空间理论 + 等价表达 + 机制组合代数 | ~1,319行 |
+| [`terminology_glossary.md`](concept/00_meta/terminology_glossary.md) | 100个核心术语中英对照 + 定义 | ~584行 |
 
 ### L1-L3：核心概念
 
@@ -123,19 +123,19 @@ cargo test --workspace
 
 | 指标 | 数值 | 状态 |
 |:---|:---|:---|
-| concept 文件 | 280+ | ✅ |
-| 总 Markdown 文档 | 2,800+ | ✅ |
-| Rust 源文件 | 1,500+ | ✅ |
-| Workspace Crates | 17 + exercises | ✅ |
-| 定理链 (⟹) | 277+ | ✅ |
-| 反命题 | 98+ | ✅ |
-| Mermaid图 | 665+ | ✅ |
-| 代码块编译验证 | 81.1% 通过 | 🔄 持续优化 |
-| 死链 | 0 (核心路径) | ✅ |
-| 风险文件（非L0）| 0 | ✅ |
-| 认知路径覆盖率 | 100% | ✅ |
+| concept 文件 | 288 | ✅ |
+| 总 Markdown 文档 | 2,890 | ✅ |
+| Rust 源文件 | 1,524 | ✅ |
+| Workspace Crates | 17 | ✅ |
+| 定理链 (⟹) | 1,172 | ✅ |
+| 反命题 | 597 | ✅ |
+| Mermaid图 | 537 | ✅ |
+| 代码块编译验证 | 90.7% 通过 | 🔄 持续优化 |
+| 死链 | 0（核心路径）/ 8 文件待修复 | ⚠️ |
+| 风险文件（非L0）| 23 | ⚠️ |
+| 认知路径覆盖率 | 91% | ⚠️ |
 | 自测题 | 80题 | ✅ |
-| 概念搜索索引 | 452概念 | ✅ |
+| 概念搜索索引 | 851概念 | ✅ |
 
 ---
 
@@ -143,7 +143,7 @@ cargo test --workspace
 
 ```text
 rust-lang/
-├── concept/                    # 📚 知识体系核心（280+ 个 md 文件）
+├── concept/                    # 📚 知识体系核心（288 个活跃 md 文件，共 322 个）
 │   ├── 00_meta/                # L0: 学习工具 + 质量基础设施
 │   ├── 01_foundation/          # L1: 所有权/借用/生命周期/类型系统
 │   ├── 02_intermediate/        # L2: Trait/泛型/内存管理/错误处理
@@ -164,10 +164,12 @@ rust-lang/
 │   ├── c09_design_pattern/
 │   ├── c10_networks/
 │   ├── c11_macro_system/
+│   ├── c11_macro_system_proc/
 │   ├── c12_wasm/
 │   ├── c13_embedded/
-│   └── common/
-├── exercises/                  # 📝 编程练习（64 道，10 主题）
+│   ├── common/
+│   └── integration_tests/
+├── exercises/                  # 📝 编程练习（80 个 .rs 文件，10 主题）
 ├── book/                       # 📖 mdbook 源文件
 ├── knowledge/                  # 🎯 结构化知识卡片
 ├── docs/                       # 📋 参考文档、研究报告、模板
@@ -201,17 +203,17 @@ rust-lang/
 ---
 
 **维护者**: rust-lang 知识体系项目组
-**最后更新**: 2026-06-01
-**版本**: v2.5.0
-**状态**: ✅ v2.5 活跃维护
+**最后更新**: 2026-06-21
+**版本**: v3.0.0
+**状态**: ✅ v3.0 活跃维护
 
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-06-01 全面更新 README 数据，对齐实际项目规模（280+ concept、17 crates、2,800+ 文档）
+> **权威来源对齐变更日志**: 2026-06-21 全面更新 README 数据，对齐实际项目规模（288 活跃 concept / 共 322、17 workspace members、2,890 文档）
 
-**文档版本**: 2.0
+**文档版本**: 3.0
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-06-01
-**状态**: ✅ 门面数据全面更新
+**最后更新**: 2026-06-21
+**状态**: ✅ 门面数据全面对齐 2026-06-21
