@@ -68,6 +68,7 @@
 - v1.34 (2026-06-20): 权威内容对齐 Batch 32：新增 §6.25–§6.30，覆盖 Rust Foundation 2025 Technology Report、Microsoft $1M Donation、Arm Platinum Member、Rust Global 2025、Project Director Jan/Feb 2026 更新、2024 Fellows。来源：Rust Foundation 2024/2025/2026
 - v1.35 (2026-06-20): 权威内容对齐 Batch 33：新增 §6.31–§6.34，覆盖 Rust Foundation 2025 年度报告与 2026-2028 战略、RustConf 2026 早期信息/CFP/Program Committee。来源：Rust Foundation 2025/2026
 - v1.36 (2026-06-20): 权威内容对齐 Batch 34：新增 §6.35–§6.40，覆盖 Compiler Team 七名新成员、Clippy 功能冻结复盘、基础设施团队 2025 Q3 复盘与 Q4 计划、Rust All Hands 2026、`hint-mostly-unused` 测试征集、Project Directors 2025 选举。来源：Inside Rust Blog 2025-07 至 2025-10
+- v1.37 (2026-06-20): 权威内容对齐 Batch 35：新增 §6.41，覆盖 rustup 1.29.0 beta/正式发布、Cargo 1.94 开发周期（Target Dir 锁/Structured Logging/TOML 1.1/cargo-cargofmt/lockfile-path）与 Cargo 1.96 稳定版工具链亮点。来源：Rust Blog / Inside Rust 2025-12 至 2026-03/05
 
 ---
 
@@ -2094,6 +2095,33 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 
 > **关键洞察**: Project Directors 是 Rust Project 在基金会董事会的直接代表，其选举过程体现了 Leadership Council 作为项目治理枢纽的角色——既要保证董事会声音反映项目整体，又要通过反馈机制维护透明度。
 > **来源**: [Inside Rust — Electing new Project Directors 2025](https://blog.rust-lang.org/inside-rust/2025/08/20/electing-new-project-directors-2025/) · 可信度: ✅
+
+### 6.41 rustup 1.29.0 与 Cargo 1.94/1.96 工具链动态（2025-12 / 2026-02 / 2026-03）
+
+**[Rust Blog / Inside Rust, 2025-12-20 / 2026-03-12 / 2026-02-18]** 工具链团队在 2025 年末至 2026 年初集中推进了 rustup 安装性能与 Cargo 构建可观测性。
+
+**rustup 1.29.0**：
+
+- 经过约两个半月 beta 测试后于 2026-03-12 发布；
+- 核心改进：并发下载组件、下载过程中解压、`rustup check` 并发检查更新；
+- 新增 `sparcv9-sun-solaris` / `x86_64-pc-solaris` host 平台，`tcsh` / `xonsh` shell PATH 自动注入；
+- BYO rust-analyzer、空环境变量视为未设置、`rustup check` 返回 `100`（有更新）/`0`（无更新）；
+- Francisco Gouveia 加入 rustup 团队。
+
+**Cargo 1.94 开发周期**：
+
+- Target Dir 细粒度锁 #16155 合并，减少 rust-analyzer 与命令行 cargo 的相互阻塞；
+- Structured Logging 扩展出 `cargo report timings` / `cargo report rebuild` / `cargo report sessions`；
+- TOML 1.1 支持合并（#16415），`cargo-cargofmt` 实验启动；
+- `lockfile-path` 转为 `resolver.lockfile-path` 配置字段（#16510）；
+- Build Dir Layout v2 继续推进，`CARGO_BIN_EXE_*` 运行时可用（#16421）。
+
+**Cargo 1.96 稳定版**：
+
+- `target.cfg.rustdocflags`、嵌套子命令 man page、`term.progress.term-integration`、依赖多位置 git+registry、macOS iCloud Drive 排除等稳定化。
+
+> **关键洞察**: 工具链演进呈现两条主线：rustup 聚焦**安装/更新性能**（并发 IO），Cargo 聚焦**构建可预测性与可观测性**（锁、日志、manifest 风格）。二者共同支撑 Rust 在大型 monorepo 与企业 CI 中的规模化使用。
+> **来源**: [Rust Blog — Announcing rustup 1.29.0](https://blog.rust-lang.org/2026/03/12/Rustup-1.29.0/) · [Inside Rust — Rustup 1.29.0 beta: Call for Testing!](https://blog.rust-lang.org/inside-rust/2025/12/20/rustup-1.29.0-beta-cft/) · [Inside Rust — This Development-cycle in Cargo: 1.94](https://blog.rust-lang.org/inside-rust/2026/02/18/this-development-cycle-in-cargo-1.94.html) · [Cargo 1.96 CHANGELOG](https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md) · 可信度: ✅
 
 ## 嵌入式测验（Embedded Quiz）
 

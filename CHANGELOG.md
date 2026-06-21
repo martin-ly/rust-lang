@@ -163,6 +163,14 @@
 - **Project Directors 2025 选举启动（2025-08-20）**
   - `concept/07_future/03_evolution.md`: 新增 §6.40，说明三席位空缺、候选人征集与选举时间线
   - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.55
+- **rustup 1.29.0 beta 测试与正式发布（2025-12-20 / 2026-03-12）**
+  - `concept/06_ecosystem/01_toolchain.md`: 在 §2.6 补充 beta 测试阶段、相关 PR、Francisco Gouveia 加入团队等细节
+  - `concept/07_future/03_evolution.md`: 新增 §6.41
+  - `concept/07_future/05_rust_version_tracking.md`: 新增 §12.56
+- **Cargo 1.94 开发周期深度更新（2026-02-18）**
+  - `concept/06_ecosystem/01_toolchain.md`: 新增 §2.8，覆盖 Target Dir 细粒度锁（#16155）、Structured Logging（`cargo report timings`/`rebuild`/`sessions`）、TOML 1.1（#16415）、`cargo-cargofmt`、`resolver.lockfile-path`（#16510）、workspace/config 发现改进方向
+- **Cargo 1.96 稳定版工具链亮点（2026-05-28）**
+  - `concept/06_ecosystem/01_toolchain.md`: 新增 §2.9，整理 `target.cfg.rustdocflags`、嵌套子命令 man page、`term.progress.term-integration`、依赖多位置 git+registry、macOS iCloud Drive 排除、改进诊断风格等
 - **crates.io Svelte 前端公测（2026-04-17）**
   - `concept/06_ecosystem/19_security_practices.md`: 在 §6.4 表中补充 Svelte 5 迁移与公测入口
 - **Rust Foundation 2025 年度报告与战略（2026-01-27）**
