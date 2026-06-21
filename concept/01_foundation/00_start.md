@@ -3,13 +3,15 @@
 # Rust 起步指南
 
 > **EN**: Getting Started with Rust
-> **Summary**: 安装 Rust 工具链，运行第一个程序，理解 Cargo 基本操作。
+> **Summary**: Getting Started with Rust: core Rust concepts, syntax, and examples.
 > **受众**: [初学者]
 > **Bloom 层级**: 记忆 → 理解
 > **定位**: Rust 学习路径的起点。本文档假设你没有任何 Rust 背景，只需基本的命令行操作经验。
 > **预计阅读时间**: 20 分钟
 > **对应练习**: [exercises/src/ownership_borrowing/ex01_hello_move.rs](../../exercises/src/ownership_borrowing/)
 
+>
+> **来源**: [TRPL — Getting Started](https://doc.rust-lang.org/book/ch01-00-getting-started.html) · [Rust Installation](https://www.rust-lang.org/tools/install)
 ---
 
 ## 安装 Rust

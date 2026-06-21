@@ -6,8 +6,8 @@
 >
 # Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态）
 >
-> **EN**: Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） (Chinese)
-> **Summary**: Robotics & ROS2 in Rust. Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态）.
+> **EN**: Robotics
+> **Summary**: Robotics: Rust ecosystem tools, crates, and engineering practices.
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
@@ -22,6 +22,8 @@
 > [机器学习生态](./46_machine_learning_ecosystem.md) ·
 > [形式化验证工具](./47_formal_verification_tools.md)
 
+>
+> **来源**: [rclrs](https://docs.rs/rclrs/) · [ROS2 Rust](https://github.com/ros2-rust/ros2_rust)
 ---
 
 > **来源**: [ROS2 Design](https://design.ros2.org/) ·
@@ -266,7 +268,7 @@ rclrs 架构约束:
   └─────────────────┴──────────────────┴──────────────────┘
 ```
 
-> **来源**: [rclrs Documentation](https://docs.rs/rclrs/latest/rclrs/) · [ros2-rust Examples](https://github.com/ros2-rust/ros2_rust/tree/main/examples)
+> **来源**: [rclrs Documentation](https://docs.rs/rclrs/latest/rclrs/) · [ros2-rust Examples](https://github.com/ros2-rust/examples)
 
 ### 3.2 ros2_rust 社区与 safe_drive
 
@@ -344,7 +346,7 @@ fn dds_direct() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-> **来源**: [cyclonedds-rs GitHub](https://github.com/kydos/cyclonedds-rs) · [dust_dds GitHub](https://github.com/s2e-systems/dust-dds) · [Fast DDS Documentation](https://fast-dds.docs.eprosima.com/)
+> **来源**: [cyclonedds-rs GitHub](https://github.com/eclipse-cyclonedds/cyclonedds-rust) · [dust_dds GitHub](https://github.com/s2e-systems/dust-dds) · [Fast DDS Documentation](https://fast-dds.docs.eprosima.com/)
 
 ---
 
@@ -541,7 +543,7 @@ fn lidar_to_base_link(scan: &LaserScan, lidar_pose: &Isometry3<f64>) -> Vec<Vect
 
 **nshare** 提供与外部张量库（如 `ndarray`、`nalgebra`、`image`）的零拷贝互操作，支持大规模点云的协方差计算和矩阵运算，无需复制底层数据缓冲区。
 
-> **来源**: [nalgebra User Guide](https://www.nalgebra.org/) · [nshare GitHub](https://github.com/dimforge/nshare) · [ndarray Documentation](https://docs.rs/ndarray/latest/ndarray/)
+> **来源**: [nalgebra User Guide](https://www.nalgebra.org/) · [nshare GitHub](https://github.com/rust-cv/nshare) · [ndarray Documentation](https://docs.rs/ndarray/latest/ndarray/)
 
 ### 5.2 OpenRR 框架
 
@@ -877,7 +879,7 @@ impl GoodNode {
 > [来源: [CycloneDDS](https://cyclonedds.io/)]
 > [来源: [Fast DDS](https://www.eprosima.com/index.php/products-all/eprosima-fast-dds)]
 > [来源: [nalgebra](https://docs.rs/nalgebra/)]
-> [来源: [nshare](https://github.com/dimforge/nshare)]
+> [来源: [nshare](https://github.com/rust-cv/nshare)]
 > [来源: [RTIC](https://rtic.rs/)]
 > [来源: [Tock OS](https://www.tockos.org/)]
 > [来源: [Hubris](https://hubris.oxide.computer/)]

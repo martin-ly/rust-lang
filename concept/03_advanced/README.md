@@ -3,12 +3,14 @@
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 
+>
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Async Book](https://rust-lang.github.io/async-book/)
 ---
 
 # L3 高级概念层（Advanced）
 >
-> **EN**: L3 高级概念层（Advanced） (Chinese)
-> **Summary**: ```mermaid mindmap root((L3 高级概念层<br/>Advanced)) concurrency SendSync[Send / Sync] MutexRwLock[Mutex / RwLock] 原子操作[Atomics & Memory Ordering] Channel[Channel / Message Passing] async Future[Future / Poll] async_await[async / await] Pin[Pin<&mut T>] AFIT[AFIT / RPITIT] Runtime[Runtime: Tokio] Unsafe 裸指针[*const
+> **EN**: Readme
+> **Summary**: Readme. Core Rust concept.
 
 > **受众**: [专家]
 > **定位**：Rust 的高级特性，涉及并发、异步、Unsafe 和元编程。本层是 L1-L2 概念在**复杂场景**中的组合应用与边界突破。

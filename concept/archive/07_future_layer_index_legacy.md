@@ -1,7 +1,11 @@
+> **Summary**: Future Layer Index Legacy. Core Rust concept.
+> **来源**: [Rust RFCs](https://rust-lang.github.io/rfcs/) · [Rust Blog](https://blog.rust-lang.org/) · [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/)
 > **内容分级**: [综述级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 
 # L7 前沿趋势层索引（Future & Trends Layer Index）
+>
+> **EN**: Future Layer Index Legacy
 
 > **受众**: [专家]
 > **定位**: Rust 在 AI 时代、形式化方法工业化、分布式系统形式化等前沿方向的**演进预测**与**需求驱动**。知识体系的"前锋"，反向约束下层设计。
@@ -42,7 +46,7 @@
 | [`07_future/15_gen_blocks_preview.md`](07_future/15_gen_blocks_preview.md) | Gen Blocks | 泛化生成器、惰性迭代、异步流 | ✅ v1.0 |
 | [`07_future/16_cranelift_backend_preview.md`](07_future/16_cranelift_backend_preview.md) | Cranelift 后端 | 快速调试编译、LLVM 替代 | ✅ v1.0 |
 | [`07_future/17_rust_specification_preview.md`](07_future/17_rust_specification_preview.md) | Rust 语言规范 | 形式化规范演进、分层需求 | ✅ v1.0 |
-| [`07_future/18_async_drop_preview.md`](07_future/18_async_drop_preview.md) | Async Drop | 异步资源销毁、[RFC 3308](https://rust-lang.github.io/rfcs/3308.html)、Pin 交互 | ⚠️ nightly |
+| [`07_future/18_async_drop_preview.md`](07_future/18_async_drop_preview.md) | Async Drop | 异步资源销毁、[RFC 3308](https://rust-lang.github.io/rfcs//3308-offset_of.html)、Pin 交互 | ⚠️ nightly |
 | [`07_future/26_specialization_preview.md`](07_future/26_specialization_preview.md) | Specialization | Trait 实现特化、重叠 impl、min_specialization | ⚠️ nightly |
 
 ---

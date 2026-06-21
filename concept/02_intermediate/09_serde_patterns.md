@@ -4,8 +4,8 @@
 >
 # Serde 序列化模式：Rust 的类型驱动数据转换
 >
-> **EN**: Serde 序列化模式：Rust 的类型驱动数据转换 (Chinese)
-> **Summary**: Serde 序列化模式：Rust 的类型驱动数据转换 (Chinese). Core Rust concept covering formal logic foundations, mechanism analysis, in-depth analysis.
+> **EN**: Serde Patterns
+> **Summary**: Serde Patterns: intermediate Rust mechanisms, patterns, and practical examples.
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S** — Application + Structure
@@ -441,7 +441,7 @@ graph TD
 ```
 
 > **边界要点**: Serde 的边界主要与**编译时间**和**动态类型**相关——它是静态类型系统的最佳搭档，但在高度动态的场景中灵活性受限。
-> [source: [Serde Limitations](https://serde.rs/limitations.html)]
+> [source: [Serde Limitations](https://serde.rs/)]
 
 ---
 

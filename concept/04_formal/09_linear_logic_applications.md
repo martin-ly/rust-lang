@@ -13,6 +13,8 @@
 > **前置概念**: [Linear Logic](./01_linear_logic.md) · [Type System](../01_foundation/04_type_system.md) · [Ownership](../01_foundation/01_ownership.md)
 > **后置概念**: [RustBelt](./04_rustbelt.md) · [Session Types](https://en.wikipedia.org/wiki/Session_type)
 
+>
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---
 
 > **来源**: [Linear Logic — Girard 1987](https://girard.perso.math.cnrs.fr/linear.pdf) ·
@@ -50,6 +52,12 @@
     - [10.4 边界测试：`Copy` 与 `Drop` 的互斥性（编译错误）](#104-边界测试copy-与-drop-的互斥性编译错误)
     - [10.5 边界测试：`Vec::drain` 与线性资源的消耗（编译错误）](#105-边界测试vecdrain-与线性资源的消耗编译错误)
     - [10.3 边界测试：线性类型与 `Drop` 的资源泄漏边界（编译错误/逻辑问题）](#103-边界测试线性类型与-drop-的资源泄漏边界编译错误逻辑问题)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：线性逻辑中的"线性"（linearity）指什么？与 Rust 的所有权有什么对应关系？（理解层）](#测验-1线性逻辑中的线性linearity指什么与-rust-的所有权有什么对应关系理解层)
+    - [测验 2：在线性逻辑中，`A ⊗ B`（张量积）和 `A & B`（with）分别对应 Rust 的什么概念？（理解层）](#测验-2在线性逻辑中a--b张量积和-a--bwith分别对应-rust-的什么概念理解层)
+    - [测验 3：Rust 的 `clone()` 在线性逻辑视角下是什么操作？（理解层）](#测验-3rust-的-clone-在线性逻辑视角下是什么操作理解层)
+    - [测验 4：为什么 Rust 的借用（`&T` 和 `&mut T`）可以在线性逻辑框架中被建模？（理解层）](#测验-4为什么-rust-的借用t-和-mut-t可以在线性逻辑框架中被建模理解层)
+    - [测验 5：线性逻辑对 Rust 类型系统设计的影响主要体现在哪个编译器组件中？（理解层）](#测验-5线性逻辑对-rust-类型系统设计的影响主要体现在哪个编译器组件中理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -215,7 +223,7 @@ let v = l.into_inner();  // 必须显式消费
 ```
 
 > **所有权洞察**: Rust 的**所有权是仿射类型**的实践——它平衡了安全性和实用性，通过 `Drop` 允许隐式释放，通过 `Copy` 允许复制。
-> [来源: [Rust Reference — Ownership](https://doc.rust-lang.org/reference/ownership.html)]
+> [来源: [Rust Reference — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)]
 
 ---
 
@@ -314,7 +322,7 @@ let committed = txn.commit();
 ```
 
 > **类型状态洞察**: **类型状态模式**是线性逻辑在 Rust 中的**最直接工程应用**——它将状态机从运行时检查转化为编译期类型约束。
-> [来源: [Rust Patterns — Typestate](https://rust-unofficial.github.io/patterns/patterns/behavioural/typestate.html)]
+> [来源: [Rust Patterns — Typestate](https://rust-unofficial.github.io/patterns/)]
 
 ---
 
@@ -413,7 +421,7 @@ graph TD
 ```
 
 > **边界要点**: 线性类型工程的边界主要与**复杂性**、**生态集成**、**错误信息**、**设计成本**相关。
-> [来源: [Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines/type-safety.html)]
+> [来源: [Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines//type-safety.html)]
 
 ---
 
@@ -470,7 +478,7 @@ graph TD
 | [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) | ✅ 一级 | Rust 形式化验证 |
 | [Wadler — Propositions as Sessions](https://homepages.inf.ed.ac.uk/wadler/papers/linearsubtypes/linearsubtypes.pdf) | ✅ 一级 | Session Types |
 | [Session Types in Rust](https://www.jaist.ac.jp/~sgonda/paper/2020_scico.html) | ✅ 一级 | 工程实现 |
-| [Rust Patterns — Typestate](https://rust-unofficial.github.io/patterns/patterns/behavioural/typestate.html) | ✅ 二级 | 模式库 |
+| [Rust Patterns — Typestate](https://rust-unofficial.github.io/patterns/) | ✅ 二级 | 模式库 |
 
 ---
 

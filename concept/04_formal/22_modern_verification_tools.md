@@ -2,8 +2,8 @@
 
 # 现代 Rust 验证工具生态（2025-2026）
 >
-> **EN**: 现代 Rust 验证工具生态（2025-2026） (Chinese)
-> **Summary**: 现代 Rust 验证工具生态. Core Rust concept covering formal methods foundations, mental model building.
+> **EN**: Modern Verification Tools
+> **Summary**: Modern Verification Tools: formal methods foundations, semantics, and verification techniques relevant to Rust.
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >
 > **受众**: [研究者]
@@ -13,6 +13,8 @@
 > **前置概念**: [Verification Toolchain](05_verification_toolchain.md) · [Hoare 逻辑](15_hoare_logic.md) · [RustBelt](04_rustbelt.md)
 > **主要来源**: [AutoVerus arXiv 2025] · [Kani 0.65 Release] · [ESBMC Rust] · [RFC #3842 Safety Tags] · [TrustInSoft]
 
+>
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---
 
 > **后置概念**: [Comparative Studies](../05_comparative/01_rust_vs_cpp.md)

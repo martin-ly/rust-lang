@@ -9,8 +9,8 @@
 
 # AArch64 SVE / SME：可伸缩向量扩展预览
 >
-> **EN**: AArch64 SVE / SME：可伸缩向量扩展预览 (Chinese)
-> **Summary**: AArch64 SVE / SME：可伸缩向量扩展预览 (Chinese). Emerging Rust feature or ecosystem trend: AArch64 SVE / SME：可伸缩向量扩展预览 (Chinese).
+> **EN**: Aarch64 Sve Sme Preview
+> **Summary**: Aarch64 Sve Sme Preview: emerging Rust language feature or ecosystem trend.
 > **受众**: [专家]
 > **内容分级**: [实验级]
 > **跟踪版本**: nightly 1.98.0 (2026-06-06)
@@ -57,7 +57,7 @@
 
 SVE 不依赖传统 SIMD 的"剩余元素处理"，而是通过**谓词寄存器**（`p0-p15`）控制向量通道的活动状态：
 
-```rust
+```rust,ignore
 #![feature(stdarch_aarch64_sve)]
 // 注意：以下代码为概念示例，API 尚未稳定
 
@@ -80,7 +80,7 @@ SME 在 SVE 基础上增加**二维可伸缩矩阵运算**：
 
 ### 2.1 Feature Gate
 
-```rust
+```rust,ignore
 #![feature(stdarch_aarch64_sve)]
 ```
 

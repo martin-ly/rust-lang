@@ -1,3 +1,5 @@
+> **EN**: Advanced 02 Async Programming Archived
+> **Summary**: Advanced 02 Async Programming Archived. Core Rust concept.
 > **内容分级**: [专家级]
 > **受众**: [专家]
 > **Bloom 层级**: 理解
@@ -9,20 +11,7 @@
 > **后置概念**: [Formal Verification](../04_formal/03_ownership_formal.md)
 > **前置概念**: [Async Basics](../03_advanced/02_async.md)
 
-## 相关概念文件
-
-> **📎 交叉引用**
->
-> 本主题在 knowledge 中有系统化的知识索引：[异步编程](../../knowledge/03_advanced/async)
-
-- [Async/Await 主文件](./02_async.md) — 异步编程核心内容（本文件已归档）
-- [Async 模式](./02_async_patterns.md) — 异步设计模式与最佳实践
-- [并发编程](./01_concurrency.md) — Send/Sync、线程、锁
-- [Futures 与 Streams](./02_async.md) — 异步状态机、流处理
-- [Tokio 运行时](./02_async.md) — 异步执行器与任务调度
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
-> **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+> **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
 
 ## 认知路径
 

@@ -11,8 +11,9 @@
 
 # Rust 核心术语英中对照表
 >
-> **EN**: Rust 核心术语英中对照表 (Chinese)
-> **Summary**: 本表按认知复杂度将术语分为五个层级，对应 Bloom 分类法从记忆到分析的不同阶段： - **L1 基础**：入门必读概念，出现在 TRPL 前 10 章，任何 Rust 学习者第一周就会遇到。 - **L2 进阶**：日常编码高频使用，涉及 trait 系统、智能指针、concurrency原语与错误处理。 - **L3 高级**：涉及 unsafe、async运行时、宏系统、memory模型与types系统深层机制。 - **L4 formal methods**：程序验证、分离逻辑、types论及 Rust 官方formal methods项目（RustBelt、Miri 等）。 - **L5+ 生态/专家**：生产环境主流 crate、嵌入式、WebAssembly 及跨
+> **EN**: Terminology Glossary
+> **Summary**: Terminology Glossary. Core Rust concept.
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [std API Docs](https://doc.rust-lang.org/std/) · [Rustnomicon](https://doc.rust-lang.org/nomicon/) · [Async Book](https://rust-lang.github.io/async-book/) · [Cargo Book](https://doc.rust-lang.org/cargo/) · [Edition Guide](https://doc.rust-lang.org/edition-guide/)
 
 > **受众**: [初学者]
 ---
@@ -65,7 +66,7 @@
 
 - **`assert_matches!`** (assert_matches!) [L1] — Rust 1.96 稳定的模式匹配断言宏，检查值是否匹配给定模式 — [std](https://doc.rust-lang.org/std/macro.assert_matches.html)
 
-- **`NonZero`** (NonZero) [L1] — 保证值不为零的整数类型族（`NonZeroU32` 等），Rust 1.96 新增 `Step` trait 支持范围迭代 — [std](https://doc.rust-lang.org/std/num/struct.NonZeroU32.html)
+- **`NonZero`** (NonZero) [L1] — 保证值不为零的整数类型族（`NonZeroU32` 等），Rust 1.96 新增 `Step` trait 支持范围迭代 — [std](https://doc.rust-lang.org/std/num/type.NonZeroU32.html)
 
 - **迭代器** (Iterator) [L1] — 按顺序惰性产生元素的 trait — [TRPL](https://doc.rust-lang.org/book/ch13-02-iterators.html)
 
@@ -145,7 +146,7 @@
 
 - **动态大小类型** (DST) [L2] — 编译期大小未知的类型（如 `[T]`、`dyn Trait`），只能通过指针或引用使用 — [Reference](https://doc.rust-lang.org/reference/dynamically-sized-types.html)
 
-- **胖指针** (Fat Pointer) [L2] — 携带额外元数据（如长度或 vtable 指针）的宽指针，用于 DST — [Reference](https://doc.rust-lang.org/reference/pointer-types.html)
+- **胖指针** (Fat Pointer) [L2] — 携带额外元数据（如长度或 vtable 指针）的宽指针，用于 DST — [Reference](https://doc.rust-lang.org/reference/types.html)
 
 - **关联常量** (Associated Constants) [L2] — 在 trait 或 impl 块中定义的常量，与类型相关联 — [Reference](https://doc.rust-lang.org/reference/items/associated-items.html#associated-constants)
 
@@ -183,11 +184,11 @@
 
 - **HRTB** (Higher-Ranked Trait Bounds) [L3] — `for<'a>` 任意生命周期的泛型约束 — [Reference](https://doc.rust-lang.org/reference/trait-bounds.html#higher-ranked-trait-bounds)
 
-- **GAT** (Generic Associated Types) [L3] — 泛型关联类型，trait 内的泛型类型构造 — [RFC 1590](https://rust-lang.github.io/rfcs/1590-generic-associated-types.html)
+- **GAT** (Generic Associated Types) [L3] — 泛型关联类型，trait 内的泛型类型构造 — [RFC 1590](https://rust-lang.github.io/rfcs//1590-macro-lifetimes.html)
 
 - **常量泛型** (Const Generics) [L3] — 以编译期常量作为参数的泛型机制 — [Reference](https://doc.rust-lang.org/reference/items/generics.html#const-generics)
 
-- **特化** (Specialization) [L3] — 为更具体类型提供 trait 默认实现覆盖 — [RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html)
+- **特化** (Specialization) [L3] — 为更具体类型提供 trait 默认实现覆盖 — [RFC 1210](https://rust-lang.github.io/rfcs//1210-impl-specialization.html)
 
 - **Pin** (Pin) [L3] — 保证值在内存中不被移动的固定包装器 — [std](https://doc.rust-lang.org/std/pin/struct.Pin.html)
 
@@ -239,7 +240,7 @@
 
 - **Polonius** (Polonius) [L3] — 基于 Datalog 约束求解的新一代借用检查器，比 NLL 更精确，目标 2026 年内稳定化 alpha — [RustConf 2018](https://www.youtube.com/watch?v=_8X69Kw0EhY)
 
-- **NLL** (Non-Lexical Lifetimes) [L3] — 非词法生命周期，基于数据流分析放宽词法作用域限制，Rust 1.31+ 默认启用 — [RFC 2094](https://rust-lang.github.io/rfcs/2094-nll.html)
+- **NLL** (Non-Lexical Lifetimes) [L3] — 非词法生命周期，基于数据流分析放宽词法作用域限制，Rust 1.31+ 默认启用 — [RFC 2094](https://rust-lang.github.io/rfcs//2094-nll.html)
 
 - **`valid for read/write`** (Valid for Read/Write) [L3] — Rust 1.96 重构的指针有效性语义，明确 null 指针不被视为 valid，统一 Miri/文档/编译器行为 — [Rust Reference](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)
 
@@ -247,7 +248,7 @@
 
 - **`float_algebraic`** (float_algebraic) [L3] — 浮点代数优化属性，允许编译器在 `-ffast-math` 语义下重组浮点运算（FCP 中） — [PR #157168](https://github.com/rust-lang/rust/pull/157168)
 
-- **`c_variadic`** (C-variadic) [L3] — C 可变参数函数定义，允许在 Rust 中直接定义 `extern "C" fn foo(fmt: *const u8, ...)`（PFCP 中） — [RFC 2137](https://rust-lang.github.io/rfcs/2137-variadic.html)
+- **`c_variadic`** (C-variadic) [L3] — C 可变参数函数定义，允许在 Rust 中直接定义 `extern "C" fn foo(fmt: *const u8, ...)`（PFCP 中） — [RFC 2137](https://rust-lang.github.io/rfcs//2137-variadic.html)
 
 - **`proc_macro_value`** (proc_macro_value) [L3] — 允许过程宏在编译期产生值而不仅是 token 流，为 const 泛型提供更强大的元编程能力（等待 review） — [PR #152092](https://github.com/rust-lang/rust/pull/152092)
 
@@ -287,7 +288,7 @@
 
 - **子类型** (Subtyping) [L4] — 类型间替代关系的层级结构 — [Reference](https://doc.rust-lang.org/reference/subtyping.html)
 
-- **类型推断** (Type Inference) [L4] — 编译器自动推导表达式类型的机制 — [Reference](https://doc.rust-lang.org/reference/type-inference.html)
+- **类型推断** (Type Inference) [L4] — 编译器自动推导表达式类型的机制 — [Reference](https://doc.rust-lang.org/reference/types.html)
 
 - **RustBelt** (RustBelt) [L4] — 在 Iris 中形式化验证 Rust 不安全代码的项目 — [POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
 
@@ -297,9 +298,9 @@
 
 - **Tree Borrows** (Tree Borrows) [L4] — 比 Stacked Borrows 更宽松的别名分析模型，允许某些合法的重叠借用模式 — [RFC](https://github.com/rust-lang/rfcs/pull/3367)
 
-- **Stacked Borrows** (Stacked Borrows) [L4] — Rust 的严格别名分析模型，Miri 默认使用以检测 UB，但比 Tree Borrows 更保守 — [Stacked Borrows Paper](https://plv.mpi-sws.org/rust-belt/stacked-borrows/)
+- **Stacked Borrows** (Stacked Borrows) [L4] — Rust 的严格别名分析模型，Miri 默认使用以检测 UB，但比 Tree Borrows 更保守 — [Stacked Borrows Paper](https://plv.mpi-sws.org/rustbelt/)
 
-- **Safety Tags** (Safety Tags) [L4] — 编译器自动为 unsafe 代码块生成的形式化安全契约标记，用于静态验证和文档生成 — [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/2026/safety-tags.html)
+- **Safety Tags** (Safety Tags) [L4] — 编译器自动为 unsafe 代码块生成的形式化安全契约标记，用于静态验证和文档生成 — [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/2026/)
 
 - **Prusti** (Prusti) [L4] — 基于 Viper 验证器基础设施的 Rust 静态验证工具，支持前置/后置条件规范 — [Prusti Project](https://www.pm.inf.ethz.ch/research/prusti.html)
 
@@ -353,7 +354,7 @@
 
 - **Clap** (Clap) [L5+] — Rust 生态最流行的命令行参数解析库，支持派生宏和构建器模式 — [docs.rs](https://docs.rs/clap/latest/clap/)
 
-- **`cargo-script`** (cargo-script) [L5+] — 直接运行单个 Rust 文件而无需 Cargo.toml，FCP 已结束但被 edition policy 阻塞 — [RFC 3503](https://rust-lang.github.io/rfcs/3503-cargo-script.html)
+- **`cargo-script`** (cargo-script) [L5+] — 直接运行单个 Rust 文件而无需 Cargo.toml，FCP 已结束但被 edition policy 阻塞 — [RFC 3503](https://rust-lang.github.io/rfcs//3503-frontmatter.html)
 
 - **Cranelift** (Cranelift) [L5+] — Wasmtime 项目开发的替代后端编译器，Rust 编译器的实验性后端，因资金不足进展停滞（2026-05） — [GitHub](https://github.com/bytecodealliance/wasmtime/tree/main/cranelift)
 
@@ -379,7 +380,7 @@
 
 - **作用域守卫** (Scope Guard) [L3] — 在作用域退出时自动执行清理逻辑的 RAII 模式（如 defer、guard）— [Scopeguard crate](https://docs.rs/scopeguard/latest/scopeguard/)
 
-- **新类型模式** (Newtype Pattern) [L2] — 通过单字段元组结构体为现有类型创建强类型包装，实现 orphan rule 规避和类型安全 — [API Guidelines](https://rust-lang.github.io/api-guidelines/type-safety.html#c-newtype)
+- **新类型模式** (Newtype Pattern) [L2] — 通过单字段元组结构体为现有类型创建强类型包装，实现 orphan rule 规避和类型安全 — [API Guidelines](https://rust-lang.github.io/api-guidelines//type-safety.html#c-newtype)
 
 - **孤儿规则** (Orphan Rule) [L3] — 禁止为外部类型实现外部 trait 的一致性规则，确保 trait 解析全局唯一 — [Reference](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)
 

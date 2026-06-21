@@ -21,8 +21,8 @@
 ---
 
 > **来源**: [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html) ·
-> [TRPL — Advanced Traits](https://doc.rust-lang.org/book/ch19-02-advanced-traits.html) ·
-> [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html) ·
+> [TRPL — Advanced Traits](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html) ·
+> [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs//2000-const-generics.html) ·
 > [Rust Type System Explained](https://doc.rust-lang.org/reference/type-system.html) ·
 > [Wikipedia — Type System](https://en.wikipedia.org/wiki/Type_system)
 
@@ -59,6 +59,12 @@
     - [10.3 边界测试：impl Trait 的自动 trait 捕获规则（编译错误）](#103-边界测试impl-trait-的自动-trait-捕获规则编译错误)
     - [10.4 边界测试：关联类型的默认实现与具体化冲突（编译错误）](#104-边界测试关联类型的默认实现与具体化冲突编译错误)
     - [10.2 边界测试：函数重复定义](#102-边界测试函数重复定义)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：关联类型（Associated Type）与泛型参数的区别是什么？什么时候更适合用关联类型？（理解层）](#测验-1关联类型associated-type与泛型参数的区别是什么什么时候更适合用关联类型理解层)
+    - [测验 2：`type Output = i32;` 这种语法出现在哪里？它有什么约束？（理解层）](#测验-2type-output--i32-这种语法出现在哪里它有什么约束理解层)
+    - [测验 3：Higher-Ranked Trait Bounds（HRTB）`for<'a>` 的用途是什么？（理解层）](#测验-3higher-ranked-trait-boundshrtbfora-的用途是什么理解层)
+    - [测验 4：类型级编程（Type-Level Programming）在 Rust 中主要通过什么机制实现？（理解层）](#测验-4类型级编程type-level-programming在-rust-中主要通过什么机制实现理解层)
+    - [测验 5：`impl Trait` 在函数参数位置和返回位置各有什么语义？（理解层）](#测验-5impl-trait-在函数参数位置和返回位置各有什么语义理解层)
   - [实践](#实践)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -110,7 +116,7 @@ trait Foo {
 ```
 
 > **impl Trait 洞察**: **impl Trait 是 Rust "零成本抽象"的关键**——它隐藏实现细节而不引入运行时开销。
-> [来源: [RFC 1522 — Conservative impl Trait](https://rust-lang.github.io/rfcs/1522-conservative-impl-trait.html)]
+> [来源: [RFC 1522 — Conservative impl Trait](https://rust-lang.github.io/rfcs//1522-conservative-impl-trait.html)]
 
 ---
 
@@ -165,7 +171,7 @@ impl<T, const R: usize, const C: usize> Matrix<T, R, C> {
 ```
 
 > **Const Generics 洞察**: **Const generics 使数组大小成为类型系统的一部分**——编译期验证矩阵维度匹配。
-> [来源: [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html)]
+> [来源: [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs//2000-const-generics.html)]
 
 ---
 
@@ -200,7 +206,7 @@ Rust 的类型推断机制:
 ```
 
 > **推断洞察**: Rust 的**类型推断是"辅助"而非"全自动"**——它减少噪声，但关键边界保持显式。
-> [来源: [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/type-inference.html)]
+> [来源: [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/types.html)]
 
 ---
 
@@ -308,7 +314,7 @@ impl<T: Copy, const N: usize> Stack<T, N> {
 ```
 
 > **实战洞察**: **Const generics 将运行时的维度检查提升为编译期类型检查**——矩阵乘法维度不匹配成为编译错误。
-> [来源: [Const Generics MVP](https://rust-lang.github.io/rfcs/2000-const-generics.html)]
+> [来源: [Const Generics MVP](https://rust-lang.github.io/rfcs//2000-const-generics.html)]
 
 ---
 
@@ -416,7 +422,7 @@ graph TD
 ```
 
 > **认知功能**: **impl Trait 是默认选择，但递归和需要命名类型的场景需要显式类型**。
-> [来源: [Rust API Guidelines — impl Trait](https://rust-lang.github.io/api-guidelines/future-proofing.html)]
+> [来源: [Rust API Guidelines — impl Trait](https://rust-lang.github.io/api-guidelines//future-proofing.html)]
 
 ---
 
@@ -717,9 +723,9 @@ impl Container for BadWrapper {
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
 | [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html) | ✅ 一级 | 类型参考 |
-| [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html) | ✅ 一级 | 常量泛型 |
-| [RFC 1522 — impl Trait](https://rust-lang.github.io/rfcs/1522-conservative-impl-trait.html) | ✅ 一级 | impl Trait |
-| [Rust Type Inference](https://doc.rust-lang.org/reference/type-inference.html) | ✅ 一级 | 类型推断 |
+| [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs//2000-const-generics.html) | ✅ 一级 | 常量泛型 |
+| [RFC 1522 — impl Trait](https://rust-lang.github.io/rfcs//1522-conservative-impl-trait.html) | ✅ 一级 | impl Trait |
+| [Rust Type Inference](https://doc.rust-lang.org/reference/types.html) | ✅ 一级 | 类型推断 |
 | [typenum crate](https://docs.rs/typenum/latest/typenum/) | ✅ 一级 | 类型级数字 |
 
 ---
@@ -794,7 +800,7 @@ fn main() {}
 >
 > 这与 TypeScript 的 `Promise<T>`（自动推断）或 C# 的 `IAsyncEnumerable<T>`（接口约束）不同——Rust 的 `impl Trait` 是编译期抽象，不暴露具体类型，但约束需显式声明。
 > [来源: [Rust Reference — impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html)] ·
-> [来源: [RFC 2289 — Associated Type Constructors](https://rust-lang.github.io/rfcs/2289-associated-type-constructors.html)]
+> [来源: [RFC 2289 — Associated Type Constructors](https://rust-lang.github.io/rfcs//2289-associated-type-bounds.html)]
 
 ### 10.4 边界测试：关联类型的默认实现与具体化冲突（编译错误）
 

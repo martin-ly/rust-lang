@@ -1,10 +1,10 @@
 # Arbitrary Self Types 预览：自定义方法接收器
 
 > **代码状态**: [综述级 — 待补充代码]
-
 >
-> **EN**: Arbitrary Self Types 预览：自定义方法接收器 (Chinese)
-> **Summary**: Arbitrary Self Types 预览：自定义方法接收器 (Chinese). Core Rust concept covering mechanism analysis, embedded systems programming, kernel development.
+> **EN**: Arbitrary Self Types Preview
+> **Summary**: Preview of arbitrary self types: extending method receivers beyond `&self`, `&mut self`, and `Box<Self>`.
+> **来源**: [RFC 3519 — Arbitrary Self Types v2](https://rust-lang.github.io/rfcs//3519-arbitrary-self-types-v2.html) · [Rust Reference — Methods](https://doc.rust-lang.org/reference/items/associated-items.html)
 >
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`

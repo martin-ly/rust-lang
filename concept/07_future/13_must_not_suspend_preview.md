@@ -1,10 +1,9 @@
 # `must_not_suspend` Lint Preview
 
 > **代码状态**: [综述级 — 待补充代码]
-
 >
-> **EN**: `must_not_suspend` Lint Preview (Chinese)
-> **Summary**: `must_not_suspend` Lint Preview (Chinese). Emerging Rust feature or ecosystem trend: `must_not_suspend` Lint Preview (Chinese).
+> **EN**: Must Not Suspend Preview
+> **Summary**: Must Not Suspend Preview: emerging Rust language feature or ecosystem trend.
 >
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
@@ -18,7 +17,7 @@
 > **双维定位**: F×Eva — 评价跨 await 点的借用安全性
 > **前置依赖**: [Async/Await](../03_advanced/02_async.md) · [Interior Mutability](../02_intermediate/08_interior_mutability.md)
 > **后置延伸**: [Async Drop](./18_async_drop_preview.md)
-> **来源**: [RFC 3014](https://rust-lang.github.io/rfcs/3014-must-not-suspend-lint.html) · [Tracking Issue](https://github.com/rust-lang/rust/issues/83310)
+> **来源**: [RFC 3014](https://rust-lang.github.io/rfcs//3014-must-not-suspend-lint.html) · [Tracking Issue](https://github.com/rust-lang/rust/issues/83310)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 

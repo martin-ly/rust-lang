@@ -10,8 +10,8 @@
 > **代码状态**: [综述级 — 待补充代码]
 
 >
-> **EN**: WASM Target Evolution Preview (Chinese)
-> **Summary**: WASM Target Evolution Preview (Chinese). 10.4 边界测试：WASI 的 capability-based security 与文件系统访问（运行时拒绝）.
+> **EN**: WebAssembly Target Evolution
+> **Summary**: WebAssembly Target Evolution: emerging Rust language feature or ecosystem trend.
 >
 > **受众**: [专家]
 > **内容分级**: [综述级]
@@ -20,7 +20,7 @@
 > **双维定位**: P×Ana — 分析 WASM 目标的演进方向
 > **前置依赖**: [WASI](../06_ecosystem/08_wasi.md) · [WebAssembly](../06_ecosystem/11_webassembly.md)
 > **后置延伸**: [Rust for WebAssembly](./28_rust_for_webassembly.md)
-> **来源**: [WebAssembly Spec](https://webassembly.github.io/spec/) · [WASI Preview 2](https://github.com/WebAssembly/WASI/blob/main/preview2/README.md)
+> **来源**: [WebAssembly Spec](https://webassembly.github.io/spec/) · [WASI Preview 2](https://github.com/WebAssembly/WASI/blob/main/specifications/wasi-0.2.4/Overview.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 

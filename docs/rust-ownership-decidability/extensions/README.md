@@ -39,7 +39,7 @@
 
 **适用场景**：框架开发、代码生成、DSL 设计、自动化 trait 实现
 
-### 3. [Unsafe Rust 模式](./unsafe-rust-patterns.md)
+### 3. [Unsafe Rust 模式](../../../concept/03_advanced/03_unsafe.md)
 
 深入理解 Rust 的底层编程能力：
 
@@ -61,7 +61,7 @@
 
 **适用场景**：物联网设备、实时系统、引导程序、微控制器
 
-### 5. [Rust for Linux](./rust-for-linux.md)
+### 5. [Rust for Linux](../../../concept/07_future/19_rust_for_linux.md)
 
 参与 Linux 内核的 Rust 支持开发：
 

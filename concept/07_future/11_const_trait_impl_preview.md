@@ -1,10 +1,9 @@
 # Const Trait Impl 预研：常量上下文中的 Trait 泛化
 
 > **代码状态**: [综述级 — 待补充代码]
-
 >
-> **EN**: Traits
-> **Summary**: Traits. Core Rust concept covering mechanism analysis, generic programming, trait system mechanics.
+> **EN**: Const Trait Impl Preview
+> **Summary**: Preview of const trait implementations (`const Trait`) for compile-time generic code.
 >
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
@@ -131,7 +130,7 @@ graph TD
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 对于需要在 `const fn` 中使用的 Trait，使用 `const impl` 实现；对于仅运行时使用的 Trait，保持普通 impl。
 > **关键洞察**: `const impl` 不是简单的语法扩展，而是 Rust **效果系统**（Effect System）的雏形——`const` 是一种**效果**（effect），表示"无副作用、可编译期执行"。
-> [来源: [Rust [RFC 2632](https://rust-lang.github.io/rfcs/2632.html) — Motivation](https://github.com/rust-lang/rfcs/pull/2632)]
+> [来源: [Rust [RFC 2632](https://github.com/rust-lang/rfcs/pull/2632) — Motivation](https://github.com/rust-lang/rfcs/pull/2632)]
 
 ---
 
@@ -317,7 +316,7 @@ graph TD
 
 | 里程碑 | 状态 | 预计时间 | 说明 |
 |:---|:---:|:---|:---|
-| [RFC 2632](https://rust-lang.github.io/rfcs/2632.html) 接受 | ✅ | 2018 | 初始设计提案 |
+| [RFC 2632](https://github.com/rust-lang/rfcs/pull/2632) 接受 | ✅ | 2018 | 初始设计提案 |
 | 编译器原型 | ✅ nightly | 2020-2024 | 多次语法迭代 |
 | `~const` 语法稳定 | 🟡 → ❌ | 2026-2027 | **已非最终方向**；语法可能废弃，语义保留 |
 | 标准库 const impl | 🟡 | 2026-2028 | 逐步为 core/std Trait 添加 |
@@ -401,10 +400,10 @@ fn main() {
 > **修正**:
 > 在 const 上下文中（`const` 变量、`static` 变量、数组长度、`match` 分支守卫），只能调用 `const fn`。
 > 普通 `fn` 可能包含堆分配、I/O、panic 等运行时才允许的操作，因此不能在编译期执行。
-> `const trait impl`（[RFC 2632](https://rust-lang.github.io/rfcs/2632.html)）扩展了这一能力：允许 trait 方法在 const 上下文中调用，但要求 trait 和实现都标记为 `const`。
+> `const trait impl`（[RFC 2632](https://github.com/rust-lang/rfcs/pull/2632)）扩展了这一能力：允许 trait 方法在 const 上下文中调用，但要求 trait 和实现都标记为 `const`。
 > 例如 `const impl Add for Point` 允许 `const SUM: Point = A + B;`。
 > 这是 Rust"编译期计算"能力的关键扩展，使自定义类型在 const 上下文中的表现力接近内置类型。
-> [来源: [Rust RFC 2632](https://rust-lang.github.io/rfcs/2632-const-trait-impl.html)] ·
+> [来源: [Rust RFC 2632](https://github.com/rust-lang/rust/issues/67792)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.2 边界测试：trait bound 的 const 兼容性（编译错误）
@@ -426,7 +425,7 @@ const fn process<T: Compute>(x: T) -> i32 {
 > 这是 Rust 类型系统的复杂扩展：trait bound 现在需要考虑"const 性"（constness），形成类似 effect system 的维度。
 > 设计挑战：向后兼容性（现有代码无需修改）、默认行为（trait 默认非 const）、语法简洁性（`~const` 标记）。
 > 这与 C++ 的 `constexpr` 虚函数（C++23）方向类似，但 Rust 通过类型系统而非关键字控制编译期/运行时分派。
-> [来源: [Rust RFC 2632](https://rust-lang.github.io/rfcs/2632-const-trait-impl.html)] ·
+> [来源: [Rust RFC 2632](https://github.com/rust-lang/rust/issues/67792)] ·
 > [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]
 
 ### 10.6 边界测试：`~const` bound 与默认实现的交互（编译错误）
@@ -454,7 +453,7 @@ const fn sum<T: ~const Add>(a: T, b: T) -> T {
 > 2) 默认行为：trait 默认非 const，需显式 `const trait` 声明；
 > 3) 语法简洁性：`~const` 标记是否足够清晰？`const trait impl` 的稳定化将使 Rust 的 const 泛型编程能力大幅提升：自定义类型的常量计算、编译期数据结构、零成本抽象的配置系统。
 > 这与 C++ 的 `constexpr` 虚函数（C++23，类似方向）或 D 的 CTFE（编译期完全可用）不同——Rust 选择通过类型系统控制编译期能力，而非全局关键字。
-> [来源: [Rust RFC 2632](https://rust-lang.github.io/rfcs/2632-const-trait-impl.html)] ·
+> [来源: [Rust RFC 2632](https://github.com/rust-lang/rust/issues/67792)] ·
 > [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]
 
 ### 10.5 边界测试：const trait 的默认实现与泛型约束（编译错误）
@@ -477,7 +476,7 @@ impl const ConstDefault for i32 {
 
 > **修正**:
 >
-> `const trait impl`（[RFC 2632](https://rust-lang.github.io/rfcs/2632.html)）允许 trait 方法在 const 上下文中调用，
+> `const trait impl`（[RFC 2632](https://github.com/rust-lang/rfcs/pull/2632)）允许 trait 方法在 const 上下文中调用，
 > 但**默认实现**是复杂点：
 >
 > 1) trait 的默认方法体若调用其他非 const 方法，const impl 中覆盖时可能破坏 const 保证；
@@ -490,7 +489,7 @@ impl const ConstDefault for i32 {
 >
 > 当前状态（nightly 1.97）：`const_trait_impl` 已部分可用，但 `~const` 语法和默认实现处理仍在讨论。
 > 这与 C++ 的 `constexpr`（类似演进路径：C++11 有限 → C++14 扩展 → C++20 `consteval`）或 D 语言的 `enum` 强制编译期求值不同——Rust 的 const 系统趋向更灵活的泛型支持，但保守推进以避免设计锁定。
-> [来源: [RFC 2632 — const trait impl](https://rust-lang.github.io/rfcs/2632-const-trait-impl.html)] ·
+> [来源: [RFC 2632 — const trait impl](https://github.com/rust-lang/rust/issues/67792)] ·
 > [来源: [Rust Internals](https://internals.rust-lang.org/)]
 
 ### 10.3 边界测试：`~const` 边界的语法演进与兼容性（编译错误）
@@ -531,7 +530,7 @@ fn main() {
 >
 > 当前状态（nightly 1.97）：`const_trait_impl` 已部分可用，但 `~const` 语法和默认实现处理仍在讨论。
 > 这与 C++ 的 `constexpr`（类似演进路径）或 D 语言的 `enum` 强制编译期求值不同——Rust 的 const 系统趋向更灵活的泛型支持，但保守推进以避免设计锁定。
-> [来源: [RFC 2632](https://rust-lang.github.io/rfcs/2632-const-trait-impl.html)] · [来源: [Rust Internals](https://internals.rust-lang.org/)]
+> [来源: [RFC 2632](https://github.com/rust-lang/rust/issues/67792)] · [来源: [Rust Internals](https://internals.rust-lang.org/)]
 > **过渡**: Const Trait Impl 预研：常量上下文中的 Trait 泛化 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ### 补充定理链

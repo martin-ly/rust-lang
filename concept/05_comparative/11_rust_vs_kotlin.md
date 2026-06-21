@@ -10,8 +10,8 @@
 >
 # Rust vs Kotlin：静态安全的两种路径
 >
-> **EN**: Security Practices
-> **Summary**: Security Practices. Core Rust concept covering cross-language comparison, mental model building, mechanism analysis.
+> **EN**: Rust vs Kotlin
+> **Summary**: Comparative analysis of Rust and Kotlin across null safety, concurrency, and target domains.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价

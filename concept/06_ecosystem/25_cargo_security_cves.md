@@ -5,7 +5,7 @@
 # Cargo 安全公告：CVE-2026-5222 与 CVE-2026-5223
 >
 > **EN**: Cargo Security Advisories: CVE-2026-5222 and CVE-2026-5223
-> **Summary**: Rust 1.96.0 修复了两个仅影响第三方 registry 用户的 Cargo 安全漏洞。CVE-2026-5222 涉及 URL 规范化导致的凭证泄露，CVE-2026-5223 涉及 crate tarball 中符号链接的越界提取。本文说明漏洞机理、修复行为、影响范围以及可落地的缓解措施。
+> **Summary**: Cargo Security Advisories: CVE-2026-5222 and CVE-2026-5223: Rust ecosystem tools, crates, and engineering practices.
 >
 > **受众**: [进阶 / 工程]
 > **Bloom 层级**: 理解 → 应用

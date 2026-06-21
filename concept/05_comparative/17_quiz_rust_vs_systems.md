@@ -2,8 +2,8 @@
 
 # 测验：Rust vs 系统编程语言（L5 试点扩展）
 >
-> **EN**: 测验：Rust vs 系统编程语言（L5 试点扩展） (Chinese)
-> **Summary**: ```c // C 代码 char* greet() { char msg[] = "Hello"; return msg;  // 返回局部变量地址！ } int main() { char* s = greet(); printf("%s\n", s); return 0; }``` <details> <summary>💡 点击展开答案与解析</summary> **答案**：C 代码有**悬垂指针（dangling pointer）**——`msg` 是局部数组，函数返回后栈帧被销毁，`s` 指向无效memory。 **Rust 的等效代码**： ```rust fn greet() ->
+> **EN**: Quiz Rust Vs Systems
+> **Summary**: Quiz Rust Vs Systems. Core Rust concept.
 
 > **受众**: [进阶]
 > **内容分级**: [综述级]
@@ -68,7 +68,7 @@ fn main() {
 
 **若尝试返回引用**：
 
-```rust
+```rust,compile_fail
 fn greet() -> &str {
     let msg = String::from("Hello");
     &msg // ❌ 编译错误！返回局部变量的引用
@@ -178,7 +178,7 @@ int main() {
 
 **Rust 的等效代码**：
 
-```rust
+```rust,compile_fail
 use std::thread;
 
 fn main() {
@@ -392,7 +392,7 @@ fn add<T: std::ops::Add<Output = T>>(a: T, b: T) -> T {
 
 > "你不需要为使用的抽象付出代价。"
 
-```rust
+```rust,ignore
 fn add_i32(a: i32, b: i32) -> i32 { a + b }
 fn add_generic<T: Add>(a: T, b: T) -> T { a + b }
 
@@ -494,7 +494,7 @@ let sum: i64 = (0..1_000_000).map(|x| x as i64).sum();
 
 **Rust 的嵌入式优势**：
 
-```rust
+```rust,ignore
 #![no_std]  // 不使用标准库（无堆分配器）
 #![no_main]
 
@@ -535,7 +535,7 @@ std::shared_ptr<int> p2 = p1;  // 引用计数 +1
 
 **Rust**：
 
-```rust
+```rust,ignore
 let p1 = Rc::new(42);
 let p2 = Rc::clone(&p1);  // 引用计数 +1
 // p1, p2 离开作用域 → 引用计数归零 → 内存释放
@@ -557,7 +557,7 @@ let p2 = Rc::clone(&p1);  // 引用计数 +1
 
 **Rust 的编译期优势**：
 
-```rust
+```rust,ignore
 let p = Rc::new(42);
 std::thread::spawn(move || {
     println!("{}", *p); // ❌ 编译错误！

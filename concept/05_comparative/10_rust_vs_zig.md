@@ -3,8 +3,8 @@
 >
 # Rust vs Zig：现代系统语言的两种哲学
 >
-> **EN**: Rust vs Zig：现代系统语言的两种哲学 (Chinese)
-> **Summary**: Rust vs Zig：现代系统语言的两种哲学 (Chinese). Core Rust concept covering cross-language comparison, mechanism analysis.
+> **EN**: Rust vs Zig
+> **Summary**: Rust vs Zig: comparative analysis with Rust across type systems, memory safety, and concurrency.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价

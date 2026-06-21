@@ -51,6 +51,12 @@
     - [10.3 边界测试：逆变（contravariant）与函数参数的生命周期（编译错误）](#103-边界测试逆变contravariant与函数参数的生命周期编译错误)
     - [10.4 边界测试：协变/逆变与生命周期子类型的错误转换（编译错误）](#104-边界测试协变逆变与生命周期子类型的错误转换编译错误)
     - [10.4 边界测试：函数重复定义](#104-边界测试函数重复定义)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Rust 中 `&'a T` 对生命周期 `'a` 是什么变型（variance）？这意味着什么？（理解层）](#测验-1rust-中-a-t-对生命周期-a-是什么变型variance这意味着什么理解层)
+    - [测验 2：`&mut T` 对 `T` 是什么变型？为什么不是协变？（理解层）](#测验-2mut-t-对-t-是什么变型为什么不是协变理解层)
+    - [测验 3：`Box<T>`、`Vec<T>`、`Option<T>` 对 `T` 是什么变型？（理解层）](#测验-3boxtvectoptiont-对-t-是什么变型理解层)
+    - [测验 4：`UnsafeCell<T>` 对 `T` 是什么变型？为什么？（理解层）](#测验-4unsafecellt-对-t-是什么变型为什么理解层)
+    - [测验 5：子类型变型在实际代码中最常见的体现是什么？（理解层）](#测验-5子类型变型在实际代码中最常见的体现是什么理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -503,7 +509,7 @@ fn main() {
 }
 ```
 
-> **修正**: `UnsafeCell` 是 Rust 内部可变性的底层原语，它**关闭**了编译器的可变性和别名假设——通过 `UnsafeCell` 获取的指针可同时存在多个读写别名。但 `UnsafeCell` 本身不改变语义：从 `UnsafeCell` 获取的 `&mut T` 和 `&T` 仍不能同时活跃，除非使用 `UnsafeCell` 的特定 API（如 `Cell::get` 的按位复制）。上述代码是 UB，因为 `r1` 和 `r2` 同时存在。正确用法：`UnsafeCell` 应配合显式同步原语（`Mutex`、`RwLock`）或单线程运行时检查（`RefCell`）使用。`UnsafeCell` 的变异性是**不变**（invariant）的：不能将 `UnsafeCell<&'long T>` 赋值给 `UnsafeCell<&'short T>`，因为内部可变可能通过 `&mut` 改变引用的生命周期。这与 Java 的 `Object[]`（数组是协变的，运行时 `ArrayStoreException`）或 C++ 的 `std::vector<T>`（无变异性概念）不同——Rust 的 `UnsafeCell` 不变性防止了通过内部可变性破坏子类型关系。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/cell/struct.UnsafeCell.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/interior-mutability.html)]
+> **修正**: `UnsafeCell` 是 Rust 内部可变性的底层原语，它**关闭**了编译器的可变性和别名假设——通过 `UnsafeCell` 获取的指针可同时存在多个读写别名。但 `UnsafeCell` 本身不改变语义：从 `UnsafeCell` 获取的 `&mut T` 和 `&T` 仍不能同时活跃，除非使用 `UnsafeCell` 的特定 API（如 `Cell::get` 的按位复制）。上述代码是 UB，因为 `r1` 和 `r2` 同时存在。正确用法：`UnsafeCell` 应配合显式同步原语（`Mutex`、`RwLock`）或单线程运行时检查（`RefCell`）使用。`UnsafeCell` 的变异性是**不变**（invariant）的：不能将 `UnsafeCell<&'long T>` 赋值给 `UnsafeCell<&'short T>`，因为内部可变可能通过 `&mut` 改变引用的生命周期。这与 Java 的 `Object[]`（数组是协变的，运行时 `ArrayStoreException`）或 C++ 的 `std::vector<T>`（无变异性概念）不同——Rust 的 `UnsafeCell` 不变性防止了通过内部可变性破坏子类型关系。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/cell/struct.UnsafeCell.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/concurrency.html)]
 
 ### 10.3 边界测试：逆变（contravariant）与函数参数的生命周期（编译错误）
 

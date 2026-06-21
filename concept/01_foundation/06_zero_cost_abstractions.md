@@ -4,8 +4,8 @@
 >
 # 零成本抽象：Rust 的性能哲学
 >
-> **EN**: 零成本抽象：Rust 的性能哲学 (Chinese)
-> **Summary**: 零成本抽象：Rust 的性能哲学 (Chinese). Core Rust concept covering cross-language comparison, mechanism analysis.
+> **EN**: Zero Cost Abstractions
+> **Summary**: Zero Cost Abstractions: core Rust concepts, syntax, and examples.
 > **受众**: [初学者]
 > **Bloom 层级**: 理解 → 分析
 > **A/S/P 标记**: **S+P** — Structure + Procedure
@@ -595,7 +595,7 @@ fn main() {
 > `tokio::pin!` 宏在栈上创建 `Pin`，`Box::pin` 在堆上创建。这是零成本抽象的代价：自引用检测和 `Pin` 管理是编译器自动完成的，但底层机制复杂。
 > 与 JavaScript 的 Promise（无自引用问题，因为所有变量在闭包中按引用捕获）或 Go 的 goroutine（栈可增长和移动，通过指针重定位处理）不同
 > ——Rust 的 async 在编译期生成固定布局的状态机，运行时无额外开销。
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-04-pin.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-concurrency-with-async.html)] ·
 > [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
 
 ### 10.3 边界测试：零大小类型的布局陷阱（编译错误/UB）

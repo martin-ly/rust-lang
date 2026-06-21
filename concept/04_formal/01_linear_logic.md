@@ -3,7 +3,7 @@
 # Linear Logic & Affine Logic（线性逻辑与仿射逻辑）
 >
 > **EN**: Linear Logic
-> **Summary**: Linear Logic. Linear Logic & Affine Logic（线性逻辑与仿射逻辑）.
+> **Summary**: Linear Logic: formal methods foundations, semantics, and verification techniques relevant to Rust.
 > **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >
@@ -15,6 +15,8 @@
 > **后置概念**: [Ownership Formalization](./03_ownership_formal.md) · [RustBelt](./04_rustbelt.md)
 > **主要来源**: [Wikipedia: Linear logic] · [Wikipedia: Affine logic] · [Girard 1987] · [Pierce 2002, TAPL §15] · [RustBelt: POPL 2018](https://doi.org/10.1145/3158154) · [Utrecht: Ownership Types]
 
+>
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---
 
 > **Bloom 层级**: 分析 → 评价
@@ -457,7 +459,7 @@ fn affine_demo() {
 } // t 被 drop，资源释放
 ```
 
-> 此处为 L1/01_ownership.md §3 "Move 语义" 的精确对应——`let t = s` 是仿射逻辑中资源从 `s` 到 `t` 的线性转移，原变量 `s` 被标记为 moved。 [来源: [PLDI 2025 — Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]
+> 此处为 L1/01_ownership.md §3 "Move 语义" 的精确对应——`let t = s` 是仿射逻辑中资源从 `s` 到 `t` 的线性转移，原变量 `s` 被标记为 moved。 [来源: [PLDI 2025 — Tree Borrows](https://plv.mpi-sws.org/rustbelt/)]
 
 ```rust
 // ✅ 指数模态: i32 是 !T（Copy）
@@ -1051,7 +1053,7 @@ fn main() {
 }
 ```
 
-> **修正**: `!`（never type）在类型论中对应于**底**（bottom，⊥），表示不可达计算。在线性逻辑中，⊥ 是零资源——从 ⊥ 可推导任意命题（ex falso quodlibet）。Rust 中 `!` 可 coerce 为任意类型，因此 `let y: String = diverges()` 合法：编译器知道 `diverges()` 永不返回，赋值永不执行，类型兼容性是形式上的。但 `!` 本身没有值，不能调用方法或打印。`!` 的稳定化（从实验到部分稳定）是 Rust 类型系统的演进标志。这与 Haskell 的 `Void`（无 inhabitant，需 `absurd` 转换）或 TypeScript 的 `never`（类似语义）类似——Rust 的 `!` 在控制流分析中发挥关键作用（`if`/`match` 分支类型统一、 `?` 运算符）。[来源: [Rust RFC 1216](https://rust-lang.github.io/rfcs/1216-bang-type.html)] · [来源: [Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)]
+> **修正**: `!`（never type）在类型论中对应于**底**（bottom，⊥），表示不可达计算。在线性逻辑中，⊥ 是零资源——从 ⊥ 可推导任意命题（ex falso quodlibet）。Rust 中 `!` 可 coerce 为任意类型，因此 `let y: String = diverges()` 合法：编译器知道 `diverges()` 永不返回，赋值永不执行，类型兼容性是形式上的。但 `!` 本身没有值，不能调用方法或打印。`!` 的稳定化（从实验到部分稳定）是 Rust 类型系统的演进标志。这与 Haskell 的 `Void`（无 inhabitant，需 `absurd` 转换）或 TypeScript 的 `never`（类似语义）类似——Rust 的 `!` 在控制流分析中发挥关键作用（`if`/`match` 分支类型统一、 `?` 运算符）。[来源: [Rust RFC 1216](https://rust-lang.github.io/rfcs//1216-bang-type.html)] · [来源: [Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)]
 
 ### 10.3 边界测试：线性类型与 `Copy` 的冲突（编译错误）
 
@@ -1072,7 +1074,7 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的所有权系统本质是**仿射类型系统**（affine types）：值可被使用一次或零次（可选择丢弃）。线性逻辑要求值**必须**使用恰好一次（不可丢弃）。Rust 的 `Drop` trait 允许自定义丢弃逻辑，但不强制使用。要实现真正的线性类型：1) `must_use` 属性（警告未使用，但不编译错误）；2) 闭包/回调模式（将资源传入 continuation，强制使用）；3) 类型状态模式（状态转换消耗旧状态）。这与 Idris 的 `LinearTypes`（1.0+ 原生支持，编译期强制使用一次）或 Haskell 的 `LinearTypes`（GHC 9.x+，`-XLinearTypes`）不同——Rust 的 affine 类型更实用（允许未使用），但牺牲了一些形式化保证。[来源: [Rust Reference — Ownership](https://doc.rust-lang.org/reference/ownership.html)] · [来源: [Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)]
+> **修正**: Rust 的所有权系统本质是**仿射类型系统**（affine types）：值可被使用一次或零次（可选择丢弃）。线性逻辑要求值**必须**使用恰好一次（不可丢弃）。Rust 的 `Drop` trait 允许自定义丢弃逻辑，但不强制使用。要实现真正的线性类型：1) `must_use` 属性（警告未使用，但不编译错误）；2) 闭包/回调模式（将资源传入 continuation，强制使用）；3) 类型状态模式（状态转换消耗旧状态）。这与 Idris 的 `LinearTypes`（1.0+ 原生支持，编译期强制使用一次）或 Haskell 的 `LinearTypes`（GHC 9.x+，`-XLinearTypes`）不同——Rust 的 affine 类型更实用（允许未使用），但牺牲了一些形式化保证。[来源: [Rust Reference — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)] · [来源: [Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)]
 
 ### 10.4 边界测试：线性类型的 drop 约束与资源泄漏检测（编译错误）
 

@@ -1,7 +1,7 @@
 # Rust 范式转换模式矩阵（Paradigm Transition Matrix）
 >
-> **EN**: Rust 范式转换模式矩阵（Paradigm Transition Matrix） (Chinese)
-> **Summary**: Rust 范式转换模式矩阵. Core Rust concept covering cross-language comparison.
+> **EN**: Paradigm Transition Matrix
+> **Summary**: Paradigm Transition Matrix. Core Rust concept.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 >
@@ -10,6 +10,8 @@
 > **定位**: 本文件系统化梳理从其他编程语言（主要是 C++）迁移到 Rust 时的**范式转换模式**，以矩阵形式呈现"源语言模式 → Rust 模式 → 转换影响 → 学习难点"。与 `05_comparative/` 的对比文件（如 `01_rust_vs_cpp.md`）形成互补：后者是"逐项对比"，本文件是"转换模式矩阵"。
 > **对齐来源**: [Microsoft RustTraining — C++→Rust 案例研究] · [Google — Rust in Chromium] · [Linux Kernel — Rust 引入报告] · [Ferrous Systems — Rust Migration Guide]
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 > **来源**: [Microsoft RustTraining — github.com/microsoft/RustTraining · C++ Case Studies]

@@ -306,7 +306,7 @@ impl<'a, T: ?Sized> Deref for SmartPtr<'a, T> {
 
 - [Rust 1.97 特性速查表](./02_rust_197_features_cheatsheet.md)
 - [Rust 1.96 特性速查表](./02_rust_196_features_cheatsheet.md)
-- [Rust 2024 Edition 迁移指南](../../05_guides/06_rust_2024_edition_migration_guide.md)
+- [Rust 2024 Edition 迁移指南](../../../knowledge/06_ecosystem/02_edition_2024.md)
 - [releases.rs — 稳定化进度跟踪](https://releases.rs/)
 - [Rust 版本跟踪](../../../concept/07_future/05_rust_version_tracking.md)
 - [gen blocks 前瞻](../../../concept/07_future/15_gen_blocks_preview.md)

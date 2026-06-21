@@ -1,77 +1,12 @@
+> **EN**: Os Kernel
+> **Summary**: Os Kernel: Rust ecosystem tools, crates, and engineering practices.
 > **内容分级**: [专家级]
 
 > **代码状态**: [综述级 — 待补充代码]
 
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
-## 代码示例：最小 `no_std` 内核入口
-
-以下展示一个极简的裸机 Rust 内核启动框架（基于 `riscv64`）：
-
-```rust,ignore
-#![no_std]
-#![no_main]
-
-use core::panic::PanicInfo;
-
-// 内核入口点
-#[no_mangle]
-pub extern "C" fn _start() -> ! {
-    // 初始化 UART 串口输出
-    unsafe {
-        let uart = 0x1000_0000 as *mut u8;
-        for b in b"Hello from Rust kernel!
-" {
-            uart.write_volatile(*b);
-        }
-    }
-    loop {}
-}
-
-#[panic_handler]
-fn panic(_info: &PanicInfo) -> ! {
-    loop {}
-}
-```
-
-对应 `.cargo/config.toml`：
-
-```toml
-[build]
-target = "riscv64gc-unknown-none-elf"
-
-[target.riscv64gc-unknown-none-elf]
-rustflags = ["-C", "link-arg=-Tsrc/linker.ld"]
-```
-
->
-> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
->
-# 操作系统与内核：Rust 的系统级编程
->
-> **EN**: Operating Systems
-> **Summary**: 以下展示一个极简的裸机 Rust 内核启动框架（基于 `riscv64`）： ```rust,ignore use core::panic::PanicInfo; // 内核入口点 pub extern "C" fn _start() -> ! { // 初始化 UART 串口输出 unsafe { let uart = 0x1000_0000 as *mut u8; for b in b"Hello from Rust kernel! " { uart.write_volatile(*b); } } loop {} } fn panic(_info: &PanicInfo) -> ! { l
->
-> **受众**: [进阶]
-
-> **Bloom 层级**: 应用 → 评价
-> **双维定位**: C×Syn — 综合操作系统工程的实践与选型
-> **定位**: 深入分析 Rust 在操作系统内核（Rust for Linux、Theseus）、系统编程（eBPF、驱动开发）和微内核架构中的应用。
-> **前置概念**: [Unsafe](../03_advanced/03_unsafe.md) ·
-> [FFI](../03_advanced/05_rust_ffi.md) ·
-> [Memory Model](../03_advanced/03_unsafe.md#十五内存模型深度对比)
-> **后置概念**: [Network Protocols](./38_network_protocols.md) ·
-> [Database Systems](./37_database_systems.md)
-
----
-
-> **来源**: [Rust for Linux](https://rust-for-linux.com/) ·
-> [Theseus OS](https://www.theseus-os.com/) ·
-> [Redox OS](https://www.redox-os.org/) ·
-> [Aya-rs](https://aya-rs.dev/) ·
-> [Linux Kernel Documentation](https://docs.kernel.org/rust/)
-
----
+> **来源**: [Rust for Linux](https://rust-for-linux.com/) · [Redox OS](https://www.redox-os.org/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 
 ## 一、Rust for Linux：内核中的 Rust 代码
 

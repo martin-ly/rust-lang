@@ -1,10 +1,9 @@
 # AI × Rust：生成-验证闭环与确定性容器
 
 > **代码状态**: ✅ 含可编译示例
-
 >
-> **EN**: AI × Rust：生成-验证闭环与确定性容器 (Chinese)
-> **Summary**: AI × Rust：生成-验证闭环与确定性容器 (Chinese). Guide to 01 Ai Integration.
+> **EN**: AI Integration
+> **Summary**: AI Integration: emerging Rust language feature or ecosystem trend.
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]
@@ -18,6 +17,7 @@
 > [Formal Methods](./02_formal_methods.md)
 > **主要来源**: [AI Coding Trends 2025-2026] · [Rust AI Ecosystem] · [Verus/Creusot + LLM] · [Wikipedia]
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+
 ---
 
 > **Bloom 层级**: 分析 → 创造

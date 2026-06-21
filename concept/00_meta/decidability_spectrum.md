@@ -1,7 +1,7 @@
 # Rust 编译期可判定性谱系全景（Decidability Spectrum）
 >
-> **EN**: Rust 编译期可判定性谱系全景（Decidability Spectrum） (Chinese)
-> **Summary**: Rust 编译期可判定性谱系全景. Core Rust concept covering compiler internals.
+> **EN**: Decidability Spectrum
+> **Summary**: Decidability Spectrum. Core Rust concept.
 > **受众**: [研究者]
 > **定位**: 本文件从**纵向判定链路**梳理 Rust 编译器在全编译流程中的可判定性问题，与 `semantic_expressiveness.md` 的横向七维光谱形成正交互补。
 > **原则**: 不做"编译器实现手册"，聚焦"什么问题 Rust 编译器能在编译期判定、什么不能、不能时的补偿机制是什么"。
@@ -9,6 +9,8 @@
 > **基准版本**: Rust 1.96.0 stable (Edition 2024)
 
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 > **Bloom 层级**: 分析 → 评价 → 创造
@@ -245,7 +247,7 @@ Rust 名称解析遵循**严格的两阶段模型**：
 - **孤儿规则（Orphan Rule）的预检查**: 虽然孤儿规则主要在类型检查阶段生效，但名称解析阶段即需确定 `impl` 块的所属 crate，此判定基于模块图即可确定。
 - **无循环导入**: `use` 语句的循环依赖在模块图构建阶段即可检测。
 
-> **边界**: 宏生成的名称（`macro_rules!` 或过程宏生成的 `struct`/`fn`）需在宏扩展后才能解析。但由于宏扩展在名称解析之前完成（或交错进行但保证终止），整体仍保持判定性。 [来源: [RFC 1560](https://rust-lang.github.io/rfcs/1560.html), rustc_resolve 文档]
+> **边界**: 宏生成的名称（`macro_rules!` 或过程宏生成的 `struct`/`fn`）需在宏扩展后才能解析。但由于宏扩展在名称解析之前完成（或交错进行但保证终止），整体仍保持判定性。 [来源: [RFC 1560](https://rust-lang.github.io/rfcs//1560-name-resolution.html), rustc_resolve 文档]
 
 ---
 
@@ -293,7 +295,7 @@ Trait 约束求解是 Rust 类型系统中最复杂的判定问题。Rust 通过
 
 > **定理 T-DS-002（Trait 求解的受限可判定性）**: 在孤儿规则、一致性检查、无高阶类型量化、无关联类型无限递归的约束下，Rust Trait 约束求解是**可判定的**。
 > 若移除孤儿规则或允许任意重叠 impl，问题将退化为类似 Haskell 类型类的约束求解，在实践中可能进入非终止（尽管 Haskell 通过「上下文缩减限制」也保持了实践中可判定）。
-> [来源: [RFC 1665](https://rust-lang.github.io/rfcs/1665.html), Chalk 设计文档]
+> [来源: [RFC 1665](https://rust-lang.github.io/rfcs//1665-windows-subsystem.html), Chalk 设计文档]
 > **Rust 1.95 更新**: 下一代 Trait Solver（Trait Engine v2）正在逐步替换旧 solver，核心判定性保证不变，但错误信息质量和求解效率提升。
 
 ### 5.3 类型等价与一致性
@@ -334,7 +336,7 @@ NLL 将借用检查转化为**控制流图上的数据流问题**：
 - 借用 `&mut x` 仅在 `x` 的活跃期间被禁止重新借用或修改。
 - 数据流分析在有限 CFG 上总是终止（Kleene 不动点迭代在有限格上收敛）。
 
-> **定理 T-DS-003（NLL 终止性）**: 对任意有限 MIR（Mid-level IR）表示的函数，NLL 借用检查算法在有限步内终止，且判定结果是 sound 的（拒绝的程序一定不安全）和 complete 的 relative to 词法借用检查（接受更多程序）。 [来源: [RFC 2094](https://rust-lang.github.io/rfcs/2094.html), *Oxide: The Essence of Rust*]
+> **定理 T-DS-003（NLL 终止性）**: 对任意有限 MIR（Mid-level IR）表示的函数，NLL 借用检查算法在有限步内终止，且判定结果是 sound 的（拒绝的程序一定不安全）和 complete 的 relative to 词法借用检查（接受更多程序）。 [来源: [RFC 2094](https://rust-lang.github.io/rfcs//2094-nll.html), *Oxide: The Essence of Rust*]
 
 **Polonius 的判定性保证**:
 Polonius 将借用检查表述为**Datalog 程序**（实际上是 Datalog 的某个可判定子集）：
@@ -786,10 +788,10 @@ Rust 社区正在逐步探索 effects 系统（如 `const`、`async`、`unsafe` 
 
 > **权威来源**:
 > [Rust Reference](https://doc.rust-lang.org/reference/) ·
-> [RFC 1560](https://rust-lang.github.io/rfcs/1560-name-resolution.html) ·
-> [RFC 1665](https://rust-lang.github.io/rfcs/1665-where-clause-reasoning.html) ·
-> [RFC 2094](https://rust-lang.github.io/rfcs/2094-nll.html) ·
-> [RFC 911](https://rust-lang.github.io/rfcs/0911-const-fn.html) ·
+> [RFC 1560](https://rust-lang.github.io/rfcs//1560-name-resolution.html) ·
+> [RFC 1665](https://rust-lang.github.io/rfcs//1665-windows-subsystem.html) ·
+> [RFC 2094](https://rust-lang.github.io/rfcs//2094-nll.html) ·
+> [RFC 911](https://rust-lang.github.io/rfcs//0911-const-fn.html) ·
 > [RustBelt POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/paper.pdf) ·
 > [Oxide arXiv 2019](https://arxiv.org/abs/1903.00982) ·
 > [Pierce *TAPL*](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
@@ -821,7 +823,7 @@ fn main() {
 >
 > 类型推断的复杂度：最坏情况下是指数级（`O(2^n)`），但 Rust 编译器使用启发式限制实际复杂度。
 > 这与 Haskell 的 HM（完整且高效，无 trait 约束）或 C++ 的 `auto`（基于表达式类型，无统一变量）不同——Rust 的类型推断在 HM 基础上增加了 trait 系统的约束求解，某些边界情况需人工标注。
-> [来源: [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/type-inference.html)] ·
+> [来源: [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/types.html)] ·
 > [来源: [Hindley-Milner Type Inference](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system)]
 
 ## 认知路径

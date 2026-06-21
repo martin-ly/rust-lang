@@ -1,7 +1,7 @@
 # Rust 知识体系能力图谱（Competency Graph）
 >
-> **EN**: Rust 知识体系能力图谱（Competency Graph） (Chinese)
-> **Summary**: Rust 知识体系能力图谱. Core Rust concept covering mental model building.
+> **EN**: Competency Graph
+> **Summary**: Competency Graph. Core Rust concept.
 > **受众**: [进阶]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **Bloom 层级**: 元（Meta）
@@ -9,6 +9,8 @@
 > **对齐来源**: [ACM 能力图谱框架] · [Bloom 修订版 2001 — 认知过程维度] · [Dreyfus 技能获取模型] · [Microsoft RustTraining — 能力评估]
 
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 > **来源**: [ACM — *Competency Graph for Programming Education*]

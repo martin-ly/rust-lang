@@ -3,6 +3,8 @@
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 
+>
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Cargo Book](https://doc.rust-lang.org/cargo/) · [crates.io](https://crates.io/)
 ---
 
 # Application Domains（软件工程应用主题）
@@ -10,7 +12,7 @@
 > **代码状态**: ✅ 含可编译示例
 
 >
-> **EN**: Application Domains（软件工程应用主题） (Chinese)
+> **EN**: Application Domains
 > **Summary**: Application Domains. Core Rust concept covering mental model building.
 > **受众**: [进阶]
 > **内容分级**: [综述级]
@@ -297,7 +299,7 @@ Rust 在嵌入式领域的独特价值：
 
 ### 4.4 游戏与实时图形
 
-**技术栈**: `bevy` + `wgpu` + `rapier` + `rodio` [来源: [Rust in Production](https://www.rust-lang.org/production)]
+**技术栈**: `bevy` + `wgpu` + `rapier` + `rodio` [来源: [Rust in Production](https://www.rust-lang.org/)]
 
 | **引擎/框架** | **定位** | **特点** | **成熟度** |
 |:---|:---|:---|:---|
@@ -404,7 +406,7 @@ Rust 在区块链领域占据**主导地位**的原因：
 | **移除未对齐字段初始化 escape hatch** | `#[disable_initialized_field_access]` 静默允许未对齐字段的就地初始化，产生运行时 UB | 移除该 escape hatch，依赖它的代码现在编译失败而非静默产生 UB |
 | **`unused_features` lint 兼容** | Rust 1.96 重新启用 `unused_features` lint，内核全局启用的 feature 列表触发大量警告 | 内核构建系统全局允许该 lint，避免逐 crate 修改 |
 
-> **关键洞察**: Rust for Linux 正在从"社区实验"转变为"Rust Project 官方目标"。编译器团队（Wesley Wiser）、语言团队（Niko Matsakis）和内核团队（Miguel Ojeda）的协同，标志着 Rust 在系统编程最深层的渗透。核心 tension：**内核需要的新语言特性**（如 guaranteed destructors、arbitrary self types）与**语言团队的稳定化保守主义**之间的平衡。pin-init 的 soundness 修复尤其重要：它展示了 Rust 内核代码如何通过类型系统级别的封闭（sealed token）来消除初始化顺序相关的漏洞类别——这是 C 语言无法实现的保证。[来源: [Rust Project Goals — Rust for Linux](https://rust-lang.github.io/rust-project-goals/2026/)] · [来源: [Rust Blog — Project Goals Update 2026-04](https://blog.rust-lang.org/2026/05/18/2026/05/18/project-goals-2026-04.html)] · [来源: [Linux Kernel v7.0-rc4](https://lexplain.net/release-notes/v7.0-rc4)] · 可信度: ✅
+> **关键洞察**: Rust for Linux 正在从"社区实验"转变为"Rust Project 官方目标"。编译器团队（Wesley Wiser）、语言团队（Niko Matsakis）和内核团队（Miguel Ojeda）的协同，标志着 Rust 在系统编程最深层的渗透。核心 tension：**内核需要的新语言特性**（如 guaranteed destructors、arbitrary self types）与**语言团队的稳定化保守主义**之间的平衡。pin-init 的 soundness 修复尤其重要：它展示了 Rust 内核代码如何通过类型系统级别的封闭（sealed token）来消除初始化顺序相关的漏洞类别——这是 C 语言无法实现的保证。[来源: [Rust Project Goals — Rust for Linux](https://rust-lang.github.io/rust-project-goals/2026/)] · [来源: [Rust Blog — Project Goals Update 2026-04](https://blog.rust-lang.org/)] · [来源: [Linux Kernel v7.0-rc4](https://lexplain.net/release-notes/v7.0-rc4)] · 可信度: ✅
 
 > **来源**: [Rust for Linux] · [LWN] · 可信度: ✅
 
@@ -1366,7 +1368,7 @@ graph TD
 
 > **[来源: Rust in Production; Rust Foundation; Ferrous Systems; AWS/Google/Microsoft Rust Blogs]** 应用领域分析基于工业报告和大型企业的 Rust 采用案例。✅
 
-> **[来源: Embassy Book; Rust for Linux; Aya Docs; QUIC [RFC 9000](https://rust-lang.github.io/rfcs/9000.html); wgpu Docs]** 各方向的深入分析参考了对应领域的权威文档和 RFC。✅
+> **[来源: Embassy Book; Rust for Linux; Aya Docs; QUIC [RFC 9000](https://www.rfc-editor.org/info/rfc9000); wgpu Docs]** 各方向的深入分析参考了对应领域的权威文档和 RFC。✅
 
 ---
 
@@ -1379,7 +1381,7 @@ graph TD
 
 > **[来源: Rust in Production; Rust Foundation; Ferrous Systems; AWS/Google/Microsoft Rust Blogs]** 应用领域分析基于工业报告和大型企业的 Rust 采用案例。✅
 
-> **[来源: Embassy Book; Rust for Linux; Aya Docs; QUIC [RFC 9000](https://rust-lang.github.io/rfcs/9000.html); wgpu Docs; egui Docs]** 各方向的深入分析参考了对应领域的权威文档和 RFC。✅
+> **[来源: Embassy Book; Rust for Linux; Aya Docs; QUIC [RFC 9000](https://www.rfc-editor.org/info/rfc9000); wgpu Docs; egui Docs]** 各方向的深入分析参考了对应领域的权威文档和 RFC。✅
 
 > **[来源: Rust Blockchain Report 2024; Solana Docs; Polkadot Substrate Docs; Near Protocol Docs]** 区块链方向基于公开协议文档和社区报告。✅
 ---

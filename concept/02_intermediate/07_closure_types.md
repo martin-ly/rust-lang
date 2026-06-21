@@ -4,8 +4,8 @@
 >
 # 闭包类型系统：Fn、FnMut、FnOnce 的捕获语义
 >
-> **EN**: Type System
-> **Summary**: Type System. Core Rust concept covering mechanism analysis, in-depth analysis, type system mechanics.
+> **EN**: Closure Types
+> **Summary**: Rust closure types, capture modes, `Fn`/`FnMut`/`FnOnce` traits, and lifetime interactions.
 > **受众**: [进阶]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **S** — Structure
@@ -602,7 +602,7 @@ let f = || drop(s);
 
 以下代码能否编译？
 
-```rust
+```rust,compile_fail
 fn make_closure() -> impl Fn() -> i32 {
     let x = 5;
     || x

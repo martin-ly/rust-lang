@@ -4,8 +4,8 @@
 
 # Rust vs Go：线性所有权 vs CSP 过程逻辑
 >
-> **EN**: Ownership
-> **Summary**: Ownership. Rust vs Go：线性所有权 vs CSP 过程逻辑.
+> **EN**: Rust vs Go
+> **Summary**: Comparative analysis of Rust and Go across memory safety, concurrency, runtime, and error handling.
 > **受众**: [进阶]
 > **层级**: L5 对比分析
 > **A/S/P 标记**: **S+P** — Structure + Procedure
@@ -14,6 +14,8 @@
 > **后置概念**: [Paradigm Matrix](./03_paradigm_matrix.md)
 > **主要来源**: [TRPL] · [Effective Go] · [Wikipedia: Communicating sequential processes] · [Wikipedia: Go]
 
+>
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/)
 ---
 
 > **Bloom 层级**: 评价

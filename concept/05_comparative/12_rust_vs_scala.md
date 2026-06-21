@@ -3,8 +3,8 @@
 >
 # Rust vs Scala：类型系统的两种哲学
 >
-> **EN**: Type System
-> **Summary**: Type System. Core Rust concept covering cross-language comparison, mental model building, mechanism analysis.
+> **EN**: Rust vs Scala
+> **Summary**: Comparative analysis of Rust and Scala across type systems, functional programming, and runtime.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价

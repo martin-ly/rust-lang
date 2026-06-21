@@ -2,8 +2,8 @@
 
 # 自定义分配器与内存布局优化
 >
-> **EN**: 自定义分配器与内存布局优化 (Chinese)
-> **Summary**: 自定义分配器与内存布局优化 (Chinese). Core Rust concept covering mechanism analysis, in-depth analysis, performance optimization.
+> **EN**: Custom Allocators
+> **Summary**: Custom Allocators: advanced Rust topics, performance/runtime considerations, and ecosystem patterns.
 > **受众**: [专家]
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 深入探讨 Rust 的**自定义分配器**机制——从 `GlobalAlloc` Trait 到 `allocator_api` 不稳定特性，分析内存布局对齐、分配策略与性能优化。
@@ -12,11 +12,10 @@
 
 ---
 
-> **来源**:
-> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> **来源**: [std::alloc::GlobalAlloc](https://doc.rust-lang.org/std/alloc/trait.GlobalAlloc.html) · [Reference — Allocator API](https://doc.rust-lang.org/std/alloc/trait.GlobalAlloc.html)
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
-> [Rust Reference — Allocation](https://doc.rust-lang.org/reference/memory-allocation.html) ·
-> [RFC 1398 — Global Allocators](https://rust-lang.github.io/rfcs/1398-global_allocators.html) ·
+> [Rust Reference — Allocation](https://doc.rust-lang.org/std/alloc/index.html) ·
+> [RFC 1398 — Global Allocators](https://rust-lang.github.io/rfcs//1398-kinds-of-allocators.html) ·
 > [Wikipedia — Memory Management](https://en.wikipedia.org/wiki/Memory_management)
 
 ## 📑 目录
@@ -412,7 +411,7 @@ graph TD
 ```
 
 > **陷阱总结**: 自定义分配器的陷阱主要与**Layout 一致性**、**ZST 处理**、**对齐假设**、**生命周期**和**全局唯一性**相关。
-> [来源: [Rust Reference — Global Allocators](https://doc.rust-lang.org/reference/memory-allocation.html)]
+> [来源: [Rust Reference — Global Allocators](https://doc.rust-lang.org/std/alloc/index.html)]
 
 ---
 
@@ -421,9 +420,9 @@ graph TD
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
-| [Rust Reference — Allocation](https://doc.rust-lang.org/reference/memory-allocation.html) | ✅ 一级 | 官方参考 |
+| [Rust Reference — Allocation](https://doc.rust-lang.org/std/alloc/index.html) | ✅ 一级 | 官方参考 |
 | [std::alloc](https://doc.rust-lang.org/std/alloc/index.html) | ✅ 一级 | 标准库 API |
-| [RFC 1398](https://rust-lang.github.io/rfcs/1398-global_allocators.html) | ✅ 一级 | 全局分配器 RFC |
+| [RFC 1398](https://rust-lang.github.io/rfcs//1398-kinds-of-allocators.html) | ✅ 一级 | 全局分配器 RFC |
 | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | ✅ 一级 | unsafe 指南 |
 | [jemalloc](http://jemalloc.net/) | ✅ 二级 | 高性能分配器 |
 | [mimalloc](https://github.com/microsoft/mimalloc) | ✅ 二级 | 安全快速分配器 |

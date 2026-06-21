@@ -19,12 +19,12 @@
 > **定理链编号**: T-030 参数多态保持 → T-031 单态化 [来源: [Rust Reference — Monomorphization](https://doc.rust-lang.org/reference/items/generics.html)]正确性 → T-032 约束满足可判定
 > **层级**: L2 进阶概念
 > **前置概念**: [Type System Basics](../01_foundation/04_type_system.md) · [Traits](./01_traits.md)
-> **后置概念**: [Advanced Lifetimes](../01_foundation/03_lifetimes.md) · [GATs](../03_advanced/02_async.md) · [Const Generics [来源: [RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html)]]
+> **后置概念**: [Advanced Lifetimes](../01_foundation/03_lifetimes.md) · [GATs](../03_advanced/02_async.md) · [Const Generics [来源: [RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html)]]
 > **主要来源**:
 > [TRPL: Ch10.1](https://doc.rust-lang.org/book/ch10-01-syntax.html) ·
 > [Rust Reference: Generic Parameters](https://doc.rust-lang.org/reference/items/generics.html) ·
 > [Wikipedia: Generic programming](https://en.wikipedia.org/wiki/Generic_programming) ·
-> [RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html)
+> [RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html)
 
 ---
 
@@ -389,7 +389,7 @@ fn draw_dyn(d: &dyn Drawable) {
 
 ### 4.3 推论：Const Generics ⟹ 类型级编程
 
-> **[RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html)** · **[Rust Reference: Const Generics](https://doc.rust-lang.org/reference/items/generics.html)** Const generics 将值引入类型系统，是依赖类型的有限形式。 ✅ 已验证
+> **[RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs//2000-const-generics.html)** · **[Rust Reference: Const Generics](https://doc.rust-lang.org/reference/items/generics.html)** Const generics 将值引入类型系统，是依赖类型的有限形式。 ✅ 已验证
 
 ```text
 前提 1: 常量泛型参数 <const N: usize> 在编译期求值为具体值
@@ -667,8 +667,8 @@ graph TD
 
 > **Bloom 层级**: 应用 → 分析
 > **[Rust Reference: Const Generics](https://doc.rust-lang.org/reference/items/generics.html)** ·
-> **[RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html)** ·
-> **[RFC 2920](https://rust-lang.github.io/rfcs/2920-generic-const-exprs.html)** Const Generics 将编译期常量值引入类型参数空间，是依赖类型的有限形式。自 Rust 1.51 稳定以来，表达式求值、where 约束、默认参数等能力逐步开放。✅ 已验证
+> **[RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html)** ·
+> **[RFC 2920](https://rust-lang.github.io/rfcs//2920-inline-const.html)** Const Generics 将编译期常量值引入类型参数空间，是依赖类型的有限形式。自 Rust 1.51 稳定以来，表达式求值、where 约束、默认参数等能力逐步开放。✅ 已验证
 
 #### 5.7.1 常量表达式与 `generic_const_exprs`
 
@@ -687,7 +687,7 @@ fn padded_array<T: Default + Copy, const N: usize>() -> [T; { N + 4 }] {
 ```
 
 然而，上述表达式能力仅限于**简单算术**和**字面量组合**。
-更复杂的类型级计算（如条件分支、递归常量函数结果作为类型参数、关联类型作为常量参数）需要 `generic_const_exprs` 不稳定特性：[来源: [RFC 2920](https://rust-lang.github.io/rfcs/2920.html) — generic_const_exprs]
+更复杂的类型级计算（如条件分支、递归常量函数结果作为类型参数、关联类型作为常量参数）需要 `generic_const_exprs` 不稳定特性：[来源: [RFC 2920](https://rust-lang.github.io/rfcs//2920-inline-const.html) — generic_const_exprs]
 
 ```rust,ignore
 #![feature(generic_const_exprs)]
@@ -849,7 +849,7 @@ type RingBuffer256<T> = RingBuffer<T, 256>;
 
 #### 5.7.5 Const Generics 与泛型关联类型的交互
 
-Const Generics 与 GATs（Generic Associated Types，见 §9.5）的交互是 Rust 类型系统向依赖类型演进的显著标志。关联类型可携带生命周期参数，但在稳定 Rust 中**不能直接携带 const generic 参数**：[来源: [RFC 2000](https://rust-lang.github.io/rfcs/2000.html) / RFC 1598]
+Const Generics 与 GATs（Generic Associated Types，见 §9.5）的交互是 Rust 类型系统向依赖类型演进的显著标志。关联类型可携带生命周期参数，但在稳定 Rust 中**不能直接携带 const generic 参数**：[来源: [RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html) / RFC 1598]
 
 ```rust
 // ❌ 不稳定: 关联类型不能直接携带 const generic
@@ -914,7 +914,7 @@ fn main() {
 
 #### 5.7.6 典型应用：固定大小数组的数学运算
 
-Const Generics 最核心的工程应用之一是为固定大小数组提供类型安全的数学运算，数组维度作为类型的一部分参与编译期检查：[来源: [RFC 2000](https://rust-lang.github.io/rfcs/2000.html) — Const Generics]
+Const Generics 最核心的工程应用之一是为固定大小数组提供类型安全的数学运算，数组维度作为类型的一部分参与编译期检查：[来源: [RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html) — Const Generics]
 
 ```rust
 use std::ops::{Add, Mul};
@@ -996,7 +996,7 @@ C++ 模板自 C++98 起支持非类型模板参数（NTTP, Non-Type Template Par
 | **字符串支持** | ❌ 不支持 | ✅ C++20 起支持字面量类类型 |
 | **编译期调试** | `const_evaluatable_checked`（不稳定） | `static_assert`、`concept` 约束失败 |
 
-**核心差异的语义根源**: [来源: [RFC 2000](https://rust-lang.github.io/rfcs/2000.html) — Const Generics]
+**核心差异的语义根源**: [来源: [RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html) — Const Generics]
 
 ```rust,ignore
 // Rust: 类型检查先于单态化，const generic 表达式必须在签名层面可验证
@@ -1075,7 +1075,7 @@ impl<T, const N: usize> RingBuffer<T, N> {
 
 ## 六、反命题与边界分析（Counter-proposition & Boundary Analysis）
 
-> **[TRPL: Ch10.1](https://doc.rust-lang.org/book/ch10-01-syntax.html)** · **[Rust Performance Book](https://nnethercote.github.io/perf-book/compile-times.html)** · **[RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html)** 反命题分析基于单态化、约束可满足性和 Const Generics 的形式化语义。 ✅ 已验证
+> **[TRPL: Ch10.1](https://doc.rust-lang.org/book/ch10-01-syntax.html)** · **[Rust Performance Book](https://nnethercote.github.io/perf-book/compile-times.html)** · **[RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html)** 反命题分析基于单态化、约束可满足性和 Const Generics 的形式化语义。 ✅ 已验证
 
 ### 6.1 反命题 1: "泛型总是零成本的"
 
@@ -1494,8 +1494,8 @@ fn foo<T>() where T: Display + Clone { }  // where 子句（复杂约束）
 | 泛型通过单态化实现 | [TRPL: Ch10.1](https://doc.rust-lang.org/book/ch10-01-syntax.html) · [Rust Reference: Monomorphization](https://doc.rust-lang.org/reference/items/generics.html) | ✅ |
 | 单态化产生零成本抽象 | [TRPL: Ch10.1](https://doc.rust-lang.org/book/ch10-01-syntax.html) | ✅ |
 | 单态化导致二进制膨胀 | [Rust Performance Book](https://nnethercote.github.io/perf-book/compile-times.html) | ✅ |
-| Const Generics | [RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html) · [Rust Reference: Const Generics](https://doc.rust-lang.org/reference/items/generics.html) | ✅ |
-| GATs | [RFC 1598](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html) · [TRPL: Ch19.3](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html) | ✅ |
+| Const Generics | [RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html) · [Rust Reference: Const Generics](https://doc.rust-lang.org/reference/items/generics.html) | ✅ |
+| GATs | [RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html) · [TRPL: Ch19.3](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html) | ✅ |
 | ?Sized 解除默认约束 | [Rust Reference: Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html) | ✅ |
 | 参数多态对应 System F | [Wikipedia: System F](https://en.wikipedia.org/wiki/System_F) · [Pierce 2002, Ch.23](https://www.cis.upenn.edu/~bcpierce/tapl/) | ✅ |
 | System F 原始论文 | [Girard 1972 — PhD Thesis](https://www.unige.ch/~girard/thesis.pdf) | ✅ |
@@ -1503,7 +1503,7 @@ fn foo<T>() where T: Display + Clone { }  // where 子句（复杂约束）
 | Parametricity / Theorems for Free | [Wadler 1989 — POPL](https://dl.acm.org/doi/10.1145/75277.75305) | ✅ |
 | 约束多态 | [Cardelli & Wegner 1985](https://dl.acm.org/doi/10.1145/6041.6042) | ✅ |
 | Const Generics 与依赖类型 | [Rust Reference: Const Generics](https://doc.rust-lang.org/reference/items/generics.html) · 原创分析 | 💡 |
-| 最小能力原则与泛型约束 | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/flexibility.html) · 原创分析 | 💡 |
+| 最小能力原则与泛型约束 | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines//flexibility.html) · 原创分析 | 💡 |
 
 ---
 
@@ -1525,7 +1525,7 @@ fn print_all(items: impl Iterator<Item = i32>) {
 fn print_all<T: Iterator<Item = i32>>(items: T) { ... }
 ```
 
-**语义**: `print_all` 接受**任何**满足 `Iterator<Item = i32>` 的类型——调用者决定具体传入 `Vec::into_iter()`、`array::into_iter()` 还是自定义迭代器。函数内部只能使用 `Iterator` trait 的方法，无法知道具体类型。[来源: [RFC 1951](https://rust-lang.github.io/rfcs/1951.html) / Rust Reference: Impl trait]
+**语义**: `print_all` 接受**任何**满足 `Iterator<Item = i32>` 的类型——调用者决定具体传入 `Vec::into_iter()`、`array::into_iter()` 还是自定义迭代器。函数内部只能使用 `Iterator` trait 的方法，无法知道具体类型。[来源: [RFC 1951](https://rust-lang.github.io/rfcs//1951-expand-impl-trait.html) / Rust Reference: Impl trait]
 
 #### 返回位置 `impl Trait` = Existential（存在）
 
@@ -1572,12 +1572,12 @@ impl Factory for WidgetFactory {
 
 ### 9.2 补充：`min_specialization` 的当前状态与使用
 
-> **[RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html)** ·
+> **[RFC 1210](https://rust-lang.github.io/rfcs//1210-impl-specialization.html)** ·
 > **[Tracking Issue #31844](https://github.com/rust-lang/rust/issues/31844)** `min_specialization` 是 Rust 当前可用的 specialization 子集，限制为仅允许"更具体参数类型"的特化，禁止基于 trait bound 的特化。⚠️ nightly only。
 
 #### 与 full specialization 的核心区别
 
-| **维度** | `min_specialization` | Full specialization（[RFC 1210](https://rust-lang.github.io/rfcs/1210.html)） |
+| **维度** | `min_specialization` | Full specialization（[RFC 1210](https://rust-lang.github.io/rfcs//1210-impl-specialization.html)） |
 | :--- | :--- | :--- |
 | **稳定性** | nightly only | 未实现 |
 | **特化依据** | 仅参数类型具体度 | 参数类型 + trait bound |
@@ -1621,11 +1621,11 @@ impl<T: Bar> Foo for T {}         // E0751: 不能基于 trait bound 特化
 
 Full specialization 允许基于 trait bound 的特化（如 `impl<T: Display> Foo for T` vs `impl<T: Debug> Foo for T`），这会导致**语义交集重叠**（`T: Display + Debug` 时两者都适用），使编译器需要复杂的偏序裁决。`min_specialization` 通过限制特化仅基于类型构造子的具体度，保证了特化链的**全序性**和可判定性。
 
-> **来源**: [RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html) · [Tracking Issue #31844](https://github.com/rust-lang/rust/issues/31844) · [Rust Reference: Specialization](https://doc.rust-lang.org/reference/items/implementations.html#specialization)
+> **来源**: [RFC 1210](https://rust-lang.github.io/rfcs//1210-impl-specialization.html) · [Tracking Issue #31844](https://github.com/rust-lang/rust/issues/31844) · [Rust Reference: Specialization](https://doc.rust-lang.org/reference/items/implementations.html#specialization)
 
 #### 与 `default impl` 的交互
 
-`min_specialization` 与 `default impl`（[RFC 1210](https://rust-lang.github.io/rfcs/1210.html)）协同工作：`default impl` 提供**不完整的默认实现**，允许特化 impl 仅覆盖部分方法，而 `default` 关键字标记的方法可被更具体的 impl 覆盖。
+`min_specialization` 与 `default impl`（[RFC 1210](https://rust-lang.github.io/rfcs//1210-impl-specialization.html)）协同工作：`default impl` 提供**不完整的默认实现**，允许特化 impl 仅覆盖部分方法，而 `default` 关键字标记的方法可被更具体的 impl 覆盖。
 
 ```rust,ignore
 #![feature(min_specialization)]
@@ -1666,7 +1666,7 @@ impl Parse for String {
 
 **关键约束**: `min_specialization` 要求特化 impl 的约束是默认 impl 约束的**逻辑子集**（always applicable）。若默认 impl 要求 `T: Into<U>`，则特化 impl 不能引入 `T: Display` 等新约束。
 
-> **来源**: [RFC 1210 — Default impls](https://rust-lang.github.io/rfcs/1210-impl-specialization.html#default-impls) · [Rust Internals: min_specialization soundness](https://internals.rust-lang.org/t/soundness-of-min-specialization/)
+> **来源**: [RFC 1210 — Default impls](https://rust-lang.github.io/rfcs//1210-impl-specialization.html#default-impls) · [Rust Internals: min_specialization soundness](https://internals.rust-lang.org/t/soundness-of-min-specialization/)
 
 #### 实际用例：为 `&str` 和 `String` 提供不同优化实现
 
@@ -1724,7 +1724,7 @@ fn build_message<T: Append>(parts: &[T]) -> String {
 | `String` | `write!(buf, "{}", self)` | `buf.push_str(self)` | 避免格式化器开销，~3-5x |
 | `i32` | `write!(buf, "{}", self)` | 无特化 | 通用路径，可接受 |
 
-> **来源**: [RFC 1210 — Motivation](https://rust-lang.github.io/rfcs/1210-impl-specialization.html#motivation) · [Rust Performance Book](https://nnethercote.github.io/perf-book/compile-times.html) · [原创分析]
+> **来源**: [RFC 1210 — Motivation](https://rust-lang.github.io/rfcs//1210-impl-specialization.html#motivation) · [Rust Performance Book](https://nnethercote.github.io/perf-book/compile-times.html) · [原创分析]
 
 ---
 
@@ -2045,13 +2045,13 @@ type Huge = <U1000 as Add<U1000>>::Output;  // 可能触发递归深度限制
 
 > **关键洞察**: Type-level programming 是 Rust 对依赖类型（dependent types）的有限模拟。`typenum` 的二进制编码比 Peano 的 O(n) 链式编码更高效（O(log n)），但 Const Generics（`const N: usize`）在 Rust 1.51+ 后已覆盖大多数场景。type-level programming 仅在需要"类型作为计算结果"（如 GATs 返回类型级数值）时仍不可替代。
 
-> **来源**: [typenum docs](https://docs.rs/typenum) · [generic-array docs](https://docs.rs/generic-array) · [Rust Type System Turing Completeness](https://sdleffler.github.io/RustTypeSystemTuringComplete/) · [Pierce 2002, Ch.29: Type Operators and Kinding] · [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html)
+> **来源**: [typenum docs](https://docs.rs/typenum) · [generic-array docs](https://docs.rs/generic-array) · [Rust Type System Turing Completeness](https://sdleffler.github.io/RustTypeSystemTuringComplete/) · [Pierce 2002, Ch.29: Type Operators and Kinding] · [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs//2000-const-generics.html)
 
 ---
 
 ### 9.5 补充：Generic Associated Types (GATs) 的完整形式化视角
 
-> **[RFC 1598](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html)** · **[System F_ω](https://en.wikipedia.org/wiki/System_F)** GATs 将关联类型从"零阶类型别名"扩展为"类型族"（type family），对应类型论中 System F_ω 的类型构造器抽象。✅
+> **[RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html)** · **[System F_ω](https://en.wikipedia.org/wiki/System_F)** GATs 将关联类型从"零阶类型别名"扩展为"类型族"（type family），对应类型论中 System F_ω 的类型构造器抽象。✅
 
 #### GATs 与 System F_ω 的映射
 
@@ -2088,7 +2088,7 @@ Rust 刻意避免完整 HKT，因为：
 
 #### Lending Iterator 的完整类型论分析
 
-Lending Iterator 是 GATs 的典范用例，其类型签名在标准 `Iterator` 中**无法表达**：[来源: [RFC 1598](https://rust-lang.github.io/rfcs/1598.html) / TRPL: Ch19.3]
+Lending Iterator 是 GATs 的典范用例，其类型签名在标准 `Iterator` 中**无法表达**：[来源: [RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html) / TRPL: Ch19.3]
 
 ```rust
 trait LendingIterator {
@@ -2145,11 +2145,11 @@ impl<'t, T> LendingIterator for Windows<'t, T> {
 
 > **L4 映射**: GATs 对应范畴论中的**索引范畴**（indexed category）——关联类型从单对象（single type）到类型族（type family）的扩展，是依赖类型理论中 Π 类型（product type）的 Rust 近似。Lending Iterator 的类型安全正是 borrow checker（区域子类型）与 GATs（类型族）协同的形式化体现。
 
-> **来源**: [RFC 1598](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html) · [TRPL: Ch19.3](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html) · [TAPL Ch.29: Type Operators and Kinding] · [Haskell Type Families](https://wiki.haskell.org/Type_families)
+> **来源**: [RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html) · [TRPL: Ch19.3](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html) · [TAPL Ch.29: Type Operators and Kinding] · [Haskell Type Families](https://wiki.haskell.org/Type_families)
 
 ---
 
-## 十、Rust 2024 Edition：`use<..>` Precise Capturing（[RFC 3617](https://rust-lang.github.io/rfcs/3617.html)）
+## 十、Rust 2024 Edition：`use<..>` Precise Capturing（[RFC 3617](https://rust-lang.github.io/rfcs//3617-precise-capturing.html)）
 
 > **稳定版本**: Rust 1.82 (stable) · **2024 Edition 默认行为变更**
 > **形式化意义**: 存在类型的区域参数显化——从"隐式闭包"到"显式契约"
@@ -2509,8 +2509,8 @@ fn main() {
 
 ## 参考来源
 
-> [来源: [RFC 0195 — Associated Items](https://rust-lang.github.io/rfcs/0195-associated-items.html)]
-> [来源: [RFC 0448 — Associated Types](https://rust-lang.github.io/rfcs/0448-associated-types.html)]
+> [来源: [RFC 0195 — Associated Items](https://rust-lang.github.io/rfcs//0195-associated-items.html)]
+> [来源: [RFC 0448 — Associated Types](https://github.com/rust-lang/rfcs/pull/448)]
 > [来源: [JFP 2023 — Rust Generic Type System](https://www.cambridge.org/core/journals/journal-of-functional-programming)]
 > [来源: [Rust Reference — Type Parameters](https://doc.rust-lang.org/reference/items/generics.html)]
 
@@ -2522,7 +2522,7 @@ fn main() {
 
 以下代码能否编译？
 
-```rust
+```rust,compile_fail
 fn largest<T>(a: T, b: T) -> T {
     if a > b { a } else { b }
 }
@@ -2596,7 +2596,7 @@ fn process<T: Clone + PartialOrd + std::fmt::Debug>(item: T) {
 
 多个 bound 用 `+` 连接，表示"同时满足"。等价写法：
 
-```rust
+```rust,ignore
 fn process<T>(item: T)
 where
     T: Clone + PartialOrd + std::fmt::Debug,

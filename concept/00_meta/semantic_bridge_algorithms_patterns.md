@@ -1,7 +1,7 @@
 # 语义桥：算法、设计模式与工作流模式的统一谱系
 >
-> **EN**: Design Patterns
-> **Summary**: Design Patterns. Semantic bridge connecting algorithms to design patterns.
+> **EN**: Algorithms–Patterns Semantic Bridge
+> **Summary**: A semantic bridge linking algorithmic thinking to design patterns in Rust.
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **受众**: [专家]
 > **层级**: L0 元信息 — 跨域语义关联
@@ -17,6 +17,8 @@
 > [Wikipedia: Software design pattern] ·
 > [Wikipedia: Workflow patterns]
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 > **Bloom 层级**: 分析 → 评价 → 创造

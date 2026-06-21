@@ -3,8 +3,8 @@
 >
 # 数据抽象谱系：从 C struct 到 Rust enum + trait
 >
-> **EN**: 数据抽象谱系：从 C struct 到 Rust enum + trait (Chinese)
-> **Summary**: C 的 `struct` 是**最底层的数据抽象**——仅定义memory中字段的顺序和types：
+> **EN**: Data Abstraction Spectrum
+> **Summary**: Data Abstraction Spectrum: core Rust concepts, syntax, and examples.
 > ```c struct Point { double x; double y; }; // 抽象层级: memory地址 + 偏移量 // 无行为封装、无访问控制、无types安全保证```
 > **特征**: - 抽象单位 = memory布局 - 行为 = 独立函数（`distance(struct Point a, struct Point b)`） - 封装 = 无（所有字段公开） - 多态 = 无 C++ 将数据与行为绑定，引入访问控制和构造函数：
 > **受众**: [初学者]
@@ -15,6 +15,8 @@
 > **后置概念**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Type Erasure](../03_advanced/17_type_erasure.md)
 > **主要来源**: [Pierce TAPL, §18-§24] · [Cardelli & Wegner 1985 — On Understanding Types, Data Abstraction, and Polymorphism] · [Wikipedia: Abstract data type] · [Rust Reference — §4.2 Types]
 
+>
+> **来源**: [TRPL — Structs](https://doc.rust-lang.org/book/ch05-00-structs.html) · [TRPL — Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums.html) · [Reference — Items](https://doc.rust-lang.org/reference/items.html)
 ---
 
 > **Bloom 层级**: 理解 → 分析 → 评价
@@ -616,7 +618,7 @@ fn main() {
 > 部分移动使 Rust 的所有权系统更灵活：无需为单个字段移动而拆分整个 struct。
 > 这与 C++ 的默认拷贝（无移动语义）或 Swift 的拷贝语义不同——Rust 的部分移动是零成本抽象，编译期跟踪每个字段的所有权状态。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] ·
-> [来源: [Rust Reference — Moved Values](https://doc.rust-lang.org/reference/ownership.html)]
+> [来源: [Rust Reference — Moved Values](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)]
 
 ## 嵌入式测验（Embedded Quiz）
 

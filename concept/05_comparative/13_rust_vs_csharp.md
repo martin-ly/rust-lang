@@ -10,8 +10,8 @@
 >
 # Rust vs C#：托管与原生之路
 >
-> **EN**: Rust vs C#：托管与原生之路 (Chinese)
-> **Summary**: Rust vs C#：托管与原生之路 (Chinese). Core Rust concept covering cross-language comparison, mental model building, mechanism analysis.
+> **EN**: Rust vs C#
+> **Summary**: Rust vs C#: comparative analysis with Rust across type systems, memory safety, and concurrency.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
@@ -206,7 +206,7 @@
 
   Rust:
     async fn fetch_data() -> Result<String, reqwest::Error> {
-        let resp = reqwest::get("https://api.example.com").await?;
+        let resp = reqwest::get("https:/api.example.com").await?;
         resp.text().await
     }
 

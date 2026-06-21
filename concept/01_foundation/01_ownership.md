@@ -9,7 +9,7 @@
 # Ownership（所有权）
 >
 > **EN**: Ownership
-> **Summary**:
+> **Summary**: Ownership: core Rust concepts, syntax, and examples.
 > Ownership. Rust's core memory management model enforcing unique ownership, move semantics, and deterministic deallocation.
 > Covers linear/affine logic foundations, cross-language comparisons, and common ownership traps.
 > **📎 交叉引用**
@@ -1296,7 +1296,7 @@ fn main() {
 > 3) **clone**：`process(s.clone())`（显式深拷贝）。
 > Rust 的所有权规则使 API 设计更明确：函数签名即文档——`fn foo(s: String)` 消费 `s`，`fn foo(s: &String)` 只读借用，`fn foo(s: &mut String)` 可变借用。
 > 这与 C++ 的 const 引用参数（`void foo(const string& s)`，类似 Rust 的 `&String`）或 Java 的对象传递（总是引用传递，无所有权概念）不同——Rust 的参数类型直接反映所有权语义。
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] · [来源: [Rust Reference — Ownership](https://doc.rust-lang.org/reference/ownership.html)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] · [来源: [Rust Reference — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)]
 
 ## 嵌入式测验
 
@@ -1547,7 +1547,7 @@ fn greet_str(s: &str) { }
 
 ## 参考来源
 
-> [来源: [Rust Reference — Ownership](https://doc.rust-lang.org/reference/ownership.html)]
+> [来源: [Rust Reference — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)]
 > [来源: [RustBelt: Logical Foundations](https://plv.mpi-sws.org/rustbelt/)]
 > [来源: [POPL 2018 — RustBelt](https://dl.acm.org/doi/10.1145/3158154)]
 
@@ -1593,7 +1593,7 @@ let s2 = s1;
 
 **题目**: 以下代码能否通过编译？如果不能，错误是什么？
 
-```rust
+```rust,compile_fail
 fn take_ownership(s: String) {
     println!("{}", s);
 }
@@ -1628,7 +1628,7 @@ fn main() {
 
 **题目**: 以下代码中，哪一行违反了 Rust 的借用规则？
 
-```rust
+```rust,compile_fail
 let mut v = vec![1, 2, 3];
 let ref1 = &v;
 let ref2 = &v;
@@ -1707,7 +1707,7 @@ Rust 的 Drop 遵循 **LIFO（后进先出）** 原则：
 
 **题目**: 以下代码试图实现"从函数返回部分数据"，为什么它无法编译？如何修复？
 
-```rust
+```rust,compile_fail
 fn get_first_word(s: String) -> String {
     let bytes = s.as_bytes();
     for (i, &item) in bytes.iter().enumerate() {
@@ -1734,14 +1734,14 @@ fn main() {
 
 **修复方案 1（借用）**:
 
-```rust
+```rust,ignore
 fn get_first_word(s: &str) -> &str { ... }
 let word = get_first_word(&s); // s 仍有效
 ```
 
 **修复方案 2（Clone）**:
 
-```rust
+```rust,ignore
 let word = get_first_word(s.clone()); // s 仍有效
 ```
 

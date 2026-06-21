@@ -10,7 +10,7 @@
 > **代码状态**: ✅ 含可编译示例
 
 >
-> **EN**: Core Crates（核心开源库谱系） (Chinese)
+> **EN**: Core Crates
 > **Summary**: Core Crates. Guide to 03 Core Crates.
 > **受众**: [进阶]
 > **内容分级**: [综述级]
@@ -19,7 +19,7 @@
 > **双维定位**: P×Eva — 评估生态 crate 的安全性和可维护性
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Async](../03_advanced/02_async.md) · [Unsafe](../03_advanced/03_unsafe.md) [来源: [Rust FFI Guidelines](https://doc.rust-lang.org/nomicon/ffi.html)]
 > **后置概念**: [Application Domains](./04_application_domains.md)
-> **主要来源**: [crates.io](https://crates.io) · [lib.rs](https://lib.rs) · [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) · [Rust API Guidelines]
+> **主要来源**: [crates.io](https://crates.io) · [lib.rs](https:/lib.rs) · [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) · [Rust API Guidelines]
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -803,7 +803,7 @@ fn main() {
 ### 9.2 Crate 组合最佳实践：Axum + SQLx + Tracing 完整栈
 
 ```rust,ignore
-// ✅ Cargo.toml
+/ ✅ Cargo.toml
 // [dependencies]
 // axum = "0.7"
 // sqlx = { version = "0.8", features = ["runtime-tokio", "postgres"] }

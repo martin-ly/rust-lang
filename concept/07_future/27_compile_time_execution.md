@@ -3,8 +3,8 @@
 > **代码状态**: ✅ 含可编译示例
 
 >
-> **EN**: 编译期执行与常量求值 (Chinese)
-> **Summary**: 编译期执行与常量求值 (Chinese). Core Rust concept covering mechanism analysis, in-depth analysis, generic programming.
+> **EN**: Compile Time Execution
+> **Summary**: Compile Time Execution: emerging Rust language feature or ecosystem trend.
 >
 > **受众**: [专家]
 > **内容分级**: [综述级]
@@ -17,10 +17,9 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
-> **来源**:
-> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> **来源**: [Reference — Constant Evaluation](https://doc.rust-lang.org/reference/const_eval.html) · [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html)
 > [Rust Reference — Const Eval](https://doc.rust-lang.org/reference/const_eval.html) ·
-> [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html) ·
+> [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs//2000-const-generics.html) ·
 > [Wikipedia — Compile Time](https://en.wikipedia.org/wiki/Compile_time) ·
 > [Rust Blog — Const Evaluation](https://blog.rust-lang.org/)
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
@@ -180,7 +179,7 @@ Const Generics:
 ```
 
 > **泛型洞察**: **Const Generics 是 Rust 类型系统的里程碑**——数组大小进入类型系统，实现真正的编译期类型安全。
-> [来源: [RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html)]
+> [来源: [RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html)]
 
 ---
 
@@ -349,7 +348,7 @@ Const Generics:
 ```
 
 > **状态机洞察**: **类型状态机是 Rust 零成本类型安全的极致**——编译期保证正确的状态转换序列。
-> [来源: [Type State Pattern](https://rust-unofficial.github.io/patterns/idioms/type-state.html)]
+> [来源: [Type State Pattern](https://rust-unofficial.github.io/patterns/)]
 
 ---
 
@@ -461,10 +460,10 @@ graph TD
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
 | [Rust Reference — Const Eval](https://doc.rust-lang.org/reference/const_eval.html) | ✅ 一级 | 官方参考 |
-| [RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html) | ✅ 一级 | Const Generics |
+| [RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html) | ✅ 一级 | Const Generics |
 | [Rust Blog — Const](https://blog.rust-lang.org/) | ✅ 一级 | 官方博客 |
 | [Rust Performance Book](https://nnethercote.github.io/perf-book/) | ✅ 二级 | 性能优化 |
-| [Type State Pattern](https://rust-unofficial.github.io/patterns/idioms/type-state.html) | ✅ 二级 | 类型状态 |
+| [Type State Pattern](https://rust-unofficial.github.io/patterns/) | ✅ 二级 | 类型状态 |
 
 ---
 
@@ -534,7 +533,7 @@ fn main() {
 > Rust 的 `const fn` 能力在持续扩展：1.46 允许 `if`/`match`，1.57 允许 `panic`，1.64 允许 `dyn Trait`，未来可能允许有限堆分配（`const Heap` RFC）。
 > 这与 C++ 的 `constexpr`（C++20 允许堆分配和虚函数）相比，Rust 更保守——优先保证编译期执行的确定性和可预测性。
 > [来源: [Rust Reference — Const Evaluation](https://doc.rust-lang.org/reference/const_eval.html)] ·
-> [来源: [Rust RFC 2344](https://rust-lang.github.io/rfcs/2344-const-looping.html)]
+> [来源: [Rust RFC 2344](https://rust-lang.github.io/rfcs//2344-const-looping.html)]
 
 ### 10.2 边界测试：过程宏的 TokenStream 解析错误（编译错误）
 

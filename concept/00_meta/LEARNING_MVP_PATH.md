@@ -1,7 +1,7 @@
 # MVP 学习路径：从零到多线程 CLI（40 小时）
 >
-> **EN**: MVP 学习路径：从零到多线程 CLI（40 小时） (Chinese)
-> **Summary**:
+> **EN**: Learning Mvp Path
+> **Summary**: Learning Mvp Path. Core Rust concept.
 > ```text Week 1: 基础能力构建（20h） ├─ Day 1-2: Hello World + 基础语法      [4h] ├─ Day 3-4: ownership与borrowing                [6h] ├─ Day 5-6: types系统与错误处理          [6h] └─ Day 7:   第一个 CLI 工具（无concurrency）    [4h] Week 2: concurrency与工程化（20h） ├─ Day 8-9:  集合与迭代器               [4h] ├─ Day 10-11: 多线程与concurrency              [6h] ├─ Day 12-13: async基础```
 
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -19,6 +19,8 @@
 > - **选修**（🟡）：按兴趣和职业方向选择，不影响 MVP 达成，但扩展能力边界
 > - **核心产出**：一个可 `cargo install` 的多线程/异步 CLI 工具
 >
+>
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 ## 路径总览

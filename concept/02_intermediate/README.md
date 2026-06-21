@@ -1,7 +1,7 @@
 # L2 进阶概念层（Intermediate）
 >
-> **EN**: L2 进阶概念层（Intermediate） (Chinese)
-> **Summary**: L2 进阶概念层. L2 Intermediate layer overview and navigation hub.
+> **EN**: Readme
+> **Summary**: Readme. Core Rust concept.
 >
 > **受众**: [进阶]
 > **定位**：在掌握 L1 基础后，理解 Rust 的模块化、泛型、内存管理和错误处理等进阶机制。本层内容对齐 TRPL 第 10-15 章、Microsoft RustTraining 进阶部分。
@@ -10,6 +10,8 @@
 > **[来源: TRPL Ch. 10–15]** · **[来源: Wikipedia - Generic Programming]** · **[来源: Wikipedia - Trait-based Programming]** · **[来源: Microsoft Rust Training - Advanced Topics]**
 
 > **本节关键术语**: 进阶概念 (Intermediate) · 特征 (Trait) · 泛型 (Generics) · 生命周期 (Lifetime) · 智能指针 (Smart Pointer) — [完整对照表](../00_meta/terminology_glossary.md)
+>
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 ---
 
 ## 📑 目录

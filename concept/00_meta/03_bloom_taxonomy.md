@@ -62,6 +62,8 @@ fn main() {
 > [来源: [Rust Learning Path](https://www.rust-lang.org/learn)] ·
 > [来源: Bloom Taxonomy AI 2026 Revision, educational-data-mining.org]
 
+>
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 ## Augmented Cognition Framework (ACF) 2026 集成

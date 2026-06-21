@@ -4,17 +4,17 @@
 >
 # DSL 与嵌入 式设计：Rust 中的领域特定语言
 >
-> **EN**: DSL 与嵌入 式设计：Rust 中的领域特定语言 (Chinese)
-> **Summary**: DSL 与嵌入 式设计：Rust 中的领域特定语言 (Chinese). Core Rust concept covering mechanism analysis, design patterns, metaprogramming techniques.
+> **EN**: Dsl and Embedding
+> **Summary**: Dsl and Embedding: intermediate Rust mechanisms, patterns, and practical examples.
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
-> **定位**: 分析 Rust 中 **DSL（领域特定语言）**的构建方法——从宏驱动的内嵌 DSL（如 html!、sql!）、到外部 DSL 的解析器 [来源: [Parsing in Rust](https://rust-lang.github.io/rustc-dev-guide/grammar.html)]组合子（parser combinators），再到 Rust 作为宿主语言的嵌入策略，揭示类型安全 DSL 的设计模式。
+> **定位**: 分析 Rust 中 **DSL（领域特定语言）**的构建方法——从宏驱动的内嵌 DSL（如 html!、sql!）、到外部 DSL 的解析器 [来源: [Parsing in Rust](https://rustc-dev-guide.rust-lang.org/)]组合子（parser combinators），再到 Rust 作为宿主语言的嵌入策略，揭示类型安全 DSL 的设计模式。
 > **前置概念**: [Macros](../03_advanced/04_macros.md) · [Proc Macro](../03_advanced/07_proc_macro.md) · [Trait](./01_traits.md)
 > **后置概念**: [Serde Patterns](./09_serde_patterns.md) · [WebAssembly](../06_ecosystem/11_webassembly.md)
 
 ---
 
-> **来源**: [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) · [nom Parser Combinators](https://docs.rs/nom/latest/nom/) · [serde DSL Design](https://serde.rs/) · [Rust API Guidelines — DSLs](https://rust-lang.github.io/api-guidelines/predictability.html) · [Wikipedia — Domain-specific language](https://en.wikipedia.org/wiki/Domain-specific_language)
+> **来源**: [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) · [nom Parser Combinators](https://docs.rs/nom/latest/nom/) · [serde DSL Design](https://serde.rs/) · [Rust API Guidelines — DSLs](https://rust-lang.github.io/api-guidelines//predictability.html) · [Wikipedia — Domain-specific language](https://en.wikipedia.org/wiki/Domain-specific_language)
 
 ## 📑 目录
 
@@ -44,6 +44,12 @@
     - [10.4 边界测试：DSL 的类型安全与运行时错误（运行时 panic）](#104-边界测试dsl-的类型安全与运行时错误运行时-panic)
     - [10.3 边界测试：DSL 宏的优先级与歧义解析（编译错误）](#103-边界测试dsl-宏的优先级与歧义解析编译错误)
     - [10.4 边界测试：DSL 宏的优先级与运算符结合性（编译错误）](#104-边界测试dsl-宏的优先级与运算符结合性编译错误)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：在 Rust 中嵌入 DSL 的常见技术有哪些？（理解层）](#测验-1在-rust-中嵌入-dsl-的常见技术有哪些理解层)
+    - [测验 2：Builder 模式在 Rust 中为什么特别受欢迎？与构造函数相比有什么优势？（理解层）](#测验-2builder-模式在-rust-中为什么特别受欢迎与构造函数相比有什么优势理解层)
+    - [测验 3：过程宏（proc macro）与声明宏（`macro_rules!`）在 DSL 设计上各有什么优劣？（理解层）](#测验-3过程宏proc-macro与声明宏macro_rules在-dsl-设计上各有什么优劣理解层)
+    - [测验 4：类型状态模式（Type State Pattern）如何实现"编译期状态机"？（理解层）](#测验-4类型状态模式type-state-pattern如何实现编译期状态机理解层)
+    - [测验 5：Rust 的 `?` 运算符可以被看作一种小型 DSL 吗？为什么？（理解层）](#测验-5rust-的--运算符可以被看作一种小型-dsl-吗为什么理解层)
   - [实践](#实践)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -169,7 +175,7 @@ impl RequestBuilder<Ready> {
 ```
 
 > **Builder DSL 洞察**: **Typestate 模式**将运行时检查转化为编译期类型检查——这是 Rust 类型系统的强大应用。
-> [来源: [Rust API Guidelines — Builders](https://rust-lang.github.io/api-guidelines/type-safety.html#builders-enable-construction-of-complex-values-c-builder)]
+> [来源: [Rust API Guidelines — Builders](https://rust-lang.github.io/api-guidelines//type-safety.html#builders-enable-construction-of-complex-values-c-builder)]
 
 ---
 
@@ -265,7 +271,7 @@ let query = Query::new("SELECT * FROM users WHERE id = ?")
 ```
 
 > **类型安全洞察**: Rust 的**强类型系统**使 DSL 可以在编译期排除大量错误——从 SQL 注入到格式字符串漏洞。
-> [source: [Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines/type-safety.html)]
+> [source: [Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines//type-safety.html)]
 
 ---
 
@@ -695,6 +701,7 @@ fn main() {
 <summary>✅ 答案与解析</summary>
 
 1) 宏（`macro_rules!` / 过程宏）—— 编译期语法扩展；2) Builder 模式 —— 链式 API；3) 类型状态模式 —— 用类型编码 DSL 状态机；4) 运算符重载 —— 自定义 `+`、`|` 等。
+
 </details>
 
 ---

@@ -1,4 +1,8 @@
+> **Summary**: Legacy mdBook summary for the Rust concept knowledge system.
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 # Summary
+>
+> **EN**: mdBook Summary (Legacy)
 
 > **受众**: [初学者]
 

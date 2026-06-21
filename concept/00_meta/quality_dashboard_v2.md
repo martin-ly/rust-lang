@@ -1,12 +1,14 @@
 # Rust 知识体系思维表征覆盖率仪表板（Quality Dashboard v2）
 >
-> **EN**: Rust 知识体系思维表征覆盖率仪表板（Quality Dashboard v2） (Chinese)
-> **Summary**: Rust 知识体系思维表征覆盖率仪表板. Core Rust concept covering theorem proving foundations.
+> **EN**: Quality Dashboard V2
+> **Summary**: Quality Dashboard V2. Core Rust concept.
 > **受众**: [专家]
 > **Bloom 层级**: 元（Meta）
 > **定位**: 本文件是 `concept/` 知识体系的多维思维表征覆盖率统计面板，追踪每种表征类型（思维导图、矩阵、决策树、定理树、FTA 等）的覆盖概念数、来源对齐率和一致性状态。与 `navigation.md` 的"质量状态速览"形成互补：后者提供**静态快照**，本仪表板提供**动态趋势**和**维度细分**。
 > **更新周期**: 每次新增/修改 00_meta/ 元信息文件时更新
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 > **来源**: [`concept/` 知识体系规范 — `methodology.md`]

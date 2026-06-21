@@ -1,7 +1,7 @@
 # Rust 表征空间（Semantic / Representational Space）
 >
-> **EN**: Rust 表征空间（Semantic / Representational Space） (Chinese)
-> **Summary**: Rust 表征空间. Semantic expressiveness analysis and representation space mapping.
+> **EN**: Semantic Space
+> **Summary**: Semantic Space. Core Rust concept.
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **受众**: [研究者]
 > **Bloom 层级**: 分析 → 评价
@@ -10,6 +10,8 @@
 > **方法论对齐**: Felleisen 1989 "On the Expressive Power of Programming Languages" · Observational Equivalence · Turing Completeness · Semantic Closure
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 
+>
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 > **来源**: [Rust Reference] · [RFCs] · [RustBelt] · [Wikipedia]
@@ -1115,7 +1117,7 @@ graph TD
 
 > **认知功能**: 本图通过反事实推理验证"Rust 可以表达任何程序"这一命题，展示图灵完备性与表征空间边界的关键区分。建议在评估语言表达力时，区分"可计算"与"可简洁/安全表达"两个层次。关键洞察：被排除的绿色线程、GC 等并非不可计算，而是与 Rust 的零成本安全目标冲突。[来源: 💡 原创分析]
 
-[来源: [Wikipedia — Green Thread](https://en.wikipedia.org/wiki/Green_thread) · [RFC 230 — Remove Runtime](https://rust-lang.github.io/rfcs/0230-remove-runtime.html)]
+[来源: [Wikipedia — Green Thread](https://en.wikipedia.org/wiki/Green_thread) · [RFC 230 — Remove Runtime](https://rust-lang.github.io/rfcs//0230-remove-runtime.html)]
 
 ### 7.2 "safe Rust 的封闭性限制了表达力"
 
@@ -1187,8 +1189,8 @@ graph TD
 | 参数性定理 | Wadler 1989 · Theorems for Free! | ✅ 学术经典 |
 | 内存模型 | C11 Standard §5.1.2.4 · Rustonomicon | ✅ 标准/官方 |
 | Effects System | Rust Effects Initiative · Yoshua Wuyts 2024 | ✅ 研究阶段 |
-| Const Trait / Generic Const Items | [RFC 3762](https://rust-lang.github.io/rfcs/3762.html) · rust#113521 | ✅ 官方提案 |
-| Strict Provenance | Rust Reference · [RFC 4018](https://rust-lang.github.io/rfcs/4018.html) | ✅ 官方文档 |
+| Const Trait / Generic Const Items | [RFC 3762](https://github.com/rust-lang/rfcs/pull/3762) · rust#113521 | ✅ 官方提案 |
+| Strict Provenance | Rust Reference · [RFC 3559](https://rust-lang.github.io/rfcs/3559-rust-has-provenance.html) | ✅ 官方文档 |
 | 图灵完备类型系统 | Leffler 2017 · Rust Type System is Turing-Complete | ✅ 技术证明 |
 | 观察等价性 | Reynolds 1983 · relational parametricity | ✅ 学术经典 |
 

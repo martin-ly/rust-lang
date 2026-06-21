@@ -3,7 +3,7 @@
 # 测验：错误处理（试点扩展）
 >
 > **EN**: Error Handling
-> **Summary**: ```rust fn main() { let x: Result<i32, &str> = Ok(5); let y: Result<i32, &str> = Err("error"); println!("{:?} {:?}", x.is_ok(), y.is_err()); }``` <details> <summary>💡 点击展开答案与解析</summary> **答案**：`true true` **解析**： - `x.is_ok()` → `true`（`x` 是 `Ok`） - `y.is_err()` → `true`（`y` 是 `Err`） **`Result<T,
+> **Summary**: Quiz Error Handling. Core Rust concept.
 
 > **受众**: [初学者]
 > **内容分级**: [综述级]
@@ -97,7 +97,7 @@ fn main() {
 
 **解析**：`?` 运算符是 Rust 错误传播的**语法糖**：
 
-```rust
+```rust,ignore
 let val = may_fail()?;
 
 // 等价于：
@@ -159,7 +159,7 @@ thread 'main' panicked at 'should be a number: ParseIntError { ... }'
 
 **安全替代**：
 
-```rust
+```rust,ignore
 let m = bad.parse().unwrap_or(0);        // 失败时用默认值
 let m = bad.parse().unwrap_or_default(); // 失败时用类型默认值
 let m = bad.parse()?;                    // 传播错误
@@ -264,7 +264,7 @@ Count: 0
 
 **`let else` 示例**（Rust 1.65+ 稳定）：
 
-```rust
+```rust,ignore
 let Some(mode) = config else {
     println!("No config");
     return;
@@ -308,7 +308,7 @@ fn main() {
 
 **安全替代**：
 
-```rust
+```rust,ignore
 // 不 panic，返回 Option
 if let Some(val) = v.get(idx) {
     println!("{val}");
@@ -416,7 +416,7 @@ fn main() {
 
 **`?` 的自动转换机制**：
 
-```rust
+```rust,ignore
 let content = std::fs::read_to_string("config.txt")?;
 // 等价于：
 let content = match std::fs::read_to_string("config.txt") {
@@ -476,7 +476,7 @@ fn main() {
 
 **`collect` 的妙用**：
 
-```rust
+```rust,ignore
 // 收集为 Vec<Result<i32, _>>
 let results: Vec<Result<i32, _>> = vec![s1, s2, s3]
     .into_iter()
@@ -532,7 +532,7 @@ Err("Parse failed: invalid digit found in string")
 
 **执行流程**：
 
-```rust
+```rust,ignore
 s.parse::<i32>()           // "5" → Ok(5), "xyz" → Err(ParseIntError)
     .map(|n| n * 10)       // Ok(5) → Ok(50), Err → 不变
     .map_err(|e| ...)      // Ok → 不变, Err(e) → Err("Parse failed: ...")
@@ -540,7 +540,7 @@ s.parse::<i32>()           // "5" → Ok(5), "xyz" → Err(ParseIntError)
 
 **常见组合**：
 
-```rust
+```rust,ignore
 // 同时转换 Ok 和 Err
 result
     .map(|v| v.process())

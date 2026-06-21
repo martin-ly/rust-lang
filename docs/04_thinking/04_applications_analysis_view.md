@@ -107,7 +107,7 @@
 
 **公理 / 定理 → 论证**：系统编程选型遵循「最小依赖」公理——底层系统库应尽量少依赖。定理：`std::process` 提供可移植的进程抽象；`nix` 提供 Unix 特定 API。unsafe 使用需遵守 Rustonomicon 约束：安全抽象边界、不变式文档化。
 
-**决策树**：标准 API 够用？→ std；需 Unix 特定？→ nix；需 Windows 特定？→ windows-sys；FFI？→ 最小化 unsafe 范围。参考 [UNSAFE_RUST_GUIDE](../05_guides/05_unsafe_rust_guide.md)。
+**决策树**：标准 API 够用？→ std；需 Unix 特定？→ nix；需 Windows 特定？→ windows-sys；FFI？→ 最小化 unsafe 范围。参考 [UNSAFE_RUST_GUIDE](../../concept/03_advanced/03_unsafe.md)。
 
 ---
 

@@ -7,7 +7,7 @@
 # 模式组合代数：设计模式的结构化关联与冲突分析
 >
 > **EN**: Design Patterns
-> **Summary**: 借鉴范畴论的态射复合思想，定义模式组合的四种基本操作：[来源: [Milewski — Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)] ```text 模式组合代数: ⊗ (张量积/并行):  Pattern A ⊗ Pattern B = 两个模式同时作用，互不干扰 ∘ (复合/串行):    Pattern A ∘ Pattern B = B 的输出作为 A 的输入 ⊕ (和/选择):      Pat
+> **Summary**: Design Patterns: Rust ecosystem tools, crates, and engineering practices.
 >
 > **受众**: [进阶]
 > **层级**: L6 生态工程 — 系统设计模式
@@ -17,6 +17,8 @@
 > **后置概念**: [Distributed Systems](./18_distributed_systems.md) · [System Design Principles](./05_system_design_principles.md)
 > **主要来源**: [GoF — Design Patterns] · [POSA — Pattern-Oriented Software Architecture] · [Category Theory for Programmers, Bartosz Milewski] · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 
+>
+> **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)
 ---
 
 > **Bloom 层级**: 分析 → 评价 → 创造

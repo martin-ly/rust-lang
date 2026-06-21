@@ -4,8 +4,8 @@
 >
 # 内部可变性：编译期规则的运行时逃逸
 >
-> **EN**: 内部可变性：编译期规则的运行时逃逸 (Chinese)
-> **Summary**: Interior Mutability (内部可变性). Runtime-checked mutability patterns (Cell, RefCell, Mutex, RwLock) that relax compile-time borrowing rules when static analysis is insufficient.
+> **EN**: Interior Mutability
+> **Summary**: Interior Mutability: intermediate Rust mechanisms, patterns, and practical examples.
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 应用
 > **A/S/P 标记**: **S+P** — Structure + Procedure
@@ -23,7 +23,7 @@
 
 > **来源**: [Rust Reference — Interior Mutability](https://doc.rust-lang.org/reference/interior-mutability.html) ·
 > [TRPL Ch15 — RefCell](https://doc.rust-lang.org/book/ch15-05-interior-mutability.html) ·
-> [Rustonomicon — Interior Mutability](https://doc.rust-lang.org/nomicon/interior-mutability.html) ·
+> [Rustonomicon — Interior Mutability](https://doc.rust-lang.org/nomicon/concurrency.html) ·
 > [std::cell Documentation](https://doc.rust-lang.org/std/cell/index.html)
 
 ## 📑 目录
@@ -167,7 +167,7 @@ RefCell<T> 的运行时借用规则:
 > **运行时洞察**:
 > RefCell 的**运行时 panic**不是 UB——它是安全的、确定性的失败模式。
 > 与 C/C++ 的未定义行为不同，Rust 的运行时检查确保即使规则被违反，程序也是安全的（虽然会崩溃）。
-> [来源: [Rustonomicon — Interior Mutability](https://doc.rust-lang.org/nomicon/interior-mutability.html)]
+> [来源: [Rustonomicon — Interior Mutability](https://doc.rust-lang.org/nomicon/concurrency.html)]
 
 ---
 
@@ -540,7 +540,7 @@ fn correct_upgrade() {
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
 |:---|:---:|:---|
 | [TRPL Ch15 — Interior Mutability](https://doc.rust-lang.org/book/ch15-05-interior-mutability.html) | ✅ 一级 | 官方入门指南 |
-| [Rustonomicon — Interior Mutability](https://doc.rust-lang.org/nomicon/interior-mutability.html) | ✅ 一级 | unsafe 视角深入 |
+| [Rustonomicon — Interior Mutability](https://doc.rust-lang.org/nomicon/concurrency.html) | ✅ 一级 | unsafe 视角深入 |
 | [std::cell Documentation](https://doc.rust-lang.org/std/cell/index.html) | ✅ 一级 | 标准库文档 |
 | [std::sync Documentation](https://doc.rust-lang.org/std/sync/index.html) | ✅ 一级 | 线程同步原语 |
 | [Rust Reference — Interior Mutability](https://doc.rust-lang.org/reference/interior-mutability.html) | ✅ 一级 | 语言参考 |
@@ -663,7 +663,7 @@ fn main() {
 > [来源: [std::cell::RefCell](https://doc.rust-lang.org/std/cell/struct.RefCell.html)]
 > [来源: [std::sync::Mutex](https://doc.rust-lang.org/std/sync/struct.Mutex.html)]
 > [来源: [std::sync::RwLock](https://doc.rust-lang.org/std/sync/struct.RwLock.html)]
-> [来源: [Rust Unsafe Code Guidelines — Interior Mutability](https://rust-lang.github.io/unsafe-code-guidelines/glossary.html)]
+> [来源: [Rust Unsafe Code Guidelines — Interior Mutability](https://rust-lang.github.io/unsafe-code-guidelines//glossary.html)]
 > **权威来源**:
 > [Rust Reference](https://doc.rust-lang.org/reference/) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/) ·

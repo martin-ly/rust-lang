@@ -18,8 +18,8 @@
 ---
 
 > **来源**: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html) ·
-> [TRPL — Advanced Lifetimes](https://doc.rust-lang.org/book/ch19-02-advanced-lifetimes.html) ·
-> [RFC 0387 — Higher-Ranked Trait Bounds](https://rust-lang.github.io/rfcs/0387-higher-ranked-trait-bounds.html) ·
+> [TRPL — Advanced Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) ·
+> [RFC 0387 — Higher-Ranked Trait Bounds](https://rust-lang.github.io/rfcs//0387-higher-ranked-trait-bounds.html) ·
 > [The Rustonomicon — Subtyping and Variance](https://doc.rust-lang.org/nomicon/subtyping.html) ·
 > [Wikipedia — Region-based Memory Management](https://en.wikipedia.org/wiki/Region-based_memory_management)
 
@@ -101,7 +101,7 @@ HRTB (Higher-Ranked Trait Bounds):
 ```
 
 > **认知功能**: HRTB 是 Rust **泛型与借用结合**的关键机制——它使闭包和回调可以接受任意生命周期的引用。
-> [来源: [RFC 0387 — HRTB](https://rust-lang.github.io/rfcs/0387-higher-ranked-trait-bounds.html)]
+> [来源: [RFC 0387 — HRTB](https://rust-lang.github.io/rfcs//0387-higher-ranked-trait-bounds.html)]
 
 ---
 
@@ -418,7 +418,7 @@ graph TD
 ```
 
 > **认知功能**: **生命周期省略**覆盖大多数场景——只在编译器无法推断或需要明确文档时显式标注。
-> [来源: [Rust API Guidelines — Lifetimes](https://rust-lang.github.io/api-guidelines/flexibility.html#c-seeker)]
+> [来源: [Rust API Guidelines — Lifetimes](https://rust-lang.github.io/api-guidelines//flexibility.html#c-seeker)]
 
 ---
 
@@ -514,8 +514,8 @@ graph TD
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
 | [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html) | ✅ 一级 | 生命周期参考 |
-| [TRPL — Advanced Lifetimes](https://doc.rust-lang.org/book/ch19-02-advanced-lifetimes.html) | ✅ 一级 | 高级教程 |
-| [RFC 0387 — HRTB](https://rust-lang.github.io/rfcs/0387-higher-ranked-trait-bounds.html) | ✅ 一级 | HRTB 设计 |
+| [TRPL — Advanced Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) | ✅ 一级 | 高级教程 |
+| [RFC 0387 — HRTB](https://rust-lang.github.io/rfcs//0387-higher-ranked-trait-bounds.html) | ✅ 一级 | HRTB 设计 |
 | [The Rustonomicon — Subtyping](https://doc.rust-lang.org/nomicon/subtyping.html) | ✅ 一级 | 变型详解 |
 | [Pin and Suffering](https://blog.cloudflare.com/pin-and-unpin-in-rust/) | ✅ 二级 | Pin 深入讲解 |
 
@@ -710,7 +710,7 @@ fn main() {}
 > HRTB 的语法：`dyn for<'a> Fn(&'a str) -> &'a str` 表示闭包对所有 `'a` 有效。
 > 这与 Java 的泛型通配符（`? extends T`）或 C++ 的模板（无显式生命周期参数）不同——Rust 的 HRTB 允许 trait object 保持生命周期泛型，是高级类型系统的核心特性。
 > [来源: [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html)] ·
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-02-advanced-lifetimes.html)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
 
 ## 实践
 
@@ -728,7 +728,7 @@ fn main() {}
 
 对于 `&'a T`，若 `'static: 'a`（`'static` 比 `'a` 长），以下赋值是否合法？
 
-```rust
+```rust,ignore
 let s: &'static str = "hello";
 let r: &'a str = s;
 ```
@@ -814,7 +814,7 @@ where
 
 以下 trait bound 的含义是什么？
 
-```rust
+```rust,ignore
 fn foo<T>(x: T)
 where
     T: Trait + 'static,
@@ -846,7 +846,7 @@ where
 
 以下函数签名中，编译器能否自动推断生命周期？
 
-```rust
+```rust,ignore
 fn longest(x: &str, y: &str) -> &str
 ```
 
@@ -867,7 +867,7 @@ fn longest(x: &str, y: &str) -> &str
 
 `longest` 有两个输入引用，编译器无法确定输出应与 `x` 还是 `y` 关联。必须显式标注：
 
-```rust
+```rust,ignore
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 ```
 

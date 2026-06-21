@@ -4,8 +4,8 @@
 >
 # 元编程：Rust 的编译期代码生成与变换
 >
-> **EN**: 元编程：Rust 的编译期代码生成与变换 (Chinese)
-> **Summary**: 元编程：Rust 的编译期代码生成与变换 (Chinese). Core Rust concept covering practical examples, mechanism analysis, in-depth analysis.
+> **EN**: Metaprogramming
+> **Summary**: Metaprogramming: intermediate Rust mechanisms, patterns, and practical examples.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
@@ -21,10 +21,10 @@
 > [syn crate](https://docs.rs/syn/latest/syn/) ·
 > [quote crate](https://docs.rs/quote/latest/quote/) ·
 > [proc-macro2 crate](https://docs.rs/proc-macro2/latest/proc_macro2/) ·
-> [RFC 1584 — Macros 2.0](https://rust-lang.github.io/rfcs/1584-macros.html) ·
+> [RFC 1584 — Macros 2.0](https://rust-lang.github.io/rfcs//1584-macros.html) ·
 > [Wikipedia — Metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming) ·
 > [Wikipedia — Hygienic Macro](https://en.wikipedia.org/wiki/Hygienic_macro) ·
-> [Rust API Guidelines — Macros](https://rust-lang.github.io/api-guidelines/macros.html)
+> [Rust API Guidelines — Macros](https://rust-lang.github.io/api-guidelines//macros.html)
 
 ## 📑 目录
 
@@ -55,6 +55,12 @@
     - [10.3 边界测试：常量泛型的表达式复杂度（编译错误）](#103-边界测试常量泛型的表达式复杂度编译错误)
     - [10.4 边界测试：`TypeId` 的跨 crate 稳定性（逻辑错误）](#104-边界测试typeid-的跨-crate-稳定性逻辑错误)
     - [10.4 边界测试：编译期递归深度限制（编译错误）](#104-边界测试编译期递归深度限制编译错误)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：`macro_rules!` 与过程宏（proc macro）在元编程中的根本区别是什么？（理解层）](#测验-1macro_rules-与过程宏proc-macro在元编程中的根本区别是什么理解层)
+    - [测验 2：声明宏的"卫生性"（hygiene）意味着什么？（理解层）](#测验-2声明宏的卫生性hygiene意味着什么理解层)
+    - [测验 3：`compile_error!("msg")` 宏的作用是什么？（理解层）](#测验-3compile_errormsg-宏的作用是什么理解层)
+    - [测验 4：`concat!` 和 `stringify!` 宏分别做什么？（理解层）](#测验-4concat-和-stringify-宏分别做什么理解层)
+    - [测验 5：为什么过程宏必须放在独立的 crate 中，而不能与使用它的代码在同一 crate？（理解层）](#测验-5为什么过程宏必须放在独立的-crate-中而不能与使用它的代码在同一-crate理解层)
   - [实践](#实践)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -422,7 +428,7 @@ Rust 元编程的演进方向:
       ├── 显式传递的 ident 参数使用调用者上下文
       ├── stringify! 生成的字符串无卫生性保护
       └── ✅ 正确表述: "卫生性消除了意外捕获，但显式参数传递仍需注意"
-> [来源: [RFC 1584](https://rust-lang.github.io/rfcs/1584-macros.html)]
+> [来源: [RFC 1584](https://rust-lang.github.io/rfcs//1584-macros.html)]
 ```
 
 > **认知功能**: 反命题分析揭示了宏系统的**关键边界**——宏操作的是"语法"而非"语义"，这是宏强大与危险的根源：强大在于可以创造新语法，危险在于无法利用类型系统的安全保障。
@@ -504,7 +510,7 @@ Rust 元编程的演进方向:
   ✅ 优先使用泛型 + trait bound
      // impl<T: Add<Output=T>> MyWrapper<T> { ... }
      // 更少的代码，更好的错误信息
-> [来源: [Rust API Guidelines — Macros](https://rust-lang.github.io/api-guidelines/macros.html)]
+> [来源: [Rust API Guidelines — Macros](https://rust-lang.github.io/api-guidelines//macros.html)]
 ```
 
 > **陷阱总结**: 元编程的陷阱集中在**错误定位**、**卫生性理解**、**模式匹配细节**、**依赖限制**和**泛型替代**五个方面——每个陷阱都反映了"宏的语法层面操作"与"开发者的语义层面直觉"之间的鸿沟。
@@ -522,9 +528,9 @@ Rust 元编程的演进方向:
 | [syn crate docs](https://docs.rs/syn/latest/syn/) | ✅ 一级 | AST 解析库 |
 | [quote crate docs](https://docs.rs/quote/latest/quote/) | ✅ 一级 | 代码生成库 |
 | [proc-macro2 crate docs](https://docs.rs/proc-macro2/latest/proc_macro2/) | ✅ 一级 | 可测试 TokenStream |
-| [RFC 1584 — Macros 2.0](https://rust-lang.github.io/rfcs/1584-macros.html) | ✅ 一级 | 宏系统演进 RFC |
+| [RFC 1584 — Macros 2.0](https://rust-lang.github.io/rfcs//1584-macros.html) | ✅ 一级 | 宏系统演进 RFC |
 | [proc-macro Workshop](https://github.com/dtolnay/proc-macro-workshop) | ✅ 二级 | 过程宏练习 |
-| [Rust API Guidelines — Macros](https://rust-lang.github.io/api-guidelines/macros.html) | ✅ 一级 | API 设计指南 |
+| [Rust API Guidelines — Macros](https://rust-lang.github.io/api-guidelines//macros.html) | ✅ 一级 | API 设计指南 |
 | [rustc Dev Guide — Macro Expansion](https://rustc-dev-guide.rust-lang.org/macro-expansion.html) | ✅ 一级 | 编译器宏展开 |
 | [Wikipedia — Metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming) | ✅ 三级 | 元编程概念 |
 | [Wikipedia — Hygienic Macro](https://en.wikipedia.org/wiki/Hygienic_macro) | ✅ 三级 | 卫生宏概念 |
@@ -671,7 +677,7 @@ struct Wrapper<T, const N: usize>(Array<T, { N + 1 }>);
 fn main() {}
 ```
 
-> **修正**: 常量泛型（const generics，`const N: usize`）允许类型参数化数组大小、位掩码宽度等。但常量表达式（`N + 1`、`N * 2`）在泛型位置的使用需要 `generic_const_exprs` 特性（不稳定）。当前稳定的 Rust 只允许简单的常量泛型：1) 单一常量参数（`[T; N]`）；2) 默认参数（`const N: usize = 10`）；3) 关联常量（`Trait::CONST`）。复杂表达式（`N + 1`、`{ N * 2 }`）在稳定编译器上被拒绝。这与 C++ 的模板非类型参数（`template<int N>`，允许任意常量表达式）或 D 的模板参数（类似 C++）不同——Rust 的常量泛型更保守，优先保证编译期求值的确定性和类型系统的稳定性。[来源: [Rust RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: 常量泛型（const generics，`const N: usize`）允许类型参数化数组大小、位掩码宽度等。但常量表达式（`N + 1`、`N * 2`）在泛型位置的使用需要 `generic_const_exprs` 特性（不稳定）。当前稳定的 Rust 只允许简单的常量泛型：1) 单一常量参数（`[T; N]`）；2) 默认参数（`const N: usize = 10`）；3) 关联常量（`Trait::CONST`）。复杂表达式（`N + 1`、`{ N * 2 }`）在稳定编译器上被拒绝。这与 C++ 的模板非类型参数（`template<int N>`，允许任意常量表达式）或 D 的模板参数（类似 C++）不同——Rust 的常量泛型更保守，优先保证编译期求值的确定性和类型系统的稳定性。[来源: [Rust RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.4 边界测试：`TypeId` 的跨 crate 稳定性（逻辑错误）
 

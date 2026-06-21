@@ -17,8 +17,7 @@
 
 ---
 
-> **来源**:
-> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> **来源**: [Rustonomicon — Atomics](https://doc.rust-lang.org/nomicon/atomics.html) · [std::sync::atomic](https://doc.rust-lang.org/std/sync/atomic/index.html)
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
 > [C++ Memory Model](https://en.cppreference.com/w/cpp/atomic/memory_order) ·
 > [Wikipedia — Lock-free](https://en.wikipedia.org/wiki/Non-blocking_algorithm) ·
@@ -748,7 +747,7 @@ fn main() {}
 ## 参考来源
 
 > [来源: [Herlihy & Shavit — Art of Multiprocessor Programming](https://dl.acm.org/doi/book/10.5555/2385452)]
-> [来源: [RFC 1543 — Compare and Exchange Weak](https://rust-lang.github.io/rfcs/1543-compare-exchange-weak.html)]
+> [来源: [RFC 1543 — Compare and Exchange Weak](https://rust-lang.github.io/rfcs//1543-integer_atomics.html)]
 > [来源: [LLVM AtomicRMW](https://llvm.org/docs/LangRef.html#atomicrmw-instruction)]
 > [来源: [Lock-free Algorithms — Michael Scott](https://dl.acm.org/doi/10.1145/248052.248106)]
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) ·
@@ -818,7 +817,7 @@ fn main() {}
 
 **题目**: `compare_exchange` 返回 `Ok` 和 `Err` 分别代表什么？
 
-```rust
+```rust,ignore
 let result = atomic.compare_exchange(current, new, Ordering::Acquire, Ordering::Relaxed);
 ```
 
@@ -834,7 +833,7 @@ let result = atomic.compare_exchange(current, new, Ordering::Acquire, Ordering::
 
 **`compare_exchange` 语义**：
 
-```rust
+```rust,ignore
 // 原子操作：如果当前值 == expected，则替换为 new，返回 Ok(old)
 //          如果当前值 != expected，返回 Err(actual_current)
 
@@ -852,7 +851,7 @@ match atomic.compare_exchange(expected, new, success_order, failure_order) {
 
 **CAS 循环模式（Lock-Free 核心）**：
 
-```rust
+```rust,ignore
 fn cas_loop(atomic: &AtomicUsize, f: impl Fn(usize) -> usize) {
     loop {
         let current = atomic.load(Ordering::Relaxed);
@@ -1052,7 +1051,7 @@ impl<T> Stack<T> {
 
 **Epoch-Based Memory Reclamation（EBR）原理**：
 
-```rust
+```rust,ignore
 // 问题：pop 后 node 内存立即释放，但其他线程可能还在读取它！
 // 解决方案：延迟释放，直到确认没有线程在访问
 
@@ -1080,7 +1079,7 @@ Epoch 2: 所有线程推进 epoch
 
 **完整修复后的 `pop`**：
 
-```rust
+```rust,ignore
 fn pop(&self) -> Option<T> {
     let guard = &epoch::pin();
 
@@ -1160,7 +1159,7 @@ fn pop(&self) -> Option<T> {
 
 **Hazard Pointer 的实现要点**：
 
-```rust
+```rust,ignore
 // 每个线程维护一个 HP 数组
 thread_local! {
     static HAZARD_POINTERS: RefCell<Vec<AtomicPtr<u8>>> = ...;

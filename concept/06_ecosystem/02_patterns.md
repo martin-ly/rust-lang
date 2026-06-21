@@ -13,6 +13,8 @@
 > **前置概念**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Type System](../01_foundation/04_type_system.md) [来源: [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/)]
 > **主要来源**: [Rust API Guidelines] · [Rust Design Patterns] · [TRPL]
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
+> **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [TRPL — Patterns](https://doc.rust-lang.org/book/ch18-00-patterns.html) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 ---
 
 > **Bloom 层级**: 应用 → 分析
@@ -539,7 +541,7 @@ struct TemperatureDisplay {
 
 impl TemperatureDisplay {
     fn update(&self, temp: f32) {
-        println!("Display: 当前温度 {}°C", temp); [来源: [Rust in Production](https://www.rust-lang.org/production)]
+        println!("Display: 当前温度 {}°C", temp); [来源: [Rust in Production](https://www.rust-lang.org/)]
     }
 
     fn attach(sensor: &Rc<RefCell<TemperatureSensor>>) -> Rc<RefCell<Self>> {
@@ -1010,7 +1012,7 @@ fn to_json<T: serde::Serialize>(input: T) -> Result<Vec<u8>, serde_json::Error> 
 
 **与 L1-L4 的关联**：过度工程的泛型滥用直接违背 [L2 泛型](../02_intermediate/02_generics.md) 中"约束即文档"的原则——无约束的泛型参数丧失类型信息；过度使用 `dyn Trait` 则绕过了 [L1 所有权](../01_foundation/01_ownership.md) 的编译期精确分析，引入运行时间接调用。
 
-> **来源**: [Rust API Guidelines — Flexibility](https://rust-lang.github.io/api-guidelines/flexibility.html) · [Rust Design Patterns — Gold Plating](https://rust-unofficial.github.io/patterns/anti_patterns/gold-plating.html) · 可信度: ✅
+> **来源**: [Rust API Guidelines — Flexibility](https://rust-lang.github.io/api-guidelines//flexibility.html) · [Rust Design Patterns — Gold Plating](https://rust-unofficial.github.io/patterns/) · 可信度: ✅
 
 ---
 
@@ -1072,7 +1074,7 @@ impl Transport {
 
 **与 L1-L4 的关联**：过早抽象常表现为对 [L2 Trait](../02_intermediate/01_traits.md) 的过早承诺——Trait 一旦作为公共 API 发布，其变更即构成破坏性修改；同时，enum 优先于 dyn Trait 的策略正是 [L1 类型系统](../01_foundation/04_type_system.md) 中"代数数据类型 + 穷尽性检查"优势的体现。
 
-> **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/about.html) · [TRPL — Traits](https://doc.rust-lang.org/book/ch10-02-traits.html) · 可信度: ✅
+> **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines//about.html) · [TRPL — Traits](https://doc.rust-lang.org/book/ch10-02-traits.html) · 可信度: ✅
 
 ---
 
@@ -1121,7 +1123,7 @@ fn run_command(cmd: Command) {
 
 **与 L1-L4 的关联**：Stringly typed 直接违背 [L1 类型系统](../01_foundation/04_type_system.md) 的核心原则——"使非法状态不可表示"（Making Illegal States Unrepresentable）。enum 的穷尽性检查是 Rust 编译期保证的关键机制，参见 [L1 类型系统](../01_foundation/04_type_system.md) §代数数据类型。
 
-> **来源**: [Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines/type-safety.html) · 可信度: ✅
+> **来源**: [Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines//type-safety.html) · 可信度: ✅
 
 ---
 
@@ -1176,7 +1178,7 @@ async fn handler(db: &DatabaseLayer, sessions: &SessionLayer) { /* ... */ }
 
 **与 L1-L4 的关联**：上帝对象的 `Mutex<GlobalState>` 模式违背了 [L1 所有权](../01_foundation/01_ownership.md) 的核心理念——"单一所有者决定生命周期"。通过 Actor / Channel 模型将状态拆分，正是 [L3 并发](../03_advanced/01_concurrency.md) 中"共享状态转化为消息传递"原则的实践。参见 [L1 借用](../01_foundation/02_borrowing.md) §内部可变性、[L3 并发](../03_advanced/01_concurrency.md) §Actor 模型。
 
-> **来源**: [Rust API Guidelines — Structs](https://rust-lang.github.io/api-guidelines/predictability.html) · [Rust Design Patterns — Anti-patterns](https://rust-unofficial.github.io/patterns/anti_patterns/index.html) · 可信度: ✅
+> **来源**: [Rust API Guidelines — Structs](https://rust-lang.github.io/api-guidelines//predictability.html) · [Rust Design Patterns — Anti-patterns](https://rust-unofficial.github.io/patterns/anti_patterns/index.html) · 可信度: ✅
 
 ---
 
@@ -1232,7 +1234,7 @@ fn process_items(mut items: Vec<Item>) -> Vec<Processed> {
 
 **与 L1-L4 的关联**：Spaghetti Code 在 Rust 中最危险的变体是生命周期意大利面——过度复杂的生命周期标注往往意味着违背了 [L1 所有权](../01_foundation/01_ownership.md) 的"单一所有者"原则，或需要 [L3 异步](../03_advanced/02_async.md) 中的 `Pin` 来安全表达自引用。`Rc<RefCell<...>>` 的滥用则是 [L2 内存管理](../02_intermediate/03_memory_management.md) 中内部可变性机制的误用，参见该文件 §`RefCell<T>` 边界。
 
-> **来源**: [Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines/type-safety.html) · [Rust Design Patterns — Anti-patterns](https://rust-unofficial.github.io/patterns/anti_patterns/index.html) · [TRPL — Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [Wikipedia — Spaghetti code](https://en.wikipedia.org/wiki/Spaghetti_code) · 可信度: ✅
+> **来源**: [Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines//type-safety.html) · [Rust Design Patterns — Anti-patterns](https://rust-unofficial.github.io/patterns/anti_patterns/index.html) · [TRPL — Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [Wikipedia — Spaghetti code](https://en.wikipedia.org/wiki/Spaghetti_code) · 可信度: ✅
 
 ---
 
@@ -1692,7 +1694,7 @@ fn main() {
 }
 ```
 
-> **修正**: Builder 模式的**链式调用**在 Rust 中需处理所有权：`fn name(mut self, ...)` 消耗 `self` 并返回新的 `Self`，旧的 `self` 不可用。修复：1) `fn name(&mut self, ...)` — 借用，支持链式但不返回 `Self`（需分开调用：`builder.name(...); builder.age(...);`）；2) `fn name(mut self, ...) -> Self` — 消耗式，但要求一次性链式调用：`Builder::new().name(...).age(...).build()`；3) `fn name(self, ...) -> Self` — 无 `mut`，在函数内重新绑定。Rust 的 builder 模式通常采用**消耗式**（`mut self`），因为构建完成后 builder 不再需要。这与 Java 的 builder（总是返回 `this`，无所有权问题）或 Python 的 builder（同样无所有权）不同——Rust 的 builder 需显式处理移动语义。[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/creational/builder.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: Builder 模式的**链式调用**在 Rust 中需处理所有权：`fn name(mut self, ...)` 消耗 `self` 并返回新的 `Self`，旧的 `self` 不可用。修复：1) `fn name(&mut self, ...)` — 借用，支持链式但不返回 `Self`（需分开调用：`builder.name(...); builder.age(...);`）；2) `fn name(mut self, ...) -> Self` — 消耗式，但要求一次性链式调用：`Builder::new().name(...).age(...).build()`；3) `fn name(self, ...) -> Self` — 无 `mut`，在函数内重新绑定。Rust 的 builder 模式通常采用**消耗式**（`mut self`），因为构建完成后 builder 不再需要。这与 Java 的 builder（总是返回 `this`，无所有权问题）或 Python 的 builder（同样无所有权）不同——Rust 的 builder 需显式处理移动语义。[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/print.html#builder)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ## 嵌入式测验（Embedded Quiz）
 

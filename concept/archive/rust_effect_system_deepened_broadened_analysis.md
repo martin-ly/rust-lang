@@ -1,9 +1,14 @@
+> **Summary**: Rust Effect System Deepened Broadened Analysis. Core Rust concept.
 # Rust 效应系统（Effect System）与其语言边界的全面深化广化分析论证
+>
+> **EN**: Rust Effect System Deepened Broadened Analysis
 
 > **文档性质**：形式化分析论证 | **对齐标准**：POPL、PLDI、ICFP、OOPSLA、SOSP、USENIX ATC 国际顶会学术传统
 > **核心问题**：Rust 的类型系统是否构成效应系统？其边界在哪里？与代数效应、能力系统、所有权系统的本质差异为何？
 > **表征方式**：思维导图 · 多维矩阵热力图 · 定理推理判定树 · 边界语义空间决策树 · 历史演进时间线 · 编译器 lowering 路径图 · 形式化验证生态图谱 · 范畴论三元对比图 · unsafe 形式化模型图 · 工程决策雷达图 · 综合架构全景图
 
+>
+> **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
 ---
 
 ## 目录

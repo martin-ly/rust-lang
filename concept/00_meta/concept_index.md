@@ -1,7 +1,7 @@
 # 全局概念索引（Concept Index）
 >
-> **EN**: 全局概念索引（Concept Index） (Chinese)
-> **Summary**: 全局概念索引. Global concept index providing cross-layer navigation and topic lookup.
+> **EN**: Concept Index
+> **Summary**: Concept Index. Core Rust concept.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **受众**: [进阶]
@@ -10,6 +10,8 @@
 > **方法论对齐**: Wikipedia Infobox Pattern · Semantic Link Network · Knowledge Graph Indexing
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
+>
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 ## 📑 目录
@@ -131,6 +133,7 @@
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
 | **Borrowing (&/&mut)** | [L1: 借用](../01_foundation/02_borrowing.md) | L1 所有权、L3 并发、L4 分离逻辑 | 理解 | ← 所有权 → 生命周期 ≡ 分数权限 |
+| **Bootstrap (rustc)** | [L6: rustc Bootstrap](../06_ecosystem/70_rustc_bootstrap.md) | L6 rustc、L6 基础设施 | 分析 | ← rustc_driver → Stage0/1/2
 | **Box** | [L2: 内存管理](../02_intermediate/03_memory_management.md) | L1 所有权、L4 线性逻辑 | 应用 | ← 所有权 → 智能指针 |
 | **Builder Pattern** | [L6: 设计模式](../06_ecosystem/02_patterns.md) | L2 Trait、L1 类型系统 | 应用 | ← 所有权 + 方法链 → API 设计 |
 
@@ -151,6 +154,8 @@
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
 | **Decision Tree (定理推理)** | [L0: 方法论](../00_meta/methodology.md) | 所有文件 | — | 规范所有推理链的呈现方式 |
+| **Compiler Diagnostics and UI Tests** | [L6: Compiler Diagnostics](../06_ecosystem/69_compiler_diagnostics_and_ui_tests.md) | L4 rustc、L6 基础设施 | 分析 | ← rustc_driver → Lint / UI Test |
+| **Compiler Testing** | [L6: Compiler Testing](../06_ecosystem/71_compiler_testing.md) | L4 rustc、L6 基础设施 | 应用 | ← UI Test → Crater / rustc-perf
 | **Drop Trait** | [L1: 所有权](../01_foundation/01_ownership.md) | L2 Trait、L4 线性逻辑 | 理解 | ← 所有权 → RAII ≡ 资源消耗 |
 | **dyn Trait** | [L1: 类型系统](../01_foundation/04_type_system.md) | L2 Trait、L4 类型论 | 分析 | ⊘ impl Trait → 动态分发 |
 
@@ -165,7 +170,15 @@
 | **enum (Sum Type)** | [L1: 类型系统](../01_foundation/04_type_system.md) | L2 错误处理、L4 代数类型 | 理解 | ≡ 和类型 / 余积 (A + B) |
 | **Error Handling (Result/Option)** | [L2: 错误处理](../02_intermediate/04_error_handling.md) | L1 类型系统、L3 异步 | 应用 | ← Option/Result → ? 运算符 |
 | **Error Pedagogy** | [L0: 学习指南](./learning_guide.md) | L0 Bloom、L1-L3 | 应用 | ← 编译错误 → 概念学习 |
-| **embedded-hal-async** | [L6: 嵌入式系统](../06_ecosystem/22_embedded_systems.md) | L3 async、L6 Embassy | 应用 | ← 异步 trait → 嵌入式 I/O
+| **embedded-hal-async** | [L6: 嵌入式系统](../06_ecosystem/22_embedded_systems.md) | L3 async、L6 Embassy | 应用 | ← 异步 trait → 嵌入式 I/O |
+| **Cargo Build Scripts** | [L6: Cargo Build Scripts](../06_ecosystem/59_cargo_build_scripts.md) | L6 Toolchain、L6 Dependency Resolution | 应用 | ← Cargo 工作区 → 原生库链接 |
+| **Cargo Dependency Resolution** | [L6: Cargo Dependency Resolution](../06_ecosystem/60_cargo_dependency_resolution.md) | L6 Cargo、L6 Registry | 应用 | ← SemVer → Lockfile / Resolver |
+| **Cargo Registries and Publishing** | [L6: Cargo Registries](../06_ecosystem/62_cargo_registries_and_publishing.md) | L6 Cargo、L6 Security | 应用 | ← Dependency Resolution → crates.io |
+| **Cargo Source Replacement** | [L6: Cargo Source Replacement](../06_ecosystem/61_cargo_source_replacement.md) | L6 Cargo、L6 Dependency Resolution | 应用 | ← Registry → Mirror / Vendor |
+| **Cargo Subcommands and Plugins** | [L6: Cargo Subcommands](../06_ecosystem/66_cargo_subcommands_and_plugins.md) | L6 Cargo、L6 Toolchain | 应用 | ← Toolchain → Custom Tooling
+| **Cargo Authentication and Cache** | [L6: Cargo Auth & Cache](../06_ecosystem/63_cargo_authentication_and_cache.md) | L6 Cargo、L6 Security | 应用 | ← Registry → Token / CARGO_HOME |
+| **Cargo Manifest Reference** | [L6: Cargo Manifest](../06_ecosystem/64_cargo_manifest_reference.md) | L6 Cargo | 应用 | ← Toolchain → Profiles / Lints |
+| **Cargo Profiles and Lints** | [L6: Cargo Profiles](../06_ecosystem/65_cargo_profiles_and_lints.md) | L6 Cargo | 应用 | ← Manifest → Build Tuning
 
 ### F [来源: 概念定义基于 Rust Reference / TRPL / 学术论文]
 
@@ -190,7 +203,8 @@
 |:---|:---|:---|:---|:---|
 | **HRTB (Higher-Ranked Trait Bounds)** | [L1: 生命周期](../01_foundation/03_lifetimes.md) | L2 Trait、L4 类型论 | 评价 | ← 生命周期 + 泛型 ≡ ∀<'a> |
 | **HM Type Inference** | [L4: 类型论](../04_formal/02_type_theory.md) | L1 类型系统、L2 泛型 | 分析 | → 类型自动推导 |
-| **hax** | [L6: 形式化验证](../06_ecosystem/47_formal_verification_tools.md) | L4 形式化、L6 密码学 | 分析 | ← Rust → F*/Rocq 翻译 → 验证
+| **hax** | [L6: 形式化验证](../06_ecosystem/47_formal_verification_tools.md) | L4 形式化、L6 密码学 | 分析 | ← Rust → F*/Rocq 翻译 → 验证 |
+| **HIR (High-level IR)** | [L4: Name Resolution and HIR](../04_formal/25_name_resolution_and_hir.md) | L4 rustc、L4 Type System | 分析 | ← AST → Type Checking → MIR
 
 ### I
 
@@ -214,6 +228,7 @@
 | **Lifetimes ('a)** | [L1: 生命周期](../01_foundation/03_lifetimes.md) | L2 泛型、L3 异步、L4 区域类型 | 理解 | ← 借用 → Send/Sync ≡ 区域约束 |
 | **Linear Logic** | [L4: 线性逻辑](../04_formal/01_linear_logic.md) | L1 所有权、L5 Rust vs C++ | 评价 | ≡ 所有权的形式化根基 |
 | **Liskov Substitution** | [L2: Trait](../02_intermediate/01_traits.md) | L4 子类型 | 理解 | → Trait 对象安全 |
+| **LLVM Backend and Codegen** | [L6: LLVM Backend](../06_ecosystem/67_llvm_backend_and_codegen.md) | L4 rustc、L6 编译器基础设施 | 分析 | ← MIR → 目标文件 / LTO
 
 ### M
 
@@ -233,6 +248,7 @@
 |:---|:---|:---|:---|:---|
 | **Newtype Pattern** | [L6: 设计模式](../06_ecosystem/02_patterns.md) | L1 类型系统、L2 Trait | 应用 | ← 零大小类型 → 类型安全 |
 | **NLL (Non-Lexical Lifetimes)** | [L1: 生命周期](../01_foundation/03_lifetimes.md) | L4 区域类型 | 分析 | ← 词法作用域 → 控制流敏感 |
+| **Name Resolution** | [L4: Name Resolution and HIR](../04_formal/25_name_resolution_and_hir.md) | L1 模块、L3 宏、L4 rustc | 分析 | ← 命名空间 + Rib → HIR |
 
 ### O
 
@@ -262,6 +278,8 @@
 | **Representational Space (表征空间)** | [L0: 语义空间](semantic_space.md) | 所有层 | 评价 | ← 所有概念 → 能/不能表达边界 |
 | **RPITIT (Return Position Impl Trait In Trait)** | [L3: 异步](../03_advanced/02_async.md) | L2 Trait、L7 演进 | 评价 | ← AFIT → 关联返回类型 |
 | **RustBelt** | [L4: RustBelt](../04_formal/04_rustbelt.md) | L3 Unsafe、L7 形式化方法 | 评价 | ← Iris → Rust 安全验证 |
+| **Rustc Query System** | [L4: Rustc Query System](../04_formal/19_rustc_query_system.md) | L4 rustc、L6 编译器基础设施 | 分析 | ← TyCtxt → 增量编译 / Dep Graph |
+| **Rustc Driver and Stable MIR** | [L6: rustc Driver](../06_ecosystem/68_rustc_driver_and_stable_mir.md) | L4 rustc、L6 工具链 | 分析 | ← rustc_interface → 外部工具 / rustc_public |
 
 ### S
 
@@ -294,6 +312,8 @@
 | **Embedded Rust** | [L6: 应用主题](../06_ecosystem/04_application_domains.md) | L3 unsafe、L1 no_std | 应用 | ← embassy → 裸机 |
 | **Blockchain** | [L6: 应用主题](../06_ecosystem/04_application_domains.md) | L1 类型安全、L3 unsafe | 应用 | ← solana → 智能合约 |
 | **Game Engine** | [L6: 应用主题](../06_ecosystem/04_application_domains.md) | L3 unsafe、L2 泛型 | 应用 | ← bevy → ECS |
+| **Trait Solver** | [L4: Trait Solver in rustc](../04_formal/26_trait_solver_in_rustc.md) | L2 Trait、L4 Type Inference | 分析 | ← Obligation → Selection / Fulfillment |
+| **Type Checking and Inference** | [L4: Type Checking](../04_formal/27_type_checking_and_inference.md) | L4 Trait Solver、L4 Name Resolution | 分析 | ← HIR → MIR / Borrow Check |
 | **Type System** | [L1: 类型系统](../01_foundation/04_type_system.md) | 所有层 | 理解 | → 所有类型相关概念 |
 
 ### U
@@ -329,7 +349,7 @@
 
 以下概念在**多个文件中重复出现**，需要确保定义一致：
 
-### 3.1 Pin（出现在 4+ 个文件中） [来源: 跨文件概念一致性检查参照 [RFC 2349](https://rust-lang.github.io/rfcs/2349.html) — Pin / 2018; concept/03_advanced/02_async.md 等 4+ 文件中的 Pin 定义一致性验证]
+### 3.1 Pin（出现在 4+ 个文件中） [来源: 跨文件概念一致性检查参照 [RFC 2349](https://rust-lang.github.io/rfcs//2349-pin.html) — Pin / 2018; concept/03_advanced/02_async.md 等 4+ 文件中的 Pin 定义一致性验证]
 
 | 文件 | 定义侧重点 | 一致性检查 |
 |:---|:---|:---|

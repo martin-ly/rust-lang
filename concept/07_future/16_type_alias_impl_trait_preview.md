@@ -1,10 +1,9 @@
 # TAIT Preview
 
 > **代码状态**: [综述级 — 待补充代码]
-
 >
-> **EN**: TAIT Preview (Chinese)
-> **Summary**: TAIT Preview (Chinese). Emerging Rust feature or ecosystem trend: TAIT Preview (Chinese).
+> **EN**: Type Alias Impl Trait Preview
+> **Summary**: Type Alias Impl Trait Preview: emerging Rust language feature or ecosystem trend.
 >
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
@@ -18,7 +17,7 @@
 > **双维定位**: C×Ana — 分析 TAIT 的类型系统影响
 > **前置依赖**: [Generics](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md)
 > **后置延伸**: [RPITIT](./15_rpitit_preview.md)
-> **来源**: [Rust Reference — Type Aliases](https://doc.rust-lang.org/reference/items/type-aliases.html) · [RFC 2515](https://rust-lang.github.io/rfcs/2515-type_alias_impl_trait.html)
+> **来源**: [Rust Reference — Type Aliases](https://doc.rust-lang.org/reference/items/type-aliases.html) · [RFC 2515](https://rust-lang.github.io/rfcs//2515-type_alias_impl_trait.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 
@@ -58,7 +57,7 @@ fn main() {}
 >
 > 这与 Haskell 的 `type` synonym（完全透明，不隐藏实现）或 OCaml 的 `module type`（模块签名抽象，类似但不同粒度）不同——Rust 的 TAIT 是类型系统的精确抽象机制。
 > [来源: [TAIT Tracking Issue](https://github.com/rust-lang/rust/issues/63063)] ·
-> [来源: [Type Alias Impl Trait](https://rust-lang.github.io/rfcs/2515-type_alias_impl_trait.html)]
+> [来源: [Type Alias Impl Trait](https://rust-lang.github.io/rfcs//2515-type_alias_impl_trait.html)]
 >
 > **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)

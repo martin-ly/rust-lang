@@ -3,14 +3,16 @@
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 
+>
+> **来源**: [std::net](https://doc.rust-lang.org/std/net/) · [Tokio Docs](https://docs.rs/tokio/) · [Async Book](https://rust-lang.github.io/async-book/)
 ---
 
 > **内容分级**: [专家级]
 
 # Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象
 >
-> **EN**: Async Programming
-> **Summary**:
+> **EN**: Network Programming
+> **Summary**: Network programming patterns in Rust using std, Tokio, and async I/O.
 > Async Programming. Core Rust concept covering mechanism analysis, async/await patterns, network programming.
 > **受众**: [专家]
 > **Bloom 层级**: 应用 → 分析
@@ -29,7 +31,7 @@
 > [Tower Middleware](https://docs.rs/tower/latest/tower/) ·
 > [Hyper](https://hyper.rs/) ·
 > [Rust Async Book](https://rust-lang.github.io/async-book/) ·
-> [RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-async_await.html) ·
+> [RFC 2394 — async/await](https://rust-lang.github.io/rfcs//2394-async_await.html) ·
 > [RFC 793 — TCP](https://tools.ietf.org/html/rfc793) ·
 > [RFC 768 — UDP](https://tools.ietf.org/html/rfc768) ·
 > [Linux socket man pages](https://man7.org/linux/man-pages/man2/socket.2.html) ·
@@ -559,9 +561,9 @@ graph TB
 ```
 
 > **认知功能**: 此图揭示 async/await 的**暂停-恢复**机制——当 socket 未就绪时，任务从 Runtime 卸载；当内核通知 IO 就绪时，Waker 重新调度任务。
-> [来源: [Tokio Internals](https://tokio.rs/tokio/topics/runtime)] · [来源: [Rust Async Book — Executors](https://rust-lang.github.io/async-book/02_execution/01_chapter.html)]
+> [来源: [Tokio Internals](https://tokio.rs/tokio/topics/runtime)] · [来源: [Rust Async Book — Executors](https://rust-lang.github.io/async-book//02_execution/01_chapter.html)]
 > **关键洞察**: `await` 点的本质是将**状态机控制权交还 Runtime**——Runtime 决定何时基于 IO 事件恢复执行。
-> [来源: [RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-async_await.html)]
+> [来源: [RFC 2394 — async/await](https://rust-lang.github.io/rfcs//2394-async_await.html)]
 
 ---
 
@@ -639,7 +641,7 @@ graph LR
 ```
 
 > **层次一致性**: 反命题分析区分了**并发**（任务交替执行）与**并行**（任务同时执行）——async/await 是并发工具，多线程 Runtime 才提供并行。
-> [来源: [Rust Async Book — Async vs Threads](https://rust-lang.github.io/async-book/01_getting_started/02_why_async.html)]
+> [来源: [Rust Async Book — Async vs Threads](https://rust-lang.github.io/async-book//01_getting_started/02_why_async.html)]
 
 ---
 
@@ -709,7 +711,7 @@ graph LR
   ├── 症状: Future 永远不被唤醒
   ├── 原因: 自定义 Future 的 poll 未正确存储 Waker
   └── 修复: cx.waker().clone() 并在事件发生时 wake()
-  > [来源: [Rust Async Book — Waker](https://rust-lang.github.io/async-book/02_execution/03_wakeups.html)]
+  > [来源: [Rust Async Book — Waker](https://rust-lang.github.io/async-book//02_execution/03_wakeups.html)]
 ```
 
 ---
@@ -723,7 +725,7 @@ graph LR
 | [Tower Service](https://docs.rs/tower/latest/tower/trait.Service.html) | ✅ 一级 | Tower Service trait 定义 |
 | [Tower Middleware](https://docs.rs/tower/latest/tower/) | ✅ 一级 | Tower 中间件生态文档 |
 | [Rust Async Book](https://rust-lang.github.io/async-book/) | ✅ 一级 | Rust 异步编程官方指南 |
-| [RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-async_await.html) | ✅ 一级 | async/await 语言特性 RFC |
+| [RFC 2394 — async/await](https://rust-lang.github.io/rfcs//2394-async_await.html) | ✅ 一级 | async/await 语言特性 RFC |
 | [RFC 793 — TCP](https://tools.ietf.org/html/rfc793) | ✅ 一级 | TCP 协议规范 |
 | [RFC 768 — UDP](https://tools.ietf.org/html/rfc768) | ✅ 一级 | UDP 协议规范 |
 | [mio crate](https://docs.rs/mio/latest/mio/) | ✅ 二级 | Tokio 底层的跨平台 IO 多路复用库 |

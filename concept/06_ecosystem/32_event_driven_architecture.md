@@ -6,8 +6,8 @@
 >
 # 事件驱动架构 (Event-Driven Architecture)
 >
-> **EN**: 事件驱动架构 (Event-Driven Architecture) (Chinese)
-> **Summary**: 事件驱动架构 (Event-Driven Architecture) (Chinese). Core Rust concept covering mechanism analysis, design patterns, ownership and borrowing.
+> **EN**: Event Driven Architecture
+> **Summary**: Event Driven Architecture: Rust ecosystem tools, crates, and engineering practices.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 创造
@@ -21,6 +21,8 @@
 > **后置概念**: [分布式系统](./18_distributed_systems.md) ·
 > [云原生](./24_cloud_native.md)
 
+>
+> **来源**: [tokio](https://docs.rs/tokio/) · [lapin](https://docs.rs/lapin/) · [rdkafka](https://docs.rs/rdkafka/)
 ---
 
 > **来源**: [Tokio](https://tokio.rs/) ·

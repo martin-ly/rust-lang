@@ -3,7 +3,7 @@
 > **代码状态**: ✅ 含可编译示例
 >
 > **EN**: API Naming Conventions
-> **Summary**: Rust API 设计中的常见命名约定与习惯用法，对应 Google Comprehensive Rust 的 Idiomatic Rust > Foundations of API Design > Predictable API。
+> **Summary**: Rust API naming conventions aligned with the Rust API Guidelines and std library style.
 > **受众**: [进阶]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **S+P** — Structure + Procedure
@@ -13,7 +13,7 @@
 > **后置概念**: [Design Patterns](../03_advanced/07_design_patterns.md) · [Type System Patterns](../03_advanced/06_type_system_patterns.md)
 
 > **来源**: [Google Comprehensive Rust — Predictable API](https://google.github.io/comprehensive-rust/idiomatic/foundations-api-design/predictable-api.html) ·
-> [Rust API Guidelines — Naming](https://rust-lang.github.io/api-guidelines/naming.html) ·
+> [Rust API Guidelines — Naming](https://rust-lang.github.io/api-guidelines//naming.html) ·
 > [RFC 430 / rust-lang/api-guidelines](https://rust-lang.github.io/api-guidelines/)
 
 > **定理链**: N/A — 描述性/约定性文档，不涉及形式化定理链
@@ -93,7 +93,7 @@ impl Task {
 - `with_config` / `with_options` — 带配置对象
 - `with_xxx` — 带某个特定属性
 
-```rust
+```rust,ignore
 impl Task {
     pub fn with_priority(mut self, priority: u8) -> Self {
         self.priority = priority;
@@ -110,7 +110,7 @@ let task = Task::new("compile").with_priority(5);
 
 用于从其他类型构造当前类型。若类型已实现 `From<T>`，通常不再重复提供 `from_xxx` 方法，除非需要额外参数。
 
-```rust
+```rust,ignore
 impl Task {
     /// 从字符串切片构造，并自动分配默认 priority
     pub fn from_str(name: &str) -> Self {
@@ -125,7 +125,7 @@ impl Task {
 
 当构造可能失败时，返回 `Result<Self, E>`。
 
-```rust
+```rust,ignore
 #[derive(Debug)]
 pub enum TaskError {
     EmptyName,
@@ -156,7 +156,7 @@ impl Task {
 
 返回 `bool` 的查询方法，不改变状态。
 
-```rust
+```rust,ignore
 impl Task {
     pub fn is_high_priority(&self) -> bool {
         self.priority >= 7
@@ -173,7 +173,7 @@ impl Task {
 - `as_`：返回借用/视图（cheap，通常不分配）
 - `to_`：返回所有权转换结果（可能分配）
 
-```rust
+```rust,ignore
 impl Task {
     /// 返回 name 的字符串切片视图
     pub fn as_name(&self) -> &str {
@@ -195,7 +195,7 @@ impl Task {
 
 返回可变引用的访问器，对应 `xxx()` 的不可变版本。
 
-```rust
+```rust,ignore
 impl Task {
     pub fn name(&self) -> &str {
         &self.name
@@ -236,7 +236,7 @@ let bytes: &[u8] = s.as_bytes(); // 无分配
 
 `into_` 表示**消耗自身**的转换，常与 `From`/`Into` trait 配合使用。
 
-```rust
+```rust,ignore
 impl Task {
     /// 消耗 Task，返回其 name 的所有权
     pub fn into_name(self) -> String {
@@ -253,7 +253,7 @@ let owned_name: String = task.into_name(); // 消耗 Task
 
 标准 trait `From<T>` 的实现方法。若一个类型可从多种源构造，优先实现 `From` 而非手写多个 `from_xxx`。
 
-```rust
+```rust,ignore
 impl From<&str> for Task {
     fn from(name: &str) -> Self {
         Self::new(name)
@@ -269,7 +269,7 @@ impl From<&str> for Task {
 
 `by` 表示“通过某种方式执行动作”，常见于排序、比较、分组等 API。
 
-```rust
+```rust,ignore
 // 标准库风格
 items.sort_by(|a, b| a.priority.cmp(&b.priority));
 items.sort_by_key(|item| item.priority);
@@ -287,7 +287,7 @@ where
 
 接收闭包以自定义行为的 API，通常用 `with_` 前缀。
 
-```rust
+```rust,ignore
 fn with_each_task<F>(tasks: &[Task], mut f: F)
 where
     F: FnMut(&Task),

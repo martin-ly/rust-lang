@@ -6,8 +6,8 @@
 >
 # 分布式 系统：Rust 在微服务 与集群中的工程实践
 >
-> **EN**: 分布式 系统：Rust 在微服务 与集群中的工程实践 (Chinese)
-> **Summary**: 分布式 系统：Rust 在微服务 与集群中的工程实践 (Chinese). Core Rust concept covering mental model building, mechanism analysis, performance optimization.
+> **EN**: Distributed Systems
+> **Summary**: Distributed Systems: Rust ecosystem tools, crates, and engineering practices.
 > **受众**: [进阶]
 >
 > **Bloom 层级**: 应用 → 评价
@@ -19,6 +19,8 @@
 > **后置概念**: [WebAssembly](./11_webassembly.md) ·
 > [Observability](./13_logging_observability.md)
 
+>
+> **来源**: [tokio](https://docs.rs/tokio/) · [tower](https://docs.rs/tower/) · [tonic](https://docs.rs/tonic/)
 ---
 
 > **来源**: [tonic [来源: [tonic](https://docs.rs/tonic/latest/tonic/)] crate](<https://docs.rs/tonic/latest/tonic/>) ·
@@ -434,7 +436,7 @@ graph TD
 ```
 
 > **边界要点**: Rust 分布式系统的边界主要与**生态成熟度**、**编译时间**、**人才**、**调试**和**集成**相关。
-> [来源: [Rust in Production](https://rust-lang.github.io/rust-lang-cn/)]
+> [来源: [Rust in Production](https://github.com/rust-lang-cn)]
 
 ---
 

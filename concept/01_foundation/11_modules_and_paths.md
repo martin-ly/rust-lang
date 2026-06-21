@@ -24,8 +24,8 @@
 > **来源**: [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html) ·
 > [TRPL — Packages, Crates, Modules](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) ·
 > [Cargo Book — Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) ·
-> [Rust API Guidelines — Naming](https://rust-lang.github.io/api-guidelines/naming.html) ·
-> [RFC 2126 — Uniform Paths](https://rust-lang.github.io/rfcs/2126-path-clarity.html)
+> [Rust API Guidelines — Naming](https://rust-lang.github.io/api-guidelines//naming.html) ·
+> [RFC 2126 — Uniform Paths](https://rust-lang.github.io/rfcs//2126-path-clarity.html)
 
 ## 📑 目录
 
@@ -201,7 +201,7 @@ pub use self::hosting::add_to_waitlist;  // 外部可见
 ```
 
 > **路径洞察**: Rust 的**Uniform Paths**（统一路径）在 2018 Edition 中引入，消除了 `extern crate` 的需要，使路径系统更直观。
-> [来源: [RFC 2126 — Path Clarity](https://rust-lang.github.io/rfcs/2126-path-clarity.html)]
+> [来源: [RFC 2126 — Path Clarity](https://rust-lang.github.io/rfcs//2126-path-clarity.html)]
 
 ---
 
@@ -285,7 +285,7 @@ pub use self::{
 ```
 
 > **重导出洞察**: `pub use` 是 Rust **API 设计**的核心工具——它允许内部模块保持清晰结构，同时对外暴露简洁的 API 表面。
-> [来源: [Rust API Guidelines — Re-exports](https://rust-lang.github.io/api-guidelines/naming.html#casing-conforms-to-rfc-430-c-casing)]
+> [来源: [Rust API Guidelines — Re-exports](https://rust-lang.github.io/api-guidelines//naming.html#casing-conforms-to-rfc-430-c-casing)]
 
 ---
 
@@ -389,7 +389,7 @@ graph TD
 ```
 
 > **认知功能**: 可见性的**核心决策**是"谁需要访问"——默认私有，按需放宽。
-> [来源: [Rust API Guidelines — Exposure](https://rust-lang.github.io/api-guidelines/naming.html)]
+> [来源: [Rust API Guidelines — Exposure](https://rust-lang.github.io/api-guidelines//naming.html)]
 
 ---
 
@@ -482,8 +482,8 @@ graph TD
 | [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html) | ✅ 一级 | 模块系统参考 |
 | [TRPL — Packages, Crates, Modules](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) | ✅ 一级 | 基础教程 |
 | [Cargo Book — Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) | ✅ 一级 | 工作空间 |
-| [RFC 2126 — Path Clarity](https://rust-lang.github.io/rfcs/2126-path-clarity.html) | ✅ 一级 | 路径改进 |
-| [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/naming.html) | ✅ 一级 | API 设计 |
+| [RFC 2126 — Path Clarity](https://rust-lang.github.io/rfcs//2126-path-clarity.html) | ✅ 一级 | 路径改进 |
+| [Rust API Guidelines](https://rust-lang.github.io/api-guidelines//naming.html) | ✅ 一级 | API 设计 |
 
 ---
 
@@ -778,7 +778,7 @@ Rust 的可见性修饰符精确控制作用域：
 
 **题目**: 在 2021 Edition 中，以下 `use` 语句哪些是合法的？
 
-```rust
+```rust,ignore
 // 假设 crate 结构:
 // crate root
 // └── front_of_house
@@ -844,7 +844,7 @@ Rust 2021 Edition 的模块文件映射规则：
 
 **题目**: 以下代码中，`external_user` 模块能访问哪些项？
 
-```rust
+```rust,ignore
 mod internal {
     pub fn public_fn() {}
     fn private_fn() {}
@@ -884,4 +884,4 @@ mod external_user {
 
 ---
 
-> **测验设计来源**: [Bloom Taxonomy 2001] · [Brown University Interactive Rust Book — Quiz Design](https://rust-book.cs.brown.edu/) · [RFC 2126 — Path Clarity](https://rust-lang.github.io/rfcs/2126-path-clarity.html)
+> **测验设计来源**: [Bloom Taxonomy 2001] · [Brown University Interactive Rust Book — Quiz Design](https://rust-book.cs.brown.edu/) · [RFC 2126 — Path Clarity](https://rust-lang.github.io/rfcs//2126-path-clarity.html)

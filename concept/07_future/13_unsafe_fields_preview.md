@@ -1,10 +1,9 @@
 # Unsafe Fields 预研：字段级安全边界的精确标注
 
 > **代码状态**: [综述级 — 待补充代码]
-
 >
-> **EN**: Unsafe Rust
-> **Summary**: Unsafe Rust. Guide to 13 Unsafe Fields Preview.
+> **EN**: Unsafe Fields Preview
+> **Summary**: Preview of unsafe fields: marking individual fields as requiring unsafe access.
 >
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
@@ -139,7 +138,7 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 对于包含原始指针、手动内存管理字段的结构体，使用 `unsafe` 字段标记；纯安全字段保持普通声明。
 > **关键洞察**: `unsafe` 字段将**不变量文档化**从注释/文档转移到类型系统——字段声明即安全契约声明。
-> [来源: [Rust [RFC 3458](https://rust-lang.github.io/rfcs/3458.html) — Motivation](https://github.com/rust-lang/rfcs/pull/3458)]
+> [来源: [Rust [RFC 3458](https://rust-lang.github.io/rfcs//3458-unsafe-fields.html) — Motivation](https://github.com/rust-lang/rfcs/pull/3458)]
 
 ---
 
@@ -227,7 +226,7 @@ unsafe 字段的不变量模式:
 ```
 
 > **技术要点**: `unsafe` 字段是一种**轻量级契约机制**——它不像形式化验证那样证明不变量，但强制所有可能破坏不变量的代码路径通过 `unsafe` 块显式标记，便于人工审计。
-> [来源: [Unsafe Code Guidelines — Glossary](https://rust-lang.github.io/unsafe-code-guidelines/glossary.html)]
+> [来源: [Unsafe Code Guidelines — Glossary](https://rust-lang.github.io/unsafe-code-guidelines//glossary.html)]
 
 ---
 
@@ -345,7 +344,7 @@ graph TD
 ```
 
 > **边界要点**: unsafe fields 是**语法糖级别的改进**，不改变 Rust 的安全模型本质。它只是将"哪个字段不安全"的信息从文档/注释下推到类型声明。
-> [来源: [Rust [RFC 3458](https://rust-lang.github.io/rfcs/3458.html) — Drawbacks](https://github.com/rust-lang/rfcs/pull/3458)]
+> [来源: [Rust [RFC 3458](https://rust-lang.github.io/rfcs//3458-unsafe-fields.html) — Drawbacks](https://github.com/rust-lang/rfcs/pull/3458)]
 
 ---
 
@@ -353,7 +352,7 @@ graph TD
 
 | 里程碑 | 状态 | 预计时间 | 说明 |
 |:---|:---:|:---|:---|
-| [RFC 3458](https://rust-lang.github.io/rfcs/3458.html) 提交 | ✅ | 2023 | 初始提案 |
+| [RFC 3458](https://rust-lang.github.io/rfcs//3458-unsafe-fields.html) 提交 | ✅ | 2023 | 初始提案 |
 | 社区讨论 | ✅ | 2023-2024 | 语法和语义反馈 |
 | **RFC 已接受** | ✅ | 2026-02 | Jack Wrenn 确认 RFC 被接受，开始准备 2026 持续目标 |
 | **Clippy 扩展支持** | 🔄 | 2026-04 | rust-clippy#16767 已开，等待 t-clippy review |
@@ -461,7 +460,7 @@ impl Buffer {
 > 使用场景：FFI 绑定中的原始句柄、自引用结构中的内部指针、手动内存管理中的元数据。
 > 安全封装模式：`Buffer` 的公开 API 完全安全，内部使用 `unsafe` 字段实现；unsafe 字段的文档必须明确列出不变式（invariants）和前置条件。
 > 这与 C 的结构体（所有字段无限制访问）或 Rust 当前的 `pub`/`priv` 封装（不区分安全级别）不同——unsafe fields 将"需要人工审查的代码"在语法层面显式化。
-> [来源: [Unsafe Fields RFC Draft](https://github.com/rust-lang/rfcs/pull/0000)] · [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]
+> [来源: [Unsafe Fields Tracking Issue](https://github.com/rust-lang/rust/issues/132922)] · [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]
 
 ### 10.2 边界测试：unsafe 字段与 Drop 的交互（运行时 UB）
 
@@ -481,7 +480,7 @@ impl Drop for RawBuffer {
 }
 ```
 
-> **修正**: `unsafe` 字段与 `Drop` 的交互是内存安全的关键边界。`Drop::drop` 必须处理字段可能处于的任何状态（已初始化、未初始化、已释放、部分初始化）。`unsafe` 字段的文档必须明确：1) 构造后是否总是初始化；2) `Drop` 是否总是有效；3) 是否存在 `into_raw` 模式转移所有权（类似 `Box::into_raw`，跳过 Drop）。Rust 的 `ManuallyDrop<T>` 和 `MaybeUninit<T>` 已部分解决此问题，但 `unsafe fields` 提供了更原生的语法。形式化上，`unsafe fields` 可建模为**部分类型**（partial types）：字段的存在性在类型层面追踪，编译器验证所有代码路径正确处理初始化/未初始化状态。这与 Rust 当前的初始化分析（flow-sensitive）扩展一致。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)] · [来源: [Rust RFC 1892](https://rust-lang.github.io/rfcs/1892-cfged-types.html)]
+> **修正**: `unsafe` 字段与 `Drop` 的交互是内存安全的关键边界。`Drop::drop` 必须处理字段可能处于的任何状态（已初始化、未初始化、已释放、部分初始化）。`unsafe` 字段的文档必须明确：1) 构造后是否总是初始化；2) `Drop` 是否总是有效；3) 是否存在 `into_raw` 模式转移所有权（类似 `Box::into_raw`，跳过 Drop）。Rust 的 `ManuallyDrop<T>` 和 `MaybeUninit<T>` 已部分解决此问题，但 `unsafe fields` 提供了更原生的语法。形式化上，`unsafe fields` 可建模为**部分类型**（partial types）：字段的存在性在类型层面追踪，编译器验证所有代码路径正确处理初始化/未初始化状态。这与 Rust 当前的初始化分析（flow-sensitive）扩展一致。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)] · [来源: [Rust RFC 1892](https://rust-lang.github.io/rfcs//1892-uninitialized-uninhabited.html)]
 
 ### 10.3 边界测试：unsafe 字段与 `#[repr(C)]` 的交互（编译错误）
 

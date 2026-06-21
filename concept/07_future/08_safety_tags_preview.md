@@ -3,8 +3,8 @@
 > **代码状态**: ✅ 含可编译示例
 
 >
-> **EN**: Unsafe Rust
-> **Summary**: Unsafe Rust. Core Rust concept covering verification techniques, practical examples, mechanism analysis.
+> **EN**: Safety Tags Preview
+> **Summary**: Preview of safety tags for annotating and propagating unsafe preconditions in Rust.
 >
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
@@ -212,7 +212,7 @@ AI 代码生成场景:
 ```
 
 > **关键洞察**: Safety Tags 使 AI 生成代码的**安全边界**显式化、可验证化。这是 AI × Rust 集成的关键基础设施。
-> [来源: [AI Integration in Rust](https://blog.rust-lang.org/inside-rust/2025/)]
+> [来源: [AI Integration in Rust](https://blog.rust-lang.org/inside-rust/)]
 
 ---
 

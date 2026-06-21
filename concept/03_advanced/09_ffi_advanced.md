@@ -417,7 +417,7 @@ Opaque 指针:
 ```
 
 > **模式矩阵**: FFI 的**核心原则**是"在边界处验证"——所有跨边界的假设都必须在 Rust 侧显式检查。
-> [来源: [Rust FFI Guidelines](https://rust-lang.github.io/rust-bindgen/some-ffi-patterns.html)]
+> [来源: [Rust FFI Guidelines](https://rust-lang.github.io/rust-bindgen/)]
 
 ---
 
@@ -441,7 +441,7 @@ graph TD
 ```
 
 > **认知功能**: **Safe 包装是目标**，但**理解 C API 契约是前提**——不安全的包装比直接的 unsafe 更危险。
-> [来源: [Rust API Guidelines — Safety](https://rust-lang.github.io/api-guidelines/documentation.html#function-docs-include-error-conditions-and-panic-conditions-c-failure)]
+> [来源: [Rust API Guidelines — Safety](https://rust-lang.github.io/api-guidelines//documentation.html#function-docs-include-error-conditions-and-panic-conditions-c-failure)]
 
 ---
 

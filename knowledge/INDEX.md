@@ -43,7 +43,7 @@
 | `core::hint::cold_path` | [03_advanced/performance_optimization.md](03_advanced/05_performance_optimization.md) | ✅ |
 | `bool::TryFrom<{integer}>` | [02_intermediate/type_conversions.md](02_intermediate/07_type_conversions.md) | ✅ |
 | `MaybeUninit` / `Cell` 数组转换 | [03_advanced/unsafe/maybe_uninit.md](03_advanced/unsafe/03_maybe_uninit.md) | ✅ |
-| PowerPC/PowerPC64 内联汇编 | [03_advanced/unsafe/inline_asm.md](03_advanced/unsafe/02_inline_asm.md) | ✅ |
+| PowerPC/PowerPC64 内联汇编 | [concept/03_advanced/13_inline_assembly.md](../concept/03_advanced/13_inline_assembly.md) | ✅ |
 | `fmt::from_fn` / `ControlFlow` (const) | [06_ecosystem/emerging/rust_1_95.md](06_ecosystem/emerging/03_rust_1_95.md) | ✅ |
 | `--remap-path-scope` | [06_ecosystem/emerging/rust_1_95.md](06_ecosystem/emerging/03_rust_1_95.md) | ✅ |
 | `irrefutable_let_patterns` lint | [06_ecosystem/emerging/rust_1_95.md](06_ecosystem/emerging/03_rust_1_95.md) | ✅ |
@@ -77,11 +77,11 @@
 
 | 特性 | 文档 | 状态 |
 |------|------|------|
-| AFIDT (`async fn` in `dyn Trait`) | [06_ecosystem/emerging/06_rust_1_97_preview.md](06_ecosystem/emerging/06_rust_1_97_preview.md) | 🧪 Nightly |
-| `VecDeque::truncate_front` | [06_ecosystem/emerging/06_rust_1_97_preview.md](06_ecosystem/emerging/06_rust_1_97_preview.md) | 🧪 Nightly |
-| `RefCell::try_map` | [06_ecosystem/emerging/06_rust_1_97_preview.md](06_ecosystem/emerging/06_rust_1_97_preview.md) | 🧪 Nightly |
-| `int_format_into` | [06_ecosystem/emerging/06_rust_1_97_preview.md](06_ecosystem/emerging/06_rust_1_97_preview.md) | 🧪 Nightly |
-| `cargo script` / frontmatter | [06_ecosystem/emerging/06_rust_1_97_preview.md](06_ecosystem/emerging/06_rust_1_97_preview.md) | 🧪 完善中 |
+| AFIDT (`async fn` in `dyn Trait`) | [concept/07_future/rust_1_97_preview.md](../concept/07_future/rust_1_97_preview.md) | 🧪 Nightly |
+| `VecDeque::truncate_front` | [concept/07_future/rust_1_97_preview.md](../concept/07_future/rust_1_97_preview.md) | 🧪 Nightly |
+| `RefCell::try_map` | [concept/07_future/rust_1_97_preview.md](../concept/07_future/rust_1_97_preview.md) | 🧪 Nightly |
+| `int_format_into` | [concept/07_future/rust_1_97_preview.md](../concept/07_future/rust_1_97_preview.md) | 🧪 Nightly |
+| `cargo script` / frontmatter | [concept/07_future/rust_1_97_preview.md](../concept/07_future/rust_1_97_preview.md) | 🧪 完善中 |
 
 ---
 
@@ -144,7 +144,7 @@
 ### I
 
 - **if let guards** - [02_intermediate/control_flow/if_let_guards.md](02_intermediate/control_flow/01_if_let_guards.md) - Rust 1.95.0
-- **inline assembly** - [03_advanced/unsafe/inline_asm.md](03_advanced/unsafe/02_inline_asm.md)
+- **inline assembly** - [concept/03_advanced/13_inline_assembly.md](../concept/03_advanced/13_inline_assembly.md)
 - **installation** - [00_start/02_installation.md](00_start/02_installation.md)
 - **iterators** - [01_fundamentals/iterators.md](01_fundamentals/02_iterators.md)
 

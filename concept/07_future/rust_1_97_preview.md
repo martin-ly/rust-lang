@@ -3,8 +3,8 @@
 > **代码状态**: [综述级 — 待补充代码]
 
 >
-> **EN**: Rust 1.97 前沿特性预览 (Chinese)
-> **Summary**: 1.97 前沿特性预览 (Chinese). Emerging Rust feature or ecosystem trend: 1.97 前沿特性预览 (Chinese).
+> **EN**: Rust 1 97 Preview
+> **Summary**: Rust 1 97 Preview: emerging Rust language feature or ecosystem trend.
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]
@@ -163,7 +163,7 @@ enum CCompatibleEnum {
 
 **深度文档**: [25_open_enums_preview.md](25_open_enums_preview.md)
 
-> **来源**: [rust-lang/rust#156628](https://github.com/rust-lang/rust/issues/156628) · [RFC 3894](https://rust-lang.github.io/rfcs/3894-unnamed-enum-variants.html) · 可信度: ✅
+> **来源**: [rust-lang/rust#156628](https://github.com/rust-lang/rust/issues/156628) · [RFC 3894](https://github.com/rust-lang/rust/issues/156628) · 可信度: ✅
 
 ---
 
@@ -572,7 +572,7 @@ pub unsafe extern "C" fn my_printf(fmt: *const c_char, mut args: ...) -> c_int {
 | `target.'cfg(..)'.rustdocflags` | ✅ 1.96 已稳定 | 条件 rustdoc 标志 |
 | `cargo lint` 子命令 | 📋 RFC 阶段 | 统一的 lint 管理接口 |
 | 依赖图谱可视化 | 📋 设计阶段 | `cargo tree --graph` |
-| **cargo-script 稳定化** | 🔄 FCP 已结束 | [RFC 3502](https://rust-lang.github.io/rfcs/3502.html)+3503 已批准；frontmatter（脚本顶部 `---` 元数据块）格式同步推进；**blocker 为 edition policy（lang/edition 方面）**；Project Goals 2026 Continued [来源: Rust Project Goals 2026 April Update] |
+| **cargo-script 稳定化** | 🔄 FCP 已结束 | [RFC 3502](https://rust-lang.github.io/rfcs//3502-cargo-script.html)+3503 已批准；frontmatter（脚本顶部 `---` 元数据块）格式同步推进；**blocker 为 edition policy（lang/edition 方面）**；Project Goals 2026 Continued [来源: Rust Project Goals 2026 April Update] |
 | **Cargo `-m` shorthand** | 🟢 1.97 已确认 | `cargo -m <path>` 作为 `--manifest-path` 的简写（Cargo #16858） [来源: Cargo CHANGELOG 1.97] |
 | **Cargo improved `-p` errors** | 🟢 1.97 已确认 | 拼写错误的 `-p` 参数将提示相似的 workspace member 名称（Cargo #16844） [来源: Cargo CHANGELOG 1.97] |
 | **Cargo `-Zscript` edition pinning** | 🧪 Nightly | 教育用户如何为脚本固定 edition（Cargo #16851） [来源: Cargo CHANGELOG 1.97] |

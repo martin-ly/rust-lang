@@ -1,4 +1,6 @@
-> **内容分级**: [综述级]
+> **内容分级**:
+>
+> [综述级]
 > **本节关键术语**: 模块系统 (Module System) · 工作空间 (Workspace) · 包 (Package) · Crate · 可见性 (Visibility) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 模块系统：Rust 的代码组织与可见性规则
@@ -16,8 +18,8 @@
 > **来源**:
 > [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html) ·
 > [TRPL Ch7 — Modules](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) ·
-> [Rust [RFC 2126](https://rust-lang.github.io/rfcs/2126.html) — Clarify and streamline paths and visibility](<https://github.com/rust-lang/rfcs/pull/2126>) ·
-> [Rust Edition Guide — Path Changes](https://doc.rust-lang.org/edition-guide/rust-2018/module-system.html)
+> [Rust [RFC 2126](https://rust-lang.github.io/rfcs//2126-path-clarity.html) — Clarify and streamline paths and visibility](<https://github.com/rust-lang/rfcs/pull/2126>) ·
+> [Rust Edition Guide — Path Changes](https://doc.rust-lang.org/edition-guide/rust-2018/path-changes.html)
 
 ## 📑 目录
 
@@ -245,7 +247,7 @@ Edition 2015 vs 2018 路径规则对比:
 ```
 
 > **Edition 变更**: Edition 2018 的路径规则消除了**路径歧义**——`crate::` 前缀明确标识本地路径，使代码更易读、更易维护。这是 Rust 版本演进中最重要的模块系统改进。
-> [来源: [Rust Edition Guide — Path Changes](https://doc.rust-lang.org/edition-guide/rust-2018/module-system.html)]
+> [来源: [Rust Edition Guide — Path Changes](https://doc.rust-lang.org/edition-guide/rust-2018/path-changes.html)]
 
 ---
 
@@ -387,7 +389,7 @@ graph TD
 | [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html) | ✅ 一级 | 官方语言参考 |
 | [TRPL Ch7 — Modules](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) | ✅ 一级 | 模块系统入门 |
 | [Cargo Book — Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) | ✅ 一级 | Workspace 管理 |
-| [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2018/module-system.html) | ✅ 一级 | Edition 2018 路径变更 |
+| [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2018/path-changes.html) | ✅ 一级 | Edition 2018 路径变更 |
 | [RFC 2126](https://github.com/rust-lang/rfcs/pull/2126) | ✅ 一级 | 路径与可见性澄清 |
 
 ---
@@ -457,16 +459,6 @@ fn main() {
 > ```
 >
 ## 权威来源索引
-
->
->
->
-
----
-
----
-
----
 
 > **补充来源**
 
@@ -773,7 +765,7 @@ fn main() {
 
 等效写法：
 
-```rust
+```rust,ignore
 println!("{}", inner::VALUE);  // 完整路径
 ```
 
@@ -823,7 +815,7 @@ mylib/
 <details>
 <summary>✅ 答案</summary>
 
-```rust
+```rust,ignore
 // src/lib.rs
 pub mod parser;
 pub mod evaluator;

@@ -21,7 +21,7 @@
 > [TRPL — Iterators](https://doc.rust-lang.org/book/ch13-02-iterators.html) ·
 > [Rust Iterator Cheat Sheet](https://doc.rust-lang.org/std/iter/index.html) ·
 > [Cliff Click — Iterators in Rust](https://www.youtube.com/watch?v=y-ek3S9JFPw) ·
-> [RFC 0235 — IntoIterator](https://rust-lang.github.io/rfcs/0235-collections-conventions.html)
+> [RFC 0235 — IntoIterator](https://rust-lang.github.io/rfcs//0235-collections-conventions.html)
 
 ## 📑 目录
 
@@ -341,7 +341,7 @@ for x in &mut v { /* x 是 &mut i32 */ }
 ```
 
 > **IntoIterator 洞察**: `for` 循环是**语法糖**，背后使用 `IntoIterator`——这统一了数组、向量、哈希表等所有集合的遍历方式。
-> [来源: [RFC 0235 — IntoIterator](https://rust-lang.github.io/rfcs/0235-collections-conventions.html)]
+> [来源: [RFC 0235 — IntoIterator](https://rust-lang.github.io/rfcs//0235-collections-conventions.html)]
 
 ---
 
@@ -406,7 +406,7 @@ graph TD
 ```
 
 > **认知功能**: **迭代器是默认选择**——只在需要复杂控制流或编译器无法优化时才使用手写循环。
-> [来源: [Rust Style Guide — Iterators](https://doc.rust-lang.org/style/)]
+> [来源: [Rust Style Guide — Iterators](https://doc.rust-lang.org/nightly/style-guide/)]
 
 ---
 
@@ -446,7 +446,7 @@ graph TD
 ```
 
 > **边界要点**: 迭代器的边界主要与**编译时间**、**错误信息**、**递归限制**、**特殊算法**和**异步**相关。
-> [来源: [async-iter RFC](https://rust-lang.github.io/rfcs/2996-async-iterator.html)]
+> [来源: [async-iter RFC](https://rust-lang.github.io/rfcs//2996-async-iterator.html)]
 
 ---
 
@@ -502,7 +502,7 @@ graph TD
 | [std::iter::Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html) | ✅ 一级 | 核心 trait |
 | [TRPL — Iterators](https://doc.rust-lang.org/book/ch13-02-iterators.html) | ✅ 一级 | 基础教程 |
 | [itertools crate](https://docs.rs/itertools/latest/itertools/) | ✅ 一级 | 扩展迭代器 |
-| [RFC 0235](https://rust-lang.github.io/rfcs/0235-collections-conventions.html) | ✅ 一级 | IntoIterator |
+| [RFC 0235](https://rust-lang.github.io/rfcs//0235-collections-conventions.html) | ✅ 一级 | IntoIterator |
 | [Iterator Performance](https://doc.rust-lang.org/book/ch13-04-performance.html) | ✅ 一级 | 性能分析 |
 
 ---

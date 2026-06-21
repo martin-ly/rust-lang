@@ -3,7 +3,7 @@
 # 测验：所有权、借用与生命周期（试点）
 >
 > **EN**: Ownership
-> **Summary**:
+> **Summary**: Quiz Ownership Borrowing. Core Rust concept.
 > ```rust fn main() { let s1 = String::from("hello"); let s2 = s1; println!("{s1}"); }```
 > <details> <summary>💡 点击展开答案与解析</summary> **答案**：❌ 不能编译。
 > **错误信息**：`borrow of moved value: s1` **解析**：`String` 未实现 `Copy` trait，赋值 `let s2 = s1` 会**移动（move）**ownership。`s1` 在移动后变为未初始化状态，不能再使用。
@@ -17,7 +17,7 @@
 ---
 
 > **来源**:
-> [The Rust Programming Language — Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html) ·
+> [The Rust Programming Language — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) ·
 > [The Rust Programming Language — References and Borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html) ·
 > [The Rust Programming Language — Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)
 >
@@ -44,7 +44,7 @@
 
 ### Q1. 以下代码能否编译？若不能，原因是什么？
 
-```rust
+```rust,compile_fail
 fn main() {
     let s1 = String::from("hello");
     let s2 = s1;
@@ -69,7 +69,7 @@ fn main() {
 
 ### Q2. 以下代码能否编译？若不能，如何修改？
 
-```rust
+```rust,compile_fail
 fn main() {
     let s = String::from("hello");
     take_ownership(s);
@@ -102,7 +102,7 @@ fn take_ownership(s: &String) {
 
 1. **显式克隆**（有堆分配成本）：
 
-```rust
+```rust,ignore
 let s = String::from("hello");
 take_ownership(s.clone());
 println!("{s}");
@@ -140,7 +140,7 @@ println!("{s}");
 
 ### Q4. 以下代码能否编译？若不能，原因是什么？
 
-```rust
+```rust,compile_fail
 fn main() {
     let mut s = String::from("hello");
     let r1 = &mut s;
@@ -180,7 +180,7 @@ fn main() {
 
 ### Q5. 以下代码能否编译？
 
-```rust
+```rust,compile_fail
 fn main() {
     let s = String::from("hello");
     let r1 = &s;
@@ -220,7 +220,7 @@ fn main() {
 
 ### Q6. 悬垂引用（Dangling Reference）在 Rust 中是否可能？以下代码能否编译？
 
-```rust
+```rust,compile_fail
 fn dangle() -> &String {
     let s = String::from("hello");
     &s
@@ -255,7 +255,7 @@ fn no_dangle() -> String {
 
 ### Q7. 以下代码中，`result` 的生命周期由谁决定？
 
-```rust
+```rust,compile_fail
 fn longest(x: &str, y: &str) -> &str {
     if x.len() > y.len() { x } else { y }
 }
@@ -286,7 +286,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### Q8. 以下代码能否编译？
 
-```rust
+```rust,compile_fail
 fn main() {
     let string1 = String::from("long string is long");
     let result;
@@ -313,7 +313,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 **修正方案**：将 `println!` 移入内部作用域：
 
-```rust
+```rust,ignore
 fn main() {
     let string1 = String::from("long string is long");
     {
@@ -334,7 +334,7 @@ fn main() {
 
 ### Q9. 以下代码的输出是什么？
 
-```rust
+```rust,compile_fail
 fn main() {
     let mut v = vec![1, 2, 3];
     let first = &v[0];
@@ -441,9 +441,9 @@ shared shared
 ---
 
 > **权威来源**:
-> [The Rust Programming Language — Ch4 Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html) ·
+> [The Rust Programming Language — Ch4 Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) ·
 > [The Rust Programming Language — Ch10 Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) ·
-> [Rust Reference — Ownership](https://doc.rust-lang.org/reference/ownership.html)
+> [Rust Reference — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
 
 ## 嵌入式测验（Embedded Quiz）
 

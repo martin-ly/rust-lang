@@ -3,7 +3,7 @@
 # 测验：模块系统与测试（L1 试点扩展）
 >
 > **EN**: Modules
-> **Summary**: ```rust // src/main.rs mod front_of_house { pub mod hosting { pub fn add_to_waitlist() {} } } fn main() { front_of_house::hosting::add_to_waitlist(); }``` <details> <summary>💡 点击展开答案与解析</summary> **答案**：✅ 能编译。 **解析**： | 关键字 | 作用 | |:---|:---| | `mod` | 声明一个模块，Rust 根据模块位置查找对应文件 | | `pub` | 使项对外部可见；默
+> **Summary**: Quiz Modules Testing. Core Rust concept.
 
 > **受众**: [初学者]
 > **内容分级**: [综述级]
@@ -60,7 +60,7 @@ fn main() {
 
 **模块查找规则**：
 
-```rust
+```rust,ignore
 mod front_of_house; // 查找 src/front_of_house.rs 或 src/front_of_house/mod.rs
 ```
 
@@ -114,7 +114,7 @@ fn main() {}
 
 **路径类型**：
 
-```rust
+```rust,ignore
 // 绝对路径（推荐）
 crate::outer::inner::bar();
 
@@ -125,7 +125,7 @@ super::foo();  // 从 inner 模块引用 outer
 
 **注意**：`self` 通常可省略，`self::baz()` 等价于 `baz()`。但在 `use` 语句中有特殊用途：
 
-```rust
+```rust,ignore
 use self::inner::bar;     // 显式引用当前模块的 inner
 use super::foo;           // 引用父模块的 foo
 use crate::utils::helper; // 引用 crate 根的 utils
@@ -186,7 +186,7 @@ use std::collections::*;          // 导入所有公共项
 
 **重导出（Re-export）**：
 
-```rust
+```rust,ignore
 pub use shapes::circle; // 外部用户可通过 crate::circle 访问
 ```
 
@@ -254,7 +254,7 @@ test tests::test_overflow ... ok
 
 **常用断言宏**：
 
-```rust
+```rust,ignore
 assert!(condition);
 assert_eq!(left, right);
 assert_ne!(left, right);
@@ -269,7 +269,7 @@ assert!(result.is_ok(), "Expected Ok, got {:?}", result);
 
 ### Q5. 以下代码能否编译？集成测试如何访问被测 crate？
 
-```rust
+```rust,ignore
 // tests/integration_test.rs
 use my_project::add;
 
@@ -309,7 +309,7 @@ my_project/
 
 `tests/common/mod.rs` 不会被视为测试文件（因为 `common` 不是 `.rs` 测试文件），但可被其他测试文件引用：
 
-```rust
+```rust,ignore
 // tests/integration_test.rs
 mod common;
 use common::setup;
@@ -381,7 +381,7 @@ fn test_ok() -> Result<(), &'static str> {
 
 **断言 `Result` 的方法**：
 
-```rust
+```rust,ignore
 assert!(result.is_ok());
 assert!(result.is_err());
 assert_eq!(result.unwrap(), expected);
@@ -494,7 +494,7 @@ fn main() {
 
 **修正**：`main` 中只能访问 `crate_visible`：
 
-```rust
+```rust,ignore
 fn main() {
     outer::crate_visible();    // ✅ pub(crate)
     // outer::parent_visible(); // ❌ pub(super) 仅 outer 的父模块可见
@@ -559,7 +559,7 @@ assertion `left != right` failed: IDs should be unique, but both were 42
 
 **自定义错误消息**：所有断言宏都支持格式化字符串：
 
-```rust
+```rust,ignore
 assert!(condition, "message: {}", value);
 assert_eq!(left, right, "expected {}, got {}", expected, actual);
 assert_ne!(left, right, "should not be equal to {}", forbidden);

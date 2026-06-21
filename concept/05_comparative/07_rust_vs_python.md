@@ -3,8 +3,8 @@
 >
 # Rust vs Python：系统编程与动态脚本的对照分析
 >
-> **EN**: Rust vs Python：系统编程与动态脚本的对照分析 (Chinese)
-> **Summary**: Rust vs Python：系统编程与动态脚本的对照分析 (Chinese). Core Rust concept covering cross-language comparison, mental model building, mechanism analysis.
+> **EN**: Rust vs Python
+> **Summary**: Rust vs Python: comparative analysis with Rust across type systems, memory safety, and concurrency.
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 对比分析 **Rust**（编译型、强类型、内存安全）与 **Python**（解释型、动态类型、开发效率优先）在语言设计哲学、类型系统、内存模型、并发模型和工程实践五个维度的深层差异。
@@ -318,7 +318,7 @@ CLI 工具:
 ```
 
 > **选型洞察**: Rust 和 Python 不是**竞争关系**，而是**互补关系**——Python 负责快速探索和生态利用，Rust 负责性能瓶颈和系统底层。
-> [来源: [PyO3 Documentation](https://pyo3.rs/)] · [来源: [Rust in Production](https://www.rust-lang.org/production)]
+> [来源: [PyO3 Documentation](https://pyo3.rs/)] · [来源: [Rust in Production](https://www.rust-lang.org/)]
 
 ---
 

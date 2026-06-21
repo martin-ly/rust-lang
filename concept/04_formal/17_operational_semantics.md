@@ -12,6 +12,8 @@
 > **前置概念**: [Type Theory](./02_type_theory.md) · [Ownership Formal](./03_ownership_formal.md) · [Linear Logic](./01_linear_logic.md)
 > **后置概念**: [RustBelt](./04_rustbelt.md) · [Separation Logic](./11_separation_logic.md)
 
+>
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---
 
 > **来源**:

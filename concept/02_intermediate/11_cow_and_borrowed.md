@@ -4,8 +4,8 @@
 >
 # Cow：写时克隆与零拷贝抽象
 >
-> **EN**: Cow：写时克隆与零拷贝抽象 (Chinese)
-> **Summary**: Cow：写时克隆与零拷贝抽象 (Chinese). Core Rust concept covering mechanism analysis, in-depth analysis, trait system mechanics.
+> **EN**: Cow and Borrowed
+> **Summary**: Cow and Borrowed: intermediate Rust mechanisms, patterns, and practical examples.
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **S+P** — Structure + Procedure
@@ -18,7 +18,7 @@
 
 > **来源**:
 > [std::borrow::Cow](https://doc.rust-lang.org/std/borrow/enum.Cow.html) ·
-> [Rust API Guidelines — Flexibility](https://rust-lang.github.io/api-guidelines/flexibility.html) ·
+> [Rust API Guidelines — Flexibility](https://rust-lang.github.io/api-guidelines//flexibility.html) ·
 > [TRPL — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) ·
 > [Wikipedia — Copy-on-write](https://en.wikipedia.org/wiki/Copy-on-write)
 
@@ -94,7 +94,7 @@ API 设计中的常见困境:
 ```
 
 > **核心问题**: API 设计常面临**借用 vs 拥有**的选择——借用高效但受限，拥有灵活但有克隆成本。Cow 提供了**第三种选择**。
-> [来源: [Rust API Guidelines — Flexibility](https://rust-lang.github.io/api-guidelines/flexibility.html)]
+> [来源: [Rust API Guidelines — Flexibility](https://rust-lang.github.io/api-guidelines//flexibility.html)]
 
 ---
 
@@ -268,7 +268,7 @@ fn normalize(s: Cow<str>) -> Cow<str> {
 ```
 
 > **模式总结**: Cow 的**核心价值**是 API 的**灵活性**——调用者可以选择是否预先分配，被调用者只在必要时克隆。
-> [来源: [Rust API Guidelines — Caller decides](https://rust-lang.github.io/api-guidelines/flexibility.html#caller-decides)]
+> [来源: [Rust API Guidelines — Caller decides](https://rust-lang.github.io/api-guidelines//flexibility.html#caller-decides)]
 
 ---
 
@@ -353,7 +353,7 @@ graph TD
 
 > **认知功能**: 此决策树判断是否应使用 Cow。核心原则是：**只在需要同时支持借用/拥有且可能修改时使用 Cow**。
 > **使用建议**: 过度使用 Cow 会增加 API 复杂性和内存开销；只在真正需要灵活性时使用。
-> [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/flexibility.html)]
+> [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines//flexibility.html)]
 
 ---
 
@@ -388,7 +388,7 @@ graph TD
 ```
 
 > **边界要点**: Cow 的边界主要与**使用场景**（只在需要时）、**返回类型复杂性**、**生命周期限制**和**嵌套复杂性**相关。
-> [来源: [Rust API Guidelines — Cow](https://rust-lang.github.io/api-guidelines/flexibility.html#functions-minimize-assumptions-about-types-by-using-conversions)]
+> [来源: [Rust API Guidelines — Cow](https://rust-lang.github.io/api-guidelines//flexibility.html#functions-minimize-assumptions-about-types-by-using-conversions)]
 
 ---
 
@@ -431,7 +431,7 @@ graph TD
 ```
 
 > **陷阱总结**: Cow 的主要陷阱与**过度使用**、**所有权语义**和**性能假设**相关。理解 Cow 的"延迟克隆"语义是正确使用它的关键。
-> [来源: [Rust Clippy — Needless Borrow](https://rust-lang.github.io/rust-clippy/master/index.html)]
+> [来源: [Rust Clippy — Needless Borrow](https://rust-lang.github.io/rust-clippy//master/index.html)]
 
 ---
 
@@ -451,7 +451,7 @@ graph TD
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
 |:---|:---:|:---|
 | [std::borrow::Cow](https://doc.rust-lang.org/std/borrow/enum.Cow.html) | ✅ 一级 | 标准库文档 |
-| [Rust API Guidelines — Flexibility](https://rust-lang.github.io/api-guidelines/flexibility.html) | ✅ 一级 | API 设计指南 |
+| [Rust API Guidelines — Flexibility](https://rust-lang.github.io/api-guidelines//flexibility.html) | ✅ 一级 | API 设计指南 |
 | [TRPL — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) | ✅ 一级 | 智能指针章节 |
 | [Wikipedia — Copy-on-write](https://en.wikipedia.org/wiki/Copy-on-write) | ✅ 三级 | 通用概念 |
 

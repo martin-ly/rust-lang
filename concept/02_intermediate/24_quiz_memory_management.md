@@ -3,7 +3,7 @@
 # 测验：内存管理（L2 试点扩展）
 >
 > **EN**: Memory Management
-> **Summary**:
+> **Summary**: Quiz Memory Management. Core Rust concept.
 >
 > ```rust fn main() { let b = Box::new(5); println!("{}", b); }```
 > <details> <summary>💡 点击展开答案与解析</summary>
@@ -82,7 +82,7 @@ fn main() {
 
 ### Q2. 以下代码能否编译？解释递归类型为什么需要 `Box`
 
-```rust
+```rust,compile_fail
 enum List {
     Cons(i32, List),
     Nil,
@@ -180,7 +180,7 @@ fn main() {
 
 **常见陷阱**：
 
-```rust
+```rust,ignore
 // ❌ 错误：尝试跨线程使用 Rc
 let data = Rc::new(42);
 std::thread::spawn(move || {
@@ -228,14 +228,14 @@ fn main() {
 
 **内部可变性原理**：`RefCell` 在**运行时**检查借用规则：
 
-```rust
+```rust,ignore
 data.borrow()     // 获取不可变借用（运行时检查）
 data.borrow_mut() // 获取可变借用（运行时检查）
 ```
 
 **运行时 panic 条件**（与编译期借用检查器相同规则）：
 
-```rust
+```rust,ignore
 let ref_cell = RefCell::new(0);
 let b1 = ref_cell.borrow();
 let b2 = ref_cell.borrow_mut(); // ❌ 运行时 panic！
@@ -288,7 +288,7 @@ fn main() {
 
 `Cell::get()` 返回值的**副本**（`T: Copy`），因此不存在多个引用同时访问同一数据的问题。
 
-```rust
+```rust,ignore
 let c = Cell::new(5);
 let x = c.get(); // x = 5（复制）
 c.set(10);       // 修改 Cell 内部
@@ -297,7 +297,7 @@ let y = c.get(); // y = 10（复制）
 
 **`Cell` 的限制**：
 
-```rust
+```rust,ignore
 let cell = Cell::new(vec![1, 2, 3]);
 // ❌ Vec 不实现 Copy，不能用 Cell
 ```
@@ -338,7 +338,7 @@ fn main() {
 
 **问题分析**：
 
-```rust
+```rust,ignore
 let mut num = m.lock().unwrap(); // 获取锁 #1
 *m.lock().unwrap();              // 尝试获取锁 #2 —— 死锁！
 ```
@@ -362,7 +362,7 @@ fn main() {
 
 **更优雅的修复**——使用 drop 显式释放：
 
-```rust
+```rust,ignore
 let mut num = m.lock().unwrap();
 *num = 6;
 drop(num); // 显式释放锁
@@ -473,7 +473,7 @@ fn main() {
 
 **为什么不能直接调用 `s.drop()`**：
 
-```rust
+```rust,ignore
 s.drop(); // ❌ 编译错误！
 ```
 
@@ -488,7 +488,7 @@ pub fn drop<T>(_x: T) {}
 
 **取消注释后的结果**：
 
-```rust
+```rust,ignore
 std::mem::drop(s);
 println!("{:?}", s); // ❌ 编译错误：use of moved value: s
 ```
@@ -542,7 +542,7 @@ leaf strong = 1, weak = 0
 
 假设父子节点都用 `Rc` 互相引用：
 
-```rust
+```rust,ignore
 // 反模式：循环引用导致内存泄漏！
 struct BadNode {
     value: i32,
@@ -562,7 +562,7 @@ struct BadNode {
 
 **`Weak` 的操作**：
 
-```rust
+```rust,ignore
 let weak = Rc::downgrade(&rc);    // Rc → Weak
 let maybe_rc = weak.upgrade();    // Weak → Option<Rc>
 // 若原 Rc 已被 drop，upgrade() 返回 None
@@ -607,7 +607,7 @@ fn main() {
 
 **发生了什么**：
 
-```rust
+```rust,ignore
 hello(&m);
 // &MyBox<String> 自动强制转换为 &String（调用 deref）
 // &String 再自动强制转换为 &str（String 也实现 Deref<Target=str>）
@@ -615,7 +615,7 @@ hello(&m);
 
 **等价展开**：
 
-```rust
+```rust,ignore
 hello(&(*m)[..]);
 // 1. *m     → Deref::deref(&m) → &String
 // 2. (*m)[..] → &str（字符串切片）

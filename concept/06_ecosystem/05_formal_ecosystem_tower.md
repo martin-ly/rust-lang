@@ -17,7 +17,7 @@
 > [Type Theory](../04_formal/02_type_theory.md)
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **后置概念**: [Application Domains](./04_application_domains.md) · [Toolchain](./01_toolchain.md)
-> **主要来源**: [crates.io](https://crates.io) · [lib.rs](https://lib.rs) · [Tokio 文档] · [Tower 文档] · [AWS Kani 博客] · [Microsoft Verus 论文] · [INRIA Creusot 教程]
+> **主要来源**: [crates.io](https://crates.io) · [lib.rs](https:/lib.rs) · [Tokio 文档] · [Tower 文档] · [AWS Kani 博客] · [Microsoft Verus 论文] · [INRIA Creusot 教程]
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 

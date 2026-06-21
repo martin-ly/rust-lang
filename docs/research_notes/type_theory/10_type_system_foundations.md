@@ -126,7 +126,7 @@
     - [类型系统改进](#类型系统改进)
     - [Rust 1.93.0 补充](#rust-1930-补充)
     - [低优先级扩展（形式化占位）](#低优先级扩展形式化占位)
-  - [🆕 Rust 1.96.0 更新内容 {#-rust-1940-更新内容}](#-rust-1940-更新内容--rust-1940-更新内容)
+  - [🆕 Rust 1.96.0 更新内容 {#-rust-1940-更新内容}](#-rust-1960-更新内容--rust-1940-更新内容)
     - [1. ControlFlow::ok() - 控制流与Option转换](#1-controlflowok---控制流与option转换)
     - [2. RangeToInclusive 类型](#2-rangetoinclusive-类型)
     - [3. int\_format\_into - 高性能整数格式化](#3-int_format_into---高性能整数格式化)
@@ -2955,7 +2955,7 @@ $
 \text{Transparent}(\tau_w, \tau) \rightarrow \text{Layout}(\tau_w) = \text{Layout}(\tau)
 $。
 
-**定理 NEWTYPE-T1**：`repr(transparent)` 保证单字段包装零成本；类型检查与 `transmute` 安全见 [UNSAFE_RUST_GUIDE](../../05_guides/05_unsafe_rust_guide.md)。
+**定理 NEWTYPE-T1**：`repr(transparent)` 保证单字段包装零成本；类型检查与 `transmute` 安全见 [UNSAFE_RUST_GUIDE](../../../concept/03_advanced/03_unsafe.md)。
 
 **Def DEREF-NULL1（deref_nullptr deny）**：1.93 中 `deref_nullptr` lint 默认 deny；对 `*const T`/`*mut T` 解引用需非空保证；与类型系统衔接：裸指针解引用 $*p$ 在 $p$ 可能为 null 时产生 lint 错误。
 

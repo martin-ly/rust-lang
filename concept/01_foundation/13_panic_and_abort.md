@@ -3,8 +3,8 @@
 >
 # Panic 与 Abort：不可恢复错误的处理机制
 >
-> **EN**: Panic 与 Abort：不可恢复错误的处理机制 (Chinese)
-> **Summary**: Panic 与 Abort：不可恢复错误的处理机制 (Chinese). Core Rust concept covering mechanism analysis, design patterns, error handling strategies.
+> **EN**: Panic and Abort
+> **Summary**: Panic and Abort: core Rust concepts, syntax, and examples.
 > **受众**: [初学者]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **S+P** — Structure + Procedure
@@ -18,7 +18,7 @@
 > **来源**: [Rust Reference — Panics](https://doc.rust-lang.org/reference/runtime.html#panics) ·
 > [TRPL — Unrecoverable Errors](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html) ·
 > [std::panic](https://doc.rust-lang.org/std/panic/index.html) ·
-> [RFC 2361 — catch_panic](https://rust-lang.github.io/rfcs/2361-panic-safe-rust.html) ·
+> [RFC 2361 — catch_panic](https://rust-lang.github.io/rfcs//2361-dbg-macro.html) ·
 > [Wikipedia — Crash-only Software](https://en.wikipedia.org/wiki/Crash-only_software)
 
 ## 📑 目录
@@ -142,7 +142,7 @@ Panic 的定义:
 ```
 
 > **选择洞察**: **Panic 用于 bug，Result 用于预期错误**——这个区分是 Rust 错误处理设计的核心。
-> [来源: [Rust API Guidelines — Panics](https://rust-lang.github.io/api-guidelines/documentation.html#function-docs-include-error-conditions-and-panic-conditions-c-failure)]
+> [来源: [Rust API Guidelines — Panics](https://rust-lang.github.io/api-guidelines//documentation.html#function-docs-include-error-conditions-and-panic-conditions-c-failure)]
 
 ---
 
@@ -387,7 +387,7 @@ graph TD
 ```
 
 > **认知功能**: **Result 是默认选择**——Panic 只在"这不应该发生"时使用。
-> [来源: [Rust API Guidelines — Errors](https://rust-lang.github.io/api-guidelines/interoperability.html#error-types-are-meaningful-and-well-behaved-c-good-err)]
+> [来源: [Rust API Guidelines — Errors](https://rust-lang.github.io/api-guidelines//interoperability.html#error-types-are-meaningful-and-well-behaved-c-good-err)]
 
 ---
 
@@ -485,7 +485,7 @@ graph TD
 |:---|:---:|:---|
 | [TRPL — Panic](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html) | ✅ 一级 | 基础教程 |
 | [std::panic](https://doc.rust-lang.org/std/panic/index.html) | ✅ 一级 | 标准库模块 |
-| [RFC 2361](https://rust-lang.github.io/rfcs/2361-panic-safe-rust.html) | ✅ 一级 | Panic 安全 |
+| [RFC 2361](https://rust-lang.github.io/rfcs//2361-dbg-macro.html) | ✅ 一级 | Panic 安全 |
 | [Rust Reference — Panic](https://doc.rust-lang.org/reference/runtime.html#panics) | ✅ 一级 | 参考 |
 
 ---
@@ -714,7 +714,7 @@ fn compute_expensive_value() -> i32 { 42 }
 fn compute_expensive_string() -> String { String::from("expensive") }
 ```
 
-> **修正**: `assert!` 的格式参数在**断言失败时**求值，但 `compute_expensive_string()` 是否在断言通过时求值？实际上，Rust 的 `assert!` 宏展开后，格式参数在 panic 时才求值（通过 `format_args!` 的惰性），但闭包捕获可能意外触发求值。更安全的模式：`assert!(x > 0, "value is not positive")`，或延迟格式化：`assert!(x > 0, "value {x} is not positive")`（1.58+ 的捕获格式化）。`debug_assert!` 在 release 模式下完全消除（无运行时开销），适合开发期检查。这与 C 的 `assert`（宏，条件为假时打印消息并 abort）或 Java 的 `assert`（类似，但可启用/禁用）不同——Rust 的 `assert!` 是宏，可格式化消息，且 `debug_assert!` 在 release 中零成本。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html)] · [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/panic-macro.html)]
+> **修正**: `assert!` 的格式参数在**断言失败时**求值，但 `compute_expensive_string()` 是否在断言通过时求值？实际上，Rust 的 `assert!` 宏展开后，格式参数在 panic 时才求值（通过 `format_args!` 的惰性），但闭包捕获可能意外触发求值。更安全的模式：`assert!(x > 0, "value is not positive")`，或延迟格式化：`assert!(x > 0, "value {x} is not positive")`（1.58+ 的捕获格式化）。`debug_assert!` 在 release 模式下完全消除（无运行时开销），适合开发期检查。这与 C 的 `assert`（宏，条件为假时打印消息并 abort）或 Java 的 `assert`（类似，但可启用/禁用）不同——Rust 的 `assert!` 是宏，可格式化消息，且 `debug_assert!` 在 release 中零成本。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html)] · [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/panic.html)]
 
 ## 嵌入式测验（Embedded Quiz）
 

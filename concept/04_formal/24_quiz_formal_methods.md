@@ -3,7 +3,7 @@
 # 测验：形式化方法概念（L4 试点扩展）
 >
 > **EN**: Formal Methods
-> **Summary**:
+> **Summary**: Quiz Formal Methods. Core Rust concept.
 > ``` P * Q ``` <details> <summary>💡 点击展开答案与解析</summary> **答案**：`P * Q` 表示memory堆可以**分割**为两个不相交的部分，一部分满足 `P`，另一部分满足 `Q`。
 > **formal methods定义（教学类比）**： ``` h ⊨ P * Q   ⟺   ∃h₁, h₂.  h = h₁ ⊎ h₂  ∧  h₁ ⊨ P  ∧  h₂ ⊨ Q ``` - `h` 是整个memory堆（heap） - `h₁ ⊎ h₂` 表示 `h₁` 和 `h₂` 的**不相交并集**（disjoint union） - `h₁` 和 `h₂` 没有重叠的memory地址 **
 > **受众**: [研究者]
@@ -11,6 +11,8 @@
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
 
+>
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---
 
 > **来源**:
@@ -389,7 +391,7 @@ fn main() {
 
 **反例**（违反框架规则）：
 
-```rust
+```rust,ignore
 unsafe {
     // 假设这个函数不仅修改 ptr 指向的内存，
     // 还偷偷修改了全局变量 GLOBAL_STATE
@@ -425,7 +427,7 @@ unsafe {
 
 **Verus**（Microsoft Research）：
 
-```rust
+```rust,ignore
 fn binary_search(v: &Vec<u64>, x: u64) -> (r: Option<usize>)
     requires forall|i: int, j: int| 0 <= i < j < v.len() ==> v[i] <= v[j],
     ensures match r {
@@ -439,7 +441,7 @@ fn binary_search(v: &Vec<u64>, x: u64) -> (r: Option<usize>)
 
 **Creusot**（Inria）：
 
-```rust
+```rust,ignore
 #[predicate]
 def sorted(s: Seq<T>) -> bool {
     pearlite! { forall<i: Int, j: Int> 0 <= i && i < j && j < s.len() ==> s[i] <= s[j] }
@@ -461,7 +463,7 @@ def sorted(s: Seq<T>) -> bool {
 
 ### Q10. 以下代码在 Miri 下会报告什么？解释 Tree Borrows 与 Stacked Borrows 的区别
 
-```rust
+```rust,compile_fail
 fn main() {
     let mut x = 0u8;
     let y = &mut x;

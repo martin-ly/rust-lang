@@ -1,7 +1,7 @@
 # Rust 知识体系知识图谱本体规范（Knowledge Graph Ontology）
 >
-> **EN**: Rust 知识体系知识图谱本体规范（Knowledge Graph Ontology） (Chinese)
-> **Summary**: Rust 知识体系知识图谱本体规范. Core Rust concept covering FFI interoperability.
+> **EN**: Kg Ontology
+> **Summary**: Kg Ontology. Core Rust concept.
 >
 > **受众**: [研究者]
 >
@@ -12,6 +12,8 @@
 > **对齐来源**: [W3C RDF/OWL 标准] · [Stanford CS520 — 知识图谱定义] · [Collins & Quillian (1969) — 层次语义网络] · [Bordes et al. (2013) — TransE 知识图谱嵌入]
 
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 > **来源**: [W3C — *RDF 1.1 Concepts and Abstract Syntax*]
@@ -293,7 +295,7 @@ ex:Ownership rdf:type ex:Concept ;
     rdfs:label "所有权"@zh ;
     ex:dependsOn ex:TypeSystem ;
     ex:equivalentTo ex:AffineLogic ;
-    ex:definedIn <https://doc.rust-lang.org/reference/ownership.html> ;
+    ex:definedIn <https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html> ;
     ex:bloomLevel ex:Understand ;
     ex:aspMarker ex:S .
 

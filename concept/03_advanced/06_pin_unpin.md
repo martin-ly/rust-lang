@@ -7,7 +7,6 @@
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[Pin/Unpin](../../knowledge/03_advanced/async)
-
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure
@@ -18,9 +17,9 @@
 
 ---
 
-> **来源**: [Rust Reference — Pin](https://doc.rust-lang.org/reference/types/pin.html) ·
-> [TRPL Ch17 — Pin](https://doc.rust-lang.org/book/ch17-04-pin.html) ·
-> [Rustonomicon — Pin](https://doc.rust-lang.org/nomicon/pinning.html) ·
+> **来源**: [Rust Reference — Pin](https://doc.rust-lang.org/std/pin/index.html) ·
+> [TRPL Ch17 — Pin](https://doc.rust-lang.org/book/ch17-02-concurrency-with-async.html) ·
+> [Rustonomicon — Pin](https://doc.rust-lang.org/std/pin/index.html) ·
 > [RFC 2349 — Pin](https://github.com/rust-lang/rfcs/pull/2349) ·
 > [Tracking Issue #55766](https://github.com/rust-lang/rust/issues/55766)
 
@@ -96,7 +95,7 @@ let s2 = s;  // ❌ 移动后 ptr_to_data 指向旧地址！
 ```
 
 > **核心问题**: Rust 默认允许移动值，但自引用结构体移动后，内部指针变成**悬空指针**（dangling pointer）。这在 C++ 中也是常见问题（move 后自引用失效）。
-> [来源: [Rustonomicon — Pinning](https://doc.rust-lang.org/nomicon/pinning.html)]
+> [来源: [Rustonomicon — Pinning](https://doc.rust-lang.org/std/pin/index.html)]
 
 ---
 
@@ -124,7 +123,7 @@ graph TD
 > [来源: [RFC 2592 — Pin]]
 > **使用建议**: 绝大多数 Rust 代码不需要直接操作 Pin。Pin 主要在 async/await、生成器和特定 unsafe 代码中使用。
 > **关键洞察**: Pin 不是"阻止移动"，而是**"承诺不移动"**——如果违反了承诺（通过 unsafe），结果是 UB。
-> [来源: [Rust Reference — Pin](https://doc.rust-lang.org/reference/types/pin.html)]
+> [来源: [Rust Reference — Pin](https://doc.rust-lang.org/std/pin/index.html)]
 
 ---
 
@@ -234,7 +233,7 @@ impl SelfReferential {
 ```
 
 > **构建模式**: 自引用结构体的安全构建需要**两步初始化**——先在堆上分配（Box），然后 Pin，最后初始化自引用字段。`pin-project` crate 简化了这一过程。
-> [来源: [Rustonomicon — Pinning](https://doc.rust-lang.org/nomicon/pinning.html)]
+> [来源: [Rustonomicon — Pinning](https://doc.rust-lang.org/std/pin/index.html)]
 
 ---
 
@@ -331,7 +330,7 @@ graph TD
 > **认知功能**: 此决策树判断是否使用 Pin。核心判断标准是**是否真的需要自引用且不需要移动**。
 > **使用建议**: 优先避免自引用设计；必须自引用时用 Pin；需要移动时重新设计（如使用索引替代指针）。
 > **关键洞察**: Pin 是**最后手段**而非首选方案。大多数"需要自引用"的场景可以通过重新设计消除自引用需求。
-> [来源: [Rust API Guidelines — Pin](https://rust-lang.github.io/api-guidelines/predictability.html)]
+> [来源: [Rust API Guidelines — Pin](https://rust-lang.github.io/api-guidelines//predictability.html)]
 
 ---
 
@@ -529,14 +528,14 @@ fn main() {
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
-| [Rust Reference — Pin](https://doc.rust-lang.org/reference/types/pin.html) | ✅ 一级 | 官方语言参考 |
-| [TRPL Ch17 — Pin](https://doc.rust-lang.org/book/ch17-04-pin.html) | ✅ 一级 | Pin 入门指南 |
-| [Rustonomicon — Pinning](https://doc.rust-lang.org/nomicon/pinning.html) | ✅ 一级 | 深入 Pin 分析 |
+| [Rust Reference — Pin](https://doc.rust-lang.org/std/pin/index.html) | ✅ 一级 | 官方语言参考 |
+| [TRPL Ch17 — Pin](https://doc.rust-lang.org/book/ch17-02-concurrency-with-async.html) | ✅ 一级 | Pin 入门指南 |
+| [Rustonomicon — Pinning](https://doc.rust-lang.org/std/pin/index.html) | ✅ 一级 | 深入 Pin 分析 |
 | [RFC 2349 — Pin](https://github.com/rust-lang/rfcs/pull/2349) | ✅ 一级 | Pin 设计 RFC |
 | [pin-project](https://docs.rs/pin-project/latest/pin_project/) | ✅ 一级 | 自引用结构体辅助 crate |
 | [std::pin::Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html) | ✅ 一级 | 标准库 API |
 | [std::marker::Unpin](https://doc.rust-lang.org/std/marker/trait.Unpin.html) | ✅ 一级 | Unpin 标准库 API |
-| [RFC 2394 — Async/Await](https://rust-lang.github.io/rfcs/2394-async_await.html) | ✅ 一级 | async 状态机 RFC |
+| [RFC 2394 — Async/Await](https://rust-lang.github.io/rfcs//2394-async_await.html) | ✅ 一级 | async 状态机 RFC |
 
 ---
 
@@ -642,7 +641,7 @@ fn main() {
 }
 ```
 
-> **修正**: **`Unpin`** 是**auto trait**：1) 编译器自动为大多数类型实现 `Unpin`；2) 包含 `PhantomPinned` 或 `!Unpin` 字段的类型自动 `!Unpin`；3) 不能为 `!Unpin` 类型手动实现 `Unpin`（不安全）。`Pin<P<T>>` 的行为：1) `T: Unpin` — `Pin` 允许 `get_mut()`（数据可安全移动）；2) `T: !Unpin` — `Pin` 禁止 `get_mut()`（数据不可移动）。自引用结构：1) 使用 `PhantomPinned` 标记 `!Unpin`；2) 通过 `Pin<&mut Self>` 访问；3) `unsafe` 创建 `Pin`（需保证数据不移动）。这与 C++ 的 `std::pin`（无原生支持，需手动管理）或 Swift 的引用类型（始终堆分配，无 move 问题）不同——Rust 的 `Pin` 是零成本抽象，通过类型系统保证。[来源: [Pin API](https://doc.rust-lang.org/std/pin/)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/pins-and-fns.html)]
+> **修正**: **`Unpin`** 是**auto trait**：1) 编译器自动为大多数类型实现 `Unpin`；2) 包含 `PhantomPinned` 或 `!Unpin` 字段的类型自动 `!Unpin`；3) 不能为 `!Unpin` 类型手动实现 `Unpin`（不安全）。`Pin<P<T>>` 的行为：1) `T: Unpin` — `Pin` 允许 `get_mut()`（数据可安全移动）；2) `T: !Unpin` — `Pin` 禁止 `get_mut()`（数据不可移动）。自引用结构：1) 使用 `PhantomPinned` 标记 `!Unpin`；2) 通过 `Pin<&mut Self>` 访问；3) `unsafe` 创建 `Pin`（需保证数据不移动）。这与 C++ 的 `std::pin`（无原生支持，需手动管理）或 Swift 的引用类型（始终堆分配，无 move 问题）不同——Rust 的 `Pin` 是零成本抽象，通过类型系统保证。[来源: [Pin API](https://doc.rust-lang.org/std/pin/)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/std/pin/index.html)]
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
@@ -783,7 +782,7 @@ struct ReallySelfRef {
 
 **题目**: 以下代码能否编译？为什么？
 
-```rust
+```rust,compile_fail
 use std::pin::Pin;
 
 struct NoMove {
@@ -808,7 +807,7 @@ fn main() {
 
 `Pin::new` 的签名：
 
-```rust
+```rust,ignore
 impl<'a, T: Unpin> Pin<&'a mut T> {
     pub fn new(pointer: &'a mut T) -> Pin<&'a mut T>;
 }
@@ -820,7 +819,7 @@ impl<'a, T: Unpin> Pin<&'a mut T> {
 
 **正确做法**: 使用 `Box::pin`（不要求 `Unpin`）：
 
-```rust
+```rust,ignore
 let pinned = Box::pin(NoMove { _marker: std::marker::PhantomPinned });
 ```
 
@@ -833,7 +832,7 @@ let pinned = Box::pin(NoMove { _marker: std::marker::PhantomPinned });
 
 **题目**: 为什么 `Future::poll` 的签名使用 `Pin<&mut Self>` 而不是 `&mut Self`？
 
-```rust
+```rust,ignore
 fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
 ```
 
@@ -849,7 +848,7 @@ fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
 
 `async fn` 编译后的状态机可能包含**自引用字段**：
 
-```rust
+```rust,ignore
 async fn example() {
     let local = String::from("hello");
     let ref_to_local = &local;  // 自引用！
@@ -880,4 +879,4 @@ struct ExampleFuture {
 
 ---
 
-> **测验设计来源**: [Bloom Taxonomy 2001] · [Rust Async Book — Pin](https://rust-lang.github.io/async-book/04_pinning/01_chapter.html) · [TRPL Ch17](https://doc.rust-lang.org/book/ch17-04-pin.html)
+> **测验设计来源**: [Bloom Taxonomy 2001] · [Rust Async Book — Pin](https://rust-lang.github.io/async-book/) · [TRPL Ch17](https://doc.rust-lang.org/book/ch17-02-concurrency-with-async.html)

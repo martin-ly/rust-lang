@@ -1,7 +1,7 @@
 # Rust 安全边界扩展推理树
 >
-> **EN**: Security Practices
-> **Summary**: Security Practices. Core Rust concept covering mechanism analysis, security practices.
+> **EN**: Boundary Extension Tree
+> **Summary**: A reasoning tree for extending Rust's safety boundaries across unsafe, FFI, and formal-verification layers.
 > **受众**: [专家]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **定位**: 本文件从「安全边界」核心出发，推演向更底层、更通用、更危险领域的扩展路径，标注每条扩展边的条件、风险和补偿机制。
@@ -9,6 +9,8 @@
 > **风险色标**: 🟢 编译期保证 / 🟡 运行时检查 / 🔴 程序员责任 / ⚫ 系统级风险
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
+>
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 > **Bloom 层级**: 元（Meta）
@@ -138,7 +140,7 @@ graph TD
 
 **补偿机制**:
 
-- **SAFETY 注释**: 每个 `unsafe` 块必须注释「为什么此操作是安全的」。 [来源: [RFC 2585](https://rust-lang.github.io/rfcs/2585.html), Rust Style Guide]
+- **SAFETY 注释**: 每个 `unsafe` 块必须注释「为什么此操作是安全的」。 [来源: [RFC 2585](https://rust-lang.github.io/rfcs//2585-unsafe-block-in-unsafe-fn.html), Rust Style Guide]
 - **Miri 验证**: 动态检测未定义行为。
 - **审计**: `cargo geiger` 统计 unsafe 代码比例。 [来源: cargo-geiger 文档]
 

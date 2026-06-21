@@ -24,7 +24,7 @@
 
 > **来源**: [WebAssembly Specification](https://webassembly.github.io/spec/) ·
 > [Rust Wasm Book](https://rustwasm.github.io/book/) ·
-> [wasm-bindgen Guide](https://rustwasm.github.io/wasm-bindgen/) ·
+> [wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/) ·
 > [Bytecode Alliance](https://bytecodealliance.org/) ·
 > [W3C WebAssembly](https://www.w3.org/wasm/)
 
@@ -96,17 +96,17 @@ Wasm 的内存模型:
 > **设计洞察**: Wasm 的**无未定义行为**保证与 Rust 的**安全子集**高度契合。C/C++ 编译到 Wasm 时，许多 UB 行为（如越界访问）被 Wasm 运行时捕获；而 Rust 在编译期就消除了这类 UB。
 > [来源: [WebAssembly Specification — Security](https://webassembly.github.io/spec/core/appendix/security.html)]
 
-**可编译示例** — 极简 Wasm 导出函数：
+**可编译示例** — 极简 Wasm 导出函数（Rust 1.82+ 必须使用 `#[unsafe(no_mangle)]`）：
 
-```rust
+```rust,ignore
 /// 编译目标: wasm32-unknown-unknown
 /// 此函数可被 JavaScript 或其他宿主直接调用
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub extern "C" fn add(a: i32, b: i32) -> i32 {
     a + b
 }
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub extern "C" fn greet(name_ptr: *const u8, name_len: usize) {
     // 实际项目中应使用 wasm-bindgen 处理字符串
     let _slice = unsafe {
@@ -238,7 +238,7 @@ impl Point {
 > 1. 字符串编码（UTF-8 ↔ UTF-16）
 > 2. 对象引用管理（JS 对象句柄表）
 > 3. 异常转换（Rust panic → JS Error）
-> [来源: [wasm-bindgen Reference](https://rustwasm.github.io/wasm-bindgen/reference/)]
+> [来源: [wasm-bindgen Reference](https://rustwasm.github.io/docs/wasm-bindgen/reference/)]
 
 ---
 
@@ -278,6 +278,7 @@ graph TD
 > **生态状态提示**：本小节涉及 2026-05-28 发布的 Rust 1.96 中的 **breaking change**。
 
 Rust 1.96 起，所有 WebAssembly 目标在链接时**不再默认**向 `wasm-ld` 传递 `--allow-undefined`。此前，Rust 代码中未定义的 `extern "C"` 符号会被 wasm-ld 静默转换为 Wasm 模块的导入（通常来自 `"env"` 模块）；现在，未定义符号将像原生平台一样产生**链接错误**。
+> [来源: [Rust 1.96 Release Notes — WebAssembly linker behavior](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)]
 
 **典型影响**（Rust 1.96 之前可编译，之后报错）：
 
@@ -440,7 +441,7 @@ Rust Wasm 工具链:
 | [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
 | [WebAssembly Specification](https://webassembly.github.io/spec/) | ✅ 一级 | W3C 官方规范 |
 | [Rust Wasm Book](https://rustwasm.github.io/book/) | ✅ 一级 | Rust 官方 Wasm 指南 |
-| [wasm-bindgen Guide](https://rustwasm.github.io/wasm-bindgen/) | ✅ 一级 | JS 互操作指南 |
+| [wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/) | ✅ 一级 | JS 互操作指南 |
 | [Bytecode Alliance](https://bytecodealliance.org/) | ✅ 一级 | Wasm 生态组织 |
 | [Component Model Docs](https://component-model.bytecodealliance.org/) | ✅ 一级 | 组件模型文档 |
 | [WASI Preview](https://wasi.dev/) | ✅ 一级 | 系统接口规范 |
@@ -521,7 +522,7 @@ pub fn process(data: String) -> Vec<u8> {
 // 需要返回 JsValue 或使用 #[wasm_bindgen] 标记的类型
 ```
 
-> **修正**: `wasm-bindgen` 在 Rust 和 JavaScript 之间自动生成绑定代码，但不是所有 Rust 类型都可自动映射。`String`、`Vec<T>`（特定 T）、`Option<T>` 等支持自动转换，但自定义结构体需要 `#[wasm_bindgen]` 标记，复杂类型需手动序列化为 `JsValue`。这与 AssemblyScript 的自动类型映射不同——Rust 的设计更保守，要求显式控制 FFI 边界，避免隐式转换导致的性能问题或语义差异。[来源: [wasm-bindgen Documentation](https://rustwasm.github.io/wasm-bindgen/)]
+> **修正**: `wasm-bindgen` 在 Rust 和 JavaScript 之间自动生成绑定代码，但不是所有 Rust 类型都可自动映射。`String`、`Vec<T>`（特定 T）、`Option<T>` 等支持自动转换，但自定义结构体需要 `#[wasm_bindgen]` 标记，复杂类型需手动序列化为 `JsValue`。这与 AssemblyScript 的自动类型映射不同——Rust 的设计更保守，要求显式控制 FFI 边界，避免隐式转换导致的性能问题或语义差异。[来源: [wasm-bindgen Documentation](https://rustwasm.github.io/docs/wasm-bindgen/)]
 
 ### 10.3 边界测试：WASM 的线性内存与 Rust 引用的不兼容性（编译错误）
 
@@ -537,7 +538,7 @@ pub extern "C" fn process(data: *mut u8, len: usize) {
 }
 ```
 
-> **修正**: WASM 的线性内存（Linear Memory）是一个连续的 byte 数组，Rust 的引用（`&T`、`&mut T`）要求**非空、对齐、有效**。从 host 传递的指针可能：1) 为 null；2) 未对齐；3) 越界。`slice::from_raw_parts_mut` 不验证这些条件，违反即 UB。安全封装：1) 验证 `data != null`；2) 验证 `data + len <= memory_size`；3) 使用 `wasm-bindgen` 生成的绑定（自动处理类型转换）。这与 C 的 WASM 模块（同样需验证指针）或 AssemblyScript（类型安全的 TypeScript 子集编译到 WASM）类似——WASM 的低级接口需要显式安全检查。`wasm-bindgen` 和 `wit-bindgen` 提供高层绑定生成，减少手动指针操作。[来源: [WASM Linear Memory](https://webassembly.org/docs/modules/#linear-memory)] · [来源: [wasm-bindgen Documentation](https://rustwasm.github.io/wasm-bindgen/)]
+> **修正**: WASM 的线性内存（Linear Memory）是一个连续的 byte 数组，Rust 的引用（`&T`、`&mut T`）要求**非空、对齐、有效**。从 host 传递的指针可能：1) 为 null；2) 未对齐；3) 越界。`slice::from_raw_parts_mut` 不验证这些条件，违反即 UB。安全封装：1) 验证 `data != null`；2) 验证 `data + len <= memory_size`；3) 使用 `wasm-bindgen` 生成的绑定（自动处理类型转换）。这与 C 的 WASM 模块（同样需验证指针）或 AssemblyScript（类型安全的 TypeScript 子集编译到 WASM）类似——WASM 的低级接口需要显式安全检查。`wasm-bindgen` 和 `wit-bindgen` 提供高层绑定生成，减少手动指针操作。[来源: [WASM Linear Memory](https://webassembly.org/docs/modules/#linear-memory)] · [来源: [wasm-bindgen Documentation](https://rustwasm.github.io/docs/wasm-bindgen/)]
 
 ### 10.4 边界测试：`wasm32-unknown-unknown` 的 panic 处理（编译错误/运行时陷阱）
 

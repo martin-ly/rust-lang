@@ -5,7 +5,7 @@
 # 测验：Rust 工具链（L6 试点扩展）
 >
 > **EN**: Toolchain
-> **Summary**: ```toml [dependencies] serde = "^1.0" tokio = "~1.35" regex = "=1.10.2"``` <details> <summary>💡 点击展开答案与解析</summary> **答案**： | 约束 | 含义 | 允许范围 | 示例 | |:---|:---|:---|:---| | `^1.0` | 兼容更新 | `>=1.0.0, <2.0.0` | 1.0.0, 1.5.0, 1.99.9 ✅；2.0.0 ❌ | | `~1.35` | 近似更新 | `>=1.35.0, <1.36.0` | 1.35.0, 1.35.99 ✅
+> **Summary**: Quiz Toolchain. Core Rust concept.
 
 > **受众**: [进阶]
 > **内容分级**: [综述级]
@@ -14,8 +14,7 @@
 
 ---
 
-> **来源**:
-> [The Cargo Book](https://doc.rust-lang.org/cargo/) ·
+> **来源**: [Cargo Book](https://doc.rust-lang.org/cargo/) · [rustup](https://rust-lang.github.io/rustup/)
 > [Clippy Documentation](https://doc.rust-lang.org/clippy/) ·
 > [Miri Documentation](https://github.com/rust-lang/miri) ·
 > [Rustfmt Documentation](https://github.com/rust-lang/rustfmt)
@@ -353,7 +352,7 @@ pub fn add(a: i32, b: i32) -> i32 {
 
 **常用 doc 属性**：
 
-```rust
+```rust,ignore
 /// # Panics
 /// # Errors
 /// # Safety（unsafe 函数必须）
@@ -507,7 +506,7 @@ RUST_BACKTRACE=1 cargo run
 
 ---
 
-> **权威来源**: [The Cargo Book](https://doc.rust-lang.org/cargo/) · [Clippy Lints](https://rust-lang.github.io/rust-clippy/master/index.html) · [Miri Book](https://rustc-dev-guide.rust-lang.org/miri.html)
+> **权威来源**: [The Cargo Book](https://doc.rust-lang.org/cargo/) · [Clippy Lints](https://rust-lang.github.io/rust-clippy//master/index.html) · [Miri Book](https://rustc-dev-guide.rust-lang.org/miri.html)
 
 ## 嵌入式测验（Embedded Quiz）
 

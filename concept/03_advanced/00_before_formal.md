@@ -1,7 +1,7 @@
 # 是否需要进入 L4 形式化层？
 >
 > **EN**: Formal Methods
-> **Summary**: ```mermaid flowchart TD START([你已完成 L1-L3 的学习]) --> Q1{你的目标是什么？} Q1 -->|写更好的 Rust 代码| A1[❌ 不需要 L4]<br/>继续 L5 对比层 / L6 生态层<br/>重点：设计模式、工具链、生产实践] Q1 -->|理解compiler为什么报错| A2[⚠️ 选择性阅读 L4]<br/>重点：Tree Borrows、Lifetime formal methods<br/>跳过：范畴论、线性逻辑公理] Q1 -->|做formal methods验证 / PL 研究| A3[✅ 需要 L4]<br/>阅读全部内容<br/>注意区分 [教学类比] 与 [严格证明
+> **Summary**: Formal Methods: advanced Rust topics, performance/runtime considerations, and ecosystem patterns.
 
 > **内容分级**: [综述级]
 > **受众**: [进阶]
@@ -9,6 +9,8 @@
 >
 > **定位**: L3（高级）与 L4（形式化）之间的**决策缓冲带**，帮助你判断是否需要阅读形式化内容。
 
+>
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/)
 ---
 
 ## 快速决策树

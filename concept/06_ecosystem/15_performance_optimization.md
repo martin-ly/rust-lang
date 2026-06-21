@@ -26,13 +26,7 @@
 
 ---
 
-> **来源**:
-> [Criterion [来源: [Criterion.rs](https://bheisler.github.io/criterion.rs/book/)].rs](<https://bokeh.github.io/criterion.rs/book/>) ·
-> [Rust Performance Book](https://nnethercote.github.io/perf-book/) ·
-> [cargo-flamegraph](https://github.com/flamegraph-rs/flamegraph) ·
-> [Rust SIMD Guide](https://doc.rust-lang.org/std/simd/index.html) ·
-> [Coherence Cache Lines](https://en.wikipedia.org/wiki/CPU_cache) ·
-> [TRPL — Optimization](https://doc.rust-lang.org/book/ch13-01-closures.html)
+> **来源**: [Criterion.rs Book](https://bheisler.github.io/criterion.rs/book/) · [Rust Performance Book](https://nnethercote.github.io/perf-book/) · [cargo-flamegraph](https://github.com/flamegraph-rs/flamegraph) · [std::simd](https://doc.rust-lang.org/std/simd/index.html) · [TRPL — Closures](https://doc.rust-lang.org/book/ch13-01-closures.html)
 
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 

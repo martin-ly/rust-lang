@@ -2,8 +2,8 @@
 
 # 流处理语义：从 Dataflow Model 到 Differential Dataflow
 >
-> **EN**: 流处理语义：从 Dataflow Model 到 Differential Dataflow (Chinese)
-> **Summary**: 流处理语义：从 Dataflow Model 到 Differential Dataflow (Chinese). Core Rust concept covering mechanism analysis, in-depth analysis.
+> **EN**: Stream Processing Semantics
+> **Summary**: Stream Processing Semantics: advanced Rust topics, performance/runtime considerations, and ecosystem patterns.
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure
@@ -16,6 +16,8 @@
 > **后置概念**: [Stream Processing Ecosystem](../06_ecosystem/36_stream_processing_ecosystem.md) ·
 > [Distributed Systems](../06_ecosystem/18_distributed_systems.md)
 
+>
+> **来源**: [Async Book — Streams](https://rust-lang.github.io/async-book//05_streams/01_chapter.html) · [futures::stream](https://docs.rs/futures/)
 ---
 
 > **来源**: [Akidau et al. — The Dataflow Model, VLDB 2015](https://www.vldb.org/pvldb/vol8/p1792-Akidau.pdf) ·
@@ -79,6 +81,12 @@
     - [10.3 边界测试：Stream 的 `fuse` 与重复 poll 后的行为（逻辑错误）](#103-边界测试stream-的-fuse-与重复-poll-后的行为逻辑错误)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [参考来源](#参考来源)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：`Stream` trait 与 `Iterator` trait 的核心区别是什么？（理解层）](#测验-1stream-trait-与-iterator-trait-的核心区别是什么理解层)
+    - [测验 2：`futures::StreamExt::buffered(n)` 的作用是什么？（理解层）](#测验-2futuresstreamextbufferedn-的作用是什么理解层)
+    - [测验 3：背压（Backpressure）在流处理中是什么意思？Tokio 的 channel 如何实现背压？（理解层）](#测验-3背压backpressure在流处理中是什么意思tokio-的-channel-如何实现背压理解层)
+    - [测验 4：`Stream::merge` 与 `Stream::chain` 有什么区别？（理解层）](#测验-4streammerge-与-streamchain-有什么区别理解层)
+    - [测验 5：在流处理中，为什么通常使用 `tokio::sync::mpsc` 而不是无界通道（`unbounded_channel`）？（理解层）](#测验-5在流处理中为什么通常使用-tokiosyncmpsc-而不是无界通道unbounded_channel理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -719,7 +727,7 @@ fn main() {
 
 > [来源: [Tokio Streams](https://docs.rs/tokio-stream/)]
 > [来源: [Reactive Streams Specification](https://www.reactive-streams.org/)]
-> [来源: [RFC 2996 — Async Iteration](https://rust-lang.github.io/rfcs/2996-async-iterator.html)]
+> [来源: [RFC 2996 — Async Iteration](https://rust-lang.github.io/rfcs//2996-async-iterator.html)]
 > [来源: [Stream Processing — Akka Streams](https://doc.akka.io/docs/akka/current/stream/)]
 > [来源: [Apache Flink — Stream Semantics](https://nightlies.apache.org/flink/flink-docs-stable/)]
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)

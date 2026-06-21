@@ -22,7 +22,7 @@
 
 ---
 
-> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> **来源**: [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [std::result::Result](https://doc.rust-lang.org/std/result/enum.Result.html)
 > [Rust By Example](https://doc.rust-lang.org/rust-by-example/error.html) ·
 > [std::result](https://doc.rust-lang.org/std/result/index.html) ·
 > [std::option](https://doc.rust-lang.org/std/option/index.html) ·
@@ -385,7 +385,7 @@ Result/Option 组合:
 ```
 
 > **模式洞察**: **组合模式让错误处理成为数据流的一部分**——而非控制流的例外。
-> [来源: [Rust API Guidelines — Error Handling](https://rust-lang.github.io/api-guidelines/errors.html)]
+> [来源: [Rust API Guidelines — Error Handling](https://rust-lang.github.io/api-guidelines//dependability.html)]
 
 ---
 
@@ -467,7 +467,7 @@ unwrap / expect:
 ```
 
 > **unwrap 洞察**: **unwrap 是"我知道这不会失败"的断言**——如果错了，程序 panic 告诉你。
-> [来源: [Rust API Guidelines — unwrap](https://rust-lang.github.io/api-guidelines/documentation.html#function-docs-include-error-panic-and-safety-considerations-c-failure)]
+> [来源: [Rust API Guidelines — unwrap](https://rust-lang.github.io/api-guidelines//documentation.html#function-docs-include-error-panic-and-safety-considerations-c-failure)]
 
 ---
 
@@ -590,7 +590,7 @@ graph TD
 | [TRPL Ch. 9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) | ✅ 一级 | 错误处理 |
 | [std::result](https://doc.rust-lang.org/std/result/index.html) | ✅ 一级 | Result API |
 | [std::option](https://doc.rust-lang.org/std/option/index.html) | ✅ 一级 | Option API |
-| [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/errors.html) | ✅ 一级 | 错误指南 |
+| [Rust API Guidelines](https://rust-lang.github.io/api-guidelines//dependability.html) | ✅ 一级 | 错误指南 |
 | [thiserror](https://docs.rs/thiserror/latest/thiserror/) | ✅ 二级 | 错误派生 |
 | [anyhow](https://docs.rs/anyhow/latest/anyhow/) | ✅ 二级 | 便捷错误 |
 
@@ -886,7 +886,7 @@ fn main() {
 
 生产代码中，以下哪种写法更推荐？
 
-```rust
+```rust,ignore
 // 选项 A
 let port = config.get("PORT").unwrap();
 
@@ -933,7 +933,7 @@ fn may_fail() -> Result<i32, String> {
 
 修复方案 1（显式映射错误）：
 
-```rust
+```rust,ignore
 let y = x.map_err(|e| e.to_string())?;
 ```
 

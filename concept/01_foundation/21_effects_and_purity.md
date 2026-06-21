@@ -3,8 +3,8 @@
 >
 # 副作用与纯度：从引用透明到 Rust 的所有权效果
 >
-> **EN**: Ownership
-> **Summary**:
+> **EN**: Effects and Purity
+> **Summary**: Tracking side effects and purity in Rust functions, const contexts, and unsafe boundaries.
 > 一个表达式是**引用透明**的，当且仅当：在程序的任何位置，该表达式都可以被其计算结果替换，而不改变程序的行为。
 > ```text 引用透明: expr ≡ value_of(expr) 在任何上下文中成立```
 > **引用透明的表达式**:- 纯数学函数：`2 + 3` ≡ `5` - 无副作用的函数：`square(4)` ≡ `16`
@@ -18,6 +18,8 @@
 > **后置概念**: [Borrowing](./02_borrowing.md) · [Effects System](../07_future/04_effects_system.md) · [Async](../03_advanced/02_async.md)
 > **主要来源**: [Haskell Wiki — Referential Transparency] · [Pierce TAPL, §13] · [Moggi 1989 — Computational Lambda-Calculus and Monads] · [Wadler 1992 — The Essence of Functional Programming]
 
+>
+> **来源**: [Reference — Constant Evaluation](https://doc.rust-lang.org/reference/const_eval.html) · [Rust Project Goals — const traits](https://rust-lang.github.io/rust-project-goals/2025h1/const-trait.html)
 ---
 
 > **Bloom 层级**: 理解 → 分析 → 评价
@@ -536,7 +538,7 @@ fn main() {
 > 未来演进：`const fn` 可能支持有限的堆分配（`const Heap` 提案），但当前受限。
 > 这与 C++ 的 `constexpr`（C++20 支持堆分配和虚函数）或 D 的 `enum` 强制编译期求值不同——Rust 的 `const` 系统保守但逐步扩展，每次扩展需确保编译期求值的可判定性。
 > [来源: [Rust Reference — const fn](https://doc.rust-lang.org/reference/items/functions.html#const-functions)] ·
-> [来源: [Rust Const Eval](https://doc.rust-lang.org/nightly/unstable-book/language-features/const-fn.html)]
+> [来源: [Rust Const Eval](https://doc.rust-lang.org/reference/const_eval.html)]
 
 ### 10.2 边界测试：类型不匹配的基础错误
 
@@ -628,7 +630,7 @@ fn main() {
 
 > [来源: [ICFP 2014 — Extensible Effects](https://dl.acm.org/doi/10.1145/2628136.2628161)]
 > [来源: [Haskell — IO Monad](https://www.haskell.org/tutorial/io.html)]
-> [来源: [Rust [RFC 2593](https://rust-lang.github.io/rfcs/2593.html) — Effects](https://rust-lang.github.io/rfcs/)]
+> [来源: [Rust [RFC 2593](https://github.com/rust-lang/rfcs/pull/2593) — Effects](https://rust-lang.github.io/rfcs/)]
 > [来源: [Rust Reference — Const Evaluation](https://doc.rust-lang.org/reference/const_eval.html)]
 > [来源: [Rust Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)]
 > **权威来源**:

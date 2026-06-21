@@ -128,6 +128,12 @@
     - [10.3 边界测试：`Box::into_raw` 后双重释放（运行时 UB）](#103-边界测试boxinto_raw-后双重释放运行时-ub)
     - [10.4 边界测试：Box::leak 后的可变借用与原始 Box 的关系（编译错误）](#104-边界测试boxleak-后的可变借用与原始-box-的关系编译错误)
     - [10.3 边界测试：返回局部变量的悬垂引用](#103-边界测试返回局部变量的悬垂引用)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Stack vs Heap（理解层）](#测验-1stack-vs-heap理解层)
+    - [测验 2：Drop 与 RAII（应用层）](#测验-2drop-与-raii应用层)
+    - [测验 3：Box 与递归类型（应用层）](#测验-3box-与递归类型应用层)
+    - [测验 4：内存布局对齐（分析层）](#测验-4内存布局对齐分析层)
+    - [测验 5：内存泄漏与 `Rc` 循环（分析层）](#测验-5内存泄漏与-rc-循环分析层)
   - [实践](#实践)
   - [参考来源](#参考来源)
   - [`ManuallyDrop` 模式匹配（Rust 1.96）](#manuallydrop-模式匹配rust-196)
@@ -138,8 +144,8 @@
 > [来源: [Wikipedia — Memory Management](https://en.wikipedia.org/wiki/Memory_management)]
 > [来源: [Wikipedia — Smart Pointer](https://en.wikipedia.org/wiki/Smart_pointer)]
 > [来源: [Wikipedia — Reference Counting](https://en.wikipedia.org/wiki/Reference_counting)]
-> [来源: [RFC 1857 — Non-Lexical Lifetimes](https://rust-lang.github.io/rfcs/1857-nll.html)]
-> [来源: [RFC 2094 — NLL](https://rust-lang.github.io/rfcs/2094-nll.html)])
+> [来源: [RFC 1857 — Non-Lexical Lifetimes](https://rust-lang.github.io/rfcs//1857-stabilize-drop-order.html)]
+> [来源: [RFC 2094 — NLL](https://rust-lang.github.io/rfcs//2094-nll.html)])
 
 ## 一、权威定义（Definition）
 
@@ -494,7 +500,7 @@ fn main() {
 
 ### 5.5 补充：`Pin<&mut T>` 的堆内存语义与自引用安全
 
-> **[Rust Reference: Pin](https://doc.rust-lang.org/std/pin/index.html)** · **[RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html)** `Pin<P>` 是对指针类型 `P` 的包装，提供**地址不变性（address stability）**保证：当 `T: !Unpin` 时，`Pin<P<T>>` 确保 `T` 的内存地址不会被移动。这是自引用结构（self-referential structs）在 Safe Rust 中安全表达的关键。✅ 已验证
+> **[Rust Reference: Pin](https://doc.rust-lang.org/std/pin/index.html)** · **[RFC 2349](https://rust-lang.github.io/rfcs//2349-pin.html)** `Pin<P>` 是对指针类型 `P` 的包装，提供**地址不变性（address stability）**保证：当 `T: !Unpin` 时，`Pin<P<T>>` 确保 `T` 的内存地址不会被移动。这是自引用结构（self-referential structs）在 Safe Rust 中安全表达的关键。✅ 已验证
 
 #### 栈 Pin vs 堆 Pin
 
@@ -1598,7 +1604,7 @@ Box<MaybeUninit<T>>.field → Box<MaybeUninit<FieldType>>
 
 **关键跟踪**：
 
-- [Rust Project Goals: Beyond the &](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)
+- [Rust Project Goals: Beyond the &](https://rust-lang.github.io/rust-project-goals/2026/)
 - Tracking Issue: Arbitrary Self Types v2
 - WG: Safe Pin Projection (formal verification)
 
@@ -2007,7 +2013,7 @@ fn main() {
 
 解决方案：使用 `Weak<T>` 打破循环：
 
-```rust
+```rust,ignore
 struct Node {
     next: Option<Rc<RefCell<Node>>>,
     prev: Option<Weak<RefCell<Node>>>,
@@ -2027,7 +2033,7 @@ struct Node {
 
 ## 参考来源
 
-> [来源: [RFC 2445 — Allocator API](https://rust-lang.github.io/rfcs/2445-allocator-api.html)]
+> [来源: [RFC 2445 — Allocator API](https://github.com/rust-lang/rfcs/pull/2445)]
 
 > [来源: [Rust Global Allocator](https://doc.rust-lang.org/std/alloc/trait.GlobalAlloc.html)]
 

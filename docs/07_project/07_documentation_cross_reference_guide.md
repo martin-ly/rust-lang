@@ -184,10 +184,10 @@ docs/
 
 | 文档类型 | 文档路径 | 交叉引用链接 |
 | :--- | :--- | :--- |
-| **主索引** | `crates/c01_ownership_borrow_scope/docs/tier_01_foundations/02_主索引导航.md` | ←→ [ownership_cheatsheet](../02_reference/quick_reference/02_ownership_cheatsheet.md) ←→ [UNSAFE_RUST_GUIDE](../05_guides/05_unsafe_rust_guide.md) |
+| **主索引** | `crates/c01_ownership_borrow_scope/docs/tier_01_foundations/02_主索引导航.md` | ←→ [ownership_cheatsheet](../02_reference/quick_reference/02_ownership_cheatsheet.md) ←→ [UNSAFE_RUST_GUIDE](../../concept/03_advanced/03_unsafe.md) |
 | **速查卡** | [02_ownership_cheatsheet.md](../02_reference/quick_reference/02_ownership_cheatsheet.md) | → [ownership_model](../research_notes/formal_methods/10_ownership_model.md) → [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) → [PROOF_INDEX](../research_notes/10_proof_index.md) |
 | **形式化** | [10_ownership_model.md](../research_notes/formal_methods/10_ownership_model.md) | ←→ [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) ←→ [type_system_foundations](../research_notes/type_theory/10_type_system_foundations.md) ←→ [CORE_THEOREMS](../research_notes/10_core_theorems_full_proofs.md) |
-| **指南** | [05_unsafe_rust_guide.md](../05_guides/05_unsafe_rust_guide.md) | ← [ownership_model](../research_notes/formal_methods/10_ownership_model.md) ← [SAFE_UNSAFE_ANALYSIS](../research_notes/10_safe_unsafe_comprehensive_analysis.md) |
+| **指南** | [05_unsafe_rust_guide.md](../../concept/03_advanced/03_unsafe.md) | ← [ownership_model](../research_notes/formal_methods/10_ownership_model.md) ← [SAFE_UNSAFE_ANALYSIS](../research_notes/10_safe_unsafe_comprehensive_analysis.md) |
 | **思维表征** | [MIND_MAP_COLLECTION](../04_thinking/04_mind_map_collection.md) §2 | ←→ [ownership_model](../research_notes/formal_methods/10_ownership_model.md) ←→ [DECISION_GRAPH_NETWORK](../04_thinking/04_decision_graph_network.md) §1 |
 
 **关键交叉引用链**:
@@ -423,7 +423,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 
 | 速查卡 | 对应指南 | 交叉类型 |
 | :--- | :--- | :--- |
-| [ownership_cheatsheet](../02_reference/quick_reference/02_ownership_cheatsheet.md) | [UNSAFE_RUST_GUIDE](../05_guides/05_unsafe_rust_guide.md) | 理论 ↔ 实践 |
+| [ownership_cheatsheet](../02_reference/quick_reference/02_ownership_cheatsheet.md) | [UNSAFE_RUST_GUIDE](../../concept/03_advanced/03_unsafe.md) | 理论 ↔ 实践 |
 | [type_system](../02_reference/quick_reference/02_type_system.md) | [ADVANCED_TOPICS_DEEP_DIVE](../05_guides/05_advanced_topics_deep_dive.md) | 基础 ↔ 高级 |
 | [async_patterns](../02_reference/quick_reference/02_async_patterns.md) | [ASYNC_PROGRAMMING_USAGE_GUIDE](../05_guides/05_async_programming_usage_guide.md) | 语法 ↔ 应用 |
 | [threads_concurrency_cheatsheet](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) | [THREADS_CONCURRENCY_USAGE_GUIDE](../05_guides/05_threads_concurrency_usage_guide.md) | 语法 ↔ 应用 |

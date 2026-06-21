@@ -6,13 +6,13 @@
 
 # 文档生态：rustdoc、文档测试与 API 文档规范
 >
-> **EN**: Testing
-> **Summary**: Testing. Core Rust concept covering testing strategies, practical applications, mechanism analysis.
+> **EN**: Documentation
+> **Summary**: Writing and publishing Rust documentation with rustdoc, doc tests, and crate docs.
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: F×App — 文档工具和约定的应用
-> **定位**: 覆盖 Rust **文档生态**的核心工具与实践——从 rustdoc 的渲染机制、文档测试（doctest）、到 API 文档规范（[RFC 1574](https://rust-lang.github.io/rfcs/1574.html)）和 mdBook 静态站点生成，分析 Rust 文档文化如何成为语言生态的竞争优势。
+> **定位**: 覆盖 Rust **文档生态**的核心工具与实践——从 rustdoc 的渲染机制、文档测试（doctest）、到 API 文档规范（[RFC 1574](https://rust-lang.github.io/rfcs//1574-more-api-documentation-conventions.html)）和 mdBook 静态站点生成，分析 Rust 文档文化如何成为语言生态的竞争优势。
 > **前置概念**: [Macros](../03_advanced/04_macros.md) · [Module System](../02_intermediate/10_module_system.md)
 > **后置概念**: [Cargo Toolchain](./01_toolchain.md) · [WebAssembly](./11_webassembly.md)
 
@@ -180,7 +180,7 @@ Rust 文档文化的独特性:
   └───────────┴─────────────────┴─────────────────┴─────────────────┘
 ```
 
-> **文档文化洞察**: Rust 的文档生态不是**事后补充**，而是**开发流程的组成部分**——从 [RFC 1574](https://rust-lang.github.io/rfcs/1574.html) 的标准化到 docs.rs 的自动托管，文档质量被提升到与代码质量同等重要的地位。
+> **文档文化洞察**: Rust 的文档生态不是**事后补充**，而是**开发流程的组成部分**——从 [RFC 1574](https://rust-lang.github.io/rfcs//1574-more-api-documentation-conventions.html) 的标准化到 docs.rs 的自动托管，文档质量被提升到与代码质量同等重要的地位。
 > [来源: [RFC 1574 — API Documentation](https://github.com/rust-lang/rfcs/pull/1574)]
 
 ---
@@ -223,8 +223,8 @@ pub fn documented() {}
 //! - 功能 B
 ```
 
-> **注释规范**: `///` 用于项文档，`//!` 用于容器（模块/crate）文档。[RFC 1574](https://rust-lang.github.io/rfcs/1574.html) 建议使用 Markdown 格式和特定章节结构（Examples、Panics、Errors、Safety）。
-> [来源: [RFC 1574 — Documentation Conventions](https://rust-lang.github.io/rfcs/1574-more-api-documentation-conventions.html)]
+> **注释规范**: `///` 用于项文档，`//!` 用于容器（模块/crate）文档。[RFC 1574](https://rust-lang.github.io/rfcs//1574-more-api-documentation-conventions.html) 建议使用 Markdown 格式和特定章节结构（Examples、Panics、Errors、Safety）。
+> [来源: [RFC 1574 — Documentation Conventions](https://rust-lang.github.io/rfcs//1574-more-api-documentation-conventions.html)]
 
 ---
 
@@ -355,7 +355,7 @@ API 文档规范（RFC 1574 推荐）:
 ```
 
 > **最佳实践**: Rust 的文档规范不是**可选的**——`cargo doc` 会对未文档化的公共项发出警告（`#[warn(missing_docs)]`）， crates.io 上的高质量 crate 都有完整的文档。
-> [来源: [Rust API Guidelines — Documentation](https://rust-lang.github.io/api-guidelines/documentation.html)]
+> [来源: [Rust API Guidelines — Documentation](https://rust-lang.github.io/api-guidelines//documentation.html)]
 
 ---
 
@@ -466,7 +466,7 @@ graph TD
 ```
 
 > **陷阱总结**: 文档生态的陷阱主要与**doctest 可靠性**、**链接有效性**、**同步维护**和**文档优先级**相关。
-> [来源: [Rust [RFC 1574](https://rust-lang.github.io/rfcs/1574.html) — Common Mistakes](https://rust-lang.github.io/rfcs/1574-more-api-documentation-conventions.html)]
+> [来源: [Rust [RFC 1574](https://rust-lang.github.io/rfcs//1574-more-api-documentation-conventions.html) — Common Mistakes](https://rust-lang.github.io/rfcs//1574-more-api-documentation-conventions.html)]
 
 ---
 
@@ -479,7 +479,7 @@ graph TD
 | [mdBook Guide](https://rust-lang.github.io/mdBook/) | ✅ 一级 | 静态站点生成器 |
 | [RFC 1946 — Intra-doc Links](https://github.com/rust-lang/rfcs/pull/1946) | ✅ 一级 | 内部链接 RFC |
 | [docs.rs](https://docs.rs/about) | ✅ 一级 | crate 文档托管 |
-| [Rust API Guidelines — Documentation](https://rust-lang.github.io/api-guidelines/documentation.html) | ✅ 一级 | API 文档指南 |
+| [Rust API Guidelines — Documentation](https://rust-lang.github.io/api-guidelines//documentation.html) | ✅ 一级 | API 文档指南 |
 
 ---
 

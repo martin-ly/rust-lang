@@ -3,8 +3,8 @@
 > **代码状态**: [综述级 — 待补充代码]
 
 >
-> **EN**: `std::autodiff`：Rust 官方自动微分前沿追踪 (Chinese)
-> **Summary**: `std::autodiff`：Rust 官方自动微分前沿追踪 (Chinese). Emerging Rust feature or ecosystem trend: `std::autodiff`：Rust 官方自动微分前沿追踪 (Chinese).
+> **EN**: Std Autodiff Preview
+> **Summary**: Std Autodiff Preview: emerging Rust language feature or ecosystem trend.
 >
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
@@ -25,8 +25,8 @@
 > **来源**:
 >
 > [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) ·
-> [AutoDiff RFC Draft](https://github.com/rust-lang/rfcs/pull/0000-autodiff) ·
-> [rustc_autodiff crate](https://github.com/Rust-AutoDiff/rustc_autodiff) ·
+> [AutoDiff Tracking Issue](https://github.com/rust-lang/rust/issues/124509) ·
+> [rustc_autodiff crate](https://github.com/rust-lang/rust/issues/124509) ·
 > [Burn ADBackend](https://burn.dev/)
 > **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
 
@@ -220,7 +220,7 @@ std::autodiff 适合所有 Rust 数值计算?
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
 | [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) | ✅ 一级 | 官方项目目标 |
-| [rustc_autodiff GitHub](https://github.com/Rust-AutoDiff/rustc_autodiff) | ⚠️ 社区 | 实验性编译器插件 |
+| [rustc_autodiff GitHub](https://github.com/rust-lang/rust/issues/124509) | ⚠️ 社区 | 实验性编译器插件 |
 | [Burn ADBackend](https://burn.dev/) | ✅ 一级 | 当前 Rust 最成熟的 AD 方案 |
 | [JAX Autodiff](https://jax.readthedocs.io/en/latest/jax-101/01-jax-basics.html) | ✅ 一级 | 函数变换范式的参考实现 |
 | [Automatic Differentiation in ML](https://arxiv.org/abs/1502.05767) | ✅ 学术 | 经典综述论文 |

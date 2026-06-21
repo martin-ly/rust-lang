@@ -2,8 +2,8 @@
 
 # 零拷贝解析与序列化优化
 >
-> **EN**: 零拷贝解析与序列化优化 (Chinese)
-> **Summary**: 零拷贝解析与序列化优化 (Chinese). Core Rust concept covering mechanism analysis, memory safety guarantees, performance optimization.
+> **EN**: Zero Copy Parsing
+> **Summary**: Zero Copy Parsing: advanced Rust topics, performance/runtime considerations, and ecosystem patterns.
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 应用
 > **定位**: 探讨 Rust 中的**零拷贝**（Zero-Copy）技术——从字节切片直接解析结构化数据，无需中间复制，分析内存安全与性能权衡。
@@ -17,9 +17,9 @@
 
 ---
 
-> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> **来源**: [std::io](https://doc.rust-lang.org/std/io/) · [Rust By Example — File I/O](https://doc.rust-lang.org/rust-by-example/std_misc/file.html)
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
-> [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html) ·
+> [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs//2000-const-generics.html) ·
 > [Wikipedia — Zero-copy](https://en.wikipedia.org/wiki/Zero-copy)
 
 > **对应 Crate**: [`c10_networks`](../../crates/c10_networks/)

@@ -21,6 +21,8 @@
 > **后置概念**: [WebAssembly](../06_ecosystem/11_webassembly.md) ·
 > [ECS](../06_ecosystem/04_application_domains.md)
 
+>
+> **来源**: [Bevy Engine](https://bevyengine.org/) · [wgpu](https://docs.rs/wgpu/)
 ---
 
 > **来源**: [Bevy Engine](https://bevyengine.org/) ·
@@ -121,7 +123,7 @@ ECS (Entity-Component-System):
 ```
 
 > **认知功能**: **ECS 将数据与逻辑解耦，实现缓存友好和天然并行**——Rust 的类型系统完美支持这种数据导向设计。
-> [来源: [Bevy ECS](https://bevyengine.org/learn/book/getting-started/ecs/)]
+> [来源: [Bevy ECS](https://bevyengine.org/learn/book/)]
 
 ---
 
@@ -162,7 +164,7 @@ Bevy 引擎架构:
 ```
 
 > **Bevy 洞察**: **Bevy 是 Rust 游戏开发的标杆**——利用 Rust 的所有权和类型系统实现编译期系统依赖图验证。
-> [来源: [Bevy Architecture](https://bevyengine.org/learn/book/getting-started/ecs/)]
+> [来源: [Bevy Architecture](https://bevyengine.org/learn/book/)]
 
 ---
 

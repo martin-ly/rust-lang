@@ -6,7 +6,7 @@
 >
 # Data Engineering（数据工程）
 >
-> **EN**: Data Engineering（数据工程） (Chinese)
+> **EN**: Data Engineering
 > **Summary**: Data Engineering. Guide to 48 Data Engineering.
 >
 > **受众**: [进阶]
@@ -17,6 +17,8 @@
 > **前置依赖**: [类型系统](../01_foundation/04_type_system.md) · [泛型](../02_intermediate/02_generics.md) · [Async/Await](../03_advanced/02_async.md) · [Machine Learning Ecosystem](./46_machine_learning_ecosystem.md)
 > **后置延伸**: [流处理生态](./36_stream_processing_ecosystem.md) · [云原生](./24_cloud_native.md) · [性能优化](./15_performance_optimization.md)
 
+>
+> **来源**: [polars](https://docs.rs/polars/) · [arrow-rs](https://docs.rs/arrow/) · [datafusion](https://docs.rs/datafusion/)
 ---
 
 > **来源**: [Apache Arrow](https://arrow.apache.org/) ·

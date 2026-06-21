@@ -7,7 +7,6 @@
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[FFI](../../knowledge/03_advanced/02_ffi.md)
-
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 系统分析 Rust 与 C/C++ 等外部代码交互的**Foreign Function Interface (FFI)** 机制，探讨 `extern` 块、ABI 兼容、`unsafe` 边界管理以及 `bindgen`/`cbindgen` 工具链。
@@ -729,7 +728,7 @@ FFI 调用需要 `unsafe` 的根本原因：
 - `extern "Rust"` 的名字修饰包含 crate 和模块路径（如 `_ZN4mycrate3foo17h...`）
 - `extern "C"` 的名字修饰简单（如 `foo`），C 编译器可以直接链接
 
-```rust
+```rust,ignore
 // Rust 侧
 extern "C" {
     fn c_function(x: i32) -> i32;  // 使用 C 调用约定
@@ -802,7 +801,7 @@ pub struct Student {
 
 **题目**: 以下代码存在什么潜在问题？
 
-```rust
+```rust,ignore
 use std::ffi::CString;
 use std::os::raw::c_char;
 
@@ -830,7 +829,7 @@ fn call_process(input: &str) {
 
 这是 FFI 中最常见的**所有权转移陷阱**：
 
-```rust
+```rust,ignore
 fn call_process(input: &str) {
     let c_string = CString::new(input).unwrap();
     let ptr = c_string.into_raw();  // 所有权转移给 C
@@ -850,7 +849,7 @@ fn call_process(input: &str) {
 
 **正确模式**：
 
-```rust
+```rust,ignore
 fn call_process(input: &str) {
     let c_string = CString::new(input).unwrap();
     let ptr = c_string.into_raw();
@@ -865,7 +864,7 @@ fn call_process(input: &str) {
 
 **如果 C 会释放内存**：
 
-```rust
+```rust,ignore
 // C 侧承诺：process_string 会释放传入的指针
 unsafe { process_string(ptr); }
 // 不要调用 from_raw！C 已经释放了

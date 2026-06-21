@@ -1,7 +1,10 @@
+> **Summary**: Advanced Layer Index Legacy. Core Rust concept.
 > **内容分级**: [综述级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 
 # L3 高级概念层索引（Advanced Layer Index）
+>
+> **EN**: Advanced Layer Index Legacy
 
 >
 > **受众**: [专家]
@@ -11,6 +14,8 @@
 > **规范文件**: [`03_advanced/README.md`](03_advanced/README.md)
 > **[来源: Rust Reference - Concurrency]** · **[来源: Rustonomicon]** · **[来源: Wikipedia - Asynchronous I/O]** · **[来源: Wikipedia - Memory Safety]**
 
+>
+> **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
 ---
 
 ## 📑 目录

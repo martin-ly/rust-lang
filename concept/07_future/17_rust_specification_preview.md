@@ -1,10 +1,9 @@
 # Rust 语言规范预研：从参考文档到形式化规范
 
 > **代码状态**: ✅ 含可编译示例
-
 >
-> **EN**: Formal Methods
-> **Summary**: Formal Methods. Core Rust concept covering formal methods foundations, verification techniques, mechanism analysis.
+> **EN**: Rust Specification Preview
+> **Summary**: Preview of the official Rust specification effort and its relation to the Reference.
 >
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`

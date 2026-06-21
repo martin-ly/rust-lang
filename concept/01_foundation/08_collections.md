@@ -6,8 +6,8 @@
 
 # 集合类型：Rust 标准库的数据结构谱系
 >
-> **EN**: 集合类型：Rust 标准库的数据结构谱系 (Chinese)
-> **Summary**: 集合类型：Rust 标准库的数据结构谱系 (Chinese). Core Rust concept covering mechanism analysis, performance optimization, ownership and borrowing.
+> **EN**: Collections
+> **Summary**: Collections: core Rust concepts, syntax, and examples.
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[集合](../../knowledge/02_intermediate/01_collections.md)
@@ -764,7 +764,7 @@ fn main() {
 
 修复方案：
 
-```rust
+```rust,ignore
 let value = map.get("key").unwrap().clone();
 map.insert("other".to_string(), vec![4, 5, 6]);
 println!("{:?}", value);
@@ -778,7 +778,7 @@ println!("{:?}", value);
 
 以下代码能否编译？
 
-```rust
+```rust,compile_fail
 fn main() {
     let mut v = vec![1, 2, 3];
     for i in &v {
@@ -798,7 +798,7 @@ fn main() {
 
 修复方案（若需扩展 vec）：先收集再扩展：
 
-```rust
+```rust,ignore
 let to_add: Vec<_> = v.iter().copied().collect();
 v.extend(to_add);
 ```

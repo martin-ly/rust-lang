@@ -1,13 +1,15 @@
 # Rust 语义表达力多视角深化（Multiview Expressiveness Analysis）
 >
-> **EN**: Rust 语义表达力多视角深化（Multiview Expressiveness Analysis） (Chinese)
-> **Summary**: Rust 语义表达力多视角深化. Core Rust concept covering concurrent programming patterns.
+> **EN**: Expressiveness Multiview
+> **Summary**: Expressiveness Multiview. Core Rust concept.
 > **受众**: [研究者]
 > **定位**: 本文件从**纵向理论视角**（计算/类型/控制/内存/并发/抽象/安全）深化 Rust 的表达能力，与 `semantic_expressiveness.md` 的**横向七维光谱**形成正交互补。前者回答「Rust 能表达什么」，后者回答「Rust 从哪些维度表达」。
 > **原则**: 不做"语法特性列表"，聚焦"每个理论视角下 Rust 的表达边界、与其他语言的等价性、以及形式化基础"。
 > **对齐来源**: [Rust Reference] · [Rust RFCs] · [RustBelt/Oxide] · [Felleisen 表达力理论] · [PL 语义学经典]
 > **对比语言**: Rust · C++ · Go · Haskell · OCaml · Erlang
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 > **Bloom 层级**: 分析 → 评价 → 创造
@@ -294,7 +296,7 @@ impl<'a> Future for FetchAndProcessFuture<'a> {
 > 1. **直接风格 async/await**（源代码）
 > 2. **显式 Future 状态机**（编译器生成）
 > 3. **CPS 变换**（理论对应）
-> 等价性在「相同的 poll 调用序列产生相同的输出」的意义上成立。 [来源: [RFC 2394](https://rust-lang.github.io/rfcs/2394.html), *Asynchronous Programming in Rust*; Danvy & Filinski, *Representing Control*, 1990]
+> 等价性在「相同的 poll 调用序列产生相同的输出」的意义上成立。 [来源: [RFC 2394](https://rust-lang.github.io/rfcs//2394-async_await.html), *Asynchronous Programming in Rust*; Danvy & Filinski, *Representing Control*, 1990]
 
 ```mermaid
 graph LR
@@ -691,7 +693,7 @@ graph TD
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) ·
-> [Rust RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html) ·
+> [Rust RFC 2394](https://rust-lang.github.io/rfcs//2394-async_await.html) ·
 > [Felleisen 1990](https://doi.org/10.1007/BF00398256) ·
 > [Wadler 1989 *Theorems for Free!*](https://doi.org/10.1145/99370.99404) ·
 > [RustBelt POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/paper.pdf) ·

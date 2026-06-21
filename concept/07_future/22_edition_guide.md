@@ -1,10 +1,9 @@
 # Edition 2024 完全指南：新特性与迁移策略
 
 > **代码状态**: ✅ 含可编译示例
-
 >
-> **EN**: Edition 2024 完全指南：新特性与迁移策略 (Chinese)
-> **Summary**: Edition 2024 完全指南：新特性与迁移策略 (Chinese). Core Rust concept covering mechanism analysis, lifetime semantics, Rust edition mechanism.
+> **EN**: Edition Guide
+> **Summary**: Edition Guide: emerging Rust language feature or ecosystem trend.
 >
 > **受众**: [专家]
 > **内容分级**: [综述级]
@@ -20,7 +19,7 @@
 > **来源**:
 > [Rust Edition Guide — 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) ·
 > [Rust Blog — Edition 2024](https://blog.rust-lang.org/) ·
-> [RFC 3501 — Edition 2024](https://rust-lang.github.io/rfcs/3501-edition-2024.html) ·
+> [RFC 3501 — Edition 2024](https://rust-lang.github.io/rfcs//3501-edition-2024.html) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
 > [Wikipedia — Software Release Life Cycle](https://en.wikipedia.org/wiki/Software_release_life_cycle)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
@@ -220,7 +219,7 @@ fn async_stream() -> impl Stream<Item = i32> {
 ```
 
 > **Gen Blocks 洞察**: **gen blocks 是 Rust 生成器的语法糖**——它将复杂的状态机手写代码简化为直观的 yield 语法。
-> [来源: [RFC 3513 — Gen Blocks](https://rust-lang.github.io/rfcs/3513-gen-blocks.html)]
+> [来源: [RFC 3513 — Gen Blocks](https://rust-lang.github.io/rfcs//3513-gen-blocks.html)]
 
 ---
 
@@ -256,7 +255,7 @@ let closure = async |x: &str| -> String {
 ```
 
 > **Async Closures 洞察**: **async closures 解决了 async move 闭包的捕获语义问题**——参数和环境的捕获更直观、更灵活。
-> [来源: [Async Closures RFC](https://rust-lang.github.io/rfcs/3668-async-closures.html)]
+> [来源: [Async Closures RFC](https://rust-lang.github.io/rfcs//3668-async-closures.html)]
 
 ---
 
@@ -290,7 +289,7 @@ fn foo<'a, 'b>(x: &'a str, y: &'b str) -> impl Display + use<'a> {
 ```
 
 > **Lifetime 捕获洞察**: **精确的 lifetime captures** 是 Rust **类型系统的精细化**——它减少了过度保守的借用检查拒绝。
-> [来源: [impl Trait Lifetime Capture](https://rust-lang.github.io/rfcs/3498-lifetime-capture-of-impl-trait.html)]
+> [来源: [impl Trait Lifetime Capture](https://rust-lang.github.io/rfcs//3498-lifetime-capture-rules-2024.html)]
 
 ---
 
@@ -473,7 +472,7 @@ graph TD
 ```
 
 > **陷阱总结**: Edition 迁移的陷阱主要与**自动迁移信任**、**混合 Edition 误解**、**关键字冲突**、**过度使用新特性**和**MSRV**相关。
-> [来源: [Rust Edition FAQ](https://doc.rust-lang.org/edition-guide/faq.html)]
+> [来源: [Rust Edition FAQ](https://doc.rust-lang.org/edition-guide/index.html)]
 
 ---
 
@@ -482,9 +481,9 @@ graph TD
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
 | [Rust Edition Guide — 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) | ✅ 一级 | 官方迁移指南 |
-| [RFC 3501 — Edition 2024](https://rust-lang.github.io/rfcs/3501-edition-2024.html) | ✅ 一级 | Edition 设计 RFC |
-| [RFC 3513 — Gen Blocks](https://rust-lang.github.io/rfcs/3513-gen-blocks.html) | ✅ 一级 | 生成器 RFC |
-| [Async Closures RFC](https://rust-lang.github.io/rfcs/3668-async-closures.html) | ✅ 一级 | 异步闭包 |
+| [RFC 3501 — Edition 2024](https://rust-lang.github.io/rfcs//3501-edition-2024.html) | ✅ 一级 | Edition 设计 RFC |
+| [RFC 3513 — Gen Blocks](https://rust-lang.github.io/rfcs//3513-gen-blocks.html) | ✅ 一级 | 生成器 RFC |
+| [Async Closures RFC](https://rust-lang.github.io/rfcs//3668-async-closures.html) | ✅ 一级 | 异步闭包 |
 | [Rust Blog](https://blog.rust-lang.org/) | ✅ 一级 | 官方公告 |
 
 ---
@@ -554,7 +553,7 @@ fn main() {
 > 这与 C++ 的标准版本（`-std=c++17`、`-std=c++20`，允许混合链接）或 Java 的版本（字节码兼容）不同——Rust 的 Edition 是 crate 级别的，同一二进制可混合多个 Edition 的 crate。
 > Edition 的设计目标：在保持生态兼容的前提下，逐步改进语言和标准库。
 > [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)] ·
-> [来源: [Rust RFC 2052](https://rust-lang.github.io/rfcs/2052-epochs.html)]
+> [来源: [Rust RFC 2052](https://rust-lang.github.io/rfcs//2052-epochs.html)]
 
 ### 10.2 边界测试：`gen` 关键字保留与宏解析冲突（编译错误）
 
@@ -582,7 +581,7 @@ fn main() {
 > 宏名 `gen!` 在语法解析阶段就与关键字冲突，即使宏从未在 Edition 2024 代码中使用。
 > 这是保留关键字策略的代价：语言扩展需要"征用"标识符空间。
 > [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)] ·
-> [来源: [Rust RFC 2052](https://rust-lang.github.io/rfcs/2052-epochs.html)]
+> [来源: [Rust RFC 2052](https://rust-lang.github.io/rfcs//2052-epochs.html)]
 
 ### 10.6 边界测试：Edition 迁移后的 `cargo fix` 残留问题（编译错误）
 

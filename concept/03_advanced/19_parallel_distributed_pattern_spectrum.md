@@ -2,8 +2,8 @@
 
 # 并行与分布式模式谱系：从线程池到共识算法
 >
-> **EN**: 并行与分布式模式谱系：从线程池到共识算法 (Chinese)
-> **Summary**: 并行与分布式模式谱系：从线程池到共识算法 (Chinese). Guide to 19 Parallel Distributed Pattern Spectrum.
+> **EN**: Parallel Distributed Pattern Spectrum
+> **Summary**: Parallel Distributed Pattern Spectrum: advanced Rust topics, performance/runtime considerations, and ecosystem patterns.
 > **受众**: [专家]
 > **层级**: L3 高级概念 — 并发/分布式系统设计
 > **A/S/P 标记**: **S+A** — Structure + Application
@@ -22,6 +22,8 @@
 > [Amazon Science — Must Framework] ·
 > [Rust Atomics and Locks](https://marabos.nl/atomics/)
 
+>
+> **来源**: [std::thread](https://doc.rust-lang.org/std/thread/) · [Rayon Docs](https://docs.rs/rayon/) · [TRPL — Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
 ---
 
 > **Bloom 层级**: 分析 → 评价 → 创造
@@ -67,6 +69,12 @@
     - [10.8 边界测试：生命周期参数的不匹配返回](#108-边界测试生命周期参数的不匹配返回)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [参考来源](#参考来源)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：`std::thread::spawn` 与 `tokio::spawn` 创建的"任务"有什么本质区别？（理解层）](#测验-1stdthreadspawn-与-tokiospawn-创建的任务有什么本质区别理解层)
+    - [测验 2：Rayon 的 `par_iter()` 与标准库的 `iter()` 在 API 使用上有什么区别？（理解层）](#测验-2rayon-的-par_iter-与标准库的-iter-在-api-使用上有什么区别理解层)
+    - [测验 3：Actor 模型在 Rust 中的典型实现方式是什么？（理解层）](#测验-3actor-模型在-rust-中的典型实现方式是什么理解层)
+    - [测验 4：分布式系统中，Rust 的 Serde + 强类型系统在消息序列化上有什么优势？（理解层）](#测验-4分布式系统中rust-的-serde--强类型系统在消息序列化上有什么优势理解层)
+    - [测验 5：`crossbeam::channel` 与 `std::sync::mpsc` 的主要改进是什么？（理解层）](#测验-5crossbeamchannel-与-stdsyncmpsc-的主要改进是什么理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)

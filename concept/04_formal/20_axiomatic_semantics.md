@@ -2,7 +2,7 @@
 
 # Axiomatic Semantics（公理语义）
 >
-> **EN**: Axiomatic Semantics（公理语义） (Chinese)
+> **EN**: Axiomatic Semantics
 > **Summary**: Axiomatic Semantics. Guide to 20 Axiomatic Semantics.
 > **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
@@ -17,59 +17,7 @@
 
 > **后置概念**: [Comparative Studies](../05_comparative/01_rust_vs_cpp.md)
 
-## 📑 目录
-
-- [Axiomatic Semantics（公理语义）](#axiomatic-semantics公理语义)
-  - [📑 目录](#-目录)
-  - [一、权威定义（Definition）](#一权威定义definition)
-    - [1.1 Hoare 逻辑与霍尔三元组](#11-hoare-逻辑与霍尔三元组)
-    - [1.2 最弱前置条件（Weakest Precondition）](#12-最弱前置条件weakest-precondition)
-    - [1.3 最强后置条件（Strongest Postcondition）](#13-最强后置条件strongest-postcondition)
-    - [1.4 三种语义谱系：操作 · 指称 · 公理](#14-三种语义谱系操作--指称--公理)
-  - [二、概念属性矩阵](#二概念属性矩阵)
-    - [2.1 公理语义方法对比矩阵](#21-公理语义方法对比矩阵)
-  - [三、技术细节](#三技术细节)
-    - [3.1 Rust 赋值规则的公理化](#31-rust-赋值规则的公理化)
-    - [3.2 所有权转移的 wp 计算](#32-所有权转移的-wp-计算)
-    - [3.3 借用规则的不变式](#33-借用规则的不变式)
-    - [3.4 unsafe 块的公理边界](#34-unsafe-块的公理边界)
-  - [四、工具链映射](#四工具链映射)
-    - [4.1 Prusti：Viper 后端的契约推导](#41-prustiviper-后端的契约推导)
-    - [4.2 Creusot：Why3 逻辑下的 WP 计算](#42-creusotwhy3-逻辑下的-wp-计算)
-    - [4.3 Kani：符号执行与断言验证](#43-kani符号执行与断言验证)
-  - [五、反命题与边界分析](#五反命题与边界分析)
-    - [5.1 反命题树](#51-反命题树)
-    - [5.2 边界极限](#52-边界极限)
-  - [六、在 Rust 语义谱系中的位置](#六在-rust-语义谱系中的位置)
-  - [十、边界测试](#十边界测试)
-    - [10.1 边界测试：wp 计算的无限 descending chain（逻辑错误）](#101-边界测试wp-计算的无限-descending-chain逻辑错误)
-    - [10.2 边界测试：借用不变式违反的验证失败（验证错误）](#102-边界测试借用不变式违反的验证失败验证错误)
-    - [10.3 边界测试：unsafe 块的公理逃逸（运行时 UB）](#103-边界测试unsafe-块的公理逃逸运行时-ub)
-  - [零、认知路径（Cognitive Path）](#零认知路径cognitive-path)
-    - [路径总览](#路径总览)
-    - [Step 1: 为什么需要公理语义？](#step-1-为什么需要公理语义)
-    - [Step 2: wp 和 sp 怎么计算？](#step-2-wp-和-sp-怎么计算)
-    - [Step 3: Rust 的所有权怎么公理化？](#step-3-rust-的所有权怎么公理化)
-    - [Step 4: 工具怎么自动验证？](#step-4-工具怎么自动验证)
-    - [Step 5: 公理语义的边界在哪里？](#step-5-公理语义的边界在哪里)
-  - [六、定理推理链](#六定理推理链)
-    - [6.1 定理一致性矩阵](#61-定理一致性矩阵)
-    - [6.2 反命题决策树](#62-反命题决策树)
-  - [七、工具链深度对比矩阵](#七工具链深度对比矩阵)
-    - [7.1 Prusti vs Creusot vs Kani](#71-prusti-vs-creusot-vs-kani)
-  - [八、更多边界测试](#八更多边界测试)
-    - [10.4 边界测试：Prusti 对泛型 Trait 的验证失败](#104-边界测试prusti-对泛型-trait-的验证失败)
-    - [10.5 边界测试：Kani 的路径爆炸与有界验证](#105-边界测试kani-的路径爆炸与有界验证)
-    - [10.6 边界测试：Creusot 的 Ghost 代码与零成本抽象](#106-边界测试creusot-的-ghost-代码与零成本抽象)
-  - [相关概念文件](#相关概念文件)
-    - [补充定理链](#补充定理链)
-
-> **Bloom 层级**: 分析 → 评价
-**变更日志**:
-
-- v1.0 (2026-05-25): 初始创建——公理语义专题，覆盖 Hoare 逻辑、wp/sp 计算、Rust 所有权公理化、验证工具链映射
-
----
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 
 ## 一、权威定义（Definition）
 >
@@ -187,7 +135,7 @@ P → wp(C, Q)    ⟺    sp(P, C) → Q
 | **符号执行** | 路径条件 + SMT | 高（路径爆炸）| Kani | 断言验证/反例生成 | 路径空间指数级增长 |
 | **类型系统即规约** | 类型签名 | 全自动 | Rust 编译器本身 | 内存安全/数据竞争 | 无法表达功能性规约 |
 
-> **洞察**: Rust 编译器的**借用检查器**本质上是一个轻量级的、全自动的公理验证器——它通过类型推导自动计算所有权和生命周期的不变式，无需程序员手动书写 `{P} C {Q}`。这是 Hoare 逻辑从学术研究走向工业实践的最成功范例：将公理规约"编译进"类型系统，使验证成为零成本抽象。[来源: [RustBelt Paper](https://doi.org/10.1145/3158154)] · [来源: [Rust Reference — Ownership](https://doc.rust-lang.org/reference/ownership.html)]
+> **洞察**: Rust 编译器的**借用检查器**本质上是一个轻量级的、全自动的公理验证器——它通过类型推导自动计算所有权和生命周期的不变式，无需程序员手动书写 `{P} C {Q}`。这是 Hoare 逻辑从学术研究走向工业实践的最成功范例：将公理规约"编译进"类型系统，使验证成为零成本抽象。[来源: [RustBelt Paper](https://doi.org/10.1145/3158154)] · [来源: [Rust Reference — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)]
 
 ---
 
@@ -318,7 +266,7 @@ fn check_invariants() {
 }
 ```
 
-> **形式化表达**: 借用检查器通过**区域约束系统**（Region Constraint System）在编译期验证这三个不变式。NLL（Non-Lexical Lifetimes）将生命周期从词法作用域精确到**使用点**（use-site），使得不变式的验证更加精确。Polonius 进一步将区域约束转化为 Datalog 规则，实现 borrow check 的声明式表达。[来源: [Rust [RFC 2094](https://rust-lang.github.io/rfcs/2094.html) — NLL](https://rust-lang.github.io/rfcs/2094-nll.html)] · [来源: [Polonius — rust-lang/polonius](https://github.com/rust-lang/polonius)] · [来源: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/items/lifetimes.html)]
+> **形式化表达**: 借用检查器通过**区域约束系统**（Region Constraint System）在编译期验证这三个不变式。NLL（Non-Lexical Lifetimes）将生命周期从词法作用域精确到**使用点**（use-site），使得不变式的验证更加精确。Polonius 进一步将区域约束转化为 Datalog 规则，实现 borrow check 的声明式表达。[来源: [Rust [RFC 2094](https://rust-lang.github.io/rfcs//2094-nll.html) — NLL](https://rust-lang.github.io/rfcs//2094-nll.html)] · [来源: [Polonius — rust-lang/polonius](https://github.com/rust-lang/polonius)] · [来源: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/items/generics.html)]
 
 ### 3.4 unsafe 块的公理边界
 >
@@ -505,7 +453,7 @@ fn check_increment() {
 > 2. **rustc 规格项目**: 将 Rust 语义写入机器可读的规格，使公理工具可以直接引用编译器定义的语义
 > 3. **Ghost code 标准化**: 在 Rust 中引入官方支持的 ghost/规约代码语法（类似 SPARK 的 `with Ghost`），降低契约编写的门槛
 >
-> **来源**: [A-mir-formality](https://github.com/rust-lang/a-mir-formality) · [Rust Specification Project](https://rust-lang.github.io/rfcs/3355-rust-spec.html) · [Rust Verification Workshop 2024](https://rustverify.github.io/)
+> **来源**: [A-mir-formality](https://github.com/rust-lang/a-mir-formality) · [Rust Specification Project](https://rust-lang.github.io/rfcs//3355-rust-spec.html) · [Rust Verification Workshop 2024](https://rustverify.github.io/)
 
 ---
 
@@ -739,7 +687,7 @@ Prusti 将 Rust 翻译为 Viper 中间语言，使用分离逻辑自动验证内
 |:---|:---|:---|:---|:---|
 | **T-120: 霍尔三元组可判定性** | 程序无循环/无递归 | `{P}C{Q}` 可在多项式时间内验证 | `const fn` 的编译期求值 | Hoare 1969 · Cook 1978 |
 | **T-121: wp 计算完备性** | 循环不变式存在 | `wp(C, Q)` 可机械计算 | Creusot 的验证条件生成 | Dijkstra 1975 · Winskel 1993 §7 |
-| **T-122: 所有权不变式可验证性** | 程序为 safe Rust | 借用规则在编译期自动验证 | Rust 编译器借用检查 | RustBelt 2018 · [RFC 2094](https://rust-lang.github.io/rfcs/2094.html) |
+| **T-122: 所有权不变式可验证性** | 程序为 safe Rust | 借用规则在编译期自动验证 | Rust 编译器借用检查 | RustBelt 2018 · [RFC 2094](https://rust-lang.github.io/rfcs//2094-nll.html) |
 | **T-123: 分离逻辑框架规则** | 命令只访问局部资源 | 未访问资源自动保持 | `&mut T` 的独占性保证 | Reynolds 2002 · Iris |
 | **T-124: unsafe 块公理不可判定** | 允许裸指针别名 | 标准 Hoare 逻辑失效 | `unsafe` 需人工公理 | Rustonomicon · RustBelt |
 | **T-125: 循环不变式自动推断不完备** | Rice 定理 | 存在循环其不变式不可自动推断 | Prusti 对复杂循环的失效 | Rice 1953 · Cousot 1977 |

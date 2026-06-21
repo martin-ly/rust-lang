@@ -6,8 +6,8 @@
 >
 # 算法与竞赛编程 (Algorithms & Competitive Programming)
 >
-> **EN**: 算法与竞赛编程 (Algorithms & Competitive Programming) (Chinese)
-> **Summary**: 算法与竞赛编程 (Algorithms & Competitive Programming) (Chinese). 算法与竞赛编程 Algorithms & Competitive Programming.
+> **EN**: Algorithms Competitive Programming
+> **Summary**: Algorithms Competitive Programming: Rust ecosystem tools, crates, and engineering practices.
 >
 > **受众**: [进阶]
 
@@ -18,6 +18,8 @@
 > **后置概念**: [Formal Ecosystem Tower](./05_formal_ecosystem_tower.md) · [Performance Optimization](./15_performance_optimization.md)
 > **主要来源**: [CLRS — Introduction to Algorithms] · [LeetCode] · [Codeforces] · [TRPL] · [Rust Reference] · [VeriContest arXiv 2026-05-08] · [Kani Docs] · [CSES Problem Set]
 
+>
+> **来源**: [std::collections](https://doc.rust-lang.org/std/collections/) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/) · [The Algorithms — Rust](https://github.com/TheAlgorithms/Rust)
 ---
 
 > **Bloom 层级**: 应用 → 分析
@@ -472,7 +474,7 @@ impl<R: BufRead> FastScanner<R> {
 }
 ```
 
-> [来源: [Rust Competitive Programming Guide](https://github.com/aepsil0n/acropolis)] 竞赛编程中 I/O 优化是 TLE 的第一道防线；`BufRead::read_until` 比逐字符解析快 5-10 倍。
+> [来源: [Rust Competitive Programming Guide](https://github.com/namanlp/rustp)] 竞赛编程中 I/O 优化是 TLE 的第一道防线；`BufRead::read_until` 比逐字符解析快 5-10 倍。
 
 ### 3.2 零分配算法
 

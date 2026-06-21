@@ -6,8 +6,8 @@
 >
 # 流处理生态：Rust 实现与工业系统全景
 >
-> **EN**: 流处理生态：Rust 实现与工业系统全景 (Chinese)
-> **Summary**: Rust 流处理生态可分为三层：底层执行引擎、中间抽象层、应用框架层。 ```text Rust Stream Processing Ecosystem │ ├── 底层执行引擎 │   ├── timely-dataflow — 分布式数据流计算引擎 │   └── differential-dataflow — 增量计算框架（基于 timely） │ ├── 中间抽象层 │   ├── tokio-stream — Tokio async流抽象 │   ├── async-stream — async生成器流 │   ├── futures::Stream — 标准async流 trait │   └──
+> **EN**: Stream Processing Ecosystem
+> **Summary**: Stream Processing Ecosystem: Rust ecosystem tools, crates, and engineering practices.
 >
 > **受众**: [进阶]
 
@@ -18,6 +18,8 @@
 > **前置概念**: [Stream Processing Semantics](../03_advanced/20_stream_processing_semantics.md) · [Async/Await](../03_advanced/02_async.md) · [Concurrency](../03_advanced/01_concurrency.md)
 > **后置概念**: [Distributed Systems](./18_distributed_systems.md) · [Distributed Systems](./18_distributed_systems.md)
 
+>
+> **来源**: [tokio-stream](https://docs.rs/tokio-stream/) · [futures](https://docs.rs/futures/) · [fluvio](https://docs.rs/fluvio/)
 ---
 
 > **来源**: [Timely Dataflow GitHub](https://github.com/TimelyDataflow/timely-dataflow) ·

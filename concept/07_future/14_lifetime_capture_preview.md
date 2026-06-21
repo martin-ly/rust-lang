@@ -1,10 +1,9 @@
 # Lifetime Capture in `impl Trait` Preview
 
 > **代码状态**: [综述级 — 待补充代码]
-
 >
-> **EN**: Traits
-> **Summary**: Traits. Emerging Rust feature or ecosystem trend: Traits.
+> **EN**: Lifetime Capture Preview
+> **Summary**: Preview of precise lifetime capture rules for `impl Trait` return types.
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)
@@ -17,7 +16,7 @@
 > **双维定位**: C×Ana — 分析 impl Trait 的生命周期捕获规则
 > **前置依赖**: [Lifetime](../01_foundation/03_lifetimes.md) · [Trait](../02_intermediate/01_traits.md)
 > **后置延伸**: [RPITIT](./15_rpitit_preview.md)
-> **来源**: [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html) · [RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html)
+> **来源**: [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html) · [RFC 2289](https://rust-lang.github.io/rfcs//2289-associated-type-bounds.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 
@@ -53,7 +52,7 @@ fn main() {}
 > 3) 复杂嵌套的 lifetime 关系简化。
 >
 > 这与 TypeScript 的泛型（默认全部捕获，无精确控制）或 Swift 的 `@escaping`（控制闭包捕获，但不精确到 lifetime）不同——Rust 的 `use<>` 是类型系统的精确性扩展，解决 impl trait 的 lifetime 泄露问题。
-> [来源: [Precise Capturing RFC](https://rust-lang.github.io/rfcs/3498-lifetime-capture-in-impl-trait.html)] ·
+> [来源: [Precise Capturing RFC](https://rust-lang.github.io/rfcs//3498-lifetime-capture-rules-2024.html)] ·
 > [来源: [Rust 2024 Edition](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)]
 >
 > **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)

@@ -1,7 +1,7 @@
 # 方法论：思维表征与知识结构规范
 >
-> **EN**: 方法论：思维表征与知识结构规范 (Chinese)
-> **Summary**: 方法论：思维表征与知识结构规范 (Chinese). Methodology for knowledge representation and structural organization.
+> **EN**: Methodology
+> **Summary**: Methodology. Core Rust concept.
 >
 > **受众**: [研究者]
 >
@@ -9,6 +9,8 @@
 > **Bloom 层级**: 理解 → 应用
 > **定位**：本文件定义 `concept/` 下所有主题文件的内容结构、思维表征方式和知识组织规范，确保内容的**一致性、可比较性、可扩展性**。
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 ## 📑 目录

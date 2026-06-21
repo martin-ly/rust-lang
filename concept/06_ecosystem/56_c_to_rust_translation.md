@@ -8,8 +8,8 @@
 
 # C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态）
 >
-> **EN**: C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态） (Chinese)
-> **Summary**: C-to-Rust Translation Ecosystem. C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态）.
+> **EN**: C To Rust Translation
+> **Summary**: C To Rust Translation: Rust ecosystem tools, crates, and engineering practices.
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **P** — Procedure
@@ -23,6 +23,8 @@
 >
 > **主要来源**: [DARPA TRACTOR] · [C2Rust] · [Scylla (OOPSLA 2026)] · [&inator (PLDI 2026)] · [His2Trans]
 
+>
+> **来源**: [Rustonomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html) · [bindgen](https://docs.rs/bindgen/)
 ---
 
 **变更日志**:

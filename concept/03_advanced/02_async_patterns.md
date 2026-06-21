@@ -18,7 +18,7 @@
 > [TRPL — Async/Await](https://doc.rust-lang.org/book/ch17-00-async-await.html) ·
 > [Async Rust Book](https://rust-lang.github.io/async-book/) ·
 > [tokio.rs](https://tokio.rs/) ·
-> [RFC 2394 — Async/Await](https://rust-lang.github.io/rfcs/2394-async_await.html) ·
+> [RFC 2394 — Async/Await](https://rust-lang.github.io/rfcs//2394-async_await.html) ·
 > [Wikipedia — Futures and Promises](https://en.wikipedia.org/wiki/Futures_and_promises)
 
 > **对应 Crate**: [`c06_async`](../../crates/c06_async/)
@@ -113,7 +113,7 @@ Future 的本质:
 ```
 
 > **认知功能**: **Future 是"可暂停的函数"**——编译器将 async/await 转换为状态机，使代码看起来像同步但执行是异步的。
-> [来源: [Async Rust Book — Future](https://rust-lang.github.io/async-book/02_execution/02_future.html)]
+> [来源: [Async Rust Book — Future](https://rust-lang.github.io/async-book//02_execution/02_future.html)]
 
 ---
 
@@ -405,7 +405,7 @@ async fn auto_cancel() {
 ```
 
 > **取消洞察**: **Rust 的取消通过 Drop 传播**——当 Future 被 drop，所有已获取的资源自动清理，无需显式取消回调。
-> [来源: [Async Cancellation](https://rust-lang.github.io/async-book/08_workarounds/03_cancel_safe.html)]
+> [来源: [Async Cancellation](https://rust-lang.github.io/async-book/)]
 
 ---
 
@@ -512,7 +512,7 @@ async fn batch_processing(mut rx: mpsc::Receiver<i32>) {
 ```
 
 > **模式矩阵**: Rust 异步的**核心模式可以归纳为 6 类**——覆盖从简单并发到复杂流处理的大部分场景。
-> [来源: [Async Patterns](https://rust-lang.github.io/async-book/09_workarounds/00_intro.html)]
+> [来源: [Async Patterns](https://rust-lang.github.io/async-book/)]
 
 ---
 
@@ -536,7 +536,7 @@ graph TD
 ```
 
 > **认知功能**: **async 适合 IO 密集型，CPU 密集型需要 spawn_blocking 或 rayon**——混合使用是关键。
-> [来源: [Async Rust Book — CPU Bound](https://rust-lang.github.io/async-book/09_workarounds/03_cancel_safe.html)]
+> [来源: [Async Rust Book — CPU Bound](https://rust-lang.github.io/async-book/)]
 
 ---
 
@@ -576,7 +576,7 @@ graph TD
 ```
 
 > **边界要点**: 异步的边界主要与**递归**、**调用栈**、**取消安全**、**调试**和**生态**相关。
-> [来源: [Async Rust Book — Workarounds](https://rust-lang.github.io/async-book/09_workarounds/00_intro.html)]
+> [来源: [Async Rust Book — Workarounds](https://rust-lang.github.io/async-book/)]
 
 ---
 
@@ -628,7 +628,7 @@ graph TD
 ```
 
 > **陷阱总结**: 异步陷阱主要与**阻塞**、**await 遗漏**、**取消安全**、**Send 约束**和**背压**相关。
-> [来源: [Common Async Mistakes](https://rust-lang.github.io/async-book/09_workarounds/03_cancel_safe.html)]
+> [来源: [Common Async Mistakes](https://rust-lang.github.io/async-book/)]
 
 ---
 
@@ -638,11 +638,11 @@ graph TD
 |:---|:---:|:---|
 | [Async Rust Book](https://rust-lang.github.io/async-book/) | ✅ 一级 | 异步权威 |
 | [tokio.rs](https://tokio.rs/) | ✅ 一级 | Tokio 文档 |
-| [RFC 2394 — Async/Await](https://rust-lang.github.io/rfcs/2394-async_await.html) | ✅ 一级 | 设计 RFC |
+| [RFC 2394 — Async/Await](https://rust-lang.github.io/rfcs//2394-async_await.html) | ✅ 一级 | 设计 RFC |
 | [TRPL — Async](https://doc.rust-lang.org/book/ch17-00-async-await.html) | ✅ 一级 | 基础教程 |
 | [tokio::select!](https://docs.rs/tokio/latest/tokio/macro.select.html) | ✅ 一级 | 并发原语 |
 | [Rust Reference — Await](https://doc.rust-lang.org/reference/expressions/await-expr.html) | ✅ 一级 | 语言参考 |
-| [RFC 2592 — Pin](https://rust-lang.github.io/rfcs/2592-pin.html) | ✅ 一级 | Pin 设计 RFC |
+| [RFC 2592 — Pin](https://rust-lang.github.io/rfcs//2592-futures.html) | ✅ 一级 | Pin 设计 RFC |
 | [std::task::Waker](https://doc.rust-lang.org/std/task/struct.Waker.html) | ✅ 一级 | 标准库 API |
 
 ---
@@ -805,7 +805,7 @@ fn main() {}
 > 这与 JavaScript 的 `async` 方法（接口中直接声明，无特殊限制）或 Kotlin 的 `suspend` 函数（类似，但编译器处理）不同
 > ——Rust 的 `async fn` in trait 是类型系统的重大扩展。
 > [来源: [Async Fn In Traits](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html)] ·
-> [来源: [RPITIT](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html)]
+> [来源: [RPITIT](https://rust-lang.github.io/rfcs//2289-associated-type-bounds.html)]
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
 > [Rust Standard Library](https://doc.rust-lang.org/std/) ·
@@ -964,7 +964,7 @@ async fn consumer(mut rx: mpsc::Receiver<i32>) {
 
 **修复方案 — Backpressure**：
 
-```rust
+```rust,ignore
 // 使用有界 channel，容量 = 消费者处理能力 × 缓冲系数
 let (tx, rx) = mpsc::channel::<i32>(100);  // 仅缓冲100条
 

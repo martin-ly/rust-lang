@@ -1,3 +1,5 @@
+> **EN**: Industrial Case Studies
+> **Summary**: Industrial Case Studies: Rust ecosystem tools, crates, and engineering practices.
 > **内容分级**: [专家级]
 
 > **代码状态**: [综述级 — 待补充代码]
@@ -8,67 +10,7 @@
 
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
-## 代码示例：工业级并发流水线（日志 ETL）
-
-以下展示基于通道的无锁并发流水线模式，典型用于工业级日志/数据 ETL：
-
-```rust,ignore
-use std::sync::mpsc::{channel, Sender, Receiver};
-use std::thread;
-
-// Stage 1: 解析原始日志行
-fn parser_stage(input: Receiver<String>, output: Sender<LogEntry>) {
-    for line in input {
-        if let Ok(entry) = parse_log(&line) {
-            let _ = output.send(entry);
-        }
-    }
-}
-
-// Stage 2: 过滤与聚合
-fn filter_stage(input: Receiver<LogEntry>, output: Sender<Metric>) {
-    let mut counter = 0u64;
-    for entry in input {
-        if entry.level == "ERROR" {
-            counter += 1;
-        }
-        if counter % 1000 == 0 {
-            let _ = output.send(Metric::ErrorRate(counter));
-        }
-    }
-}
-
-// Stage 3: 输出到持久化存储
-fn sink_stage(input: Receiver<Metric>) {
-    for metric in input {
-        persist_to_disk(metric);
-    }
-}
-```
-
->
-> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
->
-# Rust 工业级案例研究
->
-> **EN**: Rust 工业级案例研究 (Chinese)
-> **Summary**: 以下展示基于通道的无锁concurrency流水线模式，典型用于工业级日志/数据 ETL： ```rust,ignore use std::sync::mpsc::{channel, Sender, Receiver}; use std::thread; // Stage 1: 解析原始日志行 fn parser_stage(input: Receiver<String>, output: Sender<LogEntry>) { for line in input { if let Ok(entry) = parse_log(&line) { let _ = output.send(entry); } } }
-
-> **受众**: [专家]
-> **Bloom 层级**: 分析 → 评价 → 创造
-> **定位**: 系统分析 Rust 在大型工业项目中的应用模式、架构决策和安全认证路径，为生产环境采用 Rust 提供实证参考。
-> **前置概念**: [Concurrency](../03_advanced/01_concurrency.md) · [Unsafe Rust](../03_advanced/03_unsafe.md) · [Toolchain](./01_toolchain.md)
-> **后置延伸**: [Embedded Systems](./22_embedded_systems.md) · [Safety Critical](../04_formal/22_modern_verification_tools.md)
-
----
-
-> **来源**:
-> [Rust for Linux](https://rust-for-linux.com/) ·
-> [Ferrocene](https://ferrocene.dev/) ·
-> [Android Rust](https://source.android.com/docs/core/architecture/rust) ·
-> [Microsoft Rust Windows](https://msrc-blog.microsoft.com/2019/07/16/a-proactive-approach-to-more-secure-code/) ·
-> [Firecracker](https://firecracker-microvm.github.io/) ·
-> [Rustls](https://github.com/rustls/rustls)
+> **来源**: [Rust in Production](https://www.rust-lang.org/) · [Rust Foundation](https://foundation.rust-lang.org/)
 
 ## 一、案例总览矩阵
 
@@ -307,7 +249,7 @@ Firecracker 是 AWS 开发的**微虚拟机监视器 (MicroVMM)**，用于 AWS L
 | :--- | :---: | :--- |
 | [Rust for Linux](https://rust-for-linux.com/) | ✅ 一级 | 官方项目网站 |
 | [Ferrocene](https://ferrocene.dev/) | ✅ 一级 | 安全认证 Rust 工具链 |
-| [Android Rust](https://source.android.com/docs/core/architecture/rust) | ✅ 一级 | Google 官方文档 |
+| [Android Rust](https://security.googleblog.com/2021/05/integrating-rust-into-android-open.html) | ✅ 一级 | Google 官方文档 |
 | [Firecracker](https://firecracker-microvm.github.io/) | ✅ 一级 | AWS 微虚拟化 |
 | [Rustls](https://github.com/rustls/rustls) | ✅ 一级 | 纯 Rust TLS |
 | [TiKV](https://tikv.org/) | ✅ 一级 | 分布式 KV 存储 |
@@ -322,7 +264,7 @@ Firecracker 是 AWS 开发的**微虚拟机监视器 (MicroVMM)**，用于 AWS L
 > **权威来源**:
 > [Rust for Linux](https://rust-for-linux.com/),
 > [Ferrocene](https://ferrocene.dev/),
-> [Android Rust](https://source.android.com/docs/core/architecture/rust)
+> [Android Rust](https://security.googleblog.com/2021/05/integrating-rust-into-android-open.html)
 > **过渡**: Rust 工业级案例研究 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Rust 工业级案例研究 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Rust 工业级案例研究 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

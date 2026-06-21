@@ -1,3 +1,5 @@
+> **EN**: Embedded Graphics
+> **Summary**: Embedded Graphics: Rust ecosystem tools, crates, and engineering practices.
 > **内容分级**: [综述级]
 
 > **代码状态**: [综述级 — 待补充代码]
@@ -7,64 +9,7 @@
 
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
-## 代码示例：egui 即时模式 GUI（嵌入式场景）
-
-以下演示使用 `egui` 在资源受限环境下构建交互式界面：
-
-```rust,ignore
-use egui::{Context, CentralPanel, Slider};
-
-struct SensorApp {
-    temperature: f32,
-    threshold: f32,
-}
-
-impl eframe::App for SensorApp {
-    fn update(&mut self, ctx: &Context, _frame: &mut eframe::Frame) {
-        CentralPanel::default().show(ctx, |ui| {
-            ui.heading("传感器监控面板");
-            ui.add(Slider::new(&mut self.threshold, 0.0..=100.0)
-                .text("报警阈值 (°C)"));
-
-            let color = if self.temperature > self.threshold {
-                egui::Color32::RED
-            } else {
-                egui::Color32::GREEN
-            };
-            ui.colored_label(color, format!("当前温度: {:.1}°C", self.temperature));
-        });
-    }
-}
-```
-
-> **嵌入式约束**: 在 `no_std` 环境下，可使用 `embedded-graphics` + `lvgl` 替代 egui。
-
->
-> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
->
-# Rust 嵌入式图形系统开发
->
-> **EN**: Embedded Systems
-> **Summary**: 以下演示使用 `egui` 在资源受限环境下构建交互式界面： ```rust,ignore use egui::{Context, CentralPanel, Slider}; struct SensorApp { temperature: f32, threshold: f32, } impl eframe::App for SensorApp { fn update(&mut self, ctx: &Context, _frame: &mut eframe::Frame) { CentralPanel::default().show(ctx, |ui| { ui.heading("传感器监
-
-> **受众**: [进阶]
-> **Bloom 层级**: 应用 → 分析
-> **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
-> **双维定位**: P×App — 设计嵌入式图形系统架构
-> **定位**: 覆盖 Rust **嵌入式图形**的核心技术栈——从 `embedded-graphics` 的 2D 原语绘制到 `lvgl-rs` 的 widget 系统，从 `slint-ui` 的声明式 UI 到 `egui` 的即时模式 GUI，建立显示驱动、字体渲染、触摸输入与 `no_std` 环境的完整知识体系。
-> **前置概念**: [Embedded Systems](./22_embedded_systems.md) · [Unsafe Rust](../03_advanced/03_unsafe.md) · [Type System](../01_foundation/04_type_system.md)
-> **后置概念**: [Performance Optimization](./15_performance_optimization.md) · [Async/Await](../03_advanced/02_async.md)
-
----
-
-> **来源**: [embedded-graphics](https://docs.rs/embedded-graphics/latest/) ·
-> [LVGL](https://lvgl.io/) ·
-> [Slint UI](https://slint-ui.com/) ·
-> [egui](https://docs.rs/egui/latest/) ·
-> [embedded-hal](https://docs.rs/embedded-hal/latest/) ·
-> [The Embedded Rust Book](https://docs.rust-embedded.org/book/) ·
-> [Rust Reference](https://doc.rust-lang.org/reference/) ·
-> [TRPL](https://doc.rust-lang.org/book/)
+> **来源**: [embedded-graphics](https://docs.rs/embedded-graphics/) · [lvgl-rs](https://docs.rs/lvgl/)
 
 ## 📑 目录
 
@@ -343,7 +288,7 @@ embedded-graphics crate:
 > [来源: [embedded-graphics Book](https://docs.rs/embedded-graphics/latest/embedded_graphics/)]
 > **测试洞察**: `MockDisplay` 允许在单元测试中验证像素输出，无需真实硬件——这对 CI 和 TDD 至关重要。
 > [来源: [embedded-graphics Mock Display](https://docs.rs/embedded-graphics/latest/embedded_graphics/mock_display/struct.MockDisplay.html)]
-> [来源: [embedded-graphics Testing](https://github.com/embedded-graphics/embedded-graphics/tree/master/examples)]
+> [来源: [embedded-graphics Testing](https://github.com/embedded-graphics/examples)]
 
 ---
 
@@ -383,7 +328,7 @@ lvgl-rs: Rust 绑定到 LVGL (Light and Versatile Graphics Library)
 ```
 
 > **绑定洞察**: **lvgl-rs 将 C 的 widget 系统包装为 Rust 的安全 API**——但底层仍依赖 LVGL 的 C 内存管理，需要谨慎处理生命周期和自定义分配器。
-> [来源: [lvgl-rs GitHub](https://github.com/lvgl/lvgl-rs)]
+> [来源: [lvgl-rs GitHub](https://github.com/lvgl/lv_binding_rust)]
 > [来源: [LVGL Rust Bindings](https://docs.rs/lvgl/latest/lvgl/)]
 > **生态洞察**: LVGL 是嵌入式 GUI 领域最成熟的 C 库之一，lvgl-rs 使其可被 Rust 项目利用，但绑定维护成本较高，API 更新可能滞后。
 > [来源: [LVGL Documentation](https://docs.lvgl.io/latest/en/html/index.html)]
@@ -532,7 +477,7 @@ egui: 即时模式 GUI (Immediate Mode GUI)
 > [来源: [Wikipedia — SPI](https://en.wikipedia.org/wiki/Serial_Peripheral_Interface)]
 > [来源: [Wikipedia — I2C](https://en.wikipedia.org/wiki/I%C2%B2C)]
 > **HAL 抽象**: `embedded-hal` 的 `spi::Write` 和 `digital::OutputPin` trait 使显示驱动代码可跨 MCU 平台复用。
-> [来源: [embedded-hal SPI Trait](https://docs.rs/embedded-hal/latest/embedded_hal/spi/trait.Write.html)]
+> [来源: [embedded-hal SPI Trait](https://docs.rs/embedded-hal/latest/embedded_hal/)]
 > [来源: [embedded-hal Traits](https://docs.rs/embedded-hal/latest/embedded_hal/)]
 
 ---
@@ -702,7 +647,7 @@ Rust 实现模式:
 
 > **输入洞察**: **触摸处理是典型的事件驱动架构**——中断触发读取，主循环处理手势状态机，与 UI 渲染解耦。
 > [来源: [embedded-hal InputPin](https://docs.rs/embedded-hal/latest/embedded_hal/digital/trait.InputPin.html)]
-> [来源: [embedded-hal I2C](https://docs.rs/embedded-hal/latest/embedded_hal/blocking/i2c/index.html)]
+> [来源: [embedded-hal I2C](https://docs.rs/embedded-hal/latest/embedded_hal/)]
 > **校准洞察**: 电阻屏的校准矩阵是 3×3 仿射变换，通过 3~5 个采样点求解线性方程组。Rust 的 `nalgebra` 或 `micromath` 可提供 `no_std` 矩阵运算。
 > [来源: [Touchscreen Calibration Theory](https://www.ti.com/lit/an/slyt277/slyt277.pdf)]
 > [来源: [micromath Crate](https://docs.rs/micromath/latest/micromath/)]
@@ -851,7 +796,7 @@ graph TD
 ```
 
 > **陷阱总结**: 嵌入式图形的陷阱主要与**总线共享**、**内存安全**、**中断约束**、**缓存一致性**和**硬件时序**相关。
-> [来源: [embedded-graphics Examples](https://github.com/embedded-graphics/embedded-graphics/tree/master/examples)]
+> [来源: [embedded-graphics Examples](https://github.com/embedded-graphics/examples)]
 > [来源: [Rust Embedded Patterns](https://docs.rust-embedded.org/book/peripherals/index.html)]
 > **Rust 优势**: Rust 的类型系统可防止帧缓冲越界（通过 safe 抽象），但 `unsafe` 直接指针操作仍需谨慎。`embedded-graphics` 的 `DrawTarget` 自动裁剪是安全的默认选择。
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
@@ -948,7 +893,7 @@ fn start_dma_transfer() {
 
 ### 10.2 边界测试：绘制超出帧缓冲边界（内存损坏）
 
-```rust,no_run
+```rustno_run,ignore
 #![no_std]
 
 static mut FRAMEBUFFER: [u16; 320 * 240] = [0; 320 * 240];
@@ -974,7 +919,7 @@ fn main() {
 
 ---
 
-> [来源: [Rust Embedded Interrupts](https://docs.rust-embedded.org/book/interrupts/index.html)]
+> [来源: [Rust Embedded Interrupts](https://docs.rust-embedded.org/book/)]
 
 ### 10.3 边界测试：中断上下文中阻塞 SPI 传输（实时性违例）
 

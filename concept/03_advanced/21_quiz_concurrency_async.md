@@ -3,7 +3,7 @@
 # 测验：并发与异步（L3 试点扩展）
 >
 > **EN**: Concurrency
-> **Summary**: ```rust use std::rc::Rc; use std::thread; fn main() { let data = Rc::new(42); let handle = thread::spawn(move || { println!("{}", *data); }); handle.join().unwrap(); }``` <details> <summary>💡 点击展开答案与解析</summary> **答案**：❌ 不能编译。 **错误信息**：`Rc<i32> cannot be sent between threads safely` **解析**：`Rc<T>`
+> **Summary**: Quiz Concurrency Async. Core Rust concept.
 
 > **受众**: [专家]
 > **内容分级**: [专家级]
@@ -38,7 +38,7 @@
 
 ### Q1. 以下代码能否编译？解释 `Send` 和 `Sync` 的语义
 
-```rust
+```rust,compile_fail
 use std::rc::Rc;
 use std::thread;
 
@@ -256,7 +256,7 @@ After await
 
 **关键点**：
 
-```rust
+```rust,ignore
 let future = say_hello(); // 创建 Future，零成本
 // ... 此时可以进行其他工作 ...
 future.await;             // 执行异步操作，可能让出线程
@@ -305,7 +305,7 @@ fn main() {
 
 `async fn` 编译后的状态机可能包含**自引用**（例如一个字段是指向另一个字段的引用）：
 
-```rust
+```rust,ignore
 async fn example() {
     let data = [1, 2, 3];
     let ptr = &data[0]; // ptr 指向 data 内部
@@ -465,7 +465,7 @@ Result: 3
 
 ### Q8. 以下代码能否编译？解释 `'static` 在并发中的含义
 
-```rust
+```rust,compile_fail
 use std::thread;
 
 fn main() {
@@ -496,7 +496,7 @@ fn main() {
 
 **对比**：
 
-```rust
+```rust,ignore
 // ✅ 可以：字符串字面量是 'static
 let s = "hello";
 thread::spawn(move || { println!("{}", s); });
@@ -576,7 +576,7 @@ Final: 6
 
 ### Q10. 以下代码存在什么问题？这是 Rust 并发的经典陷阱
 
-```rust
+```rust,compile_fail
 use std::sync::Mutex;
 
 fn main() {
@@ -630,7 +630,7 @@ fn main() {
 
 **另一个陷阱**——若不 `join`，可能打印时子线程尚未完成：
 
-```rust
+```rust,ignore
 // 错误：可能输出 "Result: 0" 到 "Result: 10" 之间的任意值
 println!("Result: {}", *counter.lock().unwrap());
 ```

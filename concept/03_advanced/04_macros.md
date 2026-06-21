@@ -4,6 +4,7 @@
 >
 > **EN**: Macros
 > **Summary**: Macros. Guide to 04 Macros.
+> **来源**: [TRPL — Ch19.5 Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) · [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html) · [Rust By Example — Macros](https://doc.rust-lang.org/rust-by-example/macros.html)
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[宏系统](../../knowledge/03_advanced/macros)
@@ -360,7 +361,7 @@ graph TD
 > [来源: [Rust Reference — Macros]]
 > 若需在编译期执行复杂算法，建议优先使用 const fn + const generics，而非递归宏。
 > 核心洞察：Rust 宏系统被刻意设计为非图灵完备，递归深度、I/O、类型信息三重受限。[来源: 💡 原创分析]
-> [来源: [RFC 1584](https://rust-lang.github.io/rfcs/1584-macros.html)]
+> [来源: [RFC 1584](https://rust-lang.github.io/rfcs//1584-macros.html)]
 
 ### 5.4 反命题决策树三："过程宏总是类型安全的"
 
@@ -396,7 +397,7 @@ graph TD
 
 宏系统与类型系统之间存在严格的**阶段隔离**：宏展开在类型检查之前完成，这决定了宏无法执行任何需要类型信息的操作。
 
-**不可跨越的边界**（Rust Reference: Macros · [RFC 1584](https://rust-lang.github.io/rfcs/1584.html)）：
+**不可跨越的边界**（Rust Reference: Macros · [RFC 1584](https://rust-lang.github.io/rfcs//1584-macros.html)）：
 
 1. **宏无法做类型推断** — 过程宏接收未类型化的 `TokenStream`；`macro_rules!` 的 `:expr` / `:ty` 只匹配语法形态，不携带语义类型。
 2. **宏无法做重载** — 宏匹配基于语法模式（token 结构），无法像 C++ 模板那样根据类型特化。
@@ -470,7 +471,7 @@ graph TD
 > [来源: [Rust Reference — Macros]]
 > 设计代码生成方案时，若需要全局代码视图或隐式修改，应放弃过程宏，考虑构建时代码生成（build.rs）。
 > 核心洞察：过程宏的修改范围严格受限于其被显式调用的 item，无法像文本替换一样"查找替换"任意代码。[来源: 💡 原创分析]
-> [来源: [RFC 1566](https://rust-lang.github.io/rfcs/1566-proc-macros.html)]
+> [来源: [RFC 1566](https://rust-lang.github.io/rfcs//1566-proc-macros.html)]
 
 > **过渡说明**: 决策树从工程视角揭示了宏的边界与反直觉特性，而定理推理链则从形式化视角将这些边界上升为严格的数学命题。下面的矩阵将每个反命题对应到一条带 ⟹ 的推理链，形成"前提-结论-失效条件"的完整逻辑闭环。
 
@@ -502,7 +503,7 @@ graph TD
 | 编号 | 前提 ⟹ 结论 | 类型 | 依赖定理 | 失效条件 | 典型场景 |
 |:---|:---|:---|:---|:---|:---|
 | **L1** | 声明宏 hygienic ⟹ 避免标识符冲突 | 语法保证 | Kohlbecker 1986 | 过程宏手动构造标识符（`format_ident!`） | `macro_rules!` 局部变量与外部同名变量共存 |
-| **L2** | 过程宏操作 TokenStream ⟹ 编译期元编程 | 阶段隔离 | [RFC 1566](https://rust-lang.github.io/rfcs/1566.html) | 宏 panic 导致编译中断 | `#[derive(Debug)]` 自动生成 impl |
+| **L2** | 过程宏操作 TokenStream ⟹ 编译期元编程 | 阶段隔离 | [RFC 1566](https://rust-lang.github.io/rfcs//1566-proc-macros.html) | 宏 panic 导致编译中断 | `#[derive(Debug)]` 自动生成 impl |
 | **L3** | 宏重复模式 `$($x:expr),*` ⟹ 零开销抽象 | 语法生成 | TLBORM 模式语义 | 重复模式与尾随逗号不匹配 | `vec![1, 2, 3]` 展开为数组初始化 |
 | **L4** | Token 操作 vs 文本替换 ⟹ 类型安全增强 | 对比定理 | L1 + L2 | C 风格预处理器绕过 Token 层 | Rust 宏避免 C `#define` 优先级陷阱 |
 | **T1** | 宏展开在语义分析前 ⟹ 语法级变换 | 编译阶段 | Rust Reference | 宏依赖类型信息做分支（不可行） | 过程宏无法根据字段类型选择生成逻辑 |
@@ -1249,7 +1250,7 @@ fn main() {
 
 > **[Rust Reference: const fn]** `const fn` 允许在编译期执行计算，生成编译期常量。许多过去必须用 `macro_rules!` 实现的场景（如数组长度计算、类型大小断言）现在可以用纯 Rust 函数完成。✅ 已验证
 
-> **[Rust [RFC 2000](https://rust-lang.github.io/rfcs/2000.html): const generics]** const generics 允许泛型参数为编译期常量值（如 `Array<T, N>`），消除了对宏生成多态类型的需求。✅ 已验证
+> **[Rust [RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html): const generics]** const generics 允许泛型参数为编译期常量值（如 `Array<T, N>`），消除了对宏生成多态类型的需求。✅ 已验证
 
 **`const fn` 替代 `macro_rules!` 的场景**
 
@@ -2216,7 +2217,7 @@ fn main() {}
 ## 参考来源
 
 > [来源: [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)]
-> [来源: [RFC 1584 — Macros 2.0](https://rust-lang.github.io/rfcs/1584-macros.html)]
+> [来源: [RFC 1584 — Macros 2.0](https://rust-lang.github.io/rfcs//1584-macros.html)]
 > [来源: [Rust By Example — Macros](https://doc.rust-lang.org/rust-by-example/macros.html)]
 > [来源: [proc-macro2 crate](https://docs.rs/proc-macro2/)]
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) ·
@@ -2335,7 +2336,7 @@ macro_rules! count_args {
 
 递归调用中的分隔符不匹配：
 
-```rust
+```rust,ignore
 count_args!(1, 2, 3)
 // 匹配第三个分支: $x=1, $rest=[2, 3]
 // 递归调用: count_args!(2, 3)  ← 注意：逗号被剥离了！
@@ -2397,7 +2398,7 @@ struct User {
 - 不需要修改结构体定义语法
 - 生态成熟（`derive_builder`、`structopt` → `clap`）
 
-```rust
+```rust,ignore
 use derive_builder::Builder;
 
 #[derive(Builder)]

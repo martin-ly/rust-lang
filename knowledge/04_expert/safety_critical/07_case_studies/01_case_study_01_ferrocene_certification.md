@@ -1,4 +1,8 @@
-> **权威来源**: [Ferrocene](https://ferrous-systems.com/ferrocene/), [TUV SUD](https://www.tuvsud.com/), [Rust Reference](https://doc.rust-lang.org/reference/)
+> **权威来源**:
+>
+> [Ferrocene](https://ferrous-systems.com/ferrocene/),
+> [TUV SUD](https://www.tuvsud.com/),
+> [Rust Reference](https://doc.rust-lang.org/reference/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Ferrocene 认证案例来源标注 [来源: Authority Source Sprint Batch 8]
 >

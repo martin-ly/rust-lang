@@ -6,7 +6,7 @@
 >
 # Machine Learning Ecosystem（机器学习生态）
 >
-> **EN**: Machine Learning Ecosystem（机器学习生态） (Chinese)
+> **EN**: Machine Learning Ecosystem
 > **Summary**: Machine Learning Ecosystem. Guide to 46 Machine Learning Ecosystem.
 >
 > **受众**: [进阶]
@@ -17,6 +17,8 @@
 > **前置依赖**: [类型系统](../01_foundation/04_type_system.md) · [泛型](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md) · [Unsafe Rust](../03_advanced/03_unsafe.md)
 > **后置延伸**: [嵌入式系统](./22_embedded_systems.md) · [性能优化](./15_performance_optimization.md) · [并发编程](../03_advanced/01_concurrency.md)
 
+>
+> **来源**: [candle](https://docs.rs/candle-core/) · [burn](https://docs.rs/burn/) · [tch-rs](https://docs.rs/tch/)
 ---
 
 > **来源**: [candle — Hugging Face](https://github.com/huggingface/candle) · [burn — Deep Learning Framework](https://burn.dev/) · [tch-rs — PyTorch Rust Bindings](https://github.com/LaurentMazare/tch-rs) · [ort — ONNX Runtime Rust](https://github.com/pykeio/ort) · [linfa — ML Algorithms](https://github.com/rust-ml/linfa) · [polars — DataFrame Library](https://pola.rs/) · [Apache Arrow Rust](https://arrow.apache.org/rust/) · [DataFusion — Query Engine](https://arrow.apache.org/datafusion/)
@@ -632,7 +634,7 @@ Rust 优势:
   · 跨平台 (ARM/x86/RISC-V + WASM)
 ```
 
-> **来源**: [Edge ML with Rust](https://www.arewelearningyet.com/) · [WASM ML](https://github.com/torch2424/wasm-bytes)
+> **来源**: [Edge ML with Rust](https://www.arewelearningyet.com/) · [WASM ML](https://github.com/torch2424/wasm-by-example)
 
 ---
 

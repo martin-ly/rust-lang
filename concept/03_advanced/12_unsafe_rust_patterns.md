@@ -12,8 +12,7 @@
 
 ---
 
-> **来源**:
-> [Rust Nomicon](https://doc.rust-lang.org/nomicon/) ·
+> **来源**: [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-blocks.html)
 > [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-keyword.html) ·
 > [Rust Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) ·
@@ -258,7 +257,7 @@ impl<T> MyVec<T> {
 ```
 
 > **抽象洞察**: **安全抽象的核心是"验证前置条件，然后调用 unsafe"**——safe 层检查，unsafe 层执行。
-> [来源: [Rust API Guidelines — Unsafe Functions](https://rust-lang.github.io/api-guidelines/documentation.html#unsafe-functions-document-conditions-c-unsafe-doc)]
+> [来源: [Rust API Guidelines — Unsafe Functions](https://rust-lang.github.io/api-guidelines//documentation.html#unsafe-functions-document-conditions-c-unsafe-doc)]
 
 ---
 
@@ -684,8 +683,8 @@ fn main() {
 > 3) 确保 `SelfRef: !Unpin`（通过 `std::marker::PhantomPinned`）。
 > 这是 Rust 异步生态的核心模式：async 状态机是自引用的（局部变量引用其他局部变量），`Pin` 保证状态机在 `.await` 点不被移动。
 > 与 C++ 的 `std::pin`（C++20，类似概念但无 `Unpin` 区分）或 Swift 的 `inout`（无 Pin 概念）不同——Rust 的 Pin 是类型系统的原生组成部分。
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-04-pin.html)] ·
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/pinning.html)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-concurrency-with-async.html)] ·
+> [来源: [Rustonomicon](https://doc.rust-lang.org/std/pin/index.html)]
 
 ### 10.4 边界测试：`MaybeUninit` 的数组初始化模式（编译错误）
 
@@ -776,7 +775,7 @@ fn main() {
 > 这与 C 的 `malloc` + `memcpy`（未初始化内存默认合法读取，但值不确定）或 C++ 的 `std::optional`（有状态跟踪）不同
 > ——Rust 的 `MaybeUninit` 将未初始化状态编码到类型系统，强制显式初始化。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html)] ·
-> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/uninit.html)]
+> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/uninitialized.html)]
 
 ### 10.4 边界测试：MaybeUninit 的未初始化内存读取（运行时 UB）
 

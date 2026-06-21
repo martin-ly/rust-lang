@@ -2,7 +2,7 @@
 
 > **Rust版本**: 1.96.0 stable (2026-05-28)
 > **Edition**: 2024
-> **状态**: v3.0 正式发布 | 288 concept 文件（共 322） | 2,890 Markdown | 1,524 Rust 源文件 | Bloom 双标签覆盖率 99.6% | Phase 1-5 完成 | 活跃锚点 0 | 代码块编译通过率 90.7%
+> **状态**: v3.0 正式发布 | 302 concept 文件（共 336） | 2,908 Markdown | 1,524 Rust 源文件 | Bloom 双标签覆盖率 99.6% | Phase 1-5 完成 | 活跃锚点 0 | 代码块编译通过率 100.0% | 概念国际化元数据覆盖率 EN/Summary/来源 100% | 2026-06-21
 
 [![Rust](https://img.shields.io/badge/rust-1.96.0+-blue.svg)](https://www.rust-lang.org)
 [![Edition](https://img.shields.io/badge/edition-2024-purple.svg)](https://doc.rust-lang.org/edition-guide/rust-2024/)

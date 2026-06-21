@@ -2,8 +2,8 @@
 
 # 类型擦除与动态分发
 >
-> **EN**: 类型擦除与动态分发 (Chinese)
-> **Summary**: 类型擦除与动态分发 (Chinese). Core Rust concept covering mechanism analysis, in-depth analysis, trait system mechanics.
+> **EN**: Type Erasure
+> **Summary**: Type Erasure: advanced Rust topics, performance/runtime considerations, and ecosystem patterns.
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 应用
 > **定位**: 深入探讨 Rust 中的**类型擦除**技术——从 trait object 到 vtable，分析动态分发如何在保持类型安全的同时实现运行时多态。
@@ -17,8 +17,7 @@
 
 ---
 
-> **来源**:
-> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> **来源**: [TRPL — Trait Objects](https://doc.rust-lang.org/book/ch17-02-trait-objects.html) · [Reference — Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html)
 > [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) ·
 > [Wikipedia — Type Erasure](https://en.wikipedia.org/wiki/Type_erasure) ·
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
@@ -375,7 +374,7 @@ fn main() {
 ```
 
 > **自定义洞察**: **Enum 类型擦除比 trait object 更快**——但限制了可扩展性。
-> [来源: [Rust Design Patterns — Type Erasure](https://rust-unofficial.github.io/patterns/patterns/behavioural/type-erasure.html)]
+> [来源: [Rust Design Patterns — Type Erasure](https://rust-unofficial.github.io/patterns/)]
 
 ---
 

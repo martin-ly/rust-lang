@@ -6,8 +6,8 @@
 >
 # Rust Web 框架对比与选型
 >
-> **EN**: Rust Web 框架对比与选型 (Chinese)
-> **Summary**: Rust Web 框架对比与选型 (Chinese). Core Rust concept covering cross-language comparison, mechanism analysis.
+> **EN**: Web Frameworks
+> **Summary**: Web Frameworks: Rust ecosystem tools, crates, and engineering practices.
 >
 > **📎 交叉引用**
 >
@@ -21,6 +21,8 @@
 > **前置概念**: [Async](../03_advanced/02_async.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Traits](../02_intermediate/01_traits.md)
 > **后置概念**: [云原生生态](./24_cloud_native.md) · [设计模式](02_patterns.md)
 
+>
+> **来源**: [axum](https://docs.rs/axum/) · [actix-web](https://docs.rs/actix-web/) · [Rocket](https://rocket.rs/)
 ---
 
 > **来源**:
@@ -30,7 +32,7 @@
 > [Poem](https://docs.rs/poem/latest/poem/) ·
 > [Tokio](https://tokio.rs/) ·
 > [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/) ·
-> [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html)
+> [RFC 2394](https://rust-lang.github.io/rfcs//2394-async_await.html)
 
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
 
@@ -764,7 +766,7 @@ graph TD
 | [Tokio 官方文档](https://tokio.rs/) | ✅ 一级 | 异步运行时 |
 | [Tower 文档](https://docs.rs/tower/latest/tower/) | ✅ 一级 | 中间件抽象 |
 | [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/) | ✅ 二级 | 性能基准测试 |
-| [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html) | ✅ 一级 | async/await 设计 |
+| [RFC 2394](https://rust-lang.github.io/rfcs//2394-async_await.html) | ✅ 一级 | async/await 设计 |
 | [hyper 文档](https://docs.rs/hyper/latest/hyper/) | ✅ 一级 | HTTP 协议实现 |
 | [Rust 异步编程](https://rust-lang.github.io/async-book/) | ✅ 一级 | 异步模型 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ⚠️ 三级 | 生态动态 |

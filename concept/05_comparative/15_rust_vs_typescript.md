@@ -3,8 +3,8 @@
 >
 # Rust vs TypeScript：静态类型系统的两种哲学 —— 编译期证明与渐进式工程
 >
-> **EN**: Type System
-> **Summary**: Type System. Core Rust concept covering cross-language comparison, mental model building, mechanism analysis.
+> **EN**: Rust vs TypeScript
+> **Summary**: Comparative analysis of Rust and TypeScript across type systems, compile-time guarantees, and domains.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
@@ -14,7 +14,7 @@
 
 ---
 
-> **来源**: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html) · [TypeScript Deep Dive](https://basarat.gitbook.io/typescript/) · [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [TC39 ECMAScript](https://tc39.es/ecma262/) · [WASM Specification](https://webassembly.github.io/spec/) · [Rust and WASM](https://rustwasm.github.io/book/) · [wasm-bindgen](https://rustwasm.github.io/wasm-bindgen/) · [ts-rs crate](https://docs.rs/ts-rs/latest/ts_rs/) · [oxc project](https://oxc.rs/) · [swc project](https://swc.rs/) · [Type System — Wikipedia](https://en.wikipedia.org/wiki/Type_system) · [Structural vs Nominal Typing](https://www.typescriptlang.org/docs/handbook/type-compatibility.html) · [Rustnomicon](https://doc.rust-lang.org/nomicon/) · [Node.js Performance](https://nodejs.org/en/docs/guides/dont-block-the-event-loop)
+> **来源**: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html) · [TypeScript Deep Dive](https://basarat.gitbook.io/typescript/) · [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [TC39 ECMAScript](https://tc39.es/ecma262/) · [WASM Specification](https://webassembly.github.io/spec/) · [Rust and WASM](https://rustwasm.github.io/book/) · [wasm-bindgen](https://rustwasm.github.io/docs/wasm-bindgen/) · [ts-rs crate](https://docs.rs/ts-rs/latest/ts_rs/) · [oxc project](https://oxc.rs/) · [swc project](https://swc.rs/) · [Type System — Wikipedia](https://en.wikipedia.org/wiki/Type_system) · [Structural vs Nominal Typing](https://www.typescriptlang.org/docs/handbook/type-compatibility.html) · [Rustnomicon](https://doc.rust-lang.org/nomicon/) · [Node.js Performance](https://nodejs.org/en/docs/guides/dont-block-the-event-loop)
 
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
 
@@ -309,7 +309,7 @@ TypeScript 核心特征:
 ```
 
 > **认知功能**: JavaScript 的 async/await 建立在**Promise + 事件循环**之上，取消是外显的（AbortController）；Rust 的 async/await 建立在**Future + Waker**之上，取消是内隐的（drop 即取消）。
-> [来源: [JavaScript MDN — AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController)] · [来源: [Rust Async Book — Cancellation](https://rust-lang.github.io/async-book/09_workarounds/03_cancellation.html)]
+> [来源: [JavaScript MDN — AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController)] · [来源: [Rust Async Book — Cancellation](https://rust-lang.github.io/async-book/)]
 
 ---
 
@@ -375,14 +375,14 @@ WASM 互操作模型:
   ├── 内存: Linear Memory（Wasm 管理）
   ├── 字符串: 编码为 UTF-8 字节传递
   └── 优势: 高性能计算、游戏引擎、图像处理
-  > [来源: [Rust and WASM](https://rustwasm.github.io/book/)] · [来源: [wasm-bindgen](https://rustwasm.github.io/wasm-bindgen/)]
+  > [来源: [Rust and WASM](https://rustwasm.github.io/book/)] · [来源: [wasm-bindgen](https://rustwasm.github.io/docs/wasm-bindgen/)]
 
   TypeScript ↔ WASM (Rust):
   ├── Rust 侧: #[wasm_bindgen] 导出函数/结构体
   ├── TS 侧: 自动生成 .d.ts 类型定义
   ├── 数据传递: number, string, Array, Object
   └── 工具: wasm-pack（构建 + 发布到 npm）
-  > [来源: [wasm-pack](https://rustwasm.github.io/wasm-pack/book/)]
+  > [来源: [wasm-pack](https://rustwasm.github.io/docs/wasm-pack/)]
 
   ts-rs crate（Rust 类型 → TS 类型）:
   #[derive(TS)]
@@ -572,7 +572,7 @@ graph TD
   ├── 反例: WASM ↔ JS 边界有序列化开销
   ├── 反例: WASM 无法直接访问 JS 对象（需复制）
   └── 结论: ❌ 错误 — WASM 适合计算密集型隔离任务，不适合高频 JS 交互
-  > [来源: [WASM Performance](https://webassembly.github.io/spec/core/benchmarks.html)] · [来源: [wasm-bindgen — Performance](https://rustwasm.github.io/wasm-bindgen/contributing/design/js-objects.html)]
+  > [来源: [WASM Performance](https://webassembly.github.io/spec/core/benchmarks.html)] · [来源: [wasm-bindgen — Performance](https://rustwasm.github.io/docs/wasm-bindgen/contributing/design/js-objects-in-rust.html)]
 ```
 
 > **层次一致性**: 反命题分析区分了**类型系统的力量**（Rust 的穷尽保证 vs TS 的渐进检查）和**运行时的真实行为**（TS 类型擦除后即为无类型 JS）。
@@ -627,7 +627,7 @@ graph TD
   ├── 症状: 频繁传递 String 导致 WASM ↔ JS 开销
   ├── 原因: 字符串需编码/解码为 UTF-8 字节
   └── 修复: 批量处理，减少跨边界调用次数
-  > [来源: [wasm-bindgen — Strings](https://rustwasm.github.io/wasm-bindgen/contributing/design/js-objects.html)]
+  > [来源: [wasm-bindgen — Strings](https://rustwasm.github.io/docs/wasm-bindgen/contributing/design/js-objects-in-rust.html)]
 
   陷阱 3: TypeScript 的隐式 any
   ├── 症状: 无返回类型注解的函数隐式返回 any
@@ -639,7 +639,7 @@ graph TD
   ├── 症状: WASM 中导出的 async Rust 函数在 TS 中表现异常
   ├── 原因: wasm-bindgen 将 Rust Future 包装为 JS Promise
   └── 修复: 理解包装层语义，避免跨边界持有锁
-  > [来源: [wasm-bindgen — Futures](https://rustwasm.github.io/wasm-bindgen/api/wasm_bindgen_futures/)]
+  > [来源: [wasm-bindgen — Futures](https://docs.rs/wasm-bindgen-futures/latest/wasm_bindgen_futures/)]
 
   陷阱 5: 忽视 TS 的运行时类型缺失
   ├── 症状: 假设编译期类型在运行时存在
@@ -662,7 +662,7 @@ graph TD
 | [TC39 ECMAScript](https://tc39.es/ecma262/) | ✅ 一级 | JavaScript 语言规范 |
 | [WASM Specification](https://webassembly.github.io/spec/) | ✅ 一级 | WebAssembly 规范 |
 | [Rust and WASM](https://rustwasm.github.io/book/) | ✅ 一级 | Rust WASM 官方指南 |
-| [wasm-bindgen](https://rustwasm.github.io/wasm-bindgen/) | ✅ 一级 | Rust ↔ JS 绑定工具 |
+| [wasm-bindgen](https://rustwasm.github.io/docs/wasm-bindgen/) | ✅ 一级 | Rust ↔ JS 绑定工具 |
 | [ts-rs crate](https://docs.rs/ts-rs/latest/ts_rs/) | ✅ 二级 | Rust 类型生成 TS 接口 |
 | [swc project](https://swc.rs/) | ✅ 二级 | Rust 编写的 TS/JS 编译器 |
 | [oxc project](https://oxc.rs/) | ✅ 二级 | Rust 编写的 JS 工具链 |

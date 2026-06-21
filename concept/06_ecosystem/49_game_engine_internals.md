@@ -6,7 +6,7 @@
 >
 # Game Engine Internals（游戏引擎内部原理）
 >
-> **EN**: Game Engine Internals（游戏引擎内部原理） (Chinese)
+> **EN**: Game Engine Internals
 > **Summary**: Game Engine Internals. Guide to 49 Game Engine Internals.
 >
 > **受众**: [进阶]
@@ -17,6 +17,8 @@
 > **前置依赖**: [ECS 架构](./07_game_ecs.md) · [游戏开发](./21_game_development.md) · [并发编程](../03_advanced/01_concurrency.md) · [Async/Await](../03_advanced/02_async.md)
 > **后置延伸**: [性能优化](./15_performance_optimization.md) · [嵌入式系统](./22_embedded_systems.md) · [内存管理](../02_intermediate/03_memory_management.md)
 
+>
+> **来源**: [Bevy Engine](https://bevyengine.org/) · [wgpu](https://docs.rs/wgpu/)
 ---
 
 > **来源**: [Bevy Engine](https://bevyengine.org/) ·
@@ -142,7 +144,7 @@ ECS 调度器                    特定系统和组件
 ```
 
 > **来源**: [Game Engine Architecture — Jason Gregory](https://www.gameenginebook.com/) ·
-> [Bevy Engine Architecture](https://bevyengine.org/learn/book/getting-started/ecs/)
+> [Bevy Engine Architecture](https://bevyengine.org/learn/book/)
 
 ---
 
@@ -293,7 +295,7 @@ impl Engine {
 }
 ```
 
-> **来源**: [Bevy Subsystem Design](https://bevyengine.org/learn/book/getting-started/bevy-app/) ·
+> **来源**: [Bevy Subsystem Design](https://bevyengine.org/learn/book/) ·
 > [Rust Ownership for Engine Architecture](https://docs.rs/bevy/latest/bevy/)
 
 ### 3.3 Rust 中的引擎骨架
@@ -351,7 +353,7 @@ fn main() {
 }
 ```
 
-> **来源**: [Bevy ECS Guide](https://bevyengine.org/learn/book/getting-started/ecs/) ·
+> **来源**: [Bevy ECS Guide](https://bevyengine.org/learn/book/) ·
 > [bevy_ecs crate](https://docs.rs/bevy_ecs/latest/bevy_ecs/)
 
 ---
@@ -747,7 +749,7 @@ impl AssetServer {
 }
 ```
 
-> **来源**: [Bevy Asset System](https://bevyengine.org/learn/book/getting-started/assets/) ·
+> **来源**: [Bevy Asset System](https://bevyengine.org/learn/book/) ·
 > [Tokio Async I/O](https://docs.rs/tokio/latest/tokio/fs/index.html)
 
 ### 7.2 热重载与版本控制
@@ -790,7 +792,7 @@ impl HotReloader {
 ```
 
 > **来源**: [notify crate](https://docs.rs/notify/latest/notify/) ·
-> [Bevy Hot Reloading](https://bevyengine.org/learn/book/getting-started/hot-reloading/)
+> [Bevy Hot Reloading](https://bevyengine.org/learn/book/)
 
 ---
 
@@ -900,7 +902,7 @@ struct InputSync {
            好的引擎应支持多种架构模式（Bevy 的 ECS + 传统节点树）。
 ```
 
-> **来源**: [Bevy ECS Design](https://bevyengine.org/learn/book/getting-started/ecs/) ·
+> **来源**: [Bevy ECS Design](https://bevyengine.org/learn/book/) ·
 > [OOP vs ECS — Martin Cave](https://www.gamedeveloper.com/programming/oop-is-dead-long-live-ecs) ·
 > [Game Programming Patterns](https://gameprogrammingpatterns.com/)
 
@@ -915,7 +917,7 @@ struct InputSync {
 | **音频延迟** | 10-50ms | OS 音频缓冲区 | 低延迟模式 + 专属线程 |
 | **内存碎片** | Arena/Pool 分配器 | 物理内存限制 | ECS 平铺布局天然紧凑 |
 
-> **来源**: [Bevy Performance](https://bevyengine.org/learn/book/getting-started/performance/) ·
+> **来源**: [Bevy Performance](https://bevyengine.org/learn/book/) ·
 > [Rapier Benchmarks](https://rapier.rs/docs/user_guides/rust/getting_started#benchmarks)
 
 ---
@@ -1012,7 +1014,7 @@ enum AssetState {
 }
 ```
 
-> **来源**: [Bevy Asset Loading](https://bevyengine.org/learn/book/getting-started/assets/) ·
+> **来源**: [Bevy Asset Loading](https://bevyengine.org/learn/book/) ·
 > [Error Handling in Rust](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
 
 ---

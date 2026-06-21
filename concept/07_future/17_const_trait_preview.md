@@ -1,10 +1,9 @@
 # Const Trait Preview
 
 > **代码状态**: [综述级 — 待补充代码]
-
 >
-> **EN**: Traits
-> **Summary**: Traits. Emerging Rust feature or ecosystem trend: Traits.
+> **EN**: Const Trait Preview
+> **Summary**: Preview of const traits for generic compile-time computation.
 >
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
@@ -18,7 +17,7 @@
 > **双维定位**: C×Eva — 评价 const trait 的设计权衡
 > **前置依赖**: [Trait](../02_intermediate/01_traits.md) · [Const Generics](../02_intermediate/02_generics.md)
 > **后置延伸**: [Const Trait Impl](./11_const_trait_impl_preview.md)
-> **来源**: [Rust Reference — Const Eval](https://doc.rust-lang.org/reference/const_eval.html) · [RFC 2632](https://rust-lang.github.io/rfcs/2632-const-trait-impl.html)
+> **来源**: [Rust Reference — Const Eval](https://doc.rust-lang.org/reference/const_eval.html) · [RFC 2632](https://github.com/rust-lang/rust/issues/67792)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 
@@ -55,8 +54,8 @@ fn main() {
 > 2) `min_specialization` 为常量/非常量分别实现；
 > 3) 放弃 const，使用运行时计算。
 > 这与 C++ 的 `constexpr`（函数可自动在编译期/运行期使用，无需特殊标记）或 D 的 `CTFE`（Compile Time Function Execution，类似但更灵活）不同——Rust 追求显式控制：const 函数有严格的副作用限制，trait 的 const 支持需显式声明。
-> [来源: [Const Trait RFC](https://rust-lang.github.io/rfcs/2632-const-trait-impl.html)] ·
-> [来源: [Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html)]
+> [来源: [Const Trait RFC](https://github.com/rust-lang/rust/issues/67792)] ·
+> [来源: [Const Generics](https://rust-lang.github.io/rfcs//2000-const-generics.html)]
 
 > **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)

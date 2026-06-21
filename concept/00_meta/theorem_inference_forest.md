@@ -1,7 +1,7 @@
 # Rust 知识体系定理推理森林
 >
-> **EN**: Rust 知识体系定理推理森林 (Chinese)
-> **Summary**: Rust 知识体系定理推理森林 (Chinese). Core Rust concept covering mental model building.
+> **EN**: Theorem Inference Forest
+> **Summary**: Theorem Inference Forest. Core Rust concept.
 >
 > **受众**: [研究者]
 >
@@ -10,6 +10,8 @@
 > **原则**: 每条定理链必须可追溯至 L4 形式化公理，并标注失效条件（什么情况下定理不成立）。
 > **符号约定**: `⊢` 推导 / `⟹` 蕴含 / `⇐` 依赖 / `⊘` 反例 / `≡` 等价
 
+>
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 > **Bloom 层级**: 元（Meta）

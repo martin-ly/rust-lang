@@ -16,11 +16,11 @@
 
 ---
 
-> **来源**: [Rust Reference — Errors](https://doc.rust-lang.org/reference/errors.html) ·
+> **来源**: [Rust Reference — Errors](https://doc.rust-lang.org/std/result/enum.Result.html) ·
 > [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) ·
 > [thiserror crate](https://docs.rs/thiserror/latest/thiserror/) ·
 > [anyhow crate](https://docs.rs/anyhow/latest/anyhow/) ·
-> [RFC 0243 — Trait-based Exception Handling](https://rust-lang.github.io/rfcs/0243-trait-based-exception-handling.html)
+> [RFC 0243 — Trait-based Exception Handling](https://rust-lang.github.io/rfcs//0243-trait-based-exception-handling.html)
 
 ## 📑 目录
 
@@ -138,7 +138,7 @@ fn last_char_of_first_line(text: &str) -> Option<char> {
 ```
 
 > **? 洞察**: `?` 运算符是 Rust **错误传播**的核心创新——它将异常处理的便捷性与显式返回的安全性结合。
-> [来源: [RFC 0243 — Trait-based Exception Handling](https://rust-lang.github.io/rfcs/0243-trait-based-exception-handling.html)]
+> [来源: [RFC 0243 — Trait-based Exception Handling](https://rust-lang.github.io/rfcs//0243-trait-based-exception-handling.html)]
 
 ---
 
@@ -495,10 +495,10 @@ graph TD
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
 | [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) | ✅ 一级 | 基础教程 |
-| [Rust Reference — Errors](https://doc.rust-lang.org/reference/errors.html) | ✅ 一级 | 错误参考 |
+| [Rust Reference — Errors](https://doc.rust-lang.org/std/result/enum.Result.html) | ✅ 一级 | 错误参考 |
 | [thiserror crate](https://docs.rs/thiserror/latest/thiserror/) | ✅ 一级 | 库错误派生 |
 | [anyhow crate](https://docs.rs/anyhow/latest/anyhow/) | ✅ 一级 | 应用错误处理 |
-| [RFC 0243](https://rust-lang.github.io/rfcs/0243-trait-based-exception-handling.html) | ✅ 一级 | ? 运算符设计 |
+| [RFC 0243](https://rust-lang.github.io/rfcs//0243-trait-based-exception-handling.html) | ✅ 一级 | ? 运算符设计 |
 | [Rust Error Handling WG](https://github.com/rust-lang/project-error-handling) | ✅ 一级 | 工作组 |
 
 ---

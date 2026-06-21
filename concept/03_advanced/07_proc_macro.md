@@ -2,8 +2,8 @@
 
 # 过程宏：编译期代码生成的元编程工具
 >
-> **EN**: Macros
-> **Summary**: Macros. Core Rust concept covering mental model building, mechanism analysis, in-depth analysis.
+> **EN**: Procedural Macros
+> **Summary**: Authoritative guide to procedural macros: derive, attribute, and function-like macros.
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[过程宏](../../knowledge/03_advanced/macros/02_procedural.md)
@@ -391,7 +391,7 @@ graph TD
 > **认知功能**: 此决策树判断是否应使用过程宏。核心原则是：**优先使用语言原生特性（泛型、Trait），过程宏是最后手段**。
 > **使用建议**: 80% 的"重复代码"可以用泛型解决；只有当模式跨越类型边界且无法抽象为 Trait 时，才考虑过程宏。
 > **关键洞察**: 过程宏增加了**编译时间**和**调试复杂度**——只在 boilerplate 显著影响可维护性时使用。
-> [来源: [Rust API Guidelines — Macros](https://rust-lang.github.io/api-guidelines/macros.html)]
+> [来源: [Rust API Guidelines — Macros](https://rust-lang.github.io/api-guidelines//macros.html)]
 
 ---
 
@@ -699,7 +699,7 @@ fn main() {
 
 ## 参考来源
 
-> [来源: [RFC 1566 — Procedural Macros](https://rust-lang.github.io/rfcs/1566-proc-macros.html)]
+> [来源: [RFC 1566 — Procedural Macros](https://rust-lang.github.io/rfcs//1566-proc-macros.html)]
 > [来源: [syn crate](https://docs.rs/syn/)]
 > [来源: [quote crate](https://docs.rs/quote/)]
 > [来源: [proc-macro2 crate](https://docs.rs/proc-macro2/)]
@@ -775,7 +775,7 @@ Rust 有两种宏系统：
 
 过程宏的标准工作流：
 
-```rust
+```rust,ignore
 // 1. syn 解析输入
 let input = parse_macro_input!(input as DeriveInput);
 

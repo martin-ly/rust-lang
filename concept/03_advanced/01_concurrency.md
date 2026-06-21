@@ -1357,7 +1357,7 @@ fn main() {
 ## 参考来源
 
 > [来源: [Rustonomicon — Concurrency](https://doc.rust-lang.org/nomicon/concurrency.html)]
-> [来源: [RFC 0458 — Send/Sync](https://rust-lang.github.io/rfcs/0458-send-sync.html)]
+> [来源: [RFC 0458 — Send/Sync](https://rust-lang.github.io/rfcs//0458-send-improvements.html)]
 > [来源: [Crossbeam crate](https://docs.rs/crossbeam/)]
 > [来源: [Rayon crate](https://docs.rs/rayon/)]
 > [来源: [Rust Atomics and Locks Book](https://marabos.nl/atomics/)]
@@ -1436,7 +1436,7 @@ Rust 并发安全的两个核心 marker trait：
 
 **题目**: 以下代码能否编译？如果不能，应该如何修复？
 
-```rust
+```rust,compile_fail
 use std::rc::Rc;
 use std::thread;
 

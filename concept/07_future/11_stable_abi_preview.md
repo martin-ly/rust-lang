@@ -1,10 +1,9 @@
 # Stable ABI Preview
 
 > **代码状态**: [综述级 — 待补充代码]
-
 >
-> **EN**: Stable ABI Preview (Chinese)
-> **Summary**: Stable ABI Preview (Chinese). Emerging Rust feature or ecosystem trend: Stable ABI Preview (Chinese).
+> **EN**: Stable Abi Preview
+> **Summary**: Stable Abi Preview: emerging Rust language feature or ecosystem trend.
 >
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
@@ -18,7 +17,7 @@
 > **双维定位**: C×Ana — 分析 Rust ABI 稳定性问题
 > **前置依赖**: [FFI](../03_advanced/05_rust_ffi.md) · [Unsafe](../03_advanced/03_unsafe.md)
 > **后置延伸**: [Rust for Linux](./19_rust_for_linux.md)
-> **来源**: [Rust Reference — ABI](https://doc.rust-lang.org/reference/items/external-blocks.html) · [RFC 2945](https://rust-lang.github.io/rfcs/2945-c-unwind-abi.html)
+> **来源**: [Rust Reference — ABI](https://doc.rust-lang.org/reference/items/external-blocks.html) · [RFC 2945](https://rust-lang.github.io/rfcs//2945-c-unwind-abi.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 
@@ -59,7 +58,7 @@ fn main() {}
 > 2) `panic` 跨 FFI 边界是 UB；
 > 3) `Drop` 在 FFI 中的行为未定义。这与 C++ 的 ABI（由 Itanium/MSVC 定义，稳定但不跨编译器）或 Swift 的 ABI（稳定但版本锁定）不同——Rust 追求语言级别的稳定 ABI，而非依赖平台约定。
 >
-> [来源: [crabi Proposal](https://rust-lang.github.io/rfcs/3325-crabi.html)] ·
+> [来源: [crabi Proposal](https://rust-lang.github.io/rfcs//3325-unsafe-attributes.html)] ·
 > [来源: [Rust FFI](https://doc.rust-lang.org/nomicon/ffi.html)]
 >
 > **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)

@@ -4,8 +4,8 @@
 >
 # Rust 数值类型与运算
 >
-> **EN**: Rust 数值类型与运算 (Chinese)
-> **Summary**: Rust 数值类型与运算 (Chinese). Core Rust concept covering mechanism analysis, security practices.
+> **EN**: Numeric Types
+> **Summary**: Numeric Types: core Rust concepts, syntax, and examples.
 > **受众**: [初学者]
 > **Bloom 层级**: 理解 → 应用
 > **定位**: 系统讲解 Rust 的**数值类型**——从整数、浮点到 wrapping/saturating 运算，分析类型安全如何防止数值错误。
@@ -14,7 +14,7 @@
 
 ---
 
-> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> **来源**: [TRPL — Data Types](https://doc.rust-lang.org/book/ch03-02-data-types.html) · [Reference — Types](https://doc.rust-lang.org/reference/types.html)
 > [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html) ·
 > [std::num](https://doc.rust-lang.org/std/num/index.html) ·
 > [Wikipedia — Integer Overflow](https://en.wikipedia.org/wiki/Integer_overflow) ·
@@ -532,7 +532,7 @@ fn main() {
 > 这在高频 Option 场景（解析器、图算法）中显著减少内存。
 > 构造必须通过 `NonZeroU32::new(u32) -> Option<NonZeroU32>`——编译器无法在类型层面证明字面量非零（`NonZeroU32::new(0)` 返回 `None`）。
 > 这与 C 的 `assert(x != 0)`（运行时检查，无优化）或 Swift 的 `Nonzero` 类型（无标准支持）不同——Rust 的 `NonZero*` 是标准库类型，与编译器深度集成。
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/num/struct.NonZeroU32.html)] ·
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/num/type.NonZeroU32.html)] ·
 > [来源: [The Rust Performance Book](https://nnethercote.github.io/perf-book/type-sizes.html)]
 
 ### 10.3 边界测试：`Wrapping<T>` 与 `T` 的混用陷阱（编译错误）

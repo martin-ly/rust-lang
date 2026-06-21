@@ -1,12 +1,14 @@
 # Rust 知识体系全局思维导图（Knowledge Mindmap）
 >
-> **EN**: Rust 知识体系全局思维导图（Knowledge Mindmap） (Chinese)
-> **Summary**: Rust 知识体系全局思维导图. Core Rust concept covering AI/ML integration patterns.
+> **EN**: Knowledge Mindmap
+> **Summary**: Knowledge Mindmap. Core Rust concept.
 > **受众**: [进阶]
 > **定位**: 本文件是 `concept/` 知识体系的**认知入口**——用 Mermaid `mindmap` 语法将整个 L0-L7 知识体系浓缩为一张可导航的思维导图，帮助学习者建立全局认知地图。
 > **原则**: 不做"内容重复"，聚焦"结构导航"——每个节点链接到对应的具体文件。
 > **使用方法**: 在支持 Mermaid 的 Markdown 阅读器中查看，点击节点 mentally 定位到对应主题。
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 > **Bloom 层级**: 记忆 → 理解

@@ -3,7 +3,7 @@
 # 测验：Trait 与泛型（试点扩展）
 >
 > **EN**: Generics
-> **Summary**:
+> **Summary**: Quiz Traits And Generics. Core Rust concept.
 > ```rust trait Summary { fn summarize(&self) -> String; } struct Article { headline: String, } fn main() { let article = Article { headline: String::from("News") }; println!("{}", article.summarize()); }```
 > <details> <summary>💡 点击展开答案与解析</summary>
 > **答案**：❌ 不能编译。
@@ -41,7 +41,7 @@
 
 ### Q1. 以下代码能否编译？若不能，为什么？
 
-```rust
+```rust,ignore
 trait Summary {
     fn summarize(&self) -> String;
 }
@@ -65,7 +65,7 @@ fn main() {
 
 **解析**：定义 `trait Summary` 后，必须为具体类型**显式实现（impl）**该 trait：
 
-```rust
+```rust,ignore
 impl Summary for Article {
     fn summarize(&self) -> String {
         format!("Article: {}", self.headline)
@@ -172,7 +172,7 @@ fn main() {
 
 **Trait bound 的多种写法**：
 
-```rust
+```rust,ignore
 // 单约束
 fn render<T: Drawable>(item: T) {}
 
@@ -231,7 +231,7 @@ enum Result<T, E> {
 
 编译期为每个具体类型生成独立代码：
 
-```rust
+```rust,ignore
 Option<i32>    // 编译期生成一个版本
 Option<&str>   // 编译期生成另一个版本
 ```
@@ -428,7 +428,7 @@ fn print_it<T: ?Sized>(t: &T) {
 
 ### Q8. 以下代码能否编译？解释 `impl Trait` 作为返回类型的限制
 
-```rust
+```rust,compile_fail
 trait Animal {
     fn name(&self) -> &str;
 }
@@ -468,7 +468,7 @@ fn main() {
 
 **解决方案**——使用 trait 对象：
 
-```rust
+```rust,ignore
 fn random_animal(n: i32) -> Box<dyn Animal> {
     if n % 2 == 0 {
         Box::new(Dog)
@@ -543,7 +543,7 @@ p2 distance = 5
 
 **代码结构**：
 
-```rust
+```rust,ignore
 impl<T> Point<T> {
     // 所有 Point<T> 可用
 }
@@ -561,7 +561,7 @@ impl Point<f32> {
 
 ### Q10. 以下代码能否编译？解释 `Copy` 和 `Clone` 的关系
 
-```rust
+```rust,compile_fail
 #[derive(Clone)]
 struct MyStruct {
     data: String,

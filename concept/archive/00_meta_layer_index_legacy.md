@@ -1,14 +1,19 @@
+> **Summary**:
+>
+> Meta Layer Index Legacy. Core Rust concept.
 > **内容分级**: [综述级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **归档声明**: 本文件前部为 Rust 概念知识体系 **L0 元信息层索引**。原 PostgreSQL 18+ 形式化分析内容已折叠至文件尾部 `§[PostgreSQL 18+ 形式化分析归档]`。
 > 与 Rust 相关的跨系统对比内容已提取至 [`05_comparative/04_safety_boundaries.md`](05_comparative/04_safety_boundaries.md) §10。
 >
 > **状态**: v1.1（2026-05-13 重构索引）
-
+>
+> **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
 ---
 
 # L0 元信息层索引（Meta Layer Index）
-
+>
+> **EN**: Meta Layer Index Legacy
 > **受众**: [进阶]
 > **定位**: 本层为 Rust 概念知识体系的**元信息层**，存放权威来源、方法论、知识来源关系、全局索引等基础设施。所有 L1-L7 文件必须遵循本层定义的元规则。
 > **Bloom 层级**: —（元结构，不适用）

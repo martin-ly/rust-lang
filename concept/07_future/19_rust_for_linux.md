@@ -1,7 +1,6 @@
 # Rust for Linux ：操作系统内核中的内存安全
 
 > **代码状态**: [综述级 — 待补充代码]
-
 >
 > **EN**: Operating Systems
 > **Summary**: Operating Systems. Core Rust concept covering mechanism analysis, in-depth analysis, FFI interoperability.
@@ -16,6 +15,8 @@
 > **前置概念**: [Unsafe](../03_advanced/03_unsafe.md) · [FFI](../03_advanced/05_rust_ffi.md) · [Cross Compilation](../06_ecosystem/17_cross_compilation.md)
 > **后置概念**: [Formal Methods](../04_formal/04_rustbelt.md) · [Evolution](./03_evolution.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
+> **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/) · [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 ---
 
 > **来源**: [Rust for Linux](https://rust-for-linux.com/) ·
@@ -37,6 +38,8 @@
     - [2.2 内核抽象层](#22-内核抽象层)
     - [2.3 驱动程序开发模型](#23-驱动程序开发模型)
   - [三、采用状态矩阵](#三采用状态矩阵)
+    - [3.1 内核 Rust 实验正式结束（2025-12）](#31-内核-rust-实验正式结束2025-12)
+    - [3.2 Linux 7.0 将 Rust 支持提升为 stable（2026-04）](#32-linux-70-将-rust-支持提升为-stable2026-04)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
@@ -60,6 +63,14 @@
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
+  - [自 docs/06\_toolchain/06\_rust\_for\_linux\_tooling\_guide.md 合并的补充内容](#自-docs06_toolchain06_rust_for_linux_tooling_guidemd-合并的补充内容)
+    - [工具链需求](#工具链需求)
+    - [内核编译目标](#内核编译目标)
+    - [内核模块编写基础](#内核模块编写基础)
+      - [`#[no_std]` 与 `#[no_main]`](#no_std-与-no_main)
+      - [`panic_handler`](#panic_handler)
+      - [`alloc` 配置](#alloc-配置)
+    - [与标准 Rust 开发的差异](#与标准-rust-开发的差异)
 
 ---
 
@@ -175,7 +186,7 @@ Rust for Linux 项目结构:
 ```
 
 > **unsafe 洞察**: Rust for Linux 的**核心策略**是"unsafe 封装"——将 C API 的 unsafe 调用封装为 safe 抽象，使驱动开发者编写 safe Rust。
-> [来源: [Rust for Linux — Safety](https://rust-for-linux.com/safety)]
+> [来源: [Rust for Linux — Safety](https://rust-for-linux.com/)]
 
 ---
 
@@ -373,7 +384,7 @@ Rust for Linux 采用状态 (2024+):
 > **MSRV 策略来源**: [Inside Rust — Program Management Update February 2026](https://blog.rust-lang.org/inside-rust/2026/03/27/program-management-update-2026-02/)（2026-03-27）
 > Debian Stable 对 Rust for Linux 至关重要，因为它提供了内核开发所需的最小 Rust 版本基线。MSRV 升级后，内核可以采用新的稳定特性，消除维护多个条件编译路径的负担。
 > **采用矩阵**: Rust for Linux 是**渐进式替换**——从外围驱动开始，逐步向核心子系统推进。
-> [来源: [Rust for Linux — Status](https://rust-for-linux.com/status)]
+> [来源: [Rust for Linux — Status](https://rust-for-linux.com/)]
 
 ### 3.1 内核 Rust 实验正式结束（2025-12）
 
@@ -463,7 +474,7 @@ graph TD
 ```
 
 > **边界要点**: Rust for Linux 的边界主要与**启动代码**、**内联汇编**、**编译器版本**、**调试工具**和**社区接受度**相关。
-> [来源: [Rust for Linux — Challenges](https://rust-for-linux.com/challenges)]
+> [来源: [Rust for Linux — Challenges](https://rust-for-linux.com/)]
 
 ---
 
@@ -507,7 +518,7 @@ graph TD
 ```
 
 > **陷阱总结**: Rust for Linux 的陷阱主要与**C 绑定安全**、**内核分配器**、**panic 处理**、**并发原语**和**许可证**相关。
-> [来源: [Rust for Linux — Getting Started](https://rust-for-linux.com/getting-started)]
+> [来源: [Rust for Linux — Getting Started](https://rust-for-linux.com/)]
 
 ---
 
@@ -807,3 +818,133 @@ fn main() {}
 ### 反命题与边界
 
 > **反命题**: "Rust for Linux ：操作系统内核中的内存安全 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
+
+## 自 docs/06_toolchain/06_rust_for_linux_tooling_guide.md 合并的补充内容
+
+> **合并说明**: 以下内容来自 `docs/06_toolchain/06_rust_for_linux_tooling_guide.md`（2026-05-08 创建），
+> 专注 Rust for Linux 的工具链需求、裸机目标、`panic_handler`、`alloc` 配置等独特实操细节。
+
+### 工具链需求
+>
+> **[来源: Rust Official Docs]**
+
+在内核中编译 Rust 代码与常规用户态开发有本质区别，需要专门的工具链配置：
+
+| 组件 | 说明 | 版本要求 |
+| :--- | :--- | :--- |
+| `rustc` | 需支持裸机目标（`no_std`） | 1.85.0+（内核分支可能锁定特定 nightly） |
+| `bindgen` | 自动生成 C 头文件的 Rust FFI 绑定 | 0.70+ |
+| `libclang` | `bindgen` 依赖的 C/C++ 前端 | LLVM 18+ |
+| `rustfmt` | 内核代码格式化 | 与 `rustc` 配套 |
+| `clippy` | 静态检查（内核配置下禁用部分 lint） | 与 `rustc` 配套 |
+| `QEMU` | 调试与测试环境 | 8.0+ |
+
+**关键配置**：
+
+- 内核的 `Kconfig` 提供 `CONFIG_RUST` 选项，启用后会调用 `scripts/rust/` 下的工具链脚本。
+- `bindgen` 的配置由内核 `Makefile` 和 `.bindgen` 规则统一管理，开发者通常无需手动调用。
+
+---
+
+### 内核编译目标
+>
+> **[来源: Rust Official Docs]**
+
+Rust for Linux 使用裸机（bare-metal）目标，没有操作系统支撑的标准库：
+
+| 目标三元组 | 架构 | 说明 |
+| :--- | :--- | :--- |
+| `x86_64-unknown-none` | x86_64 | 64 位 x86 裸机，无 `std` |
+| `aarch64-unknown-none` | ARM64 | 64 位 ARM 裸机，无 `std` |
+| `riscv64gc-unknown-none-elf` | RISC-V | 实验性支持 |
+
+这些目标与常规 Linux 用户态目标（如 `x86_64-unknown-linux-gnu`）的核心差异：
+
+- **无 `std`**：无法使用 `std::vec::Vec`、`std::string::String` 等，需通过内核封装的 `alloc` 或自定义容器替代。
+- **无 `libc`**：内核直接运行在硬件之上，不依赖 C 标准库。
+- **自定义链接脚本**：由内核 `Makefile` 和 `vmlinux.lds` 控制，Rust 编译出的目标文件（`.o`）与 C 目标文件统一链接。
+
+---
+
+### 内核模块编写基础
+>
+> **[来源: Rust Official Docs]**
+
+一个最小的 Rust 内核模块需要显式处理以下语言层面约束：
+
+#### `#[no_std]` 与 `#[no_main]`
+
+> **[来源: Wikipedia - Type System]**
+>
+> **[来源: Rust Official Docs]**
+
+```rust,ignore
+#![no_std]
+#![no_main]
+```
+
+- `#![no_std]`：禁用标准库，仅保留 `core`。
+- `#![no_main]`：内核模块不是独立可执行程序，没有用户态的 `main` 函数。
+
+#### `panic_handler`
+
+> **[来源: Wikipedia - Rust (programming language)]**
+>
+> **[来源: Rust Official Docs]**
+
+内核中 `panic` 不能展开栈（unwinding），必须提供一个终止型的 panic handler：
+
+```rust,ignore
+use core::panic::PanicInfo;
+
+#[panic_handler]
+fn panic(_info: &PanicInfo) -> ! {
+    // 内核 panic：记录日志并停止当前 CPU
+    loop {}
+}
+```
+
+> **版本标注**: Rust 1.81+ 引入了 `#[expect(panic_handler)]` 属性，内核工具链已跟进此 lint。
+
+#### `alloc` 配置
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+>
+> **[来源: Rust Official Docs]**
+
+若需要使用堆分配（如 `Box`、`Vec`），需显式定义全局分配器。内核提供专门的 `KernelAllocator`：
+
+```rust,ignore
+extern crate alloc;
+
+use kernel::alloc::KernelAllocator;
+
+#[global_allocator]
+static ALLOCATOR: KernelAllocator = KernelAllocator;
+```
+
+---
+
+### 与标准 Rust 开发的差异
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+| 维度 | 标准 Rust（用户态） | Rust for Linux（内核态） |
+| :--- | :--- | :--- |
+| 标准库 | `std` + `alloc` + `core` | 仅 `core` + 可选 `alloc` |
+| 全局分配器 | 默认 `System` | 必须显式指定 `KernelAllocator` |
+| Panic 行为 | 默认 unwinding | 必须 `abort`（内核不支持栈展开） |
+| `unsafe` 审计 | 业务逻辑层面 | 极度严格：每行 `unsafe` 需配对安全注释 |
+| 浮点运算 | 自由使用 | 受限（内核上下文可能禁用 FPU） |
+| 并发原语 | `std::sync::Mutex` | 内核 `spinlock_t` / `mutex_t` 封装 |
+| 错误处理 | `Result<T, E>` + `?` | 内核错误码 `i32`（如 `-EINVAL`） |
+| 测试框架 | `cargo test` | 内核 `kselftest` 或 `KUnit` |
+
+```mermaid
+graph LR
+    A[标准 Rust] -->|std, cargo, libc| B[用户态程序]
+    C[内核 Rust] -->|core, no_std, 内核 ABI| D[vmlinux / .ko]
+    B -.->|syscall| D
+```
+
+---

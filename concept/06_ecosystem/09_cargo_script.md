@@ -1,3 +1,9 @@
+# Cargo Script
+
+> **EN**: Cargo Script
+> **Summary**: Cargo Script single-file programs with frontmatter dependencies and `cargo` execution.
+> **来源**: [Cargo Book — Scripts](https://doc.rust-lang.org/cargo/reference/unstable.html#script) · [Rust 1.85 Release Notes](https://blog.rust-lang.org/2025/02/20/Rust-1.85.0.html)
+
 ## 代码示例：Cargo Script 单文件程序
 
 > **代码状态**: [综述级 — 待补充代码]
@@ -20,9 +26,6 @@ use clap::Parser;
 use chrono::Local;
 
 # [derive(Parser)]
->
-> **EN**: [derive(Parser)] (Chinese)
-> **Summary**: 以下是一个完整的 Cargo Script 示例，演示 frontmatter 依赖声明与单文件执行： ```rust,ignore```cargo [package] name = "csv-filter" edition = "2024" [dependencies] clap = { version = "4", features = ["derive"] } chrono = "0.4" ``` use clap::Parser; use chrono::Local; struct Args { #[arg(help = "输入 CSV 文件路径")] input: String,
 
 struct Args {
     #[arg(help = "输入 CSV 文件路径")]
@@ -76,6 +79,8 @@ chmod +x csv_filter.rs && ./csv_filter.rs
 
 ## 📑 目录
 
+- [Cargo Script](#cargo-script)
+  - [代码示例：Cargo Script 单文件程序](#代码示例cargo-script-单文件程序)
 - [\[derive(Parser)\]](#deriveparser)
 - [Cargo Script：单文件 Rust 程序](#cargo-script单文件-rust-程序)
   - [📑 目录](#-目录)
@@ -119,7 +124,7 @@ chmod +x csv_filter.rs && ./csv_filter.rs
 
 ## 一、核心概念
 
-Cargo Script（[RFC 3502](https://rust-lang.github.io/rfcs/3502.html) + [RFC 3503](https://rust-lang.github.io/rfcs/3503.html)）允许在单个 `.rs` 文件中编写完整 Rust 程序并直接执行，**无需 `Cargo.toml` 或项目目录结构**。两个 RFC 均已获批：[RFC 3502](https://rust-lang.github.io/rfcs/3502.html) 定义单文件 manifest 格式，[RFC 3503](https://rust-lang.github.io/rfcs/3503.html) 定义 frontmatter 语法。RFC 3502/3503 已获批，**Cargo Script FCP 已结束**，但当前被 **edition policy（lang/edition 方面）block**，尚未完全稳定。当前 nightly 可通过 `-Zscript` 使用，frontmatter 支持亦在积极推进中。
+Cargo Script（[RFC 3502](https://rust-lang.github.io/rfcs//3502-cargo-script.html) + [RFC 3503](https://rust-lang.github.io/rfcs//3503-frontmatter.html)）允许在单个 `.rs` 文件中编写完整 Rust 程序并直接执行，**无需 `Cargo.toml` 或项目目录结构**。两个 RFC 均已获批：[RFC 3502](https://rust-lang.github.io/rfcs//3502-cargo-script.html) 定义单文件 manifest 格式，[RFC 3503](https://rust-lang.github.io/rfcs//3503-frontmatter.html) 定义 frontmatter 语法。RFC 3502/3503 已获批，**Cargo Script FCP 已结束**，但当前被 **edition policy（lang/edition 方面）block**，尚未完全稳定。当前 nightly 可通过 `-Zscript` 使用，frontmatter 支持亦在积极推进中。
 
 ### 1.1 三种执行方式
 
@@ -262,7 +267,7 @@ graph TD
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **思维表征说明**: `graph TD` 流程图将 Cargo Script 的**内部执行机制**可视化——从单文件输入到最终运行的完整管道。
 > 关键洞察：Cargo Script 并非「无需编译」，而是「**隐式管理编译**」——frontmatter 被解析为临时 `Cargo.toml`，编译缓存存储在 `~/.cargo/script-cache/`，第二次执行时若源码未变更则直接复用。
-> 这与传统 `cargo run` 的差异在于「临时项目」的自动化管理。 [来源: [RFC 3502](https://rust-lang.github.io/rfcs/3502.html) §Execution Model; Cargo Book — Scripts]
+> 这与传统 `cargo run` 的差异在于「临时项目」的自动化管理。 [来源: [RFC 3502](https://rust-lang.github.io/rfcs//3502-cargo-script.html) §Execution Model; Cargo Book — Scripts]
 
 **何时使用 Cargo Script？决策树（Mermaid graph TD）**:
 
@@ -300,7 +305,7 @@ graph TD
 > 此决策树帮助程序员在「Cargo Script」和「传统 Cargo 项目」之间做出**工程化的选择**
 > ——不是「Cargo Script 可以替代所有项目」，而是「根据项目规模、依赖复杂度、构建需求选择适当的工具」。
 > 叶子节点的颜色编码（绿色=传统项目，黄色=Cargo Script）直观传达了推荐倾向。
-> [来源: [RFC 3503](https://rust-lang.github.io/rfcs/3503.html) §Motivation; Cargo Book — When to use scripts]
+> [来源: [RFC 3503](https://rust-lang.github.io/rfcs//3503-frontmatter.html) §Motivation; Cargo Book — When to use scripts]
 
 ---
 
@@ -389,7 +394,7 @@ $$
 \text{ScriptFile} \cong \text{Crate}\langle \text{name} \leftarrow \text{filename}, \text{manifest} \leftarrow \text{frontmatter} \rangle
 $$
 
-> [来源: [Cargo 源码 — `ops/script.rs`](https://github.com/rust-lang/cargo/blob/master/src/cargo/ops/script.rs) — 单文件脚本在 Cargo 内部通过 `to_manifest()` 转换为标准 `Manifest`，然后走常规编译流程。
+> [来源: [Cargo 源码 — `util/toml/embedded.rs`](https://github.com/rust-lang/cargo/blob/master/src/cargo/util/toml/embedded.rs) — 单文件脚本在 Cargo 内部通过 `to_manifest()` 转换为标准 `Manifest`，然后走常规编译流程。
 
 ### 5.2 与模块系统的关系
 
@@ -542,7 +547,7 @@ fn main() {
 > 3) 对关键脚本进行版本锁定审查。
 > 这与 Python 的 `pip install`（同样解析最新版本）或 Node 的 `npx`（每次可能下载最新版本）相同——便捷与确定性是权衡。
 > `cargo` 的 lock 文件机制缓解了部分风险，但 script 的隐式性增加了不确定性。
-> [来源: [Cargo Script RFC](https://rust-lang.github.io/rfcs/3502-cargo-script.html)] ·
+> [来源: [Cargo Script RFC](https://rust-lang.github.io/rfcs//3502-cargo-script.html)] ·
 > [来源: [Cargo Documentation](https://doc.rust-lang.org/cargo/)]
 
 ### 10.7 边界测试：cargo script 的依赖解析与版本冲突（运行时/编译错误）
@@ -577,7 +582,7 @@ fn main() {
 > 3) 不支持复杂构建脚本。
 > 这与 Python 的 `pip` + `requirements.txt`（类似冲突）或 Deno 的 URL 导入（无版本冲突，但无版本管理）不同
 > ——Cargo 的依赖解析是行业中最成熟的之一，但单文件脚本的限制仍需注意。
-> [来源: [Cargo Script RFC](https://rust-lang.github.io/rfcs/3424-cargo-script.html)] ·
+> [来源: [Cargo Script RFC](https://rust-lang.github.io/rfcs//3424-cargo-script.html)] ·
 > [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)]
 
 ### 10.3 边界测试：cargo script 的 shebang 与 Windows 兼容性（运行时错误）
@@ -609,7 +614,7 @@ fn main() {
 > 3) 不支持复杂构建脚本。适用场景：快速原型、单次运行脚本、教学示例。
 > 这与 Python 的 shebang（跨平台更成熟）或 Deno 的 `deno run script.ts`（内置脚本运行，无需 shebang）不同
 > ——Rust 的 cargo script 是实验性功能，仍在演进。
-> [来源: [Cargo Script RFC](https://rust-lang.github.io/rfcs/3424-cargo-script.html)] ·
+> [来源: [Cargo Script RFC](https://rust-lang.github.io/rfcs//3424-cargo-script.html)] ·
 > [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)]
 > **过渡**: Cargo Script：单文件 Rust 程序 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 

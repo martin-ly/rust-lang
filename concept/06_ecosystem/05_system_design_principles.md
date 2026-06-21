@@ -3,8 +3,8 @@
 > **代码状态**: ✅ 含可编译示例
 
 >
-> **EN**: Rust 系统设计原则与国际权威对齐 (Chinese)
-> **Summary**: Rust 系统设计原则与国际权威对齐 (Chinese). Core Rust concept covering formal methods foundations, security practices.
+> **EN**: System Design Principles
+> **Summary**: System Design Principles: Rust ecosystem tools, crates, and engineering practices.
 > **受众**: [进阶]
 > **内容分级**: [专家级]
 > **定位**: 本文件从**系统架构设计**视角梳理 Rust 的核心设计原则，并与国际权威内容（形式化方法、分布式系统理论、安全工程、容错计算）建立对齐关系。
@@ -12,6 +12,8 @@
 > **对齐来源**: [RustBelt] · [SE L4] · [NIST Zero Trust] · [AWS TLA+] · [Erlang OTP] · [CAP Theorem] · [CALM Theorem]
 > **基准版本**: Rust 1.96.0 stable (Edition 2024)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
+> **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [Cargo Book](https://doc.rust-lang.org/cargo/)
 ---
 
 > **Bloom 层级**: 评价 → 创造

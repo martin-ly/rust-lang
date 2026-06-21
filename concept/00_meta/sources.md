@@ -1,13 +1,15 @@
 # 权威来源清单与知识来源关系分析
 >
-> **EN**: 权威来源清单与知识来源关系分析 (Chinese)
-> **Summary**: 权威来源清单与知识来源关系分析 (Chinese). Authoritative source mapping and citation management for Rust concepts.
+> **EN**: Sources
+> **Summary**: Sources. Core Rust concept.
 > **受众**: [进阶]
 > **内容分级**: [研究者级]
 > **Bloom 层级**: 应用
 > **定位**：本文件维护 Rust 概念知识体系的所有权威来源，构建如实的知识来源关系网络。所有 `concept/` 下的概念文件引用来源时，应优先引用本清单中的条目。
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 
+>
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 ## 📑 目录
@@ -150,7 +152,7 @@ graph TD
 | **维护方** | Rust Lang Team |
 | **性质** | 语言演进的设计文档，包含动机、设计、替代方案 |
 | **适用范围** | 理解特定特性为何如此设计（如 Pin、async/await、Edition） |
-| **关键 RFCs** | RFC 200 (ownership/lifetime notation), RFC 769 (SIMD), [RFC 2349](https://rust-lang.github.io/rfcs/2349.html) (async/await), [RFC 2585](https://rust-lang.github.io/rfcs/2585.html) (unsafe blocks) |
+| **关键 RFCs** | RFC 200 (ownership/lifetime notation), RFC 769 (SIMD), [RFC 2349](https://rust-lang.github.io/rfcs//2349-pin.html) (async/await), [RFC 2585](https://rust-lang.github.io/rfcs//2585-unsafe-block-in-unsafe-fn.html) (unsafe blocks) |
 | **引用格式** | `[RFC-编号: 标题]` |
 
 ---

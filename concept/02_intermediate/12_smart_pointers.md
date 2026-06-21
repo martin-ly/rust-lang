@@ -25,7 +25,7 @@
 > [std::sync::Arc](https://doc.rust-lang.org/std/sync/struct.Arc.html) ·
 > [std::cell::RefCell](https://doc.rust-lang.org/std/cell/struct.RefCell.html) ·
 > [TRPL Ch15 — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) ·
-> [Rustonomicon — Interior Mutability](https://doc.rust-lang.org/nomicon/interior-mutability.html)
+> [Rustonomicon — Interior Mutability](https://doc.rust-lang.org/nomicon/concurrency.html)
 
 ## 📑 目录
 
@@ -223,7 +223,7 @@ let weak = Rc::downgrade(&data);
 ```
 
 > **内部可变性洞察**: Cell/RefCell 是 Rust **借用规则的逃逸舱口**——当编译器无法证明借用安全时，将检查推迟到运行时。这是**性能 vs 安全**的权衡。
-> [来源: [Rustonomicon — Interior Mutability](https://doc.rust-lang.org/nomicon/interior-mutability.html)]
+> [来源: [Rustonomicon — Interior Mutability](https://doc.rust-lang.org/nomicon/concurrency.html)]
 
 ---
 
@@ -345,7 +345,7 @@ struct Node {
 ```
 
 > **选型原则**: 从**最少能力**开始——先用 Box，不够再加 Rc/Arc，需要可变再加 RefCell/Mutex。
-> [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/flexibility.html)]
+> [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines//flexibility.html)]
 
 ---
 
@@ -463,7 +463,7 @@ graph TD
 ```
 
 > **陷阱总结**: 智能指针的陷阱主要与**语义混淆**、**借用冲突**、**线程安全误解**和**过度使用**相关。理解每种指针的所有权语义是避免陷阱的关键。
-> [来源: [Rust Clippy — Rc clone](https://rust-lang.github.io/rust-clippy/master/index.html)]
+> [来源: [Rust Clippy — Rc clone](https://rust-lang.github.io/rust-clippy//master/index.html)]
 
 ### 编译错误示例
 
@@ -581,7 +581,7 @@ fn fixed() {
 | [std::rc::Rc](https://doc.rust-lang.org/std/rc/struct.Rc.html) | ✅ 一级 | 标准库文档 |
 | [std::sync::Arc](https://doc.rust-lang.org/std/sync/struct.Arc.html) | ✅ 一级 | 标准库文档 |
 | [TRPL Ch15 — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) | ✅ 一级 | 智能指针章节 |
-| [Rustonomicon — Interior Mutability](https://doc.rust-lang.org/nomicon/interior-mutability.html) | ✅ 一级 | 内部可变性深入 |
+| [Rustonomicon — Interior Mutability](https://doc.rust-lang.org/nomicon/concurrency.html) | ✅ 一级 | 内部可变性深入 |
 | [Rust Performance Book](https://nnethercote.github.io/perf-book/) | ✅ 二级 | 性能优化指南 |
 
 ---
@@ -699,7 +699,7 @@ fn main() {
 
 > [来源: [std::sync::Arc](https://doc.rust-lang.org/std/sync/struct.Arc.html)]
 
-> [来源: [Rustonomicon — Rc and Arc](https://doc.rust-lang.org/nomicon/rc-mostly.html)]
+> [来源: [Rustonomicon — Rc and Arc](https://doc.rust-lang.org/std/rc/struct.Rc.html)]
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
@@ -814,7 +814,7 @@ trait Deref {
 
 以下代码的输出顺序是什么？
 
-```rust
+```rust,ignore
 struct LoudDrop(&'static str);
 impl Drop for LoudDrop {
     fn drop(&mut self) { println!("Drop: {}", self.0); }

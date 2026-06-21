@@ -22,6 +22,8 @@
 > [Reactive Programming](./40_reactive_programming.md) ·
 > [分布式系统](./18_distributed_systems.md)
 
+>
+> **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Cargo Book](https://doc.rust-lang.org/cargo/)
 ---
 
 > **来源**: [Workflow Management Coalition — Terminology & Glossary](https://www.wfmc.org/standards/terminology) ·
@@ -596,7 +598,7 @@ impl Future for OrderWorkflowState {
 }
 ```
 
-> **来源**: [Rust async-book — Under the Hood](https://rust-lang.github.io/async-book/01_getting_started/04_async_await_primer.html) · [Rust Reference — Generators](https://doc.rust-lang.org/reference/items/generators.html)
+> **来源**: [Rust async-book — Under the Hood](https://rust-lang.github.io/async-book//01_getting_started/04_async_await_primer.html) · [Rust Reference — Generators](https://doc.rust-lang.org/reference/items/functions.html#generator-functions)
 
 ---
 

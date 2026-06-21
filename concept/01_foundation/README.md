@@ -1,7 +1,7 @@
 # L1 基础概念层（Foundation）
 >
-> **EN**: L1 基础概念层（Foundation） (Chinese)
-> **Summary**: L1 基础概念层. L1 Foundation layer overview and navigation hub.
+> **EN**: Readme
+> **Summary**: Readme. Core Rust concept.
 > **受众**: [初学者]
 > **定位**：Rust 最核心的基础性概念，是所有进阶内容的**必要前提**。本层内容对齐 TRPL 第 3-10 章、Wikipedia 核心词条、Stanford/CMU 基础课程。
 > **Bloom 层级**: 记忆 → 理解
@@ -9,6 +9,8 @@
 > **[来源: TRPL Ch. 3–10]** · **[来源: Wikipedia - Ownership (programming)]** · **[来源: Wikipedia - Type System]** · **[来源: Stanford CS242 - Programming Languages]**
 
 > **本节关键术语**: 基础概念 (Foundation) · 所有权 (Ownership) · 借用 (Borrowing) · 生命周期 (Lifetime) · 类型系统 (Type System) — [完整对照表](../00_meta/terminology_glossary.md)
+>
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 ## 📑 目录

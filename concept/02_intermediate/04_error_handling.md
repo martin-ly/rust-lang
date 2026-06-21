@@ -278,7 +278,7 @@ graph TD
 
 > **[TRPL: Ch9.2] · [Rust Reference: The ? operator]** ? 运算符通过隐式调用 From::from 实现错误的自动转换与传播。 ✅ 已验证
 
-> **[RFC 243: The ? Operator]** The `?` operator was introduced in RFC 243 to provide ergonomic error propagation, later extended by [RFC 3058](https://rust-lang.github.io/rfcs/3058.html) for the general `Try` trait. ✅ 已验证
+> **[RFC 243: The ? Operator]** The `?` operator was introduced in RFC 243 to provide ergonomic error propagation, later extended by [RFC 3058](https://rust-lang.github.io/rfcs//3058-try-trait-v2.html) for the general `Try` trait. ✅ 已验证
 
 ```text
 前提 1: ? 运算符展开为 match，Err 分支提前返回
@@ -1668,7 +1668,7 @@ fn main() {
 }
 ```
 
-**代价模型**：隐式 `Location` 参数通常通过寄存器传递（在支持的平台），或在栈上占用一个指针宽度（`usize` 大小）。因此开销为**极低**（亚指令级），但非绝对零成本——与 `Backtrace` 的运行时栈展开相比可忽略。[来源: [RFC 2091](https://rust-lang.github.io/rfcs/2091.html) — Cost analysis] · [Rust Reference: track_caller ABI]
+**代价模型**：隐式 `Location` 参数通常通过寄存器传递（在支持的平台），或在栈上占用一个指针宽度（`usize` 大小）。因此开销为**极低**（亚指令级），但非绝对零成本——与 `Backtrace` 的运行时栈展开相比可忽略。[来源: [RFC 2091](https://rust-lang.github.io/rfcs//2091-inline-semantic.html) — Cost analysis] · [Rust Reference: track_caller ABI]
 
 #### 9.5.2 `Location::caller()` 与 `PanicInfo::location()` 的区别
 
@@ -1880,7 +1880,7 @@ impl AppError {
 | 普通函数 | ✅ 稳定 | Rust 1.46+ |
 | 泛型函数 | ✅ 稳定 | 单态化后隐式参数正确传递 |
 | `const fn` | ✅ 稳定 | 编译期错误定位 |
-| trait 方法 | ✅ 稳定 | [RFC 2091](https://rust-lang.github.io/rfcs/2091.html) 最初因 MIR 传递时机限制而禁止；后实现改为 monomorphization 之后注入，解除限制 [来源: rustc-dev-guide — track_caller in traits] |
+| trait 方法 | ✅ 稳定 | [RFC 2091](https://rust-lang.github.io/rfcs//2091-inline-semantic.html) 最初因 MIR 传递时机限制而禁止；后实现改为 monomorphization 之后注入，解除限制 [来源: rustc-dev-guide — track_caller in traits] |
 | `async fn` | ⚠️ 部分支持 | Stable 上为 **no-op**（编译通过但 `Location::caller()` 返回 async fn 自身位置）；完整支持需 nightly `#![feature(async_fn_track_caller)]`（Tracking: [rust-lang/rust#110011]） |
 | 闭包 | ❌ 不稳定 | 需 nightly `#![feature(closure_track_caller)]`（Tracking: [rust-lang/rust#87417]） |
 | `dyn Fn()` / 函数指针 | ❌ 不支持 | 动态分发无法传递隐式 `Location` 参数；通过 trait object 调用时丢失 caller 信息 |
@@ -1915,7 +1915,7 @@ fn ensure_nonzero(x: i32) -> i32 {
 
 ### 9.6 `Try` trait 与自定义 `?` 行为（稳定化中）
 
-`Try` trait（Tracking: [RFC 3058](https://rust-lang.github.io/rfcs/3058.html)）将 `?` 运算符泛化到任意类型：
+`Try` trait（Tracking: [RFC 3058](https://rust-lang.github.io/rfcs//3058-try-trait-v2.html)）将 `?` 运算符泛化到任意类型：
 
 ```rust,ignore
 // ✅ Try trait 的核心定义（概念等价，稳定化中）
@@ -2444,7 +2444,7 @@ fn main() {
 
 Rust 编译器会对未使用的 `Result` 发出 `unused_must_use` 警告。正确做法：
 
-```rust
+```rust,ignore
 let f = std::fs::File::open("not_exist.txt")?; // 传播错误
 // 或
 let f = std::fs::File::open("not_exist.txt").expect("open file");

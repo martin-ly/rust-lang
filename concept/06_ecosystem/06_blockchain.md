@@ -3,8 +3,8 @@
 > **代码状态**: ✅ 含可编译示例
 
 >
-> **EN**: Security Practices
-> **Summary**: Security Practices. Guide to 06 Blockchain.
+> **EN**: Blockchain Development in Rust
+> **Summary**: Blockchain ecosystem patterns, cryptography primitives, and smart-contract tooling in Rust.
 > **受众**: [进阶]
 > **内容分级**: [专家级]
 > **层级**: L6 应用主题

@@ -5,8 +5,8 @@
 
 # Never Type (`!`)：底类型与穷尽性
 >
-> **EN**: Never Type (`!`)：底类型与穷尽性 (Chinese)
-> **Summary**: Never Type (`!`)：底类型与穷尽性 (Chinese). Core Rust concept covering mechanism analysis.
+> **EN**: Never Type
+> **Summary**: Never Type: core Rust concepts, syntax, and examples.
 > **受众**: [初学者]
 > **Bloom 层级**: L3-L4 (应用/分析)
 > **A/S/P 标记**: **S** — Structure
@@ -22,7 +22,7 @@
 > [Rust Reference — Never Type](https://doc.rust-lang.org/reference/types/never.html) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
-> [RFC 1216](https://rust-lang.github.io/rfcs/1216-bang-type.html)
+> [RFC 1216](https://rust-lang.github.io/rfcs//1216-bang-type.html)
 
 ## 目录
 
@@ -407,7 +407,7 @@ fn incomplete_match(result: Result<i32, !>) -> i32 {
 > [Rust Reference — Never Type](https://doc.rust-lang.org/reference/types/never.html) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
-> [RFC 1216](https://rust-lang.github.io/rfcs/1216-bang-type.html)
+> [RFC 1216](https://rust-lang.github.io/rfcs//1216-bang-type.html)
 >
 > **文档版本**: 1.0
 > **对应 Rust 版本**: 1.96.0+ stable (Edition 2024)

@@ -1,7 +1,7 @@
 # Rust 知识体系全景导航（Navigation Hub）
 >
-> **EN**: Rust 知识体系全景导航（Navigation Hub） (Chinese)
-> **Summary**: | 指标 | 数值 | 状态 | |:---|:---|:---:| | 核心概念文件 | 58 | ✅ | | 总文件数 | **81** | ✅ | | 总行数 | ~75,000 | ✅ | | 来源标注 | ~1,350 | ✅ | | Mermaid 图表 | **332（20 种types）** | ✅ | | 代码块编译 | 226/226 通过 | ✅ | | 死链接 | 0 | ✅ | | 概念一致性 | 0 错误 / 0 警告 | ✅ | | A/S/P 标记覆盖 | 58/58（100%） | ✅ | | 判定树覆盖 | 8 棵（L1-L4） | ✅ | | FTA 覆盖 |
+> **EN**: Navigation
+> **Summary**: Navigation. Core Rust concept.
 
 > **受众**: [初学者]
 >
@@ -10,6 +10,8 @@
 > **适用对象**: 任何希望系统掌握 Rust 语义空间的读者。
 > **Bloom 层级**: 应用
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 ## 〇、质量状态速览
@@ -133,7 +135,7 @@
 | [07_game_ecs](../06_ecosystem/07_game_ecs.md) | ECS 架构、Bevy、Archetype | 7 |
 | [08_wasi](../06_ecosystem/08_wasi.md) | WASI 四层架构、能力安全、wit-bindgen | 2 |
 | [09_cargo_script](../06_ecosystem/09_cargo_script.md) | Cargo script 执行流程、决策树 | 2 |
-| [10_public_private_deps](../06_ecosystem/10_public_private_deps.md) | 依赖泄漏/隔离、[RFC 3516](https://rust-lang.github.io/rfcs/3516.html)、决策流程 | 2 |
+| [10_public_private_deps](../06_ecosystem/10_public_private_deps.md) | 依赖泄漏/隔离、[RFC 3516](https://rust-lang.github.io/rfcs//3516-public-private-dependencies.html)、决策流程 | 2 |
 
 > **出口层**: L6 是知识体系的"工程化落地"——将理论转化为可维护、可扩展的代码库。
 

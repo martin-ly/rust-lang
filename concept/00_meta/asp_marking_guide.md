@@ -1,14 +1,19 @@
-> **生态状态提示**：本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
+> **生态状态提示**：本文档提及 `async-std` 与/或 `wasm32-wasi`。
+> 请注意：
 >
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
-
+>
+> **来源**:
+> [TRPL](https://doc.rust-lang.org/book/) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/)
+>
 ---
 
 # Rust 知识体系 A/S/P 三维认知标记规范
 >
-> **EN**: Rust 知识体系 A/S/P 三维认知标记规范 (Chinese)
-> **Summary**: Rust 知识体系 A/S/P 三维认知标记规范 (Chinese). Core Rust concept covering language specification.
+> **EN**: Asp Marking Guide
+> **Summary**: Asp Marking Guide. Core Rust concept.
 > **受众**: [专家]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **Bloom 层级**: 元（Meta）
@@ -82,7 +87,9 @@ mindmap
       对应Bloom[评价 + 创造（元认知）]
 ```
 
-> **认知功能**: 本 mindmap 展示 A/S/P 三标记的**核心差异**——不是按难度划分，而是按**可自动化程度**划分。在 AI 辅助编程时代，这一区分具有战略意义：A 类技能可被 AI 高度替代，学习者应将认知资源集中在 S 和 P 类技能上。[来源: 💡 原创分析]
+> **认知功能**:
+> 本 mindmap 展示 A/S/P 三标记的**核心差异**——不是按难度划分，而是按**可自动化程度**划分。
+> 在 AI 辅助编程时代，这一区分具有战略意义：A 类技能可被 AI 高度替代，学习者应将认知资源集中在 S 和 P 类技能上。[来源: 💡 原创分析]
 > [来源: [arxiv 2604.06331v1]]
 
 ---

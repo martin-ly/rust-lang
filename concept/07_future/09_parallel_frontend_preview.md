@@ -1,7 +1,6 @@
 # 并行 前端编译预研：Rust 编译器 的多核扩展
 
 > **代码状态**: ✅ 含可编译示例
-
 >
 > **EN**: Compiler Internals
 > **Summary**: Compiler Internals. Core Rust concept covering mechanism analysis, parallel programming, threading and synchronization.
@@ -85,7 +84,7 @@ Rust 编译器采用传统的**前端-中端-后端**分离架构：
 > **前端职责**: 词法分析、语法分析、语义分析（类型检查、借用检查）
 > **中端职责**: MIR 优化、 borrow check、常量求值
 > **后端职责**: LLVM 代码生成、优化、目标平台适配
-> [来源: [Rust Reference — Compiler Overview](https://doc.rust-lang.org/rustc/overview.html)]
+> [来源: [Rust Reference — Compiler Overview](https://rustc-dev-guide.rust-lang.org/overview.html)]
 
 ---
 
@@ -325,7 +324,7 @@ graph TD
 | [Rust Compiler Team](https://github.com/rust-lang/compiler-team/) | ✅ 一级 | 编译器开发团队 |
 | [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) | ✅ 一级 | 官方项目目标 |
 | [Salsa Documentation](https://salsa-rs.github.io/salsa/) | ✅ 一级 | 查询系统框架 |
-| [Rust Reference — Compiler](https://doc.rust-lang.org/rustc/overview.html) | ✅ 一级 | 编译器架构 |
+| [Rust Reference — Compiler](https://rustc-dev-guide.rust-lang.org/overview.html) | ✅ 一级 | 编译器架构 |
 | [Rust Internals Forum](https://internals.rust-lang.org/) | ⚠️ 二级 | 设计讨论 |
 | [Amdahl's Law](https://en.wikipedia.org/wiki/Amdahl%27s_law) | 🔍 三级 | 并行加速理论基础 |
 
@@ -520,7 +519,7 @@ fn main() {}
 > 3) 错误消息的顺序稳定性。
 >
 > 这与 C++ 的模块（C++20 modules，类似并行编译挑战）或 Go 的编译器（天然并行 package 编译）不同——Rust 的并行前端是编译器内部优化，不影响语言语义。
-> [来源: [Rust Parallel Frontend](https://blog.rust-lang.org/inside-rust/2023/03/17/parallel-rustc.html)] ·
+> [来源: [Rust Parallel Frontend](https://blog.rust-lang.org/inside-rust/)] ·
 > [来源: [Rust Compiler Development](https://rustc-dev-guide.rust-lang.org/)]
 > **过渡**: 并行 前端编译预研：Rust 编译器 的多核扩展 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 

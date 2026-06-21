@@ -3,7 +3,7 @@
 # 测验：类型系统（试点扩展）
 >
 > **EN**: Type System
-> **Summary**: ```rust fn main() { let x: u8 = 255; let y = x.wrapping_add(1); println!("{y}"); }``` <details> <summary>💡 点击展开答案与解析</summary> **答案**：`0` **解析**：`u8` 范围为 0–255。`255 + 1` 在数学上溢出，但 `.wrapping_add()` 执行**环绕运算**（wrap around），结果回到 0。 **对比**： | 方法 | 行为 | 溢出 255+1 时 | |:---|:---|:---| | `+` | debug 模式 pan
+> **Summary**: Quiz Type System. Core Rust concept.
 
 > **受众**: [初学者]
 > **内容分级**: [综述级]
@@ -99,7 +99,7 @@ fn main() {
 
 ### Q3. 以下代码能否编译？若不能，如何修改？
 
-```rust
+```rust,ignore
 fn main() {
     let a = [1, 2, 3, 4, 5];
     let index = 10;
@@ -119,7 +119,7 @@ fn main() {
 
 **修改方案**：
 
-```rust
+```rust,ignore
 let element = a.get(index); // 返回 Option<&T>
 match element {
     Some(val) => println!("{val}"),
@@ -200,7 +200,7 @@ fn main() {
 
 **解析**：`if let` 是 `match` 的**语法糖**，用于只关心一个模式的情况：
 
-```rust
+```rust,ignore
 // 以下两者等价：
 if let Some(x) = some_number { ... }
 
@@ -263,7 +263,7 @@ fn main() {
 
 ### Q7. 以下代码能否编译？
 
-```rust
+```rust,compile_fail
 fn main() {
     let a: u32 = 10;
     let b: u64 = a;
@@ -280,7 +280,7 @@ fn main() {
 
 **解析**：Rust **不允许隐式数值类型转换**（即使是从小范围到大范围）。必须显式转换：
 
-```rust
+```rust,ignore
 let b: u64 = a as u64; // 显式类型转换
 ```
 

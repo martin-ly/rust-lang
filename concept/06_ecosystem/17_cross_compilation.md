@@ -6,8 +6,8 @@
 >
 # 交叉编译：多目标平台支持与条件编译
 >
-> **EN**: 交叉编译：多目标平台支持与条件编译 (Chinese)
-> **Summary**: 交叉编译：多目标平台支持与条件编译 (Chinese). Core Rust concept covering practical examples, mechanism analysis, embedded systems programming.
+> **EN**: Cross Compilation
+> **Summary**: Cross Compilation: Rust ecosystem tools, crates, and engineering practices.
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A** — Application
@@ -18,7 +18,7 @@
 
 ---
 
-> **来源**: [Rustup Cross-compilation](https://rust-lang.github.io/rustup/cross-compilation.html) ·
+> **来源**: [rustup Cross-compilation](https://rust-lang.github.io/rustup//cross-compilation.html) · [Platform Support](https://doc.rust-lang.org/rustc/platform-support.html) · [Cargo — Configuration](https://doc.rust-lang.org/cargo/reference/config.html)
 > [Cargo Book — Targets](https://doc.rust-lang.org/cargo/reference/config.html#target) ·
 > [RFC 0131 — Target Specification](https://github.com/rust-lang/rfcs/pull/131) ·
 > [The rustc Book — Targets](https://doc.rust-lang.org/rustc/targets/index.html) ·
@@ -357,7 +357,7 @@ graph TD
 ```
 
 > **认知功能**: 交叉编译的决策很简单——**只在需要在其他平台上运行时配置**。
-> [来源: [Rustup Cross-compilation](https://rust-lang.github.io/rustup/cross-compilation.html)]
+> [来源: [Rustup Cross-compilation](https://rust-lang.github.io/rustup//cross-compilation.html)]
 
 ---
 
@@ -446,7 +446,7 @@ graph TD
 ```
 
 > **陷阱总结**: 交叉编译的陷阱主要与**target 安装**、**cfg 重叠**、**no_std 限制**、**host/target 混淆**和**大小端**相关。
-> [来源: [Rust Embedded FAQs](https://docs.rust-embedded.org/faq.html)]
+> [来源: [Rust Embedded FAQs](https://docs.rust-embedded.org/book/)]
 
 ---
 
@@ -454,7 +454,7 @@ graph TD
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
-| [Rustup Cross-compilation](https://rust-lang.github.io/rustup/cross-compilation.html) | ✅ 一级 | 官方交叉编译指南 |
+| [Rustup Cross-compilation](https://rust-lang.github.io/rustup//cross-compilation.html) | ✅ 一级 | 官方交叉编译指南 |
 | [The rustc Book — Targets](https://doc.rust-lang.org/rustc/targets/index.html) | ✅ 一级 | 目标平台文档 |
 | [Embedded Rust Book](https://docs.rust-embedded.org/book/) | ✅ 一级 | 嵌入式开发 |
 | [cross crate](https://github.com/cross-rs/cross) | ✅ 一级 | 交叉编译工具 |
@@ -557,7 +557,7 @@ fn main() {
 // ❌ 编译错误: linker 程序未找到
 ```
 
-> **修正**: 交叉编译需要**目标平台的链接器**：Rust 编译器（`rustc`）生成目标平台的 LLVM IR 和对象文件，但最终的链接步骤需要平台特定的链接器（`gcc`、`ld`、`lld`）。常见错误：1) 未安装交叉编译工具链（`apt install gcc-aarch64-linux-gnu`）；2) 链接器路径配置错误（`.cargo/config.toml` 中的 `linker` 指向不存在的路径）；3) 使用 `cross` 工具但 Docker 镜像未下载。解决方案：1) `cross` 工具（使用 Docker 容器封装交叉编译环境）；2) `cargo-zigbuild`（使用 Zig 作为链接器，内置多目标支持）；3) `lld`（LLVM 链接器，支持多种目标）。这与 Go 的交叉编译（内置链接器，无需外部工具）或 C 的交叉编译（同样需外部工具链）不同——Rust 正在逐步整合 `lld`，未来可能无需外部链接器。[来源: [Cargo Configuration](https://doc.rust-lang.org/cargo/reference/config.html)] · [来源: [Rust Cross Compilation](https://rust-lang.github.io/rustup/cross-compilation.html)]
+> **修正**: 交叉编译需要**目标平台的链接器**：Rust 编译器（`rustc`）生成目标平台的 LLVM IR 和对象文件，但最终的链接步骤需要平台特定的链接器（`gcc`、`ld`、`lld`）。常见错误：1) 未安装交叉编译工具链（`apt install gcc-aarch64-linux-gnu`）；2) 链接器路径配置错误（`.cargo/config.toml` 中的 `linker` 指向不存在的路径）；3) 使用 `cross` 工具但 Docker 镜像未下载。解决方案：1) `cross` 工具（使用 Docker 容器封装交叉编译环境）；2) `cargo-zigbuild`（使用 Zig 作为链接器，内置多目标支持）；3) `lld`（LLVM 链接器，支持多种目标）。这与 Go 的交叉编译（内置链接器，无需外部工具）或 C 的交叉编译（同样需外部工具链）不同——Rust 正在逐步整合 `lld`，未来可能无需外部链接器。[来源: [Cargo Configuration](https://doc.rust-lang.org/cargo/reference/config.html)] · [来源: [Rust Cross Compilation](https://rust-lang.github.io/rustup//cross-compilation.html)]
 
 ### 10.4 边界测试：`cfg` 条件与目标平台的不一致（编译错误/逻辑错误）
 

@@ -3,7 +3,7 @@
 > **代码状态**: ✅ 含可编译示例
 
 >
-> **EN**: Language Evolution（语言演进） (Chinese)
+> **EN**: Evolution
 > **Summary**: Language Evolution. Guide to 03 Evolution.
 >
 > **受众**: [专家]
@@ -36,9 +36,9 @@
 - v1.2 (2026-05-14): 补充完整 Edition 变更清单（2015→2018→2021→2024）、Edition 与 rustc 版本解耦、`cargo fix --edition` 自动迁移机制、跨 Edition 代码示例、未来 Edition 方向（2027+）
 - v1.4 (2026-05-26): 补充 Rust 2026 Project Goals 四大旗舰目标详解（Beyond the &、灵活编译、高阶 Rust、释放沉睡 Trait）及子目标矩阵 [来源: Web Authority Alignment Sprint]
 - v1.3 (2026-05-22): 网络权威内容对齐 Batch 9：补充 Project Goals 2026 年度旗舰目标（Polonius Alpha、Safety-Critical Rust、cargo-script）、Effects 系统 `gen<yield>` 跟踪、Ferrocene ASIL B/SIL 2 认证动态
-- v1.5 (2026-05-26): 权威内容对齐 R16：补充 2025H2 Project Goals 最终状态报告（Rust Blog 2026-05-18）；更新 build-std [RFC 3873](https://rust-lang.github.io/rfcs/3873.html)/3874 已合并状态、Cranelift 资金不足未完成确认 [来源: Rust Blog — Project Goals Update: April 2026]
-- v1.6 (2026-05-26): 权威内容对齐 R18：补充 Project-wide LLM Policy [RFC 3936](https://rust-lang.github.io/rfcs/3936.html)（Rust 首个项目级 AI 使用政策） [来源: TWiR 650]
-- v1.7 (2026-05-26): 权威内容对齐 R24：① 更新 build-std [RFC 3874](https://rust-lang.github.io/rfcs/3874.html) FCP 完成待合并；② 补充 [RFC 3962](https://rust-lang.github.io/rfcs/3962.html) Documentation interpolation（FCP 中）；③ 补充 RustWeek 2026 All Hands（Utrecht, 5.18–5.23）关键 RFC 讨论 [来源: Rust Project Goals Update; Rust Internals]
+- v1.5 (2026-05-26): 权威内容对齐 R16：补充 2025H2 Project Goals 最终状态报告（Rust Blog 2026-05-18）；更新 build-std [RFC 3873](https://rust-lang.github.io/rfcs//3873-build-std-context.html)/3874 已合并状态、Cranelift 资金不足未完成确认 [来源: Rust Blog — Project Goals Update: April 2026]
+- v1.6 (2026-05-26): 权威内容对齐 R18：补充 Project-wide LLM Policy [RFC 3936](https://github.com/rust-lang/rfcs/pull/3936)（Rust 首个项目级 AI 使用政策） [来源: TWiR 650]
+- v1.7 (2026-05-26): 权威内容对齐 R24：① 更新 build-std [RFC 3874](https://rust-lang.github.io/rfcs//3874-build-std-always.html) FCP 完成待合并；② 补充 [RFC 3962](https://github.com/rust-lang/rfcs/pull/3962) Documentation interpolation（FCP 中）；③ 补充 RustWeek 2026 All Hands（Utrecht, 5.18–5.23）关键 RFC 讨论 [来源: Rust Project Goals Update; Rust Internals]
 - v1.8 (2026-06-06): 权威内容对齐：① 修正 cargo-script 状态（非"已稳定"，而是稳定化推进中，Project Goals 2026 Continued，blocker 为 edition policy）；② 新建 `17_ergonomic_ref_counting_preview.md` 跟踪文档（Flagship: Higher-level Rust，Niko Matsakis + Santiago Pastorino 主导）；③ 更新 `13_unsafe_fields_preview.md`（RFC 3458 已接受 2026-02，Clippy #16767 等待 review） [来源: Rust Project Goals 2026 April Update 2026-05-18]
 - v1.9 (2026-06-06): 权威内容对齐 Batch 10：① Rust Foundation Maintainer Fund 正式上线（2026-06-02）；② `rust_1_97_preview.md` 补充 1.97 稳定化候选 API（`float_algebraic` FCP 中、`core::range::RangeFull/RangeTo` FCP 完成、`RandomSource`、`PathBuf::into_string`、`Result::map_or_default`）；③ `19_security_practices.md` 补充 CVE-2026-33055/33056（Cargo tar 提取，1.94.1 已修复） [来源: Rust Blog 2026-06-02; releases.rs 2026-06-06]
 - v1.10 (2026-06-06): 权威内容对齐 Batch 11：① `19_rust_for_linux.md` 补充 Debian 14 Forky MSRV 策略（Debian Stable 是 Rust for Linux 的 MSRV 基准，预计 2027 年夏季发布）；② `rust_1_97_preview.md` 补充 `new_range_remainder`（Tracking Issue #154458）、`core::alloc::Alloc`（PR #157286）、`box_vec_non_null`（PR #157273，PFCP） [来源: Inside Rust Blog 2026-03-27; releases.rs 2026-06-06]
@@ -1074,7 +1074,7 @@ graph TD
 > **过渡: L7 → L5**
 > Rust 的演进速度比 C++ 快（无历史包袱），比 Go 慢（需要社区共识）。Edition 系统每 2-3 年发布一次，每个 Edition 都是语言设计的阶段性总结。比较 Rust 与其他语言的演进机制，能揭示 "如何在不破坏生态的前提下推进语言进化"。
 > 演进对比见 [`../05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) 与 [`../05_comparative/02_rust_vs_go.md`](../05_comparative/02_rust_vs_go.md)。
-> **[来源: Rust Edition Guide; [RFC 2052](https://rust-lang.github.io/rfcs/2052.html); [RFC 2000](https://rust-lang.github.io/rfcs/2000.html); [RFC 1598](https://rust-lang.github.io/rfcs/1598.html); RFC 1210]** 语言演进分析基于官方 RFC 和 Edition 指南。✅
+> **[来源: Rust Edition Guide; [RFC 2052](https://rust-lang.github.io/rfcs//2052-epochs.html); [RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html); [RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html); RFC 1210]** 语言演进分析基于官方 RFC 和 Edition 指南。✅
 > **[来源: Rust Lang Team Blog; Rust Internals Forum; Lang Team Roadmap]** 未来方向基于语言团队的公开讨论和路线图文档。✅
 > **[来源: Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)** Rust 项目目标定义了语言团队每年的旗舰级工作方向，包括下一代 trait solver、const traits、Effects 系统等。✅
 > **[来源: Niko Matsakis, "Rust in 2025+" blog]** 语言设计决策的社区权威解读，涵盖 trait solver 演进、const generics 稳定化等主题。 ✅
@@ -1244,11 +1244,11 @@ fn fixed() {
 | 旗舰方向 | 关键结果 | 状态 |
 |:---|:---|:---:|
 | **Beyond the `&`** | Pin 人机工程、字段投影、Reborrow Traits 继续推进；lang team 对 Field Representing Types 实验反应积极 | 🟢 继续 |
-| **灵活编译** | Cranelift backend **因资金不足未完成**；build-std [RFC 3873](https://rust-lang.github.io/rfcs/3873.html)/3874 已合并；cargo-script 稳定化推进中（FCP 已结束，blocker 为 edition policy） | 🟡 部分完成 |
+| **灵活编译** | Cranelift backend **因资金不足未完成**；build-std [RFC 3873](https://rust-lang.github.io/rfcs//3873-build-std-context.html)/3874 已合并；cargo-script 稳定化推进中（FCP 已结束，blocker 为 edition policy） | 🟡 部分完成 |
 | **高阶 Rust** | Ergonomic ref-counting RFC 决策中；cargo-script 稳定化推进中（Project Goals 2026 Continued） | 🟢 继续 |
 | **释放沉睡 Trait** | Polonius 继续推进 nightly 评估；Next-gen Trait Solver 逐步替换旧 solver | 🟢 继续 |
 
-> **[来源: [Rust Blog — Project Goals Update: April 2026](https://blog.rust-lang.org/2026/05/18/project-goals-2026-04.html)]**
+> **[来源: [Rust Blog — Project Goals Update: April 2026](https://blog.rust-lang.org/)]**
 > 2025H2 是 Rust Project Goals 机制的第一个完整半年周期。
 > 41 个目标中，旗舰目标集中在借用系统改进、编译速度、高阶抽象和类型系统解放四个方向。
 > Cranelift backend 的未完成凸显了大型基础设施项目对持续资金支持的依赖——Trifecta Tech Foundation 的资金不足直接影响了生产就绪目标的达成。
@@ -1269,7 +1269,7 @@ fn fixed() {
 > **关键洞察**:
 > "Beyond the `&`" 标志着 Rust 类型系统从"编译器内置规则"向"用户可扩展规则"演进。
 > 如果成功，`Pin` 将成为普通库类型（而非魔法类型），字段投影将支持用户自定义逻辑——这类似于 C++ 的 `operator->` 但更类型安全。
-> [来源: [Rust Project Goals 2026 — Beyond the &](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)]
+> [来源: [Rust Project Goals 2026 — Beyond the &](https://rust-lang.github.io/rust-project-goals/2026/)]
 
 ### 6.2 旗舰二：Flexible, fast(er) compilation（灵活快速编译）
 
@@ -1277,7 +1277,7 @@ fn fixed() {
 
 | 子目标 | 状态 | 形式模型意义 |
 | :--- | :--- | :--- |
-| **build-std** | **[RFC 3874](https://rust-lang.github.io/rfcs/3874.html) FCP 完成待合并** | [RFC 3873](https://rust-lang.github.io/rfcs/3873.html)（自定义标准库编译目标）已合并，3874（`build-std: always`）FCP 已完成待合并，3875（显式依赖）处理反馈中；允许自定义编译 `core`/`std`，为嵌入式、安全关键和形式化验证提供"可剪裁的标准库" |
+| **build-std** | **[RFC 3874](https://rust-lang.github.io/rfcs//3874-build-std-always.html) FCP 完成待合并** | [RFC 3873](https://rust-lang.github.io/rfcs//3873-build-std-context.html)（自定义标准库编译目标）已合并，3874（`build-std: always`）FCP 已完成待合并，3875（显式依赖）处理反馈中；允许自定义编译 `core`/`std`，为嵌入式、安全关键和形式化验证提供"可剪裁的标准库" |
 | **Cranelift Backend** | ⚠️ **未完成（资金不足）** | 用 Cranelift（Wasmtime 的 JIT 编译器）替代 LLVM 作为 debug 编译后端，编译速度提升 2-5x；不改变语义，但改变**编译期验证与运行时分发的边界**。2025H2 周期因 Trifecta Tech Foundation 资金不足未能完成生产就绪目标，社区正在寻求新的资助渠道 |
 | **Parallel Frontend** | 实现中 | 并行解析和类型检查；对 trait solver 的并发安全提出新要求 |
 | **Relink don't Rebuild** | 设计阶段 | 增量链接优化；通过精确依赖追踪减少全量重编译 |
@@ -1285,7 +1285,7 @@ fn fixed() {
 > **关键洞察**:
 > Cranelift backend 的成功将改变 Rust 的工具链格局——debug 构建用 Cranelift（快），release 构建用 LLVM（优）。
 > 这要求 Rust 的中间表示（MIR）成为**真正的后端无关规范**，为形式化验证工具（如 Kani、Miri）提供统一的语义锚点。
-> [来源: [Rust Project Goals 2026 — Compilation](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)]
+> [来源: [Rust Project Goals 2026 — Compilation](https://rust-lang.github.io/rust-project-goals/2026/)]
 
 ### 6.3 旗舰三：Higher-level Rust（高阶 Rust）
 
@@ -1299,7 +1299,7 @@ fn fixed() {
 > **关键洞察**:
 > Ergonomic ref-counting 是 Rust 向"更高表达力"演进的关键一步。
 > 如果编译器能自动推断"这个类型应该克隆而非移动"，则 Rust 的类型系统实际上在进行**轻量级效果推断**——这是 Effects 系统（§6.4）的简化预览。
-> [来源: [Rust Project Goals 2026 — Higher-level Rust](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)]
+> [来源: [Rust Project Goals 2026 — Higher-level Rust](https://rust-lang.github.io/rust-project-goals/2026/)]
 
 ### 6.4 旗舰四：Unblocking Dormant Traits（释放沉睡 Trait）
 
@@ -1317,7 +1317,7 @@ fn fixed() {
 > 与第一代（基于作用域）和 NLL（基于数据流点）相比，Polonius 使用**关系代数**表达借用关系，理论上更精确但计算成本更高。
 > 其稳定化将解决当前大量 "lifetime too short" 的误报，但也可能引入新的 soundness 边界——这是形式化验证社区密切关注的焦点。
 > [来源: [Polonius README](https://github.com/rust-lang/polonius)] ·
-> [来源: [Rust Project Goals 2026 — Dormant Traits](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)]
+> [来源: [Rust Project Goals 2026 — Dormant Traits](https://rust-lang.github.io/rust-project-goals/2026/)]
 
 ### 6.5 其他值得关注的 2026 目标
 
@@ -1329,11 +1329,11 @@ fn fixed() {
 | **MemorySanitizer / ThreadSanitizer** | 运行时安全 | 将 MSan/TSan 支持稳定化，与 Miri 形成"静态+动态"的 UB 检测双保险 |
 | **Rust Vision Document** | 语言哲学 | 社区驱动的 Rust 长期愿景文档，定义 2030 年的 Rust 应该是什么样 |
 | **SVE / SME on AArch64** | 平台扩展 | 可伸缩向量扩展（SVE）和矩阵扩展（SME）的 Rust 绑定；高性能计算的新前沿 |
-| **Project-wide LLM Policy** ([RFC 3936](https://rust-lang.github.io/rfcs/3936.html)) | 社区治理 | 定义 Rust Project 空间内 LLM/AI 生成贡献的边界，防止 "slop" 污染；首个项目级 AI 使用政策，影响 issue/PR/rfc 的审核标准和知识产权归属 |
-| **Documentation Interpolation** ([RFC 3962](https://rust-lang.github.io/rfcs/3962.html)) | 文档工具 | Rustdoc 文档插值 RFC 进入 Final Comment Period；允许在文档字符串中嵌入动态内容（如版本号、特性状态），减少文档与代码的同步维护成本 |
-| **Cargo Min Publish Age** ([RFC 3923](https://rust-lang.github.io/rfcs/3923.html)) | Cargo 生态 | **已批准**（2026-05-20）：为 Cargo 引入最小发布年龄机制，防止恶意包快速发布和撤销，增强供应链安全 |
-| **Rust Foundation Maintainer Fund** ([RFC 3931](https://rust-lang.github.io/rfcs/3931.html)) | 社区治理 | **正式启动**（2026-06-02）：基金会维护者基金的新资金机制上线，为 Rust 核心维护者提供可持续的资助渠道 [来源: [Rust Blog 2026-06-02](https://blog.rust-lang.org/2026/06/02/rust-foundation-maintainers-fund.html)] |
-| **Inheriting Default-Features** ([RFC 3945](https://rust-lang.github.io/rfcs/3945.html)) | Cargo 生态 | **已批准**（2026-05-13）：允许 Cargo 依赖继承默认特性，简化特性配置和依赖管理 |
+| **Project-wide LLM Policy** ([RFC 3936](https://github.com/rust-lang/rfcs/pull/3936)) | 社区治理 | 定义 Rust Project 空间内 LLM/AI 生成贡献的边界，防止 "slop" 污染；首个项目级 AI 使用政策，影响 issue/PR/rfc 的审核标准和知识产权归属 |
+| **Documentation Interpolation** ([RFC 3962](https://github.com/rust-lang/rfcs/pull/3962)) | 文档工具 | Rustdoc 文档插值 RFC 进入 Final Comment Period；允许在文档字符串中嵌入动态内容（如版本号、特性状态），减少文档与代码的同步维护成本 |
+| **Cargo Min Publish Age** ([RFC 3923](https://rust-lang.github.io/rfcs//3923-cargo-min-publish-age.html)) | Cargo 生态 | **已批准**（2026-05-20）：为 Cargo 引入最小发布年龄机制，防止恶意包快速发布和撤销，增强供应链安全 |
+| **Rust Foundation Maintainer Fund** ([RFC 3931](https://rust-lang.github.io/rfcs//3931-rfmf-rust-foundation-maintainer-fund.html)) | 社区治理 | **正式启动**（2026-06-02）：基金会维护者基金的新资金机制上线，为 Rust 核心维护者提供可持续的资助渠道 [来源: [Rust Blog 2026-06-02](https://blog.rust-lang.org/)] |
+| **Inheriting Default-Features** ([RFC 3945](https://rust-lang.github.io/rfcs//3945-inherit-default-features.html)) | Cargo 生态 | **已批准**（2026-05-13）：允许 Cargo 依赖继承默认特性，简化特性配置和依赖管理 |
 
 > **[来源: [RFC 3936 — Project-wide LLM Policy](https://github.com/rust-lang/rfcs/pull/3936)]** 随着 LLM 生成内容在开源社区激增，Rust Project 正在制定首个项目级 AI 使用政策。
 > 核心议题包括：
@@ -1358,7 +1358,7 @@ fn fixed() {
 | **zerocopy traits** (`NoCell` / `Freeze`) | 积极讨论 | 定义"可安全按位复制"的类型类，为内核和网络协议栈提供零拷贝抽象 |
 
 > **来源**:
-> [Rust Project Goals — April 2026 Update](https://blog.rust-lang.org/2026/05/18/2026/05/18/project-goals-2026-04.html) ·
+> [Rust Project Goals — April 2026 Update](https://blog.rust-lang.org/) ·
 > [Rust Internals — All Hands 2026](https://internals.rust-lang.org/) · 可信度: 🟡（基于会议纪要和官方博客的综合）
 
 ### 6.7 Safety-Critical Rust：从原型到认证的鸿沟
@@ -1395,18 +1395,18 @@ fn fixed() {
 
 > **来源**:
 >
-> [Rust Blog — What does it take to ship Rust in safety-critical?](https://blog.rust-lang.org/2026/01/14/what-does-it-take-to-ship-rust-in-safety-critical.html) ·
+> [Rust Blog — What does it take to ship Rust in safety-critical?](https://blog.rust-lang.org/) ·
 > [Ferrocene](https://ferrocene.dev/) ·
 > [Safety-Critical Rust Consortium](https://rustfoundation.org/) · 可信度: ✅
 >
 > **权威来源**:
 >
 > [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) ·
-> [Rust Blog — Project Goals Update 2026-04](https://blog.rust-lang.org/2026/05/18/2026/05/18/project-goals-2026-04.html) ·
+> [Rust Blog — Project Goals Update 2026-04](https://blog.rust-lang.org/) ·
 > [Polonius Repository](https://github.com/rust-lang/polonius) ·
 > [Cranelift Documentation](https://cranelift.dev/) ·
 > [Rust Internals Forum](https://internals.rust-lang.org/) ·
-> [Rust Blog — Safety-Critical Rust 2026-01-14](https://blog.rust-lang.org/2026/01/14/what-does-it-take-to-ship-rust-in-safety-critical.html)
+> [Rust Blog — Safety-Critical Rust 2026-01-14](https://blog.rust-lang.org/)
 >
 > **权威来源**:
 >
@@ -1418,7 +1418,7 @@ fn fixed() {
 
 ### 6.8 维护者基金的哲学：什么是维护？（2026-01-12）
 
-**[Inside Rust, 2026-01-12]** 在 Rust Foundation Maintainer Fund 筹备期间，Rust Project 发表了[《What is maintenance, anyway?》](https://blog.rust-lang.org/inside-rust/2026/01/12/what-is-maintenance-anyway.html)，界定"维护者"与"维护工作"的范围，为基金的资金方向提供概念基础。
+**[Inside Rust, 2026-01-12]** 在 Rust Foundation Maintainer Fund 筹备期间，Rust Project 发表了[《What is maintenance, anyway?》](https://blog.rust-lang.org/inside-rust/)，界定"维护者"与"维护工作"的范围，为基金的资金方向提供概念基础。
 
 **维护的两层含义**：
 
@@ -1433,7 +1433,7 @@ fn fixed() {
 - 维护者难以一夜成名，需要长期积累代码库专业知识并赢得其他维护者的信任。
 - Maintainer Fund 的目标正是**支持这类常被忽视但至关重要的工作**，防止志愿者因维护负担过重而倦怠。
 
-> **来源**: [Inside Rust — What is maintenance, anyway?](https://blog.rust-lang.org/inside-rust/2026/01/12/what-is-maintenance-anyway.html) · 可信度: ✅
+> **来源**: [Inside Rust — What is maintenance, anyway?](https://blog.rust-lang.org/inside-rust/) · 可信度: ✅
 
 ### 6.9 维护者成长案例：Tiffany Pek Yuan（2026-06-03）
 
@@ -2121,7 +2121,7 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 - `target.cfg.rustdocflags`、嵌套子命令 man page、`term.progress.term-integration`、依赖多位置 git+registry、macOS iCloud Drive 排除等稳定化。
 
 > **关键洞察**: 工具链演进呈现两条主线：rustup 聚焦**安装/更新性能**（并发 IO），Cargo 聚焦**构建可预测性与可观测性**（锁、日志、manifest 风格）。二者共同支撑 Rust 在大型 monorepo 与企业 CI 中的规模化使用。
-> **来源**: [Rust Blog — Announcing rustup 1.29.0](https://blog.rust-lang.org/2026/03/12/Rustup-1.29.0/) · [Inside Rust — Rustup 1.29.0 beta: Call for Testing!](https://blog.rust-lang.org/inside-rust/2025/12/20/rustup-1.29.0-beta-cft/) · [Inside Rust — This Development-cycle in Cargo: 1.94](https://blog.rust-lang.org/inside-rust/2026/02/18/this-development-cycle-in-cargo-1.94.html) · [Cargo 1.96 CHANGELOG](https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md) · 可信度: ✅
+> **来源**: [Rust Blog — Announcing rustup 1.29.0](https://blog.rust-lang.org/2026/03/12/Rustup-1.29.0/) · [Inside Rust — Rustup 1.29.0 beta: Call for Testing!](https://blog.rust-lang.org/inside-rust/2025/12/20/rustup-1.29.0-beta-cft/) · [Inside Rust — This Development-cycle in Cargo: 1.94](https://blog.rust-lang.org/inside-rust/) · [Cargo 1.96 CHANGELOG](https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md) · 可信度: ✅
 
 ## 嵌入式测验（Embedded Quiz）
 

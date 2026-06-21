@@ -3,7 +3,7 @@
 # 测验：Unsafe Rust（L3 试点扩展）
 >
 > **EN**: Unsafe Rust
-> **Summary**: ```rust fn main() { let mut num = 5; let r1 = &num as *const i32; let r2 = &mut num as *mut i32; unsafe { println!("r1 is: {}", *r1); println!("r2 is: {}", *r2); } }``` <details> <summary>💡 点击展开答案与解析</summary> **答案**：✅ 能编译，但 **Miri 会报告 Undefined Behavior**。 **输出**： ``` r1 is: 5 r2 is: 5 ``` **解析**：
+> **Summary**: Quiz Unsafe. Core Rust concept.
 
 > **受众**: [专家]
 > **内容分级**: [专家级]
@@ -89,7 +89,7 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri run
 
 ### Q2. 以下代码能否编译？解释 `unsafe fn` 与 `unsafe` 块的职责分离
 
-```rust
+```rust,compile_fail
 unsafe fn dangerous() {
     println!("This is unsafe");
 }
@@ -287,7 +287,7 @@ struct MyType {
 
 ### Q6. 以下代码存在什么问题？这是 FFI 的经典陷阱
 
-```rust
+```rust,ignore
 extern "C" {
     fn abs(input: i32) -> i32;
 }
@@ -314,7 +314,7 @@ fn main() {
 
 **更安全的做法**——使用 `libc` crate：
 
-```rust
+```rust,ignore
 use libc::abs;
 
 fn main() {
@@ -357,7 +357,7 @@ fn main() {
 
 **背景问题**：
 
-```rust
+```rust,compile_fail
 let x: i32; // 未初始化
 println!("{}", x); // 编译错误！
 ```
@@ -370,7 +370,7 @@ println!("{}", x); // 编译错误！
 
 **危险操作**：
 
-```rust
+```rust,ignore
 let x = MaybeUninit::<i32>::uninit();
 unsafe {
     println!("{}", x.assume_init()); // UB！未初始化就读取
@@ -434,7 +434,7 @@ unsafe {
 
 **正确做法**：
 
-```rust
+```rust,ignore
 let b = Box::new(42);
 let ptr = Box::into_raw(b); // 转移所有权到原始指针
 unsafe {

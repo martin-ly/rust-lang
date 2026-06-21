@@ -334,4 +334,4 @@ const VALUE: u32 = cfg_select! { ... };
 
 - [Rust 1.95 特性速查表](../02_reference/quick_reference/02_rust_195_features_cheatsheet.md)
 - [Rust 版本跟踪](../../concept/07_future/05_rust_version_tracking.md)
-- [2024 Edition 迁移指南](./06_rust_2024_edition_migration_guide.md)
+- [2024 Edition 迁移指南](../../knowledge/06_ecosystem/02_edition_2024.md)

@@ -443,7 +443,7 @@ graph TD
 ```
 
 > **认知功能**: **测试是投资**——在安全关键和长期维护的代码上回报最高，原型上可适度减少。
-> [来源: [Rust API Guidelines — Testing](https://rust-lang.github.io/api-guidelines/documentation.html#examples-use--not-try-not-unwrap-c-example)]
+> [来源: [Rust API Guidelines — Testing](https://rust-lang.github.io/api-guidelines//documentation.html#examples-use--not-try-not-unwrap-c-example)]
 
 ---
 

@@ -4,8 +4,8 @@
 >
 # 控制流：表达式导向的流程控制
 >
-> **EN**: 控制流：表达式导向的流程控制 (Chinese)
-> **Summary**: 控制流：表达式导向的流程控制 (Chinese). Core Rust concept covering mechanism analysis, design patterns.
+> **EN**: Control Flow
+> **Summary**: Control Flow: core Rust concepts, syntax, and examples.
 > **受众**: [初学者]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **A+S** — Application + Structure
@@ -410,7 +410,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树帮助选择正确的控制流结构。核心原则是：**枚举处理用 match，单模式解包用 if let，简单布尔条件用 if**。
-> [来源: [Rust Clippy — Match Patterns](https://rust-lang.github.io/rust-clippy/master/index.html)]
+> [来源: [Rust Clippy — Match Patterns](https://rust-lang.github.io/rust-clippy//master/index.html)]
 
 ---
 
@@ -734,8 +734,8 @@ fn main() {
 ## 参考来源
 
 > [来源: [The Rust Programming Language, Ch. 3.5](https://doc.rust-lang.org/book/ch03-05-control-flow.html)]
-> [来源: [RFC 1210 — `impl Trait`](https://rust-lang.github.io/rfcs/1210-impl-trait-for-all.html)]
-> [来源: [RFC 2497 — if let chains](https://rust-lang.github.io/rfcs/2497-if-let-chains.html)]
+> [来源: [RFC 1210 — `impl Trait`](https://rust-lang.github.io/rfcs//1210-impl-specialization.html)]
+> [来源: [RFC 2497 — if let chains](https://rust-lang.github.io/rfcs//2497-if-let-chains.html)]
 
 ## 认知路径
 
@@ -767,7 +767,7 @@ fn main() {
 
 以下代码能否编译？
 
-```rust
+```rust,compile_fail
 fn main() {
     let x = if true { 5 } else { 6.0 };
     println!("{}", x);
@@ -818,7 +818,7 @@ fn main() {
 
 修复方案：
 
-```rust
+```rust,ignore
 match x {
     Some(n) if n > 0 => println!("positive"),
     Some(_) => println!("non-positive"),
@@ -867,7 +867,7 @@ Rust 的 `loop` 可以通过 `break value;` 返回一个值。此处：
 
 以下两段代码是否等价？
 
-```rust
+```rust,ignore
 // 版本 A
 match x {
     Some(v) => println!("{}", v),
@@ -889,7 +889,7 @@ if let Some(v) = x {
 
 Rust 1.95+ 还引入了 `if let` 守卫：
 
-```rust
+```rust,ignore
 if let Some(v) = x && v > 0 {
     println!("positive: {}", v);
 }

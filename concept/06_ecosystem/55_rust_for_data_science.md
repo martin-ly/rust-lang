@@ -1,3 +1,5 @@
+> **EN**: Rust For Data Science
+> **Summary**: Rust For Data Science: Rust ecosystem tools, crates, and engineering practices.
 > **内容分级**: [综述级]
 
 > **代码状态**: ✅ 含可编译示例
@@ -9,66 +11,7 @@
 
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
-## 代码示例：ndarray 数值计算与矩阵操作
-
-以下演示 Rust 数据科学核心库 `ndarray` 的典型用法：
-
-```rust
-use ndarray::{Array2, Axis, array};
-
-fn main() {
-    // 创建 3×3 矩阵
-    let a = array![[1.0, 2.0, 3.0],
-                   [4.0, 5.0, 6.0],
-                   [7.0, 8.0, 9.0]];
-
-    // 按行求和
-    let row_sums = a.sum_axis(Axis(1));
-    println!("行和: {:?}", row_sums); // [6.0, 15.0, 24.0]
-
-    // 逐元素乘法
-    let b = array![[0.5, 1.0, 1.5],
-                   [2.0, 2.5, 3.0],
-                   [3.5, 4.0, 4.5]];
-    let c = &a * &b;
-    println!("逐元素乘: {:?}", c);
-
-    // 切片: 提取子矩阵
-    let sub = c.slice(ndarray::s![1..3, 0..2]);
-    println!("子矩阵:
-{:?}", sub);
-}
-```
-
-> **性能对比**: 上述操作在 release 模式下通过 SIMD 优化，单核性能接近 C/BLAS 级别。
-
->
-> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
->
-# Rust for Data Science（Rust 数据科学）
->
-> **EN**: Rust for Data Science（Rust 数据科学） (Chinese)
-> **Summary**: 以下演示 Rust 数据科学核心库 `ndarray` 的典型用法： ```rust use ndarray::{Array2, Axis, array}; fn main() { // 创建 3×3 矩阵 let a = array![[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [7.0, 8.0, 9.0]]; // 按行求和 let row_sums = a.sum_axis(Axis(1)); println!("行和: {:?}", row_sums); // [6.0, 15.0, 24.0] // 逐元素乘法 let b = array![[0.5, 1.
-
-> **受众**: [进阶]
-> **Bloom 层级**: 分析 → 评价
-> **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
-> **双维定位**: C×Eva — 评价 Rust 在数据科学生态中的性能、安全与表达能力
-> **前置依赖**: [数据工程](./48_data_engineering.md) ·
-> [机器学习生态](./46_machine_learning_ecosystem.md) ·
-> [性能优化](./15_performance_optimization.md) ·
-> [类型系统](../01_foundation/04_type_system.md)
-> **后置延伸**: [量子计算](./51_quantum_computing_rust.md) ·
-> [WebAssembly](./11_webassembly.md) ·
-> [云计算](./24_cloud_native.md)
-
----
-
-> **来源**: [Polars User Guide](https://docs.pola.rs/) ·
-> [DataFusion Documentation](https://arrow.apache.org/datafusion/) ·
-> [Jupyter Protocol](https://jupyter-client.readthedocs.io/en/latest/) ·
-> [Rust Data Science Survey 2024](https://www.arewelearningyet.com/) ·
-> [Arrow Rust](https://docs.rs/arrow/latest/arrow/)
+> **来源**: [polars](https://docs.rs/polars/) · [ndarray](https://docs.rs/ndarray/) · [plotters](https://docs.rs/plotters/)
 
 ## 📑 目录
 

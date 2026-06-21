@@ -2,8 +2,8 @@
 >
 # Rust 职业市场全景：2026 年数据与分析
 >
-> **EN**: Rust 职业市场全景：2026 年数据与分析 (Chinese)
-> **Summary**: Rust 职业市场全景：2026 年数据与分析 (Chinese). Core Rust concept covering mechanism analysis, AI/ML integration patterns.
+> **EN**: Career Landscape
+> **Summary**: Career Landscape. Core Rust concept.
 > **受众**: [入门 → 进阶]
 > **Bloom 层级**: 知道 → 分析
 > **A/S/P 标记**: **A** — Application
@@ -12,6 +12,8 @@
 > **前置概念**: [Bloom Taxonomy](./03_bloom_taxonomy.md)
 > **后置概念**: [Application Domains](../06_ecosystem/04_application_domains.md)
 
+>
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 > **来源**: [JetBrains State of Developer Ecosystem 2025](https://www.jetbrains.com/lp/devecosystem-2025/) ·

@@ -21,7 +21,7 @@
 > **来源**: [TRPL — Closures](https://doc.rust-lang.org/book/ch13-01-closures.html) ·
 > [Rust Reference — Closure Expressions](https://doc.rust-lang.org/reference/expressions/closure-expr.html) ·
 > [std::ops::Fn](https://doc.rust-lang.org/std/ops/trait.Fn.html) ·
-> [RFC 1558 — Closures](https://rust-lang.github.io/rfcs/1558-closure-to-fn-coercion.html) ·
+> [RFC 1558 — Closures](https://rust-lang.github.io/rfcs//1558-closure-to-fn-coercion.html) ·
 > [Wikipedia — Closure (computer programming)](https://en.wikipedia.org/wiki/Closure_(computer_programming))
 
 ## 📑 目录
@@ -289,7 +289,7 @@ let f: fn(i32) -> i32 = |x| x + 1;
 ```
 
 > **推断洞察**: 每个闭包是**唯一的匿名类型**——这是 Rust 实现零成本抽象的**关键设计**。
-> [来源: [RFC 1558 — Closure to Fn Coercion](https://rust-lang.github.io/rfcs/1558-closure-to-fn-coercion.html)]
+> [来源: [RFC 1558 — Closure to Fn Coercion](https://rust-lang.github.io/rfcs//1558-closure-to-fn-coercion.html)]
 
 ---
 
@@ -373,7 +373,7 @@ async 块:
 ```
 
 > **模式矩阵**: 闭包是 Rust **函数式编程风格的核心**——它们与迭代器、异步和并发深度集成。
-> [来源: [Rust Patterns — Closures](https://rust-unofficial.github.io/patterns/patterns/functional/closure.html)]
+> [来源: [Rust Patterns — Closures](https://rust-unofficial.github.io/patterns/)]
 
 ---
 
@@ -397,7 +397,7 @@ graph TD
 ```
 
 > **认知功能**: **不捕获环境时使用 fn 指针或普通函数**——它们更简单且有明确类型。
-> [来源: [Rust API Guidelines — Functions](https://rust-lang.github.io/api-guidelines/naming.html)]
+> [来源: [Rust API Guidelines — Functions](https://rust-lang.github.io/api-guidelines//naming.html)]
 
 ---
 
@@ -496,7 +496,7 @@ graph TD
 | [TRPL — Closures](https://doc.rust-lang.org/book/ch13-01-closures.html) | ✅ 一级 | 基础教程 |
 | [std::ops::Fn](https://doc.rust-lang.org/std/ops/trait.Fn.html) | ✅ 一级 | Trait 文档 |
 | [Rust Reference — Closures](https://doc.rust-lang.org/reference/expressions/closure-expr.html) | ✅ 一级 | 语法参考 |
-| [RFC 1558](https://rust-lang.github.io/rfcs/1558-closure-to-fn-coercion.html) | ✅ 一级 | 闭包设计 |
+| [RFC 1558](https://rust-lang.github.io/rfcs//1558-closure-to-fn-coercion.html) | ✅ 一级 | 闭包设计 |
 | [Rust By Example — Closures](https://doc.rust-lang.org/rust-by-example/fn/closures.html) | ✅ 一级 | 示例 |
 
 ---
@@ -799,7 +799,7 @@ fn main() {
 
 以下代码能否编译？
 
-```rust
+```rust,compile_fail
 fn main() {
     let s = String::from("hello");
     let f = move || println!("{}", s);
@@ -817,7 +817,7 @@ fn main() {
 
 修复方案：在闭包中借用而非拥有：
 
-```rust
+```rust,ignore
 let f = || println!("{}", s);  // 默认按引用捕获
 f();
 println!("{}", s);  // OK

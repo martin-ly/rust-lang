@@ -8,7 +8,7 @@
 # 数据库系统：Rust 在存储引擎中的语义
 >
 > **EN**: Database Access
-> **Summary**: Rust 在数据库领域的渗透呈现"基础设施层优先"的特征： ```text Rust 数据库生态谱系: │ ├── 分布式 OLTP/OLAP │   ├── TiKV — 分布式 KV 存储（Percolator 事务） │   ├── CockroachDB — 分布式 SQL（部分 Rust 组件） │   └── Materialize — 流式 SQL 物化视图 │ ├── 搜索引擎 │   ├── Meilisearch — 轻量级全文搜索 │   ├── Tantivy — Lucene 风格搜索引擎库 │   └── Quickwit — 云原生日志搜索 │ ├── 多模型数据
+> **Summary**: Database Access: Rust ecosystem tools, crates, and engineering practices.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 评价
@@ -18,10 +18,12 @@
 > **前置概念**: [Stream Processing Ecosystem](./36_stream_processing_ecosystem.md) · [Ownership](../01_foundation/01_ownership.md) · [Concurrency](../03_advanced/01_concurrency.md)
 > **后置概念**: [Distributed Systems](./18_distributed_systems.md) · [Formal Methods](../04_formal/05_verification_toolchain.md)
 
+>
+> **来源**: [Diesel](https://docs.rs/diesel/) · [SQLx](https://docs.rs/sqlx/) · [TiKV](https://tikv.org/)
 ---
 
 > **来源**: [TiKV GitHub](https://github.com/tikv/tikv) ·
-> [PingCAP TiKV 架构文档](https://tikv.org/docs/5.1/concepts/architecture/) ·
+> [PingCAP TiKV 架构文档](https://tikv.org/docs/) ·
 > [Materialize Documentation](https://materialize.com/docs/) ·
 > [Meilisearch Documentation](https://www.meilisearch.com/docs) ·
 > [SurrealDB Documentation](https://surrealdb.com/docs)

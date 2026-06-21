@@ -2,8 +2,8 @@
 >
 > **代码状态**: [综述级 — 待补充可编译示例]
 >
-> **EN**: Rust in Large Codebases: Android, Chromium, and Bare Metal
-> **Summary**: Rust 在超大规模代码库中的集成实践：Android AOSP、Chromium 与裸机嵌入式。对应 Google Comprehensive Rust 的 Android、Chromium、Bare Metal 专题。
+> **EN**: Platform Rust Integration
+> **Summary**: Integrating Rust into large platforms: Android, Chromium, Linux, and bare-metal firmware.
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
@@ -12,10 +12,10 @@
 > **前置概念**: [Cross Compilation](./17_cross_compilation.md) · [Embedded Systems](./22_embedded_systems.md) · [Unsafe Rust](../03_advanced/03_unsafe.md) · [FFI](../03_advanced/05_rust_ffi.md)
 > **后置概念**: [Industrial Case Studies](./48_industrial_case_studies.md) · [OS Kernel](./39_os_kernel.md)
 
-> **来源**: [Google Comprehensive Rust — Android](https://google.github.io/comprehensive-rust/android.html) ·
+> **来源**: [Android Rust](https://security.googleblog.com/2021/05/integrating-rust-into-android-open.html) · [Chromium Rust](https://www.chromium.org/chromium-os/developer-library/guides/rust/rust-on-cros/) · [Rust for Linux](https://rust-for-linux.com/)
 > [Google Comprehensive Rust — Chromium](https://google.github.io/comprehensive-rust/chromium.html) ·
 > [Google Comprehensive Rust — Bare Metal](https://google.github.io/comprehensive-rust/bare-metal.html) ·
-> [AOSP Rust](https://source.android.com/docs/core/architecture/rust) ·
+> [AOSP Rust](https://security.googleblog.com/2021/05/integrating-rust-into-android-open.html) ·
 > [Chromium Rust](https://chromium.googlesource.com/chromium/src/+/main/docs/rust.md) ·
 > [The Embedded Rust Book](https://docs.rust-embedded.org/book/)
 
@@ -272,7 +272,7 @@ unsafe fn uart_putc(c: u8) {
 | [Google Comprehensive Rust — Android](https://google.github.io/comprehensive-rust/android.html) | AOSP Rust 入门 |
 | [Google Comprehensive Rust — Chromium](https://google.github.io/comprehensive-rust/chromium.html) | Chromium Rust 与 GN/CXX |
 | [Google Comprehensive Rust — Bare Metal](https://google.github.io/comprehensive-rust/bare-metal.html) | no_std、PAC、HAL、UART 驱动 |
-| [AOSP Rust Documentation](https://source.android.com/docs/core/architecture/rust) | 官方 AOSP Rust 指南 |
+| [AOSP Rust Documentation](https://security.googleblog.com/2021/05/integrating-rust-into-android-open.html) | 官方 AOSP Rust 指南 |
 | [Chromium Rust Docs](https://chromium.googlesource.com/chromium/src/+/main/docs/rust.md) | Chromium Rust 策略与构建 |
 | [The Embedded Rust Book](https://docs.rust-embedded.org/book/) | 通用嵌入式 Rust |
 | [rust-embedded/awesome-embedded-rust](https://github.com/rust-embedded/awesome-embedded-rust) | 嵌入式 crate 生态 |

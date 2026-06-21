@@ -2,8 +2,8 @@
 
 # RustBelt & Verification Toolchain（RustBelt 与验证工具链）
 >
-> **EN**: Toolchain
-> **Summary**: Toolchain. RustBelt & Verification Toolchain（RustBelt 与验证工具链）.
+> **EN**: RustBelt
+> **Summary**: RustBelt: a formal model of Rust's ownership and borrowing in Iris separation logic.
 > **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >
@@ -24,6 +24,8 @@
 > **后置概念**: [Formal Methods](../07_future/02_formal_methods.md)
 > **主要来源**: [RustBelt: POPL 2018](https://doi.org/10.1145/3158154) · [Iris Project](https://iris-project.org/) · [Creusot] · [Verus] · [Kani: AWS] · [Aeneas] · [RefinedRust] · [Prusti]
 
+>
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---
 
 > **Bloom 层级**: 分析 → 评价
@@ -408,7 +410,7 @@ ArcInvariant(rc, data, P) ≜  ∃n. rc ↦ n * (n > 0 → data ↦ v * P(v))
 
 ### 3.5 CSL 规范代码示例
 
-以下伪代码展示如何用 CSL 注释描述 Rust 并发原语的契约： [来源: [PLDI 2025 — Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]
+以下伪代码展示如何用 CSL 注释描述 Rust 并发原语的契约： [来源: [PLDI 2025 — Tree Borrows](https://plv.mpi-sws.org/rustbelt/)]
 
 ```rust,ignore
 // CSL 规范: Mutex 守卫整数不变量 "x ≥ 0"

@@ -1,3 +1,6 @@
+> **EN**: Advanced 08 Zero Cost Abstractions Archived
+> **Summary**: Advanced 08 Zero Cost Abstractions Archived. Core Rust concept.
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **内容分级**: [专家级]
 > **受众**: [专家]
 > **Bloom 层级**: 理解

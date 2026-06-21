@@ -1,3 +1,5 @@
+> **EN**: Ecosystem 34 Formal Ecosystem Tower Archived
+> **Summary**: Ecosystem 34 Formal Ecosystem Tower Archived. Core Rust concept.
 > **内容分级**: [专家级]
 > **归档说明**: 本文件已归档，内容已迁移至 [`05_formal_ecosystem_tower.md`](./05_formal_ecosystem_tower.md)。
 > **受众**: [专家]
@@ -11,14 +13,7 @@
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
 > **前置概念**: [Formal Verification](../04_formal/03_ownership_formal.md)
 
-## 相关概念文件
-
-- [Formal Ecosystem Tower 主文件](./05_formal_ecosystem_tower.md) — Rust 生态形式化分层塔（本文件已归档）
-- [核心开源库谱系](./03_core_crates.md) — crates 生态详解
-- [形式化验证工具](../06_ecosystem/47_formal_verification_tools.md) — Kani、Prusti、Creusot
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
-> **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+> **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
 
 ## 认知路径
 

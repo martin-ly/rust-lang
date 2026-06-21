@@ -1,7 +1,10 @@
+> **Summary**: Formal Layer Index Legacy. Core Rust concept.
 > **内容分级**: [综述级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 
 # L4 形式化理论层索引（Formal Methods Layer Index）
+>
+> **EN**: Formal Layer Index Legacy
 
 > **受众**: [研究者]
 > **定位**: Rust 概念体系的**数学根基**与形式化验证。为 L1-L3 的所有安全保证提供严格的数学证明，是知识体系的"地基"。
@@ -10,6 +13,8 @@
 > **规范文件**: [`04_formal/README.md`](04_formal/README.md)
 > **[来源: Wikipedia - Linear Logic]** · **[来源: Wikipedia - Type Theory]** · **[来源: POPL 2018 - RustBelt: Securing the Foundations of the Rust Programming Language]** · **[来源: Iris Project - iris-project.org]**
 
+>
+> **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
 ---
 
 ## 📑 目录

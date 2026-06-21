@@ -6,8 +6,8 @@
 >
 # 许可证与合规：Rust 项目的法律工程
 >
-> **EN**: 许可证与合规：Rust 项目的法律工程 (Chinese)
-> **Summary**: 许可证与合规：Rust 项目的法律工程 (Chinese). Guide to 20 Licensing And Compliance.
+> **EN**: Licensing and Compliance
+> **Summary**: Licensing and Compliance: Rust ecosystem tools, crates, and engineering practices.
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 评价
 > **A/S/P 标记**: **A+P** — ApplicationProcedure
@@ -18,6 +18,8 @@
 > **前置概念**: [Toolchain](./01_toolchain.md) · [Cargo](./01_toolchain.md) · [Security Practices](./19_security_practices.md)
 > **后置概念**: [Cross Compilation](./17_cross_compilation.md) · [Distributed Systems](./18_distributed_systems.md)
 
+>
+> **来源**: [Cargo — Manifest: license](https://doc.rust-lang.org/cargo/reference/manifest.html#the-license-and-license-file-fields) · [Choose a License](https://choosealicense.com/)
 ---
 
 > **来源**: [Rust FAQ — Why MIT/Apache-2.0](https://www.rust-lang.org/policies/licenses) ·
@@ -286,7 +288,7 @@ MIT/Apache-2.0 双许可的实施:
 ```
 
 > **双许可洞察**: **MIT OR Apache-2.0** 是 Rust 生态的**事实标准**——它最大化兼容性同时提供专利保护。
-> [来源: [Rust RFC — License](https://rust-lang.github.io/rfcs/0007-privacy-and-visibility.html)]
+> [来源: [Rust RFC — License](https://github.com/rust-lang/rfcs/pull/7)]
 
 ---
 

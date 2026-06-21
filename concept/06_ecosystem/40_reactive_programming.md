@@ -6,7 +6,7 @@
 >
 # Reactive Programming & FRP（响应式编程与函数式响应编程）
 >
-> **EN**: Reactive Programming & FRP（响应式编程与函数式响应编程） (Chinese)
+> **EN**: Reactive Programming
 > **Summary**: Reactive Programming & FRP. Guide to 40 Reactive Programming.
 >
 > **受众**: [进阶]
@@ -20,6 +20,8 @@
 > **后置延伸**: [CQRS & Event Sourcing](./33_cqrs_event_sourcing.md) ·
 > [流处理生态](./36_stream_processing_ecosystem.md)
 
+>
+> **来源**: [futures](https://docs.rs/futures/) · [tokio](https://docs.rs/tokio/) · [rxrust](https://docs.rs/rxrust/)
 ---
 
 > **来源**: [Reactive Manifesto](https://www.reactivemanifesto.org/) ·

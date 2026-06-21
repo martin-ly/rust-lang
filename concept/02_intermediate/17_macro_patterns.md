@@ -21,7 +21,7 @@
 
 > **来源**: [The Little Book of Rust Macros](https://veykril.github.io/tlborm/) ·
 > [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html) ·
-> [Rust API Guidelines — Macros](https://rust-lang.github.io/api-guidelines/macros.html) ·
+> [Rust API Guidelines — Macros](https://rust-lang.github.io/api-guidelines//macros.html) ·
 > [serde_derive](https://docs.rs/serde_derive/latest/serde_derive/) ·
 > [Wikipedia — Code Generation](https://en.wikipedia.org/wiki/Code_generation_(compiler))
 
@@ -108,7 +108,7 @@
 ```
 
 > **认知功能**: 宏的**核心价值**是"编译期编程"——它扩展了语言的表达能力，同时保持零运行时成本。
-> [来源: [Rust API Guidelines — Macros](https://rust-lang.github.io/api-guidelines/macros.html)]
+> [来源: [Rust API Guidelines — Macros](https://rust-lang.github.io/api-guidelines//macros.html)]
 
 ---
 
@@ -251,7 +251,7 @@ define_enum_with_display! {
 ```
 
 > **DRY 洞察**: 宏的**批量 Trait 实现**是大型项目中减少样板代码的标准技术——尤其适用于 Newtype 和枚举。
-> [来源: [Rust Patterns — Macros](https://rust-unofficial.github.io/patterns/patterns/creational/factory.html)]
+> [来源: [Rust Patterns — Macros](https://rust-unofficial.github.io/patterns/)]
 
 ---
 
@@ -427,7 +427,7 @@ graph TD
 ```
 
 > **认知功能**: **泛型 > 宏**——当类型系统可以表达时，优先使用泛型（更好的错误信息、IDE 支持、编译速度）。
-> [来源: [Rust Style Guide](https://doc.rust-lang.org/style/)]
+> [来源: [Rust Style Guide](https://doc.rust-lang.org/nightly/style-guide/)]
 
 ---
 
@@ -538,7 +538,7 @@ graph TD
 |:---|:---:|:---|
 | [TLBORM](https://veykril.github.io/tlborm/) | ✅ 一级 | 宏权威指南 |
 | [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html) | ✅ 一级 | 参考 |
-| [Rust API Guidelines — Macros](https://rust-lang.github.io/api-guidelines/macros.html) | ✅ 一级 | API 设计 |
+| [Rust API Guidelines — Macros](https://rust-lang.github.io/api-guidelines//macros.html) | ✅ 一级 | API 设计 |
 | [proc-macro-workshop](https://github.com/dtolnay/proc-macro-workshop) | ✅ 一级 | 学习资源 |
 | [paste crate](https://docs.rs/paste/latest/paste/) | ✅ 一级 | 标识符拼接 |
 

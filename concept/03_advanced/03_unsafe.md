@@ -3,7 +3,7 @@
 # Unsafe Rust
 >
 > **EN**: Unsafe Rust
-> **Summary**: Unsafe Rust. Guide to 03 Unsafe.
+> **Summary**: Authoritative guide to `unsafe` Rust: raw pointers, extern blocks, and the safety-invariant contract.
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[Unsafe Rust](../../knowledge/03_advanced/unsafe)
@@ -174,6 +174,9 @@
     - [测验 2：unsafe fn 与 unsafe 块的区别（理解层）](#测验-2unsafe-fn-与-unsafe-块的区别理解层)
     - [测验 3：裸指针安全解引用（应用层）](#测验-3裸指针安全解引用应用层)
     - [测验 4：unsafe impl 的契约（分析层）](#测验-4unsafe-impl-的契约分析层)
+  - [自 docs/05\_guides/05\_unsafe\_rust\_guide.md 合并的补充内容](#自-docs05_guides05_unsafe_rust_guidemd-合并的补充内容)
+    - [🔗 推荐学习路径](#-推荐学习路径)
+    - [📖 Rustonomicon 逐章对标表](#-rustonomicon-逐章对标表)
 
 <!-- L3::权威定义 -->
 
@@ -409,7 +412,7 @@ stateDiagram-v2
 > `stateDiagram-v2` 将 Safe/Unsafe 边界建模为**状态转换系统**——Safe 是「编译器保护态」，UnsafeBlock/UnsafeFn/UnsafeTrait 是「人工证明态」，UB 是「不可恢复的错误态」。
 > 关键洞察：从 Safe 进入 Unsafe 的每次转移都必须有**显式标记**（`unsafe` 关键字），且转移条件是「程序员已验证安全契约」。
 > 这与 `graph TD` 流程图（展示知识结构）形成互补——状态机图展示的是**运行时/编码时的状态约束**。
-> [来源: Rustonomicon §1; [RFC 2585](https://rust-lang.github.io/rfcs/2585.html); Rust Reference §19]
+> [来源: Rustonomicon §1; [RFC 2585](https://rust-lang.github.io/rfcs//2585-unsafe-block-in-unsafe-fn.html); Rust Reference §19]
 
 ```text
 Rust 区分两种不变式:
@@ -767,7 +770,7 @@ graph TD
 ```
 
 > **认知功能**: 快速识别五类常见操作的 UB 风险边界，将"编译通过"与"运行安全"脱钩。建议在代码审查时对照此图检查 unsafe 操作是否被正确分类。关键洞察：编译器对 unsafe 操作的合法性检查极为有限——`unsafe impl Send` 和 `transmute` 都能编译通过，但前者可能引发数据竞争，后者直接导致类型混淆 UB。[来源: 💡 原创分析]
-> [来源: [Rustonomicon: What is unsafe?](https://doc.rust-lang.org/nomicon/what-is-unsafe.html)]
+> [来源: [Rustonomicon: What is unsafe?](https://doc.rust-lang.org/nomicon/meet-safe-and-unsafe.html)]
 
 ### 6.3 反命题决策树
 
@@ -1835,7 +1838,7 @@ unsafe fn swap_via_replace<T>(a: *mut T, b: *mut T) {
 
 ### 补充章节：`NonNull<T>` / `Unique<T>` / `Shared<T>` 的演进
 
-> **权威来源**: [Rust [RFC 1184](https://rust-lang.github.io/rfcs/1184.html): Rename `Unique` to `NonNull`] · [std::ptr::NonNull docs] · [Rust PR #45207: Introduce NonNull]
+> **权威来源**: [Rust [RFC 1184](https://rust-lang.github.io/rfcs//1184-stabilize-no_std.html): Rename `Unique` to `NonNull`] · [std::ptr::NonNull docs] · [Rust PR #45207: Introduce NonNull]
 > **层级标注**: `L3::指针类型` → `L2::智能指针` Box/Arc 内部实现 · `L1::类型系统` 协变与不变
 
 **历史演进**：Rust 标准库内部指针类型经历了从 `Unique<T>` / `Shared<T>` 到 `NonNull<T>` 的统一化过程，核心动机是**简化内部表示**、**提供稳定的外部 API**，并**统一协变语义**。
@@ -2770,7 +2773,7 @@ fn main() {
 
 ## 参考来源
 
-> [来源: [RFC 2585 — Unsafe Op in Unsafe Fn](https://rust-lang.github.io/rfcs/2585-unsafe-block-in-unsafe-fn.html)]
+> [来源: [RFC 2585 — Unsafe Op in Unsafe Fn](https://rust-lang.github.io/rfcs//2585-unsafe-block-in-unsafe-fn.html)]
 > [来源: [Rust Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)]
 > [来源: [Miri — Undefined Behavior Detection](https://github.com/rust-lang/miri)]
 > [来源: [Stacked Borrows Paper](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)]
@@ -2779,7 +2782,7 @@ fn main() {
 ### 16.7 前沿方向：Unsafe Fields（字段级 unsafe，Rust 2026 Project Goal）
 
 > **[来源: [Rust Project Goals 2026 — Unsafe Fields](https://rust-lang.github.io/rust-project-goals/2026/)]** ·
-> **[来源: [RFC 3908 — Unsafe Fields](https://rust-lang.github.io/rfcs/3908-unsafe-fields.html)]**
+> **[来源: [RFC 3908 — Unsafe Fields](https://github.com/rust-lang/rfcs/pull/3908)]**
 
 **核心命题**：
 当前 Rust 的 `unsafe` 粒度是**整个结构体**——如果结构体包含需要 unsafe 初始化的字段（如自引用、未对齐数据、原始句柄），则整个结构体的构造和使用都被 unsafe 污染。
@@ -2922,7 +2925,7 @@ Rust 中 `unsafe` 块的 **5 种能力** [来源: Rust Reference]：
 
 **题目**: 以下代码的输出是什么？为什么？
 
-```rust
+```rust,compile_fail
 unsafe fn dangerous() {
     println!("called");
 }
@@ -2949,7 +2952,7 @@ fn main() {
 
 正确写法：
 
-```rust
+```rust,ignore
 fn main() {
     unsafe {
         dangerous();
@@ -3060,4 +3063,50 @@ fn main() {
 
 ---
 
-> **测验设计来源**: [Bloom Taxonomy 2001] · [Rust Reference — Unsafe Operations](https://doc.rust-lang.org/reference/unsafe-op.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **测验设计来源**: [Bloom Taxonomy 2001] · [Rust Reference — Unsafe Operations](https://doc.rust-lang.org/reference/unsafe-blocks.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+
+## 自 docs/05_guides/05_unsafe_rust_guide.md 合并的补充内容
+
+> **合并说明**: 以下内容来自 `docs/05_guides/05_unsafe_rust_guide.md`（2026-06-10 最后更新），
+> 该文档侧重工程实践与 Rustonomicon 逐章对标。因其内容已被 `concept/03_advanced/03_unsafe.md`
+> 覆盖或更具权威性，此处仅保留其独特的 Rustonomicon 对标表与学习路径，作为补充参考。
+
+### 🔗 推荐学习路径
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+> **对应 Nomicon 阅读顺序**:
+> [Meet Safe and Unsafe](https://doc.rust-lang.org/nomicon/meet-safe-and-unsafe.html) →
+> [How Safe and Unsafe Interact](https://doc.rust-lang.org/nomicon/safe-unsafe-meaning.html) →
+> [What Unsafe Rust Can Do](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) →
+> [Working with Unsafe](https://doc.rust-lang.org/nomicon/working-with-unsafe.html)
+
+1. **通读 Nomicon 前 4 节**（Meet Safe、Interact、What Unsafe Does、Working with Unsafe）
+2. 学习 C01 的零成本抽象与高级所有权
+3. 研究本项目 `formal_methods` 中的形式化证明
+4. 实践：为现有安全 API 编写 `unsafe` 实现（如自定义集合）
+
+---
+
+### 📖 Rustonomicon 逐章对标表
+>
+> **[来源: [crates.io](https://crates.io/)]**
+
+| Nomicon 章节 | 官方链接 | 本指南对应小节 |
+| :--- | :--- | :--- |
+| **Meet Safe and Unsafe** | [meet-safe-and-unsafe](https://doc.rust-lang.org/nomicon/meet-safe-and-unsafe.html) | § 文档定位、§ 何时使用 Unsafe |
+| **How Safe and Unsafe Interact** | [safe-unsafe-meaning](https://doc.rust-lang.org/nomicon/safe-unsafe-meaning.html) | § 安全抽象原则 |
+| **What Unsafe Can Do** | [what-unsafe-does](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) | § 核心 Unsafe 操作、§ UB 案例 |
+| **Working with Unsafe** | [working-with-unsafe](https://doc.rust-lang.org/nomicon/working-with-unsafe.html) | § 安全抽象原则、§ 推荐学习路径 |
+| **Data Layout** | [data](https://doc.rust-lang.org/nomicon/data.html) | 本项目 [type_system](../../docs/02_reference/quick_reference/02_type_system.md) |
+| **Ownership** | [ownership](https://doc.rust-lang.org/nomicon/ownership.html) | [ownership_model](../../docs/research_notes/formal_methods/10_ownership_model.md)、[ownership_cheatsheet](../../docs/02_reference/quick_reference/02_ownership_cheatsheet.md) |
+| **Subtyping and Variance** | [subtyping](https://doc.rust-lang.org/nomicon/subtyping.html) | [VARIANCE_CONCEPT_MINDMAP](../../docs/research_notes/formal_methods/10_variance_concept_mindmap.md) |
+| **Type Conversions / Transmutes** | [transmutes](https://doc.rust-lang.org/nomicon/transmutes.html) | § UB 案例 4 类型混淆 |
+| **Uninitialized Memory** | [uninitialized](https://doc.rust-lang.org/nomicon/uninitialized.html) | § UB 案例 6 越界、§ Miri |
+| **Destructors / Drop** | [destructors](https://doc.rust-lang.org/nomicon/destructors.html) | § UB 案例 8 不恰当的 Drop |
+| **Exception Safety** | [exception-safety](https://doc.rust-lang.org/nomicon/exception-safety.html) | [EDGE_CASES_AND_SPECIAL_CASES](../../docs/02_reference/02_edge_cases_and_special_cases.md) |
+| **Concurrency / Send and Sync** | [send-and-sync](https://doc.rust-lang.org/nomicon/send-and-sync.html) | § 示例 3 实现 Send/Sync、[threads_concurrency_cheatsheet](../../docs/02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) |
+| **Implementing Vec** | [vec](https://doc.rust-lang.org/nomicon/vec/vec.html) | § 示例 1 原始指针、§ 示例 6 自定义智能指针 |
+| **Implementing Arc** | [arc](https://doc.rust-lang.org/nomicon/arc-mutex/arc.html) | [smart_pointers_cheatsheet](../../docs/02_reference/quick_reference/02_smart_pointers_cheatsheet.md) |
+| **FFI** | [ffi](https://doc.rust-lang.org/nomicon/ffi.html) | § 示例 2 调用外部函数 |
+
+> **官方入口**: [The Rustonomicon](https://doc.rust-lang.org/nomicon/) · 与 Rust 1.93 对应见 [09_rust_1.93_compatibility_deep_dive](../../docs/06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md)

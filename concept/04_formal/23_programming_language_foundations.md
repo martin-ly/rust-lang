@@ -2,8 +2,8 @@
 
 # 通用程序语言理论基础：Rust 的 PL 基座
 >
-> **EN**: 通用程序语言理论基础：Rust 的 PL 基座 (Chinese)
-> **Summary**: Rust 的独特性（ownership、borrowing、lifetimes）常被描述为"工程创新"，但它们深植于**数十年的 PL 理论研究**。理解这些根基，才能： 1. **区分本质与实现**: 哪些特性是 Rust 独有，哪些是 PL 理论的必然 2. **预测语言演进**: 基于理论判断某特性是否可安全加入 3. **跨语言对比**: 解释为什么 C++ move 不安全而 Rust move 安全 | 策略 | 名称 | 核心规则 | 代表语言 | |:---|:---|:---|:---| | **CBV** | Call-by-Value | 先求值参数，再代入 | Rust, C, Java, Scheme
+> **EN**: Programming Language Foundations
+> **Summary**: Programming Language Foundations: formal methods foundations, semantics, and verification techniques relevant to Rust.
 
 > **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
@@ -13,6 +13,8 @@
 > **前置概念**: [Type Theory](./02_type_theory.md) · [Linear Logic](./01_linear_logic.md) · [Ownership Formal](./03_ownership_formal.md)
 > **后置延伸**: [Effects System](../07_future/04_effects_system.md) · [Evolution](../07_future/03_evolution.md)
 
+>
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---
 
 > **来源**: [TAPL — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [SF — Software Foundations](https://softwarefoundations.cis.upenn.edu/) · [CS 242 Stanford](https://stanford-cs242.github.io/f19/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)

@@ -20,6 +20,8 @@
 > [Unsafe](../03_advanced/03_unsafe.md) ·
 > [Concurrency](../03_advanced/01_concurrency.md)
 
+>
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---
 
 > **来源**:
@@ -58,6 +60,12 @@
     - [10.4 边界测试：Kani 的循环展开限制（验证失败）](#104-边界测试kani-的循环展开限制验证失败)
     - [10.5 边界测试：形式化验证的时间复杂度与路径爆炸（验证失败/超时）](#105-边界测试形式化验证的时间复杂度与路径爆炸验证失败超时)
     - [10.8 边界测试：不可变借用与可变借用的冲突](#108-边界测试不可变借用与可变借用的冲突)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：形式化方法（Formal Methods）在 Rust 中的主要应用形式有哪些？（理解层）](#测验-1形式化方法formal-methods在-rust-中的主要应用形式有哪些理解层)
+    - [测验 2：Kani 与 Miri 在验证目标上有什么区别？（理解层）](#测验-2kani-与-miri-在验证目标上有什么区别理解层)
+    - [测验 3：Prusti 使用什么逻辑框架来验证 Rust 程序？（理解层）](#测验-3prusti-使用什么逻辑框架来验证-rust-程序理解层)
+    - [测验 4：形式化验证能完全替代测试吗？为什么？（理解层）](#测验-4形式化验证能完全替代测试吗为什么理解层)
+    - [测验 5：Rust 的编译器本身对形式化方法有什么贡献？（理解层）](#测验-5rust-的编译器本身对形式化方法有什么贡献理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -533,7 +541,7 @@ fn fixed() {
 > 对于 safe Rust，编译器已保证无 UB；对于 unsafe Rust，形式化工具验证 unsafe 块的前置条件是否满足。
 > Kani 使用模型检查（CBMC）验证所有执行路径，Miri 解释执行并检测 UB（Stacked Borrows / Tree Borrows 违规）。
 > unsafe 块是形式化方法的边界——工具假设 unsafe 块内的操作是正确的，验证其外部接口的安全性。
-> [来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)]
+> [来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]
 
 ### 10.2 边界测试：循环不变量与编译期验证（逻辑错误）
 
@@ -663,6 +671,7 @@ fn main() {
 <summary>✅ 答案与解析</summary>
 
 1) 模型检测（Kani）—— 验证 unsafe 代码；2) 演绎验证（Prusti/Creusot）—— Hoare 逻辑验证；3) 类型系统本身—— 线性逻辑编码所有权；4) 符号执行（Miri）—— 检测 UB。
+
 </details>
 
 ---

@@ -4,8 +4,8 @@
 >
 # Rust vs Swift：现代系统语言的两种路径
 >
-> **EN**: Rust vs Swift：现代系统语言的两种路径 (Chinese)
-> **Summary**: Rust vs Swift：现代系统语言的两种路径 (Chinese). Core Rust concept covering cross-language comparison, mental model building, mechanism analysis.
+> **EN**: Rust vs Swift
+> **Summary**: Rust vs Swift: comparative analysis with Rust across type systems, memory safety, and concurrency.
 >
 > **受众**: [进阶]
 
@@ -373,7 +373,7 @@
 ```
 
 > **互补洞察**: **Rust 作为共享核心 + Swift 作为平台 UI**是 Apple 平台的**合理架构**——各自发挥优势。
-> [来源: [Mozilla Rust Projects](https://www.rust-lang.org/production/users)]
+> [来源: [Mozilla Rust Projects](https://www.rust-lang.org/)]
 
 ---
 

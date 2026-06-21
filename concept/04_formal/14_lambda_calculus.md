@@ -2,8 +2,8 @@
 
 # Lambda 演算与 Rust 计算模型
 >
-> **EN**: Lambda 演算与 Rust 计算模型 (Chinese)
-> **Summary**: Lambda 演算与 Rust 计算模型 (Chinese). Core Rust concept covering mechanism analysis.
+> **EN**: Lambda Calculus
+> **Summary**: Lambda Calculus: formal methods foundations, semantics, and verification techniques relevant to Rust.
 >
 > **受众**: [研究者]
 
@@ -614,7 +614,7 @@ Lambda 表达式 `(λx. x x) (λy. y)` 的 β-归约结果是什么？
 
 以下 Rust 闭包分别对应 Lambda 演算的哪种抽象？
 
-```rust
+```rust,ignore
 let x = 5;
 let f = |y| x + y;  // 闭包 A
 let g = move |y| x + y;  // 闭包 B

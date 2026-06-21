@@ -15,6 +15,8 @@
 > **前置依赖**: [类型系统](../01_foundation/04_type_system.md) · [Unsafe Rust](../03_advanced/03_unsafe.md) · [形式化验证](../04_formal/05_verification_toolchain.md) · [生命周期](../01_foundation/03_lifetimes.md)
 > **后置延伸**: [编译器内部原理](./45_compiler_internals.md) · [安全与密码学](./43_security_cryptography.md) · [嵌入式系统](./22_embedded_systems.md)
 
+>
+> **来源**: [Kani](https://model-checking.github.io/kani/) · [Creusot](https://creusot.rs/) · [Verus](https://verus-lang.github.io/verus/)
 ---
 
 > **来源**: [Kani — Rust Verifier](https://github.com/model-checking/kani) ·
@@ -26,7 +28,7 @@
 > [Aeneas — Rust Verification](https://github.com/AeneasVerif/aeneas) ·
 > [RefinedRust — Iris-based](https://gitlab.mpi-sws.org/lgaeher/refinedrust) ·
 > [hax — Cryspen/Inria](https://github.com/hacspec/hax) ·
-> [Kani verify-std](https://github.com/model-checking/verify-std-rfc)
+> [Kani verify-std](https://github.com/model-checking/verify-rust-std)
 
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
 
@@ -122,7 +124,7 @@ Rust 形式化验证生态可按验证方法分层：
 
 > **来源**: [Hoare 1969](https://doi.org/10.1145/363235.363259) ·
 > [Formal Methods in Software Engineering](https://www.cis.upenn.edu/~lee/09cis500/lectures/verification.pdf) ·
-> [Rust Formal Methods Working Group](https://rust-lang.github.io/formal-methods/)
+> [Rust Formal Methods Working Group](https://github.com/rust-lang)
 
 ### 1.2 Rust 形式化验证的独特挑战
 
@@ -625,7 +627,7 @@ Theorem (RustBelt): 对于任何通过 Rust 借用检查器的程序 P，
 | **Tree Borrows** | 改进别名模型，更宽容 | 活跃（PLDI 2025）|
 | **RefinedRust** | 用户代码的 Iris 验证 | 研究中（OOPSLA 2024）|
 
-> **来源**: [RustBelt Project](https://plv.mpi-sws.org/rustbelt/) · [RustBelt Logical Relations](https://plv.mpi-sws.org/rustbelt/18/07/types-as-propositions.html) · [Iris Tutorial](https://iris-project.org/tutorial-pdfs/iris-lecture-notes.pdf)
+> **来源**: [RustBelt Project](https://plv.mpi-sws.org/rustbelt/) · [RustBelt Logical Relations](https://plv.mpi-sws.org/rustbelt/) · [Iris Tutorial](https://iris-project.org/tutorial-pdfs/iris-lecture-notes.pdf)
 
 ### 7.3 hax：翻译到 F* 和 Rocq 的验证工具链
 
@@ -656,7 +658,7 @@ F* / Rocq 规范
 ### 7.4 Kani verify-std：标准库验证计划
 
 > **Kani verify-std** 是 AWS 于 2024 年启动的社区倡议，目标是用 Kani 有界模型检验器**系统性地验证 Rust 标准库**的核心模块。这是 Rust 生态中首个大规模的标准库验证努力。
-> [来源: [VSTTE 2024 Invited Talk](https://www.soundandcomplete.org/vstte2024/vstte2024-invited.pdf)] · [来源: [Kani verify-std RFC](https://github.com/model-checking/verify-std-rfc)]
+> [来源: [VSTTE 2024 Invited Talk](https://www.soundandcomplete.org/vstte2024/vstte2024-invited.pdf)] · [来源: [Kani verify-std RFC](https://github.com/model-checking/verify-rust-std)]
 
 | 验证目标 | 当前状态 | 挑战 |
 |:---|:---|:---|
@@ -703,7 +705,7 @@ F* / Rocq 规范
            适合安全关键模块的定向验证，不适合整个大型项目。
 ```
 
-> **来源**: [Formal Methods Reality Check](https://www.hillelwayne.com/post/formally-verifying/) · [Kani Production Use](https://model-checking.github.io/kani/publications.html) · [Verus Production Use](https://github.com/verus-lang/verus/blob/main/IMPACT.md)
+> **来源**: [Formal Methods Reality Check](https://www.hillelwayne.com/post/formally-verifying/) · [Kani Production Use](https://model-checking.github.io/kani/publications.html) · [Verus README](https://github.com/verus-lang/verus/blob/main/README.md)
 
 ### 8.2 边界极限
 

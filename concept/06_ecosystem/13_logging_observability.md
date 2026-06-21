@@ -4,8 +4,8 @@
 
 # 日志与可观测性：Rust 服务端监控生态
 >
-> **EN**: 日志与可观测性：Rust 服务端监控生态 (Chinese)
-> **Summary**: 日志与可观测性：Rust 服务端监控生态 (Chinese). Core Rust concept covering mechanism analysis, ecosystem and tooling, HTTP and web services.
+> **EN**: Logging Observability
+> **Summary**: Logging Observability: Rust ecosystem tools, crates, and engineering practices.
 > **受众**: [进阶]
 > **内容分级**: [综述级]
 > **Bloom 层级**: 应用 → 分析
@@ -16,6 +16,8 @@
 > **后置概念**: [WebAssembly](./11_webassembly.md) · [Rust Version Tracking](../07_future/05_rust_version_tracking.md)
 
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
+> **来源**: [log crate](https://docs.rs/log/) · [tracing](https://docs.rs/tracing/) · [std::fmt](https://doc.rust-lang.org/std/fmt/)
 ---
 
 > **来源**: [tracing Documentation](https://docs.rs/tracing/latest/tracing/) ·

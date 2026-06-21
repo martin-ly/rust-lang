@@ -6,13 +6,15 @@
 >
 # 编程语言理论基础（PL Prerequisites）
 >
-> **EN**: 编程语言理论基础（PL Prerequisites） (Chinese)
-> **Summary**: 编程语言理论基础. Clarifies core mechanisms and common misconceptions.
+> **EN**: Pl Prerequisites
+> **Summary**: Pl Prerequisites: core Rust concepts, syntax, and examples.
 > **受众**: [初学者]
 > **Bloom 层级**: 记忆 → 理解
 > **定位**: L1 基础层的**前置知识补充**。理解这些通用 PL 概念后，你将能更深刻地回答"为什么 Rust 要这样设计"，而非仅仅记忆规则。
 > **阅读建议**: 可选阅读。若你已有 Haskell/Scheme/OCaml 背景，可跳过；若你只有 Python/JavaScript 背景，强烈建议先读本文。
 
+>
+> **来源**: [TRPL — Foreword](https://doc.rust-lang.org/book/foreword.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 > **后置概念**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
@@ -405,8 +407,8 @@ unsafe {
 > - [Dijkstra, 1968 — Go To Statement Considered Harmful](https://doi.org/10.1145/362929.362947)
 > - [Plotkin, 1975 — Call-by-Name, Call-by-Value and the λ-Calculus](https://doi.org/10.1016/0304-3975(75)90017-1)
 > - [Wadler, 1995 — Monads for Functional Programming](https://doi.org/10.1007/3-540-59451-5_2)
-> - [TRPL Ch13 — Closures and Iterators](https://doc.rust-lang.org/book/ch13-00-closures.html)
-> - [Rust Async Book — Async/Await Primer](https://rust-lang.github.io/async-book/01_getting_started/01_chapter.html)
+> - [TRPL Ch13 — Closures and Iterators](https://doc.rust-lang.org/book/ch13-01-closures.html)
+> - [Rust Async Book — Async/Await Primer](https://rust-lang.github.io/async-book//01_getting_started/01_chapter.html)
 
 ## 嵌入式测验（Embedded Quiz）
 

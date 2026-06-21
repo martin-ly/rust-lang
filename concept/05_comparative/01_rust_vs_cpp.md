@@ -3,9 +3,11 @@
 >
 # Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证>
 >
-> **EN**: Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证> (Chinese)
-> **Summary**: Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证> (Chinese). Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证>.
+> **EN**: Rust vs C++
+> **Summary**: Rust vs C++: comparative analysis with Rust across type systems, memory safety, and concurrency.
 > **受众**: [进阶]
+>
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/)
 ---
 
 > **层级**: L5 对比分析

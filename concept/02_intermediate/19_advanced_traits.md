@@ -24,9 +24,9 @@
 
 ---
 > **来源**: [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html) ·
-> [TRPL — Advanced Traits](https://doc.rust-lang.org/book/ch19-02-advanced-traits.html) ·
-> [RFC 0195 — Associated Items](https://rust-lang.github.io/rfcs/0195-associated-items.html) ·
-> [RFC 1598 — Generic Associated Types](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html) ·
+> [TRPL — Advanced Traits](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html) ·
+> [RFC 0195 — Associated Items](https://rust-lang.github.io/rfcs//0195-associated-items.html) ·
+> [RFC 1598 — Generic Associated Types](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html) ·
 > [Wikipedia — Type Class](https://en.wikipedia.org/wiki/Type_class)
 
 ## 📑 目录
@@ -126,7 +126,7 @@ pub trait Graph {
 ```
 
 > **关联类型洞察**: 关联类型使 Trait **像一个"类型族"**——每个实现者定义自己的成员类型，而非让调用者指定。
-> [来源: [RFC 0195 — Associated Items](https://rust-lang.github.io/rfcs/0195-associated-items.html)]
+> [来源: [RFC 0195 — Associated Items](https://rust-lang.github.io/rfcs//0195-associated-items.html)]
 
 ---
 
@@ -173,7 +173,7 @@ impl<'a, T> LendingIterator for MutWindows<'a, T> {
 ```
 
 > **GATs 洞察**: GATs 是 Rust **类型系统的重大扩展**——它使**生命周期泛型**可以出现在关联类型上，解决了自引用和流式处理的核心问题。
-> [来源: [RFC 1598 — GATs](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html)]
+> [来源: [RFC 1598 — GATs](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html)]
 
 ---
 
@@ -256,7 +256,7 @@ impl Convert<OsString> for String { ... }
 ```
 
 > **选择洞察**: **关联类型用于"输出类型"**，**泛型参数用于"输入类型"**——这是核心设计原则。
-> [来源: [Rust API Guidelines — Traits](https://rust-lang.github.io/api-guidelines/flexibility.html#c-associated-type)]
+> [来源: [Rust API Guidelines — Traits](https://rust-lang.github.io/api-guidelines//flexibility.html#c-associated-type)]
 
 ---
 
@@ -329,7 +329,7 @@ pub trait Service = Fn(Request) -> Response + Send + Sync + 'static;
 ```
 
 > **别名洞察**: Trait 别名**减少样板代码**——复杂的 where 子句可以封装为有意义的名称。
-> [来源: [Rust Reference — Trait Aliases](https://doc.rust-lang.org/reference/items/trait-aliases.html)]
+> [来源: [Rust Reference — Trait Aliases](https://doc.rust-lang.org/reference/items/traits.html#trait-aliases)]
 
 ---
 
@@ -385,7 +385,7 @@ graph TD
 ```
 
 > **认知功能**: **关联类型和泛型参数不是竞争关系**——它们服务于不同的抽象需求。
-> [来源: [Rust API Guidelines — Associated Types](https://rust-lang.github.io/api-guidelines/flexibility.html#c-associated-type)]
+> [来源: [Rust API Guidelines — Associated Types](https://rust-lang.github.io/api-guidelines//flexibility.html#c-associated-type)]
 
 ---
 
@@ -425,7 +425,7 @@ graph TD
 ```
 
 > **边界要点**: 高级 Trait 的边界主要与**特化 soundness**、**GATs 复杂性**、**特性稳定性**、**别名限制**和**编译时间**相关。
-> [来源: [Rust Compiler — Specialization](https://rust-lang.github.io/compiler-team/working-groups/specialization/)]
+> [来源: [Rust Compiler — Specialization](https://rust-lang.github.io/compiler-team/working-groups/)]
 
 ---
 
@@ -480,9 +480,9 @@ graph TD
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
 | [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html) | ✅ 一级 | Trait 参考 |
-| [TRPL — Advanced Traits](https://doc.rust-lang.org/book/ch19-02-advanced-traits.html) | ✅ 一级 | 高级教程 |
-| [RFC 0195 — Associated Items](https://rust-lang.github.io/rfcs/0195-associated-items.html) | ✅ 一级 | 关联类型设计 |
-| [RFC 1598 — GATs](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html) | ✅ 一级 | GATs 设计 |
+| [TRPL — Advanced Traits](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html) | ✅ 一级 | 高级教程 |
+| [RFC 0195 — Associated Items](https://rust-lang.github.io/rfcs//0195-associated-items.html) | ✅ 一级 | 关联类型设计 |
+| [RFC 1598 — GATs](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html) | ✅ 一级 | GATs 设计 |
 | [Specialization Tracking](https://github.com/rust-lang/rust/issues/31844) | ✅ 一级 | 特化追踪 |
 
 ---
@@ -594,7 +594,7 @@ struct Buffer<C: Config> {
 }
 ```
 
-> **修正**: Rust 的关联常量（associated constants）在 trait 中声明，在实现中定义。但**泛型参数**的关联常量不能在类型定义中用于确定数组大小——`[u8; C::MAX_SIZE]` 中 `C` 是泛型参数，编译器无法在单态化前知道 `MAX_SIZE` 的具体值。这是 Rust 常量泛化的限制：只有具体类型（如 `[u8; 1024]`）或 const 泛型参数（`[u8; N]`）可用于数组大小。Workaround：1) 使用 `GenericArray`（`typenum` crate，通过类型级数字模拟常量）；2) 使用 `Vec<u8>` 替代数组；3) 使用宏为每个具体配置生成代码。这与 C++ 的 `template<size_t N>`（非类型模板参数可用于数组大小）或 Zig 的 `comptime`（编译期常量可用于任何类型位置）不同——Rust 的 const 泛型仍在扩展中。[来源: [Rust RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: Rust 的关联常量（associated constants）在 trait 中声明，在实现中定义。但**泛型参数**的关联常量不能在类型定义中用于确定数组大小——`[u8; C::MAX_SIZE]` 中 `C` 是泛型参数，编译器无法在单态化前知道 `MAX_SIZE` 的具体值。这是 Rust 常量泛化的限制：只有具体类型（如 `[u8; 1024]`）或 const 泛型参数（`[u8; N]`）可用于数组大小。Workaround：1) 使用 `GenericArray`（`typenum` crate，通过类型级数字模拟常量）；2) 使用 `Vec<u8>` 替代数组；3) 使用宏为每个具体配置生成代码。这与 C++ 的 `template<size_t N>`（非类型模板参数可用于数组大小）或 Zig 的 `comptime`（编译期常量可用于任何类型位置）不同——Rust 的 const 泛型仍在扩展中。[来源: [Rust RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.6 边界测试：trait alias 与 bound 的冗余（编译错误）
 
@@ -612,7 +612,7 @@ fn main() {
 }
 ```
 
-> **修正**: Trait alias（不稳定特性）允许为 trait bound 组合创建别名，但**不自动为符合条件的类型实现**。`MyTrait` 是真实 trait，类型需 `impl MyTrait for Type` 才能使用。这与 C++ 的 `concept`（同样需显式 `requires` 或 `template` 约束）或 Haskell 的 typeclass 别名（同样需显式 `instance`）类似。Workaround：1) 使用 blanket impl：`impl<T: Clone + Send + Sync + 'static> MyTrait for T {}`；2) 使用 `where` 从句直接写 bound，不使用别名；3) 等待 trait alias 稳定（可能包含自动实现语义）。Rust 的设计权衡：trait alias 是语法糖还是新类型？当前倾向语法糖，但自动实现的需求强烈。[来源: [Trait Alias RFC](https://rust-lang.github.io/rfcs/1733-trait-alias.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: Trait alias（不稳定特性）允许为 trait bound 组合创建别名，但**不自动为符合条件的类型实现**。`MyTrait` 是真实 trait，类型需 `impl MyTrait for Type` 才能使用。这与 C++ 的 `concept`（同样需显式 `requires` 或 `template` 约束）或 Haskell 的 typeclass 别名（同样需显式 `instance`）类似。Workaround：1) 使用 blanket impl：`impl<T: Clone + Send + Sync + 'static> MyTrait for T {}`；2) 使用 `where` 从句直接写 bound，不使用别名；3) 等待 trait alias 稳定（可能包含自动实现语义）。Rust 的设计权衡：trait alias 是语法糖还是新类型？当前倾向语法糖，但自动实现的需求强烈。[来源: [Trait Alias RFC](https://rust-lang.github.io/rfcs//1733-trait-alias.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.3 边界测试：关联类型在 trait 边界中的不一致（编译错误）
 
@@ -671,7 +671,7 @@ fn main() {
 }
 ```
 
-> **修正**: **GAT**（Generic Associated Types，Rust 1.65+）允许关联类型带泛型参数：`type Item<'a>`。但 GAT 的使用常需额外约束：1) `where Self: 'a` — 保证 `self` 的生命周期覆盖 `'a`；2) `Item<'a>: 'a` — 保证输出类型在 `'a` 内有效。GAT 的应用：1)  lending iterator（`LendingIterator` trait，返回与自身绑定的引用）；2) 类型级函数（`type Family<T>`）；3) 替代部分 HKT（Higher-Kinded Types）用例。GAT 的编译错误信息可能复杂，因涉及多个生命周期和关联类型约束。这与 Haskell 的 associated type families（`type family Item c :: * -> *`）或 C++ 的模板模板参数（`template<template<typename> class F>`）类似——Rust 的 GAT 是类型系统的重要扩展，但学习曲线陡。[来源: [Rust Reference — Generic Associated Types](https://doc.rust-lang.org/reference/items/associated-items.html#generic-associated-types)] · [来源: [RFC 1598 — GAT](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html)]
+> **修正**: **GAT**（Generic Associated Types，Rust 1.65+）允许关联类型带泛型参数：`type Item<'a>`。但 GAT 的使用常需额外约束：1) `where Self: 'a` — 保证 `self` 的生命周期覆盖 `'a`；2) `Item<'a>: 'a` — 保证输出类型在 `'a` 内有效。GAT 的应用：1)  lending iterator（`LendingIterator` trait，返回与自身绑定的引用）；2) 类型级函数（`type Family<T>`）；3) 替代部分 HKT（Higher-Kinded Types）用例。GAT 的编译错误信息可能复杂，因涉及多个生命周期和关联类型约束。这与 Haskell 的 associated type families（`type family Item c :: * -> *`）或 C++ 的模板模板参数（`template<template<typename> class F>`）类似——Rust 的 GAT 是类型系统的重要扩展，但学习曲线陡。[来源: [Rust Reference — Generic Associated Types](https://doc.rust-lang.org/reference/items/associated-items.html#generic-associated-types)] · [来源: [RFC 1598 — GAT](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html)]
 
 ## 实践
 
@@ -750,7 +750,7 @@ GAT（Generic Associated Types）是 Rust 1.65 稳定化的重要特性。它允
 
 以下 `trait alias` 的作用是什么？
 
-```rust
+```rust,ignore
 trait Numeric = PartialOrd + Add<Output = Self> + Copy;
 ```
 
@@ -765,7 +765,7 @@ trait Numeric = PartialOrd + Add<Output = Self> + Copy;
 
 Trait alias 是 nightly 特性（截至 Rust 1.96 尚未稳定），用于给复杂的 trait bound 组合起短名：
 
-```rust
+```rust,ignore
 fn sum<T: Numeric>(a: T, b: T) -> T { a + b }
 // 等价于
 fn sum<T: PartialOrd + Add<Output = Self> + Copy>(a: T, b: T) -> T { a + b }

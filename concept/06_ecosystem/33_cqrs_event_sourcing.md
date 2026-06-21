@@ -6,7 +6,7 @@
 >
 # CQRS & Event Sourcing（命令查询职责分离与事件溯源）
 >
-> **EN**: CQRS & Event Sourcing（命令查询职责分离与事件溯源） (Chinese)
+> **EN**: Cqrs Event Sourcing
 > **Summary**: CQRS & Event Sourcing. Guide to 33 Cqrs Event Sourcing.
 >
 > **受众**: [进阶]
@@ -17,6 +17,8 @@
 > **前置依赖**: [Async](../03_advanced/02_async.md) · [事件驱动架构](./32_event_driven_architecture.md) · [泛型](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md)
 > **后置延伸**: [分布式系统](./18_distributed_systems.md) · [微服务架构模式](./31_microservice_patterns.md) · [云原生](./24_cloud_native.md)
 
+>
+> **来源**: [eventstore-rs](https://docs.rs/eventstore/) · [cqrs-es](https://docs.rs/cqrs-es/)
 ---
 
 > **来源**: [Martin Fowler — CQRS](https://martinfowler.com/bliki/CQRS.html) ·

@@ -1,10 +1,10 @@
 # Field Projections 预览：安全的字段级投影
 
 > **代码状态**: ✅ 含可编译示例
-
 >
-> **EN**: Security Practices
-> **Summary**: Security Practices. Core Rust concept covering mechanism analysis, memory safety guarantees, security practices.
+> **EN**: Field Projections Preview
+> **Summary**: Preview of safe field projections and pinned field access for self-referential types.
+> **来源**: [std::pin — Pinning](https://doc.rust-lang.org/std/pin/index.html) · [Rust Reference — Field Access](https://doc.rust-lang.org/reference/expressions.html#field-access-expressions)
 >
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
@@ -58,7 +58,7 @@
 
 ## 一、核心概念
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/expressions/field-access-expr.html)]**
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/expressions.html#field-access-expressions)]**
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 

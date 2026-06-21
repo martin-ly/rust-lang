@@ -1,13 +1,10 @@
-> **内容分级**: [归档级]
-
+> **内容分级**:
+>
+> [归档级]
 > **说明**: 本文档为历史研究材料，最新内容请参阅 [concept/07_future/23_rust_edition_guide.md](../../../../concept/07_future/23_rust_edition_guide.md)
-
 > **说明**: 本文档为历史研究材料，最新内容请参阅 [concept/07_future/22_edition_guide.md](../../../../concept/07_future/22_edition_guide.md)
-
 > **说明**: 本文档为历史研究材料，最新内容请参阅 [knowledge/03_advanced/async/01_async_closures_2024.md](../../../../knowledge/03_advanced/async/01_async_closures_2024.md)
-
 > **说明**: 本文档为历史研究材料，最新内容请参阅 [knowledge/02_intermediate/control_flow/02_let_chains.md](../../../../knowledge/02_intermediate/control_flow/02_let_chains.md)
-
 > **说明**: 本文档为历史研究材料，最新 Edition 2024 内容请参阅 [knowledge/06_ecosystem/02_edition_2024.md](../../../../knowledge/06_ecosystem/02_edition_2024.md) 与 [concept/07_future/19_rust_edition_preview.md](../../../../concept/07_future/19_rust_edition_preview.md)
 
 ---

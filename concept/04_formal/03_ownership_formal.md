@@ -16,97 +16,7 @@
 > **跨层映射**: L4↔L1 形式化 ↔ 直觉 双射 | L4→L3 Unsafe 边界 ↔ 公理扩展
 > **定理链编号**: T-100 借用检查可判定性 → T-101 所有权类型 soundness → T-102 内存安全完备性
 
-## 📑 目录
-
-- [Ownership Formalization（所有权形式化）](#ownership-formalization所有权形式化)
-  - [📑 目录](#-目录)
-  - [零、认知路径（Cognitive Path）](#零认知路径cognitive-path)
-    - [路径总览](#路径总览)
-    - [Step 1: 为什么需要形式化所有权？](#step-1-为什么需要形式化所有权)
-    - [Step 2: 权限和借用的数学模型？](#step-2-权限和借用的数学模型)
-    - [Step 3: 怎么证明没有悬垂指针？](#step-3-怎么证明没有悬垂指针)
-    - [Step 4: 和实际 Rust 代码怎么对应？](#step-4-和实际-rust-代码怎么对应)
-    - [Step 5: 形式化证明了什么、没证明什么？](#step-5-形式化证明了什么没证明什么)
-    - [所有权状态转换图](#所有权状态转换图)
-  - [一、权威定义（Definition）](#一权威定义definition)
-    - [1.1 Wikipedia 权威定义](#11-wikipedia-权威定义)
-    - [1.2 Reed 2009：所有权类型的逻辑框架基础](#12-reed-2009所有权类型的逻辑框架基础)
-    - [1.3 COR（Calculus of Ownership and Reference）](#13-corcalculus-of-ownership-and-reference)
-    - [1.4 RustBelt 形式化](#14-rustbelt-形式化)
-  - [二、概念属性矩阵](#二概念属性矩阵)
-    - [2.1 形式化方法对比矩阵](#21-形式化方法对比矩阵)
-    - [2.2 所有权状态的形式化](#22-所有权状态的形式化)
-  - [三、形式化理论根基](#三形式化理论根基)
-  - [四、思维导图](#四思维导图)
-  - [五、定理推理链](#五定理推理链)
-    - [5.1 定理一致性矩阵（10 行）](#51-定理一致性矩阵10-行)
-    - [5.2 反命题决策树](#52-反命题决策树)
-      - [决策树 1: "形式化所有权证明所有程序安全"](#决策树-1-形式化所有权证明所有程序安全)
-      - [决策树 2: "线性类型和 Rust 所有权完全等价"](#决策树-2-线性类型和-rust-所有权完全等价)
-      - [决策树 3: "权限系统可自动化验证所有属性"](#决策树-3-权限系统可自动化验证所有属性)
-    - [5.3 形式化模型与实现的差距](#53-形式化模型与实现的差距)
-  - [六、国际课程与论文对齐](#六国际课程与论文对齐)
-    - [6.4 Pin 与自引用结构的形式化语义](#64-pin-与自引用结构的形式化语义)
-  - [七、知识来源关系](#七知识来源关系)
-  - [八、相关概念链接](#八相关概念链接)
-  - [九、Polonius：Loan-based 形式化语义](#九poloniusloan-based-形式化语义)
-    - [9.1 从区域到 Loans](#91-从区域到-loans)
-    - [9.2 Polonius 的 Datalog 规则（核心）](#92-polonius-的-datalog-规则核心)
-    - [9.3 Polonius 对 T3（区域约束）的影响](#93-polonius-对-t3区域约束的影响)
-    - [9.4 Polonius 的复杂度](#94-polonius-的复杂度)
-    - [9.5 与 Oxide 的衔接](#95-与-oxide-的衔接)
-    - [9.6 开放问题](#96-开放问题)
-    - [9.3 Reed 2009 资源标签与 Iris 幽灵状态的对应](#93-reed-2009-资源标签与-iris-幽灵状态的对应)
-    - [9.4 `Pin<T>` 的形式化语义：location stability](#94-pint-的形式化语义location-stability)
-    - [9.5 Pin 不动性的 LTL 形式化](#95-pin-不动性的-ltl-形式化)
-    - [9.5b Kani 验证：Pin 地址恒定规格](#95b-kani-验证pin-地址恒定规格)
-  - [十、待补充与演进方向（TODOs）](#十待补充与演进方向todos)
-  - [十一、别名模型：Stacked Borrows 与 Tree Borrows](#十一别名模型stacked-borrows-与-tree-borrows)
-    - [11.1 Stacked Borrows 核心规则](#111-stacked-borrows-核心规则)
-    - [11.2 Tree Borrows 核心规则](#112-tree-borrows-核心规则)
-    - [11.3 对比矩阵](#113-对比矩阵)
-    - [11.4 为什么 Tree Borrows 更优](#114-为什么-tree-borrows-更优)
-    - [11.5 Tree Borrows 2025：PLDI 2025 Distinguished Paper](#115-tree-borrows-2025pldi-2025-distinguished-paper)
-    - [11.5b Tree Borrows 操作语义规约](#115b-tree-borrows-操作语义规约)
-      - [状态空间定义](#状态空间定义)
-      - [小步语义：引用创建](#小步语义引用创建)
-      - [小步语义：读写访问](#小步语义读写访问)
-      - [小步语义：裸指针转换与延迟激活](#小步语义裸指针转换与延迟激活)
-      - [Permissions 转换的完整状态机](#permissions-转换的完整状态机)
-      - [与 Miri 检测算法的对应](#与-miri-检测算法的对应)
-    - [11.6 与 RustBelt / Miri 的关系](#116-与-rustbelt--miri-的关系)
-  - [十二、Wikipedia 概念对齐](#十二wikipedia-概念对齐)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：所有权形式化的编译错误](#十边界测试所有权形式化的编译错误)
-    - [10.1 边界测试：线性类型与 `Drop` 的冲突（编译错误）](#101-边界测试线性类型与-drop-的冲突编译错误)
-    - [10.2 边界测试：分离逻辑与共享可变状态的不可兼得（编译错误）](#102-边界测试分离逻辑与共享可变状态的不可兼得编译错误)
-    - [10.3 边界测试：子类型化与生命周期协变（编译错误）](#103-边界测试子类型化与生命周期协变编译错误)
-    - [10.4 边界测试：悬垂指针的形式化禁止（编译错误）](#104-边界测试悬垂指针的形式化禁止编译错误)
-    - [10.3 边界测试：形式化所有权与编译器实现的差距（编译错误）](#103-边界测试形式化所有权与编译器实现的差距编译错误)
-    - [10.4 边界测试：形式化所有权与编译器实现的偏差（运行时 UB）](#104-边界测试形式化所有权与编译器实现的偏差运行时-ub)
-    - [10.2 边界测试：const fn 中的非编译期操作](#102-边界测试const-fn-中的非编译期操作)
-  - [嵌入式测验](#嵌入式测验)
-    - [测验 1：所有权的形式化直觉（记忆层）](#测验-1所有权的形式化直觉记忆层)
-    - [测验 2：借用作为能力（理解层）](#测验-2借用作为能力理解层)
-    - [测验 3：Hoare 三元组与 Unsafe（应用层）](#测验-3hoare-三元组与-unsafe应用层)
-    - [测验 4：分离逻辑与并发（分析层）](#测验-4分离逻辑与并发分析层)
-
-> **层级**: L4 形式化理论
-> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Lifetimes](../01_foundation/03_lifetimes.md) · [Linear Logic](./01_linear_logic.md) · [Type Theory](./02_type_theory.md)
-> **后置概念**: [RustBelt](./04_rustbelt.md)
-> **主要来源**: [COR: ETH Zurich] · [RustBelt: POPL 2018](https://doi.org/10.1145/3158154) · [Aeneas] · [RefinedRust] · [Wikipedia] · [Reed 2009]
-
----
-
-> **Bloom 层级**: 分析 → 评价
-**变更日志**:
-
-- v1.0 (2026-05-12): 初始版本，完成 COR 形式化、区域类型、分离逻辑、操作语义、思维导图$entry
-- v2.2 (2026-05-13): Phase B 验证实践——新增§9.5b Kani 验证规格（Pin 地址恒定定理的可机械验证 harness，含 SelfRef 自引用结构、符号化地址检查、不变量断言）
-- v2.1 (2026-05-13): Phase A-1 形式化深化——新增§11.5b Tree Borrows 完整操作语义规约（状态空间 Σ=(M,P,T)、小步语义规则 REBORROW-MUT/SHARED/READ/WRITE/RAW、Permissions 状态机转换图、与 Miri 检测算法的精确对应） [来源: [Wikipedia — Simply Typed Lambda Calculus](https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus)]
-- v2.0 (2026-05-13): 深度重构。扩展定理一致性矩阵至 10 行并引入 "⟹" 推理链；新增反命题决策树 3 组；重构认知路径为 5 步渐进式问答；补充 Wikipedia、Reed 2009、RustBelt 权威引用；全篇强化 L1↔L4 层次一致性标注
-
----
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 
 ## 零、认知路径（Cognitive Path）
 
@@ -477,7 +387,7 @@ graph TD
 
 > **认知功能**: 此决策树对比**线性类型与 Rust 所有权的本质差异**。功能定位：澄清 Rust 不是严格线性类型，而是仿射类型系统。使用建议：在阅读线性逻辑文献时，注意 Rust 额外引入了生命周期和 unsafe 封装两个维度。关键洞察：**仿射弱化（允许丢弃）+ 区域约束 + Iris 高阶协议 = Rust 超越经典线性类型的三要素**。[来源: 💡 原创分析]
 
-> **分析**: Rust 是**仿射类型（Affine）**而非严格线性类型：值可以被丢弃（weakening），但不能被复制（contraction）。此外，Rust 的**生命周期**和 **unsafe** 封装都是传统线性类型系统不具备的维度。RustBelt 的 Iris 模型正是为了弥合这一差距而设计。 [来源: [PLDI 2025 — Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]
+> **分析**: Rust 是**仿射类型（Affine）**而非严格线性类型：值可以被丢弃（weakening），但不能被复制（contraction）。此外，Rust 的**生命周期**和 **unsafe** 封装都是传统线性类型系统不具备的维度。RustBelt 的 Iris 模型正是为了弥合这一差距而设计。 [来源: [PLDI 2025 — Tree Borrows](https://plv.mpi-sws.org/rustbelt/)]
 
 #### 决策树 3: "权限系统可自动化验证所有属性"
 
@@ -1585,7 +1495,7 @@ let r3 = &data;       // ❌ 错误：token 在借用期间，不能共享读
 
 **题目**: 以下 `unsafe` 函数的形式化规约应该如何写？
 
-```rust
+```rust,compile_fail
 /// 将 `*const T` 转换为 `&T`，要求指针非空且对齐
 unsafe fn as_ref_unchecked<T>(ptr: *const T) -> &T {
     &*ptr
@@ -1612,7 +1522,7 @@ unsafe fn as_ref_unchecked<T>(ptr: *const T) -> &T {
 
 **为什么前置条件必须包含非空和对齐**：
 
-```rust
+```rust,ignore
 // Rust 引用 &T 的不变性（编译器假设永远为真）：
 // 1. 非空: &T 永远不能为 null（与 C 指针不同）
 // 2. 对齐: &T 必须按 align_of::<T>() 对齐
@@ -1693,7 +1603,7 @@ fn increment() {
 
 **原子操作的形式化语义**：
 
-```rust
+```rust,ignore
 // fetch_add(n) 的原子性 = 读取-修改-写入是一个不可分的"大步骤"
 // 分离逻辑中: 这个"大步骤"持有 COUNTER 资源的独占权
 

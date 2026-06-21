@@ -16,7 +16,7 @@
 
 ---
 
-> **来源**: [Cargo Book — Build Scripts](https://doc.rust-lang.org/cargo/reference/build-scripts.html) ·
+> **来源**: [Cargo — Build Scripts](https://doc.rust-lang.org/cargo/reference/build-scripts.html)
 > [Cargo Book — Build Script Examples](https://doc.rust-lang.org/cargo/reference/build-script-examples.html) ·
 > [Cargo Book — Environment Variables](https://doc.rust-lang.org/cargo/reference/environment-variables.html) ·
 > [The `links` Manifest Key](https://doc.rust-lang.org/cargo/reference/build-scripts.html#the-links-manifest-key)
@@ -164,7 +164,7 @@ cc = "1.2"
 
 `build.rs`:
 
-```rust
+```rust,ignore
 fn main() {
     cc::Build::new()
         .file("src/mylib.c")
@@ -182,7 +182,7 @@ int mylib_add(int a, int b) { return a + b; }
 
 `src/lib.rs`:
 
-```rust
+```rust,ignore
 extern "C" {
     fn mylib_add(a: i32, b: i32) -> i32;
 }
@@ -200,7 +200,7 @@ pub fn add(a: i32, b: i32) -> i32 {
 
 ### 5.1 生成代码到 `OUT_DIR`
 
-```rust
+```rust,ignore
 use std::env;
 use std::fs::File;
 use std::io::Write;

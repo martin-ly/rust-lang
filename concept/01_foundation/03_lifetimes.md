@@ -205,7 +205,7 @@ NLL 的关键改进:
   求解器: 从基于"作用域嵌套树"变为基于"CFG 数据流分析"
 ```
 
-> **来源**: [rustc NLL [RFC 2094](https://rust-lang.github.io/rfcs/2094.html) — Non-Lexical Lifetimes] · [Rust Reference: Lifetime resolution] · [rustc borrow_check/src/region_inference/mod.rs]
+> **来源**: [rustc NLL [RFC 2094](https://rust-lang.github.io/rfcs//2094-nll.html) — Non-Lexical Lifetimes] · [Rust Reference: Lifetime resolution] · [rustc borrow_check/src/region_inference/mod.rs]
 
 #### 与 Polonius 的演进关系
 
@@ -456,7 +456,7 @@ graph BT
   ⟹ LendingIterator 等自引用集合可在 Safe Rust 中安全表达
 ```
 
-> **[来源: [RFC 1598](https://rust-lang.github.io/rfcs/1598.html) (GATs)]** GATs 中 `where Self: 'a` 确保关联类型的生命周期自洽。✅
+> **[来源: [RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html) (GATs)]** GATs 中 `where Self: 'a` 确保关联类型的生命周期自洽。✅
 
 ### 4.9 定理一致性矩阵
 
@@ -1229,7 +1229,7 @@ fn main() {
 ## 参考来源
 
 > [来源: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/items/generics.html#lifetime-parameters)]
-> [来源: [RFC 0387 — Higher-Ranked Trait Bounds](https://rust-lang.github.io/rfcs/0387-higher-ranked-trait-bounds.html)]
+> [来源: [RFC 0387 — Higher-Ranked Trait Bounds](https://rust-lang.github.io/rfcs//0387-higher-ranked-trait-bounds.html)]
 > [来源: [PLDI 2023 — Polonius](https://dl.acm.org/doi/10.1145/3591283)]
 
 ---
@@ -1240,7 +1240,7 @@ fn main() {
 
 以下函数签名中，编译器会自动推断生命周期吗？
 
-```rust
+```rust,ignore
 fn first_word(s: &str) -> &str
 ```
 
@@ -1261,7 +1261,7 @@ fn first_word(s: &str) -> &str
 
 以下代码为什么不能编译？
 
-```rust
+```rust,compile_fail
 fn longest(x: &str, y: &str) -> &str {
     if x.len() > y.len() { x } else { y }
 }
@@ -1278,7 +1278,7 @@ fn longest(x: &str, y: &str) -> &str {
 
 函数有两个输入引用 `x` 和 `y`，编译器无法确定返回的引用应该与哪个输入参数的生命周期关联。需要显式标注：
 
-```rust
+```rust,ignore
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 ```
 
@@ -1291,7 +1291,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 
 以下代码的错误是什么？
 
-```rust
+```rust,compile_fail
 fn dangle() -> &String {
     let s = String::from("hello");
     &s

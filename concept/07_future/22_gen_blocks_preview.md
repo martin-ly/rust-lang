@@ -3,8 +3,8 @@
 > **代码状态**: [综述级 — 待补充代码]
 
 >
-> **EN**: Gen Blocks Preview (Chinese)
-> **Summary**: Gen Blocks Preview (Chinese). Emerging Rust feature or ecosystem trend: Gen Blocks Preview (Chinese).
+> **EN**: Gen Blocks Preview
+> **Summary**: Preview of generator blocks as a language-level lazy iteration construct.
 >
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
@@ -18,7 +18,7 @@
 > **双维定位**: F×App — 应用 gen 块构建迭代器
 > **前置依赖**: [Iterator](../02_intermediate/15_iterator_patterns.md) · [Async](../03_advanced/02_async.md)
 > **后置延伸**: [Async Gen](./15_gen_blocks_preview.md)
-> **来源**: [RFC 3513](https://rust-lang.github.io/rfcs/3513-gen-blocks.html)
+> **来源**: [RFC 3513](https://rust-lang.github.io/rfcs//3513-gen-blocks.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 > **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
@@ -59,7 +59,7 @@ fn main() {}
 > 3) 流处理（yield 数据块）。
 >
 > 这与 Python 的 generator（`yield` 创建 generator object）或 C# 的 `yield return`（编译器状态机转换）类似——Rust 的 `gen` block 是编译器转换的状态机，零成本抽象。
-> [来源: [Gen Blocks RFC](https://rust-lang.github.io/rfcs/3513-gen-blocks.html)] ·
+> [来源: [Gen Blocks RFC](https://rust-lang.github.io/rfcs//3513-gen-blocks.html)] ·
 > [来源: [Generator Tracking](https://github.com/rust-lang/rust/issues/43122)]
 
 ## 认知路径

@@ -22,11 +22,11 @@
 > [来源: Authority Source Sprint Batch 8]
 > **受众**: [专家] / [研究者]
 > **内容分级**: [实验级]
-> **相关文档**: 请参阅 [docs/rust-ownership-decidability/extensions/unsafe-rust-patterns.md](../../../docs/rust-ownership-decidability/extensions/unsafe-rust-patterns.md)
-> **相关文档**: 请参阅 [docs/rust-ownership-decidability/17-unsafe-rust/01-intro.md](../../../docs/rust-ownership-decidability/17-unsafe-rust/01-intro.md)
-> **相关文档**: 请参阅 [docs/research_notes/formal_methods/10_unsafe_safety_proof_tree.md](../../../docs/research_notes/formal_methods/10_unsafe_safety_proof_tree.md)
-> **相关文档**: 请参阅 [docs/research_notes/formal_methods/10_unsafe_concept_mindmap.md](../../../docs/research_notes/formal_methods/10_unsafe_concept_mindmap.md)
-> **相关文档**: 请参阅 [docs/05_guides/05_unsafe_rust_guide.md](../../../docs/05_guides/05_unsafe_rust_guide.md)
+> **相关文档**: 请参阅 [docs/rust-ownership-decidability/extensions/unsafe-rust-patterns.md](../../../concept/03_advanced/03_unsafe.md)
+> **相关文档**: 请参阅 [docs/rust-ownership-decidability/17-unsafe-rust/01-intro.md](../../../concept/03_advanced/03_unsafe.md)
+> **相关文档**: 请参阅 [docs/research_notes/formal_methods/10_unsafe_safety_proof_tree.md](../../../concept/03_advanced/03_unsafe.md)
+> **相关文档**: 请参阅 [docs/research_notes/formal_methods/10_unsafe_concept_mindmap.md](../../../concept/03_advanced/03_unsafe.md)
+> **相关文档**: 请参阅 [docs/05_guides/05_unsafe_rust_guide.md](../../../concept/03_advanced/03_unsafe.md)
 
 ---
 

@@ -3,8 +3,8 @@
 >
 # Rust vs Elixir
 >
-> **EN**: Rust vs Elixir (Chinese)
-> **Summary**: Rust vs Elixir (Chinese). Core Rust concept covering cross-language comparison, mental model building.
+> **EN**: Rust vs Elixir
+> **Summary**: Rust vs Elixir: comparative analysis with Rust across type systems, memory safety, and concurrency.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 评价 → 创造

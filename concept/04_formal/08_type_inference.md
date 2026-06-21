@@ -2,8 +2,8 @@
 
 # 类型推断：Hindley-Milner 算法与 Rust 的工业实现
 >
-> **EN**: 类型推断：Hindley-Milner 算法与 Rust 的工业实现 (Chinese)
-> **Summary**: 类型推断：Hindley-Milner 算法与 Rust 的工业实现 (Chinese). Core Rust concept covering practical examples, mechanism analysis, in-depth analysis.
+> **EN**: Type Inference
+> **Summary**: Type Inference: formal methods foundations, semantics, and verification techniques relevant to Rust.
 > **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >
@@ -18,7 +18,7 @@
 
 > **来源**: [Hindley 1969 — Principal Type-Schemes](https://doi.org/10.1093/comjnl/12.2.166) ·
 > [Milner 1978 — A Theory of Type Polymorphism](https://doi.org/10.1016/0022-0000(78)90014-4) ·
-> [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/type-inference.html) ·
+> [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/types.html) ·
 > [Wikipedia — Hindley-Milner Type System](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system) ·
 > [Rust RFC 438 — Type Inference](https://github.com/rust-lang/rfcs/pull/438)
 > **前置依赖**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
@@ -52,6 +52,12 @@
     - [10.3 边界测试：闭包捕获与类型推断的交互（编译错误）](#103-边界测试闭包捕获与类型推断的交互编译错误)
     - [10.4 边界测试：类型推断的模糊性与显式标注需求（编译错误）](#104-边界测试类型推断的模糊性与显式标注需求编译错误)
     - [10.5 边界测试：类型不匹配的基础错误](#105-边界测试类型不匹配的基础错误)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Hindley-Milner（HM）类型推断的核心算法是什么？它的时间复杂度如何？（理解层）](#测验-1hindley-milnerhm类型推断的核心算法是什么它的时间复杂度如何理解层)
+    - [测验 2：Rust 的类型推断与 Haskell 的 HM 推断有什么主要区别？（理解层）](#测验-2rust-的类型推断与-haskell-的-hm-推断有什么主要区别理解层)
+    - [测验 3：`let x = vec![1, 2, 3];` 中 `x` 的类型是如何推断出来的？（理解层）](#测验-3let-x--vec1-2-3-中-x-的类型是如何推断出来的理解层)
+    - [测验 4：为什么 Rust 有时需要显式类型标注（如 `collect::<Vec<_>>()`），而 Haskell 通常不需要？（理解层）](#测验-4为什么-rust-有时需要显式类型标注如-collectvec_而-haskell-通常不需要理解层)
+    - [测验 5：Rust 1.x 之后的类型推断相比早期版本有什么改进？（理解层）](#测验-5rust-1x-之后的类型推断相比早期版本有什么改进理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -165,7 +171,7 @@ graph TD
 > **认知功能**: 此图展示 Rust 类型推断的**层次结构**——基于 HM 基础，扩展了 Trait、生命周期、关联类型等工业级特性。
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **关键洞察**: Rust 的类型推断不是纯 HM——它结合了**约束求解**（类型统一）和**Trait 解析**（目标导向搜索）。
-> [来源: [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/type-inference.html)]
+> [来源: [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/types.html)]
 
 ---
 
@@ -241,7 +247,7 @@ fn fixed() {
 ```
 
 > **统一洞察**: 统一是类型推断的**核心算法**——它将"类型相等"的概念扩展为"类型兼容"，通过替换类型变量实现。
-> [来源: [Rust Compiler — Type Checking](https://rustc-dev-guide.rust-lang.org/type-checking.html)]
+> [来源: [Rust Compiler — Type Checking](https://rustc-dev-guide.rust-lang.org/hir-typeck/summary.html)]
 
 ---
 
@@ -374,7 +380,7 @@ graph TD
 
 > **认知功能**: 此决策树展示类型推断的**最佳实践**。核心原则是：**公共 API 显式标注，私有代码允许推断**。
 > **关键洞察**: 显式类型是**文档**——在公共接口上，类型标注比推断更有价值。
-> [来源: [Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines/type-safety.html)]
+> [来源: [Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines//type-safety.html)]
 
 ---
 
@@ -471,7 +477,7 @@ graph TD
 |:---|:---:|:---|
 | [Milner 1978 — Type Polymorphism](https://doi.org/10.1016/0022-0000(78)90014-4) | ✅ 一级 | HM 算法奠基论文 |
 | [Hindley 1969 — Principal Type-Schemes](https://doi.org/10.1093/comjnl/12.2.166) | ✅ 一级 | 类型推断先驱 |
-| [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/type-inference.html) | ✅ 一级 | 官方参考 |
+| [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/types.html) | ✅ 一级 | 官方参考 |
 | [rustc-dev-guide — Type Inference](https://rustc-dev-guide.rust-lang.org/type-inference.html) | ✅ 一级 | 编译器实现 |
 | [Wikipedia — Hindley-Milner](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system) | ✅ 三级 | 入门概述 |
 
@@ -527,7 +533,7 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的闭包参数类型推断依赖**使用点上下文**：闭包在何处被调用，参数类型从调用处推断。若闭包定义后未被调用（或调用点无足够类型信息），编译器无法推断参数类型。这与 C++ 的 lambda（参数类型必须显式或使用 `auto`）或 JavaScript 的箭头函数（动态类型，无推断问题）不同——Rust 的闭包类型推断是双向的：函数签名可从闭包推断，闭包参数可从调用推断，但若两端都未知，推断失败。`map`、`filter` 等迭代器适配器提供足够的上下文（`Iterator::Item` 类型），因此迭代器闭包通常无需显式标注。独立闭包（未立即使用）需要类型注解。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/type-inference.html)]
+> **修正**: Rust 的闭包参数类型推断依赖**使用点上下文**：闭包在何处被调用，参数类型从调用处推断。若闭包定义后未被调用（或调用点无足够类型信息），编译器无法推断参数类型。这与 C++ 的 lambda（参数类型必须显式或使用 `auto`）或 JavaScript 的箭头函数（动态类型，无推断问题）不同——Rust 的闭包类型推断是双向的：函数签名可从闭包推断，闭包参数可从调用推断，但若两端都未知，推断失败。`map`、`filter` 等迭代器适配器提供足够的上下文（`Iterator::Item` 类型），因此迭代器闭包通常无需显式标注。独立闭包（未立即使用）需要类型注解。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/types.html)]
 
 ### 10.4 边界测试：关联类型的投影歧义（编译错误）
 
@@ -599,7 +605,7 @@ fn main() {
 > 8) 编译错误更精确（推断失败时错误信息模糊）；
 > 9) API 边界（公共接口必须显式）。
 > 这与 Haskell 的完全类型推断（几乎无需标注，但复杂程序可能需要）或 C++ 的 `auto`（有限推断，模板参数从调用推断）不同——Rust 的平衡点是"局部推断 + 接口显式"。
-> [来源: [Type Inference](https://doc.rust-lang.org/reference/type-inference.html)] ·
+> [来源: [Type Inference](https://doc.rust-lang.org/reference/types.html)] ·
 
 ### 10.5 边界测试：类型不匹配的基础错误
 

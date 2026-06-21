@@ -3,8 +3,8 @@
 > **代码状态**: [综述级 — 待补充代码]
 
 >
-> **EN**: Smart Pointers
-> **Summary**: Smart Pointers. Core Rust concept covering practical examples, unsafe Rust and memory safety, metaprogramming techniques.
+> **EN**: Derive CoercePointee Preview
+> **Summary**: Preview of the `CoercePointee` derive for custom smart-pointer types.
 >
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
@@ -197,7 +197,7 @@ struct SmartPtr<T: ?Sized> {
 | 其他字段与 T 大小无关 | metadata、计数器等字段不能依赖 T: Sized | 编译错误：布局依赖无法自动推导 |
 
 > **边界说明**: 这些约束确保强制转换的**唯一性**——给定源类型和目标类型，转换后的布局是确定的。
-> [来源: [Rust [RFC 3621](https://rust-lang.github.io/rfcs/3621.html) — 约束章节](https://github.com/rust-lang/rfcs/pull/3621)]
+> [来源: [Rust [RFC 3621](https://rust-lang.github.io/rfcs//3621-derive-smart-pointer.html) — 约束章节](https://github.com/rust-lang/rfcs/pull/3621)]
 
 ---
 
@@ -252,7 +252,7 @@ graph LR
 ```
 
 > **安全核心论点**: `CoercePointee` 派生将**智能指针类型强制**这一机械性、易错的 unsafe 操作转化为编译器管理的自动代码生成，显著降低自定义智能指针的安全门槛。
-> [来源: [Rust [RFC 3621](https://rust-lang.github.io/rfcs/3621.html) — Motivation](https://github.com/rust-lang/rfcs/pull/3621)]
+> [来源: [Rust [RFC 3621](https://rust-lang.github.io/rfcs//3621-derive-smart-pointer.html) — Motivation](https://github.com/rust-lang/rfcs/pull/3621)]
 
 ---
 
@@ -303,7 +303,7 @@ graph TD
 ```
 
 > **边界要点**: `CoercePointee` 是**保守的正确性方案**——只在编译器能证明安全的情况下自动生成代码。不满足约束的场景仍需手动 unsafe 实现，这是设计上的有意限制。
-> [来源: [Rust [RFC 3621](https://rust-lang.github.io/rfcs/3621.html) — Drawbacks](https://github.com/rust-lang/rfcs/pull/3621)]
+> [来源: [Rust [RFC 3621](https://rust-lang.github.io/rfcs//3621-derive-smart-pointer.html) — Drawbacks](https://github.com/rust-lang/rfcs/pull/3621)]
 
 ---
 
@@ -311,7 +311,7 @@ graph TD
 
 | 里程碑 | 状态 | 预计时间 | 说明 |
 |:---|:---:|:---|:---|
-| [RFC 3621](https://rust-lang.github.io/rfcs/3621.html) 接受 | ✅ | 2024 | 派生宏方案设计完成 |
+| [RFC 3621](https://rust-lang.github.io/rfcs//3621-derive-smart-pointer.html) 接受 | ✅ | 2024 | 派生宏方案设计完成 |
 | 编译器实现 | ✅ nightly | 2025 | `#[derive(CoercePointee)]` 可用 |
 | 稳定化 | 🟡 | 2026-2027 | 等待实际使用反馈 |
 | 标准库采用 | ⬜ | 2027+ | Box/Rc/Arc 内部使用 |
@@ -377,12 +377,12 @@ fn main() {
 }
 ```
 
-> **修正**: `CoercePointee`（[RFC 3621](https://rust-lang.github.io/rfcs/3621.html)，Rust 1.95+）允许自定义智能指针参与**强制点转换**（unsized coercion），如 `MyBox<String>` → `MyBox<str>`（通过 `Deref`）。
+> **修正**: `CoercePointee`（[RFC 3621](https://rust-lang.github.io/rfcs//3621-derive-smart-pointer.html)，Rust 1.95+）允许自定义智能指针参与**强制点转换**（unsized coercion），如 `MyBox<String>` → `MyBox<str>`（通过 `Deref`）。
 > 关键约束：智能指针类型必须是 `#[repr(transparent)]`——保证其内存布局与内部指针完全相同。
 > 这是编译器进行强制转换的前提：转换只需修改类型标记，无需调整内存。
 > `Box<T>`、`Rc<T>`、`Arc<T>` 都满足此约束。非透明包装（如包含额外字段的 struct）不能派生 `CoercePointee`，因为强制转换会改变字段布局。
 > 这与 C++ 的 `std::shared_ptr`（通过虚函数表和类型擦除实现多态）不同——Rust 的 unsized coercion 是零成本编译期转换。
-> [来源: [Rust RFC 3621](https://rust-lang.github.io/rfcs/3621-derive-coerce-pointee.html)] ·
+> [来源: [Rust RFC 3621](https://rust-lang.github.io/rfcs//3621-derive-smart-pointer.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-04-advanced-types.html)]
 
 ### 10.2 边界测试：多字段 struct 的 CoercePointee 尝试（编译错误）
@@ -407,7 +407,7 @@ fn main() {}
 > 这阻止了 `CoercePointee` 的派生，因为编译器无法保证强制转换后的内存表示等价。
 > 正确模式：额外元数据应存储在堆上（如 `Box` 的指针指向 `(T, usize)` 布局），或使用全局表（`TypeId` → metadata 映射）。
 > Rust 的 DST（dynamically sized type）设计深思熟虑： fat pointer（宽指针）包含数据指针 + 元数据（长度或 vtable），但自定义 DST 的元数据存储仍是开放问题。
-> [来源: [Rust RFC 3621](https://rust-lang.github.io/rfcs/3621-derive-coerce-pointee.html)] ·
+> [来源: [Rust RFC 3621](https://rust-lang.github.io/rfcs//3621-derive-smart-pointer.html)] ·
 > [来源: [Rust Reference — Type Layout](https://doc.rust-lang.org/reference/type-layout.html)]
 
 ### 10.3 边界测试：CoercePointee 与自定义 DST 的元数据（编译错误）
@@ -436,7 +436,7 @@ fn main() {
 > 自定义 DST（如 `dyn MyTrait + Send` 的特定组合）的元数据布局可能不同。
 > `CoercePointee` 目前主要针对标准库的智能指针（`Box`、`Rc`、`Arc`）的自定义版本，对完全自定义的 DST 支持有限。
 > 这与 C++ 的 `std::shared_ptr<void>`（类型擦除，无元数据）或 Rust 的 `dyn Any`（固定元数据布局）类似——DST 是 Rust 类型系统的高级特性，智能指针的 coercion 需要编译器的深度配合。
-> [来源: [Rust RFC 3621](https://rust-lang.github.io/rfcs/3621-derive-coerce-pointee.html)] ·
+> [来源: [Rust RFC 3621](https://rust-lang.github.io/rfcs//3621-derive-smart-pointer.html)] ·
 > [来源: [Rust Reference — Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html)]
 
 ### 10.4 边界测试：`PhantomData` 与 CoercePointee 的生命周期交互（编译错误）
@@ -466,7 +466,7 @@ fn main() {
 > `Ref<'short, String>` → `Ref<'long, str>` 要求 `'short: 'long`（短生命周期可 coerce 为长生命周期）。
 > 若生命周期不匹配，编译错误。这是 Rust 生命周期系统的常规行为，但 `CoercePointee` 增加了复杂度：coercion 现在同时涉及类型和生命周期两个维度。
 > 这与 `&'a String` → `&'a str` 的自动 coercion（Deref coercion）类似——`CoercePointee` 将这一能力扩展到自定义智能指针。
-> [来源: [Rust RFC 3621](https://rust-lang.github.io/rfcs/3621-derive-coerce-pointee.html)] ·
+> [来源: [Rust RFC 3621](https://rust-lang.github.io/rfcs//3621-derive-smart-pointer.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
 
 ### 10.4 边界测试：`CoercePointee` 与智能指针的自动转换（编译错误/未来特性）
@@ -497,7 +497,7 @@ fn main() {}
 > 1) 自定义 allocator 的智能指针；
 > 2) 领域特定指针类型（`GpuBuffer<T>`）；
 > 3) 与 `Pin` 结合的自定义指针。这与 C++ 的隐式转换（`std::shared_ptr<Derived>` → `std::shared_ptr<Base>` 自动）或 Swift 的引用类型（始终支持多态转换）不同——Rust 的 trait object 转换需显式支持，`CoercePointee` 是类型系统的扩展。
-> [来源: [CoercePointee RFC](https://rust-lang.github.io/rfcs/3621-derive-coerce-pointee.html)] ·
+> [来源: [CoercePointee RFC](https://rust-lang.github.io/rfcs//3621-derive-smart-pointer.html)] ·
 > [来源: [Rust Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)]
 > **过渡**: 派生 CoercePointee 预研：智能指针的自动类型强制 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 

@@ -1,3 +1,5 @@
+> **EN**: Ecosystem 33 Idioms Spectrum Archived
+> **Summary**: Ecosystem 33 Idioms Spectrum Archived. Core Rust concept.
 > **内容分级**: [综述级]
 > **归档说明**: 本文件已归档，内容已迁移至 [`03_idioms_spectrum.md`](./03_idioms_spectrum.md)。
 
@@ -14,14 +16,7 @@
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
-## 相关概念文件
-
-- [Rust 惯用法谱系全景主文件](./03_idioms_spectrum.md) — 惯用法完整内容（本文件已归档）
-- [设计模式](./02_patterns.md) — 面向问题的设计模式
-- [核心开源库谱系](./03_core_crates.md) — crates 生态详解
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
-> **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+> **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
 
 ## 认知路径
 

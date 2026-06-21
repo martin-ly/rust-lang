@@ -1,3 +1,5 @@
+> **EN**: Compiler Internals
+> **Summary**: Compiler Internals: Rust ecosystem tools, crates, and engineering practices.
 > **内容分级**: [专家级]
 
 > **代码状态**: ✅ 含可编译示例
@@ -6,112 +8,54 @@
 
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
-## 代码示例：自定义过程宏（编译器插件雏形）
-
-以下演示如何通过过程宏实现编译期代码生成，这是深入 Rust 编译器内部的入口：
-
-```rust,ignore
-// proc-macro crate: trace_var
-use proc_macro::TokenStream;
-use quote::quote;
-use syn::{parse_macro_input, ItemFn};
-
-#[proc_macro_attribute]
-pub fn trace_var(_attr: TokenStream, item: TokenStream) -> TokenStream {
-    let input = parse_macro_input!(item as ItemFn);
-    let fn_name = &input.sig.ident;
-    let fn_body = &input.block;
-
-    let expanded = quote! {
-        fn #fn_name() {
-            println!("[TRACE] Entering {}", stringify!(#fn_name));
-            #fn_body
-            println!("[TRACE] Exiting {}", stringify!(#fn_name));
-        }
-    };
-    expanded.into()
-}
-```
-
-使用方式：
-
-```rust,ignore
-use trace_var::trace_var;
-
-#[trace_var]
-fn compute() -> i32 {
-    let x = 1 + 2;
-    x * 3
-}
-```
-
->
-> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
->
-# Compiler Internals（Rust 编译器内部原理）
->
-> **EN**: Compiler Internals
-> **Summary**: 以下演示如何通过过程宏实现编译期代码生成，这是深入 Rust compiler内部的入口： ```rust,ignore // proc-macro crate: trace_var use proc_macro::TokenStream; use quote::quote; use syn::{parse_macro_input, ItemFn}; pub fn trace_var(_attr: TokenStream, item: TokenStream) -> TokenStream { let input = parse_macro_input!(item as ItemFn); let fn_
->
-> **受众**: [进阶]
-
-> **Bloom 层级**: 分析 → 评价
-> **A/S/P 标记**: **S+P** — Structure + Procedure
-> **双维定位**: C×Eva — 评价 rustc 编译管线的架构设计与实现权衡
-> **前置依赖**: [类型系统](../01_foundation/04_type_system.md) · [泛型](../02_intermediate/02_generics.md) · [生命周期](../01_foundation/03_lifetimes.md) · [Trait](../02_intermediate/01_traits.md) · [Unsafe](../03_advanced/03_unsafe.md)
-> **后置延伸**: [Async/Await](../03_advanced/02_async.md) · [宏系统](../03_advanced/07_proc_macro.md) · [形式化验证](../04_formal/05_verification_toolchain.md)
-
----
-
-> **来源**: [Rustc Development Guide](https://rustc-dev-guide.rust-lang.org/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Niko Matsakis — Rust Blog](https://smallcultfollowing.com/babysteps/) · [Polonius — OOPSLA 2018](https://hal.inria.fr/hal-03827702/) · [Chalk — Rust PL](https://rust-lang.github.io/chalk/book/) · [LLVM](https://llvm.org/docs/) · [rustc_driver API](https://doc.rust-lang.org/nightly/nightly-rustc/rustc_driver/)
+> **来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ## 📑 目录
 
-- [Compiler Internals（Rust 编译器内部原理）](#compiler-internalsrust-编译器内部原理)
-  - [📑 目录](#-目录)
-  - [一、权威定义（Definition）](#一权威定义definition)
-    - [1.1 rustc 架构概览](#11-rustc-架构概览)
-    - [1.2 编译管线](#12-编译管线)
-  - [二、概念属性矩阵](#二概念属性矩阵)
-  - [三、前端：解析与 AST](#三前端解析与-ast)
-    - [3.1 词法与语法分析](#31-词法与语法分析)
-    - [3.2 宏展开](#32-宏展开)
-  - [四、HIR：高级中间表示](#四hir高级中间表示)
-    - [4.1 HIR 的设计目标](#41-hir-的设计目标)
-    - [4.2 类型检查](#42-类型检查)
-  - [五、类型系统实现](#五类型系统实现)
-    - [5.1 Trait 解析与 Chalk](#51-trait-解析与-chalk)
-    - [5.2 类型推断](#52-类型推断)
-  - [六、MIR：中级中间表示](#六mir中级中间表示)
-    - [6.1 MIR 的结构](#61-mir-的结构)
-    - [6.2 MIR 优化](#62-mir-优化)
-    - [6.3 常量求值（MIRI / Const Eval）](#63-常量求值miri--const-eval)
-  - [七、借用检查器](#七借用检查器)
-    - [7.1 NLL（Non-Lexical Lifetimes）](#71-nllnon-lexical-lifetimes)
-    - [7.2 Polonius：基于逻辑的借用检查](#72-polonius基于逻辑的借用检查)
-    - [7.3 别名模型：Tree Borrows](#73-别名模型tree-borrows)
-  - [八、后端：代码生成](#八后端代码生成)
-    - [8.1 LLVM IR 生成](#81-llvm-ir-生成)
-    - [8.2 增量编译](#82-增量编译)
-  - [九、查询系统](#九查询系统)
-  - [十、反命题与边界](#十反命题与边界)
-    - [10.1 反命题树](#101-反命题树)
-    - [10.2 边界极限](#102-边界极限)
-  - [十一、边界测试](#十一边界测试)
-    - [11.1 边界测试：递归宏展开导致栈溢出（编译错误）](#111-边界测试递归宏展开导致栈溢出编译错误)
-    - [11.2 边界测试：泛型单态化导致二进制膨胀（编译/链接错误）](#112-边界测试泛型单态化导致二进制膨胀编译链接错误)
-    - [11.3 边界测试：unsafe 代码在 Miri 中触发 UB（运行时错误）](#113-边界测试unsafe-代码在-miri-中触发-ub运行时错误)
-  - [相关概念文件](#相关概念文件)
-    - [补充定理链](#补充定理链)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：Rust 编译器 `rustc` 的前端（Frontend）主要做什么？（理解层）](#测验-1rust-编译器-rustc-的前端frontend主要做什么理解层)
-    - [测验 2：MIR（Mid-level IR）在 Rust 编译管道中的作用是什么？（理解层）](#测验-2mirmid-level-ir在-rust-编译管道中的作用是什么理解层)
-    - [测验 3：LLVM 在 Rust 编译中扮演什么角色？为什么 Rust 选择 LLVM 而非自己写后端？（理解层）](#测验-3llvm-在-rust-编译中扮演什么角色为什么-rust-选择-llvm-而非自己写后端理解层)
-    - [测验 4：什么是"单态化"（Monomorphization）？它对编译时间和二进制体积有什么影响？（理解层）](#测验-4什么是单态化monomorphization它对编译时间和二进制体积有什么影响理解层)
-    - [测验 5：Rust 的增量编译（Incremental Compilation）如何工作？（理解层）](#测验-5rust-的增量编译incremental-compilation如何工作理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [📑 目录](#-目录)
+- [一、权威定义（Definition）](#一权威定义definition)
+  - [1.1 rustc 架构概览](#11-rustc-架构概览)
+  - [1.2 编译管线](#12-编译管线)
+- [二、概念属性矩阵](#二概念属性矩阵)
+- [三、前端：解析与 AST](#三前端解析与-ast)
+  - [3.1 词法与语法分析](#31-词法与语法分析)
+  - [3.2 宏展开](#32-宏展开)
+- [四、HIR：高级中间表示](#四hir高级中间表示)
+  - [4.1 HIR 的设计目标](#41-hir-的设计目标)
+  - [4.2 类型检查](#42-类型检查)
+- [五、类型系统实现](#五类型系统实现)
+  - [5.1 Trait 解析与 Chalk](#51-trait-解析与-chalk)
+  - [5.2 类型推断](#52-类型推断)
+- [六、MIR：中级中间表示](#六mir中级中间表示)
+  - [6.1 MIR 的结构](#61-mir-的结构)
+  - [6.2 MIR 优化](#62-mir-优化)
+  - [6.3 常量求值（MIRI / Const Eval）](#63-常量求值miri--const-eval)
+- [七、借用检查器](#七借用检查器)
+  - [7.1 NLL（Non-Lexical Lifetimes）](#71-nllnon-lexical-lifetimes)
+  - [7.2 Polonius：基于逻辑的借用检查](#72-polonius基于逻辑的借用检查)
+  - [7.3 别名模型：Tree Borrows](#73-别名模型tree-borrows)
+- [八、后端：代码生成](#八后端代码生成)
+  - [8.1 LLVM IR 生成](#81-llvm-ir-生成)
+  - [8.2 增量编译](#82-增量编译)
+- [九、查询系统](#九查询系统)
+- [十、反命题与边界](#十反命题与边界)
+  - [10.1 反命题树](#101-反命题树)
+  - [10.2 边界极限](#102-边界极限)
+- [十一、边界测试](#十一边界测试)
+  - [11.1 边界测试：递归宏展开导致栈溢出（编译错误）](#111-边界测试递归宏展开导致栈溢出编译错误)
+  - [11.2 边界测试：泛型单态化导致二进制膨胀（编译/链接错误）](#112-边界测试泛型单态化导致二进制膨胀编译链接错误)
+  - [11.3 边界测试：unsafe 代码在 Miri 中触发 UB（运行时错误）](#113-边界测试unsafe-代码在-miri-中触发-ub运行时错误)
+- [相关概念文件](#相关概念文件)
+  - [补充定理链](#补充定理链)
+- [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+  - [测验 1：Rust 编译器 `rustc` 的前端（Frontend）主要做什么？（理解层）](#测验-1rust-编译器-rustc-的前端frontend主要做什么理解层)
+  - [测验 2：MIR（Mid-level IR）在 Rust 编译管道中的作用是什么？（理解层）](#测验-2mirmid-level-ir在-rust-编译管道中的作用是什么理解层)
+  - [测验 3：LLVM 在 Rust 编译中扮演什么角色？为什么 Rust 选择 LLVM 而非自己写后端？（理解层）](#测验-3llvm-在-rust-编译中扮演什么角色为什么-rust-选择-llvm-而非自己写后端理解层)
+  - [测验 4：什么是"单态化"（Monomorphization）？它对编译时间和二进制体积有什么影响？（理解层）](#测验-4什么是单态化monomorphization它对编译时间和二进制体积有什么影响理解层)
+  - [测验 5：Rust 的增量编译（Incremental Compilation）如何工作？（理解层）](#测验-5rust-的增量编译incremental-compilation如何工作理解层)
+- [认知路径](#认知路径)
+  - [核心推理链](#核心推理链)
+  - [反命题与边界](#反命题与边界)
 
 > **Bloom 层级**: 分析 → 评价
 **变更日志**:
@@ -328,7 +272,7 @@ fn use_debug<T: Debug>(t: T) { println!("{:?}", t); }
 use_debug(42);  // 检查 i32: Debug → 是（标准库实现）
 ```
 
-> **来源**: [Rustc Dev Guide — Type Checking](https://rustc-dev-guide.rust-lang.org/type-checking.html) · [Chalk Book](https://rust-lang.github.io/chalk/book/)
+> **来源**: [Rustc Dev Guide — Type Checking](https://rustc-dev-guide.rust-lang.org/hir-typeck/summary.html) · [Chalk Book](https://rust-lang.github.io/chalk/book/)
 
 ---
 
@@ -387,7 +331,7 @@ Rust 类型推断的特点:
   - `collect()` 需要显式类型标注（因为多个类型可实现 `FromIterator`）
 ```
 
-> **来源**: [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/type-inference.html) · [Rustc Dev Guide — Type Checking](https://rustc-dev-guide.rust-lang.org/type-checking.html)
+> **来源**: [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/types.html) · [Rustc Dev Guide — Type Checking](https://rustc-dev-guide.rust-lang.org/hir-typeck/summary.html)
 
 ---
 
@@ -481,7 +425,7 @@ MIR 优化阶段（在 borrowck 之后、codegen 之前）:
   - -C opt-level=z: 极致代码大小优化
 ```
 
-> **来源**: [Rustc Dev Guide — Optimizations](https://rustc-dev-guide.rust-lang.org/optimizations.html)
+> **来源**: [Rustc Dev Guide — Optimizations](https://rustc-dev-guide.rust-lang.org/)
 
 ### 6.3 常量求值（MIRI / Const Eval）
 >
@@ -504,7 +448,7 @@ MIRI（MIR Interpreter）:
   - 独立工具 miri 用于运行时 UB 检测
 ```
 
-> **来源**: [Rustc Dev Guide — Const Evaluation](https://rustc-dev-guide.rust-lang.org/const-eval/interpretation.html) · [MIRI](https://github.com/rust-lang/miri)
+> **来源**: [Rustc Dev Guide — Const Evaluation](https://rustc-dev-guide.rust-lang.org/const-eval/interpret.html) · [MIRI](https://github.com/rust-lang/miri)
 
 ---
 
@@ -538,7 +482,7 @@ NLL 的实现:
   - 检查借用在整个 live range 内不冲突
 ```
 
-> **来源**: [Rust [RFC 2094](https://rust-lang.github.io/rfcs/2094.html) — NLL](<https://rust-lang.github.io/rfcs/2094-nll.html>) · [Niko Matsakis — NLL](https://smallcultfollowing.com/babysteps/blog/2016/04/27/non-lexical-lifetimes-introduction/)
+> **来源**: [Rust [RFC 2094](https://rust-lang.github.io/rfcs//2094-nll.html) — NLL](<https://rust-lang.github.io/rfcs//2094-nll.html>) · [Niko Matsakis — NLL](https://smallcultfollowing.com/babysteps/blog/2016/04/27/non-lexical-lifetimes-introduction/)
 
 ### 7.2 Polonius：基于逻辑的借用检查
 >
@@ -568,7 +512,7 @@ Polonius 状态（2025）:
   - 解决了 NLL problem case #3（lending iterator）
 ```
 
-> **来源**: [Polonius Paper — OOPSLA 2018](https://hal.inria.fr/hal-03827702/) · [Rustc Dev Guide — Polonius](https://rustc-dev-guide.rust-lang.org/borrow_check/polonius.html) · [Niko Matsakis — Polonius](https://smallcultfollowing.com/babysteps/blog/2019/01/21/polonius-and-region-errors/)
+> **来源**: [Polonius Paper — OOPSLA 2018](https://hal.inria.fr/hal-03827702/) · [Rustc Dev Guide — Polonius](https://rustc-dev-guide.rust-lang.org/borrow-check.html) · [Niko Matsakis — Polonius](https://smallcultfollowing.com/babysteps/blog/2019/01/21/polonius-and-region-errors/)
 
 ### 7.3 别名模型：Tree Borrows
 >
@@ -594,7 +538,7 @@ Tree Borrows 的核心规则:
   - 读取操作向下传播（父 → 子），写入操作向上验证（子 → 父）
 ```
 
-> **来源**: [Tree Borrows Paper — PLDI 2025](https://perso.crans.org/vanille/treebor/) · [Rustc Dev Guide — Tree Borrows](https://rustc-dev-guide.rust-lang.org/mir/index.html) · [Miri Book — Tree Borrows](https://github.com/rust-lang/miri/blob/master/borrow_tracker/tree_borrows.md)
+> **来源**: [Tree Borrows Paper — PLDI 2025](https://perso.crans.org/vanille/treebor/) · [Rustc Dev Guide — Tree Borrows](https://rustc-dev-guide.rust-lang.org/mir/index.html) · [Miri Tree Borrows Implementation](https://github.com/rust-lang/miri/blob/master/src/borrow_tracker/tree_borrows/mod.rs)
 
 ---
 
@@ -620,7 +564,7 @@ LLVM 优化管道:
   - Rust 特有的优化: 单态化后的函数去重、panic 路径优化
 ```
 
-> **来源**: [LLVM Documentation](https://llvm.org/docs/) · [Rustc Dev Guide — Code Generation](https://rustc-dev-guide.rust-lang.org/backend/index.html)
+> **来源**: [LLVM Documentation](https://llvm.org/docs/) · [Rustc Dev Guide — Code Generation](https://rustc-dev-guide.rust-lang.org/backend/codegen.html)
 
 ### 8.2 增量编译
 >

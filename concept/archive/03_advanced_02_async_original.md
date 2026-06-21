@@ -1,3 +1,4 @@
+> **Summary**: Advanced 02 Async Original. Core Rust concept.
 > **⚠️ 历史文档提示**：本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用。
 > 其中技术观点反映了对应时间点的社区状态，可能与当前（Rust 1.96+）推荐实践不一致。
 > 学习时请以 `concept/`、`knowledge/` 及官方文档为准。
@@ -8,6 +9,8 @@
 ---
 
 # Async/Await（异步 [来源: [Async Rust](https://rust-lang.github.io/async-book/)]编程）
+>
+> **EN**: Advanced 02 Async Original
 
 > **受众**: [归档]
 > **层次定位**: L3 高级概念 / 异步子域
@@ -203,7 +206,7 @@ Step 6: "什么时候会阻塞？"
 >
 > **[RFC 2394]** async/await 语法糖的设计基于生成器（generator）状态机转换，语义等价于显式 Future 组合。 ✅ 已验证
 
-> **[RFC 2592: Futures 0.3]** The `Future` trait and `async/await` syntax were stabilized based on [RFC 2394](https://rust-lang.github.io/rfcs/2394.html), with the `Pin` type introduced in [RFC 2349](https://rust-lang.github.io/rfcs/2349.html) to support self-referential async state machines. ✅ 已验证
+> **[RFC 2592: Futures 0.3]** The `Future` trait and `async/await` syntax were stabilized based on [RFC 2394](https://rust-lang.github.io/rfcs//2394-async_await.html), with the `Pin` type introduced in [RFC 2349](https://rust-lang.github.io/rfcs//2349-pin.html) to support self-referential async state machines. ✅ 已验证
 
 ### 1.3 形式化定义
 >
@@ -375,7 +378,7 @@ Pin<&mut Self> 的内存布局约束:
 
 ### 3.1b 状态机操作语义（Operational Semantics）
 
-> **[来源: Rust Compiler: rustc_mir_transform::async_lowering; [RFC 2394](https://rust-lang.github.io/rfcs/2394.html) §3.2; without.boats blog: Pinning in Rust Futures]**
+> **[来源: Rust Compiler: rustc_mir_transform::async_lowering; [RFC 2394](https://rust-lang.github.io/rfcs//2394-async_await.html) §3.2; without.boats blog: Pinning in Rust Futures]**
 
 §3.1 展示了编译器变换的**结果**（enum 结构），本节补充变换的**形式化规则**——将 async fn 视为一个受控的、带挂起点的小步操作语义系统。
 
@@ -468,7 +471,7 @@ stateDiagram-v2
 > [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
 > [来源: [Rust Async Book]]
 
-> **思维表征说明**: `stateDiagram-v2` 是 Mermaid 专门用于状态机的语法，与 `graph TD` 流程图不同——它强调**状态**（节点）和**转移条件**（边标注），天然适合表达 Future 的 poll 状态机。每个状态对应编译器生成的 enum 变体，转移标注对应 poll 的返回值。 [来源: Mermaid stateDiagram 文档; [RFC 2394](https://rust-lang.github.io/rfcs/2394.html) §3.2]
+> **思维表征说明**: `stateDiagram-v2` 是 Mermaid 专门用于状态机的语法，与 `graph TD` 流程图不同——它强调**状态**（节点）和**转移条件**（边标注），天然适合表达 Future 的 poll 状态机。每个状态对应编译器生成的 enum 变体，转移标注对应 poll 的返回值。 [来源: Mermaid stateDiagram 文档; [RFC 2394](https://rust-lang.github.io/rfcs//2394-async_await.html) §3.2]
 
 #### .await 的 CPS 变换规则
 
@@ -545,7 +548,7 @@ Pin<P<T>> 保证 T 在内存中不移动:
 
 ### 3.2b Pin 的 LTL 形式化（异步状态机语境）
 
-> **[来源: `04_formal/03_ownership_formal.md` §9.5; [RFC 2349](https://rust-lang.github.io/rfcs/2349.html) §3; RustBelt Pin 证明; Vardi & Wolper 1986 — LTL]**
+> **[来源: `04_formal/03_ownership_formal.md` §9.5; [RFC 2349](https://rust-lang.github.io/rfcs//2349-pin.html) §3; RustBelt Pin 证明; Vardi & Wolper 1986 — LTL]**
 
 §3.2 给出了 Pin 的直觉定义（"保证不移动"）。本节将其形式化为**线性时序逻辑（LTL）**命题，使其在 async 状态机的挂起-恢复周期中可验证。
 
@@ -873,7 +876,7 @@ graph TD
 ```
 
 > **认知功能**: 生命周期认知修正器——打破"函数调用即执行到返回"的同步思维惯性。读者在设计取消安全（cancellation safety）时，应将此图作为检查清单，确保所有可能导致 Future 提前终止的路径都被处理。关键洞察：poll 是协作式请求而非命令式保证，取消是一等公民。[来源: 💡 原创分析]
-> [来源: [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html)]
+> [来源: [RFC 2394](https://rust-lang.github.io/rfcs//2394-async_await.html)]
 > [来源: [Rust Async Book]]
 
 **修正认知**：
@@ -951,7 +954,7 @@ graph TD
 ```
 
 > **认知功能**: 技术选型向导——从任务特征（IO/CPU 密集度、并发规模、状态共享需求）出发的决策树。读者在新项目架构设计时，可从根节点出发回答两个关键问题，得到推荐的并发模型。关键洞察：选择 async 还是 thread 的本质是回答"任务是否以挂起等待为主"。[来源: 💡 原创分析]
-> [来源: [Rust Async Book: Execution](https://rust-lang.github.io/async-book/02_execution/01_chapter.html)]
+> [来源: [Rust Async Book: Execution](https://rust-lang.github.io/async-book//02_execution/01_chapter.html)]
 > [来源: [Rust Async Book]]
 
 ### 7.2 Pin 使用边界
@@ -1298,7 +1301,7 @@ graph TD
 ```
 
 > **认知功能**: 活性调试路径图——当 Future 陷入永久 Pending 时，按此决策树定位故障根因。读者可逐层检查 Waker 注册、Reactor 唤醒调用、poll 返回值合法性三个环节。关键洞察：`poll → Pending → wake → poll` 的闭环是异步执行器活性（liveness）的根本保证，任一环节断裂即导致活锁或饥饿。[来源: 💡 原创分析]
-> [来源: [Rust Reference: Pin](https://doc.rust-lang.org/reference/types/pin.html)]
+> [来源: [Rust Reference: Pin](https://doc.rust-lang.org/std/pin/index.html)]
 > [来源: [Rust Async Book]]
 > **[Async Book: Waker]** Waker 是 Future 与 Reactor 之间的桥梁——poll 时将 Waker 传递给底层 I/O 源，I/O 就绪时源通过 Waker 通知执行器重新调度该 Future。✅ 已验证
 >
@@ -1783,7 +1786,7 @@ where
 }
 ```
 
-> **[来源: futures-rs: Sink trait 文档]** `Sink` 的设计灵感来自 `Iterator` 的逆过程，但增加了异步缓冲和刷新阶段。`send` 是 `poll_ready` + `start_send` + `poll_flush` 的组合子，确保每次发送后数据不滞留缓冲。[来源: [RFC 2394](https://rust-lang.github.io/rfcs/2394.html) 附录: Async I/O 抽象]
+> **[来源: futures-rs: Sink trait 文档]** `Sink` 的设计灵感来自 `Iterator` 的逆过程，但增加了异步缓冲和刷新阶段。`send` 是 `poll_ready` + `start_send` + `poll_flush` 的组合子，确保每次发送后数据不滞留缓冲。[来源: [RFC 2394](https://rust-lang.github.io/rfcs//2394-async_await.html) 附录: Async I/O 抽象]
 
 **`futures::stream` 与 `tokio_stream` 生态对比**
 
@@ -1992,7 +1995,7 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
                 └── 否 → impl Future（默认最优路径）
 ```
 
-> **[来源: Tokio 文档: Task spawning internals]** Tokio 的任务调度器在内部使用 `Pin<Box<dyn Future + Send + 'static>>` 存储任务，这是类型擦除的必要代价。但 Tokio 的 `spawn` API 接受 `impl Future`，仅在入队时进行一次 Box 包装，用户代码仍享受单态化优化。[来源: [RFC 2592](https://rust-lang.github.io/rfcs/2592.html): futures 0.3 设计原则]
+> **[来源: Tokio 文档: Task spawning internals]** Tokio 的任务调度器在内部使用 `Pin<Box<dyn Future + Send + 'static>>` 存储任务，这是类型擦除的必要代价。但 Tokio 的 `spawn` API 接受 `impl Future`，仅在入队时进行一次 Box 包装，用户代码仍享受单态化优化。[来源: [RFC 2592](https://rust-lang.github.io/rfcs//2592-futures.html): futures 0.3 设计原则]
 
 > **交叉链接**: 单态化机制见 [../02_intermediate/02_generics.md](../02_intermediate/02_generics.md) §4.5（泛型单态化与代码膨胀）；trait 对象的内存布局见 [../02_intermediate/01_traits.md](../02_intermediate/01_traits.md) §4.3（trait object 与 vtable）。
 
@@ -2302,7 +2305,7 @@ help: alloc232 was deallocated here:
 
 > **关键洞察**: Miri 不仅报告 UB，还精确追踪**分配点**和**释放点**，帮助开发者理解指针何时变为悬垂。这对于 async 状态机中的自引用结构尤为重要——状态机被 Pin 后若被 unsafe 代码移动，内部自引用指针会变为悬垂，Miri 能精确定位违规的 `move` 操作。
 [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
-> [来源: [RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html)]
+> [来源: [RFC 2349](https://rust-lang.github.io/rfcs//2349-pin.html)]
 >
 #### 场景 2：无效值检测（非法 bool 构造）
 
@@ -2328,7 +2331,7 @@ error: Undefined Behavior: constructing invalid value of type bool:
 
 > **关键洞察**: Rust 编译器假设 `bool` 只能是 `0x00` 或 `0x01`，并基于此做分支优化（如将 `if b` 编译为跳转表）。无效 `bool` 值会导致控制流跳转到任意位置。async 状态机的 discriminant（状态标签）同理——若通过 unsafe 构造无效状态标签，恢复执行时会进入不存在的状态分支。
 [来源: [Tokio Docs](https://tokio.rs/)]
-> [来源: [Rust Async Book: Cancellation](https://rust-lang.github.io/async-book/09_workarounds/03_cancel_safe.html)]
+> [来源: [Rust Async Book: Cancellation](https://rust-lang.github.io/async-book/)]
 >
 #### 场景 3：async 状态机中的未初始化内存
 
@@ -2548,7 +2551,7 @@ trait DataProvider<'a> {
 
 ---
 
-## 十二、`AsyncFn` Trait 家族：异步闭包的类型化（1.85 stable，[RFC 3668](https://rust-lang.github.io/rfcs/3668.html)）
+## 十二、`AsyncFn` Trait 家族：异步闭包的类型化（1.85 stable，[RFC 3668](https://rust-lang.github.io/rfcs//3668-async-closures.html)）
 
 > [来源: [Rust Async Book]]
 > **稳定版本**: Rust 1.85 (stable) · **适用 Edition**: 所有 Edition（非 Edition-gated）

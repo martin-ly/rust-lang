@@ -10,6 +10,8 @@
 > **方法论对齐**: 反事实推理 · 边界测试 · 知识库一致性 (Torchiano et al. 2018)
 > **对应**: 所有 L1-L4 文件的"反命题与边界分析"章节的**全局汇总**
 
+>
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/)
 ---
 
 > **Bloom 层级**: 分析 → 评价
@@ -611,7 +613,7 @@ FFI（Foreign Function Interface）是 Rust 安全边界最薄弱的环节：
 |:---|:---|:---|:---|:---|
 | **ABI 不匹配** | C `int` vs Rust `c_int`、结构体 padding 差异 | 编译警告、`bindgen` | 使用 `std::ffi::*` 类型、`#[repr(C)]` | Rustonomicon |
 | **生命周期不匹配** | C 指针无生命周期，Rust 引用需 'static 或 scoped | Miri、代码审查 | 使用 `PhantomData<&'a T>` 标记生命周期 | Rustonomicon |
-| **异常传播** | C++ 异常无法穿越 Rust 边界 | `catch_unwind`、`extern "C-unwind"` | 在 C++ 侧捕获所有异常 | [RFC 2945](https://rust-lang.github.io/rfcs/2945.html) |
+| **异常传播** | C++ 异常无法穿越 Rust 边界 | `catch_unwind`、`extern "C-unwind"` | 在 C++ 侧捕获所有异常 | [RFC 2945](https://rust-lang.github.io/rfcs//2945-c-unwind-abi.html) |
 | **线程安全假设** | C 库可能非线程安全，Rust `Send/Sync` 标注可能错误 | 文档审查、TSan | 使用 `!Send`/`!Sync` 标记、Mutex 包装 | Rustonomicon |
 | **未初始化内存** | C 可能返回部分初始化的结构体 | Valgrind、Miri | 使用 `MaybeUninit<T>`、显式初始化 | Unsafe Guidelines |
 | **回调生命周期** | C 保存 Rust 回调指针，超出 Rust 对象生命周期 | 代码审查 | 使用 `Arc` + `weak` 模式、注册/注销配对 | Rustonomicon |

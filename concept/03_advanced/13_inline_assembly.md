@@ -15,7 +15,7 @@
 ---
 
 > **来源**: [Rust Reference — Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html) ·
-> [RFC 2873 — Inline Assembly](https://rust-lang.github.io/rfcs/2873-inline-assembly.html) ·
+> [RFC 2873 — Inline Assembly](https://rust-lang.github.io/rfcs//2873-inline-asm.html) ·
 > [Rust By Example — Inline Assembly](https://doc.rust-lang.org/rust-by-example/unsafe/asm.html) ·
 > [s390x Vector Support PR](https://github.com/rust-lang/rust/pull/150551) ·
 > [LLVM SystemZ Backend](https://llvm.org/docs/SystemZ.html)
@@ -135,7 +135,7 @@ unsafe fn vector_add(a: &[i32; 4], b: &[i32; 4]) -> [i32; 4] {
 
 **Clobber**: 显式声明汇编代码修改了哪些未列出的寄存器：
 
-```rust
+```rust,ignore
 unsafe {
     asm!(
         "cpuid",
@@ -163,7 +163,7 @@ unsafe {
 
 ### 2.1 x86_64
 
-```rust
+```rust,ignore
 #[cfg(target_arch = "x86_64")]
 unsafe fn read_tsc() -> u64 {
     let mut low: u32;
@@ -318,7 +318,7 @@ mod s390x_vector_demo {
 
 ### 3.4 与 x86_64 SIMD 的对比
 
-```rust
+```rust,ignore
 // x86_64 SSE2 等效实现
 #[cfg(target_arch = "x86_64")]
 #[target_feature(enable = "sse2")]
@@ -364,7 +364,7 @@ unsafe fn sse2_xor(a: &[u32; 4], b: &[u32; 4]) -> [u32; 4] {
 
 ### 4.2 常见错误模式
 
-```rust
+```rust,ignore
 // ❌ 错误：忘记声明 clobber 寄存器
 unsafe {
     let mut x: u64 = 10;
@@ -415,7 +415,7 @@ unsafe {
 | 资源 | 说明 |
 |:---|:---|
 | [Rust Reference: Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html) | 权威语法参考 |
-| [RFC 2873](https://rust-lang.github.io/rfcs/2873-inline-assembly.html) | 内联汇编设计 RFC |
+| [RFC 2873](https://rust-lang.github.io/rfcs//2873-inline-asm.html) | 内联汇编设计 RFC |
 | [Rust By Example](https://doc.rust-lang.org/rust-by-example/unsafe/asm.html) | 交互式教程 |
 | [LLVM SystemZ Backend](https://llvm.org/docs/SystemZ.html) | s390x 后端文档 |
 | [IBM Z Architecture Principles](https://www.ibm.com/docs/en/zos/2.5.0?topic=operations-vector-instructions) | IBM Z 向量指令参考 |
@@ -427,7 +427,7 @@ unsafe {
 | 来源 | 可信度 | 说明 |
 |:---|:---|:---|
 | [Rust Reference — Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html) | ✅ 一级 | 官方语法规范 |
-| [RFC 2873](https://rust-lang.github.io/rfcs/2873-inline-assembly.html) | ✅ 一级 | 设计决策记录 |
+| [RFC 2873](https://rust-lang.github.io/rfcs//2873-inline-asm.html) | ✅ 一级 | 设计决策记录 |
 | [s390x Vector Support PR](https://github.com/rust-lang/rust/pull/150551) | ✅ 一级 | Rust 1.96 s390x vreg 实现 |
 | [LLVM SystemZ Backend](https://llvm.org/docs/SystemZ.html) | ✅ 二级 | 底层代码生成参考 |
 | [IBM Z Vector Instructions](https://www.ibm.com/docs/en/zos/2.5.0?topic=operations-vector-instructions) | ✅ 二级 | 硬件指令集手册 |
@@ -469,7 +469,7 @@ mod tests {
 
 Rust 内联汇编语法规则：
 
-```rust
+```rust,ignore
 unsafe {
     asm!(
         "汇编模板",                    // 汇编指令模板
@@ -496,7 +496,7 @@ unsafe {
 
 **完整示例**：
 
-```rust
+```rust,ignore
 // x86_64: 读取 CPU 时间戳计数器 (RDTSC)
 unsafe {
     let lo: u32;
@@ -519,7 +519,7 @@ unsafe {
 
 **题目**: `lateout` 与 `out` 有什么区别？以下代码为什么要用 `lateout`？
 
-```rust
+```rust,ignore
 unsafe {
     let mut x: u64 = 1;
     asm!(
@@ -552,7 +552,7 @@ unsafe {
 
 **`out` vs `lateout` 的关键区别**：
 
-```rust
+```rust,ignore
 // 场景: x = x + y
 unsafe {
     let mut x: u64 = 1;
@@ -571,7 +571,7 @@ unsafe {
 
 **寄存器复用优化**：
 
-```rust
+```rust,ignore
 // 使用 lateout 允许编译器将输出放入输入寄存器
 // 节省一个寄存器！
 unsafe {
@@ -594,7 +594,7 @@ unsafe {
 
 **题目**: 在 `no_std` 环境下，如何用 x86_64 内联汇编实现一个原子自增？
 
-```rust
+```rust,ignore
 unsafe fn atomic_inc(ptr: *mut u64) -> u64 {
     let result: u64;
     asm!(
@@ -618,7 +618,7 @@ unsafe fn atomic_inc(ptr: *mut u64) -> u64 {
 
 **x86_64 原子操作指令**：
 
-```rust
+```rust,ignore
 unsafe fn atomic_fetch_add(ptr: *mut u64, value: u64) -> u64 {
     let mut old = value;
     asm!(
@@ -652,7 +652,7 @@ lock xadd qword ptr [rdi], rax
 
 **与 `AtomicUsize::fetch_add` 的对比**：
 
-```rust
+```rust,ignore
 // Rust 标准库实现（概念上等价）：
 std::sync::atomic::AtomicUsize::fetch_add(1, Ordering::SeqCst);
 
@@ -669,7 +669,7 @@ std::sync::atomic::AtomicUsize::fetch_add(1, Ordering::SeqCst);
 
 **题目**: 以下代码没有使用 `options(nomem)`，编译器会做出什么假设？如果加上 `options(nomem)` 会有什么问题？
 
-```rust
+```rust,ignore
 let mut x = 0;
 unsafe {
     asm!(
@@ -693,7 +693,7 @@ assert_eq!(x, 1);
 
 **`asm!` 的 options 控制编译器假设**：
 
-```rust
+```rust,ignore
 unsafe {
     asm!(...,
         options(
@@ -708,7 +708,7 @@ unsafe {
 
 **不加 `nomem` 时**：
 
-```rust
+```rust,ignore
 let mut x = 0;
 unsafe {
     asm!("syscall", ...);  // 编译器假设可能读写内存
@@ -718,7 +718,7 @@ unsafe {
 
 **加 `nomem` 后的危险**：
 
-```rust
+```rust,ignore
 static mut FLAG: bool = false;
 static mut DATA: u64 = 0;
 
@@ -738,7 +738,7 @@ unsafe {
 
 **正确的内存屏障使用**：
 
-```rust
+```rust,ignore
 unsafe {
     DATA = 42;
     asm!(

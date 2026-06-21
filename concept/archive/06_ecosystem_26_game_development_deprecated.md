@@ -1,4 +1,7 @@
+> **Summary**: Ecosystem 26 Game Development Deprecated. Core Rust concept.
 # Rust 游戏开发
+>
+> **EN**: Ecosystem 26 Game Development Deprecated
 
 > **受众**: [归档]
 > **Bloom 层级**: 应用 → 评价
@@ -8,6 +11,8 @@
 > **前置概念**: [ECS](07_game_ecs.md) · [Memory](../02_intermediate/03_memory_management.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Ownership](../01_foundation/01_ownership.md)
 > **后置概念**: [WebAssembly](11_webassembly.md) · [Performance](15_performance_optimization.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
+> **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
 ---
 
 > **来源**: [Bevy Engine](https://bevyengine.org/) · [wgpu](https://wgpu.rs/) · [Rust GameDev WG](https://gamedev.rs/) · [Wikipedia — Game Engine](https://en.wikipedia.org/wiki/Game_engine)
@@ -177,8 +182,8 @@ fn main() {
 ```
 
 > **ECS 洞察**: **ECS 架构天然适合 Rust 的所有权模型**——系统之间不共享可变状态，编译期保证并行安全。
-> [来源: [Bevy ECS Guide](https://bevyengine.org/learn/book/getting-started/ecs/)]
-> [来源: [Bevy ECS](https://bevyengine.org/learn/book/getting-started/ecs/)]
+> [来源: [Bevy ECS Guide](https://bevyengine.org/learn/book/)]
+> [来源: [Bevy ECS](https://bevyengine.org/learn/book/)]
 
 ---
 
@@ -266,7 +271,7 @@ wgpu:
 ```
 
 > **渲染洞察**: **Rust 的零成本抽象让渲染代码既可读又高效**——无运行时开销。
-> [来源: [Bevy Rendering](https://bevyengine.org/learn/book/getting-started/)]
+> [来源: [Bevy Rendering](https://bevyengine.org/learn/book/)]
 
 ---
 
@@ -482,7 +487,7 @@ graph TD
 ```
 
 > **陷阱总结**: 游戏开发的陷阱与**ECS 设计**、**资源加载**、**系统顺序**和**生命周期管理**相关。
-> [来源: [Bevy Best Practices](https://bevyengine.org/learn/book/getting-started/)]
+> [来源: [Bevy Best Practices](https://bevyengine.org/learn/book/)]
 
 ---
 

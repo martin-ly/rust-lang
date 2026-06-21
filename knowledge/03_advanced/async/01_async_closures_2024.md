@@ -1,9 +1,9 @@
 # Rust 2024 Edition Async Closures 完整指南
 
-> **相关文档**: 请参阅 [docs/rust-ownership-decidability/16-program-semantics/rust-194-features/05-edition-2024-semantics.md](../../../docs/rust-ownership-decidability/16-program-semantics/rust-194-features/05-edition-2024-semantics.md)
-> **相关文档**: 请参阅 [docs/05_guides/06_rust_2024_edition_migration_guide.md](../../../docs/05_guides/06_rust_2024_edition_migration_guide.md)
+> **相关文档**: 请参阅 [docs/rust-ownership-decidability/16-program-semantics/rust-194-features/05-edition-2024-semantics.md](../../06_ecosystem/02_edition_2024.md)
+> **相关文档**: 请参阅 [docs/05_guides/06_rust_2024_edition_migration_guide.md](../../06_ecosystem/02_edition_2024.md)
 > **深度**: [综述级]
-> **主轨引用**: 概念级深度分析请参阅 [concept/07_future/19_rust_edition_preview.md](../../../concept/07_future/19_rust_edition_preview.md)
+> **主轨引用**: 概念级深度分析请参阅 [concept/07_future/19_rust_edition_preview.md](../../06_ecosystem/02_edition_2024.md)
 >
 > **相关概念**: [异步闭包](../../../concept/03_advanced/02_async.md)
 > **Bloom 层级**: 理解

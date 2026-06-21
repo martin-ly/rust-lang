@@ -24,7 +24,7 @@
 ---
 
 > **来源**:
-> [Cranelift Documentation](https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/docs/index.md) ·
+> [Cranelift Documentation](https://github.com/bytecodealliance/wasmtime/tree/main/cranelift/docs) ·
 > [rustc_codegen_cranelift](https://github.com/rust-lang/rustc_codegen_cranelift) ·
 > [Bytecode Alliance](https://bytecodealliance.org/) ·
 > [Rust Compiler Team — Cranelift](https://github.com/rust-lang/compiler-team/issues/)
@@ -173,7 +173,7 @@ rustc_codegen_cranelift 项目:
 | **LTO** | 全支持（ThinLTO, FullLTO） | 不支持 | Cranelift 不适合发布构建 |
 
 > **技术要点**: Cranelift 的简化架构是其速度优势的来源。它不做复杂的跨函数分析、循环变换或向量化——这些正是 LLVM 编译时间的大头。
-> [来源: [Cranelift vs LLVM Comparison](https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/docs/comparison.md)]
+> [来源: [Cranelift vs LLVM Comparison](https://github.com/bytecodealliance/wasmtime/tree/main/cranelift/docs)]
 
 ---
 
@@ -343,7 +343,7 @@ graph TD
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [rustc_codegen_cranelift](https://github.com/rust-lang/rustc_codegen_cranelift) | ✅ 一级 | 官方项目仓库 |
-| [Cranelift Documentation](https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/docs/index.md) | ✅ 一级 | Cranelift IR 文档 |
+| [Cranelift Documentation](https://github.com/bytecodealliance/wasmtime/tree/main/cranelift/docs) | ✅ 一级 | Cranelift IR 文档 |
 | [Bytecode Alliance](https://bytecodealliance.org/) | ✅ 一级 | 主导 Cranelift 开发 |
 | [Rust Compiler Team](https://github.com/rust-lang/compiler-team/) | ✅ 一级 | 编译器团队讨论 |
 | [Rust Compiler Benchmarks](https://perf.rust-lang.org/) | ✅ 一级 | 性能基准数据 |
@@ -416,7 +416,7 @@ fn main() {
 > Rust 保证所有合法代码在 LLVM 和 Cranelift 下行为一致，但`unsafe`代码或依赖特定 LLVM 行为的代码可能暴露差异。
 > 测试策略：CI 中同时使用两个后端运行测试，确保行为一致。
 > 这与 GCC 和 Clang 的兼容性测试类似——多后端验证增加了生态的健壮性。
-> [来源: [Cranelift Documentation](https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/docs/index.md)] ·
+> [来源: [Cranelift Documentation](https://github.com/bytecodealliance/wasmtime/tree/main/cranelift/docs)] ·
 > [来源: [rustc_codegen_cranelift](https://github.com/rust-lang/rustc_codegen_cranelift)]
 
 ### 10.2 边界测试：Cranelift 不支持的平台特定内联汇编（编译错误）
@@ -544,7 +544,7 @@ fn main() {
 > Cranelift 的目标不是替代 LLVM 的 release 构建，而是提供更快的 debug 迭代。
 >
 > [来源: [Cranelift Debug Info](https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/docs/ir.md)] ·
-> [来源: [rustc Developer Guide](https://rustc-dev-guide.rust-lang.org/backend/)]
+> [来源: [rustc Developer Guide](https://rustc-dev-guide.rust-lang.org/backend/codegen.html)]
 
 ### 10.5 边界测试：Cranelift 的调试构建与发布构建行为差异（运行时性能/语义差异）
 
@@ -581,7 +581,7 @@ fn main() {
 >
 > 这与 Go 的 gc 编译器（自研，简单快速）vs gccgo（GCC 后端，优化强）或 Java 的 C1（客户端编译器，快）vs C2（服务器编译器，优化强）的分层策略类似——Rust 的双后端策略提供开发/生产的最优组合。
 >
-> [来源: [Cranelift Documentation](https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/docs/)] ·
+> [来源: [Cranelift Documentation](https://github.com/bytecodealliance/wasmtime/tree/main/cranelift/docs)] ·
 > [来源: [Rust Compiler Explorer](https://rustc-dev-guide.rust-lang.org/backend/codegen.html)]
 
 ### 10.3 边界测试：Cranelift 与 LLVM 的调试信息质量差异（运行时行为差异）
@@ -615,7 +615,7 @@ fn main() {
 > 2) `wasm32` target 的 Cranelift 支持（wasmtime 使用）比 native 更成熟。
 >
 > 这与 Go 的 gc 编译器 vs gccgo 或 Java 的 C1 vs C2 类似——Rust 的双后端策略提供开发/生产的最优组合。
-> [来源: [Cranelift](https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/docs/)] ·
+> [来源: [Cranelift](https://github.com/bytecodealliance/wasmtime/tree/main/cranelift/docs)] ·
 > [来源: [Rust Compiler Explorer](https://rustc-dev-guide.rust-lang.org/backend/codegen.html)]
 >
 > **过渡**: Cranelift 后端预研：Rust 编译器的快速调试编译 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

@@ -3,8 +3,8 @@
 >
 # 变量模型：从通用 PL 视角看 Rust 的所有权
 >
-> **EN**: Ownership
-> **Summary**:
+> **EN**: Variable Model
+> **Summary**: Rust's variable bindings, mutability, shadowing, and move/copy semantics.
 >
 > 在环境模型中，变量绑定将**名字**映射到**值**。
 > 赋值操作改变的是变量在当前环境中的绑定关系。
@@ -22,6 +22,8 @@
 > **后置概念**: [Borrowing](./02_borrowing.md) · [Memory Management](../02_intermediate/03_memory_management.md) · [Evaluation Strategies](../04_formal/18_evaluation_strategies.md)
 > **主要来源**: [Pierce TAPL] · [Harper PFPL] · [Felleisen & Flatt PLAI] · [Wikipedia: Evaluation strategy]
 
+>
+> **来源**: [TRPL — Variables and Mutability](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html) · [TRPL — Data Types](https://doc.rust-lang.org/book/ch03-02-data-types.html)
 ---
 
 > **Bloom 层级**: 理解 → 分析

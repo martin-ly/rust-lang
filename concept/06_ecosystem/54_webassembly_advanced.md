@@ -1,3 +1,5 @@
+> **EN**: Webassembly Advanced
+> **Summary**: Webassembly Advanced: Rust ecosystem tools, crates, and engineering practices.
 > **内容分级**: [专家级]
 
 > **代码状态**: ✅ 含可编译示例
@@ -5,74 +7,7 @@
 >
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
-## 代码示例：wasm-bindgen 高级 FFI 绑定
-
-以下演示 Rust ↔ JavaScript 之间传递复杂数据结构，使用 `wasm-bindgen`：
-
-```rust
-use wasm_bindgen::prelude::*;
-use serde::{Serialize, Deserialize};
-
-#[wasm_bindgen]
-#[derive(Serialize, Deserialize)]
-pub struct Point {
-    pub x: f64,
-    pub y: f64,
-}
-
-#[wasm_bindgen]
-pub struct GeometryEngine;
-
-#[wasm_bindgen]
-impl GeometryEngine {
-    #[wasm_bindgen(constructor)]
-    pub fn new() -> Self { Self }
-
-    /// 计算两点间欧几里得距离
-    pub fn distance(&self, a: &Point, b: &Point) -> f64 {
-        ((b.x - a.x).powi(2) + (b.y - a.y).powi(2)).sqrt()
-    }
-
-    /// 批量处理（避免反复跨边界调用开销）
-    pub fn batch_distances(&self, points_js: JsValue) -> Result<JsValue, JsValue> {
-        let points: Vec<Point> = serde_wasm_bindgen::from_value(&points_js)?;
-        let distances: Vec<f64> = points.windows(2)
-            .map(|w| self.distance(&w[0], &w[1]))
-            .collect();
-        Ok(serde_wasm_bindgen::to_value(&distances)?)
-    }
-}
-```
-
-编译目标：`wasm32-unknown-unknown`
-
->
-> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
->
-# Advanced WebAssembly in Rust（高级 WebAssembly 与 Rust）
->
-> **EN**: WebAssembly
-> **Summary**: 以下演示 Rust ↔ JavaScript 之间传递复杂数据结构，使用 `wasm-bindgen`： ```rust use wasm_bindgen::prelude::*; use serde::{Serialize, Deserialize}; pub struct Point { pub x: f64, pub y: f64, } pub struct GeometryEngine; impl GeometryEngine { #[wasm_bindgen(constructor)] pub fn new() -> Self { Self } /// 计算两点间欧几里得距离 pub
-
-> **受众**: [进阶]
-> **Bloom 层级**: 分析 → 评价
-> **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
-> **双维定位**: C×Eva — 评价 Rust 在高级 WASM 生态中的工程实践与架构决策
-> **定位**: 系统分析 Rust 与 **WebAssembly 组件模型、WASI Preview 2、高性能边界优化**的深度集成，超越基础浏览器用例，覆盖服务端、边缘计算与跨语言组件组合。
-> **前置概念**: [WebAssembly 基础](./11_webassembly.md) · [WASI](./08_wasi.md) · [Unsafe Rust](../03_advanced/03_unsafe.md) · [FFI](../03_advanced/05_rust_ffi.md) · [性能优化](./15_performance_optimization.md)
-> **后置概念**: [嵌入式系统](./22_embedded_systems.md) · [安全实践](./19_security_practices.md) · [云原生](./24_cloud_native.md)
-
----
-
-> **来源**: [WebAssembly Specification](https://webassembly.github.io/spec/) ·
-> [WASI Preview 2 Docs](https://wasi.dev) ·
-> [WebAssembly Component Model](https://component-model.bytecodealliance.org/) ·
-> [wasm-bindgen Guide](https://rustwasm.github.io/wasm-bindgen/) ·
-> [wasm-pack Documentation](https://rustwasm.github.io/wasm-pack/) ·
-> [Rust Wasm Book](https://rustwasm.github.io/book/) ·
-> [Bytecode Alliance](https://bytecodealliance.org/) ·
-> [Wasmtime Docs](https://docs.wasmtime.dev) ·
-> [W3C WebAssembly](https://www.w3.org/wasm/)
+> **来源**: [Rust and WebAssembly Book](https://rustwasm.github.io/book/) · [wasm-bindgen](https://docs.rs/wasm-bindgen/) · [Wasmtime Rust API](https://docs.wasmtime.dev/lang-rust.html)
 
 ## 📑 目录
 
@@ -171,7 +106,7 @@ Wasm 演进路径:
 
 ### 1.3 WASI：WebAssembly 系统接口
 
-> **[WASI Docs](https://wasi.dev)** WASI (WebAssembly System Interface) 是 WebAssembly 的模块化系统接口，核心设计原则是 **capability-based security**：程序只能访问显式被授予的能力。[来源: [WASI Overview](https://wasi.dev/)]
+> **[WASI Docs](https://wasi.dev)** WASI (WebAssembly System Interface) 是 WebAssembly 的模块化系统接口，核心设计原则是 **capability-based security**：程序只能访问显式被授予的能力。[来源: [WASI Overview](https:/wasi.dev/)]
 
 ```text
 WASI 演进:
@@ -180,7 +115,7 @@ WASI 演进:
   Preview 3 (未来): 异步 I/O + 图形 GUI + 设备访问标准化
 ```
 
-> **来源**: [WASI Preview 2 Docs](https://wasi.dev) · [WASI Evolution](https://github.com/WebAssembly/WASI/blob/main/docs/wasi-tutorial.md)
+> **来源**: [WASI Preview 2 Docs](https://wasi.dev) · [WASI Evolution](https:/github.com/WebAssembly/WASI/blob/main/docs/wasi-tutorial.md)
 
 ---
 
@@ -202,7 +137,7 @@ pub fn process_image_data(data: &[u8], width: u32, height: u32) -> Vec<u8> {
 ```
 
 > **执行模型约束**: 单线程（Web Workers 是独立实例）、无直接 DOM 访问（须通过 JS 胶水）、事件循环共享（`wasm-bindgen-futures` 桥接 `Future` 到 JS `Promise`）。
-> [来源: [wasm-bindgen Futures](https://rustwasm.github.io/wasm-bindgen/reference/js-promises-and-rust-futures.html)]
+> [来源: [wasm-bindgen Futures](https://rustwasm.github.io/docs/wasm-bindgen/reference/js-promises-and-rust-futures.html)]
 
 ---
 
@@ -247,7 +182,7 @@ pub fn process_image_data(data: &[u8], width: u32, height: u32) -> Vec<u8> {
 
 ### 3.1 wasm-bindgen：JS 互操作的生成艺术
 
-> **[wasm-bindgen Guide](https://rustwasm.github.io/wasm-bindgen/)** `wasm-bindgen` 通过过程宏在编译期生成 **JS 胶水代码** 和 **Wasm 导入/导出包装**，自动处理字符串编码、对象引用管理和异常转换。[来源: [wasm-bindgen Reference](https://rustwasm.github.io/wasm-bindgen/reference/)]
+> **[wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/)** `wasm-bindgen` 通过过程宏在编译期生成 **JS 胶水代码** 和 **Wasm 导入/导出包装**，自动处理字符串编码、对象引用管理和异常转换。[来源: [wasm-bindgen Reference](https://rustwasm.github.io/docs/wasm-bindgen/reference/)]
 
 ```rust,ignore
 use wasm_bindgen::prelude::*;
@@ -271,13 +206,13 @@ impl Counter {
 ```
 
 > **wasm-bindgen 机制**: (1) 字符串编解码 UTF-8↔UTF-16；(2) 对象句柄表防止 GC 提前回收；(3) Rust `panic!` → JS `Error`；(4) `wasm_bindgen_futures::spawn_local` 桥接 `Future` 到 JS 事件循环。
-> [来源: [wasm-bindgen Architecture](https://rustwasm.github.io/wasm-bindgen/contributing/design/index.html)]
+> [来源: [wasm-bindgen Architecture](https://rustwasm.github.io/docs/wasm-bindgen/contributing/design/index.html)]
 
 ---
 
 ### 3.2 wasm-pack：构建与发布的统一入口
 
-> **[wasm-pack Documentation](https://rustwasm.github.io/wasm-pack/)** `wasm-pack` 封装了 `cargo` 编译、`wasm-bindgen` 生成、Binaryen 优化（`wasm-opt`）和 npm 包打包的完整流水线。[来源: [wasm-pack Book](https://rustwasm.github.io/wasm-pack/book/)]
+> **[wasm-pack Documentation](https://rustwasm.github.io/docs/wasm-pack/)** `wasm-pack` 封装了 `cargo` 编译、`wasm-bindgen` 生成、Binaryen 优化（`wasm-opt`）和 npm 包打包的完整流水线。[来源: [wasm-pack Book](https://rustwasm.github.io/docs/wasm-pack/)]
 
 ```bash
 wasm-pack new my-wasm-lib    # 创建项目模板
@@ -294,7 +229,7 @@ wasm-pack 构建流水线:
     → package.json + .d.ts 类型定义生成
 ```
 
-> **来源**: [wasm-pack Build](https://rustwasm.github.io/wasm-pack/commands/build.html)
+> **来源**: [wasm-pack Build](https://rustwasm.github.io/docs/wasm-pack/commands/build.html)
 
 ---
 
@@ -426,7 +361,7 @@ world app-world {
 
 ### 5.1 能力安全模型
 
-> **[WASI Preview 2 Docs](https://wasi.dev)** WASI Preview 2 采用 **capability-based security** 模型替代传统 POSIX 系统调用。程序不通过全局文件描述符访问资源，而是通过显式传递的**能力句柄（capability handle）**。[来源: [WASI Preview 2](https://wasi.dev)]
+> **[WASI Preview 2 Docs](https://wasi.dev)** WASI Preview 2 采用 **capability-based security** 模型替代传统 POSIX 系统调用。程序不通过全局文件描述符访问资源，而是通过显式传递的**能力句柄（capability handle）**。[来源: [WASI Preview 2](https:/wasi.dev)]
 
 ```rust,ignore
 use wasmtime::{Engine, Module, Store};
@@ -714,7 +649,7 @@ pub fn apply_config(config: Config) -> String {
 ```
 
 > **修正**: `wasm-bindgen` 的自动类型映射有严格限制。包含 `String`、`Vec<T>` 的自定义结构体不能直接作为函数参数或返回值——因为 JS 和 Rust 的内存布局不兼容（JS GC 堆 vs Wasm 线性内存）。安全做法：使用 `#[wasm_bindgen]` 标记的简单位段结构体，或通过 `serde-wasm-bindgen` 显式序列化为 `JsValue`。这反映了 FFI 边界的根本约束：**不同运行时之间不存在安全的直接指针共享**。
-> [来源: [wasm-bindgen Types](https://rustwasm.github.io/wasm-bindgen/reference/types.html)] · [来源: [wasm-bindgen Exported Types](https://rustwasm.github.io/wasm-bindgen/reference/types/exported-rust-types.html)]
+> [来源: [wasm-bindgen Types](https://rustwasm.github.io/docs/wasm-bindgen/reference/types.html)] · [来源: [wasm-bindgen Exported Types](https://rustwasm.github.io/docs/wasm-bindgen/reference/types/exported-rust-types.html)]
 
 ---
 
@@ -749,7 +684,7 @@ pub fn recursive_call(n: i32) -> i32 {
 ```
 
 > **修正**: JS 引擎和 Wasm 运行时共享**同一块栈空间**（通常 1MB 左右）。JS → Wasm → JS → Wasm 的同步递归调用会在同一线程栈上累积帧，没有独立的栈切换机制。异步调用（Promise/Future）将调用帧卸载到堆上，是避免此类栈溢出的标准模式。
-> [来源: [V8 Stack Size](https://v8.dev/blog/stackoverflow)] · [来源: [wasm-bindgen Callbacks](https://rustwasm.github.io/wasm-bindgen/reference/receiving-js-closures.html)]
+> [来源: [V8 Stack Size](https://v8.dev/blog/stackoverflow)] · [来源: [wasm-bindgen Callbacks](https://rustwasm.github.io/docs/wasm-bindgen/reference/receiving-js-closures-in-rust.html)]
 
 ---
 
@@ -799,7 +734,7 @@ fn main() {
 | **Rust 生态位** | 浏览器计算、游戏前端 | 服务端 Wasm、CLI、插件 | 跨语言微组件、插件系统 | 浏览器库、npm 包 |
 
 > **矩阵洞察**: `wasm32-unknown-unknown` 和 `wasm32-wasip1` 或 `wasm32-wasip2` 代表了 Wasm 的两种基本安全模型——前者是"纯计算沙箱"，后者是"能力安全沙箱"。`cargo-component` 增加了**跨语言类型安全**，`wasm-bindgen` 专注于**JS 互操作性**。选择工具链时，首要判断是"宿主是谁"——JS 引擎选 `wasm-bindgen`，独立运行时选 `wasm32-wasip1` 或 `wasm32-wasip2` + `cargo-component`。
-> [来源: [Rust Wasm Book — Project Setup](https://rustwasm.github.io/book/game-of-life/setup.html)] · [来源: [cargo-component Motivation](https://github.com/bytecodealliance/cargo-component/blob/main/docs/design/motivation.md)]
+> [来源: [Rust Wasm Book — Project Setup](https://rustwasm.github.io/book/game-of-life/setup.html)] · [来源: [cargo-component Motivation](https://github.com/bytecodealliance/cargo-component#motivation)]
 
 ---
 
@@ -824,12 +759,12 @@ fn main() {
 |:---|:---|:---:|
 | Wasm 规范定义 | [W3C WebAssembly](https://www.w3.org/wasm/) | ✅ 一级 |
 | WASI Preview 2 能力安全 | [WASI Docs](https://wasi.dev) | ✅ 一级 |
-| 组件模型规范 | [Component Model Spec](https://component-model.bytecodealliance.org/) | ✅ 一级 |
-| wasm-bindgen 类型映射 | [wasm-bindgen Guide](https://rustwasm.github.io/wasm-bindgen/) | ✅ 一级 |
-| wasm-pack 构建流程 | [wasm-pack Docs](https://rustwasm.github.io/wasm-pack/) | ✅ 一级 |
+| 组件模型规范 | [Component Model Spec](https:/component-model.bytecodealliance.org/) | ✅ 一级 |
+| wasm-bindgen 类型映射 | [wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/) | ✅ 一级 |
+| wasm-pack 构建流程 | [wasm-pack Docs](https://rustwasm.github.io/docs/wasm-pack/) | ✅ 一级 |
 | cargo-component 设计 | [cargo-component GitHub](https://github.com/bytecodealliance/cargo-component) | ✅ 一级 |
 | Wasmtime 嵌入 API | [Wasmtime Docs](https://docs.wasmtime.dev) | ✅ 一级 |
-| V8 Wasm 编译管道 | [V8 Docs](https://v8.dev/docs/wasm-compilation-pipeline) | ✅ 一级 |
+| V8 Wasm 编译管道 | [V8 Docs](https:/v8.dev/docs/wasm-compilation-pipeline) | ✅ 一级 |
 | Cloudflare Workers Wasm | [Cloudflare Docs](https://developers.cloudflare.com/workers/) | ✅ 一级 |
 | Fastly Compute | [Fastly Docs](https://www.fastly.com/documentation/guides/compute/) | ✅ 一级 |
 | WASI 文件系统规范 | [wasi-filesystem](https://github.com/WebAssembly/wasi-filesystem) | ✅ 一级 |
@@ -841,7 +776,7 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [WebAssembly Specification](https://webassembly.github.io/spec/), [WASI Preview 2 Docs](https://wasi.dev), [Component Model Spec](https://component-model.bytecodealliance.org/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [WebAssembly Specification](https://webassembly.github.io/spec/), [WASI Preview 2 Docs](https://wasi.dev), [Component Model Spec](https:/component-model.bytecodealliance.org/)
 > **权威来源对齐变更日志**: 2026-05-26 初始创建，对齐 Rust 1.96.0+ (Edition 2024) 与 WASI Preview 2 / Component Model 最新规范
 
 **文档版本**: 1.0

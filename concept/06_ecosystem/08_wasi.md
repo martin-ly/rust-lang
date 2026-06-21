@@ -3,6 +3,8 @@
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 
+>
+> **来源**: [WASI](https://wasi.dev/) · [Rust and WebAssembly Book](https://rustwasm.github.io/book/) · [Rust Platform Support](https://doc.rust-lang.org/rustc/platform-support.html)
 ---
 
 # WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型）
@@ -44,7 +46,7 @@ $entry
 > **来源**: <https://wasi.dev>
 
 > **[Component Model Spec]** The WebAssembly Component Model is a proposal to build upon the WebAssembly standard by defining how modules may be composed together and how they may communicate using high-level types.
-> **来源**: <https://component-model.bytecodealliance.org>
+> **来源**: <https:/component-model.bytecodealliance.org>
 
 ---
 
@@ -533,7 +535,7 @@ let sub_result = subcomponent::analyze(file); // 再次 move
 
 ---
 
-> **权威来源**: [WASI Preview 2 Docs](https://wasi.dev) · [WebAssembly Component Model Spec](https://component-model.bytecodealliance.org) · [wit-bindgen Docs](https://github.com/bytecodealliance/wit-bindgen) · [WASMtime Docs](https://docs.wasmtime.dev)
+> **权威来源**: [WASI Preview 2 Docs](https://wasi.dev) · [WebAssembly Component Model Spec](https:/component-model.bytecodealliance.org) · [wit-bindgen Docs](https://github.com/bytecodealliance/wit-bindgen) · [WASMtime Docs](https://docs.wasmtime.dev)
 > **文档版本**: 1.2
 > **对应 Rust 版本**: 1.90.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
@@ -546,7 +548,7 @@ use std::fs::File;
 use std::io::Read;
 
 fn main() {
-    // ❌ 运行时拒绝: WASI 默认无文件系统访问权限
+    / ❌ 运行时拒绝: WASI 默认无文件系统访问权限
     let mut file = File::open("/etc/passwd").unwrap();
     let mut contents = String::new();
     file.read_to_string(&mut contents).unwrap();

@@ -1,3 +1,5 @@
+> **EN**: Formal 09 Operational Semantics Archived
+> **Summary**: Formal 09 Operational Semantics Archived. Core Rust concept.
 > **内容分级**: [专家级]
 > **受众**: [研究者]
 > **Bloom 层级**: 理解
@@ -10,16 +12,7 @@
 > **前置依赖**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
 > **前置依赖**: [Concurrency](../03_advanced/01_concurrency.md)
 
-## 相关概念文件
-
-- [操作语义主文件](./17_operational_semantics.md) — 结构化操作语义（本文件已归档）
-- [公理语义](./20_axiomatic_semantics.md) — Hoare 逻辑
-- [类型语义](./21_type_semantics.md) — 类型系统形式化
-- [分离逻辑](./11_separation_logic.md) — 内存分离逻辑
-- [形式化验证工具](../06_ecosystem/47_formal_verification_tools.md) — 模型检测与定理证明
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
-> **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+> **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
 
 ## 认知路径
 

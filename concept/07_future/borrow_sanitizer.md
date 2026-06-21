@@ -3,7 +3,8 @@
 > **代码状态**: [综述级 — 待补充代码]
 
 > **EN**: BorrowSanitizer (BSan) — Dynamic aliasing rule verification for Rust
-> **Summary**: BorrowSanitizer 是 Rust 编译器的运行时 sanitizer，用于动态检测 Stacked Borrows / Tree Borrows 别名违规。作为 Miri 的互补工具，它以 2-5x 性能开销在生产环境压力测试中验证 `unsafe` 代码的内存安全。
+> **Summary**: BorrowSanitizer (BSan) — Dynamic aliasing rule verification for Rust: emerging Rust language feature or ecosystem trend.
+> **来源**: [BorrowSanitizer MCP](https://github.com/rust-lang/compiler-team/issues/958) · [Rust Project Goals 2026 — BorrowSanitizer](https://rust-lang.github.io/rust-project-goals/2026/borrowsanitizer.html) · [BorrowSanitizer 官方站点](https://borrowsanitizer.com/)
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]
@@ -19,7 +20,7 @@
 > **权威来源**:
 >
 > - [BorrowSanitizer MCP](https://github.com/rust-lang/compiler-team/issues/958)
-> - [Rust Project Goals 2026 — BorrowSanitizer](https://rust-lang.github.io/rust-project-goals/2026/BorrowSanitizer.html)
+> - [Rust Project Goals 2026 — BorrowSanitizer](https://rust-lang.github.io/rust-project-goals/2026/borrowsanitizer.html)
 > - [BSan 官方网站](https://borrowsanitizer.com/)
 > - [BSan April 2026 Update](https://borrowsanitizer.com/status/april_2026.html)
 > - [BSan February 2026 Update](https://borrowsanitizer.com/status/february_2026.html)
@@ -221,7 +222,7 @@ Safety Tags (RFC #3842)        BorrowSanitizer
 | 资源 | URL | 类型 |
 |:---|:---|:---|
 | BSan 跟踪 Issue | rust-lang/rust#126567 | 官方跟踪 |
-| Rust Project Goals 2026 — BorrowSanitizer | [rust-lang.github.io/rust-project-goals/2026/BorrowSanitizer.html](https://rust-lang.github.io/rust-project-goals/2026/BorrowSanitizer.html) | 项目目标 |
+| Rust Project Goals 2026 — BorrowSanitizer | [rust-lang.github.io/rust-project-goals/2026/BorrowSanitizer.html](https://rust-lang.github.io/rust-project-goals/2026/borrowsanitizer.html) | 项目目标 |
 | Miri Book | [rustc-dev-guide.rust-lang.org/miri.html](https://rustc-dev-guide.rust-lang.org/miri.html) | 互补工具 |
 | Tree Borrows 论文 | [POPL 2026 / PLDI 2025](https://perso.crans.org/vanille/treebor/) | 理论基础 |
 | BSan 月度更新 (Jan) | [borrowsanitizer.com/status/january_2026.html](https://borrowsanitizer.com/status/january_2026.html) | 进展博客 |

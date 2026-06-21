@@ -7,8 +7,8 @@
 >
 # Rust CLI 开发生态
 >
-> **EN**: Rust CLI 开发生态 (Chinese)
-> **Summary**: Rust CLI 开发生态 (Chinese). Core Rust concept covering mechanism analysis, ecosystem and tooling.
+> **EN**: CLI Development
+> **Summary**: CLI Development: Rust ecosystem tools, crates, and engineering practices.
 >
 > **受众**: [进阶]
 
@@ -21,7 +21,7 @@
 
 ---
 
-> **来源**: [clap](https://docs.rs/clap/latest/clap/) · [Rust CLI Book](https://rust-cli.github.io/book/index.html) · [Command Line Applications in Rust](https://rust-cli.github.io/book/index.html) · [Wikipedia — Command-line Interface](https://en.wikipedia.org/wiki/Command-line_interface) · [Cargo](https://doc.rust-lang.org/cargo/)
+> **来源**: [Rust CLI Book](https://rust-cli.github.io/book/) · [clap](https://docs.rs/clap/) · [Cargo Book](https://doc.rust-lang.org/cargo/)
 
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
 

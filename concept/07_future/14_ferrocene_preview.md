@@ -1,10 +1,9 @@
 # Ferrocene 预研：Rust 的安全关键认证之路
 
 > **代码状态**: ✅ 含可编译示例
-
 >
-> **EN**: Security Practices
-> **Summary**: Security Practices. Core Rust concept covering formal methods foundations, verification techniques, mechanism analysis.
+> **EN**: Ferrocene Preview
+> **Summary**: Preview of Ferrocene: the safety-critical Rust toolchain qualification initiative.
 >
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
@@ -21,6 +20,8 @@
 > **前置概念**: [Toolchain](../06_ecosystem/01_toolchain.md) · [Formal Methods](./02_formal_methods.md) · [MC/DC Coverage](./07_mcdc_coverage_preview.md)
 > **后置概念**: [Version Tracking](./05_rust_version_tracking.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
+> **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/) · [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 ---
 
 > **来源**:
@@ -43,6 +44,7 @@
     - [2.2 与上游 Rust 的关系](#22-与上游-rust-的关系)
     - [2.3 证据包与审计追踪](#23-证据包与审计追踪)
   - [三、行业应用分析](#三行业应用分析)
+    - [3.1 2026 Vision Doc：安全关键 Rust 的真实落地洞察](#31-2026-vision-doc安全关键-rust-的真实落地洞察)
     - [3.2 Safety-Critical Rust Consortium](#32-safety-critical-rust-consortium)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
@@ -274,7 +276,7 @@ Ferrocene 证据包构成:
 6. **将 C/C++ 互操作视为安全故事的一部分**：提供可审计、可同步的 FFI 边界指导与工具。
 
 > **关键洞察**：安全关键 Rust 的最大障碍**不是语言本身**，而是**证据友好的软件栈组装能力**——包括认证工具链、稳定目标、可控依赖和可论证的 FFI 边界。Ferrocene 解决了编译器认证，但生态其余部分仍需社区与行业共建。
-> [来源: [Rust Blog — What does it take to ship Rust in safety-critical?](https://blog.rust-lang.org/2026/01/14/what-does-it-take-to-ship-rust-in-safety-critical.html)] · 可信度: ✅
+> [来源: [Rust Blog — What does it take to ship Rust in safety-critical?](https://blog.rust-lang.org/)] · 可信度: ✅
 
 ### 3.2 Safety-Critical Rust Consortium
 
@@ -303,7 +305,7 @@ Ferrocene 证据包构成:
 - 两者共同构成 Rust 进入汽车/航空/医疗/工业安全关键市场的“工具链 + 行业治理”双支柱
 
 > **关键洞察**: 安全关键 Rust 的成熟不能仅靠单个产品（Ferrocene）或单个组织完成。SCRC 通过免费会员、子委员会分工和公开会议，把行业需求聚合为 Rust Project 可执行的目标，这是开源语言进入受监管行业的制度创新。
-> **来源**: [Safety-Critical Rust Consortium](https://rustfoundation.org/safety-critical-rust-consortium/) · [GitHub — rustfoundation/safety-critical-rust-consortium](https://github.com/rustfoundation/safety-critical-rust-consortium) · [Rust Blog — What does it take to ship Rust in safety-critical?](https://blog.rust-lang.org/2026/01/14/what-does-it-take-to-ship-rust-in-safety-critical.html) · 可信度: ✅
+> **来源**: [Safety-Critical Rust Consortium](https://rustfoundation.org/safety-critical-rust-consortium/) · [GitHub — rustfoundation/safety-critical-rust-consortium](https://github.com/rustfoundation/safety-critical-rust-consortium) · [Rust Blog — What does it take to ship Rust in safety-critical?](https://blog.rust-lang.org/) · 可信度: ✅
 
 ---
 

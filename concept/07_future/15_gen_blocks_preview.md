@@ -1,10 +1,9 @@
 # Gen Blocks 预研：超越异步的泛化生成器
 
 > **代码状态**: [综述级 — 待补充代码]
-
 >
-> **EN**: Async Programming
-> **Summary**: Async Programming. Core Rust concept covering mechanism analysis, design patterns, async/await patterns.
+> **EN**: Gen Blocks Preview
+> **Summary**: Preview of generator blocks (`gen {}`) for ergonomic lazy iterators.
 >
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
@@ -24,7 +23,7 @@
 
 > **来源**:
 > [Rust RFC — Gen Blocks](https://github.com/rust-lang/rfcs/pull/3513) ·
-> [Rust Reference — Generators](https://doc.rust-lang.org/reference/expressions/generator-expr.html) ·
+> [Rust Reference — Generators](https://doc.rust-lang.org/reference/expressions.html#generator-expressions) ·
 > [Tracking Issue #93132](https://github.com/rust-lang/rust/issues/93132) ·
 > [Iterator RFCs](https://github.com/rust-lang/rfcs/labels/T-libs-api)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
@@ -154,7 +153,7 @@ graph TD
 ```
 
 > **生态影响**: `gen` 块不会替代手动 `Iterator` 实现（性能关键场景仍需手动控制），但为**复杂迭代逻辑**提供了一种更直观的表达方式。
-> [来源: [Rust [RFC 3513](https://rust-lang.github.io/rfcs/3513.html) — Motivation](https://github.com/rust-lang/rfcs/pull/3513)]
+> [来源: [Rust [RFC 3513](https://rust-lang.github.io/rfcs//3513-gen-blocks.html) — Motivation](https://github.com/rust-lang/rfcs/pull/3513)]
 
 ---
 
@@ -284,7 +283,7 @@ graph LR
 ```
 
 > **最佳实践**: `gen` 适用于**无法或不宜使用现有组合子**的复杂迭代逻辑；简单场景继续使用 `.map`/`.filter` 等组合子以获得更好的性能和可读性。
-> [来源: [Rust [RFC 3513](https://rust-lang.github.io/rfcs/3513.html) — Examples](https://github.com/rust-lang/rfcs/pull/3513)]
+> [来源: [Rust [RFC 3513](https://rust-lang.github.io/rfcs//3513-gen-blocks.html) — Examples](https://github.com/rust-lang/rfcs/pull/3513)]
 
 ---
 
@@ -341,7 +340,7 @@ graph TD
 ```
 
 > **边界要点**: gen block 的边界与 async fn 高度相似——两者共享状态机实现，因此面临相同的借用检查、Pin 和清理挑战。
-> [来源: [Rust [RFC 3513](https://rust-lang.github.io/rfcs/3513.html) — Drawbacks](https://github.com/rust-lang/rfcs/pull/3513)]
+> [来源: [Rust [RFC 3513](https://rust-lang.github.io/rfcs//3513-gen-blocks.html) — Drawbacks](https://github.com/rust-lang/rfcs/pull/3513)]
 
 ---
 
@@ -367,7 +366,7 @@ graph TD
 |:---|:---:|:---|
 | [Rust RFC 3513](https://github.com/rust-lang/rfcs/pull/3513) | ✅ 一级 | 官方 RFC，gen blocks 设计 |
 | [Tracking Issue #93132](https://github.com/rust-lang/rust/issues/93132) | ✅ 一级 | 实现跟踪 |
-| [Rust Reference — Generators](https://doc.rust-lang.org/reference/expressions/generator-expr.html) | ✅ 一级 | 生成器表达式 |
+| [Rust Reference — Generators](https://doc.rust-lang.org/reference/expressions.html#generator-expressions) | ✅ 一级 | 生成器表达式 |
 | [Async Fundamentals Initiative](https://rust-lang.github.io/async-fundamentals-initiative/) | ✅ 一级 | 异步基础设计 |
 | [Rust Compiler Dev Guide](https://rustc-dev-guide.rust-lang.org/) | ✅ 一级 | 编译器内部机制 |
 | [Rust Internals Forum](https://internals.rust-lang.org/) | ⚠️ 二级 | 设计讨论 |
@@ -422,12 +421,12 @@ fn numbers() -> impl Iterator<Item = i32> {
 ```
 
 > **修正**:
-> `gen` 块（[RFC 3513](https://rust-lang.github.io/rfcs/3513.html)，实验性）是 Rust 的生成器语法糖，编译器将 `yield` 表达式转换为状态机，自动生成 `Iterator` 实现。
+> `gen` 块（[RFC 3513](https://rust-lang.github.io/rfcs//3513-gen-blocks.html)，实验性）是 Rust 的生成器语法糖，编译器将 `yield` 表达式转换为状态机，自动生成 `Iterator` 实现。
 > `gen` 块的返回类型隐式为 `impl Iterator<Item = T>`，其中 `T` 是所有 `yield` 表达式的统一类型。
 > 类型不匹配时编译错误，与 `async` 块（所有 `await` 的 future 类型必须统一）类似。
 > 这与 Python 的生成器（`yield` 可返回任意类型，动态类型）或 JavaScript 的生成器（同样动态）不同——Rust 保持静态类型安全，生成器的 `Item` 类型在编译期确定。
 > `gen` 块的设计目标：消除手写 `Iterator` 实现的样板代码（`next` 方法 + 手动状态机），同时保持零成本抽象。
-> [来源: [Rust RFC 3513](https://rust-lang.github.io/rfcs/3513-gen-blocks.html)] ·
+> [来源: [Rust RFC 3513](https://rust-lang.github.io/rfcs//3513-gen-blocks.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.2 边界测试：`gen` 块与借用生命周期的冲突（编译错误）
@@ -449,7 +448,7 @@ fn borrow_iter(data: &mut Vec<i32>) -> impl Iterator<Item = &i32> {
 > 但 `impl Iterator<Item = &i32>` 的隐式生命周期参数无法捕获 `data` 的生命周期——迭代器的 `Item` 类型需要一个显式生命周期参数。
 > 正确写法：返回 `impl Iterator<Item = &'_ i32>` 或显式命名生命周期。这与手写 `Iterator` 实现的生命周期问题相同——`gen` 块的便利不消除生命周期约束，只是隐藏了状态机的复杂性。
 > 这与 Rust 的 async/await 类似：await 点保存的引用必须满足状态机的生命周期。
-> [来源: [Rust RFC 3513](https://rust-lang.github.io/rfcs/3513-gen-blocks.html)] ·
+> [来源: [Rust RFC 3513](https://rust-lang.github.io/rfcs//3513-gen-blocks.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
 
 ### 10.3 边界测试：gen 块与 `Pin` 的隐式需求（编译错误）
@@ -476,7 +475,7 @@ fn self_referential_gen() -> impl Iterator<Item = &str> {
 >
 > 这与 `async` 块的自引用问题相同——`async fn` 自动处理 `Pin`，但 `gen` 块的返回类型设计仍在演进。
 > `gen` 块的简化目标（消除手写 Iterator 的样板）与自引用的复杂性形成张力。
-> [来源: [Rust RFC 3513](https://rust-lang.github.io/rfcs/3513-gen-blocks.html)] ·
+> [来源: [Rust RFC 3513](https://rust-lang.github.io/rfcs//3513-gen-blocks.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.4 边界测试：gen 块与异常控制流（`return`、`break`）的语义（编译错误）
@@ -502,7 +501,7 @@ fn early_return() -> impl Iterator<Item = i32> {
 > 当前设计倾向：`return` 结束整个函数（与 `async` 块一致），`break` 和 `continue` 针对最内层循环（与常规块一致），
 > `?` 传播到函数的返回类型（要求函数返回 `Result`/`Option`）。
 > 这与 Python 的 generator（`return` 结束 generator，`return value` 成为 `StopIteration` 的 value）或 JavaScript 的 generator（`return` 结束迭代，`yield*` 委托）类似——`gen` 块的设计需与 Rust 的错误处理和控制流哲学一致。
-> [来源: [Rust RFC 3513](https://rust-lang.github.io/rfcs/3513-gen-blocks.html)] ·
+> [来源: [Rust RFC 3513](https://rust-lang.github.io/rfcs//3513-gen-blocks.html)] ·
 > [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]
 > **过渡**: Gen Blocks 预研：超越异步的泛化生成器 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 

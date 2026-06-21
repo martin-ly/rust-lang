@@ -11,8 +11,8 @@
 >
 # Rust vs JavaScript：系统编程与脚本执行的范式差异
 >
-> **EN**: Rust vs JavaScript：系统编程与脚本执行的范式差异 (Chinese)
-> **Summary**: Rust vs JavaScript：系统编程与脚本执行的范式差异 (Chinese). Core Rust concept covering cross-language comparison, mental model building, mechanism analysis.
+> **EN**: Rust vs JavaScript
+> **Summary**: Rust vs JavaScript: comparative analysis with Rust across type systems, memory safety, and concurrency.
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 对比分析 **Rust**（编译型、强类型、内存安全）与 **JavaScript**（解释型、动态类型、事件驱动）在语言语义、运行时模型、异步处理和生态工具链四个维度的本质差异，特别关注 WASM 作为两者交汇点的作用。
@@ -310,7 +310,7 @@ Rust + JavaScript + WASM 的工作模式:
 ```
 
 > **WASM 洞察**: WASM 不是**替代 JavaScript**，而是**增强 JavaScript**——在计算密集型任务上用 Rust/WASM，在 DOM/I/O 上用 JavaScript。
-> [来源: [Rust and WASM Book](https://rustwasm.github.io/book/)] · [来源: [wasm-bindgen Guide](https://rustwasm.github.io/wasm-bindgen/)]
+> [来源: [Rust and WASM Book](https://rustwasm.github.io/book/)] · [来源: [wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/)]
 
 ---
 
@@ -460,7 +460,7 @@ graph TD
 ```
 
 > **陷阱总结**: Rust/JS/WASM 的陷阱主要与**边界穿越开销**、**包体积**、**性能假设**、**错误处理**和**内存管理**相关。
-> [source: [wasm-bindgen Best Practices](https://rustwasm.github.io/wasm-bindgen/contributing/design.html)]
+> [source: [wasm-bindgen Best Practices](https://rustwasm.github.io/docs/wasm-bindgen/contributing/design/index.html)]
 
 ---
 
@@ -472,7 +472,7 @@ graph TD
 | [MDN — JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) | ✅ 一级 | JS 文档 |
 | [WASM Specification](https://webassembly.github.io/spec/) | ✅ 一级 | WASM 标准 |
 | [Rust and WASM Book](https://rustwasm.github.io/book/) | ✅ 一级 | Rust WASM 指南 |
-| [wasm-bindgen](https://rustwasm.github.io/wasm-bindgen/) | ✅ 一级 | JS 绑定工具 |
+| [wasm-bindgen](https://rustwasm.github.io/docs/wasm-bindgen/) | ✅ 一级 | JS 绑定工具 |
 | [V8 Blog](https://v8.dev/blog) | ✅ 二级 | JS 引擎博客 |
 
 ---

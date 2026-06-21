@@ -1,7 +1,11 @@
+> **Summary**: Ecosystem Layer Index Legacy. Core Rust concept.
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Cargo Book](https://doc.rust-lang.org/cargo/) · [crates.io](https://crates.io/) · [Rust RFCs](https://rust-lang.github.io/rfcs/)
 > **内容分级**: [综述级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 
 # L6 生态工程层索引（Ecosystem & Engineering Layer Index）
+>
+> **EN**: Ecosystem Layer Index Legacy
 >
 > **受众**: [进阶]
 > **定位**: Rust 的工程实践、工具链、设计模式和生态协作机制。L1-L5 知识的**工程化落地**。

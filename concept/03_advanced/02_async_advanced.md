@@ -2,13 +2,15 @@
 
 # Async/Await 高级主题
 >
-> **EN**: Async/Await 高级主题 (Chinese)
-> **Summary**: Async/Await 高级主题 (Chinese). Guide to 02 Async Advanced.
+> **EN**: Async Advanced
+> **Summary**: Async Advanced: advanced Rust topics, performance/runtime considerations, and ecosystem patterns.
 > **受众**: [专家]
 > **层次定位**: L3 高级概念 / 异步子域 — 高级主题
 > **前置依赖**: [Async/Await 基础](./02_async.md)
 > **定理链编号**: T-053 Waker 活性 ⟹ T-054 Stream 安全性
 
+>
+> **来源**: [Async Book](https://rust-lang.github.io/async-book/) · [TRPL — Async/Await](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [std::future::Future](https://doc.rust-lang.org/std/future/trait.Future.html)
 ---
 
 > **后置概念**: [Formal Verification](../04_formal/03_ownership_formal.md)
@@ -114,7 +116,7 @@ graph TD
 > 读者可逐层检查 Waker 注册、Reactor 唤醒调用、poll 返回值合法性三个环节。
 > 关键洞察：`poll → Pending → wake → poll` 的闭环是异步执行器活性（liveness）的根本保证，任一环节断裂即导致活锁或饥饿。
 > [来源: 💡 原创分析]
-> [来源: [Rust Reference: Pin](https://doc.rust-lang.org/reference/types/pin.html)]
+> [来源: [Rust Reference: Pin](https://doc.rust-lang.org/std/pin/index.html)]
 >
 > **[Async Book: Waker]** Waker 是 Future 与 Reactor 之间的桥梁——poll 时将 Waker 传递给底层 I/O 源，I/O 就绪时源通过 Waker 通知执行器重新调度该 Future。✅ 已验证
 >
@@ -1316,7 +1318,7 @@ fn main() {
 }
 ```
 
-> **修正**: `Pin<P<T>>` 只在 `T: !Unpin` 时保证 `T` 不被移动。`SelfRef` 未包含 `std::marker::PhantomPinned`，因此自动实现 `Unpin`——`Pin<&mut SelfRef>` 允许 `get_mut()` 获取 `&mut SelfRef`，进而允许移动。正确做法：`struct SelfRef { data: String, ptr: *const String, _pin: std::marker::PhantomPinned }`，显式标记 `!Unpin`。这与 C++ 的 `std::pin`（C++20，类似概念）或 Swift 的 `inout`（无 Pin 概念）不同——Rust 的 `Unpin` 是自动 trait，`PhantomPinned` 是显式禁用自动实现的方法。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-04-pin.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/pinning.html)]
+> **修正**: `Pin<P<T>>` 只在 `T: !Unpin` 时保证 `T` 不被移动。`SelfRef` 未包含 `std::marker::PhantomPinned`，因此自动实现 `Unpin`——`Pin<&mut SelfRef>` 允许 `get_mut()` 获取 `&mut SelfRef`，进而允许移动。正确做法：`struct SelfRef { data: String, ptr: *const String, _pin: std::marker::PhantomPinned }`，显式标记 `!Unpin`。这与 C++ 的 `std::pin`（C++20，类似概念）或 Swift 的 `inout`（无 Pin 概念）不同——Rust 的 `Unpin` 是自动 trait，`PhantomPinned` 是显式禁用自动实现的方法。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-concurrency-with-async.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/std/pin/index.html)]
 
 ### 10.3 边界测试：类型不匹配的基础错误
 
@@ -1341,7 +1343,7 @@ fn main() {
 
 > [来源: [Rust Reference — Async Blocks](https://doc.rust-lang.org/reference/expressions/block-expr.html#async-blocks)]
 
-> [来源: [RFC 2515 — Pinning](https://rust-lang.github.io/rfcs/2515-pin.html)]
+> [来源: [RFC 2515 — Pinning](https://rust-lang.github.io/rfcs//2515-type_alias_impl_trait.html)]
 
 > [来源: [Pin API Documentation](https://doc.rust-lang.org/std/pin/struct.Pin.html)]
 
@@ -1435,7 +1437,7 @@ fn main() {
 
 **Rust 1.75+ 代码**：
 
-```rust
+```rust,ignore
 trait HttpClient {
     async fn fetch(&self, url: &str) -> Result<String, Error>;
 }
@@ -1563,7 +1565,7 @@ async fn compute_hash(data: &str) -> String {
 
 Tokio 使用协作式调度：一个线程驱动多个 `Future`。如果某个 `Future` 长时间占用线程（不做 `.await`），其他 `Future` 无法执行，导致**整个运行时饿死**。
 
-```rust
+```rust,ignore
 // 错误示范：compute_hash 占用线程 100ms，期间其他任务无法运行
 async fn bad(data: &str) -> String {
     // 100ms 的纯 CPU 计算，没有 .await 点
@@ -1672,7 +1674,7 @@ fn traverse_dir(path: &Path) -> Pin<Box<dyn Future<Output = Vec<String>> + Send 
 
 **或者使用 `async_recursion` 宏**（简化版）：
 
-```rust
+```rust,ignore
 use async_recursion::async_recursion;
 
 #[async_recursion]

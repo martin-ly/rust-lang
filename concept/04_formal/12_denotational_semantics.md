@@ -2,8 +2,8 @@
 
 # 指称语义与领域理论
 >
-> **EN**: 指称语义与领域理论 (Chinese)
-> **Summary**: 指称语义与领域理论 (Chinese). Core Rust concept covering mechanism analysis.
+> **EN**: Denotational Semantics
+> **Summary**: Denotational Semantics: formal methods foundations, semantics, and verification techniques relevant to Rust.
 > **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >
@@ -12,6 +12,8 @@
 > **前置概念**: [Type Theory](./02_type_theory.md) · [Operational Semantics](./17_operational_semantics.md) · [Linear Logic](./01_linear_logic.md)
 > **后置概念**: [Category Theory](./10_category_theory.md) · [RustBelt](./04_rustbelt.md)
 
+>
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---
 
 > **来源**:
@@ -58,6 +60,12 @@
     - [10.3 边界测试：发散函数（`!`）的指称语义（编译错误）](#103-边界测试发散函数的指称语义编译错误)
     - [10.4 边界测试：`unsafe` 代码的语义鸿沟（运行时 UB）](#104-边界测试unsafe-代码的语义鸿沟运行时-ub)
     - [10.3 边界测试：不动点语义与递归类型的无限展开（编译错误）](#103-边界测试不动点语义与递归类型的无限展开编译错误)
+  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：指称语义（Denotational Semantics）的核心思想是什么？与操作语义有什么区别？（理解层）](#测验-1指称语义denotational-semantics的核心思想是什么与操作语义有什么区别理解层)
+    - [测验 2：什么是"域"（Domain）？为什么需要引入 ⊥（bottom）元素？（理解层）](#测验-2什么是域domain为什么需要引入-bottom元素理解层)
+    - [测验 3：Rust 的严格求值（strict/eager evaluation）在指称语义中如何体现？（理解层）](#测验-3rust-的严格求值stricteager-evaluation在指称语义中如何体现理解层)
+    - [测验 4：不动点定理（Knaster-Tarski）在递归函数语义中起什么作用？（理解层）](#测验-4不动点定理knaster-tarski在递归函数语义中起什么作用理解层)
+    - [测验 5：为什么 Rust 不允许直接递归类型（如 `struct List { head: i32, tail: List }`）？这与指称语义中的域有什么关系？（理解层）](#测验-5为什么-rust-不允许直接递归类型如-struct-list--head-i32-tail-list-这与指称语义中的域有什么关系理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -490,7 +498,7 @@ fn main() {
 > 这与 Haskell 的 `undefined :: a`（值层面的 ⊥，有类型但运行时错误）或 Scala 的 `Nothing`（类型层面的 ⊥，无值）类似——Rust 的 `!` 更接近 Scala 的 `Nothing`，是空类型（uninhabited type）。
 > `!` 的稳定化使 Rust 的类型系统在理论上更完整，支持更精确的控制流分析。
 > [来源: [Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_semantics)] ·
-> [来源: [Rust RFC 1216](https://rust-lang.github.io/rfcs/1216-bang-type.html)]
+> [来源: [Rust RFC 1216](https://rust-lang.github.io/rfcs//1216-bang-type.html)]
 
 ### 10.4 边界测试：`unsafe` 代码的语义鸿沟（运行时 UB）
 

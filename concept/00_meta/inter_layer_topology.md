@@ -1,7 +1,7 @@
 # Rust 知识体系跨层依赖与蕴含拓扑图
 >
-> **EN**: Rust 知识体系跨层依赖与蕴含拓扑图 (Chinese)
-> **Summary**: Rust 知识体系跨层依赖与蕴含拓扑图 (Chinese). Core Rust concept covering testing and verification.
+> **EN**: Inter Layer Topology
+> **Summary**: Inter Layer Topology. Core Rust concept.
 >
 > **受众**: [进阶]
 >
@@ -12,6 +12,8 @@
 > **符号约定**: `⟹` 蕴含 / `←` 依赖 / `≡` 同构 / `⊘` 互斥 / `↔` 双向映射
 
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 > **Bloom 层级**: 元（Meta）

@@ -24,9 +24,9 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
-> **来源**: [Rust Wasm Book](https://rustwasm.github.io/book/) ·
-> [wasm-bindgen Guide](https://rustwasm.github.io/wasm-bindgen/) ·
-> [wasm-pack Book](https://rustwasm.github.io/wasm-pack/book/) ·
+> **来源**: [Rust and WebAssembly Book](https://rustwasm.github.io/book/) · [TRPL — Advanced Features](https://doc.rust-lang.org/book/ch19-00-advanced-features.html)
+> [wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/) ·
+> [wasm-pack Book](https://rustwasm.github.io/docs/wasm-pack/) ·
 > [Yew Framework](https://yew.rs/) ·
 > [Leptos Framework](https://leptos.dev/) ·
 > [WebAssembly Specification](https://webassembly.github.io/spec/) ·
@@ -148,7 +148,7 @@ graph LR
     style 互操作层 fill:#fff3e0
 ```
 
-> **架构洞察**: wasm-bindgen 在编译期生成 JS 胶水代码，负责 Rust 结构体/枚举与 JS 对象之间的**序列化/反序列化**。这一层是性能开销的主要来源之一。[来源: [wasm-bindgen Guide](https://rustwasm.github.io/wasm-bindgen/)]
+> **架构洞察**: wasm-bindgen 在编译期生成 JS 胶水代码，负责 Rust 结构体/枚举与 JS 对象之间的**序列化/反序列化**。这一层是性能开销的主要来源之一。[来源: [wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/)]
 
 ---
 
@@ -192,7 +192,7 @@ impl Point {
 }
 ```
 
-> **互操作语义**: `#[wasm_bindgen]` 宏在编译期展开为 `__wasm_bindgen_generated_fibonacci` 等 shim 函数，处理参数/返回值的 ABI 转换。复杂类型（如 `String`、`Vec<T>`）通过 Wasm 线性内存传递指针+长度，JS 端负责解码。[来源: [wasm-bindgen Guide](https://rustwasm.github.io/wasm-bindgen/)]
+> **互操作语义**: `#[wasm_bindgen]` 宏在编译期展开为 `__wasm_bindgen_generated_fibonacci` 等 shim 函数，处理参数/返回值的 ABI 转换。复杂类型（如 `String`、`Vec<T>`）通过 Wasm 线性内存传递指针+长度，JS 端负责解码。[来源: [wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/)]
 
 ```text
 wasm-bindgen 的类型映射规则:
@@ -239,7 +239,7 @@ wasm-pack 工作流:
   └── 将 Rust Wasm 包发布为 npm 包
 ```
 
-> **工程洞察**: wasm-pack 的 `--target` 参数决定输出格式：`bundler`（webpack/vite 使用 ES module）、`web`（浏览器原生 ES module）、`nodejs`（CommonJS）、`no-modules`（全局脚本）。选型直接影响集成方式。[来源: [wasm-pack Book](https://rustwasm.github.io/wasm-pack/book/)]
+> **工程洞察**: wasm-pack 的 `--target` 参数决定输出格式：`bundler`（webpack/vite 使用 ES module）、`web`（浏览器原生 ES module）、`nodejs`（CommonJS）、`no-modules`（全局脚本）。选型直接影响集成方式。[来源: [wasm-pack Book](https://rustwasm.github.io/docs/wasm-pack/)]
 
 ---
 
@@ -616,8 +616,8 @@ Rust panic in Wasm:
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
 | [Rust Wasm Book](https://rustwasm.github.io/book/) | ✅ 一级 | 官方 Rust Wasm 教程 |
-| [wasm-bindgen Guide](https://rustwasm.github.io/wasm-bindgen/) | ✅ 一级 | JS 互操作官方文档 |
-| [wasm-pack Book](https://rustwasm.github.io/wasm-pack/book/) | ✅ 一级 | 构建工具官方文档 |
+| [wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/) | ✅ 一级 | JS 互操作官方文档 |
+| [wasm-pack Book](https://rustwasm.github.io/docs/wasm-pack/) | ✅ 一级 | 构建工具官方文档 |
 | [WebAssembly Specification](https://webassembly.github.io/spec/) | ✅ 一级 | W3C 规范 |
 | [W3C WebAssembly](https://www.w3.org/wasm/) | ✅ 一级 | 标准化组织 |
 | [MDN — WebAssembly](https://developer.mozilla.org/en-US/docs/WebAssembly) | ✅ 一级 | Mozilla 开发者文档 |
@@ -715,7 +715,7 @@ impl Point {
 > 编译错误发生在 `wasm-bindgen` 宏展开阶段——它尝试为不支持的类型生成绑定代码并失败。
 > 安全替代：将裸指针包装为 `JsValue`，使用 `serde-wasm-bindgen` 序列化复杂类型，或手动编写 JS shim。
 > 这与 C 的 Emscripten（编译为 JS 并模拟 POSIX）不同——`wasm-bindgen` 是显式、类型安全的 FFI，而非透明移植。
-> [来源: [wasm-bindgen Documentation](https://rustwasm.github.io/wasm-bindgen/)] ·
+> [来源: [wasm-bindgen Documentation](https://rustwasm.github.io/docs/wasm-bindgen/)] ·
 > [来源: [Rust Wasm Book](https://rustwasm.github.io/book/)]
 
 ### 10.3 边界测试：WASM 模块的大小限制与 `wee_alloc`（运行时错误）
@@ -818,7 +818,7 @@ fn main() {
 >
 > 这改变了 WASM 模块的编写方式：模块不再假设拥有文件系统或网络，而是通过接口声明需求，运行时注入能力。
 > 这与 Deno 的权限模型（`--allow-read`、`--allow-net`）或 Cloudflare Workers 的隔离（无文件系统，有 fetch API）类似——WASI Preview 2 将 WASM 从"沙箱中的 POSIX"推向"能力安全的组件"。
-> [来源: [WASI Preview 2](https://github.com/WebAssembly/WASI/tree/main/preview2)] ·
+> [来源: [WASI Preview 2](https://github.com/WebAssembly/WASI/tree/main/specifications/wasi-0.2.4)] ·
 > [来源: [Component Model](https://component-model.bytecodealliance.org/)]
 
 ### 10.3 边界测试：WASM 模块的线性内存与 Rust 的 Vec 增长策略（运行时 OOM）

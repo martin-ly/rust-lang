@@ -1,10 +1,9 @@
 # Rust 在 AI 与机器学习中的新兴角色
 
 > **代码状态**: ✅ 含可编译示例
-
 >
-> **EN**: Rust 在 AI 与机器学习中的新兴角色 (Chinese)
-> **Summary**: Rust 在 AI 与机器学习中的新兴角色 (Chinese). Core Rust concept covering mechanism analysis, memory safety guarantees, performance optimization.
+> **EN**: Rust In AI
+> **Summary**: Rust In AI: emerging Rust language feature or ecosystem trend.
 >
 > **受众**: [专家]
 > **内容分级**: [综述级]
@@ -16,6 +15,8 @@
 > **前置概念**: [Unsafe](../03_advanced/03_unsafe.md) · [Concurrency](../03_advanced/01_concurrency.md) · [WebAssembly](../06_ecosystem/11_webassembly.md)
 > **后置概念**: [AI Integration](./01_ai_integration.md) · [Evolution](./03_evolution.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
+> **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/) · [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 ---
 
 > **来源**: [candle [来源: [Candle](https://github.com/huggingface/candle)] (Hugging Face)](<https://github.com/huggingface/candle>) ·

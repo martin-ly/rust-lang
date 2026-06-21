@@ -5,8 +5,8 @@
 >
 # 字符串与文本：Rust 的 Unicode 处理与格式化系统
 >
-> **EN**: 字符串与文本：Rust 的 Unicode 处理与格式化系统 (Chinese)
-> **Summary**: 字符串与文本：Rust 的 Unicode 处理与格式化系统 (Chinese). Core Rust concept covering mechanism analysis, HTTP and web services.
+> **EN**: Strings and Text
+> **Summary**: Strings and Text: core Rust concepts, syntax, and examples.
 > **📎 交叉引用**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[字符串与文本](../../knowledge/02_intermediate/05_strings.md)
@@ -349,7 +349,7 @@ FFI C 接口:
 ```
 
 > **选型原则**: 默认使用 `String`/`&str`，只在需要与非 UTF-8 数据交互时使用 `OsString`/`CString`。
-> [来源: [Rust API Guidelines — Strings](https://rust-lang.github.io/api-guidelines/naming.html)]
+> [来源: [Rust API Guidelines — Strings](https://rust-lang.github.io/api-guidelines//naming.html)]
 
 ---
 
@@ -370,7 +370,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树展示字符串类型的**核心选择**。原则很简单：**只读用 &str，需要修改用 String**。
-> [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/flexibility.html#c-str)]
+> [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines//flexibility.html#c-str)]
 
 ---
 
@@ -730,7 +730,7 @@ fn main() {
 
 以下代码能否编译？如果能，输出什么？
 
-```rust
+```rust,compile_fail
 fn main() {
     let s = "你好";
     println!("{}", s[0]);
@@ -761,7 +761,7 @@ println!("{}", s.as_bytes()[0]);  // 228 — "你" 的第一个 UTF-8 字节
 
 以下代码能否编译？
 
-```rust
+```rust,compile_fail
 fn main() {
     let mut s = String::from("hello");
     let r = &s;

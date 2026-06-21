@@ -3,8 +3,8 @@
 >
 # Rust vs Ruby：性能与表达力的两极
 >
-> **EN**: Rust vs Ruby：性能与表达力的两极 (Chinese)
-> **Summary**: Rust vs Ruby：性能与表达力的两极 (Chinese). Core Rust concept covering cross-language comparison, mechanism analysis.
+> **EN**: Rust vs Ruby
+> **Summary**: Rust vs Ruby: comparative analysis with Rust across type systems, memory safety, and concurrency.
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 对比分析 **Rust** 与 **Ruby** 的设计哲学——从动态类型的极致表达力到静态类型的编译期安全，揭示两种语言在Web开发、脚本编写和系统编程中的互补定位。
@@ -351,7 +351,7 @@ Rust + Ruby 的互补模式:
 ```
 
 > **互补洞察**: **Rust 和 Ruby 不是竞争关系**——在大型系统中，它们可以协同工作，各自发挥优势。
-> [来源: [Rust in Production](https://www.rust-lang.org/production/users)]
+> [来源: [Rust in Production](https://www.rust-lang.org/)]
 
 ---
 

@@ -3,12 +3,14 @@
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 
+>
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 # Rust 知识体系双维认知矩阵（Krathwohl × Bloom）
 >
-> **EN**: Rust 知识体系双维认知矩阵（Krathwohl × Bloom） (Chinese)
-> **Summary**: Rust 知识体系双维认知矩阵. Core Rust concept covering mechanism analysis.
+> **EN**: Cognitive Dimension Matrix
+> **Summary**: Cognitive Dimension Matrix. Core Rust concept.
 > **受众**: [研究者]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **Bloom 层级**: 元（Meta）

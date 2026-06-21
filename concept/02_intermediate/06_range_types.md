@@ -4,8 +4,8 @@
 >
 # Rust 范围类型语义：`std::ops::Range` → `core::range`
 >
-> **EN**: Rust 范围类型语义：`std::ops::Range` → `core::range` (Chinese)
-> **Summary**: Rust 范围类型语义：`std::ops::Range` → `core::range` (Chinese). Core Rust concept covering cross-language comparison.
+> **EN**: Range Types
+> **Summary**: Range Types: intermediate Rust mechanisms, patterns, and practical examples.
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 理解 → 分析

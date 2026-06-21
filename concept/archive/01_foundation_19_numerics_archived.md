@@ -1,3 +1,5 @@
+> **EN**: Foundation 19 Numerics Archived
+> **Summary**: Foundation 19 Numerics Archived. Core Rust concept.
 > **内容分级**: [综述级]
 > **受众**: [初学者]
 > **Bloom 层级**: 理解
@@ -13,14 +15,7 @@
 
 > **前置概念**: [Numeric Types](../01_foundation/11_numeric_types.md)
 
-## 相关概念文件
-
-- [数值类型主文件](./10_numerics.md) — 数值类型与运算完整图景（本文件已归档）
-- [类型系统](./04_type_system.md) — 类型系统基础
-- [零成本抽象](./06_zero_cost_abstractions.md) — 抽象与性能
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
-> **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+> **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
 
 ## 认知路径
 

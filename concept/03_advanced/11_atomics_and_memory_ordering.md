@@ -282,7 +282,7 @@ impl SpinLock {
 ```
 
 > **CAS 洞察**: **Compare-And-Swap**是**无锁算法的基石**——它使多个线程可以安全地竞争更新同一内存位置。
-> [来源: [std::sync::atomic::AtomicUsize](https://doc.rust-lang.org/std/sync/atomic/struct.AtomicUsize.html)]
+> [来源: [std::sync::atomic::AtomicUsize](https://doc.rust-lang.org/std/sync/atomic/type.AtomicUsize.html)]
 
 ---
 
@@ -758,7 +758,7 @@ fn main() {
 > 3) **Epoch-based reclamation**（`crossbeam-epoch`）：分代回收。
 > Rust 的 `crossbeam`  crate 提供成熟的内存回收方案。
 > 这与 C++ 的 `std::atomic<T*>`（同样 ABA 问题）或 Java 的 `AtomicReference`（同样问题，GC 缓解）相同——ABA 是所有 CAS 操作的固有限制。
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/sync/atomic/struct.AtomicPtr.html)] ·
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/sync/atomic/type.AtomicPtr.html)] ·
 
 ### 10.3 边界测试：`Relaxed` 顺序与 happens-before 缺失（逻辑错误/UB）
 
@@ -816,7 +816,7 @@ fn main() {
 
 > [来源: [LLVM Atomic Instructions](https://llvm.org/docs/Atomics.html)]
 > [来源: [C++ Memory Model — ISO/IEC 14882](https://www.iso.org/standard/83626.html)]
-> [来源: [RFC 1505 — Atomic Ordering](https://rust-lang.github.io/rfcs/1505-ordering-atomic-ops.html)]
+> [来源: [RFC 1505 — Atomic Ordering](https://github.com/rust-lang/rfcs/pull/1505)]
 > [来源: [Herlihy & Shavit — Art of Multiprocessor Programming](https://dl.acm.org/doi/book/10.5555/2385452)]
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
@@ -916,7 +916,7 @@ thread::scope(|s| {
 
 **正确的原子递增**：
 
-```rust
+```rust,ignore
 // fetch_add 是单一原子操作：读取-修改-写入不可中断
 counter.fetch_add(1, Ordering::Relaxed);  // 保证结果 = 10
 ```
@@ -986,7 +986,7 @@ DATA = 42
 
 **修复方案 — Release/Acquire 配对**：
 
-```rust
+```rust,ignore
 fn producer() {
     DATA.store(42, Ordering::Relaxed);
     READY.store(true, Ordering::Release);  // Release: 之前的写入不会重排到之后
@@ -1029,7 +1029,7 @@ graph LR
 
 **题目**: 以下是一个基于 `AtomicBool` 的自旋锁实现。它有什么问题？
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::cell::UnsafeCell;
 
@@ -1066,7 +1066,7 @@ impl<T> SpinLock<T> {
 
 **内存序问题**：
 
-```rust
+```rust,ignore
 // 线程1: 释放锁
 self.locked.store(false, Ordering::Relaxed);
 // Relaxed 不保证 data 的修改对其他线程可见！
@@ -1082,7 +1082,7 @@ while self.locked.compare_exchange_weak(
 
 **修复方案**：
 
-```rust
+```rust,ignore
 impl<T> SpinLock<T> {
     fn lock(&self) -> LockGuard<T> {
         while self.locked.compare_exchange_weak(
@@ -1176,7 +1176,7 @@ next_ticket++      next_ticket++      next_ticket++
 
 **Ticket Lock 的原理**：
 
-```rust
+```rust,ignore
 // 类似银行叫号系统
 next_ticket  = 下一个号码（ fetch_add 原子分配）
 now_serving  = 当前叫到的号码

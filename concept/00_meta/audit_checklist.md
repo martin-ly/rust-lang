@@ -1,13 +1,15 @@
 # 概念一致性检查清单（Concept Consistency Audit Checklist）
 >
-> **EN**: 概念一致性检查清单（Concept Consistency Audit Checklist） (Chinese)
-> **Summary**: 概念一致性检查清单. Quality assurance checklist for maintaining knowledge base consistency.
+> **EN**: Audit Checklist
+> **Summary**: Audit Checklist. Core Rust concept.
 > **受众**: [专家]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **Bloom 层级**: 应用
 > **定位**: 本文件定义 `concept/` 知识体系的**质量门禁**，用于定期审计概念文件的一致性、完备性和关系清晰度。
 > **使用方法**: 每轮内容更新后，逐条检查并标记状态。
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 > **来源**: [Rust Reference] · [Rust Internals] · [concept/知识体系规范]

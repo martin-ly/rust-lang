@@ -1,6 +1,6 @@
 # Rust Semantic Expressiveness: A Panoramic Survey（Rust 语义表达力全景梳理）
 >
-> **EN**: Rust Semantic Expressiveness: A Panoramic Survey（Rust 语义表达力全景梳理） (Chinese)
+> **EN**: Semantic Expressiveness
 > **Summary**: Rust Semantic Expressiveness: A Panoramic Survey. Guide to Semantic Expressiveness.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -10,6 +10,8 @@
 > **对齐来源**: [Rust Reference] · [Rust RFCs] · [Rust Internals Forum] · [RustBelt/Oxide] · [KRust]
 > **对比语言**: Rust · C++ · Go · Haskell
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 > **Bloom 层级**: 分析 → 评价 → 创造
@@ -239,7 +241,7 @@ Rust 的常量求值器（const evaluator）是 MIR 解释器的一个子集，*
 |:---|:---:|:---:|:---|
 | 整数/布尔/字符运算 | ✅ | ✅ | 基础计算，无副作用 |
 | `match` / `if` | ✅ | ✅ | 结构化控制流 |
-| `loop` / `while` | ✅ | ✅ | [RFC 2344](https://rust-lang.github.io/rfcs/2344.html) 允许循环常量求值 |
+| `loop` / `while` | ✅ | ✅ | [RFC 2344](https://rust-lang.github.io/rfcs//2344-const-looping.html) 允许循环常量求值 |
 | `const fn` 调用 | ✅ | ✅ | 纯函数组合 |
 | 堆分配 (`Box`, `Vec`) | ❌ | ✅ | 编译期无运行时内存管理器 |
 | 浮点运算 (`f32`/`f64`) | ⚠️ 有限 | ✅ | IEEE 754 在交叉编译时不稳定 |

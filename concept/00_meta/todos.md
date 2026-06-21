@@ -1,7 +1,7 @@
 # 全局待办清单（Global TODO Tracker）
 >
-> **EN**: 全局待办清单（Global TODO Tracker） (Chinese)
-> **Summary**: 全局待办清单. Global task tracking and content development roadmap.
+> **EN**: Todos
+> **Summary**: Todos. Core Rust concept.
 >
 > **受众**: [专家]
 >
@@ -12,6 +12,8 @@
 > **版本状态**：v1.2 正式发布 —— 257/257 TODO 全部完成，232/232 代码块编译验证 100% 通过
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
+>
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 ## 📑 目录

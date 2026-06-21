@@ -1,7 +1,7 @@
 # Rust 知识体系失效分析树集（Fault Tree Analysis Collection）
 >
-> **EN**: Rust 知识体系失效分析树集（Fault Tree Analysis Collection） (Chinese)
-> **Summary**: Rust 知识体系失效分析树集. Core Rust concept covering mechanism analysis, security practices.
+> **EN**: Fault Tree Analysis Collection
+> **Summary**: Fault Tree Analysis Collection. Core Rust concept.
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **受众**: [专家]
@@ -17,6 +17,8 @@
 > [MIRI 未定义行为检测]
 > **符号约定**: ⬡ 顶事件 / ◇ 中间事件 / ○ 基本事件 / ∧ 与门 / ∨ 或门
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 > **来源**: [IEC 61025 — *Fault Tree Analysis*]
@@ -431,7 +433,7 @@ graph TD
 **⬡ 顶事件：Rust 异步程序发生运行时安全违规（Pin 契约违反 / 自引用悬垂 / Future 状态损坏）**
 
 > **定义**: async 程序在运行时出现由于 Pin 不动性被破坏、跨 await 引用悬垂、或 Future 状态机被非法移动导致的安全问题。
-> [来源: Rust Reference — Pin; [RFC 2349](https://rust-lang.github.io/rfcs/2349.html) — Pin]
+> [来源: Rust Reference — Pin; [RFC 2349](https://rust-lang.github.io/rfcs//2349-pin.html) — Pin]
 
 ### 5.2 故障树 Mermaid
 

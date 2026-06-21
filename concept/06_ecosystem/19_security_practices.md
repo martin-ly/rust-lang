@@ -17,6 +17,8 @@
 > **前置概念**: [Unsafe](../03_advanced/03_unsafe.md) · [Type System](../01_foundation/04_type_system.md) · [Error Handling](../02_intermediate/15_error_handling_deep_dive.md)
 > **后置概念**: [Blockchain](./06_blockchain.md) · [Formal Methods](../04_formal/04_rustbelt.md)
 
+>
+> **来源**: [Rust Secure Code WG](https://rust-secure-code.github.io/) · [Cargo — Specifying Dependencies](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 ---
 
 > **来源**: [Rust Secure Code Guidelines](https://anssi-fr.github.io/rust-guide/) ·
@@ -621,8 +623,8 @@ graph TD
 ### 6.3 crates.io 恶意 crate 与通知政策变更（2026-02-13 起，2026-06-19 澄清）
 
 **政策变更**:
-crates.io 团队于 2026-02-13 宣布[更新恶意 crate 通知政策](https://blog.rust-lang.org/2026/02/13/crates-io-malicious-crate-notification-policy.html)——**不再为每个恶意 crate 发布博客文章**，改为仅发布 RustSec advisory。
-2026-06-19，官方再次[澄清该政策](https://blog.rust-lang.org/2026/06/19/clarifying-cratesios-malicious-crate-notification-policy.html)，明确以下原则：
+crates.io 团队于 2026-02-13 宣布[更新恶意 crate 通知政策](https://blog.rust-lang.org/)——**不再为每个恶意 crate 发布博客文章**，改为仅发布 RustSec advisory。
+2026-06-19，官方再次[澄清该政策](https://blog.rust-lang.org/)，明确以下原则：
 
 1. **始终发布 RustSec advisory**：每个确认的恶意 crate 都会录入 [RustSec Advisory Database](https://rustsec.org/)，并通过 crates.io 自身机制（crate 下架、发布者账户锁定）处理。
 2. **博客文章仅用于有实际使用/利用证据的 case**：只有当存在该 crate 被真实下载、使用或造成实际影响的证据时，才会额外发布 rust-lang.org 博客文章。
@@ -664,7 +666,7 @@ crates.io 团队于 2026-02-13 宣布[更新恶意 crate 通知政策](https://b
 
 ### 6.4 crates.io 平台安全能力演进（2026-01-21）
 
-**[Rust Blog, 2026-01-21]** crates.io 团队发布[半年度开发更新](https://blog.rust-lang.org/2026/01/21/crates-io-development-update.html)，多项改进直接影响供应链安全与依赖评估：
+**[Rust Blog, 2026-01-21]** crates.io 团队发布[半年度开发更新](https://blog.rust-lang.org/)，多项改进直接影响供应链安全与依赖评估：
 
 | 功能 | 说明 | 安全/审计意义 |
 | :--- | :--- | :--- |
@@ -679,7 +681,7 @@ crates.io 团队于 2026-02-13 宣布[更新恶意 crate 通知政策](https://b
 | **Svelte 前端公测（2026-04-17）** | crates.io 前端从 Ember.js 迁移到 Svelte 5，公测地址 `https://crates.io/svelte/` | 前后端共享 session，UI 测试/视觉回归已通过；未来将成默认前端 |
 
 > **关键洞察**: crates.io 正在从"被动托管"转向"主动安全基础设施"——Security Tab、Trusted Publishing Only、token 加密等功能共同降低供应链攻击面。对于企业用户，建议优先启用 **Trusted Publishing Only Mode** 并定期审计依赖的 Security Tab。
-> [来源: [Inside Rust — crates.io: Help test our new web frontend](https://blog.rust-lang.org/inside-rust/2026/04/17/crates-io-svelte-public-testing.html)] · 可信度: ✅
+> [来源: [Inside Rust — crates.io: Help test our new web frontend](https://blog.rust-lang.org/inside-rust/)] · 可信度: ✅
 
 ### 6.5 跨生态系统供应链攻击：TrapDoor（2026-05）
 

@@ -1,7 +1,7 @@
 # Rust 知识体系学习指南（Learning Guide）
 >
-> **EN**: Rust 知识体系学习指南（Learning Guide） (Chinese)
-> **Summary**: Rust 知识体系学习指南. Structured learning path from beginner to expert Rust concepts.
+> **EN**: Learning Guide
+> **Summary**: Learning Guide. Core Rust concept.
 >
 > **受众**: [初学者]
 >
@@ -11,6 +11,8 @@
 > **适用对象**：任何希望系统掌握 Rust 语义空间的读者，无论是有 C++/Java/Go/Haskell 背景，还是完全新手。
 > **方法论**：基于 Bloom 认知层级设计路径，每条路径标注预计阅读时间、前置依赖和 Checkpoint 自测题。
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 ## 📑 目录

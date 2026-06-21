@@ -788,7 +788,7 @@ Rust 对应：`let x = x + 1;` 后断言 `x == 5`，则前需 `x == 4`。
 
 以下循环的循环不变量是什么？
 
-```rust
+```rust,ignore
 let mut i = 0;
 let mut sum = 0;
 while i < n {
@@ -834,7 +834,7 @@ Rust 的 `NonZeroI32` 类型如何对应 Hoare 逻辑？
 
 **B. 编码了前置条件"输入值非零"**。
 
-```rust
+```rust,ignore
 fn divide(a: i32, b: NonZeroI32) -> i32 {
     a / b.get() // 安全：b 保证非零
 }

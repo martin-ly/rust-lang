@@ -16,6 +16,8 @@
 > **前置依赖**: [泛型](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md) · [生命周期](../01_foundation/03_lifetimes.md) · [设计模式](./02_patterns.md)
 > **后置延伸**: [CQRS & Event Sourcing](./33_cqrs_event_sourcing.md) · [微服务架构模式](./31_microservice_patterns.md) · [事件驱动架构](./32_event_driven_architecture.md)
 
+>
+> **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 ---
 
 > **来源**: [Hexagonal Architecture — Alistair Cockburn](https://alistair.cockburn.us/hexagonal-architecture/) ·
@@ -1096,7 +1098,7 @@ async fn risky_handler(event: LambdaEvent<OrderRequest>) -> Result<Value, Error>
 > 3. **异步事件触发**: 使用 DynamoDB Streams 触发 Lambda，而非在函数内直接发消息
 >
 > ```rust
-> // ✅ 正确: 使用 DynamoDB Streams 解耦写入和事件发布
+> / ✅ 正确: 使用 DynamoDB Streams 解耦写入和事件发布
 > // DynamoDB Stream → Lambda（事件处理器）→ SQS
 > // 这样即使初始 Lambda 超时，DynamoDB Streams 仍能保证事件最终传递
 > ```

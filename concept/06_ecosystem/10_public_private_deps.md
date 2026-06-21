@@ -1,3 +1,9 @@
+# Public/Private Dependencies
+
+> **EN**: Public/Private Dependencies
+> **Summary**: Controlling dependency visibility with `public = true`/`false` to prevent API leakage.
+> **来源**: [Cargo Book — Dependencies](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html) · [Cargo Book — Features](https://doc.rust-lang.org/cargo/reference/features.html)
+
 ## 代码示例：Public/Private Dependencies 配置
 
 > **代码状态**: [综述级 — 待补充代码]
@@ -12,8 +18,6 @@ edition = "2024"
 
 [dependencies]
 # public = true: 下游 crate 可通过本 crate 的公共 API 使用 serde
-> **EN**: public = true: 下游 crate 可通过本 crate 的公共 API 使用 serde (Chinese)
-> **Summary**: 以下 `Cargo.toml` 演示如何显式控制依赖可见性，避免"依赖泄漏"： ```toml [package] name = "my-api" version = "0.1.0" edition = "2024" [dependencies] serde = { version = "1.0", features = ["derive"], public = true } thiserror = "2.0" [features] default = [] std = ["serde/std"] ``` compiler可见性规则效果： ```rust,ignore // 下游 crate 使用 my
 serde = { version = "1.0", features = ["derive"], public = true }
 
 # public = false (默认): 仅限内部使用，不暴露给下游
@@ -54,7 +58,7 @@ let _ = serde_json::to_string(&s);
 > 来源: [RFC 3516 — Public & Private Dependencies](https://github.com/rust-lang/rfcs/pull/3516) ·
 > [Cargo Book — SemVer Compatibility](https://doc.rust-lang.org/cargo/reference/semver.html) ·
 > [rust-lang/cargo#9094](https://github.com/rust-lang/cargo/issues/9094) ·
-> [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)
+> [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)
 
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
 
@@ -64,6 +68,8 @@ let _ = serde_json::to_string(&s);
 
 ## 📑 目录
 
+- [Public/Private Dependencies](#publicprivate-dependencies)
+  - [代码示例：Public/Private Dependencies 配置](#代码示例publicprivate-dependencies-配置)
 - [Public/Private Dependencies：可见性控制的工程化](#publicprivate-dependencies可见性控制的工程化)
   - [📑 目录](#-目录)
   - [〇、依赖可见性控制全景](#〇依赖可见性控制全景)
@@ -191,7 +197,7 @@ let x = B::SomeType::new();  // 能编译，因为 A 泄漏了 B
 ## 二、核心机制
 >
 
-[RFC 3516](https://rust-lang.github.io/rfcs/3516.html) 引入 `public = true/false` 字段，显式标记依赖的**可见性契约**。该特性已被纳入 Rust 2026 Project Goals，但当前标记为 **Help Wanted** — 需要社区贡献者推动 MVP 实现和稳定化。
+[RFC 3516](https://rust-lang.github.io/rfcs//3516-public-private-dependencies.html) 引入 `public = true/false` 字段，显式标记依赖的**可见性契约**。该特性已被纳入 Rust 2026 Project Goals，但当前标记为 **Help Wanted** — 需要社区贡献者推动 MVP 实现和稳定化。
 
 ```toml
 [dependencies]
@@ -295,7 +301,7 @@ flowchart TD
     style Newtype fill:#ffe0b2
 ```
 
-> **认知功能**: 此决策树将 [RFC 3516](https://rust-lang.github.io/rfcs/3516.html) 的工程实践转化为**可操作的检查清单**。核心原则：**默认私有（principle of least exposure）**，只有类型确实出现在公共 API 中才标记为 public。关键分支点是"未来可能替换实现"——如果答案是"是"，则优先使用 newtype 模式封装，保持依赖隔离的同时提供公共接口。 [来源: [Cargo Book](https://doc.rust-lang.org/cargo/)]
+> **认知功能**: 此决策树将 [RFC 3516](https://rust-lang.github.io/rfcs//3516-public-private-dependencies.html) 的工程实践转化为**可操作的检查清单**。核心原则：**默认私有（principle of least exposure）**，只有类型确实出现在公共 API 中才标记为 public。关键分支点是"未来可能替换实现"——如果答案是"是"，则优先使用 newtype 模式封装，保持依赖隔离的同时提供公共接口。 [来源: [Cargo Book](https://doc.rust-lang.org/cargo/)]
 
 ### 4.2 默认策略
 >
@@ -500,7 +506,7 @@ impl Serializable for MyData {
 // serde = "2.0" // ❌ 编译错误: serde 版本冲突，因为 A 公开暴露了 serde 类型
 ```
 
-> **修正**: Cargo 的 **public dependency**（`public = true`，[RFC 3516](https://rust-lang.github.io/rfcs/3516.html)）标记依赖为 crate API 的一部分：若 crate A 公开返回 `serde::Serialize` 类型，则 serde 是 A 的 public dependency。下游 crate B 若同时依赖不同版本的 serde，编译失败——同一 crate 不能有两个版本出现在公共 API 中。这与私有依赖（`public = false` 或默认）不同：私有依赖的内部使用不传播到下游。设计影响：1) 库作者需谨慎标记 public dependency；2) 频繁出现在 API 中的 crate（`serde`、`tokio`）应保持稳定版本；3) 用 `#[doc(hidden)]` 或新类型模式（newtype）封装，避免暴露外部类型。这与 npm 的 peer dependencies（类似概念）或 Maven 的 optional dependencies（不同语义）不同——Rust 的 public dependency 在编译期强制执行 API 兼容性。[来源: [RFC 3516 — Public & Private Dependencies](https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html)] · [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/reference/features.html)]
+> **修正**: Cargo 的 **public dependency**（`public = true`，[RFC 3516](https://rust-lang.github.io/rfcs//3516-public-private-dependencies.html)）标记依赖为 crate API 的一部分：若 crate A 公开返回 `serde::Serialize` 类型，则 serde 是 A 的 public dependency。下游 crate B 若同时依赖不同版本的 serde，编译失败——同一 crate 不能有两个版本出现在公共 API 中。这与私有依赖（`public = false` 或默认）不同：私有依赖的内部使用不传播到下游。设计影响：1) 库作者需谨慎标记 public dependency；2) 频繁出现在 API 中的 crate（`serde`、`tokio`）应保持稳定版本；3) 用 `#[doc(hidden)]` 或新类型模式（newtype）封装，避免暴露外部类型。这与 npm 的 peer dependencies（类似概念）或 Maven 的 optional dependencies（不同语义）不同——Rust 的 public dependency 在编译期强制执行 API 兼容性。[来源: [RFC 3516 — Public & Private Dependencies](https://rust-lang.github.io/rfcs//3516-public-private-dependencies.html)] · [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/reference/features.html)]
 
 ### 10.3 边界测试：public dependency 的 semver 不兼容传播（编译中断）
 
@@ -537,7 +543,7 @@ fn main() {
 }
 ```
 
-> **修正**: `public = true` 的依赖成为 crate API 的**类型签名一部分**。若 crate A 公开返回 `serde_json::Value`，下游 crate B 若同时依赖不同版本的 serde，编译失败——同一 trait 的两个版本视为不同类型。 Cargo 的依赖解析：1) 尽量统一版本（语义版本兼容时）；2) 不兼容版本在依赖图中可共存（视为不同 crate）；3) 但 public dependency 要求 API 中只有一个版本。企业级策略：1) 核心库（serde、tokio）保持长期稳定版本；2) 用 newtype 封装外部类型（`struct MyValue(serde_json::Value)`）；3) `cargo-deny` 自动检测 public dependency 冲突。这与 npm 的 peer dependencies（运行时检查）或 Python 的依赖解析（pip 的宽松策略）不同——Rust 在编译期强制执行 public dependency 的一致性。[来源: [RFC 3516](https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html)] · [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/reference/features.html)]
+> **修正**: `public = true` 的依赖成为 crate API 的**类型签名一部分**。若 crate A 公开返回 `serde_json::Value`，下游 crate B 若同时依赖不同版本的 serde，编译失败——同一 trait 的两个版本视为不同类型。 Cargo 的依赖解析：1) 尽量统一版本（语义版本兼容时）；2) 不兼容版本在依赖图中可共存（视为不同 crate）；3) 但 public dependency 要求 API 中只有一个版本。企业级策略：1) 核心库（serde、tokio）保持长期稳定版本；2) 用 newtype 封装外部类型（`struct MyValue(serde_json::Value)`）；3) `cargo-deny` 自动检测 public dependency 冲突。这与 npm 的 peer dependencies（运行时检查）或 Python 的依赖解析（pip 的宽松策略）不同——Rust 在编译期强制执行 public dependency 的一致性。[来源: [RFC 3516](https://rust-lang.github.io/rfcs//3516-public-private-dependencies.html)] · [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/reference/features.html)]
 > **过渡**: Public/Private Dependencies：可见性控制的工程化 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Public/Private Dependencies：可见性控制的工程化 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Public/Private Dependencies：可见性控制的工程化 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

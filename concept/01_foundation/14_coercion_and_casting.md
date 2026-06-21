@@ -3,8 +3,8 @@
 >
 # 类型强制与转换：显式与隐式的边界
 >
-> **EN**: 类型强制与转换：显式与隐式的边界 (Chinese)
-> **Summary**: 类型强制与转换：显式与隐式的边界 (Chinese). Core Rust concept covering security practices.
+> **EN**: Coercion and Casting
+> **Summary**: Coercion and Casting: core Rust concepts, syntax, and examples.
 > **受众**: [初学者]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **S** — Structure
@@ -18,7 +18,7 @@
 > **来源**: [Rust Reference — Type Coercions](https://doc.rust-lang.org/reference/type-coercions.html) ·
 > [Rust Reference — Cast Expressions](https://doc.rust-lang.org/reference/expressions/operator-expr.html#cast-expressions) ·
 > [TRPL — Data Types](https://doc.rust-lang.org/book/ch03-02-data-types.html) ·
-> [RFC 0401 — Coercions](https://rust-lang.github.io/rfcs/0401-coercions.html) ·
+> [RFC 0401 — Coercions](https://rust-lang.github.io/rfcs//0401-coercions.html) ·
 > [Wikipedia — Type Conversion](https://en.wikipedia.org/wiki/Type_conversion)
 
 ## 📑 目录
@@ -366,7 +366,7 @@ let ptr = &aligned as *const Aligned as *const u8;
 ```
 
 > **模式矩阵**: Rust 的**类型转换分层**——安全转换用 Into，可能失败用 TryInto，位操作用 as，指针用 unsafe。
-> [来源: [Rust API Guidelines — Conversions](https://rust-lang.github.io/api-guidelines/naming.html#ad-hoc-conversions-follow-as_-to_-into_-conventions-c-conv)]
+> [来源: [Rust API Guidelines — Conversions](https://rust-lang.github.io/api-guidelines//naming.html#ad-hoc-conversions-follow-as_-to_-into_-conventions-c-conv)]
 
 ---
 
@@ -390,7 +390,7 @@ graph TD
 ```
 
 > **认知功能**: **as 是最后手段**——优先使用类型系统保证安全的转换方式。
-> [来源: [Rust Clippy — Casting Lints](https://rust-lang.github.io/rust-clippy/master/index.html#/cast)]
+> [来源: [Rust Clippy — Casting Lints](https://rust-lang.github.io/rust-clippy//master/index.html#/cast)]
 
 ---
 
@@ -484,8 +484,8 @@ graph TD
 | [Rust Reference — Type Coercions](https://doc.rust-lang.org/reference/type-coercions.html) | ✅ 一级 | 强制参考 |
 | [Rust Reference — Cast Expressions](https://doc.rust-lang.org/reference/expressions/operator-expr.html#cast-expressions) | ✅ 一级 | 转换参考 |
 | [std::convert](https://doc.rust-lang.org/std/convert/index.html) | ✅ 一级 | 转换 trait |
-| [RFC 0401 — Coercions](https://rust-lang.github.io/rfcs/0401-coercions.html) | ✅ 一级 | 强制设计 |
-| [Rust Clippy — Casts](https://rust-lang.github.io/rust-clippy/master/index.html#/cast) | ✅ 一级 | Lint 规则 |
+| [RFC 0401 — Coercions](https://rust-lang.github.io/rfcs//0401-coercions.html) | ✅ 一级 | 强制设计 |
+| [Rust Clippy — Casts](https://rust-lang.github.io/rust-clippy//master/index.html#/cast) | ✅ 一级 | Lint 规则 |
 
 ---
 
@@ -634,7 +634,7 @@ fn upcast(b: &dyn B) -> &dyn A {
 > 旧版 workaround：1) 在 trait 中定义 `as_a(&self) -> &dyn A` 方法；2) 使用泛型而非 trait object；3) 使用 `downcast_ref`（若具体类型已知）。
 > 这与 Java 的接口向上转型（自动，无开销）或 C++ 的多继承（复杂 vtable 调整）不同——Rust 的单一继承 trait + 自动 upcasting 是设计演进的方向。
 > [来源: [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html)] ·
-> [来源: [Trait Upcasting RFC](https://rust-lang.github.io/rfcs/3324-dyn-upcasting.html)]
+> [来源: [Trait Upcasting RFC](https://rust-lang.github.io/rfcs//3324-dyn-upcasting.html)]
 
 ### 10.5 边界测试：强制类型转换与 `Deref` 的自动解引用（编译错误）
 
@@ -671,7 +671,7 @@ fn main() {
 > `Deref` 的设计目的：让自定义类型像智能指针一样行为（`Box<T>`、`Rc<T>`、`Arc<T>`）。
 > 这与 C++ 的隐式转换运算符（`operator T()`，可作用于值移动）或 Swift 的 `ExpressibleByStringLiteral` 不同——Rust 的 `Deref` 是受限的自动解引用，滥用会导致设计问题。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-02-deref.html)] ·
-> [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/predictability.html)]
+> [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines//predictability.html)]
 
 ### 10.6 边界测试：函数指针到闭包的类型不兼容（编译错误）
 

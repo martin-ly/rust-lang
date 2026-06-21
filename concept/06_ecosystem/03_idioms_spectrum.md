@@ -3,8 +3,8 @@
 > **代码状态**: ✅ 含可编译示例
 
 >
-> **EN**: Rust 惯用法谱系全景（Idioms Spectrum） (Chinese)
-> **Summary**: Rust 惯用法谱系全景. Core Rust concept covering design patterns.
+> **EN**: Idioms Spectrum
+> **Summary**: Idioms Spectrum: Rust ecosystem tools, crates, and engineering practices.
 > **受众**: [进阶]
 > **内容分级**: [专家级]
 > **定位**: 本文件从**纵向抽象层级**梳理 Rust 的惯用法（idioms）——从词法糖到架构模式的高效、等效、简洁表达方式，与 `02_patterns.md` 的设计模式形成互补：后者聚焦「设计模式」（面向问题），本文件聚焦「惯用法」（面向表达）。
@@ -12,6 +12,8 @@
 > **对齐来源**: [Rust API Guidelines] · [Rust Design Patterns] · [Rust Style Guide] · [Clippy Lints] · [TRPL 惯用章节]
 > **基准版本**: Rust 1.96.0 stable (Edition 2024)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
+> **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 > **Bloom 层级**: 应用 → 分析 → 评价
@@ -1158,7 +1160,7 @@ quadrantChart
 
 ---
 
-> **权威来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/idioms/) · [Rust Style Guide](https://doc.rust-lang.org/style-guide/) · [Clippy Lints](https://rust-lang.github.io/rust-clippy/master/index.html) · [TRPL §13](https://doc.rust-lang.org/book/ch13-00-functional-features.html)
+> **权威来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/idioms/) · [Rust Style Guide](https://doc.rust-lang.org/style-guide/) · [Clippy Lints](https://rust-lang.github.io/rust-clippy//master/index.html) · [TRPL §13](https://doc.rust-lang.org/book/ch13-00-functional-features.html)
 >
 > **Rust 版本**: 1.96.0 stable (Edition 2024)
 > **文档版本**: 1.1
@@ -1251,7 +1253,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: `ref` 绑定模式在模式匹配中创建引用，但在 `match s { ref t => ... }` 中，`s` 仍被按值匹配（转移所有权），而 `t` 是对被转移值的引用。这在逻辑上正确但语义令人困惑。惯用写法是 `match &s { t => ... }`——直接对引用进行匹配，清晰表达意图。Clippy lint `match_ref_pats` 建议将 `match x { ref y => ... }` 改写为 `match &x { y => ... }`。这是 Rust"显式优于隐式"原则的体现：让引用的创建位置一目了然。[来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)] · [来源: [Clippy Lints](https://rust-lang.github.io/rust-clippy/master/index.html)]
+> **修正**: `ref` 绑定模式在模式匹配中创建引用，但在 `match s { ref t => ... }` 中，`s` 仍被按值匹配（转移所有权），而 `t` 是对被转移值的引用。这在逻辑上正确但语义令人困惑。惯用写法是 `match &s { t => ... }`——直接对引用进行匹配，清晰表达意图。Clippy lint `match_ref_pats` 建议将 `match x { ref y => ... }` 改写为 `match &x { y => ... }`。这是 Rust"显式优于隐式"原则的体现：让引用的创建位置一目了然。[来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)] · [来源: [Clippy Lints](https://rust-lang.github.io/rust-clippy//master/index.html)]
 
 ### 10.4 边界测试：`String` 与 `&str` 的类型不匹配（编译错误）
 
@@ -1328,7 +1330,7 @@ fn main() {
 }
 ```
 
-> **修正**: `#[derive(Default)]` 为所有字段调用 `Default::default()`，可能产生**语义无效**的默认值。`u16::default() = 0`，`String::default() = ""`。修复：1) **手动实现** `Default`：`impl Default for Config { fn default() -> Self { Self { port: 8080, host: "localhost".to_string() } } }`；2) **builder 模式**：强制显式设置关键字段；3) **`#[serde(default = "default_port")]`**：自定义反序列化默认值。`Default` 的设计目的：类型系统的"空值"概念，用于泛型代码（`Vec::resize_with`、`Option::unwrap_or_default`）。这与 C++ 的默认构造函数（类似，但可能执行复杂逻辑）或 Java 的 `null`（无默认值概念）不同——Rust 的 `Default` 是纯函数，无副作用，语义简单。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/default/trait.Default.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/interoperability.html#c-common-traits)]
+> **修正**: `#[derive(Default)]` 为所有字段调用 `Default::default()`，可能产生**语义无效**的默认值。`u16::default() = 0`，`String::default() = ""`。修复：1) **手动实现** `Default`：`impl Default for Config { fn default() -> Self { Self { port: 8080, host: "localhost".to_string() } } }`；2) **builder 模式**：强制显式设置关键字段；3) **`#[serde(default = "default_port")]`**：自定义反序列化默认值。`Default` 的设计目的：类型系统的"空值"概念，用于泛型代码（`Vec::resize_with`、`Option::unwrap_or_default`）。这与 C++ 的默认构造函数（类似，但可能执行复杂逻辑）或 Java 的 `null`（无默认值概念）不同——Rust 的 `Default` 是纯函数，无副作用，语义简单。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/default/trait.Default.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines//interoperability.html#c-common-traits)]
 > **过渡**: Rust 惯用法谱系全景（Idioms Spectrum） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Rust 惯用法谱系全景（Idioms Spectrum） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Rust 惯用法谱系全景（Idioms Spectrum） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

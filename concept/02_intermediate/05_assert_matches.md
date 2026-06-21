@@ -4,8 +4,8 @@
 >
 # `assert_matches!`：模式匹配断言的形式化语义
 >
-> **EN**: Formal Methods
-> **Summary**: Formal Methods. Core Rust concept covering testing strategies, mechanism analysis, design patterns.
+> **EN**: assert_matches! Macro
+> **Summary**: The `assert_matches!` macro for pattern-based assertions on enums and trait objects.
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A** — Application
@@ -17,7 +17,7 @@
 ---
 
 > **来源**: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html) ·
-> [Rust 1.96 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) · [releases.rs 1.96.0](https://releases.rs/docs/1.96.0/) · [std::assert_matches](https://doc.rust-lang.org/std/assert_matches/macro.assert_matches.html) ·
+> [Rust 1.96 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) · [releases.rs 1.96.0](https://releases.rs/docs/1.96.0/) · [std::assert_matches](https://doc.rust-lang.org/std/macro.assert_matches.html) ·
 > [RFC 2005 — `matches!`](https://github.com/rust-lang/rfcs/pull/2005) ·
 > [std::matches](https://doc.rust-lang.org/std/macro.matches.html)
 
@@ -132,7 +132,7 @@ assert_matches!(nested, Ok(Some(n)) if n > 0);
 > 5. 支持 guard 条件：`assert_matches!(e, p if guard)`
 >
 > **注意**: 绑定不可导出到宏外部。如需提取值并后续使用，请使用 `if let`。
-> [来源: [std::assert_matches](https://doc.rust-lang.org/std/assert_matches/macro.assert_matches.html)]
+> [来源: [std::assert_matches](https://doc.rust-lang.org/std/macro.assert_matches.html)]
 
 **与 `assert!(matches!(...))` 的对比**:
 
@@ -397,7 +397,7 @@ let x = 42;
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
 | [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/) | ✅ 一级 | 稳定化公告 |
-| [std::assert_matches](https://doc.rust-lang.org/std/assert_matches/macro.assert_matches.html) | ✅ 一级 | API 文档 |
+| [std::assert_matches](https://doc.rust-lang.org/std/macro.assert_matches.html) | ✅ 一级 | API 文档 |
 | [std::matches](https://doc.rust-lang.org/std/macro.matches.html) | ✅ 一级 | `matches!` 宏文档 |
 | [RFC 2005 — `matches!`](https://github.com/rust-lang/rfcs/pull/2005) | ✅ 一级 | 设计动机与语义 |
 | [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html) | ✅ 一级 | 模式匹配权威规范 |
@@ -443,7 +443,7 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [std::assert_matches](https://doc.rust-lang.org/std/assert_matches/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [std::assert_matches](https://doc.rust-lang.org/std/macro.assert_matches.html), [The Rust Programming Language](https://doc.rust-lang.org/book/)
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.0 (Edition 2024)
 
 **文档版本**: 1.1
@@ -544,7 +544,7 @@ fn test_nested_match() {
 > `assert_matches!` 的优势是简洁和良好的失败消息（打印不匹配的值），劣势是绑定不可导出。
 > 这与 `matches!` 宏（返回 `bool`，无绑定）或 `insta` 的 snapshot 测试（结构化匹配）互补。
 > `assert_matches!` 的设计体现了 Rust 宏的能力边界：宏生成的代码在词法上封闭，无法将绑定泄露到外部。
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/assert_matches/macro.assert_matches.html)] ·
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/macro.assert_matches.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.4 边界测试：自定义断言失败消息的类型约束（编译错误）

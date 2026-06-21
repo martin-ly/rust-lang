@@ -6,8 +6,9 @@
 >
 # 系统可组合性 (System Composability)
 >
-> **EN**: 系统可组合性 (System Composability) (Chinese)
-> **Summary**: 系统可组合性 (System Composability) (Chinese). Guide to 30 System Composability.
+> **EN**: System Composability
+> **Summary**: System Composability: Rust ecosystem tools, crates, and engineering practices.
+> **来源**: [tokio](https://docs.rs/tokio/) · [tower](https://docs.rs/tower/) · [rayon](https://docs.rs/rayon/)
 >
 > **受众**: [进阶]
 > **层级**: L6 生态工程

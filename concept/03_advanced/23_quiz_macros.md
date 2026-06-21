@@ -3,7 +3,7 @@
 # 测验：宏系统（L3 试点扩展）
 >
 > **EN**: Macros
-> **Summary**: <details> <summary>💡 点击展开答案与解析</summary>
+> **Summary**: Quiz Macros. Core Rust concept.
 > **答案**： ```rust // vec![1, 2, 3] 展开为： { let mut temp_vec = Vec::new(); temp_vec.push(1); temp_vec.push(2); temp_vec.push(3); temp_vec }```
 > **解析**：`vec!` 是 Rust 标准库中的**声明宏**（declarative macro），使用 `macro_rules!` 定义。
 > **声明宏的核心特征**： | 特性 | 说明 | |:---|:---| | 调用语法
@@ -44,7 +44,7 @@
 
 **答案**：
 
-```rust
+```rust,compile_fail
 // vec![1, 2, 3] 展开为：
 {
     let mut temp_vec = Vec::new();
@@ -129,7 +129,7 @@ fn main() {
 
 **展开过程**（`sum!(1, 2, 3)`）：
 
-```rust
+```rust,compile_fail
 {
     let mut temp = 0;
     temp += 1;
@@ -232,7 +232,7 @@ fn main() {
 
 **生成的代码近似于**：
 
-```rust
+```rust,ignore
 impl Debug for Point { /* 自动实现 */ }
 impl Clone for Point {
     fn clone(&self) -> Self {
@@ -267,7 +267,7 @@ impl PartialEq for Point {
 
 ### Q5. 以下代码能否编译？解释属性宏（Attribute Macro）与函数宏的区别
 
-```rust
+```rust,ignore
 // 假设有一个 `trace` 属性宏
 #[trace]
 fn add(a: i32, b: i32) -> i32 {
@@ -402,7 +402,7 @@ fn main() {
 
 **展开过程**（`count!(a b c d e)`）：
 
-```rust
+```rust,ignore
 count!(a b c d e)
 → 1 + count!(b c d e)
 → 1 + 1 + count!(c d e)
@@ -510,7 +510,7 @@ fn main() {
 
 **解析**：
 
-```rust
+```rust,compile_fail
 // build_array!(1, 2, 3) 展开为：
 [1, 2, 3]
 ```
@@ -545,7 +545,7 @@ macro_rules! good {
 
 ### Q10. 以下代码存在什么问题？这是宏与模块交互的经典陷阱
 
-```rust
+```rust,compile_fail
 macro_rules! use_std {
     () => {
         use std::vec::Vec;

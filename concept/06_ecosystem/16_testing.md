@@ -32,7 +32,7 @@
 > [proptest crate](https://docs.rs/proptest/latest/proptest/) ·
 > [cargo-fuzz](https://github.com/rust-fuzz/cargo-fuzz) ·
 > [Miri](https://github.com/rust-lang/miri) ·
-> [Rust [RFC 2318](https://rust-lang.github.io/rfcs/2318.html) — Custom Test Frameworks](<https://github.com/rust-lang/rfcs/pull/2318>)
+> [Rust [RFC 2318](https://rust-lang.github.io/rfcs//2318-custom-test-frameworks.html) — Custom Test Frameworks](<https://github.com/rust-lang/rfcs/pull/2318>)
 
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
 
@@ -393,7 +393,7 @@ graph TD
 
 > **认知功能**: 此决策树展示测试投入的**优先级**。核心原则是：**公共 API + 复杂逻辑优先**。
 > **关键洞察**: Rust 的类型系统已消除了许多需要测试的"错误类"——测试应聚焦于**业务逻辑**而非**语言安全**。
-> [来源: [Rust API Guidelines — Testing](https://rust-lang.github.io/api-guidelines/testing.html)]
+> [来源: [Rust API Guidelines — Testing](https://rust-lang.github.io/api-guidelines//debuggability.html)]
 
 ---
 
@@ -478,7 +478,7 @@ graph TD
 ```
 
 > **陷阱总结**: 测试的陷阱主要与**flakiness**、**过度 mock**、**错误忽略**、**实现耦合**和**成功路径偏见**相关。
-> [来源: [Rust Testing Best Practices](https://doc.rust-lang.org/rustc-guide/tests/intro.html)]
+> [来源: [Rust Testing Best Practices](https://rustc-dev-guide.rust-lang.org/tests/intro.html)]
 
 ---
 

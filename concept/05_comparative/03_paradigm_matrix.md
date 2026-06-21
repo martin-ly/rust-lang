@@ -3,8 +3,8 @@
 
 # Paradigm Matrix: Multi-Language Formal Comparison（多语言范式对比矩阵）
 >
-> **EN**: Paradigm Matrix: Multi-Language Formal Comparison（多语言范式对比矩阵） (Chinese)
-> **Summary**: Paradigm Matrix: Multi-Language Formal Comparison. Paradigm Matrix: Multi-Language Formal Comparison（多语言范式对比矩阵）.
+> **EN**: Paradigm Matrix
+> **Summary**: Paradigm Matrix: comparative analysis with Rust across type systems, memory safety, and concurrency.
 > **受众**: [进阶]
 > **层级**: L5 对比分析
 > **A/S/P 标记**: **S** — Structure（心智模型）
@@ -13,6 +13,8 @@
 > **后置概念**: [Future Evolution](../07_future/03_evolution.md)
 > **主要来源**: [Wikipedia: Comparison of programming languages] · [Wikipedia: Programming paradigm] · [Wikipedia: Type system] · [PL Papers]
 
+>
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/)
 ---
 
 > **Bloom 层级**: 评价

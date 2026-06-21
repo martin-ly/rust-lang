@@ -1,7 +1,10 @@
+> **Summary**: Comparative Layer Index Legacy. Core Rust concept.
 > **内容分级**: [综述级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 
 # L5 对比分析层索引（Comparative Analysis Layer Index）
+>
+> **EN**: Comparative Layer Index Legacy
 >
 > **受众**: [进阶]
 > **定位**: 将 Rust 置于更广泛的编程语言范式和技术栈语境中，通过**多维对比**揭示其设计本体论、形式化优势与工程权衡。
@@ -10,6 +13,8 @@
 > **规范文件**: [`05_comparative/README.md`](05_comparative/README.md)
 > **[来源: Wikipedia - Programming Paradigm]** · **[来源: Wikipedia - Type System]** · **[来源: PLDI 2023 - Comparative Language Studies]** · **[来源: IEEE Software - Rust Adoption Surveys]**
 
+>
+> **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
 ---
 
 ## 📑 目录

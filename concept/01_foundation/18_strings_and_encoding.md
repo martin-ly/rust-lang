@@ -3,8 +3,8 @@
 >
 # 字符串与编码：Rust 的文本处理类型系统
 >
-> **EN**: Type System
-> **Summary**: Type System. Core Rust concept covering mechanism analysis, ownership and borrowing, FFI interoperability.
+> **EN**: Strings and Encoding
+> **Summary**: Rust's string types (`String`, `str`, `OsString`, `CString`) and Unicode/encoding handling.
 > **受众**: [初学者]
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 系统分析 Rust **字符串类型体系**的设计——String 与 str 的所有权语义、UTF-8 编码约束、OsString/OsStr 的平台抽象、CString/CStr 的 FFI 互操作，以及 grapheme clusters、unicode normalization 等高级文本处理概念。
@@ -115,7 +115,7 @@ fn main() {
 > **认知功能**: String/&str 的**所有权设计**是 Rust 所有权系统的教科书案例——String 拥有数据，&str 借用数据，通过 Deref 实现无缝协作，避免了 C++ 中 std::string/const char* 的混乱。
 > [来源: [TRPL Ch8 — Strings](https://doc.rust-lang.org/book/ch08-02-strings.html)]
 > **关键洞察**: &str 的普适性使其成为 Rust API 设计的首选参数类型——接受 &str 意味着调用者可以传入 String、&str 或任何能 Deref 到 str 的类型。
-> [来源: [Rust API Guidelines — Strings](https://rust-lang.github.io/api-guidelines/naming.html)]
+> [来源: [Rust API Guidelines — Strings](https://rust-lang.github.io/api-guidelines//naming.html)]
 
 ---
 
@@ -367,7 +367,7 @@ Unicode Normalization（规范化）:
 | `&str` → 系统路径 | `Path::new()` | 无（直接包装） |
 
 > **认知功能**: 字符串类型选型的**核心原则**——"使用能表达最弱约束的类型作为参数，最强的类型作为返回值"，这最大化 API 的通用性和安全性。
-> [来源: [Rust API Guidelines — Flexibility](https://rust-lang.github.io/api-guidelines/flexibility.html)]
+> [来源: [Rust API Guidelines — Flexibility](https://rust-lang.github.io/api-guidelines//flexibility.html)]
 
 ---
 
@@ -504,7 +504,7 @@ Unicode Normalization（规范化）:
 | [std::ffi::OsString](https://doc.rust-lang.org/std/ffi/struct.OsString.html) | ✅ 一级 | OS 字符串文档 |
 | [unicode-segmentation crate](https://docs.rs/unicode-segmentation/latest/) | ✅ 一级 | Grapheme 分割 |
 | [unicode-normalization crate](https://docs.rs/unicode-normalization/latest/) | ✅ 一级 | Unicode 规范化 |
-| [Rust API Guidelines — Strings](https://rust-lang.github.io/api-guidelines/naming.html) | ✅ 一级 | API 设计指南 |
+| [Rust API Guidelines — Strings](https://rust-lang.github.io/api-guidelines//naming.html) | ✅ 一级 | API 设计指南 |
 | [Wikipedia — Unicode](https://en.wikipedia.org/wiki/Unicode) | ✅ 三级 | Unicode 概念 |
 | [Unicode TR29 — Text Segmentation](https://www.unicode.org/reports/tr29/) | ✅ 一级 | 文本分割标准 |
 | [Unicode TR15 — Normalization](https://www.unicode.org/reports/tr15/) | ✅ 一级 | 规范化标准 |

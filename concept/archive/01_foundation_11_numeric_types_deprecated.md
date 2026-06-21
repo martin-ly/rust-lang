@@ -1,4 +1,8 @@
+> **Summary**: Foundation 11 Numeric Types Deprecated. Core Rust concept.
+>
 # Rust 数值类型与运算
+>
+> **EN**: Foundation 11 Numeric Types Deprecated
 
 > **受众**: [归档]
 > **Bloom 层级**: 理解 → 应用

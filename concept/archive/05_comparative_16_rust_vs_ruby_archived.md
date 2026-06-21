@@ -1,3 +1,5 @@
+> **EN**: Comparative 16 Rust Vs Ruby Archived
+> **Summary**: Comparative 16 Rust Vs Ruby Archived. Core Rust concept.
 > **内容分级**: [综述级]
 > **受众**: [进阶]
 > **Bloom 层级**: 分析
@@ -10,15 +12,7 @@
 > **后置概念**: [Ecosystem](../06_ecosystem/01_toolchain.md)
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
 
-## 相关概念文件
-
-- [Rust vs Ruby 主文件](./08_rust_vs_ruby.md) — Rust vs Ruby 完整对比（本文件已归档）
-- [Rust vs Python](./07_rust_vs_python.md) — 动态类型语言对比
-- [宏系统](../03_advanced/04_macros.md) — Rust 宏系统详解
-- [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、线程、锁
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
-> **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+> **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
 
 ## 认知路径
 

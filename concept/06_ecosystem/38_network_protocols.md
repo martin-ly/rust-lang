@@ -6,8 +6,8 @@
 >
 # 网络协议：QUIC/HTTP-3 与 Rust 实现
 >
-> **EN**: 网络协议：QUIC/HTTP-3 与 Rust 实现 (Chinese)
-> **Summary**: QUIC 解决了 TCP+TLS 的四个根本问题： | 问题 | TCP+TLS | QUIC | |:---|:---|:---| | **连接建立延迟** | 3-RTT（TCP握手 + TLS握手） | 1-RTT（0-RTT 重连） | | **队头阻塞** | TCP 层阻塞所有流 | 流独立（单包丢失只阻塞该流） | | **连接迁移** | 四元组绑定（IP+Port），NAT 重绑定后断开 | 连接 ID 标识，IP 变化不影响 | | **协议僵化** | 中间盒（middlebox）干扰 TCP 选项 | UDP 封装，避免中间盒干扰 | ```text QUIC 长包头结
+> **EN**: Network Protocols
+> **Summary**: Network Protocols: Rust ecosystem tools, crates, and engineering practices.
 >
 > **受众**: [进阶]
 
@@ -18,6 +18,8 @@
 > **前置概念**: [Async/Await](../03_advanced/02_async.md) · [Ownership](../01_foundation/01_ownership.md) · [Unsafe](../03_advanced/03_unsafe.md)
 > **后置概念**: [Stream Processing Ecosystem](./36_stream_processing_ecosystem.md) · [Distributed Systems](./18_distributed_systems.md)
 
+>
+> **来源**: [tokio](https://docs.rs/tokio/) · [quinn](https://docs.rs/quinn/) · [rustls](https://docs.rs/rustls/)
 ---
 
 > **来源**: [RFC 9000 — QUIC](https://www.rfc-editor.org/rfc/rfc9000.html) ·
@@ -67,7 +69,7 @@ QUIC 长包头结构:
  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 ```
 
-> **关键洞察**: QUIC 的包号是**单调递增**的（即使重传也用新包号），这与 TCP 的"重传相同序列号"根本不同。这使得 QUIC 可以精确测量 RTT（无重传歧义），也是 Rust 实现中状态机设计的核心约束。[来源: [RFC 9000](https://rust-lang.github.io/rfcs/9000.html) §12.3] ✅
+> **关键洞察**: QUIC 的包号是**单调递增**的（即使重传也用新包号），这与 TCP 的"重传相同序列号"根本不同。这使得 QUIC 可以精确测量 RTT（无重传歧义），也是 Rust 实现中状态机设计的核心约束。[来源: [RFC 9000](https://www.rfc-editor.org/info/rfc9000) §12.3] ✅
 
 ### 1.3 Rust 实现：quinn
 

@@ -1,7 +1,7 @@
 # Rust 知识体系层次内模型间映射图
 >
-> **EN**: Rust 知识体系层次内模型间映射图 (Chinese)
-> **Summary**: Rust 知识体系层次内模型间映射图 (Chinese). Core Rust concept covering mental model building.
+> **EN**: Intra Layer Model Map
+> **Summary**: Intra Layer Model Map. Core Rust concept.
 >
 > **受众**: [进阶]
 >
@@ -12,6 +12,8 @@
 > **符号约定**: 同于 `inter_layer_topology.md`
 
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
+> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 > **Bloom 层级**: 元（Meta）

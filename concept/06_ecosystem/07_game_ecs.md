@@ -5,7 +5,7 @@
 # Game Development & ECS Architecture（游戏开发与 ECS 架构）
 >
 > **EN**: Game Development
-> **Summary**: Game Development. Game Development & ECS Architecture（游戏开发与 ECS 架构）.
+> **Summary**: Game Development: Rust ecosystem tools, crates, and engineering practices.
 > **受众**: [进阶]
 > **内容分级**: [专家级]
 > **层级**: L6 应用主题
@@ -1288,7 +1288,7 @@ fn parallel_system(query: Query<&SharedData>) {
 fn main() {}
 ```
 
-> **修正**: Bevy 的 ECS **system 参数冲突**：1) `Query<&mut T>` 与 `Query<&T>` 不能共存（同一组件的可变和不可变查询）；2) `ResMut<R>` 与 `Res<R>` 不能共存（同一资源的可变和不可变引用）；3) `Query<&mut T>` 与 `Commands` 在特定情况下冲突（`Commands` 可能删除实体，影响 Query）。解决：1) `ParamSet` — 显式声明互斥参数集；2) 分多个 system — 通过事件或 `Commands` 通信；3) `Without<T>` 过滤 — 排除特定组件。Bevy 的编译期检查利用 Rust 的类型系统防止 ECS 冲突，是 ECS + Rust 的独特优势。这与 Unity 的 ECS（运行时检查冲突，可能抛出异常）或 flecs（C ECS，类似编译期检查但不完全）不同——Bevy 的编译期保证消除了大量运行时错误。[来源: [Bevy ECS](https://bevyengine.org/learn/book/getting-started/ecs/)] · [来源: [Bevy Query](https://docs.rs/bevy_ecs/)]
+> **修正**: Bevy 的 ECS **system 参数冲突**：1) `Query<&mut T>` 与 `Query<&T>` 不能共存（同一组件的可变和不可变查询）；2) `ResMut<R>` 与 `Res<R>` 不能共存（同一资源的可变和不可变引用）；3) `Query<&mut T>` 与 `Commands` 在特定情况下冲突（`Commands` 可能删除实体，影响 Query）。解决：1) `ParamSet` — 显式声明互斥参数集；2) 分多个 system — 通过事件或 `Commands` 通信；3) `Without<T>` 过滤 — 排除特定组件。Bevy 的编译期检查利用 Rust 的类型系统防止 ECS 冲突，是 ECS + Rust 的独特优势。这与 Unity 的 ECS（运行时检查冲突，可能抛出异常）或 flecs（C ECS，类似编译期检查但不完全）不同——Bevy 的编译期保证消除了大量运行时错误。[来源: [Bevy ECS](https://bevyengine.org/learn/book/)] · [来源: [Bevy Query](https://docs.rs/bevy_ecs/)]
 > **过渡**: Game Development & ECS Architecture（游戏开发与 ECS 架构） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Game Development & ECS Architecture（游戏开发与 ECS 架构） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Game Development & ECS Architecture（游戏开发与 ECS 架构） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

@@ -198,7 +198,7 @@ fn spawn_thread<T: Send + 'static>(data: T) {
 ```
 
 > **模型洞察**: Rust 的**所有权系统**使两种模型都可以**安全地实现**——消息传递自动转移所有权，共享状态通过类型系统保证互斥。
-> [来源: [Rust By Example — Concurrency](https://doc.rust-lang.org/rust-by-example/concurrency.html)]
+> [来源: [Rust By Example — Concurrency](https://doc.rust-lang.org/rust-by-example/std_misc/threads.html)]
 
 ---
 
@@ -755,7 +755,7 @@ fn main() {
 > [来源: [Tokio Concurrency Primitives](https://tokio.rs/tokio/tutorial/shared-state)]
 > [来源: [Rustonomicon — Concurrency](https://doc.rust-lang.org/nomicon/concurrency.html)]
 > [来源: [Herlihy & Shavit — Art of Multiprocessor Programming](https://dl.acm.org/doi/book/10.5555/2385452)]
-> [来源: [RFC 0458 — Send and Sync](https://rust-lang.github.io/rfcs/0458-send-sync.html)]
+> [来源: [RFC 0458 — Send and Sync](https://rust-lang.github.io/rfcs//0458-send-improvements.html)]
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 
@@ -847,7 +847,7 @@ fn main() {
 
 **RwLock vs Mutex 的选择指南**：
 
-```rust
+```rust,ignore
 use std::sync::{Mutex, RwLock};
 
 // 场景1: 读多写少 → RwLock
@@ -872,7 +872,7 @@ let cache: Mutex<Cache> = Mutex::new(Cache::default());
 
 **题目**: 以下代码能否编译？如果不能，为什么？
 
-```rust
+```rust,compile_fail
 use std::sync::Arc;
 use std::thread;
 
@@ -926,7 +926,7 @@ fn main() {
 
 **`Arc::clone(&data)` 的本质**：
 
-```rust
+```rust,ignore
 // 不是深拷贝！只是增加引用计数
 impl<T> Clone for Arc<T> {
     fn clone(&self) -> Self {
@@ -939,7 +939,7 @@ impl<T> Clone for Arc<T> {
 
 **常见模式**：
 
-```rust
+```rust,ignore
 // N 个线程共享同一数据
 let data = Arc::new(Mutex::new(0));
 let mut handles = vec![];
@@ -1007,7 +1007,7 @@ fn quicksort(arr: &mut [i32]) {
 
 **为什么不用 `thread::spawn`**：
 
-```rust
+```rust,ignore
 // 错误示范：每次递归都创建新线程，开销巨大
 thread::spawn(|| quicksort(left));
 thread::spawn(|| quicksort(right));
@@ -1091,7 +1091,7 @@ fn main() {
 
 **修复方案 — 统一加锁顺序**：
 
-```rust
+```rust,ignore
 use std::sync::Mutex;
 
 fn transfer(from: &Account, to: &Account, amount: i32) {

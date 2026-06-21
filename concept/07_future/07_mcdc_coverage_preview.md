@@ -3,8 +3,8 @@
 > **代码状态**: ✅ 含可编译示例
 
 >
-> **EN**: Security Practices
-> **Summary**: Security Practices. Core Rust concept covering formal methods foundations, verification techniques, compiler internals.
+> **EN**: MC/DC Coverage Preview
+> **Summary**: Preview of modified condition/decision coverage (MC/DC) support in Rust's coverage tooling.
 >
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`

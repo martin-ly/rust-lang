@@ -21,8 +21,7 @@
 
 ---
 
-> **来源**:
-> [GitHub Actions Docs](https://docs.github.com/en/actions) ·
+> **来源**: [GitHub Actions Docs](https://docs.github.com/en/actions) · [Cargo Book](https://doc.rust-lang.org/cargo/)
 > [Cargo Book — Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) ·
 > [cargo-release](https://github.com/crate-ci/cargo-release) ·
 > [Docker — Best Practices](https://docs.docker.com/build/building/multi-stage/) ·
@@ -731,7 +730,7 @@ fn test_b() {
 }
 ```
 
-> **修正**: `static mut` 在 Rust 中是极不安全的机制：任何访问都需要 `unsafe` 块，但编译器不保证线程安全或测试隔离。并行测试（`cargo test -- --test-threads=8`）时，`test_a` 和 `test_b` 可能并发执行，导致 `COUNTER` 的值不确定。正确做法：1) 使用 `std::sync::atomic::AtomicI32`（无锁、线程安全）；2) 使用 `std::sync::Mutex`（互斥）；3) 使用 `thread_local!`（每个线程独立）。Rust 2024 Edition 进一步限制 `static mut` 的使用，鼓励迁移到安全抽象。这与 C 的全局变量（无任何保护）或 Go 的 `sync/atomic`（包级原子操作）不同——Rust 的类型系统逐步淘汰最危险的并发原语。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-03-shared-state.html)] · [来源: [Rust RFC 3560](https://rust-lang.github.io/rfcs/3560-static-mut-references.html)]
+> **修正**: `static mut` 在 Rust 中是极不安全的机制：任何访问都需要 `unsafe` 块，但编译器不保证线程安全或测试隔离。并行测试（`cargo test -- --test-threads=8`）时，`test_a` 和 `test_b` 可能并发执行，导致 `COUNTER` 的值不确定。正确做法：1) 使用 `std::sync::atomic::AtomicI32`（无锁、线程安全）；2) 使用 `std::sync::Mutex`（互斥）；3) 使用 `thread_local!`（每个线程独立）。Rust 2024 Edition 进一步限制 `static mut` 的使用，鼓励迁移到安全抽象。这与 C 的全局变量（无任何保护）或 Go 的 `sync/atomic`（包级原子操作）不同——Rust 的类型系统逐步淘汰最危险的并发原语。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-03-shared-state.html)] · [来源: [Rust RFC 3560](https://github.com/rust-lang/rfcs/pull/3560)]
 
 ### 10.6 边界测试：Docker 多阶段构建的缓存失效（编译时间膨胀）
 

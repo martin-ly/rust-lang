@@ -1,7 +1,6 @@
 # Formal Methods Industrialization（形式化方法工业化）
 
 > **代码状态**: ✅ 含可编译示例
-
 >
 > **EN**: Formal Methods
 > **Summary**: Formal Methods. Core Rust concept covering practical examples.
@@ -14,6 +13,7 @@
 > **前置概念**: [RustBelt](../04_formal/04_rustbelt.md) · [Ownership Formalization](../04_formal/03_ownership_formal.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Unsafe](../03_advanced/03_unsafe.md)
 > **主要来源**: [AWS Kani] · [Microsoft Verus] · [TLA+] · [P Language] · [POPL/PLDI 2024-2026] · [Wikipedia] · [O'Hearn 2007 — Separation Logic]
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
 ---
 
 > **Bloom 层级**: 评价 → 创造
@@ -703,7 +703,7 @@ timeout = 600
 env = { MIRIFLAGS = "-Zmiri-strict-provenance -Zmiri-symbolic-alignment-check" }
 ```
 
-> **来源**: [Rust Compiler Team Triage](https://blog.rust-lang.org/inside-rust/) · [Crater Docs](https://github.com/rust-lang/crater/blob/master/docs/)
+> **来源**: [Rust Compiler Team Triage](https://blog.rust-lang.org/inside-rust/) · [Crater Docs](https://github.com/rust-lang/crater/tree/master/docs)
 
 ### 6.6 Miri 在项目级 CI 中的配置
 
@@ -1654,7 +1654,7 @@ fn main() {
 > 这与 C 的 static analyzer（如 Coverity，独立于编译器）或 Java 的 SpotBugs（基于字节码，编译器无关）不同——Rust 的形式化生态年轻，尚未建立稳定的跨版本接口。
 > `rustup` 的 toolchain 管理缓解了部分痛苦（`rustup run nightly-2024-01-01 miri`）。
 > [来源: [Miri Documentation](https://github.com/rust-lang/miri)] ·
-> [来源: [Rustup Toolchains](https://rust-lang.github.io/rustup/concepts/toolchains.html)]
+> [来源: [Rustup Toolchains](https://rust-lang.github.io/rustup//concepts/toolchains.html)]
 
 ---
 

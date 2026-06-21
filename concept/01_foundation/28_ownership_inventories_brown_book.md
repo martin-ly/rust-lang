@@ -3,12 +3,14 @@
 # 所有权清单自测：Brown University Ownership Inventory
 
 > **EN**: Brown University Ownership Inventory
-> **Summary**: 引入 Brown University Interactive Book 的 Ownership Inventory 概念清单，帮助学习者在真实代码场景中检验所有权理解。
+> **Summary**: Brown University Ownership Inventory: core Rust concepts, syntax, and examples.
 > **受众**: [初学者]
 > **内容分级**: [综述级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **定理链**: N/A — 测验性/互动性文档
 
+>
+> **来源**: [Brown University Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL — Understanding Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
 ---
 
 > **来源**:
@@ -88,7 +90,7 @@ fn main() {
 
 ### 样题 2：Vec 与切片
 
-```rust
+```rust,compile_fail
 fn main() {
     let mut v = vec![1, 2, 3];
     let s = &v[0..2];
@@ -119,7 +121,7 @@ fn main() {
 
 ### 样题 3：函数返回值的生命周期
 
-```rust
+```rust,compile_fail
 fn first_word(s: &str) -> &str {
     &s[0..1]
 }

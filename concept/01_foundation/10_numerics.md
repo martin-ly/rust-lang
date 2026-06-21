@@ -5,8 +5,8 @@
 
 # 数值类型与运算：从整数到浮点的完整图景
 >
-> **EN**: 数值类型与运算：从整数到浮点的完整图景 (Chinese)
-> **Summary**: 数值类型与运算：从整数到浮点的完整图景 (Chinese). Core Rust concept covering performance optimization.
+> **EN**: Numerics
+> **Summary**: Numerics: core Rust concepts, syntax, and examples.
 > **受众**: [初学者]
 > **Bloom 层级**: 记忆 → 理解
 > **定位**: 系统讲解 Rust **数值类型**——从整数、浮点、饱和运算到类型转换和溢出行为，揭示 Rust 如何在安全性与性能之间做出精确的设计选择。
@@ -316,7 +316,7 @@ let size = NonZeroU32::new(1024).unwrap();
 ```
 
 > **NonZero 洞察**: `NonZero` 类型是 Rust **类型系统与优化**结合的经典案例——编译器利用**niche value**（零）压缩 `Option<T>` 的表示。
-> [来源: [std::num::NonZeroU32](https://doc.rust-lang.org/std/num/struct.NonZeroU32.html)]
+> [来源: [std::num::NonZeroU32](https://doc.rust-lang.org/std/num/type.NonZeroU32.html)]
 
 ---
 
@@ -352,7 +352,7 @@ let size = NonZeroU32::new(1024).unwrap();
 ```
 
 > **类型选择**: Rust 的**精确数值类型**迫使开发者思考数值的真实语义——这是避免整数溢出和精度错误的**第一道防线**。
-> [来源: [Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines/type-safety.html)]
+> [来源: [Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines//type-safety.html)]
 
 ---
 

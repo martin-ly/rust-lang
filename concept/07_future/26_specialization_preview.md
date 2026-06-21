@@ -3,8 +3,8 @@
 > **代码状态**: [综述级 — 待补充代码]
 
 >
-> **EN**: Traits
-> **Summary**: Traits. Core Rust concept covering mechanism analysis, generic programming, trait system mechanics.
+> **EN**: Specialization Preview
+> **Summary**: Preview of trait specialization: allowing overlapping impls with a default/fallback.
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
 > **跟踪版本**: nightly 1.98.0 (2026-05-31)
@@ -38,7 +38,7 @@
 > **来源**:
 > [RFC 1210 — Specialization](https://github.com/rust-lang/rfcs/pull/1210) ·
 > [Tracking Issue #31844](https://github.com/rust-lang/rust/issues/31844) ·
-> [Rust Blog — Specialization](https://blog.rust-lang.org/inside-rust/2021/09/06/Separating-contract-and-implementation.html) ·
+> [Rust Blog — Specialization](https://blog.rust-lang.org/inside-rust/) ·
 > [Rust Reference — Trait Implementations](https://doc.rust-lang.org/reference/items/implementations.html) ·
 > [Wikipedia — Multiple Dispatch](https://en.wikipedia.org/wiki/Multiple_dispatch)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
@@ -264,7 +264,7 @@ impl Container for Vec<u8> {
 ```
 
 > **关联类型特化**: 关联类型的特化是特化中最复杂的部分——它涉及**类型等价性**和**投影归约**的形式化理论。
-> [来源: [Rust Blog — Specialization](https://blog.rust-lang.org/inside-rust/2021/09/06/Separating-contract-and-implementation.html)]
+> [来源: [Rust Blog — Specialization](https://blog.rust-lang.org/inside-rust/)]
 
 ---
 
@@ -442,7 +442,7 @@ graph TD
 | [RFC 1210 — Specialization](https://github.com/rust-lang/rfcs/pull/1210) | ✅ 一级 | 特化 RFC |
 | [Tracking Issue #31844](https://github.com/rust-lang/rust/issues/31844) | ✅ 一级 | 实现跟踪 |
 | [Chalk Trait Solver](https://github.com/rust-lang/chalk) | ✅ 一级 | 新 Trait 求解器 |
-| [Rust Blog — Specialization](https://blog.rust-lang.org/inside-rust/2021/09/06/Separating-contract-and-implementation.html) | ✅ 二级 | 设计深度分析 |
+| [Rust Blog — Specialization](https://blog.rust-lang.org/inside-rust/) | ✅ 二级 | 设计深度分析 |
 | [Rust Reference — Implementations](https://doc.rust-lang.org/reference/items/implementations.html) | ✅ 一级 | 官方参考 |
 
 ---
@@ -501,7 +501,7 @@ impl Display for MyString {
 > `impl<T> Display for T` 是最通用的（顶层），`impl Display for String` 是特化的。
 > 若添加 `impl<T: Deref<Target=str>> Display for T`，它与 `impl Display for String` 重叠（`String: Deref<Target=str>`），且 neither 是对方的子集——编译错误。
 > 这与 C++ 的模板特化（允许任意重叠，由偏序规则解决）不同——Rust 的特化更保守，确保始终存在唯一最特化实现，避免歧义。
-> [来源: [Rust RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html)] ·
+> [来源: [Rust RFC 1210](https://rust-lang.github.io/rfcs//1210-impl-specialization.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.2 边界测试：`default` 方法与最终实现的冲突（编译错误）
@@ -535,7 +535,7 @@ impl Process for i32 {
 > 若需复用默认逻辑，应将共享代码提取为独立函数，在默认实现和特化实现中都调用。
 > 这与 Rust 的整体哲学一致—— trait 是接口 + 默认实现，不是类继承层次。
 > 特化的主要用例是性能优化（如 `Iterator::nth` 的默认实现 vs `SliceIter::nth` 的 O(1) 实现），而非代码复用。
-> [来源: [Rust RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html)] ·
+> [来源: [Rust RFC 1210](https://rust-lang.github.io/rfcs//1210-impl-specialization.html)] ·
 > [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]
 
 ### 10.3 边界测试：特化与关联类型的冲突（编译错误）
@@ -570,7 +570,7 @@ impl Container for Vec<u8> {
 > 2) 方法签名可以特化，但返回类型的特化受对象安全约束；
 > 3) `default` 关键字标记可被覆盖的项。
 > 这与 C++ 的模板特化（可完全改变类定义，包括嵌套类型）或 Java 的泛型（类型擦除，无特化概念）不同——Rust 的特化更保守，优先保证类型一致性。
-> [来源: [Rust RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html)] ·
+> [来源: [Rust RFC 1210](https://rust-lang.github.io/rfcs//1210-impl-specialization.html)] ·
 > [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]
 
 ### 10.4 边界测试：特化的交互与 trait 一致性（编译错误）
@@ -610,7 +610,7 @@ fn main() {
 > 3) 特化序决定最具体实现。
 > 这与 C++ 的 ADL（Argument Dependent Lookup，类似但无特化序）或 Scala 的 implicit resolution（更复杂的优先级规则）类似
 > ——Rust 的特化增加了方法解析的复杂度，但设计目标始终是"有唯一最具体实现"。
-> [来源: [Rust RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html)] ·
+> [来源: [Rust RFC 1210](https://rust-lang.github.io/rfcs//1210-impl-specialization.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.3 边界测试：特化（specialization）的 soundness 问题与编译错误（编译错误）
@@ -652,7 +652,7 @@ fn main() {
 > 2) 类型级编程（`typenum`、`generic-array`）；
 > 3) 宏生成特定实现。
 > 这与 C++ 的模板特化（完全支持，但无类型安全保证）或 Haskell 的 overlapping instances（可控制重叠）不同——Rust 对 specialization 极其谨慎，宁可不实现也不牺牲 soundness。
-> [来源: [Specialization RFC](https://rust-lang.github.io/rfcs/1210-impl-specialization.html)] ·
+> [来源: [Specialization RFC](https://rust-lang.github.io/rfcs//1210-impl-specialization.html)] ·
 > [来源: [Rust Internals](https://internals.rust-lang.org/)]
 > **过渡**: Specialization：Trait 实现的精确化与重叠解析 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Specialization：Trait 实现的精确化与重叠解析 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

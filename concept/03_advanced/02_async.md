@@ -221,7 +221,7 @@ Step 6: "什么时候会阻塞？"
 > **[TRPL: Ch17]** A future is an asynchronous computation that can produce a value. `async fn` returns a future. When you call an `async fn`, it returns a future that is a suspended computation, not the result. Futures are lazy: they don't do any work until you await them.
 > **[Rust Reference: Async await]** `async fn` 被编译器转换为返回 `impl Future<Output = T>` 的函数，`.await` 被转换为对 `Future::poll` 的循环调用。✅ 已验证
 > **[RFC 2394]** async/await 语法糖的设计基于生成器（generator）状态机转换，语义等价于显式 Future 组合。 ✅ 已验证
-> **[RFC 2592: Futures 0.3]** The `Future` trait and `async/await` syntax were stabilized based on [RFC 2394](https://rust-lang.github.io/rfcs/2394.html), with the `Pin` type introduced in [RFC 2349](https://rust-lang.github.io/rfcs/2349.html) to support self-referential async state machines. ✅ 已验证
+> **[RFC 2592: Futures 0.3]** The `Future` trait and `async/await` syntax were stabilized based on [RFC 2394](https://rust-lang.github.io/rfcs//2394-async_await.html), with the `Pin` type introduced in [RFC 2349](https://rust-lang.github.io/rfcs//2349-pin.html) to support self-referential async state machines. ✅ 已验证
 
 ### 1.3 形式化定义
 
@@ -464,7 +464,7 @@ stateDiagram-v2
 
 > **认知功能**: 状态转移可视化工具——将编译器生成的匿名 enum 状态机映射为可读的状态图。读者可将此图作为阅读 MIR lowering 输出的"导航地图"，每个节点对应一个 enum 变体，每条边对应一次 poll 调用。关键洞察：Pin 约束不是装饰，而是 Suspend 状态期间地址恒定性的形式化保证。[来源: 💡 原创分析]
 > [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
-> **思维表征说明**: `stateDiagram-v2` 是 Mermaid 专门用于状态机的语法，与 `graph TD` 流程图不同——它强调**状态**（节点）和**转移条件**（边标注），天然适合表达 Future 的 poll 状态机。每个状态对应编译器生成的 enum 变体，转移标注对应 poll 的返回值。 [来源: Mermaid stateDiagram 文档; [RFC 2394](https://rust-lang.github.io/rfcs/2394.html) §3.2]
+> **思维表征说明**: `stateDiagram-v2` 是 Mermaid 专门用于状态机的语法，与 `graph TD` 流程图不同——它强调**状态**（节点）和**转移条件**（边标注），天然适合表达 Future 的 poll 状态机。每个状态对应编译器生成的 enum 变体，转移标注对应 poll 的返回值。 [来源: Mermaid stateDiagram 文档; [RFC 2394](https://rust-lang.github.io/rfcs//2394-async_await.html) §3.2]
 
 #### .await 的 CPS 变换规则
 
@@ -846,7 +846,7 @@ graph TD
 ```
 
 > **认知功能**: 生命周期认知修正器——打破"函数调用即执行到返回"的同步思维惯性。读者在设计取消安全（cancellation safety）时，应将此图作为检查清单，确保所有可能导致 Future 提前终止的路径都被处理。关键洞察：poll 是协作式请求而非命令式保证，取消是一等公民。[来源: 💡 原创分析]
-> [来源: [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html)]
+> [来源: [RFC 2394](https://rust-lang.github.io/rfcs//2394-async_await.html)]
 
 **修正认知**：
 
@@ -918,7 +918,7 @@ graph TD
 ```
 
 > **认知功能**: 技术选型向导——从任务特征（IO/CPU 密集度、并发规模、状态共享需求）出发的决策树。读者在新项目架构设计时，可从根节点出发回答两个关键问题，得到推荐的并发模型。关键洞察：选择 async 还是 thread 的本质是回答"任务是否以挂起等待为主"。[来源: 💡 原创分析]
-> [来源: [Rust Async Book: Execution](https://rust-lang.github.io/async-book/02_execution/01_chapter.html)]
+> [来源: [Rust Async Book: Execution](https://rust-lang.github.io/async-book//02_execution/01_chapter.html)]
 
 ### 7.2 Pin 使用边界
 
@@ -1247,7 +1247,7 @@ graph TD
 ```
 
 > **认知功能**: 活性调试路径图——当 Future 陷入永久 Pending 时，按此决策树定位故障根因。读者可逐层检查 Waker 注册、Reactor 唤醒调用、poll 返回值合法性三个环节。关键洞察：`poll → Pending → wake → poll` 的闭环是异步执行器活性（liveness）的根本保证，任一环节断裂即导致活锁或饥饿。[来源: 💡 原创分析]
-> [来源: [Rust Reference: Pin](https://doc.rust-lang.org/reference/types/pin.html)]
+> [来源: [Rust Reference: Pin](https://doc.rust-lang.org/std/pin/index.html)]
 
 > **[Async Book: Waker]** Waker 是 Future 与 Reactor 之间的桥梁——poll 时将 Waker 传递给底层 I/O 源，I/O 就绪时源通过 Waker 通知执行器重新调度该 Future。✅ 已验证
 > **[without.boats blog]** Waker 的设计刻意与具体执行器解耦：任何实现了 `Wake` trait 的类型均可作为 Waker，这使得同一个 Future 可在不同运行时之间复用。✅ 已验证
@@ -2473,7 +2473,7 @@ trait DataProvider<'a> {
 
 ---
 
-## 十二、`AsyncFn` Trait 家族：异步闭包的类型化（1.85 stable，[RFC 3668](https://rust-lang.github.io/rfcs/3668.html)）
+## 十二、`AsyncFn` Trait 家族：异步闭包的类型化（1.85 stable，[RFC 3668](https://rust-lang.github.io/rfcs//3668-async-closures.html)）
 
 > **稳定版本**: Rust 1.85 (stable) · **适用 Edition**: 所有 Edition（非 Edition-gated）
 > **形式化意义**: 高阶函数的异步扩展——效果系统（Effect System）的原型
@@ -2886,7 +2886,7 @@ impl Service for MyService {
 fn main() {}
 ```
 
-> **修正**: Rust stable **不支持 trait 中的 `async fn`**（RPITIT — Return Position Impl Trait In Traits，1.75.0+ 已稳定！）。`async_trait` crate 提供过程宏 workaround：`// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]` 自动将 `async fn` 转为返回 `Pin<Box<dyn Future>>`。1.75.0+ 后，原生 `async fn` 在 trait 中可用，但需注意：1) `Send` 约束不自动推导（`async_trait` 自动添加）；2) 动态分发（`dyn Trait`）仍需 `async_trait` 或手动 `Box::pin`。异步 trait 是 Rust async 生态的关键里程碑，使 async/await 可用于 trait 抽象。这与 C# 的 `async` 接口方法（原生支持）或 Java 的 `CompletableFuture`（接口中返回 Future，非 async 方法）不同——Rust 的 async trait 支持是语言演进的重要步骤。[来源: [Rust 1.75 Release Notes](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html)] · [来源: [async_trait crate](https://docs.rs/AFIT（async fn in trait，Rust 1.75.0+ 稳定）/)]
+> **修正**: Rust stable **不支持 trait 中的 `async fn`**（RPITIT — Return Position Impl Trait In Traits，1.75.0+ 已稳定！）。`async_trait` crate 提供过程宏 workaround：`// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]` 自动将 `async fn` 转为返回 `Pin<Box<dyn Future>>`。1.75.0+ 后，原生 `async fn` 在 trait 中可用，但需注意：1) `Send` 约束不自动推导（`async_trait` 自动添加）；2) 动态分发（`dyn Trait`）仍需 `async_trait` 或手动 `Box::pin`。异步 trait 是 Rust async 生态的关键里程碑，使 async/await 可用于 trait 抽象。这与 C# 的 `async` 接口方法（原生支持）或 Java 的 `CompletableFuture`（接口中返回 Future，非 async 方法）不同——Rust 的 async trait 支持是语言演进的重要步骤。[来源: [Rust 1.75 Release Notes](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html)] · [来源: [async_trait crate](https://docs.rs/async-trait/latest/async_trait/)]
 
 ## 逆向推理链（Backward Reasoning）
 
@@ -2908,9 +2908,9 @@ fn main() {}
 
 > [来源: [Rust Reference — Async/Await](https://doc.rust-lang.org/reference/expressions/await-expr.html)]
 
-> [来源: [RFC 2394 — Async/Await](https://rust-lang.github.io/rfcs/2394-async-await.html)]
+> [来源: [RFC 2394 — Async/Await](https://rust-lang.github.io/rfcs//2394-async_await.html)]
 
-> [来源: [RFC 3185 — Static Async Fn](https://rust-lang.github.io/rfcs/3185-static-async-fn-in-trait.html)]
+> [来源: [RFC 3185 — Static Async Fn](https://rust-lang.github.io/rfcs//3185-static-async-fn-in-trait.html)]
 
 > [来源: [Tokio Documentation](https://tokio.rs/)]
 
@@ -2972,7 +2972,7 @@ fn main() {}
 
 `async fn foo() -> i32` 编译后等价于：
 
-```rust
+```rust,ignore
 fn foo() -> impl Future<Output = i32> {
     // 编译器生成的状态机
     FooFuture { state: 0, /* 捕获的局部变量 */ }
@@ -2996,7 +2996,7 @@ fn foo() -> impl Future<Output = i32> {
 
 **题目**: 以下代码中，`let result = read_file().await;` 的作用是什么？
 
-```rust
+```rust,ignore
 async fn read_file() -> String { ... }
 
 async fn process() {

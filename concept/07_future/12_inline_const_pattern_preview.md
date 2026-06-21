@@ -1,10 +1,9 @@
 # Inline Const Pattern Preview
 
 > **代码状态**: [综述级 — 待补充代码]
-
 >
-> **EN**: Inline Const Pattern Preview (Chinese)
-> **Summary**: Inline Const Pattern Preview (Chinese). Emerging Rust feature or ecosystem trend: Inline Const Pattern Preview (Chinese).
+> **EN**: Inline Const Pattern Preview
+> **Summary**: Inline Const Pattern Preview: emerging Rust language feature or ecosystem trend.
 >
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
@@ -18,7 +17,7 @@
 > **双维定位**: F×App — 应用 const 块于模式匹配
 > **前置依赖**: [Const Generics](../02_intermediate/02_generics.md) · [Pattern Matching](../01_foundation/07_control_flow.md)
 > **后置延伸**: [Const Trait](./17_const_trait_preview.md)
-> **来源**: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html) · [RFC 2920](https://rust-lang.github.io/rfcs/2920-inline-const.html)
+> **来源**: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html) · [RFC 2920](https://rust-lang.github.io/rfcs//2920-inline-const.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 
 ## 10.4 边界测试：`const {}` 块在 pattern 中的使用（编译错误/未来特性）
@@ -59,8 +58,8 @@ fn main() {
 > 3) 类型级计算的结果用于值级匹配。
 >
 > 这与 C++ 的 `constexpr`（可在编译期计算，但不支持在 switch case 中使用复杂表达式）或 C 的 `case`（仅支持整型常量表达式）不同——Rust 的 `const {}` 更灵活，支持任意编译期可计算的 Rust 代码。
-> [来源: [Inline Const RFC](https://rust-lang.github.io/rfcs/2920-inline-const.html)] ·
-> [来源: [Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html)]
+> [来源: [Inline Const RFC](https://rust-lang.github.io/rfcs//2920-inline-const.html)] ·
+> [来源: [Const Generics](https://rust-lang.github.io/rfcs//2000-const-generics.html)]
 >
 > **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)

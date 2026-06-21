@@ -612,7 +612,7 @@ Admitted.
 | [DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md) | 设计机制论证 |
 | [ARGUMENTATION_GAP_INDEX](./10_argumentation_gap_index.md) | 论证缺口追踪 |
 | [software_design_theory](software_design_theory/README.md) | **软件设计理论体系**：设计模式形式化、23/43 模型、执行模型、组合工程有效性 |
-| [UNSAFE_RUST_GUIDE](../05_guides/05_unsafe_rust_guide.md) | Unsafe Rust 专题指南 |
+| [UNSAFE_RUST_GUIDE](../../concept/03_advanced/03_unsafe.md) | Unsafe Rust 专题指南 |
 
 ---
 

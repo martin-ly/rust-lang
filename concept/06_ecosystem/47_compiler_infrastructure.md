@@ -8,7 +8,7 @@
 # Rust 编译器基础设施深度解析
 >
 > **EN**: Compiler Internals
-> **Summary**:
+> **Summary**: Compiler Internals: Rust ecosystem tools, crates, and engineering practices.
 Compiler Internals. Core Rust concept covering mechanism analysis, parallel programming, compiler internals.
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
@@ -18,7 +18,7 @@ Compiler Internals. Core Rust concept covering mechanism analysis, parallel prog
 
 ---
 
-> **来源**: [Rust Compiler Team](https://rust-lang.github.io/compiler-team/) · [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/) · [Cranelift README](https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/README.md) · [RFC 3873 — build-std](https://github.com/rust-lang/rfcs/pull/3873)
+> **来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) · [rustc_driver](https://doc.rust-lang.org/nightly/nightly-rustc/rustc_driver/)
 
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
@@ -148,7 +148,7 @@ CI/发布: LLVM → 极致优化
 
 ## 四、build-std（从源码构建标准库）
 
-### 4.1 [RFC 3873](https://rust-lang.github.io/rfcs/3873.html) 核心内容
+### 4.1 [RFC 3873](https://rust-lang.github.io/rfcs//3873-build-std-context.html) 核心内容
 
 `build-std` 允许从源码重新编译 `core`/`std`/`alloc`/`panic_abort`/`panic_unwind`，而非使用预编译的标准库。
 

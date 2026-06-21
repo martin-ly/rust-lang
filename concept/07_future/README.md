@@ -2,6 +2,7 @@
 >
 > **EN**: Futures
 > **Summary**: Futures. Emerging Rust feature or ecosystem trend: Futures.
+> **来源**: [Rust RFCs](https://rust-lang.github.io/rfcs/) · [Rust Blog](https://blog.rust-lang.org/) · [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/)
 > **内容分级**: [综述级]
 > **受众**: [专家]
 >
@@ -153,7 +154,7 @@ graph TB
 | [15_gen_blocks_preview.md](./15_gen_blocks_preview.md) | Gen Blocks 预研 | 泛化生成器、惰性迭代、异步流 | ✅ v1.0 | L3 Async, L2 Trait | L3 控制流泛化 |
 | [16_cranelift_backend_preview.md](./16_cranelift_backend_preview.md) | Cranelift 后端预研 | 快速调试编译、LLVM 替代后端 | ✅ v1.0 | L6 Toolchain | L6 编译工具链扩展 |
 | [17_rust_specification_preview.md](./17_rust_specification_preview.md) | Rust 语言规范预研 | 形式化规范演进、Ferrocene 先行探索 | ✅ v1.0 | L4 Formal, L7 Future | L4-L7 规范桥梁 |
-| [18_async_drop_preview.md](./18_async_drop_preview.md) | Async Drop 预研 | 异步资源销毁、[RFC 3308](https://rust-lang.github.io/rfcs/3308.html)、Pin 交互、workaround 模式 | ⚠️ nightly | L3 Async, L3 Pin | 异步生态完善 |
+| [18_async_drop_preview.md](./18_async_drop_preview.md) | Async Drop 预研 | 异步资源销毁、[RFC 3308](https://rust-lang.github.io/rfcs//3308-offset_of.html)、Pin 交互、workaround 模式 | ⚠️ nightly | L3 Async, L3 Pin | 异步生态完善 |
 | [26_specialization_preview.md](./26_specialization_preview.md) | Specialization 预研 | Trait 实现特化、重叠 impl、min_specialization | ⚠️ nightly | L2 Trait, L2 Generics | 泛型表达能力扩展 |
 | [04_effects_system.md](./04_effects_system.md) | 效果系统预研 | Effect 类型论、Rust 现有 effect 映射、跨语言对比、演进路线 | ✅ v1.0 | L2 Trait, L3 Async, L4 Type Theory | L2-L3 效果统一化 |
 
@@ -170,7 +171,7 @@ graph TB
 - [Arbitrary Self Types 预览：自定义方法接收器](./17_arbitrary_self_types_preview.md)
 - [Const Trait Preview](./17_const_trait_preview.md)
 - [Field Projections 预览：安全的字段级投影](./18_field_projections_preview.md)
-- [Rust 2024 Edition Preview](./19_rust_edition_preview.md)
+- [Rust 2024 Edition Preview](../../knowledge/06_ecosystem/02_edition_2024.md)
 - [Rust for Linux ：操作系统内核中的内存安全](./19_rust_for_linux.md)
 - [Rust 在 AI 与机器学习中的新兴角色](./21_rust_in_ai.md)
 - [Edition 2024 完全指南：新特性与迁移策略](./22_edition_guide.md)

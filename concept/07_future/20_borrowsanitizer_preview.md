@@ -1,11 +1,12 @@
-> **⚠️ 已更新**: 本文件的深度内容已迁移至 [borrow_sanitizer.md](./borrow_sanitizer.md)（2026-06-08 新建，2026-06-19 已同步 April 2026 更新）。本文件保留为历史参考，不再主动维护。
-
+> **⚠️ 已更新**:
+>
+> 本文件的深度内容已迁移至 [borrow_sanitizer.md](./borrow_sanitizer.md)（2026-06-08 新建，2026-06-19 已同步 April 2026 更新）。本文件保留为历史参考，不再主动维护。
 > **代码状态**: ✅ 含可编译示例
 
 # BorrowSanitizer 概念预研：运行时借用检查工业化
 >
-> **EN**: Borrowing
-> **Summary**: Borrowing. Core Rust concept covering dynamic verification with Miri, ownership and borrowing, aerospace and fault-tolerant systems.
+> **EN**: BorrowSanitizer Preview
+> **Summary**: Preview of BorrowSanitizer: dynamic aliasing-rule validation at runtime.
 >
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
@@ -21,6 +22,8 @@
 > **前置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Version Tracking](./05_rust_version_tracking.md)
 > **后置概念**: [Formal Methods](./02_formal_methods.md) · [RustBelt](../04_formal/04_rustbelt.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+>
+> **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/) · [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 ---
 
 > **来源**:
@@ -312,7 +315,7 @@ graph TD
 > **2026 年度目标**: BorrowSanitizer 是 Rust 2026 年 **33 个旗舰目标之一**（3.8 号目标）。核心目标是从研究原型过渡到**可用工具**。三个关键特性待实现：垃圾回收、错误报告、原子内存访问支持。
 > **上游化计划**: 采用分阶段策略——先上游化 LLVM 组件（定义外层 API、shadow memory 管理、错误报告），再通过弱符号被 Rust 运行时覆盖。LLVM 运行时单独测试时为空操作（no-op）。
 > **预测**: BorrowSanitizer 的工业化路径参考 AddressSanitizer。最大技术挑战是 **Shadow Stack 的性能优化**（当前仍与 Miri 同数量级，缺乏 GC 是主因）和 **LLVM RFC 的推进**。
-> [来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)] · [borrowsanitizer.com](https://borrowsanitizer.com/)]
+> [来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)] · [borrowsanitizer.com](https://borrowsanitizer.com/)]
 
 ---
 

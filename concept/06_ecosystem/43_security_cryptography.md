@@ -18,6 +18,8 @@
 > **前置依赖**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Trait](../02_intermediate/01_traits.md) · [类型系统](../01_foundation/04_type_system.md) · [安全实践](./19_security_practices.md)
 > **后置延伸**: [区块链与智能合约安全](./06_blockchain.md) · [网络协议](./38_network_protocols.md) · [TLS/QUIC](38_network_protocols.md)
 
+>
+> **来源**: [ring](https://docs.rs/ring/) · [rustls](https://docs.rs/rustls/) · [Rust Crypto](https://github.com/RustCrypto)
 ---
 
 > **来源**: [NIST FIPS 197](https://csrc.nist.gov/publications/detail/fips/197/final) ·
@@ -298,7 +300,7 @@ fn encrypt_chacha20(key: &[u8; 32], plaintext: &[u8]) -> Result<Vec<u8>, chacha2
 ### 4.1 ECC 与 Ed25519
 >
 
-> **[NIST FIPS 186-5](https://csrc.nist.gov/publications/detail/fips/186/5/final)** 椭圆曲线密码学（ECC）相比 RSA 提供相同安全强度下更短的密钥和更快的运算。Ed25519 是 Daniel Bernstein 设计的基于 Curve25519 的 EdDSA 签名方案，被 IETF 标准化（[RFC 8032](https://rust-lang.github.io/rfcs/8032.html)），特征：**恒定时间实现、确定性签名、紧凑的 64 字节签名**。
+> **[NIST FIPS 186-5](https://csrc.nist.gov/publications/detail/fips/186/5/final)** 椭圆曲线密码学（ECC）相比 RSA 提供相同安全强度下更短的密钥和更快的运算。Ed25519 是 Daniel Bernstein 设计的基于 Curve25519 的 EdDSA 签名方案，被 IETF 标准化（[RFC 8032](https://www.rfc-editor.org/info/rfc8032)），特征：**恒定时间实现、确定性签名、紧凑的 64 字节签名**。
 
 ```text
 Ed25519 参数:
@@ -582,7 +584,7 @@ fn create_tls_server(cert_chain: Vec<CertificateDer<'static>>, key: PrivateKeyDe
 > - 默认禁用压缩（CRIME/BREACH 攻击防护）
 > - 证书验证使用 **webpki**（Rust 实现的 X.509 验证）
 >
-> **来源**: [rustls Documentation](https://docs.rs/rustls/latest/rustls/) · [rustls Book](https://docs.rs/rustls/latest/rustls/manual/_00_impl_details/index.html) · [Let's Encrypt — Rustls](https://letsencrypt.org/docs/rustls/)
+> **来源**: [rustls Documentation](https://docs.rs/rustls/latest/rustls/) · [rustls Book](https://docs.rs/rustls/latest/rustls/manual/index.html) · [Let's Encrypt — Rustls](https://letsencrypt.org/docs/rustls/)
 
 ### 6.3 dalek-cryptography：零知识友好
 >

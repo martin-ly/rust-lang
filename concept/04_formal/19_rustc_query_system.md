@@ -14,23 +14,38 @@
 > **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Type Inference](./08_type_inference.md) · [NLL and Polonius](../03_advanced/08_nll_and_polonius.md)
 > **后置概念**: [Compiler Internals](../06_ecosystem/45_compiler_internals.md) · [Compiler Infrastructure](../06_ecosystem/47_compiler_infrastructure.md)
 
+>
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---
 
 > **来源**: [Rustc Dev Guide — Queries](https://rustc-dev-guide.rust-lang.org/query.html) ·
-> [Rustc Dev Guide — Incremental Compilation](https://rustc-dev-guide.rust-lang.org/incremental-compilation.html) ·
+> [Rustc Dev Guide — Incremental Compilation](https://rustc-dev-guide.rust-lang.org/queries/incremental-compilation.html) ·
 > [Rustc Dev Guide — Overview](https://rustc-dev-guide.rust-lang.org/overview.html) ·
 > [Salsa](https://salsa-rs.github.io/salsa/)
 
 ## 📑 目录
 
 - [Rustc 查询系统与增量编译](#rustc-查询系统与增量编译)
+  - [📑 目录](#-目录)
   - [一、为什么需要查询系统](#一为什么需要查询系统)
   - [二、查询系统的核心抽象](#二查询系统的核心抽象)
+    - [2.1 `TyCtxt`](#21-tyctxt)
+    - [2.2 查询的三种形态](#22-查询的三种形态)
   - [三、依赖图与 Red-Green 算法](#三依赖图与-red-green-算法)
+    - [3.1 Dep Graph（依赖图）](#31-dep-graph依赖图)
+    - [3.2 Red-Green 算法](#32-red-green-算法)
+    - [3.3 哈希与序列化](#33-哈希与序列化)
   - [四、增量编译实战](#四增量编译实战)
+    - [4.1 开启与观察](#41-开启与观察)
+    - [4.2 典型输出解读](#42-典型输出解读)
+    - [4.3 增量编译不生效的常见原因](#43-增量编译不生效的常见原因)
   - [五、局限与边界](#五局限与边界)
   - [六、与 Salsa 的关系](#六与-salsa-的关系)
   - [嵌入式测验](#嵌入式测验)
+    - [测验 1：`rustc` 的查询系统主要解决什么问题？](#测验-1rustc-的查询系统主要解决什么问题)
+    - [测验 2：什么是 Red-Green 算法中的 "Green" 节点？](#测验-2什么是-red-green-算法中的-green-节点)
+    - [测验 3：增量编译的粒度是“文件”还是“查询结果”？](#测验-3增量编译的粒度是文件还是查询结果)
+    - [测验 4：为什么 borrow checker 目前会全量执行？](#测验-4为什么-borrow-checker-目前会全量执行)
   - [权威来源索引](#权威来源索引)
 
 ---
@@ -114,8 +129,8 @@ graph LR
 
 增量编译的核心算法：
 
-1. **Green（绿色）**: 如果某个 `DepNode` 的输入（依赖）与上次完全相同，则它的输出也一定相同，可以直接复用上次结果。  
-2. **Red（红色）**: 如果输入发生变化，或者该节点本身依赖了红色节点，则需要重新计算。  
+1. **Green（绿色）**: 如果某个 `DepNode` 的输入（依赖）与上次完全相同，则它的输出也一定相同，可以直接复用上次结果。
+2. **Red（红色）**: 如果输入发生变化，或者该节点本身依赖了红色节点，则需要重新计算。
 
 ```mermaid
 graph TD
@@ -131,7 +146,7 @@ graph TD
 
 > **关键洞察**: Red-Green 不是“按文件”增量，而是**按查询结果**增量。即使一个文件被修改，只要它不影响某个查询的输入，该查询的结果仍可复用。
 >
-> [来源: Rustc Dev Guide — Incremental Compilation](https://rustc-dev-guide.rust-lang.org/incremental-compilation.html)
+> [来源: Rustc Dev Guide — Incremental Compilation](https://rustc-dev-guide.rust-lang.org/queries/incremental-compilation.html)
 
 ### 3.3 哈希与序列化
 
@@ -179,10 +194,10 @@ incremental: process 23 dirty nodes
 
 ## 五、局限与边界
 
-1. **并非所有查询都磁盘缓存**：某些查询（如部分 lint）为了正确性每次都会执行。  
-2. **borrow checker 目前会全量跑**：`mir_borrowck` 查询在 codegen 前会被强制触发所有函数，以便报告所有错误。  
-3. **跨 crate 增量有限**：crate 边界是增量编译的天然边界；依赖 crate 改变通常会导致下游重编。  
-4. **缓存占用空间**：`target/` 下的增量缓存可能很大，CI 中常关闭增量编译以节省空间。  
+1. **并非所有查询都磁盘缓存**：某些查询（如部分 lint）为了正确性每次都会执行。
+2. **borrow checker 目前会全量跑**：`mir_borrowck` 查询在 codegen 前会被强制触发所有函数，以便报告所有错误。
+3. **跨 crate 增量有限**：crate 边界是增量编译的天然边界；依赖 crate 改变通常会导致下游重编。
+4. **缓存占用空间**：`target/` 下的增量缓存可能很大，CI 中常关闭增量编译以节省空间。
 
 ```rust,ignore
 // 示例：在 CI 中关闭增量编译
@@ -260,7 +275,7 @@ Salsa 本身是从 `rustc` 查询系统中提取出来的通用框架，被 `rus
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
 | [Rustc Dev Guide — Queries](https://rustc-dev-guide.rust-lang.org/query.html) | ✅ 一级 | 查询系统官方文档 |
-| [Rustc Dev Guide — Incremental Compilation](https://rustc-dev-guide.rust-lang.org/incremental-compilation.html) | ✅ 一级 | 增量编译官方文档 |
+| [Rustc Dev Guide — Incremental Compilation](https://rustc-dev-guide.rust-lang.org/queries/incremental-compilation.html) | ✅ 一级 | 增量编译官方文档 |
 | [Rustc Dev Guide — Overview](https://rustc-dev-guide.rust-lang.org/overview.html) | ✅ 一级 | 编译流程总览 |
 | [Salsa Book](https://salsa-rs.github.io/salsa/) | ✅ 一级 | 查询系统通用框架 |
 

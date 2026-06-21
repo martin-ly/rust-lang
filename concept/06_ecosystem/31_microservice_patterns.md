@@ -7,8 +7,8 @@
 >
 # 微服务架构模式 (Microservice Architecture Patterns)
 >
-> **EN**: 微服务架构模式 (Microservice Architecture Patterns) (Chinese)
-> **Summary**: 微服务架构模式 (Microservice Architecture Patterns) (Chinese). Core Rust concept covering design patterns.
+> **EN**: Microservice Patterns
+> **Summary**: Microservice Patterns: Rust ecosystem tools, crates, and engineering practices.
 >
 > **受众**: [进阶]
 
@@ -19,6 +19,8 @@
 > **前置概念**: [Async](../03_advanced/02_async.md) · [分布式系统](./18_distributed_systems.md) · [错误处理](../02_intermediate/04_error_handling.md)
 > **后置概念**: [事件驱动架构](./32_event_driven_architecture.md) · [云原生](./24_cloud_native.md)
 
+>
+> **来源**: [tower](https://docs.rs/tower/) · [tonic](https://docs.rs/tonic/) · [failsafe](https://docs.rs/failsafe/)
 ---
 
 > **来源**: [Axum](https://docs.rs/axum/latest/axum/) · [Tower](https://docs.rs/tower/latest/tower/) · [failsafe crate](https://docs.rs/failsafe/latest/failsafe/) · [Microservices Patterns (Chris Richardson)](https://microservices.io/book/) · [Kafka Documentation](https://kafka.apache.org/documentation/)

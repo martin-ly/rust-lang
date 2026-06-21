@@ -1,4 +1,8 @@
+> **Summary**: Future 23 Rust Edition Guide Deprecated. Core Rust concept.
+>
 # Rust Edition 机制与迁移指南
+>
+> **EN**: Future 23 Rust Edition Guide Deprecated
 
 > **受众**: [归档]
 > **Bloom 层级**: 分析 → 应用
@@ -13,7 +17,7 @@
 > **来源**:
 > [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
 > [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/) ·
-> [RFC 2052 — Epochs](https://rust-lang.github.io/rfcs/2052-epochs.html) ·
+> [RFC 2052 — Epochs](https://rust-lang.github.io/rfcs//2052-epochs.html) ·
 > [Rust Blog — Edition 2024](https://blog.rust-lang.org/) ·
 > [Wikipedia — Software Versioning](https://en.wikipedia.org/wiki/Software_versioning)
 
@@ -119,7 +123,7 @@ Edition 机制:
 ```
 
 > **兼容性洞察**: **Rust 的兼容性承诺是行业标杆**——Edition 机制实现了"演化而不革命"。
-> [来源: [Rust RFC 2052](https://rust-lang.github.io/rfcs/2052-epochs.html)]
+> [来源: [Rust RFC 2052](https://rust-lang.github.io/rfcs//2052-epochs.html)]
 
 ---
 
@@ -361,7 +365,7 @@ graph TD
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
 | [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/) | ✅ 一级 | 官方指南 |
-| [RFC 2052](https://rust-lang.github.io/rfcs/2052-epochs.html) | ✅ 一级 | Edition RFC |
+| [RFC 2052](https://rust-lang.github.io/rfcs//2052-epochs.html) | ✅ 一级 | Edition RFC |
 | [Rust Blog](https://blog.rust-lang.org/) | ✅ 一级 | 官方博客 |
 | [cargo fix](https://doc.rust-lang.org/cargo/commands/cargo-fix.html) | ✅ 一级 | 迁移工具 |
 | [SemVer](https://semver.org/) | ✅ 二级 | 语义化版本 |

@@ -5,8 +5,8 @@
 >
 # 引用语义：自动解引用、Deref 强制与类型转换
 >
-> **EN**: 引用语义：自动解引用、Deref 强制与类型转换 (Chinese)
-> **Summary**: Reference Semantics (引用语义). Auto-deref, Deref coercion, and type coercion mechanisms in Rust, clarifying implicit conversions and their interaction with the borrow checker.
+> **EN**: Reference Semantics
+> **Summary**: Reference Semantics: core Rust concepts, syntax, and examples.
 > **受众**: [初学者]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **S** — Structure
@@ -360,7 +360,7 @@ graph TD
 > **认知功能**: 此决策树判断是否应为类型实现 Deref。核心判断标准是**语义是否属于"引用"家族**。
 > **使用建议**: Deref 只用于**智能指针/引用包装器**。普通封装应使用显式方法，而非 Deref。
 > **关键洞察**: Deref 的滥用会导致**隐式行为过度**——调用者无法从代码中看出转换发生，增加理解成本。
-> [来源: [Rust API Guidelines — Deref](https://rust-lang.github.io/api-guidelines/predictability.html)]
+> [来源: [Rust API Guidelines — Deref](https://rust-lang.github.io/api-guidelines//predictability.html)]
 
 ---
 
@@ -474,7 +474,7 @@ graph TD
 > [Rust Reference — Method Call Expressions](https://doc.rust-lang.org/reference/expressions/method-call-expr.html#automatic-referencing) ·
 > [TRPL Ch4 — References and Borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html) ·
 > [Rustonomicon — Transmutes](https://doc.rust-lang.org/nomicon/transmutes.html) ·
-> [PLDI 2025 — Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/) ·
+> [PLDI 2025 — Tree Borrows](https://plv.mpi-sws.org/rustbelt/) ·
 > [Rust Internals — Partial Reborrows](https://internals.rust-lang.org/)
 
 ### 7.1 多级引用类型
@@ -746,7 +746,7 @@ graph TD
 ### 7.4 Tree Borrows 模型
 
 > **Bloom 层级**: 分析 → 应用
-> [来源: [PLDI 2025 — Ralf Jung et al., "Tree Borrows"](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]（一级来源，学术论文）
+> [来源: [PLDI 2025 — Ralf Jung et al., "Tree Borrows"](https://plv.mpi-sws.org/rustbelt/)]（一级来源，学术论文）
 
 #### 7.4.1 从 Stacked Borrows 到 Tree Borrows
 
@@ -800,7 +800,7 @@ let r2 = &mut r1;      // 树节点 B: Unique (指向 r1), 节点 A 变为 Reser
 树模型允许 `r2` 存在时 `r1` 暂时被"冻结"（从 Unique 降级为 Reserved），当 `r2` 释放后 `r1` 恢复 Unique 权限。这种"临时降级"在栈模型中难以表达，但在树模型中自然成为父子节点的权限转换。
 
 > **关键洞察**: Tree Borrows 使得 `&mut &mut T` 的行为更加可预测——内层引用可以在外层引用的生命周期内被"临时冻结"，而不会触发 UB（Undefined Behavior）。
-> [来源: [PLDI 2025 — Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]（一级来源）
+> [来源: [PLDI 2025 — Tree Borrows](https://plv.mpi-sws.org/rustbelt/)]（一级来源）
 
 ---
 
@@ -1097,7 +1097,7 @@ let target: &mut i32 = *r_mut;    // ✅ 必须显式解引用
 Tree Borrows 的权限树在 Iris 框架中可以建模为**分式权限（Fractional Permissions）**的层次化分配：每个节点持有父节点授予的权限子集，当子节点活跃时，父节点的对应权限被冻结。
 
 > **学术连接**: Tree Borrows 模型已被整合进 RustBelt 项目的 Iris 框架中，为 Rust 的 unsafe 代码验证提供了更精确的内存模型基础。
-> [来源: [PLDI 2025 — Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]（一级来源）
+> [来源: [PLDI 2025 — Tree Borrows](https://plv.mpi-sws.org/rustbelt/)]（一级来源）
 
 ---
 
@@ -1169,8 +1169,8 @@ let s: &mut &Secret = &mut &Secret(String::from("x"));
 | [Rust Reference — Reference Types](https://doc.rust-lang.org/reference/types/pointer.html) | ✅ 一级 | 引用类型的语法与语义 |
 | [Rust Reference — Type Coercions](https://doc.rust-lang.org/reference/type-coercions.html) | ✅ 一级 | 类型强制与引用弱化 |
 | [Rust Reference — Method Call Expressions](https://doc.rust-lang.org/reference/expressions/method-call-expr.html) | ✅ 一级 | 自动解引用规则 |
-| [RFC 2094 — Non-Lexical Lifetimes](https://rust-lang.github.io/rfcs/2094-nll.html) | ✅ 一级 | NLL 的设计与实现 |
-| [PLDI 2025 — Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/) | ✅ 一级 | 树形借用模型学术论文 |
+| [RFC 2094 — Non-Lexical Lifetimes](https://rust-lang.github.io/rfcs//2094-nll.html) | ✅ 一级 | NLL 的设计与实现 |
+| [PLDI 2025 — Tree Borrows](https://plv.mpi-sws.org/rustbelt/) | ✅ 一级 | 树形借用模型学术论文 |
 | [RustBelt / Iris](https://plv.mpi-sws.org/rustbelt/) | ✅ 一级 | Rust 形式化验证框架 |
 | [Rust Internals — Partial Reborrows](https://internals.rust-lang.org/) | ⚠️ 二级 | 社区对部分重借用的讨论 |
 | [Rust Blog — Polonius Update](https://blog.rust-lang.org/inside-rust/2023/10/06/polonius-update.html) | ⚠️ 二级 | Polonius 借用检查器进展 |
@@ -1413,7 +1413,7 @@ fn main() {}
 
 > [来源: [Rustonomicon — References](https://doc.rust-lang.org/nomicon/references.html)]
 > [来源: [IEEE 754-2019 — Floating-Point](https://standards.ieee.org/standard/754-2019.html)]
-> [来源: [RFC 2005 — Match Ergonomics](https://rust-lang.github.io/rfcs/2005-match-ergonomics.html)]
+> [来源: [RFC 2005 — Match Ergonomics](https://rust-lang.github.io/rfcs//2005-match-ergonomics.html)]
 
 ## 认知路径
 

@@ -1,3 +1,5 @@
+> **EN**: Quantum Computing Rust
+> **Summary**: Quantum Computing Rust: Rust ecosystem tools, crates, and engineering practices.
 > **内容分级**: [实验级]
 
 > **代码状态**: [综述级 — 待补充代码]
@@ -6,73 +8,7 @@
 
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
-## 代码示例：量子门操作模拟（概念性实现）
-
-以下展示用量子计算核心概念（叠加态、幺正变换）在 Rust 中的数学表达：
-
-```rust,ignore
-use nalgebra::{Matrix2, Vector2, Complex};
-
-// 复数类型简写
-type C = Complex<f64>;
-
-/// 量子比特状态 |ψ⟩ = α|0⟩ + β|1⟩
-struct Qubit {
-    state: Vector2<C>,
-}
-
-impl Qubit {
-    fn new(alpha: C, beta: C) -> Self {
-        let state = Vector2::new(alpha, beta);
-        // 归一化: |α|² + |β|² = 1
-        assert!((state.norm_squared() - 1.0).abs() < 1e-9);
-        Self { state }
-    }
-
-    /// 应用 Hadamard 门: H = 1/√2 [[1, 1], [1, -1]]
-    fn hadamard(&mut self) {
-        let h = C::new(1.0 / 2.0f64.sqrt(), 0.0);
-        let gate = Matrix2::new(h, h, h, -h);
-        self.state = gate * self.state;
-    }
-
-    /// 测量概率: P(|0⟩) = |α|²
-    fn prob_zero(&self) -> f64 {
-        self.state.x.norm_squared()
-    }
-}
-```
-
-> **注意**: 真实量子计算需要使用专用库（如 `qiskit-rust` 或 `qudit`），以上为数学原理演示。
-
->
-> **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
->
-# Quantum Computing in Rust（量子计算与 Rust）
->
-> **EN**: Quantum Computing in Rust（量子计算与 Rust） (Chinese)
-> **Summary**: 以下展示用量子计算核心概念（叠加态、幺正变换）在 Rust 中的数学表达： ```rust,ignore use nalgebra::{Matrix2, Vector2, Complex}; // 复数types简写 type C = Complex<f64>; /// 量子比特状态 |ψ⟩ = α|0⟩ + β|1⟩ struct Qubit { state: Vector2<C>, } impl Qubit { fn new(alpha: C, beta: C) -> Self { let state = Vector2::new(alpha, beta); // 归一化: |α|² + |β|
->
-> **受众**: [进阶]
-
-> **Bloom 层级**: 分析 → 评价
-> **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
-> **双维定位**: C×Ana — 分析量子计算原理、模拟性能与 Rust 生态的工程可行性
-> **前置依赖**: [安全与密码学](./43_security_cryptography.md) · [并发编程](../03_advanced/01_concurrency.md) · [性能优化](./15_performance_optimization.md) · [类型系统](../01_foundation/04_type_system.md) · [泛型](../02_intermediate/02_generics.md)
-> **后置延伸**: [机器学习生态](./46_machine_learning_ecosystem.md) · [分布式系统](./18_distributed_systems.md) · [形式化验证](../04_formal/05_verification_toolchain.md) · [WebAssembly](./11_webassembly.md)
-
----
-
-> **来源**:
-> [Nielsen & Chuang — Quantum Computation and Quantum Information](https://www.cambridge.org/highereducation/books/quantum-computation-and-quantum-information/01E10196D0A682A6AEFFEA52D53BE9AE) ·
-> [Qiskit Textbook](https://qiskit.org/textbook/) ·
-> [IBM Quantum](https://quantum.ibm.com/) ·
-> [NIST Post-Quantum Cryptography](https://csrc.nist.gov/projects/post-quantum-cryptography) ·
-> [Are We Quantum Yet?](https://arewequantumyet.github.io/) ·
-> [roqoqo Documentation](https://docs.rs/roqoqo/) ·
-> [rustqip GitHub](https://github.com/renmusxd/rustqip) ·
-> [LogosQ arXiv 2025](https://arxiv.org/abs/2512.23183) ·
-> [rustls-post-quantum](https://crates.io/crates/rustls-post-quantum)
+> **来源**: [Cargo Book](https://doc.rust-lang.org/cargo/) · [Rustdoc Book](https://doc.rust-lang.org/rustdoc/) · [std API Docs](https://doc.rust-lang.org/std/)
 
 ## 📑 目录
 
@@ -239,7 +175,7 @@ impl Qubit {
 | **活跃程度** | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
 | **适用场景** | 电路序列化 / 云平台 | 教学 / 原型 | 模拟 / QASM 导出 | IBM QASM 验证 | 大规模态向量模拟 | PQC 集成 | 生产级 PQ-TLS |
 
-> **来源**: [roqoqo crates.io](https://crates.io/crates/roqoqo) · [rustqip GitHub](https://github.com/renmusxd/rustqip) · [q1tsim crates.io](https://crates.io/crates/q1tsim) · [qasmsim GitHub](https://github.com/sdelquin/qasmsim) · [pqcrypto GitHub](https://github.com/rustpq/pqcrypto) · [rustls-post-quantum crates.io](https://crates.io/crates/rustls-post-quantum)
+> **来源**: [roqoqo crates.io](https://crates.io/crates/roqoqo) · [rustqip GitHub](https://github.com/renmusxd/rustqip) · [q1tsim crates.io](https://crates.io/crates/q1tsim) · [qasmsim GitHub](https://github.com/delapuente/qasmsim) · [pqcrypto GitHub](https://github.com/rustpq/pqcrypto) · [rustls-post-quantum crates.io](https://crates.io/crates/rustls-post-quantum)
 
 ---
 
@@ -326,7 +262,7 @@ Rust 量子模拟器生态定位:
   跨语言绑定    →  rust-libquantum, qoqo (Python)
 ```
 
-> **来源**: [Are We Quantum Yet?](https://arewequantumyet.github.io/) · [qasmsim GitHub](https://github.com/sdelquin/qasmsim) · [q1tsim crates.io](https://crates.io/crates/q1tsim)
+> **来源**: [Are We Quantum Yet?](https://arewequantumyet.github.io/) · [qasmsim GitHub](https://github.com/delapuente/qasmsim) · [q1tsim crates.io](https://crates.io/crates/q1tsim)
 
 ### 3.4 与 Python 量子生态的交互
 
@@ -442,7 +378,7 @@ Rust 在量子模拟中的性能优势:
   5. FFI 能力: 可安全绑定 QuEST (C) 或 CUDA 内核
 ```
 
-> **来源**: [Rayon Documentation](https://docs.rs/rayon/) · [Rust std::simd RFC](https://rust-lang.github.io/rfcs/2948-portable-simd.html) · [LogosQ Performance Analysis](https://arxiv.org/abs/2512.23183)
+> **来源**: [Rayon Documentation](https://docs.rs/rayon/) · [Rust std::simd RFC](https://github.com/rust-lang/rfcs/pull/2948) · [LogosQ Performance Analysis](https://arxiv.org/abs/2512.23183)
 
 ---
 

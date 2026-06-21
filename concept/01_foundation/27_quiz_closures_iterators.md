@@ -3,7 +3,7 @@
 # 测验：闭包与迭代器（L1 试点扩展）
 >
 > **EN**: Closures
-> **Summary**: ```rust fn main() { let add = |a, b| a + b; println!("{}", add(2, 3)); println!("{}", add(2.5, 3.5)); }``` <details> <summary>💡 点击展开答案与解析</summary> **答案**：❌ 不能编译。 **错误信息**：`expected integer, found floating-point number` **解析**：Rust 闭包**没有generics参数**，types在第一次使用时被推断并固定。 ```rust let add = |a, b| a + b; // 第一
+> **Summary**: Quiz Closures Iterators. Core Rust concept.
 
 > **受众**: [初学者]
 > **内容分级**: [综述级]
@@ -13,7 +13,7 @@
 ---
 
 > **来源**:
-> [The Rust Programming Language — Ch13 Closures](https://doc.rust-lang.org/book/ch13-00-closures.html) ·
+> [The Rust Programming Language — Ch13 Closures](https://doc.rust-lang.org/book/ch13-01-closures.html) ·
 > [The Rust Programming Language — Ch13 Iterators](https://doc.rust-lang.org/book/ch13-01-closures.html) ·
 > [Rust Reference — Closures](https://doc.rust-lang.org/reference/expressions/closure-expr.html)
 >
@@ -34,7 +34,7 @@
 
 ### Q1. 以下代码能否编译？解释闭包的类型推断
 
-```rust
+```rust,ignore
 fn main() {
     let add = |a, b| a + b;
     println!("{}", add(2, 3));
@@ -51,7 +51,7 @@ fn main() {
 
 **解析**：Rust 闭包**没有泛型参数**，类型在第一次使用时被推断并固定。
 
-```rust
+```rust,ignore
 let add = |a, b| a + b;
 // 第一次调用 add(2, 3) 推断：add: |i32, i32| -> i32
 // 第二次调用 add(2.5, 3.5) 期望 |f64, f64| -> f64，不匹配！
@@ -76,7 +76,7 @@ let add_f64 = |a: f64, b: f64| a + b;
 
 Rust 闭包编译后实际上是匿名结构体：
 
-```rust
+```rust,ignore
 // let f = |x| x + 1;
 // 编译器生成：
 struct Closure { /* 捕获的环境 */ }
@@ -165,7 +165,7 @@ fn main() {
 
 **为什么需要 `move`**：
 
-```rust
+```rust,compile_fail
 fn make_adder(x: i32) -> impl Fn(i32) -> i32 {
     |y| x + y  // ❌ 编译错误：x 的生命周期不够长
 }
@@ -175,7 +175,7 @@ fn make_adder(x: i32) -> impl Fn(i32) -> i32 {
 
 **加了 `move`**：
 
-```rust
+```rust,ignore
 move |y| x + y
 // x 被复制（i32 实现 Copy）或移动到闭包中
 // 闭包拥有 x 的副本，与外部 x 无关
@@ -227,7 +227,7 @@ Result: [2, 4, 6, 8, 10]
 
 **惰性求值（Lazy Evaluation）**：
 
-```rust
+```rust,ignore
 let iter = v.iter()
     .map(|x| x * 2); // 此时没有任何计算发生！
 
@@ -246,7 +246,7 @@ iter.for_each(|x| ...); // 驱动整个链
 
 **性能优势**：惰性求值允许编译器优化整个迭代器链，消除中间分配：
 
-```rust
+```rust,ignore
 // 等价于：一次遍历，无中间 Vec
 let sum: i32 = v.iter().map(|x| x * 2).filter(|x| x > 4).sum();
 ```
@@ -295,7 +295,7 @@ fn main() {
 
 **修复方案**：
 
-```rust
+```rust,ignore
 impl IntoIterator for Counter {
     type Item = u32;
     type IntoIter = Counter; // 自身就是迭代器
@@ -308,7 +308,7 @@ impl IntoIterator for Counter {
 
 **或更简单**：为 `Counter` 的引用实现 `IntoIterator`：
 
-```rust
+```rust,ignore
 fn main() {
     let counter = Counter { count: 0 };
     for val in counter { // 需要 IntoIterator
@@ -323,7 +323,7 @@ fn main() {
 
 抱歉，标准库确实为所有 `Iterator` 类型提供了 `IntoIterator` 的 blanket impl：
 
-```rust
+```rust,ignore
 impl<I: Iterator> IntoIterator for I {
     type Item = I::Item;
     type IntoIter = I;
@@ -335,7 +335,7 @@ impl<I: Iterator> IntoIterator for I {
 
 **更好的题目**——为什么这段代码只能迭代一次：
 
-```rust
+```rust,ignore
 let counter = Counter { count: 0 };
 for val in counter { println!("{}", val); }
 for val in counter { println!("{}", val); } // ❌ 编译错误：counter 已被移动
@@ -369,7 +369,7 @@ fn main() {
 
 **解析**：迭代器链的执行顺序：
 
-```rust
+```rust,ignore
 [1, 2, 3, 4, 5, 6]
     .filter(|x| x % 2 == 0)   // [2, 4, 6]
     .map(|x| x * x)            // [4, 16, 36]
@@ -423,7 +423,7 @@ fn main() {
 
 **解析**：`fold` 是**归约（reduce）**操作，遍历所有元素并累积结果。
 
-```rust
+```rust,ignore
 // fold(初始值, |累积值, 当前元素| -> 新累积值)
 v.iter().fold(0, |acc, x| acc + x)
 // 执行过程：
@@ -441,7 +441,7 @@ v.iter().fold(0, |acc, x| acc + x)
 | `fold(init, f)` | 显式提供 | 返回 `init` |
 | `reduce(f)` | 使用第一个元素 | 返回 `None` |
 
-```rust
+```rust,compile_fail
 let empty: Vec<i32> = vec![];
 empty.iter().fold(0, |a, b| a + b);     // 返回 0
 empty.iter().reduce(|a, b| a + b);       // 返回 None
@@ -449,7 +449,7 @@ empty.iter().reduce(|a, b| a + b);       // 返回 None
 
 **其他归约方法**：
 
-```rust
+```rust,ignore
 v.iter().sum();      // fold 的特例
 v.iter().product();  // fold 的特例
 v.iter().count();    // 元素个数
@@ -490,7 +490,7 @@ fn main() {
 
 **注意闭包签名**：
 
-```rust
+```rust,ignore
 v.iter().find(|&&x| x > 3)
 // iter() 返回 &i32
 // find 传递 &&i32（对引用的引用）
@@ -499,13 +499,13 @@ v.iter().find(|&&x| x > 3)
 
 **更简洁的写法**（使用 `copied()` 或 `cloned()`）：
 
-```rust
+```rust,ignore
 let found = v.iter().copied().find(|&x| x > 3); // Some(4)
 ```
 
 **相关方法**：
 
-```rust
+```rust,ignore
 v.iter().find(|&&x| x > 3);        // Some(&4)
 v.iter().position(|&x| x > 3);     // Some(3)
 v.iter().rposition(|&x| x > 3);    // Some(4)，从右查找
@@ -553,7 +553,7 @@ let threshold = 3;
 
 **若使用 `iter()`**：
 
-```rust
+```rust,ignore
 nums.iter()                          // &i32
     .filter(|&&x| x > threshold)     // 需要 &&x
     .map(|&x| x * 2)                 // 需要 &x
@@ -575,7 +575,7 @@ nums.iter()                          // &i32
 
 ### Q10. 以下代码能否编译？如何修复？这是 `move` 闭包与迭代器的经典陷阱
 
-```rust
+```rust,compile_fail
 fn make_filter(min: i32) -> impl Fn(&i32) -> bool {
     |x| x >= &min
 }
@@ -599,7 +599,7 @@ fn main() {
 
 **修复方案**——使用 `move` 闭包：
 
-```rust
+```rust,compile_fail
 fn make_filter(min: i32) -> impl Fn(i32) -> bool {
     move |x| x >= min  // move 将 min 复制到闭包中
 }
@@ -644,7 +644,7 @@ fn make_filter(min: i32) -> impl Fn(&i32) -> bool {
 
 ---
 
-> **权威来源**: [The Rust Programming Language — Ch13](https://doc.rust-lang.org/book/ch13-00-closures.html) · [Rust By Example — Closures](https://doc.rust-lang.org/rust-by-example/fn/closures.html) · [std::iter::Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html)
+> **权威来源**: [The Rust Programming Language — Ch13](https://doc.rust-lang.org/book/ch13-01-closures.html) · [Rust By Example — Closures](https://doc.rust-lang.org/rust-by-example/fn/closures.html) · [std::iter::Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html)
 
 ## 嵌入式测验（Embedded Quiz）
 

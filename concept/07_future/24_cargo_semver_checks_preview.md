@@ -9,13 +9,15 @@
 
 # cargo-semver-checks：从社区工具到 Cargo 官方集成
 >
-> **EN**: Cargo
-> **Summary**: Cargo. Emerging Rust feature or ecosystem trend: Cargo.
+> **EN**: Cargo SemVer Checks Preview
+> **Summary**: Preview of `cargo-semver-checks` integration for automated semantic-versioning linting.
 > **受众**: [专家]
 > **内容分级**: [实验级]
 > **跟踪版本**: 1.96.0+ (Edition 2024)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 
+>
+> **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/) · [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 ---
 
 > **来源**:
@@ -62,7 +64,7 @@
 
 当前 `cargo-semver-checks` 最大的局限是**无法执行类型检查**。例如以下变更当前无法被检测：
 
-```rust
+```rust,ignore
 // 旧版本
 pub fn example(x: i64) {}
 
@@ -89,7 +91,7 @@ pub fn example(x: String) {}
 
 ### 2.3 `public` 依赖标记集成
 
-随着 Cargo `public = true/false` 依赖标记（[RFC 3516](https://rust-lang.github.io/rfcs/3516.html)）的推进，`cargo-semver-checks` 计划利用该标记优化分析：
+随着 Cargo `public = true/false` 依赖标记（[RFC 3516](https://rust-lang.github.io/rfcs//3516-public-private-dependencies.html)）的推进，`cargo-semver-checks` 计划利用该标记优化分析：
 
 - 仅对 `public` 依赖的 API 变更进行 SemVer 影响分析
 - 减少 `private` 依赖升级导致的误报

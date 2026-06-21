@@ -3,8 +3,9 @@
 > **代码状态**: ✅ 含可编译示例
 
 >
-> **EN**: eBPF / Aya / Rex 的 Rust 映射 (Chinese)
-> **Summary**: eBPF / Aya / Rex 的 Rust 映射 (Chinese). Emerging Rust feature or ecosystem trend: eBPF / Aya / Rex 的 Rust 映射 (Chinese).
+> **EN**: eBPF Rust
+> **Summary**: eBPF Rust: emerging Rust language feature or ecosystem trend.
+> **来源**: [Aya Book](https://aya-rs.dev/book/) · [Linux Kernel BPF Docs](https://docs.kernel.org/bpf/)
 >
 > **受众**: [专家]
 > **内容分级**: [综述级]

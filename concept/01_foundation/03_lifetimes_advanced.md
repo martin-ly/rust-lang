@@ -5,13 +5,15 @@
 >
 # Lifetimes 高级主题
 >
-> **EN**: Lifetimes 高级主题 (Chinese)
-> **Summary**: Lifetimes 高级主题 (Chinese). Guide to 03 Lifetimes Advanced.
+> **EN**: Lifetimes Advanced
+> **Summary**: Lifetimes Advanced: core Rust concepts, syntax, and examples.
 > **受众**: [初学者]
 > **层次定位**: L1-L3 进阶 / 生命周期高级主题
 > **前置依赖**: [Lifetimes 基础](./03_lifetimes.md)
 > **定理链编号**: T-015 Polonius 流敏感安全 ⟹ T-016 Elision 完备性
 
+>
+> **来源**: [TRPL — Advanced Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) · [Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html) · [Reference — Subtyping and Variance](https://doc.rust-lang.org/reference/subtyping.html)
 ---
 
 从直觉到形式化的过渡需要六步递进的认知脚手架。
@@ -582,7 +584,7 @@ fn filter<'a, 'b>(
 }
 ```
 
-> **[来源: Rust Reference: `impl Trait` in return position]** RPIT 的生命周期捕获策略在 [RFC 2289](https://rust-lang.github.io/rfcs/2289.html) 中定义：返回类型自动捕获所有在函数体中被实现类型使用且出现在签名中的生命周期。✅
+> **[来源: Rust Reference: `impl Trait` in return position]** RPIT 的生命周期捕获策略在 [RFC 2289](https://rust-lang.github.io/rfcs//2289-associated-type-bounds.html) 中定义：返回类型自动捕获所有在函数体中被实现类型使用且出现在签名中的生命周期。✅
 
 ### 14.2 `impl Trait` + `+'a` 的显式生命周期约束
 
@@ -687,7 +689,7 @@ where
 }
 ```
 
-> **[来源: [RFC 2289](https://rust-lang.github.io/rfcs/2289.html) (TAFIT)]** APIT 和 RPIT 的生命周期推断遵循不同的隐式捕获策略：APIT 作为泛型语法糖不引入新的生命周期捕获，RPIT 则自动封装实现类型的生命周期依赖。✅
+> **[来源: [RFC 2289](https://rust-lang.github.io/rfcs//2289-associated-type-bounds.html) (TAFIT)]** APIT 和 RPIT 的生命周期推断遵循不同的隐式捕获策略：APIT 作为泛型语法糖不引入新的生命周期捕获，RPIT 则自动封装实现类型的生命周期依赖。✅
 
 ### 14.4 RPIT vs APIT：生命周期推断对比矩阵
 
@@ -727,7 +729,7 @@ trait FactoryOld {
 
 RPITIT 的解决方式是让 `impl Trait` 在 trait 方法中等价于一个**隐式关联类型**，其生命周期由实现自动推断，同时通过编译器内部的**规范化（normalization）**机制确保调用方看到的类型签名一致。
 
-> **[来源: [RFC 2289](https://rust-lang.github.io/rfcs/2289.html) (TAFIT); Rust 1.75 Release Notes]** RPITIT 的稳定解决了 trait 层面返回抽象类型的表达力缺口，但隐式关联类型的生命周期推断仍遵循"自动捕获"原则。✅
+> **[来源: [RFC 2289](https://rust-lang.github.io/rfcs//2289-associated-type-bounds.html) (TAFIT); Rust 1.75 Release Notes]** RPITIT 的稳定解决了 trait 层面返回抽象类型的表达力缺口，但隐式关联类型的生命周期推断仍遵循"自动捕获"原则。✅
 
 **跨层映射**: 本章节 APIT/RPIT 语义 ↔ [`./04_type_system.md`](./04_type_system.md) §11 "类型系统前沿" · [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md) §4.1 "泛型参数推断"
 
@@ -810,7 +812,7 @@ impl<'s> Iterator for Words<'s> {
 
 Lending Iterator 通过 GATs 将 `Item` 参数化为 `Item<'a>`，并用 `where Self: 'a` 确保**迭代器本身至少存活到返回引用的生命周期**，从而安全地表达自引用迭代。这是 GATs 解决表达力鸿沟的经典案例。
 
-> **[来源: [RFC 1598](https://rust-lang.github.io/rfcs/1598.html) (GATs)]** `where Self: 'a` 约束确保关联类型不会引用比 `Self` 更短的生命周期，构成自引用集合的类型安全基础。✅
+> **[来源: [RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html) (GATs)]** `where Self: 'a` 约束确保关联类型不会引用比 `Self` 更短的生命周期，构成自引用集合的类型安全基础。✅
 > **[来源: Rust Reference; TRPL; Rust RFCs; Academic Papers]** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
 > **[来源: Wikipedia; POPL/PLDI/ECOOP Papers; RustBelt/Iris Project]** 形式化概念参考了权威学术来源和类型论研究。✅
 
@@ -1272,7 +1274,7 @@ fn main() {
 > HRTB 是 Rust 类型系统的高级特性，用于泛型代码（`std::fs::read_dir` 的回调、解析器的输入引用）。
 > 这与 Haskell 的 `RankNTypes`（类似的高阶多态）或 C++ 的模板（无生命周期，但有完美转发和万能引用）类似
 > ——Rust 的 HRTB 在生命周期层面提供类似的表达能力。
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-05-advanced-lifetimes.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)] ·
 > [来源: [Rust Reference — Lifetime Bounds](https://doc.rust-lang.org/reference/trait-bounds.html#lifetime-bounds)]
 
 ### 10.4 边界测试：NLL（非词法生命周期）的边界（编译错误）
@@ -1300,7 +1302,7 @@ fn main() {
 > Polonius（下一代借用检查器）将解决更多 NLL 的边缘情况，但尚未稳定。
 > NLL 的设计体现了 Rust 类型系统的演进：从保守（词法作用域）到精确（数据流分析），逐步接受更多合法程序。
 > 这与 C++ 的临时对象生命周期（复杂规则，某些情况延长到语句结束）或 Swift 的 ARC（引用计数，无编译期生命周期）不同
-> ——Rust 在编译期通过静态分析确定精确的生命周期。[来源: [NLL RFC 2094](https://rust-lang.github.io/rfcs/2094-nll.html)] · [来源: [Polonius Initiative](https://rust-lang.github.io/polonius/)]
+> ——Rust 在编译期通过静态分析确定精确的生命周期。[来源: [NLL RFC 2094](https://rust-lang.github.io/rfcs//2094-nll.html)] · [来源: [Polonius Initiative](https://rust-lang.github.io/polonius/)]
 
 ### 10.3 边界测试：HRTB 与闭包生命周期不匹配（编译错误）
 
@@ -1345,7 +1347,7 @@ fn main() {
 
 以下函数签名中，哪些必须显式标注生命周期？
 
-```rust
+```rust,ignore
 fn foo(x: &str, y: &str) -> &str
 fn bar(x: &str) -> &str
 fn baz<'a>(x: &'a str, y: &str) -> &'a str

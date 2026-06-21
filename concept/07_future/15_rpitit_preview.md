@@ -3,8 +3,8 @@
 > **代码状态**: [综述级 — 待补充代码]
 
 >
-> **EN**: RPITIT Preview (Chinese)
-> **Summary**: RPITIT Preview (Chinese). Emerging Rust feature or ecosystem trend: RPITIT Preview (Chinese).
+> **EN**: RPITIT Preview
+> **Summary**: RPITIT Preview: emerging Rust language feature or ecosystem trend.
 >
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
@@ -18,7 +18,7 @@
 > **双维定位**: F×App — 应用 RPITIT 于 trait 设计
 > **前置依赖**: [Trait](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
 > **后置延伸**: [Type Alias Impl Trait](./16_type_alias_impl_trait_preview.md)
-> **来源**: [Rust Reference — Impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html) · [RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html) · [Rust Blog — AFIT](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html)
+> **来源**: [Rust Reference — Impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html) · [RFC 2289](https://rust-lang.github.io/rfcs//2289-associated-type-bounds.html) · [Rust Blog — AFIT](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 
@@ -61,7 +61,7 @@ fn main() {}
 > 1) RPITIT 是 GAT 的语法糖（`fn foo() -> impl Trait` ≈ `type Foo: Trait; fn foo() -> Self::Foo`）；
 > 2) GAT 更灵活但语法更冗长。这与 Java 的接口默认方法（返回具体类型，无抽象返回类型）或 C++ 的虚函数（返回类型必须完全相同，不支持协变返回）不同——Rust 的 RPITIT 是类型系统的创新，平衡了抽象和实现灵活性。
 >
-> [来源: [RPITIT RFC](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html)] ·
+> [来源: [RPITIT RFC](https://rust-lang.github.io/rfcs//2289-associated-type-bounds.html)] ·
 > [来源: [Async Fn In Traits](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html)]
 
 > **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)

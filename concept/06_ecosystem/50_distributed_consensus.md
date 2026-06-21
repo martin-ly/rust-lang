@@ -6,7 +6,7 @@
 >
 # Distributed Consensus（分布式共识）
 >
-> **EN**: Distributed Consensus（分布式共识） (Chinese)
+> **EN**: Distributed Consensus
 > **Summary**: Distributed Consensus. Guide to 50 Distributed Consensus.
 >
 > **受众**: [进阶]
@@ -17,6 +17,8 @@
 > **前置依赖**: [分布式系统](./18_distributed_systems.md) · [并发编程](../03_advanced/01_concurrency.md) · [网络协议](./38_network_protocols.md) · [类型系统](../01_foundation/04_type_system.md)
 > **后置延伸**: [区块链](./06_blockchain.md) · [云原生](./24_cloud_native.md) · [微服务架构](./31_microservice_patterns.md)
 
+>
+> **来源**: [raft-rs](https://docs.rs/raft/) · [hotstuff-rs](https://docs.rs/hotstuff-rs/)
 ---
 
 > **来源**:
@@ -384,7 +386,7 @@ Rust 优势:
   · Storage trait 允许自定义持久化后端
 ```
 
-> **来源**: [raft-rs Documentation](https://docs.rs/raft/latest/raft/) · [TiKV Architecture](https://tikv.org/docs/5.1/concepts/architecture/) · [etcd Raft](https://github.com/etcd-io/raft)
+> **来源**: [raft-rs Documentation](https://docs.rs/raft/latest/raft/) · [TiKV Architecture](https://tikv.org/docs/) · [etcd Raft](https://github.com/etcd-io/raft)
 
 ---
 
@@ -580,7 +582,7 @@ use tendermint_rpc::{Client, HttpClient};
 async fn query_tendermint_consensus() -> anyhow::Result<()> {
     let client = HttpClient::new("http://localhost:26657")?;
 
-    // 查询当前共识状态
+    / 查询当前共识状态
     let state = client.consensus_state().await?;
     println!("Round: {}, Step: {:?}", state.round, state.step);
 
@@ -644,7 +646,7 @@ async fn query_tendermint_consensus() -> anyhow::Result<()> {
 | **日志恢复** | snapshot + 增量 | 完整日志重放 | snapshot 频率权衡 |
 | **成员变更** | Joint Consensus | 运行时任意变更 | 需计划维护窗口 |
 
-> **来源**: [Raft Performance](https://tikv.org/docs/5.1/benchmark/performance/) · [PBFT Scalability](https://ieeexplore.ieee.org/document/8326838)
+> **来源**: [Raft Performance](https://tikv.org/docs/) · [PBFT Scalability](https://ieeexplore.ieee.org/document/8326838)
 
 ---
 

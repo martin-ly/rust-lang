@@ -3,6 +3,8 @@
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 
+>
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/)
 ---
 
 > **内容分级**: [专家级]
@@ -213,11 +215,11 @@ handle.join().unwrap();
 
 ## 四、异步模型
 
-> [来源: [RFC 2394](https://rust-lang.github.io/rfcs/2394.html), Async Book, Tokio Tutorial]：Future 与无栈协程
+> [来源: [RFC 2394](https://rust-lang.github.io/rfcs//2394-async_await.html), Async Book, Tokio Tutorial]：Future 与无栈协程
 
 ### 4.1 Future 状态机语义
 
-> **核心命题**: Rust 的 `async fn` 被编译器降阶为**无栈协程（stackless coroutine）**，生成一个实现了 `Future` trait 的匿名状态机。 [来源: [RFC 2394](https://rust-lang.github.io/rfcs/2394.html), *Asynchronous Programming in Rust*]
+> **核心命题**: Rust 的 `async fn` 被编译器降阶为**无栈协程（stackless coroutine）**，生成一个实现了 `Future` trait 的匿名状态机。 [来源: [RFC 2394](https://rust-lang.github.io/rfcs//2394-async_await.html), *Asynchronous Programming in Rust*]
 
 ```rust,ignore
 // 源代码
@@ -306,7 +308,7 @@ sequenceDiagram
 > **定理 T-EM-001（async 与 goroutine 不同构）**:
 > Rust `async/await` 与 Go goroutine **不同构**——前者是**惰性求值的无栈状态机**，后者是**立即调度的有栈协程**。
 > 二者在「创建后是否立即执行」和「状态存储方式」上存在不可调和的语义差异。
-> [来源: [RFC 2394](https://rust-lang.github.io/rfcs/2394.html); *Zero-cost futures in Rust*, Aaron Turon 2016]
+> [来源: [RFC 2394](https://rust-lang.github.io/rfcs//2394-async_await.html); *Zero-cost futures in Rust*, Aaron Turon 2016]
 
 ---
 
@@ -582,7 +584,7 @@ CPS:               fn f(k: impl FnOnce(T) -> R) -> R {
 - **状态机 → CPS**: `poll(cx)` 中的 `Context` 携带了 Waker（即续体），`Pending` 返回等价于「保存当前续体，等待外部事件」。
 - **CPS → 直接**: CPS 的逆变换（defunctionalization）将续体重构为状态机的显式状态。
 
-> **边界条件**: 等价性在 `Pin<&mut Self>` 的内存稳定性约束下成立。若状态包含自引用（如 `async` 块中引用了栈变量），则必须通过 `Pin` 保证状态机不会在内存中移动。破坏 `Pin` 契约（通过 `unsafe`）将导致等价性失效。 [来源: [RFC 2394](https://rust-lang.github.io/rfcs/2394.html); Danvy & Filinski, *Representing Control*, 1990]
+> **边界条件**: 等价性在 `Pin<&mut Self>` 的内存稳定性约束下成立。若状态包含自引用（如 `async` 块中引用了栈变量），则必须通过 `Pin` 保证状态机不会在内存中移动。破坏 `Pin` 契约（通过 `unsafe`）将导致等价性失效。 [来源: [RFC 2394](https://rust-lang.github.io/rfcs//2394-async_await.html); Danvy & Filinski, *Representing Control*, 1990]
 
 ---
 
@@ -824,7 +826,7 @@ fn main() {
 > 这与 Go 的 goroutine（M:N，由运行时调度）或 Erlang 的 process（M:N，由 BEAM VM 调度）不同
 > ——Rust 将并发抽象交给库（tokio、smol [历史: async-std [已归档]]），
 > 内核保持简单。执行模型同构的关键洞察：不是所有并发模型都能透明映射，选择受生态系统、性能需求、兼容性约束。
-> [来源: [Rust RFC 230](https://rust-lang.github.io/rfcs/0230-remove-runtime.html)] ·
+> [来源: [Rust RFC 230](https://rust-lang.github.io/rfcs//0230-remove-runtime.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-01-threads.html)]
 
 ### 10.4 边界测试：CPS 变换与 Rust 的 `?` 运算符（编译错误）

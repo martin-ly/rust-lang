@@ -22,6 +22,8 @@
 > [事件驱动架构](./32_event_driven_architecture.md) ·
 > [分布式系统](./18_distributed_systems.md)
 
+>
+> **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 ---
 
 > **来源**: [Fielding 2000 — Architectural Styles and the Design of Network-based Software Architectures](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm) ·
@@ -868,7 +870,7 @@ impl UserService for UserServiceImpl {
 }
 ```
 
-> **来源**: [tonic — Streaming](https://docs.rs/tonic/latest/tonic/codec/trait.Streaming.html) ·
+> **来源**: [tonic — Streaming](https://docs.rs/tonic/latest/tonic/codec/) ·
 > [gRPC Streaming](https://grpc.io/docs/what-is-grpc/core-concepts/)
 
 ### 6.3 拦截器与中间件
@@ -985,7 +987,7 @@ async fn proxy_to_user_service(req: Request<Body>) -> Result<Response<Body>, Sta
 }
 ```
 
-> **来源**: [Microsoft — API Gateway Pattern](https://docs.microsoft.com/en-us/azure/architecture/microservices/design/gateway) ·
+> **来源**: [Microsoft — API Gateway Pattern](https:/docs.microsoft.com/en-us/azure/architecture/microservices/design/gateway) ·
 > [Kong Gateway](https://docs.konghq.com/) ·
 > [Traefik](https://doc.traefik.io/traefik/)
 

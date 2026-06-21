@@ -1,7 +1,7 @@
 # L4 形式化理论层（Formal Methods）
 >
 > **EN**: Formal Methods
-> **Summary**: 进入 L4 之前，你需要确认已掌握以下基础。L4 不是"更难的 Rust"，而是**用数学语言重新表达你已理解的 Rust 概念**。 | 前置能力 | 验证标准 | 学习资源 | |:---|:---|:---| | ownership直觉 | 能向新手解释"为什么 `&mut` 不能别名" | [L1 ownership](../01_foundation/01_ownership.md) | | borrowing规则 | 能独立标注含 3+ 引用的函数签名 | [L2 lifetimes](../02_intermediate/18_lifetimes_advanced.md) | | types系统 | 理解 `enum`/`struc
+> **Summary**: Readme. Core Rust concept.
 
 > **受众**: [研究者]
 > ⚠️ **声明**: 本层使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
@@ -11,6 +11,8 @@
 > **核心功能**: 为上层概念提供**形式化直觉**与**教学类比**的安全性解释；指向可机械验证证明的权威来源（RustBelt、Iris、Coq）
 > **[来源: POPL 2018 - RustBelt]** · **[来源: Wikipedia - Separation Logic]** · **[来源: Wikipedia - Linear Logic]** · **[来源: Iris Project - iris-project.org]**
 
+>
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---
 
 ## 〇、L4 前置检查清单

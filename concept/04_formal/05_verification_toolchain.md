@@ -2,8 +2,8 @@
 
 # Verification Toolchain Selection Guide（验证工具链选择指南）
 >
-> **EN**: Toolchain
-> **Summary**: Toolchain. Guide to 05 Verification Toolchain.
+> **EN**: Verification Toolchain
+> **Summary**: The Rust formal verification toolchain: Miri, Kani, Creusot, Verus, Prusti, and RustBelt.
 > **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >
@@ -16,6 +16,8 @@
 > **Bloom 层级**: 评价 → 应用
 > **[来源: Rust Project Goals 2026 — Safety-Critical Rust]** · **[来源: SOSP 2024 Verus]** · **[来源: PLDI 2024 RefinedRust]** · **[来源: POPL 2018 RustBelt]** ✅
 
+>
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---
 
 **变更日志**:
@@ -863,7 +865,7 @@ fn main() {
 > 它的哲学与 Kani/Verus 截然不同——不是"证明正确"，而是"快速找错"。
 > 对于日常 `unsafe` 代码开发，Miri 是零成本（除运行时间外）的首选工具；对于安全关键组件，Miri 应与 Kani 或 Verus 组合使用。
 > [来源: [Miri Book](https://rustc-dev-guide.rust-lang.org/miri.html)] ·
-> [PLDI 2025 — Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)
+> [PLDI 2025 — Tree Borrows](https://plv.mpi-sws.org/rustbelt/)
 
 ### 7.3 Verus：基于 Z3 的演绎验证
 
@@ -927,7 +929,7 @@ fn binary_search(v: &Vec<u64>, key: u64) -> (r: usize)
 > **关键洞察**: Verus 的 "exec/spec/proof" 三元分离是 Rust 验证工具中最接近"生产代码与验证代码共存"的设计。`spec` 代码在编译期被擦除（零运行时开销），`proof` 代码确保 `exec` 代码的正确性。这与 Rust 的 `const fn` 有哲学上的相似性——两者都区分"编译期计算"和"运行时计算"，但 Verus 将这一区分扩展到形式化证明。[来源: Lorch et al., SOSP 2024] ✅
 > **2026 最新进展 — VerusBelt (PLDI 2026 Distinguished Paper Award)**: VerusBelt 为 Verus 的 proof-oriented 扩展提供了完整的语义基础，形式化证明了 Verus 的 `tracked` 权限系统和 ghost 状态的正确性，建立了从 Verus 规格到 Z3 求解器的可靠翻译。
 > 这是首个为工业级 Rust 验证工具提供完全形式化语义基础的工作，标志着 Rust 验证从"工程实践"向"数学可信"的关键跃迁。
-> [来源: [PLDI 2026 — Hance et al., "VerusBelt: A Semantic Foundation for Verus's Proof-Oriented Extensions to the Rust Type System"](https://plv.mpi-sws.org/verusbelt/)]
+> [来源: [PLDI 2026 — Hance et al., "VerusBelt: A Semantic Foundation for Verus's Proof-Oriented Extensions to the Rust Type System"](https://verus-lang.github.io/verus/)]
 
 ### 7.4 Creusot：基于 Why3 的契约验证
 
@@ -1279,7 +1281,7 @@ fn fixed() {
 
 > **验证映射**: 闭包捕获分析是 Rust 类型系统的复杂部分。形式化工具（如 RustBelt 的 closure 语义）需要精确建模环境捕获（by-reference / by-value）与借用规则的一致性。编译器的拒绝对应于资源谓词 `own(τ)` 与 `shr(κ, ℓ)` 的不一致分配。
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/flagships.html), [Wikipedia: Model Checking](https://en.wikipedia.org/wiki/Model_checking), [Wikipedia: Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/), [Wikipedia: Model Checking](https://en.wikipedia.org/wiki/Model_checking), [Wikipedia: Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]; 2026-05-21 补充 Wikipedia 概念对齐、a-mir-formality 工具链、2026 工具状态更新 [来源: Formal Methods Deep Dive]; 2026-05-22 网络权威内容对齐：Miri POPL 2026、KVerus arXiv 2026、AutoVerus OOPSLA 2025、Vest USENIX Security 2025、Rustlantis OOPSLA 2024、Kani+VeriFast 联合 std 验证 [来源: Web Authority Alignment Sprint]
 
 **文档版本**: 1.2
