@@ -12,7 +12,6 @@
 > **Bloom 层级**: 记忆 → 理解
 > **定位**: L1 基础层的**前置知识补充**。理解这些通用 PL 概念后，你将能更深刻地回答"为什么 Rust 要这样设计"，而非仅仅记忆规则。
 > **阅读建议**: 可选阅读。若你已有 Haskell/Scheme/OCaml 背景，可跳过；若你只有 Python/JavaScript 背景，强烈建议先读本文。
-
 >
 > **来源**: [TRPL — Foreword](https://doc.rust-lang.org/book/foreword.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---

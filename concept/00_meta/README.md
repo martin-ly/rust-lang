@@ -5,9 +5,10 @@
 > **受众**: [初学者]
 > 本目录包含学习工具、质量基础设施和元数据。
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
-> **内容分级**: [综述级]
-请参阅项目根目录的 [README.md](../README.md) 获取完整项目概述。
-
+> **内容分级**:
+>
+> [综述级]
+> 请参阅项目根目录的 [README.md](../README.md) 获取完整项目概述。
 > **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ## 嵌入式测验（Embedded Quiz）

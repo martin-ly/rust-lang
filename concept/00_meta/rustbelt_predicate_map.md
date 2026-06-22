@@ -12,7 +12,6 @@
 >
 > **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
-
 > **来源**: [Jung, R. et al. — *RustBelt: Securing the Foundations of the Rust Programming Language*. POPL 2018]
 >
 > **来源**: [Iris 教程 — https://iris-project.org/tutorial.html]

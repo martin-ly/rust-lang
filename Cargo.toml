@@ -396,8 +396,8 @@ metrics-exporter-prometheus = "0.18.3"
 # 2026-06-19: 0.4.44 -> 0.4.45
 chrono = { version = "0.4.45", features = ["serde"] }
 # time: 现代时间处理库，提供高性能的时间操作
-# 2026-06-19: 0.3.47 -> 0.3.49
-time = { version = "0.3.49", features = ["serde", "macros"] }
+# 2026-06-22: 0.3.49 -> 0.3.51 (cargo update)
+time = { version = "0.3.51", features = ["serde", "macros"] }
 
 # 2025-12-11: 其他常用库最新稳定版本
 # uuid: UUID生成和解析库，支持多种UUID版本
@@ -574,8 +574,8 @@ bindgen = "0.72.1"
 # ahash: 高性能哈希算法实现，替代fxhash (未维护)
 ahash = "0.8.12"
 # quote: 代码生成宏库，替代paste (未维护)
-# 2026-01-26: 1.0.43 -> 1.0.44 (cargo update)
-quote = "1.0.45"  # 2026-04-23: 同步至实际解析版本
+# 2026-06-22: 1.0.45 -> 1.0.46 (cargo update)
+quote = "1.0.46"  # 同步 cargo update 实际解析版本
 # proc-macro2: 过程宏底层词法分析库
 proc-macro2 = "1.0.106"
 # proc-macro-error2: 过程宏错误处理库，替代proc-macro-error (未维护)
@@ -696,7 +696,13 @@ const-hex = "=1.19.1"
 # - webpki-roots: 1.0.7 -> 1.0.8
 # - log: 0.4.32 -> 0.4.33 (cargo update 2026-06-22)
 # - chrono: 0.4.44 -> 0.4.45
-# - time: 0.3.47 -> 0.3.49
+# - time: 0.3.49 -> 0.3.51 (cargo update 2026-06-22)
+# - quote: 1.0.45 -> 1.0.46 (cargo update 2026-06-22)
+# - 传递依赖 (cargo update 自动升级):
+#     libp2p-quic 0.13.0 -> 0.13.1
+#     quinn 0.11.9 -> 0.11.11
+#     quinn-proto 0.11.14 -> 0.11.15
+#     time-macros 0.2.29 -> 0.2.30
 # - bytes: 1.11.1 -> 1.12.0
 # - redis: 1.2.3 -> 1.2.4 (cargo update 2026-06-22)
 # - config: 0.15.23 -> 0.15.24

@@ -9,7 +9,6 @@
 > **核心命题**：Rust 的 safe 子集是一个**内部完备但封闭**的形式系统；其设计空间的边界由编译器强制，而非程序员自律。
 > **方法论对齐**: Felleisen 1989 "On the Expressive Power of Programming Languages" · Observational Equivalence · Turing Completeness · Semantic Closure
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
-
 >
 > **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---

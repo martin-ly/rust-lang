@@ -11,7 +11,6 @@
 > **定位**: 基于权威招聘数据（JetBrains、Stack Overflow、Levels.fyi、Robert Half）的 Rust 职业市场定量分析，覆盖薪资范围、岗位分布、技能需求和地域差异。
 > **前置概念**: [Bloom Taxonomy](./03_bloom_taxonomy.md)
 > **后置概念**: [Application Domains](../06_ecosystem/04_application_domains.md)
-
 >
 > **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---

@@ -5,9 +5,15 @@
 > **受众**: [研究者]
 > **定位**: 本文件从**纵向判定链路**梳理 Rust 编译器在全编译流程中的可判定性问题，与 `semantic_expressiveness.md` 的横向七维光谱形成正交互补。
 > **原则**: 不做"编译器实现手册"，聚焦"什么问题 Rust 编译器能在编译期判定、什么不能、不能时的补偿机制是什么"。
-> **对齐来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Rust RFCs](https://rust-lang.github.io/rfcs/) · [RustBelt / Oxide](https://plv.mpi-sws.org/rustbelt/) · [POPL Papers](https://dblp.org/db/conf/popl/index.html) · [Theory of Computation](https://en.wikipedia.org/wiki/Theory_of_computation)
+> **对齐来源**:
+>
+> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [Rust RFCs](https://rust-lang.github.io/rfcs/) ·
+> [RustBelt / Oxide](https://plv.mpi-sws.org/rustbelt/) ·
+> [POPL Papers](https://dblp.org/db/conf/popl/index.html) ·
+> [Theory of Computation](https://en.wikipedia.org/wiki/Theory_of_computation)
+>
 > **基准版本**: Rust 1.96.0 stable (Edition 2024)
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 > **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)

@@ -7,7 +7,6 @@
 > **Bloom 层级**: 应用
 > **定位**：本文件维护 Rust 概念知识体系的所有权威来源，构建如实的知识来源关系网络。所有 `concept/` 下的概念文件引用来源时，应优先引用本清单中的条目。
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
-
 >
 > **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---

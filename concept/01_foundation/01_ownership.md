@@ -7,6 +7,7 @@
 > **本节关键术语**: 所有权 (Ownership) · 移动 (Move) · 借用 (Borrow) · 引用 (Reference) · 生命周期 (Lifetime) — [完整对照表](../00_meta/terminology_glossary.md)
 
 # Ownership（所有权）
+
 >
 > **EN**: Ownership
 > **Summary**: Ownership: core Rust concepts, syntax, and examples.

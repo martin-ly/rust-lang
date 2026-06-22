@@ -31,7 +31,7 @@
     - [3.2 否定命题分析](#32-否定命题分析)
   - [四、认知路径检查（Cognitive Path） \[来源: 认知路径设计参照建构主义学习理论 — Bruner (1961) 发现学习理论; Ausubel (1968) 有意义学习理论; 概念文件的认知路径章节要求渐进式推导\]](#四认知路径检查cognitive-path-来源-认知路径设计参照建构主义学习理论--bruner-1961-发现学习理论-ausubel-1968-有意义学习理论-概念文件的认知路径章节要求渐进式推导)
     - [4.1 渐进式推导](#41-渐进式推导)
-  - 五、来源与可信度检查（Provenance） \[来源: 来源可信度分级 — 一级: Rust Reference / RFCs / 学术论文; 二级: Rust Internals / 开发者博客; 三级: TRPL / [Rustonomicon; 参照证据金字塔模型\](https://doc.rust-lang.org/nomicon/)](#五来源与可信度检查provenance-来源-来源可信度分级--一级-rust-referencerfcs学术论文-二级-rust-internals开发者博客-三级-trplrustonomicon-参照证据金字塔模型)
+  - [五、来源与可信度检查（Provenance） 来源: 来源可信度分级 — 一级: Rust Reference / RFCs / 学术论文; 二级: Rust Internals / 开发者博客; 三级: TRPL / Rustonomicon; 参照证据金字塔模型](#五来源与可信度检查provenance-来源-来源可信度分级--一级-rust-reference--rfcs--学术论文-二级-rust-internals--开发者博客-三级-trpl--rustonomicon-参照证据金字塔模型)
     - [5.1 来源标注](#51-来源标注)
   - [六、跨引用密度检查（Cross-reference Density） \[来源: 跨引用密度 ≥3/文件的要求参照 hypertext 认知负荷研究 — 适度链接促进概念网络形成，过度链接导致导航迷失; 本知识体系采用 3-5 个核心跨文件链接作为平衡点\]](#六跨引用密度检查cross-reference-density-来源-跨引用密度-3文件的要求参照-hypertext-认知负荷研究--适度链接促进概念网络形成过度链接导致导航迷失-本知识体系采用-3-5-个核心跨文件链接作为平衡点)
   - [七、自动化检查脚本（已实现）](#七自动化检查脚本已实现)

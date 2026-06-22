@@ -24,7 +24,7 @@
     - [1.1 选择你的起点](#11-选择你的起点)
     - [1.2 选择你的目标](#12-选择你的目标)
   - [二、按背景的详细起点指南](#二按背景的详细起点指南)
-    - [2.1 完全新手路径（无系统编程经验） \[来源: TRPL Ch1-3; Rust by Example; 前置依赖: 无; 认知负荷管理参照 Sweller — *Cognitive Load Theory* / 1988\]](#21-完全新手路径无系统编程经验-来源-trpl-ch1-3-rust-by-example-前置依赖-无-认知负荷管理参照-sweller--cognitive-load-theory--1988)
+    - [2.1 完全新手路径（无系统编程经验） 来源: TRPL Ch1-3; Rust by Example; 前置依赖: 无; 认知负荷管理参照 Sweller — *Cognitive Load Theory* / 1988](#21-完全新手路径无系统编程经验-来源-trpl-ch1-3-rust-by-example-前置依赖-无-认知负荷管理参照-sweller--cognitive-load-theory--1988)
     - [2.2 C/C++ 开发者路径 \[来源: 概念迁移理论 — 已有 RAII/指针/内存管理知识可作为正向迁移; ISO C++20 § 作为对比基准\]](#22-cc-开发者路径-来源-概念迁移理论--已有-raii指针内存管理知识可作为正向迁移-iso-c20--作为对比基准)
     - [2.3 Java/Go 开发者路径 \[来源: Java JLS § — GC 背景下的所有权概念缺失; Go Language Specification — CSP 并发模型与 Rust 所有权并发的对比\]](#23-javago-开发者路径-来源-java-jls---gc-背景下的所有权概念缺失-go-language-specification--csp-并发模型与-rust-所有权并发的对比)
     - [2.4 Haskell/ML 开发者路径 \[来源: Hindley-Milner 类型推断的已有知识可作为类型系统学习的前置; Wadler — *Theorems for Free!* / 1989; GHC User's Guide\]](#24-haskellml-开发者路径-来源-hindley-milner-类型推断的已有知识可作为类型系统学习的前置-wadler--theorems-for-free--1989-ghc-users-guide)

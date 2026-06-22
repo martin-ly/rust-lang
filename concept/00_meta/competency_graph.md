@@ -7,7 +7,6 @@
 > **Bloom 层级**: 元（Meta）
 > **定位**: 本文件建立 `concept/` 知识体系的**能力评估与提升框架**，定义 Rust 编程能力的六维雷达模型，提供自评工具、薄弱点诊断和个性化训练路径推荐。与 `problem_graph.md`（"遇到什么问题"）和 `cognitive_dimension_matrix.md`（"认知类型是什么"）形成三角互补。
 > **对齐来源**: [ACM 能力图谱框架] · [Bloom 修订版 2001 — 认知过程维度] · [Dreyfus 技能获取模型] · [Microsoft RustTraining — 能力评估]
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 > **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)

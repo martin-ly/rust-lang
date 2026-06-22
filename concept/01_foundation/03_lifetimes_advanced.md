@@ -11,7 +11,6 @@
 > **层次定位**: L1-L3 进阶 / 生命周期高级主题
 > **前置依赖**: [Lifetimes 基础](./03_lifetimes.md)
 > **定理链编号**: T-015 Polonius 流敏感安全 ⟹ T-016 Elision 完备性
-
 >
 > **来源**: [TRPL — Advanced Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) · [Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html) · [Reference — Subtyping and Variance](https://doc.rust-lang.org/reference/subtyping.html)
 ---
