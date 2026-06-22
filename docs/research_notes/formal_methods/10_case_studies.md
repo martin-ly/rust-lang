@@ -51,7 +51,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档通过具体案例展示形式化方法在Rust中的应用，从简单数据结构到复杂并发系统，演示完整的形式化验证流程。
 
@@ -59,13 +59,13 @@
 
 ## 案例一：Vec的形式化验证
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 规范
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // Vec的不变式
@@ -83,9 +83,9 @@ invariant Vec<T> {
 
 ### 1.2 push操作证明
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 impl<T> Vec<T> {
@@ -111,9 +111,9 @@ impl<T> Vec<T> {
 
 ### 1.3 pop操作证明
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 #[requires(self.len > 0)]
@@ -136,13 +136,13 @@ fn pop(&mut self) -> Option<T> {
 
 ## 案例二：智能指针验证
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 Box<T>
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **规范**:
 
@@ -173,9 +173,9 @@ fn drop(&mut self) {
 
 ### 2.2 Rc<T>
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **不变式**:
 
@@ -222,13 +222,13 @@ fn drop(&mut self) {
 
 ## 案例三：并发数据结构
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 3.1 Mutex<T>
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **规范**:
 
@@ -260,9 +260,9 @@ MutexGuard<T>: Deref, DerefMut
 
 ### 3.2 无锁队列 (Michael-Scott Queue)
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **结构**:
 
@@ -338,7 +338,7 @@ fn enqueue(&self, value: T) {
 
 ### 4.1 Future形式化
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 **定义**:
 
@@ -359,7 +359,7 @@ Future<T> = StateMachine {
 
 ### 4.2 任务调度证明
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust,ignore
 // 调度器不变式
@@ -383,7 +383,7 @@ invariant Scheduler {
 
 ### 5.1 常量时间比较
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **安全要求**:
 
@@ -403,7 +403,7 @@ fn constant_time_eq(a: &[u8], b: &[u8]) -> bool {
 
 ### 5.2 安全内存清零
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 // 防止编译器优化掉清零操作
@@ -427,7 +427,7 @@ fn secure_zero(memory: &mut [u8]) {
 
 ### 6.1 C互操作安全
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **Rust侧规范**:
 
@@ -454,7 +454,7 @@ T* alloc_T() {
 
 ### 6.2 不变式保持
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 // 跨越FFI边界的不变式
@@ -587,17 +587,17 @@ invariant CrossFFI {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
-> **[来源: Coq Reference]**
-> **[来源: TLA+]**
-> **[来源: ACM - Formal Verification]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

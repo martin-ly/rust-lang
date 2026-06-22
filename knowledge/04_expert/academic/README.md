@@ -43,3 +43,33 @@
 ## 相关概念
 
 - [形式化验证工具链 (concept)](../../../concept/04_formal/05_verification_toolchain.md) — KVerus (arXiv 2026)、AutoVerus (OOPSLA 2025)、Vest (USENIX Security 2025)
+
+
+## 📚 模块 8: 国际化对齐
+
+> 本模块按项目模板补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 说明 |
+|:---|:---|
+| [Rust Reference](https://doc.rust-lang.org/reference/) | 语言规范 |
+| [Rust RFCs](https://github.com/rust-lang/rfcs) | 语言演进 RFC |
+
+### 8.2 学术/工业来源
+
+| 来源 | 说明 |
+|:---|:---|
+| [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | Rust 形式化基础 |
+| [Iris Project](https://iris-project.org/) | 高阶并发分离逻辑框架 |
+| [Tree Borrows — PLDI 2025](https://perso.crans.org/vanille/treebor/) | 别名模型 |
+| [Kani](https://model-checking.github.io/kani/) | 模型检查工具 |
+| [Verus](https://verus-lang.github.io/verus/) | 自动证明生态 |
+
+### 8.3 社区资源
+
+| 来源 | 说明 |
+|:---|:---|
+| [Aeneas](https://github.com/AeneasVerif/aeneas) | Rust 形式化验证器 |
+| [Rust Formal Methods Interest Group](https://rust-formal-methods.github.io/) | 形式化社区 |
+

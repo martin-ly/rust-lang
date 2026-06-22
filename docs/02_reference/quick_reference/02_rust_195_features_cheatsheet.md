@@ -42,13 +42,13 @@
 
 ## 一、语言特性
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. `cfg_select!` 宏
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 编译期 `cfg` 条件选择，替代 `cfg-if` crate。
 
@@ -78,9 +78,9 @@ let arch_str = cfg_select! {
 
 ### 2. `if let` guards on match arms
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 在 `match` arm 守卫中使用 `if let`：
 
@@ -96,9 +96,9 @@ match value {
 
 ### 3. 路径段关键字重命名导入
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use std::keyword as kw;  // 重命名关键字路径段
@@ -106,8 +106,8 @@ use std::keyword as kw;  // 重命名关键字路径段
 
 ### 4. PowerPC/PowerPC64 内联汇编稳定化
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 > 📎 可运行示例: [`crates/c11_macro_system/examples/ppc_asm_demo.rs`](../../../crates/c11_macro_system/examples/ppc_asm_demo.rs)
 
 ```rust
@@ -121,12 +121,12 @@ unsafe {
 
 ## 二、标准库新 API
 
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### `core::range` 模块
 
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Official Docs]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 > 📎 可运行示例: [`crates/c08_algorithms/examples/core_range_demo.rs`](../../../crates/c08_algorithms/examples/core_range_demo.rs)
 
 | API | 示例 | 说明 |
@@ -145,8 +145,8 @@ for i in range {
 
 ### 原子操作 — `update` / `try_update`
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: Rust Official Docs]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 > 📎 可运行示例: [`crates/c05_threads/examples/atomic_update_demo.rs`](../../../crates/c05_threads/examples/atomic_update_demo.rs)
 
 封装 CAS 循环的原子更新：
@@ -175,8 +175,8 @@ counter.update(Ordering::Relaxed, Ordering::Relaxed, |current| current + 1);
 
 ### 集合 — 获取可变引用的插入操作
 
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Rust Official Docs]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 > 📎 可运行示例:
 > [`crates/c02_type_system/examples/vec_push_mut_demo.rs`](../../../crates/c02_type_system/examples/vec_push_mut_demo.rs) (Vec) |
 > [`crates/c08_algorithms/examples/collections_mut_ref_demo.rs`](../../../crates/c08_algorithms/examples/collections_mut_ref_demo.rs) (VecDeque/LinkedList)
@@ -203,8 +203,8 @@ head.push_str(" world");
 
 ### 裸指针 — 不安全转引用
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Rust Official Docs]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 > 📎 可运行示例: [`crates/c01_ownership_borrow_scope/examples/raw_ptr_ref_demo.rs`](../../../crates/c01_ownership_borrow_scope/examples/raw_ptr_ref_demo.rs)
 
 ```rust
@@ -219,8 +219,8 @@ let m: &mut String = unsafe { mut_ptr.as_mut_unchecked() };
 
 ### 布局计算 — `Layout` 新 API
 
-> **[来源: Wikipedia - Type System]**
-> **[来源: Rust Official Docs]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 > 📎 可运行示例: [`crates/c01_ownership_borrow_scope/examples/layout_api_demo.rs`](../../../crates/c01_ownership_borrow_scope/examples/layout_api_demo.rs)
 
 ```rust,ignore
@@ -242,7 +242,7 @@ let extended = layout.extend_packed(Layout::new::<u8>()).unwrap().0;
 
 ### 提示 — `cold_path`
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 > 📎 可运行示例: [`crates/c02_type_system/examples/cold_path_demo.rs`](../../../crates/c02_type_system/examples/cold_path_demo.rs)
 
 分支预测标注：
@@ -260,7 +260,7 @@ fn handle_error(e: Option<&str>) {
 
 ### 布尔转换 — `TryFrom<{integer}>`
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 > 📎 可运行示例: [`crates/c02_type_system/examples/bool_try_from_demo.rs`](../../../crates/c02_type_system/examples/bool_try_from_demo.rs)
 
 ```rust
@@ -271,7 +271,7 @@ let err = bool::try_from(2u8); // Err(()) — 仅 0 和 1 有效
 
 ### `MaybeUninit` 数组互转
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > 📎 可运行示例: [`crates/c01_ownership_borrow_scope/examples/maybeuninit_cell_array_demo.rs`](../../../crates/c01_ownership_borrow_scope/examples/maybeuninit_cell_array_demo.rs)
 
 ```rust
@@ -286,7 +286,7 @@ let back: [MaybeUninit<i32>; 3] = uninit_arr.into();
 
 ### `Cell` 数组引用
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 > 📎 可运行示例: [`crates/c01_ownership_borrow_scope/examples/maybeuninit_cell_array_demo.rs`](../../../crates/c01_ownership_borrow_scope/examples/maybeuninit_cell_array_demo.rs)
 
 ```rust
@@ -305,7 +305,7 @@ let ref_slice: &[Cell<i32>] = cell_arr.as_ref();
 
 ### `--remap-path-scope` 稳定化
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 控制二进制中路径重映射的范围：
 
@@ -315,7 +315,7 @@ rustc --remap-path-scope=macro,sysroot -Z remap-path-prefix=/home/user=/project
 
 ### 平台支持提升
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 | 目标 | 新级别 |
 |------|--------|
@@ -398,13 +398,13 @@ Rust 1.95.0 发布时，Rust 2024 Edition 已稳定 3 个月（自 1.85.0）。1
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

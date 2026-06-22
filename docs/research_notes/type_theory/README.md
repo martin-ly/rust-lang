@@ -15,7 +15,7 @@
 
 ## 📊 目录 {#-目录}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [🔬 类型理论研究 {#-类型理论研究}](#-类型理论研究--类型理论研究)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -55,7 +55,7 @@
 
 ## 完备性声明
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **本目录核心缺口已补全，全部缺口均有 Def 占位**。详见 [00_completeness_gaps](../formal_methods/00_completeness_gaps.md)：
 
@@ -67,7 +67,7 @@
 
 ## 🎯 研究目标 {#-研究目标}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本目录专注于 Rust 类型系统的理论基础和形式化研究，包括：
 
@@ -80,13 +80,13 @@
 
 ## 📚 研究主题 {#-研究主题}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 类型系统基础
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **研究问题**:
 
@@ -100,9 +100,9 @@
 
 ### 1b. 类型构造能力
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **研究问题**:
 
@@ -117,7 +117,7 @@
 
 ### 2. Trait 系统形式化
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **研究问题**:
 
@@ -133,7 +133,7 @@
 
 ### 3. 生命周期形式化
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **研究问题**:
 
@@ -149,7 +149,7 @@
 
 ### 4. 高级类型特性
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **研究问题**:
 
@@ -165,7 +165,7 @@
 
 ### 5. 型变理论
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **研究问题**:
 
@@ -185,7 +185,7 @@
 
 ## 形式化论证汇总
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def TT1（类型理论覆盖）**：设 $\mathcal{T}$ 为类型理论族，$\mathcal{T} = \{\text{type\_system},\, \text{trait},\, \text{lifetime},\, \text{advanced},\, \text{variance}\}$。每 $t \in \mathcal{T}$ 有 Def、Axiom、Theorem 及证明。
 
@@ -223,7 +223,7 @@
 
 ### 已完成 ✅ {#已完成-}
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - [x] [类型系统基础](./10_type_system_foundations.md) - 100%
 - [x] [类型构造能力](./10_construction_capability.md) - Def TCON1、矩阵、决策树
@@ -238,7 +238,7 @@
 
 ### 核心文档
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - [形式化工程系统 - 类型系统](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)
 - [类型系统文档](../../../crates/c02_type_system/docs/README.md)
@@ -246,14 +246,14 @@
 
 ### 代码实现
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - [类型系统实现](../../../crates/c02_type_system/src/README.md)
 - [类型系统示例](../../../crates/c02_type_system/examples/README.md)
 
 ### 学术资源
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - [CORE_THEOREMS_FULL_PROOFS](../10_core_theorems_full_proofs.md) — 类型安全 T-TY3 完整证明（L2）；[coq_skeleton](../coq_skeleton/README.md) — Coq 证明骨架
 - **Types and Programming Languages** (Benjamin C. Pierce)
@@ -266,7 +266,7 @@
 
 ### 类型理论工具
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - **Coq**: 类型理论证明助手
 - **Agda**: 依赖类型编程语言
@@ -365,10 +365,10 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
-> **[来源: Pierce 2002 - TAPL]**
+> **来源: [Pierce 2002 - TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)**
 
-> **[来源: Rust Reference - Type System]**
+> **来源: [Rust Reference - Type System](https://doc.rust-lang.org/reference/types.html)**
 
-> **[来源: ACM - Type Systems]**
+> **来源: [ACM - Type Systems](https://dl.acm.org/)**

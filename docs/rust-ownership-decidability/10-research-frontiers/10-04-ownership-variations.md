@@ -10,16 +10,16 @@
 
 ---
 
-> **[来源: Rust Reference - Ownership]** ·
-> **[来源: Wikipedia - Type System]** ·
-> **[来源: Wikipedia - Region-based Memory Management]** ·
-> **[来源: RFC 2094 - NLL]** ·
-> **[来源: Wikipedia - Linear Type]** ·
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Rust Reference - Ownership](https://doc.rust-lang.org/reference/)** ·
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)** ·
+> **来源: [Wikipedia - Region-based Memory Management](https://en.wikipedia.org/wiki/Region_based_Memory_Management)** ·
+> **来源: [RFC 2094 - NLL](https://rust-lang.github.io/rfcs/2094-2094-nll.html)** ·
+> **来源: [Wikipedia - Linear Type](https://en.wikipedia.org/wiki/Linear_Type)** ·
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [所有权变体](#所有权变体)
   - [目录](#目录)
@@ -77,13 +77,13 @@
 
 ## 1. 区域类型系统（Region-based Typing）
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 区域系统基础
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 区域类型系统（Region-based Typing）是 Rust 生命周期系统的理论基础，由 Tofte 和 Talpin 在 1994 年提出，用于管理堆分配内存的生命周期。
 
@@ -108,7 +108,7 @@
 
 ### 1.2 Rust 生命周期与区域
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 Rust 的生命周期参数本质上就是区域：
 
@@ -143,7 +143,7 @@ where
 
 ### 1.3 区域推断算法
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 Rust 使用约束基础的区域推断：
 
@@ -177,7 +177,7 @@ fn example(x: &i32, y: &i32) -> &i32 {
 
 ### 1.4 区域多态
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 区域多态允许代码在不同区域上重用：
 
@@ -216,7 +216,7 @@ fn use_regions() {
 
 ### 2.1 Polonius 详解
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 Polonius 是下一代 Rust 借用检查器，基于 Datalog 和约束求解，提供更精确的分析。
 
@@ -243,7 +243,7 @@ Datalog 规则
 
 #### Polonius 规则示例
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```prolog
 % Polonius 核心规则（概念性）
@@ -293,7 +293,7 @@ fn polonius_friendly() {
 
 ### 2.2 流敏感分析
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 流敏感分析跟踪程序点上的借用状态：
 
@@ -321,7 +321,7 @@ fn flow_sensitive() {
 
 ### 2.3 路径敏感分析
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 路径敏感分析考虑控制流路径：
 
@@ -356,7 +356,7 @@ fn path_sensitive(condition: bool) {
 
 ### 2.4 借用检查器比较
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 特性 | 当前借用检查器 | Polonius | NLL | 流敏感 |
 |-----|--------------|----------|-----|-------|
@@ -375,7 +375,7 @@ fn path_sensitive(condition: bool) {
 
 ### 3.1 幽灵借用
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 幽灵借用（Ghost Borrow）是一种仅在验证时存在的借用：
 
@@ -407,7 +407,7 @@ fn use_vector<T>(vec: &mut Vec<T>) {
 
 ### 3.2 共享 XOR 可变
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 Rust 的核心规则：共享 XOR 可变（Shared XOR Mutable）。
 
@@ -453,7 +453,7 @@ fn unique_reference() {
 
 ### 3.3 独占借用模式
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 独占借用模式确保值只能在一个地方使用：
 
@@ -495,7 +495,7 @@ impl<T> Drop for Exclusive<T> {
 
 ### 3.4 二阶段借用
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 二阶段借用（Two-phase Borrow）用于解决某些借用模式：
 
@@ -522,7 +522,7 @@ fn two_phase_borrow() {
 
 ### 4.1 分离堆并发
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 分离堆（Disjoint Heap）并发模型基于内存分离：
 
@@ -556,7 +556,7 @@ fn disjoint_heap() {
 
 ### 4.2 基于能力的并发
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 基于能力的并发（Capability-based Concurrency）使用权限控制访问：
 
@@ -603,7 +603,7 @@ impl<T> Capability<T> {
 
 ### 4.3 会话类型
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 会话类型（Session Types）用于验证通信协议：
 
@@ -643,7 +643,7 @@ fn client_session<P: Protocol>(
 
 ### 4.4 并发验证挑战
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 并发所有权验证的主要挑战：
 
@@ -662,7 +662,7 @@ fn client_session<P: Protocol>(
 
 ### 5.1 仿射类型
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 Rust 使用仿射类型（Affine Types）：值最多使用一次（可以零次或一次）。
 
@@ -1327,9 +1327,9 @@ Rust 所有权系统的变体代表了编程语言理论的前沿探索。从区
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---

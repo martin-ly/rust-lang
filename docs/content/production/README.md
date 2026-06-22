@@ -12,7 +12,7 @@
 
 ## 📋 目录
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Rust 生产实践指南](#rust-生产实践指南)
   - [📋 目录](#-目录)
@@ -60,7 +60,7 @@
 
 ## 🎯 目标
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本目录致力于提供：
 
@@ -73,13 +73,13 @@
 
 ## 📊 生产就绪检查清单
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 功能完整性
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 所有功能有单元测试覆盖 (>80%)
 - [ ] 集成测试覆盖关键路径
@@ -91,9 +91,9 @@
 
 ### 可观测性
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 结构化日志输出
 - [ ] 关键指标暴露 (Prometheus)
@@ -103,9 +103,9 @@
 
 ### 安全性
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 依赖安全审计通过
 - [ ] 密钥管理服务集成
@@ -115,9 +115,9 @@
 
 ### 性能
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 内存使用分析
 - [ ] CPU 热点优化
@@ -129,19 +129,19 @@
 
 ## 🐳 部署
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Docker 优化
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 多阶段构建
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```dockerfile
 # 构建阶段
@@ -169,9 +169,9 @@ ENTRYPOINT ["/app/myapp"]
 
 #### 镜像优化技巧
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 技巧 | 效果 | 实施难度 |
 |------|------|----------|
@@ -207,11 +207,11 @@ ENTRYPOINT ["/usr/local/bin/app"]
 
 ### Kubernetes
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 #### 基础部署
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```yaml
 apiVersion: apps/v1
@@ -260,7 +260,7 @@ spec:
 
 #### HPA 配置
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```yaml
 apiVersion: autoscaling/v2
@@ -300,11 +300,11 @@ spec:
 
 ### Serverless
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 #### AWS Lambda
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use lambda_runtime::{service_fn, LambdaEvent, Error};
@@ -329,7 +329,7 @@ async fn handler(event: LambdaEvent<Value>) -> Result<Value, Error> {
 
 #### Cargo Lambda
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```bash
 # 安装
@@ -348,11 +348,11 @@ cargo lambda deploy --region us-east-1
 
 ### 指标收集
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 #### Prometheus 集成
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use prometheus::{Counter, Histogram, Registry, TextEncoder};
@@ -399,11 +399,11 @@ async fn metrics_middleware<B>(
 
 ### 分布式追踪
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 #### OpenTelemetry + Jaeger
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
 use opentelemetry::trace::Tracer;
@@ -709,18 +709,18 @@ impl Service {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-> **[来源: Rust Reference]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-> **[来源: Rust Standard Library]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: ACM - Systems Programming]**
+> **来源: [ACM](https://dl.acm.org/)**
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-> **[来源: Rustonomicon]**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**

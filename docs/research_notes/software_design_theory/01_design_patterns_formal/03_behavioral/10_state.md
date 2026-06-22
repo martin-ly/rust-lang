@@ -7,7 +7,7 @@
 
 ## 📊 目录 {#-目录}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [State 形式化分析](#state-形式化分析)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -46,13 +46,13 @@
 
 ## 形式化定义
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Def 1.1（State 结构）
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 设 $C$ 为上下文类型，$S$ 为状态类型。State 是一个三元组 $\mathcal{ST} = (C, S, \mathit{transition})$，满足：
 
@@ -68,9 +68,9 @@ $$\mathcal{ST} = \langle C, S, \mathit{transition}: C \times S \rightarrow S' \r
 
 ### Axiom ST1（状态机全定义公理）
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 $$\forall s: S,\, \forall e: \mathit{Event},\, \exists s': S,\, \delta(s, e) = s'$$
 
@@ -80,9 +80,9 @@ $$\forall s: S,\, \forall e: \mathit{Event},\, \exists s': S,\, \delta(s, e) = s
 
 ### 定理 ST-T1（枚举穷尽定理）
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 枚举 + match 或类型状态（零开销）实现；由 [type_system_foundations](../../../type_theory/10_type_system_foundations.md) 穷尽匹配保证完备性。
 
@@ -110,9 +110,9 @@ $$\forall s: S,\, \forall e: \mathit{Event},\, \exists s': S,\, \delta(s, e) = s
 
 ### 定理 ST-T2（类型状态编译期消除定理）
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 类型状态模式（泛型相位）在编译期消除非法状态；如 `Locked` 与 `Unlocked` 为不同类型。
 
@@ -143,9 +143,9 @@ $$\forall s: S,\, \forall e: \mathit{Event},\, \exists s': S,\, \delta(s, e) = s
 
 ### 推论 ST-C1（纯 Safe State）
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 State 为纯 Safe；`enum` + `match` 或类型状态模式，无 `unsafe`。
 
@@ -161,9 +161,9 @@ State 为纯 Safe；`enum` + `match` 或类型状态模式，无 `unsafe`。
 
 ### 概念定义-属性关系-解释论证 层次汇总
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
@@ -175,7 +175,7 @@ State 为纯 Safe；`enum` + `match` 或类型状态模式，无 `unsafe`。
 
 ## Rust 实现与代码示例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 enum State { A, B, C }
@@ -212,13 +212,13 @@ impl Config<Unlocked> {
 
 ## 完整证明
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 形式化论证链
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 Axiom ST1 (状态机全定义)
@@ -440,13 +440,13 @@ graph LR
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -457,7 +457,7 @@ graph LR
 
 #### 代码示例更新
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 本文档中的所有Rust代码示例均已：
 
@@ -467,7 +467,7 @@ graph LR
 
 #### 相关文档
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查
@@ -501,19 +501,19 @@ graph LR
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Design Pattern]**
-> **[来源: Rust API Guidelines]**
-> **[来源: Gang of Four]**
-> **[来源: ACM - Software Design Patterns]**
-> **[来源: Wikipedia - Formal Methods]**
-> **[来源: Coq Reference]**
-> **[来源: TLA+]**
-> **[来源: ACM - Formal Verification]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
+> **来源: [Gang of Four](https://en.wikipedia.org/wiki/Design_Patterns)**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ---

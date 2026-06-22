@@ -7,7 +7,7 @@
 
 ## 📊 目录 {#-目录}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Strategy 形式化分析](#strategy-形式化分析)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -47,13 +47,13 @@
 
 ## 形式化定义
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Def 1.1（Strategy 结构）
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 设 $C$ 为上下文类型，$S$ 为策略类型。Strategy 是一个三元组 $\mathcal{SG} = (C, S, \mathit{execute})$，满足：
 
@@ -69,9 +69,9 @@ $$\mathcal{SG} = \langle C, S, \mathit{execute}: C \rightarrow R \rangle$$
 
 ### Axiom SR1（接口一致公理）
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 $$\forall s_1, s_2: S,\, s_1: \mathcal{T} \land s_2: \mathcal{T} \implies \mathit{interchangeable}(s_1, s_2)$$
 
@@ -79,9 +79,9 @@ $$\forall s_1, s_2: S,\, s_1: \mathcal{T} \land s_2: \mathcal{T} \implies \mathi
 
 ### Axiom SR2（所有权独立公理）
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 $$\Omega(S) \cap \Omega(C) = \emptyset \text{ 或 } C \text{ 拥有 } S$$
 
@@ -91,9 +91,9 @@ $$\Omega(S) \cap \Omega(C) = \emptyset \text{ 或 } C \text{ 拥有 } S$$
 
 ### 定理 SR-T1（trait 多态安全定理）
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 trait 定义策略接口；`impl Trait` 或 `dyn Trait` 实现多态；由 [trait_system_formalization](../../../type_theory/10_trait_system_formalization.md) 解析正确性。
 
@@ -119,9 +119,9 @@ trait 定义策略接口；`impl Trait` 或 `dyn Trait` 实现多态；由 [trai
 
 ### 定理 SR-T2（借用互斥定理）
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 策略调用时借用规则：`&self` 不可变调用策略；`&mut self` 可变时仍满足互斥。由 [borrow_checker_proof](../../../formal_methods/10_borrow_checker_proof.md)。
 
@@ -149,9 +149,9 @@ trait 定义策略接口；`impl Trait` 或 `dyn Trait` 实现多态；由 [trai
 
 ### 推论 SR-C1（纯 Safe Strategy）
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Strategy 为纯 Safe；trait 多态策略，无 `unsafe`。
 
@@ -168,9 +168,9 @@ Strategy 为纯 Safe；trait 多态策略，无 `unsafe`。
 
 ### 概念定义-属性关系-解释论证 层次汇总
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
@@ -182,7 +182,7 @@ Strategy 为纯 Safe；trait 多态策略，无 `unsafe`。
 
 ## Rust 实现与代码示例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 trait Strategy {
@@ -218,11 +218,11 @@ assert_eq!(ctx.run(), 6);
 
 ## 完整证明
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 形式化论证链
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```text
 Axiom SR1 (接口一致)
@@ -446,13 +446,13 @@ graph LR
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -463,7 +463,7 @@ graph LR
 
 #### 代码示例更新
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 本文档中的所有Rust代码示例均已：
 
@@ -473,7 +473,7 @@ graph LR
 
 #### 相关文档
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查
@@ -507,24 +507,24 @@ graph LR
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Design Pattern]**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 
-> **[来源: Rust API Guidelines]**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 
-> **[来源: Gang of Four]**
+> **来源: [Gang of Four](https://en.wikipedia.org/wiki/Design_Patterns)**
 
-> **[来源: ACM - Software Design Patterns]**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
-> **[来源: Coq Reference]**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
 
-> **[来源: TLA+]**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
 
-> **[来源: ACM - Formal Verification]**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
 
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ---

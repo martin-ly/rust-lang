@@ -10,7 +10,7 @@
 
 ## 1.93.1 补丁版本说明
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Rust 1.93.1**（2026-02-12）为补丁版本，修复 1.93.0 引入的三处回归，**无语言/库/兼容性变更**：
 
@@ -24,7 +24,7 @@
 
 ## 目录
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Rust 1.93 兼容性深度解析](#rust-193-兼容性深度解析)
   - [1.93.1 补丁版本说明](#1931-补丁版本说明)
@@ -51,7 +51,7 @@
 
 ## pin_v2 内置属性
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **变更**：Rust 1.93 将 `pin_v2` 引入内置属性命名空间。
 
@@ -63,7 +63,7 @@
 
 ## Emscripten unwinding ABI 变更
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **变更**：在 Emscripten 目标上，使用 `panic=unwind` 编译时，unwinding ABI 从 **JS 异常处理 ABI** 改为 **wasm 异常处理 ABI**。
 
@@ -97,7 +97,7 @@ rustc -Z wasm-emscripten-eh=false -Z build-std ...
 
 ## #[test] 属性严格化
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **变更**：`#[test]`  previously 在无意义位置（trait 方法、结构体、类型等）被忽略；Rust 1.93 起将**报错**。
 
@@ -145,7 +145,7 @@ mod tests {
 
 ## offset_of! 类型检查
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **变更**：`offset_of!` 宏中的用户类型现在会进行 **well-formed** 检查。
 
@@ -168,7 +168,7 @@ let off = core::mem::offset_of!(NotWellFormed<dyn Send>, 0);
 
 ## deref_nullptr deny-by-default
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **变更**：`deref_nullptr` lint 从 **warn-by-default** 升级为 **deny-by-default**。
 
@@ -207,7 +207,7 @@ fn legacy_code() { ... }
 
 ## ... 可变参数 future-incompat
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **变更**：在 `extern` 块外使用 `...` 作为函数参数且无模式，将产生 **future-incompatibility** 警告。
 
@@ -237,7 +237,7 @@ extern "system" {
 
 ## repr(C) enum 判别值警告
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **变更**：`repr(C)` 枚举的判别值若超出 `c_int` 或 `c_uint` 范围，将产生 **future-incompatibility** 警告。
 
@@ -261,7 +261,7 @@ enum LargeDiscriminant {
 
 ## repr(transparent) 忽略 repr(C) 警告
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **变更**：在 `repr(transparent)` 中忽略 `repr(C)` 类型将产生 future-incompatibility 警告。
 
@@ -280,7 +280,7 @@ struct Wrapper(OtherReprC);  // 若 OtherReprC 为 repr(C) 且被忽略
 
 ## 相关文档
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - Rust 1.93 兼容性注意事项
 - [Rust 1.93 vs 1.92 对比](./06_05_rust_1_93_vs_1_92_comparison.md)
@@ -295,7 +295,7 @@ struct Wrapper(OtherReprC);  // 若 OtherReprC 为 repr(C) 且被忽略
 
 ### 类型系统影响分析
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 | 变更 | 类型系统影响 | 形式化语义变化 |
 | :--- | :--- | :--- |
@@ -306,7 +306,7 @@ struct Wrapper(OtherReprC);  // 若 OtherReprC 为 repr(C) 且被忽略
 
 ### 内存安全形式化
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 /// deref_nullptr 的内存安全形式化保证
@@ -344,7 +344,7 @@ pub fn memory_safety_formalization() {
 
 ### 生命周期形式化
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 /// offset_of! 的 well-formed 检查与生命周期
@@ -731,33 +731,33 @@ Rust 1.95+ 重要更新：
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Machine Learning]**
+> **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
 
-> **[来源: Wikipedia - Artificial Intelligence]**
+> **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)**
 
-> **[来源: tch-rs Documentation]**
+> **来源: [tch-rs Documentation](https://docs.rs/tch/latest/tch/)**
 
-> **[来源: ACM - AI Systems]**
+> **来源: [ACM - AI Systems](https://dl.acm.org/)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Wikipedia - Type System]**
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ---

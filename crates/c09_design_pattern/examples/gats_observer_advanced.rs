@@ -53,7 +53,7 @@ pub trait Observer {
 /// 主题 trait
 pub trait Subject {
     type Item;
-    type ObserverType: for<'a> Observer;
+    type ObserverType: Observer;
 
     fn attach(&mut self, observer: Self::ObserverType);
     fn detach(&mut self, name: &str) -> bool;

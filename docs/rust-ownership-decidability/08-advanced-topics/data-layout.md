@@ -14,7 +14,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [Data Layout 与内存布局](#data-layout-与内存布局)
   - [目录](#目录)
@@ -58,13 +58,13 @@
 
 ## 1. 内存布局基础
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 什么是 Data Layout
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Data Layout 定义了类型在内存中的**表示方式**：
 
@@ -85,7 +85,7 @@ struct Example {
 
 ### 1.2 基本类型的布局
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 | 类型 | 大小 | 对齐 | 说明 |
 |-----|------|------|------|
@@ -115,7 +115,7 @@ assert_eq!(mem::align_of::<u32>(), 4);
 
 ### 2.1 对齐规则
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 类型的对齐值必须是**2的幂**，表示该类型的实例必须存储在地址为该值的倍数的内存位置。
 
@@ -128,7 +128,7 @@ assert_eq!(mem::align_of::<u32>(), 4);
 
 ### 2.2 结构体对齐
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 结构体的对齐等于其**最严格对齐字段**的对齐值。
 
@@ -144,7 +144,7 @@ assert_eq!(std::mem::align_of::<S>(), 4);
 
 ### 2.3 为什么需要对齐
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 1. **性能**: 未对齐访问可能更慢 (x86) 或导致崩溃 (ARM)
 2. **原子性**: 某些原子操作要求对齐
@@ -165,7 +165,7 @@ let ptr = arr.as_ptr().add(1) as *const u32;  // 地址 1，未对齐到 4
 
 ### 3.1 结构体尺寸计算
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 struct S1 {
@@ -187,7 +187,7 @@ Offset:  0   1   2   3   4   5   6   7   8   9   10  11
 
 ### 3.2 字段重排优化
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 // 优化前: 12 bytes
@@ -210,7 +210,7 @@ assert_eq!(mem::size_of::<Good>(), 8);
 
 ### 3.3 布局工具
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 use std::mem;
@@ -243,7 +243,7 @@ fn main() {
 
 ### 4.1 `#[repr(Rust)]` (默认)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 - 编译器可自由重排字段
 - 不保证稳定性
@@ -606,9 +606,9 @@ mod tests {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---

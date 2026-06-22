@@ -65,3 +65,30 @@
 ## 相关概念
 
 - [标准库速查](03_std_library_cheatsheet.md)
+
+
+## 📚 模块 8: 国际化对齐
+
+> 本模块按项目模板补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 说明 |
+|:---|:---|
+| [Rust Reference](https://doc.rust-lang.org/reference/) | 语言参考 |
+| [Rust Standard Library](https://doc.rust-lang.org/std/) | 标准库 API |
+| [The Rust Programming Language](https://doc.rust-lang.org/book/) | 官方教程 |
+
+### 8.2 学术/工业来源
+
+| 来源 | 说明 |
+|:---|:---|
+| [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | 语义基础 |
+
+### 8.3 社区资源
+
+| 来源 | 说明 |
+|:---|:---|
+| [Rust Cheat Sheet](https://cheats.rs/) | 速查表 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | 示例 |
+

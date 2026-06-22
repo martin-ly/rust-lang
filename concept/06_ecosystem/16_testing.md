@@ -140,7 +140,7 @@ mod tests {
 ```
 
 > **认知功能**: Rust 的测试框架是**语言内置**的——不需要外部依赖即可写测试。这与 JavaScript（需要 Jest/Mocha）或 Java（需要 JUnit）形成对比。
-> [来源: [TRPL — Testing]]
+> [来源: [TRPL — Testing](https://doc.rust-lang.org/book/)]
 > **关键洞察**: `#[cfg(test)]` 条件编译使测试代码在生产构建中**完全消除**——零运行时开销。
 > [来源: [TRPL Ch11 — Testing](https://doc.rust-lang.org/book/ch11-00-testing.html)]
 

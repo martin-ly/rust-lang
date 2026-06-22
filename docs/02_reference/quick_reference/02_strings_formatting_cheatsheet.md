@@ -82,13 +82,13 @@
 
 ## 🔤 字符串类型
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### String vs &str
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // String - 可增长的堆分配字符串（拥有所有权）
@@ -102,9 +102,9 @@ let s4: &str = &s1; // String 自动解引用为 &str
 
 ### 类型特点
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 类型     | 所有权 | 可变性 | 存储位置 | 大小            |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -114,13 +114,13 @@ let s4: &str = &s1; // String 自动解引用为 &str
 
 ## 🆕 字符串创建
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 基本创建
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 从字面量创建
@@ -140,9 +140,9 @@ let mut s6 = String::with_capacity(10);
 
 ### 从其他类型创建
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 从数字
@@ -161,13 +161,13 @@ let s4 = String::from_utf8(bytes.to_vec()).unwrap();
 
 ## ✂️ 字符串操作
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 追加内容
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 let mut s = String::from("hello");
@@ -190,9 +190,9 @@ let s3 = s1 + &s2; // s1 被移动
 
 ### 删除内容
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 let mut s = String::from("hello, world");
@@ -213,9 +213,9 @@ s.drain(1..3); // 移除索引 1-2
 
 ### 替换
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 let s = String::from("hello world");
@@ -233,7 +233,7 @@ s.replace_range(0..1, "H");
 
 ### 查找和检查
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 let s = String::from("hello world");
@@ -256,7 +256,7 @@ let pos = s.rfind("l");
 
 ### 分割
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 let s = "hello,world,rust";
@@ -284,7 +284,7 @@ for part in s.split_terminator(',') {
 
 ### 修剪
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 let s = "  hello world  ";
@@ -306,11 +306,11 @@ let trimmed = s.trim_matches(' ');
 
 ## 🔄 字符串转换
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### String ↔ &str
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 // String → &str（自动解引用）
@@ -325,7 +325,7 @@ let s3 = format!("{}", "hello");
 
 ### 大小写转换
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 let s = "Hello World";
@@ -345,7 +345,7 @@ let capitalized = format!("{}{}", first, rest);
 
 ### 数字转换
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 // 字符串 → 数字
@@ -361,7 +361,7 @@ let s = format!("{}", n);
 
 ### 字符和字节
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 let s = "hello";
@@ -387,11 +387,11 @@ let byte_count = s.len();
 
 ## 🖨️ 格式化输出
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 基本宏
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 // println! - 输出到标准输出（带换行）
@@ -411,7 +411,7 @@ eprint!("Warning: ");
 
 ### format! 宏
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust
 // 基本格式化
@@ -431,7 +431,7 @@ let s = format!("{1} and {0}", "first", "second");
 
 ### write! 和 writeln
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust
 use std::fmt::Write;
@@ -450,11 +450,11 @@ writeln!(s, "Line 2").unwrap();
 
 ## 🎨 格式化选项
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 对齐和填充
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 > **扩展**: 内存对齐见 [ALIGNMENT_GUIDE](../ALIGNMENT_GUIDE.md)；此处为**格式化**对齐（文本排版）。
 
 ```rust
@@ -480,7 +480,7 @@ println!("{:*^10}", value);    // "****42****"
 
 ### 数字格式化
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust
 let n = 1234;
@@ -511,7 +511,7 @@ println!("{:05}", n);          // "01234"
 
 ### 浮点数格式化
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust
 let f = 3.14159;
@@ -533,7 +533,7 @@ println!("{:10.2}", f);        // "      3.14"
 
 ### 字符串格式化
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust
 let s = "hello";
@@ -550,7 +550,7 @@ println!("{:10.3}", s);        // "hel       "
 
 ### 指针和引用
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust
 let value = 42;
@@ -567,11 +567,11 @@ println!("{:#?}", vec![1, 2, 3]); // 美化格式
 
 ## 🎯 常用模式
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 字符串拼接
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust
 // 方式 1: format!（推荐，不移动所有权）
@@ -595,7 +595,7 @@ let s = parts.join(", ");
 
 ### 字符串模板
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 // 使用 format! 创建模板
@@ -612,7 +612,7 @@ let text = format!(
 
 ### 错误消息格式化
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 use std::fmt;
@@ -638,7 +638,7 @@ println!("{}", err); // "Error 404: Not Found"
 
 ### 表格格式化
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 let rows = vec![
@@ -657,7 +657,7 @@ for (name, age, role) in rows {
 
 ### 进度条格式化
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 let current = 45;
@@ -677,11 +677,11 @@ print!("\r[{}{}] {:.1}%",
 
 ## 💡 代码示例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 示例 1: 实现 Display trait
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 use std::fmt;
@@ -715,7 +715,7 @@ println!("Pretty: {:#?}", p);      // Pretty: 格式化多行输出
 
 ### 示例 2: 自定义格式化参数
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 use std::fmt;
@@ -751,7 +751,7 @@ println!("{:x}", data);      // 48656c6c6f
 
 ### 示例 3: 安全的字符串切片
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 fn safe_slice(s: &str, start: usize, end: usize) -> Option<&str> {
@@ -780,7 +780,7 @@ println!("{:?}", safe_slice(s, 6, 8));  // Some("世界")
 
 ### 示例 4: 字符串模板引擎
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 use std::collections::HashMap;
@@ -816,7 +816,7 @@ println!("{}", template.render(&vars));
 
 ### 示例 5: CSV 解析器
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 struct CsvRow {
@@ -857,11 +857,11 @@ println!("{:?}", row.fields);
 
 ## 🎯 使用场景
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 场景: 日志格式化系统
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 在实际项目中，字符串格式化常用于日志记录和报告生成。以下是一个完整的日志格式化系统：
 
@@ -943,11 +943,11 @@ println!("{}", entry.format_colored());
 
 ## 🚫 反例速查
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 反例 1: 在循环中拼接字符串
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **错误示例**:
 
@@ -971,7 +971,7 @@ let s: String = (0..1000).map(|i| i.to_string()).collect();
 
 ### 反例 2: 按字节索引切片 UTF-8
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **错误示例**:
 
@@ -1085,7 +1085,7 @@ fn process_logs(logs: &[LogEntry]) -> String {
 
 ## 📚 相关文档
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [类型系统模块（String/&str 相关）](../../../crates/c02_type_system/README.md)
 - [算法模块（字符串算法与数据处理）](../../../crates/c08_algorithms/README.md)
@@ -1093,7 +1093,7 @@ fn process_logs(logs: &[LogEntry]) -> String {
 
 ## 🧩 相关示例代码
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 以下示例与字符串/格式化高度相关，可直接运行：
 
@@ -1102,7 +1102,7 @@ fn process_logs(logs: &[LogEntry]) -> String {
 
 ## 📚 相关资源
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 官方文档
 >
@@ -1221,21 +1221,21 @@ let gamma = f64::consts::EULER_GAMMA;
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - String (computer science)]**
-> **[来源: TRPL Ch. 8 - Strings]**
-> **[来源: Rust Reference - str]**
-> **[来源: Unicode Standard]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: Wikipedia - String (computer science)]**
-> **[来源: TRPL Ch. 8 - Strings]**
-> **[来源: Rust Reference - str]**
-> **[来源: Unicode Standard]**
+> **来源: [Wikipedia - String (computer science)](https://en.wikipedia.org/wiki/String_(computer_science))**
+> **来源: [TRPL Ch. 8 - Strings](https://doc.rust-lang.org/book/ch08-00-common-collections.html)**
+> **来源: [Rust Reference - str](https://doc.rust-lang.org/reference/)**
+> **来源: [Unicode Standard](https://unicode.org/standard/standard.html)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Wikipedia - String (computer science)](https://en.wikipedia.org/wiki/String_(computer_science))**
+> **来源: [TRPL Ch. 8 - Strings](https://doc.rust-lang.org/book/ch08-00-common-collections.html)**
+> **来源: [Rust Reference - str](https://doc.rust-lang.org/reference/)**
+> **来源: [Unicode Standard](https://unicode.org/standard/standard.html)**
 
 ---

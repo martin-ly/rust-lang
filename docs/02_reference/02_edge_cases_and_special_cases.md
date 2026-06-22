@@ -22,7 +22,7 @@
 
 ## 目录
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Rust 边界条件与特例示例](#rust-边界条件与特例示例)
   - [目录](#目录)
@@ -96,13 +96,13 @@
 
 ## 集合边界
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 空 Vec 与零长度
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 let empty: Vec<i32> = vec![];
@@ -115,9 +115,9 @@ empty.get(0);   // ✅ 返回 None
 
 ### 空 HashMap / BTreeMap
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use std::collections::HashMap;
@@ -129,9 +129,9 @@ map.insert(1, "a");  // 插入后非空
 
 ### 空切片
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 let slice: &[i32] = &[];
@@ -143,13 +143,13 @@ slice.iter().next();  // ✅ 返回 None
 
 ## 算法特例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 空输入的排序与搜索
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 let empty: Vec<i32> = vec![];
@@ -163,9 +163,9 @@ one.binary_search(&0);  // ✅ Err(0)
 
 ### 单元素与双元素
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 let single = vec![42];
@@ -177,13 +177,13 @@ single.chunks(1).count();  // 1
 
 ## 并发特例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 零个线程 / 空任务列表
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 let handles: Vec<_> = vec![];
@@ -195,9 +195,9 @@ for h in handles {
 
 ### 通道已关闭
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use std::sync::mpsc;
@@ -209,7 +209,7 @@ rx.recv();  // ✅ Err，表明通道已关闭
 
 ### Mutex poison
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 // 当持有 MutexGuard 的线程 panic 时，Mutex 被标记为 poisoned
@@ -230,7 +230,7 @@ match mutex.lock() {
 
 ### 整数溢出（debug 下 panic）
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 let x: u8 = 255;
@@ -241,7 +241,7 @@ let z = x.saturating_add(1);  // ✅ 饱和，z = 255
 
 ### 除零
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 let x: i32 = 1;
@@ -258,7 +258,7 @@ let y = x.checked_div(zero);  // ✅ None
 
 ### 空字符串
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 let s = "";
@@ -269,7 +269,7 @@ s.as_bytes();      // &[]
 
 ### 字节边界上的字符切分
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 let s = "hello";
@@ -284,7 +284,7 @@ for c in s.chars() {
 
 ### 零长度范围
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 let s = "hello";
@@ -299,7 +299,7 @@ let sub = &s[2..2];  // ✅ ""
 
 ### 空指针解引用
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 let ptr: *const i32 = std::ptr::null();
@@ -311,7 +311,7 @@ if !ptr.is_null() {
 
 ### FFI 边界：C 传入空指针
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 #[repr(C)]
@@ -329,7 +329,7 @@ fn safe_wrapper() -> Option<&'static Foo> {
 
 ### 悬垂引用典型反例
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 // ❌ 返回局部变量的引用
@@ -350,7 +350,7 @@ fn good(x: &i32) -> &i32 { x }
 
 ### 无 std 环境
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust
 #![no_std]
@@ -853,21 +853,21 @@ fn iterator_invalidation() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

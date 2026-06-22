@@ -65,13 +65,13 @@
 
 ## 🎯 语义基线概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 权威源对齐状态
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```
 ╔═══════════════════════════════════════════════════════════════════════════════╗
@@ -92,9 +92,9 @@
 
 ### 1.2 Rust 1.94 语义演进摘要
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 语义领域 | Rust 1.93 | Rust 1.94 | 语义变化 | 影响模块 |
 |----------|-----------|-----------|----------|----------|
@@ -109,19 +109,19 @@
 
 ## 🧠 核心概念体系
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 所有权系统语义
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 2.1.1 所有权三规则 (Ownership Rules)
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // ╔═══════════════════════════════════════════════════════════════════════════╗
@@ -145,9 +145,9 @@
 
 #### 2.1.2 借用语义 (Borrowing Semantics)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 借用类型 | 语法 | 所有权影响 | 数量限制 | 生命周期约束 |
 |----------|------|------------|----------|--------------|
@@ -172,9 +172,9 @@
 
 #### 2.1.3 生命周期语义 (Lifetime Semantics)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // ═══════════════════════════════════════════════════════════════════════════
@@ -205,15 +205,15 @@ trait Parser<'a> {
 
 ### 2.2 类型系统语义
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 2.2.1 类型层级 (Type Hierarchy)
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -250,7 +250,7 @@ trait Parser<'a> {
 
 #### 2.2.2 Trait 系统语义 (Trait System Semantics)
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 // ╔═══════════════════════════════════════════════════════════════════════════╗
@@ -294,7 +294,7 @@ trait Borrow<'a, T: 'a> {
 
 #### 2.2.3 型变 (Variance)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 /// 型变定义: 类型参数变化与子类型关系的变化
@@ -328,11 +328,11 @@ fn variance_example() {
 
 ### 2.3 并发模型语义
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 #### 2.3.1 Send 与 Sync 语义
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 // ╔═══════════════════════════════════════════════════════════════════════════╗
@@ -379,7 +379,7 @@ fn sync_semantics<T: Sync>(value: &'static T) {
 
 #### 2.3.2 内存顺序语义 (Memory Ordering)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 use std::sync::atomic::{Ordering, AtomicUsize};
@@ -414,11 +414,11 @@ fn consumer() {
 
 ### 2.4 控制流语义
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 #### 2.4.1 ControlFlow 语义 (Rust 1.94)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust
 use std::ops::ControlFlow;
@@ -474,7 +474,7 @@ fn find_negative_semantic(numbers: &[i32]) -> Option<i32> {
 
 ### 3.1 所有权相关概念
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 概念 | 定义 | 属性 | 关系 | 示例 | 反例 |
 |------|------|------|------|------|------|
@@ -488,7 +488,7 @@ fn find_negative_semantic(numbers: &[i32]) -> Option<i32> {
 
 ### 3.2 类型系统概念
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | 概念 | 定义 | 属性 | 关系 | 示例 | 反例 |
 |------|------|------|------|------|------|
@@ -1030,20 +1030,20 @@ fn lazy_semantic() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

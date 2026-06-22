@@ -45,7 +45,7 @@
 
 ## 一、什么是 Miri？
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Miri 是 Rust 的一个**解释器**，它运行 Rust 的中间表示（MIR）并在执行过程中检测**未定义行为（Undefined Behavior, UB）**。与 Valgrind、ASan 等工具不同，Miri 专注于 Rust 特有的内存模型问题：
 
@@ -59,9 +59,9 @@ Miri 是 Rust 的一个**解释器**，它运行 Rust 的中间表示（MIR）�
 
 ### Miri vs 其他工具
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 工具 | 检测目标 | Rust 特异性 | 运行时开销 |
 |------|----------|-------------|------------|
@@ -75,13 +75,13 @@ Miri 是 Rust 的一个**解释器**，它运行 Rust 的中间表示（MIR）�
 
 ## 二、安装与基础使用
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 安装 Miri
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 # 需要 nightly 工具链
@@ -94,9 +94,9 @@ rustup default nightly
 
 ### 2.2 运行测试
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 # 运行当前 crate 的所有测试（通过 Miri 解释器）
@@ -114,9 +114,9 @@ cargo miri run --bin bin_name
 
 ### 2.3 常用环境变量
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 # 启用数据竞争检测（实验性，可能误报）
@@ -139,13 +139,13 @@ cargo miri test
 
 ## 三、十大 UB 检测示例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 示例 1：使用未初始化内存
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // ❌ 错误代码
@@ -170,9 +170,9 @@ but the data is uninitialized
 
 ### 示例 2：违反可变借用唯一性（Stacked Borrows）
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // ❌ 错误代码
@@ -205,9 +205,9 @@ error: Undefined Behavior: no item granting read access ...
 
 ### 示例 3：通过共享引用修改数据（内部可变性违规）
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // ❌ 错误代码
@@ -229,9 +229,9 @@ fn modify_with_interior_mutability() {
 
 ### 示例 4：悬空指针解引用
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // ❌ 错误代码
@@ -258,7 +258,7 @@ fn valid_pointer() {
 
 ### 示例 5：对齐违规
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 // ❌ 错误代码
@@ -280,7 +280,7 @@ fn aligned_access() {
 
 ### 示例 6：越界指针算术（即使不解引用也是 UB）
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 // ❌ 错误代码
@@ -301,7 +301,7 @@ fn in_bounds_ptr() {
 
 ### 示例 7：无效枚举判别式
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 #[repr(u8)]
@@ -504,21 +504,21 @@ jobs:
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Undefined Behavior]**
+> **来源: [Wikipedia - Undefined Behavior](https://en.wikipedia.org/wiki/Undefined_Behavior)**
 
-> **[来源: Miri Documentation]**
+> **来源: [Miri Documentation](https://github.com/rust-lang/miri)**
 
-> **[来源: Rust Reference - Miri]**
+> **来源: [Rust Reference - Miri](https://doc.rust-lang.org/reference/)**
 
-> **[来源: RFC 2585 - Unsafe Code Guidelines]**
+> **来源: [RFC 2585 - Unsafe Code Guidelines](https://rust-lang.github.io/rfcs/2585-2585-unsafe-block-in-unsafe-fn.html)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

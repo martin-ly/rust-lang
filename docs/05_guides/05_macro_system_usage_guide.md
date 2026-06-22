@@ -73,7 +73,7 @@
 
 ## 📋 概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本指南介绍 Rust 宏系统的使用，包括声明宏、过程宏、属性宏、派生宏等。
 
@@ -84,13 +84,13 @@
 
 ## 🚀 快速开始
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 声明宏
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 macro_rules! vec {
@@ -111,9 +111,9 @@ let v = vec![1, 2, 3];
 
 ### 过程宏
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use proc_macro::TokenStream;
@@ -129,19 +129,19 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
 
 ## 📊 核心功能
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 声明宏
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 基本语法
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 macro_rules! my_macro {
@@ -154,9 +154,9 @@ macro_rules! my_macro {
 
 #### 重复模式
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 macro_rules! repeat {
@@ -174,9 +174,9 @@ macro_rules! repeat {
 
 #### 条件展开
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 macro_rules! conditional {
@@ -197,9 +197,9 @@ macro_rules! conditional {
 
 ### 2. 属性宏
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use proc_macro::TokenStream;
@@ -219,7 +219,7 @@ fn my_function() {
 
 ### 3. 派生宏
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 use proc_macro::TokenStream;
@@ -252,7 +252,7 @@ println!("{}", s.method());  // "MyStruct"
 
 ### 4. 函数式宏
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 #[proc_macro]
@@ -273,7 +273,7 @@ my_function_macro!(some input);
 
 ### 1. 调试宏
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust
 macro_rules! dbg_print {
@@ -286,7 +286,7 @@ macro_rules! dbg_print {
 
 ### 2. 测试宏
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust
 macro_rules! test_case {
@@ -304,7 +304,7 @@ test_case!(test_2, 2, 4);
 
 ### 3. 构建器宏
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 macro_rules! builder {
@@ -349,7 +349,7 @@ let config = Config::new()
 
 ### 示例 1: 模式匹配与重复
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 // 匹配不同数量的参数
@@ -385,7 +385,7 @@ macro_rules! sum {
 
 ### 示例 2: Token Tree 操作
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 // 解析键值对
@@ -421,7 +421,7 @@ let map = hashmap! {
 
 ### 示例 3: 条件编译宏
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 macro_rules! platform_specific {
@@ -458,7 +458,7 @@ platform_specific! {
 
 ### 示例 1: 自定义 Derive 宏
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 // lib.rs - 过程宏 crate
@@ -542,7 +542,7 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
 
 ### 示例 2: 属性宏
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use proc_macro::TokenStream;
@@ -585,7 +585,7 @@ pub fn timed(attr: TokenStream, item: TokenStream) -> TokenStream {
 
 ### 示例 3: 函数式宏
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 use proc_macro::TokenStream;
@@ -637,7 +637,7 @@ pub fn sql(input: TokenStream) -> TokenStream {
 
 ### 陷阱 1: 卫生性问题 (Hygiene)
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust
 macro_rules! buggy_scope {
@@ -666,7 +666,7 @@ macro_rules! safe_scope {
 
 ### 陷阱 2: 表达式 vs 语句
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust
 macro_rules! double {
@@ -688,7 +688,7 @@ macro_rules! double_safe {
 
 ### 陷阱 3: 重复模式匹配问题
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust
 // ❌ 错误的重复匹配
@@ -713,7 +713,7 @@ macro_rules! correct_repeat {
 
 ### 陷阱 4: 编译错误信息模糊
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 // ❌ 错误信息不清晰
@@ -742,7 +742,7 @@ macro_rules! good_assert {
 
 ### 调试技巧 1: 展开宏查看
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```bash
 # 查看宏展开结果
@@ -757,7 +757,7 @@ cargo expand --test my_test
 
 ### 调试技巧 2: 使用 `trace_macros!`
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 #![feature(trace_macros)]
@@ -772,7 +772,7 @@ trace_macros!(false);
 
 ### 调试技巧 3: 使用 `log_syntax!`
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 #![feature(log_syntax)]
@@ -787,7 +787,7 @@ macro_rules! debug_macro {
 
 ### 调试技巧 4: 编译时断言
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 macro_rules! const_assert {
@@ -803,7 +803,7 @@ const_assert!(std::mem::size_of::<usize>() == 8);
 
 ### 调试技巧 5: 过程宏调试
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 // 在过程宏中使用 eprintln!
@@ -826,7 +826,7 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
 
 ### 1. 宏命名
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 - 使用 `snake_case`
 - 使用描述性名称
@@ -1062,19 +1062,19 @@ fn validate_macro_rules(rules: &[MacroRule]) -> ControlFlow<MacroError, ()> {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Macro (computer science)]**
-> **[来源: Wikipedia - Metaprogramming]**
-> **[来源: Rust Reference - Macros]**
-> **[来源: TRPL Ch. 19 - Macros]**
-> **[来源: The Little Book of Rust Macros]**
+> **来源: [Wikipedia - Macro (computer science)](https://en.wikipedia.org/wiki/Macro_(computer_science))**
+> **来源: [Wikipedia - Metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming)**
+> **来源: [Rust Reference - Macros](https://doc.rust-lang.org/reference/macros.html)**
+> **来源: [TRPL Ch. 19 - Macros](https://doc.rust-lang.org/book/ch19-00-advanced-features.html)**
+> **来源: [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)**
 > **[来源: ACM - Macro Systems Survey]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ---

@@ -117,7 +117,7 @@ Trait Object:
   │ 异构集合        │ 不支持          │ 支持            │
   │ 编译期已知类型  │ 是              │ 否              │
   └─────────────────┴─────────────────┴─────────────────┘
-> [来源: [Rust Reference — Trait Objects]]
+> [来源: [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html)]
 ```
 
 ```rust

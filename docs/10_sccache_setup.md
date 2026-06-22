@@ -36,7 +36,7 @@
 
 ## 什么是 sccache?
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 `sccache` 是 Mozilla 开发的编译缓存工具，支持:
 
@@ -46,11 +46,11 @@
 
 ## 安装
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 方式 1: 使用 cargo 安装 (推荐)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 cargo install sccache --locked
@@ -277,18 +277,18 @@ sccache --start-server
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Compiler Cache]**
+> **来源: [Wikipedia - Compiler Cache](https://en.wikipedia.org/wiki/Compiler_Cache)**
 > **[来源: Mozilla - sccache]**
 > **[来源: ACM - Build System Optimization]**
 > **[来源: IEEE - Software Build Automation]**
 > **[来源: Rust CI Best Practices]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

@@ -53,7 +53,7 @@
 
 ## 宏系统全景
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 mindmap
@@ -117,13 +117,13 @@ mindmap
 
 ## 声明宏详解
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 基本结构
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 macro_rules! macro_name {
@@ -134,9 +134,9 @@ macro_rules! macro_name {
 
 ### 片段类型
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 指示符 | 匹配内容 | 示例 |
 | :--- | :--- | :--- |
@@ -154,9 +154,9 @@ macro_rules! macro_name {
 
 ### 重复模式
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 macro_rules! vec {
@@ -179,13 +179,13 @@ vec![1, 2, 3,]
 
 ## 过程宏详解
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 三种类型
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 1. 派生宏
@@ -209,9 +209,9 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
 
 ### 派生宏示例
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 定义
@@ -246,13 +246,13 @@ Pancakes::hello(); // Hello, Macro! My name is Pancakes
 
 ## 常用内置宏
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 编译期信息
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 宏 | 返回值 | 用途 |
 | :--- | :--- | :--- |
@@ -263,9 +263,9 @@ Pancakes::hello(); // Hello, Macro! My name is Pancakes
 
 ### 代码生成
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 宏 | 用途 |
 | :--- | :--- |
@@ -284,7 +284,7 @@ Pancakes::hello(); // Hello, Macro! My name is Pancakes
 
 ### 查看展开结果
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```bash
 # 安装 cargo-expand
@@ -299,7 +299,7 @@ cargo expand --lib module::name
 
 ### 追踪宏展开
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 #![feature(trace_macros)]
@@ -527,13 +527,13 @@ Token流程
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Macro (computer science)]**
+> **来源: [Wikipedia - Macro (computer science)](https://en.wikipedia.org/wiki/Macro_(computer_science))**
 
-> **[来源: TRPL Ch. 19 - Macros]**
+> **来源: [TRPL Ch. 19 - Macros](https://doc.rust-lang.org/book/ch19-00-advanced-features.html)**
 
-> **[来源: Rust Reference - Macros]**
+> **来源: [Rust Reference - Macros](https://doc.rust-lang.org/reference/macros.html)**
 
-> **[来源: The Little Book of Rust Macros]**
+> **来源: [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)**
 
 ---
 

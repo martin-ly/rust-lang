@@ -14,7 +14,7 @@
 
 ## 目录
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Rust形式化概念百科](#rust形式化概念百科)
   - [目录](#目录)
@@ -61,19 +61,19 @@
 
 ## 一、所有权与借用
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 所有权 (Ownership)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 概念定义
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义 (所有权)**: 在Rust中，每个值在任意时刻有且只有一个**所有者**（变量）。当所有者离开作用域，值将被丢弃。
 
@@ -91,9 +91,9 @@
 
 #### 所有权转移 (Move)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义 (Move)**: 将值的所有权从一个变量转移到另一个变量。转移后，原变量不再有效。
 
@@ -113,9 +113,9 @@ Move(x, y, v):
 
 #### 复制 (Copy)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义 (Copy)**: 对于实现了`Copy` trait的类型，赋值操作会复制值而非转移所有权。
 
@@ -134,15 +134,15 @@ println!("{}", x);  // OK
 
 ### 1.2 借用 (Borrowing)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 不可变借用 (&T)
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义 (不可变借用)**: 允许一个或多个引用读取数据，但不允许修改。
 
@@ -163,9 +163,9 @@ println!("{}", x);  // OK
 
 #### 可变借用 (&mut T)
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义 (可变借用)**: 允许一个引用读取和修改数据，具有排他性。
 
@@ -186,9 +186,9 @@ println!("{}", x);  // OK
 
 #### 借用规则总结
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **规则 1**: 任意时刻，要么有一个可变引用，要么有任意数量的不可变引用
 **规则 2**: 引用必须始终有效（不能悬垂）
@@ -197,9 +197,9 @@ println!("{}", x);  // OK
 
 ### 1.3 生命周期 (Lifetime)
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义 (生命周期)**: 引用有效的程序区间。编译器通过生命周期确保引用不会比它指向的数据活得更长。
 
@@ -233,7 +233,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### 2.1 类型安全
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **定义 (类型安全)**: 良类型的程序不会陷入未定义行为。具体表现为：
 
@@ -249,7 +249,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### 2.2 型变 (Variance)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **定义 (型变)**: 描述复合类型的子类型关系如何依赖于其组成部分的子类型关系。
 
@@ -267,7 +267,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### 2.3 Trait系统
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **定义 (Trait)**: 定义类型必须实现的方法集合，类似其他语言中的接口。
 
@@ -298,7 +298,7 @@ impl Trait: 静态分发，编译时确定
 
 ### 3.1 生命周期省略规则
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Rust编译器会自动推断生命周期，遵循以下规则：
 
@@ -308,7 +308,7 @@ Rust编译器会自动推断生命周期，遵循以下规则：
 
 ### 3.2 生命周期边界
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **定义 (生命周期边界)**: `'static`表示整个程序运行期间都有效。
 
@@ -326,7 +326,7 @@ Rust编译器会自动推断生命周期，遵循以下规则：
 
 ### 4.1 Send与Sync
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **定义 (Send)**: 类型T可以安全地跨线程边界移动。
 
@@ -359,7 +359,7 @@ Rust编译器会自动推断生命周期，遵循以下规则：
 
 ### 4.2 异步与Future
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **定义 (Future)**: 表示异步计算的trait，可以被轮询以检查是否完成。
 
@@ -391,7 +391,7 @@ Wake -> poll() -> ...
 
 ### 5.1 Saga模式
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **定义 (Saga)**: 将长事务分解为一系列本地事务，每个本地事务有对应的补偿操作。
 
@@ -421,7 +421,7 @@ Saga = [LocalTx₁, LocalTx₂, ..., LocalTxₙ]
 
 ### 5.2 CQRS模式
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 **定义 (CQRS)**: 命令查询职责分离，读写使用不同的模型。
 
@@ -632,20 +632,20 @@ thread::spawn(move || {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
-> **[来源: Wikipedia - Model Checking]**
-> **[来源: ACM - Formal Verification Survey]**
-> **[来源: IEEE - Formal Specification Standards]**
-> **[来源: POPL - Automated Verification]**
-> **[来源: RustBelt - Rust Formal Semantics]**
-> **[来源: TLA+ Documentation]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
+> **来源: [Wikipedia - Model Checking](https://en.wikipedia.org/wiki/Model_Checking)**
+> **来源: [ACM - Formal Verification Survey](https://dl.acm.org/)**
+> **来源: [IEEE - Formal Specification Standards](https://standards.ieee.org/)**
+> **来源: [POPL - Automated Verification](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)**
+> **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

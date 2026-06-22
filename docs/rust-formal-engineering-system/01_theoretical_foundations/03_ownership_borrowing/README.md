@@ -15,7 +15,7 @@
 
 ## 知识结构思维导图
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 mindmap
@@ -42,7 +42,7 @@ mindmap
 
 ## 与核心文档的关联
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 本文档 | 核心文档 | 关系 |
 | :--- | :--- | :--- |
@@ -56,7 +56,7 @@ mindmap
 
 ## 形式化链接
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文档 | 路径 | 内容 |
 | :--- | :--- | :--- |
@@ -70,13 +70,13 @@ mindmap
 
 ## 所有权系统的形式化理解
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 资源管理代数
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Rust 的所有权系统可以形式化为线性逻辑的资源管理：
 
@@ -114,9 +114,9 @@ fn partial_use() {
 
 ### 借用检查器的形式化规则
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 借用检查器确保以下不变式：
@@ -157,9 +157,9 @@ fn borrow_rules() {
 
 ### 非词法生命周期（NLL）
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // Rust 2018+ 的非词法生命周期允许更早释放借用
@@ -189,9 +189,9 @@ fn nll_control_flow() {
 
 ### 内部可变性模式
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 use std::cell::RefCell;
@@ -251,9 +251,9 @@ fn arc_mutex_demo() {
 
 ### 所有权与并发的形式化
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // Send 和 Sync 的形式化定义
@@ -315,12 +315,12 @@ fn non_send_sync() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**

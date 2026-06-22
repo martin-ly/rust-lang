@@ -12,7 +12,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [Rust 所有权系统 - 全面 FAQ](#rust-所有权系统---全面-faq)
   - [目录](#目录)
@@ -55,13 +55,13 @@
 
 ## 基础概念 FAQ
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### Q1: 所有权系统与其他语言的垃圾回收有何不同？
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **A**: 核心区别:
 
@@ -89,7 +89,7 @@
 
 ### Q2: 为什么 Rust 需要 `Clone` trait？不能总是自动复制吗？
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **A**: 性能考虑。深拷贝可能很昂贵:
 
@@ -108,7 +108,7 @@ let n2 = n1;  // 隐式 Copy，因为 i32 是廉价的
 
 ### Q3: `Copy` 和 `Clone` 的区别是什么？
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **A**:
 
@@ -132,7 +132,7 @@ struct BigData { buffer: Vec<u8> }
 
 ### Q4: 什么是 "移动" (Move) 的真正含义？
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **A**: 移动 = 所有权转移。在底层，它只是指针复制:
 
@@ -157,7 +157,7 @@ let s2 = s1;  // 移动发生
 
 ### Q5: 为什么编译器拒绝这个明显安全的代码？
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 fn example() {
@@ -193,7 +193,7 @@ println!("{}", first);  // OK
 
 ### Q6: 什么是 "Non-Lexical Lifetimes" (NLL)？
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **A**: NLL 允许借用只持续到真正需要的地方，而不是整个作用域:
 
@@ -219,7 +219,7 @@ fn new_rust() {
 
 ### Q7: 如何理解 `'static` 生命周期？
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **A**: `'static` 表示数据在程序整个生命周期内都有效:
 
@@ -240,7 +240,7 @@ take_static("hello");  // OK
 
 ### Q8: 为什么需要显式生命周期注解？
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **A**: 当编译器无法推断时:
 
@@ -263,7 +263,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### Q9: 什么时候应该使用 `unsafe`？
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **A**: 五种情况:
 
@@ -306,7 +306,7 @@ unsafe { println!("{}", u.i); }
 
 ### Q10: `unsafe` 代码块内的代码还是安全的吗？
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **A**: `unsafe` 不意味着 "危险"，而是 "程序员保证正确":
 
@@ -326,7 +326,7 @@ unsafe {
 
 ### Q11: 原始指针和引用的区别？
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **A**:
 
@@ -346,7 +346,7 @@ unsafe {
 
 ### Q12: `Send` 和 `Sync` 的区别？
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **A**:
 
@@ -367,7 +367,7 @@ unsafe {
 
 ### Q13: 为什么 `Rc` 不是 `Send`？
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **A**: 引用计数不是原子的:
 
@@ -396,7 +396,7 @@ struct RcBox<T> {
 
 ### Q14: `Mutex` 和 `RwLock` 的选择？
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **A**:
 
@@ -417,7 +417,7 @@ struct RcBox<T> {
 
 ### Q15: 形式化验证能发现所有 bug 吗？
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **A**: 不能。形式化验证只能验证**规范**，而规范可能不完整:
 
@@ -442,7 +442,7 @@ fn increment(x: i32) -> i32 {
 
 ### Q16: Kani 和 Miri 的区别？
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 **A**:
 
@@ -465,7 +465,7 @@ cargo kani
 
 ### Q17: 为什么需要 RefinedRust，既然有 Kani？
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **A**: 不同层次的保证:
 
@@ -490,7 +490,7 @@ cargo kani
 
 ### Q18: 如何选择验证工具？
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **A**: 决策树:
 
@@ -518,7 +518,7 @@ cargo kani
 
 ### Q19: 如何在 CI 中集成验证？
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **A**: GitHub Actions 示例:
 
@@ -556,7 +556,7 @@ jobs:
 
 ### Q20: 所有权系统影响性能吗？
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **A**: 通常**零成本**:
 
@@ -580,7 +580,7 @@ process(data);  // 移动，只是指针复制
 
 ### Q21: 如何避免 `clone()` 的性能损失？
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **A**: 策略:
 
@@ -624,7 +624,7 @@ let doubled = data.iter().map(|x| x * 2);
 
 ### Q22: "cannot borrow as mutable more than once" 解决方案
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **A**: 常见解决方案:
 
@@ -657,7 +657,7 @@ v.borrow_mut().push(2);  // 运行时检查
 
 ### Q23: "does not live long enough" 解决策略
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **A**:
 
@@ -690,7 +690,7 @@ fn get_string<'a>(buffer: &'a mut String) -> &'a str {
 
 ### Q24: 如何调试复杂的生命周期错误？
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **A**: 调试步骤:
 
@@ -755,9 +755,9 @@ fn foo<'a, 'b>(x: &'a str, y: &'b str) -> &'a str { ... }
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---

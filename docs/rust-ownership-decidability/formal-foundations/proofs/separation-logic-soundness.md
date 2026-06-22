@@ -11,7 +11,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [分离逻辑可靠性证明](#分离逻辑可靠性证明)
   - [目录](#目录)
@@ -70,11 +70,11 @@
 
 ## 1. 背景介绍
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 什么是分离逻辑
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 分离逻辑(Separation Logic)是一种用于推理**共享可变状态**的程序逻辑。由John Reynolds (2002) 和 Peter O'Hearn 等人发展，最初用于验证指针操作程序，现在广泛应用于：
 
@@ -84,7 +84,7 @@
 
 ### 1.2 为什么需要分离逻辑
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 传统Hoare逻辑在堆推理方面存在局限：
 
@@ -102,7 +102,7 @@
 
 ### 1.3 核心思想
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```
 分离合取: P * Q
@@ -131,7 +131,7 @@
 
 ### 2.1 堆(Heap)的数学定义
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **定义 2.1** (堆):
 
@@ -168,7 +168,7 @@ h₁ ⊥ h₂  ⟺  dom(h₁) ∩ dom(h₂) = ∅
 
 ### 2.2 存储(Store)与状态
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **定义 2.5** (存储):
 
@@ -194,7 +194,7 @@ s ∈ Store = Var → Value
 
 ### 3.1 语法
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```
 P, Q ::= emp                    (空堆)
@@ -212,7 +212,7 @@ P, Q ::= emp                    (空堆)
 
 ### 3.2 语义
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **定义 3.1** (满足关系):
 
@@ -250,7 +250,7 @@ P, Q ::= emp                    (空堆)
 
 ### 3.3 常见模式
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **列表段**:
 
@@ -281,7 +281,7 @@ tree(x) ::= x = null ∧ emp
 
 ### 4.1 Hoare三元组
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **定义 4.1** (部分正确性Hoare三元组):
 
@@ -304,7 +304,7 @@ tree(x) ::= x = null ∧ emp
 
 ### 4.2 可靠性定理
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **定理 4.3** (分离逻辑可靠性):
 > 如果 ⊢ {P} C {Q} 可证，则对于所有满足(s, h) ⊨ P的状态，
@@ -322,7 +322,7 @@ tree(x) ::= x = null ∧ emp
 
 ### 4.3 完备性说明
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 分离逻辑对于**指针操作**是完备的吗？
 
@@ -342,17 +342,17 @@ tree(x) ::= x = null ∧ emp
 
 ### 5.1 证明策略
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 使用**结构归纳法**，对命令C的结构进行归纳。
 
 ### 5.2 基本命令的证明
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 #### 5.2.1 空命令 (Skip)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **规则**:
 
@@ -369,7 +369,7 @@ tree(x) ::= x = null ∧ emp
 
 #### 5.2.2 赋值 (Assignment)
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **规则**:
 
@@ -395,7 +395,7 @@ tree(x) ::= x = null ∧ emp
 
 #### 5.2.3 内存分配 (Alloc)
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **规则**:
 
@@ -420,7 +420,7 @@ tree(x) ::= x = null ∧ emp
 
 #### 5.2.4 内存释放 (Free)
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 **规则**:
 
@@ -835,21 +835,21 @@ Rust程序 ──► 分离逻辑规范 ──► 形式化证明
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
-> **[来源: Coq Reference]**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
 
-> **[来源: TLA+]**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
 
-> **[来源: ACM - Formal Verification]**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
 
 ---
 

@@ -32,19 +32,19 @@
 | 所有权 | `01_foundation/03_lifetimes.md` | `01_foundation/01_ownership.md` | 232 | \| **T6: Copy trait 安全** \| 类型实现 `Copy` + 仅含标量 \| 按位复制语义等价于原值，无... |
 | 所有权 | `01_foundation/03_lifetimes.md` | `01_foundation/01_ownership.md` | 233 | \| **C1: 无所有权 ⟹ 无 Drop 责任** \| 值被 `mem::forget` 或 `ManuallyDro... |
 | 所有权 | `01_foundation/03_lifetimes.md` | `01_foundation/01_ownership.md` | 245 | > **一致性检查**: 上述 11 个定理/引理/推论之间无矛盾。完整推理链: > `L1(所有权唯一性) ⟹ L2(... |
-| 所有权 | `01_foundation/03_lifetimes.md` | `01_foundation/01_ownership.md` | 772 | > **[来源: Rust Reference: Send]** Send trait 定义跨线程所有权转移的安全性，要... |
+| 所有权 | `01_foundation/03_lifetimes.md` | `01_foundation/01_ownership.md` | 772 | > **来源: [Rust Reference: Send](https://doc.rust-lang.org/reference/)** Send trait 定义跨线程所有权转移的安全性，要... |
 | 所有权 | `01_foundation/03_lifetimes.md` | `01_foundation/01_ownership.md` | 777 | > `T: Sync` 的形式化语义：`T: Sync ⇔ &T: Send`，即 T 的共享引用可以安全地跨线程共享。... |
-| 所有权 | `01_foundation/03_lifetimes.md` | `01_foundation/02_borrowing.md` | 217 | > **[来源: RustBelt: POPL 2018]** Safe Rust 中不存在数据竞争的形式化定理，基于 ... |
+| 所有权 | `01_foundation/03_lifetimes.md` | `01_foundation/02_borrowing.md` | 217 | > **来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)** Safe Rust 中不存在数据竞争的形式化定理，基于 ... |
 | 所有权 | `01_foundation/03_lifetimes.md` | `02_intermediate/03_memory_management.md` | 51 | > **过渡到属性矩阵**: 从形式化定义出发，内存管理不仅是"堆 vs 栈"的二元区分，而是由多种所有权模型（独占、共... |
 | 所有权 | `01_foundation/03_lifetimes.md` | `02_intermediate/03_memory_management.md` | 132 | > **过渡到定理推理链**: 思维导图呈现了内存管理的概念拓扑，但缺乏严格的逻辑推导关系。下一节通过"⟹"标注的定理链... |
 | 所有权 | `01_foundation/03_lifetimes.md` | `02_intermediate/03_memory_management.md` | 215 | \|:---\|:---\|:---\|:---\|:---\|:---\|:---\| \| **引理**: Box ⟹ 堆分配 + 唯... |
 | 所有权 | `01_foundation/03_lifetimes.md` | `02_intermediate/03_memory_management.md` | 216 | \| **引理**: Box ⟹ 堆分配 + 唯一所有权 \| 单线程 \| 堆内存安全释放 \| 线性逻辑 ⊗ \| 所有堆分配... |
 | 所有权 | `01_foundation/03_lifetimes.md` | `02_intermediate/03_memory_management.md` | 224 | > **一致性检查**: Box（独占）⟹ Rc（单线程共享）⟹ Arc（多线程共享）⟹ RefCell（内部可变），形... |
 | 所有权 | `01_foundation/03_lifetimes.md` | `02_intermediate/03_memory_management.md` | 226 | > > **关键洞察**: Rc/Arc/RefCell 的定理**不在 L4 形式化范围内**（运行时机制），是工程折... |
-| 所有权 | `01_foundation/03_lifetimes.md` | `03_advanced/01_concurrency.md` | 191 | > **[RustBelt: POPL 2017 (Jung et al.)]** Rust 的类型系统通过 Send/... |
-| 所有权 | `01_foundation/03_lifetimes.md` | `03_advanced/01_concurrency.md` | 193 | > **[RustBelt: POPL 2017]** `Send` and `Sync` are formally v... |
-| 所有权 | `01_foundation/03_lifetimes.md` | `03_advanced/01_concurrency.md` | 195 | > > **[TRPL: Ch16.0]** Fearless concurrency 强调：所有权和类型系统是消除并发... |
-| 所有权 | `01_foundation/03_lifetimes.md` | `03_advanced/01_concurrency.md` | 313 | > **[RustBelt: POPL 2017]** 定理：Safe Rust 的并发程序无数据竞争。前提为所有权规则... |
+| 所有权 | `01_foundation/03_lifetimes.md` | `03_advanced/01_concurrency.md` | 191 | > **[RustBelt](https://plv.mpi-sws.org/rustbelt/)** Rust 的类型系统通过 Send/... |
+| 所有权 | `01_foundation/03_lifetimes.md` | `03_advanced/01_concurrency.md` | 193 | > **[RustBelt](https://plv.mpi-sws.org/rustbelt/)** `Send` and `Sync` are formally v... |
+| 所有权 | `01_foundation/03_lifetimes.md` | `03_advanced/01_concurrency.md` | 195 | > > **[The Rust Programming Language](https://doc.rust-lang.org/book/)** Fearless concurrency 强调：所有权和类型系统是消除并发... |
+| 所有权 | `01_foundation/03_lifetimes.md` | `03_advanced/01_concurrency.md` | 313 | > **[RustBelt](https://plv.mpi-sws.org/rustbelt/)** 定理：Safe Rust 的并发程序无数据竞争。前提为所有权规则... |
 | 所有权 | `01_foundation/03_lifetimes.md` | `03_advanced/01_concurrency.md` | 356 | \| T1 \| 类型系统排他性 \| `T: Send + Sync` + 借用检查通过 \| ⟹ 编译期排除数据竞争 \| A... |
 | 所有权 | `01_foundation/03_lifetimes.md` | `03_advanced/01_concurrency.md` | 358 | \| T3 \| Atomic 无锁安全 \| 正确使用 `Ordering` \| ⟹ 原子操作无撕裂 \| C11 内存模型 ... |
 | 所有权 | `01_foundation/03_lifetimes.md` | `03_advanced/01_concurrency.md` | 365 | > **对应标注**：T1 中"编译期排除数据竞争"为 [`01_foundation/01_ownership.md`... |

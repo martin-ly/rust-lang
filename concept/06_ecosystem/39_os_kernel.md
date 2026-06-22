@@ -1,4 +1,6 @@
-> **EN**: Os Kernel
+# Rust 操作系统内核开发
+
+> **EN**: Rust for Operating System Kernel Development
 > **Summary**: Os Kernel: Rust ecosystem tools, crates, and engineering practices.
 > **内容分级**: [专家级]
 

@@ -49,7 +49,7 @@
 
 ## 形式化理论体系架构
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 形式化基础
@@ -82,13 +82,13 @@
 
 ## 文档索引
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 逻辑基础
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文档 | 内容 | 难度 |
 | :--- | :--- | :--- |
@@ -97,7 +97,7 @@
 
 ### 程序语义
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 | 文档 | 内容 | 难度 |
 | :--- | :--- | :--- |
@@ -106,7 +106,7 @@
 
 ### 证明技术
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | 文档 | 内容 | 难度 |
 | :--- | :--- | :--- |
@@ -115,7 +115,7 @@
 
 ### 方法学
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 | 文档 | 内容 | 难度 |
 | :--- | :--- | :--- |
@@ -130,7 +130,7 @@
 
 ### 入门路径
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```
 1. 逻辑基础
@@ -148,7 +148,7 @@
 
 ### 进阶路径
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```
 1. 分离逻辑
@@ -167,7 +167,7 @@
 
 ### 专家路径
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```
 1. Iris框架
@@ -193,7 +193,7 @@
 
 ### 理论 → 实践映射
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 理论概念 | Rust应用 | 文档位置 |
 | :--- | :--- | :--- |
@@ -359,12 +359,12 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
-> **[来源: Wikipedia - Model Checking]**
-> **[来源: ACM - Formal Verification Survey]**
-> **[来源: IEEE - Formal Specification Standards]**
-> **[来源: POPL - Automated Verification]**
-> **[来源: RustBelt - Rust Formal Semantics]**
-> **[来源: TLA+ Documentation]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
+> **来源: [Wikipedia - Model Checking](https://en.wikipedia.org/wiki/Model_Checking)**
+> **来源: [ACM - Formal Verification Survey](https://dl.acm.org/)**
+> **来源: [IEEE - Formal Specification Standards](https://standards.ieee.org/)**
+> **来源: [POPL - Automated Verification](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)**
+> **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**
 
 ---

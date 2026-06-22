@@ -7,7 +7,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference - Lifetimes]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon - Lifetime Elision]** · **[来源: TRPL Ch. 10]** · **[来源: Wikipedia - Region-based Memory Management]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Wikipedia - Type Inference]** · **[来源: Wikipedia - Hindley-Milner Type System]** · **[来源: ACM - Region-based Memory Management]** · **[来源: IEEE - Lifetime Analysis in Compilers]**
+> **来源: [Rust Reference - Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon - Lifetime Elision](https://doc.rust-lang.org/nomicon/)** · **来源: [TRPL Ch. 10](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)** · **来源: [Wikipedia - Region-based Memory Management](https://en.wikipedia.org/wiki/Region_based_Memory_Management)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [Wikipedia - Type Inference](https://en.wikipedia.org/wiki/Type_Inference)** · **来源: [Wikipedia - Hindley-Milner Type System](https://en.wikipedia.org/wiki/Hindley_Milner_Type_System)** · **[来源: ACM - Region-based Memory Management]** · **[来源: IEEE - Lifetime Analysis in Compilers]**
 
 - [深入理解 Rust 生命周期系统](#深入理解-rust-生命周期系统)
   - [目录](#目录)
@@ -112,13 +112,13 @@
 
 ## 1. 生命周期形式语义
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 生命周期作为区域 (Region)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 在 Rust 的类型系统中，生命周期被形式化为**区域 (Region)**，表示程序执行过程中的一个代码点集合。
 
@@ -133,7 +133,7 @@
 
 #### 1.1.1 区域的形式化定义
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust
 // 直观理解：生命周期对应代码中的 scope
@@ -163,7 +163,7 @@
 
 #### 1.1.2 区域包含关系 (Outlives)
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```
 定义 1.2 (区域包含/Outlives)
@@ -215,11 +215,11 @@
 
 ### 1.2 生命周期约束
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 #### 1.2.1 约束的形式化定义
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```
 定义 1.3 (生命周期约束)
@@ -236,7 +236,7 @@ C ::= 'a: 'b | C₁ ∧ C₂ | true | false
 
 #### 1.2.2 约束满足性
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```
 定义 1.4 (约束满足性)
@@ -265,7 +265,7 @@ C ::= 'a: 'b | C₁ ∧ C₂ | true | false
 
 #### 1.2.3 约束生成规则
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```
 规则 1.1 (借用约束生成)
@@ -302,11 +302,11 @@ fn example<'a>(x: &'a i32) -> &'a i32 {
 
 ### 1.3 生命周期推断
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 #### 1.3.1 约束收集算法
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```
 算法 1.1 (生命周期约束收集)
@@ -342,7 +342,7 @@ fn example<'a>(x: &'a i32) -> &'a i32 {
 
 #### 1.3.2 约束求解算法
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```
 算法 1.2 (生命周期约束求解)
@@ -372,7 +372,7 @@ fn example<'a>(x: &'a i32) -> &'a i32 {
 
 #### 1.3.3 最小生命周期原则
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```
 定理 1.2 (最小生命周期原则)
@@ -413,11 +413,11 @@ fn main() {
 
 ### 2.1 变型类型
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 #### 2.1.1 形式化定义
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```
 定义 2.1 (变型 Variance)
@@ -443,7 +443,7 @@ fn main() {
 
 #### 2.1.2 Rust 中的变型
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 | 类型 | 参数位置 | 变型 |
 |------|----------|------|
@@ -463,11 +463,11 @@ fn main() {
 
 ### 2.2 协变 (Covariance)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 #### 2.2.1 定义与示例
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```
 定义 2.2 (协变)
@@ -507,7 +507,7 @@ fn wrapper_covariance<'a>(w: Wrapper<&'static str>) -> Wrapper<&'a str> {
 
 #### 2.2.2 协变的数学解释
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```
 定理 2.1 (协变引用的安全性)
@@ -530,11 +530,11 @@ fn wrapper_covariance<'a>(w: Wrapper<&'static str>) -> Wrapper<&'a str> {
 
 ### 2.3 逆变 (Contravariance)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 #### 2.3.1 定义与示例
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```
 定义 2.3 (逆变)
@@ -570,7 +570,7 @@ fn handler_contravariance<'a>(
 
 #### 2.3.2 逆变的数学解释
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```
 定理 2.2 (逆变函数参数的安全性)
@@ -590,11 +590,11 @@ fn handler_contravariance<'a>(
 
 ### 2.4 不变 (Invariance)
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 #### 2.4.1 定义与示例
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```
 定义 2.4 (不变)
@@ -636,7 +636,7 @@ fn invariant_raw() {
 
 #### 2.4.2 为什么需要不变
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 // 反例：如果 Cell 是协变的，会发生什么？
@@ -660,7 +660,7 @@ fn broken_variance<'a>() {
 
 ### 2.5 变型推导规则
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```
 规则 2.1 (结构体变型推导)
@@ -712,11 +712,11 @@ Rust 编译器推导的变型与形式化变型定义一致。
 
 ### 3.1 子类型规则
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 #### 3.1.1 基本子类型规则
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```
 规则 3.1 (引用子类型)
@@ -751,7 +751,7 @@ fn subtyping_examples<'a: 'b, 'b>() {
 
 #### 3.1.2 函数子类型
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```
 规则 3.2 (函数子类型)
@@ -789,11 +789,11 @@ fn main() {
 
 ### 3.2 高阶 trait 约束 (Higher-Ranked Trait Bounds, HRTB)
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 #### 3.2.1 HRTB 语法与语义
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust
 // 高阶 trait 约束：适用于所有生命周期
@@ -830,7 +830,7 @@ where
 
 #### 3.2.2 HRTB 的实际应用
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust
 // 应用 1：闭包接受任何生命周期的引用
@@ -881,7 +881,7 @@ where
 
 ### 反例 1：变型违反
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 /// 错误：变型违反示例
@@ -923,7 +923,7 @@ fn variance_explanation() {
 
 ### 反例 2：Cell 中的不变生命周期
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 use std::cell::Cell;
@@ -961,7 +961,7 @@ fn correct_cell_usage() {
 
 ### 反例 3：逆变函数参数
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust
 /// 错误：逆变理解错误
@@ -996,7 +996,7 @@ trait Dog: Animal { fn bark(&self); }
 
 ### 反例 4：trait 对象生命周期
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 /// 错误：trait 对象生命周期省略陷阱
@@ -1028,7 +1028,7 @@ fn trait_object_lifetime_bound<'a>() {
 
 ### 反例 5：自引用生命周期
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 /// 错误：尝试创建自引用结构体
@@ -1089,7 +1089,7 @@ impl SelfRefFixed {
 
 ### 反例 6：生命周期省略混淆
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 /// 错误：生命周期省略规则误解
@@ -1129,7 +1129,7 @@ fn explicit_vs_elided<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### 反例 7：高阶生命周期不匹配
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 /// 错误：高阶生命周期约束违反
@@ -1164,7 +1164,7 @@ fn higher_ranked_mismatch() {
 
 ### 反例 8：GAT 生命周期约束失败
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 /// 错误：泛型关联类型生命周期约束
@@ -1215,7 +1215,7 @@ mod gat_lifetime_failure {
 
 ### 反例 9：impl Trait 生命周期捕获
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 /// 错误：impl Trait 生命周期捕获问题
@@ -1252,7 +1252,7 @@ mod impl_trait_lifetime {
 
 ### 反例 10：async 块生命周期
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 /// 错误：async 块生命周期陷阱
@@ -1297,7 +1297,7 @@ mod async_lifetime_failure {
 
 ### 反例 11：闭包生命周期推断
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 /// 错误：闭包生命周期推断失败
@@ -1339,7 +1339,7 @@ mod closure_lifetime_failure {
 
 ### 反例 12：迭代器项生命周期
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 /// 错误：迭代器生命周期问题
@@ -1395,7 +1395,7 @@ mod iterator_lifetime_failure {
 
 ### 反例 13：Stream 生命周期问题
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 /// 错误：Stream 生命周期问题
@@ -1441,7 +1441,7 @@ mod stream_lifetime_failure {
 
 ### 反例 14：Scoped 线程生命周期
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 /// 错误：Scoped 线程生命周期问题
@@ -1487,7 +1487,7 @@ mod scoped_thread_failure {
 
 ### 反例 15：Crossbeam Scope 生命周期
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 /// 错误：Crossbeam scope 高级生命周期问题
@@ -1555,11 +1555,11 @@ mod crossbeam_advanced_failure {
 
 ### 5.1 PhantomData 生命周期
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 #### 5.1.1 PhantomData 的作用
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust
 use std::marker::PhantomData;
@@ -1588,7 +1588,7 @@ impl<'a, T> MyStruct<'a, T> {
 
 #### 5.1.2 PhantomData 变型组合
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 use std::marker::PhantomData;
@@ -1617,7 +1617,7 @@ struct WithLifetime<'a, T> {
 
 #### 5.1.3 自定义 Drop 检查
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 use std::marker::PhantomData;
@@ -1653,11 +1653,11 @@ struct BadResource<T> {
 
 ### 5.2 自引用类型
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 #### 5.2.1 Pin 基础
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 use std::pin::Pin;
@@ -1706,7 +1706,7 @@ impl SelfReferential {
 
 #### 5.2.2 Ouroboros 模式
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 /// 使用 ouroboros crate 简化自引用
@@ -1771,11 +1771,11 @@ impl ManualDocument {
 
 ### 5.3 Lending Iterator
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 #### 5.3.1 传统 Iterator 的限制
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 /// 标准 Iterator 的 Item 不能借用迭代器本身
@@ -1795,7 +1795,7 @@ trait StandardIterator {
 
 #### 5.3.2 GAT 实现 Lending Iterator
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 #![feature(generic_associated_types)]
@@ -1862,7 +1862,7 @@ fn use_lending_iterator() {
 
 #### 5.3.3 Lending Iterator 扩展
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 /// 为 Lending Iterator 提供适配器
@@ -1919,11 +1919,11 @@ where
 
 ### 6.1 生命周期参数 vs 类型参数
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 #### 6.1.1 参数顺序与约束
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 /// 生命周期参数与类型参数的声明顺序
@@ -1960,7 +1960,7 @@ impl<'a, T: 'a> Reference<'a, T> {
 
 #### 6.1.2 生命周期推导
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 /// 生命周期在泛型中的自动推导
@@ -1999,11 +1999,11 @@ impl<T> Container<T> {
 
 ### 6.2 生命周期边界
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 #### 6.2.1 类型边界 (Type Bounds)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 /// T: 'a 表示 T 必须至少活 'a 那么长
@@ -2054,7 +2054,7 @@ where
 
 #### 6.2.2 生命周期与 trait 边界
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 /// trait 对象的生命周期边界
@@ -2090,11 +2090,11 @@ async fn async_with_bounds<'a, T: 'a>(value: T) -> T {
 
 ### 7.1 Arena 设计原理
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 #### 7.1.1 Arena 模式概述
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust
 /// Arena 分配器：批量分配，统一释放
@@ -2142,7 +2142,7 @@ impl<'arena, T: 'arena> ArenaBox<'arena, T> {
 
 #### 7.1.2 生命周期设计
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
 /// Arena 生命周期分析：
@@ -2244,11 +2244,11 @@ impl<'arena> Drop for Arena<'arena> {
 
 ### 7.2 完整 Arena 实现
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 #### 7.2.1 类型安全的 bump allocator
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust
 use std::alloc::{alloc, dealloc, Layout};
@@ -2381,7 +2381,7 @@ unsafe impl Sync for BumpArena {}
 
 #### 7.2.2 带生命周期的 Arena
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 /// 带生命周期的类型安全 Arena
@@ -2453,11 +2453,11 @@ struct Point {
 
 ### 7.3 生命周期分析
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 #### 7.3.1 Arena 生命周期约束
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```
 定理 7.1 (Arena 安全性)
@@ -2509,7 +2509,7 @@ fn nested_arena_lifetimes() {
 
 #### 7.3.2 Arena 与自引用
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 /// Arena 中的自引用结构
@@ -2572,7 +2572,7 @@ fn graph_in_arena() {
 
 ### 7.4 性能与使用模式
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 #### 7.4.1 Arena 性能特征
 
@@ -2767,7 +2767,7 @@ mod game_ecs_arena {
 
 ### 定理 8.1：约束传递性 (CONSTRAINT-TRANSITIVITY)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```
 ─────────────────────────────────────────
@@ -2784,7 +2784,7 @@ mod game_ecs_arena {
 
 ### 定理 8.2：最小生命周期原则 (MINIMAL-LIFETIME)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```
 ─────────────────────────────────────────
@@ -2798,7 +2798,7 @@ Rust 选择 σ* ∈ S 使得 ∀σ ∈ S, ∀'a. σ*('a) ⊆ σ('a)
 
 ### 定理 8.3：变型推导正确性 (VARIANCE-SOUNDNESS)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```
 ─────────────────────────────────────────
@@ -2817,7 +2817,7 @@ Rust 编译器推导的变型保证类型安全。
 
 ### 定理 8.4：协变引用安全性 (COVARIANT-REF)
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```
 ─────────────────────────────────────────
@@ -2832,7 +2832,7 @@ Rust 编译器推导的变型保证类型安全。
 
 ### 定理 8.5：逆变函数参数安全性 (CONTRAVARIANT-FN)
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```
 ─────────────────────────────────────────
@@ -2848,7 +2848,7 @@ Rust 编译器推导的变型保证类型安全。
 
 ### 定理 8.6：HRTB 全称量词 (HRTB-FORALL)
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```
 ─────────────────────────────────────────
@@ -2862,7 +2862,7 @@ Rust 的 for<'a> 是全称量词。
 
 ### 定理 8.7：Arena 内存安全 (ARENA-SAFETY)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```
 ─────────────────────────────────────────
@@ -2883,7 +2883,7 @@ Rust 的 for<'a> 是全称量词。
 
 ### 9.1 核心概念回顾
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 | 概念 | 描述 | 重要性 |
 |------|------|--------|
@@ -2898,7 +2898,7 @@ Rust 的 for<'a> 是全称量词。
 
 ### 9.2 最佳实践
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 1. **显式生命周期**：复杂函数使用显式生命周期注解，提高可读性
 2. **变型理解**：理解为什么 Cell 必须是不变的
@@ -2908,7 +2908,7 @@ Rust 的 for<'a> 是全称量词。
 
 ### 9.3 常见陷阱
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 1. 生命周期省略规则误解
 2. 协变/逆变方向混淆
@@ -2939,50 +2939,50 @@ Rust 的 for<'a> 是全称量词。
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Region-Based Memory Management]**
+> **来源: [Wikipedia - Region-Based Memory Management](https://en.wikipedia.org/wiki/Region_Based_Memory_Management)**
 
-> **[来源: Wikipedia - Type Inference]**
+> **来源: [Wikipedia - Type Inference](https://en.wikipedia.org/wiki/Type_Inference)**
 
-> **[来源: Wikipedia - Hindley-Milner Type System]**
+> **来源: [Wikipedia - Hindley-Milner Type System](https://en.wikipedia.org/wiki/Hindley_Milner_Type_System)**
 
-> **[来源: Wikipedia - Subtyping]**
+> **来源: [Wikipedia - Subtyping](https://en.wikipedia.org/wiki/Subtyping)**
 
 > **[来源: IEEE - Lifetime Analysis in Compilers]**
 
 > **[来源: ACM - Region-based Memory Management]**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: Rust Reference - Lifetimes]**
+> **来源: [Rust Reference - Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html)**
 
-> **[来源: Rustonomicon - Lifetime Elision]**
+> **来源: [Rustonomicon - Lifetime Elision](https://doc.rust-lang.org/nomicon/)**
 
-> **[来源: TRPL Ch. 10 - Generic Types, Traits, and Lifetimes]**
+> **来源: [TRPL Ch. 10 - Generic Types, Traits, and Lifetimes](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages Survey]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design and Implementation]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM - Systems Programming Languages Survey](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI - Programming Language Design and Implementation](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---
 

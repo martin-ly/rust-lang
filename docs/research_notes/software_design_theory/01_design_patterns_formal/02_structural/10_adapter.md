@@ -57,13 +57,13 @@
 
 ## 形式化定义
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Def 1.1（Adapter 结构）
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 设 $A$ 为适配器类型，$T$ 为目标接口类型，$S$ 为被适配类型。Adapter 是一个四元组 $\mathcal{AD} = (A, T, S, \mathit{adapt})$，满足：
 
@@ -79,9 +79,9 @@ $$\mathcal{AD} = \langle A, T, S, \mathit{adapt}: A \times S \rightarrow \mathrm
 
 ### Axiom AD1（语义保持公理）
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 $$\forall a: A,\, \mathit{op}_T(a) \equiv_{\mathrm{sem}} \mathit{op}_S(a.\mathit{inner})$$
 
@@ -89,9 +89,9 @@ $$\forall a: A,\, \mathit{op}_T(a) \equiv_{\mathrm{sem}} \mathit{op}_S(a.\mathit
 
 ### Axiom AD2（委托借用公理）
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 $$\mathit{op}_T(\&a) \text{ 内调用 } \&a.\mathit{inner} \text{，满足借用规则}$$
 
@@ -101,9 +101,9 @@ $$\mathit{op}_T(\&a) \text{ 内调用 } \&a.\mathit{inner} \text{，满足借用
 
 ### 定理 AD-T1（所有权安全定理）
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 由 [ownership_model](../../../formal_methods/10_ownership_model.md)，$A$ 拥有 $S$，委托调用时 `&self.inner` 借用有效，无悬垂。
 
@@ -131,9 +131,9 @@ $$\mathit{op}_T(\&a) \text{ 内调用 } \&a.\mathit{inner} \text{，满足借用
 
 ### 定理 AD-T2（借用冲突避免定理）
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 由 [borrow_checker_proof](../../../formal_methods/10_borrow_checker_proof.md)，委托链上无双重可变借用。
 
@@ -166,9 +166,9 @@ $$\mathit{op}_T(\&a) \text{ 内调用 } \&a.\mathit{inner} \text{，满足借用
 
 ### 推论 AD-C1（纯 Safe Adapter）
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Adapter 为纯 Safe；仅用结构体包装、委托、`impl Trait`，无 `unsafe`。
 
@@ -185,9 +185,9 @@ Adapter 为纯 Safe；仅用结构体包装、委托、`impl Trait`，无 `unsaf
 
 ### 概念定义-属性关系-解释论证 层次汇总
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
@@ -199,7 +199,7 @@ Adapter 为纯 Safe；仅用结构体包装、委托、`impl Trait`，无 `unsaf
 
 ## Rust 实现与代码示例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 被适配者：第三方库接口
@@ -235,11 +235,11 @@ a.log("hello");
 
 ## 完整证明
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 形式化论证链
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```text
 Axiom AD1 (语义保持)
@@ -259,7 +259,7 @@ borrow_checker_proof
 
 ### 与 Rust 类型系统的联系
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | Rust 特性 | Adapter 实现 | 类型安全保证 |
 | :--- | :--- | :--- |
@@ -270,7 +270,7 @@ borrow_checker_proof
 
 ### 内存安全保证
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 1. **无悬垂**：`Adapter` 拥有 `S`，生命周期绑定
 2. **借用安全**：委托链符合借用规则
@@ -495,13 +495,13 @@ graph LR
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -512,7 +512,7 @@ graph LR
 
 #### 代码示例更新
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 本文档中的所有Rust代码示例均已：
 
@@ -522,7 +522,7 @@ graph LR
 
 #### 相关文档
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - Rust 1.94 迁移指南
 - Rust 1.94 特性速查
@@ -557,18 +557,18 @@ graph LR
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Design Pattern]**
-> **[来源: Rust API Guidelines]**
-> **[来源: Gang of Four]**
-> **[来源: ACM - Software Design Patterns]**
-> **[来源: Wikipedia - Formal Methods]**
-> **[来源: Coq Reference]**
-> **[来源: TLA+]**
-> **[来源: ACM - Formal Verification]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Wikipedia - Type System]**
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
+> **来源: [Gang of Four](https://en.wikipedia.org/wiki/Design_Patterns)**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ---

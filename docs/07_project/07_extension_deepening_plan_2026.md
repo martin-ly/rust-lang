@@ -42,7 +42,7 @@
 
 ## 📋 执行摘要
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 经过全面检查，本项目当前完成度为 **88%**，距离真正的 100% 完成还需以下关键工作：
 
@@ -59,13 +59,13 @@
 
 ## 🎯 第一阶段：实质内容深度检查 (Week 1)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 内容深度评估标准
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 定义"有实质内容"的标准：
 
@@ -87,9 +87,9 @@
 
 ### 1.2 需要检查的模块清单
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 模块 | 文档数 | 需检查项 | 预计时间 |
 | :--- | :--- | :--- | :--- |
@@ -109,9 +109,9 @@
 
 ### 1.3 内容深化检查清单
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```markdown
 ## 单文档内容质量检查表
@@ -159,7 +159,7 @@
 
 ### 2.1 需要创建的证明树
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 基于现有证明内容，创建 Mermaid 可视化图表：
 
@@ -174,7 +174,7 @@
 
 ### 2.2 证明树模板
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```markdown
       ## 证明树：所有权唯一性
@@ -214,13 +214,13 @@
 
 ### 3.1 Rust 1.94 稳定化特性
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 基于 releases.rs 和官方信息，需要整合的特性：
 
 #### 语言特性
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | 特性 | 状态 | 影响模块 | 文档更新 |
 | :--- | :--- | :--- | :--- |
@@ -232,7 +232,7 @@
 
 #### 标准库 API
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 | API | 模块 | 文档更新 |
 | :--- | :--- | :--- |
@@ -241,7 +241,7 @@
 
 #### Cargo 特性
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 | 特性 | 文档更新 |
 | :--- | :--- |
@@ -251,7 +251,7 @@
 
 ### 3.2 Rust 1.95 Nightly 实验特性
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | 特性 | 研究方向 | 文档计划 |
 | :--- | :--- | :--- |
@@ -456,13 +456,13 @@ Week 4 (03/22-03/28): 完善与验证
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

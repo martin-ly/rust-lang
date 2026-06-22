@@ -11,7 +11,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference - Interior Mutability]** · **[来源: Rustonomicon]** · **[来源: Wikipedia - Read-Copy-Update]** · **[来源: TRPL Ch. 15]** · **[来源: Rust Standard Library - std::cell]** · **[来源: Wikipedia - Mutual Exclusion] · **[来源: Wikipedia - Mutability]** · **[来源: Wikipedia - Interior Pointer]** · **[来源: ACM - Safe Mutation Patterns]** · **[来源: IEEE - Memory Safety in Concurrent Contexts]**
+> **来源: [Rust Reference - Interior Mutability](https://doc.rust-lang.org/reference/)** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [Wikipedia - Read-Copy-Update](https://en.wikipedia.org/wiki/Read_Copy_Update)** · **来源: [TRPL Ch. 15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)** · **[来源: Rust Standard Library - std::cell]** · **来源: [Wikipedia - Mutual Exclusion](https://en.wikipedia.org/wiki/Mutual_Exclusion) · **来源: [Wikipedia - Mutability](https://en.wikipedia.org/wiki/Mutability)** · **来源: [Wikipedia - Interior Pointer](https://en.wikipedia.org/wiki/Interior_Pointer)** · **[来源: ACM - Safe Mutation Patterns]** · **[来源: IEEE - Memory Safety in Concurrent Contexts]**
 
 - [内部可变性模式](#内部可变性模式)
   - [目录](#目录)
@@ -74,13 +74,13 @@
 
 ## 1. 形式化定义
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 内部可变性的形式化模型
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **定义 1.1** (内部可变性): 内部可变性是指在拥有不可变引用 (`&T`) 的情况下修改 `T` 内部状态的能力。
 
@@ -99,7 +99,7 @@ let r: &T = &x
 
 ### 1.2 内部可变性的安全保证
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 内部可变性类型必须维持 Rust 的核心安全不变量：
 
@@ -112,7 +112,7 @@ let r: &T = &x
 
 ### 1.3 内部可变性类型谱系
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```
                     内部可变性类型
@@ -138,7 +138,7 @@ let r: &T = &x
 
 ### 2.1 Cell 的形式化定义
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **定义 2.1** (`Cell<T>`): `Cell<T>` 是一种提供内部可变性的容器，通过值的**移动**实现修改，适用于实现 `Copy` 的类型。
 
@@ -150,7 +150,7 @@ pub struct Cell<T: ?Sized> {
 
 ### 2.2 Cell 的核心操作
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 use std::cell::Cell;
@@ -174,7 +174,7 @@ fn main() {
 
 ### 2.3 Cell 与 Copy 类型
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 `Cell<T>` 要求 `T: Copy` 才能使用 `get()`：
 
@@ -192,7 +192,7 @@ let string_cell: Cell<String> = Cell::new(String::from("hello"));
 
 ### 2.4 Cell 的内存模型
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 // Cell<i32> 的内存布局
@@ -213,7 +213,7 @@ let string_cell: Cell<String> = Cell::new(String::from("hello"));
 
 ### 2.5 Cell 的线程不安全性
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 `Cell<T>` 故意不实现 `Sync`，防止多线程同时访问：
 
@@ -233,11 +233,11 @@ thread::spawn(move || {
 
 ### 2.6 Cell 的实际应用场景
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 #### 场景 1: 延迟初始化
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 use std::cell::Cell;
@@ -269,7 +269,7 @@ impl<T: Copy> LazyValue<T> {
 
 #### 场景 2: 计数器
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 use std::cell::Cell;
@@ -296,7 +296,7 @@ impl Stats {
 
 #### 场景 3: 图结构中的标记
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 use std::cell::Cell;
@@ -329,7 +329,7 @@ fn dfs(node: &Rc<Node>) {
 
 ### 3.1 RefCell 的形式化定义
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **定义 3.1** (`RefCell<T>`): `RefCell<T>` 提供运行时借用检查的内部可变性，允许在单线程环境中获取可变或不可变引用。
 
@@ -345,7 +345,7 @@ const UNUSED: BorrowFlag = 0;
 
 ### 3.2 RefCell 的运行时借用规则
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust
 use std::cell::RefCell;
@@ -371,7 +371,7 @@ fn main() {
 
 ### 3.3 运行时借用检查
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust
 use std::cell::RefCell;
@@ -399,7 +399,7 @@ borrow = -1:   有一个可变借用（不能再获取任何借用）
 
 ### 3.4 RefCell 的 panic 与 try_ 方法
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 use std::cell::RefCell;
@@ -423,7 +423,7 @@ fn safe_access(cell: &RefCell<Vec<i32>>) {
 
 ### 3.5 RefCell 与 Rc 的组合
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 use std::cell::RefCell;
@@ -446,11 +446,11 @@ fn main() {
 
 ### 3.6 RefCell 的常见陷阱
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 #### 陷阱 1: 运行时 panic
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 use std::cell::RefCell;
@@ -464,7 +464,7 @@ fn panic_example(cell: &RefCell<i32>) {
 
 #### 陷阱 2: 引用泄露
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 use std::cell::RefCell;
@@ -502,7 +502,7 @@ fn fixed_example() {
 
 ### 3.7 RefCell 与 Observable 模式
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 use std::cell::RefCell;
@@ -551,7 +551,7 @@ impl<T: Clone> Observable<T> {
 
 ### 4.1 Mutex<T> 详解
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **定义 4.1** (`Mutex<T>`): `Mutex<T>` 提供互斥访问，确保任意时刻只有一个线程可以访问数据。
 
@@ -582,7 +582,7 @@ fn main() {
 
 ### 4.2 Mutex 的 poison 机制
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 use std::sync::{Arc, Mutex};
@@ -613,7 +613,7 @@ fn main() {
 
 ### 4.3 RwLock<T> 详解
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **定义 4.2** (`RwLock<T>`): `RwLock<T>` 提供多读单写的访问模式，适用于读多写少的场景。
 
@@ -650,7 +650,7 @@ fn main() {
 
 ### 4.4 Atomic 类型
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 对于简单类型，可以使用无锁的原子操作：
 
@@ -691,7 +691,7 @@ fn main() {
 
 ### 4.5 线程安全类型的组合
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust
 use std::sync::{Arc, RwLock};
@@ -1322,29 +1322,29 @@ fn scoped_threads() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Interior Mutability]**
+> **来源: [Wikipedia - Interior Mutability](https://en.wikipedia.org/wiki/Interior_Mutability)**
 
-> **[来源: Wikipedia - Mutual Exclusion]**
+> **来源: [Wikipedia - Mutual Exclusion](https://en.wikipedia.org/wiki/Mutual_Exclusion)**
 
-> **[来源: Wikipedia - Read-Copy-Update]**
+> **来源: [Wikipedia - Read-Copy-Update](https://en.wikipedia.org/wiki/Read_Copy_Update)**
 
-> **[来源: Rust Reference - Interior Mutability]**
+> **来源: [Rust Reference - Interior Mutability](https://doc.rust-lang.org/reference/)**
 
-> **[来源: Rustonomicon - Interior Mutability]**
+> **来源: [Rustonomicon - Interior Mutability](https://doc.rust-lang.org/nomicon/)**
 
-> **[来源: TRPL Ch. 15 - Smart Pointers]**
+> **来源: [TRPL Ch. 15 - Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)**
 
 > **[来源: ACM - Safe Mutation Patterns]**
 
 > **[来源: IEEE - Memory Safety in Concurrent Contexts]**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
-> **[来源: Wikipedia - Machine Learning]**
-> **[来源: Wikipedia - Artificial Intelligence]**
-> **[来源: tch-rs Documentation]**
-> **[来源: ACM - AI Systems]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
+> **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
+> **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)**
+> **来源: [tch-rs Documentation](https://docs.rs/tch/latest/tch/)**
+> **来源: [ACM - AI Systems](https://dl.acm.org/)**
 
 ---

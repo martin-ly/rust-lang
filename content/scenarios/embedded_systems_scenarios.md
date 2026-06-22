@@ -1,7 +1,7 @@
 # 嵌入式系统场景
 
 > **Bloom 层级**: 应用 → 分析
-> **[来源: Rust Embedded WG]** · **[来源: Embassy/RTIC 文档]** ✅
+> **来源: [Rust Embedded WG](https://rust-embedded.github.io/book/)** · **[来源: Embassy/RTIC 文档]** ✅
 
 ---
 

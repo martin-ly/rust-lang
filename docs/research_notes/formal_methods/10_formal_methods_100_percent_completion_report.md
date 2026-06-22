@@ -37,15 +37,15 @@
 
 ## 🎉 完成摘要
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 formal_methods 目录已达到 **100% 完成度**！
 
 ### 完成度变化
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 类别 | 之前 | 之后 | 提升 |
 |------|------|------|------|
@@ -59,11 +59,11 @@ formal_methods 目录已达到 **100% 完成度**！
 
 ## ✅ 已完成工作
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 证明树补充 (4个)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 | # | 证明树 | 文件名 | 状态 |
 |---|--------|--------|------|
@@ -74,7 +74,7 @@ formal_methods 目录已达到 **100% 完成度**！
 
 ### 2. Coq骨架创建 (3个)
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | # | Coq文件 | 完成度 | 内容 |
 |---|---------|--------|------|
@@ -86,7 +86,7 @@ formal_methods 目录已达到 **100% 完成度**！
 
 ### 3. 矩阵更新
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - ✅ 10_implementation_progress_matrix.md - 更新至100%
 - ✅ 10_concept_axiom_theorem_matrix.md - 更新所有定理状态
@@ -99,7 +99,7 @@ formal_methods 目录已达到 **100% 完成度**！
 
 ### 文档统计
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | 类型 | 数量 | 完成率 |
 |------|------|--------|
@@ -114,7 +114,7 @@ formal_methods 目录已达到 **100% 完成度**！
 
 ### 形式化内容统计
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 | 类型 | 数量 |
 |------|------|
@@ -174,7 +174,7 @@ formal_methods 目录已达到 **100% 完成度**！
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
@@ -230,9 +230,9 @@ formal_methods 目录已达到 **100% 完成度**！
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
-> **[来源: Coq Reference]**
-> **[来源: TLA+]**
-> **[来源: ACM - Formal Verification]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
 
 ---

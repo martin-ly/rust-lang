@@ -16,7 +16,7 @@
 
 ## 📊 目录 {#-目录}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Send/Sync 形式化](#sendsync-形式化)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -47,15 +47,15 @@
 
 ## 🎯 研究目标 {#-研究目标}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 对 Rust 的 **Send** 与 **Sync** 做独立形式化：给出概念定义、属性关系、解释论证与形式证明，并与其他形式化文档（ownership、borrow、async、pin）衔接。
 
 ### 核心问题
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **Send/Sync 的形式化定义**：如何用数学语言精确描述「可安全跨线程转移」与「可安全跨线程共享引用」？
 2. **属性关系**：$T : \text{Sync} \Leftrightarrow \&T : \text{Send}$ 如何形式化并用于证明？
@@ -63,9 +63,9 @@
 
 ### 预期成果
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - Send/Sync 的 Def 与定理（SEND1、SYNC1、SEND-T1、SYNC-T1、SYNC-L1）
 - 反例索引（Rc !Send、Cell !Sync、非 Send 闭包 spawn）
@@ -77,7 +77,7 @@
 
 ## 📚 理论基础 {#-理论基础}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **Send**：类型可以**安全地跨线程转移所有权**。若值从线程 $t_1$ 转移到 $t_2$，则 $t_1$ 不再访问该值，且 $t_2$ 的访问满足单线程内存与借用规则。
 - **Sync**：类型可以**安全地跨线程共享引用**。即多线程同时持有 `&T` 时，不产生数据竞争（无共享可变或由同步原语保护）。
@@ -102,7 +102,7 @@
 
 ## 🔬 形式化定义 {#-形式化定义} {#defs-send1send-sync1sendsync-形式化}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def SEND1（Send）**：类型 $\tau$ 满足 **Send** 当且仅当：将 $\tau$ 的值从线程 $t_1$ 转移到线程 $t_2$ 后，$t_1$ 不再持有或访问该值，且 $t_2$ 上的使用满足单线程内存安全与 [borrow_checker_proof](./10_borrow_checker_proof.md) 借用规则。形式化谓词：
 
@@ -162,7 +162,7 @@ $$\text{Sync}(\tau) \leftrightarrow \text{Send}(\& \tau)$$
 
 ## 定理与引理
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **引理 SYNC-L1（Sync 与 Send 等价）**：$T : \text{Sync} \Leftrightarrow \&T : \text{Send}$。
 
@@ -182,9 +182,9 @@ $$\text{Sync}(\tau) \leftrightarrow \text{Send}(\& \tau)$$
 
 ### 概念定义-属性关系-解释论证 层次汇总
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
@@ -196,9 +196,9 @@ $$\text{Sync}(\tau) \leftrightarrow \text{Send}(\& \tau)$$
 
 ### Rust 对应
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 定理 | crates 示例 | 说明 |
 | :--- | :--- | :--- |
@@ -210,7 +210,7 @@ $$\text{Sync}(\tau) \leftrightarrow \text{Send}(\& \tau)$$
 
 ## ⚠️ 反例 {#️-反例}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 反例 | 违反 | 结果 | 形式化对应 |
 | :--- | :--- | :--- | :--- |
@@ -224,7 +224,7 @@ $$\text{Sync}(\tau) \leftrightarrow \text{Send}(\& \tau)$$
 
 ## 🌳 公理-定理证明树 {#-公理-定理证明树}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 Def SEND1, SYNC1
@@ -250,7 +250,7 @@ Def SEND1, SYNC1
 
 ### 相关思维表征
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 | 类型 | 位置 |
 | :--- | :--- |
@@ -290,13 +290,13 @@ Def SEND1, SYNC1
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -307,7 +307,7 @@ Def SEND1, SYNC1
 
 #### 代码示例更新
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 本文档中的所有Rust代码示例均已：
 
@@ -317,7 +317,7 @@ Def SEND1, SYNC1
 
 #### 相关文档
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查
@@ -351,14 +351,14 @@ Def SEND1, SYNC1
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ---

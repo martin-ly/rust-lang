@@ -12,7 +12,7 @@
 
 ## 📋 目录
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Rust 1.94 引入特性速查卡（1.96+ 稳定可用）/ Rust 1.94 Features Cheatsheet (Stable in 1.96+)](#rust-194-引入特性速查卡196-稳定可用-rust-194-features-cheatsheet-stable-in-196)
   - [📋 目录](#-目录)
@@ -47,7 +47,7 @@
 
 ## 🎯 快速参考
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | 语法 | 用途 |
 |------|------|------|
@@ -63,11 +63,11 @@
 
 ## 1. Array Windows（数组窗口）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 基本用法
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 let data = [1, 2, 3, 4, 5];
@@ -80,7 +80,7 @@ for window in data.array_windows::<3>() {
 
 ### 滑动窗口平均值
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 fn sliding_average(data: &[f64], window_size: usize) -> Vec<f64> {
@@ -98,7 +98,7 @@ fn sliding_average(data: &[f64], window_size: usize) -> Vec<f64> {
 
 ### 模式检测（ABBA）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 fn has_abba_pattern(s: &str) -> bool {
@@ -115,11 +115,11 @@ assert!(!has_abba_pattern("abcd"));
 
 ## 2. LazyCell & LazyLock 新方法
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### LazyCell（单线程）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use std::cell::LazyCell;
@@ -145,7 +145,7 @@ let value: &mut String = LazyCell::force_mut(&cell);
 
 ### LazyLock（多线程）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use std::sync::LazyLock;
@@ -167,11 +167,11 @@ std::thread::spawn(|| {
 
 ## 3. 数学常量
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 可用常量
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 欧拉-马歇罗尼常数

@@ -39,7 +39,7 @@ Rust 1.95 对 `RangeInclusive` 的迭代性能进行了内部优化。
 
 ## Rust 1.96 稳定特性
 
-> **[来源: Rust Compiler Documentation]**
+> **来源: [Rust Compiler Documentation](https://doc.rust-lang.org/rustc/)**
 > **来源**: [GitHub rust-lang/rust #156512](https://github.com/rust-lang/rust/issues/156512) · [releases.rs 1.96.0](https://releases.rs/docs/1.96.0/)
 
 ### 语言特性

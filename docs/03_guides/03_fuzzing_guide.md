@@ -5,7 +5,7 @@
 > **Bloom 层级**: L2-L3 (理解/应用)
 > 本文档对应 Rust 生产级工程实践体系阶段三 —— 模糊测试。
 > 参考: Google OSS-Fuzz、Cloudflare 模糊测试实践、Rust Fuzzing Book。
-> **[来源: Wikipedia - Fuzzing]** ·
+> **来源: [Wikipedia - Fuzzing](https://en.wikipedia.org/wiki/Fuzzing)** ·
 > **[来源: AFL - American Fuzzy Lop]** ·
 > **[来源: LLVM libFuzzer]** ·
 > **[来源: Rust Fuzzing Book - fuzzingbook.com]**
@@ -42,15 +42,15 @@
 
 ## 1. 什么是模糊测试（Fuzzing）？
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 模糊测试是一种自动化的软件测试技术，通过向程序输入大量随机或半随机的数据，来发现崩溃、断言失败、内存错误等异常行为。
 
 ### 为什么 Rust 需要 Fuzzing？
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Rust 的所有权系统防止了大部分内存安全问题，但以下场景仍可能出现问题：
 
@@ -67,7 +67,7 @@ Rust 的所有权系统防止了大部分内存安全问题，但以下场景仍
 
 ## 2. 工具链安装
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 # 安装 cargo-fuzz（需要 nightly Rust）
@@ -87,7 +87,7 @@ cargo fuzz --version
 
 ### 初始化 fuzz 项目
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```bash
 cd crates/c08_algorithms
@@ -105,7 +105,7 @@ fuzz/
 
 ### 编写 Fuzz Target
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 // fuzz/src/sort_fuzzer.rs
@@ -141,7 +141,7 @@ fuzz_target!(|data: &[u8]| {
 
 ### 运行 Fuzzer
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```bash
 # 运行特定的 fuzz target
@@ -165,7 +165,7 @@ cargo fuzz run sort_fuzzer corpus/
 
 ### c08_algorithms —— 解析器模糊测试
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 `fuzz/src/parser_fuzzer.rs`:
 
@@ -197,7 +197,7 @@ fuzz_target!(|data: &[u8]| {
 
 ### 注册到 fuzz/Cargo.toml
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```toml
 [[bin]]
@@ -215,7 +215,7 @@ doc = false
 
 ### 结构化 Fuzzing
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 对于需要结构化输入的场景：
 
@@ -324,13 +324,13 @@ fuzzing:
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

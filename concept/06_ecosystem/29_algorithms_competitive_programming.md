@@ -16,7 +16,7 @@
 > **双维定位**: C×App — 应用算法和竞赛编程模式
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Generics](../02_intermediate/02_generics.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Unsafe](../03_advanced/03_unsafe.md)
 > **后置概念**: [Formal Ecosystem Tower](./05_formal_ecosystem_tower.md) · [Performance Optimization](./15_performance_optimization.md)
-> **主要来源**: [CLRS — Introduction to Algorithms] · [LeetCode] · [Codeforces] · [TRPL] · [Rust Reference] · [VeriContest arXiv 2026-05-08] · [Kani Docs] · [CSES Problem Set]
+> **主要来源**: [CLRS — Introduction to Algorithms] · [LeetCode] · [Codeforces] · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [VeriContest arXiv 2026-05-08] · [Kani Docs] · [CSES Problem Set]
 
 >
 > **来源**: [std::collections](https://doc.rust-lang.org/std/collections/) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/) · [The Algorithms — Rust](https://github.com/TheAlgorithms/Rust)
@@ -35,7 +35,7 @@
 > **[来源: CLRS — Introduction to Algorithms, 4th Edition]** An algorithm is any well-defined computational procedure that takes some value, or set of values, as input and produces some value, or set of values, as output.
 > **来源**: <https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/>
 
-> **[来源: Wikipedia — Competitive Programming]** Competitive programming is a mind sport usually held over the internet or a local network, involving participants trying to program according to provided specifications.
+> **来源: [Wikipedia — Competitive Programming](https://en.wikipedia.org/wiki/Competitive_Programming)** Competitive programming is a mind sport usually held over the internet or a local network, involving participants trying to program according to provided specifications.
 > **来源**: <https://en.wikipedia.org/wiki/Competitive_programming>
 
 > **[来源: VeriContest arXiv 2026-05-08]** VeriContest: A Benchmark of 946 LeetCode and Codeforces Problems for Rust + Verus Formal Verification.

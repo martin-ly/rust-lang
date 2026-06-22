@@ -10,13 +10,13 @@
 > **形式化框架**: Pod保证 + 对齐验证 + 位模式安全
 >
 > **参考**: bytemuck Documentation, Rust Unsafe Code Guidelines
-> **[来源: bytemuck Documentation - docs.rs/bytemuck]** · **[来源: Rust Unsafe Code Guidelines - rust-lang.github.io/unsafe-code-guidelines]** · **[来源: Wikipedia - Type Punning]** · **[来源: Rustonomicon - Transmute]** · **[来源: Wikipedia - Memory Alignment]** · **[来源: Rust Reference - Type Layout]** · **[来源: ACM - Safe Type Transmutation]** · **[来源: IEEE - Type Safety in Systems Programming]**
+> **[来源: bytemuck Documentation - docs.rs/bytemuck]** · **[来源: Rust Unsafe Code Guidelines - rust-lang.github.io/unsafe-code-guidelines]** · **来源: [Wikipedia - Type Punning](https://en.wikipedia.org/wiki/Type_Punning)** · **来源: [Rustonomicon - Transmute](https://doc.rust-lang.org/nomicon/)** · **来源: [Wikipedia - Memory Alignment](https://en.wikipedia.org/wiki/Memory_Alignment)** · **来源: [Rust Reference - Type Layout](https://doc.rust-lang.org/reference/)** · **[来源: ACM - Safe Type Transmutation]** · **来源: [IEEE - Type Safety in Systems Programming](https://standards.ieee.org/)**
 
 ---
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [Bytemuck 字节转换形式化分析](#bytemuck-字节转换形式化分析)
   - [目录](#目录)
@@ -76,13 +76,13 @@
 
 ## 1. 项目概览与解决的问题
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 类型转换的安全挑战
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 在系统编程中，类型与字节之间的转换是常见需求，但也充满危险：
 
@@ -107,7 +107,7 @@ unsafe fn dangerous_cast(bytes: &[u8]) -> &MyStruct {
 
 ### 1.2 Rust内存模型的约束
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 Rust的内存模型对类型转换有严格要求：
 
@@ -133,7 +133,7 @@ let c: char = std::mem::transmute(0x110000u32);  // 无效Unicode！
 
 ### 1.3 Bytemuck的设计目标
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 Bytemuck通过类型系统保证安全的字节转换：
 
@@ -167,7 +167,7 @@ let bytes: &[u8] = bytemuck::cast_slice(&vertices);
 
 ### 2.1 Pod (Plain Old Data) 类型
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Pod类型是Bytemuck的核心概念：
 
@@ -215,7 +215,7 @@ struct BadEnum {
 
 ### 2.2 Zeroable 类型
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 Zeroable类型可以安全地初始化为全零：
 
@@ -250,7 +250,7 @@ let config: Config = Config::zeroed();
 
 ### 2.3 对齐要求与检查
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 对齐是安全类型转换的关键：
 
@@ -288,7 +288,7 @@ let always_ok: Result<&u64, _> = bytemuck::try_from_bytes(&[0; 8]);
 
 ### 2.4 字节顺序处理
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 跨平台数据交换需要考虑字节顺序：
 
@@ -331,7 +331,7 @@ impl BigEndianU32 {
 
 ### 3.1 Pod Trait 详解
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 Pod trait是Bytemuck的核心安全边界：
 
@@ -390,7 +390,7 @@ unsafe impl bytemuck::Pod for CustomPod {}
 
 ### 3.2 Zeroable Trait 详解
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 Zeroable允许类型安全地零初始化：
 
@@ -436,7 +436,7 @@ let buffer: [f32; 1024] = Zeroable::zeroed();
 
 ### 3.3 CheckedBitPattern Trait
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 对于不是所有位模式都有效的类型：
 
@@ -469,7 +469,7 @@ if let Some(pct) = bytemuck::checked::try_from_bytes::<Percentage>(&bytes) {
 
 ### 3.4 NoUninit Trait
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 NoUninit确保类型无未初始化位：
 
@@ -493,7 +493,7 @@ struct NumericData {
 
 ### 3.5 TransparentWrapper Trait
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 TransparentWrapper用于新类型模式：
 
@@ -519,7 +519,7 @@ let user_id: &UserId = UserId::wrap_ref(&raw_id);
 
 ### 3.6 派生宏机制
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 Bytemuck的派生宏编译期验证：
 
@@ -554,7 +554,7 @@ struct BadRepr {
 
 ### 4.1 图形数据转换
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 GPU图形编程需要大量类型转换：
 
@@ -611,7 +611,7 @@ impl GpuBuffer {
 
 ### 4.2 音频数据处理
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 实时音频处理需要高效的数据转换：
 
@@ -665,7 +665,7 @@ impl LittleEndianI16 {
 
 ### 4.3 科学计算优化
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 数值计算中的向量化：
 
@@ -717,7 +717,7 @@ fn call_external_blas(data: &mut [Vec3]) {
 
 ### 4.4 序列化优化
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 高效的二进制序列化：
 
@@ -782,7 +782,7 @@ fn read_message<R: Read>(reader: &mut R) -> std::io::Result<(MessageHeader, Vec<
 
 ### 4.5 FFI边界转换
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 与C库交互：
 
@@ -845,7 +845,7 @@ pub fn get_points_safe() -> Vec<Point> {
 
 ### 5.1 与Zerocopy的对比
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 特性 | Bytemuck | Zerocopy |
 |-----|----------|----------|
@@ -871,7 +871,7 @@ let value = u32::read_from(bytes)?;
 
 ### 5.2 与Transmute的对比
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 `std::mem::transmute`是最危险的转换方式：
 
@@ -895,7 +895,7 @@ let value: &u32 = bytemuck::try_from_bytes(&bytes)?;
 
 ### 5.3 与Raw指针的对比
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 原始指针转换：
 
@@ -923,7 +923,7 @@ let value = bytemuck::try_from_bytes::<T>(bytes)?;
 
 ### 6.1 图像像素格式转换
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 use bytemuck::{Pod, Zeroable, cast_slice, cast_slice_mut};
@@ -1044,7 +1044,7 @@ impl GpuTexture {
 
 ### 6.2 顶点缓冲区管理
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 use bytemuck::{Pod, Zeroable, cast_slice};
@@ -1173,7 +1173,7 @@ impl Mesh {
 
 ### 6.3 类型安全的Union
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use bytemuck::{Pod, Zeroable, TransparentWrapper};
@@ -1269,7 +1269,7 @@ fn deserialize_values(bytes: &[u8]) -> Option<&[TypedValue]> {
 
 ### 6.4 矩阵操作优化
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use bytemuck::{Pod, Zeroable};
@@ -1385,7 +1385,7 @@ impl Mat4 {
 
 ### 7.1 零拷贝优势
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 基准测试数据（处理100万个元素）：
 
@@ -1411,7 +1411,7 @@ let bytes: &[u8] = bytemuck::cast_slice(&floats);
 
 ### 7.2 向量化优化
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 Bytemuck的连续内存布局允许编译器自动向量化：
 
@@ -1435,7 +1435,7 @@ fn add_vectors(a: &[Vec3], b: &[Vec3], result: &mut [Vec3]) {
 
 ### 7.3 缓存友好性
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Pod类型的平坦内存布局优化缓存使用：
 
@@ -1467,7 +1467,7 @@ fn update_particles(particles: &mut [Particle]) {
 
 ### 8.1 类型设计准则
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 // 1. 使用repr(C)确保布局
@@ -1509,7 +1509,7 @@ struct WithPadding {
 
 ### 8.2 对齐处理策略
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 // 策略1：保证输入对齐
@@ -1538,7 +1538,7 @@ struct UnalignedData {
 
 ### 8.3 错误处理模式
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 // 模式1: 返回Result
@@ -1584,7 +1584,7 @@ fn detailed_check<T: Pod>(data: &[u8]) -> Result<&T, ConversionError> {
 
 ### 8.4 调试与验证
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 #[cfg(test)]
@@ -1622,7 +1622,7 @@ mod tests {
 
 ### 9.1 Pod安全性定理
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 **定理 9.1** (Pod类型安全性)
 
@@ -1646,7 +1646,7 @@ Pod trait的unsafe实现要求程序员保证：
 
 ### 9.2 对齐正确性定理
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **定理 9.2** (对齐验证)
 
@@ -1670,7 +1670,7 @@ $$
 
 ### 9.3 转换等价性定理
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **定理 9.3** (转换等价性)
 
@@ -1812,19 +1812,19 @@ impl SafeReference {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Type Punning]**
+> **来源: [Wikipedia - Type Punning](https://en.wikipedia.org/wiki/Type_Punning)**
 
-> **[来源: Wikipedia - Type Casting]**
+> **来源: [Wikipedia - Type Casting](https://en.wikipedia.org/wiki/Type_Casting)**
 
-> **[来源: Wikipedia - Union Type]**
+> **来源: [Wikipedia - Union Type](https://en.wikipedia.org/wiki/Union_Type)**
 
-> **[来源: IEEE - Type Safety in Systems Programming]**
+> **来源: [IEEE - Type Safety in Systems Programming](https://standards.ieee.org/)**
 
 > **[来源: ACM - Safe Type Transmutation]**
 
-> **[来源: Rust Reference - Unsafe Rust]**
+> **来源: [Rust Reference - Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-blocks.html)**
 
-> **[来源: Rustonomicon - Data Layout]**
+> **来源: [Rustonomicon - Data Layout](https://doc.rust-lang.org/nomicon/)**
 
 > **[来源: bytemuck.rs Documentation]**
 
@@ -1832,19 +1832,19 @@ impl SafeReference {
 
 > **[来源: LLVM - Type-Based Alias Analysis]**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---
 

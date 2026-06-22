@@ -54,13 +54,13 @@
 
 ## 一、概念关联网络
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 核心概念的三角关系
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```text
                     所有权(Ownership)
@@ -105,9 +105,9 @@
 
 ### 1.2 类型系统与所有权系统的融合
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **传统观点**：类型系统和所有权是分开的
 
@@ -145,7 +145,7 @@ Inductive ty :=
 
 ### 1.3 Linearizability 的中心地位
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **Linearizability 是连接多个主题的枢纽**：
 
@@ -208,7 +208,7 @@ Linearizable(Γ)  ⟹  借用检查终止
 
 ### 2.1 五大定理的依赖关系
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```text
                     数学基础
@@ -248,7 +248,7 @@ Linearizable(Γ)  ⟹  借用检查终止
 
 ### 2.2 定理关联的详细论证
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **路径1：终止性 → 可判定性**
 
@@ -314,7 +314,7 @@ Linearizable(Γ)  ⟹  借用检查终止
 
 ### 2.3 循环依赖的处理
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **问题**：看起来有些概念是相互依赖的？
 
@@ -364,7 +364,7 @@ Linearizable(Γ)  ⟹  借用检查终止
 
 ### 3.1 证明方法的协同
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```text
 结构归纳 ───────┐
@@ -407,7 +407,7 @@ Linearizable(Γ)  ⟹  借用检查终止
 
 ### 3.2 归纳假设的传递
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```text
 终止性证明中的归纳：
@@ -445,7 +445,7 @@ Linearizable(Γ)  ⟹  借用检查终止
 
 ### 3.3 对称性与对偶性
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **保持性 vs 进展：对偶关系**
 
@@ -487,7 +487,7 @@ Linearizable(Γ)  ⟹  借用检查终止
 
 ### 4.1 静态与动态的联系
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```text
 静态（编译时）                    动态（运行时）
@@ -508,7 +508,7 @@ Linearizability检查         ↔   资源释放顺序
 
 ### 4.2 大步与小步的互补
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```text
 大步语义（eval）：
@@ -543,7 +543,7 @@ Linearizability检查         ↔   资源释放顺序
 
 ### 4.3 操作语义与类型系统的呼应
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```text
 操作语义规则                    类型规则
@@ -568,7 +568,7 @@ E_Assign: 赋值                 T_Assign: 检查可变性
 
 ### 5.1 语言特性的理论基础
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```text
 Rust 语言特性                理论概念
@@ -613,7 +613,7 @@ Rust 生命周期：
 
 ### 5.2 特性组合的涌现性
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **单独看每个特性**：
 
@@ -638,7 +638,7 @@ Rust 生命周期：
 
 ### 5.3 与 Rust 实际实现的关联
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```text
 理论概念                    Rust 实现
@@ -666,7 +666,7 @@ trait                       类型类 (Type Classes)
 
 ### 6.1 与 Featherweight Rust 的关联
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **继承**：
 
@@ -867,13 +867,13 @@ RustBelt：精确但复杂，覆盖 unsafe
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---
 

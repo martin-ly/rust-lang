@@ -7,7 +7,7 @@
 
 ## Type-Ownership Unified Theory
 >
-> **[来源: Wikipedia - Type Theory]** · **[来源: Wikipedia - Separation Logic]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Pierce 2002 - TAPL]** · **[来源: Jung et al. 2018 - RustBelt Paper]** · **[来源: Iris Project - iris-project.org]** · **[来源: Wikipedia - Proof Assistant]** · **[来源: ACM - Unified Type-Ownership Theory]** · **[来源: IEEE - Formal Proof Methods]**
+> **来源: [Wikipedia - Type Theory](https://en.wikipedia.org/wiki/Type_Theory)** · **来源: [Wikipedia - Separation Logic](https://en.wikipedia.org/wiki/Separation_Logic)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [Pierce 2002 - TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [Iris Project - iris-project.org](https://iris-project.org/)** · **来源: [Wikipedia - Proof Assistant](https://en.wikipedia.org/wiki/Proof_Assistant)** · **[来源: ACM - Unified Type-Ownership Theory]** · **[来源: IEEE - Formal Proof Methods]**
 
 > **文档性质**: 形式化理论核心证明文档
 > **版本**: 1.0.0
@@ -18,7 +18,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [类型-所有权统一理论](#类型-所有权统一理论)
   - [Type-Ownership Unified Theory](#type-ownership-unified-theory)
@@ -111,11 +111,11 @@
 
 ## 1. 引言
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 问题陈述
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 在现有的 Rust 形式化框架中，**类型系统**和**所有权系统**被视为两个独立的组件：
 
@@ -144,7 +144,7 @@
 
 ### 1.2 目标
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 本理论的目标是建立类型系统和所有权系统之间的**形式化联系**，证明以下核心命题：
 
@@ -163,7 +163,7 @@
 
 ### 1.3 方法论
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 本理论采用**统一判断**的方法论：
 
@@ -205,11 +205,11 @@
 
 ### 2.1 类型系统回顾
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 #### 2.1.1 类型判断 has_type
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **定义 2.1** (类型判断):
 
@@ -231,7 +231,7 @@ $$
 
 #### 2.1.2 类型规则
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **变量规则** (T-Var):
 
@@ -253,7 +253,7 @@ $$
 
 #### 2.1.3 类型安全性
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **定义 2.2** (类型安全):
 
@@ -263,11 +263,11 @@ $$
 
 ### 2.2 所有权系统回顾
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 #### 2.2.1 所有权判断 ownership_safe
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **定义 2.3** (所有权安全判断):
 
@@ -285,7 +285,7 @@ $$
 
 #### 2.2.2 贷款环境 LoanEnv
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 **定义 2.4** (贷款环境):
 
@@ -308,7 +308,7 @@ $$
 
 #### 2.2.3 借用检查规则
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **基础规则** (O-Base):
 
@@ -330,11 +330,11 @@ $$
 
 ### 2.3 现有分离的问题
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 #### 2.3.1 类型系统和所有权检查是分开的
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```
 问题: rustc 中的分离
@@ -364,7 +364,7 @@ $$
 
 #### 2.3.2 缺少形式化联系
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **缺失的形式化**:
 
@@ -374,7 +374,7 @@ $$
 
 #### 2.3.3 需要统一框架
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```
 需要的统一框架:
@@ -408,11 +408,11 @@ $$
 
 ### 3.1 统一判断体系
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 #### 3.1.1 统一判断定义
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **定义 3.1** (统一判断):
 
@@ -440,7 +440,7 @@ $$
 
 #### 3.1.2 统一判断的语义
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **定义 3.2** (统一判断有效性):
 
@@ -458,7 +458,7 @@ $$
 
 #### 3.1.3 简化的统一判断
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 对于核心定理，我们使用简化形式：
 
@@ -476,11 +476,11 @@ $$
 
 ### 3.2 类型-所有权耦合规则
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 #### 3.2.1 耦合规则概述
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 耦合规则将类型规则与所有权检查结合：
 
@@ -496,7 +496,7 @@ $$
 
 #### 3.2.2 变量规则 (CU-Var)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **规则**:
 
@@ -514,7 +514,7 @@ $$
 
 #### 3.2.3 借用规则 (CU-Borrow)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **规则**:
 
@@ -548,7 +548,7 @@ $$
 
 #### 3.2.4 赋值规则 (CU-Assign)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **规则**:
 
@@ -579,7 +579,7 @@ $$
 
 #### 3.2.5 函数调用规则 (CU-Call)
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **规则**:
 
@@ -605,7 +605,7 @@ $$
 
 #### 3.2.6 耦合规则汇总
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | 规则 | 核心类型前提 | 核心所有权前提 |
 |------|-------------|---------------|
@@ -622,11 +622,11 @@ $$
 
 ### 4.1 类型蕴含所有权安全
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 #### 4.1.1 定理陈述
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 **定理 4.1** (类型蕴含所有权安全):
 
@@ -646,7 +646,7 @@ Theorem type_implies_ownership_safety :
 
 #### 4.1.2 所有权安全程序定义
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **定义 4.1** (所有权安全程序):
 
@@ -671,7 +671,7 @@ $$
 
 #### 4.1.3 定理意义
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```
 定理意义:
@@ -700,11 +700,11 @@ $$
 
 ### 4.2 所有权检查即类型约束
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 #### 4.2.1 定理陈述
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **定理 4.2** (所有权检查即类型约束):
 
@@ -724,7 +724,7 @@ Theorem ownership_as_typing_constraint :
 
 #### 4.2.2 双向蕴含解释
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **正向** ($\Rightarrow$): 借用检查成功 ⟹ 存在类型
 
@@ -736,7 +736,7 @@ Theorem ownership_as_typing_constraint :
 
 #### 4.2.3 定理的深层含义
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```
 所有权检查作为类型约束:
@@ -765,11 +765,11 @@ Theorem ownership_as_typing_constraint :
 
 ### 4.3 生命周期作为类型的时态维度
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 #### 4.3.1 定理陈述
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **定理 4.3** (生命周期作为类型的时态维度):
 
@@ -856,7 +856,7 @@ fn example<'a, 'b>(x: &'a i32, y: &'b i32) -> &'a i32
 
 ### 5.1 结构归纳框架
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 #### 5.1.1 对表达式结构归纳
 
@@ -960,7 +960,7 @@ $$
 
 ### 5.2 关键引理
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 #### 5.2.1 所有权保持引理
 
@@ -1059,7 +1059,7 @@ $$
 
 ### 5.3 主定理证明
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 #### 5.3.1 类型正确性 ⟹ 所有权安全
 
@@ -1194,7 +1194,7 @@ $$
 
 ### 6.1 Vec<T> 的所有权模型
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 #### 6.1.1 类型定义
 
@@ -1249,7 +1249,7 @@ fn get<'a, T>(v: &'a Vec<T>, i: usize) -> &'a T
 
 ### 6.2 String 的所有权模型
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 #### 6.2.1 类型定义
 
@@ -1294,7 +1294,7 @@ $$
 
 ### 6.3 HashMap<K,V> 的所有权模型
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 #### 6.3.1 类型定义
 
@@ -1344,7 +1344,7 @@ $$
 
 ### 6.4 引用的生命周期模型
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 #### 6.4.1 生命周期参数化
 
@@ -1403,7 +1403,7 @@ $$
 
 ### 7.1 统一判断定义
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```coq
 (* 统一判断核心定义 *)
@@ -1552,7 +1552,7 @@ with args_well_typed (Δ : region_env) (Γ : type_env) :
 
 ### 7.2 耦合规则形式化
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```coq
 (* 所有权有效性检查 *)
@@ -1642,7 +1642,7 @@ Definition update_loans_call (Θ : loan_env) (args : list expr)
 
 ### 7.3 核心定理证明
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```coq
 (* 核心定理 1: 类型蕴含所有权安全 *)
@@ -1825,7 +1825,7 @@ Admitted.
 
 ### 7.4 引理证明
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```coq
 (* 引理 5.1: 所有权保持 *)
@@ -2064,39 +2064,39 @@ Admitted.
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Type Theory]**
+> **来源: [Wikipedia - Type Theory](https://en.wikipedia.org/wiki/Type_Theory)**
 
-> **[来源: Wikipedia - Ownership Type]**
+> **来源: [Wikipedia - Ownership Type](https://en.wikipedia.org/wiki/Ownership_Type)**
 
-> **[来源: Wikipedia - Linear Logic]**
+> **来源: [Wikipedia - Linear Logic](https://en.wikipedia.org/wiki/Linear_Logic)**
 
-> **[来源: Wikipedia - Substructural Type System]**
+> **来源: [Wikipedia - Substructural Type System](https://en.wikipedia.org/wiki/Substructural_Type_System)**
 
 > **[来源: IEEE - Formal Proof Methods]**
 
 > **[来源: ACM - Unified Type-Ownership Theory]**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: PLDI 2023 - Aeneas]**
+> **来源: [PLDI 2023 - Aeneas](https://www.sigplan.org/Conferences/PLDI/)**
 
-> **[来源: Rust Reference - Ownership]**
+> **来源: [Rust Reference - Ownership](https://doc.rust-lang.org/reference/)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---
 

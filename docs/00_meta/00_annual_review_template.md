@@ -54,13 +54,13 @@
 
 ### 项目内容 vs 权威来源
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 评估项目内容与权威来源之间的"对称差"——即项目缺少的权威内容和项目中独有的原创内容。
 
 #### 权威来源覆盖检查
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 权威来源 | 本年度新内容数 | 项目已覆盖 | 待覆盖 | 覆盖率 |
 |----------|---------------|-----------|--------|--------|
@@ -75,7 +75,7 @@
 
 #### 项目原创贡献
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 原创主题 | 类型 | 质量评估 | 社区反馈 | 改进方向 |
 |----------|------|----------|----------|----------|
@@ -84,7 +84,7 @@
 
 #### 缺失内容清单
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] ________________________________
 - [ ] ________________________________
@@ -109,7 +109,7 @@
 
 ### 覆盖度目标 vs 实际
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 指标 | 年初目标 | 年末实际 | 达成率 |
 |------|----------|----------|--------|
@@ -318,11 +318,11 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**

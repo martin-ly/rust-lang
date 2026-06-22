@@ -38,7 +38,7 @@
 
 ## 📋 概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本指南对应 `crates/c03_control_fn`，涵盖 Rust 控制流、函数系统、闭包、模式匹配以及 Rust 1.95.0 的 `if let guards` 和协程/生成器前瞻。
 
@@ -49,7 +49,7 @@
 
 ## 🚀 快速开始
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use c03_control_fn::control_flow_patterns::{
@@ -71,11 +71,11 @@ fn main() {
 
 ## 📊 核心功能
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 控制流模式
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 `control_flow_patterns/` 模块封装了 Rust 中所有控制流结构的高级用法：
 
@@ -106,7 +106,7 @@ fn process_nested_options() {
 
 ### 2. 函数系统
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 `control_struct/` 和 `items/` 模块展示函数定义的高级特性：
 
@@ -126,7 +126,7 @@ fn conditional_execution() {
 
 ### 3. 闭包
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 `closure/` 模块深入解析闭包的捕获机制与类型系统：
 
@@ -149,7 +149,7 @@ fn closure_patterns() {
 
 ### 4. 模式匹配
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 `pattern_matching/` 模块提供穷尽性检查和复杂模式：
 
@@ -171,7 +171,7 @@ fn advanced_matching() {
 
 ### 5. if let guards (Rust 1.95.0)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 `if_let_guards_deep_dive/` 模块是 Rust 1.95 核心特性的深度解析：
 
@@ -219,7 +219,7 @@ fn process_message(msg: Message, current_user: Option<User>) {
 
 ### 6. 协程与生成器
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 `coroutine/` 和 `generator/` 模块提供异步控制流和生成器模式（部分为 nightly 特性）：
 
@@ -242,7 +242,7 @@ fn async_control_flow() {
 
 ## ⚡ 性能优化
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 技术 | 说明 | 模块 |
 |------|------|------|
@@ -323,13 +323,13 @@ fn robust_control_flow() -> ControlFlowResult<()> {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

@@ -59,7 +59,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 分离逻辑(Separation Logic)是霍尔逻辑的扩展，专门用于推理使用共享可变状态的程序。
 它为Rust的所有权和借用系统提供了形式化基础。
@@ -68,13 +68,13 @@
 
 ## 一、分离逻辑基础
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 分离合取 (*)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **语法**: `P * Q` (P和Q分别描述不相交的内存区域)
 
@@ -93,9 +93,9 @@ H₁ ⊨ P    H₂ ⊨ Q    H₁ ⊥ H₂
 
 ### 1.2 分离蕴含 (-*)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **语法**: `P -* Q` (如果添加满足P的内存，则Q成立)
 
@@ -114,9 +114,9 @@ H ⊨ P -* Q    H' ⊨ P    H ⊥ H'
 
 ### 1.3 空堆断言 (emp)
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **含义**: 堆为空
 
@@ -128,9 +128,9 @@ H ⊨ P -* Q    H' ⊨ P    H ⊥ H'
 
 ### 1.4 Points-to断言
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **语法**: `l ↦ v` (位置l存储值v)
 
@@ -149,13 +149,13 @@ H ⊨ P -* Q    H' ⊨ P    H ⊥ H'
 
 ## 二、分离逻辑推理规则
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 框架规则 (Frame Rule)
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```
 {P} C {Q}
@@ -183,9 +183,9 @@ H ⊨ P -* Q    H' ⊨ P    H ⊥ H'
 
 ### 2.2 规则合取
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```
 {P₁} C {Q₁}    {P₂} C {Q₂}
@@ -195,9 +195,9 @@ H ⊨ P -* Q    H' ⊨ P    H ⊥ H'
 
 ### 2.3 分配规则
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **存在量词分配**:
 
@@ -219,11 +219,11 @@ H ⊨ P -* Q    H' ⊨ P    H ⊥ H'
 
 ## 三、在Rust形式化中的应用
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 3.1 所有权建模
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **独占所有权**:
 
@@ -579,22 +579,22 @@ void assign(int* x, int v)
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
-> **[来源: Coq Reference]**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
 
-> **[来源: TLA+]**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
 
-> **[来源: ACM - Formal Verification]**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---
 

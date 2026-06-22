@@ -77,7 +77,7 @@
 
 ## 🎯 文档概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档提供模块文档知识结构补充的指南和模板，帮助为各模块文档补充完整的概念定义、属性特征、关系连接、解释论证和形式证明。
 
@@ -85,13 +85,13 @@
 
 ## 代码示例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 概念定义生成器
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 //! 自动生成概念定义的 Markdown 文档
@@ -181,9 +181,9 @@ fn main() {
 
 ### 知识结构批量生成器
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 //! 为多个模块批量生成知识结构
@@ -277,9 +277,9 @@ fn main() {
 
 ### 思维表征模板生成器
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 //! 生成思维导图、矩阵等思维表征模板
@@ -370,13 +370,13 @@ fn main() {
 
 ## 形式化链接
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 研究笔记关联
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **知识结构框架**: [07_knowledge_structure_framework.md](./07_knowledge_structure_framework.md) - 完整知识结构体系定义
 - **证明图网**: [04_proof_graph_network.md](../04_thinking/04_proof_graph_network.md) - 形式化证明结构模板
@@ -385,9 +385,9 @@ fn main() {
 
 ### 实施场景
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 场景 | 实施步骤 | 参考代码 |
 | :--- | :--- | :--- |
@@ -399,17 +399,17 @@ fn main() {
 
 ## 📐 知识结构补充模板
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 概念定义补充
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 模板
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```markdown
 ### 概念定义
@@ -434,7 +434,7 @@ fn main() {
 
 #### 示例：异步编程
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```markdown
 ### 概念定义
@@ -461,16 +461,16 @@ fn main() {
 
 ### 2. 属性特征补充
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 #### 模板
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```markdown
 ### 属性特征
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **核心属性**:
 
@@ -491,16 +491,16 @@ fn main() {
 
 ### 3. 关系连接补充
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 #### 模板
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```markdown
 ### 关系连接
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **继承关系**:
 
@@ -521,16 +521,16 @@ fn main() {
 
 ### 4. 解释论证补充
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 #### 模板
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```markdown
 ### 解释论证
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **论点**: [要论证的论点]
 
@@ -553,16 +553,16 @@ fn main() {
 
 ### 5. 形式证明补充
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 #### 模板
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```markdown
 ### 形式证明
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **定理**: [要证明的定理]
 
@@ -591,11 +591,11 @@ fn main() {
 
 ### 1. 思维导图补充
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 #### 模板
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ````markdown
     ### 思维导图
@@ -614,11 +614,11 @@ fn main() {
 
 ### 2. 概念矩阵补充
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 #### 模板
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```markdown
 ### 概念矩阵
@@ -955,18 +955,18 @@ fn main() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Modular Programming]**
-> **[来源: Wikipedia - Software Component]**
-> **[来源: Rust Reference - Modules]**
-> **[来源: TRPL Ch. 7 - Packages and Modules]**
+> **来源: [Wikipedia - Modular Programming](https://en.wikipedia.org/wiki/Modular_Programming)**
+> **来源: [Wikipedia - Software Component](https://en.wikipedia.org/wiki/Software_Component)**
+> **来源: [Rust Reference - Modules](https://doc.rust-lang.org/reference/)**
+> **来源: [TRPL Ch. 7 - Packages and Modules](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html)**
 > **[来源: ACM - Modular Software Design]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ---

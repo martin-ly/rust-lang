@@ -39,7 +39,7 @@
 
 ## 项目目标
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 创建一个命令行待办事项管理工具 (Todo CLI)，学习Rust基础编程。
 
@@ -47,13 +47,13 @@
 
 ## 功能需求
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 基本功能
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 添加待办事项: `todo add "买牛奶"`
 - [ ] 列出待办事项: `todo list`
@@ -63,7 +63,7 @@
 
 ### 扩展功能
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [ ] 设置优先级
 - [ ] 截止日期提醒
@@ -77,7 +77,7 @@
 
 ### 1. 所有权和借用
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 // 学习如何管理字符串所有权
@@ -88,7 +88,7 @@ fn add_todo(todos: &mut Vec<String>, item: String) {
 
 ### 2. 错误处理
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust
 // 学习 Result 类型
@@ -100,7 +100,7 @@ fn load_todos() -> Result<Vec<String>, std::io::Error> {
 
 ### 3. 文件IO
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust
 // 学习文件读写
@@ -140,7 +140,7 @@ todo-cli/
 
 ### 步骤 1: 创建项目
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```bash
 cargo new todo-cli
@@ -149,7 +149,7 @@ cd todo-cli
 
 ### 步骤 2: 定义数据结构
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust
 // src/models.rs
@@ -322,12 +322,12 @@ cargo build --release
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ---

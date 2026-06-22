@@ -70,7 +70,7 @@
 
 ## 🎯 研究目标 {#-研究目标}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本研究旨在通过分析实际应用案例，验证 Rust 理论在实际项目中的应用效果，包括：
 
@@ -81,9 +81,9 @@
 
 ### 核心问题
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **Rust 在实际项目中的表现如何？**
 2. **哪些 Rust 特性在实际应用中最为重要？**
@@ -91,9 +91,9 @@
 
 ### 预期成果
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - 建立实际应用案例库
 - 总结最佳实践
@@ -103,7 +103,7 @@
 
 ## 形式化论证与案例衔接
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def PA1（案例验证）**：设 $C$ 为实际应用案例，$T$ 为形式化定理。
 若 $C$ 的实现满足 $T$ 的结论（如无数据竞争、无内存泄漏），则称 $C$ **与 $T$ 一致**。
@@ -127,13 +127,13 @@
 
 ## 📚 案例分类 {#-案例分类}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 系统编程案例
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **案例类型**：
 
@@ -145,9 +145,9 @@
 
 #### 案例 1.1：Redox OS
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **项目描述**：使用 Rust 编写的类 Unix 操作系统
 
@@ -200,9 +200,9 @@ impl Syscall {
 
 #### 案例 1.2：Tokio 异步运行时
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **项目描述**：Rust 异步编程运行时
 
@@ -266,9 +266,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 2. 网络应用案例
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **案例类型**：
 
@@ -287,9 +287,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 #### 案例 2.1：Actix-web 高性能 Web 框架
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **项目描述**：Rust 生态系统中最快的 Web 框架之一
 
@@ -335,7 +335,7 @@ async fn main() -> std::io::Result<()> {
 
 #### 案例 2.2：Linkerd 服务网格
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **项目描述**：使用 Rust 构建的云原生服务网格
 
@@ -360,7 +360,7 @@ async fn main() -> std::io::Result<()> {
 
 ### 3. 并发系统案例
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **案例类型**：
 
@@ -379,7 +379,7 @@ async fn main() -> std::io::Result<()> {
 
 #### 案例 3.1：TiKV 分布式键值存储
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **项目描述**：PingCAP 使用 Rust 构建的分布式事务键值数据库
 
@@ -431,7 +431,7 @@ impl TiKVEngine {
 
 #### 案例 3.2：ScyllaDB Rust 驱动
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **项目描述**：高性能 NoSQL 数据库的 Rust 客户端
 
@@ -450,7 +450,7 @@ impl TiKVEngine {
 
 ### 4. 嵌入式系统案例
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **案例类型**：
 
@@ -469,7 +469,7 @@ impl TiKVEngine {
 
 #### 案例 4.1：Tock 嵌入式操作系统
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **项目描述**：使用 Rust 构建的安全嵌入式操作系统
 
@@ -518,7 +518,7 @@ impl TockOS {
 
 #### 案例 4.2：Drone 实时操作系统
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **项目描述**：使用 Rust 构建的实时操作系统框架
 
@@ -539,11 +539,11 @@ impl TockOS {
 
 ## 💻 案例示例 {#-案例示例}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 案例 1：高性能 Web 服务器
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **项目描述**：使用 Rust 构建高性能 Web 服务器
 
@@ -628,7 +628,7 @@ async fn main() {
 
 ### 案例 2：并发数据处理系统
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **项目描述**：使用 Rust 构建高并发数据处理系统
 
@@ -693,7 +693,7 @@ async fn process_task(task: DataTask, worker_id: usize) {
 
 ### 案例 3：内存安全的数据结构
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **项目描述**：实现内存安全的高性能数据结构
 
@@ -782,7 +782,7 @@ impl<T> Drop for SafeVec<T> {
 
 #### 案例 1.3：Firecracker 微虚拟机
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **项目描述**：AWS 使用 Rust 构建的轻量级虚拟化技术
 
@@ -891,11 +891,11 @@ impl<T> Drop for SafeVec<T> {
 
 ## 📊 案例分析 {#-案例分析}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 性能分析
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **Web 服务器性能**：
 
@@ -911,7 +911,7 @@ impl<T> Drop for SafeVec<T> {
 
 ### 最佳实践总结 {#-最佳实践总结}
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 1. **异步编程**：充分利用 Rust 的异步特性
 2. **内存管理**：利用所有权系统避免内存问题
@@ -922,11 +922,11 @@ impl<T> Drop for SafeVec<T> {
 
 ## 📊 最佳实践总结
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 系统编程最佳实践
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 1. **内存管理**：
    - 优先使用栈分配
@@ -945,7 +945,7 @@ impl<T> Drop for SafeVec<T> {
 
 ### 网络应用最佳实践
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 1. **异步编程**：
    - 使用 `async/await` 语法
@@ -964,7 +964,7 @@ impl<T> Drop for SafeVec<T> {
 
 ### 并发系统最佳实践
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 1. **同步原语选择**：
    - 读多写少使用 `RwLock`
@@ -983,7 +983,7 @@ impl<T> Drop for SafeVec<T> {
 
 ### 嵌入式系统最佳实践
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 1. **资源管理**：
    - 使用 `no_std` 环境
@@ -1004,11 +1004,11 @@ impl<T> Drop for SafeVec<T> {
 
 ## 📋 案例报告与应用指南 {#-案例报告与应用指南}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 案例报告模板
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 撰写单个案例报告时，建议包含以下部分：
 
@@ -1021,7 +1021,7 @@ impl<T> Drop for SafeVec<T> {
 
 ### 应用指南
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 - **选型**：系统编程、网络、并发、嵌入式可分别从「案例分类」中选取对标项目；性能与安全诉求可参考「案例分析」与各实验的基准。
 - **落地**：按「最佳实践总结」的四个领域逐条对照；异步、错误处理、并发原语选型可结合 [async_state_machine](./formal_methods/10_async_state_machine.md)、[concurrency_performance](./experiments/10_concurrency_performance.md)。
@@ -1031,11 +1031,11 @@ impl<T> Drop for SafeVec<T> {
 
 ## 🔗 系统集成与案例索引 {#-系统集成与案例索引}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 与形式化方法的关联
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 - **所有权模型** [10_ownership_model.md](./formal_methods/10_ownership_model.md)：Redox、Tock、Firecracker、SafeVec 等案例中的资源管理与 `unsafe` 边界，可对照所有权规则做形式化抽查。
 - **借用检查器** [10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md)：TiKV、Actix、Linkerd 等并发与迭代场景，可对照借用规则验证无数据竞争。
@@ -1043,7 +1043,7 @@ impl<T> Drop for SafeVec<T> {
 
 ### 与类型理论、实验研究的关联
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 - **类型系统 / Trait** [10_type_system_foundations.md](./type_theory/10_type_system_foundations.md)、[10_trait_system_formalization.md](./type_theory/10_trait_system_formalization.md)：各案例中的泛型、`impl Trait`、派生与 Trait 对象，可作类型论与 Trait 形式化的实例。
 - **性能基准** [10_performance_benchmarks.md](./experiments/10_performance_benchmarks.md)、**并发性能** [10_concurrency_performance.md](./experiments/10_concurrency_performance.md)：案例 1–2 的吞吐、延迟、并发模式可与实验的「结果分析模板」对照，用于选型与调优。
@@ -1051,7 +1051,7 @@ impl<T> Drop for SafeVec<T> {
 
 ### 案例快速索引
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | 领域 | 案例 | 文档内锚点 / 关键词 |
 | :--- | :--- | :--- |
@@ -1083,7 +1083,7 @@ impl<T> Drop for SafeVec<T> {
 
 ## 📖 参考文献 {#-参考文献}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 实际项目
 >
@@ -1117,7 +1117,7 @@ impl<T> Drop for SafeVec<T> {
 
 ## 🆕 Rust 1.94 深度整合更新
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
@@ -1184,28 +1184,28 @@ impl<T> Drop for SafeVec<T> {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

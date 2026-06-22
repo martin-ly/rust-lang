@@ -7,7 +7,7 @@
 
 ## 目录
 >
-> **[来源: Rust Design Patterns Book]** · **[来源: Wikipedia - Software Design Pattern]** · **[来源: GoF - Design Patterns]** · **[来源: TRPL Ch. 17]** · **[来源: Rust Reference - Traits]** · **[来源: Rust API Guidelines]** · **[来源: Wikipedia - Formal Semantics]** · **[来源: ACM - Pattern Formalization]** · **[来源: IEEE - Certified Design Patterns]**
+> **来源: [Rust Design Patterns Book](https://rust-lang.github.io/design-patterns/)** · **来源: [Wikipedia - Software Design Pattern](https://en.wikipedia.org/wiki/Software_Design_Pattern)** · **来源: [GoF - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)** · **来源: [TRPL Ch. 17](https://doc.rust-lang.org/book/ch17-00-async-await.html)** · **来源: [Rust Reference - Traits](https://doc.rust-lang.org/reference/items/traits.html)** · **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** · **来源: [Wikipedia - Formal Semantics](https://en.wikipedia.org/wiki/Formal_Semantics)** · **[来源: ACM - Pattern Formalization]** · **[来源: IEEE - Certified Design Patterns]**
 
 - [设计模式语义分析](#设计模式语义分析)
   - [目录](#目录)
@@ -84,13 +84,13 @@
 
 ## 1. 引言
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 设计模式的语义视角
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **设计模式（Design Patterns）** 是软件工程中解决常见问题的可复用解决方案。
 从语义角度分析设计模式，意味着我们不仅关注模式的结构和实现，更关注其**形式化语义**、**类型系统行为**和**运行时保证**。
@@ -103,7 +103,7 @@ $$
 
 ### 1.2 Rust 设计模式的独特性
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 Rust 的设计模式具有独特性，主要源于其**所有权系统**和**类型系统**的交互：
 
@@ -117,13 +117,13 @@ Rust 的设计模式具有独特性，主要源于其**所有权系统**和**类
 
 ### 1.3 所有权对设计模式的影响
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 所有权系统从根本上改变了设计模式的实现方式。所有权对模式的影响可以用**资源转移语义**来描述。
 
 ### 1.4 设计模式语义分析框架
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```mermaid
 graph TB
@@ -146,11 +146,11 @@ graph TB
 
 ### 2.1 所有权转移模式 (Move Semantics)
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 #### 2.1.1 所有权转移的形式化语义
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 所有权转移是 Rust 资源管理的基础，其形式化语义可以表示为：
 
@@ -169,7 +169,7 @@ fn move_semantics_demo() {
 
 #### 2.1.2 构造器模式与所有权
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 struct Resource { data: Vec<i32>, name: String }
@@ -195,7 +195,7 @@ struct ProcessedResource { original_name: String, computed_sum: i32 }
 
 #### 2.1.3 Builder 模式的语义分析
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 struct HttpRequestBuilder<'a> {
@@ -224,11 +224,11 @@ struct HttpRequest<'a> { method: &'a str, url: &'a str, headers: Vec<(&'a str, &
 
 ### 2.2 借用检查模式 (Borrow Check)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 #### 2.2.1 借用的生命周期语义
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 fn borrow_lifecycle() {
@@ -253,7 +253,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 #### 2.2.2 不可变借用共享语义
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 fn shared_borrow_semantics() {
@@ -272,7 +272,7 @@ fn shared_borrow_semantics() {
 
 #### 2.2.3 可变借用独占语义
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 fn exclusive_mutable_borrow() {
@@ -290,11 +290,11 @@ fn exclusive_mutable_borrow() {
 
 ### 2.3 智能指针模式 (Smart Pointers)
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 #### 2.3.1 Box 语义（唯一所有权）
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 fn box_semantics() {
@@ -311,7 +311,7 @@ enum BinaryTree {
 
 #### 2.3.2 Rc 语义（引用计数）
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 use std::rc::Rc;
@@ -334,7 +334,7 @@ fn rc_with_interior_mutability() {
 
 #### 2.3.3 Arc 语义（原子引用计数）
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 use std::sync::Arc;
@@ -358,7 +358,7 @@ fn arc_semantics() {
 
 #### 2.3.4 Weak 语义（弱引用）
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust
 use std::rc::{Rc, Weak};
@@ -399,11 +399,11 @@ fn weak_semantics() {
 
 ### 3.1 组合模式 (Composition)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 #### 3.1.1 所有权树形结构语义
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```mermaid
 graph TD
@@ -446,7 +446,7 @@ impl Directory {
 
 #### 3.1.2 Drop 传播语义
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust
 struct Resource { id: usize, name: String }
@@ -471,7 +471,7 @@ impl Drop for Container {
 
 #### 3.1.3 递归类型语义
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust
 enum List<T> {
@@ -497,11 +497,11 @@ enum SharedList<T> {
 
 ### 3.2 类型状态模式 (Type State)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 #### 3.2.1 状态作为类型参数
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```mermaid
 stateDiagram-v2
@@ -547,7 +547,7 @@ impl Connection<Authenticated> {
 
 #### 3.2.2 状态转换语义
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 trait ConnectionState {}
@@ -580,7 +580,7 @@ impl ConnectionManager<Disconnected> {
 
 #### 3.2.3 编译时状态机验证
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 struct NoMethod;
@@ -634,11 +634,11 @@ struct HttpResponse { status: u16 }
 
 ### 3.3 适配器模式 (Adapter)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 #### 3.3.1 trait 适配语义
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 trait Target {
@@ -662,7 +662,7 @@ impl Target for Adapter {
 
 #### 3.3.2 From/Into 语义
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 struct OldUser { name: String, age: u32 }
@@ -697,7 +697,7 @@ impl From<std::io::Error> for MyError {
 
 #### 3.3.3 Deref 适配语义
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 use std::ops::{Deref, DerefMut};
@@ -735,11 +735,11 @@ fn deref_semantics() {
 
 ### 4.1 迭代器模式 (Iterator)
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 #### 4.1.1 迭代器协议语义
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 struct Counter { count: u32, max: u32 }
@@ -815,7 +815,7 @@ fn consumer_adapters() {
 
 ### 4.2 观察者模式 (Observer)
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 #### 4.2.1 回调所有权语义
 
@@ -860,7 +860,7 @@ impl Observer for ConcreteObserver {
 
 ### 4.3 访问者模式 (Visitor)
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 #### 4.3.1 双重分发语义
 
@@ -897,7 +897,7 @@ impl Visitor for Evaluator {
 
 ### 5.1 通道模式 (Channel)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 #### 5.1.1 所有权传递语义
 
@@ -983,7 +983,7 @@ fn producer_consumer_pattern() {
 
 ### 5.2 锁模式 (Lock)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 #### 5.2.1 Mutex 保护语义
 
@@ -1039,7 +1039,7 @@ fn rwlock_semantics() {
 
 ### 5.3 原子模式 (Atomic)
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 #### 5.3.1 原子操作语义
 
@@ -1209,7 +1209,7 @@ async fn backpressure_control() {
 
 ### 6.3 取消模式 (Cancellation)
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 async fn cancellation_pattern() {
@@ -1497,11 +1497,11 @@ graph TB
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Software Design Pattern]**
+> **来源: [Wikipedia - Software Design Pattern](https://en.wikipedia.org/wiki/Software_Design_Pattern)**
 
-> **[来源: Wikipedia - Formal Semantics]**
+> **来源: [Wikipedia - Formal Semantics](https://en.wikipedia.org/wiki/Formal_Semantics)**
 
-> **[来源: Wikipedia - Abstract Data Type]**
+> **来源: [Wikipedia - Abstract Data Type](https://en.wikipedia.org/wiki/Abstract_Data_Type)**
 
 > **[来源: IEEE - Certified Design Patterns]**
 
@@ -1509,21 +1509,21 @@ graph TB
 
 > **[来源: Gamma et al. 1994 - Design Patterns]**
 
-> **[来源: Rust API Guidelines]**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 
-> **[来源: Rust Reference - Patterns]**
+> **来源: [Rust Reference - Patterns](https://doc.rust-lang.org/reference/)**
 
-> **[来源: Rust Cookbook]**
+> **来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)**
 
-> **[来源: RFC 1210 - impl Specialization]**
+> **来源: [RFC 1210 - impl Specialization](https://github.com/rust-lang/rfcs/pull/1210)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ---

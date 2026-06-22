@@ -9,7 +9,7 @@
 > **内容分级**: [专家级]
 > **定位**: 本文件从**系统架构设计**视角梳理 Rust 的核心设计原则，并与国际权威内容（形式化方法、分布式系统理论、安全工程、容错计算）建立对齐关系。
 > **原则**: 不做"系统设计教程"，聚焦"Rust 的类型系统和所有权模型如何为系统设计提供形式化基础，以及这些基础与国际权威理论的对应关系"。
-> **对齐来源**: [RustBelt] · [SE L4] · [NIST Zero Trust] · [AWS TLA+] · [Erlang OTP] · [CAP Theorem] · [CALM Theorem]
+> **对齐来源**: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [SE L4] · [NIST Zero Trust] · [AWS TLA+] · [Erlang OTP] · [CAP Theorem] · [CALM Theorem]
 > **基准版本**: Rust 1.96.0 stable (Edition 2024)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
@@ -134,7 +134,7 @@ fn process(data: Vec<u8>) { // 获得 data 的 capability
 } // process 退出，data 的 capability 被销毁（Drop）
 ```
 
-> **对齐**: Rust 的所有权系统与 SEL4（世界上最安全的操作系统内核）的 capability 模型在**安全保证层面同构**。SEL4 通过形式化验证证明了 capability 模型的无 UAF 性质；Rust 通过类型系统（RustBelt）证明了等价的安全保证。 [来源: SEL4 Formal Verification; RustBelt POPL 2018]
+> **对齐**: Rust 的所有权系统与 SEL4（世界上最安全的操作系统内核）的 capability 模型在**安全保证层面同构**。SEL4 通过形式化验证证明了 capability 模型的无 UAF 性质；Rust 通过类型系统（RustBelt）证明了等价的安全保证。 来源: SEL4 Formal Verification; [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
 
 ### 2.2 并发安全：Session Types 编译期编码
 
@@ -165,7 +165,7 @@ Rust 的零成本抽象机制：
 | `async/await` | 状态机变换 | 零（状态机在栈/内联内存） | 手写状态机 enum + poll |
 | `?` 错误传播 | `match` 展开 | 零 | 手写等效 match |
 
-> **定理 T-SD-001（零成本抽象保持）**: 在 `release` 模式下，Rust 的标准抽象（泛型、Iterator、async/await、`?`）经 LLVM 优化后，生成的机器码与等价的手工编码在性能和内存占用上无统计显著差异。 [来源: Rust Reference §8; LLVM 优化管道文档]
+> **定理 T-SD-001（零成本抽象保持）**: 在 `release` 模式下，Rust 的标准抽象（泛型、Iterator、async/await、`?`）经 LLVM 优化后，生成的机器码与等价的手工编码在性能和内存占用上无统计显著差异。 来源: [Rust Reference §8; LLVM 优化管道文档](https://doc.rust-lang.org/reference/)
 
 ### 2.4 组件组合：范畴论态射复合
 

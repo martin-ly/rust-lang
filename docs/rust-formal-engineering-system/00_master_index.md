@@ -36,7 +36,7 @@
 
 ## 🏛️ 理论体系与论证体系结构（顶层入口）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文档 | 说明 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -46,7 +46,7 @@
 
 ## 理论基础 (01_theoretical_foundations)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 子模块 | 映射目标 | 说明 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -61,9 +61,9 @@
 
 ### 类型系统子路径
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 路径 | 映射目标 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -175,13 +175,13 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
-> **[来源: Coq Reference]**
-> **[来源: TLA+]**
-> **[来源: ACM - Formal Verification]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ---
 

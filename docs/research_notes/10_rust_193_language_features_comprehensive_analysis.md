@@ -62,7 +62,7 @@
 
 ## 📋 目录<a id="目录"></a> {#-目录}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 <!-- markdownlint-disable MD051 -->
 - [Rust 1.93 语言特性全面分析：设计论证与形式化](#rust-193-语言特性全面分析设计论证与形式化)
@@ -97,7 +97,7 @@
 
 ## 🎯 文档宗旨<a id="文档宗旨"></a> {#-文档宗旨}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档针对「论证未全面分析 Rust 1.93 所有语言特性」的缺口，系统化补全：
 
@@ -109,7 +109,7 @@
 
 ## 📐 特性覆盖矩阵总览<a id="特性覆盖矩阵总览"></a> {#-特性覆盖矩阵总览}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 类别 | 特性数 | 已论证 | 形式化文档 | 完成度 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -129,7 +129,7 @@
 
 ## 特性→Def/Axiom/Theorem 映射表（兼 92 项→推荐落点文档）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本表将 92 项特性与形式化文档中的 Def、Axiom、Theorem 建立一一对应，**最后一列「文档」即该特性的推荐落点文档**；与 FORMAT_AND_CONTENT_ALIGNMENT_PLAN F3.1 对齐。详见 [PROOF_INDEX](./10_proof_index.md)。
 
@@ -178,7 +178,7 @@
 
 ## 1. 内存与所有权族
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | 动机 | 设计决策 | 形式化 | 反例 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -199,7 +199,7 @@
 
 ## 2. 类型系统族
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | 动机 | 设计决策 | 形式化 | 反例 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -223,7 +223,7 @@
 
 ## 3. Trait 与多态族
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | 动机 | 设计决策 | 形式化 | 反例 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -242,7 +242,7 @@
 
 ## 4. 控制流与模式匹配族
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | 动机 | 设计决策 | 形式化 | 反例 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -259,7 +259,7 @@
 
 ## 5. 并发与异步族
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | 动机 | 设计决策 | 形式化 | 反例 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -276,7 +276,7 @@
 
 ## 6. 宏与元编程族
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | 动机 | 设计决策 | 形式化 | 反例 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -290,7 +290,7 @@
 
 ## 7. 模块与可见性族
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | 动机 | 设计决策 | 形式化 | 反例 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -394,7 +394,7 @@
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
@@ -449,20 +449,20 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

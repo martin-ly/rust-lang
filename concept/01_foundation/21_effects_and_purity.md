@@ -354,7 +354,7 @@ fn implicit_side_effect() {
 // std::cout << *r;
 ```
 
-> **关键洞察**: C++ 允许在存在别名的情况下修改数据，导致语义混乱；Rust 的 borrow checker 在编译期阻止此类隐式副作用。[来源: RustBelt] ✅
+> **关键洞察**: C++ 允许在存在别名的情况下修改数据，导致语义混乱；Rust 的 borrow checker 在编译期阻止此类隐式副作用。来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) ✅
 
 ### 7.2 边界测试：`unsafe` 中的副作用逃逸
 
@@ -386,7 +386,7 @@ const fn impure_const() -> i32 {
 }
 ```
 
-> **边界洞察**: `const fn` 是 Rust 中纯度要求最严格的上下文——不允许可变变量、不允许堆分配、不允许非 `const` 操作。任何副作用尝试都会在编译期被拒绝。这构成了 Rust 效果系统的"核心纯净区"。[来源: Rust Reference — §6.10.1 const contexts] ✅
+> **边界洞察**: `const fn` 是 Rust 中纯度要求最严格的上下文——不允许可变变量、不允许堆分配、不允许非 `const` 操作。任何副作用尝试都会在编译期被拒绝。这构成了 Rust 效果系统的"核心纯净区"。来源: [Rust Reference — §6.10.1 const contexts](https://doc.rust-lang.org/reference/) ✅
 
 ### 7.4 边界测试：闭包捕获的副作用
 
@@ -405,7 +405,7 @@ fn closure_effect() {
 }
 ```
 
-> **认知功能**: 此示例展示了 Rust 如何通过闭包类型（`Fn`, `FnMut`, `FnOnce`）将副作用限制在明确的边界内。`FnMut` = 可修改捕获的环境，`Fn` = 只读环境，`FnOnce` = 消费环境。[来源: Rust Reference — §8.2.13 Closure expressions] ✅
+> **认知功能**: 此示例展示了 Rust 如何通过闭包类型（`Fn`, `FnMut`, `FnOnce`）将副作用限制在明确的边界内。`FnMut` = 可修改捕获的环境，`Fn` = 只读环境，`FnOnce` = 消费环境。来源: [Rust Reference — §8.2.13 Closure expressions](https://doc.rust-lang.org/reference/) ✅
 
 ---
 
@@ -430,8 +430,8 @@ fn closure_effect() {
 | 引用透明定义 | [Quine 1960] · [Haskell Wiki] | ✅ | Tier 1 |
 | 副作用分类 | [Moggi 1989] · [Peyton Jones & Wadler 1993] | ✅ | Tier 1 |
 | Monad 显式化副作用 | [Moggi 1989] · [Wadler 1992] | ✅ | Tier 1 |
-| Rust 效果系统原型 | [RustBelt] · 原创分析 | ✅/💡 | Tier 3 |
-| `&mut T` 作为写效果 | [Rust Reference] · [RustBelt §4] | ✅ | Tier 2 |
+| Rust 效果系统原型 | [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · 原创分析 | ✅/💡 | Tier 3 |
+| `&mut T` 作为写效果 | [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | ✅ | Tier 2 |
 | 纯函数局部保证 | [💡 原创分析] | ⚠️ | Tier 3 |
 | 跨语言副作用对比矩阵 | [💡 原创分析] | ⚠️ | Tier 3 |
 

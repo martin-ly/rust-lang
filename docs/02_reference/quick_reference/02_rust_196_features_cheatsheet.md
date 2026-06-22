@@ -19,7 +19,7 @@
 
 ## 目录
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Rust 1.96 特性速查表](#rust-196-特性速查表)
   - [目录](#目录)
@@ -49,13 +49,13 @@
 
 ## if let guards 语法
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 基本语法
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 match value {
@@ -66,9 +66,9 @@ match value {
 
 ### 链式守卫
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 match event {
@@ -85,7 +85,7 @@ match event {
 
 ### 对比表
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 场景 | 旧写法 (Rust < 1.95) | 新写法 (Rust 1.95+) |
 |------|---------------------|-------------------|
@@ -95,7 +95,7 @@ match event {
 
 ### 代码示例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // ✅ Rust 1.95+ 推荐写法
@@ -126,11 +126,11 @@ match message {
 
 ## Range 类型对比
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 类型总览
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 类型 | 语法 | 包含开始 | 包含结束 | 迭代性 |
 |------|------|:--------:|:--------:|:------:|
@@ -143,7 +143,7 @@ match message {
 
 ### 使用场景速查
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 数组/向量切片
@@ -168,7 +168,7 @@ vec.get(0..=5);                // 获取 0-5
 
 ### Range 方法
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 方法 | 适用类型 | 说明 |
 |------|----------|------|
@@ -182,7 +182,7 @@ vec.get(0..=5);                // 获取 0-5
 
 ## 新 Lint 规则
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Rust 1.96 新增 Lints
 >
@@ -375,13 +375,13 @@ let wide: (i64, i64) = widen(narrow);
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

@@ -14,9 +14,9 @@
 
 ## 📋 目录
 >
-> **[来源: Rust Official Docs]** ·
-> **[来源: Wikipedia - Modular Programming]** ·
-> **[来源: Wikipedia - Namespace]** ·
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
+> **来源: [Wikipedia - Modular Programming](https://en.wikipedia.org/wiki/Modular_Programming)** ·
+> **来源: [Wikipedia - Namespace](https://en.wikipedia.org/wiki/Namespace)** ·
 > **[来源: ACM - Module System Design]** ·
 > **[来源: IEEE - Software Modularity Standards]**
 
@@ -90,7 +90,7 @@
 
 ## 🎯 模块系统概览
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 模块层次结构：
@@ -109,13 +109,13 @@ Crate (包)
 
 ## 📝 模块声明
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 内联模块
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 内联模块定义
@@ -137,9 +137,9 @@ fn main() {
 
 ### 文件模块
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // src/main.rs
@@ -163,9 +163,9 @@ fn private_function() {
 
 ### 目录模块
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // src/main.rs
@@ -196,13 +196,13 @@ pub fn sub_function() {
 
 ## 🔒 可见性控制
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### pub 关键字
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 mod my_module {
@@ -219,9 +219,9 @@ mod my_module {
 
 ### 受限可见性
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 mod my_module {
@@ -241,9 +241,9 @@ mod my_module {
 
 ### 结构体可见性
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 mod my_module {
@@ -268,11 +268,11 @@ mod my_module {
 
 ## 📥 use 语句
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 基本用法
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 // 导入模块
@@ -284,7 +284,7 @@ let map = HashMap::new();
 
 ### 导入项
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 // 导入函数
@@ -303,7 +303,7 @@ use std::collections::*;
 
 ### 重命名
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 // 使用 as 重命名
@@ -314,7 +314,7 @@ let map = Map::new();
 
 ### 嵌套导入
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 // 导入嵌套路径
@@ -327,7 +327,7 @@ use std::{
 
 ### self 和 super
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 // 导入当前模块
@@ -348,7 +348,7 @@ use crate::root_module;
 
 ### 绝对路径
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 // 从 crate 根开始
@@ -360,7 +360,7 @@ use std::collections::HashMap;
 
 ### 相对路径
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 mod parent {
@@ -376,7 +376,7 @@ mod parent {
 
 ### 路径简写
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 // 完整路径
@@ -394,7 +394,7 @@ use std::collections::HashMap;
 
 ### 单文件模块
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```text
 src/
@@ -410,7 +410,7 @@ pub mod models;
 
 ### 文件模块1
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```text
 src/
@@ -432,7 +432,7 @@ fn main() {
 
 ### 目录模块
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```text
 src/
@@ -460,7 +460,7 @@ pub fn help() {}
 
 ### 混合组织
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```text
 src/
@@ -483,7 +483,7 @@ src/
 
 ### 库 Crate
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 // src/lib.rs
@@ -495,7 +495,7 @@ pub fn public_api() {}
 
 ### 二进制 Crate
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 // src/main.rs
@@ -508,7 +508,7 @@ fn main() {
 
 ### 多个二进制文件
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```text
 src/
@@ -530,7 +530,7 @@ fn main() {
 
 ### 外部 Crate
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```toml
 # Cargo.toml
@@ -555,7 +555,7 @@ use tokio::runtime::Runtime;
 
 ### 重导出
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 // src/lib.rs
@@ -569,7 +569,7 @@ pub use internal::helper;
 
 ### 条件编译
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 #[cfg(feature = "async")]
@@ -586,7 +586,7 @@ mod tests {
 
 ### 模块别名
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 // 使用 type 别名
@@ -598,7 +598,7 @@ use std::collections::HashMap as Map;
 
 ### 私有模块
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 // 私有模块（默认）
@@ -1201,26 +1201,26 @@ let gamma = f64::consts::EULER_GAMMA;
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Modular Programming]**
-> **[来源: Wikipedia - Software Component]**
-> **[来源: Rust Reference - Modules]**
-> **[来源: TRPL Ch. 7 - Packages and Modules]**
+> **来源: [Wikipedia - Modular Programming](https://en.wikipedia.org/wiki/Modular_Programming)**
+> **来源: [Wikipedia - Software Component](https://en.wikipedia.org/wiki/Software_Component)**
+> **来源: [Rust Reference - Modules](https://doc.rust-lang.org/reference/)**
+> **来源: [TRPL Ch. 7 - Packages and Modules](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html)**
 > **[来源: ACM - Modular Software Design]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

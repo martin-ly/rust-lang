@@ -15,13 +15,13 @@
 
 ## 异步编程核心概念
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Future 与异步执行
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Rust 的异步编程基于 Future trait：
 
@@ -59,9 +59,9 @@ impl Future for TimerFuture {
 
 ### async/await 语法
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use tokio::time::{sleep, Duration};
@@ -115,9 +115,9 @@ async fn race_example() {
 
 ### 异步状态机
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // async fn 被编译为状态机
@@ -171,9 +171,9 @@ fn pin_demo() {
 
 ### 流（Streams）
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use futures::stream::{self, Stream, StreamExt};
@@ -209,9 +209,9 @@ async fn stream_combinators() {
 
 ### 异步运行时
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // Tokio：最常用的异步运行时
@@ -265,9 +265,9 @@ async fn async_channels() {
 
 ### 取消与超时
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use tokio::time::{timeout, Duration};
@@ -320,9 +320,9 @@ fn cancellation_demo() {
 
 ### 并发控制
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use tokio::sync::Semaphore;
@@ -383,7 +383,7 @@ where
 
 ## 使用场景
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 场景 | 异步模式 | 关键技术 |
 | :--- | :--- | :--- |
@@ -400,13 +400,13 @@ where
 
 ## 相关研究笔记
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 软件设计理论
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -415,7 +415,7 @@ where
 
 ### 形式化方法
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -425,7 +425,7 @@ where
 
 ### 实验分析
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -455,15 +455,15 @@ where
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
-> **[来源: TRPL Ch. 17 - Async]**
+> **来源: [TRPL Ch. 17 - Async](https://doc.rust-lang.org/book/ch17-00-async-await.html)**
 
-> **[来源: Tokio Documentation]**
+> **来源: [Tokio Documentation](https://tokio.rs/)**
 
-> **[来源: RFC 2394 - Async/Await]**
+> **来源: [RFC 2394 - Async/Await](https://rust-lang.github.io/rfcs/2394-2394-async_await.html)**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Wikipedia - Type System]**
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**

@@ -39,7 +39,7 @@
 
 ## 工具对比总览
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 工具 | 类型 | 验证方法 | 学习曲线 | 成熟度 | Rust 支持 |
 |------|------|----------|----------|--------|-----------|
@@ -54,13 +54,13 @@
 
 ## 详细对比
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. Miri - 内存安全检查器
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // Miri 可以检测的未定义行为
@@ -88,7 +88,7 @@ miri run  # 或 cargo miri test
 
 ### 2. Kani - 位精确模型检查器
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 // Kani 验证示例
@@ -113,7 +113,7 @@ fn check_vector_push() {
 
 ### 3. Prusti - 契约式验证
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 // Prusti 契约示例
@@ -140,7 +140,7 @@ fn find_min(arr: &[i32]) -> usize {
 
 ### 功能覆盖对比
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```mermaid
 graph TD
@@ -168,7 +168,7 @@ graph TD
 
 ### 性能与可扩展性
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 工具 | 分析速度 | 内存占用 | 代码侵入性 | CI 友好 |
 |------|----------|----------|------------|---------|
@@ -216,7 +216,7 @@ graph TD
 
 ### CI/CD 配置
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```yaml
 # .github/workflows/verification.yml
@@ -264,13 +264,13 @@ jobs:
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -322,13 +322,13 @@ jobs:
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
-> **[来源: Wikipedia - Model Checking]**
-> **[来源: ACM - Formal Verification Survey]**
-> **[来源: IEEE - Formal Specification Standards]**
-> **[来源: POPL - Automated Verification]**
-> **[来源: RustBelt - Rust Formal Semantics]**
-> **[来源: TLA+ Documentation]**
-> **[来源: Wikipedia - Formal Verification]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
+> **来源: [Wikipedia - Model Checking](https://en.wikipedia.org/wiki/Model_Checking)**
+> **来源: [ACM - Formal Verification Survey](https://dl.acm.org/)**
+> **来源: [IEEE - Formal Specification Standards](https://standards.ieee.org/)**
+> **来源: [POPL - Automated Verification](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)**
+> **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [Wikipedia - Formal Verification](https://en.wikipedia.org/wiki/Formal_Verification)**
 
 ---

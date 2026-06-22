@@ -7,16 +7,16 @@
 
 ## Table of Contents
 
-> **[来源: Rust Reference - Formal Semantics]**
+> **来源: [Rust Reference - Formal Semantics](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Reference - Type System]** ·
-> **[来源: Wikipedia - Type Theory]** ·
-> **[来源: Wikipedia - Operational Semantics]** ·
-> **[来源: POPL 2018 - RustBelt]** ·
-> **[来源: PLDI 2023 - Aeneas]** ·
-> **[来源: Iris Project - iris-project.org]** ·
-> **[来源: Wikipedia - Formal Methods]** ·
-> **[来源: Wikipedia - Denotational Semantics]** ·
+> **来源: [Rust Reference - Type System](https://doc.rust-lang.org/reference/types.html)** ·
+> **来源: [Wikipedia - Type Theory](https://en.wikipedia.org/wiki/Type_Theory)** ·
+> **来源: [Wikipedia - Operational Semantics](https://en.wikipedia.org/wiki/Operational_Semantics)** ·
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** ·
+> **来源: [PLDI 2023 - Aeneas](https://www.sigplan.org/Conferences/PLDI/)** ·
+> **来源: [Iris Project - iris-project.org](https://iris-project.org/)** ·
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)** ·
+> **来源: [Wikipedia - Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_Semantics)** ·
 > **[来源: IEEE - Formal Verification Standards]** ·
 > **[来源: ACM - Programming Language Semantics]**
 
@@ -262,9 +262,9 @@
 
 ## 1. Introduction
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Rust's type system represents one of the most sophisticated static analysis systems in modern programming languages.
 Its unique ownership and borrowing mechanisms ensure memory safety without requiring a garbage collector.
@@ -272,9 +272,9 @@ This document provides a comprehensive formal treatment of Rust's semantics, fro
 
 ### 1.1 Motivation
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Formal semantics serve multiple purposes:
 
@@ -285,7 +285,7 @@ Formal semantics serve multiple purposes:
 
 ### 1.2 Overview of Approach
 
-> **[来源: ACM - Formal Verification Survey]**
+> **来源: [ACM - Formal Verification Survey](https://dl.acm.org/)**
 
 We present Rust's semantics in layers:
 
@@ -297,15 +297,15 @@ We present Rust's semantics in layers:
 
 ## 2. Type System Formalization
 
-> **[来源: ACM - Formal Verification Survey]**
+> **来源: [ACM - Formal Verification Survey](https://dl.acm.org/)**
 
 ### 2.1 Abstract Syntax
 
-> **[来源: IEEE - Specification Standards]**
+> **来源: [IEEE - Specification Standards](https://standards.ieee.org/)**
 
 #### 2.1.1 Expressions
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```
 e ∈ Expr ::=
@@ -337,7 +337,7 @@ e ∈ Expr ::=
 
 #### 2.1.2 Types
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```
 T ∈ Type ::=
@@ -368,7 +368,7 @@ T ∈ Type ::=
 
 #### 2.1.3 Lifetimes
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```
 'a ∈ Lifetime ::=
@@ -380,7 +380,7 @@ T ∈ Type ::=
 
 #### 2.1.4 Kinds
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```
 κ ∈ Kind ::=
@@ -391,11 +391,11 @@ T ∈ Type ::=
 
 ### 2.2 Type Contexts
 
-> **[来源: TLA+ Documentation]**
+> **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**
 
 #### 2.2.1 Variable Context (Γ)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 The variable context maps variables to their types:
 
@@ -405,7 +405,7 @@ The variable context maps variables to their types:
 
 #### 2.2.2 Lifetime Context (Λ)
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 The lifetime context tracks active lifetimes and their relationships:
 
@@ -415,7 +415,7 @@ The lifetime context tracks active lifetimes and their relationships:
 
 #### 2.2.3 Outlives Context (Δ)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 The outlives context records lifetime constraints:
 
@@ -427,7 +427,7 @@ Where `'a: 'b` means "lifetime 'a outlives lifetime 'b" (i.e., 'a ≥ 'b).
 
 #### 2.2.4 Combined Context
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```
 Σ ::= Λ; Δ; Γ
@@ -435,11 +435,11 @@ Where `'a: 'b` means "lifetime 'a outlives lifetime 'b" (i.e., 'a ≥ 'b).
 
 ### 2.3 Typing Rules
 
-> **[来源: Coq Reference Manual]**
+> **来源: [Coq Reference Manual](https://coq.inria.fr/doc/)**
 
 #### 2.3.1 Variable Rule
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```
 __________  (T-VAR)
@@ -452,7 +452,7 @@ where (x: T) ∈ Γ
 
 #### 2.3.2 Abstraction Rule
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```
 Λ; Δ; Γ, x: T₁ ⊢ e: T₂
@@ -464,7 +464,7 @@ where (x: T) ∈ Γ
 
 #### 2.3.3 Application Rule
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```
 Σ ⊢ e₁: T₁ → T₂    Σ ⊢ e₂: T₁
@@ -476,7 +476,7 @@ where (x: T) ∈ Γ
 
 #### 2.3.4 Let Binding Rule
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```
 Σ ⊢ e₁: T₁    Λ; Δ; Γ, x: T₁ ⊢ e₂: T₂
@@ -488,7 +488,7 @@ where (x: T) ∈ Γ
 
 #### 2.3.5 Immutable Borrow Rule
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```
 Σ ⊢ e: T    T: Copy
@@ -504,7 +504,7 @@ where (x: T) ∈ Γ
 
 #### 2.3.6 Mutable Borrow Rule
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```
 Σ ⊢ e: T    access_ok(Σ, e, mut)    no_active_borrows(Σ, e)
@@ -516,7 +516,7 @@ where (x: T) ∈ Γ
 
 #### 2.3.7 Dereference Rule (Immutable)
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```
 Σ ⊢ e: &'a T
@@ -526,7 +526,7 @@ where (x: T) ∈ Γ
 
 #### 2.3.8 Dereference Rule (Mutable)
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```
 Σ ⊢ e: &'a mut T
@@ -536,7 +536,7 @@ where (x: T) ∈ Γ
 
 #### 2.3.9 Box Construction Rule
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```
 Σ ⊢ e: T
@@ -546,7 +546,7 @@ where (x: T) ∈ Γ
 
 #### 2.3.10 Tuple Formation Rule
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```
 Σ ⊢ eᵢ: Tᵢ  for all i ∈ 1..n
@@ -556,7 +556,7 @@ where (x: T) ∈ Γ
 
 #### 2.3.11 Projection Rules
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```
 Σ ⊢ e: (T₁, ..., Tₙ)
@@ -570,7 +570,7 @@ where (x: T) ∈ Γ
 
 #### 2.3.12 Sequencing Rule
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```
 Σ ⊢ e₁: ()    Σ ⊢ e₂: T
@@ -580,7 +580,7 @@ where (x: T) ∈ Γ
 
 #### 2.3.13 Conditional Rule
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```
 Σ ⊢ e₁: bool    Σ ⊢ e₂: T    Σ ⊢ e₃: T
@@ -590,7 +590,7 @@ where (x: T) ∈ Γ
 
 #### 2.3.14 Integer Literal Rule
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```
 ----------------  (T-INT)
@@ -599,7 +599,7 @@ where (x: T) ∈ Γ
 
 #### 2.3.15 Boolean Literal Rule
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```
 -------------------  (T-TRUE)
@@ -611,7 +611,7 @@ where (x: T) ∈ Γ
 
 #### 2.3.16 Unit Rule
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```
 -------------  (T-UNIT)
@@ -620,11 +620,11 @@ where (x: T) ∈ Γ
 
 ### 2.4 Subtyping Rules
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
 #### 2.4.1 Reflexivity
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```
 --------  (S-REFL)
@@ -633,7 +633,7 @@ T <: T
 
 #### 2.4.2 Lifetime Subtyping (Outlives)
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```
 'a: 'b ∈ Δ
@@ -645,7 +645,7 @@ T <: T
 
 #### 2.4.3 Mutable Reference Subtyping
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```
 'a: 'b ∈ Δ    T₁ <: T₂    T₂ <: T₁
@@ -657,7 +657,7 @@ T <: T
 
 #### 2.4.4 Function Subtyping (Contravariant in Input)
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```
 T₁' <: T₁    T₂ <: T₂'
@@ -667,7 +667,7 @@ T₁ → T₂ <: T₁' → T₂'
 
 #### 2.4.5 Transitivity
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```
 T₁ <: T₂    T₂ <: T₃
@@ -677,11 +677,11 @@ T₁ <: T₃
 
 ### 2.5 Trait System
 
-> **[来源: Pierce 2002 - TAPL]**
+> **来源: [Pierce 2002 - TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)**
 
 #### 2.5.1 Trait Definition Syntax
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```
 trait Trait<'a, T: Bound> where Self: Sized {
@@ -693,7 +693,7 @@ trait Trait<'a, T: Bound> where Self: Sized {
 
 #### 2.5.2 Trait Bound Rules
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```
 Σ ⊢ T: Trait
@@ -703,7 +703,7 @@ trait Trait<'a, T: Bound> where Self: Sized {
 
 #### 2.5.3 Impl Trait Rules
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```
 Σ ⊢ e: T    T: Trait
@@ -713,7 +713,7 @@ trait Trait<'a, T: Bound> where Self: Sized {
 
 #### 2.5.4 Dyn Trait Rules
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```
 Σ ⊢ e: T    T: Trait + 'a
@@ -725,15 +725,15 @@ trait Trait<'a, T: Bound> where Self: Sized {
 
 ## 3. Operational Semantics
 
-> **[来源: Wikipedia - Operational Semantics]** · **[来源: Rust Reference]** · **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Operational Semantics](https://en.wikipedia.org/wiki/Operational_Semantics)** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ### 3.1 Runtime Configurations
 
-> **[来源: POPL 2020 - Oxide]**
+> **来源: [POPL 2020 - Oxide](https://www.sigplan.org/Conferences/POPL/)**
 
 #### 3.1.1 Memory Model
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 The runtime state consists of:
 
@@ -745,7 +745,7 @@ The runtime state consists of:
 
 #### 3.1.2 Values
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```
 v ∈ Value ::=
@@ -760,7 +760,7 @@ v ∈ Value ::=
 
 #### 3.1.3 Runtime Expressions
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```
 r ∈ RExpr ::=
@@ -774,7 +774,7 @@ r ∈ RExpr ::=
 
 #### 3.1.4 Configuration
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```
 ⟨σ; ρ; μ; e⟩  -- evaluation configuration
@@ -789,11 +789,11 @@ Where:
 
 ### 3.2 Small-Step Semantics
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 #### 3.2.1 Variable Lookup
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```
 ρ(x) = ℓ    σ(ℓ) = v
@@ -803,7 +803,7 @@ Where:
 
 #### 3.2.2 Beta Reduction
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```
 ⟨σ; ρ; μ; (λx:T.e) v⟩ → ⟨σ; ρ[x↦ℓ]; μ; e⟩
@@ -813,7 +813,7 @@ where ℓ = fresh_loc(σ)    σ' = σ[ℓ↦v]
 
 #### 3.2.3 Application (Left)
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```
 ⟨σ; ρ; μ; e₁⟩ → ⟨σ'; ρ'; μ'; e₁'⟩
@@ -823,7 +823,7 @@ where ℓ = fresh_loc(σ)    σ' = σ[ℓ↦v]
 
 #### 3.2.4 Application (Right)
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```
 e₁ is value    ⟨σ; ρ; μ; e₂⟩ → ⟨σ'; ρ'; μ'; e₂'⟩
@@ -833,7 +833,7 @@ e₁ is value    ⟨σ; ρ; μ; e₂⟩ → ⟨σ'; ρ'; μ'; e₂'⟩
 
 #### 3.2.5 Let Binding
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```
 ⟨σ; ρ; μ; let x = v in e⟩ → ⟨σ'; ρ[x↦ℓ]; μ; e⟩
@@ -843,7 +843,7 @@ where ℓ = fresh_loc(σ)    σ' = σ[ℓ↦v]
 
 #### 3.2.6 Immutable Borrow Creation
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```
 ρ(x) = ℓ    μ' = μ ∪ {ℓ ↦ imm(ℓ)}
@@ -853,7 +853,7 @@ where ℓ = fresh_loc(σ)    σ' = σ[ℓ↦v]
 
 #### 3.2.7 Mutable Borrow Creation
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```
 ρ(x) = ℓ    no_borrows(μ, ℓ)    μ' = μ ∪ {ℓ ↦ mut(ℓ)}
@@ -863,7 +863,7 @@ where ℓ = fresh_loc(σ)    σ' = σ[ℓ↦v]
 
 #### 3.2.8 Dereference
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```
 ⟨σ; ρ; μ; *ℓ⟩ → ⟨σ; ρ; μ; σ(ℓ)⟩
@@ -871,7 +871,7 @@ where ℓ = fresh_loc(σ)    σ' = σ[ℓ↦v]
 
 #### 3.2.9 Box Allocation
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```
 ⟨σ; ρ; μ; Box::new(v)⟩ → ⟨σ'; ρ; μ; ℓ⟩
@@ -881,7 +881,7 @@ where ℓ = fresh_loc(σ)    σ' = σ[ℓ↦v]
 
 #### 3.2.10 Assignment
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```
 ρ(x) = ℓ    no_borrows(μ, ℓ)
@@ -891,7 +891,7 @@ where ℓ = fresh_loc(σ)    σ' = σ[ℓ↦v]
 
 #### 3.2.11 Conditional True
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```
 -----------------------------------------  (E-IF-TRUE)
@@ -900,7 +900,7 @@ where ℓ = fresh_loc(σ)    σ' = σ[ℓ↦v]
 
 #### 3.2.12 Conditional False
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```
 ------------------------------------------  (E-IF-FALSE)
@@ -909,7 +909,7 @@ where ℓ = fresh_loc(σ)    σ' = σ[ℓ↦v]
 
 #### 3.2.13 Sequencing
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```
 ---------------------------------------  (E-SEQ)
@@ -918,7 +918,7 @@ where ℓ = fresh_loc(σ)    σ' = σ[ℓ↦v]
 
 ### 3.3 Big-Step Semantics (Alternative)
 
-> **[来源: ACM - Formal Verification Survey]**
+> **来源: [ACM - Formal Verification Survey](https://dl.acm.org/)**
 
 For some proofs, big-step semantics are more convenient:
 
@@ -930,7 +930,7 @@ Meaning: "Expression `e` evaluates to value `v` with final heap `σ'`."
 
 #### 3.3.1 Big-Step Rules
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```
 ρ(x) = ℓ    σ(ℓ) = v
@@ -955,11 +955,11 @@ where ℓ = fresh_loc(σ₁)    σ₁' = σ₁[ℓ↦v₁]
 
 ### 3.4 Memory Management Rules
 
-> **[来源: IEEE - Specification Standards]**
+> **来源: [IEEE - Specification Standards](https://standards.ieee.org/)**
 
 #### 3.4.1 Drop Rule
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```
 ρ(x) = ℓ    σ(ℓ) = v
@@ -969,7 +969,7 @@ where ℓ = fresh_loc(σ₁)    σ₁' = σ₁[ℓ↦v₁]
 
 #### 3.4.2 Ownership Transfer
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```
 ρ(x) = ℓ    move_ok(μ, ℓ)
@@ -979,7 +979,7 @@ where ℓ = fresh_loc(σ₁)    σ₁' = σ₁[ℓ↦v₁]
 
 #### 3.4.3 Copy Semantics
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```
 ρ(x) = ℓ    σ(ℓ) = v    T: Copy
@@ -991,15 +991,15 @@ where ℓ = fresh_loc(σ₁)    σ₁' = σ₁[ℓ↦v₁]
 
 ## 4. Ownership Semantics
 
-> **[来源: IEEE - Specification Standards]**
+> **来源: [IEEE - Specification Standards](https://standards.ieee.org/)**
 
 ### 4.1 Ownership Judgments
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 #### 4.1.1 Ownership Definition
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```
 owns(Γ, x, T)
@@ -1009,7 +1009,7 @@ Meaning: Variable `x` owns a value of type `T`.
 
 #### 4.1.2 Ownership Rules
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```
 (x: T) ∈ Γ    T: !Copy
@@ -1027,11 +1027,11 @@ owns(Γ, x, S)
 
 ### 4.2 Borrow Judgments
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 #### 4.2.1 Borrow Definition
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```
 borrows(Γ, r, x, T, κ)
@@ -1043,7 +1043,7 @@ Where `κ ∈ {imm, mut}` indicates immutable or mutable borrow.
 
 #### 4.2.2 Immutable Borrow Rules
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```
 owns(Γ, x, T)    no_mut_borrows(Γ, x)
@@ -1057,7 +1057,7 @@ borrows(Γ, &r, x, T, imm)
 
 #### 4.2.3 Mutable Borrow Rules
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```
 owns(Γ, x, T)    no_active_borrows(Γ, x)
@@ -1071,11 +1071,11 @@ borrows(Γ, &mut r, x, T, mut)
 
 ### 4.3 Lifetime Relationships
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 #### 4.3.1 Lifetime Inclusion
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```
 'a ⊆ 'b
@@ -1085,7 +1085,7 @@ Meaning: Lifetime `'a` is contained within lifetime `'b` (i.e., `'a` is shorter 
 
 #### 4.3.2 Borrow Validity
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```
 valid(Γ, r, 'a)
@@ -1101,11 +1101,11 @@ valid(Γ, r, 'a)
 
 ### 4.4 Move Semantics
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 #### 4.4.1 Move Judgment
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```
 move(Γ, x, Γ')
@@ -1121,7 +1121,7 @@ move(Γ, x, Γ \\ x)
 
 #### 4.4.2 Partial Move
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```
 owns(Γ, x.f, T)    T: !Copy
@@ -1133,11 +1133,11 @@ Where `S\\f` indicates that field `f` has been moved out of struct `S`.
 
 ### 4.5 Copy vs Move
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 #### 4.5.1 Copy Types
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```
 T: Copy  iff  T ∈ {i32, i64, u32, u64, bool, (), char, &'static T} or T = [U; n] where U: Copy
@@ -1145,7 +1145,7 @@ T: Copy  iff  T ∈ {i32, i64, u32, u64, bool, (), char, &'static T} or T = [U; 
 
 #### 4.5.2 Copy Rule
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```
 T: Copy    (x: T) ∈ Γ
@@ -1159,11 +1159,11 @@ Note: The context is unchanged after a copy.
 
 ## 5. Lifetime System
 
-> **[来源: Wikipedia - Region-based Memory Management]** · **[来源: Rust Reference - Lifetimes]** · **[来源: RFC 1414 - Lifetime Elision]**
+> **来源: [Wikipedia - Region-based Memory Management](https://en.wikipedia.org/wiki/Region_based_Memory_Management)** · **来源: [Rust Reference - Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html)** · **来源: [RFC 1414 - Lifetime Elision](https://github.com/rust-lang/rfcs/pull/1414)**
 
 ### 5.1 Lifetime Parameters
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 #### 5.1.1 Function Lifetime Parameters
 
@@ -1179,7 +1179,7 @@ fn f<'a, 'b>(x: &'a T, y: &'b U) -> &'a V
 
 ### 5.2 Lifetime Elision
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 #### 5.2.1 Elision Rules
 
@@ -1191,7 +1191,7 @@ fn foo(&self) -> &T         -- equivalent to: fn foo<'a>(&'a self) -> &'a T
 
 ### 5.3 Lifetime Constraints
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 #### 5.3.1 Well-Formedness
 
@@ -1234,7 +1234,7 @@ fn foo(&self) -> &T         -- equivalent to: fn foo<'a>(&'a self) -> &'a T
 
 ### 5.4 Region Inference
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 #### 5.4.1 Region Variables
 
@@ -1258,7 +1258,7 @@ gen(Σ, &e) = gen(Σ, e) ∪ { '?new: lifetime(e) }
 
 ### 5.5 Higher-Ranked Trait Bounds
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 #### 5.5.1 Syntax
 
@@ -1277,11 +1277,11 @@ for<'a> Trait<'a> ⊢ Trait<'b>
 
 ## 6. Soundness Theory
 
-> **[来源: TLA+ Documentation]**
+> **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**
 
 ### 6.1 Progress Theorem
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **Theorem 6.1 (Progress)**:
 If `⊢ e: T`, then either:
@@ -1308,7 +1308,7 @@ By structural induction on the typing derivation `⊢ e: T`.
 
 ### 6.2 Preservation Theorem
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **Theorem 6.2 (Preservation)**:
 If `⊢ e: T` and `e → e'`, then `⊢ e': T`.
@@ -1350,7 +1350,7 @@ Given `⊢ &x: &'a T`, by inversion `x: T` and borrow is valid.
 
 ### 6.3 Substitution Lemma
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **Lemma 6.3 (Substitution)**:
 If `Γ, x:T₁ ⊢ e: T₂` and `⊢ v: T₁`, then `Γ ⊢ e[x↦v]: T₂`.
@@ -1361,7 +1361,7 @@ If `Γ, x:T₁ ⊢ e: T₂` and `⊢ v: T₁`, then `Γ ⊢ e[x↦v]: T₂`.
 
 ### 6.4 Canonical Forms Lemma
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **Lemma 6.4 (Canonical Forms)**:
 
@@ -1376,7 +1376,7 @@ If `Γ, x:T₁ ⊢ e: T₂` and `⊢ v: T₁`, then `Γ ⊢ e[x↦v]: T₂`.
 
 ### 6.5 Type Soundness Theorem
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **Theorem 6.5 (Type Soundness)**:
 If `⊢ e: T`, then either:
@@ -1391,7 +1391,7 @@ If `⊢ e: T`, then either:
 
 ### 6.6 Memory Safety Theorem
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **Theorem 6.6 (Memory Safety)**:
 If `⊢ e: T` and `⟨∅; e⟩ →* ⟨σ; e'⟩`, then:
@@ -1420,7 +1420,7 @@ Never both simultaneously.
 
 ### 6.7 Lifetime Safety Theorem
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **Theorem 6.7 (Lifetime Safety)**:
 If `Λ; Δ; Γ ⊢ e: T` and `'a ∈ Λ`, then all references with lifetime `'a` are valid throughout `'a`.
@@ -1433,13 +1433,13 @@ If `Λ; Δ; Γ ⊢ e: T` and `'a ∈ Λ`, then all references with lifetime `'a`
 
 ## 7. Counter-Examples and Error Analysis
 
-> **[来源: Rust Reference]** · **[来源: Rustonomicon]** · **[来源: Wikipedia - Type System]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 This section provides detailed analysis of 12+ common type system violations in Rust.
 
 ### 7.1 Type Confusion (CWE-843)
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 #### 7.1.1 Example Code
 
@@ -1486,7 +1486,7 @@ error[E0277]: cannot downcast to `f64` from `i32`
 
 ### 7.2 Lifetime Subtyping Violation
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 #### 7.2.1 Example Code
 
@@ -1538,7 +1538,7 @@ error[E0597]: `x` does not live long enough
 
 ### 7.3 Variance Error
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 #### 7.3.1 Example Code
 
@@ -1593,7 +1593,7 @@ error[E0597]: `s` does not live long enough
 
 ### 7.4 Trait Bound Not Satisfied
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 #### 7.4.1 Example Code
 
@@ -1648,7 +1648,7 @@ error[E0277]: the trait bound `Point: Drawable` is not satisfied
 
 ### 7.5 Associated Type Mismatch
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 #### 7.5.1 Example Code
 
@@ -1720,7 +1720,7 @@ error[E0271]: type mismatch resolving `<VecWrapper<&str> as Container>::Item == 
 
 ### 7.6 Higher-Ranked Lifetime Error
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 #### 7.6.1 Example Code
 
@@ -1778,7 +1778,7 @@ error[E0515]: cannot return reference to local variable `local`
 
 ### 7.7 Impl Trait Opaque Type Error
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 #### 7.7.1 Example Code
 
@@ -1843,7 +1843,7 @@ error[E0308]: `if` and `else` have incompatible types
 
 ### 7.8 Generic Recursion Error
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 #### 7.8.1 Example Code
 
@@ -1897,7 +1897,7 @@ Rust prevents this by requiring indirection (Box, Rc, etc.)
 
 ### 7.9 Const Generic Mismatch
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 #### 7.9.1 Example Code
 
@@ -1954,7 +1954,7 @@ error[E0308]: mismatched types
 
 ### 7.10 Type Inference Failure
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 #### 7.10.1 Example Code
 
@@ -2006,7 +2006,7 @@ error[E0282]: type annotations needed
 
 ### 7.11 Ambiguous Method Call
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 #### 7.11.1 Example Code
 
@@ -2076,7 +2076,7 @@ note: candidate #2 is defined in an impl of `Logger` for `MyType`
 
 ### 7.12 Coherence Violation
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 #### 7.12.1 Example Code
 
@@ -2140,7 +2140,7 @@ error[E0117]: only traits defined in the current crate can be implemented for ar
 
 ### 7.13 Additional Counter-Example: Drop Check Violation
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 #### 7.13.1 Example Code
 
@@ -2185,7 +2185,7 @@ error[E0597]: `inner_data` does not live long enough
 
 ### 7.14 Additional Counter-Example: Borrow Splitting Violation
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 #### 7.14.1 Example Code
 
@@ -2224,13 +2224,13 @@ error[E0502]: cannot borrow `v` as mutable because it is also borrowed as immuta
 
 ## 8. Polonius Analysis
 
-> **[来源: Coq Reference Manual]**
+> **来源: [Coq Reference Manual](https://coq.inria.fr/doc/)**
 
 Polonius is Rust's next-generation borrow checker based on a declarative, logic-based approach using Datalog.
 
 ### 8.1 Origin-Based System
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 #### 8.1.1 Origins vs Lifetimes
 
@@ -2258,7 +2258,7 @@ o₁ ⊆ o₂  -- origin o₁ is contained in origin o₂
 
 ### 8.2 Datalog Formulation
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 #### 8.2.1 Input Relations
 
@@ -2335,7 +2335,7 @@ path_maybe_uninitialized(Path, P) :-
 
 ### 8.3 Two-Phase Borrows
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 #### 8.3.1 Two-Phase Definition
 
@@ -2367,7 +2367,7 @@ read_allowed(Path, P) :-
 
 ### 8.4 Universal Region Analysis
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 #### 8.4.1 Universal Regions
 
@@ -2384,7 +2384,7 @@ universal_region_live_at(R, P) :-
 
 ### 8.5 Polonius vs NLL
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 | Feature | NLL (Current) | Polonius (Future) |
 |---------|---------------|-------------------|
@@ -2398,13 +2398,13 @@ universal_region_live_at(R, P) :-
 
 ## 9. RustBelt Model
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
 RustBelt is a formal verification framework for Rust, mechanized in Coq and based on Iris separation logic.
 
 ### 9.1 Iris Separation Logic Foundation
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 #### 9.1.1 Separation Logic Basics
 
@@ -2438,7 +2438,7 @@ Rules:
 
 ### 9.2 Lifetime Logic
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 #### 9.2.1 Lifetime as Predicates
 
@@ -2476,7 +2476,7 @@ Where:
 
 ### 9.3 Protocols
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 #### 9.3.1 Protocol Definition
 
@@ -2507,7 +2507,7 @@ own_chan(c, P) -- owns channel c with protocol P
 
 ### 9.4 Ghost State
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 #### 9.4.1 Ghost Variables
 
@@ -2525,7 +2525,7 @@ own_chan(c, P) -- owns channel c with protocol P
 
 ### 9.5 Verification of Unsafe Code
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 #### 9.5.1 Unsafe Function Specification
 
@@ -2562,13 +2562,13 @@ fn safe_read<T>(r: &T) -> T {
 
 ## 10. Coq Mechanization
 
-> **[来源: Pierce 2002 - TAPL]**
+> **来源: [Pierce 2002 - TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)**
 
 This section provides Coq formalizations of Rust subset semantics.
 
 ### 10.1 Syntax Definition
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```coq
 (* Rust Types *)
@@ -2611,7 +2611,7 @@ Definition loc := nat.
 
 ### 10.2 Operational Semantics in Coq
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```coq
 (* Values *)
@@ -2724,7 +2724,7 @@ Inductive multistep : config -> config -> Prop :=
 
 ### 10.3 Type System in Coq
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```coq
 (* Type context *)
@@ -2821,7 +2821,7 @@ Inductive typing : ctx -> expr -> ty -> Prop :=
 
 ### 10.4 Soundness Proof in Coq
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```coq
 (* Progress theorem *)
@@ -2927,7 +2927,7 @@ Admitted.
 
 ### 10.5 Ownership Verification in Coq
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```coq
 (* Ownership predicate *)
@@ -2981,11 +2981,11 @@ Admitted.
 
 ## 11. Advanced Topics
 
-> **[来源: POPL 2020 - Oxide]**
+> **来源: [POPL 2020 - Oxide](https://www.sigplan.org/Conferences/POPL/)**
 
 ### 11.1 Non-Lexical Lifetimes (NLL)
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 #### 11.1.1 Problem with Lexical Lifetimes
 
@@ -3017,7 +3017,7 @@ borrow_live_at(borrow, p) :=
 
 ### 11.2 Generic Associated Types (GATs)
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 #### 11.2.1 GAT Syntax
 
@@ -3041,7 +3041,7 @@ Constraint:
 
 ### 11.3 Async/Await Semantics
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 #### 11.3.1 Desugaring
 
@@ -3066,7 +3066,7 @@ Pinning:
 
 ### 11.4 Const Generics
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 #### 11.4.1 Const Generic Types
 
@@ -3089,7 +3089,7 @@ Constraint generation:
 
 ### 11.5 Type Erasure and VTables
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 #### 11.5.1 Dynamic Dispatch
 
@@ -3117,11 +3117,11 @@ VTable layout:
 
 ## 12. References and Further Reading
 
-> **[来源: PLDI 2023 - Aeneas]**
+> **来源: [PLDI 2023 - Aeneas](https://www.sigplan.org/Conferences/PLDI/)**
 
 ### 12.1 Academic Papers
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 1. **"RustBelt: Securing the Foundations of the Rust Programming Language"**
    - Ralf Jung, Jacques-Henri Jourdan, Robbert Krebbers, Derek Dreyer
@@ -3153,7 +3153,7 @@ VTable layout:
 
 ### 12.2 Technical Resources
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 1. **The Rust Programming Language** (The Book)
    - <https://doc.rust-lang.org/book/>
@@ -3172,7 +3172,7 @@ VTable layout:
 
 ### 12.3 Verification Tools
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 1. **RustBelt** - Iris-based verification in Coq
 2. **Creusot** - deductive verification tool
@@ -3182,7 +3182,7 @@ VTable layout:
 
 ### 12.4 Related Languages and Systems
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 1. **Cyclone** - Region-based memory management
 2. **ATS** - Dependent types with linear types
@@ -3194,41 +3194,41 @@ VTable layout:
 
 ## Appendix A: Summary of Key Theorems
 
-> **[来源: Rust Reference - Formal Semantics]**
+> **来源: [Rust Reference - Formal Semantics](https://doc.rust-lang.org/reference/)**
 
 ### A.1 Progress
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 Every well-typed expression is either a value or can take a step.
 
 ### A.2 Preservation
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 Evaluation preserves types.
 
 ### A.3 Type Soundness
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 Well-typed programs don't get stuck.
 
 ### A.4 Memory Safety
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 Well-typed programs have no use-after-free, no dangling pointers, and no data races.
 
 ### A.5 Lifetime Safety
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 References are always valid for their entire declared lifetime.
 
 ### A.6 Borrow Safety
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 Borrowing rules are enforced at compile time.
 
@@ -3236,7 +3236,7 @@ Borrowing rules are enforced at compile time.
 
 ## Appendix B: Notation Reference
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 | Notation | Meaning |
 |----------|---------|
@@ -3258,7 +3258,7 @@ Borrowing rules are enforced at compile time.
 
 ## Document Information
 
-> **[来源: ACM - Formal Verification Survey]**
+> **来源: [ACM - Formal Verification Survey](https://dl.acm.org/)**
 
 - **Title**: Rust Formal Semantics: A Comprehensive Deep Dive
 - **Version**: 1.0
@@ -3290,50 +3290,50 @@ Borrowing rules are enforced at compile time.
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
-> **[来源: Wikipedia - Type Theory]**
+> **来源: [Wikipedia - Type Theory](https://en.wikipedia.org/wiki/Type_Theory)**
 
-> **[来源: Wikipedia - Operational Semantics]**
+> **来源: [Wikipedia - Operational Semantics](https://en.wikipedia.org/wiki/Operational_Semantics)**
 
-> **[来源: Wikipedia - Denotational Semantics]**
+> **来源: [Wikipedia - Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_Semantics)**
 
 > **[来源: IEEE - Formal Verification Standards]**
 
 > **[来源: ACM - Programming Language Semantics]**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: PLDI 2023 - Aeneas]**
+> **来源: [PLDI 2023 - Aeneas](https://www.sigplan.org/Conferences/PLDI/)**
 
-> **[来源: Iris Project - iris-project.org]**
+> **来源: [Iris Project - iris-project.org](https://iris-project.org/)**
 
-> **[来源: Rust Reference - Type System]**
+> **来源: [Rust Reference - Type System](https://doc.rust-lang.org/reference/types.html)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages Survey]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design and Implementation]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM - Systems Programming Languages Survey](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI - Programming Language Design and Implementation](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---
 

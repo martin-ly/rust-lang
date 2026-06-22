@@ -49,13 +49,13 @@
 
 ## 🧠 1. 思维导图 (Mind Maps)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 Rust 1.94 核心语义思维导图
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 mindmap
@@ -166,9 +166,9 @@ mindmap
 
 ### 1.2 所有权语义思维导图
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 mindmap
@@ -219,9 +219,9 @@ mindmap
 
 ### 1.3 类型系统思维导图
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 mindmap
@@ -278,13 +278,13 @@ mindmap
 
 ## 📊 2. 多维矩阵对比 (Multi-dimensional Matrices)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 所有权语义矩阵
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | 所有权 | &T 借用 | &mut T 借用 | Copy 语义 | Move 语义 | `Rc<T>` | `Arc<T>` |
 |------|--------|---------|-------------|-----------|-----------|-------|--------|
@@ -298,9 +298,9 @@ mindmap
 
 ### 2.2 并发原语矩阵
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 原语 | Send | Sync | 阻塞 | 读写分离 | 适用场景 | Rust 1.94 状态 |
 |------|------|------|------|----------|----------|----------------|
@@ -315,9 +315,9 @@ mindmap
 
 ### 2.3 错误处理策略矩阵
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 策略 | `Option<T>` | `Result<T,E>` | panic! | ControlFlow | 适用场景 |
 |------|-----------|-------------|--------|-------------|----------|
@@ -330,9 +330,9 @@ mindmap
 
 ### 2.4 Rust 1.94 新特性影响矩阵
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 新特性 | 影响模块 | 内存安全 | 类型安全 | 性能 | 表达力 | 兼容性 |
 |--------|----------|----------|----------|------|--------|--------|
@@ -345,9 +345,9 @@ mindmap
 
 ### 2.5 语言特性对比矩阵 (vs 其他语言)
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | Rust 1.94 | C++20 | Go 1.22 | Java 21 | TypeScript 5.3 |
 |------|-----------|-------|---------|---------|----------------|
@@ -365,11 +365,11 @@ mindmap
 
 ## 🌳 3. 决策树图 (Decision Trees)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 3.1 所有权选择决策树
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```mermaid
 graph TD
@@ -403,7 +403,7 @@ graph TD
 
 ### 3.2 错误处理策略决策树
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```mermaid
 graph TD
@@ -427,7 +427,7 @@ graph TD
 
 ### 3.3 并发策略决策树
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```mermaid
 graph TD
@@ -453,7 +453,7 @@ graph TD
 
 ### 3.4 泛型边界决策树
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```mermaid
 graph TD
@@ -481,7 +481,7 @@ graph TD
 
 ### 3.5 Rust 1.94 迭代器选择决策树
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```mermaid
 graph TD
@@ -797,20 +797,20 @@ graph TD
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-> **[来源: Rust Reference]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-> **[来源: Rust Standard Library]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: ACM - Systems Programming]**
+> **来源: [ACM](https://dl.acm.org/)**
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-> **[来源: Rustonomicon]**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

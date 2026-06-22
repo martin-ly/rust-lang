@@ -49,7 +49,7 @@
 
 ## Send与Sync
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 Send: 可跨线程转移所有权
@@ -66,7 +66,7 @@ T: Send + Sync      T: Send + !Sync    !Send + !Sync
 
 ## 同步原语
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 原语 | 用途 | 场景 |
 | :--- | :--- | :--- |
@@ -80,7 +80,7 @@ T: Send + Sync      T: Send + !Sync    !Send + !Sync
 
 ## 创建线程
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 use std::thread;
@@ -107,7 +107,7 @@ thread::Builder::new()
 
 ## Send/Sync
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 类型 | `Send` | `Sync` | 说明 |
 | :--- | :--- | :--- | :--- |
@@ -123,13 +123,13 @@ thread::Builder::new()
 
 ## 共享状态
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Mutex
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use std::sync::{Arc, Mutex};
@@ -148,9 +148,9 @@ println!("{}", *num);
 
 ### RwLock
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 use std::sync::RwLock;
@@ -172,13 +172,13 @@ let r2 = data.read().unwrap();
 
 ## 通道通信
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### mpsc
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 use std::sync::mpsc;
@@ -201,9 +201,9 @@ for received in rx {
 
 ### 多生产者
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 let (tx, rx) = mpsc::channel();
@@ -225,7 +225,7 @@ for received in rx {
 
 ## 原子操作
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -253,7 +253,7 @@ counter.compare_exchange(
 
 ### 内存序
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | 顺序 | 保证 | 性能 |
 | :--- | :--- | :--- |
@@ -270,7 +270,7 @@ counter.compare_exchange(
 
 ### Barrier
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use std::sync::Barrier;
@@ -289,7 +289,7 @@ for _ in 0..3 {
 
 ### Condvar
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 use std::sync::{Arc, Condvar, Mutex};
@@ -338,7 +338,7 @@ COUNTER.with(|c| {
 
 ### 线程池
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use threadpool::ThreadPool;
@@ -356,7 +356,7 @@ pool.join();
 
 ### 并行迭代
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use rayon::prelude::*;
@@ -411,7 +411,7 @@ vec.par_iter_mut().for_each(|x| *x *= 2);
 
 ### 核心研究点
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 - rray_windows 的形式化语义
 - ControlFlow 的代数结构
@@ -433,13 +433,13 @@ vec.par_iter_mut().for_each(|x| *x *= 2);
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -490,9 +490,9 @@ vec.par_iter_mut().for_each(|x| *x *= 2);
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
-> **[来源: Rust Reference - std::sync]**
-> **[来源: ACM - Concurrent Programming]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [TRPL Ch. 16 - Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)**
+> **来源: [Rust Reference - std::sync](https://doc.rust-lang.org/std/sync/)**
+> **来源: [ACM - Concurrent Programming](https://dl.acm.org/)**
 
 ---

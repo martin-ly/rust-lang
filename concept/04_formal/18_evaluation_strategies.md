@@ -13,7 +13,7 @@
 > **双维定位**: F×Und — 形式化理解程序执行的求值规则
 > **前置概念**: [Lambda Calculus](./14_lambda_calculus.md) · [Variable Model](../01_foundation/20_variable_model.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Ownership Formalization](./03_ownership_formal.md) · [Control Flow](../01_foundation/07_control_flow.md)
-> **主要来源**: [Pierce TAPL, §5-§11] · [Harper PFPL, Part III] · [Wadler 1984 — Why Calculating is Better than Scheming] · [Wikipedia: Evaluation strategy]
+> **主要来源**: [Pierce TAPL, §5-§11] · [Harper PFPL, Part III] · [Wadler 1984 — Why Calculating is Better than Scheming] · [Wikipedia: Evaluation strategy](https://en.wikipedia.org/wiki/Evaluation_strategy)
 
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
@@ -230,7 +230,7 @@ Rust 明确规定了表达式的求值顺序：
 | 副作用顺序 | 不可预测（UB 风险） | 完全确定 |
 | 示例 | `foo(i++, i++)` // 未定义行为 | `foo(i, i)` // 编译错误（若涉及移动）或确定行为 |
 
-> **关键洞察**: Rust 的严格求值顺序消除了 C/C++ 中大量与求值顺序相关的 UB，是 Rust "无未定义行为"承诺的重要组成部分。[来源: Rust Reference §6.2.13] ✅
+> **关键洞察**: Rust 的严格求值顺序消除了 C/C++ 中大量与求值顺序相关的 UB，是 Rust "无未定义行为"承诺的重要组成部分。来源: [Rust Reference §6.2.13](https://doc.rust-lang.org/reference/) ✅
 
 ---
 
@@ -258,7 +258,7 @@ fn mutate(x: &mut i32) {
 ```
 
 > **形式化命题** [Tier 2]: Rust 的 `&mut T` 在类型系统中编码了**局部可变性效果**（local mutation effect），等价于将 CBR 的可变性限制在线性逻辑框架内。
-> **证明草图**: `&mut T` 满足线性逻辑的 `⊗`（张量积）规则：创建 `&mut T` 消耗 `T` 的所有权，归还 `&mut T` 恢复 `T` 的所有权。在此区间内，存储被独占修改，无别名干扰。[来源: RustBelt POPL 2018, §4]
+> **证明草图**: `&mut T` 满足线性逻辑的 `⊗`（张量积）规则：创建 `&mut T` 消耗 `T` 的所有权，归还 `&mut T` 恢复 `T` 的所有权。在此区间内，存储被独占修改，无别名干扰。来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
 
 ---
 
@@ -346,10 +346,10 @@ fn linear_move() {
 | 严格 vs 非严格求值 | [Harper PFPL] · [Pierce TAPL §11] | ✅ | Tier 1 |
 | CBV/CBN/CBV-need 定义 | [Pierce TAPL §11] · [Wadler 1984] | ✅ | Tier 1 |
 | Normal Order 正规化定理 | [Curry & Feys 1958] · [Barendregt 1984] | ✅ | Tier 1 |
-| Rust 求值顺序 | [Rust Reference §6.2.13] | ✅ | Tier 1 |
-| Rust 参数传递语义 | [Rust Reference §6.2] | ✅ | Tier 1 |
-| Rust 线性所有权 = CBV + 线性约束 | [RustBelt POPL 2018] · 原创分析 | ✅/💡 | Tier 2 |
-| `&mut T` 编码局部可变性效果 | [RustBelt] · [Moggi 1989] | ✅ | Tier 2 |
+| Rust 求值顺序 | [Rust Reference §6.2.13](https://doc.rust-lang.org/reference/) | ✅ | Tier 1 |
+| Rust 参数传递语义 | [Rust Reference §6.2](https://doc.rust-lang.org/reference/) | ✅ | Tier 1 |
+| Rust 线性所有权 = CBV + 线性约束 | [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · 原创分析 | ✅/💡 | Tier 2 |
+| `&mut T` 编码局部可变性效果 | [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [Moggi 1989] | ✅ | Tier 2 |
 | 跨语言对比矩阵 | [💡 原创分析] | ⚠️ | Tier 3 |
 
 ---

@@ -7,7 +7,7 @@
 
 ## 📋 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [11 隐式终止模式 (Implicit Termination)](#11-隐式终止模式-implicit-termination)
   - [� 目录](#-目录)
@@ -39,16 +39,16 @@
 
 ## 模式定义与语义
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 隐式终止模式允许工作流在没有显式终止节点的情况下完成。
 当所有活跃路径都自然结束时，工作流被视为完成。
 
 ### 核心语义
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 $$
 \text{ImplicitTermination} = \text{when } \nexists \text{ active tokens}: \text{workflow completes}
@@ -70,7 +70,7 @@ $$
 
 ### 与显式终止的区别
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | 特性 | 显式终止 | 隐式终止 |
 |------|----------|----------|
@@ -86,7 +86,7 @@ $$
 
 ### Dijkstra-Scholten 算法
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 Dijkstra-Scholten 算法是一种经典的分布式终止检测算法：
 
@@ -126,7 +126,7 @@ $$
 
 ### 分布式终止检测
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **Chandy-Misra-Haas 算法：**
 
@@ -157,7 +157,7 @@ $$
 
 ### 死锁检测
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **死锁四条件（Coffman 条件）：**
 
@@ -193,7 +193,7 @@ fn detect_deadlock(wait_graph: &Graph<ProcessId>) -> Option<Vec<ProcessId>> {
 
 ### 避免策略
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **银行家算法：**
 
@@ -294,7 +294,7 @@ fn detect_deadlock(wait_graph: &Graph<ProcessId>) -> Option<Vec<ProcessId>> {
 
 ### 状态机形式化
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 $$
 \begin{aligned}
@@ -315,7 +315,7 @@ $$
 
 ### 进程代数
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **CSP 形式化：**
 
@@ -378,7 +378,7 @@ Terminated = if deadlock(System) then STOP else RUN
 
 ### 基础实现
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -497,7 +497,7 @@ pub async fn implicit_termination_example() {
 
 ### 分布式终止检测
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 use std::collections::HashMap;
@@ -814,21 +814,21 @@ $$
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Design Pattern]**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 
-> **[来源: Rust API Guidelines]**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 
-> **[来源: Gang of Four - Design Patterns]**
+> **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
 
-> **[来源: ACM - Software Design Patterns]**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---
 

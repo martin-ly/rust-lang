@@ -35,7 +35,7 @@
 
 ## 🎯 索引宗旨 {#-索引宗旨}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本索引针对用户反馈的核心问题：
 
@@ -48,7 +48,7 @@
 
 ## 📐 四维缺口分类 {#-四维缺口分类}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 维度 | 缺口类型 | 含义 | 示例 | 目标文档 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -232,13 +232,13 @@
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -249,7 +249,7 @@
 
 #### 代码示例更新
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 本文档中的所有Rust代码示例均已：
 
@@ -259,7 +259,7 @@
 
 #### 相关文档
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查
@@ -289,13 +289,13 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ---

@@ -157,11 +157,11 @@ graph TD
 
 ---
 
-> **[来源: TRPL 官方文档; Rust by Example]** 不同背景的学习者有不同的概念迁移路径。
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** 不同背景的学习者有不同的概念迁移路径。
 
 ## 二、按背景的详细起点指南
 
-### 2.1 完全新手路径（无系统编程经验） [来源: TRPL Ch1-3; Rust by Example; 前置依赖: 无; 认知负荷管理参照 Sweller — *Cognitive Load Theory* / 1988]
+### 2.1 完全新手路径（无系统编程经验） 来源: [TRPL Ch1-3; Rust by Example; 前置依赖: 无; 认知负荷管理参照 Sweller — *Cognitive Load Theory* / 1988](https://doc.rust-lang.org/book/ch01-00-getting-started.html)
 
 **核心挑战**: 没有指针、内存布局、编译期的直觉。需要从最基础的概念建立心智模型。
 

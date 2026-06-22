@@ -19,7 +19,7 @@
 > [Pin/Unpin](../03_advanced/06_pin_unpin.md)
 > **主要来源**: [Rust Foundation Interop Initiative] ·
 > [Itanium C++ ABI Spec] ·
-> [Rust Reference — Type Layout] ·
+> [Rust Reference — Type Layout](https://doc.rust-lang.org/reference/type-layout.html) ·
 > [System V AMD64 ABI] ·
 > [simplifycpp.org C++_Rust.pdf]
 
@@ -265,7 +265,7 @@ struct Packed {
 | C++ | 字段顺序 = 声明顺序 | `#pragma pack` / `alignas` |
 | Rust | 编译器可重排字段以优化大小 | `#[repr(C)]` 禁止重排 / `#[repr(packed)]` 无 padding |
 
-> **关键洞察**: Rust 编译器默认会重排结构体字段以最小化 padding，而 C/C++ 保持声明顺序。这导致相同字段声明顺序的 Rust 结构体和 C 结构体可能有不同的内存布局——`#[repr(C)]` 是确保 FFI 兼容的必要条件。[来源: Rust Reference — §4.2.1] ✅
+> **关键洞察**: Rust 编译器默认会重排结构体字段以最小化 padding，而 C/C++ 保持声明顺序。这导致相同字段声明顺序的 Rust 结构体和 C 结构体可能有不同的内存布局——`#[repr(C)]` 是确保 FFI 兼容的必要条件。来源: [Rust Reference — §4.2.1](https://doc.rust-lang.org/reference/) ✅
 
 ---
 
@@ -351,7 +351,7 @@ enum Value {
 
 > **关键洞察**: Rust 的 enum 布局优化（null pointer optimization）是 Rust 类型系统优越性的典型体现：`Option<&T>` 和 `Option<Box<T>>` 的大小与 `&T` / `Box<T>` 相同，利用指针的非零特性将 `None` 编码为 null 指针。
 > C++ `std::optional<T*>` 无法实现此优化（标准不保证）。
-> [来源: Rust Reference — §4.2.1] ✅
+> 来源: [Rust Reference — §4.2.1](https://doc.rust-lang.org/reference/) ✅
 
 ---
 
@@ -548,9 +548,9 @@ pub struct CDrawable {
 |:---|:---|:---:|:---:|
 | C++ 无标准 ABI | [Rust Foundation Interop Initiative] | ✅ | Tier 1 |
 | Itanium ABI 规范 | [Itanium C++ ABI Spec] | ✅ | Tier 1 |
-| Rust 类型布局 | [Rust Reference §4.2.1] | ✅ | Tier 1 |
-| dyn Trait 胖指针 | [Rust Reference §4.1.13] | ✅ | Tier 1 |
-| null pointer optimization | [Rust Reference §4.2.1] | ✅ | Tier 1 |
+| Rust 类型布局 | [Rust Reference §4.2.1](https://doc.rust-lang.org/reference/) | ✅ | Tier 1 |
+| dyn Trait 胖指针 | [Rust Reference §4.1.13](https://doc.rust-lang.org/reference/) | ✅ | Tier 1 |
+| null pointer optimization | [Rust Reference §4.2.1](https://doc.rust-lang.org/reference/) | ✅ | Tier 1 |
 | C++ vs Rust 移动 ABI | [💡 原创分析] | ⚠️ | Tier 3 |
 | 对象切片不可能性 | [💡 原创分析] | ⚠️ | Tier 3 |
 

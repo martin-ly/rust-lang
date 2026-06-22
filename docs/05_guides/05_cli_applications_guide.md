@@ -50,7 +50,7 @@
 
 ## 文档定位
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本指南为官方 **Command Line Book** 的补充与项目内导航，帮助在开发 Rust 命令行应用时快速定位到本项目的相关模块和示例。
 
@@ -61,7 +61,7 @@
 
 ## 官方 CLI Book 入口
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 资源 | URL | 说明 |
 | :--- | :--- | :--- |
@@ -72,7 +72,7 @@
 
 ## 本项目对应模块
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | CLI 开发主题 | 官方 CLI Book | 本项目对应 |
 | :--- | :--- | :--- |
@@ -87,13 +87,13 @@
 
 ## 快速开始示例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 最小 CLI 应用
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 use std::env;
@@ -112,9 +112,9 @@ fn main() {
 
 ### 2. 使用 clap 构建专业 CLI
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```toml
 [dependencies]
@@ -168,9 +168,9 @@ fn main() {
 
 ### 3. 异步 CLI 示例
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```toml
 [dependencies]
@@ -205,9 +205,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 4. 带进度条的 CLI
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```toml
 [dependencies]
@@ -238,9 +238,9 @@ fn main() {
 
 ### 5. 错误处理最佳实践
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use thiserror::Error;
@@ -283,7 +283,7 @@ fn main() {
 
 ## 推荐学习路径
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **入门**: 通读 [Command Line Book](https://rust-cli.github.io/book/) 快速教程
 2. **巩固**: 学习 C07 进程管理（std::process、std::io）
@@ -294,7 +294,7 @@ fn main() {
 
 ## 常用 crate 推荐
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 用途 | crate | 说明 |
 | :--- | :--- | :--- |
@@ -314,7 +314,7 @@ fn main() {
 
 ### 1. 使用 `?` 操作符传播错误
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 fn read_config(path: &str) -> Result<Config, Box<dyn std::error::Error>> {
@@ -326,7 +326,7 @@ fn read_config(path: &str) -> Result<Config, Box<dyn std::error::Error>> {
 
 ### 2. 提供有意义的错误信息
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 fn main() {
@@ -339,7 +339,7 @@ fn main() {
 
 ### 3. 使用 exit codes
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 use std::process::ExitCode;
@@ -363,7 +363,7 @@ fn main() -> ExitCode {
 
 ### 场景1: 简单命令行工具
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 快速构建文件处理工具：
 
@@ -374,7 +374,7 @@ fn main() -> ExitCode {
 
 ### 场景2: 专业级 CLI 应用
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 构建类似 `cargo` 或 `rg` 的专业工具：
 
@@ -521,17 +521,17 @@ pub fn get_config() -> Option<&'static CliConfig> {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Command-Line Interface]**
+> **来源: [Wikipedia - Command-Line Interface](https://en.wikipedia.org/wiki/Command_Line_Interface)**
 > **[来源: clap.rs Documentation]**
-> **[来源: TRPL Ch. 12 - CLI]**
-> **[来源: Rust Reference - std::env]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [TRPL Ch. 12 - CLI](https://doc.rust-lang.org/book/ch12-00-an-io-project.html)**
+> **来源: [Rust Reference - std::env](https://doc.rust-lang.org/reference/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

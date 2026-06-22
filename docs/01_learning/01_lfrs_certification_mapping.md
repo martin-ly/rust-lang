@@ -6,7 +6,7 @@
 > **创建日期**: 2026-04-24
 > **用途**: 将 LFRS 认证的 10 大考点映射到本项目内容，建立可量化的学习验证体系
 > **认证官网**: <https://www.linuxfoundation.org/certification/linux-foundation-certified-rust-programmer>
-> **[来源: Linux Foundation]** · **[来源: Rust Reference]** · **[来源: TRPL]** · **[来源: Rust Standard Library]**
+> **[来源: Linux Foundation]** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]
@@ -62,7 +62,7 @@
 
 ## 考点总览
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 编号 | 考点 | 掌握程度 | 项目覆盖度 |
 | :--- | :--- | :--- | :--- |
@@ -81,15 +81,15 @@
 
 ## 考点 1: 语法、类型与控制流
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **掌握程度**: ✅ 完整
 
 ### 映射文件
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 子主题 | 项目文件路径 | 说明 |
 | :--- | :--- | :--- |
@@ -101,7 +101,7 @@
 
 ### 练习验证
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 - `exercises/src/ownership_borrowing/ex01_borrow_checker_fix.rs` (Easy)
 - `exercises/src/type_system/ex01_enum_pattern_match.rs` (Easy)
@@ -117,7 +117,7 @@
 
 ### 映射文件
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 子主题 | 项目文件路径 | 说明 |
 | :--- | :--- | :--- |
@@ -130,7 +130,7 @@
 
 ### 练习验证
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - `exercises/src/ownership_borrowing/ex01_borrow_checker_fix.rs` (Easy)
 - `exercises/src/ownership_borrowing/ex02_string_slice.rs` (Easy)
@@ -151,7 +151,7 @@
 
 ### 映射文件
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | 子主题 | 项目文件路径 | 说明 |
 | :--- | :--- | :--- |
@@ -163,7 +163,7 @@
 
 ### 练习验证
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 - `exercises/src/type_system/ex01_enum_pattern_match.rs` (Easy)
 - `exercises/src/type_system/ex02_struct_methods.rs` (Easy)
@@ -179,7 +179,7 @@
 
 ### 映射文件
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | 子主题 | 项目文件路径 | 说明 |
 | :--- | :--- | :--- |
@@ -190,7 +190,7 @@
 
 ### 练习验证
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - 本项目本身就是一个 13+ crate 的 workspace，是最佳实践范例
 - `exercises/src/lib.rs` 展示了模块组织方式
@@ -484,13 +484,13 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

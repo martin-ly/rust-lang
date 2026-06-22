@@ -40,17 +40,17 @@
 
 ## 1. 概念定义 (Def)
 
-> **[来源: Rust Official Docs]** ·
-> **[来源: Wikipedia - Retry Pattern]** ·
-> **[来源: Wikipedia - Circuit Breaker Pattern]** ·
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
+> **来源: [Wikipedia - Retry Pattern](https://en.wikipedia.org/wiki/Retry_Pattern)** ·
+> **来源: [Wikipedia - Circuit Breaker Pattern](https://en.wikipedia.org/wiki/Circuit_Breaker_Pattern)** ·
 > **[来源: ACM - Fault-Tolerant Design Patterns]** ·
 > **[来源: IEEE - Resilient Software Architecture]**
 
 ### Def RT1: Retry
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 重试是一种**故障恢复机制**，当操作失败时，按策略重新执行操作。
 
@@ -64,9 +64,9 @@ Retry := (Op, policy, predicate)
 
 ### Def RT2: 退避策略
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 BackoffStrategy :=
@@ -78,7 +78,7 @@ BackoffStrategy :=
 
 ### Def RT3: 抖动 (Jitter)
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```text
 Jitter := None | Full | Equal | Decorrelated
@@ -96,7 +96,7 @@ Jitter := None | Full | Equal | Decorrelated
 
 ### Axiom RT1: 重试次数有界
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```text
 attempts ≤ max_attempts
@@ -106,7 +106,7 @@ attempts ≤ max_attempts
 
 ### Axiom RT2: 幂等性要求
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```text
 ∀Op ∈ Retry. Idempotent(Op) ∨ (predicate only for transient errors)
@@ -116,7 +116,7 @@ attempts ≤ max_attempts
 
 ### Axiom RT3: 退避单调性
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```text
 n < m → backoff(n) ≤ backoff(m)
@@ -403,13 +403,13 @@ pub fn is_retryable_error<E: std::error::Error>(e: &E) -> bool {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Design Pattern]**
-> **[来源: Rust API Guidelines]**
-> **[来源: Gang of Four]**
-> **[来源: ACM - Software Design Patterns]**
-> **[来源: Wikipedia - Design Pattern]**
-> **[来源: Rust API Guidelines]**
-> **[来源: Gang of Four - Design Patterns]**
-> **[来源: ACM - Software Design Patterns]**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
+> **来源: [Gang of Four](https://en.wikipedia.org/wiki/Design_Patterns)**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
+> **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
 
 ---

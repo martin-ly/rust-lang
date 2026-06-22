@@ -39,13 +39,13 @@
 
 ## 1. 概念定义 (Def)
 >
-> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Outbox Pattern]** · **[来源: Wikipedia - Event Sourcing]** · **[来源: ACM - Distributed Transaction Patterns]** · **[来源: IEEE - Message Delivery Guarantees]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Outbox Pattern](https://en.wikipedia.org/wiki/Outbox_Pattern)** · **来源: [Wikipedia - Event Sourcing](https://en.wikipedia.org/wiki/Event_Sourcing)** · **[来源: ACM - Distributed Transaction Patterns]** · **[来源: IEEE - Message Delivery Guarantees]**
 
 ### Def OB1: Outbox
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Outbox（发件箱）模式是一种**事务性消息投递模式**，确保数据库更新和消息发送的**原子性**。
 
@@ -60,9 +60,9 @@ Outbox := (T_db, T_outbox, M, P_relay)
 
 ### Def OB2: 事务边界
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 Transaction := (db_ops, outbox_ops)
@@ -77,7 +77,7 @@ Transaction := (db_ops, outbox_ops)
 
 ### Def OB3: 消息状态
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```text
 MessageStatus :=
@@ -94,7 +94,7 @@ MessageStatus :=
 
 ### Axiom OB1: 事务原子性
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```text
 (db_ops ∧ outbox_ops) 要么同时成功，要么同时失败
@@ -102,7 +102,7 @@ MessageStatus :=
 
 ### Axiom OB2: 中继幂等性
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```text
 ∀m ∈ M. relay(m) = success → relay(m) = success (idempotent)
@@ -112,7 +112,7 @@ MessageStatus :=
 
 ### Axiom OB3: 最终投递
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```text
 ∀msg ∈ T_outbox. status = Pending → ◇(status = Published)
@@ -128,7 +128,7 @@ MessageStatus :=
 
 ### Theorem OB1: 消息不丢失
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```text
 db_ops 成功 → ◇(msg ∈ M)
@@ -143,7 +143,7 @@ db_ops 成功 → ◇(msg ∈ M)
 
 ### Theorem OB2: 消息不重复
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```text
 msg.id 唯一 → 消费者收到 msg 一次且仅一次
@@ -295,7 +295,7 @@ Outbox 模式常与 Saga 配合使用：
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
@@ -351,9 +351,9 @@ Outbox 模式常与 Saga 配合使用：
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Design Pattern]**
-> **[来源: Rust API Guidelines]**
-> **[来源: Gang of Four]**
-> **[来源: ACM - Software Design Patterns]**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
+> **来源: [Gang of Four](https://en.wikipedia.org/wiki/Design_Patterns)**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
 
 ---

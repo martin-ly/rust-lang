@@ -18,13 +18,13 @@
 > **对比维度**: 内存安全模型、所有权系统、类型系统、并发模型、应用场景
 > **目标读者**: Swift 开发者学习 Rust，跨平台开发者技术选型
 > **文档版本**: 2.0.0 (L2+ 深度)
-> **[来源: Wikipedia - Rust (programming language)]** ·
-> **[来源: Wikipedia - Swift (programming language)]** ·
-> **[来源: Rust Reference]** ·
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** ·
+> **来源: [Wikipedia - Swift (programming language)](https://en.wikipedia.org/wiki/Swift_(programming_language))** ·
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** ·
 > **[来源: Swift Documentation - swift.org]** ·
 > **[来源: IEEE Software - Language Comparison]** ·
-> **[来源: Stack Overflow Developer Survey 2025]** ·
-> **[来源: Wikipedia - Automatic Reference Counting]** ·
+> **来源: [Stack Overflow Developer Survey 2025](https://survey.stackoverflow.co/2025/)** ·
+> **来源: [Wikipedia - Automatic Reference Counting](https://en.wikipedia.org/wiki/Automatic_Reference_Counting)** ·
 > **[来源: ACM - Modern Systems Language Design]** ·
 > **[来源: IEEE - Language Interoperability]**
 
@@ -32,12 +32,12 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** ·
-> **[来源: Wikipedia - Rust (programming language)]** ·
-> **[来源: Rustonomicon]** ·
-> **[来源: TRPL]** ·
-> **[来源: RFCs - github.com/rust-lang/rfcs]** ·
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** ·
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** ·
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** ·
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** ·
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** ·
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [Rust vs Swift: 现代系统语言深度对比](#rust-vs-swift-现代系统语言深度对比)
   - [目录](#目录)
@@ -89,12 +89,12 @@
 
 ## 1. 执行摘要
 >
-> **[来源: Rust Reference]** ·
-> **[来源: Wikipedia - Rust (programming language)]** ·
-> **[来源: Rustonomicon]** ·
-> **[来源: TRPL]** ·
-> **[来源: RFCs - github.com/rust-lang/rfcs]** ·
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** ·
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** ·
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** ·
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** ·
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** ·
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -127,11 +127,11 @@
 
 ## 2. 内存安全模型对比
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 2.1 核心安全机制
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -177,7 +177,7 @@
 
 ### 2.2 所有权 vs ARC
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **Swift ARC 示例:**
 
@@ -285,7 +285,7 @@ fn ownership_demo() {
 
 ### 2.3 循环引用解决
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **Swift 解决方案:**
 
@@ -399,7 +399,7 @@ struct NodeData {
 
 ### 2.4 内存安全保证对比
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | 安全问题 | Rust | Swift |
 |---------|------|-------|
@@ -418,7 +418,7 @@ struct NodeData {
 
 ### 3.1 值类型与引用类型
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **Swift 值类型 vs 引用类型:**
 
@@ -497,7 +497,7 @@ fn print_name(person: &Person) {
 
 ### 3.2 引用语义对比
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 | 特性 | Swift | Rust |
 |-----|-------|------|
@@ -510,7 +510,7 @@ fn print_name(person: &Person) {
 
 ### 3.3 借用检查 vs ARC
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **Swift 引用:**
 
@@ -564,7 +564,7 @@ fn modify(data: &mut Vec<i32>) {
 
 ### 3.4 内部可变性
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **Swift:**
 
@@ -663,7 +663,7 @@ fn use_counter() {
 
 ### 4.1 类型系统概览
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 特性 | Rust | Swift |
 |-----|------|-------|
@@ -677,7 +677,7 @@ fn use_counter() {
 
 ### 4.2 代数数据类型
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **Swift enum:**
 
@@ -748,7 +748,7 @@ if let Ok(data) = result {
 
 ### 4.3 泛型与协议/Trait
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **Swift 协议:**
 
@@ -827,7 +827,7 @@ let drawables: Vec<Box<dyn Drawable>> = vec![
 
 ### 4.4 类型推断
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **Swift:**
 
@@ -862,7 +862,7 @@ vec.push(1);               // 现在 Vec<i32>
 
 ### 4.5 空值安全
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **Swift Optional:**
 
@@ -930,7 +930,7 @@ fn process(name: Option<String>) -> Option<usize> {
 
 ### 5.1 并发安全模型
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -973,7 +973,7 @@ fn process(name: Option<String>) -> Option<usize> {
 
 ### 5.2 Swift Actor vs Rust Send/Sync
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **Swift Actor:**
 
@@ -1081,7 +1081,7 @@ fn non_send_demo() {
 
 ### 5.3 异步编程对比
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **Swift async/await:**
 
@@ -1182,7 +1182,7 @@ fn main() {
 
 ### 6.1 错误处理机制
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **Swift:**
 
@@ -1262,7 +1262,7 @@ fn process_files() -> Result<(), io::Error> {
 
 ### 6.2 错误传播
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **Swift:**
 
@@ -1317,7 +1317,7 @@ fn operation_c() -> Result<()> {
 
 ### 7.1 内存管理开销
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | 操作 | Rust | Swift |
 |-----|------|-------|
@@ -1328,7 +1328,7 @@ fn operation_c() -> Result<()> {
 
 ### 7.2 运行时特性
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -1352,7 +1352,7 @@ fn operation_c() -> Result<()> {
 
 ### 7.3 ARC vs 所有权性能
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **Swift ARC 开销:**
 
@@ -1419,7 +1419,7 @@ fn process_shared(head: Option<Rc<SharedNode>>) {
 
 ### 8.1 数据结构：链表
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **Swift:**
 
@@ -1487,7 +1487,7 @@ impl<T> LinkedList<T> {
 
 ### 8.2 并发：安全计数器
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **Swift:**
 
@@ -1569,7 +1569,7 @@ fn use_counter() {
 
 ### 8.3 异步网络请求
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **Swift:**
 
@@ -1631,7 +1631,7 @@ async fn fetch_multiple_users() -> Result<Vec<User>, reqwest::Error> {
 
 ### 8.4 资源管理
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **Swift:**
 
@@ -1711,7 +1711,7 @@ fn explicit_drop() {
 
 ### 9.1 选择 Rust 的场景
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```text
 ✅ 选择 Rust 当:
@@ -1744,7 +1744,7 @@ fn explicit_drop() {
 
 ### 9.2 选择 Swift 的场景
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```text
 ✅ 选择 Swift 当:
@@ -1774,7 +1774,7 @@ fn explicit_drop() {
 
 ### 9.3 跨平台策略
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```text
 混合架构:
@@ -1807,7 +1807,7 @@ fn explicit_drop() {
 
 ### 10.1 Swift → Rust 思维转换
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────┐
@@ -1833,7 +1833,7 @@ fn explicit_drop() {
 
 ### 10.2 常见模式映射
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | Swift | Rust |
 |-------|------|
@@ -1916,18 +1916,18 @@ fn explicit_drop() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Swift (programming language)]**
-> **[来源: Wikipedia - Automatic Reference Counting]**
+> **来源: [Wikipedia - Swift (programming language)](https://en.wikipedia.org/wiki/Swift_(programming_language))**
+> **来源: [Wikipedia - Automatic Reference Counting](https://en.wikipedia.org/wiki/Automatic_Reference_Counting)**
 > **[来源: Apple Swift Documentation]**
 > **[来源: IEEE - Language Interoperability]**
 > **[来源: ACM - Modern Systems Language Design]**
 > **[来源: Swift.org - Evolution Proposals]**
-> **[来源: Rust Reference - Unsafe Rust]**
-> **[来源: TRPL - Ownership]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [Rust Reference - Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-blocks.html)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ---

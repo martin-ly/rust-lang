@@ -57,13 +57,13 @@
 
 ## 形式化定义
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Def 1.1（Proxy 结构）
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 设 $P$ 为代理类型，$T$ 为目标类型。Proxy 是一个四元组 $\mathcal{PR} = (P, T, \mathit{access}, \mathit{delegate})$，满足：
 
@@ -79,9 +79,9 @@ $$\mathcal{PR} = \langle P, T, \mathit{access}: P \times T, \mathit{delegate}: P
 
 ### Axiom PR1（接口一致公理）
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 $$\forall p: P,\, p: \mathrm{impl}\,T \land \mathit{behavior}(p) \equiv_{\mathrm{obs}} \mathit{behavior}(t: T)$$
 
@@ -89,9 +89,9 @@ $$\forall p: P,\, p: \mathrm{impl}\,T \land \mathit{behavior}(p) \equiv_{\mathrm
 
 ### Axiom PR2（委托规则公理）
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 $$\mathit{delegate}(p) \text{ 满足借用/所有权规则；无循环依赖}$$
 
@@ -101,9 +101,9 @@ $$\mathit{delegate}(p) \text{ 满足借用/所有权规则；无循环依赖}$$
 
 ### 定理 PR-T1（委托安全定理）
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 委托时借用/所有权规则保证正确性。由 [borrow_checker_proof](../../../formal_methods/10_borrow_checker_proof.md)。
 
@@ -135,9 +135,9 @@ $$\mathit{delegate}(p) \text{ 满足借用/所有权规则；无循环依赖}$$
 
 ### 定理 PR-T2（访问控制定理）
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 保护代理可在委托前执行权限检查。
 
@@ -164,9 +164,9 @@ $$\mathit{delegate}(p) \text{ 满足借用/所有权规则；无循环依赖}$$
 
 ### 推论 PR-C1（纯 Safe Proxy）
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Proxy 为纯 Safe；`OnceLock` 延迟加载、委托调用，无 `unsafe`。
 
@@ -183,9 +183,9 @@ Proxy 为纯 Safe；`OnceLock` 延迟加载、委托调用，无 `unsafe`。
 
 ### 概念定义-属性关系-解释论证 层次汇总
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
@@ -197,7 +197,7 @@ Proxy 为纯 Safe；`OnceLock` 延迟加载、委托调用，无 `unsafe`。
 
 ## Rust 实现与代码示例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 trait Subject {
@@ -238,11 +238,11 @@ assert_eq!(p.request(), "real");
 
 ## 完整证明
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 形式化论证链
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```text
 Axiom PR1 (接口一致)
@@ -262,7 +262,7 @@ borrow_checker_proof
 
 ### 与 Rust 类型系统的联系
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | Rust 特性 | Proxy 实现 | 类型安全保证 |
 | :--- | :--- | :--- |
@@ -273,7 +273,7 @@ borrow_checker_proof
 
 ### 内存安全保证
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 1. **延迟加载安全**：`OnceLock` 保证初始化一次
 2. **访问控制**：权限检查在委托前
@@ -458,13 +458,13 @@ graph LR
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -475,7 +475,7 @@ graph LR
 
 #### 代码示例更新
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 本文档中的所有Rust代码示例均已：
 
@@ -485,7 +485,7 @@ graph LR
 
 #### 相关文档
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - Rust 1.94 迁移指南
 - [性能调优指南](../../../../05_guides/05_performance_tuning_guide.md)
@@ -518,14 +518,14 @@ graph LR
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Design Pattern]**
-> **[来源: Rust API Guidelines]**
-> **[来源: Gang of Four]**
-> **[来源: ACM - Software Design Patterns]**
-> **[来源: Wikipedia - Formal Methods]**
-> **[来源: Coq Reference]**
-> **[来源: TLA+]**
-> **[来源: ACM - Formal Verification]**
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
+> **来源: [Gang of Four](https://en.wikipedia.org/wiki/Design_Patterns)**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ---

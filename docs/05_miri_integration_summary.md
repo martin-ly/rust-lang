@@ -35,13 +35,13 @@
 
 ## 完成的工作
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. Miri 配置
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **文件**: `.cargo/config.toml`
 
@@ -67,9 +67,9 @@ MIRIFLAGS = { value = "-Zmiri-tree-borrows -Zmiri-disable-isolation", force = fa
 
 ### 2. Miri 测试文件
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 为以下 crate 创建了 `miri_tests.rs` 文件：
 
@@ -89,7 +89,7 @@ MIRIFLAGS = { value = "-Zmiri-tree-borrows -Zmiri-disable-isolation", force = fa
 
 ### 3. Lib.rs 模块声明
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 在每个 crate 的 `lib.rs` 中添加了：
 
@@ -100,7 +100,7 @@ pub mod miri_tests;
 
 ### 4. 运行脚本
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **文件**: `scripts/run-miri.sh` (Linux/macOS)
 
@@ -118,7 +118,7 @@ pub mod miri_tests;
 
 ### 5. 文档
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **文件**: `docs/03_miri_guide.md`
 
@@ -290,9 +290,9 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Undefined Behavior]**
-> **[来源: Miri Documentation]**
-> **[来源: Rust Reference - Miri]**
-> **[来源: RFC 2585 - Unsafe Code Guidelines]**
+> **来源: [Wikipedia - Undefined Behavior](https://en.wikipedia.org/wiki/Undefined_Behavior)**
+> **来源: [Miri Documentation](https://github.com/rust-lang/miri)**
+> **来源: [Rust Reference - Miri](https://doc.rust-lang.org/reference/)**
+> **来源: [RFC 2585 - Unsafe Code Guidelines](https://rust-lang.github.io/rfcs/2585-2585-unsafe-block-in-unsafe-fn.html)**
 
 ---

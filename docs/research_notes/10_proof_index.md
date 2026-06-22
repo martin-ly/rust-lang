@@ -75,7 +75,7 @@
 
 ## 🔢 公理编号规范 (Axiom Numbering Convention) {#-公理编号规范-axiom-numbering-convention}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **用途**: 统一证明树、证明图网中的形式化引用，便于交叉引用与追溯。
 
@@ -96,7 +96,7 @@
 
 ## 📐 证明深度层次 (Proof Depth) {#-证明深度层次-proof-depth}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **用途**: 区分证明充分性，便于对标国际机器可检查证明。见 [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./10_formal_proof_critical_analysis_and_plan_2026_02.md)。
 
@@ -112,7 +112,7 @@
 
 ## 🎯 索引说明 {#-索引说明}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档索引了所有已完成的形式化证明，帮助研究者快速查找和参考相关证明工作。
 
@@ -133,19 +133,19 @@
 
 ## 📚 按研究领域分类 {#-按研究领域分类}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 所有权与借用
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 所有权模型形式化
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **文档**: [10_ownership_model.md](./formal_methods/10_ownership_model.md)
 
@@ -205,9 +205,9 @@
 
 #### 借用检查器证明
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **文档**: [10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md)
 
@@ -266,15 +266,15 @@
 
 ### 生命周期
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 生命周期形式化
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **文档**: 10_lifetime_formalization.md（形式化方法视角，含 Axiom LF1–LF2、引理 LF-L1、推论 LF-C1）；[type_theory/10_lifetime_formalization.md](./type_theory/10_lifetime_formalization.md)（类型论视角，含 Axiom LT1–LT2、定理 LT-T1/T2、引理 LT-L1、推论 LT-C1/C2）
 
@@ -303,13 +303,13 @@
 
 ### 类型系统
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 类型系统基础
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **文档**: [10_type_system_foundations.md](./type_theory/10_type_system_foundations.md)
 
@@ -367,11 +367,11 @@
 
 ### 异步状态机与 Pin
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 #### 异步状态机形式化
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **文档**: [10_async_state_machine.md](./formal_methods/10_async_state_machine.md)
 
@@ -398,7 +398,7 @@
 
 #### Pin 和自引用类型形式化
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **文档**: [10_pin_self_referential.md](./formal_methods/10_pin_self_referential.md)
 
@@ -421,11 +421,11 @@
 
 ### 类型理论扩展
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 #### Trait 系统形式化
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **文档**: [10_trait_system_formalization.md](./type_theory/10_trait_system_formalization.md)
 
@@ -444,7 +444,7 @@
 
 #### 型变理论
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **文档**: [10_variance_theory.md](./type_theory/10_variance_theory.md)
 
@@ -459,7 +459,7 @@
 
 #### 类型理论完备性缺口
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **文档**: [00_completeness_gaps.md](./formal_methods/00_completeness_gaps.md)
 
@@ -473,7 +473,7 @@
 
 #### 类型构造能力
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **文档**: [10_construction_capability.md](./type_theory/10_construction_capability.md)
 
@@ -486,7 +486,7 @@
 
 #### 高级类型特性
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **文档**: [10_advanced_types.md](./type_theory/10_advanced_types.md)
 
@@ -504,7 +504,7 @@
 
 #### 软件设计理论
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **文档**: [02_effectiveness_proofs.md](./software_design_theory/04_compositional_engineering/02_effectiveness_proofs.md)、[01_formal_composition.md](./software_design_theory/04_compositional_engineering/01_formal_composition.md)
 
@@ -541,7 +541,7 @@
 
 #### 边界系统
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **文档**: [05_boundary_system](./software_design_theory/05_boundary_system/README.md)、[04_boundary_matrix](./software_design_theory/01_design_patterns_formal/04_boundary_matrix.md)、[06_boundary_analysis](./software_design_theory/03_execution_models/06_boundary_analysis.md)
 
@@ -559,7 +559,7 @@
 
 #### 语义与表达能力
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 **文档**: [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md)
 
@@ -571,7 +571,7 @@
 
 #### 顶层框架
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **文档**: [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./10_comprehensive_systematic_overview.md)、[UNIFIED_SYSTEMATIC_FRAMEWORK](./10_unified_systematic_framework.md)
 
@@ -587,7 +587,7 @@
 
 #### 实际应用案例
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **文档**: [practical_applications](./10_practical_applications.md)
 
@@ -700,7 +700,7 @@
 
 ### 唯一性证明
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 - ✅ **所有权唯一性** `L2` ([10_ownership_model.md](./formal_methods/10_ownership_model.md)、[CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) §2)
   - 方法：结构归纳法

@@ -7,15 +7,15 @@
 
 ## 1. 引言
 
-SQLx 是 Rust 生态中的异步 SQL 工具包，年下载量超过 3000 万次 [来源: crates.io 统计, 2025]。与其他 Rust ORM（如 Diesel）不同，SQLx 采用**查询优先（query-first）**
+SQLx 是 Rust 生态中的异步 SQL 工具包，年下载量超过 3000 万次 来源: [crates.io 统计, 2025](https://crates.io/)。与其他 Rust ORM（如 Diesel）不同，SQLx 采用**查询优先（query-first）**
 哲学：开发者编写原生 SQL，SQLx 在编译期检查查询的语法正确性、类型安全性以及与数据库 schema 的兼容性。
 这种设计消除了运行时 SQL 语法错误的全部可能性，同时保留了 SQL 的全部表达能力——无需学习 DSL，无需受限于 ORM 的查询生成能力边界。
 
 SQLx 的核心理念可概括为：**SQL 是源语言，Rust 类型是派生产物**。
 通过宏系统在编译期连接数据库、执行查询计划分析，SQLx 将数据库 schema 的知识静态编码到 Rust 类型系统中，实现真正的编译期验证。
 
-> [来源: SQLx 官方文档, https://docs.rs/sqlx/latest/sqlx/]
-> [来源: SQLx GitHub README, https://github.com/launchbadge/sqlx]
+> 来源: SQLx 官方文档, https: /  / [docs.rs](https://docs.rs/) / [sqlx](https://github.com/launchbadge/sqlx) / latest / [sqlx](https://github.com/launchbadge/sqlx) / 
+> 来源: SQLx GitHub README, https: /  / github.com / launchbadge / [sqlx](https://github.com/launchbadge/sqlx)
 
 ---
 
@@ -82,7 +82,7 @@ graph TB
 | 类型层 | 数据库类型与 Rust 类型的双向映射 | `FromRow`, `Type`, `Encode`, `Decode` |
 | 驱动层 | 特定数据库协议的实现 | `sqlx-postgres`, `sqlx-mysql`, `sqlx-sqlite` |
 
-> [来源: SQLx 架构概述, https://docs.rs/sqlx/latest/sqlx/macro.query.html]
+> 来源: SQLx 架构概述, https: /  / [docs.rs](https://docs.rs/) / [sqlx](https://github.com/launchbadge/sqlx) / latest / [sqlx](https://github.com/launchbadge/sqlx) / macro.query.html
 
 ---
 
@@ -132,7 +132,7 @@ pub trait Executor<'c>: Send + Debug + Sized {
 | `&mut Connection<DB>` | 在单一连接上执行 | 需要会话状态的操作 |
 | `&mut Transaction<DB>` | 在事务中执行，支持回滚 | 多语句原子操作 |
 
-> [来源: SQLx Executor 文档, https://docs.rs/sqlx/latest/sqlx/trait.Executor.html]
+> 来源: SQLx Executor 文档, https: /  / [docs.rs](https://docs.rs/) / [sqlx](https://github.com/launchbadge/sqlx) / latest / [sqlx](https://github.com/launchbadge/sqlx) / trait.Executor.html
 
 ### 3.2 `FromRow` — 行到结构体的类型安全映射
 >
@@ -168,7 +168,7 @@ impl<'r> FromRow<'r, PgRow> for User {
 }
 ```
 
-> [来源: SQLx FromRow 文档, https://docs.rs/sqlx/latest/sqlx/trait.FromRow.html]
+> 来源: SQLx FromRow 文档, https: /  / [docs.rs](https://docs.rs/) / [sqlx](https://github.com/launchbadge/sqlx) / latest / [sqlx](https://github.com/launchbadge/sqlx) / trait.FromRow.html
 
 ### 3.3 `Type`, `Encode`, `Decode` — 类型系统的三支柱
 >
@@ -199,7 +199,7 @@ pub trait Decode<'r, DB: Database>: Sized {
 
 SQLx 为所有标准 Rust 类型实现了这三者：`i32`, `i64`, `String`, `Vec<u8>`, `bool`, `chrono::DateTime<Utc>` 等。用户可以为自定义类型手动实现（如 PostgreSQL 的 `JSONB` 映射到 serde `Value`）。
 
-> [来源: SQLx 类型系统文档, https://docs.rs/sqlx/latest/sqlx/trait.Type.html]
+> 来源: SQLx 类型系统文档, https: /  / [docs.rs](https://docs.rs/) / [sqlx](https://github.com/launchbadge/sqlx) / latest / [sqlx](https://github.com/launchbadge/sqlx) / trait.Type.html
 
 ---
 
@@ -262,8 +262,8 @@ let user = sqlx::query_as!(User, "SELECT id, name FROM users WHERE id = $1", id)
 
 `query_as!` 不仅检查 SQL 语法，还**验证每个列的类型与目标 struct 字段是否兼容**。如果数据库中 `name` 为 `TEXT` 但 struct 中声明为 `i32`，编译直接失败。
 
-> [来源: SQLx 宏文档, https://docs.rs/sqlx/latest/sqlx/macro.query.html]
-> [来源: Rust Reference, Procedural Macros, https://doc.rust-lang.org/reference/procedural-macros.html]
+> 来源: SQLx 宏文档, https: /  / [docs.rs](https://docs.rs/) / [sqlx](https://github.com/launchbadge/sqlx) / latest / [sqlx](https://github.com/launchbadge/sqlx) / macro.query.html
+> 来源: [Rust Reference, Procedural Macros, https://doc.rust-lang.org/reference/procedural-macros.html](https://doc.rust-lang.org/reference/)
 
 ---
 
@@ -314,7 +314,7 @@ let row = sqlx::query!("SELECT 1 as one")
 
 `Pool::acquire()` 是一个异步操作：当池中没有空闲连接且未达到 `max_connections` 上限时，创建新连接；当达到上限时，任务进入等待队列，直到有连接被归还。这种设计与 Tokio 的异步运行时深度集成，避免阻塞线程。
 
-> [来源: SQLx Pool 文档, https://docs.rs/sqlx/latest/sqlx/struct.Pool.html]
+> 来源: SQLx Pool 文档, https: /  / [docs.rs](https://docs.rs/) / [sqlx](https://github.com/launchbadge/sqlx) / latest / [sqlx](https://github.com/launchbadge/sqlx) / struct.Pool.html
 
 ---
 
@@ -361,7 +361,7 @@ graph LR
 
 迁移的幂等性由事务保证——每个迁移在独立的事务中执行，失败时自动回滚。`sqlx migrate revert` 支持回滚到指定版本（需提供对应的 `down` 迁移）。
 
-> [来源: SQLx CLI 迁移文档, https://github.com/launchbadge/sqlx/tree/main/sqlx-cli]
+> 来源: SQLx CLI 迁移文档, https: /  / github.com / launchbadge / [sqlx](https://github.com/launchbadge/sqlx) / tree / main / sqlx-cli
 
 ---
 
@@ -416,7 +416,7 @@ diesel::users
 当查询复杂度增加（CTE、窗口函数、LATERAL JOIN），SQLx 的"写 SQL"方式优势愈发明显；而对于简单的 CRUD，Diesel 的 DSL 提供了更好的可组合性和重构安全性。
 
 > [来源: Diesel 官方文档, https://diesel.rs/guides/getting-started.html]
-> [来源: SQLx vs Diesel 社区讨论, https://github.com/launchbadge/sqlx/discussions]
+> 来源: SQLx vs Diesel 社区讨论, https: /  / github.com / launchbadge / [sqlx](https://github.com/launchbadge/sqlx) / discussions
 
 ---
 
@@ -505,7 +505,7 @@ let posts = user.find_related(Post).all(&db).await?;
 
 SQLx 的宏在编译期绑定特定数据库类型。如果同一套代码需要同时支持 PostgreSQL 和 MySQL（如可插拔后端），需要条件编译或抽象层，增加了复杂度。
 
-> [来源: SQLx 离线模式文档, https://docs.rs/sqlx/latest/sqlx/macro.query.html#offline-mode-requires-the-offline-feature]
+> 来源: SQLx 离线模式文档, https: /  / [docs.rs](https://docs.rs/) / [sqlx](https://github.com/launchbadge/sqlx) / latest / [sqlx](https://github.com/launchbadge/sqlx) / macro.query.html#offline-mode-requires-the-offline-feature
 
 ---
 

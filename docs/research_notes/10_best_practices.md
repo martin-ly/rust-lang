@@ -69,15 +69,15 @@
 
 ## 📋 概述 {#-概述}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档提供研究笔记系统的最佳实践指南，帮助研究者和贡献者创建高质量的研究笔记。
 
 ### 目标
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - 提供清晰的编写指南
 - 确保内容质量和一致性
@@ -88,7 +88,7 @@
 
 ## 形式化论证最佳实践
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def BP1（形式化完备性）**：研究笔记 $N$ 满足**形式化完备**，当且仅当 $N$ 对核心概念有 Def/Axiom、对主要结论有定理及证明或证明思路、对边界有反例。
 
@@ -115,7 +115,7 @@
 
 ## 研究笔记与形式化体系衔接
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def BP2（实质内容完备）**：研究笔记 $N$ 满足**实质内容完备**，当且仅当 $N$ 含：
 形式化（Def/定理）、可运行代码、典型场景、反例或边界、
@@ -167,7 +167,7 @@ fn example_anti_pattern() {
 
 ## 实质内容不足判断与修复
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def BP3（实质内容不足）**：研究笔记 $N$ 存在**实质内容不足**，当且仅当 $N$ 存在以下至少一项：无 Def/定理或仅占位、
 无可运行代码或代码与论点无关、无典型场景或仅泛泛描述、无反例或边界说明、
@@ -197,13 +197,13 @@ fn example_anti_pattern() {
 
 ## ✍️ 编写最佳实践 {#️-编写最佳实践}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 明确研究目标
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **最佳实践**:
 
@@ -226,9 +226,9 @@ fn example_anti_pattern() {
 
 ### 2. 提供理论基础
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **最佳实践**:
 
@@ -251,7 +251,7 @@ fn example_anti_pattern() {
 
 ### 3. 使用清晰的结构
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **最佳实践**:
 
@@ -289,7 +289,7 @@ fn example_anti_pattern() {
 
 ### 1. 模块化组织
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **最佳实践**:
 
@@ -305,24 +305,24 @@ fn example_anti_pattern() {
 
 ### 基本定义
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ### 所有权转移
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ### 借用规则
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ### 生命周期约束
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 ```
 
 ### 2. 渐进式展开
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **最佳实践**:
 
@@ -357,7 +357,7 @@ fn example_anti_pattern() {
 
 ### 3. 交叉引用
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **最佳实践**:
 
@@ -381,7 +381,7 @@ fn example_anti_pattern() {
 
 ### 1. 使用相对路径
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **最佳实践**:
 
@@ -398,7 +398,7 @@ fn example_anti_pattern() {
 
 ### 2. 提供描述性链接文本
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 **最佳实践**:
 
@@ -415,7 +415,7 @@ fn example_anti_pattern() {
 
 ### 3. 维护链接完整性
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **最佳实践**:
 
@@ -441,7 +441,7 @@ find docs/research_notes -name "*.md" -exec grep -l "\[.*\](.*)" {} \;
 
 ### 1. 提供可运行的代码
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **最佳实践**:
 
@@ -462,7 +462,7 @@ fn main() {
 
 ### 2. 添加注释和说明
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **最佳实践**:
 
@@ -489,7 +489,7 @@ fn main() {
 
 ### 3. 展示错误和解决方案
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **最佳实践**:
 
@@ -526,7 +526,7 @@ fn main() {
 
 ### 1. 使用一致的格式
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **最佳实践**:
 
@@ -553,7 +553,7 @@ fn main() {
 
 ### 2. 使用列表和表格
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **最佳实践**:
 
@@ -861,18 +861,18 @@ git commit -m "添加所有权模型形式化研究笔记
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Best Practice]**
-> **[来源: Wikipedia - Code Review]**
-> **[来源: Rust API Guidelines]**
+> **来源: [Wikipedia - Best Practice](https://en.wikipedia.org/wiki/Best_Practice)**
+> **来源: [Wikipedia - Code Review](https://en.wikipedia.org/wiki/Code_Review)**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 > **[来源: ACM - Code Quality]**
 > **[来源: IEEE - Software Engineering Standards]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ---

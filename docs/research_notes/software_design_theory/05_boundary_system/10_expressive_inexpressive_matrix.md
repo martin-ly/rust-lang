@@ -48,7 +48,7 @@
 
 ## 形式化定义与公理
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def 1.1（表达边界）**:
 
@@ -110,7 +110,7 @@ trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；
 
 ## 反例：违反表达边界
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 反例 | 后果 | 论证 |
 | :--- | :--- | :--- |
@@ -122,7 +122,7 @@ trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；
 
 ## 定义（非形式化对照）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 分类 | 定义 |
 | :--- | :--- |
@@ -134,13 +134,13 @@ trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；
 
 ## 设计模式 × 表达边界
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 创建型（5）
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 模式 | 表达边界 | 说明 |
 | :--- | :--- | :--- |
@@ -152,9 +152,9 @@ trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；
 
 ### 结构型（7）
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 模式 | 表达边界 | 说明 |
 | :--- | :--- | :--- |
@@ -168,9 +168,9 @@ trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；
 
 ### 行为型（11）
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 模式 | 表达边界 | 说明 |
 | :--- | :--- | :--- |
@@ -190,7 +190,7 @@ trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；
 
 ## 执行模型 × 表达边界
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 模型 | 表达边界 | 说明 |
 | :--- | :--- | :--- |
@@ -204,7 +204,7 @@ trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；
 
 ## 近似表达详解
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 模式/模型 | 近似原因 | Rust 替代方案 |
 | :--- | :--- | :--- |
@@ -220,7 +220,7 @@ trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；
 
 ## 等价表达示例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Strategy**：trait 即策略接口，`impl Trait` 即具体策略；语义完全等价。
 
@@ -332,7 +332,7 @@ impl Node {
 
 ### 示例 1：OOP 继承迁移
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **场景**：原 Java 类 `Button extends Widget`。
 
@@ -346,7 +346,7 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 
 ### 示例 2：观察者模式
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **场景**：原 OOP Subject/Observer 继承。
 
@@ -354,7 +354,7 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 
 ### 示例 3：多继承不可表达
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **场景**：`class C extends A, B` 菱形继承。
 
@@ -381,13 +381,13 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -398,7 +398,7 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 
 #### 代码示例更新
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 本文档中的所有Rust代码示例均已：
 
@@ -408,7 +408,7 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 
 #### 相关文档
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 - Rust 1.94 迁移指南
 - [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
@@ -442,25 +442,25 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-> **[来源: Rust Reference]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-> **[来源: Rust Standard Library]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: ACM - Systems Programming]**
+> **来源: [ACM](https://dl.acm.org/)**
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-> **[来源: Rustonomicon]**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ---

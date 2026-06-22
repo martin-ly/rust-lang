@@ -15,7 +15,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [Rayon并行计算形式化分析](#rayon并行计算形式化分析)
   - [目录](#目录)
@@ -65,7 +65,7 @@
 
 ## 1. 引言
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Rayon是一个数据并行库，允许将串行迭代器转换为并行迭代器：
 
@@ -87,15 +87,15 @@ let sum: i32 = data.par_iter().map(|x| x * x).sum();
 
 ## 2. Fork-Join模型形式化
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 2.1 计算DAG
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ### 定义 2.1 (计算有向无环图)
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 并行计算可表示为DAG:
 
@@ -110,7 +110,7 @@ $$
 
 ### 定义 2.2 (串行投影)
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 串行执行顺序是DAG的**拓扑排序**:
 
@@ -120,7 +120,7 @@ $$
 
 ### 定义 2.3 (并行执行)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 并行执行是DAG的**并行拓扑排序**:
 
@@ -136,11 +136,11 @@ $$
 
 ### 2.2 串行执行语义
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ### 定义 2.4 (串行语义函数)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 $$
 [\!\![e]\!\!]_{seq} : \text{State} \rightarrow \text{State}
@@ -167,11 +167,11 @@ $$
 
 ### 3.1 迭代器trait的形式化
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ### 定义 3.1 (迭代器trait)
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 trait Iterator {
@@ -194,7 +194,7 @@ $$
 
 ### 定义 3.2 (并行迭代器转换)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 fn par_iter<I>(iter: I) -> impl ParallelIterator<Item = I::Item>
@@ -212,7 +212,7 @@ $$
 
 ### 3.2 并行化正确性
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ### 定理 3.1 (并行迭代正确性)
 >
@@ -692,21 +692,21 @@ data.par_iter().for_each(|_| {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Parallel Computing]**
+> **来源: [Wikipedia - Parallel Computing](https://en.wikipedia.org/wiki/Parallel_Computing)**
 
-> **[来源: ACM - Parallel Programming]**
+> **来源: [ACM - Parallel Programming](https://dl.acm.org/)**
 
-> **[来源: IEEE - Parallel Algorithms]**
+> **来源: [IEEE - Parallel Algorithms](https://standards.ieee.org/)**
 
-> **[来源: Rust Reference - Parallel Iterators]**
+> **来源: [Rust Reference - Parallel Iterators](https://doc.rust-lang.org/std/iter/trait.Iterator.html)**
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---
 

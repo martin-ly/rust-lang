@@ -38,7 +38,7 @@
 
 ## 📋 概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本指南对应 `crates/c02_type_system`，涵盖 Rust 类型系统的核心概念与高级特性，包括基本类型、泛型、Trait、型变、模式匹配以及 Rust 1.95.0 的 `if let guards` 和 `use<..>` 精确捕获。
 
@@ -49,7 +49,7 @@
 
 ## 🚀 快速开始
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use c02_type_system::primitive_types::scalar_types::number::enhanced_integer::SafeInteger;
@@ -71,13 +71,13 @@ fn main() {
 
 ## 📊 核心功能
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 基本类型系统
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 `primitive_types/` 模块提供对标量类型和复合类型的深度封装：
 
@@ -107,9 +107,9 @@ fn safe_math() {
 
 ### 2. 泛型与 Trait
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 `type_class/` 和 `type_composition/` 模块展示泛型编程与 Trait 系统：
 
@@ -138,7 +138,7 @@ impl<T: std::ops::Add<Output = T> + Copy> Measurable for Point<T> {
 
 ### 3. 型变 (Variance)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 `type_variance/` 模块演示协变、逆变与不变的实际影响：
 
@@ -160,7 +160,7 @@ fn demonstrate_contravariance(f: fn(&'static str)) {
 
 ### 4. 高级模式匹配
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 `advanced_pattern_matching/` 模块提供动态模式匹配和优化：
 
@@ -181,7 +181,7 @@ fn advanced_matching() {
 
 ### 5. 精确捕获 (Precise Capturing)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 `precise_capturing_guide/` 模块深度解析 Rust 1.95+ 的 `use<..>` 语法：
 
@@ -199,7 +199,7 @@ fn precise_capturing_example() {
 
 ### 6. Rust 1.95 类型系统增强
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 `rust_195_features/` 模块包含：
 
@@ -223,7 +223,7 @@ fn main() {
 
 ## ⚡ 性能优化
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 技术 | 说明 | 模块 |
 |------|------|------|
@@ -304,9 +304,9 @@ fn robust_operation() -> Result<(), ContextualError> {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Type System]**
-> **[来源: Pierce 2002 - TAPL]**
-> **[来源: Rust Reference - Type System]**
-> **[来源: ACM - Type Systems]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Pierce 2002 - TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)**
+> **来源: [Rust Reference - Type System](https://doc.rust-lang.org/reference/types.html)**
+> **来源: [ACM - Type Systems](https://dl.acm.org/)**
 
 ---

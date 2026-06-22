@@ -16,7 +16,7 @@
 
 ## 📋 目录 {#-目录}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Rust 快速参考指南 {#-rust-快速参考指南}](#rust-快速参考指南--rust-快速参考指南)
   - [📋 目录 {#-目录}](#-目录--目录)
@@ -76,15 +76,15 @@
 
 ## 🎯 快速参考概述 {#-快速参考概述}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本目录提供 Rust 核心概念的快速参考速查卡，帮助开发者快速查找常用语法、模式和最佳实践。
 
 ### 适用场景
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - ✅ **快速查找** - 忘记语法时快速查阅
 - ✅ **代码编写** - 编写代码时的参考
@@ -95,13 +95,13 @@
 
 ## 📖 速查卡列表 {#-速查卡列表}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 类型系统速查卡
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **文件**: [02_type_system.md](./02_type_system.md)
 
@@ -120,9 +120,9 @@
 
 ### 2. 所有权系统速查卡
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **文件**: [02_ownership_cheatsheet.md](./02_ownership_cheatsheet.md)
 
@@ -140,9 +140,9 @@
 
 ### 3. 异步编程速查卡
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **文件**: [02_async_patterns.md](./02_async_patterns.md)
 
@@ -160,9 +160,9 @@
 
 ### 4. 泛型编程速查卡
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **文件**: [02_generics_cheatsheet.md](./02_generics_cheatsheet.md)
 
@@ -179,9 +179,9 @@
 
 ### 5. 错误处理速查卡
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **文件**: [02_error_handling_cheatsheet.md](./02_error_handling_cheatsheet.md)
 
@@ -198,9 +198,9 @@
 
 ### 6. 线程与并发速查卡
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **文件**: [02_threads_concurrency_cheatsheet.md](./02_threads_concurrency_cheatsheet.md)
 
@@ -217,9 +217,9 @@
 
 ### 7. 宏系统速查卡
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **文件**: macros_cheatsheet.md
 
@@ -236,7 +236,7 @@
 
 ### 8. 测试速查卡
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **文件**: [02_testing_cheatsheet.md](./02_testing_cheatsheet.md)
 
@@ -255,7 +255,7 @@
 
 ### 9. 控制流与函数速查卡
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **文件**: [02_control_flow_functions_cheatsheet.md](./02_control_flow_functions_cheatsheet.md)
 
@@ -273,7 +273,7 @@
 
 ### 10. 集合与迭代器速查卡
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **文件**: [02_collections_iterators_cheatsheet.md](./02_collections_iterators_cheatsheet.md)
 
@@ -292,7 +292,7 @@
 
 ### 11. 智能指针速查卡
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **文件**: [02_smart_pointers_cheatsheet.md](./02_smart_pointers_cheatsheet.md)
 
@@ -310,7 +310,7 @@
 
 ### 12. 模块系统速查卡
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **文件**: [02_modules_cheatsheet.md](./02_modules_cheatsheet.md)
 
@@ -329,7 +329,7 @@
 
 ### 13. 字符串与格式化速查卡
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **文件**: [02_strings_formatting_cheatsheet.md](./02_strings_formatting_cheatsheet.md)
 
@@ -347,7 +347,7 @@
 
 ### 14. Cargo 速查卡
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **文件**: [02_cargo_cheatsheet.md](./02_cargo_cheatsheet.md)
 
@@ -367,7 +367,7 @@
 
 ### 15. 进程管理速查卡 ⭐ NEW
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 **文件**: [02_process_management_cheatsheet.md](./02_process_management_cheatsheet.md)
 
@@ -386,7 +386,7 @@
 
 ### 16. 网络编程速查卡 ⭐ NEW
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **文件**: [02_network_programming_cheatsheet.md](./02_network_programming_cheatsheet.md)
 
@@ -405,7 +405,7 @@
 
 ### 17. 算法与数据结构速查卡 ⭐ NEW
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **文件**: [02_algorithms_cheatsheet.md](./02_algorithms_cheatsheet.md)
 
@@ -424,7 +424,7 @@
 
 ### 18. 设计模式速查卡 ⭐ NEW
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **文件**: design_patterns_cheatsheet.md
 
@@ -807,18 +807,18 @@ if let Some(msg) = e { cold_path(); eprintln!("error: {}", msg); }
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**

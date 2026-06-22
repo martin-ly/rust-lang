@@ -43,11 +43,11 @@
 
 ## 1️⃣ Rust 新版本发布跟踪
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 版本信息收集
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 版本类型 | 版本号 | 发布日期 | 项目当前使用 | 状态 |
 |----------|--------|----------|-------------|------|
@@ -58,7 +58,7 @@
 
 ### 发布说明审查
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 阅读 [Rust Release Notes](https://github.com/rust-lang/rust/releases)
 - [ ] 阅读 [Rust 博客](https://blog.rust-lang.org/) 对应版本文章
@@ -75,11 +75,11 @@
 
 ## 2️⃣ Edition 兼容性检查
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 当前 Edition 状态
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 项目当前使用的 Rust Edition: ________
 - [ ] 最新可用的 Rust Edition: ________
@@ -87,7 +87,7 @@
 
 ### Edition 迁移评估
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 如存在新 Edition，评估迁移影响：
 
@@ -103,7 +103,7 @@
 
 ### Edition 迁移计划（如适用）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 阶段 | 任务 | 负责人 | 截止日期 | 状态 |
 |------|------|--------|----------|------|
@@ -118,11 +118,11 @@
 
 ## 3️⃣ MSRV 更新评估
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 当前 MSRV 审查
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 当前声明的 MSRV: ________________
 - [ ] 实际最低测试版本: ________________
@@ -130,7 +130,7 @@
 
 ### MSRV 更新分析
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 评估维度 | 当前状态 | 建议 | 备注 |
 |----------|----------|------|------|
@@ -141,7 +141,7 @@
 
 ### MSRV 更新决策
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 保持当前 MSRV
 - [ ] 更新 MSRV 至: ________________
@@ -269,11 +269,11 @@ cargo clippy --workspace --all-features -- -D warnings
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**

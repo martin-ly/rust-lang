@@ -10,7 +10,7 @@
 
 ## 目录
 >
-> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Exception Handling]** · **[来源: Wikipedia - Error Detection and Correction]** · **[来源: ACM - Error Handling Patterns]** · **[来源: IEEE - Fault-Tolerant Software Design]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Exception Handling](https://en.wikipedia.org/wiki/Exception_Handling)** · **来源: [Wikipedia - Error Detection and Correction](https://en.wikipedia.org/wiki/Error_Detection_and_Correction)** · **[来源: ACM - Error Handling Patterns]** · **[来源: IEEE - Fault-Tolerant Software Design]**
 
 - [Rust 错误处理决策树](#rust-错误处理决策树)
   - [目录](#目录)
@@ -84,7 +84,7 @@
 
 ## 决策树总览
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
                     ┌─────────────────────────────────────┐
@@ -124,13 +124,13 @@
 
 ## 决策维度详解
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 维度 1: 错误类型 - 可恢复 vs 不可恢复
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特征 | 可恢复错误 | 不可恢复错误 |
 | :--- | :--- | :--- |
@@ -148,9 +148,9 @@
 
 ### 维度 2: 错误传播范围
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 传播范围决策流程:
@@ -183,9 +183,9 @@
 
 #### 2.1 本地处理场景
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 场景 | 推荐方式 | 示例 |
 | :--- | :--- | :--- |
@@ -195,9 +195,9 @@
 
 #### 2.2 错误传播场景
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 边界类型 | 传播方式 | 注意事项 |
 | :--- | :--- | :--- |
@@ -212,9 +212,9 @@
 
 ### 维度 3: 错误处理策略
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 ┌──────────────────────────────────────────────────────────────┐
@@ -234,9 +234,9 @@
 
 #### 策略选择矩阵
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 错误特征 | 立即处理 | 传播 | 重试 | 降级 | 典型场景 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -249,9 +249,9 @@
 
 #### 3.1 重试策略决策
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 重试决策树
@@ -281,9 +281,9 @@ fn should_retry(error: &Error) -> RetryDecision {
 
 #### 3.2 降级策略
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 服务状态 | 降级策略 | 示例 |
 | :--- | :--- | :--- |
@@ -296,7 +296,7 @@ fn should_retry(error: &Error) -> RetryDecision {
 
 ### 维度 4: 库 vs 应用
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```text
 ┌─────────────────────────────────────────────────────────────┐
@@ -335,7 +335,7 @@ fn should_retry(error: &Error) -> RetryDecision {
 
 #### 对比表
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 方面 | 库代码 (Library) | 应用程序 (Application) |
 | :--- | :--- | :--- |
@@ -350,11 +350,11 @@ fn should_retry(error: &Error) -> RetryDecision {
 
 ## 对比分析
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Result vs Option vs panic
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────┐
@@ -383,7 +383,7 @@ fn should_retry(error: &Error) -> RetryDecision {
 
 #### 详细对比
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | 特性 | `Result<T, E>` | `Option<T>` | `panic!` |
 | :--- | :--- | :--- | :--- |
@@ -396,7 +396,7 @@ fn should_retry(error: &Error) -> RetryDecision {
 
 #### 转换关系
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
 // Option → Result
@@ -416,7 +416,7 @@ let value = result.unwrap();        // 仅用于原型/测试
 
 ### thiserror vs anyhow
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```text
 ┌────────────────────────────────────────────────────────────────┐
@@ -446,7 +446,7 @@ let value = result.unwrap();        // 仅用于原型/测试
 
 #### 详细对比
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 | 特性 | `thiserror` | `anyhow` |
 | :--- | :--- | :--- |
@@ -461,7 +461,7 @@ let value = result.unwrap();        // 仅用于原型/测试
 
 #### 混合使用模式
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 // 库代码 (lib.rs)
@@ -499,7 +499,7 @@ fn main() -> Result<()> {
 
 ### 自定义错误类型设计
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```text
 ┌────────────────────────────────────────────────────────────────┐
@@ -542,7 +542,7 @@ fn main() -> Result<()> {
 
 #### 设计原则
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | 原则 | 说明 | 示例 |
 | :--- | :--- | :--- |
@@ -554,7 +554,7 @@ fn main() -> Result<()> {
 
 #### 推荐模式
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 use thiserror::Error;
@@ -606,7 +606,7 @@ pub enum AppError {
 
 ### 错误链和上下文
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```text
 错误链结构:
@@ -628,7 +628,7 @@ pub enum AppError {
 
 #### anyhow 上下文链
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use anyhow::{Context, Result};
@@ -661,7 +661,7 @@ fn process_user(user_id: Uuid) -> Result<()> {
 
 #### thiserror 错误源
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use thiserror::Error;
@@ -703,15 +703,15 @@ fn load_config(path: &str) -> Result<Config, ConfigError> {
 
 ## 最佳实践
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 错误类型设计模式
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 #### 模式 A: 分层错误架构
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 // 领域层错误
@@ -766,7 +766,7 @@ impl From<ApplicationError> for ApiError {
 
 #### 模式 B: 错误状态码映射
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 pub trait HttpStatusCode {
@@ -788,7 +788,7 @@ impl HttpStatusCode for ApiError {
 
 #### 模式 C: 错误 Builder
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 #[derive(Debug)]
@@ -846,11 +846,11 @@ let err = ErrorBuilder::new(ErrorCode::NotFound)
 
 ### 2. 错误转换和映射
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 #### 2.1 自动转换 (`From` trait)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 use std::io;
@@ -877,7 +877,7 @@ fn read_config() -> Result<Config, AppError> {
 
 #### 2.2 映射错误 (`map_err`)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 // 当需要自定义错误信息时
@@ -900,7 +900,7 @@ fn load_users() -> Result<Vec<User>> {
 
 #### 2.3 错误类型转换矩阵
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 从 / 到 | `Result<T, E1>` | `Result<T, E2>` | `Option<T>` | `panic` |
 | :--- | :--- | :--- | :--- | :--- |
@@ -912,11 +912,11 @@ fn load_users() -> Result<Vec<User>> {
 
 ### 3. 错误报告和日志
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 #### 3.1 结构化日志集成
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use tracing::{error, warn, info, instrument};
@@ -954,7 +954,7 @@ async fn authenticate_user(
 
 #### 3.2 用户友好的错误报告
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
 pub fn format_error_report(err: &anyhow::Error) -> String {
@@ -997,7 +997,7 @@ fn suggest_fixes(err: &anyhow::Error) -> String {
 
 #### 3.3 错误聚合和监控
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust,ignore
 use metrics::{counter, gauge, histogram};
@@ -1023,11 +1023,11 @@ pub fn report_error(err: &AppError) {
 
 ### 4. 测试错误处理
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 #### 4.1 测试错误类型
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 #[cfg(test)]
@@ -1066,7 +1066,7 @@ mod tests {
 
 #### 4.2 测试错误传播
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 #[test]
@@ -1086,7 +1086,7 @@ fn test_error_propagation() {
 
 #### 4.3 测试错误处理逻辑
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 #[tokio::test]
@@ -1130,11 +1130,11 @@ async fn test_circuit_breaker() {
 
 ## 反模式警示
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### ❌ 反模式 1: 滥用 `unwrap()`
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 // ❌ 错误: 生产代码中使用 unwrap
@@ -1156,7 +1156,7 @@ let val = Some(42).expect("this is a bug: value should exist");
 
 ### ❌ 反模式 2: 过度使用 `String` 作为错误
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 // ❌ 错误: 使用 String 丢失类型安全
@@ -1188,7 +1188,7 @@ match do_something() {
 
 ### ❌ 反模式 3: 错误的 `?` 使用导致信息丢失
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 // ❌ 错误: 丢失了上下文信息
@@ -1218,7 +1218,7 @@ fn process_file(path: &str) -> Result<Data> {
 
 ### ❌ 反模式 4: 混淆 `Option` 和 `Result`
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 // ❌ 错误: Option 表示错误
@@ -1250,7 +1250,7 @@ fn find_user(id: Uuid) -> Result<User, FindUserError> {
 
 ### ❌ 反模式 5: 忽略错误
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 // ❌ 错误: 完全忽略错误
@@ -1278,7 +1278,7 @@ let _ = cache.insert(key, value); // 缓存失败可接受
 
 ### ❌ 反模式 6: 过度详细的错误类型
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 // ❌ 错误: 过于详细的错误枚举
@@ -1311,7 +1311,7 @@ enum DatabaseError {
 
 ### ❌ 反模式 7: 跨线程边界传递非 Send 错误
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 // ❌ 错误: Rc 不能跨线程
@@ -1338,7 +1338,7 @@ enum GoodError {
 
 ### ❌ 反模式 8: 在热路径中创建错误字符串
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 // ❌ 错误: 每次调用都分配字符串，即使成功
@@ -1370,11 +1370,11 @@ enum LazyError {
 
 ## 代码示例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 完整示例 1: 分层错误处理架构
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 //! 完整的多层错误处理示例
@@ -1675,7 +1675,7 @@ fn main() {
 
 ### 完整示例 2: 带重试和断路器的错误处理
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 //! 生产级错误处理：重试、断路器、超时
@@ -2077,7 +2077,7 @@ mod tests {
 
 ### 完整示例 3: anyhow + thiserror 混合使用
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 //! anyhow 和 thiserror 的最佳实践组合
@@ -2416,11 +2416,11 @@ mod examples {
 
 ## 附录
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### A. 快速决策参考表
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | 场景 | 推荐方案 | 代码示例 |
 | :--- | :--- | :--- |
@@ -2436,7 +2436,7 @@ mod examples {
 
 ### B. 常用 crate 对比
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 | Crate | 用途 | 开销 | 推荐场景 |
 | :--- | :--- | :--- | :--- |
@@ -2448,7 +2448,7 @@ mod examples {
 
 ### C. 进一步阅读
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - [Rust Error Handling Best Practices](https://doc.rust-lang.org/stable/rust-by-example/error.html)
 - [thiserror 文档](https://docs.rs/thiserror)
@@ -2460,20 +2460,20 @@ mod examples {
 
 ## 🆕 Rust 1.94 深度整合更新
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -2484,7 +2484,7 @@ mod examples {
 
 #### 代码示例更新
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 本文档中的所有Rust代码示例均已：
 
@@ -2494,7 +2494,7 @@ mod examples {
 
 #### 相关文档
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 - Rust 1.94 迁移指南
 - Rust 1.94 特性速查
@@ -2524,48 +2524,48 @@ mod examples {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Exception Handling]**
-> **[来源: Wikipedia - Error Detection and Correction]**
-> **[来源: Wikipedia - Fault Tolerance]**
-> **[来源: Wikipedia - Recovery Block]**
+> **来源: [Wikipedia - Exception Handling](https://en.wikipedia.org/wiki/Exception_Handling)**
+> **来源: [Wikipedia - Error Detection and Correction](https://en.wikipedia.org/wiki/Error_Detection_and_Correction)**
+> **来源: [Wikipedia - Fault Tolerance](https://en.wikipedia.org/wiki/Fault_Tolerance)**
+> **来源: [Wikipedia - Recovery Block](https://en.wikipedia.org/wiki/Recovery_Block)**
 > **[来源: IEEE - Fault-Tolerant Software Design]**
 > **[来源: ACM - Error Handling Patterns]**
-> **[来源: Rust Reference - Error Handling]**
-> **[来源: TRPL Ch. 9 - Error Handling]**
-> **[来源: RFC 0243 - Trait-based Exception Handling]**
+> **来源: [Rust Reference - Error Handling](https://doc.rust-lang.org/reference/)**
+> **来源: [TRPL Ch. 9 - Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)**
+> **来源: [RFC 0243 - Trait-based Exception Handling](https://github.com/rust-lang/rfcs/pull/0243)**
 > **[来源: anyhow.rs Documentation]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages Survey]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design and Implementation]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: Wikipedia - Decision Tree]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM - Systems Programming Languages Survey](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI - Programming Language Design and Implementation](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Wikipedia - Decision Tree](https://en.wikipedia.org/wiki/Decision_Tree)**
 > **[来源: ACM - Decision Support Systems]**
 > **[来源: IEEE - Risk Analysis]**
-> **[来源: Rust API Guidelines]**
-> **[来源: Wikipedia - Exception Handling]**
-> **[来源: TRPL Ch. 9 - Error Handling]**
-> **[来源: Rust Reference - Result]**
-> **[来源: RFC 2504 - Try Trait]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Wikipedia - Type System]**
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
+> **来源: [Wikipedia - Exception Handling](https://en.wikipedia.org/wiki/Exception_Handling)**
+> **来源: [TRPL Ch. 9 - Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)**
+> **来源: [Rust Reference - Result](https://doc.rust-lang.org/std/result/)**
+> **来源: [RFC 2504 - Try Trait](https://rust-lang.github.io/rfcs/2504-2504-try-trait.html)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ---

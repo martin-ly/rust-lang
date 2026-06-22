@@ -7,7 +7,7 @@
 
 ## 📊 目录 {#-目录}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [充分表达 vs 非充分表达论证](#充分表达-vs-非充分表达论证)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -42,7 +42,7 @@
 
 ## 定义
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 分类 | 定义 |
 | :--- | :--- |
@@ -53,7 +53,7 @@
 
 ## 等价/近似/不可表达判定规则
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def EB-DET1（判定规则）**：给定模式 $P$ 与 Rust 实现 $R$，按下列步骤判定表达分类：
 
@@ -75,13 +75,13 @@
 
 ## 等价表达的模式
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 创建型
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **Factory Method**：trait 工厂方法，语义一致
 - **Abstract Factory**：枚举/关联类型产品族，等价
@@ -90,9 +90,9 @@
 
 ### 结构型
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **Adapter**：包装 + 委托，等价
 - **Bridge**：trait 解耦抽象与实现，等价
@@ -104,9 +104,9 @@
 
 ### 行为型
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **Chain of Responsibility**：`Option`/链表传递，等价
 - **Command**：闭包即命令对象，等价
@@ -121,7 +121,7 @@
 
 ## 近似表达的模式
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 模式 | 偏移原因 | Rust 替代 |
 | :--- | :--- | :--- |
@@ -138,7 +138,7 @@
 
 ## 不可表达或极难表达
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - 依赖全局可变 + 隐式共享的经典 OOP 模式
 - 依赖多继承的复杂层次
@@ -150,7 +150,7 @@
 
 ## 扩展模式（43 完全之 20）表达边界
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 模式 | 表达 | 说明 |
 | :--- | :--- | :--- |
@@ -181,7 +181,7 @@
 
 ## 分布式模式形式化边界（Event Sourcing、Saga、CQRS）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 模式 | 表达 | 形式化边界 | Rust 实现要点 |
 | :--- | :--- | :--- | :--- |
@@ -244,7 +244,7 @@
 
 ### 等价表达完整代码示例
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **Strategy 模式**：
 
@@ -309,7 +309,7 @@ impl<R: Renderer> Page<R> {
 
 ### 近似表达完整代码示例
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **Singleton 近似**：
 
@@ -419,13 +419,13 @@ impl Originator {
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -436,7 +436,7 @@ impl Originator {
 
 #### 代码示例更新
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 本文档中的所有Rust代码示例均已：
 
@@ -446,7 +446,7 @@ impl Originator {
 
 #### 相关文档
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 - Rust 1.94 迁移指南
 - Rust 1.94 特性速查
@@ -481,15 +481,15 @@ impl Originator {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ---

@@ -60,7 +60,7 @@
 
 ## 异步编程全景
 >
-> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Asynchronous I/O]** · **[来源: Wikipedia - Coroutine]** · **[来源: ACM - Async Programming Concepts]** · **[来源: IEEE - Concurrent Computation Models]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)** · **来源: [Wikipedia - Coroutine](https://en.wikipedia.org/wiki/Coroutine)** · **[来源: ACM - Async Programming Concepts]** · **[来源: IEEE - Concurrent Computation Models]**
 
 ```mermaid
 mindmap
@@ -175,13 +175,13 @@ mindmap
 
 ## 核心概念详解
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Future 状态机
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // async fn 编译后的状态机
@@ -210,7 +210,7 @@ impl Future for MyAsyncFn {
 
 ### 执行流程
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```text
 ┌──────────┐     ┌──────────┐     ┌──────────┐
@@ -235,7 +235,7 @@ impl Future for MyAsyncFn {
 
 ### Future Trait 定义
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 trait Future {
@@ -251,7 +251,7 @@ enum Poll<T> {
 
 ### Send边界规则
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | 场景 | Future: Send? | 条件 |
 | :--- | :--- | :--- |
@@ -594,13 +594,13 @@ Pin<P<T>>
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: TRPL Ch. 17 - Async]**
-> **[来源: Tokio Documentation]**
-> **[来源: RFC 2394 - Async/Await]**
-> **[来源: Wikipedia - Formal Methods]**
-> **[来源: Coq Reference]**
-> **[来源: TLA+]**
-> **[来源: ACM - Formal Verification]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+> **来源: [TRPL Ch. 17 - Async](https://doc.rust-lang.org/book/ch17-00-async-await.html)**
+> **来源: [Tokio Documentation](https://tokio.rs/)**
+> **来源: [RFC 2394 - Async/Await](https://rust-lang.github.io/rfcs/2394-2394-async_await.html)**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
 
 ---

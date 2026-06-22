@@ -109,3 +109,31 @@
 - [Rust for Linux (concept)](../../concept/07_future/19_rust_for_linux.md) — 操作系统内核中的内存安全
 - [Cranelift 后端 (concept)](../../concept/07_future/16_cranelift_backend_preview.md) — 快速调试编译
 - [并行前端 (concept)](../../concept/07_future/09_parallel_frontend_preview.md) — SALSA 3.0 与多核编译加速
+
+
+## 📚 模块 8: 国际化对齐
+
+> 本模块按项目模板补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 说明 |
+|:---|:---|
+| [The Cargo Book](https://doc.rust-lang.org/cargo/) | Cargo 官方文档 |
+| [crates.io](https://crates.io/) | 官方包注册表 |
+| [docs.rs](https://docs.rs/) | 文档托管 |
+
+### 8.2 学术/工业来源
+
+| 来源 | 说明 |
+|:---|:---|
+| [SemVer 规范](https://semver.org/) | 语义化版本 |
+
+### 8.3 社区资源
+
+| 来源 | 说明 |
+|:---|:---|
+| [lib.rs](https://lib.rs/) | 生态索引 |
+| [This Week in Rust](https://this-week-in-rust.org/) | 社区周报 |
+| [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) | 常用模式 |
+

@@ -70,15 +70,15 @@
 
 ## 🎯 证明图网概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **证明图网 (Proof Graph Network)** 是一种形式化的证明结构，用于展示从前提条件到结论的完整推理过程。
 
 ### 核心属性
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **形式化** - 使用形式化逻辑结构
 2. **可验证** - 证明步骤可验证
@@ -87,9 +87,9 @@
 
 ### 证明结构层次
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 公理 (Axiom) → 引理 (Lemma) → 定理 (Theorem) → 推论 (Corollary)
@@ -99,13 +99,13 @@
 
 ## 📐 证明结构说明
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 证明结构模板
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 目标: [要实现的功能]
@@ -117,9 +117,9 @@
 
 ### Mermaid 证明图语法
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 graph TD
@@ -136,13 +136,13 @@ graph TD
 
 ## 🔬 定理证明树
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 公理→引理→定理→推论链
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 graph TD
@@ -219,9 +219,9 @@ graph TD
 
 ### 2. MaybeUninit 安全性证明树
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 graph TD
@@ -274,9 +274,9 @@ graph TD
 
 ### 3. 借用检查器安全性证明树
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **形式化对应**: [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) 定理 T1（数据竞争自由）、规则 1–5。
 
@@ -321,7 +321,7 @@ graph TD
 
 ### 4. 生命周期安全性证明树
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **形式化对应**: lifetime_formalization 定理 LF-T1/T2、规则 3。
 
@@ -372,7 +372,7 @@ graph TD
 
 ## 🛡️ 内存安全证明树
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **形式化对应**:
 
@@ -382,7 +382,7 @@ graph TD
 
 ### 内存安全定理
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```mermaid
 graph TD
@@ -453,7 +453,7 @@ graph TD
 
 ### 无数据竞争证明
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```mermaid
 graph TD
@@ -498,7 +498,7 @@ graph TD
 
 ### 无悬垂指针证明
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```mermaid
 graph TD
@@ -546,7 +546,7 @@ graph TD
 
 ### 无双重释放证明
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```mermaid
 graph TD
@@ -602,13 +602,13 @@ graph TD
 
 ## 🔒 类型安全证明树
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **形式化对应**: [type_system_foundations](../research_notes/type_theory/10_type_system_foundations.md) 定理 T1（进展性）、T2（保持性）、T3（类型安全）。
 
 ### 类型安全定理
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```mermaid
 graph TD
@@ -675,7 +675,7 @@ graph TD
 
 ### 类型一致性证明
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```mermaid
 graph TD
@@ -722,7 +722,7 @@ graph TD
 
 ### 泛型单态化正确性证明
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```mermaid
 graph TD
@@ -771,13 +771,13 @@ graph TD
 
 ## ⚡ 异步证明树
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **形式化对应**: [async_state_machine](../research_notes/formal_methods/10_async_state_machine.md) 定理 T6.1–T6.3、[pin_self_referential](../research_notes/formal_methods/10_pin_self_referential.md) 定理 T1–T3。
 
 ### 异步 Future 安全性证明树
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```mermaid
 graph TD
@@ -820,11 +820,11 @@ graph TD
 
 ## 🧵 并发安全证明树
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Send/Sync 安全性证明
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```mermaid
 graph TD
@@ -891,7 +891,7 @@ graph TD
 
 ### 互斥访问保证证明
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```mermaid
 graph TD
@@ -938,7 +938,7 @@ graph TD
 
 ### 数据竞争自由证明
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```mermaid
 graph TD
@@ -1007,11 +1007,11 @@ graph TD
 
 ## 🔗 特性组合证明
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 组合1: MaybeUninit + 调用追踪
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```mermaid
 graph TD
@@ -1049,7 +1049,7 @@ graph TD
 
 ### 组合2: 关联类型多边界 + 自动特征
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```mermaid
 graph TD
@@ -1091,11 +1091,11 @@ graph TD
 
 ## 💻 代码示例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 示例 1: MaybeUninit 安全性证明实现
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust
 use std::mem::MaybeUninit;
@@ -1168,7 +1168,7 @@ mod tests {
 
 ### 示例 2: 借用检查器规则的形式化表示
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 /// 借用检查器规则的形式化表示
@@ -1233,7 +1233,7 @@ mod borrow_checker_formalization {
 
 ### 示例 3: 证明可视化工具
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 use std::fmt::{self, Display, Formatter};
@@ -1313,11 +1313,11 @@ fn create_maybeuninit_proof() -> ProofGraphNetwork {
 
 ## 🎯 使用场景
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 何时使用证明图网
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 | 场景 | 使用方式 | 预期收益 |
 | :--- | :--- | :--- |
@@ -1330,7 +1330,7 @@ fn create_maybeuninit_proof() -> ProofGraphNetwork {
 
 ### 证明图网工作流
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 /// 代码开发中的证明验证工作流
@@ -1358,11 +1358,11 @@ fn proof_validation_workflow() {
 
 ## 🔗 相关文档
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 核心证明文档
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 - [10_proof_index.md](../research_notes/10_proof_index.md) - 形式化证明索引
 - [10_core_theorems_full_proofs.md](../research_notes/10_core_theorems_full_proofs.md) - 核心定理完整证明
@@ -1370,21 +1370,21 @@ fn proof_validation_workflow() {
 
 ### 理论基础
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 - [10_theoretical_and_argumentation_system_architecture.md](../research_notes/10_theoretical_and_argumentation_system_architecture.md) - 理论体系架构
 - [10_language_semantics_expressiveness.md](../research_notes/10_language_semantics_expressiveness.md) - 语言语义与表达能力
 
 ### 证明工具
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 - [10_coq_of_rust_integration_plan.md](../research_notes/10_coq_of_rust_integration_plan.md) - Coq 证明集成
 - [10_aeneas_integration_plan.md](../research_notes/10_aeneas_integration_plan.md) - Aeneas 验证工具
 
 ### 相关文档
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 - [04_decision_graph_network.md](./04_decision_graph_network.md) - 决策图网
 - [04_mind_map_collection.md](./04_mind_map_collection.md) - 思维导图集合
@@ -1401,13 +1401,13 @@ fn proof_validation_workflow() {
 
 ## Rust 1.95+ 思维表征更新
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 > **适用版本**: Rust 1.96.0+
 
 ### 新增思维表征
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 Rust 新特性可扩展思维表征方式：
 
@@ -1419,7 +1419,7 @@ Rust 新特性可扩展思维表征方式：
 
 ### 示例
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 `
 ust
@@ -1436,20 +1436,20 @@ ust
 
 ## Rust 1.95+ 持续更新更新
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.95+更新要点
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 本文档已针对 **Rust 1.95+** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -1460,7 +1460,7 @@ ust
 
 #### 代码示例更新
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 本文档中的所有Rust代码示例均已：
 
@@ -1470,7 +1470,7 @@ ust
 
 #### 相关文档
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查（已归档）
@@ -1509,19 +1509,19 @@ ust
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Mathematical Proof]**
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Mathematical Proof](https://en.wikipedia.org/wiki/Mathematical_Proof)**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 > **[来源: ACM - Proof Assistant Survey]**
 > **[来源: IEEE - Verification Standards]**
-> **[来源: RustBelt - Rust Formal Verification]**
-> **[来源: TLA+ Documentation]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)**
+> **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ---

@@ -71,7 +71,7 @@
 > **[TypeScript Handbook]** TypeScript is JavaScript with syntax for types. TypeScript is a strongly typed programming language that builds on JavaScript, giving you better tooling at any scale.
 > **来源**: <https://www.typescriptlang.org/docs/handbook/intro.html>
 
-> **[Wikipedia: TypeScript]** TypeScript is a free and open-source high-level programming language developed by Microsoft that adds static typing with optional type annotations to JavaScript.
+> **[Wikipedia: TypeScript](https://en.wikipedia.org/wiki/TypeScript)** TypeScript is a free and open-source high-level programming language developed by Microsoft that adds static typing with optional type annotations to JavaScript.
 > **来源**: <https://en.wikipedia.org/wiki/TypeScript>
 
 ```text

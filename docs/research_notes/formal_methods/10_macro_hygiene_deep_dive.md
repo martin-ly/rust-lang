@@ -51,13 +51,13 @@
 
 ## 1. 卫生性机制概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 什么是宏卫生性？
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **卫生性 (Hygiene)** 确保宏生成的标识符不会与宏外部的标识符意外冲突。
 
@@ -81,13 +81,13 @@ let four = using_a!(a / 10);  // ❌ 编译错误！
 
 ## 2. 语法上下文 (Syntax Context)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Def CTX-1（语法上下文定义）
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 每个标识符携带**语法上下文** (Syntax Context)，用于区分不同作用域的同名标识符：
 
@@ -112,9 +112,9 @@ $$
 
 ### 上下文层级
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 层级 | 描述 | 示例 |
 |------|------|------|
@@ -127,13 +127,13 @@ $$
 
 ## 3. 标识符分类
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Def ID-CLASS（标识符分类）
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 标识符按用途分为三类：
 
@@ -149,9 +149,9 @@ $$
 
 ### 绑定标识符的卫生性
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 macro_rules! make_var {
@@ -168,9 +168,9 @@ make_var!(x, 42);
 
 ### 引用标识符的解析
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 macro_rules! use_var {
@@ -188,13 +188,13 @@ let result = use_var!(5);  // 引用宏调用上下文的 'a'
 
 ## 4. 卫生性规则形式化
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Rule HYGIENE-1（绑定隔离规则）
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 宏内部创建的绑定标识符，只在宏定义上下文可见：
 
@@ -204,7 +204,7 @@ $$
 
 ### Rule HYGIENE-2（引用解析规则）
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 宏内部的引用标识符，优先在宏定义上下文解析，其次是宏调用上下文：
 
@@ -214,7 +214,7 @@ $$
 
 ### Rule HYGIENE-3（混合上下文规则）
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 通过 `$var` 传入的标识符，在调用上下文解析：
 
@@ -238,7 +238,7 @@ mixed_context!(y);
 
 ### Def CROSS-CRATE（跨 Crate 卫生性）
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 宏导出的标识符需要在不同 crate 间保持卫生性：
 
@@ -262,7 +262,7 @@ fn main() {
 
 ### $crate 变量
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 #[macro_export]
@@ -311,7 +311,7 @@ macro_rules! check_hygiene {
 
 ### 使用 `#[macro_export]` + 组合
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 // 组合多个宏来"传递"标识符
@@ -329,7 +329,7 @@ let result = define_and_use!(x, 42, x * 2);
 
 ### 使用 const 泛型传递（高级技巧）
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 macro_rules! const_hygiene_break {
@@ -409,13 +409,13 @@ pub fn hygienic_macro(input: TokenStream) -> TokenStream {
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -426,7 +426,7 @@ pub fn hygienic_macro(input: TokenStream) -> TokenStream {
 
 #### 代码示例更新
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 本文档中的所有Rust代码示例均已：
 
@@ -436,7 +436,7 @@ pub fn hygienic_macro(input: TokenStream) -> TokenStream {
 
 #### 相关文档
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查
@@ -470,15 +470,15 @@ pub fn hygienic_macro(input: TokenStream) -> TokenStream {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Macro (computer science)]**
+> **来源: [Wikipedia - Macro (computer science)](https://en.wikipedia.org/wiki/Macro_(computer_science))**
 
-> **[来源: TRPL Ch. 19 - Macros]**
+> **来源: [TRPL Ch. 19 - Macros](https://doc.rust-lang.org/book/ch19-00-advanced-features.html)**
 
-> **[来源: Rust Reference - Macros]**
+> **来源: [Rust Reference - Macros](https://doc.rust-lang.org/reference/macros.html)**
 
-> **[来源: The Little Book of Rust Macros]**
+> **来源: [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)**
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ---
 

@@ -13,7 +13,7 @@
 > **双维定位**: C×Ana — 分析线性逻辑到 Rust 的映射
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Type System](../01_foundation/04_type_system.md) [来源: [TAPL — Pierce 2002](https://www.cis.upenn.edu/~bcpierce/tapl/)]
 > **后置概念**: [Ownership Formalization](./03_ownership_formal.md) · [RustBelt](./04_rustbelt.md)
-> **主要来源**: [Wikipedia: Linear logic] · [Wikipedia: Affine logic] · [Girard 1987] · [Pierce 2002, TAPL §15] · [RustBelt: POPL 2018](https://doi.org/10.1145/3158154) · [Utrecht: Ownership Types]
+> **主要来源**: [Wikipedia: Linear logic](https://en.wikipedia.org/wiki/Linear_logic) · [Wikipedia: Affine logic](https://en.wikipedia.org/wiki/Affine_logic) · [Girard 1987] · [Pierce 2002, TAPL §15] · [RustBelt: POPL 2018](https://doi.org/10.1145/3158154) · [Utrecht: Ownership Types]
 
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
@@ -41,15 +41,15 @@
 
 ### 1.1 Wikipedia 定义
 
-> **[Wikipedia: Linear logic]** Linear logic is a substructural logic proposed by Jean-Yves Girard as a refinement of classical and intuitionistic logic, joining the dualities of the former with many of the constructive properties of the latter. The key operational intuition behind linear logic is that logical assumptions are consumed in proving a conclusion, rather than merely used as in classical logic. [来源: [Wikipedia — Simply Typed Lambda Calculus](https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus)]
+> **[Wikipedia: Linear logic](https://en.wikipedia.org/wiki/Linear_logic)** Linear logic is a substructural logic proposed by Jean-Yves Girard as a refinement of classical and intuitionistic logic, joining the dualities of the former with many of the constructive properties of the latter. The key operational intuition behind linear logic is that logical assumptions are consumed in proving a conclusion, rather than merely used as in classical logic. [来源: [Wikipedia — Simply Typed Lambda Calculus](https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus)]
 
-> **[Wikipedia: Affine logic]** Affine logic is a substructural logic whose proof theory rejects the structural rule of contraction. It can also be characterized as linear logic with weakening. In affine logic, each hypothesis may be used at most once—unlike in linear logic, where each hypothesis must be used exactly once.
+> **[Wikipedia: Affine logic](https://en.wikipedia.org/wiki/Affine_logic)** Affine logic is a substructural logic whose proof theory rejects the structural rule of contraction. It can also be characterized as linear logic with weakening. In affine logic, each hypothesis may be used at most once—unlike in linear logic, where each hypothesis must be used exactly once.
 
 > **[学术来源: Girard 1987, *Linear Logic* (Theoretical Computer Science 50:1-102)]** Linear logic introduces a new connective, the exponential `!A` ("of course A"), which allows a formula to be copied or discarded. Without `!`, every assumption must be used exactly once. This makes linear logic a **resource-sensitive logic**: propositions represent resources, and proofs represent resource-transforming processes. [来源] ✅
 
 > **[学术来源: Pierce 2002, *Types and Programming Languages* (TAPL) §15.3]** Pierce 将子结构类型系统（substructural type systems）定位为"通过控制变量的使用次数来管理资源 [来源: [Linear Logic](https://plato.stanford.edu/entries/logic-linear/)]"的类型理论。线性类型（linear types）对应"恰好使用一次"，仿射类型（affine types）对应"最多使用一次"，这构成了 Rust 所有权系统的理论先声。此处为 L1/01_ownership.md §1 "什么是所有权" 的精确对应——Pierce 的形式化定义是 Rust 所有权规则的先验类型论基础。 [来源] ✅
 
-> **[学术来源: RustBelt: POPL 2018, Jung et al. *RustBelt: Securing the Foundations of the Rust Programming Language*]** Rust's ownership system can be understood as an **affine type system** embedded in a larger language with managed copying (`Clone`) and shared borrowing (`&T`). The core insight is that ownership tracking enforces the resource discipline of affine logic at compile time. [来源] ✅
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** Rust's ownership system can be understood as an **affine type system** embedded in a larger language with managed copying (`Clone`) and shared borrowing (`&T`). The core insight is that ownership tracking enforces the resource discipline of affine logic at compile time. [来源] ✅
 
 ---
 
@@ -113,7 +113,7 @@ graph TD
 ```
 
 > **认知功能**: 此谱系图将子结构逻辑的**结构规则削减**过程可视化。从经典逻辑到有序逻辑，每向下一步就移除一个结构规则，表达能力递减但资源控制递增。**Rust 位于仿射逻辑节点**——允许 weakening（丢弃资源）但禁止 contraction（复制资源），这恰好对应 `drop` 自动调用和 `move` 语义。颜色的冷暖梯度表达"资源控制严格度"：红色最严格（有序逻辑），绿色最实用（Rust/仿射逻辑）。
-> [来源: [Wikipedia — Linear Logic]]
+> [来源: [Wikipedia — Linear Logic](https://en.wikipedia.org/wiki/Linear_Logic)]
 
 ### 2.4 逻辑系统谱系矩阵
 >
@@ -322,7 +322,7 @@ graph TD
 >
 ## 六、定理推理链（Theorem Chain）
 
-> **[学术来源: Wadler 1990, *Linear Types can Change the World*; RustBelt: POPL 2018, Jung et al.; Pierce TAPL §15.3]** 仿射类型系统通过资源唯一性保证内存安全。本节引入 ⟹ 符号表示定理间的**逻辑依赖方向**——若 A ⟹ B，则 A 是 B 的必要前提或逻辑前驱。
+> **来源: Wadler 1990, *Linear Types can Change the World*; [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/), Jung et al.; Pierce TAPL §15.3** 仿射类型系统通过资源唯一性保证内存安全。本节引入 ⟹ 符号表示定理间的**逻辑依赖方向**——若 A ⟹ B，则 A 是 B 的必要前提或逻辑前驱。
 
 ```text
 核心推理链:
@@ -359,7 +359,7 @@ T1(切消定理) ⟹ L1(线性命题) ⟹ C1(Rust所有权) ⟹ C2(仿射move语
 >
 ## 七、sequent calculus 完整规则集与 Phase Semantics
 
-> **[Girard 1987 · Linear Logic]** · **[Wikipedia: Sequent calculus]** · **[Wikipedia: Phase semantics]** 本节补充线性逻辑的三层规则系统（乘法/加法/指数）及其相位语义与 Rust 编译阶段的直观映射。✅
+> **[Girard 1987 · Linear Logic]** · **[Wikipedia: Sequent calculus](https://en.wikipedia.org/wiki/Sequent_calculus)** · **[Wikipedia: Phase semantics](https://en.wikipedia.org/wiki/Phase_semantics)** 本节补充线性逻辑的三层规则系统（乘法/加法/指数）及其相位语义与 Rust 编译阶段的直观映射。✅
 
 ### 7.1 乘法片段（Multiplicatives）：所有权与资源分解
 
@@ -605,11 +605,11 @@ fn session_demo() {
 | **[Pierce 2002: TAPL §15.3]** | 子结构类型系统；linear/affine/relevant types 谱系 | 类型论定位；§1.1, §2.3, §5.2 |
 | **[Wadler 1990: Linear Types]** | 线性类型在编程中的应用；"线性类型可以改变世界" | 编程语言映射；§3, §6 |
 | **[CMU 17-363: PL Pragmatics]** | 类型系统、子结构类型、会话类型 | 教学对齐；§6, §7.2 |
-| **[Wikipedia: Linear logic]** | 线性逻辑通用概念；连接词语义 | 权威定义；§1.1 |
-| **[Wikipedia: Affine logic]** | 仿射逻辑定义；与线性逻辑的关系 | 权威定义；§1.1, §5.1 |
-| **[Wikipedia: Substructural type system]** | 子结构类型系统总览 | 类型论定位；§2.3 |
+| **[Wikipedia: Linear logic](https://en.wikipedia.org/wiki/Linear_logic)** | 线性逻辑通用概念；连接词语义 | 权威定义；§1.1 |
+| **[Wikipedia: Affine logic](https://en.wikipedia.org/wiki/Affine_logic)** | 仿射逻辑定义；与线性逻辑的关系 | 权威定义；§1.1, §5.1 |
+| **[Wikipedia: Substructural type system](https://en.wikipedia.org/wiki/Substructural_type_system)** | 子结构类型系统总览 | 类型论定位；§2.3 |
 | **[RustBelt: POPL 2018](https://doi.org/10.1145/3158154)** | 线性逻辑 → Rust 所有权；Iris 分离逻辑 | 应用映射；§1.1, §5.3, §7.3 |
-| **[Tofte & Talpin 1994]** | 区域类型系统；堆分配的生命周期管理 | 生命周期形式化；§8 Step 5 |
+| **[Tofte & Talpin 1994](https://en.wikipedia.org/wiki/Region-based_memory_management)** | 区域类型系统；堆分配的生命周期管理 | 生命周期形式化；§8 Step 5 |
 | **[Honda 1993: Session Types]** | 会话类型；通道通信的线性协议 | 并发验证；§6 T2, §7.2 |
 
 ---
@@ -618,11 +618,11 @@ fn session_demo() {
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
-| 线性逻辑由 Girard 1987 提出 | [Wikipedia: Linear logic] · Girard 1987, *Linear Logic* (TCS 50:1-102) | ✅ |
-| 仿射逻辑 = 线性逻辑 + weakening | [Wikipedia: Affine logic] · Girard 1987 §1 | ✅ |
+| 线性逻辑由 Girard 1987 提出 | [Wikipedia: Linear logic](https://en.wikipedia.org/wiki/Linear_logic) · Girard 1987, *Linear Logic* (TCS 50:1-102) | ✅ |
+| 仿射逻辑 = 线性逻辑 + weakening | [Wikipedia: Affine logic](https://en.wikipedia.org/wiki/Affine_logic) · Girard 1987 §1 | ✅ |
 | Rust 是仿射类型系统（非严格线性） | [RustBelt: POPL 2018](https://doi.org/10.1145/3158154) · [Utrecht] · Jung et al. 2017 | ✅ |
 | 子结构类型谱系（linear/affine/relevant/ordered） | Pierce 2002, TAPL §15.3 | ✅ |
-| !A 对应 Copy trait | [RustBelt] · Wadler 1990 · 原创分析 | 💡 |
+| !A 对应 Copy trait | [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · Wadler 1990 · 原创分析 | 💡 |
 | ⊗ 对应元组 | [Category Theory for Programmers] · Wadler 1990 | ✅ |
 | 仿射类型 ⇒ 无 UAF/DF | Wadler 1990; Jung et al. 2017 POPL | ✅ |
 | 线性逻辑 sequent calculus 规则 | Girard 1987; Lincoln et al. 1992 | ✅ |
@@ -654,7 +654,7 @@ fn session_demo() {
 >
 ## 十一、Proof nets（证明网）与并发程序可视化
 
-> **[学术来源: Girard 1987, *Linear Logic* §6; Danos & Regnier 1989, *The Structure of Multiplicatives*; Wikipedia: Proof net]** Proof nets 是线性逻辑证明的**图形化规范形式**，消除了 sequent calculus 中因规则应用顺序不同而产生的**句法冗余**。它们将证明表示为图结构，其中逻辑连接词是节点，公式是边，cut 是连接两个对偶公式的边。
+> **来源: Girard 1987, *Linear Logic* §6; Danos & Regnier 1989, *The Structure of Multiplicatives*; [Wikipedia: Proof net](https://en.wikipedia.org/wiki/Proof_net)** Proof nets 是线性逻辑证明的**图形化规范形式**，消除了 sequent calculus 中因规则应用顺序不同而产生的**句法冗余**。它们将证明表示为图结构，其中逻辑连接词是节点，公式是边，cut 是连接两个对偶公式的边。
 
 ### 11.1 Proof nets 的语法与正确性
 
@@ -784,10 +784,10 @@ h x = ...  -- m 是重数变量
 | **unsafe 支持** | 原生支持，可封装安全抽象 | 无 direct 对应（FFI 通过 C 调用） | 原生 `unsafe` 区域广泛存在 | 有限（`unsafe` 包） |
 | **生态状态** | 工业级，稳定 | 实验性，GHC 9.x+ 可用 | 工业级，标准化 | 工业级，稳定 |
 
-> **[来源: RustBelt: POPL 2018]** Rust 的所有权系统可理解为嵌入在更大语言中的**仿射类型系统**，核心资源纪律在编译期强制执行。 ✅
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** Rust 的所有权系统可理解为嵌入在更大语言中的**仿射类型系统**，核心资源纪律在编译期强制执行。 ✅
 > **[来源: Bernardy et al. 2017, *Linear Haskell*]** Linear Haskell 通过重数（multiplicity）在现有类型系统中嵌入线性约束，是严格线性类型系统的工业级实验。 ✅
 > **[来源: C++ Reference: Smart pointers]** C++ 无内置线性/仿射类型系统；`unique_ptr` 提供运行时所有权管理，但编译器不检查 use-after-move。 ✅
-> **[来源: Go Spec: Memory Model]** Go 无线性/仿射类型概念，内存安全完全依赖 GC，引用有效性无编译期检查。 ✅
+> **来源: [Go Spec: Memory Model](https://go.dev/ref/mem)** Go 无线性/仿射类型概念，内存安全完全依赖 GC，引用有效性无编译期检查。 ✅
 
 > **核心区别**: Rust 是**仿射类型系统**（允许 weakening，即资源可丢弃），而 Linear Haskell 是**严格线性类型系统**（weakening 不成立，资源必须精确使用一次）。C++ 和 Go 不在线性逻辑谱系中——C++ 依赖运行时 RAII 和程序员自律，Go 依赖 GC。这使得 Rust 和 Linear Haskell 在"编译期资源安全"维度上形成独特阵营，而 C++ 和 Go 选择运行时方案。
 
@@ -891,7 +891,7 @@ Rust 所有权系统（仿射变体）:
 
 > **关键洞察**: Linear Haskell 的 `%1 ->` 精确对应线性逻辑的 `⊸`（线性蕴含），而 Rust 的 `fn(T) -> U` 更接近**仿射蕴含**——允许调用者丢弃参数而不使用。这是两种语言在"资源敏感性"光谱上的关键差异：Linear Haskell 追求**形式纯度**，Rust 追求**工程实用性**。
 
-> **来源**: [Bernardy et al. 2017, *Linear Haskell*] · [GHC 9.0+ LinearTypes Documentation] · [Pierce 2002, TAPL §15.3] · [Wikipedia: Linear logic]
+> **来源**: [Bernardy et al. 2017, *Linear Haskell*] · [GHC 9.0+ LinearTypes Documentation] · [Pierce 2002, TAPL §15.3] · [Wikipedia: Linear logic](https://en.wikipedia.org/wiki/Linear_logic)
 
 ---
 
@@ -916,7 +916,7 @@ Rust 所有权系统（仿射变体）:
 
 ## 十四、Wikipedia 概念对齐
 
-> **[来源: Wikipedia]** 线性逻辑核心概念与国际知识库映射。
+> **来源: [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)** 线性逻辑核心概念与国际知识库映射。
 
 | 概念 | Wikipedia 词条 | 对应 Rust 概念 |
 |:---|:---|:---|

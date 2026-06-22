@@ -11,7 +11,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [WebAssembly (WASM) 开发指南](#webassembly-wasm-开发指南)
   - [目录](#目录)
@@ -61,13 +61,13 @@
 
 ## 1. WebAssembly概述
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 什么是WebAssembly
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 WebAssembly (WASM) 是一种**低级别字节码格式**，设计用于在现代Web浏览器中以接近原生的性能运行。
 
@@ -80,7 +80,7 @@ WebAssembly (WASM) 是一种**低级别字节码格式**，设计用于在现代
 
 ### 1.2 WASM内存模型
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```
 ┌─────────────────────────────────────────────────────┐
@@ -107,7 +107,7 @@ WebAssembly (WASM) 是一种**低级别字节码格式**，设计用于在现代
 
 ### 1.3 Rust为什么适合WASM
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 特性 | Rust优势 | 对WASM的意义 |
 |------|----------|--------------|
@@ -122,7 +122,7 @@ WebAssembly (WASM) 是一种**低级别字节码格式**，设计用于在现代
 
 ### 2.1 wasm-bindgen
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 `wasm-bindgen` 是Rust与JavaScript之间的桥梁。
 
@@ -152,7 +152,7 @@ pub fn greet(name: &str) {
 
 ### 2.2 wasm-pack
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 `wasm-pack` 是构建、测试和发布WASM的CLI工具。
 
@@ -172,7 +172,7 @@ wasm-pack publish
 
 ### 2.3 项目结构
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```
 my-wasm-project/
@@ -194,7 +194,7 @@ my-wasm-project/
 
 ### 3.1 创建项目
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```bash
 # 使用cargo generate
@@ -207,7 +207,7 @@ cd my-wasm-project
 
 ### 3.2 Cargo.toml配置
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```toml
 [package]
@@ -247,7 +247,7 @@ lto = true
 
 ### 3.3 基本模板代码
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 use wasm_bindgen::prelude::*;
@@ -287,7 +287,7 @@ impl Calculator {
 
 ### 4.1 类型映射
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | Rust类型 | JavaScript类型 | 说明 |
 |----------|----------------|------|
@@ -301,7 +301,7 @@ impl Calculator {
 
 ### 4.2 复杂类型传递
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **使用Serde进行序列化**:
 
@@ -329,7 +329,7 @@ pub fn process_user(data: &str) -> Result<JsValue, JsValue> {
 
 ### 4.3 回调函数
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use wasm_bindgen::prelude::*;
@@ -364,7 +364,7 @@ pub async fn fetch_data(url: String) -> Result<JsValue, JsValue> {
 
 ### 5.1 WASM线性内存
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```text
 ┌────────────────────────────────────────┐
@@ -388,7 +388,7 @@ pub async fn fetch_data(url: String) -> Result<JsValue, JsValue> {
 
 ### 5.2 所有权与WASM内存
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 use wasm_bindgen::prelude::*;
@@ -417,7 +417,7 @@ pub fn sum_buffer(data: &[u8]) -> u32 {
 
 ### 5.3 内存泄漏预防
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use wasm_bindgen::prelude::*;
@@ -452,7 +452,7 @@ impl Drop for Resource {
 
 ### 6.1 编译优化
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```toml
 [profile.release]
@@ -472,7 +472,7 @@ wee_alloc = "0.4.5"
 
 ### 6.2 减少WASM体积
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```bash
 # 使用wasm-opt优化
@@ -487,7 +487,7 @@ wasm-snip pkg/*.wasm -o snipped.wasm
 
 ### 6.3 避免边界检查
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
 use wasm_bindgen::prelude::*;
@@ -507,7 +507,7 @@ pub fn sum_array(data: &[f64]) -> f64 {
 
 ### 6.4 批量数据处理
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust,ignore
 use wasm_bindgen::prelude::*;
@@ -537,7 +537,7 @@ pub fn process_array(input: &Float64Array) -> Float64Array {
 
 ### 7.1 图像处理
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 use wasm_bindgen::prelude::*;
@@ -587,7 +587,7 @@ impl ImageProcessor {
 
 ### 7.2 加密运算
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 use wasm_bindgen::prelude::*;
@@ -607,7 +607,7 @@ pub fn sha256_hash(input: &[u8]) -> Vec<u8> {
 
 ### 7.3 物理模拟
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 use wasm_bindgen::prelude::*;
@@ -784,10 +784,10 @@ WebAssembly + Rust 提供了：
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**

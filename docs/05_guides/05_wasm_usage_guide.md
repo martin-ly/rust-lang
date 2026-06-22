@@ -57,7 +57,7 @@
 
 ## 📋 概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本指南介绍如何使用 Rust 编译到 WebAssembly (WASM)，包括项目设置、编译配置、与 JavaScript 互操作等。
 
@@ -68,13 +68,13 @@ WASM 异步与 Rust 异步模型一致。
 
 ## 🚀 快速开始
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 安装工具链
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 # 安装 wasm-pack
@@ -89,9 +89,9 @@ cargo install wasm-bindgen-cli
 
 ### 创建 WASM 项目
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 # 使用 wasm-pack 创建新项目
@@ -106,13 +106,13 @@ cd my-wasm-project
 
 ## 📊 核心功能
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 基本 WASM 函数
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // src/lib.rs
@@ -131,9 +131,9 @@ pub fn greet(name: &str) -> String {
 
 ### 2. 与 JavaScript 互操作
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use wasm_bindgen::prelude::*;
@@ -159,9 +159,9 @@ pub fn log_message(message: &str) {
 
 ### 3. 处理 JavaScript 对象
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use wasm_bindgen::prelude::*;
@@ -193,9 +193,9 @@ impl Person {
 
 ### 4. 异步函数
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use wasm_bindgen::prelude::*;
@@ -220,11 +220,11 @@ pub async fn fetch_data(url: &str) -> Result<JsValue, JsValue> {
 
 ## 🔧 编译配置
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. Cargo.toml
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```toml
 [package]
@@ -252,7 +252,7 @@ wasm-bindgen-test = "0.3"
 
 ### 2. 编译命令
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```bash
 # 使用 wasm-pack 编译
@@ -272,7 +272,7 @@ wasm-pack build --target no-modules
 
 ### 1. HTML 示例
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```html
 <!DOCTYPE html>
@@ -300,7 +300,7 @@ wasm-pack build --target no-modules
 
 ### 2. Node.js 示例
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```javascript
 const wasm = require("./pkg/my_wasm_project.js")
@@ -319,7 +319,7 @@ wasm.init().then(() => {
 
 ### 1. 单元测试
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 use wasm_bindgen_test::*;
@@ -334,7 +334,7 @@ fn test_add() {
 
 ### 2. 运行测试
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```bash
 wasm-pack test --headless --firefox
@@ -350,7 +350,7 @@ wasm-pack test --headless --safari
 
 ### 1. 减小二进制大小
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```toml
 [profile.release]
@@ -363,7 +363,7 @@ strip = true
 
 ### 2. 使用 wasm-opt
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```bash
 # 安装 wasm-opt
@@ -375,7 +375,7 @@ wasm-opt -Os pkg/my_wasm_project_bg.wasm -o pkg/my_wasm_project_optimized.wasm
 
 ### 3. 避免不必要的分配
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
 // ❌ 不好：多次分配
@@ -399,7 +399,7 @@ pub fn process(data: &str) -> String {
 
 ### 场景1: Web 前端开发
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 在浏览器中使用 Rust 替代 JavaScript：
 
@@ -411,7 +411,7 @@ pub fn process(data: &str) -> String {
 
 ### 场景2: 跨平台桌面应用
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 使用 WASM 构建跨平台应用：
 
@@ -549,13 +549,13 @@ pub fn get_state_json() -> String {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

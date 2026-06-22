@@ -1,7 +1,7 @@
 # 系统基础设施场景
 
 > **Bloom 层级**: 应用 → 分析
-> **[来源: Rust Project Goals 2026]** · **[来源: tokio/hyper/axum 生态]** ✅
+> **来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)** · **来源: [tokio](https://tokio.rs/) / [hyper](https://hyper.rs/) / axum 生态** ✅
 
 ---
 

@@ -8,7 +8,7 @@
 
 ## 📋 目录
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [🦀 所有权系统速查卡](#-所有权系统速查卡)
   - [📋 目录](#-目录)
@@ -72,7 +72,7 @@
 
 ## 🧠 所有权系统思维导图
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 mindmap
@@ -107,7 +107,7 @@ mindmap
 
 ## 📊 概念定义-属性关系-解释论证
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 层次 | 概念定义 | 属性关系 | 解释论证 |
 | :--- | :--- | :--- | :--- |
@@ -123,7 +123,7 @@ mindmap
 
 ## 📐 三大规则（核心）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 1. 每个值有且仅有一个所有者
@@ -133,9 +133,9 @@ mindmap
 
 ### 所有权转移决策树
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 graph TD
@@ -158,13 +158,13 @@ graph TD
 
 ## 🎯 常见模式速查
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 模式 1: 所有权转移（Move）
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 let s1 = String::from("hello");
@@ -183,9 +183,9 @@ println!("{}", s2);    // ✅ OK
 
 ### 模式 2: 不可变借用（&T）
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 fn process(s: &String) {  // 借用，不夺取所有权
@@ -207,9 +207,9 @@ println!("{}", s);  // ✅ s 仍然有效
 
 ### 模式 3: 可变借用（&mut T）
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 fn modify(s: &mut String) {
@@ -231,9 +231,9 @@ println!("{}", s);  // "hello world"
 
 ### 模式 4: Clone（显式复制）
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 let s1 = String::from("hello");
@@ -247,9 +247,9 @@ println!("{} {}", s1, s2);  // ✅ 都有效
 
 ### 模式 5: Copy 类型
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 let x = 5;
@@ -298,7 +298,7 @@ println!("{} {}", x, y);  // ✅ 都有效
 
 ### 错误 1: 借用检查器错误
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 // ❌ 错误
@@ -321,7 +321,7 @@ s.push_str(" world");
 
 ### 错误 2: 悬垂引用
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 // ❌ 错误
@@ -348,7 +348,7 @@ fn no_dangle2<'a>(input: &'a String) -> &'a String {
 
 ### 错误 3: 循环中的借用
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 // ❌ 错误
@@ -373,7 +373,7 @@ v.extend(to_add);
 
 ### `Box<T>` - 堆分配
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 let b = Box::new(5);
@@ -382,7 +382,7 @@ let b = Box::new(5);
 
 ### `Rc<T>` - 引用计数（单线程）
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 use std::rc::Rc;
@@ -393,7 +393,7 @@ let b = Rc::clone(&a);  // 引用计数 +1
 
 ### `Arc<T>` - 原子引用计数（多线程）
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 use std::sync::Arc;
@@ -404,7 +404,7 @@ let b = Arc::clone(&a);  // 线程安全的引用计数
 
 ### `RefCell<T>` - 内部可变性（单线程）
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust
 use std::cell::RefCell;
@@ -415,7 +415,7 @@ let data = RefCell::new(5);
 
 ### `Mutex<T>` - 互斥锁（多线程）
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust
 use std::sync::Mutex;
@@ -435,7 +435,7 @@ let m = Mutex::new(5);
 
 ### 基本语法
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
@@ -445,7 +445,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### 生命周期省略规则
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 1. **规则 1**: 每个引用参数获得独立生命周期
 
@@ -474,7 +474,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### ✅ 高效模式
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 1. **借用而非拥有**
 
@@ -497,7 +497,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### ⚠️ 低效模式
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 1. **过度使用 clone**
 
@@ -519,7 +519,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### 反例 1: 移动后使用
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **错误示例**（以下代码无法通过编译）:
 
@@ -543,7 +543,7 @@ println!("{}", s);
 
 ### 反例 2: 可变借用与不可变借用冲突
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **错误示例**（以下代码无法通过编译）:
 
@@ -570,7 +570,7 @@ let r2 = &mut v;  // r1 已离开作用域
 
 ### 反例 3: 返回悬垂引用
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **错误示例**（以下代码无法通过编译）:
 
@@ -600,7 +600,7 @@ fn no_dangle() -> String {
 
 ### 深入学习
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 - [完整所有权教程](../../../crates/c01_ownership_borrow_scope/docs/tier_02_guides/01_所有权快速入门.md)
 - [借用检查器详解](../../../crates/c01_ownership_borrow_scope/docs/tier_03_references/02_借用检查器详解.md)
@@ -608,14 +608,14 @@ fn no_dangle() -> String {
 
 ### 代码示例
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 - [综合示例](../../../crates/c01_ownership_borrow_scope/examples/comprehensive_ownership_examples.rs)
 - [智能指针示例](../../../crates/c01_ownership_borrow_scope/examples/comprehensive_ownership_examples.rs)
 
 ### 形式化理论
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 - [类型系统理论](../../../crates/c01_ownership_borrow_scope/docs/tier_04_advanced/06_类型系统理论.md)
 - [形式化验证](../../../crates/c01_ownership_borrow_scope/docs/tier_04_advanced/07_形式化验证.md)
@@ -631,7 +631,7 @@ fn no_dangle() -> String {
 
 ### 场景 1: 配置解析器
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 #[derive(Debug)]
@@ -668,7 +668,7 @@ fn main() {
 
 ### 场景 2: 缓存实现
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 use std::collections::HashMap;
@@ -708,7 +708,7 @@ fn main() {
 
 ### 场景 3: 读取文件并处理
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust
 use std::fs;
@@ -743,7 +743,7 @@ fn main() {
 
 ### 边界 1: 自引用结构
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust
 // ❌ 错误：自引用结构需要特殊处理
@@ -985,19 +985,19 @@ let gamma = f64::consts::EULER_GAMMA;
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Wikipedia - Resource Management]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rust Reference - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: ACM - Ownership Types]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Wikipedia - Resource Management](https://en.wikipedia.org/wiki/Resource_Management)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rust Reference - Ownership](https://doc.rust-lang.org/reference/)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [ACM - Ownership Types](https://dl.acm.org/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ---

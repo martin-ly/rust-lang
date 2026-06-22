@@ -50,7 +50,7 @@
 
 ## 一、概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档提供分布式系统设计中常用模式的完整特性矩阵，帮助架构师根据系统需求选择合适的模式组合。
 
@@ -58,11 +58,11 @@
 
 ## 二、模式总览
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 事务模式
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 模式 | 核心思想 | 一致性级别 | 复杂度 |
 |------|----------|------------|--------|
@@ -73,7 +73,7 @@
 
 ### 2.2 数据模式
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | 模式 | 核心思想 | 适用场景 | 复杂度 |
 |------|----------|----------|--------|
@@ -84,7 +84,7 @@
 
 ### 2.3 容错模式
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 | 模式 | 核心思想 | 保护目标 | 复杂度 |
 |------|----------|----------|--------|
@@ -96,7 +96,7 @@
 
 ### 2.4 通信模式
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 模式 | 核心思想 | 耦合度 | 复杂度 |
 |------|----------|--------|--------|
@@ -113,7 +113,7 @@
 
 ### 3.1 核心特性矩阵
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | 模式 | 一致性 | 可用性 | 分区容错 | 延迟 | 吞吐量 | 复杂度 | 运维成本 |
 |------|:------:|:------:|:--------:|:----:|:------:|:------:|:--------:|
@@ -133,7 +133,7 @@
 
 ### 3.2 适用场景矩阵
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 场景 | 推荐模式 | 不推荐 | 理由 |
 |------|----------|--------|------|
@@ -146,7 +146,7 @@
 
 ### 3.3 故障处理矩阵
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | 模式 | 网络分区 | 服务宕机 | 超时 | 重复消息 | 消息丢失 |
 |------|----------|----------|------|----------|----------|
@@ -165,7 +165,7 @@
 
 ### 4.1 经典组合
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 | 组合名称 | 组成模式 | 适用系统 | 复杂度 |
 |----------|----------|----------|--------|
@@ -177,7 +177,7 @@
 
 ### 4.2 组合关系图
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```text
 基础层
@@ -203,7 +203,7 @@
 
 ### 4.3 互斥模式
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | 模式A | 模式B | 原因 |
 |-------|-------|------|
@@ -373,9 +373,9 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Design Pattern]**
-> **[来源: Rust API Guidelines]**
-> **[来源: Gang of Four]**
-> **[来源: ACM - Software Design Patterns]**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
+> **来源: [Gang of Four](https://en.wikipedia.org/wiki/Design_Patterns)**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
 
 ---

@@ -7,7 +7,7 @@
 
 ## 📊 目录 {#-目录}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Abstract Factory 形式化分析](#abstract-factory-形式化分析)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -48,13 +48,13 @@
 
 ## 形式化定义
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Def 1.1（Abstract Factory 结构）
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 设 $\mathcal{F}$ 为抽象工厂族，$T_1, \ldots, T_n$ 为产品类型族。Abstract Factory 是一个多元组 $\mathcal{AF} = (\mathcal{F}, \{T_i\}_{i=1}^n, \{\mathit{create}_i\}_{i=1}^n)$，满足：
 
@@ -70,9 +70,9 @@ $$\mathcal{AF} = \langle \mathcal{F}, \{T_i\}_{i=1}^n, \{\mathit{create}_i: \mat
 
 ### Axiom AF1（产品族一致性公理）
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 $$\forall f: \mathcal{F},\, \mathit{create}_1(f) : T_1 \land \mathit{create}_2(f) : T_2 \implies \mathit{Compatible}(T_1, T_2)$$
 
@@ -80,9 +80,9 @@ $$\forall f: \mathcal{F},\, \mathit{create}_1(f) : T_1 \land \mathit{create}_2(f
 
 ### Axiom AF2（所有权转移公理）
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 $$\Omega(\mathit{create}_i(f)) \cap \Omega(f) = \emptyset$$
 
@@ -92,9 +92,9 @@ $$\Omega(\mathit{create}_i(f)) \cap \Omega(f) = \emptyset$$
 
 ### 定理 AF-T1（关联类型安全定理）
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 由 [trait_system_formalization](../../../type_theory/10_trait_system_formalization.md)，trait 解析保证多态工厂调用类型安全。
 
@@ -128,9 +128,9 @@ $$\Omega(\mathit{create}_i(f)) \cap \Omega(f) = \emptyset$$
 
 ### 定理 AF-T2（产品族完整性定理）
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 由 [ownership_model](../../../formal_methods/10_ownership_model.md) T2，同一工厂创建的产品族所有权独立且兼容。
 
@@ -153,9 +153,9 @@ $$\Omega(\mathit{create}_i(f)) \cap \Omega(f) = \emptyset$$
 
 ### 推论 AF-C1（纯 Safe 抽象工厂）
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Abstract Factory 为纯 Safe；trait 多态工厂、产品所有权转移，无 `unsafe`。
 
@@ -172,9 +172,9 @@ Abstract Factory 为纯 Safe；trait 多态工厂、产品所有权转移，无 
 
 ### 概念定义-属性关系-解释论证 层次汇总
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
@@ -186,7 +186,7 @@ Abstract Factory 为纯 Safe；trait 多态工厂、产品所有权转移，无 
 
 ## Rust 实现与代码示例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 trait Button { fn render(&self); }
@@ -223,11 +223,11 @@ impl GuiFactory for WinFactory {
 
 ## 完整证明
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 形式化论证链
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```text
 Axiom AF1 (产品族一致性)
@@ -247,7 +247,7 @@ ownership_model T2
 
 ### 与 Rust 类型系统的联系
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | Rust 特性 | Abstract Factory 实现 | 类型安全保证 |
 | :--- | :--- | :--- |
@@ -258,7 +258,7 @@ ownership_model T2
 
 ### 内存安全保证
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 1. **产品族一致性**：关联类型保证编译期族匹配
 2. **所有权清晰**：各产品独立拥有，无共享所有权问题
@@ -442,13 +442,13 @@ graph LR
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -459,7 +459,7 @@ graph LR
 
 #### 代码示例更新
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 本文档中的所有Rust代码示例均已：
 
@@ -469,7 +469,7 @@ graph LR
 
 #### 相关文档
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查
@@ -503,17 +503,17 @@ graph LR
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Design Pattern]**
-> **[来源: Rust API Guidelines]**
-> **[来源: Gang of Four]**
-> **[来源: ACM - Software Design Patterns]**
-> **[来源: Wikipedia - Formal Methods]**
-> **[来源: Coq Reference]**
-> **[来源: TLA+]**
-> **[来源: ACM - Formal Verification]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Wikipedia - Type System]**
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
+> **来源: [Gang of Four](https://en.wikipedia.org/wiki/Design_Patterns)**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ---

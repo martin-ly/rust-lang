@@ -11,7 +11,7 @@
 
 ## 知识结构思维导图
 >
-> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Compiler Construction]** · **[来源: Wikipedia - Formal Grammar]** · **[来源: ACM - Compiler Design Principles]** · **[来源: IEEE - Language Implementation Standards]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)** · **来源: [Wikipedia - Formal Grammar](https://en.wikipedia.org/wiki/Formal_Grammar)** · **[来源: ACM - Compiler Design Principles]** · **[来源: IEEE - Language Implementation Standards]**
 
 ```mermaid
 mindmap
@@ -44,7 +44,7 @@ mindmap
 
 ## 与核心文档的关联
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 本文档 | 核心文档 | 关系 |
 | :--- | :--- | :--- |
@@ -57,11 +57,11 @@ mindmap
 
 ## Rust 编译器架构
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 编译流程
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```text
 源代码 (.rs)
@@ -89,7 +89,7 @@ LLVM 优化 → 优化后的 LLVM IR
 
 ### MIR（中级中间表示）
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 // Rust 代码
@@ -110,7 +110,7 @@ fn add(a: i32, b: i32) -> i32 {
 
 ### 借用检查的 MIR 分析
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 // 借用检查器在 MIR 上工作
@@ -134,7 +134,7 @@ fn borrow_check_example() {
 
 ### 编译器优化
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 // 常量折叠
@@ -161,7 +161,7 @@ fn dead_code() {
 
 ### 泛型单态化
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 // 泛型定义
@@ -183,7 +183,7 @@ fn monomorphization_demo() {
 
 ### 生命周期擦除
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 // 源代码带生命周期注解
@@ -206,7 +206,7 @@ fn lifetime_erasure() {
 
 ### 属性宏与派生宏
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 // 过程宏示例
@@ -239,7 +239,7 @@ const _: () = assert!(std::mem::size_of::<usize>() == 8, "64-bit only");
 
 ### unsafe 代码检查边界
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust
 // 编译器确保 unsafe 块边界清晰
@@ -344,10 +344,10 @@ unsafe fn very_dangerous() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Compiler Construction]**
+> **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)**
 
-> **[来源: Rust Compiler Team Blog]**
+> **来源: [Rust Compiler Team Blog](https://blog.rust-lang.org/inside-rust/)**
 
-> **[来源: LLVM Documentation]**
+> **来源: [LLVM Documentation](https://llvm.org/docs/)**
 
-> **[来源: ACM - Compiler Design]**
+> **来源: [ACM](https://dl.acm.org/)**

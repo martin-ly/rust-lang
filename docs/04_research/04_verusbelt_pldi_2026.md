@@ -12,7 +12,7 @@
 
 ## 📋 目录
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [VerusBelt (PLDI 2026) 研究笔记](#verusbelt-pldi-2026-研究笔记)
   - [📋 目录](#-目录)
@@ -39,7 +39,7 @@
 
 ## 🔍 背景：Verus 验证框架
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Verus** 是由 **Microsoft Research** 开发的 Rust 程序验证框架，允许开发者用 Rust 本身编写规范（`spec` 函数）和证明（`proof` 代码），从而验证 Rust 程序的正确性。
 
@@ -74,7 +74,7 @@ Verus 的三种函数模式：
 
 ## 📄 VerusBelt 论文概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **论文标题**: VerusBelt: A Semantic Foundation for Proof-Oriented Extensions to Rust
 
@@ -93,13 +93,13 @@ Verus 的三种函数模式：
 
 ## 🧠 核心贡献
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 VerusBelt 的主要技术贡献：
 
 ### 1. 类型系统扩展的形式化
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 为 Verus 的以下扩展提供形式化类型规则：
 
@@ -112,7 +112,7 @@ VerusBelt 的主要技术贡献：
 
 ### 2. 层叠语义 (Layered Semantics)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 VerusBelt 语义层次:
@@ -134,7 +134,7 @@ VerusBelt 语义层次:
 
 ### 3. 擦除定理 (Erasure Theorem)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 证明：所有 `spec` 和 `proof` 代码在编译后可以被安全擦除，不影响 `exec` 代码的运行时行为。这是 Verus "零开销抽象" 的形式化保证。
 
@@ -142,11 +142,11 @@ VerusBelt 语义层次:
 
 ## ⚖️ 与相关工作的对比
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### VerusBelt vs RefinedRust
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 维度 | VerusBelt / Verus | RefinedRust |
 |------|------------------|-------------|
@@ -160,7 +160,7 @@ VerusBelt 语义层次:
 
 ### VerusBelt vs RustBelt
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 维度 | RustBelt | VerusBelt |
 |------|----------|-----------|
@@ -201,7 +201,7 @@ RustBelt (POPL 2018) ── 证明 Rust 所有权系统内存安全
 
 ## 🔧 对安全关键 Rust 的实践意义
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 VerusBelt 的研究成果对以下领域有直接影响：
 
@@ -310,13 +310,13 @@ Design and Implementation (PLDI 2026).
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

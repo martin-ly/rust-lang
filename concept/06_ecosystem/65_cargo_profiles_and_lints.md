@@ -18,7 +18,7 @@
 
 > **来源**: [Cargo — Profiles](https://doc.rust-lang.org/cargo/reference/profiles.html) · [Cargo — Lints](https://doc.rust-lang.org/cargo/reference/manifest.html#the-lints-table)
 > [Cargo Book — Lints](https://doc.rust-lang.org/cargo/reference/lints.html) ·
-> [Cargo Book — The Manifest Format — `[lints]`](https://doc.rust-lang.org/cargo/reference/manifest.html#the-lints-section)
+> [The Cargo Book](https://doc.rust-lang.org/cargo/)`](https://doc.rust-lang.org/cargo/reference/manifest.html#the-lints-section)
 
 ## 📑 目录
 
@@ -268,7 +268,7 @@ Cargo lints 目前仍为 nightly-only 不稳定特性，需要在 nightly 工具
 |:---|:---:|:---|
 | [Cargo Book — Profiles](https://doc.rust-lang.org/cargo/reference/profiles.html) | ✅ 一级 | Profile 官方文档 |
 | [Cargo Book — Lints](https://doc.rust-lang.org/cargo/reference/lints.html) | ✅ 一级 | Cargo lints 官方文档 |
-| [Cargo Book — The Manifest Format — `[lints]`](https://doc.rust-lang.org/cargo/reference/manifest.html#the-lints-section) | ✅ 一级 | `[lints]` 官方文档 |
+| [The Cargo Book](https://doc.rust-lang.org/cargo/)`](https://doc.rust-lang.org/cargo/reference/manifest.html#the-lints-section) | ✅ 一级 | `[lints]` 官方文档 |
 
 ---
 

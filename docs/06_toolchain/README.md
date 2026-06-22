@@ -15,7 +15,7 @@
 
 ## 快速开始
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 # 创建新项目
@@ -63,7 +63,7 @@ lto = true
 
 ## 🔬 形式化理论
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 深入学习工具链生态系统的形式化理论基础：
 
@@ -78,7 +78,7 @@ lto = true
 
 ## 🎯 文档说明
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本目录包含 Rust 工具链的高级文档，涵盖编译器特性、构建系统、文档生成等核心工具的深入使用指南。
 
@@ -88,19 +88,19 @@ lto = true
 
 ## 📋 文档目录
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 核心工具链文档
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 0. Rust 2024 Edition 学习影响 🆕
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **涵盖内容**:
 
@@ -112,9 +112,9 @@ lto = true
 
 #### 1. [编译器特性与优化](./01_compiler_features.md)
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **涵盖内容**:
 
@@ -135,9 +135,9 @@ lto = true
 
 #### 2. Cargo 工作空间与依赖管理
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **涵盖内容**:
 
@@ -157,9 +157,9 @@ lto = true
 
 #### 3. [Rustdoc 高级功能](./03_rustdoc_advanced.md)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **涵盖内容**:
 
@@ -179,7 +179,7 @@ lto = true
 
 #### 4. Rust 1.91 vs 1.90 全面对比分析（对齐官方发布说明）
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **涵盖内容（以权威来源为准）**:
 
@@ -191,9 +191,9 @@ lto = true
 
 #### 5. [Rust 1.93 vs 1.92 全面对比分析](./06_05_rust_1_93_vs_1_92_comparison.md) 🆕
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **涵盖内容**:
 
@@ -215,15 +215,15 @@ lto = true
 
 ## 🔍 快速导航
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 按主题分类
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 #### 性能优化
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - [编译器优化](./01_compiler_features.md#3-优化级别)
 - [LTO](./01_compiler_features.md#4-link-time-optimization-lto)
@@ -232,7 +232,7 @@ lto = true
 
 #### 构建系统
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - Workspace 管理
 - 依赖管理
@@ -241,7 +241,7 @@ lto = true
 
 #### 文档生成
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - [文档注释](./03_rustdoc_advanced.md#2-文档注释语法)
 - [文档测试](./03_rustdoc_advanced.md#3-文档测试-doc-tests)
@@ -254,7 +254,7 @@ lto = true
 
 ### Rust 1.93 主要改进 🆕
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **版本**: Rust 1.93.1 (2026-02-12，补丁版；功能版 1.93.0 于 2026-01-22 发布)
 
@@ -270,7 +270,7 @@ lto = true
 
 #### 6. Rust 1.93 兼容性注意事项 🆕
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **涵盖内容**:
 
@@ -286,7 +286,7 @@ lto = true
 
 #### 7. [Rust 1.93 兼容性深度解析](./06_09_rust_1_93_compatibility_deep_dive.md) 🆕
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **涵盖内容**:
 
@@ -308,7 +308,7 @@ lto = true
 
 ### Rust 1.95+ 主要改进 🆕
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **版本**: Rust 1.96.0+ (2026-03-05)
 
@@ -330,7 +330,7 @@ lto = true
 
 ### Rust 1.91 主要改进
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **版本**: Rust 1.91.0 (2025-10-30)
 
@@ -347,11 +347,11 @@ lto = true
 
 ### Rust 1.54+ 新特性
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 #### 1. 增量编译默认启用
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **特性**: Rust 1.54 默认重新启用增量编译
 
@@ -367,7 +367,7 @@ lto = true
 
 #### 2. Rustdoc JSON 输出改进
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **特性**: 改进的 JSON 格式文档输出
 
@@ -385,7 +385,7 @@ lto = true
 
 ### 生产环境优化配置
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```toml
 # Cargo.toml
@@ -403,7 +403,7 @@ strip = true
 
 ### 创建 Workspace 项目
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```toml
 # 根 Cargo.toml
@@ -422,7 +422,7 @@ tokio = { version = "1.0", features = ["full"] }
 
 ### 编写高质量文档
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ````rust,ignore
 /// 函数说明
@@ -469,7 +469,7 @@ pub fn function(a: i32, b: i32) -> i32 {
 
 ### 内部文档
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 - Rust 2024 Edition 学习影响 🆕
 - [编译器特性](./01_compiler_features.md)
@@ -492,7 +492,7 @@ pub fn function(a: i32, b: i32) -> i32 {
 
 ### 官方资源
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 - [Rustc Book](https://doc.rust-lang.org/rustc/)
 - [Cargo Book](https://doc.rust-lang.org/cargo/)
@@ -710,18 +710,18 @@ let gamma = f64::consts::EULER_GAMMA;
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Wikipedia - Compiler Construction]**
-> **[来源: Rust Compiler Team Blog]**
-> **[来源: LLVM Documentation]**
-> **[来源: ACM - Compiler Design]**
-> **[来源: Wikipedia - Machine Learning]**
-> **[来源: Wikipedia - Artificial Intelligence]**
-> **[来源: tch-rs Documentation]**
-> **[来源: ACM - AI Systems]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)**
+> **来源: [Rust Compiler Team Blog](https://blog.rust-lang.org/inside-rust/)**
+> **来源: [LLVM Documentation](https://llvm.org/docs/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
+> **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)**
+> **来源: [tch-rs Documentation](https://docs.rs/tch/latest/tch/)**
+> **来源: [ACM - AI Systems](https://dl.acm.org/)**

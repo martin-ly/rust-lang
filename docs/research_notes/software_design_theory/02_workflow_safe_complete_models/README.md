@@ -13,7 +13,7 @@
 
 ## 📊 目录 {#-目录}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [工作流：23 安全 vs 43 完全模型](#工作流23-安全-vs-43-完全模型)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -40,7 +40,7 @@
 
 ## 宗旨
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 建立「23 种安全设计模型」与「43 种完全模型」的形式边界与语义论证，明确安全子集与扩展目录的构成。
 
@@ -48,7 +48,7 @@
 
 ## 定义
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 概念 | 定义 |
 | :--- | :--- |
@@ -59,7 +59,7 @@
 
 ## 文档索引
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文档 | 内容 |
 | :--- | :--- |
@@ -72,7 +72,7 @@
 
 ## 核心关系
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **23 安全 ⊆ 43 完全**：23 为纯 Safe 子集
 - **扩展 20**：企业/分布式模式，绝大部分亦纯 Safe；Gateway 在 FFI 场景可能需 unsafe
@@ -81,7 +81,7 @@
 
 ## 使用流程
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **查 23 安全**：模式是否纯 Safe → `01_safe_23_catalog`
 2. **查 43 完全**：扩展模式（Repository、DTO 等）→ [02_complete_43_catalog](./02_complete_43_catalog.md)
@@ -92,7 +92,7 @@
 
 ## 快速参考
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 需求 | 首选文档 |
 | :--- | :--- |
@@ -105,7 +105,7 @@
 
 ## 层次推进阅读路径
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 层次 | 读者 | 阅读顺序 | 产出 |
 | :--- | :--- | :--- | :--- |
@@ -118,7 +118,7 @@
 
 ## 23 vs 43 选型指南（实质内容）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 场景 | 推荐 | 理由 |
 | :--- | :--- | :--- |
@@ -134,11 +134,11 @@
 
 ## 场景→模式→代码完整链条（实质内容）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 链条 1：Web API 分层
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **场景**：REST API 处理订单请求；需校验、持久化、返回 DTO。
 
@@ -170,7 +170,7 @@ impl OrderService {
 
 ### 链条 2：可撤销编辑器
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **场景**：文本编辑器支持 undo/redo。
 
@@ -228,13 +228,13 @@ impl OrderService {
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -277,11 +277,11 @@ impl OrderService {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**

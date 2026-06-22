@@ -1475,7 +1475,7 @@ Rust 效果演进路线（推测，基于 Yoshua Wuyts 2025-2026 输出）：
 近期（Rust 2027-2028 / Edition 2027?）:
   AsyncFn trait      → 效果多态的泛型（fn/afn 统一）[1.85+ stable]
   gen<yield>         → 统一生成器和协程效果 [推进中]
-  const trait        → trait 的 const 版本（效果约束）[Rust Project Goals 2025H1]
+  const trait        → trait 的 const 版本（效果约束）[Rust Project Goals 2025H1](https://rust-lang.github.io/rust-project-goals/2025h1/)
   throw/throws       → fallibility 作为真正效果 [提案阶段]
   with-clauses       → 统一效果语法框架 [设计提案]
 
@@ -1644,7 +1644,7 @@ trait Generator<R> {
 
 ## Wikipedia 概念对齐
 
-> **[来源: Wikipedia]** 核心概念与国际知识库映射。
+> **来源: [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)** 核心概念与国际知识库映射。
 
 | 概念 | Wikipedia 词条 | 说明 |
 | :--- | :--- | :--- |

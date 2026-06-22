@@ -53,7 +53,7 @@
 
 ## 错误处理全景
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 mindmap
@@ -142,13 +142,13 @@ mindmap
 
 ## Result<T, E> 详解
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 基本使用
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 定义可能失败的操作
@@ -169,9 +169,9 @@ fn calculate(x: f64, y: f64) -> Result<f64, MathError> {
 
 ### 组合方法
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 方法 | 签名 | 用途 |
 | :--- | :--- | :--- |
@@ -186,13 +186,13 @@ fn calculate(x: f64, y: f64) -> Result<f64, MathError> {
 
 ## 错误类型设计
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 使用 thiserror (库开发)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use thiserror::Error;
@@ -215,9 +215,9 @@ pub enum ConfigError {
 
 ### 使用 anyhow (应用开发)
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use anyhow::{Context, Result};
@@ -240,13 +240,13 @@ fn main() -> Result<()> {
 
 ## panic! 使用指南
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 适用场景
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 场景 | 示例 | 原因 |
 | :--- | :--- | :--- |
@@ -257,9 +257,9 @@ fn main() -> Result<()> {
 
 ### 与 Result 对比
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // ✅ 使用Result - 调用者决定如何处理
@@ -281,11 +281,11 @@ fn parse_user_input(s: &str) -> i32 {
 
 ## 错误转换
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### From trait
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 impl From<io::Error> for MyError {
@@ -303,7 +303,7 @@ fn read_file() -> Result<String, MyError> {
 
 ### Try trait (实验性)
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
 // 统一处理Option和Result
@@ -320,7 +320,7 @@ fn get_or_default<T: Default>(opt: Option<T>) -> T {
 
 ### 模式1: 立即处理
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust,ignore
 match result {
@@ -334,7 +334,7 @@ match result {
 
 ### 模式2: 传播并添加上下文
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 let data = operation()
@@ -343,7 +343,7 @@ let data = operation()
 
 ### 模式3: 错误恢复
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 let result = primary_op()
@@ -571,9 +571,9 @@ Option<T>
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Exception Handling]**
-> **[来源: TRPL Ch. 9 - Error Handling]**
-> **[来源: Rust Reference - Result]**
-> **[来源: RFC 2504 - Try Trait]**
+> **来源: [Wikipedia - Exception Handling](https://en.wikipedia.org/wiki/Exception_Handling)**
+> **来源: [TRPL Ch. 9 - Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)**
+> **来源: [Rust Reference - Result](https://doc.rust-lang.org/std/result/)**
+> **来源: [RFC 2504 - Try Trait](https://rust-lang.github.io/rfcs/2504-2504-try-trait.html)**
 
 ---

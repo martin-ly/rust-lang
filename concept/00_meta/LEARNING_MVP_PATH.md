@@ -19,6 +19,8 @@
 > - **选修**（🟡）：按兴趣和职业方向选择，不影响 MVP 达成，但扩展能力边界
 > - **核心产出**：一个可 `cargo install` 的多线程/异步 CLI 工具
 >
+> **测验入口**: 每个阶段末尾标注可运行的 L3 嵌入式测验，用于验证学习效果。
+>
 >
 > **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
@@ -27,17 +29,30 @@
 
 ```text
 Week 1: 基础能力构建（20h）
-├─ Day 1-2: Hello World + 基础语法      [4h]
-├─ Day 3-4: 所有权与借用                [6h]
-├─ Day 5-6: 类型系统与错误处理          [6h]
-└─ Day 7:   第一个 CLI 工具（无并发）    [4h]
+├─ Day 1-2: Hello World + 基础语法      [4h]  🔴
+├─ Day 3-4: 所有权与借用                [6h]  🔴
+├─ Day 5-6: 类型系统与错误处理          [6h]  🔴
+└─ Day 7:   第一个 CLI 工具（无并发）    [4h]  🔴
 
 Week 2: 并发与工程化（20h）
-├─ Day 8-9:  集合与迭代器               [4h]
-├─ Day 10-11: 多线程与并发              [6h]
-├─ Day 12-13: 异步基础                  [6h]
-└─ Day 14:   综合项目：多线程/异步 CLI  [4h]
+├─ Day 8-9:  集合与迭代器               [4h]  🔴
+├─ Day 10-11: 多线程与并发              [6h]  🔴
+├─ Day 12-13: 异步基础                  [6h]  🟡
+└─ Day 14:   综合项目：多线程/异步 CLI  [4h]  🔴
 ```
+
+### 必修/选修快速对照
+
+| 模块 | 类型 | 对应 L3 测验 |
+|:---|:---:|:---|
+| Hello World + 基础语法 | 🔴 必修 | — |
+| 所有权与借用 | 🔴 必修 | `exercises/tests/l3_core.rs` |
+| 类型系统与错误处理 | 🔴 必修 | `exercises/tests/l3_core.rs` |
+| 第一个 CLI 工具 | 🔴 必修 | — |
+| 集合与迭代器 | 🔴 必修 | `exercises/tests/l3_core.rs` |
+| 多线程与并发 | 🔴 必修 | `exercises/tests/l3_advanced_systems.rs` |
+| 异步基础 | 🟡 选修 | `exercises/tests/l3_async_concurrency.rs` |
+| 综合项目 | 🔴 必修 | — |
 
 ---
 
@@ -59,6 +74,8 @@ Week 2: 并发与工程化（20h）
 | 练习 | 编写猜数字游戏（无错误处理版） | 1h | **必修** | 能运行，可猜测 1-100 的随机数 |
 
 **产出**: `guessing_game_v1.rs` — 基础猜数字游戏
+
+**测验**: 完成本日后可尝试 [`exercises/tests/l1_foundation.rs`](../../../exercises/tests/l1_foundation.rs) 中的基础语法题（可选）。
 
 ---
 
@@ -82,6 +99,8 @@ Week 2: 并发与工程化（20h）
 
 **产出**: 一份个人"借用检查器错误速查表"
 
+**测验**: [`exercises/tests/l3_core.rs`](../../../exercises/tests/l3_core.rs) — 测验 1-2（原始指针、Unsafe Trait）。
+
 ---
 
 ### Day 5-6: 类型系统与错误处理 [6h]
@@ -100,6 +119,8 @@ Week 2: 并发与工程化（20h）
 
 **产出**: `guessing_game_v2.rs` — 带错误处理的猜数字游戏
 
+**测验**: [`exercises/tests/l3_core.rs`](../../../exercises/tests/l3_core.rs) — 测验 3-5（宏、FFI、C 布局）。
+
 ---
 
 ### Day 7: 第一个 CLI 工具（无并发） [4h]
@@ -115,6 +136,8 @@ Week 2: 并发与工程化（20h）
 | 阅读 | [concept/06_ecosystem/01_toolchain.md](../06_ecosystem/01_toolchain.md)（Cargo 部分） | 0.5h | **必修** | 理解 `Cargo.toml` 基本结构 |
 
 **产出**: `rsgrep` 项目 — 可发布的 CLI 工具雏形
+
+**测验**: 使用 `cargo test` 验证 `rsgrep` 的单元测试通过。
 
 ---
 
@@ -135,6 +158,8 @@ Week 2: 并发与工程化（20h）
 
 **产出**: `rsgrep` v2 — 迭代器驱动的惯用 Rust 代码
 
+**测验**: [`exercises/tests/l3_core.rs`](../../../exercises/tests/l3_core.rs) — 复习宏与 FFI 测验。
+
 ---
 
 ### Day 10-11: 多线程与并发 [6h]
@@ -154,6 +179,8 @@ Week 2: 并发与工程化（20h）
 
 **产出**: `rsgrep` v3 — 多线程并行搜索版本
 
+**测验**: [`exercises/tests/l3_advanced_systems.rs`](../../../exercises/tests/l3_advanced_systems.rs) — 原子操作、Release/Acquire、自旋锁测验。
+
 ---
 
 ### Day 12-13: 异步基础 [6h]
@@ -171,6 +198,8 @@ Week 2: 并发与工程化（20h）
 | 练习 | 实现异步文件读取 + 内容搜索 | 0.5h | **选修** | 使用 `tokio::fs` |
 
 **产出**: 异步 HTTP 客户端工具 `async_fetch`
+
+**测验**: [`exercises/tests/l3_async_concurrency.rs`](../../../exercises/tests/l3_async_concurrency.rs) — async fn、spawn_blocking、select、Actor 模式测验。
 
 ---
 
@@ -198,6 +227,8 @@ Week 2: 并发与工程化（20h）
 
 **产出**: 一个可 `cargo install` 的完整 CLI 工具
 
+**测验**: 项目自身至少 3 个单元测试 + `cargo clippy` 无警告。
+
 ---
 
 ## 验证清单（Checkpoint）
@@ -210,6 +241,31 @@ Week 2: 并发与工程化（20h）
 - [ ] **并发**: 选择正确的并发原语（`thread` vs `async` vs `channel`）
 - [ ] **工具链**: 熟练使用 `cargo` 的 build/test/run/doc/clippy/fmt
 - [ ] **生态**: 能在 crates.io 找到并集成合适的第三方库
+
+---
+
+## L3 嵌入式测验总览
+
+完成 MVP 路径后，可通过以下 L3 级可运行测验巩固与扩展知识：
+
+| 测验文件 | 覆盖主题 | 推荐时机 |
+|:---|:---|:---|
+| [`exercises/tests/l1_foundation.rs`](../../../exercises/tests/l1_foundation.rs) | 基础语法、变量、控制流 | Day 1-2 后 |
+| [`exercises/tests/l2_intermediate.rs`](../../../exercises/tests/l2_intermediate.rs) | 集合、错误处理、模块 | Day 5-6 后 |
+| [`exercises/tests/l3_core.rs`](../../../exercises/tests/l3_core.rs) | async/unsafe/宏/FFI | Day 3-6 后 |
+| [`exercises/tests/l3_advanced_systems.rs`](../../../exercises/tests/l3_advanced_systems.rs) | 原子操作、内联汇编、无锁结构 | Day 10-11 后 |
+| [`exercises/tests/l3_async_concurrency.rs`](../../../exercises/tests/l3_async_concurrency.rs) | async/await、Tokio、并发模式 | Day 12-13 后 |
+| [`exercises/tests/l3_ecosystem_alignment.rs`](../../../exercises/tests/l3_ecosystem_alignment.rs) | 生态对齐、版本跟踪、形式化工具概念 | 完成 MVP 综合项目后（选修） |
+
+运行方式：
+
+```bash
+cd exercises
+cargo test --test l3_core
+cargo test --test l3_advanced_systems
+cargo test --test l3_async_concurrency
+cargo test --test l3_ecosystem_alignment
+```
 
 ---
 
@@ -246,10 +302,10 @@ Week 2: 并发与工程化（20h）
 
 ---
 
-> **文档版本**: 1.2
+> **文档版本**: 1.3
 > **对应 Rust 版本**: 1.96.0 (Edition 2024)
-> **最后更新**: 2026-06-19
-> **状态**: ✅ MVP 路径已创建 · 外部学习路径已对齐
+> **最后更新**: 2026-06-22
+> **状态**: ✅ 已区分必修/选修 · 已标注 L3 测验入口 · 已新增生态对齐测验
 
 ## 认知路径
 

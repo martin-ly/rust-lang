@@ -10,13 +10,13 @@
 > **形式化框架**: 容量不变式 + 溢出处理 + 零堆分配验证
 >
 > **参考**: heapless Documentation; The Rust Programming Language (Embedded); Real-Time Systems
-> **[来源: heapless Documentation - docs.rs/heapless]** · **[来源: Rust Embedded Book]** · **[来源: Wikipedia - Real-time Computing]** · **[来源: Rust Reference - no_std]** · **[来源: Wikipedia - Stack-based Memory Allocation]** · **[来源: TRPL Ch. 15]** · **[来源: Wikipedia - Stack-Based Memory Allocation]** · **[来源: Wikipedia - Fixed-Size Data Structure]** · **[来源: ACM - Heapless Data Structures]** · **[来源: IEEE - Embedded Memory Management]**
+> **[来源: heapless Documentation - docs.rs/heapless]** · **来源: [Rust Embedded Book](https://doc.rust-lang.org/stable/embedded-book/)** · **来源: [Wikipedia - Real-time Computing](https://en.wikipedia.org/wiki/Real_time_Computing)** · **来源: [Rust Reference - no_std](https://doc.rust-lang.org/reference/names/preludes.html)** · **来源: [Wikipedia - Stack-based Memory Allocation](https://en.wikipedia.org/wiki/Stack_based_Memory_Allocation)** · **来源: [TRPL Ch. 15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)** · **来源: [Wikipedia - Stack-Based Memory Allocation](https://en.wikipedia.org/wiki/Stack_Based_Memory_Allocation)** · **来源: [Wikipedia - Fixed-Size Data Structure](https://en.wikipedia.org/wiki/Fixed_Size_Data_Structure)** · **[来源: ACM - Heapless Data Structures]** · **[来源: IEEE - Embedded Memory Management]**
 
 ---
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [Heapless 嵌入式集合形式化分析](#heapless-嵌入式集合形式化分析)
   - [目录](#目录)
@@ -114,7 +114,7 @@
 
 ## 1. 引言
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 `heapless` 是Rust嵌入式生态系统中最重要的基础库之一，它为 `no_std` 环境提供了固定容量的集合类型。与标准库的动态分配集合不同，heapless在编译时确定容量，完全避免运行时堆分配。
 
@@ -136,15 +136,15 @@ $$
 
 ## 2. 理论基础
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 2.1 固定容量数据结构的代数定义
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 定义 2.1 (固定容量类型)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 固定容量数据结构 $C\langle T, N \rangle$ 是一个三元组:
 
@@ -167,11 +167,11 @@ $$
 
 ### 2.2 容量作为类型参数的形式化
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ### 定义 2.2 (类型级容量)
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 使用Rust const generics，容量 $N$ 被编码为类型参数:
 
@@ -195,11 +195,11 @@ $$
 
 ### 2.3 栈分配与堆分配的语义差异
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ### 定义 2.3 (内存分配语义)
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **堆分配（标准库Vec）**:
 
@@ -240,11 +240,11 @@ $$
 
 ### 3.1 Vec: 容量不变式与操作语义
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ### 定义 3.1 (HeaplessVec内存布局)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 pub struct Vec<T, const N: usize> {
@@ -267,7 +267,7 @@ $$
 
 ### 定理 3.1 (容量不变式)
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 > 对于任何HeaplessVec操作，长度 $n$ 始终满足 $0 \leq n \leq N$。
 
@@ -312,7 +312,7 @@ $$
 
 ### 算法 3.1 (push操作语义)
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 fn push(&mut self, item: T) -> Result<(), T> {
@@ -343,7 +343,7 @@ $$
 
 ### 算法 3.2 (pop操作语义)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 fn pop(&mut self) -> Option<T> {
@@ -372,11 +372,11 @@ $$
 
 ### 3.2 String: UTF-8约束与容量管理
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ### 定义 3.2 (HeaplessString)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 pub struct String<const N: usize> {
@@ -398,7 +398,7 @@ $$
 
 ### 定理 3.2 (UTF-8安全性)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 > HeaplessString的所有操作保持UTF-8有效性。
 
@@ -429,11 +429,11 @@ HeaplessString确保UTF-8有效性通过以下机制:
 
 ### 3.3 LinearMap/IndexMap: 查找复杂度
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ### 定义 3.3 (LinearMap)
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 pub struct LinearMap<K, V, const N: usize> {
@@ -450,7 +450,7 @@ $$
 
 ### 定理 3.3 (查找复杂度)
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 > LinearMap的查找操作时间复杂度为 $O(n)$，空间复杂度为 $O(n)$。
 
@@ -491,11 +491,11 @@ $$
 
 ### 3.4 Queue: SPSC/MPMC变体
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ### 定义 3.4 (SPSC Queue)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 单生产者单消费者（SPSC）队列:
 
@@ -525,7 +525,7 @@ $$
 
 ### 定义 3.5 (MPMC Queue)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 多生产者多消费者（MPMC）队列使用原子操作保证线程安全:
 
@@ -537,7 +537,7 @@ pub struct MpMcQueue<T, const N: usize> {
 
 ### 定理 3.4 (队列安全保证)
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 > Heapless队列在无锁条件下提供线程安全保证。
 
@@ -555,11 +555,11 @@ $$
 
 ### 3.5 BinaryHeap: 堆性质保持
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ### 定义 3.6 (BinaryHeap)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 pub struct BinaryHeap<T, const N: usize, const MAX: bool = true> {
@@ -589,7 +589,7 @@ $$
 
 ### 定理 3.5 (堆性质不变式)
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 > BinaryHeap的所有操作保持堆性质。
 
@@ -624,11 +624,11 @@ $$
 
 ### 4.1 编译时容量检查的形式化
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 定理 4.1 (编译时容量保证)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 > 容量约束在编译时静态检查，无运行时开销。
 
@@ -660,11 +660,11 @@ fn create_vec() -> Vec<u8, 64> {
 
 ### 4.2 类型级容量运算
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ### 定义 4.1 (容量运算)
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 虽然heapless不直接提供类型级算术，但可以与 `typenum` 结合:
 
@@ -684,11 +684,11 @@ $$
 
 ### 4.3 容量溢出处理的代数模型
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ### 定义 4.2 (溢出代数)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 溢出处理可以建模为代数效果:
 
@@ -718,11 +718,11 @@ $$
 
 ### 5.1 push操作的类型转换
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ### 定理 5.1 (push类型安全性)
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 > push操作在成功时保持类型安全，在溢出时安全地返回所有权。
 
@@ -754,11 +754,11 @@ $$
 
 ### 5.2 pop操作的所有权转移
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ### 定理 5.2 (pop所有权转移)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 > pop操作正确地将元素所有权从集合转移到调用者。
 
@@ -788,11 +788,11 @@ $$
 
 ### 5.3 迭代器的生命周期保证
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ### 定理 5.3 (迭代器安全性)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 > Heapless迭代器保持对集合的借用，防止迭代期间修改。
 
@@ -829,11 +829,11 @@ for x in it { ... }
 
 ### 5.4 Drop实现的正确性
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ### 定理 5.4 (Drop正确性)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 > Heapless集合正确释放所有元素，无内存泄漏。
 
@@ -869,11 +869,11 @@ $$
 
 ### 6.1 核心定理汇总
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ### 定理 6.1 (容量不变式定理)
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 > 对于任何HeaplessVec $\langle T, N \rangle$，长度 $n$ 始终满足:
 
@@ -1768,30 +1768,30 @@ mod unit_tests {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Stack-Based Memory Allocation]**
+> **来源: [Wikipedia - Stack-Based Memory Allocation](https://en.wikipedia.org/wiki/Stack_Based_Memory_Allocation)**
 
-> **[来源: Wikipedia - Fixed-Size Data Structure]**
+> **来源: [Wikipedia - Fixed-Size Data Structure](https://en.wikipedia.org/wiki/Fixed_Size_Data_Structure)**
 
-> **[来源: Wikipedia - Ring Buffer]**
+> **来源: [Wikipedia - Ring Buffer](https://en.wikipedia.org/wiki/Ring_Buffer)**
 
 > **[来源: IEEE - Embedded Memory Management]**
 
 > **[来源: ACM - Heapless Data Structures]**
 
-> **[来源: Rust Reference - no_std]**
+> **来源: [Rust Reference - no_std](https://doc.rust-lang.org/reference/names/preludes.html)**
 
-> **[来源: Rustonomicon - Data Layout]**
+> **来源: [Rustonomicon - Data Layout](https://doc.rust-lang.org/nomicon/)**
 
 > **[来源: heapless.rs Documentation]**
 
 > **[来源: MISRA C - Memory Constraints]**
 
-> **[来源: Rust Embedded Working Group]**
+> **来源: [Rust Embedded Working Group](https://rust-embedded.github.io/book/)**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---
 

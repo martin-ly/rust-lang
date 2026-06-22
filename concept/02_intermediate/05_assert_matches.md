@@ -208,7 +208,7 @@ graph LR
 ```
 
 > **认知功能**: 此图展示 Rust 断言宏的**家族关系**和**语义演进**。`assert_matches!` 填补了"模式匹配断言"的空白，使断言系统从"值相等"扩展到"结构匹配"。
-> [来源: [Rust Reference — Patterns]]
+> [来源: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html)]
 > **使用建议**: 在测试枚举类型时，优先选择 `assert_matches!` 而非 `assert_eq!`——前者验证结构形状，后者仅验证相等性。
 > **关键洞察**: 断言系统的演进轨迹是**从具体值到抽象模式**：`assert!`（任意布尔）→ `assert_eq!`（部分相等）→ `assert_matches!`（结构模式）。
 

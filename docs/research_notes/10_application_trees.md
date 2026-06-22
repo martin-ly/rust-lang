@@ -58,7 +58,7 @@
 
 ## 一、概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档构建 Rust 在三大核心应用领域的知识体系树：系统编程、网络服务和数据系统。每个领域展示从基础概念到高级应用的知识路径。
 
@@ -66,11 +66,11 @@
 
 ## 二、系统编程应用树
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 概念树
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```mermaid
 mindmap
@@ -121,7 +121,7 @@ mindmap
 
 ### 2.2 技能路径
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | 层级 | 主题 | 核心概念 | 实践项目 |
 |------|------|----------|----------|
@@ -132,7 +132,7 @@ mindmap
 
 ### 2.3 核心技术栈
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```text
 系统编程栈
@@ -167,7 +167,7 @@ mindmap
 
 ### 3.1 概念树
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```mermaid
 mindmap
@@ -227,7 +227,7 @@ mindmap
 
 ### 3.2 架构层次
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | 层次 | 技术选择 | 关注点 | 成熟度 |
 |------|----------|--------|--------|
@@ -238,7 +238,7 @@ mindmap
 
 ### 3.3 服务开发技能树
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```text
 网络服务开发
@@ -575,12 +575,12 @@ Rust 应用领域总览
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ---

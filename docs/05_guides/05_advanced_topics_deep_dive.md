@@ -61,7 +61,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档深入探讨Rust的高级主题，帮助开发者掌握更深层次的技术和最佳实践。
 
@@ -74,13 +74,13 @@ SEND-T1/SYNC-T1 (并发)。
 
 ## 1. 高级所有权模式
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 自定义智能指针
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 use std::ops::{Deref, DerefMut};
@@ -116,9 +116,9 @@ impl<T> Deref for Shared<T> {
 
 ### 1.2 零成本抽象的所有权转移
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 /// 使用move语义实现零成本抽象
@@ -136,13 +136,13 @@ pub fn borrow_value<T>(value: &T) -> &T {
 
 ## 2. 高级类型系统技巧
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 关联类型与GATs
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 /// 使用关联类型定义Trait
@@ -164,9 +164,9 @@ trait Iterable {
 
 ### 2.2 类型级编程
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 /// 使用PhantomData进行类型级编程
@@ -193,13 +193,13 @@ impl<T, const N: usize> Array<T, N> {
 
 ## 3. 高级并发模式
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 3.1 无锁编程
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -228,9 +228,9 @@ impl LockFreeCounter {
 
 ### 3.2 工作窃取算法
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 use std::sync::mpsc;
@@ -266,7 +266,7 @@ impl<T> WorkStealingQueue<T> {
 
 ### 4.1 自定义Future实现
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust
 use std::future::Future;
@@ -307,7 +307,7 @@ impl Future for Delay {
 
 ### 4.2 异步流处理
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust,ignore
 use futures::stream::{Stream, StreamExt};
@@ -335,7 +335,7 @@ where
 
 ### 5.1 声明宏高级模式
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 /// 递归宏实现
@@ -352,7 +352,7 @@ const COUNT: usize = count!(a b c d e); // 5
 
 ### 5.2 过程宏基础
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 // 注意：过程宏需要在单独的crate中定义
@@ -373,7 +373,7 @@ struct MyStruct {
 
 ### 6.1 内存布局优化
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 /// 使用#[repr(C)]优化内存布局
@@ -395,7 +395,7 @@ struct PackedStruct {
 
 ### 6.2 零成本抽象
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 /// 使用泛型实现零成本抽象
@@ -421,7 +421,7 @@ pub fn fast_add(a: i32, b: i32) -> i32 {
 
 ### 7.1 生命周期高级用法
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 /// 高阶生命周期绑定
@@ -444,7 +444,7 @@ fn subtype_example<'a: 'b, 'b>(x: &'a str, y: &'b str) -> &'b str {
 
 ### 7.2 借用检查器深入理解
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 /// 理解借用检查器的规则
@@ -472,7 +472,7 @@ fn borrow_checker_example() {
 
 ### 8.1 自定义错误类型
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 use std::fmt;
@@ -500,7 +500,7 @@ impl std::error::Error for MyError {}
 
 ### 8.2 错误传播模式
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 use std::io;
@@ -544,11 +544,11 @@ fn process_file(path: &str) -> Result<Vec<i32>, MyError> {
 
 ### array_windows 的高级模式
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 #### 1. 多重窗口组合
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 /// 同时计算多个时间窗口的指标
@@ -753,20 +753,20 @@ pub fn log_complexity_analysis(n: usize, base: f64) -> Complexity {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

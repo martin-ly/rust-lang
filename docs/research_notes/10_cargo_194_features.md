@@ -57,7 +57,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Cargo 1.94 带来了多项重要改进，包括配置文件包含、TOML 1.1 支持、发布时间记录等功能。
 
@@ -65,21 +65,21 @@ Cargo 1.94 带来了多项重要改进，包括配置文件包含、TOML 1.1 支
 
 ## 一、Config Inclusion（配置文件包含）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 特性描述
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Cargo 现在在配置文件（`.cargo/config.toml`）中支持 `include` 键，允许加载额外的配置文件，从而更好地跨项目和环境组织、共享和管理 Cargo 配置。
 
 ### 1.2 基本用法
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```toml
 # .cargo/config.toml
@@ -91,9 +91,9 @@ include = [
 
 ### 1.3 高级用法（带可选标记）
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```toml
 # .cargo/config.toml
@@ -107,15 +107,15 @@ include = [
 
 ### 1.4 实际应用场景
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 团队共享配置
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```toml
 # .cargo/config.toml
@@ -129,9 +129,9 @@ include = [
 
 #### 环境特定配置
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```toml
 # .cargo/config.toml
@@ -145,9 +145,9 @@ include = [
 
 ### 1.5 配置合并规则
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - 后续配置可以覆盖前面的配置
 - 当前文件的配置优先级最高
@@ -157,13 +157,13 @@ include = [
 
 ## 二、TOML 1.1 支持
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 支持的特性
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Cargo 1.94 现在解析 TOML v1.1，包含以下新特性：
 
@@ -177,7 +177,7 @@ Cargo 1.94 现在解析 TOML v1.1，包含以下新特性：
 
 ### 2.2 多行内联表示例
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```toml
 [dependencies]
@@ -203,7 +203,7 @@ tokio = {
 
 ### 2.3 MSRV 注意事项
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 使用 TOML 1.1 特性会提高开发时的 MSRV（最低支持 Rust 版本），但：
 
@@ -226,13 +226,13 @@ rust-version = "1.96"  # 需要 1.94+ 来解析 TOML 1.1
 
 ### 3.1 特性描述
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 Cargo registry 索引现在包含 `pubtime` 字段，记录 crate 版本的发布时间。这支持未来的基于时间的依赖解析。
 
 ### 3.2 使用场景
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```bash
 # 未来可能支持的时间范围依赖
@@ -241,7 +241,7 @@ cargo add serde --time "2026-01-01..2026-03-01"
 
 ### 3.3 注意事项
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 - crates.io 将逐步回填现有包的发布时间
 - 不是所有 crate 都有 `pubtime`（取决于发布时间和 registry）
@@ -473,9 +473,9 @@ protocol = "sparse"
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Build Automation]**
-> **[来源: Cargo Book]**
-> **[来源: Rust Reference - Cargo]**
-> **[来源: crates.io Documentation]**
+> **来源: [Wikipedia - Build Automation](https://en.wikipedia.org/wiki/Build_Automation)**
+> **来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)**
+> **来源: [Rust Reference - Cargo](https://doc.rust-lang.org/cargo/)**
+> **来源: [crates.io Documentation](https://crates.io/)**
 
 ---

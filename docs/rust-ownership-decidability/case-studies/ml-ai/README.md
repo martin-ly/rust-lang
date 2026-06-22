@@ -11,7 +11,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Machine Learning]** · **[来源: Candle (Hugging Face) - github.com/huggingface/candle]** · **[来源: ndarray Documentation - docs.rs/ndarray]** · **[来源: Wikipedia - Deep Learning]** · **[来源: Polars Documentation - docs.pola.rs]** · **[来源: ACM - ML Systems Performance]** · **[来源: IEEE - AI Accelerator Architectures]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)** · **[来源: Candle (Hugging Face) - github.com/huggingface/candle]** · **[来源: ndarray Documentation - docs.rs/ndarray]** · **来源: [Wikipedia - Deep Learning](https://en.wikipedia.org/wiki/Deep_Learning)** · **[来源: Polars Documentation - docs.pola.rs]** · **[来源: ACM - ML Systems Performance]** · **[来源: IEEE - AI Accelerator Architectures]**
 
 - [Rust 机器学习与 AI 开发完全指南](#rust-机器学习与-ai-开发完全指南)
   - [目录](#目录)
@@ -74,13 +74,13 @@
 
 ## 1. ML生态系统概述
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 为什么Rust用于ML
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Rust在机器学习领域正快速崛起，其核心优势在于独特的内存安全保证与零成本抽象的完美结合：
 
@@ -118,7 +118,7 @@ pub fn matrix_multiply(a: &[f32], b: &[f32], n: usize) -> Vec<f32> {
 
 ### 1.2 性能vs生产力权衡
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 | 维度 | Python | Rust | 说明 |
 |------|--------|------|------|
@@ -149,7 +149,7 @@ fn ml_rust_backend(_py: Python, m: &PyModule) -> PyResult<()> {
 
 ### 1.3 Python互操作性
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **PyO3：Rust与Python的桥梁**
 
@@ -199,7 +199,7 @@ maturin build --release
 
 ### 2.1 ndarray基础
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 `ndarray`是Rust最广泛使用的N维数组库，提供类似NumPy的API：
 
@@ -268,7 +268,7 @@ fn advanced_operations() {
 
 ### 2.2 nalgebra用于线性代数
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 `nalgebra`专注于线性代数运算，适合数学密集型应用：
 
@@ -314,7 +314,7 @@ fn linear_algebra_demo() {
 
 ### 2.3 Tensor操作
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use ndarray::{Array, ArrayD, IxDyn};
@@ -384,7 +384,7 @@ impl Tensor {
 
 ### 2.4 GPU加速（CUDA/ROCm）
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **cudarc：纯Rust CUDA运行时**
 
@@ -470,7 +470,7 @@ impl GpuTensor {
 
 ### 3.1 Candle (Hugging Face)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 Candle是Hugging Face开发的极简Rust深度学习框架，专注于推理场景：
 
@@ -546,7 +546,7 @@ fn bert_inference() -> anyhow::Result<()> {
 
 ### 3.2 Burn
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 Burn是面向研究和生产的现代化深度学习框架：
 
@@ -613,7 +613,7 @@ pub fn train(model: &mut MlpModel, x: Tensor<Backend, 2>, y: Tensor<Backend, 2>)
 
 ### 3.3 dfdx（可微分编程）
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 dfdx使用Rust类型系统实现编译时形状检查：
 
@@ -652,7 +652,7 @@ fn type_checked_nn() {
 
 ### 3.4 tch-rs (PyTorch绑定)
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 tch-rs提供Rust绑定的PyTorch C++ API：
 
@@ -700,7 +700,7 @@ fn torch_example() {
 
 ### 4.1 linfa（scikit-learn风格）
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 linfa是Rust的机器学习框架，提供统一的API：
 
@@ -715,7 +715,7 @@ linfa-preprocessing = "0.7"
 
 ### 4.2 聚类算法
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 use linfa::prelude::*;
@@ -749,7 +749,7 @@ fn clustering_examples() {
 
 ### 4.3 分类器
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 use linfa_trees::DecisionTree;
@@ -782,7 +782,7 @@ fn classification_examples() {
 
 ### 4.4 回归分析
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use linfa_linear::{LinearRegression, RidgeRegression, Lasso};
@@ -817,7 +817,7 @@ fn regression_examples() {
 
 ### 5.1 前馈网络
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use candle_nn::{Linear, Module, ReLU, Dropout, VarBuilder, BatchNorm};
@@ -891,7 +891,7 @@ impl FeedForwardNetwork {
 
 ### 5.2 卷积网络
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use candle_nn::{Conv2d, Conv2dConfig, MaxPool2d, Module};
@@ -966,7 +966,7 @@ impl ConvNet {
 
 ### 5.3 循环网络
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 pub struct LstmCell {
@@ -1052,7 +1052,7 @@ impl Lstm {
 
 ### 5.4 Transformer实现
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 pub struct MultiHeadAttention {
@@ -1152,7 +1152,7 @@ impl TransformerBlock {
 
 ### 6.1 ONNX格式
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 use ort::{Environment, Session, Value};
@@ -1189,7 +1189,7 @@ fn onnx_inference() -> ort::Result<()> {
 
 ### 6.2 TensorFlow Lite
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use tflite::interpreter::{Interpreter, InterpreterBuilder};
@@ -1227,7 +1227,7 @@ fn tflite_inference() {
 
 ### 6.3 边缘设备部署
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 // 针对嵌入式设备的优化推理
@@ -1282,7 +1282,7 @@ fn relu(x: f32) -> f32 {
 
 ### 7.1 Tokenization
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use tokenizers::Tokenizer;
@@ -1318,7 +1318,7 @@ fn tokenization_examples() {
 
 ### 7.2 BERT推理
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 use candle_transformers::models::bert::{BertModel, Config, DTYPE};
@@ -1388,7 +1388,7 @@ impl BertEmbedder {
 
 ### 7.3 文本生成
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 use candle_transformers::models::llama::{Llama, Config as LlamaConfig};
@@ -1509,7 +1509,7 @@ impl TextGenerator {
 
 ### 8.1 图像处理
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 use image::{ImageBuffer, Rgb, DynamicImage, GenericImageView};
@@ -1596,7 +1596,7 @@ impl ImageProcessor {
 
 ### 8.2 目标检测
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use candle_core::{Tensor, DType, Device};
@@ -1750,7 +1750,7 @@ impl ObjectDetector {
 
 ### 8.3 图像分类
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use candle_core::{Tensor, DType, Device};
@@ -1839,7 +1839,7 @@ impl ImageClassifier {
 
 ### 9.1 项目结构
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```
 image-classifier/
@@ -1858,7 +1858,7 @@ image-classifier/
 
 ### 9.2 数据加载
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 // src/data.rs
@@ -1993,7 +1993,7 @@ impl Iterator for DataLoader {
 
 ### 9.3 模型定义
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 // src/model.rs
@@ -2095,7 +2095,7 @@ impl Module for ConvClassifier {
 
 ### 9.4 训练循环
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 // src/train.rs
@@ -2204,7 +2204,7 @@ impl Trainer {
 
 ### 9.5 推理优化
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 // src/inference.rs
@@ -2315,7 +2315,7 @@ impl OptimizedInference {
 
 ### 9.6 主程序
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 // src/main.rs
@@ -2383,7 +2383,7 @@ fn load_model(path: &str, num_classes: usize, device: &Device) -> anyhow::Result
 
 ### 10.1 并行计算
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use rayon::prelude::*;
@@ -2429,7 +2429,7 @@ pub fn configure_thread_pool() {
 
 ### 10.2 SIMD
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 use std::simd::*;
@@ -2492,7 +2492,7 @@ pub fn simd_dot_product(a: &[f32], b: &[f32]) -> f32 {
 
 ### 10.3 内存布局
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 use ndarray::{Array, Array2, Array3, Axis, ShapeBuilder};
@@ -2574,7 +2574,7 @@ impl BufferPool {
 
 ### 常用资源
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - **Candle文档**: <https://github.com/huggingface/candle>
 - **Burn文档**: <https://burn.dev>
@@ -2583,7 +2583,7 @@ impl BufferPool {
 
 ### 性能对比基准
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 | 操作 | Python (NumPy) | Rust (ndarray) | 加速比 |
 |------|----------------|----------------|--------|
@@ -2622,13 +2622,13 @@ impl BufferPool {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Machine Learning]**
+> **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
 
-> **[来源: Wikipedia - Deep Learning]**
+> **来源: [Wikipedia - Deep Learning](https://en.wikipedia.org/wiki/Deep_Learning)**
 
-> **[来源: Wikipedia - Artificial Neural Network]**
+> **来源: [Wikipedia - Artificial Neural Network](https://en.wikipedia.org/wiki/Artificial_Neural_Network)**
 
-> **[来源: Wikipedia - GPU Computing]**
+> **来源: [Wikipedia - GPU Computing](https://en.wikipedia.org/wiki/GPU_Computing)**
 
 > **[来源: IEEE - AI Accelerator Architectures]**
 
@@ -2642,31 +2642,31 @@ impl BufferPool {
 
 > **[来源: Rust ML Working Group]**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages Survey]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design and Implementation]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM - Systems Programming Languages Survey](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI - Programming Language Design and Implementation](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
-> **[来源: Wikipedia - Machine Learning]**
-> **[来源: Wikipedia - Artificial Intelligence]**
-> **[来源: tch-rs Documentation]**
-> **[来源: ACM - AI Systems]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
+> **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
+> **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)**
+> **来源: [tch-rs Documentation](https://docs.rs/tch/latest/tch/)**
+> **来源: [ACM - AI Systems](https://dl.acm.org/)**

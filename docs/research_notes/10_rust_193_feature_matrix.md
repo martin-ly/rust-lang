@@ -41,7 +41,7 @@
 
 ## 1. 内存与所有权族
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | 概念 | 公理/定义 | 定理 | 证明方法 | 反例 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -62,7 +62,7 @@
 
 ## 2. 类型系统族
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | 概念 | 公理/定义 | 定理 | 证明方法 | 反例 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -298,18 +298,18 @@
 
 ## 权威来源索引
 
-> **[来源: Rust Reference - Feature Gates]**
-> **[来源: Rust Release Notes]**
-> **[来源: RFCs - rust-lang/rfcs]**
-> **[来源: TRPL - Appendix: Derivable Traits]**
-> **[来源: Rust Compiler Team Blog]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Rust Reference - Feature Gates](https://doc.rust-lang.org/reference/)**
+> **来源: [Rust Release Notes](https://github.com/rust-lang/rust/blob/master/RELEASES.md)**
+> **来源: [RFCs - rust-lang/rfcs](https://github.com/rust-lang/rfcs)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Compiler Team Blog](https://blog.rust-lang.org/inside-rust/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

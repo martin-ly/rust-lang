@@ -63,7 +63,7 @@
 
 ## 📊 目录 {#-目录}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [内存分析研究](#内存分析研究)
   - [📑 目录](#-目录)
@@ -114,7 +114,7 @@
 
 ## 🎯 研究目标 {#-研究目标}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本研究旨在深入分析 Rust 程序的内存使用模式，包括：
 
@@ -125,9 +125,9 @@
 
 ### 核心问题
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **Rust 程序的内存使用特征是什么？**
 2. **如何检测和预防内存泄漏？**
@@ -135,9 +135,9 @@
 
 ### 预期成果
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - 建立内存分析工具和方法
 - 识别常见内存问题模式
@@ -147,13 +147,13 @@
 
 ## 📚 理论基础 {#-理论基础}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 相关概念
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **内存分析（Memory Analysis）**：通过工具和技术分析程序的内存使用情况，识别内存问题和优化机会。
 
@@ -166,9 +166,9 @@
 
 ### 理论背景
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **内存管理理论**：
 
@@ -178,9 +178,9 @@
 
 ### 形式化论证与实验衔接
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def MA1（内存实验验证）**：内存分析实验 $E$ 验证 [ownership_model](../formal_methods/10_ownership_model.md) 定理 T2/T3，当且仅当 $E$ 观测到无悬垂、无双重释放、无泄漏。
 
@@ -208,13 +208,13 @@
 
 ## 🔬 实验设计 {#-实验设计}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 内存分配模式分析
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **测试目标**：分析不同类型数据的内存分配模式
 
@@ -227,9 +227,9 @@
 
 ### 2. 内存泄漏检测
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **测试目标**：检测和预防内存泄漏
 
@@ -241,7 +241,7 @@
 
 ### 3. 内存碎片化分析
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **测试目标**：分析内存碎片化问题
 
@@ -258,7 +258,7 @@
 
 ### 示例 1：内存使用分析
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 use std::alloc::{GlobalAlloc, Layout, System};
@@ -300,7 +300,7 @@ fn analyze_memory_usage() {
 
 ### 示例 2：Vec 增长模式分析
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 fn analyze_vec_growth() {
@@ -326,7 +326,7 @@ fn analyze_vec_growth() {
 
 ### 示例 3：内存泄漏检测
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 use std::rc::Rc;
@@ -381,7 +381,7 @@ impl SafeNode {
 
 ### 示例 4：内存布局分析
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust
 use std::mem;
@@ -410,7 +410,7 @@ fn analyze_memory_layout() {
 
 ### Vec 增长模式
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **观察结果**：
 
@@ -420,7 +420,7 @@ fn analyze_memory_layout() {
 
 ### 内存泄漏检测
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **发现**：
 
@@ -430,7 +430,7 @@ fn analyze_memory_layout() {
 
 ### 结果分析模板
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 将 `valgrind --leak-check=full`、`dhat` 或自定义 `TrackingAllocator` 的产出填入下表：
 
@@ -462,14 +462,14 @@ fn analyze_memory_layout() {
 
 ### 环境要求
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 - **Rust**: 1.93.0+；**Valgrind**: 3.18+（Linux）；**Miri**: `rustup component add miri`
 - **dhat**：`cargo add dhat` 或使用 `#[global_allocator]` + 自定义 TrackingAllocator
 
 ### 执行步骤
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 1. **Vec 增长与布局**：运行含 `analyze_vec_growth`、`analyze_memory_layout` 的示例，记录 `capacity` 序列与 `size_of`/`align_of`。
 2. **泄漏检测**：`valgrind --leak-check=full --show-leak-kinds=all ./target/release/your_binary`；或 `MIRIFLAGS="-Zmiri-tag-raw-pointers" cargo miri run`。
@@ -484,7 +484,7 @@ fn analyze_memory_layout() {
 
 ### 内存优化建议
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 - **Vec**：`Vec::with_capacity` 预分配；避免频繁 `push` 触发多次扩容。
 - **Rc/Arc**：有环则用 `Weak` 破环；无环优先 `Rc`，多线程用 `Arc`。
@@ -493,7 +493,7 @@ fn analyze_memory_layout() {
 
 ### 工具改进
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 - **Valgrind**：可与 `--error-limit=no`、`--trace-children=yes` 联用做集成测试。
 - **Miri**：持续跟进 `-Zmiri` 与 1.93 的兼容性。
@@ -501,7 +501,7 @@ fn analyze_memory_layout() {
 
 ### 内存报告
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 按「结果分析模板」整理 + 各工具截图/日志摘要，即可形成内存分析报告；建议区分「无泄漏验证」「峰值驻留」「碎片化与分配热点」三部分。
 
@@ -513,14 +513,14 @@ fn analyze_memory_layout() {
 
 ### 与形式化方法的集成
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - **所有权模型**：见 [10_ownership_model.md](../formal_methods/10_ownership_model.md)。内存分析中的「移动/复制/Drop」可对照所有权规则验证无泄漏。
 - **借用检查器**：见 [10_borrow_checker_proof.md](../formal_methods/10_borrow_checker_proof.md)。引用与生命周期不影响堆分配量，但可通过 Miri 与借用规则共同保证无 UB。
 
 ### 与实验研究的集成
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - **性能基准测试**：见 [10_performance_benchmarks.md](./10_performance_benchmarks.md)。内存分配基准（栈/堆/预分配）与本研究的数据收集可共用 `cargo bench` 与 Criterion 输出。
 - **编译器优化**：见 [10_compiler_optimizations.md](./10_compiler_optimizations.md)。`-C link-dead-code`、`opt-level` 会影响可执行体大小与分配内联，分析时需固定编译选项。
@@ -625,13 +625,13 @@ fn analyze_memory_layout() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

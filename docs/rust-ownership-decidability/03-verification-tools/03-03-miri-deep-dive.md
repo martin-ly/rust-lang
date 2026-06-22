@@ -13,7 +13,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [Miri 深度解析](#miri-深度解析)
   - [目录](#目录)
@@ -59,7 +59,7 @@
 
 ## 1. 引言与概述
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Miri (Mid-level IR Interpreter) 是 Rust 的官方解释器，专门用于检测程序中的**未定义行为 (Undefined Behavior, UB)**。与编译器不同，Miri 在 Mid-level IR (MIR) 层面解释执行代码，能够精确跟踪内存状态和所有权变化。
 
@@ -87,11 +87,11 @@ Miri (Mid-level IR Interpreter) 是 Rust 的官方解释器，专门用于检测
 
 ## 2. Miri 的工作原理
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 2.1 解释执行模型
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 Miri 采用**字节码解释执行**的方式运行 Rust 程序：
 
@@ -117,7 +117,7 @@ Miri 采用**字节码解释执行**的方式运行 Rust 程序：
 
 ### 2.2 Stacked Borrows 内存模型
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 Stacked Borrows 是 Rust 的实验性内存模型，用于精确追踪指针的借用关系。
 
@@ -156,7 +156,7 @@ let r2 = &mut x;  // 弹出 Unique(r1), 压入 Unique(r2)
 
 ### 2.3 Tree Borrows 模型
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 Tree Borrows 是 Stacked Borrows 的替代方案，使用**树结构**而非栈结构来追踪借用关系。
 
@@ -190,7 +190,7 @@ MIRI_TREE_BORROWS=1 cargo miri run
 
 ### 3.1 未定义行为 (UB) 的数学定义
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **定义 3.1 (未定义行为)**
 
@@ -214,7 +214,7 @@ $$\text{UB}(s_i) \Rightarrow \forall j > i: \neg\text{Defined}(s_j)$$
 
 ### 3.2 别名规则的形式化
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **定义 3.2 (别名关系)**
 
@@ -236,7 +236,7 @@ $$\text{active}(&mut\ T) \Rightarrow \neg\exists p: A(p, &mut\ T) \land \text{ac
 
 ### 3.3 内存模型定理
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **定理 3.3 (内存安全保证)**
 
@@ -254,7 +254,7 @@ $$\text{active}(&mut\ T) \Rightarrow \neg\exists p: A(p, &mut\ T) \land \text{ac
 
 ### 4.1 安装 Miri
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```bash
 # 安装 Miri 组件
@@ -266,7 +266,7 @@ cargo miri --version
 
 ### 4.2 环境配置
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```toml
 # .cargo/config.toml
@@ -286,7 +286,7 @@ flags = ["-Zmiri-disable-isolation"]
 
 ### 5.1 使用未初始化内存
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **错误示例：**
 
@@ -340,7 +340,7 @@ fn partial_init() {
 
 ### 5.2 悬垂指针解引用
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **错误示例：**
 
@@ -379,7 +379,7 @@ fn main() {
 
 ### 5.3 数据竞争
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **错误示例：**
 
@@ -448,7 +448,7 @@ fn main() {
 
 ### 5.4 违反别名规则
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 **Stacked Borrows 违规示例：**
 
@@ -492,7 +492,7 @@ fn main() {
 
 ### 5.5 对齐违规
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **错误示例：**
 
@@ -524,7 +524,7 @@ fn main() {
 
 ### 5.6 整数溢出
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **错误示例：**
 
@@ -562,7 +562,7 @@ fn main() {
 
 ### 6.1 与 FFI 代码交互
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 Miri 默认在隔离模式下运行，与外部函数 (FFI) 交互需要特殊配置：
 
@@ -590,7 +590,7 @@ MIRI_DISABLE_ISOLATION=1 cargo miri run
 
 ### 6.2 环境变量详解
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 | 环境变量 | 说明 | 示例 |
 |:---|:---|:---|
@@ -602,7 +602,7 @@ MIRI_DISABLE_ISOLATION=1 cargo miri run
 
 ### 6.3 测试框架集成
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 #[cfg(test)]
@@ -654,7 +654,7 @@ cargo miri test test_unsafe_ptr_ops
 
 ### 7.1 自定义智能指针验证
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 use std::alloc::{alloc, dealloc, Layout};
@@ -724,7 +724,7 @@ mod tests {
 
 ### 7.2 并发数据结构检测
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -780,7 +780,7 @@ mod tests {
 
 ### 7.3 Unsafe 抽象边界验证
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 /// 安全的字符串转换封装
@@ -856,7 +856,7 @@ mod tests {
 
 ### 9.1 最佳实践
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```markdown
 1. **CI 集成**: 在持续集成中运行 Miri 测试
@@ -892,7 +892,7 @@ mod tests {
 
 ### 9.2 常见陷阱
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **陷阱 1: 忘记 Miri 的非确定性**
 
@@ -964,7 +964,7 @@ fn platform_specific() {
 
 ### 当前限制
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 1. **性能**: 解释执行导致 10-100 倍 slowdown
 2. **平台支持**: 仅支持部分目标平台
@@ -974,7 +974,7 @@ fn platform_specific() {
 
 ### 未来方向
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 - 改进 Tree Borrows 模型
 - 更好的异步/并发支持
@@ -1014,21 +1014,21 @@ fn platform_specific() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Undefined Behavior]**
+> **来源: [Wikipedia - Undefined Behavior](https://en.wikipedia.org/wiki/Undefined_Behavior)**
 
-> **[来源: Miri Documentation]**
+> **来源: [Miri Documentation](https://github.com/rust-lang/miri)**
 
-> **[来源: Rust Reference - Miri]**
+> **来源: [Rust Reference - Miri](https://doc.rust-lang.org/reference/)**
 
-> **[来源: RFC 2585 - Unsafe Code Guidelines]**
+> **来源: [RFC 2585 - Unsafe Code Guidelines](https://rust-lang.github.io/rfcs/2585-2585-unsafe-block-in-unsafe-fn.html)**
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---
 

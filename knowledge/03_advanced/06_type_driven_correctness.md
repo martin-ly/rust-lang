@@ -1223,3 +1223,26 @@ fn main() {
 > 这与 Haskell 的 GADT 类型状态或 Idris 的依赖类型状态机类似——Rust 的 `PhantomData` 是轻量实现，但复杂度限制在工业规模系统中需权衡。
 > [来源: [Typestate Pattern in Rust](https://cliffle.com/blog/rust-typestate/)] ·
 > [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
+
+## 📚 模块 8: 国际化对齐
+
+> 本节按项目模板要求补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Rust Reference — Type System](https://doc.rust-lang.org/reference/types.html) | 权威来源 | 类型系统 |
+| [TRPL Ch10 — Generic Types / Traits](https://doc.rust-lang.org/book/ch10-00-generics.html) | 权威来源 | 泛型与 Trait |
+
+### 8.2 学术来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | 权威来源 | 类型安全语义 |
+
+### 8.3 社区权威
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Rust By Example — Types](https://doc.rust-lang.org/rust-by-example/types.html) | 权威来源 | 类型示例 |

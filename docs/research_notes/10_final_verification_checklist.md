@@ -46,7 +46,7 @@
 
 ## 验证说明
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本清单用于验证 `docs/research_notes` 项目是否达到100%完成标准。
 
@@ -54,13 +54,13 @@
 
 ## 一、文档完整性验证 ✅
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 核心形式化文档
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文档 | 检查项 | 状态 |
 | :--- | :--- | :--- |
@@ -80,7 +80,7 @@
 
 ### 1.2 设计模式文档
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 分类 | 数量 | 检查项 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -96,7 +96,7 @@
 
 ### 1.3 思维表征
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | 类型 | 目标 | 实际 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -110,7 +110,7 @@
 
 ### 1.4 实用资源
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 | 资源 | 检查项 | 状态 |
 | :--- | :--- | :--- |
@@ -130,7 +130,7 @@
 
 ### 2.1 形式化完整性
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 检查项 | 要求 | 结果 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -144,7 +144,7 @@
 
 ### 2.2 Rust衔接
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | 检查项 | 要求 | 结果 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -339,13 +339,13 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
-> **[来源: Wikipedia - Model Checking]**
-> **[来源: ACM - Formal Verification Survey]**
-> **[来源: IEEE - Formal Specification Standards]**
-> **[来源: POPL - Automated Verification]**
-> **[来源: RustBelt - Rust Formal Semantics]**
-> **[来源: TLA+ Documentation]**
-> **[来源: Wikipedia - Formal Verification]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
+> **来源: [Wikipedia - Model Checking](https://en.wikipedia.org/wiki/Model_Checking)**
+> **来源: [ACM - Formal Verification Survey](https://dl.acm.org/)**
+> **来源: [IEEE - Formal Specification Standards](https://standards.ieee.org/)**
+> **来源: [POPL - Automated Verification](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)**
+> **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [Wikipedia - Formal Verification](https://en.wikipedia.org/wiki/Formal_Verification)**
 
 ---

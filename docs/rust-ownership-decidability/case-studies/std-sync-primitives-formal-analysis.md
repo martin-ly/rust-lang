@@ -15,7 +15,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [Rust标准库同步原语形式化分析](#rust标准库同步原语形式化分析)
   - [目录](#目录)
@@ -65,7 +65,7 @@
 
 ## 1. 引言
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Rust标准库提供了一套线程安全的同步原语:
 
@@ -80,15 +80,15 @@ Rust标准库提供了一套线程安全的同步原语:
 
 ## 2. Arc (原子引用计数)
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 2.1 内存模型
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ### 定义 2.1 (Arc内存布局)
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 pub struct Arc<T: ?Sized> {
@@ -123,11 +123,11 @@ $$
 
 ### 2.2 线程安全性证明
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 定理 2.1 (Arc线程安全)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 > `Arc<T>` 是 `Send` 当且仅当 `T: Send + Sync`；是 `Sync` 当且仅当 `T: Send + Sync`。
 
@@ -166,7 +166,7 @@ let arc = Arc::new(Cell::new(0));
 
 ### 定理 2.2 (引用计数正确性)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 > Arc的引用计数准确追踪活动引用数量。
 
@@ -218,11 +218,11 @@ $$
 
 ### 2.3 内存序分析
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ### 定理 2.3 (Arc内存序正确性)
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 > Arc使用Release-Acquire序确保数据可见性。
 
@@ -289,11 +289,11 @@ $$
 
 ### 3.1 形式化规范
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ### 定义 3.1 (Mutex内存表示)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 pub struct Mutex<T: ?Sized> {
@@ -315,7 +315,7 @@ $$
 
 ### 定理 3.1 (Mutex互斥性)
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 > 任意时刻，最多只有一个线程持有MutexGuard。
 
@@ -359,11 +359,11 @@ RAII确保锁最终释放。∎
 
 ### 3.2 死锁自由度证明
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 定理 3.2 (单Mutex无死锁)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 > 使用单个Mutex的程序不会发生死锁。
 
@@ -389,7 +389,7 @@ let guard2 = mutex.lock();  // 编译错误! guard仍然存活
 
 ### 定理 3.3 (多Mutex死锁可能性)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 > 使用多个Mutex时，死锁是可能的。
 
@@ -417,11 +417,11 @@ let g1 = m1.lock();  // 可能阻塞
 
 ### 3.3 优先级反转分析
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ### 定义 3.2 (优先级反转)
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 高优先级线程被低优先级线程阻塞的现象。
 
@@ -452,11 +452,11 @@ T3被T1阻塞，但T2在运行(优先级介于两者之间)。
 
 ### 4.1 读者-写者问题形式化
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ### 定义 4.1 (RwLock状态)
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 $$
 \text{RwLockState} = \text{Unlocked} \mid \text{Read}(n: \mathbb{N}) \mid \text{Write}(t: \text{ThreadId})
@@ -476,7 +476,7 @@ $$
 
 ### 定理 4.1 (RwLock读写互斥)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 > RwLock保证:
 >
@@ -500,11 +500,11 @@ $$
 
 ### 4.2 饥饿自由度分析
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ### 定理 4.2 (写者饥饿可能性)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 > 在读者优先策略下，写者可能饥饿。
 
@@ -544,7 +544,7 @@ Rust的RwLock实现策略:
 
 ### 5.1 等待-通知协议
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ### 定义 5.1 (Condvar操作)
 >
@@ -781,13 +781,13 @@ if FLAG.compare_exchange(false, true, AcqRel, Relaxed).is_ok() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---
 

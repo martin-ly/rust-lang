@@ -57,7 +57,7 @@
 
 ## 一、概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 RustSEM (Rust Semantic Model) 定义 Rust 语言的完整操作语义。
 本文档提供数学级的语义规范，用于形式化验证和理论研究。
@@ -72,13 +72,13 @@ RustSEM (Rust Semantic Model) 定义 Rust 语言的完整操作语义。
 
 ## 二、语法定义
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 抽象语法
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 表达式 e ::=
@@ -112,9 +112,9 @@ RustSEM (Rust Semantic Model) 定义 Rust 语言的完整操作语义。
 
 ### 2.2 程序状态
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 程序状态 S ::= (H, Σ, θ, P)
@@ -129,13 +129,13 @@ P: 权限集         当前有效权限
 
 ## 三、语义域
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 3.1 值域
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 域 | 定义 | 说明 |
 |----|------|------|
@@ -145,9 +145,9 @@ P: 权限集         当前有效权限
 
 ### 3.2 环境域
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 Γ: 类型环境   变量 → 类型
@@ -157,9 +157,9 @@ P: 权限集         当前有效权限
 
 ### 3.3 求值上下文
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 求值上下文 E ::=
@@ -178,13 +178,13 @@ P: 权限集         当前有效权限
 
 ## 四、小步操作语义
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 4.1 基本归约规则
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **β归约**:
 
@@ -206,7 +206,7 @@ v; e → e    (Seq)
 
 ### 4.2 借用语义
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **共享借用创建**:
 
@@ -234,7 +234,7 @@ x ∈ dom(Σ)  Ω(x) = Owned  ∀y ∈ dom(Σ). no_borrow(y)
 
 ### 4.3 所有权语义
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **移动语义**:
 
@@ -268,7 +268,7 @@ x ∈ dom(Σ)  Γ(x) : Copy
 
 ### 5.1 表达式求值
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **Let求值**:
 
@@ -288,7 +288,7 @@ x ∈ dom(Σ)  Γ(x) : Copy
 
 ### 5.2 求值错误规则
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **使用后移动错误**:
 
@@ -314,7 +314,7 @@ BorrowCheck(e) = Fail
 
 ### 6.1 类型判定规则
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **变量**:
 
@@ -342,7 +342,7 @@ x : τ ∈ Γ
 
 ### 6.2 借用类型规则
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 **共享借用**:
 
@@ -380,7 +380,7 @@ x : τ ∈ Γ
 
 ### 7.1 堆操作语义
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **分配**:
 
@@ -408,7 +408,7 @@ H, a := v → H[a := v], ()    (Write)
 
 ### 7.2 Stacked Borrows 简化模型
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```text
 借用标签栈操作:
@@ -443,7 +443,7 @@ H, θ, *a := v → H[a := v], θ, ()    (SB-Write)
 
 ### 8.1 线程创建
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```text
 S ⊢ e →* e'    spawn(e') = t
@@ -453,7 +453,7 @@ S, spawn(e) → S ∪ {t}, t    (Spawn)
 
 ### 8.2 共享状态
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **原子读取**:
 
@@ -604,13 +604,13 @@ Rust 语义层次
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

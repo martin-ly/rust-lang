@@ -8,7 +8,7 @@
 > **Rust Version**: 1.96.0+ (Edition 2024)
 > **对齐日期**: 2026-05-12
 > **Scope**: Formal concurrency models, thread safety theorems, memory ordering semantics
-> **[来源: Rust Reference - Concurrency]** · **[来源: Wikipedia - Concurrent Computing]** · **[来源: Rustonomicon - Concurrency]** · **[来源: TRPL Ch. 16]** · **[来源: Wikipedia - Memory Ordering]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Wikipedia - Computer Multitasking]** · **[来源: Wikipedia - Lock-Free Data Structure]** · **[来源: ACM - Concurrent Programming Paradigms]** · **[来源: IEEE - Parallel Architecture Patterns]**
+> **来源: [Rust Reference - Concurrency](https://doc.rust-lang.org/reference/special-types-and-traits.html)** · **来源: [Wikipedia - Concurrent Computing](https://en.wikipedia.org/wiki/Concurrent_Computing)** · **来源: [Rustonomicon - Concurrency](https://doc.rust-lang.org/nomicon/concurrency.html)** · **来源: [TRPL Ch. 16](https://doc.rust-lang.org/book/ch16-00-concurrency.html)** · **来源: [Wikipedia - Memory Ordering](https://en.wikipedia.org/wiki/Memory_Ordering)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [Wikipedia - Computer Multitasking](https://en.wikipedia.org/wiki/Computer_Multitasking)** · **来源: [Wikipedia - Lock-Free Data Structure](https://en.wikipedia.org/wiki/Lock_Free_Data_Structure)** · **[来源: ACM - Concurrent Programming Paradigms]** · **[来源: IEEE - Parallel Architecture Patterns]**
 > **Prerequisites**: Understanding of ownership, borrowing, and trait system
 > **Estimated Reading Time**: 3-4 hours
 
@@ -16,7 +16,7 @@
 
 ## Table of Contents
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [Concurrency Architecture: Formal Deep Dive](#concurrency-architecture-formal-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -86,7 +86,7 @@
 
 ## Executive Summary
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 This document provides a formal treatment of Rust's concurrency architecture, establishing mathematical foundations for understanding why Rust's concurrency model prevents data races at compile time. We present:
 
@@ -102,11 +102,11 @@ The core insight is that Rust's ownership system, when combined with the `Send` 
 
 ## 1. Concurrency Models Formal Comparison
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 Shared Memory vs Message Passing
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 The fundamental dichotomy in concurrent programming can be formalized as:
 
@@ -183,7 +183,7 @@ fn message_passing_pattern() {
 
 ### 1.2 Rust's Ownership-Based Concurrency
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 Rust unifies these models through its ownership system, providing compile-time guarantees for both approaches.
 
@@ -276,7 +276,7 @@ fn demonstrate_send_not_sync() {
 
 ### 1.3 Formal Model Definitions
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **Definition 1.3.1 (Rust Concurrency State)**:
 
@@ -331,7 +331,7 @@ Any well-typed Rust program (excluding `unsafe` blocks) is data-race-free.
 
 ### Theorem SEND-SYNC-SAFETY
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **Statement**: If `T: Send + Sync`, then shared references to `T` across threads are safe.
 
@@ -386,7 +386,7 @@ fn demonstrate_send_sync_safety() {
 
 ### Theorem SYNC-DEREF-SAFETY
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **Statement**: If `T: Sync`, then for any valid shared reference `&T`, concurrent reads are safe.
 
@@ -441,7 +441,7 @@ fn safe_concurrent_counter() {
 
 ### Theorem SEND-COMPOSITIONALITY
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **Statement**: Generic types preserve `Send` when their type parameters are `Send`.
 
@@ -495,7 +495,7 @@ fn counter_example_not_send() {
 
 ### Theorem SYNC-COMPOSITIONALITY
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **Statement**: Generic types preserve `Sync` when their type parameters are `Sync`.
 
@@ -553,7 +553,7 @@ fn counter_example_not_sync() {
 
 ### Theorem CHANNEL-ISOLATION
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **Statement**: Channel communication preserves ownership and prevents data races by design.
 
@@ -629,7 +629,7 @@ fn what_channels_prevent() {
 
 ### 3.1 Mutex Ownership Analysis
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 A `Mutex<T>` in Rust provides a unique ownership model that combines compile-time and runtime guarantees.
 
@@ -683,11 +683,11 @@ For any type `T: Send`, `Mutex<T>` ensures that at most one thread can access `T
 
 ### 3.2 Common Mistakes and Counter-Examples
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 #### Deadlock: Circular Lock Acquisition
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 **Problem**: Thread A locks X then Y; Thread B locks Y then X
 
@@ -761,7 +761,7 @@ fn deadlock_solution() {
 
 #### Poisoning: Panic While Holding Lock
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **Problem**: If a thread panics while holding a mutex, the mutex becomes "poisoned"
 
@@ -821,7 +821,7 @@ fn poisoning_solution() {
 
 #### Hold Lock Across await: Async Deadlock
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **Problem**: Holding a synchronous mutex across an await point
 
@@ -878,7 +878,7 @@ async fn alternative_async_mutex() {
 
 ### 3.3 Deadlock Prevention Strategies
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 // Strategy 1: Try-lock with timeout
@@ -940,7 +940,7 @@ use std::collections::HashMap;
 
 ### 3.4 Poisoning and Recovery
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 use std::sync::{Arc, Mutex};
@@ -1008,7 +1008,7 @@ fn risky_operation() -> Result<(), ()> {
 
 ### 4.1 RwLock Semantics
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 An `RwLock<T>` provides multiple-reader/single-writer access patterns.
 
@@ -1056,7 +1056,7 @@ fn rwlock_semantics() {
 
 ### 4.2 Safety Guarantees
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **Theorem 4.2.1 (RwLock Data Race Prevention)**:
 
@@ -1118,7 +1118,7 @@ fn upgrade_solution() {
 
 ### 4.3 Starvation Analysis
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **Problem**: Writers can starve if readers continuously acquire the lock.
 
@@ -1192,7 +1192,7 @@ async fn async_fair_rwlock() {
 
 ### 5.1 Atomic Operations
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **Formal Definition 5.1.1 (Atomic Operation)**:
 
@@ -1230,7 +1230,7 @@ fn atomic_operations() {
 
 ### 5.2 Compare-And-Swap Loops
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **Formal Definition 5.2.1 (CAS Operation)**:
 
@@ -1350,11 +1350,11 @@ impl<T> LockFreeStack<T> {
 
 ### 5.3 Counter-Examples
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 #### ABA Problem
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **Problem**: A value changes from A to B and back to A, causing CAS to succeed when it shouldn't.
 
@@ -1415,7 +1415,7 @@ impl<T> TaggedPointer<T> {
 
 #### False Sharing
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **Problem**: Independent atomic variables on the same cache line cause unnecessary cache coherence traffic.
 
@@ -1487,7 +1487,7 @@ fn no_false_sharing() {
 
 ### 5.4 Memory Reclamation
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **Problem**: In lock-free data structures, when do we free memory?
 
@@ -1574,7 +1574,7 @@ fn using_crossbeam_epoch() {
 
 ### 6.1 Ownership Transfer in Channels
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 Channels in Rust provide a mechanism for transferring ownership between threads.
 
@@ -1614,7 +1614,7 @@ fn ownership_transfer_in_channels() {
 
 ### 6.2 Safety Theorem
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **Theorem CHANNEL-SAFETY**:
 
@@ -1632,11 +1632,11 @@ At no point can two threads simultaneously access the value.
 
 ### 6.3 Channel Patterns
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 #### Worker Pool Pattern
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 use std::sync::mpsc;
@@ -1701,7 +1701,7 @@ fn worker_pool_example() {
 
 #### Pipeline Pattern
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 use std::sync::mpsc::{self, Sender, Receiver};
@@ -1764,7 +1764,7 @@ fn pipeline_example() {
 
 #### Request-Response Pattern
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 use std::sync::mpsc;
@@ -1813,7 +1813,7 @@ fn request_response_example() {
 
 ### 6.4 Backpressure and Flow Control
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use std::sync::mpsc;
@@ -1921,7 +1921,7 @@ impl TokenBucket {
 
 ### 7.1 Happens-Before Relation
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **Formal Definition 7.1.1 (Happens-Before)**:
 
@@ -1983,7 +1983,7 @@ ready.store(true, Release)─┼──> ready.load(Acquire) ───> data.load
 
 ### 7.2 Ordering Options
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | Ordering | Guarantee | Use Case |
 |----------|-----------|----------|
@@ -2029,11 +2029,11 @@ fn ordering_options() {
 
 ### 7.3 Counter-Examples of Wrong Ordering
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 #### Incorrect: Relaxed for synchronization
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 // COUNTER-EXAMPLE: Wrong ordering
@@ -2063,7 +2063,7 @@ fn wrong_ordering_relaxed() {
 
 #### Incorrect: Acquire-only for producer
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 // COUNTER-EXAMPLE: Using Acquire when Release needed
@@ -2085,7 +2085,7 @@ fn wrong_ordering_producer() {
 
 #### Solution: Correct ordering pairs
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 // SOLUTION: Correct ordering usage
@@ -2113,7 +2113,7 @@ fn correct_ordering() {
 
 ### 7.4 Sequential Consistency
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **Definition**: Sequential consistency guarantees that all threads see all `SeqCst` operations in the same global order.
 
@@ -2162,7 +2162,7 @@ fn seq_cst_example() {
 
 ### 8.1 Lock-Free Bounded Queue Implementation
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 We'll implement a lock-free bounded queue (based on the array-based bounded MPMC queue algorithm).
 
@@ -2315,7 +2315,7 @@ impl<T> Drop for LockFreeQueue<T> {
 
 ### 8.2 Ownership Semantics Analysis
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **Ownership Transfer in Enqueue**:
 
@@ -2353,7 +2353,7 @@ fn queue_ownership_demo() {
 
 ### 8.3 Safety Arguments
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **Theorem 8.3.1 (Queue Safety)**:
 
@@ -2385,7 +2385,7 @@ The `LockFreeQueue` implementation is safe (no data races, no use-after-free) wh
 
 ### 8.4 Performance Considerations
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **Benchmark Results** (approximate, on modern x86):
 
@@ -2459,7 +2459,7 @@ Rust 1.94 introduces several improvements to concurrency primitives:
 
 ### LazyLock Concurrency Enhancements
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 use std::sync::LazyLock;
@@ -2505,7 +2505,7 @@ fn lazy_lock_1_94_features() {
 
 ### Improved Atomic Operations
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -2537,7 +2537,7 @@ fn atomic_improvements_1_94() {
 
 ### Loom for Model Checking
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 // Using loom to verify concurrent algorithms
@@ -2574,7 +2574,7 @@ mod tests {
 
 ### MIRI for Undefined Behavior Detection
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 // Run with: cargo miri test
@@ -2593,7 +2593,7 @@ fn miri_test_lock_free_queue() {
 
 ### Creusot for Formal Proof
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 // Creusot can prove functional correctness
@@ -2658,13 +2658,13 @@ pub fn try_enqueue(&self, item: T) -> Result<(), T> {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Concurrent Computing]**
+> **来源: [Wikipedia - Concurrent Computing](https://en.wikipedia.org/wiki/Concurrent_Computing)**
 
-> **[来源: Wikipedia - Lock-Free Data Structure]**
+> **来源: [Wikipedia - Lock-Free Data Structure](https://en.wikipedia.org/wiki/Lock_Free_Data_Structure)**
 
-> **[来源: Wikipedia - Thread Pool]**
+> **来源: [Wikipedia - Thread Pool](https://en.wikipedia.org/wiki/Thread_Pool)**
 
-> **[来源: Wikipedia - Work Stealing]**
+> **来源: [Wikipedia - Work Stealing](https://en.wikipedia.org/wiki/Work_Stealing)**
 
 > **[来源: IEEE - Parallel Architecture Patterns]**
 
@@ -2672,56 +2672,56 @@ pub fn try_enqueue(&self, item: T) -> Result<(), T> {
 
 > **[来源: ACM - Scalable Concurrent Algorithms]**
 
-> **[来源: Rust Reference - Concurrency]**
+> **来源: [Rust Reference - Concurrency](https://doc.rust-lang.org/reference/special-types-and-traits.html)**
 
-> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
+> **来源: [TRPL Ch. 16 - Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)**
 
 > **[来源: crossbeam.rs Documentation]**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages Survey]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design and Implementation]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM - Systems Programming Languages Survey](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI - Programming Language Design and Implementation](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
-> **[来源: Rust Reference - std::sync]**
-> **[来源: ACM - Concurrent Programming]**
-> **[来源: Wikipedia - Design Pattern]**
-> **[来源: Rust API Guidelines]**
-> **[来源: Gang of Four - Design Patterns]**
-> **[来源: ACM - Software Design Patterns]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [TRPL Ch. 16 - Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)**
+> **来源: [Rust Reference - std::sync](https://doc.rust-lang.org/std/sync/)**
+> **来源: [ACM - Concurrent Programming](https://dl.acm.org/)**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
+> **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
 
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Wikipedia - Type System]**
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ---
 

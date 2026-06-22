@@ -44,7 +44,7 @@
 
 ## 一、什么是 `cfg_select!`
 
-> **[来源: Rust Standard Library]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 `cfg_select!` 是 Rust 1.95.0 稳定化的编译期条件选择宏。
 它允许在表达式上下文中根据 `cfg` 条件选择不同的值，**无需代码重复**。
@@ -320,8 +320,8 @@ const VALUE: u32 = cfg_select! { ... };
 
 ## 七、参考
 
-> **[来源: Rust Standard Library]**
-> **[来源: Rust Reference]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
 | 资源 | 链接 |
 |------|------|

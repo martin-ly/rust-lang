@@ -23,7 +23,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [Rust并发架构设计模式](#rust并发架构设计模式)
   - [目录](#目录)
@@ -63,13 +63,13 @@
 
 ## 1. 并发模型概述
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### Rust并发哲学
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```text
 零成本抽象 +  fearless concurrency
@@ -81,7 +81,7 @@
 
 ### 并发模型对比
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 | 模型 | 代表库 | 适用场景 | 特点 |
 |------|--------|---------|------|
@@ -98,7 +98,7 @@
 
 ### 线程池模式
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 use std::sync::{mpsc, Arc, Mutex};
@@ -167,7 +167,7 @@ impl Worker {
 
 ### Scoped线程 (Rust 1.63+)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 use std::thread;
@@ -199,7 +199,7 @@ fn scoped_threads() {
 
 ### 读写锁模式
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 use std::sync::RwLock;
@@ -223,7 +223,7 @@ impl<K: Eq + std::hash::Hash, V: Clone> Cache<K, V> {
 
 ### 屏障模式 (Barrier)
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 use std::sync::Barrier;
@@ -249,7 +249,7 @@ fn barrier_example() {
 
 ### 信号量模式
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 use std::sync::Arc;
@@ -284,7 +284,7 @@ async fn semaphore_example() {
 
 ### Actor模式 (Tokio)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 use tokio::sync::{mpsc, oneshot};
@@ -373,7 +373,7 @@ pub fn start_actor() -> CacheActorHandle {
 
 ### 管道模式 (Pipeline)
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use tokio::sync::mpsc;
@@ -413,7 +413,7 @@ async fn pipeline_example() {
 
 ### Future组合模式
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use futures::future::{join, select, try_join};
@@ -444,7 +444,7 @@ async fn future_composition() {
 
 ### 数据并行 (Rayon)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use rayon::prelude::*;
@@ -471,7 +471,7 @@ fn data_parallel() {
 
 ### 分治模式
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use rayon::join;
@@ -503,7 +503,7 @@ fn parallel_merge_sort<T: Ord + Send>(data: &mut [T]) {
 
 ### Actix框架示例
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 use actix::prelude::*;
@@ -851,21 +851,21 @@ async fn good_mutex() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
-> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
+> **来源: [TRPL Ch. 16 - Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)**
 
-> **[来源: Rust Reference - std::sync]**
+> **来源: [Rust Reference - std::sync](https://doc.rust-lang.org/std/sync/)**
 
-> **[来源: ACM - Concurrent Programming]**
+> **来源: [ACM - Concurrent Programming](https://dl.acm.org/)**
 
-> **[来源: Wikipedia - Design Pattern]**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 
-> **[来源: Rust API Guidelines]**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 
-> **[来源: Gang of Four - Design Patterns]**
+> **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
 
-> **[来源: ACM - Software Design Patterns]**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
 
 ---
 

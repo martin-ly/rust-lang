@@ -11,7 +11,7 @@
 
 ## 知识结构思维导图
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 mindmap
@@ -35,7 +35,7 @@ mindmap
 
 ## 与核心文档的关联
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 本文档 | 核心文档 | 关系 |
 | :--- | :--- | :--- |
@@ -48,7 +48,7 @@ mindmap
 
 ## 内存安全的核心保证
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Rust 通过所有权和借用系统在编译时保证内存安全：
 
@@ -109,7 +109,7 @@ fn no_use_after_free() {
 
 ### 内存布局与对齐
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 // Rust 保证内存对齐安全
@@ -140,7 +140,7 @@ fn memory_layout() {
 
 ### 安全抽象边界
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 // 安全封装 unsafe 操作
@@ -198,7 +198,7 @@ impl Drop for SafeBuffer {
 
 ### 编译时内存安全检查
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 // Rust 编译器在编译时防止内存错误
@@ -256,13 +256,13 @@ fn prevent_use_after_free() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
-> **[来源: Coq Reference]**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
 
-> **[来源: TLA+]**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
 
-> **[来源: ACM - Formal Verification]**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**

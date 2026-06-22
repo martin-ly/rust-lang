@@ -17,7 +17,7 @@
 
 - [Rust 概念速查卡片（Quick Reference）](#rust-概念速查卡片quick-reference)
   - [📑 目录](#-目录)
-  - [一、核心概念速查（按字母序） \[来源: 速查内容基于 Rust Reference / TRPL / Rustonomicon / RFCs; 概念定义与 concept/ 目录核心文件保持一致\]](#一核心概念速查按字母序-来源-速查内容基于-rust-reference--trpl--rustonomicon--rfcs-概念定义与-concept-目录核心文件保持一致)
+  - 一、核心概念速查（按字母序） \[来源: 速查内容基于 Rust Reference / [The Rust Programming Language](https://doc.rust-lang.org/book/) / [Rustonomicon](https://doc.rust-lang.org/nomicon/) / RFCs; 概念定义与 concept / 目录核心文件保持一致\](#一核心概念速查按字母序-来源-速查内容基于-rust-reference--trpl--rustonomicon--rfcs-概念定义与-concept-目录核心文件保持一致)
     - [A](#a)
       - [`async` / `await`](#async--await)
       - [`Arc<T>`](#arct)
@@ -89,9 +89,9 @@
     - [测验 2：《Rust 概念速查卡片（Quick Reference）》的主要用途是什么？（理解层）](#测验-2rust-概念速查卡片quick-reference的主要用途是什么理解层)
     - [测验 3：元数据层文档能否替代 L1-L7 的核心概念学习？（理解层）](#测验-3元数据层文档能否替代-l1-l7-的核心概念学习理解层)
 
-## 一、核心概念速查（按字母序） [来源: 速查内容基于 Rust Reference / TRPL / Rustonomicon / RFCs; 概念定义与 concept/ 目录核心文件保持一致]
+## 一、核心概念速查（按字母序） 来源: 速查内容基于 Rust Reference / [The Rust Programming Language](https://doc.rust-lang.org/book/) / [Rustonomicon](https://doc.rust-lang.org/nomicon/) / RFCs; 概念定义与 concept / 目录核心文件保持一致
 
-> **[来源: Rust Standard Library / 2025; Rust Reference / 2025; TRPL / 2024]** 本速查表的所有概念定义均来源于 Rust 官方文档和学术论文。
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/) / 2025; Rust Reference / 2025; TRPL / 2024** 本速查表的所有概念定义均来源于 Rust 官方文档和学术论文。
 
 ### A
 

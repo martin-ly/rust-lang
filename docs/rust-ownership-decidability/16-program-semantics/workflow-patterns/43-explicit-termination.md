@@ -7,7 +7,7 @@
 
 ## 目录
 >
-> **[来源: Workflow Patterns Initiative]** · **[来源: van der Aalst 2003]** · **[来源: Russell 2006]** · **[来源: Rust Reference]** · **[来源: TRPL Ch. 9 - Error Handling]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)** · **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)** · **来源: [Russell 2006](https://www.workflowpatterns.com/)** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [TRPL Ch. 9 - Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)**
 
 - [43 显式终止模式 (Explicit Termination) - 完整形式化语义](#43-显式终止模式-explicit-termination---完整形式化语义)
   - [目录](#目录)
@@ -53,13 +53,13 @@
 
 ## 1. 引言
 >
-> **[来源: Workflow Patterns Initiative]** · **[来源: van der Aalst 2003]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)** · **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)**
 
 显式终止模式（Explicit Termination）是工作流控制流模式中的状态模式，定义了工作流案例在指定的显式结束节点处终止，而非隐式地在所有活动完成时自然结束。该模式强调了终止行为作为工作流定义的一等公民，使业务流程设计师能够明确表达案例的结束语义。
 
 ### 1.1 历史背景
 
-> **[来源: van der Aalst 2003]** · **[来源: Russell 2006]**
+> **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)** · **来源: [Russell 2006](https://www.workflowpatterns.com/)**
 
 显式终止模式最早由 Wil van der Aalst 等人在 "Workflow Patterns" (2003) 中系统定义，作为与隐式终止模式（Implicit Termination, WCP11）对偶的概念。隐式终止假设当案例中没有更多可执行的活动时，案例自动结束；而显式终止要求案例必须到达一个预定义的终止节点才能合法结束。
 
@@ -71,7 +71,7 @@
 
 ### 1.2 动机与应用场景
 
-> **[来源: Russell 2006]** · **[来源: Rust Reference]**
+> **来源: [Russell 2006](https://www.workflowpatterns.com/)** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
 显式终止模式的核心动机来源于以下需求：
 
@@ -88,7 +88,7 @@
 
 ### 2.1 概念定义
 
-> **[来源: Workflow Patterns Initiative]** · **[来源: Russell 2006]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)** · **来源: [Russell 2006](https://www.workflowpatterns.com/)**
 
 **显式终止** 是一个控制流构造，它要求工作流案例必须通过一个预定义的终止节点来结束执行，其中：
 
@@ -111,7 +111,7 @@ Condition ::= BooleanExpression
 
 ### 2.2 核心语义
 
-> **[来源: van der Aalst 2003]** · **[来源: POPL - Programming Languages Research]**
+> **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)** · **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **显式终止语义**:
 
@@ -145,11 +145,11 @@ $$
 
 ### 2.3 形式化表示
 
-> **[来源: POPL - Programming Languages Research]** · **[来源: PLDI - Programming Language Design]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)** · **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 #### 2.3.1 状态机表示
 
-> **[来源: van der Aalst 2003]**
+> **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)**
 
 $$
 \begin{aligned}
@@ -184,7 +184,7 @@ stateDiagram-v2
 
 #### 2.3.2 流程代数表示 (CSP 风格)
 
-> **[来源: Hoare 1978]** · **[来源: CSP 理论]**
+> **来源: [Hoare 1978](https://en.wikipedia.org/wiki/Communicating_sequential_processes)** · **[来源: CSP 理论]**
 
 $$
 \text{Case} = \text{Body}; \text{Termination}
@@ -208,7 +208,7 @@ $$
 
 #### 2.3.3 Petri 网表示
 
-> **[来源: Petri Net Theory]** · **[来源: van der Aalst 2003]**
+> **来源: [Petri Net Theory](https://en.wikipedia.org/wiki/Petri_net)** · **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)**
 
 ```
 (A1) --> (A2) --> ... --> (An) --> [eval_end]
@@ -232,7 +232,7 @@ $$
 
 ### 3.1 BPMN 表示
 
-> **[来源: OMG BPMN 2.0 Specification]** · **[来源: Wikipedia - BPMN]**
+> **[来源: OMG BPMN 2.0 Specification]** · **来源: [Wikipedia - BPMN](https://en.wikipedia.org/wiki/BPMN)**
 
 在 BPMN 2.0 中，显式终止通过**终止结束事件**（Terminate End Event）表示：
 
@@ -254,7 +254,7 @@ graph TD
 
 ### 3.3 WfMC 标准
 
-> **[来源: WfMC - Workflow Management Coalition]** · **[来源: Russell 2006]**
+> **来源: [WfMC - Workflow Management Coalition](https://www.wfmc.org/)** · **来源: [Russell 2006](https://www.workflowpatterns.com/)**
 
 工作流管理联盟 (WfMC) 将显式终止定义为：
 
@@ -291,7 +291,7 @@ $$
 
 ### 4.2 CSP 表示
 
-> **[来源: Hoare 1978]** · **[来源: Roscoe 2011]**
+> **来源: [Hoare 1978](https://en.wikipedia.org/wiki/Communicating_sequential_processes)** · **来源: [Roscoe 2011](https://en.wikipedia.org/wiki/Communicating_sequential_processes)**
 
 **Communicating Sequential Processes (CSP)**:
 
@@ -345,7 +345,7 @@ $$
 
 ### 5.1 基础实现
 
-> **[来源: Rust Reference]** · **[来源: TRPL Ch. 3 - Control Flow]** · **[来源: TRPL Ch. 9 - Error Handling]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [TRPL Ch. 3 - Control Flow](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html)** · **来源: [TRPL Ch. 9 - Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)**
 
 Rust 提供了多种显式终止的机制：
 
@@ -420,7 +420,7 @@ fn process_data(data: &str) -> Result<String, String> {
 
 ### 5.2 高级实现
 
-> **[来源: Tokio Docs - docs.rs/tokio]** · **[来源: Rust Reference - Async/Await]**
+> **来源: Tokio Docs - docs.rs / [tokio](https://tokio.rs/)** · **来源: [Rust Reference - Async/Await](https://doc.rust-lang.org/reference/items/functions.html#async-functions)**
 
 使用 `JoinSet` 和结构化并发实现异步显式终止：
 
@@ -474,7 +474,7 @@ pub fn explicit_exit(code: i32, reason: &str) -> ! {
 
 ### 5.3 服务器优雅关闭完整示例
 
-> **[来源: Tokio Docs - tokio::net]** · **[来源: TRPL Ch. 20 - Web Server]**
+> **[来源: Tokio Docs - tokio::net]** · **来源: [TRPL Ch. 20 - Web Server](https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html)**
 
 ```rust,ignore
 use tokio::net::{TcpListener, TcpStream};
@@ -577,7 +577,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 6.1 活性 (Liveness)
 
-> **[来源: POPL - Programming Languages Research]** · **[来源: van der Aalst 2003]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)** · **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)**
 
 **定理 6.1.1 (显式终止活性定理)**
 
@@ -601,7 +601,7 @@ $$
 
 ### 6.2 安全性 (Safety)
 
-> **[来源: PLDI - Programming Language Design]** · **[来源: Rustonomicon - Safety]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)** · **来源: [Rustonomicon - Safety](https://doc.rust-lang.org/nomicon/)**
 
 **定理 6.2.1 (单终止定理)**
 
@@ -625,7 +625,7 @@ $$
 
 ### 6.3 正确性条件
 
-> **[来源: Workflow Patterns Initiative]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)**
 
 显式终止模式的正确性条件：
 
@@ -645,7 +645,7 @@ $$
 
 ### 7.1 模式层次
 
-> **[来源: Workflow Patterns Initiative]** · **[来源: Russell 2006]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)** · **来源: [Russell 2006](https://www.workflowpatterns.com/)**
 
 ```mermaid
 graph TD
@@ -664,7 +664,7 @@ graph TD
 
 ### 7.2 形式化关系
 
-> **[来源: van der Aalst 2003]**
+> **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)**
 
 **显式终止 vs 隐式终止**:
 
@@ -692,7 +692,7 @@ $$
 
 ### 8.1 服务器优雅关闭
 
-> **[来源: Tokio Docs - docs.rs/tokio]** · **[来源: Russell 2006]**
+> **来源: Tokio Docs - docs.rs / [tokio](https://tokio.rs/)** · **来源: [Russell 2006](https://www.workflowpatterns.com/)**
 
 **场景**: Web 服务器在部署更新或维护时需要优雅关闭：停止接受新连接、等待现有请求完成、释放资源、退出进程。
 
@@ -704,7 +704,7 @@ $$
 
 ### 8.2 支付流程显式终止
 
-> **[来源: Rust Reference]** · **[来源: TRPL Ch. 9 - Error Handling]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [TRPL Ch. 9 - Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)**
 
 **场景**: 在线支付系统中，支付请求必须明确结束于成功、失败或超时三种终止状态之一，每种状态触发不同的后续业务逻辑。
 
@@ -822,7 +822,7 @@ struct CardInfo { token: String }
 
 ### 9.1 多终止节点
 
-> **[来源: Workflow Patterns Initiative]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)**
 
 一个案例可以有多个不同类型的终止节点：
 

@@ -14,17 +14,48 @@ from collections import Counter
 
 CONCEPT_DIR = Path("concept")
 
-# 权威来源域名/路径
+# 权威来源域名/路径（按项目 source hierarchy 扩展：官方 Rust + 学术/工业 + 社区权威）
 AUTHORITATIVE_PATTERNS = [
+    # Rust 官方
     "doc.rust-lang.org",
     "github.com/rust-lang/rfcs",
     "github.com/rust-lang/rust",
-    "releases.rs",
+    "github.com/rust-lang/miri",
+    "rust-lang.github.io",
+    "rustc-dev-guide.rust-lang.org",
+    "forge.rust-lang.org",
+    "www.rust-lang.org",
+    "foundation.rust-lang.org",
     "blog.rust-lang.org",
+    "releases.rs",
     "rustwasm.github.io",
     "webassembly.github.io",
     "w3.org/wasm",
     "bytecodealliance.org",
+    # 国际权威教学/工业
+    "google.github.io/comprehensive-rust",
+    "rust-book.cs.brown.edu",
+    "doc.rust-embedded.org",
+    "tokio.rs",
+    "diesel.rs",
+    "sea-ql.org",
+    "docs.rs",
+    "crates.io",
+    "martinfowler.com",
+    "semver.org",
+    # 形式化/学术
+    "plv.mpi-sws.org/rustbelt",
+    "perso.crans.org/vanille/treebor",
+    "github.com/rust-lang/a-mir-formality",
+    "github.com/model-checking",
+    "github.com/verus-lang",
+    "github.com/safer-rust",
+    "borrowsanitizer.com",
+    "dl.acm.org",
+    "arxiv.org",
+    "doi.org",
+    # 通用权威参考
+    "en.wikipedia.org",
 ]
 
 

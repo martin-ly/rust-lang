@@ -13,7 +13,7 @@
 
 ## 📊 目录 {#-目录}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [常见问题解答 (FAQ)](#常见问题解答-faq)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -58,13 +58,13 @@
 
 ## 🎯 如何使用本 FAQ {#-如何使用本-faq}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 快速查找
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **按主题查找**: 使用上面的目录跳转到相关主题
 2. **按关键词搜索**: 使用编辑器的搜索功能 (Ctrl+F) 查找关键词
@@ -72,9 +72,9 @@
 
 ### 问题标记
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - 🔵 **基础问题**: 初学者常见问题
 - 🟢 **中级问题**: 实际使用中的问题
@@ -85,13 +85,13 @@
 
 ## 📚 系统使用问题 {#-系统使用问题}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Q1: 我应该从哪里开始？🔵
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **简短回答**: 从 [快速入门指南](./10_getting_started.md) 开始。
 
@@ -111,9 +111,9 @@
 
 ### Q2: 如何查找特定的研究主题？🔵
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **简短回答**: 使用 [快速参考](./10_quick_reference.md) 或 [完整索引](./INDEX.md)。
 
@@ -133,9 +133,9 @@
 
 ### Q2.5: 如何判断研究笔记是否有实质内容？🔵
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **简短回答**：按 [CONTENT_ENHANCEMENT](./10_content_enhancement.md) 的实质内容检查清单：形式化（Def/定理）、代码、场景、反例、衔接。
 
@@ -151,9 +151,9 @@
 
 ### Q3: 研究笔记的状态是什么意思？🟢
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **简短回答**: 状态标记表示研究笔记的完成程度。
 
@@ -172,13 +172,13 @@
 
 ## 🔬 研究相关问题 {#-研究相关问题}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Q4: 我应该选择哪个研究方向？🟢
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **简短回答**: 根据您的兴趣和能力选择研究方向。
 
@@ -198,7 +198,7 @@
 
 ### Q5: 如何开始形式化研究？🟡
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **简短回答**: 从学习形式化工具开始，然后选择研究主题。
 
@@ -219,7 +219,7 @@
 
 ### Q6: 如何设计实验研究？🟢
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **简短回答**: 遵循实验研究方法，设计合理的实验方案。
 
@@ -244,7 +244,7 @@
 
 ### Q7: 我可以贡献哪些内容？🔵
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **简短回答**: 可以贡献新研究笔记、完善现有笔记、修正错误、翻译工作。
 
@@ -264,7 +264,7 @@
 
 ### Q8: 如何确保我的贡献质量？🟢
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **简短回答**: 使用质量检查清单确保贡献质量。
 
@@ -284,7 +284,7 @@
 
 ### Q9: 如何更新索引文件？🟢
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **简短回答**: 更新相应目录的 README.md 和主索引文件。
 
@@ -308,7 +308,7 @@
 
 ### Q10: 我应该使用哪些研究工具？🟢
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **简短回答**: 根据研究类型选择合适的研究工具。
 
@@ -328,7 +328,7 @@
 
 ### Q11: 如何安装和使用 Coq？🟡
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **简短回答**: 查看 [工具使用指南](./10_tools_guide.md) 中的 Coq 部分。
 
@@ -348,7 +348,7 @@
 
 ### Q12: 如何使用 Criterion.rs 进行基准测试？🟢
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **简短回答**: 查看 [工具使用指南](./10_tools_guide.md) 中的 Criterion.rs 部分。
 
@@ -372,7 +372,7 @@
 
 ### Q13: 研究笔记的格式要求是什么？🔵
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **简短回答**: 遵循 [研究笔记规范](./README.md#研究笔记规范)。
 
@@ -395,7 +395,7 @@
 
 ### Q14: 如何编写形式化定义？🟡
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **简短回答**: 使用数学符号和逻辑语言编写形式化定义。
 
@@ -415,7 +415,7 @@
 
 ### Q15: 代码示例有什么要求？🟢
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **简短回答**: 代码示例应该可运行、相关、有说明。
 
@@ -438,7 +438,7 @@
 
 ### 核心文档
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 - [快速入门指南](./10_getting_started.md) - 新用户入门指南
 - [主索引](./README.md) - 完整的研究笔记索引
@@ -447,7 +447,7 @@
 
 ### 获取帮助
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 - 🐛 提交 Issue
 - 💬 参与讨论
@@ -482,7 +482,7 @@
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
@@ -537,13 +537,13 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

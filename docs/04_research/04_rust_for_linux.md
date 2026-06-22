@@ -46,13 +46,13 @@
 
 ## 一、历史里程碑：Rust 正式成为 Linux 内核永久组成部分
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 时间线
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 时间 | 事件 |
 |------|------|
@@ -64,9 +64,9 @@
 
 ### 1.2 这意味着什么？
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **不再是"实验"**：Rust 代码与 C 代码在内核中享有同等地位
 - **长期维护承诺**：内核维护者承诺长期支持 Rust 基础设施
@@ -77,13 +77,13 @@
 
 ## 二、为什么 Linux 需要 Rust？
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 C 语言的内存安全问题
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Linux 内核历史上约 **60-70% 的安全漏洞与内存安全相关**（use-after-free、缓冲区溢出、空指针解引用）。Rust 的所有权模型在编译期消除这些漏洞。
 
@@ -97,9 +97,9 @@ Linux 内核历史上约 **60-70% 的安全漏洞与内存安全相关**（use-a
 
 ### 2.2 内核特有的挑战
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 挑战 | Rust 解决方案 |
 |------|---------------|
@@ -113,13 +113,13 @@ Linux 内核历史上约 **60-70% 的安全漏洞与内存安全相关**（use-a
 
 ## 三、Rust for Linux 架构
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 3.1 内核中的 Rust 支持层
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 Linux Kernel
@@ -140,7 +140,7 @@ Linux Kernel
 
 ### 3.2 `kernel` Crate 核心 API
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 内核模块声明
@@ -180,7 +180,7 @@ impl kernel::file::Operations for RustFile {
 
 ### 3.3 与 C 驱动的对比
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 方面 | C 驱动 | Rust 驱动 |
 |------|--------|-----------|
@@ -195,7 +195,7 @@ impl kernel::file::Operations for RustFile {
 
 ## 四、生产级驱动案例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 4.1 Android Binder IPC
 >
@@ -397,13 +397,13 @@ impl Drop for RustMinimal {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

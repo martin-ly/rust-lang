@@ -7,7 +7,7 @@
 
 ## Table of Contents
 >
-> **[来源: Rust Reference - Interior Mutability]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon - Interior Mutability]** · **[来源: TRPL Ch. 15]** · **[来源: Wikipedia - Read-Copy-Update]** · **[来源: Rust Standard Library - std::cell]** · **[来源: Wikipedia - Mutual Exclusion]** · **[来源: ACM - Interior Pointer Analysis]** · **[来源: IEEE - Safe Concurrency Primitives]**
+> **来源: [Rust Reference - Interior Mutability](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon - Interior Mutability](https://doc.rust-lang.org/nomicon/)** · **来源: [TRPL Ch. 15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)** · **来源: [Wikipedia - Read-Copy-Update](https://en.wikipedia.org/wiki/Read_Copy_Update)** · **[来源: Rust Standard Library - std::cell]** · **来源: [Wikipedia - Mutual Exclusion](https://en.wikipedia.org/wiki/Mutual_Exclusion)** · **[来源: ACM - Interior Pointer Analysis]** · **[来源: IEEE - Safe Concurrency Primitives]**
 
 - [Interior Mutability Deep Dive](#interior-mutability-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -82,13 +82,13 @@
 
 ## 1. Interior Mutability Formal Model
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 The Problem
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Rust's ownership system is built on a fundamental principle known as the **aliasing XOR mutation** rule:
 
@@ -149,7 +149,7 @@ fn main() {
 
 ### 1.2 Interior Mutability: The Solution Pattern
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 Interior mutability is the pattern of allowing mutation through an immutable reference. It achieves this by moving the borrow checking from **compile time** to **runtime**:
 
@@ -177,7 +177,7 @@ Interior mutability is the pattern of allowing mutation through an immutable ref
 
 ### 1.3 The Interior Mutability Spectrum
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 Rust provides multiple interior mutability types, each with different trade-offs:
 
@@ -205,13 +205,13 @@ Rust provides multiple interior mutability types, each with different trade-offs
 
 ### 1.4 Safety Through Runtime Checks
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 Each interior mutability type enforces safety differently:
 
 #### RefCell<T>: Borrow Checking at Runtime
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 use std::cell::RefCell;
@@ -238,7 +238,7 @@ RefCell maintains a **borrow count** at runtime:
 
 #### Mutex<T>: Synchronization for Thread Safety
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 use std::sync::{Arc, Mutex};
@@ -265,7 +265,7 @@ Mutex uses **operating system primitives** or **hardware atomic operations** to 
 
 #### AtomicUsize: Hardware Atomic Operations
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -293,7 +293,7 @@ Atomic types use **CPU atomic instructions** (like `LOCK XADD` on x86) to provid
 
 ### 2.1 Cell Semantics
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 `Cell<T>` is the simplest form of interior mutability. It provides mutation through shared references by **moving values in and out**:
 
@@ -324,7 +324,7 @@ impl<T> Cell<T> {
 
 ### 2.2 The Copy Constraint
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 The key insight about `Cell<T>` is the `T: Copy` constraint on `get()`:
 
@@ -344,7 +344,7 @@ let cell_string: Cell<String> = Cell::new(String::from("hello"));
 
 ### 2.3 Cell Implementation Deep Dive
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 use std::cell::UnsafeCell;
@@ -416,7 +416,7 @@ impl<T> Cell<T> {
 
 ### 2.4 When to Use Cell
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 use std::cell::Cell;
@@ -470,7 +470,7 @@ struct Metrics {
 
 ### 2.5 Cell Limitations
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 use std::cell::Cell;
@@ -509,7 +509,7 @@ let cell_string = Cell::new(String::from("hello"));
 
 ### 3.1 RefCell Overview
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 `RefCell<T>` extends the interior mutability concept by allowing **runtime borrow checking**. Unlike `Cell<T>`, it can work with non-Copy types and provides reference-like access to the interior data.
 
@@ -533,7 +533,7 @@ let cell = RefCell::new(vec![1, 2, 3]);
 
 ### 3.2 Borrow State Machine
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 RefCell maintains a state machine for tracking borrows:
 
@@ -576,7 +576,7 @@ RefCell maintains a state machine for tracking borrows:
 
 ### 3.3 RefCell Implementation
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use std::cell::{UnsafeCell, Cell};
@@ -695,7 +695,7 @@ impl<T: ?Sized> DerefMut for RefMut<'_, T> {
 
 ### 3.4 Panic Conditions
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 RefCell panics in two main situations:
 
@@ -726,7 +726,7 @@ let _ref = cell.borrow(); // PANIC: already mutably borrowed
 
 ### 3.5 RefCell Memory Layout
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -757,7 +757,7 @@ let _ref = cell.borrow(); // PANIC: already mutably borrowed
 
 ### 3.6 RefCell Best Practices
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 use std::cell::RefCell;
@@ -811,7 +811,7 @@ struct BadStruct<'a> {
 
 ### 4.1 Mutex Semantics
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 `Mutex<T>` provides mutual exclusion for thread-safe access to data:
 
@@ -842,7 +842,7 @@ assert_eq!(result.len(), 6);
 
 ### 4.2 Mutex Implementation Concepts
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 // Conceptual implementation (simplified)
@@ -880,7 +880,7 @@ impl<T: ?Sized> Drop for MutexGuard<'_, T> {
 
 ### 4.3 Poisoning
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 Mutex poisoning is a safety mechanism that detects when a thread panics while holding a lock:
 
@@ -920,7 +920,7 @@ match data.lock() {
 
 ### 4.4 RwLock<T>
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 `RwLock<T>` allows multiple readers or a single writer:
 
@@ -947,7 +947,7 @@ let data = Arc::new(RwLock::new(vec![1, 2, 3]));
 
 ### 4.5 Deadlock Potential
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 Mutexes can deadlock when locks are acquired in inconsistent orders:
 
@@ -993,7 +993,7 @@ let t2 = thread::spawn(move || {
 
 ### 4.6 Double Lock in Same Thread
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 use std::sync::Mutex;
@@ -1016,7 +1016,7 @@ let guard1 = mutex.lock().unwrap();
 
 ### 5.1 Atomic Types Overview
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Rust provides atomic types for lock-free concurrent programming:
 
@@ -1030,7 +1030,7 @@ let value = AtomicI32::new(42);
 
 ### 5.2 Ordering Semantics
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 Memory ordering controls how atomic operations are synchronized across threads:
 
@@ -1054,7 +1054,7 @@ Memory ordering controls how atomic operations are synchronized across threads:
 
 ### 5.3 Ordering Examples
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
@@ -1097,7 +1097,7 @@ b.store(true, Ordering::SeqCst);
 
 ### 5.4 Counter-Example: Wrong Ordering
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust
 use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
@@ -1130,7 +1130,7 @@ thread::scope(|s| {
 
 ### 5.5 Compare-And-Swap (CAS) Loops
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -1163,7 +1163,7 @@ loop {
 
 ### Counter-Example 1: RefCell Panic - borrow then borrow_mut
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 use std::cell::RefCell;
@@ -1180,7 +1180,7 @@ let b2 = c.borrow_mut(); // PANIC: already borrowed
 
 ### Counter-Example 2: RefCell Across await (Async)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 use std::cell::RefCell;
@@ -1216,7 +1216,7 @@ async fn some_async_function() {}
 
 ### Counter-Example 3: Mutex in Async Deadlock
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 use std::sync::Mutex;
@@ -1248,7 +1248,7 @@ async fn some_io() {}
 
 ### Counter-Example 4: RwLock Upgrade Deadlock
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 use std::sync::RwLock;
@@ -1267,7 +1267,7 @@ if read_guard.len() < 5 {
 
 ### Counter-Example 5: Atomic with Wrong Ordering
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
@@ -1294,7 +1294,7 @@ fn main() {
 
 ### Counter-Example 6: Cell with Non-Copy Type
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 use std::cell::Cell;
@@ -1317,7 +1317,7 @@ let cell: Cell<NonCopy> = Cell::new(NonCopy {
 
 ### Counter-Example 7: RefCell in Static
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 use std::cell::RefCell;
@@ -1350,7 +1350,7 @@ fn recursive_increment(depth: u32) {
 
 ### Counter-Example 8: Mutex Poison Handling
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 use std::sync::{Arc, Mutex};
@@ -1383,7 +1383,7 @@ match data.lock() {
 
 ### Counter-Example 9: RwLock Writer Starvation
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 use std::sync::{Arc, RwLock};
@@ -1422,7 +1422,7 @@ handles.push(thread::spawn(move || {
 
 ### Counter-Example 10: Recursive Mutex Need
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust
 use std::sync::Mutex;
@@ -1471,7 +1471,7 @@ impl CalculatorFixed {
 
 ### Counter-Example 11: Condvar Misuse
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust
 use std::sync::{Arc, Condvar, Mutex};
@@ -1507,7 +1507,7 @@ cvar.notify_one();
 
 ### Counter-Example 12: OnceCell Reinitialization Attempt
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust
 use std::sync::OnceLock;
@@ -1530,7 +1530,7 @@ fn initialize_config() {
 
 ### Counter-Example 13: LazyLock Deadlock
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 use std::sync::LazyLock;
@@ -1559,7 +1559,7 @@ static B: LazyLock<i32> = LazyLock::new(|| {
 
 ### Counter-Example 14: Thread Local with RefCell
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 use std::cell::RefCell;
@@ -1597,7 +1597,7 @@ fn main() {
 
 ### Counter-Example 15: Interior Mutability in Iterator
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 use std::cell::RefCell;
@@ -1652,7 +1652,7 @@ fn safe_iteration(cell: &RefCell<Vec<i32>>) {
 
 ### 7.1 Rc + RefCell
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 The combination of `Rc<T>` (reference counting) and `RefCell<T>` enables shared mutable ownership in single-threaded contexts:
 
@@ -1705,7 +1705,7 @@ fn main() {
 
 ### 7.2 Arc + Mutex
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 For thread-safe shared mutable state:
 
@@ -1764,7 +1764,7 @@ fn main() {
 
 ### 7.3 Lock-Free Patterns with Crossbeam
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 // Using crossbeam for lock-free data structures
@@ -1818,7 +1818,7 @@ fn lock_free_queue() {
 
 ### 7.4 Read-Write Lock Pattern
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust
 use std::sync::{Arc, RwLock};
@@ -1902,7 +1902,7 @@ fn main() {
 
 ### 8.1 The Problem
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 Self-referential structs are notoriously difficult in Rust. Here's how interior mutability can help:
 
@@ -1983,7 +1983,7 @@ fn main() {
 
 ### 8.2 Avoiding Cycles with Weak References
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 The above code has a memory leak due to reference cycles. Here's the fix:
 
@@ -2043,7 +2043,7 @@ fn demonstrate_no_leak() {
 
 ### 8.3 Thread-Safe Version with Arc
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 use std::sync::{Arc, RwLock, Weak};
@@ -2094,7 +2094,7 @@ impl ThreadSafeNode {
 
 ### Theorem CELL-SAFETY
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **Statement**: `Cell<T>` is safe because it only works with `Copy` types, preventing the creation of multiple references to the same data.
 
@@ -2255,37 +2255,37 @@ Remember: Runtime checks mean runtime failures. Use these types carefully and al
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Interior Mutability]**
-> **[来源: Wikipedia - Mutual Exclusion]**
-> **[来源: Wikipedia - Read-Copy-Update]**
-> **[来源: Wikipedia - Atomic Operation]**
+> **来源: [Wikipedia - Interior Mutability](https://en.wikipedia.org/wiki/Interior_Mutability)**
+> **来源: [Wikipedia - Mutual Exclusion](https://en.wikipedia.org/wiki/Mutual_Exclusion)**
+> **来源: [Wikipedia - Read-Copy-Update](https://en.wikipedia.org/wiki/Read_Copy_Update)**
+> **来源: [Wikipedia - Atomic Operation](https://en.wikipedia.org/wiki/Atomic_Operation)**
 > **[来源: IEEE - Safe Concurrency Primitives]**
 > **[来源: ACM - Interior Pointer Analysis]**
-> **[来源: Rust Reference - Interior Mutability]**
-> **[来源: Rustonomicon - Interior Mutability]**
-> **[来源: TRPL Ch. 15 - Smart Pointers]**
-> **[来源: RFC 1156 - Mutability and Mutation]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages Survey]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design and Implementation]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Rust Reference - Interior Mutability](https://doc.rust-lang.org/reference/)**
+> **来源: [Rustonomicon - Interior Mutability](https://doc.rust-lang.org/nomicon/)**
+> **来源: [TRPL Ch. 15 - Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)**
+> **来源: [RFC 1156 - Mutability and Mutation](https://github.com/rust-lang/rfcs/pull/1156)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM - Systems Programming Languages Survey](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI - Programming Language Design and Implementation](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---

@@ -117,7 +117,7 @@
 
 > **[来源类型: 具体来源]** 论断内容
 >
-> 例如：**[Wikipedia: Rust (programming language)]** Rust is a multi-paradigm, general-purpose programming language.
+> 例如：**[Wikipedia: Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** Rust is a multi-paradigm, general-purpose programming language.
 
 ---
 

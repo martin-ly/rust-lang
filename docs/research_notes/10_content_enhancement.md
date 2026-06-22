@@ -65,15 +65,15 @@
 
 ## 层次推进计划（2026-02 新增）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 针对「不充分、无实质内容」缺口，采用**分层推进**策略：
 
 ### 层次定义
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 层次 | 名称 | 目标 | 示例 |
 | :--- | :--- | :--- | :--- |
@@ -84,9 +84,9 @@
 
 ### 推进优先级（三阶段已完成 ✅） {#推进优先级三阶段已完成-}
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 第一阶段（L1→L2）✅
@@ -107,9 +107,9 @@
 
 ### 实质内容检查清单（完成度）
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 检查项 | 设计模式 23 | 43 完全 | 执行模型 | 实验 | 其他 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -121,9 +121,9 @@
 
 ### 实质内容自检表（逐文档核对）
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 任一文档可按下表自检；**任一项为 ❌ 则需补充**，直至全部 ✅：
 
@@ -141,7 +141,7 @@
 
 ## 📊 目录 {#-目录}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [研究笔记内容完善指南](#研究笔记内容完善指南)
   - [📑 目录](#-目录)
@@ -194,7 +194,7 @@
 
 ## 🎯 指南概述 {#-指南概述}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本指南提供研究笔记内容完善的详细指导，帮助研究者系统化地完善研究笔记内容。
 
@@ -213,7 +213,7 @@
 
 ## 形式化论证规范
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def CE1（内容完备性）**：研究笔记 $N$ 满足**内容完备**，当且仅当 $N$ 对核心概念有 Def、对主要结论有定理及证明或证明思路、对边界有反例、与 [PROOF_INDEX](./10_proof_index.md) 衔接。
 
@@ -227,7 +227,7 @@
 
 ## 概念定义-属性关系-解释论证 层次化小节规范（2026-02 新增）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **依据**：RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN 建议 P0。核心 research_notes 文档宜具备**层次化三块**（可合并到现有结构，不必另起标题）：
 
@@ -245,7 +245,7 @@
 
 ## 矩阵与文档双向链接规范（2026-02 新增）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **依据**：RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN 建议 P2。凡有「多维对比矩阵」的领域，宜满足双向链接：
 
@@ -260,11 +260,11 @@
 
 ## 📚 理论基础部分完善 {#-理论基础部分完善}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 补充相关概念
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **完善步骤**:
 
@@ -277,7 +277,7 @@
 ```markdown
 ### 相关概念
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **所有权 (Ownership)**: Rust 的核心概念，每个值都有一个所有者。当所有者离开作用域时，值被释放。
 
@@ -288,7 +288,7 @@
 
 ### 2. 完善理论背景
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **完善步骤**:
 
@@ -312,7 +312,7 @@
 
 ### 3. 添加理论联系
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **完善步骤**:
 
@@ -328,7 +328,7 @@
 
 ### 1. 完善形式化定义
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **完善步骤**:
 
@@ -361,7 +361,7 @@ let s2 = s1;  // 所有权转移: s1 → s2
 
 ### 2. 添加更多规则
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **完善步骤**:
 
@@ -371,7 +371,7 @@ let s2 = s1;  // 所有权转移: s1 → s2
 
 ### 3. 提供证明框架
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **完善步骤**:
 
@@ -712,21 +712,21 @@ error[E0382]: borrow of moved value: `s1`
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

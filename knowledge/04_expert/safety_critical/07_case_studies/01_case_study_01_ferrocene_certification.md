@@ -379,3 +379,28 @@ Ferrocene项目旨在提供经过TÜV SÜD认证的Rust工具链，使Rust能够
 ## 相关概念
 
 - [Ferrocene 认证 (concept)](../../../../concept/04_formal/16_aerospace_certification_formal_methods.md) — Ferrocene 26.02.0 ASIL B / SIL 2 认证与 DO-178C/DO-333/DO-330 映射矩阵
+
+## 📚 模块 8: 国际化对齐
+
+> 本节按项目模板要求补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Rust Project Goals — Safety-Critical Rust](https://rust-lang.github.io/rust-project-goals/2026/) | 权威来源 | 安全关键目标 |
+| [Ferrocene](https://ferrocene.dev/) | 权威来源 | Ferrocene 认证 Rust |
+
+### 8.2 学术来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | 权威来源 | 语义基础 |
+| [RefinedRust — OOPSLA 2024](https://dl.acm.org/doi/10.1145/3689738) | 权威来源 | 形式化验证 |
+
+### 8.3 社区权威
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Rust Safety-Critical Consortium](https://rust-safety-critical.com/) | 权威来源 | 安全关键联盟 |
+| [High Integrity Systems Blog](https://www.highintegritysystems.com/) | 权威来源 | 工业实践 |

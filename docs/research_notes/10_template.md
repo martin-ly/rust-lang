@@ -61,15 +61,15 @@
 
 ## 🎯 研究目标 {#-研究目标}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本研究的目的是 [研究目的描述]。
 
 ### 核心问题
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **[问题一]**: [问题描述]
 2. **[问题二]**: [问题描述]
@@ -77,9 +77,9 @@
 
 ### 预期成果
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [成果一]
 - [成果二]
@@ -89,21 +89,21 @@
 
 ## 📚 理论基础 {#-理论基础}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 相关概念
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **[概念名称]**: [概念定义和说明]
 
 ### 理论背景
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **[理论名称]**: [理论背景和说明]
 
@@ -111,13 +111,13 @@
 
 ## 🔬 形式化定义 / 实验设计 {#-形式化定义--实验设计}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 定义/设计要点一
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义 X.X (名称)**: [形式化定义或实验设计描述]
 
@@ -137,9 +137,9 @@ fn example_definition() {
 
 ### 2. 定义/设计要点二
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义 X.X (名称)**: [形式化定义或实验设计描述]
 
@@ -159,9 +159,9 @@ fn example_two() {
 
 ### 3. 定义/设计要点三
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义 X.X (名称)**: [形式化定义或实验设计描述]
 
@@ -203,7 +203,7 @@ fn example_two() {
 
 ### 待证明的性质 / 待测试的场景
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 1. **[性质/场景一]**: [描述]
 2. **[性质/场景二]**: [描述]
@@ -211,7 +211,7 @@ fn example_two() {
 
 ### 证明方法 / 测试方法
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 - **[方法一]**: [方法描述]
 - **[方法二]**: [方法描述]
@@ -225,7 +225,7 @@ fn example_two() {
 
 ### 示例 1: 基础示例
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 // 基础代码示例
@@ -244,7 +244,7 @@ fn main() {
 
 ### 示例 2: 进阶示例
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 // 进阶代码示例
@@ -264,7 +264,7 @@ fn main() {
 
 ### 示例 3: 研究场景示例
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust
 // 研究场景：验证 [研究目标] 的实际应用
@@ -290,7 +290,7 @@ fn main() {
 
 ### 示例 4: Coq 形式化示例
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```coq
 (* Coq 形式化代码示例 *)
@@ -330,7 +330,7 @@ Qed.
 
 ### 学术论文
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 1. **[论文标题]**
    - 作者: [作者姓名]
@@ -344,7 +344,7 @@ Qed.
 
 ### 官方文档
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 - Rust Reference
 - Rust Book
@@ -506,13 +506,13 @@ Qed.
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

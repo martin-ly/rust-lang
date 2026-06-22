@@ -50,7 +50,7 @@
 
 ## 相关文档
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文档 | 说明 |
 | :--- | :--- |
@@ -62,7 +62,7 @@
 
 ## 型变概念全景
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
                           型变概念族
@@ -92,13 +92,13 @@
 
 ## 一、三种型变详解
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 协变 (Covariant) +
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义**: 如果`T`是`U`的子类型，那么`C<T>`是`C<U>`的子类型。
 
@@ -136,9 +136,9 @@ let b2: Box<&'a str> = b1;  // OK
 
 ### 1.2 逆变 (Contravariant) -
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义**: 如果`T`是`U`的子类型，那么`C<U>`是`C<T>`的子类型（反向）。
 
@@ -174,9 +174,9 @@ let f: fn(&'a str) = handler;  // 可能错误，具体取决于'a
 
 ### 1.3 不变 (Invariant) =
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义**: `C<T>`和`C<U>`无关，除非`T = U`。
 
@@ -211,7 +211,7 @@ let mut r1: &mut &'static str = &mut "hello";
 
 ## 二、型变表
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 类型构造器 | 对T的型变 | 说明 |
 | :--- | :--- | :--- |
@@ -231,13 +231,13 @@ let mut r1: &mut &'static str = &mut "hello";
 
 ## 三、型变组合规则
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 函数指针的型变
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 fn(T) -> U
@@ -252,9 +252,9 @@ fn(T) -> U
 
 ### 结构体的型变
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 struct Wrapper<T>(T);
@@ -268,11 +268,11 @@ struct Contravariant<T>(fn(T));
 
 ## 四、型变的实际影响
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 影响1: 生命周期子类型
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 // 'static <: 'a (static更长，是任何'a的子类型)
@@ -288,7 +288,7 @@ fn takes_str<'a>(s: &'a str) {}
 
 ### 影响2: 智能指针的使用
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 // Box的协变性允许：
@@ -306,7 +306,7 @@ let mut r: &mut &'static str = &mut "hello";
 
 ### 影响3: 回调函数的类型
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 // 回调函数参数是逆变的
@@ -328,7 +328,7 @@ set_handler(|s: &'static str| { });  // OK
 
 ### 为什么&mut必须不变？
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 // 假设&mut是协变的（实际不是）
@@ -412,13 +412,13 @@ let local = String::from("local");
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -429,7 +429,7 @@ let local = String::from("local");
 
 #### 代码示例更新
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 本文档中的所有Rust代码示例均已：
 
@@ -439,7 +439,7 @@ let local = String::from("local");
 
 #### 相关文档
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查
@@ -473,12 +473,12 @@ let local = String::from("local");
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
-> **[来源: Coq Reference]**
-> **[来源: TLA+]**
-> **[来源: ACM - Formal Verification]**
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ---

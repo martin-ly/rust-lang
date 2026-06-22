@@ -7,7 +7,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [22 递归模式 (Recursion) - 完整形式化语义](#22-递归模式-recursion---完整形式化语义)
   - [目录](#目录)
@@ -57,15 +57,15 @@
 
 ## 1. 引言
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 递归模式（Recursion）是工作流控制流模式中的基础模式之一，允许一个活动在其执行过程中再次调用自身。与循环（Loop）不同，递归通过自引用实现重复执行，每次调用都在新的栈帧上运行，具有自然的分治特性。
 
 ### 1.1 历史背景
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 递归模式最早由 McCarthy 在 LISP 语言中系统使用，成为函数式编程的核心构造。Wil van der Aalst 等人在 "Workflow Patterns" (2003) 中将其形式化为工作流控制流模式之一。在 Rust 中，递归受所有权系统和栈大小限制的双重约束，需要通过 `Box`、`Rc`、`Arc` 等堆分配机制来管理递归数据结构。
 
@@ -77,7 +77,7 @@
 
 ### 2.1 概念定义
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **递归** 是一个控制流构造，其中一个活动（函数或过程）在执行过程中直接或间接调用自身：
 
@@ -96,7 +96,7 @@ RecursiveCase ::= "call" Self "with" ReducedInput
 
 ### 2.2 核心语义
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **激活语义**:
 
@@ -121,11 +121,11 @@ $$
 
 ### 2.3 形式化表示
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 #### 2.3.1 状态机表示
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 $$
 \begin{aligned}
@@ -146,7 +146,7 @@ $$
 
 #### 2.3.2 流程代数表示 (CSP 风格)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 $$
 \text{Recursion}(f, x) = \text{check}(x) \rightarrow \
@@ -158,7 +158,7 @@ $$
 
 #### 2.3.3 Petri 网表示
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```
                     ┌──→ [Base Case] ──┐
@@ -187,7 +187,7 @@ Base Case: 基准情形变迁
 
 ### 3.1 BPMN 表示
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 在 BPMN 2.0 中，递归通常使用**子流程** (Sub-Process) 的递归调用来表示：
 
@@ -231,7 +231,7 @@ Base Case: 基准情形变迁
 
 ### 3.2 UML 活动图
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 在 UML 中，递归使用**调用行为动作** (Call Behavior Action) 调用同一活动：
 
@@ -249,7 +249,7 @@ Base Case: 基准情形变迁
 
 ### 3.3 WfMC 标准
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 工作流管理联盟 (WfMC) 将递归定义为：
 
@@ -269,7 +269,7 @@ Base Case: 基准情形变迁
 
 ### 4.1 CCS 表示
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **Calculus of Communicating Systems (CCS)**:
 
@@ -285,7 +285,7 @@ $$
 
 ### 4.2 CSP 表示
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **Communicating Sequential Processes (CSP)**:
 
@@ -302,7 +302,7 @@ Rec = mu P . (check -> (base -> SKIP | reduce -> P))
 
 ### 4.3 π-演算表示
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **Pi-Calculus**:
 
@@ -320,8 +320,8 @@ $$
 
 ### 5.1 基础实现
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL Ch. 10 - Generics]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [TRPL Ch. 10 - Generics](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)**
 
 ```rust
 use std::cmp::Ordering;
@@ -377,8 +377,8 @@ pub fn factorial(n: u64) -> u64 {
 
 ### 5.2 带错误处理的高级实现
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
 ```rust,ignore
 use std::boxed::Box;
@@ -503,7 +503,7 @@ impl<T: Ord + Clone> TreeNode<T> {
 ### 5.3 目录遍历完整示例
 
 > **[来源: Rust Standard Library - std::fs]**
-> **[来源: Rustonomicon - FFI]**
+> **来源: [Rustonomicon - FFI](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use std::collections::VecDeque;
@@ -830,21 +830,21 @@ Rust 编译器不保证尾递归优化，推荐在深度递归场景使用迭代
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Design Pattern]**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 
-> **[来源: Rust API Guidelines]**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 
-> **[来源: Gang of Four - Design Patterns]**
+> **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
 
-> **[来源: ACM - Software Design Patterns]**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---
 

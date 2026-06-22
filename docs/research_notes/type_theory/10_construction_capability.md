@@ -39,7 +39,7 @@
 
 ## 文档宗旨
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档填补「类型构造能力」缺口：
 
@@ -51,7 +51,7 @@
 
 ## 形式化定义
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def TCON1（类型构造能力）**：
 
@@ -240,13 +240,13 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -257,7 +257,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 
 #### 代码示例更新
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 本文档中的所有Rust代码示例均已：
 
@@ -267,7 +267,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 
 #### 相关文档
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查
@@ -301,15 +301,15 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Type Theory]**
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type Theory](https://en.wikipedia.org/wiki/Type_Theory)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 > **[来源: Pierce 2002 - Types and Programming Languages]**
 > **[来源: ACM - Type System Research]**
-> **[来源: IEEE - Type Safety Verification]**
+> **来源: [IEEE - Type Safety Verification](https://standards.ieee.org/)**
 > **[来源: POPL - Type Theory Advances]**
-> **[来源: Rust Reference - Type System]**
-> **[来源: Wikipedia - Type Constructor]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Rust Reference - Type System](https://doc.rust-lang.org/reference/types.html)**
+> **来源: [Wikipedia - Type Constructor](https://en.wikipedia.org/wiki/Type_Constructor)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ---

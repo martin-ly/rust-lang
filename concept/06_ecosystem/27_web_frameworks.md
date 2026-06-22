@@ -95,7 +95,7 @@
 ### 1.1 Web 框架的职能定义
 >
 
-> **[Wikipedia: Web framework]** A web framework (WF) or web application framework (WAF) is a software framework that is designed to support the development of web applications including web services, web resources, and web APIs.
+> **[Wikipedia: Web framework](https://en.wikipedia.org/wiki/Web_framework)** A web framework (WF) or web application framework (WAF) is a software framework that is designed to support the development of web applications including web services, web resources, and web APIs.
 
 Rust Web 框架的核心职责可分解为四层：
 
@@ -306,7 +306,7 @@ fn main() {
 
 ### 2.2 Actix-web：Actor 模型的工业级实现
 
-> **[来源: Actix docs]** Actix Web is a powerful, pragmatic, and extremely fast web framework for Rust. It is built on top of the Actix actor framework.
+> **来源: [Actix docs](https://actix.rs/)** Actix Web is a powerful, pragmatic, and extremely fast web framework for Rust. It is built on top of the Actix actor framework.
 
 ```text
 Actix-web 架构特征:
@@ -344,7 +344,7 @@ HttpServer::new(|| {
 .await
 ```
 
-> **Actix-web 洞察**: **Actix-web 是 Rust 最成熟的生产级框架**——Actor 模型提供独特的并发隔离能力，且生态历史最久（2017 年起），文档和社区资源最丰富。[来源: Actix docs]
+> **Actix-web 洞察**: **Actix-web 是 Rust 最成熟的生产级框架**——Actor 模型提供独特的并发隔离能力，且生态历史最久（2017 年起），文档和社区资源最丰富。来源: [Actix docs](https://actix.rs/)
 
 ### 2.3 Rocket：声明式编程与类型安全
 
@@ -456,7 +456,7 @@ Server::new(TcpListener::bind("0.0.0.0:3000"))
   [来源: Poem docs — Runtime]
 ```
 
-> **关键洞察**: **所有主流 Rust Web 框架均绑定 Tokio**——这不是偶然，而是生态收敛的结果。Tokio 的 M:N 调度、工作窃取线程池和丰富的生态（tonic、hyper、axum）使其成为事实标准。[来源: Tokio docs] [来源: 💡 原创分析]
+> **关键洞察**: **所有主流 Rust Web 框架均绑定 Tokio**——这不是偶然，而是生态收敛的结果。Tokio 的 M:N 调度、工作窃取线程池和丰富的生态（tonic、hyper、axum）使其成为事实标准。来源: [Tokio docs](https://tokio.rs/) [来源: 💡 原创分析]
 
 ### 3.2 运行时兼容性矩阵
 
@@ -637,7 +637,7 @@ graph TD
 | **场景** | **推荐框架** | **理由** |
 |:---|:---|:---|
 | 微服务 + gRPC 混合 | **Axum** | Tower 生态与 Tonic 共享中间件 [来源: Tonic docs] |
-| 高并发 API 网关 | **Actix-web / Axum** | Actor 模型或纯 Tokio 均顶级性能 [来源: Actix docs] |
+| 高并发 API 网关 | **Actix-web / Axum** | Actor 模型或纯 Tokio 均顶级性能 来源: [Actix docs](https://actix.rs/) |
 | 快速原型/MVP | **Rocket** | 声明式 API 开发效率最高 [来源: Rocket docs] |
 | OpenAPI/文档驱动 | **Poem** | poem-openapi 类型安全生成 [来源: Poem OpenAPI docs] |
 | 企业级长期维护 | **Actix-web** | 生态最成熟，招聘/交接最友好 [来源: crates.io 下载量] |

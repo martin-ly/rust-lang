@@ -65,7 +65,7 @@
 
 ## 🎯 概述 {#-概述}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档建立 Rust 语言概念的**关联网络**，实现：
 
@@ -78,13 +78,13 @@
 
 ## 概念节点定义
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### L1: 元概念节点
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 节点ID | 概念名称 | 定义 | 属性 |
 | :--- | :--- | :--- | :--- |
@@ -96,9 +96,9 @@
 
 ### L2: 核心概念族节点
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 节点ID | 概念名称 | 所属概念族 | 定义 | 属性 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -119,9 +119,9 @@
 
 ### L3: 具体概念节点
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 节点ID | 概念名称 | 父概念 | 定义 | 属性 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -146,9 +146,9 @@
 
 ### L4: 实现机制节点
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 节点ID | 机制名称 | 对应概念 | 实现细节 | 属性 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -166,13 +166,13 @@
 
 ## 关系类型定义
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 等价关系 ≡ {#等价关系-}
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义**: 两个概念在语义上等价，可以互换使用。
 
@@ -187,9 +187,9 @@
 
 ### 蕴含关系 ⇒ {#蕴含关系-}
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义**: 概念A的存在或成立必然导致概念B的存在或成立。
 
@@ -210,9 +210,9 @@
 
 ### 互斥关系 ⊥ {#互斥关系-}
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义**: 两个概念在同一上下文中不能同时成立。
 
@@ -229,7 +229,7 @@
 
 ### 组合关系 ∘ {#组合关系-}
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **定义**: 概念A和概念B组合形成概念C。
 
@@ -250,7 +250,7 @@
 
 ### 层次关系 ⊂ {#层次关系-}
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **定义**: 概念A是概念B的子集或特例。
 
@@ -279,7 +279,7 @@
 
 ### L1-L2 关联矩阵
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 | L1 \ L2 | C1 | C2 | C3 | C4 | C5 | C6 | C7 | C8 | C9 | C10 | C11 | C12 | C13 | C14 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -296,7 +296,7 @@
 
 ### L2-L3 关联矩阵
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 | L2 \ L3 | S1 | S2 | S3 | S4 | S5 | S6 | S7 | S8 | S9 | S10 | S11 | S12 | S13 | S14 | S15 | S16 | S17 | S18 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -317,7 +317,7 @@
 
 ### L3-L4 关联矩阵
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | L3 \ L4 | I1 | I2 | I3 | I4 | I5 | I6 | I7 | I8 | I9 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -348,7 +348,7 @@
 
 ### 全局概念图谱
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```mermaid
 graph TB
@@ -442,7 +442,7 @@ graph TB
 
 ### 所有权概念子图
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```mermaid
 graph TB
@@ -473,7 +473,7 @@ graph TB
 
 ### 类型系统概念子图
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```mermaid
 graph LR
@@ -498,7 +498,7 @@ graph LR
 
 ### 并发概念子图
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```mermaid
 graph TB
@@ -531,11 +531,11 @@ graph TB
 
 ### 概念到文档映射
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 #### L1 元概念 → 文档
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 | 概念 | 主要文档 | 类型 | 关联文档 |
 | :--- | :--- | :--- | :--- |
@@ -547,7 +547,7 @@ graph TB
 
 #### L2 核心概念 → 文档
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | 概念 | 主要文档 | 类型 | 关联文档 |
 | :--- | :--- | :--- | :--- |
@@ -561,7 +561,7 @@ graph TB
 
 #### L3 具体概念 → 文档
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 | 概念 | 主要文档 | 类型 | 示例代码 |
 | :--- | :--- | :--- | :--- |
@@ -577,11 +577,11 @@ graph TB
 
 ### 概念间导航路径
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 #### 路径1: 从代码问题到形式化理论
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```text
 代码问题
@@ -806,16 +806,16 @@ C6 共享借用 ⊥ C7 可变借用
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Wikipedia - Network Programming]**
-> **[来源: Tokio Documentation]**
-> **[来源: Rust Reference - std::net]**
-> **[来源: IEEE - Network Protocols]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Wikipedia - Network Programming](https://en.wikipedia.org/wiki/Network_Programming)**
+> **来源: [Tokio Documentation](https://tokio.rs/)**
+> **来源: [Rust Reference - std::net](https://doc.rust-lang.org/reference/)**
+> **来源: [IEEE - Network Protocols](https://standards.ieee.org/)**
 
 ---

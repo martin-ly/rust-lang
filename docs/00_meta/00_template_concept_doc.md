@@ -55,7 +55,7 @@
 
 ## 检查清单（提交前自检）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 模块 1: 概念定义（三层定义完整）
 - [ ] 模块 2: 属性清单（含反例边界）
@@ -72,13 +72,13 @@
 
 ## 模块 1: 概念定义（Concept Definition）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 直观定义（Intuitive）
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 用一句话向有前置知识的读者解释：
 
@@ -86,9 +86,9 @@
 
 ### 1.2 操作定义（Operational）
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 通过代码行为刻画概念边界。回答："在什么操作下，该概念生效/失效？"
 
@@ -102,9 +102,9 @@ fn boundary() {}
 
 ### 1.3 形式化直觉（Formal Intuition）
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 对齐类型理论/内存模型/形式化语义的精确表述。
 
@@ -118,7 +118,7 @@ fn boundary() {}
 
 ## 模块 2: 属性清单（Property Inventory）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 属性名 | 类型 | 值域/取值 | 说明 | 反例边界 |
 |--------|------|-----------|------|----------|
@@ -127,9 +127,9 @@ fn boundary() {}
 
 ### 关键推论
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 由上述属性可推导出的重要结论：
 
@@ -140,7 +140,7 @@ fn boundary() {}
 
 ## 模块 3: 概念依赖图（Concept Dependency Graph）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 graph TD
@@ -153,9 +153,9 @@ graph TD
 
 ### 承上（前置知识回溯）
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 前置概念 | 所在文档 | 本章中使用的具体点 |
 |----------|----------|-------------------|
@@ -163,9 +163,9 @@ graph TD
 
 ### 启下（后续延伸预告）
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 后续概念 | 所在文档 | 掌握本章后方可理解 |
 |----------|----------|-------------------|
@@ -175,23 +175,23 @@ graph TD
 
 ## 模块 4: 机制解释（Mechanistic Explanation）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 4.1 类型系统视角
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 该特性在 HM 推断 / 子类型 / trait solving 中的位置：
 
 ### 4.2 内存模型视角
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Stacked Borrows / Tree Borrows / LLVM IR 层面的体现：
 
 ### 4.3 运行时视角
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 vtable 布局、monomorphization 结果、零成本抽象的物理含义：
 
@@ -201,7 +201,7 @@ vtable 布局、monomorphization 结果、零成本抽象的物理含义：
 
 ### 5.1 Minimal（最小正例）
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
  stripped-down 到最少代码行，突出核心机制：
 
@@ -211,7 +211,7 @@ fn minimal() {}
 
 ### 5.2 Realistic（真实场景）
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 接近真实场景的用法：
 
@@ -221,7 +221,7 @@ fn realistic() {}
 
 ### 5.3 Production-grade（生产级）
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 包含错误处理、边界条件、性能考量：
 
@@ -235,7 +235,7 @@ fn production() {}
 
 ### 反例 1: XX 错误
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **错误代码**:
 
@@ -278,13 +278,13 @@ fn fix_b() {}
 
 ### 表征 A: [类型，如 决策树 / 矩阵 / 状态图]
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 [插入表征内容]
 
 ### 表征 B: [类型]
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 [插入表征内容]
 
@@ -294,7 +294,7 @@ fn fix_b() {}
 
 ### 8.1 官方来源
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 来源 | 类型 | 对应章节/条目 | 本文档对应点 |
 |------|------|---------------|--------------|
@@ -304,7 +304,7 @@ fn fix_b() {}
 
 ### 8.2 学术来源
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 论文/学位论文 | 会议/机构 | 核心论证 | 本文档对应点 |
 |---------------|-----------|----------|--------------|
@@ -312,7 +312,7 @@ fn fix_b() {}
 
 ### 8.3 社区权威
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | 作者 | 文章/演讲 | 核心观点 | 本文档对应点 |
 |------|-----------|----------|--------------|
@@ -320,7 +320,7 @@ fn fix_b() {}
 
 ### 8.4 跨语言对比（如适用）
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 | 维度 | Rust | C++ | Haskell | Go |
 |------|------|-----|---------|-----|
@@ -332,7 +332,7 @@ fn fix_b() {}
 
 ### 9.1 为什么 Rust 选择这个设计？
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ### 9.2 放弃了什么替代方案？
 
@@ -399,11 +399,11 @@ fn broken() {}
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**

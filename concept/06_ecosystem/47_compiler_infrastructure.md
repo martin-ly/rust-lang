@@ -259,7 +259,7 @@ RUSTFLAGS="-Z sanitizer=memory -Z build-std" \
 
 > **权威来源**: [Rust Compiler Team](https://rust-lang.github.io/compiler-team/), [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/)
 >
-> **权威来源对齐变更日志**: 2026-06-01 创建 [来源: rustc-dev-guide, Cranelift README, RFC 3873]
+> **权威来源对齐变更日志**: 2026-06-01 创建 来源: rustc-dev-guide, Cranelift README, [RFC 3873](https://github.com/rust-lang/rfcs/pull/3873)
 > **过渡**: Rust 编译器基础设施深度解析 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Rust 编译器基础设施深度解析 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Rust 编译器基础设施深度解析 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

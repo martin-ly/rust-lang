@@ -154,12 +154,12 @@
 |:---|:---|:---|
 | **[CMU 17-363: Programming Language Pragmatics]** | Lifetimes、Region types、NLL | L1 生命周期 |
 | **[CMU 17-350: Safe Systems Programming]** | 生命周期在系统编程中的应用 | 工程实践 |
-| **[Wikipedia: Region-based memory management]** | 区域类型通用概念 | 权威定义 §1.2 |
-| **[Wikipedia: Subtyping]** | 子类型、协变/逆变 | Variance §4.5 |
-| **[Tofte & Talpin 1994]** | 区域类型系统 | 形式化根基 §4.1–4.2 |
-| **[RustBelt: POPL 2018]** | 生命周期逻辑 | 形式化验证 §4.1 |
+| **[Wikipedia: Region-based memory management](https://en.wikipedia.org/wiki/Region_based_memory_management)** | 区域类型通用概念 | 权威定义 §1.2 |
+| **[Wikipedia: Subtyping](https://en.wikipedia.org/wiki/Subtyping)** | 子类型、协变/逆变 | Variance §4.5 |
+| **[Tofte & Talpin 1994](https://en.wikipedia.org/wiki/Region-based_memory_management)** | 区域类型系统 | 形式化根基 §4.1–4.2 |
+| **[RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** | 生命周期逻辑 | 形式化验证 §4.1 |
 | **[Niko Matsakis: NLL Blog]** | Non-Lexical Lifetimes 设计 | NLL §4.4 |
-| **[TRPL: Ch10.3]** | 生命周期语法与省略规则 | Elision §2.3、§4.3 |
+| **[TRPL Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)** | 生命周期语法与省略规则 | Elision §2.3、§4.3 |
 
 ---
 
@@ -175,10 +175,10 @@
 | **形式化基础** | 区域类型 (Tofte-Talpin) + 分离逻辑 (RustBelt) | 无统一形式化 | 范畴论 + 线性逻辑 | 无 |
 | **表达能力** | 高（HRTB、Variance、Elision） | 中 | 高（但 LinearTypes 为可选扩展） | 低 |
 
-> **[来源: Rust Reference: Lifetimes]** Rust 生命周期是类型系统的核心特征，通过编译期区域推断保证引用有效性，零运行时开销。 ✅
+> **来源: [Rust Reference: Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html)** Rust 生命周期是类型系统的核心特征，通过编译期区域推断保证引用有效性，零运行时开销。 ✅
 > **[来源: C++ Reference: unique_ptr]** C++ 智能指针管理所有权生命周期，但无编译期引用有效性检查，悬垂引用为未定义行为。 ✅
 > **[来源: Haskell GHC User Guide: LinearTypes]** Haskell LinearTypes 扩展允许显式线性类型约束（`a %1 -> b`），与 Rust 生命周期在类型论上同源，但为可选扩展。 ✅
-> **[来源: Go Spec: Memory Model]** Go 无生命周期或借用概念，内存安全完全依赖垃圾回收器，引用有效性无编译期检查。 ✅
+> **来源: [Go Spec: Memory Model](https://go.dev/ref/mem)** Go 无生命周期或借用概念，内存安全完全依赖垃圾回收器，引用有效性无编译期检查。 ✅
 
 **关键洞察**: Rust 是唯一将生命周期作为**显式、强制、核心类型系统特征**的工业级主流语言。C++ 依赖运行时 RAII 和程序员自律；Haskell LinearTypes 提供了类似的编译期保证但尚未成为主流实践；Go 完全依赖 GC。
 
@@ -188,17 +188,17 @@
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
-| 每个引用都有生命周期 | [TRPL: Ch10.3] | ✅ |
-| 生命周期确保引用在使用时有效 | [TRPL: Ch10.3] | ✅ |
-| 生命周期省略规则 | [Rust Reference: Lifetime elision] | ✅ |
-| NLL (Non-Lexical Lifetimes) | [RFC 2094] · [Rust Reference: NLL] | ✅ |
-| 区域类型理论 (Tofte & Talpin) | [Wikipedia: Region-based memory management] | ✅ |
-| 生命周期子类型关系 | [Rust Reference: Subtyping] | ✅ |
-| `'static` 是最长生命周期 | [TRPL: Ch10.3] | ✅ |
-| HRTB 全称量化语义 | [Rust Reference: HRTB] | ✅ |
-| GATs 生命周期约束 | [RFC 1598] | ✅ |
+| 每个引用都有生命周期 | [TRPL Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) | ✅ |
+| 生命周期确保引用在使用时有效 | [TRPL Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) | ✅ |
+| 生命周期省略规则 | [Rust Reference: Lifetime elision](https://doc.rust-lang.org/reference/lifetime-elision.html) | ✅ |
+| NLL (Non-Lexical Lifetimes) | [RFC 2094](https://rust-lang.github.io/rfcs/2094-2094-nll.html) · [Rust Reference: NLL](https://doc.rust-lang.org/reference/nll.html) | ✅ |
+| 区域类型理论 (Tofte & Talpin) | [Wikipedia: Region-based memory management](https://en.wikipedia.org/wiki/Region_based_memory_management) | ✅ |
+| 生命周期子类型关系 | [Rust Reference: Subtyping](https://doc.rust-lang.org/reference/subtyping.html) | ✅ |
+| `'static` 是最长生命周期 | [TRPL Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) | ✅ |
+| HRTB 全称量化语义 | [Rust Reference: HRTB](https://doc.rust-lang.org/reference/) | ✅ |
+| GATs 生命周期约束 | [RFC 1598](https://github.com/rust-lang/rfcs/pull/1598) | ✅ |
 | Polonius (Datalog 约束求解) | [Polonius GitHub] · [Niko Matsakis blog] | ✅ |
-| Tree Borrows (下一代内存模型) | [Ralf Jung, arXiv 2023] · [Miri: Tree Borrows] | ✅ |
+| Tree Borrows (下一代内存模型) | [Ralf Jung, arXiv 2023] · [Miri: Tree Borrows](https://github.com/rust-lang/miri) | ✅ |
 
 ---
 
@@ -356,7 +356,7 @@ Elision 不是语法便捷性的简单堆砌，而是一组基于 Hindley-Milner
 | **Rule 2（单输入关联）** | $\|L_{in}\| = 1$ 且返回类型含引用 | 输出生命周期等于唯一输入生命周期 | $\|L_{in}\| = 1 \land \text{is\_ref}(\text{Return}) \Rightarrow 'b = 'a_1$ |
 | **Rule 3（self 关联）** | 函数为方法且第一个参数为 `&self` 或 `&mut self` | 输出生命周期等于 `self` 的生命周期 | $\text{is\_method}(f) \land \text{ty}(\text{self}) = \&'a_s\, \text{Self} \Rightarrow 'b = 'a_s$ |
 
-> **[来源: Rust Reference: Lifetime elision]** 三条规则按顺序应用，Rule 3 优先于 Rule 2（方法签名场景）。✅
+> **来源: [Rust Reference: Lifetime elision](https://doc.rust-lang.org/reference/lifetime-elision.html)** 三条规则按顺序应用，Rule 3 优先于 Rule 2（方法签名场景）。✅
 
 #### 13.1.1 Rule 1：每个输入引用获得独立生命周期
 
@@ -399,7 +399,7 @@ fn merge<'a>(a: &'a str, b: &'a str) -> &'a str {
 }
 ```
 
-> **[来源: Rust Reference: Lifetime elision §The rules]** Rule 1 的独立分配是后续规则产生歧义的根源——当 $|L_{in}| > 1$ 且返回含引用时，Rule 2 不适用，必须显式标注。✅
+> **来源: [Rust Reference: Lifetime elision §The rules](https://doc.rust-lang.org/reference/lifetime-elision.html#the-rules)** Rule 1 的独立分配是后续规则产生歧义的根源——当 $|L_{in}| > 1$ 且返回含引用时，Rule 2 不适用，必须显式标注。✅
 
 #### 13.1.2 Rule 2：单输入时输出等于输入生命周期
 
@@ -430,7 +430,7 @@ fn longest(x: &str, y: &str) -> &str {  // E0106
 
 此时 $|L_{in}| = 2$，Rule 2 的前提 $|L_{in}| = 1$ 不满足，编译器无法确定返回引用应继承 `x` 还是 `y` 的生命周期。
 
-> **[来源: Rust Reference: Lifetime elision §The rules]** Rule 2 的核心前提是"函数返回值的生命周期必须源自某个输入"——当存在多个候选源时，Elision 放弃推导以避免 unsound 的猜测。✅
+> **来源: [Rust Reference: Lifetime elision §The rules](https://doc.rust-lang.org/reference/lifetime-elision.html#the-rules)** Rule 2 的核心前提是"函数返回值的生命周期必须源自某个输入"——当存在多个候选源时，Elision 放弃推导以避免 unsound 的猜测。✅
 
 #### 13.1.3 Rule 3：方法有 `&self` / `&mut self` 时输出优先
 
@@ -484,7 +484,7 @@ impl<'a> Parser<'a> {
 }
 ```
 
-> **[来源: Rust Reference: Lifetime elision §The rules]** Rule 3 体现了面向对象方法的语义约定：方法有 `&self`/`&mut self` 时，返回引用（输出）的生命周期与 self 的生命周期一致。✅
+> **来源: [Rust Reference: Lifetime elision §The rules](https://doc.rust-lang.org/reference/lifetime-elision.html#the-rules)** Rule 3 体现了面向对象方法的语义约定：方法有 `&self`/`&mut self` 时，返回引用（输出）的生命周期与 self 的生命周期一致。✅
 
 ### 13.2 为什么 Elision 是 Sound 的
 
@@ -530,7 +530,7 @@ fn longest(x: &str, y: &str) -> &str;    // ❌ E0106
 ```
 
 > **核心洞察**：Elision 是编译器在"不引入歧义"的前提下的最大努力推导。它的 soundness 来源于**函数返回值不能凭空产生引用**这一 Rust 核心公理——任何返回的引用必须"继承"自某个输入。
-> **[来源: Rust Reference: Lifetime elision]** 完整的 Elision 规则定义于 Reference 的 "Lifetime elision" 章节，覆盖函数签名、方法签名及 trait 对象场景。✅
+> **来源: [Rust Reference: Lifetime elision](https://doc.rust-lang.org/reference/lifetime-elision.html)** 完整的 Elision 规则定义于 Reference 的 "Lifetime elision" 章节，覆盖函数签名、方法签名及 trait 对象场景。✅
 
 **跨层映射**: 本章节形式化规则 ↔ [`../04_formal/03_ownership_formal.md`](../04_formal/03_ownership_formal.md) §2.2 "区域约束的语法与语义"
 
@@ -584,7 +584,7 @@ fn filter<'a, 'b>(
 }
 ```
 
-> **[来源: Rust Reference: `impl Trait` in return position]** RPIT 的生命周期捕获策略在 [RFC 2289](https://rust-lang.github.io/rfcs//2289-associated-type-bounds.html) 中定义：返回类型自动捕获所有在函数体中被实现类型使用且出现在签名中的生命周期。✅
+> **来源: [Rust Reference: `impl Trait` in return position](https://doc.rust-lang.org/reference/)** RPIT 的生命周期捕获策略在 [RFC 2289](https://rust-lang.github.io/rfcs//2289-associated-type-bounds.html) 中定义：返回类型自动捕获所有在函数体中被实现类型使用且出现在签名中的生命周期。✅
 
 ### 14.2 `impl Trait` + `+'a` 的显式生命周期约束
 
@@ -624,7 +624,7 @@ fn bad_static(s: &str) -> impl Display + 'static {
 }
 ```
 
-> **[来源: Rust Reference: Lifetime bounds on `impl Trait`]** `impl Trait + 'a` 的语义等价于"实现该 trait 的匿名类型，且该类型中所有引用至少存活 'a"。✅
+> **来源: [Rust Reference: Lifetime bounds on `impl Trait`](https://doc.rust-lang.org/reference/)** `impl Trait + 'a` 的语义等价于"实现该 trait 的匿名类型，且该类型中所有引用至少存活 'a"。✅
 
 ### 14.3 `impl Trait` 参数位置（APIT）的生命周期推断差异
 
@@ -702,7 +702,7 @@ where
 | **HRTB 交互** | 复杂（隐式捕获与 `for<'a>` 量化冲突） | 直接（APIT 的隐式泛型可参与 HRTB） |
 | **类型推导方向** | 由函数体推导实现类型 | 由调用方推导具体类型 |
 
-> **[来源: Rust Reference: `impl Trait`; RFC 2289]** APIT 于 Rust 1.26 稳定，RPIT 于 Rust 1.26 稳定；RPITIT（trait 中的 RPIT）于 Rust 1.75 稳定。✅
+> **来源: [Rust Reference: `impl Trait`; RFC 2289](https://doc.rust-lang.org/reference/)** APIT 于 Rust 1.26 稳定，RPIT 于 Rust 1.26 稳定；RPITIT（trait 中的 RPIT）于 Rust 1.75 稳定。✅
 
 ### 14.5 为什么 `impl Trait` 不能随意出现在 Trait 定义中（RPITIT）
 
@@ -813,8 +813,8 @@ impl<'s> Iterator for Words<'s> {
 Lending Iterator 通过 GATs 将 `Item` 参数化为 `Item<'a>`，并用 `where Self: 'a` 确保**迭代器本身至少存活到返回引用的生命周期**，从而安全地表达自引用迭代。这是 GATs 解决表达力鸿沟的经典案例。
 
 > **[来源: [RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html) (GATs)]** `where Self: 'a` 约束确保关联类型不会引用比 `Self` 更短的生命周期，构成自引用集合的类型安全基础。✅
-> **[来源: Rust Reference; TRPL; Rust RFCs; Academic Papers]** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
-> **[来源: Wikipedia; POPL/PLDI/ECOOP Papers; RustBelt/Iris Project]** 形式化概念参考了权威学术来源和类型论研究。✅
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/); [The Rust Programming Language](https://doc.rust-lang.org/book/); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
+> **来源: [Wikipedia](https://en.wikipedia.org/wiki/Main_Page); POPL/PLDI/ECOOP Papers; [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)/Iris Project** 形式化概念参考了权威学术来源和类型论研究。✅
 
 ---
 
@@ -837,8 +837,8 @@ Lending Iterator 通过 GATs 将 `Item` 参数化为 `Item<'a>`，并用 `where 
 | 访问安全性 | Safe（match 检查 tag） | `unsafe` 必需 |
 | 与 C 兼容 | `#[repr(C)]` 下兼容 C enum | `#[repr(C)]` 下兼容 C union |
 
-> **[来源: Rust Reference: Unions]** `union` 的所有 variant 共享同一起始地址，内存对齐等于所有 variant 对齐的最大值。✅
-> **[来源: Rust Reference: Type Layout]** `enum` 的内存布局包含 discriminant（tag），而 `union` 不含 tag。✅
+> **来源: [Rust Reference: Unions](https://doc.rust-lang.org/reference/items/unions.html)** `union` 的所有 variant 共享同一起始地址，内存对齐等于所有 variant 对齐的最大值。✅
+> **来源: [Rust Reference: Type Layout](https://doc.rust-lang.org/reference/type-layout.html)** `enum` 的内存布局包含 discriminant（tag），而 `union` 不含 tag。✅
 
 ```rust
 union IntOrFloat {
@@ -866,13 +866,13 @@ union Value {
 }
 ```
 
-> **[来源: The Rustonomicon: Unions]** `union` 的设计哲学是"零成本类型双关（type punning）"——允许在同一内存位置用不同类型视角解读位模式，但放弃了编译期变体追踪。✅
+> **来源: [The Rustonomicon: Unions](https://doc.rust-lang.org/nomicon/unions.html)** `union` 的设计哲学是"零成本类型双关（type punning）"——允许在同一内存位置用不同类型视角解读位模式，但放弃了编译期变体追踪。✅
 
 ### 16.2 unsafe 读取 union field 的必要性
 
 Rust 的内存安全模型要求：读取一个值时必须知道其有效类型（valid type）。`union` 消除了编译器对活跃变体的追踪能力，因此**所有字段访问都必须通过 `unsafe` 块**显式声明"程序员保证读取的变体是最后写入的"。
 
-> **[来源: Rust Reference: Unions]** 访问 union 字段是 `unsafe` 的，因为编译器无法验证当前激活的变体。读取非活跃变体属于未定义行为（如果位模式对目标类型无效）。✅
+> **来源: [Rust Reference: Unions](https://doc.rust-lang.org/reference/items/unions.html)** 访问 union 字段是 `unsafe` 的，因为编译器无法验证当前激活的变体。读取非活跃变体属于未定义行为（如果位模式对目标类型无效）。✅
 
 ```rust
 union IntOrFloat {
@@ -905,7 +905,7 @@ fn main() {
 
 **核心问题**：若 union 的某个 variant 实现了 `Drop`，当 union 离开作用域时，编译器**不知道该调用哪个变体的 `drop`**。
 
-> **[来源: Rust Reference: Unions]** union 不会自动 `Drop` 其字段。若 union 包含需要 drop 的类型，必须显式使用 `ManuallyDrop<T>` 包裹。✅
+> **来源: [Rust Reference: Unions](https://doc.rust-lang.org/reference/items/unions.html)** union 不会自动 `Drop` 其字段。若 union 包含需要 drop 的类型，必须显式使用 `ManuallyDrop<T>` 包裹。✅
 
 ```rust
 use std::mem::ManuallyDrop;
@@ -947,7 +947,7 @@ union BadUnion {
 // 编译错误: unions cannot have fields that need dropping
 ```
 
-> **[来源: The Rustonomicon: Unions]** `ManuallyDrop<T>` 阻止编译器自动调用 `T::drop`，使 union 的析构语义完全由程序员控制。这是 union 实现"手动内存管理"的关键抽象。✅
+> **来源: [The Rustonomicon: Unions](https://doc.rust-lang.org/nomicon/unions.html)** `ManuallyDrop<T>` 阻止编译器自动调用 `T::drop`，使 union 的析构语义完全由程序员控制。这是 union 实现"手动内存管理"的关键抽象。✅
 
 ### 16.4 union 的 impl 限制
 
@@ -976,7 +976,7 @@ union NonCopyUnion {
 // NonCopyUnion: !Copy
 ```
 
-> **[来源: Rust Reference: Unions]** union 的 `Copy` 推导遵循与 struct 相同的规则：仅当所有字段都实现 `Copy`。union 的字段若为 `ManuallyDrop<T>`，则 `Copy` 性取决于 `T`。✅
+> **来源: [Rust Reference: Unions](https://doc.rust-lang.org/reference/items/unions.html)** union 的 `Copy` 推导遵循与 struct 相同的规则：仅当所有字段都实现 `Copy`。union 的字段若为 `ManuallyDrop<T>`，则 `Copy` 性取决于 `T`。✅
 
 ### 16.5 与 C 语言 union 的 FFI 互操作
 
@@ -1009,7 +1009,7 @@ fn main() {
 }
 ```
 
-> **[来源: Rust Reference: Unions]** `#[repr(C)]` 保证 union 的字段顺序、对齐和大小与 C 一致。Rust union 不支持位域（bitfields），需用 `#[repr(C)] struct` 模拟。✅
+> **来源: [Rust Reference: Unions](https://doc.rust-lang.org/reference/items/unions.html)** `#[repr(C)]` 保证 union 的字段顺序、对齐和大小与 C 一致。Rust union 不支持位域（bitfields），需用 `#[repr(C)] struct` 模拟。✅
 
 **C 互操作边界**:
 
@@ -1019,7 +1019,7 @@ fn main() {
 | 指针 union | ✅ 直接映射 | `*mut T` ↔ `T*` |
 | 嵌套 struct | ✅ `#[repr(C)] struct` | 确保布局一致 |
 | 位域（bitfields） | ❌ 不支持 | 需手动掩码模拟 |
-| 变长数组尾部 | ⚠️ 需 `#[repr(C)]` + 不透明类型 | 参见 [Rustonomicon: FFI] |
+| 变长数组尾部 | ⚠️ 需 `#[repr(C)]` + 不透明类型 | 参见 [Rustonomicon: FFI](https://doc.rust-lang.org/nomicon/ffi.html) |
 
 ### 16.6 代码示例：正确使用 + 典型错误
 
@@ -1100,7 +1100,7 @@ fn risky(u: &mut DoubleFreeRisk) {
 }
 ```
 
-> **[来源: The Rustonomicon: Unions]** union 的正确使用模式是：外部维护一个 tag（enum 包装）或使用 `MaybeUninit` 语义，绝不在不知道活跃变体的情况下执行 drop。✅
+> **来源: [The Rustonomicon: Unions](https://doc.rust-lang.org/nomicon/unions.html)** union 的正确使用模式是：外部维护一个 tag（enum 包装）或使用 `MaybeUninit` 语义，绝不在不知道活跃变体的情况下执行 drop。✅
 
 **安全包装模式：Tagged Union**:
 
@@ -1132,7 +1132,7 @@ enum SafeValue {
 
 ## Wikipedia 概念对齐
 
-> **[来源: Wikipedia]** 核心概念与国际知识库映射。
+> **来源: [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)** 核心概念与国际知识库映射。
 
 | 概念 | Wikipedia 词条 | 说明 |
 | :--- | :--- | :--- |

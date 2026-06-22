@@ -640,3 +640,27 @@ mod tests {
 >
 
 ---
+
+## 📚 模块 8: 国际化对齐
+
+> 本节按项目模板要求补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Rustonomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html) | 权威来源 | FFI 官方指南 |
+| [The Rust FFI Omnibus](https://jakegoulding.com/rust-ffi-omnibus/) | 权威来源 | FFI 示例 |
+
+### 8.2 学术来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | 权威来源 | FFI 边界语义 |
+
+### 8.3 社区权威
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [bindgen docs](https://rust-lang.github.io/rust-bindgen/) | 权威来源 | C/C++ 绑定生成 |
+| [cbindgen docs](https://mozilla.github.io/cbindgen/) | 权威来源 | 生成 C 头文件 |

@@ -53,7 +53,7 @@
 
 ## 🎯 概述 {#-概述}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档索引了所有使用多种思维表征方式（思维导图、概念对比矩阵、决策树等）创建的可视化文档。
 
@@ -68,13 +68,13 @@
 
 ## 🧠 思维导图 {#-思维导图}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 任务关系网络图
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **文档**: TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md（已归档）
 
@@ -97,13 +97,13 @@
 
 ## 📊 概念对比矩阵 {#-概念对比矩阵}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 任务类型对比矩阵
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **文档**: TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md（已归档）
 
@@ -120,9 +120,9 @@
 
 ### 2. 任务完成策略对比矩阵
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **文档**: TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md（已归档）
 
@@ -139,9 +139,9 @@
 
 ### 3. 工具选择对比矩阵
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **文档**: TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md（已归档）
 
@@ -160,13 +160,13 @@
 
 ## 🌳 决策树 {#-决策树}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 任务优先级决策树
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **文档**: TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md（已归档）
 
@@ -195,11 +195,11 @@
 
 ## 📈 进度可视化 {#-进度可视化}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 周进度跟踪表
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **文档**: TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md（已归档）
 
@@ -211,7 +211,7 @@
 
 ### 2. 任务完成度热力图
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **文档**: TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md（已归档）
 
@@ -236,7 +236,7 @@
 
 ### 核心文档
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - 任务编排与执行计划 - 包含所有可视化内容
 - [任务清单](./10_task_checklist.md) - 详细任务列表
@@ -244,7 +244,7 @@
 
 ### 工具资源
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - [Mermaid 文档](https://mermaid.js.org/) - 图表绘制工具
 - [Graphviz 文档](https://graphviz.org/) - 图形可视化工具
@@ -258,7 +258,7 @@
 
 ### 示例 1: Mermaid 思维导图代码
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```mermaid
 graph TB
@@ -466,20 +466,20 @@ fn main() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-> **[来源: Rust Reference]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-> **[来源: Rust Standard Library]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: ACM - Systems Programming]**
+> **来源: [ACM](https://dl.acm.org/)**
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-> **[来源: Rustonomicon]**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

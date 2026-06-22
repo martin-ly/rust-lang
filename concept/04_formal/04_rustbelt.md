@@ -22,7 +22,7 @@
 > [Concurrency](../03_advanced/01_concurrency.md)
 > [来源: [Wikipedia — Simply Typed Lambda Calculus](https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus)]
 > **后置概念**: [Formal Methods](../07_future/02_formal_methods.md)
-> **主要来源**: [RustBelt: POPL 2018](https://doi.org/10.1145/3158154) · [Iris Project](https://iris-project.org/) · [Creusot] · [Verus] · [Kani: AWS] · [Aeneas] · [RefinedRust] · [Prusti]
+> **主要来源**: [RustBelt: POPL 2018](https://doi.org/10.1145/3158154) · [Iris Project](https://iris-project.org/) · [Creusot](https://creusot.github.io/creusot/) · [Verus](https://verus-lang.github.io/verus/) · [Kani: AWS] · [Aeneas](https://github.com/AeneasVerif/aeneas) · [RefinedRust] · [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html)
 
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
@@ -106,15 +106,15 @@
 
 ### 1.1 Wikipedia 权威定义
 
-> **[Wikipedia: Formal verification]** Formal verification is the act of proving or disproving the correctness of intended algorithms underlying a system with respect to a certain formal specification or property, using formal methods of mathematics. It is used in software engineering to ensure that systems operate correctly and reliably. [来源: [Wikipedia — Hindley-Milner](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system)]
+> **[Wikipedia: Formal verification](https://en.wikipedia.org/wiki/Formal_verification)** Formal verification is the act of proving or disproving the correctness of intended algorithms underlying a system with respect to a certain formal specification or property, using formal methods of mathematics. It is used in software engineering to ensure that systems operate correctly and reliably. [来源: [Wikipedia — Hindley-Milner](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system)]
 
-> **[Wikipedia: Separation logic]** Separation logic is an extension of Hoare logic that permits local reasoning about mutable data structures. It was developed to support reasoning about shared mutable data structures, which are common in imperative and object-oriented programs. The key innovation is the separating conjunction `*`, which asserts that two assertions hold for disjoint portions of memory, enabling modular and compositional verification [来源: Wikipedia · Separation logic].
+> **[Wikipedia: Separation logic](https://en.wikipedia.org/wiki/Separation_logic)** Separation logic is an extension of Hoare logic that permits local reasoning about mutable data structures. It was developed to support reasoning about shared mutable data structures, which are common in imperative and object-oriented programs. The key innovation is the separating conjunction `*`, which asserts that two assertions hold for disjoint portions of memory, enabling modular and compositional verification 来源: [Wikipedia](https://en.wikipedia.org/wiki/Main_Page) · Separation logic.
 
-> **[Wikipedia: Model checking]** Model checking is a method for checking whether a finite-state model of a system meets a given specification. In order to solve such a problem algorithmically, both the model of the system and the specification are formulated in some precise mathematical language.
+> **[Wikipedia: Model checking](https://en.wikipedia.org/wiki/Model_checking)** Model checking is a method for checking whether a finite-state model of a system meets a given specification. In order to solve such a problem algorithmically, both the model of the system and the specification are formulated in some precise mathematical language.
 
 ### 1.2 RustBelt 与 Iris 核心定义
 
-> **[RustBelt: POPL 2018](https://doi.org/10.1145/3158154)** RustBelt is the first formal (and machine-checked) foundations for safe and unsafe Rust. It provides a proof technique for verifying that unsafe code respects safe Rust's abstraction boundaries. The paper establishes the core safety theorem: well-typed safe Rust programs are guaranteed to be data-race free and memory-safe (no use-after-free) under the λRust operational semantics [来源: Jung et al., *RustBelt: Securing the Foundations of the Rust Programming Language*, POPL 2018].
+> **[RustBelt: POPL 2018](https://doi.org/10.1145/3158154)** RustBelt is the first formal (and machine-checked) foundations for safe and unsafe Rust. It provides a proof technique for verifying that unsafe code respects safe Rust's abstraction boundaries. The paper establishes the core safety theorem: well-typed safe Rust programs are guaranteed to be data-race free and memory-safe (no use-after-free) under the λRust operational semantics 来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/).
 
 > **[Iris Project](https://iris-project.org/)** Iris is a higher-order concurrent separation logic framework implemented in Coq. It provides the logical infrastructure for reasoning about fine-grained concurrency, higher-order ghost state, and atomicity. RustBelt builds directly on Iris to model Rust's ownership and borrowing mechanisms [来源: Jung et al., *Iris from the Ground Up*, JFP 2018; iris-project.org].
 
@@ -133,7 +133,7 @@
 
 ## 二、定理一致性矩阵（Theorem Consistency Matrix）
 
-> **[学术来源: Jung et al. 2017 POPL; Jung et al. 2018 POPL; Iris: JFP 2018]** 以下定理矩阵基于 RustBelt 系列论文及 Iris 框架的公理体系，每行包含"被依赖"（下游定理）与"失效条件"（假设被违反的情形）。
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** 以下定理矩阵基于 RustBelt 系列论文及 Iris 框架的公理体系，每行包含"被依赖"（下游定理）与"失效条件"（假设被违反的情形）。
 
 ### 2.1 矩阵总览（11 行）
 >
@@ -248,11 +248,11 @@ graph BT
 ```
 
 > **认知功能**: 此推导链图将 RustBelt 的**三层定理结构**（L1 逻辑基础设施 → L2 Rust 语义特化 → L3 安全定理）与**边界层**可视化。箭头方向自下而上表示"依赖关系"：L3 定理依赖 L2 语义，L2 语义依赖 L1 逻辑。关键洞察：**L2-C (λRust 语义一致性) 是整个链条的根基假设**——若 MIR→λRust 翻译有误，则所有定理与真实编译器脱节。边界层 C1/C2 用虚线连接，表示它们不是定理的前提，而是定理的**适用范围声明**。
-> [来源: [RustBelt Paper]]
+> [来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)]
 
 ## 三、Concurrent Separation Logic（并发分离逻辑）
 
-> **[学术来源: O'Hearn 2007 (CSL 原始论文); Jung et al. 2015 (Iris); RustBelt: POPL 2018 §4–§5]** CSL 是分离逻辑向并发领域的自然延伸。Rust 的所有权系统与 CSL 的资源分区思想存在深层同构：`&mut T` 对应独占的分离合取 `l ↦ v`，`&T` 对应持久资源 `□(l ↦ v)`，`Mutex<T>` 对应资源不变量 `I`。
+> **来源: O'Hearn 2007 (CSL 原始论文); Jung et al. 2015 (Iris); [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** CSL 是分离逻辑向并发领域的自然延伸。Rust 的所有权系统与 CSL 的资源分区思想存在深层同构：`&mut T` 对应独占的分离合取 `l ↦ v`，`&T` 对应持久资源 `□(l ↦ v)`，`Mutex<T>` 对应资源不变量 `I`。
 
 ### 3.1 CSL = 分离逻辑 + 资源不变量
 
@@ -305,11 +305,11 @@ MutexInvariant(m, l, P) ≜  ∃v. l ↦ v * P(v)
 
 执行 `unlock` 时，调用者必须归还独占访问权、证明数据满足不变量、并交还幽灵令牌。
 
-> **[来源: RustBelt: POPL 2018 §5]** RustBelt 在 Iris 中机械验证了 `std::sync::Mutex` 满足上述规约。关键难点在于处理 `UnsafeCell` 和平台线程原语（`pthread_mutex_t` / `futex`）的对接。
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** RustBelt 在 Iris 中机械验证了 `std::sync::Mutex` 满足上述规约。关键难点在于处理 `UnsafeCell` 和平台线程原语（`pthread_mutex_t` / `futex`）的对接。
 
 ### 3.3b Kani 验证：Mutex 无数据竞争规格
 
-> **[来源: Kani Documentation: Concurrent verification; RustBelt POPL 2018 §5]** CSL 的 `MutexInvariant` 规约可在 Kani 中编码为**并发验证 harness**。Kani 通过符号化线程交错，验证在所有可能的执行顺序下数据竞争不存在。
+> **来源: Kani Documentation: Concurrent verification; [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** CSL 的 `MutexInvariant` 规约可在 Kani 中编码为**并发验证 harness**。Kani 通过符号化线程交错，验证在所有可能的执行顺序下数据竞争不存在。
 
 ```rust
 // Kani 验证规格: Mutex 保护的数据访问无竞争
@@ -381,7 +381,7 @@ Kani 并发验证的工作方式:
   Kani 的验证 ⟹ 在所有符号化交错路径上，hb 关系成立 ⟹ 无数据竞争
 ```
 
-> **来源**: [Kani Book: Concurrent programs] · [RustBelt: POPL 2018 §5 — Mutex CSL proof] · [Kani GitHub: std::sync verification]
+> **来源**: [Kani Book: Concurrent programs] · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [Kani GitHub: std::sync verification]
 
 ### 3.4 `Arc<T>` 的形式化
 >
@@ -406,7 +406,7 @@ ArcInvariant(rc, data, P) ≜  ∃n. rc ↦ n * (n > 0 → data ↦ v * P(v))
 { ArcInvariant(rc, data, P) * ArcHandle(data) }  drop(arc)  { emp }
 ```
 
-> **[来源: RustBelt: POPL 2018 §6; Ralf Jung PhD Thesis 2020]** `Arc` 的证明依赖 Iris "协议状态机"，将引用计数变化建模为原子状态迁移。
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** `Arc` 的证明依赖 Iris "协议状态机"，将引用计数变化建模为原子状态迁移。
 
 ### 3.5 CSL 规范代码示例
 
@@ -443,7 +443,7 @@ drop(arc2);  // rc: 1 → 0, 释放 data
 
 ## 四、反命题决策树（Antithesis Decision Trees）
 
-> **[学术来源: RustBelt 系列论文; Iris 框架设计原则]** 以下决策树用于识别对 RustBelt 和形式化验证的常见误解，每棵树对应一个过度概括的命题。
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** 以下决策树用于识别对 RustBelt 和形式化验证的常见误解，每棵树对应一个过度概括的命题。
 
 ### 4.1 命题一："RustBelt 证明了 Rust 完全安全"
 >
@@ -679,7 +679,7 @@ unsafe 代码的正确性仍然依赖程序员的正确实现和额外验证（�
 ## 六、RustBelt 验证的标准库原语
 >
 
-> **[学术来源: RustBelt: POPL 2018; RustHornBelt: PLDI 2022; RefinedRust: PLDI 2024; Ralf Jung PhD Thesis 2020]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ### 6.1 已验证 / 待验证矩阵
 
@@ -999,7 +999,7 @@ jobs:
 
 ```mermaid
 graph TD
-    A[RustBelt & Verification] --> B[RustBelt]
+    A[RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) --> B[RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
     A --> C[Creusot]
     A --> D[Verus]
     A --> E[Kani]
@@ -1043,8 +1043,8 @@ graph TD
     H --> H1[Viper 中间语言]
     H --> H2[模块化契约]
 
-    I --> I1[Stacked Borrows]
-    I --> I2[Tree Borrows]
+    I --> I1[Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)
+    I --> I2[Tree Borrows — PLDI 2025](https://perso.crans.org/vanille/treebor/)
     I --> I3[动态 UB 检测]
 ```
 
@@ -1056,7 +1056,7 @@ graph TD
 
 | 来源 | 核心内容 | 与本文件对应 |
 |:---|:---|:---|
-| **[ETH Zurich: RustBelt Project]** | Iris 分离逻辑、λRust 语义 | L1-A, L2-C, 理论基础 |
+| **[RustBelt](https://plv.mpi-sws.org/rustbelt/)** | Iris 分离逻辑、λRust 语义 | L1-A, L2-C, 理论基础 |
 | **[CMU 17-350: Safe Systems Programming]** | 形式化验证工具使用 | 工业实践 |
 | **[RustBelt: POPL 2018](https://doi.org/10.1145/3158154)** | 类型安全定理、unsafe 封装 | T1, T2, C1, §3 Mutex/Arc 形式化 |
 | **[Iris: JFP 2018]** | 高阶并发分离逻辑框架 | L1-A, L1-B, L1-C, 逻辑基础 |
@@ -1075,7 +1075,7 @@ graph TD
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
 | RustBelt 是首个 Rust 形式化基础 | [RustBelt: POPL 2018](https://doi.org/10.1145/3158154) · Jung et al. 2017 POPL | ✅ |
-| CSL 资源不变量可建模 Mutex/Arc | [RustBelt: POPL 2018 §5–§6] · Ralf Jung PhD Thesis 2020 | ✅ |
+| CSL 资源不变量可建模 Mutex/Arc | [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · Ralf Jung PhD Thesis 2020 | ✅ |
 | Kani 用于 AWS Rust 服务验证 | [AWS Kani Blog] · Tautschnig 2023 | ✅ |
 | Verus 由 Microsoft Research 开发 | [Verus GitHub] · Lorch et al. 2024 SOSP | ✅ |
 | Creusot 支持 unsafe 代码验证 | [Creusot Documentation] · Denis et al. 2022 FM | ✅ |
@@ -1083,7 +1083,7 @@ graph TD
 | RustBelt 安全定理: Safe Rust ⇒ 内存安全 + 数据竞争自由 | Jung et al. 2017 POPL | ✅ |
 | Send/Sync 充分性基于并发分离逻辑 | Jung et al. 2017 POPL §5 | ✅ |
 | Iris 高阶分离逻辑支撑 RustBelt | Jung et al. 2018 POPL | ✅ |
-| Separation logic 是 Hoare 逻辑的内存扩展 | [Wikipedia: Separation logic] | ✅ |
+| Separation logic 是 Hoare 逻辑的内存扩展 | [Wikipedia: Separation logic](https://en.wikipedia.org/wiki/Separation_logic) | ✅ |
 | RustBelt 不覆盖死锁与活性 | Jung et al. 2017 POPL §1, §8 | ✅ |
 | Iris 框架独立于 Rust，可实例化到其他语言 | [Iris Project: iris-project.org] | ✅ |
 | Miri 支持 Tree Borrows 模型 | [Miri 官方文档; Jung et al. 2019] | ✅ |
@@ -1204,7 +1204,7 @@ let mut w = data.write().unwrap();
 drop(w);
 ```
 
-> **来源**: [RustBelt: POPL 2018 §5–§6] · [Jung PhD Thesis 2020 · CSL] · [Iris Tutorial: iris-project.org]
+> **来源**: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [Jung PhD Thesis 2020 · CSL] · [Iris Tutorial: iris-project.org]
 
 ### 7.9 `Vec` 重新分配：借用与重分配的形式化处理
 
@@ -1245,7 +1245,7 @@ unsafe {
 ```
 
 > **定理**：在 Safe Rust 中，不可能构造出观察到 `Vec` realloc 的引用。这是**编译期保证**（借用检查器）与**运行时保证**（realloc 后旧指针不可达）的联合结果。
-> **来源**: [RustBelt: POPL 2018 §4] · [Rust Reference: Vec] · [Unsafe Code Guidelines: Vec] · [Jung et al. 2019: Stacked Borrows]
+> **来源**: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [Rust Reference: Vec](https://doc.rust-lang.org/std/vec/struct.Vec.html) · [Unsafe Code Guidelines: Vec] · [Stacked Borrows — POPL 2021](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)
 
 ---
 
@@ -1272,7 +1272,7 @@ unsafe {
 
 ## 十四、Wikipedia 概念对齐
 
-> **[来源: Wikipedia]** RustBelt 与分离逻辑核心概念与国际知识库映射。
+> **来源: [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)** RustBelt 与分离逻辑核心概念与国际知识库映射。
 
 | 概念 | Wikipedia 词条 | 对应 Rust 概念 |
 |:---|:---|:---|

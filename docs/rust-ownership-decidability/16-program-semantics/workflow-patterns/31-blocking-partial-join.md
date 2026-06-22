@@ -7,7 +7,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [31 阻塞部分合并模式 (Blocking Partial Join) - 完整形式化语义](#31-阻塞部分合并模式-blocking-partial-join---完整形式化语义)
   - [目录](#目录)
@@ -58,15 +58,15 @@
 
 ## 1. 引言
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 阻塞部分合并模式（Blocking Partial Join，WCP-31）是工作流控制流模式中的一种高级合并模式。与部分合并（Partial Join，WCP-30）不同，阻塞部分合并在等待到指定数量的分支完成后，不仅触发后续活动，还会继续阻塞等待剩余分支完成，确保所有分支最终都被处理。
 
 ### 1.1 历史背景
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 阻塞部分合并模式最早由 Wil van der Aalst 等人在 "Workflow Patterns" (2003) 中系统定义，作为部分合并模式的扩展变体，用于需要既保证快速响应又确保最终一致性的场景。
 
@@ -78,7 +78,7 @@
 
 ### 2.1 概念定义
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **阻塞部分合并** 是一个控制流构造，它从 $M$ 个并行分支中等待 $N$ 个分支完成（$1 \leq N \leq M$），然后：
 
@@ -97,7 +97,7 @@ M ::= Integer  -- 总分支数
 
 ### 2.2 核心语义
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **触发语义**:
 
@@ -123,11 +123,11 @@ $$
 
 ### 2.3 形式化表示
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 #### 2.3.1 状态机表示
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 $$
 \begin{aligned}
@@ -142,7 +142,7 @@ $$
 
 #### 2.3.2 流程代数表示 (CSP 风格)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 $$
 \text{BlockingPartialJoin} = \text{WAIT}_N \rightarrow \text{TRIGGER} \rightarrow \text{WAIT}_M \rightarrow \text{SKIP}
@@ -152,7 +152,7 @@ $$
 
 #### 2.3.3 Petri 网表示
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```
          ┌─→ (B1) ──┐
@@ -173,7 +173,7 @@ Count=M: 当所有分支完成时进行清理
 
 ### 3.1 BPMN 表示
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 在 BPMN 2.0 中，阻塞部分合并没有直接的原生支持，但可以通过**复杂网关** (Complex Gateway) 结合事件实现：
 
@@ -189,7 +189,7 @@ Count=M: 当所有分支完成时进行清理
 
 ### 3.2 UML 活动图
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 在 UML 中，阻塞部分合并使用**汇合节点**配合守卫条件：
 
@@ -210,7 +210,7 @@ Count=M: 当所有分支完成时进行清理
 
 ### 3.3 WfMC 标准
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 工作流管理联盟 (WfMC) 将阻塞部分合并定义为：
 
@@ -230,7 +230,7 @@ Count=M: 当所有分支完成时进行清理
 
 ### 4.1 CCS 表示
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **Calculus of Communicating Systems (CCS)**:
 
@@ -246,7 +246,7 @@ $$
 
 ### 4.2 CSP 表示
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **Communicating Sequential Processes (CSP)**:
 
@@ -267,7 +267,7 @@ COUNT' = continue_waiting -> done?x | (count == M) -> SKIP
 
 ### 4.3 π-演算表示
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **Pi-Calculus**:
 
@@ -841,21 +841,21 @@ BlockPartialJoin(N=2, M=3)
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Design Pattern]**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 
-> **[来源: Rust API Guidelines]**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 
-> **[来源: Gang of Four - Design Patterns]**
+> **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
 
-> **[来源: ACM - Software Design Patterns]**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---
 

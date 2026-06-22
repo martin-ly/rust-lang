@@ -14,7 +14,7 @@
 
 ## 目录
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [循环引用与内存泄漏形式化](#循环引用与内存泄漏形式化)
   - [目录](#目录)
@@ -56,7 +56,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 循环引用是Rc/Arc智能指针的固有问题：当两个或多个对象通过引用计数相互引用时，即使程序不再使用它们，引用计数也不会归零，导致内存无法释放。
 
@@ -66,13 +66,13 @@
 
 ## 引用计数形式化
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 定义 RC-1 (Rc引用计数)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 `Rc<T>`提供堆分配的引用计数共享所有权。
 
@@ -87,9 +87,9 @@ $$
 
 ### 定义 RC-2 (引用计数操作)
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **创建**:
 $$
@@ -113,13 +113,13 @@ $$
 
 ## 循环引用形式化
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 定义 CYCLE-1 (循环引用)
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 循环引用是一组对象，其中每个对象通过`Rc`引用序列中的下一个对象，最后一个引用第一个。
 
@@ -129,9 +129,9 @@ $$
 
 ### 定义 CYCLE-2 (循环引用计数)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 在循环中，每个对象的引用计数包含来自循环内和循环外的引用。
 
@@ -148,13 +148,13 @@ $$
 
 ## Weak引用形式化
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 定义 WEAK-1 (Weak指针)
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 `Weak<T>`是对`RcBox`的非拥有引用，不增加强引用计数。
 
@@ -177,9 +177,9 @@ $$
 
 ### 定理 WEAK-T1 (Weak不阻止释放)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 `Weak`引用不阻止`Rc`值的释放。
 
@@ -202,7 +202,7 @@ $$
 
 ### 定理 CYCLE-T1 (循环引用导致泄漏)
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 如果一组对象形成循环引用且没有外部引用，则这些对象永远不会被释放。
 
@@ -234,7 +234,7 @@ $$
 
 ### 定理 CYCLE-T2 (Weak打破循环)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 使用`Weak`引用代替`Rc`引用可以打破循环引用，防止内存泄漏。
 
@@ -267,7 +267,7 @@ $$
 
 ### 定理 CYCLE-T3 (泄漏检测不可判定性)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 在一般情况下，静态检测所有可能的循环引用是不可判定的。
 
@@ -291,7 +291,7 @@ $$
 
 ### 示例1: 循环引用导致泄漏
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust
 use std::rc::Rc;
@@ -330,7 +330,7 @@ fn cycle_leak() {
 
 ### 示例2: 使用Weak打破循环
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust
 use std::rc::{Rc, Weak};
@@ -382,7 +382,7 @@ fn no_cycle_with_weak() {
 
 ### 示例3: 父子树结构
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 use std::rc::{Rc, Weak};
@@ -593,22 +593,22 @@ struct Node {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
-> **[来源: Coq Reference]**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
 
-> **[来源: TLA+]**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
 
-> **[来源: ACM - Formal Verification]**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---
 

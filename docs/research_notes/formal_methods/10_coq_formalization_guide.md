@@ -14,7 +14,7 @@
 
 ## 📋 目录 {#-目录}
 >
-> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Coq]** · **[来源: Wikipedia - Proof Assistant]** · **[来源: ACM - Interactive Theorem Proving]** · **[来源: IEEE - Formal Verification Tools]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Coq](https://en.wikipedia.org/wiki/Coq)** · **来源: [Wikipedia - Proof Assistant](https://en.wikipedia.org/wiki/Proof_Assistant)** · **[来源: ACM - Interactive Theorem Proving]** · **[来源: IEEE - Formal Verification Tools]**
 
 - [Coq形式化证明框架指南](#coq形式化证明框架指南)
   - [📋 目录 {#-目录}](#-目录--目录)
@@ -126,19 +126,19 @@
 
 ## 1. Coq基础设置
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 安装和配置 (Coq Platform)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 安装Coq Platform
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Windows:**
 
@@ -172,9 +172,9 @@ opam install coq.8.18.0
 
 #### Iris框架安装
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 # 添加Iris opam仓库
@@ -189,9 +189,9 @@ opam install coq-stdpp
 
 #### 项目配置 (_CoqProject)
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 # _CoqProject 文件
@@ -221,9 +221,9 @@ theories/proofs/type_safety.v
 
 #### Makefile配置
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```makefile
 # Makefile
@@ -245,15 +245,15 @@ clean:
 
 ### 1.2 基础语法速览
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 基本定义
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```coq
 (* 定义类型 *)
@@ -274,9 +274,9 @@ Notation "x + y" := (add x y) (at level 50, left associativity).
 
 #### 命题和证明
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```coq
 (* 定义命题 *)
@@ -297,9 +297,9 @@ Qed.
 
 #### 归纳类型
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```coq
 (* 列表类型 *)
@@ -317,7 +317,7 @@ Notation "[ x ; .. ; y ]" := (cons x .. (cons y nil) ..).
 
 #### 记录类型
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```coq
 (* 记录定义 *)
@@ -333,7 +333,7 @@ Definition p1 := mkPoint 3 4.
 
 #### 常用证明策略
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 策略 | 用途 | 示例 |
 | :--- | :--- | :--- |
@@ -350,11 +350,11 @@ Definition p1 := mkPoint 3 4.
 
 ### 1.3 Iris分离逻辑框架简介
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 #### Iris核心概念
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```coq
 (* Iris基础导入 *)
@@ -372,7 +372,7 @@ From iris.heap_lang Require Import lang proofmode notation.
 
 #### Iris断言示例
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```coq
 (* 点断言: 内存位置l持有值v *)
@@ -391,7 +391,7 @@ Definition swap_spec (l1 l2 : loc) : iProp Σ :=
 
 #### Iris Hoare三元组
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```coq
 (* Hoare三元组: {{ P }} e {{ v, Q }} *)
@@ -415,15 +415,15 @@ Qed.
 
 ## 2. Rust所有权形式化
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 所有权规则公理化
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 #### 基础定义
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```coq
 (* theories/core/syntax.v *)
@@ -468,7 +468,7 @@ Inductive ty : Type :=
 
 #### 所有权环境
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```coq
 (* theories/ownership/ownership.v *)
@@ -502,7 +502,7 @@ Definition heap := VarMap.t val.
 
 #### 所有权公理
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```coq
 (* 所有权唯一性公理 *)
@@ -544,7 +544,7 @@ Axiom scope_end_axiom :
 
 #### Copy trait判定
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```coq
 (* Copy trait实现类型 *)
@@ -561,11 +561,11 @@ Fixpoint is_copy (T : ty) : Prop :=
 
 ### 2.2 唯一性定理的Coq证明框架
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 #### 定理陈述
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```coq
 (* theories/proofs/ownership_theorems.v *)
@@ -588,7 +588,7 @@ Admitted.  (* 待完成完整证明 *)
 
 #### 引理定义
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```coq
 (* 辅助引理: 所有权转移保持唯一性 *)
@@ -646,7 +646,7 @@ Definition ownership_unique (Ω : ownership_env) : Prop :=
 
 #### 归纳证明结构
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```coq
 (* 状态转换归纳 *)
@@ -688,11 +688,11 @@ Admitted.
 
 ### 2.3 代码示例 + Coq证明脚本
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 #### 示例1: 简单所有权转移
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **Rust代码:**
 
@@ -754,7 +754,7 @@ End OwnershipTransferExample.
 
 #### 示例2: Copy类型
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **Rust代码:**
 
@@ -804,7 +804,7 @@ End CopyExample.
 
 #### 示例3: 作用域与Drop
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **Rust代码:**
 
@@ -861,15 +861,15 @@ End ScopeExample.
 
 ## 3. 借用检查器形式化
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 3.1 借用规则公理化
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 #### 借用状态定义
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```coq
 (* theories/borrow/borrow_checker.v *)
@@ -899,7 +899,7 @@ Definition borrows_disjoint (b1 b2 : borrow_record) : Prop :=
 
 #### 借用规则公理
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```coq
 (* 规则6: 可变借用唯一性 *)
@@ -948,7 +948,7 @@ Axiom mutable_immutable_mutex :
 
 #### 借用创建与释放
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```coq
 (* 借用创建 *)
@@ -990,11 +990,11 @@ Qed.
 
 ### 3.2 数据竞争自由定理框架
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 #### 竞争自由定义
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```coq
 (* theories/concurrency/race_freedom.v *)
@@ -1032,7 +1032,7 @@ Parameter happens_before : operation -> operation -> Prop.
 
 #### 借用检查器保证无数据竞争
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```coq
 (* 定理: 借用检查器保证无数据竞争 *)
@@ -1075,11 +1075,11 @@ Definition valid_borrow_env (B : borrow_env) (Ω : ownership_env) : Prop :=
 
 ### 3.3 引理和证明结构
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 #### 核心引理
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```coq
 Section BorrowLemmas.
@@ -1134,15 +1134,15 @@ End BorrowLemmas.
 
 ## 4. 类型安全形式化
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 4.1 进展性 (Progress) 定理
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 #### 进展性定义
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```coq
 (* theories/proofs/type_safety.v *)
@@ -1174,7 +1174,7 @@ Admitted.
 
 #### 求值上下文
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```coq
 (* 求值上下文 *)
@@ -1200,11 +1200,11 @@ Fixpoint fill_ctx (K : eval_ctx) (e : expr) : expr :=
 
 ### 4.2 保持性 (Preservation) 定理
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 #### 保持性定理
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```coq
 (* 保持性定理 *)
@@ -1252,11 +1252,11 @@ Qed.
 
 ### 4.3 类型推导正确性
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 #### 类型推导关系
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```coq
 (* 类型推导关系 *)
@@ -1288,17 +1288,17 @@ Inductive type_check : value_env -> ownership_env -> expr -> ty -> Prop :=
 
 ## 5. 实战案例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 定理1: 所有权唯一性
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **对应文档**: [10_ownership_model.md](./10_ownership_model.md) 定理 6
 
 #### Rust代码示例
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 fn ownership_uniqueness_example() {
@@ -1312,7 +1312,7 @@ fn ownership_uniqueness_example() {
 
 #### Coq形式化规范
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```coq
 (* theories/proofs/theorem_1_ownership_uniqueness.v *)
@@ -1377,7 +1377,7 @@ End Theorem1_OwnershipUniqueness.
 
 ### 定理2: 借用互斥性
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **对应文档**: [10_borrow_checker_proof.md](./10_borrow_checker_proof.md) 定理 1
 
@@ -1497,7 +1497,7 @@ End Theorem2_BorrowMutex.
 
 ### 定理3: 引用有效性
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **对应文档**: 10_lifetime_formalization.md
 
@@ -1598,7 +1598,7 @@ End Theorem3_ReferenceValidity.
 
 ### 定理4: Send/Sync安全性
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **对应文档**: [10_send_sync_formalization.md](./10_send_sync_formalization.md)
 
@@ -1770,7 +1770,7 @@ Send/Sync安全性证明策略:
 
 ### 定理5: 类型安全（进展+保持）
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **对应文档**: [10_formal_foundations_index.md](./10_formal_foundations_index.md)
 
@@ -1938,11 +1938,11 @@ End Theorem5_TypeSafety.
 
 ## 6. 与Iris集成
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 6.1 Iris基础概念
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 #### Iris程序逻辑
 
@@ -1995,7 +1995,7 @@ Qed.
 
 ### 6.2 资源代数定义
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 #### 所有权资源代数
 
@@ -2051,7 +2051,7 @@ Notation "□ P" := (persistently P) (at level 20) : bi_scope.
 
 ### 6.3 Rust内存模型的Iris表达
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 #### 所有权转移的Iris表达
 
@@ -2157,11 +2157,11 @@ Admitted.
 
 ## 7. 验证工作流
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 7.1 CoqIDE/VsCoq使用
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 #### VsCoq配置 (VS Code)
 
@@ -2204,7 +2204,7 @@ coqide -Q theories RustFormal \
 
 ### 7.2 证明调试技巧
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 #### 常见错误与解决
 
@@ -2278,7 +2278,7 @@ Admitted.
 
 ### 7.3 CI集成 (coq-community/docker-coq)
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 #### GitHub Actions配置
 
@@ -2366,11 +2366,11 @@ lint:
 
 ## 📚 相关文档链接
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 形式化方法文档
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | 文档 | 内容 | 与本文件关系 |
 | :--- | :--- | :--- |
@@ -2385,7 +2385,7 @@ lint:
 
 ### 外部资源
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 | 资源 | 链接 | 用途 |
 | :--- | :--- | :--- |
@@ -2398,7 +2398,7 @@ lint:
 
 ## 🎯 学习路径建议
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```
 入门阶段 (4周):
@@ -2440,14 +2440,14 @@ lint:
 
 ## 🆕 Rust 1.94 深度整合更新
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
@@ -2507,38 +2507,38 @@ lint:
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Coq]**
-> **[来源: Wikipedia - Proof Assistant]**
-> **[来源: Coq Reference Manual]**
+> **来源: [Wikipedia - Coq](https://en.wikipedia.org/wiki/Coq)**
+> **来源: [Wikipedia - Proof Assistant](https://en.wikipedia.org/wiki/Proof_Assistant)**
+> **来源: [Coq Reference Manual](https://coq.inria.fr/doc/)**
 > **[来源: ACM - Interactive Theorem Proving]**
 > **[来源: IEEE - Formal Proof Standards]**
 > **[来源: Software Foundations - cis.upenn.edu]**
 > **[来源: POPL - Program Verification with Coq]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages Survey]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design and Implementation]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM - Systems Programming Languages Survey](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI - Programming Language Design and Implementation](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

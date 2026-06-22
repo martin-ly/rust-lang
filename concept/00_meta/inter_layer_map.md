@@ -16,7 +16,7 @@
 > **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
-> **来源**: [Rust Reference] · [Rust Internals] · [concept/知识体系规范]
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Rust Internals Forum](https://internals.rust-lang.org/) · [concept/知识体系规范](./authority_source_map.md)
 
 ## 📑 目录
 
@@ -55,7 +55,7 @@
     - [测验 2：《跨层知识图谱（Inter-Layer Dependency Map）》的主要用途是什么？（理解层）](#测验-2跨层知识图谱inter-layer-dependency-map的主要用途是什么理解层)
     - [测验 3：元数据层文档能否替代 L1-L7 的核心概念学习？（理解层）](#测验-3元数据层文档能否替代-l1-l7-的核心概念学习理解层)
 
-> **来源**: [Rust Reference] · [Rust Internals] · [concept/知识体系规范]
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Rust Internals Forum](https://internals.rust-lang.org/) · [concept/知识体系规范](./authority_source_map.md)
 >
 ## 一、全局层级依赖图
 
@@ -93,7 +93,7 @@ graph TB
         LL[线性逻辑]
         TT[类型论]
         OF[所有权形式化]
-        RB[RustBelt]
+        RB[RustBelt](https://plv.mpi-sws.org/rustbelt/)
     end
 
     subgraph L5["L5 对比分析层"]
@@ -201,7 +201,7 @@ graph LR
         LL[线性逻辑]
         TT[类型论]
         OF[所有权形式化]
-        RB[RustBelt]
+        RB[RustBelt](https://plv.mpi-sws.org/rustbelt/)
     end
 
     OWN ==>|"启用"| TRAIT
@@ -232,7 +232,7 @@ graph LR
 
 ---
 
-> **来源**: [Rust Reference] · [Rust Internals] · [concept/知识体系规范]
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Rust Internals Forum](https://internals.rust-lang.org/) · [concept/知识体系规范](./authority_source_map.md)
 >
 ## 二、语义链接类型定义
 
@@ -304,31 +304,31 @@ graph LR
     前提: 每个堆分配有唯一 owner
     推理: owner 离开作用域时 drop 一次且仅一次
     反事实: Rc 循环引用 ⟹ 内存泄漏（非 UAF，是安全漏洞的另一形式）
-    来源: ✅ [TRPL Ch4] · ✅ [Wikipedia: Memory safety]
+    来源: ✅ [TRPL Ch4](https://doc.rust-lang.org/book/ch04-00-ownership.html) · ✅ [Wikipedia: Memory safety]
 
 子定理 2 (L1): 借用规则 (AXM) ⟹ 无数据竞争
     前提: &T 不可变共享 或 &mut T 唯一可变
     推理: 不存在同时读写同一内存的别名
     反事实: UnsafeCell + 手动同步 ⟹ 需程序员保证安全（突破编译器证明）
-    来源: ✅ [TRPL Ch4.2] · 💡 [原创: AXM → 并发安全]
+    来源: ✅ [TRPL Ch4.2](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html) · 💡 [原创: AXM → 并发安全]
 
 子定理 3 (L1): 生命周期约束 ⟹ 无悬垂指针
     前提: 所有引用 'a 必须 outlive 其指向数据
     推理: 若数据已释放，引用生命周期必已结束
     反事实: 'static 引用指向局部变量（编译错误 E0597）
-    来源: ✅ [TRPL Ch10.3] · ✅ [Rust Reference: Lifetimes]
+    来源: ✅ [TRPL Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) · ✅ [Rust Reference: Lifetimes](https://doc.rust-lang.org/reference/)
 
 组合定理 (L2-L3): Send + Sync ⟹ 跨线程安全
     前提: T: Send（所有权可跨线程转移）∧ T: Sync（&T 可跨线程共享）
     推理: 线程间传递满足所有权唯一性或不可变共享
     反事实: Rc<T> 不是 Send（共享计数器非线程安全）
-    来源: ✅ [TRPL Ch16] · ✅ [Rustonomicon: Send and Sync]
+    来源: ✅ [TRPL Ch16](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · ✅ [Rustonomicon: Send and Sync](https://doc.rust-lang.org/nomicon/)
 
 形式化完备 (L4): RustBelt ⟹ 上述所有定理可机械验证
     前提: Iris 分离逻辑 + λRust 操作语义
     推理: 对任何 safe Rust 程序，存在形式化证明其满足安全规范
     边界: unsafe 块不在证明范围内（需手动验证）
-    来源: ✅ [Jung et al. POPL 2017] · ✅ [RustBelt website]
+    来源: ✅ [Jung et al. POPL 2017] · ✅ [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ```
 
 [来源: [TRPL](https://doc.rust-lang.org/book/) ·
@@ -351,13 +351,13 @@ graph LR
     前提: 生命周期约束是偏序关系
     推理: 图可达性算法可在多项式时间求解
     反事实: HRTB (∀<'a>) 引入全称量词 ⟹ 更高复杂度但仍可判定
-    来源: ✅ [Rust Reference: Lifetime Elision] · 💡 [原创分析]
+    来源: ✅ [Rust Reference: Lifetime Elision](https://doc.rust-lang.org/reference/) · 💡 [原创分析]
 
 子定理 3 (L2-L3): 单态化 ⟹ 零成本抽象
     前提: 泛型函数在每个实例类型上独立编译
     推理: 无运行时类型信息开销
     反事实: dyn Trait（动态分发）打破零成本 ⟹ 有 vtable 开销
-    来源: ✅ [TRPL Ch10] · ✅ [RFC: Trait Objects]
+    来源: ✅ [TRPL Ch10](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html) · ✅ [RFC: Trait Objects]
 ```
 
 [来源: [TAPL (Pierce, 2002)](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html) · [RFC 3417 — GATs](https://github.com/rust-lang/rfcs/pull/3417)]
@@ -371,19 +371,19 @@ graph LR
     前提: Pin 不提供 &mut T → T 的解包路径（除非 T: Unpin）
     推理: 自引用字段的地址在对象生命周期内恒定
     反事实: Unpin 自动实现 ⟹ 大多数类型可被移动，需显式 !Unpin 标记
-    来源: ✅ [TRPL Ch17] · ✅ [Pin API docs]
+    来源: ✅ [TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) · ✅ [Pin API docs]
 
 子定理 2 (L3): Future 轮询 ⟹ 协作式多任务安全
     前提: 每次 poll 满足 Pin 约束
     推理: 状态机转换保持自引用有效性
     反事实: 在 poll 中手动 mem::swap ⟹ UB（unsafe）
-    来源: ✅ [Rust Async Book] · 💡 [原创分析]
+    来源: ✅ [The Rust Async Book](https://rust-lang.github.io/async-book/) · 💡 [原创分析]
 
 形式化映射 (L4): Pin 对应线性逻辑中的 "location stability"
     前提: 地址是资源的一部分
     推理: 移动 = 资源重组，Pin = 资源位置冻结
     精度: ⚠️ 部分映射（Rust 的 Pin 比线性逻辑的位置稳定性更弱）
-    来源: ✅ [RFC 2349: Pin] · [PLDI 2024: RefinedRust] · [Jung et al. 2018: Iris]
+    来源: ✅ [RFC 2349: Pin](https://rust-lang.github.io/rfcs/2349-2349-pin.html) · [PLDI 2024: RefinedRust] · [Jung et al. 2018: Iris]
 ```
 
 [来源: [TRPL — Async/Await](https://doc.rust-lang.org/book/ch17-01-futures-and-syntax.html) ·

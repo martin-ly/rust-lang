@@ -61,7 +61,7 @@
 
 ## 🎯 概述 {#-概述}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档建立 Rust 的**五大核心领域**分析框架：
 
@@ -74,21 +74,21 @@
 
 ## 五大核心领域
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 领域 1: 内存安全
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **核心关注点**: 防止内存错误（悬垂指针、双重释放、缓冲区溢出、数据竞争）
 
 #### 边界定义
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 包含 | 排除 | 交叉领域 |
 | :--- | :--- | :--- |
@@ -99,9 +99,9 @@
 
 #### 核心抽象
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **代数模型**:
 
@@ -136,9 +136,9 @@
 
 #### 关键定理
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 定理 | 陈述 | 证明 | 重要性 |
 | :--- | :--- | :--- | :--- |
@@ -149,9 +149,9 @@
 
 #### 领域模型图
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 graph TB
@@ -185,17 +185,17 @@ graph TB
 
 ### 领域 2: 类型系统
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **核心关注点**: 类型安全、抽象能力、代码复用
 
 #### 边界定义 {#边界定义-1}
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 包含 | 排除 | 交叉领域 |
 | :--- | :--- | :--- |
@@ -207,9 +207,9 @@ graph TB
 
 #### 核心抽象 {#核心抽象-1}
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **代数模型** (范畴论):
 
@@ -243,7 +243,7 @@ A + B     : A 或 B
 
 #### 关键定理 {#关键定理-1}
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 定理 | 陈述 | 证明 | 重要性 |
 | :--- | :--- | :--- | :--- |
@@ -254,7 +254,7 @@ A + B     : A 或 B
 
 #### 类型层次结构
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```text
 类型系统
@@ -284,13 +284,13 @@ A + B     : A 或 B
 
 ### 领域 3: 并发与并行
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **核心关注点**: 多线程执行、异步编程、同步机制
 
 #### 边界定义 {#边界定义-2}
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 | 包含 | 排除 | 交叉领域 |
 | :--- | :--- | :--- |
@@ -350,7 +350,7 @@ Rust 映射:
 
 ### 领域 4: 软件设计
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **核心关注点**: 架构模式、设计模式、代码组织
 
@@ -410,7 +410,7 @@ Rust特有:
 
 ### 领域 5: 工具链
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **核心关注点**: 编译、构建、测试、代码质量
 
@@ -487,7 +487,7 @@ Rust特有:
 
 ### 领域交叉矩阵
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 | 领域 A | 领域 B | 交叉概念 | 交叉文档 |
 | :--- | :--- | :--- | :--- |
@@ -499,7 +499,7 @@ Rust特有:
 
 ### 领域依赖图
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```mermaid
 graph TB
@@ -536,7 +536,7 @@ graph TB
 
 ### 抽象层次对比
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 | 领域 | L1 元概念 | L2 核心抽象 | L3 具体实现 | L4 代码实践 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -575,7 +575,7 @@ graph TB
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
@@ -630,17 +630,17 @@ graph TB
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Machine Learning]**
+> **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
 
-> **[来源: Wikipedia - Artificial Intelligence]**
+> **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)**
 
-> **[来源: tch-rs Documentation]**
+> **来源: [tch-rs Documentation](https://docs.rs/tch/latest/tch/)**
 
-> **[来源: ACM - AI Systems]**
+> **来源: [ACM - AI Systems](https://dl.acm.org/)**
 
-> **[来源: Wikipedia - Machine Learning]**
-> **[来源: Wikipedia - Artificial Intelligence]**
-> **[来源: tch-rs Documentation]**
-> **[来源: ACM - AI Systems]**
+> **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
+> **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)**
+> **来源: [tch-rs Documentation](https://docs.rs/tch/latest/tch/)**
+> **来源: [ACM - AI Systems](https://dl.acm.org/)**
 
 ---

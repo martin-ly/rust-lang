@@ -42,13 +42,13 @@
 
 ## 迁移清单
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 工具链更新
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 # 更新Rust到1.96.0
@@ -62,15 +62,15 @@ cargo install cargo-update cargo-tree cargo-outdated
 
 ### 2. 代码现代化
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### lazy_static → LazyLock
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 旧代码
@@ -86,9 +86,9 @@ static CONFIG: LazyLock<String> = LazyLock::new(|| load_config());
 
 #### async-trait → 原生async trait
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 旧代码
@@ -105,9 +105,9 @@ trait Storage {
 
 #### 生成器 → gen关键字
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 旧代码 (不稳定特性)
@@ -120,15 +120,15 @@ gen fn my_gen() -> i32 { yield 1; }
 
 ### 3. 配置更新
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### Cargo.toml
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```toml
 [package]
@@ -146,9 +146,9 @@ redundant_guards = "warn"
 
 ### 4. CI/CD更新
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```yaml
 # 更新actions版本
@@ -163,13 +163,13 @@ redundant_guards = "warn"
 
 ## Rust 1.96 迁移章节
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 概述
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Rust 1.95.0/1.96 引入了多项重要特性，包括 `if let guards` (1.95.0)、Range 类型改进和元组 coercion。本章节指导您从 1.94.0 平滑迁移到 1.96.0。
 
@@ -177,11 +177,11 @@ Rust 1.95.0/1.96 引入了多项重要特性，包括 `if let guards` (1.95.0)�
 
 ### 从 1.94 到 1.96 的完整步骤
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 #### 步骤 1: 环境准备
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```bash
 # 备份现有工具链
@@ -196,7 +196,7 @@ rustc --version  # 应显示 1.96.0 或更高
 
 #### 步骤 2: 依赖更新
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```bash
 # 更新 Cargo.lock
@@ -211,7 +211,7 @@ cargo update --aggressive
 
 #### 步骤 3: 代码迁移
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **3.1 启用新 Lint 规则**
 
@@ -284,7 +284,7 @@ fn box_future<T>(f: impl Future<Output = T> + 'static) -> Pin<Box<dyn Future<Out
 
 #### 步骤 4: 测试验证
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```bash
 # 完整构建
@@ -305,7 +305,7 @@ cargo fmt --check
 
 #### 步骤 5: 持续集成更新
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 更新 `.github/workflows/ci.yml`：
 
@@ -344,7 +344,7 @@ jobs:
 
 ### 常见问题
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 #### Q1: if let guards 导致编译错误？
 
@@ -419,7 +419,7 @@ let wide: (i32, i32) = (narrow.0 as i32, narrow.1 as i32);
 
 ### 版本兼容性表
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 特性 | 最低版本 | 说明 |
 |------|----------|------|
@@ -434,7 +434,7 @@ let wide: (i32, i32) = (narrow.0 as i32, narrow.1 as i32);
 
 ### 回滚指南
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 如果迁移遇到问题，可以回滚到 1.94：
 
@@ -486,13 +486,13 @@ git checkout -- .
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

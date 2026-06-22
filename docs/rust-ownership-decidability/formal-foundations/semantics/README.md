@@ -12,7 +12,7 @@
 
 ## 文件列表
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文件 | 描述 |
 |------|------|
@@ -25,7 +25,7 @@
 
 ## 相关目录
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [形式化模型](../models/README.md) - 所有权类型和借用模型
 - [证明](../proofs/README.md) - 形式化证明和定理

@@ -1,9 +1,9 @@
-# RPITIT Preview
+# 特质中返回位置 impl Trait（RPITIT）预览
 
 > **代码状态**: [综述级 — 待补充代码]
 
 >
-> **EN**: RPITIT Preview
+> **EN**: Return Position Impl Trait In Traits (RPITIT) Preview
 > **Summary**: RPITIT Preview: emerging Rust language feature or ecosystem trend.
 >
 > **状态**: 🧪 Nightly 实验性

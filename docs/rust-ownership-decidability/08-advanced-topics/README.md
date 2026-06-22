@@ -20,15 +20,15 @@
 
 ## 目录结构
 >
-> **[来源: Rust Reference]** ·
-> **[来源: Wikipedia - Rust (programming language)]** ·
-> **[来源: Rustonomicon]** ·
-> **[来源: TRPL]** ·
-> **[来源: RFCs - github.com/rust-lang/rfcs]** ·
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]** ·
-> **[来源: Wikipedia - Advanced Programming Language Features]** ·
-> **[来源: Wikipedia - Metaprogramming]** ·
-> **[来源: ACM - Advanced Type System Features]** ·
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** ·
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** ·
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** ·
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** ·
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** ·
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** ·
+> **来源: [Wikipedia - Advanced Programming Language Features](https://en.wikipedia.org/wiki/Advanced_Programming_Language_Features)** ·
+> **来源: [Wikipedia - Metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming)** ·
+> **来源: [ACM - Advanced Type System Features](https://dl.acm.org/)** ·
 > **[来源: IEEE - Language Extension Mechanisms]**
 
 ```text
@@ -48,13 +48,13 @@
 
 ## 学习路径建议
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 初级路径
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 如果你刚开始接触 Rust 高级特性：
 
@@ -65,7 +65,7 @@
 
 ### 进阶路径
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 如果你需要与外部系统交互或开发库：
 
@@ -75,7 +75,7 @@
 
 ### 专家路径
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 如果你正在优化性能或开发系统级代码：
 
@@ -89,7 +89,7 @@
 
 ### 08-01 Const Generics（常量泛型）
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 常量泛型允许你在类型参数中使用常量值，实现编译时多态。
 
@@ -127,7 +127,7 @@ struct Buffer<T, const SIZE: usize = 1024> {
 
 ### 08-02 Async Rust（异步Rust）
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 深度解析 Rust 的异步编程模型，包括 Future trait、Pin、异步运行时和流处理。
 
@@ -165,7 +165,7 @@ async fn fetch_data(url: &str) -> Result<Data, Error> {
 
 ### 08-03 FFI Patterns（FFI模式）
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 学习如何安全地与 C 代码和其他语言交互，包括内存布局、ABI 兼容性和绑定生成。
 
@@ -205,7 +205,7 @@ pub extern "C-unwind" fn my_library_init() -> *mut MyContext {
 
 ### 08-04 Proc Macros（过程宏）
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 全面掌握 Rust 的宏系统，包括声明宏（macro_rules!）和三种过程宏。
 
@@ -242,7 +242,7 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
 
 ### 05 Unsafe Patterns（Unsafe模式）
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 深入理解 Unsafe Rust，学习如何在不安全代码中维护安全不变量。
 
@@ -277,7 +277,7 @@ pub unsafe fn slice_from_raw_parts<'a, T>(
 
 ### 08-06 Zero-Cost Abstractions（零成本抽象）
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 学习 Rust 如何实现零成本抽象，以及如何利用这些特性编写高效代码。
 
@@ -310,7 +310,7 @@ let sum: i32 = (0..1000)
 
 ### 08-07 Custom Allocators（自定义分配器）
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 学习 Rust 的分配器 API，以及如何为特定场景实现自定义内存分配器。
 
@@ -376,7 +376,7 @@ unsafe impl GlobalAlloc for PoolAllocator {
 
 ### 代码组织
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 // 模块组织示例
@@ -400,7 +400,7 @@ mod unsafe_utils {
 
 ### 安全检查清单
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 在使用高级特性时，请检查：
 
@@ -430,7 +430,7 @@ mod unsafe_utils {
 
 ### 开发工具
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 | 工具 | 用途 | 安装命令 |
 |------|------|----------|
@@ -443,7 +443,7 @@ mod unsafe_utils {
 
 ### 性能分析
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```bash
 # 使用 perf 进行性能分析
@@ -462,7 +462,7 @@ heaptrack ./target/release/myapp
 
 ### 学习资源
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **官方文档：**
 
@@ -488,7 +488,7 @@ heaptrack ./target/release/myapp
 
 ### Q: 什么时候应该使用 Unsafe Rust？
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **A:** 仅在以下情况下使用：
 
@@ -501,7 +501,7 @@ heaptrack ./target/release/myapp
 
 ### Q: 异步 Rust 应该选择哪个运行时？
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **A:**
 
@@ -512,7 +512,7 @@ heaptrack ./target/release/myapp
 
 ### Q: 如何调试宏生成的代码？
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **A:**
 
@@ -529,7 +529,7 @@ cargo expand > expanded.rs
 
 ### Q: FFI 中如何处理 panic？
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **A:** 始终使用 `catch_unwind` 捕获 panic，防止跨 FFI 边界传播：
 
@@ -556,7 +556,7 @@ pub extern "C" fn safe_ffi_function() -> i32 {
 
 ### 跨边界所有权模式
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 // 模式1：Rust 拥有，C 借用
@@ -600,7 +600,7 @@ impl SharedFFIResource {
 
 ### 生命周期标记技巧
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 use std::marker::PhantomData;
@@ -644,7 +644,7 @@ fn use_borrowed() {
 
 ### 跨 await 的所有权模式
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 use std::sync::Arc;
@@ -1104,11 +1104,11 @@ impl<T, const N: usize> Drop for RingBuffer<T, N> {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**

@@ -18,13 +18,13 @@
 > **对比维度**: 内存安全、类型系统、并发模型、性能特征、运行时特性
 > **目标读者**: 有 Java 背景想了解 Rust 的开发者，技术决策者
 > **文档版本**: 2.0.0 (L2+ 深度)
-> **[来源: Wikipedia - Rust (programming language)]** · **[来源: Wikipedia - Java (programming language)]** · **[来源: Rust Reference]** · **[来源: Java Language Specification - docs.oracle.com/javase]** · **[来源: IEEE Software - Language Comparison]** · **[来源: Stack Overflow Developer Survey 2025]** · **[来源: Wikipedia - Memory Management]** · **[来源: ACM - Managed vs Unmanaged Languages]** · **[来源: IEEE - Language Safety Comparison]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Wikipedia - Java (programming language)](https://en.wikipedia.org/wiki/Java_(programming_language))** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **[来源: Java Language Specification - docs.oracle.com/javase]** · **[来源: IEEE Software - Language Comparison]** · **来源: [Stack Overflow Developer Survey 2025](https://survey.stackoverflow.co/2025/)** · **来源: [Wikipedia - Memory Management](https://en.wikipedia.org/wiki/Memory_Management)** · **[来源: ACM - Managed vs Unmanaged Languages]** · **[来源: IEEE - Language Safety Comparison]**
 
 ---
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [Rust vs Java: 内存管理、类型系统与并发模型深度对比](#rust-vs-java-内存管理类型系统与并发模型深度对比)
   - [目录](#目录)
@@ -75,7 +75,7 @@
 
 ## 1. 执行摘要
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -116,11 +116,11 @@
 
 ## 2. 语言设计哲学对比
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 2.1 设计目标
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | 维度 | Rust | Java |
 |-----|------|------|
@@ -188,7 +188,7 @@ private void process(String line) {
 
 ### 2.2 执行模型
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -234,7 +234,7 @@ private void process(String line) {
 
 ### 3.1 所有权 vs 垃圾回收
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -289,7 +289,7 @@ private void process(String line) {
 
 ### 3.2 内存安全保证
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 安全问题 | Rust (编译期) | Java (运行时) |
 |---------|--------------|---------------|
@@ -369,7 +369,7 @@ fn use_user(user: &User) {
 
 ### 3.3 资源管理对比
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **Java try-with-resources:**
 
@@ -451,7 +451,7 @@ pub fn temp_operations() -> io::Result<()> {
 
 ### 3.4 内存布局与缓存
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **Java 内存布局:**
 
@@ -528,7 +528,7 @@ assert_eq!(std::mem::size_of::<ZeroSized>(), 0);
 
 ### 4.1 类型系统概览
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 特性 | Rust | Java |
 |-----|------|------|
@@ -540,7 +540,7 @@ assert_eq!(std::mem::size_of::<ZeroSized>(), 0);
 
 ### 4.2 泛型实现对比
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **Java 类型擦除:**
 
@@ -619,7 +619,7 @@ fn use_generic() {
 
 ### 4.3 Trait vs Interface
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 | 特性 | Rust Trait | Java Interface |
 |-----|-----------|---------------|
@@ -706,7 +706,7 @@ impl Drawable for String {
 
 ### 4.4 代数数据类型
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **Java 类层次结构:**
 
@@ -812,7 +812,7 @@ fn process_message(msg: Message) {
 
 ### 4.5 空值安全
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **Java Optional:**
 
@@ -890,7 +890,7 @@ pub fn process() {
 
 ### 5.1 线程模型对比
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 | 特性 | Rust OS 线程 | Java 线程 |
 |-----|-------------|-----------|
@@ -1007,7 +1007,7 @@ fn parallel_computation() -> i32 {
 
 ### 5.2 内存模型对比
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | 特性 | Rust | Java |
 |-----|------|------|
@@ -1106,7 +1106,7 @@ pub fn memory_orderings() {
 
 ### 5.3 数据竞争防护
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **Java 数据竞争 (编译通过，运行时问题):**
 
@@ -1207,7 +1207,7 @@ pub fn prevented_at_compile_time() {
 
 ### 5.4 异步编程对比
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **Java CompletableFuture:**
 
@@ -1299,7 +1299,7 @@ pub async fn with_timeout() {
 
 ### 6.1 异常 vs Result
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 特性 | Java Exception | Rust Result |
 |-----|---------------|-------------|
@@ -1390,7 +1390,7 @@ pub enum AppError {
 
 ### 6.2 错误传播
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **Java:**
 
@@ -1441,7 +1441,7 @@ pub fn operation_c() -> Result<()> {
 
 ### 7.1 运行时开销
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -1464,7 +1464,7 @@ pub fn operation_c() -> Result<()> {
 
 ### 7.2 启动性能
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 指标 | Rust | Java |
 |-----|------|------|
@@ -1475,7 +1475,7 @@ pub fn operation_c() -> Result<()> {
 
 ### 7.3 零成本抽象
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **Java Stream 开销:**
 
@@ -1538,7 +1538,7 @@ pub fn sum_manual(numbers: &[i32]) -> i32 {
 
 ### 8.1 集合操作
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **Java:**
 
@@ -1612,7 +1612,7 @@ pub fn process_with_itertools(input: Vec<String>) -> Vec<String> {
 
 ### 8.2 文件处理
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **Java:**
 
@@ -1682,7 +1682,7 @@ pub fn word_count_functional<P: AsRef<Path>>(path: P) -> io::Result<HashMap<Stri
 
 ### 8.3 并发计数器
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **Java:**
 
@@ -1796,7 +1796,7 @@ pub fn demo() {
 
 ### 8.4 REST API 服务
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **Java (Spring Boot):**
 
@@ -1872,7 +1872,7 @@ async fn main() {
 
 ### 9.1 构建工具
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 特性 | Cargo (Rust) | Maven/Gradle (Java) |
 |-----|-------------|---------------------|
@@ -1885,7 +1885,7 @@ async fn main() {
 
 ### 9.2 框架生态
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 领域 | Java | Rust |
 |-----|------|------|
@@ -1898,7 +1898,7 @@ async fn main() {
 
 ### 9.3 部署运维
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | 方面 | Rust | Java |
 |-----|------|------|
@@ -1933,7 +1933,7 @@ async fn main() {
 
 ### Java → Rust 思维转换
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -2017,21 +2017,21 @@ async fn main() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Java (programming language)]**
-> **[来源: Wikipedia - JVM]**
-> **[来源: Wikipedia - Garbage Collection]**
+> **来源: [Wikipedia - Java (programming language)](https://en.wikipedia.org/wiki/Java_(programming_language))**
+> **来源: [Wikipedia - JVM](https://en.wikipedia.org/wiki/JVM)**
+> **来源: [Wikipedia - Garbage Collection](https://en.wikipedia.org/wiki/Garbage_Collection)**
 > **[来源: IEEE - Language Safety Comparison]**
 > **[来源: ACM - Managed vs Unmanaged Languages]**
 > **[来源: Java Language Specification]**
 > **[来源: JVM Specification]**
-> **[来源: Rust Reference - Memory Safety]**
-> **[来源: TRPL - Ownership]**
+> **来源: [Rust Reference - Memory Safety](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 > **[来源: Oracle Java Documentation]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ---

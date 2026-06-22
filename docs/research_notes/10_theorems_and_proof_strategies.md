@@ -51,7 +51,7 @@
 
 ## 核心定理索引
 
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 定理ID | 定理名称 | 难度 | 证明策略 | 状态 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -66,13 +66,13 @@
 
 ## 一、所有权唯一性定理 (T-OW2)
 
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 定理陈述
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定理 (T-OW2)**: 对于任何值$v$，在任意时刻，最多存在一个变量$x$使得$\Omega(x) = \text{Owned}$且$\Gamma(x) = v$。
 
@@ -80,9 +80,9 @@
 
 ### 1.2 证明策略
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **核心思想**: 证明所有权转移操作保持唯一性不变式。
 
@@ -98,9 +98,9 @@
 
 ### 1.3 详细证明思路
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **步骤 1: 定义不变式**
 
@@ -159,9 +159,9 @@ post: v被释放，x变为Dropped
 
 ### 1.4 推论
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **推论 1 (无使用后移动)**: 值被移动后，原变量不能继续使用。
 
@@ -171,13 +171,13 @@ post: v被释放，x变为Dropped
 
 ## 二、数据竞争自由定理 (T-BR1)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 定理陈述
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定理 (T-BR1)**: 通过Rust借用检查的程序是数据竞争自由的。
 
@@ -189,9 +189,9 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 ### 2.2 证明策略
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **核心思想**: 借用规则确保对同一内存位置的冲突访问不能并发发生。
 
@@ -205,9 +205,9 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 ### 2.3 详细证明思路
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **步骤 1: 数据竞争定义**
 
@@ -251,9 +251,9 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 ### 2.4 直观理解
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **类比**: 借用系统像图书馆的管理规则：
 
@@ -269,7 +269,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 ### 3.1 定理陈述
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **定理 (T-TY3)**: 良类型的程序不会陷入类型错误。
 
@@ -529,21 +529,21 @@ T: 'a  表示 T中所有引用都存活至少'a
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
-> **[来源: Coq Reference]**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
 
-> **[来源: TLA+]**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
 
-> **[来源: ACM - Formal Verification]**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

@@ -15,7 +15,7 @@
 > **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
-> **来源**: [Bloom Taxonomy 2001] · [TRPL] · [Rust Reference] · [concept/知识体系]
+> **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [concept/知识体系]
 >
 ## 📑 目录
 
@@ -121,13 +121,13 @@
     - [测验 2：《Rust 知识体系自测题库（Self-Assessment）》的主要用途是什么？（理解层）](#测验-2rust-知识体系自测题库self-assessment的主要用途是什么理解层)
     - [测验 3：元数据层文档能否替代 L1-L7 的核心概念学习？（理解层）](#测验-3元数据层文档能否替代-l1-l7-的核心概念学习理解层)
 
-> **来源**: [Bloom Taxonomy 2001] · [TRPL] · [Rust Reference] · [concept/知识体系]
+> **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [concept/知识体系]
 >
 ## L1 基础层：所有权与类型系统（8 题） [来源: 题目基于 TRPL Ch4 (所有权), Ch10 (生命周期), Ch6 (枚举) / 2024; Rust Reference — Ownership, Lifetimes, Types / 2025; RustBelt (Jung et al., POPL 2018)]
 
 > **[来源: Bloom Taxonomy 2001; 认知科学评估方法论]** 自测题基于 Bloom 认知层级设计，覆盖记忆→理解→应用→分析。
 
-> **来源**: [Rust Reference] · [TRPL] · [RFCs]
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust RFCs](https://rust-lang.github.io/rfcs/)
 >
 ### Q1: Move vs Copy
 >
@@ -151,7 +151,7 @@ println!("{}", s1);
 
 ---
 
-> **来源**: [Rust Reference] · [TRPL] · [RFCs]
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust RFCs](https://rust-lang.github.io/rfcs/)
 >
 ### Q2: 借用规则
 >
@@ -176,7 +176,7 @@ println!("{}", r1);
 
 ---
 
-> **来源**: [Rust Reference] · [TRPL] · [RFCs]
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust RFCs](https://rust-lang.github.io/rfcs/)
 >
 ### Q3: 生命周期省略
 >
@@ -336,11 +336,11 @@ Rust 泛型采用**单态化**，每个具体类型生成独立函数体，零�
 
 ---
 
-> **来源**: [Bloom Taxonomy 2001] · [TRPL] · [Rust Reference] · [concept/知识体系]
+> **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [concept/知识体系]
 >
 ## L2 进阶层：泛型与错误处理（7 题） [来源: 题目基于 TRPL Ch10 (泛型), Ch9 (错误处理) / 2024; Rust Reference — Generic Parameters, The ? operator / 2025; Pierce — TAPL (2002)]
 
-> **[来源: TRPL / Rust Reference / TAPL]** 泛型基于参数多态，错误处理基于代数数据类型。
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** 泛型基于参数多态，错误处理基于代数数据类型。
 
 ### Q9: Trait Bounds
 >
@@ -503,11 +503,11 @@ let g = move || println!("{}", x);  // 捕获方式？
 
 ---
 
-> **来源**: [Bloom Taxonomy 2001] · [TRPL] · [Rust Reference] · [concept/知识体系]
+> **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [concept/知识体系]
 >
 ## L3 高级层：并发与异步（8 题） [来源: 题目基于 TRPL Ch16 (并发), Rust Async Book / 2025; RustBelt (Jung et al., POPL 2018); RFC 2394 / 2018; Herlihy & Shavit — The Art of Multiprocessor Programming (2020)]
 
-> **[来源: Rust Async Book / RustBelt / Herlihy & Shavit]** 并发安全基于 `Send`/`Sync` 类型系统保证，异步基于 Future 状态机。
+> **来源: [The Rust Async Book](https://rust-lang.github.io/async-book/) / RustBelt / Herlihy & Shavit** 并发安全基于 `Send`/`Sync` 类型系统保证，异步基于 Future 状态机。
 
 ### Q16: Send + Sync
 >
@@ -696,7 +696,7 @@ unsafe impl Send for MyType {}
 
 ---
 
-> **来源**: [Bloom Taxonomy 2001] · [TRPL] · [Rust Reference] · [concept/知识体系]
+> **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [concept/知识体系]
 >
 ## L4 形式化层：类型理论与证明（7 题） [来源: 题目基于 TAPL (Pierce, 2002); RustBelt (Jung et al., POPL 2018); Girard — Linear Logic / 1987; Jung — Tree Borrows (arXiv 2023)]
 
@@ -828,8 +828,8 @@ Oxide 的核心创新：用 **ownership typing** 形式化 Rust 的所有权规�
 
 ---
 
-> **来源**: [Bloom Taxonomy 2001] · [TRPL] · [Rust Reference] · [concept/知识体系]
-> **来源**: [Bloom Taxonomy 2001] · [TRPL] · [Rust Reference] · [Wikipedia — Programming Language Comparison](https://en.wikipedia.org/wiki/Comparison_of_programming_languages)
+> **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [concept/知识体系]
+> **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Wikipedia — Programming Language Comparison](https://en.wikipedia.org/wiki/Comparison_of_programming_languages)
 >
 ## L5 对比层：多语言范式（5 题） [来源: 题目基于 TRPL 跨章节对比 / 2024; Rust Reference — Types, Traits / 2025; Wikipedia — Object-oriented Programming](https://en.wikipedia.org/wiki/Object-oriented_programming)
 
@@ -918,8 +918,8 @@ Rust 是仿射的：`let x = ...;` 后不使用 `x` 是合法的（ weakening）
 
 ---
 
-> **来源**: [Bloom Taxonomy 2001] · [TRPL] · [Rust Reference] · [concept/知识体系]
-> **来源**: [Bloom Taxonomy 2001] · [TRPL] · [Rust Reference] · [Cargo Book](https://doc.rust-lang.org/cargo/)
+> **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [concept/知识体系]
+> **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Cargo Book](https://doc.rust-lang.org/cargo/)
 >
 ## L6 生态层：工程实践（5 题） [来源: 题目基于 Cargo Book / 2025; Rust Reference — Crates, unsafe / 2025; Rust Internals — Edition System](https://internals.rust-lang.org/)
 
@@ -1014,8 +1014,8 @@ Rust 如何保证向后兼容？
 </details>
 ---
 
-> **来源**: [Bloom Taxonomy 2001] · [TRPL] · [Rust Reference] · [concept/知识体系]
-> **来源**: [Bloom Taxonomy 2001] · [TRPL] · [Rust Reference] · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [concept/知识体系]
+> **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 >
 ## L1 扩展层：所有权与类型系统（8 题） [来源: 题目基于 Rust Reference — Ownership, Lifetimes, Types / 2025; TRPL Ch4, Ch6, Ch10 / 2024; Rustonomicon — Life before Main](https://doc.rust-lang.org/nomicon/)
 
@@ -1225,8 +1225,8 @@ const fn sum(a: i32, b: i32) -> i32 {
 
 ---
 
-> **来源**: [Bloom Taxonomy 2001] · [TRPL] · [Rust Reference] · [concept/知识体系]
-> **来源**: [Bloom Taxonomy 2001] · [TRPL] · [Rust Reference] · [Wikipedia — Parametric Polymorphism](https://en.wikipedia.org/wiki/Parametric_polymorphism)
+> **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [concept/知识体系]
+> **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Wikipedia — Parametric Polymorphism](https://en.wikipedia.org/wiki/Parametric_polymorphism)
 >
 ## L2 扩展层：Trait、泛型、内存管理与错误处理（8 题） [来源: 题目基于 TRPL Ch10 (泛型), Ch9 (错误处理), Ch15 (智能指针) / 2024; Rust Reference — Generic Parameters, The ? operator / 2025; Wikipedia — Copy-on-Write](https://en.wikipedia.org/wiki/Copy-on-write)]
 
@@ -1450,8 +1450,8 @@ ZST 在运行时不占内存，但编译期类型信息完整。常用于**类�
 
 ---
 
-> **来源**: [Bloom Taxonomy 2001] · [TRPL] · [Rust Reference] · [concept/知识体系]
-> **来源**: [Bloom Taxonomy 2001] · [TRPL] · [Rust Reference] · [Rust Async Book](https://rust-lang.github.io/async-book/)
+> **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [concept/知识体系]
+> **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Rust Async Book](https://rust-lang.github.io/async-book/)
 >
 ## L3 扩展层：并发、异步、unsafe 与宏（8 题） [来源: 题目基于 TRPL Ch16 (并发), Rust Async Book / 2025; Rust Reference — unsafe, Macros / 2025; [RFC 2349](https://rust-lang.github.io/rfcs//2349-pin.html) (Pin)](<https://rust-lang.github.io/async-book/>)
 
@@ -1673,8 +1673,8 @@ struct BadWrapper(*const u8);
 
 ---
 
-> **来源**: [Bloom Taxonomy 2001] · [TRPL] · [Rust Reference] · [concept/知识体系]
-> **来源**: [Bloom Taxonomy 2001] · [TAPL (Pierce, 2002)] · [RustBelt] · [Wikipedia — Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)
+> **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [concept/知识体系]
+> **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [TAPL (Pierce, 2002)] · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Wikipedia — Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)
 >
 ## L4 扩展层：线性逻辑、类型论、所有权形式化与 RustBelt（8 题） [来源: 题目基于 TAPL (Pierce, 2002); RustBelt (Jung et al., POPL 2018); Girard — Linear Logic / 1987; Wikipedia — Substructural Type System](https://en.wikipedia.org/wiki/Substructural_type_system)]
 
@@ -1858,8 +1858,8 @@ proof fn maintain_invariant(x: u32, ghost prev: u32)
 
 ---
 
-> **来源**: [Bloom Taxonomy 2001] · [TRPL] · [Rust Reference] · [concept/知识体系]
-> **来源**: [Bloom Taxonomy 2001] · [TRPL] · [Rust Reference] · [Wikipedia — Zero-cost Abstraction](https://en.wikipedia.org/wiki/Zero-overhead_principle)
+> **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [concept/知识体系]
+> **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Wikipedia — Zero-cost Abstraction](https://en.wikipedia.org/wiki/Zero-overhead_principle)
 >
 ## L5 扩展层：多语言范式对比（4 题） [来源: 题目基于 TRPL 跨语言对比 / 2024; Rust Reference — unsafe, FFI / 2025; Wikipedia — Capability-based Security](https://en.wikipedia.org/wiki/Capability-based_security)]
 
@@ -1956,8 +1956,8 @@ Rust 的所有权即一种**能力**：
 
 ---
 
-> **来源**: [Bloom Taxonomy 2001] · [TRPL] · [Rust Reference] · [concept/知识体系]
-> **来源**: [Bloom Taxonomy 2001] · [TRPL] · [Rust Reference] · [SemVer Specification](https://semver.org/)
+> **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [concept/知识体系]
+> **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [SemVer Specification](https://semver.org/)
 >
 ## L6 扩展层：工程实践与生态（4 题） [来源: 题目基于 Cargo Book / 2025; Rust Reference — Macros, Documentation / 2025; SemVer 2.0.0](https://semver.org/)]
 

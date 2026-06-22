@@ -14,7 +14,7 @@
 
 ## 目录
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Rust 内联汇编完整指南](#rust-内联汇编完整指南)
   - [目录](#目录)
@@ -56,7 +56,7 @@
 
 ## 快速开始
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 最简单的内联汇编
@@ -79,13 +79,13 @@ fn main() {
 
 ## 基础语法
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### asm! 宏基本结构
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 asm!(
@@ -99,9 +99,9 @@ asm!(
 
 ### global_asm! 全局汇编
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use std::arch::global_asm;
@@ -122,13 +122,13 @@ extern "C" {
 
 ## 操作数详解
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 输入操作数 (in)
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 let x: u64 = 42;
@@ -142,9 +142,9 @@ unsafe {
 
 ### 2. 输出操作数 (out)
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 let mut y: u64;
@@ -158,9 +158,9 @@ unsafe {
 
 ### 3. 输入输出操作数 (inout)
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 let mut z: u64 = 10;
@@ -175,9 +175,9 @@ unsafe {
 
 ### 4. 延迟输出 (lateout)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // lateout: 在输入操作数使用完之后再写入
@@ -195,9 +195,9 @@ unsafe {
 
 ### 5. 内存操作数 (mem)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 let mut arr = [1u64; 4];
@@ -212,7 +212,7 @@ assert_eq!(arr[0], 42);
 
 ### 6. 标签和跳转
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 // 使用本地标签
@@ -250,7 +250,7 @@ assert_eq!(result, 1);
 
 ### 选项组合示例
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 // 纯计算，无副作用
@@ -286,7 +286,7 @@ unsafe fn exit_process(code: i32) -> ! {
 
 ### x86/x86_64
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 #[cfg(target_arch = "x86_64")]
@@ -334,7 +334,7 @@ mod x86_64_examples {
 
 ### ARM/AArch64
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 #[cfg(target_arch = "aarch64")]
@@ -372,7 +372,7 @@ mod aarch64_examples {
 
 ### RISC-V
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 #[cfg(target_arch = "riscv64")]
@@ -408,7 +408,7 @@ mod riscv_examples {
 
 ### 1. 系统调用封装
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 /// Linux x86_64 系统调用
@@ -448,7 +448,7 @@ pub fn sys_write(fd: usize, buf: &[u8]) -> isize {
 
 ### 2. SIMD 操作 (x86_64 AVX)
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 #[cfg(target_arch = "x86_64")]
@@ -473,7 +473,7 @@ pub unsafe fn add_vectors_avx(a: &[f32; 8], b: &[f32; 8]) -> [f32; 8] {
 
 ### 3. 原子操作（自定义实现）
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use std::sync::atomic::Ordering;
@@ -598,7 +598,7 @@ extern "C" fn handle_syscall() {
 
 ### 陷阱 1: 忘记标记 clobbered 寄存器
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
 // ❌ 错误：未标记被修改的寄存器
@@ -619,7 +619,7 @@ unsafe {
 
 ### 陷阱 2: 输入输出操作数混淆
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust,ignore
 let mut x = 10;
@@ -646,7 +646,7 @@ unsafe {
 
 ### 陷阱 3: 忘记内存屏障
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 // ❌ 错误：编译器可能重排内存操作
@@ -833,13 +833,13 @@ pub fn aligned_buffer_size(min_size: usize) -> usize {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

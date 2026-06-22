@@ -12,9 +12,9 @@
 > **双维定位**: P×Eva — 评估验证工具的 ROI 和适用性
 > **前置概念**: [RustBelt](./04_rustbelt.md) · [Ownership Formalization](./03_ownership_formal.md) · [Unsafe Rust](../03_advanced/03_unsafe.md)
 > **后置概念**: [Formal Methods](../07_future/02_formal_methods.md)
-> **主要来源**: [AWS Kani] · [Microsoft Verus] · [Creusot] · [Miri Book] · [Prusti] · [Aeneas] · [RefinedRust] · [a-mir-formality]
+> **主要来源**: [AWS Kani] · [Microsoft Verus] · [Creusot](https://creusot.github.io/creusot/) · [Miri Book](https://github.com/rust-lang/miri) · [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html) · [Aeneas](https://github.com/AeneasVerif/aeneas) · [RefinedRust] · [a-mir-formality]
 > **Bloom 层级**: 评价 → 应用
-> **[来源: Rust Project Goals 2026 — Safety-Critical Rust]** · **[来源: SOSP 2024 Verus]** · **[来源: PLDI 2024 RefinedRust]** · **[来源: POPL 2018 RustBelt]** ✅
+> **来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)** · **[来源: SOSP 2024 Verus]** · **[来源: PLDI 2024 RefinedRust]** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** ✅
 
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
@@ -120,7 +120,7 @@
 
 ## 一、工具链全景矩阵（选型版）
 
-> **[来源: 各工具官方文档; AWS Kani Blog 2023; SOSP 2024 Verus; PLDI 2024 RefinedRust; Rust Project Goals 2026]** 以下矩阵聚焦于"选择维度"，而非工具内部原理。
+> **来源: 各工具官方文档; AWS Kani Blog 2023; SOSP 2024 Verus; PLDI 2024 RefinedRust; [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)** 以下矩阵聚焦于"选择维度"，而非工具内部原理。
 > 内部原理见 [`04_rustbelt.md`](./04_rustbelt.md) §7–§8。
 
 ### 1.1 八维选型矩阵
@@ -269,7 +269,7 @@ classDiagram
 
 ## 二、Wikipedia 概念对齐
 
-> **[来源: Wikipedia]** 以下将各验证工具映射到其背后的计算机科学基础概念。
+> **来源: [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)** 以下将各验证工具映射到其背后的计算机科学基础概念。
 
 | 工具 | Wikipedia 核心概念 | 相关词条 | 形式化基础 |
 | :--- | :--- | :--- | :--- |
@@ -287,8 +287,8 @@ classDiagram
 ```mermaid
 graph LR
     subgraph 动态分析["动态分析层"]
-        MIRI[Miri] --> SB[Stacked Borrows]
-        MIRI --> TB[Tree Borrows]
+        MIRI[Miri] --> SB[Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)
+        MIRI --> TB[Tree Borrows — PLDI 2025](https://perso.crans.org/vanille/treebor/)
     end
 
     subgraph 符号执行["符号执行层"]
@@ -452,7 +452,7 @@ ROI: ★★★★☆ 高 — Microsoft IronRDP 已验证 [来源: SOSP 2024 Veru
 标注成本:       零
 运行成本:       接近零
 ─────────────────────────────────────────
-ROI: ★★★☆☆ 中 — 纯 safe Rust 的内存安全已由编译器保证 [来源: RustBelt: POPL 2018]
+ROI: ★★★☆☆ 中 — 纯 safe Rust 的内存安全已由编译器保证 来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
                 形式化验证的边际收益在于 unsafe 边界
 ```
 

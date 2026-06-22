@@ -15,7 +15,7 @@
 
 ## Trait 作为类型类
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Rust 的 Trait 系统受 Haskell 类型类启发：
 
@@ -57,7 +57,7 @@ fn process<T: Drawable + Clone + Send>(item: &T) {
 
 ## 关联类型
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 关联类型：每个实现可以指定自己的类型
@@ -84,7 +84,7 @@ impl Iterator for Counter {
 
 ## Trait 对象与动态分发
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 静态分发（单态化）
@@ -114,13 +114,13 @@ fn demo() {
 
 ## 更多代码示例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 泛型约束与边界
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // Trait 边界：对泛型参数的约束
@@ -163,9 +163,9 @@ where
 
 ### 高级 Trait 模式
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // Supertrait：trait 继承
@@ -229,9 +229,9 @@ impl Distance for Kilometers {
 
 ### Trait 对象与对象安全
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 对象安全的 trait
@@ -282,7 +282,7 @@ fn heterogeneous_collection() {
 
 ## 相关研究笔记
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -307,16 +307,16 @@ fn heterogeneous_collection() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Machine Learning]**
+> **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
 
-> **[来源: Wikipedia - Artificial Intelligence]**
+> **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)**
 
-> **[来源: tch-rs Documentation]**
+> **来源: [tch-rs Documentation](https://docs.rs/tch/latest/tch/)**
 
-> **[来源: ACM - AI Systems]**
+> **来源: [ACM - AI Systems](https://dl.acm.org/)**
 
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Wikipedia - Type System]**
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**

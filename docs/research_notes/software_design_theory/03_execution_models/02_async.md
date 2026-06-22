@@ -53,7 +53,7 @@
 
 ## 形式化定义
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def 1.1（Future 类型）**:
 
@@ -89,7 +89,7 @@ $\mathit{async}\, \{ e \}$ 产生 $\mathrm{Future}\langle \tau \rangle$，其中
 
 ## 操作语义（简化）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 poll(Pending)     →  Pending
@@ -102,7 +102,7 @@ await Pending     →  suspend（挂起，稍后继续）
 
 ## Rust 实现与代码示例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use std::future::Future;
@@ -154,7 +154,7 @@ impl SelfReferential {
 
 ## 典型场景
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 场景 | 说明 |
 | :--- | :--- |
@@ -167,7 +167,7 @@ impl SelfReferential {
 
 ## 与同步/并发对比
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 模型 | 线程 | 调度 | 适用场景 |
 | :--- | :--- | :--- | :--- |
@@ -179,13 +179,13 @@ impl SelfReferential {
 
 ## 运行时与任务调度
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Waker 与 Executor
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def 1.4（Waker）**:
 
@@ -208,9 +208,9 @@ Future 执行流程（简化）：
 
 ### 多任务组合
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 组合 | 语义 | 示例 |
 | :--- | :--- | :--- |
@@ -221,9 +221,9 @@ Future 执行流程（简化）：
 
 ### 错误传播与取消
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // ? 操作符传播 Result
@@ -243,7 +243,7 @@ handle.abort();  // 显式取消
 
 ## 运行时选型
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 运行时 | 特点 | 适用 |
 | :--- | :--- | :--- |
@@ -313,13 +313,13 @@ handle.abort();  // 显式取消
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -330,7 +330,7 @@ handle.abort();  // 显式取消
 
 #### 代码示例更新
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 本文档中的所有Rust代码示例均已：
 
@@ -340,7 +340,7 @@ handle.abort();  // 显式取消
 
 #### 相关文档
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查
@@ -375,16 +375,16 @@ handle.abort();  // 显式取消
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: TRPL Ch. 17 - Async]**
-> **[来源: Tokio Documentation]**
-> **[来源: RFC 2394 - Async/Await]**
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+> **来源: [TRPL Ch. 17 - Async](https://doc.rust-lang.org/book/ch17-00-async-await.html)**
+> **来源: [Tokio Documentation](https://tokio.rs/)**
+> **来源: [RFC 2394 - Async/Await](https://rust-lang.github.io/rfcs/2394-2394-async_await.html)**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ---

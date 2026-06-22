@@ -182,10 +182,10 @@ graph TD
 定理 T-002: Move 语义完备性 [来源: 01_ownership.md T-002, Oxide arXiv 2019]
     「所有权转移后，原变量不可访问」
     ↓
-推论 C-001: Safe Rust 无 Use-After-Free [来源: RustBelt Soundness Theorem]
+推论 C-001: Safe Rust 无 Use-After-Free 来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)
     「well-typed Safe Rust 程序不存在 UAF」
     ↓
-推论 C-002: Safe Rust 无双重释放 [来源: RustBelt Soundness Theorem]
+推论 C-002: Safe Rust 无双重释放 来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)
     「Drop 只由唯一所有者执行一次」
 ```
 
@@ -213,10 +213,10 @@ graph TD
 定理 T-010: AXM（Alias XOR Mutation） [来源: 02_borrowing.md T-010, Reynolds Separation Logic]
     「同一时间，一个值要么被多个 &T 共享访问，要么被一个 &mut T 独占访问」
     ↓
-推论 C-010: 无数据竞争（Safe Rust） [来源: RustBelt POPL 2018, CACM 2021]
+推论 C-010: 无数据竞争（Safe Rust） 来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)
     「well-typed Safe Rust 不存在数据竞争」
     ↓
-推论 C-011: 迭代器失效排除 [来源: Rust Reference §11]
+推论 C-011: 迭代器失效排除 来源: [Rust Reference §11](https://doc.rust-lang.org/reference/)
     「在 &mut Vec<T> 存活期间，不能通过其他引用修改 Vec」
 ```
 
@@ -243,7 +243,7 @@ graph TD
 定理 T-020: 生命周期偏序约束可满足性 [来源: 03_lifetimes.md T-020, Tofte-Talpin 1994]
     「有限生命周期变量集上的约束图无环 ⟺ 约束可满足」
     ↓
-定理 T-021: NLL 流敏感安全 [来源: RFC 2094, Oxide 2019]
+定理 T-021: NLL 流敏感安全 来源: [RFC 2094, Oxide 2019](https://rust-lang.github.io/rfcs/2094-2094-nll.html)
     「基于 CFG 的活跃性分析保证引用只在有效期间使用」
     ↓
 推论 C-020: 悬垂引用不可达 [来源: 03_lifetimes.md T-022]
@@ -276,7 +276,7 @@ graph TD
 定理 T-031: Trait 约束求解受限可判定性 [来源: 02_generics.md T-032, RFC 1665]
     「孤儿规则 + 一致性检查 ⟹ Trait 求解可判定」
     ↓
-推论 C-030: 全局类型一致性 [来源: Rust Reference §6]
+推论 C-030: 全局类型一致性 来源: [Rust Reference §6](https://doc.rust-lang.org/reference/)
     「任意 well-typed 程序中，每个表达式有唯一确定的类型」
 ```
 
@@ -304,7 +304,7 @@ graph TD
     「T: Send ⟺ T 的所有权可跨线程转移」
     「T: Sync ⟺ &T: Send」
     ↓
-定理 T-041: fearless concurrency [来源: TRPL §16, RustBelt]
+定理 T-041: fearless concurrency 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)
     「Safe Rust + Send/Sync ⟹ 无数据竞争」
     ↓
 推论 C-040: MutexGuard 自动释放 [来源: RAII 原则, Rust std docs]
@@ -331,13 +331,13 @@ graph TD
 引理 L6-1: async fn 是无栈协程（stackless coroutine）
 引理 L6-2: .await 点是续体边界
     ↓
-定理 T-050: Future 状态机变换正确性 [来源: RFC 2394, Async Book]
+定理 T-050: Future 状态机变换正确性 来源: [RFC 2394, Async Book](https://rust-lang.github.io/rfcs/2394-2394-async_await.html)
     「编译器将 async fn 变换为等价的 Future 状态机」
     ↓
-定理 T-051: Pin 内存稳定性 [来源: RFC 2349, Pin API docs]
+定理 T-051: Pin 内存稳定性 来源: [RFC 2349, Pin API docs](https://rust-lang.github.io/rfcs/2349-2349-pin.html)
     「Pin<&mut T> 保证 T 在内存中不被移动」
     ↓
-推论 C-050: 自引用结构安全 [来源: Rustonomicon §4.8]
+推论 C-050: 自引用结构安全 来源: [Rustonomicon §4.8](https://doc.rust-lang.org/nomicon/)
     「自引用字段的指针在 Pin 下保持有效」
 ```
 

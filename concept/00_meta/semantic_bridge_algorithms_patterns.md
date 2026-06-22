@@ -13,9 +13,9 @@
 > **后置概念**: [Pattern Composition Algebra](../06_ecosystem/35_pattern_composition_algebra.md) ·
 > [Parallel Distributed Spectrum](../03_advanced/19_parallel_distributed_pattern_spectrum.md)
 > **主要来源**: [arXiv 2605.07788 — Multilingual Shared Semantic Space] ·
-> [Wikipedia: Algorithm] ·
-> [Wikipedia: Software design pattern] ·
-> [Wikipedia: Workflow patterns]
+> [Wikipedia: Algorithm](https://en.wikipedia.org/wiki/Algorithm) ·
+> [Wikipedia: Software design pattern](https://en.wikipedia.org/wiki/Software_design_pattern) ·
+> [Wikipedia: Workflow patterns](https://en.wikipedia.org/wiki/Workflow_patterns)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 > **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)

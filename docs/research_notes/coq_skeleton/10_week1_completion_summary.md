@@ -43,13 +43,13 @@
 
 ## Week 1 完成情况
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 已完成 ✅
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 任务 | 完成度 | 备注 |
 | :--- | :--- | :--- |
@@ -61,9 +61,9 @@
 
 ### 当前阻碍
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 `move_preserves_uniqueness` 证明需要额外的辅助引理：
 
@@ -80,7 +80,7 @@
 
 ### 执行策略: 滚动推进
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```
 每日执行节奏:
@@ -128,7 +128,7 @@ Week 17-20: Aeneas对接
 
 ### 立即执行 (今明两天)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 1. **完成Week 1收尾**
    - [ ] 添加move_auxiliary_lemmas
@@ -142,7 +142,7 @@ Week 17-20: Aeneas对接
 
 ### 本周目标 (Week 1+2)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - [ ] OWNERSHIP_UNIQUENESS.v: Admitted = 0
 - [ ] BORROW_DATARACE_FREE.v: 骨架细化完成
@@ -157,7 +157,7 @@ Week 17-20: Aeneas对接
 
 ### 工具安装 (Week 2前)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 | 工具 | 优先级 | 安装命令 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -168,7 +168,7 @@ Week 17-20: Aeneas对接
 
 ### 学习资源
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 | 资源 | 用途 | 预计时间 |
 | :--- | :--- | :--- |
@@ -184,7 +184,7 @@ Week 17-20: Aeneas对接
 
 ### 每任务检查清单
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 - [ ] Coq编译通过 (`coqc -Q . "" file.v`)
 - [ ] Admitted数量符合里程碑要求
@@ -193,7 +193,7 @@ Week 17-20: Aeneas对接
 
 ### 每周检查清单
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 - [ ] 本周任务完成度 ≥ 90%
 - [ ] Admitted总数趋势下降
@@ -303,12 +303,12 @@ Week 17-20: Aeneas对接
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ---

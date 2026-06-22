@@ -65,7 +65,7 @@
 
 ## 📋 概述 {#-概述}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档介绍如何测量和提高 Rust 项目的测试覆盖率，包括工具使用、最佳实践和覆盖率目标。
 
@@ -76,13 +76,13 @@
 
 ## 🚀 快速开始 {#-快速开始}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 安装覆盖率工具
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 # 安装 cargo-tarpaulin
@@ -94,9 +94,9 @@ cargo install cargo-llvm-cov
 
 ### 运行覆盖率测试
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 # 使用 cargo-tarpaulin
@@ -110,13 +110,13 @@ cargo llvm-cov --html
 
 ## 📊 覆盖率工具 {#-覆盖率工具}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. cargo-tarpaulin
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **特点**:
 
@@ -142,9 +142,9 @@ cargo tarpaulin --fail-under 80
 
 ### 2. cargo-llvm-cov
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **特点**:
 
@@ -172,13 +172,13 @@ cargo llvm-cov --exclude '*/tests/*'
 
 ## 🎯 覆盖率目标 {#-覆盖率目标}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 推荐覆盖率
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 模块类型     | 行覆盖率 | 分支覆盖率 | 函数覆盖率 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -188,9 +188,9 @@ cargo llvm-cov --exclude '*/tests/*'
 
 ### 当前项目覆盖率
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 根据最新测试结果：
 
@@ -210,7 +210,7 @@ cargo llvm-cov --exclude '*/tests/*'
 
 ### 1. 单元测试
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 #[cfg(test)]
@@ -233,7 +233,7 @@ mod tests {
 
 ### 2. 集成测试
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 // tests/integration_test.rs
@@ -248,7 +248,7 @@ fn test_integration() {
 
 ### 3. 文档测试
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ````rust,ignore
 /// 计算两个数的和
@@ -267,7 +267,7 @@ pub fn add(a: i32, b: i32) -> i32 {
 
 ### 4. 异步测试
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 #[tokio::test]
@@ -285,7 +285,7 @@ async fn test_async_function() {
 
 ### 1. 测试边界情况
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 #[test]
@@ -306,7 +306,7 @@ fn test_edge_cases() {
 
 ### 2. 测试错误路径
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 #[test]
@@ -324,7 +324,7 @@ fn test_error_handling() {
 
 ### 3. 测试并发场景
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 #[test]
@@ -360,7 +360,7 @@ fn test_concurrent_access() {
 
 ### 生成报告
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```bash
 # HTML 报告
@@ -372,7 +372,7 @@ open coverage/tarpaulin-report.html
 
 ### 解读报告
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 - **绿色**: 已覆盖的代码
 - **红色**: 未覆盖的代码
@@ -380,7 +380,7 @@ open coverage/tarpaulin-report.html
 
 ### 覆盖率指标
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 - **行覆盖率**: 执行的代码行数 / 总代码行数
 - **分支覆盖率**: 执行的分支数 / 总分支数
@@ -642,13 +642,13 @@ pub fn is_test_db_ready() -> bool {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Software Testing]**
-> **[来源: TRPL Ch. 11 - Testing]**
-> **[来源: Rust Reference - Test Attributes]**
+> **来源: [Wikipedia - Software Testing](https://en.wikipedia.org/wiki/Software_Testing)**
+> **来源: [TRPL Ch. 11 - Testing](https://doc.rust-lang.org/book/ch11-00-testing.html)**
+> **来源: [Rust Reference - Test Attributes](https://doc.rust-lang.org/reference/attributes/testing.html)**
 > **[来源: ACM - Software Testing Methods]**
-> **[来源: Wikipedia - Software Testing]**
-> **[来源: TRPL Ch. 11 - Testing]**
-> **[来源: Rust Reference - Test Attributes]**
+> **来源: [Wikipedia - Software Testing](https://en.wikipedia.org/wiki/Software_Testing)**
+> **来源: [TRPL Ch. 11 - Testing](https://doc.rust-lang.org/book/ch11-00-testing.html)**
+> **来源: [Rust Reference - Test Attributes](https://doc.rust-lang.org/reference/attributes/testing.html)**
 > **[来源: ACM - Software Testing]**
 
 ---

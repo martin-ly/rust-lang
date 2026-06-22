@@ -49,25 +49,25 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Rust 1.95.0 稳定了**异步闭包（Async Closures）** 和对应的 `AsyncFn` trait 家族，这是 Rust 异步编程生态的里程碑式进展。在此之前，Rust 开发者只能使用 `async move || {}` 形式的异步闭包，它们在类型系统和trait边界方面存在诸多限制。
 
 本指南深度解析异步闭包的语法、语义、类型系统以及在主流框架中的实战应用。
 
-[来源: Rust 1.95 Release Notes / RFC 3668]
+来源: Rust 1.95 Release Notes / [RFC 3668](https://github.com/rust-lang/rfcs/pull/3668)
 
 ---
 
 ## 一、历史背景：为什么需要 AsyncFn？
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 旧时代的困境
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 在 Rust 1.95 之前，传递异步逻辑的唯一方式是 `impl Fn() -> impl Future`：
 
@@ -90,7 +90,7 @@ where
 
 ### 1.2 异步闭包的诞生
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 Rust 1.95 引入了原生异步闭包语法：
 
@@ -113,7 +113,7 @@ let closure = async |x: i32| -> i32 {
 
 ### 2.1 三层 trait 体系
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | Trait | 调用次数 | 捕获语义 | 对应同步 trait |
 |-------|---------|---------|--------------|
@@ -154,7 +154,7 @@ where
 
 ### 2.2 自动实现规则
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 // 所有 async fn 自动实现 AsyncFn
@@ -169,7 +169,7 @@ let c3 = async |x: i32| -> String { s }; // impl AsyncFnOnce (消耗 s)
 
 ### 2.3 关键区别：AsyncFn vs Fn + Future
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 // 旧方式: Fn() -> impl Future
@@ -190,7 +190,7 @@ fn new_closure() -> impl AsyncFn(i32) -> i32 {
 | 编译器优化 | 间接调用 | 直接内联 |
 | 错误信息 | 复杂嵌套 | 清晰直接 |
 
-[来源: Rust Reference, Async Closures]
+来源: [Rust Reference, Async Closures](https://doc.rust-lang.org/reference/)
 
 ---
 
@@ -200,7 +200,7 @@ fn new_closure() -> impl AsyncFn(i32) -> i32 {
 
 ### 3.1 捕获模式
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 异步闭包的捕获规则与同步闭包一致，但捕获的是**生成 Future 所需的状态**，而非 Future 本身：
 
@@ -223,7 +223,7 @@ let c3 = async move |idx: usize| -> Option<i32> {
 
 ### 3.2 生命周期陷阱
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 let local = String::from("hello");
@@ -237,7 +237,7 @@ let good: Box<dyn AsyncFn() -> String> = Box::new(async move || local.clone());
 
 ### 3.3 与 `async move` 闭包的对比
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 let s = String::from("data");
@@ -271,7 +271,7 @@ let new = async || {
 
 ### 4.1 Axum Handler 中的异步闭包
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 use axum::{routing::get, Router};
@@ -296,7 +296,7 @@ async fn main() {
 
 ### 4.2 泛型服务抽象
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 use axum::{extract::Request, middleware::Next, response::Response};
@@ -327,7 +327,7 @@ where
 
 ### 4.3 Tokio 任务中的异步闭包
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use tokio::task::JoinSet;
@@ -351,7 +351,7 @@ where
 }
 ```
 
-[来源: Axum Documentation / Tokio Documentation]
+来源: [Axum Documentation](https://docs.rs/axum/latest/axum/) / [Tokio Documentation](https://tokio.rs/)
 
 ---
 
@@ -554,13 +554,13 @@ fn handler<F>(f: F) where F: AsyncFn(i32) -> i32 {}
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: TRPL Ch. 17 - Async]**
-> **[来源: Tokio Documentation]**
-> **[来源: RFC 2394 - Async/Await]**
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: TRPL Ch. 17 - Async]**
-> **[来源: Tokio Documentation]**
-> **[来源: RFC 2394 - Async/Await]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+> **来源: [TRPL Ch. 17 - Async](https://doc.rust-lang.org/book/ch17-00-async-await.html)**
+> **来源: [Tokio Documentation](https://tokio.rs/)**
+> **来源: [RFC 2394 - Async/Await](https://rust-lang.github.io/rfcs/2394-2394-async_await.html)**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+> **来源: [TRPL Ch. 17 - Async](https://doc.rust-lang.org/book/ch17-00-async-await.html)**
+> **来源: [Tokio Documentation](https://tokio.rs/)**
+> **来源: [RFC 2394 - Async/Await](https://rust-lang.github.io/rfcs/2394-2394-async_await.html)**
 
 ---

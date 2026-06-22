@@ -376,3 +376,28 @@ Level 5: 专家 (持续学习)
 >
 
 ---
+
+## 📚 模块 8: 国际化对齐
+
+> 本节按项目模板要求补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [The Rust Programming Language — Ch1](https://doc.rust-lang.org/book/ch01-00-getting-started.html) | 权威来源 | 入门指南 |
+| [Rust 官方安装指南](https://www.rust-lang.org/tools/install) | 权威来源 | 安装说明 |
+
+### 8.2 学术来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | 权威来源 | Rust 安全保证基础 |
+
+### 8.3 社区权威
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Rustlings](https://github.com/rust-lang/rustlings) | 权威来源 | 交互式入门练习 |
+| [100 Exercises to Learn Rust](https://rust-exercises.com/) | 权威来源 | 系统练习 |
+| [Google Comprehensive Rust](https://google.github.io/comprehensive-rust/) | 权威来源 | Google Rust 课程 |

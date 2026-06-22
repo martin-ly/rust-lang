@@ -44,7 +44,7 @@
 
 ## 1. Embassy架构
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────┐
@@ -102,13 +102,13 @@
 
 ## 2. 核心概念
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 2.1 任务 (Tasks)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 use embassy_executor::Spawner;
@@ -167,7 +167,7 @@ async fn main(spawner: Spawner) {
 
 ### 2.2 时间管理
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use embassy_time::{Duration, Instant, Timer};
@@ -205,7 +205,7 @@ async fn with_timeout<T>(
 
 ### 2.3 中断处理
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use embassy_stm32::exti::ExtiInput;
@@ -244,7 +244,7 @@ spawner.spawn(button_task(button)).unwrap();
 
 ### 3.1 UART with DMA
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use embassy_stm32::usart::{Uart, Config};
@@ -280,7 +280,7 @@ let uart = Uart::new(
 
 ### 3.2 I2C异步传输
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use embassy_stm32::i2c::I2c;
@@ -314,7 +314,7 @@ async fn read_all_sensors(i2c: &mut I2c<'static>) -> [SensorData; 3] {
 
 ### 3.3 SPI异步传输
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust,ignore
 use embassy_stm32::spi::Spi;
@@ -343,7 +343,7 @@ impl<'a> SpiDevice<'a> {
 
 ### 4.1 静态任务分配
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 // Embassy默认不使用堆分配
@@ -369,7 +369,7 @@ fn main() -> ! {
 
 ### 4.2 无堆数据结构
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 use heapless::Vec;
@@ -416,7 +416,7 @@ async fn consumer() {
 
 ### 5.1 Tickless Idle
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 // Embassy自动管理tickless idle
@@ -448,7 +448,7 @@ async fn low_power_task() {
 
 ### 5.2 深度睡眠集成
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use embassy_stm32::low_power::LowPower;
@@ -477,7 +477,7 @@ async fn sleep_until_event() {
 
 ### 6.1 共享资源
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use embassy_sync::mutex::Mutex;
@@ -514,7 +514,7 @@ async fn sensor_task1(i2c: &'static Mutex<ThreadModeRawMutex, I2c<'static>>) {
 
 ### 6.2 信号量与通道
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use embassy_sync::signal::Signal;
@@ -692,21 +692,21 @@ async fn stack_heavy_task() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Embedded System]**
+> **来源: [Wikipedia - Embedded System](https://en.wikipedia.org/wiki/Embedded_System)**
 
-> **[来源: Rust Embedded WG]**
+> **来源: [Rust Embedded WG](https://rust-embedded.github.io/book/)**
 
-> **[来源: Embassy Book]**
+> **来源: [Embassy Book](https://embassy.dev/book/)**
 
 > **[来源: IEEE - Embedded Software]**
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---
 

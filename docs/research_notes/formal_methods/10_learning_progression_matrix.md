@@ -67,7 +67,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 学习进阶矩阵为Rust形式化方法的学习者提供系统化的学习路径，从入门到精通的完整进阶路线。
 
@@ -75,7 +75,7 @@
 
 ## 学习阶段总览
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 Level 1          Level 2          Level 3          Level 4          Level 5
@@ -91,13 +91,13 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 
 ## Level 1: 入门 (2-4周)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 目标
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - 理解Rust基本语法
 - 能编写简单程序
@@ -105,9 +105,9 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 
 ### 学习资源
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 主题 | 资源 | 预计时间 |
 | :--- | :--- | :--- |
@@ -121,9 +121,9 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 
 ### 检查清单
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```markdown
 □ 能解释变量绑定与可变性
@@ -138,13 +138,13 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 
 ## Level 2: 进阶 (4-6周)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 目标
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - 深入理解所有权系统
 - 掌握借用和引用
@@ -152,9 +152,9 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 
 ### 学习资源
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 主题 | 资源 | 预计时间 |
 | :--- | :--- | :--- |
@@ -168,9 +168,9 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 
 ### 检查清单
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```markdown
 □ 能解释所有权转移和移动语义
@@ -186,11 +186,11 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 
 ## Level 3: 熟练 (4-6周)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 目标
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 - 掌握生命周期
 - 理解高级类型系统特性
@@ -198,7 +198,7 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 
 ### 学习资源
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 | 主题 | 资源 | 预计时间 |
 | :--- | :--- | :--- |
@@ -213,7 +213,7 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 
 ### 检查清单
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```markdown
 □ 能显式标注生命周期
@@ -233,7 +233,7 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 
 ### 目标
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 - 掌握并发编程
 - 理解异步编程
@@ -569,22 +569,22 @@ Level 1 ──> Level 2 ──> Level 3 ──> 证明技术 ──> Coq ──>
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
-> **[来源: Coq Reference]**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
 
-> **[来源: TLA+]**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
 
-> **[来源: ACM - Formal Verification]**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---
 

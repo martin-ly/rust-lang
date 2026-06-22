@@ -10,7 +10,7 @@
 
 ## 📋 目录
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [项目架构指南](#项目架构指南)
   - [📋 目录](#-目录)
@@ -65,13 +65,13 @@
 
 ## 代码示例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 项目结构验证脚本
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 //! 验证项目架构一致性
@@ -212,9 +212,9 @@ fn main() {
 
 ### 模块依赖关系分析器
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 //! 分析模块间的依赖关系并生成可视化
@@ -360,9 +360,9 @@ fn main() {
 
 ### 测试覆盖率报告生成器
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 //! 生成模块测试覆盖率报告
@@ -463,13 +463,13 @@ fn main() {
 
 ## 形式化链接
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 研究笔记关联
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **形式化方法**: [10_ownership_model.md](../research_notes/formal_methods/10_ownership_model.md) - 所有权模型的形式化定义
 - **架构证明**: [04_proof_graph_network.md](../04_thinking/04_proof_graph_network.md) - 架构决策的形式化证明
@@ -477,9 +477,9 @@ fn main() {
 
 ### 实施场景
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 场景 | 实施步骤 | 参考代码 |
 | :--- | :--- | :--- |
@@ -491,7 +491,7 @@ fn main() {
 
 ## 📋 概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档介绍 Rust 学习项目的整体架构设计，包括模块组织、依赖关系、设计原则等。
 
@@ -499,13 +499,13 @@ fn main() {
 
 ## 🏗️ 项目结构
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 整体架构
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 rust-lang/
@@ -538,11 +538,11 @@ rust-lang/
 
 ### 模块分层
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 #### Tier 1: 基础层（C01-C03）
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 - **C01**: 所有权与借用
 - **C02**: 类型系统
@@ -552,7 +552,7 @@ rust-lang/
 
 #### Tier 2: 进阶层（C04-C06）
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 - **C04**: 泛型编程
 - **C05**: 线程与并发
@@ -562,7 +562,7 @@ rust-lang/
 
 #### Tier 3: 应用层（C07-C10）
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 - **C07**: 进程管理
 - **C08**: 算法与数据结构
@@ -573,7 +573,7 @@ rust-lang/
 
 #### Tier 4: 专业层（C11-C12）
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 - **C11**: 宏系统
 - **C12**: WASM
@@ -588,7 +588,7 @@ rust-lang/
 
 ### 依赖图
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```text
 C01 (所有权) ──┐
@@ -606,7 +606,7 @@ C03 (控制流) ──┘                     ├──> C04 (泛型) ──┐
 
 ### 依赖原则
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 1. **单向依赖**: 低层模块不依赖高层模块
 2. **最小依赖**: 每个模块只依赖必要的模块
@@ -620,13 +620,13 @@ C03 (控制流) ──┘                     ├──> C04 (泛型) ──┐
 
 ### 4-Tier 文档体系
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 每个模块遵循统一的 4-Tier 文档架构：
 
 #### Tier 1: 基础文档（Foundations）
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 - 项目概览
 - 主索引导航
@@ -635,7 +635,7 @@ C03 (控制流) ──┘                     ├──> C04 (泛型) ──┐
 
 #### Tier 2: 指南文档（Guides）
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 - 快速入门指南
 - 实践指南
@@ -644,7 +644,7 @@ C03 (控制流) ──┘                     ├──> C04 (泛型) ──┐
 
 #### Tier 3: 参考文档（References）
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 - API 参考
 - 技术规范
@@ -653,7 +653,7 @@ C03 (控制流) ──┘                     ├──> C04 (泛型) ──┐
 
 #### Tier 4: 高级文档（Advanced）
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 - 高级主题
 - 理论分析
@@ -668,7 +668,7 @@ C03 (控制流) ──┘                     ├──> C04 (泛型) ──┐
 
 ### 1. 模块化原则
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 - **单一职责**: 每个模块只负责一个主题
 - **高内聚**: 模块内部功能紧密相关
@@ -676,7 +676,7 @@ C03 (控制流) ──┘                     ├──> C04 (泛型) ──┐
 
 ### 2. 可扩展性原则
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - **特性标志**: 使用 feature flags 控制功能
 - **插件架构**: 支持扩展和自定义
@@ -858,20 +858,20 @@ codegen-units = 1
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

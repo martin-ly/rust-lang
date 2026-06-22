@@ -54,7 +54,7 @@
 
 ## 🎯 报告概述 {#-报告概述}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本报告提供研究笔记系统的全面统计信息，帮助了解系统的整体状态和进展。
 
@@ -71,13 +71,13 @@
 
 ## 📚 文档统计 {#-文档统计}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 总体统计
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 类别 | 数量 | 占比 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -88,9 +88,9 @@
 
 ### 按类型统计
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **核心文档类型**:
 
@@ -115,9 +115,9 @@
 
 ### 按状态统计
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 状态 | 数量 | 占比 |
 | :--- | :--- | :--- |
@@ -129,13 +129,13 @@
 
 ## 🔬 研究笔记统计 {#-研究笔记统计}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 按研究领域统计
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 研究领域       | 研究笔记数 | 平均完成度 | 状态      |
 | :--- | :--- | :--- | :--- |
@@ -147,9 +147,9 @@
 
 ### 按优先级统计
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 优先级      | 研究笔记数 | 平均完成度 | 状态      |
 | :--- | :--- | :--- | :--- |
@@ -166,9 +166,9 @@
 
 ### 按完成度统计
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 完成度范围 | 研究笔记数 | 占比 |
 | :--- | :--- | :--- |
@@ -188,11 +188,11 @@
 
 ## 📈 内容统计 {#-内容统计}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 代码示例统计
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 研究领域   | 代码示例数 | 平均每个笔记 |
 | :--- | :--- | :--- |
@@ -210,7 +210,7 @@
 
 ### 参考文献统计
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | 研究领域   | 参考文献数 | 平均每个笔记 |
 | :--- | :--- | :--- |
@@ -229,7 +229,7 @@
 
 ### 形式化定义统计
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 | 研究领域   | 形式化定义数 | 平均每个笔记 |
 | :--- | :--- | :--- |
@@ -460,13 +460,13 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

@@ -45,7 +45,7 @@
 
 ## 🚀 什么是 Cranelift
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Cranelift** 是 Rust 编译器的替代代码生成后端（`codegen backend`），最初由 Mozilla 的 Wasmtime 团队开发。
 与 Rust 默认使用的 LLVM 后端不同，Cranelift 专注于**快速编译**而非极致的运行时性能优化。
@@ -86,7 +86,7 @@ Cranelift 作为 `rustc` 的后端，项目代号通常为 `cg_clif` (`rustc_cod
 
 ## ⏱️ 为什么 Cranelift 重要
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 在 Rust 开发中，**编译时间**是影响开发者体验的关键因素。Cranelift 的核心价值：
 
@@ -109,13 +109,13 @@ Cranelift debug: █████████████████████
 
 ## ⚙️ 安装与配置
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 安装组件
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 # 确保已安装 nightly 工具链
@@ -127,9 +127,9 @@ rustup component add rustc-codegen-cranelift-preview --toolchain nightly
 
 ### 2. 项目级配置
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 在 `.cargo/config.toml` 中启用：
 
@@ -150,9 +150,9 @@ codegen-backend = "cranelift"
 
 ### 3. 单次编译
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 无需修改项目配置，通过环境变量单次使用：
 
@@ -167,9 +167,9 @@ RUSTFLAGS="-Zcodegen-backend=cranelift" cargo +nightly build
 
 ### 4. 验证生效
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 cargo +nightly build -v
@@ -182,13 +182,13 @@ cargo +nightly build -v
 
 ## ⚖️ LLVM vs Cranelift 对比
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 设计哲学
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 维度 | LLVM | Cranelift |
 |------|------|-----------|
@@ -201,9 +201,9 @@ cargo +nightly build -v
 
 ### 支持平台
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 平台 | LLVM | Cranelift |
 |------|------|-----------|
@@ -217,7 +217,7 @@ cargo +nightly build -v
 
 ### 优化级别
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | `opt-level` | LLVM 行为 | Cranelift 行为 |
 |-------------|----------|----------------|
@@ -264,7 +264,7 @@ Cranelift 作为 rustc 后端的时间线:
 
 ### Rust 2026 Project Goal 关联
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 Cranelift 后端是 Rust 2026 年 **"开发者体验优化"** 项目目标的关键组成部分。编译器团队的目标包括：
 
@@ -274,7 +274,7 @@ Cranelift 后端是 Rust 2026 年 **"开发者体验优化"** 项目目标的关
 
 ### 已知限制 (2026-05)
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 限制 | 状态 | 说明 |
 |------|------|------|
@@ -294,7 +294,7 @@ Cranelift 后端是 Rust 2026 年 **"开发者体验优化"** 项目目标的关
 
 ### ✅ 推荐使用 Cranelift
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | 场景 | 原因 |
 |------|------|
@@ -306,7 +306,7 @@ Cranelift 后端是 Rust 2026 年 **"开发者体验优化"** 项目目标的关
 
 ### 🚫 不推荐使用 Cranelift
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 | 场景 | 原因 |
 |------|------|
@@ -338,7 +338,7 @@ flowchart TD
 
 ### 推荐 `.cargo/config.toml`
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```toml
 [unstable]
@@ -354,7 +354,7 @@ codegen-backend = "cranelift"
 
 ### 快速切换脚本
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```powershell
 # enable-cranelift.ps1
@@ -373,7 +373,7 @@ cargo +nightly build
 
 ### Makefile 集成
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```makefile
 .PHONY: build-dev build-release
@@ -442,13 +442,13 @@ test-dev:
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Compiler Construction]**
-> **[来源: Rust Compiler Team Blog]**
-> **[来源: LLVM Documentation]**
-> **[来源: ACM - Compiler Design]**
-> **[来源: Wikipedia - Machine Learning]**
-> **[来源: Wikipedia - Artificial Intelligence]**
-> **[来源: tch-rs Documentation]**
-> **[来源: ACM - AI Systems]**
+> **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)**
+> **来源: [Rust Compiler Team Blog](https://blog.rust-lang.org/inside-rust/)**
+> **来源: [LLVM Documentation](https://llvm.org/docs/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
+> **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)**
+> **来源: [tch-rs Documentation](https://docs.rs/tch/latest/tch/)**
+> **来源: [ACM - AI Systems](https://dl.acm.org/)**
 
 ---

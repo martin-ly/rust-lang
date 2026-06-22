@@ -255,7 +255,7 @@ graph LR
         T2[反例分析 + Mermaid 可视化]
         T3[设计模式实践 + 代码评审]
         T4[Miri 练习 + 编译器错误专题]
-        T5[RustBelt 论文 + Kani 实验]
+        T5[RustBelt](https://plv.mpi-sws.org/rustbelt/)
         T6[开源贡献 + CI 设计]
     end
 

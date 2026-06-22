@@ -4,7 +4,7 @@
 > **Bloom 层级**: L4-L5 (分析/评价)
 
 > **定位**: 三轨道（concept/ / knowledge/ / docs/）核心文件的层次关系、定理链、跨层映射的单一事实来源
-> **[来源: Wikipedia - Knowledge Organization]** · **[来源: Wikipedia - Taxonomy]** · **[来源: ACM - Knowledge Representation]** · **[来源: IEEE - Information Architecture]** · **[来源: Bloom Taxonomy 2001]**
+> **来源: [Wikipedia - Knowledge Organization](https://en.wikipedia.org/wiki/Knowledge_Organization)** · **来源: [Wikipedia - Taxonomy](https://en.wikipedia.org/wiki/Taxonomy)** · **[来源: ACM - Knowledge Representation]** · **[来源: IEEE - Information Architecture]** · **[来源: Bloom Taxonomy 2001]**
 > **覆盖**: 30 个核心示范文件 + L0-L7 全局架构
 > **更新频率**: 每批次核心文件完善后同步更新
 > **状态**: v1.0（2026-05-21）
@@ -66,7 +66,7 @@ graph TB
         LL[线性逻辑]
         TT[类型论]
         OF[所有权形式化]
-        RB[RustBelt]
+        RB[RustBelt](https://plv.mpi-sws.org/rustbelt/)
     end
 
     subgraph L5["L5 对比分析层"]
@@ -239,13 +239,13 @@ graph LR
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

@@ -10,13 +10,13 @@
 > **形式化框架**: 配置源优先级 + 配置提取 + Profile选择
 >
 > **参考**: Figment Documentation, Rocket Framework, serde
-> **[来源: Figment Documentation - docs.rs/figment]** · **[来源: Rocket Framework - rocket.rs]** · **[来源: serde.rs Documentation]** · **[来源: Wikipedia - Configuration Management]** · **[来源: Rust Reference - Traits]** · **[来源: Rust API Guidelines]** · **[来源: ACM - Configuration DSL Design]** · **[来源: IEEE - Software Configuration Standards]**
+> **[来源: Figment Documentation - docs.rs/figment]** · **[来源: Rocket Framework - rocket.rs]** · **来源: [serde.rs Documentation](https://serde.rs/)** · **来源: [Wikipedia - Configuration Management](https://en.wikipedia.org/wiki/Configuration_Management)** · **来源: [Rust Reference - Traits](https://doc.rust-lang.org/reference/items/traits.html)** · **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** · **[来源: ACM - Configuration DSL Design]** · **[来源: IEEE - Software Configuration Standards]**
 
 ---
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [Figment 配置管理库形式化分析](#figment-配置管理库形式化分析)
   - [目录](#目录)
@@ -71,13 +71,13 @@
 
 ## 1. 项目概览
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 Figment 是什么
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Figment 是一个 Rust 生态中的配置管理库，由 Sergio Benitez（Rocket Web 框架作者）开发。它提供了一个统一、类型安全且可扩展的配置管理解决方案。
 
@@ -93,7 +93,7 @@ Figment 是一个 Rust 生态中的配置管理库，由 Sergio Benitez（Rocket
 
 ### 1.2 解决的核心问题
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 在应用程序开发中，配置管理通常面临以下挑战：
 
@@ -140,7 +140,7 @@ let config: AppConfig = Figment::new()
 
 ### 1.3 与同类库对比
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 | 库 | 类型安全 | 多源合并 | Profile 支持 | 生态集成 |
 |----|----------|----------|--------------|----------|
@@ -163,7 +163,7 @@ let config: AppConfig = Figment::new()
 
 ### 2.1 Provider Trait 设计
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 Provider 是 Figment 的核心抽象，定义配置数据的来源：
 
@@ -191,7 +191,7 @@ pub trait Provider {
 
 ### 2.2 内置 Provider 类型
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 Figment 内置了多种常用 Provider：
 
@@ -224,7 +224,7 @@ let figment = Figment::new()
 
 ### 3.1 后进优先原理
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 Figment 使用后进优先（Last-Write-Wins）策略合并配置源：
 
@@ -253,7 +253,7 @@ let figment = Figment::new()
 
 ### 3.2 嵌套值合并
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 对于嵌套对象，Figment 执行深度合并而非简单替换：
 
@@ -297,7 +297,7 @@ fn merge_deep(base: Value, override: Value) -> Value {
 
 ### 3.3 数组处理
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 数组在合并时有特殊行为：**整个数组被替换，而非数组合并**：
 
@@ -323,7 +323,7 @@ hosts = ["server1:8080", "server2:8080"]
 
 ### 4.1 多环境配置
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 Profile 允许在同一份配置文件中定义多个环境的配置：
 
@@ -356,7 +356,7 @@ log_level = "normal"
 
 ### 4.2 Profile 选择策略
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 Figment 提供多种方式选择当前 Profile：
 
@@ -406,7 +406,7 @@ let figment = Figment::new()
 
 ### 5.1 deserialize_into 原理
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 Figment 的核心提取机制基于 serde：
 
@@ -447,7 +447,7 @@ let config: AppConfig = figment.extract()?;
 
 ### 5.2 错误处理
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 Figment 提供详细的错误信息：
 
@@ -476,7 +476,7 @@ match figment.extract::<AppConfig>() {
 
 ### 5.3 验证机制
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 结合 serde 和自定义验证：
 
@@ -520,7 +520,7 @@ config.validate()?;  // 运行 validator 验证
 
 ### 6.1 Env Provider
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 Figment 的 Env Provider 提供强大的环境变量处理能力：
 
@@ -536,7 +536,7 @@ let figment = Figment::new()
 
 ### 6.2 前缀处理
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 灵活的前缀和过滤策略：
 
@@ -561,7 +561,7 @@ let env = Env::prefixed("APP_")
 
 ### 6.3 嵌套变量映射
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 通过分隔符实现嵌套配置映射：
 
@@ -605,7 +605,7 @@ let figment = Figment::new()
 
 ### 7.1 JSON/YAML/TOML 解析
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 Figment 原生支持三种主流配置格式：
 
@@ -674,7 +674,7 @@ description: |
 
 ### 7.2 文件监听
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 虽然 Figment 本身不提供文件监听，但可结合 `notify` crate 实现：
 
@@ -750,7 +750,7 @@ impl<T: for<'de> Deserialize<'de> + Send + Sync + 'static> ReloadableConfig<T> {
 
 ### 8.1 实现自定义配置源
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 实现 Provider trait 可创建自定义配置源：
 
@@ -813,7 +813,7 @@ let figment = Figment::new()
 
 ### 8.2 数据库/远程配置
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 更完整的远程配置 Provider 示例：
 
@@ -941,7 +941,7 @@ let figment = Figment::new()
 
 ### 9.1 Rocket 配置
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 Figment 最初为 Rocket 设计，集成最为原生：
 
@@ -988,7 +988,7 @@ url = "postgres://prod-db.example.com/rocket_db"
 
 ### 9.2 Axum 集成示例
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 在 Axum 中使用 Figment：
 
@@ -1082,7 +1082,7 @@ async fn main() {
 
 ### 10.1 配置结构设计
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 推荐的配置分层结构：
 
@@ -1137,7 +1137,7 @@ impl Default for ServerConfig {
 
 ### 10.2 敏感信息处理
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 敏感信息的安全处理方案：
 
@@ -1200,7 +1200,7 @@ impl Provider for SecretsManagerProvider {
 
 ### 10.3 默认值策略
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 合理的默认值设计模式：
 
@@ -1250,7 +1250,7 @@ enum SslMode {
 
 ### 11.1 复杂配置场景实现
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 以下是一个生产级应用的完整配置实现：
 
@@ -1792,7 +1792,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 定理 2.1 (后进优先)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 > 后加入的配置源覆盖先加入的，这是 Figment 配置合并的核心原则。
 
@@ -1814,7 +1814,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 定理 3.1 (类型提取)
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 > 通过 serde 反序列化将配置数据提取为强类型结构，在编译期保证类型安全。
 
@@ -1826,7 +1826,7 @@ Figment 内部数据 → serde Deserializer → 目标类型 T: Deserialize
 
 ### 定理 4.1 (Profile 支持)
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 > Profile 系统支持按环境分离配置，选择 Profile 时会自动继承 default Profile 的默认值。
 
@@ -1840,7 +1840,7 @@ Figment 内部数据 → serde Deserializer → 目标类型 T: Deserialize
 
 ### 定理 5.1 (嵌套合并)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 > 对于嵌套对象，Figment 执行深度递归合并；对于数组，执行完全替换。
 
@@ -1854,7 +1854,7 @@ Figment 内部数据 → serde Deserializer → 目标类型 T: Deserialize
 
 ### 定理 6.1 (环境变量嵌套)
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 > 通过分隔符（如 `__`）可在环境变量名称中表示嵌套结构，实现扁平到嵌套的映射。
 
@@ -1887,17 +1887,17 @@ PREFIX_KEY__SUBKEY__VALUE → {"key": {"subkey": {"value": ...}}}
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Configuration Management]**
+> **来源: [Wikipedia - Configuration Management](https://en.wikipedia.org/wiki/Configuration_Management)**
 
-> **[来源: Wikipedia - Domain-Specific Language]**
+> **来源: [Wikipedia - Domain-Specific Language](https://en.wikipedia.org/wiki/Domain_Specific_Language)**
 
-> **[来源: Wikipedia - Environment Variable]**
+> **来源: [Wikipedia - Environment Variable](https://en.wikipedia.org/wiki/Environment_Variable)**
 
 > **[来源: IEEE - Software Configuration Standards]**
 
 > **[来源: ACM - Configuration DSL Design]**
 
-> **[来源: Rust Reference - Macros]**
+> **来源: [Rust Reference - Macros](https://doc.rust-lang.org/reference/macros.html)**
 
 > **[来源: figment.rs Documentation]**
 
@@ -1907,25 +1907,25 @@ PREFIX_KEY__SUBKEY__VALUE → {"key": {"subkey": {"value": ...}}}
 
 > **[来源: JSON Specification - RFC 8259]**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Wikipedia - Type System]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ---
 

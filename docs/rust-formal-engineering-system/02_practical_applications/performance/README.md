@@ -10,7 +10,7 @@
 
 ## 知识结构思维导图
 >
-> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Performance Engineering]** · **[来源: Wikipedia - Software Optimization]** · **[来源: ACM - Performance Measurement Methodology]** · **[来源: IEEE - Software Performance Standards]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Performance Engineering](https://en.wikipedia.org/wiki/Performance_Engineering)** · **来源: [Wikipedia - Software Optimization](https://en.wikipedia.org/wiki/Software_Optimization)** · **[来源: ACM - Performance Measurement Methodology]** · **[来源: IEEE - Software Performance Standards]**
 
 ```mermaid
 mindmap
@@ -39,7 +39,7 @@ mindmap
 
 ## 与核心文档的关联
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 本文档 | 核心文档 | 关系 |
 | :--- | :--- | :--- |
@@ -52,11 +52,11 @@ mindmap
 
 ## 性能优化核心概念
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 零成本抽象
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 // Rust 的抽象不引入运行时开销
@@ -83,7 +83,7 @@ fn manual_loop(data: &[i32]) -> i32 {
 
 ### 内存布局优化
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 // 结构体字段排序影响内存布局
@@ -121,7 +121,7 @@ struct PackedLayout {
 
 ### SIMD 优化
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
 // 使用标准库的 SIMD 支持
@@ -145,7 +145,7 @@ fn simd_add(a: &[f32], b: &[f32], c: &mut [f32]) {
 
 ### 缓存友好性优化
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust
 // 行优先 vs 列优先遍历
@@ -185,7 +185,7 @@ fn blocked_access(matrix: &mut [[f64; N]; N], block_size: usize) {
 
 ### 内联与分支预测提示
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 // 内联小函数
@@ -344,18 +344,18 @@ criterion_main!(benches);
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Program Optimization]**
+> **来源: [Wikipedia - Program Optimization](https://en.wikipedia.org/wiki/Program_Optimization)**
 
 > **[来源: Criterion.rs]**
 
-> **[来源: ACM - Performance Engineering]**
+> **来源: [ACM - Performance Engineering](https://dl.acm.org/)**
 
-> **[来源: Rust Performance Book]**
+> **来源: [The Rust Performance Book](https://nnethercote.github.io/perf-book/)**
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
-> **[来源: Coq Reference]**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
 
-> **[来源: TLA+]**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
 
-> **[来源: ACM - Formal Verification]**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**

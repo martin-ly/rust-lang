@@ -1,4 +1,6 @@
-> **EN**: Rust For Data Science
+# Rust 数据科学与科学计算
+
+> **EN**: Rust for Data Science and Scientific Computing
 > **Summary**: Rust For Data Science: Rust ecosystem tools, crates, and engineering practices.
 > **内容分级**: [综述级]
 

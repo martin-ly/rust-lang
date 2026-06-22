@@ -71,13 +71,13 @@
 
 ## 核心概念速查
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 所有权规则
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 1. 每个值有唯一所有者
@@ -95,9 +95,9 @@ let len = calculate_length(&s1);  // 借用s1
 
 ### 借用规则
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 规则 | 说明 | 代码 |
 | :--- | :--- | :--- |
@@ -109,13 +109,13 @@ let len = calculate_length(&s1);  // 借用s1
 
 ## 生命周期速查
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 语法
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 显式标注
@@ -131,9 +131,9 @@ struct Parser<'a> { input: &'a str }
 
 ### 省略规则
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. 每个引用参数有自己的生命周期
 2. 单一输入 → 应用到输出
@@ -143,7 +143,7 @@ struct Parser<'a> { input: &'a str }
 
 ## Send/Sync速查
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 类型 | Send | Sync | 说明 |
 | :--- | :--- | :--- | :--- |
@@ -160,7 +160,7 @@ struct Parser<'a> { input: &'a str }
 
 ## 核心定理速查
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 定理 | 内容 | 位置 |
 | :--- | :--- | :--- |
@@ -175,7 +175,7 @@ struct Parser<'a> { input: &'a str }
 
 ## 证明技术速查
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 技术 | 适用场景 | 形式化工具 |
 | :--- | :--- | :--- |
@@ -189,7 +189,7 @@ struct Parser<'a> { input: &'a str }
 
 ## 验证工具速查
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 工具 | 类型 | 用途 | 命令 |
 | :--- | :--- | :--- | :--- |
@@ -202,11 +202,11 @@ struct Parser<'a> { input: &'a str }
 
 ## 设计模式速查
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 创建型
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 模式 | 用途 | Rust特色 |
 | :--- | :--- | :--- |
@@ -216,7 +216,7 @@ struct Parser<'a> { input: &'a str }
 
 ### 结构型
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 | 模式 | 用途 | Rust特色 |
 | :--- | :--- | :--- |
@@ -226,7 +226,7 @@ struct Parser<'a> { input: &'a str }
 
 ### 行为型
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 | 模式 | 用途 | Rust特色 |
 | :--- | :--- | :--- |
@@ -242,7 +242,7 @@ struct Parser<'a> { input: &'a str }
 
 ### 安全承诺
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 unsafe {
@@ -255,7 +255,7 @@ unsafe {
 
 ### 常见unsafe操作
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 | 操作 | 安全条件 | 示例 |
 | :--- | :--- | :--- |
@@ -272,7 +272,7 @@ unsafe {
 
 ### Future基础
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 async fn foo() -> i32 { 42 }
@@ -285,7 +285,7 @@ fn foo() -> impl Future<Output = i32> {
 
 ### 组合操作
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | 操作 | 说明 | 示例 |
 | :--- | :--- | :--- |
@@ -296,7 +296,7 @@ fn foo() -> impl Future<Output = i32> {
 
 ### 取消安全
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 // ✅ 取消安全: 使用临时文件
@@ -315,7 +315,7 @@ async fn safe_write(path: &str, data: &[u8]) {
 
 ### 共享状态
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 // Mutex
@@ -330,7 +330,7 @@ data.write().unwrap().push(1);
 
 ### 消息传递
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 // mpsc
@@ -377,7 +377,7 @@ tx.send("hello").unwrap();
 
 ### 所有权三规则
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```
 1. 每个值有且只有一个所有者
@@ -387,7 +387,7 @@ tx.send("hello").unwrap();
 
 ### 借用两规则
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```
 规则1: 要么一个可变引用(&mut)，要么多个不可变引用(&)
@@ -656,17 +656,17 @@ Coq → Iris → RustBelt → 工具开发
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
-> **[来源: Coq Reference]**
-> **[来源: TLA+]**
-> **[来源: ACM - Formal Verification]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

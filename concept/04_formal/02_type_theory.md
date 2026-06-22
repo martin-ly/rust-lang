@@ -316,7 +316,7 @@ graph TD
     Q3 -->|是| F3["反例: Java/C# 的 billion-dollar mistake<br/>→ `null` 是任意引用类型的值，调用方法时 NPE<br/>→ 类型系统声称安全，实际运行时崩溃"]
     Q3 -->|否| Q4{"是否经验证（Progress + Preservation 证明）?"}
     Q4 -->|否| N1["状态: soundness 未知<br/>→ 如早期 Rust 生命周期系统（pre-NLL）存在已知 soundness bug"]
-    Q4 -->|是| T1["定理成立: 类型系统 sound<br/>✅ 元定理已证明，如 λ→ / System F / RustBelt"]
+    Q4 -->|是| T1"定理成立: 类型系统 sound<br / >✅ 元定理已证明，如 λ→ / System F / [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
 
     style F1 fill:#f66
     style F2 fill:#f66
@@ -592,7 +592,7 @@ enum List<T> {
 
 ### 9.3 HRTB 与全称量词的形式化语义
 
-> **[学术来源: System F_ω]** · **[Rust Reference: Higher-Ranked Trait Bounds]** `for<'a> T: Trait<'a>` 是 Rust 类型系统中**高阶 Trait Bound**的语法，其形式化语义对应于一阶逻辑中的受限全称量词。✅
+> **[学术来源: System F_ω]** · **[Rust Reference: Higher-Ranked Trait Bounds](https://doc.rust-lang.org/reference/)** `for<'a> T: Trait<'a>` 是 Rust 类型系统中**高阶 Trait Bound**的语法，其形式化语义对应于一阶逻辑中的受限全称量词。✅
 
 **语法与逻辑对应**
 
@@ -675,7 +675,7 @@ Rust HRTB:       ∀'a.τ  where 'a ∈ Lifetime (Region)
 
 ## 十之一、补充：Dependent Type、Const Generics 与 HKT workaround
 
-> **[Wikipedia: Dependent type]** · **[Wikipedia: Higher-kinded type]** · **[RFC 2000: Const Generics]** · **[Rust Reference: Const Generics]** 本节补充 Rust 类型系统与更高级类型论概念的关系，以及 Rust 在表达力边界上的工程妥协。✅ [来源: [POPL 2018 — RustBelt](https://dl.acm.org/doi/10.1145/3158154)]
+> **[Wikipedia: Dependent type](https://en.wikipedia.org/wiki/Dependent_type)** · **[Wikipedia: Higher-kinded type](https://en.wikipedia.org/wiki/Higher_kinded_type)** · **[RFC 2000: Const Generics](https://rust-lang.github.io/rfcs/2000-2000-const-generics.html)** · **[Rust Reference: Const Generics](https://doc.rust-lang.org/reference/items/generics.html#const-generics)** 本节补充 Rust 类型系统与更高级类型论概念的关系，以及 Rust 在表达力边界上的工程妥协。✅ [来源: [POPL 2018 — RustBelt](https://dl.acm.org/doi/10.1145/3158154)]
 
 ### 10.1 Dependent Type 与 Const Generics 的关系
 
@@ -708,11 +708,11 @@ let b: Array<i32, 4> = Array { data: [1, 2, 3, 4] };
 | **与unsafe关系** | 无 unsafe 概念（证明即程序） | 仍依赖 unsafe 进行底层优化 |
 
 > **关键洞察**: Const Generics 不是"依赖类型的弱化版"，而是**工程上的精确裁剪**——它保留了依赖类型在系统编程中最有用的子集（数组长度、缓冲区大小、维度参数），同时避免了完整依赖类型带来的编译期不可判定性问题。
-> **来源**: [Wikipedia: Dependent type] · [RFC 2000: Const Generics] · [Idris 文档: Dependent Types]
+> **来源**: [Wikipedia: Dependent type](https://en.wikipedia.org/wiki/Dependent_type) · [RFC 2000: Const Generics](https://rust-lang.github.io/rfcs/2000-2000-const-generics.html) · [Idris 文档: Dependent Types]
 
 ### 10.1b Const Generics 的形式化演进（1.89+）
 
-> **[来源: Rust 1.89 Release Notes; RFC 2000]** Rust 1.89 稳定了 `_` 推断 const generics 参数，使常量参数获得与类型参数同等的 HM 推断能力。
+> **来源: Rust 1.89 Release Notes; [RFC 2000](https://rust-lang.github.io/rfcs/2000-2000-const-generics.html)** Rust 1.89 稳定了 `_` 推断 const generics 参数，使常量参数获得与类型参数同等的 HM 推断能力。
 
 **`_` 推断的形式化意义**:
 
@@ -826,7 +826,7 @@ impl<T> Result<T, E> { fn map<U>(self, f: impl FnOnce(T) -> U) -> Result<U, E> {
 ```
 
 > **形式化视角**: HKT 需要 **System F_ω**（允许类型抽象的类型构造器）。Rust 的类型系统接近 System F_ω + 区域类型，但出于**单态化实现的复杂性**和**类型推断的实用性**，HKT 尚未加入语言。GATs 提供了约 80% 的 HKT 表达能力，剩余 20%（高阶类型抽象）需通过宏或显式实例化弥补。
-> **来源**: [Wikipedia: Higher-kinded type] · [TAPL Ch.29] · [Rust Internals: HKT Discussion] · [RFC 1598: GATs]
+> **来源**: [Wikipedia: Higher-kinded type](https://en.wikipedia.org/wiki/Higher_kinded_type) · [TAPL Ch.29] · [Rust Internals: HKT Discussion] · [RFC 1598: GATs](https://github.com/rust-lang/rfcs/pull/1598)
 
 ### 10.3 线性逻辑与所有权类型的 Curry-Howard 对应
 
@@ -852,7 +852,7 @@ Curry-Howard 在 Rust 中的具体实例:
     ⟺ 程序的资源安全（borrow checker 通过）
 ```
 
-> **来源**: [Wikipedia: Curry–Howard correspondence] · [Wadler 2015 · Propositions as Types] · [Girard 1989 · Proofs and Types] · [TAPL Ch.9]
+> **来源**: [Wikipedia: Curry–Howard correspondence](https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence) · [Wadler 2015 · Propositions as Types] · [Girard 1989 · Proofs and Types] · [TAPL Ch.9]
 
 ---
 
@@ -935,7 +935,7 @@ fn invariant<'a>(x: &'a mut String) -> &'a mut str {
 ```
 
 > **定理**：Rust 的生命周期子类型化是**结构子类型**（structural subtyping）的特例——子类型关系由类型的结构（生命周期参数）决定，而非名义（name-based）。
-> **来源**: [Pierce · Types and Programming Languages Ch.15–16] · [Rust Reference: Subtyping] · [Rust Nomicon: Variance] · [Wikipedia: Subtyping]
+> **来源**: [Pierce · Types and Programming Languages Ch.15–16] · [Rust Reference: Subtyping](https://doc.rust-lang.org/reference/subtyping.html) · [Rust Nomicon: Variance] · [Wikipedia: Subtyping](https://en.wikipedia.org/wiki/Subtyping)
 
 ---
 

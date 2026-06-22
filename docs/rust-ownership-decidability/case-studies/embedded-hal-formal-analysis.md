@@ -10,7 +10,7 @@
 > **形式化框架**: Trait抽象 + 类型状态机 + 零成本抽象
 >
 > **参考**: embedded-hal v1.0 Documentation
-> **[来源: embedded-hal Documentation - docs.rs/embedded-hal]** · **[来源: Rust Embedded Book]** · **[来源: Wikipedia - Hardware Abstraction Layer]** · **[来源: Rust Reference - Traits]** · **[来源: Wikipedia - Embedded System]** · **[来源: Rust Embedded Working Group]** · **[来源: ACM - HAL Design Patterns]** · **[来源: IEEE - Hardware-Software Interface Standards]**
+> **[来源: embedded-hal Documentation - docs.rs/embedded-hal]** · **来源: [Rust Embedded Book](https://doc.rust-lang.org/stable/embedded-book/)** · **来源: [Wikipedia - Hardware Abstraction Layer](https://en.wikipedia.org/wiki/Hardware_Abstraction_Layer)** · **来源: [Rust Reference - Traits](https://doc.rust-lang.org/reference/items/traits.html)** · **来源: [Wikipedia - Embedded System](https://en.wikipedia.org/wiki/Embedded_System)** · **来源: [Rust Embedded Working Group](https://rust-embedded.github.io/book/)** · **[来源: ACM - HAL Design Patterns]** · **[来源: IEEE - Hardware-Software Interface Standards]**
 >
 > **分析深度**: 生产级技术分析
 
@@ -18,7 +18,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [Embedded-HAL 硬件抽象层深度形式化分析](#embedded-hal-硬件抽象层深度形式化分析)
   - [目录](#目录)
@@ -86,13 +86,13 @@
 
 ## 1. 项目概览
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 设计目标与定位
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 embedded-hal 是 Rust 嵌入式生态系统的核心基础设施，它定义了一组 trait（接口），用于抽象各种微控制器上的常见外设功能。
 
@@ -134,7 +134,7 @@ embedded-hal的解决方案:
 
 ### 1.2 嵌入式Rust生态地位
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```text
 嵌入式Rust生态系统架构:
@@ -173,7 +173,7 @@ embedded-hal的解决方案:
 
 ### 2.1 硬件无关性
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 embedded-hal通过trait抽象隐藏硬件差异:
 
@@ -198,7 +198,7 @@ pub fn blink_led<P: OutputPin>(led: &mut P, delay: &mut impl DelayUs) {
 
 ### 2.2 零运行时开销
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 使用泛型单态化实现零成本抽象:
 
@@ -215,7 +215,7 @@ fn use_pin<P: OutputPin>(pin: &mut P) {
 
 ### 2.3 类型安全
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 使用类型状态机在编译期防止错误:
 
@@ -237,7 +237,7 @@ pa0.set_high().unwrap();
 
 ### 3.1 InputPin与OutputPin Trait
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 embedded-hal定义了三个核心GPIO trait:
 
@@ -274,7 +274,7 @@ pub trait StatefulOutputPin: OutputPin {
 
 ### 3.2 类型状态机模式
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 HAL实现使用类型参数编码引脚状态:
 
@@ -338,7 +338,7 @@ impl PA0<Input<Floating>> {
 
 ### 3.3 可翻转输出
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ToggleableOutputPin提供状态翻转功能:
 
@@ -373,7 +373,7 @@ led.toggle()?;  // 单条指令，原子操作
 
 ### 3.4 嵌入式HAL 1.0演进
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 embedded-hal 1.0对GPIO trait进行了重要重构:
 
@@ -407,7 +407,7 @@ pub trait OutputPin {
 
 ### 4.1 阻塞式串口
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 embedded-hal 1.0 使用 `embedded_io` trait 进行串口通信:
 
@@ -436,7 +436,7 @@ fn write_bytes<UART: Write>(uart: &mut UART, data: &[u8]) -> Result<(), UART::Er
 
 ### 4.2 串口配置
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 串口配置通常由HAL实现提供:
 
@@ -467,7 +467,7 @@ let (mut tx, mut rx) = serial.split();
 
 ### 4.3 驱动实现模式
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 基于串口实现Modbus RTU协议的示例:
 
@@ -534,7 +534,7 @@ impl<UART: Read + Write> ModbusRTU<UART> {
 
 ### 5.1 SPI设备抽象
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 SPI使用设备trait抽象总线访问:
 
@@ -557,7 +557,7 @@ pub enum Operation<'a> {
 
 ### 5.2 事务安全
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 SPI事务确保操作的原子性:
 
@@ -597,7 +597,7 @@ fn read_sensor_data<SPI: SpiDevice>(spi: &mut SPI) -> Result<SensorData, SPI::Er
 
 ### 5.3 多设备共享
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 使用 `SpiDevice` 管理片选:
 
@@ -626,7 +626,7 @@ sensor2.transaction(...)?;
 
 ### 6.1 I2c Trait设计
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 pub trait I2c<A: AddressMode = SevenBitAddress> {
@@ -656,7 +656,7 @@ impl AddressMode for TenBitAddress {}
 
 ### 6.2 地址处理
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 I2C支持7位和10位地址:
 
@@ -688,7 +688,7 @@ impl<I2C: I2c> Mpu6050<I2C> {
 
 ### 6.3 读写操作
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 I2C典型操作模式:
 
@@ -729,7 +729,7 @@ impl<I2C: I2c> Mpu6050<I2C> {
 
 ### 7.1 Delay trait
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 延迟是最常用的定时器功能:
 
@@ -765,7 +765,7 @@ fn blink_with_delay<P: OutputPin, D: DelayNs>(
 
 ### 7.2 CountDown
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 倒计时定时器用于非阻塞延迟:
 
@@ -804,7 +804,7 @@ fn periodic_sampling<T: CountDown>(
 
 ### 7.3 PWM
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 PWM（脉宽调制）用于模拟输出:
 
@@ -848,7 +848,7 @@ fn fade_led<PWM: SetDutyCycle>(pwm: &mut PWM) -> Result<(), PWM::Error> {
 
 ### 8.1 ADC转换
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 模数转换:
 
@@ -887,7 +887,7 @@ impl<PIN: Channel<Adc, ID = u8>> TemperatureSensor<PIN> {
 
 ### 8.2 DAC输出
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 数模转换:
 
@@ -929,7 +929,7 @@ fn generate_sine_wave<DAC: SetValue>(
 
 ### 9.1 驱动架构
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 跨平台驱动的典型架构:
 
@@ -960,7 +960,7 @@ nrf-hal-common = "0.18"
 
 ### 9.2 平台迁移案例
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 将MPU6050驱动从STM32F4迁移到nRF52:
 
@@ -995,7 +995,7 @@ let mut mpu = Mpu6050::new(i2c);  // 驱动代码完全不变！
 
 ### 10.1 核心trait设计
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 embedded-hal核心trait完全支持no_std:
 
@@ -1021,7 +1021,7 @@ fn use_peripherals<P: OutputPin, SPI: SpiDevice, I2C: I2c>(
 
 ### 10.2 alloc依赖处理
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 某些功能需要堆分配，应作为可选特性:
 
@@ -1065,7 +1065,7 @@ pub fn read_buffer<'a, I2C: I2c>(
 
 ### 11.1 生态配合
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -1091,7 +1091,7 @@ pub fn read_buffer<'a, I2C: I2c>(
 
 ### 11.2 async HAL发展
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 embedded-hal-async提供异步trait:
 
@@ -1666,11 +1666,11 @@ let dev2 = RefCellDevice::new(&bus)?;
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Hardware Abstraction Layer]**
+> **来源: [Wikipedia - Hardware Abstraction Layer](https://en.wikipedia.org/wiki/Hardware_Abstraction_Layer)**
 
-> **[来源: Wikipedia - Embedded System]**
+> **来源: [Wikipedia - Embedded System](https://en.wikipedia.org/wiki/Embedded_System)**
 
-> **[来源: Rust Embedded Working Group]**
+> **来源: [Rust Embedded Working Group](https://rust-embedded.github.io/book/)**
 
 > **[来源: embedded-hal.rs Documentation]**
 
@@ -1680,16 +1680,16 @@ let dev2 = RefCellDevice::new(&bus)?;
 
 > **[来源: ARM CoreSight Technical Reference]**
 
-> **[来源: Rust Reference - no_std]**
+> **来源: [Rust Reference - no_std](https://doc.rust-lang.org/reference/names/preludes.html)**
 
-> **[来源: Wikipedia - Embedded System]**
-> **[来源: Rust Embedded WG]**
-> **[来源: Embassy Book]**
+> **来源: [Wikipedia - Embedded System](https://en.wikipedia.org/wiki/Embedded_System)**
+> **来源: [Rust Embedded WG](https://rust-embedded.github.io/book/)**
+> **来源: [Embassy Book](https://embassy.dev/book/)**
 > **[来源: IEEE - Embedded Software]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---
 

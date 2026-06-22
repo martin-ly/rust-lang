@@ -30,7 +30,7 @@
 
 ## 1. 索引说明
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本项目包含两个主要的形式化内容体系：
 
@@ -43,11 +43,11 @@
 
 ## 2. 按主题索引
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 所有权与借用形式化
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 深度 | 位置 | 说明 |
 |------|------|------|
@@ -168,7 +168,7 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
-> **[来源: Coq Reference Manual]**
-> **[来源: TLA+ Documentation]**
-> **[来源: ACM - Formal Verification]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
+> **来源: [Coq Reference Manual](https://coq.inria.fr/doc/)**
+> **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**

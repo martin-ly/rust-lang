@@ -6,7 +6,7 @@
 > **定位**：Rust 最核心的基础性概念，是所有进阶内容的**必要前提**。本层内容对齐 TRPL 第 3-10 章、Wikipedia 核心词条、Stanford/CMU 基础课程。
 > **Bloom 层级**: 记忆 → 理解
 > **对应 L4 形式化**: 线性逻辑 ⊗ · 分离逻辑 · 区域类型系统 · 代数类型论
-> **[来源: TRPL Ch. 3–10]** · **[来源: Wikipedia - Ownership (programming)]** · **[来源: Wikipedia - Type System]** · **[来源: Stanford CS242 - Programming Languages]**
+> **来源: [TRPL Ch3](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html)** · **来源: [Wikipedia - Ownership (programming)](https://en.wikipedia.org/wiki/Ownership_(programming))** · **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)** · **[来源: Stanford CS242 - Programming Languages]**
 
 > **本节关键术语**: 基础概念 (Foundation) · 所有权 (Ownership) · 借用 (Borrowing) · 生命周期 (Lifetime) · 类型系统 (Type System) — [完整对照表](../00_meta/terminology_glossary.md)
 >

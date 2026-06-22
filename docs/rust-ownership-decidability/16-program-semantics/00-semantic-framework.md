@@ -7,7 +7,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference - Semantics]** · **[来源: Wikipedia - Operational Semantics]** · **[来源: Wikipedia - Denotational Semantics]** · **[来源: POPL 2018 - RustBelt]** · **[来源: PLDI 2023 - Aeneas]** · **[来源: TRPL Ch. 4]** · **[来源: Wikipedia - Abstract Interpretation]** · **[来源: ACM - Semantic Frameworks for Systems Languages]** · **[来源: IEEE - Formal Semantic Models]**
+> **来源: [Rust Reference - Semantics](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Operational Semantics](https://en.wikipedia.org/wiki/Operational_Semantics)** · **来源: [Wikipedia - Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_Semantics)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [PLDI 2023 - Aeneas](https://www.sigplan.org/Conferences/PLDI/)** · **来源: [TRPL Ch. 4](https://doc.rust-lang.org/book/ch04-00-ownership.html)** · **来源: [Wikipedia - Abstract Interpretation](https://en.wikipedia.org/wiki/Abstract_Interpretation)** · **[来源: ACM - Semantic Frameworks for Systems Languages]** · **[来源: IEEE - Formal Semantic Models]**
 
 - [程序设计语义框架](#程序设计语义框架)
   - [目录](#目录)
@@ -127,13 +127,13 @@
 
 ## 1. 引言
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 什么是程序设计语义
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **程序设计语义（Programming Language Semantics）** 是研究程序设计语言含义和行为的数学理论。
 它为程序的执行提供严格的数学解释，使得我们能够形式化地分析和验证程序的正确性。
@@ -156,7 +156,7 @@ $$
 
 ### 1.2 为什么需要语义分析框架
 
-> **[来源: ACM - Formal Verification Survey]**
+> **来源: [ACM - Formal Verification Survey](https://dl.acm.org/)**
 
 Rust 作为一门系统级编程语言，其独特的所有权、借用和生命周期系统使得传统的语义分析方法面临挑战：
 
@@ -173,7 +173,7 @@ $$
 
 ### 1.3 Rust 语义特性的独特性
 
-> **[来源: IEEE - Specification Standards]**
+> **来源: [IEEE - Specification Standards](https://standards.ieee.org/)**
 
 Rust 的语义特性可以从以下维度进行分类：
 
@@ -204,15 +204,15 @@ $$
 
 ## 2. 语义分析维度
 
-> **[来源: Wikipedia - Semantics]** · **[来源: Rust Reference]** · **[来源: Wikipedia - Operational Semantics]**
+> **来源: [Wikipedia - Semantics](https://en.wikipedia.org/wiki/Semantics)** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Operational Semantics](https://en.wikipedia.org/wiki/Operational_Semantics)**
 
 ### 2.1 静态语义 vs 动态语义
 
-> **[来源: TLA+ Documentation]**
+> **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**
 
 #### 2.1.1 编译时保证 vs 运行时行为
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 静态语义在编译时检查程序属性，动态语义描述程序运行时的行为。
 
@@ -253,7 +253,7 @@ fn dynamic_semantics() {
 
 #### 2.1.2 类型系统语义
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 Rust 的类型系统语义包含以下层次：
 
@@ -284,7 +284,7 @@ $$
 
 #### 2.1.3 所有权系统语义
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 所有权系统的核心规则可以用分离逻辑（Separation Logic）表示：
 
@@ -317,11 +317,11 @@ fn ownership_semantics() {
 
 ### 2.2 控制流语义
 
-> **[来源: Coq Reference Manual]**
+> **来源: [Coq Reference Manual](https://coq.inria.fr/doc/)**
 
 #### 2.2.1 顺序执行语义
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 顺序执行是最基本的控制流，形式化为：
 
@@ -340,7 +340,7 @@ fn sequential_semantics() {
 
 #### 2.2.2 条件执行语义
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 条件执行的形式化语义：
 
@@ -367,7 +367,7 @@ fn conditional_semantics(x: i32) -> i32 {
 
 #### 2.2.3 循环执行语义
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 循环语义可以使用不动点或递归规则定义：
 
@@ -400,7 +400,7 @@ fn loop_semantics() {
 
 #### 2.2.4 跳转语义
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Rust 支持以下跳转结构：
 
@@ -444,11 +444,11 @@ impl Ready {
 
 ### 2.3 数据流语义
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
 #### 2.3.1 值传递语义
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 Rust 的值传递有三种形式，每种都有精确的语义：
 
@@ -507,7 +507,7 @@ fn borrow_semantics() {
 
 #### 2.3.2 生命周期数据流
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 生命周期描述了引用的有效范围：
 
@@ -541,7 +541,7 @@ fn lifetime_example() {
 
 #### 2.3.3 共享 vs 独占数据流
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 Rust 的借用检查器强制执行以下规则：
 
@@ -574,11 +574,11 @@ fn sharing_vs_exclusive() {
 
 ### 2.4 执行模型语义
 
-> **[来源: Pierce 2002 - TAPL]**
+> **来源: [Pierce 2002 - TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)**
 
 #### 2.4.1 同步执行模型
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 同步执行模型是最简单的执行模型：
 
@@ -604,7 +604,7 @@ fn compute_c() -> i32 { 3 }
 
 #### 2.4.2 异步执行模型
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 异步执行模型引入了 Future 和任务调度：
 
@@ -657,7 +657,7 @@ impl Future for MyFuture {
 
 #### 2.4.3 并发执行模型
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 并发模型涉及多个执行流的交错：
 
@@ -690,7 +690,7 @@ fn concurrent_model() {
 
 #### 2.4.4 并行执行模型
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 并行执行模型利用数据并行性：
 
@@ -729,11 +729,11 @@ fn simd_semantics() {
 
 ### 3.1 创建型模式语义
 
-> **[来源: POPL 2020 - Oxide]**
+> **来源: [POPL 2020 - Oxide](https://www.sigplan.org/Conferences/POPL/)**
 
 #### 3.1.1 所有权转移语义
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 所有权转移是 Rust 中资源管理的基础：
 
@@ -778,7 +778,7 @@ fn ownership_transfer_pattern() {
 
 #### 3.1.2 借用检查语义
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 借用检查是编译时验证的核心：
 
@@ -833,7 +833,7 @@ fn builder_pattern() {
 
 #### 3.1.3 智能指针语义
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 智能指针扩展了所有权的表达能力：
 
@@ -884,11 +884,11 @@ fn smart_pointer_semantics() {
 
 ### 3.2 结构型模式语义
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 #### 3.2.1 组合模式语义
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 组合模式允许统一处理个体和组合对象：
 
@@ -964,7 +964,7 @@ fn composite_pattern() {
 
 #### 3.2.2 适配器模式语义
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 适配器模式转换接口而不改变实现：
 
@@ -1020,7 +1020,7 @@ fn adapter_pattern() {
 
 #### 3.2.3 类型状态模式语义
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 类型状态模式在类型系统中编码状态机：
 
@@ -1112,11 +1112,11 @@ fn typestate_pattern() {
 
 ### 3.3 行为型模式语义
 
-> **[来源: ACM - Formal Verification Survey]**
+> **来源: [ACM - Formal Verification Survey](https://dl.acm.org/)**
 
 #### 3.3.1 迭代器模式语义
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 迭代器抽象了序列遍历：
 
@@ -1175,7 +1175,7 @@ fn iterator_pattern() {
 
 #### 3.3.2 观察者模式语义
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 观察者模式实现了发布-订阅机制：
 
@@ -1286,7 +1286,7 @@ fn observer_pattern() {
 
 #### 3.3.3 访问者模式语义
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 访问者模式允许在不修改类的情况下添加新操作：
 
@@ -1384,15 +1384,15 @@ fn visitor_pattern() {
 
 ## 4. 并发语义模型
 
-> **[来源: Wikipedia - Concurrent Computing]** · **[来源: Rust Reference - Concurrency]** · **[来源: CSP - Hoare 1978]**
+> **来源: [Wikipedia - Concurrent Computing](https://en.wikipedia.org/wiki/Concurrent_Computing)** · **来源: [Rust Reference - Concurrency](https://doc.rust-lang.org/reference/special-types-and-traits.html)** · **[来源: CSP - Hoare 1978]**
 
 ### 4.1 线程模型语义
 
-> **[来源: IEEE - Specification Standards]**
+> **来源: [IEEE - Specification Standards](https://standards.ieee.org/)**
 
 #### 4.1.1 OS 线程语义
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 操作系统线程是最基础的并发单元：
 
@@ -1437,7 +1437,7 @@ fn os_thread_semantics() {
 
 #### 4.1.2 绿色线程/协程语义
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 协程提供了用户级线程抽象：
 
@@ -1500,7 +1500,7 @@ impl Future for SimpleCoroutine {
 
 #### 4.1.3 线程间通信语义
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 线程间通信遵循所有权和通道语义：
 
@@ -1543,11 +1543,11 @@ fn inter_thread_communication() {
 
 ### 4.2 同步原语语义
 
-> **[来源: TLA+ Documentation]**
+> **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**
 
 #### 4.2.1 互斥锁语义
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 互斥锁提供独占访问：
 
@@ -1585,7 +1585,7 @@ fn mutex_semantics() {
 
 #### 4.2.2 读写锁语义
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 读写锁允许多读单写：
 
@@ -1630,7 +1630,7 @@ fn rwlock_semantics() {
 
 #### 4.2.3 条件变量语义
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 条件变量用于线程间条件通知：
 
@@ -1668,7 +1668,7 @@ fn condvar_semantics() {
 
 #### 4.2.4 屏障语义
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 屏障用于同步多个线程到达某点：
 
@@ -1705,11 +1705,11 @@ fn barrier_semantics() {
 
 ### 4.3 无锁语义
 
-> **[来源: Coq Reference Manual]**
+> **来源: [Coq Reference Manual](https://coq.inria.fr/doc/)**
 
 #### 4.3.1 原子操作语义（内存序）
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 原子操作内存序定义了操作之间的可见性：
 
@@ -1768,7 +1768,7 @@ fn atomic_semantics() {
 
 #### 4.3.2 CAS 循环语义
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 比较并交换（CAS）是无锁算法的基础：
 
@@ -1851,7 +1851,7 @@ impl<T> LockFreeStack<T> {
 
 #### 4.3.3 内存模型语义
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 Rust 遵循 C++11 内存模型，提供以下一致性保证：
 
@@ -1896,11 +1896,11 @@ fn memory_model_semantics() {
 
 ### 5.1 Future 语义
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
 #### 5.1.1 Future 状态机语义
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 Future 本质上是异步计算的状态机：
 
@@ -1970,7 +1970,7 @@ impl Future for MyFuture {
 
 #### 5.1.2 Poll 模型语义
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 Poll 模型定义了异步计算的协作式调度：
 
@@ -2000,7 +2000,7 @@ async fn async_operation_b() -> i32 {
 
 #### 5.1.3 Waker 机制语义
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 Waker 用于在异步操作完成时唤醒任务：
 
@@ -2064,11 +2064,11 @@ impl Future for TimerFuture {
 
 ### 5.2 async/await 语义
 
-> **[来源: Pierce 2002 - TAPL]**
+> **来源: [Pierce 2002 - TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)**
 
 #### 5.2.1 状态机转换语义
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 `async/await` 被编译器转换为状态机：
 
@@ -2117,7 +2117,7 @@ impl Future for ExampleStateMachine {
 
 #### 5.2.2 Pin 语义（自引用）
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 Pin 用于安全地处理自引用结构：
 
@@ -2176,7 +2176,7 @@ fn pin_semantics() {
 
 #### 5.2.3 取消安全语义
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 取消安全是指当 Future 被丢弃时的正确性：
 
@@ -2218,11 +2218,11 @@ impl DatabaseConnection {
 
 ### 5.3 执行器语义
 
-> **[来源: POPL 2020 - Oxide]**
+> **来源: [POPL 2020 - Oxide](https://www.sigplan.org/Conferences/POPL/)**
 
 #### 5.3.1 任务调度语义
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 执行器负责任务的调度执行：
 
@@ -2289,7 +2289,7 @@ fn create_waker(queue: Arc<Mutex<VecDeque<Task>>>) -> Waker {
 
 #### 5.3.2 工作窃取语义
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 工作窃取是一种负载均衡策略：
 
@@ -2347,7 +2347,7 @@ struct Task;
 
 #### 5.3.3 协作式调度语义
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 协作式调度依赖任务主动让出控制权：
 
@@ -2388,15 +2388,15 @@ fn process_item(_item: i32) {
 
 ## 6. Actor 模型语义
 
-> **[来源: Wikipedia - Actor Model]** · **[来源: Hewitt et al. 1973]** · **[来源: Rust Reference]**
+> **来源: [Wikipedia - Actor Model](https://en.wikipedia.org/wiki/Actor_Model)** · **[来源: Hewitt et al. 1973]** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
 ### 6.1 Actor 基本语义
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 #### 6.1.1 消息传递语义
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 Actor 模型基于异步消息传递：
 
@@ -2489,7 +2489,7 @@ fn counter_actor_example() {
 
 #### 6.1.2 Actor 生命周期语义
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 Actor 有其明确的生命周期：
 
@@ -2561,7 +2561,7 @@ impl<S, M: Message> ManagedActor<S, M> {
 
 #### 6.1.3 监督树语义
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 监督树提供了故障恢复机制：
 
@@ -2628,11 +2628,11 @@ impl Supervisor {
 
 ### 6.2 分布式 Actor 语义
 
-> **[来源: ACM - Formal Verification Survey]**
+> **来源: [ACM - Formal Verification Survey](https://dl.acm.org/)**
 
 #### 6.2.1 位置透明语义
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 位置透明允许 Actor 不感知本地或远程：
 
@@ -2699,7 +2699,7 @@ struct RemoteConnection;
 
 #### 6.2.2 故障隔离语义
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 分布式系统中的故障隔离：
 
@@ -2748,7 +2748,7 @@ impl FailureDetector {
 
 #### 6.2.3 一致性与可用性语义
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 分布式系统中的一致性与可用性权衡：
 
@@ -2822,11 +2822,11 @@ impl Crdt for GCounter {
 
 ### 7.1 内存模型语义
 
-> **[来源: IEEE - Specification Standards]**
+> **来源: [IEEE - Specification Standards](https://standards.ieee.org/)**
 
 #### 7.1.1 栈分配语义
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 栈分配是最快的内存分配方式：
 
@@ -2863,7 +2863,7 @@ fn stack_overflow_risk() {
 
 #### 7.1.2 堆分配语义
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 堆分配用于动态大小的数据：
 
@@ -2898,7 +2898,7 @@ fn heap_allocation_semantics() {
 
 #### 7.1.3 内存回收语义（RAII/Drop）
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 RAII（资源获取即初始化）是 Rust 的核心内存管理策略：
 
@@ -2979,11 +2979,11 @@ impl<'a> std::ops::DerefMut for LockGuard<'a> {
 
 ### 7.2 调度语义
 
-> **[来源: TLA+ Documentation]**
+> **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**
 
 #### 7.2.1 任务调度语义
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 任务调度决定了代码何时执行：
 
@@ -3038,7 +3038,7 @@ impl PriorityScheduler {
 
 #### 7.2.2 抢占式调度语义
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 抢占式调度允许操作系统中断任务：
 
@@ -3082,7 +3082,7 @@ fn set_thread_priority_high() {
 
 #### 7.2.3 协作式调度语义
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 协作式调度依赖任务主动让出：
 
@@ -3166,11 +3166,11 @@ fn yield_now() -> YieldNow {
 
 ### 7.3 I/O 语义
 
-> **[来源: Coq Reference Manual]**
+> **来源: [Coq Reference Manual](https://coq.inria.fr/doc/)**
 
 #### 7.3.1 阻塞 I/O 语义
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 阻塞 I/O 会使线程等待操作完成：
 
@@ -3223,7 +3223,7 @@ fn handle_connection(_stream: TcpStream) {
 
 #### 7.3.2 非阻塞 I/O 语义
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 非阻塞 I/O 立即返回，不会阻塞线程：
 
@@ -3293,7 +3293,7 @@ fn non_blocking_io_semantics() {
 
 #### 7.3.3 异步 I/O 语义
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 异步 I/O 结合了非阻塞和事件驱动：
 
@@ -3375,11 +3375,11 @@ async fn batch_async_io(urls: Vec<&str>) -> Vec<Result<String, reqwest::Error>> 
 
 ### 8.1 操作语义
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 #### 8.1.1 大步语义规则
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 大步语义（自然语义）描述表达式的完整求值：
 
@@ -3415,7 +3415,7 @@ fn big_step_apply() -> i32 {
 
 #### 8.1.2 小步语义规则
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 小步语义（结构化操作语义）描述单步转换：
 
@@ -3460,7 +3460,7 @@ fn small_step_ownership() {
 
 #### 8.1.3 求值上下文
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 求值上下文（Evaluation Contexts）定义了规约可以进行的位置：
 
@@ -3498,11 +3498,11 @@ fn evaluation_contexts() {
 
 ### 8.2 类型与效果系统
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 #### 8.2.1 类型判断语义
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 类型判断规则定义了程序的类型正确性：
 
@@ -3546,7 +3546,7 @@ fn lifetime_type_judgment<'a>(x: &'a i32) -> &'a i32 {
 
 #### 8.2.2 效果追踪语义
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 效果系统追踪程序可能产生的效果：
 
@@ -3599,7 +3599,7 @@ fn complex_operation(data: &mut Vec<i32>) {
 
 #### 8.2.3 能力系统语义
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 能力系统（Capability System）控制对资源的访问：
 
@@ -3677,11 +3677,11 @@ impl Session<Privileged> {
 
 ### 9.1 静态分析语义
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 #### 9.1.1 借用检查器语义
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 借用检查器是 Rust 的核心创新，在编译时验证内存安全：
 
@@ -3731,7 +3731,7 @@ fn non_lexical_lifetimes() {
 
 #### 9.1.2 模式匹配穷尽性语义
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 Rust 编译器检查模式匹配是否穷尽：
 
@@ -3788,7 +3788,7 @@ fn wildcard_match(x: Result<i32, String>) -> i32 {
 
 #### 9.1.3 常量求值语义
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 常量求值在编译时执行代码：
 
@@ -3835,11 +3835,11 @@ use std::mem::size_of;
 
 ### 9.2 动态分析语义
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 #### 9.2.1 Miri 语义解释器
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 Miri 是 Rust 的未定义行为检测工具：
 
@@ -3912,7 +3912,7 @@ fn miri_safe_example() {
 
 #### 9.2.2 数据竞争检测语义
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 数据竞争检测确保并发安全：
 
@@ -3982,7 +3982,7 @@ fn thread_safety_traits() {
 
 #### 9.2.3 内存泄漏检测语义
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 内存泄漏检测帮助发现资源管理问题：
 
@@ -4057,7 +4057,7 @@ fn no_memory_leak() {
 
 ### 10.1 语义框架回顾
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 本文档建立了一个全面的 Rust 程序设计语义框架，涵盖了以下核心维度：
 
@@ -4074,7 +4074,7 @@ fn no_memory_leak() {
 
 ### 10.2 统一语义形式
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 Rust 的核心语义可以用以下统一框架表示：
 
@@ -4091,7 +4091,7 @@ $$
 
 ### 10.3 未来发展方向
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 1. **形式化验证集成**：将 Rust 语义与 Coq/Isabelle 等证明助手集成
 2. **异步语义完善**：完整的 async/await 效果系统形式化
@@ -4101,7 +4101,7 @@ $$
 
 ### 10.4 文档组织
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 本语义框架文档为后续专题文档提供基础：
 
@@ -4172,52 +4172,52 @@ docs/rust-ownership-decidability/
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Operational Semantics]**
+> **来源: [Wikipedia - Operational Semantics](https://en.wikipedia.org/wiki/Operational_Semantics)**
 
-> **[来源: Wikipedia - Abstract Interpretation]**
+> **来源: [Wikipedia - Abstract Interpretation](https://en.wikipedia.org/wiki/Abstract_Interpretation)**
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
-> **[来源: Wikipedia - Programming Language Theory]**
+> **来源: [Wikipedia - Programming Language Theory](https://en.wikipedia.org/wiki/Programming_Language_Theory)**
 
 > **[来源: IEEE - Formal Semantic Models]**
 
 > **[来源: ACM - Semantic Frameworks for Systems Languages]**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: PLDI 2023 - Aeneas]**
+> **来源: [PLDI 2023 - Aeneas](https://www.sigplan.org/Conferences/PLDI/)**
 
-> **[来源: Rust Reference - Type System]**
+> **来源: [Rust Reference - Type System](https://doc.rust-lang.org/reference/types.html)**
 
-> **[来源: Rustonomicon - Data Layout]**
+> **来源: [Rustonomicon - Data Layout](https://doc.rust-lang.org/nomicon/)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages Survey]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design and Implementation]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM - Systems Programming Languages Survey](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI - Programming Language Design and Implementation](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

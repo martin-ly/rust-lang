@@ -93,7 +93,7 @@
 ### 1.1 异步网络 IO 模型
 >
 
-> **[Wikipedia: Asynchronous I/O]** Asynchronous I/O (AIO) is a form of input/output processing that permits other processing to continue before the transmission has finished.
+> **[Wikipedia: Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)** Asynchronous I/O (AIO) is a form of input/output processing that permits other processing to continue before the transmission has finished.
 > **来源**: <https://en.wikipedia.org/wiki/Asynchronous_I/O>
 
 ```text
@@ -190,10 +190,10 @@ Tokio Runtime 架构:
 ### 1.3 TCP vs UDP 语义差异
 >
 
-> **[RFC 793 — TCP]** The Transmission Control Protocol (TCP) is intended for use as a highly reliable host-to-host protocol between hosts in packet-switched computer communication networks.
+> **[RFC 793 — TCP](https://github.com/rust-lang/rfcs/pull/793)** The Transmission Control Protocol (TCP) is intended for use as a highly reliable host-to-host protocol between hosts in packet-switched computer communication networks.
 > **来源**: <https://tools.ietf.org/html/rfc793>
 
-> **[RFC 768 — UDP]** This User Datagram Protocol (UDP) is defined to make available a datagram mode of packet-switched computer communication.
+> **[RFC 768 — UDP](https://github.com/rust-lang/rfcs/pull/768)** This User Datagram Protocol (UDP) is defined to make available a datagram mode of packet-switched computer communication.
 > **来源**: <https://tools.ietf.org/html/rfc768>
 
 ```text

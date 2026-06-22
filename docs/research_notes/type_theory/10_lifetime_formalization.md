@@ -63,15 +63,15 @@
 
 ## 🎯 研究目标 {#-研究目标}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本研究的目的是形式化定义 Rust 的生命周期系统，并理解其类型理论基础。
 
 ### 核心问题
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **生命周期的形式化定义**: 如何用类型理论精确描述生命周期？
 2. **生命周期推断算法**: 生命周期推断算法如何工作？
@@ -79,9 +79,9 @@
 
 ### 预期成果
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - 生命周期系统的形式化定义
 - 生命周期推断算法的形式化描述
@@ -91,13 +91,13 @@
 
 ## 📚 理论基础 {#-理论基础}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 生命周期核心概念
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **生命周期参数**: 表示引用的有效作用域
 2. **生命周期推断**: 自动推断生命周期参数
@@ -106,9 +106,9 @@
 
 ### 相关理论
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **区域类型 (Region Types)**: 区域类型系统
 - **线性类型**: 线性类型系统
@@ -119,13 +119,13 @@
 
 ## 🔬 形式化定义 {#-形式化定义}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 生命周期
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义 1.1 (生命周期)**: 生命周期 $\ell$ 表示引用的有效作用域，是一个作用域标识符。
 
@@ -136,9 +136,9 @@ $$\Lambda : \text{LifetimeVar} \to \text{Scope}$$
 
 ### 2. 生命周期子类型
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义 2.1 (生命周期子类型)**: 如果生命周期 $\ell_1$ 包含生命周期 $\ell_2$（$\ell_1 \supseteq \ell_2$），则 $\ell_2$ 是 $\ell_1$ 的子类型，记作 $\ell_2 <: \ell_1$。
 
@@ -146,9 +146,9 @@ $$\Lambda : \text{LifetimeVar} \to \text{Scope}$$
 
 ### 3. 生命周期推断
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义 3.1 (生命周期约束)**: 生命周期约束 $C$ 是一个生命周期关系的集合：
 $$C = \{\ell_1 <: \ell_2, \ell_2 <: \ell_3, \ldots\}$$
@@ -197,7 +197,7 @@ $$C = \{\ell_1 <: \ell_2, \ell_2 <: \ell_3, \ldots\}$$
 
 ### 待证明的性质
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 1. **生命周期推断正确性**: 见定理 LT-T2
 2. **生命周期约束一致性**: 见 Axiom LT2、定理 LT-T2
@@ -205,7 +205,7 @@ $$C = \{\ell_1 <: \ell_2, \ell_2 <: \ell_3, \ldots\}$$
 
 ### 证明方法
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - **约束求解**: 定理 LT-T2 证明思路
 - **子类型证明**: 引理 LT-L1、推论 LT-C1
@@ -219,7 +219,7 @@ $$C = \{\ell_1 <: \ell_2, \ell_2 <: \ell_3, \ldots\}$$
 
 ### 示例 1: 基本生命周期
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
@@ -249,7 +249,7 @@ fn main() {
 
 ### 示例 2: 生命周期推断
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust
 fn first_word(s: &str) -> &str {
@@ -271,7 +271,7 @@ fn first_word(s: &str) -> &str {
 
 ### 示例 3: 生命周期约束
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust
 struct ImportantExcerpt<'a> {
@@ -298,7 +298,7 @@ impl<'a> ImportantExcerpt<'a> {
 
 ### 示例 4: 生命周期与泛型
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust
 fn longest_with_an_announcement<'a, T>(
@@ -326,7 +326,7 @@ where
 
 ### 示例 5: 高阶生命周期
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 fn apply<'a, F>(f: F, x: &'a str) -> &'a str
@@ -509,13 +509,13 @@ $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\e
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Variable Scope]**
-> **[来源: TRPL Ch. 10 - Lifetimes]**
-> **[来源: Rust Reference - Lifetimes]**
-> **[来源: RFC 2094 - NLL]**
-> **[来源: Wikipedia - Type System]**
-> **[来源: Pierce 2002 - TAPL]**
-> **[来源: Rust Reference - Type System]**
-> **[来源: ACM - Type Systems]**
+> **来源: [Wikipedia - Variable Scope](https://en.wikipedia.org/wiki/Variable_Scope)**
+> **来源: [TRPL Ch. 10 - Lifetimes](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)**
+> **来源: [Rust Reference - Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html)**
+> **来源: [RFC 2094 - NLL](https://rust-lang.github.io/rfcs/2094-2094-nll.html)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Pierce 2002 - TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)**
+> **来源: [Rust Reference - Type System](https://doc.rust-lang.org/reference/types.html)**
+> **来源: [ACM - Type Systems](https://dl.acm.org/)**
 
 ---

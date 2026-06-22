@@ -10,13 +10,13 @@
 > **适用框架**: Coq + Iris 分离逻辑
 >
 > **参考**: Pierce (2002). TAPL; Chlipala (2013). CPDT
-> **[来源: Pierce 2002 - Types and Programming Languages (TAPL)]** · **[来源: Chlipala 2013 - Certified Programming with Dependent Types (CPDT)]** · **[来源: Wikipedia - Proof Assistant]** · **[来源: Coq Documentation - coq.inria.fr]** · **[来源: Iris Project - iris-project.org]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Wikipedia - Mathematical Proof]** · **[来源: ACM - Proof Engineering]** · **[来源: IEEE - Formal Proof Verification]**
+> **[来源: Pierce 2002 - Types and Programming Languages (TAPL)]** · **[来源: Chlipala 2013 - Certified Programming with Dependent Types (CPDT)]** · **来源: [Wikipedia - Proof Assistant](https://en.wikipedia.org/wiki/Proof_Assistant)** · **[来源: Coq Documentation - coq.inria.fr]** · **来源: [Iris Project - iris-project.org](https://iris-project.org/)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [Wikipedia - Mathematical Proof](https://en.wikipedia.org/wiki/Mathematical_Proof)** · **[来源: ACM - Proof Engineering]** · **[来源: IEEE - Formal Proof Verification]**
 
 ---
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [证明策略模式库](#证明策略模式库)
   - [目录](#目录)
@@ -56,13 +56,13 @@
 
 ## 1. 引言
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 证明工程化的重要性
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 形式化证明是软件验证的黄金标准，但大型证明项目面临着严峻的工程挑战：
 
@@ -88,7 +88,7 @@
 
 ### 1.2 为什么需要证明模式库
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 证明模式库提供：
 
@@ -102,7 +102,7 @@
 
 ### 1.3 文档组织结构
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 本文档按以下结构组织：
 
@@ -118,7 +118,7 @@
 
 ### 2.1 结构归纳法
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **适用场景**: 对表达式/类型/值等归纳定义的结构进行归纳
 
@@ -232,7 +232,7 @@ Qed.
 
 ### 2.2 良基归纳法
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **适用场景**: 终止性证明、需要度量递减的递归证明
 
@@ -323,7 +323,7 @@ Qed.
 
 ### 2.3 推导归纳法
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **适用场景**: 对类型判断/求值判断等推导关系进行归纳
 
@@ -1166,7 +1166,7 @@ Qed.
 
 ### 8.1 常用组合 Tactics
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```coq
 (* 基本反演 tactic *)
@@ -1197,7 +1197,7 @@ Ltac std_proof :=
 
 ### 8.2 证明自动化 Tactics
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```coq
 (* 类型检查自动化 *)
@@ -1353,7 +1353,7 @@ Qed.
 
 ### 10.1 Progress 定理完整证明
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```coq
 (* Progress 定理完整标注证明 *)
@@ -1447,7 +1447,7 @@ Qed.
 
 ### 10.2 Preservation 定理完整证明
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```coq
 (* Preservation 定理完整标注证明 *)
@@ -1537,7 +1537,7 @@ Qed.
 
 ### 陷阱1: 归纳假设不够强
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```coq
 (* ❌ 错误: 归纳假设太弱 *)
@@ -1566,7 +1566,7 @@ Qed.
 
 ### 陷阱2: 上下文爆炸
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```coq
 (* ❌ 错误: 上下文积累太多无用假设 *)
@@ -1605,7 +1605,7 @@ Ltac clean_context :=
 
 ### 陷阱3: 变量命名冲突
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```coq
 (* ❌ 错误: 变量名重复导致混淆 *)
@@ -1639,7 +1639,7 @@ Qed.
 
 ### 陷阱4: 依赖类型问题
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```coq
 (* ❌ 错误: 标准归纳在依赖类型上失效 *)
@@ -1686,7 +1686,7 @@ Qed.
 
 ### 陷阱5: 重写方向错误
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```coq
 (* ❌ 错误: 重写方向导致循环 *)
@@ -1709,7 +1709,7 @@ Qed.
 
 ### 陷阱速查表
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 陷阱 | 症状 | 解决方案 |
 |------|------|----------|
@@ -1845,25 +1845,25 @@ flowchart TD
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
-> **[来源: Wikipedia - Design Pattern]**
-> **[来源: Rust API Guidelines]**
-> **[来源: Gang of Four]**
-> **[来源: ACM - Software Design Patterns]**
-> **[来源: Wikipedia - Design Pattern]**
-> **[来源: Rust API Guidelines]**
-> **[来源: Gang of Four - Design Patterns]**
-> **[来源: ACM - Software Design Patterns]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
+> **来源: [Gang of Four](https://en.wikipedia.org/wiki/Design_Patterns)**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
+> **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ---

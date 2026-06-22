@@ -60,7 +60,7 @@
 
 ## 文档定位
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本指南涵盖「AI 辅助 Rust 开发」与「用 Rust 构建 AI/ML 应用」两类场景，帮助开发者选择合适工具并规划学习路径。
 
@@ -70,7 +70,7 @@
 
 ## 一、AI 辅助 Rust 开发
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 使用 AI 工具（Cursor、Copilot、Claude 等）高效学习 Rust 与构建项目。
 
@@ -85,13 +85,13 @@
 
 ## 二、Rust 构建 AI/ML 应用
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 深度学习框架
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 框架 | 用途 | 特点 | 链接 |
 | :--- | :--- | :--- | :--- |
@@ -101,9 +101,9 @@
 
 ### 2.2 LLM 推理
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 项目 | 用途 | 特点 |
 | :--- | :--- | :--- |
@@ -113,9 +113,9 @@
 
 ### 2.3 与 C01–C12 的关联
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 本项目模块 | AI/ML 应用中的关联 |
 | :--- | :--- |
@@ -129,13 +129,13 @@
 
 ## 三、推荐学习路径
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 路径 A：AI 辅助学 Rust（先 AI 后 Rust）
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. 使用 [AI_ASSISTED_RUST_PROGRAMMING_GUIDE](../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md) 的提示词模板
 2. 结合 [RUSTLINGS_MAPPING](../../exercises/RUSTLINGS_MAPPING.md) 让 AI 推荐习题
@@ -143,9 +143,9 @@
 
 ### 路径 B：Rust 构建 AI（先 Rust 后 AI）
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. 掌握 C01–C03、C04 泛型
 2. 学习 Candle 或 Burn 入门教程
@@ -153,9 +153,9 @@
 
 ### 路径 C：AI + Rust 双轨
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. 用 AI 辅助学习 Rust 核心
 2. 用 Rust 实现 AI 推理/训练脚本
@@ -165,11 +165,11 @@
 
 ## 四、入门示例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 4.1 Candle 最小示例
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```toml
 # 新建项目: cargo new candle_demo && cd candle_demo
@@ -192,7 +192,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 4.2 Candle 神经网络推理
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 use candle_core::{DType, Device, Tensor};
@@ -222,7 +222,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 4.3 Burn 最小示例
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```toml
 [dependencies]
@@ -261,7 +261,7 @@ fn main() {
 
 ### 4.4 使用 Candle 加载预训练模型
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use candle_core::{Device, Tensor};
@@ -296,7 +296,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 4.5 本地 LLM 推理 (llm crate)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```toml
 [dependencies]
@@ -349,7 +349,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 4.6 并发数据加载器
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use std::sync::{Arc, Mutex};
@@ -430,7 +430,7 @@ fn tokenize_and_embed(text: &str) -> Vec<f32> {
 
 ### 6.1 内存管理
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 use candle_core::{Device, Tensor};
@@ -451,7 +451,7 @@ fn process_large_tensor() -> candle_core::Result<()> {
 
 ### 6.2 批量处理
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 fn batch_inference(model: &dyn Model, inputs: &[Tensor]) -> Vec<Tensor> {
@@ -469,7 +469,7 @@ fn batch_inference(model: &dyn Model, inputs: &[Tensor]) -> Vec<Tensor> {
 
 ### 6.3 错误处理
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use thiserror::Error;
@@ -510,7 +510,7 @@ type Result<T> = std::result::Result<T, AIError>;
 
 ### 场景1: AI 辅助 Rust 学习
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 使用 AI 工具快速理解 Rust 复杂概念：
 
@@ -520,7 +520,7 @@ type Result<T> = std::result::Result<T, AIError>;
 
 ### 场景2: 本地 LLM 推理服务
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 构建轻量级本地 LLM 服务：
 
@@ -531,7 +531,7 @@ type Result<T> = std::result::Result<T, AIError>;
 
 ### 场景3: 嵌入式 AI 推理
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 在资源受限设备运行 AI 模型：
 
@@ -540,7 +540,7 @@ type Result<T> = std::result::Result<T, AIError>;
 
 ### 场景4: 生产级 ML Pipeline
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 构建端到端机器学习工作流：
 
@@ -589,7 +589,7 @@ type Result<T> = std::result::Result<T, AIError>;
 
 ### array_windows 在特征工程中的应用
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 /// 使用 array_windows 进行时间窗口特征提取
@@ -615,7 +615,7 @@ pub fn sliding_predict(model: &Model, data: &[f32]) -> Vec<f32> {
 
 ### LazyLock 在模型缓存中的应用
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use std::sync::LazyLock;
@@ -638,7 +638,7 @@ pub fn quick_inference(input: &[f32]) -> Option<Vec<f32>> {
 
 ### ControlFlow 在数据处理管道中的应用
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use std::ops::ControlFlow;
@@ -666,7 +666,7 @@ fn preprocess_pipeline(
 
 ### 数学常量在算法优化中的应用
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 /// 使用黄金比例进行超参数搜索
@@ -731,16 +731,16 @@ pub fn golden_ratio_search_lr(
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Wikipedia - Machine Learning]**
-> **[来源: Wikipedia - Artificial Intelligence]**
-> **[来源: tch-rs Documentation]**
-> **[来源: ACM - AI Systems]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
+> **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)**
+> **来源: [tch-rs Documentation](https://docs.rs/tch/latest/tch/)**
+> **来源: [ACM - AI Systems](https://dl.acm.org/)**
 
 ---

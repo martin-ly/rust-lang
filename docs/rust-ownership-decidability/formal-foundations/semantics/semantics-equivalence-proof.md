@@ -7,7 +7,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: Wikipedia - Operational Semantics]** · **[来源: Wikipedia - Bisimulation]** · **[来源: ACM - Semantic Equivalence Verification]** · **[来源: IEEE - Formal Proof Standards]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** · **来源: [Wikipedia - Operational Semantics](https://en.wikipedia.org/wiki/Operational_Semantics)** · **来源: [Wikipedia - Bisimulation](https://en.wikipedia.org/wiki/Bisimulation)** · **[来源: ACM - Semantic Equivalence Verification]** · **[来源: IEEE - Formal Proof Standards]**
 
 - [大步语义与小步语义等价性证明](#大步语义与小步语义等价性证明)
   - [目录](#目录)
@@ -58,11 +58,11 @@
 
 ## 1. 引言
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 为什么需要两种语义
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 在编程语言的形式化理论中，操作语义（Operational Semantics）是描述程序执行行为的核心工具。根据描述的粒度不同，操作语义主要分为两种风格：
 
@@ -73,7 +73,7 @@
 
 ### 1.2 大步语义的优势
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 大步语义 $s, h \vdash e \Downarrow v, h'$ 表示在存储 $s$ 和堆 $h$ 下，表达式 $e$ 求值得到值 $v$ 和最终堆 $h'$。
 
@@ -90,7 +90,7 @@ $$\frac{e_1 \Downarrow n_1 \quad e_2 \Downarrow n_2 \quad n = n_1 + n_2}{e_1 + e
 
 ### 1.3 小步语义的优势
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 小步语义 $\langle e, s, h \rangle \rightarrow \langle e', s', h' \rangle$ 表示表达式 $e$ 在状态 $\langle s, h \rangle$ 下单步归约到 $e'$ 和状态 $\langle s', h' \rangle$。
 
@@ -107,7 +107,7 @@ $$\frac{\langle e_1, s, h \rangle \rightarrow \langle e_1', s', h' \rangle}{\lan
 
 ### 1.4 等价性的重要性
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 证明两种语义的等价性具有以下重要意义：
 
@@ -124,7 +124,7 @@ $$\frac{\langle e_1, s, h \rangle \rightarrow \langle e_1', s', h' \rangle}{\lan
 
 ### 2.1 大步语义 (eval) 的定义
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 大步语义定义了求值关系 $eval \subseteq Store \times Heap \times Expr \times Value \times Heap$。
 
@@ -170,7 +170,7 @@ $$
 
 ### 2.2 小步语义 (step) 的定义
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 小步语义定义了单步转换关系 $step \subseteq Config \times Config$。
 
@@ -222,7 +222,7 @@ $$
 
 ### 2.3 多步语义 (star_step) 的定义
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 多步语义是小步语义的自反传递闭包，记为 $\rightarrow^*$。
 
@@ -255,7 +255,7 @@ $$
 
 ### 3.1 核心定理陈述
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **定理 3.1 (大步-小步等价性)：**
 
@@ -278,7 +278,7 @@ Theorem big_step_equiv_small_step :
 
 ### 3.2 定理的直观理解
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 这个等价性定理建立了两种视角的联系：
 
@@ -296,11 +296,11 @@ Theorem big_step_equiv_small_step :
 
 ### 4.1 大步 ⇒ 小步 (→方向)
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 #### 4.1.1 证明策略
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 我们需要证明：如果 $s, h \vdash e \Downarrow v, h'$，则存在 $n$ 使得 $\langle e, s, h \rangle \rightarrow^n \langle v, s', h' \rangle$。
 
@@ -308,7 +308,7 @@ Theorem big_step_equiv_small_step :
 
 #### 4.1.2 归纳基础
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **情况 E_Const：**
 
@@ -328,7 +328,7 @@ Theorem big_step_equiv_small_step :
 
 #### 4.1.3 归纳步骤
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 **情况 E_Add：**
 
@@ -397,11 +397,11 @@ $$\langle e_2, s[x \mapsto v_1], h_1 \rangle \rightarrow^{n_2} \langle v_2, s[x 
 
 ### 4.2 小步 ⇒ 大步 (←方向)
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 #### 4.2.1 证明策略
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 我们需要证明：如果 $\langle e, s, h \rangle \rightarrow^n \langle v, s', h' \rangle$，则 $s, h \vdash e \Downarrow v, h'$。
 
@@ -409,7 +409,7 @@ $$\langle e_2, s[x \mapsto v_1], h_1 \rangle \rightarrow^{n_2} \langle v_2, s[x 
 
 #### 4.2.2 步数归纳
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **基础情况 (n = 0)：**
 
@@ -431,7 +431,7 @@ $$\langle e_2, s[x \mapsto v_1], h_1 \rangle \rightarrow^{n_2} \langle v_2, s[x 
 
 #### 4.2.3 可逆性引理的应用
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **关键观察**：我们需要从单步小步归约 "反向" 构造大步语义。
 
@@ -465,11 +465,11 @@ $$\frac{s, h \vdash e_1 \Downarrow n_1, h_{mid} \quad s, h_{mid} \vdash e_2 \Dow
 
 ### 4.3 辅助引理
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 #### 4.3.1 eval_deterministic
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **引理 4.1 (大步语义确定性)：**
 
@@ -497,7 +497,7 @@ Qed.
 
 #### 4.3.2 step_deterministic
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **引理 4.2 (小步语义确定性)：**
 
@@ -525,7 +525,7 @@ Qed.
 
 #### 4.3.3 eval_trans
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **引理 4.3 (求值传递性)：**
 
@@ -535,7 +535,7 @@ Qed.
 
 #### 4.3.4 step_eval
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **引理 4.4 (单步小步蕴含大步)：**
 
@@ -567,7 +567,7 @@ Qed.
 
 ### 5.1 类型安全性与语义选择无关
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **定理 5.1 (类型安全语义无关性)：**
 
@@ -585,7 +585,7 @@ Qed.
 
 ### 5.2 保持性在大步语义下的证明
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **定理 5.2 (大步语义保持性)：**
 
@@ -608,7 +608,7 @@ Qed.
 
 ### 5.3 进展性在小步语义下的证明
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **定理 5.3 (小步语义进展性)：**
 
@@ -636,7 +636,7 @@ Qed.
 
 ### 6.1 基本定义
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```coq
 (* 基础类型定义 *)
@@ -694,7 +694,7 @@ Definition update_heap (h : heap) (l : loc) (v : value) : heap :=
 
 ### 6.2 大步语义定义
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```coq
 (* 大步语义：eval s h e v h' *)
@@ -752,7 +752,7 @@ Inductive eval : store -> heap -> expr -> value -> heap -> Prop :=
 
 ### 6.3 小步语义定义
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```coq
 (* 配置类型 *)
@@ -836,7 +836,7 @@ Inductive step : store -> heap -> expr -> store -> heap -> expr -> Prop :=
 
 ### 6.4 多步语义定义
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```coq
 (* 多步语义 (自反传递闭包) *)
@@ -1156,26 +1156,26 @@ Qed.
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
-> **[来源: Coq Reference]**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
 
-> **[来源: TLA+]**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
 
-> **[来源: ACM - Formal Verification]**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---
 

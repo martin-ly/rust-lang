@@ -387,7 +387,7 @@ tx.send(42).await?;
 
 > **关键洞察**: Rust 的 `async/await` + 有界 channel = 零成本背压。
 > 与 Java（需额外背压库）或 Go（channel 有界但无类型安全保证）相比，Rust 在编译期就保证了背压通道的正确性（Send/Sync + 类型安全 + 无数据竞争）。
-> [来源: 💡 原创分析] · [Tokio Documentation] ✅
+> [来源: 💡 原创分析] · [Tokio Documentation](https://tokio.rs/) ✅
 
 ---
 

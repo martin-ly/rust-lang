@@ -9,13 +9,13 @@
 > **Rust Version**: 1.96.0+ (Edition 2024)
 > **对齐日期**: 2026-05-12.0+ (Edition 2024)
 > **Target Audience**: Systems Architects, Formal Methods Researchers, Advanced Rust Developers
-> **[来源: Wikipedia - Actor Model]** · **[来源: Rust Reference - Concurrency]** · **[来源: Wikipedia - Message Passing]** · **[来源: Hewitt et al. 1973 - Actor Model]** · **[来源: Rustonomicon - Concurrency]** · **[来源: Erlang Documentation - erlang.org]** · **[来源: Wikipedia - Distributed Computing]** · **[来源: ACM - Actor Model in Modern Languages]** · **[来源: IEEE - Fault-Tolerant Distributed Systems]**
+> **来源: [Wikipedia - Actor Model](https://en.wikipedia.org/wiki/Actor_Model)** · **来源: [Rust Reference - Concurrency](https://doc.rust-lang.org/reference/special-types-and-traits.html)** · **来源: [Wikipedia - Message Passing](https://en.wikipedia.org/wiki/Message_Passing)** · **[来源: Hewitt et al. 1973 - Actor Model]** · **来源: [Rustonomicon - Concurrency](https://doc.rust-lang.org/nomicon/concurrency.html)** · **[来源: Erlang Documentation - erlang.org]** · **来源: [Wikipedia - Distributed Computing](https://en.wikipedia.org/wiki/Distributed_Computing)** · **[来源: ACM - Actor Model in Modern Languages]** · **[来源: IEEE - Fault-Tolerant Distributed Systems]**
 
 ---
 
 ## Table of Contents
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [Actor Model in Rust: Formal Deep Dive](#actor-model-in-rust-formal-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -67,13 +67,13 @@
 
 ## 1. Actor Model Formal Semantics
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 Formal Definition
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 The Actor model, first proposed by Carl Hewitt in 1973, provides a mathematical framework for concurrent computation. We present a modern formalization suitable for Rust's ownership system.
 
@@ -118,7 +118,7 @@ Effect :=
 
 ### 1.2 Operational Semantics
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 We define the operational semantics using transition rules. Let `⟨Σ⟩` denote a system configuration.
 
@@ -170,7 +170,7 @@ where:
 
 ### 1.3 Message Passing Semantics
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **Definition 1.4 (Message)**:
 
@@ -199,7 +199,7 @@ Proof:
 
 ### 1.4 State Transformation Rules
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **Invariant 1 (State Encapsulation)**:
 
@@ -229,7 +229,7 @@ where process_next selects the next actor to process based on scheduling policy.
 
 ### 2.1 Theorem Statement
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **Theorem ACTOR-ISOLATION (Core Isolation Theorem)**:
 
@@ -243,7 +243,7 @@ Formal:
 
 ### 2.2 Proof Sketch
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **Proof Structure**:
 
@@ -302,7 +302,7 @@ Proof by Rust type system:
 
 ### 2.3 Corollaries
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **Corollary 2.1 (No Data Races)**:
 
@@ -335,7 +335,7 @@ Proof:
 
 ### 3.1 Actix Framework Deep Dive
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **Architecture Overview**:
 
@@ -417,7 +417,7 @@ Proof:
 
 ### 3.2 Bastion Framework
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **Supervisor Tree Architecture**:
 
@@ -478,7 +478,7 @@ Proof:
 
 ### 3.3 Safety Guarantees
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **Compile-Time Actor Isolation**:
 
@@ -528,7 +528,7 @@ impl Handler<ProcessData> for Worker {
 
 ### 4.1 Ask vs Tell Pattern
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **Tell Pattern (Fire-and-Forget)**:
 
@@ -622,7 +622,7 @@ impl Handler<GetBalance> for AccountB {
 
 ### 4.2 Supervision Tree
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **Formal Hierarchical Structure**:
 
@@ -688,7 +688,7 @@ impl Handler<RoutedMessage> for GoodSupervisor {
 
 ### 4.3 Circuit Breaker
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **Formal State Machine**:
 
@@ -843,7 +843,7 @@ impl SafeCircuitBreaker {
 
 ### 5.1 Message Ownership Transfer
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **Theorem 5.1 (Message Passing is Ownership-Safe)**:
 
@@ -910,7 +910,7 @@ processor.send(order).await?;
 
 ### 5.2 Actor State Management
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **Interior Mutability Pattern**:
 
@@ -1049,7 +1049,7 @@ impl Handler<Increment> for SafeActor {
 
 ### 6.1 Holding References in Messages
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **Problem: Dangling References**:
 
@@ -1144,7 +1144,7 @@ impl Handler<IndexedMessage> for BufferManager {
 
 ### 6.2 Blocking in Actor Handler
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **Problem: Mailbox Overflow**:
 
@@ -1254,7 +1254,7 @@ impl Handler<Compute> for WorkerActor {
 
 ### 6.3 Shared State Between Actors
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **Problem: Violates Actor Model**:
 
@@ -1409,7 +1409,7 @@ impl Handler<ApplyEvent> for EventSourcedCounter {
 
 ### 6.4 Circular Message Loops
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **Problem: Deadlock**:
 
@@ -1588,7 +1588,7 @@ impl Handler<Response> for ActorA {
 
 ### 6.5 Actor Leaking
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **Problem: Unbounded Actor Creation**:
 
@@ -1769,7 +1769,7 @@ impl RateLimitedSpawner {
 
 ### 7.1 Architecture Overview
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -1798,7 +1798,7 @@ impl RateLimitedSpawner {
 
 ### 7.2 Message Protocol Design
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 // Protocol messages with ownership semantics
@@ -1865,7 +1865,7 @@ struct GetHistory {
 
 ### 7.3 Implementation with Ownership Flow
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 // ChatServer - central coordinator
@@ -2072,7 +2072,7 @@ impl Handler<Cleanup> for ClientSession {
 
 ### 7.4 Safety Arguments
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **Theorem 7.1 (Chat System Message Delivery)**:
 
@@ -2105,7 +2105,7 @@ Proof:
 
 ### 7.5 Potential Pitfalls
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 // PITFALL 1: Blocking on broadcast
@@ -2157,7 +2157,7 @@ impl Handler<JoinRoom> for Room {
 
 ### 8.1 Core Safety Theorems
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **Theorem 8.1 (ACTOR-NO-DATA-RACE)**:
 
@@ -2260,7 +2260,7 @@ Proof:
 
 ### 8.2 Liveness Properties
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **Theorem 8.6 (ACTOR-PROGRESS)**:
 
@@ -2289,7 +2289,7 @@ Formal:
 
 ### 8.3 Compositional Properties
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **Theorem 8.8 (ACTOR-COMPOSITION)**:
 
@@ -2310,7 +2310,7 @@ Proof:
 
 ### 8.4 Rust-Specific Properties
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **Theorem 8.9 (RUST-ACTOR-MEMORY-SAFETY)**:
 
@@ -2361,7 +2361,7 @@ This deep dive has presented a comprehensive formal analysis of the Actor model 
 
 ### Key Results
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 1. **Formal Semantics**: Complete operational semantics for Actor systems with transition rules
 2. **Isolation Theorem**: Proof that Actor isolation prevents data races by construction
@@ -2373,7 +2373,7 @@ This deep dive has presented a comprehensive formal analysis of the Actor model 
 
 ### Practical Takeaways
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 | Pattern | Use When | Avoid When |
 |---------|----------|------------|
@@ -2384,7 +2384,7 @@ This deep dive has presented a comprehensive formal analysis of the Actor model 
 
 ### Rust 1.94 Considerations
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 - Use `async fn` in traits for cleaner actor handlers
 - Leverage `impl Trait` return types for message results
@@ -2428,13 +2428,13 @@ This deep dive has presented a comprehensive formal analysis of the Actor model 
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Actor Model]**
+> **来源: [Wikipedia - Actor Model](https://en.wikipedia.org/wiki/Actor_Model)**
 
-> **[来源: Wikipedia - Distributed Computing]**
+> **来源: [Wikipedia - Distributed Computing](https://en.wikipedia.org/wiki/Distributed_Computing)**
 
-> **[来源: Wikipedia - Message Passing]**
+> **来源: [Wikipedia - Message Passing](https://en.wikipedia.org/wiki/Message_Passing)**
 
-> **[来源: Wikipedia - Fault Tolerance]**
+> **来源: [Wikipedia - Fault Tolerance](https://en.wikipedia.org/wiki/Fault_Tolerance)**
 
 > **[来源: IEEE - Fault-Tolerant Distributed Systems]**
 
@@ -2444,60 +2444,60 @@ This deep dive has presented a comprehensive formal analysis of the Actor model 
 
 > **[来源: Hewitt et al. 1973 - Actor Model]**
 
-> **[来源: Rust Async Working Group]**
+> **来源: [Rust Async Working Group](https://rust-lang.github.io/wg-async/)**
 
-> **[来源: actix.rs Documentation]**
+> **来源: [actix.rs Documentation](https://actix.rs/)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages Survey]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design and Implementation]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM - Systems Programming Languages Survey](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI - Programming Language Design and Implementation](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Wikipedia - Type System]**
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Wikipedia - Type System]**
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---
 

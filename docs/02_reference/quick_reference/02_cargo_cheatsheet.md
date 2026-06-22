@@ -11,7 +11,7 @@
 
 ## 📋 目录 {#-目录}
 >
-> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Build Automation]** · **[来源: Wikipedia - Package Manager]** · **[来源: ACM - Dependency Management]** · **[来源: IEEE - Software Build Standards]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Build Automation](https://en.wikipedia.org/wiki/Build_Automation)** · **来源: [Wikipedia - Package Manager](https://en.wikipedia.org/wiki/Package_Manager)** · **[来源: ACM - Dependency Management]** · **[来源: IEEE - Software Build Standards]**
 
 - [📦 Cargo 速查卡 {#-cargo-速查卡}](#-cargo-速查卡--cargo-速查卡)
   - [📋 目录 {#-目录}](#-目录--目录)
@@ -85,13 +85,13 @@
 
 ## 🆕 项目创建 {#-项目创建}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 创建新项目
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 # 创建二进制项目
@@ -183,9 +183,9 @@ cargo init --lib
 
 ### 项目结构
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 my_project/
@@ -199,13 +199,13 @@ my_project/
 
 ## 🔨 构建命令 {#-构建命令}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 基本构建
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 # 开发构建
@@ -223,9 +223,9 @@ cargo clean
 
 ### 指定目标
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 # 构建特定包
@@ -247,9 +247,9 @@ cargo build --target wasm32-unknown-unknown
 
 ### 特性标志
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 # 启用特定特性
@@ -264,9 +264,9 @@ cargo build --no-default-features
 
 ### 并行和优化
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 # 指定并行任务数
@@ -284,13 +284,13 @@ cargo build --verbose
 
 ## 🧪 测试命令 {#-测试命令}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 基本测试
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 # 运行所有测试
@@ -311,7 +311,7 @@ cargo test -- --test-threads=1
 
 ### 测试选项
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```bash
 # 运行被忽略的测试
@@ -332,7 +332,7 @@ cargo test --doc
 
 ### 基准测试
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```bash
 # 运行基准测试
@@ -353,7 +353,7 @@ cargo bench --bench my_benchmark test_name
 
 ### 添加依赖
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```bash
 # 添加依赖（编辑 Cargo.toml）
@@ -374,7 +374,7 @@ cargo add serde@1.0
 
 ### 更新依赖
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```bash
 # 更新所有依赖
@@ -389,7 +389,7 @@ cargo update -p serde --precise 1.0.100
 
 ### 查看依赖
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```bash
 # 查看依赖树
@@ -410,7 +410,7 @@ cargo tree -f "{p} {f}"
 
 ### 依赖检查
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```bash
 # 检查过时依赖（需要 cargo-outdated）
@@ -433,7 +433,7 @@ cargo audit fix
 
 ### 发布准备
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```bash
 # 检查发布准备
@@ -451,7 +451,7 @@ cargo publish --allow-dirty
 
 ### 版本管理
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```bash
 # 使用 cargo-release（推荐）
@@ -472,7 +472,7 @@ cargo release --workspace --dry-run
 
 ### 工作空间命令
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```bash
 # 构建所有成员
@@ -490,7 +490,7 @@ cargo check --workspace
 
 ### 工作空间结构
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```toml
 # Cargo.toml（工作空间根）
@@ -513,7 +513,7 @@ tokio = { version = "1.0", features = ["full"] }
 
 ### Cargo.toml 结构
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```toml
 [package]
@@ -539,7 +539,7 @@ async = ["tokio"]
 
 ### 构建配置
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```toml
 [profile.dev]
@@ -557,7 +557,7 @@ panic = "abort"
 
 ### 特性配置
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```toml
 [features]
@@ -575,7 +575,7 @@ serde = ["dep:serde"]
 
 ### 代码格式化
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```bash
 # 格式化代码
@@ -590,7 +590,7 @@ cargo fmt --all
 
 ### 代码检查
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```bash
 # 运行 Clippy
@@ -608,7 +608,7 @@ cargo clippy --fix
 
 ### 文档生成
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```bash
 # 生成文档
@@ -626,7 +626,7 @@ cargo doc --no-deps
 
 ### 代码覆盖率
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```bash
 # 安装 tarpaulin
@@ -644,7 +644,7 @@ cargo tarpaulin --fail-under 80
 
 ### 宏展开
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```bash
 # 安装 cargo-expand
@@ -665,7 +665,7 @@ cargo expand my_function
 
 ### 配置别名
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```toml
 # .cargo/config.toml
@@ -691,7 +691,7 @@ fmt-check = "fmt --all -- --check"
 
 ### 使用别名
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```bash
 # 使用自定义别名
@@ -708,7 +708,7 @@ cargo clippy-all
 
 ### 开发工作流
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```bash
 # 1. 创建项目
@@ -730,7 +730,7 @@ cargo build --release
 
 ### CI/CD 工作流
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```bash
 # 检查
@@ -754,7 +754,7 @@ cargo doc --no-deps
 
 ### 发布工作流
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```bash
 # 1. 更新版本
@@ -779,7 +779,7 @@ cargo publish
 
 ### 清理和重建
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```bash
 # 清理构建缓存
@@ -795,7 +795,7 @@ cargo build
 
 ### 依赖问题
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```bash
 # 查看依赖冲突
@@ -810,7 +810,7 @@ cargo tree -p problematic_crate
 
 ### 构建问题
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```bash
 # 详细输出
@@ -831,7 +831,7 @@ cargo build --target <target>
 
 ### 反例 1: 依赖版本冲突
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **错误示例**:
 
@@ -849,7 +849,7 @@ other = "2.0"  # 内部依赖 tokio 1.5  ❌ 可能冲突
 
 ### 反例 2: 将 dev-dependencies 用于生产
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **错误示例**:
 
@@ -1152,16 +1152,16 @@ let gamma = f64::consts::EULER_GAMMA;
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Wikipedia - Build Automation]**
-> **[来源: Cargo Book]**
-> **[来源: Rust Reference - Cargo]**
-> **[来源: crates.io Documentation]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Wikipedia - Build Automation](https://en.wikipedia.org/wiki/Build_Automation)**
+> **来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)**
+> **来源: [Rust Reference - Cargo](https://doc.rust-lang.org/cargo/)**
+> **来源: [crates.io Documentation](https://crates.io/)**
 
 ---

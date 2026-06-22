@@ -68,15 +68,15 @@
 
 ## 🎯 决策图网概述 {#-决策图网概述}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **决策图网 (Decision Graph Network)** 是一种结构化的决策支持工具，通过树状结构和图网络展示不同场景下的技术选择路径。
 
 ### 核心属性
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **结构化** - 树状结构组织决策路径
 2. **场景化** - 针对不同场景提供决策
@@ -85,9 +85,9 @@
 
 ### 应用场景
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - 快速定位合适的技术方案
 - 避免技术选型错误
@@ -98,7 +98,7 @@
 
 ## 🚀 核心决策流程 {#-核心决策流程}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 graph TD
@@ -134,13 +134,13 @@ graph TD
 
 ## 📦 模块化决策树 {#-模块化决策树}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 所有权与借用决策树
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 graph TD
@@ -178,9 +178,9 @@ graph TD
 
 ### 2. 类型系统决策树
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 graph TD
@@ -206,9 +206,9 @@ graph TD
 
 ### 3. 控制流决策树
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 graph TD
@@ -239,9 +239,9 @@ graph TD
 
 ### 4. 异步编程决策树
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 graph TD
@@ -274,9 +274,9 @@ graph TD
 
 ### 5. Pin 使用场景决策树
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 graph TD
@@ -309,7 +309,7 @@ graph TD
 
 ### 6. 表达能力边界决策树
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```mermaid
 graph TD
@@ -348,11 +348,11 @@ graph TD
 
 ## 🔧 技术选型决策树 {#-技术选型决策树}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 集合类型选择
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```mermaid
 graph TD
@@ -388,7 +388,7 @@ graph TD
 
 ### 错误处理策略选择
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```mermaid
 graph TD
@@ -422,7 +422,7 @@ graph TD
 
 ### 并发模型选择
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```mermaid
 graph TD
@@ -457,7 +457,7 @@ graph TD
 
 ### 序列化库选择
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```mermaid
 graph TD
@@ -487,7 +487,7 @@ graph TD
 
 ### Web框架选择
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```mermaid
 graph TD
@@ -524,7 +524,7 @@ graph TD
 
 ### 数据库访问选择
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```mermaid
 graph TD
@@ -564,11 +564,11 @@ graph TD
 
 ## 🐛 调试决策树 {#-调试决策树}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 编译错误调试
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```mermaid
 graph TD
@@ -603,7 +603,7 @@ graph TD
 
 ### 运行时错误调试
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```mermaid
 graph TD
@@ -636,7 +636,7 @@ graph TD
 
 ### 性能问题调试
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```mermaid
 graph TD
@@ -669,7 +669,7 @@ graph TD
 
 ### 内存问题调试
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```mermaid
 graph TD
@@ -706,11 +706,11 @@ graph TD
 
 ## ⚡ 优化决策树 {#-优化决策树}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### CPU优化决策树
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```mermaid
 graph TD
@@ -747,7 +747,7 @@ graph TD
 
 ### 内存优化决策树
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```mermaid
 graph TD
@@ -782,7 +782,7 @@ graph TD
 
 ### I/O优化决策树
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```mermaid
 graph TD
@@ -816,7 +816,7 @@ graph TD
 
 ### 编译优化决策树
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```mermaid
 graph TD
@@ -853,11 +853,11 @@ graph TD
 
 ## 📚 学习路径决策树 {#-学习路径决策树}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 新手学习路径
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```mermaid
 graph TD
@@ -897,7 +897,7 @@ graph TD
 
 ### 有经验开发者路径
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```mermaid
 graph TD
@@ -940,7 +940,7 @@ graph TD
 
 ### 专项技能提升路径
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```mermaid
 graph TD
@@ -986,11 +986,11 @@ graph TD
 
 ## 📊 决策矩阵总结 {#-决策矩阵总结}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 快速决策参考
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 | 需求场景 | Rust 1.93 推荐方案 | 替代方案 | 性能影响 | 安全影响 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -1007,39 +1007,39 @@ graph TD
 
 ## 🔗 相关文档 {#-相关文档}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 设计机制论证
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 - [DESIGN_MECHANISM_RATIONALE](../research_notes/10_design_mechanism_rationale.md) - Pin 堆/栈区分、设计机制论证
 - [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](../research_notes/10_theoretical_and_argumentation_system_architecture.md) - 理论体系架构
 
 ### 表达能力与边界
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 - [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../research_notes/10_language_semantics_expressiveness.md) - 表达能力边界
 - [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](../research_notes/10_safe_decidable_mechanisms_overview.md) - 安全可判定机制
 
 ### 证明与安全
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - [04_proof_graph_network.md](./04_proof_graph_network.md) - 证明图网详细文档
 - [10_proof_index.md](../research_notes/10_proof_index.md) - 形式化证明索引
 
 ### 分布式与工作流决策树（formal_methods 独立）
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - [DISTRIBUTED_ARCHITECTURE_DECISION_TREE](../research_notes/10_distributed_architecture_decision_tree.md) - 分布式架构选型（Saga/CQRS/熔断器）
 - WORKFLOW_ENGINE_DECISION_TREE - 工作流引擎选型（Temporal/自研/状态机）
 
 ### 相关文档
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - [04_thinking_representation_methods.md](./04_thinking_representation_methods.md) - 思维表征方式
 - [04_mind_map_collection.md](./04_mind_map_collection.md) - 思维导图集合
@@ -1055,13 +1055,13 @@ graph TD
 
 ## Rust 1.95+ 思维表征更新
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 > **适用版本**: Rust 1.96.0+
 
 ### 新增思维表征
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 Rust 新特性可扩展思维表征方式：
 
@@ -1073,7 +1073,7 @@ Rust 新特性可扩展思维表征方式：
 
 ### 示例
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 `
 ust
@@ -1090,20 +1090,20 @@ ust
 
 ## Rust 1.95+ 持续更新更新
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.95+更新要点
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 本文档已针对 **Rust 1.95+** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -1114,7 +1114,7 @@ ust
 
 #### 代码示例更新
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 本文档中的所有Rust代码示例均已：
 
@@ -1160,24 +1160,24 @@ ust
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: Wikipedia - Network Programming]**
-> **[来源: Tokio Documentation]**
-> **[来源: Rust Reference - std::net]**
-> **[来源: IEEE - Network Protocols]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Wikipedia - Network Programming](https://en.wikipedia.org/wiki/Network_Programming)**
+> **来源: [Tokio Documentation](https://tokio.rs/)**
+> **来源: [Rust Reference - std::net](https://doc.rust-lang.org/reference/)**
+> **来源: [IEEE - Network Protocols](https://standards.ieee.org/)**
 
 ---

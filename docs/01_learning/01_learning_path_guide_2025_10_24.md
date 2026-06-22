@@ -40,13 +40,13 @@
 
 ## 🗺️ 推荐学习路径
 >
-> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Educational Technology]** · **[来源: Wikipedia - Spiral Curriculum]** · **[来源: ACM - CS Curriculum Guidelines]** · **[来源: IEEE - Learning Outcome Standards]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Educational Technology](https://en.wikipedia.org/wiki/Educational_Technology)** · **来源: [Wikipedia - Spiral Curriculum](https://en.wikipedia.org/wiki/Spiral_Curriculum)** · **[来源: ACM - CS Curriculum Guidelines]** · **[来源: IEEE - Learning Outcome Standards]**
 
 ### 路径 1: 初学者 (4-6 周)
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 C01 (所有权) → C02 (类型) → C03 (控制流)
@@ -56,9 +56,9 @@ C01 (所有权) → C02 (类型) → C03 (控制流)
 
 ### 路径 2: 进阶开发者 (6-8 周)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 C04 (泛型) → C05 (并发) → C06 (异步)
@@ -68,7 +68,7 @@ C04 (泛型) → C05 (并发) → C06 (异步)
 
 ### 路径 3: 系统程序员 (8-12 周)
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```text
 C07 (进程) → C08 (算法) → C10 (网络) → C12 (WASM)
@@ -78,7 +78,7 @@ C07 (进程) → C08 (算法) → C10 (网络) → C12 (WASM)
 
 ### 路径 4: Rust 1.95/1.96 特性专题 (2-3 周)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```text
 第1周: 核心新特性
@@ -105,7 +105,7 @@ C07 (进程) → C08 (算法) → C10 (网络) → C12 (WASM)
 
 ### 阶段 1: 快速上手 (第 1-2 天)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | 特性 | 难度 | 学习资源 | 实践目标 |
 |------|------|----------|----------|
@@ -346,13 +346,13 @@ async fn use_async_fn_trait() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

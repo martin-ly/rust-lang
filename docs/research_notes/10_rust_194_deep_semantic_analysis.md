@@ -69,13 +69,13 @@
 
 ## 1. array_windows - 数组窗口迭代的语义革命
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 形式化定义
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 pub fn array_windows<const N: usize>(&self) -> ArrayWindows<'_, T, N>
@@ -87,9 +87,9 @@ where
 
 ### 1.2 与 windows() 的语义对比
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 维度 | `windows(n: usize)` (1.93) | `array_windows<const N: usize>()` (1.94) | 语义影响 |
 |------|---------------------------|----------------------------------------|----------|
@@ -100,9 +100,9 @@ where
 
 ### 1.3 类型系统影响
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 1.93 - 动态大小，无法解构
@@ -127,9 +127,9 @@ array_windows: &[T] → Iterator<Item = &[T; N]>  (N: 编译期常量)
 
 ### 1.4 内存安全保证
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定理**: `array_windows` 保证永远不会越界。
 
@@ -141,15 +141,15 @@ array_windows: &[T] → Iterator<Item = &[T; N]>  (N: 编译期常量)
 
 ### 1.5 实际应用模式
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 模式1: 滑动窗口检测
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 /// 检测ABBA回文模式
@@ -181,9 +181,9 @@ mod tests {
 
 #### 模式2: 数值微分
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 /// 计算离散微分 (相邻元素差值)
@@ -196,9 +196,9 @@ fn discrete_derivative(data: &[f64]) -> Vec<f64> {
 
 #### 模式3: 移动平均
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 /// 计算N点移动平均
@@ -211,9 +211,9 @@ fn moving_average<const N: usize>(data: &[f64]) -> Vec<f64> {
 
 ### 1.6 性能分析
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // benchmarks
@@ -248,7 +248,7 @@ fn benchmark_windows(c: &mut Criterion) {
 
 ### 2.1 类型定义与语义
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 pub enum ControlFlow<B, C = ()> {
@@ -264,7 +264,7 @@ pub enum ControlFlow<B, C = ()> {
 
 ### 2.2 与 Option/Result 的语义对比
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 | 类型 | 语义焦点 | 适用场景 | 代数结构 |
 |------|---------|----------|----------|
@@ -274,7 +274,7 @@ pub enum ControlFlow<B, C = ()> {
 
 ### 2.3 代数性质
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **ControlFlow 是一个 Bifunctor**:
 
@@ -304,11 +304,11 @@ where
 
 ### 2.4 实际应用模式
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 #### 模式1: 提前搜索终止
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 use std::ops::ControlFlow;
@@ -336,7 +336,7 @@ fn find_first_v2<T>(items: &[T], predicate: impl Fn(&T) -> bool) -> Option<&T> {
 
 #### 模式2: 带状态累积的提前终止
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 /// 验证所有元素，返回第一个错误及其索引
@@ -355,7 +355,7 @@ fn validate_all<T, E>(
 
 #### 模式3: 嵌套迭代控制
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 /// 二维搜索，找到目标立即终止所有循环
@@ -374,7 +374,7 @@ fn search_2d<T: Eq>(matrix: &[Vec<T>], target: &T) -> Option<(usize, usize)> {
 
 ### 2.5 与异步结合
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use std::ops::ControlFlow;
@@ -408,11 +408,11 @@ where T: Clone
 
 ### 3.1 API演进分析
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 #### 1.93 API (基础)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 impl<T, F: FnOnce() -> T> LazyCell<T, F> {
@@ -431,7 +431,7 @@ impl<T, F: FnOnce() -> T> Deref for LazyCell<T, F> {
 
 #### 1.94 API (完善)
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 impl<T, F> LazyCell<T, F> {
@@ -448,7 +448,7 @@ impl<T, F> LazyCell<T, F> {
 
 ### 3.2 语义分析
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 方法 | 触发初始化 | 返回类型 | 使用场景 |
 |------|-----------|----------|----------|
@@ -459,7 +459,7 @@ impl<T, F> LazyCell<T, F> {
 
 ### 3.3 实际应用模式
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 #### 模式1: 条件初始化检查
 
@@ -813,27 +813,27 @@ include = [
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-> **[来源: Rust Reference]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-> **[来源: Rust Standard Library]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

@@ -23,7 +23,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [Rust vs Java：全面对比分析](#rust-vs-java全面对比分析)
   - [目录](#目录)
@@ -76,7 +76,7 @@
 
 ## 概述
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Rust 和 Java 代表了两种截然不同的内存管理和运行时哲学：
 
@@ -85,7 +85,7 @@ Rust 和 Java 代表了两种截然不同的内存管理和运行时哲学：
 
 ### 历史与定位
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 方面 | Java | Rust |
 |------|------|------|
@@ -101,7 +101,7 @@ Rust 和 Java 代表了两种截然不同的内存管理和运行时哲学：
 
 ### Java 垃圾回收
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 Java 依赖自动垃圾回收机制管理堆内存：
 
@@ -150,7 +150,7 @@ try (FileInputStream fis = new FileInputStream("file.txt")) {
 
 ### Rust 所有权系统
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 Rust 在编译期通过所有权系统管理内存：
 
@@ -182,7 +182,7 @@ fn calculate_length(s: &String) -> usize {
 
 ### 对比分析
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | 特性 | Java GC | Rust 所有权 |
 |------|---------|-------------|
@@ -199,7 +199,7 @@ fn calculate_length(s: &String) -> usize {
 
 ### 测试环境
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 - **CPU**: AMD Ryzen 9 5900X
 - **内存**: 32GB DDR4-3600
@@ -209,7 +209,7 @@ fn calculate_length(s: &String) -> usize {
 
 ### 计算性能
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 测试项目 | Java (JIT预热后) | Rust | 说明 |
 |----------|-----------------|------|------|
@@ -221,7 +221,7 @@ fn calculate_length(s: &String) -> usize {
 
 ### 内存性能
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 测试项目 | Java | Rust | 说明 |
 |----------|------|------|------|
@@ -233,7 +233,7 @@ fn calculate_length(s: &String) -> usize {
 
 ### Web 服务性能
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```
 测试：REST API (JSON CRUD)
@@ -255,7 +255,7 @@ Rust (Actix-web):
 
 ### Java 内存模型
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```
 ┌─────────────────────────────────────┐
@@ -297,7 +297,7 @@ public class MemoryManagement {
 
 ### Rust 内存布局
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```
 ┌─────────────────────────────────────┐
@@ -346,11 +346,11 @@ struct Packet {
 
 ### 内存泄漏对比
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 #### Java 内存泄漏
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```java
 // 常见的 Java 内存泄漏模式
@@ -381,7 +381,7 @@ threadLocal.set(new byte[1024 * 1024]);
 
 #### Rust 内存泄漏
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 // Rust 内存泄漏（较少见，需要显式代码）
@@ -423,7 +423,7 @@ fn forget_leak() {
 
 ### Java 并发
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 Java 提供丰富的并发工具：
 
@@ -476,7 +476,7 @@ public class JavaConcurrency {
 
 ### Rust 并发
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 Rust 的所有权系统提供编译期并发安全：
 
@@ -541,7 +541,7 @@ async fn async_example() {
 
 ### 并发安全性对比
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | 特性 | Java | Rust |
 |------|------|------|
@@ -557,7 +557,7 @@ async fn async_example() {
 
 ### Java 类型系统
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```java
 // Java 泛型（类型擦除）
@@ -606,7 +606,7 @@ public class NullProblem {
 
 ### Rust 类型系统
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 // Rust 泛型（单态化）
@@ -671,7 +671,7 @@ fn use_option() {
 
 ### 类型系统对比
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 特性 | Java | Rust |
 |------|------|------|
@@ -688,7 +688,7 @@ fn use_option() {
 
 ### Java 生态系统
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | 领域 | 主流框架/库 | 成熟度 |
 |------|------------|--------|
@@ -720,7 +720,7 @@ class HelloController {
 
 ### Rust 生态系统
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 | 领域 | 主流框架/库 | 成熟度 |
 |------|------------|--------|
@@ -1136,13 +1136,13 @@ public class NativeLib {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---

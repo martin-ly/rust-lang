@@ -7,7 +7,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: TRPL]** · **[来源: Rust Standard Library]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [01 顺序模式 (Sequence) - 完整形式化语义](#01-顺序模式-sequence---完整形式化语义)
   - [目录](#目录)
@@ -57,17 +57,17 @@
 
 ## 1. 引言
 >
-> **[来源: Rust Reference]** · **[来源: TRPL]** · **[来源: Rust Standard Library]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 顺序模式（Sequence）是工作流控制流模式中最基础、最核心的模式。它定义了活动之间的最基本依赖关系：一个活动必须在另一个活动完成之后才能开始。尽管概念简单，但顺序模式是所有复杂工作流的构建基石。
 
-> [来源: Workflow Patterns Initiative]
+> 来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)
 
 在 Rust 编程语言中，顺序执行不仅是默认的控制流语义，更是通过所有权（Ownership）和移动语义（Move Semantics）在类型系统层面被强制保证的。Rust 编译器会拒绝任何试图在值被产生之前使用它的代码，这使得顺序模式在 Rust 中获得了编译期形式化验证的能力。
 
 ### 1.1 历史背景
 
-> [来源: van der Aalst et al. 2003]
+> 来源: [van der Aalst et al. 2003](https://www.workflowpatterns.com/)
 
 顺序模式最早由 Wil van der Aalst 等人在 "Workflow Patterns" (2003) 中作为第一个控制流模式系统定义。它是所有工作流语言的原始构造，可以追溯到早期的流程图符号和结构化程序设计理论。在程序语言理论中，顺序执行对应于顺序组合（Sequential Composition）算子，由 Hoare 在 CSP 和 Dijkstra 在最弱前置条件演算中形式化。
 
@@ -79,7 +79,7 @@
 
 ### 2.1 概念定义
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **顺序模式** 是一个控制流构造，它将两个或多个活动按照严格的先后次序连接，其中：
 
@@ -95,7 +95,7 @@ Activity ::= atomic_action | Sequence | Parallel | Choice
 
 ### 2.2 核心语义
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **执行语义**:
 
@@ -123,11 +123,11 @@ $$
 
 ### 2.3 形式化表示
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 #### 2.3.1 状态机表示
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 $$
 \begin{aligned}
@@ -153,7 +153,7 @@ stateDiagram-v2
 
 #### 2.3.2 流程代数表示 (CSP 风格)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 $$
 \text{Sequence}(A, B) = A \gg B
@@ -167,7 +167,7 @@ $$
 
 #### 2.3.3 Petri 网表示
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```mermaid
 flowchart LR
@@ -190,7 +190,7 @@ flowchart LR
 
 ### 3.1 BPMN 表示
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 在 BPMN 2.0 中，顺序模式使用**顺序流** (Sequence Flow) 表示：
 
@@ -216,7 +216,7 @@ flowchart LR
 
 ### 3.2 UML 活动图
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 在 UML 中，顺序模式是活动图的基本语义：
 
@@ -230,7 +230,7 @@ flowchart LR
 
 ### 3.3 WfMC 标准
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 工作流管理联盟 (WfMC) 将顺序模式定义为：
 
@@ -250,7 +250,7 @@ flowchart LR
 
 ### 4.1 CCS 表示
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **Calculus of Communicating Systems (CCS)**:
 
@@ -266,7 +266,7 @@ $$
 
 ### 4.2 CSP 表示
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **Communicating Sequential Processes (CSP)**:
 
@@ -283,7 +283,7 @@ $$
 
 ### 4.3 π-演算表示
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **Pi-Calculus**:
 
@@ -547,7 +547,7 @@ $$
 
 **结论**: A;B 满足活性。
 
-> [来源: van der Aalst 2003]
+> 来源: [van der Aalst 2003](https://www.workflowpatterns.com/)
 
 ### 6.2 安全性 (Safety)
 >
@@ -670,7 +670,7 @@ fn compile(source: String) -> Result<Binary, CompileError> {
 }
 ```
 
-> [来源: Rust Reference - Compiler Pipeline]
+> 来源: [Rust Reference - Compiler Pipeline](https://doc.rust-lang.org/reference/)
 
 每个阶段必须等待前一阶段完成，且前一阶段的输出（所有权）被移动到下一阶段。
 
@@ -802,8 +802,8 @@ let nested = sequence(
 
 在 Rust 中，顺序模式不仅是语言的基本控制流语义，更是通过所有权和移动语义在编译期获得形式化验证。Rust 编译器拒绝任何破坏顺序约束的代码，使得顺序执行的正确性从运行时检查前移至编译期保证。
 
-> [来源: Rust Reference - Ownership]
-> [来源: TRPL Ch. 4 - Ownership]
+> 来源: [Rust Reference - Ownership](https://doc.rust-lang.org/reference/)
+> 来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)
 
 ---
 
@@ -842,16 +842,16 @@ let nested = sequence(
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Design Pattern]**
-> **[来源: Rust API Guidelines]**
-> **[来源: Gang of Four - Design Patterns]**
-> **[来源: ACM - Software Design Patterns]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
-> **[来源: Workflow Patterns Initiative]**
-> **[来源: van der Aalst et al. 2003]**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
+> **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)**
+> **来源: [van der Aalst et al. 2003](https://www.workflowpatterns.com/)**
 
 ---
 

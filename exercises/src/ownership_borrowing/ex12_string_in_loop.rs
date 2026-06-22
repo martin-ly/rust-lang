@@ -33,7 +33,7 @@ mod tests {
     #[test]
     fn test_build_greetings() {
         let names = vec!["Alice", "Bob", "Carol"];
-        let greetings = build_greetings(&names.iter().copied().collect::<Vec<_>>());
+        let greetings = build_greetings(&names.to_vec());
         assert_eq!(
             greetings,
             vec!["Hello, Alice!", "Hello, Bob!", "Hello, Carol!"]

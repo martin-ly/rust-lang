@@ -11,7 +11,7 @@
 
 ## 目录
 
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Rust 应用分析论证视图](#rust-应用分析论证视图)
   - [目录](#目录)
@@ -45,7 +45,7 @@
 
 ## 应用场景选型决策树
 
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 应用类型？
@@ -65,7 +65,7 @@
 
 ## CLI 工具
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 应用场景 | 技术选型 | 论证依据 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -81,7 +81,7 @@
 
 ## Web 服务
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 应用场景 | 技术选型 | 论证依据 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -98,7 +98,7 @@
 
 ## 系统编程
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 应用场景 | 技术选型 | 论证依据 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -113,7 +113,7 @@
 
 ## 嵌入式
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 应用场景 | 技术选型 | 论证依据 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -128,7 +128,7 @@
 
 ## 分布式系统
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 应用场景 | 技术选型 | 论证依据 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -143,7 +143,7 @@
 
 ## 数据科学
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 应用场景 | 技术选型 | 论证依据 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -159,7 +159,7 @@
 
 ## 游戏引擎
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 应用场景 | 技术选型 | 论证依据 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -175,7 +175,7 @@
 
 ## 区块链与智能合约
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 应用场景 | 技术选型 | 论证依据 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -191,7 +191,7 @@
 
 ## WASM 与跨平台
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 应用场景 | 技术选型 | 论证依据 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -322,7 +322,7 @@ flowchart LR
 
 ### 新增思维表征
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 Rust 新特性可扩展思维表征方式：
 
@@ -334,7 +334,7 @@ Rust 新特性可扩展思维表征方式：
 
 ### 示例
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 // array_windows 的思维导图节点
@@ -357,13 +357,13 @@ Rust 新特性可扩展思维表征方式：
 
 ### 本文档的Rust 1.95+更新要点
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 本文档已针对 **Rust 1.95+** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -374,7 +374,7 @@ Rust 新特性可扩展思维表征方式：
 
 #### 代码示例更新
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 本文档中的所有Rust代码示例均已：
 
@@ -384,7 +384,7 @@ Rust 新特性可扩展思维表征方式：
 
 #### 相关文档
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查（已归档）
@@ -405,18 +405,18 @@ Rust 新特性可扩展思维表征方式：
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Wikipedia - Type System]**
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ---

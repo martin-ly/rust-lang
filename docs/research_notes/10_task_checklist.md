@@ -81,7 +81,7 @@
 
 ## 🎯 清单说明 {#-清单说明}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档将研究计划转化为具体的可执行任务，帮助研究者系统化地推进研究工作。
 
@@ -102,13 +102,13 @@
 
 ## 📚 高优先级任务 {#-高优先级任务}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 所有权模型形式化
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **文档**: [10_ownership_model.md](./formal_methods/10_ownership_model.md)
 **优先级**: 🔴 高
@@ -116,9 +116,9 @@
 
 #### 理论基础完善
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [x] 补充线性类型系统的详细说明 ✅
 - [x] 添加分离逻辑的相关内容 ✅
@@ -127,9 +127,9 @@
 
 #### 形式化定义
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [x] 完善所有权转移的完整形式化定义 ✅
 - [x] 添加所有权规则的形式化表示 ✅
@@ -138,9 +138,9 @@
 
 #### 代码示例
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [x] 添加更多所有权转移的示例 ✅
 - [x] 添加复杂场景的代码示例 ✅
@@ -149,9 +149,9 @@
 
 #### 证明工作
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [x] 完成内存安全的形式化证明 ✅
 - [x] 完成所有权唯一性的证明 ✅
@@ -162,9 +162,9 @@
 
 ### 借用检查器证明
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **文档**: [10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md)
 **优先级**: 🔴 高
@@ -172,9 +172,9 @@
 
 #### 理论基础完善 {#理论基础完善-1}
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [x] 补充借用规则的理论基础 ✅
 - [x] 添加数据竞争的形式化定义 ✅
@@ -183,9 +183,9 @@
 
 #### 形式化定义 {#形式化定义-1}
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [x] 完善借用规则的完整形式化定义 ✅
 - [x] 添加不可变借用的形式化 ✅
@@ -194,7 +194,7 @@
 
 #### 代码示例 {#代码示例-1}
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 - [x] 添加借用规则的示例 ✅
 - [x] 添加数据竞争的场景示例 ✅
@@ -203,7 +203,7 @@
 
 #### 证明工作 {#证明工作-1}
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 - [x] 完成数据竞争自由的证明 ✅
 - [x] 完成借用规则正确性的证明 ✅
@@ -214,7 +214,7 @@
 
 ### 生命周期形式化
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **文档**: 10_lifetime_formalization.md
 **优先级**: 🔴 高
@@ -252,7 +252,7 @@
 
 ### 类型系统基础
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **文档**: [10_type_system_foundations.md](./type_theory/10_type_system_foundations.md)
 **优先级**: 🔴 高
@@ -294,7 +294,7 @@
 
 ### 异步状态机形式化
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **文档**: [10_async_state_machine.md](./formal_methods/10_async_state_machine.md)
 **优先级**: 🟡 中
@@ -332,7 +332,7 @@
 
 ### Trait 系统形式化
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **文档**: [10_trait_system_formalization.md](./type_theory/10_trait_system_formalization.md)
 **优先级**: 🟡 中
@@ -370,7 +370,7 @@
 
 ### 性能基准测试
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **文档**: [10_performance_benchmarks.md](./experiments/10_performance_benchmarks.md)
 **优先级**: 🟡 中
@@ -624,13 +624,13 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

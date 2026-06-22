@@ -41,7 +41,7 @@
 
 ## 概念族谱概览
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 mindmap
@@ -117,11 +117,11 @@ mindmap
 
 ## 核心概念详解
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 工作流定义语言
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 标准 | 特点 | 适用场景 |
 |------|------|----------|
@@ -393,21 +393,21 @@ impl EventDrivenWorkflow {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Mind Map]**
+> **来源: [Wikipedia - Mind Map](https://en.wikipedia.org/wiki/Mind_Map)**
 
-> **[来源: Wikipedia - Concept Map]**
+> **来源: [Wikipedia - Concept Map](https://en.wikipedia.org/wiki/Concept_Map)**
 
 > **[来源: ACM - Knowledge Visualization]**
 
 > **[来源: Tony Buzan - Mind Mapping]**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

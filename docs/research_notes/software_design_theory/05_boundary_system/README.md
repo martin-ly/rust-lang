@@ -13,7 +13,7 @@
 
 ## 宗旨
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本目录提供软件设计理论体系的三维边界分析。
 **层次推进**：先读本 README 与 Def B1–B3，再查各矩阵决策树，
@@ -27,7 +27,7 @@
 
 ## 形式化定义
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 设 $D$ 为设计模式或执行模型，$B_s$、$B_p$、$B_e$ 分别为安全、支持、表达边界函数（定义见各矩阵文档）：
 
@@ -49,7 +49,7 @@
 
 ## 文档索引
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文档 | 内容 |
 | :--- | :--- |
@@ -61,7 +61,7 @@
 
 ## 三维边界快速参考
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 维度 | 取值 | 含义 |
 | :--- | :--- | :--- |
@@ -71,7 +71,7 @@
 
 ## 使用流程
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. 查模式：在 [04_boundary_matrix](../01_design_patterns_formal/04_boundary_matrix.md) 或对应模式文档
 2. 判安全：用 [safe_unsafe_matrix](./10_safe_unsafe_matrix.md) 决策树
@@ -82,7 +82,7 @@
 
 ## 快速决策
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 问题 | 查文档 |
 | :--- | :--- |
@@ -95,7 +95,7 @@
 
 ## 模式选取决策依据（实质指南）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 需求类型 | 决策依据 | 推荐矩阵 |
 | :--- | :--- | :--- |
@@ -111,7 +111,7 @@
 
 ## 模式选取与边界判定完整示例（实质内容）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **场景**：需跨平台 UI 组件族（按钮、文本框）；运行时根据平台选择。
 
@@ -129,11 +129,11 @@
 
 ## 场景化 Safe 决策示例（实质内容）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 示例 1：需全局唯一配置
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **需求**：应用启动时加载配置，全局访问。
 
@@ -143,7 +143,7 @@
 
 ### 示例 2：需跨线程共享缓存
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **需求**：多线程可读共享缓存，偶有更新。
 
@@ -153,7 +153,7 @@
 
 ### 示例 3：需 FFI 调用 C 库
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **需求**：调用 C 的 `malloc`/`free`。
 
@@ -176,13 +176,13 @@
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -225,11 +225,11 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**

@@ -610,3 +610,27 @@ impl ConfigurationManager {
 >
 
 ---
+
+## 📚 模块 8: 国际化对齐
+
+> 本节按项目模板要求补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [The Cargo Book](https://doc.rust-lang.org/cargo/) | 权威来源 | Cargo 构建与发布 |
+| [Rust Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html) | 权威来源 | 平台支持 |
+
+### 8.2 学术来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Continuous Delivery](https://en.wikipedia.org/wiki/Continuous_delivery) | 权威来源 | 持续交付 |
+
+### 8.3 社区权威
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [cross](https://github.com/cross-rs/cross) | 权威来源 | 交叉编译工具 |
+| [cargo-dist docs](https://opensource.axo.dev/cargo-dist/) | 权威来源 | 发布分发 |

@@ -38,13 +38,13 @@
 
 ## 🗺️ 7 条定制化学习路径
 >
-> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Learning Path]** · **[来源: Wikipedia - Curriculum Design]** · **[来源: ACM - Computing Education Research]** · **[来源: IEEE - Competency Frameworks]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Learning Path](https://en.wikipedia.org/wiki/Learning_Path)** · **来源: [Wikipedia - Curriculum Design](https://en.wikipedia.org/wiki/Curriculum_Design)** · **[来源: ACM - Computing Education Research]** · **[来源: IEEE - Competency Frameworks]**
 
 ### 路径 1: 零基础入门
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 C01 → C02 → C03 → 项目
@@ -52,9 +52,9 @@ C01 → C02 → C03 → 项目
 
 ### 路径 2: 有编程经验
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 C01 → C04 → C05 → 项目
@@ -62,7 +62,7 @@ C01 → C04 → C05 → 项目
 
 ### 路径 3: 系统程序员
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```text
 C01 → C07 → C08 → C10
@@ -70,7 +70,7 @@ C01 → C07 → C08 → C10
 
 ### 路径 4: Web 开发者
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```text
 C01 → C06 → C10 → C12
@@ -78,7 +78,7 @@ C01 → C06 → C10 → C12
 
 ### 路径 5: Rust 1.95/1.96 特性探索者
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```text
 isqrt → get_disjoint_mut → async Fn → 综合项目
@@ -92,7 +92,7 @@ isqrt → get_disjoint_mut → async Fn → 综合项目
 
 ### C01 所有权与借用 → 1.96 并发安全
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **新特性关联**:
 
@@ -321,13 +321,13 @@ C07 高级系统编程 ────────────┘
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

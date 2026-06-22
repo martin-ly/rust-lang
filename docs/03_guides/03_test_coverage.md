@@ -45,7 +45,7 @@
 
 ## 1. 覆盖率工具选择
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Rust 生态有两个主流的覆盖率工具：
 
@@ -60,13 +60,13 @@ Rust 生态有两个主流的覆盖率工具：
 
 ## 2. cargo-tarpaulin 使用
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 安装
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 # 通过 cargo 安装
@@ -80,7 +80,7 @@ cargo tarpaulin --version
 
 ### 基本使用
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```bash
 # 生成文本报告
@@ -104,7 +104,7 @@ cargo tarpaulin --workspace --timeout 300
 
 ### 输出文件
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 格式 | 文件 | 用途 |
 |-----|------|------|
@@ -121,7 +121,7 @@ cargo tarpaulin --workspace --timeout 300
 
 ### 安装
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```bash
 # 安装 rustup 组件
@@ -133,7 +133,7 @@ cargo install cargo-llvm-cov --locked
 
 ### 基本使用
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```bash
 # 生成 HTML 报告
@@ -184,7 +184,7 @@ coverage:
 
 ### 与 Codecov 集成
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```yaml
 - name: Upload to Codecov
@@ -209,7 +209,7 @@ coverage:
 
 ### 当前项目状态
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 运行以下命令查看各 crate 覆盖率：
 
@@ -238,7 +238,7 @@ cargo tarpaulin --workspace --all-features --engine llvm --out html
 
 ### Q: tarpaulin 在 Windows 上失败？
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 A: 使用 `--engine llvm` 标志：
 
@@ -299,12 +299,12 @@ A: 这是已知问题。尝试：
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Code Coverage]**
-> **[来源: Wikipedia - Software Testing]**
+> **来源: [Wikipedia - Code Coverage](https://en.wikipedia.org/wiki/Code_Coverage)**
+> **来源: [Wikipedia - Software Testing](https://en.wikipedia.org/wiki/Software_Testing)**
 > **[来源: ACM - Test Coverage Metrics]**
 > **[来源: IEEE - Software Quality Standards]**
 > **[来源: Rust Book - Testing]**
-> **[来源: Rust Reference - Test Attributes]**
+> **来源: [Rust Reference - Test Attributes](https://doc.rust-lang.org/reference/attributes/testing.html)**
 > **[来源: Martin Fowler - Test Coverage]**
 
 ---

@@ -11,7 +11,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Cloud Computing]** · **[来源: Wikipedia - Kubernetes]** · **[来源: Tokio Documentation]** · **[来源: containerd Documentation]** · **[来源: Rust Async Working Group]** · **[来源: Wikipedia - Containerization]** · **[来源: ACM - Cloud Native Application Design]** · **[来源: IEEE - Microservices Architecture Standards]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Cloud Computing](https://en.wikipedia.org/wiki/Cloud_Computing)** · **来源: [Wikipedia - Kubernetes](https://en.wikipedia.org/wiki/Kubernetes)** · **来源: [Tokio Documentation](https://tokio.rs/)** · **[来源: containerd Documentation]** · **来源: [Rust Async Working Group](https://rust-lang.github.io/wg-async/)** · **来源: [Wikipedia - Containerization](https://en.wikipedia.org/wiki/Containerization)** · **[来源: ACM - Cloud Native Application Design]** · **[来源: IEEE - Microservices Architecture Standards]**
 
 - [Rust 云计算与容器开发完全指南](#rust-云计算与容器开发完全指南)
   - [目录](#目录)
@@ -81,19 +81,19 @@
 
 ## 1. 云原生 Rust 概述
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 Rust 在云原生领域的优势
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Rust 语言在云原生领域展现出独特的优势，使其成为构建基础设施软件的理想选择：
 
 #### 内存安全与性能
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust
 // Rust 的零成本抽象确保高性能
@@ -127,7 +127,7 @@ impl<T> ConnectionPool<T> {
 
 #### 并发模型
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 Rust 的所有权系统天然适合云原生环境的高并发需求：
 
@@ -152,11 +152,11 @@ pub async fn handle_requests(
 
 ### 1.2 与 Go 的对比
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 #### 性能对比
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 // Rust 的高性能 HTTP 服务
@@ -184,7 +184,7 @@ async fn handler() -> &'static str {
 
 #### 资源占用对比
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 | 指标 | Rust (Actix-web) | Go (Gin) | 差异 |
 |------|------------------|----------|------|
@@ -195,11 +195,11 @@ async fn handler() -> &'static str {
 
 ### 1.3 现有项目概览
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 #### Firecracker - AWS 的微型虚拟机
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 // Firecracker 的核心设计理念
@@ -228,7 +228,7 @@ impl Vmm {
 
 #### Linkerd2-proxy - 服务网格数据平面
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 // Linkerd2-proxy 的连接处理
@@ -253,11 +253,11 @@ impl Proxy {
 
 ## 2. 容器运行时
 
-> **[来源: Wikipedia - Container Runtime]** · **[来源: containerd Documentation]** · **[来源: Wikipedia - Docker]**
+> **来源: [Wikipedia - Container Runtime](https://en.wikipedia.org/wiki/Container_Runtime)** · **[来源: containerd Documentation]** · **来源: [Wikipedia - Docker](https://en.wikipedia.org/wiki/Docker)**
 
 ### 2.1 youki 容器运行时
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 youki 是使用 Rust 编写的 OCI 运行时，旨在替代 runc：
 
@@ -303,7 +303,7 @@ impl ContainerBuilder {
 
 ### 2.2 OCI 规范实现
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use serde::{Deserialize, Serialize};
@@ -350,7 +350,7 @@ pub fn load_spec(path: &Path) -> Result<Spec, SpecError> {
 
 ### 2.3 cgroups v2 实现
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use std::path::PathBuf;
@@ -439,7 +439,7 @@ impl CgroupV2 {
 
 ### 2.4 命名空间管理
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 use nix::sched::{clone, unshare, CloneFlags};
@@ -541,7 +541,7 @@ where
 
 ### 2.5 容器文件系统隔离
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 use nix::mount::{mount, umount, MsFlags};
@@ -625,7 +625,7 @@ pub fn pivot_rootfs(new_root: &Path, put_old: &Path) -> Result<(), MountError> {
 
 ### 3.1 kube-rs 客户端基础
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 kube-rs 是 Kubernetes 的官方 Rust 客户端：
 
@@ -654,7 +654,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 3.2 Operator 开发框架
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 use kube::runtime::controller::{Action, Controller};
@@ -718,7 +718,7 @@ pub async fn run(client: Client) -> Result<(), Error> {
 
 ### 3.3 CRD 定义与代码生成
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use kube::CustomResource;
@@ -785,7 +785,7 @@ pub enum DatabasePhase {
 
 ### 3.4 Controller 实现详解
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 use k8s_openapi::api::apps::v1::{Deployment, DeploymentSpec};
@@ -906,7 +906,7 @@ async fn ensure_service(
 
 ### 3.5 高级 API 操作
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 use kube::api::{DeleteParams, Patch, PatchParams, WatchEvent};
@@ -988,11 +988,11 @@ async fn delete_pod_with_grace_period(
 
 ## 4. 服务网格
 
-> **[来源: Wikipedia - Service Mesh]** · **[来源: Linkerd Documentation]** · **[来源: Istio Documentation]**
+> **来源: [Wikipedia - Service Mesh](https://en.wikipedia.org/wiki/Service_Mesh)** · **[来源: Linkerd Documentation]** · **[来源: Istio Documentation]**
 
 ### 4.1 Linkerd2-proxy 架构分析
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 Linkerd2-proxy 是 Linkerd 服务网格的数据平面代理：
 
@@ -1056,7 +1056,7 @@ impl InboundProxy {
 
 ### 4.2 mTLS 实现
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use rustls::{Certificate, PrivateKey, ServerConfig, ClientConfig};
@@ -1137,7 +1137,7 @@ impl RotatingIdentity {
 
 ### 4.3 流量管理
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use std::collections::HashMap;
@@ -1228,7 +1228,7 @@ impl<S> Layer<S> for TimeoutRetryLayer {
 
 ### 4.4 可观测性集成
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use opentelemetry::trace::{Tracer, SpanKind};
@@ -1331,7 +1331,7 @@ where
 
 ### 5.1 AWS Lambda Rust 运行时
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use lambda_runtime::{service_fn, LambdaEvent, Error};
@@ -1376,7 +1376,7 @@ async fn main() -> Result<(), Error> {
 
 ### 5.2 冷启动优化
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 use std::sync::OnceLock;
@@ -1442,7 +1442,7 @@ impl AppState {
 
 ### 5.3 函数即服务框架
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 use actix_web::{web, App, HttpResponse, HttpServer};
@@ -1523,11 +1523,11 @@ impl WasmRuntime {
 
 ## 6. 分布式系统
 
-> **[来源: Wikipedia - Distributed Computing]** · **[来源: Rust Async Working Group]** · **[来源: Wikipedia - CAP Theorem]**
+> **来源: [Wikipedia - Distributed Computing](https://en.wikipedia.org/wiki/Distributed_Computing)** · **来源: [Rust Async Working Group](https://rust-lang.github.io/wg-async/)** · **来源: [Wikipedia - CAP Theorem](https://en.wikipedia.org/wiki/CAP_Theorem)**
 
 ### 6.1 Raft 共识算法实现
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use std::collections::HashMap;
@@ -1747,7 +1747,7 @@ impl<T: StateMachine> RaftNode<T> {
 
 ### 6.2 服务发现
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 use std::collections::HashMap;
@@ -1882,7 +1882,7 @@ impl ConsulClient {
 
 ### 6.3 负载均衡
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -1988,7 +1988,7 @@ impl ConsistentHash {
 
 ### 6.4 断路器模式
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 use std::sync::atomic::{AtomicU64, Ordering};
@@ -2148,7 +2148,7 @@ where
 
 ### 7.1 OpenTelemetry 集成
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 use opentelemetry::trace::{Tracer, SpanKind, TraceContextExt};
@@ -2245,7 +2245,7 @@ where
 
 ### 7.2 Prometheus 指标
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 use prometheus::{Counter, Histogram, Gauge, Registry, Encoder, TextEncoder};
@@ -2372,7 +2372,7 @@ async fn metrics_endpoint() -> impl IntoResponse {
 
 ### 7.3 结构化日志
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use tracing::{info, warn, error, debug, span, Level, Instrument};
@@ -2464,7 +2464,7 @@ macro_rules! app_log {
 
 ### 7.4 健康检查与探针
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use std::collections::HashMap;
@@ -2594,7 +2594,7 @@ async fn startup_probe(State(registry): State<Arc<HealthRegistry>>) -> impl Into
 
 ### 8.1 微服务代码
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 // src/main.rs
@@ -2693,7 +2693,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 8.2 Dockerfile 多阶段构建
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```dockerfile
 # 构建阶段
@@ -2735,7 +2735,7 @@ ENTRYPOINT ["/app/my-service"]
 
 ### 8.3 Kubernetes 部署配置
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```yaml
 # k8s/namespace.yaml
@@ -2900,7 +2900,7 @@ spec:
 
 ### 8.4 Istio 服务网格配置
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```yaml
 # istio/gateway.yaml
@@ -3035,7 +3035,7 @@ spec:
 
 ### 8.5 Prometheus 监控告警
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```yaml
 # monitoring/servicemonitor.yaml
@@ -3115,7 +3115,7 @@ spec:
 
 ### 9.1 编译优化
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```toml
 # Cargo.toml 优化配置
@@ -3142,7 +3142,7 @@ linker = "rust-lld"
 
 ### 9.2 镜像大小优化
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```dockerfile
 # 多阶段构建优化版
@@ -3181,7 +3181,7 @@ ENTRYPOINT ["/app/my-app"]
 
 ### 9.3 启动时间优化
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 // 延迟初始化减少启动时间
@@ -3234,7 +3234,7 @@ impl Config {
 
 ### 10.1 GitHub Actions 工作流
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```yaml
 # .github/workflows/ci-cd.yaml
@@ -3386,7 +3386,7 @@ jobs:
 
 ### 10.2 容器镜像构建脚本
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```bash
 #!/bin/bash
@@ -3419,7 +3419,7 @@ echo "Build complete: ${REGISTRY}/${IMAGE_NAME}:${VERSION}"
 
 ### 10.3 安全扫描配置
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```yaml
 # .cargo/audit.toml
@@ -3473,7 +3473,7 @@ allow-registry = ["https://github.com/rust-lang/crates.io-index"]
 
 ### 推荐 crate
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | 用途 | Crate | 说明 |
 |------|-------|------|
@@ -3492,7 +3492,7 @@ allow-registry = ["https://github.com/rust-lang/crates.io-index"]
 
 ### 学习资源
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 - [Rust Cloud Native](https://rust-cloud-native.github.io/)
 - [Kube-rs 文档](https://docs.rs/kube/)
@@ -3526,13 +3526,13 @@ allow-registry = ["https://github.com/rust-lang/crates.io-index"]
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Cloud Computing]**
+> **来源: [Wikipedia - Cloud Computing](https://en.wikipedia.org/wiki/Cloud_Computing)**
 
-> **[来源: Wikipedia - Containerization]**
+> **来源: [Wikipedia - Containerization](https://en.wikipedia.org/wiki/Containerization)**
 
-> **[来源: Wikipedia - Microservices]**
+> **来源: [Wikipedia - Microservices](https://en.wikipedia.org/wiki/Microservices)**
 
-> **[来源: Wikipedia - Kubernetes]**
+> **来源: [Wikipedia - Kubernetes](https://en.wikipedia.org/wiki/Kubernetes)**
 
 > **[来源: IEEE - Microservices Architecture Standards]**
 
@@ -3546,49 +3546,49 @@ allow-registry = ["https://github.com/rust-lang/crates.io-index"]
 
 > **[来源: tonic.rs Documentation]**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages Survey]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design and Implementation]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM - Systems Programming Languages Survey](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI - Programming Language Design and Implementation](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Wikipedia - Type System]**
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Wikipedia - Type System]**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**

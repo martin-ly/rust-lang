@@ -74,7 +74,7 @@
 
 ## 🎯 研究目标 {#-研究目标}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本研究旨在深入分析 Rust 并发实现的性能特征，评估不同并发原语和模式的性能表现，包括：
 
@@ -85,9 +85,9 @@
 
 ### 核心问题
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **Rust 并发原语的性能特征是什么？**
 2. **不同并发模式的性能差异如何？**
@@ -95,9 +95,9 @@
 
 ### 预期成果
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - 建立并发性能基准测试套件
 - 识别并发性能瓶颈
@@ -107,13 +107,13 @@
 
 ## 📚 理论基础 {#-理论基础}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 形式化论证与实验衔接
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def CP1（并发实验验证）**：并发性能实验 $E$ 验证 [borrow_checker_proof](../../research_notes/formal_methods/10_borrow_checker_proof.md) T1、[async_state_machine](../../research_notes/formal_methods/10_async_state_machine.md) T6.2，当且仅当 $E$ 在观测下无数据竞争。
 
@@ -138,9 +138,9 @@
 
 ### 相关概念
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **并发性能（Concurrency Performance）**：评估并发程序在多核处理器上的执行效率和资源利用率。
 
@@ -153,9 +153,9 @@
 
 ### 理论背景
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **并发模型**：
 
@@ -168,13 +168,13 @@
 
 ## 🔬 实验设计 {#-实验设计}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 同步原语性能测试
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **测试目标**：比较不同同步原语的性能
 
@@ -194,9 +194,9 @@
 
 ### 2. 通道性能测试
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **测试目标**：评估不同通道实现的性能
 
@@ -215,7 +215,7 @@
 
 ### 3. 异步运行时性能测试
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **测试目标**：分析异步运行时的性能特征
 
@@ -234,7 +234,7 @@
 
 ### 4. 并发模式性能测试
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **测试目标**：评估不同并发模式的性能
 
@@ -259,7 +259,7 @@
 
 ### 示例 1：Mutex vs RwLock 性能测试
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust
 use std::sync::{Arc, Mutex, RwLock};
@@ -326,7 +326,7 @@ fn main() {
 
 ### 示例 2：通道性能测试
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
 use std::sync::mpsc;
@@ -390,7 +390,7 @@ fn unbounded_channel_benchmark() -> u128 {
 
 ### 示例 3：异步任务性能测试
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust,ignore
 use tokio::time::Instant;
@@ -428,7 +428,7 @@ async fn async_task_benchmark() {
 
 ### 1. 同步原语性能对比
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **测试环境**：
 
@@ -453,7 +453,7 @@ async fn async_task_benchmark() {
 
 ### 2. 通道性能对比
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **结果**：
 
@@ -471,7 +471,7 @@ async fn async_task_benchmark() {
 
 ### 结果分析模板
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 将 `cargo bench`（Mutex/RwLock/Atomic、mpsc/crossbeam、async 任务）的产出填入下表：
 
@@ -505,14 +505,14 @@ async fn async_task_benchmark() {
 
 ### 环境要求
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - **Rust**: 1.93.1+；**Tokio**：`tokio = { version = "1", features = ["full"] }`；**Criterion**：工作区已配置
 - 建议固定 CPU 频率、关闭节能；多线程 bench 需注意核心数与负载隔离
 
 ### 执行步骤
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 1. **同步原语**：运行 `mutex_benchmark`、`rwlock_benchmark`，以及 Atomic、Condvar 的 bench；记录 ITERATIONS/THREADS 与耗时。
 2. **通道**：运行 `channel_benchmark`、`unbounded_channel_benchmark`，若有 crossbeam 则一并对比；记录 MESSAGES 与延迟/吞吐。
@@ -527,7 +527,7 @@ async fn async_task_benchmark() {
 
 ### 性能优化建议
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 - **同步**：读多写少用 `RwLock`；简单标量用 `Atomic`；减少锁粒度与持锁时间。
 - **通道**：高吞吐优先 `crossbeam`；有背压需求用有界 `mpsc`；避免在热路径上 `clone` 大消息。
@@ -694,20 +694,20 @@ async fn async_task_benchmark() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
-> **[来源: Rust Reference - std::sync]**
-> **[来源: ACM - Concurrent Programming]**
-> **[来源: Wikipedia - Program Optimization]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [TRPL Ch. 16 - Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)**
+> **来源: [Rust Reference - std::sync](https://doc.rust-lang.org/std/sync/)**
+> **来源: [ACM - Concurrent Programming](https://dl.acm.org/)**
+> **来源: [Wikipedia - Program Optimization](https://en.wikipedia.org/wiki/Program_Optimization)**
 > **[来源: Criterion.rs Documentation]**
-> **[来源: ACM - Performance Engineering]**
-> **[来源: Rust Performance Book]**
+> **来源: [ACM - Performance Engineering](https://dl.acm.org/)**
+> **来源: [The Rust Performance Book](https://nnethercote.github.io/perf-book/)**
 
 ---

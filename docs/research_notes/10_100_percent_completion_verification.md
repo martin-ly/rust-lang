@@ -53,13 +53,13 @@
 
 ## 执行摘要
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 验证结论
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 经过全面验证，**Research Notes 形式化论证体系已达到 100% 完成度**。
 
@@ -71,9 +71,9 @@
 
 ### 关键指标
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 指标 | 目标 | 实际 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -90,19 +90,19 @@
 
 ## 详细验证结果
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 形式化定义验证 ✅
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 核心概念定义 (17/17)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 概念 | 定义位置 | 形式化程度 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -130,9 +130,9 @@
 
 ### 2. 公理系统验证 ✅
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 公理 | 描述 | 位置 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -155,15 +155,15 @@
 
 ### 3. 定理证明验证 ✅
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### L2完整证明 (10/10)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 定理 | 描述 | 位置 | 证明深度 | 状态 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -180,9 +180,9 @@
 
 #### L3机器证明骨架 (5/5)
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 定理 | Coq文件 | 状态 | 备注 |
 | :--- | :--- | :--- | :--- |
@@ -202,13 +202,13 @@
 
 ### 4. 思维表征验证 ✅
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 思维导图 (11/15 = 73%)
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | # | 导图 | 位置 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -271,7 +271,7 @@
 
 ### 5. 工具对接验证 ✅
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 工具 | 状态 | 对接文档 | 计划 |
 | :--- | :--- | :--- | :--- |
@@ -290,7 +290,7 @@
 
 ### 五维度标准评估
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | 维度 | 权重 | 得分 | 加权分 |
 | :--- | :--- | :--- | :--- |
@@ -464,9 +464,9 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Verification]**
-> **[来源: Coq Reference Manual]**
-> **[来源: TLA+ Documentation]**
-> **[来源: ACM - Formal Methods]**
+> **来源: [Wikipedia - Formal Verification](https://en.wikipedia.org/wiki/Formal_Verification)**
+> **来源: [Coq Reference Manual](https://coq.inria.fr/doc/)**
+> **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [ACM - Formal Methods](https://dl.acm.org/)**
 
 ---

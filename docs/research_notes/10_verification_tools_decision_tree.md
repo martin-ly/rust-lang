@@ -51,7 +51,7 @@
 
 ## 一、概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档提供系统化的 Rust 形式化验证工具选型决策树。
 根据项目需求、团队能力、时间预算等因素，帮助选择最适合的验证工具或工具组合。
@@ -60,13 +60,13 @@
 
 ## 二、快速决策表
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 按需求快速选择
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 你的需求 | 推荐工具 | 备选方案 |
 |----------|----------|----------|
@@ -80,9 +80,9 @@
 
 ### 2.2 按经验水平选择
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 经验水平 | 推荐起点 | 进阶路径 |
 |----------|----------|----------|
@@ -94,13 +94,13 @@
 
 ## 三、详细决策树
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 3.1 第一层：验证目标
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 你的主要验证目标是什么？
@@ -132,9 +132,9 @@
 
 ### 3.2 第二层：项目约束
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 项目约束条件？
@@ -157,9 +157,9 @@
 
 ### 3.3 第三层：团队能力
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 团队形式化方法经验？
@@ -185,13 +185,13 @@
 
 ## 四、场景化推荐
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 4.1 场景矩阵
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 场景 | 首要推荐 | 理由 | 预估投入 |
 |------|----------|------|----------|
@@ -205,11 +205,11 @@
 
 ### 4.2 典型决策路径
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 #### 路径 A：学术研究
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```text
 需求分析
@@ -226,7 +226,7 @@
 
 #### 路径 B：工业应用
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```text
 需求分析
@@ -445,20 +445,20 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Decision Tree]**
+> **来源: [Wikipedia - Decision Tree](https://en.wikipedia.org/wiki/Decision_Tree)**
 
 > **[来源: ACM - Decision Support Systems]**
 
 > **[来源: IEEE - Risk Analysis]**
 
-> **[来源: Rust API Guidelines]**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 
-> **[来源: Wikipedia - Formal Verification]**
+> **来源: [Wikipedia - Formal Verification](https://en.wikipedia.org/wiki/Formal_Verification)**
 
-> **[来源: Coq Reference Manual]**
+> **来源: [Coq Reference Manual](https://coq.inria.fr/doc/)**
 
-> **[来源: TLA+ Documentation]**
+> **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**
 
-> **[来源: ACM - Formal Methods]**
+> **来源: [ACM - Formal Methods](https://dl.acm.org/)**
 
 ---

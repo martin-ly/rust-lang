@@ -47,13 +47,13 @@
 
 ## 基础知识
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### Q1: 为什么 Rust 需要所有权系统？
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **A**: Rust 的所有权系统是为了在编译时保证内存安全，而不需要垃圾回收器。
 
@@ -80,7 +80,7 @@ drop(s);
 
 ### Q2: Copy trait 和 Clone trait 有什么区别？
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **A**:
 
@@ -122,7 +122,7 @@ struct Buffer { data: Vec<u8> }
 
 ### Q3: 什么时候使用引用，什么时候使用智能指针？
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **A**:
 
@@ -166,7 +166,7 @@ let large = Box::new([0u8; 1000000]);  // 大数组在堆上
 
 ### Q4: 为什么不能同时有可变借用和不可变借用？
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **A**: 为了防止数据竞争。考虑以下场景：
 
@@ -198,7 +198,7 @@ data.push(4);
 
 ### Q5: 如何实现自引用结构体？
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **A**: 使用 `Pin` 和 `PhantomPinned`：
 
@@ -248,7 +248,7 @@ impl SelfReferential {
 
 ### Q6: 生命周期省略的三条规则是什么？
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **A**:
 
@@ -283,7 +283,7 @@ fn return_part<'a, 'b: 'a>(x: &'a str, y: &'b str) -> &'a str {
 
 ### Q7: 'static 生命周期是什么意思？
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **A**: `'static` 表示整个程序生命周期：
 
@@ -329,7 +329,7 @@ fn good() -> &'static str {
 
 ### Q8: Rc 和 Arc 的区别是什么？
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **A**:
 
@@ -362,7 +362,7 @@ thread::spawn(move || {
 
 ### Q9: RefCell 和 Mutex 的区别是什么？
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **A**:
 
@@ -409,7 +409,7 @@ for _ in 0..10 {
 
 ### Q10: Send 和 Sync trait 有什么区别？
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **A**:
 
@@ -450,7 +450,7 @@ for _ in 0..10 {
 
 ### Q11: 如何避免死锁？
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **A**:
 
@@ -513,7 +513,7 @@ let write = data.write().unwrap();  // 等待所有读者完成
 
 ### Q12: RustBelt 是什么？
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **A**: RustBelt 是一个形式化框架，用于证明 Rust 的内存安全保证。
 
@@ -546,7 +546,7 @@ RustBelt 使用 Iris（高阶并发分离逻辑）证明：
 
 ### Q13: Coq 形式化证明有什么用？
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **A**: 提供机械验证的数学保证。
 
@@ -578,7 +578,7 @@ Qed.
 
 ### Q14: Miri 能检测什么？
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **A**: Miri 检测未定义行为（UB）：
 
@@ -626,7 +626,7 @@ unsafe {
 
 ### Q15: Kani 和 Miri 有什么区别？
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **A**:
 
@@ -663,7 +663,7 @@ fn test_abs() {
 
 ### Q16: 如何处理复杂的生命周期？
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **A**: 使用模式简化：
 
@@ -699,7 +699,7 @@ fn longest<'a, T: PartialEq>(x: &'a [T], y: &'a [T]) -> &'a [T] {
 
 ### Q17: 如何设计良好的 Rust API？
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **A**: 遵循以下原则：
 
@@ -792,15 +792,15 @@ pub enum MyError {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ---

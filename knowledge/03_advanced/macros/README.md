@@ -64,3 +64,30 @@
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+## 📚 模块 8: 国际化对齐
+
+> 本模块按项目模板补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 说明 |
+|:---|:---|
+| [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html) | 宏系统规范 |
+| [Rust Reference — Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html) | 过程宏规范 |
+| [Rust By Example — Macros](https://doc.rust-lang.org/rust-by-example/macros.html) | 宏示例 |
+
+### 8.2 学术/工业来源
+
+| 来源 | 说明 |
+|:---|:---|
+| [RFC 1584 — Macros Literal Matcher](https://rust-lang.github.io/rfcs/1584-macros-literal-matcher.html) | 宏字面量匹配 |
+
+### 8.3 社区资源
+
+| 来源 | 说明 |
+|:---|:---|
+| [The Little Book of Rust Macros](https://veykril.github.io/tlborm/) | 宏进阶教程 |
+| [Rust Cookbook — Macros](https://rust-lang-nursery.github.io/rust-cookbook/) | 宏模式 |
+

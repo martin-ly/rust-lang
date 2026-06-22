@@ -75,11 +75,11 @@
 
 ## 1. 工具链现状（权威版本）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 Rust编译器
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 | 组件 | 版本 | 发布日期 | 权威来源 |
 |------|------|---------|---------|
@@ -89,15 +89,15 @@
 
 ### 1.2 Rust 1.94核心特性（官方确认）
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### array_windows方法
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 > "Rust 1.94 adds `array_windows`, an iterating method for slices. It works just like `windows` but with a constant length, so the iterator items are `&[T; N]` rather than dynamically-sized `&[T]`."
 >
@@ -115,9 +115,9 @@ s.as_bytes().windows(4).any(|w| ...)
 
 #### LazyCell/LazyLock API稳定化
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **稳定化API列表**（官方发布说明）：
 
@@ -128,7 +128,7 @@ s.as_bytes().windows(4).any(|w| ...)
 
 #### AVX-512 FP16 Intrinsics
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **硬件支持矩阵**（多来源交叉验证）：
 
@@ -145,13 +145,13 @@ s.as_bytes().windows(4).any(|w| ...)
 
 ## 2. Tree Borrows权威论证
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 学术认可 [^5] [^20]
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Tree Borrows论文** (PLDI 2025 Distinguished Paper Award) [^20]：
 
@@ -169,9 +169,9 @@ DOI: 10.1145/3735592
 
 ### 2.2 Miri学术认可
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 > "We are pleased to announce that our paper 'Miri: Practical Undefined Behavior Detection for Rust' has been accepted at **POPL 2026**. Miri has come a long way since its first public release in 2017."
 >
@@ -189,15 +189,15 @@ DOI: 10.1145/3704904
 
 ### 2.3 Tree Borrows核心优势
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 实验数据（PLDI 2025）
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 > "实验结果显示，Tree Borrows比Stacked Borrows少拒绝54%的测试用例"
 > —— Villani et al., PLDI 2025 Distinguished Paper
@@ -226,11 +226,11 @@ DOI: 10.1145/3704904
 
 ## 3. Linux内核永久采用Rust [^13] [^18]
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 3.1 官方宣布
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **来源**: Linux Kernel Maintainer Summit 2025 [^13]
 **官方文档**: kernel.org Rust Support [^18]
@@ -245,9 +245,9 @@ DOI: 10.1145/3704904
 
 ### 3.2 关键里程碑
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **生产部署**:
 
@@ -268,7 +268,7 @@ DOI: 10.1145/3704904
 
 ### 3.3 Rust基金会安全计划 [^15]
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 > "The Rust Foundation's Security Initiative aims to strengthen the Rust programming language and its ecosystem through security-focused efforts."
 > —— **Rust Foundation**, 2026
@@ -281,7 +281,7 @@ DOI: 10.1145/3704904
 
 ### 3.4 供应链安全与CVE跟踪 [^23] [^24] [^25]
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 > "crates.io has implemented new security measures following the discovery of malicious packages in 2025."
 > —— **Rust Security Response WG**, December 2025
@@ -311,7 +311,7 @@ DOI: 10.1145/3704904
 
 ### 4.1 Google [^16]
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 > "Rust is the key to memory safety in Android. Our data shows that Rust code has approximately **1000x fewer vulnerabilities** than C/C++ code."
 > —— **Google Security Research**, December 2024
@@ -323,7 +323,7 @@ DOI: 10.1145/3704904
 
 ### 4.2 Microsoft [^17]
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 > "We are excited to share that we have started work on a project to integrate Rust into the Windows kernel."
 > —— **Microsoft Security Response Center**, January 2025
@@ -335,7 +335,7 @@ DOI: 10.1145/3704904
 
 ### 4.3 其他企业 [^14] [^19]
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **AWS** [^19]:
 > "Rust has become a critical part of AWS's infrastructure. We use Rust for performance-sensitive components across our services."
@@ -353,7 +353,7 @@ DOI: 10.1145/3704904
 
 ### 3.1 官方发布
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 > "Rust 1.85.0 stable brings the Rust 2024 edition, after it has been in development for about 2 years and available for testing on the nightly channel for the last several months."
 >
@@ -361,7 +361,7 @@ DOI: 10.1145/3704904
 
 ### 3.2 gen关键字（RFC #3513）
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 > "`gen` is a reserved keyword... `gen` blocks will provide a way to make it easier to write certain kinds of iterators. Reserving the keyword now will make it easier to stabilize `gen` blocks before the next edition."
 >
@@ -369,7 +369,7 @@ DOI: 10.1145/3704904
 
 ### 3.3 Edition 2024迁移实践
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **来自400+ crate大型项目经验**：
 
@@ -393,7 +393,7 @@ DOI: 10.1145/3704904
 
 ### 学术论文
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 [^1]: The Rust Programming Language Blog. "Announcing Rust 1.94.0." 2026-03-05. <https://blog.rust-lang.org/releases/latest/>
 
@@ -455,7 +455,7 @@ DOI: 10.1145/3704904
 
 ### 5.1 已对齐内容
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 | 特性 | 项目状态 | 权威来源验证 |
 |------|---------|-------------|
@@ -477,7 +477,7 @@ DOI: 10.1145/3704904
 
 ### 5.2 权威引用统计
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```
 引用类型统计
@@ -513,7 +513,7 @@ DOI: 10.1145/3704904
 
 ### 6.1 国际权威覆盖度
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | 来源类型 | 数量 | 覆盖度 |
 |---------|------|--------|
@@ -529,7 +529,7 @@ DOI: 10.1145/3704904
 
 ### 6.2 权威来源分类
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **顶级学术会议**:
 
@@ -612,30 +612,30 @@ DOI: 10.1145/3704904
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Wikipedia - Type System]**
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ---

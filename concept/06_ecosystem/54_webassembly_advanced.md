@@ -1,4 +1,6 @@
-> **EN**: Webassembly Advanced
+# Rust WebAssembly 高级开发
+
+> **EN**: Advanced WebAssembly Development with Rust
 > **Summary**: Webassembly Advanced: Rust ecosystem tools, crates, and engineering practices.
 > **内容分级**: [专家级]
 

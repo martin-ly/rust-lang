@@ -36,7 +36,7 @@
 
 ## 🧬 核心概念族谱
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 mindmap
@@ -86,7 +86,7 @@ mindmap
 
 ## 📊 概念关系矩阵
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 概念A | 关系 | 概念B | 说明 |
 |-------|------|-------|------|
@@ -101,7 +101,7 @@ mindmap
 
 ## 🎯 核心定理映射
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 定理编号 | 定理名称 | 相关概念 |
 |----------|----------|----------|
@@ -119,7 +119,7 @@ mindmap
 
 ### Level 1: 基础层
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - 所有权 (Ownership)
 - 借用 (Borrowing)
@@ -127,7 +127,7 @@ mindmap
 
 ### Level 2: 机制层
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - 移动语义 (Move)
 - Copy/Clone
@@ -135,7 +135,7 @@ mindmap
 
 ### Level 3: 抽象层
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - 智能指针 (Box, Rc, Arc)
 - 内部可变性 (Cell, RefCell)
@@ -143,7 +143,7 @@ mindmap
 
 ### Level 4: 高级层
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 - Pin/Unpin
 - 自引用结构
@@ -237,9 +237,9 @@ mindmap
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---

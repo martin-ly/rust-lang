@@ -523,7 +523,7 @@ enum CircuitState {
 | 模式组合代数 | [POSA] · [💡 原创分析] | ✅/💡 | Tier 3 |
 | 协同组合矩阵 | [GoF] · [💡 原创分析] | ✅/💡 | Tier 3 |
 | 冲突矩阵 | [POSA] · [💡 原创分析] | ✅/💡 | Tier 3 |
-| Rust Typestate + Builder | [Rust Design Patterns] | ✅ | Tier 2 |
+| Rust Typestate + Builder | [Rust Design Patterns](https://rust-lang.github.io/design-patterns/) | ✅ | Tier 2 |
 | Saga 模式 | [Hector & Kenneth — Sagas] | ✅ | Tier 2 |
 | 组合安全性定理 | [💡 原创分析] | ⚠️ | Tier 3 |
 

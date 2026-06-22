@@ -2,6 +2,7 @@
 > **最后更新**: 2026-06-09
 
 > **分级**: [C]
+> **状态**: ✅ 已完成
 >
 ## 📑 目录
 >
@@ -51,19 +52,19 @@
 
 ## Part 2: Deep Dive Counter-Examples
 >
-> **[来源: Rust Reference]** · **[来源: Rustonomicon]** · **[来源: Wikipedia - Memory Safety]** · **[来源: TRPL Ch. 4]** · **[来源: Wikipedia - Undefined Behavior]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Wikipedia - Counterexample]** · **[来源: Wikipedia - Formal Verification]** · **[来源: ACM - Counterexample-Guided Verification]** · **[来源: IEEE - Error Pattern Analysis]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)** · **来源: [TRPL Ch. 4](https://doc.rust-lang.org/book/ch04-00-ownership.html)** · **来源: [Wikipedia - Undefined Behavior](https://en.wikipedia.org/wiki/Undefined_Behavior)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [Wikipedia - Counterexample](https://en.wikipedia.org/wiki/Counterexample)** · **来源: [Wikipedia - Formal Verification](https://en.wikipedia.org/wiki/Formal_Verification)** · **[来源: ACM - Counterexample-Guided Verification]** · **[来源: IEEE - Error Pattern Analysis]**
 
 ### Extended Ownership Deep Dive
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 #### EDO.1 Understanding Move Semantics
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 The Rust ownership system is built on three core rules:
 
@@ -149,7 +150,7 @@ fn give_back(s: String) -> String {
 
 #### EDO.2 The Copy Trait Deep Dive
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 Not all types are moved. Types implementing `Copy` are copied instead.
 
@@ -204,7 +205,7 @@ struct HasHeapData {
 
 #### EDO.3 Drop Order and Destructors
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 Understanding when destructors run is crucial.
 
@@ -250,11 +251,11 @@ fn explicit_order() {
 
 ### Extended Borrowing Deep Dive
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 #### EDB.1 Understanding Borrowing Rules
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 The borrowing rules can be summarized as:
 
@@ -306,7 +307,7 @@ fn sequential_borrows() {
 
 #### EDB.2 Lifetime Elision Rules
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 Rust has rules for inferring lifetimes:
 
@@ -350,7 +351,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 #### EDB.3 The 'static Lifetime
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 `'static` means the reference lives for the entire program duration.
 
@@ -382,11 +383,11 @@ fn static_examples() {
 
 ### Extended Interior Mutability Deep Dive
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 #### EDI.1 When to Use Each Type
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 | Type | Use When | Overhead |
 |------|----------|----------|
@@ -421,7 +422,7 @@ struct Wrapper {
 
 #### EDI.2 Runtime Panic Prevention
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **❌ RefCell Panic:**
 
@@ -454,11 +455,11 @@ fn no_panic() {
 
 ### Extended Async Deep Dive
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 #### EDA.1 The Async Runtime Model
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 Understanding how async works:
 
@@ -505,7 +506,7 @@ async fn true_concurrent() {
 
 #### EDA.2 Cancellation Safety
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 Not all async operations are cancellation-safe.
 
@@ -550,11 +551,11 @@ async fn write_file(data: &[u8]) -> std::io::Result<()> {
 
 ### Extended FFI Deep Dive
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 #### EDF.1 C String Handling
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 C strings are fundamentally different from Rust strings:
 
@@ -600,7 +601,7 @@ unsafe fn string_correct() {
 
 #### EDF.2 Struct Layout Compatibility
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **❌ Layout Mismatch:**
 
@@ -635,11 +636,11 @@ assert_eq_size!(Point, [u8; 16]);
 
 ### Extended Unsafe Deep Dive
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 #### EDU.1 Pointer Aliasing Rules
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 Rust's aliasing rules apply even to raw pointers in many cases.
 
@@ -677,7 +678,7 @@ unsafe fn no_aliasing() {
 
 #### EDU.2 Transmute Safety
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 `transmute` is one of the most dangerous operations.
 
@@ -704,11 +705,11 @@ unsafe fn safe_transmute() {
 
 ## Part 3: Error Message Glossary
 
-> **[来源: Rust Reference]** · **[来源: Rustonomicon]** · **[来源: TRPL Ch. 4]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [TRPL Ch. 4](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
 ### E0382: Use of Moved Value
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **Full Error:**
 
@@ -735,7 +736,7 @@ You tried to use a value after it was moved to another owner.
 
 ### E0499: Multiple Mutable Borrows
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **Full Error:**
 
@@ -762,7 +763,7 @@ You tried to create two mutable borrows simultaneously.
 
 ### E0502: Mixed Borrow
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **Full Error:**
 
@@ -789,7 +790,7 @@ You have an immutable borrow active while trying to create a mutable borrow.
 
 ### E0597: Lifetime Error
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **Full Error:**
 
@@ -820,7 +821,7 @@ A reference outlives the data it points to.
 
 ### Ownership Cheat Sheet
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 // MOVE (default for non-Copy types)
@@ -846,7 +847,7 @@ let r = &mut s;  // Mutable borrow
 
 ### Lifetime Cheat Sheet
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 // Function with lifetimes
@@ -868,7 +869,7 @@ fn first(s: &str) -> &str { &s[0..1] }
 
 ### Pattern Cheat Sheet
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 // Builder Pattern
@@ -898,11 +899,11 @@ Mutex::new(0);       // Thread-safe
 
 ## Part 5: Common Pitfalls by Experience Level
 
-> **[来源: Rust Reference]** · **[来源: Rust API Guidelines]** · **[来源: Wikipedia - Memory Safety]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** · **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ### Beginner Pitfalls
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 1. **Forgetting `mut`**
 
@@ -933,7 +934,7 @@ Mutex::new(0);       // Thread-safe
 
 ### Intermediate Pitfalls
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 1. **Iterator invalidation**
 
@@ -968,7 +969,7 @@ Mutex::new(0);       // Thread-safe
 
 ### Advanced Pitfalls
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 1. **Pin projection unsoundness**
 2. **HRTB confusion**
@@ -993,7 +994,7 @@ This handbook covered:
 
 ### Key Takeaways
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 1. **The borrow checker prevents bugs** - don't fight it
 2. **Owned data is easiest** - use references only when needed
@@ -1003,7 +1004,7 @@ This handbook covered:
 
 ### Resources
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 - [The Rust Book](https://doc.rust-lang.org/book/)
 - [Rust by Example](https://doc.rust-lang.org/rust-by-example/)

@@ -10,13 +10,13 @@
 > **形式化框架**: 错误恢复 + 调试输出 + 探针协议
 >
 > **参考**: knurling-rs tools, ARM Cortex-M Fault Handling
-> **[来源: knurling-rs Documentation - knurling.ferrous-systems.com]** · **[来源: ARM Cortex-M Documentation - developer.arm.com]** · **[来源: Rust Embedded Book]** · **[来源: Wikipedia - ARM Architecture]** · **[来源: Rust Reference - no_std]** · **[来源: RTIC Documentation - rtic.rs]** · **[来源: Wikipedia - Debugging]** · **[来源: Wikipedia - Stack Trace]** · **[来源: ACM - Fault Diagnosis in Embedded Systems]** · **[来源: IEEE - Software Fault Tolerance]**
+> **[来源: knurling-rs Documentation - knurling.ferrous-systems.com]** · **[来源: ARM Cortex-M Documentation - developer.arm.com]** · **来源: [Rust Embedded Book](https://doc.rust-lang.org/stable/embedded-book/)** · **来源: [Wikipedia - ARM Architecture](https://en.wikipedia.org/wiki/ARM_Architecture)** · **来源: [Rust Reference - no_std](https://doc.rust-lang.org/reference/names/preludes.html)** · **来源: [RTIC Documentation - rtic.rs](https://rtic.rs/)** · **来源: [Wikipedia - Debugging](https://en.wikipedia.org/wiki/Debugging)** · **来源: [Wikipedia - Stack Trace](https://en.wikipedia.org/wiki/Stack_Trace)** · **[来源: ACM - Fault Diagnosis in Embedded Systems]** · **[来源: IEEE - Software Fault Tolerance]**
 
 ---
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [Panic-Probe 与嵌入式 Panic 处理形式化分析](#panic-probe-与嵌入式-panic-处理形式化分析)
   - [目录](#目录)
@@ -75,13 +75,13 @@
 
 ## 1. 项目概览与解决的问题
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 嵌入式系统的故障处理挑战
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 嵌入式系统与传统桌面/服务器环境有本质差异：
 
@@ -123,7 +123,7 @@ fn main() -> ! {
 
 ### 1.2 Panic的语义与要求
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 Rust的panic机制：
 
@@ -150,7 +150,7 @@ fn panic_handler(info: &PanicInfo) -> ! {
 
 ### 1.3 Panic-Probe的设计目标
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 panic-probe 提供：
 
@@ -189,7 +189,7 @@ fn main() -> ! {
 
 ### 2.1 Rust Panic机制
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 // Panic流程
@@ -214,7 +214,7 @@ enum AbortStrategy {
 
 ### 2.2 Panic处理器类型
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 处理器 | 行为 | 适用场景 | 代码大小 |
 |-------|------|---------|---------|
@@ -259,7 +259,7 @@ fn panic(info: &PanicInfo) -> ! {
 
 ### 2.3 RTT (Real-Time Transfer) 协议
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 RTT是SEGGER开发的实时传输协议：
 
@@ -348,7 +348,7 @@ fn write(channel: &mut RttChannel, data: &[u8]) {
 
 ### 2.4 探针通信机制
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```
 目标设备 <-> 调试探针 <-> 主机
@@ -366,7 +366,7 @@ fn write(channel: &mut RttChannel, data: &[u8]) {
 
 ### 2.5 栈回溯原理
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 栈回溯（Stack Unwinding）在panic时捕获调用链：
 
@@ -421,7 +421,7 @@ fn resolve_symbol(pc: u32, elf: &Elf) -> Option<String> {
 
 ### 3.1 PanicInfo结构
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 // 标准库PanicInfo
@@ -461,7 +461,7 @@ impl<'a> Location<'a> {
 
 ### 3.2 PanicHandler特性
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 // Panic处理器trait（概念性）
@@ -512,7 +512,7 @@ impl ConfigurablePanic {
 
 ### 3.3 Defmt集成
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 // panic-probe与defmt集成
@@ -548,7 +548,7 @@ fn panic(info: &PanicInfo) -> ! {
 
 ### 3.4 探针协议抽象
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 // 探针通信trait
@@ -616,7 +616,7 @@ impl ProbeChannel for ItmChannel {
 
 ### 4.1 开发调试场景
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 // 开发配置: panic-probe + defmt
@@ -659,7 +659,7 @@ fn main() -> ! {
 
 ### 4.2 生产环境处理
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 // 生产配置: panic-reset
@@ -706,7 +706,7 @@ fn enter_safe_mode() {
 
 ### 4.3 故障记录与恢复
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use littlefs2::fs::{Filesystem, File, OpenOptions};
@@ -806,7 +806,7 @@ fn check_previous_panics(fs: &Filesystem<FlashStorage>) {
 
 ### 4.4 远程诊断
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 // 通过无线连接发送panic信息
@@ -855,7 +855,7 @@ fn send_panic_report(info: &PanicInfo) -> Result<(), Error> {
 
 ### 4.5 安全关键系统
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 // IEC 61508 / ISO 26262 兼容的panic处理
@@ -921,7 +921,7 @@ fn enter_safe_state() {
 
 ### 5.1 与Semihosting的对比
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 特性 | Panic-Probe/RTT | Semihosting |
 |-----|-----------------|-------------|
@@ -951,7 +951,7 @@ fn panic(info: &PanicInfo) -> ! {
 
 ### 5.2 与ITM/SWO的对比
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | 特性 | RTT | ITM/SWO |
 |-----|-----|---------|
@@ -964,7 +964,7 @@ fn panic(info: &PanicInfo) -> ! {
 
 ### 5.3 与UART输出的对比
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 | 特性 | RTT | UART |
 |-----|-----|------|
@@ -982,7 +982,7 @@ fn panic(info: &PanicInfo) -> ! {
 
 ### 6.1 完整调试配置
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 // Cargo.toml
@@ -1052,7 +1052,7 @@ async fn main(_spawner: Spawner) {
 
 ### 6.2 自定义Panic处理器
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 // src/panic_handler.rs
@@ -1227,7 +1227,7 @@ fn get_timestamp() -> u64 {
 
 ### 6.3 故障日志系统
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 // src/fault_log.rs
@@ -1372,7 +1372,7 @@ pub struct FaultStatistics {
 
 ### 6.4 多级恢复策略
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 // src/recovery.rs
@@ -1568,7 +1568,7 @@ fn restore_context_and_return() -> ! { loop {} }
 
 ### 7.1 Panic处理延迟
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 // 测量panic处理时间
@@ -1595,7 +1595,7 @@ fn panic(info: &PanicInfo) -> ! {
 
 ### 7.2 代码大小开销
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 | 处理器 | 代码大小 | 数据大小 |
 |-------|---------|---------|
@@ -1607,7 +1607,7 @@ fn panic(info: &PanicInfo) -> ! {
 
 ### 7.3 运行时开销
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 正常运行时开销（无panic）：
 
@@ -1628,7 +1628,7 @@ Panic发生时开销：
 
 ### 8.1 Panic处理器选择
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 // 开发阶段：最大调试信息
@@ -1649,7 +1649,7 @@ mod panic_config {
 
 ### 8.2 调试信息配置
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```toml
 # Cargo.toml
@@ -1665,7 +1665,7 @@ lto = true         # 链接时优化
 
 ### 8.3 故障恢复模式
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 // 恢复状态机
@@ -1701,7 +1701,7 @@ impl RecoveryState {
 
 ### 8.4 安全考虑
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust
 // 安全关键系统的panic处理
@@ -1732,7 +1732,7 @@ fn panic(info: &PanicInfo) -> ! {
 
 ### 9.1 Panic不返回定理
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **定理 9.1** (Panic Handler Divergence)
 
@@ -1760,7 +1760,7 @@ $$
 
 ### 9.2 探针非侵入性定理
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 **定理 9.2** (Probe Non-Intrusiveness)
 
@@ -1787,7 +1787,7 @@ $$
 
 ### 9.3 栈回溯完整性定理
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **定理 9.3** (Stack Trace Completeness)
 
@@ -1817,7 +1817,7 @@ ARM Cortex-M的异常/调用约定：
 
 ### 10.1 堆栈溢出
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 // 问题：栈溢出可能导致双重panic
@@ -1850,7 +1850,7 @@ unsafe extern "C" fn HardFault(_frame: &ExceptionFrame) -> ! {
 
 ### 10.2 双重Panic
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 // 问题：panic处理中再次panic
@@ -1877,7 +1877,7 @@ fn panic(info: &PanicInfo) -> ! {
 
 ### 10.3 硬件故障
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 // 问题：硬件故障可能破坏panic处理
@@ -1938,11 +1938,11 @@ fn panic(_info: &PanicInfo) -> ! {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Debugger]**
+> **来源: [Wikipedia - Debugger](https://en.wikipedia.org/wiki/Debugger)**
 
-> **[来源: Wikipedia - Stack Trace]**
+> **来源: [Wikipedia - Stack Trace](https://en.wikipedia.org/wiki/Stack_Trace)**
 
-> **[来源: Wikipedia - Core Dump]**
+> **来源: [Wikipedia - Core Dump](https://en.wikipedia.org/wiki/Core_Dump)**
 
 > **[来源: IEEE - Software Diagnostic Tools]**
 
@@ -1956,24 +1956,24 @@ fn panic(_info: &PanicInfo) -> ! {
 
 > **[来源: probe.rs Documentation]**
 
-> **[来源: Rust Embedded Working Group]**
+> **来源: [Rust Embedded Working Group](https://rust-embedded.github.io/book/)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ---
 

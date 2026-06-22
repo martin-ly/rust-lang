@@ -22,7 +22,7 @@
 
 ## 目录
 
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Rust 核心概念 (Core Concepts)](#rust-核心概念-core-concepts)
   - [目录](#目录)
@@ -56,13 +56,13 @@
 
 ## 1. 所有权 (Ownership)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 概念定义
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 所有权是 Rust 最核心、最独特的语言特性。每个值在任意时刻有且仅有一个**所有者 (owner)**，当所有者离开作用域时，值被**丢弃 (drop)**。
 
@@ -75,7 +75,7 @@
 
 ### 所有权规则
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. 每个值有一个所有者
 2. 同一时间只能有一个所有者
@@ -83,7 +83,7 @@
 
 ### 移动语义 (Move Semantics)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 let s1 = String::from("hello");
@@ -93,7 +93,7 @@ let s2 = s1; // s1 的所有权移动到 s2
 
 ### Copy 类型
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 实现 `Copy` trait 的类型在赋值时**复制**而非**移动**：
 
@@ -114,11 +114,11 @@ println!("x = {}, y = {}", x, y); // ✅
 
 ## 2. 借用与引用 (Borrowing & References)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 概念定义
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **借用 (Borrowing)** 允许在不转移所有权的情况下临时访问数据。
 
@@ -134,7 +134,7 @@ println!("'{}' 的长度是 {}", s1, len); // ✅ s1 仍然有效
 
 ### 借用规则
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **任意数量**的不可变引用 (`&T`)
 2. **仅一个**可变引用 (`&mut T`)
@@ -155,7 +155,7 @@ r3.push_str(" world");
 
 ### 悬垂引用防护
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Rust 编译器确保引用永远不会比被引用的数据活得更长：
 
@@ -170,7 +170,7 @@ fn dangle() -> &String { // ❌ 编译错误
 
 ## 3. 生命周期 (Lifetimes)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 概念定义
 
@@ -343,11 +343,11 @@ unsafe {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**

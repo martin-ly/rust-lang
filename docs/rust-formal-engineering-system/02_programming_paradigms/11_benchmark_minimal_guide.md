@@ -13,7 +13,7 @@
 
 ## 形式化链接
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文档 | 路径 | 内容 |
 | :--- | :--- | :--- |
@@ -27,13 +27,13 @@
 
 ## 基准测试核心概念
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 为什么需要基准测试
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // ❌ 错误：简单计时容易受干扰
@@ -55,9 +55,9 @@ fn fibonacci(n: u64) -> u64 {
 
 ### 使用 Criterion 进行可靠基准测试
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // Cargo.toml:
@@ -95,9 +95,9 @@ criterion_main!(benches);
 
 ### 防止编译器优化（black_box）
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use criterion::black_box;
@@ -125,9 +125,9 @@ pub fn custom_black_box<T>(dummy: T) -> T {
 
 ### 参数化基准测试
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use criterion::{BenchmarkId, Criterion};
@@ -156,9 +156,9 @@ fn bench_various_sizes(c: &mut Criterion) {
 
 ### 比较不同实现
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use criterion::{BenchmarkId, Criterion};
@@ -208,9 +208,9 @@ fn bench_comparison(c: &mut Criterion) {
 
 ### 异步基准测试
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use criterion::{async_executor::FuturesExecutor, Criterion};
@@ -238,9 +238,9 @@ fn bench_async(c: &mut Criterion) {
 
 ### 吞吐量测量
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use criterion::{Criterion, Throughput};
@@ -268,13 +268,13 @@ fn bench_with_throughput(c: &mut Criterion) {
 
 ## 基准测试最佳实践
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 统计显著性
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use criterion::{Criterion, SamplingMode};
@@ -305,7 +305,7 @@ fn expensive_operation() -> Vec<u32> {
 
 ### 预热与稳定
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use criterion::Criterion;
@@ -333,7 +333,7 @@ fn cache_sensitive_operation() -> Vec<f64> {
 
 ### 基准测试隔离
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 // benches/bench1.rs
@@ -365,7 +365,7 @@ fn bench2(c: &mut Criterion) {
 
 ### 使用 perf 分析
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```bash
 # 编译并运行基准测试
@@ -413,7 +413,7 @@ $ perf report
 
 ### 使用 cargo-flamegraph
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```bash
 # 安装
@@ -425,7 +425,7 @@ $ cargo flamegraph --bench my_benchmark
 
 ### 内存分配分析
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust,ignore
 // 使用 dhat 进行堆分析
@@ -611,21 +611,21 @@ criterion_main!(benches);
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Program Optimization]**
+> **来源: [Wikipedia - Program Optimization](https://en.wikipedia.org/wiki/Program_Optimization)**
 
 > **[来源: Criterion.rs]**
 
-> **[来源: ACM - Performance Engineering]**
+> **来源: [ACM - Performance Engineering](https://dl.acm.org/)**
 
-> **[来源: Rust Performance Book]**
+> **来源: [The Rust Performance Book](https://nnethercote.github.io/perf-book/)**
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
-> **[来源: Coq Reference]**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
 
-> **[来源: TLA+]**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
 
-> **[来源: ACM - Formal Verification]**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
 
 ---
 

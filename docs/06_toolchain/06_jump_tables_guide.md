@@ -37,8 +37,8 @@
 
 ## 一、什么是跳转表 (Jump Tables)
 
-> **[来源: Rust Compiler Documentation]**
-> **[来源: Wikipedia - Branch Table]**
+> **来源: [Rust Compiler Documentation](https://doc.rust-lang.org/rustc/)**
+> **来源: [Wikipedia - Branch Table](https://en.wikipedia.org/wiki/Branch_Table)**
 
 **跳转表 (Jump Table)** 是编译器优化 `match` / `switch` 语句的一种技术。
 当分支较多且条件值密集时，编译器会生成一个指针数组（表），通过索引直接跳转到对应的分支代码，而不是逐一比较。
@@ -217,8 +217,8 @@ const _: () = {
 
 ## 六、参考
 
-> **[来源: Rust Compiler Documentation]**
-> **[来源: LLVM Documentation]**
+> **来源: [Rust Compiler Documentation](https://doc.rust-lang.org/rustc/)**
+> **来源: [LLVM Documentation](https://llvm.org/docs/)**
 
 | 资源 | 链接 |
 |------|------|

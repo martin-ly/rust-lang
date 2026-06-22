@@ -250,7 +250,7 @@ graph TD
 >
 > 例如：
 > **[Wikipedia: Rust]** Rust is a multi-paradigm, general-purpose programming language.
-> **[TRPL: Ch4.1]** Ownership is Rust's most unique feature.
+> **[The Rust Programming Language](https://doc.rust-lang.org/book/)** Ownership is Rust's most unique feature.
 > **[Stanford CS340R: Syllabus]** What are the most important open research challenges?
 ```
 

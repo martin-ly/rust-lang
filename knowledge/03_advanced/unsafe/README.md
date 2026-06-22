@@ -71,3 +71,31 @@
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+## 📚 模块 8: 国际化对齐
+
+> 本模块按项目模板补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 说明 |
+|:---|:---|
+| [Rustonomicon](https://doc.rust-lang.org/nomicon/) | Unsafe Rust 权威指南 |
+| [Rust Reference — Unsafe Blocks](https://doc.rust-lang.org/reference/unsafe-blocks.html) | unsafe 块规范 |
+| [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) | UB 列表 |
+
+### 8.2 学术/工业来源
+
+| 来源 | 说明 |
+|:---|:---|
+| [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | Unsafe 边界语义 |
+| [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) | 别名模型 |
+
+### 8.3 社区资源
+
+| 来源 | 说明 |
+|:---|:---|
+| [Rust for Linux](https://rust-for-linux.com/) | 内核 Unsafe 实践 |
+| [Miri](https://github.com/rust-lang/miri) | UB 检测工具 |
+

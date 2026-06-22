@@ -71,15 +71,15 @@
 
 ## 🎯 研究目标 {#-研究目标}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本研究的目的是深入理解 Rust 的型变（Variance）理论，并形式化定义型变规则。
 
 ### 核心问题
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **型变的形式化定义**: 如何用数学语言精确描述型变？
 2. **型变规则推导**: Rust 的型变规则如何推导？
@@ -87,9 +87,9 @@
 
 ### 预期成果
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - 型变的完整形式化定义
 - 型变规则的推导证明
@@ -99,13 +99,13 @@
 
 ## 📚 理论基础 {#-理论基础}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 子类型关系
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **子类型 (Subtyping)**: 一种类型间的关系，表示一个类型是另一个类型的"子集"或"更具体版本"。
 子类型关系允许在需要父类型的地方使用子类型。
@@ -119,9 +119,9 @@
 
 ### 型变的基本概念
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **型变 (Variance)**: 描述了当类型参数之间存在子类型关系时，包含这些参数的泛型类型之间会形成什么样的子类型关系。
 型变决定了泛型类型的子类型关系如何从类型参数的子类型关系推导出来。
@@ -136,9 +136,9 @@
 
 ### Rust 中的型变
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 在 Rust 中，型变最常通过**生命周期**来体现。如果生命周期 `'long` 长于 `'short`（写作 `'long: 'short`），那么 `'long` 就是 `'short` 的一个子类型。
 
@@ -148,9 +148,9 @@
 
 ### 相关概念
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **协变 (Covariance)**: 如果 $S <: T$，则 $F[S] <: F[T]$。协变允许在需要 $F[T]$ 的地方使用 $F[S]$。
 
@@ -166,9 +166,9 @@
 
 ### 理论背景
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **子类型理论 (Subtyping Theory)**: 型变理论基于子类型理论，子类型理论研究类型之间的子类型关系。
 
@@ -182,11 +182,11 @@
 
 ## 🔬 形式化定义 {#-形式化定义}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 协变 (Covariance)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **定义 1.1 (协变)**: 对于参数化类型构造器 $F[T]$，如果 $S <: T \Rightarrow F[S] <: F[T]$，则 $F$ 对参数 $T$ 是**协变的**。
 
@@ -216,7 +216,7 @@ $$\text{Cov}[F] \Leftrightarrow \forall S, T. S <: T \Rightarrow F[S] <: F[T]$$
 
 ### 2. 逆变 (Contravariance)
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **定义 2.1 (逆变)**: 对于参数化类型构造器 $F[T]$，如果 $S <: T \Rightarrow F[T] <: F[S]$，则 $F$ 对参数 $T$ 是**逆变的**。
 
@@ -247,7 +247,7 @@ $$
 
 ### 3. 不变 (Invariance)
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **定义 3.1 (不变)**: 对于参数化类型构造器 $F[T]$，如果 $S <: T \land S \neq T \Rightarrow F[S] \not<: F[T] \land F[T] \not<: F[S]$，则 $F$ 对参数 $T$ 是**不变的**。
 
@@ -298,7 +298,7 @@ $$\text{Inv}[F] \Leftrightarrow \forall S, T. (S <: T \land S \neq T) \Rightarro
 
 ### 4. 型变规则
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **定理 1 (型变规则)**: Rust 的型变规则由类型参数的使用方式决定：
 
@@ -323,7 +323,7 @@ $$\text{Inv}[F] \Leftrightarrow \forall S, T. (S <: T \land S \neq T) \Rightarro
 
 ### 反例 1：`&mut T` 若协变则悬垂引用
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **假设**：若 `&mut T` 在 $T$ 上协变（错误假设）。
 
@@ -342,7 +342,7 @@ fn evil(mut r: &mut &'a str) {
 
 ### 反例 2：函数参数若协变则悬垂
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **假设**：若 `fn(T) -> R` 在参数 $T$ 上协变（错误假设）。
 
@@ -350,7 +350,7 @@ fn evil(mut r: &mut &'a str) {
 
 ### 反例 3：`Cell<T>` 若协变则悬垂
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 **假设**：若 `Cell<T>` 在 $T$ 上协变。
 
@@ -392,7 +392,7 @@ fn evil(mut r: &mut &'a str) {
 
 ### 待证明的性质
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 1. **型变规则正确性**: 型变规则保证类型安全
 2. **型变推导**: 编译器正确推导型变
@@ -400,7 +400,7 @@ fn evil(mut r: &mut &'a str) {
 
 ### 证明方法
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 - **类型系统证明**: 证明型变规则的类型系统保证
 - **语义证明**: 证明型变的语义正确性
@@ -414,7 +414,7 @@ fn evil(mut r: &mut &'a str) {
 
 ### 示例 1: 协变类型
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 fn covariant_example() {
@@ -434,7 +434,7 @@ fn covariant_example() {
 
 ### 示例 2: 逆变类型
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 fn contravariant_example() {
@@ -459,7 +459,7 @@ fn contravariant_example() {
 
 ### 示例 3: 不变类型
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 fn invariant_example() {
@@ -480,7 +480,7 @@ fn invariant_example() {
 
 ### 示例 4: PhantomData 与型变
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use std::marker::PhantomData;
@@ -513,7 +513,7 @@ fn phantom_example() {
 
 ### 示例 5: 函数指针型变
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 fn function_pointer_variance() {
@@ -539,7 +539,7 @@ fn function_pointer_variance() {
 
 ### 示例 6: 型变与内存安全
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 fn variance_memory_safety() {
@@ -562,7 +562,7 @@ fn variance_memory_safety() {
 
 ### 示例 7: 实际应用场景
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 // 协变在迭代器中的应用
@@ -604,7 +604,7 @@ fn use_contravariant_callback() {
 
 ### 学术论文
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 1. **Types and Programming Languages**
    - 作者: Benjamin C. Pierce
@@ -617,7 +617,7 @@ fn use_contravariant_callback() {
 
 ### 官方文档
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 - [Rust Reference - Subtyping and Variance](https://doc.rust-lang.org/reference/subtyping.html)
 - [型变参考文档](../../../crates/c02_type_system/docs/tier_03_references/02_类型型变参考.md)
@@ -625,7 +625,7 @@ fn use_contravariant_callback() {
 
 ### 相关代码
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 - [型变实现](../../../crates/c02_type_system/src/README.md)
 - [型变示例](../../../crates/c02_type_system/examples/README.md)
@@ -766,28 +766,28 @@ fn use_contravariant_callback() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Covariance and Contravariance]**
+> **来源: [Wikipedia - Covariance and Contravariance](https://en.wikipedia.org/wiki/Covariance_and_Contravariance)**
 
-> **[来源: Wikipedia - Subtyping]**
+> **来源: [Wikipedia - Subtyping](https://en.wikipedia.org/wiki/Subtyping)**
 
-> **[来源: Rust Reference - Variance]**
+> **来源: [Rust Reference - Variance](https://doc.rust-lang.org/reference/)**
 
-> **[来源: Rustonomicon - Subtyping and Variance]**
+> **来源: [Rustonomicon - Subtyping and Variance](https://doc.rust-lang.org/nomicon/)**
 
 > **[来源: ACM - Subtyping Theory]**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Type System]**
-> **[来源: Pierce 2002 - TAPL]**
-> **[来源: Rust Reference - Type System]**
-> **[来源: ACM - Type Systems]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Pierce 2002 - TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)**
+> **来源: [Rust Reference - Type System](https://doc.rust-lang.org/reference/types.html)**
+> **来源: [ACM - Type Systems](https://dl.acm.org/)**
 
 ---

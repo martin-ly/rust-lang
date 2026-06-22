@@ -98,7 +98,7 @@
 
 ## 🧠 异步状态机思维导图
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 mindmap
@@ -133,7 +133,7 @@ mindmap
 
 ## 📊 概念定义-属性关系-解释论证
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 层次 | 概念定义 | 属性关系 | 解释论证 |
 | :--- | :--- | :--- | :--- |
@@ -149,7 +149,7 @@ mindmap
 
 ## 🔬 异步状态机证明树
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 graph TD
@@ -177,9 +177,9 @@ graph TD
 
 ### 异步执行决策树
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 graph TD
@@ -202,13 +202,13 @@ graph TD
 
 ## 🎯 核心概念
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Future Trait（核心抽象）
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 pub trait Future {
@@ -226,13 +226,13 @@ pub enum Poll<T> {
 
 ## 🚀 基本模式
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 模式 1: async/await 基础
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 async fn fetch_data() -> String {
@@ -250,9 +250,9 @@ async fn main() {
 
 ### 模式 2: 并发执行
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use tokio::join;
@@ -272,9 +272,9 @@ async fn main() {
 
 ### 模式 3: 选择第一个完成
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use tokio::select;
@@ -291,7 +291,7 @@ async fn operation() {
 
 ### 模式 4: 超时控制
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use tokio::time::{timeout, Duration};
@@ -309,7 +309,7 @@ async fn fetch_with_timeout() -> Result<String, tokio::time::error::Elapsed> {
 
 ### Tokio（推荐，功能最全）
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 // Cargo.toml
@@ -337,7 +337,7 @@ async fn main() { }
 
 ### smol（轻量运行时）
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 [dependencies]
@@ -358,7 +358,7 @@ async fn main() {
 
 ### smol（轻量级）
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 [dependencies]
@@ -384,7 +384,7 @@ fn main() {
 
 ### 模式 1: Fan-out（任务分发）
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use tokio::task;
@@ -410,7 +410,7 @@ async fn fan_out(items: Vec<i32>) -> Vec<i32> {
 
 ### 模式 2: Stream 处理
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use tokio_stream::StreamExt;
@@ -428,7 +428,7 @@ async fn process_stream() {
 
 ### 模式 3: Actor 模式
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use tokio::sync::mpsc;
@@ -454,7 +454,7 @@ impl Actor {
 
 ### 模式 4: CSP 模式（Channel）
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use tokio::sync::mpsc;
@@ -484,7 +484,7 @@ async fn csp_pattern() {
 
 ### 模式 1: Arc + Mutex
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use std::sync::Arc;
@@ -516,7 +516,7 @@ async fn main() {
 
 ### 模式 2: Arc + RwLock（读多写少）
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use tokio::sync::RwLock;
@@ -540,7 +540,7 @@ write.push(4);
 
 ### TCP Server
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use tokio::net::TcpListener;
@@ -570,7 +570,7 @@ async fn main() -> std::io::Result<()> {
 
 ### HTTP Client
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use reqwest;
@@ -595,7 +595,7 @@ async fn main() -> Result<(), reqwest::Error> {
 
 ### 1. 批处理
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 use tokio::time::{sleep, Duration};
@@ -620,7 +620,7 @@ async fn batch_processor() {
 
 ### 2. 连接池
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 use deadpool_postgres::{Config, Pool};
@@ -638,7 +638,7 @@ async fn with_pool() {
 
 ### 3. 取消任务
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use tokio_util::sync::CancellationToken;
@@ -672,7 +672,7 @@ async fn cancellable_task() {
 
 ### 陷阱 1: 在 async 中使用标准库阻塞 API
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 // ❌ 错误：阻塞运行时
@@ -690,7 +690,7 @@ async fn good() {
 
 ### 陷阱 2: 持有 MutexGuard 跨 await
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 // ❌ 错误
@@ -714,7 +714,7 @@ async fn good(mutex: Arc<Mutex<i32>>) {
 
 ### 陷阱 3: 忘记 spawn 导致串行
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
 // ❌ 串行执行
@@ -741,13 +741,13 @@ async fn good() {
 
 ### 反例 1–2
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 见上方「陷阱 1」「陷阱 2」。
 
 ### 反例 3: 忘记 spawn 导致串行
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **错误示例**: 直接 `task1().await; task2().await` 串行执行。
 
@@ -757,7 +757,7 @@ async fn good() {
 
 ### 反例 4: 持有锁跨越 await
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **错误示例**:
 
@@ -837,7 +837,7 @@ tokio = { version = "1", features = [
 
 ### 深入学习
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - [Future 机制详解](../../../crates/c06_async/docs/tier_02_guides/02_Future与Executor机制.md)
 - [Tokio API 参考](../../../crates/c06_async/docs/tier_03_references/02_Tokio完整API参考.md)
@@ -845,7 +845,7 @@ tokio = { version = "1", features = [
 
 ### 代码示例
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - [基础示例](../../../crates/c06_async/examples/comprehensive_async_demo.rs)
 - [并发模式](../../../crates/c06_async/examples/comprehensive_async_patterns_2025.rs)
@@ -853,7 +853,7 @@ tokio = { version = "1", features = [
 
 ### 形式化理论
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 - [异步语义理论](../../../crates/c06_async/src/async_semantics_theory.rs)
 - [CSP vs Actor](../../../crates/c06_async/src/csp_model_comparison.rs)
@@ -868,7 +868,7 @@ tokio = { version = "1", features = [
 
 ### 场景 1: Web 服务器并发处理
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use tokio::net::TcpListener;
@@ -904,7 +904,7 @@ async fn main() -> std::io::Result<()> {
 
 ### 场景 2: 批量数据获取
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use tokio::time::{sleep, Duration};
@@ -945,7 +945,7 @@ async fn main() {
 
 ### 场景 3: 生产者-消费者模式
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 use tokio::sync::mpsc;
@@ -984,7 +984,7 @@ async fn main() {
 
 ### 边界 1: 异步递归
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 use std::future::Future;
@@ -1281,14 +1281,14 @@ pub fn get_async_config() -> Option<&'static AsyncConfig> {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: Wikipedia - Future/Promise]**
-> **[来源: Wikipedia - Coroutine]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+> **来源: [Wikipedia - Future/Promise](https://en.wikipedia.org/wiki/Future/Promise)**
+> **来源: [Wikipedia - Coroutine](https://en.wikipedia.org/wiki/Coroutine)**
 > **[来源: IEEE - Concurrent Language Constructs]**
 > **[来源: ACM - Async Programming Patterns]**
-> **[来源: Rust Reference - async/await]**
-> **[来源: TRPL Ch. 17 - Async and Await]**
-> **[来源: Rustonomicon - Async]**
+> **来源: [Rust Reference - async/await](https://doc.rust-lang.org/reference/items/functions.html#async-functions)**
+> **来源: [TRPL Ch. 17 - Async and Await](https://doc.rust-lang.org/book/ch17-00-async-await.html)**
+> **来源: [Rustonomicon - Async](https://doc.rust-lang.org/nomicon/pin.html)**
 > **[来源: tokio.rs Documentation]**
 > **[来源: async-std [已归档].rs Documentation]**
 

@@ -51,7 +51,7 @@
 
 ## 🎯 文档宗旨 {#-文档宗旨}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档针对「缺乏完整论证体系结构、理论体系结构、安全与非安全全面论证」的缺口，建立：
 
@@ -63,13 +63,13 @@
 
 ## 📐 一、理论体系结构（总览） {#-一理论体系结构总览}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 理论体系四层架构
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -117,9 +117,9 @@
 
 ### 1.2 理论族依赖关系
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 理论基础依赖图（自底向上）
@@ -149,9 +149,9 @@
 
 ### 1.3 理论覆盖范围矩阵
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 理论族 | 公理/定义 | 语义模型 | 核心定理 | 边界/反例 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -168,13 +168,13 @@
 
 ## 📐 二、论证体系结构（总览） {#-二论证体系结构总览}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 论证要素五层结构
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -214,9 +214,9 @@
 
 ### 2.2 论证流向与一致性
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 论证流向（自上而下、自底而上）
@@ -238,9 +238,9 @@
 
 ### 2.3 论证体系索引
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 论证要素 | 索引文档 | 覆盖范围 |
 | :--- | :--- | :--- |
@@ -257,11 +257,11 @@
 
 ## 🔬 三、安全与非安全全面论证 {#-三安全与非安全全面论证}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 3.1 安全与非安全边界总览
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -300,7 +300,7 @@
 
 ### 3.2 安全保证形式化汇总
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 保证类型 | 安全机制 | 形式化定理 | 违反后果 |
 | :--- | :--- | :--- | :--- |
@@ -314,7 +314,7 @@
 
 ### 3.3 unsafe 契约矩阵
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 | 操作 | 前置条件 P | 后置条件 Q | 违反后果 |
 | :--- | :--- | :--- | :--- |
@@ -331,7 +331,7 @@
 
 ### 3.4 安全抽象论证
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **定义**：安全抽象 = 内部使用 unsafe、对外暴露仅安全 API、且满足：若调用者仅用安全 API，则不会触发 UB。
 
@@ -346,7 +346,7 @@
 
 ### 3.5 UB 分类与反例
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | UB 类别 | 典型原因 | 反例 |
 | :--- | :--- | :--- |
@@ -358,7 +358,7 @@
 
 ### 3.6 安全 vs 非安全决策树
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```text
 需要执行 X？
@@ -404,7 +404,7 @@
 
 ### 示例 1: 理论体系层验证代码
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust
 // 研究场景：验证理论体系的层次结构
@@ -483,7 +483,7 @@ fn main() {
 
 ### 示例 2: 安全边界验证代码
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 // 研究场景：验证安全与非安全边界
@@ -540,7 +540,7 @@ fn main() {
 
 ### 示例 3: Coq 形式化对应代码
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```coq
 (* Coq 代码：理论体系的形式化表示 *)
@@ -687,13 +687,13 @@ Admitted.
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

@@ -45,7 +45,7 @@
 
 ## 形式化定义与公理
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def 1.1（ Safe 边界）**:
 
@@ -91,7 +91,7 @@
 
 ## 定义（非形式化对照）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 分类 | 定义 |
 | :--- | :--- |
@@ -103,7 +103,7 @@
 
 ## 安全边界决策树
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 实现模式 X？
@@ -123,13 +123,13 @@
 
 ## 设计模式 × 安全边界
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 创建型（5）
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 模式 | 安全边界 | 实现要点 |
 | :--- | :--- | :--- |
@@ -141,9 +141,9 @@
 
 ### 结构型（7）
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 模式 | 安全边界 | 实现要点 |
 | :--- | :--- | :--- |
@@ -157,9 +157,9 @@
 
 ### 行为型（11）
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 模式 | 安全边界 | 实现要点 |
 | :--- | :--- | :--- |
@@ -179,7 +179,7 @@
 
 ## 执行模型 × 安全边界
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 模型 | 安全边界 | 说明 |
 | :--- | :--- | :--- |
@@ -193,7 +193,7 @@
 
 ## 扩展模式（43 完全之 20）安全边界
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 模式 | 安全边界 | 说明 |
 | :--- | :--- | :--- |
@@ -216,7 +216,7 @@
 
 ## 反例：违反安全边界
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 反例 | 后果 |
 | :--- | :--- |
@@ -228,7 +228,7 @@
 
 ## 实现检查清单
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 实现某模式前，确认：
 
@@ -258,7 +258,7 @@
 
 ### 示例 1：需全局配置的单例
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **场景**：应用启动时加载配置，全局只读访问。
 
@@ -278,7 +278,7 @@ fn config() -> &'static Config {
 
 ### 示例 2：需共享可变状态的 Observer
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **场景**：多订阅者接收事件；发布者与订阅者可能跨线程。
 
@@ -294,7 +294,7 @@ let (tx, rx) = mpsc::channel::<Event>();
 
 ### 示例 3：需 FFI 的 Gateway
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **场景**：调用 C 库支付接口。
 
@@ -331,13 +331,13 @@ impl PaymentGateway for FFIPaymentGateway {
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -348,7 +348,7 @@ impl PaymentGateway for FFIPaymentGateway {
 
 #### 代码示例更新
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 本文档中的所有Rust代码示例均已：
 
@@ -358,7 +358,7 @@ impl PaymentGateway for FFIPaymentGateway {
 
 #### 相关文档
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - Rust 1.94 迁移指南
 - [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
@@ -392,11 +392,11 @@ impl PaymentGateway for FFIPaymentGateway {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Rustonomicon]**
-> **[来源: Rust Reference - Unsafe]**
-> **[来源: RFC 2585 - Unsafe Guidelines]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [Rust Reference - Unsafe](https://doc.rust-lang.org/reference/unsafe-blocks.html)**
+> **来源: [RFC 2585 - Unsafe Guidelines](https://rust-lang.github.io/rfcs/2585-2585-unsafe-block-in-unsafe-fn.html)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

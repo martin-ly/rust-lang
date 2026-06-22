@@ -59,7 +59,7 @@
 
 ## 🎯 概述 {#-概述}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本指南提供了使用形式化工具（Coq、Isabelle）验证 Rust 形式化定义的完整流程。
 
@@ -69,9 +69,9 @@
 
 ### 验证目标
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **所有权模型验证**：验证所有权规则的正确性
 2. **借用检查器验证**：验证借用规则的正确性
@@ -84,7 +84,7 @@
 
 ## 形式化论证（验证框架）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def FV1（形式化验证）**：设 $T$ 为形式化定理（如 ownership T2、borrow T1），$V$ 为 Coq/Isabelle 等工具的验证活动。若 $V$ 生成机器可检查证明，且证明的结论与 $T$ 的陈述一致，则称 $V$ **验证** $T$。
 
@@ -104,13 +104,13 @@
 
 ## 🛠️ 工具选择 {#️-工具选择}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Coq
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **优势**：
 
@@ -151,9 +151,9 @@ Definition move_rule (s: OwnershipState) : OwnershipState :=
 
 ### Isabelle/HOL
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **优势**：
 
@@ -187,13 +187,13 @@ end
 
 ## 📚 验证准备工作 {#-验证准备工作}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 环境准备
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Coq 环境**：
 
@@ -209,9 +209,9 @@ end
 
 ### 2. 理论准备
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **需要转换的形式化定义**：
 
@@ -224,9 +224,9 @@ end
 
 ### 3. 验证框架设计
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **验证结构**：
 
@@ -249,7 +249,7 @@ formal_verification/
 
 ### 步骤 1: 所有权模型验证
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **目标**：验证所有权规则的正确性
 
@@ -291,7 +291,7 @@ Qed.
 
 ### 步骤 2: 借用检查器验证
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **目标**：验证借用规则的正确性
 
@@ -336,7 +336,7 @@ Qed.
 
 ### 步骤 3: 生命周期验证
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **目标**：验证生命周期规则的正确性
 
@@ -370,7 +370,7 @@ Qed.
 
 ### 步骤 4: 类型系统验证
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **目标**：验证类型系统的正确性
 
@@ -408,7 +408,7 @@ Admitted.
 
 ### 步骤 5: 异步状态机验证
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **目标**：验证 Future 状态一致性、并发安全与进度保证（参见 [10_async_state_machine.md](./formal_methods/10_async_state_machine.md)）
 
@@ -442,7 +442,7 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 
 ### 步骤 6: Pin 与自引用验证
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **目标**：验证 Pin 保证、自引用类型安全与 Pin 投影安全（参见 [10_pin_self_referential.md](./formal_methods/10_pin_self_referential.md)）
 
@@ -469,7 +469,7 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 
 ### 所有权模型验证
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - [ ] 转换所有权模型形式化定义到 Coq/Isabelle
 - [ ] 实现所有权状态定义
@@ -480,7 +480,7 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 
 ### 借用检查器验证
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 - [ ] 转换借用检查器形式化定义到 Coq/Isabelle
 - [ ] 实现借用类型定义
@@ -491,7 +491,7 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 
 ### 生命周期验证
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 - [ ] 转换生命周期形式化定义到 Coq/Isabelle
 - [ ] 实现生命周期定义
@@ -502,7 +502,7 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 
 ### 类型系统验证
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 - [ ] 转换类型系统形式化定义到 Coq/Isabelle
 - [ ] 实现类型定义
@@ -513,7 +513,7 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 
 ### 异步状态机验证
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [ ] 转换异步状态机形式化定义到 Coq/Isabelle
 - [ ] 实现 Future 状态与转换
@@ -524,7 +524,7 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 
 ### Pin 与自引用验证
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 - [ ] 转换 Pin/自引用形式化定义到 Coq/Isabelle
 - [ ] 实现 Pin 不变式与投影条件
@@ -541,7 +541,7 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 
 ### 学习资源
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 - **Coq 教程**：
   - [Software Foundations](https://softwarefoundations.cis.upenn.edu/)
@@ -553,7 +553,7 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 
 ### 相关项目
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 - **RustBelt**：Rust 类型系统的形式化验证
 - **Creusot**：Rust 程序的形式化验证工具
@@ -561,7 +561,7 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 
 ### 工具链扩展任务（Rust → 证明助手）
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | 工具 | 输入 | 输出 | 对接状态 | 任务入口 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -572,7 +572,7 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 
 ### 工具资源
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 - [Coq GitHub](https://github.com/coq/coq)
 - [Isabelle GitHub](https://github.com/isabelle-prover/isabelle)
@@ -662,13 +662,13 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
-> **[来源: Coq Reference]**
-> **[来源: TLA+]**
-> **[来源: ACM - Formal Verification]**
-> **[来源: Wikipedia - Formal Verification]**
-> **[来源: Coq Reference Manual]**
-> **[来源: TLA+ Documentation]**
-> **[来源: ACM - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
+> **来源: [Wikipedia - Formal Verification](https://en.wikipedia.org/wiki/Formal_Verification)**
+> **来源: [Coq Reference Manual](https://coq.inria.fr/doc/)**
+> **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [ACM - Formal Methods](https://dl.acm.org/)**
 
 ---

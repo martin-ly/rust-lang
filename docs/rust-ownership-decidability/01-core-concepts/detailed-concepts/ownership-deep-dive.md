@@ -11,7 +11,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: Wikipedia - Ownership Type]** · **[来源: Wikipedia - Linear Logic]** · **[来源: ACM - Ownership-Based Memory Management]** · **[来源: IEEE - Type-Based Memory Safety]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** · **来源: [Wikipedia - Ownership Type](https://en.wikipedia.org/wiki/Ownership_Type)** · **来源: [Wikipedia - Linear Logic](https://en.wikipedia.org/wiki/Linear_Logic)** · **[来源: ACM - Ownership-Based Memory Management]** · **[来源: IEEE - Type-Based Memory Safety]**
 
 - [所有权深度解析](#所有权深度解析)
   - [目录](#目录)
@@ -68,13 +68,13 @@
 
 ## 1. 形式化定义
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 所有权的形式化模型
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 在 Rust 的类型系统中，所有权可以通过以下形式化规则描述：
 
@@ -100,7 +100,7 @@
 
 ### 1.2 类型状态的转换图
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```
           ┌─────────────┐
@@ -128,7 +128,7 @@
 
 ### 2.1 Move 的本质
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 Move 语义是 Rust 所有权系统的核心。表面上看，Move 类似于 C++ 的转移语义，但实际上有更严格的保证。
 
@@ -146,7 +146,7 @@ fn main() {
 
 ### 2.2 Move 的底层实现
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 Move 在 LLVM IR 层面的实现是**按位复制**（bitwise copy），然后使原变量失效：
 
@@ -168,11 +168,11 @@ let b = a;
 
 ### 2.3 Move 的三种触发场景
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 #### 场景 A: 赋值
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust
 let x = vec![1, 2, 3];
@@ -181,7 +181,7 @@ let y = x;  // x 被移动到 y
 
 #### 场景 B: 函数传参
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 fn take_ownership(v: Vec<i32>) {
@@ -195,7 +195,7 @@ take_ownership(v);  // v 被移动到函数
 
 #### 场景 C: 函数返回
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 fn give_ownership() -> String {
@@ -208,7 +208,7 @@ let s = give_ownership();  // 接收所有权
 
 ### 2.4 Move 与函数式编程
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Move 语义使 Rust 能够实现高效的函数式编程模式：
 
@@ -234,7 +234,7 @@ let result = process_data(data);  // 高效：没有不必要的复制
 
 ### 3.1 Copy 的形式化定义
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **定义 3.1** (Copy Trait): 类型 `T` 实现 `Copy` 当且仅当对 `T` 的值的赋值操作创建值的完整副本，原值继续有效。
 
@@ -250,7 +250,7 @@ let result = process_data(data);  // 高效：没有不必要的复制
 
 ### 3.2 自动派生 Copy 的条件
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 一个类型可以派生 `Copy` 当且仅当其所有字段都实现了 `Copy`：
 
@@ -285,7 +285,7 @@ struct Person {
 
 ### 3.3 自定义 Copy 实现
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust
 #[derive(Debug)]
@@ -317,7 +317,7 @@ fn main() {
 
 ### 3.4 Copy 与 Clone 的关系
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 // Copy trait 的定义
@@ -345,7 +345,7 @@ pub trait Clone {
 
 ### 3.5 选择 Copy vs Clone 的设计建议
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
 // 场景 1: 小型固定大小类型 → 使用 Copy
@@ -388,7 +388,7 @@ impl Clone for FileHandle {
 
 ### 4.1 Drop 的形式化定义
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **定义 4.1** (Drop Trait): `Drop` trait 定义了值超出作用域时的清理行为。
 
@@ -408,7 +408,7 @@ pub trait Drop {
 
 ### 4.2 RAII 模式详解
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 RAII (Resource Acquisition Is Initialization) 是 C++ 引入的模式，Rust 将其发扬光大。
 
@@ -436,7 +436,7 @@ fn write_to_file() -> std::io::Result<()> {
 
 ### 4.3 自定义 Drop 实现
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -480,7 +480,7 @@ fn main() {
 
 ### 4.4 Drop 的顺序规则
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **规则 4.1** (变量释放顺序): 变量按照与声明**相反**的顺序释放（LIFO）。
 
@@ -526,7 +526,7 @@ fn main() {
 
 ### 4.5 提前释放: std::mem::drop
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use std::mem;
@@ -545,7 +545,7 @@ fn main() {
 
 ### 4.6 避免双重释放的模式
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 struct Buffer {
@@ -576,7 +576,7 @@ impl Drop for Buffer {
 
 ### 陷阱 1: 部分移动 (Partial Move)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 struct Person {
@@ -1130,29 +1130,29 @@ fn polonius_example() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: Wikipedia - Machine Learning]**
+> **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
 
-> **[来源: Wikipedia - Artificial Intelligence]**
+> **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)**
 
-> **[来源: tch-rs Documentation]**
+> **来源: [tch-rs Documentation](https://docs.rs/tch/latest/tch/)**
 
-> **[来源: ACM - AI Systems]**
+> **来源: [ACM - AI Systems](https://dl.acm.org/)**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
-> **[来源: Wikipedia - Machine Learning]**
-> **[来源: Wikipedia - Artificial Intelligence]**
-> **[来源: tch-rs Documentation]**
-> **[来源: ACM - AI Systems]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
+> **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
+> **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)**
+> **来源: [tch-rs Documentation](https://docs.rs/tch/latest/tch/)**
+> **来源: [ACM - AI Systems](https://dl.acm.org/)**
 
 ---

@@ -290,3 +290,27 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 >
 
 ---
+
+## 📚 模块 8: 国际化对齐
+
+> 本节按项目模板要求补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Rust Language FAQ](https://www.rust-lang.org/faq) | 权威来源 | 官方 FAQ |
+| [The Rust Programming Language](https://doc.rust-lang.org/book/) | 权威来源 | 官方教程 |
+
+### 8.2 学术来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | 权威来源 | 所有权与内存安全语义 |
+
+### 8.3 社区权威
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Rust Blog](https://blog.rust-lang.org/) | 权威来源 | 官方博客 |
+| [Rust Foundation News](https://foundation.rust-lang.org/news/) | 权威来源 | 基金会动态 |

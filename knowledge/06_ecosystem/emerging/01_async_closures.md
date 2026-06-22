@@ -503,3 +503,27 @@ let f = async || {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ---
+
+## 📚 模块 8: 国际化对齐
+
+> 本节按项目模板要求补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [The Rust Async Book](https://rust-lang.github.io/async-book/) | 权威来源 | 异步编程官方教程 |
+| [TRPL Ch17 — Async/Await](https://doc.rust-lang.org/book/ch17-00-async-await.html) | 权威来源 | async/await 语法 |
+
+### 8.2 学术来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | 权威来源 | 异步语义基础 |
+
+### 8.3 社区权威
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Tokio Documentation](https://tokio.rs/) | 权威来源 | Tokio 运行时 |
+| [smol](https://github.com/smol-rs/smol) | 权威来源 | 轻量异步运行时 |

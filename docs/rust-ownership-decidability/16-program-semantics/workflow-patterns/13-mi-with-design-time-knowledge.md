@@ -7,7 +7,7 @@
 
 ## 目录
 >
-> **[来源: Workflow Patterns Initiative]** · **[来源: van der Aalst 2003]** · **[来源: Russell 2006]** · **[来源: Rust Reference]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)** · **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)** · **来源: [Russell 2006](https://www.workflowpatterns.com/)** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [13 多实例先验设计时知识模式 (Multiple Instances With a priori Design-Time Knowledge) - 完整形式化语义](#13-多实例先验设计时知识模式-multiple-instances-with-a-priori-design-time-knowledge---完整形式化语义)
   - [目录](#目录)
@@ -57,13 +57,13 @@
 
 ## 1. 引言
 >
-> **[来源: Workflow Patterns Initiative]** · **[来源: van der Aalst 2003]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)** · **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)**
 
 多实例先验设计时知识模式（Multiple Instances With a priori Design-Time Knowledge，WCP13）是工作流控制流模式家族中的核心多实例模式之一。该模式描述的场景是：在流程定义阶段即已知需要创建的并行活动实例的确切数量，这些实例在同一时刻被创建、并行执行，并在全部完成后汇合继续后续流程。
 
 ### 1.1 历史背景
 
-> **[来源: van der Aalst 2003]** · **[来源: Russell 2006]**
+> **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)** · **来源: [Russell 2006](https://www.workflowpatterns.com/)**
 
 多实例模式最早由 Wil van der Aalst 等人在 "Workflow Patterns" (2003) 中系统定义，分为三种子模式：
 
@@ -94,7 +94,7 @@ WCP13 解决的核心问题是：**如何在保证类型安全和编译期优化
 
 ### 2.1 概念定义
 
-> **[来源: Workflow Patterns Initiative]** · **[来源: Russell 2006]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)** · **来源: [Russell 2006](https://www.workflowpatterns.com/)**
 
 **多实例先验设计时知识模式** 是一个控制流构造，其形式化定义为：
 
@@ -119,7 +119,7 @@ Activity ::= Task | SubProcess
 
 ### 2.2 核心语义
 
-> **[来源: van der Aalst 2003]**
+> **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)**
 
 **创建语义**:
 
@@ -149,7 +149,7 @@ $$
 
 #### 2.3.1 状态机表示
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 $$
 \begin{aligned}
@@ -175,7 +175,7 @@ $$
 
 #### 2.3.3 Petri 网表示
 
-> **[来源: Wikipedia - Petri Net]**
+> **来源: [Wikipedia - Petri Net](https://en.wikipedia.org/wiki/Petri_Net)**
 
 ```
          ┌─→ (A₁) ──┐
@@ -224,7 +224,7 @@ flowchart LR
 
 ### 3.2 UML 活动图
 
-> **[来源: Wikipedia - UML Activity Diagram]**
+> **来源: [Wikipedia - UML Activity Diagram](https://en.wikipedia.org/wiki/UML_Activity_Diagram)**
 
 在 UML 活动图中，WCP13 使用扩展区域或带 `parallel` 模式的循环节点：
 
@@ -243,7 +243,7 @@ flowchart LR
 
 ### 3.3 WfMC 标准
 
-> **[来源: WfMC - Workflow Management Coalition]**
+> **来源: [WfMC - Workflow Management Coalition](https://www.wfmc.org/)**
 
 工作流管理联盟将 WCP13 定义为：
 
@@ -265,7 +265,7 @@ flowchart LR
 
 ### 4.1 CCS 表示
 
-> **[来源: Milner 1989 - Communication and Concurrency]**
+> **来源: [Milner 1989 - Communication and Concurrency](https://en.wikipedia.org/wiki/Communication_and_Concurrency)**
 
 **Calculus of Communicating Systems (CCS)**:
 
@@ -305,7 +305,7 @@ $$
 
 ### 5.1 基础实现
 
-> **[来源: Rust Reference]** · **[来源: The Rust Programming Language]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 利用 Rust 的 `const generics` 特性，在类型层面编码设计时已知数量 $N$：
 
@@ -374,7 +374,7 @@ where
 
 ### 5.2 带错误处理的高级实现
 
-> **[来源: Rust Standard Library]** · **[来源: Tokio Docs]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** · **来源: [Tokio Docs](https://tokio.rs/)**
 
 ```rust,ignore
 use std::sync::Arc;
@@ -476,7 +476,7 @@ where
 
 ### 5.3 信贷审批完整示例
 
-> **[来源: Rust Standard Library]** · **[来源: Tokio Docs]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** · **来源: [Tokio Docs](https://tokio.rs/)**
 
 ```rust,ignore
 use tokio::time::{sleep, Duration};
@@ -585,7 +585,7 @@ pub fn verify_array_size<const N: usize>() {
 
 ### 6.1 活性 (Liveness)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **定理**: 若活动模板 $A$ 满足活性，则 WCP13 最终会完成。
 
@@ -605,7 +605,7 @@ $$
 
 ### 6.2 安全性 (Safety)
 
-> **[来源: van der Aalst 2003]**
+> **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)**
 
 **定理**: WCP13 恰好创建 $N$ 个实例，且汇合点仅在全部 $N$ 个实例完成后触发。
 
@@ -650,7 +650,7 @@ Multiple Instances Patterns
 
 ### 7.2 形式化关系
 
-> **[来源: Workflow Patterns Initiative]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)**
 
 $$
 \text{WCP13} \subseteq \text{WCP14} \subseteq \text{WCP15}
@@ -686,7 +686,7 @@ $$
 
 ### 8.1 并行信贷核查
 
-> **[来源: Russell 2006]**
+> **来源: [Russell 2006](https://www.workflowpatterns.com/)**
 
 银行贷款审批中，监管要求并行执行 3 项固定核查：征信局报告、收入验证、就业历史。数量在设计时已固定，不会随申请变化。
 
@@ -707,7 +707,7 @@ struct RaftNode<const N: usize> { peers: [PeerId; N] }
 
 ### 8.3 编译时确定的流水线阶段
 
-> **[来源: Rust Reference - const generics]**
+> **来源: [Rust Reference - const generics](https://doc.rust-lang.org/reference/)**
 
 图像处理流水线，设计时已知需要 4 个固定阶段：去噪、锐化、色彩校正、压缩。
 
@@ -823,13 +823,13 @@ pub const fn parallel_reduce<const N: usize>(values: [f64; N]) -> f64 {
 
 ## 权威来源索引
 
-> **[来源: Workflow Patterns Initiative]**
-> **[来源: van der Aalst 2003]**
-> **[来源: Russell 2006]**
-> **[来源: Rust Reference]**
-> **[来源: The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: Tokio Docs]**
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)**
+> **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)**
+> **来源: [Russell 2006](https://www.workflowpatterns.com/)**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Tokio Docs](https://tokio.rs/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ---

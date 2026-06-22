@@ -17,8 +17,8 @@
 
 ## 📋 目录
 
-> **[来源: Rust Official Docs]** ·
-> **[来源: Wikipedia - Software Development Best Practices]** ·
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
+> **来源: [Wikipedia - Software Development Best Practices](https://en.wikipedia.org/wiki/Software_Development_Best_Practices)** ·
 > **[来源: ACM - Code Quality Metrics]** ·
 > **[来源: IEEE - Software Engineering Standards]** ·
 > **[来源: Rust Project Guidelines]**
@@ -129,7 +129,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档提供 Rust 项目开发的综合最佳实践，涵盖从代码编写到项目组织的各个方面，合并了项目级代码质量、性能、测试、文档、工具使用等主题。
 
@@ -139,13 +139,13 @@
 
 ## 1. 代码质量最佳实践
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 所有权和借用
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **✅ 最佳实践**:
 
@@ -182,9 +182,9 @@ fn good_process(data: &[i32]) -> i32 {
 
 ### 1.2 类型安全
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **✅ 最佳实践**: 使用新类型模式、枚举而非魔法数字、Option 而非 null
 
@@ -217,9 +217,9 @@ fn find_user(id: UserId) -> Option<User> {
 
 ### 1.3 错误处理
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **✅ 最佳实践**: 使用 Result 和 ? 操作符、自定义错误类型、有意义的错误信息
 
@@ -255,13 +255,13 @@ fn read_config(path: &str) -> Result<Config> {
 
 ## 2. 性能优化最佳实践
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 内存管理
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **✅ 最佳实践**: Vec::with_capacity 预分配、Box 大结构体、Cow 避免克隆
 
@@ -290,9 +290,9 @@ fn process_string(s: Cow<str>) -> String {
 
 ### 2.2 迭代器优化
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **✅ 最佳实践**: 迭代器链、collect 指定类型、enumerate 获取索引
 
@@ -317,9 +317,9 @@ for (idx, value) in data.iter().enumerate() {
 
 ### 2.3 零成本抽象
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **✅ 最佳实践**: 泛型、#[inline] 关键路径
 
@@ -346,11 +346,11 @@ fn error_handler() {
 
 ## 3. 错误处理最佳实践
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 3.1 自定义错误类型
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **✅ 最佳实践**: 实现 Error + Display、thiserror 等
 
@@ -388,7 +388,7 @@ impl std::error::Error for CustomError {}
 
 ### 3.2 错误传播
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **✅ 最佳实践**: ? 操作符、map_err 转换
 
@@ -412,11 +412,11 @@ fn process_file(path: &str) -> Result<Vec<u8>, AppError> {
 
 ## 4. 测试最佳实践
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 4.1 单元测试
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **✅ 最佳实践**: #[cfg(test)]、assert_eq、#[should_panic]
 
@@ -447,7 +447,7 @@ mod tests {
 
 ### 4.2 集成测试
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **✅ 最佳实践**: tests/ 目录、完整工作流测试
 
@@ -493,7 +493,7 @@ fn test_concurrent_access() {
 
 ### 4.3 文档测试
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **✅ 最佳实践**: /// 示例块、可运行示例
 
@@ -524,11 +524,11 @@ pub fn add(a: i32, b: i32) -> i32 {
 
 ## 5. 文档最佳实践
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 5.1 代码文档
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **✅ 最佳实践**: Arguments、Returns、Examples 块
 
@@ -565,7 +565,7 @@ pub fn process(input: &str, options: &Options) -> Result<ProcessResult, ProcessE
 
 ### 5.2 README 文档
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **✅ 最佳实践**: 项目概述、快速开始、特性列表、贡献指南
 
@@ -607,11 +607,11 @@ pub fn process(input: &str, options: &Options) -> Result<ProcessResult, ProcessE
 
 ## 6. 安全性最佳实践
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 6.1 输入验证
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **✅ 最佳实践**: 空值检查、长度限制、类型校验
 
@@ -639,7 +639,7 @@ fn process_input(input: &UserInput) -> Result<(), ValidationError> {
 
 ### 6.2 资源管理
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **✅ 最佳实践**: RAII、Drop 实现、避免泄漏
 
@@ -683,11 +683,11 @@ impl<'a> Drop for LockGuard<'a> {
 
 ## 7. 并发编程最佳实践
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 7.1 线程安全
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **✅ 最佳实践**: Arc + Mutex、通道优先于共享可变状态
 
@@ -726,7 +726,7 @@ let received = rx.recv().unwrap();
 
 ### 7.2 无锁编程
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **✅ 最佳实践**: AtomicUsize 等原子类型、Ordering 选型
 
@@ -753,11 +753,11 @@ fn get_count() -> usize {
 
 ## 8. 异步编程最佳实践
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 8.1 Future 和 async/await
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **✅ 最佳实践**: async fn、.await、避免阻塞
 
@@ -793,7 +793,7 @@ async fn cpu_intensive_task(data: Vec<u8>) -> Vec<u8> {
 
 ### 8.2 错误处理
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **✅ 最佳实践**: Result 传播、`Box<dyn Error>`
 
@@ -822,11 +822,11 @@ enum AsyncError {
 
 ## 9. 模块设计最佳实践
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 9.1 模块组织
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **✅ 最佳实践**: pub mod、分层结构
 
@@ -849,7 +849,7 @@ pub use core::types::{Config, Result};
 
 ### 9.2 可见性控制
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **✅ 最佳实践**: pub、pub(crate)、pub(super)
 
@@ -873,11 +873,11 @@ mod inner {
 
 ## 10. 项目组织最佳实践
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 10.1 目录结构
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **✅ 最佳实践**: src/、tests/、benches/、examples/
 
@@ -907,7 +907,7 @@ my_project/
 
 ### 10.2 特性标志
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **✅ 最佳实践**: [features]、default、可选依赖
 
@@ -944,11 +944,11 @@ pub struct Config {
 
 ## 11. 工具使用
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 11.1 Clippy
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```bash
 # 运行 clippy
@@ -1076,7 +1076,7 @@ cargo clippy -- -D warnings
 
 ### 11.2 rustfmt
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```bash
 # 格式化代码
@@ -1088,7 +1088,7 @@ cargo fmt -- --check
 
 ### 11.3 依赖管理
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```toml
 [dependencies]
@@ -1109,11 +1109,11 @@ mockall = "0.12"
 
 ## 12. 性能监控
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 12.1 基准测试
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **✅ 最佳实践**: criterion、benches/ 目录
 
@@ -1139,7 +1139,7 @@ criterion_main!(benches);
 
 ### 12.2 性能分析
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```bash
 # 使用 perf (Linux)
@@ -1159,11 +1159,11 @@ cargo valgrind --bin my_app
 
 ## 13. 代码示例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 13.1 新类型模式
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use std::fmt;
@@ -1201,7 +1201,7 @@ impl FromStr for UserId {
 
 ### 13.2 Builder 模式
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 #[derive(Debug, Clone)]
@@ -1268,7 +1268,7 @@ let config = Config::builder()
 
 ### 13.3 状态机模式
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 // 状态标记类型
@@ -1342,7 +1342,7 @@ println!("运行时长: {:?}", stopped.duration());
 
 ### 场景1: 新项目启动
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 为新 Rust 项目建立最佳实践基线：
 
@@ -1352,7 +1352,7 @@ println!("运行时长: {:?}", stopped.duration());
 
 ### 场景2: 代码审查
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 使用本指南进行代码审查：
 
@@ -1362,7 +1362,7 @@ println!("运行时长: {:?}", stopped.duration());
 
 ### 场景3: 性能优化
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 系统性地优化 Rust 代码性能：
 
@@ -1373,7 +1373,7 @@ println!("运行时长: {:?}", stopped.duration());
 
 ### 场景4: 团队代码规范
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 建立团队统一的 Rust 编码规范：
 
@@ -1408,7 +1408,7 @@ println!("运行时长: {:?}", stopped.duration());
 
 ### 官方资源
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 - [Rust 官方文档](https://doc.rust-lang.org/)
 - [Rust API 指南](https://rust-lang.github.io/api-guidelines/)
@@ -1417,7 +1417,7 @@ println!("运行时长: {:?}", stopped.duration());
 
 ### 在线课程 (Coursera)
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 - [Rust Programming Specialization](https://www.coursera.org/specializations/rust-programming) (Duke University) - Rust基础、数据结构、并发编程
 - [Programming in Rust](https://www.coursera.org/learn/programming-in-rust) (University of Colorado Boulder) - Rust编程基础
@@ -1427,7 +1427,7 @@ println!("运行时长: {:?}", stopped.duration());
 
 ### 项目资源
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 - C01 所有权
 - C02 类型系统
@@ -1444,11 +1444,11 @@ println!("运行时长: {:?}", stopped.duration());
 
 ### 1. array_windows - 零开销滑动窗口
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 #### 什么时候使用 array_windows？
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 | 场景 | 推荐 | 原因 |
 |------|------|------|
@@ -1459,7 +1459,7 @@ println!("运行时长: {:?}", stopped.duration());
 
 #### 最佳实践示例
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 // ✅ 推荐：使用 array_windows 进行类型安全迭代
@@ -1488,7 +1488,7 @@ fn bad_example(data: &[i32], n: usize) -> Vec<i32> {
 
 #### 性能检查清单
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - [ ] 窗口大小是否在编译期已知？
 - [ ] 是否在热路径上（高频调用）？
@@ -1499,11 +1499,11 @@ fn bad_example(data: &[i32], n: usize) -> Vec<i32> {
 
 ### 2. ControlFlow - 清晰的提前终止语义
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 #### ControlFlow vs Result/Option 选择指南
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```
 需要提前终止？
@@ -1515,7 +1515,7 @@ fn bad_example(data: &[i32], n: usize) -> Vec<i32> {
 
 #### 最佳实践：验证管道
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use std::ops::ControlFlow;
@@ -1549,7 +1549,7 @@ fn validate_and_process(input: &UserInput) -> ControlFlow<ValidationError, Proce
 
 #### 最佳实践：搜索与短路
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 // ✅ 推荐：使用 ControlFlow 进行短路搜索
@@ -1574,11 +1574,11 @@ fn find_first_valid_connection(connections: &[Connection]) -> Option<&Connection
 
 ### 3. LazyLock/LazyCell - 延迟初始化优化
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 #### 热路径优化模式
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 use std::sync::LazyLock;
@@ -1613,7 +1613,7 @@ impl DatabasePool {
 
 #### 单线程可变缓存模式
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use std::cell::LazyCell;
@@ -1655,11 +1655,11 @@ impl<T> LocalCache<T> {
 
 ### 4. 数学常量 - 精确计算
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 #### 使用标准库常量的好处
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust
 // ✅ 推荐：使用 Rust 1.96 标准库常量
@@ -1702,11 +1702,11 @@ where
 
 ### 5. 综合性能优化检查清单
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 #### array_windows 优化
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 - [ ] 窗口大小是否 <= 32（编译器展开限制）？
 - [ ] 是否避免了不必要的 collect()？
@@ -1714,7 +1714,7 @@ where
 
 #### ControlFlow 优化
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 - [ ] 是否正确区分了 "错误" vs "提前终止"？
 - [ ] 是否使用了 ? 操作符简化代码？
@@ -1722,7 +1722,7 @@ where
 
 #### LazyLock 优化
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - [ ] 是否在热路径上使用了 get()？
 - [ ] 是否避免了在循环中重复访问？
@@ -1732,7 +1732,7 @@ where
 
 ### 快速参考卡片
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 // array_windows - 零开销窗口迭代
@@ -2290,39 +2290,39 @@ graph TD
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Software Development Best Practices]**
-> **[来源: Wikipedia - Code Review]**
-> **[来源: Wikipedia - Software Quality]**
-> **[来源: Rust API Guidelines]**
+> **来源: [Wikipedia - Software Development Best Practices](https://en.wikipedia.org/wiki/Software_Development_Best_Practices)**
+> **来源: [Wikipedia - Code Review](https://en.wikipedia.org/wiki/Code_Review)**
+> **来源: [Wikipedia - Software Quality](https://en.wikipedia.org/wiki/Software_Quality)**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 > **[来源: ACM - Code Quality Metrics]**
 > **[来源: IEEE - Software Engineering Standards]**
 > **[来源: Google Style Guides]**
 > **[来源: Microsoft Secure Coding Guidelines]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages Survey]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design and Implementation]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM - Systems Programming Languages Survey](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI - Programming Language Design and Implementation](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

@@ -14,13 +14,13 @@
 
 ## 研究方法概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 形式化方法研究流程
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 问题定义
@@ -40,9 +40,9 @@
 
 ### 研究笔记结构
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```markdown
 # 研究笔记模板
@@ -78,9 +78,9 @@
 
 ### 证明验证工具
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 形式化验证工具链
@@ -106,9 +106,9 @@ fn double(x: i32) -> i32 {
 
 ### 研究方法论示例
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 研究问题：验证 Vec<T> 的 push 操作内存安全
@@ -167,9 +167,9 @@ mod verification_tests {
 
 ### 类型系统研究示例
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 研究问题：验证类型系统的子类型关系
@@ -194,7 +194,7 @@ fn verify<'long: 'short>(long: &'long str, short: &'short str) {
 
 ### 所有权研究示例
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 // 研究问题：验证所有权转移的正确性
@@ -239,7 +239,7 @@ fn borrowing_rules() {
 
 ### 形式化规范写作
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 /// # 规范
@@ -340,8 +340,8 @@ mod property_tests {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
-> **[来源: Coq Reference Manual]**
-> **[来源: TLA+ Documentation]**
-> **[来源: ACM - Formal Verification]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
+> **来源: [Coq Reference Manual](https://coq.inria.fr/doc/)**
+> **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**

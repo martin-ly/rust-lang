@@ -11,7 +11,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Computer Security]** · **[来源: Wikipedia - Cryptography]** · **[来源: Rust Crypto Working Group]** · **[来源: OpenSSL Documentation]** · **[来源: Rustls Documentation - docs.rs/rustls] · **[来源: ACM - Security in Systems Programming]** · **[来源: IEEE - Secure Software Development]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Computer Security](https://en.wikipedia.org/wiki/Computer_Security)** · **来源: [Wikipedia - Cryptography](https://en.wikipedia.org/wiki/Cryptography)** · **[来源: Rust Crypto Working Group]** · **[来源: OpenSSL Documentation]** · **[来源: Rustls Documentation - docs.rs/rustls] · **[来源: ACM - Security in Systems Programming]** · **[来源: IEEE - Secure Software Development]**
 
 - [Rust网络安全工具开发指南](#rust网络安全工具开发指南)
   - [目录](#目录)
@@ -56,13 +56,13 @@
 
 ## 1. 安全工具概述
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 Rust在安全领域的优势
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Rust语言因其独特的内存安全保证和零成本抽象特性，成为开发网络安全工具的理想选择：
 
@@ -86,7 +86,7 @@ fn process_sensitive_data(data: Vec<u8>) {
 
 ### 1.2 内存安全与漏洞预防
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 Rust通过编译时检查消除常见的内存安全漏洞：
 
@@ -111,7 +111,7 @@ fn safe_parse_input(input: &str) -> Result<i32, ParseIntError> {
 
 ### 1.3 常见安全工具类型
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```text
 安全工具生态系统
@@ -140,7 +140,7 @@ fn safe_parse_input(input: &str) -> Result<i32, ParseIntError> {
 
 ### 2.1 ring库
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 `ring`是Rust生态中最流行的密码学库之一，提供安全的底层加密原语：
 
@@ -180,7 +180,7 @@ fn encrypt_aes_gcm(
 
 ### 2.2 rustls（TLS实现）
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 `rustls`是一个现代、安全的TLS库，完全用Rust编写：
 
@@ -201,7 +201,7 @@ fn configure_tls_client(root_certs: Vec<Certificate>) -> Arc<ClientConfig> {
 
 ### 2.3 AEAD加密
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use chacha20poly1305::{
@@ -235,7 +235,7 @@ impl ChaChaCipher {
 
 ### 2.4 密钥派生
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 use argon2::{self, Config, ThreadMode, Variant, Version};
@@ -268,7 +268,7 @@ fn derive_key_argon2id(
 
 ### 3.1 端口扫描器
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use tokio::net::TcpStream;
@@ -345,7 +345,7 @@ impl AsyncPortScanner {
 
 ### 3.2 异步扫描优化
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 use tokio::sync::{mpsc, Semaphore};
@@ -412,7 +412,7 @@ impl AsyncScanManager {
 
 ### 4.1 静态分析
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 use std::collections::HashMap;
@@ -512,7 +512,7 @@ struct AnalysisReport {
 
 ### 5.1 数据包捕获（libpcap）
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 use pcap::{Capture, Device};
@@ -570,7 +570,7 @@ impl PacketCaptureEngine {
 
 ### 5.2 规则引擎
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use serde::{Deserialize, Serialize};
@@ -646,7 +646,7 @@ struct RuleMatch {
 
 ### 6.1 沙箱环境
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 use std::process::Command;
@@ -710,7 +710,7 @@ struct SandboxExecutionResult {
 
 ### 7.1 日志收集
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 use serde::{Serialize, Deserialize};
@@ -755,7 +755,7 @@ impl LogCollector {
 
 ### 7.2 SIEM集成
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use reqwest::Client;
@@ -892,7 +892,7 @@ impl SimpleIDS {
 
 ### 9.1 输入验证
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 pub mod input_validation {
@@ -926,7 +926,7 @@ pub mod input_validation {
 
 ### 9.2 错误处理
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use thiserror::Error;
@@ -946,7 +946,7 @@ pub enum SecurityError {
 
 ### 9.3 敏感数据处理
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
 use zeroize::{Zeroize, Zeroizing};
@@ -976,7 +976,7 @@ impl Drop for SecureKey {
 
 ### 10.1 安全标准
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust,ignore
 pub mod compliance {
@@ -1023,7 +1023,7 @@ pub mod compliance {
 
 ### 10.2 审计日志
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 pub struct AuditLogger {
@@ -1059,7 +1059,7 @@ pub struct AuditEvent {
 
 ### 10.3 取证工具
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 pub mod forensics {
@@ -1176,17 +1176,17 @@ proptest = "1.0"
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**

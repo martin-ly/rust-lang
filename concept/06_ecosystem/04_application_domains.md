@@ -21,7 +21,7 @@
 > **双维定位**: P×Eva — 评估 Rust 在特定领域的适用性
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Traits](../02_intermediate/01_traits.md) · [Async](../03_advanced/02_async.md) · [Unsafe](../03_advanced/03_unsafe.md) · [Core Crates](./03_core_crates.md) [来源: [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/)]
 > **后置概念**: [AI Integration](../07_future/01_ai_integration.md) · [Formal Methods](../07_future/02_formal_methods.md)
-> **主要来源**: [Rust in Production] · [Rust Foundation] · [Ferrous Systems] · [RustConf] · [AWS/Google/Microsoft Rust 博客]
+> **主要来源**: [Rust in Production](https://www.rust-lang.org/production) · [Rust Foundation] · [Ferrous Systems] · [RustConf] · [AWS/Google/Microsoft Rust 博客]
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -39,35 +39,35 @@
 
 [来源: [Async Book](https://rust-lang.github.io/async-book/)]
 
-> **[Wikipedia: Software engineering]** Software engineering is an engineering-based approach to software development.
+> **[Wikipedia: Software engineering](https://en.wikipedia.org/wiki/Software_engineering)** Software engineering is an engineering-based approach to software development.
 > A software engineer is a person who applies the engineering design process to design, develop, test, maintain, and evaluate computer software.
 > **来源**: <https://en.wikipedia.org/wiki/Software_engineering>
 
-> **[Wikipedia: Systems programming]** Systems programming is the activity of programming computer system software.
+> **[Wikipedia: Systems programming](https://en.wikipedia.org/wiki/Systems_programming)** Systems programming is the activity of programming computer system software.
 > The primary distinguishing characteristic of systems programming when compared to application programming is that application programming aims to produce software which provides services to the user,
 > whereas systems programming aims to produce software and software platforms which provide services to other software. [来源: [Rust Embedded Book](https://docs.rust-embedded.org/book/)]
 > **来源**: <https://en.wikipedia.org/wiki/Systems_programming>
 
-> **[Wikipedia: Web framework]** A web framework (WF) or web application framework (WAF) is a software framework that is designed to support the development of web applications including web services,
+> **[Wikipedia: Web framework](https://en.wikipedia.org/wiki/Web_framework)** A web framework (WF) or web application framework (WAF) is a software framework that is designed to support the development of web applications including web services,
 > web resources, and web APIs.
 > **来源**: <https://en.wikipedia.org/wiki/Web_framework>
 
-> **[Wikipedia: Embedded system]** An embedded system is a computer system—a combination of a computer processor,
+> **[Wikipedia: Embedded system](https://en.wikipedia.org/wiki/Embedded_system)** An embedded system is a computer system—a combination of a computer processor,
 > computer memory, and input/output peripheral devices—that has a dedicated function within a larger mechanical or electronic system.
 > **来源**: <https://en.wikipedia.org/wiki/Embedded_system>
 
-> **[Wikipedia: Blockchain]** A blockchain is a distributed ledger with growing lists of records (blocks) that are securely linked together via cryptographic hashes.
+> **[Wikipedia: Blockchain](https://en.wikipedia.org/wiki/Blockchain)** A blockchain is a distributed ledger with growing lists of records (blocks) that are securely linked together via cryptographic hashes.
 > **来源**: <https://en.wikipedia.org/wiki/Blockchain>
 
-> **[Wikipedia: Game engine]** A game engine is a software framework primarily designed for the development of video games,
+> **[Wikipedia: Game engine](https://en.wikipedia.org/wiki/Game_engine)** A game engine is a software framework primarily designed for the development of video games,
 > and generally includes relevant libraries and support programs. [来源: [Are We Game Yet](https://arewegameyet.rs/)]
 > **来源**: <https://en.wikipedia.org/wiki/Game_engine>
 
-> **[Wikipedia: Command-line interface]** A command-line interface (CLI) is a means of interacting with a device or
+> **[Wikipedia: Command-line interface](https://en.wikipedia.org/wiki/Command_line_interface)** A command-line interface (CLI) is a means of interacting with a device or
 > computer program with commands from a user or client, and responses from the device or program, in the form of lines of text.
 > **来源**: <https://en.wikipedia.org/wiki/Command-line_interface>
 
-> **[Wikipedia: Machine learning]** Machine learning (ML) is a field of study in artificial intelligence concerned with the development and
+> **[Wikipedia: Machine learning](https://en.wikipedia.org/wiki/Machine_learning)** Machine learning (ML) is a field of study in artificial intelligence concerned with the development and
 > study of statistical algorithms that can learn from data and generalize to unseen data.
 > **来源**: <https://en.wikipedia.org/wiki/Machine_learning>
 
@@ -257,7 +257,7 @@ Rust 在 CLI 领域是最成熟的应用之一。核心优势：
 | **nushell** | bash/zsh | 结构化数据、类型安全 shell | 32k+ stars |
 | **helix** | vim | 模态编辑、tree-sitter、LSP | 35k+ stars |
 
-> **来源**: [GitHub] · [Rust CLI Book] · 可信度: ✅
+> **来源**: [GitHub](https://github.com/) · [Rust CLI Book](https://rust-cli.github.io/book/) · 可信度: ✅
 
 ### 4.3 嵌入式与物联网
 >
@@ -295,7 +295,7 @@ Rust 在嵌入式领域的独特价值：
 
 **关键洞察**：embassy 的 `async` 在 `no_std` 环境下的实现，证明了 Rust 的 async/await 不是运行时的专利——通过编译期状态机转换，裸机上也能获得协作式多任务，且无堆分配。
 
-> **来源**: [Ferrous Systems — Embedded Rust] · [Embassy Book] · 可信度: ✅
+> **来源**: [Ferrous Systems — Embedded Rust] · [Embassy Book](https://embassy.dev/book/) · 可信度: ✅
 
 ### 4.4 游戏与实时图形
 
@@ -553,7 +553,7 @@ fn main() -> ! {
 > **关键洞察**: `defmt`（deferred formatting）通过将格式化字符串留在主机端，仅传输原始数据到调试器，将日志开销降低 **10-100 倍**。这是 Rust 嵌入式生态的**杀手级工具**。
 [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
-> **来源**: [Ferrous Systems] · [Embassy Book] · [probe-rs] · 可信度: ✅
+> **来源**: [Ferrous Systems] · [Embassy Book](https://embassy.dev/book/) · [probe-rs] · 可信度: ✅
 
 ### 4.11 CLI 工具工程化
 
@@ -594,7 +594,7 @@ fn main() -> Result<()> {
 > **关键洞察**: Rust CLI 的**分发优势**是其他语言难以比拟的——`cargo build --release` 生成单二进制，`cargo-dist` 自动打包 Windows `.msi`、macOS `.dmg`、Linux `.deb`。无需运行时、无依赖地狱。
 [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
 
-> **来源**: [Rust CLI Book] · [cargo-dist docs] · 可信度: ✅
+> **来源**: [Rust CLI Book](https://rust-cli.github.io/book/) · [cargo-dist docs] · 可信度: ✅
 
 ### 4.12 游戏开发：Bevy 生态深度
 
@@ -789,7 +789,7 @@ graph TD
 > **关键洞察**: 领域选择不是“Rust 是否适合”，而是**“约束优先级排序”**。当性能、安全、并发中任意两项为硬约束时，Rust 通常是最佳选择；当开发速度和生态数量为唯一约束时，其他语言可能更优。
 [来源: [Wikipedia — Software engineering](https://en.wikipedia.org/wiki/Software_engineering)]
 
-> **来源**: [Rust in Production] · [Rust Foundation Survey] · 可信度: ✅
+> **来源**: [Rust in Production](https://www.rust-lang.org/production) · [Rust Foundation Survey] · 可信度: ✅
 
 ---
 
@@ -798,13 +798,13 @@ graph TD
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
-| Rust 适合系统编程 | [TRPL] · [Wikipedia: Systems programming] | ✅ |
-| Web 框架定义 | [Wikipedia: Web framework] | ✅ |
-| 嵌入式系统定义 | [Wikipedia: Embedded system] | ✅ |
-| 区块链定义 | [Wikipedia: Blockchain] | ✅ |
-| 游戏引擎定义 | [Wikipedia: Game engine] | ✅ |
-| CLI 定义 | [Wikipedia: Command-line interface] | ✅ |
-| ML 定义 | [Wikipedia: Machine learning] | ✅ |
+| Rust 适合系统编程 | [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Wikipedia: Systems programming](https://en.wikipedia.org/wiki/Systems_programming) | ✅ |
+| Web 框架定义 | [Wikipedia: Web framework](https://en.wikipedia.org/wiki/Web_framework) | ✅ |
+| 嵌入式系统定义 | [Wikipedia: Embedded system](https://en.wikipedia.org/wiki/Embedded_system) | ✅ |
+| 区块链定义 | [Wikipedia: Blockchain](https://en.wikipedia.org/wiki/Blockchain) | ✅ |
+| 游戏引擎定义 | [Wikipedia: Game engine](https://en.wikipedia.org/wiki/Game_engine) | ✅ |
+| CLI 定义 | [Wikipedia: Command-line interface](https://en.wikipedia.org/wiki/Command_line_interface) | ✅ |
+| ML 定义 | [Wikipedia: Machine learning](https://en.wikipedia.org/wiki/Machine_learning) | ✅ |
 | Discord 使用 Rust | [Discord Blog] | ✅ |
 | AWS Firecracker 用 Rust | [AWS Blog] | ✅ |
 | Google Android Rust | [Android Security Blog] | ✅ |
@@ -1234,7 +1234,7 @@ graph TD
 
 **安全边界**: Embassy 通过 `embassy::time` 的 `Instant` 类型和 `embassy::sync` 的通道，将中断上下文与任务上下文的形式化隔离封装为 safe API。`critical_section` 是唯一的 `unsafe` 边界，标记中断屏蔽的短暂区域。
 
-> **[来源: Embassy Book]** `embassy` 的 `async` 不是运行时的专利——通过编译期状态机转换，裸机上也能获得协作式多任务。
+> **来源: [Embassy Book](https://embassy.dev/book/)** `embassy` 的 `async` 不是运行时的专利——通过编译期状态机转换，裸机上也能获得协作式多任务。
 
 ---
 

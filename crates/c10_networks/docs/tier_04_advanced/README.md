@@ -204,7 +204,7 @@ tracing-subscriber = "0.3"
 
 - **Tokio**: <https://github.com/tokio-rs/tokio>
 - **Quinn (QUIC)**: <https://github.com/quinn-rs/quinn>
-- **Pingora**: <https://github.com/cloudflare/pingora>
+- **Pingora** (历史参考，其 Rust crate 存在已知安全漏洞，不推荐直接依赖): <https://github.com/cloudflare/pingora>
 
 ---
 

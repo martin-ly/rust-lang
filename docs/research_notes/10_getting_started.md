@@ -59,7 +59,7 @@
 
 ## 🎯 欢迎 {#-欢迎}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 欢迎来到 Rust 研究笔记系统！本指南将帮助您快速了解和使用研究笔记系统。
 
@@ -67,9 +67,9 @@
 
 ### 系统简介
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 研究笔记系统是一个完整的 Rust 语言研究文档体系，包含：
 
@@ -82,13 +82,13 @@
 
 ## 📚 第一步：了解系统 {#-第一步了解系统}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 阅读主索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 首先，阅读 [主索引](./README.md) 了解系统结构：
 
@@ -99,9 +99,9 @@
 
 ### 1.2 查看系统总结
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 阅读 [系统总结](10_system_summary.md) 了解系统概览：
 
@@ -112,9 +112,9 @@
 
 ### 1.3 浏览快速参考
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 查看 [快速参考](./10_quick_reference.md) 快速查找感兴趣的主题：
 
@@ -126,13 +126,13 @@
 
 ## 🔍 第二步：查找研究主题 {#-第二步查找研究主题}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 使用完整索引
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 查看 [完整索引](./INDEX.md) 浏览所有研究笔记：
 
@@ -143,9 +143,9 @@
 
 ### 2.2 查看研究路线图
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 阅读 [研究路线图](./10_research_roadmap.md) 了解研究计划：
 
@@ -155,9 +155,9 @@
 
 ### 2.3 浏览目录索引
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 查看各目录的 README：
 
@@ -173,7 +173,7 @@
 
 ### 3.1 选择研究主题
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 根据您的兴趣选择研究主题：
 
@@ -184,7 +184,7 @@
 
 ### 3.2 阅读研究笔记
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 每个研究笔记包含：
 
@@ -196,7 +196,7 @@
 
 ### 3.3 使用工具指南
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 如果需要使用研究工具，查看 [工具使用指南](./10_tools_guide.md)：
 
@@ -212,13 +212,13 @@
 
 ### 4.1 查看研究路线图
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 首先查看 [研究路线图](./10_research_roadmap.md) 了解研究计划，选择合适的研究主题。
 
 ### 4.2 使用模板
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 使用 [研究笔记模板](./10_template.md) 创建新文件：
 
@@ -228,7 +228,7 @@
 
 ### 4.3 遵循规范
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 确保您的内容遵循：
 
@@ -238,7 +238,7 @@
 
 ### 4.4 更新索引
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 创建新笔记后，更新：
 
@@ -254,7 +254,7 @@
 
 ### 5.1 阅读贡献指南
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 详细阅读 [贡献指南](./10_contributing.md) 了解：
 
@@ -435,13 +435,13 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

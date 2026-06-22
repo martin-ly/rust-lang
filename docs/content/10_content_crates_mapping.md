@@ -40,7 +40,7 @@
 
 ## 🗺️ 映射关系概览
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 content/                    crates/                     docs/05_guides/
@@ -61,13 +61,13 @@ representations/ ────────▶  (知识表示)                 ─
 
 ## 📂 详细映射
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### content/emerging/ → C04 + C11
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | Content 文档 | 关联 Crate | 说明 |
 |--------------|------------|------|
@@ -87,7 +87,7 @@ representations/ ────────▶  (知识表示)                 ─
 
 ### content/ecosystem/ → C05 + C06 + C10
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | Content 文档 | 关联 Crate | 说明 |
 |--------------|------------|------|
@@ -108,7 +108,7 @@ representations/ ────────▶  (知识表示)                 ─
 
 ### content/production/ → C07 + C12
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | Content 文档 | 关联 Crate | 说明 |
 |--------------|------------|------|
@@ -127,7 +127,7 @@ representations/ ────────▶  (知识表示)                 ─
 
 ### content/academic/ → C01 + C04
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 | Content 文档 | 关联 Crate | 说明 |
 |--------------|------------|------|
@@ -146,7 +146,7 @@ representations/ ────────▶  (知识表示)                 ─
 
 ### content/scenarios/ → C09 + C10
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 | Content 文档 | 关联 Crate | 说明 |
 |--------------|------------|------|
@@ -167,7 +167,7 @@ representations/ ────────▶  (知识表示)                 ─
 
 ### 项目 1: Web 应用
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **涉及内容**:
 
@@ -184,7 +184,7 @@ representations/ ────────▶  (知识表示)                 ─
 
 ### 项目 2: 分布式任务队列
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **涉及内容**:
 
@@ -327,10 +327,10 @@ representations/ ────────▶  (知识表示)                 ─
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**

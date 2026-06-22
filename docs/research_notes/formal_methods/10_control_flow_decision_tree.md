@@ -34,7 +34,7 @@
 
 ## 📊 控制流选择决策树
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 graph TD
@@ -73,13 +73,13 @@ graph TD
 
 ## 🔀 分支结构决策
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### match vs if-let
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 场景 | 推荐 | 示例 |
 |------|------|------|
@@ -116,7 +116,7 @@ match result {
 
 ### 循环类型选择矩阵
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 | 场景 | 推荐 | 说明 |
 |------|------|------|
@@ -166,7 +166,7 @@ loop {
 
 ### 决策流程
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```mermaid
 graph LR
@@ -186,7 +186,7 @@ graph LR
 
 ### 对比示例
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 // 场景: 找第一个满足条件的元素
@@ -232,7 +232,7 @@ let result = collection.iter().try_for_each(|item| {
 
 ### 错误处理决策树
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```mermaid
 graph TD
@@ -316,12 +316,12 @@ graph TD
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
-> **[来源: Wikipedia - Model Checking]**
-> **[来源: ACM - Formal Verification Survey]**
-> **[来源: IEEE - Formal Specification Standards]**
-> **[来源: POPL - Automated Verification]**
-> **[来源: RustBelt - Rust Formal Semantics]**
-> **[来源: TLA+ Documentation]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
+> **来源: [Wikipedia - Model Checking](https://en.wikipedia.org/wiki/Model_Checking)**
+> **来源: [ACM - Formal Verification Survey](https://dl.acm.org/)**
+> **来源: [IEEE - Formal Specification Standards](https://standards.ieee.org/)**
+> **来源: [POPL - Automated Verification](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)**
+> **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**
 
 ---

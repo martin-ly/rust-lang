@@ -99,10 +99,10 @@ cd exercises && cargo test
 在 `CHANGELOG.md` 顶部添加新章节：
 
 ```markdown
-## [2.6.0] - 2026-07-09 — Rust 1.97.0 稳定支持
+## [3.1.0] - 2026-07-09 — Rust 1.97.0 稳定支持
 
 ### 语言特性
-- VecDeque::truncate_front / retain_back
+- VecDeque::truncate_front / retain_back（若稳定）
 - ...（根据实际稳定内容补充）
 
 ### 文档更新

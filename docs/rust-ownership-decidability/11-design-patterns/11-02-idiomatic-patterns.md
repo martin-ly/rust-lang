@@ -9,13 +9,13 @@
 > **对齐日期**: 2026-05-12
 > **主题**: 编写地道Rust代码的模式与技巧
 > **目标**: 掌握Rust特有的编程范式，写出符合社区习惯的代码
-> **[来源: Rust API Guidelines]** · **[来源: Rust Design Patterns Book]** · **[来源: Wikipedia - Programming Idiom]** · **[来源: TRPL Ch. 18]** · **[来源: Effective Rust - effective-rust.com]** · **[来源: Rust Reference]
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** · **来源: [Rust Design Patterns Book](https://rust-lang.github.io/design-patterns/)** · **来源: [Wikipedia - Programming Idiom](https://en.wikipedia.org/wiki/Programming_Idiom)** · **来源: [TRPL Ch. 18](https://doc.rust-lang.org/book/ch18-00-patterns.html)** · **[来源: Effective Rust - effective-rust.com]** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ---
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [惯用Rust模式](#惯用rust模式)
   - [目录](#目录)
@@ -76,13 +76,13 @@
 
 ## 1. 引言
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 什么是惯用Rust
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 惯用Rust（Idiomatic Rust）是指符合Rust语言哲学和社区实践的编程方式。它不仅仅是"能运行的代码"，而是：
 
@@ -109,7 +109,7 @@ fn process(input: Option<String>) -> String {
 
 ### 与其他语言的差异
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | 概念 | 其他语言 | Rust惯用方式 |
 |------|---------|-------------|
@@ -130,7 +130,7 @@ Option是Rust处理可能缺失值的惯用方式。
 
 ### 2.1 map
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 `map`将`Option<T>`转换为`Option<U>`，在Some时应用函数，None时保持None。
 
@@ -177,7 +177,7 @@ fn declarative(input: Option<String>) -> Option<usize> {
 
 ### 2.2 and_then
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 `and_then`（也叫`flat_map`）用于当转换函数本身返回Option时，避免嵌套Option。
 
@@ -210,7 +210,7 @@ fn get_user_email(db: &Database, user_id: u64) -> Option<String> {
 
 ### 2.3 unwrap_or / unwrap_or_else
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 提供默认值，但不panic。
 
@@ -232,7 +232,7 @@ let timeout: u64 = config_timeout.unwrap_or_default();
 
 ### 2.4 ok_or / ok_or_else
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 将Option转换为Result，为None时提供错误。
 
@@ -248,7 +248,7 @@ let result2: Result<i32, &str> = None.ok_or("was None");            // Err("was 
 
 ### 2.5 filter / map_or
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust
 // filter: 仅当满足条件时保持Some
@@ -268,7 +268,7 @@ let len = None
 
 ### 2.6 组合子链式调用
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust
 fn process_user_input(input: &str) -> Result<String, String> {
@@ -296,7 +296,7 @@ fn process_user_input(input: &str) -> Result<String, String> {
 
 ### 3.1 ?操作符
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 `?`操作符是Rust错误处理的核心，在Err时提前返回，Ok时解包。
 
@@ -346,7 +346,7 @@ fn parse_then_divide(a: &str, b: &str) -> Option<i32> {
 
 ### 3.2 try_trait与自定义类型
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 use std::ops::ControlFlow;
@@ -382,7 +382,7 @@ fn operation2() -> MyResult<String> {
 
 ### 3.3 map_err错误转换
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 use std::num::ParseIntError;
@@ -416,7 +416,7 @@ fn parse_config(input: &str) -> Result<Vec<i32>, AppError> {
 
 ### 3.4 错误上下文
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 use std::fmt;
@@ -472,7 +472,7 @@ fn read_config(path: &str) -> Result<String, ContextualError> {
 
 ### 4.1 AsRef模式
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 `AsRef<T>`用于泛化地接受借用。
 
@@ -494,7 +494,7 @@ open_file(std::path::PathBuf::from("/etc/passwd")); // PathBuf
 
 ### 4.2 Borrow模式
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 `Borrow<T>`强调语义等价性，常用于HashMap键。
 
@@ -520,7 +520,7 @@ let value = get_value(&map, "key");
 
 ### 4.3 ToOwned模式
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 `ToOwned`从借用创建拥有值。
 
@@ -538,7 +538,7 @@ let v: Vec<i32> = ensure_owned(&[1, 2, 3]);
 
 ### 4.4 泛型参数设计
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 // 灵活的字符串参数
@@ -564,7 +564,7 @@ where
 
 ### 5.1 From/Into
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 `From<T>`和`Into<T>`是Rust类型转换的基础。
 
@@ -601,7 +601,7 @@ connect(Port(8080)); // 已经是Port
 
 ### 5.2 TryFrom/TryInto
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 当转换可能失败时使用。
 
@@ -633,7 +633,7 @@ let result: Result<NonZeroU32, _> = 0u32.try_into();  // Err
 
 ### 5.3 AsRef/AsMut
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 用于廉价引用转换。
 
@@ -669,7 +669,7 @@ fn process_bytes<B: AsRef<[u8]>>(buffer: B) -> usize {
 
 ### 6.1 惰性求值
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 Rust迭代器是惰性的，只有在消费时才执行。
 
@@ -688,7 +688,7 @@ let result: Vec<i32> = (0..100)
 
 ### 6.2 消费器与适配器
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 // 消费器（产生最终结果）
@@ -712,7 +712,7 @@ let zipped: Vec<(i32, i32)> = [1, 2].iter().zip([10, 20].iter()).map(|(&a, &b)| 
 
 ### 6.3 collect策略
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 use std::collections::{HashSet, HashMap, BTreeMap};
@@ -739,7 +739,7 @@ let map: HashMap<i32, i32> = data
 
 ### 6.4 fold与reduce
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 // fold（有初始值）
@@ -773,7 +773,7 @@ let result: Result<i32, &str> = [1, 2, 3, 4].iter().try_fold(0, |acc, &x| {
 
 ### 6.5 自定义迭代器
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 struct Fibonacci {
@@ -1243,21 +1243,21 @@ thread::spawn(move || {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Design Pattern]**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 
-> **[来源: Rust API Guidelines]**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 
-> **[来源: Gang of Four - Design Patterns]**
+> **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
 
-> **[来源: ACM - Software Design Patterns]**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---
 

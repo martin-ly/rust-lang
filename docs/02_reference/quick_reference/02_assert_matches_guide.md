@@ -5,10 +5,10 @@
 > **Rust 版本**: 1.96.0+ Stable
 > **跟踪 Issue**: rust#108099
 > **Bloom 层级**: 应用
-> **[来源: Rust Standard Library]** ·
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** ·
 > **[来源: RFC 未正式发布，社区长期需求]** ·
-> **[来源: Rust Reference - Patterns]** ·
-> **[来源: TRPL Ch. 18 - Patterns and Matching]** ✅
+> **来源: [Rust Reference - Patterns](https://doc.rust-lang.org/reference/)** ·
+> **来源: [TRPL Ch. 18 - Patterns and Matching](https://doc.rust-lang.org/book/ch18-00-patterns.html)** ✅
 >
 > **受众**: [进阶]
 > **内容分级**: [实验级]
@@ -39,7 +39,7 @@
 
 ## 概述
 
-> **[来源: Rust Standard Library]** · **[来源: Rust Project Goals 2026]** ✅
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** · **来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)** ✅
 
 `assert_matches!` 是 Rust 社区期待已久的模式断言宏，终于随 **1.96.0** 稳定。它允许在测试和调试中直接对 `Result`、`Option`、枚举变体进行**模式匹配断言**，无需繁琐的 `if let` 或 `match` 展开。
 
@@ -65,7 +65,7 @@ debug_assert_matches!(expression, pattern); // 仅 debug 构建触发
 
 ### 旧方式（1.95 及之前）
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 let result = parse_config("key=value");
@@ -84,7 +84,7 @@ if let Ok(config) = result {
 
 ### 新方式（1.96+）
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 let result = parse_config("key=value");
@@ -109,7 +109,7 @@ assert_matches!(
 
 ### 1. `Result` 断言
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust
 #[test]
@@ -121,7 +121,7 @@ fn test_file_open() {
 
 ### 2. 枚举变体验证
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 enum State {
@@ -250,12 +250,12 @@ assert_matches!(result, Ok(Config { key: "test", .. }));
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ---

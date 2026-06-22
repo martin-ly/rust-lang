@@ -11,7 +11,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: Wikipedia - Region-Based Memory Management]** · **[来源: Wikipedia - Type Inference]** · **[来源: ACM - Lifetime Analysis Algorithms]** · **[来源: IEEE - Static Lifetime Verification]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** · **来源: [Wikipedia - Region-Based Memory Management](https://en.wikipedia.org/wiki/Region_Based_Memory_Management)** · **来源: [Wikipedia - Type Inference](https://en.wikipedia.org/wiki/Type_Inference)** · **[来源: ACM - Lifetime Analysis Algorithms]** · **[来源: IEEE - Static Lifetime Verification]**
 
 - [生命周期精通](#生命周期精通)
   - [目录](#目录)
@@ -71,13 +71,13 @@
 
 ## 1. 形式化定义
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 生命周期的形式化模型
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **定义 1.1** (生命周期): 生命周期 `'a` 是程序执行期间的一个连续时间段，表示值或引用的有效范围。
 
@@ -94,7 +94,7 @@
 
 ### 1.2 生命周期的类型系统
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **子类型规则**:
 
@@ -111,7 +111,7 @@
 
 ### 1.3 生命周期的包含关系
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```
         'static（程序整个生命周期）
@@ -134,7 +134,7 @@
 
 ### 2.1 Elision 规则概述
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 Rust 编译器可以自动推断某些常见的生命周期模式，减少显式标注的需要。
 
@@ -146,7 +146,7 @@ Rust 编译器可以自动推断某些常见的生命周期模式，减少显式
 
 ### 2.2 规则 1: 输入生命周期推断
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 // 显式版本
@@ -159,7 +159,7 @@ fn elided(x: &i32, y: &i32) -> i32 { ... }
 
 ### 2.3 规则 2: 单输入生命周期
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 // 显式版本
@@ -172,7 +172,7 @@ fn elided(x: &str) -> &str { x }
 
 ### 2.4 规则 3: 方法中的 `&self`
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 struct Parser<'a> {
@@ -191,7 +191,7 @@ impl<'a> Parser<'a> {
 
 ### 2.5 无法省略的情况
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 // ❌ 编译错误：无法推断输出生命周期
@@ -207,7 +207,7 @@ fn explicit<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### 2.6 Elision 的完整算法
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 // 示例：分析这个函数签名
@@ -236,7 +236,7 @@ fn process<'a>(data: &'a str, config: &Config) -> &'a str;
 
 ### 3.1 多个独立生命周期
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 // 场景：解析器返回与输入文本相同生命周期的结果
@@ -260,7 +260,7 @@ impl<'text, 'config> Parser<'text, 'config> {
 
 ### 3.2 生命周期约束
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 // 约束 'b 至少和 'a 一样长
@@ -291,7 +291,7 @@ where
 
 ### 3.3 生命周期与泛型结合
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 // 泛型函数的生命周期标注
@@ -313,7 +313,7 @@ trait Iterable<'a> {
 
 ### 3.4 生命周期与 trait bound
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 // 返回实现了特定 trait 的引用
@@ -333,7 +333,7 @@ where
 
 ### 3.5 静态生命周期 `'static`
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 // 'static 生命周期贯穿整个程序执行
@@ -378,7 +378,7 @@ std::thread::spawn(move || {
 
 ### 4.1 HRTB 的动机
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 当需要接受对任意生命周期的引用时，使用 HRTB：
 
@@ -402,7 +402,7 @@ where
 
 ### 4.2 HRTB 的形式化定义
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **定义 4.1** (HRTB): 高阶 trait bound 允许对**所有**生命周期进行量化，表示为 `for<'a>`。
 
@@ -414,11 +414,11 @@ F: for<'a> Trait<'a>  ≡  ∀'a: F 满足 Trait<'a>
 
 ### 4.3 HRTB 的实际应用
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 #### 应用 1: 通用闭包
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 fn with_data<F, R>(f: F) -> R
@@ -437,7 +437,7 @@ with_data(|d: &Data| {
 
 #### 应用 2: 回调函数
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 struct EventHandler {
@@ -1053,20 +1053,20 @@ impl<'env> Drop for Connection<'env> {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: Wikipedia - Machine Learning]**
+> **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
 
-> **[来源: Wikipedia - Artificial Intelligence]**
+> **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)**
 
-> **[来源: tch-rs Documentation]**
+> **来源: [tch-rs Documentation](https://docs.rs/tch/latest/tch/)**
 
-> **[来源: ACM - AI Systems]**
+> **来源: [ACM - AI Systems](https://dl.acm.org/)**
 
 ---

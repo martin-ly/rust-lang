@@ -71,7 +71,7 @@
 
 ## Executive Summary
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Rust 1.94.0, released on March 5, 2026, represents a relatively incremental release in terms of ownership and borrow checking features, with most changes focused on standard library API refinements, particularly around `LazyCell`/`LazyLock` ergonomics and iterator enhancements.
 The release includes significant improvements to slice iteration with `array_windows`, relaxation of `BinaryHeap` trait bounds, and several new lints that help catch ownership-related issues.
@@ -80,17 +80,17 @@ The release includes significant improvements to slice iteration with `array_win
 
 ## 1. Language Changes Affecting Ownership
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 Borrow Checker Improvements
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 #### Closure Lifetime Fixes (1.94)
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 - **Change:** "Avoid incorrect lifetime errors for closures"
 - **Impact:** The borrow checker now more accurately handles lifetime inference for closures, reducing false positives where the compiler incorrectly rejected valid code
@@ -98,18 +98,18 @@ The release includes significant improvements to slice iteration with `array_win
 
 #### No Breaking Borrow Checker Changes
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 - Rust 1.94 did not introduce any breaking changes to the core borrow checking algorithm
 - The fundamental ownership rules (one mutable xor multiple immutable references) remain unchanged
 
 ### 1.2 Lifetime Inference Changes
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 #### LUB Coercions Improvement (1.93)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - **Change:** "LUB coercions now correctly handle function item types, and functions with differing safeties"
 - **Impact:** Improved handling of least-upper-bound (LUB) coercion when function types with different safety modifiers (`unsafe` vs safe) are involved
@@ -117,14 +117,14 @@ The release includes significant improvements to slice iteration with `array_win
 
 #### No Significant Lifetime Elision Changes
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - Both 1.93 and 1.94 maintained stability in lifetime elision rules
 - The `mismatched_lifetime_syntaxes` lint (from earlier versions) remains active
 
 ### 1.3 New Lint Warnings
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 | Lint Name | Version | Default Level | Description | Ownership Impact |
 |-----------|---------|---------------|-------------|------------------|
@@ -134,7 +134,7 @@ The release includes significant improvements to slice iteration with `array_win
 
 #### Critical: `const_item_interior_mutations` Lint (1.93)
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 This lint addresses a significant soundness concern:
 
@@ -160,11 +160,11 @@ This lint helps catch patterns that could lead to unsoundness in ownership reaso
 
 ### 2.1 LazyCell/LazyLock Improvements (1.94)
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 #### New API Methods
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | Method | Type | Description | Ownership Semantic |
 |--------|------|-------------|-------------------|
@@ -177,7 +177,7 @@ This lint helps catch patterns that could lead to unsoundness in ownership reaso
 
 #### Ownership Implications
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use std::sync::LazyLock;
@@ -213,11 +213,11 @@ fn modify_local_lazy() {
 
 ### 2.2 `array_windows` - Slice Iteration Enhancement (1.94)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 #### New API: `<[T]>::array_windows`
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 fn has_abba(s: &str) -> bool {
@@ -241,11 +241,11 @@ fn has_abba(s: &str) -> bool {
 
 ### 2.3 BinaryHeap Relaxations (1.94)
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 #### Trait Bound Relaxation
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **Change:** Relax `T: Ord` bound for some `BinaryHeap<T>` methods
 
@@ -280,7 +280,7 @@ fn main() {
 
 ### 2.4 Other Notable Standard Library Changes
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 #### `<[T]>::element_offset` (1.94)
 
@@ -316,7 +316,7 @@ New methods for safe uninit memory handling:
 
 ### 3.1 Clippy New Lints
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 #### Rust 1.94 Clippy Additions
 
@@ -333,7 +333,7 @@ New methods for safe uninit memory handling:
 
 ### 3.2 rust-analyzer Improvements
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 #### Recent Enhancements (January-March 2026)
 
@@ -359,7 +359,7 @@ rustc-unicode = true  # Enable unicode diagnostic rendering
 
 ### 4.1 Breaking Changes
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 #### None in Core Language
 
@@ -573,13 +573,13 @@ No changes required to core formal models of Rust ownership (e.g., RustBelt, Oxi
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---
 

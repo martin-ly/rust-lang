@@ -413,3 +413,26 @@ fn parse_args(input: &str) -> Vec<String> {
 >
 
 ---
+
+## 📚 模块 8: 国际化对齐
+
+> 本节按项目模板要求补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [TRPL Ch13 — Iterators](https://doc.rust-lang.org/book/ch13-02-iterators.html) | 权威来源 | 迭代器 |
+| [std::iter](https://doc.rust-lang.org/std/iter/) | 权威来源 | 迭代器 trait API |
+
+### 8.2 学术来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Iterator Fusion](https://en.wikipedia.org/wiki/Iterator) | 权威来源 | 迭代器理论基础 |
+
+### 8.3 社区权威
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Rust By Example — Iterators](https://doc.rust-lang.org/rust-by-example/trait/iter.html) | 权威来源 | 迭代器示例 |

@@ -38,7 +38,7 @@
 
 ## Overview
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 A unified formal system covering **ownership + borrow + lifetime + type + trait + async + pin**, with axiom lists, theorem dependency DAG, and mappings to sub-documents.
 
@@ -46,7 +46,7 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 
 ## Core Mechanisms and Axiom Layer
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | Mechanism | Axioms/Definitions | Sub-document |
 | :--- | :--- | :--- |
@@ -65,7 +65,7 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 
 ## Theorem Dependency DAG (Simplified)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 [ axioms ]
@@ -151,13 +151,13 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -168,7 +168,7 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 
 #### 代码示例更新
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 本文档中的所有Rust代码示例均已：
 
@@ -178,7 +178,7 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 
 #### 相关文档
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查
@@ -203,15 +203,15 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
-> **[来源: Coq Reference]**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
 
-> **[来源: TLA+]**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
 
-> **[来源: ACM - Formal Verification]**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ---
 

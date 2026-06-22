@@ -11,7 +11,7 @@
 
 ## 📋 目录
 >
-> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Software Testing]** · **[来源: Wikipedia - Unit Testing]** · **[来源: ACM - Test-Driven Development]** · **[来源: IEEE - Software Testing Standards]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Software Testing](https://en.wikipedia.org/wiki/Software_Testing)** · **来源: [Wikipedia - Unit Testing](https://en.wikipedia.org/wiki/Unit_Testing)** · **[来源: ACM - Test-Driven Development]** · **[来源: IEEE - Software Testing Standards]**
 
 - [🧪 Rust 测试速查卡](#-rust-测试速查卡)
   - [📋 目录](#-目录)
@@ -118,7 +118,7 @@
 
 ## 📋 测试类型概览
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 单元测试    → src/ 文件中的 #[cfg(test)] mod tests
@@ -131,13 +131,13 @@
 
 ## 🔬 单元测试（Unit Tests）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 基本结构
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 #[cfg(test)]
@@ -153,9 +153,9 @@ mod tests {
 
 ### 断言宏
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 #[test]
@@ -178,9 +178,9 @@ fn test_assertions() {
 
 ### 测试失败和 panic
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 #[test]
@@ -200,9 +200,9 @@ fn test_expected_panic() {
 
 ### 使用 Result 类型
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 #[test]
@@ -217,9 +217,9 @@ fn test_with_result() -> Result<(), String> {
 
 ### 忽略测试
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 #[test]
@@ -237,9 +237,9 @@ fn network_test() {
 
 ### 测试组织
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 #[cfg(test)]
@@ -275,13 +275,13 @@ mod tests {
 
 ## 🔗 集成测试（Integration Tests）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 目录结构
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 my_project/
@@ -296,7 +296,7 @@ my_project/
 
 ### 基本集成测试
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 // tests/integration_test.rs
@@ -311,7 +311,7 @@ fn test_integration() {
 
 ### 公共测试模块
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 // tests/common/mod.rs
@@ -336,7 +336,7 @@ fn test_with_setup() {
 
 ### 测试子模块
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 // tests/integration/
@@ -359,11 +359,11 @@ fn test_api_endpoint() {
 
 ## 📚 文档测试（Doc Tests）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 基本文档测试
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ````rust,ignore
 /// 将两个数字相加
@@ -381,7 +381,7 @@ pub fn add(a: i32, b: i32) -> i32 {
 
 ### 隐藏辅助代码
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ````rust,ignore
 /// 计算阶乘
@@ -403,7 +403,7 @@ pub fn factorial(n: u32) -> u32 {
 
 ### 忽略文档测试
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ````rust,ignore
 /// 这个示例不会运行
@@ -419,7 +419,7 @@ pub fn expensive_operation() -> i32 {
 
 ### 编译但不运行
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ````rust,ignore
 /// 只编译不运行
@@ -433,11 +433,11 @@ pub fn expensive_operation() -> i32 {
 
 ## ⚡ 性能测试（Benchmark Tests）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Cargo.toml 配置
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```toml
 [dev-dependencies]
@@ -450,7 +450,7 @@ harness = false
 
 ### Criterion 基准测试
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 // benches/my_benchmark.rs
@@ -474,7 +474,7 @@ criterion_main!(benches);
 
 ### 比较基准测试
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
@@ -509,7 +509,7 @@ criterion_main!(benches);
 
 ### 异步基准测试
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use criterion::{criterion_group, criterion_main, Criterion};
@@ -534,7 +534,7 @@ criterion_main!(benches);
 
 ### 运行基准测试
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```bash
 # 运行所有基准测试
@@ -553,11 +553,11 @@ cargo bench --bench my_benchmark fib_20
 
 ## 🛠️ 测试工具和库
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 常用测试库
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```toml
 [dev-dependencies]
@@ -582,7 +582,7 @@ cargo-tarpaulin = "0.25"
 
 ### 异步测试
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 use tokio::test;
@@ -601,7 +601,7 @@ async fn test_multi_thread() {
 
 ### 属性测试（Proptest）
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use proptest::prelude::*;
@@ -637,7 +637,7 @@ proptest! {
 
 ### Mock 测试（Mockall）
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 use mockall::predicate::*;
@@ -662,7 +662,7 @@ fn test_mock() {
 
 ### 参数化测试（Rstest）
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use rstest::rstest;
@@ -688,7 +688,7 @@ fn fixture() -> i32 {
 
 ### 模糊测试（Cargo-fuzz）
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```toml
 # Cargo.toml
@@ -739,11 +739,11 @@ cargo fuzz run parser_fuzz -- -max_total_time=300
 
 ## 🎯 测试最佳实践
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 测试金字塔
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```text
         /\
@@ -764,7 +764,7 @@ cargo fuzz run parser_fuzz -- -max_total_time=300
 
 ### 测试驱动开发（TDD）
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 // 步骤 1: Red - 写失败的测试
@@ -799,7 +799,7 @@ fn fibonacci(n: u32) -> u32 {
 
 ### 测试命名
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 // ✅ 好的命名
@@ -819,7 +819,7 @@ fn test_thing() { }
 
 ### 测试组织
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 #[cfg(test)]
@@ -869,7 +869,7 @@ mod tests {
 
 ### 测试私有函数
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 pub fn public_function() -> i32 {
@@ -894,7 +894,7 @@ mod tests {
 
 ### 测试并发代码
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 use std::sync::{Arc, Mutex};
@@ -924,7 +924,7 @@ fn test_concurrent_access() {
 
 ### 测试文件 I/O
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 use std::fs;
@@ -946,11 +946,11 @@ fn test_file_operations() {
 
 ## 📊 测试覆盖率
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 使用 cargo-tarpaulin
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```bash
 # 安装
@@ -968,7 +968,7 @@ cargo tarpaulin --out Html --fail-under 80
 
 ### tarpaulin.toml 配置
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```toml
 [tool.tarpaulin]
@@ -993,11 +993,11 @@ exclude_lines = [
 
 ## 🚀 运行测试
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 基本命令
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```bash
 # 运行所有测试
@@ -1027,7 +1027,7 @@ cargo test --test integration_test
 
 ### 测试输出
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```bash
 # 显示测试输出
@@ -1042,7 +1042,7 @@ cargo test --quiet
 
 ### 并行控制
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```bash
 # 使用 4 个线程
@@ -1056,11 +1056,11 @@ cargo test -- --test-threads=1
 
 ## 🔍 测试调试
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 打印调试信息
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 #[test]
@@ -1074,7 +1074,7 @@ fn test_with_debug() {
 
 ### 使用断言消息
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 #[test]
@@ -1090,7 +1090,7 @@ fn test_with_message() {
 
 ### 测试超时
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 use std::time::{Duration, Instant};
@@ -1113,11 +1113,11 @@ fn test_with_timeout() {
 
 ## 📝 测试模式速查
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 测试 Result 类型
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 #[test]
@@ -1136,7 +1136,7 @@ fn test_result() {
 
 ### 测试 Option 类型
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 #[test]
@@ -1155,7 +1155,7 @@ fn test_option() {
 
 ### 测试浮点数（近似相等）
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 #[test]
@@ -1174,7 +1174,7 @@ fn test_float_approx() {
 
 ### 测试集合
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 #[test]
@@ -1199,11 +1199,11 @@ fn test_collections() {
 
 ## 🎓 常见测试场景
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 测试错误处理
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 #[test]
@@ -1221,7 +1221,7 @@ fn test_error_handling() {
 
 ### 测试生命周期
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 #[test]
@@ -1235,7 +1235,7 @@ fn test_lifetimes() {
 
 ### 测试泛型函数
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust
 #[test]
@@ -1251,7 +1251,7 @@ fn identity<T>(x: T) -> T {
 
 ### 测试 trait 实现
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust
 #[test]
@@ -1265,11 +1265,11 @@ fn test_trait_impl() {
 
 ## 🔄 CI/CD 集成
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### GitHub Actions 测试
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```yaml
 # .github/workflows/test.yml
@@ -1307,7 +1307,7 @@ jobs:
 
 ### 测试覆盖率 CI
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```yaml
 - name: Install tarpaulin
@@ -1324,7 +1324,7 @@ jobs:
 
 ### 性能测试 CI
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```yaml
 - name: Run benchmarks
@@ -1344,7 +1344,7 @@ jobs:
 
 ### 快照测试
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 use insta::assert_snapshot;
@@ -1358,7 +1358,7 @@ fn test_output() {
 
 ### 金标准测试（Golden Tests）
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 use std::fs;
@@ -1879,33 +1879,33 @@ pub fn get_test_db() -> Option<&'static TestDatabase> {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Software Testing]**
-> **[来源: Wikipedia - Unit Testing]**
-> **[来源: Rust Reference - Test Attributes]**
-> **[来源: TRPL Ch. 11 - Testing]**
+> **来源: [Wikipedia - Software Testing](https://en.wikipedia.org/wiki/Software_Testing)**
+> **来源: [Wikipedia - Unit Testing](https://en.wikipedia.org/wiki/Unit_Testing)**
+> **来源: [Rust Reference - Test Attributes](https://doc.rust-lang.org/reference/attributes/testing.html)**
+> **来源: [TRPL Ch. 11 - Testing](https://doc.rust-lang.org/book/ch11-00-testing.html)**
 > **[来源: ACM - Software Testing Methods]**
 > **[来源: IEEE - Test Coverage Standards]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages Survey]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design and Implementation]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: Wikipedia - Software Testing]**
-> **[来源: TRPL Ch. 11 - Testing]**
-> **[来源: Rust Reference - Test Attributes]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM - Systems Programming Languages Survey](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI - Programming Language Design and Implementation](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Wikipedia - Software Testing](https://en.wikipedia.org/wiki/Software_Testing)**
+> **来源: [TRPL Ch. 11 - Testing](https://doc.rust-lang.org/book/ch11-00-testing.html)**
+> **来源: [Rust Reference - Test Attributes](https://doc.rust-lang.org/reference/attributes/testing.html)**
 > **[来源: ACM - Software Testing]**
 
 ---

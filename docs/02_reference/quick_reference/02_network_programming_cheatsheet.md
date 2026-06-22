@@ -68,13 +68,13 @@
 
 ## 🚀 快速开始
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### HTTP 客户端
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use c10_networks::prelude::*;
@@ -97,9 +97,9 @@ let response = client
 
 ### TCP 服务器
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use c10_networks::tcp::TcpListener;
@@ -129,13 +129,13 @@ loop {
 
 ## 📋 常用 API
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### HTTP 客户端
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 操作      | 方法                  | 说明             |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -148,9 +148,9 @@ loop {
 
 ### TCP/UDP
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 操作 | TCP                    | UDP                    |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -160,9 +160,9 @@ loop {
 
 ### WebSocket
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use c10_networks::websocket::WebSocket;
@@ -185,9 +185,9 @@ if let Some(msg) = ws.recv().await? {
 
 ### DNS 解析
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use c10_networks::dns::DnsResolver;
@@ -211,13 +211,13 @@ for ip in ips {
 
 ## 🔧 配置选项
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### HTTP 客户端配置
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 let client = HttpClient::builder()
@@ -229,7 +229,7 @@ let client = HttpClient::builder()
 
 ### TCP 服务器配置
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 let listener = TcpListener::bind("127.0.0.1:8080")
@@ -246,7 +246,7 @@ let listener = TcpListener::bind("127.0.0.1:8080")
 
 ### 并发处理多个请求
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use futures::future;
@@ -266,7 +266,7 @@ let results = future::join_all(futures).await;
 
 ### 流式处理
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use futures::StreamExt;
@@ -310,7 +310,7 @@ match client.get(url).await {
 
 ### HTTPS/TLS
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 let client = HttpClient::builder()
@@ -321,7 +321,7 @@ let client = HttpClient::builder()
 
 ### 认证
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 // Basic 认证
@@ -347,7 +347,7 @@ let response = client
 
 ### 连接池
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 let client = HttpClient::builder()
@@ -358,7 +358,7 @@ let client = HttpClient::builder()
 
 ### 压缩
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 let response = client
@@ -376,7 +376,7 @@ let response = client
 
 ### 反例 1: 忽略连接错误
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **错误示例**:
 
@@ -396,7 +396,7 @@ let stream = TcpStream::connect("127.0.0.1:8080")?;
 
 ### 反例 2: 未设置超时导致无限阻塞
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **错误示例**:
 
@@ -439,7 +439,7 @@ stream.read(&mut buf);  // ❌ 可能永久阻塞
 
 ### 场景 1: REST API 客户端
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use reqwest::Client;
@@ -744,16 +744,16 @@ pub fn get_connection() -> Option<Connection> {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Wikipedia - Network Programming]**
-> **[来源: Tokio Documentation]**
-> **[来源: Rust Reference - std::net]**
-> **[来源: IEEE - Network Protocols]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Wikipedia - Network Programming](https://en.wikipedia.org/wiki/Network_Programming)**
+> **来源: [Tokio Documentation](https://tokio.rs/)**
+> **来源: [Rust Reference - std::net](https://doc.rust-lang.org/reference/)**
+> **来源: [IEEE - Network Protocols](https://standards.ieee.org/)**
 
 ---

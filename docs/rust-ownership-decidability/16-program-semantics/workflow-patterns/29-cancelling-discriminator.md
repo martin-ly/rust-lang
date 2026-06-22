@@ -7,7 +7,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: tokio - docs.rs/tokio]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** · **来源: tokio - docs.rs / [tokio](https://tokio.rs/)**
 
 - [29 取消鉴别器模式 (Cancelling Discriminator) - 完整形式化语义](#29-取消鉴别器模式-cancelling-discriminator---完整形式化语义)
   - [目录](#目录)
@@ -58,15 +58,15 @@
 
 ## 1. 引言
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: tokio - docs.rs/tokio]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** · **来源: tokio - docs.rs / [tokio](https://tokio.rs/)**
 
 取消鉴别器模式（Cancelling Discriminator）是工作流控制流模式中的高级同步模式，等待 N 个分支完成后立即取消剩余分支并继续主流程。与阻塞鉴别器不同，取消鉴别器主动终止未完成的实例，释放系统资源。
 
 ### 1.1 历史背景
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: tokio - docs.rs/tokio]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** · **来源: tokio - docs.rs / [tokio](https://tokio.rs/)**
 
 取消鉴别器由 van der Aalst 等人在 "Workflow Patterns" (2003) 中定义，在"先到先得"且不需要等待所有结果的场景中特别有用。
 
@@ -78,7 +78,7 @@
 
 ### 2.1 概念定义
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **取消鉴别器** 是一个控制流构造：
 
@@ -97,7 +97,7 @@ Threshold ::= Natural  (1 <= Threshold < |BranchSet|)
 
 ### 2.2 核心语义
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **鉴别语义**:
 
@@ -124,11 +124,11 @@ $$
 
 ### 2.3 形式化表示
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 #### 2.3.1 状态机表示
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 $$
 \begin{aligned}
@@ -147,7 +147,7 @@ $$
 
 #### 2.3.2 流程代数表示
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 $$
 \text{CancelDisc} = \text{Race}(n) \gg \text{Cancel}(\text{rest})
@@ -163,7 +163,7 @@ $$
 
 #### 2.3.3 Petri 网表示
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```
                     ┌─→ (B1) ──done(1)──┐
@@ -185,7 +185,7 @@ $$
 
 ### 3.1 BPMN 表示
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 在 BPMN 2.0 中，取消鉴别器使用**事件网关**配合**边界取消事件**：
 
@@ -222,7 +222,7 @@ $$
 
 ### 3.2 UML 活动图
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 在 UML 中，取消鉴别器使用**中断区域**配合**接收信号**：
 
@@ -236,7 +236,7 @@ $$
 
 ### 3.3 WfMC 标准
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 工作流管理联盟 (WfMC) 将取消鉴别器定义为：
 
@@ -256,7 +256,7 @@ $$
 
 ### 4.1 CCS 表示
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **Calculus of Communicing Systems (CCS)**:
 
@@ -274,7 +274,7 @@ $$
 
 ### 4.2 CSP 表示
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **Communicating Sequential Processes (CSP)**:
 
@@ -294,7 +294,7 @@ Controller = done?i -> (
 
 ### 4.3 π-演算表示
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **Pi-Calculus**:
 
@@ -322,7 +322,7 @@ $$
 
 ### 5.1 基础实现：select! 与 biased
 
-> **[来源: tokio - docs.rs/tokio]**
+> **来源: tokio - docs.rs / [tokio](https://tokio.rs/)**
 
 ```rust,ignore
 use std::future::Future;
@@ -378,7 +378,7 @@ where
 
 ### 5.2 FuturesUnordered 与 AbortHandle
 
-> **[来源: tokio - docs.rs/tokio]**
+> **来源: tokio - docs.rs / [tokio](https://tokio.rs/)**
 
 ```rust,ignore
 use futures::stream::FuturesUnordered;
@@ -435,7 +435,7 @@ where
 
 ### 5.3 API 提供商竞速示例
 
-> **[来源: tokio - docs.rs/tokio]**
+> **来源: tokio - docs.rs / [tokio](https://tokio.rs/)**
 
 ```rust,ignore
 use std::time::Duration;
@@ -829,21 +829,21 @@ pub fn cascading_cancel(
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Design Pattern]**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 
-> **[来源: Rust API Guidelines]**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 
-> **[来源: Gang of Four - Design Patterns]**
+> **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
 
-> **[来源: ACM - Software Design Patterns]**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: TRPL Ch. 16 - Concurrency]**
+> **来源: [TRPL Ch. 16 - Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)**
 
-> **[来源: Rustonomicon - Implementation Details]**
+> **来源: [Rustonomicon - Implementation Details](https://doc.rust-lang.org/nomicon/)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 > **[来源: Tokio Documentation - Task Cancellation]**
 

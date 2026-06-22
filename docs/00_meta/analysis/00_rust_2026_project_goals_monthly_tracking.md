@@ -14,7 +14,7 @@
 
 ## 📋 目录
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Rust 2026 Project Goals — 月度跟踪报告](#rust-2026-project-goals--月度跟踪报告)
   - [📋 目录](#-目录)
@@ -50,7 +50,7 @@
 
 ## 一、Rust 2026 Project Goals 概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 [Rust 2026 Project Goals](https://rust-lang.github.io/rust-project-goals/2026/) 是 Rust 项目官方制定的年度目标集合，由 Rust 领导委员会（Leadership Council）和各个工作组（Working Groups）共同维护。2026 年度共设立 **66 个具体目标**，涵盖语言演进、编译器工具链、开发者体验、生态系统基础设施、嵌入式与操作系统内核支持，以及形式化方法等六大方向。
 
@@ -74,7 +74,7 @@
 
 ## 二、目标分类体系
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 基于官方 2026 目标的原始结构，结合本项目的知识组织方式，我们将其归并为五大类别，便于对齐、跟踪和检索：
 
@@ -92,13 +92,13 @@
 
 ## 三、与本项目对齐状态矩阵
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 图例
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 符号 | 含义 | 判定标准 |
 |------|------|----------|
@@ -110,9 +110,9 @@
 
 ### 3.1 语言特性 (Language)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 语言特性类目标关注 Rust 语法和类型系统演进，是数量最多、影响面最广的类别。本项目在该类别覆盖薄弱，深度文档仅 2 篇。
 
@@ -143,9 +143,9 @@
 
 ### 3.2 工具链 (Tooling)
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 工具链类目标覆盖编译器后端、构建系统、IDE 和调试设施。核心主题是「速度」与「可观测性」。本项目在该类别覆盖较好，5 项目标已完全覆盖。
 
@@ -174,9 +174,9 @@
 
 ### 3.3 生态系统 (Ecosystem)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 生态系统类目标关注包管理、互操作、文档和行业采纳。2026 年关键词是「互操作」与「供应链安全」。本项目覆盖中等，C++ 互操作已有深度文档，但供应链安全工具链仍属空白。
 
@@ -203,9 +203,9 @@
 
 ### 3.4 嵌入式/内核 (Embedded/Kernel)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 嵌入式与内核类别是 Rust 向底层系统渗透的关键战场。2026 年标志性事件是 Rust for Linux 转为「生产级」支持。本项目在该类别覆盖极为薄弱，10 项目标中仅 1 项完全覆盖。
 
@@ -228,9 +228,9 @@
 
 ### 3.5 形式化验证 (Formal Methods)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 形式化验证是最具学术深度和长远价值的类别。Miri、Polonius、VerusBelt 三篇文档奠定了领先地位，但 Kani、Prusti、Ferrocene 仍待覆盖。建议持续跟踪 PLDI、POPL 等顶级会议。
 
@@ -251,13 +251,13 @@
 
 ## 四、月度跟踪机制
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 为确保本文档持续反映项目与官方目标的同步状态，建立以下可持续的跟踪机制：
 
 ### 4.1 更新触发条件
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 以下任一事件发生时，应触发本文档的更新：
 
@@ -269,7 +269,7 @@
 
 ### 4.2 更新操作流程
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```text
 步骤 1: 对比官方 2026 goals 页面，提取新增、变更、标记为完成的目标
@@ -425,11 +425,11 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**

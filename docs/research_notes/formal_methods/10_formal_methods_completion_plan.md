@@ -38,13 +38,13 @@
 
 ## 未完成任务清单
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 证明树 (Proof Trees) - 4个待完成
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | # | 证明树 | 状态 | 优先级 | 工作量 |
 |---|--------|------|--------|--------|
@@ -55,9 +55,9 @@
 
 ### 2. Coq L3 证明 - 5个待完成
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | # | Coq文件 | 状态 | 完成度 | 工作量 |
 |---|---------|------|--------|--------|
@@ -69,7 +69,7 @@
 
 ### 3. 矩阵更新
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 - 10_concept_axiom_theorem_matrix.md - 更新定理状态
 - 10_implementation_progress_matrix.md - 更新完成度
@@ -82,19 +82,19 @@
 
 ### Phase 1: 证明树可视化 (12小时)
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 创建4个缺失的证明树可视化文档。
 
 ### Phase 2: Coq骨架完成 (30小时)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 创建/完成5个Coq证明文件。
 
 ### Phase 3: 矩阵更新 (2小时)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 更新所有进度矩阵的状态标记。
 
@@ -120,7 +120,7 @@
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
@@ -175,13 +175,13 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
-> **[来源: Coq Reference]**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
 
-> **[来源: TLA+]**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
 
-> **[来源: ACM - Formal Verification]**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
 
 ---
 

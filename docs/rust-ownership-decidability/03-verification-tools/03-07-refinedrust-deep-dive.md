@@ -14,7 +14,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [RefinedRust 深度解析](#refinedrust-深度解析)
   - [目录](#目录)
@@ -60,13 +60,13 @@
 
 ## 1. 引言与背景
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 研究动机
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Rust 的所有权类型系统在编译时静态保证内存安全，使其特别适合安全关键系统。
 近年来，出现了许多自动化演绎验证工具来建立 Rust 代码的功能正确性。
@@ -81,7 +81,7 @@ Rust 的所有权类型系统在编译时静态保证内存安全，使其特别
 
 ### 1.2 核心贡献
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 RefinedRust 做出了以下关键贡献:
 
@@ -102,7 +102,7 @@ RefinedRust 做出了以下关键贡献:
 
 ### 2.1 精细化所有权类型
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 RefinedRust 的核心是**精细化所有权类型** (Refined Ownership Types)，结合了:
 
@@ -129,7 +129,7 @@ fn box_add_42(r: Box<i32>) -> Box<i32> {
 
 ### 2.2 分离逻辑与 Iris
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 RefinedRust 在 **Iris 分离逻辑框架**中构建语义模型:
 
@@ -155,7 +155,7 @@ RefinedRust 在 **Iris 分离逻辑框架**中构建语义模型:
 
 ### 2.3 生命周期逻辑
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 RefinedRust 扩展了 RustBelt 的**生命周期逻辑** (Lifetime Logic):
 
@@ -182,7 +182,7 @@ let mut z = 1;
 
 ### 3.1 Borrow Names: 可变引用的数学建模
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **关键创新**: 使用 **borrow names** (借用名) 处理可变引用。
 
@@ -213,7 +213,7 @@ assert!(z == 43);        // RefinedRust 解析 *y 为 43
 
 ### 3.2 Place Types: 位置的精细化类型
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 Rust 的一个独特特性是 **places** (位置，也称为 lvalues):
 
@@ -242,7 +242,7 @@ Place Type 层次:
 
 ### 3.3 Blocked 类型与固定借用
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **问题场景**: 当从 Vec 借用元素时，需要临时"阻塞"对 Vec 的部分访问。
 
@@ -275,7 +275,7 @@ fn get_unchecked_mut<'a, T>(
 
 ### 4.1 类型语法
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```ocaml
 (* 数学值 *)
@@ -302,7 +302,7 @@ place_type ::=
 
 ### 4.2 类型规则
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **可变借用检查** (chk-mut-borrow):
 
@@ -323,7 +323,7 @@ place_type ::=
 
 ### 4.3 分层策略 (Stratify)
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 `stratify` 过程将类型转换为标准形状 `#v @ place_τ`:
 
@@ -345,7 +345,7 @@ stratify(place_(int × int), #(1, 2)) = (place_(int × int), (1, 2))
 
 ### 5.1 前端架构
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```text
 RefinedRust 验证流程:
@@ -380,7 +380,7 @@ RefinedRust 验证流程:
 
 ### 5.2 Radium 中间表示
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 Radium 是基于 RefinedC 的 Caesium 操作语义的 Rust 形式化:
 
@@ -397,7 +397,7 @@ Radium 是基于 RefinedC 的 Caesium 操作语义的 Rust 形式化:
 
 ### 5.3 Lithium 证明引擎
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 Lithium 是 Iris 分离逻辑的一个片段，专门设计用于高效证明搜索:
 
@@ -422,7 +422,7 @@ Lithium 是 Iris 分离逻辑的一个片段，专门设计用于高效证明搜
 
 ### 6.1 Vec 表示不变量
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 `Vec<T>` 的 RefinedRust 表示:
 
@@ -445,7 +445,7 @@ struct Vec<T> {
 
 ### 6.2 get_unchecked_mut 验证
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 #[rr::params("xs: list T", "i: int", "α: lifetime")]
@@ -478,7 +478,7 @@ unsafe fn get_unchecked_mut<'a, T>(
 
 ### 6.3 push/pop 操作验证
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **Vec::pop 验证统计**:
 
@@ -495,7 +495,7 @@ unsafe fn get_unchecked_mut<'a, T>(
 
 ### 7.1 工具对比矩阵
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 特性 | RefinedRust | RustBelt | Creusot | Prusti | Verus | Kani | Aeneas |
 |------|-------------|----------|---------|--------|-------|------|--------|
@@ -514,7 +514,7 @@ unsafe fn get_unchecked_mut<'a, T>(
 
 ### 7.2 与 RustBelt 的关系
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **RustBelt** (Jung et al., POPL 2018):
 
@@ -691,21 +691,21 @@ RefinedRust 原型目前**不支持**:
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
-> **[来源: Coq Reference]**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
 
-> **[来源: TLA+]**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
 
-> **[来源: ACM - Formal Verification]**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
 
 ---
 

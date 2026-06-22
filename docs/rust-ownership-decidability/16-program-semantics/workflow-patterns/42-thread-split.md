@@ -16,7 +16,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: TRPL Ch. 16 - Concurrency]** · **[来源: Rust Standard Library - std::thread]** · **[来源: Tokio Docs - docs.rs/tokio]** · **[来源: rayon - docs.rs/rayon]** · **[来源: crossbeam - docs.rs/crossbeam]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [TRPL Ch. 16 - Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)** · **来源: [Rust Standard Library - std::thread](https://doc.rust-lang.org/std/thread/)** · **来源: Tokio Docs - docs.rs / [tokio](https://tokio.rs/)** · **来源: rayon - docs.rs / [rayon](https://docs.rs/rayon/latest/rayon/)** · **来源: crossbeam - docs.rs / [crossbeam](https://docs.rs/crossbeam/latest/crossbeam/)**
 
 - [42 线程分裂模式 (Thread Split) - 完整形式化语义](#42-线程分裂模式-thread-split---完整形式化语义)
   - [目录](#目录)
@@ -67,7 +67,7 @@
 
 ## 1. 引言
 >
-> **[来源: Rust Reference]** · **[来源: TRPL Ch. 16 - Concurrency]** · **[来源: Rust Standard Library - std::thread]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [TRPL Ch. 16 - Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)** · **来源: [Rust Standard Library - std::thread](https://doc.rust-lang.org/std/thread/)**
 
 线程分裂模式（Thread Split）是工作流控制流模式中的核心并发模式，描述了单一执行线程分化为多个独立线程并并行执行的语义。与抽象的并行分裂（Parallel Split, WCP02）不同，线程分裂明确关注**线程级**实体的创建——包括操作系统线程、绿色线程（green threads）和异步任务——以及数据所有权在这些实体间的安全分布。
 
@@ -75,7 +75,7 @@
 
 ### 1.1 历史背景
 >
-> **[来源: Rust Standard Library - std::thread]** · **[来源: POSIX Threads Specification]** · **[来源: Flynn 1972 - Computer Architecture]**
+> **来源: [Rust Standard Library - std::thread](https://doc.rust-lang.org/std/thread/)** · **[来源: POSIX Threads Specification]** · **[来源: Flynn 1972 - Computer Architecture]**
 
 线程分裂的概念源于操作系统进程/线程模型。POSIX `pthread_create`（1995 年标准化）奠定了现代线程分裂的 API 形态：调用线程继续执行，新线程从指定入口函数开始独立执行。在计算机架构层面，Flynn 分类法（1972）将多指令流多数据流（MIMD）定义为线程级并行的硬件基础。
 
@@ -91,11 +91,11 @@ Rust 的线程分裂设计在安全保障方面具有开创性：
 - `Send` trait 保证跨线程传递安全，`Sync` trait 保证共享引用安全
 - 编译器拒绝包含悬垂引用的闭包，消除 use-after-free 风险
 
-> **[来源: Rustonomicon - Concurrency]** · **[来源: RFC 458 - Send/Sync traits]**
+> **来源: [Rustonomicon - Concurrency](https://doc.rust-lang.org/nomicon/concurrency.html)** · **来源: [RFC 458 - Send/Sync traits](https://github.com/rust-lang/rfcs/pull/458)**
 
 ### 1.2 动机与应用场景
 >
-> **[来源: TRPL Ch. 16 - Concurrency]** · **[来源: Tokio Docs - docs.rs/tokio]**
+> **来源: [TRPL Ch. 16 - Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)** · **来源: Tokio Docs - docs.rs / [tokio](https://tokio.rs/)**
 
 线程分裂模式的核心动机来源于以下需求：
 
@@ -118,7 +118,7 @@ Rust 的线程分裂设计在安全保障方面具有开创性：
 
 ### 2.1 概念定义
 >
-> **[来源: POPL - Programming Languages Research]** · **[来源: POSIX Threads Specification]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)** · **[来源: POSIX Threads Specification]**
 
 **线程分裂** 是一个控制流构造，其中：
 
@@ -141,7 +141,7 @@ DataDistribution ::= "move_all" | "clone" | "borrow" (scope only)
 
 ### 2.2 核心语义
 >
-> **[来源: PLDI - Programming Language Design]** · **[来源: Hoare 1978 - CSP]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)** · **来源: [Hoare 1978 - CSP](https://en.wikipedia.org/wiki/Communicating_sequential_processes)**
 
 **执行语义**:
 
@@ -170,11 +170,11 @@ $$
 
 ### 2.3 形式化表示
 >
-> **[来源: Petri Net Theory]** · **[来源: Workflow Patterns Initiative]**
+> **来源: [Petri Net Theory](https://en.wikipedia.org/wiki/Petri_net)** · **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)**
 
 #### 2.3.1 状态机表示
 >
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 $$
 \begin{aligned}
@@ -208,7 +208,7 @@ stateDiagram-v2
 
 #### 2.3.2 流程代数表示 (CSP 风格)
 >
-> **[来源: Hoare 1978 - CSP]** · **[来源: Roscoe 2011 - Understanding CSP]**
+> **来源: [Hoare 1978 - CSP](https://en.wikipedia.org/wiki/Communicating_sequential_processes)** · **[来源: Roscoe 2011 - Understanding CSP]**
 
 $$
 \text{ThreadSplit}(P, \{B_i\}) = P \;\text{;;}\; \left(|||\; i : \{1..n\} \@\; \text{fork}(B_i)\right)
@@ -228,7 +228,7 @@ $$
 
 #### 2.3.3 Petri 网表示
 >
-> **[来源: Petri Net Theory]** · **[来源: van der Aalst 2003]**
+> **来源: [Petri Net Theory](https://en.wikipedia.org/wiki/Petri_net)** · **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)**
 
 ```
                     ┌─[spawn]→ (T1) ──run(1)──┐
@@ -305,7 +305,7 @@ graph TD
 
 ### 3.3 WfMC 标准
 >
-> **[来源: WfMC - Workflow Management Coalition]** · **[来源: Russell 2006]**
+> **来源: [WfMC - Workflow Management Coalition](https://www.wfmc.org/)** · **来源: [Russell 2006](https://www.workflowpatterns.com/)**
 
 工作流管理联盟 (WfMC) 将线程分裂定义为并行分裂（Parallel Split）的线程级实例化：
 
@@ -329,7 +329,7 @@ graph TD
 
 ### 4.1 CCS 表示
 >
-> **[来源: Milner 1989 - Communication and Concurrency]**
+> **来源: [Milner 1989 - Communication and Concurrency](https://en.wikipedia.org/wiki/Communication_and_Concurrency)**
 
 **Calculus of Communicating Systems (CCS)**:
 
@@ -351,7 +351,7 @@ $$
 
 ### 4.2 CSP 表示
 >
-> **[来源: Hoare 1978 - CSP]** · **[来源: Roscoe 2011]**
+> **来源: [Hoare 1978 - CSP](https://en.wikipedia.org/wiki/Communicating_sequential_processes)** · **来源: [Roscoe 2011](https://en.wikipedia.org/wiki/Communicating_sequential_processes)**
 
 **Communicating Sequential Processes (CSP)**:
 
@@ -406,7 +406,7 @@ $$
 
 ### 5.1 基础实现：thread::spawn
 >
-> **[来源: Rust Reference - std::thread::spawn]** · **[来源: TRPL Ch. 16 - Concurrency]**
+> **来源: [Rust Reference - std::thread::spawn](https://doc.rust-lang.org/reference/)** · **来源: [TRPL Ch. 16 - Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)**
 
 Rust 标准库的 `std::thread::spawn` 是最基础的线程分裂原语，创建独立 OS 线程并返回 `JoinHandle<T>`。
 
@@ -501,7 +501,7 @@ fn do_other_work() {
 
 ### 5.2 高级实现：tokio::spawn 与异步任务分裂
 >
-> **[来源: Tokio Docs - docs.rs/tokio]** · **[来源: Rust Reference - Async/Await]**
+> **来源: Tokio Docs - docs.rs / [tokio](https://tokio.rs/)** · **来源: [Rust Reference - Async/Await](https://doc.rust-lang.org/reference/items/functions.html#async-functions)**
 
 对于 I/O 密集型场景，异步任务分裂比 OS 线程更高效：
 
@@ -591,7 +591,7 @@ async fn process_item(item: Item) -> Result<ProcessedItem, String> {
 
 ### 5.3 rayon::spawn 与作用域线程 crossbeam
 >
-> **[来源: rayon - docs.rs/rayon]** · **[来源: crossbeam - docs.rs/crossbeam]** · **[来源: RFC 3151 - scoped threads]**
+> **来源: rayon - docs.rs / [rayon](https://docs.rs/rayon/latest/rayon/)** · **来源: crossbeam - docs.rs / [crossbeam](https://docs.rs/crossbeam/latest/crossbeam/)** · **来源: [RFC 3151 - scoped threads](https://rust-lang.github.io/rfcs/3151-3151-scoped-threads.html)**
 
 `rayon` 提供数据并行分裂，`crossbeam` 提供灵活的作用域线程：
 
@@ -673,7 +673,7 @@ fn expensive_computation(x: u32) -> u64 {
 
 ### 6.1 活性 (Liveness)
 >
-> **[来源: POPL - Programming Languages Research]** · **[来源: Workflow Patterns Initiative]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)** · **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)**
 
 **定理 6.1.1 (线程分裂活性定理)**
 
@@ -702,7 +702,7 @@ $$
 
 ### 6.2 安全性 (Safety)
 >
-> **[来源: PLDI - Programming Language Design]** · **[来源: Rustonomicon - Safety]** · **[来源: RFC 458 - Send/Sync]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)** · **来源: [Rustonomicon - Safety](https://doc.rust-lang.org/nomicon/)** · **来源: [RFC 458 - Send/Sync](https://github.com/rust-lang/rfcs/pull/458)**
 
 **定理 6.2.1 (数据竞争自由定理)**
 
@@ -733,7 +733,7 @@ $$
 
 ### 6.3 正确性条件
 >
-> **[来源: Workflow Patterns Initiative]** · **[来源: Rust Reference - std::thread]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)** · **来源: [Rust Reference - std::thread](https://doc.rust-lang.org/reference/)**
 
 线程分裂模式的正确性条件：
 
@@ -753,7 +753,7 @@ $$
 
 ### 7.1 模式层次
 >
-> **[来源: Workflow Patterns Initiative]** · **[来源: van der Aalst 2003]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)** · **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)**
 
 ```mermaid
 graph TD
@@ -767,7 +767,7 @@ graph TD
 
 ### 7.2 形式化关系
 >
-> **[来源: van der Aalst 2003]** · **[来源: Hoare 1978]**
+> **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)** · **来源: [Hoare 1978](https://en.wikipedia.org/wiki/Communicating_sequential_processes)**
 
 **线程分裂与线程合并的对偶关系**:
 
@@ -801,7 +801,7 @@ $$
 
 ### 8.1 用户请求并行处理：验证、日志、分析
 >
-> **[来源: Rust Reference]** · **[来源: Tokio Docs - docs.rs/tokio]** · **[来源: microservices.io]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: Tokio Docs - docs.rs / [tokio](https://tokio.rs/)** · **[来源: microservices.io]**
 
 **场景**: Web 网关接收到用户请求后，将请求分裂为三个并行处理流：输入验证、审计日志记录、用户行为分析。三个流独立执行，互不阻塞。
 
@@ -905,7 +905,7 @@ async fn analyze_user_behavior(req: &UserRequest) -> Result<(), String> {
 
 ### 8.2 MapReduce 风格数据并行
 >
-> **[来源: rayon - docs.rs/rayon]** · **[来源: Dean & Ghemawat 2004 - MapReduce]**
+> **来源: rayon - docs.rs / [rayon](https://docs.rs/rayon/latest/rayon/)** · **[来源: Dean & Ghemawat 2004 - MapReduce]**
 
 **场景**: 大数据集的分裂-映射-归约并行处理。
 
@@ -938,7 +938,7 @@ fn map_count_chars(s: &str) -> std::collections::HashMap<char, usize> {
 
 ### 8.3 微服务并行初始化
 >
-> **[来源: Tokio Docs - docs.rs/tokio]** · **[来源: Rust Reference]**
+> **来源: Tokio Docs - docs.rs / [tokio](https://tokio.rs/)** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
 **场景**: 应用启动时并行初始化独立的子系统。
 
@@ -1001,7 +1001,7 @@ pub enum InitError {
 
 ### 9.1 条件线程分裂
 >
-> **[来源: Workflow Patterns Initiative]** · **[来源: Rust Reference - Control Flow]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)** · **来源: [Rust Reference - Control Flow](https://doc.rust-lang.org/reference/expressions.html)**
 
 根据运行时条件决定是否分裂：
 
@@ -1021,7 +1021,7 @@ pub fn conditional_split(data: Vec<u32>, threshold: usize) -> Vec<u64> {
 
 ### 9.2 动态线程池分裂
 >
-> **[来源: rayon - docs.rs/rayon]** · **[来源: Tokio Docs - runtime]**
+> **来源: rayon - docs.rs / [rayon](https://docs.rs/rayon/latest/rayon/)** · **[来源: Tokio Docs - runtime]**
 
 根据可用资源动态调整分裂粒度：
 
@@ -1042,7 +1042,7 @@ pub fn adaptive_split(data: Vec<f64>) -> Vec<f64> {
 
 ### 9.3 嵌套线程分裂
 >
-> **[来源: rayon - docs.rs/rayon]** · **[来源: Workflow Patterns Initiative]**
+> **来源: rayon - docs.rs / [rayon](https://docs.rs/rayon/latest/rayon/)** · **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)**
 
 多级分裂形成并行树：
 
@@ -1131,26 +1131,26 @@ pub fn nested_parallel_matrix_multiply(
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Thread (computing)]**
+> **来源: [Wikipedia - Thread (computing)](https://en.wikipedia.org/wiki/Thread_(computing))**
 
 > **[来源: POSIX Threads Specification - IEEE Std 1003.1c]**
 
 > **[来源: Flynn's Taxonomy - MIMD]**
 
-> **[来源: Rust API Guidelines]**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 
-> **[来源: TRPL Ch. 16 - Concurrency]**
+> **来源: [TRPL Ch. 16 - Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)**
 
-> **[来源: Rustonomicon - Concurrency]**
+> **来源: [Rustonomicon - Concurrency](https://doc.rust-lang.org/nomicon/concurrency.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 > **[来源: Tokio Documentation - task spawning]**
 
 > **[来源: Rayon Documentation - Parallel Iterators]**
 
-> **[来源: RFC 3151 - scoped threads]**
+> **来源: [RFC 3151 - scoped threads](https://rust-lang.github.io/rfcs/3151-3151-scoped-threads.html)**
 
-> **[来源: RFC 458 - Send and Sync traits]**
+> **来源: [RFC 458 - Send and Sync traits](https://github.com/rust-lang/rfcs/pull/458)**
 
 ---

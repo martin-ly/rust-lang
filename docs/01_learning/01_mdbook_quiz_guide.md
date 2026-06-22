@@ -10,7 +10,7 @@
 
 ## 目录
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [MDBook Quiz 使用指南](#mdbook-quiz-使用指南)
   - [目录](#目录)
@@ -59,13 +59,13 @@
 
 ## 快速开始
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 安装依赖
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 确保已安装 mdbook 和 mdbook-quiz：
 
@@ -76,9 +76,9 @@ cargo install mdbook-quiz
 
 ### 2. 构建和预览
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 cd book
@@ -88,21 +88,21 @@ mdbook serve    # 预览（自动刷新）
 
 ### 3. 访问测验
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 打开浏览器访问 `http://localhost:3000`，选择对应的测验章节即可开始。
 
 ## 添加新测验
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 步骤 1：创建测验目录
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 如果还没有对应主题的目录，先创建：
 
@@ -112,9 +112,9 @@ mkdir -p book/src/quizzes
 
 ### 步骤 2：创建 TOML 测验文件
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 在 `book/src/quizzes/` 下创建新的 `.toml` 文件：
 
@@ -124,9 +124,9 @@ touch book/src/quizzes/your_topic.toml
 
 ### 步骤 3：编写测验内容
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 参考以下模板：
 
@@ -148,9 +148,9 @@ difficulty = "基础"
 
 ### 步骤 4：创建 Markdown 入口文件
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 创建 `book/src/quizzes/your_topic.md`：
 
@@ -164,9 +164,9 @@ difficulty = "基础"
 
 ### 步骤 5：更新 SUMMARY.md
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 在 `book/src/SUMMARY.md` 中添加新章节：
 
@@ -176,7 +176,7 @@ difficulty = "基础"
 
 ### 步骤 6：更新测验索引
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 在 `book/src/quiz-index.md` 中添加新测验信息。
 
@@ -186,7 +186,7 @@ difficulty = "基础"
 
 ### 1. 题目质量
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 - **概念准确**：确保题目和答案技术上正确
 - **覆盖全面**：涵盖主题的各个方面和常见误区
@@ -195,7 +195,7 @@ difficulty = "基础"
 
 ### 2. 答案设计
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 - **干扰项合理**：错误选项应该反映常见误解
 - **解释详尽**：不仅说明为什么对，还要说明为什么错
@@ -203,7 +203,7 @@ difficulty = "基础"
 
 ### 3. 难度分级标准
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 级别 | 描述 | 示例 |
 |------|------|------|
@@ -213,7 +213,7 @@ difficulty = "基础"
 
 ### 4. 题型选择指南
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 - **单选题**：只有一个正确答案的概念性问题
 - **多选题**：多个正确选项，考察全面理解
@@ -226,7 +226,7 @@ difficulty = "基础"
 
 ### 单选题 (SingleChoice)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```toml
 [[questions]]
@@ -246,7 +246,7 @@ difficulty = "基础"
 
 ### 多选题 (MultipleChoice)
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```toml
 [[questions]]
@@ -266,7 +266,7 @@ difficulty = "进阶"
 
 ### 判断题 (TrueFalse)
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```toml
 [[questions]]
@@ -280,7 +280,7 @@ difficulty = "基础"
 
 ### 填空题 (FillInBlank)
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```toml
 [[questions]]
@@ -294,7 +294,7 @@ difficulty = "进阶"
 
 ### 代码块格式
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 在 prompt 中使用代码块：
 
@@ -499,13 +499,13 @@ A: 目前 mdbook-quiz 不支持直接导出。可以通过浏览器的 Local Sto
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

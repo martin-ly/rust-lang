@@ -8,7 +8,7 @@
 
 ## 目录
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Miri 使用指南](#miri-使用指南)
   - [目录](#目录)
@@ -41,7 +41,7 @@
 
 ## 什么是 Miri
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Miri (Mid-level Intermediate Representation Interpreter) 是 Rust 的官方解释器，用于检测代码中的**未定义行为 (Undefined Behavior, UB)**。
 
@@ -56,7 +56,7 @@ Miri 可以检测的问题：
 
 ## 安装 Miri
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 # 添加 Miri 组件
@@ -68,13 +68,13 @@ cargo miri setup
 
 ## 运行 Miri 测试
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 使用脚本运行
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 # Linux/macOS
@@ -86,9 +86,9 @@ scripts\run-miri.bat
 
 ### 手动运行
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 # 运行所有 Miri 测试
@@ -106,15 +106,15 @@ MIRIFLAGS="-Zmiri-disable-isolation" cargo miri test
 
 ## Tree Borrows vs Stacked Borrows
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Miri 支持两种别名模型来检查内存访问的有效性：
 
 ### Stacked Borrows (默认)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - 更严格的模型
 - 基于栈的借用跟踪
@@ -122,9 +122,9 @@ Miri 支持两种别名模型来检查内存访问的有效性：
 
 ### Tree Borrows (推荐)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - 更灵活的模型
 - 基于树的借用关系
@@ -139,9 +139,9 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 
 ### 关键区别示例
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 let mut x = 0;
@@ -156,11 +156,11 @@ let z = &mut *y;     // 重新借用
 
 ## 配置 Miri
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 项目配置
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 项目的 `.cargo/config.toml` 已配置 Miri 支持：
 
@@ -415,13 +415,13 @@ mod non_miri_tests {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

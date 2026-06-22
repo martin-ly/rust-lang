@@ -140,7 +140,7 @@ stateDiagram-v2
 ```
 
 > **认知功能**: 此状态图将所有权形式化的**分数权限模型**转化为可视化的状态机。关键洞察：**所有权不是静态属性，而是随程序执行动态变化的状态**。`Owned` 态（π=1）可以分化为 `SharedBorrow`（π 拆分）或 `MutBorrow`（临时转移），但最终必须回归 `Owned` 或进入 `Dropped`。这对应分离逻辑中的资源不变量：资源要么被持有，要么被释放，不存在"悬空持有"状态。
-> [来源: [RustBelt]]
+> [来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)]
 
 ---
 
@@ -148,15 +148,15 @@ stateDiagram-v2
 
 ### 1.1 Wikipedia 权威定义
 
-> **[Wikipedia: Operational semantics]** In computer science, operational semantics is a category of formal programming language semantics in which certain desired properties of a program, such as correctness, safety or security, are verified by constructing proofs from logical statements about its execution and procedures, rather than by attaching mathematical meanings to its terms.
+> **[Wikipedia: Operational semantics](https://en.wikipedia.org/wiki/Operational_semantics)** In computer science, operational semantics is a category of formal programming language semantics in which certain desired properties of a program, such as correctness, safety or security, are verified by constructing proofs from logical statements about its execution and procedures, rather than by attaching mathematical meanings to its terms.
 
-> **[Wikipedia: Formal methods]** In computer science, formal methods are mathematically rigorous techniques for the specification, development, analysis, and verification of software and hardware systems. The use of formal methods is motivated by the expectation that, as in other engineering disciplines, performing appropriate mathematical analysis can contribute to the reliability and robustness of a design. [来源: [Iris Project](https://iris-project.org/)]
+> **[Wikipedia: Formal methods](https://en.wikipedia.org/wiki/Formal_methods)** In computer science, formal methods are mathematically rigorous techniques for the specification, development, analysis, and verification of software and hardware systems. The use of formal methods is motivated by the expectation that, as in other engineering disciplines, performing appropriate mathematical analysis can contribute to the reliability and robustness of a design. [来源: [Iris Project](https://iris-project.org/)]
 
-> **[Wikipedia: Separation logic]** Separation logic is an extension of Hoare logic, a way of reasoning about programs. It was developed by John C. Reynolds, Peter O'Hearn, Samin Ishtiaq, and Hongseok Yang to allow local reasoning about mutable data structures.
+> **[Wikipedia: Separation logic](https://en.wikipedia.org/wiki/Separation_logic)** Separation logic is an extension of Hoare logic, a way of reasoning about programs. It was developed by John C. Reynolds, Peter O'Hearn, Samin Ishtiaq, and Hongseok Yang to allow local reasoning about mutable data structures.
 
-> **[Wikipedia: Linear logic]** Linear logic is a substructural logic proposed by Jean-Yves Girard as a refinement of classical and intuitionistic logic, combining the dualities of the former with many of the constructive properties of the latter. Linear logic emphasizes the role of formulas as resources.
+> **[Wikipedia: Linear logic](https://en.wikipedia.org/wiki/Linear_logic)** Linear logic is a substructural logic proposed by Jean-Yves Girard as a refinement of classical and intuitionistic logic, combining the dualities of the former with many of the constructive properties of the latter. Linear logic emphasizes the role of formulas as resources.
 
-> **[Wikipedia: Affine logic]** Affine logic is a substructural logic whose main feature is a weakened form of contraction: while the rule of contraction is not valid in general, it can be applied to formulas of a certain form. This is the logical basis for affine types, which permit weakening (discarding) but not contraction (duplication).
+> **[Wikipedia: Affine logic](https://en.wikipedia.org/wiki/Affine_logic)** Affine logic is a substructural logic whose main feature is a weakened form of contraction: while the rule of contraction is not valid in general, it can be applied to formulas of a certain form. This is the logical basis for affine types, which permit weakening (discarding) but not contraction (duplication).
 
 ### 1.2 Reed 2009：所有权类型的逻辑框架基础
 
@@ -220,7 +220,7 @@ COR 的核心类型判断：
 ## 三、形式化理论根基
 >
 
-> **[学术来源: Felleisen & Hieb 1992, *The Revised Report on the Syntactic Theories of Sequential Control and State*; RustBelt: POPL 2018, Jung et al. *RustBelt* §3]** 操作语义规则描述状态转换，λRust 在此基础上扩展了所有权与借用。
+> **来源: Felleisen & Hieb 1992, *The Revised Report on the Syntactic Theories of Sequential Control and State*; [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/), [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** 操作语义规则描述状态转换，λRust 在此基础上扩展了所有权与借用。
 
 ```text
 赋值（Move）/ 传参:
@@ -275,7 +275,7 @@ COR 的核心类型判断：
 ```mermaid
 graph TD
     A[Ownership Formalization] --> B[COR]
-    A --> C[λRust / RustBelt]
+    A --> CλRust / [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
     A --> D[分离逻辑]
     A --> E[工具链]
     A --> F[认知路径]
@@ -312,7 +312,7 @@ graph TD
 
 ## 五、定理推理链
 
-> **[学术来源: Jung et al. 2017 POPL, *RustBelt: Securing the Foundations of the Rust Programming Language*; Jung et al. 2018 POPL, *Iris from the Ground Up*]** RustBelt 在 Iris 高阶并发分离逻辑中建立了 Rust 安全性的机器检验证明。
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** RustBelt 在 Iris 高阶并发分离逻辑中建立了 Rust 安全性的机器检验证明。
 
 ```text
 定理 (RustBelt Safety):
@@ -430,15 +430,15 @@ graph TD
 | 来源 | 核心内容 | 与本文件对应 |
 |:---|:---|:---|
 | **[CMU 17-363: Programming Language Pragmatics]** | Operational semantics、type soundness | COR 操作语义 |
-| **[ETH RustBelt]** | λRust、Iris 分离逻辑 | 所有权形式化 |
+| **[RustBelt](https://plv.mpi-sws.org/rustbelt/)** | λRust、Iris 分离逻辑 | 所有权形式化 |
 | **[RustBelt: POPL 2018](https://doi.org/10.1145/3158154)** | 类型安全定理、unsafe 封装 | 核心定理 |
-| **[Stacked Borrows: POPL 2019]** | 别名模型操作语义 | 内存模型 §3 |
-| **[Tree Borrows]** | 更宽松的别名模型 | Miri 检测基础 |
+| **[Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)** | 别名模型操作语义 | 内存模型 §3 |
+| **[Tree Borrows — PLDI 2025](https://perso.crans.org/vanille/treebor/)** | 更宽松的别名模型 | Miri 检测基础 |
 | **[Aeneas: ICFP 2022]** | MIR → 纯函数式翻译 | 验证替代路径 |
 | **[RefinedRust: PLDI 2024]** | 自动化分离逻辑验证 | 工业验证 |
 | **[Reed 2009]** | 混合逻辑框架、线性资源模型 | L1↔L4 资源视角理论基础 |
-| **[Wikipedia: Separation Logic]** | 局部推理、分离合取 | 分离逻辑断言 |
-| **[Wikipedia: Affine Logic]** | 弱化而非收缩 | Rust 仿射类型语义 |
+| **[Wikipedia: Separation Logic](https://en.wikipedia.org/wiki/Separation_Logic)** | 局部推理、分离合取 | 分离逻辑断言 |
+| **[Wikipedia: Affine Logic](https://en.wikipedia.org/wiki/Affine_Logic)** | 弱化而非收缩 | Rust 仿射类型语义 |
 
 ### 6.4 Pin 与自引用结构的形式化语义
 
@@ -511,7 +511,7 @@ Oxide 视角:
 |:---|:---|:---|
 | COR 形式化 Rust 核心 | [COR: ETH Zurich] | ✅ |
 | RustBelt 在 Iris 中验证 Rust | [RustBelt: POPL 2018](https://doi.org/10.1145/3158154) · Jung et al. 2017 | ✅ |
-| 分离逻辑描述所有权 | [RustBelt] · [Separation Logic] · Reynolds 2002; Boyland 2003 | ✅ |
+| 分离逻辑描述所有权 | [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [Separation Logic] · Reynolds 2002; Boyland 2003 | ✅ |
 | Aeneas 翻译到纯函数式 | [Aeneas Paper] · Ho & Protzenko 2022 | ✅ |
 | Kani 模型检测 Rust | [AWS Kani] · [Kani GitHub / CAV 2023] | ✅ |
 | 区域约束可满足 | Tofte & Talpin 1994 | ✅ |
@@ -710,7 +710,7 @@ impl SelfRef {
 ```
 
 > **定理（Pin 地址不变性）**：若 `Pin<P<T>>` 被构造且 `T: !Unpin`，则 `P` 指向的内存地址在所有可观测程序点保持不变。这是 RefinedRust（PLDI 2024）中通过 **lifetime token** 和 **location ownership** 联合保证的。 [来源: [Wikipedia — Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)]
-> **来源**: [RFC 2349: Pin] · [PLDI 2024: RefinedRust](https://doi.org/10.1145/3656425) · [Rust Reference: Pin] · [Jung et al. 2019: Stacked Borrows](https://doi.org/10.1145/3290343)
+> **来源**: [RFC 2349: Pin](https://rust-lang.github.io/rfcs/2349-2349-pin.html) · [PLDI 2024: RefinedRust](https://doi.org/10.1145/3656425) · [Rust Reference: Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html) · [Jung et al. 2019: Stacked Borrows](https://doi.org/10.1145/3290343)
 
 ### 9.5 Pin 不动性的 LTL 形式化
 
@@ -842,7 +842,7 @@ Kani 将上述证明转化为符号执行路径:
 
 ## 十一、别名模型：Stacked Borrows 与 Tree Borrows
 
-> **[学术来源: Jung et al. 2019 POPL, *Stacked Borrows: An Aliasing Model for Rust*; Pichon-Pharabod & Dreyer 2024, *Tree Borrows: A New Aliasing Model for Rust*]** Rust 的别名模型定义了引用在内存中的合法使用方式，是 Miri 检测未定义行为的核心依据。
+> **来源: [Stacked Borrows — POPL 2021](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)** Rust 的别名模型定义了引用在内存中的合法使用方式，是 Miri 检测未定义行为的核心依据。
 
 ### 11.1 Stacked Borrows 核心规则
 
@@ -923,7 +923,7 @@ Tree Borrows 通过 **Reserved → Active** 的延迟激活，允许裸指针与
 
 ### 11.5 Tree Borrows 2025：PLDI 2025 Distinguished Paper
 
-> **[学术来源: Pichon-Pharabod & Dreyer, *Tree Borrows: A New Aliasing Model for Rust*, PLDI 2025 Distinguished Paper]** Tree Borrows 于 2025 年获 PLDI Distinguished Paper Award，标志着别名模型从学术研究走向工业级部署。
+> **来源: [Tree Borrows — PLDI 2025](https://perso.crans.org/vanille/treebor/)** Tree Borrows 于 2025 年获 PLDI Distinguished Paper Award，标志着别名模型从学术研究走向工业级部署。
 
 **核心更新（2024–2025）**:
 
@@ -973,7 +973,7 @@ Tree Borrows 的状态空间 Σ = (M, P, T) 其中：
   Disabled   —— 已失效：任何通过该标签的访问均为 UB
 ```
 
-> **来源**: [Pichon-Pharabod & Dreyer 2024 §3.1 — State definition] · [Miri Book: Tree Borrows state machine]
+> **来源**: [Pichon-Pharabod & Dreyer 2024 §3.1 — State definition] · [Miri Book](https://github.com/rust-lang/miri)
 
 #### 小步语义：引用创建
 
@@ -1042,7 +1042,7 @@ Tree Borrows 的状态空间 Σ = (M, P, T) 其中：
   证明: [WRITE] 规则将其他 Active/Reserved/Unique 兄弟 Disabled，且 Frozen 祖先也 Disabled。
 ```
 
-> **来源**: [Pichon-Pharabod & Dreyer 2024 §3.3 — Access rules] · [Miri Book: Tree Borrows access permissions]
+> **来源**: [Pichon-Pharabod & Dreyer 2024 §3.3 — Access rules] · [Miri Book](https://github.com/rust-lang/miri)
 
 #### 小步语义：裸指针转换与延迟激活
 
@@ -1075,7 +1075,7 @@ Tree Borrows 的状态空间 Σ = (M, P, T) 其中：
     - 优化假设：只要没有实际写冲突，多个潜在别名可暂时共存
 ```
 
-> **来源**: [Pichon-Pharabod & Dreyer 2024 §4 — Delayed activation and raw pointers] · [Rust Reference: &raw operator (1.82)] · [Miri src/borrow_tracker/tree_borrows/tree.rs]
+> **来源**: [Pichon-Pharabod & Dreyer 2024 §4 — Delayed activation and raw pointers] · [Rust Reference: &raw operator (1.82)](https://doc.rust-lang.org/reference/) · [Miri src/borrow_tracker/tree_borrows/tree.rs]
 
 #### Permissions 转换的完整状态机
 
@@ -1115,7 +1115,7 @@ Tree Borrows 的状态空间 Σ = (M, P, T) 其中：
   Any → Disabled: 兄弟分支发生写操作；或父节点被 Frozen 后该分支是 Active
 ```
 
-> **来源**: [Pichon-Pharabod & Dreyer 2024 §3.1, Fig. 3] · [Miri Book: Permission state machine]
+> **来源**: [Pichon-Pharabod & Dreyer 2024 §3.1, Fig. 3] · [Miri Book](https://github.com/rust-lang/miri)
 
 #### 与 Miri 检测算法的对应
 
@@ -1151,7 +1151,7 @@ Miri 的 Tree Borrows 检测器直接实现了上述操作语义：
   Miri 默认使用 Tree Borrows（2024 年末起）
   Miri -Zmiri-stacked-borrows 保留 Stacked Borrows（兼容选项）
       ↓
-  结论: Tree Borrows 成为 Rust 别名假设的首选形式化 [来源: Miri Book] ✅
+  结论: Tree Borrows 成为 Rust 别名假设的首选形式化 来源: [Miri Book](https://github.com/rust-lang/miri) ✅
 ```
 
 | 工具/框架 | 支持的模型 | 作用 |
@@ -1193,7 +1193,7 @@ Miri 的 Tree Borrows 检测器直接实现了上述操作语义：
 
 ## 十二、Wikipedia 概念对齐
 
-> **[来源: Wikipedia]** 所有权形式化核心概念与国际知识库映射。
+> **来源: [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)** 所有权形式化核心概念与国际知识库映射。
 
 | 概念 | Wikipedia 词条 | 对应 Rust 概念 |
 |:---|:---|:---|

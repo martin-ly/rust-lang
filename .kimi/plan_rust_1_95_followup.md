@@ -91,4 +91,4 @@
 
 - [Hello, World](../00_start/hello_world.md)
 - [安装 Rust](../00_start/installation.md)
----\n\n## 权威来源索引\n\n> **[来源: Rust Reference - Edition 2024]**\n\n> **[来源: Wikipedia - Rust (programming language)]**\n\n> **[来源: TRPL - Rust Evolution]**\n\n> **[来源: Rust Internals Forum]**\n
+---\n\n## 权威来源索引\n\n> **来源: [Rust Reference - Edition 2024](https://doc.rust-lang.org/reference/)**\n\n> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**\n\n> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**\n\n> **[来源: Rust Internals Forum]**\n

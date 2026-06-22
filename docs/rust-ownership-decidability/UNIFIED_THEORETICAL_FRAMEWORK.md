@@ -7,7 +7,7 @@
 
 ## Unified Theoretical Framework for Rust Ownership System
 >
-> **[来源: Wikipedia - Type Theory]** · **[来源: Wikipedia - Operational Semantics]** · **[来源: Wikipedia - Separation Logic]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Pierce 2002 - TAPL]** · **[来源: Iris Project - iris-project.org] · **[来源: Wikipedia - Unified Theory]** · **[来源: Wikipedia - Formal Methods]** · **[来源: ACM - Unified Program Analysis]** · **[来源: IEEE - Integrated Verification Frameworks]**
+> **来源: [Wikipedia - Type Theory](https://en.wikipedia.org/wiki/Type_Theory)** · **来源: [Wikipedia - Operational Semantics](https://en.wikipedia.org/wiki/Operational_Semantics)** · **来源: [Wikipedia - Separation Logic](https://en.wikipedia.org/wiki/Separation_Logic)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [Pierce 2002 - TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)** · **来源: [Iris Project - iris-project.org](https://iris-project.org/) · **来源: [Wikipedia - Unified Theory](https://en.wikipedia.org/wiki/Unified_Theory)** · **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)** · **[来源: ACM - Unified Program Analysis]** · **[来源: IEEE - Integrated Verification Frameworks]**
 
 > **文档性质**: 形式化理论顶层框架
 > **版本**: 1.0.0
@@ -18,7 +18,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [Rust 所有权系统统一理论框架](#rust-所有权系统统一理论框架)
   - [Unified Theoretical Framework for Rust Ownership System](#unified-theoretical-framework-for-rust-ownership-system)
@@ -96,11 +96,11 @@
 
 ## 1. 引言
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 研究问题
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Rust 所有权系统形式化验证的核心问题是建立严格的数学基础，证明以下命题：
 
@@ -121,7 +121,7 @@ $$
 
 ### 1.2 方法论
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 本框架采用三重理论支柱：
 
@@ -155,7 +155,7 @@ $$
 
 ### 1.3 形式化目标
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 本框架追求以下形式化目标：
 
@@ -175,11 +175,11 @@ $$
 
 ### 2.1 类型论基础
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 #### 2.1.1 简单类型 lambda 演算
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 Rust 的核心类型系统基于简单类型 lambda 演算的扩展：
 
@@ -208,7 +208,7 @@ $$
 
 #### 2.1.2 多态类型系统 (System F)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 Rust 泛型对应 System F 的多态扩展：
 
@@ -227,7 +227,7 @@ $$
 
 #### 2.1.3 线性类型系统
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 Rust 所有权系统的核心是**线性类型** (Linear Types)：
 
@@ -254,11 +254,11 @@ $$
 
 ### 2.2 操作语义理论
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 #### 2.2.1 小步操作语义 (SOS)
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **定义 2.2** (小步关系):
 小步语义定义程序的单步转换：
@@ -287,7 +287,7 @@ $$
 
 #### 2.2.2 大步操作语义
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **定义 2.3** (大步求值):
 大步语义描述完整求值：
@@ -304,7 +304,7 @@ $$
 
 #### 2.2.3 求值上下文
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **定义 2.4** (求值上下文):
 
@@ -320,11 +320,11 @@ $$
 
 ### 2.3 逻辑框架
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 #### 2.3.1 分离逻辑 (Separation Logic)
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **定义 2.5** (分离逻辑断言):
 
@@ -348,7 +348,7 @@ $$
 
 #### 2.3.2 模态逻辑扩展 (Iris)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **定义 2.6** (Later Modality):
 
@@ -368,7 +368,7 @@ $$\persistent P \vdash P * P$$
 
 #### 2.3.3 生命周期逻辑
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **定义 2.8** (生命周期断言):
 
@@ -391,11 +391,11 @@ $$
 
 ### 3.1 语法统一视图
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 #### 3.1.1 抽象语法定义
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **元元语言约定**:
 
@@ -438,7 +438,7 @@ $$
 
 #### 3.1.2 声明语法
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **函数声明**:
 
@@ -454,11 +454,11 @@ $$
 
 ### 3.2 语义统一视图
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 #### 3.2.1 语义域定义
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **基本集合**:
 
@@ -491,7 +491,7 @@ $$
 
 #### 3.2.2 配置定义
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 **小步配置**:
 
@@ -527,7 +527,7 @@ $$
 
 ### 3.3 判断体系统一视图
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 #### 3.3.1 类型判断
 
@@ -617,7 +617,7 @@ $$
 
 ### 4.1 定理依赖网络
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```mermaid
 graph TB
@@ -687,7 +687,7 @@ graph TB
 
 ### 4.2 核心定理陈述
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 #### 定理 4.1: Linearizability → Termination
 
@@ -894,7 +894,7 @@ $$
 
 ### 4.3 引理与辅助定理
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 #### 引理 4.2: 求值确定性
 
@@ -924,7 +924,7 @@ $$
 
 ### 5.1 结构归纳法模式
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **模式定义**:
 
@@ -963,7 +963,7 @@ induction H0.
 
 ### 5.2 反演法模式
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **模式定义**:
 
@@ -992,7 +992,7 @@ T-Var: Γ(x) = τ' → Γ ⊢ x : τ'
 
 ### 5.3 矛盾法模式
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **模式定义**:
 
@@ -1022,7 +1022,7 @@ Qed.
 
 ### 5.4 构造法模式
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **模式定义**:
 
@@ -1052,7 +1052,7 @@ split; auto.
 
 ### 5.5 证明策略选择矩阵
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | 证明目标 | 推荐策略 | 辅助策略 |
 |----------|----------|----------|
@@ -1070,7 +1070,7 @@ split; auto.
 
 ### 6.1 Rust 表面语法 → 核心语言
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **翻译层架构**:
 
@@ -1117,7 +1117,7 @@ split; auto.
 
 ### 6.2 核心语言 → 形式化语言
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **类型系统映射**:
 
@@ -1398,30 +1398,30 @@ $$
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Unified Theory]**
+> **来源: [Wikipedia - Unified Theory](https://en.wikipedia.org/wiki/Unified_Theory)**
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
-> **[来源: Wikipedia - Programming Language Theory]**
+> **来源: [Wikipedia - Programming Language Theory](https://en.wikipedia.org/wiki/Programming_Language_Theory)**
 
 > **[来源: IEEE - Integrated Verification Frameworks]**
 
 > **[来源: ACM - Unified Program Analysis]**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: PLDI 2023 - Aeneas]**
+> **来源: [PLDI 2023 - Aeneas](https://www.sigplan.org/Conferences/PLDI/)**
 
-> **[来源: Iris Project - iris-project.org]**
+> **来源: [Iris Project - iris-project.org](https://iris-project.org/)**
 
-> **[来源: Rust Reference - Type System]**
+> **来源: [Rust Reference - Type System](https://doc.rust-lang.org/reference/types.html)**
 
-> **[来源: Rustonomicon - The Dark Arts of Unsafe Rust]**
+> **来源: [Rustonomicon - The Dark Arts of Unsafe Rust](https://doc.rust-lang.org/nomicon/)**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---
 

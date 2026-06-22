@@ -48,7 +48,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Project Management]** · **[来源: Wikipedia - Progress Tracking]** · **[来源: ACM - Software Metrics]** · **[来源: IEEE - Project Status Reporting]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Project Management](https://en.wikipedia.org/wiki/Project_Management)** · **来源: [Wikipedia - Progress Tracking](https://en.wikipedia.org/wiki/Progress_Tracking)** · **[来源: ACM - Software Metrics]** · **[来源: IEEE - Project Status Reporting]**
 
 实现进度矩阵追踪Rust形式化方法文档项目的完成状态，为项目管理和资源分配提供数据支持。
 
@@ -56,13 +56,13 @@
 
 ## 总体进度
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 完成度概览
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 类别 | 计划 | 已完成 | 进行中 | 待开始 | 完成率 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -96,7 +96,7 @@
 
 ### Phase 0: 审计与清理 ✅
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 | 任务 | 状态 | 完成日期 |
 | :--- | :--- | :--- |
@@ -106,7 +106,7 @@
 
 ### Phase 1: 核心形式化增强 ✅
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 | 任务 | 状态 | 完成度 |
 | :--- | :--- | :--- |
@@ -118,7 +118,7 @@
 
 ### Phase 2: 设计模式扩展 ✅
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 | 任务 | 状态 | 完成度 |
 | :--- | :--- | :--- |
@@ -128,7 +128,7 @@
 
 ### Phase 3: 思维表征增强 ✅
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | 任务 | 状态 | 完成度 |
 | :--- | :--- | :--- |
@@ -325,21 +325,21 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-> **[来源: Rust Reference]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-> **[来源: Rust Standard Library]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: ACM - Systems Programming]**
+> **来源: [ACM](https://dl.acm.org/)**
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-> **[来源: Rustonomicon]**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---
 

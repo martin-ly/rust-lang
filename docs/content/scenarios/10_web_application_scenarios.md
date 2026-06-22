@@ -23,7 +23,7 @@
 
 ## 🌳 Web 应用场景树
 
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 graph TD
@@ -57,13 +57,13 @@ graph TD
 
 ## 📊 RESTful API 场景
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 场景 1: CRUD API
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use axum::{
@@ -153,12 +153,12 @@ async fn get_user(Path(id): Path<Uuid>) -> Json<User> {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Web Framework]**
-> **[来源: axum.rs Documentation]**
-> **[来源: actix.rs Documentation]**
-> **[来源: RFC 2616 - HTTP]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Wikipedia - Type System]**
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Web Framework](https://en.wikipedia.org/wiki/Web_Framework)**
+> **来源: [axum.rs Documentation](https://docs.rs/axum/latest/axum/)**
+> **来源: [actix.rs Documentation](https://actix.rs/)**
+> **来源: [RFC 2616 - HTTP](https://rust-lang.github.io/rfcs/2616-2616-http.html)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ---

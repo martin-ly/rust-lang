@@ -13,7 +13,7 @@
 > **双维定位**: P×Cre — 设计 ECS 游戏架构
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Lifetimes](../01_foundation/03_lifetimes.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Unsafe](../03_advanced/03_unsafe.md)
 > **后置概念**: [Application Domains](./04_application_domains.md) · [Formal Ecosystem Tower](./05_formal_ecosystem_tower.md)
-> **主要来源**: [Bevy Book] · [Bevy ECS Docs] · [Fyrox Docs] · [wgpu Documentation] · [Wikipedia: Entity component system] · [Data-Oriented Design Book] · [Niko Matsakis — Rayon Blog]
+> **主要来源**: [Bevy Book] · [Bevy ECS Docs] · [Fyrox Docs] · [wgpu Documentation] · [Wikipedia: Entity component system](https://en.wikipedia.org/wiki/Entity_component_system) · [Data-Oriented Design Book] · [Niko Matsakis — Rayon Blog]
 
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
@@ -34,7 +34,7 @@
 
 ## 权威定义
 
-> **[Wikipedia — Entity component system]** Entity component system (ECS) is a software architectural pattern mostly used in video game development for the representation of game world objects. An ECS comprises entities composed from components of data, with systems which read and update component data.
+> **[Wikipedia — Entity component system](https://en.wikipedia.org/wiki/Entity_component_system)** Entity component system (ECS) is a software architectural pattern mostly used in video game development for the representation of game world objects. An ECS comprises entities composed from components of data, with systems which read and update component data.
 > **来源**: <https://en.wikipedia.org/wiki/Entity_component_system>
 
 > **[Data-Oriented Design]** The purpose of all programs, and all parts of those programs, is to transform data from one form to another.
@@ -1155,7 +1155,7 @@ struct ChildOf {
 
 > **[来源: Bevy Book; Bevy ECS Docs; Fyrox Docs; wgpu Documentation; Data-Oriented Design Book]** 游戏开发分析基于官方引擎文档和 DOD 研究。✅
 
-> **[来源: Wikipedia — Entity component system; Richard Fabian — Data-Oriented Design; Niko Matsakis Blog]** ECS 和 DOD 概念参考了权威定义和核心开发者博客。✅
+> **来源: [Wikipedia — Entity component system; Richard Fabian — Data-Oriented Design; Niko Matsakis Blog](https://en.wikipedia.org/wiki/Entity_component_system%3B_Richard_Fabian_%E2%80%94_Data_Oriented_Design%3B_Niko_Matsakis_Blog)** ECS 和 DOD 概念参考了权威定义和核心开发者博客。✅
 
 > **[来源: Rust Concurrency Book; Rayon Docs; Rust Book Ch.16]** 并发渲染分析基于 Rust 并发安全的核心文献。✅
 ---

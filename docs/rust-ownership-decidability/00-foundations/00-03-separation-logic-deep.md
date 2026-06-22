@@ -7,7 +7,7 @@
 
 ## Table of Contents
 >
-> **[来源: Wikipedia - Separation Logic]** · **[来源: Wikipedia - Hoare Logic]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Reynolds 2002 - Separation Logic]** · **[来源: Iris Project - iris-project.org]** · **[来源: O'Hearn 2019 - Incorrectness Logic]** · **[来源: Wikipedia - Program Verification]** · **[来源: ACM - Separation Logic Tutorial]** · **[来源: IEEE - Deductive Verification Methods]**
+> **来源: [Wikipedia - Separation Logic](https://en.wikipedia.org/wiki/Separation_Logic)** · **来源: [Wikipedia - Hoare Logic](https://en.wikipedia.org/wiki/Hoare_Logic)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **[来源: Reynolds 2002 - Separation Logic]** · **来源: [Iris Project - iris-project.org](https://iris-project.org/)** · **[来源: O'Hearn 2019 - Incorrectness Logic]** · **来源: [Wikipedia - Program Verification](https://en.wikipedia.org/wiki/Program_Verification)** · **[来源: ACM - Separation Logic Tutorial]** · **[来源: IEEE - Deductive Verification Methods]**
 
 - [Separation Logic: A Comprehensive Deep Dive](#separation-logic-a-comprehensive-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -135,15 +135,15 @@
 
 ## 1. Introduction
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Separation Logic (SL) is a logical framework for reasoning about programs that manipulate mutable data structures stored in memory. Introduced by John C. Reynolds and Peter W. O'Hearn in the early 2000s, it extends Hoare logic with a separating conjunction operator that enables local reasoning about memory.
 
 ### 1.1 Historical Context
 
-> **[来源: Wikipedia - Separation Logic]**
+> **来源: [Wikipedia - Separation Logic](https://en.wikipedia.org/wiki/Separation_Logic)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Before Separation Logic, reasoning about pointer programs required global invariants that tracked the entire heap state. This approach was:
 
@@ -153,7 +153,7 @@ Before Separation Logic, reasoning about pointer programs required global invari
 
 ### 1.2 Key Innovation: Local Reasoning
 
-> **[来源: Wikipedia - Hoare Logic]**
+> **来源: [Wikipedia - Hoare Logic](https://en.wikipedia.org/wiki/Hoare_Logic)**
 
 Separation Logic's fundamental insight is that most program operations affect only a small portion of memory. By using the **frame rule**, we can verify a command with respect to a small precondition and then extend the result to any larger context.
 
@@ -177,7 +177,7 @@ The RustBelt project uses Iris, a higher-order concurrent separation logic frame
 
 ### 2.1 Assertion Language
 
-> **[来源: IEEE - Logic in Computer Science]**
+> **来源: [IEEE - Logic in Computer Science](https://standards.ieee.org/)**
 
 The syntax of separation logic assertions is defined as:
 
@@ -200,7 +200,7 @@ P, Q ::= emp                    // Empty heap
 
 #### 2.1.1 Detailed Semantics
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **Emp (Empty Heap)**:
 
@@ -228,7 +228,7 @@ where h1 # h2 means h1 and h2 have disjoint domains.
 
 #### 2.1.2 The Heap Model
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 Formally, a heap h is a partial function from addresses to values:
 
@@ -248,14 +248,14 @@ The separating conjunction is the defining operator of separation logic. It asse
 
 #### 2.2.1 Intuition
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 - `P * Q` means P holds in one part of memory, Q holds in another, and these parts do not overlap
 - This enables **frame reasoning**: if we prove {P} C {Q}, we automatically get {P *R} C {Q* R}
 
 #### 2.2.2 Algebraic Properties
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **Theorem 2.1 (Separating Conjunction Properties)**:
 The separating conjunction forms a commutative monoid with emp as identity:
@@ -276,7 +276,7 @@ iff h |= Q * P
 
 #### 2.2.3 Frame Rule
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **Theorem 2.2 (FRAME RULE)**:
 If {P} C {Q}, then {P *R} C {Q* R} when C does not modify any variables free in R.
@@ -302,13 +302,13 @@ Thus the result satisfies Q* R.
 
 ### 2.3 Separating Implication (-*)
 
-> **[来源: Wikipedia - Separation Logic]**
+> **来源: [Wikipedia - Separation Logic](https://en.wikipedia.org/wiki/Separation_Logic)**
 
 The magic wand P -* Q (read as "P wand Q") asserts that if we add a heap satisfying P to the current heap, we get a heap satisfying Q.
 
 #### 2.3.1 Semantics
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```
 h |= P -* Q    iff    forall h'. h' # h and h' |= P implies h' union h |= Q
@@ -316,7 +316,7 @@ h |= P -* Q    iff    forall h'. h' # h and h' |= P implies h' union h |= Q
 
 #### 2.3.2 Key Properties
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **Theorem 2.3 (Magic Wand Adjoint)**:
 The magic wand is the right adjoint of separating conjunction:
@@ -345,7 +345,7 @@ This is the modus ponens for separation logic.
 
 ### 2.4 Iterated Separating Conjunction
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 For reasoning about collections, we define:
 
@@ -365,7 +365,7 @@ This is used for describing arrays, lists, and other data structures.
 
 ### 3.1 Basic Syntax
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 A Hoare triple {P} C {Q} means:
 
@@ -377,7 +377,7 @@ In separation logic, P and Q are assertions over heaps.
 
 ### 3.2 Operational Semantics
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **Heap Operations**:
 
@@ -402,11 +402,11 @@ In separation logic, P and Q are assertions over heaps.
 
 ### 3.3 Inference Rules
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 #### 3.3.1 Assignment Rule
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **Simple Assignment**:
 
@@ -428,7 +428,7 @@ More generally, with frame:
 
 #### 3.3.2 Allocation Rule
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```
 {emp} x := alloc() {x |-> _}
@@ -442,7 +442,7 @@ For allocation with initialization:
 
 #### 3.3.3 Deallocation Rule
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```
 {e |-> _} free(e) {emp}
@@ -456,7 +456,7 @@ With frame:
 
 #### 3.3.4 Dereference Rule
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```
 {e |-> v} x := [!e] {e |-> v and x = v}
@@ -464,11 +464,11 @@ With frame:
 
 ### 3.4 Structural Rules
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 #### 3.4.1 Consequence Rule
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```
    P |= P'    {P'} C {Q'}    Q' |= Q
@@ -478,7 +478,7 @@ With frame:
 
 #### 3.4.2 Frame Rule (Revisited)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```
       {P} C {Q}    modifies(C) intersect fv(R) = empty
@@ -498,7 +498,7 @@ Thus the result satisfies Q* R.
 
 ### 3.5 Theorem: Locality
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **Theorem 3.2 (Locality)**:
 If {P} C {Q} and the execution of C from a state satisfying P * R is safe, then:
@@ -511,11 +511,11 @@ This theorem formalizes the principle that well-behaved commands only touch memo
 
 ### 3.6 Derived Rules
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 #### 3.6.1 Rule of Conjunction
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```
    {P} C {Q}    {P'} C {Q'}
@@ -525,7 +525,7 @@ This theorem formalizes the principle that well-behaved commands only touch memo
 
 #### 3.6.2 Rule of Disjunction
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```
    {P} C {Q}    {P'} C {Q'}
@@ -541,7 +541,7 @@ This theorem formalizes the principle that well-behaved commands only touch memo
 
 ### 4.1 The Iris Framework
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 Iris is a higher-order concurrent separation logic framework implemented in Coq. It extends basic separation logic with:
 
@@ -553,7 +553,7 @@ Iris is a higher-order concurrent separation logic framework implemented in Coq.
 
 #### 4.1.1 Iris Assertion Language
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```
 P, Q ::= ...                      // Basic SL assertions
@@ -570,7 +570,7 @@ P, Q ::= ...                      // Basic SL assertions
 
 #### 4.1.2 Later Modality (>)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 The later modality is used for guarded recursion:
 
@@ -588,7 +588,7 @@ This allows reasoning about recursive programs and recursive types.
 
 #### 4.1.3 Persistent Assertions ([])
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 A persistent assertion can be duplicated:
 
@@ -600,13 +600,13 @@ Persistent assertions are used for immutable knowledge that does not depend on e
 
 ### 4.2 Lifetime Logic in RustBelt
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 RustBelt models Rust's ownership system using separation logic concepts:
 
 #### 4.2.1 Ownership as Permission
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **Exclusive Ownership (Box<T>, &mut T)**:
 
@@ -626,7 +626,7 @@ Shared references are modeled using invariants. The lifetime k being alive guara
 
 #### 4.2.2 Lifetime Logic
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 Lifetimes in RustBelt are ghost variables representing the duration of borrows:
 
@@ -663,7 +663,7 @@ Shared borrows allow multiple readers but no writers during the lifetime.
 
 ### 4.3 The Semantic Model
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 RustBelt proves that Rust's type system is sound by giving each type a semantic interpretation:
 
@@ -702,7 +702,7 @@ This theorem states that well-typed Rust programs are memory safe.
 
 ### 4.4 Invariants and Protocols
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 #### 4.4.1 Invariants
 
@@ -743,7 +743,7 @@ where:
 
 ### 5.1 Linked List Verification
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 #### 5.1.1 Recursive Definition
 
@@ -826,7 +826,7 @@ fn reverse(mut head: *mut Node) -> *mut Node {
 
 ### 5.2 Tree Verification
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 #### 5.2.1 Binary Tree Definition
 
@@ -882,7 +882,7 @@ fn insert(root: *mut *mut Node, key: i32) {
 
 ### 5.3 Array Segments
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 For reasoning about array operations, we use segment assertions:
 
@@ -920,7 +920,7 @@ This section presents 12+ common errors in separation logic reasoning, each with
 
 ### 6.1 Counter-Example 1: Frame Rule Violation
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **The Error**: Applying the frame rule when the command modifies variables in the frame.
 
@@ -950,7 +950,7 @@ Only if y does not alias x.
 
 ### 6.2 Counter-Example 2: Overlapping Permissions
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **The Error**: Asserting overlapping memory with separating conjunction.
 
@@ -968,7 +968,7 @@ fn unsound_overlap(x: *mut i32) {
 
 ### 6.3 Counter-Example 3: Dangling Pointer Dereference
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **The Error**: Dereferencing memory after deallocation.
 
@@ -998,7 +998,7 @@ After `drop(x)`, we have `emp` - no heap ownership. Dereferencing `raw` (which e
 
 ### 6.4 Counter-Example 4: Use After Free
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **The Error**: Similar to dangling pointer, but with explicit heap manipulation.
 
@@ -1027,7 +1027,7 @@ After deallocation, we lose all permission to access that memory.
 
 ### 6.5 Counter-Example 5: Double Free
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **The Error**: Freeing the same memory twice.
 
@@ -1059,7 +1059,7 @@ drop(x);  // Compile error: x already moved
 
 ### 6.6 Counter-Example 6: Memory Leak
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **The Error**: Losing the last reference to allocated memory.
 
@@ -1087,7 +1087,7 @@ If {emp} C {emp} is provable, then C is memory-safe (no leaks, no use-after-free
 
 ### 6.7 Counter-Example 7: Incorrect Invariant
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **The Error**: Using an invariant that does not actually hold.
 
@@ -1118,7 +1118,7 @@ while x < 100 {
 
 ### 6.8 Counter-Example 8: Aliasing in Unique Pointer
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **The Error**: Creating aliases when exclusive ownership is required.
 
@@ -1147,7 +1147,7 @@ Creating a second `&mut` would require owning `own(x, 42)` twice, which is impos
 
 ### 6.9 Counter-Example 9: Partial Overlap
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **The Error**: Operations on overlapping but non-identical memory regions.
 
@@ -1179,7 +1179,7 @@ The decomposition is invalid because the regions overlap. Correct decomposition:
 
 ### 6.10 Counter-Example 10: Ghost State Inconsistency
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **The Error**: Mismanaging ghost state in Iris-style proofs.
 
@@ -1200,7 +1200,7 @@ Qed.
 
 ### 6.11 Counter-Example 11: Invariant Weakening Failure
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **The Error**: Attempting to weaken an invariant unsoundly.
 
@@ -1228,7 +1228,7 @@ Consequence rules require `Q' |= Q` for postcondition weakening. Here we are try
 
 ### 6.12 Counter-Example 12: View Shift Unsoundness
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **The Error**: Using view shifts incorrectly in Iris.
 
@@ -1257,7 +1257,7 @@ View shifts must respect invariant masks. Opening an invariant temporarily remov
 
 ### 6.13 Additional Counter-Example 13: Frame Mask Violation
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **The Error**: Not accounting for invariant masks in atomic operations.
 
@@ -1284,7 +1284,7 @@ The mask changes during the CAS to allow accessing the invariant.
 
 ### 6.14 Additional Counter-Example 14: Later Modality Misuse
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **The Error**: Dropping the later modality unsoundly.
 
@@ -1316,7 +1316,7 @@ The later modality is essential for step-indexed logical relations.
 
 ### 7.1 Concurrent Separation Logic
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 Concurrent Separation Logic (CSL) extends SL to reason about shared-memory concurrency.
 
@@ -1358,7 +1358,7 @@ If two threads have compatible rely/guarantee conditions, they can execute in pa
 
 ### 7.2 Higher-Order Protocols
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 #### 7.2.1 Ghost State Protocols
 
@@ -1390,7 +1390,7 @@ Definition lock_inv (gamma : gname) (l : loc) : iProp :=
 
 ### 7.3 Higher-Order Separation Logic
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 #### 7.3.1 Impredicativity
 
@@ -1416,7 +1416,7 @@ list(x) = mu L. lambda y. > (y = null \/ (exists z. y |-> (z, _) * L(z)))
 
 ### 7.4 Fictional Separation Logic
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 A variant that allows "fictionally" separating resources that are actually shared:
 
@@ -1434,7 +1434,7 @@ Used for reasoning about data structures with sharing, like graphs with cycles.
 
 ### 8.1 Iris in Coq
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 Iris is implemented as a Coq library providing tactics for separation logic proofs.
 
@@ -1488,7 +1488,7 @@ iFrame                (* Frame automation *)
 
 ### 8.2 Example Proofs
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 #### 8.2.1 Simple Allocation
 
@@ -1552,7 +1552,7 @@ Qed.
 
 ### 8.3 RustBelt Mechanization
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 #### 8.3.1 Type Interpretation
 
@@ -1623,7 +1623,7 @@ Qed.
 
 ### 9.1 Vec Specification
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 A Rust `Vec<T>` consists of:
 
@@ -1645,7 +1645,7 @@ struct RawVec<T> {
 
 ### 9.2 Separation Logic Model
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```coq
 Definition vec_inv {Sigma} (gamma : gname) (v : val) (xs : list val) : iProp Sigma :=
@@ -1660,7 +1660,7 @@ Definition vec_inv {Sigma} (gamma : gname) (v : val) (xs : list val) : iProp Sig
 
 ### 9.3 Vec Operations
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 #### 9.3.1 New
 
@@ -1850,7 +1850,7 @@ Qed.
 
 ### 9.4 Vec Iterator
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 pub struct Iter<'a, T> {
@@ -1873,7 +1873,7 @@ Definition iter_inv (iter : val) (start : loc) (remaining total : list val) : iP
 
 ### 9.5 Safety Theorems
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **Theorem 9.1 (Vec Memory Safety)**:
 All Vec operations maintain:
@@ -1898,7 +1898,7 @@ The sequence of elements after operations matches the expected mathematical oper
 
 ### 10.1 Foundational Papers
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 1. **Reynolds, J.C.** (2002). "Separation Logic: A Logic for Shared Mutable Data Structures." *LICS 2002*.
    - The original paper introducing separation logic.
@@ -1911,7 +1911,7 @@ The sequence of elements after operations matches the expected mathematical oper
 
 ### 10.2 Iris and RustBelt
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 1. **Jung, R., et al.** (2018). "Iris from the Ground Up: A Modular Foundation for Higher-Order Concurrent Separation Logic." *Journal of Functional Programming*.
    - Comprehensive description of the Iris framework.
@@ -1924,7 +1924,7 @@ The sequence of elements after operations matches the expected mathematical oper
 
 ### 10.3 Mechanization and Tools
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 1. **Krebbers, R., et al.** (2017). "The Essence of Higher-Order Concurrent Separation Logic." *ESOP 2017*.
    - Core Iris theory.
@@ -1935,7 +1935,7 @@ The sequence of elements after operations matches the expected mathematical oper
 
 ### 10.4 Books and Surveys
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 1. **O'Hearn, P.W. & Pym, D.J.** (2002). "The Logic of Bunched Implications." *Bulletin of Symbolic Logic*.
     - Logical foundations of separating conjunction.
@@ -1948,7 +1948,7 @@ The sequence of elements after operations matches the expected mathematical oper
 
 ### 10.5 Advanced Topics
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 1. **Brookes, S.** (2007). "A Semantics for Concurrent Separation Logic." *Theoretical Computer Science*.
     - Action trace semantics for CSL.
@@ -1987,7 +1987,7 @@ The sequence of elements after operations matches the expected mathematical oper
 
 ### Structural Rules
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```
    P |= P'    {P'} C {Q'}    Q' |= Q
@@ -2005,7 +2005,7 @@ The sequence of elements after operations matches the expected mathematical oper
 
 ### Primitive Rules
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```
 {emp} x := alloc() {x |-> _}
@@ -2016,7 +2016,7 @@ The sequence of elements after operations matches the expected mathematical oper
 
 ### Separation Rules
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```
 P * Q |= Q * P                     (COMM)
@@ -2033,7 +2033,7 @@ P * Q |= P' * Q'    if P|=P', Q|=Q' (MONO)
 
 ### Core Theorems
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | Theorem | Statement | Section |
 |---------|-----------|---------|
@@ -2098,49 +2098,49 @@ P * Q |= P' * Q'    if P|=P', Q|=Q' (MONO)
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Separation Logic]**
+> **来源: [Wikipedia - Separation Logic](https://en.wikipedia.org/wiki/Separation_Logic)**
 
-> **[来源: Wikipedia - Hoare Logic]**
+> **来源: [Wikipedia - Hoare Logic](https://en.wikipedia.org/wiki/Hoare_Logic)**
 
-> **[来源: Wikipedia - Program Verification]**
+> **来源: [Wikipedia - Program Verification](https://en.wikipedia.org/wiki/Program_Verification)**
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
 > **[来源: IEEE - Deductive Verification Methods]**
 
 > **[来源: ACM - Separation Logic Tutorial]**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 > **[来源: Reynolds 2002 - Separation Logic]**
 
-> **[来源: Iris Project - iris-project.org]**
+> **来源: [Iris Project - iris-project.org](https://iris-project.org/)**
 
 > **[来源: O'Hearn 2019 - Incorrectness Logic]**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages Survey]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design and Implementation]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM - Systems Programming Languages Survey](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI - Programming Language Design and Implementation](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---

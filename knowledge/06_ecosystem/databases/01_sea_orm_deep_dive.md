@@ -564,3 +564,27 @@ mod tests {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ---
+
+## 📚 模块 8: 国际化对齐
+
+> 本节按项目模板要求补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Sea-ORM docs](https://www.sea-ql.org/SeaORM/) | 权威来源 | Sea-ORM 文档 |
+| [SQLx docs](https://docs.rs/sqlx/latest/sqlx/) | 权威来源 | SQLx 文档 |
+
+### 8.2 学术来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Relational Database](https://en.wikipedia.org/wiki/Relational_database) | 权威来源 | 关系型数据库 |
+
+### 8.3 社区权威
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Diesel docs](https://diesel.rs/) | 权威来源 | Diesel ORM |
+| [Axum + SQLx examples](https://github.com/tokio-rs/axum/tree/main/examples/sqlx-postgres) | 权威来源 | Web + DB 示例 |

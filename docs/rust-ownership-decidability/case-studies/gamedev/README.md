@@ -9,9 +9,9 @@
 
 ## 目录
 
-> **[来源: Wikipedia - Game Engine]**
+> **来源: [Wikipedia - Game Engine](https://en.wikipedia.org/wiki/Game_Engine)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Game Engine]** · **[来源: Bevy Engine Documentation - bevyengine.org]** · **[来源: wgpu Documentation - gfx-rs.github.io]** · **[来源: Wikipedia - Entity Component System]** · **[来源: Rust GameDev Working Group]** · **[来源: ACM - Game Development Patterns]** · **[来源: IEEE - Real-Time Graphics Rendering]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Game Engine](https://en.wikipedia.org/wiki/Game_Engine)** · **[来源: Bevy Engine Documentation - bevyengine.org]** · **[来源: wgpu Documentation - gfx-rs.github.io]** · **来源: [Wikipedia - Entity Component System](https://en.wikipedia.org/wiki/Entity_Component_System)** · **来源: [Rust GameDev Working Group](https://gamedev.rs/)** · **[来源: ACM - Game Development Patterns]** · **[来源: IEEE - Real-Time Graphics Rendering]**
 
 - [Rust 游戏开发完整指南](#rust-游戏开发完整指南)
   - [目录](#目录)
@@ -76,23 +76,23 @@
 
 ## 1. 游戏引擎概述
 
-> **[来源: Wikipedia - Entity Component System]**
+> **来源: [Wikipedia - Entity Component System](https://en.wikipedia.org/wiki/Entity_Component_System)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Rust 生态系统提供了多个优秀的游戏引擎选择，每个都有其独特的优势和适用场景。
 
 ### 1.1 Bevy 引擎
 
-> **[来源: Wikipedia - Game Engine]**
+> **来源: [Wikipedia - Game Engine](https://en.wikipedia.org/wiki/Game_Engine)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Bevy 是 Rust 生态中最活跃、最受欢迎的游戏引擎之一，采用现代 ECS 架构。
 
 #### 核心特性
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 // Cargo.toml
@@ -189,7 +189,7 @@ fn player_movement(
 
 #### Bevy 系统顺序
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use bevy::prelude::*;
@@ -230,7 +230,7 @@ enum GameSystemSet {
 
 ### 1.2 Fyrox (rg3d)
 
-> **[来源: Wikipedia - Entity Component System]**
+> **来源: [Wikipedia - Entity Component System](https://en.wikipedia.org/wiki/Entity_Component_System)**
 
 Fyrox 是一个功能完整的 3D 游戏引擎，具有内置的编辑器。
 
@@ -304,7 +304,7 @@ fn main() {
 
 ### 1.3 Amethyst（归档）
 
-> **[来源: Bevy Engine Documentation]**
+> **来源: [Bevy Engine Documentation](https://bevyengine.org/)**
 
 Amethyst 是一个数据导向的游戏引擎，虽然项目已归档，但其设计理念仍有学习价值。
 
@@ -476,13 +476,13 @@ async fn main() {
 
 ## 2. ECS 架构
 
-> **[来源: Wikipedia - Entity Component System]** · **[来源: Bevy Engine Documentation]** · **[来源: Rust GameDev Working Group]**
+> **来源: [Wikipedia - Entity Component System](https://en.wikipedia.org/wiki/Entity_Component_System)** · **来源: [Bevy Engine Documentation](https://bevyengine.org/)** · **来源: [Rust GameDev Working Group](https://gamedev.rs/)**
 
 Entity-Component-System (ECS) 是现代游戏开发的核心架构模式，强调数据导向设计。
 
 ### 2.1 核心概念
 
-> **[来源: Rust GameDev Working Group]**
+> **来源: [Rust GameDev Working Group](https://gamedev.rs/)**
 
 ```rust,ignore
 use bevy::prelude::*;
@@ -621,7 +621,7 @@ fn enemy_ai(
 
 ### 2.2 数据导向设计
 
-> **[来源: Wikipedia - Game Engine]**
+> **来源: [Wikipedia - Game Engine](https://en.wikipedia.org/wiki/Game_Engine)**
 
 ECS 的核心优势在于数据局部性和缓存友好性。
 
@@ -700,7 +700,7 @@ fn update_particles(
 
 ### 2.3 查询系统
 
-> **[来源: Wikipedia - Entity Component System]**
+> **来源: [Wikipedia - Entity Component System](https://en.wikipedia.org/wiki/Entity_Component_System)**
 
 Bevy 的查询系统提供了强大的组件筛选能力。
 
@@ -841,7 +841,7 @@ fn nested_queries(
 
 ### 2.4 性能优化
 
-> **[来源: Bevy Engine Documentation]**
+> **来源: [Bevy Engine Documentation](https://bevyengine.org/)**
 
 ```rust,ignore
 use bevy::prelude::*;
@@ -1016,7 +1016,7 @@ fn toggle_pause(
 
 ## 3. 渲染系统
 
-> **[来源: Wikipedia - Computer Graphics]** · **[来源: wgpu Documentation]** · **[来源: Wikipedia - Rendering]**
+> **来源: [Wikipedia - Computer Graphics](https://en.wikipedia.org/wiki/Computer_Graphics)** · **[来源: wgpu Documentation]** · **来源: [Wikipedia - Rendering](https://en.wikipedia.org/wiki/Rendering)**
 
 ### 3.1 WGPU 基础
 
@@ -1179,7 +1179,7 @@ fn animate_material_time(
 
 ### 3.3 2D vs 3D 渲染
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use bevy::prelude::*;
@@ -1349,7 +1349,7 @@ fn setup_mixed_scene(mut commands: Commands) {
 
 ### 3.4 粒子系统
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use bevy::prelude::*;
@@ -1496,11 +1496,11 @@ fn create_explosion(
 
 ## 4. 物理引擎
 
-> **[来源: Wikipedia - Physics Engine]** · **[来源: Rapier Documentation - docs.rs/rapier]** · **[来源: Wikipedia - Rigid Body Dynamics]**
+> **来源: [Wikipedia - Physics Engine](https://en.wikipedia.org/wiki/Physics_Engine)** · **[来源: Rapier Documentation - docs.rs/rapier]** · **来源: [Wikipedia - Rigid Body Dynamics](https://en.wikipedia.org/wiki/Rigid_Body_Dynamics)**
 
 ### 4.1 Rapier2D/3D
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 Rapier 是 Rust 的高性能物理引擎。
 
@@ -1671,7 +1671,7 @@ fn player_controller(
 
 ### 4.2 碰撞检测
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 use bevy::prelude::*;
@@ -1790,7 +1790,7 @@ fn setup_fast_objects(mut commands: Commands) {
 
 ### 4.3 刚体动力学
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 use bevy::prelude::*;
@@ -1922,7 +1922,7 @@ fn physics_queries(
 
 ### 4.4 射线检测
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use bevy::prelude::*;
@@ -2109,11 +2109,11 @@ fn sphere_sweep(
 
 ## 5. 资源管理
 
-> **[来源: Wikipedia - Asset Management]** · **[来源: Bevy Asset Documentation]** · **[来源: Rust Reference]**
+> **来源: [Wikipedia - Asset Management](https://en.wikipedia.org/wiki/Asset_Management)** · **[来源: Bevy Asset Documentation]** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
 ### 5.1 Asset Pipeline
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 use bevy::prelude::*;
@@ -2248,7 +2248,7 @@ struct LevelLoading {
 
 ### 5.2 热重载
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use bevy::prelude::*;
@@ -2346,7 +2346,7 @@ fn reload_config(
 
 ### 5.3 内存管理
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 use bevy::prelude::*;
@@ -2509,11 +2509,11 @@ fn update_lod(
 
 ## 6. 音频系统
 
-> **[来源: Wikipedia - Digital Signal Processing]** · **[来源: kira Documentation - docs.rs/kira]** · **[来源: Wikipedia - Game Audio]**
+> **来源: [Wikipedia - Digital Signal Processing](https://en.wikipedia.org/wiki/Digital_Signal_Processing)** · **[来源: kira Documentation - docs.rs/kira]** · **来源: [Wikipedia - Game Audio](https://en.wikipedia.org/wiki/Game_Audio)**
 
 ### 6.1 Rodio
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 Rodio 是 Rust 的纯 Rust 音频播放库。
 
@@ -2618,7 +2618,7 @@ impl AudioManager {
 
 ### 6.2 3D 空间音频
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 use bevy::prelude::*;
@@ -2699,7 +2699,7 @@ fn ambient_zone_system(
 
 ### 6.3 音乐流媒体
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use rodio::source::SineWave;
@@ -2826,11 +2826,11 @@ impl AdaptiveMusicSystem {
 
 ## 7. 输入处理
 
-> **[来源: Wikipedia - Input Device]** · **[来源: winit Documentation - docs.rs/winit]** · **[来源: Rust GameDev Working Group]**
+> **来源: [Wikipedia - Input Device](https://en.wikipedia.org/wiki/Input_Device)** · **[来源: winit Documentation - docs.rs/winit]** · **来源: [Rust GameDev Working Group](https://gamedev.rs/)**
 
 ### 7.1 键盘/鼠标
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use bevy::prelude::*;
@@ -2986,7 +2986,7 @@ fn first_person_controller(
 
 ### 7.2 游戏手柄
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use bevy::prelude::*;
@@ -3171,7 +3171,7 @@ struct ActionState {
 
 ### 7.3 触摸输入
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use bevy::prelude::*;
@@ -3333,11 +3333,11 @@ fn draw_virtual_joysticks(
 
 ## 8. 多人游戏
 
-> **[来源: Bevy Engine Documentation]**
+> **来源: [Bevy Engine Documentation](https://bevyengine.org/)**
 
 ### 8.1 网络同步
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 use bevy::prelude::*;
@@ -3494,7 +3494,7 @@ impl GameServer {
 
 ### 8.2 客户端预测
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 use bevy::prelude::*;
@@ -3664,7 +3664,7 @@ fn apply_input(
 
 ### 8.3 服务器权威
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use bevy::prelude::*;
@@ -3856,7 +3856,7 @@ impl AuthoritativeServer {
 
 ### 9.1 场景设置
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 // main.rs
@@ -3996,7 +3996,7 @@ fn rotate_collectibles(
 
 ### 9.2 玩家控制
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 // player.rs
@@ -4214,7 +4214,7 @@ struct Score(pub i32);
 
 ### 9.3 敌人 AI
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 // enemy.rs
@@ -4347,7 +4347,7 @@ fn enemy_health_check(
 
 ### 9.4 UI 系统
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 // ui.rs
@@ -4447,7 +4447,7 @@ fn update_ui(
 
 ### 9.5 游戏状态管理
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 // game_state.rs
@@ -4561,7 +4561,7 @@ fn toggle_pause(
 
 ### 10.1 剖析工具
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use bevy::prelude::*;
@@ -4640,7 +4640,7 @@ fn print_memory_usage() {
 
 ### 10.2 批处理
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use bevy::prelude::*;
@@ -4728,7 +4728,7 @@ fn occlusion_culling(
 
 ### 10.3 LOD（细节层次）
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use bevy::prelude::*;
@@ -4813,7 +4813,7 @@ fn static_batching_system(
 
 ### 10.4 其他优化技巧
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use bevy::prelude::*;
@@ -4924,7 +4924,7 @@ fn cleanup_system(
 
 ## 总结
 
-> **[来源: Rust GameDev Working Group]**
+> **来源: [Rust GameDev Working Group](https://gamedev.rs/)**
 
 本指南涵盖了 Rust 游戏开发的完整知识体系：
 
@@ -4941,7 +4941,7 @@ fn cleanup_system(
 
 ## 推荐资源
 
-> **[来源: Wikipedia - Game Engine]**
+> **来源: [Wikipedia - Game Engine](https://en.wikipedia.org/wiki/Game_Engine)**
 
 - [Bevy 官方文档](https://bevyengine.org/learn/)
 - [Bevy Cheat Book](https://bevy-cheatbook.github.io/)
@@ -4951,7 +4951,7 @@ fn cleanup_system(
 
 ## 下一步
 
-> **[来源: Wikipedia - Entity Component System]**
+> **来源: [Wikipedia - Entity Component System](https://en.wikipedia.org/wiki/Entity_Component_System)**
 
 1. 完成 [Bevy 官方示例](https://github.com/bevyengine/bevy/tree/main/examples)
 2. 尝试修改本指南中的示例代码
@@ -4974,7 +4974,7 @@ fn cleanup_system(
 
 ## 相关概念
 
-> **[来源: Bevy Engine Documentation]**
+> **来源: [Bevy Engine Documentation](https://bevyengine.org/)**
 
 - [案例研究总览](../README.md)
 - [所有案例分析目录](../COMPLETE_DOMAIN_COVERAGE_INDEX.md)
@@ -4983,13 +4983,13 @@ fn cleanup_system(
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Game Engine]**
+> **来源: [Wikipedia - Game Engine](https://en.wikipedia.org/wiki/Game_Engine)**
 
-> **[来源: Wikipedia - Entity Component System]**
+> **来源: [Wikipedia - Entity Component System](https://en.wikipedia.org/wiki/Entity_Component_System)**
 
-> **[来源: Wikipedia - Computer Graphics]**
+> **来源: [Wikipedia - Computer Graphics](https://en.wikipedia.org/wiki/Computer_Graphics)**
 
-> **[来源: Wikipedia - Real-Time Rendering]**
+> **来源: [Wikipedia - Real-Time Rendering](https://en.wikipedia.org/wiki/Real_Time_Rendering)**
 
 > **[来源: IEEE - Real-Time Graphics Rendering]**
 
@@ -4997,82 +4997,82 @@ fn cleanup_system(
 
 > **[来源: SIGGRAPH - Graphics Programming]**
 
-> **[来源: Rust GameDev Working Group]**
+> **来源: [Rust GameDev Working Group](https://gamedev.rs/)**
 
 > **[来源: bevyengine.org Documentation]**
 
 > **[来源: wgpu.rs Documentation]**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages Survey]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design and Implementation]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM - Systems Programming Languages Survey](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI - Programming Language Design and Implementation](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**

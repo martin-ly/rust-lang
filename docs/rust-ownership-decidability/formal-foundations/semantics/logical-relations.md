@@ -7,7 +7,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [Rust 逻辑关系形式化理论](#rust-逻辑关系形式化理论)
   - [目录](#目录)
@@ -112,14 +112,14 @@
 
 ## 引言
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 逻辑关系（Logical Relations）是编程语言理论中用于证明类型系统性质的核心技术。
 它通过将语法类型解释为语义关系，建立起类型与行为之间的深层联系。
 
 ### 形式化目标
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 本文档旨在形式化 Rust 相关逻辑关系理论：
 
@@ -131,7 +131,7 @@
 
 ### 核心思想
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 逻辑关系的核心洞见：**良类型的程序在逻辑上相关**。
 
@@ -149,11 +149,11 @@
 
 ### 2.1 语义解释
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 #### 2.1.1 类型解释
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 将语法类型 τ 解释为语义关系 ⟦τ⟧：
 
@@ -169,7 +169,7 @@
 
 #### 2.1.2 表达式关系
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```
 ⟦τ⟧^E = {(e₁, e₂) | ∀(σ₁, σ₂) ∈ ⟦Γ⟧.
@@ -179,11 +179,11 @@
 
 ### 2.2 基本引理
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 #### 2.2.1 基本引理 (Fundamental Lemma)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **引理 2.1 (基本引理)**：
 如果 Γ ⊢ e : τ，则 Γ ⊢ e ∼ e : τ。
@@ -203,7 +203,7 @@
 
 #### 2.2.2 兼容性引理
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **引理 2.2 (兼容性)**：
 逻辑关系与所有类型构造子兼容。
@@ -216,11 +216,11 @@
 
 ### 2.3 观察等价
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 #### 2.3.1 观察上下文
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```
 Context C ::= □ | C e | v C | λx.C | ...
@@ -228,7 +228,7 @@ Context C ::= □ | C e | v C | λx.C | ...
 
 #### 2.3.2 上下文等价
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```
 Γ ⊢ e₁ ≃ e₂ : τ := ∀C. C[e₁] ⇓ v ⇔ C[e₂] ⇓ v
@@ -236,7 +236,7 @@ Context C ::= □ | C e | v C | λx.C | ...
 
 #### 2.3.3 上下文等价与逻辑等价
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **定理 2.3**：
 逻辑等价与上下文等价一致：
@@ -253,17 +253,17 @@ Context C ::= □ | C e | v C | λx.C | ...
 
 ### 3.1 动机
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 处理递归类型和可能不终止的计算需要限制观察深度。
 
 ### 3.2 步进索引定义
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 #### 3.2.1 索引类型关系
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```
 ⟦τ⟧ₙ ⊆ Value × Value  (在深度 n 上的关系)
@@ -276,7 +276,7 @@ Context C ::= □ | C e | v C | λx.C | ...
 
 #### 3.2.2 表达式关系（步进索引）
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```
 (e₁, e₂) ∈ ⟦τ⟧ₙ^E := ∀m < n. ∀(σ₁, σ₂).
@@ -286,11 +286,11 @@ Context C ::= □ | C e | v C | λx.C | ...
 
 ### 3.3 单调性
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 #### 3.3.1 关系单调性
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```
 m ≤ n ⟹ ⟦τ⟧ₙ ⊆ ⟦τ⟧ₘ
@@ -298,7 +298,7 @@ m ≤ n ⟹ ⟦τ⟧ₙ ⊆ ⟦τ⟧ₘ
 
 #### 3.3.2 极限关系
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```
 ⟦τ⟧ = ⋂ₙ ⟦τ⟧ₙ
@@ -306,11 +306,11 @@ m ≤ n ⟹ ⟦τ⟧ₙ ⊆ ⟦τ⟧ₘ
 
 ### 3.4 递归类型
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 #### 3.4.1 递归类型解释
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```
 ⟦μα.τ⟧ₙ = {(fold(v₁), fold(v₂)) | (v₁, v₂) ∈ ⟦τ[μα.τ/α]⟧ₙ₋₁}
@@ -332,7 +332,7 @@ m ≤ n ⟹ ⟦τ⟧ₙ ⊆ ⟦τ⟧ₘ
 
 ### 4.1 可能世界语义
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 #### 4.1.1 世界定义
 
@@ -352,7 +352,7 @@ W ⊑ W'  (W' 是 W 的扩展)
 
 ### 4.2 Kripke 关系
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 #### 4.2.1 Kripke 值关系
 
@@ -374,7 +374,7 @@ W ⊑ W' ⟹ ⟦τ⟧(W) ⊆ ⟦τ⟧(W')
 
 ### 4.3 存储关系
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 #### 4.3.1 堆关系
 
@@ -402,7 +402,7 @@ W ⊑ W' ⟹ ⟦τ⟧(W) ⊆ ⟦τ⟧(W')
 
 ### 5.1 表达能力层级
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 #### 5.1.1 类型系统层级
 
@@ -925,21 +925,21 @@ Definition borrow (ℓ: lifetime) (P: iProp) : iProp :=
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
-> **[来源: Coq Reference]**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
 
-> **[来源: TLA+]**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
 
-> **[来源: ACM - Formal Verification]**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
 
 ---
 

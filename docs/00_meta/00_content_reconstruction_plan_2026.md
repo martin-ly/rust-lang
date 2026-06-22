@@ -54,15 +54,15 @@
 
 ## 一、内容标准模板（Concept Document Standard Template）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 每篇核心知识文档必须包含以下 10 个模块。缺失任一模块视为"未完成"。
 
 ### 模块 1: 概念定义（Concept Definition）
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **要求**：提供三层定义，由浅入深
 
@@ -78,9 +78,9 @@
 
 ### 模块 2: 属性清单（Property Inventory）
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **要求**：用表格列出概念的固有属性与关系属性
 
@@ -90,9 +90,9 @@
 
 ### 模块 3: 概念依赖图（Concept Dependency Graph）
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **要求**：Mermaid 图，明确承上启下
 
@@ -109,9 +109,9 @@ graph TD
 
 ### 模块 4: 机制解释（Mechanistic Explanation）
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **要求**：从至少 2 个视角解释"为什么这样设计"与"编译器如何实现"
 
@@ -121,9 +121,9 @@ graph TD
 
 ### 模块 5: 正例集（Positive Examples）
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **要求**：3 个层级，渐进式复杂度
 
@@ -133,9 +133,9 @@ graph TD
 
 ### 模块 6: 反例集（Counterexamples & Anti-patterns）
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **要求**：系统化反例，每例包含
 
@@ -147,9 +147,9 @@ graph TD
 
 ### 模块 7: 思维表征套件（Multi-modal Representations）
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **要求**：每篇文档至少包含 2 种非纯文本表征
 
@@ -164,7 +164,7 @@ graph TD
 
 ### 模块 8: 国际化对齐（International Alignment）
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **要求**：每篇文档建立"权威来源映射"
 
@@ -175,9 +175,9 @@ graph TD
 
 ### 模块 9: 设计权衡分析（Trade-off Analysis）
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **要求**：回答以下问题
 
@@ -187,9 +187,9 @@ graph TD
 
 ### 模块 10: 自我检测与练习（Self-assessment）
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **要求**：
 
@@ -201,15 +201,15 @@ graph TD
 
 ## 二、双轨并行执行路线图
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 轨道 A：核心知识体系重构（Track A: Core Knowledge）
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 #### Phase A1: P0 急救（第 1-2 周）
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 目标：抢救"下游依赖最多、当前最薄弱"的文档
 
@@ -222,7 +222,7 @@ graph TD
 
 #### Phase A2: 中级层加固（第 3-4 周）
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 | 优先级 | 文档路径 | 当前行数 | 目标行数 | 核心增补内容 | 表征要求 |
 |--------|----------|----------|----------|--------------|----------|
@@ -233,7 +233,7 @@ graph TD
 
 #### Phase A3: 高级层补全（第 5-6 周）
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | 优先级 | 文档路径 | 核心增补内容 | 表征要求 |
 |--------|----------|--------------|----------|
@@ -244,7 +244,7 @@ graph TD
 
 #### Phase A4: 专家层重构（第 7-8 周）
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 | 优先级 | 文档路径 | 核心增补内容 | 表征要求 |
 |--------|----------|--------------|----------|
@@ -256,11 +256,11 @@ graph TD
 
 ### 轨道 B：safety_critical 持续演进（Track B: Safety Critical）
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 #### Phase B1: 表征范式标准化（与 Track A Phase A1 同步）
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 将 safety_critical 现有的"矩阵+决策树+思维导图"方法提炼为 **《知识表征标准规范》**，供 Track A 复用：
 
@@ -270,7 +270,7 @@ graph TD
 
 #### Phase B2: 跨轨关联（第 3-4 周）
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 在 safety_critical 文档中建立指向核心知识的**精确反向链接**：
 
@@ -280,7 +280,7 @@ graph TD
 
 #### Phase B3: 标准对齐深化（第 5-8 周）
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 - 补充 DO-178C / ISO 26262 / IEC 61508 的**具体条款映射到 Rust 语言特性**
 - 增加 **"安全关键 Rust 代码审查清单"** 与核心知识文档的交叉引用
@@ -291,7 +291,7 @@ graph TD
 
 ### 3.1 自动化检查清单
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 每篇重构文档提交前必须通过：
 
@@ -304,7 +304,7 @@ graph TD
 
 ### 3.2 人工审阅维度
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 - **认知负荷**：新读者能否在不查外部资料的情况下理解核心概念？
 - **逻辑连贯**：承上启下是否自然？前文引用是否精确到段落？
@@ -460,11 +460,11 @@ graph TD
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**

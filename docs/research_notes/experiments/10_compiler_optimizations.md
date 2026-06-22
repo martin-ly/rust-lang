@@ -66,7 +66,7 @@
 
 ## 🎯 研究目标 {#-研究目标}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本研究旨在分析 Rust 编译器的优化能力，评估不同优化级别和优化策略的效果，包括：
 
@@ -77,9 +77,9 @@
 
 ### 核心问题
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **Rust 编译器的优化能力如何？**
 2. **哪些优化对性能影响最大？**
@@ -87,9 +87,9 @@
 
 ### 预期成果
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - 建立编译器优化评估方法
 - 识别关键优化机会
@@ -99,7 +99,7 @@
 
 ## 形式化论证（与类型系统衔接）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def CO1（编译器优化保持性）**：设优化 $O$ 将程序 $P$ 变换为 $P'$。若 $\Gamma \vdash P : \tau \Rightarrow \Gamma \vdash P' : \tau$，则称 $O$ **保持类型**。
 
@@ -119,13 +119,13 @@
 
 ## 📚 理论基础 {#-理论基础}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 相关概念
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **编译器优化（Compiler Optimization）**：编译器在编译过程中对代码进行转换，以提高程序的执行效率或减少代码大小。
 
@@ -138,9 +138,9 @@
 
 ### 理论背景
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **优化理论**：
 
@@ -152,13 +152,13 @@
 
 ## 🔬 实验设计 {#-实验设计}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 优化级别比较
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **测试目标**：比较不同优化级别的效果
 
@@ -171,9 +171,9 @@
 
 ### 2. 内联优化分析
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **测试目标**：分析函数内联的影响
 
@@ -185,7 +185,7 @@
 
 ### 3. 循环优化分析
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **测试目标**：评估循环优化的效果
 
@@ -203,7 +203,7 @@
 
 ### 示例 1：内联优化测试
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 #[inline]
@@ -230,7 +230,7 @@ fn test_inlining() {
 
 ### 示例 2：循环优化测试
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 fn loop_optimization() {
@@ -250,7 +250,7 @@ fn loop_optimization() {
 
 ### 示例 3：死代码消除测试
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 fn dead_code_elimination() {
@@ -270,7 +270,7 @@ fn dead_code_elimination() {
 
 ### 示例 1：优化级别比较
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 // 测试函数
@@ -297,7 +297,7 @@ criterion_main!(benches);
 
 ### 示例 2：内联优化
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 // 不使用内联
@@ -344,7 +344,7 @@ criterion_main!(benches);
 
 ### 示例 3：循环优化
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 // 未优化的循环
@@ -381,7 +381,7 @@ fn sum_array_unrolled(arr: &[i32]) -> i32 {
 
 ### 示例 4：死代码消除
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 // 死代码示例
@@ -409,7 +409,7 @@ fn dead_code_example() {
 
 ### 优化级别效果
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **初步结果**（基于测试环境）：
 
@@ -429,7 +429,7 @@ fn dead_code_example() {
 
 ### 内联优化效果
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **初步结果**：
 
@@ -447,7 +447,7 @@ fn dead_code_example() {
 
 ### 结果分析模板
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 将 `cargo bench`（-O0/-O1/-O2/-O3/-Os）与 `cargo bloat` 的产出填入下表：
 
@@ -481,14 +481,14 @@ fn dead_code_example() {
 
 ### 环境要求
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 - **Rust**: 1.93.0+；**cargo-bloat**：`cargo install cargo-bloat`；**Criterion**：工作区已配置
 - 建议关掉无关后台、固定 CPU 频率，多次运行取中位数
 
 ### 执行步骤
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 1. **优化级别**：在 `Cargo.toml` 或 `cargo rustc -- -C opt-level=0|1|2|3` 下跑 `cargo bench`，记录 `compute_sum`、`add_*` 等均值。
 2. **代码大小**：`cargo build --release` 后 `cargo bloat -n 50 --release`，记录 `.text` 与 top 符号。
@@ -503,7 +503,7 @@ fn dead_code_example() {
 
 ### 优化建议
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 - **发布构建**：默认 `opt-level = 2`；对延迟敏感的可试 `opt-level = 3`，配合 `lto = "thin"` 或 `"fat"`。
 - **内联**：热路径小函数加 `#[inline]`；避免 `#[inline(always)]` 导致代码膨胀。
@@ -643,20 +643,20 @@ fn dead_code_example() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Wikipedia - Compiler Construction]**
-> **[来源: Rust Compiler Team Blog]**
-> **[来源: LLVM Documentation]**
-> **[来源: ACM - Compiler Design]**
-> **[来源: Wikipedia - Program Optimization]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)**
+> **来源: [Rust Compiler Team Blog](https://blog.rust-lang.org/inside-rust/)**
+> **来源: [LLVM Documentation](https://llvm.org/docs/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [Wikipedia - Program Optimization](https://en.wikipedia.org/wiki/Program_Optimization)**
 > **[来源: Criterion.rs Documentation]**
-> **[来源: ACM - Performance Engineering]**
-> **[来源: Rust Performance Book]**
+> **来源: [ACM - Performance Engineering](https://dl.acm.org/)**
+> **来源: [The Rust Performance Book](https://nnethercote.github.io/perf-book/)**
 
 ---

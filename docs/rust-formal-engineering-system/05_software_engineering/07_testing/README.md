@@ -15,13 +15,13 @@
 
 ## Rust 测试生态系统
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 单元测试
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 模块内的测试
@@ -83,9 +83,9 @@ fn some_operation() -> Result<i32, String> {
 
 ### 集成测试
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // tests/integration_test.rs
@@ -99,7 +99,7 @@ fn test_add_integration() {
 
 ### 文档测试
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 /// 加法函数
@@ -118,7 +118,7 @@ pub fn add(a: i32, b: i32) -> i32 {
 
 ### 属性测试
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust
 // 使用 proptest 进行属性测试
@@ -151,7 +151,7 @@ fn add(a: i32, b: i32) -> i32 {
 
 ### 模拟与 Mock
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust
 // 使用 mockall 创建 mock
@@ -285,18 +285,18 @@ mod concurrency_tests {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Software Testing]**
+> **来源: [Wikipedia - Software Testing](https://en.wikipedia.org/wiki/Software_Testing)**
 
-> **[来源: TRPL Ch. 11 - Testing]**
+> **来源: [TRPL Ch. 11 - Testing](https://doc.rust-lang.org/book/ch11-00-testing.html)**
 
-> **[来源: Rust Reference - Test Attributes]**
+> **来源: [Rust Reference - Test Attributes](https://doc.rust-lang.org/reference/attributes/testing.html)**
 
 > **[来源: ACM - Software Testing Methods]**
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
-> **[来源: Coq Reference]**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
 
-> **[来源: TLA+]**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
 
-> **[来源: ACM - Formal Verification]**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**

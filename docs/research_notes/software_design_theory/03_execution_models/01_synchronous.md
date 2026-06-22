@@ -44,7 +44,7 @@
 
 ## 形式化定义
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def 1.1（同步执行）**:
 
@@ -70,7 +70,7 @@
 
 ## 操作语义（小步）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 (λx.e) v     →  e[v/x]     （β 归约）
@@ -84,7 +84,7 @@ Rust 的 MIR 语义更细粒度，但上述为概念性简化。
 
 ## Rust 对应与代码示例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 同步：无 async、无 spawn
@@ -106,7 +106,7 @@ fn compute(n: i32) -> i32 {
 
 ## 调用栈与求值顺序
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 main()
@@ -124,7 +124,7 @@ main()
 
 ## 与 async/并发对比
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 模型 | 线程 | 调度 | 数据竞争 |
 | :--- | :--- | :--- | :--- |
@@ -136,7 +136,7 @@ main()
 
 ## 栈展开与 panic
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Axiom SY3**：panic 时栈展开，按 LIFO 顺序 drop 局部变量；若展开到线程边界则线程终止。
 
@@ -146,7 +146,7 @@ main()
 
 ## 典型场景（实质内容）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 场景 | 说明 | 代码示例 |
 | :--- | :--- | :--- |
@@ -158,9 +158,9 @@ main()
 
 ### 与设计模式组合
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 组合 | 说明 |
 | :--- | :--- |
@@ -171,9 +171,9 @@ main()
 
 ### 常见陷阱
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 陷阱 | 后果 | 规避 |
 | :--- | :--- | :--- |
@@ -183,9 +183,9 @@ main()
 
 ### 反例
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 反例 | 后果 | 正确做法 |
 | :--- | :--- | :--- |
@@ -254,7 +254,7 @@ main()
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
@@ -310,13 +310,13 @@ main()
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

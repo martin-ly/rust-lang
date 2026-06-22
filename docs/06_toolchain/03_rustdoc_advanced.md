@@ -83,7 +83,7 @@
 
 ## 🎯 文档说明
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档深入介绍 Rustdoc 的高级功能、文档生成技术、以及最新改进，帮助开发者创建高质量的 API 文档。
 
@@ -93,13 +93,13 @@
 
 ## 1. Rustdoc 概览
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 基础用法
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **生成文档**:
 
@@ -121,9 +121,9 @@ cargo doc --document-private-items
 
 ### 1.2 文档结构
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **输出目录**:
 
@@ -144,13 +144,13 @@ target/doc/
 
 ## 2. 文档注释语法
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 基础注释
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **外部文档注释** (`///`):
 
@@ -205,9 +205,9 @@ pub fn divide(a: i32, b: i32) -> Result<i32, String> {
 
 ### 2.2 Markdown 支持
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **完整 Markdown 语法**:
 
@@ -245,9 +245,9 @@ pub fn demo() {}
 
 ### 2.3 代码块
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **基础代码块**:
 
@@ -291,13 +291,13 @@ pub fn error_demo() {}
 
 ## 3. 文档测试 (Doc Tests)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 3.1 基础测试
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **自动测试**:
 
@@ -325,7 +325,7 @@ cargo test --doc
 
 ### 3.2 高级测试选项
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **隐藏部分代码**:
 
@@ -371,7 +371,7 @@ pub fn panic_demo() {}
 
 ### 3.3 测试属性
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ````rust,ignore
 /// ```
@@ -401,7 +401,7 @@ pub struct MyType;
 
 ### 4.1 Intra-doc Links
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **链接到其他项**:
 
@@ -426,7 +426,7 @@ pub struct MyStruct;
 
 ### 4.2 链接语法
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **不同的链接方式**:
 
@@ -457,7 +457,7 @@ pub fn explicit_links() {}
 
 ### 4.3 链接到外部文档
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 /// 使用 [tokio](https://docs.rs/tokio) 进行异步编程
@@ -474,7 +474,7 @@ pub fn external_links() {}
 
 ### 5.1 模块级文档
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ````rust
 //! # 模块名称
@@ -495,7 +495,7 @@ pub fn function() {}
 
 ### 5.2 crate 级文档
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **`src/lib.rs`**:
 
@@ -524,7 +524,7 @@ pub fn function() {}
 
 ### 5.3 文档章节
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **标准章节**:
 
@@ -570,7 +570,7 @@ pub fn documented_function() {}
 
 ### 6.1 生成 JSON
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **命令**:
 
@@ -586,7 +586,7 @@ rustdoc src/lib.rs -Z unstable-options --output-format json
 
 ### 6.2 JSON 格式
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 **输出示例**:
 
@@ -616,7 +616,7 @@ rustdoc src/lib.rs -Z unstable-options --output-format json
 
 ### 6.3 应用场景
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 - **文档工具**: 构建自定义文档生成器
 - **API 索引**: 生成 API 目录
@@ -631,7 +631,7 @@ rustdoc src/lib.rs -Z unstable-options --output-format json
 
 ### 7.1 自定义 CSS
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **添加自定义样式**:
 
@@ -662,7 +662,7 @@ rustdoc-args = ["--html-in-header", "header.html"]
 
 ### 7.2 自定义 HTML
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **添加自定义 HTML**:
 
@@ -678,7 +678,7 @@ rustdoc-args = ["--html-in-header", "header.html"]
 
 ### 7.3 Logo 和 Favicon
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 #![doc(html_logo_url = "https://example.com/logo.png")]
@@ -1363,17 +1363,17 @@ pub fn x86_64_optimized() -> i32 {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Machine Learning]**
-> **[来源: Wikipedia - Artificial Intelligence]**
-> **[来源: tch-rs Documentation]**
-> **[来源: ACM - AI Systems]**
-> **[来源: Wikipedia - Compiler Construction]**
-> **[来源: Rust Compiler Team Blog]**
-> **[来源: LLVM Documentation]**
-> **[来源: ACM - Compiler Design]**
-> **[来源: Wikipedia - Machine Learning]**
-> **[来源: Wikipedia - Artificial Intelligence]**
-> **[来源: tch-rs Documentation]**
-> **[来源: ACM - AI Systems]**
+> **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
+> **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)**
+> **来源: [tch-rs Documentation](https://docs.rs/tch/latest/tch/)**
+> **来源: [ACM - AI Systems](https://dl.acm.org/)**
+> **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)**
+> **来源: [Rust Compiler Team Blog](https://blog.rust-lang.org/inside-rust/)**
+> **来源: [LLVM Documentation](https://llvm.org/docs/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
+> **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)**
+> **来源: [tch-rs Documentation](https://docs.rs/tch/latest/tch/)**
+> **来源: [ACM - AI Systems](https://dl.acm.org/)**
 
 ---

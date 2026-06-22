@@ -69,7 +69,7 @@
 
 ## 🧠 并发安全思维导图
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 mindmap
@@ -105,7 +105,7 @@ mindmap
 
 ## 📊 概念定义-属性关系-解释论证
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 层次 | 概念定义 | 属性关系 | 解释论证 |
 | :--- | :--- | :--- | :--- |
@@ -121,7 +121,7 @@ mindmap
 
 ## 🔬 并发安全证明树
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 graph TD
@@ -152,13 +152,13 @@ graph TD
 
 ## 🎯 核心概念
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 线程创建
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 use std::thread;
@@ -173,9 +173,9 @@ handle.join().unwrap();
 
 ### 作用域线程 (Rust 1.93.0+)
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 use std::thread;
@@ -193,13 +193,13 @@ thread::scope(|s| {
 
 ## 📐 同步原语
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Mutex
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 use std::sync::Mutex;
@@ -214,9 +214,9 @@ let m = Mutex::new(5);
 
 ### RwLock
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 use std::sync::RwLock;
@@ -238,9 +238,9 @@ let lock = RwLock::new(5);
 
 ### Arc (原子引用计数)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 use std::sync::Arc;
@@ -264,7 +264,7 @@ for i in 0..3 {
 
 ### Channel
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 use std::sync::mpsc;
@@ -280,7 +280,7 @@ let received = rx.recv().unwrap();
 
 ### 多生产者
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use std::sync::mpsc;
@@ -309,7 +309,7 @@ for received in rx {
 
 ### Atomic 类型
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -322,7 +322,7 @@ let value = counter.load(Ordering::SeqCst);
 
 ### 内存顺序
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use std::sync::atomic::Ordering;
@@ -355,7 +355,7 @@ Ordering::Relaxed
 
 ### 示例 1: 线程池实现
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 use std::sync::{mpsc, Arc, Mutex};
@@ -417,7 +417,7 @@ for i in 0..8 {
 
 ### 示例 2: 条件变量使用
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 use std::sync::{Arc, Condvar, Mutex};
@@ -484,7 +484,7 @@ thread::spawn(move || {
 
 ### 示例 3: 屏障同步
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 use std::sync::Barrier;
@@ -509,7 +509,7 @@ for h in handles {
 
 ### 示例 4: OnceLock 初始化（Rust 1.70+ 推荐）
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 use std::sync::OnceLock;
@@ -532,7 +532,7 @@ for h in handles {
 
 ### 示例 5: 并发生产者-消费者（多对多）
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use std::sync::mpsc;
@@ -577,7 +577,7 @@ for h in handles {
 
 ### 场景: 高并发 Web 服务器
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 在实际应用中，线程并发模式常用于构建高性能服务器。以下是一个简化的请求处理器：
 
@@ -665,7 +665,7 @@ fn main() {
 
 ### 反例 1: 将非 Send 类型传入 spawn
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **错误示例**:
 
@@ -691,7 +691,7 @@ thread::spawn(move || {
 
 ### 反例 2: 死锁 - 重复获取同一 Mutex
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **错误示例**:
 
@@ -714,7 +714,7 @@ let g = m.lock().unwrap();
 
 ### 反例 3: 锁顺序不一致导致死锁
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **错误示例**:
 
@@ -757,7 +757,7 @@ thread::spawn(move || {
 
 ### 反例 4: 在持有锁时进行阻塞操作
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **错误示例**:
 
@@ -825,7 +825,7 @@ thread::spawn(move || {
 
 ### 内存分配优化
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 **改进**: 小对象分配性能提升 25-30%（并发场景）
 
@@ -852,7 +852,7 @@ let shared_map: Arc<HashMap<i32, String>> = Arc::new(HashMap::new());
 
 ### 官方文档
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 - [Rust 并发文档](https://doc.rust-lang.org/book/ch16-00-fearless-concurrency.html)
 - [std::thread 文档](https://doc.rust-lang.org/std/thread/)
@@ -860,14 +860,14 @@ let shared_map: Arc<HashMap<i32, String>> = Arc::new(HashMap::new());
 
 ### 项目内部文档
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 - [线程与并发完整文档](../../../crates/c05_threads/docs/README.md)
 - [并发研究笔记](../../research_notes/README.md)
 
 ### 形式化理论与决策树
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - [执行模型边界分析](../../research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md) — Def EB-DET1、确定性判定、静态 vs 运行时验证
 - [执行模型选型决策树](../../research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md#决策树选择执行模型)
@@ -875,7 +875,7 @@ let shared_map: Arc<HashMap<i32, String>> = Arc::new(HashMap::new());
 
 ### 形式化理论与类型系统
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - [执行模型边界分析](../../research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md) — 确定性判定、静态 vs 运行时验证
 - [执行模型选型决策树](../../research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md#决策树选择执行模型)
@@ -886,7 +886,7 @@ let shared_map: Arc<HashMap<i32, String>> = Arc::new(HashMap::new());
 
 ### 相关速查卡
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - [异步编程速查卡](./02_async_patterns.md) - 异步并发对比
 - [智能指针速查卡](./02_smart_pointers_cheatsheet.md) - Arc 和 Mutex
@@ -906,7 +906,7 @@ let shared_map: Arc<HashMap<i32, String>> = Arc::new(HashMap::new());
 
 ### LazyLock 在并发状态管理中的应用
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use std::sync::LazyLock;
@@ -924,7 +924,7 @@ pub fn get_thread_config() -> Option<&'static ThreadPoolConfig> {
 
 ### array_windows 在并发数据处理中的应用
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 /// 并行滑动窗口处理
@@ -965,18 +965,18 @@ fn parallel_window_process(data: &[i32]) -> Vec<i32> {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Thread (computing)]**
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: Rust Reference - Threads]**
-> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
-> **[来源: ACM - Concurrent Programming]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Thread (computing)](https://en.wikipedia.org/wiki/Thread_(computing))**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [Rust Reference - Threads](https://doc.rust-lang.org/reference/)**
+> **来源: [TRPL Ch. 16 - Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)**
+> **来源: [ACM - Concurrent Programming](https://dl.acm.org/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ---

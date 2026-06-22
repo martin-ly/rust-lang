@@ -357,3 +357,26 @@ fn main() {
 > 这与 C++ 的 `constexpr`（C++23 支持 `std::sqrt` 等数学函数）或 D 的 CTFE（支持浮点数学函数）不同——Rust 的 `const fn` 保守但逐步扩展。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/f64/consts/index.html)] ·
 > [来源: [Rust Reference — const fn](https://doc.rust-lang.org/reference/items/functions.html#const-functions)]
+
+## 📚 模块 8: 国际化对齐
+
+> 本节按项目模板要求补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [TRPL Ch03 — Data Types](https://doc.rust-lang.org/book/ch03-02-data-types.html) | 权威来源 | 数据类型 |
+| [Rust Reference — Type System](https://doc.rust-lang.org/reference/types.html) | 权威来源 | 类型系统参考 |
+
+### 8.2 学术来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | 权威来源 | 类型语义 |
+
+### 8.3 社区权威
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Rust By Example — Types](https://doc.rust-lang.org/rust-by-example/types.html) | 权威来源 | 类型示例 |

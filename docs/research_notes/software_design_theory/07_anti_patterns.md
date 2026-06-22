@@ -48,7 +48,7 @@
 
 ## 宗旨
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 将设计模式反例、反模式与形式化边界衔接，提供**实质内容**：形式化对应、与安全边界关系、规避策略、与 [FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md) 反例索引的衔接。
 
@@ -56,13 +56,13 @@
 
 ## 一、反模式与安全边界
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 形式化定义
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def AP1（反模式）**：违反设计模式不变式或 Rust 安全规则的实现；$\mathit{SafeB}(P) = \mathrm{Inexpr}$ 或违反 [ownership_model](../formal_methods/10_ownership_model.md)、[borrow_checker_proof](../formal_methods/10_borrow_checker_proof.md) 规则。
 
@@ -70,9 +70,9 @@
 
 ### 1.2 反模式分类
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 分类 | 边界 | 示例 |
 | :--- | :--- | :--- |
@@ -85,7 +85,7 @@
 
 ## 二、13 反例索引（与 [FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md) 衔接）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 模式 | 反例 | 后果 | 规避 |
 | :--- | :--- | :--- | :--- |
@@ -107,13 +107,13 @@
 
 ## 三、常见反模式详解（含代码示例）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 3.1 所有权反模式
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 反模式 | 形式化 | 规避 |
 | :--- | :--- | :--- |
@@ -147,9 +147,9 @@ a.borrow_mut().next = Some(b.clone());  // 环：a → b → a
 
 ### 3.2 借用反模式
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 反模式 | 形式化 | 规避 |
 | :--- | :--- | :--- |
@@ -183,9 +183,9 @@ fn process(data: &Vec<String>) -> Vec<String> {
 
 ### 3.3 设计模式反模式
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 反模式 | 形式化 | 规避 |
 | :--- | :--- | :--- |
@@ -210,9 +210,9 @@ where
 
 ### 3.4 并发反模式
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 反模式 | 形式化 | 规避 |
 | :--- | :--- | :--- |
@@ -224,7 +224,7 @@ where
 
 ## 四、反模式与三维边界
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 反模式 | 安全边界 | 支持边界 | 表达边界 |
 | :--- | :--- | :--- | :--- |
@@ -275,7 +275,7 @@ where
 
 ### 场景 1：需要共享可变
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **反模式**：`Rc<RefCell<T>>` 跨线程。
 
@@ -299,7 +299,7 @@ thread::spawn(move || {
 
 ### 场景 2：迭代中修改
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **反模式**：`for x in &mut v { v.push(...); }`。
 
@@ -312,7 +312,7 @@ v.extend(to_add);
 
 ### 场景 3：单产品却用 Abstract Factory
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **反模式**：仅需一种按钮却定义 `ButtonFactory` 产品族。
 
@@ -326,7 +326,7 @@ trait Creator {
 
 ### 场景 4：无共享用 Flyweight
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **反模式**：对象仅创建一次却用 `Arc` 缓存。
 
@@ -338,7 +338,7 @@ let item = Item::new();  // 无需缓存
 
 ### 场景 5：错误类型用 unwrap
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **反模式**：`let x = result.unwrap();` 在库代码中。
 
@@ -364,13 +364,13 @@ let x = match result {
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -381,7 +381,7 @@ let x = match result {
 
 #### 代码示例更新
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 本文档中的所有Rust代码示例均已：
 
@@ -424,12 +424,12 @@ let x = match result {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Design Pattern]**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 
-> **[来源: Rust API Guidelines]**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 
-> **[来源: Gang of Four - Design Patterns]**
+> **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
 
-> **[来源: ACM - Software Design Patterns]**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
 
 ---

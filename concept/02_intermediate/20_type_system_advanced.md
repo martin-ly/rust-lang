@@ -614,7 +614,7 @@ let b: i32 = a.into();          // ✅ 显式: MyInt → i32
 > C++ 的运算符重载是**语法层面的重载**——`operator+` 是函数名，遵循 C++ 重载决议规则。
 > Rust 的运算符是**语法糖层面的 Trait 调用**——`a + b` 是 `Add::add(a, b)` 的语法糖，遵循 Trait 解析规则。
 > Rust 的设计消除了 C++ 运算符重载的歧义性（如 `*` 的一元/二元），但牺牲了 C++ 的灵活性（如自定义隐式转换链）。
-> [来源: 💡 原创分析] · [Rust Reference — §4.2.3] ✅
+> [来源: 💡 原创分析] · [Rust Reference — §4.2.3](https://doc.rust-lang.org/reference/) ✅
 
 ### 编译错误示例
 

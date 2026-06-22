@@ -66,7 +66,7 @@
 
 ## 宗旨
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 将 Rust 社区惯用模式（Idioms）与软件设计理论、形式化基础衔接，提供**实质内容**：形式化对应、与 GoF 模式关系、典型场景、常见陷阱、代码示例。
 
@@ -74,7 +74,7 @@
 
 ## 层次推进（阅读顺序）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 层次 | 内容 | 先修 |
 | :--- | :--- | :--- |
@@ -86,13 +86,13 @@
 
 ## 一、RAII（资源获取即初始化）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 定义与形式化
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def RAII1（RAII 惯用）**：资源生命周期与对象绑定；构造时获取、析构时释放；$\forall r \in \text{Resource},\, \exists x \in \text{Var}: \text{owns}(x, r) \land \text{scope\_end}(x) \rightarrow \text{release}(r)$。
 
@@ -102,9 +102,9 @@
 
 ### 1.2 典型场景
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 场景 | 实现 | 与 GoF 关系 |
 | :--- | :--- | :--- |
@@ -115,9 +115,9 @@
 
 ### 1.3 完整代码示例
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // RAII：文件句柄自动关闭
@@ -145,9 +145,9 @@ let m = Mutex::new(0);
 
 ### 1.4 常见陷阱
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 陷阱 | 后果 | 规避 |
 | :--- | :--- | :--- |
@@ -157,9 +157,9 @@ let m = Mutex::new(0);
 
 ### 1.5 与设计模式衔接
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **Builder**：`build(self)` 消费后由调用方负责 drop；RAII 保证中间资源正确释放
 - **Factory Method**：产品常为 RAII 类型；工厂返回 `Box<T>` 时 ownership 清晰
@@ -169,13 +169,13 @@ let m = Mutex::new(0);
 
 ## 二、Newtype 模式
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 定义与形式化
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def NW1（Newtype）**：单字段包装类型，零成本抽象；`struct Newtype(T)`；`repr(transparent)` 保证布局与 `T` 一致。
 
@@ -185,9 +185,9 @@ let m = Mutex::new(0);
 
 ### 2.2 典型场景
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 场景 | 实现 | 与 GoF 关系 |
 | :--- | :--- | :--- |
@@ -197,7 +197,7 @@ let m = Mutex::new(0);
 
 ### 2.3 完整代码示例
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 #[derive(Clone, PartialEq, Eq)]
@@ -227,7 +227,7 @@ impl std::ops::Add for Meter {
 
 ### 2.4 常见陷阱
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | 陷阱 | 后果 | 规避 |
 | :--- | :--- | :--- |
@@ -237,7 +237,7 @@ impl std::ops::Add for Meter {
 
 ### 2.5 与设计模式衔接
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 - **Adapter**：Newtype 可作适配器包装；`impl Trait for Newtype` 委托
 - **Value Object**：Fowler 的 Value Object 与 Newtype 等价；不可变、相等性
@@ -251,7 +251,7 @@ impl std::ops::Add for Meter {
 
 ### 3.1 定义与形式化
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **Def TS1（类型状态）**：类型参数编码状态；编译期强制合法转换；$\text{State}(F\langle S \rangle) \in \{S_1, \ldots, S_n\}$；仅允许的转换由类型系统约束。
 
@@ -261,7 +261,7 @@ impl std::ops::Add for Meter {
 
 ### 3.2 典型场景
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | 场景 | 实现 | 与 GoF 关系 |
 | :--- | :--- | :--- |
@@ -271,7 +271,7 @@ impl std::ops::Add for Meter {
 
 ### 3.3 常见陷阱
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 | 陷阱 | 后果 | 规避 |
 | :--- | :--- | :--- |
@@ -281,7 +281,7 @@ impl std::ops::Add for Meter {
 
 ### 3.4 与设计模式衔接
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 - **Builder**：类型状态 Builder 为 B-T2 的扩展；编译期强制顺序
 - **State**：与 [state](01_design_patterns_formal/03_behavioral/10_state.md) 互补；编译期 vs 运行时状态机
@@ -323,7 +323,7 @@ impl std::ops::Add for Meter {
 
 ### 6.1 定义与形式化
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **Def EH1（Error handling 惯用）**：错误通过 `Result<T, E>` 显式传播；`?` 操作符实现早期返回；$\text{query}(e) \equiv \text{match } e \text{ with Ok}(v) \rightarrow v \mid \text{Err}(e) \rightarrow \text{return Err}(e.\text{into}())$。
 
@@ -331,7 +331,7 @@ impl std::ops::Add for Meter {
 
 ### 6.2 典型场景
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | 场景 | 实现 | 与设计模式关系 |
 | :--- | :--- | :--- |
@@ -341,7 +341,7 @@ impl std::ops::Add for Meter {
 
 ### 6.3 完整代码示例：错误传播链
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 #[derive(Debug)]
@@ -373,7 +373,7 @@ fn load_or_default(path: &str) -> Result<u32, AppError> {
 
 ### 6.4 常见陷阱
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 | 陷阱 | 后果 | 规避 |
 | :--- | :--- | :--- |
@@ -389,7 +389,7 @@ fn load_or_default(path: &str) -> Result<u32, AppError> {
 
 ### 7.1 定义与形式化
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **Def OR1（Option/Result 组合）**：`Option` 表示可选值；`Result` 表示成功或错误；组合模式包括 `and_then`、`map`、`map_err`、`unwrap_or`、`ok_or`。
 

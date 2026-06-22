@@ -7,7 +7,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [04 排他选择模式 (Exclusive Choice) - 完整形式化语义](#04-排他选择模式-exclusive-choice---完整形式化语义)
   - [目录](#目录)
@@ -58,7 +58,7 @@
 
 ## 1. 引言
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 排他选择模式（Exclusive Choice，也称为 XOR-Split）是工作流控制流模式中最基础、最常用的模式之一。它表示流程中的一个决策点，在该点处根据条件评估从多条互斥的分支中**恰好选择一条**路径继续执行。与多路选择（OR-Split）允许同时激活多个分支不同，排他选择保证在任何时刻有且仅有一个分支被激活。
 
@@ -66,9 +66,9 @@
 
 ### 1.1 历史背景
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 排他选择模式最早由 Wil van der Aalst 等人在 "Workflow Patterns" (2003) 中系统定义，其形式化根源可追溯至 Dijkstra 的守卫命令语言（Guarded Commands, 1975）。在 Rust 中，这一语义通过 `match` 表达式的穷尽性检查得到强化，编译器拒绝任何非穷尽的匹配模式，从而在类型系统层面保证了"恰好一个分支"的安全性。
 
@@ -80,7 +80,7 @@
 
 ### 2.1 概念定义
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **排他选择** 是一个控制流构造，它将单个执行线程分化为多条互斥的执行路径，其中：
 
@@ -103,7 +103,7 @@ Condition ::= BooleanExpression
 
 ### 2.2 核心语义
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **激活语义**:
 
@@ -132,11 +132,11 @@ $$
 
 ### 2.3 形式化表示
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 #### 状态机表示
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 $$
 \begin{aligned}
@@ -166,7 +166,7 @@ stateDiagram-v2
 
 #### 流程代数表示 (CSP 风格)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 $$
 \text{ExclusiveChoice} = \bigoplus_{i \in I} [C_i] \rightarrow B_i
@@ -181,7 +181,7 @@ XOR_Split = [] i:indices @ condition(i) & Branch(i)
 
 #### Petri 网表示
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 在 Petri 网中，排他选择通过一个变迁实现，该变迁有多条输出弧，但弧上的权重函数保证只有一个位置获得令牌：
 
@@ -219,7 +219,7 @@ graph LR
 
 ### BPMN 表示
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 在 BPMN 2.0 中，排他选择使用**排他网关** (Exclusive Gateway) 表示，图形符号为菱形内部带有 "X"：
 
@@ -249,7 +249,7 @@ graph LR
 
 ### UML 活动图
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 在 UML 活动图中，排他选择使用**决策节点** (Decision Node) 表示：
 
@@ -263,7 +263,7 @@ graph LR
 
 ### WfMC 标准
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 工作流管理联盟 (WfMC) 将排他选择定义为：
 
@@ -283,7 +283,7 @@ graph LR
 
 ### CCS 表示
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **Calculus of Communicating Systems (CCS)**:
 
@@ -302,7 +302,7 @@ $$
 
 ### CSP 表示
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **Communicating Sequential Processes (CSP)**:
 
@@ -320,7 +320,7 @@ Constraint(tr) = card({i | execute(i) in tr}) = 1
 
 ### π-演算表示
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **Pi-Calculus**:
 
@@ -345,8 +345,8 @@ $$
 
 ### 5.1 基础实现
 
-> **[来源: Rust Reference - Expressions]**
-> **[来源: TRPL Ch. 6 - Enums and Pattern Matching]**
+> **来源: [Rust Reference - Expressions](https://doc.rust-lang.org/reference/)**
+> **来源: [TRPL Ch. 6 - Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums-and-pattern-matching.html)**
 
 Rust 的 `match` 表达式是排他选择最原生的实现。编译器对 `match` 进行穷尽性检查（exhaustiveness checking），确保所有可能的情况都被处理，从而在编译期保证排他选择的完备性。
 
@@ -437,12 +437,12 @@ fn mask_account(account: &str) -> String {
 // }
 ```
 
-> [来源: Rust Reference - Match Expressions]
+> 来源: [Rust Reference - Match Expressions](https://doc.rust-lang.org/reference/)
 
 ### 5.2 带错误处理的高级实现
 
 > **[来源: Rust Standard Library - Result]**
-> **[来源: TRPL Ch. 9 - Error Handling]**
+> **来源: [TRPL Ch. 9 - Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)**
 
 ```rust,ignore
 use thiserror::Error;
@@ -529,7 +529,7 @@ pub fn hierarchical_choice(payment: &PaymentMethod) -> &'static str {
 }
 ```
 
-> [来源: Rust Reference - if let Expressions]
+> 来源: [Rust Reference - if let Expressions](https://doc.rust-lang.org/reference/)
 > [来源: tokio docs - select! macro]
 
 ### 5.3 支付处理完整示例
@@ -701,7 +701,7 @@ $$
 
 执行器只创建 $\text{Activated}$ 中分支的任务，因此恰好一个分支被执行。在 Rust 中，编译器的穷尽性检查静态保证了完备性；运行时条件评估保证互斥性。
 
-> [来源: RustBelt - PLDI 2015]
+> 来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 
 ### 6.3 正确性条件
 >
@@ -1007,25 +1007,25 @@ pub fn process_nested(payment: PaymentRegion) -> String {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Design Pattern]**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 
-> **[来源: Rust API Guidelines]**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 
-> **[来源: Gang of Four - Design Patterns]**
+> **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
 
-> **[来源: ACM - Software Design Patterns]**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: TRPL Ch. 6 - Enums and Pattern Matching]**
+> **来源: [TRPL Ch. 6 - Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums-and-pattern-matching.html)**
 
-> **[来源: Rust Reference - Match Expressions]**
+> **来源: [Rust Reference - Match Expressions](https://doc.rust-lang.org/reference/)**
 
 > **[来源: tokio docs - select! macro]**
 

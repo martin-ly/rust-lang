@@ -96,13 +96,13 @@
 
 ## 一、执行摘要
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 项目背景
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本计划针对 `research_notes` 体系进行全面梳理，解决以下核心问题：
 
@@ -114,9 +114,9 @@
 
 ### 1.2 当前完成度评估
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 维度 | 当前状态 | 目标状态 | 缺口 |
 | :--- | :--- | :--- | :--- |
@@ -131,9 +131,9 @@
 
 ### 1.3 核心结论
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **已完成**: 理论框架、文档结构、L2证明草图、思维表征基础
 - **待完成**: L3机器证明、完整归纳证明、分布式/工作流深度形式化、工具对接
@@ -143,13 +143,13 @@
 
 ## 二、现状全面分析
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 文档体系结构
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 research_notes/
@@ -192,15 +192,15 @@ research_notes/
 
 ### 2.2 形式化论证覆盖度评估
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 2.2.1 formal_methods 覆盖度
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文档 | Def | Axiom | Theorem | Proof | 反例 | 综合 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -219,9 +219,9 @@ research_notes/
 
 #### 2.2.2 type_theory 覆盖度
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文档 | Def | Axiom | Theorem | Proof | 综合 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -239,9 +239,9 @@ research_notes/
 
 #### 2.2.3 software_design_theory 覆盖度
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 领域 | 形式化程度 | 缺口 |
 | :--- | :--- | :--- |
@@ -253,11 +253,11 @@ research_notes/
 
 ### 2.3 思维表征覆盖度评估
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 #### 2.3.1 思维导图覆盖
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 | 领域 | 全局导图 | 概念导图 | 证明导图 | 缺口 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -270,7 +270,7 @@ research_notes/
 
 #### 2.3.2 多维矩阵覆盖
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 | 矩阵类型 | 状态 | 缺口 |
 | :--- | :--- | :--- |
@@ -283,7 +283,7 @@ research_notes/
 
 #### 2.3.3 证明树与决策树覆盖
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 | 类型 | 数量 | 状态 |
 | :--- | :--- | :--- |
@@ -296,11 +296,11 @@ research_notes/
 
 ### 2.4 论证缺口详细识别
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 #### 2.4.1 定义层缺口 (D1/D2)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | 缺口ID | 描述 | 优先级 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -311,7 +311,7 @@ research_notes/
 
 #### 2.4.2 关系层缺口 (R1/R2)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 | 缺口ID | 描述 | 优先级 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -321,7 +321,7 @@ research_notes/
 
 #### 2.4.3 证明层缺口 (P1/P2)
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 | 缺口ID | 描述 | 优先级 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -337,7 +337,7 @@ research_notes/
 
 ### 3.1 RustBelt 对标
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **RustBelt** (MPI-SWS, POPL 2018) 是基于 Iris 分离逻辑的 Coq 框架，提供 Rust 核心类型的机器可检查安全性证明。
 
@@ -359,7 +359,7 @@ research_notes/
 
 ### 3.2 Aeneas 对标
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **Aeneas** (Inria, ICFP 2022) 将 Rust 翻译成 Lean/Coq/F*，通过函数式翻译简化验证。
 
@@ -380,7 +380,7 @@ research_notes/
 
 ### 3.3 其他验证工具对标
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 | 工具 | 机构 | 方法 | 与本体系关系 |
 | :--- | :--- | :--- | :--- |
@@ -398,7 +398,7 @@ research_notes/
 
 ### 4.1 缺口四维分类体系
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────┐
@@ -426,7 +426,7 @@ research_notes/
 
 ### 4.2 优先级矩阵
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | 缺口 | 影响范围 | 难度 | 优先级 | 预计工时 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -449,7 +449,7 @@ research_notes/
 
 ### 5.1 阶段规划总览
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```text
 Phase 1 (月1-2): 基础补全阶段
@@ -475,11 +475,11 @@ Phase 4 (持续): 维护与扩展
 
 ### 5.2 详细任务分解
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 #### Phase 1: 基础补全阶段 (Week 1-8)
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **Week 1-2: 核心定理L3骨架完善**:
 
@@ -508,7 +508,7 @@ Phase 4 (持续): 维护与扩展
 
 #### Phase 2: 深度证明阶段 (Week 9-16)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **Week 9-12: L3机器证明实施**:
 
@@ -562,7 +562,7 @@ Phase 4 (持续): 维护与扩展
 
 ### 6.1 思维导图体系
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 #### 6.1.1 全局思维导图
 
@@ -1023,20 +1023,20 @@ verification_pipeline:
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ---

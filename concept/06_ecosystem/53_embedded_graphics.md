@@ -1,4 +1,6 @@
-> **EN**: Embedded Graphics
+# Rust 嵌入式图形开发
+
+> **EN**: Embedded Graphics Development with Rust
 > **Summary**: Embedded Graphics: Rust ecosystem tools, crates, and engineering practices.
 > **内容分级**: [综述级]
 

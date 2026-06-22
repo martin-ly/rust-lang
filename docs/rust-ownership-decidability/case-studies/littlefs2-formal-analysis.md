@@ -10,13 +10,13 @@
 > **形式化框架**: 写时复制 + 幂等性 + 磨损均衡 + 掉电安全
 >
 > **参考**: littlefs2 crate, ARM mbed LittleFS Specification
-> **[来源: littlefs2 Documentation - docs.rs/littlefs2]** · **[来源: ARM mbed LittleFS Specification]** · **[来源: Wikipedia - Flash Memory]** · **[来源: Rust Embedded Book]** · **[来源: Wikipedia - Wear Leveling]** · **[来源: Rust Reference - no_std]** · **[来源: Wikipedia - Flash File System]** · **[来源: ACM - Embedded File System Design]** · **[来源: IEEE - Non-Volatile Storage Management]**
+> **[来源: littlefs2 Documentation - docs.rs/littlefs2]** · **[来源: ARM mbed LittleFS Specification]** · **来源: [Wikipedia - Flash Memory](https://en.wikipedia.org/wiki/Flash_Memory)** · **来源: [Rust Embedded Book](https://doc.rust-lang.org/stable/embedded-book/)** · **来源: [Wikipedia - Wear Leveling](https://en.wikipedia.org/wiki/Wear_Leveling)** · **来源: [Rust Reference - no_std](https://doc.rust-lang.org/reference/names/preludes.html)** · **来源: [Wikipedia - Flash File System](https://en.wikipedia.org/wiki/Flash_File_System)** · **[来源: ACM - Embedded File System Design]** · **[来源: IEEE - Non-Volatile Storage Management]**
 
 ---
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [LittleFS2 嵌入式文件系统形式化分析](#littlefs2-嵌入式文件系统形式化分析)
   - [目录](#目录)
@@ -77,13 +77,13 @@
 
 ## 1. 项目概览与解决的问题
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 嵌入式存储的挑战
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 嵌入式系统在存储方面面临独特挑战：
 
@@ -115,7 +115,7 @@ unsafe {
 
 ### 1.2 闪存的物理特性
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 NOR和NAND闪存有特殊的物理特性：
 
@@ -155,7 +155,7 @@ impl FlashCharacteristics {
 
 ### 1.3 LittleFS的设计目标
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 LittleFS专为嵌入式闪存设计：
 
@@ -193,7 +193,7 @@ pub struct LittleFSConfig {
 
 ### 2.1 文件系统架构
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 LittleFS采用分层架构：
 
@@ -251,7 +251,7 @@ struct MetadataPair {
 
 ### 2.2 写时复制 (COW) 机制
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 COW是LittleFS保证原子性的核心机制：
 
@@ -328,7 +328,7 @@ impl<'a> CowOperation<'a> {
 
 ### 2.3 元数据对 (Metadata Pairs)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 元数据对提供原子更新能力：
 
@@ -390,7 +390,7 @@ impl MetadataPair {
 
 ### 2.4 块分配与磨损均衡
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 LittleFS使用轮询分配实现磨损均衡：
 
@@ -476,7 +476,7 @@ struct WearStats {
 
 ### 2.5 前向查找缓存 (Lookahead Cache)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Lookahead缓存减少读取操作：
 
@@ -557,7 +557,7 @@ impl LookaheadCache {
 
 ### 3.1 Storage Trait详解
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 Storage trait抽象底层存储：
 
@@ -614,7 +614,7 @@ impl<S: NorFlash> Storage for NorFlashAdapter<S> {
 
 ### 3.2 FileSystem Trait详解
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 FileSystem trait提供文件系统操作：
 
@@ -673,7 +673,7 @@ pub trait FileSystem {
 
 ### 3.3 File与Dir Trait详解
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 文件和目录trait：
 
@@ -720,7 +720,7 @@ pub enum FileType {
 
 ### 3.4 Read/Write Trait详解
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 IO traits提供基本读写：
 
@@ -793,7 +793,7 @@ pub enum SeekFrom {
 
 ### 4.1 传感器数据记录
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 use littlefs2::fs::{Filesystem, Allocation, File, OpenOptions};
@@ -925,7 +925,7 @@ impl<S: Storage> SensorLogger<S> {
 
 ### 4.2 固件更新存储
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 use littlefs2::fs::{Filesystem, File, OpenOptions};
@@ -1083,7 +1083,7 @@ impl<S: Storage> FirmwareManager<S> {
 
 ### 4.3 配置管理
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 use littlefs2::fs::{Filesystem, File, OpenOptions};
@@ -1226,7 +1226,7 @@ impl<S: Storage> ConfigManager<S> {
 
 ### 4.4 日志轮转系统
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use littlefs2::fs::{Filesystem, File, Dir, OpenOptions};
@@ -1373,7 +1373,7 @@ impl<S: Storage> CircularLog<S> {
 
 ### 4.5 嵌入式数据库
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use littlefs2::fs::{Filesystem, File, OpenOptions};
@@ -1512,7 +1512,7 @@ fn database_example() -> Result<(), Error> {
 
 ### 5.1 与FATFS的对比
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 | 特性 | LittleFS | FATFS |
 |-----|----------|-------|
@@ -1537,7 +1537,7 @@ file.sync()?;  // 原子提交
 
 ### 5.2 与SPIFFS的对比
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 特性 | LittleFS | SPIFFS |
 |-----|----------|--------|
@@ -1551,7 +1551,7 @@ file.sync()?;  // 原子提交
 
 ### 5.3 与裸Flash操作的对比
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 // 裸Flash操作
@@ -1584,25 +1584,25 @@ fs.open_file_with_options_and_then(
 
 ### 6.1 完整的传感器记录系统
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 （见4.1节传感器数据记录）
 
 ### 6.2 原子配置文件更新
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 （见4.3节配置管理）
 
 ### 6.3 循环日志实现
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 （见4.4节日志轮转系统）
 
 ### 6.4 多文件数据管理
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use littlefs2::fs::{Filesystem, File, Dir, OpenOptions};
@@ -1727,7 +1727,7 @@ impl<S: Storage> DataManager<S> {
 
 ### 7.1 内存使用分析
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 LittleFS的RAM使用主要由以下部分组成：
 
@@ -1769,7 +1769,7 @@ impl MemoryUsage {
 
 ### 7.2 写入性能
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 写入性能测试（4KB块）：
 
@@ -1782,7 +1782,7 @@ impl MemoryUsage {
 
 ### 7.3 磨损均衡效果
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 理论磨损均衡：
 
@@ -1804,7 +1804,7 @@ fn wear_uniformity(block_count: usize, total_writes: usize) -> f32 {
 
 ### 7.4 掉电恢复时间
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 // 恢复过程
@@ -1828,7 +1828,7 @@ fn mount_time(block_count: usize) -> Duration {
 
 ### 8.1 块大小选择
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 // 块大小应该匹配Flash的擦除块大小
@@ -1848,7 +1848,7 @@ fn recommend_block_size(flash_type: FlashType) -> usize {
 
 ### 8.2 缓存配置
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 // 读缓存：通常等于块大小
@@ -1866,7 +1866,7 @@ const LOOKAHEAD_SIZE: usize = 1024;  // 位
 
 ### 8.3 文件组织策略
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 // 避免大目录：分散文件到子目录
@@ -1881,7 +1881,7 @@ fn distribute_path(id: u32, base: &str) -> String {
 
 ### 8.4 错误处理模式
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 // 1. 幂等重试
@@ -2127,11 +2127,11 @@ impl<S: Storage> ThreadSafeFS<S> {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Flash File System]**
+> **来源: [Wikipedia - Flash File System](https://en.wikipedia.org/wiki/Flash_File_System)**
 
-> **[来源: Wikipedia - Wear Leveling]**
+> **来源: [Wikipedia - Wear Leveling](https://en.wikipedia.org/wiki/Wear_Leveling)**
 
-> **[来源: Wikipedia - Journaling File System]**
+> **来源: [Wikipedia - Journaling File System](https://en.wikipedia.org/wiki/Journaling_File_System)**
 
 > **[来源: IEEE - Non-Volatile Storage Management]**
 
@@ -2145,12 +2145,12 @@ impl<S: Storage> ThreadSafeFS<S> {
 
 > **[来源: NAND Flash Memory Standard]**
 
-> **[来源: Rust Embedded Working Group]**
+> **来源: [Rust Embedded Working Group](https://rust-embedded.github.io/book/)**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---
 

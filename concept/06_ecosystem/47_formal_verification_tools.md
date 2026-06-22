@@ -44,6 +44,7 @@
   - [二、概念属性矩阵](#二概念属性矩阵)
   - [三、模型检验工具](#三模型检验工具)
     - [3.1 Kani：基于 CBMC 的 Rust 验证器](#31-kani基于-cbmc-的-rust-验证器)
+      - [Kani 0.66 新特性（2026-05 发布）](#kani-066-新特性2026-05-发布)
     - [3.2 MIRI：运行时 UB 检测器](#32-miri运行时-ub-检测器)
   - [四、演绎验证工具](#四演绎验证工具)
     - [4.1 Prusti：Viper 分离逻辑验证器](#41-prustiviper-分离逻辑验证器)
@@ -82,6 +83,7 @@
 > **Bloom 层级**: 分析 → 评价
 > **变更日志**:
 >
+> - v1.2 (2026-06-22): 更新 Kani 到 0.66，补充 quantifiers、autoharness、loop contracts 示例
 > - v1.1 (2026-05-26): 补充 Generic Refinement Types (POPL 2025) — Flux 泛型精化类型扩展 [来源: Web Authority Alignment Sprint]
 > - v1.0 (2026-05-26): 初始创建——覆盖模型检验（Kani/MIRI）、演绎验证（Prusti/Creusot/Verus）、精化类型（Flux）、前沿框架（RefinedRust/RustBelt）、选型决策矩阵
 
@@ -233,9 +235,46 @@ mod verification {
 | **Unsafe 验证** | 可验证包含 unsafe 的代码 | 需信任 unsafe 的规范 |
 | **内存安全** | 检测 use-after-free、双重释放 | 复杂数据结构状态爆炸 |
 
-> **来源**: [Kani GitHub](https://github.com/model-checking/kani) ·
+#### Kani 0.66 新特性（2026-05 发布）
+
+Kani 0.66 引入了多项降低验证门槛的能力：
+
+- **Quantifiers（`kani::forall` / `kani::exists`）**：在规格中直接表达全称/存在量词，无需手写循环不变式。
+- **Autoharness**：自动为函数生成验证 harness，并支持为结构体/枚举派生 `Arbitrary`，减少样板代码。
+- **Loop Contracts**：通过 `#[kani::loop_invariant(...)]` 与 loop-modifies 子句提供循环 contract，减少对 `#[kani::unwind]` 的依赖。
+- **`--prove-safety-only`**：专注验证内存安全与 UB，跳过功能正确性断言，加速安全基线检查。
+
+> **来源**: [Kani Documentation](https://model-checking.github.io/kani/) ·
+> [Kani GitHub Releases](https://github.com/model-checking/kani/releases) ·
 > [CBMC Documentation](https://diffblue.github.io/cbmc/) ·
 > [Bounded Model Checking](https://en.wikipedia.org/wiki/Model_checking#Bounded_model_checking)
+
+```rust,ignore
+// Kani 0.66+ 量化器示例
+#[cfg(kani)]
+mod verification_066 {
+    use kani::any;
+
+    #[kani::proof]
+    fn test_all_positive() {
+        let arr: [i32; 4] = [any(), any(), any(), any()];
+        kani::assume(kani::forall!(|i in 0..4| arr[i] >= 0));
+        let sum: i64 = arr.iter().map(|&x| x as i64).sum();
+        assert!(sum >= 0);
+    }
+
+    #[kani::proof]
+    #[kani::loop_invariant(arr.len() == 4)]
+    fn test_loop_contract() {
+        let arr = [any::<i32>(); 4];
+        let mut sum = 0i64;
+        for &x in &arr {
+            sum += x as i64;
+        }
+        assert!(sum >= i64::MIN);
+    }
+}
+```
 
 ### 3.2 MIRI：运行时 UB 检测器
 

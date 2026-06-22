@@ -54,7 +54,7 @@
 
 ## 🎯 工具分类 {#-工具分类}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 研究工具按用途分为以下几类：
 
@@ -68,15 +68,15 @@
 
 ## 🔬 形式化验证工具 {#-形式化验证工具}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **主推路径**：Prusti、Kani（Rust 原生验证，无需学习专业形式化语言）。Coq/Lean 为可选进阶研究，见 [archive/deprecated/](../archive/deprecated/README.md)。
 
 ### Prusti
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **用途**: Rust 程序的形式化验证工具
 
@@ -130,9 +130,9 @@ cargo prusti --file src/lib.rs
 
 ### Kani
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **用途**: Rust 程序的模型检查器
 
@@ -183,9 +183,9 @@ cargo kani --function test_abs
 
 ### 可选进阶：Coq/Lean
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **说明**：Coq、Lean 为专业形式化证明语言，需额外学习成本。
 本项目已归档 Coq 骨架与 Aeneas 对接计划至 [archive/deprecated/](../archive/deprecated/README.md)。
@@ -196,13 +196,13 @@ cargo kani --function test_abs
 
 ## ⚡ 性能分析工具 {#-性能分析工具}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Criterion.rs
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **用途**: 统计驱动的 Rust 基准测试框架
 
@@ -256,9 +256,9 @@ cargo bench
 
 ### perf
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **用途**: Linux 性能分析工具
 
@@ -297,9 +297,9 @@ perf stat ./target/release/my_program
 
 ### flamegraph
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **用途**: 性能火焰图生成工具
 
@@ -333,11 +333,11 @@ cargo flamegraph -o flamegraph.svg --bin my_program
 
 ## 🔍 内存分析工具 {#-内存分析工具}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Miri
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **用途**: Rust 的中断执行器，用于检查未定义行为
 
@@ -373,7 +373,7 @@ cargo miri test --test my_test
 
 ### Valgrind
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **用途**: 内存错误检测工具
 
@@ -406,7 +406,7 @@ valgrind --tool=memcheck --leak-check=yes ./target/release/my_program
 
 ### heaptrack
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **用途**: 堆内存分析工具
 
@@ -448,7 +448,7 @@ heaptrack_gui heaptrack.my_program.12345.gz
 
 ### cargo test
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **用途**: Rust 标准测试工具
 
@@ -472,7 +472,7 @@ cargo test -- --test-threads=1
 
 ### proptest
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **用途**: 属性测试框架
 
@@ -506,7 +506,7 @@ proptest! {
 
 ### loom
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **用途**: 并发模型验证工具
 
@@ -551,7 +551,7 @@ mod tests {
 
 ### Clippy
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **用途**: Rust 代码检查工具
 
@@ -584,7 +584,7 @@ cargo clippy -- -W clippy::all
 
 ### rust-analyzer
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **用途**: Rust 语言服务器
 
@@ -617,7 +617,7 @@ rust-analyzer 通常在 IDE 中自动使用，提供：
 
 ### cargo-expand
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **用途**: 宏展开工具
 
@@ -654,7 +654,7 @@ cargo expand > expanded.rs
 
 ### 工具选择
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 根据研究类型选择工具：
 
@@ -666,7 +666,7 @@ cargo expand > expanded.rs
 
 ### 工具组合
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 推荐的工具组合：
 
@@ -677,7 +677,7 @@ cargo expand > expanded.rs
 
 ### 最佳实践
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 1. **从简单开始**: 先使用基础工具，再使用高级工具
 2. **工具组合**: 组合使用多个工具获得全面结果
@@ -711,13 +711,13 @@ cargo expand > expanded.rs
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -728,7 +728,7 @@ cargo expand > expanded.rs
 
 #### 代码示例更新
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 本文档中的所有Rust代码示例均已：
 
@@ -738,7 +738,7 @@ cargo expand > expanded.rs
 
 #### 相关文档
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查
@@ -772,27 +772,27 @@ cargo expand > expanded.rs
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Software Development Tool]**
-> **[来源: Wikipedia - Integrated Development Environment]**
+> **来源: [Wikipedia - Software Development Tool](https://en.wikipedia.org/wiki/Software_Development_Tool)**
+> **来源: [Wikipedia - Integrated Development Environment](https://en.wikipedia.org/wiki/Integrated_Development_Environment)**
 > **[来源: Rust Tools Team]**
-> **[来源: Rust Reference - Compiler]**
+> **来源: [Rust Reference - Compiler](https://doc.rust-lang.org/reference/)**
 > **[来源: ACM - Developer Tooling Survey]**
 > **[来源: IEEE - Software Engineering Environment]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

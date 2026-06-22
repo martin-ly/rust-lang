@@ -1,4 +1,8 @@
-> **权威来源**: [ISO 26262](https://www.iso.org/standard/68383.html), [AUTOSAR](https://www.autosar.org/), [Rust Reference](https://doc.rust-lang.org/reference/)
+> **权威来源**:
+>
+> [ISO 26262](https://www.iso.org/standard/68383.html),
+> [AUTOSAR](https://www.autosar.org/),
+> [Rust Reference](https://doc.rust-lang.org/reference/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增汽车 ECU Rust 应用案例来源标注 [来源: Authority Source Sprint Batch 8]
 >
@@ -570,3 +574,28 @@ fn critical_calculation(x: u32) -> u32 {
 >
 
 ---
+
+## 📚 模块 8: 国际化对齐
+
+> 本节按项目模板要求补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Rust Project Goals — Safety-Critical Rust](https://rust-lang.github.io/rust-project-goals/2026/) | 权威来源 | 安全关键目标 |
+| [Ferrocene](https://ferrocene.dev/) | 权威来源 | Ferrocene 认证 Rust |
+
+### 8.2 学术来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | 权威来源 | 语义基础 |
+| [RefinedRust — OOPSLA 2024](https://dl.acm.org/doi/10.1145/3689738) | 权威来源 | 形式化验证 |
+
+### 8.3 社区权威
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Rust Safety-Critical Consortium](https://rust-safety-critical.com/) | 权威来源 | 安全关键联盟 |
+| [High Integrity Systems Blog](https://www.highintegritysystems.com/) | 权威来源 | 工业实践 |

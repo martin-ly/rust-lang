@@ -51,7 +51,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档提供跨模块集成的实际示例，展示如何将不同的Rust模块组合使用，构建完整的应用程序。
 
@@ -61,13 +61,13 @@
 
 ## 示例1: 所有权与类型系统集成
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 场景：类型安全的资源管理
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use c01_ownership_borrow_scope::*;
@@ -115,13 +115,13 @@ fn test_resource_manager() {
 
 ## 示例2: 异步与网络编程集成
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 场景：异步HTTP服务器
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use c06_async::*;
@@ -153,13 +153,13 @@ async fn async_http_server() -> Result<(), Box<dyn std::error::Error>> {
 
 ## 示例3: 线程与进程管理集成
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 场景：多线程进程池
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use c05_threads::*;
@@ -226,13 +226,13 @@ impl Drop for ThreadPool {
 
 ## 示例4: 宏系统与设计模式集成
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 场景：使用宏实现设计模式
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use c11_macro_system::*;
@@ -278,11 +278,11 @@ fn test_singleton() {
 
 ## 示例5: 算法与性能优化集成
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 场景：高性能数据处理管道
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use c08_algorithms::*;
@@ -321,7 +321,7 @@ fn test_data_pipeline() {
 
 ### 场景：WASM模块与Rust后端集成
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use c12_wasm::*;
@@ -353,7 +353,7 @@ fn test_wasm_integration() {
 
 ### 1. 模块边界清晰
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 - 每个模块应该有明确的职责
 - 使用trait定义模块接口
@@ -361,7 +361,7 @@ fn test_wasm_integration() {
 
 ### 2. 错误处理统一
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 - 使用统一的错误类型
 - 实现From trait进行错误转换
@@ -369,7 +369,7 @@ fn test_wasm_integration() {
 
 ### 3. 性能考虑
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 - 使用零成本抽象
 - 避免不必要的克隆
@@ -377,7 +377,7 @@ fn test_wasm_integration() {
 
 ### 4. 测试策略
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - 为每个模块编写单元测试
 - 编写集成测试验证模块协作
@@ -391,7 +391,7 @@ fn test_wasm_integration() {
 
 ### 场景1: 全栈 Rust 应用
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 构建前后端统一的 Rust 应用：
 
@@ -403,7 +403,7 @@ fn test_wasm_integration() {
 
 ### 场景2: 高性能数据处理系统
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 结合多线程 + 异步 + 算法优化：
 
@@ -413,7 +413,7 @@ fn test_wasm_integration() {
 
 ### 场景3: 嵌入式 + 云端协同
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 边缘设备 + 云服务架构：
 
@@ -423,7 +423,7 @@ fn test_wasm_integration() {
 
 ### 场景4: 可扩展的插件系统
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 使用宏 + 设计模式构建插件架构：
 
@@ -468,7 +468,7 @@ fn test_wasm_integration() {
 
 ### LazyLock 在跨模块配置共享中的应用
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
 // crate: common_config
@@ -488,7 +488,7 @@ pub fn is_config_ready() -> bool {
 
 ### ControlFlow 在跨模块错误处理中的应用
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust,ignore
 // crate: validation_engine
@@ -517,7 +517,7 @@ where
 
 ### array_windows 在跨模块数据流中的应用
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 /// 跨模块数据流处理：使用 array_windows 进行批次处理
@@ -562,20 +562,20 @@ pub fn process_module_pipeline(
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

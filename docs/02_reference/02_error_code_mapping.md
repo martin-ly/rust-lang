@@ -22,9 +22,9 @@
 
 ## 目录
 >
-> **[来源: Rust Official Docs]** ·
-> **[来源: Rust Reference - Error Codes]** ·
-> **[来源: Wikipedia - Compiler Construction]** ·
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
+> **来源: [Rust Reference - Error Codes](https://doc.rust-lang.org/reference/)** ·
+> **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)** ·
 > **[来源: ACM - Compiler Error Message Design]** ·
 > **[来源: IEEE - Programming Language Diagnostics]**
 
@@ -118,7 +118,7 @@
 
 ## 简介
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档提供 Rust 编译器错误码的详细映射，帮助开发者：
 
@@ -129,9 +129,9 @@
 
 ### 使用方式
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. 在编译错误信息中找到 `error[EXXXX]` 格式的错误码
 2. 在本文档中搜索该错误码（如 `E0382`）
@@ -142,7 +142,7 @@
 
 ## 错误码快速索引
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 错误码范围 | 类别 | 常见错误码 |
 |:---|:---|:---|
@@ -161,13 +161,13 @@
 
 ## 借用检查错误 (E01xx-E05xx)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### E0382 - 使用已移动的值
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **错误信息**: `use of moved value` / `value borrowed here after move`
 
@@ -233,9 +233,9 @@ fn main() {
 
 ### E0383 - 部分移动
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **错误信息**: `partial move` / `borrow of partially moved value`
 
@@ -309,9 +309,9 @@ fn main() {
 
 ### E0499 - 重复可变借用
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **错误信息**: `cannot borrow as mutable more than once at a time`
 
@@ -391,9 +391,9 @@ fn process(s: String) -> String {
 
 ### E0502 - 可变与不可变借用共存
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **错误信息**: `cannot borrow as immutable because it is borrowed as mutable`
 
@@ -464,9 +464,9 @@ fn main() {
 
 ### E0503 - 使用已移动的值（在借用后）
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **错误信息**: `cannot use because it was mutably borrowed` / `value used after move`
 
@@ -516,9 +516,9 @@ fn main() {
 
 ### E0505 - 在借用时移动
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **错误信息**: `cannot move out of because it is borrowed`
 
@@ -561,7 +561,7 @@ fn main() {
 
 ### E0506 - 在借用时赋值
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **错误信息**: `cannot assign to because it is borrowed`
 
@@ -596,7 +596,7 @@ fn main() {
 
 ### E0507 - 从借用内容中移出
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **错误信息**: `cannot move out of borrowed content`
 
@@ -647,7 +647,7 @@ fn main() {
 
 ### E0508 - 从数组/元组中移出
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **错误信息**: `cannot move out of type which is behind a shared reference`
 
@@ -687,11 +687,11 @@ fn main() {
 
 ## 类型系统错误 (E02xx-E03xx)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### E0277 - Trait 约束不满足
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **错误信息**: `trait bound not satisfied` / `doesn't implement trait`
 
@@ -752,7 +752,7 @@ fn main() {
 
 ### E0282 - 需要类型标注
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **错误信息**: `type annotations needed` / `cannot infer the type`
 
@@ -794,7 +794,7 @@ fn main() {
 
 ### E0283 - 类型标注不足
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **错误信息**: `type annotations required` / `cannot resolve`
 
@@ -826,7 +826,7 @@ fn main() {
 
 ### E0308 - 类型不匹配
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **错误信息**: `mismatched types` / `expected ... found ...`
 
@@ -872,7 +872,7 @@ fn main() {
 
 ### E0308 - 返回值类型不匹配
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **错误信息**: `mismatched types` (返回类型)
 
@@ -901,11 +901,11 @@ fn add_result(a: i32, b: i32) -> Result<i32, String> {
 
 ## 生命周期错误 (E05xx-E06xx)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### E0106 - 需要生命周期标注
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **错误信息**: `missing lifetime specifier`
 
@@ -954,7 +954,7 @@ fn main() {
 
 ### E0107 - 生命周期参数数量不匹配
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **错误信息**: `wrong number of lifetime parameters`
 
@@ -992,7 +992,7 @@ fn main() {
 
 ### E0597 - 生命周期不足
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **错误信息**: `does not live long enough`
 
@@ -1061,7 +1061,7 @@ fn main() {
 
 ### E0310 - 参数生命周期不足
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **错误信息**: `parameter ... may not live long enough`
 
@@ -1105,7 +1105,7 @@ fn make_container_owned(s: &str) -> ContainerOwned {
 
 ### E0495 - 生命周期不匹配
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **错误信息**: `cannot infer an appropriate lifetime due to conflicting requirements`
 
@@ -1142,11 +1142,11 @@ fn foo<'a, 'b>(x: &'a str, y: &'b str) -> Either<'a, 'b> {
 
 ## 所有权错误
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### E0381 - 使用未初始化变量
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **错误信息**: `use of possibly-uninitialized variable`
 
@@ -1174,7 +1174,7 @@ fn main() {
 
 ### E0384 - 对不可变变量赋值
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **错误信息**: `cannot assign twice to immutable variable`
 
@@ -1205,11 +1205,11 @@ fn main() {
 
 ## 模式匹配错误
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### E0004 - 非穷尽模式匹配
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **错误信息**: `non-exhaustive patterns`
 
@@ -1265,7 +1265,7 @@ fn main() {
 
 ### E0005 - 不可反驳模式
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **错误信息**: `refutable pattern in local binding`
 
@@ -1307,7 +1307,7 @@ fn main() {
 
 ### E0297 - 模式绑定不匹配
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **错误信息**: `refutable pattern in function argument`
 
@@ -1337,11 +1337,11 @@ fn bar(opt: Option<i32>) {
 
 ## 宏系统错误
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### E0424 - self 使用错误
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **错误信息**: `self` is not available in a static method`
 
@@ -1386,7 +1386,7 @@ impl Foo {
 
 ### E0425 - 未找到函数/变量
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **错误信息**: `cannot find function/variable ... in this scope`
 
@@ -1413,7 +1413,7 @@ fn main() {
 
 ### E0554 - 未知特性
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **错误信息**: `feature may not be used on the ... release channel`
 
@@ -1443,11 +1443,11 @@ fn main() {
 
 ## 模块系统错误
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### E0432 - 未解析的导入
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **错误信息**: `unresolved import`
 
@@ -1480,7 +1480,7 @@ fn main() {}
 
 ### E0433 - 未找到 crate
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **错误信息**: `failed to resolve: use of undeclared crate or module`
 
@@ -1515,7 +1515,7 @@ fn main() {}
 
 ### E0463 - 找不到 crate
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **错误信息**: `can't find crate for ...`
 
@@ -1538,7 +1538,7 @@ cargo update
 
 ### E0603 - 私有模块
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **错误信息**: `module is private`
 
@@ -1576,11 +1576,11 @@ pub use internal::secret;  // ✅ 重新导出
 
 ## 变量与可变性错误
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### E0596 - 无法借用不可变变量为可变
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **错误信息**: `cannot borrow as mutable`
 
@@ -1609,7 +1609,7 @@ fn main() {
 
 ### E0599 - 未找到方法
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **错误信息**: `no method named ... found for type`
 
@@ -1638,7 +1638,7 @@ fn main() {
 
 ### E0609 - 未找到字段
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **错误信息**: `no field ... on type`
 
@@ -1670,7 +1670,7 @@ fn main() {
 
 ### E0614 - 类型不能进行此操作
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **错误信息**: `type ... cannot be ...` / `cannot be dereferenced`
 
@@ -1699,7 +1699,7 @@ fn main() {
 
 ### E0616 - 私有字段
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **错误信息**: `field ... of ... is private`
 
@@ -1748,11 +1748,11 @@ fn main() {
 
 ## Trait 与泛型错误
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### E0201 - 重复的 Trait 实现
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **错误信息**: `duplicate definitions with name ...`
 
@@ -1796,7 +1796,7 @@ impl Bar for Foo {
 
 ### E0323 - 错误的方法签名
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **错误信息**: `item ... is an associated method, which doesn't match the trait`
 
@@ -1838,7 +1838,7 @@ impl Greet for Person {
 
 ### E0392 - 参数未使用
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **错误信息**: `parameter ... is never used`
 
@@ -1878,7 +1878,7 @@ struct Wrapper<T> {
 
 ### E0275 - Trait 解析无限递归
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **错误信息**: `overflow evaluating the requirement`
 
@@ -1899,11 +1899,11 @@ trait Bar: Foo {}  // ✅ 单向约束
 
 ## 并发与异步错误
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### E0373 - 闭包生命周期问题
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **错误信息**: `closure may outlive current function`
 
@@ -1952,7 +1952,7 @@ fn make_closure_static() -> impl Fn() -> i32 {
 
 ### E0378 - Send/Sync 约束不满足
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **错误信息**: `trait bound ... is not satisfied` (Send/Sync)
 
@@ -1995,7 +1995,7 @@ fn main() {
 
 ### E0700 - 异步块中借用
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **错误信息**: `cannot borrow as mutable more than once at a time in async block`
 
@@ -2050,7 +2050,7 @@ async fn some_async() {}
 
 ### E0733 - 递归异步函数
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **错误信息**: `recursion in an async fn requires boxing`
 
@@ -2083,11 +2083,11 @@ fn fib(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 
 ## 其他常见错误
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### E0252 - 名称冲突
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **错误信息**: `a name ... is defined multiple times`
 
@@ -2117,7 +2117,7 @@ fn main() {
 
 ### E0301 - 可变与不可变模式
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **错误信息**: `cannot mutably borrow in a pattern guard`
 
@@ -2142,7 +2142,7 @@ fn main() {
 
 ### E0446 - 私有类型在公共接口
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **错误信息**: `private type in public interface`
 
@@ -2182,7 +2182,7 @@ mod inner {
 
 ### E0515 - 返回局部变量的引用
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **错误信息**: `cannot return reference to local variable`
 
@@ -2221,7 +2221,7 @@ fn good_lifetime<'a>(input: &'a str) -> &'a str {
 
 ### E0521 - 借用数据逃逸
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **错误信息**: `borrowed data escapes outside of function`
 
@@ -2242,7 +2242,7 @@ fn get_ref() -> &'static str {
 
 ### E0658 - 不稳定特性
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **错误信息**: `feature is unstable`
 
@@ -2262,7 +2262,7 @@ fn main() {
 
 ### E0689 - 整数类型后缀
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **错误信息**: `can't call method on ambiguous numeric type`
 
@@ -2295,7 +2295,7 @@ fn main() {
 
 ### W0001 - 未使用的变量
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **警告信息**: `unused variable`
 
@@ -2329,7 +2329,7 @@ fn main() {
 
 ### W0002 - 未使用的导入
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **警告信息**: `unused import`
 
@@ -2360,7 +2360,7 @@ fn main() {
 
 ### W0003 - 不可达代码
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **警告信息**: `unreachable code`
 
@@ -2379,7 +2379,7 @@ fn main() {
 
 ### W0004 - 未使用的 mut
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **警告信息**: `variable does not need to be mutable`
 
@@ -2606,12 +2606,12 @@ Rust 1.94 对错误诊断进行了多项改进：
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Compiler Construction]**
-> **[来源: Wikipedia - Error Message]**
-> **[来源: Wikipedia - Diagnostic (medicine)]**
+> **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)**
+> **来源: [Wikipedia - Error Message](https://en.wikipedia.org/wiki/Error_Message)**
+> **来源: [Wikipedia - Diagnostic (medicine)](https://en.wikipedia.org/wiki/Diagnostic_(medicine))**
 > **[来源: IEEE - Programming Language Diagnostics]**
 > **[来源: ACM - Compiler Error Message Design]**
-> **[来源: Rust Reference - Error Codes]**
+> **来源: [Rust Reference - Error Codes](https://doc.rust-lang.org/reference/)**
 > **[来源: Rust Compiler Error Index]**
 > **[来源: rustc --explain Documentation]**
 > **[来源: LLVM - Error Handling]**
@@ -2657,15 +2657,15 @@ graph TD
     Q4 -->|否| A5[查看 rustc --explain 输出]
 ```
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages Survey]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design and Implementation]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM - Systems Programming Languages Survey](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI - Programming Language Design and Implementation](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ---

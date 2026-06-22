@@ -26,7 +26,7 @@
 
 ## 项目目标
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 创建一个支持并发下载的文件下载器。
 
@@ -34,7 +34,7 @@
 
 ## 功能需求
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 多线程下载
 - [ ] 断点续传
@@ -45,11 +45,11 @@
 
 ## 学习要点
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 多线程下载
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use std::thread;
@@ -124,9 +124,9 @@ async fn download_async(url: &str) -> Result<Vec<u8>, reqwest::Error> {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
-> **[来源: crossbeam Documentation]**
-> **[来源: ACM - Concurrent Programming]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [TRPL Ch. 16 - Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)**
+> **来源: [crossbeam Documentation](https://docs.rs/crossbeam/latest/crossbeam/)**
+> **来源: [ACM - Concurrent Programming](https://dl.acm.org/)**
 
 ---

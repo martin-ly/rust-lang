@@ -44,7 +44,7 @@
 
 ## 一、国际权威成果总览
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 成果 | 机构/作者 | 年份 | 形式化范围 | 证明助手/工具 | 与本项目对应 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -62,13 +62,13 @@
 
 ## 二、逐项对标与差距
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 RustBelt
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **论文**: RustBelt: Logical Foundations for the Future of Safe Systems Programming
 - **形式化**: λ Rust 模型、分离逻辑、MIR 级语义
@@ -77,7 +77,7 @@
 
 ### 2.2 RustBelt Meets Relaxed Memory (POPL 2020)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - **论文**: RustBelt Meets Relaxed Memory
 - **形式化**: 松弛内存、Arc 数据竞争、synchronized ghost state
@@ -86,7 +86,7 @@
 
 ### 2.3 RustSEM (K-Framework, 2024)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - **论文**: [Formally understanding Rust's ownership and borrowing system at the memory level](https://link.springer.com/article/10.1007/s10703-024-00460-3) (FMSD)
 - **形式化**: 内存级 OBS、可执行操作语义、700+ 测试
@@ -95,7 +95,7 @@
 
 ### 2.4 Aeneas
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - **形式化**: Safe Rust 翻译到 Coq、F*、HOL4、Lean
 - **本项目对应**: [AENEAS_INTEGRATION_PLAN](./10_aeneas_integration_plan.md)（对接方案已制定）
@@ -104,7 +104,7 @@
 
 ### 2.5 coq-of-rust
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 - **形式化**: THIR → Rocq，显式借用与 effect 序列
 - **本项目对应**: 无
@@ -112,7 +112,7 @@
 
 ### 2.6 Crux-MIR
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 - **形式化**: 比特级精确、密码学模块验证
 - **本项目对应**: 无
@@ -120,7 +120,7 @@
 
 ### 2.7 AutoVerus
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 - **形式化**: LLM 自动生成 Verus 正确性证明
 - **本项目对应**: 无
@@ -247,9 +247,9 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
-> **[来源: Coq Reference]**
-> **[来源: TLA+]**
-> **[来源: ACM - Formal Verification]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
 
 ---

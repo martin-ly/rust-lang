@@ -51,3 +51,31 @@
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+## 📚 模块 8: 国际化对齐
+
+> 本模块按项目模板补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 说明 |
+|:---|:---|
+| [Rust Reference](https://doc.rust-lang.org/reference/) | 语言规范 |
+| [The Cargo Book](https://doc.rust-lang.org/cargo/) | Cargo 依赖管理 |
+
+### 8.2 学术/工业来源
+
+| 来源 | 说明 |
+|:---|:---|
+| [SQLx](https://github.com/launchbadge/sqlx) | 异步 SQL 工具包 |
+| [Diesel](https://diesel.rs/) | 类型安全 ORM |
+| [SeaORM](https://www.sea-ql.org/SeaORM/) | 异步 ORM |
+
+### 8.3 社区资源
+
+| 来源 | 说明 |
+|:---|:---|
+| [Rust Database Drivers Working Group](https://github.com/rust-db) | 数据库驱动工作组 |
+| [Crates.io — Database](https://crates.io/categories/database) | 数据库分类索引 |
+

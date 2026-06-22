@@ -39,7 +39,7 @@
 
 ## 概念族谱概览
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 mindmap
@@ -113,13 +113,13 @@ mindmap
 
 ## 核心证明技术
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 归纳法
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 结构归纳示例：证明列表长度
@@ -144,7 +144,7 @@ mod proofs {
 
 ### 2. 分离逻辑
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust
 // 分离逻辑概念在 Rust 中的体现
@@ -160,7 +160,7 @@ fn separation_logic_example() {
 
 ### 3. 双模拟
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 // 状态机双模拟概念
@@ -190,7 +190,7 @@ struct Action(String);
 
 ### Hoare 三元组
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```
 {P} C {Q}
@@ -218,7 +218,7 @@ fn find_max(slice: &[i32]) -> Option<&i32> {
 
 ### Iris 框架概念
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 | 概念 | 描述 | Rust 对应 |
 |------|------|-----------|
@@ -235,7 +235,7 @@ fn find_max(slice: &[i32]) -> Option<&i32> {
 
 ### 验证工具能力对比
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```mermaid
 graph LR
@@ -345,8 +345,8 @@ graph LR
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Mind Map]**
-> **[来源: Wikipedia - Concept Map]**
+> **来源: [Wikipedia - Mind Map](https://en.wikipedia.org/wiki/Mind_Map)**
+> **来源: [Wikipedia - Concept Map](https://en.wikipedia.org/wiki/Concept_Map)**
 > **[来源: ACM - Knowledge Visualization]**
 > **[来源: Tony Buzan - Mind Mapping]**
 

@@ -9,7 +9,7 @@
 > **内容分级**: [专家级]
 > **定位**: 本文件从**纵向抽象层级**梳理 Rust 的惯用法（idioms）——从词法糖到架构模式的高效、等效、简洁表达方式，与 `02_patterns.md` 的设计模式形成互补：后者聚焦「设计模式」（面向问题），本文件聚焦「惯用法」（面向表达）。
 > **原则**: 每个惯用法必须展示「非惯用写法 → 惯用写法」的等价变换，并标注效率特征与认知负荷。
-> **对齐来源**: [Rust API Guidelines] · [Rust Design Patterns] · [Rust Style Guide] · [Clippy Lints] · [TRPL 惯用章节]
+> **对齐来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-lang.github.io/design-patterns/) · [Rust Style Guide] · [Clippy Lints] · [The Rust Programming Language](https://doc.rust-lang.org/book/)
 > **基准版本**: Rust 1.96.0 stable (Edition 2024)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
@@ -193,7 +193,7 @@ L6 架构     Tower Service             服务态射复合                低开
 
 ### 1.1 惯用法的定义与判别标准
 
-> **惯用法（Idiom）**: 在特定编程语言社区中，被广泛接受为「标准做法」的表达方式。它通常不是语言强制要求的，而是社区在长期实践中形成的**最优局部解**——在正确性、效率、可读性之间取得平衡。 [来源: Rust API Guidelines, *About*]
+> **惯用法（Idiom）**: 在特定编程语言社区中，被广泛接受为「标准做法」的表达方式。它通常不是语言强制要求的，而是社区在长期实践中形成的**最优局部解**——在正确性、效率、可读性之间取得平衡。 来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 
 Rust 惯用法的判别标准（四级评价）：
 
@@ -271,7 +271,7 @@ graph TD
 
 ### 3.1
 
-> [来源: Rust Reference §6.13] `?` 传播运算符
+> 来源: [Rust Reference §6.13](https://doc.rust-lang.org/reference/) `?` 传播运算符
 
 > **惯用**: 在返回 `Result` 或 `Option` 的函数中，用 `?` 自动传播错误，替代显式 `match`。
 
@@ -302,11 +302,11 @@ fn read_file(path: &str) -> Result<String, io::Error> {
 }
 ```
 
-**等价性**: `?` 是 `match` 的局部语法糖，不改变控制流语义。编译后生成相同的 MIR。 [来源: Rust Reference §6.13, TRPL §9]
+**等价性**: `?` 是 `match` 的局部语法糖，不改变控制流语义。编译后生成相同的 MIR。 来源: [Rust Reference §6.13, TRPL §9](https://doc.rust-lang.org/reference/)
 
 ### 3.2
 
-> [来源: Rust Reference §8, Rust 1.95 Release Notes] `match` 解构与模式守卫
+> 来源: [Rust Reference §8, Rust 1.95 Release Notes](https://doc.rust-lang.org/reference/) `match` 解构与模式守卫
 
 > **惯用**: 利用模式穷尽性检查和 `if` guards 将条件与解构合一。
 
@@ -329,7 +329,7 @@ fn classify(value: Option<Result<i32, Error>>) -> &'static str {
 
 ### 3.3
 
-> [来源: TRPL §6] `if let` / `while let` 局部绑定
+> 来源: [TRPL §6](https://doc.rust-lang.org/book/ch06-00-enums-and-pattern-matching.html) `if let` / `while let` 局部绑定
 
 > **惯用**: 当只关心一个变体时，用 `if let` 替代 `match`。
 
@@ -375,7 +375,7 @@ for &n in &numbers {
 
 ### 4.1
 
-> [来源: Rust API Guidelines C-NEWTYPE] Newtype 模式
+> 来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) Newtype 模式
 
 > **惯用**: 用单字段元组结构体为已有类型赋予新的语义身份，零运行时成本。
 
@@ -433,7 +433,7 @@ impl Client<Connected> {
 
 ### 4.3
 
-> [来源: Rustonomicon §4.6] PhantomData 标记
+> 来源: [Rustonomicon §4.6](https://doc.rust-lang.org/nomicon/) PhantomData 标记
 
 > **惯用**: 用 `PhantomData` 在不占用内存的情况下，向类型系统传递额外的约束信息。
 
@@ -454,7 +454,7 @@ struct MyBox<T> {
 
 ### 4.4
 
-> [来源: Rust Reference §6.28] Zero-Sized Types (ZST)
+> 来源: [Rust Reference §6.28](https://doc.rust-lang.org/reference/) Zero-Sized Types (ZST)
 
 > **惯用**: 利用零大小类型（如 `()`、`PhantomData<T>`、`!`）作为编译期标记，无运行时开销。
 
@@ -483,7 +483,7 @@ impl FileHandle<WritePermission> {
 
 ### 5.1
 
-> [来源: Rust API Guidelines C-CONV] Into/From 转换链
+> 来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) Into/From 转换链
 
 > **惯用**: 实现 `From<T>` 自动获得 `Into<U>`，利用类型推断隐式转换。
 
@@ -507,7 +507,7 @@ connect(8080u16); // Into::into(8080u16)
 
 ### 5.2
 
-> [来源: Rust API Guidelines C-DEREF] Deref/DerefMut 多态
+> 来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) Deref/DerefMut 多态
 
 > **惯用**: 为智能指针和包装类型实现 `Deref`，使其透明地代理内部值的方法。
 
@@ -529,11 +529,11 @@ let buf = SmartBuffer { data: vec![1, 2, 3] };
 let first = buf.first(); // 透明调用 [T]::first
 ```
 
-> **边界**: 过度使用 `Deref` 会导致「隐式转换陷阱」——用户可能意识不到正在通过代理调用。仅对「明显是某种类型的智能指针/包装器」使用。 [来源: Rust API Guidelines, *C-DEREF*]
+> **边界**: 过度使用 `Deref` 会导致「隐式转换陷阱」——用户可能意识不到正在通过代理调用。仅对「明显是某种类型的智能指针/包装器」使用。 来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 
 ### 5.3
 
-> [来源: TRPL §10] Trait Bound 组合
+> 来源: [TRPL §10](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html) Trait Bound 组合
 
 > **惯用**: 用 `+` 组合 trait bounds 表达「能力交集」，用 `where` 子句处理复杂约束。
 
@@ -552,7 +552,7 @@ fn callback() -> impl Fn() + use<> { /* ... */ }
 
 ### 5.4
 
-> [来源: Rust API Guidelines, C-GENERIC] Borrow/AsRef 参数化
+> 来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) Borrow/AsRef 参数化
 
 > **惯用**: 函数参数接受 `&str` 而非 `&String`，`&[T]` 而非 `&Vec<T>`，最大化调用灵活性。
 
@@ -574,7 +574,7 @@ greeting(&"Rust".to_owned());    // &String
 
 ### 6.1
 
-> [来源: Rust Reference §10.8] RAII 守卫模式
+> 来源: [Rust Reference §10.8](https://doc.rust-lang.org/reference/) RAII 守卫模式
 
 > **惯用**: 将资源获取与释放绑定到值的生命周期，利用 `Drop` 自动清理。
 
@@ -613,7 +613,7 @@ fn critical_section() {
 
 ### 6.3
 
-> [来源: RFC 2349] Pin 不动性契约
+> 来源: [RFC 2349](https://rust-lang.github.io/rfcs/2349-2349-pin.html) Pin 不动性契约
 
 > **惯用**: 对自引用结构和异步 Future 使用 `Pin<&mut T>`，保证内存位置稳定。
 
@@ -644,7 +644,7 @@ impl SelfReferential {
 
 ### 6.4
 
-> [来源: Rustonomicon §7, Rust std docs] 内部可变性分层
+> 来源: [Rustonomicon §7, Rust std docs](https://doc.rust-lang.org/nomicon/) 内部可变性分层
 
 > **惯用**: 根据场景选择适当的内部可变性原语，形成安全梯度。
 
@@ -681,7 +681,7 @@ let max_even: Option<i32> = numbers
 
 ### 7.2
 
-> [来源: Rust Performance Book] 递归 → 循环变换
+> 来源: [The Rust Performance Book](https://nnethercote.github.io/perf-book/) 递归 → 循环变换
 
 > **惯用**: 当递归深度不可预测时，用显式栈或 `loop` 替代递归，避免栈溢出。
 
@@ -756,7 +756,7 @@ let squares = (0..10).map(|n| n * n).collect::<Vec<i32>>();
 
 ### 8.1
 
-> [来源: TRPL §16, RustBelt] Send/Sync 边界显式化
+> 来源: [TRPL §16](https://doc.rust-lang.org/book/ch16-00-concurrency.html) Send/Sync 边界显式化
 
 > **惯用**: 通过 `#[derive]` 或显式 `unsafe impl` 标记类型的线程安全属性，利用编译器推导复合类型的安全性。
 

@@ -11,7 +11,7 @@
 
 ## 📋 目录 {#-目录}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [WASM 快速参考卡片](#wasm-快速参考卡片)
   - [📋 目录 {#-目录}](#-目录--目录)
@@ -57,13 +57,13 @@
 
 ## 🚀 快速开始 {#-快速开始}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 基本设置
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 # 安装 wasm-pack
@@ -77,13 +77,13 @@ wasm-pack new my-wasm-project
 
 ## 📋 常用 API {#-常用-api}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### JavaScript 互操作
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 #[wasm_bindgen]
@@ -97,9 +97,9 @@ extern "C" {
 
 ### 处理对象
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 #[wasm_bindgen]
@@ -119,9 +119,9 @@ impl Person {
 
 ### 异步函数
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use wasm_bindgen_futures::JsFuture;
@@ -138,13 +138,13 @@ pub async fn fetch_data(url: &str) -> Result<JsValue, JsValue> {
 
 ## 🔧 编译配置 {#-编译配置}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Cargo.toml
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```toml
 [lib]
@@ -159,9 +159,9 @@ web-sys = { version = "0.3", features = ["Window"] }
 
 ### 编译命令
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 # Web 目标
@@ -197,7 +197,7 @@ wasm-pack build --target bundler
 
 ### 减小二进制大小
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```toml
 [profile.release]
@@ -210,7 +210,7 @@ strip = true
 
 ### 使用 wasm-opt
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```bash
 wasm-opt -Os pkg/my_project_bg.wasm -o pkg/my_project_optimized.wasm
@@ -224,7 +224,7 @@ wasm-opt -Os pkg/my_project_bg.wasm -o pkg/my_project_optimized.wasm
 
 ### 反例 1: 在 wasm 中使用阻塞 API
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **错误示例**:
 
@@ -243,7 +243,7 @@ fn bad() {
 
 ### 反例 2: 忽略 JS 边界开销
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **错误示例**:
 
@@ -286,7 +286,7 @@ for i in 0..10000 {
 
 ### 官方文档
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 - [wasm-bindgen 文档](https://rustwasm.github.io/wasm-bindgen/)
 - [wasm-pack 文档](https://rustwasm.github.io/wasm-pack/)
@@ -294,7 +294,7 @@ for i in 0..10000 {
 
 ### 项目内部文档
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 - [完整文档](../../../crates/c12_wasm/README.md)
 - [WASM 使用指南](../../05_guides/05_wasm_usage_guide.md)
@@ -306,7 +306,7 @@ for i in 0..10000 {
 
 ### 场景 1: 浏览器图像处理器
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
 use wasm_bindgen::prelude::*;
@@ -350,7 +350,7 @@ impl ImageProcessor {
 
 ### 场景 2: 实时数据可视化
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust,ignore
 use wasm_bindgen::prelude::*;
@@ -415,7 +415,7 @@ impl ChartRenderer {
 
 ### 场景 3: Web Worker 计算密集型任务
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 // worker.rs
@@ -458,7 +458,7 @@ pub fn process_task(task_json: &str) -> String {
 
 ### 理论基础
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | 概念 | 形式化文档 | 描述 |
 | :--- | :--- | :--- |
@@ -469,7 +469,7 @@ pub fn process_task(task_json: &str) -> String {
 
 ### 形式化定理
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **定理 WASM-T1（JS 边界安全）**: 若 WASM 模块满足所有权规则，则 JS 互操作无内存不安全。
 
@@ -479,7 +479,7 @@ pub fn process_task(task_json: &str) -> String {
 
 ### 相关速查卡
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - [异步编程速查卡](./02_async_patterns.md) - WASM 异步
 - [类型系统速查卡](./02_type_system.md) - WASM 类型
@@ -502,7 +502,7 @@ pub fn process_task(task_json: &str) -> String {
 
 ### 核心特性速查
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 // array_windows - 零分配滑动窗口
@@ -626,20 +626,20 @@ pub fn get_state() -> String {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

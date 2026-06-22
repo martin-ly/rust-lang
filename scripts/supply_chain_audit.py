@@ -13,16 +13,23 @@ Supply Chain Audit — cargo-vet 替代脚本
 输出: reports/SUPPLY_CHAIN_AUDIT_YYYY_MM_DD.md
 """
 
+import io
 import json
+import os
+import re
 import subprocess
+import sys
+import tempfile
 import tomllib
 import urllib.request
 import urllib.error
+import zipfile
 from datetime import datetime
 from pathlib import Path
 
 REPORT_DIR = Path("reports")
 ADVISORY_DB_URL = "https://github.com/rustsec/advisory-db/archive/refs/heads/main.zip"
+
 
 def get_cargo_lock_packages():
     """解析 Cargo.lock，提取所有依赖包。"""
@@ -55,8 +62,135 @@ def fetch_crate_latest_version(name: str) -> str | None:
         return None
 
 
+def parse_version(v: str) -> tuple[int, ...]:
+    """简单版本号解析，忽略 pre-release 后缀用于基础比较。"""
+    # 取数字段，例如 "2.0.0-rc.41" -> (2, 0, 0)
+    parts = re.split(r"[.-]", v)
+    nums = []
+    for p in parts:
+        if p.isdigit():
+            nums.append(int(p))
+        else:
+            break
+    return tuple(nums)
+
+
+def version_in_range(version: str, affected: dict) -> bool:
+    """判断版本是否落在 advisory 的 affected 范围内（简化实现）。"""
+    v = parse_version(version)
+
+    def cmp(op: str, bound: str) -> bool:
+        b = parse_version(bound)
+        # 补齐长度
+        max_len = max(len(v), len(b))
+        vv = v + (0,) * (max_len - len(v))
+        bb = b + (0,) * (max_len - len(b))
+        if op in (">=", ">"):
+            return vv >= bb if op == ">=" else vv > bb
+        if op in ("<=", "<"):
+            return vv <= bb if op == "<=" else vv < bb
+        return vv == bb
+
+    functions = {
+        ">=": lambda b: cmp(">=", b),
+        ">": lambda b: cmp(">", b),
+        "<=": lambda b: cmp("<=", b),
+        "<": lambda b: cmp("<", b),
+        "=": lambda b: cmp("=", b),
+    }
+
+    # 解析 strings like ">=1.2.0, <1.3.0"
+    ranges = affected.get("functions", {}).get("version", "")
+    if not ranges:
+        # 没有范围信息时保守地认为可能受影响
+        return True
+
+    # 多个条件用逗号分隔，需全部满足
+    conditions = [c.strip() for c in ranges.split(",") if c.strip()]
+    for cond in conditions:
+        matched = False
+        for op, func in functions.items():
+            if cond.startswith(op):
+                bound = cond[len(op):].strip()
+                if not func(bound):
+                    return False
+                matched = True
+                break
+        if not matched:
+            # 无法识别的条件，保守处理
+            return True
+    return True
+
+
+def fetch_rustsec_advisories_from_db(packages: list[dict]) -> list[dict]:
+    """下载 RustSec advisory-db 并匹配 Cargo.lock 中的包。"""
+    advisories = []
+    pkg_map = {(p["name"], p["version"]) for p in packages}
+    pkg_names = {p["name"] for p in packages}
+
+    try:
+        req = urllib.request.Request(
+            ADVISORY_DB_URL,
+            headers={"User-Agent": "rust-lang-learning-audit/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            zip_data = resp.read()
+    except Exception as e:
+        print(f"   ⚠️ 无法下载 advisory-db: {e}")
+        return []
+
+    with zipfile.ZipFile(io.BytesIO(zip_data)) as zf:
+        for name in zf.namelist():
+            if not name.endswith(".md") or "/crates/" not in name:
+                continue
+            # advisory-db 结构: advisory-db-main/crates/<crate>/RUSTSEC-YYYY-NNNN.md
+            parts = Path(name).parts
+            if len(parts) < 4 or parts[-2] != parts[-3]:
+                # 实际结构: crates/<crate>/<id>.md
+                continue
+            crate_name = parts[-3] if len(parts) >= 3 and parts[-4] == "crates" else None
+            if crate_name is None:
+                continue
+            if crate_name not in pkg_names:
+                continue
+
+            try:
+                content = zf.read(name).decode("utf-8")
+                # 提取 TOML front matter
+                if not content.startswith("---"):
+                    continue
+                _, front, _ = content.split("---", 2)
+                data = tomllib.loads(front.strip())
+
+                advisory = data.get("advisory", {})
+                affected = data.get("affected", {})
+                if advisory.get("package") != crate_name:
+                    continue
+
+                # 检查该 crate 在 Cargo.lock 中的每个版本是否受影响
+                matched_versions = []
+                for p in packages:
+                    if p["name"] == crate_name and version_in_range(p["version"], affected):
+                        matched_versions.append(p["version"])
+
+                if matched_versions:
+                    advisories.append({
+                        "id": advisory.get("id", "N/A"),
+                        "package": crate_name,
+                        "title": advisory.get("title", ""),
+                        "severity": advisory.get("severity", "unknown"),
+                        "versions": affected.get("functions", {}).get("version", "unknown"),
+                        "matched_versions": matched_versions,
+                        "url": advisory.get("url", ""),
+                    })
+            except Exception:
+                continue
+
+    return advisories
+
+
 def fetch_rustsec_advisories() -> list[dict]:
-    """获取 RustSec  advisory-db 中的 Rust 相关公告。"""
+    """获取 RustSec advisory-db 中的 Rust 相关公告。"""
     advisories = []
     try:
         # 尝试使用 cargo-audit 的输出（如果已安装）
@@ -64,10 +198,10 @@ def fetch_rustsec_advisories() -> list[dict]:
             ["cargo", "audit", "--json"],
             capture_output=True, text=True, timeout=30
         )
-        if result.returncode in (0, 1):
+        if result.returncode in (0, 1) and result.stdout.strip():
             data = json.loads(result.stdout)
             advisories = data.get("vulnerabilities", {}).get("list", [])
-    except (FileNotFoundError, subprocess.TimeoutExpired):
+    except (FileNotFoundError, subprocess.TimeoutExpired, json.JSONDecodeError):
         pass
     return advisories
 
@@ -133,17 +267,17 @@ def generate_report(packages, advisories):
     lines.append("## 已知安全公告")
     lines.append("")
     if advisories:
-        lines.append("| CVE/ID | 包名 | 影响版本 | 严重程度 |")
-        lines.append("|:---|:---|:---|:---|")
+        lines.append("| ID | 包名 | 影响版本 | 命中版本 | 严重程度 | 标题 |")
+        lines.append("|:---|:---|:---|:---|:---|:---|")
         for adv in advisories:
-            meta = adv.get("advisory", {})
-            affected = adv.get("versions", {}).get("patched", ["unknown"])
             lines.append(
-                f"| {meta.get('id', 'N/A')} | {meta.get('package', 'N/A')} | "
-                f"< {', '.join(affected)} | {meta.get('severity', 'unknown')} |"
+                f"| {adv.get('id', 'N/A')} | {adv.get('package', 'N/A')} | "
+                f"{adv.get('versions', 'unknown')} | "
+                f"{', '.join(adv.get('matched_versions', []))} | "
+                f"{adv.get('severity', 'unknown')} | {adv.get('title', '')} |"
             )
     else:
-        lines.append("✅ 未发现已知安全漏洞（或 cargo-audit 未安装，无法获取 advisory-db）。")
+        lines.append("✅ 未发现已知安全漏洞。")
     lines.append("")
 
     # 建议
@@ -169,6 +303,9 @@ def main():
 
     print("🔍 检查安全公告...")
     advisories = fetch_rustsec_advisories()
+    if not advisories:
+        # 若 cargo-audit 不可用，从 advisory-db 手动匹配
+        advisories = fetch_rustsec_advisories_from_db(packages)
     print(f"   发现 {len(advisories)} 个安全公告")
 
     print("🔍 生成报告...")

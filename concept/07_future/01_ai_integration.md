@@ -15,7 +15,7 @@
 > [Type System](../01_foundation/04_type_system.md) ·
 > [Traits](../02_intermediate/01_traits.md) ·
 > [Formal Methods](./02_formal_methods.md)
-> **主要来源**: [AI Coding Trends 2025-2026] · [Rust AI Ecosystem] · [Verus/Creusot + LLM] · [Wikipedia]
+> **主要来源**: [AI Coding Trends 2025-2026] · [Rust AI Ecosystem] · [Verus](https://verus-lang.github.io/verus/) / Creusot + LLM · [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 
 ---
@@ -181,7 +181,7 @@ fn rl_fix_borrow_error() {
 | 确定性 | 宏/条件编译引入不确定性 | 动态类型引入不确定性 | **相同输入 → 相同诊断** |
 | 错误可修复性 | 指针错误难以自动修复 | 类型错误运行时才发现 | **类型系统约束缩小搜索空间** |
 
-> **关键洞察**: Rust 编译器的**结构化密度**（每字节源码对应的诊断信息量）是 C++ 的 3-5 倍，这意味着 RL agent 的状态表示更紧凑、奖励信号更密集。[来源: Rust Reference: JSON Diagnostic Format] ✅
+> **关键洞察**: Rust 编译器的**结构化密度**（每字节源码对应的诊断信息量）是 C++ 的 3-5 倍，这意味着 RL agent 的状态表示更紧凑、奖励信号更密集。来源: [Rust Reference: JSON Diagnostic Format](https://doc.rust-lang.org/reference/) ✅
 
 ### 5.2 类型系统对 AI 生成的约束形式化
 
@@ -222,7 +222,7 @@ AI 生成空间 = 所有语法合法的 Rust 程序（超大规模）
 ---
 
 > **Bloom 层级**: 分析 → 创造
-> **[来源: Compiler-assisted AI / RL on Compiler Feedback] · [PLDI/ICML/NeurIPS Papers]** 强化学习（RL）在编译器错误修复中的应用，本质上是将编译器视为一个**确定性环境**（deterministic environment）：给定源代码输入，编译器输出结构化诊断反馈，这种反馈可作为 RL agent 的密集奖励信号。与传统监督学习依赖大量标注数据不同，RL 通过"生成-编译-修复"的迭代循环自主学习修复策略。✅
+> **[来源: Compiler-assisted AI / RL on Compiler Feedback] · [PLDI](https://www.sigplan.org/Conferences/PLDI/) / ICML / NeurIPS Papers** 强化学习（RL）在编译器错误修复中的应用，本质上是将编译器视为一个**确定性环境**（deterministic environment）：给定源代码输入，编译器输出结构化诊断反馈，这种反馈可作为 RL agent 的密集奖励信号。与传统监督学习依赖大量标注数据不同，RL 通过"生成-编译-修复"的迭代循环自主学习修复策略。✅
 
 ### 6.1 研究背景与问题定义
 >
@@ -423,7 +423,7 @@ Rust 编译器（`rustc --error-format=json`）输出的 JSON 结构化诊断，
 | `suggested_replacement` | 动作空间剪枝 | 将候选修复从全 token 空间缩小到建议替换 |
 | `children[].message` (help) | 附加状态特征 | 编译器主动提供修复方向提示 |
 
-> **定理**：Rust 编译器诊断的**结构化密度**（每字节源码对应的诊断信息量）远高于 C++（文本诊断）或 Python（运行时堆栈），这使得 Rust 的 RL 状态表示更紧凑、奖励信号更密集。`rustc` 的确定性（相同输入总是产生相同诊断）进一步保证了 MDP 转移函数的稳定性。[来源: Rust Reference: JSON Diagnostic Format] · [rustc-dev-guide]
+> **定理**：Rust 编译器诊断的**结构化密度**（每字节源码对应的诊断信息量）远高于 C++（文本诊断）或 Python（运行时堆栈），这使得 Rust 的 RL 状态表示更紧凑、奖励信号更密集。`rustc` 的确定性（相同输入总是产生相同诊断）进一步保证了 MDP 转移函数的稳定性。来源: [Rust Reference: JSON Diagnostic Format](https://doc.rust-lang.org/reference/) · [rustc-dev-guide]
 
 ### 6.5 与 LLM-based 修复的对比
 >
@@ -505,7 +505,7 @@ AI 生成代码具有统计不确定性：同一 Prompt 多次调用可能产生
 | **工具** | **作用** | **来源** |
 |:---|:---|:---|
 | `rustc --remap-path-prefix` | 消除构建路径差异 | [Rustc Docs] |
-| `cargo auditable` | 在二进制中嵌入依赖清单 | [RustSec] |
+| `cargo auditable` | 在二进制中嵌入依赖清单 | [RustSec](https://rustsec.org/) |
 | Nix + crane | 可复现的 Rust 构建 | [NixOS Wiki] |
 | `reproducible-builds` | Debian 发起的通用标准 | [Reproducible Builds] |
 
@@ -726,7 +726,7 @@ fn correct_fix(s: &str) -> String {
 | **论断** | **来源** | **可信度** | **Tier** |
 |:---|:---|:---:|:---:|
 | AI 生成代码有统计不确定性 | [LLM Research] | ✅ | Tier 1 |
-| Rust 编译器作为语义过滤器 | [RustBelt] · 原创分析 | 💡 | Tier 3 |
+| Rust 编译器作为语义过滤器 | [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · 原创分析 | 💡 | Tier 3 |
 | 编译错误可作为 RL 信号 | [Yasunaga & Liang, ICML 2021] | ✅ | Tier 1 |
 | 确定性容器与 Nix 关联 | [NixOS Wiki] · [Reproducible Builds] | ✅ | Tier 2 |
 | Compiler-Guided Decoding | [PLDI 2024/2025] | ⚠️ 前沿 | Tier 2 |

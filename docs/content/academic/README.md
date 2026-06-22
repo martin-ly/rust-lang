@@ -11,7 +11,7 @@
 
 ## 📋 目录
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Rust 学术研究对接](#rust-学术研究对接)
   - [📋 目录](#-目录)
@@ -47,7 +47,7 @@
 
 ## 🎯 目标
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本目录致力于：
 
@@ -60,7 +60,7 @@
 
 ## 📊 学术研究覆盖矩阵
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 研究领域 | 核心论文 | 工程影响 | 文档完整度 | 工具支持 |
 |----------|----------|----------|------------|----------|
@@ -76,13 +76,13 @@
 
 ## 🔬 RustBelt 项目
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 核心贡献
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 RustBelt 是首个对 Rust 内存安全保证进行形式化证明的研究项目。
 
@@ -103,9 +103,9 @@ RustBelt 论文链:
 
 ### 所有权形式化
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Iris 分离逻辑表示**:
 
@@ -145,9 +145,9 @@ Definition own_shared (l: loc) (v: val) : iProp :=
 
 ### 分离逻辑应用
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **关键概念**:
 
@@ -173,13 +173,13 @@ fn example() {
 
 ## 🌳 Tree Borrows
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 与 Stacked Borrows 对比
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | Stacked Borrows | Tree Borrows |
 |------|-----------------|--------------|
@@ -209,9 +209,9 @@ fn tree_borrows_allows() {
 
 ### 实际影响
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **对开发者的影响**:
 
@@ -230,11 +230,11 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 
 ## 🔍 Polonius
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Datalog 形式化
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 Polonius 是 Rust 借用检查器的新实现，使用 Datalog 规则。
 
@@ -270,7 +270,7 @@ error(Loan, Point) :-
 
 ### 与当前借用检查器对比
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 // 当前借用检查器: 拒绝
@@ -295,7 +295,7 @@ fn polonius_accepts() {
 
 ### Kani
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 **定位**: Rust 的模型检查器
 
@@ -339,7 +339,7 @@ fn verify_raw_ptr() {
 
 ### Prusti
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **定位**: 基于 Viper 的演绎验证器
 
@@ -373,7 +373,7 @@ fn find_max(array: &[i32]) -> i32 {
 
 ### Creusot
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **定位**: 使用 Why3 的 Rust 验证器
 
@@ -507,18 +507,18 @@ fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-> **[来源: Rust Reference]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-> **[来源: Rust Standard Library]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: ACM - Systems Programming]**
+> **来源: [ACM](https://dl.acm.org/)**
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-> **[来源: Rustonomicon]**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**

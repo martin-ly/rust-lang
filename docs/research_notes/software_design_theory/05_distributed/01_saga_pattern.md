@@ -40,13 +40,13 @@
 
 ## 1. 概念定义 (Def)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Def S1: Saga
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Saga 是一种**长事务管理模式**，它将一个长事务分解为一系列**本地事务**（Local Transactions），每个本地事务有对应的**补偿操作**（Compensating Transaction）。
 
@@ -61,9 +61,9 @@ Saga := (T, C, ≺, σ)
 
 ### Def S2: Saga 执行状态
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 State(Saga) :=
@@ -75,7 +75,7 @@ State(Saga) :=
 
 ### Def S3: 补偿正确性
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 补偿操作 cᵢ 对于事务 tᵢ 是**正确的**，当且仅当：
 
@@ -94,7 +94,7 @@ Correct(cᵢ, tᵢ) := ∀s. exec(tᵢ, s) = s' ∧ exec(cᵢ, s') = s''
 
 ### Axiom S1: 补偿幂等性
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```text
 ∀c ∈ C. exec(c, s) = s' → exec(c, s') = s'
@@ -104,7 +104,7 @@ Correct(cᵢ, tᵢ) := ∀s. exec(tᵢ, s) = s' ∧ exec(cᵢ, s') = s''
 
 ### Axiom S2: 偏序无环性
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```text
 ¬∃t₁, t₂, ..., tₙ ∈ T. t₁ ≺ t₂ ≺ ... ≺ tₙ ≺ t₁
@@ -114,7 +114,7 @@ Correct(cᵢ, tᵢ) := ∀s. exec(tᵢ, s) = s' ∧ exec(cᵢ, s') = s''
 
 ### Axiom S3: 最终一致性
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```text
 ∀tᵢ ∈ T. σ(tᵢ) = success → ◇(∀tⱼ ≺ tᵢ. σ(tⱼ) = success)
@@ -291,14 +291,14 @@ impl<S, E> SagaExecutor<S, E> {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Saga Pattern]**
-> **[来源: Wikipedia - Long-Running Transaction]**
+> **来源: [Wikipedia - Saga Pattern](https://en.wikipedia.org/wiki/Saga_Pattern)**
+> **来源: [Wikipedia - Long-Running Transaction](https://en.wikipedia.org/wiki/Long_Running_Transaction)**
 > **[来源: Hector Garcia-Molina - Sagas (1987)]**
 > **[来源: IEEE - Distributed Transaction Patterns]**
 > **[来源: ACM - Compensation-Based Transactions]**
-> **[来源: Wikipedia - Design Pattern]**
-> **[来源: Rust API Guidelines]**
-> **[来源: Gang of Four - Design Patterns]**
-> **[来源: ACM - Software Design Patterns]**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
+> **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
 
 ---

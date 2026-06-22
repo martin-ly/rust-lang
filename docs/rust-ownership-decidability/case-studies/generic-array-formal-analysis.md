@@ -10,7 +10,7 @@
 > **形式化框架**: typenum + 零成本抽象 + 内存安全
 >
 > **参考**: generic-array 0.14.x, typenum 1.17+, Rust 1.51+ Const Generics
-> **[来源: generic-array Documentation - docs.rs/generic-array]** · **[来源: typenum Documentation - docs.rs/typenum]** · **[来源: Rust Reference - Const Generics]** · **[来源: Wikipedia - Generic Programming]** · **[来源: RFC 2000 - Const Generics]** · **[来源: TRPL Ch. 19]** · **[来源: ACM - Type-Level Computation]** · **[来源: IEEE - Dependent Types in Practice]**
+> **[来源: generic-array Documentation - docs.rs/generic-array]** · **[来源: typenum Documentation - docs.rs/typenum]** · **来源: [Rust Reference - Const Generics](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Generic Programming](https://en.wikipedia.org/wiki/Generic_Programming)** · **来源: [RFC 2000 - Const Generics](https://github.com/rust-lang/rfcs/pull/2000)** · **来源: [TRPL Ch. 19](https://doc.rust-lang.org/book/ch19-00-advanced-features.html)** · **[来源: ACM - Type-Level Computation]** · **[来源: IEEE - Dependent Types in Practice]**
 >
 > **分析版本**: 2.0.0 - 完整技术深度分析
 
@@ -18,7 +18,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [Generic-Array 泛型数组形式化分析](#generic-array-泛型数组形式化分析)
   - [目录](#目录)
@@ -89,13 +89,13 @@
 
 ## 1. 项目概览
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 问题背景
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 在 Rust 1.51 引入 const generics (最小可行版本) 之前，Rust 开发者面临一个核心问题：**无法在泛型代码中使用固定大小的数组**。考虑以下场景：
 
@@ -117,7 +117,7 @@ fn process<N>(data: [u8; N])  // 错误：N 必须是编译时常量
 
 ### 1.2 历史演进
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```
 时间线:
@@ -137,7 +137,7 @@ fn process<N>(data: [u8; N])  // 错误：N 必须是编译时常量
 
 ### 1.3 核心设计目标
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 1. **零成本抽象**: GenericArray 与原生数组性能相同
 2. **内存安全**: 保持 Rust 的所有权和借用规则
@@ -152,7 +152,7 @@ fn process<N>(data: [u8; N])  // 错误：N 必须是编译时常量
 
 ### 2.1 类型级数字系统
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 typenum 是一个在 Rust 类型系统中实现无符号整数运算的库。其核心思想是将数字编码为类型：
 
@@ -180,7 +180,7 @@ example::<U32>();  // 打印: Array size: 32
 
 ### 2.2 UInt 类型结构
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 typenum 使用二叉树结构编码二进制数：
 
@@ -214,7 +214,7 @@ use typenum::consts::U5;  // 等同于上面
 
 ### 2.3 类型级运算
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 typenum 支持丰富的编译时运算：
 
@@ -256,7 +256,7 @@ type AesGcmOutputSize = Sum<BlockSize, TagSize>;  // U32
 
 ### 定理 2.1 (大小编码完备性)
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 > **定理**: typenum 类型系统可以编码任意无符号整数，并支持完整的算术运算，所有运算在编译时完成。
 >
@@ -297,7 +297,7 @@ any_size::<U65536>();  // 64 KB
 
 ### 3.1 内部实现
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 GenericArray 的核心定义：
 
@@ -336,7 +336,7 @@ unsafe impl<T> ArrayLength<T> for U4096 {
 
 ### 3.2 与原生数组对比
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 | 特性 | `[T; N]` (原生) | `GenericArray<T, N>` |
 |------|-----------------|----------------------|
@@ -374,7 +374,7 @@ fn extended(arr: GenericArray<u8, U32>) -> GenericArray<u8, U48> {
 
 ### 3.3 内存布局保证
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 GenericArray 提供与原生数组相同的内存布局保证：
 
@@ -399,7 +399,7 @@ fn verify_layout() {
 
 ### 定理 3.1 (内存布局等价性)
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 > **定理**: 对于任意类型 `T` 和大小 `N`，`GenericArray<T, N>` 与 `[T; N::USIZE]` 具有相同的内存布局、大小和对齐要求。
 >
@@ -438,7 +438,7 @@ fn layout_equivalence() {
 
 ### 4.1 大小抽象机制
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ArrayLength trait 是 generic-array 的核心抽象：
 
@@ -480,7 +480,7 @@ impl_array_length!(U0, U1, U2, U3, U4, U5, /* ... */ U512);
 
 ### 4.2 关联类型设计
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ArrayLength 使用关联类型模式实现类型级抽象：
 
@@ -504,7 +504,7 @@ fn check_storage() {
 
 ### 4.3 与其他 Trait 的交互
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ArrayLength 与标准库 trait 的集成：
 
@@ -551,7 +551,7 @@ impl<T: Copy, N: ArrayLength<T>> Copy for GenericArray<T, N> {}
 
 ### 5.1 default() - 默认构造
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 创建所有元素为默认值的数组：
 
@@ -578,7 +578,7 @@ fn default_example() {
 
 ### 5.2 from_slice() - 切片构造
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 从切片创建 GenericArray（切片长度必须匹配）：
 
@@ -620,7 +620,7 @@ fn clone_from_slice_example() {
 
 ### 5.3 clone_from_slice() - 克隆构造
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 适用于元素需要 Clone 的场景：
 
@@ -651,7 +651,7 @@ fn clone_example() {
 
 ### 5.4 其他构造方式
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **generate() - 函数式构造**：
 
@@ -697,7 +697,7 @@ fn from_iter_example() {
 
 ### 6.1 map 操作
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 对每个元素应用函数：
 
@@ -721,7 +721,7 @@ fn map_example() {
 
 ### 6.2 zip 操作
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 合并两个数组：
 
@@ -746,7 +746,7 @@ fn zip_example() {
 
 ### 6.3 as_slice 与类型转换
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use generic_array::GenericArray;
@@ -772,7 +772,7 @@ fn conversion_example() {
 
 ### 6.4 迭代器支持
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 GenericArray 支持多种迭代模式：
 
@@ -809,7 +809,7 @@ fn iterator_example() {
 
 ### 7.1 序列化实现
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 GenericArray 支持 serde 的 Serialize 和 Deserialize：
 
@@ -845,7 +845,7 @@ fn serialize_example() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 7.2 反序列化实现
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use generic_array::GenericArray;
@@ -877,7 +877,7 @@ fn deserialize_example() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 7.3 性能考量
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 use generic_array::GenericArray;
@@ -905,7 +905,7 @@ fn performance_notes() {
 
 ### 8.1 与 SHA-2 集成
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 generic-array 是 RustCrypto 生态的核心依赖：
 
@@ -934,7 +934,7 @@ fn sha2_example() {
 
 ### 8.2 与 AES 集成
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
 use aes::{Aes128, BlockEncrypt, BlockDecrypt, NewBlockCipher};
@@ -961,7 +961,7 @@ fn aes_example() {
 
 ### 8.3 固定大小块处理
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust,ignore
 use generic_array::{GenericArray, ArrayLength};
@@ -992,7 +992,7 @@ fn block_processing_example() {
 
 ### 定理 8.1 (密码学应用安全性)
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 > **定理**: 使用 GenericArray 实现的密码学原语具有与原生数组实现相同的安全性保证，包括内存安全和时序安全。
 >
@@ -1038,7 +1038,7 @@ fn security_example() {
 
 ### 9.1 Rust 1.51 后的演进
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 Rust 1.51 引入了 const generics MVP，允许：
 
@@ -1056,7 +1056,7 @@ struct Buffer<T, const N: usize> {
 
 ### 9.2 功能对比矩阵
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 | 功能 | Const Generics | generic-array |
 |------|---------------|---------------|
@@ -1071,7 +1071,7 @@ struct Buffer<T, const N: usize> {
 
 ### 9.3 迁移建议
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **何时使用 generic-array**：
 
@@ -1113,7 +1113,7 @@ where
 
 ### 10.1 与原生数组对比
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
@@ -1142,7 +1142,7 @@ fn benchmark_comparison(c: &mut Criterion) {
 
 ### 10.2 零成本抽象验证
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 编译器优化后的代码对比：
 
@@ -1167,7 +1167,7 @@ fn native_array_ops() -> i32 {
 
 ### 10.3 编译时开销
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use generic_array::GenericArray;
@@ -1192,7 +1192,7 @@ type Large = U4096;  // 较长编译时间
 
 ### 11.1 加密算法实现
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 use generic_array::{GenericArray, ArrayLength};
@@ -1222,7 +1222,7 @@ struct CbcMode {
 
 ### 11.2 网络协议头部
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 use generic_array::{GenericArray, typenum::consts::*};
@@ -1262,7 +1262,7 @@ struct EthernetHeader {
 
 ### 11.3 科学计算
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use generic_array::{GenericArray, ArrayLength};
@@ -1301,7 +1301,7 @@ fn vec3_example() {
 
 ### 12.1 泛型矩阵运算
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 use generic_array::{GenericArray, ArrayLength};
@@ -1373,7 +1373,7 @@ fn matrix_example() {
 
 ### 12.2 固定大小缓冲区
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use generic_array::{GenericArray, ArrayLength};
@@ -1658,43 +1658,43 @@ GenericArray 是 Rust 类型级编程的经典案例，它：
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Generic Programming]**
+> **来源: [Wikipedia - Generic Programming](https://en.wikipedia.org/wiki/Generic_Programming)**
 
-> **[来源: Wikipedia - Type-Level Programming]**
+> **来源: [Wikipedia - Type-Level Programming](https://en.wikipedia.org/wiki/Type_Level_Programming)**
 
-> **[来源: Wikipedia - Peano Axioms]**
+> **来源: [Wikipedia - Peano Axioms](https://en.wikipedia.org/wiki/Peano_Axioms)**
 
 > **[来源: IEEE - Dependent Types in Practice]**
 
 > **[来源: ACM - Type-Level Computation]**
 
-> **[来源: Rust Reference - Const Generics]**
+> **来源: [Rust Reference - Const Generics](https://doc.rust-lang.org/reference/)**
 
-> **[来源: Rust Reference - Generic Parameters]**
+> **来源: [Rust Reference - Generic Parameters](https://doc.rust-lang.org/reference/)**
 
 > **[来源: generic-array.rs Documentation]**
 
 > **[来源: typenum.rs Documentation]**
 
-> **[来源: RFC 2000 - Const Generics]**
+> **来源: [RFC 2000 - Const Generics](https://github.com/rust-lang/rfcs/pull/2000)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
-> **[来源: Wikipedia - Generic Programming]**
-> **[来源: TRPL Ch. 10 - Generics]**
-> **[来源: Rust Reference - Generics]**
-> **[来源: Wikipedia - Parametric Polymorphism]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
+> **来源: [Wikipedia - Generic Programming](https://en.wikipedia.org/wiki/Generic_Programming)**
+> **来源: [TRPL Ch. 10 - Generics](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)**
+> **来源: [Rust Reference - Generics](https://doc.rust-lang.org/reference/)**
+> **来源: [Wikipedia - Parametric Polymorphism](https://en.wikipedia.org/wiki/Parametric_Polymorphism)**
 
 ---
 

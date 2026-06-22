@@ -14,7 +14,7 @@
 
 ## 📊 目录 {#-目录}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [组合软件工程有效性形式论证](#组合软件工程有效性形式论证)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -53,7 +53,7 @@
 
 ## 宗旨
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 论证 Rust 组合软件工程的有效性：形式化定义组合、建立有效性定理、与 ownership/borrow/trait 衔接。
 
@@ -61,7 +61,7 @@
 
 ## 设计模式组合示例（实质内容）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 组合 | 实现要点 | 形式化衔接 |
 | :--- | :--- | :--- |
@@ -76,13 +76,13 @@
 
 ## 组合完整代码示例（层次推进）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 示例 1：Builder + Factory Method
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 trait Product { fn name(&self) -> &str; }
@@ -115,9 +115,9 @@ impl ConfigFactory for DefaultFactory {
 
 ### 示例 2：Repository + Service Layer + DTO（完整链条）
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // DTO：跨边界
@@ -148,9 +148,9 @@ impl<R: OrderRepository> OrderService<R> {
 
 ### 实例推导：CE-T1–T3 作用于模式组合（R1-01 最小交付）
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Decorator + Strategy 组合有效性推导**：
 
@@ -164,7 +164,7 @@ impl<R: OrderRepository> OrderService<R> {
 
 ## 文档索引
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文档 | 内容 |
 | :--- | :--- |
@@ -176,7 +176,7 @@ impl<R: OrderRepository> OrderService<R> {
 
 ## 核心问题
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **组合的形式化**：模块、crate、trait、泛型如何组合？组合满足何种性质？
 2. **有效性**：组合后的系统保持内存安全、类型安全、无数据竞争？
@@ -186,7 +186,7 @@ impl<R: OrderRepository> OrderService<R> {
 
 ## 形式化论证汇总
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def CE1（组合有效性）**：设 $C = M_1 \oplus \cdots \oplus M_n$ 为模块组合。若 $C$ 满足 CE-T1、CE-T2、CE-T3，则称 $C$ **有效**。
 
@@ -198,9 +198,9 @@ impl<R: OrderRepository> OrderService<R> {
 
 ### 组合法则依赖链（Def → Axiom → Lemma → Theorem → Corollary）
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 Def CE1 (组合有效性)     Def 1.1 (模块组合)
@@ -269,7 +269,7 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 
 ### L3/L4 验证工具索引
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 | 工具 | 用途 | 层级 | 链接/命令 |
 | :--- | :--- | :--- | :--- |
@@ -358,7 +358,7 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 
 ### Mermaid 形式化树图
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```mermaid
 flowchart TB
@@ -407,7 +407,7 @@ flowchart TB
 
 ### ASCII 形式化树图（模块→crate→进程→网络）
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```text
 组件构建能力形式化树（与 02_complete_43_catalog 联合）
@@ -517,13 +517,13 @@ L4 跨进程/跨网络（分布式、微服务）
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -534,7 +534,7 @@ L4 跨进程/跨网络（分布式、微服务）
 
 #### 代码示例更新
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 本文档中的所有Rust代码示例均已：
 
@@ -544,7 +544,7 @@ L4 跨进程/跨网络（分布式、微服务）
 
 #### 相关文档
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - Rust 1.94 迁移指南
 - [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
@@ -569,17 +569,17 @@ L4 跨进程/跨网络（分布式、微服务）
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
-> **[来源: Wikipedia - Type System]**
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**

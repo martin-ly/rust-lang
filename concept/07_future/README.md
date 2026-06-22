@@ -9,7 +9,7 @@
 > **定位**：Rust 在 AI 时代、形式化方法工业化、分布式系统形式化等前沿方向的**演进预测**与**需求驱动**。本层是知识体系的"前锋"，反向约束下层设计。
 > **Bloom 层级**: 评价 → 创造
 > **功能**: 预测演进方向，反向驱动 L1-L6 的更新
-> **[来源: Rust RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Blog - blog.rust-lang.org]** · **[来源: Wikipedia - Artificial Intelligence]** · **[来源: Formal Methods Industry Reports 2026]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **[来源: Rust Blog - blog.rust-lang.org]** · **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)** · **[来源: Formal Methods Industry Reports 2026]**
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -30,7 +30,7 @@ mindmap
       RustBelt工具化[Iris → 工具实现]
     语言演进
       Edition机制[Edition 机制]
-      RFC流程[RFC 流程]
+      RFC流程[Rust RFCs](https://github.com/rust-lang/rfcs)
       泛型完善[Const 泛型 / GATs / 特化]
       效果系统[Effects / Type System 扩展]
       版本跟踪[Rust 版本跟踪]
@@ -82,7 +82,7 @@ graph TB
     FM --> FM3[Trace-Checking 运行时]
 
     EV --> EV1[Edition 机制]
-    EV --> EV2[RFC 流程]
+    EV --> EV2[Rust RFCs](https://github.com/rust-lang/rfcs)
     EV --> EV3[Const 泛型 / GATs / 特化]
     EV --> EV4[Effects / Type System 扩展]
 

@@ -87,7 +87,7 @@
 
 ## 引言
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 所有权是Rust最独特的特性，它使Rust能够在没有垃圾回收器的情况下保证内存安全。
 本教程将深入讲解所有权系统的工作原理、规则以及如何利用它编写安全的代码。
@@ -96,13 +96,13 @@
 
 ## 第一部分：为什么需要所有权
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 内存管理的困境
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 传统语言面临的三难问题：
 
@@ -124,9 +124,9 @@
 
 ### Rust的解决方案
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 所有权系统在编译时检查内存安全，无需运行时开销：
 
@@ -154,13 +154,13 @@ fn makes_copy(i: i32) {
 
 ## 第二部分：所有权规则
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 三大规则
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **每个值都有一个所有者**
 2. **同一时间只能有一个所有者**
@@ -168,9 +168,9 @@ fn makes_copy(i: i32) {
 
 ### 作用域与生命周期
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 {
@@ -186,9 +186,9 @@ fn makes_copy(i: i32) {
 
 ### 内存表示
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```
 栈                    堆
@@ -209,13 +209,13 @@ s离开作用域时:
 
 ## 第三部分：移动语义
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 什么是移动
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 let s1 = String::from("hello");
@@ -232,9 +232,9 @@ println!("{}", s2);    // OK
 
 ### 浅复制的问题(Copy vs Move)
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // C++中的问题(如果只有浅拷贝)
@@ -257,7 +257,7 @@ let s2 = s1;                    // 移动: s1失效，只有s2释放
 
 ### 哪些类型实现Copy
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust
 // 实现Copy的类型(栈上简单复制)
@@ -275,7 +275,7 @@ println!("{}", x); // OK! x仍然有效
 
 ### 自定义类型的Copy
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 #[derive(Copy, Clone)]
@@ -304,7 +304,7 @@ struct Container {
 
 ### 为什么需要借用
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 // 不使用借用: 需要返回值来继续使用
@@ -330,7 +330,7 @@ println!("{} 长度是 {}", s1, len);  // s1仍然可用!
 
 ### 借用规则
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 // 规则1: 可同时有多个不可变借用
@@ -350,7 +350,7 @@ println!("{}", r1);  // r1最后使用在这里
 
 ### 借用与作用域
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 let mut s = String::from("hello");
@@ -373,7 +373,7 @@ r2.push_str("!");
 
 ### 编译器如何防止
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 fn dangle() -> &String {  // 错误! 返回悬垂引用
@@ -387,7 +387,7 @@ fn dangle() -> &String {  // 错误! 返回悬垂引用
 
 ### 正确的做法
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 // 方案1: 返回所有权
@@ -410,7 +410,7 @@ fn first_word(s: &str) -> &str {
 
 ### String vs &str
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 // String: 拥有所有权的可变字符串(堆分配)
@@ -428,7 +428,7 @@ let world = &s[6..11];   // "world"
 
 ### 字符串字面量
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 let s: &'static str = "hello";  // 'static生命周期
@@ -444,7 +444,7 @@ let s: &'static str = "hello";  // 'static生命周期
 
 ### 模式1: 所有权转移
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 fn process(data: Vec<u8>) -> Vec<u8> {
@@ -459,7 +459,7 @@ let processed = process(data);  // 转移所有权
 
 ### 模式2: 借用检查
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 fn analyze(data: &[u8]) -> Analysis {
@@ -477,7 +477,7 @@ let a2 = analyze(&data);  // 可以同时多次借用
 
 ### 模式3: 可变借用
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 fn normalize(data: &mut Vec<f64>) {
@@ -512,7 +512,7 @@ normalize(&mut data);  // 可变借用修改数据
 
 ### 所有权定理
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **定理 (所有权唯一性)**: 在任意程序点，每个值最多只有一个有效的所有者。
 
@@ -525,7 +525,7 @@ normalize(&mut data);  // 可变借用修改数据
 
 ### 与形式化文档的关联
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | 概念 | 形式化定义 | 文档位置 |
 | :--- | :--- | :--- |
@@ -578,7 +578,7 @@ Rust的所有权系统是其最独特的特性。
 
 ### C/C++中的内存错误
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 在C/C++中，以下错误很常见：
 
@@ -608,7 +608,7 @@ void leak() {
 
 ### 传统解决方案的局限
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 方案 | 优点 | 缺点 |
 | :--- | :--- | :--- |
@@ -626,7 +626,7 @@ void leak() {
 
 ### 规则很简单
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 1. **每个值有且只有一个所有者**
 2. **所有者离开作用域，值被丢弃**
@@ -634,7 +634,7 @@ void leak() {
 
 ### 直观理解：图书馆比喻
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 想象一个图书馆系统：
 
@@ -662,7 +662,7 @@ void leak() {
 
 ### 安全保证1：没有悬垂指针
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **问题**: 在C中，指针指向已释放内存。
 
@@ -687,7 +687,7 @@ Move(s1, s2, v) 后:
 
 ### 安全保证2：没有双重释放
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **问题**: 在C中，同一内存被释放两次。
 
@@ -710,7 +710,7 @@ Move(s1, s2, v) 后:
 
 ### 安全保证3：没有数据竞争
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **问题**: 多线程同时读写同一数据。
 
@@ -749,7 +749,7 @@ w.push(4);  // OK，没有其他引用
 
 ### 定理 T-OW2: 所有权唯一性
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 **陈述**: 对于任何值v，在任意时刻，最多存在一个变量x拥有v。
 
@@ -764,7 +764,7 @@ w.push(4);  // OK，没有其他引用
 
 ### 定理 T-BR1: 数据竞争自由
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **陈述**: 借用检查通过的程序无数据竞争。
 
@@ -993,17 +993,17 @@ fn main() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: Wikipedia - Ownership (programming)]**
+> **来源: [Wikipedia - Ownership (programming)](https://en.wikipedia.org/wiki/Ownership_(programming))**
 
-> **[来源: Wikipedia - Resource Acquisition Is Initialization]**
+> **来源: [Wikipedia - Resource Acquisition Is Initialization](https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization)**
 
-> **[来源: Rust Reference - Ownership]**
+> **来源: [Rust Reference - Ownership](https://doc.rust-lang.org/reference/)**
 
-> **[来源: TRPL Ch. 4 - Understanding Ownership]**
+> **来源: [TRPL Ch. 4 - Understanding Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
 > **[来源: ACM - Memory Management in Systems Languages]**
 
@@ -1018,18 +1018,18 @@ fn main() {
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---

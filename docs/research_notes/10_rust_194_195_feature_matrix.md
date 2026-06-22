@@ -44,7 +44,7 @@
 
 ## 特性矩阵概览
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | 1.93 | 1.94 | 1.95 | 形式化文档 | 完成度 |
 | :--- | :---: | :---: | :---: | :--- | :---: |
@@ -70,13 +70,13 @@
 
 ## 形式化文档更新计划
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 高优先级更新
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文档 | 更新内容 | 预计工时 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -87,9 +87,9 @@
 
 ### 中优先级更新
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文档 | 更新内容 | 预计工时 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -101,13 +101,13 @@
 
 ## 新增形式化定义
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Def 1.94-1 (RangeToInclusive)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义**: `RangeToInclusive<T>` 表示从起始到 `end`（含）的范围
 
@@ -126,9 +126,9 @@ RangeToInclusive<T> = { x | x ≤ end }
 
 ### Def 1.94-2 (ControlFlow::ok)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义**: `ControlFlow<B, C>::ok() -> Option<C>` 将 Continue 映射为 Some，Break 映射为 None
 
@@ -145,9 +145,9 @@ ok(Break(_)) = None
 
 ### Def 1.94-3 (RefCell::try_map)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义**: 条件映射 RefCell 内部值，失败时保留原引用
 
@@ -163,9 +163,9 @@ try_map: Ref<T> -> (T -> Option<U>) -> Result<Ref<U>, Ref<T>>
 
 ### Def 1.95-1 (生成器状态机)
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义**: 生成器是一个状态机，状态为 `Yielded(Y)` 或 `Complete(R)`
 
@@ -181,11 +181,11 @@ Generator<Yield=Y, Return=R>:
 
 ## 证明更新清单
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 定理更新
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 定理 | 更新内容 | 状态 |
 | :--- | :--- | :--- |
@@ -320,20 +320,20 @@ Generator<Yield=Y, Return=R>:
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-> **[来源: Rust Reference]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-> **[来源: Rust Standard Library]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: ACM - Systems Programming]**
+> **来源: [ACM](https://dl.acm.org/)**
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-> **[来源: Rustonomicon]**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

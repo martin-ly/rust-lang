@@ -26,7 +26,7 @@
 
 ## 项目目标
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 理解异步原理，创建简化版async运行时。
 
@@ -34,7 +34,7 @@
 
 ## 功能需求
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] Future trait实现
 - [ ] 任务调度器
@@ -46,7 +46,7 @@
 
 ## 学习要点
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 自定义Future
 >
@@ -106,9 +106,9 @@ impl Future for MyFuture {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: TRPL Ch. 17 - Async]**
-> **[来源: Tokio Documentation]**
-> **[来源: RFC 2394 - Async/Await]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+> **来源: [TRPL Ch. 17 - Async](https://doc.rust-lang.org/book/ch17-00-async-await.html)**
+> **来源: [Tokio Documentation](https://tokio.rs/)**
+> **来源: [RFC 2394 - Async/Await](https://rust-lang.github.io/rfcs/2394-2394-async_await.html)**
 
 ---

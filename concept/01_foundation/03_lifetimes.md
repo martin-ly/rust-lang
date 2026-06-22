@@ -19,7 +19,7 @@
 > **双维定位**: C×App — 在复杂场景下正确标注生命周期
 > **前置概念**: [Ownership](./01_ownership.md) · [Borrowing](./02_borrowing.md)
 > **后置概念**: [Advanced Generics](../02_intermediate/02_generics.md) · [Async/Await](../03_advanced/02_async.md) · [Pin](../03_advanced/02_async.md)
-> **主要来源**: [TRPL: Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) · [Wikipedia: Region-based memory management] · [Rust Reference: Lifetime elision]
+> **主要来源**: [TRPL: Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) · [Wikipedia: Region-based memory management](https://en.wikipedia.org/wiki/Region_based_memory_management) · [Rust Reference: Lifetime elision](https://doc.rust-lang.org/reference/lifetime-elision.html)
 
 ---
 
@@ -110,15 +110,15 @@
 
 ### 1.1 TRPL 官方定义
 
-> **[TRPL: Ch10.3]** Lifetimes are another kind of generic that we've already been using. Rather than ensuring that a type has the behavior we want, lifetimes ensure that references are valid as long as we need them to be. Every reference in Rust has a lifetime, which is the scope for which that reference is valid.
+> **[TRPL Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)** Lifetimes are another kind of generic that we've already been using. Rather than ensuring that a type has the behavior we want, lifetimes ensure that references are valid as long as we need them to be. Every reference in Rust has a lifetime, which is the scope for which that reference is valid.
 
 ### 1.2 Wikipedia 对齐定义
 
-> **[Wikipedia: Region-based memory management]** Region-based memory management is a type of memory management in which each allocated object is assigned to a region. A region, also called a zone, arena, area, or memory context, is a collection of allocated objects that can be efficiently deallocated all at once. In Rust, lifetimes are a form of **static region inference** where regions are associated with references and checked at compile time.
+> **[Wikipedia: Region-based memory management](https://en.wikipedia.org/wiki/Region_based_memory_management)** Region-based memory management is a type of memory management in which each allocated object is assigned to a region. A region, also called a zone, arena, area, or memory context, is a collection of allocated objects that can be efficiently deallocated all at once. In Rust, lifetimes are a form of **static region inference** where regions are associated with references and checked at compile time.
 
 ### 1.3 形式化定义（区域类型）
 
-> **[Wikipedia: Region-based memory management]** Rust uses a system of lifetimes that can be understood as **region types** (Tofte & Talpin, 1994) adapted for an imperative, non-GC language. Each reference `&'a T` is parameterized by a lifetime `'a` representing the region during which the reference is guaranteed to be valid.
+> **[Wikipedia: Region-based memory management](https://en.wikipedia.org/wiki/Region_based_memory_management)** Rust uses a system of lifetimes that can be understood as **region types** (Tofte & Talpin, 1994) adapted for an imperative, non-GC language. Each reference `&'a T` is parameterized by a lifetime `'a` representing the region during which the reference is guaranteed to be valid.
 
 > **过渡**: 权威定义从学术和官方来源确立了生命周期的语义——引用有效期的编译期保证。而概念属性矩阵则将这些语义转化为可操作的规则对比——`'a` 标注的不同形式、生命周期关系的推导规则、以及它们与所有权、借用系统的交互约束。
 
@@ -205,7 +205,7 @@ NLL 的关键改进:
   求解器: 从基于"作用域嵌套树"变为基于"CFG 数据流分析"
 ```
 
-> **来源**: [rustc NLL [RFC 2094](https://rust-lang.github.io/rfcs//2094-nll.html) — Non-Lexical Lifetimes] · [Rust Reference: Lifetime resolution] · [rustc borrow_check/src/region_inference/mod.rs]
+> **来源**: [rustc NLL [RFC 2094](https://rust-lang.github.io/rfcs//2094-nll.html) — Non-Lexical Lifetimes] · [Rust Reference: Lifetime resolution](https://doc.rust-lang.org/reference/) · [rustc borrow_check/src/region_inference/mod.rs]
 
 #### 与 Polonius 的演进关系
 
@@ -333,7 +333,7 @@ graph TD
   ⟹ 悬垂指针（dangling pointer）在 Safe Rust 的编译期被消除
 ```
 
-> **[来源: Tofte & Talpin 1994]** 区域类型的核心公理：引用值的有效区域不能超出被引用值的有效区域。✅
+> **来源: [Tofte & Talpin 1994](https://en.wikipedia.org/wiki/Region-based_memory_management)** 区域类型的核心公理：引用值的有效区域不能超出被引用值的有效区域。✅
 
 ### 4.2 引理：生命周期构成偏序集 ⟹ outlives 关系可传递
 >
@@ -400,7 +400,7 @@ graph BT
   ⟹ 合法的 Rust 程序集在 NLL 下严格大于词法作用域下的程序集
 ```
 
-> **[来源: RFC 2094]** NLL 将生命周期从词法作用域扩展到基于数据流的实际使用期，减少不必要的借用冲突。✅
+> **来源: [RFC 2094](https://rust-lang.github.io/rfcs/2094-2094-nll.html)** NLL 将生命周期从词法作用域扩展到基于数据流的实际使用期，减少不必要的借用冲突。✅
 
 ### 4.5 定理：Variance 子类型安全 ⟹ 生命周期替换的合法性
 
@@ -428,7 +428,7 @@ graph BT
   ⟹ Box::leak、LazyLock、字符串字面量等全局/泄漏数据的使用是类型安全的
 ```
 
-> **[来源: TRPL: Ch10.3]** 'static 作为最长生命周期，可安全 coercion 为任意较短生命周期。✅
+> **来源: [TRPL Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)** 'static 作为最长生命周期，可安全 coercion 为任意较短生命周期。✅
 
 ### 4.7 推论：HRTB 全称量化 ⟹ 高阶回调的类型安全
 

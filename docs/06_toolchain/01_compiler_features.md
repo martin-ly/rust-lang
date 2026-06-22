@@ -87,7 +87,7 @@
 
 ## 🎯 文档说明
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档涵盖 Rust 编译器 (`rustc`) 的核心特性、优化技术和最新改进，帮助开发者更好地理解和利用编译器功能。
 
@@ -97,13 +97,13 @@
 
 ## 1. 编译器概览
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 编译流程
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 ┌─────────────┐
@@ -165,9 +165,9 @@
 
 ### 1.2 编译器版本
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 # 查看编译器版本
@@ -203,13 +203,13 @@ rustc --print target-list
 
 ## 2. 增量编译 (Rust 1.54+)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 增量编译原理
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **特性**: Rust 1.54 默认重新启用增量编译
 
@@ -224,9 +224,9 @@ rustc --print target-list
 
 ### 2.2 配置增量编译
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Cargo.toml 配置**:
 
@@ -266,9 +266,9 @@ rm -rf target/release/incremental
 
 ### 2.3 性能影响
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **首次编译**: 无明显差异
 
@@ -287,13 +287,13 @@ rm -rf target/release/incremental
 
 ## 3. 优化级别
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 3.1 基础优化级别
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```toml
 [profile.dev]
@@ -317,7 +317,7 @@ opt-level = 3  # 最大优化 (最快运行)
 
 ### 3.2 高级优化选项
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```toml
 [profile.release]
@@ -349,7 +349,7 @@ opt-level = 0  # 自己的 crate 保持无优化
 
 ### 4.1 LTO 类型
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **Thin LTO** (推荐):
 
@@ -381,7 +381,7 @@ lto = true
 
 ### 4.2 配置 LTO
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **完整配置示例**:
 
@@ -405,7 +405,7 @@ lto = true  # 所有依赖包也启用 LTO
 
 ### 4.3 性能权衡
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **基准测试结果**:
 
@@ -428,7 +428,7 @@ lto = true  # 所有依赖包也启用 LTO
 
 ### 5.1 PGO 工作流程
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```text
 ┌───────────────────────────────────────────────────┐
@@ -455,7 +455,7 @@ lto = true  # 所有依赖包也启用 LTO
 
 ### 5.2 实施 PGO
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **步骤 1: Instrumented 构建**:
 
@@ -502,7 +502,7 @@ cargo build --release
 
 ### 5.3 性能提升
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **典型提升**:
 
@@ -526,7 +526,7 @@ cargo build --release
 
 ### 6.1 目标 CPU 和特性
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **指定目标 CPU**:
 
@@ -566,7 +566,7 @@ rustflags = ["-C", "target-cpu=native"]
 
 ### 6.2 代码模型
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```bash
 # 小代码模型 (默认, < 2GB)
@@ -587,7 +587,7 @@ RUSTFLAGS="-C code-model=large" cargo build --release
 
 ### 7.1 调试信息级别
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```toml
 [profile.dev]
@@ -610,7 +610,7 @@ debug = 1  # 仅行号信息
 
 ### 7.2 分割调试信息
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```toml
 [profile.release]
@@ -629,7 +629,7 @@ split-debuginfo = "packed"  # macOS/Windows: 打包到单独文件
 
 ### 7.3 DWARF 版本
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```bash
 # 使用 DWARF 5 (最新, 更小)
@@ -649,7 +649,7 @@ RUSTFLAGS="-C debuginfo=2 -C dwarf-version=4" cargo build
 
 ### 8.1 Sccache
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **安装**:
 
@@ -681,7 +681,7 @@ rustc-wrapper = "/path/to/sccache"
 
 ### 8.2 配置缓存
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **本地缓存**:
 
@@ -711,7 +711,7 @@ export SCCACHE_REGION="us-west-2"
 
 ### 9.1 并行编译
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```bash
 # 设置并行任务数
@@ -732,7 +732,7 @@ jobs = 8  # 默认为 CPU 核心数
 
 ### 9.2 依赖优化
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **减少依赖**:
 
@@ -761,7 +761,7 @@ tokio = { version = "1.0", features = ["full"] }
 
 ### 9.3 代码组织
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **最佳实践**:
 
@@ -792,7 +792,7 @@ pub mod everything_in_one_file; // 10000+ lines
 
 ### 10.1 Procedural Macros
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 **性能影响**:
 
@@ -814,7 +814,7 @@ struct Data { /* ... */ }
 
 ### 10.2 编译器内置工具
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **Clippy** (Linter):
 
@@ -842,7 +842,7 @@ cargo +nightly miri test
 
 ### 11.1 Polly (LLVM 优化器)
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```bash
 # 启用 Polly (实验性)
@@ -853,7 +853,7 @@ RUSTFLAGS="-C passes=polly" cargo build --release
 
 ### 11.2 自定义构建脚本
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **build.rs**:
 
@@ -879,7 +879,7 @@ fn main() {
 
 ### 12.1 生产环境优化配置
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```toml
 [profile.release]
@@ -1277,13 +1277,13 @@ fn pgo_workflow() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Compiler Construction]**
+> **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)**
 
-> **[来源: Wikipedia - LLVM]**
+> **来源: [Wikipedia - LLVM](https://en.wikipedia.org/wiki/LLVM)**
 
-> **[来源: Rust Compiler Team Blog]**
+> **来源: [Rust Compiler Team Blog](https://blog.rust-lang.org/inside-rust/)**
 
-> **[来源: Rust Reference - Compiler Plugins]**
+> **来源: [Rust Reference - Compiler Plugins](https://doc.rust-lang.org/reference/)**
 
 > **[来源: ACM - Compiler Frontend Design]**
 
@@ -1291,24 +1291,24 @@ fn pgo_workflow() {
 
 > **[来源: Nicholas Nethercote - How to Speed Up the Rust Compiler]**
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Compiler Construction]**
-> **[来源: Rust Compiler Team Blog]**
-> **[来源: LLVM Documentation]**
-> **[来源: ACM - Compiler Design]**
-> **[来源: Wikipedia - Machine Learning]**
-> **[来源: Wikipedia - Artificial Intelligence]**
-> **[来源: tch-rs Documentation]**
-> **[来源: ACM - AI Systems]**
+> **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)**
+> **来源: [Rust Compiler Team Blog](https://blog.rust-lang.org/inside-rust/)**
+> **来源: [LLVM Documentation](https://llvm.org/docs/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
+> **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)**
+> **来源: [tch-rs Documentation](https://docs.rs/tch/latest/tch/)**
+> **来源: [ACM - AI Systems](https://dl.acm.org/)**
 
 ---

@@ -72,3 +72,31 @@
 ## 相关概念
 
 - [NLL 与 Polonius (concept)](../../../concept/03_advanced/08_nll_and_polonius.md) — Location-sensitive Polonius 与并发借用分析
+
+
+## 📚 模块 8: 国际化对齐
+
+> 本模块按项目模板补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 说明 |
+|:---|:---|
+| [TRPL Ch16 — Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html) | 并发基础 |
+| [Rustonomicon — Concurrency](https://doc.rust-lang.org/nomicon/concurrency.html) | 并发高级话题 |
+| [std::sync](https://doc.rust-lang.org/std/sync/) | 同步原语 API |
+
+### 8.2 学术/工业来源
+
+| 来源 | 说明 |
+|:---|:---|
+| [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | Send / Sync 语义 |
+
+### 8.3 社区资源
+
+| 来源 | 说明 |
+|:---|:---|
+| [Rayon Documentation](https://docs.rs/rayon/latest/rayon/) | 数据并行 |
+| [Crossbeam](https://github.com/crossbeam-rs/crossbeam) | 并发原语库 |
+| [Rust Cookbook — Concurrency](https://rust-lang-nursery.github.io/rust-cookbook/concurrency.html) | 并发模式 |
+

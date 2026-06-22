@@ -11,7 +11,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Blockchain]** · **[来源: Wikipedia - Smart Contract]** · **[来源: Substrate Documentation - docs.substrate.io]** · **[来源: Solana Documentation - docs.solana.com]** · **[来源: Ethereum Documentation - ethereum.org]** · **[来源: ACM - Distributed Ledger Technology]** · **[来源: IEEE - Blockchain Security Standards]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Blockchain](https://en.wikipedia.org/wiki/Blockchain)** · **来源: [Wikipedia - Smart Contract](https://en.wikipedia.org/wiki/Smart_Contract)** · **[来源: Substrate Documentation - docs.substrate.io]** · **[来源: Solana Documentation - docs.solana.com]** · **[来源: Ethereum Documentation - ethereum.org]** · **[来源: ACM - Distributed Ledger Technology]** · **[来源: IEEE - Blockchain Security Standards]**
 
 - [Rust 区块链/Web3 开发完整指南](#rust-区块链web3-开发完整指南)
   - [目录](#目录)
@@ -61,13 +61,13 @@
 
 ## 1. 区块链开发概述
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 为什么Rust适合区块链
 
-> **[来源: Wikipedia - Blockchain]**
+> **来源: [Wikipedia - Blockchain](https://en.wikipedia.org/wiki/Blockchain)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Rust在区块链领域迅速崛起成为首选语言，主要基于以下核心优势：
 
@@ -97,7 +97,7 @@ Rust在区块链领域迅速崛起成为首选语言，主要基于以下核心�
 
 ### 1.2 内存安全与共识算法
 
-> **[来源: Wikipedia - Smart Contract]**
+> **来源: [Wikipedia - Smart Contract](https://en.wikipedia.org/wiki/Smart_Contract)**
 
 区块链系统的共识算法对执行确定性有严格要求。Rust的所有权系统从根本上保障了这一点：
 
@@ -161,7 +161,7 @@ Rust的高性能特性：
 
 ## 2. 智能合约开发
 
-> **[来源: Wikipedia - Smart Contract]** · **[来源: Substrate Documentation]** · **[来源: Solana Documentation]**
+> **来源: [Wikipedia - Smart Contract](https://en.wikipedia.org/wiki/Smart_Contract)** · **[来源: Substrate Documentation]** · **[来源: Solana Documentation]**
 
 ### 2.1 ink!框架介绍
 
@@ -361,7 +361,7 @@ pub mod pallet {
 
 ### 2.3 Solana Rust程序
 
-> **[来源: Wikipedia - Blockchain]**
+> **来源: [Wikipedia - Blockchain](https://en.wikipedia.org/wiki/Blockchain)**
 
 Solana使用Rust编写原生程序，基于BPF（Berkeley Packet Filter）字节码：
 
@@ -403,7 +403,7 @@ pub fn process_instruction(
 
 ### 2.4 NEAR合约
 
-> **[来源: Wikipedia - Smart Contract]**
+> **来源: [Wikipedia - Smart Contract](https://en.wikipedia.org/wiki/Smart_Contract)**
 
 NEAR Protocol的智能合约开发：
 
@@ -441,11 +441,11 @@ impl Contract {
 
 ### 3.1 共识算法实现
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 #### 工作量证明 (PoW)
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 use sha2::{Sha256, Digest};
@@ -513,7 +513,7 @@ pub struct Block {
 
 #### 权益证明 (PoS)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 use rand::Rng;
@@ -576,7 +576,7 @@ pub enum StakeError {
 
 #### 拜占庭容错 (BFT)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 use std::collections::{HashMap, HashSet};
@@ -654,7 +654,7 @@ pub enum ConsensusEvent {
 
 ### 3.2 交易池管理
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use std::collections::{BTreeMap, HashMap, HashSet};
@@ -862,11 +862,11 @@ impl Plumtree {
 
 ## 6. 存储层
 
-> **[来源: Wikipedia - Distributed Ledger]** · **[来源: Rust Database Ecosystem]** · **[来源: Wikipedia - Consensus]**
+> **来源: [Wikipedia - Distributed Ledger](https://en.wikipedia.org/wiki/Distributed_Ledger)** · **[来源: Rust Database Ecosystem]** · **来源: [Wikipedia - Consensus](https://en.wikipedia.org/wiki/Consensus)**
 
 ### 6.1 LevelDB/RocksDB集成
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 use rocksdb::{DB, Options, ColumnFamilyDescriptor, WriteBatch};
@@ -1003,7 +1003,7 @@ pub struct Header {
 
 ### 6.2 状态数据库
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 /// 状态数据库 - 维护账户状态
@@ -1106,7 +1106,7 @@ struct SnapshotMeta {
 
 ### 6.3 归档节点
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 /// 归档节点配置
@@ -1257,7 +1257,7 @@ impl From<serde_json::Error> for ArchiveError {
 
 ### 7.1 区块结构
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 use sha2::{Sha256, Digest};
@@ -1393,7 +1393,7 @@ fn current_timestamp() -> u64 {
 
 ### 7.2 挖矿算法
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 use rayon::prelude::*;
@@ -1520,7 +1520,7 @@ impl Miner {
 
 ### 7.3 交易验证
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use secp256k1::{Secp256k1, Message, PublicKey, ecdsa::Signature};
@@ -1676,7 +1676,7 @@ pub struct Receipt {
 
 ### 7.4 网络同步
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use tokio::sync::{mpsc, RwLock};
@@ -1895,7 +1895,7 @@ pub enum BlockError {
 
 ### 8.1 DEX核心逻辑
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 /// 自动做市商(AMM) - Uniswap V2风格
@@ -2156,7 +2156,7 @@ pub enum DeFiError {
 
 ### 8.2 借贷协议
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 /// 超额抵押借贷协议（Compound/Aave风格）
@@ -2413,7 +2413,7 @@ pub enum LendingError {
 
 ### 8.3 流动性池
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 /// 多代币流动性池 - Balancer风格
@@ -2529,7 +2529,7 @@ impl WeightedPool {
 
 ### 9.1 重入攻击防护
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 /// 重入攻击防护模式
@@ -2642,7 +2642,7 @@ pub enum SecurityError {
 
 ### 9.2 整数溢出防护
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use num_traits::{CheckedAdd, CheckedSub, CheckedMul, CheckedDiv};
@@ -2773,7 +2773,7 @@ pub enum MathError {
 
 ### 9.3 访问控制
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 use std::collections::HashSet;
@@ -2966,7 +2966,7 @@ pub enum AccessError {
 
 ### 10.1 本地测试网
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use std::process::{Command, Child};
@@ -3106,7 +3106,7 @@ pub enum TestError {
 
 ### 10.2 单元测试
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 #[cfg(test)]
@@ -3267,7 +3267,7 @@ mod tests {
 
 ### 10.3 审计工具
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 /// 安全审计检查器
@@ -3415,7 +3415,7 @@ pub mod static_analysis {
 
 ### 学习资源
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 | 资源 | 链接 | 描述 |
 |------|------|------|
@@ -3427,7 +3427,7 @@ pub mod static_analysis {
 
 ### 常用Crates
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```toml
 [dependencies]
@@ -3486,13 +3486,13 @@ tokio-test = "0.4"
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Blockchain]**
+> **来源: [Wikipedia - Blockchain](https://en.wikipedia.org/wiki/Blockchain)**
 
-> **[来源: Wikipedia - Smart Contract]**
+> **来源: [Wikipedia - Smart Contract](https://en.wikipedia.org/wiki/Smart_Contract)**
 
-> **[来源: Wikipedia - Cryptocurrency]**
+> **来源: [Wikipedia - Cryptocurrency](https://en.wikipedia.org/wiki/Cryptocurrency)**
 
-> **[来源: Wikipedia - Distributed Ledger]**
+> **来源: [Wikipedia - Distributed Ledger](https://en.wikipedia.org/wiki/Distributed_Ledger)**
 
 > **[来源: IEEE - Blockchain Security Standards]**
 
@@ -3506,70 +3506,70 @@ tokio-test = "0.4"
 
 > **[来源: Web3 Foundation Research]**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages Survey]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design and Implementation]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM - Systems Programming Languages Survey](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI - Programming Language Design and Implementation](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
-> **[来源: Wikipedia - Machine Learning]**
-> **[来源: Wikipedia - Artificial Intelligence]**
-> **[来源: tch-rs Documentation]**
-> **[来源: ACM - AI Systems]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
+> **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
+> **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)**
+> **来源: [tch-rs Documentation](https://docs.rs/tch/latest/tch/)**
+> **来源: [ACM - AI Systems](https://dl.acm.org/)**
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Wikipedia - Type System]**
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**

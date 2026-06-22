@@ -6,7 +6,7 @@
 > **受众**: [专家]
 > **Bloom 层级**: 元（Meta）
 > **定位**: 本文件为 L1-L4 核心概念建立从**定义**出发的完整判定链：**前提假设 → 推理规则 → 判定条件 → 边界 → 失效模式**。与 `theorem_inference_forest.md`（从 L4 公理出发的定理链）形成互补：后者回答「安全保证从哪来」，本文件回答「编译器/开发者如何逐步判定代码是否合法」。
-> **对齐来源**: [Gentzen 自然演绎系统] · [Novak & Cañas (2008) 概念地图理论] · [Torchiano et al. (2018) 边界分析] · [Rust Reference 类型判断规则] · [RustBelt POPL 2018 安全性条件]
+> **对齐来源**: [Gentzen 自然演绎系统] · [Novak & Cañas (2008) 概念地图理论] · [Torchiano et al. (2018) 边界分析] · [Rust Reference 类型判断规则](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 > **符号约定**: `⊢` 推导 / `⟹` 蕴含 / `⇐` 依赖 / `⊘` 反例 / `≡` 等价 / `∧` 与 / `∨` 或
 
 >
@@ -17,8 +17,8 @@
 >
 > **来源**: [Novak, J.D. & Cañas, A.J. — *The Theory Underlying Concept Maps*. Technical Report, Florida Institute for Human and Machine Cognition, 2008]
 > **来源**: [Torchiano et al. (2018) — 软件工程知识库边界分析研究]
-> **来源**: [Rust Reference — 类型系统判断规则]
-> **来源**: [RustBelt (Jung et al., POPL 2018) — 安全性充分条件]
+> **来源**: [Rust Reference — 类型系统判断规则](https://doc.rust-lang.org/reference/)
+> **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 
 ## 📑 目录
 
@@ -140,7 +140,7 @@ mindmap
 ┌─────────────────────────────────────────────────────────────┐
 │ 概念定义                                                    │
 │ 「每个值在任意时刻有且只有一个所有者」                        │
-│   [来源: Rust Reference §4.1; RustBelt T-001]               │
+│   来源: [Rust Reference §4.1; RustBelt T-001](https://doc.rust-lang.org/reference/)               │
 └─────────────────────────────────────────────────────────────┘
                               │
         ┌─────────────────────┼─────────────────────┐
@@ -247,7 +247,7 @@ graph TD
 ┌─────────────────────────────────────────────────────────────┐
 │ 概念定义                                                    │
 │ 「借用是通过引用 (&T / &mut T) 临时访问值，不转移所有权」      │
-│   [来源: Rust Reference §4.2; RustBelt Borrow Prop]         │
+│   来源: [Rust Reference §4.2; RustBelt Borrow Prop](https://doc.rust-lang.org/reference/)         │
 └─────────────────────────────────────────────────────────────┘
                               │
         ┌─────────────────────┼─────────────────────┐
@@ -348,7 +348,7 @@ graph TD
 ┌─────────────────────────────────────────────────────────────┐
 │ 概念定义                                                    │
 │ 「生命周期是引用有效的程序点集合，编译期构造，不进入机器码」   │
-│   [来源: Rust Reference §10.3; Tofte-Talpin 区域类型]       │
+│   来源: [Rust Reference §10.3; Tofte-Talpin 区域类型](https://doc.rust-lang.org/reference/)       │
 └─────────────────────────────────────────────────────────────┘
                               │
         ┌─────────────────────┼─────────────────────┐
@@ -458,7 +458,7 @@ graph TD
 ┌─────────────────────────────────────────────────────────────┐
 │ 概念定义                                                    │
 │ 「Trait 是定义共享行为的接口，可被类型实现，可被泛型约束」     │
-│   [来源: Rust Reference §8.18; Haskell Typeclass 对应]      │
+│   来源: [Rust Reference §8.18; Haskell Typeclass 对应](https://doc.rust-lang.org/reference/)      │
 └─────────────────────────────────────────────────────────────┘
                               │
         ┌─────────────────────┼─────────────────────┐
@@ -567,7 +567,7 @@ graph TD
 │ 概念定义                                                    │
 │ 「泛型是参数化多态，允许函数/类型/Trait 对多种类型工作，      │
 │   编译器通过单态化生成具体代码」                              │
-│   [来源: Rust Reference §6.11; System F ∀T.λx:T]            │
+│   来源: [Rust Reference §6.11; System F ∀T.λx:T](https://doc.rust-lang.org/reference/)            │
 └─────────────────────────────────────────────────────────────┘
                               │
         ┌─────────────────────┼─────────────────────┐
@@ -672,7 +672,7 @@ graph TD
 │ 概念定义                                                    │
 │ 「Rust 通过类型系统（Send/Sync）在编译期排除数据竞争，        │
 │   实现 fearless concurrency」                                │
-│   [来源: Rust Reference §13; RustBelt Thread Safety]        │
+│   来源: [Rust Reference §13; RustBelt Thread Safety](https://doc.rust-lang.org/reference/)        │
 └─────────────────────────────────────────────────────────────┘
                               │
         ┌─────────────────────┼─────────────────────┐
@@ -777,7 +777,7 @@ graph TD
 │ 概念定义                                                    │
 │ 「async/await 是协作式多任务的语法糖，编译器将 async fn      │
 │   变换为实现了 Future trait 的状态机」                        │
-│   [来源: Rust Reference Ch 17; Tokio 文档]                  │
+│   来源: [Rust Reference Ch 17; Tokio 文档](https://doc.rust-lang.org/reference/)                  │
 └─────────────────────────────────────────────────────────────┘
                               │
         ┌─────────────────────┼─────────────────────┐
@@ -888,7 +888,7 @@ graph TD
 │ 概念定义                                                    │
 │ 「unsafe 是 Rust 的安全边界逃逸舱口，标记程序员手动维护       │
 │   编译器不再验证的不变式」                                   │
-│   [来源: Rust Reference §16; Rustonomicon §1]               │
+│   来源: [Rust Reference §16; Rustonomicon §1](https://doc.rust-lang.org/reference/)               │
 └─────────────────────────────────────────────────────────────┘
                               │
         ┌─────────────────────┼─────────────────────┐

@@ -7,9 +7,9 @@
 
 ## Table of Contents
 
-> **[来源: serde.rs Documentation]**
+> **来源: [serde.rs Documentation](https://serde.rs/)**
 >
-> **[来源: serde.rs Documentation]** · **[来源: Rust Reference - Traits]** · **[来源: Wikipedia - Serialization]** · **[来源: Rust API Guidelines]** · **[来源: Wikipedia - JSON]** · **[来源: Rust Standard Library - std::fmt]** · **[来源: Wikipedia - Remote Procedure Call]** · **[来源: ACM - Data Serialization Performance]** · **[来源: IEEE - Schema Evolution in Data Formats]**
+> **来源: [serde.rs Documentation](https://serde.rs/)** · **来源: [Rust Reference - Traits](https://doc.rust-lang.org/reference/items/traits.html)** · **来源: [Wikipedia - Serialization](https://en.wikipedia.org/wiki/Serialization)** · **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** · **来源: [Wikipedia - JSON](https://en.wikipedia.org/wiki/JSON)** · **[来源: Rust Standard Library - std::fmt]** · **来源: [Wikipedia - Remote Procedure Call](https://en.wikipedia.org/wiki/Remote_Procedure_Call)** · **[来源: ACM - Data Serialization Performance]** · **[来源: IEEE - Schema Evolution in Data Formats]**
 
 - [Serde Serialization Framework: Formal Analysis and Deep Dive](#serde-serialization-framework-formal-analysis-and-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -95,17 +95,17 @@
 
 ## 1. Introduction
 
-> **[来源: Rust Reference - Derive Macros]**
+> **来源: [Rust Reference - Derive Macros](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Serde is Rust's most widely used serialization framework, providing a powerful, type-safe, and zero-cost abstraction for converting Rust data structures to and from various data formats. This document provides a comprehensive formal analysis of Serde's architecture, implementation patterns, common pitfalls, and performance characteristics.
 
 ### 1.1 Design Philosophy
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Serde follows several core design principles:
 
@@ -117,7 +117,7 @@ Serde follows several core design principles:
 
 ### 1.2 Why Serde Matters
 
-> **[来源: ACM - Formal Verification Survey]**
+> **来源: [ACM - Formal Verification Survey](https://dl.acm.org/)**
 
 In the context of Rust's ownership system, Serde demonstrates how complex data transformations can be:
 
@@ -130,11 +130,11 @@ In the context of Rust's ownership system, Serde demonstrates how complex data t
 
 ## 2. Serde Architecture
 
-> **[来源: serde.rs Documentation]** · **[来源: Rust Reference - Derive]** · **[来源: Wikipedia - Serialization]**
+> **来源: [serde.rs Documentation](https://serde.rs/)** · **来源: [Rust Reference - Derive](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Serialization](https://en.wikipedia.org/wiki/Serialization)**
 
 ### 2.1 Core Traits
 
-> **[来源: IEEE - Specification Standards]**
+> **来源: [IEEE - Specification Standards](https://standards.ieee.org/)**
 
 The foundation of Serde rests on two primary traits that define the contract between data structures and serialization formats:
 
@@ -181,7 +181,7 @@ pub trait Deserialize<'de>: Sized {
 
 #### 2.1.1 Detailed Trait Analysis
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **Serialize Trait Semantics:**
 
@@ -214,7 +214,7 @@ where
 
 ### 2.2 Data Model
 
-> **[来源: TLA+ Documentation]**
+> **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**
 
 Serde defines a unified data model that abstracts over all supported formats. This model captures the essential structure of data without format-specific details.
 
@@ -272,7 +272,7 @@ pub struct TypeInfo {
 
 #### 2.2.1 Data Model Formal Specification
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **Definition 2.1 (Data Type Completeness):**
 A serialization format is *complete* with respect to Serde if it can represent all variants of `DataType`. Most formats are incomplete in practice:
@@ -288,7 +288,7 @@ For any two types T₁ and T₂ where T₁ ≠ T₂, if format F can distinguish
 
 ### 2.3 Serializer Trait
 
-> **[来源: Coq Reference Manual]**
+> **来源: [Coq Reference Manual](https://coq.inria.fr/doc/)**
 
 The `Serializer` trait defines the interface that data structures use to output their data:
 
@@ -395,7 +395,7 @@ pub trait Serializer: Sized {
 
 ### 2.4 Deserializer Trait
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
 The `Deserializer` trait is the dual of `Serializer`, providing methods to extract typed data:
 
@@ -584,11 +584,11 @@ pub trait Deserializer<'de>: Sized {
 
 ## 3. Serialization Deep Dive
 
-> **[来源: Wikipedia - Serialization]**
+> **来源: [Wikipedia - Serialization](https://en.wikipedia.org/wiki/Serialization)**
 
 ### 3.1 Serializer Pattern
 
-> **[来源: Pierce 2002 - TAPL]**
+> **来源: [Pierce 2002 - TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)**
 
 The serializer pattern in Serde uses a visitor-style approach where:
 
@@ -598,7 +598,7 @@ The serializer pattern in Serde uses a visitor-style approach where:
 
 #### 3.1.1 State Machine Pattern
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 Serialization follows a state machine pattern where each compound type creates a context:
 
@@ -645,7 +645,7 @@ impl<W: Write> JsonSerializer<W> {
 
 ### 3.2 Type-Driven Serialization
 
-> **[来源: POPL 2020 - Oxide]**
+> **来源: [POPL 2020 - Oxide](https://www.sigplan.org/Conferences/POPL/)**
 
 Serde serialization is type-driven, meaning the Rust type system determines the serialization format:
 
@@ -675,7 +675,7 @@ enum Message {
 
 #### 3.2.1 Serialization Strategy Matrix
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | Rust Type | Default JSON | With Attributes | Bincode |
 |-----------|--------------|-----------------|---------|
@@ -687,7 +687,7 @@ enum Message {
 
 ### 3.3 Zero-Copy Serialization
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 While zero-copy is primarily a deserialization concern, serialization also benefits from borrowed data:
 
@@ -720,11 +720,11 @@ fn serialize_borrowed() {
 
 ## 4. Deserialization Deep Dive
 
-> **[来源: serde.rs Documentation]** · **[来源: Rust Reference - Traits]** · **[来源: Wikipedia - Deserialization]**
+> **来源: [serde.rs Documentation](https://serde.rs/)** · **来源: [Rust Reference - Traits](https://doc.rust-lang.org/reference/items/traits.html)** · **来源: [Wikipedia - Deserialization](https://en.wikipedia.org/wiki/Deserialization)**
 
 ### 4.1 Lifetime Management
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 Lifetime management is the most complex aspect of Serde deserialization. The `'de` lifetime parameter represents the data source's lifetime.
 
@@ -756,7 +756,7 @@ fn demonstrate_lifetimes() {
 
 #### 4.1.1 Lifetime Categories
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 /// Category 1: Owned deserialization
@@ -788,7 +788,7 @@ struct MixedData<'de> {
 
 #### 4.1.2 The `'de` Lifetime in Detail
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 // The 'de lifetime appears in multiple places:
@@ -822,7 +822,7 @@ pub trait Deserializer<'de>: Sized {
 
 ### 4.2 Visitor Pattern
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 The visitor pattern decouples type construction from data parsing. This is crucial for handling format-specific quirks.
 
@@ -889,7 +889,7 @@ pub trait Visitor<'de>: Sized {
 
 #### 4.2.1 Custom Visitor Example
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 use serde::de::{self, Deserialize, Deserializer, Visitor, SeqAccess};
@@ -945,7 +945,7 @@ impl<'de> Deserialize<'de> for StringOrVec {
 
 ### 4.3 Access Traits
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 For compound types, Serde provides access traits that iterate over elements:
 
@@ -1031,17 +1031,17 @@ pub trait VariantAccess<'de> {
 
 ## 5. Derive Macros Analysis
 
-> **[来源: Wikipedia - JSON]**
+> **来源: [Wikipedia - JSON](https://en.wikipedia.org/wiki/JSON)**
 
 ### 5.1 Serialize Derive
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 The `#[derive(Serialize)]` macro generates an implementation of the `Serialize` trait.
 
 #### 5.1.1 Code Generation Analysis
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 // Input:
@@ -1068,7 +1068,7 @@ impl Serialize for Person {
 
 #### 5.1.2 Field Attributes
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 #[derive(Serialize)]
@@ -1105,13 +1105,13 @@ fn default_count() -> u32 {
 
 ### 5.2 Deserialize Derive
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 The `#[derive(Deserialize)]` macro generates an implementation of the `Deserialize` trait.
 
 #### 5.2.1 Code Generation Analysis
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 // Input:
@@ -1210,7 +1210,7 @@ impl<'de> Deserialize<'de> for Field {
 
 #### 5.2.2 Field Mapping and Defaults
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 #[derive(Deserialize)]
@@ -1247,7 +1247,7 @@ fn default_count() -> u32 {
 
 ### 5.3 Enum Representations
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 Serde supports multiple enum serialization strategies:
 
@@ -1306,11 +1306,11 @@ enum Untagged {
 
 ## 6. Counter-Examples and Pitfalls
 
-> **[来源: Rust Reference]** · **[来源: Rust API Guidelines]** · **[来源: serde.rs - Best Practices]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** · **[来源: serde.rs - Best Practices]**
 
 ### Counter-Example 1: Lifetime Mismatch in Deserialize
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **Problem:** Trying to return borrowed data beyond its lifetime.
 
@@ -1349,7 +1349,7 @@ fn lifetime_mismatch_demo() {
 
 ### Counter-Example 2: Recursive Type Without Indirection
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **Problem:** Recursive types cause infinite size.
 
@@ -1385,7 +1385,7 @@ struct LinkedListNode {
 
 ### Counter-Example 3: Self-Referential Deserialize
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **Problem:** Creating self-referential structs during deserialization.
 
@@ -1427,7 +1427,7 @@ struct ExternalReference {
 
 ### Counter-Example 4: Untagged Enum Ambiguity
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **Problem:** Untagged enums can deserialize to wrong variants.
 
@@ -1485,7 +1485,7 @@ fn complex_ambiguity() {
 
 ### Counter-Example 5: Flatten + deny_unknown_fields
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **Problem:** Incompatible attributes causing deserialization failures.
 
@@ -1540,7 +1540,7 @@ struct CatchAllConfig {
 
 ### Counter-Example 6: Skip_serializing_none Confusion
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **Problem:** Misunderstanding when fields are skipped.
 
@@ -1597,7 +1597,7 @@ fn skip_confusion_demo() {
 
 ### Counter-Example 7: Borrow str but get owned String
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **Problem:** Expecting zero-copy but getting allocation anyway.
 
@@ -1657,7 +1657,7 @@ fn flexible_demo() {
 
 ### Counter-Example 8: DeserializeOwned Not Implemented
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **Problem:** Generic constraints for owned deserialization.
 
@@ -1715,7 +1715,7 @@ fn correct_borrowing() {
 
 ### Counter-Example 9: Custom Visitor Missing Case
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **Problem:** Incomplete visitor implementations cause deserialization failures.
 
@@ -1797,7 +1797,7 @@ impl<'de> Visitor<'de> for CompleteVisitor {
 
 ### Counter-Example 10: Serde_json Value Extraction
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **Problem:** Incorrect extraction from `serde_json::Value`.
 
@@ -1879,7 +1879,7 @@ fn struct_extraction(data: Value) -> Result<UserData, serde_json::Error> {
 
 ### Counter-Example 11: Zero-Copy with Escape Sequences
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **Problem:** Expecting zero-copy when format requires processing.
 
@@ -1953,7 +1953,7 @@ fn correct_escape_handling() {
 
 ### Counter-Example 12: Stream Deserialization Error
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **Problem:** Incorrect handling of streaming deserialization.
 
@@ -2040,7 +2040,7 @@ fn robust_streaming(data: &str) -> Vec<Event> {
 
 ### Counter-Example 13: Field Rename Confusion
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **Problem:** Mismatched field naming between serialization and deserialization.
 
@@ -2111,7 +2111,7 @@ fn flexible_naming() {
 
 ### Counter-Example 14: Default Deserialization Panic
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **Problem:** Panics during default value generation.
 
@@ -2197,7 +2197,7 @@ impl RobustConfig {
 
 ### Counter-Example 15: Internally Tagged Enum Failure
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **Problem:** Internally tagged enums have limitations with certain variant types.
 
@@ -2291,13 +2291,13 @@ fn external_tagged_demo() {
 
 ### 7.1 JSON Implementation
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 The `serde_json` crate is the reference implementation for JSON serialization.
 
 #### 7.1.1 Architecture
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 /// Core JSON serializer
@@ -2316,7 +2316,7 @@ pub struct Deserializer<R> {
 
 #### 7.1.2 JSON-Specific Considerations
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 // Number handling
@@ -2350,7 +2350,7 @@ fn json_escapes() {
 
 ### 7.2 Bincode Implementation
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 Bincode is a compact binary format optimized for speed and size.
 
@@ -2374,7 +2374,7 @@ fn bincode_demo() {
 
 #### 7.2.1 Bincode Characteristics
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | Feature | Behavior |
 |---------|----------|
@@ -2386,7 +2386,7 @@ fn bincode_demo() {
 
 ### 7.3 MessagePack Implementation
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 MessagePack is a binary format that aims for JSON compatibility with better performance.
 
@@ -2419,7 +2419,7 @@ fn messagepack_demo() {
 
 #### 7.3.1 MessagePack vs JSON vs Bincode
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 | Aspect | JSON | MessagePack | Bincode |
 |--------|------|-------------|---------|
@@ -2434,11 +2434,11 @@ fn messagepack_demo() {
 
 ## 8. Performance Analysis
 
-> **[来源: RFC 8259 - JSON]**
+> **来源: [RFC 8259 - JSON](https://github.com/rust-lang/rfcs/pull/8259)**
 
 ### 8.1 Zero-Copy Benefits
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 Zero-copy deserialization eliminates memory allocation for borrowed data:
 
@@ -2480,7 +2480,7 @@ fn benchmark_zero_copy() {
 
 #### 8.1.1 Zero-Copy Benchmarks
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | Scenario | Allocations (Zero-Copy) | Allocations (Owned) | Speedup |
 |----------|-------------------------|---------------------|---------|
@@ -2491,7 +2491,7 @@ fn benchmark_zero_copy() {
 
 ### 8.2 Streaming
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 Streaming deserialization processes large data without loading everything into memory:
 
@@ -2532,7 +2532,7 @@ fn alert(msg: &str) {
 
 ### 8.3 Buffer Reuse
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 Reusing buffers reduces allocation overhead:
 
@@ -2564,7 +2564,7 @@ fn process(value: serde_json::Value) {
 
 #### 8.3.1 Performance Comparison
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | Approach | Time (1M records) | Peak Memory |
 |----------|-------------------|-------------|
@@ -2577,11 +2577,11 @@ fn process(value: serde_json::Value) {
 
 ## 9. Case Study: API Server
 
-> **[来源: serde.rs Documentation]**
+> **来源: [serde.rs Documentation](https://serde.rs/)**
 
 ### 9.1 Complete Serialization Layer Design
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 This case study demonstrates a production-ready serialization layer for a REST API server.
 
@@ -2858,7 +2858,7 @@ fn main() {
 
 ### 9.2 Performance Considerations
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 // High-performance batch processing
@@ -2914,11 +2914,11 @@ fn hash_password(password: &str) -> String {
 
 ## 10. Formal Theorems
 
-> **[来源: Rust Reference - Derive Macros]**
+> **来源: [Rust Reference - Derive Macros](https://doc.rust-lang.org/reference/)**
 
 ### Theorem 1: Serialization Roundtrip Completeness
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **Statement:** For any type T implementing both `Serialize` and `Deserialize<'de>` for any `'de`, if format F is complete with respect to Serde's data model, then for all values x: T:
 
@@ -2946,7 +2946,7 @@ where x' is observationally equivalent to x.
 
 ### Theorem 2: Zero-Copy Borrow Safety
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **Statement:** For any type T<'de> implementing `Deserialize<'de>`, if deserializer D provides data with lifetime 'de, then for any field f: &'de U in T, the reference f is valid for exactly lifetime 'de.
 
@@ -2968,7 +2968,7 @@ where x' is observationally equivalent to x.
 
 ### Theorem 3: Enum Representation Unambiguity
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **Statement:** For any enum E with variants V₁...Vₙ, the deserialization of E from format F is unambiguous if and only if the representation of each variant is pairwise disjoint in F.
 
@@ -2991,7 +2991,7 @@ where x' is observationally equivalent to x.
 
 ### Theorem 4: Monomorphization Efficiency
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **Statement:** For generic serialization function S<T, F>() where T is a type and F is a format, the generated code has no dynamic dispatch overhead compared to a hand-written S for specific T and F.
 
@@ -3013,11 +3013,11 @@ Benchmarks show serde-generated serialization within 1-5% of hand-written code.
 
 ## 11. Appendices
 
-> **[来源: Wikipedia - Serialization]**
+> **来源: [Wikipedia - Serialization](https://en.wikipedia.org/wiki/Serialization)**
 
 ### Appendix A: Custom Serializer Implementation
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 use serde::{Serialize, Serializer, ser::{self, SerializeSeq}};
@@ -3209,7 +3209,7 @@ impl ser::Error for BinaryError {
 
 ### Appendix B: Custom Deserializer Implementation
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 use serde::de::{self, Deserialize, Deserializer, Visitor, SeqAccess, MapAccess};
@@ -3409,7 +3409,7 @@ impl de::Error for BinaryError {
 
 ### Appendix C: Performance Benchmarks
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 // Benchmark harness for comparing serialization formats
@@ -3473,7 +3473,7 @@ mod benches {
 
 ### Appendix D: Quick Reference
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | Attribute | Effect | Example |
 |-----------|--------|---------|
@@ -3517,13 +3517,13 @@ mod benches {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Serialization]**
+> **来源: [Wikipedia - Serialization](https://en.wikipedia.org/wiki/Serialization)**
 
-> **[来源: Wikipedia - Remote Procedure Call]**
+> **来源: [Wikipedia - Remote Procedure Call](https://en.wikipedia.org/wiki/Remote_Procedure_Call)**
 
-> **[来源: Wikipedia - Data Interchange Format]**
+> **来源: [Wikipedia - Data Interchange Format](https://en.wikipedia.org/wiki/Data_Interchange_Format)**
 
-> **[来源: Wikipedia - Schema Evolution]**
+> **来源: [Wikipedia - Schema Evolution](https://en.wikipedia.org/wiki/Schema_Evolution)**
 
 > **[来源: IEEE - Data Exchange Protocols]**
 
@@ -3531,70 +3531,70 @@ mod benches {
 
 > **[来源: ACM - Schema Migration Strategies]**
 
-> **[来源: serde.rs Documentation]**
+> **来源: [serde.rs Documentation](https://serde.rs/)**
 
-> **[来源: Rust Reference - Traits]**
+> **来源: [Rust Reference - Traits](https://doc.rust-lang.org/reference/items/traits.html)**
 
-> **[来源: RFC 0019 - Opt-in Builtin Traits]**
+> **来源: [RFC 0019 - Opt-in Builtin Traits](https://github.com/rust-lang/rfcs/pull/0019)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages Survey]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design and Implementation]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM - Systems Programming Languages Survey](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI - Programming Language Design and Implementation](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Wikipedia - Type System]**
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ---
 

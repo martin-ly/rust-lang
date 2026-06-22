@@ -7,7 +7,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [内存管理范式深度对比](#内存管理范式深度对比)
   - [目录](#目录)
@@ -60,7 +60,7 @@
 
 ## 概述
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 内存管理是编程语言设计的核心问题之一。
 不同的内存管理范式代表了在开发效率、运行时性能和安全性之间的不同权衡。
@@ -76,11 +76,11 @@
 
 ## 手动内存管理
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 原理
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 程序员显式分配和释放内存，拥有完全控制权。
 
@@ -133,7 +133,7 @@ void manual_management_demo() {
 
 ### C++ 的现代改进
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```cpp
 #include <memory>
@@ -168,7 +168,7 @@ void custom_deleter() {
 
 ### 优缺点分析
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 优点 | 缺点 |
 |------|------|
@@ -179,7 +179,7 @@ void custom_deleter() {
 
 ### 常见错误模式
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```c
 // 错误 1: 内存泄漏
@@ -219,13 +219,13 @@ void buffer_overflow() {
 
 ### 原理
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 运行时系统自动追踪不再使用的内存并回收。
 
 ### 主要 GC 算法
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```java
 // Java 垃圾回收示例
@@ -258,7 +258,7 @@ public class GCDemo {
 
 #### 标记-清除（Mark-Sweep）
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```
 阶段 1: 标记（从根对象开始遍历）
@@ -282,7 +282,7 @@ public class GCDemo {
 
 #### 复制算法（Copying）
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```
 From 空间          To 空间（复制后）
@@ -299,7 +299,7 @@ From 空间          To 空间（复制后）
 
 #### 分代收集（Generational）
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```
 ┌────────────────────────────────────────────────┐
@@ -320,7 +320,7 @@ From 空间          To 空间（复制后）
 
 ### Go 的并发 GC
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```go
 package main
@@ -365,7 +365,7 @@ func init() {
 
 ### GC 优缺点
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 优点 | 缺点 |
 |------|------|
@@ -380,7 +380,7 @@ func init() {
 
 ### 原理
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 每个对象维护一个引用计数器，计数为零时立即释放。
 
@@ -418,7 +418,7 @@ node2.ref = node1
 
 ### Swift 的 ARC（自动引用计数）
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```swift
 // Swift 使用 ARC，编译器自动插入引用计数操作
@@ -464,7 +464,7 @@ func arcDemo() {
 
 ### 引用计数变体
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | 类型 | 描述 | 用途 |
 |------|------|------|
@@ -491,7 +491,7 @@ struct Node {
 
 ### 优缺点分析
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 | 优点 | 缺点 |
 |------|------|
@@ -506,7 +506,7 @@ struct Node {
 
 ### 核心原理
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 Rust 的所有权系统在编译期跟踪资源生命周期：
 
@@ -538,7 +538,7 @@ fn calculate_length(s: &String) -> usize {
 
 ### 借用规则
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 // 借用规则：
@@ -567,7 +567,7 @@ fn borrowing_rules() {
 
 ### 生命周期
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 // 显式生命周期注解
@@ -597,7 +597,7 @@ fn static_lifetime() {
 
 ### 智能指针
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use std::rc::Rc;
@@ -653,7 +653,7 @@ fn refcell_example() {
 
 ### 优缺点分析
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 优点 | 缺点 |
 |------|------|
@@ -668,7 +668,7 @@ fn refcell_example() {
 
 ### 原理
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 基于作用域（区域）管理内存，离开区域自动释放。
 
@@ -1030,19 +1030,19 @@ public class HybridMemory {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Management]**
+> **来源: [Wikipedia - Memory Management](https://en.wikipedia.org/wiki/Memory_Management)**
 
-> **[来源: Rustonomicon - Memory Layout]**
+> **来源: [Rustonomicon - Memory Layout](https://doc.rust-lang.org/nomicon/repr-rust.html)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
 > **[来源: ACM - Memory Safety]**
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---
 

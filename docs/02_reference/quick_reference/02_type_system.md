@@ -92,7 +92,7 @@
 
 ## 📋 目录
 >
-> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Type System]** · **[来源: Wikipedia - Type Inference]** · **[来源: ACM - Advanced Type System Features]** · **[来源: IEEE - Type Safety Verification]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)** · **来源: [Wikipedia - Type Inference](https://en.wikipedia.org/wiki/Type_Inference)** · **来源: [ACM - Advanced Type System Features](https://dl.acm.org/)** · **来源: [IEEE - Type Safety Verification](https://standards.ieee.org/)**
 
 - [🔷 Rust 类型系统速查卡](#-rust-类型系统速查卡)
   - [📑 目录](#-目录)
@@ -170,13 +170,13 @@
 
 ## 🎯 核心概念
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 类型安全三支柱
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 1. 静态类型检查（编译期）
@@ -188,13 +188,13 @@
 
 ## 📐 基本类型速查
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 标量类型
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 整数
@@ -218,9 +218,9 @@ let h: char = '🦀';    // Unicode 字符
 
 ### 复合类型
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 元组
@@ -240,13 +240,13 @@ let s2: String = String::from("world");  // 堆字符串
 
 ## 🏗️ Trait 系统
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 定义与实现
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 trait Summary {
@@ -274,9 +274,9 @@ impl Summary for Article {
 
 ### Trait 作为参数
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 方式 1: impl Trait
@@ -302,9 +302,9 @@ where
 
 ### Trait 作为返回值
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // impl Trait 语法
@@ -325,11 +325,11 @@ fn returns_trait_object() -> Box<dyn Summary> {
 
 ## 🔄 类型转换
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### From/Into
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 // From trait
@@ -349,7 +349,7 @@ let my: MyType = 42.into();
 
 ### TryFrom/TryInto（可失败转换）
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use std::convert::TryFrom;
@@ -373,7 +373,7 @@ let pos = PositiveInt::try_from(42)?;
 
 ### as 转换（基本类型）
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 let a = 3.14f64;
@@ -389,7 +389,7 @@ let c = 100i32 as u8;  // 100
 
 ### 泛型函数
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 fn largest<T: PartialOrd>(list: &[T]) -> &T {
@@ -407,7 +407,7 @@ fn largest<T: PartialOrd>(list: &[T]) -> &T {
 
 ### 泛型结构体
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 struct Point<T> {
@@ -433,7 +433,7 @@ impl Point<f32> {
 
 ### 关联类型
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 trait Iterator {
@@ -459,7 +459,7 @@ impl Iterator for Counter {
 
 ### 协变（Covariant）- &T
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 // 'long 是 'short 的子类型
@@ -475,7 +475,7 @@ where
 
 ### 逆变（Contravariant）- fn(T)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 // 函数参数是逆变的
@@ -493,7 +493,7 @@ fn contravariant<'short, 'long>(
 
 ### 不变（Invariant）- &mut T
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 // &mut T 是不变的
@@ -510,7 +510,7 @@ fn invariant<'a, 'b>(x: &'a mut i32, y: &'b mut i32) {
 
 ### Debug & Display
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 #[derive(Debug)]
@@ -531,7 +531,7 @@ println!("{}", p);    // Display
 
 ### Clone & Copy
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 // Copy: 隐式复制（栈上简单类型）
@@ -550,7 +550,7 @@ let d2 = d1.clone();  // 显式克隆
 
 ### PartialEq & Eq
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 #[derive(PartialEq, Eq)]
@@ -565,7 +565,7 @@ assert_eq!(p1, p2);
 
 ### PartialOrd & Ord
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 #[derive(PartialOrd, Ord, PartialEq, Eq)]
@@ -586,7 +586,7 @@ assert!(p1 < p2);
 
 ### 类型别名
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 type Kilometers = i32;
@@ -601,7 +601,7 @@ fn distance() -> Kilometers {
 
 ### Never 类型
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 fn never_returns() -> ! {
@@ -619,7 +619,7 @@ let x: i32 = if some_condition {
 
 ### PhantomData（零大小类型标记）
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 use std::marker::PhantomData;
@@ -638,7 +638,7 @@ struct MyType<T> {
 
 ### 新类型模式（Newtype）
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 struct Meters(u32);
@@ -657,7 +657,7 @@ fn run(distance: Meters, time: Seconds) {
 
 ### 类型状态模式
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 struct Locked;
@@ -693,7 +693,7 @@ door.open();  // ✅ OK
 
 ### Builder 模式（类型安全）
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 struct EmailBuilder<Subject, Body> {
@@ -741,7 +741,7 @@ impl EmailBuilder<Set<String>, Set<String>> {
 
 ### 单态化（Monomorphization）
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 // 泛型函数会为每个具体类型生成一份代码
@@ -761,7 +761,7 @@ generic("hello"); // 生成 generic::<&str>
 
 ### 动态分派 vs 静态分派
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
 // 静态分派（单态化）
@@ -783,7 +783,7 @@ fn dynamic_dispatch(item: &dyn Summary) {
 
 ### 内存对齐
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust,ignore
 use std::mem::{size_of, align_of};
@@ -810,7 +810,7 @@ struct CacheAligned { data: [u8; 64]; }
 
 ### 反例 1: 为 Copy 类型实现 Clone 不一致
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **错误示例**:
 
@@ -836,7 +836,7 @@ struct Good {
 
 ### 反例 2: 生命周期省略导致悬垂引用
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **错误示例**:
 
@@ -861,7 +861,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### 反例 3: 混淆 Sized 与动态大小类型
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **错误示例**:
 
@@ -886,7 +886,7 @@ fn take_slice<T>(t: &[T]) {}
 
 ### 深入学习
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - [类型系统理论](../../../crates/c02_type_system/docs/tier_04_advanced/README.md)
 - [型变详解](../../../crates/c02_type_system/docs/tier_03_references/02_类型型变参考.md)
@@ -894,14 +894,14 @@ fn take_slice<T>(t: &[T]) {}
 
 ### 代码示例
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 - [泛型示例](../../../crates/c02_type_system/examples/README.md)
 - [类型转换](../../../crates/c02_type_system/src/README.md)
 
 ### 形式化理论
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 - [类型理论深度](../../../crates/c02_type_system/docs/tier_04_advanced/01_类型理论深度.md)
 - [类型构造能力](../../research_notes/type_theory/10_construction_capability.md) — Def TCON1、TCON 矩阵、类型构造决策树、Rust 1.93 新特性
@@ -1355,25 +1355,25 @@ Rust 1.95+ 重要更新：
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Type System]**
-> **[来源: Wikipedia - Type Theory]**
-> **[来源: Wikipedia - Hindley-Milner Type System]**
-> **[来源: Rust Reference - Type System]**
-> **[来源: TRPL Ch. 3 - Common Programming Concepts]**
-> **[来源: ACM - Advanced Type System Features]**
-> **[来源: IEEE - Type Safety Verification]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type Theory](https://en.wikipedia.org/wiki/Type_Theory)**
+> **来源: [Wikipedia - Hindley-Milner Type System](https://en.wikipedia.org/wiki/Hindley_Milner_Type_System)**
+> **来源: [Rust Reference - Type System](https://doc.rust-lang.org/reference/types.html)**
+> **来源: [TRPL Ch. 3 - Common Programming Concepts](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html)**
+> **来源: [ACM - Advanced Type System Features](https://dl.acm.org/)**
+> **来源: [IEEE - Type Safety Verification](https://standards.ieee.org/)**
 > **[来源: Pierce 2002 - Types and Programming Languages]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: Wikipedia - Type System]**
-> **[来源: Pierce 2002 - TAPL]**
-> **[来源: Rust Reference - Type System]**
-> **[来源: ACM - Type Systems]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Pierce 2002 - TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)**
+> **来源: [Rust Reference - Type System](https://doc.rust-lang.org/reference/types.html)**
+> **来源: [ACM - Type Systems](https://dl.acm.org/)**
 
 ---

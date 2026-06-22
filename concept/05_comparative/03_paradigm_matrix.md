@@ -11,7 +11,7 @@
 > **双维定位**: C×Ana — 分析多语言类型系统谱系
 > **前置概念**: [Rust vs C++](./01_rust_vs_cpp.md) · [Rust vs Go](./02_rust_vs_go.md) · [Type Theory](../04_formal/02_type_theory.md)
 > **后置概念**: [Future Evolution](../07_future/03_evolution.md)
-> **主要来源**: [Wikipedia: Comparison of programming languages] · [Wikipedia: Programming paradigm] · [Wikipedia: Type system] · [PL Papers]
+> **主要来源**: [Wikipedia: Comparison of programming languages](https://en.wikipedia.org/wiki/Comparison_of_programming_languages) · [Wikipedia: Programming paradigm](https://en.wikipedia.org/wiki/Programming_paradigm) · [Wikipedia: Type system](https://en.wikipedia.org/wiki/Type_system) · [PL Papers]
 
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/)
@@ -54,16 +54,16 @@ Step 6: 怎么在代码中选择范式？
 ### 1.1 Wikipedia 权威定义
 >
 
-> **[Wikipedia: Programming paradigm]** A programming paradigm is a relatively high-level way to conceptualize and structure the implementation of a computer program.
+> **[Wikipedia: Programming paradigm](https://en.wikipedia.org/wiki/Programming_paradigm)** A programming paradigm is a relatively high-level way to conceptualize and structure the implementation of a computer program.
 > **来源**: <https://en.wikipedia.org/wiki/Programming_paradigm>
 
-> **[Wikipedia: Comparison of programming languages]** Programming languages are used for controlling the behavior of a machine. They are used to express the algorithms that make up a program.
+> **[Wikipedia: Comparison of programming languages](https://en.wikipedia.org/wiki/Comparison_of_programming_languages)** Programming languages are used for controlling the behavior of a machine. They are used to express the algorithms that make up a program.
 > **来源**: <https://en.wikipedia.org/wiki/Comparison_of_programming_languages>
 
-> **[Wikipedia: Type system]** A type system is a logical system comprising a set of rules that assigns a property called a type to every term in a computer program.
+> **[Wikipedia: Type system](https://en.wikipedia.org/wiki/Type_system)** A type system is a logical system comprising a set of rules that assigns a property called a type to every term in a computer program.
 > **来源**: <https://en.wikipedia.org/wiki/Type_system>
 
-> **[Wikipedia: Memory management]** Memory management is a form of resource management applied to computer memory. It involves the allocation, deallocation, and organization of memory to ensure efficient operation of a computer system.
+> **[Wikipedia: Memory management](https://en.wikipedia.org/wiki/Memory_management)** Memory management is a form of resource management applied to computer memory. It involves the allocation, deallocation, and organization of memory to ensure efficient operation of a computer system.
 > **来源**: <https://en.wikipedia.org/wiki/Memory_management>
 
 > **层次一致性**: L5 建立在 L1-L4 精确概念之上，上述定义提供统一术语基线。
@@ -205,7 +205,7 @@ graph LR
 > Haskell 提供高度抽象安全但 GC 不适合系统编程。
 > Rust 将线性/仿射类型理论（Girard 1987）与系统编程需求结合，通过所有权在编译期证明内存安全和无数据竞争，同时保持零运行时开销
 > ——这是类型系统演进史上首次在单一工业语言中实现如此完整的静态保证。
-> [来源: Girard 1987 / RustBelt POPL 2018]
+> 来源: Girard 1987 / [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
 
 > **过渡**: 理论差异如何在工程实践中转化为具体的技术选型？
 
@@ -590,7 +590,7 @@ graph TD
 >
 > - **横向**: 位于"底层控制"与"抽象安全"的交汇点，唯一同时满足无 GC、内存安全、数据竞争消除、零成本、工业级工具链的语言。
 > - **纵向**: 向上通过 WASM/嵌入式影响应用层，向下通过 `no_std` 影响内核/固件，横向通过 FFI 与 C/C++ 生态互通。
-> - **演进**: Rust 正从"系统语言"向"通用安全基础设施"扩展——Linux 内核、Windows 驱动、Android 系统组件、云原生数据平面。 [来源: RustBelt POPL 2018 / LWN Linux Rust]
+> - **演进**: Rust 正从"系统语言"向"通用安全基础设施"扩展——Linux 内核、Windows 驱动、Android 系统组件、云原生数据平面。 来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
 
 ---
 
@@ -599,7 +599,7 @@ graph TD
 > **Cardelli, L., & Wegner, P. (1985).** *On understanding types, data abstraction, and polymorphism.* ACM Computing Surveys (CSUR), 17(4), 471-522. [来源: ACM Computing Surveys]
 > 这篇经典综述首次系统性地建立了类型理论的分类框架，将多态性划分为参数多态、包含多态和特设多态，为后世编程语言类型系统的设计提供了统一的术语基础和理论谱系。
 
-> **Van Roy, P. (2009).** *Programming Paradigms for Dummies: What Every Programmer Should Know.* In Encyclopedia of Computer Science and Engineering. [来源: Van Roy 2009 / Wikipedia: Programming paradigm]
+> **Van Roy, P. (2009).** *Programming Paradigms for Dummies: What Every Programmer Should Know.* In Encyclopedia of Computer Science and Engineering. 来源: Van Roy 2009 / [Wikipedia: Programming paradigm](https://en.wikipedia.org/wiki/Programming_paradigm)
 > 该文献提出了编程范式的多维分类法，将语言特性映射到不同的计算模型，解释了为什么现代语言（包括 Rust）趋向于多范式融合。
 
 > **Hoare, C.A.R. (1978).** *Communicating Sequential Processes.* Communications of the ACM, 21(8), 666-677. [来源: CACM]
@@ -614,16 +614,16 @@ graph TD
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
-| Rust 无 GC + 内存安全 | [TRPL] · [RustBelt POPL 2018] | ✅ |
-| Rust 数据竞争编译期消除 | [TRPL] · [RustBelt] | ✅ |
+| Rust 无 GC + 内存安全 | [The Rust Programming Language](https://doc.rust-lang.org/book/) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | ✅ |
+| Rust 数据竞争编译期消除 | [The Rust Programming Language](https://doc.rust-lang.org/book/) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | ✅ |
 | 各语言适用域 | 社区共识 · 工业实践 | ⚠️ 主观 |
 | Rust 线性类型论根基 | [Girard 1987 — Linear Logic] | ✅ |
 | Haskell 范畴论基础 | [Wadler 1989 — Theorems for Free, POPL] | ✅ |
-| 编程范式定义 | [Wikipedia: Programming paradigm] | ✅ |
-| 类型系统定义 | [Wikipedia: Type system] | ✅ |
+| 编程范式定义 | [Wikipedia: Programming paradigm](https://en.wikipedia.org/wiki/Programming_paradigm) | ✅ |
+| 类型系统定义 | [Wikipedia: Type system](https://en.wikipedia.org/wiki/Type_system) | ✅ |
 | CMU PL Concepts 多语言对比 | [CMU 17-363] | ✅ |
 | C++ 模板机制 | [C++ Standard] · [Stroustrup] | ✅ |
-| Go CSP 并发模型 | [Hoare 1978] · [Effective Go] | ✅ |
+| Go CSP 并发模型 | [Hoare 1978](https://en.wikipedia.org/wiki/Communicating_sequential_processes) · [Effective Go] | ✅ |
 
 ---
 
@@ -743,9 +743,9 @@ fn process(data: Vec<String>) -> Vec<String> {
 - [x] **TODO**: 补充更多新兴语言的 benchmark 对比数据（Vale、Hylo、Mojo） —— 已完成 §8.3
 - [x] **TODO**: 补充编程范式在 AI 辅助编程时代的演化趋势 —— 已完成 §8.4
 
-> **[来源: Rust Reference; TRPL; Rust RFCs; Academic Papers]** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/); [The Rust Programming Language](https://doc.rust-lang.org/book/); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
 
-> **[来源: Wikipedia; POPL/PLDI/ECOOP Papers; RustBelt/Iris Project]** 形式化概念参考了权威学术来源和类型论研究。✅
+> **来源: [Wikipedia](https://en.wikipedia.org/wiki/Main_Page); POPL/PLDI/ECOOP Papers; [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)/Iris Project** 形式化概念参考了权威学术来源和类型论研究。✅
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

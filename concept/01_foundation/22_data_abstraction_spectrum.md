@@ -13,7 +13,7 @@
 > **双维定位**: C×Ana — 分析数据抽象机制的演进谱系
 > **前置概念**: [Type System](./04_type_system.md) · [Variable Model](./20_variable_model.md) · [Ownership](./01_ownership.md)
 > **后置概念**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Type Erasure](../03_advanced/17_type_erasure.md)
-> **主要来源**: [Pierce TAPL, §18-§24] · [Cardelli & Wegner 1985 — On Understanding Types, Data Abstraction, and Polymorphism] · [Wikipedia: Abstract data type] · [Rust Reference — §4.2 Types]
+> **主要来源**: [Pierce TAPL, §18-§24] · [Cardelli & Wegner 1985 — On Understanding Types, Data Abstraction, and Polymorphism] · [Wikipedia: Abstract data type](https://en.wikipedia.org/wiki/Abstract_data_type) · [Rust Reference — §4.2 Types](https://doc.rust-lang.org/reference/)
 
 >
 > **来源**: [TRPL — Structs](https://doc.rust-lang.org/book/ch05-00-structs.html) · [TRPL — Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums.html) · [Reference — Items](https://doc.rust-lang.org/reference/items.html)
@@ -410,7 +410,7 @@ impl std::fmt::Display for MyVec {
 }
 ```
 
-> **边界洞察**: Orphan Rule 是 Rust 保证 trait 实现唯一性（coherence）的核心机制。它限制了"为外部类型实现外部 trait"，防止不同 crate 产生冲突实现。这与 C++ 的 ADL（Argument Dependent Lookup）和模板特化规则有本质不同。[来源: RFC 1023] ✅
+> **边界洞察**: Orphan Rule 是 Rust 保证 trait 实现唯一性（coherence）的核心机制。它限制了"为外部类型实现外部 trait"，防止不同 crate 产生冲突实现。这与 C++ 的 ADL（Argument Dependent Lookup）和模板特化规则有本质不同。来源: [RFC 1023](https://rust-lang.github.io/rfcs/1023-1023-rebalancing-coherence.html) ✅
 
 ---
 
@@ -436,7 +436,7 @@ impl std::fmt::Display for MyVec {
 | 代数数据类型定义 | [Pierce TAPL §11] · [Cardelli & Wegner 1985] | ✅ | Tier 1 |
 | C++ class 模型 | [Stroustrup — C++PL] · [C++ Standard §11.4] | ✅ | Tier 1 |
 | Java 接口模型 | [JLS Ch.9] | ✅ | Tier 1 |
-| Rust enum+trait | [Rust Reference §4.2.1] · [RFC 0003] | ✅ | Tier 1 |
+| Rust enum+trait | [Rust Reference §4.2.1](https://doc.rust-lang.org/reference/) · [RFC 0003](https://github.com/rust-lang/rfcs/pull/0003) | ✅ | Tier 1 |
 | 数据抽象谱系 | [💡 原创分析] | ⚠️ | Tier 3 |
 | 跨语言对比矩阵 | [💡 原创分析] | ⚠️ | Tier 3 |
 

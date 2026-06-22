@@ -49,3 +49,30 @@
 
 - [Tree Borrows (concept)](../../../concept/01_foundation/05_reference_semantics.md) — PLDI 2025 Distinguished Paper 详解
 - [形式化验证工具链 (concept)](../../../concept/04_formal/05_verification_toolchain.md) — Miri POPL 2026、KVerus、AutoVerus、Vest 2026 状态矩阵
+
+
+## 📚 模块 8: 国际化对齐
+
+> 本模块按项目模板补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 说明 |
+|:---|:---|
+| [Miri](https://github.com/rust-lang/miri) | Miri 解释器仓库 |
+| [Rustc Dev Guide — MIRI](https://rustc-dev-guide.rust-lang.org/miri.html) | Miri 在编译器中的位置 |
+
+### 8.2 学术/工业来源
+
+| 来源 | 说明 |
+|:---|:---|
+| [Stacked Borrows — POPL 2021](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) | 旧默认别名模型 |
+| [Tree Borrows — PLDI 2025](https://perso.crans.org/vanille/treebor/) | 新默认别名模型 |
+
+### 8.3 社区资源
+
+| 来源 | 说明 |
+|:---|:---|
+| [Miri Book](https://github.com/rust-lang/miri) | Miri 文档 |
+| [Rust Internals — Miri](https://internals.rust-lang.org/) | 讨论区 |
+

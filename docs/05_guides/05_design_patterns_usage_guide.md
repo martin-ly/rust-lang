@@ -86,7 +86,7 @@
 
 ## 📋 概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本指南介绍如何在 Rust 中使用常见的设计模式，包括 GoF 模式和 Rust 特有的模式。
 
@@ -98,13 +98,13 @@
 
 ## 🚀 快速开始
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 单例模式
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 use std::sync::{Arc, Mutex, OnceLock};
@@ -126,9 +126,9 @@ impl Singleton {
 
 ### 工厂模式
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 trait Product {
@@ -166,21 +166,21 @@ fn create_product(t: ProductType) -> Box<dyn Product> {
 
 ## 📊 核心模式
 
-> **[来源: Rust Design Patterns Book]** · **[来源: GoF - Design Patterns]** · **[来源: Rust API Guidelines]**
+> **来源: [Rust Design Patterns Book](https://rust-lang.github.io/design-patterns/)** · **来源: [GoF - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)** · **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 创建型模式
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 建造者模式
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 struct Config {
@@ -238,15 +238,15 @@ let config = ConfigBuilder::new()
 
 ### 2. 结构型模式
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 适配器模式
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 旧接口
@@ -273,9 +273,9 @@ impl NewInterface for Adapter {
 
 #### 装饰器模式
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 trait Component {
@@ -302,11 +302,11 @@ impl Component for Decorator {
 
 ### 3. 行为型模式
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 #### 策略模式
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 trait Strategy {
@@ -344,7 +344,7 @@ impl Context {
 
 #### 观察者模式
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 use std::sync::{Arc, Mutex};
@@ -390,15 +390,15 @@ impl Subject {
 
 ## 📐 23种设计模式完整实现
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 创建型模式 (Creational Patterns)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 #### 1. 单例模式 (Singleton)
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 use std::sync::{Arc, Mutex, OnceLock};
@@ -430,7 +430,7 @@ impl Config {
 
 #### 2. 工厂方法 (Factory Method)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 // 产品 trait
@@ -485,7 +485,7 @@ impl Creator for ConcreteCreatorB {
 
 #### 3. 抽象工厂 (Abstract Factory)
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 // 产品族 trait
@@ -559,7 +559,7 @@ fn render_ui(factory: &dyn GUIFactory) {
 
 #### 4. 建造者模式 (Builder)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 #[derive(Debug, Clone)]
@@ -642,7 +642,7 @@ let request = HttpRequestBuilder::post()
 
 #### 5. 原型模式 (Prototype)
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use std::clone::Clone;
@@ -698,11 +698,11 @@ impl PrototypeRegistry {
 
 ### 结构型模式 (Structural Patterns)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 #### 6. 适配器模式 (Adapter)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 // 目标接口
@@ -761,7 +761,7 @@ impl SpecificInterface for Adaptee {
 
 #### 7. 桥接模式 (Bridge)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 // 实现维度
@@ -835,7 +835,7 @@ impl Shape for RectangleShape {
 
 #### 8. 组合模式 (Composite)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust
 // 组件 trait
@@ -909,7 +909,7 @@ impl Graphic for CompoundGraphic {
 
 #### 9. 装饰器模式 (Decorator)
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 // 组件 trait
@@ -969,7 +969,7 @@ println!("{}: ${}", coffee.description(), coffee.cost());
 
 #### 10. 外观模式 (Facade)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 // 复杂子系统
@@ -1033,7 +1033,7 @@ impl ComputerFacade {
 
 #### 11. 享元模式 (Flyweight)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 use std::collections::HashMap;
@@ -1102,7 +1102,7 @@ impl Tree {
 
 #### 12. 代理模式 (Proxy)
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 use std::time::{Duration, Instant};
@@ -1187,11 +1187,11 @@ impl<T: Image> Image for ProtectedImage<T> {
 
 ### 行为型模式 (Behavioral Patterns)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 #### 13. 责任链模式 (Chain of Responsibility)
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 // 处理者 trait
@@ -1273,7 +1273,7 @@ impl Handler for LoggingHandler {
 
 #### 14. 命令模式 (Command)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 // 命令 trait
@@ -1354,7 +1354,7 @@ impl CommandManager {
 
 #### 15. 解释器模式 (Interpreter)
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 // 表达式 trait
@@ -1424,7 +1424,7 @@ let result = expression.interpret(&context);
 
 #### 16. 迭代器模式 (Iterator)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 // Rust 内置强大的迭代器，这里展示自定义实现
@@ -1497,7 +1497,7 @@ impl<'a> Iterator for ReverseBookIterator<'a> {
 
 #### 17. 中介者模式 (Mediator)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 use std::collections::HashMap;
@@ -1570,7 +1570,7 @@ impl User for ChatUser {
 
 #### 18. 备忘录模式 (Memento)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust
 // 备忘录 - 只读，通过构造函数创建
@@ -1663,7 +1663,7 @@ impl History {
 
 #### 19. 观察者模式 (Observer)
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 use std::sync::{Arc, Mutex};
@@ -1732,7 +1732,7 @@ impl Observer for NewsChannel {
 
 #### 20. 状态模式 (State)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 // 状态 trait
@@ -1822,7 +1822,7 @@ impl Document {
 
 #### 21. 策略模式 (Strategy)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 // 策略 trait
@@ -1920,7 +1920,7 @@ impl ShoppingCart {
 
 #### 22. 模板方法模式 (Template Method)
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 // 抽象类（trait 定义算法骨架）
@@ -2005,7 +2005,7 @@ impl DataMiner for CsvDataMiner {
 
 #### 23. 访问者模式 (Visitor)
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 // 元素 trait
@@ -2111,13 +2111,13 @@ impl ShapeCollection {
 
 ## 🦀 Rust 特有模式
 
-> **[来源: Rust Reference - Traits]** · **[来源: Wikipedia - Type System]** · **[来源: Rust Design Patterns Book]**
+> **来源: [Rust Reference - Traits](https://doc.rust-lang.org/reference/items/traits.html)** · **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)** · **来源: [Rust Design Patterns Book](https://rust-lang.github.io/design-patterns/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. Newtype 模式
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust
 // 类型安全包装 - 区分相同底层类型的不同语义
@@ -2136,7 +2136,7 @@ fn process_order(id: OrderId) { /* ... */ }
 
 ### 2. RAII 模式
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust
 struct FileGuard {
@@ -2165,7 +2165,7 @@ impl Drop for FileGuard {
 
 ### 3. 类型状态模式 (Type State)
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 // 使用泛型参数编码状态
@@ -2206,7 +2206,7 @@ impl Connection<Connected> {
 
 ### 4. Builder 模式（消耗型 vs 非消耗型）
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 // 非消耗型 Builder（使用 &mut self）
@@ -2249,7 +2249,7 @@ let req2 = builder.build()?; // 可以重用
 
 ## 📚 相关文档
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [完整文档](../../crates/c09_design_pattern/README.md)
 - [GoF 模式](../../crates/c09_design_pattern/docs/tier_02_guides/01_创建型模式指南.md)
@@ -2258,7 +2258,7 @@ let req2 = builder.build()?; // 可以重用
 
 ## 🆕 Rust 1.95+ 特性在设计模式中的应用
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 > **适用版本**: Rust 1.96.0+
 
@@ -2268,14 +2268,14 @@ Rust 1.95+ 引入的新特性为设计模式实现提供了更优雅、更高效
 
 ### 1. Array_windows() 在滑动窗口模式中的应用
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **设计模式**: 滑动窗口 (Sliding Window)
 **适用场景**: 时间序列分析、流数据处理、模式检测
 
 #### 传统实现 vs Rust 1.95+ 实现
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 `
 ust
@@ -2296,7 +2296,7 @@ fn moving_average_optimized(data: &[f64]) -> Vec<f64> {
 
 #### 生产示例：股票价格趋势检测
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 `
 ust
@@ -2327,7 +2327,7 @@ impl PriceAnalyzer {
 
 ### 2. ControlFlow 在责任链模式中的应用
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **设计模式**: 责任链 (Chain of Responsibility)
 **适用场景**: 请求处理链、验证管道、拦截器
@@ -2355,7 +2355,7 @@ fn validate_request(req: &Request) -> ControlFlow<ValidationError, ()> {
 
 ### 3. LazyLock 在单例模式中的应用
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **设计模式**: 单例 (Singleton)
 **适用场景**: 全局配置、连接池、缓存
@@ -2380,7 +2380,7 @@ pub fn get_config_fast() -> Option<&'static AppConfig> {
 
 ### 4. 数学常量在算法模式中的应用
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **设计模式**: 策略模式 (Strategy Pattern)
 
@@ -2401,7 +2401,7 @@ where
 
 ### 特性对比总结
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 设计模式 | 传统实现 | Rust 1.95+ 实现 | 优势 |
 |----------|---------|---------------|------|
@@ -2437,16 +2437,16 @@ where
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Software Design Pattern]**
-> **[来源: Wikipedia - Gang of Four]**
-> **[来源: Wikipedia - Anti-pattern]**
+> **来源: [Wikipedia - Software Design Pattern](https://en.wikipedia.org/wiki/Software_Design_Pattern)**
+> **来源: [Wikipedia - Gang of Four](https://en.wikipedia.org/wiki/Gang_of_Four)**
+> **来源: [Wikipedia - Anti-pattern](https://en.wikipedia.org/wiki/Anti_pattern)**
 > **[来源: IEEE - Software Architecture Patterns]**
 > **[来源: ACM - Design Patterns in Rust]**
 > **[来源: Gamma et al. 1994 - Design Patterns]**
-> **[来源: Rust API Guidelines]**
-> **[来源: Rust Reference - Traits]**
-> **[来源: Rust Cookbook]**
-> **[来源: RFC 1210 - impl Specialization]**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
+> **来源: [Rust Reference - Traits](https://doc.rust-lang.org/reference/items/traits.html)**
+> **来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)**
+> **来源: [RFC 1210 - impl Specialization](https://github.com/rust-lang/rfcs/pull/1210)**
 
 ---
 
@@ -2491,29 +2491,29 @@ graph TD
     Q4 -->|否| A5[函数组合即可]
 ```
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages Survey]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design and Implementation]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: Wikipedia - Design Pattern]**
-> **[来源: Rust API Guidelines]**
-> **[来源: Gang of Four - Design Patterns]**
-> **[来源: ACM - Software Design Patterns]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM - Systems Programming Languages Survey](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI - Programming Language Design and Implementation](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
+> **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ---

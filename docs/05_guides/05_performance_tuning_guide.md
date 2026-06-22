@@ -72,7 +72,7 @@
 
 ## 📋 概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档提供全面的 Rust 性能调优指南，涵盖编译优化、运行时优化、内存管理、并发优化等方面。
 
@@ -83,13 +83,13 @@
 
 ## 🚀 编译优化
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. Release 模式
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```toml
 # Cargo.toml
@@ -106,9 +106,9 @@ strip = true           # 移除符号信息
 
 ### 2. 特性标志优化
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```toml
 # 只启用需要的特性
@@ -125,9 +125,9 @@ no-std = []
 
 ### 3. 增量编译
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```toml
 [profile.dev]
@@ -142,13 +142,13 @@ opt-level = 2  # 测试时启用优化，加速测试执行
 
 ## 💾 内存优化
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 预分配容量
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // ❌ 不好：多次重新分配
@@ -169,9 +169,9 @@ let mut vec = vec![0; 1000];
 
 ### 2. 使用切片而非 Vec
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // ❌ 不好：不必要的分配
@@ -192,9 +192,9 @@ fn process_generic<T: AsRef<[i32]>>(data: T) -> i32 {
 
 ### 3. 使用 Cow 避免克隆
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 use std::borrow::Cow;
@@ -213,9 +213,9 @@ let owned: Cow<str> = Cow::Owned(String::from("world"));
 
 ### 4. 使用 Box 减少栈分配
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 大结构体使用 Box
@@ -232,7 +232,7 @@ enum TreeNode {
 
 ### 5. 内存池模式
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust
 use std::sync::Mutex;
@@ -279,7 +279,7 @@ impl<T: Send> ObjectPool<T> {
 
 ### 1. 迭代器优化
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 // ❌ 不好：多次遍历
@@ -302,7 +302,7 @@ let stats = data.iter().fold(
 
 ### 2. 避免不必要的克隆
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 // ❌ 不好：不必要的克隆
@@ -326,7 +326,7 @@ fn maybe_modify(s: Cow<str>) -> String {
 
 ### 3. 使用 `#[inline]` 提示
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 #[inline]
@@ -344,7 +344,7 @@ fn critical_path(x: i32) -> i32 {
 
 ### 4. 使用 `#[cold]` 标记冷路径
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 #[cold]
@@ -368,7 +368,7 @@ fn unlikely_branch() {}
 
 ### 5. SIMD 优化
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 #![feature(portable_simd)]
@@ -405,7 +405,7 @@ use std::arch::aarch64::*;
 
 ### 1. 使用 Arc 而非 Rc
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 // ❌ 不好：Rc 不能跨线程
@@ -420,7 +420,7 @@ let data_clone = Arc::clone(&data);
 
 ### 2. 减少锁竞争
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 // ❌ 不好：长时间持有锁
@@ -452,7 +452,7 @@ let write_guard = data.write().unwrap();
 
 ### 3. 使用无锁数据结构
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use crossbeam::queue::ArrayQueue;
@@ -475,7 +475,7 @@ while let Some(item) = queue.pop() {
 
 ### 4. 工作窃取调度
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use rayon::prelude::*;
@@ -500,7 +500,7 @@ pool.install(|| {
 
 ### 5. 并行迭代器
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 use rayon::prelude::*;
@@ -529,7 +529,7 @@ let sum: f64 = data.par_iter().map(|x| x * 2.0).sum();
 
 ### 1. 使用 select! 而非 join
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 use tokio::select;
@@ -562,7 +562,7 @@ async fn with_timeout<T>(
 
 ### 2. 使用有界通道
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use tokio::sync::mpsc;
@@ -587,7 +587,7 @@ while let Some(batch) = rx.recv_many(10).await {
 
 ### 3. 批量处理
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 use futures::stream::{self, StreamExt};
@@ -618,7 +618,7 @@ while let Some(result) = tasks.next().await {
 
 ### 4. 避免阻塞
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
 // ❌ 不好：在异步代码中阻塞
@@ -654,7 +654,7 @@ async fn read_file(path: &str) -> Result<String, io::Error> {
 
 ### 1. 使用 criterion 基准测试
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust,ignore
 use criterion::{black_box, criterion_group, criterion_main, Criterion, BenchmarkId};
@@ -685,7 +685,7 @@ criterion_main!(benches);
 
 ### 2. 使用 perf 分析
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```bash
 # Linux
@@ -705,7 +705,7 @@ perf script | stackcollapse-perf.pl | flamegraph.pl > flamegraph.svg
 
 ### 3. 使用 cargo-flamegraph
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```bash
 # 安装
@@ -722,7 +722,7 @@ cargo flamegraph --bin my_app -- arg1 arg2
 
 ### 4. 使用 valgrind (Linux)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```bash
 # 安装 cargo-valgrind
@@ -747,7 +747,7 @@ valgrind --leak-check=full ./target/debug/my_app
 
 ### 1. 测量优先
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 // 先测量，再优化
@@ -773,7 +773,7 @@ println!("耗时: {:?}", duration);
 
 ### 2. 热点分析
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 // 使用 tracing 进行性能追踪
@@ -1057,16 +1057,16 @@ where
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Wikipedia - Program Optimization]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Wikipedia - Program Optimization](https://en.wikipedia.org/wiki/Program_Optimization)**
 > **[来源: Criterion.rs Documentation]**
-> **[来源: ACM - Performance Engineering]**
-> **[来源: Rust Performance Book]**
+> **来源: [ACM - Performance Engineering](https://dl.acm.org/)**
+> **来源: [The Rust Performance Book](https://nnethercote.github.io/perf-book/)**
 
 ---

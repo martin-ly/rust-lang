@@ -13,7 +13,7 @@
 
 ## 形式化论证（质量与论证衔接）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def QC1（质量完备性）**：设 $D$ 为研究笔记文档。若 $D$ 满足本清单全部必需项，且含 Def/Axiom/Theorem 或与 [PROOF_INDEX](./10_proof_index.md) 的衔接，则称 $D$ **质量完备**。
 
@@ -29,7 +29,7 @@
 
 ## 📊 目录 {#-目录}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [研究笔记质量检查清单](#研究笔记质量检查清单)
   - [形式化论证（质量与论证衔接）](#形式化论证质量与论证衔接)
@@ -88,13 +88,13 @@
 
 ## 📋 元信息检查 {#-元信息检查}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 必需元信息
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 创建日期格式正确（YYYY-MM-DD）
 - [ ] 最后更新日期格式正确（YYYY-MM-DD）
@@ -105,9 +105,9 @@
 
 ### research_notes 元信息统一模板
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本目录下所有含 blockquote 元信息的 .md **至少**使用以下字段（可选字段按需增加）：
 
@@ -127,13 +127,13 @@
 
 ## 📝 内容质量检查 {#-内容质量检查}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 研究目标
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 研究目标明确
 - [ ] 核心问题清晰
@@ -141,9 +141,9 @@
 
 ### 理论基础
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 理论基础充分
 - [ ] 相关概念定义准确
@@ -151,9 +151,9 @@
 
 ### 形式化定义 / 实验设计
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 形式化定义准确（如适用）
 - [ ] 实验设计合理（如适用）
@@ -161,9 +161,9 @@
 
 ### 证明目标 / 实验目标
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 待证明的性质明确（如适用）
 - [ ] 待测试的场景清晰（如适用）
@@ -171,9 +171,9 @@
 
 ### 代码示例
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 代码示例可运行
 - [ ] 代码示例相关
@@ -181,7 +181,7 @@
 
 ### 研究进展
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - [ ] 研究进展状态准确
 - [ ] 已完成任务明确
@@ -190,7 +190,7 @@
 
 ### 实质内容（研究笔记必选）
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - [ ] 含 Def/Axiom/定理或与 [PROOF_INDEX](./10_proof_index.md) 衔接
 - [ ] 至少 1 段可运行 Rust 代码（索引/概览类可放宽）
@@ -208,7 +208,7 @@
 
 ### 形式化定义
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - [ ] 数学符号使用正确
 - [ ] 数学公式格式正确
@@ -217,7 +217,7 @@
 
 ### 理论证明
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 - [ ] 证明逻辑正确（如适用）
 - [ ] 证明步骤清晰（如适用）
@@ -225,7 +225,7 @@
 
 ### 参考文献
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 - [ ] 参考文献充分
 - [ ] 参考文献格式统一
@@ -522,13 +522,13 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

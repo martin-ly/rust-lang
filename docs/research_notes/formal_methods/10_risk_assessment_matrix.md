@@ -45,7 +45,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 风险评估矩阵系统分析Rust项目中各类技术风险的概率和影响，为决策提供量化参考。
 
@@ -53,13 +53,13 @@
 
 ## 风险分类矩阵
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 技术风险
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 风险项 | 概率 | 影响 | 风险等级 | 缓解措施 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -73,7 +73,7 @@
 
 ### 生态风险
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | 风险项 | 概率 | 影响 | 风险等级 | 缓解措施 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -85,7 +85,7 @@
 
 ### 项目风险
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 | 风险项 | 概率 | 影响 | 风险等级 | 缓解措施 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -126,11 +126,11 @@
 
 ### 高风险项应对
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 #### 1. 依赖库漏洞 (🔴 高)
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **预防措施:**
 
@@ -164,7 +164,7 @@ jobs:
 
 #### 2. 遗留系统集成 (🔴 高)
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 **缓解策略:**
 
@@ -230,7 +230,7 @@ unsafe impl Send for SafeLegacyWrapper {}
 
 ### 关键指标
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 | 指标 | 目标 | 当前 | 监控频率 |
 | :--- | :--- | :--- | :--- |
@@ -338,21 +338,21 @@ cargo clippy -- -W clippy::undocumented_unsafe_blocks
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
-> **[来源: Wikipedia - Model Checking]**
+> **来源: [Wikipedia - Model Checking](https://en.wikipedia.org/wiki/Model_Checking)**
 
-> **[来源: ACM - Formal Verification Survey]**
+> **来源: [ACM - Formal Verification Survey](https://dl.acm.org/)**
 
-> **[来源: IEEE - Formal Specification Standards]**
+> **来源: [IEEE - Formal Specification Standards](https://standards.ieee.org/)**
 
-> **[来源: POPL - Automated Verification]**
+> **来源: [POPL - Automated Verification](https://www.sigplan.org/Conferences/POPL/)**
 
-> **[来源: RustBelt - Rust Formal Semantics]**
+> **来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)**
 
-> **[来源: TLA+ Documentation]**
+> **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**
 
-> **[来源: Wikipedia - Risk Management]**
+> **来源: [Wikipedia - Risk Management](https://en.wikipedia.org/wiki/Risk_Management)**
 
 ---
 

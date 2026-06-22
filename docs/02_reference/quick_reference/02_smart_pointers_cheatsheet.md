@@ -88,7 +88,7 @@
 
 ## 🎯 智能指针概览
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 智能指针类型选择树：
@@ -110,13 +110,13 @@
 
 ## 📦 `Box<T>` - 堆分配
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 基本用法
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 创建
@@ -135,9 +135,9 @@ fn print_value(b: Box<i32>) {
 
 ### 使用场景
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 1. 递归类型
@@ -163,9 +163,9 @@ fn take_ownership(b: Box<i32>) {
 
 ### API
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 创建
@@ -185,13 +185,13 @@ let value = *b; // 或 Box::into_inner(b)
 
 ## 🔗 `Rc<T>` - 引用计数（单线程）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 基本用法
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 use std::rc::Rc;
@@ -211,9 +211,9 @@ println!("count: {}", Rc::strong_count(&a));
 
 ### 使用场景
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 多重所有权（单线程）
@@ -233,9 +233,9 @@ let child2 = Rc::clone(&node);
 
 ### API
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use std::rc::Rc;
@@ -264,11 +264,11 @@ let value = *rc;
 
 ## 🔗 `Arc<T>` - 原子引用计数（多线程）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 基本用法
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 use std::sync::Arc;
@@ -292,7 +292,7 @@ handle2.join().unwrap();
 
 ### 使用场景
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 // 多线程共享数据（只读）
@@ -317,7 +317,7 @@ for handle in handles {
 
 ### API
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use std::sync::Arc;
@@ -332,11 +332,11 @@ let count = Arc::strong_count(&arc);
 
 ## 🔓 `RefCell<T>` - 内部可变性（单线程）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 基本用法
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 use std::cell::RefCell;
@@ -355,7 +355,7 @@ let mut r = data.borrow_mut();
 
 ### 使用场景
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 // 在不可变引用中修改数据
@@ -376,7 +376,7 @@ impl Counter {
 
 ### API
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use std::cell::RefCell;
@@ -397,7 +397,7 @@ let value = cell.into_inner();
 
 ### 运行时借用检查
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 let cell = RefCell::new(5);
@@ -416,11 +416,11 @@ let r3 = cell.borrow_mut();  // OK
 
 ## 🔒 `Mutex<T>` - 互斥锁（多线程）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 基本用法
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust
 use std::sync::{Arc, Mutex};
@@ -447,7 +447,7 @@ println!("Result: {}", *counter.lock().unwrap());
 
 ### 使用场景
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust
 // 多线程共享可变数据
@@ -468,7 +468,7 @@ impl SharedData {
 
 ### API
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 use std::sync::Mutex;
@@ -490,11 +490,11 @@ let value = *guard;
 
 ## 🔓 `RwLock<T>` - 读写锁（多线程）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 基本用法
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 use std::sync::{Arc, RwLock};
@@ -528,7 +528,7 @@ writer.join().unwrap();
 
 ### 使用场景
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 // 读多写少的场景
@@ -553,7 +553,7 @@ impl Cache {
 
 ### API
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use std::sync::RwLock;
@@ -573,11 +573,11 @@ let w = rwlock.try_write();          // Result<RwLockWriteGuard<T>, TryLockError
 
 ## 🔗 `Weak<T>` - 弱引用
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 基本用法
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 use std::rc::{Rc, Weak};
@@ -603,7 +603,7 @@ assert!(weak.upgrade().is_none());
 
 ### 使用场景
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 // 避免循环引用
@@ -633,7 +633,7 @@ let branch = Rc::new(Node {
 
 ### API
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use std::rc::{Rc, Weak};
@@ -653,11 +653,11 @@ let weak_count = weak.weak_count();
 
 ## 🔄 组合模式
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### `Rc<RefCell<T>>` - 单线程内部可变性
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 use std::rc::Rc;
@@ -677,7 +677,7 @@ println!("{}", *data.borrow()); // 8
 
 ### `Arc<Mutex<T>>` - 多线程共享可变数据
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 use std::sync::{Arc, Mutex};
@@ -700,7 +700,7 @@ for handle in handles {
 
 ### `Arc<RwLock<T>>` - 多线程读写锁
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust
 use std::sync::{Arc, RwLock};
@@ -727,7 +727,7 @@ thread::spawn(move || {
 
 ### `Rc<RefCell<Vec<T>>>` - 共享可变向量
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust
 use std::rc::Rc;
@@ -748,11 +748,11 @@ println!("{:?}", vec.borrow()); // [1, 2, 3, 4, 5]
 
 ## 💡 代码示例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 示例 1: 实现链表
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust
 use std::rc::Rc;
@@ -801,7 +801,7 @@ assert_eq!(list.pop_front(), Some(3));
 
 ### 示例 2: 带父指针的树结构（避免循环引用）
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust
 use std::rc::{Rc, Weak};
@@ -846,7 +846,7 @@ if let Some(parent) = child.get_parent() {
 
 ### 示例 3: 自定义智能指针
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust
 use std::ops::{Deref, Drop};
@@ -884,7 +884,7 @@ hello(&m);  // 自动解引用 &MyBox<String> -> &String -> &str
 
 ### 示例 4: LazyCell 和 LazyLock（Rust 1.80+，Rust 1.95+ 增强）
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 use std::sync::LazyLock;
@@ -913,7 +913,7 @@ fn main() {
 
 #### Rust 1.95+ 新增 API
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 Rust 1.95+ 大幅增强了 `LazyCell` 和 `LazyLock`，新增了安全访问方法：
 
@@ -1005,7 +1005,7 @@ impl AppConfig {
 
 #### 性能对比
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 | 操作 | `LazyLock` (标准访问) | `LazyLock::get()` (Rust 1.96) | 提升 |
 |------|----------------------|------------------------------|------|
@@ -1015,7 +1015,7 @@ impl AppConfig {
 
 #### 使用建议
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - **全局配置**: 使用 `LazyLock` + `get()` 实现热路径优化
 - **单线程缓存**: 使用 `LazyCell` + `force_mut()` 实现延迟初始化+可变更新
@@ -1067,7 +1067,7 @@ println!("{}", data.get_data());
 
 ## 🎯 使用场景
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 场景: 图结构实现
 >
@@ -1141,7 +1141,7 @@ impl<T> Graph<T> {
 
 ## 🎯 选择指南
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 决策树
 >
@@ -1189,7 +1189,7 @@ impl<T> Graph<T> {
 
 ## 🚫 反例速查
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 反例 1: Rc 用于多线程
 >
@@ -1361,7 +1361,7 @@ impl Unmovable {
 
 ## 📚 相关文档
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [所有权与智能指针文档](../../../crates/c01_ownership_borrow_scope/docs/README.md)
 - [智能指针 API 参考](../../../crates/c01_ownership_borrow_scope/docs/tier_03_references/05_智能指针API参考.md)
@@ -1452,28 +1452,28 @@ impl Unmovable {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

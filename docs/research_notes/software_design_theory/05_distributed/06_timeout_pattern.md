@@ -40,13 +40,13 @@
 
 ## 1. 概念定义 (Def)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Def TO1: Timeout
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 超时是一种**时间限制机制**，当操作在指定时间内未完成时，终止操作并返回错误。
 
@@ -60,9 +60,9 @@ Timeout := (Op, t_max, handler)
 
 ### Def TO2: 操作结果
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 OperationResult<T> :=
@@ -73,7 +73,7 @@ OperationResult<T> :=
 
 ### Def TO3: 超时类型
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```text
 TimeoutType :=
@@ -91,7 +91,7 @@ TimeoutType :=
 
 ### Axiom TO1: 超时确定性
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```text
 t_execution > t_max → result = Timeout
@@ -101,7 +101,7 @@ t_execution > t_max → result = Timeout
 
 ### Axiom TO2: 时钟单调性
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```text
 t₁ < t₂ → elapsed(t₁) < elapsed(t₂)
@@ -111,7 +111,7 @@ t₁ < t₂ → elapsed(t₁) < elapsed(t₂)
 
 ### Axiom TO3: 资源释放
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```text
 Timeout → resources_released
@@ -127,7 +127,7 @@ Timeout → resources_released
 
 ### Theorem TO1: 资源占用有界
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```text
 ∀Op. resource_usage(Op) ≤ f(t_max)
@@ -141,7 +141,7 @@ Timeout → resources_released
 
 ### Theorem TO2: 系统活性
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```text
 Timeout → system_continues
@@ -283,7 +283,7 @@ impl TimeoutHttpClient {
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
@@ -339,14 +339,14 @@ impl TimeoutHttpClient {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Timeout (computing)]**
-> **[来源: Wikipedia - Distributed Computing]**
+> **来源: [Wikipedia - Timeout (computing)](https://en.wikipedia.org/wiki/Timeout_(computing))**
+> **来源: [Wikipedia - Distributed Computing](https://en.wikipedia.org/wiki/Distributed_Computing)**
 > **[来源: IEEE - Distributed System Design]**
 > **[来源: ACM - Timeout Pattern in Distributed Systems]**
 > **[来源: Martin Kleppmann - Designing Data-Intensive Applications]**
-> **[来源: Wikipedia - Design Pattern]**
-> **[来源: Rust API Guidelines]**
-> **[来源: Gang of Four - Design Patterns]**
-> **[来源: ACM - Software Design Patterns]**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
+> **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
 
 ---

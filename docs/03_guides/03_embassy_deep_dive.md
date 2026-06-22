@@ -44,12 +44,12 @@
   - [权威来源索引](#权威来源索引)
 
 > **Bloom 层级**: 应用 → 评价 → 创造
-> **[来源: Embassy Book]** ·
+> **来源: [Embassy Book](https://embassy.dev/book/)** ·
 > **[来源: embedded-hal 文档]** ·
 > **[来源: svd2rust 文档]** ·
 > **[来源: defmt 文档]** ·
-> **[来源: Rust Embedded Book]** ·
-> **[来源: Rustonomicon]** ✅
+> **来源: [Rust Embedded Book](https://doc.rust-lang.org/stable/embedded-book/)** ·
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** ✅
 
 ---
 

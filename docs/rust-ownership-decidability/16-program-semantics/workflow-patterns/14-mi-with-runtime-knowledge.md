@@ -7,7 +7,7 @@
 
 ## 目录
 >
-> **[来源: Workflow Patterns Initiative]** · **[来源: van der Aalst 2003]** · **[来源: Russell 2006]** · **[来源: Rust Reference]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)** · **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)** · **来源: [Russell 2006](https://www.workflowpatterns.com/)** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [14 多实例先验运行时知识模式 (Multiple Instances With a priori Runtime Knowledge) - 完整形式化语义](#14-多实例先验运行时知识模式-multiple-instances-with-a-priori-runtime-knowledge---完整形式化语义)
   - [目录](#目录)
@@ -58,13 +58,13 @@
 
 ## 1. 引言
 >
-> **[来源: Workflow Patterns Initiative]** · **[来源: van der Aalst 2003]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)** · **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)**
 
 多实例先验运行时知识模式（Multiple Instances With a priori Runtime Knowledge，WCP14）是工作流控制流模式家族中处理动态并行性的核心模式。与 WCP13（设计时已知实例数）不同，WCP14 的实例数量 $N$ 在流程执行前、于运行时根据业务数据动态确定，广泛应用于批量处理、动态任务分配和弹性计算场景。
 
 ### 1.1 历史背景
 
-> **[来源: van der Aalst 2003]** · **[来源: Russell 2006]**
+> **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)** · **来源: [Russell 2006](https://www.workflowpatterns.com/)**
 
 多实例模式的三层分类框架由 van der Aalst 等人 (2003) 首次系统提出。Russell 等人 (2006) 进一步区分了以下时序类别：
 
@@ -97,7 +97,7 @@ WCP14 解决的核心问题是：**如何在运行时确定并行实例数量后
 
 ### 2.1 概念定义
 
-> **[来源: Workflow Patterns Initiative]** · **[来源: Russell 2006]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)** · **来源: [Russell 2006](https://www.workflowpatterns.com/)**
 
 **多实例先验运行时知识模式** 的形式化定义为：
 
@@ -122,7 +122,7 @@ Activity ::= Task | SubProcess
 
 ### 2.2 核心语义
 
-> **[来源: van der Aalst 2003]**
+> **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)**
 
 **求值语义**:
 
@@ -153,7 +153,7 @@ $$
 
 #### 2.3.1 状态机表示
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 $$
 \begin{aligned}
@@ -180,7 +180,7 @@ $$
 
 #### 2.3.3 Petri 网表示
 
-> **[来源: Wikipedia - Petri Net]**
+> **来源: [Wikipedia - Petri Net](https://en.wikipedia.org/wiki/Petri_Net)**
 
 ```
                           ┌─→ (A₁) ──┐
@@ -233,7 +233,7 @@ flowchart LR
 
 ### 3.2 UML 活动图
 
-> **[来源: Wikipedia - UML Activity Diagram]**
+> **来源: [Wikipedia - UML Activity Diagram](https://en.wikipedia.org/wiki/UML_Activity_Diagram)**
 
 在 UML 活动图中，WCP14 使用带运行时表达式的扩展节点：
 
@@ -251,7 +251,7 @@ flowchart LR
 
 ### 3.3 WfMC 标准
 
-> **[来源: WfMC - Workflow Management Coalition]**
+> **来源: [WfMC - Workflow Management Coalition](https://www.wfmc.org/)**
 
 工作流管理联盟将 WCP14 定义为：
 
@@ -273,7 +273,7 @@ flowchart LR
 
 ### 4.1 CCS 表示
 
-> **[来源: Milner 1989 - Communication and Concurrency]**
+> **来源: [Milner 1989 - Communication and Concurrency](https://en.wikipedia.org/wiki/Communication_and_Concurrency)**
 
 **Calculus of Communicating Systems (CCS)**:
 
@@ -320,7 +320,7 @@ $$
 
 ### 5.1 基础实现
 
-> **[来源: Rust Reference]** · **[来源: The Rust Programming Language]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 利用 Rust 的 `Vec` 和动态并发原语实现运行时确定实例数的多实例模式：
 
@@ -384,7 +384,7 @@ where
 
 ### 5.2 带错误处理的高级实现
 
-> **[来源: Rust Standard Library]** · **[来源: Tokio Docs]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** · **来源: [Tokio Docs](https://tokio.rs/)**
 
 ```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -463,7 +463,7 @@ pub fn barrier_wait(n: usize, arrived: &AtomicUsize) {
 
 ### 5.3 订单处理完整示例
 
-> **[来源: Rust Standard Library]** · **[来源: Tokio Docs]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** · **来源: [Tokio Docs](https://tokio.rs/)**
 
 ```rust,ignore
 use tokio::time::{sleep, Duration};
@@ -557,7 +557,7 @@ pub async fn spawn_known_count(n: usize) -> Vec<tokio::task::JoinHandle<u64>> {
 
 ### 6.1 活性 (Liveness)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **定理**: 若活动模板 $A$ 满足活性，且运行时求值表达式 $\text{Expr}$ 终止并返回有限值 $N$，则 WCP14 最终会完成。
 
@@ -576,7 +576,7 @@ $$
 
 ### 6.2 安全性 (Safety)
 
-> **[来源: van der Aalst 2003]**
+> **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)**
 
 **定理**: WCP14 在求值后恰好创建 $N$ 个实例，且汇合点仅在全部 $N$ 个实例完成后触发。
 
@@ -621,7 +621,7 @@ Multiple Instances Patterns
 
 ### 7.2 形式化关系
 
-> **[来源: Workflow Patterns Initiative]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)**
 
 $$
 \text{WCP13} \subseteq \text{WCP14} \subseteq \text{WCP15}
@@ -661,7 +661,7 @@ $$
 
 ### 8.1 批量订单并行处理
 
-> **[来源: Russell 2006]**
+> **来源: [Russell 2006](https://www.workflowpatterns.com/)**
 
 电商系统在每日开盘时从消息队列获取待处理订单，队列长度 $N$ 在批处理启动前已知。
 
@@ -704,7 +704,7 @@ let ranges: Vec<_> = (0..n).map(|i| i * shard_size..((i + 1) * shard_size).min(r
 
 ### 9.1 流式实例创建
 
-> **[来源: Russell 2006]**
+> **来源: [Russell 2006](https://www.workflowpatterns.com/)**
 
 预取 N 个实例后批量启动：
 
@@ -728,7 +728,7 @@ where F: Fn() -> Fut + Send + 'static, Fut: Future<Output = R> + Send + 'static,
 
 ### 9.2 优先级调度
 
-> **[来源: Tokio Docs]**
+> **来源: [Tokio Docs](https://tokio.rs/)**
 
 为不同实例分配优先级：
 
@@ -748,7 +748,7 @@ pub async fn execute_prioritized<F, Fut, R>(instances: Vec<PrioritizedInstance<F
 
 ### 9.3 弹性伸缩实例池
 
-> **[来源: Rust Reference - Arc]**
+> **来源: [Rust Reference - Arc](https://doc.rust-lang.org/reference/)**
 
 基于运行时已知 $N$ 动态调整工作线程池大小：
 
@@ -817,21 +817,21 @@ impl ElasticPool {
 
 ## 权威来源索引
 
-> **[来源: Workflow Patterns Initiative]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)**
 
-> **[来源: van der Aalst 2003]**
+> **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)**
 
-> **[来源: Russell 2006]**
+> **来源: [Russell 2006](https://www.workflowpatterns.com/)**
 
-> **[来源: Rust Reference]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
-> **[来源: The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-> **[来源: Rust Standard Library]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Tokio Docs]**
+> **来源: [Tokio Docs](https://tokio.rs/)**
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ---
 

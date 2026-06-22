@@ -79,7 +79,7 @@
 
 ## 🎯 跟踪概览 {#-跟踪概览}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档用于跟踪所有研究笔记的详细进展，包括已完成的任务、进行中的工作和计划中的任务。
 
@@ -94,13 +94,13 @@
 
 ## 📚 形式化方法研究进展 {#-形式化方法研究进展}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 所有权模型形式化
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **文档**: [10_ownership_model.md](./formal_methods/10_ownership_model.md)
 **状态**: ✅ 已完成
@@ -108,9 +108,9 @@
 
 #### 已完成 ✅ {#已完成-}
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [x] 研究目标、理论基础、形式化定义、所有权规则、唯一性定理、内存安全证明框架、代码示例（含示例7-10）
 - [x] 与借用检查器的集成、与生命周期的集成、实际应用案例（资源管理、并发、嵌入式/unsafe）
@@ -123,9 +123,9 @@
 
 ### 借用检查器证明
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **文档**: [10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md)
 **状态**: ✅ 已完成
@@ -133,9 +133,9 @@
 
 #### 已完成 ✅ {#已完成--1}
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [x] 研究目标、理论基础、借用规则形式化、数据竞争自由、借用检查算法、正确性证明、代码示例
 - [x] 与所有权系统的集成、与生命周期的集成、实际应用案例（并发、迭代器、闭包）
@@ -147,9 +147,9 @@
 
 ### 异步状态机形式化
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **文档**: [10_async_state_machine.md](./formal_methods/10_async_state_machine.md)
 **状态**: ✅ 已完成
@@ -157,9 +157,9 @@
 
 #### 已完成 ✅ {#已完成--2}
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [x] 研究目标、理论基础、形式化（Future 状态、Poll、状态转换、async/await、并发安全）、定理 6.1–6.3、代码示例
 - [x] 与类型系统、生命周期的集成，实际应用（Tokio、select、结构化并发），Rust 1.93 更新
@@ -171,9 +171,9 @@
 
 ### 生命周期形式化
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **文档**: 10_lifetime_formalization.md
 **状态**: ✅ 已完成
@@ -181,9 +181,9 @@
 
 #### 已完成 ✅ {#已完成--3}
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [x] 研究目标、理论基础、形式化（生命周期语义、约束、推断算法）、引用有效性、代码示例
 - [x] 与所有权、借用检查器的集成，实际应用（结构体/自引用、async/Pin、HRTB）
@@ -195,7 +195,7 @@
 
 ### Pin 和自引用类型形式化
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **文档**: [10_pin_self_referential.md](./formal_methods/10_pin_self_referential.md)
 **状态**: ✅ 已完成
@@ -203,7 +203,7 @@
 
 #### 已完成 ✅ {#已完成--4}
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 - [x] 研究目标、理论基础、形式化（Pin 类型、自引用、Pin 保证）、定理 2–3、代码示例
 - [x] 与异步系统、生命周期的集成，实际应用（async/await、Stream/迭代器、与他语言对比）
@@ -219,7 +219,7 @@
 
 ### 类型系统基础
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **文档**: [10_type_system_foundations.md](./type_theory/10_type_system_foundations.md)
 **状态**: ✅ 已完成
@@ -227,7 +227,7 @@
 
 #### 已完成 ✅ {#已完成--5}
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 - [x] 研究目标、理论基础、形式化、类型安全证明（进展性、保持性、类型安全、类型推导正确性）、代码示例
 - [x] 与 Trait 系统的集成、与生命周期的集成、实际应用案例（泛型/impl Trait、错误处理、Rust 1.93）
@@ -239,7 +239,7 @@
 
 ### Trait 系统形式化
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **文档**: [10_trait_system_formalization.md](./type_theory/10_trait_system_formalization.md)
 **状态**: ✅ 已完成
@@ -247,7 +247,7 @@
 
 #### 已完成 ✅ {#已完成--6}
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 - [x] 研究目标定义
 - [x] 理论基础整理（包括理论背景和相关概念）
@@ -266,7 +266,7 @@
 
 ### 生命周期形式化（类型理论）
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **文档**: [10_lifetime_formalization.md](./type_theory/10_lifetime_formalization.md)
 **状态**: ✅ 已完成
@@ -274,7 +274,7 @@
 
 #### 已完成 ✅ {#已完成--7}
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 - [x] 研究目标、理论基础、形式化（生命周期、子类型、推断）、代码示例
 - [x] 与类型系统、借用检查器的集成，实际应用（结构体/HRTB、async/Pin、Trait 对象）；与 formal_methods 生命周期文档互补
@@ -286,7 +286,7 @@
 
 ### 高级类型特性
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **文档**: [10_advanced_types.md](./type_theory/10_advanced_types.md)
 **状态**: ✅ 已完成
@@ -294,7 +294,7 @@
 
 #### 已完成 ✅ {#已完成--8}
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 - [x] 研究目标、理论基础（GATs、const、依赖类型、学术论文）、形式化、代码示例 8 个
 - [x] 类型理论分析、系统集成与实际应用（与类型系统/Trait、迭代器/Stream、序列化/const、他语言对比）
@@ -306,7 +306,7 @@
 
 ### 型变理论
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **文档**: [10_variance_theory.md](./type_theory/10_variance_theory.md)
 **状态**: ✅ 已完成
@@ -314,7 +314,7 @@
 
 #### 已完成 ✅ {#已完成--9}
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 - [x] 研究目标、理论基础、形式化（协变、逆变、不变、型变规则）、定理 1–4、代码示例
 - [x] 与类型系统的集成，实际应用（闭包/fn、PhantomData/泛型、与他语言对比）
@@ -330,7 +330,7 @@
 
 ### 性能基准测试
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **文档**: [10_performance_benchmarks.md](./experiments/10_performance_benchmarks.md)
 **状态**: ✅ 已完成
@@ -338,7 +338,7 @@
 
 #### 已完成 ✅ {#已完成--10}
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - [x] 研究目标定义、理论基础、实验设计、测试框架选择
 - [x] 具体实验设计、基准测试实现、数据收集机制、结果分析工具
@@ -353,7 +353,7 @@
 
 ### 内存分析
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **文档**: [10_memory_analysis.md](./experiments/10_memory_analysis.md)
 **状态**: ✅ 已完成
@@ -656,17 +656,17 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Project Management]**
-> **[来源: Wikipedia - Software Development Process]**
+> **来源: [Wikipedia - Project Management](https://en.wikipedia.org/wiki/Project_Management)**
+> **来源: [Wikipedia - Software Development Process](https://en.wikipedia.org/wiki/Software_Development_Process)**
 > **[来源: ACM - Software Project Tracking]**
 > **[来源: IEEE - Project Management Standards]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ---

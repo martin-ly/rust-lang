@@ -7,13 +7,13 @@
 
 ## 1. 引言
 
-Tonic 是 Rust 生态中的原生 gRPC 实现，年下载量超过 2000 万次 [来源: crates.io 统计, 2025]。
+Tonic 是 Rust 生态中的原生 gRPC 实现，年下载量超过 2000 万次 来源: [crates.io 统计, 2025](https://crates.io/)。
 它并非独立的网络框架，而是精密组装了 Tokio（异步运行时）、Hyper（HTTP/2 实现）、Tower（Service/Layer 抽象）和 prost（Protobuf 编解码）等多个生态基石。
 Tonic 的核心理念可以概括为：**gRPC 即 HTTP/2 + Protobuf + 流语义**，一切抽象都围绕这三者的类型安全组合展开。
 
 与 Go 的 gRPC 实现不同，Tonic 充分利用 Rust 的类型系统，在编译期即保证：服务方法的签名与 `.proto` 定义一致、流类型的方向（服务器流/客户端流/双向流）与 handler 签名匹配、拦截器链的类型正确。
 
-> [来源: Tonic 官方文档, https://docs.rs/tonic/latest/tonic/]
+> 来源: Tonic 官方文档, https: /  / [docs.rs](https://docs.rs/) / tonic / latest / tonic / 
 > [来源: Tonic GitHub README, https://github.com/hyperium/tonic]
 
 ---
@@ -115,7 +115,7 @@ pub trait Greeter: Send + Sync + 'static {
 关键设计：**每个 gRPC 方法映射为一个 async trait 方法**，流方法的返回类型是一个 `Stream` 关联类型。
 编译器保证：如果 `.proto` 中声明为 `stream`，实现者必须返回 `Stream`；如果声明为 unary，返回单一 `Response`。
 
-> [来源: Tonic Service trait 生成, https://docs.rs/tonic-build/latest/tonic_build/]
+> 来源: Tonic Service trait 生成, https: /  / [docs.rs](https://docs.rs/) / tonic-build / latest / tonic_build / 
 
 ### 3.2 `Service<http::Request<Body>>` — Tower 统一的请求抽象
 >
@@ -146,7 +146,7 @@ where
 这种设计的精妙之处：**HTTP/2 的细节对用户完全透明**。
 用户只处理 Protobuf message，Tonic 负责 HTTP/2 帧的组装、gRPC 消息分帧（length-prefixed）、trailers 的写入。
 
-> [来源: Tower Service trait, https://docs.rs/tower/latest/tower/trait.Service.html]
+> 来源: Tower Service trait, https: /  / [docs.rs](https://docs.rs/) / tower / latest / tower / trait.Service.html
 
 ### 3.3 `Streaming<T>` — 流类型的方向安全
 >
@@ -187,7 +187,7 @@ async fn bidirectional(
 ) -> Result<Response<BoxStream<Result<ServerMessage, Status>>>, Status> { }
 ```
 
-> [来源: Tonic Streaming 文档, https://docs.rs/tonic/latest/tonic/struct.Streaming.html]
+> 来源: Tonic Streaming 文档, https: /  / [docs.rs](https://docs.rs/) / tonic / latest / tonic / struct.Streaming.html
 
 ---
 
@@ -239,7 +239,7 @@ let response = client
 println!("RESPONSE={:?}", response.into_inner().message);
 ```
 
-> [来源: Tonic-build 文档, https://docs.rs/tonic-build/latest/tonic_build/]
+> 来源: Tonic-build 文档, https: /  / [docs.rs](https://docs.rs/) / tonic-build / latest / tonic_build / 
 
 ---
 
@@ -305,7 +305,7 @@ impl<S> Layer<S> for AsyncAuthLayer {
 // AsyncAuthService 实现 Service<Request>，内部可执行 .await
 ```
 
-> [来源: Tonic Interceptor 文档, https://docs.rs/tonic/latest/tonic/service/trait.Interceptor.html]
+> 来源: Tonic Interceptor 文档, https: /  / [docs.rs](https://docs.rs/) / tonic / latest / tonic / service / trait.Interceptor.html
 
 ---
 
@@ -400,8 +400,8 @@ pub struct FileChunk {
 | 服务端流（1000 条）| 1x | 流式传输无批量延迟 |
 | 大消息（1MB payload）| 2-3x JSON | Protobuf 二进制 + 零拷贝优势明显 |
 
-> [来源: prost 文档, https://docs.rs/prost/latest/prost/]
-> [来源: Hyper HTTP/2 文档, https://docs.rs/h2/latest/h2/]
+> 来源: prost 文档, https: /  / [docs.rs](https://docs.rs/) / prost / latest / prost / 
+> 来源: Hyper HTTP / 2 文档, https: /  / [docs.rs](https://docs.rs/) / h2 / latest / h2 / 
 
 ---
 

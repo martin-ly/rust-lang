@@ -25,7 +25,7 @@
 
 ## 📊 目录 {#-目录}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Pin 和自引用类型形式化](#pin-和自引用类型形式化)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -86,15 +86,15 @@
 
 ## 🎯 研究目标 {#-研究目标}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本研究的目的是形式化定义 Rust 的 Pin 类型和自引用类型，并证明其安全性。
 
 ### 核心问题
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **Pin 类型的形式化**: 如何用数学语言精确描述 Pin 类型？
 2. **自引用类型安全**: 如何证明自引用类型的安全性？
@@ -102,9 +102,9 @@
 
 ### 预期成果
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - Pin 类型的形式化定义
 - 自引用类型的形式化模型
@@ -114,13 +114,13 @@
 
 ## 📚 理论基础 {#-理论基础}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Pin 类型
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Pin**: `Pin<P>` 是一个智能指针，保证被指向的值不会被移动。Pin 通过类型系统提供内存位置稳定性的保证。
 
@@ -130,9 +130,9 @@
 
 ### 自引用类型
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **自引用类型 (Self-Referential Type)**: 包含指向自身字段引用的类型。
 自引用类型在结构体中包含指向同一结构体其他字段的引用。
@@ -143,9 +143,9 @@
 
 ### 移动语义与 Pin
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **关系**: Pin 通过类型系统保证，被 Pin 的值不会被移动，从而保证自引用类型的安全性。
 
@@ -153,9 +153,9 @@
 
 ### 相关概念
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **内存位置稳定性 (Memory Location Stability)**: 值在内存中的位置保持不变。Pin 保证非 `Unpin` 类型的值在内存中的位置稳定。
 
@@ -178,9 +178,9 @@ $。
 
 ### 堆与栈固定：使用场景区分与设计论证
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 维度 | 栈固定 `Pin::new` | 堆固定 `Box::pin` |
 | :--- | :--- | :--- |
@@ -194,9 +194,9 @@ $。
 
 ### 理论背景
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **线性类型系统 (Linear Type System)**: Pin 可以视为线性类型系统的一种应用，确保值不会被意外移动。
 
@@ -223,7 +223,7 @@ $。
 
 ### 1. Pin 类型形式化
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **定义 1.1 (Pin 类型)**: Pin 类型 $\text{Pin}[P]$ 是一个智能指针类型，其中 $P$ 是指针类型（如 $\Box[T]$ 或 $\&mut T$）。
 
@@ -233,7 +233,7 @@ $。
 
 ### 2. 自引用类型形式化
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **定义 2.1 (自引用类型)**: 自引用类型 $T$ 是一个包含指向自身字段引用的类型：
 $$T = \{\text{field}_1 : \tau_1, \ldots, \text{field}_n : \&'a \tau_i\}$$
@@ -244,7 +244,7 @@ $$T = \{\text{field}_1 : \tau_1, \ldots, \text{field}_n : \&'a \tau_i\}$$
 
 ### 3. Pin 保证
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **定理 1 (Pin 保证)**:
 对于非 `Unpin` 类型 $T$ 和 $\text{Pin}[\Box[T]]$，被 Pin 的值在内存中的位置不会改变。
@@ -273,7 +273,7 @@ $$T = \{\text{field}_1 : \tau_1, \ldots, \text{field}_n : \&'a \tau_i\}$$
 
 ### 3.1 Unpin Trait 定义
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **定义 3.1 (Unpin Trait)**: `Unpin` 是一个 marker trait，表示类型可以安全移动。
 
@@ -299,7 +299,7 @@ $$
 
 ### 3.2 Drop 与 Pin 的交互
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **定义 3.2 (Drop 与 Pin 的交互)**: 对于被 Pin 的类型，Drop 的实现必须遵守特定的安全契约。
 
@@ -327,7 +327,7 @@ $$
 
 ### 3.3 Pin 投影规则
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **定义 3.3 (Pin 投影规则)**: Pin 投影是指从被 Pin 的结构体中获取被 Pin 的字段的安全转换。
 
@@ -369,7 +369,7 @@ $$
 
 ### Rust 对应
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 定理 | crates 示例 | 说明 |
 | :--- | :--- | :--- |
@@ -414,7 +414,7 @@ Pin 安全性证明树
 
 ### 概念定义-属性关系-解释论证 层次汇总
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
@@ -430,7 +430,7 @@ Pin 安全性证明树
 
 ### 待证明的性质
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 1. **Pin 不变性**: Pin 保证被 Pin 的值不会被移动
 2. **自引用类型安全**: 自引用类型在 Pin 下是安全的
@@ -438,7 +438,7 @@ Pin 安全性证明树
 
 ### 证明方法
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 - **类型系统证明**: 证明 Pin 的类型系统保证
 - **语义证明**: 证明 Pin 的语义正确性
@@ -452,7 +452,7 @@ Pin 安全性证明树
 
 ### 示例 1: Pin 基础
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust
 use std::pin::Pin;
@@ -480,7 +480,7 @@ fn main() {
 
 ### 示例 2: 自引用结构
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use std::pin::Pin;
@@ -520,7 +520,7 @@ impl SelfReferential {
 
 ### 示例 3: Future 和 Pin
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust
 use std::pin::Pin;
@@ -561,7 +561,7 @@ async fn use_future() {
 
 ### 示例 4: 自引用结构体
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust,ignore
 use std::pin::Pin;
@@ -611,7 +611,7 @@ fn use_self_referential() {
 
 ### 示例 5: Pin 投影
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 use std::pin::Pin;
@@ -851,34 +851,34 @@ async fn use_future() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Pointer (computer programming)]**
+> **来源: [Wikipedia - Pointer (computer programming)](https://en.wikipedia.org/wiki/Pointer_(computer_programming))**
 
-> **[来源: Rust Reference - Pin]**
+> **来源: [Rust Reference - Pin](https://doc.rust-lang.org/reference/)**
 
-> **[来源: Rustonomicon - Self-Referential Types]**
+> **来源: [Rustonomicon - Self-Referential Types](https://doc.rust-lang.org/nomicon/)**
 
-> **[来源: TRPL Ch. 17 - Pin]**
+> **来源: [TRPL Ch. 17 - Pin](https://doc.rust-lang.org/book/ch17-00-async-await.html)**
 
-> **[来源: RFC 2349 - Pin API]**
+> **来源: [RFC 2349 - Pin API](https://rust-lang.github.io/rfcs/2349-2349-pin.html)**
 
 > **[来源: ACM - Safe Self-Referential Structures]**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

@@ -46,13 +46,13 @@
 
 ## 1. 什么是 cargo-semver-checks？
 >
-> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Semantic Versioning]** · **[来源: Wikipedia - Software Versioning]** · **[来源: ACM - API Evolution Management]** · **[来源: IEEE - Software Configuration Management]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Semantic Versioning](https://en.wikipedia.org/wiki/Semantic_Versioning)** · **来源: [Wikipedia - Software Versioning](https://en.wikipedia.org/wiki/Software_Versioning)** · **[来源: ACM - API Evolution Management]** · **[来源: IEEE - Software Configuration Management]**
 
 **cargo-semver-checks** 是一个静态分析工具，用于检测 Rust crate 的公共 API 是否违反了语义化版本控制（Semantic Versioning）规则。
 
 ### 为什么需要它？
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Rust 生态严格遵循 SemVer：
 
@@ -69,7 +69,7 @@ Rust 生态严格遵循 SemVer：
 
 ### 检测范围
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 cargo-semver-checks 基于 rustdoc JSON 输出进行分析，可检测：
 
@@ -272,13 +272,13 @@ pub fn __internal_helper() {} // semver-checks 会忽略此项
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

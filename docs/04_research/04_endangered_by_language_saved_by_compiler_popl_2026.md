@@ -13,7 +13,7 @@
 
 ## 目录
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Endangered by Language, Saved by Compiler (POPL 2026) 研究笔记](#endangered-by-language-saved-by-compiler-popl-2026-研究笔记)
   - [目录](#目录)
@@ -42,7 +42,7 @@
 
 ## 1. 论文信息
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **论文标题**: Endangered by Language, Saved by Compiler
 
@@ -66,13 +66,13 @@
 
 ## 2. 核心论点
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 论文核心命题
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 该论文提出了一个引人注目的反直觉观点：
 
@@ -82,9 +82,9 @@
 
 ### 2.2 具体案例
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 论文分析了以下几类典型模式：
 
@@ -110,13 +110,13 @@ flowchart TD
 
 ## 3. 与 Rust 的关系
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 3.1 Rust 的所有权系统：编译期消除运行时错误
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Rust 的设计理念与该论文的观察形成了有趣的**呼应与超越**：
 
@@ -133,9 +133,9 @@ flowchart LR
 
 ### 3.2 Rust 的编译器"拯救"机制
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Rust 编译器 (`rustc`) 的以下组件扮演了论文中"saved by compiler"的角色，但更加系统和彻底：
 
@@ -148,9 +148,9 @@ Rust 编译器 (`rustc`) 的以下组件扮演了论文中"saved by compiler"的
 
 ### 3.3 关键差异
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 论文中讨论的语言（如 C/C++）依赖的是**优化过程中的偶然保护**，而 Rust 提供的是**语言设计层面的必然保证**：
 
@@ -162,13 +162,13 @@ Rust 编译器 (`rustc`) 的以下组件扮演了论文中"saved by compiler"的
 
 ## 4. 跨语言对比：C/C++ 的教训
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 4.1 C 语言中的典型案例
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 在 C 语言中，以下模式理论上是 `UB`，但某些编译器优化实际上"拯救"了它们：
 
@@ -188,7 +188,7 @@ free(p);
 
 ### 4.2 C++ 的 `std::unique_ptr`
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 C++11 引入的 `std::unique_ptr` 是一个中间案例：
 
@@ -217,7 +217,7 @@ flowchart LR
 
 ### 5.1 对安全关键系统开发的启示
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 该论文对安全关键系统（Safety-Critical Systems）开发有重要指导意义：
 
@@ -230,7 +230,7 @@ flowchart LR
 
 ### 5.2 从"偶然安全"到"必然安全"
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 论文的核心警示在于：
 
@@ -246,14 +246,14 @@ flowchart LR
 
 ### 6.1 技术谱系
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```mermaid
 flowchart TD
-    A[Iris 分离逻辑框架<br/>2015+] --> B[RustBelt<br/>POPL 2018]
+    A[Iris 分离逻辑框架<br/>2015+] --> B[RustBelt](https://plv.mpi-sws.org/rustbelt/)
     B --> C[Miri<br/>运行时 UB 检测]
-    B --> D[Stacked Borrows<br/>别名模型]
-    D --> E[Tree Borrows<br/>2023+ 改进]
+    B --> D[Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)
+    D --> E[Tree Borrows — PLDI 2025](https://perso.crans.org/vanille/treebor/)
     B --> F[RefinedRust<br/>Coq 精炼类型]
     B --> G[VerusBelt<br/>PLDI 2026]
     G --> H[Verus<br/>SMT 自动验证]
@@ -265,7 +265,7 @@ flowchart TD
 
 ### 6.2 各组件的角色
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | 工具/论文 | 角色 | 与本论文的关系 |
 |-----------|------|--------------|
@@ -277,7 +277,7 @@ flowchart TD
 
 ### 6.3 论文在学术脉络中的定位
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 本论文填补了形式化验证领域的一个重要空白：
 
@@ -354,9 +354,9 @@ Programming Languages (POPL 2026).
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Compiler Construction]**
-> **[来源: Rust Compiler Team Blog]**
-> **[来源: LLVM Documentation]**
-> **[来源: ACM - Compiler Design]**
+> **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)**
+> **来源: [Rust Compiler Team Blog](https://blog.rust-lang.org/inside-rust/)**
+> **来源: [LLVM Documentation](https://llvm.org/docs/)**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ---

@@ -83,7 +83,7 @@ graph LR
 | 后端层 | 为不同数据库生成特定方言的 SQL | `Backend` trait、`Pg`、`Sqlite`、`Mysql` |
 | 运行时层 | 连接池管理、事务、结果映射 | `Connection`、`TransactionManager`、`LoadDsl` |
 
-> [来源: Diesel API 文档, https://docs.rs/diesel/latest/diesel/]
+> 来源: Diesel API 文档, https: /  / [docs.rs](https://docs.rs/) / [diesel](https://diesel.rs/) / latest / [diesel](https://diesel.rs/) / 
 
 ---
 
@@ -203,7 +203,7 @@ users::table
 ```
 
 > [来源: Diesel Query Builder 文档, https://diesel.rs/guides/all-about-inserts.html]
-> [来源: Rust Reference, Trait 与泛型章节, https://doc.rust-lang.org/reference/items/traits.html]
+> 来源: [Rust Reference, Trait 与泛型章节, https://doc.rust-lang.org/reference/items/traits.html](https://doc.rust-lang.org/reference/)
 
 ---
 
@@ -305,8 +305,8 @@ fn transfer_funds(
 }
 ```
 
-> [来源: Diesel Connection 文档, https://docs.rs/diesel/latest/diesel/connection/trait.Connection.html]
-> [来源: Rust Reference, RAII 与 Drop trait, https://doc.rust-lang.org/reference/items/traits.html#drop]
+> 来源: Diesel Connection 文档, https: /  / [docs.rs](https://docs.rs/) / [diesel](https://diesel.rs/) / latest / [diesel](https://diesel.rs/) / connection / trait.Connection.html
+> 来源: [Rust Reference, RAII 与 Drop trait, https://doc.rust-lang.org/reference/items/traits.html#drop](https://doc.rust-lang.org/reference/)
 
 ---
 
@@ -439,7 +439,7 @@ struct UserChangeset {
 ```
 
 > [来源: Diesel Schema 文档, https://diesel.rs/guides/schema-in-depth.html]
-> [来源: Rust Reference, 过程宏, https://doc.rust-lang.org/reference/procedural-macros.html]
+> 来源: [Rust Reference, 过程宏, https://doc.rust-lang.org/reference/procedural-macros.html](https://doc.rust-lang.org/reference/)
 
 ---
 
@@ -553,8 +553,8 @@ let pg_users = fetch_active_users(&mut pg_conn)?;
 let sqlite_users = fetch_active_users(&mut sqlite_conn)?;
 ```
 
-> [来源: Diesel Backend 文档, https://docs.rs/diesel/latest/diesel/backend/trait.Backend.html]
-> [来源: Rust Reference, Monomorphization, https://doc.rust-lang.org/reference/items/generics.html]
+> 来源: Diesel Backend 文档, https: /  / [docs.rs](https://docs.rs/) / [diesel](https://diesel.rs/) / latest / [diesel](https://diesel.rs/) / backend / trait.Backend.html
+> 来源: [Rust Reference, Monomorphization, https://doc.rust-lang.org/reference/items/generics.html](https://doc.rust-lang.org/reference/)
 
 ---
 
@@ -652,7 +652,7 @@ let row: (i64, String) = sqlx::query_as("SELECT id, name FROM users WHERE id = $
 | 零成本抽象 | ✅ 是 | ✅ 是 | ✅ 是 |
 
 > [来源: Diesel vs sqlx 对比分析, https://diesel.rs/guides/comparison-to-other-orms.html]
-> [来源: sqlx 文档, https://github.com/launchbadge/sqlx]
+> 来源: sqlx 文档, https: /  / github.com / launchbadge / [sqlx](https://github.com/launchbadge/sqlx)
 
 ---
 

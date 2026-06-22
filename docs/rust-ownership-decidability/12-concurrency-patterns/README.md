@@ -24,7 +24,7 @@
 
 ## 📚 文档结构
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 本系列文档深入探讨 Rust 并发编程的各个层面，从理论基础到实际应用，从线程安全到分布式系统。
 
@@ -48,13 +48,13 @@
 
 ## 🎯 学习路径
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 路径一：循序渐进（推荐初学者）
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```text
 README → 12-02 → 12-03 → 12-05 → 12-01 → 12-06 → 12-04 → 12-07
@@ -70,7 +70,7 @@ README → 12-02 → 12-03 → 12-05 → 12-01 → 12-06 → 12-04 → 12-07
 
 ### 路径二：问题导向
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 你的问题 | 推荐阅读 |
 |---------|---------|
@@ -84,7 +84,7 @@ README → 12-02 → 12-03 → 12-05 → 12-01 → 12-06 → 12-04 → 12-07
 
 ### 路径三：性能优先
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```text
 12-06 → 12-04 → 12-05 → 12-02 → 12-03
@@ -92,7 +92,7 @@ README → 12-02 → 12-03 → 12-05 → 12-01 → 12-06 → 12-04 → 12-07
 
 ### 路径四：形式化方法（研究员/高级开发者）
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```text
 12-02 → 12-01 → 12-01-deep → 12-04 → 12-04-deep → 12-05
@@ -111,7 +111,7 @@ README → 12-02 → 12-03 → 12-05 → 12-01 → 12-06 → 12-04 → 12-07
 
 ### 12-01: 并发架构设计模式
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **核心主题**:
 
@@ -128,7 +128,7 @@ README → 12-02 → 12-03 → 12-05 → 12-01 → 12-06 → 12-04 → 12-07
 
 ### 12-01-deep: 并发架构形式化深度解析
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **核心主题** (🔬 高级形式化内容):
 
@@ -181,7 +181,7 @@ fn cas_loop(counter: &AtomicUsize) {
 
 ### 12-02: 线程安全模式
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **核心主题**:
 
@@ -213,7 +213,7 @@ static LOCK_ORDER: AtomicUsize = AtomicUsize::new(0);
 
 ### 12-03: 消息传递模式
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **核心主题**:
 
@@ -256,7 +256,7 @@ async fn send_with_backpressure<T>(
 
 ### 12-04: 无锁编程
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **核心主题**:
 
@@ -306,7 +306,7 @@ pub fn push(&self, value: T) {
 
 ### 12-05: 异步并发模式
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **核心主题**:
 
@@ -351,7 +351,7 @@ impl AdaptiveBackpressure {
 
 ### 12-06: 数据并行
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **核心主题**:
 
@@ -389,7 +389,7 @@ pub fn parallel_simd_sum(data: &[f64]) -> f64 {
 
 ### 12-06-deep: 数据并行形式化深度解析
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **核心主题** (🔬 高级形式化内容):
 
@@ -443,7 +443,7 @@ impl ParallelIterator for StepRange {
 
 ### 12-07: 分布式模式
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **核心主题**:
 
@@ -494,7 +494,7 @@ impl RaftNode {
 
 ### 12-07-deep: 分布式系统模式深度解析
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **核心主题** (🔬 高级形式化内容):
 
@@ -614,7 +614,7 @@ cargo test --all
 
 ### 死锁检测
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 use parking_lot::deadlock;
@@ -633,7 +633,7 @@ std::thread::spawn(move || {
 
 ### 竞态条件检测
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 使用 `loom` 进行并发测试：
 
@@ -664,7 +664,7 @@ fn test_concurrent_stack() {
 
 ### 性能分析
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```bash
 # CPU 火焰图
@@ -683,7 +683,7 @@ cargo build --features parking_lot/deadlock_detection
 
 ### 陷阱 1: 在异步代码中阻塞
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 // ❌ 错误
@@ -699,7 +699,7 @@ async fn good() {
 
 ### 陷阱 2: 在持有锁时 await
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
 // ❌ 错误
@@ -720,7 +720,7 @@ async fn good(data: Arc<Mutex<Data>>) {
 
 ### 陷阱 3: 忽略取消安全
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust,ignore
 // ❌ 非取消安全
@@ -755,7 +755,7 @@ async fn good(sender: &mpsc::Sender<i32>) {
 
 ### 书籍
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 1. **Rust Atomics and Locks** by Mara Bos
    - 深入讲解 Rust 内存模型和原子操作
@@ -771,7 +771,7 @@ async fn good(sender: &mpsc::Sender<i32>) {
 
 ### 在线资源
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - [The Rust Async Book](https://rust-lang.github.io/async-book/)
 - [Tokio Documentation](https://tokio.rs/)
@@ -780,7 +780,7 @@ async fn good(sender: &mpsc::Sender<i32>) {
 
 ### 论文与研究
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - "The Problem of Programming Language Concurrency Semantics" - Batty et al.
 - "Memory Models: A Case for Rethinking Parallel Languages and Hardware" - Boehm
@@ -799,7 +799,7 @@ async fn good(sender: &mpsc::Sender<i32>) {
 
 ### 文档风格指南
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - 代码示例必须包含错误处理
 - 性能声明需要基准测试支持
@@ -839,7 +839,7 @@ async fn good(sender: &mpsc::Sender<i32>) {
 
 ### LazyCell 和 LazyLock 新方法
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 Rust 1.94 为 `LazyCell` 和 `LazyLock` 引入了新的访问方法，简化了延迟初始化模式：
 
@@ -919,18 +919,18 @@ where
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
-> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
+> **来源: [TRPL Ch. 16 - Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)**
 
-> **[来源: crossbeam Documentation]**
+> **来源: [crossbeam Documentation](https://docs.rs/crossbeam/latest/crossbeam/)**
 
-> **[来源: ACM - Concurrent Programming]**
+> **来源: [ACM - Concurrent Programming](https://dl.acm.org/)**

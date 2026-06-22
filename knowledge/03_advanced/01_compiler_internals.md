@@ -36,3 +36,28 @@ fn main() {
 - [FFI 边界测试](02_ffi.md) — C 可变参数与 Rust FFI 绑定
 - [内联汇编](03_inline_asm.md) — 输入输出约束与编译器优化
 - [性能优化](05_performance_optimization.md) — 零成本抽象与编译器优化策略
+
+## 📚 模块 8: 国际化对齐
+
+> 本节按项目模板要求补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) | 权威来源 | 编译器开发指南 |
+| [Rust Reference](https://doc.rust-lang.org/reference/) | 权威来源 | 语言参考 |
+
+### 8.2 学术来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | 权威来源 | 编译器语义基础 |
+| [a-mir-formality](https://github.com/rust-lang/a-mir-formality) | 权威来源 | 形式化类型系统 |
+
+### 8.3 社区权威
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [This Week in Rust — Compiler](https://this-week-in-rust.org/) | 权威来源 | 编译器团队动态 |
+| [rustc-reading-club](https://github.com/rust-lang/rustc-reading-club) | 权威来源 | rustc 源码共读 |

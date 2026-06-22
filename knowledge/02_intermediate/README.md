@@ -105,3 +105,31 @@
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+## 📚 模块 8: 国际化对齐
+
+> 本模块按项目模板补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 说明 |
+|:---|:---|
+| [The Rust Programming Language — Ch10](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html) | 泛型、Trait 与生命周期 |
+| [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html) | Trait 规范 |
+| [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | API 设计指南 |
+
+### 8.2 学术/工业来源
+
+| 来源 | 说明 |
+|:---|:---|
+| [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | Trait 对象与泛型语义 |
+
+### 8.3 社区资源
+
+| 来源 | 说明 |
+|:---|:---|
+| [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) | 常用编程模式 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | 中级示例 |
+| [This Week in Rust](https://this-week-in-rust.org/) | 社区动态 |
+

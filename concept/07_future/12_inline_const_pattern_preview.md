@@ -1,8 +1,8 @@
-# Inline Const Pattern Preview
+# Inline Const Pattern 预览（Rust 1.98+ Nightly）
 
 > **代码状态**: [综述级 — 待补充代码]
 >
-> **EN**: Inline Const Pattern Preview
+> **EN**: Inline Const Pattern Preview (Rust 1.98+ Nightly)
 > **Summary**: Inline Const Pattern Preview: emerging Rust language feature or ecosystem trend.
 >
 > **状态**: 🧪 Nightly 实验性

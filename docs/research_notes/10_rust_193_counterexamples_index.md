@@ -32,7 +32,7 @@
 
 ## 1.93 新增/变更相关反例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性/变更 | 反例或边界说明 | 形式化/设计文档 |
 | :--- | :--- | :--- |
@@ -50,7 +50,7 @@
 
 ## 与形式化/设计文档的衔接
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **所有权/借用**：deref_nullptr、全局分配器反例见 [formal_methods](formal_methods/README.md) 六篇并表与 [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md)。
 - **类型/Trait**：Copy 特化移除、const/static 边界见 [type_theory](type_theory/README.md)、[trait_system_formalization](type_theory/10_trait_system_formalization.md)、[advanced_types](type_theory/10_advanced_types.md)。
@@ -129,13 +129,13 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

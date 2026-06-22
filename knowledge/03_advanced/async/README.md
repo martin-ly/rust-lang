@@ -58,3 +58,31 @@
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+## 📚 模块 8: 国际化对齐
+
+> 本模块按项目模板补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 说明 |
+|:---|:---|
+| [The Rust Async Book](https://rust-lang.github.io/async-book/) | 异步编程官方教程 |
+| [TRPL Ch17 — Async/Await](https://doc.rust-lang.org/book/ch17-00-async-await.html) | async/await 语法 |
+| [Rust Reference — Async Functions](https://doc.rust-lang.org/reference/items/functions.html#async-functions) | async fn 规范 |
+
+### 8.2 学术/工业来源
+
+| 来源 | 说明 |
+|:---|:---|
+| [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | Future / Pin 语义基础 |
+
+### 8.3 社区资源
+
+| 来源 | 说明 |
+|:---|:---|
+| [Tokio Documentation](https://tokio.rs/) | 主流异步运行时 |
+| [smol](https://github.com/smol-rs/smol) | 轻量异步运行时 |
+| [Embassy](https://embassy.dev/) | 嵌入式异步框架 |
+

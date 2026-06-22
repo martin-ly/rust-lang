@@ -13,14 +13,14 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** ·
-> **[来源: Wikipedia - Rust (programming language)]** ·
-> **[来源: Rustonomicon]** ·
-> **[来源: TRPL]** ·
-> **[来源: RFCs - github.com/rust-lang/rfcs]** ·
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]** ·
-> **[来源: Wikipedia - Thread Safety]** ·
-> **[来源: Wikipedia - Mutual Exclusion]** ·
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** ·
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** ·
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** ·
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** ·
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** ·
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** ·
+> **来源: [Wikipedia - Thread Safety](https://en.wikipedia.org/wiki/Thread_Safety)** ·
+> **来源: [Wikipedia - Mutual Exclusion](https://en.wikipedia.org/wiki/Mutual_Exclusion)** ·
 > **[来源: ACM - Safe Concurrency Patterns]** ·
 > **[来源: IEEE - Concurrent Programming Standards]**
 
@@ -51,13 +51,13 @@
 
 ## 1. 理论基础
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 并发安全的形式化定义
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 在并发编程中，安全性通常使用以下形式化概念描述：
 
@@ -108,7 +108,7 @@ fn toctou_race(shared: Arc<Mutex<i32>>) {
 
 ### 1.2 Send 和 Sync trait 理论
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **定理 1.2.1 (Send 保证)**
 如果类型 T: Send，则可以将 T 的值的所有权安全地转移到另一个线程。
@@ -128,7 +128,7 @@ T: Send + Sync     ⇔ Rc<T>: !Send ∧ !Sync (因为引用计数非原子)
 
 ### 1.3 数据竞争与竞态条件
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **数据竞争三要素**:
 
@@ -167,7 +167,7 @@ fn data_race_prevention() {
 
 ### 2.1 Send trait
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 pub unsafe auto trait Send {
@@ -224,7 +224,7 @@ unsafe impl Sync for ThreadSafeHandle {}
 
 ### 2.2 Sync trait
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 pub unsafe auto trait Sync {
@@ -290,7 +290,7 @@ fn sync_demonstration() {
 
 ### 2.3 自动推导规则
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 Rust 编译器自动推导 Send 和 Sync：
 
@@ -316,7 +316,7 @@ impl !Sync for NonSendData {}
 
 ### 2.4 手动实现示例
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 use std::sync::atomic::{AtomicPtr, Ordering};
@@ -452,7 +452,7 @@ mod tests {
 
 ### 3.1 RefCell 与线程安全
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 RefCell 提供运行时借用检查，但不是线程安全的：
 
@@ -481,7 +481,7 @@ fn refcell_single_thread() {
 
 ### 3.2 Mutex 详解
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use std::sync::{Arc, Mutex, MutexGuard};
@@ -606,7 +606,7 @@ impl ConfigManager {
 
 ### 3.3 RwLock 详解
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 use std::sync::{Arc, RwLock, RwLockReadGuard, RwLockWriteGuard};
@@ -715,7 +715,7 @@ impl<K: Eq + std::hash::Hash + Clone, V: Clone> FastConcurrentCache<K, V> {
 
 ### 3.4 延迟初始化模式 (Rust 1.94)
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 Rust 1.94 为 `LazyLock` 和 `LazyCell` 引入了新的访问方法，简化了线程安全延迟初始化：
 
@@ -777,7 +777,7 @@ fn scoped_with_lazy() {
 
 ### 线程局部存储中的 LazyCell
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
 use std::cell::LazyCell;
@@ -804,7 +804,7 @@ fn thread_local_lazy() {
 
 ### 3.5 原子类型
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust
 use std::sync::atomic::{
@@ -974,7 +974,7 @@ impl<T> SynchronizedData<T> {
 
 ### 3.5 性能对比与选择
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 use std::time::{Duration, Instant};
@@ -1043,7 +1043,7 @@ pub fn benchmark_locks() {
 
 ### 4.1 操作系统互斥锁
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 （限于篇幅，继续扩展下一部分...）
 
@@ -1068,18 +1068,18 @@ pub fn benchmark_locks() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
-> **[来源: Rust Reference - std::sync]**
-> **[来源: ACM - Concurrent Programming]**
-> **[来源: Wikipedia - Design Pattern]**
-> **[来源: Rust API Guidelines]**
-> **[来源: Gang of Four - Design Patterns]**
-> **[来源: ACM - Software Design Patterns]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [TRPL Ch. 16 - Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)**
+> **来源: [Rust Reference - std::sync](https://doc.rust-lang.org/std/sync/)**
+> **来源: [ACM - Concurrent Programming](https://dl.acm.org/)**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
+> **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ---

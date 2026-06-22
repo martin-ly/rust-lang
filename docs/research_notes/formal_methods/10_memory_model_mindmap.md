@@ -57,7 +57,7 @@
 
 ## 内存模型全景
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 mindmap
@@ -194,13 +194,13 @@ mindmap
 
 ## 内存区域详解
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 栈 vs 堆
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | Stack | Heap |
 | :--- | :--- | :--- |
@@ -213,9 +213,9 @@ mindmap
 
 ### 内存布局示例
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 栈分配
@@ -234,13 +234,13 @@ static GLOBAL: i32 = 42;     // 静态区:4字节
 
 ## 所有权与内存管理
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 所有权转移的内存视角
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 let s1 = String::from("hello");  // 堆分配 "hello"
@@ -254,9 +254,9 @@ let n2 = n1;    // Copy类型，栈值复制
 
 ### Drop trait与资源释放
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 trait Drop {
@@ -275,7 +275,7 @@ struct Resource {
 
 ## 借用规则形式化
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 在给定作用域内:
@@ -293,13 +293,13 @@ struct Resource {
 
 ## 智能指针详解
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 使用场景决策
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 需求 | 选择 | 原因 |
 | :--- | :--- | :--- |
@@ -312,9 +312,9 @@ struct Resource {
 
 ### 性能对比
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 智能指针 | 分配开销 | 访问开销 | 释放开销 |
 | :--- | :--- | :--- | :--- |
@@ -332,7 +332,7 @@ struct Resource {
 
 ### 安全抽象边界
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 // 安全封装unsafe内部实现
@@ -350,7 +350,7 @@ pub fn safe_interface() {
 
 ### 常见unsafe模式
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | 场景 | unsafe使用 | 安全保证 |
 | :--- | :--- | :--- |
@@ -368,7 +368,7 @@ pub fn safe_interface() {
 
 ### 内存序对比
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 | 内存序 | 保证 | 使用场景 | 性能 |
 | :--- | :--- | :--- | :--- |
@@ -380,7 +380,7 @@ pub fn safe_interface() {
 
 ### Happens-Before关系
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 use std::sync::atomic::{AtomicBool, Ordering};
@@ -406,7 +406,7 @@ if FLAG.load(Ordering::Acquire) {     // Acquire: 能看到Release前的操作
 
 ### 泄漏场景
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 场景 | 原因 | 解决 |
 | :--- | :--- | :--- |
@@ -417,7 +417,7 @@ if FLAG.load(Ordering::Acquire) {     // Acquire: 能看到Release前的操作
 
 ### Weak引用
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 use std::rc::{Rc, Weak};
@@ -589,13 +589,13 @@ struct Node {
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -646,11 +646,11 @@ struct Node {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Management]**
+> **来源: [Wikipedia - Memory Management](https://en.wikipedia.org/wiki/Memory_Management)**
 
-> **[来源: Rustonomicon - Memory Layout]**
+> **来源: [Rustonomicon - Memory Layout](https://doc.rust-lang.org/nomicon/repr-rust.html)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
 > **[来源: ACM - Memory Safety]**
 

@@ -68,7 +68,7 @@
 
 ## 📋 说明 {#-说明}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档展示了一个完整的研究笔记示例，帮助研究者理解如何编写高质量的研究笔记。
 
@@ -80,7 +80,7 @@
 
 ## 📝 完整示例 {#-完整示例}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 以下是一个完整的研究笔记示例：
 
@@ -88,7 +88,7 @@
 
 ## 所有权模型形式化（示例）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 > **说明**：以下为示例内容，展示研究笔记的完整格式（含进行中、计划中状态示例）
 > **创建日期**: 2025-01-27
@@ -100,15 +100,15 @@
 
 ## 🎯 研究目标 {#-研究目标}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本研究的目的是形式化定义 Rust 的所有权模型，包括所有权转移、借用规则和生命周期约束。
 
 ### 核心问题
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **所有权转移的形式化**: 如何用形式化方法描述所有权的转移？
 2. **借用规则的逻辑表达**: 如何用逻辑语言表达借用规则？
@@ -116,9 +116,9 @@
 
 ### 预期成果
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - 所有权模型的形式化定义
 - 借用规则的逻辑表达
@@ -129,13 +129,13 @@
 
 ## 📚 理论基础 {#-理论基础}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 相关概念
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **所有权 (Ownership)**: Rust 的核心概念，每个值都有一个所有者。当所有者离开作用域时，值被释放。
 
@@ -145,9 +145,9 @@
 
 ### 理论背景
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **线性类型系统 (Linear Type System)**: 用于建模所有权转移的类型系统。
 
@@ -159,11 +159,11 @@
 
 ## 🔬 形式化定义 {#-形式化定义}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 所有权转移
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **定义 1.1 (所有权转移)**: 所有权从变量 `x` 转移到变量 `y`，记为 `x → y`。
 
@@ -177,7 +177,7 @@ move(x, y) : x → y
 
 ### 2. 借用规则
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **定义 2.1 (不可变借用)**: 变量 `x` 可以被多个不可变借用，记为 `&x`。
 
@@ -201,7 +201,7 @@ borrow_mutable(x) : &mut x
 
 ### 3. 生命周期约束
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **定义 3.1 (生命周期)**: 生命周期 `'a` 表示引用的有效时间范围。
 
@@ -221,7 +221,7 @@ lifetime('a) : 'a
 
 ### 待证明的性质
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 1. **内存安全**: 所有权模型保证内存安全
 2. **无数据竞争**: 借用规则防止数据竞争
@@ -229,7 +229,7 @@ lifetime('a) : 'a
 
 ### 证明方法
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 - **结构归纳**: 对程序结构进行归纳证明
 - **操作语义**: 使用操作语义证明性质
@@ -243,7 +243,7 @@ lifetime('a) : 'a
 
 ### 示例 1: 所有权转移
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust
 fn main() {
@@ -258,7 +258,7 @@ fn main() {
 
 ### 示例 2: 不可变借用
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust
 fn main() {
@@ -273,7 +273,7 @@ fn main() {
 
 ### 示例 3: 可变借用
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 fn main() {
@@ -289,7 +289,7 @@ fn main() {
 
 ### 示例 4: 生命周期约束
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
@@ -311,7 +311,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### 学术论文
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 1. **RustBelt: Securing the Foundations of the Rust Programming Language**
    - 作者: Ralf Jung, et al.
@@ -327,14 +327,14 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### 官方文档
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - [The Rust Programming Language - Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
 - [The Rust Reference - Ownership](https://doc.rust-lang.org/reference/ownership.html)
 
 ### 相关代码
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 - [RustBelt 项目](https://github.com/rust-lang/rustbelt)
 - [所有权系统实现](../rust-formal-engineering-system/01_theoretical_foundations/02_ownership_system/README.md)
@@ -523,13 +523,13 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

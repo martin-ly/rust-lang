@@ -73,7 +73,7 @@ license = "MIT OR Apache-2.0"
 repository = "https://github.com/you/my-crate"
 ```
 
-> [来源: Cargo Book — The `[package]` section](https://doc.rust-lang.org/cargo/reference/manifest.html#the-package-section)
+> 来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)` section](https://doc.rust-lang.org/cargo/reference/manifest.html#the-package-section)
 
 ---
 

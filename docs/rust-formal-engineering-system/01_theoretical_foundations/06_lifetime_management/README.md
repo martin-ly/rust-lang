@@ -15,7 +15,7 @@
 
 ## 形式化链接
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文档 | 路径 | 内容 |
 | :--- | :--- | :--- |
@@ -29,13 +29,13 @@
 
 ## 生命周期的形式化模型
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 生命周期作为区域（Region）
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 生命周期可以形式化为程序执行中的时间区域：
 
@@ -71,7 +71,7 @@ fn constrained_lifetime<'a, 'b: 'a>(
 
 ### 生命周期省略规则（Lifetime Elision）
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust
 // Rust 自动推导生命周期的规则
@@ -100,7 +100,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### 生命周期边界与类型
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust
 // 边界生命周期：'static
@@ -230,18 +230,18 @@ fn invariance(x: &mut &'static str) {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Variable Scope]**
+> **来源: [Wikipedia - Variable Scope](https://en.wikipedia.org/wiki/Variable_Scope)**
 
-> **[来源: TRPL Ch. 10 - Lifetimes]**
+> **来源: [TRPL Ch. 10 - Lifetimes](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)**
 
-> **[来源: Rust Reference - Lifetimes]**
+> **来源: [Rust Reference - Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html)**
 
-> **[来源: RFC 2094 - NLL]**
+> **来源: [RFC 2094 - NLL](https://rust-lang.github.io/rfcs/2094-2094-nll.html)**
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
-> **[来源: Coq Reference]**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
 
-> **[来源: TLA+]**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
 
-> **[来源: ACM - Formal Verification]**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**

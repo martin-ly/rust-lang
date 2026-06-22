@@ -1,9 +1,9 @@
 > **内容分级**: [综述级]
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-# Rust vs Elixir
+# Rust vs Elixir 对比分析
 >
-> **EN**: Rust vs Elixir
+> **EN**: Rust vs Elixir: Concurrency and Fault Tolerance Comparison
 > **Summary**: Rust vs Elixir: comparative analysis with Rust across type systems, memory safety, and concurrency.
 >
 > **受众**: [进阶]

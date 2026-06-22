@@ -11,7 +11,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Database Management System]** · **[来源: Wikipedia - ACID]** · **[来源: Rust Database Ecosystem - arewedatabasyet.com]** · **[来源: Wikipedia - Distributed Database]** · **[来源: PostgreSQL Documentation]** · **[来源: Wikipedia - SQL]** · **[来源: ACM - Database Systems Survey]** · **[来源: IEEE - Transaction Processing]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Database Management System](https://en.wikipedia.org/wiki/Database_Management_System)** · **来源: [Wikipedia - ACID](https://en.wikipedia.org/wiki/ACID)** · **[来源: Rust Database Ecosystem - arewedatabasyet.com]** · **来源: [Wikipedia - Distributed Database](https://en.wikipedia.org/wiki/Distributed_Database)** · **[来源: PostgreSQL Documentation]** · **来源: [Wikipedia - SQL](https://en.wikipedia.org/wiki/SQL)** · **[来源: ACM - Database Systems Survey]** · **[来源: IEEE - Transaction Processing]**
 
 - [Rust数据库系统实现指南](#rust数据库系统实现指南)
   - [目录](#目录)
@@ -72,19 +72,19 @@
 
 ## 1. 数据库系统概述
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 Rust在数据库领域的优势
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Rust作为一门系统级编程语言，在数据库系统开发中展现出独特的优势：
 
 #### 内存安全性
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 // Rust的借用检查器在编译期防止数据竞争
@@ -108,7 +108,7 @@ impl Database {
 
 #### 零成本抽象
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 // 高性能的迭代器抽象，编译后无运行时开销
@@ -134,7 +134,7 @@ impl<'a> Iterator for PageIterator<'a> {
 
 #### Fearless Concurrency
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use std::sync::RwLock;
@@ -161,7 +161,7 @@ impl<K: Ord + Send, V: Send> ConcurrentIndex<K, V> {
 
 ### 1.2 内存安全与数据一致性
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Rust的所有权系统天然适合实现数据一致性保证：
 
@@ -205,7 +205,7 @@ impl<'a> Drop for Transaction<'a> {
 
 ### 1.3 现有Rust数据库介绍
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | 数据库 | 类型 | 特点 | 适用场景 |
 |--------|------|------|----------|
@@ -248,7 +248,7 @@ fn sled_example() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 2.1 B-Tree实现
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 B-Tree是数据库中最核心的数据结构之一。Rust实现需要考虑节点布局、分裂合并、并发控制等：
 
@@ -339,7 +339,7 @@ impl<K: Ord + Clone + Send + Sync, V: Clone + Send + Sync> ConcurrentBTree<K, V>
 
 ### 2.2 LSM-Tree（Sled风格实现）
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 LSM-Tree（日志结构合并树）通过顺序写优化磁盘I/O：
 
@@ -437,7 +437,7 @@ impl LsmTree {
 
 ### 2.3 内存映射文件
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 内存映射提供用户态文件访问，减少系统调用开销：
 
@@ -502,7 +502,7 @@ impl MmapPageCache {
 
 ### 2.4 页面管理
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 页面是数据库存储的基本单位，包含元数据管理：
 
@@ -592,7 +592,7 @@ impl PageAllocator {
 
 ### 3.1 ACID保证
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ACID属性是事务处理的基础，Rust的类型系统可以帮助我们实现编译期保证：
 
@@ -647,7 +647,7 @@ pub enum IsolationLevel {
 
 ### 3.2 MVCC（多版本并发控制）
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 MVCC通过保存数据的历史版本实现高并发读取：
 
@@ -735,7 +735,7 @@ impl MvccRow {
 
 ### 3.3 两阶段锁
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 两阶段锁（2PL）是实现可串行化的经典方法：
 
@@ -828,7 +828,7 @@ impl LockManager {
 
 ### 3.4 死锁检测
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 /// 等待图用于死锁检测
@@ -906,7 +906,7 @@ impl WaitForGraph {
 
 ### 4.1 SQL解析
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use sqlparser::dialect::GenericDialect;
@@ -995,7 +995,7 @@ pub enum Expr {
 
 ### 4.2 查询优化
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 /// 基于成本的优化器
@@ -1071,7 +1071,7 @@ impl OptimizerRule for PredicatePushDown {
 
 ### 4.3 执行计划
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 /// 物理执行计划
@@ -1122,7 +1122,7 @@ trait Executor: Send {
 
 ### 4.4 向量化执行
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 use arrow::array::{Array, ArrayRef, Float64Array, Int64Array};
@@ -1181,7 +1181,7 @@ impl Executor for VectorizedFilterExecutor {
 
 ### 5.1 B+树索引
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 /// B+树节点类型
@@ -1251,7 +1251,7 @@ impl<K: Ord + Serialize + DeserializeOwned, V: Serialize + DeserializeOwned> BPl
 
 ### 5.2 哈希索引
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 use std::hash::{Hash, Hasher};
@@ -1300,7 +1300,7 @@ impl<K: Hash + Eq, V> ExtendibleHashIndex<K, V> {
 
 ### 5.3 全文索引
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use rust_stemmers::{Algorithm, Stemmer};
@@ -1366,7 +1366,7 @@ impl InvertedIndex {
 
 ### 5.4 空间索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 /// R-Tree空间索引
@@ -1432,7 +1432,7 @@ impl RTreeIndex {
 
 ### 6.1 预写日志
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 /// WAL日志记录类型
@@ -1518,7 +1518,7 @@ impl WriteAheadLog {
 
 ### 6.2 检查点机制
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 /// 检查点类型
@@ -1572,7 +1572,7 @@ impl CheckpointManager {
 
 ### 6.3 崩溃恢复
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 /// ARIES恢复算法实现
@@ -1710,7 +1710,7 @@ impl RecoveryManager {
 
 ### 7.1 分片策略
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 /// 分片策略
@@ -1758,7 +1758,7 @@ impl ShardingStrategy for RangeSharding {
 
 ### 7.2 复制协议
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 /// Raft复制状态机
@@ -1837,7 +1837,7 @@ impl RaftNode {
 
 ### 7.3 一致性模型
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 /// 一致性级别
@@ -1907,7 +1907,7 @@ impl ConsistencyCoordinator {
 
 ### 8.1 存储格式
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 use std::fs::{File, OpenOptions};
@@ -2038,7 +2038,7 @@ impl EmbeddedKV {
 
 ### 8.2 基本操作
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 impl EmbeddedKV {
@@ -2127,7 +2127,7 @@ impl EmbeddedKV {
 
 ### 8.3 迭代器
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 /// 前向迭代器
@@ -2235,7 +2235,7 @@ impl EmbeddedKV {
 
 ### 8.4 事务支持
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 /// 事务状态
@@ -2364,7 +2364,7 @@ impl EmbeddedKV {
 
 ### 9.1 零拷贝
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use std::os::unix::io::AsRawFd;
@@ -2451,7 +2451,7 @@ pub async fn send_file_zero_copy(
 
 ### 9.2 异步I/O
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 use tokio::fs::File;
@@ -2575,7 +2575,7 @@ impl TokioStorage {
 
 ### 9.3 内存池
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 /// 固定大小的内存块
@@ -2710,7 +2710,7 @@ impl MemoryPoolInner {
 
 ### 10.1 持久化测试
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 /// 使用确定性故障注入测试持久化
@@ -2807,7 +2807,7 @@ mod persistence_tests {
 
 ### 10.2 崩溃恢复测试
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 /// 使用进程分叉测试崩溃恢复
@@ -2902,7 +2902,7 @@ mod crash_recovery_tests {
 
 ### 10.3 并发测试
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 /// 使用Loom进行并发模型测试
@@ -3069,13 +3069,13 @@ Rust的内存安全、零成本抽象和 fearless 并发特性使其成为构建
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Database Management System]**
+> **来源: [Wikipedia - Database Management System](https://en.wikipedia.org/wiki/Database_Management_System)**
 
-> **[来源: Wikipedia - SQL]**
+> **来源: [Wikipedia - SQL](https://en.wikipedia.org/wiki/SQL)**
 
-> **[来源: Wikipedia - ACID]**
+> **来源: [Wikipedia - ACID](https://en.wikipedia.org/wiki/ACID)**
 
-> **[来源: Wikipedia - Object-Relational Mapping]**
+> **来源: [Wikipedia - Object-Relational Mapping](https://en.wikipedia.org/wiki/Object_Relational_Mapping)**
 
 > **[来源: IEEE - Transaction Processing]**
 
@@ -3089,47 +3089,47 @@ Rust的内存安全、零成本抽象和 fearless 并发特性使其成为构建
 
 > **[来源: sqlx.dev Documentation]**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages Survey]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design and Implementation]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM - Systems Programming Languages Survey](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI - Programming Language Design and Implementation](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Wikipedia - Type System]**
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Wikipedia - Type System]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**

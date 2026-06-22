@@ -582,7 +582,7 @@ fn crdt_commutativity() {
 | **论断** | **来源** | **可信度** | **Tier** |
 |:---|:---|:---:|:---:|
 | Actor 模型 | [Hewitt et al. 1973] | ✅ | Tier 1 |
-| CSP | [Hoare 1978] | ✅ | Tier 1 |
+| CSP | [Hoare 1978](https://en.wikipedia.org/wiki/Communicating_sequential_processes) | ✅ | Tier 1 |
 | Raft 算法 | [Ongaro & Ousterhout 2014] | ✅ | Tier 1 |
 | CAP 定理 | [Brewer 2000] · [Gilbert & Lynch 2002] | ✅ | Tier 1 |
 | CRDT 理论 | [Shapiro et al. 2011] | ✅ | Tier 1 |

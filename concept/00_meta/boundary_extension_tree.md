@@ -120,7 +120,7 @@ graph TD
 
 ### 2.1 L0: Safe Rust（🟢 编译期保证）
 
-> **边界特征**: 编译器提供完整保证——无 UAF、无 DF、无数据竞争、无类型错误。 [来源: Rust Reference §3, RustBelt POPL 2018]
+> **边界特征**: 编译器提供完整保证——无 UAF、无 DF、无数据竞争、无类型错误。 来源: [Rust Reference §3, RustBelt POPL 2018](https://doc.rust-lang.org/reference/)
 > **程序员责任**: 仅需保证逻辑正确性，内存安全由编译器负责。
 > **失效模式**: 编译器 bug（极罕见）、标准库 unsafe 内部 bug（历史上极罕见）。
 
@@ -128,9 +128,9 @@ graph TD
 
 > **扩展条件**: 使用 `unsafe` 关键字标记的块、函数或 trait impl。
 > **安全保证**: 编译器不再验证内存安全，程序员必须手动维护不变式。
-> **核心契约**: [来源: The Rustonomicon, *What Unsafe Rust Can Do*]
+> **核心契约**: 来源: [The Rustonomicon, *What Unsafe Rust Can Do*](https://doc.rust-lang.org/nomicon/)
 
-| 操作 | 是否需要 unsafe | 风险等级 | 典型场景 | [来源: Rustonomicon §1.3]
+| 操作 | 是否需要 unsafe | 风险等级 | 典型场景 | 来源: [Rustonomicon §1.3](https://doc.rust-lang.org/nomicon/)
 |:---|:---:|:---:|:---|
 | 解引用裸指针 (`*const T`, `*mut T`) | ✅ | 🔴 | 与 C 交互、自定义数据结构 |
 | 调用 `unsafe` 函数 | ✅ | 🟡 | 使用 `std::ptr::read` / `write` |
@@ -163,7 +163,7 @@ pub fn safe_wrapper(data: &mut [u8]) {
 
 **补偿机制**:
 
-- **最小暴露面**: 仅通过 Safe Rust 包装函数暴露 FFI 功能。 [来源: Rust API Guidelines, *FFI Boundaries*]
+- **最小暴露面**: 仅通过 Safe Rust 包装函数暴露 FFI 功能。 来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 - **类型隔离**: 使用 Newtype 区分 C 指针和 Rust 引用。
 - **Sanitizer**: AddressSanitizer / MemorySanitizer 检测 C 端错误。
 

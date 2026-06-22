@@ -1,8 +1,8 @@
-# Const Trait Preview
+# Const Trait 实现预览
 
 > **代码状态**: [综述级 — 待补充代码]
 >
-> **EN**: Const Trait Preview
+> **EN**: Const Trait Implementation Preview
 > **Summary**: Preview of const traits for generic compile-time computation.
 >
 > **状态**: 🧪 Nightly 实验性

@@ -1,6 +1,6 @@
-# Public/Private Dependencies
+# Cargo 公共与私有依赖
 
-> **EN**: Public/Private Dependencies
+> **EN**: Public and Private Dependencies in Cargo
 > **Summary**: Controlling dependency visibility with `public = true`/`false` to prevent API leakage.
 > **来源**: [Cargo Book — Dependencies](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html) · [Cargo Book — Features](https://doc.rust-lang.org/cargo/reference/features.html)
 
@@ -388,7 +388,7 @@ internal = { path = "crates/internal", public = false } # 实现细节 crate
 
 ## Wikipedia 概念对齐
 
-> **[来源: Wikipedia]** 核心概念与国际知识库映射。
+> **来源: [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)** 核心概念与国际知识库映射。
 
 | 概念 | Wikipedia 词条 | 说明 |
 |:---|:---|:---|

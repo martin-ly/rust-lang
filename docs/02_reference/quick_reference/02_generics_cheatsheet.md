@@ -75,7 +75,7 @@
 
 ## 🧠 泛型系统思维导图
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 mindmap
@@ -106,7 +106,7 @@ mindmap
 
 ## 📊 概念定义-属性关系-解释论证
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 层次 | 概念定义 | 属性关系 | 解释论证 |
 | :--- | :--- | :--- | :--- |
@@ -122,7 +122,7 @@ mindmap
 
 ## 🔬 泛型系统证明树
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 graph TD
@@ -146,13 +146,13 @@ graph TD
 
 ## 🎯 核心概念
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 泛型函数
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 基本泛型函数
@@ -169,9 +169,9 @@ fn largest<T: PartialOrd>(list: &[T]) -> &T {
 
 ### 泛型结构体
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 struct Point<T> {
@@ -186,9 +186,9 @@ let float = Point { x: 1.0, y: 4.0 };
 
 ### 泛型枚举
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 enum Option<T> {
@@ -206,13 +206,13 @@ enum Result<T, E> {
 
 ## 📐 Trait 约束
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 基本约束
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 使用 where 子句
@@ -227,9 +227,9 @@ where
 
 ### 常见 Trait 约束
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 可比较
@@ -256,7 +256,7 @@ fn print<T: Display>(item: T) {
 
 ### 关联类型
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 trait Iterator {
@@ -268,7 +268,7 @@ trait Iterator {
 
 ### 泛型关联类型 (GATs)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 trait StreamingIterator {
@@ -280,7 +280,7 @@ trait StreamingIterator {
 
 ### const 泛型
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 struct Array<T, const N: usize> {
@@ -299,7 +299,7 @@ let arr: Array<i32, 5> = Array { data: [0; 5] };
 
 ### 模式 1: 泛型函数
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 fn swap<T>(x: &mut T, y: &mut T) {
@@ -309,7 +309,7 @@ fn swap<T>(x: &mut T, y: &mut T) {
 
 ### 模式 2: 泛型方法
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 impl<T> Point<T> {
@@ -328,7 +328,7 @@ impl Point<f32> {
 
 ### 模式 3: 泛型 Trait 实现
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 impl<T: Display> ToString for T {
@@ -346,7 +346,7 @@ impl<T: Display> ToString for T {
 
 ### 单态化 (Monomorphization)
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 // 编译时生成具体类型
@@ -368,7 +368,7 @@ let float = largest(&[1.0, 2.0]);   // 生成 largest_f64
 
 ### 反例 1: 遗漏 Trait 约束
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **错误示例**:
 
@@ -400,7 +400,7 @@ fn largest<T: PartialOrd>(list: &[T]) -> &T {
 
 ### 反例 2: 泛型与 trait 对象混用不当
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **错误示例**:
 
@@ -456,7 +456,7 @@ fn print_all(items: Vec<Box<dyn Display>>) {
 
 ### MaybeUninit 泛型支持增强
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **改进**: MaybeUninit 的新方法支持泛型类型
 
@@ -483,7 +483,7 @@ fn init_array<T, const N: usize>(init: impl Fn(usize) -> T) -> [T; N] {
 
 ### const 上下文增强
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **改进**: 支持对非静态常量的引用，应用于泛型配置
 
@@ -510,21 +510,21 @@ const REF: &i32 = &CONFIG;  // ✅ 现在支持
 
 ### 官方文档
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - [Rust 泛型文档](https://doc.rust-lang.org/book/ch10-00-generics.html)
 - [Rust Reference - Generics](https://doc.rust-lang.org/reference/items/generics.html)
 
 ### 项目内部文档
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 - [泛型完整文档](../../../crates/c04_generic/docs/README.md)
 - [类型系统研究笔记](../../research_notes/type_theory/README.md)
 
 ### 相关速查卡
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 - [类型系统速查卡](./02_type_system.md) - 类型系统基础
 - [Trait 系统速查卡](./02_type_system.md#trait-系统) - Trait 与泛型
@@ -539,7 +539,7 @@ const REF: &i32 = &CONFIG;  // ✅ 现在支持
 
 ### 场景 1: 通用 Repository 模式
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 use std::collections::HashMap;
@@ -593,7 +593,7 @@ fn main() {
 
 ### 场景 2: 类型安全的构建器
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 struct Unset;
@@ -653,7 +653,7 @@ fn main() {
 
 ### 场景 3: 泛型事件处理器
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 trait Event: Clone + Send + 'static {
@@ -725,7 +725,7 @@ fn main() {
 
 ### 边界 1: 孤儿规则 (Orphan Rule)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust
 // ❌ 错误：违反孤儿规则
@@ -752,7 +752,7 @@ fn main() {
 
 ### 边界 2: 生命周期与泛型的交互
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust
 struct Container<'a, T> {
@@ -947,20 +947,20 @@ static TYPE_CACHE: LazyLock<HashMap<TypeId, String>> = LazyLock::new(|| {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ---

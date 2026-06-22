@@ -10,13 +10,13 @@
 > **Prerequisites**: Understanding of ownership, Send/Sync traits, async/await basics
 > **Estimated Reading Time**: 3-4 hours
 > **Difficulty**: Advanced
-> **[来源: Rust Reference - Concurrency]** · **[来源: Wikipedia - Message Passing]** · **[来源: Rustonomicon - Concurrency]** · **[来源: TRPL Ch. 16]** · **[来源: Wikipedia - Actor Model]** · **[来源: CSP - Hoare 1978]** · **[来源: Wikipedia - Communicating Sequential Processes]** · **[来源: ACM - Message-Oriented Middleware]** · **[来源: IEEE - Distributed Message Protocols]**
+> **来源: [Rust Reference - Concurrency](https://doc.rust-lang.org/reference/special-types-and-traits.html)** · **来源: [Wikipedia - Message Passing](https://en.wikipedia.org/wiki/Message_Passing)** · **来源: [Rustonomicon - Concurrency](https://doc.rust-lang.org/nomicon/concurrency.html)** · **来源: [TRPL Ch. 16](https://doc.rust-lang.org/book/ch16-00-concurrency.html)** · **来源: [Wikipedia - Actor Model](https://en.wikipedia.org/wiki/Actor_Model)** · **[来源: CSP - Hoare 1978]** · **来源: [Wikipedia - Communicating Sequential Processes](https://en.wikipedia.org/wiki/Communicating_Sequential_Processes)** · **[来源: ACM - Message-Oriented Middleware]** · **[来源: IEEE - Distributed Message Protocols]**
 
 ---
 
 ## Table of Contents
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [Message Passing Patterns: Formal Deep Dive](#message-passing-patterns-formal-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -77,7 +77,7 @@
 
 ## Executive Summary
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 This document provides a comprehensive formal treatment of message passing patterns in Rust, establishing mathematical foundations for understanding how Rust's channel-based concurrency ensures memory safety through ownership transfer. We present:
 
@@ -93,11 +93,11 @@ The core insight is that Rust's ownership system, when combined with channel com
 
 ## 1. Message Passing Fundamentals
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 Channel Semantics
 
-> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
+> **来源: [TRPL Ch. 16 - Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)**
 
 A channel in Rust implements a fundamental communication primitive based on **ownership transfer**. Unlike shared memory where multiple threads can access data simultaneously (requiring synchronization), channels ensure that at any point in time, only one party owns the data.
 
@@ -169,13 +169,13 @@ use std::rc::Rc;
 
 ### 1.2 Types of Channels
 
-> **[来源: Rust Reference - std::sync]**
+> **来源: [Rust Reference - std::sync](https://doc.rust-lang.org/std/sync/)**
 
 Rust's ecosystem provides several channel types, each optimized for different communication patterns:
 
 #### mpsc: Multiple Producer, Single Consumer
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 The `mpsc` (Multiple Producer, Single Consumer) channel is the standard library's primary channel type.
 
@@ -220,7 +220,7 @@ fn mpsc_example() {
 
 #### oneshot: Single Use Channel
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 Oneshot channels are optimized for single message communication, typically used for request-response patterns.
 
@@ -249,7 +249,7 @@ async fn oneshot_example() {
 
 #### broadcast: One-to-Many
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 Broadcast channels send the same message to multiple receivers.
 
@@ -283,7 +283,7 @@ async fn broadcast_example() {
 
 #### watch: Latest Value
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 Watch channels maintain the most recent value, useful for configuration or state propagation.
 
@@ -323,7 +323,7 @@ async fn watch_example() {
 
 ### Theorem CHANNEL-OWNERSHIP
 
-> **[来源: Wikipedia - Thread (computing)]**
+> **来源: [Wikipedia - Thread (computing)](https://en.wikipedia.org/wiki/Thread_(computing))**
 
 **Statement**: Channel send/receive correctly transfers ownership without data races.
 
@@ -389,7 +389,7 @@ fn ownership_prevents_races() {
 
 ### Theorem CHANNEL-ISOLATION
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 **Statement**: Channel communication provides thread isolation—values in transit are inaccessible to any thread.
 
@@ -442,7 +442,7 @@ fn channel_isolation() {
 
 ### Theorem ASYNC-CHANNEL-SAFETY
 
-> **[来源: ACM - Concurrent Programming]**
+> **来源: [ACM - Concurrent Programming](https://dl.acm.org/)**
 
 **Statement**: Async channel operations preserve ownership safety across await points.
 
@@ -501,7 +501,7 @@ async fn async_channel_safety() {
 
 ### 3.1 Worker Pool
 
-> **[来源: crossbeam Documentation]**
+> **来源: [crossbeam Documentation](https://docs.rs/crossbeam/latest/crossbeam/)**
 
 The worker pool pattern distributes tasks among a fixed set of worker threads, providing load balancing and resource control.
 
@@ -608,7 +608,7 @@ impl<T, R> Drop for WorkerPool<T, R> {
 
 #### Counter-Example: Task Loss on Panic
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use std::sync::mpsc;
@@ -719,7 +719,7 @@ fn worker_pool_with_recovery() {
 
 ### 3.2 Pipeline
 
-> **[来源: Tokio Documentation]**
+> **来源: [Tokio Documentation](https://tokio.rs/)**
 
 The pipeline pattern chains processing stages, where each stage receives input from the previous stage and sends output to the next.
 
@@ -840,7 +840,7 @@ fn image_pipeline_example() {
 
 #### Counter-Example: Unbounded Queue Overflow
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use std::sync::mpsc;
@@ -1030,7 +1030,7 @@ async fn rpc_example() {
 
 #### Counter-Example: Response to Wrong Requestor
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use tokio::sync::{mpsc, oneshot};
@@ -1104,7 +1104,7 @@ async fn safe_request_response() {
 
 ### 3.4 Pub-Sub
 
-> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
+> **来源: [TRPL Ch. 16 - Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)**
 
 The pub-sub pattern allows publishers to broadcast messages to multiple subscribers without knowing who they are.
 
@@ -1195,7 +1195,7 @@ async fn event_bus_example() {
 
 #### Counter-Example: Slow Subscriber Blocking
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use tokio::sync::broadcast;
@@ -1281,7 +1281,7 @@ impl<T: Clone + Send + 'static> ReliablePubSub<T> {
 
 ### 4.1 Bounded vs Unbounded
 
-> **[来源: Rust Reference - std::sync]**
+> **来源: [Rust Reference - std::sync](https://doc.rust-lang.org/std/sync/)**
 
 Async channels come in bounded and unbounded variants, each with distinct memory and performance characteristics.
 
@@ -1322,7 +1322,7 @@ async fn channel_types_comparison() {
 
 #### Counter-Example: Unbounded Memory Growth
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 use tokio::sync::mpsc;
@@ -1379,7 +1379,7 @@ async fn bounded_with_backpressure() {
 
 ### 4.2 Select Operation
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 The `select!` macro allows waiting on multiple channel operations simultaneously.
 
@@ -1433,7 +1433,7 @@ async fn select_with_timeout() {
 
 #### Counter-Example: Resource Leak in Select
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 use tokio::select;
@@ -1512,7 +1512,7 @@ async fn safe_select_cleanup() {
 
 ### 4.3 Priority Channels
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 Priority channels allow processing messages based on importance rather than arrival order.
 
@@ -1659,7 +1659,7 @@ impl<T: Send + 'static> FairPriorityChannel<T> {
 
 ### 5.1 Sender/Receiver Disconnection
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 Channels can disconnect when one end is dropped, and proper handling is essential for robust applications.
 
@@ -1708,7 +1708,7 @@ fn disconnection_handling() {
 
 #### Counter-Example: Ignoring SendError Causing Panic
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust
 use std::sync::mpsc;
@@ -1761,7 +1761,7 @@ fn graceful_send_with_retry<T: Send>(
 
 ### 5.2 Poisoned Channels
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 While "poisoned channels" aren't a standard Rust concept like poisoned mutexes, similar issues can occur when a thread panics while holding channel-related state.
 
@@ -1813,7 +1813,7 @@ fn channel_recovery_after_panic() {
 
 ### 6.1 Batch Processing
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 Batch processing amortizes channel overhead by processing multiple messages together.
 
@@ -1899,7 +1899,7 @@ async fn batch_tradeoff_demo() {
 
 ### 6.2 Zero-Copy Messages
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 Using `Arc` for shared data reduces copying when multiple consumers need the same data.
 
@@ -1952,7 +1952,7 @@ async fn zero_copy_broadcast() {
 
 #### Counter-Example: Unnecessary Cloning
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 use tokio::sync::broadcast;
@@ -2007,7 +2007,7 @@ This section presents a complete chat server implementation demonstrating messag
 
 ### Architecture Overview
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -2036,7 +2036,7 @@ This section presents a complete chat server implementation demonstrating messag
 
 ### Complete Implementation
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use tokio::net::{TcpListener, TcpStream};
@@ -2283,7 +2283,7 @@ async fn client_with_shutdown(
 
 ### Ownership Flow Analysis
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```
 Connection Flow Ownership Analysis:
@@ -2311,7 +2311,7 @@ Connection Flow Ownership Analysis:
 
 ### Graceful Shutdown
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use tokio::signal;
@@ -2360,7 +2360,7 @@ async fn run_with_graceful_shutdown(server: ChatServer, addr: &str) {
 
 ### Anti-Pattern 1: Synchronous Send in Async Context
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **Problem**: Using `std::sync::mpsc` in async code blocks the executor thread.
 
@@ -2390,7 +2390,7 @@ async fn async_send_in_async() {
 
 ### Anti-Pattern 2: Unbounded Channels Without Backpressure
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **Problem**: Unbounded channels can exhaust memory under load.
 
@@ -2427,7 +2427,7 @@ fn bounded_channel_solution() {
 
 ### Anti-Pattern 3: Holding Receiver Across Await
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **Problem**: Holding a synchronous receiver across await points can cause issues.
 
@@ -2466,7 +2466,7 @@ async fn proper_async_receive() {
 
 ### Anti-Pattern 4: Channel Per Task Overhead
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **Problem**: Creating too many channels creates overhead and complexity.
 
@@ -2591,7 +2591,7 @@ type LargeChannel<T> = SizedChannel<T, 1000>;
 
 ### Core Documentation
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 1. **The Rust Programming Language - Chapter 16: Concurrency**
    - Official documentation on channels and message passing
@@ -2607,7 +2607,7 @@ type LargeChannel<T> = SizedChannel<T, 1000>;
 
 ### Academic Papers
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 1. **Hoare, C.A.R. "Communicating Sequential Processes" (1978)**
    - Foundation of channel-based concurrency
@@ -2620,7 +2620,7 @@ type LargeChannel<T> = SizedChannel<T, 1000>;
 
 ### Related Patterns
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - [12-01-concurrency-architecture-deep.md](./12-01-concurrency-architecture-deep.md) - Thread safety theorems
 - [12-05-async-patterns-deep.md](./12-05-async-patterns-deep.md) - Async ownership semantics
@@ -2646,57 +2646,57 @@ type LargeChannel<T> = SizedChannel<T, 1000>;
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Message Passing]**
-> **[来源: Wikipedia - Communicating Sequential Processes]**
-> **[来源: Wikipedia - Actor Model]**
-> **[来源: Wikipedia - Channel (programming)]**
+> **来源: [Wikipedia - Message Passing](https://en.wikipedia.org/wiki/Message_Passing)**
+> **来源: [Wikipedia - Communicating Sequential Processes](https://en.wikipedia.org/wiki/Communicating_Sequential_Processes)**
+> **来源: [Wikipedia - Actor Model](https://en.wikipedia.org/wiki/Actor_Model)**
+> **来源: [Wikipedia - Channel (programming)](https://en.wikipedia.org/wiki/Channel_(programming))**
 > **[来源: IEEE - Distributed Message Protocols]**
 > **[来源: ACM - Message-Oriented Middleware]**
 > **[来源: Hoare 1978 - Communicating Sequential Processes]**
-> **[来源: Rust Reference - Concurrency]**
-> **[来源: TRPL Ch. 16 - Message Passing]**
+> **来源: [Rust Reference - Concurrency](https://doc.rust-lang.org/reference/special-types-and-traits.html)**
+> **来源: [TRPL Ch. 16 - Message Passing](https://doc.rust-lang.org/book/ch16-00-concurrency.html)**
 > **[来源: Rust Standard Library - std::sync::mpsc]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
-> **[来源: Rust Reference - std::sync]**
-> **[来源: ACM - Concurrent Programming]**
-> **[来源: Wikipedia - Design Pattern]**
-> **[来源: Rust API Guidelines]**
-> **[来源: Gang of Four - Design Patterns]**
-> **[来源: ACM - Software Design Patterns]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Wikipedia - Type System]**
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Wikipedia - Type System]**
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [TRPL Ch. 16 - Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)**
+> **来源: [Rust Reference - std::sync](https://doc.rust-lang.org/std/sync/)**
+> **来源: [ACM - Concurrent Programming](https://dl.acm.org/)**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
+> **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ---

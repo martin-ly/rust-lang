@@ -1,3 +1,5 @@
+# 归档：异步模式
+
 > **EN**: Advanced 13 Async Patterns Archived
 > **Summary**: Advanced 13 Async Patterns Archived. Core Rust concept.
 > **内容分级**: [专家级]

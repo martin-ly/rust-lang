@@ -14,7 +14,7 @@
 
 ## 📊 目录 {#-目录}
 
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [🔬 实验研究 {#-实验研究}](#-实验研究--实验研究)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -51,7 +51,7 @@
 
 ## 🎯 研究目标 {#-研究目标}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本目录专注于通过实验验证理论假设，优化 Rust 实践，包括：
 
@@ -64,11 +64,11 @@
 
 ## 📚 研究主题 {#-研究主题}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 性能基准测试
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **研究问题**:
 
@@ -84,7 +84,7 @@
 
 ### 2. 内存分析
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **研究问题**:
 
@@ -100,7 +100,7 @@
 
 ### 3. 编译器优化
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **研究问题**:
 
@@ -116,7 +116,7 @@
 
 ### 4. 并发性能
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **研究问题**:
 
@@ -132,7 +132,7 @@
 
 ### 5. 宏展开性能
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **研究问题**:
 
@@ -148,11 +148,11 @@
 
 ## 📝 研究笔记 {#-研究笔记}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 已完成 ✅ {#已完成-}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [x] [性能基准测试](./10_performance_benchmarks.md) - 100%
 - [x] [内存分析](./10_memory_analysis.md) - 100%
@@ -164,11 +164,11 @@
 
 ## 🔗 相关资源 {#-相关资源}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 核心文档
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [基准测试框架](../../../crates/c08_algorithms/docs/README.md)
 - [性能分析工具](../../../crates/c06_async/docs/README.md)
@@ -176,7 +176,7 @@
 
 ### 代码实现
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 - [算法实现](../../../crates/c08_algorithms/src/README.md)
 - [异步实现](../../../crates/c06_async/docs/README.md)
@@ -184,7 +184,7 @@
 
 ### 工具资源
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 - [Criterion.rs](https://github.com/bheisler/criterion.rs): 统计驱动的基准测试框架
 - perf: Linux 性能分析工具
@@ -197,7 +197,7 @@
 
 ### 实验设计
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 1. **假设提出**: 明确要验证的假设
 2. **实验设计**: 设计实验方案和对照组
@@ -207,7 +207,7 @@
 
 ### 基准测试方法
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 - **统计方法**: 使用统计方法分析结果
 - **多次运行**: 多次运行取平均值
@@ -216,7 +216,7 @@
 
 ### 性能分析工具
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 - **Profiler**: 性能分析器
 - **Memory Profiler**: 内存分析器
@@ -273,7 +273,7 @@
 
 ### 创建新的实验笔记
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 1. 复制模板文件（如 `10_performance_benchmarks.md`）
 2. 填写实验假设和目标
@@ -284,7 +284,7 @@
 
 ### 实验流程
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 1. **问题定义**: 明确要研究的性能问题
 2. **假设提出**: 提出可验证的假设
@@ -308,7 +308,7 @@
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
@@ -355,11 +355,11 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**

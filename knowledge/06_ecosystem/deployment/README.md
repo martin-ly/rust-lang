@@ -42,3 +42,31 @@
 ## 相关概念
 
 - [Rust 标准库速查](../../05_reference/03_std_library_cheatsheet.md)
+
+
+## 📚 模块 8: 国际化对齐
+
+> 本模块按项目模板补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 说明 |
+|:---|:---|
+| [The Cargo Book — Profiles](https://doc.rust-lang.org/cargo/reference/profiles.html) | 编译配置 |
+| [Rust Reference](https://doc.rust-lang.org/reference/) | 语言规范 |
+
+### 8.2 学术/工业来源
+
+| 来源 | 说明 |
+|:---|:---|
+| [Kubernetes](https://kubernetes.io/) | 容器编排平台 |
+| [Docker](https://docs.docker.com/) | 容器化平台 |
+
+### 8.3 社区资源
+
+| 来源 | 说明 |
+|:---|:---|
+| [Shuttle](https://www.shuttle.rs/) | Rust 原生部署平台 |
+| [Render — Rust](https://render.com/docs/rust) | 云部署指南 |
+| [Fly.io — Rust](https://fly.io/docs/rust/) | 边缘部署指南 |
+

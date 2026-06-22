@@ -228,7 +228,7 @@ Tree Borrows 核心规则（简化）:
 
 ```mermaid
 graph TD
-    A[Tree Borrows 形式模型] --> B[编译器静态分析]
+    A[Tree Borrows — PLDI 2025](https://perso.crans.org/vanille/treebor/) --> B[编译器静态分析]
     A --> C[Miri 解释执行]
     A --> D[BorrowSanitizer 运行时检测]
 

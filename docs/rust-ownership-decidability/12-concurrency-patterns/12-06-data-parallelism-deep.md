@@ -10,13 +10,13 @@
 > **Scope**: Data parallelism fundamentals, parallel iterator theorems, safety guarantees, performance optimization
 > **Prerequisites**: Understanding of ownership, `Send`/`Sync` traits, and basic Rayon usage
 > **Estimated Reading Time**: 3-4 hours
-> **[来源: Rust Reference - Concurrency]** · **[来源: Wikipedia - Data Parallelism]** · **[来源: Rayon Documentation - docs.rs/rayon]** · **[来源: TRPL Ch. 16]** · **[来源: Wikipedia - Parallel Computing]** · **[来源: Rustonomicon - Concurrency] · **[来源: Wikipedia - SIMD]** · **[来源: ACM - Parallel Algorithm Design]** · **[来源: IEEE - High-Performance Parallel Computing]**
+> **来源: [Rust Reference - Concurrency](https://doc.rust-lang.org/reference/special-types-and-traits.html)** · **来源: [Wikipedia - Data Parallelism](https://en.wikipedia.org/wiki/Data_Parallelism)** · **来源: Rayon Documentation - docs.rs / [rayon](https://docs.rs/rayon/latest/rayon/)** · **来源: [TRPL Ch. 16](https://doc.rust-lang.org/book/ch16-00-concurrency.html)** · **来源: [Wikipedia - Parallel Computing](https://en.wikipedia.org/wiki/Parallel_Computing)** · **来源: [Rustonomicon - Concurrency](https://doc.rust-lang.org/nomicon/concurrency.html) · **来源: [Wikipedia - SIMD](https://en.wikipedia.org/wiki/SIMD)** · **[来源: ACM - Parallel Algorithm Design]** · **[来源: IEEE - High-Performance Parallel Computing]**
 
 ---
 
 ## Table of Contents
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [Data Parallelism Patterns: Formal Deep Dive](#data-parallelism-patterns-formal-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -97,7 +97,7 @@
 
 ## Executive Summary
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 This document provides a formal treatment of data parallelism patterns in Rust, focusing on how Rust's ownership system enables safe, efficient parallel data processing. We present:
 
@@ -113,15 +113,15 @@ The core insight is that Rust's ownership system, when combined with parallel it
 
 ## 1. Data Parallelism Fundamentals
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 Definition
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 #### SIMD vs MIMD
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 Data parallelism encompasses two major architectural paradigms:
 
@@ -187,7 +187,7 @@ where
 
 #### Data vs Task Parallelism
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **Data Parallelism**:
 
@@ -231,7 +231,7 @@ pub fn analyze_data(data: &[f64]) -> (f64, f64, f64) {
 
 #### Ownership Implications
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 Data parallelism interacts with Rust's ownership system in specific ways:
 
@@ -256,11 +256,11 @@ Data parallelism interacts with Rust's ownership system in specific ways:
 
 ### 1.2 Rust's Approach
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 #### Rayon Design Philosophy
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 Rayon's design follows three core principles:
 
@@ -282,7 +282,7 @@ pub fn parallel_pipeline(data: &[i32]) -> i32 {
 
 #### Work Stealing Scheduler
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 Rayon uses a work-stealing scheduler with the following properties:
 
@@ -315,7 +315,7 @@ Rayon uses a work-stealing scheduler with the following properties:
 
 #### Safety Through Ownership
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 Rayon leverages Rust's ownership system for safety:
 
@@ -353,7 +353,7 @@ pub fn ownership_demo() {
 
 ### Theorem PAR-ITER-SAFETY
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **Statement**: Parallel iteration preserves ownership safety.
 
@@ -419,7 +419,7 @@ pub fn par_iter_safety_proof() {
 
 ### Theorem PAR-ITER-DETERMINISM
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **Statement**: Parallel iterator operations are deterministic when using pure functions.
 
@@ -466,11 +466,11 @@ pub fn determinism_proof() {
 
 ### 3.1 Parallel Map
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 #### Ownership Semantics
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use rayon::prelude::*;
@@ -507,7 +507,7 @@ where
 
 #### Counter-Example: Non-Send Closure
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
 use std::rc::Rc;
@@ -538,7 +538,7 @@ pub fn bad_par_map() {
 
 #### Solution: Ensure Closure is Send
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -588,11 +588,11 @@ pub fn par_map_with_aggregation() {
 
 ### 3.2 Parallel Reduce
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 #### Associativity Requirement
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 use rayon::prelude::*;
@@ -618,7 +618,7 @@ pub fn par_reduce_demo() {
 
 #### Counter-Example: Non-Associative Operation
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 use rayon::prelude::*;
@@ -660,7 +660,7 @@ pub fn string_concat_order() {
 
 #### Tree Reduction Pattern
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 use rayon::prelude::*;
@@ -703,11 +703,11 @@ pub fn custom_tree_reduce() {
 
 ### 3.3 Parallel Filter
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 #### Predicate Ownership
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use rayon::prelude::*;
@@ -748,7 +748,7 @@ pub fn par_filter_with_context() {
 
 #### Result Collection
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use rayon::prelude::*;
@@ -777,11 +777,11 @@ pub fn par_partition() {
 
 ### 3.4 Parallel Group By
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 #### Hash-Based Grouping
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use rayon::prelude::*;
@@ -828,7 +828,7 @@ pub fn group_by_example() {
 
 #### Counter-Example: Non-Deterministic Ordering
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use rayon::prelude::*;
@@ -877,11 +877,11 @@ pub fn non_deterministic_ordering() {
 
 ### 4.1 Send Requirement
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 #### Why Closures Must Be Send
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 use rayon::prelude::*;
@@ -905,7 +905,7 @@ pub fn send_requirement() {
 
 #### Counter-Example: Capturing !Send Type
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 use std::rc::Rc;
@@ -947,11 +947,11 @@ pub fn capture_notsend() {
 
 ### 4.2 Sync Requirement for Output
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 #### When Output Collection Needs Sync
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use rayon::prelude::*;
@@ -978,7 +978,7 @@ pub fn collection_requirements() {
 
 #### Counter-Example: Race in Collection
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 use rayon::prelude::*;
@@ -1039,11 +1039,11 @@ pub fn safe_collection() {
 
 ### 5.1 Parallel Sort
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 #### Sample Sort Algorithm
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use rayon::slice::ParallelSliceMut;
@@ -1091,7 +1091,7 @@ pub fn parallel_sort_by_key() {
 
 #### Stability Considerations
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
 use rayon::slice::ParallelSliceMut;
@@ -1120,11 +1120,11 @@ pub fn stability_demo() {
 
 ### 5.2 Parallel Search
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 #### Divide and Conquer
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust,ignore
 use rayon::prelude::*;
@@ -1170,7 +1170,7 @@ pub fn parallel_find_all<T: Send + PartialEq + Sync>(data: &[T], target: &T) -> 
 
 #### Early Termination
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 use rayon::prelude::*;
@@ -1205,11 +1205,11 @@ pub fn hybrid_search() {
 
 ### 5.3 Parallel Graph Processing
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 #### BFS/DFS Parallelization
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 use rayon::prelude::*;
@@ -1265,7 +1265,7 @@ impl Graph {
 
 #### Ownership of Graph Structure
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 use rayon::prelude::*;
@@ -1334,11 +1334,11 @@ pub fn parallel_graph_mutation() {
 
 ### 6.1 Granularity Control
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 #### Too Fine: Overhead Dominates
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use rayon::prelude::*;
@@ -1360,7 +1360,7 @@ pub fn too_fine_grained() {
 
 #### Too Coarse: Underutilization
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use rayon::prelude::*;
@@ -1383,7 +1383,7 @@ pub fn too_coarse_grained() {
 
 #### Counter-Example: Wrong Chunk Size
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use rayon::prelude::*;
@@ -1418,11 +1418,11 @@ pub fn chunk_size_benchmark() {
 
 ### 6.2 Cache Considerations
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 #### False Sharing
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use std::sync::atomic::{AtomicU64, Ordering};
@@ -1466,7 +1466,7 @@ pub fn no_false_sharing() {
 
 #### Counter-Example: Cache Line Ping-Pong
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 use std::sync::Arc;
@@ -1514,11 +1514,11 @@ pub fn thread_local_accumulation() {
 
 ### 7.1 Implementing ParallelIterator
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 #### Producer/Consumer Traits
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 use rayon::iter::plumbing::{Consumer, Producer, ProducerCallback, UnindexedConsumer};
@@ -1641,7 +1641,7 @@ impl<T: Send> ParallelIterator for SafeParIter<T> {
 
 ### 7.2 Join Context
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 #### Scope for Spawning
 
@@ -1717,7 +1717,7 @@ pub fn scope_escape_attempt() {
 
 ### 8.1 Parallel Blur
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 use rayon::prelude::*;
@@ -1853,7 +1853,7 @@ fn vertical_blur(data: &[u8], width: usize, x: usize, y: usize, radius: usize) -
 
 ### 8.2 Parallel Edge Detection
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 use rayon::prelude::*;
@@ -1910,7 +1910,7 @@ pub fn parallel_sobel(image: &Image) -> Image {
 
 ### 8.3 Performance Analysis
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 /// Performance comparison framework
@@ -1949,7 +1949,7 @@ pub fn benchmark_image_processing() {
 
 ### 8.4 Memory Bandwidth Considerations
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 /// Understanding memory bandwidth limits
@@ -2090,7 +2090,7 @@ pub const fn optimal_chunk_size(data_len: usize, num_threads: usize) -> usize {
 
 ### Academic Papers
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 1. **Frigo et al.** "The Implementation of the Cilk-5 Multithreaded Language". PLDI 1998.
 2. **Blumofe et al.** "Cilk: An Efficient Multithreaded Runtime System". J. Parallel Distrib. Comput. 1996.
@@ -2098,7 +2098,7 @@ pub const fn optimal_chunk_size(data_len: usize, num_threads: usize) -> usize {
 
 ### Rust Documentation
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 - [Rayon Documentation](https://docs.rs/rayon)
 - [std::simd - Portable SIMD](https://doc.rust-lang.org/std/simd/index.html)
@@ -2106,7 +2106,7 @@ pub const fn optimal_chunk_size(data_len: usize, num_threads: usize) -> usize {
 
 ### Related Documentation in This Project
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [Thread Safety Patterns](./12-02-thread-safety-patterns.md) - Send/Sync fundamentals
 - [Rayon Formal Analysis](../case-studies/rayon-formal-analysis.md) - Case study
@@ -2131,13 +2131,13 @@ pub const fn optimal_chunk_size(data_len: usize, num_threads: usize) -> usize {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Data Parallelism]**
+> **来源: [Wikipedia - Data Parallelism](https://en.wikipedia.org/wiki/Data_Parallelism)**
 
-> **[来源: Wikipedia - SIMD]**
+> **来源: [Wikipedia - SIMD](https://en.wikipedia.org/wiki/SIMD)**
 
-> **[来源: Wikipedia - GPU Computing]**
+> **来源: [Wikipedia - GPU Computing](https://en.wikipedia.org/wiki/GPU_Computing)**
 
-> **[来源: Wikipedia - MapReduce]**
+> **来源: [Wikipedia - MapReduce](https://en.wikipedia.org/wiki/MapReduce)**
 
 > **[来源: IEEE - High-Performance Parallel Computing]**
 
@@ -2145,29 +2145,29 @@ pub const fn optimal_chunk_size(data_len: usize, num_threads: usize) -> usize {
 
 > **[来源: ACM - Parallel Programming Models]**
 
-> **[来源: Rust Reference - Concurrency]**
+> **来源: [Rust Reference - Concurrency](https://doc.rust-lang.org/reference/special-types-and-traits.html)**
 
 > **[来源: rayon.rs Documentation]**
 
 > **[来源: Rust SIMD Working Group]**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Parallel Computing]**
-> **[来源: ACM - Parallel Programming]**
-> **[来源: IEEE - Parallel Algorithms]**
-> **[来源: Rust Reference - Parallel Iterators]**
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
-> **[来源: Rust Reference - std::sync]**
-> **[来源: ACM - Concurrent Programming]**
+> **来源: [Wikipedia - Parallel Computing](https://en.wikipedia.org/wiki/Parallel_Computing)**
+> **来源: [ACM - Parallel Programming](https://dl.acm.org/)**
+> **来源: [IEEE - Parallel Algorithms](https://standards.ieee.org/)**
+> **来源: [Rust Reference - Parallel Iterators](https://doc.rust-lang.org/std/iter/trait.Iterator.html)**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [TRPL Ch. 16 - Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)**
+> **来源: [Rust Reference - std::sync](https://doc.rust-lang.org/std/sync/)**
+> **来源: [ACM - Concurrent Programming](https://dl.acm.org/)**
 
 ---
 

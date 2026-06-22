@@ -79,7 +79,7 @@
 
 ### 1.1 BTreeMap/BTreeSet：有序关联容器
 
-> **[Wikipedia: B-tree]** A B-tree is a self-balancing tree data structure that maintains sorted data and allows searches, sequential access, insertions, and deletions in logarithmic time.
+> **[Wikipedia: B-tree](https://en.wikipedia.org/wiki/B_tree)** A B-tree is a self-balancing tree data structure that maintains sorted data and allows searches, sequential access, insertions, and deletions in logarithmic time.
 > **来源**: <https://en.wikipedia.org/wiki/B-tree>
 
 ```text
@@ -147,7 +147,7 @@ VecDeque 核心特征:
 
 ### 1.3 BinaryHeap：二叉堆优先队列
 
-> **[Wikipedia: Binary Heap]** A binary heap is a heap data structure that takes the form of a binary tree. Binary heaps are a common way of implementing priority queues.
+> **[Wikipedia: Binary Heap](https://en.wikipedia.org/wiki/Binary_Heap)** A binary heap is a heap data structure that takes the form of a binary tree. Binary heaps are a common way of implementing priority queues.
 > **来源**: <https://en.wikipedia.org/wiki/Binary_heap>
 
 ```text

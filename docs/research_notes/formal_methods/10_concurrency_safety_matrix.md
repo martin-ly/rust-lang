@@ -52,7 +52,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Concurrency Control]** · **[来源: Wikipedia - Deadlock]** · **[来源: ACM - Concurrency Bug Detection]** · **[来源: IEEE - Parallel Programming Safety]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Concurrency Control](https://en.wikipedia.org/wiki/Concurrency_Control)** · **来源: [Wikipedia - Deadlock](https://en.wikipedia.org/wiki/Deadlock)** · **[来源: ACM - Concurrency Bug Detection]** · **[来源: IEEE - Parallel Programming Safety]**
 
 并发安全矩阵全面梳理 Rust 并发编程中的安全保证、同步原语、并发模式和常见陷阱，为并发程序的形式化验证提供参考框架。
 
@@ -60,13 +60,13 @@
 
 ## 一、Send/Sync 类型矩阵
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 基础规则
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 类型 | `Send` | `Sync` | 说明 |
 | :--- | :--- | :--- | :--- |
@@ -87,7 +87,7 @@
 
 ### 复合类型推导
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 | 复合类型 | `Send`条件 | `Sync`条件 |
 | :--- | :--- | :--- |
@@ -105,7 +105,7 @@
 
 ### 互斥与锁
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 原语 | 公平性 | 阻塞类型 | 适用场景 | 开销 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -118,7 +118,7 @@
 
 ### 原子操作
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 操作 | 内存序 | 使用场景 | 性能 |
 | :--- | :--- | :--- | :--- |
@@ -129,7 +129,7 @@
 
 ### 线程通信
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | 机制 | 语义 | 容量 | 适用场景 |
 | :--- | :--- | :--- | :--- |
@@ -147,7 +147,7 @@
 
 ### 数据共享模式
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 | 模式 | 所有权 | 同步 | 性能 | 复杂度 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -159,7 +159,7 @@
 
 ### 任务并行模式
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | 模式 | 适用 | 工具 | 负载均衡 |
 | :--- | :--- | :--- | :--- |
@@ -408,13 +408,13 @@ unsafe impl<T: Sync> Sync for Wrapper<T> {}
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
-> **[来源: crossbeam Documentation]**
-> **[来源: ACM - Concurrent Programming]**
-> **[来源: Wikipedia - Formal Methods]**
-> **[来源: Coq Reference]**
-> **[来源: TLA+]**
-> **[来源: ACM - Formal Verification]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [TRPL Ch. 16 - Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)**
+> **来源: [crossbeam Documentation](https://docs.rs/crossbeam/latest/crossbeam/)**
+> **来源: [ACM - Concurrent Programming](https://dl.acm.org/)**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
 
 ---

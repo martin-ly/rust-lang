@@ -12,13 +12,13 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** ·
-> **[来源: Wikipedia - Rust (programming language)]** ·
-> **[来源: Rustonomicon]** ·
-> **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** ·
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]** ·
-> **[来源: Wikipedia - Generic Programming]** ·
-> **[来源: Wikipedia - Dependent Type]** ·
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** ·
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** ·
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** ·
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** ·
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** ·
+> **来源: [Wikipedia - Generic Programming](https://en.wikipedia.org/wiki/Generic_Programming)** ·
+> **来源: [Wikipedia - Dependent Type](https://en.wikipedia.org/wiki/Dependent_Type)** ·
 > **[来源: ACM - Const Generic Programming]** ·
 > **[来源: IEEE - Parameterized Type Systems]**
 
@@ -74,13 +74,13 @@
 
 ## 1. 概述
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 什么是常量泛型
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **常量泛型(Const Generics)** 允许类型由**常量值**参数化，而不仅仅是其他类型或生命周期。
 
@@ -96,7 +96,7 @@ let arr: Array<i32, 5> = Array { data: [1, 2, 3, 4, 5] };
 
 ### 1.2 为什么需要常量泛型
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **问题：固定大小数组的类型化**:
 
@@ -117,7 +117,7 @@ struct Array<T, const N: usize>([T; N]);
 
 ### 1.3 与泛型的关系
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 | 特性 | `类型泛型<T>` | `常量泛型<const N>` |
 |------|-------------|-------------------|
@@ -134,7 +134,7 @@ struct Array<T, const N: usize>([T; N]);
 
 ### 2.1 声明常量泛型
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **支持的常量类型**:
 
@@ -162,7 +162,7 @@ type Vector3 = Point<3>;
 
 ### 2.2 函数中的常量泛型
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust
 // 泛型函数
@@ -180,7 +180,7 @@ let zeros: [i32; 5] = create_array::<i32, 5>();
 
 ### 2.3 多个常量泛型参数
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 struct Matrix<T, const ROWS: usize, const COLS: usize> {
@@ -205,7 +205,7 @@ let m: Matrix<f64, 3, 4> = Matrix::new();
 
 ### 2.4 默认值（Rust 1.94+ 稳定）
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 // Rust 1.94+: 常量泛型默认值已稳定！
@@ -248,7 +248,7 @@ let buf3: MultiBuffer<i32, 8, 512> = MultiBuffer { inner: [[0; 512]; 8] };
 
 ### 3.1 类型作为计算
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 常量泛型允许在**类型级别**进行计算：
 
@@ -267,7 +267,7 @@ const RESULT: usize = add::<3, 5>();  // 值 8
 
 ### 3.2 泛型特化
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 基于常量值的特化（部分支持）：
 
@@ -291,7 +291,7 @@ impl<T: Default + Copy> Array<T, 1> {
 
 ### 3.3 递归类型定义
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 // 类型级链表（实验性）
@@ -314,7 +314,7 @@ const fn length<T>(_: &T) -> usize {
 
 ### 4.1 停机问题
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 常量求值涉及**停机问题**：
 
@@ -337,7 +337,7 @@ use_it::<i32, { compute() }>();  // 编译会挂起！
 
 ### 4.2 Rust的解决方案
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **策略1: 求值步骤限制**:
 
@@ -364,7 +364,7 @@ where
 
 ### 4.3 可判定性分类
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 特性 | 可判定性 | 说明 |
 |------|----------|------|
@@ -375,7 +375,7 @@ where
 
 ### 4.4 实践中的限制
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 // 好的：简单表达式
@@ -400,7 +400,7 @@ const fn fib<const N: usize>() -> usize {
 
 ### 5.1 静态大小优化
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 常量泛型使编译器知道确切大小：
 
@@ -417,7 +417,7 @@ struct Packet<const SIZE: usize> {
 
 ### 5.2 栈分配 vs 堆分配
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust
 // 小的数组：栈分配（高效）
@@ -998,13 +998,13 @@ trait Container {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
-> **[来源: Wikipedia - Generic Programming]**
-> **[来源: TRPL Ch. 10 - Generics]**
-> **[来源: Rust Reference - Generics]**
-> **[来源: Wikipedia - Parametric Polymorphism]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
+> **来源: [Wikipedia - Generic Programming](https://en.wikipedia.org/wiki/Generic_Programming)**
+> **来源: [TRPL Ch. 10 - Generics](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)**
+> **来源: [Rust Reference - Generics](https://doc.rust-lang.org/reference/)**
+> **来源: [Wikipedia - Parametric Polymorphism](https://en.wikipedia.org/wiki/Parametric_Polymorphism)**
 
 ---

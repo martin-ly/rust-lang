@@ -7,7 +7,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: TRPL]** · **[来源: Rust Standard Library]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [02 并行分裂模式 (Parallel Split) - 完整形式化语义](#02-并行分裂模式-parallel-split---完整形式化语义)
   - [目录](#目录)
@@ -57,19 +57,19 @@
 
 ## 1. 引言
 >
-> **[来源: Rust Reference]** · **[来源: TRPL]** · **[来源: Rust Standard Library]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 并行分裂模式（Parallel Split，也称为 AND-Split）是工作流控制流模式中的核心并发模式。它定义了一个执行点，在此点上一个单一的执行线程分裂为多个并行执行的线程，所有分支同时被激活并独立执行。
 
-> [来源: Workflow Patterns Initiative]
+> 来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)
 
 在现代计算系统中，并行分裂是提升吞吐量和降低延迟的关键手段。Rust 编程语言通过其独特的所有权系统和类型安全的并发原语，为并行分裂模式提供了编译期保证：数据竞争在编译期被消除，所有权分布通过 `move` 闭包明确传递，使得并行程序的构建既高效又安全。
 
-> [来源: Rustonomicon - Concurrency]
+> 来源: [Rustonomicon - Concurrency](https://doc.rust-lang.org/nomicon/concurrency.html)
 
 ### 1.1 历史背景
 
-> [来源: van der Aalst et al. 2003]
+> 来源: [van der Aalst et al. 2003](https://www.workflowpatterns.com/)
 
 并行分裂模式最早由 Wil van der Aalst 等人在 "Workflow Patterns" (2003) 中系统定义，编号为 WCP-02。该模式源于早期并行计算理论，如 Flynn 分类法中的 MIMD 架构，以及 Petri 网中的分叉（Fork）构造。在程序语言理论中，并行分裂对应于并行组合（Parallel Composition）算子，由 Hoare 在 CSP 中形式化为 $P \,||\, Q$，由 Milner 在 CCS 中形式化为 $P \,|\, Q$。
 
@@ -81,7 +81,7 @@
 
 ### 2.1 概念定义
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **并行分裂** 是一个控制流构造，它将单个执行线程分化为多个并行执行的线程，其中：
 
@@ -99,7 +99,7 @@ Activity ::= atomic_action | Sequence | Parallel | Choice
 
 ### 2.2 核心语义
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **执行语义**:
 
@@ -121,11 +121,11 @@ $$
 
 ### 2.3 形式化表示
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 #### 2.3.1 状态机表示
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 $$
 \begin{aligned}
@@ -155,7 +155,7 @@ stateDiagram-v2
 
 #### 2.3.2 流程代数表示 (CSP 风格)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 $$
 \text{ParallelSplit}(B_1, ..., B_n) = B_1 \,||\, B_2 \,||\, ... \,||\, B_n
@@ -172,7 +172,7 @@ Parallel = || i: Branches @ Branch(i)
 
 #### 2.3.3 Petri 网表示
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```mermaid
 flowchart LR
@@ -195,7 +195,7 @@ flowchart LR
 
 ### 3.1 BPMN 表示
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 在 BPMN 2.0 中，并行分裂使用**并行网关** (Parallel Gateway) 表示：
 
@@ -220,7 +220,7 @@ flowchart LR
 
 ### 3.2 UML 活动图
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 在 UML 中，并行分裂使用**分叉节点** (Fork Node) 表示：
 
@@ -234,7 +234,7 @@ flowchart LR
 
 ### 3.3 WfMC 标准
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 工作流管理联盟 (WfMC) 将并行分裂定义为：
 
@@ -254,7 +254,7 @@ flowchart LR
 
 ### 4.1 CCS 表示
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **Calculus of Communicating Systems (CCS)**:
 
@@ -272,7 +272,7 @@ $$
 
 ### 4.2 CSP 表示
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **Communicating Sequential Processes (CSP)**:
 
@@ -290,7 +290,7 @@ $$
 
 ### 4.3 π-演算表示
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **Pi-Calculus**:
 
@@ -546,7 +546,7 @@ struct AccountBalance { amount: f64 }
 
 **结论**: 并行分裂满足活性。
 
-> [来源: van der Aalst 2003]
+> 来源: [van der Aalst 2003](https://www.workflowpatterns.com/)
 
 ### 6.2 安全性 (Safety)
 >
@@ -785,8 +785,8 @@ let (b, (c, d)) = tokio::join!(
 
 在 Rust 中，并行分裂模式通过 `std::thread::spawn`、`tokio::join!`、`rayon::join` 等原语实现。Rust 的所有权系统和类型约束（`Send` / `Sync`）在编译期消除了数据竞争，使得并行程序的构建既高效又安全。`move` 闭包明确地将所有权分布到各并行分支，编译器确保不会发生并发访问冲突。
 
-> [来源: Rustonomicon - Concurrency]
-> [来源: TRPL Ch. 16 - Concurrency]
+> 来源: [Rustonomicon - Concurrency](https://doc.rust-lang.org/nomicon/concurrency.html)
+> 来源: [TRPL Ch. 16 - Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
 
 ---
 
@@ -825,16 +825,16 @@ let (b, (c, d)) = tokio::join!(
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Design Pattern]**
-> **[来源: Rust API Guidelines]**
-> **[来源: Gang of Four - Design Patterns]**
-> **[来源: ACM - Software Design Patterns]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 16 - Concurrency]**
-> **[来源: Rustonomicon - Concurrency]**
-> **[来源: POPL 2018 - RustBelt]**
-> **[来源: Workflow Patterns Initiative]**
-> **[来源: van der Aalst et al. 2003]**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
+> **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 16 - Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)**
+> **来源: [Rustonomicon - Concurrency](https://doc.rust-lang.org/nomicon/concurrency.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)**
+> **来源: [van der Aalst et al. 2003](https://www.workflowpatterns.com/)**
 
 ---
 

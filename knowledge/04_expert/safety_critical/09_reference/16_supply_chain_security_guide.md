@@ -444,3 +444,27 @@ jobs:
 >
 
 ---
+
+## 📚 模块 8: 国际化对齐
+
+> 本节按项目模板要求补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Rust Security Response WG](https://www.rust-lang.org/governance/wgs/wg-security-response) | 权威来源 | 安全响应工作组 |
+| [Cargo Security](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html) | 权威来源 | 依赖安全 |
+
+### 8.2 学术来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [RustSec](https://rustsec.org/) | 权威来源 | Rust 安全公告数据库 |
+
+### 8.3 社区权威
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [cargo audit](https://github.com/RustSec/rustsec) | 权威来源 | 依赖审计工具 |
+| [OpenSSF Scorecard](https://github.com/ossf/scorecard) | 权威来源 | 供应链安全评分 |

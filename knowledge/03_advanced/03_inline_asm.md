@@ -46,3 +46,26 @@ fn main() {
 - [FFI 边界测试](02_ffi.md) — C 可变参数与 Rust FFI 绑定
 - [编译器内部边界测试](01_compiler_internals.md) — MIR 优化与 unsafe 语义保留
 - [延迟初始化](04_lazy_initialization.md) — 运行时资源管理模式
+
+## 📚 模块 8: 国际化对齐
+
+> 本节按项目模板要求补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Rust Reference — Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html) | 权威来源 | 内联汇编参考 |
+| [Rustonomicon — Exotic](https://doc.rust-lang.org/nomicon/exotic-sizes.html) | 权威来源 | 裸机类型 |
+
+### 8.2 学术来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [x86 Instruction Set Reference](https://www.felixcloutier.com/x86/) | 权威来源 | x86 指令参考 |
+
+### 8.3 社区权威
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Rust Embedded Book](https://docs.rust-embedded.org/book/) | 权威来源 | 嵌入式实践 |

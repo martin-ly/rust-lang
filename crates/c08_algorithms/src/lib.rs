@@ -78,6 +78,10 @@ pub mod algorithms;
 // 主题化算法模块
 pub mod topics;
 
+// Kani 形式化验证示例（仅在 cargo kani 时编译）
+#[cfg(kani)]
+pub mod kani_examples;
+
 // 兼容性：保留原有模块结构
 pub mod backtracking;
 pub mod data_structure;

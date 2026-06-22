@@ -1,10 +1,10 @@
 > **Summary**: mdBook-style summary for the concept collection.
 >
 
-# Summary
+# 目录
 
 >
-> **EN**: Summary
+> **EN**: Table of Contents
 
 - [Rust 概念知识体系 —— 全面分析论证与权威对齐](README.md)
 

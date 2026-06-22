@@ -47,7 +47,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Workflow Engine]** · **[来源: Wikipedia - Business Process Management]** · **[来源: ACM - Workflow System Design]** · **[来源: IEEE - Process Automation Standards]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Workflow Engine](https://en.wikipedia.org/wiki/Workflow_Engine)** · **来源: [Wikipedia - Business Process Management](https://en.wikipedia.org/wiki/Business_Process_Management)** · **[来源: ACM - Workflow System Design]** · **[来源: IEEE - Process Automation Standards]**
 
 工作流引擎能力矩阵对比主流工作流引擎的功能特性、适用场景和Rust集成能力，为技术选型提供参考。
 
@@ -55,13 +55,13 @@
 
 ## 引擎能力对比矩阵
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 核心功能
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 引擎 | 持久化 | 补偿 | 人工任务 | 可视化 | 监控 | 定时触发 | 子流程 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -74,7 +74,7 @@
 
 ### 技术特性
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 引擎 | 横向扩展 | 事件驱动 | Saga支持 | 并行执行 | 版本控制 | 多租户 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -87,7 +87,7 @@
 
 ### Rust支持
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | 引擎 | Rust SDK | 异步支持 | 类型安全 | 维护状态 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -106,7 +106,7 @@
 
 ### 按场景推荐
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 | 场景 | 推荐引擎 | 理由 | 注意事项 |
 | :--- | :--- | :--- | :--- |
@@ -119,7 +119,7 @@
 
 ### 复杂度评估
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```text
 低复杂度 ────────────────────────────────────> 高复杂度
@@ -137,7 +137,7 @@
 
 ### Temporal vs Cadence
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 维度 | Temporal | Cadence |
 | :--- | :--- | :--- |
@@ -150,7 +150,7 @@
 
 ### Camunda 7 vs 8
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | 维度 | Camunda 7 | Camunda 8 |
 | :--- | :--- | :--- |
@@ -169,7 +169,7 @@
 
 ### Temporal Rust SDK
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use temporal_sdk::{ActivityOptions, WorkflowContext, workflow};
@@ -201,7 +201,7 @@ async fn compensate_payment(ctx: &mut WorkflowContext, order_id: String) {
 
 ### 自研状态机模式
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 // Rust原生状态机实现
@@ -322,13 +322,13 @@ impl<S: State> Workflow<S> {
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -379,9 +379,9 @@ impl<S: State> Workflow<S> {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
-> **[来源: Coq Reference]**
-> **[来源: TLA+]**
-> **[来源: ACM - Formal Verification]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
 
 ---

@@ -25,7 +25,7 @@
 
 ## 层次推进（阅读顺序）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 层次 | 内容 | 入口 |
 | :--- | :--- | :--- |
@@ -41,7 +41,7 @@
 
 ## 体系宗旨
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本体系填补以下缺口：
 
@@ -55,7 +55,7 @@
 
 ## 目录结构
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 目录 | 内容 |
 | :--- | :--- |
@@ -220,13 +220,13 @@
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -237,7 +237,7 @@
 
 #### 代码示例更新
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 本文档中的所有Rust代码示例均已：
 
@@ -247,7 +247,7 @@
 
 #### 相关文档
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 - Rust 1.94 迁移指南
 - Rust 1.94 特性速查

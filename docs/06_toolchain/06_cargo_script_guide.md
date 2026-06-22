@@ -13,7 +13,7 @@
 
 ## 目录
 
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Cargo Script / Frontmatter 指南](#cargo-script--frontmatter-指南)
   - [目录](#目录)
@@ -41,15 +41,15 @@
 
 ## 1. 什么是 Cargo Script？
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Cargo Script** 是 Rust 的一项新能力，允许你编写**单文件 Rust 脚本**，直接在文件中声明依赖，无需创建完整的 Cargo 项目。
 
 ### 核心特性
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **单文件可执行**: `foo.rs` 直接运行
 - **嵌入式依赖声明**: 通过 `cargo:` frontmatter 或内联 TOML 声明依赖
@@ -58,9 +58,9 @@
 
 ### 为什么重要？
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 场景 | 传统方式 | Cargo Script |
 |------|---------|-------------|
@@ -73,13 +73,13 @@
 
 ## 2. Frontmatter 语法
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 基本格式
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Frontmatter 位于文件顶部，使用 `---` 分隔符包裹 TOML 配置：
 
@@ -108,9 +108,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 简写依赖语法
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 ---
@@ -123,9 +123,9 @@ serde_json = "1"
 
 ### 最小示例（无 frontmatter）
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 对于无依赖的脚本，甚至可以省略 frontmatter：
 
@@ -140,13 +140,13 @@ fn main() {
 
 ## 3. 完整示例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 示例 1：HTTP 请求脚本
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 ---
@@ -189,9 +189,9 @@ cargo +nightly fetch-json.rs
 
 ### 示例 2：数据处理脚本
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 ---
@@ -214,7 +214,7 @@ fn main() {
 
 ### 示例 3：系统管理脚本
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 #!/usr/bin/env cargo
@@ -358,13 +358,13 @@ fn main() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Compiler Construction]**
-> **[来源: Rust Compiler Team Blog]**
-> **[来源: LLVM Documentation]**
-> **[来源: ACM - Compiler Design]**
-> **[来源: Wikipedia - Build Automation]**
-> **[来源: Cargo Book]**
-> **[来源: Rust Reference - Cargo]**
-> **[来源: crates.io Documentation]**
+> **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)**
+> **来源: [Rust Compiler Team Blog](https://blog.rust-lang.org/inside-rust/)**
+> **来源: [LLVM Documentation](https://llvm.org/docs/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [Wikipedia - Build Automation](https://en.wikipedia.org/wiki/Build_Automation)**
+> **来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)**
+> **来源: [Rust Reference - Cargo](https://doc.rust-lang.org/cargo/)**
+> **来源: [crates.io Documentation](https://crates.io/)**
 
 ---

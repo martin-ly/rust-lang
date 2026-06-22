@@ -63,7 +63,7 @@
 
 ## 🎯 路线图概览 {#-路线图概览}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本路线图提供了 Rust 研究笔记系统的研究推进计划，分为四个主要阶段：
 
@@ -76,15 +76,15 @@
 
 ## 📚 阶段一：基础理论研究 {#-阶段一基础理论研究}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **目标**: 建立 Rust 类型系统和内存安全的理论基础
 
 ### 1.1 类型系统基础
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [x] [类型系统基础](./type_theory/10_type_system_foundations.md) ✅ 100%
   - 类型环境与类型判断
@@ -95,9 +95,9 @@
 
 ### 1.2 Trait 系统
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [x] [Trait 系统形式化](./type_theory/10_trait_system_formalization.md) ✅ 100%
   - Trait 的形式化定义
@@ -108,9 +108,9 @@
 
 ### 1.3 型变理论
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [x] [型变理论](./type_theory/10_variance_theory.md) ✅ 100%
   - 协变、逆变、不变
@@ -121,9 +121,9 @@
 
 ### 1.4 类型理论完备性缺口（已完成）
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [x] [完备性缺口](./formal_methods/00_completeness_gaps.md) ✅ 阶段 1–7 已补全
   - LUB coercion、Copy 与 specialization（LUB-T1、COP-T1）— type_system_foundations 已补全
@@ -137,15 +137,15 @@
 
 ## 📚 阶段二：形式化验证 {#-阶段二形式化验证}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **目标**: 对 Rust 核心机制进行形式化建模和证明
 
 ### 2.1 所有权系统
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [x] [所有权模型形式化](./formal_methods/10_ownership_model.md) ✅ 100%
   - 所有权规则形式化
@@ -156,9 +156,9 @@
 
 ### 2.2 借用检查器
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [x] [借用检查器证明](./formal_methods/10_borrow_checker_proof.md) ✅ 100%
   - 借用规则形式化
@@ -169,9 +169,9 @@
 
 ### 2.3 异步系统
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [x] [异步状态机形式化](./formal_methods/10_async_state_machine.md) ✅ 100%
   - Future/Poll 状态机
@@ -182,7 +182,7 @@
 
 ### 2.4 生命周期系统
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 - x] [生命周期形式化 ✅ 100%
   - 生命周期语义
@@ -203,7 +203,7 @@
 
 ### 2.6 形式化证明批判性分析与推进计划（2026-02-14 完成）
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 - [x] [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./10_formal_proof_critical_analysis_and_plan_2026_02.md) ✅ 阶段 1–3 100%
   - 阶段 1：国际对标索引、证明深度、全模型入口、层次化导航
@@ -222,7 +222,7 @@
 
 ### 3.1 性能研究
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 - [x] [性能基准测试](./experiments/10_performance_benchmarks.md) ✅ 100%
   - 基准测试框架
@@ -238,7 +238,7 @@
 
 ### 3.2 内存研究
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 - [x] [内存分析](./experiments/10_memory_analysis.md) ✅ 100%
   - 内存使用模式
@@ -249,7 +249,7 @@
 
 ### 3.3 并发研究
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 - [x] [并发性能](./experiments/10_concurrency_performance.md) ✅ 100%
   - 并发模型对比
@@ -260,7 +260,7 @@
 
 ### 3.4 宏系统研究
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - [x] [宏展开性能](./experiments/10_macro_expansion_performance.md) ✅ 100%
   - 宏展开时间分析
@@ -279,7 +279,7 @@
 
 ### 4.1 实际应用案例
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - [x] [实际应用案例研究](./10_practical_applications.md) ✅ 100%
   - 系统编程案例
@@ -291,7 +291,7 @@
 
 ### 4.2 研究方法论
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - [x] [研究方法论](./10_research_methodology.md) ✅ 100%
   - 研究方法框架
@@ -488,13 +488,13 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

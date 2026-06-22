@@ -7,7 +7,7 @@
 
 ## 目录
 >
-> **[来源: Workflow Patterns Initiative]** · **[来源: van der Aalst 2003]** · **[来源: Russell 2006]** · **[来源: Rust Reference]** · **[来源: Tokio Docs - docs.rs/tokio]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)** · **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)** · **来源: [Russell 2006](https://www.workflowpatterns.com/)** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: Tokio Docs - docs.rs / [tokio](https://tokio.rs/)**
 
 - [20 取消案例模式 (Cancel Case) - 完整形式化语义](#20-取消案例模式-cancel-case---完整形式化语义)
   - [目录](#目录)
@@ -57,13 +57,13 @@
 
 ## 1. 引言
 >
-> **[来源: Workflow Patterns Initiative]** · **[来源: van der Aalst 2003]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)** · **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)**
 
 取消案例模式（Cancel Case，WCP20）是工作流控制流模式家族中最高级别的撤销机制，提供终止整个工作流案例（case）的能力。与仅取消单个活动的 WCP19 不同，WCP20 作用于案例的全部生命周期，包括所有当前活跃的活动、待执行的子流程、已分配的资源和相关的子案例。
 
 ### 1.1 历史背景
 
-> **[来源: van der Aalst 2003]** · **[来源: Russell 2006]**
+> **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)** · **来源: [Russell 2006](https://www.workflowpatterns.com/)**
 
 取消案例模式最早由 van der Aalst 等人 (2003) 在 "Workflow Patterns" 中系统定义，分为两个级别：
 
@@ -96,7 +96,7 @@ WCP20 解决的核心问题是：**如何在案例执行的任意时刻，安全
 
 ### 2.1 概念定义
 
-> **[来源: Workflow Patterns Initiative]** · **[来源: Russell 2006]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)** · **来源: [Russell 2006](https://www.workflowpatterns.com/)**
 
 **取消案例模式** 的形式化定义为：
 
@@ -116,7 +116,7 @@ Event        ::= Timeout | ExternalSignal | BusinessRule
 
 ### 2.2 核心语义
 
-> **[来源: van der Aalst 2003]**
+> **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)**
 
 **取消语义**:
 
@@ -143,7 +143,7 @@ $$
 
 #### 2.3.1 状态机表示
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 $$
 \begin{aligned}
@@ -174,7 +174,7 @@ ActivityWithCancel = normal -> ActivityWithCancel
 
 #### 2.3.3 Petri 网表示
 
-> **[来源: Wikipedia - Petri Net]**
+> **来源: [Wikipedia - Petri Net](https://en.wikipedia.org/wiki/Petri_Net)**
 
 ```
                     ┌─→ (A₁) ──┐
@@ -229,7 +229,7 @@ flowchart LR
 
 ### 3.2 UML 活动图
 
-> **[来源: Wikipedia - UML Activity Diagram]**
+> **来源: [Wikipedia - UML Activity Diagram](https://en.wikipedia.org/wiki/UML_Activity_Diagram)**
 
 在 UML 活动图中，WCP20 使用**中断活动区域** (Interruptible Activity Region)：
 
@@ -250,7 +250,7 @@ flowchart LR
 
 ### 3.3 WfMC 标准
 
-> **[来源: WfMC - Workflow Management Coalition]**
+> **来源: [WfMC - Workflow Management Coalition](https://www.wfmc.org/)**
 
 工作流管理联盟将 WCP20 定义为：
 
@@ -266,7 +266,7 @@ flowchart LR
 
 ### 4.1 CCS 表示
 
-> **[来源: Milner 1989 - Communication and Concurrency]**
+> **来源: [Milner 1989 - Communication and Concurrency](https://en.wikipedia.org/wiki/Communication_and_Concurrency)**
 
 **Calculus of Communicating Systems (CCS)**:
 
@@ -325,7 +325,7 @@ $$
 
 ### 5.1 基础实现
 
-> **[来源: Rust Reference]** · **[来源: The Rust Programming Language]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 利用 Rust 的 `tokio::task::AbortHandle`、`tokio::select!` 和 `Drop` 特性实现案例级取消：
 
@@ -391,7 +391,7 @@ impl<F: FnOnce()> Drop for CleanupGuard<F> {
 
 ### 5.2 高级实现
 
-> **[来源: Rust Standard Library]** · **[来源: Tokio Docs]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** · **来源: [Tokio Docs](https://tokio.rs/)**
 
 ```rust,ignore
 use std::sync::atomic::{AtomicBool, Ordering};
@@ -473,7 +473,7 @@ where F: FnOnce() -> T + Send + 'static, T: Send + 'static {
 
 ### 5.3 保险理赔取消完整示例
 
-> **[来源: Rust Standard Library]** · **[来源: Tokio Docs]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** · **来源: [Tokio Docs](https://tokio.rs/)**
 
 ```rust,ignore
 use tokio::time::{sleep, Duration};
@@ -582,7 +582,7 @@ pub async fn demo_claim_with_cancellation() {
 
 ### 6.1 活性 (Liveness)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **定理**: CancelCase 操作最终在有限时间内完成，不会无限阻塞。
 
@@ -601,7 +601,7 @@ $$
 
 ### 6.2 安全性 (Safety)
 
-> **[来源: van der Aalst 2003]**
+> **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)**
 
 **定理**: 取消操作不会遗漏案例内的任何活动，且不会导致资源泄漏。
 
@@ -651,7 +651,7 @@ Cancellation Patterns
 
 ### 7.2 形式化关系
 
-> **[来源: Workflow Patterns Initiative]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)**
 
 **WCP19 与 WCP20 的关系**:
 
@@ -685,7 +685,7 @@ $$
 
 ### 8.1 保险理赔全流程取消
 
-> **[来源: Russell 2006]**
+> **来源: [Russell 2006](https://www.workflowpatterns.com/)**
 
 客户提交理赔申请后，在任意处理阶段要求撤销。需要停止评估、释放资源、撤销资金预留。
 
@@ -714,7 +714,7 @@ $$
 
 ### 9.1 超时自动取消
 
-> **[来源: Russell 2006]**
+> **来源: [Russell 2006](https://www.workflowpatterns.com/)**
 
 案例在超过预定时间后自动取消：
 
@@ -727,7 +727,7 @@ where F: Future<Output = T> {
 
 ### 9.2 分级取消
 
-> **[来源: Tokio Docs]**
+> **来源: [Tokio Docs](https://tokio.rs/)**
 
 根据取消原因执行不同级别的清理：
 
@@ -746,7 +746,7 @@ impl AdvancedCaseManager {
 
 ### 9.3 跨案例取消
 
-> **[来源: Rust Reference - channels]**
+> **来源: [Rust Reference - channels](https://doc.rust-lang.org/reference/)**
 
 一个案例的取消触发相关案例的级联取消：
 
@@ -818,20 +818,20 @@ impl CrossCaseCancel {
 
 ## 权威来源索引
 
-> **[来源: Workflow Patterns Initiative]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)**
 
-> **[来源: van der Aalst 2003]**
+> **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)**
 
-> **[来源: Russell 2006]**
+> **来源: [Russell 2006](https://www.workflowpatterns.com/)**
 
-> **[来源: Rust Reference]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
-> **[来源: The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-> **[来源: Rust Standard Library]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Tokio Docs]**
+> **来源: [Tokio Docs](https://tokio.rs/)**
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ---

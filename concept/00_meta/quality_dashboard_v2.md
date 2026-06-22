@@ -245,7 +245,7 @@ graph LR
         F1[问题图谱]
         F2[能力图谱]
         F3[知识图谱本体]
-        F4[RustBelt 谓词可视化]
+        F4[RustBelt](https://plv.mpi-sws.org/rustbelt/)
         F5[范式转换矩阵]
     end
 

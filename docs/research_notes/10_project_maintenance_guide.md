@@ -52,7 +52,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本指南为 `docs/research_notes` 项目的长期维护提供标准和流程，确保文档质量和一致性。
 
@@ -60,13 +60,13 @@
 
 ## 维护责任
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 维护者角色
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 角色 | 职责 | 人员 |
 | :--- | :--- | :--- |
@@ -77,9 +77,9 @@
 
 ### 维护周期
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 任务 | 频率 | 负责人 |
 | :--- | :--- | :--- |
@@ -92,13 +92,13 @@
 
 ## 文档标准
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 文件命名规范
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 # 核心形式化文档
@@ -123,9 +123,9 @@ TUTORIAL_<topic>.md
 
 ### 头部模板
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```markdown
 # 标题
@@ -140,9 +140,9 @@ TUTORIAL_<topic>.md
 
 ### 内容结构
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 章节 | 必需 | 说明 |
 | :--- | :--- | :--- |
@@ -156,13 +156,13 @@ TUTORIAL_<topic>.md
 
 ## 更新流程
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 内容更新步骤
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **评估变更**
 
@@ -200,9 +200,9 @@ TUTORIAL_<topic>.md
 
 ### Rust版本更新
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 当新Rust版本发布时：
 
@@ -225,7 +225,7 @@ TUTORIAL_<topic>.md
 
 ### 自动化检查
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```bash
 #!/bin/bash
@@ -251,7 +251,7 @@ echo "=== 检查完成 ==="
 
 ### 手动审核清单
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```markdown
 ## 内容审核清单
@@ -259,7 +259,7 @@ echo "=== 检查完成 ==="
 
 ### 形式化文档
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 - [ ] 定义(Def)清晰明确
 - [ ] 公理(Axiom)完备
 - [ ] 定理(Theorem)有证明或引用
@@ -268,7 +268,7 @@ echo "=== 检查完成 ==="
 
 ### 思维表征
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 - [ ] 图示清晰可读
 - [ ] 矩阵维度一致
 - [ ] 决策树逻辑完整
@@ -276,7 +276,7 @@ echo "=== 检查完成 ==="
 
 ### 教程
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 - [ ] 目标受众明确
 - [ ] 渐进式结构
 - [ ] 练习/示例完整
@@ -291,7 +291,7 @@ echo "=== 检查完成 ==="
 
 ### 贡献流程
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 1. **Fork 和分支**
 
@@ -322,7 +322,7 @@ echo "=== 检查完成 ==="
 
 ### 内容请求
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 社区可以通过以下方式请求内容：
 
@@ -340,7 +340,7 @@ echo "=== 检查完成 ==="
 
 ### 版本号规则
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```text
 主版本.次版本.修订号
@@ -352,7 +352,7 @@ echo "=== 检查完成 ==="
 
 ### 变更日志
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```markdown
 ## 变更日志
@@ -480,9 +480,9 @@ echo "=== 检查完成 ==="
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Machine Learning]**
-> **[来源: Wikipedia - Artificial Intelligence]**
-> **[来源: tch-rs Documentation]**
-> **[来源: ACM - AI Systems]**
+> **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
+> **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)**
+> **来源: [tch-rs Documentation](https://docs.rs/tch/latest/tch/)**
+> **来源: [ACM - AI Systems](https://dl.acm.org/)**
 
 ---

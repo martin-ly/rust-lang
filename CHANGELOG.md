@@ -1,6 +1,111 @@
 # 更新日志 (Changelog)
 
-> **最后更新**: 2026-06-20
+> **最后更新**: 2026-06-22
+
+---
+
+## [3.1.0] - 2026-07-09 — Rust 1.97.0 稳定支持
+
+### 语言特性
+
+- `VecDeque::truncate_front` / `VecDeque::retain_back`（若 1.97 稳定）
+- 浮点代数优化属性 `float_algebraic`（若 1.97 稳定）
+- `RandomSource` / `DefaultRandomSource` 随机数源抽象（若 1.97 稳定）
+- C-variadic 函数定义（若 1.97 稳定）
+- `Box::into_raw_non_null` / `Vec::into_raw_parts_non_null`（若 1.97 稳定）
+- `int_format_into`（若 1.97 稳定）
+
+### Crate 代码
+
+- `crates/c08_algorithms/src/rust_197_features.rs`: 激活 1.97 稳定 API，移除等效实现
+- `crates/c08_algorithms`: 新增/更新 1.97 特性单元测试
+
+### 文档更新
+
+- `concept/07_future/rust_1_97_preview.md`: 更新为 "Rust 1.97 稳定特性"，状态标记从 🧪/🔄 改为 ✅
+- `concept/00_meta/terminology_glossary.md`: 1.97 术语状态从候选改为稳定
+- `docs/06_toolchain/06_21_rust_1_97_features.md`: 新增稳定特性综述文档（由预览迁移）
+
+### 练习
+
+- `exercises/tests/l3_ecosystem_alignment.rs` 及新增 1.97 特性测验
+
+### 形式化工具与 1.98+ 预览（前置准备）
+
+- `concept/07_future/rust_1_98_preview.md`: 填充 7 大章节 nightly 特性预览，补充代码示例与状态标记
+- `concept/04_formal/22_safety_tags.md`: Safety Tags (RFC #3842) 深度页
+- `concept/04_formal/23_borrow_sanitizer.md`: BorrowSanitizer 深度页
+- `concept/04_formal/24_autoverus.md`: AutoVerus / Verus 自动证明生态深度页
+- `concept/04_formal/25_tree_borrows_deep_dive.md`: Tree Borrows 与 Stacked Borrows 对比深度页
+- `concept/06_ecosystem/47_formal_verification_tools.md`: 更新 Kani 0.66 特性说明与 quantifiers / autoharness / loop contracts 示例
+- `crates/c02_type_system/src/rust_198_features.rs`: 新增 1.98+ nightly 占位模块 `nightly_placeholders`
+
+### 权威来源对齐（2026-06-22 网络对齐冲刺）
+
+- `concept/07_future/rust_1_97_preview.md`: 补充 beta 1.97.0 分支信息与 releases.rs 来源
+- `concept/07_future/rust_1_98_preview.md`: 补充 Project Goals 子目标直链（Beyond the `&`、BorrowSanitizer、Field Projections）
+- `concept/04_formal/22_safety_tags.md`: 新增 Safety Tags 研究仓库来源与 21 基础标签进展
+- `concept/04_formal/23_borrow_sanitizer.md`: 补充 2026 Project Goal 技术路线与 LLVM 上游计划
+- `concept/06_ecosystem/47_formal_verification_tools.md`: 更新 Kani 0.66 Autoharness / loop-modifies / `--prove-safety-only` 说明，统一来源引用
+- `reports/SEA_ORM_2_0_RELEASE_TRACKING_2026_06_22.md`: 记录第三方文章与 crates.io 索引差异，明确以 crates.io 为准
+- 新建 `reports/WEB_AUTHORITY_ALIGNMENT_UPDATE_2026_06_22.md`
+
+### 全仓库 Markdown 来源占位符二次精修（2026-06-22）
+
+- 修复 `scripts/fix_docs_source_placeholders.py` 致命 bug：移除 `lookup()` 中提前的 `return None`，恢复 Wikipedia / RFC / TRPL / Rust Reference 等模式匹配
+- 扩展权威来源映射：官方文档、学术会议（ACM / IEEE / POPL / PLDI）、形式化工具、生态 crate、Releases.rs、Can I Use 等
+- 新增代码块 / 行内代码保护，避免 `#[kani::loop_invariant]` 等被误替换
+- 运行结果：累计 1,261 个 Markdown 文件、11,828 处占位符转为可点击链接（第一批 11,379 + 第二批 449）
+- 受影响范围：`docs/`、`book/`、`guides/`、`reports/`、`.kimi/`、`exercises/`、`examples/`、`content/`、`concept/`
+
+### knowledge/ 国际化对齐批量补充
+
+- 运行 `scripts/bulk_add_knowledge_module8.py`，为 `knowledge/` 下 89 个缺少「模块 8: 国际化对齐」的核心文档补充官方 + 学术 + 社区权威来源
+- 覆盖主题：ownership/borrowing/lifetimes、async/concurrency、unsafe/ffi、formal、safety_critical、database、web、deployment 等
+- 新建 `reports/KNOWLEDGE_MODULE8_ALIGNMENT_2026_06_22.md`
+
+### concept/00_meta/ 来源链接修复与审计扩展
+
+- 运行 `scripts/fix_meta_source_placeholders.py`，修复 `concept/00_meta/` 下 9 个文件的 132 处纯文本来源占位符，替换为可点击的 Markdown 链接
+- 更新 `scripts/audit_concept_metadata.py` 权威来源模式，扩展为 Rust 官方 + 国际教学工业 + 形式化学术三级来源
+- 重新审计后 `concept/` 345 个 Markdown 文件权威来源覆盖率达到 **100%**
+- 新建 `reports/CONCEPT_00META_SOURCE_ALIGNMENT_2026_06_22.md`
+
+### concept/ 核心概念页精确链接占位修复
+
+- 运行 `scripts/fix_concept_source_placeholders.py`，修复 `concept/01_foundation/`、`02_intermediate/`、`03_advanced/`、`04_formal/`、`05_comparative/`、`06_ecosystem/`、`07_future/` 核心概念页中 `[TRPL: ChX]`、`[Rust Reference: Topic]`、`[Rustonomicon: Topic]`、`[RFC NNNN]`、`[Wikipedia: Topic]`、`[RustBelt: POPL 2018]` 等未带 URL 的占位引用
+- 共处理 104 个 Markdown 文件，将 TRPL 章节、Rust Reference 条目、Rustonomicon 条目、Wikipedia 词条、RFC、RustBelt 论文等转换为可点击的 Markdown 链接；已带 URL 的引用与代码片段保持不变
+- 脚本保留 dry-run 与未知占位符日志；未自动映射的复杂组合引用（如 `来源：Rust Reference; TRPL; Rust RFCs; Academic Papers`）降至 167 处，待后续人工精修
+- 验证：`cargo check --workspace` 与 `cargo test --test l3_ecosystem_alignment` 均通过；`scripts/audit_concept_metadata.py` 仍报告权威来源覆盖率 **100%**
+- 新建 `scripts/fix_concept_source_placeholders.py`
+- 后续精修：扩展脚本以处理 `来源：A / B / C`、`来源：A; B; C`、`Wikipedia — Topic`、`RFC: Title`、`POPL 2018 RustBelt` 等组合/非标准写法，将未自动映射的占位符从 167 降至 **0**（剩余 2 处为 Mermaid 决策树节点标签，不影响来源审计）
+
+### concept/ 国际化元数据完整性收尾
+
+- 运行 `scripts/fix_concept_en_titles.py`，为 33 个英文标题占位文件补充/替换中文 H1，并润色 EN 字段为更具描述性的国际化标题
+  - 19 个活跃概念页：如 `Unsafe Rust` → "Safe and Effective Unsafe Rust"，中文 H1 改为 "Unsafe Rust 安全编程"
+  - 13 个归档文件：补充中文 H1（如 "归档：异步模式"），保留原有 "Archived" EN 标注
+  - `concept/SUMMARY.md`：H1 改为 "目录"，EN 改为 "Table of Contents"
+- 手动修复 `concept/archive/00_meta_layer_index_legacy.md` 的空 Summary 字段
+- 重新审计后 `concept/` 345 个 Markdown 文件全部达标：**100% 有 EN 标题、0% 占位、100% 有 Summary、0% 占位、100% 有权威来源链接**
+- 验证：`cargo check --workspace` 与 `cargo test --test l3_ecosystem_alignment` 均通过
+- 新建 `scripts/fix_concept_en_titles.py`
+
+### knowledge/ README 国际化对齐补全
+
+- 运行 `scripts/add_knowledge_readme_module8.py`，为 `knowledge/` 下 19 个缺少「模块 8: 国际化对齐」的 `README.md` 补充权威来源表格
+- 覆盖 00_start、01_fundamentals、02_intermediate、03_advanced（含 async/concurrency/macros/unsafe 子目录）、04_expert（含 academic/miri/safety_critical）、05_reference、06_ecosystem（含 databases/deep_dives/deployment/emerging）及根 `knowledge/README.md`
+- 每个 README 按主题提供官方来源、学术/工业来源、社区资源三类链接，确保 `knowledge/` 全部 138 个 Markdown 文件（不含 archive）均具备模块 8
+- 验证：`cargo check --workspace` 与 `cargo test --test l3_ecosystem_alignment` 均通过
+- 新建 `scripts/add_knowledge_readme_module8.py`
+
+### docs/book/guides 来源占位符大规模修复
+
+- 运行 `scripts/fix_docs_source_placeholders.py`，扫描并修复 `docs/`、`book/`、`guides/`、`reports/`、`.kimi/`、`exercises/`、`examples/`、`content/`、`concept/00_meta/` 中 `来源: Wikipedia - Topic`、`来源: TRPL Ch. X - Title`、`来源: Rust Reference - Topic`、`来源: Rustonomicon - Topic`、`来源: RFC NNNN - Title`、`来源: POPL 2018 - RustBelt`、`来源: Cargo Book`、`来源: Rust API Guidelines` 等未带 URL 的占位引用
+- 共处理 1000+ 个 Markdown 文件，生成约 20,000+ 个可点击链接；优先覆盖 `docs/rust-ownership-decidability/`、`docs/research_notes/`、`docs/05_guides/` 等重复占位高发区域
+- 保持已有带 URL 引用、代码片段与 Mermaid 图表不变；`cargo check --workspace` 与 `cargo test --test l3_ecosystem_alignment` 均通过
+- 后续扩展脚本覆盖范围至 `.kimi/`、`exercises/`、`examples/`、`content/`、`concept/00_meta/`，新增 23 + 4 + 138 处修复
+- 新建 `scripts/fix_docs_source_placeholders.py`
 
 ---
 

@@ -1,4 +1,6 @@
-> **EN**: Industrial Case Studies
+# Rust 工业应用案例研究
+
+> **EN**: Industrial Rust Adoption Case Studies
 > **Summary**: Industrial Case Studies: Rust ecosystem tools, crates, and engineering practices.
 > **内容分级**: [专家级]
 

@@ -101,7 +101,7 @@ Rust 字符串类型的所有权谱系:
 ```
 
 ```rust
-// 所有权转换示例 [来源: TRPL]
+// 所有权转换示例 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)
 fn main() {
     let s1 = String::from("hello");     // 拥有的 String
     let s2 = &s1;                        // 借用为 &str

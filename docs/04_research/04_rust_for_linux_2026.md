@@ -14,7 +14,7 @@
 
 ## 目录
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Rust for Linux：2026 年全景与工程实践](#rust-for-linux2026-年全景与工程实践)
   - [目录](#目录)
@@ -47,7 +47,7 @@
 
 ## 一、历史里程碑
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```
 2020-06  Linux 5.8: Rust 支持首次以 RFC 形式提出
@@ -70,13 +70,13 @@
 
 ## 二、Rust 在内核中的定位
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 设计哲学
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 维度 | C 内核代码 | Rust 内核代码 |
 |------|-----------|--------------|
@@ -88,9 +88,9 @@
 
 ### 2.2 适用场景
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ✅ **强烈推荐使用 Rust**：
 
@@ -107,13 +107,13 @@
 
 ## 三、内核 Rust 开发环境
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 3.1 工具链要求
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 # Rust 版本：通常需要特定 nightly 或内核绑定的 stable
@@ -136,9 +136,9 @@ make LLVM=1 -j$(nproc)
 
 ### 3.2 最小示例：内核模块
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // SPDX-License-Identifier: GPL-2.0
@@ -187,13 +187,13 @@ impl Drop for HelloRust {
 
 ## 四、`kernel` Crate API 概览
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 4.1 核心抽象
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use kernel::prelude::*;
@@ -211,9 +211,9 @@ static MY_DATA: Mutex<u32> = Mutex::new(0);
 
 ### 4.2 内存管理
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use kernel::alloc::vec::Vec;
@@ -230,7 +230,7 @@ let data = Box::try_new(MyStruct { ... }, GFP_KERNEL)?;
 
 ### 4.3 同步原语
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use kernel::sync::{Mutex, SpinLock};
@@ -262,7 +262,7 @@ let shared = Arc::try_new(data, GFP_KERNEL)?;
 
 ### 5.1 Android Binder IPC（Google）
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **背景**：Android 的核心 IPC 机制 Binder 原先用 C++ 实现，存在大量历史漏洞。
 
@@ -290,7 +290,7 @@ fn handle_transaction(transaction: &Transaction) -> Result<Reply> {
 
 ### 5.2 Asahi GPU 驱动（Apple Silicon）
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **背景**：Asahi Linux 项目为 Apple Silicon (M1/M2/M3) 编写开源 GPU 驱动。
 
@@ -307,7 +307,7 @@ fn handle_transaction(transaction: &Transaction) -> Result<Reply> {
 
 ### 5.3 NVMe 驱动子系统
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **背景**：NVMe（Non-Volatile Memory Express）是现代 SSD 的标准接口。
 
@@ -331,7 +331,7 @@ fn handle_transaction(transaction: &Transaction) -> Result<Reply> {
 
 ### 6.1 绑定生成（bindgen）
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```bash
 # 内核自带 bindgen 配置
@@ -352,7 +352,7 @@ pub struct file_operations {
 
 ### 6.2 调用约定与 ABI
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 // Rust 调用 C 函数
@@ -455,13 +455,13 @@ Rust for Linux 与项目已有的安全关键系统知识体系直接相关：
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

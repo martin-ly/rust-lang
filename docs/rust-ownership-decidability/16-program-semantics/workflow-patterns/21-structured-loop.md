@@ -722,7 +722,7 @@ $$
 
 **尾递归与尾调用优化 (TCO)**:
 
-> **[来源: Rust Reference - Functions]** · **[来源: TRPL Ch. 13 - Closures]**
+> **来源: [Rust Reference - Functions](https://doc.rust-lang.org/reference/)** · **来源: [TRPL Ch. 13 - Closures](https://doc.rust-lang.org/book/ch13-00-functional-features-of-rust.html)**
 
 虽然 Rust 编译器目前**不保证**尾调用优化（TCO），但结构化循环与尾递归在语义上等价：
 
@@ -749,7 +749,7 @@ fn factorial_rec(n: u64, acc: u64) -> u64 {
 - 循环版本：`acc` 和 `i` 是循环携带状态（loop-carried state），存储在同一块栈帧中
 - 递归版本：每次调用创建新栈帧，若无 TCO 可能导致栈溢出
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **循环携带依赖与所有权**:
 

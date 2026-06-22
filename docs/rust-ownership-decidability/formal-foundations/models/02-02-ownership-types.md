@@ -12,7 +12,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [所有权类型系统：线性类型与仿射类型](#所有权类型系统线性类型与仿射类型)
   - [目录](#目录)
@@ -53,13 +53,13 @@
 
 ## 1. 引言：资源敏感的类型系统
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 资源管理问题
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 传统类型系统关注**值的形状**，资源敏感类型系统额外关注**值的使用次数**。
 
@@ -89,7 +89,7 @@ readFile(f)  // ← 运行时错误: 已关闭的文件
 
 ### 1.2 类型系统的演变
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```text
 类型系统谱系:
@@ -128,7 +128,7 @@ readFile(f)  // ← 运行时错误: 已关闭的文件
 
 ### 2.1 线性逻辑基础
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **线性逻辑**由Jean-Yves Girard于1987年提出，核心思想是：
 
@@ -154,7 +154,7 @@ readFile(f)  // ← 运行时错误: 已关闭的文件
 
 ### 2.2 线性类型的语法
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```text
 线性类型语法:
@@ -176,7 +176,7 @@ readFile(f)  // ← 运行时错误: 已关闭的文件
 
 ### 2.3 线性类型的推导规则
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **核心推导规则**:
 
@@ -238,7 +238,7 @@ Promotion (!):
 
 ### 2.4 线性类型的语义
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **Categorical语义** (幺半范畴):
 
@@ -276,7 +276,7 @@ Promotion (!):
 
 ### 3.1 从线性到仿射
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **仿射逻辑**是线性逻辑的扩展，允许**弱化规则**但不允许**收缩规则**。
 
@@ -319,7 +319,7 @@ fn no_contraction() {
 
 ### 3.2 仿射逻辑的判定
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **Kopylov定理 (2001)**:
 
@@ -342,7 +342,7 @@ TOWER-Complete 意味着复杂度是非初等递归的，但仍然是可判定�
 
 ### 3.3 仿射类型的推导规则
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```text
 仿射类型系统的额外规则:
@@ -367,7 +367,7 @@ TOWER-Complete 意味着复杂度是非初等递归的，但仍然是可判定�
 
 ### 4.1 所有权作为仿射类型
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **所有权的三条规则**:
 
@@ -392,7 +392,7 @@ Rust所有权类型 ≈ 仿射类型 + Drop类型类
 
 ### 4.2 Copy类型作为线性类型
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **Copy trait**标记的类型是**线性类型**：
 
@@ -431,7 +431,7 @@ Copy类型:    !τ  (指数的of-course)
 
 ### 4.3 Drop trait的形式化
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **Drop trait的语义**:
 
@@ -754,12 +754,12 @@ Rust的所有权系统保证:
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---

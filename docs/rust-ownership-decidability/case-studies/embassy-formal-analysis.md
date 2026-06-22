@@ -10,13 +10,13 @@
 > **形式化框架**: async/await + 无堆分配 + 协作式调度
 >
 > **参考**: Embassy Documentation, Rust Async Working Group
-> **[来源: Embassy Documentation - embassy.dev]** · **[来源: Rust Async Working Group]** · **[来源: Rust Reference - async/await]** · **[来源: Wikipedia - Asynchronous I/O]** · **[来源: Rust Embedded Book]** · **[来源: RTIC Documentation - rtic.rs]** · **[来源: Wikipedia - Embedded Operating System]** · **[来源: ACM - Async Embedded Frameworks]** · **[来源: IEEE - Real-Time Async Scheduling]**
+> **[来源: Embassy Documentation - embassy.dev]** · **来源: [Rust Async Working Group](https://rust-lang.github.io/wg-async/)** · **来源: [Rust Reference - async/await](https://doc.rust-lang.org/reference/items/functions.html#async-functions)** · **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)** · **来源: [Rust Embedded Book](https://doc.rust-lang.org/stable/embedded-book/)** · **来源: [RTIC Documentation - rtic.rs](https://rtic.rs/)** · **来源: [Wikipedia - Embedded Operating System](https://en.wikipedia.org/wiki/Embedded_Operating_System)** · **[来源: ACM - Async Embedded Frameworks]** · **[来源: IEEE - Real-Time Async Scheduling]**
 
 ---
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [Embassy 异步嵌入式运行时形式化分析](#embassy-异步嵌入式运行时形式化分析)
   - [目录](#目录)
@@ -76,13 +76,13 @@
 
 ## 1. 项目概览与解决的问题
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 嵌入式并发挑战
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 嵌入式系统需要处理多个并发任务，但传统方法面临诸多挑战：
 
@@ -123,7 +123,7 @@ fn main() -> ! {
 
 ### 1.2 传统RTOS的局限
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 传统实时操作系统的问题：
 
@@ -149,7 +149,7 @@ unsafe fn task_sensor(_: *mut c_void) {
 
 ### 1.3 Embassy的设计目标
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 Embassy针对嵌入式优化的异步运行时：
 
@@ -190,7 +190,7 @@ async fn main(spawner: Spawner) {
 
 ### 2.1 Async/Await基础
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Rust的async/await工作原理：
 
@@ -255,7 +255,7 @@ pub enum Poll<T> {
 
 ### 2.2 任务与Executor
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 Embassy的任务模型：
 
@@ -297,7 +297,7 @@ impl Executor {
 
 ### 2.3 Waker机制
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 Waker是异步任务的通知机制：
 
@@ -333,7 +333,7 @@ async fn wait_for_interrupt() {
 
 ### 2.4 时间驱动与定时器
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 use embassy_time::{Duration, Instant, Timer};
@@ -377,7 +377,7 @@ impl TimerQueue {
 
 ### 2.5 中断集成
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use embassy_sync::signal::Signal;
@@ -409,7 +409,7 @@ async fn button_handler() {
 
 ### 3.1 Future Trait详解
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 pub trait Future {
@@ -435,7 +435,7 @@ impl<'a> Context<'a> {
 
 ### 3.2 Executor Trait设计
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 pub trait Executor {
@@ -452,7 +452,7 @@ pub trait Executor {
 
 ### 3.3 Spawner机制
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 pub struct Spawner {
@@ -474,7 +474,7 @@ impl Spawner {
 
 ### 3.4 Timer与Timeout
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 pub struct Timer {
@@ -509,7 +509,7 @@ impl Future for Timer {
 
 ### 3.5 Channel与Signal
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 pub struct Channel<M, T, const N: usize> {
@@ -575,7 +575,7 @@ impl<M: RawMutex, T, const N: usize> Channel<M, T, N> {
 
 ### 4.1 传感器数据采集
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use embassy_executor::Spawner;
@@ -654,7 +654,7 @@ async fn process_batch(readings: &[SensorReading]) {
 
 ### 4.2 网络协议栈
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use embassy_net::{Stack, tcp::TcpSocket};
@@ -714,7 +714,7 @@ async fn connection_handler(
 
 ### 4.3 用户界面处理
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 #[derive(Clone, Copy, Debug)]
@@ -795,7 +795,7 @@ async fn ui_controller() {
 
 ### 4.4 低功耗应用
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 #[embassy_executor::task]
@@ -840,7 +840,7 @@ async fn perform_measurement() {
 
 ### 4.5 多核协调
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 static IPC_CHANNEL: Channel<CriticalSectionRawMutex, IpcMessage, 16> = Channel::new();
@@ -896,7 +896,7 @@ async fn core1_main_task() {
 
 ### 5.1 与RTOS的对比
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 特性 | Embassy | FreeRTOS | Zephyr |
 |-----|---------|----------|--------|
@@ -910,7 +910,7 @@ async fn core1_main_task() {
 
 ### 5.2 与裸机轮询的对比
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | 特性 | Embassy | 裸机轮询 |
 |-----|---------|---------|
@@ -922,7 +922,7 @@ async fn core1_main_task() {
 
 ### 5.3 与Tokio的对比
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 | 特性 | Embassy | Tokio |
 |-----|---------|-------|
@@ -941,7 +941,7 @@ async fn core1_main_task() {
 
 ### 6.1 完整的传感器系统
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 use embassy_executor::Spawner;
@@ -1074,7 +1074,7 @@ async fn main_monitor() {
 
 ### 6.2 异步状态机
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 #[derive(Clone, Copy, Debug, PartialEq)]
@@ -1174,7 +1174,7 @@ async fn shutting_down_state() -> StateEvent {
 
 ### 6.3 并发服务器
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 const MAX_CONCURRENT_CONNECTIONS: usize = 4;
@@ -1254,7 +1254,7 @@ async fn handle_connection(
 
 ### 6.4 低功耗数据采集
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 #[embassy_executor::task]
@@ -1323,7 +1323,7 @@ async fn upload_pending_data() {
 
 ### 7.1 内存占用分析
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 // Embassy任务内存模型
@@ -1346,7 +1346,7 @@ async fn example_task() {
 
 ### 7.2 上下文切换开销
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 // Embassy协作式切换
@@ -1363,7 +1363,7 @@ fn switch_tasks(from: &mut Task, to: &mut Task) {
 
 ### 7.3 响应时间分析
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 // 协作式调度响应时间
@@ -1394,7 +1394,7 @@ async fn good_task() {
 
 ### 8.1 任务设计原则
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 // 1. 任务应该小而专注
@@ -1431,7 +1431,7 @@ async fn event_handler() {
 
 ### 8.2 资源共享策略
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 // 1. 使用Mutex保护共享资源
@@ -1462,7 +1462,7 @@ async fn waiter() {
 
 ### 8.3 错误处理模式
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 // 使用?传播错误
@@ -1671,13 +1671,13 @@ async fn greedy_task() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
-> **[来源: Wikipedia - Embedded Operating System]**
+> **来源: [Wikipedia - Embedded Operating System](https://en.wikipedia.org/wiki/Embedded_Operating_System)**
 
 > **[来源: Embassy Framework Documentation]**
 
-> **[来源: Rust Embedded Working Group]**
+> **来源: [Rust Embedded Working Group](https://rust-embedded.github.io/book/)**
 
 > **[来源: ACM - Async Embedded Frameworks]**
 
@@ -1685,12 +1685,12 @@ async fn greedy_task() {
 
 > **[来源: RTIC Framework Documentation]**
 
-> **[来源: Rust Reference - async/await]**
+> **来源: [Rust Reference - async/await](https://doc.rust-lang.org/reference/items/functions.html#async-functions)**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---
 

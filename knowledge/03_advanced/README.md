@@ -115,3 +115,33 @@
 ## 相关概念
 
 - [NLL 与 Polonius (concept)](../../concept/03_advanced/08_nll_and_polonius.md) — 三代借用检查器演进分析
+
+
+## 📚 模块 8: 国际化对齐
+
+> 本模块按项目模板补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 说明 |
+|:---|:---|
+| [Rustonomicon](https://doc.rust-lang.org/nomicon/) | Unsafe Rust 权威指南 |
+| [The Rust Async Book](https://rust-lang.github.io/async-book/) | 异步编程官方教程 |
+| [Rust Reference — Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html) | 内联汇编规范 |
+
+### 8.2 学术/工业来源
+
+| 来源 | 说明 |
+|:---|:---|
+| [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | Unsafe / Send / Sync 语义 |
+| [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) | 别名模型 |
+| [Tree Borrows — PLDI 2025](https://perso.crans.org/vanille/treebor/) | Miri 默认别名模型 |
+
+### 8.3 社区资源
+
+| 来源 | 说明 |
+|:---|:---|
+| [Tokio Documentation](https://tokio.rs/) | 异步运行时 |
+| [Rust for Linux](https://rust-for-linux.com/) | 内核开发 |
+| [This Week in Rust](https://this-week-in-rust.org/) | 社区周报 |
+

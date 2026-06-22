@@ -12,7 +12,7 @@
 
 ## 目录
 
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [14. 工作流理论与形式化模型](#14-工作流理论与形式化模型)
   - [目录](#目录)
@@ -58,13 +58,13 @@
 
 ## 14.1 工作流基础理论
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 14.1.1 工作流模型分类
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 工作流模型是用于描述业务流程自动化的形式化表达，按照关注点可分为以下几类：
 
@@ -97,9 +97,9 @@ W = (CF, DF, RM, EH)
 
 ### 14.1.2 工作流形式化表示
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义 14.1.2** (工作流图)
 工作流图是一个有向图 G = (V, E, λ, μ)，其中：
@@ -121,9 +121,9 @@ W = (CF, DF, RM, EH)
 
 ### 14.1.3 工作流语义模型
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义 14.1.5** (工作流语义)
 工作流语义是一个三元组 Sem = (S, T, I)，其中：
@@ -137,13 +137,13 @@ W = (CF, DF, RM, EH)
 
 ## 14.2 Rust工作流实现理论
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 14.2.1 异步机制与工作流同构性
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Rust的异步机制与工作流模型存在天然的同构性：
 
@@ -181,9 +181,9 @@ F: Future<Output = T> → N: WorkflowNode<Output = T>
 
 ### 14.2.2 类型系统映射
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义 14.2.2** (工作流类型系统)
 工作流类型系统 WT 包含以下类型：
@@ -207,9 +207,9 @@ type ConditionalWorkflow<T> = Workflow<bool> -> Workflow<T> -> Workflow<T> -> Wo
 
 ### 14.2.3 状态机转换
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义 14.2.3** (Rust状态机)
 Rust编译器将异步函数转换为状态机：
@@ -249,13 +249,13 @@ impl Future for WorkflowState {
 
 ## 14.3 工作流形式化验证
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 14.3.1 Petri网模型
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义 14.3.1** (工作流Petri网)
 工作流Petri网是一个五元组 WPN = (P, T, F, W, M₀)，其中：
@@ -300,7 +300,7 @@ impl WorkflowPetriNet {
 
 ### 14.3.2 π演算模型
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **定义 14.3.2** (工作流π演算)
 工作流π演算进程 P 的语法：
@@ -350,7 +350,7 @@ impl PiProcess {
 
 ### 14.3.3 时态逻辑验证
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **定义 14.3.3** (工作流时态逻辑)
 工作流时态逻辑公式 φ 的语法：
@@ -400,11 +400,11 @@ impl TemporalFormula {
 
 ## 14.4 AI与工作流融合理论
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 14.4.1 认知循环模型
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **定义 14.4.1** (AI-工作流认知循环)
 AI-工作流认知循环是一个四元组 C = (P, D, E, L)，其中：
@@ -448,7 +448,7 @@ impl AIWorkflowCycle {
 
 ### 14.4.2 自洽续洽它洽机制
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **定义 14.4.2** (自洽机制)
 自洽机制是指AI系统能够自我验证和修正的能力：
@@ -485,7 +485,7 @@ trait Collaborative {
 
 ### 14.4.3 演化式工作流代数
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **定义 14.4.5** (演化式工作流代数)
 演化式工作流代数是一个代数结构 EWA = (W, ⊕, ⊗, \*, ε)，其中：
@@ -527,11 +527,11 @@ impl EvolutionaryWorkflowAlgebra {
 
 ## 14.5 工作流实现架构
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 14.5.1 核心组件设计
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **定义 14.5.1** (工作流引擎架构)
 工作流引擎架构包含以下核心组件：
@@ -601,7 +601,7 @@ impl WorkflowEngine {
 
 ### 14.5.2 分布式执行模型
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **定义 14.5.2** (分布式工作流)
 分布式工作流是一个三元组 DW = (N, C, S)，其中：
@@ -654,7 +654,7 @@ impl DistributedWorkflow {
 
 ### 14.5.3 故障恢复机制
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **定义 14.5.3** (故障恢复策略)
 故障恢复策略包含以下组件：
@@ -719,11 +719,11 @@ impl WorkflowEngine {
 
 ## 14.6 跨领域应用模型
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 14.6.1 制造业工作流
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **定义 14.6.1** (制造业工作流)
 制造业工作流是一个五元组 MW = (P, M, Q, T, C)，其中：
@@ -776,7 +776,7 @@ impl ManufacturingWorkflow {
 
 ### 14.6.2 金融服务工作流
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **定义 14.6.2** (金融服务工作流)
 金融服务工作流是一个四元组 FW = (T, R, C, A)，其中：
@@ -821,7 +821,7 @@ impl FinancialWorkflow {
 
 ### 14.6.3 智能家居工作流
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **定义 14.6.3** (智能家居工作流)
 智能家居工作流是一个三元组 HW = (D, S, U)，其中：
@@ -872,11 +872,11 @@ impl SmartHomeWorkflow {
 
 ## 14.7 形式化证明与验证
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 14.7.1 可达性分析
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **定义 14.7.1** (可达性分析)
 对于工作流 W 和状态 s，可达性分析确定是否存在执行路径从初始状态到达 s。
@@ -908,7 +908,7 @@ fn reachability_analysis(workflow: &Workflow, target_state: &State) -> bool {
 
 ### 14.7.2 死锁检测
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **定义 14.7.2** (死锁)
 工作流 W 存在死锁，当且仅当存在状态 s 使得：
@@ -945,7 +945,7 @@ impl Workflow {
 
 ### 14.7.3 活性验证
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **定义 14.7.3** (活性)
 工作流 W 是活的，当且仅当从任何可达状态都能最终到达终止状态。
@@ -994,11 +994,11 @@ impl Workflow {
 
 ## 14.8 结论与展望
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 14.8.1 理论贡献
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 本文建立了完整的工作流形式化理论框架，主要贡献包括：
 
@@ -1009,7 +1009,7 @@ impl Workflow {
 
 ### 14.8.2 实践意义
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 1. **类型安全**：Rust的类型系统为工作流提供了编译时安全保障
 2. **性能优化**：零成本抽象使得工作流执行具有高性能
@@ -1018,7 +1018,7 @@ impl Workflow {
 
 ### 14.8.3 未来研究方向
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 1. **量子工作流**：探索量子计算环境下的工作流模型
 2. **生物启发工作流**：研究基于生物系统的自适应工作流
@@ -1027,7 +1027,7 @@ impl Workflow {
 
 ### 14.8.4 工业应用前景
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 工作流理论在以下领域具有广阔的应用前景：
 
@@ -1040,7 +1040,7 @@ impl Workflow {
 
 ## 参考资料（权威来源）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - BPMN 2.0（OMG 规范）：`https://www.omg.org/spec/BPMN/2.0/`
 - BPMN 2.0（ISO/IEC 19510）：`https://www.iso.org/standard/62652.html`
@@ -1051,12 +1051,12 @@ impl Workflow {
 
 ## Rust 1.95+ 工作流理论应用
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 > **适用版本**: Rust 1.96.0+
 
 ### array_windows 在工作流状态转换中的应用
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 /// 使用 array_windows 分析工作流状态转换序列
@@ -1079,7 +1079,7 @@ fn analyze_state_transitions(states: &[WorkflowState]) -> Vec<StateTransition> {
 
 ### LazyLock 在工作流引擎配置中的应用
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use std::sync::LazyLock;
@@ -1098,7 +1098,7 @@ pub fn get_engine_config() -> Option<&'static EngineConfig> {
 
 ### ControlFlow 在工作流执行控制中的应用
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use std::ops::ControlFlow;
@@ -1152,36 +1152,36 @@ fn execute_workflow_steps(
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Workflow]**
-> **[来源: Wikipedia - Software Development Process]**
+> **来源: [Wikipedia - Workflow](https://en.wikipedia.org/wiki/Workflow)**
+> **来源: [Wikipedia - Software Development Process](https://en.wikipedia.org/wiki/Software_Development_Process)**
 > **[来源: ACM - Development Workflow Patterns]**
 > **[来源: IEEE - Software Process Standards]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Wikipedia - Type System]**
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

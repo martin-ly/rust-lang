@@ -59,13 +59,13 @@
 
 ## 🎯 文档宗旨与问题导向 {#-文档宗旨与问题导向}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 核心问题（用户反馈）
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 问题类型 | 具体表现 | 本总览的应对 |
 | :--- | :--- | :--- |
@@ -80,9 +80,9 @@
 
 ### 设计原则
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **定义先行**：每个概念有形式化定义（必要时含非形式化描述）
 2. **公理链闭环**：公理 → 引理 → 定理 → 推论，依赖链清晰
@@ -94,7 +94,7 @@
 
 ## 📐 五大梳理维度 {#-五大梳理维度}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
                     全面系统化梳理
@@ -131,13 +131,13 @@
 
 ## 🧬 语义归纳与概念族谱 {#-语义归纳与概念族谱}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 语义归纳表：Rust 核心概念族
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 Rust 语义族谱（顶层归纳）
@@ -170,9 +170,9 @@ Rust 语义族谱（顶层归纳）
 
 ### 2. 概念族之间的依赖关系
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 上游概念族 | 下游概念族 | 依赖关系 | 形式化表达 |
 | :--- | :--- | :--- | :--- |
@@ -199,9 +199,9 @@ Rust 语义族谱（顶层归纳）
 
 ### 3. 语义归纳：核心命题一句话总结
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 概念 | 语义归纳（一句话） | 证明文档 |
 | :--- | :--- | :--- |
@@ -218,13 +218,13 @@ Rust 语义族谱（顶层归纳）
 
 ## 🔗 全局一致性矩阵 {#-全局一致性矩阵}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 跨模块术语一致性
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 术语 | 形式化方法 | 类型理论 | 语义一致性 |
 | :--- | :--- | :--- | :--- |
@@ -238,7 +238,7 @@ Rust 语义族谱（顶层归纳）
 
 ### 2. 公理编号全局一致性
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | 前缀 | 含义 | 示例 | 使用范围 |
 | :--- | :--- | :--- | :--- |
@@ -250,7 +250,7 @@ Rust 语义族谱（顶层归纳）
 
 ### 3. 证明依赖链一致性
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```text
 全局证明依赖图（简化）
@@ -290,7 +290,7 @@ Axiom/规则层
 
 ### 缺口类型定义（沿用 FORMAL_PROOF_SYSTEM_GUIDE）
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 | 类型 | 含义 | 目标 |
 | :--- | :--- | :--- |
@@ -303,7 +303,7 @@ Axiom/规则层
 
 ### 各模块缺口详细追踪
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 模块 | D1 | D2 | R1 | R2 | P1 | P2 | 综合 | 备注 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -320,7 +320,7 @@ Axiom/规则层
 
 ### 证明完成度评分（1–5）
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 定理 | 完整证明 | 证明思路 | 反例 | 证明树 | 公理链标注 | 综合 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -346,7 +346,7 @@ Axiom/规则层
 
 ### 按表征类型索引
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | 类型 | 文档 | 用途 | 覆盖范围 |
 | :--- | :--- | :--- | :--- |
@@ -363,7 +363,7 @@ Axiom/规则层
 
 ### 按研究领域索引
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 领域 | 思维导图 | 矩阵 | 证明树 | 决策树 | 反例 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -378,7 +378,7 @@ Axiom/规则层
 
 ### 形式化理论概念对比矩阵（快速参考）
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 > 完整矩阵见 [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/04_multi_dimensional_concept_matrix.md) §形式化理论概念对比矩阵。
 
@@ -394,7 +394,7 @@ Axiom/规则层
 
 ### 决策树快速导航
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 > 完整决策树见 [DECISION_GRAPH_NETWORK](../04_thinking/04_decision_graph_network.md)、[THINKING_REPRESENTATION_METHODS](../04_thinking/04_thinking_representation_methods.md) §3。
 
@@ -455,7 +455,7 @@ Axiom/规则层
 
 ### 阶段总览
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 阶段 | 内容 | 状态 | 完成度 |
 | :--- | :--- | :--- | :--- |
@@ -472,7 +472,7 @@ Axiom/规则层
 
 ### 剩余工作清单（达成 100%）
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | 优先级 | 任务 | 目标文档 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -490,7 +490,7 @@ Axiom/规则层
 
 ### 完成度仪表盘
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```text
 总体完成度: ████████████████████ 100%
@@ -556,7 +556,7 @@ Axiom/规则层
 
 ### 核心研究点
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 - rray_windows 的形式化语义
 - ControlFlow 的代数结构
@@ -633,13 +633,13 @@ Axiom/规则层
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

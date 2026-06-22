@@ -15,7 +15,7 @@
 
 ## 📋 目录
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Unsafe Fields 预览指南](#unsafe-fields-预览指南)
   - [📋 目录](#-目录)
@@ -41,7 +41,7 @@
 
 ## 🔑 什么是 Unsafe Fields
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Unsafe Fields** 是 Rust Project Goal 2026 中提出的一项语言特性，允许在结构体定义中**显式标记哪些字段需要 `unsafe` 访问**。其核心思想是：将 `unsafe` 的粒度从"代码块"细化到"字段级别"，从而让 `unsafe` 的使用更加精确和可审计。
 
@@ -79,13 +79,13 @@ Unsafe Fields 模型:
 
 ## 💡 动机
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 问题：当前 `unsafe` 的粒度太粗
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 在现有 Rust 中，一旦进入 `unsafe` 块，编译器就放弃对所有操作的检查。但一个结构体中通常**只有部分字段**涉及不安全的内存操作：
 
@@ -112,9 +112,9 @@ impl IoBuffer {
 
 ### Unsafe Fields 的目标
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 目标 | 说明 |
 |------|------|
@@ -127,13 +127,13 @@ impl IoBuffer {
 
 ## 📝 提议语法
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 基本语法
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 pub struct KernelBuffer {
@@ -149,9 +149,9 @@ pub struct KernelBuffer {
 
 ### 访问规则
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 impl KernelBuffer {
@@ -176,9 +176,9 @@ impl KernelBuffer {
 
 ### 模式匹配
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 fn process_buffer(buf: &KernelBuffer) {
@@ -198,7 +198,7 @@ fn process_buffer(buf: &KernelBuffer) {
 
 ## ⚖️ 与当前 `unsafe` 块的对比
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 方面 | 当前 `unsafe` 块 | Unsafe Fields |
 |------|-----------------|---------------|
@@ -242,7 +242,7 @@ Unsafe Fields 模型:
 
 ## 🧪 当前状态
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 截至 2026-05，Unsafe Fields 仍处于**实验性讨论阶段**：
 
@@ -255,7 +255,7 @@ Unsafe Fields 模型:
 
 ### 已知的设计问题
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 1. **与 `Drop` 的交互**: `unsafe field` 的析构是否也需要 `unsafe`?
 2. **与 `union` 的关系**: `union` 的字段是否默认 unsafe?
@@ -272,7 +272,7 @@ Unsafe Fields 特性的一个重要推动力来自 **Rust for Linux** 项目。
 
 ### Linux 内核的需求
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```text
 内核编程的典型场景:
@@ -358,9 +358,9 @@ Unsafe Fields 特性的一个重要推动力来自 **Rust for Linux** 项目。
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Rustonomicon]**
-> **[来源: Rust Reference - Unsafe]**
-> **[来源: RFC 2585 - Unsafe Guidelines]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [Rust Reference - Unsafe](https://doc.rust-lang.org/reference/unsafe-blocks.html)**
+> **来源: [RFC 2585 - Unsafe Guidelines](https://rust-lang.github.io/rfcs/2585-2585-unsafe-block-in-unsafe-fn.html)**
 
 ---

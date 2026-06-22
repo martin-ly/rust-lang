@@ -80,7 +80,7 @@
 
 ## 🎯 文档概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档提供四种主要的思维表征方式，帮助开发者从不同角度理解和应用 Rust 1.93.1 的特性：
 
@@ -94,13 +94,13 @@
 
 ## 🗺️ 1. 思维导图 (Mind Map)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 Rust 1.93.0 核心特性思维导图
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 mindmap
@@ -164,9 +164,9 @@ mindmap
 
 ### 1.2 所有权系统完整思维导图
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 mindmap
@@ -203,9 +203,9 @@ mindmap
 
 ### 1.3 借用系统完整思维导图
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 mindmap
@@ -249,9 +249,9 @@ mindmap
 
 ### 1.4 生命周期系统完整思维导图
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 mindmap
@@ -288,9 +288,9 @@ mindmap
 
 ### 1.5 泛型系统完整思维导图
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 mindmap
@@ -335,9 +335,9 @@ mindmap
 
 ### 1.6 Trait 系统完整思维导图
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 mindmap
@@ -396,9 +396,9 @@ mindmap
 
 ### 1.7 并发编程完整思维导图
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 mindmap
@@ -450,9 +450,9 @@ mindmap
 
 ### 1.8 异步编程完整思维导图
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 mindmap
@@ -503,7 +503,7 @@ mindmap
 
 ### 1.9 特性应用场景思维导图
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```mermaid
 mindmap
@@ -544,7 +544,7 @@ mindmap
 
 ### 1.10 跨模块概念依赖思维导图
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```mermaid
 mindmap
@@ -589,7 +589,7 @@ mindmap
 
 ### 1.11 模块级思维导图索引
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 各模块的思维导图与知识可视化资源：
 
@@ -609,7 +609,7 @@ mindmap
 
 ### 1.12 学习路径思维导图
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```mermaid
 mindmap
@@ -654,11 +654,11 @@ mindmap
 
 ## 📊 2. 多维矩阵 (Multidimensional Matrix)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 Rust 1.93.0 特性对比矩阵
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 特性类别 | 特性名称 | 重要性 | 影响范围 | 迁移难度 | 性能影响 | 安全影响 | 应用场景 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -692,7 +692,7 @@ mindmap
 
 ### 2.2 版本迁移对比矩阵
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | 从版本 | 到版本 | 主要变更                   | 破坏性变更 | 迁移工作量 | 建议优先级 | 关键注意事项 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -702,7 +702,7 @@ mindmap
 
 ### 2.3 特性依赖关系矩阵
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 | 特性               | 依赖特性    | 影响特性        | 冲突特性 | 协同特性       | 组合示例               |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -714,7 +714,7 @@ mindmap
 
 ### 2.4 性能影响矩阵
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 | 特性               | 编译时性能 | 运行时性能 | 内存使用 | 代码大小 | 优化潜力 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -728,11 +728,11 @@ mindmap
 
 ## 🌳 3. 决策树图 (Decision Tree)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 3.1 Rust 1.93.0 特性使用决策树
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```mermaid
 graph TD
@@ -780,7 +780,7 @@ graph TD
 
 ### 3.2 技术选型决策树
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```mermaid
 graph TD
@@ -820,7 +820,7 @@ graph TD
 
 ### 3.3 调试决策树
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```mermaid
 graph TD
@@ -874,7 +874,7 @@ graph TD
 
 ### 3.4 优化决策树
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```mermaid
 graph TD
@@ -939,7 +939,7 @@ graph TD
 
 ### 3.5 学习路径决策树
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```mermaid
 graph TD
@@ -1015,7 +1015,7 @@ graph TD
 
 ### 3.6 迁移决策树
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```mermaid
 graph TD
@@ -1045,7 +1045,7 @@ graph TD
 
 ### 3.7 性能优化决策树
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```mermaid
 graph TD
@@ -1075,7 +1075,7 @@ graph TD
 
 ### 3.8 应用场景决策树
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```mermaid
 graph TD
@@ -1109,13 +1109,13 @@ graph TD
 
 ### 3.9 转换树图 (Transformation Tree)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 转换树描述概念间的转换关系与适用条件，帮助理解何时、如何在不同表示间转换。
 
 #### 3.9.1 借用 ↔ 所有权转换树
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```mermaid
 flowchart TD
@@ -1143,7 +1143,7 @@ flowchart TD
 
 #### 3.9.2 Option ↔ Result 转换树
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```mermaid
 flowchart LR
@@ -1169,7 +1169,7 @@ flowchart LR
 
 #### 3.9.3 &T vs &mut T 选择转换树
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```mermaid
 flowchart TD
@@ -1185,7 +1185,7 @@ flowchart TD
 
 #### 3.9.4 泛型约束转换树
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```mermaid
 flowchart TD
@@ -1201,7 +1201,7 @@ flowchart TD
 
 #### 3.9.5 生命周期转换树
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```mermaid
 flowchart TD
@@ -1219,7 +1219,7 @@ flowchart TD
 
 #### 3.9.6 错误传播转换树
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```mermaid
 flowchart TD
@@ -1243,11 +1243,11 @@ flowchart TD
 
 ## 🔬 4. 证明树图 (Proof Tree)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 4.1 定理证明树结构
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```mermaid
 graph TD
@@ -1288,7 +1288,7 @@ graph TD
 
 ### 4.2 内存安全证明树
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```mermaid
 graph TD
@@ -1338,7 +1338,7 @@ graph TD
 
 ### 4.3 类型安全证明树
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```mermaid
 graph TD
@@ -1385,7 +1385,7 @@ graph TD
 
 ### 4.4 并发安全证明树
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```mermaid
 graph TD
@@ -1437,7 +1437,7 @@ graph TD
 
 ## 📈 5. 概念关系网络图 (Concept Relationship Network)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 graph LR
@@ -1486,11 +1486,11 @@ graph LR
 
 ## 🎯 6. 使用指南
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 6.1 何时使用思维导图
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 - ✅ 开始学习新特性，需要规划学习路径
 - ✅ 需要可视化知识结构
@@ -1499,7 +1499,7 @@ graph LR
 
 ### 6.2 何时使用多维矩阵
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 - ✅ 需要对比不同特性的优劣
 - ✅ 需要评估迁移成本和收益
@@ -1540,7 +1540,7 @@ graph LR
 
 ## 💻 代码示例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 示例 1: 思维导图生成器
 >
@@ -1667,7 +1667,7 @@ impl DecisionEngine {
 
 ## 📚 7. 参考资源
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 7.1 官方资源
 >
@@ -1706,7 +1706,7 @@ impl DecisionEngine {
 
 ## Rust 1.95+ 持续更新更新
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
@@ -1772,28 +1772,28 @@ impl DecisionEngine {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

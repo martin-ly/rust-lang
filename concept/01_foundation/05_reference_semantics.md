@@ -1157,7 +1157,7 @@ let s: &mut &Secret = &mut &Secret(String::from("x"));
 ```
 
 > **分析**: 这一边界是 Rust 类型系统安全性的核心支柱之一——多级引用提供了表达复杂内存关系的灵活性（结构规则），但名义类型确保了语义契约在任何引用层级都不会被意外破坏（名义规则）。
-> [来源: [Rust Reference: Types] · [Rust Reference: Subtyping] · [Rust Reference: Type Coercions]]（一级来源）
+> [来源: [Rust Reference: Types] · [Rust Reference: Subtyping](https://doc.rust-lang.org/reference/subtyping.html) · [Rust Reference: Type Coercions](https://doc.rust-lang.org/reference/)]（一级来源）
 > **与类型系统的关联**: 详见 [`04_type_system.md`](../01_foundation/04_type_system.md) 对名义类型与结构类型的完整分析——其中第 11.7 节专门论证了引用构造的结构本质与目标类型名义约束的交互关系。
 
 ---

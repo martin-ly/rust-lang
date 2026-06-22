@@ -7,7 +7,7 @@
 
 ## 目录
 
-> **[来源: Workflow Patterns Initiative - workflowpatterns.com]** · **[来源: van der Aalst et al. (2003)]** · **[来源: Russell et al. (2006)]** · **[来源: Rust Reference]** · **[来源: TRPL]**
+> **[来源: Workflow Patterns Initiative - workflowpatterns.com]** · **来源: [van der Aalst et al. (2003)](https://www.workflowpatterns.com/)** · **来源: [Russell et al. (2006)](https://www.workflowpatterns.com/)** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - [工作流控制流模式总索引 (WCP1-WCP43)](#工作流控制流模式总索引-wcp1-wcp43)
   - [目录](#目录)
@@ -49,7 +49,7 @@
 
 > [来源: van der Aalst et al., "Workflow Patterns", EOR 2003] · [来源: Russell et al., "Workflow Control-Flow Patterns", Springer 2006]
 
-**工作流控制流模式（Workflow Control-Flow Patterns, WCP）** 是业务流程管理与并发计算领域的经典模式语言。2003 年，Wil van der Aalst 等人在 *"Workflow Patterns"* 一文中首次系统提出了 20 个控制流模式；2003-2006 年间，Nick Russell 等人在此基础上扩展至 **43 个模式**，形成了覆盖顺序、分支、同步、多实例、状态、取消、迭代、终止、触发器等维度的完整控制流模式体系 [来源: workflowpatterns.com]。
+**工作流控制流模式（Workflow Control-Flow Patterns, WCP）** 是业务流程管理与并发计算领域的经典模式语言。2003 年，Wil van der Aalst 等人在 *"Workflow Patterns"* 一文中首次系统提出了 20 个控制流模式；2003-2006 年间，Nick Russell 等人在此基础上扩展至 **43 个模式**，形成了覆盖顺序、分支、同步、多实例、状态、取消、迭代、终止、触发器等维度的完整控制流模式体系 来源: [workflowpatterns.com](https://www.workflowpatterns.com/)。
 
 Rust 编程语言的所有权系统、类型安全的并发原语和零成本抽象，为工作流模式的实现提供了独特的编译期保证。与 BPMN 引擎在运行时解释流程定义不同，Rust 可以在编译期验证：
 
@@ -65,13 +65,13 @@ Rust 编程语言的所有权系统、类型安全的并发原语和零成本抽
 
 本索引作为知识库中所有工作流模式文件的 **主控映射（Master Index）**，记录 43 个 WCP 的 Rust 实现状态、关键技术选型、所有权安全等级和形式化方法覆盖。截至本文更新，知识库已完成 **21 个模式文件**，覆盖约 48.8% 的 43 模式体系；剩余模式按优先级分三档规划补充。
 
-> [来源: Rust Reference - Control Flow Expressions] · [来源: TRPL Ch. 4, 8, 13, 16] · [来源: Tokio Documentation]
+> 来源: [Rust Reference - Control Flow Expressions](https://doc.rust-lang.org/reference/) · 来源: [TRPL Ch. 4, 8, 13, 16](https://doc.rust-lang.org/book/ch04-00-ownership.html) · 来源: [Tokio Documentation](https://tokio.rs/)
 
 ---
 
 ## 2. 完整 43 模式对照表
 
-> [来源: Workflow Patterns Initiative] · [来源: Russell 2006]
+> 来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/) · 来源: [Russell 2006](https://www.workflowpatterns.com/)
 
 ### 实现状态总览
 >
@@ -146,7 +146,7 @@ xychart-beta
 - 实现状态：`✅ 已完成` · `📝 部分覆盖` · `❌ 缺失`
 - 所有权安全等级：`🟢 天然安全` · `🟡 需共享状态` · `🔴 需 unsafe` · `⚪ 纯编译期`
 
-> [来源: Workflow Patterns Initiative] · [来源: Rust Reference - std::sync] · [来源: Tokio Docs - tokio::sync] · [来源: TRPL Ch. 16]
+> 来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/) · 来源: [Rust Reference - std::sync](https://doc.rust-lang.org/std/sync/) · 来源: [Tokio Docs - tokio::sync](https://docs.rs/tokio/latest/tokio/sync/) · 来源: [TRPL Ch. 16](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
 
 ---
 
@@ -156,7 +156,7 @@ xychart-beta
 
 ### 3.1 基础控制流 (Basic Control Flow)
 
-> [来源: van der Aalst 2003] · [来源: TRPL Ch. 3, 4, 6]
+> 来源: [van der Aalst 2003](https://www.workflowpatterns.com/) · 来源: [TRPL Ch. 3, 4, 6](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html)
 
 包含 WCP1-WCP5，是所有工作流语言的原始构造。在 Rust 中，这五个模式全部可以 **零成本、零运行时开销** 地实现，且获得编译期类型安全保证。
 
@@ -182,7 +182,7 @@ graph LR
 
 ### 3.2 高级分支与同步 (Advanced Branching & Synchronization)
 
-> [来源: Russell 2006] · [来源: Rust Reference - Concurrency] · [来源: Tokio Documentation]
+> 来源: [Russell 2006](https://www.workflowpatterns.com/) · 来源: [Rust Reference - Concurrency](https://doc.rust-lang.org/reference/special-types-and-traits.html) · 来源: [Tokio Documentation](https://tokio.rs/)
 
 包含 WCP6-WCP11，处理动态分支数、竞态汇合和非结构化循环。Rust 的实现需要从编译期静态检查降级到运行时同步原语。
 
@@ -198,7 +198,7 @@ graph LR
 
 ### 3.3 多实例模式 (Multiple Instances)
 
-> [来源: Russell 2006] · [来源: Rust Reference - std::thread] · [来源: Tokio Docs - tokio::task]
+> 来源: [Russell 2006](https://www.workflowpatterns.com/) · 来源: [Rust Reference - std::thread](https://doc.rust-lang.org/reference/) · [来源: Tokio Docs - tokio::task]
 
 包含 WCP12-WCP15 及 WCP34-WCP36、WCP39，描述同一活动创建多个实例的场景。Rust 的线程/任务 spawn 模型天然支持多实例，但同步和先验知识的处理需要不同策略。
 
@@ -214,7 +214,7 @@ graph LR
 
 ### 3.4 基于状态的模式 (State-based)
 
-> [来源: Russell 2006] · [来源: Rust Reference - Atomics] · [来源: Tokio Docs - sync]
+> 来源: [Russell 2006](https://www.workflowpatterns.com/) · 来源: [Rust Reference - Atomics](https://doc.rust-lang.org/reference/) · [来源: Tokio Docs - sync]
 
 包含 WCP16-WCP18，依赖运行时状态或外部事件做出路由决策。
 
@@ -226,7 +226,7 @@ graph LR
 
 ### 3.5 取消与强制完成 (Cancellation & Force Completion)
 
-> [来源: Russell 2006] · [来源: Rust Reference - Drop] · [来源: Tokio Docs - task::AbortHandle]
+> 来源: [Russell 2006](https://www.workflowpatterns.com/) · 来源: [Rust Reference - Drop](https://doc.rust-lang.org/reference/) · [来源: Tokio Docs - task::AbortHandle]
 
 包含 WCP19-WCP20 及 WCP25-WCP27，是工作流异常处理的核心机制。
 
@@ -244,7 +244,7 @@ graph LR
 
 ### 3.6 迭代模式 (Iteration)
 
-> [来源: TRPL Ch. 3, 13] · [来源: Rust Reference - Loops]
+> 来源: [TRPL Ch. 3, 13](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html) · 来源: [Rust Reference - Loops](https://doc.rust-lang.org/reference/)
 
 包含 WCP21-WCP22。
 
@@ -254,7 +254,7 @@ graph LR
 
 ### 3.7 终止模式 (Termination)
 
-> [来源: Russell 2006] · [来源: Rust Reference - std::process]
+> 来源: [Russell 2006](https://www.workflowpatterns.com/) · 来源: [Rust Reference - std::process](https://doc.rust-lang.org/reference/)
 
 包含 WCP11 和 WCP43。
 
@@ -264,7 +264,7 @@ graph LR
 
 ### 3.8 触发器模式 (Trigger)
 
-> [来源: Russell 2006] · [来源: Tokio Docs - sync::oneshot, sync::broadcast]
+> 来源: [Russell 2006](https://www.workflowpatterns.com/) · [来源: Tokio Docs - sync::oneshot, sync::broadcast]
 
 包含 WCP23-WCP24，描述外部信号触发活动执行的机制。
 
@@ -276,7 +276,7 @@ graph LR
 
 ### 3.9 鉴别器与部分汇合 (Discriminator & Partial Join)
 
-> [来源: Russell 2006] · [来源: Rust Reference - std::sync::atomic]
+> 来源: [Russell 2006](https://www.workflowpatterns.com/) · 来源: [Rust Reference - std::sync::atomic](https://doc.rust-lang.org/reference/)
 
 包含 WCP28-WCP32，是 WCP9（鉴别器）的扩展家族。
 
@@ -292,7 +292,7 @@ graph LR
 
 ### 3.10 结构模式 (Structural)
 
-> [来源: Russell 2006] · [来源: Rust Reference - std::sync] · [来源: petgraph crate]
+> 来源: [Russell 2006](https://www.workflowpatterns.com/) · 来源: [Rust Reference - std::sync](https://doc.rust-lang.org/std/sync/) · [来源: petgraph crate]
 
 包含 WCP33、WCP37-WCP38、WCP40-WCP42，处理复杂拓扑结构中的同步问题。
 
@@ -312,7 +312,7 @@ graph LR
 
 ## 4. Rust 实现技术栈映射
 
-> [来源: Rust Standard Library] · [来源: Tokio Documentation] · [来源: rayon crate]
+> 来源: [Rust Standard Library](https://doc.rust-lang.org/std/) · 来源: [Tokio Documentation](https://tokio.rs/) · [来源: rayon crate]
 
 下表将工作流概念映射到 Rust 的具体语言构造和库原语：
 
@@ -371,7 +371,7 @@ Rust 的所有权系统本身可以看作一种轻量级的**分离逻辑（Sepa
 
 这一对应关系使得工作流模式的形式化验证在 Rust 中具有独特的优势：许多在传统语言中需要外部验证器（如 TLA+、Coq）证明的性质，在 Rust 中可以通过类型检查器自动保证。例如，WCP1（Sequence）的数据流安全性、WCP4（Exclusive Choice）的穷尽性、WCP5（Simple Merge）的类型一致性，均由编译器在编译期静态验证，无需运行时开销或外部形式化工具。
 
-> [来源: van der Aalst 2003] · [来源: RustBelt - POPL 2018]
+> 来源: [van der Aalst 2003](https://www.workflowpatterns.com/) · 来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 
 ---
 

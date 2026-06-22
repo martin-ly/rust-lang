@@ -16,7 +16,7 @@
 
 ## 知识结构思维导图
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 mindmap
@@ -41,7 +41,7 @@ mindmap
 
 ## 与核心文档的关联
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 本文档 | 核心文档 | 关系 |
 | :--- | :--- | :--- |
@@ -53,7 +53,7 @@ mindmap
 
 ## 形式化链接
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文档 | 路径 | 内容 |
 | :--- | :--- | :--- |
@@ -70,7 +70,7 @@ mindmap
 
 ### 类型即命题（Curry-Howard 对应）
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 在 Rust 类型系统中，类型对应于逻辑命题，程序对应于证明：
 
@@ -101,7 +101,7 @@ fn implication(x: i32) -> String {
 
 ### 泛型与参数多态
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 // 全称量词（∀）的 Rust 表达
@@ -137,7 +137,7 @@ impl<T> ContainerTrait for Container<T> {
 
 ### 型变（Variance）
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 型变描述复合类型如何随其组件类型的子类型关系变化：
 
@@ -238,18 +238,18 @@ fn type_safety() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
-> **[来源: Pierce 2002 - TAPL]**
+> **来源: [Pierce 2002 - TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)**
 
-> **[来源: Rust Reference - Type System]**
+> **来源: [Rust Reference - Type System](https://doc.rust-lang.org/reference/types.html)**
 
-> **[来源: ACM - Type Systems]**
+> **来源: [ACM - Type Systems](https://dl.acm.org/)**
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
-> **[来源: Coq Reference]**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
 
-> **[来源: TLA+]**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
 
-> **[来源: ACM - Formal Verification]**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**

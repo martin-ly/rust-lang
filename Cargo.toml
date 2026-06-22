@@ -360,8 +360,11 @@ tracing = "0.1.44"
 # tracing-subscriber: tracing的订阅者实现，支持多种输出格式
 tracing-subscriber = { version = "0.3.23", features = ["env-filter", "json"] }
 # log: 标准日志库，提供简单的日志记录接口
-# 2026-06-19: 0.4.31 -> 0.4.32
-log = "0.4.32"
+# 2026-06-22: 0.4.32 -> 0.4.33 (cargo update)
+log = "0.4.33"
+# env_logger: log 的简单初始化封装（仅 c06_async 示例使用）
+# 注意: 禁用 default-features 中的 humantime，避免引入 jiff -> defmt 传递依赖
+env_logger = { version = "0.11.10", default-features = false, features = ["auto-color", "regex"] }
 # prometheus: Prometheus指标收集库
 prometheus = "0.14.0"
 # tracing-opentelemetry: tracing与OpenTelemetry的集成 - 2025年10月最新版本
@@ -435,7 +438,8 @@ memoffset = "0.9.1"
 
 # 2025-12-11: 数据库和存储最新稳定版本
 # sea-orm: 异步动态ORM，支持多种数据库后端
-# 2026-06-19: 2.0.0-rc.40 -> 2.0.0-rc.41 (仍等待 2.0.0 stable)
+# 2026-06-19: 2.0.0-rc.40 -> 2.0.0-rc.41
+# 2026-06-22 跟踪: crates.io 最新仍为 2.0.0-rc.41，2.0.0 stable 未发布，继续等待
 sea-orm = { version = "2.0.0-rc.41", features = [
     "sqlx-postgres",      # PostgreSQL支持
     "runtime-tokio-rustls", # tokio运行时和rustls支持
@@ -451,8 +455,8 @@ sqlx = { version = "0.9.0", features = [
     "uuid",                # UUID类型支持
 ], default-features = false }
 # redis: Redis客户端库，支持异步操作
-# 2026-06-19: 1.2.2 -> 1.2.3
-redis = "1.2.3"
+# 2026-06-22: 1.2.3 -> 1.2.4 (cargo update)
+redis = "1.2.4"
 # rusqlite: SQLite的Rust绑定，提供类型安全的SQLite接口
 rusqlite = { version = "0.39.0", default-features = false }
 # mysql_async: MySQL异步客户端
@@ -690,11 +694,11 @@ const-hex = "=1.19.1"
 # - prost 系列: 0.14.3 -> 0.14.4
 # - protobuf: 4.34.2-release -> 4.35.1-release
 # - webpki-roots: 1.0.7 -> 1.0.8
-# - log: 0.4.31 -> 0.4.32
+# - log: 0.4.32 -> 0.4.33 (cargo update 2026-06-22)
 # - chrono: 0.4.44 -> 0.4.45
 # - time: 0.3.47 -> 0.3.49
 # - bytes: 1.11.1 -> 1.12.0
-# - redis: 1.2.2 -> 1.2.3
+# - redis: 1.2.3 -> 1.2.4 (cargo update 2026-06-22)
 # - config: 0.15.23 -> 0.15.24
 # - syn: 2.0.117 -> 2.0.118
 # - wasm-bindgen 系列: wasm-bindgen 0.2.125 / js-sys 0.3.102 / wasm-bindgen-futures 0.4.75

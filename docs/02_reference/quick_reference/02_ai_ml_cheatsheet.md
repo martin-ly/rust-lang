@@ -11,7 +11,7 @@
 
 ## 📋 目录
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [🤖 Rust AI/ML 速查卡](#-rust-aiml-速查卡)
   - [📋 目录](#-目录)
@@ -56,7 +56,7 @@
 
 ## 框架选型
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 框架 | 适用场景 | 依赖 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -68,13 +68,13 @@
 
 ## Burn 快速入门
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 示例 1: 张量基础操作
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```toml
 # Cargo.toml
@@ -155,9 +155,9 @@ fn main() {
 
 ### 示例 2: 简单神经网络
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use burn::{
@@ -195,9 +195,9 @@ impl<B: burn::tensor::backend::Backend> Net<B> {
 
 ### 示例 3: 模型推理
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use burn::tensor::{Tensor, backend::NdArray};
@@ -221,13 +221,13 @@ fn inference<B: burn::tensor::backend::Backend>(
 
 ## Candle 快速入门
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 示例 4: 张量操作
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```toml
 # Cargo.toml
@@ -260,9 +260,9 @@ fn main() -> Result<()> {
 
 ### 示例 5: 加载 Hugging Face 模型
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use candle_core::{Device, Result};
@@ -296,13 +296,13 @@ fn load_model(model_id: &str) -> Result<()> {
 
 ## LLM 推理
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 示例 6: 使用 llm crate 进行本地推理
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use llm::Model;
@@ -349,7 +349,7 @@ fn llm_inference() -> anyhow::Result<()> {
 
 ### 框架选型表
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | 库 | 用途 | 适用场景 |
 | :--- | :--- | :--- |
@@ -379,7 +379,7 @@ fn llm_inference() -> anyhow::Result<()> {
 
 ### 场景 1: 图像分类服务
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 // 使用 Candle 构建图像分类微服务
@@ -403,7 +403,7 @@ impl ImageClassifier {
 
 ### 场景 2: 实时文本生成
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 // 使用 Burn 实现流式文本生成
@@ -433,7 +433,7 @@ async fn stream_generate<B: Backend>(
 
 ### 理论基础
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 | 概念 | 形式化文档 | 描述 |
 | :--- | :--- | :--- |
@@ -444,7 +444,7 @@ async fn stream_generate<B: Backend>(
 
 ### 形式化定理
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **定理 ML-T1（张量内存安全）**: 若张量操作满足所有权规则 1-8 和借用规则 5-8，则张量内存访问安全。
 
@@ -458,7 +458,7 @@ async fn stream_generate<B: Backend>(
 
 ### 反例 1: 混淆不同框架的 API
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **错误示例**:
 
@@ -493,7 +493,7 @@ impl<B: Backend, const D: usize> TensorOps for Tensor<B, D> { ... }
 
 ### 反例 2: 未根据场景选择后端
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **错误示例**:
 
@@ -530,7 +530,7 @@ fn fast_inference() {
 
 ### 反例 3: 忽略依赖版本兼容性
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **错误示例**:
 
@@ -561,7 +561,7 @@ burn-ndarray = { workspace = true }
 
 ### 反例 4: 内存泄漏 - 循环引用张量缓存
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **错误示例**:
 
@@ -595,7 +595,7 @@ struct TensorCache {
 
 ### 反例 5: 边界情况 - 空张量操作
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **错误示例**:
 
@@ -653,7 +653,7 @@ AI/ML 示例代码位于指南与外部仓库，可直接参考：
 
 ### array_windows 在特征工程中的应用
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **问题**: 时间序列特征提取需要滑动窗口，传统方法内存分配频繁。
 
@@ -686,7 +686,7 @@ pub fn extract_time_window_features(signal: &[f32]) -> Vec<WindowFeatures> {
 
 ### LazyLock 在模型缓存中的应用
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 use std::sync::LazyLock;
@@ -716,7 +716,7 @@ pub fn batch_classify(images: Vec<Vec<f32>>) -> Vec<Vec<f32>> {
 
 ### ControlFlow 在训练管道中的应用
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use std::ops::ControlFlow;
@@ -746,7 +746,7 @@ pub fn training_step<B: Backend>(
 
 ### 数学常量在超参数优化中的应用
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 /// 黄金分割搜索最优学习率
@@ -774,7 +774,7 @@ pub fn harmonic_lr_schedule(initial_lr: f64, epoch: usize) -> f64 {
 
 ### 生产场景：实时推荐系统
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 pub struct RecommendationService {
@@ -814,7 +814,7 @@ impl RecommendationService {
 
 ### 总结
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 | 特性 | AI/ML 场景应用 | 性能提升 |
 |------|---------------|----------|
@@ -849,21 +849,21 @@ impl RecommendationService {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Wikipedia - Machine Learning]**
-> **[来源: Wikipedia - Artificial Intelligence]**
-> **[来源: tch-rs Documentation]**
-> **[来源: ACM - AI Systems]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
+> **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)**
+> **来源: [tch-rs Documentation](https://docs.rs/tch/latest/tch/)**
+> **来源: [ACM - AI Systems](https://dl.acm.org/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ---

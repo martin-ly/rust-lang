@@ -667,3 +667,27 @@ pub fn process_data_safe(data: &[i32]) -> Option<i32> {
 >
 
 ---
+
+## 📚 模块 8: 国际化对齐
+
+> 本节按项目模板要求补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) | 权威来源 | 年度目标 |
+| [Rust Blog](https://blog.rust-lang.org/) | 权威来源 | 官方博客 |
+
+### 8.2 学术来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | 权威来源 | 语义基础 |
+
+### 8.3 社区权威
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [This Week in Rust](https://this-week-in-rust.org/) | 权威来源 | 社区周报 |
+| [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/) | 权威来源 | 核心团队博客 |

@@ -1,5 +1,7 @@
 > **Summary**:
 >
+> Legacy meta layer index for the Rust concept knowledge system, covering authority sources, methodology, and global indexing infrastructure.
+>
 > Meta Layer Index Legacy. Core Rust concept.
 > **内容分级**: [综述级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)

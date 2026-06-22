@@ -221,7 +221,7 @@ graph TD
 | **宏** | `#[tonic::service]` | `#[wasm_bindgen]` | | | |
 | **零成本证明** | gRPC 编码零拷贝 | JS ↔ WASM 无额外拷贝 | | | |
 
-> [来源: Rust Reference · TRPL · Rustonomicon · 各 crate 官方文档]
+> 来源: [Rust Reference · TRPL · Rustonomicon · 各 crate 官方文档](https://doc.rust-lang.org/reference/)
 
 ---
 

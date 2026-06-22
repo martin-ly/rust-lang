@@ -41,7 +41,7 @@
 
 ## 一、按三大支柱的文档树
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 research_notes/
@@ -103,11 +103,11 @@ research_notes/
 
 ## 二、概念族 ↔ 文档 ↔ Def/Axiom/定理 映射表
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 支柱 1（公理判定）
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 | 概念族 | 主文档 | Def/Axiom | 定理/推论 | 备注 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -124,7 +124,7 @@ research_notes/
 
 ### 2.2 支柱 2（语言表达力）
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 | 概念族 | 主文档 | Def/Axiom | 定理/推论 | 备注 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -136,7 +136,7 @@ research_notes/
 
 ### 2.3 支柱 3（组件组合）
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 概念族 | 主文档 | Def/Axiom | 定理/推论 | 备注 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -152,7 +152,7 @@ research_notes/
 
 ### 3.1 按文档 → 思维表征
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | research_notes 文档 | 思维导图 | 多维矩阵 | 证明树 | 决策树 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -172,7 +172,7 @@ research_notes/
 
 ### 3.2 按思维表征 → 文档（入口）
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 | 思维表征文档 | 覆盖领域 | 对应 research_notes 入口 |
 | :--- | :--- | :--- |
@@ -242,13 +242,13 @@ research_notes/
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -299,12 +299,12 @@ research_notes/
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ---

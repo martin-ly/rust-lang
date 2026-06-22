@@ -7,7 +7,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: TRPL Ch. 16 - Concurrency]** · **[来源: Rust Standard Library - std::thread]** · **[来源: Tokio Docs - docs.rs/tokio]** · **[来源: crossbeam - docs.rs/crossbeam]** · **[来源: futures - docs.rs/futures]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [TRPL Ch. 16 - Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)** · **来源: [Rust Standard Library - std::thread](https://doc.rust-lang.org/std/thread/)** · **来源: Tokio Docs - docs.rs / [tokio](https://tokio.rs/)** · **来源: crossbeam - docs.rs / [crossbeam](https://docs.rs/crossbeam/latest/crossbeam/)** · **[来源: futures - docs.rs/futures]**
 
 - [41 线程合并模式 (Thread Merge) - 完整形式化语义](#41-线程合并模式-thread-merge---完整形式化语义)
   - [目录](#目录)
@@ -58,7 +58,7 @@
 
 ## 1. 引言
 >
-> **[来源: Rust Reference]** · **[来源: TRPL Ch. 16 - Concurrency]** · **[来源: Rust Standard Library - std::thread]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [TRPL Ch. 16 - Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)** · **来源: [Rust Standard Library - std::thread](https://doc.rust-lang.org/std/thread/)**
 
 线程合并模式（Thread Merge）是工作流控制流模式中的核心同步模式，描述了多个独立执行的线程在完成后汇聚到单一执行路径的语义。与简单的同步合并（Synchronizing Merge）不同，线程合并强调**线程级**的并发实体——操作系统线程或异步任务——在完成计算后的显式汇合（join）操作。
 
@@ -66,7 +66,7 @@
 
 ### 1.1 历史背景
 >
-> **[来源: Rust Standard Library - std::thread]** · **[来源: POSIX Threads Specification]**
+> **来源: [Rust Standard Library - std::thread](https://doc.rust-lang.org/std/thread/)** · **[来源: POSIX Threads Specification]**
 
 线程合并的概念源于 POSIX 线程（pthreads）标准中的 `pthread_join` 调用，该调用使调用线程阻塞直到指定线程终止。这一语义在 1995 年标准化的 POSIX.1c 中确立，成为操作系统线程编程的基础原语。
 
@@ -78,11 +78,11 @@ Rust 的线程合并设计在确保安全方面独树一帜：
 - `thread::scope` 确保所有子线程在作用域结束时自动汇合，无需显式 `join`
 - 所有权系统保证合并后结果数据的安全传递，无数据竞争
 
-> **[来源: Rustonomicon - Concurrency]** · **[来源: RFC 3151 - scoped threads]**
+> **来源: [Rustonomicon - Concurrency](https://doc.rust-lang.org/nomicon/concurrency.html)** · **来源: [RFC 3151 - scoped threads](https://rust-lang.github.io/rfcs/3151-3151-scoped-threads.html)**
 
 ### 1.2 动机与应用场景
 >
-> **[来源: TRPL Ch. 16 - Concurrency]** · **[来源: Tokio Docs - docs.rs/tokio]**
+> **来源: [TRPL Ch. 16 - Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)** · **来源: Tokio Docs - docs.rs / [tokio](https://tokio.rs/)**
 
 线程合并模式的核心动机来源于以下需求：
 
@@ -105,7 +105,7 @@ Rust 的线程合并设计在确保安全方面独树一帜：
 
 ### 2.1 概念定义
 >
-> **[来源: POPL - Programming Languages Research]** · **[来源: POSIX Threads Specification]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)** · **[来源: POSIX Threads Specification]**
 
 **线程合并** 是一个同步构造，其中：
 
@@ -126,7 +126,7 @@ Aggregation ::= "tuple" | "sum" | "custom" Function
 
 ### 2.2 核心语义
 >
-> **[来源: PLDI - Programming Language Design]** · **[来源: Hoare 1978 - CSP]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)** · **来源: [Hoare 1978 - CSP](https://en.wikipedia.org/wiki/Communicating_sequential_processes)**
 
 **执行语义**:
 
@@ -153,11 +153,11 @@ $$
 
 ### 2.3 形式化表示
 >
-> **[来源: Petri Net Theory]** · **[来源: Workflow Patterns Initiative]**
+> **来源: [Petri Net Theory](https://en.wikipedia.org/wiki/Petri_net)** · **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)**
 
 #### 2.3.1 状态机表示
 >
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 $$
 \begin{aligned}
@@ -191,7 +191,7 @@ stateDiagram-v2
 
 #### 2.3.2 流程代数表示 (CSP 风格)
 >
-> **[来源: Hoare 1978 - CSP]** · **[来源: Roscoe 2011 - Understanding CSP]**
+> **来源: [Hoare 1978 - CSP](https://en.wikipedia.org/wiki/Communicating_sequential_processes)** · **[来源: Roscoe 2011 - Understanding CSP]**
 
 $$
 \text{ThreadMerge}(\{T_i\}) = \left(||\; i : \{1..n\} \@\; T_i\right) \;\text{;;}\; \text{Aggregate}
@@ -209,7 +209,7 @@ $$
 
 #### 2.3.3 Petri 网表示
 >
-> **[来源: Petri Net Theory]** · **[来源: van der Aalst 2003]**
+> **来源: [Petri Net Theory](https://en.wikipedia.org/wiki/Petri_net)** · **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)**
 
 ```
                     ┌─→ (T1) ──done(1)──┐
@@ -284,7 +284,7 @@ graph TD
 
 ### 3.3 WfMC 标准
 >
-> **[来源: WfMC - Workflow Management Coalition]** · **[来源: Russell 2006]**
+> **来源: [WfMC - Workflow Management Coalition](https://www.wfmc.org/)** · **来源: [Russell 2006](https://www.workflowpatterns.com/)**
 
 工作流管理联盟 (WfMC) 将线程合并定义为同步合并（Synchronizing Merge）的特例：
 
@@ -308,7 +308,7 @@ graph TD
 
 ### 4.1 CCS 表示
 >
-> **[来源: Milner 1989 - Communication and Concurrency]**
+> **来源: [Milner 1989 - Communication and Concurrency](https://en.wikipedia.org/wiki/Communication_and_Concurrency)**
 
 **Calculus of Communicating Systems (CCS)**:
 
@@ -328,7 +328,7 @@ $$
 
 ### 4.2 CSP 表示
 >
-> **[来源: Hoare 1978 - CSP]** · **[来源: Roscoe 2011]**
+> **来源: [Hoare 1978 - CSP](https://en.wikipedia.org/wiki/Communicating_sequential_processes)** · **来源: [Roscoe 2011](https://en.wikipedia.org/wiki/Communicating_sequential_processes)**
 
 **Communicating Sequential Processes (CSP)**:
 
@@ -388,7 +388,7 @@ $$
 
 ### 5.1 基础实现：thread::scope 自动汇合
 >
-> **[来源: Rust Reference - std::thread::scope]** · **[来源: RFC 3151 - scoped threads]** · **[来源: TRPL Ch. 16 - Concurrency]**
+> **来源: [Rust Reference - std::thread::scope](https://doc.rust-lang.org/reference/)** · **来源: [RFC 3151 - scoped threads](https://rust-lang.github.io/rfcs/3151-3151-scoped-threads.html)** · **来源: [TRPL Ch. 16 - Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)**
 
 Rust 1.63 引入的 `thread::scope` 提供了最安全的线程合并机制：所有在作用域内生成的线程在作用域结束时自动汇合，无需显式 `join`，且允许借用非 `'static` 数据。
 
@@ -482,7 +482,7 @@ fn authorize_access(user: &str, resource: &str) -> Result<Permission, String> {
 
 ### 5.2 高级实现：tokio::join! 与 futures::future::join
 >
-> **[来源: Tokio Docs - docs.rs/tokio]** · **[来源: futures crate - docs.rs/futures]** · **[来源: Rust Reference - Async/Await]**
+> **来源: Tokio Docs - docs.rs / [tokio](https://tokio.rs/)** · **[来源: futures crate - docs.rs/futures]** · **来源: [Rust Reference - Async/Await](https://doc.rust-lang.org/reference/items/functions.html#async-functions)**
 
 对于异步任务，Rust 生态系统提供了宏级的合并原语：
 
@@ -564,7 +564,7 @@ pub enum Error {
 
 ### 5.3 crossbeam::scope 作用域线程合并
 >
-> **[来源: crossbeam - docs.rs/crossbeam]** · **[来源: Rust Reference - std::thread]**
+> **来源: crossbeam - docs.rs / [crossbeam](https://docs.rs/crossbeam/latest/crossbeam/)** · **来源: [Rust Reference - std::thread](https://doc.rust-lang.org/reference/)**
 
 `crossbeam` 提供了比标准库更丰富的线程合并原语，包括作用域线程和并行迭代器：
 
@@ -649,7 +649,7 @@ pub fn explicit_join_merge() -> Vec<String> {
 
 ### 6.1 活性 (Liveness)
 >
-> **[来源: POPL - Programming Languages Research]** · **[来源: Workflow Patterns Initiative]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)** · **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)**
 
 **定理 6.1.1 (线程合并活性定理)**
 
@@ -679,7 +679,7 @@ $$
 
 ### 6.2 安全性 (Safety)
 >
-> **[来源: PLDI - Programming Language Design]** · **[来源: Rustonomicon - Safety]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)** · **来源: [Rustonomicon - Safety](https://doc.rust-lang.org/nomicon/)**
 
 **定理 6.2.1 (数据竞争自由定理)**
 
@@ -710,7 +710,7 @@ $$
 
 ### 6.3 正确性条件
 >
-> **[来源: Workflow Patterns Initiative]** · **[来源: Rust Reference - std::thread]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)** · **来源: [Rust Reference - std::thread](https://doc.rust-lang.org/reference/)**
 
 线程合并模式的正确性条件：
 
@@ -730,7 +730,7 @@ $$
 
 ### 7.1 模式层次
 >
-> **[来源: Workflow Patterns Initiative]** · **[来源: van der Aalst 2003]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)** · **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)**
 
 ```mermaid
 graph TD
@@ -743,7 +743,7 @@ graph TD
 
 ### 7.2 形式化关系
 >
-> **[来源: van der Aalst 2003]** · **[来源: Hoare 1978]**
+> **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)** · **来源: [Hoare 1978](https://en.wikipedia.org/wiki/Communicating_sequential_processes)**
 
 **线程合并是并行分裂的对偶操作**:
 
@@ -779,7 +779,7 @@ $$
 
 ### 8.1 认证与授权合并决策
 >
-> **[来源: Rust Reference]** · **[来源: RFC 6749 - OAuth 2.0]** · **[来源: NIST SP 800-207 - Zero Trust]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [RFC 6749 - OAuth 2.0](https://github.com/rust-lang/rfcs/pull/6749)** · **[来源: NIST SP 800-207 - Zero Trust]**
 
 **场景**: 零信任架构中，访问请求需同时通过身份认证（Authentication）和权限授权（Authorization）两个独立检查，合并为单一访问决策。
 
@@ -872,7 +872,7 @@ fn authorize(resource: &str, action: &str) -> Result<AuthzResult, String> {
 
 ### 8.2 并行数据聚合
 >
-> **[来源: Rust Standard Library - Iterator]** · **[来源: rayon - docs.rs/rayon]**
+> **[来源: Rust Standard Library - Iterator]** · **来源: rayon - docs.rs / [rayon](https://docs.rs/rayon/latest/rayon/)**
 
 **场景**: 从多个数据源并行获取数据后合并为统一视图。
 
@@ -929,7 +929,7 @@ async fn fetch_notifications(_user_id: u64) -> Result<Vec<Notification>, ApiErro
 
 ### 8.3 多阶段构建汇合
 >
-> **[来源: Cargo Book - Build Scripts]** · **[来源: Rust Reference - cfg]**
+> **来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)** · **来源: [Rust Reference - cfg](https://doc.rust-lang.org/reference/)**
 
 **场景**: 构建系统中并行编译多个模块后合并产物进行链接。
 
@@ -1036,7 +1036,7 @@ pub async fn selective_merge<T: Send + 'static>(
 
 ### 9.3 级联合并
 >
-> **[来源: rayon - docs.rs/rayon]** · **[来源: Workflow Patterns Initiative]**
+> **来源: rayon - docs.rs / [rayon](https://docs.rs/rayon/latest/rayon/)** · **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)**
 
 多层级联合并结果：
 
@@ -1137,22 +1137,22 @@ pub fn cascading_merge<T: Send + Clone>(
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Thread (computing)]**
+> **来源: [Wikipedia - Thread (computing)](https://en.wikipedia.org/wiki/Thread_(computing))**
 
 > **[来源: POSIX Threads Specification - IEEE Std 1003.1c]**
 
-> **[来源: Rust API Guidelines]**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 
-> **[来源: TRPL Ch. 16 - Concurrency]**
+> **来源: [TRPL Ch. 16 - Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)**
 
-> **[来源: Rustonomicon - Concurrency]**
+> **来源: [Rustonomicon - Concurrency](https://doc.rust-lang.org/nomicon/concurrency.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 > **[来源: Tokio Documentation - JoinSet]**
 
 > **[来源: Crossbeam Documentation - Scoped Threads]**
 
-> **[来源: RFC 3151 - scoped threads]**
+> **来源: [RFC 3151 - scoped threads](https://rust-lang.github.io/rfcs/3151-3151-scoped-threads.html)**
 
 ---

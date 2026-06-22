@@ -14,7 +14,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: Wikipedia - Python (programming language)]** · **[来源: Wikipedia - Dynamic Typing]** · **[来源: ACM - Static vs Dynamic Typing]** · **[来源: IEEE - Language Performance Comparison]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** · **来源: [Wikipedia - Python (programming language)](https://en.wikipedia.org/wiki/Python_(programming_language))** · **来源: [Wikipedia - Dynamic Typing](https://en.wikipedia.org/wiki/Dynamic_Typing)** · **[来源: ACM - Static vs Dynamic Typing]** · **[来源: IEEE - Language Performance Comparison]**
 
 - [Rust vs Python：全面对比分析](#rust-vs-python全面对比分析)
   - [目录](#目录)
@@ -62,7 +62,7 @@
 
 ## 概述
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Rust 和 Python 代表了编程语言设计光谱的两端：
 
@@ -71,9 +71,9 @@ Rust 和 Python 代表了编程语言设计光谱的两端：
 
 ### 语言特性对比
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 特性 | Python | Rust |
 |------|--------|------|
@@ -90,7 +90,7 @@ Rust 和 Python 代表了编程语言设计光谱的两端：
 
 ### 基准测试数据
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 测试环境：AMD Ryzen 9 5900X, 32GB RAM
 
@@ -131,11 +131,11 @@ fn main() {
 
 ### 性能优化路径
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 #### Python 性能优化
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```python
 # 1. 使用 NumPy 向量化
@@ -174,7 +174,7 @@ def parallel_map(func, data, workers=4):
 
 #### Rust 原生性能
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 // Rust 不需要这些优化技巧，原生就快
@@ -198,7 +198,7 @@ fn parallel_sum(data: &[i32]) -> i32 {
 
 ### 启动时间和内存占用
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 | 指标 | Python | Rust |
 |------|--------|------|
@@ -213,7 +213,7 @@ fn parallel_sum(data: &[i32]) -> i32 {
 
 ### Python 动态类型
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```python
 # Python：灵活但运行时错误
@@ -248,7 +248,7 @@ MyClass.method = new_method
 
 ### Rust 静态类型
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 // Rust：编译期捕获所有类型错误
@@ -291,7 +291,7 @@ fn handle_message(msg: Message) {
 
 ### 类型系统对比表
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 特性 | Python | Rust |
 |------|--------|------|
@@ -308,7 +308,7 @@ fn handle_message(msg: Message) {
 
 ### Python 内存管理
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```python
 import sys
@@ -352,7 +352,7 @@ for stat in top_stats[:10]:
 
 ### Rust 所有权系统
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 // Rust 编译期内存管理
@@ -390,7 +390,7 @@ fn calculate_length(s: &String) -> usize {
 
 ### 内存使用对比
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 | 场景 | Python | Rust |
 |------|--------|------|
@@ -405,7 +405,7 @@ fn calculate_length(s: &String) -> usize {
 
 ### Python AI/ML 生态
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 Python 是 AI/ML 领域无可争议的王者：
 
@@ -473,7 +473,7 @@ class NeuralNet(torch.nn.Module):
 
 ### Rust AI/ML 生态
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 Rust 的 ML 生态正在快速发展：
 
@@ -552,7 +552,7 @@ fn neural_network() {
 
 ### Polars：Rust 在 Python 生态中的成功案例
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```python
 # Polars - 用 Rust 编写的高性能 DataFrame 库
@@ -583,11 +583,11 @@ pandas_df = result.to_pandas()
 
 ### Web 服务
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 #### Python (FastAPI)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```python
 from fastapi import FastAPI, HTTPException
@@ -629,7 +629,7 @@ if __name__ == "__main__":
 
 #### Rust (Axum)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 use axum::{
@@ -697,11 +697,11 @@ async fn main() {
 
 ### 数据处理
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 #### Python (Pandas)
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```python
 import pandas as pd
@@ -730,7 +730,7 @@ def process_data(file_path: str) -> pd.DataFrame:
 
 #### Rust (Polars API)
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use polars::prelude::*;
@@ -771,7 +771,7 @@ fn process_data(file_path: &str) -> Result<DataFrame, PolarsError> {
 
 ### PyO3：Rust 与 Python 的桥梁
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
 // Rust 代码（使用 PyO3）
@@ -821,7 +821,7 @@ total = rust_extension.array_sum(arr)  # 比 Python 快 10-100 倍
 
 ### 混合架构建议
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```
 ┌─────────────────────────────────────────┐
@@ -994,13 +994,13 @@ fn compute_heavy(data: Vec<f64>) -> f64 {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---
 

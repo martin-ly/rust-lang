@@ -75,4 +75,5 @@ name = "ai_ml_ecosystem_demo"
 [lints.rust]
 # 声明 nightly cfg 条件名，消除 unexpected_cfgs 警告
 # 用于 rust_197_features.rs 中 nightly-only 测试的条件编译
-unexpected_cfgs = { level = "warn", check-cfg = ['cfg(nightly)'] }
+# 同时声明 kani cfg，用于 Kani 形式化验证示例的条件编译
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(nightly)', 'cfg(kani)'] }

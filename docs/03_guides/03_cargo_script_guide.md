@@ -57,15 +57,15 @@
 
 ## 1. 什么是 Cargo Script？
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Cargo Script** 是 Rust 从 1.79 版本开始稳定化的功能，允许在**单个 `.rs` 文件**中编写完整的 Rust 程序，包括外部依赖声明。
 
 ### 1.1 为什么需要它？
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 在 Cargo Script 之前，运行一个依赖外部 crate 的 Rust 程序需要：
 
@@ -87,9 +87,9 @@ cargo run --manifest-path my_script.rs
 
 ### 1.2 适用场景
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 场景 | 传统项目 | Cargo Script |
 |------|---------|-------------|
@@ -104,13 +104,13 @@ cargo run --manifest-path my_script.rs
 
 ## 2. 文件格式规范
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 基本结构
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
     #!/usr/bin/env cargo
@@ -128,9 +128,9 @@ cargo run --manifest-path my_script.rs
 
 ### 2.2 格式要求
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **Shebang (可选但推荐)**
    - 首行: `#!/usr/bin/env cargo`
@@ -148,9 +148,9 @@ cargo run --manifest-path my_script.rs
 
 ### 2.3 完整清单示例
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
     #!/usr/bin/env cargo
@@ -184,13 +184,13 @@ cargo run --manifest-path my_script.rs
 
 ## 3. 运行方式
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 3.1 使用 cargo 直接运行 (推荐)
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 # Rust 1.79+ 稳定方式
@@ -202,9 +202,9 @@ cargo run --manifest-path script.rs -- --help
 
 ### 3.2 作为可执行脚本 (Unix)
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 # 添加执行权限
@@ -216,9 +216,9 @@ chmod +x script.rs
 
 ### 3.3 使用 Rust 解释器模式
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 # 某些环境支持
@@ -227,7 +227,7 @@ rust-script script.rs
 
 ### 3.4 Windows 环境
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 Windows 不支持 shebang，因此：
 
@@ -248,7 +248,7 @@ cargo run --manifest-path script.rs
 
 ### 4.1 基本依赖
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```cargo
 [dependencies]
@@ -258,7 +258,7 @@ rand = "0.8"
 
 ### 4.2 带特性的依赖
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```cargo
 [dependencies]
@@ -268,7 +268,7 @@ serde = { version = "1", features = ["derive"] }
 
 ### 4.3 路径依赖 (同目录下的本地 crate)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```cargo
 [dependencies]
@@ -277,7 +277,7 @@ my_local_lib = { path = "../my_local_lib" }
 
 ### 4.4 工作区依赖
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 Cargo Script 目前**不支持**直接引用工作区依赖。需要显式声明版本：
 
@@ -463,13 +463,13 @@ cargo run --manifest-path script.rs --release
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Build Automation]**
-> **[来源: Cargo Book]**
-> **[来源: Rust Reference - Cargo]**
-> **[来源: crates.io Documentation]**
-> **[来源: Wikipedia - Build Automation]**
-> **[来源: Cargo Book]**
-> **[来源: Rust Reference - Cargo]**
-> **[来源: crates.io Documentation]**
+> **来源: [Wikipedia - Build Automation](https://en.wikipedia.org/wiki/Build_Automation)**
+> **来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)**
+> **来源: [Rust Reference - Cargo](https://doc.rust-lang.org/cargo/)**
+> **来源: [crates.io Documentation](https://crates.io/)**
+> **来源: [Wikipedia - Build Automation](https://en.wikipedia.org/wiki/Build_Automation)**
+> **来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)**
+> **来源: [Rust Reference - Cargo](https://doc.rust-lang.org/cargo/)**
+> **来源: [crates.io Documentation](https://crates.io/)**
 
 ---

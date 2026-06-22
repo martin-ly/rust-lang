@@ -502,3 +502,26 @@ impl Drop for PerformanceCounter {
 >
 
 ---
+
+## 📚 模块 8: 国际化对齐
+
+> 本节按项目模板要求补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Rust Performance Book](https://nnethercote.github.io/perf-book/) | 权威来源 | Rust 性能书籍 |
+| [Rustonomicon](https://doc.rust-lang.org/nomicon/) | 权威来源 | 高级内存与性能 |
+
+### 8.2 学术来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Data-Oriented Design](https://en.wikipedia.org/wiki/Data-oriented_design) | 权威来源 | 面向数据设计 |
+
+### 8.3 社区权威
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [criterion.rs docs](https://bheisler.github.io/criterion.rs/book/) | 权威来源 | 基准测试 |

@@ -1,8 +1,10 @@
+# Rust API 命名约定
+
 > **内容分级**: [中级]
 >
 > **代码状态**: ✅ 含可编译示例
 >
-> **EN**: API Naming Conventions
+> **EN**: Idiomatic Rust API Naming Conventions
 > **Summary**: Rust API naming conventions aligned with the Rust API Guidelines and std library style.
 > **受众**: [进阶]
 > **Bloom 层级**: 理解 → 应用

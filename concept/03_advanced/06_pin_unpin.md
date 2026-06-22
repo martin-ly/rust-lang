@@ -120,7 +120,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示 Pin 的**核心契约**——通过类型系统承诺值不会被移动，从而使自引用在安全前提下成为可能。
-> [来源: [RFC 2592 — Pin]]
+> [来源: [RFC 2592 — Pin](https://github.com/rust-lang/rfcs/pull/2592)]
 > **使用建议**: 绝大多数 Rust 代码不需要直接操作 Pin。Pin 主要在 async/await、生成器和特定 unsafe 代码中使用。
 > **关键洞察**: Pin 不是"阻止移动"，而是**"承诺不移动"**——如果违反了承诺（通过 unsafe），结果是 UB。
 > [来源: [Rust Reference — Pin](https://doc.rust-lang.org/std/pin/index.html)]

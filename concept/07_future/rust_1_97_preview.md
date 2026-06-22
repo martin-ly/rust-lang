@@ -8,9 +8,10 @@
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]
-> **跟踪版本**: nightly 1.98.0 (2026-06-17)
-> **预计稳定时间**: 2026-07-09（Rust 1.97.0 Beta 计划发布日期，来源: [Rust Forge](https://forge.rust-lang.org/)，距今约 20 天）
+> **跟踪版本**: beta 1.97.0（2026-05-22 从 master 分支，来源: [releases.rs](https://releases.rs/docs/1.97.0/)）
+> **预计稳定时间**: 2026-07-09（Rust 1.97.0 计划发布日期，来源: [Rust Forge](https://forge.rust-lang.org/)）
 > **当前阶段**: 🧪 Nightly 实验性 / 1.97 已进入 Beta 分支
+> **发布日准备**: `.kimi/EXECUTION_RUST_1_97_RELEASE_2026_07_09.md` 已就绪；`CHANGELOG.md` 已预置 `[3.1.0]` 模板
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
 > **状态**: 部分特性已 MCP 通过，实现中；稳定版发布前特性集可能调整
 >
@@ -19,6 +20,7 @@
 > - [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)
 > - [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
 > - [Rust Internals Forum](https://internals.rust-lang.org/)
+> - [releases.rs — Rust 1.97.0 beta](https://releases.rs/docs/1.97.0/)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 ---
@@ -572,11 +574,11 @@ pub unsafe extern "C" fn my_printf(fmt: *const c_char, mut args: ...) -> c_int {
 | `target.'cfg(..)'.rustdocflags` | ✅ 1.96 已稳定 | 条件 rustdoc 标志 |
 | `cargo lint` 子命令 | 📋 RFC 阶段 | 统一的 lint 管理接口 |
 | 依赖图谱可视化 | 📋 设计阶段 | `cargo tree --graph` |
-| **cargo-script 稳定化** | 🔄 FCP 已结束 | [RFC 3502](https://rust-lang.github.io/rfcs//3502-cargo-script.html)+3503 已批准；frontmatter（脚本顶部 `---` 元数据块）格式同步推进；**blocker 为 edition policy（lang/edition 方面）**；Project Goals 2026 Continued [来源: Rust Project Goals 2026 April Update] |
-| **Cargo `-m` shorthand** | 🟢 1.97 已确认 | `cargo -m <path>` 作为 `--manifest-path` 的简写（Cargo #16858） [来源: Cargo CHANGELOG 1.97] |
-| **Cargo improved `-p` errors** | 🟢 1.97 已确认 | 拼写错误的 `-p` 参数将提示相似的 workspace member 名称（Cargo #16844） [来源: Cargo CHANGELOG 1.97] |
-| **Cargo `-Zscript` edition pinning** | 🧪 Nightly | 教育用户如何为脚本固定 edition（Cargo #16851） [来源: Cargo CHANGELOG 1.97] |
-| **Cargo `-Zcargo-lints`** | 🧪 Nightly | 优先使用定义的 lint 级别而非默认值；`unused_dependencies` 忽略 rustc 的 `unused_crate_dependencies` 状态（Cargo #16879, #16877） [来源: Cargo CHANGELOG 1.97] |
+| **cargo-script 稳定化** | 🔄 FCP 已结束 | [RFC 3502](https://rust-lang.github.io/rfcs//3502-cargo-script.html)+3503 已批准；frontmatter（脚本顶部 `---` 元数据块）格式同步推进；**blocker 为 edition policy（lang/edition 方面）**；Project Goals 2026 Continued 来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) |
+| **Cargo `-m` shorthand** | 🟢 1.97 已确认 | `cargo -m <path>` 作为 `--manifest-path` 的简写（Cargo #16858） 来源: [Cargo CHANGELOG 1.97](https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md) |
+| **Cargo improved `-p` errors** | 🟢 1.97 已确认 | 拼写错误的 `-p` 参数将提示相似的 workspace member 名称（Cargo #16844） 来源: [Cargo CHANGELOG 1.97](https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md) |
+| **Cargo `-Zscript` edition pinning** | 🧪 Nightly | 教育用户如何为脚本固定 edition（Cargo #16851） 来源: [Cargo CHANGELOG 1.97](https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md) |
+| **Cargo `-Zcargo-lints`** | 🧪 Nightly | 优先使用定义的 lint 级别而非默认值；`unused_dependencies` 忽略 rustc 的 `unused_crate_dependencies` 状态（Cargo #16879, #16877） 来源: [Cargo CHANGELOG 1.97](https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md) |
 
 ### 6.2 rustfmt / clippy
 

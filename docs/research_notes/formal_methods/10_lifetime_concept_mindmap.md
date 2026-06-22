@@ -53,7 +53,7 @@
 
 ## 生命周期概念全景
 >
-> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Object Lifetime]** · **[来源: Wikipedia - Scope (computer science)]** · **[来源: ACM - Lifetime Analysis Concepts]** · **[来源: IEEE - Resource Lifetime Management]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Object Lifetime](https://en.wikipedia.org/wiki/Object_Lifetime)** · **来源: [Wikipedia - Scope (computer science)](https://en.wikipedia.org/wiki/Scope_(computer_science))** · **[来源: ACM - Lifetime Analysis Concepts]** · **[来源: IEEE - Resource Lifetime Management]**
 
 ```text
                         生命周期概念族
@@ -94,13 +94,13 @@
 
 ## 一、生命周期参数
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 泛型生命周期
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 泛型生命周期
@@ -119,7 +119,7 @@
 
 ### 1.2 生命周期推断
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```text
 生命周期推断
@@ -141,7 +141,7 @@
 
 ### 2.1 包含关系
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```text
 包含关系 ('a: 'b)
@@ -160,7 +160,7 @@
 
 ### 2.2 子类型关系
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```text
 子类型关系
@@ -176,7 +176,7 @@
 
 ### 2.3 类型约束
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```text
 类型约束
@@ -500,13 +500,13 @@ impl<'a> Parser<'a> {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

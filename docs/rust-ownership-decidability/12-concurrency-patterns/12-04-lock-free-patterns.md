@@ -8,13 +8,13 @@
 > **对齐日期**: 2026-05-12
 > **覆盖范围**: CAS操作、原子内存序、无锁数据结构、内存回收
 > **权威参考**: Rust Atomics and Locks by Mara Bos, C++ Concurrency in Action
-> **[来源: Mara Bos - Rust Atomics and Locks]** · **[来源: Rust Reference - Atomics]** · **[来源: Wikipedia - Lock-free Data Structure]** · **[来源: TRPL Ch. 16]** · **[来源: Wikipedia - Compare-and-Swap]** · **[来源: Rustonomicon - Concurrency]
+> **[来源: Mara Bos - Rust Atomics and Locks]** · **来源: [Rust Reference - Atomics](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Lock-free Data Structure](https://en.wikipedia.org/wiki/Lock_free_Data_Structure)** · **来源: [TRPL Ch. 16](https://doc.rust-lang.org/book/ch16-00-concurrency.html)** · **来源: [Wikipedia - Compare-and-Swap](https://en.wikipedia.org/wiki/Compare_and_Swap)** · **来源: [Rustonomicon - Concurrency](https://doc.rust-lang.org/nomicon/concurrency.html)
 
 ---
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [Rust 无锁编程模式](#rust-无锁编程模式)
   - [目录](#目录)
@@ -44,13 +44,13 @@
 
 ## 1. 内存模型基础
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 Happens-Before 关系
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Happens-before 关系是并发程序分析的基础概念：
 
@@ -95,7 +95,7 @@ fn happens_before_example() {
 
 ### 1.2 Sequentially Consistent
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 /// 顺序一致性是最强的内存序
@@ -128,7 +128,7 @@ fn sequential_consistency_example() {
 
 ### 1.3 内存序详解
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 use std::sync::atomic::Ordering;
@@ -223,7 +223,7 @@ fn seq_cst_example() {
 
 ### 2.1 原子类型
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use std::sync::atomic::{
@@ -262,7 +262,7 @@ pub fn platform_capabilities() {
 
 ### 2.2 加载与存储
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 use std::sync::atomic::{AtomicUsize, AtomicPtr, Ordering};
@@ -342,7 +342,7 @@ impl<T> Drop for AtomicBox<T> {
 
 ### 2.3 读-修改-写操作
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 use std::sync::atomic::{AtomicUsize, AtomicI64, Ordering};
@@ -464,7 +464,7 @@ impl AtomicFlags {
 
 ### 2.4 比较并交换 CAS
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 use std::sync::atomic::{AtomicUsize, AtomicPtr, Ordering};
@@ -584,7 +584,7 @@ impl<T: Copy + Into<usize> + From<usize>> AtomicUpdate<T> {
 
 ### 3.1 基本 CAS 循环
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 use std::sync::atomic::{AtomicUsize, AtomicPtr, Ordering};
@@ -693,7 +693,7 @@ impl AtomicAccumulator {
 
 ### 3.2 ABA 问题与解决
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 use std::sync::atomic::{AtomicU64, Ordering};
@@ -837,7 +837,7 @@ impl<T> ABAFreeStack<T> {
 
 ### 3.3 帮助机制
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 /// 帮助机制（Helping）用于无锁数据结构
@@ -934,7 +934,7 @@ impl<T> HelpingStack<T> {
 
 ### LazyLock 的无锁语义
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 Rust 1.94 引入的 `LazyLock::get()` 和相关方法提供了一种无锁的延迟初始化模式，与传统的 `std::sync::Once` 相比具有更好的可组合性：
 
@@ -1008,7 +1008,7 @@ fn concurrent_access() {
 
 ### LazyLock 与无锁数据结构组合
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use std::sync::LazyLock;
@@ -1073,7 +1073,7 @@ pub fn get_lazy_stack() -> &'static LockFreeStack<i32> {
 
 ### 4.1 无锁栈
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 use std::sync::atomic::{AtomicPtr, Ordering};
@@ -1244,7 +1244,7 @@ mod tests {
 
 ### 4.2 无锁队列
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 use std::sync::atomic::{AtomicPtr, Ordering};
@@ -1415,21 +1415,21 @@ impl<T> CountedMSQueue<T> {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
-> **[来源: Rust Reference - std::sync]**
-> **[来源: ACM - Concurrent Programming]**
-> **[来源: Wikipedia - Design Pattern]**
-> **[来源: Rust API Guidelines]**
-> **[来源: Gang of Four - Design Patterns]**
-> **[来源: ACM - Software Design Patterns]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Wikipedia - Type System]**
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [TRPL Ch. 16 - Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)**
+> **来源: [Rust Reference - std::sync](https://doc.rust-lang.org/std/sync/)**
+> **来源: [ACM - Concurrent Programming](https://dl.acm.org/)**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
+> **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ---

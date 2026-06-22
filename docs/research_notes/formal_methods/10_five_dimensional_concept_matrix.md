@@ -51,7 +51,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 五维概念矩阵是 Rust 形式化方法的核心概念组织框架，从五个正交维度系统化梳理 Rust 的所有权、借用、生命周期、类型系统和并发模型。
 
@@ -59,7 +59,7 @@
 
 ## 维度一：所有权维度 (Ownership)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 概念 | 定义 | 形式化表示 | Rust语法 |
 | :--- | :--- | :--- | :--- |
@@ -73,9 +73,9 @@
 
 ### 所有权状态转移
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 ┌─────────┐    移动   ┌─────────┐    借用    ┌─────────┐
@@ -93,7 +93,7 @@
 
 ## 维度二：借用维度 (Borrowing)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 借用类型 | 数量限制 | 可变性 | 形式化 | 典型使用 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -107,9 +107,9 @@
 
 ### 借用规则矩阵
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 场景 | `&T` | `&mut T` | 允许? |
 | :--- | :--- | :--- | :--- |
@@ -123,7 +123,7 @@
 
 ## 维度三：生命周期维度 (Lifetime)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 生命周期类型 | 语法 | 约束 | 示例 |
 | :--- | :--- | :--- | :--- |
@@ -135,9 +135,9 @@
 
 ### 生命周期关系图
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 'static  ────────────────────────────────▶  最长
@@ -153,7 +153,7 @@
 
 ## 维度四：类型系统维度 (Type System)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 类型类别 | 描述 | 示例 | 特性 |
 | :--- | :--- | :--- | :--- |
@@ -168,9 +168,9 @@
 
 ### 型变矩阵 (Variance)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 类型构造器 | 参数T的型变 | 示例 |
 | :--- | :--- | :--- |
@@ -187,7 +187,7 @@
 
 ## 维度五：并发维度 (Concurrency)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 概念 | 标记trait | 保证 | 形式化 |
 | :--- | :--- | :--- | :--- |
@@ -201,9 +201,9 @@
 
 ### Send/Sync 推导矩阵
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 类型 | `T: Send` | `T: Sync` | 结果 |
 | :--- | :--- | :--- | :--- |
@@ -223,7 +223,7 @@
 
 ### 所有权 × 借用
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 | 所有权状态 | 可变借用 | 不可变借用 | 释放 |
 | :--- | :--- | :--- | :--- |
@@ -234,7 +234,7 @@
 
 ### 生命周期 × 类型系统
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | 类型 | 默认生命周期 | 显式约束 |
 | :--- | :--- | :--- |
@@ -245,7 +245,7 @@
 
 ### 并发 × 所有权
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 | 场景 | 所有权策略 | 同步机制 |
 | :--- | :--- | :--- |
@@ -403,13 +403,13 @@
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -420,7 +420,7 @@
 
 #### 代码示例更新
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 本文档中的所有Rust代码示例均已：
 
@@ -430,7 +430,7 @@
 
 #### 相关文档
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 - Rust 1.94 迁移指南
 - Rust 1.94 特性速查
@@ -465,11 +465,11 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
-> **[来源: Coq Reference]**
-> **[来源: TLA+]**
-> **[来源: ACM - Formal Verification]**
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ---

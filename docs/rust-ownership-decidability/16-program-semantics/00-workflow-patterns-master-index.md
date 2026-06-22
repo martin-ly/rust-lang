@@ -14,7 +14,7 @@
 > **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
-> **[来源: Workflow Patterns Initiative - workflowpatterns.com]** · **[来源: van der Aalst et al., "Workflow Patterns", Distributed and Parallel Databases 2003]** · **[来源: Russell et al., "Workflow Control-Flow Patterns: A Revised View", Springer 2006]** · **[来源: Rust Reference]** · **[来源: TRPL]** · **[来源: Tokio Documentation]**
+> **[来源: Workflow Patterns Initiative - workflowpatterns.com]** · **[来源: van der Aalst et al., "Workflow Patterns", Distributed and Parallel Databases 2003]** · **[来源: Russell et al., "Workflow Control-Flow Patterns: A Revised View", Springer 2006]** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Tokio Documentation](https://tokio.rs/)**
 
 ## 目录
 >
@@ -51,11 +51,11 @@
 
 ## 1. 引言
 
-> [来源: van der Aalst et al. 2003] · [来源: Russell et al. 2006] · [来源: workflowpatterns.com]
+> 来源: [van der Aalst et al. 2003](https://www.workflowpatterns.com/) · [来源: Russell et al. 2006] · 来源: [workflowpatterns.com](https://www.workflowpatterns.com/)
 
-**工作流控制流模式（Workflow Control-Flow Patterns, WCP）** 是业务流程管理（BPM）、并发计算与分布式系统领域最具影响力的模式语言之一。2003 年，Wil van der Aalst、Arthur ter Hofstede、Bartek Kiepuszewski 和 Alistair Barros 在 *"Workflow Patterns"*（发表于 *Distributed and Parallel Databases*）中首次系统提出了 **20 个控制流模式**，旨在通过一组与具体实现语言无关的抽象模式，评估和比较不同工作流引擎的表达力 [来源: van der Aalst 2003]。
+**工作流控制流模式（Workflow Control-Flow Patterns, WCP）** 是业务流程管理（BPM）、并发计算与分布式系统领域最具影响力的模式语言之一。2003 年，Wil van der Aalst、Arthur ter Hofstede、Bartek Kiepuszewski 和 Alistair Barros 在 *"Workflow Patterns"*（发表于 *Distributed and Parallel Databases*）中首次系统提出了 **20 个控制流模式**，旨在通过一组与具体实现语言无关的抽象模式，评估和比较不同工作流引擎的表达力 来源: [van der Aalst 2003](https://www.workflowpatterns.com/)。
 
-2003 至 2006 年间，Nick Russell、Wil van der Aalst 和 Arthur ter Hofstede 等人持续扩展这一模式集合，最终形成了涵盖 **43 个控制流模式** 的完整框架，并于 2006 年以 *"Workflow Control-Flow Patterns: A Revised View"* 为题发表于 Springer [来源: Russell 2006]。这 43 个模式被组织为多个语义类别，包括：
+2003 至 2006 年间，Nick Russell、Wil van der Aalst 和 Arthur ter Hofstede 等人持续扩展这一模式集合，最终形成了涵盖 **43 个控制流模式** 的完整框架，并于 2006 年以 *"Workflow Control-Flow Patterns: A Revised View"* 为题发表于 Springer 来源: [Russell 2006](https://www.workflowpatterns.com/)。这 43 个模式被组织为多个语义类别，包括：
 
 - **基础控制流（Basic Control Flow）**：顺序、并行、选择、合并的原始构造
 - **高级分支与同步（Advanced Branching & Synchronization）**：动态分支数、竞态汇合、部分汇合与非结构化循环
@@ -67,7 +67,7 @@
 - **触发器模式（Trigger）**：外部事件驱动的活动激活
 - **线程模式（Thread）**：线程级别的分裂与汇合
 
-这些模式不仅为 BPMN、BPEL、XPDL 等工作流语言的设计提供了理论基准，也为通用编程语言中的并发与异步控制流设计提供了经过验证的抽象模板 [来源: workflowpatterns.com]。
+这些模式不仅为 BPMN、BPEL、XPDL 等工作流语言的设计提供了理论基准，也为通用编程语言中的并发与异步控制流设计提供了经过验证的抽象模板 来源: [workflowpatterns.com](https://www.workflowpatterns.com/)。
 
 值得注意的是，WCP 的评估方法具有极强的普适性：van der Aalst 等人最初使用这 20 个模式（后扩展至 43 个）评估了当时主流的 15 个工作流管理系统（包括 Staffware、IBM MQSeries、COSA 等），揭示了不同系统在控制流表达力上的系统性差异。这一评估框架同样适用于现代编程语言——本知识库即是以 WCP 为透镜，系统评估 Rust 在控制流表达力上的优势与边界。
 
@@ -93,13 +93,13 @@ Rust 编程语言的所有权系统、类型安全的并发原语与零成本抽
 
 截至本文更新，知识库已完成 **21 个模式文件**（约 48.8%），剩余 22 个模式按优先级持续补充中。已完成的模式覆盖了基础控制流（100%）、终止（100%）和大部分状态与取消模式；缺失模式主要集中在高级分支与同步（Partial Join 系列、鉴别器变体）、触发器和线程模式。
 
-> [来源: Rust Reference - Control Flow Expressions] · [来源: TRPL Ch. 4, 8, 13, 16] · [来源: Tokio Docs - tokio::sync]
+> 来源: [Rust Reference - Control Flow Expressions](https://doc.rust-lang.org/reference/) · 来源: [TRPL Ch. 4, 8, 13, 16](https://doc.rust-lang.org/book/ch04-00-ownership.html) · 来源: [Tokio Docs - tokio::sync](https://docs.rs/tokio/latest/tokio/sync/)
 
 ---
 
 ## 2. 模式分类总览
 
-> [来源: Workflow Patterns Initiative] · [来源: Russell 2006]
+> 来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/) · 来源: [Russell 2006](https://www.workflowpatterns.com/)
 
 43 个控制流模式按语义职责划分为 **10 个类别**。以下 Mermaid 树状图展示完整的分类层级与模式分布：
 
@@ -211,7 +211,7 @@ graph TD
 
 理解这些层级关系有助于在 Rust 中实现模式时进行正确的抽象复用：例如，WCP30 Structured Partial Join 的实现可以复用 WCP3 Synchronization 的 `Barrier` 代码，只需将阈值从"全部到达"降低为"部分到达"。
 
-> [来源: Workflow Patterns Initiative] · [来源: Russell 2006] · [来源: Rust Reference - Concurrency]
+> 来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/) · 来源: [Russell 2006](https://www.workflowpatterns.com/) · 来源: [Rust Reference - Concurrency](https://doc.rust-lang.org/reference/special-types-and-traits.html)
 
 ### 实现进度概览
 >
@@ -243,7 +243,7 @@ pie title WCP Rust 实现状态分布 (43 模式)
 
 ## 3. 完整模式矩阵 (WCP1–WCP43)
 
-> [来源: Workflow Patterns Initiative] · [来源: Russell 2006]
+> 来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/) · 来源: [Russell 2006](https://www.workflowpatterns.com/)
 
 下表列出全部 43 个 WCP 的完整信息，包括 WCP 原始编号、中英文名称、分类、Rust 实现文件链接、所有权安全等级、Rust 核心抽象与完成状态。
 
@@ -298,13 +298,13 @@ pie title WCP Rust 实现状态分布 (43 模式)
 | **WCP42** | 线程分裂模式 | Thread Split | Thread | `42-thread-split.md` | 🟢 | `thread::spawn`、`scope`、并行分支启动 | 📝 |
 | **WCP43** | 显式终止模式 | Explicit Termination | Termination | [`43-explicit-termination.md`](./workflow-patterns/43-explicit-termination.md) | 🟢 | `return`、`Result`、`std::process::exit` | ✅ |
 
-> [来源: Workflow Patterns Initiative] · [来源: Rust Reference - std::sync] · [来源: Tokio Docs - tokio::sync] · [来源: TRPL Ch. 16]
+> 来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/) · 来源: [Rust Reference - std::sync](https://doc.rust-lang.org/std/sync/) · 来源: [Tokio Docs - tokio::sync](https://docs.rs/tokio/latest/tokio/sync/) · 来源: [TRPL Ch. 16](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
 
 ---
 
 ## 4. Rust 实现策略速查表
 
-> [来源: Rust Reference] · [来源: TRPL Ch. 8, 13, 16] · [来源: Tokio Documentation]
+> 来源: [Rust Reference](https://doc.rust-lang.org/reference/) · 来源: [TRPL Ch. 8, 13, 16](https://doc.rust-lang.org/book/ch08-00-common-collections.html) · 来源: [Tokio Documentation](https://tokio.rs/)
 
 下表将每个模式类别映射到推荐的 Rust 语言构造与生态 crates，作为快速实现参考。
 
@@ -336,13 +336,13 @@ pie title WCP Rust 实现状态分布 (43 模式)
 | **Critical Section** | 互斥访问共享资源 | `Mutex`, `RwLock`, `MutexGuard`, `parking_lot` | `std`, `parking_lot` | 锁守卫生命周期自动释放 |
 | **Explicit Termination** | 显式结束流程 | `return`, `Result::Err` 传播, `std::process::exit` | `std` | 纯控制流；编译期安全 |
 
-> [来源: Rust Reference - Concurrency] · [来源: Tokio Docs - Select] · [来源: TRPL Ch. 16] · [来源: futures crate documentation]
+> 来源: [Rust Reference - Concurrency](https://doc.rust-lang.org/reference/special-types-and-traits.html) · [来源: Tokio Docs - Select] · 来源: [TRPL Ch. 16](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [来源: futures crate documentation]
 
 ---
 
 ## 5. 所有权安全原则
 
-> [来源: Rust Reference - Ownership] · [来源: TRPL Ch. 4] · [来源: Rustonomicon]
+> 来源: [Rust Reference - Ownership](https://doc.rust-lang.org/reference/) · 来源: [TRPL Ch. 4](https://doc.rust-lang.org/book/ch04-00-ownership.html) · 来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 
 43 个 WCP 在 Rust 中的实现难度差异，根源在于所有权系统与模式语义之间的张力。以下四条核心原则解释了为什么某些模式天然安全，而某些需要额外抽象：
 
@@ -361,7 +361,7 @@ pie title WCP Rust 实现状态分布 (43 模式)
 
 从形式化角度，这种同构性可以表述为：**WCP 的控制流图（CFG）若为一棵有向树（每个节点至多一个父节点），则 Rust 的所有权系统可完全静态验证其安全性**，无需运行时同步开销。
 
-> [来源: Rust Reference - Move Semantics] · [来源: Linear Type Theory, Wadler 1990]
+> 来源: [Rust Reference - Move Semantics](https://doc.rust-lang.org/reference/) · [来源: Linear Type Theory, Wadler 1990]
 
 ### 原则 2：分叉即所有权分裂，汇合即同步点
 >
@@ -376,7 +376,7 @@ pie title WCP Rust 实现状态分布 (43 模式)
 
 这条原则揭示了 🟡 模式的本质：它们打破了所有权的线性假设，需要运行时机制重建安全性。
 
-> [来源: Rust Reference - Borrow Checker] · [来源: Rust Reference - Shared-State Concurrency]
+> 来源: [Rust Reference - Borrow Checker](https://doc.rust-lang.org/reference/) · 来源: [Rust Reference - Shared-State Concurrency](https://doc.rust-lang.org/reference/)
 
 ### 原则 3：动态拓扑需要 `unsafe` 或 `Pin`
 >
@@ -390,7 +390,7 @@ pie title WCP Rust 实现状态分布 (43 模式)
 
 这些模式的关键挑战在于：**Rust 的类型系统擅长表达静态结构，而 WCP 的某些变体本质上是动态的**。`Pin` 和 `unsafe` 提供了突破静态限制的逃生舱，但代价是安全性保证需由程序员手动维护。
 
-> [来源: Rust Reference - Unsafe Rust] · [来源: Rustonomicon - Self-Referential Structs] · [来源: Pin API documentation]
+> 来源: [Rust Reference - Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-blocks.html) · 来源: [Rustonomicon - Self-Referential Structs](https://doc.rust-lang.org/nomicon/) · [来源: Pin API documentation]
 
 ### 原则 4：取消安全是 Rust 的显式优势
 >
@@ -405,13 +405,13 @@ pie title WCP Rust 实现状态分布 (43 模式)
 
 传统工作流引擎在运行时解释取消语义，而 Rust 将取消安全性编码进类型系统与作用域规则，实现了**零成本的安全取消**。
 
-> [来源: Tokio Docs - Cancel Safety] · [来源: Rust Reference - Drop Trait] · [来源: TRPL Ch. 16]
+> [来源: Tokio Docs - Cancel Safety] · 来源: [Rust Reference - Drop Trait](https://doc.rust-lang.org/reference/) · 来源: [TRPL Ch. 16](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
 
 ---
 
 ## 6. 形式化语义映射
 
-> [来源: van der Aalst 2003] · [来源: Petri Net Theory] · [来源: Process Algebra, Hoare 1985]
+> 来源: [van der Aalst 2003](https://www.workflowpatterns.com/) · 来源: [Petri Net Theory](https://en.wikipedia.org/wiki/Petri_net) · [来源: Process Algebra, Hoare 1985]
 
 工作流控制流模式与形式化方法之间存在成熟的映射关系。理解这些映射有助于在 Rust 中实现模式时做出正确的类型设计决策。
 
@@ -547,7 +547,7 @@ Petri 网是工作流模式最经典的形式化基础。van der Aalst 等人的
 **状态**: ✅ Master Index 初版完成
 **覆盖率**: 21/43 模式文件已完成（48.8%）
 
-> [来源: Workflow Patterns Initiative - workflowpatterns.com] · [来源: van der Aalst 2003] · [来源: Russell 2006] · [来源: Rust Reference] · [来源: TRPL] · [来源: Tokio Documentation]
+> [来源: Workflow Patterns Initiative - workflowpatterns.com] · 来源: [van der Aalst 2003](https://www.workflowpatterns.com/) · 来源: [Russell 2006](https://www.workflowpatterns.com/) · 来源: [Rust Reference](https://doc.rust-lang.org/reference/) · 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/) · 来源: [Tokio Documentation](https://tokio.rs/)
 
 ---
 

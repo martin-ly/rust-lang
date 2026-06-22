@@ -37,13 +37,13 @@
 
 ### Wikipedia 权威定义
 
-> **[Wikipedia: Software framework]** A software framework is an abstraction in which software providing generic functionality can be selectively changed by additional user-written code, thus providing application-specific software.
+> **[Wikipedia: Software framework](https://en.wikipedia.org/wiki/Software_framework)** A software framework is an abstraction in which software providing generic functionality can be selectively changed by additional user-written code, thus providing application-specific software.
 > **来源**: <https://en.wikipedia.org/wiki/Software_framework>
 
-> **[Wikipedia: Formal verification]** Formal verification is the act of proving or disproving the correctness of intended algorithms underlying a system with respect to a certain formal specification or property, using formal methods of mathematics.
+> **[Wikipedia: Formal verification](https://en.wikipedia.org/wiki/Formal_verification)** Formal verification is the act of proving or disproving the correctness of intended algorithms underlying a system with respect to a certain formal specification or property, using formal methods of mathematics.
 > **来源**: <https://en.wikipedia.org/wiki/Formal_verification>
 
-> **[Wikipedia: Category theory]** Category theory is a general theory of mathematical structures and their relations. It was introduced by Samuel Eilenberg and Saunders Mac Lane in the mid-20th century.
+> **[Wikipedia: Category theory](https://en.wikipedia.org/wiki/Category_theory)** Category theory is a general theory of mathematical structures and their relations. It was introduced by Samuel Eilenberg and Saunders Mac Lane in the mid-20th century.
 > **来源**: <https://en.wikipedia.org/wiki/Category_theory>
 
 ---
@@ -333,7 +333,7 @@ Wasmtime 是 Bytecode Alliance 的 WebAssembly 运行时，其安全性依赖于
 
 **关键定理**：Wasmtime 的 Rust 实现通过**编译期类型系统**（而非运行时检查）保证 Wasm 模块的内存隔离。`unsafe` 代码仅用于 Wasm 线性内存的底层访问，且被 Miri 和模糊测试双重验证。
 
-> **来源**: [Wasmtime 文档] · [Bytecode Alliance] · [WasmCert: Isabelle Formalization] · [Wikipedia: WebAssembly]
+> **来源**: [Wasmtime 文档] · [Bytecode Alliance] · [WasmCert: Isabelle Formalization] · [Wikipedia: WebAssembly](https://en.wikipedia.org/wiki/WebAssembly)
 
 ---
 
@@ -394,9 +394,9 @@ Wasmtime 是 Bytecode Alliance 的 WebAssembly 运行时，其安全性依赖于
 - [L4: Type Theory](../04_formal/02_type_theory.md) —— 范畴论与类型论根基
 - [L7: Formal Methods](../07_future/02_formal_methods.md) —— Kani/Verus/Creusot 的工业化路径
 
-> **[来源: Rust Reference; TRPL; Rust RFCs; Academic Papers]** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/); [The Rust Programming Language](https://doc.rust-lang.org/book/); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
 
-> **[来源: Wikipedia; POPL/PLDI/ECOOP Papers; RustBelt/Iris Project]** 形式化概念参考了权威学术来源和类型论研究。✅
+> **来源: [Wikipedia](https://en.wikipedia.org/wiki/Main_Page); POPL/PLDI/ECOOP Papers; [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)/Iris Project** 形式化概念参考了权威学术来源和类型论研究。✅
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

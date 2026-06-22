@@ -19,7 +19,7 @@
 > **双维定位**: P×Eva — 评估生态 crate 的安全性和可维护性
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Async](../03_advanced/02_async.md) · [Unsafe](../03_advanced/03_unsafe.md) [来源: [Rust FFI Guidelines](https://doc.rust-lang.org/nomicon/ffi.html)]
 > **后置概念**: [Application Domains](./04_application_domains.md)
-> **主要来源**: [crates.io](https://crates.io) · [lib.rs](https:/lib.rs) · [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) · [Rust API Guidelines]
+> **主要来源**: [crates.io](https://crates.io) · [lib.rs](https:/lib.rs) · [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -34,26 +34,26 @@
 
 ### 1.1 Wikipedia 权威定义
 
-> **[Wikipedia: Library (computing)]** A library is a collection of non-volatile resources used by computer programs, often for software development. These may include configuration data, documentation, help data, message templates, pre-written code and subroutines, classes, values or type specifications.
+> **[Wikipedia: Library (computing)](https://en.wikipedia.org/wiki/Library_(computing))** A library is a collection of non-volatile resources used by computer programs, often for software development. These may include configuration data, documentation, help data, message templates, pre-written code and subroutines, classes, values or type specifications.
 > **来源**: <https://en.wikipedia.org/wiki/Library_(computing)>
 
-> **[Wikipedia: Package manager]** A package manager or package-management system is a collection of software tools that automates the process of installing, upgrading, configuring, and removing computer programs for a computer in a consistent manner. [来源: [Rust CLI Book](https://rust-cli.github.io/book/)]
+> **[Wikipedia: Package manager](https://en.wikipedia.org/wiki/Package_manager)** A package manager or package-management system is a collection of software tools that automates the process of installing, upgrading, configuring, and removing computer programs for a computer in a consistent manner. [来源: [Rust CLI Book](https://rust-cli.github.io/book/)]
 > **来源**: <https://en.wikipedia.org/wiki/Package_manager>
 
-> **[Wikipedia: Software framework]** A software framework is an abstraction in which software, providing generic functionality, can be selectively changed by additional user-written code, thus providing application-specific software.
+> **[Wikipedia: Software framework](https://en.wikipedia.org/wiki/Software_framework)** A software framework is an abstraction in which software, providing generic functionality, can be selectively changed by additional user-written code, thus providing application-specific software.
 > **来源**: <https://en.wikipedia.org/wiki/Software_framework>
 
-> **[Wikipedia: Serialization]** In computing, serialization is the process of translating a data structure or object state into a format that can be stored or transmitted and reconstructed later.
+> **[Wikipedia: Serialization](https://en.wikipedia.org/wiki/Serialization)** In computing, serialization is the process of translating a data structure or object state into a format that can be stored or transmitted and reconstructed later.
 > **来源**: <https://en.wikipedia.org/wiki/Serialization>
 
-> **[Wikipedia: Cryptography]** Cryptography is the practice and study of techniques for secure communication in the presence of adversarial behavior.
+> **[Wikipedia: Cryptography](https://en.wikipedia.org/wiki/Cryptography)** Cryptography is the practice and study of techniques for secure communication in the presence of adversarial behavior.
 > **来源**: <https://en.wikipedia.org/wiki/Cryptography>
 
 ### 1.2 Cargo / crates.io 官方定义
 
-> **[The Cargo Book]** A crate is the smallest amount of code that the Rust compiler considers at a time. A crate can come in one of two forms: a binary crate or a library crate. [来源: [Rust by Example](https://doc.rust-lang.org/rust-by-example/)]
+> **[The Cargo Book](https://doc.rust-lang.org/cargo/)** A crate is the smallest amount of code that the Rust compiler considers at a time. A crate can come in one of two forms: a binary crate or a library crate. [来源: [Rust by Example](https://doc.rust-lang.org/rust-by-example/)]
 
-> **[crates.io]** crates.io is the Rust community's crate registry. It serves as a central location to discover and download packages.
+> **[crates.io](https://crates.io/)** crates.io is the Rust community's crate registry. It serves as a central location to discover and download packages.
 
 ---
 
@@ -294,7 +294,7 @@ graph TD
 ```
 
 > **认知功能**: 此图建立核心 crate 的全景认知地图，按数据/网络/运行时/工具/安全/FFI 六层组织生态组件。使用建议：选型时先定位功能域，再在该域内比较具体 crate。关键洞察：serde、tokio、clap 分别是各自领域的"生态标准"，优先默认选择可降低决策成本。[来源: 💡 原创分析]
-> [来源: [Cargo Book]]
+> [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)]
 
 ---
 
@@ -303,7 +303,7 @@ graph TD
 
 ### 4.1 序列化（Serialization）
 
-> **[serde]** Serde is a framework for serializing and deserializing Rust data structures efficiently and generically.
+> **[serde](https://serde.rs/)** Serde is a framework for serializing and deserializing Rust data structures efficiently and generically.
 
 | **Crate** | **格式** | **特点** | **L2 概念根基** |
 |:---|:---|:---|:---|
@@ -318,7 +318,7 @@ graph TD
 
 **关键洞察**：serde 的 `derive(Serialize, Deserialize)` 是 Rust **Trait 系统 + 过程宏**的工业级典范。编译器通过单态化为每个类型生成专门的序列化代码，实现零成本抽象。 [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
-> **来源**: [serde.rs](https://serde.rs) · [Wikipedia: Serialization] · 可信度: ✅
+> **来源**: [serde.rs](https://serde.rs) · [Wikipedia: Serialization](https://en.wikipedia.org/wiki/Serialization) · 可信度: ✅
 
 ### 4.2 异步运行时（Async Runtime）
 
@@ -441,7 +441,7 @@ graph TD
 
 #### crossbeam：无锁并发原语
 
-**[crossbeam]** A set of tools for concurrent programming in Rust.
+**[crossbeam](https://docs.rs/crossbeam/latest/crossbeam/)** A set of tools for concurrent programming in Rust.
 
 | **模块** | **功能** | **核心机制** | **何时使用** |
 |:---|:---|:---|:---|
@@ -453,7 +453,7 @@ graph TD
 
 #### rayon：数据并行迭代器
 
-**[rayon]** A data parallelism library for Rust.
+**[rayon](https://docs.rs/rayon/latest/rayon/)** A data parallelism library for Rust.
 
 ```rust,ignore
 use rayon::prelude::*;
@@ -572,7 +572,7 @@ graph TD
 
 > **关键洞察**: 下载量是**popularity 指标**，不是**质量指标**。`cargo audit` 和 `cargo geiger` 才是生产选型的硬性门槛。优先选择被大型项目（tokio、serde、rustls）作为依赖的 crate——它们的代码质量经过最广泛的实际验证。
 
-> **来源**: [crates.io] · [lib.rs] · [RustSec] · [cargo-geiger] · 可信度: ✅
+> **来源**: [crates.io](https://crates.io/) · [lib.rs](https://lib.rs/) · [RustSec](https://rustsec.org/) · [cargo-geiger](https://github.com/rust-secure-code/cargo-geiger) · 可信度: ✅
 
 ---
 
@@ -673,20 +673,20 @@ graph TD
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
-| serde 是 Rust 序列化标准 | [crates.io 下载量] · [serde.rs] | ✅ |
-| tokio 是异步运行时标准 | [tokio.rs] · [crates.io] | ✅ |
+| serde 是 Rust 序列化标准 | [crates.io 下载量] · [serde.rs](https://serde.rs/) | ✅ |
+| tokio 是异步运行时标准 | [tokio.rs](https://tokio.rs/) · [crates.io](https://crates.io/) | ✅ |
 | axum 是 tokio 官方 Web 框架 | [Tokio Blog] · [axum docs] | ✅ |
 | sqlx 编译期查询检查 | [sqlx README] · 官方文档 | ✅ |
-| clap 是 CLI 解析标准 | [clap.rs] · [crates.io] | ✅ |
+| clap 是 CLI 解析标准 | [clap.rs](https://clap.rs/) · [crates.io](https://crates.io/) | ✅ |
 | tracing 取代 log 成为标准 | [Tokio Blog] · 社区共识 | ✅ |
 | rustls 替代 OpenSSL 趋势 | [AWS Blog] · [Rustls Book] | ✅ |
 | ring 经过安全审计 | [ring GitHub] · 审计报告 | ✅ |
 | rayon 数据并行无数据竞争 | [rayon README] · [Niko Matsakis] | ✅ |
-| pyo3 是 Python 绑定标准 | [pyo3.rs] · [crates.io] | ✅ |
-| crates.io 下载量级 | [crates.io] · [lib.rs] | ✅ |
-| Library 定义 | [Wikipedia: Library] | ✅ |
-| Serialization 定义 | [Wikipedia: Serialization] | ✅ |
-| Cryptography 定义 | [Wikipedia: Cryptography] | ✅ |
+| pyo3 是 Python 绑定标准 | [pyo3.rs](https://pyo3.rs/) · [crates.io](https://crates.io/) | ✅ |
+| crates.io 下载量级 | [crates.io](https://crates.io/) · [lib.rs](https://lib.rs/) | ✅ |
+| Library 定义 | [Wikipedia: Library](https://en.wikipedia.org/wiki/Library) | ✅ |
+| Serialization 定义 | [Wikipedia: Serialization](https://en.wikipedia.org/wiki/Serialization) | ✅ |
+| Cryptography 定义 | [Wikipedia: Cryptography](https://en.wikipedia.org/wiki/Cryptography) | ✅ |
 | CMU 课程涵盖 crate 选型 | [CMU 17-350 — Safe Systems] | ✅ |
 | Stanford 课程涵盖 Rust 生态 | [Stanford CS340R] | ✅ |
 
@@ -886,7 +886,7 @@ cargo vet certify tokio@1.37.0 --criteria safe-to-deploy
 | `cargo audit` | 已知 CVE（安全漏洞） | 自动查询 Advisory DB | 推荐每次构建 |
 | `cargo vet` | 供应链可信度 | 人工审计 + 聚合认证 | 推荐每周/每月 |
 
-> **来源**: [cargo-vet 文档] · [Mozilla Supply Chain] · [Rust Secure Code WG]
+> **来源**: [cargo-vet 文档] · [Mozilla Supply Chain](https://www.mozilla.org/en-US/security/) · [Rust Secure Code WG](https://www.rust-lang.org/governance/wg-secure-code)
 
 ### 9.4 WASM 前端框架对比
 
@@ -1178,11 +1178,11 @@ graph TD
 > Rust 生态仍在快速增长：2024 年 crates.io 下载量突破 500 亿，嵌入式、WASM、AI 推理等新领域正在涌现。生态的成熟度决定了 Rust 能否从"系统语言"扩展为"通用语言"。
 > 演进方向见 [`../07_future/03_evolution.md`](../07_future/03_evolution.md)（语言演进）与 [`../07_future/01_ai_integration.md`](../07_future/01_ai_integration.md)（AI 集成）。
 
-> **[来源: crates.io; lib.rs; Rust Cookbook; Rust API Guidelines]** Crate 分析基于 crates.io 的公开数据和社区评估。✅
+> **来源: crates.io; lib.rs; Rust Cookbook; [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** Crate 分析基于 crates.io 的公开数据和社区评估。✅
 
 > **[来源: serde.rs; Tokio Documentation; rayon Docs; wasm-bindgen Guide; axum Docs]** 各 crate 的具体分析参考了官方文档和最新版本说明。✅
 
-> **[来源: crates.io; lib.rs; Rust Cookbook; Rust API Guidelines; docs.rs]** Crate 分析基于官方仓库数据和社区评估。✅
+> **来源: crates.io; lib.rs; Rust Cookbook; [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/); docs.rs** Crate 分析基于官方仓库数据和社区评估。✅
 
 > **[来源: serde.rs; Tokio Documentation; rayon Docs; wasm-bindgen Guide; axum Docs; clap Docs]** 各 crate 的具体分析参考了官方文档和最新版本说明。✅
 

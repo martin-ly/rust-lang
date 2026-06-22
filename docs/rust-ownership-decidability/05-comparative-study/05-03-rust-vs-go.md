@@ -19,13 +19,13 @@
 > **难度**: 🟢 入门
 > **目标读者**: 系统架构师、后端开发者、技术决策者
 > **文档版本**: 2.0.0 (L2+ 深度)
-> **[来源: Wikipedia - Rust (programming language)]** · **[来源: Wikipedia - Go (programming language)]** · **[来源: Rust Reference]** · **[来源: Go Documentation - go.dev/doc]** · **[来源: IEEE Software - Language Comparison Studies]** · **[来源: Stack Overflow Developer Survey 2025]** · **[来源: Wikipedia - Concurrent Computing]** · **[来源: ACM - Language Comparison Methodology]** · **[来源: IEEE - Systems Language Benchmarks]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Wikipedia - Go (programming language)](https://en.wikipedia.org/wiki/Go_(programming_language))** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **[来源: Go Documentation - go.dev/doc]** · **[来源: IEEE Software - Language Comparison Studies]** · **来源: [Stack Overflow Developer Survey 2025](https://survey.stackoverflow.co/2025/)** · **来源: [Wikipedia - Concurrent Computing](https://en.wikipedia.org/wiki/Concurrent_Computing)** · **[来源: ACM - Language Comparison Methodology]** · **[来源: IEEE - Systems Language Benchmarks]**
 
 ---
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [Rust vs Go 深度对比](#rust-vs-go-深度对比)
   - [目录](#目录)
@@ -82,7 +82,7 @@
 
 ## 1. 执行摘要
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -119,11 +119,11 @@
 
 ## 2. 设计理念对比
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 2.1 语言设计哲学
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **Rust 设计理念:**
 
@@ -173,7 +173,7 @@ func processData(data []byte) ([]byte, error) {
 
 ### 2.2 编译器 vs 运行时
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -215,7 +215,7 @@ func processData(data []byte) ([]byte, error) {
 
 ### 3.1 所有权 vs 垃圾回收
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -315,7 +315,7 @@ func main() {
 
 ### 3.2 内存安全模型
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | 安全问题 | Rust | Go |
 |---------|------|-----|
@@ -328,7 +328,7 @@ func main() {
 
 ### 3.3 内存布局与缓存
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **Rust 内存布局控制:**
 
@@ -386,7 +386,7 @@ func processPackets(packets []Packet) {
 
 ### 3.4 内存泄漏风险
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **Rust 内存泄漏 (可能但罕见):**
 
@@ -457,7 +457,7 @@ type SafeNode struct {
 
 ### 4.1 并发哲学
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -497,7 +497,7 @@ type SafeNode struct {
 
 ### 4.2 Goroutines vs OS 线程
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 | 特性 | Rust OS 线程 | Go Goroutine |
 |-----|-------------|--------------|
@@ -625,7 +625,7 @@ async fn asyncDemo() {
 
 ### 4.3 Channels 对比
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | 特性 | Rust Channel | Go Channel |
 |-----|-------------|------------|
@@ -748,7 +748,7 @@ fn advancedChannels() {
 
 ### 4.4 数据竞争防护
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **Go 数据竞争 (编译通过，运行时错误):**
 
@@ -879,7 +879,7 @@ fn atomicOperations() {
 
 ### 4.5 async/await 对比
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **Go 隐式协程:**
 
@@ -967,7 +967,7 @@ async fn concurrentTasks() {
 
 ### 5.1 基准测试数据
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -991,7 +991,7 @@ async fn concurrentTasks() {
 
 ### 5.2 启动时间与内存占用
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 | 指标 | Rust | Go |
 |-----|------|-----|
@@ -1002,7 +1002,7 @@ async fn concurrentTasks() {
 
 ### 5.3 GC 暂停影响
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **Go GC 暂停:**
 
@@ -1083,7 +1083,7 @@ fn realTimeGuarantee() {
 
 ### 5.4 编译时间对比
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 项目规模 | Rust | Go |
 |---------|------|-----|
@@ -1113,7 +1113,7 @@ codegen-units = 1  # 全程序优化
 
 ### 6.1 错误处理哲学
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -1156,7 +1156,7 @@ codegen-units = 1  # 全程序优化
 
 ### 6.2 Result vs error interface
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **Go error interface:**
 
@@ -1276,7 +1276,7 @@ fn process_file() -> Result<(), AppError> {
 
 ### 6.3 错误传播与处理
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **Go 错误传播:**
 
@@ -1365,7 +1365,7 @@ fn load_app_anyhow() -> Result<()> {
 
 ### 7.1 静态 vs 动态类型
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | 特性 | Rust | Go |
 |-----|------|-----|
@@ -1425,7 +1425,7 @@ impl Reader for Vec<u8> {
 
 ### 7.2 泛型支持
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **Go 泛型 (1.18+):**
 
@@ -1530,7 +1530,7 @@ impl Stack<i32> {
 
 ### 7.3 空值安全
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **Go 的 nil:**
 
@@ -1600,7 +1600,7 @@ fn option_demo() {
 
 ### 8.1 HTTP 服务实现
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **Go HTTP 服务:**
 
@@ -1708,7 +1708,7 @@ async fn main() {
 
 ### 8.2 并发数据处理
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **Go 并发处理:**
 
@@ -2019,7 +2019,7 @@ async fn db_operations() -> Result<()> {
 
 ### 9.1 Web 框架
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 框架 | Rust | Go |
 |-----|------|-----|
@@ -2091,7 +2091,7 @@ async fn db_operations() -> Result<()> {
 
 ### 10.2 选择 Go 的场景
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```text
 ✅ 选择 Go 当:
@@ -2124,7 +2124,7 @@ async fn db_operations() -> Result<()> {
 
 ### 10.3 混合使用场景
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```text
 混合架构示例:
@@ -2164,7 +2164,7 @@ async fn db_operations() -> Result<()> {
 
 ### 11.1 Go → Rust 思维转换
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -2278,11 +2278,11 @@ Go 开发者学习 Rust 路径:
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Go (programming language)]**
+> **来源: [Wikipedia - Go (programming language)](https://en.wikipedia.org/wiki/Go_(programming_language))**
 
-> **[来源: Wikipedia - Concurrent Computing]**
+> **来源: [Wikipedia - Concurrent Computing](https://en.wikipedia.org/wiki/Concurrent_Computing)**
 
-> **[来源: Wikipedia - Goroutine]**
+> **来源: [Wikipedia - Goroutine](https://en.wikipedia.org/wiki/Goroutine)**
 
 > **[来源: IEEE - Systems Language Benchmarks]**
 
@@ -2292,15 +2292,15 @@ Go 开发者学习 Rust 路径:
 
 > **[来源: Go Memory Model]**
 
-> **[来源: Rust Reference - Concurrency]**
+> **来源: [Rust Reference - Concurrency](https://doc.rust-lang.org/reference/special-types-and-traits.html)**
 
-> **[来源: TRPL - Fearless Concurrency]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 > **[来源: golang.org Documentation]**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---

@@ -84,3 +84,31 @@
 ## 相关概念
 
 - [不安全代码审计](02_unsafe_audit.md)
+
+
+## 📚 模块 8: 国际化对齐
+
+> 本模块按项目模板补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 说明 |
+|:---|:---|
+| [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) | 编译器开发指南 |
+| [Rust Reference](https://doc.rust-lang.org/reference/) | 语言参考 |
+| [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/) | 项目目标 |
+
+### 8.2 学术/工业来源
+
+| 来源 | 说明 |
+|:---|:---|
+| [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | Rust 形式化基础 |
+| [Tree Borrows — PLDI 2025](https://perso.crans.org/vanille/treebor/) | 别名模型 |
+
+### 8.3 社区资源
+
+| 来源 | 说明 |
+|:---|:---|
+| [Rust Internals Forum](https://internals.rust-lang.org/) | 设计与 RFC 讨论 |
+| [This Week in Rust](https://this-week-in-rust.org/) | 社区周报 |
+

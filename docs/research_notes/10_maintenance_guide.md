@@ -74,15 +74,15 @@
 
 ## 📋 维护概览 {#-维护概览}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本维护指南为研究笔记系统提供完整的维护流程和最佳实践，确保系统长期稳定运行和持续改进。
 
 ### 维护范围
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **核心文档**: 14个核心文档的维护和更新
 - **研究笔记**: 17个研究笔记的内容完善和更新
@@ -94,13 +94,13 @@
 
 ## 🎯 维护目标 {#-维护目标}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 内容质量保证
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - ✅ 确保文档内容的准确性和时效性
 - ✅ 维护概念定义的一致性和完整性
@@ -109,9 +109,9 @@
 
 ### 2. 结构组织优化
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - ✅ 维护清晰的目录结构和分类体系
 - ✅ 确保交叉引用链接的有效性
@@ -120,9 +120,9 @@
 
 ### 3. 用户体验提升
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - ✅ 持续改进学习路径和导航体验
 - ✅ 收集用户反馈并实施改进
@@ -133,13 +133,13 @@
 
 ## 📅 维护计划 {#-维护计划}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 日常维护 (每日)
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 检查新提交的贡献
 - [ ] 验证链接有效性
@@ -148,9 +148,9 @@
 
 ### 周度维护 (每周)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 审查新创建的研究笔记
 - [ ] 更新索引文件
@@ -159,9 +159,9 @@
 
 ### 月度维护 (每月)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 全面检查所有文档
 - [ ] 更新过时信息
@@ -171,7 +171,7 @@
 
 ### 季度维护 (每季度)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 - [ ] 审查研究路线图
 - [ ] 评估研究进展
@@ -185,7 +185,7 @@
 
 ### 年度维护 (每年)
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - [ ] 全面审查系统架构
 - [ ] 评估系统完整性
@@ -201,7 +201,7 @@
 
 ### 内容质量检查
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 - **准确性**: 内容必须准确无误
 - **完整性**: 内容必须完整无缺
@@ -210,7 +210,7 @@
 
 ### 格式质量检查
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 - **Markdown语法**: 符合Markdown语法规范
 - **标题层次**: 标题层次清晰合理
@@ -219,7 +219,7 @@
 
 ### 格式统一检查清单（research_notes 专用）
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 与 FORMAT_AND_CONTENT_ALIGNMENT_PLAN、[QUALITY_CHECKLIST](./10_quality_checklist.md) § 元信息统一模板 一致：
 
@@ -232,7 +232,7 @@
 
 ### 链接质量检查
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 - **有效性**: 所有链接必须有效
 - **相关性**: 链接内容必须相关
@@ -241,7 +241,7 @@
 
 ### 结构质量检查
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 - **目录结构**: 目录结构清晰合理
 - **文件命名**: 文件命名规范统一
@@ -256,7 +256,7 @@
 
 ### 更新研究笔记
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 1. **选择研究主题**
    - 查看 [研究路线图](./10_research_roadmap.md)
@@ -282,7 +282,7 @@
 
 ### 更新核心文档
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 1. **确定更新内容**
    - 明确更新目标和范围
@@ -312,7 +312,7 @@
 
 ### 问题发现
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - **自动检测**: 使用维护工具自动检测问题
 - **用户报告**: 用户反馈和问题报告
@@ -321,7 +321,7 @@
 
 ### 问题分类
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - **严重问题**: 影响系统正常运行的问题（如链接失效、格式错误）
 - **重要问题**: 影响用户体验的问题（如内容过时、导航问题）
@@ -607,13 +607,13 @@ find docs/research_notes -name "*.md" -exec wc -l {} + | tail -1
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Machine Learning]**
-> **[来源: Wikipedia - Artificial Intelligence]**
-> **[来源: tch-rs Documentation]**
-> **[来源: ACM - AI Systems]**
-> **[来源: Wikipedia - Machine Learning]**
-> **[来源: Wikipedia - Artificial Intelligence]**
-> **[来源: tch-rs Documentation]**
-> **[来源: ACM - AI Systems]**
+> **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
+> **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)**
+> **来源: [tch-rs Documentation](https://docs.rs/tch/latest/tch/)**
+> **来源: [ACM - AI Systems](https://dl.acm.org/)**
+> **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
+> **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)**
+> **来源: [tch-rs Documentation](https://docs.rs/tch/latest/tch/)**
+> **来源: [ACM - AI Systems](https://dl.acm.org/)**
 
 ---

@@ -1,7 +1,7 @@
 # CLI 与开发工具场景
 
 > **Bloom 层级**: 应用
-> **[来源: Rust CLI Working Group]** · **[来源: clap crate]** · **[来源: ripgrep]** · **[来源: hyperfine]** ✅
+> **来源: [Rust CLI Working Group](https://rust-lang.github.io/wg-cli/)** · **[来源: clap crate]** · **来源: [ripgrep](https://github.com/BurntSushi/ripgrep)** · **[来源: hyperfine]** ✅
 
 ---
 

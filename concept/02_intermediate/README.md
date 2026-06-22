@@ -7,7 +7,7 @@
 > **定位**：在掌握 L1 基础后，理解 Rust 的模块化、泛型、内存管理和错误处理等进阶机制。本层内容对齐 TRPL 第 10-15 章、Microsoft RustTraining 进阶部分。
 > **Bloom 层级**: 理解 → 应用
 > **对应 L4 形式化**: 类型约束求解 · 参数多态 · 子类型 · 存在类型
-> **[来源: TRPL Ch. 10–15]** · **[来源: Wikipedia - Generic Programming]** · **[来源: Wikipedia - Trait-based Programming]** · **[来源: Microsoft Rust Training - Advanced Topics]**
+> **来源: [TRPL Ch10](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)** · **来源: [Wikipedia - Generic Programming](https://en.wikipedia.org/wiki/Generic_Programming)** · **来源: [Wikipedia - Trait-based Programming](https://en.wikipedia.org/wiki/Trait_based_Programming)** · **[来源: Microsoft Rust Training - Advanced Topics]**
 
 > **本节关键术语**: 进阶概念 (Intermediate) · 特征 (Trait) · 泛型 (Generics) · 生命周期 (Lifetime) · 智能指针 (Smart Pointer) — [完整对照表](../00_meta/terminology_glossary.md)
 >

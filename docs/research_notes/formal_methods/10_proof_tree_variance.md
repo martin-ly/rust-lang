@@ -45,56 +45,56 @@
 
 ## 定理陈述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Def VA-1 (协变)
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 类型构造器 $F$ 是协变的，当且仅当：
 $$A <: B \implies F<A> <: F<B>$$
 
 ### Def VA-2 (逆变)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 类型构造器 $F$ 是逆变的，当且仅当：
 $$A <: B \implies F<B> <: F<A>$$
 
 ### Def VA-3 (不变)
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 类型构造器 $F$ 是不变的，当且仅当：
 $$A <: B \implies \neg(F<A> <: F<B>) \land \neg(F<B> <: F<A>)$$
 
 ### Thm VA-T1 (协变安全)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 不可变引用 `&T` 的协变性保证：若 `A <: B`，则 `&A <: &B` 安全。
 
 ### Thm VA-T2 (逆变安全)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 函数参数位置的逆变性保证：若 `A <: B`，则 `fn(B) -> R <: fn(A) -> R` 安全。
 
 ### Thm VA-T3 (不变必要)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 可变引用 `&mut T` 必须是不变的，否则会导致内存不安全。
 
@@ -102,7 +102,7 @@ $$A <: B \implies \neg(F<A> <: F<B>) \land \neg(F<B> <: F<A>)$$
 
 ## 证明树可视化
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 graph TD
@@ -176,13 +176,13 @@ graph TD
 
 ## 形式化证明
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### VA-T1: 协变安全
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **陈述**: 不可变引用 `&T` 的协变性是安全的。
 
@@ -209,9 +209,9 @@ let r: &mut i32 = &mut x;
 
 ### VA-T2: 逆变安全
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **陈述**: 函数参数位置的逆变性是安全的。
 
@@ -239,7 +239,7 @@ let f: fn(&Dog) = take_animal;  // 安全!
 
 ### VA-T3: 不变必要
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **陈述**: 可变引用 `&mut T` 必须是不变的。
 
@@ -272,7 +272,7 @@ let r: &mut B = &mut a;  // 由假设，允许
 
 ### 协变示例
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 fn covariance_example() {
@@ -285,7 +285,7 @@ fn covariance_example() {
 
 ### 逆变示例
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 trait Animal { fn speak(&self); }
@@ -306,7 +306,7 @@ let h: fn(&Dog) = animal_handler;  // 安全!
 
 ### 不变示例
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust
 fn invariance_example() {
@@ -335,13 +335,13 @@ fn invariance_example() {
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -352,7 +352,7 @@ fn invariance_example() {
 
 #### 代码示例更新
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 本文档中的所有Rust代码示例均已：
 
@@ -362,7 +362,7 @@ fn invariance_example() {
 
 #### 相关文档
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查
@@ -396,15 +396,15 @@ fn invariance_example() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
-> **[来源: Coq Reference]**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
 
-> **[来源: TLA+]**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
 
-> **[来源: ACM - Formal Verification]**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---
 

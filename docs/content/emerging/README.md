@@ -11,7 +11,7 @@
 
 ## 📋 目录
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Rust 前沿特性跟踪](#rust-前沿特性跟踪)
   - [📋 目录](#-目录)
@@ -32,7 +32,7 @@
 
 ## 🎯 目标
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本目录致力于：
 
@@ -45,7 +45,7 @@
 
 ## 📊 特性跟踪矩阵
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | 状态 | 预计稳定版本 | 文档完成度 | 示例代码 | 迁移指南 |
 |------|------|--------------|------------|----------|----------|
@@ -62,7 +62,7 @@
 
 ### Generic Const Expressions (generic_const_exprs)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **描述**: 允许在泛型参数中使用更复杂的常量表达式
 
@@ -107,7 +107,7 @@ where
 
 ### Async Closures
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **描述**: 原生支持异步闭包，无需 `async move` 包裹
 
@@ -151,7 +151,7 @@ async fn new_way() {
 
 ### Impl Trait in Associated Type
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **描述**: 在关联类型中使用 `impl Trait`
 
@@ -199,7 +199,7 @@ impl AsyncIterator for Counter {
 
 ### Type Alias Impl Trait (TAIT)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **描述**: 在类型别名中使用 `impl Trait`
 
@@ -289,18 +289,18 @@ timeline
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-> **[来源: Rust Reference]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-> **[来源: Rust Standard Library]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**

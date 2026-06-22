@@ -41,7 +41,7 @@
 
 ## 快速参考
 
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 版本 | 日期 | 核心特性 |
 |------|------|----------|

@@ -3,7 +3,7 @@
 > **分级**: [A]
 > **层次定位**: L6-L7 生态-前沿 / 编译器优化
 > **前置依赖**: [docs 编译器特性](./01_compiler_features.md) · [concept L2 泛型](../../concept/02_intermediate/02_generics.md)
-> **后置延伸**: [concept L7 语言演进](../../concept/07_future/03_evolution.md) · [Rust Compiler Team Blog]
+> **后置延伸**: [concept L7 语言演进](../../concept/07_future/03_evolution.md) · [Rust Compiler Team Blog](https://blog.rust-lang.org/inside-rust/)
 > **跨层映射**: L6→L7 性能驱动映射 | 工程→研究
 > **定理链编号**: T-030 单态化正确性 → 并行语义保持
 > **层级**: L6 生态工具
@@ -11,7 +11,7 @@
 > **Bloom 层级**: 应用
 > **[来源: Rust Compiler Team]** · **[来源: rustc_parallel_frontend 跟踪 Issue]** ·
 > **[来源: Rust Compiler Development Guide]** · **[来源: Nicholas Nethercote - How to Speed Up the Rust Compiler]** ✅ ·
-> **[来源: Wikipedia - Parallel Computing]** · **[来源: Wikipedia - Compiler Optimization]** ·
+> **来源: [Wikipedia - Parallel Computing](https://en.wikipedia.org/wiki/Parallel_Computing)** · **来源: [Wikipedia - Compiler Optimization](https://en.wikipedia.org/wiki/Compiler_Optimization)** ·
 > **[来源: ACM - Parallel Compilation Techniques]** · **[来源: IEEE - Multi-Core Software Standards]**
 >
 > **受众**: [专家] / [研究者]
@@ -58,7 +58,7 @@ Rust 编译器的**前端**（词法分析、语法分析、HIR 生成、类型�
 
 ### 当前状态（nightly）
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```bash
 # 使用 nightly Rust + 并行前端
@@ -96,7 +96,7 @@ $env:RUSTFLAGS = "-Z threads=$env:NUMBER_OF_PROCESSORS"
 
 ### 性能预期
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 | 项目规模 | 单线程前端 | 8 线程前端 | 加速比 |
 |:---|:---:|:---:|:---:|
@@ -214,14 +214,14 @@ graph TD
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Parallel Computing]**
-> **[来源: ACM - Parallel Programming]**
-> **[来源: IEEE - Parallel Algorithms]**
-> **[来源: Rust Reference - Parallel Iterators]**
-> **[来源: Wikipedia - Compiler Construction]**
-> **[来源: Rust Compiler Team Blog]**
-> **[来源: LLVM Documentation]**
-> **[来源: ACM - Compiler Design]**
+> **来源: [Wikipedia - Parallel Computing](https://en.wikipedia.org/wiki/Parallel_Computing)**
+> **来源: [ACM - Parallel Programming](https://dl.acm.org/)**
+> **来源: [IEEE - Parallel Algorithms](https://standards.ieee.org/)**
+> **来源: [Rust Reference - Parallel Iterators](https://doc.rust-lang.org/std/iter/trait.Iterator.html)**
+> **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)**
+> **来源: [Rust Compiler Team Blog](https://blog.rust-lang.org/inside-rust/)**
+> **来源: [LLVM Documentation](https://llvm.org/docs/)**
+> **来源: [ACM](https://dl.acm.org/)**
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
 > **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]

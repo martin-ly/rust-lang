@@ -14,7 +14,7 @@
 
 ## 目录
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Slice类型形式化](#slice类型形式化)
   - [目录](#目录)
@@ -52,7 +52,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Slice (`[T]`) 是Rust中的动态大小类型(DST)，表示连续内存区域的视图。
 Slice本身不是具体类型，必须通过引用(`&[T]`或`&mut [T]`)使用。
@@ -63,11 +63,11 @@ Slice本身不是具体类型，必须通过引用(`&[T]`或`&mut [T]`)使用。
 
 ## 形式化定义
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 定义 SLICE-1 (Slice类型)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Slice类型`[T]`表示类型`T`的连续元素序列，大小在编译时未知。
 
@@ -82,7 +82,7 @@ $$
 
 ### 定义 SLICE-2 (Slice引用)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Slice引用`&[T]`是胖指针，包含指向首元素的指针和长度。
 
@@ -108,7 +108,7 @@ $$
 
 ### 定义 SLICE-3 (Slice索引)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Slice索引操作返回对元素的引用。
 
@@ -132,11 +132,11 @@ $$
 
 ## String切片形式化
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 定义 STR-1 (str类型)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 `str`是UTF-8编码字符串的Slice类型，是Rust的字符串切片类型。
 
@@ -152,7 +152,7 @@ $$
 
 ### 定义 STR-2 (String与str关系)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 `String`拥有堆分配的`str`，`&str`借用`String`的内容。
 
@@ -176,7 +176,7 @@ $$
 
 ### 定理 STR-T1 (UTF-8保证)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 所有`str`值在创建时保证为有效UTF-8，否则panic。
 
@@ -194,11 +194,11 @@ $$
 
 ## 切片生命周期
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 定义 SLICE-LF-1 (切片生命周期)
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 切片引用的生命周期不能超过其源数据的生命周期。
 
@@ -208,7 +208,7 @@ $$
 
 ### 定理 SLICE-LF-T1 (切片有效性)
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 切片引用在生命周期内始终指向有效内存。
 
@@ -230,7 +230,7 @@ $$
 
 ### 定理 SLICE-T2 (切片不拥有数据)
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 切片引用`&[T]`不拥有数据，只借用数据。
 
@@ -242,7 +242,7 @@ $$
 
 ### 定理 SLICE-T3 (可变切片互斥)
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 同一时间只能有一个可变切片引用。
 
@@ -252,7 +252,7 @@ $$
 
 ### 定理 SLICE-T4 (Slice Copy行为)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 若`T: Copy`，则`&[T]`可以被安全复制。
 
@@ -270,7 +270,7 @@ $$
 
 ### 示例1: 基本Slice操作
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 fn slice_basics() {
@@ -286,7 +286,7 @@ fn slice_basics() {
 
 ### 示例2: String切片
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 fn string_slices() {
@@ -408,21 +408,21 @@ fn dangling_slice() -> &str {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
-> **[来源: Coq Reference]**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
 
-> **[来源: TLA+]**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
 
-> **[来源: ACM - Formal Verification]**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

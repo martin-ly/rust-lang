@@ -82,7 +82,7 @@ graph TD
         L4_1[线性逻辑]
         L4_2[类型论]
         L4_3[所有权形式化]
-        L4_4[RustBelt]
+        L4_4[RustBelt](https://plv.mpi-sws.org/rustbelt/)
         L4_5[验证工具链]
     end
 

@@ -9,7 +9,7 @@ Foreign Function Interface (FFI) 是 Rust 与外部代码交互的核心机制�
 
 ## 目录
 >
-> **[来源: Rust Reference - FFI]** · **[来源: Wikipedia - Foreign Function Interface]** · **[来源: Rustonomicon - FFI]** · **[来源: TRPL Ch. 19]** · **[来源: Wikipedia - ABI]** · **[来源: POSIX Standard - pubs.opengroup.org] · **[来源: Wikipedia - Application Binary Interface]** · **[来源: ACM - Safe FFI Design]** · **[来源: IEEE - Language Binding Standards]**
+> **来源: [Rust Reference - FFI](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Foreign Function Interface](https://en.wikipedia.org/wiki/Foreign_Function_Interface)** · **来源: [Rustonomicon - FFI](https://doc.rust-lang.org/nomicon/)** · **来源: [TRPL Ch. 19](https://doc.rust-lang.org/book/ch19-00-advanced-features.html)** · **来源: [Wikipedia - ABI](https://en.wikipedia.org/wiki/ABI)** · **[来源: POSIX Standard - pubs.opengroup.org] · **来源: [Wikipedia - Application Binary Interface](https://en.wikipedia.org/wiki/Application_Binary_Interface)** · **[来源: ACM - Safe FFI Design]** · **[来源: IEEE - Language Binding Standards]**
 
 - [FFI 互操作性](#ffi-互操作性)
   - [目录](#目录)
@@ -36,19 +36,19 @@ Foreign Function Interface (FFI) 是 Rust 与外部代码交互的核心机制�
 
 ## 基础概念
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 什么是 FFI
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 FFI 允许一种编程语言调用另一种语言的函数和使用其数据结构。Rust 通过 `extern` 关键字和 `#[link]` 属性提供了强大的 FFI 支持。
 
 ### ABI 兼容性
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 Application Binary Interface (ABI) 定义了函数调用的底层约定：
 
@@ -72,7 +72,7 @@ extern "sysv64"     // System V AMD64 ABI
 
 ### 不透明类型
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 处理 C 库中不透明的结构体指针：
 
@@ -96,7 +96,7 @@ pub type Sqlite3Handle = *mut sqlite3;
 
 ### 基本绑定示例
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 创建一个完整的 SQLite 绑定示例：
 
@@ -362,7 +362,7 @@ impl std::error::Error for SqliteError {}
 
 ### 使用 Bindgen 自动生成绑定
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 对于大型 C 库，手动编写绑定是不现实的。`bindgen` 可以自动生成 Rust 绑定：
 
@@ -1064,7 +1064,7 @@ impl Drop for SharedBuffer {
 
 ### 1. 类型安全封装
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 始终为 FFI 调用提供安全的 Rust 包装器：
 
@@ -1091,7 +1091,7 @@ pub fn process_data(data: &[u8]) -> Result<(), Error> {
 
 ### 2. 文档和不变式
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 清晰地记录 FFI 调用的前置条件和后置条件：
 
@@ -1109,7 +1109,7 @@ pub unsafe fn use_context(ptr: *mut Context) -> Result<(), Error> {
 
 ### 3. 测试策略
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 #[cfg(test)]
@@ -1140,7 +1140,7 @@ mod tests {
 
 ### 4. 错误处理模式
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 #[derive(Debug)]
@@ -1171,7 +1171,7 @@ impl std::error::Error for FfiError {}
 
 ### 5. 持续集成配置
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```yaml
 # .github/workflows/ffi.yml
@@ -1226,37 +1226,37 @@ jobs:
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Wikipedia - Type System]**
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ---
 

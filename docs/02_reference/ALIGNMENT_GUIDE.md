@@ -65,7 +65,7 @@
 
 ## 一、概念分类
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Rust 项目中「对齐」一词在不同语境下有不同含义：
 
@@ -79,13 +79,13 @@ Rust 项目中「对齐」一词在不同语境下有不同含义：
 
 ## 二、内存对齐（核心）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.0 为何要对齐（Why Alignment Matters）
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **CPU 行为**：现代 CPU 按「对齐边界」加载数据。未对齐访问可能导致：
 
@@ -101,9 +101,9 @@ Rust 项目中「对齐」一词在不同语境下有不同含义：
 
 ### 2.1 基本概念
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **对齐**：类型 T 的实例地址必须是 `align_of::<T>()` 的整数倍
 - **自然对齐**：标量类型的对齐通常等于其大小（如 `u64` 对齐 8 字节）
@@ -129,9 +129,9 @@ assert_eq!(size_of::<Example>(), 24);
 
 ### 2.2 常用 API
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | API | 用途 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -142,9 +142,9 @@ assert_eq!(size_of::<Example>(), 24);
 
 ### 2.3 repr 与对齐（完整谱系）
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 默认 #[repr(Rust)]：编译器可重排字段以优化
@@ -177,9 +177,9 @@ struct CLayoutAligned { x: u64; y: u64; }
 
 ### 2.4 字段重排序优化
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // ❌ 大字段后置导致多出填充
@@ -191,9 +191,9 @@ struct Good { b: u64; a: u8; c: u8; } // 16 bytes
 
 ### 2.5 对齐计算（Rust 1.92+）
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use std::num::NonZeroUsize;
@@ -213,9 +213,9 @@ fn align_up_div_ceil(size: usize, alignment: NonZeroUsize) -> usize {
 
 ### 2.6 Layout API（自定义分配）
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 `std::alloc::Layout` 描述内存块的大小与对齐，用于 `alloc`、`GlobalAlloc` 等。
 
@@ -236,9 +236,9 @@ let aligned = layout.align_to(Layout::new::<u64>().align()).unwrap();
 
 ### 2.7 平台差异
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 平台 | 未对齐访问 | 缓存行 | 备注 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -270,7 +270,7 @@ println!("{:*>10}", x);  // 右对齐，* 填充
 
 ### 4.1 裸指针解引用前提与 UB 情形
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 [Rustonomicon](https://doc.rust-lang.org/nomicon/) 与 [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) 要求：
 
@@ -285,7 +285,7 @@ println!("{:*>10}", x);  // 右对齐，* 填充
 
 ### 4.2 未对齐访问
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 当指针可能未按类型对齐时（如从网络包、文件解析的字节流），必须用 `read_unaligned`/`write_unaligned`，否则 `*ptr` 或 `ptr::read` 会 UB。
 
@@ -302,7 +302,7 @@ fn parse_u64_unaligned(bytes: &[u8], offset: usize) -> u64 {
 
 ### 4.3 transmute 对齐约束
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 `mem::transmute::<A, B>(x)` 的约束（违反任一条为 UB）：
 
@@ -328,7 +328,7 @@ let b: u32 = unsafe { std::mem::transmute::<u32, u32>(a) };
 
 ### 5.1 伪共享（False Sharing）
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 多线程下，同一缓存行被不同核修改会导致缓存失效，性能可下降数倍。典型缓解：每线程数据单独占满缓存行。
 
@@ -343,7 +343,7 @@ struct CacheLinePadded {
 
 ### 5.2 数据局部性：AoS vs SoA
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 与对齐相关：连续访问同类型数据时，缓存行利用率更高。
 
@@ -467,13 +467,13 @@ struct CacheLinePadded {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

@@ -12,7 +12,7 @@
 
 ## 📋 目录 {#-目录}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [质量保障 {#-质量保障维度}](#质量保障--质量保障维度)
   - [📋 目录 {#-目录}](#-目录--目录)
@@ -37,7 +37,7 @@
 
 ## 🎯 宗旨 {#-宗旨}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本模块提供 Rust 形式化工程系统的质量保障体系，涵盖：
 
@@ -50,7 +50,7 @@
 
 ## 📐 质量保障维度
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 维度 | 内容 | 文档 |
 | :--- | :--- | :--- |
@@ -64,7 +64,7 @@
 
 ## 📚 核心文档 {#-核心文档}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [**05_testing_coverage_guide.md**](../../05_guides/05_testing_coverage_guide.md) — 测试策略、覆盖率、MIRI 集成
 - [**05_performance_testing_report.md**](../../05_guides/05_performance_testing_report.md) — 性能基准、报告、回归
@@ -73,7 +73,7 @@
 
 ## 🔬 形式化验证衔接 {#-形式化验证衔接}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 验证目标 | 形式化定理 | 工具 |
 | :--- | :--- | :--- |
@@ -86,7 +86,7 @@
 
 ## ✅ 质量检查清单 {#-质量检查清单}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **构建**：`cargo build` 通过
 2. **测试**：`cargo test` 通过
@@ -99,13 +99,13 @@
 
 ## 代码质量示例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 测试最佳实践
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 单元测试
@@ -158,9 +158,9 @@ fuzz_target!(|data: &[u8]| {
 
 ### MIRI 检测示例
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 此代码在 MIRI 中会检测到未定义行为
@@ -202,9 +202,9 @@ mod miri_tests {
 
 ### 基准测试示例
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 使用 criterion 进行基准测试
@@ -228,9 +228,9 @@ criterion_main!(benches);
 
 ### 代码覆盖率示例
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 # 使用 tarpaulin 生成覆盖率报告
@@ -247,7 +247,7 @@ cargo tarpaulin --fail-under 80  # 覆盖率必须 >= 80%
 
 ### 形式化验证示例
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 // 使用 Kani 验证关键函数
@@ -374,8 +374,8 @@ mindmap
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
-> **[来源: Coq Reference Manual]**
-> **[来源: TLA+ Documentation]**
-> **[来源: ACM - Formal Verification]**
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
+> **来源: [Coq Reference Manual](https://coq.inria.fr/doc/)**
+> **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**

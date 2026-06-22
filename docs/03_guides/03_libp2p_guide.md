@@ -5,7 +5,7 @@
 > **层级**: L6 生态工具 / L3 高级网络
 > **前置概念**: [Async](../../concept/03_advanced/02_async.md) · [Network Programming](../../crates/c10_networks/)
 > **Bloom 层级**: 应用 → 分析
-> **[来源: libp2p Specification]** · **[来源: rust-libp2p crate]** · **[来源: Protocol Labs - libp2p]** · **[来源: Wikipedia - Peer-to-Peer]** ✅
+> **[来源: libp2p Specification]** · **[来源: rust-libp2p crate]** · **[来源: Protocol Labs - libp2p]** · **来源: [Wikipedia - Peer-to-Peer](https://en.wikipedia.org/wiki/Peer_to_Peer)** ✅
 >
 > **受众**: [进阶]
 > **内容分级**: [专家级]
@@ -37,7 +37,7 @@
 
 ## 概述
 
-> **[来源: Rust Standard Library]** · **[来源: Rust Project Goals 2026]** ✅
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** · **来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)** ✅
 
 **libp2p** 是 Protocol Labs 开发的模块化 P2P（点对点）网络框架，为 IPFS、Filecoin、Polkadot 等去中心化系统提供网络基础设施。
 
@@ -64,7 +64,7 @@ libp2p 协议栈
 
 ### Multiaddr —— 统一的地址格式
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 libp2p 使用 **multiaddr** 统一描述网络地址：
 
@@ -76,7 +76,7 @@ libp2p 使用 **multiaddr** 统一描述网络地址：
 
 ### PeerId —— 去中心化身份
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```text
 PeerId = multihash(public_key)
@@ -86,7 +86,7 @@ PeerId = multihash(public_key)
 
 ### 核心协议
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 协议 | 功能 | Rust crate |
 |:---|:---|:---|
@@ -125,7 +125,7 @@ PeerId = multihash(public_key)
 
 ### 基础节点（rust-libp2p）
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 use libp2p::{
@@ -160,7 +160,7 @@ fn create_node() -> Result<Swarm<Ping>, Box<dyn std::error::Error>> {
 
 ### GossipSub 发布/订阅
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use libp2p::gossipsub::{
@@ -209,7 +209,7 @@ match event {
 
 ### Kademlia DHT 内容路由
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 use libp2p::kad::{
@@ -317,9 +317,9 @@ kademlia.get_record(Key::from(vec![1, 2, 3]));
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Peer-to-Peer]**
+> **来源: [Wikipedia - Peer-to-Peer](https://en.wikipedia.org/wiki/Peer_to_Peer)**
 
-> **[来源: Wikipedia - Distributed Hash Table]**
+> **来源: [Wikipedia - Distributed Hash Table](https://en.wikipedia.org/wiki/Distributed_Hash_Table)**
 
 > **[来源: libp2p Specification]**
 
@@ -329,6 +329,6 @@ kademlia.get_record(Key::from(vec![1, 2, 3]));
 
 > **[来源: Protocol Labs - libp2p Docs]**
 
-> **[来源: Rust Reference - Networking]**
+> **来源: [Rust Reference - Networking](https://doc.rust-lang.org/reference/)**
 
 ---

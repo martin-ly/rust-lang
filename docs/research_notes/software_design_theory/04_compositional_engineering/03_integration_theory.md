@@ -45,7 +45,7 @@
 
 ## 形式化定义与定理
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def 1.1（跨模块边界）**:
 
@@ -80,7 +80,7 @@
 
 ## 衔接关系图
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 组合软件工程有效性
@@ -114,7 +114,7 @@
 
 ## 组合与所有权
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 传递方式 | 所有权 | 形式化 |
 | :--- | :--- | :--- |
@@ -129,7 +129,7 @@
 
 ## 组合与 trait
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 场景 | 衔接 |
 | :--- | :--- |
@@ -141,7 +141,7 @@
 
 ## 设计模式组合示例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 设计模式可组合使用，例如：
 
@@ -156,7 +156,7 @@
 
 ## 组合代码示例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // Builder + Strategy：可配置的排序策略
@@ -186,7 +186,7 @@ fn visit<V: Visitor>(v: &mut V, node: &Node) {
 
 ## 完整多模式组合链条：Builder + Factory + Repository
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **场景**：订单创建（Builder）→ 工厂选择（Factory）→ 持久化（Repository + DTO）。
 
@@ -231,7 +231,7 @@ fn place_order<R: OrderRepo>(repo: &R, t: OrderType, amount: u64) -> Result<(), 
 
 ## 组合验证清单
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 组合多模块/多模式时，确认：
 
@@ -245,7 +245,7 @@ fn place_order<R: OrderRepo>(repo: &R, t: OrderType, amount: u64) -> Result<(), 
 
 ## 跨模块 Send/Sync 传递
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 场景 | 约束 |
 | :--- | :--- |
@@ -260,7 +260,7 @@ fn place_order<R: OrderRepo>(repo: &R, t: OrderType, amount: u64) -> Result<(), 
 
 ## 组合反例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 反例 | 后果 |
 | :--- | :--- |
@@ -277,7 +277,7 @@ fn place_order<R: OrderRepo>(repo: &R, t: OrderType, amount: u64) -> Result<(), 
 
 ### 链条 1：Builder + Factory + Repository
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **场景**：订单创建需配置校验、持久化。
 
@@ -304,7 +304,7 @@ trait OrderRepo { fn save(&mut self, o: Order) -> Result<u64, String>; }
 
 ### 链条 2：Decorator + Strategy + Observer（完整实现）
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **场景**：可配置的日志装饰服务，执行后发事件；Strategy 切换算法，Observer 通知完成。
 
@@ -350,7 +350,7 @@ fn run_with_observer<S: Service>(s: &S, tx: &mpsc::Sender<i32>) -> i32 {
 
 ### 链条 3：Composite + Visitor + Iterator（完整实现）
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **场景**：树结构遍历、收集、统计；Visitor 访问各节点，Iterator 展平为叶值序列。
 
@@ -398,7 +398,7 @@ impl Node {
 
 ### 链条 4：Chain of Responsibility + Command + Observer
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **场景**：HTTP 请求经认证→限流→业务处理；每步可封装为 Command；处理完成后发事件。
 
@@ -471,13 +471,13 @@ trait Command { fn execute(&self, req: &Request) -> Response; }
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -488,7 +488,7 @@ trait Command { fn execute(&self, req: &Request) -> Response; }
 
 #### 代码示例更新
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 本文档中的所有Rust代码示例均已：
 
@@ -498,7 +498,7 @@ trait Command { fn execute(&self, req: &Request) -> Response; }
 
 #### 相关文档
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 - Rust 1.94 迁移指南
 - [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
@@ -532,21 +532,21 @@ trait Command { fn execute(&self, req: &Request) -> Response; }
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ---

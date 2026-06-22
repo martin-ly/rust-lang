@@ -11,7 +11,7 @@
 > **A/S/P 标记**: **P** — Procedure（策略决策）
 > **双维定位**: P×Eva — 评估形式化验证的工业 ROI
 > **前置概念**: [RustBelt](../04_formal/04_rustbelt.md) · [Ownership Formalization](../04_formal/03_ownership_formal.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Unsafe](../03_advanced/03_unsafe.md)
-> **主要来源**: [AWS Kani] · [Microsoft Verus] · [TLA+] · [P Language] · [POPL/PLDI 2024-2026] · [Wikipedia] · [O'Hearn 2007 — Separation Logic]
+> **主要来源**: [AWS Kani] · [Microsoft Verus] · [TLA+](https://lamport.azurewebsites.net/tla/tla.html) · [P Language] · [POPL](https://www.sigplan.org/Conferences/POPL/) / PLDI 2024-2026 · [Wikipedia](https://en.wikipedia.org/wiki/Main_Page) · [O'Hearn 2007 — Separation Logic]
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 ---
@@ -1322,8 +1322,8 @@ graph TD
 | PObserve 运行时对齐 | [AWS P Language] | ✅ |
 | Verus 验证 IronRDP | [Microsoft Research] | ✅ |
 | Linux Kernel Rust 验证 | [Rust for Linux] | 🚧 进行中 |
-| 模型检测全自动特性 | [Wikipedia — Model Checking] | ✅ |
-| 定理证明 SMT 基础 | [Wikipedia — ATP] | ✅ |
+| 模型检测全自动特性 | [Wikipedia — Model Checking](https://en.wikipedia.org/wiki/Model_Checking) | ✅ |
+| 定理证明 SMT 基础 | [Wikipedia — ATP](https://en.wikipedia.org/wiki/ATP) | ✅ |
 | 分离逻辑 O'Hearn 2007 | [O'Hearn, Reynolds, Yang — CSL 2001/2007] | ✅ |
 | RustBelt safe 子集证明 | [Jung et al., POPL 2018] | ✅ |
 
@@ -1508,8 +1508,8 @@ graph TD
 > 形式化验证正在从学术研究走向工业实践：AWS 用 Kani 验证 s2n-tls、Microsoft 用 Verus 验证 Hyper-V 组件、Rust 标准库用 Miri 持续回归检测。这些案例证明形式化方法不再是"玩具"，而是关键基础设施的必需品。
 > 工业实践见 [`../06_ecosystem/03_core_crates.md`](../06_ecosystem/03_core_crates.md)（验证工具生态）。
 > **[来源: AWS Kani Blog 2023; Microsoft Verus Docs; Creusot Tutorial; Prusti GitHub; Aeneas Docs]** 形式化工具的分析基于各工具的官方文档和公开发表的论文。✅
-> **[来源: RustBelt: POPL 2018; Iris JFP 2018; O'Hearn 2007 — Separation Logic]** 理论基础参考了 RustBelt 系列论文和分离逻辑的经典文献。✅
-> **[来源: RustBelt: POPL 2018; Iris JFP 2018; O'Hearn 2007 — Separation Logic]** 形式化理论基础参考了 RustBelt 系列论文和分离逻辑经典文献。✅
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** 理论基础参考了 RustBelt 系列论文和分离逻辑的经典文献。✅
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** 形式化理论基础参考了 RustBelt 系列论文和分离逻辑经典文献。✅
 > **[来源: AWS Kani Blog 2023; Microsoft Verus Docs; Creusot Tutorial; Prusti GitHub]** 工业工具分析基于各工具的官方文档和公开发表的论文。✅
 > **[来源: TLA+ Spec; P Language Docs; Spin Documentation]** 协议验证工具参考了形式化方法领域的成熟工具文档。✅
 ---

@@ -1944,3 +1944,27 @@ fn main() {
 > ——Rust 的 channel 关闭通过 drop 隐式触发。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-02-message-passing.html)] ·
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/sync/mpsc/)]
+
+## 📚 模块 8: 国际化对齐
+
+> 本节按项目模板要求补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Rust Blog](https://blog.rust-lang.org/) | 权威来源 | 发布博客 |
+| [releases.rs](https://releases.rs/) | 权威来源 | 发布跟踪 |
+
+### 8.2 学术来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) | 权威来源 | 目标路线图 |
+
+### 8.3 社区权威
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/) | 权威来源 | 核心团队动态 |
+| [This Week in Rust](https://this-week-in-rust.org/) | 权威来源 | 社区周报 |

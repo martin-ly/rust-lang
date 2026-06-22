@@ -11,13 +11,13 @@
 
 ## 目录
 
-> **[来源: Rust Embedded Book - docs.rust-embedded.org]** ·
-> **[来源: Wikipedia - Embedded System]** ·
-> **[来源: Rust Reference - no_std]** ·
-> **[来源: Wikipedia - Internet of Things]** ·
+> **来源: [Rust Embedded Book - docs.rust-embedded.org](https://doc.rust-lang.org/stable/embedded-book/)** ·
+> **来源: [Wikipedia - Embedded System](https://en.wikipedia.org/wiki/Embedded_System)** ·
+> **来源: [Rust Reference - no_std](https://doc.rust-lang.org/reference/names/preludes.html)** ·
+> **来源: [Wikipedia - Internet of Things](https://en.wikipedia.org/wiki/Internet_of_Things)** ·
 > **[来源: Embassy Framework - embassy.dev]** ·
-> **[来源: RTIC Documentation - rtic.rs]** ·
-> **[来源: Wikipedia - Real-Time Operating System]** ·
+> **来源: [RTIC Documentation - rtic.rs](https://rtic.rs/)** ·
+> **来源: [Wikipedia - Real-Time Operating System](https://en.wikipedia.org/wiki/Real_Time_Operating_System)** ·
 > **[来源: IEEE - Embedded Software Standards]** ·
 > **[来源: ACM - Embedded Systems Survey]**
 
@@ -79,13 +79,13 @@
 
 ## 一、嵌入式Rust概述
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 no_std环境
 
-> **[来源: Rust Embedded Working Group]**
+> **来源: [Rust Embedded Working Group](https://rust-embedded.github.io/book/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 嵌入式系统通常没有完整的操作系统支持，因此Rust程序需要在 `no_std` 环境下运行。
 这意味着无法使用标准库(std)，只能使用核心库(core)。
@@ -118,7 +118,7 @@ fn main() -> ! {
 
 #### no_std的限制与替代方案
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 | 标准库功能 | no_std替代方案 | 说明 |
 |-----------|---------------|------|
@@ -131,7 +131,7 @@ fn main() -> ! {
 
 ### 1.2 内存约束下的所有权管理
 
-> **[来源: Wikipedia - Embedded System]**
+> **来源: [Wikipedia - Embedded System](https://en.wikipedia.org/wiki/Embedded_System)**
 
 嵌入式系统的内存极其有限（通常只有几KB到几百KB），Rust的所有权系统在这种情况下特别有价值：
 
@@ -171,7 +171,7 @@ static mut BUFFER: SensorBuffer<100> = SensorBuffer::new();
 
 #### 编译期内存布局验证
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 /// 设备配置结构 - 使用packed布局优化内存
@@ -189,7 +189,7 @@ const _: () = assert!(core::mem::size_of::<DeviceConfig>() == 12);
 
 ### 1.3 零成本抽象的重要性
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 Rust的零成本抽象原则在嵌入式领域至关重要：
 
@@ -245,7 +245,7 @@ let state = input_pin.read();
 
 ### 2.1 工具链安装
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```bash
 # 安装Rust嵌入式工具链
@@ -264,7 +264,7 @@ rustup component add llvm-tools-preview
 
 ### 2.2 cargo-embed配置
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 `Embed.toml` 配置文件：
 
@@ -290,7 +290,7 @@ halt_afterwards = false
 
 ### 2.3 probe-rs使用
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```bash
 # 列出连接的设备
@@ -308,7 +308,7 @@ probe-rs gdb --chip STM32F407VG --protocol swd
 
 ### 2.4 交叉编译设置
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 `.cargo/config.toml`：
 
@@ -329,7 +329,7 @@ DEFMT_LOG = "info"
 
 #### 内存布局链接脚本 (`memory.x`)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```ld
 MEMORY
@@ -354,7 +354,7 @@ _stack_start = ORIGIN(CCMRAM) + LENGTH(CCMRAM);
 
 ### 3.1 embedded-hal Trait系统
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 `embedded-hal` 提供了一套通用的硬件抽象接口：
 
@@ -403,7 +403,7 @@ impl<PIN: OutputPin> Led<PIN> {
 
 ### 3.2 GPIO示例
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use stm32f4xx_hal::{
@@ -445,7 +445,7 @@ fn gpio_example() {
 
 ### 3.3 UART串口通信
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 use stm32f4xx_hal::{
@@ -520,7 +520,7 @@ impl UartDriver<pac::USART1> {
 
 ### 3.4 SPI总线通信
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 use embedded_hal::spi::{Mode, Phase, Polarity};
@@ -588,7 +588,7 @@ impl SpiDevice {
 
 ### 3.5 I2C总线通信
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 use stm32f4xx_hal::{
@@ -654,7 +654,7 @@ where
 
 ### 4.1 RTIC框架
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 RTIC (Real-Time Interrupt-driven Concurrency) 是基于中断的并发框架：
 
@@ -773,7 +773,7 @@ mod app {
 
 ### 4.2 Embassy异步运行时
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 Embassy是现代化的异步嵌入式框架：
 
@@ -879,7 +879,7 @@ async fn main(spawner: Spawner) {
 
 ### 4.3 任务调度与优先级
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 /// Embassy中的任务优先级配置
@@ -944,7 +944,7 @@ async fn safe_sensor_read() -> u16 {
 
 ### 5.1 静态分配策略
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use heapless::{Vec, String, FnvIndexMap, Pool};
@@ -1007,7 +1007,7 @@ impl<const N: usize> LogBuffer<N> {
 
 ### 5.2 内存池
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 use heapless::pool::Pool;
@@ -1076,7 +1076,7 @@ impl MemoryManager {
 
 ### 5.3 栈溢出保护
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 /// 栈使用监控
@@ -1166,7 +1166,7 @@ pub fn setup_mpu_stack_guard() {
 
 ### 6.1 安全的中断处理
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use cortex_m::interrupt::{self, Mutex};
@@ -1216,7 +1216,7 @@ fn process_interrupts() {
 
 ### 6.2 临界区管理
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 use cortex_m::interrupt::{self, CriticalSection};
@@ -1274,7 +1274,7 @@ mod rtic_critical {
 
 ### 6.3 无锁数据结构
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use heapless::spsc::Queue;
@@ -1371,7 +1371,7 @@ impl AtomicFlags {
 
 ### 7.1 MQTT客户端
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 use embassy_net::tcp::TcpSocket;
@@ -1543,7 +1543,7 @@ impl<'a, 'b> MqttClient<'a, 'b> {
 
 ### 7.2 CoAP协议
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 /// CoAP消息类型
@@ -1649,7 +1649,7 @@ impl CoapClient {
 
 ### 7.3 LoRaWAN协议
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 /// LoRaWAN区域配置
@@ -1811,7 +1811,7 @@ where
 
 ### 8.1 低功耗模式
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use stm32f4xx_hal::pac::PWR;
@@ -1910,7 +1910,7 @@ impl PowerManager {
 
 ### 8.2 睡眠状态管理
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use embassy_time::{Duration, Instant, Timer};
@@ -2024,7 +2024,7 @@ impl LowPowerScheduler {
 
 ### 9.1 系统架构
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -2062,7 +2062,7 @@ impl LowPowerScheduler {
 
 ### 9.2 完整代码实现
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 #![no_std]
@@ -2573,7 +2573,7 @@ async fn main(spawner: Spawner) {
 
 ### 10.1 RTT (Real-Time Transfer)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 use rtt_target::{rtt_init_print, rprintln, rdbg};
@@ -2608,7 +2608,7 @@ fn log_examples() {
 
 ### 10.2 ITM (Instrumentation Trace Macrocell)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 use cortex_m::{iprintln, ITM};
@@ -2658,7 +2658,7 @@ fn configure_itm() {
 
 ### 10.3 日志系统
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use heapless::spsc::Queue;
@@ -2795,7 +2795,7 @@ macro_rules! log_error {
 
 ### 10.4 调试配置总结
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 调试方法 | 适用场景 | 优点 | 缺点 |
 |---------|---------|------|------|
@@ -2811,7 +2811,7 @@ macro_rules! log_error {
 
 ### 常用嵌入式Rust Crate
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | Crate | 用途 | 版本建议 |
 |-------|------|---------|
@@ -2828,7 +2828,7 @@ macro_rules! log_error {
 
 ### 资源链接
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 - [Embedded Rust Book](https://docs.rust-embedded.org/book/)
 - [Embassy Framework](https://embassy.dev/)
@@ -2863,86 +2863,86 @@ macro_rules! log_error {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Embedded System]**
+> **来源: [Wikipedia - Embedded System](https://en.wikipedia.org/wiki/Embedded_System)**
 
-> **[来源: Wikipedia - Real-Time Operating System]**
+> **来源: [Wikipedia - Real-Time Operating System](https://en.wikipedia.org/wiki/Real_Time_Operating_System)**
 
-> **[来源: Wikipedia - Microcontroller]**
+> **来源: [Wikipedia - Microcontroller](https://en.wikipedia.org/wiki/Microcontroller)**
 
-> **[来源: Wikipedia - Bare-Metal Programming]**
+> **来源: [Wikipedia - Bare-Metal Programming](https://en.wikipedia.org/wiki/Bare_Metal_Programming)**
 
 > **[来源: IEEE - Embedded Software Standards]**
 
 > **[来源: ACM - Embedded Systems Survey]**
 
-> **[来源: Rust Embedded Working Group]**
+> **来源: [Rust Embedded Working Group](https://rust-embedded.github.io/book/)**
 
 > **[来源: Embassy Book - embassy.dev]**
 
 > **[来源: RTIC Book - rtic.rs]**
 
-> **[来源: Rust Reference - no_std]**
+> **来源: [Rust Reference - no_std](https://doc.rust-lang.org/reference/names/preludes.html)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages Survey]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design and Implementation]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM - Systems Programming Languages Survey](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI - Programming Language Design and Implementation](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Embedded System]**
-> **[来源: Rust Embedded WG]**
-> **[来源: Embassy Book]**
+> **来源: [Wikipedia - Embedded System](https://en.wikipedia.org/wiki/Embedded_System)**
+> **来源: [Rust Embedded WG](https://rust-embedded.github.io/book/)**
+> **来源: [Embassy Book](https://embassy.dev/book/)**
 > **[来源: IEEE - Embedded Software]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Wikipedia - Type System]**
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Wikipedia - Type System]**
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Wikipedia - Type System]**
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**

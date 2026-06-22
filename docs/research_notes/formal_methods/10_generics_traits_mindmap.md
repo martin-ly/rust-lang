@@ -35,7 +35,7 @@
 
 ## 概念层次结构
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
                             泛型与Trait系统
@@ -55,7 +55,7 @@
 
 ## Trait类型详解
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 Trait分类
@@ -86,7 +86,7 @@ Trait分类
 
 ## 泛型约束
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 约束形式
@@ -246,21 +246,21 @@ Trait对象
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Generic Programming]**
+> **来源: [Wikipedia - Generic Programming](https://en.wikipedia.org/wiki/Generic_Programming)**
 
-> **[来源: TRPL Ch. 10 - Generics]**
+> **来源: [TRPL Ch. 10 - Generics](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)**
 
-> **[来源: Rust Reference - Generics]**
+> **来源: [Rust Reference - Generics](https://doc.rust-lang.org/reference/)**
 
-> **[来源: Wikipedia - Parametric Polymorphism]**
+> **来源: [Wikipedia - Parametric Polymorphism](https://en.wikipedia.org/wiki/Parametric_Polymorphism)**
 
-> **[来源: Wikipedia - Machine Learning]**
+> **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
 
-> **[来源: Wikipedia - Artificial Intelligence]**
+> **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)**
 
-> **[来源: tch-rs Documentation]**
+> **来源: [tch-rs Documentation](https://docs.rs/tch/latest/tch/)**
 
-> **[来源: ACM - AI Systems]**
+> **来源: [ACM - AI Systems](https://dl.acm.org/)**
 
 ---
 

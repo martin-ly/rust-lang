@@ -49,7 +49,7 @@
 
 ## 概念族谱概览
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 mindmap
@@ -127,13 +127,13 @@ mindmap
 
 ## 核心概念详解
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. CAP 定理
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义**: 分布式系统最多同时满足一致性、可用性、分区容错性中的两项。
 
@@ -154,7 +154,7 @@ struct DistributedSystem {
 
 ### 2. 共识算法对比
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 | 算法 | 容错类型 | 性能 | 复杂度 | Rust 实现 |
 |------|----------|------|--------|-----------|
@@ -164,7 +164,7 @@ struct DistributedSystem {
 
 ### 3. 数据分区策略
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 // 一致性哈希
@@ -191,7 +191,7 @@ impl ConsistentHash {
 
 ### 异步运行时对比
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```mermaid
 graph LR
@@ -209,7 +209,7 @@ graph LR
 
 ### 关键库生态系统
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 | 用途 | 推荐库 | 版本 |
 |------|--------|------|
@@ -227,7 +227,7 @@ graph LR
 
 ### 1. 熔断器模式
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust
 use std::sync::atomic::{AtomicU32, Ordering};
@@ -249,7 +249,7 @@ enum CircuitState {
 
 ### 2. 限流控制
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use std::sync::atomic::{AtomicU64, Ordering};
@@ -356,9 +356,9 @@ impl RateLimiter {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Mind Map]**
+> **来源: [Wikipedia - Mind Map](https://en.wikipedia.org/wiki/Mind_Map)**
 
-> **[来源: Wikipedia - Concept Map]**
+> **来源: [Wikipedia - Concept Map](https://en.wikipedia.org/wiki/Concept_Map)**
 
 > **[来源: ACM - Knowledge Visualization]**
 

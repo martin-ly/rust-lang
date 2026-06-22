@@ -27,7 +27,7 @@
 | T1.4 | 清理 `docs/` 与 `concept/` 重复内容 | P1 | T1.3 |
 | T1.5 | 清理 `archive/` deprecated 文件 | P1 | 无 |
 | T2.1 | 建立 `sources/` 权威来源索引库 | P0 | 无 |
-| T2.2 | 修复通用 `[来源: Rust Reference]` 标注为精确章节 | P1 | T2.1 |
+| T2.2 | 修复通用 `来源: [Rust Reference](https://doc.rust-lang.org/reference/)` 标注为精确章节 | P1 | T2.1 |
 | T2.3 | 更新 `07_future/05_rust_version_tracking.md` 至 1.90.0 | P1 | 无 |
 | T2.4 | 统一 Miri 别名模型为 Tree Borrows，补充对比代码 | P1 | 无 |
 | T2.5 | 建立 RFC 索引模板（覆盖 50 个关键 RFC） | P1 | T2.1 |

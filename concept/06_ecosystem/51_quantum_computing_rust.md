@@ -1,4 +1,6 @@
-> **EN**: Quantum Computing Rust
+# Rust 量子计算生态
+
+> **EN**: Rust in Quantum Computing Ecosystems
 > **Summary**: Quantum Computing Rust: Rust ecosystem tools, crates, and engineering practices.
 > **内容分级**: [实验级]
 

@@ -37,13 +37,13 @@
 
 ## 🚀 快速开始
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 安装优化工具
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Windows (PowerShell):**
 
@@ -60,9 +60,9 @@ chmod +x ./scripts/cargo-build-optimized.sh
 
 ### 2. 使用优化脚本编译
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```powershell
 # 快速检查（最快）
@@ -80,15 +80,15 @@ chmod +x ./scripts/cargo-build-optimized.sh
 
 ## ⚙️ 环境变量配置
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 将以下内容添加到你的 PowerShell 配置文件 (`$PROFILE`) 或 `.bashrc`/`.zshrc`：
 
 ### Windows (PowerShell)
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```powershell
 # 编译性能优化
@@ -114,7 +114,7 @@ $env:CARGO_PROFILE_RELEASE_CODEGEN_UNITS = "16"
 
 ### Linux/macOS (Bash/Zsh)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
 # 编译性能优化
@@ -138,7 +138,7 @@ export CARGO_PROFILE_RELEASE_CODEGEN_UNITS="16"
 
 ## 📊 优化效果对比
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 优化项 | 预期效果 | 配置位置 |
 |--------|----------|----------|
@@ -150,11 +150,11 @@ export CARGO_PROFILE_RELEASE_CODEGEN_UNITS="16"
 
 ## 🔧 配置文件说明
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### .cargo/config.toml
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 主要优化配置：
 
@@ -174,7 +174,7 @@ protocol = "sparse"
 
 ### Cargo.toml Profile 配置
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```toml
 [profile.dev]
@@ -193,7 +193,7 @@ codegen-units = 1024
 
 ## 🛠️ 推荐工具
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 工具 | 用途 | 安装命令 |
 |------|------|----------|
@@ -325,13 +325,13 @@ export CARGO_PROFILE_DEV_CODEGEN_UNITS=64
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Program Optimization]**
+> **来源: [Wikipedia - Program Optimization](https://en.wikipedia.org/wiki/Program_Optimization)**
 > **[来源: Criterion.rs]**
-> **[来源: ACM - Performance Engineering]**
-> **[来源: Rust Performance Book]**
-> **[来源: Wikipedia - Build Automation]**
-> **[来源: Cargo Book]**
-> **[来源: Rust Reference - Cargo]**
-> **[来源: crates.io Documentation]**
+> **来源: [ACM - Performance Engineering](https://dl.acm.org/)**
+> **来源: [The Rust Performance Book](https://nnethercote.github.io/perf-book/)**
+> **来源: [Wikipedia - Build Automation](https://en.wikipedia.org/wiki/Build_Automation)**
+> **来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)**
+> **来源: [Rust Reference - Cargo](https://doc.rust-lang.org/cargo/)**
+> **来源: [crates.io Documentation](https://crates.io/)**
 
 ---

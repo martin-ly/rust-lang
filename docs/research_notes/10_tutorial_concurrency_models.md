@@ -71,7 +71,7 @@
 
 ## 引言
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Rust提供了多种并发模型，从传统的线程到现代的异步编程。
 本教程将深入讲解Rust的并发模型及其适用场景。
@@ -80,13 +80,13 @@ Rust提供了多种并发模型，从传统的线程到现代的异步编程。
 
 ## 第一部分：并发基础
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 并发 vs 并行
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 概念 | 定义 | Rust支持 |
 | :--- | :--- | :--- |
@@ -109,9 +109,9 @@ Rust提供了多种并发模型，从传统的线程到现代的异步编程。
 
 ### Send 和 Sync
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // Send: 可安全跨线程转移所有权
@@ -134,13 +134,13 @@ pub unsafe auto trait Sync {}
 
 ## 第二部分：线程模型
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 创建线程
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 use std::thread;
@@ -160,9 +160,9 @@ handle.join().unwrap();
 
 ### 线程间通信
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 use std::sync::mpsc;
@@ -183,9 +183,9 @@ println!("Got: {}", received);
 
 ### 共享状态
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 use std::sync::{Arc, Mutex};
@@ -214,13 +214,13 @@ println!("Result: {}", *counter.lock().unwrap()); // 10
 
 ## 第三部分：同步原语
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Mutex vs RwLock
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 原语 | 读并发 | 写并发 | 适用场景 |
 | :--- | :--- | :--- | :--- |
@@ -245,9 +245,9 @@ let r2 = data.read().unwrap();
 
 ### 原子操作
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -281,7 +281,7 @@ counter.compare_exchange(current, new, Ordering::Acquire, Ordering::Relaxed);
 
 ### Future基础
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 use std::future::Future;
@@ -297,7 +297,7 @@ let result = f.await;  // 在async上下文中执行
 
 ### async/await
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 async fn fetch_data(url: &str) -> Result<String, Error> {
@@ -319,7 +319,7 @@ async fn fetch_multiple() -> Result<(), Error> {
 
 ### 运行时选择
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 | 运行时 | 特点 | 适用场景 |
 | :--- | :--- | :--- |
@@ -336,7 +336,7 @@ async fn fetch_multiple() -> Result<(), Error> {
 
 ### Fork-Join
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use rayon::prelude::*;
@@ -353,7 +353,7 @@ let (a, b) = rayon::join(
 
 ### 生产者-消费者
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use crossbeam::channel;
@@ -378,7 +378,7 @@ thread::spawn(move || {
 
 ### Actor模型
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use actix::prelude::*;
@@ -415,7 +415,7 @@ impl Handler<MyMessage> for MyActor {
 
 ### 选择合适的并发模型
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 场景 | 推荐模型 | 理由 |
 | :--- | :--- | :--- |
@@ -426,7 +426,7 @@ impl Handler<MyMessage> for MyActor {
 
 ### 避免常见陷阱
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 // ❌ 跨越await持有std Mutex
@@ -460,7 +460,7 @@ async fn good2() {
 
 ### 何时使用
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 - CPU密集型任务
 - 需要真正的并行
@@ -487,7 +487,7 @@ let result = handle.join().unwrap();
 
 ### 何时使用
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 - IO密集型
 - 高并发(数万连接)
@@ -515,7 +515,7 @@ async fn main() {
 
 ### 何时使用
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 - 数据处理
 - 集合操作
@@ -539,7 +539,7 @@ let sum: i32 = (0..1_000_000)
 
 ### 何时使用
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 - 分布式系统
 - 容错需求
@@ -611,13 +611,13 @@ impl Handler<Message> for MyActor {
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -628,7 +628,7 @@ impl Handler<Message> for MyActor {
 
 #### 代码示例更新
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 本文档中的所有Rust代码示例均已：
 
@@ -670,24 +670,24 @@ impl Handler<Message> for MyActor {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-> **[来源: Rust Reference]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-> **[来源: Rust Standard Library]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
-> **[来源: Rust Reference - std::sync]**
-> **[来源: ACM - Concurrent Programming]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [TRPL Ch. 16 - Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)**
+> **来源: [Rust Reference - std::sync](https://doc.rust-lang.org/std/sync/)**
+> **来源: [ACM - Concurrent Programming](https://dl.acm.org/)**
 
 ---
 

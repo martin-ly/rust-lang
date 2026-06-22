@@ -81,7 +81,7 @@
 
 ## 引言
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 借用检查器(Borrow Checker)是Rust编译器的核心组件，它在编译时检查代码的内存安全性，确保没有数据竞争、悬垂指针或使用已释放内存等问题。
 本教程将帮助你理解借用检查器的工作原理。
@@ -90,13 +90,13 @@
 
 ## 第一部分：为什么需要借用检查器
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 内存安全威胁
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 在传统语言中，以下问题是常见的：
 
@@ -120,9 +120,9 @@ void thread2() { counter++; }
 
 ### Rust的解决方案
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Rust在编译时阻止这些问题：
 
@@ -145,13 +145,13 @@ let ref2 = &mut counter;  // 错误: 不能有两个可变借用
 
 ## 第二部分：借用规则
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 三大规则
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **同一时间，只能有一个可变借用 (`&mut T`)**
 2. **可以有多个不可变借用 (`&T`)**
@@ -159,9 +159,9 @@ let ref2 = &mut counter;  // 错误: 不能有两个可变借用
 
 ### 规则的可视化
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```
 时间点 ──────────────────────────────────────>
@@ -197,13 +197,13 @@ let ref2 = &mut counter;  // 错误: 不能有两个可变借用
 
 ## 第三部分：不可变借用
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 基本用法
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 let s = String::from("hello");
@@ -217,9 +217,9 @@ println!("{}, {}, {}", r1, r2, r3);
 
 ### 为什么多个不可变借用是安全的
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 因为不可变借用保证不修改数据，所以多个读者不会相互影响：
 
@@ -235,11 +235,11 @@ println!("{}, {}, {}", r1, r2, r3);
 
 ## 第四部分：可变借用
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 独占性保证
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust
 let mut s = String::from("hello");
@@ -257,7 +257,7 @@ r2.push_str("!");
 
 ### 为什么需要独占性
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 可变借用允许修改数据，如果同时有两个可变借用：
 
@@ -280,7 +280,7 @@ Rust阻止这种情况，保证内存安全。
 
 ### 典型的冲突场景
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 let mut s = String::from("hello");
@@ -294,7 +294,7 @@ println!("{}, {}", r1, r2);
 
 ### 编译器错误分析
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```
 error[E0502]: cannot borrow `s` as mutable because it is also borrowed as immutable
@@ -312,7 +312,7 @@ error[E0502]: cannot borrow `s` as mutable because it is also borrowed as immuta
 
 ### 解决冲突
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 let mut s = String::from("hello");
@@ -335,7 +335,7 @@ r3.push_str(" world");
 
 ### 什么是NLL
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 Rust 2018引入了非词法生命周期，借用不再局限于词法作用域：
 
@@ -352,7 +352,7 @@ r2.push_str(" world");
 
 ### NLL的效果
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```
 词法生命周期 (旧):
@@ -378,7 +378,7 @@ r2.push_str(" world");
 
 ### 结构体中的借用
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 struct Parser<'a> {
@@ -404,7 +404,7 @@ fn main() {
 
 ### 自引用结构的问题
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 // 这不能编译!
@@ -426,7 +426,7 @@ struct SelfRef {
 
 ### 错误1: 值被移动后使用
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 let s = String::from("hello");
@@ -440,7 +440,7 @@ println!("{}", s);  // OK
 
 ### 错误2: 在借用期间修改
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 let mut s = String::from("hello");
@@ -456,7 +456,7 @@ s.push_str(" world");  // OK
 
 ### 错误3: 返回局部引用
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 fn bad() -> &String {
@@ -483,7 +483,7 @@ fn good2() -> &'static str {
 
 ### 当借用规则太严格时
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 有时需要在有不可变引用的情况下修改数据：
 
@@ -500,7 +500,7 @@ let mut r1 = cell.borrow_mut();  // 运行时检查的可变借用
 
 ### 内部可变性模式
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 类型 | 使用场景 | 线程安全 |
 | :--- | :--- | :--- |
@@ -517,7 +517,7 @@ let mut r1 = cell.borrow_mut();  // 运行时检查的可变借用
 
 ### 借用检查器的保证
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **定理**: 通过Rust编译器检查的代码保证：
 
@@ -528,7 +528,7 @@ let mut r1 = cell.borrow_mut();  // 运行时检查的可变借用
 
 ### 与形式化定义的关联
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 | 概念 | 形式化定义 | 文档 |
 | :--- | :--- | :--- |
@@ -576,7 +576,7 @@ let mut r1 = cell.borrow_mut();  // 运行时检查的可变借用
 
 ### 内存安全问题
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 // C语言中的错误
@@ -601,7 +601,7 @@ free(ptr);
 
 ### 规则1: 要么多个不可变借用，要么一个可变借用
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust
 let mut x = 5;
@@ -619,7 +619,7 @@ println!("{} {}", r1, r2);
 
 ### 规则2: 引用必须始终有效
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust
 let r;
@@ -638,7 +638,7 @@ let r;
 
 ### 借用检查算法
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```
 1. 为每个引用分配生命周期
@@ -649,7 +649,7 @@ let r;
 
 ### 生命周期标注
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
@@ -847,28 +847,28 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: Wikipedia - Resource Management]**
+> **来源: [Wikipedia - Resource Management](https://en.wikipedia.org/wiki/Resource_Management)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: TRPL Ch. 10 - Lifetimes]**
+> **来源: [TRPL Ch. 10 - Lifetimes](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)**
 
-> **[来源: Rust Reference - Borrow Checker]**
+> **来源: [Rust Reference - Borrow Checker](https://doc.rust-lang.org/reference/)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
 > **[来源: ACM - Borrow Checking Survey]**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ---
 

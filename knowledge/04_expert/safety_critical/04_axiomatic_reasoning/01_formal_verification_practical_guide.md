@@ -792,3 +792,29 @@ MIRIFLAGS="-Zmiri-stack-frame=16777216" cargo miri test
 >
 
 ---
+
+## 📚 模块 8: 国际化对齐
+
+> 本节按项目模板要求补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Rust Reference](https://doc.rust-lang.org/reference/) | 权威来源 | 语言参考 |
+| [a-mir-formality](https://github.com/rust-lang/a-mir-formality) | 权威来源 | 形式化类型系统 |
+
+### 8.2 学术来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | 权威来源 | 类型系统语义正确性 |
+| [Tree Borrows — PLDI 2025](https://perso.crans.org/vanille/treebor/) | 权威来源 | 别名模型 |
+| [RefinedRust — OOPSLA 2024](https://dl.acm.org/doi/10.1145/3689738) | 权威来源 | Iris 分离逻辑验证 |
+
+### 8.3 社区权威
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Kani docs](https://model-checking.github.io/kani/) | 权威来源 | 模型检验器 |
+| [Verus docs](https://verus-lang.github.io/verus/) | 权威来源 | SMT 验证器 |

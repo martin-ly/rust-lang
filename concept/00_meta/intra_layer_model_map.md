@@ -71,7 +71,7 @@ graph TD
 ```
 
 > **认知功能**: 本图将 L1 四大基础模型压缩为**可操作的认知单元**，揭示它们如何相互定义、相互约束。
-> [来源: [Rust Reference]]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 遇到编译错误时，根据错误类型（所有权/借用/生命周期/类型）定位到对应节点，沿边检查关联模型是否被违反。
 > **关键洞察**: 借用合法性同时依赖所有权（来源）和生命周期（时效），这解释了为何 borrow checker 错误常常需要同时调整多个「 seemingly unrelated 」的代码区域。
 > [来源: 💡 原创分析]
@@ -145,7 +145,7 @@ graph TD
 
     C -.->|≡ 进程代数| C_F[CCS/CSP]
     A -.->|≡ CPS| A_F[Continuation]
-    U -.->|≡ 操作语义| U_F[Stacked/Tree Borrows]
+    U -.->|≡ 操作语义| U_FStacked / [Tree Borrows — PLDI 2025](https://perso.crans.org/vanille/treebor/)
     M -.->|≡ 卫生宏| M_F[gensym]
 ```
 
@@ -177,7 +177,7 @@ graph TD
     LL[线性逻辑<br/>Girard 1987] -->|!A ↔ Copy| OF[所有权形式化<br/>COR / Oxide]
     LL -->|⊸ ↔ move| OF
     TT[类型论<br/>System F/HM] -->|类型安全 ⟹ 所有权安全| OF
-    TT -->|Progress+Preservation| RB[RustBelt<br/>Iris 逻辑]
+    TT -->|Progress+Preservation| RB[RustBelt](https://plv.mpi-sws.org/rustbelt/)
     OF -->|操作语义| RB
     RB -->|验证条件| VT[验证工具链<br/>Kani/Creusot]
     VT -->|反例/证明| RB

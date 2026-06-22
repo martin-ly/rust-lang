@@ -10,13 +10,13 @@
 > **形式化框架**: 延迟求值 + 协议编码 + 资源边界
 >
 > **参考**: defmt Documentation; Knuth (1974); Embedded Rust Book
-> **[来源: defmt Documentation - docs.rs/defmt]** · **[来源: Rust Embedded Book]** · **[来源: Knuth 1974 - Structured Programming with go to Statements]** · **[来源: Wikipedia - Logging]** · **[来源: Rust Reference - no_std]** · **[来源: RTIC Documentation - rtic.rs]** · **[来源: Wikipedia - Debugging]** · **[来源: ACM - Embedded Debugging Frameworks]** · **[来源: IEEE - Low-Overhead Instrumentation]**
+> **[来源: defmt Documentation - docs.rs/defmt]** · **来源: [Rust Embedded Book](https://doc.rust-lang.org/stable/embedded-book/)** · **[来源: Knuth 1974 - Structured Programming with go to Statements]** · **来源: [Wikipedia - Logging](https://en.wikipedia.org/wiki/Logging)** · **来源: [Rust Reference - no_std](https://doc.rust-lang.org/reference/names/preludes.html)** · **来源: [RTIC Documentation - rtic.rs](https://rtic.rs/)** · **来源: [Wikipedia - Debugging](https://en.wikipedia.org/wiki/Debugging)** · **[来源: ACM - Embedded Debugging Frameworks]** · **[来源: IEEE - Low-Overhead Instrumentation]**
 
 ---
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [defmt 延迟格式化日志形式化分析](#defmt-延迟格式化日志形式化分析)
   - [目录](#目录)
@@ -108,7 +108,7 @@
 
 ## 1. 引言
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 defmt (deferred formatting) 是一个专为资源受限嵌入式系统设计的日志框架，其核心创新在于将格式化操作从目标设备转移到主机端执行。这种架构使得在微控制器等受限环境中进行高效日志记录成为可能。
 
@@ -137,17 +137,17 @@ defmt通过协议分离将这些操作转移到主机，目标端仅需执行:
 
 ## 2. 理论基础
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 2.1 延迟格式化协议形式化定义
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 延迟格式化的核心思想是将日志操作分解为**目标端**和**主机端**两个分离的阶段。
 
 #### 定义 2.1 (延迟格式化协议)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 延迟格式化协议 $\mathcal{D}$ 是一个四元组:
 
@@ -181,7 +181,7 @@ defmt::info!("x = {=u8}", x);
 
 #### 定义 2.2 (格式化操作分解)
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 传统格式化操作可分解为:
 
@@ -202,11 +202,11 @@ $$
 
 ### 2.2 主机-目标通信模型
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 #### 定义 2.3 (通信信道)
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 defmt使用单向信道进行目标到主机的通信:
 
@@ -237,7 +237,7 @@ $$
 
 #### 定义 2.4 (协议状态机)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 defmt协议可建模为有限状态机:
 
@@ -265,11 +265,11 @@ $$
 
 ### 2.3 压缩编码的数学定义
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 #### 定义 2.5 (字符串表压缩)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 设源代码中所有格式字符串集合为 $S = \{s_1, s_2, \ldots, s_n\}$，压缩编码定义为:
 
@@ -292,7 +292,7 @@ $$
 
 #### 定理 2.1 (压缩比下界)
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 > 对于包含 $n$ 个不同格式字符串的程序，defmt的压缩比满足:
 >
@@ -341,11 +341,11 @@ $$
 
 ### 3.1 日志级别过滤的形式化
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 #### 定义 3.1 (日志级别格)
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 日志级别构成一个完全格 $(L, \sqsubseteq)$:
 
@@ -389,7 +389,7 @@ $$
 
 #### 定理 3.1 (编译时过滤完备性)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 > 对于任何日志语句 $log_l(m)$，若 $l \sqsubset c$（编译时阈值），则该语句不会产生任何运行时开销。
 
@@ -426,7 +426,7 @@ $$
 
 #### 定理 3.2 (运行时过滤一致性)
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 > 运行时过滤器的行为与编译时过滤器的语义一致，即:
 >
@@ -454,11 +454,11 @@ $$
 
 ### 3.2 字符串去重和索引机制
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 #### 定义 3.2 (字符串去重)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 设源代码中所有格式字符串的多重集合为 $M$，去重函数定义为:
 
@@ -484,7 +484,7 @@ $$
 
 #### 定理 3.3 (索引唯一性)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 > 每个唯一的格式字符串在字符串表中有且仅有一个索引。
 
@@ -525,11 +525,11 @@ $$
 
 ### 3.3 参数序列化规则
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 #### 定义 3.3 (参数编码)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 参数编码函数族 $\{ \mathcal{E}_t \}_{t \in \mathcal{T}}$，其中 $\mathcal{T}$ 为支持的类型集合:
 
@@ -553,7 +553,7 @@ $$
 
 #### 定理 3.4 (编码单射性)
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 > 对于任何类型 $t$，编码函数 $\mathcal{E}_t$ 是单射（一对一映射）。
 
@@ -582,11 +582,11 @@ $$
 
 ### 4.1 传输带宽定理
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 #### 定理 4.1 (传输带宽上界)
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 > 对于包含 $n$ 个参数的日志语句，传输数据量有上界:
 >
@@ -643,7 +643,7 @@ $$
 
 #### 定理 4.2 (压缩比分析)
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 > 相比标准格式化，defmt的压缩比满足:
 >
@@ -686,11 +686,11 @@ $$
 
 ### 4.2 零拷贝日志定理
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 #### 定理 4.3 (零拷贝保证)
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 > defmt日志操作不执行堆内存分配，所有操作在栈上完成。
 
@@ -746,11 +746,11 @@ offset += s.len();
 
 ### 4.3 格式化正确性定理
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 #### 定理 4.4 (格式化正确性)
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 > 对于任何日志语句 `defmt::info!(fmt, args)`，主机端解码后的输出与在目标端使用 `core::format_args!` 格式化的结果一致。
 
@@ -799,11 +799,11 @@ fn decode_log(frame: &Frame) -> String {
 
 ### 4.4 资源使用上界
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 #### 定理 4.5 (栈使用上界)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 > 单条defmt日志语句的最大栈使用量有编译时确定的上界:
 >
@@ -861,7 +861,7 @@ $$
 
 #### 定理 4.6 (时间复杂度)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 > defmt日志操作的时间复杂度为 $O(1)$，与日志内容无关。
 
@@ -900,11 +900,11 @@ $$
 
 ### 5.1 Format trait的形式化定义
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 #### 定义 5.1 (Format Trait)
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 `Format` trait 定义类型的可格式化性:
 
@@ -949,7 +949,7 @@ impl Format for Point {
 
 #### 定理 5.1 (Format一致性)
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 > 若类型 $T$ 实现 `Format`，则其编码表示与派生宏生成的解码器兼容。
 
@@ -969,11 +969,11 @@ $$
 
 ### 5.2 可格式化类型的约束
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 #### 定义 5.2 (可格式化类型)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 可格式化类型 $\mathcal{F}$ 归纳定义为:
 
@@ -1002,7 +1002,7 @@ $$
 
 #### 定理 5.2 (类型安全)
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 > defmt的类型系统在编译时阻止格式字符串与参数类型不匹配的日志语句。
 
@@ -1046,11 +1046,11 @@ struct Wrapper<T>(T);
 
 ### 5.3 生命周期与日志记录
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 #### 定理 5.3 (生命周期安全)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 > defmt日志操作对引用参数的生命周期要求与Rust借用规则一致。
 
@@ -1097,11 +1097,11 @@ defmt::info!("msg = {}", s.as_str());
 
 ### 6.1 栈分配保证
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 #### 定理 6.1 (纯栈分配)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 > defmt不使用堆分配器，所有内存使用在栈上完成。
 
@@ -1150,11 +1150,11 @@ $$
 
 ### 6.2 缓冲区溢出防护
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 #### 定理 6.2 (溢出防护)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 > defmt编码操作通过编译时计算缓冲区大小，防止运行时缓冲区溢出。
 
@@ -1202,11 +1202,11 @@ fn write_bytes(&mut self, bytes: &[u8]) {
 
 ### 6.3 并发日志安全
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 #### 定理 6.3 (线程安全)
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 > defmt在多线程/中断上下文中的日志操作是原子的或无锁的。
 
@@ -1274,11 +1274,11 @@ $$
 
 ### 7.1 时间复杂度分析
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 #### 定义 7.1 (日志操作时间)
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 日志操作时间 $T_{\text{log}}$ 定义为:
 
@@ -1294,7 +1294,7 @@ $$
 
 #### 定理 7.1 (O(1)日志操作)
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 > 对于固定参数数量的日志语句，defmt的执行时间为常数时间 $O(1)$。
 
@@ -1326,11 +1326,11 @@ $$
 
 ### 7.2 空间复杂度分析
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 #### 定理 7.2 (空间使用上界)
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 > defmt日志语句的空间复杂度为 $O(1)$，最大栈使用量由编译时类型分析确定。
 
@@ -1373,11 +1373,11 @@ const MAX_STACK: usize = {
 
 ### 7.3 与标准库对比
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 #### 定理 7.3 (性能优势)
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 > 相比 `core::fmt`，defmt在代码大小、执行时间和传输带宽方面都有显著优势。
 
@@ -1429,7 +1429,7 @@ $$
 
 ### 8.1 解码正确性证明
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 #### 定理 8.1 (解码正确性)
 
@@ -1470,7 +1470,7 @@ $$
 
 ### 8.2 完整性保证
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 #### 定理 8.2 (协议完整性)
 
@@ -1514,7 +1514,7 @@ $$
 
 ### 8.3 协议兼容性
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 #### 定理 8.3 (版本兼容性)
 
@@ -1564,7 +1564,7 @@ $$
 
 ### 9.1 浮点格式化陷阱
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 #### 反例 9.1 (浮点精度)
 
@@ -1605,7 +1605,7 @@ defmt::info!("amount = {}.{:02}", cents / 100, cents % 100);
 
 ### 9.2 大结构体日志开销
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 #### 反例 9.2 (大型结构体)
 
@@ -1668,7 +1668,7 @@ for chunk in data.readings.chunks(16) {
 
 ### 9.3 递归结构处理
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 #### 反例 9.3 (递归深度)
 
@@ -1758,7 +1758,7 @@ fn format_iter(&self, f: &mut Formatter) {
 
 ### 10.1 日志级别设计
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **级别选择策略**:
 
@@ -1801,7 +1801,7 @@ rustflags = [
 
 ### 10.2 结构化日志
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **使用结构体记录相关数据**:
 
@@ -1836,7 +1836,7 @@ defmt::info!("event = {}", Event {
 
 ### 10.3 与probe-rs集成
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **probe-rs运行配置**:
 
@@ -1883,7 +1883,7 @@ defmt::info!("operation took {} cycles", end - start);
 
 ### 学术论文
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 1. **Tichy, W. F.** (1998). *Tools for Embedded Systems Debugging*. IEEE Computer.
    - 关键贡献: 嵌入式调试技术综述
@@ -1903,7 +1903,7 @@ defmt::info!("operation took {} cycles", end - start);
 
 ### 技术文档
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 1. **defmt Contributors.** (2024). *defmt Documentation*. <https://defmt.ferrous-systems.com/>
    - 官方文档，API参考
@@ -1923,7 +1923,7 @@ defmt::info!("operation took {} cycles", end - start);
 
 ### 相关项目
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 1. **panic-probe.** panic处理与日志集成
 2. **cortex-m-rt.** 启动运行时支持
@@ -1932,7 +1932,7 @@ defmt::info!("operation took {} cycles", end - start);
 
 ### 形式化方法
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 1. **Pierce, B. C.** (2002). *Types and Programming Languages*. MIT Press.
     - 类型理论基础
@@ -1971,17 +1971,17 @@ defmt::info!("operation took {} cycles", end - start);
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Debugging]**
+> **来源: [Wikipedia - Debugging](https://en.wikipedia.org/wiki/Debugging)**
 
-> **[来源: Wikipedia - Stack Trace]**
+> **来源: [Wikipedia - Stack Trace](https://en.wikipedia.org/wiki/Stack_Trace)**
 
-> **[来源: Wikipedia - Logging]**
+> **来源: [Wikipedia - Logging](https://en.wikipedia.org/wiki/Logging)**
 
 > **[来源: IEEE - Low-Overhead Instrumentation]**
 
 > **[来源: ACM - Embedded Debugging Frameworks]**
 
-> **[来源: Rust Embedded Working Group]**
+> **来源: [Rust Embedded Working Group](https://rust-embedded.github.io/book/)**
 
 > **[来源: defmt.ets.rs Documentation]**
 
@@ -1991,19 +1991,19 @@ defmt::info!("operation took {} cycles", end - start);
 
 > **[来源: probe.rs Documentation]**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---
 

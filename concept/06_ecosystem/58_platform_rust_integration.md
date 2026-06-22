@@ -1,8 +1,10 @@
+# 将 Rust 集成到现有平台
+
 > **内容分级**: [专家级]
 >
 > **代码状态**: [综述级 — 待补充可编译示例]
 >
-> **EN**: Platform Rust Integration
+> **EN**: Integrating Rust into Existing Platforms and Codebases
 > **Summary**: Integrating Rust into large platforms: Android, Chromium, Linux, and bare-metal firmware.
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价

@@ -87,7 +87,7 @@
 
 ## 📋 概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本指南介绍如何使用 C06 异步编程模块的功能，包括 async/await、Future、异步运行时、Reactor 模式、Actor 模式等。
 
@@ -100,13 +100,13 @@
 
 ## 🚀 快速开始
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 基本异步函数
 
-> **[来源: Rust Reference - async/await]**
+> **来源: [Rust Reference - async/await](https://doc.rust-lang.org/reference/items/functions.html#async-functions)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use tokio::time::{sleep, Duration};
@@ -125,9 +125,9 @@ async fn main() {
 
 ### 并发执行
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use tokio::time::{sleep, Duration, Instant};
@@ -159,13 +159,13 @@ async fn main() {
 
 ## 📊 核心功能
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. Future Trait
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use std::future::Future;
@@ -194,15 +194,15 @@ async fn main() {
 
 ### 2. 异步运行时
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### Tokio 运行时
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use tokio::runtime::Runtime;
@@ -216,9 +216,9 @@ rt.block_on(async {
 
 #### 自定义运行时配置
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use tokio::runtime::Builder;
@@ -233,13 +233,13 @@ let rt = Builder::new_multi_thread()
 
 ### 3. 异步 I/O
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 文件 I/O
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use tokio::fs;
@@ -260,7 +260,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 #### 网络 I/O
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 use tokio::net::TcpListener;
@@ -291,7 +291,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 4. Reactor 模式
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use c06_async::reactor::Reactor;
@@ -309,7 +309,7 @@ reactor.run().await;
 
 ### 5. Actor 模式
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 use c06_async::actor::{Actor, ActorRef, Message};
@@ -339,7 +339,7 @@ async fn main() {
 
 ### 6. Async Closures
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 > **Rust 版本**: 1.96.0+ Stable
 > **相关文档**: [Async Closures 深度指南](../../crates/c06_async/docs/ASYNC_CLOSURES_GUIDE.md)
@@ -349,7 +349,7 @@ Rust 1.85 稳定了 async closures，引入了 `AsyncFn`、`AsyncFnMut`、`Async
 
 #### 基础语法
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 use std::time::Duration;
@@ -372,7 +372,7 @@ let moved = async move |x: i32| {
 
 #### 与旧范式对比
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 | 维度 | 旧范式 `\|x\| async move { ... }` | Async Closure `async \|x\| { ... }` (1.85.0+) |
 |------|----------------------------------|-----------------------------------------------|
@@ -384,7 +384,7 @@ let moved = async move |x: i32| {
 
 #### 在异步编程中的应用
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 /// 接受异步谓词的过滤函数
@@ -414,11 +414,11 @@ assert_eq!(evens, vec![2, 4]);
 
 ## ⚡ 性能优化
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 使用 select! 宏
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use tokio::time::{sleep, Duration, timeout};
@@ -441,7 +441,7 @@ async fn main() {
 
 ### 2. 使用 Stream
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 use tokio_stream::{self as stream, StreamExt};
@@ -458,7 +458,7 @@ async fn main() {
 
 ### 3. 背压处理
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use tokio::sync::mpsc;
@@ -481,11 +481,11 @@ while let Some(value) = rx.recv().await {
 
 ## 🔧 错误处理
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 异步错误传播
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 use std::error::Error;
@@ -507,7 +507,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
 ### Rust 1.95+ ControlFlow API 高级错误控制
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 Rust 1.95+ 标准库大幅增强了 `std::ops::ControlFlow<B, C>` 类型，使其成为异步错误处理和流控制的强大工具。与 `Result` 只能表示成功/失败不同，`ControlFlow` 可以显式表达三种语义：
 
@@ -520,7 +520,7 @@ pub enum ControlFlow<B, C = ()> {
 
 #### 为什么使用 ControlFlow？
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | 场景 | `Result<T, E>` | `ControlFlow<B, C>` |
 |------|---------------|---------------------|
@@ -532,7 +532,7 @@ pub enum ControlFlow<B, C = ()> {
 
 #### 异步流控制：批量任务处理
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
 use std::ops::ControlFlow;
@@ -661,7 +661,7 @@ async fn schedule_retry(items: Vec<(String, String)>) {
 
 #### 递归遍历与短路求值
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust,ignore
 use std::ops::ControlFlow;
@@ -724,7 +724,7 @@ async fn find_node_by_value() {
 
 #### ControlFlow 与 Try  trait 集成
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 use std::ops::ControlFlow;
@@ -770,7 +770,7 @@ async fn fold_all_errors<T, E>(
 
 #### 组合模式：ControlFlow 管道
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 use std::ops::ControlFlow;
@@ -856,11 +856,11 @@ impl Response {
 
 ## 🏗️ 异步编程模式（5+ 完整示例）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 模式 1: 取消与超时处理
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 use tokio::time::{timeout, Duration};
@@ -883,7 +883,7 @@ async fn with_timeout() -> Result<String, &'static str> {
 
 ### 模式 2: 限流与速率控制
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use tokio::time::{interval, Instant};
@@ -941,7 +941,7 @@ impl TokenBucket {
 
 ### 模式 3: 重试与退避策略
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use tokio::time::{sleep, Duration};
@@ -990,7 +990,7 @@ where
 
 ### 模式 4: 批处理与缓冲
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use tokio::sync::mpsc;
@@ -1047,7 +1047,7 @@ impl<T: Send + 'static> BatchProcessor<T> {
 
 ### 模式 5: 断路器模式
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use std::sync::Arc;
@@ -1134,11 +1134,11 @@ impl CircuitBreaker {
 
 ## 🌍 真实应用场景
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 场景 1: Web 服务器实现
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 use axum::{
@@ -1246,7 +1246,7 @@ struct CreateUserRequest {
 
 ### 场景 2: 数据处理管道
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 use tokio::sync::mpsc;
@@ -1377,7 +1377,7 @@ async fn store_batch(batch: &[ProcessedData]) -> Result<(), Box<dyn std::error::
 
 ### 场景 3: 实时消息系统
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use tokio::net::{TcpListener, TcpStream};
@@ -1515,11 +1515,11 @@ use tokio::sync::RwLock;
 
 ## 🐛 常见问题与解决方案
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 问题 1: 阻塞运行时
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 // ❌ 在异步上下文中阻塞 - 会导致整个线程阻塞
@@ -1547,7 +1547,7 @@ async fn blocking_operation() -> String {
 
 ### 问题 2: Future 必须 Send
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 // ❌ 非 Send 类型跨线程使用
@@ -1573,7 +1573,7 @@ async fn good_example() {
 
 ### 问题 3: 持有锁跨越 await 点
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 use tokio::sync::Mutex;
@@ -1608,7 +1608,7 @@ async fn better_example(mutex: &std::sync::Mutex<String>) {
 
 ### 问题 4: 忘记处理 Cancel Safety
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 // ❌ 非 cancel-safe: select! 取消分支可能导致数据丢失
@@ -1640,7 +1640,7 @@ async fn cancel_safe() {
 
 ### 问题 5: 递归 async 函数
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 // ❌ 编译错误：递归 async 函数
@@ -1675,7 +1675,7 @@ fn recursive_good(n: i32) -> Pin<Box<dyn Future<Output = i32> + Send>> {
 
 ## 📚 相关文档
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [完整文档](../../crates/c06_async/README.md)
 - [异步编程指南](../../crates/c06_async/docs/tier_02_guides/README.md)
@@ -1687,13 +1687,13 @@ fn recursive_good(n: i32) -> Pin<Box<dyn Future<Output = i32> + Send>> {
 
 ## 🆕 Rust 1.95+ 特性
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 > **适用版本**: Rust 1.96.0+
 
 ### ControlFlow 在异步编程中的应用
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 Rust 1.95+ 的 `ControlFlow` 类型可以用于异步流的提前终止：
 
@@ -1728,7 +1728,7 @@ async fn find_negative(items: &[i32]) -> Option<i32> {
 
 ### Peekable 迭代器增强
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 Rust 1.95+ 为 `Peekable` 添加了 `next_if_map`，可用于异步解析器：
 
@@ -1748,14 +1748,14 @@ async fn parse_number(chars: &mut Peekable<impl Iterator<Item = char>>) -> Optio
 
 ### `cfg_select!` 在异步配置中的应用
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 Rust 1.95 稳定的 `cfg_select!` 宏可以在表达式位置进行多分支条件编译，
 在异步编程中常用于跨平台运行时配置和特性门控。
 
 #### 跨平台异步运行时配置
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 /// 根据目标平台选择最优的线程池大小
@@ -1789,7 +1789,7 @@ async fn create_runtime() -> tokio::runtime::Runtime {
 
 #### 特性门控的异步模块加载
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 /// 根据编译特性选择不同的 HTTP 客户端后端
@@ -1815,7 +1815,7 @@ async fn fetch_data(url: &str) -> Result<String, Box<dyn std::error::Error>> {
 
 ## 🔗 形式化引用
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本指南中的概念与以下形式化定理/定义对应：
 
@@ -1895,40 +1895,40 @@ graph TD
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: Wikipedia - Cooperative Multitasking]**
-> **[来源: TRPL Ch. 17 - Async]**
-> **[来源: Rust Reference - async/await]**
-> **[来源: Tokio Documentation]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+> **来源: [Wikipedia - Cooperative Multitasking](https://en.wikipedia.org/wiki/Cooperative_Multitasking)**
+> **来源: [TRPL Ch. 17 - Async](https://doc.rust-lang.org/book/ch17-00-async-await.html)**
+> **来源: [Rust Reference - async/await](https://doc.rust-lang.org/reference/items/functions.html#async-functions)**
+> **来源: [Tokio Documentation](https://tokio.rs/)**
 > **[来源: ACM - Async Programming Models]**
-> **[来源: RFC 2394 - Async/Await]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: TRPL Ch. 17 - Async]**
-> **[来源: Tokio Documentation]**
-> **[来源: RFC 2394 - Async/Await]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Wikipedia - Type System]**
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [RFC 2394 - Async/Await](https://rust-lang.github.io/rfcs/2394-2394-async_await.html)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+> **来源: [TRPL Ch. 17 - Async](https://doc.rust-lang.org/book/ch17-00-async-await.html)**
+> **来源: [Tokio Documentation](https://tokio.rs/)**
+> **来源: [RFC 2394 - Async/Await](https://rust-lang.github.io/rfcs/2394-2394-async_await.html)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ---

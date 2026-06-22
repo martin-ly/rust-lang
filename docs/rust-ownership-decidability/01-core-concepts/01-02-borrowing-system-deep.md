@@ -13,9 +13,9 @@
 
 ## Table of Contents
 
-> **[来源: Rust Reference - Borrow Checker]**
+> **来源: [Rust Reference - Borrow Checker](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Reference - Borrowing]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon - docs.rust-lang.org/nomicon]** · **[来源: TRPL Ch. 4]** · **[来源: Wikipedia - Resource Acquisition Is Initialization]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Wikipedia - Type System]** · **[来源: Wikipedia - Memory Safety]** · **[来源: IEEE - Software Reliability Engineering]** · **[来源: ACM Computing Surveys - Memory Management]**
+> **来源: [Rust Reference - Borrowing](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon - docs.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [TRPL Ch. 4](https://doc.rust-lang.org/book/ch04-00-ownership.html)** · **来源: [Wikipedia - Resource Acquisition Is Initialization](https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)** · **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)** · **[来源: IEEE - Software Reliability Engineering]** · **[来源: ACM Computing Surveys - Memory Management]**
 
 - [01-02: The Rust Borrowing System - A Formal Deep Dive](#01-02-the-rust-borrowing-system---a-formal-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -175,9 +175,9 @@
 
 ## 1. Introduction and Overview
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 The Rust borrowing system represents one of the most significant innovations in programming language design.
 While ownership establishes the foundation for memory safety without garbage collection,
@@ -186,9 +186,9 @@ This chapter provides a comprehensive, formal treatment of Rust's borrowing sema
 
 ### 1.1 The Fundamental Insight
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 The core insight of Rust's borrowing system is that memory safety violations arise from **aliasing combined with mutation**.
 If we can ensure that:
@@ -201,7 +201,7 @@ Then we have achieved memory safety without runtime overhead.
 
 ### 1.2 Historical Context
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 The concept of borrowing has roots in several areas:
 
@@ -214,7 +214,7 @@ Rust's innovation was combining these theoretical foundations with practical usa
 
 ### 1.3 Chapter Roadmap
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 This chapter proceeds as follows:
 
@@ -230,17 +230,17 @@ This chapter proceeds as follows:
 
 ## 2. Borrowing Formal Semantics
 
-> **[来源: TRPL Ch. 10 - Lifetimes]**
+> **来源: [TRPL Ch. 10 - Lifetimes](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)**
 
 We begin with a formal operational semantics for Rust's borrowing system. Our presentation uses a standard natural deduction style with contexts, judgments, and inference rules.
 
 ### 2.1 Preliminaries
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 #### 2.1.1 Syntax
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```text
 Types:
@@ -265,7 +265,7 @@ Program Points:
 
 #### 2.1.2 Contexts
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```text
 Γ ::= ∅ | Γ, x: T                 (typing context)
@@ -278,7 +278,7 @@ where `kind ∈ {shared, mut}`
 
 ### 2.2 Borrow Judgment
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 The fundamental judgment for borrowing is:
 
@@ -288,7 +288,7 @@ The fundamental judgment for borrowing is:
 
 #### 2.2.1 Immutable Borrow Rule
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```text
       Γ ⊢ x: T
@@ -306,7 +306,7 @@ The lifetime `'a` represents the scope during which this reference is valid.
 
 #### 2.2.2 Mutable Borrow Rule
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```text
         Γ ⊢ x: T
@@ -324,7 +324,7 @@ Conditions:
 
 #### 2.2.3 Dereference Rules
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```text
       Γ ⊢ e: &'a T
@@ -342,11 +342,11 @@ Conditions:
 
 ### 2.3 Lifetime Parameters
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 #### 2.3.1 Lifetime Quantification
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```text
 ∀'a. 'a: lifetime → &'a T is valid for 'a
@@ -356,7 +356,7 @@ This states that for any lifetime `'a`, a reference `&'a T` is valid throughout 
 
 #### 2.3.2 Lifetime Constraints
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```text
 'a: 'b  (read as: 'a outlives 'b)
@@ -367,7 +367,7 @@ Meaning: The lifetime 'a encompasses at least all program points in 'b
 
 #### 2.3.3 Lifetime in Function Signatures
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```text
 fn foo<'a, 'b>(x: &'a T, y: &'b U) -> &'a V where 'a: 'b
@@ -378,11 +378,11 @@ fn foo<'a, 'b>(x: &'a T, y: &'b U) -> &'a V where 'a: 'b
 
 ### 2.4 Operational Semantics
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 #### 2.4.1 Small-Step Semantics
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 We define the transition relation `⟨Σ, e⟩ → ⟨Σ', e'⟩`:
 
@@ -406,7 +406,7 @@ We define the transition relation `⟨Σ, e⟩ → ⟨Σ', e'⟩`:
 
 #### 2.4.2 Memory Model
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 The memory model tracks:
 
@@ -417,11 +417,11 @@ Ownership O ::= Path → {owned, borrowed(shared, n), borrowed(mut), moved}
 
 ### 2.5 Type Rules for Borrowing
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 #### 2.5.1 Subtyping with Lifetimes
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```text
 'a: 'b
@@ -438,7 +438,7 @@ Ownership O ::= Path → {owned, borrowed(shared, n), borrowed(mut), moved}
 
 #### 2.5.2 Variance Rules
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```text
 Type                Variance in 'a        Variance in T
@@ -456,13 +456,13 @@ fn(T) -> U          Contravariant         Covariant
 
 ## 3. Borrowing Rules Formalization
 
-> **[来源: Rustonomicon - Lifetimes]**
+> **来源: [Rustonomicon - Lifetimes](https://doc.rust-lang.org/nomicon/)**
 
 This section formalizes the core theorems that govern Rust's borrowing behavior.
 
 ### 3.1 Theorem: BORROW-XOR-MUTATE
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **Statement**: At any program point p, for any value v:
 
@@ -472,7 +472,7 @@ This section formalizes the core theorems that govern Rust's borrowing behavior.
 
 #### 3.1.1 Formal Statement
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```text
 ∀p ∈ ProgramPoints. ∀v ∈ Values.
@@ -483,7 +483,7 @@ This section formalizes the core theorems that govern Rust's borrowing behavior.
 
 #### 3.1.2 Proof
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **Proof by induction on program execution trace**:
 
@@ -515,7 +515,7 @@ Thus the property is preserved. ∎
 
 #### 3.1.3 Consequences
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 This theorem ensures:
 
@@ -525,7 +525,7 @@ This theorem ensures:
 
 ### 3.2 Theorem: BORROW-DOESNT-TRANSFER
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **Statement**: Borrowing creates a view (reference), not a transfer of ownership:
 
@@ -535,7 +535,7 @@ owns(x, T) ⊢ &x: &T ⊸ owns(x, T)
 
 #### 3.2.1 Formal Statement
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 Given:
 
@@ -549,7 +549,7 @@ When `r` goes out of scope:
 
 #### 3.2.2 Proof
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **Proof by operational semantics**:
 
@@ -561,7 +561,7 @@ The key insight is that ownership is temporarily restricted, not transferred. Th
 
 #### 3.2.3 Contrast with Move Semantics
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```text
 // Move: ownership transfers permanently
@@ -575,7 +575,7 @@ let y = &x;         // x is borrowed, can use x after y drops
 
 ### 3.3 Theorem: MUTABLE-BORROW-EXCLUSIVITY
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **Statement**: `&mut T` guarantees unique access:
 
@@ -585,7 +585,7 @@ let y = &x;         // x is borrowed, can use x after y drops
 
 #### 3.3.1 Formal Statement
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 At any program point:
 
@@ -595,7 +595,7 @@ At any program point:
 
 #### 3.3.2 Proof
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **Proof by contradiction**:
 
@@ -615,7 +615,7 @@ All cases lead to contradiction or require that the borrows are not simultaneous
 
 ### 3.4 Theorem: BORROW-LIFETIME-VALIDITY
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **Statement**: All borrows are valid for their entire lifetime:
 
@@ -625,7 +625,7 @@ All cases lead to contradiction or require that the borrows are not simultaneous
 
 #### 3.4.1 Formal Statement
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 For any borrow `r = &x` with lifetime `'a`:
 
@@ -635,7 +635,7 @@ For any borrow `r = &x` with lifetime `'a`:
 
 #### 3.4.2 Proof
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **Proof by lifetime construction**:
 
@@ -649,13 +649,13 @@ By construction, `x` must outlive `'a`. ∎
 
 ### 3.5 Theorem: NO-DANGLING-REFERENCES
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **Statement**: Well-typed Rust programs have no dangling references.
 
 #### 3.5.1 Formal Statement
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```text
 ⊢ e: T ⟹ ¬∃r ∈ references(e). dangling(r)
@@ -663,7 +663,7 @@ By construction, `x` must outlive `'a`. ∎
 
 #### 3.5.2 Proof
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **Proof by type system soundness**:
 
@@ -681,17 +681,17 @@ By construction, `x` must outlive `'a`. ∎
 
 ## 4. Lifetime Analysis
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 This section formalizes how Rust analyzes and checks lifetimes.
 
 ### 4.1 Lifetime as Sets of Program Points
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 #### 4.1.1 Definition
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 A lifetime `'a` is a set of program points:
 
@@ -701,7 +701,7 @@ A lifetime `'a` is a set of program points:
 
 #### 4.1.2 Program Points
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```text
 p ::=
@@ -716,7 +716,7 @@ p ::=
 
 #### 4.1.3 Lifetime Construction
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 For a variable `x` declared at point `def(x)`:
 
@@ -726,11 +726,11 @@ lifetime(x) = {p | p is between def(x) and last_use(x)} ∪ {drop(x)}
 
 ### 4.2 Lifetime Inclusion
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 #### 4.2.1 Definition
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```text
 'a ⊆ 'b means 'a outlives 'b (equivalently: 'b lives within 'a)
@@ -738,7 +738,7 @@ lifetime(x) = {p | p is between def(x) and last_use(x)} ∪ {drop(x)}
 
 #### 4.2.2 Formal Definition
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```text
 'a: 'b ⟺ 'b ⊆ 'a
@@ -752,7 +752,7 @@ As sets:
 
 #### 4.2.3 Visual Representation
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```text
 Program execution: →→→→→→→→→→→→→→→→→
@@ -764,11 +764,11 @@ Program execution: →→→→→→→→→→→→→→→→→
 
 ### 4.3 Lifetime Constraint Solving
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 #### 4.3.1 Constraint Generation
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 Given a program, we generate constraints:
 
@@ -785,7 +785,7 @@ fn foo<'a>() -> &'a T  ⟹  'a: 'output_lifetime
 
 #### 4.3.2 Constraint Graph
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```text
 'a: 'b  becomes edge: 'b → 'a
@@ -800,7 +800,7 @@ Graph: 'c → 'b → 'a → 'static
 
 #### 4.3.3 Constraint Solving Algorithm
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 fn solve_constraints(constraints: &[Constraint]) -> Result<Assignment, Error> {
@@ -834,11 +834,11 @@ fn solve_constraints(constraints: &[Constraint]) -> Result<Assignment, Error> {
 
 ### 4.4 Lifetime Elision Rules (Formal)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 #### 4.4.1 Elision Desugaring
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 Rust allows eliding lifetimes in common patterns. Here is the formal desugaring:
 
@@ -878,7 +878,7 @@ fn foo<'a, 'b, 'c>(x: &'a T, y: &'b U) -> &'c V
 
 #### 4.4.2 Formal Elision Function
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```text
 elide(fn) = match fn.inputs {
@@ -894,11 +894,11 @@ elide(fn) = match fn.inputs {
 
 ### 4.5 Lifetime Subtyping in Detail
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 #### 4.5.1 Covariance
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```text
 'a: 'b
@@ -910,7 +910,7 @@ Meaning: A longer-lived reference can be used where a shorter-lived one is expec
 
 #### 4.5.2 Contravariance
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```text
 'a: 'b
@@ -922,7 +922,7 @@ Meaning: A function accepting shorter-lived references can accept longer-lived o
 
 #### 4.5.3 Invariance
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```text
 T = U
@@ -938,13 +938,13 @@ Meaning: No subtyping allowed - types must be exactly equal.
 
 ## 5. Counter-Examples: The 15 Canonical Cases
 
-> **[来源: ACM - Ownership Types]**
+> **来源: [ACM - Ownership Types](https://dl.acm.org/)**
 
 This section presents 15 canonical counter-examples that illustrate common borrow checker errors and their resolutions.
 
 ### 5.1 Counter-Example 1: Mutable Borrow While Immutable Active
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **Problem**: Attempting to create a mutable borrow while immutable borrows are active.
 
@@ -996,7 +996,7 @@ fn main() {
 
 ### 5.2 Counter-Example 2: Two Mutable Borrows
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **Problem**: Attempting to create two simultaneous mutable borrows.
 
@@ -1049,7 +1049,7 @@ fn main() {
 
 ### 5.3 Counter-Example 3: Borrow Across Function Boundary
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **Problem**: Returning a reference to a local variable.
 
@@ -1093,7 +1093,7 @@ fn get_reference<'a>(x: &'a i32) -> &'a i32 {
 
 ### 5.4 Counter-Example 4: Return Local Reference
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **Problem**: More complex case of returning a reference to stack data.
 
@@ -1140,7 +1140,7 @@ fn get_config_string() -> String {
 
 ### 5.5 Counter-Example 5: Self-Referential Struct
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **Problem**: Struct containing a reference to its own field.
 
@@ -1200,7 +1200,7 @@ struct Parser {
 
 ### 5.6 Counter-Example 6: Lifetime Variance Confusion
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **Problem**: Incorrect assumptions about lifetime variance.
 
@@ -1251,7 +1251,7 @@ fn use_correctly() {
 
 ### 5.7 Counter-Example 7: Higher-Ranked Trait Bounds
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **Problem**: Incorrect HRTB usage.
 
@@ -1291,7 +1291,7 @@ where
 
 ### 5.8 Counter-Example 8: Lifetime in Associated Types
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **Problem**: Lifetime constraints in associated types.
 
@@ -1347,7 +1347,7 @@ trait Container {
 
 ### 5.9 Counter-Example 9: GAT Lifetime Constraints
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **Problem**: Generic Associated Types with incorrect lifetime constraints.
 
@@ -1397,7 +1397,7 @@ impl<'t> LendingIterator for WindowIter<'t> {
 
 ### 5.10 Counter-Example 10: Impl Trait Lifetime Capture
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **Problem**: Lifetime elision with `impl Trait`.
 
@@ -1450,7 +1450,7 @@ fn use_iter_correctly() {
 
 ### 5.11 Counter-Example 11: Async Lifetime Issues
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **Problem**: Lifetimes across await points.
 
@@ -1499,7 +1499,7 @@ async fn caller_fixed() {
 
 ### 5.12 Counter-Example 12: Iterator Invalidation
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **Problem**: Modifying a collection while iterating.
 
@@ -1551,7 +1551,7 @@ fn main() {
 
 ### 5.13 Counter-Example 13: Vec Reallocation Invalidation
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **Problem**: References invalidated by vector growth.
 
@@ -1604,7 +1604,7 @@ fn main() {
 
 ### 5.14 Counter-Example 14: String Slice Invalidation
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **Problem**: String slices invalidated by mutation.
 
@@ -1651,7 +1651,7 @@ fn main() {
 
 ### 5.15 Counter-Example 15: Closure Lifetime Capture
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **Problem**: Closures capturing references with incorrect lifetimes.
 
@@ -1703,13 +1703,13 @@ fn use_closure_fixed() {
 
 ## 6. Non-Lexical Lifetimes (NLL)
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 Non-Lexical Lifetimes (NLL) represent a significant evolution in Rust's borrow checker. Introduced in Rust 2018, NLL allows borrows to end before the end of their lexical scope, based on actual usage rather than block structure.
 
 ### 6.1 The Problem with Lexical Lifetimes
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 Before NLL, lifetimes were tied to lexical scopes:
 
@@ -1729,13 +1729,13 @@ Under lexical lifetimes, `x` was considered alive until the end of the block, ev
 
 ### 6.2 NLL Algorithm
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 NLL uses dataflow analysis to determine when borrows actually end.
 
 #### 6.2.1 Core Algorithm
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```text
 1. Build Control Flow Graph (CFG)
@@ -1746,7 +1746,7 @@ NLL uses dataflow analysis to determine when borrows actually end.
 
 #### 6.2.2 Dataflow Analysis
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 // Borrow set computation
@@ -1779,7 +1779,7 @@ fn liveness_analysis(cfg: &Cfg, borrow_set: &BorrowSet) -> Liveness {
 
 #### 6.2.3 Borrow Conflict Detection
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
 fn check_borrows(cfg: &Cfg, liveness: &Liveness) -> Result<(), Vec<BorrowError>> {
@@ -1819,11 +1819,11 @@ fn check_borrows(cfg: &Cfg, liveness: &Liveness) -> Result<(), Vec<BorrowError>>
 
 ### 6.3 NLL Examples
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 #### 6.3.1 Basic Example
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust
 fn nll_basic() {
@@ -1838,7 +1838,7 @@ fn nll_basic() {
 
 #### 6.3.2 Branching Example
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 fn nll_branching(cond: bool) {
@@ -1855,7 +1855,7 @@ fn nll_branching(cond: bool) {
 
 #### 6.3.3 Loop Example
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 fn nll_loop() {
@@ -1872,7 +1872,7 @@ fn nll_loop() {
 
 #### 6.3.4 Complex Control Flow
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 fn nll_complex(data: &mut Vec<i32>) {
@@ -1891,7 +1891,7 @@ fn nll_complex(data: &mut Vec<i32>) {
 
 ### 6.4 Two-Phase Borrows
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 NLL introduces two-phase borrows for method calls:
 
@@ -1909,7 +1909,7 @@ fn two_phase_example() {
 
 #### 6.4.1 Formalization
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```text
 Two-phase borrow phases:
@@ -1923,7 +1923,7 @@ Transition:
 
 ### 6.5 Limitations of NLL
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 NLL still has limitations:
 
@@ -1946,17 +1946,17 @@ fn nll_limitation() {
 
 ## 7. Polonius: Next-Generation Borrow Checker
 
-> **[来源: RFC 2094 - NLL]**
+> **来源: [RFC 2094 - NLL](https://rust-lang.github.io/rfcs/2094-2094-nll.html)**
 
 Polonius represents the next generation of Rust's borrow checker, using a fundamentally different approach based on "origins" rather than scopes.
 
 ### 7.1 Origins vs Scopes
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 #### 7.1.1 NLL Approach (Scopes)
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```text
 NLL: Track where borrows are active (scope-based)
@@ -1965,7 +1965,7 @@ NLL: Track where borrows are active (scope-based)
 
 #### 7.1.2 Polonius Approach (Origins)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```text
 Polonius: Track where data flows (origin-based)
@@ -1976,11 +1976,11 @@ A loan is a borrow expression like `&x` or `&mut y`
 
 ### 7.2 Origin-Based Analysis
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 #### 7.2.1 Core Concept
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 Polonius asks: "What loans could this reference be based on?"
 
@@ -1995,7 +1995,7 @@ let y = x;          // y has same origin as x: {L1}
 
 #### 7.2.2 Dataflow Equations
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```text
 // Origin computation
@@ -2010,11 +2010,11 @@ conflict(p) = ∃l ∈ active_loans(p). conflicts_with(l, operation_at(p))
 
 ### 7.3 Polonius vs NLL
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 #### 7.3.1 Example: Conditional Borrows
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 // Code that NLL rejects but Polonius accepts
@@ -2038,7 +2038,7 @@ fn polonius_wins(cond: bool) {
 
 #### 7.3.2 Example: Loop Carried Dependencies
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust
 // Polonius handles complex loop patterns better
@@ -2054,11 +2054,11 @@ fn loop_pattern(data: &mut [i32]) {
 
 ### 7.4 Polonius Algorithm
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 #### 7.4.1 Datalog Formulation
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 Polonius is expressed as Datalog rules:
 
@@ -2119,7 +2119,7 @@ impl PoloniusEngine {
 
 ### 7.5 Polonius Benefits
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 1. **More permissive**: Accepts valid programs NLL rejects
 2. **Unified model**: Same model for borrow checking and lifetime errors
@@ -2128,7 +2128,7 @@ impl PoloniusEngine {
 
 ### 7.6 Polonius Status
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 As of Rust 1.94, Polonius is available as an experimental feature:
 
@@ -2148,7 +2148,7 @@ This section explores advanced borrowing patterns in Rust.
 
 ### 8.1 Reborrowing
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 #### 8.1.1 Definition
 
@@ -2200,7 +2200,7 @@ fn loop_reborrow(items: &mut Vec<String>) {
 
 ### 8.2 Splitting Borrows
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 #### 8.2.1 Slice Splitting
 
@@ -2246,7 +2246,7 @@ fn split_array<T>(arr: &mut [T; 4]) -> (&mut T, &mut T, &mut T, &mut T) {
 
 ### 8.3 Borrowing with Interior Mutability
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 #### 8.3.1 Cell Types
 
@@ -2291,7 +2291,7 @@ Cell<&'static str> <: Cell<&'a str> is FALSE
 
 ### 8.4 Lending Iterator Pattern
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 #### 8.4.1 Definition
 
@@ -2354,7 +2354,7 @@ impl<'input> LendingIterator for Parser<'input> {
 
 ### 8.5 Self-Referential Structs with Pin
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 #### 8.5.1 The Problem
 
@@ -2420,7 +2420,7 @@ This section provides a detailed analysis of how the borrow checker interacts wi
 
 ### 9.1 HashMap Overview
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 pub struct HashMap<K, V, S = RandomState> {
@@ -2436,7 +2436,7 @@ impl<K, V, S> HashMap<K, V, S> {
 
 ### 9.2 Iterator Types
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 pub struct IterMut<'a, K, V> {
@@ -2455,7 +2455,7 @@ impl<'a, K, V> Iterator for IterMut<'a, K, V> {
 
 ### 9.3 Borrow Checker Analysis
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 #### 9.3.1 Lifetime Relationships
 
@@ -2493,7 +2493,7 @@ Reason: Changing keys would change their hash values, invalidating the hash tabl
 
 ### 9.4 Advanced Pattern: Entry API
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 #### 9.4.1 Entry Definition
 
@@ -2522,7 +2522,7 @@ fn entry_example(map: &mut HashMap<String, i32>) {
 
 ### 9.5 Concurrent Access Pattern
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 #### 9.5.1 The Problem
 
@@ -2566,7 +2566,7 @@ fn solution3(map: &mut HashMap<String, i32>) {
 
 ### 9.6 Performance Implications
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 The borrow checker's constraints on HashMap iterators have performance implications:
 
@@ -2578,13 +2578,13 @@ The borrow checker's constraints on HashMap iterators have performance implicati
 
 ## 10. Appendix: Rust 1.94 Features
 
-> **[来源: Rust Reference - Borrow Checker]**
+> **来源: [Rust Reference - Borrow Checker](https://doc.rust-lang.org/reference/)**
 
 This appendix covers borrow checker features and improvements in Rust 1.94.
 
 ### 10.1 Precise Capturing (Rust 1.82+)
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 // Rust 1.82+ precise capturing
@@ -2599,7 +2599,7 @@ fn precise_capture<'a, 'b>(
 
 ### 10.2 Lifetime Binder Syntax
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 // Rust 1.87+ improved lifetime syntax
@@ -2611,7 +2611,7 @@ fn foo<T, U>(x: &U) where U: for<'a> Trait<'a> { }
 
 ### 10.3 const Mut References
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 // Rust 1.83+ const mutable references
@@ -2622,7 +2622,7 @@ const fn modify_in_const(x: &mut i32) {
 
 ### 10.4 Pin Enhancements
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 // Rust 1.82+ Pin::as_deref_mut
@@ -2635,7 +2635,7 @@ impl<P: DerefMut> Pin<P> {
 
 ### 10.5 async Closure Improvements
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 // Rust 1.84+ async closure improvements
@@ -2648,7 +2648,7 @@ let closure = async || {
 
 ## Summary
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
 This chapter has provided a comprehensive formal treatment of Rust's borrowing system:
 
@@ -2678,7 +2678,7 @@ The borrowing system is the cornerstone of Rust's memory safety guarantees, enab
 
 ## References
 
-> **[来源: TRPL Ch. 10 - Lifetimes]**
+> **来源: [TRPL Ch. 10 - Lifetimes](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)**
 
 1. Matsakis, N. D., & Klock, F. S. (2014). The Rust Language. ACM SIGAda Ada Letters.
 
@@ -2714,13 +2714,13 @@ The borrowing system is the cornerstone of Rust's memory safety guarantees, enab
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Borrowing (computer science)]**
+> **来源: [Wikipedia - Borrowing (computer science)](https://en.wikipedia.org/wiki/Borrowing_(computer_science))**
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: Wikipedia - Alias Analysis]**
+> **来源: [Wikipedia - Alias Analysis](https://en.wikipedia.org/wiki/Alias_Analysis)**
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 > **[来源: IEEE - Software Reliability Engineering]**
 
@@ -2728,35 +2728,35 @@ The borrowing system is the cornerstone of Rust's memory safety guarantees, enab
 
 > **[来源: ACM - Safe Systems Programming Languages]**
 
-> **[来源: POPL 2018 - RustBelt: Securing the Foundations of the Rust Programming Language]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: Rust Reference - Borrowing]**
+> **来源: [Rust Reference - Borrowing](https://doc.rust-lang.org/reference/)**
 
-> **[来源: TRPL Ch. 4 - Understanding Ownership]**
+> **来源: [TRPL Ch. 4 - Understanding Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages Survey]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design and Implementation]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM - Systems Programming Languages Survey](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI - Programming Language Design and Implementation](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---

@@ -19,9 +19,9 @@
 > **后置概念**: [Concurrency](../03_advanced/01_concurrency.md) ·
 > [Async](../03_advanced/02_async.md)
 > **主要来源**: [TRPL: Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) ·
-> [Rust Reference: Errors] ·
-> [Wikipedia: Exception handling] ·
-> [RFC 243]
+> [Rust Reference: Errors](https://doc.rust-lang.org/reference/) ·
+> [Wikipedia: Exception handling](https://en.wikipedia.org/wiki/Exception_handling) ·
+> [RFC 243](https://rust-lang.github.io/rfcs/0243-0243-trait-based-exception-handling.html)
 
 ---
 **变更日志**:
@@ -140,14 +140,14 @@
 ### 1.1 Wikipedia 对齐定义
 >
 
-> **[Wikipedia: Exception handling]** Exception handling is the process of responding to the occurrence of exceptions – anomalous or exceptional conditions requiring special processing – during the execution of a program. Rust does not use exceptions; instead, it uses the algebraic data types `Option<T>` and `Result<T, E>` for error handling, with the `?` operator for ergonomic propagation.
+> **[Wikipedia: Exception handling](https://en.wikipedia.org/wiki/Exception_handling)** Exception handling is the process of responding to the occurrence of exceptions – anomalous or exceptional conditions requiring special processing – during the execution of a program. Rust does not use exceptions; instead, it uses the algebraic data types `Option<T>` and `Result<T, E>` for error handling, with the `?` operator for ergonomic propagation.
 
 ### 1.2 TRPL 官方定义
 >
 
-> **[TRPL: Ch9.0]** Rust groups errors into two major categories: recoverable and unrecoverable errors. For a recoverable error, we most likely want to report the problem to the user and retry the operation. Unrecoverable errors are always symptoms of bugs, and we want to immediately stop the program.
+> **[TRPL Ch9.0](https://doc.rust-lang.org/book/)** Rust groups errors into two major categories: recoverable and unrecoverable errors. For a recoverable error, we most likely want to report the problem to the user and retry the operation. Unrecoverable errors are always symptoms of bugs, and we want to immediately stop the program.
 
-> **[TRPL: Ch9.2]** The `?` placed after a `Result` value is defined to work in almost the same way as the `match` expressions we defined to handle the `Result` values. If the value of the `Result` is an `Ok`, the value inside the `Ok` will get returned from this expression, and the program will continue. If the value is an `Err`, the `Err` will be returned from the whole function as if we had used the `return` keyword.
+> **[TRPL Ch9.2](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)** The `?` placed after a `Result` value is defined to work in almost the same way as the `match` expressions we defined to handle the `Result` values. If the value of the `Result` is an `Ok`, the value inside the `Ok` will get returned from this expression, and the program will continue. If the value is an `Err`, the `Err` will be returned from the whole function as if we had used the `return` keyword.
 
 ### 1.3 形式化定义
 >
@@ -258,7 +258,7 @@ graph TD
 ### 4.1 引理：Result<T,E> ⟹ 和类型强制错误处理
 >
 
-> **[TRPL: Ch9] · [Rust Reference: Enums]** Result<T, E> 作为和类型（sum type），编译器通过穷尽性检查强制处理所有分支。 ✅ 已验证
+> **[TRPL Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [Rust Reference: Enums](https://doc.rust-lang.org/reference/items/enumerations.html)** Result<T, E> 作为和类型（sum type），编译器通过穷尽性检查强制处理所有分支。 ✅ 已验证
 
 ```text
 前提 1: Result<T, E> 是代数数据类型，具有 Ok(T) 和 Err(E) 两个变体
@@ -276,9 +276,9 @@ graph TD
 ### 4.2 定理：? 运算符 ⟹ 错误传播自动化
 >
 
-> **[TRPL: Ch9.2] · [Rust Reference: The ? operator]** ? 运算符通过隐式调用 From::from 实现错误的自动转换与传播。 ✅ 已验证
+> **[TRPL Ch9.2](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html) · [Rust Reference: The ? operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator)** ? 运算符通过隐式调用 From::from 实现错误的自动转换与传播。 ✅ 已验证
 
-> **[RFC 243: The ? Operator]** The `?` operator was introduced in RFC 243 to provide ergonomic error propagation, later extended by [RFC 3058](https://rust-lang.github.io/rfcs//3058-try-trait-v2.html) for the general `Try` trait. ✅ 已验证
+> **[RFC 243: The ? Operator](https://rust-lang.github.io/rfcs/0243-0243-trait-based-exception-handling.html)** The `?` operator was introduced in RFC 243 to provide ergonomic error propagation, later extended by [RFC 3058](https://rust-lang.github.io/rfcs//3058-try-trait-v2.html) for the general `Try` trait. ✅ 已验证
 
 ```text
 前提 1: ? 运算符展开为 match，Err 分支提前返回
@@ -296,9 +296,9 @@ graph TD
 
 ### 4.3 推论：panic ⟹ 不可恢复错误的显式边界
 
-> **[TRPL: Ch9] · [Rust Reference: panic]** panic 是 Safe Rust 中显式标记"程序进入不可能状态"的机制。 ✅ 已验证
+> **[TRPL Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [Rust Reference: panic](https://doc.rust-lang.org/reference/)** panic 是 Safe Rust 中显式标记"程序进入不可能状态"的机制。 ✅ 已验证
 
-> **[Wikipedia: Exception handling]** Unlike Java/C++ exceptions, Rust's `panic!` is not a general recovery mechanism but an explicit boundary for unrecoverable bugs; recoverable errors use `Result<T, E>`. ✅ 已验证
+> **[Wikipedia: Exception handling](https://en.wikipedia.org/wiki/Exception_handling)** Unlike Java/C++ exceptions, Rust's `panic!` is not a general recovery mechanism but an explicit boundary for unrecoverable bugs; recoverable errors use `Result<T, E>`. ✅ 已验证
 
 ```text
 前提 1: panic 立即终止当前线程的执行（默认展开栈）
@@ -316,7 +316,7 @@ graph TD
 
 ### 4.4 类型安全错误处理
 
-> **[Rust Reference: Enums] · [TRPL: Ch9]** Result 的错误类型在编译期确定，match 穷尽性检查保证处理完备性。 ✅ 已验证
+> **[Rust Reference: Enums](https://doc.rust-lang.org/reference/items/enumerations.html) · [TRPL Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html)** Result 的错误类型在编译期确定，match 穷尽性检查保证处理完备性。 ✅ 已验证
 
 ```text
 前提: Result<T, E> 是泛型代数数据类型
@@ -330,7 +330,7 @@ graph TD
 
 ### 4.5 定理一致性矩阵
 
-> **[原创分析] · [TRPL: Ch9] · [Rust Reference: The ? operator]** 错误处理定理矩阵基于和类型、Monad bind 和 Rust 编译器检查。 💡 原创分析
+> **[原创分析] · [TRPL Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [Rust Reference: The ? operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator)** 错误处理定理矩阵基于和类型、Monad bind 和 Rust 编译器检查。 💡 原创分析
 
 | **定理/引理/推论** | **前提** | **结论** | **依赖的 L4 公理** | **被哪些定理依赖** | **失效条件** | **典型错误码** |
 |:---|:---|:---|:---|:---|:---|:---|
@@ -498,7 +498,7 @@ fn maybe_port() -> Option<u16> {
 
 ### 5.5 补充：异步错误处理与 `poll_fn` / `TryFuture` 模式
 
-> **[RFC 243]** · **[futures-rs 文档]** · **[Rust Reference: Async]** 异步错误处理不是同步 `Result` 的简单平移——`Future` 的惰性求值、取消（cancellation）和 `Waker` 驱动模型引入了新的错误传播边界。✅
+> **[RFC 243](https://rust-lang.github.io/rfcs/0243-0243-trait-based-exception-handling.html)** · **[futures-rs 文档]** · **[Rust Reference: Async](https://doc.rust-lang.org/reference/items/functions.html#async-functions)** 异步错误处理不是同步 `Result` 的简单平移——`Future` 的惰性求值、取消（cancellation）和 `Waker` 驱动模型引入了新的错误传播边界。✅
 
 #### `poll_fn`：将闭包提升为 Future
 
@@ -567,13 +567,13 @@ let result = select! {
 ```
 
 > **关键洞察**: 异步错误处理有**两个维度**：1) `Result` 维度的业务错误（IO 失败、解析错误）；2) **取消维度**的生命周期错误（Future 被 `select!` 丢弃时资源未清理）。`Drop` 实现负责后者，`?` 运算符负责前者，但两者在 `unsafe` 或 FFI 边界处可能交互产生 UB。
-> **来源**: [Tokio 文档: Cancellation Safety] · [RFC 243: ? in main] · [futures-rs: TryFutureExt]
+> **来源**: [Tokio 文档: Cancellation Safety] · [RFC 243: ? in main](https://rust-lang.github.io/rfcs/0243-0243-trait-based-exception-handling.html) · [futures-rs: TryFutureExt]
 
 ---
 
 ## 六、反命题与边界分析（Counter-proposition & Boundary Analysis）
 
-> **[TRPL: Ch9] · [Rust API Guidelines] · [RFC 243]** 反命题分析基于和类型、Monad bind 和 Rust 编译器检查的形式化语义。 ✅ 已验证
+> **[TRPL Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [RFC 243](https://rust-lang.github.io/rfcs/0243-0243-trait-based-exception-handling.html)** 反命题分析基于和类型、Monad bind 和 Rust 编译器检查的形式化语义。 ✅ 已验证
 
 **错误处理策略决策树（Mermaid graph TD）**:
 
@@ -608,7 +608,7 @@ graph TD
 
 > **认知功能**: 交互式策略选择器——将"当前函数应如何返回"这一工程决策转化为可遍历的条件判断流程。读者遇到"函数可能失败"的场景时，可沿决策节点逐层下行，最终到达对应 Rust 惯用法（Result/panic/Option）的叶子节点。核心洞察：颜色编码（绿=推荐，红=避免）将 Rust API Guidelines 的规范性建议转化为视觉即时判断。[来源: 💡 原创分析]
 
-> **思维表征说明**: 此 `graph TD` 决策树将错误处理的**策略选择**形式化为可遍历的判断流程——从「是否可能失败」开始，经过「失败类型」「调用方处理方式」等决策节点，最终到达叶子节点的具体 Rust 惯用法。与 ASCII 决策树相比，Mermaid 图的优势在于**可视化层次结构**和**颜色编码**（绿色=推荐，黄色=谨慎，红色=避免），帮助读者快速定位当前场景的正确策略。 [来源: TRPL §9; Rust API Guidelines; RFC 243]
+> **思维表征说明**: 此 `graph TD` 决策树将错误处理的**策略选择**形式化为可遍历的判断流程——从「是否可能失败」开始，经过「失败类型」「调用方处理方式」等决策节点，最终到达叶子节点的具体 Rust 惯用法。与 ASCII 决策树相比，Mermaid 图的优势在于**可视化层次结构**和**颜色编码**（绿色=推荐，黄色=谨慎，红色=避免），帮助读者快速定位当前场景的正确策略。 来源: [TRPL §9](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
 
 ### 6.1 反命题 1: "Result 消除了所有错误"
 
@@ -902,7 +902,7 @@ fn nested_result_option() {
 
 ## 八、认知路径（Cognitive Path）
 
-> **[原创分析] · [TRPL: Ch9]** 认知路径从"如何处理错误"直觉到和类型 + Error Monad 形式化的渐进映射。 💡 原创分析
+> **[原创分析] · [TRPL Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html)** 认知路径从"如何处理错误"直觉到和类型 + Error Monad 形式化的渐进映射。 💡 原创分析
 
 ### Step 1: 直觉类比 — "快递包裹"
 
@@ -966,7 +966,7 @@ fn caller() -> Result<i32, String> {
 
 ### Step 4: 自定义错误 — thiserror 与 anyhow
 
-> **[crates.io: thiserror / anyhow]** `thiserror` is the standard choice for libraries that need structured error types, while `anyhow` is preferred in applications for ergonomic error propagation. ✅ 已验证
+> **crates.io: thiserror / [anyhow](https://docs.rs/anyhow/latest/anyhow/)** `thiserror` is the standard choice for libraries that need structured error types, while `anyhow` is preferred in applications for ergonomic error propagation. ✅ 已验证
 
 **核心问题**: "怎么设计好的错误类型？"
 
@@ -1024,23 +1024,23 @@ Monad 定律验证:
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
-| Result/Option 用于可恢复错误 | [TRPL: Ch9] | ✅ |
-| panic 用于不可恢复错误 | [TRPL: Ch9] | ✅ |
-| ? 运算符自动传播错误 | [TRPL: Ch9.2] | ✅ |
-| ? 调用 From::from | [Rust Reference: The ? operator] | ✅ |
+| Result/Option 用于可恢复错误 | [TRPL Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) | ✅ |
+| panic 用于不可恢复错误 | [TRPL Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) | ✅ |
+| ? 运算符自动传播错误 | [TRPL Ch9.2](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html) | ✅ |
+| ? 调用 From::from | [Rust Reference: The ? operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator) | ✅ |
 | Result 是 Monad | [Haskell: Either Monad] · 类型论 | ✅ |
-| thiserror / anyhow 是生态标准 | [crates.io] · 社区实践 | ✅ |
-| unwrap 在生产代码中需谨慎 | [Rust API Guidelines] | ✅ |
+| thiserror / anyhow 是生态标准 | [crates.io](https://crates.io/) · 社区实践 | ✅ |
+| unwrap 在生产代码中需谨慎 | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | ✅ |
 | Monad 与错误处理 | [Wadler 1992 — The Essence of Functional Programming, POPL] | ✅ |
 | 代数效应与异常 | [Plotkin & Pretnar 2009 — Handlers of Algebraic Effects] | ✅ |
-| ? 运算符设计 | [RFC 243] | ✅ |
-| 和类型穷尽性检查 | [类型论标准教材] · [Rust Reference: Enums] | ✅ |
+| ? 运算符设计 | [RFC 243](https://rust-lang.github.io/rfcs/0243-0243-trait-based-exception-handling.html) | ✅ |
+| 和类型穷尽性检查 | [类型论标准教材] · [Rust Reference: Enums](https://doc.rust-lang.org/reference/items/enumerations.html) | ✅ |
 
 ---
 
 ### 9.1 补充：`Termination` trait 与 `main` 返回 `Result`
 
-> **[Rust Reference: Termination]** · **[RFC 1937]** Rust 程序入口 `main` 可以返回 `Result<T, E>` 或 `()`，这由 `Termination` trait 统一处理。该 trait 定义了程序退出时的**退出码转换规则**和**错误报告行为**。✅
+> **[Rust Reference: Termination](https://doc.rust-lang.org/reference/)** · **[RFC 1937](https://github.com/rust-lang/rfcs/pull/1937)** Rust 程序入口 `main` 可以返回 `Result<T, E>` 或 `()`，这由 `Termination` trait 统一处理。该 trait 定义了程序退出时的**退出码转换规则**和**错误报告行为**。✅
 
 #### `Termination` trait 定义
 
@@ -1087,7 +1087,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 | `Result<T, E>`（T 非 ()） | 同 Result<(), E> | 同上 | 极少使用（T 的 report 通常也返回 0） |
 | `!`（永不返回） | 无 | 无 | 守护进程、事件循环 |
 
-> **来源**: [Rust Reference: Termination] · [RFC 1937: const fn] · [TRPL: Ch12.6] · [Wikipedia: Exit status]
+> **来源**: [Rust Reference: Termination](https://doc.rust-lang.org/reference/) · [RFC 1937: const fn](https://github.com/rust-lang/rfcs/pull/1937) · [TRPL Ch12.6](https://doc.rust-lang.org/book/) · [Wikipedia: Exit status](https://en.wikipedia.org/wiki/Exit_status)
 
 ### 9.2 补充：`Result<T, !>` 与 `!` (never type) 在错误处理中的使用
 
@@ -1111,12 +1111,12 @@ where
 ```
 
 > **关键洞察**: `Result<T, !>` 将"不可能出错"这一信息编码进类型系统。当泛型函数要求 `Result<T, E>` 时，传入 `Result<T, !>` 完全合法——因为 `!` 是任意类型的子类型，`Result<T, !>` 自然满足 `Result<T, E>` 的约束（当 `E` 接收 `!` 时）。这是子类型多态在错误处理中的优雅应用。
-> **来源**: [Rust Reference: Never type] · [RFC 1216: Never type] · [TAPL Ch.11: Bottom type]
+> **来源**: [Rust Reference: Never type](https://doc.rust-lang.org/reference/) · [RFC 1216: Never type](https://github.com/rust-lang/rfcs/pull/1216) · [TAPL Ch.11: Bottom type]
 
 ### 9.3 `std::backtrace::Backtrace` 与错误追踪
 
 > **Bloom 层级**: 应用 → 分析
-> **[Rust Standard Library: Backtrace]** · **[RFC 2504: Catch Unwind]** Rust 1.65 将 `std::backtrace::Backtrace` 纳入 stable，使得可恢复错误也能携带完整的调用栈上下文，填补了"错误发生点"与"错误报告点"之间的信息鸿沟。 ✅
+> **[Rust Standard Library: Backtrace]** · **[RFC 2504: Catch Unwind](https://github.com/rust-lang/rfcs/pull/2504)** Rust 1.65 将 `std::backtrace::Backtrace` 纳入 stable，使得可恢复错误也能携带完整的调用栈上下文，填补了"错误发生点"与"错误报告点"之间的信息鸿沟。 ✅
 
 #### 9.3.1 基本获取与显示
 
@@ -1267,7 +1267,7 @@ impl std::error::Error for TracedError {
 | 强制捕获 | `Backtrace::force_capture()` | 关键安全审计点 | 无视环境变量，始终展开 |
 | 不捕获 | 纯 `std::io::Error` | 高频错误路径、性能敏感 | 零额外开销 |
 
-> **[来源: Rust API Guidelines — Error handling]** 库代码应仅在错误路径中捕获 backtrace，避免在成功路径引入运行时开销。 ✅
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** 库代码应仅在错误路径中捕获 backtrace，避免在成功路径引入运行时开销。 ✅
 
 #### 9.3.5 `#[track_caller]` 与 `Backtrace` 的协同与对比
 
@@ -1311,7 +1311,7 @@ fn main() {
 }
 ```
 
-> **[来源: Rust Reference: track_caller]** · **[Rust Standard Library: Location]** `#[track_caller]` 与 `Location::caller()` 在 Rust 1.46+ 稳定；`Backtrace` 在 Rust 1.65+ 稳定。两者结合可同时获得"精确错误源点"与"完整传播路径"。 ✅
+> **来源: [Rust Reference: track_caller](https://doc.rust-lang.org/reference/)** · **[Rust Standard Library: Location]** `#[track_caller]` 与 `Location::caller()` 在 Rust 1.46+ 稳定；`Backtrace` 在 Rust 1.65+ 稳定。两者结合可同时获得"精确错误源点"与"完整传播路径"。 ✅
 
 #### 9.3.6 与 `panic::Location` 的对比
 
@@ -1384,7 +1384,7 @@ fn parse_config_bad(path: &str) -> Result<Config, AppError> {
 ```
 
 > **[来源: Rust Standard Library: Backtrace]** `Backtrace` 采用惰性求值策略：构造时仅捕获原始帧指针，格式化时才解析符号。但即使如此，栈展开本身仍有不可忽略的开销。 ✅
-> **[来源: RFC 2504]** Backtrace 稳定化 RFC 明确要求"在默认情况下不产生开销"，因此 `capture()` 在环境变量未启用时返回 `disabled`。 ✅
+> **来源: [RFC 2504](https://github.com/rust-lang/rfcs/pull/2504)** Backtrace 稳定化 RFC 明确要求"在默认情况下不产生开销"，因此 `capture()` 在环境变量未启用时返回 `disabled`。 ✅
 
 **跨层映射**: Backtrace 的运行时成本 ↔ [§9.3.6](#936-与-paniclocation-的对比) `Location` 的编译期零成本 ↔ [../04_formal/04_rustbelt.md](../04_formal/04_rustbelt.md) §3 "运行时与编译期保证的边界"
 
@@ -1393,7 +1393,7 @@ fn parse_config_bad(path: &str) -> Result<Config, AppError> {
 ### 9.4 `eyre` / `color-eyre` / `miette` / `snafu` 生态库对比
 
 > **Bloom 层级**: 应用 → 分析
-> **[来源: eyre docs] · [color-eyre docs] · [miette docs] · [snafu docs] · [Rust CLI Book] · [thiserror docs] · [anyhow docs]** Rust 错误处理生态在 `anyhow` / `thiserror` 之外，已形成多个专攻不同场景的库：`eyre` 强调可定制的报告格式，`color-eyre` 提供富媒体诊断输出，`miette` 专注于源码级诊断标注，`snafu` 则强制显式上下文附件。以下逐一分析其设计哲学、API 风格与适用边界。✅
+> **[来源: eyre docs] · [color-eyre docs] · [miette docs] · [snafu docs] · [Rust CLI Book](https://rust-cli.github.io/book/) · [thiserror docs] · [anyhow docs]** Rust 错误处理生态在 `anyhow` / `thiserror` 之外，已形成多个专攻不同场景的库：`eyre` 强调可定制的报告格式，`color-eyre` 提供富媒体诊断输出，`miette` 专注于源码级诊断标注，`snafu` 则强制显式上下文附件。以下逐一分析其设计哲学、API 风格与适用边界。✅
 
 #### 9.4.1 `eyre`：可定制报告的错误处理
 
@@ -1636,14 +1636,14 @@ graph TD
 > **认知功能**: 生态选型导航器——将六库对比矩阵的高维信息降维为"库代码 vs 应用代码"首分叉的决策路径。读者在项目初始化或重构阶段，可沿此树在 3-4 步内确定最适合的错误处理策略。核心洞察：Rust 错误处理生态的核心张力是"静态结构化（thiserror/snafu）"与"动态统一（anyhow/eyre）"的权衡；miette 与 color-eyre 则是在诊断体验维度的垂直深化。[来源: 💡 原创分析]
 
 > **定理**：Rust 错误处理生态的分化反映了"**静态结构化**"（`thiserror`/`snafu`）与"**动态统一**"（`anyhow`/`eyre`）的两极张力，而 `miette` 与 `color-eyre` 分别在**诊断精度**与**报告体验**维度上做了垂直深化。库作者应选择静态类型以暴露契约；应用作者应选择动态类型以加速迭代；当错误面向终端用户时，`miette`/`color-eyre` 的诊断可视化能力不可替代。
-> **来源**: [eyre docs] · [color-eyre docs] · [miette docs] · [snafu docs] · [anyhow docs] · [thiserror docs] · [Rust CLI Book] · [GreptimeDB Blog]
+> **来源**: [eyre docs] · [color-eyre docs] · [miette docs] · [snafu docs] · [anyhow docs] · [thiserror docs] · [Rust CLI Book](https://rust-cli.github.io/book/) · [GreptimeDB Blog]
 
 ---
 
 ### 9.5 `#[track_caller]` 与错误定位优化
 
 > **Bloom 层级**: 应用 → 分析
-> **[Rust Reference: The track_caller attribute]** · **[RFC 2091: Implicit caller location]** · **[Rust Standard Library: core::panic::Location]** `#[track_caller]` 在 Rust 1.46 稳定化，它通过修改函数的调用约定（calling convention），在编译期隐式注入调用者位置信息，使 panic、错误包装器和断言宏能够报告**调用点**而非被调用函数内部位置。✅
+> **[Rust Reference: The track_caller attribute](https://doc.rust-lang.org/reference/)** · **[RFC 2091: Implicit caller location](https://github.com/rust-lang/rfcs/pull/2091)** · **[Rust Standard Library: core::panic::Location]** `#[track_caller]` 在 Rust 1.46 稳定化，它通过修改函数的调用约定（calling convention），在编译期隐式注入调用者位置信息，使 panic、错误包装器和断言宏能够报告**调用点**而非被调用函数内部位置。✅
 
 #### 9.5.1 工作原理：编译器隐式传递 `Location`
 
@@ -1668,7 +1668,7 @@ fn main() {
 }
 ```
 
-**代价模型**：隐式 `Location` 参数通常通过寄存器传递（在支持的平台），或在栈上占用一个指针宽度（`usize` 大小）。因此开销为**极低**（亚指令级），但非绝对零成本——与 `Backtrace` 的运行时栈展开相比可忽略。[来源: [RFC 2091](https://rust-lang.github.io/rfcs//2091-inline-semantic.html) — Cost analysis] · [Rust Reference: track_caller ABI]
+**代价模型**：隐式 `Location` 参数通常通过寄存器传递（在支持的平台），或在栈上占用一个指针宽度（`usize` 大小）。因此开销为**极低**（亚指令级），但非绝对零成本——与 `Backtrace` 的运行时栈展开相比可忽略。[来源: [RFC 2091](https://rust-lang.github.io/rfcs//2091-inline-semantic.html) — Cost analysis] · [Rust Reference: track_caller ABI](https://doc.rust-lang.org/reference/)
 
 #### 9.5.2 `Location::caller()` 与 `PanicInfo::location()` 的区别
 
@@ -1759,7 +1759,7 @@ fn parse_port(s: &str) -> Result<u16, LocatedError> {
 | `#[track_caller]` + `Location` | `&'static Location<'static>` | 极低（寄存器/栈参数传递） | 单点（文件+行+列） | 高频错误路径、库断言 |
 | 手动 `file!/line!` | `&'static str` + `u32` | 零（编译期常量） | 单点 | 宏生成的错误 |
 
-> **[来源: Rust API Guidelines — Error handling]** 库代码若仅需记录"错误在哪个调用点产生"，应优先使用 `#[track_caller]` 而非 `Backtrace`，以避免在热路径引入运行时展开开销。 ✅
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** 库代码若仅需记录"错误在哪个调用点产生"，应优先使用 `#[track_caller]` 而非 `Backtrace`，以避免在热路径引入运行时展开开销。 ✅
 
 #### 9.5.4 `#[track_caller]` 与 `Backtrace` 的对比
 
@@ -1801,7 +1801,7 @@ impl RichError {
 }
 ```
 
-> **[来源: Rust Standard Library: Backtrace]** · **[Rust Reference: track_caller]** 两者结合可覆盖"从精确源点到完整传播路径"的全谱系定位需求。 ✅
+> **[来源: Rust Standard Library: Backtrace]** · **[Rust Reference: track_caller](https://doc.rust-lang.org/reference/)** 两者结合可覆盖"从精确源点到完整传播路径"的全谱系定位需求。 ✅
 
 #### 9.5.5 与 `anyhow` / `thiserror` 的集成
 
@@ -1907,7 +1907,7 @@ fn ensure_nonzero(x: i32) -> i32 {
 }
 ```
 
-> **[来源: Rust Reference: track_caller]** · **[RFC 2091: Implicit caller location]** · **[rustc-dev-guide]** `#[track_caller]` 的设计目标是为错误报告提供"足够好的位置信息"，而非替代调试符号或 profiling 工具。 ✅
+> **来源: [Rust Reference: track_caller](https://doc.rust-lang.org/reference/)** · **[RFC 2091: Implicit caller location](https://github.com/rust-lang/rfcs/pull/2091)** · **[rustc-dev-guide]** `#[track_caller]` 的设计目标是为错误报告提供"足够好的位置信息"，而非替代调试符号或 profiling 工具。 ✅
 
 **跨层映射**: `#[track_caller]` 的编译期定位 ↔ [§9.3](#93-stdbacktracebacktrace-与错误追踪) `Backtrace` 的运行时定位 ↔ [../04_formal/04_rustbelt.md](../04_formal/04_rustbelt.md) §3 "编译期保证与运行时观察的边界"
 
@@ -1990,7 +1990,7 @@ fn compute() -> Maybe<i32> {
 
 > **定理**：`Try` trait 将 `?` 从 `Result`/`Option` 的语法糖提升为**通用的控制流抽象**。任何满足代数结构的类型（含成功/失败两种分支）都可实现 `Try`。
 > **边界**：`Try` trait 当前尚未完全稳定（`Residual` 关联类型在演进中）。`ControlFlow` 本身已稳定（Rust 1.55+），但直接实现 `Try` 需要 nightly。
-> **来源**: [RFC 3058: Try trait v2] · [Rust Reference: The ? operator] · [Rust Standard Library: ControlFlow]
+> **来源**: [RFC 3058: Try trait v2](https://github.com/rust-lang/rfcs/pull/3058) · [Rust Reference: The ? operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator) · [Rust Standard Library: ControlFlow]
 
 ---
 
@@ -2018,16 +2018,16 @@ fn compute() -> Maybe<i32> {
 - [x] **TODO**: 补充 `poll_fn` / `TryFuture` 等异步错误处理 —— 优先级: 高 —— 已完成 §5.5
 - [x] **TODO**: 补充 `Try` trait（稳定化中）与自定义 ? 行为 —— 优先级: 中 —— 已完成 §9.6
 
-> **[来源: Rust Reference; TRPL; Rust RFCs; Academic Papers]** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/); [The Rust Programming Language](https://doc.rust-lang.org/book/); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
 
-> **[来源: Wikipedia; POPL/PLDI/ECOOP Papers; RustBelt/Iris Project]** 形式化概念参考了权威学术来源和类型论研究。✅
+> **来源: [Wikipedia](https://en.wikipedia.org/wiki/Main_Page); POPL/PLDI/ECOOP Papers; [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)/Iris Project** 形式化概念参考了权威学术来源和类型论研究。✅
 ---
 
 ---
 
 ## Wikipedia 概念对齐
 
-> **[来源: Wikipedia]** 核心概念与国际知识库映射。
+> **来源: [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)** 核心概念与国际知识库映射。
 
 | 概念 | Wikipedia 词条 | 说明 |
 |:---|:---|:---|
@@ -2119,7 +2119,7 @@ match result {
 }
 ```
 
-> **关键洞察**: C++23 `std::expected` 是 Rust `Result` 的语法类似物，但**不强制错误处理**——调用者可以忽略 `expected`，直到访问 `.value()` 时才可能抛异常。Rust 的 `Result` 通过类型系统强制错误处理的分支覆盖。[来源: C++23 Draft Standard] · [Rust Reference — §4.5.6] ✅
+> **关键洞察**: C++23 `std::expected` 是 Rust `Result` 的语法类似物，但**不强制错误处理**——调用者可以忽略 `expected`，直到访问 `.value()` 时才可能抛异常。Rust 的 `Result` 通过类型系统强制错误处理的分支覆盖。[来源: C++23 Draft Standard] · [Rust Reference — §4.5.6](https://doc.rust-lang.org/reference/) ✅
 
 ### 10.4 析构函数异常：C++ 的致命陷阱
 
@@ -2149,7 +2149,7 @@ impl Drop for Safe {
 }
 ```
 
-> **关键洞察**: C++ 允许析构函数抛异常，但在栈展开时会导致 `std::terminate`。Rust 根本不允许 `Drop::drop` 返回 `Result`——资源释放必须是**不可失败**的操作。这是 Rust "无未定义行为"承诺的重要组成部分。[来源: Rustonomicon — Drop Check] ✅
+> **关键洞察**: C++ 允许析构函数抛异常，但在栈展开时会导致 `std::terminate`。Rust 根本不允许 `Drop::drop` 返回 `Result`——资源释放必须是**不可失败**的操作。这是 Rust "无未定义行为"承诺的重要组成部分。来源: [Rustonomicon — Drop Check](https://doc.rust-lang.org/nomicon/) ✅
 
 ---
 

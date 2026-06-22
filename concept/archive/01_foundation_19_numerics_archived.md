@@ -1,3 +1,5 @@
+# 归档：数值类型基础
+
 > **EN**: Foundation 19 Numerics Archived
 > **Summary**: Foundation 19 Numerics Archived. Core Rust concept.
 > **内容分级**: [综述级]

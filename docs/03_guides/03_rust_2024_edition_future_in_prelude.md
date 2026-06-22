@@ -42,19 +42,19 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Rust 2024 Edition 将 `std::future::Future` trait 添加到标准库 prelude 中。这意味着在 Edition 2024 下，`Future` trait 无需显式导入即可直接使用。
 
 ## 变化详情
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 之前（Rust 2021 及之前）
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 use std::future::Future;
@@ -70,7 +70,7 @@ fn box_future() -> Box<dyn Future<Output = i32>> {
 
 ### 之后（Rust 2024 Edition）
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 // 无需显式导入 Future trait
@@ -89,7 +89,7 @@ fn box_future() -> Box<dyn Future<Output = i32>> {
 
 ### 正面影响
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 1. **代码更简洁**：异步代码中减少冗余的 `use std::future::Future;`
 2. **学习曲线降低**：新手无需了解 prelude 与 `Future` 的关系
@@ -97,7 +97,7 @@ fn box_future() -> Box<dyn Future<Output = i32>> {
 
 ### 潜在冲突
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 #### 冲突 1：自定义 `Future` trait
 
@@ -165,7 +165,7 @@ use some_legacy_lib::Future as LegacyFuture;
 
 ### 对于应用开发者
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 1. **移除冗余导入**：
 
@@ -180,7 +180,7 @@ use std::future::Future;
 
 ### 对于库开发者
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 1. **保持兼容性**：如果库支持多 Edition，继续使用显式导入
 2. **避免定义 `Future` trait**：除非必要，否则不要定义与标准库冲突的 trait 名称
@@ -269,11 +269,11 @@ where
 
 ## 权威来源索引
 
-> **[来源: Rust Reference - Prelude]**
-> **[来源: Rust Reference - Future Trait]**
-> **[来源: RFC 2645 - Future in Prelude]**
-> **[来源: TRPL - Async Programming]**
-> **[来源: Wikipedia - Promise (programming)]**
+> **来源: [Rust Reference - Prelude](https://doc.rust-lang.org/reference/)**
+> **来源: [Rust Reference - Future Trait](https://doc.rust-lang.org/reference/)**
+> **来源: [RFC 2645 - Future in Prelude](https://github.com/rust-lang/rfcs/pull/2645)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Wikipedia - Promise (programming)](https://en.wikipedia.org/wiki/Promise_(programming))**
 > **[来源: ACM - Async Language Integration]**
 
 ---

@@ -50,13 +50,13 @@
 
 ## 一、对 formal_methods 的意见与建议
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 现状简述
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **已有**：所有权、借用、生命周期、Pin、异步（Future/Poll 状态机）、**Send/Sync** 六篇独立形式化文档；
 - 控制流、通道、Mutex、thread::spawn、裸指针、unsafe 等
@@ -75,9 +75,9 @@
 
 ### 1.2 具体建议
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 建议 | 优先级 | 说明 |
 | :--- | :--- | :--- |
@@ -91,13 +91,13 @@
 
 ## 二、安全的可判定的机制：全面梳理建议
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 何为“安全的可判定的机制”
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **安全**：在 Safe Rust 下，违反机制会导致编译错误或类型系统拒绝，从而避免内存安全/数据竞争等 UB。
 - **可判定**：是否满足该机制可由**编译期**算法判定（或由类型系统 + 固定规则在编译期检查），无需运行时或人工证明。
@@ -106,9 +106,9 @@
 
 ### 2.2 建议的“安全可判定机制”清单与形式化对应
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 下表为**全面梳理**的推荐范围；每项应具备：概念定义、属性关系、解释论证、形式证明引用、反例；并与思维表征四类挂钩。
 
@@ -132,7 +132,7 @@
 
 ### 2.3 与“概念定义–属性关系–解释论证–形式证明”的对应
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **概念定义**：每机制在对应形式化文档中有 Def 或等价形式化描述（Send/Sync 需补）。
 - **属性关系**：如 Send 与 Sync 的等价关系、与 ownership/borrow 的依赖（spawn 依赖 Send；Future 并发依赖 Send+Sync）。
@@ -143,13 +143,13 @@
 
 ## 三、完备的 Rust 特性全部特征对比
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 下表在 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../10_rust_193_language_features_comprehensive_analysis.md) 92 项基础上，增加**可判定性、安全边界、形式化文档、思维表征**四维，形成「全部特征对比」视图；核心机制（含 Send/Sync/async）单独成块便于与 formal_methods 对照。
 
 ### 3.1 核心安全可判定机制对比（子表）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | 可判定性 | 安全边界 | 形式化 Def/定理 | 思维导图 | 矩阵 | 决策树 | 证明树 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -166,7 +166,7 @@
 
 ### 3.2 全 92 项特性维度说明（与 RUST_193 一致 + 四维）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **可判定性**：静态 / 运行时 / 不可判定（或 N/A）。
 - **安全边界**：Safe 核心 / Safe 并发 / Safe 异步 / Unsafe 边界 / 仅规范（无形式化）。
@@ -179,7 +179,7 @@
 
 ## 四、思维表征与 formal_methods 结合建议
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 4.1 四类思维表征与文档绑定
 >
@@ -320,21 +320,21 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-> **[来源: Rust Reference]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-> **[来源: Rust Standard Library]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: ACM - Systems Programming]**
+> **来源: [ACM](https://dl.acm.org/)**
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-> **[来源: Rustonomicon]**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---
 

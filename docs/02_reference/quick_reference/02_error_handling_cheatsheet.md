@@ -70,13 +70,13 @@
 
 ## 🎯 核心概念
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Result 类型
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 enum Result<T, E> {
@@ -87,9 +87,9 @@ enum Result<T, E> {
 
 ### Option 类型
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 enum Option<T> {
@@ -102,13 +102,13 @@ enum Option<T> {
 
 ## 📐 基本模式
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 模式 1: 匹配处理
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 match result {
@@ -119,9 +119,9 @@ match result {
 
 ### 模式 2: unwrap 和 expect
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // unwrap: 成功返回值，失败 panic
@@ -133,9 +133,9 @@ let value = result.expect("操作失败");
 
 ### 模式 3: ? 操作符
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 fn read_file() -> Result<String, io::Error> {
@@ -150,13 +150,13 @@ fn read_file() -> Result<String, io::Error> {
 
 ## 🔧 常用方法
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Result 方法
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 映射值
@@ -179,9 +179,9 @@ let result = Ok(5)
 
 ### Option 方法
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 映射值
@@ -205,7 +205,7 @@ let value = option.unwrap_or_else(|| calculate_default());
 
 ### anyhow - 灵活的错误处理
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use anyhow::{Result, Context};
@@ -221,7 +221,7 @@ fn read_config() -> Result<Config> {
 
 ### thiserror - 自定义错误类型
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use thiserror::Error;
@@ -245,7 +245,7 @@ enum MyError {
 
 ### 反例 1: 生产代码滥用 unwrap
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **错误示例**:
 
@@ -271,7 +271,7 @@ fn read_config() -> Result<Config, Box<dyn std::error::Error>> {
 
 ### 反例 2: 在非 Result 返回类型函数中使用 ?
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **错误示例**（以下代码无法通过编译）:
 
@@ -296,7 +296,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 反例 3: 混淆 Option 与 Result 语义
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **错误示例**:
 
@@ -363,7 +363,7 @@ fn test_read() {
 
 ### MaybeUninit 错误处理增强
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **改进**: 新增安全的错误处理方法
 
@@ -388,7 +388,7 @@ Rust 1.95+ 大幅增强了 `std::ops::ControlFlow`，使其成为错误处理和
 
 ### ControlFlow vs Result：语义对比
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 场景 | `Result<T, E>` | `ControlFlow<B, C>` | 推荐选择 |
 |------|---------------|---------------------|----------|
@@ -400,7 +400,7 @@ Rust 1.95+ 大幅增强了 `std::ops::ControlFlow`，使其成为错误处理和
 
 ### Rust 1.95+ ControlFlow 核心 API
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use std::ops::ControlFlow;
@@ -426,7 +426,7 @@ pub fn map_break<F, T>(self, f: F) -> ControlFlow<T, C>;
 
 ### 生产场景 1：批量任务处理（超时 + 错误阈值）
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 use std::ops::ControlFlow;
@@ -502,7 +502,7 @@ struct BatchConfig {
 
 ### 生产场景 2：连接池快速健康检查
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 use std::ops::ControlFlow;
@@ -556,7 +556,7 @@ impl ConnectionPool {
 
 ### 生产场景 3：树形结构搜索（短路求值）
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust
 use std::ops::ControlFlow;
@@ -595,7 +595,7 @@ impl<T: PartialEq + Clone> TreeNode<T> {
 
 ### 生产场景 4：验证管道（组合模式）
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use std::ops::ControlFlow;
@@ -664,7 +664,7 @@ struct UserInput {
 
 ### 与 Try trait 的集成
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust
 use std::ops::ControlFlow;
@@ -688,7 +688,7 @@ fn validate_all_items(items: Vec<i32>) -> ControlFlow<Vec<String>, Vec<i32>> {
 
 ### 性能优势
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 | 操作 | `Result` 提前返回 | `ControlFlow` 提前终止 | 性能差异 |
 |------|------------------|----------------------|----------|
@@ -702,7 +702,7 @@ fn validate_all_items(items: Vec<i32>) -> ControlFlow<Vec<String>, Vec<i32>> {
 
 ### ControlFlow 改进
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **改进**: 可以携带详细的错误信息
 
@@ -729,7 +729,7 @@ fn validate(value: i32) -> ControlFlow<String, i32> {
 
 ### 官方文档
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - [Rust 错误处理文档](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
 - [Rust Result 文档](https://doc.rust-lang.org/std/result/)
@@ -737,14 +737,14 @@ fn validate(value: i32) -> ControlFlow<String, i32> {
 
 ### 项目内部文档
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - [错误处理完整文档](../../../crates/c03_control_fn/docs/tier_02_guides/05_错误处理指南.md)
 - [错误处理研究笔记](../../research_notes/README.md)
 
 ### 相关速查卡
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - [类型系统速查卡](./02_type_system.md) - Result 和 Option 类型
 - [控制流与函数速查卡](./02_control_flow_functions_cheatsheet.md) - 错误处理模式
@@ -759,7 +759,7 @@ fn validate(value: i32) -> ControlFlow<String, i32> {
 
 ### 场景 1: 配置文件解析
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 use std::fs;
@@ -800,7 +800,7 @@ fn main() {
 
 ### 场景 2: 用户输入验证
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 #[derive(Debug)]
@@ -857,7 +857,7 @@ fn main() {
 
 ### 场景 3: 链式操作处理
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 fn divide(a: f64, b: f64) -> Result<f64, &'static str> {
@@ -1009,16 +1009,16 @@ fn main() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Wikipedia - Exception Handling]**
-> **[来源: TRPL Ch. 9 - Error Handling]**
-> **[来源: Rust Reference - Result]**
-> **[来源: RFC 2504 - Try Trait]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Wikipedia - Exception Handling](https://en.wikipedia.org/wiki/Exception_Handling)**
+> **来源: [TRPL Ch. 9 - Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)**
+> **来源: [Rust Reference - Result](https://doc.rust-lang.org/std/result/)**
+> **来源: [RFC 2504 - Try Trait](https://rust-lang.github.io/rfcs/2504-2504-try-trait.html)**
 
 ---

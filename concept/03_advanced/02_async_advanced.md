@@ -70,7 +70,7 @@ poll 返回 Poll::Pending ⟹ Waker 已被注册到 Reactor
     ∧ 当 event_source 就绪时，Reactor 将调用 Waker::wake()
 ```
 
-> **来源**: [Rust Reference: Waker] · [RFC 2394 §4: Waker contract] · [Async Book: Waker]
+> **来源**: [Rust Reference: Waker](https://doc.rust-lang.org/std/task/struct.Waker.html) · [RFC 2394 §4: Waker contract](https://rust-lang.github.io/rfcs/2394-2394-async_await.html) · [Async Book: Waker](https://rust-lang.github.io/async-book/02_execution/03_wakeups.html)
 **活性（Liveness）**：
 
 ```text
@@ -92,7 +92,7 @@ poll 返回 Poll::Pending ⟹ Waker 已被注册到 Reactor
     - 结果: 永久 Pending
 ```
 
-> **来源**: [Async Book: Waker] · [Tokio Documentation: Task scheduling] · [RFC 2394 §4: Liveness]
+> **来源**: [Async Book: Waker](https://rust-lang.github.io/async-book/02_execution/03_wakeups.html) · [Tokio Documentation: Task scheduling] · [RFC 2394 §4: Liveness](https://rust-lang.github.io/rfcs/2394-2394-async_await.html)
 
 ```mermaid
 graph TD
@@ -118,7 +118,7 @@ graph TD
 > [来源: 💡 原创分析]
 > [来源: [Rust Reference: Pin](https://doc.rust-lang.org/std/pin/index.html)]
 >
-> **[Async Book: Waker]** Waker 是 Future 与 Reactor 之间的桥梁——poll 时将 Waker 传递给底层 I/O 源，I/O 就绪时源通过 Waker 通知执行器重新调度该 Future。✅ 已验证
+> **[Async Book: Waker](https://rust-lang.github.io/async-book/02_execution/03_wakeups.html)** Waker 是 Future 与 Reactor 之间的桥梁——poll 时将 Waker 传递给底层 I/O 源，I/O 就绪时源通过 Waker 通知执行器重新调度该 Future。✅ 已验证
 >
 > **[without.boats blog]** Waker 的设计刻意与具体执行器解耦：任何实现了 `Wake` trait 的类型均可作为 Waker，这使得同一个 Future 可在不同运行时之间复用。✅ 已验证
 
@@ -177,11 +177,11 @@ fn create_waker(task: Arc<Task>) -> Waker {
 }
 ```
 
-> **来源**: [Rust Reference: RawWakerVTable] · [futures-rs docs: Waker] · [Rust std: std::task::Waker]
+> **来源**: [Rust Reference: RawWakerVTable](https://doc.rust-lang.org/reference/) · [futures-rs docs: Waker] · [Rust std: std::task::Waker]
 
 **Context 与 Waker 的关系**
 
-> **[Rust Reference: Waker]** `Context` 包装了 `Waker`，允许 Future 在 `poll` 中访问执行器提供的上下文。`Context` 的设计为后续扩展（如局部任务调度器、优先级标记）预留了空间。✅ 已验证
+> **[Rust Reference: Waker](https://doc.rust-lang.org/std/task/struct.Waker.html)** `Context` 包装了 `Waker`，允许 Future 在 `poll` 中访问执行器提供的上下文。`Context` 的设计为后续扩展（如局部任务调度器、优先级标记）预留了空间。✅ 已验证
 
 ```rust,ignore
 // ✅ 正确: 在 poll 中使用 Context 注册 Waker
@@ -209,11 +209,11 @@ impl Future for TimerFuture {
 }
 ```
 
-> **来源**: [Rust Reference: Waker] · [Async Book: Executors] · [futures-rs docs: Timer]
+> **来源**: [Rust Reference: Waker](https://doc.rust-lang.org/std/task/struct.Waker.html) · [Async Book: Executors](https://rust-lang.github.io/async-book/02_execution/02_future.html) · [futures-rs docs: Timer]
 
 **自定义 Waker：基于 epoll/kqueue/IOCP 的 Reactor**
 
-> **[Async Book: Executors]** Reactor 负责将 OS 事件（epoll/kqueue/IOCP）映射到 Waker 的唤醒调用。以下是一个基于 `mio` 的简化 Reactor 模式：✅ 已验证
+> **[Async Book: Executors](https://rust-lang.github.io/async-book/02_execution/02_future.html)** Reactor 负责将 OS 事件（epoll/kqueue/IOCP）映射到 Waker 的唤醒调用。以下是一个基于 `mio` 的简化 Reactor 模式：✅ 已验证
 
 ```rust,ignore
 // ✅ 正确: 基于 mio 的自定义 Reactor（概念性代码）
@@ -247,7 +247,7 @@ impl Reactor {
 }
 ```
 
-> **来源**: [mio docs: Poll] · [Tokio 源码: Reactor] · [Async Book: Executors]
+> **来源**: [mio docs: Poll] · [Tokio 源码: Reactor] · [Async Book: Executors](https://rust-lang.github.io/async-book/02_execution/02_future.html)
 
 **反例：Waker 被过早释放或遗忘 wake**
 
@@ -266,7 +266,7 @@ impl Future for BadFuture {
 }
 ```
 
-> **来源**: [Rust Reference: Waker safety] · [Async Book: Common mistakes]
+> **来源**: [Rust Reference: Waker safety](https://doc.rust-lang.org/reference/) · [Async Book: Common mistakes](https://rust-lang.github.io/async-book/)
 
 ```rust,ignore
 // ❌ 反例: 返回 Pending 但未注册 Waker → 永久饥饿
@@ -285,7 +285,7 @@ impl Future for ForgetWakeFuture {
 }
 ```
 
-> **来源**: [Rust Reference: Future::poll contract] · [Async Book: Waker registration]
+> **来源**: [Rust Reference: Future::poll contract](https://doc.rust-lang.org/reference/) · [Async Book: Waker registration](https://rust-lang.github.io/async-book/)
 
 **边界：Waker 的 `wake` vs `wake_by_ref`**
 
@@ -400,7 +400,7 @@ impl UringReactor {
 
 > **[futures-rs 文档]** `Stream` 是异步版的 `Iterator`，其核心方法为 `poll_next`，返回 `Poll<Option<Self::Item>>`。每次 `poll_next` 可能返回 `Pending`，表示下一个元素尚未就绪。✅ 已验证
 
-> **[Rust Async Book]** `Stream` 允许在 `await` 循环中逐个消费异步产生的元素，是 `Iterator` 在异步世界的直接对应物。✅ 已验证
+> **[The Rust Async Book](https://rust-lang.github.io/async-book/)** `Stream` 允许在 `await` 循环中逐个消费异步产生的元素，是 `Iterator` 在异步世界的直接对应物。✅ 已验证
 
 ```rust,ignore
 // ✅ 正确: 自定义 Stream（基于 futures-rs 的 Stream trait）
@@ -433,7 +433,7 @@ impl Stream for IntervalStream {
 // 使用: while let Some(tick) = stream.next().await { ... }
 ```
 
-> **来源**: [futures-rs docs: Stream] · [Tokio Documentation: StreamExt] · [Rust Async Book: Streams]
+> **来源**: [futures-rs docs: Stream] · [Tokio Documentation: StreamExt] · [Rust Async Book: Streams](https://rust-lang.github.io/async-book/05_streams/01_chapter.html)
 
 **`Stream` vs `Iterator` 对比**
 
@@ -499,7 +499,7 @@ Future: 单次异步计算 → Poll<T>
   - AsyncRead/AsyncWrite 是字节层面的抽象；Stream/Sink 是消息层面的抽象
 ```
 
-> **来源**: [futures-rs docs] · [Tokio Documentation: I/O abstractions] · [RFC 2394 附录: Async I/O 抽象]
+> **来源**: [futures-rs docs] · [Tokio Documentation: I/O abstractions] · [RFC 2394 附录: Async I/O 抽象](https://rust-lang.github.io/rfcs/2394-2394-async_await.html)
 
 **反例：Stream 的 `poll_next` 未注册 Waker**
 
@@ -579,7 +579,7 @@ Sink 状态机:
   4. 一旦进入 Closed，再次 start_send 是逻辑错误（可能 panic）
 ```
 
-> **来源**: [futures-rs: Sink trait 文档] · [RFC 2394 附录: Async I/O 抽象]
+> **来源**: [futures-rs: Sink trait 文档] · [RFC 2394 附录: Async I/O 抽象](https://rust-lang.github.io/rfcs/2394-2394-async_await.html)
 
 ```rust,ignore
 // ✅ 正确: 严格遵循 Sink 状态机协议
@@ -662,7 +662,7 @@ async fn pipeline() {
 
 > **[Tokio 博客]** `impl Future` 使用静态分发（单态化），编译器内联 `poll` 调用；`dyn Future` 通过虚表（vtable）跳转，引入间接调用开销和指令缓存不友好。✅ 已验证
 
-> **[Rust Reference]** `async fn` 默认返回匿名具体类型（`impl Future`），这是零成本的基础；`Pin<Box<dyn Future>>` 是显式 opting-in 到动态分发。✅ 已验证
+> **[Rust Reference](https://doc.rust-lang.org/reference/)** `async fn` 默认返回匿名具体类型（`impl Future`），这是零成本的基础；`Pin<Box<dyn Future>>` 是显式 opting-in 到动态分发。✅ 已验证
 
 | 维度 | `impl Future` | `Pin<Box<dyn Future>>` |
 |:---|:---|:---|
@@ -672,11 +672,11 @@ async fn pipeline() {
 | 类型擦除 | ❌ 具体类型暴露 | ✅ 运行时类型擦除 |
 | 适用场景 | 通用路径 | trait 对象、递归、运行时类型选择 |
 
-> **来源**: [Rust Reference: Trait objects] · [Tokio 博客: Pinning] · [Rust Performance Book: Dynamic dispatch]
+> **来源**: [Rust Reference: Trait objects](https://doc.rust-lang.org/reference/types/trait-object.html) · [Tokio 博客: Pinning] · [Rust Performance Book: Dynamic dispatch]
 
 **栈 pinning（`pin!` macro）vs 堆 pinning**
 
-> **[Rust Reference: pin_macro]** Rust 1.68+ 引入 `std::pin::pin!` 宏，允许在栈上创建 `Pin<&mut T>`，避免 `Box::pin` 的堆分配开销。✅ 已验证
+> **[Rust Reference: pin_macro](https://doc.rust-lang.org/reference/)** Rust 1.68+ 引入 `std::pin::pin!` 宏，允许在栈上创建 `Pin<&mut T>`，避免 `Box::pin` 的堆分配开销。✅ 已验证
 
 ```rust
 // ✅ 正确: 栈 pinning（Rust 1.68+）
@@ -726,7 +726,7 @@ async fn recursive(n: u32) -> u32 {
 // 编译错误: recursive async function has infinite size
 ```
 
-> **来源**: [Rust Reference: Recursive async fn] · [RFC 2394 §3: State machine size] · [Tokio Documentation: Recursion]
+> **来源**: [Rust Reference: Recursive async fn](https://doc.rust-lang.org/reference/) · [RFC 2394 §3: State machine size](https://rust-lang.github.io/rfcs/2394-2394-async_await.html) · [Tokio Documentation: Recursion]
 
 ```rust
 // ✅ 修正: 使用 Box::pin 打破递归类型
@@ -759,9 +759,9 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 
 **编译期优化差异：单态化 vs 虚调用**
 
-> **[Rust Reference: Monomorphization]** `impl Future` 通过单态化（monomorphization）为每个具体类型生成专属的 `poll` 函数。编译器可内联 poll 调用、跨过程优化状态机、消除死代码，最终输出与手写状态机等价的机器码。✅ 已验证
+> **[Rust Reference: Monomorphization](https://doc.rust-lang.org/reference/items/generics.html)** `impl Future` 通过单态化（monomorphization）为每个具体类型生成专属的 `poll` 函数。编译器可内联 poll 调用、跨过程优化状态机、消除死代码，最终输出与手写状态机等价的机器码。✅ 已验证
 
-> **[Rust Performance Book]** `dyn Future` 的虚调用阻止了编译器内联。每次 `poll` 需通过 vtable 间接跳转（`call *offset(%rax)`），导致：① 指令缓存不友好（跳转目标不可预测）；② 阻止寄存器分配优化；③ 无法跨过程分析状态机结构。✅ 已验证
+> **[The Rust Performance Book](https://nnethercote.github.io/perf-book/)** `dyn Future` 的虚调用阻止了编译器内联。每次 `poll` 需通过 vtable 间接跳转（`call *offset(%rax)`），导致：① 指令缓存不友好（跳转目标不可预测）；② 阻止寄存器分配优化；③ 无法跨过程分析状态机结构。✅ 已验证
 
 ```text
 单态化（impl Future）的编译期优势:
@@ -777,7 +777,7 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
   3. 指针别名: Box<dyn Future> 的堆指针阻止某些 LICM（循环不变量外提）优化
 ```
 
-> **来源**: [Rust Reference: Monomorphization] · [Rust Performance Book] · [without.boats blog: The cost of dynamic dispatch in Rust]
+> **来源**: [Rust Reference: Monomorphization](https://doc.rust-lang.org/reference/items/generics.html) · [The Rust Performance Book](https://nnethercote.github.io/perf-book/) · [without.boats blog: The cost of dynamic dispatch in Rust]
 
 > **量化参考**: 在微基准测试中，`dyn Future` 的 poll 开销约为 `impl Future` 的 1.5~3 倍（取决于 vtable 缓存命中率和编译器优化等级）。[来源: without.boats blog: "The cost of dynamic dispatch in Rust"; Rust Performance Book: "Dynamic dispatch"]
 
@@ -1071,7 +1071,7 @@ mod tests {
 
 ### 8.13 Miri 动态验证：async 状态机的内存安全检测
 
-> **[来源: Miri Book; Rust Reference: Behavior considered undefined; rustc-dev-guide: Miri]** Miri 是 Rust 的 MIR 解释器，也是 Tree Borrows 别名模型的动态检查器。对于 async 状态机，Miri 能检测编译器无法捕获的 unsafe 边界违规——特别是涉及自引用、Pin 和跨 await 内存操作的场景。
+> **来源: [Miri Book](https://github.com/rust-lang/miri)** Miri 是 Rust 的 MIR 解释器，也是 Tree Borrows 别名模型的动态检查器。对于 async 状态机，Miri 能检测编译器无法捕获的 unsafe 边界违规——特别是涉及自引用、Pin 和跨 await 内存操作的场景。
 
 #### 场景 1：悬垂指针检测（使用已释放的 Box）
 
@@ -1187,7 +1187,7 @@ Miri 的局限（与 loom 互补）:
   - ✅ 检测别名违规、悬垂指针、无效值、未初始化内存、越界访问
 ```
 
-> **来源**: [Miri Book: What Miri can detect] · [Rust Reference: Undefined behavior] · [rustc-dev-guide: Miri and async]
+> **来源**: [Miri Book](https://github.com/rust-lang/miri) · [Rust Reference: Undefined behavior](https://doc.rust-lang.org/reference/) · [rustc-dev-guide: Miri and async]
 
 ---
 
@@ -1198,27 +1198,27 @@ Miri 的局限（与 loom 互补）:
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
-| async fn 返回 Future | [TRPL: Ch17] | ✅ |
-| Futures are lazy | [Async Book] | ✅ |
-| .await 是挂起点 | [TRPL: Ch17] | ✅ |
-| async fn 编译为状态机 | [Rust Reference: Async] | ✅ |
-| Pin 保证内存位置稳定 | [RFC 2349] · [TRPL: Ch17] | ✅ |
-| Tokio 是生产级运行时 | [tokio.rs] · 社区共识 | ✅ |
-| 取消安全需手动保证 | [Async Book: Cancellation] | ✅ |
-| AFIT/RPITIT 语义等价 | [RFC 3185] · [Rust Reference] | ✅ |
+| async fn 返回 Future | [TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) | ✅ |
+| Futures are lazy | [The Rust Async Book](https://rust-lang.github.io/async-book/) | ✅ |
+| .await 是挂起点 | [TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) | ✅ |
+| async fn 编译为状态机 | [Rust Reference: Async](https://doc.rust-lang.org/reference/items/functions.html#async-functions) | ✅ |
+| Pin 保证内存位置稳定 | [RFC 2349](https://rust-lang.github.io/rfcs/2349-2349-pin.html) · [TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) | ✅ |
+| Tokio 是生产级运行时 | [tokio.rs](https://tokio.rs/) · 社区共识 | ✅ |
+| 取消安全需手动保证 | [Async Book: Cancellation](https://rust-lang.github.io/async-book/03_async_await/02_cancellation.html) | ✅ |
+| AFIT/RPITIT 语义等价 | [RFC 3185](https://rust-lang.github.io/rfcs/3185-3185-cargo-weak-namespaced-features.html) · [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ |
 | Pin 形式化语义 | [PLDI 2024: RefinedRust] | ⚠️ 前沿研究 |
 | async 完整形式化 | 活跃研究领域 | 🔍 待验证 |
-| 异步计算与 Futures | [Wikipedia: Futures and promises] · [CMU 17-350: Safe Systems Programming] | ✅ |
-| async/await 语法 | [Rust Reference: Await expressions] · [TRPL: Ch17] | ✅ |
-| Future trait 语义 | [Rust Reference: Future trait] · [std::future::Future] | ✅ |
-| Pin 不动性保证 | [Rust Reference: Pin] · [RFC 2592] | ✅ |
-| 取消安全设计 | [Tokio Docs: Cancellation] · [Async Book: Cancellation] | ✅ |
-| Waker 契约 | [Rust Reference: Waker] · [std::task::Waker] | ✅ |
-| Stream trait | [futures-rs docs] · [Rust Async Book: Streams] | ✅ |
-| 动态分发开销 | [Rust Reference: Trait objects] · [Rust Performance Book] | ✅ |
-| Miri 检测能力 | [Miri Book] · [Rust Reference: UB] | ✅ |
-| 协程与生成器 | [Wikipedia: Coroutine] · [RFC 2394: async/await desugaring] | ✅ |
-| 惰性求值与响应式编程 | [Wikipedia: Lazy evaluation] · [CMU 15-214: Principles of Software Construction] | ✅ |
+| 异步计算与 Futures | [Wikipedia: Futures and promises](https://en.wikipedia.org/wiki/Futures_and_promises) · [CMU 17-350: Safe Systems Programming] | ✅ |
+| async/await 语法 | [Rust Reference: Await expressions](https://doc.rust-lang.org/reference/) · [TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) | ✅ |
+| Future trait 语义 | [Rust Reference: Future trait](https://doc.rust-lang.org/reference/) · [std::future::Future] | ✅ |
+| Pin 不动性保证 | [Rust Reference: Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html) · [RFC 2592](https://github.com/rust-lang/rfcs/pull/2592) | ✅ |
+| 取消安全设计 | [Tokio Docs: Cancellation] · [Async Book: Cancellation](https://rust-lang.github.io/async-book/03_async_await/02_cancellation.html) | ✅ |
+| Waker 契约 | [Rust Reference: Waker](https://doc.rust-lang.org/std/task/struct.Waker.html) · [std::task::Waker] | ✅ |
+| Stream trait | [futures-rs docs] · [Rust Async Book: Streams](https://rust-lang.github.io/async-book/05_streams/01_chapter.html) | ✅ |
+| 动态分发开销 | [Rust Reference: Trait objects](https://doc.rust-lang.org/reference/types/trait-object.html) · [The Rust Performance Book](https://nnethercote.github.io/perf-book/) | ✅ |
+| Miri 检测能力 | [Miri Book](https://github.com/rust-lang/miri) · [Rust Reference: UB](https://doc.rust-lang.org/reference/) | ✅ |
+| 协程与生成器 | [Wikipedia: Coroutine](https://en.wikipedia.org/wiki/Coroutine) · [RFC 2394: async/await desugaring](https://rust-lang.github.io/rfcs/2394-2394-async_await.html) | ✅ |
+| 惰性求值与响应式编程 | [Wikipedia: Lazy evaluation](https://en.wikipedia.org/wiki/Lazy_evaluation) · [CMU 15-214: Principles of Software Construction] | ✅ |
 
 ---
 

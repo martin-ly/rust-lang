@@ -79,3 +79,31 @@
 ## 相关概念
 
 - [安装 Rust](./02_installation.md)
+
+
+## 📚 模块 8: 国际化对齐
+
+> 本模块按项目模板补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 说明 |
+|:---|:---|
+| [The Rust Programming Language — Ch1](https://doc.rust-lang.org/book/ch01-00-getting-started.html) | 官方入门书第 1 章 |
+| [Rust 官方安装指南](https://www.rust-lang.org/tools/install) | 工具链安装 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | 官方示例驱动教程 |
+
+### 8.2 学术/工业来源
+
+| 来源 | 说明 |
+|:---|:---|
+| [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | Rust 所有权与内存安全形式化基础 |
+
+### 8.3 社区资源
+
+| 来源 | 说明 |
+|:---|:---|
+| [Brown University Interactive Rust Book](https://rust-book.cs.brown.edu/) | 可视化交互式 Rust 教程 |
+| [Rustlings](https://github.com/rust-lang/rustlings) | 官方交互式练习 |
+| [This Week in Rust](https://this-week-in-rust.org/) | 社区周报 |
+

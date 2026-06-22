@@ -10,13 +10,13 @@
 > **形式化框架**: 借用投影 + Pin保证 + 生命周期参数化
 >
 > **参考**: [ouroboros](https://docs.rs/ouroboros) 0.18.x, [ouroboros_macro](https://docs.rs/ouroboros_macro)
-> **[来源: ouroboros Documentation - docs.rs/ouroboros]** · **[来源: Rust Reference - Pin]** · **[来源: Wikipedia - Self-referential Struct]** · **[来源: Rustonomicon - Pin]** · **[来源: TRPL Ch. 19]** · **[来源: RFC 2349 - Pin] · **[来源: Wikipedia - Self-Referential Data Structure]** · **[来源: Wikipedia - Borrow Checker]** · **[来源: ACM - Safe Self-Reference Patterns]** · **[来源: IEEE - Memory Safety Verification]**
+> **[来源: ouroboros Documentation - docs.rs/ouroboros]** · **来源: [Rust Reference - Pin](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Self-referential Struct](https://en.wikipedia.org/wiki/Self_referential_Struct)** · **来源: [Rustonomicon - Pin](https://doc.rust-lang.org/nomicon/)** · **来源: [TRPL Ch. 19](https://doc.rust-lang.org/book/ch19-00-advanced-features.html)** · **来源: [RFC 2349 - Pin](https://rust-lang.github.io/rfcs/2349-2349-pin.html) · **来源: [Wikipedia - Self-Referential Data Structure](https://en.wikipedia.org/wiki/Self_Referential_Data_Structure)** · **来源: [Wikipedia - Borrow Checker](https://en.wikipedia.org/wiki/Borrow_Checker)** · **[来源: ACM - Safe Self-Reference Patterns]** · **[来源: IEEE - Memory Safety Verification]**
 
 ---
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [Ouroboros 自引用结构形式化分析](#ouroboros-自引用结构形式化分析)
   - [目录](#目录)
@@ -78,15 +78,15 @@
 
 ## 1. 项目概览
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Ouroboros 是一个 Rust 宏库，用于安全地创建**自引用结构体（Self-Referential Structs）**。它通过过程宏自动生成安全的构建器和访问器，解决了 Rust 所有权系统中长期存在的自引用难题。
 
 ### 核心解决的问题
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 问题 | Ouroboros 解决方案 |
 |------|-------------------|
@@ -97,7 +97,7 @@ Ouroboros 是一个 Rust 宏库，用于安全地创建**自引用结构体（Se
 
 ### 关键特性
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 - **零unsafe**: 用户代码无需编写 `unsafe` 块
 - **Pin兼容**: 与 Rust 的 `Pin` 系统无缝集成
@@ -113,7 +113,7 @@ Ouroboros 是一个 Rust 宏库，用于安全地创建**自引用结构体（Se
 
 ### 2.1 什么是自引用结构体
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 自引用结构体是指其某个字段包含对同一结构体其他字段的引用。这种设计在某些场景下非常自然：
 
@@ -134,7 +134,7 @@ struct Document {
 
 ### 2.2 手动实现的陷阱
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 手动实现自引用结构体充满了危险：
 
@@ -188,7 +188,7 @@ fn main() {
 
 ### 2.3 Rust所有权系统的限制
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Rust 的借用规则明确禁止自引用：
 
@@ -224,7 +224,7 @@ impl<'a> Document<'a> {
 
 ### 3.1 self_referencing宏生成分析
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 `#[self_referencing]` 是一个过程宏，它会：
 
@@ -248,7 +248,7 @@ struct DataWithSlice {
 
 ### 3.2 Builder模式实现
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 宏生成的构建器确保在结构体被固定之前完成所有初始化：
 
@@ -283,7 +283,7 @@ impl DataWithSlice {
 
 ### 3.3 代码生成示例
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 完整的宏生成代码包含以下组件：
 
@@ -337,7 +337,7 @@ impl DataWithSlice {
 
 ### 4.1 with_*方法设计原理
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 Ouroboros 使用闭包 API 来安全地访问自引用字段，这是其核心设计模式：
 
@@ -371,7 +371,7 @@ impl DataWithSlice {
 
 ### 4.2 闭包API与作用域控制
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 闭包 API 强制实现**借用纪律**：
 
@@ -420,7 +420,7 @@ impl DataWithSlice {
 
 ### 4.3 内存布局保证
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 使用 `#[repr(C)]` 确保字段布局稳定，这对自引用的安全性至关重要：
 
@@ -446,7 +446,7 @@ struct DataWithSlice {
 
 ### 5.1 !Unpin实现机制
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 Ouroboros 通过实现 `!Unpin` 来阻止结构体被移动：
 
@@ -459,7 +459,7 @@ impl !Unpin for DataWithSlice {}
 
 ### 5.2 内存固定原理
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 `Pin<P>` 是 Rust 提供的内存固定原语：
 
@@ -486,7 +486,7 @@ pub struct DataWithSlice {
 
 ### 5.3 自引用有效性证明
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **定理 5.1 (自引用有效性)**: 使用 Ouroboros 创建的自引用结构体，其自引用字段在整个生命周期内始终有效。
 
@@ -517,7 +517,7 @@ pub struct DataWithSlice {
 
 ### 6.1 'this生命周期参数
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 Ouroboros 引入特殊的 `'this` 生命周期来表示"结构体的生命周期"：
 
@@ -545,7 +545,7 @@ struct Document {
 
 ### 6.2 协变与逆变问题
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 自引用引入了复杂的生命周期方差问题：
 
@@ -569,7 +569,7 @@ struct Container<'a> {
 
 ### 6.3 生命周期约束推导
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 Ouroboros 自动推导生命周期约束：
 
@@ -603,7 +603,7 @@ struct ComplexDoc<'a, T> {
 
 ### 7.1 or_shared变体
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 `or_shared` 允许创建共享的自引用：
 
@@ -634,7 +634,7 @@ impl SharedData {
 
 ### 7.2 async/await支持
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 Ouroboros 完全支持异步代码：
 
@@ -678,7 +678,7 @@ async fn process() {
 
 ### 7.3 递归自引用类型
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 支持递归数据结构：
 
@@ -715,7 +715,7 @@ impl TreeNode {
 
 ### 8.1 堆分配策略
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 Ouroboros 默认使用 `Box::pin` 进行堆分配：
 
@@ -733,7 +733,7 @@ pub fn new(...) -> Pin<Box<Self>>
 
 ### 8.2 内存开销分析
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **结构体内存布局**:
 
@@ -760,7 +760,7 @@ struct Example {
 
 ### 8.3 零成本抽象验证
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 使用 `cargo asm` 或 `godbolt.org` 验证：
 
@@ -787,7 +787,7 @@ data.with_slice(|s| s.len())
 
 ### 9.1 解析器实现
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 实现一个高效的零拷贝解析器：
 
@@ -1283,13 +1283,13 @@ fn demo() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---
 

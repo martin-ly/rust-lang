@@ -38,11 +38,11 @@
 > **层级**: L6 生态工具 / L3 高级系统编程
 > **前置概念**: [Async](../../concept/03_advanced/02_async.md) · [Ownership](../../concept/01_foundation/01_ownership.md) · [Unsafe](../../concept/03_advanced/03_unsafe.md)
 > **Bloom 层级**: 应用 → 评价
-> **[来源: Embassy Book]** ·
-> **[来源: RTIC Book]** · **[来源: Rust Embedded Working Group]** ·
-> **[来源: Wikipedia - Embedded System]** ·
-> **[来源: Wikipedia - Real-Time Operating System]** ·
-> **[来源: Rust Embedded Book - docs.rust-embedded.org]** ✅
+> **来源: [Embassy Book](https://embassy.dev/book/)** ·
+> **来源: [RTIC Book](https://rtic.rs/book/)** · **来源: [Rust Embedded Working Group](https://rust-embedded.github.io/book/)** ·
+> **来源: [Wikipedia - Embedded System](https://en.wikipedia.org/wiki/Embedded_System)** ·
+> **来源: [Wikipedia - Real-Time Operating System](https://en.wikipedia.org/wiki/Real_Time_Operating_System)** ·
+> **来源: [Rust Embedded Book - docs.rust-embedded.org](https://doc.rust-lang.org/stable/embedded-book/)** ✅
 
 ---
 
@@ -78,7 +78,7 @@
 
 ### 核心设计
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 Embassy 将 **async/await** 带入裸机（bare-metal）嵌入式开发：
 
@@ -101,7 +101,7 @@ main loop {           #[embassy_executor::main]
 
 ### 关键特性
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 | 特性 | 说明 | 优势 |
 |:---|:---|:---|
@@ -113,7 +113,7 @@ main loop {           #[embassy_executor::main]
 
 ### 代码示例
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use embassy_executor::Spawner;
@@ -139,7 +139,7 @@ async fn main(_spawner: Spawner) {
 
 ### 多任务并发
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 use embassy_sync::channel::Channel;
@@ -173,7 +173,7 @@ async fn consumer() {
 
 ### 核心设计
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 RTIC (Real-Time Interrupt-driven Concurrency) 基于**硬件优先级**实现无开销并发：
 
@@ -190,7 +190,7 @@ RTIC 调度模型:
 
 ### 关键特性
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 | 特性 | 说明 | 优势 |
 |:---|:---|:---|
@@ -202,7 +202,7 @@ RTIC 调度模型:
 
 ### 代码示例
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use rtic::app;
@@ -362,13 +362,13 @@ graph TD
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Embedded System]**
+> **来源: [Wikipedia - Embedded System](https://en.wikipedia.org/wiki/Embedded_System)**
 
-> **[来源: Wikipedia - Real-Time Operating System]**
+> **来源: [Wikipedia - Real-Time Operating System](https://en.wikipedia.org/wiki/Real_Time_Operating_System)**
 
-> **[来源: Wikipedia - Microcontroller]**
+> **来源: [Wikipedia - Microcontroller](https://en.wikipedia.org/wiki/Microcontroller)**
 
-> **[来源: Rust Embedded Working Group]**
+> **来源: [Rust Embedded Working Group](https://rust-embedded.github.io/book/)**
 
 > **[来源: Embassy Book - embassy.dev]**
 
@@ -378,12 +378,12 @@ graph TD
 
 > **[来源: ACM - Embedded Systems Survey]**
 
-> **[来源: Wikipedia - Embedded System]**
-> **[来源: Rust Embedded WG]**
-> **[来源: Embassy Book]**
+> **来源: [Wikipedia - Embedded System](https://en.wikipedia.org/wiki/Embedded_System)**
+> **来源: [Rust Embedded WG](https://rust-embedded.github.io/book/)**
+> **来源: [Embassy Book](https://embassy.dev/book/)**
 > **[来源: IEEE - Embedded Software]**
 
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ---

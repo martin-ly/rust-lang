@@ -65,7 +65,7 @@
 
 ## 生命周期语法
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 显式标注
@@ -84,7 +84,7 @@ where
 
 ## 生命周期省略规则
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 编译器自动应用以下规则：
 
@@ -111,7 +111,7 @@ where
 
 ## 结构体生命周期
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 持有引用需要生命周期参数
@@ -136,7 +136,7 @@ impl<'a> Parser<'a> {
 
 ## 'static 生命周期
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 字符串字面量是'static
@@ -156,7 +156,7 @@ static GLOBAL: i32 = 42;
 
 ## 高阶Trait Bound (HRTB)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 对所有生命周期都成立
@@ -176,13 +176,13 @@ call_with_ref(closure);
 
 ## 常见模式
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 输入输出相同生命周期
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 fn identity<'a>(x: &'a str) -> &'a str {
@@ -192,9 +192,9 @@ fn identity<'a>(x: &'a str) -> &'a str {
 
 ### 返回与特定输入关联
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 fn get_name<'a>(person: &'a Person) -> &'a str {
@@ -204,9 +204,9 @@ fn get_name<'a>(person: &'a Person) -> &'a str {
 
 ### 多个输入，返回其中一个
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 fn choose<'a>(first: &'a str, second: &'a str, use_first: bool) -> &'a str {
@@ -218,7 +218,7 @@ fn choose<'a>(first: &'a str, second: &'a str, use_first: bool) -> &'a str {
 
 ## 生命周期错误与修复
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 错误 | 代码 | 修复 |
 | :--- | :--- | :--- |
@@ -230,7 +230,7 @@ fn choose<'a>(first: &'a str, second: &'a str, use_first: bool) -> &'a str {
 
 ## Trait对象生命周期
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 默认'static
@@ -350,7 +350,7 @@ impl SelfReferential {
 
 ### 生命周期关系
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 'a: 'b  // 'a 至少和 'b 一样长（'a 包含 'b）
@@ -359,7 +359,7 @@ T: 'a   // T 中所有引用至少存活 'a
 
 ### 常见生命周期
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | 标注 | 含义 | 示例 |
 | :--- | :--- | :--- |
@@ -375,7 +375,7 @@ T: 'a   // T 中所有引用至少存活 'a
 
 ### 三条规则
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```
 1. 每个引用参数有自己的生命周期
@@ -385,7 +385,7 @@ T: 'a   // T 中所有引用至少存活 'a
 
 ### 示例
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 // 省略前
@@ -407,7 +407,7 @@ fn method(&self, x: &str) -> &str { self.0 }
 
 ### 模式1: 输入输出相同
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
@@ -417,7 +417,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### 模式2: 返回self的引用
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 impl<'a> Parser<'a> {
@@ -427,7 +427,7 @@ impl<'a> Parser<'a> {
 
 ### 模式3: 独立生命周期
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 fn parse<'a, 'b>(input: &'a str, config: &'b Config) -> &'a str {
@@ -672,17 +672,17 @@ let r = &x;  // 编译器自动推断
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Variable Scope]**
-> **[来源: TRPL Ch. 10 - Lifetimes]**
-> **[来源: Rust Reference - Lifetimes]**
-> **[来源: RFC 2094 - NLL]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Variable Scope](https://en.wikipedia.org/wiki/Variable_Scope)**
+> **来源: [TRPL Ch. 10 - Lifetimes](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)**
+> **来源: [Rust Reference - Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html)**
+> **来源: [RFC 2094 - NLL](https://rust-lang.github.io/rfcs/2094-2094-nll.html)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

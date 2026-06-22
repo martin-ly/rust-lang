@@ -14,7 +14,7 @@
 
 ## 📊 目录 {#-目录}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [研究笔记完整索引](#研究笔记完整索引)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -62,7 +62,7 @@
 
 ## 📐 文档分类体系 {#-文档分类体系}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **多维度分类**：见 [10_classification.md](./10_classification.md) — 按文档角色、知识层次、主题域、扩展路线。
 
@@ -76,13 +76,13 @@
 
 ## 📚 核心文档索引 {#-核心文档索引}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 导航和索引
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **[10_00_organization_and_navigation.md](./10_00_organization_and_navigation.md)** - 组织架构与导航（按目标、按支柱、层级结构；首次使用必读）
 
@@ -249,9 +249,9 @@
 
 ### 进展跟踪
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **[10_progress_tracking.md](./10_progress_tracking.md)** - 研究进展跟踪
    - 详细进展跟踪
@@ -299,9 +299,9 @@
 
 ### 方法论和指南
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **[10_research_methodology.md](./10_research_methodology.md)** - 研究方法论
    - 形式化研究方法
@@ -331,9 +331,9 @@
 
 ### 实际应用
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **[10_practical_applications.md](./10_practical_applications.md)** - 实际应用案例研究
    - 系统编程案例
@@ -343,9 +343,9 @@
 
 ### 贡献和质量
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **[10_template.md](./10_template.md)** - 研究笔记模板
    - 标准化的研究笔记结构
@@ -373,13 +373,13 @@
 
 ## 🔬 研究笔记索引 {#-研究笔记索引}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 形式化方法研究
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **目录**: [formal_methods/](./formal_methods/README.md)
 
@@ -432,9 +432,9 @@
 
 ### 类型理论研究
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **目录**: [type_theory/](./type_theory/README.md)
 
@@ -472,7 +472,7 @@
 
 ### 实验研究
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **目录**: [experiments/](./experiments/README.md)
 
@@ -505,7 +505,7 @@
 
 ### 软件设计理论研究
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **目录**: [software_design_theory/](./software_design_theory/README.md)
 
@@ -537,7 +537,7 @@
 
 ### 综合研究
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 1. **[10_practical_applications.md](./10_practical_applications.md)** - 实际应用案例研究
    - 研究目标: 通过分析实际应用案例，验证 Rust 理论在实际项目中的应用效果
@@ -555,7 +555,7 @@
 
 ### 所有权和借用
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 - [所有权模型形式化](./formal_methods/10_ownership_model.md)
 - [借用检查器证明](./formal_methods/10_borrow_checker_proof.md)
@@ -563,7 +563,7 @@
 
 ### 类型系统
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 - [类型理论完备性缺口](./formal_methods/00_completeness_gaps.md)
 - [类型系统基础](./type_theory/10_type_system_foundations.md)
@@ -573,14 +573,14 @@
 
 ### 生命周期
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - 生命周期形式化（形式化方法）
 - [生命周期形式化（类型理论）](./type_theory/10_lifetime_formalization.md)
 
 ### 异步和并发
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 - [异步状态机形式化](./formal_methods/10_async_state_machine.md)
 - [并发性能研究](./experiments/10_concurrency_performance.md)
@@ -588,7 +588,7 @@
 
 ### 安全与 unsafe
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 - [安全与非安全全面论证](./10_safe_unsafe_comprehensive_analysis.md)
 - [05_boundary_system 三维边界](software_design_theory/05_boundary_system/README.md)
@@ -596,7 +596,7 @@
 
 ### 设计模式与工程
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 - [设计模式形式化](software_design_theory/01_design_patterns_formal/README.md)（GoF 23）
 - [23 安全 / 43 完全模型](software_design_theory/02_workflow_safe_complete_models/README.md)
@@ -605,7 +605,7 @@
 
 ### 性能优化
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 - [性能基准测试](./experiments/10_performance_benchmarks.md)
 - [内存分析](./experiments/10_memory_analysis.md)
@@ -614,7 +614,7 @@
 
 ### 实际应用 {#实际应用-1}
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 - [实际应用案例研究](./10_practical_applications.md)
 - [研究方法论](./10_research_methodology.md)
@@ -752,25 +752,25 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-> **[来源: Rust Reference]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-> **[来源: Rust Standard Library]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**

@@ -42,19 +42,19 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Rust 2024 Edition 对 **Return Position Impl Trait (RPIT)** 的生命周期捕获规则进行了重要调整。在 `impl Trait` 返回类型中，生命周期默认捕获行为从**精确捕获**变为**自动捕获所有输入生命周期**。
 
 ## 变化详情
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Rust 2021 及之前
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 fn example<'a>(x: &'a str) -> impl Iterator<Item = char> + 'a {
@@ -66,7 +66,7 @@ fn example<'a>(x: &'a str) -> impl Iterator<Item = char> + 'a {
 
 ### Rust 2024 Edition
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 fn example(x: &str) -> impl Iterator<Item = char> {
@@ -82,7 +82,7 @@ fn example(x: &str) -> impl Iterator<Item = char> {
 
 ### 对现有代码的影响
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 1. **大部分代码无需修改**：自动捕获通常是更安全的默认行为
 2. **边界情况需关注**：某些依赖精确生命周期控制的代码可能需要调整
@@ -90,7 +90,7 @@ fn example(x: &str) -> impl Iterator<Item = char> {
 
 ### 具体示例
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 #### 示例 1：自动捕获简化代码
 
@@ -253,13 +253,13 @@ where
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - Editions]**
-> **[来源: Rust Edition Guide]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - Editions](https://doc.rust-lang.org/reference/)**
+> **来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)**
 > **[来源: RFCs - Edition RFCs]**
-> **[来源: TRPL - Appendix: Editions]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 > **[来源: ACM - Language Evolution Patterns]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: Rust Reference - impl Trait]**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust Reference - impl Trait](https://doc.rust-lang.org/reference/)**
 
 ---

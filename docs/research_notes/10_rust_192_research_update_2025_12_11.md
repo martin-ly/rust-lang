@@ -52,7 +52,7 @@
 
 ## 📋 概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档记录 Rust 1.92.0 版本对研究笔记系统的影响和需要更新的内容。
 
@@ -60,13 +60,13 @@
 
 ## 🎯 Rust 1.92.0 主要改进
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 语言特性改进
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **`MaybeUninit` 表示和有效性文档化**
    - 正式文档化了 `MaybeUninit` 的内部表示和有效性约束
@@ -108,13 +108,13 @@
 
 ## 💻 代码示例与研究场景
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 场景 1：`MaybeUninit` 安全使用模式
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 use std::mem::MaybeUninit;
@@ -149,9 +149,9 @@ fn maybe_uninit_safety_research() {
 
 ### 场景 2：联合体原始引用访问
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 研究场景：联合体字段的安全原始引用访问
@@ -186,9 +186,9 @@ fn union_raw_pointer_research() {
 
 ### 场景 3：自动特征与 Sized 边界
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 研究场景：分析改进后的自动特征推导
@@ -217,9 +217,9 @@ impl Container for Vec<i32> {
 
 ### 场景 4：高阶生命周期处理
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 研究场景：验证高阶生命周期的正确性
@@ -248,9 +248,9 @@ where
 
 ### 场景 5：关联项多边界
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 研究场景：关联项的多个边界
@@ -277,7 +277,7 @@ impl MultiBound for MyStruct {
 
 ## 📊 标准库 API 稳定化
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **`NonZero<u{N}>::div_ceil`** - 非零整数的向上除法
 2. **`Location::file_as_c_str`** - 获取位置的文件路径作为 C 字符串
@@ -304,7 +304,7 @@ fn api_stabilization_examples() {
 
 ## 📊 性能优化
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **迭代器方法特化** - `Iterator::eq` 和 `Iterator::eq_by` 方法为 `TrustedLen` 迭代器特化
 2. **简化的元组扩展** - 简化了 `Extend` trait 对元组的实现
@@ -319,7 +319,7 @@ fn api_stabilization_examples() {
 
 ### 已更新的文档
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 - ✅ 所有核心研究笔记文档已更新到 Rust 1.93.0+（历史记录：1.92.0+ → 1.93.0+）
 - ✅ 版本引用已统一更新
@@ -327,7 +327,7 @@ fn api_stabilization_examples() {
 
 ### 需要关注的研究方向
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 1. **`MaybeUninit` 安全使用模式研究**
    - 最佳实践
@@ -352,13 +352,13 @@ fn api_stabilization_examples() {
 
 ### 外部链接
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 - [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/)
 
 ### 内部代码
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 | 资源 | 链接 | 说明 |
 | :--- | :--- | :--- |
@@ -367,7 +367,7 @@ fn api_stabilization_examples() {
 
 ### 形式化文档
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 特性 | 形式化文档 | 相关定义 |
 | :--- | :--- | :--- |
@@ -378,7 +378,7 @@ fn api_stabilization_examples() {
 
 ### 核心定理
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 定理 | 文档 | 说明 |
 | :--- | :--- | :--- |
@@ -388,7 +388,7 @@ fn api_stabilization_examples() {
 
 ### Coq 证明骨架
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | 定理 | Coq 文件 | 状态 |
 | :--- | :--- | :--- |
@@ -491,13 +491,13 @@ fn api_stabilization_examples() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

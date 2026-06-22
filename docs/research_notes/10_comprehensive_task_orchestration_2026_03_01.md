@@ -51,13 +51,13 @@
 
 ## 📊 真实状态盘点
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 文件统计
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 目录 | 文件数 | 总大小 | 平均大小 |
 | :--- | :--- | :--- | :--- |
@@ -70,9 +70,9 @@
 
 ### 内容质量评估
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 维度 | 状态 | 说明 |
 | :--- | :--- | :--- |
@@ -96,13 +96,13 @@
 
 ## 🔍 真实未完成清单
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### A类：归档占位文件 (6个) - 需清理或补充
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文件 | 大小 | 状态 | 动作 |
 | :--- | :--- | :--- | :--- |
@@ -115,9 +115,9 @@
 
 ### B类：可扩展的矩阵/决策树 (12个)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文件 | 当前大小 | 目标大小 | 优先级 |
 | :--- | :--- | :--- | :--- |
@@ -136,9 +136,9 @@
 
 ### C类：可扩展的思维导图 (15个)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文件 | 当前大小 | 目标大小 | 优先级 |
 | :--- | :--- | :--- | :--- |
@@ -160,9 +160,9 @@
 
 ### D类：可扩展的教程 (5篇)
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文件 | 当前大小 | 目标大小 | 优先级 |
 | :--- | :--- | :--- | :--- |
@@ -174,9 +174,9 @@
 
 ### E类：可扩展的速查表 (5篇)
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文件 | 当前大小 | 目标大小 | 优先级 |
 | :--- | :--- | :--- | :--- |
@@ -188,9 +188,9 @@
 
 ### F类：设计模式可扩展 (23篇)
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 分类 | 文件 | 当前大小 | 目标大小 |
 | :--- | :--- | :--- | :--- |
@@ -220,9 +220,9 @@
 
 ### G类：Coq骨架证明 (L3机器证明)
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文件 | 当前状态 | 目标 | 优先级 |
 | :--- | :--- | :--- | :--- |
@@ -239,7 +239,7 @@
 
 ### Phase 0: 全面审计与清理 (1天)
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 | 任务ID | 任务描述 | 工时 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -250,7 +250,7 @@
 
 ### Phase 1: Core形式化增强 (3天)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | 任务ID | 任务描述 | 工时 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -263,7 +263,7 @@
 
 ### Phase 2: 设计模式扩展 (5天)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 | 任务ID | 任务描述 | 工时 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -436,13 +436,13 @@ Phase 7: 验证报告      [░░░░░░░░░░] 0%  ⏳ 待开始
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

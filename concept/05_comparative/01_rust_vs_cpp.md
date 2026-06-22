@@ -21,8 +21,8 @@
 > [Paradigm Matrix](./03_paradigm_matrix.md) ·
 > [Safety Boundaries](./04_safety_boundaries.md)
 > **主要来源**:
-> [TRPL] · [Rust Reference] · [Wikipedia: C++] · [Wikipedia: Rust] · [Wikipedia: Linear logic] · [Wikipedia: Type system] · [Wikipedia: Resource acquisition is initialization] ·
-> [Wikipedia: Programming language]
+> [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Wikipedia: C++](https://en.wikipedia.org/wiki/C%2B%2B) · [Wikipedia: Rust](https://en.wikipedia.org/wiki/Rust) · [Wikipedia: Linear logic](https://en.wikipedia.org/wiki/Linear_logic) · [Wikipedia: Type system](https://en.wikipedia.org/wiki/Type_system) · [Wikipedia: Resource acquisition is initialization](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization) ·
+> [Wikipedia: Programming language](https://en.wikipedia.org/wiki/Programming_language)
 
 ---
 
@@ -38,17 +38,17 @@
 
 ### Wikipedia 权威定义
 
-> **[Wikipedia: Rust (programming language)]** Rust is a general-purpose programming language that emphasizes performance, type safety, and concurrency. It enforces memory safety — meaning that all references point to valid memory — without a garbage collector.
+> **[Wikipedia: Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** Rust is a general-purpose programming language that emphasizes performance, type safety, and concurrency. It enforces memory safety — meaning that all references point to valid memory — without a garbage collector.
 > **来源**: <https://en.wikipedia.org/wiki/Rust_(programming_language)>
-> **[Wikipedia: C++]** C++ is a high-level, general-purpose programming language created by Danish computer scientist Bjarne Stroustrup. It was designed with a bias toward system programming and embedded, resource-constrained software and large systems, with performance, efficiency, and flexibility of use as its design highlights.
+> **[Wikipedia: C++](https://en.wikipedia.org/wiki/C%2B%2B)** C++ is a high-level, general-purpose programming language created by Danish computer scientist Bjarne Stroustrup. It was designed with a bias toward system programming and embedded, resource-constrained software and large systems, with performance, efficiency, and flexibility of use as its design highlights.
 > **来源**: <https://en.wikipedia.org/wiki/C%2B%2B>
-> **[Wikipedia: Programming language]** A programming language is a system of notation for writing computer programs. Programming languages are described in terms of their syntax (form) and semantics (meaning), usually defined by a formal language.
+> **[Wikipedia: Programming language](https://en.wikipedia.org/wiki/Programming_language)** A programming language is a system of notation for writing computer programs. Programming languages are described in terms of their syntax (form) and semantics (meaning), usually defined by a formal language.
 > **来源**: <https://en.wikipedia.org/wiki/Programming_language>
-> **[Wikipedia: Type system]** A type system is a logical system comprising a set of rules that assigns a property called a type to every term in a computer program.
+> **[Wikipedia: Type system](https://en.wikipedia.org/wiki/Type_system)** A type system is a logical system comprising a set of rules that assigns a property called a type to every term in a computer program.
 > **来源**: <https://en.wikipedia.org/wiki/Type_system>
-> **[Wikipedia: Resource acquisition is initialization]** Resource acquisition is initialization (RAII [来源: [Wikipedia — RAII](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization)]) is a programming idiom used in several object-oriented, statically-typed programming languages to describe a particular language behavior. In RAII, holding a resource is a class invariant, and is tied to object lifetime.
+> **[Wikipedia: Resource acquisition is initialization](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization)** Resource acquisition is initialization (RAII [来源: [Wikipedia — RAII](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization)]) is a programming idiom used in several object-oriented, statically-typed programming languages to describe a particular language behavior. In RAII, holding a resource is a class invariant, and is tied to object lifetime.
 > **来源**: <https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization>
-> **[Wikipedia: Linear logic]** Linear logic is a substructural logic proposed by Jean-Yves Girard as a refinement of classical and intuitionistic logic, joining the dualities of the former with many of the constructive properties of the latter.
+> **[Wikipedia: Linear logic](https://en.wikipedia.org/wiki/Linear_logic)** Linear logic is a substructural logic proposed by Jean-Yves Girard as a refinement of classical and intuitionistic logic, joining the dualities of the former with many of the constructive properties of the latter.
 > **来源**: <https://en.wikipedia.org/wiki/Linear_logic>
 
 ---
@@ -343,7 +343,7 @@ C++ 的机制是**层叠式**的：
 
 ### 7.3 Move 语义系统对比（深度）
 
-> **[来源: The Coded Message — RAII] · [Stroustrup — The C++ Programming Language, Ch. 17] · [Rust Reference — §4.1.8 Moves]** ✅
+> **[来源: The Coded Message — RAII] · [Stroustrup — The C++ Programming Language, Ch. 17] · [Rust Reference — §4.1.8 Moves](https://doc.rust-lang.org/reference/)** ✅
 > **核心术语**: Rust 的 `move` 语义意味着**赋值**和**传参**时，资源的所有权自动**转移**。原变量变为 **uninitialized**，后续访问被编译器禁止。
 
 #### 7.3.1 C++ 的 Move：值类别 + 移动构造函数
@@ -387,7 +387,7 @@ let s2 = s1; // Move: s1 的所有权转移到 s2
 | C++17 | Guaranteed copy elision | 语言保证 | prvalue 的纯返回 |
 | Rust | Move semantics | **语言保证** | 所有 `!Copy` 类型的赋值都是移动 |
 
-> **关键洞察**: C++ 的 RVO 是编译器优化（可能不触发），Rust 的移动是语言语义（总是触发）。这使得 Rust 的性能更可预测。[来源: Rust Reference — §4.1.8] ✅
+> **关键洞察**: C++ 的 RVO 是编译器优化（可能不触发），Rust 的移动是语言语义（总是触发）。这使得 Rust 的性能更可预测。来源: [Rust Reference — §4.1.8](https://doc.rust-lang.org/reference/) ✅
 
 ---
 

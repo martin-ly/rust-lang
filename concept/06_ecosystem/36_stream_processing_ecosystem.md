@@ -173,7 +173,7 @@ let mut stream = ReceiverStream::new(rx);
 tx.send(42).await.unwrap();
 ```
 
-> **关键洞察**: Rust 的 `Stream` trait + 有界 channel = 拉取式背压（pull-based backpressure）。这与 Reactive Streams（Java）的 `request(n)` 或 Flink 的 credit-based 背压不同——Rust 的背压是"隐式的"，由 `await` 点的阻塞自然产生，无需显式信号协议。这是 Rust 所有权+async 模型的独特产物。[来源: 💡 原创分析] · [Tokio Documentation] ✅
+> **关键洞察**: Rust 的 `Stream` trait + 有界 channel = 拉取式背压（pull-based backpressure）。这与 Reactive Streams（Java）的 `request(n)` 或 Flink 的 credit-based 背压不同——Rust 的背压是"隐式的"，由 `await` 点的阻塞自然产生，无需显式信号协议。这是 Rust 所有权+async 模型的独特产物。[来源: 💡 原创分析] · [Tokio Documentation](https://tokio.rs/) ✅
 
 ---
 
@@ -376,7 +376,7 @@ async fn kafka_consumer() {
 | Materialize 架构 | [Materialize Documentation] | ✅ | Tier 1 |
 | RisingWave 架构 | [RisingWave Documentation] | ✅ | Tier 1 |
 | Fluvio 设计 | [Fluvio Documentation] | ✅ | Tier 1 |
-| Rust Stream trait 背压 | [Tokio Documentation] | ✅ | Tier 1 |
+| Rust Stream trait 背压 | [Tokio Documentation](https://tokio.rs/) | ✅ | Tier 1 |
 | 生态对比矩阵 | [💡 原创分析] | ⚠️ | Tier 3 |
 | 选型决策树 | [💡 原创分析] | ⚠️ | Tier 3 |
 

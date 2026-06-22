@@ -64,7 +64,7 @@
 
 ### 内存管理代码对比示例
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **场景：创建一个字符串并传递给函数**:
 
@@ -127,7 +127,7 @@ print(s)           # 仍然可用
 
 ### 内存管理形式化对比
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 语言 | 形式化模型 | 安全保证 | 形式化证明 |
 | :--- | :--- | :--- | :--- |
@@ -136,10 +136,10 @@ print(s)           # 仍然可用
 | **Go** | 标记-清除 GC | 运行时 | GC 正确性证明 |
 | **Python** | 引用计数 + GC | 运行时 | 无官方形式化证明 |
 
-> **[来源: Rust Reference: Ownership]** Rust 所有权规则由编译器在类型检查和借用检查阶段强制执行，对应线性逻辑中的资源唯一性公理。 ✅
-> **[来源: RustBelt: POPL 2018]** Safe Rust 内存安全（无 UAF / 无 DF / 无数据竞争）已在 Iris 分离逻辑框架中得到机器检验证明。 ✅
-> **[来源: C++ Reference: std::unique_ptr]** C++ `unique_ptr` 提供运行时 RAII 管理，但编译器不检查 use-after-move，无统一形式化安全保证。 ✅
-> **[来源: Go Spec: Memory Model]** Go 依赖并发标记-清除 GC，内存安全由运行时保证，无编译期形式化验证。 ✅
+> **来源: [Rust Reference: Ownership](https://doc.rust-lang.org/reference/)** Rust 所有权规则由编译器在类型检查和借用检查阶段强制执行，对应线性逻辑中的资源唯一性公理。 ✅
+> **来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)** Safe Rust 内存安全（无 UAF / 无 DF / 无数据竞争）已在 Iris 分离逻辑框架中得到机器检验证明。 ✅
+> **来源: [C++ Reference: std::unique_ptr](https://en.cppreference.com/w/cpp/memory/unique_ptr)** C++ `unique_ptr` 提供运行时 RAII 管理，但编译器不检查 use-after-move，无统一形式化安全保证。 ✅
+> **来源: [Go Spec: Memory Model](https://go.dev/ref/mem)** Go 依赖并发标记-清除 GC，内存安全由运行时保证，无编译期形式化验证。 ✅
 
 **Rust 形式化定义**:
 
@@ -160,7 +160,7 @@ print(s)           # 仍然可用
 
 ### 并发代码对比示例
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **场景：两个线程同时增加一个计数器**:
 
@@ -257,7 +257,7 @@ print(f"结果: {counter}")
 
 ### 并发模型形式化对比
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | 语言 | 并发安全机制 | 数据竞争检测 | 形式化保证 |
 | :--- | :--- | :--- | :--- |
@@ -266,8 +266,8 @@ print(f"结果: {counter}")
 | **Go** | Channel + Mutex | 运行时工具 (race detector) | 无编译期保证 |
 | **Python** | GIL + 手动锁 | 运行时工具 | GIL 保证解释器状态安全 |
 
-> **[来源: Rust Reference: Send and Sync]** `Send` 表示值可安全跨线程转移所有权，`Sync` 表示值可安全跨线程共享引用（`&T: Send`）。 ✅
-> **[来源: RustBelt: POPL 2018, §5]** Send/Sync 的语义在 Iris 中被形式化为协议验证：独占权限完整传递 ⇒ 无数据竞争。 ✅
+> **来源: [Rust Reference: Send and Sync](https://doc.rust-lang.org/reference/)** `Send` 表示值可安全跨线程转移所有权，`Sync` 表示值可安全跨线程共享引用（`&T: Send`）。 ✅
+> **来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)** Send/Sync 的语义在 Iris 中被形式化为协议验证：独占权限完整传递 ⇒ 无数据竞争。 ✅
 > **[来源: Go Spec: Concurrency]** Go 推荐 "Do not communicate by sharing memory; instead, share memory by communicating"（CSP 模型），但编译器不保证数据竞争自由。 ✅
 > **[来源: C++ Reference: thread]** C++11 `std::thread` + 手动 `std::mutex` 同步，数据竞争检测依赖 TSan 等运行时工具。 ✅
 
@@ -290,7 +290,7 @@ print(f"结果: {counter}")
 
 ### 错误处理代码对比示例
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **场景：读取文件并解析数字**:
 
@@ -398,7 +398,7 @@ except Exception as e:
 
 ### 错误处理形式化对比
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 语言 | 错误类型 | 强制处理 | 传播机制 | 形式化保证 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -407,8 +407,8 @@ except Exception as e:
 | **Go** | `error` 接口 | 习惯性 | 显式返回 | 无编译期保证 |
 | **Python** | 异常 | 否 | raise/try | 无编译期保证 |
 
-> **[来源: Rust Reference: The ? operator]** `?` 操作符是 `match` 的语法糖，要求所在函数返回类型与 `Result`/`Option` 相容，由类型系统强制保证错误处理路径存在。 ✅
-> **[来源: TRPL: Ch9.2]** Rust 的 `Result<T, E>` 将错误显式编码在类型中，编译器拒绝忽略 `Result` 的代码。 ✅
+> **来源: [Rust Reference: The ? operator](https://doc.rust-lang.org/reference/)** `?` 操作符是 `match` 的语法糖，要求所在函数返回类型与 `Result`/`Option` 相容，由类型系统强制保证错误处理路径存在。 ✅
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** Rust 的 `Result<T, E>` 将错误显式编码在类型中，编译器拒绝忽略 `Result` 的代码。 ✅
 > **[来源: Go Spec: Errors]** Go 的 `error` 是内置接口类型，错误处理为惯用模式（`if err != nil`），但编译器不强制检查。 ✅
 > **[来源: C++ Reference: Exception handling]** C++ 异常处理依赖运行时栈展开，无编译期强制，且存在异常安全（Exception Safety）的复杂子问题。 ✅
 
@@ -430,7 +430,7 @@ except Exception as e:
 
 ### 泛型代码对比示例
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **场景：实现一个通用的最大值函数**:
 
@@ -490,7 +490,7 @@ result = max_val(10, 20)
 
 ### 类型系统形式化对比
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | 语言 | 类型系统 | 泛型实现 | 类型安全 | 形式化证明 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -499,7 +499,7 @@ result = max_val(10, 20)
 | **Go** | 结构类型 | 单态化（1.18+） | 编译期 | 无官方形式化 |
 | **Python** | 动态类型 | 不适用 | 运行时 | 无形式化 |
 
-> **[来源: Rust Reference: Types]** Rust 类型系统基于 HM 推断 + Trait solving，泛型通过单态化实现零成本抽象。 ✅
+> **来源: [Rust Reference: Types](https://doc.rust-lang.org/reference/)** Rust 类型系统基于 HM 推断 + Trait solving，泛型通过单态化实现零成本抽象。 ✅
 > **[来源: C++ Reference: Templates]** C++ 模板是图灵完备的编译期元编程系统，但无官方形式化语义，错误信息 notoriously 复杂。 ✅
 > **[来源: Go Spec: Types]** Go 1.18+ 泛型基于类型参数和类型集（type sets），实现为编译期单态化，与 Rust 类似但表达能力较弱（无特化）。 ✅
 > **[来源: Pierce, "Types and Programming Languages" (TAPL)]** Rust 的类型系统理论基础：HM 推断、子类型、参数多态，与 ML 家族同源。 ⚠️（教科书级参考）
@@ -522,7 +522,7 @@ result = max_val(10, 20)
 
 ### 工具链代码对比示例
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **场景：创建一个新项目并添加依赖**:
 
@@ -587,7 +587,7 @@ $ python -m pytest
 
 ### Rust 形式化基础
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 概念 | 形式化文档 | 核心定理 |
 | :--- | :--- | :--- |
@@ -600,11 +600,11 @@ $ python -m pytest
 
 ### 权威来源索引
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 #### Rust（一级来源）
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 - [The Rust Reference](https://doc.rust-lang.org/reference/) —— 语言规范的权威定义
 - [The Rust Programming Language (TRPL)](https://doc.rust-lang.org/book/) —— 官方教程与设计理念
@@ -614,7 +614,7 @@ $ python -m pytest
 
 #### C++（一级/二级来源）
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 - [ISO C++ Standard](https://isocpp.org/std/the-standard) —— 国际标准规范
 - [cppreference.com](https://en.cppreference.com/) —— 社区维护的标准参考
@@ -622,7 +622,7 @@ $ python -m pytest
 
 #### Go（一级来源）
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 - [The Go Programming Language Specification](https://go.dev/ref/spec) —— 语言规范
 - [The Go Memory Model](https://go.dev/ref/mem) —— 内存模型与并发语义
@@ -630,7 +630,7 @@ $ python -m pytest
 
 #### Haskell（二级来源，Trait / 类型系统对标）
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 - [GHC User Guide: LinearTypes](https://downloads.haskell.org/ghc/latest/docs/users_guide/exts/linear_types.html) —— GHC 9.0+ 线性类型扩展
 - [Typeclassopedia](https://wiki.haskell.org/Typeclassopedia) —— Type Classes 与 Rust Trait 的理论同源

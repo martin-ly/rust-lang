@@ -81,3 +81,32 @@
 ## 相关概念
 
 - [所有权深入](04_ownership.md)
+
+
+## 📚 模块 8: 国际化对齐
+
+> 本模块按项目模板补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 说明 |
+|:---|:---|
+| [The Rust Programming Language — Ch4](https://doc.rust-lang.org/book/ch04-00-ownership.html) | 所有权与借用 |
+| [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html) | 类型系统规范 |
+| [Rust Standard Library](https://doc.rust-lang.org/std/) | 标准库 API |
+
+### 8.2 学术/工业来源
+
+| 来源 | 说明 |
+|:---|:---|
+| [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | 所有权语义形式化 |
+| [Tree Borrows — PLDI 2025](https://perso.crans.org/vanille/treebor/) | 别名模型 |
+
+### 8.3 社区资源
+
+| 来源 | 说明 |
+|:---|:---|
+| [Brown University Interactive Rust Book](https://rust-book.cs.brown.edu/) | 可视化所有权教学 |
+| [Rustlings](https://github.com/rust-lang/rustlings) | 基础练习 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | 示例驱动学习 |
+

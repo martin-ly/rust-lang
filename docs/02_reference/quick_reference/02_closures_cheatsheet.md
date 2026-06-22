@@ -37,13 +37,13 @@
 
 ## 闭包基础
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 定义闭包
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 基本闭包
@@ -62,9 +62,9 @@ let greet = |name| {
 
 ### 捕获环境
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 let x = 10;
@@ -88,7 +88,7 @@ let closure = move || println!("{}", s);
 
 ## 闭包 Trait
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | Trait | 描述 | 使用场景 |
 |-------|------|----------|
@@ -98,9 +98,9 @@ let closure = move || println!("{}", s);
 
 ### Trait 使用示例
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 fn apply_fn<F>(f: F, x: i32) -> i32
@@ -129,13 +129,13 @@ where
 
 ## 常见用法
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 迭代器方法
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 let nums = vec![1, 2, 3, 4, 5];
@@ -152,9 +152,9 @@ let sum = nums.iter().fold(0, |acc, x| acc + x);
 
 ### 高阶函数
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 fn compose<F, G, T>(f: F, g: G) -> impl Fn(T) -> T
@@ -171,7 +171,7 @@ where
 
 ## 相关文档
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [控制流与函数速查卡](./02_control_flow_functions_cheatsheet.md)
 - [迭代器速查卡](./02_collections_iterators_cheatsheet.md)
@@ -181,16 +181,16 @@ where
 
 ## Rust 1.95+ 在闭包与函数式编程中的深度应用
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 > **适用版本**: Rust 1.96.0+ | **实际场景**: 函数式编程模式
 
 ---
 
 ### ControlFlow 在函数式控制流中的应用
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **场景**: 迭代器链中的提前终止，比 `try_fold` 更灵活
 
@@ -298,7 +298,7 @@ where
 
 ### LazyLock 在闭包工厂中的应用
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **场景**: 延迟初始化的闭包缓存、配置注入
 
@@ -378,7 +378,7 @@ pub fn execute_pipeline(data: Data) -> Data {
 
 ### array_windows 在函数式数据处理中的应用
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 /// 函数式滑动窗口映射
@@ -456,7 +456,7 @@ pub trait WindowedIterator: Iterator {
 
 ### 数学常量在函数式数值计算中的应用
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 /// 函数式黄金比例缩放
@@ -497,7 +497,7 @@ pub fn euler_smooth() -> impl Fn(f64) -> f64 {
 
 ### 生产场景：事件处理系统
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 /// 生产级事件处理器（使用闭包组合 + ControlFlow）
@@ -603,7 +603,7 @@ pub fn setup_processor() -> EventProcessor {
 
 ### 总结
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 | 特性 | 闭包/函数式场景应用 | 性能提升 |
 |------|-------------------|----------|
@@ -638,14 +638,14 @@ pub fn setup_processor() -> EventProcessor {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ---

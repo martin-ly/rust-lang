@@ -46,13 +46,13 @@
 
 ## 一、层次化索引
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 理论层次
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 应用与边界层（本体系所在）
@@ -67,9 +67,9 @@
 
 ### 1.2 依赖关系
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本体系依赖以下已有形式化基础：
 
@@ -92,7 +92,7 @@
 
 ### 2.1 三维边界
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 | 维度 | 内容 | 文档 |
 | :--- | :--- | :--- |
@@ -102,7 +102,7 @@
 
 ### 2.2 边界原则
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - **安全边界**：每个模式/模型标注「纯 Safe / 需 unsafe / 无法表达」
 - **支持边界**：在 Rust 1.93+ 下的「原生支持 / 库支持 / 需 FFI」
@@ -116,7 +116,7 @@
 
 ### 3.1 设计模式扩展
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - GoF 23 模式（当前）✅
 - **Rust Idioms** ✅ [06_rust_idioms](./06_rust_idioms.md)：RAII、Newtype、类型状态、Error/Option/Cow、Builder 变体；含 Def/Axiom/定理、完整代码示例、典型场景、常见陷阱、与 GoF 衔接
@@ -125,7 +125,7 @@
 
 ### 3.2 执行模型扩展
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 - 五模型（同步、异步、并发、并行、分布式）✅
 - 可选扩展：Actor（actix）、CSP（channel）、事件溯源（02_complete_43 Event Sourcing）
@@ -133,7 +133,7 @@
 
 ### 3.3 工作流模型扩展
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 - 23 安全：GoF 23 纯安全子集
 - 43 完全：GoF 23 + 扩展 20（Fowler EAA/DDD，已明确）
@@ -250,7 +250,7 @@
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
@@ -305,15 +305,15 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Software Design Pattern]**
+> **来源: [Wikipedia - Software Design Pattern](https://en.wikipedia.org/wiki/Software_Design_Pattern)**
 
-> **[来源: Wikipedia - Software Architecture]**
+> **来源: [Wikipedia - Software Architecture](https://en.wikipedia.org/wiki/Software_Architecture)**
 
 > **[来源: ACM - Design Patterns Survey]**
 
 > **[来源: IEEE - Software Design Standards]**
 
-> **[来源: Gang of Four - Design Patterns]**
+> **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
 
 > **[来源: Martin Fowler - Patterns of Enterprise Application Architecture]**
 

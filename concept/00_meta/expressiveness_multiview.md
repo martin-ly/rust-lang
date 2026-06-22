@@ -5,7 +5,7 @@
 > **受众**: [研究者]
 > **定位**: 本文件从**纵向理论视角**（计算/类型/控制/内存/并发/抽象/安全）深化 Rust 的表达能力，与 `semantic_expressiveness.md` 的**横向七维光谱**形成正交互补。前者回答「Rust 能表达什么」，后者回答「Rust 从哪些维度表达」。
 > **原则**: 不做"语法特性列表"，聚焦"每个理论视角下 Rust 的表达边界、与其他语言的等价性、以及形式化基础"。
-> **对齐来源**: [Rust Reference] · [Rust RFCs] · [RustBelt/Oxide] · [Felleisen 表达力理论] · [PL 语义学经典]
+> **对齐来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Rust RFCs](https://rust-lang.github.io/rfcs/) · [RustBelt / Oxide](https://plv.mpi-sws.org/rustbelt/) · [Felleisen — On the Expressive Power of Programming Languages](https://doi.org/10.1007/BF00119822) · [Programming Language Semantics](https://en.wikipedia.org/wiki/Semantics_(computer_science))
 > **对比语言**: Rust · C++ · Go · Haskell · OCaml · Erlang
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
@@ -210,7 +210,7 @@ enum Option<T> {
 > **定理 T-EX-001（Result 的构造性完备性）**:
 > `Result<T, E>` 在 Rust 类型系统中是**代数完备**的——它形成了 `T` 和 `E` 的**标记联合（tagged union）**，
 > 且 `?` 运算符提供了构造性的错误传播 monad，对应直觉主义逻辑中的**续体（continuation）**构造。
-> [来源: Rust Reference §8, *The Rust Programming Language* §9]
+> 来源: [Rust Reference §8, *The Rust Programming Language* §9](https://doc.rust-lang.org/reference/)
 
 ### 3.3 刻意缺失的表达力：HKT 与 1st-class 模块
 
@@ -359,14 +359,14 @@ Rust 的所有权系统可被精确地映射到资源语义学：
 > - 每个值对应一个资源命题。
 > - move 语义对应资源的**精确转移**（而非复制）。
 > - `Copy` trait 对应资源的**无限复制模态**（`!A` 在线性逻辑中）。
-> - `Drop` 对应资源的**显式消去**。 [来源: RustBelt, POPL 2018; *Oxide*, arXiv 2019]
+> - `Drop` 对应资源的**显式消去**。 来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 
 ```mermaid
 graph TD
     A[线性逻辑 Girard 1987] --> B[仿射逻辑]
     B --> C[分离逻辑 Reynolds 2002]
     C --> D[Iris 高阶并发分离逻辑]
-    D --> E[RustBelt 2018]
+    D --> E[RustBelt](https://plv.mpi-sws.org/rustbelt/)
     E --> F[Rust 所有权系统]
 
     A --- A1["!A = Copy"]<--> F1[Copy trait]

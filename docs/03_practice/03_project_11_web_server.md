@@ -25,7 +25,7 @@
 
 ## 项目目标
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 使用Rust创建一个高性能的HTTP Web服务器。
 
@@ -33,7 +33,7 @@
 
 ## 功能需求
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] HTTP/1.1协议支持
 - [ ] 路由系统
@@ -46,11 +46,11 @@
 
 ## 学习要点
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### HTTP解析
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust,ignore
 use tokio::net::TcpListener;
@@ -101,9 +101,9 @@ async fn handle_request(stream: &mut tokio::net::TcpStream) {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Web Framework]**
-> **[来源: axum.rs Documentation]**
-> **[来源: actix.rs Documentation]**
-> **[来源: RFC 2616 - HTTP]**
+> **来源: [Wikipedia - Web Framework](https://en.wikipedia.org/wiki/Web_Framework)**
+> **来源: [axum.rs Documentation](https://docs.rs/axum/latest/axum/)**
+> **来源: [actix.rs Documentation](https://actix.rs/)**
+> **来源: [RFC 2616 - HTTP](https://rust-lang.github.io/rfcs/2616-2616-http.html)**
 
 ---

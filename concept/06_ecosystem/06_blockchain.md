@@ -21,7 +21,7 @@
 > **后置概念**:
 > [Formal Ecosystem Tower](./05_formal_ecosystem_tower.md) ·
 > [Application Domains](./04_application_domains.md)
-> **主要来源**: [Solana Docs] · [Polkadot Substrate Docs] · [Near Protocol Docs] · [Kani Verification Blog] · [Rust in Blockchain Report] · [Wikipedia: Blockchain] · [Wikipedia: Smart contract]
+> **主要来源**: [Solana Docs] · [Polkadot Substrate Docs] · [Near Protocol Docs] · [Kani Verification Blog] · [Rust in Blockchain Report] · [Wikipedia: Blockchain](https://en.wikipedia.org/wiki/Blockchain) · [Wikipedia: Smart contract](https://en.wikipedia.org/wiki/Smart_contract)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -34,9 +34,9 @@
 
 ## 权威定义
 
-> **[Wikipedia — Blockchain]** A blockchain is a distributed ledger with growing lists of records (blocks) that are securely linked together via cryptographic hashes.
+> **[Wikipedia — Blockchain](https://en.wikipedia.org/wiki/Blockchain)** A blockchain is a distributed ledger with growing lists of records (blocks) that are securely linked together via cryptographic hashes.
 > **来源**: <https://en.wikipedia.org/wiki/Blockchain>
-> **[Wikipedia — Smart contract]** A smart contract is a self-executing program with the terms of the agreement between buyer and seller being directly written into lines of code. [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **[Wikipedia — Smart contract](https://en.wikipedia.org/wiki/Smart_contract)** A smart contract is a self-executing program with the terms of the agreement between buyer and seller being directly written into lines of code. [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 > **来源**: <https://en.wikipedia.org/wiki/Smart_contract>
 > **[Ethereum Docs]** Smart contract security is the practice of creating and maintaining smart contracts that are resilient to attacks, bugs, and unintended behavior.
 
@@ -683,7 +683,7 @@ Polkadot 的 PVF 是平行链（Parachain）状态转换函数的 Wasm 编码，
 
 > **[来源: Solana Docs; Polkadot Substrate Docs; Near Protocol Docs; Kani Verification Blog; Rust in Blockchain Report]** 区块链分析基于官方协议文档和形式化验证研究。✅
 > **[来源: Smart Contract Security Research; Reentrancy Attack Analysis; The DAO Post-Mortem]** 合约安全分析基于已公开的安全事件和研究文献。✅
-> **[来源: RustBelt: POPL 2018; Linear Logic; Separation Logic]** 形式化映射基于 RustBelt 和分离逻辑的理论框架。✅
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** 形式化映射基于 RustBelt 和分离逻辑的理论框架。✅
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

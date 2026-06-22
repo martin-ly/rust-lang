@@ -61,7 +61,7 @@
 
 ## 定义
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **43 完全模型** = GoF 23 + 扩展模式（企业/分布式/并发等），包含**需 unsafe** 或**需库支持**的实现路径。
 
@@ -78,9 +78,9 @@
 
 ### 扩展模式（20）
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 参考 [Fowler EAA](https://martinfowler.com/eaaCatalog/)、Core J2EE 等权威 catalog，20 项构成如下：
 
@@ -109,9 +109,9 @@
 
 ### 扩展模式简要说明
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 模式 | 核心意图 | Rust 典型实现 |
 | :--- | :--- | :--- |
@@ -140,13 +140,13 @@
 
 ## 扩展模式 Rust 代码示例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Domain Model
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 领域模型：业务逻辑封装在领域对象内，非贫血
@@ -178,9 +178,9 @@ impl Order {
 
 ### Unit of Work
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 批量提交、一致性边界
@@ -208,9 +208,9 @@ impl<T> UnitOfWork<T> {
 
 ### Data Mapper
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // ORM 映射层：领域 ↔ 持久化；From/Into 实现双向转换
@@ -229,9 +229,9 @@ impl From<UserEntity> for (u64, String, String) {
 
 ### Value Object
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 #[derive(Clone, PartialEq, Eq)]
@@ -254,9 +254,9 @@ impl Money {
 
 ### Registry (Service Locator)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 use std::sync::{OnceLock, Mutex};
@@ -276,9 +276,9 @@ fn register<T: Send + 'static>(service: T) {
 
 ### Identity Map
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 use std::collections::HashMap;
@@ -297,7 +297,7 @@ impl<T> IdentityMap<T> {
 
 ### Service Layer
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 pub struct OrderService {
@@ -316,7 +316,7 @@ impl OrderService {
 
 ### Repository
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 trait Repository<T> {
@@ -333,7 +333,7 @@ impl Repository<User> for UserRepository {
 
 ### DTO
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 #[derive(Clone, serde::Serialize, serde::Deserialize)]
@@ -347,7 +347,7 @@ pub struct UserDto {
 
 ### Event Sourcing
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust
 #[derive(Clone)]
@@ -370,7 +370,7 @@ impl Aggregate {
 
 ### Specification
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust
 trait Specification<T> {
@@ -388,7 +388,7 @@ impl<T, A: Specification<T>, B: Specification<T>> Specification<T> for AndSpec<A
 
 ### Table Data Gateway (DAO)
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
 // 表级数据访问：一张表对应一个 Gateway
@@ -407,7 +407,7 @@ impl UserGateway {
 
 ### Active Record
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust
 // 对象即行：领域对象持有数据库连接，自身负责持久化
@@ -441,7 +441,7 @@ impl User {
 
 ### Gateway（外部系统集成）
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 // 外部系统集成：封装 HTTP 客户端、FFI 等
@@ -460,7 +460,7 @@ impl PaymentGateway for StripeGateway {
 
 ### Model View Controller (MVC)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 // 分离模型/视图/控制器；模块分层
@@ -485,7 +485,7 @@ mod controller {
 
 ### Front Controller
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 // 单一入口、路由分发
@@ -508,7 +508,7 @@ impl Router {
 
 ### Remote Facade
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 // 粗粒度远程接口：减少跨边界调用次数
@@ -532,7 +532,7 @@ pub async fn handle_order_batch(req: OrderBatchRequest) -> OrderBatchResponse {
 
 ### Lazy Load
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 use std::sync::OnceLock;
@@ -564,7 +564,7 @@ impl<T> Lazy<T> {
 
 ### Plugin (Dependency Injection)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 // 依赖注入、可替换实现
@@ -827,19 +827,19 @@ pub fn update_optimistic(
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Software Design Pattern]**
-> **[来源: Wikipedia - Software Architecture]**
+> **来源: [Wikipedia - Software Design Pattern](https://en.wikipedia.org/wiki/Software_Design_Pattern)**
+> **来源: [Wikipedia - Software Architecture](https://en.wikipedia.org/wiki/Software_Architecture)**
 > **[来源: ACM - Design Patterns Survey]**
 > **[来源: IEEE - Software Design Standards]**
-> **[来源: Gang of Four - Design Patterns]**
+> **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
 > **[来源: Martin Fowler - Patterns of Enterprise Application Architecture]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

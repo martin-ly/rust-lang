@@ -12,7 +12,7 @@
 
 ## 目录
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Polonius：下一代 Borrow Checker 深度解析](#polonius下一代-borrow-checker-深度解析)
   - [目录](#目录)
@@ -54,15 +54,15 @@
 
 ## 1. 什么是 Polonius
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Polonius** 是 Rust 编译器 `rustc` 的下一代 borrow checker（借用检查器）核心算法。它得名于莎士比亚《哈姆雷特》中的角色波洛涅斯（Polonius），象征其对程序中"借用关系"的精细洞察。
 
 ### 历史背景
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 timeline
@@ -79,9 +79,9 @@ timeline
 
 ### 核心定位
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 维度 | Lexical Lifetimes | NLL (当前) | Polonius (未来) |
 |------|------------------|-----------|----------------|
@@ -95,13 +95,13 @@ timeline
 
 ## 2. 为什么需要 Polonius
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 NLL 的局限性
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 当前的 NLL (Non-Lexical Lifetimes) 已经比词法生命周期精确得多，但仍存在**误报 (false positives)**：
 
@@ -122,9 +122,9 @@ fn nll_limitation() {
 
 ### 2.2 Polonius 的核心改进
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Polonius 引入**路径敏感 (path-sensitive)** 分析：
 
@@ -146,13 +146,13 @@ graph TD
 
 ## 3. 核心原理：基于 Datalog 的生命周期推断
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 3.1 Datalog 简介
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Datalog** 是一种声明式逻辑编程语言，核心概念：
 
@@ -162,9 +162,9 @@ graph TD
 
 ### 3.2 Polonius 的 Datalog 建模
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Polonius 将 Rust 程序中的借用关系建模为 Datalog 程序：
 
@@ -177,9 +177,9 @@ Polonius 将 Rust 程序中的借用关系建模为 Datalog 程序：
 
 ### 3.3 关键推导规则
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```prolog
 % 如果贷款在程序点起源，则它在该点存活
@@ -199,7 +199,7 @@ error(P) :-
 
 ### 3.4 Datafrog 引擎
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 `rustc` 使用 **[Datafrog](https://github.com/rust-lang/datafrog)** —— 一个增量式 Datalog 求解器：
 
@@ -224,7 +224,7 @@ flowchart LR
 
 ### 4.1 编译通过的案例
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 /// Polonius 能通过但 NLL 拒绝的代码示例
@@ -242,7 +242,7 @@ pub fn polonius_wins(vec: &mut Vec<i32>) -> i32 {
 
 ### 4.2 核心差异总结
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | 场景 | NLL | Polonius | 说明 |
 |------|-----|----------|------|
@@ -259,7 +259,7 @@ pub fn polonius_wins(vec: &mut Vec<i32>) -> i32 {
 
 ### 5.1 在 Nightly 上启用 Polonius
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```bash
 # 使用 nightly 编译器
@@ -278,7 +278,7 @@ rustflags = ["-Zpolonius"]
 
 ### 5.2 验证 Polonius 是否生效
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 // test_polonius.rs
@@ -301,7 +301,7 @@ fn main() {}
 
 ### 5.3 与 Miri 的联合使用
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```bash
 # Miri 检测运行时 UB，Polonius 检测编译期借用冲突
@@ -455,21 +455,21 @@ flowchart TD
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-> **[来源: Rust Reference]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-> **[来源: Rust Standard Library]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: ACM - Systems Programming]**
+> **来源: [ACM](https://dl.acm.org/)**
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-> **[来源: Rustonomicon]**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---
 

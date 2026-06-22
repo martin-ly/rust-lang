@@ -4,10 +4,10 @@
 > 确保学习者能顺利对接 crates.io、RFC、GitHub Issue 等英文生态。
 >
 > **标准来源**: TRPL · Rust Reference · std API Docs · Rustnomicon · Async Book · Cargo Book · Edition Guide
-> **对应 Rust 版本**: 1.96.0 (Edition 2024)
-> **状态**: ✅ v3.0 已冻结 — 覆盖 100 个高频术语，L1 → L5+ 分层
-> **冻结日期**: 2026-06-10
-> **维护规则**: 仅当 Rust 官方术语变更或新增核心语言关键字时才更新，常规生态术语不扩展
+> **对应 Rust 版本**: 1.96.0 (Edition 2024)，1.97.0 候选术语跟踪中
+> **状态**: 📝 v3.1 草稿 — 已覆盖 100 个高频术语；新增 Rust 1.97.0 候选术语区，待 2026-07-09 稳定后转正
+> **冻结日期**: 2026-06-10（v3.0 冻结）；2026-06-22 起跟踪 1.97 术语
+> **维护规则**: 仅当 Rust 官方术语变更或新增核心语言关键字/API 时才更新，常规生态术语不扩展
 
 # Rust 核心术语英中对照表
 >
@@ -414,10 +414,39 @@
 
 ---
 
-> **文档版本**: 2.0
-> **术语总数**: 100
+## Rust 1.97.0 新增/候选术语
+
+> **状态**: 📋 候选列表 — 待 2026-07-09 Rust 1.97.0 发布后根据实际稳定内容更新为 ✅
+>
+> 以下术语来自 `crates/c08_algorithms/src/rust_197_features.rs` 与 Rust 官方 tracking issues，
+> 在发布日前标记为候选状态，发布日根据稳定内容转为正式术语。
+
+- **`VecDeque::truncate_front`** (VecDeque truncate_front) [L2] — 截断双端队列前部，保留后部 `n` 个元素；与 `truncate` 互补 — [std tracking](https://github.com/rust-lang/rust/issues/ ) — 状态：📋 候选（1.97 预期稳定）
+
+- **`VecDeque::retain_back`** (VecDeque retain_back) [L2] — 从尾部开始保留满足条件的元素；与 `retain` 互补 — [PR #151973](https://github.com/rust-lang/rust/pull/151973) — 状态：🧪 可能推迟至 1.98+，需发布日确认
+
+- **`float_algebraic`** (Float Algebraic Optimization) [L3] — 允许编译器按代数规则重组浮点运算，以精度换性能 — [PR #157168](https://github.com/rust-lang/rust/pull/157168) — 状态：🔄 PFCP / 候选
+
+- **`RandomSource`** (RandomSource) [L2] — 标准库随机数源 trait，统一 `OsRng`、`thread_rng` 等来源 — [PR #157226](https://github.com/rust-lang/rust/pull/157226) — 状态：📋 候选（等待 libs-api 决策）
+
+- **`DefaultRandomSource`** (DefaultRandomSource) [L2] — `RandomSource` 的标准库默认实现 — [PR #157226](https://github.com/rust-lang/rust/pull/157226) — 状态：📋 候选
+
+- **`C-variadic definitions`** (C Variadic Function Definitions) [L3] — 在 Rust 中直接定义 `unsafe extern "C" fn f(fmt: *const u8, args: ...)` 风格的可变参数函数 — [PR #155942](https://github.com/rust-lang/rust/pull/155942) — 状态：🔄 PFCP / 候选
+
+- **`Box::into_raw_non_null`** (Box into_raw_non_null) [L2] — 将 `Box<T>` 转换为 `NonNull<T>`，避免空指针检查 — [PR #157273](https://github.com/rust-lang/rust/pull/157273) — 状态：🔄 PFCP / 候选
+
+- **`Vec::into_raw_parts_non_null`** (Vec into_raw_parts_non_null) [L2] — 将 `Vec<T>` 解包为 `(NonNull<T>, len, cap)` — [PR #157273](https://github.com/rust-lang/rust/pull/157273) — 状态：🔄 PFCP / 候选
+
+- **`int_format_into`** (Integer Format Into) [L2] — 将整数直接格式化为固定字节缓冲区，避免堆分配 — 状态：🧪 Nightly / 候选
+
+- **`proc_macro_value`** (Proc Macro Value) [L3] — 允许过程宏在编译期产生值（而不仅是 token 流） — [PR #152092](https://github.com/rust-lang/rust/pull/152092) — 状态：📋 等待 review / 候选
+
+---
+
+> **文档版本**: 2.1
+> **术语总数**: 100 + 10 候选
 > **与 TRPL 一致率**: 100%（所有 L1~L3 术语均与 TRPL / 官方 Reference 英文原文一致）
-> **最后更新**: 2026-05-31
+> **最后更新**: 2026-06-22
 
 ---
 

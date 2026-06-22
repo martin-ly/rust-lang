@@ -56,13 +56,13 @@
 mindmap
   root((权威来源<br/>五级体系))
     一级规范级
-      RustReference[Rust Reference<br/>语言规范]
+      RustReference[Rust Reference<br/>语言规范](https://doc.rust-lang.org/reference/)
       RustRFCs[Rust RFCs<br/>设计文档]
-      TRPL[TRPL / The Book<br/>官方教程]
+      TRPL[The Rust Programming Language](https://doc.rust-lang.org/book/)
     二级学术级
       Wikipedia[Wikipedia<br/>概念对齐]
       POPL[POPL/PLDI/ECOOP<br/>顶会论文]
-      RustBelt[RustBelt / Iris<br/>形式化验证]
+      RustBelt[RustBelt](https://plv.mpi-sws.org/rustbelt/)
     三级教学级
       Stanford[Stanford CS340R<br/>Rusty Systems]
       CMU[CMU 17-363<br/>PL Pragmatics]
@@ -80,7 +80,7 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 将五级来源按可信度与实用性组织为空间结构，帮助读者在引用时快速选择适合当前论证强度的来源等级。建议在概念定义时优先使用一级来源，在补充实践细节时使用四级/五级来源。关键洞察：来源分级不是歧视，而是知识生产的质量控制——不同层级的论断需要不同层级的证据支撑。[来源: 💡 原创分析]
-> [来源: [Rust Reference]]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **认知路径**: 本 mindmap 将五级来源按**可信度递减、实用性递增**组织。一级来源是定义的最终仲裁者，二级提供数学根基，三级提供教学路径，四级提供工业验证，五级提供社区实践。引用时应优先使用高等级来源定义概念，低等级来源补充实践细节。
 
 ## 一、来源分级体系
@@ -93,13 +93,13 @@ graph TD
     S0 --> S4[四级来源: 工业级]
     S0 --> S5[五级来源: 社区级]
 
-    S1 --> S1a[Rust Reference]
-    S1 --> S1b[Rust RFCs]
+    S1 --> S1a[Rust Reference](https://doc.rust-lang.org/reference/)
+    S1 --> S1b[Rust RFCs](https://rust-lang.github.io/rfcs/)
     S1 --> S1c[The Rust Programming Language TRPL]
 
     S2 --> S2a[Wikipedia]
     S2 --> S2b[POPL/PLDI/ECOOP Papers]
-    S2 --> S2c[RustBelt / Iris]
+    S2 --> S2c[RustBelt](https://plv.mpi-sws.org/rustbelt/)
 
     S3 --> S3a[Stanford CS340R]
     S3 --> S3b[CMU 17-363]
@@ -132,7 +132,7 @@ graph TD
 | **性质** | 官方入门教程，事实上的语言文化定义 |
 | **适用范围** | 所有权、借用、生命周期、Trait、并发、Unsafe 等所有核心概念 |
 | **版本对齐** | 跟踪最新 Stable 版本 |
-| **引用格式** | `[TRPL: 章节名]` |
+| **引用格式** | `[The Rust Programming Language](https://doc.rust-lang.org/book/)` |
 
 ### 2.2 The Rust Reference
 
@@ -142,7 +142,7 @@ graph TD
 | **维护方** | Rust Project |
 | **性质** | 语言规范，精确但非形式化 |
 | **适用范围** | 语法、语义、类型系统规则、内存模型 |
-| **引用格式** | `[Rust Reference: 章节名]` |
+| **引用格式** | `[Rust Reference: 章节名](https://doc.rust-lang.org/reference/)` |
 
 ### 2.3 Rust RFCs (Request for Comments)
 
@@ -189,8 +189,8 @@ graph TD
 
 | 论文/项目 | 作者/机构 | 核心贡献 | 引用格式 |
 |:---|:---|:---|:---|
-| **RustBelt** | Ralf Jung, Jacques-Henri Jourdan, et al. (MPI-SWS) | 在 Iris 分离逻辑中形式化验证 Rust 核心 | `[RustBelt: POPL 2018]` |
-| **Stacked Borrows / Tree Borrows** | Ralf Jung | Rust 别名模型的操作语义 | `[Tree Borrows]` |
+| **RustBelt** | Ralf Jung, Jacques-Henri Jourdan, et al. (MPI-SWS) | 在 Iris 分离逻辑中形式化验证 Rust 核心 | `[RustBelt](https://plv.mpi-sws.org/rustbelt/)` |
+| **Stacked Borrows / Tree Borrows** | Ralf Jung | Rust 别名模型的操作语义 | `[Tree Borrows — PLDI 2025](https://perso.crans.org/vanille/treebor/)` |
 | **The Meaning of Memory Safety** | Andrew K. Wright, Matthias Felleisen | 内存安全的形式化定义 | `[Wright-Felleisen]` |
 | **Calculus of Ownership and Reference (COR)** | ETH Zurich | Rust 核心语言的形式化 | `[COR: ETH Zurich]` |
 | **Creusot** | Xavier Denis, et al. | Rust 功能正确性验证工具 | `[Creusot]` |
@@ -199,8 +199,8 @@ graph TD
 | **Aeneas** | Aymeric Fromherz, et al. | MIR → 纯函数式语义翻译 | `[Aeneas: ICFP 2022]` |
 | **RefinedRust** | Lennard Gäher, et al. (ETH) | 分离逻辑 + Rust 自动化验证 | `[RefinedRust: PLDI 2024]` |
 | **RustHornBelt** | Yusuke Matsushita, et al. (MPI-SWS) | Rust 功能正确性验证（含 unsafe） | `[RustHornBelt: PLDI 2022]` |
-| **Stacked Borrows** | Ralf Jung, et al. (MPI-SWS) | Rust 别名模型操作语义 | `[Stacked Borrows: POPL 2019]` |
-| **Tree Borrows** | Neven Villani, et al. | 更宽松的别名模型 | `[Tree Borrows]` |
+| **Stacked Borrows** | Ralf Jung, et al. (MPI-SWS) | Rust 别名模型操作语义 | `[Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)` |
+| **Tree Borrows** | Neven Villani, et al. | 更宽松的别名模型 | `[Tree Borrows — PLDI 2025](https://perso.crans.org/vanille/treebor/)` |
 | **Iris from the Ground Up** | Ralf Jung, et al. | 高阶并发分离逻辑基础 | `[Iris: JFP 2018]` |
 | **The Meaning of Memory Safety** | Wright & Felleisen | 内存安全的形式化定义 | `[Wright-Felleisen 1994]` |
 | **Calculus of Ownership and Reference** | ETH Zurich | Rust 核心语言形式化 | `[COR: ETH]` |
@@ -324,14 +324,14 @@ graph LR
     subgraph "形式化根基"
         W1[Wikipedia: Linear Logic]
         W2[Wikipedia: Ownership Type]
-        P1[RustBelt POPL 2018]
+        P1[RustBelt](https://plv.mpi-sws.org/rustbelt/)
         P2[COR ETH Zurich]
     end
 
     subgraph "语言规范"
-        S1[TRPL]
-        S2[Rust Reference]
-        S3[RFCs]
+        S1[The Rust Programming Language](https://doc.rust-lang.org/book/)
+        S2[Rust Reference](https://doc.rust-lang.org/reference/)
+        S3[Rust RFCs](https://rust-lang.github.io/rfcs/)
     end
 
     subgraph "教学体系"
@@ -370,7 +370,7 @@ graph LR
 ### 8.1 引用规范
 
 1. **首次引用**：每个概念文件首次出现时，使用完整引用格式
-2. **重复引用**：同一文件内后续引用可使用简写（如 `[TRPL: Ch4]`）
+2. **重复引用**：同一文件内后续引用可使用简写（如 `[The Rust Programming Language](https://doc.rust-lang.org/book/)`）
 3. **多来源冲突**：在 `00_meta/disputes.md` 中记录并分析（如存在）
 4. **来源失效**：若 URL 失效，优先查找 Wayback Machine 归档，并更新本文件
 

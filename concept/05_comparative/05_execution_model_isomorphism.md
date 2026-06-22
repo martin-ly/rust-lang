@@ -18,7 +18,7 @@
 > **受众**: [进阶]
 > **定位**: 本文件从**数学模型同构性**视角系统梳理 Rust 的执行模型（同步/异步/并发/并行），并与 Go、理论模型（CSP/Actor/π 演算/进程代数）建立精确的对应关系。
 > **原则**: 不做"并发编程教程"，聚焦"Rust 的执行模型在数学上与什么同构、与什么不同构、同构的精确条件是什么"。
-> **对齐来源**: [Rust Async Book] · [Tokio Tutorial] · [Go Memory Model] · [Hoare CSP 1978] · [Milner π-Calculus 1992] · [Hewitt Actor 1973] · [Boehm & Adve PLDI 2008]
+> **对齐来源**: [The Rust Async Book](https://rust-lang.github.io/async-book/) · [Tokio Tutorial] · [Go Memory Model] · [Hoare CSP 1978] · [Milner π-Calculus 1992] · [Hewitt Actor 1973] · [Boehm & Adve PLDI 2008]
 > **对比语言**: Rust · Go · Erlang · C++ · Java
 > **基准版本**: Rust 1.96.0 stable (Edition 2024)
 
@@ -171,11 +171,11 @@ graph TD
 
 ## 三、同步模型
 
-> [来源: TRPL §16, Rust Reference §18]：OS 线程
+> 来源: [TRPL §16](https://doc.rust-lang.org/book/ch16-00-concurrency.html)：OS 线程
 
 ### 3.1 Rust 1:1 线程模型
 
-> **Rust 线程 = OS 线程**: Rust 的 `std::thread::spawn` 直接映射到操作系统线程（1:1 模型），每个线程有独立的栈（通常 2MB-8MB），由 OS 调度器抢占调度。 [来源: TRPL §16, Rust Reference §18]
+> **Rust 线程 = OS 线程**: Rust 的 `std::thread::spawn` 直接映射到操作系统线程（1:1 模型），每个线程有独立的栈（通常 2MB-8MB），由 OS 调度器抢占调度。 来源: [TRPL §16](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
 
 ```rust
 // Rust 1:1 线程
@@ -464,13 +464,13 @@ addr.do_send(Increment); // 异步发送，编译期检查消息类型
 
 ## 八、内存共享模型
 
-> [来源: Boehm & Adve PLDI 2008, Rust Reference §18.4]：原子性与 happens-before
+> 来源: Boehm & Adve PLDI 2008, [Rust Reference §18.4](https://doc.rust-lang.org/reference/)：原子性与 happens-before
 
 ### 8.1 Rust 与 C++11 内存模型的同构性
 
 > **Rust 直接复用 C++11 内存模型**:
 > Rust 1.0 起明确采用 C/C++11 的并发内存模型，包括 happens-before、synchronizes-with、sequenced-before 的完整框架。
-> [来源: Rust Reference §18.4; Boehm & Adve, *Foundations of the C++ Concurrency Memory Model*, PLDI 2008]
+> 来源: [Rust Reference §18.4; Boehm & Adve, *Foundations of the C++ Concurrency Memory Model*, PLDI 2008](https://doc.rust-lang.org/reference/)
 
 | Rust `Ordering` | C++ `memory_order` | 语义 |
 | :--- | :--- | :--- |
@@ -483,7 +483,7 @@ addr.do_send(Increment); // 异步发送，编译期检查消息类型
 > **同构性评价**:
 > Rust 的五种 `Ordering` 与 C++11 的 `memory_order` **一一同构**（isomorphic）。
 > 在 Rust 中写 `AtomicUsize::fetch_add(1, Ordering::Acquire)` 与在 C++ 中写 `atomic_var.fetch_add(1, std::memory_order_acquire)` 具有完全相同的语义。
-> [来源: Rust Reference §18.4.2]
+> 来源: [Rust Reference §18.4.2](https://doc.rust-lang.org/reference/)
 
 ### 8.2 Acquire-Release 的语义精化
 

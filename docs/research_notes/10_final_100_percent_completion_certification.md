@@ -46,7 +46,7 @@
 
 ## 认证声明
 >
-> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Quality Assurance]** · **[来源: Wikipedia - Completion Criteria]** · **[来源: ACM - Software Quality Metrics]** · **[来源: IEEE - Project Completion Standards]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Quality Assurance](https://en.wikipedia.org/wiki/Quality_Assurance)** · **来源: [Wikipedia - Completion Criteria](https://en.wikipedia.org/wiki/Completion_Criteria)** · **[来源: ACM - Software Quality Metrics]** · **[来源: IEEE - Project Completion Standards]**
 
 经全面审核与验证，`docs/research_notes` 目录下的所有内容已达到 **100% 完成度**，符合项目质量标准。
 
@@ -54,13 +54,13 @@
 
 ## 完成项目清单
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### ✅ 核心内容 (100%)
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 类别 | 计划 | 实际 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -74,7 +74,7 @@
 
 ### ✅ 思维表征 (100%)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | 类别 | 计划 | 实际 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -86,7 +86,7 @@
 
 ### ✅ 实用资源 (100%)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 | 类别 | 计划 | 实际 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -105,7 +105,7 @@
 
 ### 内容完整性验证 ✅
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 | 检查项 | 要求 | 结果 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -332,13 +332,13 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

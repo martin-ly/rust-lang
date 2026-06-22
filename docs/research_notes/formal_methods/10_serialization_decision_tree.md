@@ -31,7 +31,7 @@
 
 ## 决策树
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 需要序列化？
@@ -70,7 +70,7 @@
 
 ## 格式对比
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 格式 | 可读 | 性能 | 模式 | 跨语言 | Rust crate | 适用场景 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -88,7 +88,7 @@
 
 ## Serde生态
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 基本使用
@@ -181,19 +181,19 @@ let bin = bincode::serialize(&config)?;
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Decision Tree]**
+> **来源: [Wikipedia - Decision Tree](https://en.wikipedia.org/wiki/Decision_Tree)**
 
 > **[来源: ACM - Decision Support Systems]**
 
 > **[来源: IEEE - Risk Analysis]**
 
-> **[来源: Rust API Guidelines]**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 
-> **[来源: Wikipedia - Serialization]**
+> **来源: [Wikipedia - Serialization](https://en.wikipedia.org/wiki/Serialization)**
 
-> **[来源: serde.rs Documentation]**
+> **来源: [serde.rs Documentation](https://serde.rs/)**
 
-> **[来源: RFC 8259 - JSON]**
+> **来源: [RFC 8259 - JSON](https://github.com/rust-lang/rfcs/pull/8259)**
 
 > **[来源: ACM - Data Format Research]**
 

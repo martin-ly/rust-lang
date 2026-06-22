@@ -15,7 +15,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [Rust内存安全性形式化证明](#rust内存安全性形式化证明)
   - [目录](#目录)
@@ -48,13 +48,13 @@
 
 ## 1. 形式化设置
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 λRust核心语言
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **语法定义**:
 
@@ -80,7 +80,7 @@ $$
 
 ### 1.2 操作语义
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **配置**: $(e, \Sigma, \mathcal{T})$ 其中:
 
@@ -112,7 +112,7 @@ $$
 
 ### 1.3 类型系统
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **类型环境**:
 
@@ -167,7 +167,7 @@ $$
 
 ### 定义 2.1 (内存安全)
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 程序 $P$ 是**内存安全**的当且仅当它满足以下三个条件:
 
@@ -182,7 +182,7 @@ $$
 
 ### 定义 2.2 (类型安全性)
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 类型系统满足**类型安全性**当且仅当:
 
@@ -197,7 +197,7 @@ $$
 
 ### 3.1 进展性 (Progress)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **定理 3.1 (进展性)**:
 > 如果 $\vdash e : \tau$ (空环境下 $e$ 有类型 $\tau$)，那么要么:
@@ -247,7 +247,7 @@ $$
 
 ### 3.2 保持性 (Preservation)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **定理 3.2 (保持性)**:
 > 如果 $\Gamma \vdash e : \tau$ 且 $(e, \Sigma) \rightarrow (e', \Sigma')$，那么存在某个 $\Gamma'$ 使得 $\Gamma' \vdash e' : \tau$。
@@ -312,7 +312,7 @@ $$
 
 ### 4.1 无悬挂指针证明
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **定理 4.1 (无悬挂指针)**:
 > 如果 $\vdash e : \tau$ 且 $(e, \emptyset) \rightarrow^* (e', \Sigma)$，则 $e'$ 中所有访问的内存位置都在 $\text{dom}(\Sigma)$ 中。
@@ -355,7 +355,7 @@ $$
 
 ### 4.2 无双重释放证明
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **定理 4.2 (无双重释放)**:
 > 每个内存位置最多被释放一次。
@@ -389,7 +389,7 @@ drop $e$ 消耗 $e$ 的所有权，之后 $e$ 在环境中不再有效。
 
 ### 4.3 无缓冲区溢出证明
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **定理 4.3 (无缓冲区溢出)**:
 > 数组访问总是在有效范围内。
@@ -442,7 +442,7 @@ $$
 
 ### 5.1 所有权谓词
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 在Iris中，类型解释为一个**所有权谓词**:
 
@@ -472,7 +472,7 @@ $$
 
 ### 5.2 类型解释
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **引用类型**:
 
@@ -499,7 +499,7 @@ $$
 
 ### 6.1 基本引理
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **引理 6.1 (基本引理 / Fundamental Lemma)**:
 > 如果 $\Gamma \vdash e : \tau$，则对任何满足 $\Gamma$ 的资源 $r$，有:
@@ -512,7 +512,7 @@ $$
 
 ### 6.2 充分性定理
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **定理 6.2 (充分性 / Adequacy)**:
 > 如果 $\vdash e : \tau$ 且 $\tau$ 是具体的(非函数类型)，则 $e$ 的执行:
@@ -622,22 +622,22 @@ $$
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Management]**
+> **来源: [Wikipedia - Memory Management](https://en.wikipedia.org/wiki/Memory_Management)**
 
-> **[来源: Rustonomicon - Memory Layout]**
+> **来源: [Rustonomicon - Memory Layout](https://doc.rust-lang.org/nomicon/repr-rust.html)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
 > **[来源: ACM - Memory Safety]**
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ---

@@ -63,17 +63,17 @@
 
 ## 二、Rust Book 2024 Edition 逐章对齐详情
 
-> **[来源: Rust Official Docs]** ·
-> **[来源: Wikipedia - Knowledge Organization]** ·
-> **[来源: Wikipedia - Information Quality]** ·
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
+> **来源: [Wikipedia - Knowledge Organization](https://en.wikipedia.org/wiki/Knowledge_Organization)** ·
+> **来源: [Wikipedia - Information Quality](https://en.wikipedia.org/wiki/Information_Quality)** ·
 > **[来源: ACM - Source Attribution in Technical Documentation]** ·
 > **[来源: IEEE - Documentation Standards]**
 
 ### Ch 1-3: 基础概念
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | Book章节 | 本项目文档 | 对齐状态 | 备注 |
 | :--- | :--- | :--- | :--- |
@@ -93,9 +93,9 @@
 
 ### Ch 4: 所有权 (核心章节)
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | Book章节 | 本项目文档 | 对齐状态 | 差距 |
 | :--- | :--- | :--- | :--- |
@@ -113,7 +113,7 @@
 
 ### Ch 10-11: 泛型与Trait
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | Book章节 | 本项目文档 | 对齐状态 | 备注 |
 | :--- | :--- | :--- | :--- |
@@ -128,7 +128,7 @@
 
 ### Ch 15: 智能指针
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 | Book章节 | 本项目文档 | 对齐状态 | 备注 |
 | :--- | :--- | :--- | :--- |
@@ -148,7 +148,7 @@
 
 ### Ch 16: 无畏并发
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | Book章节 | 本项目文档 | 对齐状态 | 备注 |
 | :--- | :--- | :--- | :--- |
@@ -163,7 +163,7 @@
 
 ### Ch 17: 异步编程 (2024 Edition新增)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | Book章节 | 本项目文档 | 对齐状态 | 差距 |
 | :--- | :--- | :--- | :--- |
@@ -187,7 +187,7 @@
 
 ### 类型系统
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | Reference主题 | 本项目文档 | 状态 |
 | :--- | :--- | :--- |
@@ -200,7 +200,7 @@
 
 ### 所有权与借用
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 | Reference主题 | 本项目文档 | 状态 |
 | :--- | :--- | :--- |
@@ -376,13 +376,13 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

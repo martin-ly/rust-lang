@@ -37,19 +37,19 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档提供 Coq 和 Isabelle 证明助手的脚手架代码，用于形式化验证 Rust 的核心属性。
 
 ## Coq 脚手架
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 所有权模型
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```coq
 (* 所有权基本概念 *)
@@ -67,7 +67,7 @@ Inductive transfer_ownership (v: variable) (o: Ownership) : Prop :=
 
 ### 借用规则
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```coq
 (* 借用有效性 *)
@@ -88,7 +88,7 @@ Inductive valid_borrow (r: reference) (ctx: context) : Prop :=
 
 ### 类型系统
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```isabelle
 theory Rust_Type_System
@@ -115,7 +115,7 @@ end
 
 ### 所有权证明策略
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```coq
 Ltac prove_ownership :=
@@ -212,9 +212,9 @@ Ltac check_borrow :=
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
-> **[来源: Coq Reference]**
-> **[来源: TLA+]**
-> **[来源: ACM - Formal Verification]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
 
 ---

@@ -7,7 +7,7 @@
 
 ## 目录
 >
-> **[来源: Workflow Patterns Initiative]** · **[来源: van der Aalst 2003]** · **[来源: Rust Reference]** · **[来源: Tokio Docs - tokio_util::sync]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)** · **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **[来源: Tokio Docs - tokio_util::sync]**
 
 - [25 取消区域模式 (Cancel Region) - 完整形式化语义](#25-取消区域模式-cancel-region---完整形式化语义)
   - [目录](#目录)
@@ -55,13 +55,13 @@
 
 ## 1. 引言
 >
-> **[来源: Workflow Patterns Initiative]** · **[来源: van der Aalst 2003]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)** · **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)**
 
 取消区域模式（Cancel Region）是工作流控制流模式中的高级模式，允许在一个预定义的区域内同时取消多个正在执行的活动。与取消单个活动（Cancel Activity, WCP18）或取消整个案例（Cancel Case, WCP20）不同，取消区域提供了一种粒度适中的控制机制：只取消特定区域内的所有活动，而区域外的活动不受影响。
 
 ### 1.1 历史背景
 
-> **[来源: van der Aalst 2003]** · **[来源: Russell 2006]**
+> **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)** · **来源: [Russell 2006](https://www.workflowpatterns.com/)**
 
 取消区域模式最早由 Wil van der Aalst 等人在 "Workflow Patterns" (2003) 中系统定义。在工作流系统中，经常需要将一组逻辑上相关的活动作为一个整体来管理其生命周期。例如，在订单处理中，如果客户取消了订单，所有与该订单相关的活动（库存检查、支付处理、物流安排）都应该被一并取消。在并发编程领域，取消区域的概念对应于**结构化并发**、**取消令牌**和**范围退出**。
 
@@ -73,7 +73,7 @@
 
 ### 2.1 概念定义
 
-> **[来源: Workflow Patterns Initiative]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)**
 
 **取消区域** 是一个控制流构造，它定义了一个活动集合（区域），其中：
 
@@ -91,7 +91,7 @@ CancelTrigger::= Event | Condition
 
 ### 2.2 核心语义
 
-> **[来源: van der Aalst 2003]**
+> **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)**
 
 对于区域 $R = \{A_1, A_2, ..., A_n\}$，取消操作 $\text{Cancel}(R)$ 的语义定义为：
 
@@ -109,7 +109,7 @@ $$
 
 ### 2.3 形式化表示
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 #### 2.3.1 状态机表示
 
@@ -142,7 +142,7 @@ stateDiagram-v2
 
 #### 2.3.2 流程代数表示 (CSP 风格)
 
-> **[来源: Hoare 1978]**
+> **来源: [Hoare 1978](https://en.wikipedia.org/wiki/Communicating_sequential_processes)**
 
 $$
 \text{Region}(R, T) = \text{enter} \rightarrow \text{spawn}(R) \rightarrow (\text{Running} \parallel \text{AwaitCancel})
@@ -160,7 +160,7 @@ $$
 
 #### 2.3.3 Petri 网表示
 
-> **[来源: Petri Net Theory]**
+> **来源: [Petri Net Theory](https://en.wikipedia.org/wiki/Petri_net)**
 
 ```
                     ┌─────────────────────────────────────┐
@@ -237,7 +237,7 @@ graph TD
 
 ### 3.3 WfMC 标准
 
-> **[来源: WfMC - Workflow Management Coalition]**
+> **来源: [WfMC - Workflow Management Coalition](https://www.wfmc.org/)**
 
 工作流管理联盟 (WfMC) 将取消区域定义为：
 
@@ -276,7 +276,7 @@ $$
 
 ### 4.2 CSP 表示
 
-> **[来源: Hoare 1978]**
+> **来源: [Hoare 1978](https://en.wikipedia.org/wiki/Communicating_sequential_processes)**
 
 ```csp
 channel enter, spawn, cancel, abort, done, completed
@@ -319,7 +319,7 @@ $$
 
 ### 5.1 基础实现
 
-> **[来源: Rust Reference]** · **[来源: Tokio Docs - tokio_util::sync]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **[来源: Tokio Docs - tokio_util::sync]**
 
 Rust 中实现取消区域的核心工具包括 `CancellationToken`、`tokio::select!`、作用域退出和 `JoinSet::abort_all()`：
 
@@ -379,7 +379,7 @@ where
 
 ### 5.2 高级实现
 
-> **[来源: Rust Reference - Async/Await]** · **[来源: futures crate]**
+> **来源: [Rust Reference - Async/Await](https://doc.rust-lang.org/reference/items/functions.html#async-functions)** · **[来源: futures crate]**
 
 使用 `futures::future::Abortable` 和结构化并发实现类型安全的区域取消：
 
@@ -444,7 +444,7 @@ impl<T: Send + 'static> JoinSetRegion<T> {
 
 ### 5.3 物流协调区域取消完整示例
 
-> **[来源: Tokio Docs - tokio::task]** · **[来源: TRPL Ch. 16 - Concurrency]**
+> **[来源: Tokio Docs - tokio::task]** · **来源: [TRPL Ch. 16 - Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)**
 
 ```rust,ignore
 use tokio::sync::mpsc;
@@ -568,7 +568,7 @@ async fn main() {
 
 ### 6.1 活性 (Liveness)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **定理 6.1.1 (区域取消活性定理)**
 
@@ -598,7 +598,7 @@ $$
 
 ### 6.2 安全性 (Safety)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **定理 6.2.1 (区域隔离定理)**
 
@@ -655,7 +655,7 @@ $$
 
 ### 7.1 模式层次
 
-> **[来源: Workflow Patterns Initiative]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)**
 
 ```mermaid
 graph TD
@@ -674,7 +674,7 @@ graph TD
 
 ### 7.2 形式化关系
 
-> **[来源: van der Aalst 2003]**
+> **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)**
 
 **取消区域与取消活动的关系**:
 
@@ -698,7 +698,7 @@ $$
 
 ### 8.1 物流协调区域取消
 
-> **[来源: Workflow Patterns Initiative]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)**
 
 **场景**: 在物流管理系统中，当一个订单被取消时，所有与该订单相关的协调活动（仓库检查、路线规划、承运商分配、取件调度）都应该被一并取消。
 
@@ -724,7 +724,7 @@ sequenceDiagram
 
 ### 8.2 微服务请求超时取消
 
-> **[来源: Tokio Docs]**
+> **来源: [Tokio Docs](https://tokio.rs/)**
 
 **场景**: 向多个下游服务并行发起请求，如果整体超时，取消所有未完成的请求。
 
@@ -759,7 +759,7 @@ async fn fetch_endpoint(endpoint: &str) -> Result<String, String> {
 
 ### 8.3 并发测试套件取消
 
-> **[来源: Rust Reference - Testing]**
+> **来源: [Rust Reference - Testing](https://doc.rust-lang.org/reference/)**
 
 **场景**: 在测试框架中，如果一个测试失败，取消同一测试组内的其他并发测试。
 
@@ -794,7 +794,7 @@ pub async fn run_test_group(tests: Vec<TestCase>) -> TestGroupResult {
 
 ### 9.1 嵌套取消区域
 
-> **[来源: Workflow Patterns Initiative]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)**
 
 取消区域可以嵌套：内部区域的取消不会传播到外部区域，除非显式配置。
 
@@ -818,7 +818,7 @@ impl NestedCancelRegion {
 
 ### 9.2 条件取消区域
 
-> **[来源: Russell 2006]**
+> **来源: [Russell 2006](https://www.workflowpatterns.com/)**
 
 取消只在满足特定条件时触发：
 
@@ -840,7 +840,7 @@ pub async fn conditional_cancel_region<F, Fut>(
 
 ### 9.3 部分取消区域
 
-> **[来源: Workflow Patterns Initiative]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)**
 
 只取消区域内的一部分活动：
 
@@ -920,19 +920,19 @@ impl PartialCancelRegion {
 
 ## 权威来源索引
 
-> **[来源: Workflow Patterns Initiative]**
-> **[来源: van der Aalst 2003]**
-> **[来源: Russell 2006]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
-> **[来源: Tokio Docs - docs.rs/tokio]**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)**
+> **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)**
+> **来源: [Russell 2006](https://www.workflowpatterns.com/)**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [TRPL Ch. 16 - Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)**
+> **来源: Tokio Docs - docs.rs / [tokio](https://tokio.rs/)**
 > **[来源: Tokio-util Docs - docs.rs/tokio-util]**
-> **[来源: Rustonomicon - Ownership and Safety]**
-> **[来源: POPL 2018 - RustBelt]**
-> **[来源: Hoare 1978 - CSP]**
+> **来源: [Rustonomicon - Ownership and Safety](https://doc.rust-lang.org/nomicon/)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
+> **来源: [Hoare 1978 - CSP](https://en.wikipedia.org/wiki/Communicating_sequential_processes)**
 > **[来源: Milner 1989 - CCS]**
 > **[来源: Milner 1992 - Pi-Calculus]**
 > **[来源: OMG BPMN 2.0 Specification]**
-> **[来源: WfMC - Workflow Management Coalition]**
+> **来源: [WfMC - Workflow Management Coalition](https://www.wfmc.org/)**
 
 ---

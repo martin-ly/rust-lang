@@ -541,3 +541,28 @@ static mut BUFFER: FixedBuffer<1024> = FixedBuffer::new();
 
 - [Tree Borrows (concept)](../../../../concept/01_foundation/05_reference_semantics.md) — PLDI 2025 Distinguished Paper 别名模型
 - [Ferrocene 认证 (concept)](../../../../concept/04_formal/16_aerospace_certification_formal_methods.md) — 认证分层矩阵（core/alloc/std）
+
+## 📚 模块 8: 国际化对齐
+
+> 本节按项目模板要求补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [TRPL Ch04 — Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html) | 权威来源 | 所有权基础 |
+| [Rustonomicon — Ownership](https://doc.rust-lang.org/nomicon/ownership.html) | 权威来源 | 所有权高级话题 |
+
+### 8.2 学术来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | 权威来源 | 所有权语义 |
+| [Tree Borrows — PLDI 2025](https://perso.crans.org/vanille/treebor/) | 权威来源 | 别名模型 |
+
+### 8.3 社区权威
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Brown University Interactive Rust Book](https://rust-book.cs.brown.edu/) | 权威来源 | 可视化教学 |
+| [Rustlings](https://github.com/rust-lang/rustlings) | 权威来源 | 所有权练习 |

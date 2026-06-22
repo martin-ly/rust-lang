@@ -8,7 +8,7 @@
 > **层级**: L6 生态工具
 > **前置概念**: [Async](../../concept/03_advanced/02_async.md) · [Concurrency](../../concept/03_advanced/01_concurrency.md)
 > **Bloom 层级**: 应用 → 分析
-> **[来源: Linux Kernel Documentation]** · **[来源: Rust Official Docs]** · **[来源: tokio-uring]** ✅
+> **[来源: Linux Kernel Documentation]** · **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **[来源: tokio-uring]** ✅
 
 ---
 
@@ -53,7 +53,7 @@ io_uring 是 Linux 内核 5.1+ 引入的异步 I/O 接口，通过共享的提�
 
 ### 队列对（Queue Pair）
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```text
 用户态                      内核态
@@ -76,7 +76,7 @@ io_uring 是 Linux 内核 5.1+ 引入的异步 I/O 接口，通过共享的提�
 
 ### 优势
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 | 特性 | 传统 epoll | io_uring |
 |:---|:---|:---|
@@ -115,7 +115,7 @@ io_uring 是 Linux 内核 5.1+ 引入的异步 I/O 接口，通过共享的提�
 
 ### 主要 crate
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | Crate | 抽象层级 | 适用场景 | 成熟度 |
 |:---|:---|:---|:---:|
@@ -125,7 +125,7 @@ io_uring 是 Linux 内核 5.1+ 引入的异步 I/O 接口，通过共享的提�
 
 ### 条件编译
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 由于 io_uring 仅 Linux 支持，代码必须使用条件编译：
 
@@ -149,7 +149,7 @@ pub mod stub_impl {
 
 ### 文件读取（io-uring crate）
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use io_uring::{IoUring, opcode, types};
@@ -179,7 +179,7 @@ fn read_file(path: &str, buf: &mut [u8]) -> std::io::Result<usize> {
 
 ### Echo Server（tokio-uring）
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 use tokio_uring::net::TcpListener;
@@ -201,7 +201,7 @@ async fn echo_server(addr: &str) -> std::io::Result<()> {
 
 ### Registered Buffers（零拷贝优化）
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 use io_uring::{IoUring, Submitter, opcode, types};
@@ -314,13 +314,13 @@ cargo bench -p c10_networks --bench async_ecosystem_benchmarks
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - io_uring]**
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - io_uring](https://en.wikipedia.org/wiki/io_uring)**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 > **[来源: Linux Kernel Documentation - io_uring]**
 > **[来源: ACM - High-Performance Async I/O]**
 > **[来源: IEEE - Operating System I/O Optimization]**
 > **[来源: tokio-rs - tokio-uring]**
-> **[来源: Rust Reference - Async I/O]**
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [Rust Reference - Async I/O](https://doc.rust-lang.org/reference/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ---

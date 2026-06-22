@@ -30,13 +30,13 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 帮助选择适合的分布式架构模式。
 
 ## 决策流程
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```
 需要强一致性?
@@ -50,7 +50,7 @@
 
 ## 架构模式
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 场景 | 推荐模式 | 说明 |
 |------|----------|------|
@@ -76,7 +76,7 @@
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
@@ -131,12 +131,12 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Decision Tree]**
+> **来源: [Wikipedia - Decision Tree](https://en.wikipedia.org/wiki/Decision_Tree)**
 
 > **[来源: ACM - Decision Support Systems]**
 
 > **[来源: IEEE - Risk Analysis]**
 
-> **[来源: Rust API Guidelines]**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 
 ---

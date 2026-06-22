@@ -836,3 +836,26 @@ fn main() {
 > 这与 C 的隐式转换（静默截断）或 Java 的强制类型转换（运行时 `ClassCastException`）不同——Rust 在类型系统层面区分转换的安全性。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/convert/trait.TryFrom.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)]
+
+## 📚 模块 8: 国际化对齐
+
+> 本节按项目模板要求补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Rust Reference — Type Cast Expressions](https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions) | 权威来源 | 类型转换 |
+| [Rust By Example — Casting](https://doc.rust-lang.org/rust-by-example/types/cast.html) | 权威来源 | 类型转换示例 |
+
+### 8.2 学术来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [RFC 2484 — TryFrom/TryInto](https://rust-lang.github.io/rfcs/2484-trait-from-tryfrom.html) | 权威来源 | 安全转换 trait |
+
+### 8.3 社区权威
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Rust Cookbook — Conversions](https://rust-lang-nursery.github.io/rust-cookbook/conversions.html) | 权威来源 | 转换模式 |

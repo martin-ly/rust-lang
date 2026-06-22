@@ -56,13 +56,13 @@
 
 ## 📚 学术资源 {#-学术资源}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 形式化方法相关论文
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **RustBelt: Securing the Foundations of the Rust Programming Language**
    - 作者: Ralf Jung, et al.
@@ -83,9 +83,9 @@
 
 ### 类型理论相关论文
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **Type Systems for Programming Languages**
    - 作者: Benjamin C. Pierce
@@ -105,9 +105,9 @@
 
 ### 性能优化相关论文
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **Optimizing Rust Compiler Performance**
    - 作者: Rust Compiler Team
@@ -123,13 +123,13 @@
 
 ## 📖 官方文档 {#-官方文档}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Rust 官方文档
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **The Rust Programming Language (The Book)**
   - 链接: <https://doc.rust-lang.org/book/>
@@ -153,9 +153,9 @@
 
 ### Rust 编译器文档
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **Rust Compiler Development Guide**
   - 链接: <https://rustc-dev-guide.rust-lang.org/>
@@ -167,9 +167,9 @@
 
 ### Rust 工具文档
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **Cargo Book**
   - 链接: <https://doc.rust-lang.org/cargo/>
@@ -183,13 +183,13 @@
 
 ## 🛠️ 工具资源 {#️-工具资源}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 形式化验证工具
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **Coq**
   - 链接: <https://coq.inria.fr/>
@@ -213,7 +213,7 @@
 
 ### 性能分析工具
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 - **Criterion.rs**
   - 链接: <https://github.com/bheisler/criterion.rs>
@@ -232,7 +232,7 @@
 
 ### 内存分析工具
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 - **Miri**
   - 链接: <https://github.com/rust-lang/miri>
@@ -251,7 +251,7 @@
 
 ### 代码分析工具
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - **Clippy**
   - 链接: <https://github.com/rust-lang/rust-clippy>
@@ -276,7 +276,7 @@
 
 ### 社区论坛
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - **Rust Users Forum**
   - 链接: <https://users.rust-lang.org/>
@@ -292,7 +292,7 @@
 
 ### 社区项目
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - **Awesome Rust**
   - 链接: <https://github.com/rust-unofficial/awesome-rust>
@@ -310,7 +310,7 @@
 
 ### 在线课程
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 - **Rustlings**
   - 链接: <https://github.com/rust-lang/rustlings>
@@ -322,7 +322,7 @@
 
 ### 书籍
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 - **The Rust Programming Language**
   - 作者: Steve Klabnik, Carol Nichols
@@ -345,7 +345,7 @@
 
 ### 官方博客
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 - **Rust Blog**
   - 链接: <https://blog.rust-lang.org/>
@@ -357,7 +357,7 @@
 
 ### 社区博客
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - **This Week in Rust**
   - 链接: <https://this-week-in-rust.org/>
@@ -393,7 +393,7 @@
 
 ### 核心文档
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 - [主索引](./README.md) - 完整的研究笔记索引
 - [工具使用指南](./10_tools_guide.md) - 研究工具详细指南
@@ -490,13 +490,13 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

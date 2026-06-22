@@ -23,7 +23,7 @@
 
 ## 📊 目录
 >
-> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Programming Paradigm]** · **[来源: Wikipedia - Multi-Paradigm Language]** · **[来源: ACM - Paradigm Comparison Framework]** · **[来源: IEEE - Language Paradigm Taxonomy]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Programming Paradigm](https://en.wikipedia.org/wiki/Programming_Paradigm)** · **来源: [Wikipedia - Multi-Paradigm Language](https://en.wikipedia.org/wiki/Multi_Paradigm_Language)** · **[来源: ACM - Paradigm Comparison Framework]** · **[来源: IEEE - Language Paradigm Taxonomy]**
 
 - [范式对比矩阵](#范式对比矩阵)
   - [📊 目录](#-目录)
@@ -60,7 +60,7 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 范式对比矩阵系统比较编程语言范式在Rust中的体现，帮助开发者理解Rust的多范式特性及其适用场景。
 
@@ -68,11 +68,11 @@
 
 ## 多范式特性矩阵
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 核心范式支持
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | 范式 | Rust支持 | 关键特性 | 适用场景 | 与其他范式结合 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -85,7 +85,7 @@
 
 ### 范式融合示例
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 // 函数式 + 泛型 + 并发
@@ -113,7 +113,7 @@ let result = process_data(numbers, |n| n * 2);
 
 ### 系统编程语言对比
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 特性 | Rust | C | C++ | Go | Zig |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -126,7 +126,7 @@ let result = process_data(numbers, |n| n * 2);
 
 ### 内存管理对比
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```text
 语言         管理策略              安全性      性能      可控性
@@ -148,7 +148,7 @@ Haskell     GC                    ⭐⭐⭐⭐      ⭐⭐        ⭐⭐
 
 ### 错误处理范式
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 | 范式 | 语言示例 | Rust实现 | 优缺点 |
 | :--- | :--- | :--- | :--- |
@@ -172,7 +172,7 @@ let content = read_file("a.txt")
 
 ### 并发范式
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 范式 | 模型 | Rust支持 | 适用场景 |
 | :--- | :--- | :--- | :--- |
@@ -190,7 +190,7 @@ let content = read_file("a.txt")
 
 ### 接口抽象
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 语言 | 机制 | 静态/动态 | 性能 | Rust对应 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -216,7 +216,7 @@ fn dynamic_dispatch(item: &dyn Drawable) {
 
 ### 泛型实现对比
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | 语言 | 实现方式 | 代码膨胀 | 特化支持 |
 | :--- | :--- | :--- | :--- |
@@ -424,13 +424,13 @@ fn dynamic_dispatch(item: &dyn Drawable) {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
-> **[来源: Coq Reference]**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
 
-> **[来源: TLA+]**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
 
-> **[来源: ACM - Formal Verification]**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
 
 ---
 

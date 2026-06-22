@@ -78,13 +78,13 @@
 
 ## 🚀 快速开始
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 排序算法
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use c08_algorithms::algorithms::sorting::*;
@@ -106,9 +106,9 @@ println!("Sorted: {:?}", data);
 
 ### 搜索算法
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use c08_algorithms::algorithms::searching::*;
@@ -130,13 +130,13 @@ if let Some(index) = linear_search(&data, 7) {
 
 ## 📋 常用算法
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 排序算法
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 算法     | 时间复杂度 | 空间复杂度 | 稳定性 | 使用场景   |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -147,9 +147,9 @@ if let Some(index) = linear_search(&data, 7) {
 
 ### 搜索算法
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 算法     | 时间复杂度   | 空间复杂度 | 前提条件       |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -158,9 +158,9 @@ if let Some(index) = linear_search(&data, 7) {
 
 ### 图算法
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use c08_algorithms::algorithms::graph::*;
@@ -178,9 +178,9 @@ let distances = dijkstra(&graph, start)?;
 
 ### 动态规划
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use c08_algorithms::algorithms::dynamic_programming::*;
@@ -199,13 +199,13 @@ let max_value = knapsack_01(weights, values, capacity);
 
 ## 📊 数据结构
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 栈和队列
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use c08_algorithms::data_structures::*;
@@ -229,7 +229,7 @@ if let Some(value) = queue.dequeue() {
 
 ### 树结构
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 use c08_algorithms::data_structures::tree::*;
@@ -251,7 +251,7 @@ println!("Inorder: {:?}", inorder);
 
 ### 哈希表
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 use std::collections::HashMap;
@@ -267,7 +267,7 @@ if let Some(value) = map.get("key1") {
 
 ### BTreeMap/BTreeSet 与 append（Rust 1.93）
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **Rust 1.93 行为变更**：`BTreeMap::append` 和 `BTreeSet` 相关 append 操作不再更新目标中已存在的 key。
 若源与目标有相同 key，保留目标原有条目。需覆盖时使用 `insert` 或 `entry` API。
@@ -280,7 +280,7 @@ if let Some(value) = map.get("key1") {
 
 ### 示例 1: 快速排序实现
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 fn quicksort<T: Ord>(arr: &mut [T]) {
@@ -317,7 +317,7 @@ assert_eq!(data, vec![11, 12, 22, 25, 34, 64, 90]);
 
 ### 示例 2: 二分搜索实现
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 fn binary_search<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
@@ -343,7 +343,7 @@ assert_eq!(binary_search(&arr, &4), None);
 
 ### 示例 3: 动态规划 - 最长公共子序列
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 fn lcs(s1: &str, s2: &str) -> String {
@@ -388,7 +388,7 @@ assert_eq!(lcs("ABCDGH", "AEDFHR"), "ADH");
 
 ### 示例 4: 图的 BFS 和 DFS
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 use std::collections::{HashMap, HashSet, VecDeque};
@@ -458,7 +458,7 @@ println!("DFS: {:?}", g.dfs(0));
 
 ### 示例 5: 滑动窗口最大值
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 use std::collections::VecDeque;
@@ -510,7 +510,7 @@ assert_eq!(max_sliding_window(&nums, 3), vec![3, 3, 5, 5, 6, 7]);
 
 ### 场景: 日志分析系统
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 在实际项目中，算法常用于数据处理和分析。以下是一个简化的日志分析系统：
 
@@ -574,7 +574,7 @@ impl LogAnalyzer {
 
 ### 并行排序
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use rayon::prelude::*;
@@ -588,7 +588,7 @@ println!("Sorted: {:?}", data);
 
 ### 并行搜索
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use rayon::prelude::*;
@@ -610,7 +610,7 @@ if let Some(&value) = found {
 
 ### 排序选择
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - **小数据集 (< 50)**: 插入排序
 - **中等数据集 (50-1000)**: 快速排序
@@ -620,7 +620,7 @@ if let Some(&value) = found {
 
 ### 搜索选择
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 - **已排序数组**: 二分搜索
 - **未排序数组**: 线性搜索
@@ -635,7 +635,7 @@ if let Some(&value) = found {
 
 ### 使用迭代器
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 // 高效的数据处理
@@ -647,7 +647,7 @@ let sum: i32 = data.iter()
 
 ### 避免不必要的分配
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 // 使用切片而非 Vec
@@ -668,7 +668,7 @@ let mut buffer = Vec::with_capacity(1024);
 
 ### 越界访问
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 // ❌ 错误
@@ -682,7 +682,7 @@ if let Some(value) = data.get(index) {
 
 ### 整数溢出
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 // ❌ 错误
@@ -700,7 +700,7 @@ let result = a.checked_add(b)?;
 
 ### 反例 1: 对未排序切片 binary_search
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **错误示例**:
 
@@ -723,7 +723,7 @@ let _ = v.binary_search(&2);
 
 ### 反例 2: sort 与 sort_by 混用导致不稳定
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 **错误示例**:
 
@@ -741,7 +741,7 @@ v.sort_by(|a, b| a.1.cmp(&b.1));  // 可能破坏第一键顺序
 
 ### 反例 3: 递归深度过大导致栈溢出
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **错误示例**:
 
@@ -771,7 +771,7 @@ fn factorial(n: u64) -> u64 {
 
 ### 反例 4: 整数溢出
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **错误示例**:
 
@@ -794,7 +794,7 @@ let sum = a.checked_add(b).expect("overflow");
 
 ### 反例 5: 不当使用递归导致重复计算
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **错误示例**:
 
@@ -848,14 +848,14 @@ fn fib(n: usize) -> usize {
 
 ### 官方文档
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - [Rust 算法文档](https://doc.rust-lang.org/std/collections/)
 - [Iterator 文档](https://doc.rust-lang.org/std/iter/trait.Iterator.html)
 
 ### 项目内部文档
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - [算法指南](../../../crates/c08_algorithms/docs/tier_02_guides/01_算法快速入门.md)
 - [数据结构指南](../../../crates/c08_algorithms/docs/tier_02_guides/02_数据结构实践.md)
@@ -863,7 +863,7 @@ fn fib(n: usize) -> usize {
 
 ### 形式化理论与类型系统
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 - [类型系统基础](../../research_notes/type_theory/10_type_system_foundations.md) — 算法与类型的关系
 - [构造能力理论](../../research_notes/type_theory/10_construction_capability.md) — 算法表达能力边界
@@ -872,7 +872,7 @@ fn fib(n: usize) -> usize {
 
 ### 相关速查卡
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 - [集合与迭代器速查卡](./02_collections_iterators_cheatsheet.md) - 数据结构基础
 - [控制流与函数速查卡](./02_control_flow_functions_cheatsheet.md) - 算法控制流
@@ -895,7 +895,7 @@ fn fib(n: usize) -> usize {
 
 ### array_windows 在滑动窗口算法中的应用
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **经典算法优化**: KMP算法、滑动窗口最大值、数据流处理
 
@@ -976,7 +976,7 @@ pub fn stream_anomaly_detection(data: &[f64]) -> Vec<usize> {
 
 ### ControlFlow 在搜索算法中的应用
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **场景**: DFS、BFS、回溯算法中的提前终止
 
@@ -1329,20 +1329,20 @@ impl StreamProcessor {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ---

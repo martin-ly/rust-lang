@@ -9,13 +9,13 @@
 > **对齐日期**: 2026-05-12
 > **难度**: 中高级
 > **学习目标**: 掌握Rust类型系统最强大的应用，实现编译时状态验证
-> **[来源: Rust Reference - Types]** · **[来源: Wikipedia - Type System]** · **[来源: Rust Design Patterns Book]** · **[来源: Wikipedia - Finite-state Machine]** · **[来源: TRPL Ch. 10]** · **[来源: Rust API Guidelines]**
+> **来源: [Rust Reference - Types](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)** · **来源: [Rust Design Patterns Book](https://rust-lang.github.io/design-patterns/)** · **来源: [Wikipedia - Finite-state Machine](https://en.wikipedia.org/wiki/Finite_state_Machine)** · **来源: [TRPL Ch. 10](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)** · **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 
 ---
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [类型状态模式详解](#类型状态模式详解)
   - [目录](#目录)
@@ -64,13 +64,13 @@
 
 ## 1. 引言
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 什么是类型状态模式
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 类型状态模式（Type State Pattern）是一种利用类型系统在编译时编码和验证对象状态的编程技术。它将状态从运行时值提升为编译期类型，使得非法状态转换在编译时被阻止。
 
@@ -103,7 +103,7 @@ impl Connection<Connected> {
 
 ### 为什么Rust特别适合
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 1. **零成本抽象**: 类型参数在编译期单态化，运行时无开销
 2. **所有权系统**: 消费式状态转换自然契合所有权转移
@@ -118,7 +118,7 @@ conn.query("SELECT 1");  // 编译错误！Disconnected状态没有query方法
 
 ### 与传统状态模式的对比
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 | 特性 | 传统状态模式 | 类型状态模式 |
 |------|-------------|-------------|
@@ -136,7 +136,7 @@ conn.query("SELECT 1");  // 编译错误！Disconnected状态没有query方法
 
 ### PhantomData
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 `PhantomData<T>`是一个零大小类型，用于在结构体中"假装"存储一个`T`类型的值，实际不占用内存。
 
@@ -158,7 +158,7 @@ pub struct StateMachine<State> {
 
 ### 类型参数作为状态标记
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 // 定义状态标记（零大小类型）
@@ -176,7 +176,7 @@ pub struct Process<State> {
 
 ### 状态转换的编码
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 状态转换通过方法实现，消费旧状态，返回新状态：
 
@@ -221,7 +221,7 @@ impl Process<Running> {
 
 ### 最简单的类型状态机
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 use std::marker::PhantomData;
@@ -271,7 +271,7 @@ fn main() {
 
 ### 消费式状态转换
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 // 关键点：self（非&self）消费所有权
@@ -294,7 +294,7 @@ let conn = conn.connect();
 
 ### 状态相关数据
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 // 不同状态可以存储不同数据
@@ -362,7 +362,7 @@ impl Client<Connected> {
 
 ### 案例1：数据库连接
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 use std::marker::PhantomData;
@@ -563,7 +563,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 案例2：HTTP请求构建器
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use std::marker::PhantomData;
@@ -719,7 +719,7 @@ fn main() {
 
 ### 案例3：文件解析器
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
 use std::fs::File;
@@ -864,7 +864,7 @@ fn main() -> io::Result<()> {
 
 ### 案例4：订单工作流
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust,ignore
 use std::marker::PhantomData;
@@ -1047,7 +1047,7 @@ fn main() -> Result<(), PaymentError> {
 
 ### 可逆状态转换
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 // 某些状态转换可以逆转
@@ -1070,7 +1070,7 @@ impl Connection<Disconnected> {
 
 ### 状态转换守卫
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 use std::marker::PhantomData;
@@ -1126,7 +1126,7 @@ struct Row;
 
 ### 组合多个状态
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 use std::marker::PhantomData;
@@ -1195,7 +1195,7 @@ impl Connection<Connected, Authenticated> {
 
 ### 与异步结合
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 use std::future::Future;
@@ -1252,7 +1252,7 @@ async fn example() -> Result<(), Error> {
 
 ### 代码复杂度
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 类型状态模式增加了代码量和复杂性：
 
@@ -1283,7 +1283,7 @@ impl Connection<Connected> {
 
 ### 类型爆炸问题
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 当状态维度增加时，类型组合呈指数增长：
 
@@ -1297,7 +1297,7 @@ Connection<Disconnected, Anonymous>
 
 ### 序列化挑战
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 类型状态难以序列化，因为状态是类型而非值：
 
@@ -1312,7 +1312,7 @@ impl serde::Serialize for Connection<Connected> {
 
 ### 与动态分发的对比
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 // 类型状态：静态分发，零成本
@@ -1331,7 +1331,7 @@ conn.connect();  // 运行时检查当前状态
 
 ### 何时使用
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **适合使用类型状态**:
 
@@ -1349,7 +1349,7 @@ conn.connect();  // 运行时检查当前状态
 
 ### 命名约定
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 // 状态类型使用名词或形容词
@@ -1376,7 +1376,7 @@ impl Connection<Connected> {
 
 ### 文档与错误信息
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 /// A database connection.
@@ -1404,7 +1404,7 @@ pub struct Connection<State> { ... }
 
 ### C++
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 C++可以使用模板实现类似模式，但缺乏Rust的所有权系统：
 
@@ -1426,7 +1426,7 @@ public:
 
 ### TypeScript
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 TypeScript可以使用条件类型和泛型，但只在编译时有效：
 
@@ -1520,30 +1520,30 @@ query _ = return []
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: Wikipedia - Design Pattern]**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 
-> **[来源: Rust API Guidelines]**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 
-> **[来源: Gang of Four]**
+> **来源: [Gang of Four](https://en.wikipedia.org/wiki/Design_Patterns)**
 
-> **[来源: ACM - Software Design Patterns]**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
 
-> **[来源: Wikipedia - Design Pattern]**
-> **[来源: Rust API Guidelines]**
-> **[来源: Gang of Four - Design Patterns]**
-> **[来源: ACM - Software Design Patterns]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
+> **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---
 

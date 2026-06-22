@@ -44,13 +44,13 @@
 
 ## 1. 常量上下文分类
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Def CONST-CTX1（常量上下文）
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 以下位置构成**常量上下文** (Const Context)：
 
@@ -70,13 +70,13 @@ $$
 
 ## 2. const fn 语义
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Def CONST-FN1（const fn 允许操作）
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 在 const fn 中允许的操作集合：
 
@@ -112,9 +112,9 @@ const fn allowed_operations(x: i32) -> i32 {
 
 ### Def CONST-FN2（const fn 禁止操作）
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 $$
 \text{NonConstOp} ::= \text{I/O} \mid \text{堆分配} \mid \text{可变静态} \mid \text{非 const 调用}
@@ -142,13 +142,13 @@ const fn forbidden_operations() {
 
 ## 3. MIR 常量求值
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Def MIR-EVAL1（MIR 常量求值器）
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 MIR 常量求值是编译期解释器，执行以下步骤：
 
@@ -174,9 +174,9 @@ MIR 常量求值是编译期解释器，执行以下步骤：
 
 ### Thm EVAL-BOUND1（求值限制定理）
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 常量求值受以下限制约束：
 
@@ -194,13 +194,13 @@ $$
 
 ## 4. 常量泛型求值
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Def CONST-GEN1（常量泛型形式化）
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 常量泛型参数 $N$ 的类型：
 
@@ -216,9 +216,9 @@ $$
 
 ### Thm CONST-TY1（常量泛型类型安全）
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 若 $e$ 在常量上下文中求值为 $v$，则类型 $T[e]$ 良构当且仅当 $v$ 满足 $T$ 的约束：
 
@@ -247,7 +247,7 @@ let b: Array<i32, -1> = ...;
 
 ### Def CONST-SELECT1（条件常量求值）
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 `const_eval_select` 允许在 const fn 中根据求值上下文选择不同实现：
 
@@ -296,7 +296,7 @@ fn main() {
 
 ### 常量求值判定
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 $$
 \text{ConstEval}(e) =
@@ -308,7 +308,7 @@ $$
 
 ### 类型系统交互
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 常量求值与类型系统紧耦合：
 
@@ -331,13 +331,13 @@ $$
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -348,7 +348,7 @@ $$
 
 #### 代码示例更新
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 本文档中的所有Rust代码示例均已：
 
@@ -358,7 +358,7 @@ $$
 
 #### 相关文档
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查
@@ -392,9 +392,9 @@ $$
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Type System]**
-> **[来源: Pierce 2002 - TAPL]**
-> **[来源: Rust Reference - Type System]**
-> **[来源: ACM - Type Systems]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Pierce 2002 - TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)**
+> **来源: [Rust Reference - Type System](https://doc.rust-lang.org/reference/types.html)**
+> **来源: [ACM - Type Systems](https://dl.acm.org/)**
 
 ---

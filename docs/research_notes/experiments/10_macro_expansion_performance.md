@@ -60,7 +60,7 @@
 
 ## 🎯 研究目标 {#-研究目标}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本研究旨在分析 Rust 宏展开对编译时间和运行时性能的影响，评估不同宏实现的性能特征，包括：
 
@@ -71,9 +71,9 @@
 
 ### 核心问题
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **宏展开对编译时间的影响有多大？**
 2. **不同宏实现的性能差异如何？**
@@ -81,9 +81,9 @@
 
 ### 预期成果
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - 建立宏展开性能基准测试
 - 识别宏展开性能瓶颈
@@ -93,13 +93,13 @@
 
 ## 📚 理论基础 {#-理论基础}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 形式化论证与实验衔接
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def MP1（宏展开实验验证）**：宏展开实验 $E$ 验证 [type_system_foundations](../type_theory/10_type_system_foundations.md) 保持性 T2，当且仅当 $E$ 观测到宏展开后代码良型且类型检查通过。
 
@@ -124,9 +124,9 @@
 
 ### 相关概念
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **宏展开（Macro Expansion）**：编译器将宏调用替换为展开后的代码的过程。
 
@@ -139,9 +139,9 @@
 
 ### 理论背景
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **宏展开阶段**：
 
@@ -154,13 +154,13 @@
 
 ## 🔬 实验设计 {#-实验设计}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 编译时间测试
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **测试目标**：测量宏展开对编译时间的影响
 
@@ -179,9 +179,9 @@
 
 ### 2. 代码生成效率测试
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **测试目标**：评估宏生成的代码效率
 
@@ -199,7 +199,7 @@
 
 ### 3. 宏展开开销分析
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **测试目标**：分析宏展开过程的性能开销
 
@@ -223,7 +223,7 @@
 
 ### 示例 1：声明式宏性能测试
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust
 // 简单宏
@@ -266,7 +266,7 @@ fn benchmark_complex_macro() {
 
 ### 示例 2：过程宏性能测试
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 use proc_macro::TokenStream;
@@ -289,7 +289,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 ### 示例 3：宏展开时间测量
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 // 使用 cargo-expand 查看宏展开结果
@@ -311,7 +311,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 ### 1. 编译时间对比
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **测试环境**：
 
@@ -335,7 +335,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 ### 2. 代码生成效率
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **结果**：
 
@@ -353,7 +353,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 ### 结果分析模板
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 将 `time cargo build`、`cargo expand` 与运行时 bench 的产出填入下表：
 
@@ -387,14 +387,14 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 ### 环境要求
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - **Rust**: 1.93.1+；**cargo-expand**：`cargo install cargo-expand`；**cargo-bloat**：`cargo install cargo-bloat`
 - 建议 `cargo clean` 后测量冷编译；增量编译需固定 `touch` 策略
 
 ### 执行步骤
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 1. **编译时间**：`cargo clean && time cargo build --release` 作基准；在相同项目下逐步加入声明式宏、过程宏、复杂派生宏，分别 `time cargo build --release`，记录增量。
 2. **展开结果**：`cargo expand > expanded.rs`，用 `wc -l` 或脚本统计展开后行数；对比「手写等价代码」行数。
@@ -410,7 +410,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 ### 性能优化建议
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 - **声明式宏**：避免递归过深与重复展开；用 `$crate` 保证路径稳定；能用手写函数代替的简单逻辑优先函数。
 - **过程宏**：减少 `syn`/`quote` 的解析与生成量；考虑 `proc-macro2` 的 `Span` 与 hygiene；将重量级 derive 放入可选 feature。
@@ -419,7 +419,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 ### 工具改进
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 - **cargo-expand**：定期检查展开结果，防止意外膨胀与 hygiene 问题。
 - **cargo-bloat**：区分「宏生成」与「手写」符号，评估宏对体积的边际贡献。
@@ -542,13 +542,13 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Macro (computer science)]**
-> **[来源: TRPL Ch. 19 - Macros]**
-> **[来源: Rust Reference - Macros]**
-> **[来源: The Little Book of Rust Macros]**
-> **[来源: Wikipedia - Program Optimization]**
+> **来源: [Wikipedia - Macro (computer science)](https://en.wikipedia.org/wiki/Macro_(computer_science))**
+> **来源: [TRPL Ch. 19 - Macros](https://doc.rust-lang.org/book/ch19-00-advanced-features.html)**
+> **来源: [Rust Reference - Macros](https://doc.rust-lang.org/reference/macros.html)**
+> **来源: [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)**
+> **来源: [Wikipedia - Program Optimization](https://en.wikipedia.org/wiki/Program_Optimization)**
 > **[来源: Criterion.rs]**
-> **[来源: ACM - Performance Engineering]**
-> **[来源: Rust Performance Book]**
+> **来源: [ACM - Performance Engineering](https://dl.acm.org/)**
+> **来源: [The Rust Performance Book](https://nnethercote.github.io/perf-book/)**
 
 ---

@@ -130,7 +130,7 @@ Iterator Trait:
   │ take            │ Iterator<T>     │ Iterator<T>     │
   │ flat_map        │ Iterator<T>     │ Iterator<U>     │
   └─────────────────┴─────────────────┴─────────────────┘
-> [来源: [TRPL — Iterators]]
+> [来源: [TRPL — Iterators](https://doc.rust-lang.org/book/)]
 ```
 
 > **认知功能**: **适配器链让数据转换声明式且可组合**——每个适配器只做一件事，组合起来完成复杂转换。

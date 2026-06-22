@@ -12,12 +12,12 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** ·
-> **[来源: Wikipedia - Rust (programming language)]** ·
-> **[来源: Rustonomicon]** ·
-> **[来源: TRPL]** ·
-> **[来源: RFCs - github.com/rust-lang/rfcs]** ·
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** ·
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** ·
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** ·
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** ·
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** ·
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [验证技术进展](#验证技术进展)
   - [目录](#目录)
@@ -73,13 +73,13 @@
 
 ## 1. MIRI 改进与内存模型验证
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 MIRI 概述
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 MIRI（MIR Interpreter）是 Rust 的官方未定义行为检测工具，通过解释执行 Rust 的中间表示（MIR）来检测未定义行为。
 
@@ -107,7 +107,7 @@ MIRI 的核心能力：
 
 ### 1.2 Tree Borrows 模型
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 Tree Borrows 是 MIRI 中引入的新内存模型，作为 Stacked Borrows 的改进版本。
 
@@ -128,7 +128,7 @@ Tree Borrows:
 
 #### Tree Borrows 核心概念
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 // Tree Borrows 允许的模式
@@ -150,7 +150,7 @@ fn tree_borrows_friendly() {
 
 #### 2024年进展
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - **Tree Borrows 成为默认**：MIRI 默认使用 Tree Borrows
 - **文档完善**：详细的内存模型文档
@@ -159,7 +159,7 @@ fn tree_borrows_friendly() {
 
 ### 1.3 并发验证支持
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 MIRI 在并发验证方面的改进：
 
@@ -200,7 +200,7 @@ miri test --test-threads=1
 
 ### 1.4 诊断改进
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 MIRI 2024 年的诊断改进：
 
@@ -219,7 +219,7 @@ MIRI 2024 年的诊断改进：
 
 ### 2.1 Prusti 架构演进
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 Prusti 是基于 Viper 验证框架的 Rust 验证工具，使用分离逻辑进行验证。
 
@@ -245,11 +245,11 @@ Z3 SMT 求解器
 
 ### 2.2 新功能详解
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 #### 2.2.1 改进的规范语法
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 use prusti_contracts::*;
@@ -286,7 +286,7 @@ impl Counter {
 
 #### 2.2.2 循环不变量合成
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 // Prusti 现在支持循环不变量合成
@@ -310,7 +310,7 @@ fn find_max(arr: &[i32]) -> Option<i32> {
 
 #### 2.2.3 特质约束验证
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 // 验证特质实现满足约束
@@ -333,7 +333,7 @@ fn process_bounded<T: Bounded>(x: T) -> T {
 
 ### 2.3 Unsafe Rust 支持
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 Prusti 正在扩展对 Unsafe Rust 的支持：
 
@@ -373,7 +373,7 @@ unsafe fn slice_from_raw_parts<'a, T>(
 
 ### 2.4 性能优化
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 Prusti 2024 年的性能改进：
 
@@ -401,7 +401,7 @@ Prusti 2024 年的性能改进：
 
 ### 3.1 Kani 核心能力
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 Kani 是基于 CBMC（C Bounded Model Checker）的 Rust 验证工具，使用模型检查技术验证 Rust 代码。
 
@@ -432,7 +432,7 @@ Kani 的核心特性：
 
 ### 3.2 并发代码验证
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Kani 对并发代码的验证支持：
 
@@ -468,7 +468,7 @@ fn verify_atomic_counter() {
 
 ### 3.3 标准库验证
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 Kani 用于验证标准库的实现：
 
@@ -504,7 +504,7 @@ fn verify_option_map() {
 
 ### 3.4 CI/CD 集成
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 Kani 与 CI/CD 的集成：
 
@@ -547,7 +547,7 @@ Kani 验证的最佳实践：
 
 ### 4.1 Verus 架构
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 Verus 是由微软研究院开发的 Rust 验证工具，专注于系统级软件的验证。
 
@@ -574,7 +574,7 @@ Verus 的设计哲学：
 
 ### 4.2 并发验证
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 Verus 的并发验证能力：
 
@@ -624,7 +624,7 @@ impl<T> ThreadSafeQueue<T> {
 
 ### 4.3 操作系统验证案例
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Verus 在操作系统验证中的应用：
 
@@ -682,7 +682,7 @@ impl BuddyAllocator {
 
 ### 4.4 线性类型与幽灵状态
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 Verus 使用线性类型和幽灵状态进行验证：
 
@@ -729,7 +729,7 @@ impl<T> Permission<T> {
 
 ### 5.1 Creusot 设计哲学
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 Creusot 是基于 Why3 验证平台的 Rust 验证工具，使用 Coma 中间语言。
 
@@ -759,7 +759,7 @@ Why3 平台
 
 ### 5.2 Pearlite 规范语言
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 Creusot 使用 Pearlite 作为规范语言：
 
@@ -808,7 +808,7 @@ impl<T> Vec<T> {
 
 ### 5.3 标准库验证进展
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 Creusot 的标准库验证覆盖情况（2024）：
 
@@ -1186,20 +1186,20 @@ Rust 验证技术正在快速发展，为构建可靠的 Rust 软件提供了强
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Wikipedia - Formal Verification]**
-> **[来源: Coq Reference Manual]**
-> **[来源: TLA+ Documentation]**
-> **[来源: ACM - Formal Methods]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Wikipedia - Formal Verification](https://en.wikipedia.org/wiki/Formal_Verification)**
+> **来源: [Coq Reference Manual](https://coq.inria.fr/doc/)**
+> **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [ACM - Formal Methods](https://dl.acm.org/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---

@@ -808,3 +808,28 @@ fn main() {
 > 这与 C 的 `struct`（总是可 bitwise copy，但可能有 double-free 风险）或 C++ 的拷贝构造函数（可自定义，但 `= default` 和 `= delete` 控制）不同——Rust 的 `Copy` 是编译期标记，严格限制为无资源管理的类型。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] ·
 > [来源: [Rust Reference — Copy](https://doc.rust-lang.org/reference/special-types-and-traits.html#copy)]
+
+## 📚 模块 8: 国际化对齐
+
+> 本节按项目模板要求补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [TRPL Ch04 — Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html) | 权威来源 | 所有权基础 |
+| [Rustonomicon — Ownership](https://doc.rust-lang.org/nomicon/ownership.html) | 权威来源 | 所有权高级话题 |
+
+### 8.2 学术来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | 权威来源 | 所有权语义 |
+| [Tree Borrows — PLDI 2025](https://perso.crans.org/vanille/treebor/) | 权威来源 | 别名模型 |
+
+### 8.3 社区权威
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Brown University Interactive Rust Book](https://rust-book.cs.brown.edu/) | 权威来源 | 可视化教学 |
+| [Rustlings](https://github.com/rust-lang/rustlings) | 权威来源 | 所有权练习 |

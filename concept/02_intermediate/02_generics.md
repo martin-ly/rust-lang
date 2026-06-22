@@ -170,7 +170,7 @@
 ### 1.1 Wikipedia 对齐定义
 
 > **[Wikipedia: Generic programming](https://en.wikipedia.org/wiki/Generic_programming)** Generic programming is a style of computer programming in which algorithms are written in terms of types to-be-specified-later that are then instantiated when needed for specific types provided as parameters. Rust uses monomorphization to implement generics, generating specialized code at compile time for each concrete type used.
-> 关键区分：Rust 的泛型属于**参数多态**（parametric polymorphism），与 C++ 模板（textual substitution）和 Java 泛型（type erasure）在实现语义上存在本质差异。[来源: Wikipedia: Parametric polymorphism]
+> 关键区分：Rust 的泛型属于**参数多态**（parametric polymorphism），与 C++ 模板（textual substitution）和 Java 泛型（type erasure）在实现语义上存在本质差异。来源: [Wikipedia: Parametric polymorphism](https://en.wikipedia.org/wiki/Parametric_polymorphism)
 
 ### 1.2 TRPL 官方定义
 
@@ -230,7 +230,7 @@
 | **Go** | 接口实现（GCShape stenciling） | 为每个 GC shape 生成一份代码 | 极低 | 中 |
 | **Haskell** | 类型类字典传递 | 运行时传递字典指针 | 有（间接调用） | 低 |
 
-> **[来源: Rust Reference: Generic Parameters]** Rust 泛型通过单态化实现零成本抽象，为每个具体类型生成专用代码。 ✅
+> **来源: [Rust Reference: Generic Parameters](https://doc.rust-lang.org/reference/)** Rust 泛型通过单态化实现零成本抽象，为每个具体类型生成专用代码。 ✅
 > **[来源: C++ Reference: Templates]** C++ 模板通过文本替换实现编译期实例化，与 Rust 单态化类似但无统一类型检查。 ✅
 > **[来源: Java Language Spec: Type Erasure]** Java 泛型通过类型擦除实现，编译为 `Object` 并插入类型转换，有运行时装箱开销。 ✅
 > **[来源: Go Spec: Type parameters]** Go 1.18+ 泛型通过 GC shape stenciling 实现，为每个 GC shape 生成一份代码，运行时开销极低。 ✅
@@ -289,7 +289,7 @@ graph TD
 > **认知功能**:
 > 泛型系统概念拓扑导航图。将分散的语法要素组织为可遍历的知识网络，读者可按分支顺序建立"参数声明→约束施加→代码生成"的完整心智模型。
 > 关键洞察：泛型不是单一概念，而是由类型参数、生命周期、常量泛型、约束系统构成的多维参数空间。[来源: 💡 原创分析]
-> [来源: [TRPL — Generics]]
+> [来源: [TRPL — Generics](https://doc.rust-lang.org/book/)]
 > **过渡到定理推理链**:
 > 思维导图呈现了泛型系统的概念拓扑，但缺乏严格的逻辑推导关系。
 > 下一节通过"⟹"标注的定理链，将参数多态、System F、单态化、零成本抽象、Const Generics 等核心命题形式化为可验证的推理网络，每个定理标注其依赖的引理、推论的下游定理，以及失效条件和编译错误码。
@@ -333,7 +333,7 @@ graph TD
 代价: 编译时间增加 + 二进制体积膨胀（每个实例独立编译和链接）
 ```
 
-**语义保持定理（Monomorphization Semantic Preservation）**: [来源: Rust Reference: Monomorphization]
+**语义保持定理（Monomorphization Semantic Preservation）**: 来源: [Rust Reference: Monomorphization](https://doc.rust-lang.org/reference/items/generics.html)
 
 ```text
 前提: 泛型函数 G<T> 对类型参数 τ 单态化为 G_τ
@@ -351,7 +351,7 @@ graph TD
   6. 故单态化不改变可观察行为 ⟹ 语义保持 ∎
 ```
 
-**反例：`dyn Trait` 打破单态化语义保持的强等价**: [来源: Rust Reference: Trait Objects]
+**反例：`dyn Trait` 打破单态化语义保持的强等价**: 来源: [Rust Reference: Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html)
 
 | 维度 | 单态化 `Vec<i32>::push` | 动态分发 `dyn Drawable::draw` |
 |:---|:---|:---|
@@ -372,7 +372,7 @@ fn draw_dyn(d: &dyn Drawable) {
 }
 ```
 
-**边界：单态化不保持跨 crate 的 ABI 兼容性**: [来源: Rust Reference: Monomorphization]
+**边界：单态化不保持跨 crate 的 ABI 兼容性**: 来源: [Rust Reference: Monomorphization](https://doc.rust-lang.org/reference/items/generics.html)
 
 ```text
 边界条件: 单态化在每个 crate 中独立进行
@@ -672,7 +672,7 @@ graph TD
 
 #### 5.7.1 常量表达式与 `generic_const_exprs`
 
-Rust 允许在类型位置使用编译期常量表达式，简单算术可直接书写，复杂表达式需用大括号包裹：[来源: Rust Reference: Const Generics]
+Rust 允许在类型位置使用编译期常量表达式，简单算术可直接书写，复杂表达式需用大括号包裹：来源: [Rust Reference: Const Generics](https://doc.rust-lang.org/reference/items/generics.html#const-generics)
 
 ```rust,ignore
 // ✅ 合法: 简单算术表达式（1.51+）
@@ -726,7 +726,7 @@ impl<T, const N: usize> Matrix<T, N, N> {
 
 #### 5.7.2 where 约束中的 const generics
 
-`where` 子句可对含 const generics 的复合类型施加约束，这是连接常量泛型与 Trait 约束系统的关键桥梁：[来源: Rust Reference: Trait Bounds]
+`where` 子句可对含 const generics 的复合类型施加约束，这是连接常量泛型与 Trait 约束系统的关键桥梁：来源: [Rust Reference: Trait Bounds](https://doc.rust-lang.org/reference/)
 
 ```rust,ignore
 // ✅ 合法: 显式约束数组类型满足 Sized
@@ -783,7 +783,7 @@ where
 
 #### 5.7.3 默认 const generic 参数
 
-const generics 支持默认值，省略时自动填充（1.59+）：[来源: Rust Reference: Generic Parameters]
+const generics 支持默认值，省略时自动填充（1.59+）：来源: [Rust Reference: Generic Parameters](https://doc.rust-lang.org/reference/)
 
 ```rust
 // ✅ 合法: 默认常量泛型参数
@@ -1347,7 +1347,7 @@ fn transpose<T: Copy, const R: usize, const C: usize>(
 
 **核心问题**: "如何写一段对任何类型都适用的代码？"
 
-**过渡解释**: 从熟悉的概念出发是认知的最小阻力路径。将泛型类比为"填空题模板"——结构固定，具体内容由调用方填入。这一步建立直觉锚点：swap、min/max、容器等自然需要"对任意类型生效"。但类比有边界——填空题模板在 Rust 中不是文本替换（C++ 模板风格），而是类型参数化。从 Step 1 到 Step 2 的过渡发生在学习者首次写 `fn swap<T>(a: &mut T, b: &mut T)` 时，发现编译器不仅接受代码，还会检查类型能力。[来源: TRPL: Ch10.1 / 原创分析]
+**过渡解释**: 从熟悉的概念出发是认知的最小阻力路径。将泛型类比为"填空题模板"——结构固定，具体内容由调用方填入。这一步建立直觉锚点：swap、min/max、容器等自然需要"对任意类型生效"。但类比有边界——填空题模板在 Rust 中不是文本替换（C++ 模板风格），而是类型参数化。从 Step 1 到 Step 2 的过渡发生在学习者首次写 `fn swap<T>(a: &mut T, b: &mut T)` 时，发现编译器不仅接受代码，还会检查类型能力。来源: [TRPL Ch10.1](https://doc.rust-lang.org/book/)
 
 ```text
 直觉映射:
@@ -1390,7 +1390,7 @@ fn foo<T>() where T: Display + Clone { }  // where 子句（复杂约束）
 
 **核心问题**: "Rust 泛型和 Java/C++ 泛型有什么区别？"
 
-**过渡解释**: 语法熟练后，学习者需要理解不同语言泛型实现的本质差异。Rust 的单态化（为每个具体类型生成专用代码）与 Java 的类型擦除（编译为 Object + 转换）、C++ 的模板（文本替换）形成鲜明对比。这一步是认知的关键跃迁——理解"零成本抽象"的工程含义：不是魔法，是编译期工作量换运行时零开销。从 Step 3 到 Step 4 的过渡由性能问题驱动：当二进制体积膨胀时，学习者需要理解为什么泛型"免费"的代价在哪里。[来源: Wikipedia: Generic programming / TRPL: Ch10.1]
+**过渡解释**: 语法熟练后，学习者需要理解不同语言泛型实现的本质差异。Rust 的单态化（为每个具体类型生成专用代码）与 Java 的类型擦除（编译为 Object + 转换）、C++ 的模板（文本替换）形成鲜明对比。这一步是认知的关键跃迁——理解"零成本抽象"的工程含义：不是魔法，是编译期工作量换运行时零开销。从 Step 3 到 Step 4 的过渡由性能问题驱动：当二进制体积膨胀时，学习者需要理解为什么泛型"免费"的代价在哪里。来源: [Wikipedia: Generic programming / TRPL: Ch10.1](https://en.wikipedia.org/wiki/Generic_programming_/_TRPL%3A_Ch10.1)
 
 ```text
 三语言对比:
@@ -1439,7 +1439,7 @@ fn foo<T>() where T: Display + Clone { }  // where 子句（复杂约束）
 
 **核心问题**: "怎么限制泛型参数只能是有序/可复制的类型？"
 
-**过渡解释**: 纯粹的参数多态过于受限（如 `fn max<T>(a: T, b: T) -> T` 无法比较）。Trait Bounds 引入约束多态，是泛型从"任意类型"到"满足条件的类型"的关键扩展。`where` 子句将约束从函数签名中分离，提升可读性。从 Step 5 到 Step 6 的过渡由高级场景驱动：当学习者需要表达"对所有生命周期都成立"或"类型包含编译期常量"时，进入泛型系统的深水区，需要形式化工具验证设计。[来源: TRPL: Ch10.2 / Rust Reference: Trait Bounds]
+**过渡解释**: 纯粹的参数多态过于受限（如 `fn max<T>(a: T, b: T) -> T` 无法比较）。Trait Bounds 引入约束多态，是泛型从"任意类型"到"满足条件的类型"的关键扩展。`where` 子句将约束从函数签名中分离，提升可读性。从 Step 5 到 Step 6 的过渡由高级场景驱动：当学习者需要表达"对所有生命周期都成立"或"类型包含编译期常量"时，进入泛型系统的深水区，需要形式化工具验证设计。来源: [TRPL Ch10.2](https://doc.rust-lang.org/book/ch10-02-traits.html)
 
 ```text
 约束层级:
@@ -1509,7 +1509,7 @@ fn foo<T>() where T: Display + Clone { }  // where 子句（复杂约束）
 
 ### 9.1 补充：`impl Trait` 在返回位置 vs 参数位置的区别
 
-> **[Rust Reference: Impl trait]** · **[RFC 1951]** · **[RFC 2289]** `impl Trait` 在**参数位置**（argument position）和**返回位置**（return position）有截然不同的语义——前者是**全称量词 ∀**（调用者决定具体类型），后者是**存在量词 ∃**（实现者决定具体类型）。✅
+> **[Rust Reference: Impl trait](https://doc.rust-lang.org/reference/)** · **[RFC 1951](https://github.com/rust-lang/rfcs/pull/1951)** · **[RFC 2289](https://rust-lang.github.io/rfcs/2289-2289-associated-type-bounds.html)** `impl Trait` 在**参数位置**（argument position）和**返回位置**（return position）有截然不同的语义——前者是**全称量词 ∀**（调用者决定具体类型），后者是**存在量词 ∃**（实现者决定具体类型）。✅
 
 #### 参数位置 `impl Trait` = Universal（全称）
 
@@ -1566,7 +1566,7 @@ impl Factory for WidgetFactory {
 ```
 
 > **关键洞察**: 参数位置的 `impl Trait` 是语法糖（糖衣），返回位置的 `impl Trait` 是类型系统的核心扩展（存在类型）。RPITIT 将这一能力进一步扩展到 trait 定义中，使 trait 方法也能返回不透明类型。
-> **来源**: [Rust Reference: Impl trait] · [RFC 1951: Extend impl Trait to function arguments] · [RFC 2289: Associated type bounds] · [TAPL Ch.24: Existential types]
+> **来源**: [Rust Reference: Impl trait](https://doc.rust-lang.org/reference/) · [RFC 1951: Extend impl Trait to function arguments](https://github.com/rust-lang/rfcs/pull/1951) · [RFC 2289: Associated type bounds](https://rust-lang.github.io/rfcs/2289-2289-associated-type-bounds.html) · [TAPL Ch.24: Existential types]
 
 ---
 
@@ -2211,8 +2211,8 @@ fn foo<'a>(x: &'a str) -> impl Display + use<'a> { x }
 
 **形式化洞察**: 这是 Rust 类型系统从"**隐式推断**"向"**显式契约**"演进的重要一步。显式契约使形式化验证更容易（契约即规约），但增加了学习曲线。
 
-> **[来源: RFC 3617]** Explicit lifetime capture in `impl Trait`.
-> **[来源: Rust 2024 Edition Guide]** RPIT capture rules changed.
+> **来源: [RFC 3617](https://github.com/rust-lang/rfcs/pull/3617)** Explicit lifetime capture in `impl Trait`.
+> **来源: [Rust 2024 Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)** RPIT capture rules changed.
 > **[来源: Rustify.rs 2026]** "显式契约使形式化验证更容易，但增加了学习曲线。"
 
 ---
@@ -2241,9 +2241,9 @@ fn foo<'a>(x: &'a str) -> impl Display + use<'a> { x }
 - [x] **TODO**: 补充 Generic Associated Types (GATs) 的完整形式化视角 —— 优先级: 中 —— 已完成 §9.5 —— 2026-05-13
 - [x] **TODO**: 补充 Const Generics 进阶用法（表达式、where 约束、generic_const_exprs、GATs 交互、C++ 对比） —— 优先级: 高 —— 已完成 §5.7 —— 2026-05-14
 
-> **[来源: Rust Reference; TRPL; Rust RFCs; Academic Papers]** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/); [The Rust Programming Language](https://doc.rust-lang.org/book/); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
 
-> **[来源: Wikipedia; POPL/PLDI/ECOOP Papers; RustBelt/Iris Project]** 形式化概念参考了权威学术来源和类型论研究。✅
+> **来源: [Wikipedia](https://en.wikipedia.org/wiki/Main_Page); POPL/PLDI/ECOOP Papers; [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)/Iris Project** 形式化概念参考了权威学术来源和类型论研究。✅
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

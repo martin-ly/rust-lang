@@ -7,7 +7,7 @@
 
 ## Table of Contents
 >
-> **[来源: Tokio Documentation - tokio.rs]** · **[来源: Rust Reference - async/await]** · **[来源: Wikipedia - Asynchronous I/O]** · **[来源: TRPL Ch. 17]** · **[来源: Wikipedia - Reactor Pattern]** · **[来源: Rust Standard Library - std::sync]** · **[来源: Wikipedia - Event Loop]** · **[来源: ACM - Async Runtime Design Patterns]**
+> **[来源: Tokio Documentation - tokio.rs]** · **来源: [Rust Reference - async/await](https://doc.rust-lang.org/reference/items/functions.html#async-functions)** · **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)** · **来源: [TRPL Ch. 17](https://doc.rust-lang.org/book/ch17-00-async-await.html)** · **来源: [Wikipedia - Reactor Pattern](https://en.wikipedia.org/wiki/Reactor_Pattern)** · **[来源: Rust Standard Library - std::sync]** · **来源: [Wikipedia - Event Loop](https://en.wikipedia.org/wiki/Event_Loop)** · **[来源: ACM - Async Runtime Design Patterns]**
 
 - [Tokio Runtime: Formal Analysis and Deep Dive](#tokio-runtime-formal-analysis-and-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -87,15 +87,15 @@
 
 ## 1. Introduction
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Tokio is the preeminent asynchronous runtime for the Rust programming language, providing the essential infrastructure for building high-performance, concurrent applications. This document presents a comprehensive formal analysis of the Tokio runtime, examining its architecture, semantics, safety properties, and common pitfalls through the lens of ownership, types, and formal verification principles.
 
 ### 1.1 What is Tokio?
 
-> **[来源: Rust Reference]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Tokio is an event-driven, non-blocking I/O platform for writing asynchronous applications in Rust. It consists of:
 
@@ -106,7 +106,7 @@ Tokio is an event-driven, non-blocking I/O platform for writing asynchronous app
 
 ### 1.2 Why Formal Analysis Matters
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 Understanding Tokio through formal analysis provides several benefits:
 
@@ -123,7 +123,7 @@ Understanding Tokio through formal analysis provides several benefits:
 
 ### 2.1 Runtime Components
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 The Tokio runtime can be formally defined as a composition of four primary components:
 
@@ -135,7 +135,7 @@ Each component has specific responsibilities and interacts with others through w
 
 #### 2.1.1 Scheduler
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 The scheduler is responsible for executing asynchronous tasks. Tokio provides two primary scheduler flavors:
 
@@ -165,7 +165,7 @@ where:
 
 #### 2.1.2 I/O Driver
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 The I/O driver integrates with the operating system's asynchronous I/O facilities:
 
@@ -193,7 +193,7 @@ enum Inner {
 
 #### 2.1.3 Timer
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 The timer system provides:
 
@@ -210,7 +210,7 @@ pub(crate) struct Timer {
 
 #### 2.1.4 Blocking Pool
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 For operations that cannot be made asynchronous, Tokio provides a dedicated thread pool:
 
@@ -224,11 +224,11 @@ let result = tokio::task::spawn_blocking(|| {
 
 ### 2.2 Scheduler Types
 
-> **[来源: ACM - Systems Programming]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 #### 2.2.1 Current-Thread Scheduler
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **Definition**: Executes all tasks on the current OS thread.
 
@@ -261,7 +261,7 @@ Corollary: No Send bound required for Rc, RefCell
 
 #### 2.2.2 Multi-Thread Scheduler
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **Definition**: Uses a work-stealing algorithm across multiple OS threads.
 
@@ -309,7 +309,7 @@ Algorithm WORK-STEALING:
 
 ### 3.1 Task Structure
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 A Tokio task is the fundamental unit of concurrent execution. Formally:
 
@@ -363,11 +363,11 @@ enum TaskState {
 
 ### 3.2 Spawning Semantics
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 #### 3.2.1 Theorem SPAWN-SAFETY
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **Statement**:
 
@@ -404,7 +404,7 @@ tokio::spawn(async move {
 
 #### 3.2.2 Theorem SPAWN-LOCAL-SAFETY
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **Statement**:
 
@@ -426,7 +426,7 @@ tokio::task::spawn_local(async move {
 
 ### 3.3 JoinHandle Semantics
 
-> **[来源: Rustonomicon]**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 /// Handle for awaiting task completion
@@ -462,7 +462,7 @@ Theorem JOINHANDLE-COMPLETION:
 
 ### 4.1 Task Ownership Model
 
-> **[来源: Rust Reference]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
 Each Tokio task has exclusive ownership of its future and all captured data:
 
@@ -487,11 +487,11 @@ Ownership Model:
 
 ### 4.2 Shared Ownership Patterns
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 #### 4.2.1 Arc<Mutex<T>> Pattern
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use std::sync::Arc;
@@ -520,7 +520,7 @@ Invariants:
 
 #### 4.2.2 Channel-Based Communication
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 use tokio::sync::mpsc;
@@ -538,7 +538,7 @@ tx.send("message").await?;
 
 ### 4.3 JoinHandle and Task Completion
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 The `JoinHandle` provides a mechanism to await task completion and retrieve results:
 
@@ -572,7 +572,7 @@ Theorem JOINHANDLE-LIFETIME:
 
 ### 5.1 Mio Integration
 
-> **[来源: ACM - Systems Programming]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 Tokio builds upon the `mio` crate for platform-specific I/O multiplexing:
 
@@ -597,11 +597,11 @@ impl IoDriver {
 
 ### 5.2 Platform Abstractions
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 #### 5.2.1 Epoll (Linux)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust
 #[cfg(target_os = "linux")]
@@ -627,7 +627,7 @@ mod epoll {
 
 #### 5.2.2 Kqueue (BSD/macOS)
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 #[cfg(any(target_os = "macos", target_os = "freebsd", target_os = "dragonfly"))]
@@ -642,7 +642,7 @@ mod kqueue {
 
 #### 5.2.3 IOCP (Windows)
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 #[cfg(windows)]
@@ -657,7 +657,7 @@ mod iocp {
 
 ### 5.3 I/O Resource Lifecycle
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```
 ┌──────────────┐
@@ -693,7 +693,7 @@ mod iocp {
 
 ### 6.1 Hierarchical Timer Wheel
 
-> **[来源: Rustonomicon]**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 Tokio uses a hierarchical timer wheel for efficient timer management:
 
@@ -732,7 +732,7 @@ Level 5: 64 slots × 1000s = 64000s range, 1000s resolution
 
 ### 6.2 Timer Operations
 
-> **[来源: Rust Reference]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 /// Create a sleep future
@@ -763,7 +763,7 @@ Theorem TIMER-ACCURACY:
 
 ### 6.3 Timer Implementation Details
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 impl Future for Sleep {
@@ -794,7 +794,7 @@ This section presents 15+ counter-examples demonstrating common mistakes and ant
 
 ### Counter-Example 1: spawn_local in Multi-Threaded Context
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **Problem**: Attempting to use `spawn_local` without a `LocalSet` on a multi-threaded runtime.
 
@@ -853,7 +853,7 @@ Violation leads to: panic! at runtime
 
 ### Counter-Example 2: !Send Future in spawn
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **Problem**: Trying to spawn a future containing `!Send` types on a multi-threaded runtime.
 
@@ -929,7 +929,7 @@ Fix: Replace with:
 
 ### Counter-Example 3: Blocking in Async Context
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **Problem**: Performing blocking I/O or CPU-intensive work directly in async code.
 
@@ -1019,7 +1019,7 @@ Corollary: Always use spawn_blocking for:
 
 ### Counter-Example 4: Mutex Across await
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **Problem**: Holding a standard library mutex across an await point.
 
@@ -1103,7 +1103,7 @@ Theorem MUTEX-TYPE-SAFETY:
 
 ### Counter-Example 5: Unbounded Channel Memory Leak
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **Problem**: Using unbounded channels without backpressure can cause memory exhaustion.
 
@@ -1200,7 +1200,7 @@ Liveness Property:
 
 ### Counter-Example 6: Memory Leak in Long-Running Task
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **Problem**: Accumulating data in a task without proper cleanup.
 
@@ -1282,7 +1282,7 @@ impl<K: Eq + std::hash::Hash, V> BoundedCache<K, V> {
 
 ### Counter-Example 7: Timer Cancellation Race
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **Problem**: Race condition between timer expiration and explicit cancellation.
 
@@ -1369,7 +1369,7 @@ Solution: CancellationToken provides cooperative cancellation
 
 ### Counter-Example 8: Select Resource Leak
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **Problem**: Using `tokio::select!` without properly handling cancelled branches.
 
@@ -1462,7 +1462,7 @@ Theorem SELECT-CANCELLATION:
 
 ### Counter-Example 9: Async Drop Missing
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **Problem**: Types that need cleanup logic in async context.
 
@@ -1571,7 +1571,7 @@ async fn main() {
 
 ### Counter-Example 10: Runtime Shutdown with Pending Tasks
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **Problem**: Runtime drops pending tasks without completion on shutdown.
 
@@ -1654,7 +1654,7 @@ Theorem RUNTIME-SHUTDOWN:
 
 ### Counter-Example 11: Blocking Thread Exhaustion
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **Problem**: Using `spawn_blocking` without considering pool limits.
 
@@ -1722,7 +1722,7 @@ async fn main() {
 
 ### Counter-Example 12: Wrong Runtime Flavor
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **Problem**: Choosing the wrong runtime flavor for the workload.
 
@@ -1783,7 +1783,7 @@ async fn main() {
 
 ### Counter-Example 13: LocalSet in Wrong Context
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **Problem**: Misunderstanding LocalSet requirements.
 
@@ -1852,7 +1852,7 @@ async fn main() {
 
 ### Counter-Example 14: Task Abort During Critical Section
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **Problem**: Task aborted while holding resources.
 
@@ -1955,7 +1955,7 @@ async fn main() {
 
 ### Counter-Example 15: Interval Drift
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **Problem**: Timer intervals drift over time due to processing delays.
 
@@ -2031,7 +2031,7 @@ Burst:      Process all missed ticks immediately
 
 ### Counter-Example 16: Deadlock with Nested Locks
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **Problem**: Deadlock when acquiring multiple async locks in different orders.
 
@@ -2128,7 +2128,7 @@ async fn main() {
 
 ### Counter-Example 17: Semaphore Permit Leak
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **Problem**: Acquiring semaphore permits without releasing them.
 
@@ -2203,7 +2203,7 @@ async fn main() {
 
 ### Counter-Example 18: Incorrect Buffer Management
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **Problem**: Reusing buffers incorrectly in async I/O.
 
@@ -2291,7 +2291,7 @@ async fn read_messages_zero_copy(stream: &mut TcpStream) -> tokio::io::Result<()
 
 ### 8.1 Work-Stealing Algorithm
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 Tokio's multi-thread scheduler uses a work-stealing algorithm for load balancing.
 
@@ -2336,7 +2336,7 @@ Theorem WORK-STEALING-EFFICIENCY:
 
 ### 8.2 Task Polling
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **Polling Strategy**:
 
@@ -2372,7 +2372,7 @@ Task Polling Lifecycle:
 
 ### 8.3 Memory Layout
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **Task Memory Structure**:
 
@@ -2428,7 +2428,7 @@ Theorem MEMORY-EFFICIENCY:
 
 ### 9.1 Complete HTTP Server Implementation
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 //! High-performance Tokio-based HTTP server
@@ -2796,7 +2796,7 @@ async fn main() -> tokio::io::Result<()> {
 
 ### 9.2 Performance Optimizations
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 //! Performance optimizations for the HTTP server
@@ -2881,7 +2881,7 @@ impl ZeroCopyResponse {
 
 ### 9.3 Testing the Server
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 #[cfg(test)]
@@ -2971,7 +2971,7 @@ mod tests {
 
 ### 10.1 Academic Papers
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 1. **"Work-First and Help-First Scheduling Policies for Async-Finish Task Networks"**
    - Authors: Y. Guo, et al.
@@ -2985,7 +2985,7 @@ mod tests {
 
 ### 10.2 Official Documentation
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 1. [Tokio Documentation](https://tokio.rs/)
 2. [Rust Async Book](https://rust-lang.github.io/async-book/)
@@ -2993,7 +2993,7 @@ mod tests {
 
 ### 10.3 Related Crates
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 - `futures`: Core future abstractions
 - `async-trait`: Async trait methods
@@ -3071,13 +3071,13 @@ mod tests {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
-> **[来源: Wikipedia - Event Loop]**
+> **来源: [Wikipedia - Event Loop](https://en.wikipedia.org/wiki/Event_Loop)**
 
-> **[来源: Wikipedia - Reactor Pattern]**
+> **来源: [Wikipedia - Reactor Pattern](https://en.wikipedia.org/wiki/Reactor_Pattern)**
 
-> **[来源: Wikipedia - Cooperative Multitasking]**
+> **来源: [Wikipedia - Cooperative Multitasking](https://en.wikipedia.org/wiki/Cooperative_Multitasking)**
 
 > **[来源: IEEE - Concurrent Programming Languages]**
 
@@ -3087,15 +3087,15 @@ mod tests {
 
 > **[来源: Tokio Documentation - tokio.rs]**
 
-> **[来源: Rust Reference - async/await]**
+> **来源: [Rust Reference - async/await](https://doc.rust-lang.org/reference/items/functions.html#async-functions)**
 
-> **[来源: TRPL Ch. 17 - Async and Await]**
+> **来源: [TRPL Ch. 17 - Async and Await](https://doc.rust-lang.org/book/ch17-00-async-await.html)**
 
-> **[来源: Wikipedia - Thread Pool]**
+> **来源: [Wikipedia - Thread Pool](https://en.wikipedia.org/wiki/Thread_Pool)**
 
-> **[来源: Wikipedia - Load Balancing]**
+> **来源: [Wikipedia - Load Balancing](https://en.wikipedia.org/wiki/Load_Balancing)**
 
-> **[来源: Wikipedia - Lock-Free Data Structures]**
+> **来源: [Wikipedia - Lock-Free Data Structures](https://en.wikipedia.org/wiki/Lock_Free_Data_Structures)**
 
 > **[来源: ACM - Work-Stealing Scheduling]**
 
@@ -3105,70 +3105,70 @@ mod tests {
 
 > **[来源: Mio Documentation - mio.rs]**
 
-> **[来源: RFC 2592 - Futures API]**
+> **来源: [RFC 2592 - Futures API](https://github.com/rust-lang/rfcs/pull/2592)**
 
-> **[来源: Rust Reference - std::task]**
+> **来源: [Rust Reference - std::task](https://doc.rust-lang.org/reference/)**
 
 > **[来源: Rust Standard Library - std::pin]**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages Survey]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design and Implementation]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM - Systems Programming Languages Survey](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI - Programming Language Design and Implementation](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Wikipedia - Type System]**
-> **[来源: Wikipedia - Concurrency]**
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ---
 

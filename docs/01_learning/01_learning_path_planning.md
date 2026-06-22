@@ -15,7 +15,7 @@
 
 ## 📋 目录
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [学习路径规划文档](#学习路径规划文档)
   - [📋 目录](#-目录)
@@ -81,7 +81,7 @@
 
 ## 📋 概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档为不同背景的学习者提供系统化的 Rust 学习路径规划，帮助制定学习计划并跟踪进度。
 
@@ -89,13 +89,13 @@
 
 ## 🎯 学习路径分类
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 路径 1: 完全新手（0 基础）
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **目标**: 掌握 Rust 基础语法和核心概念
 
@@ -127,9 +127,9 @@
 
 ### 路径 2: 有编程经验（其他语言）
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **目标**: 快速掌握 Rust 特性并应用到实际项目
 
@@ -175,9 +175,9 @@
 
 ### 路径 3: 中级开发者（有 Rust 基础）
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **目标**: 深入掌握高级特性和最佳实践
 
@@ -229,9 +229,9 @@
 
 ### 路径 4: 高级开发者（专家级）
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **目标**: 掌握 Rust 生态系统和架构设计
 
@@ -274,19 +274,19 @@
 
 ## 📊 学习进度跟踪
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 进度检查清单
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 基础阶段（C01-C03）
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 理解所有权和借用规则
 - [ ] 掌握生命周期基础
@@ -296,9 +296,9 @@
 
 #### 进阶阶段（C04-C06）
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [ ] 掌握泛型编程
 - [ ] 理解 Trait 系统
@@ -308,7 +308,7 @@
 
 #### 高级阶段（C07-C10）
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 - [ ] 掌握进程管理
 - [ ] 理解 IPC 机制
@@ -318,7 +318,7 @@
 
 #### 专家阶段（C11-C12）
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 - [ ] 掌握宏系统
 - [ ] 能够编写 WASM 应用
@@ -327,7 +327,7 @@
 
 #### 新特性与前沿阶段（本轮新增）
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - [ ] 掌握 `Pin<P>` 与自引用结构（c01 `pin_and_self_referential.rs`）
 - [ ] 理解 Never type `!` 与类型系统前沿（c02 `type_system_frontier.rs`）
@@ -343,7 +343,7 @@
 
 ### 路径 1 代码示例：基础语法实践
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust
 // 所有权与借用基础示例
@@ -366,7 +366,7 @@ fn calculate_length(s: &String) -> usize {
 
 ### 路径 2 代码示例：并发编程实践
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 use std::thread;
@@ -388,7 +388,7 @@ fn main() {
 
 ### 路径 3 代码示例：异步编程实践
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use tokio::time::{sleep, Duration};
@@ -408,7 +408,7 @@ async fn main() {
 
 ### 路径 4 代码示例：高级特性实践
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 // 宏系统示例
@@ -438,7 +438,7 @@ fn main() {
 
 ### 1. 理论与实践结合
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 - 每学习一个概念，立即编写代码实践
 - 完成每个模块的示例程序
@@ -446,7 +446,7 @@ fn main() {
 
 ### 2. 项目驱动学习
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - 每完成一个阶段，完成一个项目
 - 从简单项目开始，逐步增加复杂度
@@ -454,7 +454,7 @@ fn main() {
 
 ### 3. 持续复习
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 - 定期回顾已学内容
 - 使用速查卡快速复习
@@ -462,7 +462,7 @@ fn main() {
 
 ### 4. 社区参与
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 - 阅读 Rust 社区博客
 - 参与开源项目
@@ -476,7 +476,7 @@ fn main() {
 
 ### 官方资源
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 - [Rust 官方文档](https://doc.rust-lang.org/)
 - [Rust Book](https://doc.rust-lang.org/book/)
@@ -484,7 +484,7 @@ fn main() {
 
 ### 项目资源
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 - [快速参考卡片](../02_reference/quick_reference/README.md)
 - [使用指南](../05_guides/README.md)
@@ -947,26 +947,26 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **[来源: Rust Learning Resources]**
-> **[来源: TRPL]**
-> **[来源: Rust By Example]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)**
 > **[来源: ACM - Programming Language Education]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

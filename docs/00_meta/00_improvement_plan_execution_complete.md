@@ -36,7 +36,7 @@
 
 ## 执行摘要
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本次改进计划已全部完成，项目质量显著提升。
 
@@ -59,13 +59,13 @@
 
 ## 详细执行成果
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### ✅ E1: 修复c02_type_system测试缺失
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **问题**: c02_type_system 有 12 个源码文件 + 22 个示例，但 **0 个测试文件**
 
@@ -90,7 +90,7 @@
 
 ### ✅ E2: 扩充docs/03_practice/实践内容
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **问题**: docs/03_practice/ 仅 **2 个文件**（理论:实践 = 154:1）
 
@@ -114,7 +114,7 @@
 
 ### ✅ E3: 解决目录重复问题
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **问题**: 两个所有权目录并存
 
@@ -138,7 +138,7 @@ docs/Rust所有权与可判定性/            (82 files)
 
 ### ✅ S1: 归档根目录冗余报告
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **状态**: 根目录已清理
 
@@ -159,7 +159,7 @@ docs/Rust所有权与可判定性/            (82 files)
 
 ### ✅ S2: 扩充c11_macro_system
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **问题**: c11_macro_system 仅 **2 个源码文件**
 
@@ -185,7 +185,7 @@ docs/Rust所有权与可判定性/            (82 files)
 
 ### ✅ S3: 创建scripts/README.md
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **解决方案**:
 
@@ -205,7 +205,7 @@ docs/Rust所有权与可判定性/            (82 files)
 
 ### 改进前 vs 改进后
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 指标 | 改进前 | 改进后 | 变化 |
 |------|--------|--------|------|
@@ -234,7 +234,7 @@ docs/Rust所有权与可判定性/            (82 files)
 
 ### 短期（本周）
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 - [ ] 运行所有测试验证通过
 - [ ] 更新文档索引
@@ -313,10 +313,10 @@ docs/Rust所有权与可判定性/            (82 files)
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**

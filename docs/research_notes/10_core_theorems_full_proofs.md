@@ -52,7 +52,7 @@
 
 ## 〇、证明结构规范（A→L→T→C 链）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 形式化文档应遵循 **Axiom → Lemma → Theorem → Corollary** 可追溯链：
 
@@ -69,7 +69,7 @@
 
 ## 一、证明依赖 DAG
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
                     [公理层]
@@ -110,7 +110,7 @@
 
 ## 二、所有权定理 T-OW2（所有权唯一性）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定理 T-OW2**：对于任何值 $v$，在任意时刻，最多存在一个变量 $x$ 使得 $\Omega(x) = \text{Owned}$ 且 $\Gamma(x) = v$。
 
@@ -118,9 +118,9 @@
 
 ### 2.1 辅助引理
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **引理 L-OW1（初始唯一性）**：在初始状态 $S_0$，$\forall v: |\{x \mid \Omega_0(x)=\text{Owned} \land \Gamma_0(x)=v\}| \leq 1$。
 
@@ -128,9 +128,9 @@
 
 ### 2.2 归纳证明
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **归纳谓词** $P(S)$：在状态 $S$ 下，$\forall v: |\{x \mid \Omega(x)=\text{Owned} \land \Gamma(x)=v\}| \leq 1$。
 
@@ -148,9 +148,9 @@
 
 ### 2.3 反例的形式化否定
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **反例**：使用已移动值。形式化 $\neg P$：$\exists x, v, t: \Omega_t(x)=\text{Moved} \land \Gamma_t(x)=v \land \text{use}_t(x)$。
 
@@ -160,15 +160,15 @@
 
 ## 三、借用定理 T-BR1（数据竞争自由）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定理 T-BR1**：借用检查器保证程序是数据竞争自由的。形式化：$\text{BorrowCheck}(P)=\text{OK} \rightarrow \text{DataRaceFree}(P)$。
 
 ### 3.1 辅助引理
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **引理 L-BR1（写操作互斥）**：若满足规则 1（可变借用唯一性），则 $\forall m, t_1, t_2: \text{Write}(t_1,m) \land \text{Write}(t_2,m) \land \text{Concurrent}(t_1,t_2) \rightarrow \text{false}$。
 
@@ -180,9 +180,9 @@
 
 ### 3.2 主证明
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **数据竞争定义**：$\text{DataRace}(m,t_1,t_2) \leftrightarrow \text{Concurrent}(t_1,t_2) \land \text{Access}(t_1,m) \land \text{Access}(t_2,m) \land (\text{Write}(t_1,m) \lor \text{Write}(t_2,m)) \land \neg\text{Synchronized}(t_1,t_2)$。
 
@@ -198,9 +198,9 @@
 
 ### 3.3 归纳细化（对执行步骤）
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **归纳谓词** $Q(e_1;\ldots;e_n)$：执行前缀满足数据竞争自由。
 
@@ -218,7 +218,7 @@
 
 ### 4.1 依赖定理
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **定理 T-TY1（进展性）**：$\Gamma \vdash e : \tau \rightarrow e \text{ is value} \lor \exists e': e \to e'$。
 
@@ -228,7 +228,7 @@
 
 ### 4.2 辅助引理
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **引理 L-TY1（类型错误在检查时拒绝）**：$\text{type\_error}(e) \rightarrow \neg\exists\Gamma,\tau: \Gamma \vdash e : \tau$。
 
@@ -236,7 +236,7 @@
 
 ### 4.3 主证明
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 设 $\Gamma \vdash e : \tau$。反证，设 $\exists e': e \to^* e' \land \text{type\_error}(e')$。
 
@@ -388,17 +388,17 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
-> **[来源: Coq Reference]**
-> **[来源: TLA+]**
-> **[来源: ACM - Formal Verification]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
+> **来源: [Coq Reference](https://coq.inria.fr/doc/)**
+> **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

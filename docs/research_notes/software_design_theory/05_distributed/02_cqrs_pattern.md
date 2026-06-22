@@ -40,13 +40,13 @@
 
 ## 1. 概念定义 (Def)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Def CQ1: CQRS (Command Query Responsibility Segregation)
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 CQRS 是一种**读写分离架构模式**，将系统的**命令操作**（写）和**查询操作**（读）分离到不同的模型中。
 
@@ -62,9 +62,9 @@ CQRS_System := (C, Q, S_c, S_q, P_sync)
 
 ### Def CQ2: 命令与查询的分离
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```
 Command := input → (S_c → S_c') × Events
@@ -76,7 +76,7 @@ Query   := input → S_q → output
 
 ### Def CQ3: 最终一致性边界
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```
 Consistency_Boundary := Δt ∈ Time
@@ -93,7 +93,7 @@ Consistency_Boundary := Δt ∈ Time
 
 ### Axiom CQ1: 命令不可重复
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```
 ∀c ∈ C. exec(c, s) = (s', ev) → exec(c, s') ≠ (s'', ev')
@@ -103,7 +103,7 @@ Consistency_Boundary := Δt ∈ Time
 
 ### Axiom CQ2: 投影单调性
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```
 ∀s_c₁, s_c₂. s_c₁ ⊆ s_c₂ → P_sync(s_c₁) ⊆ P_sync(s_c₂)
@@ -113,7 +113,7 @@ Consistency_Boundary := Δt ∈ Time
 
 ### Axiom CQ3: 查询一致性级别
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```
 Query_Consistency(q) ∈ {Strong, Eventual, Bounded_Staleness}
@@ -129,7 +129,7 @@ Query_Consistency(q) ∈ {Strong, Eventual, Bounded_Staleness}
 
 ### Theorem CQ1: 读写无冲突
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```
 ∀c ∈ C, q ∈ Q. c 和 q 可并发执行
@@ -144,7 +144,7 @@ Query_Consistency(q) ∈ {Strong, Eventual, Bounded_Staleness}
 
 ### Theorem CQ2: 查询可扩展性
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```
 ∀Q'. |Q'| = n → Scale_Out(n) ∈ O(n)
@@ -248,13 +248,13 @@ impl<E, S> ProjectionSync<E, S> {
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -306,14 +306,14 @@ impl<E, S> ProjectionSync<E, S> {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - CQRS]**
-> **[来源: Wikipedia - Event Sourcing]**
+> **来源: [Wikipedia - CQRS](https://en.wikipedia.org/wiki/CQRS)**
+> **来源: [Wikipedia - Event Sourcing](https://en.wikipedia.org/wiki/Event_Sourcing)**
 > **[来源: Martin Fowler - CQRS Pattern]**
 > **[来源: IEEE - Event-Driven Architecture]**
 > **[来源: ACM - Data Consistency Patterns]**
-> **[来源: Wikipedia - Design Pattern]**
-> **[来源: Rust API Guidelines]**
-> **[来源: Gang of Four - Design Patterns]**
-> **[来源: ACM - Software Design Patterns]**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
+> **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
 
 ---

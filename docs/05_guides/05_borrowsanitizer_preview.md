@@ -9,7 +9,7 @@
 > **层级**: L7 前沿 / L3 高级 Unsafe
 > **前置概念**: [MIRI](../03_guides/03_miri_guide.md) · [Unsafe Rust](../../concept/03_advanced/03_unsafe.md)
 > **Bloom 层级**: 分析
-> **[来源: Rust Project Goals 2026 — Safety-Critical]** · **[来源: RustConf 2026 演讲预告]** ✅
+> **来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)** · **[来源: RustConf 2026 演讲预告]** ✅
 
 ---
 
@@ -30,7 +30,7 @@
 
 ## 概述
 
-> **[来源: Rust Standard Library]** · **[来源: Rust Project Goals 2026]** ✅
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** · **来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)** ✅
 
 **BorrowSanitizer** 是 Rust 正在开发的运行时内存安全检测工具，目标是在**不依赖 Miri 解释执行**的情况下，检测 unsafe Rust 代码中的别名违规（aliasing violations）。
 
@@ -45,7 +45,7 @@
 
 ## 核心技术
 
-> **[来源: Rust Project Goals 2026 — Safety-Critical]** · **[来源: RustConf 2026]** ✅：Shadow Stack
+> **来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)** · **[来源: RustConf 2026]** ✅：Shadow Stack
 
 BorrowSanitizer 采用与现有 LLVM Sanitizer 不同的策略：
 
@@ -149,13 +149,13 @@ CI/测试:          BorrowSanitizer + Miri
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

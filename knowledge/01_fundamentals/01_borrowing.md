@@ -639,3 +639,28 @@ fn main() {
 > 安全模式：避免显式保存重新借用的引用——在函数调用中隐式使用（`process(&mut *r1)`）时，重新借用只在函数调用期间有效，函数返回后原借用自动恢复。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)] ·
 > [来源: [Rust Reference — Mutable References](https://doc.rust-lang.org/reference/expressions.html#mutable-references)]
+
+## 📚 模块 8: 国际化对齐
+
+> 本节按项目模板要求补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
+
+### 8.1 官方来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [TRPL Ch04 — References and Borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html) | 权威来源 | 借用与引用 |
+| [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html) | 权威来源 | 生命周期省略 |
+
+### 8.2 学术来源
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | 权威来源 | 借用语义 |
+| [Tree Borrows — PLDI 2025](https://perso.crans.org/vanille/treebor/) | 权威来源 | 别名模型 |
+
+### 8.3 社区权威
+
+| 来源 | 类型 | 说明 |
+|:---|:---|:---|
+| [Brown University Interactive Rust Book](https://rust-book.cs.brown.edu/) | 权威来源 | 借用可视化 |
+| [Rustlings](https://github.com/rust-lang/rustlings) | 权威来源 | 借用练习 |

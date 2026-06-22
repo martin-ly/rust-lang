@@ -19,7 +19,7 @@
 
 ## 目录
 
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [所有权、借用与生命周期：三位一体的内存安全](#所有权借用与生命周期三位一体的内存安全)
   - [目录](#目录)
@@ -50,12 +50,12 @@
 
 ## 1. 所有权：内存管理的根本创新
 
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 为什么需要所有权？
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 传统语言面临两难选择：
 
@@ -66,9 +66,9 @@ Rust 的解决方案：**编译期所有权检查** —— 零运行时开销的
 
 ### 1.2 所有权的三条铁律
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 fn main() {
@@ -92,9 +92,9 @@ fn makes_copy(some_integer: i32) {
 
 ### 1.3 返回值与所有权转移
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 fn gives_ownership() -> String {
@@ -109,9 +109,9 @@ fn takes_and_gives_back(a_string: String) -> String {
 
 ### 1.4 引用计数：共享所有权
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 当需要多个所有者时，使用 `Rc<T>`（单线程）或 `Arc<T>`（多线程）：
 
@@ -127,13 +127,13 @@ println!("引用计数: {}", Rc::strong_count(&data)); // 2
 
 ## 2. 借用：不转移所有权的访问
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 不可变借用
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 fn main() {
@@ -149,9 +149,9 @@ fn calculate_length(s: &String) -> usize {
 
 ### 2.2 可变借用
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 fn main() {
@@ -167,7 +167,7 @@ fn change(some_string: &mut String) {
 
 ### 2.3 借用规则：数据竞争的死结
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 let mut s = String::from("hello");
@@ -183,7 +183,7 @@ println!("{}, {}, 和 {}", r1, r2, r3);
 
 ### 2.4 非词法生命周期 (NLL)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Rust 2018+ 引入了 NLL，借用的结束不再是作用域末尾，而是**最后一次使用**：
 
@@ -395,13 +395,13 @@ fn longest_wrong<'a>(x: &'a str, y: &str) -> &'a str {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
-> **[来源: Wikipedia - Resource Management]**
-> **[来源: TRPL Ch. 10 - Lifetimes]**
-> **[来源: Rust Reference - Borrow Checker]**
-> **[来源: RFC 2094 - NLL]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
+> **来源: [Wikipedia - Resource Management](https://en.wikipedia.org/wiki/Resource_Management)**
+> **来源: [TRPL Ch. 10 - Lifetimes](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)**
+> **来源: [Rust Reference - Borrow Checker](https://doc.rust-lang.org/reference/)**
+> **来源: [RFC 2094 - NLL](https://rust-lang.github.io/rfcs/2094-2094-nll.html)**
 
 ---

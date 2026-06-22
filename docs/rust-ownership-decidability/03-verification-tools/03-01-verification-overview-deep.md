@@ -10,11 +10,11 @@
 
 ---
 
-> **[来源: Miri Documentation - github.com/rust-lang/miri]** · **[来源: Kani Documentation - github.com/model-checking/kani]** · **[来源: Wikipedia - Model Checking]** · **[来源: Wikipedia - Formal Verification]** · **[来源: Rust Reference]** · **[来源: POPL 2018 - RustBelt]** · **[来源: ACM - Program Verification Tools Survey]** · **[来源: IEEE - Software Verification Standards]**
+> **来源: Miri Documentation - github.com / rust-lang / [miri](https://github.com/rust-lang/miri)** · **来源: Kani Documentation - github.com / model-checking / [kani](https://model-checking.github.io/kani/)** · **来源: [Wikipedia - Model Checking](https://en.wikipedia.org/wiki/Model_Checking)** · **来源: [Wikipedia - Formal Verification](https://en.wikipedia.org/wiki/Formal_Verification)** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **[来源: ACM - Program Verification Tools Survey]** · **[来源: IEEE - Software Verification Standards]**
 
 ## Table of Contents
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [Rust Verification Tools: A Comprehensive Deep Dive](#rust-verification-tools-a-comprehensive-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -120,19 +120,19 @@
 
 ## 1. The Verification Landscape
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 Tool Categories
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 The Rust verification ecosystem has matured significantly, offering developers a spectrum of tools ranging from lightweight static analyzers to heavyweight theorem provers. Understanding the taxonomy of these tools is essential for effective verification strategy.
 
 #### 1.1.1 Static Analysis Tools
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 Static analysis tools examine source code without executing it, identifying potential issues through pattern matching, dataflow analysis, and type system extensions.
 
@@ -158,7 +158,7 @@ impl Drop for MyType {
 
 #### 1.1.2 Model Checkers
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 Model checkers systematically explore program state spaces to find concurrency bugs, race conditions, and deadlocks.
 
@@ -168,7 +168,7 @@ Model checkers systematically explore program state spaces to find concurrency b
 
 #### 1.1.3 Theorem Provers
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 Theorem provers provide the highest assurance by mathematically proving program correctness against formal specifications.
 
@@ -180,7 +180,7 @@ Theorem provers provide the highest assurance by mathematically proving program 
 
 #### 1.1.4 Fuzzing Tools
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 Fuzzing tools generate random inputs to find crashes and property violations.
 
@@ -192,7 +192,7 @@ Fuzzing tools generate random inputs to find crashes and property violations.
 
 ### 1.2 The Verification Pyramid
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```
 -----------------------------------------------------------------
@@ -227,7 +227,7 @@ Soundness(TheoremProving) >= Soundness(ModelChecking) >= Soundness(PropertyTesti
 
 ### 1.3 The Rust Verification Challenge
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 Rust's ownership system provides memory safety guarantees at compile time, but several verification challenges remain:
 
@@ -249,7 +249,7 @@ Miri is an interpreter for Rust's Mid-level Intermediate Representation (MIR). U
 
 ### 2.1 Architecture and Design
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 Miri implements the **Stacked Borrows** model for aliasing discipline and the **Tree Borrows** model as an experimental alternative.
 
@@ -266,7 +266,7 @@ Miri implements the **Stacked Borrows** model for aliasing discipline and the **
 
 #### 2.1.1 Stacked Borrows Model
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 Stacked Borrows defines when pointer aliasing is permitted:
 
@@ -288,11 +288,11 @@ fn stacked_borrows_example() {
 
 ### 2.2 Counter-Examples: Bugs Caught by Miri
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 #### Counter-Example 2.1: Use of Uninitialized Memory
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 // BUG: Reading uninitialized memory
@@ -327,7 +327,7 @@ error: Undefined Behavior: using uninitialized data
 
 #### Counter-Example 2.2: Data Race
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 use std::thread;
@@ -376,7 +376,7 @@ error: Undefined Behavior: Data race detected
 
 #### Counter-Example 2.3: Invalid Pointer Arithmetic
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 // BUG: Pointer arithmetic outside allocation bounds
@@ -406,7 +406,7 @@ fn wrapping_arithmetic_bug() {
 
 #### Counter-Example 2.4: Type Punning (Strict Aliasing Violation)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 // BUG: Violating strict aliasing rules
@@ -441,7 +441,7 @@ fn type_punning_fixed() {
 
 #### Counter-Example 2.5: Misaligned Access
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 // BUG: Misaligned pointer dereference
@@ -480,7 +480,7 @@ fn packed_struct_fixed() {
 
 #### Counter-Example 2.6: Use After Free
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust
 // BUG: Use after free
@@ -511,7 +511,7 @@ fn double_free_bug() {
 
 #### Counter-Example 2.7: Invalid VTable
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust
 trait MyTrait {
@@ -535,7 +535,7 @@ fn invalid_vtable_bug() {
 
 ### 2.3 Running Miri
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```bash
 # Install Miri
@@ -553,7 +553,7 @@ MIRIFLAGS="-Zmiri-disable-isolation" cargo miri test
 
 ### 2.4 Limitations of Miri
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **Theorem 2.2 (MIRI-COMPLETENESS-LIMIT)**:
 *Miri cannot detect all undefined behavior due to:*
@@ -573,7 +573,7 @@ Loom is a model checker specifically designed for Rust concurrent code. It syste
 
 ### 3.1 State Space Exploration
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 Loom uses a technique called **stateless model checking** with **partial order reduction** to efficiently explore thread schedules.
 
@@ -603,7 +603,7 @@ Loom uses a technique called **stateless model checking** with **partial order r
 
 ### 3.2 Using Loom
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust
 // Standard concurrent code uses std::sync
@@ -637,11 +637,11 @@ mod tests {
 
 ### 3.3 Counter-Examples: Bugs Caught by Loom
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 #### Counter-Example 3.1: Missed Atomic Ordering
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
 // BUG: Incorrect memory ordering
@@ -695,7 +695,7 @@ fn ordering_fixed() {
 
 #### Counter-Example 3.2: Incorrect CAS Loop
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust,ignore
 // BUG: Classic ABA problem in lock-free stack
@@ -794,7 +794,7 @@ impl<T> LockFreeStack<T> {
 
 #### Counter-Example 3.3: ABA Problem
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 // BUG: Classic ABA problem
@@ -860,7 +860,7 @@ fn aba_problem_bug() {
 
 #### Counter-Example 3.4: Memory Ordering Bug
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 // BUG: Dekker's algorithm with wrong orderings fails
@@ -920,7 +920,7 @@ fn dekker_correct() {
 
 #### Counter-Example 3.5: Lost Wakeup
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 // BUG: Lost wakeup in condition variable pattern
@@ -980,7 +980,7 @@ fn lost_wakeup_fixed() {
 
 #### Counter-Example 3.6: Deadlock
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 // BUG: Circular wait deadlock
@@ -1034,7 +1034,7 @@ fn deadlock_fixed() {
 
 ### 3.4 Loom Configuration
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 // loom.toml or environment variables
@@ -1056,7 +1056,7 @@ Creusot is a deductive verification tool for Rust that translates Rust programs 
 
 ### 4.1 WhyML Translation
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 Creusot translates Rust's MIR to WhyML, preserving ownership information through the `pearlite` specification language.
 
@@ -1095,7 +1095,7 @@ Proof Result
 
 ### 4.2 Specification Language: Pearlite
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 Pearlite is Creusot's specification language, a pure subset of Rust extended with logical operators.
 
@@ -1153,7 +1153,7 @@ pub fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
 
 ### 4.3 Proof Obligations
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 Creusot generates three categories of proof obligations:
 
@@ -1162,7 +1162,7 @@ Creusot generates three categories of proof obligations:
 
 #### 4.3.1 Preconditions
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 Preconditions must hold at call sites:
 
@@ -1180,7 +1180,7 @@ pub fn push<T>(&mut self, elem: T) {
 
 #### 4.3.2 Postconditions
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 Postconditions guarantee what the function establishes:
 
@@ -1197,7 +1197,7 @@ pub fn add(x: u32, y: u32) -> u32 {
 
 #### 4.3.3 Loop Invariants
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 Loop invariants capture inductive properties:
 
@@ -1220,7 +1220,7 @@ pub fn sum_to(n: u32) -> u32 {
 
 ### 4.4 Counter-Examples from Failed Verification
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 #### Counter-Example 4.1: Integer Overflow
 
@@ -1321,7 +1321,7 @@ fn factorial_logic(n: u32) -> u32 {
 
 ### 4.5 Advanced Features
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 #### 4.5.1 Mutable Borrows
 
@@ -1354,7 +1354,7 @@ Prusti is a verification tool for Rust built on the Viper verification infrastru
 
 ### 5.1 Specification Language
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 Prusti uses annotations directly in Rust code:
 
@@ -1370,7 +1370,7 @@ pub fn increment(x: i32) -> i32 {
 
 ### 5.2 Key Features
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 #### 5.2.1 Pure Functions
 
@@ -1408,7 +1408,7 @@ pub fn clear(&mut self) {
 
 ### 5.3 Counter-Examples
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 #### Counter-Example 5.1: Failing Postcondition
 
@@ -1447,7 +1447,7 @@ Fuzzing complements formal verification by finding bugs through randomized testi
 
 ### 6.1 Property-Based Testing with proptest
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 proptest is a property testing framework inspired by Hypothesis. It generates random test cases and shrinks failures to minimal examples.
 
@@ -1482,7 +1482,7 @@ proptest! {
 
 ### 6.2 Counter-Examples Found by Fuzzing
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 #### Counter-Example 6.1: Parser Bug
 
@@ -1543,7 +1543,7 @@ fn truncate_fixed(s: &str, max_len: usize) -> &str {
 
 ### 6.3 Coverage-Guided Fuzzing with cargo-fuzz
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 // fuzz/fuzz_targets/my_target.rs
@@ -1561,7 +1561,7 @@ fuzz_target!(|data: &[u8]| {
 
 ### 6.4 Bolero: Unified Fuzzing
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 use bolero::check;
@@ -1583,7 +1583,7 @@ fn test_with_fuzzing() {
 
 ### 7.1 Comparison Matrix
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | Tool | Scope | Effort | Soundness | Automation | When to Use |
 |------|-------|--------|-----------|------------|-------------|
@@ -1598,7 +1598,7 @@ fn test_with_fuzzing() {
 
 ### 7.2 Selection Decision Tree
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```
 What do you need to verify?
@@ -1624,7 +1624,7 @@ What do you need to verify?
 
 ### 7.3 Effort vs. Assurance Trade-off
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```
 Assurance
@@ -1645,7 +1645,7 @@ Assurance
 
 ### 7.4 Recommended Tool Stacks
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **For Safety-Critical Libraries**:
 
@@ -1677,7 +1677,7 @@ This case study demonstrates verifying a simplified `Vec` implementation using C
 
 ### 8.1 Basic Structure
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 use creusot_contracts::*;
@@ -1730,7 +1730,7 @@ impl<T> Vec<T> {
 
 ### 8.2 Push Operation Verification
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 impl<T: Clone> Vec<T> {
@@ -1785,7 +1785,7 @@ impl<T: Clone> Vec<T> {
 
 ### 8.3 Pop Operation Verification
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust,ignore
 impl<T> Vec<T> {
@@ -1806,7 +1806,7 @@ impl<T> Vec<T> {
 
 ### 8.4 Index Operation Verification
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust,ignore
 use std::ops::Index;
@@ -1826,7 +1826,7 @@ impl<T> Index<usize> for Vec<T> {
 
 ### 8.5 Verification Results
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 The verification with Creusot establishes:
 
@@ -1851,7 +1851,7 @@ The verification with Creusot establishes:
 
 ### 9.1 CI/CD Integration
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```yaml
 # .github/workflows/verification.yml
@@ -1899,7 +1899,7 @@ jobs:
 
 ### 9.2 Incremental Verification Strategy
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **Phase 1: Base Testing**
 
@@ -1928,7 +1928,7 @@ jobs:
 
 ### 9.3 Documentation and Training
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 /// # Verification
@@ -1959,7 +1959,7 @@ pub fn binary_search<T: Ord>(slice: &[T], target: T) -> Option<usize> {
 
 ### 10.1 Emerging Tools
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - **Aeneas**: New verification tool using characteristic formulae
 - **RustBelt**: Separation logic for Rust (foundational)
@@ -1968,7 +1968,7 @@ pub fn binary_search<T: Ord>(slice: &[T], target: T) -> Option<usize> {
 
 ### 10.2 Standardization Efforts
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - Common specification language across tools
 - Standard verification attributes
@@ -1976,7 +1976,7 @@ pub fn binary_search<T: Ord>(slice: &[T], target: T) -> Option<usize> {
 
 ### 10.3 Research Challenges
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 1. **Unsafe Code Verification**: Better support for FFI and raw pointers
 2. **Async/Await**: Verification of async Rust programs
@@ -1991,7 +1991,7 @@ pub fn binary_search<T: Ord>(slice: &[T], target: T) -> Option<usize> {
 
 ### A.1 Miri Commands
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```bash
 # Install
@@ -2009,7 +2009,7 @@ MIRIFLAGS="-Zmiri-disable-isolation" cargo miri test
 
 ### A.2 Loom Commands
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```bash
 # Add to Cargo.toml
@@ -2025,7 +2025,7 @@ LOOM_MAX_PREEMPTIONS=3 cargo test --features loom
 
 ### A.3 Creusot Commands
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```bash
 # Install
@@ -2158,13 +2158,13 @@ This document contains **9 theorems** about verification guarantees:
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Verification]**
+> **来源: [Wikipedia - Formal Verification](https://en.wikipedia.org/wiki/Formal_Verification)**
 
-> **[来源: Wikipedia - Model Checking]**
+> **来源: [Wikipedia - Model Checking](https://en.wikipedia.org/wiki/Model_Checking)**
 
-> **[来源: Wikipedia - Deductive Verification]**
+> **来源: [Wikipedia - Deductive Verification](https://en.wikipedia.org/wiki/Deductive_Verification)**
 
-> **[来源: Wikipedia - Abstract Interpretation]**
+> **来源: [Wikipedia - Abstract Interpretation](https://en.wikipedia.org/wiki/Abstract_Interpretation)**
 
 > **[来源: IEEE - Software Verification Standards]**
 
@@ -2176,36 +2176,36 @@ This document contains **9 theorems** about verification guarantees:
 
 > **[来源: Creusot Documentation]**
 
-> **[来源: Miri Documentation]**
+> **来源: [Miri Documentation](https://github.com/rust-lang/miri)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages Survey]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: POPL - Programming Languages Research]**
-> **[来源: PLDI - Programming Language Design and Implementation]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM - Systems Programming Languages Survey](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [PLDI - Programming Language Design and Implementation](https://www.sigplan.org/Conferences/PLDI/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Formal Verification]**
-> **[来源: Coq Reference Manual]**
-> **[来源: TLA+ Documentation]**
-> **[来源: ACM - Formal Methods]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Formal Verification](https://en.wikipedia.org/wiki/Formal_Verification)**
+> **来源: [Coq Reference Manual](https://coq.inria.fr/doc/)**
+> **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [ACM - Formal Methods](https://dl.acm.org/)**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---
 

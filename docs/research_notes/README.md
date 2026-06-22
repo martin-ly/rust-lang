@@ -15,7 +15,7 @@
 
 ## 🚀 从这里开始
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **首次使用？** 按目标选一条路径 → **[00_ORGANIZATION_AND_NAVIGATION](./10_00_organization_and_navigation.md)**
 
@@ -38,7 +38,7 @@
 
 ## 📊 目录结构
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **详细梳理**（实际文件清单、归档约定、formal_methods 概览）：见 **[10_research_notes_organization.md](./10_research_notes_organization.md)**。
 
@@ -125,7 +125,7 @@ research_notes/
 
 ## 🎯 研究目标
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本目录旨在记录和推进 Rust 语言相关的深入研究，包括：
 
@@ -139,13 +139,13 @@ research_notes/
 
 ## 📚 研究方向
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 形式化方法 (formal_methods/)
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **目标**: 对 Rust 核心机制进行形式化建模和证明
 
@@ -216,9 +216,9 @@ research_notes/
 
 ### 2. 类型理论 (type_theory/)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **目标**: 深入理解 Rust 类型系统的理论基础
 
@@ -244,9 +244,9 @@ research_notes/
 
 ### 3. 实验研究 (experiments/)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **目标**: 通过实验验证理论假设，优化实践
 
@@ -272,13 +272,13 @@ research_notes/
 
 ## 🔗 相关资源
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 核心文档
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [形式化工程系统](../rust-formal-engineering-system/README.md)
 - [研究议程](../rust-formal-engineering-system/09_research_agenda/04_research_methods/README.md) - 形式化工程系统研究方法
@@ -286,9 +286,9 @@ research_notes/
 
 ### 代码实现
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [所有权与借用实现](../../crates/c01_ownership_borrow_scope/docs/README.md)
 - [类型系统实现](../../crates/c02_type_system/src/README.md)
@@ -296,9 +296,9 @@ research_notes/
 
 ### 学习资源
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [类型系统速查卡](../02_reference/quick_reference/02_type_system.md)
 - [所有权速查卡](../02_reference/quick_reference/02_ownership_cheatsheet.md)
@@ -310,7 +310,7 @@ research_notes/
 
 ### 文档格式
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 每个研究笔记应包含：
 
@@ -347,13 +347,13 @@ research_notes/
 
 ### 新用户入门
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **第一次使用？** 请先阅读 [快速入门指南](./10_getting_started.md)！
 
 ### 开始新的研究主题
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 1. 查看 [研究路线图](./10_research_roadmap.md) 了解研究计划
 2. 选择合适的子目录（formal_methods/、type_theory/、experiments/）
@@ -365,7 +365,7 @@ research_notes/
 
 ### 贡献研究笔记
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 研究笔记欢迎社区贡献！请查看：
 
@@ -390,7 +390,7 @@ research_notes/
 
 ### 已完成 ✅ (17个研究笔记，100%)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **形式化方法研究** (5个):
 
@@ -427,7 +427,7 @@ research_notes/
 
 ### 最新研究内容
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **更新日期**: 2026-02-26
 
@@ -462,7 +462,7 @@ research_notes/
 
 ### 历史研究内容
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **更新日期**: 2025-11-15 / 2025-12-11
 
@@ -496,7 +496,7 @@ research_notes/
 
 ### 实际应用案例研究
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **目标**: 通过分析实际应用案例，验证 Rust 理论在实际项目中的应用效果
 
@@ -513,7 +513,7 @@ research_notes/
 
 ### 研究方法论
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **目标**: 建立 Rust 研究的方法论体系，为研究提供系统化的方法指导
 
@@ -567,7 +567,7 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 
 ### 获取帮助
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 - 📖 查看 [常见问题解答](./10_faq.md) 获取常见问题的答案
 - 📚 阅读 [快速入门指南](./10_getting_started.md) 了解如何使用系统
@@ -607,13 +607,13 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -624,7 +624,7 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 
 #### 代码示例更新
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 本文档中的所有Rust代码示例均已：
 
@@ -634,7 +634,7 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 
 #### 相关文档
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查
@@ -659,20 +659,20 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-> **[来源: Rust Reference]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-> **[来源: Rust Standard Library]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: ACM - Systems Programming]**
+> **来源: [ACM](https://dl.acm.org/)**
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-> **[来源: Rustonomicon]**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**

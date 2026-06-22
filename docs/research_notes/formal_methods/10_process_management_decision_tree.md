@@ -35,7 +35,7 @@
 
 ## 📊 IPC 机制选择决策树
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 graph TD
@@ -71,7 +71,7 @@ graph TD
 
 ## 🔀 通信机制对比矩阵
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 机制 | 速度 | 复杂度 | 适用场景 | 跨平台 |
 |------|:----:|:------:|----------|:------:|
@@ -87,11 +87,11 @@ graph TD
 
 ## 📋 具体场景推荐
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 场景 1: 父子进程通信
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 use std::process::{Command, Stdio};
@@ -122,7 +122,7 @@ fn parent_child_communication() {
 
 ### 场景 2: 高性能数据共享
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use std::sync::Arc;
@@ -145,7 +145,7 @@ fn shared_memory_ipc() {
 
 ### 场景 3: 本地服务通信
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 use std::os::unix::net::UnixListener;
@@ -177,7 +177,7 @@ fn unix_domain_socket_server() {
 
 ### 同步原语选择
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | 需求 | 推荐 | 说明 |
 |------|------|------|
@@ -221,7 +221,7 @@ fn process_sync() {
 
 ### 大数据传输优化
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```text
 数据大小阈值决策:
@@ -297,18 +297,18 @@ fn message_passing() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
-> **[来源: Wikipedia - Model Checking]**
+> **来源: [Wikipedia - Model Checking](https://en.wikipedia.org/wiki/Model_Checking)**
 
-> **[来源: ACM - Formal Verification Survey]**
+> **来源: [ACM - Formal Verification Survey](https://dl.acm.org/)**
 
-> **[来源: IEEE - Formal Specification Standards]**
+> **来源: [IEEE - Formal Specification Standards](https://standards.ieee.org/)**
 
-> **[来源: POPL - Automated Verification]**
+> **来源: [POPL - Automated Verification](https://www.sigplan.org/Conferences/POPL/)**
 
-> **[来源: RustBelt - Rust Formal Semantics]**
+> **来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)**
 
-> **[来源: TLA+ Documentation]**
+> **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**
 
 ---

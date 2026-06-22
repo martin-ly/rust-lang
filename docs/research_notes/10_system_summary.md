@@ -70,15 +70,15 @@
 
 ## 🎯 系统概览 {#-系统概览}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Rust 研究笔记系统是一个完整的 Rust 语言研究文档体系，旨在记录和推进 Rust 相关的深入研究。
 
 ### 系统目标
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **理论研究**: 形式化方法和类型理论研究
 2. **实验研究**: 性能分析和优化实验
@@ -87,9 +87,9 @@ Rust 研究笔记系统是一个完整的 Rust 语言研究文档体系，旨在
 
 ### 系统结构
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 research_notes/
@@ -104,13 +104,13 @@ research_notes/
 
 ## 📚 文档统计 {#-文档统计}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 总体统计
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 类别         | 数量 | 状态             |
 | :--- | :--- | :--- |
@@ -121,9 +121,9 @@ research_notes/
 
 ### 核心文档详情
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **README.md** - 主索引和导航中心
 2. **INDEX.md** - 完整索引
@@ -155,15 +155,15 @@ research_notes/
 
 ### 研究笔记详情
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 #### 形式化方法研究 (5个)
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文档 | 链接 | 关键定理 |
 | :--- | :--- | :--- |
@@ -175,9 +175,9 @@ research_notes/
 
 #### 类型理论研究 (5个)
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文档 | 链接 | 关键定义 |
 | :--- | :--- | :--- |
@@ -189,9 +189,9 @@ research_notes/
 
 #### 实验研究 (5个)
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文档 | 链接 | 实验类型 |
 | :--- | :--- | :--- |
@@ -203,7 +203,7 @@ research_notes/
 
 #### 综合研究 (2个)
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 | 文档 | 链接 | 内容 |
 | :--- | :--- | :--- |
@@ -218,7 +218,7 @@ research_notes/
 
 ### 形式化方法领域
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - ✅ 所有权系统
 - ✅ 借用检查器
@@ -228,7 +228,7 @@ research_notes/
 
 ### 类型理论领域
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - ✅ 类型系统基础
 - ✅ Trait 系统
@@ -238,7 +238,7 @@ research_notes/
 
 ### 实验研究领域
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - ✅ 性能基准测试
 - ✅ 内存分析
@@ -248,7 +248,7 @@ research_notes/
 
 ### 综合应用领域
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - ✅ 实际应用案例
 - ✅ 研究方法论
@@ -261,7 +261,7 @@ research_notes/
 
 ### 1. 完整性
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 - **全面覆盖**: 涵盖 Rust 研究的各个领域
 - **结构清晰**: 分类明确，易于导航
@@ -675,13 +675,13 @@ fn main() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

@@ -45,25 +45,25 @@
 
 ## 概述
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Rust 1.95.0 稳定了 **let chains** 和 **if let guards**，允许在 `if`、`while` 和 `match` 的守卫中连续使用多个 `let` 绑定，彻底消除了嵌套 `if let` 的样板代码。
 
 本指南覆盖 let chains 的全部语法、语义、适用场景和常见陷阱。
 
-[来源: Rust 1.95 Release Notes / RFC]
+来源: [Rust 1.95 Release Notes](https://releases.rs/1.95.0/) / RFC
 
 ---
 
 ## 一、核心语法
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 if let chains
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 在 `if` 条件中串联多个 `let` 绑定：
 
@@ -86,7 +86,7 @@ if let Some(a) = opt_a {
 
 ### 1.2 while let chains
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 let mut iter_a = vec![1, 2, 3].into_iter().peekable();
@@ -99,7 +99,7 @@ while let Some(a) = iter_a.next() && let Some(b) = iter_b.next() {
 
 ### 1.3 if let guards in match
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 fn classify(msg: Option<String>) -> String {
@@ -122,7 +122,7 @@ fn classify(msg: Option<String>) -> String {
 
 ### 2.1 绑定可见性
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 链中后续绑定可以使用前面绑定的变量：
 
@@ -139,7 +139,7 @@ if let Some(entry) = map.get("key") && let Ok(num) = entry.parse::<i32>() {
 
 ### 2.2 混合使用布尔条件和 let
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 let opt = Some(10);
@@ -152,7 +152,7 @@ if flag && let Some(n) = opt && n > 5 {
 
 ### 2.3 不能用 `||` 混合 let
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 // ❌ 编译错误：let chains 不支持 `||`
@@ -163,7 +163,7 @@ if let Some(a) = opt_a || let Some(b) = opt_b {
 
 原因：`||` 的短路语义与 `let` 绑定的作用域规则冲突。若 `opt_a` 为 `Some`，`b` 未绑定却进入分支体，会导致未定义变量。
 
-[来源: Rust Reference, Let Chains]
+来源: [Rust Reference, Let Chains](https://doc.rust-lang.org/reference/)
 
 ---
 
@@ -173,7 +173,7 @@ if let Some(a) = opt_a || let Some(b) = opt_b {
 
 ### 3.1 嵌套 if let → 扁平 let chains
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 场景 | 旧写法 (Rust ≤1.94) | 新写法 (Rust 1.95+) |
 |------|-------------------|-------------------|
@@ -183,7 +183,7 @@ if let Some(a) = opt_a || let Some(b) = opt_b {
 
 ### 3.2 match guard vs let chains
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 // 写法 A: match arm guard（推荐在模式匹配场景）
@@ -205,7 +205,7 @@ if let Some(ref s) = value && let Ok(n) = s.parse::<i32>() {
 - **match guard**：需要对多个不同模式做不同处理
 - **let chains**：只需二值分支（满足/不满足）
 
-[来源: Rust Design Patterns]
+来源: [Rust Design Patterns](https://rust-lang.github.io/design-patterns/)
 
 ---
 
@@ -414,12 +414,12 @@ fn process(data: Option<&str>) -> Result<i32, String> {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Machine Learning]**
+> **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
 
-> **[来源: Wikipedia - Artificial Intelligence]**
+> **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)**
 
-> **[来源: tch-rs Documentation]**
+> **来源: [tch-rs Documentation](https://docs.rs/tch/latest/tch/)**
 
-> **[来源: ACM - AI Systems]**
+> **来源: [ACM - AI Systems](https://dl.acm.org/)**
 
 ---

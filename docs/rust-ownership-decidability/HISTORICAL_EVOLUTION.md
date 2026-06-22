@@ -63,13 +63,13 @@
 
 ## 一、前 Rust 时代：资源管理的困境
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 手动内存管理时代（1970s-1990s）
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **C 语言的自由与危险**：
 
@@ -94,9 +94,9 @@ free(p);
 
 ### 1.2 垃圾回收的兴起（1990s-2000s）
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **Java 的解决方案**：
 
@@ -121,7 +121,7 @@ Object obj = new Object();
 
 ### 1.3 线性逻辑的引入（1980s-1990s）
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **Girard 的线性逻辑（1987）**：
 
@@ -147,7 +147,7 @@ A & B    : 选择使用 A 或 B
 
 ### 2.1 Rust 的早期设计（2006-2010）
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **Graydon Hoare 的初始设计**：
 
@@ -170,7 +170,7 @@ A & B    : 选择使用 A 或 B
 
 ### 2.2 所有权系统的演化（2010-2015）
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **设计的迭代**：
 
@@ -199,7 +199,7 @@ fn foo<'a>(x: &'a i32) -> &'a i32 { x }
 
 ### 2.3 形式化的早期尝试（2012-2015）
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **需求出现**：
 
@@ -221,7 +221,7 @@ fn foo<'a>(x: &'a i32) -> &'a i32 { x }
 
 ### 3.1 Patina 项目（2015）
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **目标**：为 Rust 的子集创建形式化语义
 
@@ -237,7 +237,7 @@ fn foo<'a>(x: &'a i32) -> &'a i32 { x }
 
 ### 3.2 RustBelt 项目（2015-2018）
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **里程碑论文**：
 > "RustBelt: Securing the Foundations of the Rust Programming Language"
@@ -267,7 +267,7 @@ fn foo<'a>(x: &'a i32) -> &'a i32 { x }
 
 ### 3.3 Featherweight Rust（2019-2022）
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **动机**：
 
@@ -301,7 +301,7 @@ Linearizability = 类型依赖图无环
 
 ### 3.4 Oxide 项目（2019-2021）
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **目标**：创建可执行的 Rust 语义
 
@@ -342,7 +342,7 @@ Oxide：精确，关注内存模型
 
 ### 4.1 整合与发展
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **目标**：
 
@@ -379,7 +379,7 @@ Oxide：精确，关注内存模型
 
 ### 4.2 历史位置的图示
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```text
 时间线：
@@ -410,7 +410,7 @@ Oxide：精确，关注内存模型
 
 ### 4.3 演化的关键洞察
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **洞察1：从实践到理论**
 
@@ -450,7 +450,7 @@ Featherweight Rust（2022）：简洁，但有限
 
 ### 5.1 所有权（Ownership）
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **演化路径**：
 
@@ -476,7 +476,7 @@ Rust 所有权（2010-2015）
 
 ### 5.2 借用（Borrowing）
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **演化路径**：
 
@@ -502,7 +502,7 @@ Rust 借用（2012+）
 
 ### 5.3 生命周期（Lifetime）
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **演化路径**：
 
@@ -528,7 +528,7 @@ Rust 生命周期（2015+）
 
 ### 5.4 Linearizability
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **演化路径**：
 
@@ -873,21 +873,21 @@ Rust 形式化 =
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-> **[来源: Rust Release Notes]**
+> **来源: [Rust Release Notes](https://github.com/rust-lang/rust/blob/master/RELEASES.md)**
 
-> **[来源: RFCs - rust-lang/rfcs]**
+> **来源: [RFCs - rust-lang/rfcs](https://github.com/rust-lang/rfcs)**
 
-> **[来源: Rust Blog]**
+> **来源: [Rust Blog](https://blog.rust-lang.org/)**
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---
 

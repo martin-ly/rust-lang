@@ -9,7 +9,7 @@
 > **定位**：Rust 概念体系的**数学根基**与形式化验证。本层为 L1-L3 的所有安全保证提供严格的数学证明，是知识体系的"地基"。
 > **Bloom 层级**: 分析 → 评价
 > **核心功能**: 为上层概念提供**形式化直觉**与**教学类比**的安全性解释；指向可机械验证证明的权威来源（RustBelt、Iris、Coq）
-> **[来源: POPL 2018 - RustBelt]** · **[来源: Wikipedia - Separation Logic]** · **[来源: Wikipedia - Linear Logic]** · **[来源: Iris Project - iris-project.org]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [Wikipedia - Separation Logic](https://en.wikipedia.org/wiki/Separation_Logic)** · **来源: [Wikipedia - Linear Logic](https://en.wikipedia.org/wiki/Linear_Logic)** · **来源: [Iris Project - iris-project.org](https://iris-project.org/)**
 
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
@@ -54,7 +54,7 @@ mindmap
       区域类型[Region Types]
       分数权限[Fractional Permissions]
       COR[Calculus of Ownership]
-      别名模型[Stacked/Tree Borrows]
+      别名模型Stacked / [Tree Borrows — PLDI 2025](https://perso.crans.org/vanille/treebor/)
     RustBelt
       Iris[Iris 分离逻辑]
       Creusot[Creusot / Why3]
@@ -116,12 +116,12 @@ graph TB
     OF --> OF1[Region Types]
     OF --> OF2[Fractional Permissions]
     OF --> OF3[Calculus of Ownership]
-    OF --> OF4[Stacked/Tree Borrows]
+    OF --> OF4Stacked / [Tree Borrows — PLDI 2025](https://perso.crans.org/vanille/treebor/)
 
-    RB --> RB1[RustBelt / Iris]
+    RB --> RB1[RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
     RB --> RB2[Creusot / Why3]
     RB --> RB3[Verus / Kani]
-    RB --> RB4[Stacked/Tree Borrows]
+    RB --> RB4Stacked / [Tree Borrows — PLDI 2025](https://perso.crans.org/vanille/treebor/)
 
     style LL fill:#f96,stroke:#333
     style TT fill:#bbf,stroke:#333
@@ -167,7 +167,7 @@ graph TB
                    └──────────────┬─────────────┘
                                   │
                                   ▼
-                    [RustBelt: 机械验证上述所有定理]
+                    [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
 ```
 
 ---

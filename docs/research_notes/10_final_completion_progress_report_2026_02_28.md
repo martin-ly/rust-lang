@@ -45,13 +45,13 @@
 
 ## 🎯 本次完成工作
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Phase 0: 全面审计与清理 ✅
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 任务 | 状态 |
 | :--- | :--- |
@@ -60,9 +60,9 @@
 
 ### Phase 1-4: 文档扩展 ✅
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本次共扩展 **20+** 个关键文档：
 
@@ -287,17 +287,17 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Project Management]**
-> **[来源: Wikipedia - Quality Assurance]**
+> **来源: [Wikipedia - Project Management](https://en.wikipedia.org/wiki/Project_Management)**
+> **来源: [Wikipedia - Quality Assurance](https://en.wikipedia.org/wiki/Quality_Assurance)**
 > **[来源: ACM - Software Quality Metrics]**
 > **[来源: IEEE - Project Completion Standards]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

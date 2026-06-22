@@ -1,6 +1,6 @@
-# Cargo Script
+# Cargo Script 脚本化 Rust
 
-> **EN**: Cargo Script
+> **EN**: Cargo Script: Writing and Running Rust Scripts
 > **Summary**: Cargo Script single-file programs with frontmatter dependencies and `cargo` execution.
 > **来源**: [Cargo Book — Scripts](https://doc.rust-lang.org/cargo/reference/unstable.html#script) · [Rust 1.85 Release Notes](https://blog.rust-lang.org/2025/02/20/Rust-1.85.0.html)
 
@@ -442,7 +442,7 @@ Cargo Script:  File = Crate (单模块，无子模块)
 
 ## Wikipedia 概念对齐
 
-> **[来源: Wikipedia]** 核心概念与国际知识库映射。
+> **来源: [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)** 核心概念与国际知识库映射。
 
 | 概念 | Wikipedia 词条 | 说明 |
 |:---|:---|:---|

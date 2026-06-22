@@ -7,7 +7,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [05 简单合并模式 (Simple Merge) - 完整形式化语义](#05-简单合并模式-simple-merge---完整形式化语义)
   - [目录](#目录)
@@ -58,7 +58,7 @@
 
 ## 1. 引言
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 简单合并模式（Simple Merge，也称为 XOR-Join）是工作流控制流模式中的基础合并模式。它表示流程中的一个汇合点，在该点处两条或多条互斥的分支路径重新汇聚为一条单一路径。**简单合并不做任何同步**：它假设在任何时刻只有一条输入路径是活跃的（这通常由前置的排他选择模式保证）。当任意一条输入路径到达时，流程立即继续执行。
 
@@ -66,9 +66,9 @@
 
 ### 1.1 历史背景
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 简单合并模式最早由 Wil van der Aalst 等人在 "Workflow Patterns" (2003) 中系统定义，作为排他选择（XOR-Split）的自然对应物。在工作流理论中，Simple Merge 与 Exclusive Choice 构成一对对偶模式（dual patterns）。在 Rust 中，这一语义通过表达式级别的类型统一实现：`if-else` 和 `match` 的所有分支必须返回相同类型，编译器在合并点执行类型检查，确保无论哪个分支被激活，下游流程都能获得类型一致的数据。
 
@@ -80,7 +80,7 @@
 
 ### 2.1 概念定义
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **简单合并** 是一个控制流构造，它将多条互斥的输入路径汇聚为单一的输出路径，其中：
 
@@ -102,7 +102,7 @@ OutgoingPath ::= Activity
 
 ### 2.2 核心语义
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **到达语义**:
 
@@ -130,11 +130,11 @@ $$
 
 ### 2.3 形式化表示
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 #### 状态机表示
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 $$
 \begin{aligned}
@@ -160,7 +160,7 @@ stateDiagram-v2
 
 #### 流程代数表示 (CSP 风格)
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 $$
 \text{SimpleMerge} = B_1 \triangledown B_2 \triangledown ... \triangledown B_n
@@ -176,7 +176,7 @@ XOR_Join = (B1 -> SKIP) [] (B2 -> SKIP) [] ... [] (Bn -> SKIP)
 
 #### Petri 网表示
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 在 Petri 网中，简单合并通过一个多输入变迁实现，但不使用抑制弧或同步语义：
 
@@ -212,7 +212,7 @@ graph LR
 
 ### BPMN 表示
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 在 BPMN 2.0 中，简单合并使用**排他网关** (Exclusive Gateway) 的合并语义表示，图形符号与 XOR-Split 相同，但用作汇聚节点：
 
@@ -239,7 +239,7 @@ graph LR
 
 ### UML 活动图
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 在 UML 活动图中，简单合并使用**合并节点** (Merge Node) 表示：
 
@@ -258,7 +258,7 @@ graph LR
 
 ### WfMC 标准
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 工作流管理联盟 (WfMC) 将简单合并定义为：
 
@@ -278,7 +278,7 @@ graph LR
 
 ### CCS 表示
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **Calculus of Communicating Systems (CCS)**:
 
@@ -297,7 +297,7 @@ $$
 
 ### CSP 表示
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **Communicating Sequential Processes (CSP)**:
 
@@ -316,7 +316,7 @@ AND_Join = arrive(1) -> arrive(2) -> ... -> arrive(n) -> forward -> SKIP
 
 ### π-演算表示
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **Pi-Calculus**:
 
@@ -334,8 +334,8 @@ $$
 
 ### 5.1 基础实现
 
-> **[来源: Rust Reference - Expressions]**
-> **[来源: TRPL Ch. 3 - Common Programming Concepts]**
+> **来源: [Rust Reference - Expressions](https://doc.rust-lang.org/reference/)**
+> **来源: [TRPL Ch. 3 - Common Programming Concepts](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html)**
 
 Rust 的 `if-else` 表达式是简单合并最原生的实现。所有分支必须返回相同类型，编译器在合并点强制执行类型统一。
 
@@ -396,13 +396,13 @@ pub fn assign_merge(order: &Order) -> &'static str {
 }
 ```
 
-> [来源: Rust Reference - if Expressions]
-> [来源: TRPL Ch. 3 - Control Flow]
+> 来源: [Rust Reference - if Expressions](https://doc.rust-lang.org/reference/)
+> 来源: [TRPL Ch. 3 - Control Flow](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html)
 
 ### 5.2 带错误处理的高级实现
 
 > **[来源: Rust Standard Library - Result]**
-> **[来源: TRPL Ch. 9 - Error Handling]**
+> **来源: [TRPL Ch. 9 - Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)**
 
 ```rust,ignore
 use thiserror::Error;
@@ -478,7 +478,7 @@ impl ProcessingPath {
 }
 ```
 
-> [来源: Rust Reference - The ? operator]
+> 来源: [Rust Reference - The ? operator](https://doc.rust-lang.org/reference/)
 > [来源: Rust Standard Library - Option]
 
 ### 5.3 订单处理完整示例
@@ -648,7 +648,7 @@ $$
 
 在 Rust 中，这一保证通过控制流结构静态实现：单线程 `if-else` 和 `match` 不可能同时进入两个分支。
 
-> [来源: RustBelt - PLDI 2015]
+> 来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 
 ### 6.3 正确性条件
 >
@@ -941,25 +941,25 @@ macro_rules! simple_merge {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Design Pattern]**
+> **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 
-> **[来源: Rust API Guidelines]**
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 
-> **[来源: Gang of Four - Design Patterns]**
+> **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
 
-> **[来源: ACM - Software Design Patterns]**
+> **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: TRPL Ch. 3 - Control Flow]**
+> **来源: [TRPL Ch. 3 - Control Flow](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html)**
 
-> **[来源: Rust Reference - if Expressions]**
+> **来源: [Rust Reference - if Expressions](https://doc.rust-lang.org/reference/)**
 
 > **[来源: Rust Standard Library - Option]**
 

@@ -1,3 +1,5 @@
+# 归档：Rust vs Ruby
+
 > **EN**: Comparative 16 Rust Vs Ruby Archived
 > **Summary**: Comparative 16 Rust Vs Ruby Archived. Core Rust concept.
 > **内容分级**: [综述级]

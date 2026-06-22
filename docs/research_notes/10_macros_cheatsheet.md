@@ -53,13 +53,13 @@
 
 ## 声明宏 (macro_rules!)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 基本语法
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 macro_rules! say_hello {
@@ -73,9 +73,9 @@ say_hello!();  // 展开: println!("Hello!");
 
 ### 参数模式
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 macro_rules! print_value {
@@ -96,9 +96,9 @@ print_value!(1, 2);
 
 ### 重复模式
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 macro_rules! vec {
@@ -119,9 +119,9 @@ vec![1, 2, 3,];  // 带结尾逗号
 
 ### 常见片段类型
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 指示符 | 匹配 | 示例 |
 | :--- | :--- | :--- |
@@ -140,13 +140,13 @@ vec![1, 2, 3,];  // 带结尾逗号
 
 ## 过程宏
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 派生宏
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 定义
@@ -167,9 +167,9 @@ struct MyStruct;
 
 ### 属性宏
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 定义
@@ -187,9 +187,9 @@ fn my_func() {}
 
 ### 函数式宏
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 // 定义
@@ -206,13 +206,13 @@ my_macro!(...);
 
 ## 常见宏示例
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### vec
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 创建Vec
@@ -222,7 +222,7 @@ let v = vec![0; 5];  // [0, 0, 0, 0, 0]
 
 ### println! / format
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 println!("Hello");
@@ -234,7 +234,7 @@ println!("{:>8}", text);   // 右对齐，宽度8
 
 ### assert
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust,ignore
 assert!(condition);
@@ -245,7 +245,7 @@ assert!(cond, "message: {}", arg);  // 自定义消息
 
 ### todo! / unimplemented
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust
 fn not_yet() {
@@ -259,7 +259,7 @@ fn stub() {
 
 ### include
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 include!("path/to/file.rs");  // 包含文件内容
@@ -275,7 +275,7 @@ include_bytes!("path/to/file.bin");  // 包含为&[u8]
 
 ### 查看展开
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```bash
 # 查看宏展开
@@ -287,7 +287,7 @@ cargo rustc -- -Z unpretty=expanded
 
 ### trace_macros
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust,ignore
 #![feature(trace_macros)]
@@ -422,13 +422,13 @@ struct Point { x: i32, y: i32 }
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -439,7 +439,7 @@ struct Point { x: i32, y: i32 }
 
 #### 代码示例更新
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 本文档中的所有Rust代码示例均已：
 
@@ -481,9 +481,9 @@ struct Point { x: i32, y: i32 }
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Macro (computer science)]**
-> **[来源: TRPL Ch. 19 - Macros]**
-> **[来源: Rust Reference - Macros]**
-> **[来源: The Little Book of Rust Macros]**
+> **来源: [Wikipedia - Macro (computer science)](https://en.wikipedia.org/wiki/Macro_(computer_science))**
+> **来源: [TRPL Ch. 19 - Macros](https://doc.rust-lang.org/book/ch19-00-advanced-features.html)**
+> **来源: [Rust Reference - Macros](https://doc.rust-lang.org/reference/macros.html)**
+> **来源: [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)**
 
 ---

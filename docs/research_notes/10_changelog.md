@@ -21,13 +21,13 @@
 
 ## [1.4.3] - 2026-02-15 🆕
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### TOC 与内容深化 100% 完成（2026-02-15）🆕
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **T2.2 formal_methods 六篇 层次汇总**：ownership_model、borrow_checker_proof、lifetime_formalization、async_state_machine、pin_self_referential、send_sync_formalization 全部补「概念定义-属性关系-解释论证 层次汇总」；TOC 锚点同步
 - **T2.2 层次汇总 TOC 锚点**：8 篇行为模式（chain_of_responsibility、command、interpreter、iterator、mediator、memento、template_method、visitor）在 `## 📊 目录` 中补全「概念定义-属性关系-解释论证 层次汇总」锚点链接
@@ -35,9 +35,9 @@
 
 ### 目录补全（T1）100% 完成（2026-02-15）🆕
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **T1.1 设计模式 23 篇**：全部补全 `## 📊 目录` + 锚点（01_creational 5 篇、02_structural 7 篇、03_behavioral 11 篇）
 - **T1.2 执行模型**：01_synchronous–05_distributed、06_boundary_analysis、README 补全 TOC
@@ -48,9 +48,9 @@
 
 ### 内容深化（T2）设计模式 + 执行模型 100% 完成（2026-02-15）🆕
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **T2.1 五维自检**：23 篇设计模式 + 执行模型 01–05 全部增加「实质内容五维自检」表
 - **T2.4 1.93 对应**：23 篇设计模式 + 执行模型 01–05 全部增加「与 Rust 1.93 的对应」段
@@ -64,13 +64,13 @@
 
 ## [1.4.2] - 2026-02-15 🆕
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 设计模式/分布式/工作流全面论证 100% 完成（2026-02-15）🆕
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN**：D1–D3 核心任务全部交付
 - **D1 设计模式**：CE-PAT1 模式组合定理（02_effectiveness_proofs）；EB-DET1 等价判定规则（04_expressiveness_boundary）；反例→错误码映射（01_design_patterns_formal）；模式组合约束 DAG（04_boundary_matrix）；Factory/Strategy/Observer/State 证明深度 L2
@@ -82,13 +82,13 @@
 
 ## [1.4.1] - 2026-02-15 🆕
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### docs 全结构梳理 100% 完成（2026-02-15）🆕
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **DOCS_STRUCTURE_OVERVIEW**：新建 docs/DOCS_STRUCTURE_OVERVIEW.md，按 00_COMPREHENSIVE_SUMMARY 格式（模块|核心问题|判定目标|核心文档）100% 覆盖 docs
 - **顶层 11 模块**：三大支柱、01_learning、02_reference、04_thinking、05_guides、06_toolchain、07_project、archive、rust-formal-engineering-system 全部纳入表格
@@ -101,13 +101,13 @@
 
 ## [1.4.0] - 2026-02-14 🆕
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 表格格式统一与实验/核心文档（2026-02-14）🆕
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **表格分隔符**：research_notes 下多篇文档表格统一为 `| :--- | :--- | ...` 格式（RUST_193_COUNTEREXAMPLES_INDEX、RUSTBELT_ALIGNMENT、00_COMPREHENSIVE_SUMMARY、SAFE_DECIDABLE_MECHANISMS_OVERVIEW、experiments 四篇、README、AENEAS_INTEGRATION_PLAN、DESIGN_MECHANISM_RATIONALE、FORMAT_AND_CONTENT_ALIGNMENT_PLAN、00_ORGANIZATION_AND_NAVIGATION）
 - **SAFE_DECIDABLE_MECHANISMS_OVERVIEW**：§四、§6.1、§6.2 表格改为 :--- 分隔符，MD060 已消除
@@ -115,9 +115,9 @@
 
 ### 格式统一与 Rust 1.93 对齐计划 100% 完成（2026-02-14）🆕
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - **FORMAT_AND_CONTENT_ALIGNMENT_PLAN**：F1–F4 全部交付；计划状态更新为 ✅ 100% 完成
 - **F1 格式统一**：QUALITY_CHECKLIST 增加 research_notes 元信息统一模板；全库补全「Rust 版本」行（含 23 模式、执行模型、根目录与子目录）；MAINTENANCE_GUIDE 增加格式统一检查清单与季度复核项
@@ -126,7 +126,7 @@
 
 ### 充分完整 完备 100% 收尾（2026-02-14）🆕
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 - **CORE_THEOREMS**：英文摘要与完整证明增加 Send/Sync（SEND-T1/SYNC-T1、§四、SYNC-L1、L3 表行）；归纳步引用 send_sync_formalization
 - **00_COMPREHENSIVE_SUMMARY / FORMAL_FULL_MODEL_OVERVIEW**：支柱 1 与知识地图纳入 Send/Sync、安全可判定机制总览；全模型表与 DAG 增加 Send/Sync；论证思路增加完备性自检链
@@ -137,7 +137,7 @@
 
 ### formal_methods 可持续推进计划 阶段 A–D 100% 完成（2026-02-14）🆕
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 - **阶段 A**：新建 [send_sync_formalization](formal_methods/10_send_sync_formalization.md)；Def SEND1/SYNC1、SEND-T1/SYNC-T1、SYNC-L1、与 spawn/Future/Arc 衔接、反例；README 扩展为**六篇并表**
 - **阶段 B**：新建 [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./10_safe_decidable_mechanisms_overview.md)；每机制一节（概念定义、属性关系、解释论证、形式证明、反例）；与 formal_methods/type_theory 双向链接
@@ -147,7 +147,7 @@
 
 ### 形式化证明批判性分析与推进计划 100% 完成（2026-02-14）🆕
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 - **阶段 1**：INTERNATIONAL_FORMAL_VERIFICATION_INDEX、证明深度标注（L1/L2/L3）、FORMAL_FULL_MODEL_OVERVIEW、层次化导航
 - **阶段 2**：CORE_THEOREMS_FULL_PROOFS（ownership T2、borrow T1、type T3 完整证明）、RUSTBELT_ALIGNMENT、EXECUTABLE_SEMANTICS_ROADMAP
@@ -158,7 +158,7 @@
 
 ### 完整总结与论证脉络（2026-02-14）🆕
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 - **00_COMPREHENSIVE_SUMMARY**：新建完整总结综合；项目全貌一句话、三大支柱概览、全项目知识地图、论证脉络总览、各文档职责、推荐阅读路径
 - **ARGUMENTATION_CHAIN_AND_FLOW**：新建论证脉络关系；论证五步法、自上而下/自底而上流向、概念→公理→定理→推论 DAG、三大支柱论证衔接、文档依赖、按问题查论证链、论证思路示例
@@ -166,7 +166,7 @@
 
 ### 层次化梳理与阶段 1 推进（2026-02-14）🆕
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - **层次化小节规范**：CONTENT_ENHANCEMENT 新增「概念定义-属性关系-解释论证 层次化小节规范」；QUALITY_CHECKLIST 新增「概念定义-属性关系-解释论证 层次化」检查项
 - **HIERARCHICAL_MAPPING_AND_SUMMARY**：新建层次化梳理与映射总结；含按三大支柱的文档树、概念族↔文档↔Def/Axiom/定理映射表（支柱 1/2/3）、文档↔思维表征映射表、文档依赖简表
@@ -175,7 +175,7 @@
 
 ### 阶段 2 多维矩阵与双向链接（2026-02-14）🆕
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - **23 模式双向链接**：23 个设计模式文档元信息均增加「23 模式矩阵」行号链接；[01_design_patterns_formal/README §23 模式多维对比矩阵](software_design_theory/01_design_patterns_formal/README.md#23-模式多维对比矩阵) 已建
 - **执行模型多维对比矩阵**：[03_execution_models/README §执行模型多维对比矩阵](software_design_theory/03_execution_models/README.md#执行模型多维对比矩阵)（同步/异步/并发/并行/分布式×确定性/数据竞争/选型）
@@ -185,7 +185,7 @@
 
 ### 阶段 3–4 思维表征与文档依赖（2026-02-14）🆕
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - **设计模式选型决策树**：03_semantic_boundary_map §按需求反向查模式 与 01_design_patterns_formal/README §23 模式矩阵 交叉链接；决策树（精简）注明对应模式文档入口
 - **相关思维表征块**：ownership_model、borrow_checker_proof、06_boundary_analysis 文末新增「相关思维表征」表（思维导图/矩阵/证明树/决策树 + HIERARCHICAL_MAPPING 依据）
@@ -195,11 +195,11 @@
 
 ## [1.3.0] - 2026-02-12 🆕
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 全面检查推进计划实施（2026-02-12）🆕
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 - **Phase 1 权威对齐**：RUST_193 新增权威来源对齐表（releases.rs、Rust Blog、Ferrocene FLS、RustBelt）；Edition 2024 与 FLS 范围说明；formal_methods README 新增权威来源快速链接、版本说明
 - **Phase 2 类型构造能力**：新建 [type_theory/10_construction_capability.md](type_theory/10_construction_capability.md)；Def TCON1、TCON 矩阵、类型构造决策树、确定性判定；type_theory README 收录
@@ -213,7 +213,7 @@
 
 ### 持续推进至 100% 收尾（2026-02-12）🆕
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 - **统一 100% 状态**：UNIFIED_SYSTEMATIC_FRAMEWORK 中 lifetime_formalization、pin_self_referential 证明完成度 4.6→5.0；STATISTICS、README 更新全面检查推进计划完成状态
 - **新文档纳入索引**：QUICK_REFERENCE、QUICK_FIND 新增 construction_capability、CORE_FEATURES_FULL_CHAIN、FEATURE_TEMPLATE、INCREMENTAL_UPDATE_FLOW、执行确定性、组件成熟度
@@ -222,7 +222,7 @@
 
 ### 持续推进至 100%（2026-02-12）🆕
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 - **类型理论阶段 2–5 完成**：阶段 2–4 见上；阶段 5：trait_system_formalization Def ORPH1/NEG1、定理 NEG-T1、Def DYN-IMPL1、定理 DYN-T1、推论 DYN-C1；advanced_types Def CONST-EVAL1、定理 CONST-EVAL-T1；00_completeness_gaps 高/中优先级缺口全部 ✅
 - **QUICK_REFERENCE**：新增完备性缺口、软件设计理论块；类型理论缺口链接
@@ -269,7 +269,7 @@
 
 ### 格式与形式论证扩展（2026-02-12）🆕
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **表格格式统一**：参照 10_proof_index.md 行 55 规范，research_notes 表格分隔行统一为 `| :--- | :--- | :--- |` 格式；已修复 50+ 文件：formal_methods、type_theory、01_design_patterns_formal（23 模式）、02_workflow_safe_complete_models、03_execution_models、04_compositional_engineering、FORMAL_PROOF_SYSTEM_GUIDE、THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE、experiments、BEST_PRACTICES、TASK_ORCHESTRATION_AND_EXECUTION_PLAN、practical_applications 等。
 
@@ -325,7 +325,7 @@
 
 ### 应用分析视图 100% 完成（2026-02-12）🆕
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **04_applications_analysis_view.md 全面丰富**:
 
@@ -340,7 +340,7 @@
 
 ### 论证形式化全面推进（2026-02-12）🆕
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **形式化论证扩展**（Def/Axiom/定理）:
 
@@ -356,7 +356,7 @@
 
 ### 形式论证全面推进（2026-02-12）🆕
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **形式化论证扩展**（针对「形式论证不充分」）：
 
@@ -373,7 +373,7 @@
 
 ### 工作流安全/完全模型 100% 完成（2026-02-12）🆕
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **02_workflow_safe_complete_models 全面完善**:
 
@@ -386,7 +386,7 @@
 
 ### 内容全面丰富（2026-02-12 持续推进）🆕
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **执行模型增强**:
 
@@ -420,7 +420,7 @@
 
 ### 软件设计理论体系（2026-02-12 追加）🆕
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **新增目录** [software_design_theory/](software_design_theory/README.md):
 
@@ -441,7 +441,7 @@
 
 ### 论证与设计机制全面梳理
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **新增文档**:
 
@@ -481,11 +481,11 @@
 
 ## [1.2.0] - 2026-01-26
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Rust 1.93.0 全面更新
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **主要更新**:
 
@@ -500,7 +500,7 @@
 
 ### Rust 1.93.0 新特性研究 🆕
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 - ✅ musl 1.2.5 DNS 解析改进研究
 - ✅ 全局分配器线程本地存储支持研究
@@ -510,7 +510,7 @@
 
 ### 新增文档
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 - ✅ [Rust 1.93 vs 1.92 全面对比分析](../06_toolchain/06_05_rust_1_93_vs_1_92_comparison.md)
 
@@ -518,11 +518,11 @@
 
 ## [1.1.0] - 2025-11-15
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 更新
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 - ✅ 所有研究笔记更新到 Rust 1.93.0+ (历史记录：1.92.0+ → 1.93.0+)
 - ✅ 所有文档日期信息统一为 2025-12-11
@@ -531,7 +531,7 @@
 
 ### Rust 1.92.0 新特性研究（历史）
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 - ✅ 异步迭代器性能提升研究（15-20%）
 - ✅ const 上下文增强研究
@@ -543,17 +543,17 @@
 
 ## [1.0.0] - 2025-01-27
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 🎉 系统建立
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 **初始版本**: 研究笔记系统正式建立
 
 #### ✨ 新增
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **核心文档系统**:
 
@@ -614,7 +614,7 @@
 
 #### 📊 系统统计
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 - **总文档数**: 40个
 - **核心文档**: 20个（✅ 已完成）
@@ -624,7 +624,7 @@
 
 #### 🎯 系统特点
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - ✅ 完整的文档体系
 - ✅ 统一的格式规范
@@ -638,11 +638,11 @@
 
 ## 版本 1.7.19 (2025-01-27)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 📝 内容完善
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **实际应用案例研究笔记**:
 
@@ -668,11 +668,11 @@
 
 ## 版本 1.7.18 (2025-01-27)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 📝 内容完善
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **宏展开性能分析研究笔记**:
 
@@ -690,11 +690,11 @@
 
 ## 版本 1.7.17 (2025-01-27)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 📝 内容完善
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **并发性能研究笔记**:
 
@@ -712,11 +712,11 @@
 
 ## 版本 1.7.16 (2025-01-27)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 📝 内容完善
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **编译器优化研究笔记**:
 
@@ -734,7 +734,7 @@
 
 ## 版本 1.7.15 (2025-01-27)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 📝 内容完善
 
@@ -754,7 +754,7 @@
 
 ## 版本 1.7.14 (2025-01-27)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 📝 内容完善
 

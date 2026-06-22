@@ -1,7 +1,7 @@
 # 游戏开发场景
 
 > **Bloom 层级**: 应用 → 分析
-> **[来源: Bevy Engine Documentation]** · **[来源: wgpu]** · **[来源: Rust GameDev Working Group]** ✅
+> **来源: [Bevy Engine Documentation](https://bevyengine.org/)** · **[来源: wgpu]** · **来源: [Rust GameDev Working Group](https://gamedev.rs/)** ✅
 
 ---
 

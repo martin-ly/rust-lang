@@ -5,7 +5,7 @@
 > **层级**: L6 生态工具 / L3 高级网络
 > **前置概念**: [Async](../../concept/03_advanced/02_async.md) · [Network Programming](../../crates/c10_networks/)
 > **Bloom 层级**: 应用 → 分析
-> **[来源: RFC 9000 (QUIC)]** · **[来源: RFC 9114 (HTTP/3)]** · **[来源: quinn crate]** ✅
+> **来源: [RFC 9000 (QUIC)](https://github.com/rust-lang/rfcs/pull/9000)** · **来源: [RFC 9114 (HTTP/3)](https://github.com/rust-lang/rfcs/pull/9114)** · **[来源: quinn crate]** ✅
 >
 > **受众**: [进阶]
 > **内容分级**: [实验级]
@@ -108,7 +108,7 @@ HTTP              HTTP              HTTP
 
 ### QUIC 客户端（quinn）
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 use quinn::{ClientConfig, Endpoint};
@@ -149,7 +149,7 @@ async fn quic_client(
 
 ### QUIC 服务器（quinn）
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust,ignore
 use quinn::{ServerConfig, Endpoint};
@@ -193,7 +193,7 @@ async fn handle_connection(connection: quinn::Connection) {
 
 ### HTTP/3 客户端（h3 + quinn）
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 use h3_quinn::quinn;
@@ -293,12 +293,12 @@ async fn http3_get(url: &str) -> Result<String, Box<dyn std::error::Error>> {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ---

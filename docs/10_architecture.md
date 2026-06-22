@@ -11,7 +11,7 @@
 
 ## 目录
 >
-> **[来源: Rust Official Docs]** · **[来源: Rust Reference]** · **[来源: TRPL]** · **[来源: Rustonomicon]** · **[来源: Rust Project Goals 2026]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)**
 
 - [Rust 学习项目架构文档](#rust-学习项目架构文档)
   - [目录](#目录)
@@ -42,13 +42,13 @@
 
 ## 项目概述
 >
-> **[来源: Rust Official Docs]** · **[来源: Rust Reference]** · **[来源: TRPL]** · **[来源: Rustonomicon]** · **[来源: Rust Project Goals 2026]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)**
 
 本项目是一个全面的 Rust 语言系统化学习资源，采用 Workspace 架构组织，包含 12 个核心学习 crate 和 1 个共享库 crate。
 
 ### 设计原则
 >
-> **[来源: Rust Official Docs]** · **[来源: Rust Reference]** · **[来源: TRPL]** · **[来源: Rustonomicon]** · **[来源: Rust Project Goals 2026]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)**
 
 1. **渐进式学习**: 从基础到高级，每个 crate 对应一个学习阶段
 2. **独立可运行**: 每个 crate 都可以独立编译和运行
@@ -464,20 +464,20 @@ sequenceDiagram
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

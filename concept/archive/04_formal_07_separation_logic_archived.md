@@ -1,3 +1,5 @@
+# 归档：分离逻辑
+
 > **EN**: Formal 07 Separation Logic Archived
 > **Summary**: Formal 07 Separation Logic Archived. Core Rust concept.
 > **内容分级**: [专家级]

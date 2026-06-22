@@ -54,7 +54,7 @@
 
 ## 🎯 文档宗旨 {#-文档宗旨}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档针对「安全与非安全缺乏全面论证和分析」的缺口，系统化补全：
 
@@ -68,13 +68,13 @@
 
 ## 一、安全与非安全定义与边界
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 形式化定义
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义 1.1（安全 Rust）**
 安全 Rust 指仅使用安全 API（无 `unsafe` 块、无 `unsafe fn` 调用、无 `unsafe trait` 实现）的代码子集。编译器对此子集提供**静态保证**。
@@ -87,9 +87,9 @@ unsafe Rust 指包含 `unsafe` 块、调用 `unsafe fn` 或实现 `unsafe trait`
 
 ### 1.2 边界图示
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 ┌──────────────────────────────────────────────────────────┐
@@ -116,9 +116,9 @@ unsafe Rust 指包含 `unsafe` 块、调用 `unsafe fn` 或实现 `unsafe trait`
 
 ### 1.3 为何需要 unsafe？
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 需求 | 安全子集 | unsafe 用途 |
 | :--- | :--- | :--- |
@@ -134,13 +134,13 @@ unsafe Rust 指包含 `unsafe` 块、调用 `unsafe fn` 或实现 `unsafe trait`
 
 ## 二、安全保证的形式化论证
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 安全保证定理汇总
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 保证 | 机制 | 定理 | 文档 |
 | :--- | :--- | :--- | :--- |
@@ -161,9 +161,9 @@ unsafe Rust 指包含 `unsafe` 块、调用 `unsafe fn` 或实现 `unsafe trait`
 
 ### 2.2 安全保证依赖链
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 所有权规则 1–3 ──→ 唯一性 T2 ──→ 内存安全 T3（无悬垂、无双重释放、无泄漏）
@@ -183,13 +183,13 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 
 ## 三、unsafe 契约体系
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 3.1 契约形式
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Hoare 三元组**：$\{P\}\; \text{unsafe\_op} \;\{Q\}$
 
@@ -198,7 +198,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 
 ### 3.2 典型 unsafe 操作契约表
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 | 操作 | 前置 P | 后置 Q | 说明 |
 | :--- | :--- | :--- | :--- |
@@ -218,7 +218,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 
 ### 3.3 契约违反后果
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 违反前置条件 → **未定义行为 (UB)**。编译器可假设前置条件成立，故可能产生任意优化、任意结果。
 
@@ -230,7 +230,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 
 ### 4.1 UB 分类
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 | 类别 | 说明 | 典型原因 |
 | :--- | :--- | :--- |
@@ -242,7 +242,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 
 ### 4.2 反例表
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 | 反例 | 违反契约 | 后果 |
 | :--- | :--- | :--- |
@@ -256,7 +256,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 
 ### 4.3 1.93 相关变更
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 变更 | 影响 | 文档 |
 | :--- | :--- | :--- |
@@ -272,13 +272,13 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 
 ### 5.1 定义
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **安全抽象**：内部使用 unsafe，对外仅暴露安全 API，且若调用者仅用安全 API，则不会触发 UB。
 
 ### 5.2 论证结构
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 1. **不变式**：抽象维持的不变式（如 Vec: len ≤ capacity）
 2. **安全 API 边界**：不暴露可破坏不变式的操作
@@ -287,7 +287,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 
 ### 5.3 典型安全抽象
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 | 抽象 | 内部 unsafe | 不变式 | 安全 API |
 | :--- | :--- | :--- | :--- |
@@ -299,7 +299,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 
 ### 5.4 安全抽象决策树
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```text
 需要提供底层能力？
@@ -432,9 +432,9 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Rustonomicon]**
-> **[来源: Rust Reference - Unsafe]**
-> **[来源: RFC 2585 - Unsafe Guidelines]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [Rust Reference - Unsafe](https://doc.rust-lang.org/reference/unsafe-blocks.html)**
+> **来源: [RFC 2585 - Unsafe Guidelines](https://rust-lang.github.io/rfcs/2585-2585-unsafe-block-in-unsafe-fn.html)**
 
 ---

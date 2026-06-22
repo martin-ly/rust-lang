@@ -44,13 +44,13 @@
 
 ## 一、统一形式系统总览
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1.1 核心机制与公理层
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 机制 | 公理/定义 | 子文档 |
 | :--- | :--- | :--- |
@@ -68,7 +68,7 @@
 
 ### 1.2 定理依赖 DAG（简化）
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```text
                     [公理层]
@@ -99,7 +99,7 @@
 
 ### 1.3 域间定理推导链（显式）
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | 推导链 | 依赖 | 结论 |
 | :--- | :--- | :--- |
@@ -111,7 +111,7 @@
 
 ### 1.4 公理→组合定理 DAG（支柱 1+3 衔接）
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```text
 [支柱 1 公理层]
@@ -148,7 +148,7 @@
 
 ### 2.1 内存与所有权
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 | 编号 | 内容 | 来源 |
 | :--- | :--- | :--- |
@@ -162,7 +162,7 @@
 
 ### 2.2 生命周期与类型
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 | 编号 | 内容 | 来源 |
 | :--- | :--- | :--- |
@@ -176,7 +176,7 @@
 
 ### 2.3 控制流与变量
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 编号 | 内容 | 来源 |
 | :--- | :--- | :--- |
@@ -186,7 +186,7 @@
 
 ### 2.4 异步与 Pin
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 | 编号 | 内容 | 来源 |
 | :--- | :--- | :--- |
@@ -267,13 +267,13 @@
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -325,18 +325,18 @@
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
-> **[来源: Wikipedia - Model Checking]**
+> **来源: [Wikipedia - Model Checking](https://en.wikipedia.org/wiki/Model_Checking)**
 
-> **[来源: ACM - Formal Verification Survey]**
+> **来源: [ACM - Formal Verification Survey](https://dl.acm.org/)**
 
-> **[来源: IEEE - Formal Specification Standards]**
+> **来源: [IEEE - Formal Specification Standards](https://standards.ieee.org/)**
 
-> **[来源: POPL - Automated Verification]**
+> **来源: [POPL - Automated Verification](https://www.sigplan.org/Conferences/POPL/)**
 
-> **[来源: RustBelt - Rust Formal Semantics]**
+> **来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)**
 
-> **[来源: TLA+ Documentation]**
+> **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**
 
 ---

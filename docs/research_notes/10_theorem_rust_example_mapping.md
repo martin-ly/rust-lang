@@ -58,7 +58,7 @@
 
 ## 📊 映射总览
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 领域 | 定理数量 | 示例数量 | 映射完成度 |
 |------|----------|----------|------------|
@@ -76,13 +76,13 @@
 
 ## 🧬 所有权系统定理映射
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### T-OW1: 所有权唯一性定理
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 定理: 任意时刻资源只有一个所有者
@@ -99,9 +99,9 @@ fn theorem_ow1_ownership_uniqueness() {
 
 ### T-OW2: 移动语义保持性定理
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 定理: 移动后原所有者不可用，新所有者获得完整权限
@@ -119,9 +119,9 @@ fn theorem_ow2_move_semantics() {
 
 ### T-OW3: 资源释放定理
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 定理: 资源离开作用域时自动释放 (RAII)
@@ -145,13 +145,13 @@ fn theorem_ow3_resource_release() {
 
 ## 🧬 借用检查定理映射
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### T-BR1: 借用安全性定理
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 定理: 借用期间数据始终有效且符合借用规则
@@ -174,9 +174,9 @@ fn theorem_br1_borrow_safety() {
 
 ### T-BR2: 可变借用排他性定理
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 定理: 可变借用提供独占访问权
@@ -194,13 +194,13 @@ fn theorem_br2_mutable_exclusivity(data: &mut Vec<i32>) {
 
 ## 🧬 类型系统定理映射
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### T-TY1: 类型安全定理 (进展性 + 保持性)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 定理: 良类型程序不会 stuck，且求值保持类型
@@ -220,9 +220,9 @@ fn theorem_ty1_type_safety() {
 
 ### T-TY2: 泛型单态化定理
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
 // 定理: 泛型代码在编译期实例化，零运行时开销
@@ -246,7 +246,7 @@ fn theorem_ty2_generic_monomorphization<T: std::fmt::Display>(x: T) {
 
 ### T-LT1: 生命周期包含定理
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust
 // 定理: 引用生命周期 ⊆ 被引用数据生命周期
@@ -266,7 +266,7 @@ fn theorem_lt1_lifetime_containment() -> String {
 
 ### T-LT2: 子类型替换定理
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 // 定理: 'long 可替换 'short (协变性)
@@ -287,7 +287,7 @@ fn theorem_lt2_subtyping<'a>(s: &'a str) -> &'static str {
 
 ### T-SS1: Send 安全性定理
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 // 定理: Send 类型可安全跨线程转移所有权
@@ -305,7 +305,7 @@ fn theorem_ss1_send_safety() {
 
 ### T-SS2: Sync 安全性定理
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 // 定理: Sync 类型可安全跨线程共享引用
@@ -328,7 +328,7 @@ fn theorem_ss2_sync_safety() {
 
 ### T-MT1: Mutex 安全性定理
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 // 定理: Mutex 保证数据竞争自由
@@ -357,7 +357,7 @@ fn theorem_mt1_mutex_safety() {
 
 ### T-FU1: Future 进展定理
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 // 定理: Future 会进展到完成或挂起
@@ -379,7 +379,7 @@ fn theorem_fu1_future_progress() {
 
 ### T-AS1: async/await 等价性定理
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust
 // 定理: async/await 是状态机语法糖，等价于手动实现 Future
@@ -396,7 +396,7 @@ fn manual_future() -> impl Future<Output = i32> {
 
 ### T-PI1: Pin 安全性定理
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```rust
 // 定理: Pin 保证自引用结构不会被移动
@@ -425,7 +425,7 @@ fn theorem_pi1_pin_safety() {
 
 ### T-SG1: Saga 最终一致性定理
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust
 // 定理: Saga 最终达到 Completed 或 Compensated 状态
@@ -443,7 +443,7 @@ async fn theorem_sg1_saga_eventual_consistency() {
 
 ### T-CB1: 熔断故障隔离定理
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust
 // 定理: 熔断器打开时阻止故障扩散
@@ -611,20 +611,20 @@ async fn theorem_cc1_compensation_consistency() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

@@ -71,13 +71,13 @@
 
 ## 一、终止性定理（Termination Theorem）
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: Wikipedia - Mathematical Theorem]** · **[来源: Wikipedia - Intuitionistic Logic]** · **[来源: ACM - Theorem Proving Intuition]** · **[来源: IEEE - Formal Reasoning Methods]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** · **来源: [Wikipedia - Mathematical Theorem](https://en.wikipedia.org/wiki/Mathematical_Theorem)** · **来源: [Wikipedia - Intuitionistic Logic](https://en.wikipedia.org/wiki/Intuitionistic_Logic)** · **[来源: ACM - Theorem Proving Intuition]** · **[来源: IEEE - Formal Reasoning Methods]**
 
 ### 1.1 定理陈述
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```coq
 Theorem borrow_checking_termination :
@@ -93,9 +93,9 @@ Theorem borrow_checking_termination :
 
 ### 1.2 直观理解
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **类比：整理书架**
 
@@ -110,7 +110,7 @@ Theorem borrow_checking_termination :
 
 ### 1.3 为什么这个定理重要？
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **实际意义**：
 
@@ -125,7 +125,7 @@ Theorem borrow_checking_termination :
 
 ### 1.4 证明策略详解
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **核心思想**：构造一个"度量"（measure），每次借用检查都严格减小这个度量。
 
@@ -159,7 +159,7 @@ Linearizable(Γ) =>
 
 ### 1.5 常见疑问
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **Q：所有 Rust 程序都满足 Linearizability 吗？**
 
@@ -177,7 +177,7 @@ Linearizable(Γ) =>
 
 ### 2.1 定理陈述
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```coq
 Theorem preservation :
@@ -196,7 +196,7 @@ Theorem preservation :
 
 ### 2.2 直观理解
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **类比：化学实验**
 
@@ -217,7 +217,7 @@ let y: i32 = x + 1;  // y 必须是 i32
 
 ### 2.3 为什么这个定理重要？
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **类型系统的核心保证**：
 
@@ -234,7 +234,7 @@ let x: i32 = some_function();
 
 ### 2.4 证明策略详解
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **核心方法**：对表达式 e 的结构进行归纳。
 
@@ -291,7 +291,7 @@ e = ELet ω x τ₁ e₁ e₂
 
 ### 2.5 技术难点
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **难点1：环境扩展**
 
@@ -316,7 +316,7 @@ e = ELet ω x τ₁ e₁ e₂
 
 ### 3.1 定理陈述
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```coq
 Theorem progress :
@@ -341,7 +341,7 @@ Theorem progress :
 
 ### 3.2 直观理解
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **类比：走迷宫**
 
@@ -365,7 +365,7 @@ y               // 已经是值：16
 
 ### 3.3 为什么这个定理重要？
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **程序不会"神秘停止"**：
 
@@ -385,7 +385,7 @@ y               // 已经是值：16
 
 ### 3.4 证明策略详解
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **核心方法**：对表达式的结构进行归纳。
 
@@ -448,7 +448,7 @@ e = ELet ω x τ₁ e₁ e₂
 
 ### 3.5 卡住（Stuck）vs 错误（Error）
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **区别**：
 
@@ -473,7 +473,7 @@ Definition is_stuck (e : expr) : Prop :=
 
 ### 4.1 定理陈述
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```coq
 Theorem type_safety :
@@ -494,7 +494,7 @@ Theorem type_safety :
 
 ### 4.2 直观理解
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **类型安全 = 保持性 + 进展**
 
@@ -513,7 +513,7 @@ Theorem type_safety :
 
 ### 4.3 为什么这个定理是"圣杯"
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 类型安全定理是编程语言理论中的"圣杯"，因为它保证了：
 
@@ -531,7 +531,7 @@ Theorem type_safety :
 
 ### 4.4 与 Rust 的关系
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 Rust 的类型系统就是围绕类型安全设计的：
 
@@ -555,7 +555,7 @@ let x: &i32;
 
 ### 5.1 定理陈述
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```coq
 Theorem rust_type_system_decidable :
@@ -569,7 +569,7 @@ Theorem rust_type_system_decidable :
 
 ### 5.2 直观理解
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **类比：考试评分**
 
@@ -589,7 +589,7 @@ Theorem rust_type_system_decidable :
 
 ### 5.3 为什么这个定理重要？
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **实际意义**：
 
@@ -604,7 +604,7 @@ Theorem rust_type_system_decidable :
 
 ### 5.4 证明策略
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 **核心思想**：构造一个算法（函数）来进行类型检查。
 
@@ -638,7 +638,7 @@ type_check(Δ, Γ, Θ, e, τ):
 
 ### 6.1 定理陈述
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```coq
 Theorem borrow_check_equivalent_to_ownership_safety :
@@ -1003,17 +1003,17 @@ Lineariz. ───┘
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **[来源: TRPL Ch. 4 - Ownership]**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
 
-> **[来源: Rustonomicon - Ownership]**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---

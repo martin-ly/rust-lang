@@ -15,7 +15,7 @@
 
 ## 目录
 
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Cargo 与 TOML v1.1 新特性指南](#cargo-与-toml-v11-新特性指南)
   - [目录](#目录)
@@ -51,7 +51,7 @@
 
 ## 1. TOML 版本演进
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 timeline
@@ -68,9 +68,9 @@ timeline
 
 ### 为什么 Cargo 需要跟进 TOML v1.1
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 维度 | TOML v1.0 | TOML v1.1 | 对 Cargo 的影响 |
 |------|----------|----------|----------------|
@@ -83,13 +83,13 @@ timeline
 
 ## 2. TOML v1.1 核心新特性
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 多行内联表 (Multi-line Inline Tables)
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **TOML v1.0 — 只能单行**：
 
@@ -118,9 +118,9 @@ description = "A very long description"
 
 ### 2.2 尾部逗号 (Trailing Commas)
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```toml
 # ✅ TOML v1.1 允许尾部逗号 — 减少 git diff 噪音
@@ -148,9 +148,9 @@ serde = { version = "1.0", default-features = false, features = ["derive",] }
 
 ### 2.3 扩展裸键规则 (Extended Bare Keys)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```toml
 # ✅ TOML v1.1 允许更多字符作为裸键
@@ -170,13 +170,13 @@ path = "../my-lib"
 
 ## 3. 在 Cargo.toml 中的实际应用
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 3.1 复杂依赖配置
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```toml
 # Cargo.toml
@@ -214,9 +214,9 @@ windows-sys = { version = "0.59", features = [
 
 ### 3.2 Workspace 成员配置
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```toml
 # Cargo.toml (workspace root)
@@ -242,9 +242,9 @@ tower = { version = "0.5", default-features = false }
 
 ### 3.3 Profile 配置优化
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```toml
 [profile.dev]
@@ -270,7 +270,7 @@ opt-level = 2          # 测试运行更快，编译仍可接受
 
 ### 4.1 向后兼容性保证
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```mermaid
 flowchart LR
@@ -289,7 +289,7 @@ flowchart LR
 
 ### 4.2 团队协作注意事项
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 | 场景 | 建议 |
 |------|------|
@@ -313,7 +313,7 @@ rust-version = "1.96.0"  # ← 1.96+：使用 TOML v1.1 语法
 
 ### 5.1 底层解析器升级
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 Cargo 1.96 将 `toml_edit` 依赖升级至支持 TOML v1.1 的版本：
 
@@ -326,7 +326,7 @@ Cargo 1.96 将 `toml_edit` 依赖升级至支持 TOML v1.1 的版本：
 
 ### 5.2 `cargo add` 的行为变化
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```bash
 # Cargo 1.96+ 默认使用多行格式添加复杂依赖
@@ -343,7 +343,7 @@ tokio = { version = "1.43", features = [
 
 ### 5.3 诊断改进
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```bash
 # TOML 解析错误现在提供更精确的定位
@@ -366,7 +366,7 @@ Caused by:
 
 ### 6.1 ✅ 推荐做法
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```toml
 # 1. 复杂依赖使用多行内联表
@@ -389,7 +389,7 @@ common-error = { path = "crates/common-error" }
 
 ### 6.2 ❌ 避免的做法
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```toml
 # 1. 不要为了多行而多行 — 简单配置保持单行
@@ -413,7 +413,7 @@ opt-level = 3
 
 ### 6.3 决策流
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```mermaid
 flowchart TD
@@ -485,20 +485,20 @@ flowchart TD
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Compiler Construction]**
+> **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)**
 
-> **[来源: Rust Compiler Team Blog]**
+> **来源: [Rust Compiler Team Blog](https://blog.rust-lang.org/inside-rust/)**
 
-> **[来源: LLVM Documentation]**
+> **来源: [LLVM Documentation](https://llvm.org/docs/)**
 
-> **[来源: ACM - Compiler Design]**
+> **来源: [ACM](https://dl.acm.org/)**
 
-> **[来源: Wikipedia - Build Automation]**
+> **来源: [Wikipedia - Build Automation](https://en.wikipedia.org/wiki/Build_Automation)**
 
-> **[来源: Cargo Book]**
+> **来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)**
 
-> **[来源: Rust Reference - Cargo]**
+> **来源: [Rust Reference - Cargo](https://doc.rust-lang.org/cargo/)**
 
-> **[来源: crates.io Documentation]**
+> **来源: [crates.io Documentation](https://crates.io/)**
 
 ---

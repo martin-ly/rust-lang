@@ -11,7 +11,7 @@
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×App — 应用设计模式解决类型安全问题
 > **前置概念**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Type System](../01_foundation/04_type_system.md) [来源: [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/)]
-> **主要来源**: [Rust API Guidelines] · [Rust Design Patterns] · [TRPL]
+> **主要来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-lang.github.io/design-patterns/) · [The Rust Programming Language](https://doc.rust-lang.org/book/)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [TRPL — Patterns](https://doc.rust-lang.org/book/ch18-00-patterns.html) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
@@ -29,15 +29,15 @@
 
 ## 一、权威定义
 
-> **[Rust Design Patterns]** Rust design patterns are recurring solutions to common problems in software design using the Rust programming language. They leverage Rust's unique features such as ownership, traits, and the type system.
+> **[Rust Design Patterns](https://rust-lang.github.io/design-patterns/)** Rust design patterns are recurring solutions to common problems in software design using the Rust programming language. They leverage Rust's unique features such as ownership, traits, and the type system.
 
-> **[Wikipedia — Design pattern]** A design pattern is the re-usable form of a solution to a design problem. The idea was introduced by the architect Christopher Alexander and has been adapted for various other disciplines, most notably computer science.
+> **[Wikipedia — Design pattern](https://en.wikipedia.org/wiki/Design_pattern)** A design pattern is the re-usable form of a solution to a design problem. The idea was introduced by the architect Christopher Alexander and has been adapted for various other disciplines, most notably computer science.
 > **来源**: <https://en.wikipedia.org/wiki/Design_pattern>
 
-> **[Wikipedia — Resource acquisition is initialization (RAII)]** Resource acquisition is initialization (RAII) is a programming idiom used in several object-oriented, statically-typed programming languages to describe a particular language behavior. In RAII, holding a resource is a class invariant, and is tied to object lifetime: resource allocation (or acquisition) is done during object creation (specifically initialization), by the constructor, while resource deallocation (release) is done during object destruction (specifically finalization), by the destructor. In other words, resource acquisition must succeed for initialization to succeed.
+> **[Wikipedia — Resource acquisition is initialization (RAII)](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization_(RAII))** Resource acquisition is initialization (RAII) is a programming idiom used in several object-oriented, statically-typed programming languages to describe a particular language behavior. In RAII, holding a resource is a class invariant, and is tied to object lifetime: resource allocation (or acquisition) is done during object creation (specifically initialization), by the constructor, while resource deallocation (release) is done during object destruction (specifically finalization), by the destructor. In other words, resource acquisition must succeed for initialization to succeed.
 > **来源**: <https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization>
 
-> **[Wikipedia — Typestate analysis]** Typestate analysis is a technique to do static reasoning about the states of objects. It can be seen as an extension of type systems where the type of an object changes as operations are performed on it.
+> **[Wikipedia — Typestate analysis](https://en.wikipedia.org/wiki/Typestate_analysis)** Typestate analysis is a technique to do static reasoning about the states of objects. It can be seen as an extension of type systems where the type of an object changes as operations are performed on it.
 > **来源**: <https://en.wikipedia.org/wiki/Typestate_analysis>
 
 > **认知路径（6步递进）**
@@ -81,7 +81,7 @@
 | **Plugin** | 结构型 | 运行时扩展能力 | `dyn Trait` + 注册表 | 模块热插拔 |
 | **Observer** | 行为型 | 一对多状态通知 | `Vec<Box<dyn Fn(&T)>>` / `broadcast` / `event-listener` | 解耦状态变化与响应 |
 
-> **来源**: [Rust Design Patterns] · [GoF Design Patterns] · 可信度: ✅
+> **来源**: [Rust Design Patterns](https://rust-lang.github.io/design-patterns/) · [GoF Design Patterns] · 可信度: ✅
 
 ### 2.3 断言/推理矩阵
 
@@ -188,7 +188,7 @@ impl Invoker {
 - **Java/C++**: 通常依赖 GC 或智能指针管理命令对象生命周期；Rust 需显式处理所有权，`Box<dyn Command>` 提供了堆分配动态分发。
 - **Go**: 使用函数值或接口；Rust 的 trait 对象在 vtable 布局上与 Go interface 类似，但 Rust 要求显式 `Box`/`&dyn`。
 
-> **来源**: [GoF Design Patterns] · [Rust Design Patterns] · 可信度: ✅
+> **来源**: [GoF Design Patterns] · [Rust Design Patterns](https://rust-lang.github.io/design-patterns/) · 可信度: ✅
 
 ### 4.2 Visitor 模式
 
@@ -280,7 +280,7 @@ classDiagram
 - **Java/C++**: 经典双重分发（`accept` + `visit`）；Rust 通过 `match` 枚举实现单分发，避免虚函数膨胀，但无法直接扩展现有 enum 的变体（需用 enum/struct 模拟开放访问者）。
 - **Haskell**: 利用类型类（type class）和代数数据类型直接建模，Rust 的 enum + trait 在表达能力上非常接近。
 
-> **来源**: [GoF Design Patterns] · [Rust Design Patterns] · 可信度: ✅
+> **来源**: [GoF Design Patterns] · [Rust Design Patterns](https://rust-lang.github.io/design-patterns/) · 可信度: ✅
 
 ### 4.3 Strategy 模式
 
@@ -342,7 +342,7 @@ impl<S: PaymentStrategy> ShoppingCart<S> {
 - **Java**: 接口 + 多态；无静态分发零成本特性，所有策略均为动态。
 - **Go**: 接口值隐式实现；Rust trait 需显式实现，静态分发默认内联。
 
-> **来源**: [GoF Design Patterns] · [TRPL] · 可信度: ✅
+> **来源**: [GoF Design Patterns] · [The Rust Programming Language](https://doc.rust-lang.org/book/) · 可信度: ✅
 
 ### 4.4 State Machine 模式
 
@@ -417,7 +417,7 @@ impl Connection<Open> {
 - **Rust**: `match` 穷尽性检查强制处理所有状态；Typestate 变体将非法转换上移至编译期。
 - **TypeScript**: 可用 discriminated union 模拟，但运行期仍可能处于无效状态。
 
-> **来源**: [Rust Design Patterns] · [TRPL] · 可信度: ✅
+> **来源**: [Rust Design Patterns](https://rust-lang.github.io/design-patterns/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · 可信度: ✅
 
 ### 4.5 Plugin 模式
 >
@@ -477,7 +477,7 @@ unsafe {
 - **Java**: `ServiceLoader` / OSGi 模块化；Rust 无内置类加载器，需手动管理动态库生命周期。
 - **C/C++**: `dlopen` / `LoadLibrary`；Rust 的 `libloading` 是对这些 API 的安全封装。
 
-> **来源**: [Rust API Guidelines] · [libloading docs] · 可信度: ✅
+> **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [libloading docs] · 可信度: ✅
 
 > **过渡**：从静态分发的Strategy到动态加载的Plugin，Rust的模式谱系覆盖了编译期到运行时的全生命周期。理解这些实现机制后，必须警惕其对立面——反模式。
 [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
@@ -561,9 +561,9 @@ impl TemperatureDisplay {
 }
 ```
 
-**关键洞察**：`Weak<T>` 不增加引用计数，当 Subject 被释放时，`upgrade()` 返回 `None`，Observer 自动失效。这避免了 `Rc`/`Arc` 循环引用导致的内存泄漏。[来源: TRPL Ch.15 — Smart Pointers] · [Rust API Guidelines]
+**关键洞察**：`Weak<T>` 不增加引用计数，当 Subject 被释放时，`upgrade()` 返回 `None`，Observer 自动失效。这避免了 `Rc`/`Arc` 循环引用导致的内存泄漏。来源: [TRPL Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 
-> **[来源: TRPL]** `Rc::downgrade` 产生 `Weak<T>`，允许引用而不拥有所有权，是打破循环引用的标准手段。✅
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** `Rc::downgrade` 产生 `Weak<T>`，允许引用而不拥有所有权，是打破循环引用的标准手段。✅
 
 ---
 
@@ -692,7 +692,7 @@ impl ThreadSafeSubject {
 
 `Weak<T>` 在此起到关键作用：它允许 Observer 引用 Subject（或反之）而不增加强引用计数，从而保证当所有强引用消失时，资源可以被确定性释放。[来源: `../01_foundation/02_borrowing.md`](../01_foundation/02_borrowing.md) · [`../02_intermediate/03_memory_management.md`](../02_intermediate/03_memory_management.md)
 
-> **[来源: Rust API Guidelines]** 当需要共享所有权且可能存在循环引用时，优先使用 `Weak` 打破循环，避免内存泄漏。✅
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** 当需要共享所有权且可能存在循环引用时，优先使用 `Weak` 打破循环，避免内存泄漏。✅
 
 ---
 
@@ -736,7 +736,7 @@ fn display_system(mut reader: EventReader<TemperatureChanged>) { [来源: [Rusto
 - **C++**: `std::shared_ptr` + `std::weak_ptr` 与 Rust 的 `Rc`/`Weak` 机制类似，但 Rust 的 borrow checker 额外防止了数据竞争。
 - **Go**: 使用 channel 实现发布-订阅，无所有权循环问题，但丧失了编译期类型安全（`interface{}` 类型断言）。
 
-> **来源**: [GoF Design Patterns] · [Rust API Guidelines] · [Bevy Docs] · 可信度: ✅
+> **来源**: [GoF Design Patterns] · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Bevy Docs] · 可信度: ✅
 
 > **过渡**：从动态加载的 Plugin 到事件驱动的 Observer，Rust 的模式谱系覆盖了编译期到运行时的全生命周期。理解这些实现机制后，必须警惕其对立面——反模式。
 [来源: [Async Book](https://rust-lang.github.io/async-book/)]
@@ -746,7 +746,7 @@ fn display_system(mut reader: EventReader<TemperatureChanged>) { [来源: [Rusto
 
 #### GATs（Generic Associated Types）模式
 
-**[Rust RFC 1598]** Generic Associated Types allow type constructors to be associated with traits, enabling patterns previously impossible in Rust's type system.
+**[Rust RFC 1598](https://github.com/rust-lang/rfcs/pull/1598)** Generic Associated Types allow type constructors to be associated with traits, enabling patterns previously impossible in Rust's type system.
 
 | **模式** | **GATs 解决的核心问题** | **典型应用** |
 |:---|:---|:---|
@@ -778,7 +778,7 @@ impl<'a, T> LendingIterator for Windows<'a, T> {
 }
 ```
 
-> **来源**: [RFC 1598 — GATs] · [Rust Design Patterns] · 可信度: ✅
+> **来源**: [RFC 1598 — GATs](https://github.com/rust-lang/rfcs/pull/1598) · [Rust Design Patterns] · 可信度: ✅
 
 #### Type Erasure（类型擦除）模式
 
@@ -884,7 +884,7 @@ impl Drop for FooContext {
 > **关键洞察**: FFI 安全封装的三层防线——**前置条件检查**（输入验证）、**不变式维护**（生命周期管理）、**后置条件保证**（返回值校验）。Rust 的类型系统负责编码不变式，运行时检查负责验证前置条件。
 [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
-> **来源**: [The Rustonomicon — FFI] · [Rust FFI Guidelines] · 可信度: ✅
+> **来源**: [The Rustonomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html) · [Rust FFI Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) · 可信度: ✅
 
 ### 4.9 错误处理模式对比：thiserror / miette / snafu
 >
@@ -1021,7 +1021,7 @@ fn to_json<T: serde::Serialize>(input: T) -> Result<Vec<u8>, serde_json::Error> 
 
 > **Bloom 层级**: 分析
 
-**定义**：在问题域尚未稳定、需求尚不清晰时建立抽象边界，导致后续修改牵一发而动全身。[来源: Rust API Guidelines]
+**定义**：在问题域尚未稳定、需求尚不清晰时建立抽象边界，导致后续修改牵一发而动全身。来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 
 **Rust 表现**：
 
@@ -1063,7 +1063,7 @@ impl Transport {
 
 **三次法则（Rule of Three）的 Rust 适配**：
 
-> **[来源: Rust API Guidelines]** "不要为第一次出现的情况抽象；甚至不要为第二次；第三次出现时，抽象的成本才被摊薄。"
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** "不要为第一次出现的情况抽象；甚至不要为第二次；第三次出现时，抽象的成本才被摊薄。"
 
 | 出现次数 | 推荐做法 | Rust 机制 |
 |:---|:---|:---|
@@ -1083,7 +1083,7 @@ impl Transport {
 
 > **Bloom 层级**: 应用
 
-**定义**：使用字符串替代强类型来表示结构化数据或枚举状态，丧失编译期检查能力。[来源: Rust API Guidelines — Type Safety]
+**定义**：使用字符串替代强类型来表示结构化数据或枚举状态，丧失编译期检查能力。来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 
 **Rust 表现**：
 
@@ -1131,7 +1131,7 @@ fn run_command(cmd: Command) {
 
 > **Bloom 层级**: 分析
 
-**定义**：一个对象或结构体掌握了过多职责和状态，成为系统中所有操作的中心枢纽，违反单一职责原则。[来源: Rust API Guidelines — Structs]
+**定义**：一个对象或结构体掌握了过多职责和状态，成为系统中所有操作的中心枢纽，违反单一职责原则。来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 
 **Rust 表现**：
 
@@ -1187,7 +1187,7 @@ async fn handler(db: &DatabaseLayer, sessions: &SessionLayer) { /* ... */ }
 
 > **Bloom 层级**: 分析
 
-**定义**：控制流和数据流纠缠不清，模块间依赖关系呈网状而非树状，导致理解局部代码必须遍历全局系统。[来源: Wikipedia — Spaghetti code]
+**定义**：控制流和数据流纠缠不清，模块间依赖关系呈网状而非树状，导致理解局部代码必须遍历全局系统。来源: [Wikipedia — Spaghetti code](https://en.wikipedia.org/wiki/Spaghetti_code)
 
 **Rust 表现**：
 
@@ -1419,7 +1419,7 @@ fn main() {
 | *Typestates for Objects* (Aldrich et al., 2009) | Jonathan Aldrich et al. | 将 Typestate 引入面向对象语言 | Rust 的 PhantomData + 泛型是 Typestate 的工业级实现 |
 | *Ownership Types for Flexible Alias Protection* (Clarke et al., 1998) | Dave Clarke et al. | 所有权类型理论基础 | 支撑 RAII 和线性资源管理的学术研究 |
 
-> **来源**: [GoF Book] · [Rust API Guidelines] · [Typestates for Objects](https://dl.acm.org/doi/10.1145/1640089.1640095) · 可信度: ✅
+> **来源**: [GoF Book] · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Typestates for Objects](https://dl.acm.org/doi/10.1145/1640089.1640095) · 可信度: ✅
 
 ---
 
@@ -1427,25 +1427,25 @@ fn main() {
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
-| RAII 是 Rust 核心模式 | [TRPL] · [Wikipedia: RAII] | ✅ |
+| RAII 是 Rust 核心模式 | [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Wikipedia: RAII](https://en.wikipedia.org/wiki/RAII) | ✅ |
 | Typestate 利用类型系统 | [Rust Design Patterns] · [Aldrich et al. 2009] | ✅ |
-| Newtype 零成本 | [TRPL] · [Rust Reference] | ✅ |
+| Newtype 零成本 | [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ |
 | Command/Visitor/Strategy 为 GoF 经典模式 | [GoF Design Patterns, 1994] | ✅ |
-| Stringly typed 为反模式 | [Rust API Guidelines] | ✅ |
-| Over-engineering 定义与检测 | [Rust API Guidelines] · [Rust Design Patterns — Gold Plating] | ✅ |
-| Premature abstraction 与三次法则 | [Rust API Guidelines] · [TRPL] | ✅ |
-| God Object 违反单一职责 | [Rust API Guidelines — Structs] | ✅ |
-| Spaghetti Code 形式化定义 | [Wikipedia — Spaghetti code] | ✅ |
-| 设计模式定义 | [Wikipedia: Design pattern] | ✅ |
-| Typestate analysis 定义 | [Wikipedia: Typestate analysis] | ✅ |
+| Stringly typed 为反模式 | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | ✅ |
+| Over-engineering 定义与检测 | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns — Gold Plating] | ✅ |
+| Premature abstraction 与三次法则 | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) | ✅ |
+| God Object 违反单一职责 | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | ✅ |
+| Spaghetti Code 形式化定义 | [Wikipedia — Spaghetti code](https://en.wikipedia.org/wiki/Spaghetti_code) | ✅ |
+| 设计模式定义 | [Wikipedia: Design pattern](https://en.wikipedia.org/wiki/Design_pattern) | ✅ |
+| Typestate analysis 定义 | [Wikipedia: Typestate analysis](https://en.wikipedia.org/wiki/Typestate_analysis) | ✅ |
 | 所有权类型理论基础 | [Clarke et al. 1998 — Ownership Types] | ✅ |
 | CMU 课程涵盖设计模式 | [CMU 17-363 — PL Concepts] | ✅ |
 | Stanford 课程涵盖 Rust 模式 | [Stanford CS340R] | ✅ |
-| Rust API 设计规范 | [Rust API Guidelines] | ✅ |
+| Rust API 设计规范 | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | ✅ |
 | 设计模式系统化 | [Gamma et al. 1994 — Design Patterns: Elements of Reusable Object-Oriented Software] | ✅ |
 | Typestate 工业实现 | [Aldrich et al. 2009 — Typestates for Objects, ECOOP] | ✅ |
 | Observer 模式定义 | [GoF Design Patterns, 1994] | ✅ |
-| Weak 打破循环引用 | [TRPL] · [Rust API Guidelines] | ✅ |
+| Weak 打破循环引用 | [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | ✅ |
 
 ---
 
@@ -1512,15 +1512,15 @@ fn main() {
 - [x] **高**: 补充 Observer 模式 —— 已完成 §4.6，2026-05-14
 - [x] **低**: 补充反模式（Over-engineering、Premature abstraction）—— 已完成 §5.1–5.5，2026-05-14
 
-> **[来源: Rust Design Patterns Book; Rust API Guidelines; Rust Performance Book]** 设计模式的分析基于 Rust 官方和社区最佳实践。✅
+> **来源: Rust Design Patterns Book; [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/); Rust Performance Book** 设计模式的分析基于 Rust 官方和社区最佳实践。✅
 
-> **[来源: Wikipedia — Design pattern; Wikipedia — RAII; Wikipedia — Typestate]** 通用概念定义参考了 Wikipedia，结合 Rust 特定实现进行了工程化解读。✅
+> **来源: [Wikipedia — Design pattern; Wikipedia — RAII; Wikipedia — Typestate](https://en.wikipedia.org/wiki/Design_pattern%3B_Wikipedia_%E2%80%94_RAII%3B_Wikipedia_%E2%80%94_Typestate)** 通用概念定义参考了 Wikipedia，结合 Rust 特定实现进行了工程化解读。✅
 
-> **[来源: Rust Design Patterns Book; Rust API Guidelines; Rust Performance Book; TRPL Ch.15]** 设计模式分析基于官方设计模式库和性能指南。✅
+> **来源: Rust Design Patterns Book; [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/); Rust Performance Book; [TRPL Ch.15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)** 设计模式分析基于官方设计模式库和性能指南。✅
 
-> **[来源: Wikipedia — Design pattern; Wikipedia — RAII; Wikipedia — Typestate analysis]** 通用模式概念参考了 Wikipedia 权威定义。✅
+> **来源: [Wikipedia — Design pattern; Wikipedia — RAII; Wikipedia — Typestate analysis](https://en.wikipedia.org/wiki/Design_pattern%3B_Wikipedia_%E2%80%94_RAII%3B_Wikipedia_%E2%80%94_Typestate_analysis)** 通用模式概念参考了 Wikipedia 权威定义。✅
 
-> **[来源: RFC 1598 GATs; RFC 1210 Specialization; Rust Reference: Generics]** 高级模式的技术细节有 RFC 支撑。✅
+> **来源: [RFC 1598 GATs; RFC 1210 Specialization; Rust Reference: Generics](https://github.com/rust-lang/rfcs/pull/1598)** 高级模式的技术细节有 RFC 支撑。✅
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

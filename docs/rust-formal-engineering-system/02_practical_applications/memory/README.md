@@ -10,7 +10,7 @@
 
 ## 知识结构思维导图
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```mermaid
 mindmap
@@ -35,7 +35,7 @@ mindmap
 
 ## 与核心文档的关联
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 本文档 | 核心文档 | 关系 |
 | :--- | :--- | :--- |
@@ -48,11 +48,11 @@ mindmap
 
 ## Rust 内存管理模型
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 所有权驱动的内存管理
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 // 栈分配：自动管理
@@ -71,7 +71,7 @@ fn heap_allocation() {
 
 ### 智能指针
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 use std::rc::Rc;
@@ -109,7 +109,7 @@ fn refcell_demo() {
 
 ### 零成本抽象
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 // 迭代器是零成本抽象
@@ -128,7 +128,7 @@ fn zero_cost_iter() {
 
 ### 自定义智能指针与 Drop  trait
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust
 use std::ops::Deref;
@@ -172,7 +172,7 @@ fn custom_smart_pointer_demo() {
 
 ### 内存池与对象复用
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust
 use std::sync::Mutex;
@@ -236,7 +236,7 @@ fn object_pool_demo() {
 
 ### 实验分析
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -287,16 +287,16 @@ fn object_pool_demo() {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
-> **[来源: Wikipedia - Model Checking]**
+> **来源: [Wikipedia - Model Checking](https://en.wikipedia.org/wiki/Model_Checking)**
 
-> **[来源: ACM - Formal Verification Survey]**
+> **来源: [ACM - Formal Verification Survey](https://dl.acm.org/)**
 
-> **[来源: IEEE - Formal Specification Standards]**
+> **来源: [IEEE - Formal Specification Standards](https://standards.ieee.org/)**
 
-> **[来源: POPL - Automated Verification]**
+> **来源: [POPL - Automated Verification](https://www.sigplan.org/Conferences/POPL/)**
 
-> **[来源: RustBelt - Rust Formal Semantics]**
+> **来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)**
 
-> **[来源: TLA+ Documentation]**
+> **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**

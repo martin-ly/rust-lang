@@ -11,7 +11,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference - Traits]** · **[来源: Wikipedia - Trait-based Programming]** · **[来源: RFC 255 - Trait Aliases]** · **[来源: TRPL Ch. 10]** · **[来源: Wikipedia - Type Class]** · **[来源: Rust API Guidelines]** · **[来源: Wikipedia - Trait (computer programming)]** · **[来源: Wikipedia - Polymorphism]** · **[来源: ACM - Trait-Based Language Design]** · **[来源: IEEE - Interface Specification Standards]**
+> **来源: [Rust Reference - Traits](https://doc.rust-lang.org/reference/items/traits.html)** · **来源: [Wikipedia - Trait-based Programming](https://en.wikipedia.org/wiki/Trait_based_Programming)** · **来源: [RFC 255 - Trait Aliases](https://github.com/rust-lang/rfcs/pull/255)** · **来源: [TRPL Ch. 10](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)** · **来源: [Wikipedia - Type Class](https://en.wikipedia.org/wiki/Type_Class)** · **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** · **来源: [Wikipedia - Trait (computer programming)](https://en.wikipedia.org/wiki/Trait_(computer_programming))** · **来源: [Wikipedia - Polymorphism](https://en.wikipedia.org/wiki/Polymorphism)** · **[来源: ACM - Trait-Based Language Design]** · **[来源: IEEE - Interface Specification Standards]**
 
 - [Trait 系统详解](#trait-系统详解)
   - [目录](#目录)
@@ -71,13 +71,13 @@
 
 ## 1. 形式化定义
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 1.1 Trait 的形式化模型
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **定义 1.1** (Trait): Trait 是定义类型行为的接口，可以包含方法签名、关联类型、关联常量等。
 
@@ -107,7 +107,7 @@ T: ?Sized  ≡  T 可以是动态大小类型
 
 ### 1.2 Trait 与类型系统的关系
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```
 类型层次结构:
@@ -131,7 +131,7 @@ T: ?Sized  ≡  T 可以是动态大小类型
 
 ### 2.1 基本泛型语法
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust
 // 函数泛型
@@ -161,7 +161,7 @@ impl<T> Point<T> {
 
 ### 2.2 Trait Bound 详解
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 // 简单 trait bound
@@ -196,7 +196,7 @@ where
 
 ### 2.3 生命周期与泛型
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 // 泛型与生命周期结合
@@ -225,7 +225,7 @@ where
 
 ### 2.4 默认泛型参数
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 trait Add<Rhs = Self> {
@@ -252,7 +252,7 @@ impl Add<f64> for Point {
 
 ### 2.5 泛型的单态化
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 Rust 使用单态化实现泛型，为每个具体类型生成专门的代码：
 
@@ -277,7 +277,7 @@ identity(String::new()); // 调用 identity_string
 
 ### 3.1 关联类型的形式化定义
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **定义 3.1** (关联类型): 关联类型是 trait 中定义的类型占位符，由实现者指定具体类型。
 
@@ -299,7 +299,7 @@ impl Iterator for Counter {
 
 ### 3.2 关联类型 vs 泛型参数
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 // 泛型参数版本
@@ -325,7 +325,7 @@ trait AssociatedProcessor {
 
 ### 3.3 关联类型的约束
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust,ignore
 trait Graph {
@@ -352,7 +352,7 @@ impl Graph for MyGraph {
 
 ### 3.4 关联常量
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 trait Shape {
@@ -385,7 +385,7 @@ impl Shape for Square {
 
 ### 4.1 Trait 对象的形式化定义
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **定义 4.1** (Trait Object): Trait 对象是实现了特定 trait 的具体类型的擦除类型，表示为 `dyn Trait`。
 
@@ -403,7 +403,7 @@ fn dynamic_dispatch(item: &dyn Drawable) {
 
 ### 4.2 Trait 对象的内存布局
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust
 // &dyn Trait 的内存布局
@@ -425,7 +425,7 @@ fn dynamic_dispatch(item: &dyn Drawable) {
 
 ### 4.3 对象安全 (Object Safety)
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 不是所有 trait 都可以作为 trait 对象使用。一个 trait 是对象安全的，当且仅当：
 
@@ -455,7 +455,7 @@ trait ObjectSafe {
 
 ### 4.4 动态分发的使用场景
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```rust,ignore
 // 场景 1: 异构集合
@@ -489,7 +489,7 @@ struct EventSystem {
 
 ### 4.5 静态分发 vs 动态分发
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 | 特性 | 静态分发 (`impl Trait`/泛型) | 动态分发 (`dyn Trait`) |
 |------|------------------------------|------------------------|
@@ -519,7 +519,7 @@ fn process_dynamic(p: &dyn Processor) {
 
 ### 5.1 完全限定语法
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```rust
 trait Animal {
@@ -551,7 +551,7 @@ fn main() {
 
 ### 5.2 超 trait (Supertraits)
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
 // Pet 是 Animal 的子 trait
@@ -577,7 +577,7 @@ impl Pet for Cat {
 
 ### 5.3 关联类型构造函数
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 trait Collection {
@@ -607,7 +607,7 @@ impl<T> Collection for MyVec<T> {
 
 ### 5.4 泛型特化（不稳定特性）
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
 #![feature(min_specialization)]
@@ -633,7 +633,7 @@ impl ToDebugString for String {
 
 ### 5.5 自动 trait
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```rust,ignore
 // 自动 trait（以前叫 OIBIT）
@@ -658,7 +658,7 @@ impl !Sync for RawPointer {}
 
 ### 陷阱 1: 孤儿规则 (Orphan Rules)
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 // ❌ 编译错误：违反孤儿规则
@@ -697,7 +697,7 @@ impl MyDisplay for Vec<i32> {
 
 ### 陷阱 2: 递归类型限制
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ```rust,ignore
 // ❌ 编译错误：递归类型没有固定大小
@@ -726,7 +726,7 @@ enum Json {
 
 ### 陷阱 3: 生命周期推断失败
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```rust
 // ❌ 编译错误：生命周期不明确
@@ -1395,15 +1395,15 @@ Rust 的 trait 系统是类型系统的核心，提供了：
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Trait (computer programming)]**
+> **来源: [Wikipedia - Trait (computer programming)](https://en.wikipedia.org/wiki/Trait_(computer_programming))**
 
-> **[来源: Wikipedia - Type Class]**
+> **来源: [Wikipedia - Type Class](https://en.wikipedia.org/wiki/Type_Class)**
 
-> **[来源: Wikipedia - Polymorphism]**
+> **来源: [Wikipedia - Polymorphism](https://en.wikipedia.org/wiki/Polymorphism)**
 
-> **[来源: Rust Reference - Traits]**
+> **来源: [Rust Reference - Traits](https://doc.rust-lang.org/reference/items/traits.html)**
 
-> **[来源: TRPL Ch. 10 - Generic Types, Traits]**
+> **来源: [TRPL Ch. 10 - Generic Types, Traits](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)**
 
 > **[来源: ACM - Trait-Based Language Design]**
 
@@ -1411,13 +1411,13 @@ Rust 的 trait 系统是类型系统的核心，提供了：
 
 > **[来源: Wadler - Theorems for Free! (1989)]**
 
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: TRPL Ch. 4 - Ownership]**
-> **[来源: Rustonomicon - Ownership]**
-> **[来源: POPL 2018 - RustBelt]**
-> **[来源: Wikipedia - Machine Learning]**
-> **[来源: Wikipedia - Artificial Intelligence]**
-> **[来源: tch-rs Documentation]**
-> **[来源: ACM - AI Systems]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
+> **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
+> **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)**
+> **来源: [tch-rs Documentation](https://docs.rs/tch/latest/tch/)**
+> **来源: [ACM - AI Systems](https://dl.acm.org/)**
 
 ---

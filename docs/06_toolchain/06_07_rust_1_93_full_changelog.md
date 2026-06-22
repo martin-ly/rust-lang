@@ -14,7 +14,7 @@
 
 ## 目录
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Rust 1.93 完整变更清单](#rust-193-完整变更清单)
   - [目录](#目录)
@@ -62,13 +62,13 @@
 
 ## 语言特性
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### s390x vector 特性与 is_s390x_feature_detected
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Rust 1.93** 稳定了多个 s390x `vector` 相关 target features 及 `is_s390x_feature_detected!` 宏。
 
@@ -90,9 +90,9 @@ fn check_vector_support() {
 
 ### C-style variadic for system ABI
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Rust 1.93** 稳定了 `system` ABI 的 C 风格可变参数函数声明。
 
@@ -108,9 +108,9 @@ extern "system" {
 
 ### cfg 谓词使用关键词报错
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Rust 1.93** 对将某些关键词用作 `cfg` 谓词的情况发出错误。
 
@@ -120,9 +120,9 @@ extern "system" {
 
 ### asm_cfg（asm! 行上 cfg）
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Rust 1.93** 稳定了 `asm_cfg`，允许在 `asm!` 的单个语句上使用 `cfg` 属性。
 
@@ -134,9 +134,9 @@ extern "system" {
 
 ### const-eval 指针字节复制
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Rust 1.93** 在常量求值期间支持按字节复制指针。
 
@@ -146,9 +146,9 @@ extern "system" {
 
 ### LUB coercion 修正
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Rust 1.93** 修正了 LUB（Least Upper Bound）coercion 对函数项类型及不同安全性函数的处理。
 
@@ -158,9 +158,9 @@ extern "system" {
 
 ### const 含 mutable ref 到 static
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Rust 1.93** 允许 const 项包含对 static 的可变引用（非常 unsafe，但不总是 UB）。
 
@@ -170,9 +170,9 @@ extern "system" {
 
 ### const_item_interior_mutations lint（warn-by-default）
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Rust 1.93** 新增 warn-by-default lint，对会改动内部可变 const 项的调用发出警告。
 
@@ -182,9 +182,9 @@ extern "system" {
 
 ### function_casts_as_integer lint（warn-by-default）
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Rust 1.93** 新增 warn-by-default lint，对将函数强制转换为整数的操作发出警告。
 
@@ -198,7 +198,7 @@ extern "system" {
 
 ### -C jump-tables=bool 稳定化
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **Rust 1.93** 稳定了 `-C jump-tables=bool` 选项（原 `-Zno-jump-tables`）。
 
@@ -216,7 +216,7 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 
 ### riscv64a23-unknown-linux-gnu Tier 2
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **Rust 1.93** 将 `riscv64a23-unknown-linux-gnu` 提升为 Tier 2（无 host tools）。
 
@@ -226,7 +226,7 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 
 ### musl 1.2.5
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 详见 [06_05_rust_1_93_vs_1_92_comparison.md](./06_05_rust_1_93_vs_1_92_comparison.md#1-musl-125-更新)
 
@@ -238,7 +238,7 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 
 ### Copy 不再使用 specialization
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **Rust 1.93** 在 Copy trait 上停止内部使用 specialization（因在含生命周期依赖的 Copy 实现下不安全）。部分标准库 API 可能改为调用 `Clone::clone` 而非按位复制，**可能导致性能回归**。
 
@@ -248,7 +248,7 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 
 ### 全局分配器 thread_local 支持
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 详见 [06_05_rust_1_93_vs_1_92_comparison.md](./06_05_rust_1_93_vs_1_92_comparison.md)
 
@@ -256,7 +256,7 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 
 ### BTree::append 行为变更
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **Rust 1.93** 修改 `BTree::append` 行为：当追加的条目已存在时，不再更新现有键。
 
@@ -266,7 +266,7 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 
 ### vec::IntoIter 不再要求 T: RefUnwindSafe
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **Rust 1.93** 放宽 `vec::IntoIter<T>: UnwindSafe` 的约束，不再要求 `T: RefUnwindSafe`。
 
@@ -276,7 +276,7 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 
 ### 稳定化 API
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 详见 [06_05_rust_1_93_vs_1_92_comparison.md](./06_05_rust_1_93_vs_1_92_comparison.md#标准库更新)
 
@@ -288,7 +288,7 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 
 ### CARGO_CFG_DEBUG_ASSERTIONS
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **Cargo 1.93** 在 build scripts 中根据 profile 启用 `CARGO_CFG_DEBUG_ASSERTIONS`。
 
@@ -298,7 +298,7 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 
 ### cargo tree --format 长格式
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **Cargo 1.93** 在 `cargo tree` 中支持 `--format` 变量的长格式。
 
@@ -308,7 +308,7 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 
 ### cargo clean --workspace
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **Cargo 1.93** 为 `cargo clean` 添加 `--workspace` 选项。
 
@@ -326,7 +326,7 @@ cargo clean --workspace
 
 ### 移除 #![doc(document_private_items)]
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **Rust 1.93** 移除了 `#![doc(document_private_items)]` 属性。
 
@@ -336,7 +336,7 @@ cargo clean --workspace
 
 ### 宏搜索过滤
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **Rust 1.93** 在 "macros" 搜索过滤中包含 attribute 和 derive 宏。
 
@@ -346,7 +346,7 @@ cargo clean --workspace
 
 ### import 搜索过滤
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **Rust 1.93** 在 `import` 搜索过滤中包含 extern crates。
 
@@ -356,7 +356,7 @@ cargo clean --workspace
 
 ### 文档属性校验
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **Rust 1.93** 对 crate 级文档属性进行校验。若 `html_favicon_url`、`html_logo_url`、`html_playground_url`、`issue_tracker_base_url` 或 `html_no_source` 有缺失、意外值或类型错误，将发出 deny-by-default lint `rustdoc::invalid_doc_attributes`。
 
@@ -381,7 +381,7 @@ cargo clean --workspace
 
 ### 类型系统形式化
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 特性 | 形式化参考 | 相关标准 |
 | :--- | :--- | :--- |
@@ -393,7 +393,7 @@ cargo clean --workspace
 
 ### 内存模型形式化
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 - [Rust Memory Model](https://doc.rust-lang.org/reference/memory-model.html)
 - [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) - Rust 别名模型
@@ -401,7 +401,7 @@ cargo clean --workspace
 
 ### Ferrocene 规范引用
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 - [FLS - Functions](https://spec.ferrocene.dev/functions.html)
 - [FLS - Constants and Statics](https://spec.ferrocene.dev/constants-and-statics.html)
@@ -741,23 +741,23 @@ Rust 1.95+ 重要更新：
 
 ## 权威来源索引
 
-> **[来源: Rust Release Notes]**
+> **来源: [Rust Release Notes](https://github.com/rust-lang/rust/blob/master/RELEASES.md)**
 
-> **[来源: RFCs - rust-lang/rfcs]**
+> **来源: [RFCs - rust-lang/rfcs](https://github.com/rust-lang/rfcs)**
 
-> **[来源: Rust Blog]**
+> **来源: [Rust Blog](https://blog.rust-lang.org/)**
 
-> **[来源: Rust Reference]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ---

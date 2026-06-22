@@ -255,7 +255,7 @@ Rust 已有 600+ RFCs，但项目中对 RFC 的引用：
 ### 权威来源对齐任务
 
 - [ ] **T2.1** 建立 `sources/` 目录，按一级/二级/三级分类，每个来源指向具体章节/锚点
-- [ ] **T2.2** 修复所有批量插入的通用 `[来源: Rust Reference]` 标注，替换为精确章节引用
+- [ ] **T2.2** 修复所有批量插入的通用 `来源: [Rust Reference](https://doc.rust-lang.org/reference/)` 标注，替换为精确章节引用
 - [ ] **T2.3** 更新 `07_future/05_rust_version_tracking.md` 至 Rust 1.90.0，补充 2024 Edition 完整变更映射
 - [ ] **T2.4** 统一 Miri 别名模型描述为 Tree Borrows，补充 Stacked Borrows vs Tree Borrows 的对比代码示例
 - [ ] **T2.5** 建立 RFC 索引模板，覆盖至少 50 个关键 RFC（含状态、替代方案、实现版本）

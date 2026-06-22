@@ -68,15 +68,15 @@
 
 ## 🎯 研究目标 {#-研究目标}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本研究旨在建立 Rust 研究的方法论体系，为 Rust 相关研究提供系统化的方法指导。
 
 ### 核心问题
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **研究方法**: Rust 研究应该采用哪些方法？
 2. **工具选择**: 如何选择合适的研究工具？
@@ -84,9 +84,9 @@
 
 ### 预期成果
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - Rust 研究方法论框架
 - 研究工具使用指南
@@ -96,7 +96,7 @@
 
 ## 形式化论证汇总
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def RM1（研究方法完备性）**：设 $\mathcal{R}$ 为研究方法族，$\mathcal{R} = \{\text{形式化},\, \text{实验},\, \text{实证},\, \text{理论}\}$。若研究 $Q$ 同时采用形式化证明与实验验证，则称 $Q$ **方法完备**。
 
@@ -112,13 +112,13 @@
 
 ## 📚 研究方法 {#-研究方法}
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 形式化研究方法
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义**: 使用数学和逻辑方法对 Rust 系统进行形式化建模和证明。
 
@@ -141,9 +141,9 @@
 
 ### 2. 实验研究方法
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义**: 通过实验验证理论假设，收集性能数据。
 
@@ -166,9 +166,9 @@
 
 ### 3. 实证研究方法
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定义**: 通过观察和分析实际项目来验证理论。
 
@@ -182,9 +182,9 @@
 
 ### 1.1 形式化研究方法详解
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **方法概述**：
 
@@ -241,9 +241,9 @@ Qed.
 
 ### 相关概念
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **研究方法 (Research Methodology)**: 进行研究的系统化方法，包括研究设计、数据收集、结果分析等。
 
@@ -257,7 +257,7 @@ Qed.
 
 ### 理论背景
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **科学研究方法论 (Scientific Research Methodology)**: 研究科学研究的理论，包括假设检验、实验设计等。
 
@@ -278,7 +278,7 @@ Qed.
 
 ### 4. 理论研究方法
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **定义**: 通过理论分析和推导来研究 Rust 系统。
 
@@ -299,7 +299,7 @@ Qed.
 
 ### 2.1 实验研究方法要点
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - **假设**：明确、可测（如「opt-level=2 比 -O0 快 ≥2x」）。
 - **控制变量**：固定 Rust 版本、CPU、内存、`opt-level`、`codegen-units` 等；仅变化目标因素。
@@ -308,7 +308,7 @@ Qed.
 
 ### 3.1 实证研究方法要点
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 - **案例选择**：有公开代码、文档或论文；能对应到形式化/类型/实验中的至少一类问题。
 - **数据**：代码片段、性能数据、 issue/PR、社区讨论。
@@ -317,7 +317,7 @@ Qed.
 
 ### 4.1 理论研究方法要点
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 - **问题**：类型安全、型变、生命周期、Trait 解析等；需可形式化。
 - **模型**：语法、类型规则、操作语义、性质（进展性、保持性、安全）。
@@ -332,7 +332,7 @@ Qed.
 
 ### 分析工具
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 - **静态分析工具**: Clippy, rust-analyzer, MIRAI
 - **动态分析工具**: Valgrind, Miri, sanitizers
@@ -341,7 +341,7 @@ Qed.
 
 ### 验证工具
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - **模型检查器**: TLA+, SPIN
 - **定理证明器**: Coq, Lean, Isabelle/HOL
@@ -350,7 +350,7 @@ Qed.
 
 ### 实验工具
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 - **基准测试框架**: Criterion.rs, bencher
 - **性能测试工具**: hyperfine, time
@@ -359,7 +359,7 @@ Qed.
 
 ### 数据收集工具
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 - **日志分析工具**: grep, awk, jq
 - **指标收集工具**: Prometheus, Grafana
@@ -374,7 +374,7 @@ Qed.
 
 ### 研究设计
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 1. **问题定义**: 明确研究问题和目标
 2. **方法选择**: 选择合适的研究方法
@@ -598,20 +598,20 @@ Qed.
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

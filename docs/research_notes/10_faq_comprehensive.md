@@ -12,7 +12,7 @@
 
 ## 快速导航
 >
-> **[来源: Rust Official Docs]** · **[来源: Wikipedia - FAQ]** · **[来源: Wikipedia - Knowledge Base]** · **[来源: ACM - Technical Q&A Best Practices]** · **[来源: IEEE - Documentation Usability]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - FAQ](https://en.wikipedia.org/wiki/FAQ)** · **来源: [Wikipedia - Knowledge Base](https://en.wikipedia.org/wiki/Knowledge_Base)** · **[来源: ACM - Technical Q&A Best Practices]** · **[来源: IEEE - Documentation Usability]**
 
 - [Rust形式化方法 FAQ 汇总](#rust形式化方法-faq-汇总)
   - [快速导航](#快速导航)
@@ -90,13 +90,13 @@
 
 ## 一、所有权与借用 (15问)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Q1: 什么是所有权？一句话解释
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **A**: 每个值在任意时刻有且只有一个所有者（变量），所有者离开作用域时值被自动释放。
 
@@ -106,9 +106,9 @@
 
 ### Q2: Move和Copy有什么区别？
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **A**:
 
@@ -133,9 +133,9 @@ println!("{}", x);              // OK！x仍然有效
 
 ### Q3: 为什么需要借用？
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **A**: 借用允许你临时使用值而不获取所有权，避免频繁转移所有权的麻烦。
 
@@ -156,9 +156,9 @@ fn main() {
 
 ### Q4: &和&mut为什么不能同时存在？
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **A**: 防止数据竞争。如果允许多个读者和一个写者同时存在，读者可能读到正在被修改的数据。
 
@@ -179,9 +179,9 @@ println!("{} {}", r1, r2); // 读者还在用
 
 ### Q5: 什么是悬垂引用？Rust如何防止？
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **A**: 悬垂引用是指引用指向已经被释放的内存。Rust通过生命周期检查在编译时防止。
 
@@ -203,9 +203,9 @@ fn not_dangling() -> String {
 
 ### Q6: 如何理解"所有权系统防止内存泄漏"？
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **A**: 严格来说，所有权系统主要防止**内存不安全**（use-after-free, double-free），而不是内存泄漏。
 
@@ -220,9 +220,9 @@ fn not_dangling() -> String {
 
 ### Q7: 为什么`Rc`不能跨线程？
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **A**: `Rc`使用非原子引用计数（不是线程安全的）。跨线程使用会导致数据竞争（计数更新冲突）。
 
@@ -242,9 +242,9 @@ thread::spawn(move || {
 
 ### Q8: `RefCell`和`Mutex`有什么区别？
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **A**:
 
@@ -268,9 +268,9 @@ let mutex = Mutex::new(5);
 
 ### Q9: 什么是"内部可变性"模式？
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **A**: 允许在不可变引用下修改数据，通过运行时检查保证安全。
 
@@ -290,7 +290,7 @@ let mutex = Mutex::new(5);
 
 ### Q10: 如何理解`Box`、`Rc`、`Arc`的区别？
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **A**:
 
@@ -319,7 +319,7 @@ let arc2 = Arc::clone(&arc);
 
 ### Q11: 为什么String不能Copy？
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **A**: `String`包含堆分配的缓冲区，复制需要深拷贝（昂贵）。Rust默认只给"廉价复制"的类型实现Copy。
 
@@ -340,7 +340,7 @@ String, Vec<T>, Box<T>, Rc<T>
 
 ### Q12: `clone()`和`to_owned()`有什么区别？
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **A**:
 
@@ -359,7 +359,7 @@ let v2 = v.clone();  // Vec<i32>
 
 ### Q13: 如何修复"cannot borrow as mutable"错误？
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **A**: 缩小不可变借用的作用域：
 
@@ -383,7 +383,7 @@ let r2 = &mut x;  // OK
 
 ### Q14: `mem::swap`和`mem::replace`有什么用？
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **A**:
 
@@ -409,7 +409,7 @@ assert_eq!(s, "world");
 
 ### Q15: 什么是"零成本抽象"？
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **A**: 抽象不带来运行时开销。所有权检查在编译时完成，运行时无额外成本。
 
@@ -422,11 +422,11 @@ assert_eq!(s, "world");
 
 ## 二、类型系统 (10问)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Q16: 什么是类型安全？
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **A**: 良类型的程序不会陷入未定义行为。Rust的类型系统保证：
 
@@ -440,7 +440,7 @@ assert_eq!(s, "world");
 
 ### Q17: `Sized` trait是什么？
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **A**: 标记编译时已知大小的类型。
 
@@ -463,7 +463,7 @@ fn bar<T: ?Sized>(x: &T) {}  // 允许DST
 
 ### Q18: `impl Trait`和`dyn Trait`有什么区别？
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **A**:
 
@@ -482,7 +482,7 @@ fn bar(x: &dyn Trait) {}
 
 ### Q19: 什么是型变(Variance)？
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **A**: 描述复合类型如何继承组成部分的子类型关系。
 
@@ -501,7 +501,7 @@ fn(&'a str) <: fn(&'static str)
 
 ### Q20: `'static`生命周期是什么意思？
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **A**: 整个程序运行期间都有效。
 
@@ -520,7 +520,7 @@ const X: i32 = 5;  // 'static
 
 ### Q21: 什么是关联类型(Associated Type)？
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **A**: Trait中定义的占位类型，由实现者指定。
 
@@ -545,7 +545,7 @@ impl Iterator for Vec<i32> {
 
 ### Q22: 什么是泛型关联类型(GAT)？
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **A**: 允许关联类型有泛型参数。
 
@@ -565,7 +565,7 @@ trait Container {
 
 ### Q23: `const fn`和`fn`有什么区别？
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **A**: `const fn`可以在编译时执行。
 
@@ -586,7 +586,7 @@ const X: i32 = add(1, 2);  // 编译时常量
 
 ### Q24: 什么是特化(Specialization)？
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **A**: 为特定类型提供泛型的特殊实现。
 
@@ -612,7 +612,7 @@ impl Trait for i32 {
 
 ### Q25: 什么是空指针优化(Null Pointer Optimization)？
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **A**: `Option<&T>`和`&T`大小相同，用0表示`None`。
 
@@ -632,11 +632,11 @@ assert_eq!(size_of::<Option<&i32>>(), size_of::<&i32>());
 
 ## 三、生命周期 (10问)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Q26: 生命周期省略规则是什么？
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **A**: 编译器自动推断生命周期的三条规则：
 
@@ -656,7 +656,7 @@ fn foo(x: &str) -> &str { x }  // 规则2
 
 ### Q27: 生命周期约束如何写？
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **A**: `'a: 'b`表示`'a`至少和`'b`一样长。
 
@@ -679,7 +679,7 @@ where
 
 ### Q28: 什么是生命周期子类型？
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **A**: `'static`是`'a`的子类型（`'static <: 'a`），因为`'static`更长。
 
@@ -696,7 +696,7 @@ fn take_str<'a>(s: &'a str) {}
 
 ### Q29: 为什么需要显式生命周期标注？
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **A**: 当编译器无法确定返回引用与哪个参数关联时。
 
@@ -716,7 +716,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### Q30: `for<'a>`语法是什么？
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **A**: 高阶 trait bound (HRTB)，表示"对于所有生命周期"。
 
@@ -739,7 +739,7 @@ where
 
 ### Q31: 结构体中的生命周期如何工作？
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **A**: 结构体存活期间，其引用字段指向的数据必须有效。
 
@@ -760,7 +760,7 @@ fn main() {
 
 ### Q32: 自引用结构如何处理？
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **A**: 使用`Pin`保证结构不会被移动。
 
@@ -783,7 +783,7 @@ let mut pinned = Pin::new(Box::new(SelfReferential {
 
 ### Q33: 异步函数中的生命周期
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **A**: async函数返回的Future捕获所有参数的生命周期。
 
@@ -803,7 +803,7 @@ fn main() {
 
 ### Q34: 什么是`PhantomData`？
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **A**: 零大小类型，用于告诉编译器你"使用"了某个类型，影响生命周期。
 
@@ -821,7 +821,7 @@ struct Slice<'a, T: 'a> {
 
 ### Q35: 生命周期和泛型如何结合？
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **A**:
 
@@ -842,11 +842,11 @@ where
 
 ## 四、并发与异步 (10问)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Q36: Send和Sync有什么区别？
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **A**:
 
@@ -871,7 +871,7 @@ thread::spawn(move || { println!("{}", data); });  // OK
 
 ### Q37: 为什么`Cell`不是Sync？
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 **A**: `Cell`提供内部可变性但没有同步机制，多线程同时修改会导致数据竞争。
 
@@ -887,7 +887,7 @@ let cell = Cell::new(0);
 
 ### Q38: `Mutex`和`RwLock`怎么选？
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **A**:
 
@@ -902,7 +902,7 @@ let cell = Cell::new(0);
 
 ### Q39: 什么是死锁？如何避免？
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 **A**: 死锁是两个线程互相等待对方释放锁。
 
@@ -925,7 +925,7 @@ let cell = Cell::new(0);
 
 ### Q40: async/await原理是什么？
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **A**: 编译器将async函数转换为状态机。
 
@@ -950,7 +950,7 @@ enum FooFuture {
 
 ### Q41: `Pin`是什么？为什么需要？
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **A**: `Pin`保证值不会被移动，用于自引用结构。
 
@@ -971,7 +971,7 @@ async fn self_referential() {
 
 ### Q42: `tokio::spawn`和`thread::spawn`区别？
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **A**:
 
@@ -999,7 +999,7 @@ tokio::spawn(async {
 
 ### Q43: 什么是`Unpin`？
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **A**: 标记可以安全移动的类型。大多数类型都是`Unpin`。
 
@@ -1015,7 +1015,7 @@ async fn, Pin<&mut T>
 
 ### Q44: `select!`宏是什么？
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **A**: 等待多个Future，哪个先完成就执行哪个。
 
@@ -1031,7 +1031,7 @@ tokio::select! {
 
 ### Q45: 如何避免跨await持锁？
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 **A**: `.await`前释放锁：
 
@@ -1055,11 +1055,11 @@ let guard = tokio_mutex.lock().await;
 
 ## 五、形式化方法 (10问)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Q46: 什么是L1/L2/L3证明？
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **A**:
 
@@ -1073,7 +1073,7 @@ let guard = tokio_mutex.lock().await;
 
 ### Q47: T-OW2定理是什么？
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **A**: **所有权唯一性定理** - 每个值在任意时刻只有一个所有者。
 
@@ -1083,7 +1083,7 @@ let guard = tokio_mutex.lock().await;
 
 ### Q48: T-BR1定理是什么？
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **A**: **数据竞争自由定理** - 借用检查通过 ⇒ 无数据竞争。
 
@@ -1093,7 +1093,7 @@ let guard = tokio_mutex.lock().await;
 
 ### Q49: 形式化方法对普通开发者有什么用？
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **A**:
 
@@ -1120,7 +1120,7 @@ let guard = tokio_mutex.lock().await;
 
 ## 六、分布式与工作流 (5问)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Q51: Saga模式解决什么问题？
 >
@@ -1186,7 +1186,7 @@ let saga = Saga::new()
 
 ## 🆕 Rust 1.94 更新
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 > **适用版本**: Rust 1.96.0+
 
 详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
@@ -1197,7 +1197,7 @@ let saga = Saga::new()
 
 ## 🆕 Rust 1.94 深度整合更新
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
@@ -1263,27 +1263,27 @@ let saga = Saga::new()
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL]**
-> **[来源: Rust Standard Library]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 > **[来源: Stack Overflow Rust Tag]**
 > **[来源: Rust Users Forum]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

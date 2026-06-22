@@ -10,6 +10,7 @@
 > [来源: Rayon 官方文档](https://docs.rs/rayon/latest/rayon/)
 > [来源: Rust Reference — Closure types](https://doc.rust-lang.org/reference/types/closure.html)
 > [来源: TRPL 第 16 章 — Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
+> **状态**: ✅ 已完成
 
 ---
 

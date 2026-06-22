@@ -39,13 +39,13 @@
 
 ## 1. 概念定义 (Def)
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Def ES1: Event Sourcing
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 事件溯源是一种**状态持久化模式**，系统状态不直接存储，而是存储导致状态变更的**事件序列**，状态通过**重放事件**重建。
 
@@ -60,9 +60,9 @@ EventSourcing := (E, S, apply, snapshot)
 
 ### Def ES2: 事件不变性
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 ∀e ∈ E. Immutable(e)
@@ -72,7 +72,7 @@ EventSourcing := (E, S, apply, snapshot)
 
 ### Def ES3: 状态重建
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```text
 State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
@@ -89,7 +89,7 @@ State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
 
 ### Axiom ES1: 事件顺序性
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```text
 ∀eᵢ, eⱼ ∈ E. i < j → timestamp(eᵢ) ≤ timestamp(eⱼ)
@@ -99,7 +99,7 @@ State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
 
 ### Axiom ES2: 应用函数确定性
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```text
 ∀s, e. apply(s, e) = s' 是确定性的
@@ -109,7 +109,7 @@ State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
 
 ### Axiom ES3: 版本控制
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```text
 ∀e ∈ E. version(e) = sequence_number ∈ ℕ
@@ -125,7 +125,7 @@ State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
 
 ### Theorem ES1: 状态可重现性
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```text
 ∀t. State(t) 可通过重放 E[0..t] 重建
@@ -140,7 +140,7 @@ State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
 
 ### Theorem ES2: 审计完整性
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```text
 ∀t. 历史状态 State(t) 可查询
@@ -302,13 +302,13 @@ impl<A: Aggregate> EventSourcedRepository<A> {
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Event Sourcing]**
-> **[来源: Wikipedia - CQRS]**
+> **来源: [Wikipedia - Event Sourcing](https://en.wikipedia.org/wiki/Event_Sourcing)**
+> **来源: [Wikipedia - CQRS](https://en.wikipedia.org/wiki/CQRS)**
 > **[来源: Martin Fowler - Event Sourcing]**
 > **[来源: ACM - Event-Driven Architecture]**
 > **[来源: IEEE - Distributed Data Patterns]**
-> **[来源: Wikipedia - Software Design Pattern]**
-> **[来源: Wikipedia - Software Architecture]**
+> **来源: [Wikipedia - Software Design Pattern](https://en.wikipedia.org/wiki/Software_Design_Pattern)**
+> **来源: [Wikipedia - Software Architecture](https://en.wikipedia.org/wiki/Software_Architecture)**
 > **[来源: ACM - Design Patterns Survey]**
 
 ---

@@ -34,7 +34,7 @@
 
 ## Result与Option
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 类型 | 用途 | 方法 |
 | :--- | :--- | :--- |
@@ -45,13 +45,13 @@
 
 ## 常用方法
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Option
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 opt.unwrap()        // 获取值，None时panic
@@ -63,7 +63,7 @@ opt.and_then(|v| ...) // 链式操作
 
 ### Result
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```rust,ignore
 res.unwrap()        // 获取值，Err时panic
@@ -144,13 +144,13 @@ let file = File::open("file")?;  // IOError自动转为MyError
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -201,9 +201,9 @@ let file = File::open("file")?;  // IOError自动转为MyError
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Exception Handling]**
-> **[来源: TRPL Ch. 9 - Error Handling]**
-> **[来源: Rust Reference - Result]**
-> **[来源: RFC 2504 - Try Trait]**
+> **来源: [Wikipedia - Exception Handling](https://en.wikipedia.org/wiki/Exception_Handling)**
+> **来源: [TRPL Ch. 9 - Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)**
+> **来源: [Rust Reference - Result](https://doc.rust-lang.org/std/result/)**
+> **来源: [RFC 2504 - Try Trait](https://rust-lang.github.io/rfcs/2504-2504-try-trait.html)**
 
 ---

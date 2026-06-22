@@ -17,7 +17,7 @@
 
 ## 目录
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Rust 1.95 Nightly 预览与实验特性](#rust-195-nightly-预览与实验特性)
   - [目录](#目录)
@@ -53,7 +53,7 @@
 
 ## 版本概览
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 项目 | 详情 |
 | :--- | :--- |
@@ -66,13 +66,13 @@
 
 ## 实验性语言特性
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 下一代 Trait 求解器 (next-solver)
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **状态**: 积极开发中
 
@@ -101,9 +101,9 @@ where
 
 ### 2. Async Drop
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **状态**: 实验实现中
 
@@ -133,9 +133,9 @@ impl AsyncDrop for AsyncResource {
 
 ### 3. 生成器 (Generators)
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **状态**: 迭代器生成器实验
 
@@ -164,9 +164,9 @@ let iter = std::iter::iter! {
 
 ### 4. Pin 人体工学改进
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **状态**: 实验中
 
@@ -187,13 +187,13 @@ use_pinned(pinned);  // 自动重新借用
 
 ## 编译器实验
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. `-Zinstrument-mcount`
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **用途**: 函数调用计数插桩
 
@@ -207,9 +207,9 @@ rustc -Zinstrument-mcount program.rs
 
 ### 2. `-Cdebuginfo-compression`
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **用途**: 调试信息压缩
 
@@ -221,9 +221,9 @@ rustc -Cdebuginfo-compression=zlib program.rs
 
 ### 3. `fn_align` 属性
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **状态**: 接近稳定
 
@@ -242,7 +242,7 @@ fn aligned_function() {
 
 ### 1. 严格指针来源 (Strict Provenance)
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **状态**: 实验 API
 
@@ -261,7 +261,7 @@ let addr = ptr.addr();
 
 ### 2. `offset_of_slice`
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 **状态**: 实验中
 
@@ -276,7 +276,7 @@ let offset = offset_of!(Struct, field[0]);
 
 ### 3. `MaybeUninit` 持续改进
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **新增方法**:
 
@@ -292,7 +292,7 @@ let offset = offset_of!(Struct, field[0]);
 
 ### 1. Build Dir 新布局
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 **状态**: `-Zbuild-dir-new-layout`
 
@@ -306,7 +306,7 @@ cargo build -Zbuild-dir-new-layout
 
 ### 2. Section Timings
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **状态**: `-Zsection-timings`
 
@@ -324,7 +324,7 @@ cargo build --timings -Zsection-timings
 
 ### 高优先级研究主题
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 主题 | 描述 | 相关文档 |
 | :--- | :--- | :--- |
@@ -433,12 +433,12 @@ cargo build --timings -Zsection-timings
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Machine Learning]**
+> **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
 
-> **[来源: Wikipedia - Artificial Intelligence]**
+> **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)**
 
-> **[来源: tch-rs Documentation]**
+> **来源: [tch-rs Documentation](https://docs.rs/tch/latest/tch/)**
 
-> **[来源: ACM - AI Systems]**
+> **来源: [ACM - AI Systems](https://dl.acm.org/)**
 
 ---

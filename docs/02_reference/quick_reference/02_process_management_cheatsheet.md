@@ -63,13 +63,13 @@
 
 ## 🚀 快速开始
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 基本使用
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use c07_process::prelude::*;
@@ -103,13 +103,13 @@ manager.kill(pid)?;
 
 ## 📋 常用 API
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 进程管理
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 操作     | 方法            | 说明         |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -120,9 +120,9 @@ manager.kill(pid)?;
 
 ### 异步进程管理
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use c07_process::AsyncProcessManager;
@@ -144,9 +144,9 @@ manager.wait_with_timeout(pid, Duration::from_secs(5)).await?;
 
 ### IPC 通信
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use c07_process::IpcManager;
@@ -165,9 +165,9 @@ let queue = ipc.create_message_queue("my_queue", 100)?;
 
 ### 同步原语
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 use c07_process::SyncManager;
@@ -188,13 +188,13 @@ let rwlock = sync.create_rwlock("my_rwlock")?;
 
 ## 🔧 配置选项
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### ProcessConfig
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
 ProcessConfig {
@@ -211,9 +211,9 @@ ProcessConfig {
 
 ### 跨平台注意事项
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Windows**:
 
@@ -234,7 +234,7 @@ ProcessConfig {
 
 ### 启用性能监控
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 ```rust,ignore
 use c07_process::performance::enhanced::*;
@@ -277,7 +277,7 @@ match manager.spawn(config) {
 
 ### 反例 1: 不检查子进程退出状态
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **错误示例**:
 
@@ -299,7 +299,7 @@ assert!(status.success());
 
 ### 反例 2: 在 Unix 信号处理中调用非 async-signal-safe 函数
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **错误示例**:
 
@@ -342,7 +342,7 @@ fn handler(_: i32) {
 
 ### 场景 1: 构建任务调度器
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```rust
 use std::process::{Command, Stdio};
@@ -418,7 +418,7 @@ impl TaskScheduler {
 
 ### 场景 2: 安全沙箱执行
 
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```rust
 #[cfg(unix)]
@@ -445,7 +445,7 @@ fn sandboxed_execute(program: &str, args: &[&str]) -> std::io::Result<std::proce
 
 ### 场景 3: 进程监控与自动重启
 
-> **[来源: PLDI - Programming Language Design]**
+> **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```rust,ignore
 use tokio::process::{Command, Child};
@@ -504,7 +504,7 @@ impl ProcessMonitor {
 
 ### 理论基础
 
-> **[来源: Wikipedia - Memory Safety]**
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 | 概念 | 形式化文档 | 描述 |
 | :--- | :--- | :--- |
@@ -514,7 +514,7 @@ impl ProcessMonitor {
 
 ### 形式化定理
 
-> **[来源: Wikipedia - Type System]**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 **定理 PROC-T1（进程资源安全）**: 若进程句柄正确实现 Drop trait，则进程资源不会泄漏。
 
@@ -528,14 +528,14 @@ impl ProcessMonitor {
 
 ### 官方文档
 
-> **[来源: Wikipedia - Concurrency]**
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 - [std::process 文档](https://doc.rust-lang.org/std/process/)
 - [std::io 文档](https://doc.rust-lang.org/std/io/)
 
 ### 项目内部文档
 
-> **[来源: Wikipedia - Asynchronous I/O]**
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 - [完整文档](../../../crates/c07_process/README.md)
 - [异步IO指南](../../../crates/c07_process/docs/async_stdio_guide.md)
@@ -544,7 +544,7 @@ impl ProcessMonitor {
 
 ### 相关速查卡
 
-> **[来源: Wikipedia - Rust (programming language)]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 - [异步编程速查卡](./02_async_patterns.md) - 异步进程管理
 - [错误处理速查卡](./02_error_handling_cheatsheet.md) - 进程错误处理
@@ -565,7 +565,7 @@ impl ProcessMonitor {
 
 ### 核心特性速查
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
 // array_windows - 零分配滑动窗口
@@ -628,17 +628,17 @@ let gamma = f64::consts::EULER_GAMMA;
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rust Standard Library]**
-> **[来源: ACM - Systems Programming]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rustonomicon]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 ---

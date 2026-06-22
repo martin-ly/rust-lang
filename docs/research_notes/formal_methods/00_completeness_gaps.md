@@ -40,7 +40,7 @@
 
 ## 宗旨
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档系统列出 formal_methods 目录下各文档的形式化论证覆盖情况：
 
@@ -52,7 +52,7 @@
 
 ## 形式化定义（完备性缺口）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def FMG1（形式化方法完备性缺口）**：设 $\mathcal{F}$ 为形式化方法文档集。
 若存在 Rust 特性 $C$ 或机制 $M$ 在语言规范中存在，
@@ -73,7 +73,7 @@ $
 
 ## 1. 内存与所有权族缺口
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | 状态 | 缺口说明 | 应补充文档 |
 | :--- | :--- | :--- | :--- |
@@ -90,7 +90,7 @@ $
 
 ## 2. 并发与异步族缺口
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | 状态 | 缺口说明 | 应补充文档 |
 | :--- | :--- | :--- | :--- |
@@ -104,7 +104,7 @@ $
 
 ## 3. FFI 与不安全族缺口
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | 状态 | 缺口说明 | 应补充文档 |
 | :--- | :--- | :--- | :--- |
@@ -118,7 +118,7 @@ $
 
 ## 4. 控制流与模式匹配族缺口
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | 状态 | 缺口说明 | 应补充文档 |
 | :--- | :--- | :--- | :--- |
@@ -131,7 +131,7 @@ $
 
 ## 5. Rust 1.93 新增/变更与 formal_methods 衔接缺口
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | 状态 | 缺口说明 | 应补充文档 |
 | :--- | :--- | :--- | :--- |
@@ -144,7 +144,7 @@ $
 
 ## 6. 缺口汇总与优先级
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
 ✅ 全部完成（Phase 1–6）
@@ -157,7 +157,7 @@ $
 
 ## 7. 与已有文档的衔接
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文档 | 已覆盖 | 备注 |
 | :--- | :--- | :--- |
@@ -171,7 +171,7 @@ $
 
 ## 8. 补全路线图
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 阶段 | 目标 | 产出 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -213,7 +213,7 @@ $
 
 ## 10. 国际对标缺口（与阶段 1 交付物联动）
 >
-> **[来源: Rust Official Docs]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **详见**: [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../10_international_formal_verification_index.md)、[FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](../10_formal_proof_critical_analysis_and_plan_2026_02.md)
 
@@ -247,13 +247,13 @@ $
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: ACM - Systems Programming Languages]**
+> **来源: [ACM](https://dl.acm.org/)**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -264,7 +264,7 @@ $
 
 #### 代码示例更新
 
-> **[来源: IEEE - Programming Language Standards]**
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 本文档中的所有Rust代码示例均已：
 
@@ -274,7 +274,7 @@ $
 
 #### 相关文档
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 - Rust 1.94 迁移指南
 - Rust 1.94 特性速查
@@ -309,11 +309,11 @@ $
 
 ## 权威来源索引
 
-> **[来源: Wikipedia - Formal Methods]**
-> **[来源: Coq Reference Manual]**
-> **[来源: TLA+ Documentation]**
-> **[来源: ACM - Formal Verification]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
+> **来源: [Coq Reference Manual](https://coq.inria.fr/doc/)**
+> **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**
+> **来源: [ACM - Formal Verification](https://dl.acm.org/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ---

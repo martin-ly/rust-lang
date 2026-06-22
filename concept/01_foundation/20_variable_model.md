@@ -20,7 +20,7 @@
 > **双维定位**: C×Und — 理解变量在编程语言中的通用语义
 > **前置概念**: [Ownership](./01_ownership.md) · [Type System](./04_type_system.md)
 > **后置概念**: [Borrowing](./02_borrowing.md) · [Memory Management](../02_intermediate/03_memory_management.md) · [Evaluation Strategies](../04_formal/18_evaluation_strategies.md)
-> **主要来源**: [Pierce TAPL] · [Harper PFPL] · [Felleisen & Flatt PLAI] · [Wikipedia: Evaluation strategy]
+> **主要来源**: [Pierce TAPL] · [Harper PFPL] · [Felleisen & Flatt PLAI] · [Wikipedia: Evaluation strategy](https://en.wikipedia.org/wiki/Evaluation_strategy)
 
 >
 > **来源**: [TRPL — Variables and Mutability](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html) · [TRPL — Data Types](https://doc.rust-lang.org/book/ch03-02-data-types.html)
@@ -232,7 +232,7 @@ BorrowState: None | Shared(usize) | Exclusive
 > 2. `Exclusive` 借用期间禁止其他借用或移动（编译期拒绝）
 > 3. `Shared` 借用期间禁止 `Exclusive` 借用或移动（编译期拒绝）
 > 4. `drop` 只能对 `Own` 状态调用，且调用后变为 `Moved`
-> 5. ∴ 每个存储位置最多被释放一次，且释放后不可访问 [来源: RustBelt POPL 2018, §3]
+> 5. ∴ 每个存储位置最多被释放一次，且释放后不可访问 来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
 
 ---
 
@@ -345,9 +345,9 @@ fn reference_vs_pointer() {
 | **论断** | **来源** | **可信度** | **Tier** |
 |:---|:---|:---:|:---:|
 | 环境模型与存储模型 | [SICP Ch.3] · [Pierce TAPL §13] | ✅ | Tier 1 |
-| Rust 所有权 = 存储模型 + 线性约束 | [RustBelt POPL 2018] · [LL87] | ✅ | Tier 1 |
+| Rust 所有权 = 存储模型 + 线性约束 | [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [LL87] | ✅ | Tier 1 |
 | C++ 值类别体系 | [C++ Standard §7.2.1] | ✅ | Tier 1 |
-| Rust place/value expression | [Rust Reference §8.2.8] | ✅ | Tier 1 |
+| Rust place/value expression | [Rust Reference §8.2.8](https://doc.rust-lang.org/reference/) | ✅ | Tier 1 |
 | Rust 消除 xvalue 类别 | [💡 原创分析] | ⚠️ | Tier 3 |
 | 变量模型对比矩阵 | [💡 原创分析] | ⚠️ | Tier 3 |
 
