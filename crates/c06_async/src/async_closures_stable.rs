@@ -72,11 +72,11 @@ pub async fn capture_modes() {
 ///
 /// 在 Rust 2024 edition 中，`AsyncFn`/`AsyncFnMut`/`AsyncFnOnce`
 /// 已默认进入 prelude，无需显式 use。
-pub fn accept_async_callback<F>(f: F) -> impl std::future::Future<Output = i32>
+pub async fn accept_async_callback<F>(f: F) -> i32
 where
     F: AsyncFn(i32) -> i32,
 {
-    async move { f(21).await }
+    f(21).await
 }
 
 /// 使用 async closure 作为高阶异步谓词。

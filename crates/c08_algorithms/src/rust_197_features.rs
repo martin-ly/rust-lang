@@ -269,10 +269,12 @@ pub fn demo_nonzero_from_str_radix() {
     // assert!(NonZeroU32::from_str_radix("0", 10).is_err());
 
     // 当前等效实现 (Rust 1.96):
-    let parsed = u32::from_str_radix("1a", 16).ok().and_then(|v| std::num::NonZeroU32::new(v));
+    let parsed = u32::from_str_radix("1a", 16)
+        .ok()
+        .and_then(std::num::NonZeroU32::new);
     assert_eq!(parsed.unwrap().get(), 26);
 
-    let zero = u32::from_str_radix("0", 10).ok().and_then(|v| std::num::NonZeroU32::new(v));
+    let zero = "0".parse::<u32>().ok().and_then(std::num::NonZeroU32::new);
     assert!(zero.is_none());
 }
 
