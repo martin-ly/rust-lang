@@ -395,7 +395,7 @@ async fn run_migrations(pool: &PgPool) -> Result<(), sqlx::migrate::MigrateError
 
 **选择决策树**:
 
-```
+```text
 需要复杂 SQL / 手写查询优化? ──是──→ SQLx
                 └──否──→ 需要异步 + 快速开发? ──是──→ Sea-ORM
                                       └──否──→ 类型系统极致安全? ──是──→ Diesel

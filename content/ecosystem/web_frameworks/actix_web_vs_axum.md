@@ -31,7 +31,7 @@
 | **生态集成** | 自包含 | 与 Tower/Tokio 深度整合 |
 | **中间件** | 内置 Transform | Tower Layer |
 | **Handler 签名** | 多种类型 | 函数 + Extractor |
-| **状态管理** | Data<T> | State<T> |
+| **状态管理** | `Data<T>` | `State<T>` |
 | **成熟程度** | 非常成熟 (2018+) | 快速成熟 (2021+) |
 | **Tokio 集成** | 兼容 | 原生 |
 
@@ -141,7 +141,7 @@ Router::new()
 
 ## 📐 选择决策树
 
-```
+```text
 需要最高性能 / 成熟生态?
 ├── 是 ──→ 需要 Actor 模型?
 │           ├── 是 ──→ Actix-web

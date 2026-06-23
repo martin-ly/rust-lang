@@ -366,7 +366,7 @@ async fn rocket() -> _ {
 
 ## 📐 选择决策树
 
-```
+```text
 偏好声明式 / 宏驱动语法? ──是──→ Rocket
                 └──否──→ 需要深度 Tower 生态集成? ──是──→ Axum
                                       └──否──→ 需要最高成熟度 / Actor 模型? ──是──→ Actix-web

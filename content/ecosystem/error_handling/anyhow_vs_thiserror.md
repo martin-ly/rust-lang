@@ -134,7 +134,7 @@ struct MyError {
 
 **输出示例**:
 
-```
+```text
   × oops!
    ╰─▶ 1:12
    │
@@ -194,7 +194,7 @@ fn fetch_data() -> Result<Data, FetchError> { /* ... */ }
 
 ## 📊 选择决策树
 
-```
+```text
 你是开发库 (library) 还是应用 (application)?
 ├── 库 ──→ 需要调用者区分错误类型?
 │           ├── 是 ──→ thiserror
