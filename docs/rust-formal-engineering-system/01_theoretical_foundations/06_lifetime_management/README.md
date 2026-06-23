@@ -232,11 +232,11 @@ fn invariance(x: &mut &'static str) {
 
 > **来源: [Wikipedia - Variable Scope](https://en.wikipedia.org/wiki/Variable_Scope)**
 
-> **来源: [TRPL Ch. 10 - Lifetimes](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)**
+> **来源: [TRPL Ch. 10 - Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html)**
 
 > **来源: [Rust Reference - Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html)**
 
-> **来源: [RFC 2094 - NLL](https://rust-lang.github.io/rfcs/2094-2094-nll.html)**
+> **来源: [RFC 2094 - NLL](https://rust-lang.github.io/rfcs/2094-nll.html)**
 
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 

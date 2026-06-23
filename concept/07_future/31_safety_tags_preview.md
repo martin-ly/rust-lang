@@ -90,7 +90,7 @@ Safety Tags **不替代**人工说明，而是为其提供结构化骨架。
 
 ### 3.2 支持 Rust for Linux 等安全关键场景
 
-Rust for Linux 的 [Safety Standard](https://rust-for-linux.com/safety-standard) 工作倡导用一致术语描述安全要求。Safety Tags 与该目标一致，可作为从“自然语言标准”到“机器可读契约”的桥梁。
+Rust for Linux 的 [Safety Standard](https://rust-for-linux.com/) 工作倡导用一致术语描述安全要求。Safety Tags 与该目标一致，可作为从“自然语言标准”到“机器可读契约”的桥梁。
 
 ### 3.3 与形式化验证的衔接
 

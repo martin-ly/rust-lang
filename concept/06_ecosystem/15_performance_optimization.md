@@ -1,7 +1,7 @@
-> **内容分级**: [专家级]
-
+> **内容分级**:
+>
+> [专家级]
 > **代码状态**: ✅ 含可编译示例
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 
@@ -26,8 +26,12 @@
 
 ---
 
-> **来源**: [Criterion.rs Book](https://bheisler.github.io/criterion.rs/book/) · [Rust Performance Book](https://nnethercote.github.io/perf-book/) · [cargo-flamegraph](https://github.com/flamegraph-rs/flamegraph) · [std::simd](https://doc.rust-lang.org/std/simd/index.html) · [TRPL — Closures](https://doc.rust-lang.org/book/ch13-01-closures.html)
-
+> **来源**:
+> [Criterion.rs Book](https://bheisler.github.io/criterion.rs/book/) ·
+> [Rust Performance Book](https://nnethercote.github.io/perf-book/) ·
+> [cargo-flamegraph](https://github.com/flamegraph-rs/flamegraph) ·
+> [std::simd](https://doc.rust-lang.org/std/simd/index.html) ·
+> [TRPL — Closures](https://doc.rust-lang.org/book/ch13-01-closures.html)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录

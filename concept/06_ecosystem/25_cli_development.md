@@ -1,7 +1,7 @@
-> **内容分级**: [综述级]
-
+> **内容分级**:
+>
+> [综述级]
 > **代码状态**: ✅ 含可编译示例
-
 >
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
@@ -11,7 +11,6 @@
 > **Summary**: CLI Development: Rust ecosystem tools, crates, and engineering practices.
 >
 > **受众**: [进阶]
-
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S** — ApplicationStructure
 > **双维定位**: C×App — 应用 CLI 开发模式
@@ -22,9 +21,7 @@
 ---
 
 > **来源**: [Rust CLI Book](https://rust-cli.github.io/book/) · [clap](https://docs.rs/clap/) · [Cargo Book](https://doc.rust-lang.org/cargo/)
-
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录
@@ -432,7 +429,12 @@ fn print_man_page(cmd: Command) {
 // myapp completions fish > /usr/share/fish/vendor_completions.d/myapp.fish
 ```
 
-> **文档洞察**: 现代 Rust CLI 工具应**自动生成 shell 补全和 man page**，而非手动维护。clap 的 derive 宏自动提取参数信息，`clap_complete` 和 `clap_mangen` 将其转换为目标格式。这确保了文档与代码的同步——添加新参数时，补全和手册自动更新。[来源: [clap_complete](https://docs.rs/clap_complete/latest/clap_complete/)] · [clap_mangen](https://docs.rs/clap_mangen/latest/clap_mangen/)
+> **文档洞察**:
+> 现代 Rust CLI 工具应**自动生成 shell 补全和 man page**，而非手动维护。
+> clap 的 derive 宏自动提取参数信息，`clap_complete` 和 `clap_mangen` 将其转换为目标格式。
+> 这确保了文档与代码的同步——添加新参数时，补全和手册自动更新。
+> [来源: [clap_complete](https://docs.rs/clap_complete/latest/clap_complete/)] ·
+> [clap_mangen](https://docs.rs/clap_mangen/latest/clap_mangen/)
 
 ---
 

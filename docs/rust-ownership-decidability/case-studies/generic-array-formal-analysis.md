@@ -83,7 +83,7 @@
     - [适用场景决策树](#适用场景决策树)
   - [*适用 Rust 版本: 1.31+ (const fn), 推荐 1.51+*](#适用-rust-版本-131-const-fn-推荐-151)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -1688,11 +1688,11 @@ GenericArray 是 Rust 类型级编程的经典案例，它：
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 > **来源: [Wikipedia - Generic Programming](https://en.wikipedia.org/wiki/Generic_Programming)**
-> **来源: [TRPL Ch. 10 - Generics](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)**
+> **来源: [TRPL Ch. 10 - Generics](https://doc.rust-lang.org/book/ch10-00-generics.html)**
 > **来源: [Rust Reference - Generics](https://doc.rust-lang.org/reference/)**
 > **来源: [Wikipedia - Parametric Polymorphism](https://en.wikipedia.org/wiki/Parametric_Polymorphism)**
 

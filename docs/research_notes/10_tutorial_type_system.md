@@ -876,7 +876,7 @@ Rust类型系统
 
 > **来源: [TRPL Ch. 3 - Common Types](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html)**
 
-> **来源: [TRPL Ch. 10 - Generics](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)**
+> **来源: [TRPL Ch. 10 - Generics](https://doc.rust-lang.org/book/ch10-00-generics.html)**
 
 > **来源: [Rust Reference - Type System](https://doc.rust-lang.org/reference/types.html)**
 

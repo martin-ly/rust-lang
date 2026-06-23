@@ -302,7 +302,7 @@ graph LR
     前提: 每个堆分配有唯一 owner
     推理: owner 离开作用域时 drop 一次且仅一次
     反事实: Rc 循环引用 ⟹ 内存泄漏（非 UAF，是安全漏洞的另一形式）
-    来源: ✅ [TRPL Ch4](https://doc.rust-lang.org/book/ch04-00-ownership.html) · ✅ [Wikipedia: Memory safety]
+    来源: ✅ [TRPL Ch4](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) · ✅ [Wikipedia: Memory safety]
 
 子定理 2 (L1): 借用规则 (AXM) ⟹ 无数据竞争
     前提: &T 不可变共享 或 &mut T 唯一可变
@@ -355,7 +355,7 @@ graph LR
     前提: 泛型函数在每个实例类型上独立编译
     推理: 无运行时类型信息开销
     反事实: dyn Trait（动态分发）打破零成本 ⟹ 有 vtable 开销
-    来源: ✅ [TRPL Ch10](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html) · ✅ [RFC: Trait Objects]
+    来源: ✅ [TRPL Ch10](https://doc.rust-lang.org/book/ch10-00-generics.html) · ✅ [RFC: Trait Objects]
 ```
 
 [来源: [TAPL (Pierce, 2002)](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html) · [RFC 3417 — GATs](https://github.com/rust-lang/rfcs/pull/3417)]
@@ -381,7 +381,7 @@ graph LR
     前提: 地址是资源的一部分
     推理: 移动 = 资源重组，Pin = 资源位置冻结
     精度: ⚠️ 部分映射（Rust 的 Pin 比线性逻辑的位置稳定性更弱）
-    来源: ✅ [RFC 2349: Pin](https://rust-lang.github.io/rfcs/2349-2349-pin.html) · [PLDI 2024: RefinedRust] · [Jung et al. 2018: Iris]
+    来源: ✅ [RFC 2349: Pin](https://rust-lang.github.io/rfcs/2349-pin.html) · [PLDI 2024: RefinedRust] · [Jung et al. 2018: Iris]
 ```
 
 [来源: [TRPL — Async/Await](https://doc.rust-lang.org/book/ch17-01-futures-and-syntax.html) ·

@@ -1,6 +1,6 @@
 # Rust 1.98+ 前沿特性预览
 
-> **代码状态**: [综述级 — 待补充代码]
+> **代码状态**: [实现级 — 代码已补充]
 >
 > **EN**: Rust 1.98+ Preview
 > **Summary**: Rust 1.98 and beyond: nightly language features, compiler infrastructure, and ecosystem trends tracked for future stabilization.
@@ -16,9 +16,9 @@
 > **权威来源**:
 >
 > - [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)
-> - [Project Goals — Beyond the `&`](https://rust-lang.github.io/rust-project-goals/2026/goals/beyond-the-and.html)
-> - [Project Goals — BorrowSanitizer](https://rust-lang.github.io/rust-project-goals/2026/goals/borrowsanitizer.html)
-> - [Project Goals — Field Projections](https://rust-lang.github.io/rust-project-goals/2026/goals/field-projections.html)
+> - [Project Goals — Beyond the `&`](https://rust-lang.github.io/rust-project-goals/2026/pin-ergonomics.html)
+> - [Project Goals — BorrowSanitizer](https://rust-lang.github.io/rust-project-goals/2026/borrowsanitizer.html)
+> - [Project Goals — Field Projections](https://rust-lang.github.io/rust-project-goals/2026/field-projections.html)
 > - [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
 > - [Rust Internals Forum](https://internals.rust-lang.org/)
 > - [releases.rs — nightly 1.98.0](https://releases.rs/)
@@ -221,9 +221,61 @@ impl AsyncDrop for AsyncFile {
 
 ---
 
-## 二、编译器与工具链预览
+## 二、标准库 API 预览
 
-### 2.1 Cranelift Backend（生产级）
+本小节跟踪已进入 Rust 1.98 稳定通道或极有可能进入 1.98 的标准库 API。等效实现与 nightly 测试位于 [`crates/c08_algorithms/src/rust_197_features.rs`](../../../crates/c08_algorithms/src/rust_197_features.rs)。
+
+### 2.1 已确认进入 1.98 的 API
+
+| API | PR | 说明 |
+|:---|:---|:---|
+| `f32::add_algebraic` / `f64::add_algebraic` 等 `float_algebraic` intrinsics | [#157029](https://github.com/rust-lang/rust/pull/157029) | 允许编译器在代数等价前提下重排浮点运算，提升向量化/优化空间 |
+| `int_format_into` | [#152544](https://github.com/rust-lang/rust/pull/152544) | 整数直接格式化到现有缓冲区，避免 `write!` 的堆分配 |
+| `core::range::{RangeFull, RangeTo}` / `legacy::*` | [#156629](https://github.com/rust-lang/rust/pull/156629) | 将 `std::ops::RangeFull`、`std::ops::RangeTo` 下沉到 `core::range`，服务 `no_std` |
+| `NonZero<T>::from_str_radix` | [#157877](https://github.com/rust-lang/rust/pull/157877) | 按指定进制解析非零整数，结果为 0 时返回 `Err` |
+| `Box::as_ptr` / `Box::as_mut_ptr` | [#157876](https://github.com/rust-lang/rust/pull/157876) | 不物化引用的原始指针访问，对 aliasing model 更友好 |
+| `hex_literal_case` (rustfmt) | [rustfmt #6935](https://github.com/rust-lang/rustfmt/pull/6935) | 十六进制字面量大小写风格配置 |
+
+```rust
+// 1.98+ 使用示例（概念性，当前需 nightly 或等待稳定）
+use std::num::NonZeroU32;
+
+fn demo_198_apis() {
+    // NonZero::from_str_radix
+    let n = NonZeroU32::from_str_radix("1a", 16).unwrap();
+    assert_eq!(n.get(), 26);
+
+    // Box::as_mut_ptr
+    let mut boxed = Box::new(42);
+    let ptr: *mut i32 = boxed.as_mut_ptr();
+    unsafe { *ptr = 100; }
+    assert_eq!(*boxed, 100);
+}
+```
+
+**代码实现**: [`demo_float_algebraic()`](../../../crates/c08_algorithms/src/rust_197_features.rs) · [`demo_int_format_into()`](../../../crates/c08_algorithms/src/rust_197_features.rs) · [`demo_core_range_completion()`](../../../crates/c08_algorithms/src/rust_197_features.rs) · [`demo_nonzero_from_str_radix()`](../../../crates/c08_algorithms/src/rust_197_features.rs) · [`demo_box_as_ptr()`](../../../crates/c08_algorithms/src/rust_197_features.rs)
+
+---
+
+### 2.2 等待中 / 可能推迟至 1.98+ 的 API
+
+| API | 状态 | 说明 |
+|:---|:---|:---|
+| `VecDeque::truncate_front` / `retain_back` | 🔄 FCP finished / waiting | PR [#151973](https://github.com/rust-lang/rust/pull/151973) FCP 已完成，当前等待 review / FCP completion；已确定错过 1.97 cutoff，进入 1.98 通道 |
+| `RandomSource` / `DefaultRandomSource` | 🔄 等待 libs-api | PR [#157168](https://github.com/rust-lang/rust/pull/157168)，可插拔随机数源抽象 |
+| `Box::into_raw_non_null` / `Vec::into_raw_parts_non_null` (`box_vec_non_null`) | 🔄 PFCP | PR [#157226](https://github.com/rust-lang/rust/pull/157226)，转换为 `NonNull<T>` |
+| `#[optimize]` 属性 | 🔄 PFCP / Blocked | PR [#157273](https://github.com/rust-lang/rust/pull/157273)，函数级优化提示 |
+| `size_of_val_raw` / `align_of_val_raw` / `Layout::for_value_raw` | 🔄 等待 review | PR [#157572](https://github.com/rust-lang/rust/pull/157572)，裸值尺寸/对齐计算 |
+| C-variadic function definitions | 🔄 PFCP | PR [#155942](https://github.com/rust-lang/rust/pull/155942)，定义 C 风格可变参数函数 |
+| `proc_macro_value` | 🔄 等待 review | PR [#152092](https://github.com/rust-lang/rust/pull/152092)，过程宏在编译期产生值 |
+| `local_key_cell_update` | 🔄 等待 libs-api | PR [#157734](https://github.com/rust-lang/rust/pull/157734)，`LocalKey::update` 相关 Cell 更新 API |
+| `#[my_macro] mod foo;` (proc_macro_hygiene) | 🔄 PFCP | PR [#157857](https://github.com/rust-lang/rust/pull/157857)，过程宏卫生性的一部分 |
+
+---
+
+## 三、编译器与工具链预览
+
+### 3.1 Cranelift Backend（生产级）
 
 **状态**: 🧪 Project Goals 2026 旗舰目标 "Flexible, fast(er) compilation"
 
@@ -253,7 +305,7 @@ rustflags = ["-Zcodegen-backend=cranelift"]
 
 ---
 
-### 2.2 Parallel Frontend
+### 3.2 Parallel Frontend
 
 **状态**: 🧪 Project Goals 2026 旗舰目标
 
@@ -268,7 +320,7 @@ rustflags = ["-Zcodegen-backend=cranelift"]
 
 ---
 
-### 2.3 build-std
+### 3.3 build-std
 
 **状态**: 🧪 Project Goals 2026 旗舰目标
 
@@ -283,7 +335,7 @@ rustflags = ["-Zcodegen-backend=cranelift"]
 
 ---
 
-### 2.4 Next-Generation Trait Solver
+### 3.4 Next-Generation Trait Solver
 
 **状态**: 🧪 已实现，默认在 nightly 中启用进行测试
 
@@ -297,9 +349,9 @@ rustflags = ["-Zcodegen-backend=cranelift"]
 
 ---
 
-## 三、Cargo 与生态预览
+## 四、Cargo 与生态预览
 
-### 3.1 Public/Private Dependencies（RFC #3516）
+### 4.1 Public/Private Dependencies（RFC #3516）
 
 **状态**: 🔄 FCP 准备中；Project Goals 2026 目标
 
@@ -316,7 +368,7 @@ serde = { version = "1.0", public = true }
 
 ---
 
-### 3.2 Cargo SBOM Precursor
+### 4.2 Cargo SBOM Precursor
 
 **状态**: 🧪 Project Goals 2026 目标
 
@@ -331,7 +383,7 @@ serde = { version = "1.0", public = true }
 
 ---
 
-### 3.3 cargo-script 稳定化
+### 4.3 cargo-script 稳定化
 
 **状态**: 🧪 已在 Rust 1.79 nightly；Project Goals 2026 目标 "Stabilize cargo-script"
 
@@ -346,7 +398,7 @@ serde = { version = "1.0", public = true }
 
 ---
 
-### 3.4 Sized Hierarchy / const Sized / Scalable Vectors
+### 4.4 Sized Hierarchy / const Sized / Scalable Vectors
 
 **状态**: 🧪 Project Goals 2026 旗舰目标
 
@@ -362,9 +414,9 @@ serde = { version = "1.0", public = true }
 
 ---
 
-## 四、形式化与安全预览
+## 五、形式化与安全预览
 
-### 4.1 Safety Tags（RFC #3842）
+### 5.1 Safety Tags（RFC #3842）
 
 **状态**: 🧪 RFC 讨论中
 
@@ -380,7 +432,7 @@ serde = { version = "1.0", public = true }
 
 ---
 
-### 4.2 BorrowSanitizer
+### 5.2 BorrowSanitizer
 
 **状态**: 🧪 Rust Project Goal 2026；LLVM RFC 已发布
 
@@ -395,7 +447,7 @@ serde = { version = "1.0", public = true }
 
 ---
 
-### 4.3 MemorySanitizer / ThreadSanitizer 稳定化
+### 5.3 MemorySanitizer / ThreadSanitizer 稳定化
 
 **状态**: 🧪 Project Goals 2026 目标
 
@@ -408,9 +460,9 @@ serde = { version = "1.0", public = true }
 
 ---
 
-## 五、WebAssembly 与嵌入式预览
+## 六、WebAssembly 与嵌入式预览
 
-### 5.1 Wasm Components
+### 6.1 Wasm Components
 
 **状态**: 🧪 Project Goals 2026 目标
 
@@ -426,14 +478,14 @@ serde = { version = "1.0", public = true }
 
 ---
 
-## 六、跟踪与更新机制
+## 七、跟踪与更新机制
 
-### 6.1 更新频率
+### 7.1 更新频率
 
 - 每两周检查一次 [releases.rs](https://releases.rs/) 和 [Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) 更新
 - 每次 Rust nightly 升级后，验证本文件中的 nightly 代码示例是否仍可编译
 
-### 6.2 状态标记约定
+### 7.2 状态标记约定
 
 | 标记 | 含义 |
 |:---|:---|
@@ -443,7 +495,7 @@ serde = { version = "1.0", public = true }
 | ❌ | 已取消或无限期推迟 |
 | ⏳ | 等待上游决策 |
 
-### 6.3 关联文档
+### 7.3 关联文档
 
 - [Rust 1.97 稳定特性](./rust_1_97_preview.md)
 - [Pin Ergonomics 预览](15_pin_ergonomics_preview.md)
@@ -453,11 +505,13 @@ serde = { version = "1.0", public = true }
 - [BorrowSanitizer](../04_formal/23_borrow_sanitizer.md)
 - [AutoVerus / Verus](../04_formal/24_autoverus.md)
 - [Tree Borrows 深度](../04_formal/25_tree_borrows_deep_dive.md)
+- [1.97/1.98 API 等效实现与测试](../../../crates/c08_algorithms/src/rust_197_features.rs)
 
 ---
 
-## 七、待补充代码任务
+## 八、待补充代码任务
 
 - [x] 为本文件中的每个特性补充最小 nightly 示例（使用 `rust,ignore`，待 API 稳定后转为可编译示例）
-- [x] 在 `crates/c02_type_system/src/rust_198_features.rs` 中创建 1.98+ 特性占位模块
+- [x] 在 `crates/c08_algorithms/src/rust_197_features.rs` 中维护 1.97/1.98 API 的等效实现与单元测试
+- [x] 补充 1.98 已确认标准库 API 预览（`float_algebraic`、`int_format_into`、`core::range`、`NonZero::from_str_radix`、`Box::as_ptr`、`hex_literal_case`）
 - [ ] 将本文件关键术语同步到 `concept/00_meta/terminology_glossary.md`（待 1.98 特性稳定后执行）

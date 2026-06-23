@@ -36,7 +36,7 @@
     - [反例 5.2 (Codec线程安全)](#反例-52-codec线程安全)
   - [*定理数量: 6个*](#定理数量-6个)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -239,7 +239,7 @@ spawn(async move {
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 

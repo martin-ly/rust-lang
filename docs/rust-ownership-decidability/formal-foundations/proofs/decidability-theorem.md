@@ -51,7 +51,6 @@
     - [6.2 近似算法](#62-近似算法)
   - [7. 与其他语言对比](#7-与其他语言对比)
   - [参考文献](#参考文献)
-  - [*最后更新: 2026-03-04*](#最后更新-2026-03-04)
   - [权威来源索引](#权威来源索引)
 
 ---
@@ -629,7 +628,7 @@ impl<T> Trait for T where T: OtherTrait<T> {}
    - 关键贡献: GHC的类型推断算法
    - 关联: 第5节Trait求解
 
-6. **Rust Reference.** (2024). Type inference. <https://doc.rust-lang.org/reference/type-inference.html>
+6. **Rust Reference.** (2024). Type inference. <https://doc.rust-lang.org/reference/statements.html>
    - 关键内容: Rust编译器的实际算法
    - 关联: 第6节实践算法
 
@@ -639,6 +638,7 @@ impl<T> Trait for T where T: OtherTrait<T> {}
 *形式化深度: 高*
 *定理数量: 9个主要定理 + 4个关键引理*
 *最后更新: 2026-03-04*
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -660,7 +660,7 @@ impl<T> Trait for T where T: OtherTrait<T> {}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 

@@ -15,7 +15,7 @@
 
 > **来源: [Rust Reference - Borrow Checker](https://doc.rust-lang.org/reference/)**
 >
-> **来源: [Rust Reference - Borrowing](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon - docs.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [TRPL Ch. 4](https://doc.rust-lang.org/book/ch04-00-ownership.html)** · **来源: [Wikipedia - Resource Acquisition Is Initialization](https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)** · **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)** · **[来源: IEEE - Software Reliability Engineering]** · **[来源: ACM Computing Surveys - Memory Management]**
+> **来源: [Rust Reference - Borrowing](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon - docs.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [TRPL Ch. 4](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)** · **来源: [Wikipedia - Resource Acquisition Is Initialization](https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)** · **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)** · **[来源: IEEE - Software Reliability Engineering]** · **[来源: ACM Computing Surveys - Memory Management]**
 
 - [01-02: The Rust Borrowing System - A Formal Deep Dive](#01-02-the-rust-borrowing-system---a-formal-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -175,7 +175,7 @@
 
 ## 1. Introduction and Overview
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 >
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -230,7 +230,7 @@ This chapter proceeds as follows:
 
 ## 2. Borrowing Formal Semantics
 
-> **来源: [TRPL Ch. 10 - Lifetimes](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)**
+> **来源: [TRPL Ch. 10 - Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html)**
 
 We begin with a formal operational semantics for Rust's borrowing system. Our presentation uses a standard natural deduction style with contexts, judgments, and inference rules.
 
@@ -1946,7 +1946,7 @@ fn nll_limitation() {
 
 ## 7. Polonius: Next-Generation Borrow Checker
 
-> **来源: [RFC 2094 - NLL](https://rust-lang.github.io/rfcs/2094-2094-nll.html)**
+> **来源: [RFC 2094 - NLL](https://rust-lang.github.io/rfcs/2094-nll.html)**
 
 Polonius represents the next generation of Rust's borrow checker, using a fundamentally different approach based on "origins" rather than scopes.
 
@@ -2648,7 +2648,7 @@ let closure = async || {
 
 ## Summary
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 This chapter has provided a comprehensive formal treatment of Rust's borrowing system:
 
@@ -2678,7 +2678,7 @@ The borrowing system is the cornerstone of Rust's memory safety guarantees, enab
 
 ## References
 
-> **来源: [TRPL Ch. 10 - Lifetimes](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)**
+> **来源: [TRPL Ch. 10 - Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html)**
 
 1. Matsakis, N. D., & Klock, F. S. (2014). The Rust Language. ACM SIGAda Ada Letters.
 
@@ -2732,7 +2732,7 @@ The borrowing system is the cornerstone of Rust's memory safety guarantees, enab
 
 > **来源: [Rust Reference - Borrowing](https://doc.rust-lang.org/reference/)**
 
-> **来源: [TRPL Ch. 4 - Understanding Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Understanding Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -2755,7 +2755,7 @@ The borrowing system is the cornerstone of Rust's memory safety guarantees, enab
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 

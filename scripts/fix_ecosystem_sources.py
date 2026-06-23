@@ -44,7 +44,7 @@ ECOSYSTEM_SOURCES = {
     "06_ecosystem/47_compiler_infrastructure.md": "[Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) · [rustc_driver](https://doc.rust-lang.org/nightly/nightly-rustc/rustc_driver/)",
     "06_ecosystem/47_formal_verification_tools.md": "[Kani](https://model-checking.github.io/kani/) · [Creusot](https://creusot.rs/) · [Verus](https://verus-lang.github.io/verus/)",
     "06_ecosystem/48_data_engineering.md": "[polars](https://docs.rs/polars/) · [arrow-rs](https://docs.rs/arrow/) · [datafusion](https://docs.rs/datafusion/)",
-    "06_ecosystem/48_industrial_case_studies.md": "[Rust in Production](https://www.rust-lang.org/production) · [Rust Foundation](https://foundation.rust-lang.org/)",
+    "06_ecosystem/48_industrial_case_studies.md": "[Rust in Production](https://www.rust-lang.org/) · [Rust Foundation](https://foundation.rust-lang.org/)",
     "06_ecosystem/49_game_engine_internals.md": "[Bevy Engine](https://bevyengine.org/) · [wgpu](https://docs.rs/wgpu/)",
     "06_ecosystem/50_distributed_consensus.md": "[raft-rs](https://docs.rs/raft/) · [hotstuff-rs](https://docs.rs/hotstuff-rs/)",
     "06_ecosystem/52_robotics.md": "[rclrs](https://docs.rs/rclrs/) · [ROS2 Rust](https://github.com/ros2-rust/ros2_rust)",

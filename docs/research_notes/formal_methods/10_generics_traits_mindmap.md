@@ -248,7 +248,7 @@ Trait对象
 
 > **来源: [Wikipedia - Generic Programming](https://en.wikipedia.org/wiki/Generic_Programming)**
 
-> **来源: [TRPL Ch. 10 - Generics](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)**
+> **来源: [TRPL Ch. 10 - Generics](https://doc.rust-lang.org/book/ch10-00-generics.html)**
 
 > **来源: [Rust Reference - Generics](https://doc.rust-lang.org/reference/)**
 

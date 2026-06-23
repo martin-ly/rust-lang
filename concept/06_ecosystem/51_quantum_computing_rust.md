@@ -3,18 +3,14 @@
 > **EN**: Rust in Quantum Computing Ecosystems
 > **Summary**: Quantum Computing Rust: Rust ecosystem tools, crates, and engineering practices.
 > **内容分级**: [实验级]
-
 > **代码状态**: [综述级 — 待补充代码]
-
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
-
 > **来源**: [Cargo Book](https://doc.rust-lang.org/cargo/) · [Rustdoc Book](https://doc.rust-lang.org/rustdoc/) · [std API Docs](https://doc.rust-lang.org/std/)
 
 ## 📑 目录
 
-- [Quantum Computing in Rust（量子计算与 Rust）](#quantum-computing-in-rust量子计算与-rust)
+- [Rust 量子计算生态](#rust-量子计算生态)
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 量子比特与量子态](#11-量子比特与量子态)

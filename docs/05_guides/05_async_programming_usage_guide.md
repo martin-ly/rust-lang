@@ -1901,7 +1901,7 @@ graph TD
 > **来源: [Rust Reference - async/await](https://doc.rust-lang.org/reference/items/functions.html#async-functions)**
 > **来源: [Tokio Documentation](https://tokio.rs/)**
 > **[来源: ACM - Async Programming Models]**
-> **来源: [RFC 2394 - Async/Await](https://rust-lang.github.io/rfcs/2394-2394-async_await.html)**
+> **来源: [RFC 2394 - Async/Await](https://rust-lang.github.io/rfcs/2394-async_await.html)**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -1913,7 +1913,7 @@ graph TD
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 > **来源: [TRPL Ch. 17 - Async](https://doc.rust-lang.org/book/ch17-00-async-await.html)**
 > **来源: [Tokio Documentation](https://tokio.rs/)**
-> **来源: [RFC 2394 - Async/Await](https://rust-lang.github.io/rfcs/2394-2394-async_await.html)**
+> **来源: [RFC 2394 - Async/Await](https://rust-lang.github.io/rfcs/2394-async_await.html)**
 > **来源: [ACM](https://dl.acm.org/)**
 > **来源: [IEEE](https://standards.ieee.org/)**
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**

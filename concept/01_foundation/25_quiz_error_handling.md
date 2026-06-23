@@ -1,10 +1,11 @@
-> **内容分级**: [综述级]
+> **内容分级**:
+>
+> [综述级]
 
 # 测验：错误处理（试点扩展）
 >
 > **EN**: Error Handling
 > **Summary**: Quiz Error Handling. Core Rust concept.
-
 > **受众**: [初学者]
 > **内容分级**: [综述级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)

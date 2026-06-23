@@ -591,7 +591,7 @@ async fn process_item(item: Item) -> Result<ProcessedItem, String> {
 
 ### 5.3 rayon::spawn 与作用域线程 crossbeam
 >
-> **来源: rayon - docs.rs / [rayon](https://docs.rs/rayon/latest/rayon/)** · **来源: crossbeam - docs.rs / [crossbeam](https://docs.rs/crossbeam/latest/crossbeam/)** · **来源: [RFC 3151 - scoped threads](https://rust-lang.github.io/rfcs/3151-3151-scoped-threads.html)**
+> **来源: rayon - docs.rs / [rayon](https://docs.rs/rayon/latest/rayon/)** · **来源: crossbeam - docs.rs / [crossbeam](https://docs.rs/crossbeam/latest/crossbeam/)** · **来源: [RFC 3151 - scoped threads](https://rust-lang.github.io/rfcs/3151-scoped-threads.html)**
 
 `rayon` 提供数据并行分裂，`crossbeam` 提供灵活的作用域线程：
 
@@ -1149,7 +1149,7 @@ pub fn nested_parallel_matrix_multiply(
 
 > **[来源: Rayon Documentation - Parallel Iterators]**
 
-> **来源: [RFC 3151 - scoped threads](https://rust-lang.github.io/rfcs/3151-3151-scoped-threads.html)**
+> **来源: [RFC 3151 - scoped threads](https://rust-lang.github.io/rfcs/3151-scoped-threads.html)**
 
 > **来源: [RFC 458 - Send and Sync traits](https://github.com/rust-lang/rfcs/pull/458)**
 

@@ -1,6 +1,6 @@
 # Rust 1.97 前沿特性预览
 
-> **代码状态**: [综述级 — 待补充代码]
+> **代码状态**: [实现级 — 代码已补充]
 
 >
 > **EN**: Rust 1 97 Preview
@@ -25,7 +25,7 @@
 >
 ---
 
-> **后置概念**: [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
+> **后置概念**: [Rust 1.98+ 前沿特性预览](./rust_1_98_preview.md) · [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
 
@@ -70,7 +70,7 @@ impl AsyncDrop for AsyncFile {
 
 ### 1.2 Return Type Notation (RTN)
 
-**状态**: 🧪 RFC 3654 已发布；Project Goals 2026 目标 **"Prepare TAIT + RTN for stabilization"**（#6.45）
+**状态**: 🧪 RFC 3654 已发布；Project Goals 2026 目标 **[Prepare TAIT + RTN for stabilization](https://rust-lang.github.io/rust-project-goals/2026/rtn.html)**（#646）。完整稳定化受下一代 trait solver 工作阻塞，目标今年晚些时候；RTN 与 async closures 的新语法设计仍在寻求贡献者。
 
 **核心问题**: `impl Trait` 返回类型中无法命名关联类型，导致 `async fn` / `-> impl Iterator` 的返回类型难以在 trait bound 中表达。
 
@@ -383,32 +383,38 @@ async gen fn counter_stream(max: usize) -> impl Stream<Item = usize> {
 
 | API | 状态 | 说明 |
 |:---|:---|:---|
-| `VecDeque::truncate_front` | 🟢 1.97 已确认 | 从头部截断双端队列（Cargo 端已确认进入 1.97，标准库端需核对最终 feature gate） |
-| `int_format_into` | 🧪 Nightly | 整数格式化到现有缓冲区 |
+| `VecDeque::truncate_front` | 🔄 FCP finished / waiting | 从头部截断双端队列（PR #151973 FCP 已完成，当前 `S-waiting-on-review` / `S-waiting-on-fcp`，已确定错过 1.97 cutoff，推迟至 1.98+） |
+| `int_format_into` | 🟢 1.98 已确认 | 整数格式化到现有缓冲区（PR #152544，已合并至 master；因晚于 1.97 cutoff，将进入 1.98） |
 | `RefCell::try_map` | 🧪 Nightly | 尝试性 RefCell 映射 |
 | `String::into_raw_parts` | 🧪 Nightly | 分解 String 为原始组件 |
-| **`core::range::RangeFull` / `RangeTo`** | 🔄 FCP 完成 | `core::range` 类型补全（PR #156840），`RangeFull` 和 `RangeTo` 作为 `core::ops` 的 re-export；`legacy::*` 为旧类型提供新家 [来源: releases.rs 2026-06-06] |
-| **`float_algebraic`** | 🔄 FCP 中 | 浮点代数优化属性，允许编译器在 `-ffast-math` 语义下重组浮点运算（PR #157168，disposition-merge） [来源: releases.rs 2026-06-06] |
-| **`RandomSource` / `DefaultRandomSource`** | 🔄 等待 libs-api | 可插拔随机数源抽象（PR #157226） [来源: releases.rs 2026-06-06] |
-| **`PathBuf::into_string`** | 🔄 等待 review | `PathBuf` 零成本转换为 `String`（PR #157029） [来源: releases.rs 2026-06-06] |
-| **`Result::map_or_default` / `Option::map_or_default`** | 🔄 等待 review | 便捷映射并返回默认值（PR #156629） [来源: releases.rs 2026-06-06] |
+| **`Box::as_ptr` / `Box::as_mut_ptr`** | 🟢 1.98 已确认 | `Box<T>` 返回不物化引用的原始指针（PR #157876，已合并至 master；将进入 1.98）。此前为 nightly-only `box_as_ptr` |
+| **`core::range::RangeFull` / `RangeTo` / `legacy::*`** | 🟢 1.98 已确认 | `core::range` 类型补全（PR #156629，已合并至 master），`RangeFull` 和 `RangeTo` 作为 `core::ops` 的 re-export，`legacy::*` 为旧类型提供新家；将进入 1.98 |
+| **`float_algebraic`** | 🟢 1.98 已确认 | 浮点代数运算 intrinsics（`f32::add_algebraic` 等），允许编译器在代数等价前提下重组浮点运算（PR #157029，已合并至 master；将进入 1.98） |
+| **`RandomSource` / `DefaultRandomSource`** | 🔄 等待 libs-api | 可插拔随机数源抽象（PR #157168，当前 `S-waiting-on-t-libs-api`） [来源: releases.rs 2026-06-23] |
+| **`PathBuf::into_string`** | 🟢 1.98 已确认 | `PathBuf` 零成本转换为 `String`（PR #156840，已合并至 master；将进入 1.98） |
+| **`Result::map_or_default` / `Option::map_or_default`** | 🟢 1.98 已确认 | 便捷映射并返回默认值（PR #156222，已合并至 master；将进入 1.98） |
 | **`core::alloc::Alloc`** | 🔄 等待 review | `dyn` subset of `Allocator` 稳定化为 `core::alloc::Alloc` trait（PR #157286，4 days old） [来源: releases.rs 2026-06-06] |
-| **`box_vec_non_null`** | 🔄 PFCP | `Box<Vec<T>>` → `NonNull<T>` 转换优化（PR #157273，5 days old，proposed-final-comment-period） [来源: releases.rs 2026-06-06] |
+| **`box_vec_non_null`** | 🔄 PFCP | `Box<T>` / `Vec<T>` → `NonNull<T>` 转换优化（PR #157226，`proposed-final-comment-period`，`disposition-merge`） [来源: releases.rs 2026-06-23] |
 | **`new_range_remainder`** | 🧪 Nightly | 新 `core::range` 迭代器类型的 `remainder()` 方法（Tracking Issue #154458，2026-03-27），RFC 3550 的后续扩展 [来源: rust-lang/rust#154458] |
-| **`VecDeque::retain_back`** | 🔄 FCP 完成 | `VecDeque` 反向保留元素（PR #151973，FCP finished，`to-announce`）。⚠️ 若 1.97 Beta  cutoff 前未合并则推迟至 1.98+ [来源: releases.rs 2026-06-19] |
+| **`VecDeque::retain_back`** | 🔄 FCP finished / waiting | `VecDeque` 反向保留元素（与 `truncate_front` 同在 PR #151973，FCP 已完成，当前等待 review / FCP completion；已确定错过 1.97 cutoff，推迟至 1.98+） [来源: releases.rs 2026-06-23] |
 | **`supertrait_item_shadowing`** | 🔄 PFCP | 允许子 trait 覆盖父 trait 的关联项（PR #150055，proposed-final-comment-period） [来源: releases.rs 2026-06-19] |
 | **`alignment_type` / `ptr_alignment_type`** | 🔄 PFCP | 类型级对齐抽象，部分稳定化为 `alignment_type`（PR #154065，proposed-final-comment-period） [来源: releases.rs 2026-06-19] |
 | **`stack-protector`** | 🔄 PFCP / Blocked | 栈保护编译器选项（PR #148051，proposed-final-comment-period，同时 `S-blocked`） [来源: releases.rs 2026-06-19] |
 | **`breakpoint` function** | 🔄 PFCP | 标准库断点函数（PR #142824，proposed-final-comment-period） [来源: releases.rs 2026-06-19] |
-| **`proc_macro_value`** | 🔄 等待 review | 过程宏值类型支持（PR #152092，等待 review） [来源: releases.rs 2026-06-19] |
-| **C-variadic function definitions** | 🔄 PFCP | C 可变参数函数定义稳定化（PR #155942，proposed-final-comment-period，`disposition-merge`） [来源: releases.rs 2026-06-19] |
-| **`size_of_val_raw` / `align_of_val_raw` / `Layout::for_value_raw`** | 🔄 等待 review | 裸值尺寸/对齐计算（PR #157572，11 days old，等待 review） [来源: releases.rs 2026-06-19] |
-| **`#[optimize]` attribute** | 🔄 Blocked | 函数级优化属性（PR #157273，blocked，`needs-fcp`） [来源: releases.rs 2026-06-19] |
-| **`never` type (`!`)** | 🔄 FCP / disposition-merge | `!` 类型最终稳定化（PR #155499，final-comment-period，`disposition-merge`）。Rust 2024 Edition 下已可用，此 PR 完成跨 edition 统一 [来源: releases.rs 2026-06-19] |
+| **`proc_macro_value`** | 🔄 等待 review | 过程宏值类型支持（PR #152092，`S-waiting-on-review`） [来源: releases.rs 2026-06-23] |
+| **C-variadic function definitions** | 🔄 PFCP | C 可变参数函数定义稳定化（PR #155942，`proposed-final-comment-period`，`disposition-merge`） [来源: releases.rs 2026-06-23] |
+| **`size_of_val_raw` / `align_of_val_raw` / `Layout::for_value_raw`** | 🔄 等待 review | 裸值尺寸/对齐计算（PR #157572，15 days old，`S-waiting-on-review`） [来源: releases.rs 2026-06-23] |
+| **`#[optimize]` attribute** | 🔄 PFCP / Blocked | 函数级优化属性（PR #157273，proposed-final-comment-period，`S-blocked`，`needs-fcp`） [来源: releases.rs 2026-06-23] |
+| **`never` type (`!`)** | 🔄 FCP finished / blocked | `!` 类型最终稳定化（PR #155697，finished-final-comment-period，`disposition-merge`，`S-blocked`）。Rust 2024 Edition 下已可用，此 PR 完成跨 edition 统一 [来源: releases.rs 2026-06-23] |
+| **`NonZero<T>::highest_one()` / `lowest_one()`** | 🟢 1.97 已确认 | 非零整数最高/最低 set bit 索引（PR #155147，已合并至 1.97.0 milestone） |
+| **`NonZero<T>::bit_width()`** | 🟢 1.97 已确认 | 非零整数表示所需的最少位数（PR #155131，已合并至 1.97.0 milestone） |
+| **`NonZero<T>::from_str_radix()`** | 🟢 1.98 已确认 | 非零整数按指定进制解析（PR #157877，已合并至 master；将进入 1.98） |
+| **`char::is_control()` const-stable** | 🟢 1.97 已确认 | `char::is_control()` 在 const 上下文可用（PR #155528，已合并至 1.97.0 milestone） |
 | **`derive(CoercePointee)`** | 🔄 FCP 完成 / Blocked | 自动派生 `CoerceUnsized` 的 `CoercePointee`（PR #139673，finished-final-comment-period，`disposition-merge`，但 `S-blocked`） [来源: releases.rs 2026-06-19] |
 | **Associated Type Position Impl Trait (ATPIT)** | 🔄 PFCP / Blocked | 关联类型位置 `impl Trait`（PR #133820，proposed-final-comment-period，`disposition-merge`，`S-blocked`） [来源: releases.rs 2026-06-19] |
-| **`local_key_cell_update`** | 🔄 等待 libs-api | `LocalKey::update` 相关 Cell 更新 API（PR #157734，7 days old） [来源: releases.rs 2026-06-19] |
-| **`#[my_macro] mod foo;` (proc_macro_hygiene)** | 🔄 PFCP | 过程宏卫生性的一部分（PR #157857，5 days old，`proposed-final-comment-period`） [来源: releases.rs 2026-06-19] |
+| **`local_key_cell_update`** | 🔄 等待 libs-api | `LocalKey::update` 相关 Cell 更新 API（PR #157734，12 days old，`S-waiting-on-t-libs-api`） [来源: releases.rs 2026-06-23] |
+| **`#[my_macro] mod foo;` (proc_macro_hygiene)** | 🔄 PFCP | 过程宏卫生性的一部分（PR #157857，9 days old，`proposed-final-comment-period`，`disposition-merge`，`needs-reference-pr`） [来源: releases.rs 2026-06-23] |
+| **`hex_literal_case` (rustfmt)** | 🟢 1.98 已确认 | 十六进制字面量大小写风格配置（rustfmt PR #6935，已合并；将进入 1.98） [来源: TWiR 656]
 
 > **代码示例来源**: [`crates/c08_algorithms/src/rust_197_features.rs`](../../../crates/c08_algorithms/src/rust_197_features.rs) 包含以下 API 的等效实现和 nightly 测试。
 
@@ -416,7 +422,7 @@ async gen fn counter_stream(max: usize) -> impl Stream<Item = usize> {
 
 ### 5.2 VecDeque::truncate_front
 
-**状态**: 🧪 Nightly
+**状态**: 🔄 FCP finished / waiting（与 `retain_back` 同在 PR #151973；已确定错过 1.97 cutoff，进入 1.98 稳定化通道）
 
 **说明**: 从双端队列**前部**截断，保留后部 `n` 个元素。与 `truncate(n)`（保留前部 `n` 个）形成对称操作。
 
@@ -434,7 +440,7 @@ assert_eq!(deque.make_contiguous(), &[4, 5]); // 保留后部 2 个
 
 ### 5.3 VecDeque::retain_back
 
-**状态**: 🔄 FCP 完成（⚠️ nightly 1.98.0 验证中未出现，可能推迟至 1.98+）
+**状态**: 🔄 FCP finished / waiting（与 `truncate_front` 同在 PR #151973；已确定错过 1.97 cutoff，进入 1.98 稳定化通道）
 
 **说明**: 从双端队列**尾部**开始保留满足条件的元素，与 `retain`（从头部开始）互补。
 
@@ -450,7 +456,42 @@ assert_eq!(deque.make_contiguous(), &[2, 4]); // 保留偶数
 
 ---
 
-### 5.4 RefCell::try_map
+### 5.4 NonZero 位操作 API 稳定化
+
+**状态**: 🟢 Rust 1.97.0 稳定
+
+**说明**: `NonZero<T>` 新增位相关查询方法，便于在无需额外 unwrap 的情况下处理非零整数的位模式。
+
+```rust
+use std::num::NonZeroU32;
+
+let n = NonZeroU32::new(0b10100).unwrap();
+assert_eq!(n.highest_one(), 4); // 最高 set bit 的索引
+assert_eq!(n.lowest_one(), 2);  // 最低 set bit 的索引
+// bit_width 返回同类型 NonZero，表示表示 self 所需的最少位数
+assert_eq!(n.bit_width(), NonZeroU32::new(5).unwrap()); // 0b10100 需要 5 bits
+```
+
+**来源**: [PR #155147](https://github.com/rust-lang/rust/pull/155147) · [PR #155131](https://github.com/rust-lang/rust/pull/155131)
+
+---
+
+### 5.5 `char::is_control()` const 稳定化
+
+**状态**: 🟢 Rust 1.97.0 稳定
+
+**说明**: `char::is_control()` 现在可在 `const` 上下文中调用。
+
+```rust
+const SPACE_CTRL: bool = ' '.is_control(); // false
+const NUL_CTRL: bool = '\0'.is_control();  // true
+```
+
+**来源**: [PR #155528](https://github.com/rust-lang/rust/pull/155528)
+
+---
+
+### 5.6 RefCell::try_map
 
 **状态**: 🧪 Nightly
 
@@ -488,20 +529,22 @@ assert_eq!(&buf[..written], b"12345");
 
 ### 5.6 float_algebraic
 
-**状态**: 🔄 FCP 中
+**状态**: 🧪 Nightly
 
-**说明**: 允许编译器在代数等价的前提下重组浮点运算（类似 `-ffast-math`），可能改变舍入行为。
+**说明**: 浮点代数运算 intrinsics（`f32::add_algebraic` / `sub_algebraic` / `mul_algebraic` / `div_algebraic` / `rem_algebraic` 等）允许编译器在代数等价前提下重组浮点运算（类似 `-ffast-math`），可能改变舍入行为。该特性仍处于 nightly 实验阶段，尚未进入 1.97 beta 稳定化流程。
 
 ```rust,ignore
 #![feature(float_algebraic)]
 
-#[float_algebraic]
 fn fast_sum(a: f64, b: f64, c: f64) -> f64 {
-    (a + b) + c  // 编译器可能重排为 a + (b + c)
+    // 使用实例方法而非属性
+    a.add_algebraic(b).add_algebraic(c)  // 编译器可能重排为 a + (b + c)
 }
 ```
 
 > ⚠️ 这会打破 IEEE 754 严格语义，仅在可接受精度损失的场景使用。
+>
+> **来源**: [Tracking Issue #136468](https://github.com/rust-lang/rust/issues/136468) · [Impl PR #136457](https://github.com/rust-lang/rust/pull/136457)
 
 ---
 

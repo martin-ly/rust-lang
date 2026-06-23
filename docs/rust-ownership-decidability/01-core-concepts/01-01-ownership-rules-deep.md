@@ -16,7 +16,7 @@
 > **权威来源**: The Rust Programming Language (TRPL), Rust Reference, RustBelt (POPL 2018)
 > **形式化参考**: Jung et al. (2018). RustBelt: Securing the Foundations of the Rust Programming Language. POPL
 > **状态**: 深度分析文档 | 形式化完备
-> **来源: [Rust Reference - Ownership](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [TRPL Ch. 4](https://doc.rust-lang.org/book/ch04-00-ownership.html)** · **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)** · **来源: [Wikipedia - Linear Type](https://en.wikipedia.org/wiki/Linear_Type)** · **来源: [Wikipedia - Substructural Type System](https://en.wikipedia.org/wiki/Substructural_Type_System)** · **来源: [IEEE - Type Safety in Systems Programming](https://standards.ieee.org/)** · **[来源: ACM - Ownership Types Survey]**
+> **来源: [Rust Reference - Ownership](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [TRPL Ch. 4](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)** · **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)** · **来源: [Wikipedia - Linear Type](https://en.wikipedia.org/wiki/Linear_Type)** · **来源: [Wikipedia - Substructural Type System](https://en.wikipedia.org/wiki/Substructural_Type_System)** · **来源: [IEEE - Type Safety in Systems Programming](https://standards.ieee.org/)** · **[来源: ACM - Ownership Types Survey]**
 
 ---
 
@@ -119,7 +119,7 @@
 
 ## 前言
 
-> **来源: [TRPL Ch. 4 - Understanding Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Understanding Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 >
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -2137,11 +2137,10 @@ async fn explicit_move() {
 }
 ```
 
-**Rust 1.94+ async改进**:
+**Rust 1.85+ async改进**:
 
 ```rust
-// async闭包 (Rust 1.94不稳定特性)
-#![feature(async_closure)]
+// async闭包 (Rust 1.85.0+ stable，无需 feature gate)
 
 async fn async_closure_usage() {
     let s = String::from("hello");
@@ -3668,7 +3667,7 @@ Vec<T> ──into_iter()──▶ IntoIter<T>
 
 ## 8. Rust 1.94 特性集成
 
-> **来源: [TRPL Ch. 4 - Understanding Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Understanding Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 ### 8.1 精确大小迭代器优化
 
@@ -4011,7 +4010,7 @@ fn macro_ownership() {
 
 > **来源: [Rust Reference - Ownership](https://doc.rust-lang.org/reference/)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -4034,7 +4033,7 @@ fn macro_ownership() {
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 

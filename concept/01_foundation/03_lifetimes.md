@@ -400,7 +400,7 @@ graph BT
   ⟹ 合法的 Rust 程序集在 NLL 下严格大于词法作用域下的程序集
 ```
 
-> **来源: [RFC 2094](https://rust-lang.github.io/rfcs/2094-2094-nll.html)** NLL 将生命周期从词法作用域扩展到基于数据流的实际使用期，减少不必要的借用冲突。✅
+> **来源: [RFC 2094](https://rust-lang.github.io/rfcs/2094-nll.html)** NLL 将生命周期从词法作用域扩展到基于数据流的实际使用期，减少不必要的借用冲突。✅
 
 ### 4.5 定理：Variance 子类型安全 ⟹ 生命周期替换的合法性
 

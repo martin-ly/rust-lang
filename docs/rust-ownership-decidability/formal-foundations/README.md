@@ -17,18 +17,18 @@
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [形式化理论基础](#形式化理论基础)
-  - [📋 目录](#目录)
-  - [🎯 模块概述](#模块概述)
-  - [📁 子模块导航](#子模块导航)
+  - [📋 目录](#-目录)
+  - [🎯 模块概述](#-模块概述)
+  - [📁 子模块导航](#-子模块导航)
     - [models/ - 形式化模型](#models---形式化模型)
     - [semantics/ - 语义定义](#semantics---语义定义)
     - [proofs/ - 形式化证明](#proofs---形式化证明)
-  - [🔗 与其他模块的关联](#与其他模块的关联)
-  - [🎓 学习路径](#学习路径)
+  - [🔗 与其他模块的关联](#-与其他模块的关联)
+  - [🎓 学习路径](#-学习路径)
     - [理论基础路径](#理论基础路径)
     - [证明技术路径](#证明技术路径)
-  - [📚 核心定理索引](#核心定理索引)
-  - [🌍 国际权威资料索引](#国际权威资料索引)
+  - [📚 核心定理索引](#-核心定理索引)
+  - [🌍 国际权威资料索引](#-国际权威资料索引)
     - [顶级会议论文 (POPL/PLDI)](#顶级会议论文-poplpldi)
     - [学位论文](#学位论文)
     - [工具实现](#工具实现)
@@ -228,7 +228,7 @@ formal-foundations/
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 

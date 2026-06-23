@@ -677,7 +677,7 @@ fn get_static() -> &'static str {
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
@@ -689,7 +689,7 @@ fn get_static() -> &'static str {
 
 > **来源: [Rust Reference - Result](https://doc.rust-lang.org/std/result/)**
 
-> **来源: [RFC 2504 - Try Trait](https://rust-lang.github.io/rfcs/2504-2504-try-trait.html)**
+> **来源: [RFC 2504 - Try Trait](https://rust-lang.github.io/rfcs/2504-try-trait.html)**
 
 ---
 

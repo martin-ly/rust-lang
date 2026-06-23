@@ -24,7 +24,7 @@
 > [Async Drop](./18_async_drop_preview.md)
 > **来源**:
 > [RFC #3709 — Pinned Places](https://github.com/rust-lang/rfcs/issues/3709) ·
-> [Rust Project Goals 2026 — Beyond the &](https://rust-lang.github.io/rust-project-goals/2026/) ·
+> [Rust Project Goals 2026 — Pin Ergonomics](https://rust-lang.github.io/rust-project-goals/2026/pin-ergonomics.html) ·
 > [withoutboats — Pin and Suffering](https://without.boats/blog/) ·
 > [RFC #3627 — Reborrow Traits](https://github.com/rust-lang/rfcs/pull/3627)
 
@@ -109,9 +109,10 @@ let shared: Pin<&MyFuture> = &pinned;  // ✅ 自动 CoerceShared
 
 **当前状态** (2026-06):
 
-- PR 已开，等待审查和 derive macro 实现
-- Blocker：可能需要对编译器内部 `Rvalue::Ref` / `ExprKind::Ref` 进行大规模重构
-- 详见 [Rust Project Goals 2026 — Reborrow Traits](https://rust-lang.github.io/rust-project-goals/2026/)
+- 2025H2 已实现 `Reborrow` / `CoerceShared` trait 的单生命周期 + trivial 内存布局原型
+- 2026 年继续迭代：收集用户反馈、支持多生命周期重借、非平凡 `CoerceShared`、安全性验证、基于实现经验重写 RFC
+- Blocker：可能需要对编译器内部 `Rvalue::Ref` / `ExprKind::Ref` 进行大规模重构；多生命周期支持涉及 rmeta 复杂度
+- 详见 [Rust Project Goals 2026 — Reborrow Traits](https://rust-lang.github.io/rust-project-goals/2026/reborrow-traits.html)
 
 ---
 
@@ -232,7 +233,7 @@ graph TD
 
 > **[教学类比]** Pin Ergonomics 的改进类似于给 Rust 的异步编程"解除绑腿"——核心机制（Pin 保证内存安全）不变，但使用方式更自然。Reborrow Traits 让 `Pin<&mut T>` 的行为更接近普通 `&mut T`，而 `pin` 关键字则从根本上简化自引用类型的表达。
 >
-> **来源**: [Rust Project Goals 2026 — Beyond the &](https://rust-lang.github.io/rust-project-goals/2026/) · [withoutboats — "Pin and Suffering"](https://without.boats/blog/pin-and-suffering/) · [RFC #3709](https://github.com/rust-lang/rfcs/issues/3709)
+> **来源**: [Rust Project Goals 2026 — Pin Ergonomics](https://rust-lang.github.io/rust-project-goals/2026/pin-ergonomics.html) · [withoutboats — "Pin and Suffering"](https://without.boats/blog/pin-and-suffering/) · [RFC #3709](https://github.com/rust-lang/rfcs/issues/3709)
 
 ## 嵌入式测验（Embedded Quiz）
 

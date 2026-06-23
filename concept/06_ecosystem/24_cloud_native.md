@@ -2,15 +2,12 @@
 >
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
-
 >
 > **来源**: [tokio](https://docs.rs/tokio/) · [kube-rs](https://docs.rs/kube/) · [Cargo Book](https://doc.rust-lang.org/cargo/)
 ---
 
 > **内容分级**: [综述级]
-
 > **代码状态**: ✅ 含可编译示例
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Rust 云原生生态
@@ -19,7 +16,6 @@
 > **Summary**: Cloud Native. Core Rust concept covering mechanism analysis, memory safety guarantees, performance optimization.
 >
 > **受众**: [进阶]
-
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Cre — 设计云原生架构
@@ -29,10 +25,13 @@
 
 ---
 
-> **来源**: [Tokio](https://tokio.rs/) · [Axum](https://github.com/tokio-rs/axum) · [Actix](https://actix.rs/) · [Rust Cloud Native](https://rust-cloud-native.github.io/) · [Wikipedia — Cloud Native](https://en.wikipedia.org/wiki/Cloud-native_computing)
-
+> **来源**:
+>
+> [Tokio](https://tokio.rs/) · [Axum](https://github.com/tokio-rs/axum) ·
+> [Actix](https://actix.rs/) · [Rust Cloud Native](https://rust-cloud-native.github.io/) ·
+> [Wikipedia — Cloud Native](https://en.wikipedia.org/wiki/Cloud-native_computing)
+>
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录

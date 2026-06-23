@@ -13,7 +13,7 @@
 > **来源: [Rust Reference - Ownership](https://doc.rust-lang.org/reference/)** ·
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)** ·
 > **来源: [Wikipedia - Region-based Memory Management](https://en.wikipedia.org/wiki/Region_based_Memory_Management)** ·
-> **来源: [RFC 2094 - NLL](https://rust-lang.github.io/rfcs/2094-2094-nll.html)** ·
+> **来源: [RFC 2094 - NLL](https://rust-lang.github.io/rfcs/2094-nll.html)** ·
 > **来源: [Wikipedia - Linear Type](https://en.wikipedia.org/wiki/Linear_Type)** ·
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
@@ -1328,7 +1328,7 @@ Rust 所有权系统的变体代表了编程语言理论的前沿探索。从区
 ## 权威来源索引
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 

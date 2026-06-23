@@ -2,7 +2,6 @@
 >
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
-
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Async Book](https://rust-lang.github.io/async-book/)
 ---
@@ -11,7 +10,6 @@
 >
 > **EN**: Readme
 > **Summary**: Readme. Core Rust concept.
-
 > **受众**: [专家]
 > **定位**：Rust 的高级特性，涉及并发、异步、Unsafe 和元编程。本层是 L1-L2 概念在**复杂场景**中的组合应用与边界突破。
 > **Bloom 层级**: 应用 → 分析 → 评价
@@ -187,6 +185,7 @@ graph TB
 
 - [Async/Await 高级主题](./02_async_advanced.md)
 - [异步模式：从 Future 到生产级并发](./02_async_patterns.md)
+- [Async Closures（异步闭包）](./24_async_closures.md)
 - [FFI 高级主题：跨语言边界的安全与性能](./09_ffi_advanced.md)
 - [并发 模式：从消息 传递到锁自由的数据结构](./10_concurrency_patterns.md)
 - [原子操作与内存序：无锁并发的精确控制](./11_atomics_and_memory_ordering.md)

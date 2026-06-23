@@ -1,7 +1,7 @@
-> **内容分级**: [综述级]
-
+> **内容分级**:
+>
+> [综述级]
 > **代码状态**: ✅ 含可编译示例
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Rust 嵌入式系统开发
@@ -27,9 +27,7 @@
 > [Rust Embedded Working Group](https://github.com/rust-embedded/wg) ·
 > [Wikipedia — Embedded System](https://en.wikipedia.org/wiki/Embedded_system) ·
 > [Ferrous Systems](https://ferrous-systems.com/)
-
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录

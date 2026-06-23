@@ -710,7 +710,7 @@ impl SelfRef {
 ```
 
 > **定理（Pin 地址不变性）**：若 `Pin<P<T>>` 被构造且 `T: !Unpin`，则 `P` 指向的内存地址在所有可观测程序点保持不变。这是 RefinedRust（PLDI 2024）中通过 **lifetime token** 和 **location ownership** 联合保证的。 [来源: [Wikipedia — Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)]
-> **来源**: [RFC 2349: Pin](https://rust-lang.github.io/rfcs/2349-2349-pin.html) · [PLDI 2024: RefinedRust](https://doi.org/10.1145/3656425) · [Rust Reference: Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html) · [Jung et al. 2019: Stacked Borrows](https://doi.org/10.1145/3290343)
+> **来源**: [RFC 2349: Pin](https://rust-lang.github.io/rfcs/2349-pin.html) · [PLDI 2024: RefinedRust](https://doi.org/10.1145/3656425) · [Rust Reference: Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html) · [Jung et al. 2019: Stacked Borrows](https://doi.org/10.1145/3290343)
 
 ### 9.5 Pin 不动性的 LTL 形式化
 

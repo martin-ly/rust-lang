@@ -19,27 +19,26 @@
   - [目录](#目录)
   - [1. 引言](#1-引言)
   - [2. 类型映射](#2-类型映射)
-    - [定义 TYPEMAP-1 ( 基本类型 )](#定义-typemap-1--基本类型)
-    - [定义 TYPEMAP-2 ( 复杂类型 )](#定义-typemap-2--复杂类型)
+    - [定义 TYPEMAP-1 ( 基本类型 )](#定义-typemap-1--基本类型-)
+    - [定义 TYPEMAP-2 ( 复杂类型 )](#定义-typemap-2--复杂类型-)
   - [3. 内存管理](#3-内存管理)
-    - [定义 MEM-1 ( wasm内存模型 )](#定义-mem-1--wasm内存模型)
-    - [定义 MEM-2 ( 所有权转移 )](#定义-mem-2--所有权转移)
-    - [定理 MEM-T1 ( 无泄漏 )](#定理-mem-t1--无泄漏)
+    - [定义 MEM-1 ( wasm内存模型 )](#定义-mem-1--wasm内存模型-)
+    - [定义 MEM-2 ( 所有权转移 )](#定义-mem-2--所有权转移-)
+    - [定理 MEM-T1 ( 无泄漏 )](#定理-mem-t1--无泄漏-)
   - [4. 导出函数](#4-导出函数)
-    - [定义 EXPORT-1 ( 导出语法 )](#定义-export-1--导出语法)
-    - [定义 EXPORT-2 ( 异步导出 )](#定义-export-2--异步导出)
+    - [定义 EXPORT-1 ( 导出语法 )](#定义-export-1--导出语法-)
+    - [定义 EXPORT-2 ( 异步导出 )](#定义-export-2--异步导出-)
   - [5. 导入JS](#5-导入js)
-    - [定义 IMPORT-1 ( 内联导入 )](#定义-import-1--内联导入)
-    - [定义 IMPORT-2 ( 自定义类型 )](#定义-import-2--自定义类型)
+    - [定义 IMPORT-1 ( 内联导入 )](#定义-import-1--内联导入-)
+    - [定义 IMPORT-2 ( 自定义类型 )](#定义-import-2--自定义类型-)
   - [6. 定理与证明](#6-定理与证明)
-    - [定理 WBG-T1 ( 类型安全边界 )](#定理-wbg-t1--类型安全边界)
-    - [定理 WBG-T2 ( 零拷贝视图 )](#定理-wbg-t2--零拷贝视图)
+    - [定理 WBG-T1 ( 类型安全边界 )](#定理-wbg-t1--类型安全边界-)
+    - [定理 WBG-T2 ( 零拷贝视图 )](#定理-wbg-t2--零拷贝视图-)
   - [7. 代码示例](#7-代码示例)
     - [示例1: 基础导出](#示例1-基础导出)
     - [示例2: DOM操作](#示例2-dom操作)
     - [示例3: 异步HTTP](#示例3-异步http)
   - [**状态**: ✅ 已对齐](#状态--已对齐)
-  - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引)
 
 ---
@@ -299,7 +298,7 @@ pub async fn fetch_json(url: String) -> Result<JsValue, JsValue> {
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
@@ -314,32 +313,3 @@ pub async fn fetch_json(url: String) -> Result<JsValue, JsValue> {
 > **来源: [ACM - Formal Verification](https://dl.acm.org/)**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
->
-> **[来源: [Iris Project](https://iris-project.org/)]**
->
-> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
->
-> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
->
-> **[来源: [WebAssembly Documentation](https://webassembly.org/)]**
->
-> **[来源: [Wasmtime](https://wasmtime.dev/)]**
->
-> **[来源: [Rust FFI Guide](https://doc.rust-lang.org/nomicon/ffi.html)]**
->
-> **[来源: [bindgen Documentation](https://rust-lang.github.io/rust-bindgen/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**

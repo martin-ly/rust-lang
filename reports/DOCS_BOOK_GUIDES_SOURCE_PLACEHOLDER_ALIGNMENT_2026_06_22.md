@@ -37,9 +37,9 @@
 | 原文 | 修复后 |
 |:---|:---|
 | `来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))` | `[来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))]` |
-| `来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)` | `[来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)]` |
+| `来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)` | `[来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)]` |
 | `来源: [Rust Reference - Borrow Checker](https://doc.rust-lang.org/reference/)` | `[来源: [Rust Reference - Borrow Checker](https://doc.rust-lang.org/reference/)]` |
-| `来源: [RFC 2094 - NLL](https://rust-lang.github.io/rfcs/2094-2094-nll.html)` | `[来源: [RFC 2094 - NLL](https://rust-lang.github.io/rfcs/2094-nll.html)]` |
+| `来源: [RFC 2094 - NLL](https://rust-lang.github.io/rfcs/2094-nll.html)` | `[来源: [RFC 2094 - NLL](https://rust-lang.github.io/rfcs/2094-nll.html)]` |
 
 ## 下一步
 

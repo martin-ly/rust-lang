@@ -33,6 +33,7 @@
     - [1.1 Trait Object](#11-trait-object)
     - [1.2 VTable](#12-vtable)
     - [1.3 对象安全](#13-对象安全)
+    - [1.4 Trait Object Upcasting（1.86 stable）](#14-trait-object-upcasting186-stable)
   - [二、类型擦除模式](#二类型擦除模式)
     - [2.1 Box](#21-box)
     - [2.2 自定义类型擦除](#22-自定义类型擦除)
@@ -217,6 +218,28 @@ VTable (虚函数表):
 
 > **对象安全洞察**: **对象安全限制了 trait object 的能力**——泛型和 Self 返回需要静态分发。
 > [来源: [Rust Reference — Object Safety](https://doc.rust-lang.org/reference/items/traits.html#object-safety)]
+
+---
+
+### 1.4 Trait Object Upcasting（1.86 stable）
+>
+
+Rust 1.86.0 稳定了 **trait object upcasting**：如果 `SubTrait: SuperTrait`，则 `dyn SubTrait` 可以安全地转换为 `dyn SuperTrait`。
+
+```rust
+use std::fmt::Debug;
+
+trait Animal: Debug {}
+trait Dog: Animal {}
+
+fn upcast(dog: &dyn Dog) -> &dyn Animal {
+    dog as &dyn Animal  // ✅ 1.86.0+ 无需额外 trait bound
+}
+```
+
+**此前（1.85 及之前）**: 需要手动引入 `std::ops::Upcast` 相关 workaround，或定义辅助 trait。
+
+> **权威来源**: [Rust 1.86.0 Release Notes](https://blog.rust-lang.org/2025/04/03/Rust-1.86.0.html) · [Rust Reference — Upcasting](https://doc.rust-lang.org/reference/types/trait-object.html#trait-object-upcasting)
 
 ---
 

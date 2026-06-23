@@ -77,7 +77,12 @@
     - [测验 2：《Rust 表征空间（Semantic / Representational Space）》的主要用途是什么？（理解层）](#测验-2rust-表征空间semantic--representational-space的主要用途是什么理解层)
     - [测验 3：元数据层文档能否替代 L1-L7 的核心概念学习？（理解层）](#测验-3元数据层文档能否替代-l1-l7-的核心概念学习理解层)
 
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Rust RFCs](https://rust-lang.github.io/rfcs/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)
+> **来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [Rust RFCs](https://rust-lang.github.io/rfcs/) ·
+> [RustBelt](https://plv.mpi-sws.org/rustbelt/) ·
+> [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)
+>
 >
 ## 变更日志
 
@@ -85,7 +90,11 @@
 
 ---
 
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Rust RFCs](https://rust-lang.github.io/rfcs/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)
+> **来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [Rust RFCs](https://rust-lang.github.io/rfcs/) ·
+> [RustBelt](https://plv.mpi-sws.org/rustbelt/) ·
+> [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)
 >
 ### 〇、表征空间认知全景
 

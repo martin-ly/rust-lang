@@ -16,7 +16,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [现代Rust库形式化扩展报告](#现代rust库形式化扩展报告)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [执行摘要](#执行摘要)
     - [新增库列表](#新增库列表)
   - [形式化内容统计](#形式化内容统计)
@@ -38,8 +38,10 @@
     - [中优先级](#中优先级)
     - [低优先级](#低优先级)
   - [总结](#总结)
-  - **下次迭代**: 高优先级库分析
+  - [**下次迭代**: 高优先级库分析](#下次迭代-高优先级库分析)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 执行摘要
 >
@@ -228,7 +230,7 @@ Thm PYO3-T1: 无GIL时不访问Python对象
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 

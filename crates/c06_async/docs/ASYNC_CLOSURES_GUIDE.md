@@ -2,7 +2,7 @@
 
 > **Rust 版本**: 1.85.0+ Stable
 > **RFC**: [RFC 3668 - Async Closures](https://rust-lang.github.io/rfcs/3668-async-closures.html)
-> **相关 Traits**: `AsyncFn`, `AsyncFnMut`, `AsyncFnOnce` (1.94.0+ 已入 prelude)
+> **相关 Traits**: `AsyncFn`, `AsyncFnMut`, `AsyncFnOnce` (1.85.0 stable, Rust 2024 prelude)
 > **最后更新**: 2026-05-08
 
 ---
@@ -378,7 +378,7 @@ graph TD
 ```mermaid
 graph TD
     AC[Async Closures<br/>1.85.0 稳定] --> A1[AFIT<br/>async fn in trait<br/>1.75.0 稳定]
-    AC --> A2[AsyncFn Traits<br/>1.94.0 入 prelude]
+    AC --> A2[AsyncFn Traits<br/>1.85.0 stable / 2024 prelude]
     AC --> A3[Future/IntoFuture<br/>1.85.0 入 prelude]
 
     A1 --> B1[AFIDT<br/>async fn in dyn trait<br/>1.97+ Nightly]

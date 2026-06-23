@@ -406,7 +406,7 @@ async fn send_example() {
 
 > **来源: [Tokio Documentation](https://tokio.rs/)**
 
-> **来源: [RFC 2394 - Async/Await](https://rust-lang.github.io/rfcs/2394-2394-async_await.html)**
+> **来源: [RFC 2394 - Async/Await](https://rust-lang.github.io/rfcs/2394-async_await.html)**
 
 ---
 

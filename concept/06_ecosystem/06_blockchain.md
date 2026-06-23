@@ -1,7 +1,6 @@
 # Blockchain & Smart Contract Security（区块链与智能合约安全）
 
 > **代码状态**: ✅ 含可编译示例
-
 >
 > **EN**: Blockchain Development in Rust
 > **Summary**: Blockchain ecosystem patterns, cryptography primitives, and smart-contract tooling in Rust.

@@ -14,7 +14,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [学术论文权威来源对齐](#学术论文权威来源对齐)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [1. 类型理论基础](#1-类型理论基础)
     - [1.1 线性逻辑 (Linear Logic)](#11-线性逻辑-linear-logic)
     - [1.2 仿射类型 (Affine Types)](#12-仿射类型-affine-types)
@@ -38,7 +38,7 @@
   - [**覆盖论文**: 15+ 篇核心文献](#覆盖论文-15-篇核心文献)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 1. 类型理论基础
 >
@@ -677,7 +677,7 @@ Rust内存模型基于:
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 

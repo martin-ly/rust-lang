@@ -1,8 +1,8 @@
 # Async Closures 深度指南
 
-> **状态**: Nightly 预览（预计 1.96-1.97 稳定）
+> **状态**: ✅ **Stable since Rust 1.85.0**（2025-02-20）
 > **RFC**: [RFC 3668](https://rust-lang.github.io/rfcs/3668-async-closures.html)
-> **Feature Gate**: `#![feature(async_closures)]`
+> **相关 Traits**: `AsyncFn`, `AsyncFnMut`, `AsyncFnOnce` (1.85.0 stable, Rust 2024 prelude)
 
 ---
 
@@ -34,7 +34,7 @@ let old_closure = |s: String| async move {
 ### 2.1 语法与语义
 
 ```rust
-#![feature(async_closures)]
+// async closures stable since 1.85.0，无需 feature gate
 
 // ✅ 新方式：真正的异步闭包
 let new_closure = async |s: &str| {
@@ -47,7 +47,7 @@ let new_closure = async |s: &str| {
 ### 2.2 AsyncFn trait family
 
 ```rust
-// 1.94+ 已入 prelude 的三个 trait
+// 1.85.0+ stable 的三个 trait（Rust 2024 prelude）
 pub trait AsyncFn<Args> {
     type Output;
     type CallRefFuture<'a>: Future<Output = Self::Output> where Self: 'a;
@@ -186,6 +186,6 @@ where
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.85.0+ (Edition 2024 / 2021)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

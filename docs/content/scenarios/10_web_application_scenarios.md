@@ -156,7 +156,7 @@ async fn get_user(Path(id): Path<Uuid>) -> Json<User> {
 > **来源: [Wikipedia - Web Framework](https://en.wikipedia.org/wiki/Web_Framework)**
 > **来源: [axum.rs Documentation](https://docs.rs/axum/latest/axum/)**
 > **来源: [actix.rs Documentation](https://actix.rs/)**
-> **来源: [RFC 2616 - HTTP](https://rust-lang.github.io/rfcs/2616-2616-http.html)**
+> **来源: [RFC 2616 - HTTP](https://rust-lang.github.io/rfcs/2616-http.html)**
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**

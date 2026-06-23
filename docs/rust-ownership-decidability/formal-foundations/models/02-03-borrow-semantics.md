@@ -4,7 +4,6 @@
 >
 > **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **理论来源**: RustBelt (Jung et al., 2018), Oxide (Weiss et al., 2020)
 > **核心原则**: Aliasing XOR Mutation (别名与变异互斥)
 
@@ -723,7 +722,7 @@ fn concurrent_reads() {
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
@@ -731,10 +730,10 @@ fn concurrent_reads() {
 
 > **来源: [Wikipedia - Resource Management](https://en.wikipedia.org/wiki/Resource_Management)**
 
-> **来源: [TRPL Ch. 10 - Lifetimes](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)**
+> **来源: [TRPL Ch. 10 - Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html)**
 
 > **来源: [Rust Reference - Borrow Checker](https://doc.rust-lang.org/reference/)**
 
-> **来源: [RFC 2094 - NLL](https://rust-lang.github.io/rfcs/2094-2094-nll.html)**
+> **来源: [RFC 2094 - NLL](https://rust-lang.github.io/rfcs/2094-nll.html)**
 
 ---

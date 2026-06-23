@@ -38863,7 +38863,7 @@
       "path": "concept\\07_future\\18_async_drop_preview.md",
       "layer": "L7",
       "title": "Async Drop：异步资源的优雅销毁",
-      "positioning": "分析 Rust 中 **异步资源销毁**的设计挑战——`Drop::drop` 是同步的，但异步资源（如数据库连接、网络流）需要 await 才能正确关闭。探讨 `AsyncDrop` trait 的提案（[RFC 3308](https://rust-lang.github.io/rfcs/3308.html)）、设计约束与当前 nightly 实现状态。",
+      "positioning": "分析 Rust 中 **异步资源销毁**的设计挑战——`Drop::drop` 是同步的，但异步资源（如数据库连接、网络流）需要 await 才能正确关闭。探讨 `AsyncDrop` trait 的提案（[Async Drop Initiative](https://rust-lang.github.io/async-fundamentals-initiative/roadmap/async_drop.html)）、设计约束与当前 nightly 实现状态。"}}
       "line_count": 760,
       "theorem_chains": [
         {

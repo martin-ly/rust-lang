@@ -1,7 +1,7 @@
-> **内容分级**: [专家级]
-
+> **内容分级**:
+>
+> [专家级]
 > **代码状态**: ✅ 含可编译示例
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Formal Verification Tools（形式化验证工具生态）
@@ -14,7 +14,6 @@
 > **双维定位**: C×Eva — 评价 Rust 形式化验证工具的技术能力与适用边界
 > **前置依赖**: [类型系统](../01_foundation/04_type_system.md) · [Unsafe Rust](../03_advanced/03_unsafe.md) · [形式化验证](../04_formal/05_verification_toolchain.md) · [生命周期](../01_foundation/03_lifetimes.md)
 > **后置延伸**: [编译器内部原理](./45_compiler_internals.md) · [安全与密码学](./43_security_cryptography.md) · [嵌入式系统](./22_embedded_systems.md)
-
 >
 > **来源**: [Kani](https://model-checking.github.io/kani/) · [Creusot](https://creusot.rs/) · [Verus](https://verus-lang.github.io/verus/)
 ---
@@ -29,9 +28,7 @@
 > [RefinedRust — Iris-based](https://gitlab.mpi-sws.org/lgaeher/refinedrust) ·
 > [hax — Cryspen/Inria](https://github.com/hacspec/hax) ·
 > [Kani verify-std](https://github.com/model-checking/verify-rust-std)
-
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录

@@ -42,7 +42,7 @@ content/
 │   ├── README.md
 │   ├── rust_1_95_preview.md  (历史预览文档，内容已过时)
 │   ├── generic_const_exprs.md
-│   └── async_closures.md
+│   └── async_closures.md     (已迁移至 concept/03_advanced/24_async_closures.md，1.85.0+ stable)
 ├── ecosystem/                # 生态系统深度
 │   ├── README.md
 │   ├── web_frameworks/
@@ -73,6 +73,14 @@ content/
 ```
 
 ---
+
+## 📌 与官方资源的差异化定位
+
+| 官方资源 | 当前覆盖缺口 | 本项目的补充价值 |
+|---|---|---|
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | 仍以 Edition 2021 为主，缺少 async closures、gen blocks、2024 FFI 等系统示例 | 提供按 Rust 1.85+/2024 edition 组织的可编译示例与中文深度解释 |
+| [TRPL](https://doc.rust-lang.org/book/) | 线性叙事，缺少跨语言对比与形式化深度 | 八层认知架构 + L4 形式化 + L5 跨语言对比 |
+| [Async Book](https://rust-lang.github.io/async-book/) | 正在 rewrite，多处 TODO | 提供完整的 async/await/Pin/运行时/模式体系 |
 
 ## 📈 内容统计
 

@@ -886,7 +886,7 @@ cargo vet certify tokio@1.37.0 --criteria safe-to-deploy
 | `cargo audit` | 已知 CVE（安全漏洞） | 自动查询 Advisory DB | 推荐每次构建 |
 | `cargo vet` | 供应链可信度 | 人工审计 + 聚合认证 | 推荐每周/每月 |
 
-> **来源**: [cargo-vet 文档] · [Mozilla Supply Chain](https://www.mozilla.org/en-US/security/) · [Rust Secure Code WG](https://www.rust-lang.org/governance/wg-secure-code)
+> **来源**: [cargo-vet 文档] · [Mozilla Supply Chain](https://www.mozilla.org/en-US/security/) · [Rust Secure Code WG](https://github.com/rust-secure-code/wg)
 
 ### 9.4 WASM 前端框架对比
 

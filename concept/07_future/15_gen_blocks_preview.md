@@ -23,8 +23,10 @@
 
 > **来源**:
 > [Rust RFC — Gen Blocks](https://github.com/rust-lang/rfcs/pull/3513) ·
+> [Rust RFC Book — Gen Blocks](https://rust-lang.github.io/rfcs/3513-gen-blocks.html) ·
 > [Rust Reference — Generators](https://doc.rust-lang.org/reference/expressions.html#generator-expressions) ·
-> [Tracking Issue #93132](https://github.com/rust-lang/rust/issues/93132) ·
+> [Tracking Issue #117078 — `gen` blocks and functions](https://github.com/rust-lang/rust/issues/117078) ·
+> [Tracking Issue #93132 — `Generator` trait](https://github.com/rust-lang/rust/issues/93132) ·
 > [Iterator RFCs](https://github.com/rust-lang/rfcs/labels/T-libs-api)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)

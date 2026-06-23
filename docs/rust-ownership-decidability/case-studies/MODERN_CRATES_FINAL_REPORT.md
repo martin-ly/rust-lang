@@ -16,7 +16,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [现代Rust库形式化分析 - 最终完成报告](#现代rust库形式化分析---最终完成报告)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [执行摘要](#执行摘要)
     - [三轮扩展回顾](#三轮扩展回顾)
   - [第三轮新增库 (8个)](#第三轮新增库-8个)
@@ -38,7 +38,7 @@
   - [**里程碑**: 39个著名现代Rust库形式化分析完成](#里程碑-39个著名现代rust库形式化分析完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 执行摘要
 >
@@ -314,7 +314,7 @@ hyper-T2: HTTP/2多路复用
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 

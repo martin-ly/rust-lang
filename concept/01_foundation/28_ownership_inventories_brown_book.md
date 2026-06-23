@@ -1,4 +1,6 @@
-> **内容分级**: [综述级]
+> **内容分级**:
+>
+> [综述级]
 
 # 所有权清单自测：Brown University Ownership Inventory
 

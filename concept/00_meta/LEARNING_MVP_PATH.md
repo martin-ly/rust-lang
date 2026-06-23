@@ -298,7 +298,10 @@ cargo test --test l3_ecosystem_alignment
 | [Brown University Interactive Book](https://rust-book.cs.brown.edu/) | 交互式教程 | Day 3-4 / Day 10-11 | Aquascope 所有权可视化 + 嵌入式测验；OOPSLA 2023/2024 研究支撑；本地映射见 [`28_ownership_inventories_brown_book.md`](../01_foundation/28_ownership_inventories_brown_book.md) |
 | [Google Comprehensive Rust](https://google.github.io/comprehensive-rust/) | 工业级课程 | Week 1 Day 1-6 + 扩展专题 | Google Android 团队维护；4 天基础 + Android/Chromium/Bare Metal/Concurrency/Idiomatic/Unsafe 专题；本地映射见 [`GOOGLE_COMPREHENSIVE_RUST_MAPPING_2026_06_19.md`](../../../reports/GOOGLE_COMPREHENSIVE_RUST_MAPPING_2026_06_19.md) |
 
-> **差异说明**: Rustify.rs 的三阶段路径（基础→应用→精通）将并发和异步放在"精通"阶段，而本 MVP 路径将其提前到 Week 2，以便在 40 小时内完成一个具备生产价值的 CLI 工具。这是**intentional 的设计选择**，适合有一定编程背景的学习者。纯初学者可将 Week 2 扩展为 3 周。注意：TRPL 3rd Ed 将 Async 放在 Ch 17（位于 OOP/Patterns/Advanced 之前），强调 async 是 Rust 中级核心能力，而非边缘高级主题。
+> **差异说明**:
+> Rustify.rs 的三阶段路径（基础→应用→精通）将并发和异步放在"精通"阶段，而本 MVP 路径将其提前到 Week 2，以便在 40 小时内完成一个具备生产价值的 CLI 工具。
+> 这是**intentional 的设计选择**，适合有一定编程背景的学习者。
+> 纯初学者可将 Week 2 扩展为 3 周。注意：TRPL 3rd Ed 将 Async 放在 Ch 17（位于 OOP/Patterns/Advanced 之前），强调 async 是 Rust 中级核心能力，而非边缘高级主题。
 
 ---
 

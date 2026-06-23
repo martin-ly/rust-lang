@@ -23,6 +23,7 @@
 ## 📑 目录
 
 - [Cargo Manifest 参考速查](#cargo-manifest-参考速查)
+  - [📑 目录](#-目录)
   - [一、`[package]` 元数据](#一package-元数据)
   - [二、Target 表](#二target-表)
   - [三、依赖表](#三依赖表)
@@ -30,9 +31,15 @@
   - [五、`[workspace]`](#五workspace)
   - [六、`[profile.*]`](#六profile)
   - [七、`[lints]` 与 `[hints]`](#七lints-与-hints)
+    - [`[lints]`](#lints)
+    - [`[hints]`](#hints)
   - [八、覆盖与替换](#八覆盖与替换)
   - [九、其他表](#九其他表)
   - [嵌入式测验](#嵌入式测验)
+    - [测验 1：发布到 crates.io 时，`license` 和 `license-file` 至少需要一个吗？](#测验-1发布到-cratesio-时license-和-license-file-至少需要一个吗)
+    - [测验 2：`[dev-dependencies]` 在什么场景下使用？](#测验-2dev-dependencies-在什么场景下使用)
+    - [测验 3：`[patch]` 与 `[source]` 的主要区别是什么？](#测验-3patch-与-source-的主要区别是什么)
+    - [测验 4：`workspace.lints` 会自动被成员包继承吗？](#测验-4workspacelints-会自动被成员包继承吗)
   - [权威来源索引](#权威来源索引)
 
 ---
@@ -73,7 +80,7 @@ license = "MIT OR Apache-2.0"
 repository = "https://github.com/you/my-crate"
 ```
 
-> 来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)` section](https://doc.rust-lang.org/cargo/reference/manifest.html#the-package-section)
+> 来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)` section](<https://doc.rust-lang.org/cargo/reference/manifest.html#the-package-section>)
 
 ---
 

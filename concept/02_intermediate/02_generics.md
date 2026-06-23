@@ -1509,7 +1509,7 @@ fn foo<T>() where T: Display + Clone { }  // where 子句（复杂约束）
 
 ### 9.1 补充：`impl Trait` 在返回位置 vs 参数位置的区别
 
-> **[Rust Reference: Impl trait](https://doc.rust-lang.org/reference/)** · **[RFC 1951](https://github.com/rust-lang/rfcs/pull/1951)** · **[RFC 2289](https://rust-lang.github.io/rfcs/2289-2289-associated-type-bounds.html)** `impl Trait` 在**参数位置**（argument position）和**返回位置**（return position）有截然不同的语义——前者是**全称量词 ∀**（调用者决定具体类型），后者是**存在量词 ∃**（实现者决定具体类型）。✅
+> **[Rust Reference: Impl trait](https://doc.rust-lang.org/reference/)** · **[RFC 1951](https://github.com/rust-lang/rfcs/pull/1951)** · **[RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html)** `impl Trait` 在**参数位置**（argument position）和**返回位置**（return position）有截然不同的语义——前者是**全称量词 ∀**（调用者决定具体类型），后者是**存在量词 ∃**（实现者决定具体类型）。✅
 
 #### 参数位置 `impl Trait` = Universal（全称）
 
@@ -1566,7 +1566,7 @@ impl Factory for WidgetFactory {
 ```
 
 > **关键洞察**: 参数位置的 `impl Trait` 是语法糖（糖衣），返回位置的 `impl Trait` 是类型系统的核心扩展（存在类型）。RPITIT 将这一能力进一步扩展到 trait 定义中，使 trait 方法也能返回不透明类型。
-> **来源**: [Rust Reference: Impl trait](https://doc.rust-lang.org/reference/) · [RFC 1951: Extend impl Trait to function arguments](https://github.com/rust-lang/rfcs/pull/1951) · [RFC 2289: Associated type bounds](https://rust-lang.github.io/rfcs/2289-2289-associated-type-bounds.html) · [TAPL Ch.24: Existential types]
+> **来源**: [Rust Reference: Impl trait](https://doc.rust-lang.org/reference/) · [RFC 1951: Extend impl Trait to function arguments](https://github.com/rust-lang/rfcs/pull/1951) · [RFC 2289: Associated type bounds](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html) · [TAPL Ch.24: Existential types]
 
 ---
 

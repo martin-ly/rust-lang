@@ -103,7 +103,7 @@
 ### 概念文件中引用 RFC 的标准格式
 
 ```markdown
-> **来源: [RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-2394-async_await.html)** 引入 `async`/`await` 语法糖...
+> **来源: [RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-async_await.html)** 引入 `async`/`await` 语法糖...
 > **状态**: ✅ Implemented (Rust 1.39) | 替代方案: RFC 2592 (Futures)
 ```
 
@@ -111,7 +111,7 @@
 
 ```markdown
 ❌ [来源: RFCs]  # 无编号
-❌ 来源: [RFC 2394](https://rust-lang.github.io/rfcs/2394-2394-async_await.html)  # 无标题
+❌ 来源: [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html)  # 无标题
 ❌ RFC 2394 (无状态标注)
 ```
 

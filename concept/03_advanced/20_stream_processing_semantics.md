@@ -15,7 +15,6 @@
 > [Evaluation Strategies](../04_formal/18_evaluation_strategies.md)
 > **后置概念**: [Stream Processing Ecosystem](../06_ecosystem/36_stream_processing_ecosystem.md) ·
 > [Distributed Systems](../06_ecosystem/18_distributed_systems.md)
-
 >
 > **来源**: [Async Book — Streams](https://rust-lang.github.io/async-book//05_streams/01_chapter.html) · [futures::stream](https://docs.rs/futures/)
 ---

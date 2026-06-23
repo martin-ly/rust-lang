@@ -1288,7 +1288,7 @@ pub fn get_async_config() -> Option<&'static AsyncConfig> {
 > **[来源: ACM - Async Programming Patterns]**
 > **来源: [Rust Reference - async/await](https://doc.rust-lang.org/reference/items/functions.html#async-functions)**
 > **来源: [TRPL Ch. 17 - Async and Await](https://doc.rust-lang.org/book/ch17-00-async-await.html)**
-> **来源: [Rustonomicon - Async](https://doc.rust-lang.org/nomicon/pin.html)**
+> **来源: [Rustonomicon - Async](https://doc.rust-lang.org/std/pin/struct.Pin.html)**
 > **[来源: tokio.rs Documentation]**
 > **[来源: async-std [已归档].rs Documentation]**
 

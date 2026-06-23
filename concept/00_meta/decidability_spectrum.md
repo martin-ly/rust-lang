@@ -695,12 +695,12 @@ graph TD
 |:---|:---:|:---:|:---|
 | `adt_const_params` | 1.75+ | ✅ 可判定（带边界） | 只允许 `#[derive(PartialEq, Eq)]` 类型作为 const generic 参数，限制搜索空间为有限等价类 来源: [RFC 2000](https://github.com/rust-lang/rfcs/pull/2000) |
 | `min_generic_const_args` | 1.79+ | ✅ 可判定（简化子集） | 仅允许整数、布尔、`char` 作为 const generic，无任意表达式，避免 Diophantine 复杂性 来源: [Rust Reference](https://doc.rust-lang.org/reference/) |
-| `async_fn_in_trait` | 1.75+ | ⚠️ 实际可判定 | 语义等价于返回 `impl Future` 的关联类型，当前编译器采用「惰性单态化」策略，未引入新的不可判定路径 来源: [RFC 3185](https://rust-lang.github.io/rfcs/3185-3185-cargo-weak-namespaced-features.html) |
+| `async_fn_in_trait` | 1.75+ | ⚠️ 实际可判定 | 语义等价于返回 `impl Future` 的关联类型，当前编译器采用「惰性单态化」策略，未引入新的不可判定路径 来源: [RFC 3185](https://rust-lang.github.io/rfcs/3185-static-async-fn-in-trait.html) |
 | `let_chains` | 1.64+ | ✅ 可判定（语法糖） | 纯语法扩展，不改变类型系统或借用检查的判定性边界 来源: [RFC 2497](https://github.com/rust-lang/rfcs/pull/2497) |
 | `never_type` (`!`) | 1.41+ / 1.82 完善 | ✅ 可判定 | 底类型作为所有类型的子类型，子类型关系保持偏序，不引入递归 undecidability 来源: [RFC 1216](https://github.com/rust-lang/rfcs/pull/1216) |
-| `precise_capturing` (`use<...>`) | 1.82+ | ✅ 可判定 | 显式生命周期捕获列表是 borrow checker 输入的细化，不改变约束求解本身的复杂度类 来源: [RFC 3498](https://rust-lang.github.io/rfcs/3498-3498-precise-capturing.html) |
+| `precise_capturing` (`use<...>`) | 1.82+ | ✅ 可判定 | 显式生命周期捕获列表是 borrow checker 输入的细化，不改变约束求解本身的复杂度类 来源: [RFC 3498](https://rust-lang.github.io/rfcs/3617-precise-capturing.html) |
 | `inline_const` | 1.79+ | ✅ 可判定（步数限制） | 编译期常量块受 `const_eval_limit` 约束，等价于有限状态解释器 来源: [Rust Reference](https://doc.rust-lang.org/reference/) |
-| `impl_trait_in_assoc_type` | 1.79+ | ⚠️ 实际可判定 | `type Foo = impl Trait;` 的语义等价于存在量化类型，编译器通过延迟单态化控制复杂度 来源: [RFC 2289](https://rust-lang.github.io/rfcs/2289-2289-associated-type-bounds.html) |
+| `impl_trait_in_assoc_type` | 1.79+ | ⚠️ 实际可判定 | `type Foo = impl Trait;` 的语义等价于存在量化类型，编译器通过延迟单态化控制复杂度 来源: [RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html) |
 | `cfg_version` / `cfg_accessible` | 1.79+ | ✅ 可判定 | 编译期条件编译属性，不涉及类型系统或运行时可判定性 来源: [Rust Reference](https://doc.rust-lang.org/reference/) |
 
 **关键洞察**：

@@ -4,8 +4,8 @@
 //! 注意：基准会创建临时 Tokio 运行时；不依赖外部服务
 //! ：temporary Tokio runtime ；outside
 use criterion::{Criterion, criterion_group, criterion_main};
-use std::sync::LazyLock;
 use prometheus::{Histogram, HistogramOpts, IntCounter, Opts, Registry};
+use std::sync::LazyLock;
 
 static BENCH_EXEC_TOTAL: LazyLock<IntCounter> =
     LazyLock::new(|| IntCounter::with_opts(Opts::new("bench_exec_total", "基准执行次数")).unwrap());

@@ -11,7 +11,7 @@
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×App — 应用设计模式解决类型安全问题
 > **前置概念**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Type System](../01_foundation/04_type_system.md) [来源: [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/)]
-> **主要来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-lang.github.io/design-patterns/) · [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **主要来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · [The Rust Programming Language](https://doc.rust-lang.org/book/)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [TRPL — Patterns](https://doc.rust-lang.org/book/ch18-00-patterns.html) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
@@ -29,7 +29,7 @@
 
 ## 一、权威定义
 
-> **[Rust Design Patterns](https://rust-lang.github.io/design-patterns/)** Rust design patterns are recurring solutions to common problems in software design using the Rust programming language. They leverage Rust's unique features such as ownership, traits, and the type system.
+> **[Rust Design Patterns](https://rust-unofficial.github.io/patterns/)** Rust design patterns are recurring solutions to common problems in software design using the Rust programming language. They leverage Rust's unique features such as ownership, traits, and the type system.
 
 > **[Wikipedia — Design pattern](https://en.wikipedia.org/wiki/Design_pattern)** A design pattern is the re-usable form of a solution to a design problem. The idea was introduced by the architect Christopher Alexander and has been adapted for various other disciplines, most notably computer science.
 > **来源**: <https://en.wikipedia.org/wiki/Design_pattern>
@@ -81,7 +81,7 @@
 | **Plugin** | 结构型 | 运行时扩展能力 | `dyn Trait` + 注册表 | 模块热插拔 |
 | **Observer** | 行为型 | 一对多状态通知 | `Vec<Box<dyn Fn(&T)>>` / `broadcast` / `event-listener` | 解耦状态变化与响应 |
 
-> **来源**: [Rust Design Patterns](https://rust-lang.github.io/design-patterns/) · [GoF Design Patterns] · 可信度: ✅
+> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · [GoF Design Patterns] · 可信度: ✅
 
 ### 2.3 断言/推理矩阵
 
@@ -188,7 +188,7 @@ impl Invoker {
 - **Java/C++**: 通常依赖 GC 或智能指针管理命令对象生命周期；Rust 需显式处理所有权，`Box<dyn Command>` 提供了堆分配动态分发。
 - **Go**: 使用函数值或接口；Rust 的 trait 对象在 vtable 布局上与 Go interface 类似，但 Rust 要求显式 `Box`/`&dyn`。
 
-> **来源**: [GoF Design Patterns] · [Rust Design Patterns](https://rust-lang.github.io/design-patterns/) · 可信度: ✅
+> **来源**: [GoF Design Patterns] · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · 可信度: ✅
 
 ### 4.2 Visitor 模式
 
@@ -280,7 +280,7 @@ classDiagram
 - **Java/C++**: 经典双重分发（`accept` + `visit`）；Rust 通过 `match` 枚举实现单分发，避免虚函数膨胀，但无法直接扩展现有 enum 的变体（需用 enum/struct 模拟开放访问者）。
 - **Haskell**: 利用类型类（type class）和代数数据类型直接建模，Rust 的 enum + trait 在表达能力上非常接近。
 
-> **来源**: [GoF Design Patterns] · [Rust Design Patterns](https://rust-lang.github.io/design-patterns/) · 可信度: ✅
+> **来源**: [GoF Design Patterns] · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · 可信度: ✅
 
 ### 4.3 Strategy 模式
 
@@ -417,7 +417,7 @@ impl Connection<Open> {
 - **Rust**: `match` 穷尽性检查强制处理所有状态；Typestate 变体将非法转换上移至编译期。
 - **TypeScript**: 可用 discriminated union 模拟，但运行期仍可能处于无效状态。
 
-> **来源**: [Rust Design Patterns](https://rust-lang.github.io/design-patterns/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · 可信度: ✅
+> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · 可信度: ✅
 
 ### 4.5 Plugin 模式
 >

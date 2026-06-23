@@ -52,7 +52,7 @@
 
 ## Part 2: Deep Dive Counter-Examples
 >
-> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)** · **来源: [TRPL Ch. 4](https://doc.rust-lang.org/book/ch04-00-ownership.html)** · **来源: [Wikipedia - Undefined Behavior](https://en.wikipedia.org/wiki/Undefined_Behavior)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [Wikipedia - Counterexample](https://en.wikipedia.org/wiki/Counterexample)** · **来源: [Wikipedia - Formal Verification](https://en.wikipedia.org/wiki/Formal_Verification)** · **[来源: ACM - Counterexample-Guided Verification]** · **[来源: IEEE - Error Pattern Analysis]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)** · **来源: [TRPL Ch. 4](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)** · **来源: [Wikipedia - Undefined Behavior](https://en.wikipedia.org/wiki/Undefined_Behavior)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [Wikipedia - Counterexample](https://en.wikipedia.org/wiki/Counterexample)** · **来源: [Wikipedia - Formal Verification](https://en.wikipedia.org/wiki/Formal_Verification)** · **[来源: ACM - Counterexample-Guided Verification]** · **[来源: IEEE - Error Pattern Analysis]**
 
 ### Extended Ownership Deep Dive
 
@@ -705,7 +705,7 @@ unsafe fn safe_transmute() {
 
 ## Part 3: Error Message Glossary
 
-> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [TRPL Ch. 4](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [TRPL Ch. 4](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 ### E0382: Use of Moved Value
 

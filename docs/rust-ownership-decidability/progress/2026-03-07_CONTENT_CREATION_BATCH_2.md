@@ -16,7 +16,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [内容创建批次 2 - 完成报告](#内容创建批次-2---完成报告)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [本次完成内容](#本次完成内容)
     - [1. 扩展 17-unsafe-rust/ (核心目标)](#1-扩展-17-unsafe-rust-核心目标)
     - [2. 填充 10-research-frontiers/](#2-填充-10-research-frontiers)
@@ -36,7 +36,7 @@
   - [*累积新增: 17 文件, ~112 KB*](#累积新增-17-文件-112-kb)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 本次完成内容
 >
@@ -211,7 +211,7 @@
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 

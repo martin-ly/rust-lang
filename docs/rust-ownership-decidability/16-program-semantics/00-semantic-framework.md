@@ -7,7 +7,7 @@
 
 ## 目录
 >
-> **来源: [Rust Reference - Semantics](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Operational Semantics](https://en.wikipedia.org/wiki/Operational_Semantics)** · **来源: [Wikipedia - Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_Semantics)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [PLDI 2023 - Aeneas](https://www.sigplan.org/Conferences/PLDI/)** · **来源: [TRPL Ch. 4](https://doc.rust-lang.org/book/ch04-00-ownership.html)** · **来源: [Wikipedia - Abstract Interpretation](https://en.wikipedia.org/wiki/Abstract_Interpretation)** · **[来源: ACM - Semantic Frameworks for Systems Languages]** · **[来源: IEEE - Formal Semantic Models]**
+> **来源: [Rust Reference - Semantics](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Operational Semantics](https://en.wikipedia.org/wiki/Operational_Semantics)** · **来源: [Wikipedia - Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_Semantics)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [PLDI 2023 - Aeneas](https://www.sigplan.org/Conferences/PLDI/)** · **来源: [TRPL Ch. 4](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)** · **来源: [Wikipedia - Abstract Interpretation](https://en.wikipedia.org/wiki/Abstract_Interpretation)** · **[来源: ACM - Semantic Frameworks for Systems Languages]** · **[来源: IEEE - Formal Semantic Models]**
 
 - [程序设计语义框架](#程序设计语义框架)
   - [目录](#目录)
@@ -4213,7 +4213,7 @@ docs/rust-ownership-decidability/
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 

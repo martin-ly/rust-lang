@@ -4,7 +4,6 @@
 >
 > **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **理论来源**: Tofte-Talpin (1997) 区域类型, RustBelt (2018) 生命周期逻辑
 > **Rust对应**: 生命周期参数、'static、生命周期省略规则
 
@@ -727,7 +726,7 @@ NLL检查算法:
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
@@ -735,10 +734,10 @@ NLL检查算法:
 
 > **来源: [Wikipedia - Resource Management](https://en.wikipedia.org/wiki/Resource_Management)**
 
-> **来源: [TRPL Ch. 10 - Lifetimes](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)**
+> **来源: [TRPL Ch. 10 - Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html)**
 
 > **来源: [Rust Reference - Borrow Checker](https://doc.rust-lang.org/reference/)**
 
-> **来源: [RFC 2094 - NLL](https://rust-lang.github.io/rfcs/2094-2094-nll.html)**
+> **来源: [RFC 2094 - NLL](https://rust-lang.github.io/rfcs/2094-nll.html)**
 
 ---

@@ -65,7 +65,7 @@ Rust 编程语言的所有权系统、类型安全的并发原语和零成本抽
 
 本索引作为知识库中所有工作流模式文件的 **主控映射（Master Index）**，记录 43 个 WCP 的 Rust 实现状态、关键技术选型、所有权安全等级和形式化方法覆盖。截至本文更新，知识库已完成 **21 个模式文件**，覆盖约 48.8% 的 43 模式体系；剩余模式按优先级分三档规划补充。
 
-> 来源: [Rust Reference - Control Flow Expressions](https://doc.rust-lang.org/reference/) · 来源: [TRPL Ch. 4, 8, 13, 16](https://doc.rust-lang.org/book/ch04-00-ownership.html) · 来源: [Tokio Documentation](https://tokio.rs/)
+> 来源: [Rust Reference - Control Flow Expressions](https://doc.rust-lang.org/reference/) · 来源: [TRPL Ch. 4, 8, 13, 16](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) · 来源: [Tokio Documentation](https://tokio.rs/)
 
 ---
 

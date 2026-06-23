@@ -52,7 +52,7 @@
   - [参考文献](#参考文献)
   - [**最后更新**: 2026-03-07](#最后更新-2026-03-07)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -346,7 +346,7 @@ $$
 ### 5.1 基础实现
 
 > **来源: [Rust Reference - Expressions](https://doc.rust-lang.org/reference/)**
-> **来源: [TRPL Ch. 6 - Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums-and-pattern-matching.html)**
+> **来源: [TRPL Ch. 6 - Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums.html)**
 
 Rust 的 `match` 表达式是排他选择最原生的实现。编译器对 `match` 进行穷尽性检查（exhaustiveness checking），确保所有可能的情况都被处理，从而在编译期保证排他选择的完备性。
 
@@ -1017,13 +1017,13 @@ pub fn process_nested(payment: PaymentRegion) -> String {
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
-> **来源: [TRPL Ch. 6 - Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums-and-pattern-matching.html)**
+> **来源: [TRPL Ch. 6 - Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums.html)**
 
 > **来源: [Rust Reference - Match Expressions](https://doc.rust-lang.org/reference/)**
 

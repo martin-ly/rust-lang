@@ -4,13 +4,11 @@
 //! This module provides to async runtime Performance benchmark ，
 //! 包括内存使用、启动时间、并发性能等指标。
 //! memory 、time 、concurrency performance etc. indicator 。
-use c06_async::{
-    async_integration_framework::{
-        AggregationCompositionFramework, AsyncSyncConversionFramework, DataProcessingComponent,
-    },
-    async_runtime_examples::{
-        AsyncStdExamples, RuntimeCompositionExamples, SmolExamples, StdAsyncExamples, TokioExamples,
-    },
+use c06_async::async_integration_framework::{
+    AggregationCompositionFramework, AsyncSyncConversionFramework, DataProcessingComponent,
+};
+use c06_async::async_runtime_examples::{
+    AsyncStdExamples, RuntimeCompositionExamples, SmolExamples, StdAsyncExamples, TokioExamples,
 };
 use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
 use std::hint::black_box;

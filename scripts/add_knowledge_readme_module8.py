@@ -49,7 +49,7 @@ MODULE8_BLOCKS: dict[str, str] = {
 
 | 来源 | 说明 |
 |:---|:---|
-| [The Rust Programming Language — Ch4](https://doc.rust-lang.org/book/ch04-00-ownership.html) | 所有权与借用 |
+| [The Rust Programming Language — Ch4](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) | 所有权与借用 |
 | [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html) | 类型系统规范 |
 | [Rust Standard Library](https://doc.rust-lang.org/std/) | 标准库 API |
 
@@ -76,7 +76,7 @@ MODULE8_BLOCKS: dict[str, str] = {
 
 | 来源 | 说明 |
 |:---|:---|
-| [The Rust Programming Language — Ch10](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html) | 泛型、Trait 与生命周期 |
+| [The Rust Programming Language — Ch10](https://doc.rust-lang.org/book/ch10-00-generics.html) | 泛型、Trait 与生命周期 |
 | [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html) | Trait 规范 |
 | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | API 设计指南 |
 
@@ -190,7 +190,7 @@ MODULE8_BLOCKS: dict[str, str] = {
 
 | 来源 | 说明 |
 |:---|:---|
-| [RFC 1584 — Macros Literal Matcher](https://rust-lang.github.io/rfcs/1584-macros-literal-matcher.html) | 宏字面量匹配 |
+| [RFC 1584 — Macros Literal Matcher](https://rust-lang.github.io/rfcs/1584-macros.html) | 宏字面量匹配 |
 
 ### 8.3 社区资源
 

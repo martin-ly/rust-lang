@@ -1,7 +1,7 @@
-> **内容分级**: [综述级]
-
+> **内容分级**:
+>
+> [综述级]
 > **代码状态**: ✅ 含可编译示例
-
 >
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
@@ -35,7 +35,6 @@
 > [Rust [RFC 2318](https://rust-lang.github.io/rfcs//2318-custom-test-frameworks.html) — Custom Test Frameworks](<https://github.com/rust-lang/rfcs/pull/2318>)
 
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录

@@ -16,7 +16,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [嵌入式库形式化分析索引](#嵌入式库形式化分析索引)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [硬件抽象层 (HAL)](#硬件抽象层-hal)
   - [异步运行时](#异步运行时)
   - [内存管理](#内存管理)
@@ -30,7 +30,6 @@
   - [新增分析汇总](#新增分析汇总)
   - [**状态**: ✅ 核心嵌入式库100%覆盖完成](#状态--核心嵌入式库100覆盖完成)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引)
 
 ## 硬件抽象层 (HAL)
@@ -201,7 +200,7 @@
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
@@ -216,20 +215,3 @@
 > **来源: [RTIC Book](https://rtic.rs/book/)**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
->
-> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
->
-> **[来源: [Rust Embedded Book](https://docs.rust-embedded.org/book/)]**
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->

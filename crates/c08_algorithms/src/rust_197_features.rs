@@ -7,6 +7,46 @@
 use std::collections::VecDeque;
 
 // ============================================================================
+// 0. NonZero 位操作 API (Rust 1.97 稳定)
+// ============================================================================
+
+/// `NonZero` 整数新增位查询方法：`highest_one` / `lowest_one` / `bit_width`
+///
+/// 这些 API 避免了在查询前对零值进行特殊处理，因为 `NonZero` 类型本身已保证非零。
+pub fn demo_nonzero_bit_ops() {
+    // 1.97+ 实际用法:
+    // let n = NonZeroU32::new(0b10100).unwrap();
+    // assert_eq!(n.highest_one(), 4);          // 最高 set bit 的索引
+    // assert_eq!(n.lowest_one(), 2);           // 最低 set bit 的索引
+    // assert_eq!(n.bit_width(), NonZeroU32::new(5).unwrap()); // 表示 self 所需的最少位数
+
+    // 当前等效实现 (Rust 1.96):
+    let n: u32 = 0b10100;
+    assert_eq!(u32::BITS - 1 - n.leading_zeros(), 4);
+    assert_eq!(n.trailing_zeros(), 2);
+    assert_eq!(u32::BITS - n.leading_zeros(), 5);
+}
+
+// ============================================================================
+// 0b. char::is_control() const 稳定化 (Rust 1.97)
+// ============================================================================
+
+/// `char::is_control()` 在 Rust 1.97 中变为 `const fn`
+///
+/// 使得字符分类可在编译期常量/静态项中使用。
+pub fn demo_char_is_control_const() {
+    // 1.97+ 实际用法:
+    // const SPACE_CTRL: bool = ' '.is_control(); // false
+    // const NUL_CTRL: bool = '\0'.is_control();  // true
+
+    // 当前等效实现 (Rust 1.96):
+    let space_ctrl: bool = ' '.is_control();
+    let nul_ctrl: bool = '\0'.is_control();
+    assert!(!space_ctrl);
+    assert!(nul_ctrl);
+}
+
+// ============================================================================
 // 1. VecDeque::truncate_front / retain_back
 // ============================================================================
 
@@ -66,7 +106,7 @@ pub fn demo_vecdeque_retain_back() {
 ///
 /// ⚠️ 这会打破 IEEE 754 的严格语义，仅在可接受精度损失的场景使用。
 ///
-/// 1.97 状态: FCP 中 (PR #157168)
+/// 1.98 状态: 已合并至 master (PR #157029)，因晚于 1.97 beta cutoff，进入 1.98
 #[allow(dead_code)]
 pub fn demo_float_algebraic() {
     // 未来语法（示意）:
@@ -94,7 +134,7 @@ pub fn demo_float_algebraic() {
 
 /// `RandomSource` trait 提供可插拔的随机数源抽象
 ///
-/// 1.97 状态: 等待 libs-api 决策 (PR #157226)
+/// 1.98 状态: 等待 t-libs-api 决策 (PR #157168)
 /// 设计目标: 允许 `rand::thread_rng()`、`getrandom`、`OsRng` 等通过统一 trait 接入标准库 API。
 #[allow(dead_code)]
 pub fn demo_random_source_concept() {
@@ -133,7 +173,7 @@ pub extern "C" fn demo_c_variadic_definition(_fmt: *const u8) {
 
 /// `Box::into_raw_non_null` / `Vec::into_raw_parts_non_null` 提供非空指针转换
 ///
-/// 1.97 状态: PFCP (PR #157273)
+/// 1.98 状态: PFCP (PR #157226)
 /// 设计目标: 允许 `Box<T>` 和 `Vec<T>` 直接转换为 `NonNull<T>`，避免空指针检查开销。
 #[allow(dead_code)]
 pub fn demo_box_vec_non_null() {
@@ -159,12 +199,39 @@ pub fn demo_box_vec_non_null() {
 }
 
 // ============================================================================
-// 6. int_format_into（Nightly）
+// 5b. Box::as_ptr / Box::as_mut_ptr（1.98 已确认）
+// ============================================================================
+
+/// `Box::as_ptr` / `Box::as_mut_ptr` — 不物化引用的原始指针访问
+///
+/// 1.98 状态: 已合并至 master (PR #157876)。此前为 nightly-only `box_as_ptr`。
+/// 关键保证: 该方法不会 materialize 对底层内存的引用，因此在 aliasing model 中
+/// 与 `Box::leak` / `Box::as_ref` 不同，可与其它 raw pointer 操作安全交错。
+#[allow(dead_code)]
+pub fn demo_box_as_ptr() {
+    // 1.98+ 实际用法:
+    // let mut boxed = Box::new(42);
+    // let ptr: *mut i32 = boxed.as_mut_ptr();
+    // unsafe { *ptr = 100; }
+    // assert_eq!(*boxed, 100);
+
+    // 当前等效实现 (Rust 1.96): 使用 Box::into_raw 会转移所有权，需要恢复
+    let mut boxed = Box::new(42);
+    let ptr = Box::into_raw(boxed);
+    unsafe {
+        *ptr = 100;
+        boxed = Box::from_raw(ptr); // 恢复所有权
+    }
+    assert_eq!(*boxed, 100);
+}
+
+// ============================================================================
+// 6. int_format_into（1.98 已确认）
 // ============================================================================
 
 /// 整数格式化到现有缓冲区，避免堆分配
 ///
-/// 1.97 状态: 🧪 Nightly
+/// 1.98 状态: 已合并至 master (PR #152544)，因晚于 1.97 beta cutoff 进入 1.98。
 /// 设计目标: `write!(buf, "{}", x)` 的零分配替代方案，用于 `no_std` 和嵌入式场景。
 #[allow(dead_code)]
 pub fn demo_int_format_into() {
@@ -187,7 +254,53 @@ pub fn demo_int_format_into() {
 }
 
 // ============================================================================
-// 7. proc_macro_value（等待 review）
+// 7. NonZero::from_str_radix（1.98 已确认）
+// ============================================================================
+
+/// `NonZero<T>::from_str_radix` — 按指定进制解析非零整数
+///
+/// 1.98 状态: 已合并至 master (PR #157877)，将进入 1.98。
+/// 与 `T::from_str_radix` 不同：若解析结果为 0，返回 `Err(ParseIntError::kind() == InvalidDigit)`。
+#[allow(dead_code)]
+pub fn demo_nonzero_from_str_radix() {
+    // 1.98+ 实际用法:
+    // let n = NonZeroU32::from_str_radix("1a", 16).unwrap();
+    // assert_eq!(n.get(), 26);
+    // assert!(NonZeroU32::from_str_radix("0", 10).is_err());
+
+    // 当前等效实现 (Rust 1.96):
+    let parsed = u32::from_str_radix("1a", 16).ok().and_then(|v| std::num::NonZeroU32::new(v));
+    assert_eq!(parsed.unwrap().get(), 26);
+
+    let zero = u32::from_str_radix("0", 10).ok().and_then(|v| std::num::NonZeroU32::new(v));
+    assert!(zero.is_none());
+}
+
+// ============================================================================
+// 8. core::range::{RangeFull, RangeTo}（1.98 已确认）
+// ============================================================================
+
+/// `core::range::RangeFull` / `RangeTo` / `legacy::*` — `core::range` 类型补全
+///
+/// 1.98 状态: 已合并至 master (PR #156629)，将进入 1.98。
+/// 设计目标: 将 `std::ops::RangeFull`、`std::ops::RangeTo` 等类型迁移到 `core::range`，
+/// 使 `no_std` 环境也能使用这些范围类型；`legacy::*` 为旧类型提供兼容重导出。
+#[allow(dead_code)]
+pub fn demo_core_range_completion() {
+    // 1.98+ 实际用法:
+    // use core::range::{RangeFull, RangeTo};
+    // let full: RangeFull = ..;
+    // let to: RangeTo<i32> = ..5;
+
+    // 当前等效实现 (Rust 1.96): 仍使用 std::ops
+    let _full = ..;
+    let _to = ..4;
+    let slice = [1, 2, 3, 4, 5];
+    assert_eq!(&slice[_to], &[1, 2, 3, 4]);
+}
+
+// ============================================================================
+// 9. proc_macro_value（等待 review）
 // ============================================================================
 
 /// `proc_macro_value` 允许过程宏在编译期产生值（而不仅是 token 流）
@@ -210,6 +323,16 @@ mod tests {
     use super::*;
 
     #[test]
+    fn test_nonzero_bit_ops() {
+        demo_nonzero_bit_ops();
+    }
+
+    #[test]
+    fn test_char_is_control_const() {
+        demo_char_is_control_const();
+    }
+
+    #[test]
     fn test_vecdeque_truncate_front() {
         demo_vecdeque_truncate_front();
     }
@@ -225,8 +348,23 @@ mod tests {
     }
 
     #[test]
+    fn test_box_as_ptr() {
+        demo_box_as_ptr();
+    }
+
+    #[test]
     fn test_int_format_into() {
         demo_int_format_into();
+    }
+
+    #[test]
+    fn test_nonzero_from_str_radix() {
+        demo_nonzero_from_str_radix();
+    }
+
+    #[test]
+    fn test_core_range_completion() {
+        demo_core_range_completion();
     }
 }
 

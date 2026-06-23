@@ -147,7 +147,7 @@ impl<T> Deref for KernelPtr<T> {
 
 ## 三、使用场景
 >
-> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
+> **[来源: [Rust Project Goals 2026 — Arbitrary Self Types](https://rust-lang.github.io/rust-project-goals/2026/arbitrary-self-types.html)]**
 >
 > **[来源: [Rust for Linux](https://rust-for-linux.com/)]**
 
@@ -250,7 +250,7 @@ impl<T> TaggedPtr<T> {
 
 ## 参考
 
-> **来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)**
+> **来源: [Rust Project Goals 2026 — Arbitrary Self Types](https://rust-lang.github.io/rust-project-goals/2026/arbitrary-self-types.html)**
 > **[来源: Rust Internals — Arbitrary Self Types Discussion]**
 
 | 资源 | 链接 |

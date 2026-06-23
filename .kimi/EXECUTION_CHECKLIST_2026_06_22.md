@@ -63,7 +63,7 @@
     - `crates/c10_networks/docs/tier_04_advanced/README.md`
     - `docs/rust-ownership-decidability/comprehensive-analysis/scenario-trees/application-domain-tree.md`
 - [x] **A2.5** 验证 rustls aws-lc-rs 在 Windows/Linux 构建正常
-  - Windows：`cargo check --workspace` 通过，rustls 0.23.40 默认使用 aws-lc-rs 后端
+  - Windows：`cargo check --workspace` 通过，rustls 0.23.41 默认使用 aws-lc-rs 后端
   - Linux：配置跨平台（aws-lc-rs 支持 Linux），无已知构建阻塞
 - [x] **A2.6** 准备 Rust 1.97 发布日脚本/命令速查卡
   - 已包含在 `.kimi/EXECUTION_RUST_1_97_RELEASE_2026_07_09.md` 中

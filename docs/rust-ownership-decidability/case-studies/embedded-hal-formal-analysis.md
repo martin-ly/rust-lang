@@ -80,7 +80,7 @@
     - [15.4 反例：错误模式](#154-反例错误模式)
   - [**代码示例**: 15个完整示例](#代码示例-15个完整示例)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -1687,7 +1687,7 @@ let dev2 = RefCellDevice::new(&bus)?;
 > **来源: [Embassy Book](https://embassy.dev/book/)**
 > **[来源: IEEE - Embedded Software]**
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 

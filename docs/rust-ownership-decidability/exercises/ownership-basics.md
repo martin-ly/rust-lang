@@ -15,21 +15,22 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [所有权基础练习](#所有权基础练习)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [练习 1: 移动语义](#练习-1-移动语义)
     - [题目](#题目)
     - [答案](#答案)
   - [练习 2: 借用规则](#练习-2-借用规则)
-    - [题目](#题目)
-    - [答案](#答案)
+    - [题目](#题目-1)
+    - [答案](#答案-1)
   - [练习 3: 生命周期](#练习-3-生命周期)
-    - [题目](#题目)
-    - [答案](#答案)
+    - [题目](#题目-2)
+    - [答案](#答案-2)
   - [练习 4: 实现自定义智能指针](#练习-4-实现自定义智能指针)
-    - [题目](#题目)
-    - [答案](#答案)
-  - *更多练习持续添加中...*
+    - [题目](#题目-3)
+    - [答案](#答案-3)
+  - [*更多练习持续添加中...*](#更多练习持续添加中)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 练习 1: 移动语义
 >
@@ -209,31 +210,10 @@ impl<T> Drop for MyBox<T> {
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
->
-> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**

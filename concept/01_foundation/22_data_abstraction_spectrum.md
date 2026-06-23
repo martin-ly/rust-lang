@@ -1,4 +1,6 @@
-> **内容分级**: [综述级]
+> **内容分级**:
+>
+> [综述级]
 > **本节关键术语**: 数据抽象 (Data Abstraction) · 封装 (Encapsulation) · 信息隐藏 (Information Hiding) · 模块边界 (Module Boundary) · API 设计 — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 数据抽象谱系：从 C struct 到 Rust enum + trait
@@ -410,7 +412,7 @@ impl std::fmt::Display for MyVec {
 }
 ```
 
-> **边界洞察**: Orphan Rule 是 Rust 保证 trait 实现唯一性（coherence）的核心机制。它限制了"为外部类型实现外部 trait"，防止不同 crate 产生冲突实现。这与 C++ 的 ADL（Argument Dependent Lookup）和模板特化规则有本质不同。来源: [RFC 1023](https://rust-lang.github.io/rfcs/1023-1023-rebalancing-coherence.html) ✅
+> **边界洞察**: Orphan Rule 是 Rust 保证 trait 实现唯一性（coherence）的核心机制。它限制了"为外部类型实现外部 trait"，防止不同 crate 产生冲突实现。这与 C++ 的 ADL（Argument Dependent Lookup）和模板特化规则有本质不同。来源: [RFC 1023](https://rust-lang.github.io/rfcs/1023-rebalancing-coherence.html) ✅
 
 ---
 

@@ -1,7 +1,7 @@
-> **内容分级**: [专家级]
-
+> **内容分级**:
+>
+> [专家级]
 > **代码状态**: ✅ 含可编译示例
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # 分布式 系统：Rust 在微服务 与集群中的工程实践
@@ -18,7 +18,6 @@
 > [Concurrency](../03_advanced/01_concurrency.md)
 > **后置概念**: [WebAssembly](./11_webassembly.md) ·
 > [Observability](./13_logging_observability.md)
-
 >
 > **来源**: [tokio](https://docs.rs/tokio/) · [tower](https://docs.rs/tower/) · [tonic](https://docs.rs/tonic/)
 ---
@@ -29,9 +28,7 @@
 > [Consul by HashiCorp](https://www.consul.io/) ·
 > [Linkerd](https://linkerd.io/) ·
 > [NATS](https://nats.io/)
-
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录

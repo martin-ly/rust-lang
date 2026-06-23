@@ -593,7 +593,7 @@ pub enum ConfigError {
 > **来源: [Wikipedia - Exception Handling](https://en.wikipedia.org/wiki/Exception_Handling)**
 > **来源: [TRPL Ch. 9 - Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)**
 > **来源: [Rust Reference - Result](https://doc.rust-lang.org/std/result/)**
-> **来源: [RFC 2504 - Try Trait](https://rust-lang.github.io/rfcs/2504-2504-try-trait.html)**
+> **来源: [RFC 2504 - Try Trait](https://rust-lang.github.io/rfcs/2504-try-trait.html)**
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 > **来源: [Coq Reference](https://coq.inria.fr/doc/)**
 > **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**

@@ -14,7 +14,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust设计模式综合论证](#rust设计模式综合论证)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [1. 模式分类体系](#1-模式分类体系)
     - [1.1 思维导图：Rust设计模式全景](#11-思维导图rust设计模式全景)
   - [2. 创建型模式](#2-创建型模式)
@@ -35,7 +35,7 @@
   - [**对齐来源**: Rust Book, Rust API Guidelines, crate文档](#对齐来源-rust-book-rust-api-guidelines-crate文档)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 1. 模式分类体系
 >
@@ -611,7 +611,7 @@ Pin<Box<Self>>保证:
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 

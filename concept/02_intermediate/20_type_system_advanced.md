@@ -1,4 +1,6 @@
-> **内容分级**: [综述级]
+> **内容分级**:
+>
+> [综述级]
 > **本节关键术语**:
 >
 > 高级类型系统 (Advanced Type System) · 类型推断 (Type Inference) ·
@@ -117,6 +119,30 @@ trait Foo {
 
 > **impl Trait 洞察**: **impl Trait 是 Rust "零成本抽象"的关键**——它隐藏实现细节而不引入运行时开销。
 > [来源: [RFC 1522 — Conservative impl Trait](https://rust-lang.github.io/rfcs//1522-conservative-impl-trait.html)]
+
+> **Rust 2024 edition 补充**: 返回位置 `impl Trait` 的生命周期捕获规则发生变化。
+>
+> - Rust 2021：隐式捕获所有输入生命周期。
+> - Rust 2024：默认捕获所有输入生命周期；如需精确控制，使用 `+ use<'lt>` 或 `+ use<>`。
+>
+> ```rust,ignore
+> // 2021: 隐式捕获
+> fn make_iter_2021<'a>(data: &'a [i32]) -> impl Iterator<Item = &'a i32> {
+>     data.iter()
+> }
+>
+> // 2024: 显式捕获（保留 2021 行为）
+> fn make_iter_2024<'a>(data: &'a [i32]) -> impl Iterator<Item = &'a i32> + use<'a> {
+>     data.iter()
+> }
+>
+> // 2024: 'static 返回（不捕获输入生命周期）
+> fn make_static(_data: &[i32]) -> impl Iterator<Item = i32> + use<> {
+>     [1, 2, 3].into_iter()
+> }
+> ```
+>
+> [来源: [Rust Edition Guide 2024 — precise-capturing](https://doc.rust-lang.org/edition-guide/rust-2024/rpit-lifetime-capture.html) · [RFC 3617](https://rust-lang.github.io/rfcs/3617-precise-capturing.html)]
 
 ---
 

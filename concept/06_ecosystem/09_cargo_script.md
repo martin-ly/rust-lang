@@ -79,7 +79,7 @@ chmod +x csv_filter.rs && ./csv_filter.rs
 
 ## 📑 目录
 
-- [Cargo Script](#cargo-script)
+- [Cargo Script 脚本化 Rust](#cargo-script-脚本化-rust)
   - [代码示例：Cargo Script 单文件程序](#代码示例cargo-script-单文件程序)
 - [\[derive(Parser)\]](#deriveparser)
 - [Cargo Script：单文件 Rust 程序](#cargo-script单文件-rust-程序)
@@ -124,7 +124,10 @@ chmod +x csv_filter.rs && ./csv_filter.rs
 
 ## 一、核心概念
 
-Cargo Script（[RFC 3502](https://rust-lang.github.io/rfcs//3502-cargo-script.html) + [RFC 3503](https://rust-lang.github.io/rfcs//3503-frontmatter.html)）允许在单个 `.rs` 文件中编写完整 Rust 程序并直接执行，**无需 `Cargo.toml` 或项目目录结构**。两个 RFC 均已获批：[RFC 3502](https://rust-lang.github.io/rfcs//3502-cargo-script.html) 定义单文件 manifest 格式，[RFC 3503](https://rust-lang.github.io/rfcs//3503-frontmatter.html) 定义 frontmatter 语法。RFC 3502/3503 已获批，**Cargo Script FCP 已结束**，但当前被 **edition policy（lang/edition 方面）block**，尚未完全稳定。当前 nightly 可通过 `-Zscript` 使用，frontmatter 支持亦在积极推进中。
+Cargo Script（[RFC 3502](https://rust-lang.github.io/rfcs//3502-cargo-script.html) + [RFC 3503](https://rust-lang.github.io/rfcs//3503-frontmatter.html)）允许在单个 `.rs` 文件中编写完整 Rust 程序并直接执行，**无需 `Cargo.toml` 或项目目录结构**。
+两个 RFC 均已获批：[RFC 3502](https://rust-lang.github.io/rfcs//3502-cargo-script.html) 定义单文件 manifest 格式，[RFC 3503](https://rust-lang.github.io/rfcs//3503-frontmatter.html) 定义 frontmatter 语法。
+RFC 3502/3503 已获批，**Cargo Script FCP 已结束**，但当前被 **edition policy（lang/edition 方面）block**，尚未完全稳定。
+当前 nightly 可通过 `-Zscript` 使用，frontmatter 支持亦在积极推进中。
 
 ### 1.1 三种执行方式
 

@@ -53,9 +53,9 @@
     - [9.1 信号量形式化](#91-信号量形式化)
     - [9.2 公平性策略](#92-公平性策略)
   - [10. 定理与证明](#10-定理与证明)
-    - [定理 ASYNC-SAFETY-1 ( 内存安全 )](#定理-async-safety-1--内存安全)
-    - [定理 ASYNC-COMPLETENESS-1 ( 执行完备性 )](#定理-async-completeness-1--执行完备性)
-    - [定理 PIN-SOUNDNESS-1 ( Pin正确性 )](#定理-pin-soundness-1--pin正确性)
+    - [定理 ASYNC-SAFETY-1 ( 内存安全 )](#定理-async-safety-1--内存安全-)
+    - [定理 ASYNC-COMPLETENESS-1 ( 执行完备性 )](#定理-async-completeness-1--执行完备性-)
+    - [定理 PIN-SOUNDNESS-1 ( Pin正确性 )](#定理-pin-soundness-1--pin正确性-)
   - [**状态**: ✅ 深度形式化完成](#状态--深度形式化完成)
   - [权威来源索引](#权威来源索引)
 
@@ -883,7 +883,7 @@ $$
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
@@ -895,6 +895,6 @@ $$
 
 > **来源: [Tokio Documentation](https://tokio.rs/)**
 
-> **来源: [RFC 2394 - Async/Await](https://rust-lang.github.io/rfcs/2394-2394-async_await.html)**
+> **来源: [RFC 2394 - Async/Await](https://rust-lang.github.io/rfcs/2394-async_await.html)**
 
 ---

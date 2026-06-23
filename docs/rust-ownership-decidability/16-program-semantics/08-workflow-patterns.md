@@ -7,7 +7,7 @@
 
 ## 目录
 >
-> **来源: [Rust Design Patterns Book](https://rust-lang.github.io/design-patterns/)** · **来源: [Wikipedia - Workflow Pattern](https://en.wikipedia.org/wiki/Workflow_Pattern)** · **来源: [GoF - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)** · **来源: [TRPL Ch. 18](https://doc.rust-lang.org/book/ch18-00-patterns.html)** · **来源: [Wikipedia - State Machine](https://en.wikipedia.org/wiki/State_Machine)** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源: [Rust Design Patterns Book](https://rust-unofficial.github.io/patterns/)** · **来源: [Wikipedia - Workflow Pattern](https://en.wikipedia.org/wiki/Workflow_Pattern)** · **来源: [GoF - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)** · **来源: [TRPL Ch. 18](https://doc.rust-lang.org/book/ch18-00-patterns.html)** · **来源: [Wikipedia - State Machine](https://en.wikipedia.org/wiki/State_Machine)** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)
 
 - [工作流设计模式语义分析](#工作流设计模式语义分析)
   - [目录](#目录)
@@ -1480,7 +1480,7 @@ Rust 的类型安全和零成本抽象特性使其成为实现工作流引擎的
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 

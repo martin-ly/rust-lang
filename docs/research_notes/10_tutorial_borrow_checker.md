@@ -851,9 +851,9 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 > **来源: [Wikipedia - Resource Management](https://en.wikipedia.org/wiki/Resource_Management)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
-> **来源: [TRPL Ch. 10 - Lifetimes](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)**
+> **来源: [TRPL Ch. 10 - Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html)**
 
 > **来源: [Rust Reference - Borrow Checker](https://doc.rust-lang.org/reference/)**
 

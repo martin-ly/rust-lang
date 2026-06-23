@@ -391,7 +391,7 @@ graph TD
 > 核心洞察：过程宏的"安全"仅限于 Token 语法合法性，语义类型安全是编译器后续阶段的保证。[来源: 💡 原创分析]
 > [来源: [Rust Reference: Hygiene](https://doc.rust-lang.org/reference/macros-by-example.html#hygiene)]
 
-> **[RFC 1566: Procedural Macros](https://rust-lang.github.io/rfcs/1566-1566-proc-macros.html)** Procedural macros operate on `TokenStream` before type checking, implementing a restricted compiler-plugin model for derive, attribute, and function-like macros. ✅ 已验证
+> **[RFC 1566: Procedural Macros](https://rust-lang.github.io/rfcs/1566-proc-macros.html)** Procedural macros operate on `TokenStream` before type checking, implementing a restricted compiler-plugin model for derive, attribute, and function-like macros. ✅ 已验证
 
 ### 5.5 宏与类型系统的交互边界
 
@@ -401,7 +401,7 @@ graph TD
 
 1. **宏无法做类型推断** — 过程宏接收未类型化的 `TokenStream`；`macro_rules!` 的 `:expr` / `:ty` 只匹配语法形态，不携带语义类型。
 2. **宏无法做重载** — 宏匹配基于语法模式（token 结构），无法像 C++ 模板那样根据类型特化。
-3. **宏的"类型安全"是语法级的** — 宏保证输出合法 Token 序列，但不保证语义合法；类型安全由编译器后续阶段保证。 [来源: [Rust Reference: Macros] · [RFC 1584](https://rust-lang.github.io/rfcs/1584-1584-macros-literal-matcher.html)]
+3. **宏的"类型安全"是语法级的** — 宏保证输出合法 Token 序列，但不保证语义合法；类型安全由编译器后续阶段保证。 [来源: [Rust Reference: Macros] · [RFC 1584](https://rust-lang.github.io/rfcs/1584-macros.html)]
 
 **反例：宏可以生成类型不匹配的代码**
 
@@ -515,7 +515,7 @@ graph TD
 | **C3** | 宏内部变量隔离 ⟹ 外部作用域不受影响 | 作用域保证 | L1 | 使用 `macro_export` 跨 crate 时标签冲突 | `break 'label` 在宏内外的作用域边界 |
 
 > **[Kohlbecker et al. 1986 + Rust Reference]** 一致性说明: 卫生宏有严格理论支撑（Hygienic Macros for Scheme），但过程宏的生成正确性主要依赖编译器的二次类型检查。✅ 已验证
-> **[RFC 1566](https://rust-lang.github.io/rfcs/1566-1566-proc-macros.html)** 过程宏（Derive/Attribute/Function-like）的生成代码必须返回合法 TokenStream，最终正确性由编译器后续阶段保证。✅ 已验证
+> **[RFC 1566](https://rust-lang.github.io/rfcs/1566-proc-macros.html)** 过程宏（Derive/Attribute/Function-like）的生成代码必须返回合法 TokenStream，最终正确性由编译器后续阶段保证。✅ 已验证
 > **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.3 "async 正确性"
 
 > **过渡说明**: 定理矩阵提供了"什么条件下什么保证成立"的静态知识，但工程能力的真正习得需要穿越"示例-反例-边界测试"的循环。下一章通过可运行的代码，将上述定理转化为肌肉记忆。
@@ -985,7 +985,7 @@ macro_rules! assert_impl {
 |:---|:---|:---|
 | **[CMU 17-363: Programming Language Pragmatics]** | Macros、Packages、Crates | L3 Macros 覆盖 |
 | **[CMU 17-350: Safe Systems Programming]** | 宏在系统编程中的应用 | 工程实践 |
-| **[RFC 1584: Macros](https://rust-lang.github.io/rfcs/1584-1584-macros-literal-matcher.html)** | macro_rules! 设计规范 | 语法 §3 |
+| **[RFC 1584: Macros](https://rust-lang.github.io/rfcs/1584-macros.html)** | macro_rules! 设计规范 | 语法 §3 |
 | **[RFC 2564: Procedural Macros](https://github.com/rust-lang/rfcs/pull/2564)** | 过程宏设计 | 派生宏 §3 |
 | **[Hygienic Macros (Kohlbecker 1986)]** | 卫生宏理论基础 | 形式化根基 §3 |
 
@@ -1494,7 +1494,7 @@ fn foo(x: i32) -> i32 {
 
 1. **阶段隔离** ⟹ 属性宏只能作用于被显式装饰的 item，无法全局扫描或修改其他模块代码
 2. **无类型信息** ⟹ 输入是未类型化的 TokenStream，宏无法知道变量具体类型，只能基于语法结构做判断
-3. **编译器二次检查** ⟹ 输出必须是合法 TokenStream，类型正确性由编译器后续阶段保证 [来源: [Rust Reference: Procedural Macros] · [RFC 1566](https://rust-lang.github.io/rfcs/1566-1566-proc-macros.html)]
+3. **编译器二次检查** ⟹ 输出必须是合法 TokenStream，类型正确性由编译器后续阶段保证 [来源: [Rust Reference: Procedural Macros] · [RFC 1566](https://rust-lang.github.io/rfcs/1566-proc-macros.html)]
 
 #### 5.2 `#[trace]` 完整实现：函数入口/出口自动打印日志
 
@@ -1949,7 +1949,7 @@ macro_rules! trace_fn {
 
 > **[The Little Book of Rust Macros](https://veykril.github.io/tlborm/)** `macro_rules!` 的片段分类器（`expr`、`ty`、`ident`、`path` 等）匹配语法范畴而非语义实体。对于函数定义这类结构复杂、分支众多的语法结构，声明宏的模式匹配能力迅速耗尽，这正是过程宏的设计动机。✅ 已验证
 > **[Rust Reference: Macros by Example](https://doc.rust-lang.org/reference/macros-by-example.html)** 声明宏不支持递归下降解析复杂语法结构（如完整函数签名含泛型与 where 子句），也无法在匹配后对内部节点做结构化遍历。✅ 已验证
-> **[RFC 1566: Procedural Macros](https://rust-lang.github.io/rfcs/1566-1566-proc-macros.html)** 过程宏被引入的核心动机之一，正是弥补 `macro_rules!` 在复杂 AST 变换场景下的能力缺口。✅ 已验证
+> **[RFC 1566: Procedural Macros](https://rust-lang.github.io/rfcs/1566-proc-macros.html)** 过程宏被引入的核心动机之一，正是弥补 `macro_rules!` 在复杂 AST 变换场景下的能力缺口。✅ 已验证
 
 > **跨层映射**: 本文件属性宏示例 ↔ [`01_foundation/04_type_system.md`](../01_foundation/04_type_system.md) § 泛型与 trait bound（签名保留中的泛型参数）
 > **跨层映射**: 本文件 `Fold` trait ↔ [`04_formal/02_type_theory.md`](../04_formal/02_type_theory.md) § 语法树归纳定义（AST 递归结构的归纳遍历）
@@ -1958,7 +1958,7 @@ macro_rules! trace_fn {
 
 ### 6. `macro_rules!` 与 `macro` 关键字（声明宏 2.0）的演进对比
 
-> **[RFC 1584: Macros](https://rust-lang.github.io/rfcs/1584-1584-macros-literal-matcher.html)** `macro` 关键字（声明宏 2.0）旨在解决 `macro_rules!` 的诸多限制：更好的作用域控制、模块路径支持、可见性修饰符，以及更像函数的语法。✅ 已验证
+> **[RFC 1584: Macros](https://rust-lang.github.io/rfcs/1584-macros.html)** `macro` 关键字（声明宏 2.0）旨在解决 `macro_rules!` 的诸多限制：更好的作用域控制、模块路径支持、可见性修饰符，以及更像函数的语法。✅ 已验证
 
 > **[Rust Reference: macro keyword](https://doc.rust-lang.org/reference/)** 截至 Rust 1.78，`macro` 关键字仍为不稳定特性（`#![feature(decl_macro)]`），但已在 `std` 内部广泛使用（如 `vec!`、`println!` 的标准库实现已迁移）。✅ 已验证
 
@@ -2062,7 +2062,7 @@ mod internal {
   模块路径改善: use crate::mac! 已支持（Rust 1.32+）
 ```
 
-> **[RFC 1584](https://rust-lang.github.io/rfcs/1584-1584-macros-literal-matcher.html)** 声明宏 2.0 的设计目标不是取代 `macro_rules!`，而是提供一个更符合 Rust 模块系统的替代方案。`macro_rules!` 将长期保持兼容。✅ 已验证
+> **[RFC 1584](https://rust-lang.github.io/rfcs/1584-macros.html)** 声明宏 2.0 的设计目标不是取代 `macro_rules!`，而是提供一个更符合 Rust 模块系统的替代方案。`macro_rules!` 将长期保持兼容。✅ 已验证
 
 ---
 
@@ -2074,26 +2074,26 @@ mod internal {
 |:---|:---|:---|
 | 宏是编译期元编程 | [TRPL Ch19.5](https://doc.rust-lang.org/book/ch19-05-advanced-functions-and-closures.html) | ✅ |
 | macro_rules! 是声明式宏 | [TRPL Ch19.5](https://doc.rust-lang.org/book/ch19-05-advanced-functions-and-closures.html) · [Little Book of Rust Macros] | ✅ |
-| 过程宏分三类：Derive/Attr/Fn | [TRPL Ch19.5](https://doc.rust-lang.org/book/ch19-05-advanced-functions-and-closures.html) · [RFC 1566](https://rust-lang.github.io/rfcs/1566-1566-proc-macros.html) | ✅ |
+| 过程宏分三类：Derive/Attr/Fn | [TRPL Ch19.5](https://doc.rust-lang.org/book/ch19-05-advanced-functions-and-closures.html) · [RFC 1566](https://rust-lang.github.io/rfcs/1566-proc-macros.html) | ✅ |
 | Rust 宏是卫生的 | [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Scheme 卫生宏论文] | ✅ |
 | `vec!` / `format!` 是宏 | [The Rust Programming Language](https://doc.rust-lang.org/book/) | ✅ |
 | 编译期代码生成零运行时开销 | [Rust Reference: Macros](https://doc.rust-lang.org/reference/macros.html) | ✅ |
 | 卫生宏原始论文 | [Kohlbecker et al. 1986 — Macro-by-Example: Deriving Syntactic Transformations from their Specifications, POPL] | ✅ |
 | 元编程理论基础 | [Taha 2004 — A Gentle Introduction to Multi-stage Programming] | ✅ |
 | 宏非图灵完备 | [Rust Reference: recursion limit](https://doc.rust-lang.org/reference/) · [TLBORM] | ✅ |
-| 过程宏 panic 仅产生编译错误 | [RFC 1566](https://rust-lang.github.io/rfcs/1566-1566-proc-macros.html) · [proc_macro 文档] | ✅ |
+| 过程宏 panic 仅产生编译错误 | [RFC 1566](https://rust-lang.github.io/rfcs/1566-proc-macros.html) · [proc_macro 文档] | ✅ |
 | 宏（计算机科学） | [Wikipedia: Macro (computer science)](https://en.wikipedia.org/wiki/Macro_(computer_science)) | ✅ |
 | 卫生宏（Hygienic Macros） | [Wikipedia: Hygienic macro](https://en.wikipedia.org/wiki/Hygienic_macro) · [Kohlbecker et al. 1986] | ✅ |
 | 元编程与代码生成 | [Wikipedia: Metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming) · [Taha 2004] | ✅ |
 | 编译器构造与语法分析 | [CMU 17-363: Compiler Design] · [Wikipedia: Abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree) | ✅ |
 | DSL（领域特定语言） | [Wikipedia: Domain-specific language](https://en.wikipedia.org/wiki/Domain_specific_language) · [Fowler 2010 · Domain Specific Languages] | ✅ |
 | macro_rules! 语法 | [Rust Reference: Macros by Example](https://doc.rust-lang.org/reference/macros-by-example.html) · [TRPL Ch19.5](https://doc.rust-lang.org/book/ch19-05-advanced-functions-and-closures.html) | ✅ |
-| 过程宏设计 | [Rust Reference: Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html) · [RFC 1566](https://rust-lang.github.io/rfcs/1566-1566-proc-macros.html) | ✅ |
+| 过程宏设计 | [Rust Reference: Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html) · [RFC 1566](https://rust-lang.github.io/rfcs/1566-proc-macros.html) | ✅ |
 | 卫生宏机制 | [Rust Reference: Hygiene](https://doc.rust-lang.org/reference/macros-by-example.html#hygiene) · [Kohlbecker et al. 1986] | ✅ |
 | 编译期内置宏 | [Rust Reference: Built-in Macros](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) | ✅ |
-| const fn 替代趋势 | [Rust Reference: const_eval](https://doc.rust-lang.org/reference/) · [RFC 2000](https://rust-lang.github.io/rfcs/2000-2000-const-generics.html) | ✅ |
+| const fn 替代趋势 | [Rust Reference: const_eval](https://doc.rust-lang.org/reference/) · [RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html) | ✅ |
 | syn/quote/proc_macro2 | [syn docs] · [quote docs] · [proc_macro2 docs] | ✅ |
-| 声明宏 2.0 演进 | [Rust Reference: macro keyword](https://doc.rust-lang.org/reference/) · [RFC 1584](https://rust-lang.github.io/rfcs/1584-1584-macros-literal-matcher.html) | ✅ |
+| 声明宏 2.0 演进 | [Rust Reference: macro keyword](https://doc.rust-lang.org/reference/) · [RFC 1584](https://rust-lang.github.io/rfcs/1584-macros.html) | ✅ |
 | 属性宏修改函数体 | [Rust Reference: Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html) · [syn docs] | ✅ |
 
 ---

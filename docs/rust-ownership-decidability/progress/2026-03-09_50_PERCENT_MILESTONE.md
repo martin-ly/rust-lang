@@ -16,7 +16,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [50% 里程碑报告](#50-里程碑报告)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [最新进展](#最新进展)
     - [新增内容](#新增内容)
       - [1. DecidabilityTheorems.v (120 行)](#1-decidabilitytheoremsv-120-行)
@@ -39,7 +39,7 @@
   - [**下次目标**: 60%](#下次目标-60)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 最新进展
 >
@@ -220,7 +220,7 @@ Theorem rust_ownership_system_fully_decidable :
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 

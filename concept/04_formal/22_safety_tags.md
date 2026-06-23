@@ -15,7 +15,7 @@
 > **前置依赖**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [形式化验证](05_verification_toolchain.md) · [Miri](../06_ecosystem/47_formal_verification_tools.md)
 > **后置延伸**: [BorrowSanitizer](23_borrow_sanitizer.md) · [AutoVerus](24_autoverus.md) · [Rust for Linux 案例](../07_future/19_rust_for_linux.md)
 >
-> **来源**: [RFC #3842 Safety Tags](https://github.com/rust-lang/rfcs/pull/3842) · [Safety Tags 研究仓库](https://github.com/safer-rust/safety-tags) · [safety-tool slides](https://os-checker.github.io/slides/safety-tags) · [Rust for Linux Safety Standard](https://rust-for-linux.com/safety-standard)
+> **来源**: [RFC #3842 Safety Tags](https://github.com/rust-lang/rfcs/pull/3842) · [Safety Tags 研究仓库](https://github.com/safer-rust/safety-tags) · [safety-tool slides](https://os-checker.github.io/slides/safety-tags) · [Rust for Linux Safety Standard](https://rust-for-linux.com/)
 
 ---
 
@@ -90,7 +90,7 @@ Safety Tags **不替代**人工说明，而是为其提供结构化骨架。
 
 ### 3.2 支持 Rust for Linux 等安全关键场景
 
-Rust for Linux 的 [Safety Standard](https://rust-for-linux.com/safety-standard) 工作倡导用一致术语描述安全要求。Safety Tags 与该目标一致，可作为从“自然语言标准”到“机器可读契约”的桥梁。
+Rust for Linux 的 [Safety Standard](https://rust-for-linux.com/) 工作倡导用一致术语描述安全要求。Safety Tags 与该目标一致，可作为从“自然语言标准”到“机器可读契约”的桥梁。
 
 ### 3.3 与形式化验证的衔接
 

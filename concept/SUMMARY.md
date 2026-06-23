@@ -115,6 +115,7 @@
   - [Async/Await（异步编程）](03_advanced/02_async.md)
   - [Async/Await 高级主题](03_advanced/02_async_advanced.md)
   - [异步模式：从 Future 到生产级并发](03_advanced/02_async_patterns.md)
+  - [Async Closures（异步闭包）](03_advanced/24_async_closures.md)
   - [Unsafe Rust](03_advanced/03_unsafe.md)
   - [Macros（宏系统）](03_advanced/04_macros.md)
   - [Rust FFI：与外部代码的安全边界](03_advanced/05_rust_ffi.md)

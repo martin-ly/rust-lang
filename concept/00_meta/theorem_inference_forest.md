@@ -242,7 +242,7 @@ graph TD
 定理 T-020: 生命周期偏序约束可满足性 [来源: 03_lifetimes.md T-020, Tofte-Talpin 1994]
     「有限生命周期变量集上的约束图无环 ⟺ 约束可满足」
     ↓
-定理 T-021: NLL 流敏感安全 来源: [RFC 2094, Oxide 2019](https://rust-lang.github.io/rfcs/2094-2094-nll.html)
+定理 T-021: NLL 流敏感安全 来源: [RFC 2094, Oxide 2019](https://rust-lang.github.io/rfcs/2094-nll.html)
     「基于 CFG 的活跃性分析保证引用只在有效期间使用」
     ↓
 推论 C-020: 悬垂引用不可达 [来源: 03_lifetimes.md T-022]
@@ -330,10 +330,10 @@ graph TD
 引理 L6-1: async fn 是无栈协程（stackless coroutine）
 引理 L6-2: .await 点是续体边界
     ↓
-定理 T-050: Future 状态机变换正确性 来源: [RFC 2394, Async Book](https://rust-lang.github.io/rfcs/2394-2394-async_await.html)
+定理 T-050: Future 状态机变换正确性 来源: [RFC 2394, Async Book](https://rust-lang.github.io/rfcs/2394-async_await.html)
     「编译器将 async fn 变换为等价的 Future 状态机」
     ↓
-定理 T-051: Pin 内存稳定性 来源: [RFC 2349, Pin API docs](https://rust-lang.github.io/rfcs/2349-2349-pin.html)
+定理 T-051: Pin 内存稳定性 来源: [RFC 2349, Pin API docs](https://rust-lang.github.io/rfcs/2349-pin.html)
     「Pin<&mut T> 保证 T 在内存中不被移动」
     ↓
 推论 C-050: 自引用结构安全 来源: [Rustonomicon §4.8](https://doc.rust-lang.org/nomicon/)

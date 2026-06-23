@@ -50,7 +50,7 @@
 
 ## 1. 引言
 
-> **[来源: Workflow Patterns Initiative - workflowpatterns.com]** · **来源: [van der Aalst et al. (2003)](https://www.workflowpatterns.com/)** · **来源: [Russell et al. (2006)](https://www.workflowpatterns.com/)** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [TRPL Ch. 4, 8, 16](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **[来源: Workflow Patterns Initiative - workflowpatterns.com]** · **来源: [van der Aalst et al. (2003)](https://www.workflowpatterns.com/)** · **来源: [Russell et al. (2006)](https://www.workflowpatterns.com/)** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [TRPL Ch. 4, 8, 16](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 **工作流控制模式（Workflow Control Patterns, WCP）** 由 van der Aalst 等人于 2003 年系统提出，后经 Russell 等人于 2006 年扩展为 43 个模式，描述业务流程中活动之间的控制流关系。Rust 的所有权系统核心规则可形式化为：
 
@@ -185,7 +185,7 @@ graph LR
 
 ## 3. 逐类分析
 
-> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [TRPL Ch. 4, 8, 13, 16](https://doc.rust-lang.org/book/ch04-00-ownership.html)** · **来源: [Tokio Documentation](https://tokio.rs/)**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [TRPL Ch. 4, 8, 13, 16](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)** · **来源: [Tokio Documentation](https://tokio.rs/)**
 
 ### 3.1 基础控制流 (WCP1-5)
 

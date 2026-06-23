@@ -27,7 +27,8 @@
 
 ## 📑 目录
 
-- [Rust 平台集成：AOSP、Chromium 与 Bare Metal](#rust-平台集成aospchromium-与-bare-metal)
+- [将 Rust 集成到现有平台](#将-rust-集成到现有平台)
+  - [📑 目录](#-目录)
   - [一、三种平台约束对比](#一三种平台约束对比)
   - [二、Android AOSP](#二android-aosp)
     - [2.1 AOSP 为什么选择 Rust](#21-aosp-为什么选择-rust)
@@ -39,7 +40,7 @@
     - [3.2 GN 构建与 CXX](#32-gn-构建与-cxx)
     - [3.3 引入第三方 crate](#33-引入第三方-crate)
   - [四、Bare Metal](#四bare-metal)
-    - [4.1 no_std 与 alloc](#41-no_std-与-alloc)
+    - [4.1 no\_std 与 alloc](#41-no_std-与-alloc)
     - [4.2 微控制器：PAC → HAL → Board Support](#42-微控制器pac--hal--board-support)
     - [4.3 应用处理器与 UART 驱动](#43-应用处理器与-uart-驱动)
   - [五、选型决策树](#五选型决策树)

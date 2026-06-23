@@ -11,7 +11,7 @@
 
 ## 目录
 >
-> **来源: [Rust Reference - Traits](https://doc.rust-lang.org/reference/items/traits.html)** · **来源: [Wikipedia - Trait-based Programming](https://en.wikipedia.org/wiki/Trait_based_Programming)** · **来源: [RFC 255 - Trait Aliases](https://github.com/rust-lang/rfcs/pull/255)** · **来源: [TRPL Ch. 10](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)** · **来源: [Wikipedia - Type Class](https://en.wikipedia.org/wiki/Type_Class)** · **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** · **来源: [Wikipedia - Trait (computer programming)](https://en.wikipedia.org/wiki/Trait_(computer_programming))** · **来源: [Wikipedia - Polymorphism](https://en.wikipedia.org/wiki/Polymorphism)** · **[来源: ACM - Trait-Based Language Design]** · **[来源: IEEE - Interface Specification Standards]**
+> **来源: [Rust Reference - Traits](https://doc.rust-lang.org/reference/items/traits.html)** · **来源: [Wikipedia - Trait-based Programming](https://en.wikipedia.org/wiki/Trait_based_Programming)** · **来源: [RFC 255 - Trait Aliases](https://github.com/rust-lang/rfcs/pull/255)** · **来源: [TRPL Ch. 10](https://doc.rust-lang.org/book/ch10-00-generics.html)** · **来源: [Wikipedia - Type Class](https://en.wikipedia.org/wiki/Type_Class)** · **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** · **来源: [Wikipedia - Trait (computer programming)](https://en.wikipedia.org/wiki/Trait_(computer_programming))** · **来源: [Wikipedia - Polymorphism](https://en.wikipedia.org/wiki/Polymorphism)** · **[来源: ACM - Trait-Based Language Design]** · **[来源: IEEE - Interface Specification Standards]**
 
 - [Trait 系统详解](#trait-系统详解)
   - [目录](#目录)
@@ -1403,7 +1403,7 @@ Rust 的 trait 系统是类型系统的核心，提供了：
 
 > **来源: [Rust Reference - Traits](https://doc.rust-lang.org/reference/items/traits.html)**
 
-> **来源: [TRPL Ch. 10 - Generic Types, Traits](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)**
+> **来源: [TRPL Ch. 10 - Generic Types, Traits](https://doc.rust-lang.org/book/ch10-00-generics.html)**
 
 > **[来源: ACM - Trait-Based Language Design]**
 
@@ -1412,7 +1412,7 @@ Rust 的 trait 系统是类型系统的核心，提供了：
 > **[来源: Wadler - Theorems for Free! (1989)]**
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 > **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**

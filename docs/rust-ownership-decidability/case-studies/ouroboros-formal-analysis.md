@@ -10,7 +10,7 @@
 > **形式化框架**: 借用投影 + Pin保证 + 生命周期参数化
 >
 > **参考**: [ouroboros](https://docs.rs/ouroboros) 0.18.x, [ouroboros_macro](https://docs.rs/ouroboros_macro)
-> **[来源: ouroboros Documentation - docs.rs/ouroboros]** · **来源: [Rust Reference - Pin](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Self-referential Struct](https://en.wikipedia.org/wiki/Self_referential_Struct)** · **来源: [Rustonomicon - Pin](https://doc.rust-lang.org/nomicon/)** · **来源: [TRPL Ch. 19](https://doc.rust-lang.org/book/ch19-00-advanced-features.html)** · **来源: [RFC 2349 - Pin](https://rust-lang.github.io/rfcs/2349-2349-pin.html) · **来源: [Wikipedia - Self-Referential Data Structure](https://en.wikipedia.org/wiki/Self_Referential_Data_Structure)** · **来源: [Wikipedia - Borrow Checker](https://en.wikipedia.org/wiki/Borrow_Checker)** · **[来源: ACM - Safe Self-Reference Patterns]** · **[来源: IEEE - Memory Safety Verification]**
+> **[来源: ouroboros Documentation - docs.rs/ouroboros]** · **来源: [Rust Reference - Pin](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Self-referential Struct](https://en.wikipedia.org/wiki/Self_referential_Struct)** · **来源: [Rustonomicon - Pin](https://doc.rust-lang.org/nomicon/)** · **来源: [TRPL Ch. 19](https://doc.rust-lang.org/book/ch19-00-advanced-features.html)** · **来源: [RFC 2349 - Pin](https://rust-lang.github.io/rfcs/2349-pin.html) · **来源: [Wikipedia - Self-Referential Data Structure](https://en.wikipedia.org/wiki/Self_Referential_Data_Structure)** · **来源: [Wikipedia - Borrow Checker](https://en.wikipedia.org/wiki/Borrow_Checker)** · **[来源: ACM - Safe Self-Reference Patterns]** · **[来源: IEEE - Memory Safety Verification]**
 
 ---
 
@@ -1285,7 +1285,7 @@ fn demo() {
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 

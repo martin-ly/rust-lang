@@ -93,7 +93,7 @@ Rust 编程语言的所有权系统、类型安全的并发原语与零成本抽
 
 截至本文更新，知识库已完成 **21 个模式文件**（约 48.8%），剩余 22 个模式按优先级持续补充中。已完成的模式覆盖了基础控制流（100%）、终止（100%）和大部分状态与取消模式；缺失模式主要集中在高级分支与同步（Partial Join 系列、鉴别器变体）、触发器和线程模式。
 
-> 来源: [Rust Reference - Control Flow Expressions](https://doc.rust-lang.org/reference/) · 来源: [TRPL Ch. 4, 8, 13, 16](https://doc.rust-lang.org/book/ch04-00-ownership.html) · 来源: [Tokio Docs - tokio::sync](https://docs.rs/tokio/latest/tokio/sync/)
+> 来源: [Rust Reference - Control Flow Expressions](https://doc.rust-lang.org/reference/) · 来源: [TRPL Ch. 4, 8, 13, 16](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) · 来源: [Tokio Docs - tokio::sync](https://docs.rs/tokio/latest/tokio/sync/)
 
 ---
 
@@ -342,7 +342,7 @@ pie title WCP Rust 实现状态分布 (43 模式)
 
 ## 5. 所有权安全原则
 
-> 来源: [Rust Reference - Ownership](https://doc.rust-lang.org/reference/) · 来源: [TRPL Ch. 4](https://doc.rust-lang.org/book/ch04-00-ownership.html) · 来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> 来源: [Rust Reference - Ownership](https://doc.rust-lang.org/reference/) · 来源: [TRPL Ch. 4](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) · 来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 
 43 个 WCP 在 Rust 中的实现难度差异，根源在于所有权系统与模式语义之间的张力。以下四条核心原则解释了为什么某些模式天然安全，而某些需要额外抽象：
 

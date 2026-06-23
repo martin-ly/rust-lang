@@ -281,7 +281,7 @@ Rust 规范维护的核心挑战:
 | **普通开发者** | 比 Reference 更完整的行为描述 | 遇到未文档化行为时困惑 | 低 |
 
 > **社区洞察**: 对规范需求最迫切的不是普通开发者，而是**编译器替代实现者**（gccrs）、**认证项目**（Ferrocene）和**形式化验证研究者**。这三方共同构成了推动规范工作的核心力量。
-> [来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]
+> [来源: [Rust Project Goals 2026 — Experimental Language Specification](https://rust-lang.github.io/rust-project-goals/2026/experimental-language-specification.html)]
 
 ---
 
@@ -371,7 +371,7 @@ graph TD
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 当前权威参考 |
 | [Rust RFC 3355](https://github.com/rust-lang/rfcs/pull/3355) | ✅ 一级 | 语言规范 RFC |
 | [Ferrocene Specification](https://spec.ferrocene.dev/) | ✅ 一级 | 先行技术规范 |
-| [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) | ✅ 一级 | 官方项目目标 |
+| [Rust Project Goals 2026 — Experimental Language Specification](https://rust-lang.github.io/rust-project-goals/2026/experimental-language-specification.html) | ✅ 一级 | 官方项目目标 |
 | [Rust Compiler Team](https://github.com/rust-lang/compiler-team/) | ✅ 一级 | 编译器团队讨论 |
 | [gccrs Project](https://gcc.gnu.org/wiki/RustFrontEnd) | ⚠️ 二级 | 替代实现需求 |
 

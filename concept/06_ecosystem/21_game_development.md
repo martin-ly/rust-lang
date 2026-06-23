@@ -1,7 +1,7 @@
-> **内容分级**: [综述级]
-
+> **内容分级**:
+>
+> [综述级]
 > **代码状态**: ✅ 含可编译示例
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Rust 游戏开发生态
@@ -10,7 +10,6 @@
 > **Summary**: Game Development. Core Rust concept covering mechanism analysis, memory safety guarantees, performance optimization.
 >
 > **受众**: [进阶]
-
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Cre — 设计游戏开发架构
@@ -20,7 +19,6 @@
 > [Performance](../06_ecosystem/15_performance_optimization.md)
 > **后置概念**: [WebAssembly](../06_ecosystem/11_webassembly.md) ·
 > [ECS](../06_ecosystem/04_application_domains.md)
-
 >
 > **来源**: [Bevy Engine](https://bevyengine.org/) · [wgpu](https://docs.rs/wgpu/)
 ---
@@ -30,9 +28,7 @@
 > [Rust GameDev Working Group](https://gamedev.rs/) ·
 > [Are We Game Yet?](https://arewegameyet.rs/) ·
 > [Wikipedia — Entity Component System](https://en.wikipedia.org/wiki/Entity_component_system)
-
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录

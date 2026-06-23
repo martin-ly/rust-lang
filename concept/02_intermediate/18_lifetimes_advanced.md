@@ -1,5 +1,6 @@
-> **内容分级**: [综述级]
-
+> **内容分级**:
+>
+> [综述级]
 > **本节关键术语**: 高级生命周期 (Advanced Lifetimes) · HRTB · 生命周期省略规则 (Elision) · 子类型 (Subtyping) · 变型 (Variance) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 生命周期高级主题：从 HRTB 到自引用类型

@@ -19,26 +19,26 @@
   - [目录](#目录)
   - [1. 引言](#1-引言)
   - [2. Thiserror](#2-thiserror)
-    - [定义 ERROR-1 ( 派生宏 )](#定义-error-1--派生宏)
-    - [定义 ERROR-2 ( 自动实现 )](#定义-error-2--自动实现)
-    - [定理 ERROR-T1 ( 类型安全 )](#定理-error-t1--类型安全)
+    - [定义 ERROR-1 ( 派生宏 )](#定义-error-1--派生宏-)
+    - [定义 ERROR-2 ( 自动实现 )](#定义-error-2--自动实现-)
+    - [定理 ERROR-T1 ( 类型安全 )](#定理-error-t1--类型安全-)
   - [3. Anyhow](#3-anyhow)
-    - [定义 ANYHOW-1 ( Result别名 )](#定义-anyhow-1--result别名)
-    - [定义 ANYHOW-2 ( 上下文 )](#定义-anyhow-2--上下文)
-    - [定理 ANYHOW-T1 ( 自动转换 )](#定理-anyhow-t1--自动转换)
+    - [定义 ANYHOW-1 ( Result别名 )](#定义-anyhow-1--result别名-)
+    - [定义 ANYHOW-2 ( 上下文 )](#定义-anyhow-2--上下文-)
+    - [定理 ANYHOW-T1 ( 自动转换 )](#定理-anyhow-t1--自动转换-)
   - [4. 组合使用](#4-组合使用)
-    - [定义 COMBINE-1 ( 边界设计 )](#定义-combine-1--边界设计)
-    - [定理 COMBINE-T1 ( 无缝转换 )](#定理-combine-t1--无缝转换)
+    - [定义 COMBINE-1 ( 边界设计 )](#定义-combine-1--边界设计-)
+    - [定理 COMBINE-T1 ( 无缝转换 )](#定理-combine-t1--无缝转换-)
   - [5. 定理与证明](#5-定理与证明)
-    - [定理 ERR-T1 ( 零运行时开销 )](#定理-err-t1--零运行时开销)
-    - [定理 ERR-T2 ( 上下文保留 )](#定理-err-t2--上下文保留)
+    - [定理 ERR-T1 ( 零运行时开销 )](#定理-err-t1--零运行时开销-)
+    - [定理 ERR-T2 ( 上下文保留 )](#定理-err-t2--上下文保留-)
   - [6. 代码示例](#6-代码示例)
     - [示例1: 库错误定义](#示例1-库错误定义)
     - [示例2: 应用错误处理](#示例2-应用错误处理)
     - [示例3: 错误链遍历](#示例3-错误链遍历)
   - [**状态**: ✅ 已对齐](#状态--已对齐)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -305,7 +305,7 @@ fn print_error_chain(err: &Error) {
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
@@ -317,7 +317,7 @@ fn print_error_chain(err: &Error) {
 
 > **来源: [Rust Reference - Result](https://doc.rust-lang.org/std/result/)**
 
-> **来源: [RFC 2504 - Try Trait](https://rust-lang.github.io/rfcs/2504-2504-try-trait.html)**
+> **来源: [RFC 2504 - Try Trait](https://rust-lang.github.io/rfcs/2504-try-trait.html)**
 
 ---
 

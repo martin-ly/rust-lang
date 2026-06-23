@@ -171,7 +171,7 @@
 
 ## 📊 目录 {#-目录}
 
-> **来源: [TRPL Ch. 4 - Understanding Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Understanding Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Ownership Semantics](https://en.wikipedia.org/wiki/Ownership_Semantics)** · **来源: [Wikipedia - Linear Logic](https://en.wikipedia.org/wiki/Linear_Logic)** · **[来源: ACM - Ownership Type Systems]** · **[来源: IEEE - Memory Safety Guarantees]**
 
@@ -2424,7 +2424,7 @@ fn safe_concurrent_access() {
 
 ## ✅ 证明目标 {#-证明目标}
 
-> **来源: [TRPL Ch. 4 - Understanding Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Understanding Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -3030,7 +3030,7 @@ Rustonomicon 内存布局。
 
 ## 🆕 Rust 1.94 深度整合更新
 
-> **来源: [TRPL Ch. 4 - Understanding Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Understanding Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
@@ -3128,7 +3128,7 @@ Rustonomicon 内存布局。
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 

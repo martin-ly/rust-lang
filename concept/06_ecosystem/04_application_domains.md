@@ -1,8 +1,9 @@
-> **生态状态提示**：本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
+> **生态状态提示**：
+>
+> 本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
 >
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
-
 >
 > **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Cargo Book](https://doc.rust-lang.org/cargo/) · [crates.io](https://crates.io/)
 ---
@@ -10,7 +11,6 @@
 # Application Domains（软件工程应用主题）
 
 > **代码状态**: ✅ 含可编译示例
-
 >
 > **EN**: Application Domains
 > **Summary**: Application Domains. Core Rust concept covering mental model building.
@@ -21,7 +21,7 @@
 > **双维定位**: P×Eva — 评估 Rust 在特定领域的适用性
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Traits](../02_intermediate/01_traits.md) · [Async](../03_advanced/02_async.md) · [Unsafe](../03_advanced/03_unsafe.md) · [Core Crates](./03_core_crates.md) [来源: [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/)]
 > **后置概念**: [AI Integration](../07_future/01_ai_integration.md) · [Formal Methods](../07_future/02_formal_methods.md)
-> **主要来源**: [Rust in Production](https://www.rust-lang.org/production) · [Rust Foundation] · [Ferrous Systems] · [RustConf] · [AWS/Google/Microsoft Rust 博客]
+> **主要来源**: [Rust in Production](https://www.rust-lang.org/) · [Rust Foundation] · [Ferrous Systems] · [RustConf] · [AWS/Google/Microsoft Rust 博客]
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -406,7 +406,7 @@ Rust 在区块链领域占据**主导地位**的原因：
 | **移除未对齐字段初始化 escape hatch** | `#[disable_initialized_field_access]` 静默允许未对齐字段的就地初始化，产生运行时 UB | 移除该 escape hatch，依赖它的代码现在编译失败而非静默产生 UB |
 | **`unused_features` lint 兼容** | Rust 1.96 重新启用 `unused_features` lint，内核全局启用的 feature 列表触发大量警告 | 内核构建系统全局允许该 lint，避免逐 crate 修改 |
 
-> **关键洞察**: Rust for Linux 正在从"社区实验"转变为"Rust Project 官方目标"。编译器团队（Wesley Wiser）、语言团队（Niko Matsakis）和内核团队（Miguel Ojeda）的协同，标志着 Rust 在系统编程最深层的渗透。核心 tension：**内核需要的新语言特性**（如 guaranteed destructors、arbitrary self types）与**语言团队的稳定化保守主义**之间的平衡。pin-init 的 soundness 修复尤其重要：它展示了 Rust 内核代码如何通过类型系统级别的封闭（sealed token）来消除初始化顺序相关的漏洞类别——这是 C 语言无法实现的保证。[来源: [Rust Project Goals — Rust for Linux](https://rust-lang.github.io/rust-project-goals/2026/)] · [来源: [Rust Blog — Project Goals Update 2026-04](https://blog.rust-lang.org/)] · [来源: [Linux Kernel v7.0-rc4](https://lexplain.net/release-notes/v7.0-rc4)] · 可信度: ✅
+> **关键洞察**: Rust for Linux 正在从"社区实验"转变为"Rust Project 官方目标"。编译器团队（Wesley Wiser）、语言团队（Niko Matsakis）和内核团队（Miguel Ojeda）的协同，标志着 Rust 在系统编程最深层的渗透。核心 tension：**内核需要的新语言特性**（如 guaranteed destructors、arbitrary self types）与**语言团队的稳定化保守主义**之间的平衡。pin-init 的 soundness 修复尤其重要：它展示了 Rust 内核代码如何通过类型系统级别的封闭（sealed token）来消除初始化顺序相关的漏洞类别——这是 C 语言无法实现的保证。[来源: [Rust Project Goals — Rust for Linux](https://rust-lang.github.io/rust-project-goals/2026/roadmap-rust-for-linux.html)] · [来源: [Rust Blog — Project Goals Update 2026-04](https://blog.rust-lang.org/)] · [来源: [Linux Kernel v7.0-rc4](https://lexplain.net/release-notes/v7.0-rc4)] · 可信度: ✅
 
 > **来源**: [Rust for Linux] · [LWN] · 可信度: ✅
 
@@ -789,7 +789,7 @@ graph TD
 > **关键洞察**: 领域选择不是“Rust 是否适合”，而是**“约束优先级排序”**。当性能、安全、并发中任意两项为硬约束时，Rust 通常是最佳选择；当开发速度和生态数量为唯一约束时，其他语言可能更优。
 [来源: [Wikipedia — Software engineering](https://en.wikipedia.org/wiki/Software_engineering)]
 
-> **来源**: [Rust in Production](https://www.rust-lang.org/production) · [Rust Foundation Survey] · 可信度: ✅
+> **来源**: [Rust in Production](https://www.rust-lang.org/) · [Rust Foundation Survey] · 可信度: ✅
 
 ---
 

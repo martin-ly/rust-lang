@@ -15,7 +15,7 @@
 
 > **来源: [Rust Reference - async/await](https://doc.rust-lang.org/reference/items/functions.html#async-functions)**
 >
-> **来源: [Rust Reference - async/await](https://doc.rust-lang.org/reference/items/functions.html#async-functions)** · **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)** · **来源: [Rustonomicon - Async](https://doc.rust-lang.org/nomicon/pin.html)** · **来源: [TRPL Ch. 17](https://doc.rust-lang.org/book/ch17-00-async-await.html)** · **来源: [Wikipedia - Future/Promise](https://en.wikipedia.org/wiki/Future/Promise)** · **[来源: Tokio Documentation - tokio.rs]** · **来源: [Wikipedia - Cooperative Multitasking](https://en.wikipedia.org/wiki/Cooperative_Multitasking)** · **来源: [Wikipedia - Coroutine](https://en.wikipedia.org/wiki/Coroutine)** · **[来源: IEEE - Concurrent Programming Languages]** · **[来源: ACM - Futures and Promises]**
+> **来源: [Rust Reference - async/await](https://doc.rust-lang.org/reference/items/functions.html#async-functions)** · **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)** · **来源: [Rustonomicon - Async](https://doc.rust-lang.org/std/pin/struct.Pin.html)** · **来源: [TRPL Ch. 17](https://doc.rust-lang.org/book/ch17-00-async-await.html)** · **来源: [Wikipedia - Future/Promise](https://en.wikipedia.org/wiki/Future/Promise)** · **[来源: Tokio Documentation - tokio.rs]** · **来源: [Wikipedia - Cooperative Multitasking](https://en.wikipedia.org/wiki/Cooperative_Multitasking)** · **来源: [Wikipedia - Coroutine](https://en.wikipedia.org/wiki/Coroutine)** · **[来源: IEEE - Concurrent Programming Languages]** · **[来源: ACM - Futures and Promises]**
 
 - [Rust 异步执行模型语义深度分析](#rust-异步执行模型语义深度分析)
   - [目录](#目录)
@@ -1320,7 +1320,7 @@ async fn traverse_tree(node: &TreeNode) -> i32 {
 
 ## 4. Pin 和自引用语义
 
-> **来源: [Rust Reference - Pin](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Self-referential Struct](https://en.wikipedia.org/wiki/Self_referential_Struct)** · **来源: [RFC 2349 - Pin](https://rust-lang.github.io/rfcs/2349-2349-pin.html)**
+> **来源: [Rust Reference - Pin](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Self-referential Struct](https://en.wikipedia.org/wiki/Self_referential_Struct)** · **来源: [RFC 2349 - Pin](https://rust-lang.github.io/rfcs/2349-pin.html)**
 
 ### 4.1 Pin 类型语义
 
@@ -3387,7 +3387,7 @@ async fn slow_consumer_strategies() {
 
 ## 8. 取消和超时语义
 
-> **来源: [RFC 2394 - Async/Await](https://rust-lang.github.io/rfcs/2394-2394-async_await.html)**
+> **来源: [RFC 2394 - Async/Await](https://rust-lang.github.io/rfcs/2394-async_await.html)**
 
 ### 8.1 取消语义
 
@@ -5353,7 +5353,7 @@ $$
 
 > **来源: [Rust Reference - async/await](https://doc.rust-lang.org/reference/items/functions.html#async-functions)**
 
-> **来源: [Rustonomicon - Async](https://doc.rust-lang.org/nomicon/pin.html)**
+> **来源: [Rustonomicon - Async](https://doc.rust-lang.org/std/pin/struct.Pin.html)**
 
 > **来源: [Wikipedia - Promise (programming)](https://en.wikipedia.org/wiki/Promise_(programming))**
 
@@ -5373,7 +5373,7 @@ $$
 
 > **来源: [Rust Reference - Future Trait](https://doc.rust-lang.org/reference/)**
 
-> **来源: [RFC 2394 - Async/Await](https://rust-lang.github.io/rfcs/2394-2394-async_await.html)**
+> **来源: [RFC 2394 - Async/Await](https://rust-lang.github.io/rfcs/2394-async_await.html)**
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -5396,13 +5396,13 @@ $$
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 > **来源: [TRPL Ch. 17 - Async](https://doc.rust-lang.org/book/ch17-00-async-await.html)**
 > **来源: [Tokio Documentation](https://tokio.rs/)**
-> **来源: [RFC 2394 - Async/Await](https://rust-lang.github.io/rfcs/2394-2394-async_await.html)**
+> **来源: [RFC 2394 - Async/Await](https://rust-lang.github.io/rfcs/2394-async_await.html)**
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**

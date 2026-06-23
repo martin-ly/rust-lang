@@ -56,6 +56,10 @@
   - [决策树：所有权转移判定](#决策树所有权转移判定)
   - [权威来源索引](#权威来源索引)
     - [边界测试：Copy 类型与 Drop 的互斥性（编译错误）](#边界测试copy-类型与-drop-的互斥性编译错误)
+  - [📚 模块 8: 国际化对齐](#-模块-8-国际化对齐)
+    - [8.1 官方来源](#81-官方来源)
+    - [8.2 学术来源](#82-学术来源)
+    - [8.3 社区权威](#83-社区权威)
 
 > **Bloom 层级**: 理解
 > **📌 简介**：所有权是 Rust 最独特且最重要的特性，它让 Rust 在不需要垃圾回收器的情况下保证内存安全。
@@ -817,7 +821,7 @@ fn main() {
 
 | 来源 | 类型 | 说明 |
 |:---|:---|:---|
-| [TRPL Ch04 — Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html) | 权威来源 | 所有权基础 |
+| [TRPL Ch04 — Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) | 权威来源 | 所有权基础 |
 | [Rustonomicon — Ownership](https://doc.rust-lang.org/nomicon/ownership.html) | 权威来源 | 所有权高级话题 |
 
 ### 8.2 学术来源

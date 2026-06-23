@@ -36,7 +36,7 @@ COMMUNITY_DEFAULT = [
 TOPIC_SOURCES = {
     "ownership": {
         "official": [
-            ("[TRPL Ch04 — Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)", "所有权基础"),
+            ("[TRPL Ch04 — Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)", "所有权基础"),
             ("[Rustonomicon — Ownership](https://doc.rust-lang.org/nomicon/ownership.html)", "所有权高级话题"),
         ],
         "academic": [

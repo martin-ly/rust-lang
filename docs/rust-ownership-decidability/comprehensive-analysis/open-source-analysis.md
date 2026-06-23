@@ -14,7 +14,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [著名开源库深度分析论证](#著名开源库深度分析论证)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [1. 库分类与选择标准](#1-库分类与选择标准)
     - [1.1 选择标准](#11-选择标准)
   - [2. 嵌入式生态核心库](#2-嵌入式生态核心库)
@@ -40,7 +40,7 @@
   - [**更新日期**: 2026-03-05](#更新日期-2026-03-05)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 1. 库分类与选择标准
 >
@@ -704,7 +704,7 @@ let users = sqlx::query_as::<_, User>(
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 

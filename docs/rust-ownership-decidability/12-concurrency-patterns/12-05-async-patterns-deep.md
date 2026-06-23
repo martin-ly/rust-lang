@@ -10,7 +10,7 @@
 > **Prerequisites**: Core ownership concepts, trait system, Pin semantics
 > **Reading Time**: ~3 hours
 > **Difficulty**: Advanced
-> **来源: [Rust Reference - async/await](https://doc.rust-lang.org/reference/items/functions.html#async-functions)** · **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)** · **来源: [Rustonomicon - Async](https://doc.rust-lang.org/nomicon/pin.html)** · **[来源: Tokio Documentation - tokio.rs]** · **来源: [Wikipedia - Future/Promise](https://en.wikipedia.org/wiki/Future/Promise)** · **来源: [TRPL Ch. 17](https://doc.rust-lang.org/book/ch17-00-async-await.html)** · **来源: [Wikipedia - Coroutine](https://en.wikipedia.org/wiki/Coroutine)** · **来源: [Wikipedia - Actor Model](https://en.wikipedia.org/wiki/Actor_Model)** · **[来源: ACM - Async Patterns in Modern Languages]** · **[来源: IEEE - Structured Concurrency]**
+> **来源: [Rust Reference - async/await](https://doc.rust-lang.org/reference/items/functions.html#async-functions)** · **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)** · **来源: [Rustonomicon - Async](https://doc.rust-lang.org/std/pin/struct.Pin.html)** · **[来源: Tokio Documentation - tokio.rs]** · **来源: [Wikipedia - Future/Promise](https://en.wikipedia.org/wiki/Future/Promise)** · **来源: [TRPL Ch. 17](https://doc.rust-lang.org/book/ch17-00-async-await.html)** · **来源: [Wikipedia - Coroutine](https://en.wikipedia.org/wiki/Coroutine)** · **来源: [Wikipedia - Actor Model](https://en.wikipedia.org/wiki/Actor_Model)** · **[来源: ACM - Async Patterns in Modern Languages]** · **[来源: IEEE - Structured Concurrency]**
 
 ---
 
@@ -3959,7 +3959,7 @@ async fn update_db_safe(state: &AppState) {
 
 > **来源: [Rust Reference - async/await](https://doc.rust-lang.org/reference/items/functions.html#async-functions)**
 
-> **来源: [Rustonomicon - Async](https://doc.rust-lang.org/nomicon/pin.html)**
+> **来源: [Rustonomicon - Async](https://doc.rust-lang.org/std/pin/struct.Pin.html)**
 
 > **[来源: Tokio Documentation - tokio.rs]**
 

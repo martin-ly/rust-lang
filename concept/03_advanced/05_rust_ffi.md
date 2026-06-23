@@ -18,6 +18,8 @@
 > **来源**: [Rust Reference — External Blocks](https://doc.rust-lang.org/reference/items/external-blocks.html) ·
 > [The Rustonomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html) ·
 > [Rust FFI Guide](https://doc.rust-lang.org/nomicon/ffi.html) ·
+> [Rust Edition Guide 2024 — unsafe extern blocks](https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-extern.html) ·
+> [Rust Edition Guide 2024 — unsafe attributes](https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-attributes.html) ·
 > [bindgen Documentation](https://rust-lang.github.io/rust-bindgen/) ·
 > [cbindgen Documentation](https://github.com/mozilla/cbindgen)
 

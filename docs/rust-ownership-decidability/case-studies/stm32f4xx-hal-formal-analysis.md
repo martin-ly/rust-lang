@@ -19,18 +19,18 @@
   - [目录](#目录)
   - [1. 引言](#1-引言)
   - [2. 时钟树形式化](#2-时钟树形式化)
-    - [定义 CLOCK-1 ( 时钟源 )](#定义-clock-1--时钟源)
-    - [定义 CLOCK-2 ( 时钟树 )](#定义-clock-2--时钟树)
-    - [定理 CLOCK-T1 ( 时钟安全 )](#定理-clock-t1--时钟安全)
+    - [定义 CLOCK-1 ( 时钟源 )](#定义-clock-1--时钟源-)
+    - [定义 CLOCK-2 ( 时钟树 )](#定义-clock-2--时钟树-)
+    - [定理 CLOCK-T1 ( 时钟安全 )](#定理-clock-t1--时钟安全-)
   - [3. DMA流管理](#3-dma流管理)
-    - [定义 DMA-1 ( 流与通道 )](#定义-dma-1--流与通道)
-    - [定义 DMA-2 ( 双缓冲 )](#定义-dma-2--双缓冲)
-    - [定理 DMA-T1 ( 无冲突 )](#定理-dma-t1--无冲突)
+    - [定义 DMA-1 ( 流与通道 )](#定义-dma-1--流与通道-)
+    - [定义 DMA-2 ( 双缓冲 )](#定义-dma-2--双缓冲-)
+    - [定理 DMA-T1 ( 无冲突 )](#定理-dma-t1--无冲突-)
   - [4. 中断优先级](#4-中断优先级)
-    - [定义 IRQ-1 ( 优先级分组 )](#定义-irq-1--优先级分组)
-    - [定义 IRQ-2 ( 嵌套规则 )](#定义-irq-2--嵌套规则)
+    - [定义 IRQ-1 ( 优先级分组 )](#定义-irq-1--优先级分组-)
+    - [定义 IRQ-2 ( 嵌套规则 )](#定义-irq-2--嵌套规则-)
   - [5. 定理与证明](#5-定理与证明)
-    - [定理 SAFE-T1 ( 引脚复用 )](#定理-safe-t1--引脚复用)
+    - [定理 SAFE-T1 ( 引脚复用 )](#定理-safe-t1--引脚复用-)
   - [6. 代码示例](#6-代码示例)
     - [示例1: 时钟配置](#示例1-时钟配置)
     - [示例2: DMA串口](#示例2-dma串口)
@@ -38,7 +38,7 @@
     - [示例4: 定时器PWM](#示例4-定时器pwm)
   - [**状态**: ✅ 已对齐](#状态--已对齐)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -266,7 +266,7 @@ fn pwm_example(dp: pac::Peripherals) {
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 

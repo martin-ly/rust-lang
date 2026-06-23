@@ -1,16 +1,17 @@
 //! 运行：`cargo bench -p c06_async`
 use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
-use std::sync::LazyLock;
 use prometheus::{Histogram, HistogramOpts, IntCounter, Opts, Registry};
 use std::hint::black_box;
+use std::sync::LazyLock;
 use std::time::Duration;
 
 // 基准目标：对比不同并发度下 JoinSet 与 join_all 的吞吐（简化原型，避免 async feature）
 
 fn bench_joinset_concurrency(c: &mut Criterion) {
     // 基准×指标：最小联动（可选）
-    static BENCH_EXEC_TOTAL: LazyLock<IntCounter> =
-        LazyLock::new(|| IntCounter::with_opts(Opts::new("bench_exec_total", "基准执行次数")).unwrap());
+    static BENCH_EXEC_TOTAL: LazyLock<IntCounter> = LazyLock::new(|| {
+        IntCounter::with_opts(Opts::new("bench_exec_total", "基准执行次数")).unwrap()
+    });
     static BENCH_EXEC_SECONDS: LazyLock<Histogram> = LazyLock::new(|| {
         Histogram::with_opts(HistogramOpts::new("bench_exec_seconds", "基准耗时(秒)")).unwrap()
     });

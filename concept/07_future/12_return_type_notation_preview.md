@@ -1,47 +1,49 @@
-# Return Type Notation 预研：精确捕获的显式控制
+# Return Type Notation（RTN）预研：为 AFIT/RPITIT 返回类型添加边界
 
-> **代码状态**: ✅ 含可编译示例
+> **代码状态**: ✅ 含 nightly 可编译示例
 >
 > **EN**: Return Type Notation Preview
-> **Summary**: Return Type Notation Preview: emerging Rust language feature or ecosystem trend.
+> **Summary**: Preview of Return Type Notation (RTN), a mechanism to add bounds to the return types of `async fn` in traits (AFIT) and return-position `impl Trait` in traits (RPITIT).
 >
 > **状态**: 🧪 Nightly 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
-> **跟踪版本**: nightly 1.98.0 (2026-05-31)
-> **预计稳定**: 待定（需等待 RFC / MCP 完成）
+> **Feature gate**: `#![feature(return_type_notation)]`
+> **跟踪版本**: nightly 1.98.0
+> **预计稳定**: 待定（2026 项目目标 [Prepare TAIT + RTN for stabilization](https://rust-lang.github.io/rust-project-goals/2026/rtn.html) 推进中；完整稳定化受下一代 trait solver 工作阻塞，目标今年晚些时候）
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析返回类型标注预览特性
-> **定位**: 探讨 Rust 1.95+ 中 **Return Type Notation (RTN)** —— `use<..>` 精确捕获语法，分析其对异步 Trait、生命周期推断和 API 稳定性的影响。
-> **前置概念**: [Lifetimes](../01_foundation/03_lifetimes.md) · [Async](../03_advanced/02_async.md) · [Traits](../02_intermediate/01_traits.md)
-> **后置概念**: [Version Tracking](./05_rust_version_tracking.md)
+> **定位**: 澄清 **Return Type Notation (RTN)** 与 **`use<..>` 精确捕获**是两个不同的特性；RTN 解决的是「如何为 trait 中 `async fn` / RPITIT 的返回类型添加 `Send` 等边界」的问题。
+> **前置概念**: [Lifetimes](../01_foundation/03_lifetimes.md) · [Async](../03_advanced/02_async.md) · [Traits](../02_intermediate/01_traits.md) · [Async Closures](../03_advanced/24_async_closures.md)
+> **后置概念**: [Version Tracking](./05_rust_version_tracking.md) · [Async Drop Preview](./18_async_drop_preview.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 ---
 
 > **来源**:
-> [RFC 2289 — Associated Type Bounds](https://github.com/rust-lang/rfcs/pull/2289) ·
-> [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html) ·
+> [RFC 3654 — Return Type Notation](https://rust-lang.github.io/rfcs/3654-return-type-notation.html) ·
+> [Tracking Issue #109417](https://github.com/rust-lang/rust/issues/109417) ·
+> [Rust Project Goals 2026 — Prepare TAIT + RTN for stabilization](https://rust-lang.github.io/rust-project-goals/2026/rtn.html) ·
 > [Async Working Group](https://rust-lang.github.io/async-fundamentals-initiative/) ·
-> [Tracking Issue #109417](https://github.com/rust-lang/rust/issues/109417)
+> [Rust Reference — Impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
 
 ## 📑 目录
 
-- [Return Type Notation 预研：精确捕获的显式控制](#return-type-notation-预研精确捕获的显式控制)
+- [Return Type Notation（RTN）预研：为 AFIT/RPITIT 返回类型添加边界](#return-type-notationrtn预研为-afitrpitit-返回类型添加边界)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 问题：隐式捕获的生命周期泄漏](#11-问题隐式捕获的生命周期泄漏)
-    - [1.2 `use<..>` 精确捕获语法](#12-use-精确捕获语法)
-    - [1.3 RPITIT 与 AFIT 的上下文](#13-rpitit-与-afit-的上下文)
+    - [1.1 问题：AFIT/RPITIT 的返回类型无法命名](#11-问题afitrpitit-的返回类型无法命名)
+    - [1.2 RTN 语法：`T::method(..): Send`](#12-rtn-语法tmethod-send)
+    - [1.3 RTN 与 `use<..>` 精确捕获的区别](#13-rtn-与-use-精确捕获的区别)
   - [二、技术细节](#二技术细节)
     - [2.1 语法形式与语义](#21-语法形式与语义)
-    - [2.2 与生命周期省略的对比](#22-与生命周期省略的对比)
-    - [2.3 版本迁移：Edition 2021 → 2024](#23-版本迁移edition-2021--2024)
+    - [2.2 当前限制](#22-当前限制)
+    - [2.3 与 async closures 的关联](#23-与-async-closures-的关联)
   - [三、使用模式](#三使用模式)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
@@ -51,16 +53,16 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Return Type Notation 预览的编译错误](#十边界测试return-type-notation-预览的编译错误)
-    - [10.1 边界测试：RTN 与生命周期参数的冲突（编译错误）](#101-边界测试rtn-与生命周期参数的冲突编译错误)
-    - [10.2 边界测试：RTN 与泛型返回类型的边界（编译错误）](#102-边界测试rtn-与泛型返回类型的边界编译错误)
-    - [10.3 边界测试：RTN 与关联类型的返回值约束（编译错误）](#103-边界测试rtn-与关联类型的返回值约束编译错误)
-    - [10.4 边界测试：RTN 与默认方法实现的交互（编译错误）](#104-边界测试rtn-与默认方法实现的交互编译错误)
+    - [10.1 边界测试：RTN 在类型位置使用（编译错误）](#101-边界测试rtn-在类型位置使用编译错误)
+    - [10.2 边界测试：RTN 用于非 AFIT/RPITIT 方法（编译错误）](#102-边界测试rtn-用于非-afitrpitit-方法编译错误)
+    - [10.3 边界测试：RTN 与 const/type 泛型方法（编译错误）](#103-边界测试rtn-与-consttype-泛型方法编译错误)
+    - [10.4 边界测试：RTN 与缺少 `feature(return_type_notation)`（编译错误）](#104-边界测试rtn-与缺少-featurereturn_type_notation编译错误)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Return Type Notation（RTN）解决的是什么问题？（理解层）](#测验-1return-type-notationrtn解决的是什么问题理解层)
-    - [测验 2：`impl Trait + use<'a>` 语法中的 `use<'a>` 表示什么？（理解层）](#测验-2impl-trait--usea-语法中的-usea-表示什么理解层)
-    - [测验 3：为什么 `async fn` 目前存在"生命周期过度捕获"问题？（理解层）](#测验-3为什么-async-fn-目前存在生命周期过度捕获问题理解层)
-    - [测验 4：RTN 与 `impl Trait + 'static` 有什么区别？（理解层）](#测验-4rtn-与-impl-trait--static-有什么区别理解层)
+    - [测验 2：RTN 的语法 `T::method(..): Send` 中 `..` 表示什么？（理解层）](#测验-2rtn-的语法-tmethod-send-中--表示什么理解层)
+    - [测验 3：RTN 与 `use<..>` 精确捕获有什么区别？（理解层）](#测验-3rtn-与-use-精确捕获有什么区别理解层)
+    - [测验 4：RTN 当前支持在哪些位置使用？（理解层）](#测验-4rtn-当前支持在哪些位置使用理解层)
     - [测验 5：这个特性对 API 设计有什么影响？（理解层）](#测验-5这个特性对-api-设计有什么影响理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -70,510 +72,411 @@
 
 ## 一、核心概念
 
-### 1.1 问题：隐式捕获的生命周期泄漏
+### 1.1 问题：AFIT/RPITIT 的返回类型无法命名
 
-在 Rust 中，异步函数和返回 `impl Trait` 的函数**隐式捕获**所有输入生命周期：
+Rust 1.75 稳定了 `async fn` in traits（AFIT）和 return-position `impl Trait` in traits（RPITIT）。它们把返回类型隐藏为不透明类型：
 
 ```rust
-// 隐式捕获: async fn 自动捕获 'a
-async fn borrow<'a>(x: &'a str) -> &'a str {
-    x
+#![feature(return_type_notation)]
+
+trait HealthCheck {
+    async fn check(&mut self) -> bool;
 }
-// 实际签名: async fn borrow<'a>(x: &'a str) -> impl Future<Output = &'a str> + use<'a>
-// 但早期版本不写 use<..>，捕获规则由编译器推断
 ```
 
-> **核心痛点**:
+调用者想把这个返回的 `Future` 传给 `tokio::spawn` 时，需要 `Send + 'static` 边界。但返回类型没有名字，传统写法 `T::CheckFuture: Send` 不适用。
+
+> **核心痛点**
 >
-> 1. **API 稳定性风险**: 隐式捕获规则可能在编译器升级时改变
-> 2. **过度约束**: 函数可能捕获了不需要的生命周期，导致调用者受不必要限制
-> 3. **不透明性**: 开发者无法从签名中准确知道哪些生命周期被捕获
-> [来源: [Async Fundamentals Initiative](https://rust-lang.github.io/async-fundamentals-initiative/)]
+> 1. **返回类型匿名**：AFIT/RPITIT 的返回类型由编译器生成，没有显式关联类型名。
+> 2. **无法加边界**：`where T::check: Send` 在稳定 Rust 中不合法。
+> 3. **Send 边界传播困难**：库作者被迫在 trait 定义里提前加 `+ Send`，限制实现者自由。
+
+[来源: [RFC 3654 — Return Type Notation](https://rust-lang.github.io/rfcs/3654-return-type-notation.html)]
 
 ---
 
-### 1.2 `use<..>` 精确捕获语法
->
+### 1.2 RTN 语法：`T::method(..): Send`
 
-```mermaid
-graph LR
-    subgraph 隐式["隐式捕获 (旧)"]
-        A["fn f(x: &str) -> impl Future<Output = ()>"] --> B["自动捕获所有输入生命周期"]
-        B --> C["过度约束 / 不稳定"]
-    end
+Return Type Notation（RTN）提供了一种引用 trait 方法返回类型并为其添加边界的方式：
 
-    subgraph 显式["精确捕获 (新)"]
-        D["fn f(x: &str) -> impl Future<Output = ()> + use<>"] --> E["显式声明: 不捕获任何生命周期"]
-        F["fn f(x: &'a str) -> impl Future<Output = ()> + use<'a>"] --> G["显式声明: 只捕获 'a"]
-    end
+```rust
+#![feature(return_type_notation)]
 
-    subgraph 迁移["Edition 2024 迁移"]
-        H["Edition 2021"] -->|"隐式捕获"| I["向后兼容"]
-        J["Edition 2024"] -->|"要求显式"| K["use<..> 或默认规则"]
-    end
+use std::future::Future;
+
+trait HealthCheck {
+    async fn check(&mut self) -> bool;
+}
+
+// 调用者：要求 HealthCheck::check 返回的 Future 是 Send + 'static
+fn spawn_check<T: HealthCheck>(mut hc: T)
+where
+    T::check(..): Send + 'static,
+{
+    tokio::spawn(async move { hc.check().await });
+}
 ```
 
-> **认知功能**: 此图对比隐式捕获与精确捕获的**可控性差异**——`use<..>` 将生命周期捕获从编译器推断转变为开发者显式声明。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
-> **使用建议**: Edition 2024 代码中，所有返回 `impl Trait` / `async fn` 的函数都应显式考虑 `use<..>`；库作者更应优先使用以稳定 API 契约。
-> **关键洞察**: `use<..>` 是 Rust **显式优于隐式**原则在生命周期捕获上的延伸。与 `unsafe_op_in_unsafe_fn` 类似，它要求开发者明确声明语义边界。
-> [来源: [Rust RFC — Precise Capturing](https://github.com/rust-lang/rfcs/pull/2289)]
+`T::check(..)` 表示「调用 `T::check` 返回的类型」。`..` 占位符表示方法的泛型参数由编译器推导。
+
+等价的关联类型 bound 写法：
+
+```rust
+fn spawn_check<T: HealthCheck<check(..): Send + 'static>>(mut hc: T) {
+    tokio::spawn(async move { hc.check().await });
+}
+```
+
+[来源: [Inside Rust Blog — Return type notation MVP: Call for testing!](https://blog.rust-lang.org/inside-rust/2024/09/26/rtn-call-for-testing.html)]
 
 ---
 
-### 1.3 RPITIT 与 AFIT 的上下文
->
+### 1.3 RTN 与 `use<..>` 精确捕获的区别
 
-```text
-术语澄清:
-├── RPIT  = Return Position Impl Trait
-│           └── fn f() -> impl Trait
-├── RPITIT = RPIT In Trait
-│           └── trait T { fn f() -> impl Future<Output = (); }
-└── AFIT = Async Fn In Trait
-           └── trait T { async fn f(); }
+| 特性 | Return Type Notation (RTN) | Precise Capturing (`use<..>`) |
+|:---|:---|:---|
+| **解决什么问题** | 为 AFIT/RPITIT 的返回类型添加 `Send` 等边界 | 控制 `impl Trait` / `async fn` 不透明类型捕获哪些泛型参数 |
+| **语法示例** | `T::method(..): Send` | `fn f(x: &str) -> impl Trait + use<>` |
+| **RFC** | [RFC 3654](https://rust-lang.github.io/rfcs/3654-return-type-notation.html) | [RFC 3617](https://rust-lang.github.io/rfcs/3617-precise-capturing.html) |
+| **稳定状态** | Nightly 实验性 | **Stable**（Rust 1.82.0+） |
+| **Feature gate** | `#![feature(return_type_notation)]` | 无需 feature gate |
+| **常见误用** | 与 `use<..>` 混淆，以为 RTN 是“精确捕获” | 在不需要时显式写 `use<..>` |
 
-RTN 的应用场景:
-├── RPIT:  fn f(x: &str) -> impl Iterator + use<>
-├── RPITIT: trait T { fn f(&self) -> impl Future + use<'_>; }
-└── AFIT:  trait T { async fn f(&self) -> i32; }  // Edition 2024 自动精确捕获
-```
+> **关键区分**: `use<..>` 告诉编译器「我的不透明类型捕获/不捕获哪些参数」；RTN 告诉编译器「调用这个 trait 方法返回的类型需要满足什么边界」。两者互补，但不是同一回事。
 
-> **核心关联**: RTN (`use<..>`) 是 RPITIT 和 AFIT **稳定化**的前提条件。没有精确捕获，异步 Trait 的生命周期语义无法给出稳定的 API 保证。
-> [来源: [Async Working Group — AFIT](https://rust-lang.github.io/async-fundamentals-initiative/)]
+[来源: [RFC 3617 — Precise Capturing](https://rust-lang.github.io/rfcs/3617-precise-capturing.html)]
 
 ---
 
 ## 二、技术细节
 
 ### 2.1 语法形式与语义
->
 
-```text
-use<..> 语法形式:
+RTN 引入了一种新的类型写法 `<T as Trait>::method(..)`，简写为 `T::method(..)`：
 
-  + use<>           → 不捕获任何生命周期 / 类型参数
-  + use<'a>         → 只捕获生命周期 'a
-  + use<'a, 'b>     → 捕获 'a 和 'b
-  + use<T>          → 捕获类型参数 T（不是生命周期）
-  + use<'a, T>      → 同时捕获生命周期和类型参数
+```rust
+#![feature(return_type_notation)]
 
-语义规则:
-  - 列出的参数必须确实存在于函数签名中
-  - 未列出的参数不会被捕获（即使编译器原本会隐式捕获）
-  - 在 Trait 定义中使用可约束实现者的捕获行为
+trait Factory {
+    fn make(&self) -> impl Iterator<Item = u32>;
+}
+
+// 形式 1：where 子句中作为 Self 类型
+fn use_factory<T: Factory>()
+where
+    T::make(..): DoubleEndedIterator,
+{
+    // ...
+}
+
+// 形式 2：关联类型 bound 写法
+fn use_factory2<T: Factory<make(..): DoubleEndedIterator>>() {
+    // ...
+}
 ```
 
-> **技术要点**: `use<..>` 在 trait 定义中的位置决定了**实现契约**——`trait T { fn f() -> impl Trait + use<>; }` 要求所有实现者都不能捕获额外生命周期。
-> [来源: [Rust Reference — Impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html)]
+语义规则：
+
+- `..` 表示方法的所有泛型参数由调用处推导；目前仅支持生命周期泛型。
+- RTN 类型只能出现在 bound/where 子句的 `Self` 位置；不能作为普通类型使用（如结构体字段）。
+
+[来源: [RFC 3654 — Return Type Notation](https://rust-lang.github.io/rfcs/3654-return-type-notation.html)]
 
 ---
 
-### 2.2 与生命周期省略的对比
->
+### 2.2 当前限制
 
-| 场景 | 生命周期省略 | `use<..>` 精确捕获 | 效果 |
-|:---|:---|:---|:---|
-| `fn f(x: &str) -> &str` | 自动推断 `&'a str -> &'a str` | 不适用（非 impl Trait） | 省略便捷但受限 |
-| `fn f(x: &str) -> impl Trait` | 隐式捕获所有输入生命周期 | `use<>` 或 `use<'a>` | 从隐式 → 显式 |
-| `async fn f(x: &str)` | 隐式捕获 `'a` 到 Future | `use<>` 或 `use<'a>` | 控制异步生命周期 |
-| Trait 中的 RPIT | 隐式捕获 `&self` 生命周期 | `use<'_>` 显式声明 | 稳定 trait 契约 |
+截至 nightly 1.98.0：
 
-> **对比洞察**: 生命周期省略在**函数签名**层面工作（推断参数和返回值的lifetime关系），而 `use<..>` 在**类型构造**层面工作（控制 `impl Trait` / `async` 的捕获行为）。两者互补但不重叠。
-> [来源: [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html)]
+1. **仅支持 AFIT 和 RPITIT**：方法必须是 `async fn` 或返回 `-> impl Trait`。
+2. **仅支持生命周期泛型**：方法可以有生命周期参数，但不能有 const 或 type 泛型。
+3. **仅能在 bound/where 子句中使用**：不能写成 `let x: T::method(..)` 或结构体字段类型。
+4. **需要 feature gate**：必须在 crate 根启用 `#![feature(return_type_notation)]`。
+
+```rust
+#![feature(return_type_notation)]
+
+trait Bad {
+    fn plain(&self) -> i32; // 不是 AFIT/RPITIT
+}
+
+// ❌ 编译错误：RTN 不支持普通返回类型
+fn bad<T: Bad>()
+where
+    T::plain(..): Send,
+{}
+```
+
+[来源: [Tracking Issue #109417](https://github.com/rust-lang/rust/issues/109417)]
 
 ---
 
-### 2.3 版本迁移：Edition 2021 → 2024
->
+### 2.3 与 async closures 的关联
 
-```text
-Edition 2021 行为:
-  async fn borrow(x: &str) -> &str { x }
-  // 隐式捕获: 返回的 Future 依赖输入生命周期
-  // 等价于: async fn borrow<'a>(x: &'a str) -> impl Future<Output = &'a str> + use<'a>
+Async closures（Rust 1.85.0 stable）稳定后，社区希望 RTN 也能用于 async closure 类型，以便在泛型约束中表达「async closure 返回的 Future 是 Send」。相关设计仍在 RFC 阶段，是 2026 年「Prepare TAIT + RTN for stabilization」项目目标的一部分。
 
-Edition 2024 行为:
-  async fn borrow(x: &str) -> &str { x }
-  // 自动精确捕获: 只捕获实际需要的最小生命周期集合
-  // 等价于: async fn borrow<'a>(x: &'a str) -> impl Future<Output = &'a str> + use<'a>
-  // 但语义保证更强：编译器验证不捕获额外生命周期
-
-显式控制（两 Edition 通用）:
-  async fn borrow(x: &str) -> impl Future<Output = &str> + use<> { async { x } }
-  // 显式声明: 返回的 Future 不捕获任何生命周期
-  // ⚠️ 此例实际编译会失败，因为返回值确实依赖输入
-```
-
-> **迁移要点**: Edition 2024 不改变**现有代码的行为**，但为**新代码**提供更强的自动精确捕获保证。`use<..>` 显式语法在两 Edition 中通用。
-> [来源: [Rust Edition Guide 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)]
+[来源: [Rust Project Goals 2026 — RTN](https://rust-lang.github.io/rust-project-goals/2026/rtn.html)]
 
 ---
 
 ## 三、使用模式
 
-```text
-模式 1: 最小捕获（推荐）
-  fn process(data: &str) -> impl Iterator<Item = char> + use<> {
-      data.chars().filter(|c| c.is_ascii())
-  }
-  // use<> = 不捕获任何生命周期，返回的迭代器是 'static 兼容的
+```rust
+#![feature(return_type_notation)]
 
-模式 2: 选择性捕获
-  fn find<'a, 'b>(haystack: &'a str, needle: &'b str) -> impl Option<&'a str> + use<'a> {
-      haystack.find(needle).map(|i| &haystack[i..])
-  }
-  // use<'a> = 只捕获 haystack 的生命周期，不捕获 needle 的
+use std::future::Future;
 
-模式 3: Trait 契约约束
-  trait Parser {
-      fn parse<'a>(&self, input: &'a str) -> impl ParseResult + use<'a>;
-  }
-  // use<'a> 在 trait 中 = 所有实现必须遵循此捕获规则
+trait Service {
+    async fn call(&self, request: Vec<u8>) -> Vec<u8>;
+}
 
-模式 4: 类型参数捕获
-  fn map<T, U>(x: T, f: fn(T) -> U) -> impl FnOnce() -> U + use<U> {
-      move || f(x)
-  }
-  // use<U> = 捕获 U 但不捕获 T（闭包只返回 U，不暴露 T）
+// 模式 1：在 where 子句中为 AFIT 返回类型加 Send bound
+fn spawn_service<T: Service>(svc: T, req: Vec<u8>)
+where
+    T::call(..): Send + 'static,
+{
+    tokio::spawn(async move { svc.call(req).await });
+}
+
+// 模式 2：在 trait alias / 组合 trait 中复用
+trait SendService: Service<call(..): Send + 'static> {}
+impl<T: Service<call(..): Send + 'static>> SendService for T {}
 ```
 
-> **最佳实践**: 优先使用**最小捕获**（`use<>` 或 `use<'最小集合>`），只在必要时扩大捕获范围。这最大化 API 的复用性和稳定性。
-> [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
+> **最佳实践**: 在 public async trait 中不要提前加 `+ Send`；让调用者通过 RTN 按需约束。这样 `SingleThreaded` 实现和 `Send` 实现可以共存。
+
+[来源: [RFC 3654 — Return Type Notation](https://rust-lang.github.io/rfcs/3654-return-type-notation.html)]
 
 ---
 
 ## 四、反命题与边界分析
 
 ### 4.1 反命题树
->
 
-```mermaid
-graph TD
-    ROOT["命题: 所有返回 impl Trait / async fn 都应显式使用 use<..>"]
-    ROOT --> Q1{"Edition?"}
-    Q1 -->|2024| Q2{"是否为库代码?"}
-    Q1 -->|2021| ALT1["⚠️ 可选 — Edition 2021 不强制"]
+```text
+命题: "AFIT/RPITIT 返回类型不能加边界"
+└── ❌ 错误 — RTN 提供了 T::method(..) 语法
 
-    Q2 -->|是| TRUE["✅ 强烈推荐 — 稳定 API 契约"]
-    Q2 -->|否| Q3{"生命周期复杂?"}
+命题: "RTN 已经稳定"
+└── ❌ 错误 — 仍在 nightly，feature gate return_type_notation
 
-    Q3 -->|是| TRUE
-    Q3 -->|否| ALT2["⚠️ 可选 — 简单场景可依赖默认规则"]
+命题: "RTN 和 use<..> 是同一个特性"
+└── ❌ 错误 — RTN 加 bound，use<..> 控制捕获集合
 
-    style TRUE fill:#c8e6c9
-    style ALT1 fill:#fff3e0
-    style ALT2 fill:#fff3e0
+命题: "public async trait 应该预先把返回 Future 约束为 Send"
+└── ⚠️ 不推荐 — 应通过 RTN 让调用者按需约束，保持实现灵活性
 ```
-
-> **认知功能**: 此决策树帮助判断是否需要在函数签名中添加 `use<..>`。核心判断标准是**Edition 版本**、**是否为库代码**和**生命周期复杂度**。
-> **使用建议**: 库代码（尤其 public API）在 Edition 2024 中强烈推荐显式 `use<..>`；应用代码在简单场景可依赖编译器默认。
-> **关键洞察**: `use<..>` 的价值与**API 稳定性需求**成正比。内部代码可以使用默认规则，但公开 API 应显式声明以提供长期稳定性保证。
-> [来源: 💡 原创分析]
 
 ---
 
 ### 4.2 边界极限
->
 
-```text
-边界 1: 不能捕获不存在的东西
-├── use<'a> 要求 'a 在函数签名中声明
-├── use<T> 要求 T 是函数的泛型参数
-└── 违反: 编译错误 "cannot find lifetime/parameter in scope"
-
-边界 2: 不能少于实际需要
-├── 如果返回值确实依赖 'a，use<> 会导致编译错误
-├── 编译器验证捕获集合的充分性
-└── 这与生命周期省略的"不足时显式声明"原则一致
-
-边界 3: Trait 实现一致性
-├── trait 中声明 use<..> 后，所有 impl 必须兼容
-├── impl 可以比 trait 更严格（捕获更少），但不能更宽松
-└── 类似 variance 的协变/逆变规则
-
-边界 4: 与现有代码的兼容性
-├── Edition 2021 代码无需修改即可在 2024 编译
-├── 但 2024 的新代码在 2021 中可能因捕获语义差异而行为不同
-└── 库作者需为跨 Edition 使用提供兼容性保证
-```
-
-> **边界要点**: `use<..>` 的设计遵循 Rust 的**保守正确性**原则——宁可要求显式声明，也不允许隐式行为导致意外的 API 不兼容。
-> [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)]
+| 边界 | 说明 |
+|:---|:---|
+| 不能用于普通方法 | 仅 AFIT / RPITIT 支持 RTN |
+| 不能用于 type/const 泛型方法 | 当前实现仅支持生命周期泛型 |
+| 不能在类型位置使用 | 不能作为字段类型、局部变量类型 |
+| 需要 nightly | 稳定版使用会报 `feature(return_type_notation)` 错误 |
 
 ---
 
 ## 五、演进路线
 
-| 里程碑 | 状态 | 预计时间 | 说明 |
-|:---|:---:|:---|:---|
-| `use<..>` 语法引入 | ✅ nightly | 2024 | 精确捕获语法实现 |
-| Edition 2024 RPIT 捕获规则 | ✅ stable | 2024 | 自动精确捕获成为默认 |
-| AFIT 稳定化 | ✅ stable | 2024 | async fn in trait 可用 |
-| RPITIT 稳定化 | ✅ stable | 2024 | impl Trait in trait 可用 |
-| `use<..>` 在 stable 泛化 | ✅ stable | 2025 | 所有 impl Trait 位置可用 |
-| 生态广泛采用 | 🟡 | 2025-2027 | 标准库和主流 crate 迁移 |
+```text
+2023-12: RFC 3654 合并
+2024-09: Nightly MVP 发布，开始社区测试
+2025-02: Rust 1.85 发布 Edition 2024（不含 RTN）
+2026-05: Rust Project Goals 2026 将 "Prepare TAIT + RTN for stabilization" 列为目标
+未来:    完成下一代 trait solver 集成后，TAIT + RTN 一起稳定
+```
 
-> **预测**: `use<..>` 是 Rust 2024 Edition 的**核心语法特性**之一。到 2027 年，大多数活跃维护的 crate 将采用显式 `use<..>`，成为异步和泛型 API 的标配。
+[来源: [Rust Project Goals 2026 — RTN](https://rust-lang.github.io/rust-project-goals/2026/rtn.html)]
 
 ---
 
 ## 六、来源与延伸阅读
->
 
-| 来源 | 可信度 | 说明 |
-|:---|:---:|:---|
-| [Rust RFC 2289](https://github.com/rust-lang/rfcs/pull/2289) | ✅ 一级 | 关联类型 bounds，RTN 基础 |
-| [Tracking Issue #109417](https://github.com/rust-lang/rust/issues/109417) | ✅ 一级 | `use<..>` 实现跟踪 |
-| [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html) | ✅ 一级 | 生命周期省略规则 |
-| [Async Fundamentals Initiative](https://rust-lang.github.io/async-fundamentals-initiative/) | ✅ 一级 | AFIT/RPITIT 设计 |
-| [Rust Edition Guide 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) | ✅ 一级 | 2024 Edition 变更 |
-| [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | ✅ 一级 | API 设计最佳实践 |
+- [RFC 3654 — Return Type Notation](https://rust-lang.github.io/rfcs/3654-return-type-notation.html)
+- [Tracking Issue #109417](https://github.com/rust-lang/rust/issues/109417)
+- [Inside Rust Blog — Return type notation MVP: Call for testing!](https://blog.rust-lang.org/inside-rust/2024/09/26/rtn-call-for-testing.html)
+- [Rust Project Goals 2026 — Prepare TAIT + RTN for stabilization](https://rust-lang.github.io/rust-project-goals/2026/rtn.html)
+- [RFC 3617 — Precise Capturing](https://rust-lang.github.io/rfcs/3617-precise-capturing.html)（区分 RTN 与 `use<..>`）
 
 ---
 
 ## 相关概念文件
 
-- [Lifetimes](../01_foundation/03_lifetimes.md) — 生命周期与借用检查
-- [Async](../03_advanced/02_async.md) — 异步编程与 Future
-- [Traits](../02_intermediate/01_traits.md) — Trait 系统与抽象
-- [Version Tracking](./05_rust_version_tracking.md) — Rust 版本特性演进
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
-> **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.0+ (Edition 2024)
-
-**文档版本**: 1.0
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-05-21
-**状态**: ✅ 概念文件创建完成
+| 概念 | 文件 | 关系 |
+|:---|:---|:---|
+| Async Closures | [](../03_advanced/24_async_closures.md) | RTN 未来可能扩展至 async closures |
+| AFIT / RPITIT | [](../03_advanced/02_async.md) | RTN 的主要应用场景 |
+| Precise Capturing | [](../02_intermediate/20_type_system_advanced.md) | 与 RTN 互补但不同 |
+| Version Tracking | [](./05_rust_version_tracking.md) | 稳定化时间线 |
 
 ---
 
 ## 权威来源索引
 
->
->
->
->
->
->
-
----
-
----
+- [RFC 3654](https://rust-lang.github.io/rfcs/3654-return-type-notation.html)
+- [Tracking Issue #109417](https://github.com/rust-lang/rust/issues/109417)
+- [Rust Project Goals 2026 / RTN](https://rust-lang.github.io/rust-project-goals/2026/rtn.html)
+- [Inside Rust Blog — RTN Call for Testing](https://blog.rust-lang.org/inside-rust/2024/09/26/rtn-call-for-testing.html)
 
 ---
 
 ## 十、边界测试：Return Type Notation 预览的编译错误
 
-### 10.1 边界测试：RTN 与生命周期参数的冲突（编译错误）
+### 10.1 边界测试：RTN 在类型位置使用（编译错误）
 
 ```rust,compile_fail
-trait Parser<'a> {
-    type Output;
-    fn parse(&'a self, input: &'a str) -> Self::Output;
+#![feature(return_type_notation)]
+
+trait HealthCheck {
+    async fn check(&mut self) -> bool;
 }
 
-fn process<'a, P>(parser: P) -> impl Parser<'a, Output = impl Into<String>>
-where
-    P: Parser<'a>,
-    P::parse(..): Send, // ❌ 语法错误: RTN 不支持带生命周期参数的关联函数
-{
-    parser
+struct Holder<T: HealthCheck> {
+    // ❌ RTN 目前不能作为普通类型使用
+    fut: T::check(..),
 }
 ```
 
-> **修正**:
->
-> Return Type Notation（RTN，[RFC 3654](https://rust-lang.github.io/rfcs//3654-return-type-notation.html)）允许在 trait bound 中约束关联函数的返回类型：`P::foo(..): Send` 表示 `P` 实现的 `foo` 方法的返回类型实现 `Send`。
-> 但 RTN 当前不支持带生命周期参数的函数签名——`P::parse(&'a self, &'a str)` 的生命周期参数使 RTN 语法解析复杂化。
-> 生命周期在 RTN 中的处理方式仍在设计：
->
-> 是隐式泛化（对任意生命周期约束），还是要求显式指定（`P::parse<'a>(..): Send`）？
-> 这与 `async fn` 的 `-> impl Future<Output = T> + Send` 问题相同——异步方法的返回类型（future）是否 `Send` 取决于捕获的生命周期。
-> RTN 的目标是为这一问题提供简洁、通用的语法。
->
-> [来源: [Rust RFC 3654](https://rust-lang.github.io/rfcs//3654-return-type-notation.html)] ·
-> [来源: [Rust Async Working Group](https://rust-lang.github.io/async-fundamentals-initiative/)]
+**错误信息**: `RTN types are not yet allowed in this position`
 
-### 10.2 边界测试：RTN 与泛型返回类型的边界（编译错误）
+---
 
-```rust,ignore
-trait Factory {
-    fn create<T: Default>() -> T;
-}
-
-fn make_thing<F>() -> impl Factory
-where
-    F: Factory,
-    F::create::<String>(..): Send, // ❌ 语法错误: RTN 不支持显式泛型参数
-{
-    todo!()
-}
-```
-
-> **修正**:
->
-> RTN 的另一个边界是**泛型方法**（generic methods）：
->
-> `Factory::create<T>()` 的返回类型依赖于 `T`，RTN 语法 `F::create(..): Send` 未明确指定 `T`，导致歧义。
->
-> 可能的解决方案：
->
-> 1) `F::create::<String>(..): Send` 显式实例化；
-> 2) `for<T: Default> F::create<T>(..): Send` 全称量化；
-> 3) 仅支持非泛型方法的 RTN（保守方案）。
->
-> 设计挑战：Rust 的 trait system 已有大量复杂度（关联类型、泛型、生命周期、where bound），RTN 必须与现有机制无缝集成。
-> 这与 Haskell 的 `forall` 或 C++ 的 `decltype(auto)` 类似——类型系统的表达能力扩展需要谨慎的语法设计。
-> [来源: [Rust RFC 3654](https://rust-lang.github.io/rfcs//3654-return-type-notation.html)] ·
-> [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]
-
-### 10.3 边界测试：RTN 与关联类型的返回值约束（编译错误）
+### 10.2 边界测试：RTN 用于非 AFIT/RPITIT 方法（编译错误）
 
 ```rust,compile_fail
-trait Factory {
-    type Product;
-    fn create(&self) -> Self::Product;
+#![feature(return_type_notation)]
+
+trait Plain {
+    fn value(&self) -> i32;
 }
 
-fn use_factory<F>(f: F)
+fn bad<T: Plain>()
 where
-    F: Factory,
-    F::create(..): Send, // ❌ 语法错误: RTN 不支持关联函数的返回值
-{
-}
+    T::value(..): Send,
+{}
 ```
 
-> **修正**: RTN（Return Type Notation）当前设计主要针对**trait 方法**的返回类型约束，但对**关联函数**（无 `self`）和**关联类型构造**的支持仍在讨论。`Factory::create` 是 trait 方法，但 `F::create(..): Send` 的语法在 `F` 是具体类型时可能歧义（`F` 可能有多重实现）。
-> RTN 的设计挑战：
->
-> 1) 语法简洁性（`F::foo(..): Send` vs `for<'a> F::foo<'a>(..): Send`）；
-> 2) 与现有 where bound 的集成；
-> 3) 编译器实现的复杂性（需在 trait resolution 后检查返回类型）。
->
-> 这与 C++ 的 `decltype(auto)`（返回类型推断，类似挑战）或 Swift 的 `some Collection`（不透明返回类型，不直接约束）类似——RTN 是 Rust 类型系统的精细化扩展，目标是解决 async fn 的 `Send` 推断问题。
-> [来源: [Rust RFC 3654](https://rust-lang.github.io/rfcs//3654-return-type-notation.html)] ·
-> [来源: [Rust Async Working Group](https://rust-lang.github.io/async-fundamentals-initiative/)]
+**错误信息**: `return type notation is not allowed for methods that do not return impl Trait or async`
 
-### 10.4 边界测试：RTN 与默认方法实现的交互（编译错误）
+---
 
-```rust,ignore
-trait Processor {
-    fn process(&self) -> impl Send {
-        // 默认实现
-        42
-    }
+### 10.3 边界测试：RTN 与 const/type 泛型方法（编译错误）
+
+```rust,compile_fail
+#![feature(return_type_notation)]
+
+trait Factory {
+    fn make<T>(&self) -> impl Iterator<Item = T>;
 }
 
-struct MyProcessor;
-impl Processor for MyProcessor {
-    fn process(&self) -> i32 {
-        // ❌ 编译错误: 若重写默认实现，返回类型是否仍需 Send？
-        // RTN 要求默认实现和重写都满足约束
-        42
-    }
-}
+fn bad<F: Factory>()
+where
+    F::make<T>(..): Send, // ❌ 当前不支持 type 泛型
+{}
 ```
 
-> **修正**:
-> `impl Trait` 在 trait 方法返回类型中的使用（RPITIT，Return Position Impl Trait In Traits）与 RTN 交互复杂：默认实现返回 `impl Send`，要求所有重写也返回 `Send` 类型。
-> 但编译器如何验证？
->
-> 1) 在 trait 定义处检查默认实现；
-> 2) 在每个 `impl` 处检查重写；
-> 3) 通过 RTN `Processor::process(..): Send` 在调用点验证。
->
-> 当前 Rust 1.75+ 支持 RPITIT，但 RTN 仍处于实验阶段。
-> 设计决策：返回类型约束应属于 trait 契约（所有实现必须满足）还是调用者约束（特定调用需要）？
-> RTN 倾向于后者，但前者也有需求（如 `Iterator::next` 返回 `Option<Self::Item>`，`Item` 在 trait 定义时约束）。
-> 这与 Java 的泛型返回类型（编译期擦除，无此问题）或 C++ 的 `auto` 返回（推断具体类型，无约束）不同——Rust 的 `impl Trait` 是存在类型 + 约束的组合。
-> [来源: [Rust RFC 3654](https://rust-lang.github.io/rfcs//3654-return-type-notation.html)] ·
-> [来源: [Rust RFC 2289](https://rust-lang.github.io/rfcs//2289-associated-type-bounds.html)]
-> **过渡**: Return Type Notation 预研：精确捕获的显式控制 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
+**错误信息**: `return type notation with generic type/const parameters is not yet supported`
+
+---
+
+### 10.4 边界测试：RTN 与缺少 `feature(return_type_notation)`（编译错误）
+
+```rust,compile_fail
+// ❌ 缺少 #![feature(return_type_notation)]
+
+trait HealthCheck {
+    async fn check(&mut self) -> bool;
+}
+
+fn bad<T: HealthCheck>()
+where
+    T::check(..): Send,
+{}
+```
+
+**错误信息**: `return type notation is experimental (see issue #109417)`
+
+---
 
 ### 补充定理链
 
-- **定理**: Return Type Notation 预研：精确捕获的显式控制 定义 ⟹ 类型安全保证
+> RTN 的存在性定理：若 trait 方法 `m` 返回一个不透明类型（AFIT/RPITIT），则存在一种语法 `T::m(..)` 可以在 where 子句中引用该返回类型并添加边界。
+> 限制定理：RTN 目前不支持非不透明返回类型、type/const 泛型方法以及类型位置。
+
+---
 
 ## 嵌入式测验（Embedded Quiz）
 
 ### 测验 1：Return Type Notation（RTN）解决的是什么问题？（理解层）
 
-**题目**: Return Type Notation（RTN）解决的是什么问题？
-
 <details>
-<summary>✅ 答案与解析</summary>
+<summary>点击展开答案</summary>
 
-精确控制 `impl Trait` 返回类型中隐式捕获的生命周期。允许开发者显式指定返回的 Future/闭包捕获哪些生命周期，解决过度捕获导致的编译错误。
+RTN 解决的是 AFIT/RPITIT 返回类型匿名、无法直接添加 `Send` 等边界的问题。通过 `T::method(..): Send` 语法，调用者可以在 where 子句中约束 trait 方法返回的不透明类型。
+
 </details>
 
----
-
-### 测验 2：`impl Trait + use<'a>` 语法中的 `use<'a>` 表示什么？（理解层）
-
-**题目**: `impl Trait + use<'a>` 语法中的 `use<'a>` 表示什么？
+### 测验 2：RTN 的语法 `T::method(..): Send` 中 `..` 表示什么？（理解层）
 
 <details>
-<summary>✅ 答案与解析</summary>
+<summary>点击展开答案</summary>
 
-表示返回类型只捕获生命周期 `'a`，不捕获其他隐式生命周期。这缩小了返回类型的生命周期依赖，使其更灵活。
+`..` 是占位符，表示方法的所有泛型参数（目前仅支持生命周期）由编译器根据上下文推导。它不是一个具体的参数列表。
+
 </details>
 
----
-
-### 测验 3：为什么 `async fn` 目前存在"生命周期过度捕获"问题？（理解层）
-
-**题目**: 为什么 `async fn` 目前存在"生命周期过度捕获"问题？
+### 测验 3：RTN 与 `use<..>` 精确捕获有什么区别？（理解层）
 
 <details>
-<summary>✅ 答案与解析</summary>
+<summary>点击展开答案</summary>
 
-`async fn` 返回的 Future 隐式捕获所有输入生命周期，即使函数体只使用了部分。这导致某些合法的代码因生命周期冲突而编译失败。
+- RTN（`T::method(..): Send`）用于为 trait 方法的返回类型添加边界。
+- `use<..>` 精确捕获用于控制 `impl Trait` / `async fn` 不透明类型捕获哪些泛型参数。
+- RTN 仍在 nightly；`use<..>` 已在 Rust 1.82 stable。
+
 </details>
 
----
-
-### 测验 4：RTN 与 `impl Trait + 'static` 有什么区别？（理解层）
-
-**题目**: RTN 与 `impl Trait + 'static` 有什么区别？
+### 测验 4：RTN 当前支持在哪些位置使用？（理解层）
 
 <details>
-<summary>✅ 答案与解析</summary>
+<summary>点击展开答案</summary>
 
-`'static` 要求返回类型不引用任何非静态数据。`use<'a>` 允许引用特定生命周期 `'a` 的数据，比 `'static` 更灵活。
+目前 RTN 只能作为 where 子句或关联类型 bound 中的 `Self` 类型使用。不能作为结构体字段类型、局部变量类型或函数返回类型使用。
+
 </details>
-
----
 
 ### 测验 5：这个特性对 API 设计有什么影响？（理解层）
 
-**题目**: 这个特性对 API 设计有什么影响？
-
 <details>
-<summary>✅ 答案与解析</summary>
+<summary>点击展开答案</summary>
 
-允许编写更精确、更灵活的泛型 API，特别是涉及异步和闭包时。减少了因生命周期推断保守性导致的不必要的 `Box` 或显式生命周期标注。
+库作者不必在 trait 定义中提前把 `async fn` 返回的 Future 约束为 `Send`。调用者按需通过 RTN 添加约束，使得单线程实现和多线程实现可以共用同一 trait。
+
 </details>
+
+---
 
 ## 认知路径
 
-> **认知路径**: 从 Rust 核心语言特性出发，经由 **Return Type Notation 预研：精确捕获的显式控制** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。
-
 ### 核心推理链
 
-| 定理 | 前提 | 结论 | 置信度 |
-| :--- | :--- | :--- | :--- |
-| Return Type Notation 预研：精确捕获的显式控制 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
-| Return Type Notation 预研：精确捕获的显式控制 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
-| Return Type Notation 预研：精确捕获的显式控制 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
-
-> **过渡**: 掌握 Return Type Notation 预研：精确捕获的显式控制 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-> **过渡**: 在工程实践中应用 Return Type Notation 预研：精确捕获的显式控制 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-> **过渡**: Return Type Notation 预研：精确捕获的显式控制 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
+`async fn in trait` 稳定 → 返回类型匿名 → 调用者无法加 `Send` bound → 需要 RTN → RTN 提供 `T::method(..): Send` 语法 → 调用者按需约束 → trait 实现保持灵活。
 
 ### 反命题与边界
 
-> **反命题**: "Return Type Notation 预研：精确捕获的显式控制 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。
+- ❌ "RTN 已经稳定" — 仍在 nightly。
+- ❌ "RTN 就是 `use<..>`" — 两者不同。
+- ❌ "RTN 可以用于任何方法" — 仅 AFIT/RPITIT。
+- ✅ "RTN 让 async trait 的 API 设计更灵活" — 正确。
+
+---
+
+> **文档版本**: 2.0
+> **对应 Rust 版本**: nightly 1.98.0
+> **最后更新**: 2026-06-23
+> **状态**: ✅ 权威来源对齐 — 区分 RTN 与 precise capturing

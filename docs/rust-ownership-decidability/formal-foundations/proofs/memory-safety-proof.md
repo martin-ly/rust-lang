@@ -626,7 +626,7 @@ $$
 
 > **来源: [Rustonomicon - Memory Layout](https://doc.rust-lang.org/nomicon/repr-rust.html)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **[来源: ACM - Memory Safety]**
 

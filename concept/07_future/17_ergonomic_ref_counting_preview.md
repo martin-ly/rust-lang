@@ -172,7 +172,7 @@ Ergonomic ref-counting 可显著降低内核绑定的样板代码量，提升可
 
 ---
 
-> **权威来源**: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/), [rust-project-goals#107](https://github.com/rust-lang/rust-project-goals/issues/107)
+> **权威来源**: [Rust Project Goals 2026 — Ergonomic Ref-counting](https://rust-lang.github.io/rust-project-goals/2026/ergonomic-rc.html), [rust-project-goals#107](https://github.com/rust-lang/rust-project-goals/issues/107)
 > **权威来源对齐变更日志**: 2026-06-06 创建，对齐 Rust Project Goals 2026 April Update
 
 ## 嵌入式测验（Embedded Quiz）

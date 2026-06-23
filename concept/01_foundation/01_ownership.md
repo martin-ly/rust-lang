@@ -809,7 +809,7 @@ s.release();  // 释放所有权但不 delete，常规代码中常见
 ```
 
 > **关键洞察**: `unique_ptr` 是**运行时机制**（RAII + 指针管理），Rust 所有权是**编译期机制**（类型系统 + 线性逻辑）。C++ 程序员需要"自律"来正确使用 `std::move`，Rust 程序员被编译器"强制"遵守所有权规则。这不是说 C++ 不安全——而是 Rust 将"正确使用智能指针"的责任从程序员转移到了编译器。
-> **来源**: [TRPL Ch4](https://doc.rust-lang.org/book/ch04-00-ownership.html) · [C++ Reference: unique_ptr] · [Wikipedia: Smart pointer](https://en.wikipedia.org/wiki/Smart_pointer) · [Rust vs C++ 对比分析]
+> **来源**: [TRPL Ch4](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) · [C++ Reference: unique_ptr] · [Wikipedia: Smart pointer](https://en.wikipedia.org/wiki/Smart_pointer) · [Rust vs C++ 对比分析]
 
 ---
 

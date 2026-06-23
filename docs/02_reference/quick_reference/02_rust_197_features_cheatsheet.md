@@ -200,6 +200,7 @@ let poll_result = future.poll(&mut cx);
 | `ptr::fn_addr_eq(a, b)` | 函数指针地址比较 |
 | `FromStr` for `CString` | 从字符串解析 C 字符串 |
 | `LowerExp` / `UpperExp` for `NonZero` | 科学计数法格式化 |
+| `NonZero::{highest_one, lowest_one, bit_width}` | 非零整数的位索引与位宽查询 |
 
 ---
 
@@ -221,6 +222,7 @@ let poll_result = future.poll(&mut cx);
 | `Pin::new` / `new_unchecked` / `get_ref` / `get_mut` / `static_ref` / `static_mut` | Pin 操作 |
 | float methods (`recip`, `to_degrees`, `clamp`, `abs`, etc.) | 浮点数运算 |
 | `MaybeUninit::write` | 写入 MaybeUninit |
+| `char::is_control` | 字符是否为控制字符 |
 
 ---
 

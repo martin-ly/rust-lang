@@ -361,6 +361,6 @@ Unsafe Fields 特性的一个重要推动力来自 **Rust for Linux** 项目。
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 > **来源: [Rust Reference - Unsafe](https://doc.rust-lang.org/reference/unsafe-blocks.html)**
-> **来源: [RFC 2585 - Unsafe Guidelines](https://rust-lang.github.io/rfcs/2585-2585-unsafe-block-in-unsafe-fn.html)**
+> **来源: [RFC 2585 - Unsafe Guidelines](https://rust-lang.github.io/rfcs/2585-unsafe-block-in-unsafe-fn.html)**
 
 ---

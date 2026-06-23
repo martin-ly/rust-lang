@@ -7,7 +7,7 @@
 
 ## 目录
 >
-> **来源: [Rust Design Patterns Book](https://rust-lang.github.io/design-patterns/)** · **来源: [Wikipedia - Software Design Pattern](https://en.wikipedia.org/wiki/Software_Design_Pattern)** · **来源: [GoF - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)** · **来源: [TRPL Ch. 17](https://doc.rust-lang.org/book/ch17-00-async-await.html)** · **来源: [Rust Reference - Traits](https://doc.rust-lang.org/reference/items/traits.html)** · **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** · **来源: [Wikipedia - Formal Semantics](https://en.wikipedia.org/wiki/Formal_Semantics)** · **[来源: ACM - Pattern Formalization]** · **[来源: IEEE - Certified Design Patterns]**
+> **来源: [Rust Design Patterns Book](https://rust-unofficial.github.io/patterns/)** · **来源: [Wikipedia - Software Design Pattern](https://en.wikipedia.org/wiki/Software_Design_Pattern)** · **来源: [GoF - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)** · **来源: [TRPL Ch. 17](https://doc.rust-lang.org/book/ch17-00-async-await.html)** · **来源: [Rust Reference - Traits](https://doc.rust-lang.org/reference/items/traits.html)** · **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** · **来源: [Wikipedia - Formal Semantics](https://en.wikipedia.org/wiki/Formal_Semantics)** · **[来源: ACM - Pattern Formalization]** · **[来源: IEEE - Certified Design Patterns]**
 
 - [设计模式语义分析](#设计模式语义分析)
   - [目录](#目录)

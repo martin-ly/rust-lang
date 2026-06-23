@@ -1,7 +1,7 @@
-> **内容分级**: [综述级]
-
+> **内容分级**:
+>
+> [综述级]
 > **代码状态**: ✅ 含可编译示例
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Machine Learning Ecosystem（机器学习生态）
@@ -10,13 +10,11 @@
 > **Summary**: Machine Learning Ecosystem. Guide to 46 Machine Learning Ecosystem.
 >
 > **受众**: [进阶]
-
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Ana — 分析 Rust ML 生态的技术选型与工程权衡
 > **前置依赖**: [类型系统](../01_foundation/04_type_system.md) · [泛型](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md) · [Unsafe Rust](../03_advanced/03_unsafe.md)
 > **后置延伸**: [嵌入式系统](./22_embedded_systems.md) · [性能优化](./15_performance_optimization.md) · [并发编程](../03_advanced/01_concurrency.md)
-
 >
 > **来源**: [candle](https://docs.rs/candle-core/) · [burn](https://docs.rs/burn/) · [tch-rs](https://docs.rs/tch/)
 ---
@@ -24,9 +22,7 @@
 > **来源**: [candle — Hugging Face](https://github.com/huggingface/candle) · [burn — Deep Learning Framework](https://burn.dev/) · [tch-rs — PyTorch Rust Bindings](https://github.com/LaurentMazare/tch-rs) · [ort — ONNX Runtime Rust](https://github.com/pykeio/ort) · [linfa — ML Algorithms](https://github.com/rust-ml/linfa) · [polars — DataFrame Library](https://pola.rs/) · [Apache Arrow Rust](https://arrow.apache.org/rust/) · [DataFusion — Query Engine](https://arrow.apache.org/datafusion/)
 
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
-
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录

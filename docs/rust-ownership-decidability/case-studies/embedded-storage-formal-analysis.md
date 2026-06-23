@@ -19,29 +19,29 @@
   - [目录](#目录)
   - [1. 引言](#1-引言)
   - [2. 存储trait形式化](#2-存储trait形式化)
-    - [定义 STORAGE-1 ( 只读存储 )](#定义-storage-1--只读存储)
-    - [定义 STORAGE-2 ( 可擦除存储 )](#定义-storage-2--可擦除存储)
+    - [定义 STORAGE-1 ( 只读存储 )](#定义-storage-1--只读存储-)
+    - [定义 STORAGE-2 ( 可擦除存储 )](#定义-storage-2--可擦除存储-)
   - [3. NOR Flash模型](#3-nor-flash模型)
-    - [定义 NOR-1 ( 字节可编程 )](#定义-nor-1--字节可编程)
-    - [定理 NOR-T1 ( 编程限制 )](#定理-nor-t1--编程限制)
+    - [定义 NOR-1 ( 字节可编程 )](#定义-nor-1--字节可编程-)
+    - [定理 NOR-T1 ( 编程限制 )](#定理-nor-t1--编程限制-)
   - [4. NAND Flash模型](#4-nand-flash模型)
-    - [定义 NAND-1 ( 块擦除 )](#定义-nand-1--块擦除)
-    - [定义 NAND-2 ( 坏块管理 )](#定义-nand-2--坏块管理)
-    - [定理 NAND-T1 ( 顺序编程 )](#定理-nand-t1--顺序编程)
+    - [定义 NAND-1 ( 块擦除 )](#定义-nand-1--块擦除-)
+    - [定义 NAND-2 ( 坏块管理 )](#定义-nand-2--坏块管理-)
+    - [定理 NAND-T1 ( 顺序编程 )](#定理-nand-t1--顺序编程-)
   - [5. 磨损均衡](#5-磨损均衡)
-    - [定义 WEAR-1 ( 擦除计数 )](#定义-wear-1--擦除计数)
-    - [定义 WEAR-2 ( 磨损均衡算法 )](#定义-wear-2--磨损均衡算法)
-    - [定理 WEAR-T1 ( 寿命延长 )](#定理-wear-t1--寿命延长)
+    - [定义 WEAR-1 ( 擦除计数 )](#定义-wear-1--擦除计数-)
+    - [定义 WEAR-2 ( 磨损均衡算法 )](#定义-wear-2--磨损均衡算法-)
+    - [定理 WEAR-T1 ( 寿命延长 )](#定理-wear-t1--寿命延长-)
   - [6. 定理与证明](#6-定理与证明)
-    - [定理 STORAGE-T1 ( 原子性 )](#定理-storage-t1--原子性)
-    - [定理 STORAGE-T2 ( 幂等性 )](#定理-storage-t2--幂等性)
+    - [定理 STORAGE-T1 ( 原子性 )](#定理-storage-t1--原子性-)
+    - [定理 STORAGE-T2 ( 幂等性 )](#定理-storage-t2--幂等性-)
   - [7. 代码示例](#7-代码示例)
     - [示例1: Flash驱动实现](#示例1-flash驱动实现)
     - [示例2: 文件系统抽象](#示例2-文件系统抽象)
     - [示例3: 配置存储](#示例3-配置存储)
   - [**状态**: ✅ 已对齐](#状态--已对齐)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -435,7 +435,7 @@ impl<F: NorFlash> ConfigStorage<F> {
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 

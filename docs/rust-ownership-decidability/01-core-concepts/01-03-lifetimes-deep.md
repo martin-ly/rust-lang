@@ -7,7 +7,7 @@
 
 ## 目录
 >
-> **来源: [Rust Reference - Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon - Lifetime Elision](https://doc.rust-lang.org/nomicon/)** · **来源: [TRPL Ch. 10](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)** · **来源: [Wikipedia - Region-based Memory Management](https://en.wikipedia.org/wiki/Region_based_Memory_Management)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [Wikipedia - Type Inference](https://en.wikipedia.org/wiki/Type_Inference)** · **来源: [Wikipedia - Hindley-Milner Type System](https://en.wikipedia.org/wiki/Hindley_Milner_Type_System)** · **[来源: ACM - Region-based Memory Management]** · **[来源: IEEE - Lifetime Analysis in Compilers]**
+> **来源: [Rust Reference - Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon - Lifetime Elision](https://doc.rust-lang.org/nomicon/)** · **来源: [TRPL Ch. 10](https://doc.rust-lang.org/book/ch10-00-generics.html)** · **来源: [Wikipedia - Region-based Memory Management](https://en.wikipedia.org/wiki/Region_based_Memory_Management)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [Wikipedia - Type Inference](https://en.wikipedia.org/wiki/Type_Inference)** · **来源: [Wikipedia - Hindley-Milner Type System](https://en.wikipedia.org/wiki/Hindley_Milner_Type_System)** · **[来源: ACM - Region-based Memory Management]** · **[来源: IEEE - Lifetime Analysis in Compilers]**
 
 - [深入理解 Rust 生命周期系统](#深入理解-rust-生命周期系统)
   - [目录](#目录)
@@ -2957,7 +2957,7 @@ Rust 的 for<'a> 是全称量词。
 
 > **来源: [Rustonomicon - Lifetime Elision](https://doc.rust-lang.org/nomicon/)**
 
-> **来源: [TRPL Ch. 10 - Generic Types, Traits, and Lifetimes](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)**
+> **来源: [TRPL Ch. 10 - Generic Types, Traits, and Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html)**
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -2980,7 +2980,7 @@ Rust 的 for<'a> 是全称量词。
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 

@@ -1,11 +1,11 @@
 # Async Closures (异步闭包)
 
-> **相关概念**: [异步闭包](../../../concept/03_advanced/02_async.md)
+> **相关概念**: [异步闭包](../../../concept/03_advanced/24_async_closures.md)
 > **Bloom 层级**: 理解
 > **特性**: `async_closure`
-> **状态**: 🧪 不稳定 (Unstable)
-> **预计稳定**: TBD (nightly-only，稳定时间未定)
-> **跟踪 Issue**: [#62290](https://github.com/rust-lang/rust/issues/62290)
+> **状态**: ✅ **Stable since Rust 1.85.0**
+> **RFC**: [RFC 3668 — Async Closures](https://rust-lang.github.io/rfcs/3668-async-closures.html)
+> **稳定化 PR**: [rust-lang/rust#132706](https://github.com/rust-lang/rust/pull/132706)
 > **权威来源**: [RFC 3668 — Async Closures](https://rust-lang.github.io/rfcs/3668-async-closures.html), [Rust Reference — Async closures](https://doc.rust-lang.org/reference/expressions/closure-expr.html#async-closures)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 RFC 3668 来源标注、Rust Reference 异步闭包语义引用 [来源: Authority Source Sprint Batch 8]
@@ -40,6 +40,10 @@
   - [🔗 参考资源](#-参考资源)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [📚 模块 8: 国际化对齐](#-模块-8-国际化对齐)
+    - [8.1 官方来源](#81-官方来源)
+    - [8.2 学术来源](#82-学术来源)
+    - [8.3 社区权威](#83-社区权威)
 
 ---
 
@@ -81,7 +85,6 @@ fn get_callback() -> impl Fn() -> impl Future<Output = i32> {
 > **[来源: Rust Official Docs]**
 
 ```rust,ignore
-#![feature(async_closure)]
 
 // ✅ 新的 async 闭包语法
 fn get_callback() -> impl AsyncFn() -> i32 {
@@ -111,7 +114,6 @@ fn get_processor() -> impl AsyncFn(i32, i32) -> i32 {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,compile_fail
-#![feature(async_closure)]
 
 use std::future::Future;
 
@@ -138,7 +140,6 @@ fn main() {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
-#![feature(async_closure)]
 
 async fn capture_examples() {
     let data = vec![1, 2, 3];
@@ -184,7 +185,6 @@ async fn capture_examples() {
 | **Fn trait** | `Fn() -> impl Future` | `AsyncFn` |
 
 ```rust,ignore
-#![feature(async_closure)]
 
 // 对比示例
 fn traditional() -> impl FnOnce() -> Pin<Box<dyn Future<Output = i32> + Send>>> {
@@ -213,7 +213,6 @@ fn new_way() -> impl async FnOnce() -> i32 {
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
-#![feature(async_closure)]
 
 use std::collections::HashMap;
 
@@ -269,7 +268,6 @@ async fn example() {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
-#![feature(async_closure)]
 
 use tokio::sync::mpsc;
 
@@ -313,7 +311,6 @@ async fn websocket_server() {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
-#![feature(async_closure)]
 
 use std::pin::Pin;
 use std::future::Future;
@@ -446,7 +443,6 @@ pub trait AsyncFnOnce<Args>: AsyncFnMut<Args> {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
-#![feature(async_closure)]
 
 // ❌ 错误: 不能直接在 trait 中使用
 // trait MyTrait {
@@ -471,7 +467,8 @@ let f = async || {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [Tracking Issue](https://github.com/rust-lang/rust/issues/62290)
+- [Stable since Rust 1.85.0](https://blog.rust-lang.org/2025/02/20/Rust-1.85.0.html)
+- [RFC 3668 — Async Closures](https://rust-lang.github.io/rfcs/3668-async-closures.html)
 - [RFC: Async Closures](https://rust-lang.github.io/rfcs/3668-async-closures.html)
 - [03_advanced/async/async_closure.md](../../03_advanced/async/02_async_closure.md) - 异步闭包完整教学（10 模块深度解析）
 

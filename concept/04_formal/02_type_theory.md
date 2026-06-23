@@ -675,7 +675,7 @@ Rust HRTB:       ∀'a.τ  where 'a ∈ Lifetime (Region)
 
 ## 十之一、补充：Dependent Type、Const Generics 与 HKT workaround
 
-> **[Wikipedia: Dependent type](https://en.wikipedia.org/wiki/Dependent_type)** · **[Wikipedia: Higher-kinded type](https://en.wikipedia.org/wiki/Higher_kinded_type)** · **[RFC 2000: Const Generics](https://rust-lang.github.io/rfcs/2000-2000-const-generics.html)** · **[Rust Reference: Const Generics](https://doc.rust-lang.org/reference/items/generics.html#const-generics)** 本节补充 Rust 类型系统与更高级类型论概念的关系，以及 Rust 在表达力边界上的工程妥协。✅ [来源: [POPL 2018 — RustBelt](https://dl.acm.org/doi/10.1145/3158154)]
+> **[Wikipedia: Dependent type](https://en.wikipedia.org/wiki/Dependent_type)** · **[Wikipedia: Higher-kinded type](https://en.wikipedia.org/wiki/Higher_kinded_type)** · **[RFC 2000: Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html)** · **[Rust Reference: Const Generics](https://doc.rust-lang.org/reference/items/generics.html#const-generics)** 本节补充 Rust 类型系统与更高级类型论概念的关系，以及 Rust 在表达力边界上的工程妥协。✅ [来源: [POPL 2018 — RustBelt](https://dl.acm.org/doi/10.1145/3158154)]
 
 ### 10.1 Dependent Type 与 Const Generics 的关系
 
@@ -708,11 +708,11 @@ let b: Array<i32, 4> = Array { data: [1, 2, 3, 4] };
 | **与unsafe关系** | 无 unsafe 概念（证明即程序） | 仍依赖 unsafe 进行底层优化 |
 
 > **关键洞察**: Const Generics 不是"依赖类型的弱化版"，而是**工程上的精确裁剪**——它保留了依赖类型在系统编程中最有用的子集（数组长度、缓冲区大小、维度参数），同时避免了完整依赖类型带来的编译期不可判定性问题。
-> **来源**: [Wikipedia: Dependent type](https://en.wikipedia.org/wiki/Dependent_type) · [RFC 2000: Const Generics](https://rust-lang.github.io/rfcs/2000-2000-const-generics.html) · [Idris 文档: Dependent Types]
+> **来源**: [Wikipedia: Dependent type](https://en.wikipedia.org/wiki/Dependent_type) · [RFC 2000: Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html) · [Idris 文档: Dependent Types]
 
 ### 10.1b Const Generics 的形式化演进（1.89+）
 
-> **来源: Rust 1.89 Release Notes; [RFC 2000](https://rust-lang.github.io/rfcs/2000-2000-const-generics.html)** Rust 1.89 稳定了 `_` 推断 const generics 参数，使常量参数获得与类型参数同等的 HM 推断能力。
+> **来源: Rust 1.89 Release Notes; [RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html)** Rust 1.89 稳定了 `_` 推断 const generics 参数，使常量参数获得与类型参数同等的 HM 推断能力。
 
 **`_` 推断的形式化意义**:
 

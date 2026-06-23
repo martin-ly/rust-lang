@@ -58,7 +58,7 @@ let _ = serde_json::to_string(&s);
 > 来源: [RFC 3516 — Public & Private Dependencies](https://github.com/rust-lang/rfcs/pull/3516) ·
 > [Cargo Book — SemVer Compatibility](https://doc.rust-lang.org/cargo/reference/semver.html) ·
 > [rust-lang/cargo#9094](https://github.com/rust-lang/cargo/issues/9094) ·
-> [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)
+> [Rust Project Goals 2026 — Public/Private Dependencies](https://rust-lang.github.io/rust-project-goals/2026/pub-priv.html)
 
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
 
@@ -68,7 +68,7 @@ let _ = serde_json::to_string(&s);
 
 ## 📑 目录
 
-- [Public/Private Dependencies](#publicprivate-dependencies)
+- [Cargo 公共与私有依赖](#cargo-公共与私有依赖)
   - [代码示例：Public/Private Dependencies 配置](#代码示例publicprivate-dependencies-配置)
 - [Public/Private Dependencies：可见性控制的工程化](#publicprivate-dependencies可见性控制的工程化)
   - [📑 目录](#-目录)

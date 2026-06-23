@@ -22,7 +22,11 @@
 > [Rust Reference — Never Type](https://doc.rust-lang.org/reference/types/never.html) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
-> [RFC 1216](https://rust-lang.github.io/rfcs//1216-bang-type.html)
+> [RFC 1216](https://rust-lang.github.io/rfcs/1216-bang-type.html) ·
+> [Rust Release Notes — 1.92.0](https://doc.rust-lang.org/beta/releases.html) ·
+> [Rust Release Notes — 1.96.0](https://github.com/rust-lang/rust/issues/156512)
+>
+> **稳定化状态**: `!` 已在大量上下文中可用（如发散函数、`Result<T, !>`、`Option<!>`），但**完整类型地位（full never type stabilization）仍在进行中**。Rust 1.92 将 `never_type_fallback_flowing_into_unsafe` 与 `dependency_on_unit_never_type_fallback` 两个 future-compatibility lint 提升为 deny-by-default；Rust 1.96 进一步统一了 `!` 在 tuple 表达式中的 coercion 行为。
 
 ## 目录
 
@@ -39,7 +43,10 @@
   - [三、穷尽性检查](#三穷尽性检查)
     - [3.1 Match 臂完备性](#31-match-臂完备性)
     - [3.2 与空枚举的对比](#32-与空枚举的对比)
-  - [四、Rust 1.96 改进：Tuple Coercion](#四rust-196-改进tuple-coercion)
+  - [四、Never Type 稳定化进展](#四never-type-稳定化进展)
+    - [4.1 完整稳定化仍在进行中](#41-完整稳定化仍在进行中)
+    - [4.2 Rust 1.92：deny-by-default 的 future-compatibility lint](#42-rust-192deny-by-default-的-future-compatibility-lint)
+    - [4.3 Rust 1.96：Tuple Coercion](#43-rust-196tuple-coercion)
   - [五、常见模式](#五常见模式)
     - [模式 1：编译期常量求值](#模式-1编译期常量求值)
     - [模式 2：流处理中的不可能错误](#模式-2流处理中的不可能错误)
@@ -281,9 +288,36 @@ fn new_style() -> Result<i32, !> {
 
 ---
 
-## 四、Rust 1.96 改进：Tuple Coercion
+## 四、Never Type 稳定化进展
 
-> **[来源: [Rust 1.96 Release Notes](https://blog.rust-lang.org/releases/latest/)]**
+### 4.1 完整稳定化仍在进行中
+
+> **[来源: [Rust Project Goals 2026 — Stabilize never type](https://rust-lang.github.io/rust-project-goals/2026/stabilize-never-type.html)]**
+
+`!` 作为 Rust 类型系统的底类型，其完整稳定化是一个多阶段过程：
+
+| 阶段 | 版本 | 内容 | 状态 |
+|:---|:---|:---|:---:|
+| 底类型语义可用 | 1.0+ | `panic!`、`loop {}`、`return` 等发散表达式类型为 `!` | ✅ 已稳定 |
+| `Result<T, !>` / `Option<!>` 模式 | 1.x+ | 用 `!` 表达"不可能的错误/值" | ✅ 已稳定 |
+| Never type fallback lint | 1.92 | `never_type_fallback_flowing_into_unsafe`、`dependency_on_unit_never_type_fallback` 设为 deny-by-default | ✅ 已稳定 |
+| Tuple coercion 统一 | 1.96 | `!` 在 tuple 表达式中总是 coercion | ✅ 已稳定 |
+| 完整类型地位 | 待定 | 消除剩余不稳定边界，可能需要下一代 trait solver 配合 | 🧪 进行中 |
+
+### 4.2 Rust 1.92：deny-by-default 的 future-compatibility lint
+
+Rust 1.92 将以下两个 lint 提升为 deny-by-default：
+
+- `never_type_fallback_flowing_into_unsafe`：检测 `!` fallback 流入 `unsafe` 上下文、可能导致 soundness 问题的代码。
+- `dependency_on_unit_never_type_fallback`：检测依赖 "`!` 在某些位置回退为 `()`" 这一旧行为的代码。
+
+这些 lint 不会破坏正常代码，但会迫使开发者修复那些将在完整 never type 稳定化后失效的边缘模式。
+
+[来源: [Rust 1.92 Release Notes](https://doc.rust-lang.org/beta/releases.html)]
+
+### 4.3 Rust 1.96：Tuple Coercion
+
+> **[来源: [Rust 1.96 Release Notes](https://github.com/rust-lang/rust/issues/156512)]**
 
 Rust 1.96 稳定了 never type 在 **tuple 表达式**中的 coercion 行为：
 
@@ -320,6 +354,15 @@ impl Config {
 ```
 
 > **关键洞察**: 1.96 之前，某些边缘情况下 `!` 在 tuple 中不会被自动 coercion，导致需要显式处理。1.96 统一了这一行为，使 `!` 的语义更加一致。
+>
+> ```rust
+> // Rust 1.96+：tuple 中包含 `!` 时统一 coercion
+> fn demo() -> (i32, String) {
+>     let s: String = todo!(); // `todo!()` 返回 `!`，coerce 为 String
+>     // 在 1.96 之前，`(todo!(), s)` 这种 tuple 可能因 coercion 不一致而需要额外标注
+>     (todo!(), s)
+> }
+> ```
 
 ---
 
@@ -407,7 +450,7 @@ fn incomplete_match(result: Result<i32, !>) -> i32 {
 > [Rust Reference — Never Type](https://doc.rust-lang.org/reference/types/never.html) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
-> [RFC 1216](https://rust-lang.github.io/rfcs//1216-bang-type.html)
+> [RFC 1216](https://rust-lang.github.io/rfcs/1216-bang-type.html)
 >
 > **文档版本**: 1.0
 > **对应 Rust 版本**: 1.96.0+ stable (Edition 2024)

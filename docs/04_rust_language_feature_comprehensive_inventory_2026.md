@@ -79,7 +79,7 @@
     - [06.1 特性树图](#061-特性树图)
     - [06.2 核心概念完备性检查](#062-核心概念完备性检查)
     - [06.3 异步范式演进：从 Future 到 Async Closures](#063-异步范式演进从-future-到-async-closures)
-    - [06.4 Async Closures 预研深度梳理](#064-async-closures-预研深度梳理)
+    - [06.4 Async Closures 稳定特性梳理](#064-async-closures-稳定特性梳理)
     - [06.5 Return Type Notation (RTN) 预研](#065-return-type-notation-rtn-预研)
     - [06.6 async-std \[已归档\] 迁移方案](#066-async-std-已归档-迁移方案)
     - [06.7 权威来源对齐](#067-权威来源对齐)
@@ -964,8 +964,8 @@ fn missing_lifetime<'a>(x: &'a str) -> impl Iterator<Item = char> + use<> {
 graph LR
     A[async fn<br/>1.39] --> B[AFIT<br/>async fn in trait<br/>1.75.0]
     B --> C[AFIDT<br/>async fn in dyn trait<br/>1.97+ Nightly]
-    B --> D["Async Closures<br/>async || {}<br/>1.96 FCP"]
-    D --> E[AsyncFn traits<br/>AsyncFn/Mut/Once<br/>1.94 Prelude]
+    B --> D["Async Closures<br/>async || {}<br/>1.85.0 Stable"]
+    D --> E[AsyncFn traits<br/>AsyncFn/Mut/Once<br/>1.85.0 Stable / 2024 Prelude]
     C --> F[RTN<br/>Return Type Notation<br/>1.97+ RFC 3654]
     F --> G[Send Bound<br/>Problem Solved]
     D --> G
@@ -1286,7 +1286,7 @@ graph TD
     AFIT --> AFIT1[async fn in trait 1.75.0]
     AFIT --> AFIT2[AFIDT nightly]
     AFIT --> AFIT3[RTN 预研]
-    AFIT --> AFIT4[AsyncFn traits in prelude 1.94]
+    AFIT --> AFIT4[AsyncFn traits 1.85.0 stable / 2024 prelude]
 
     AC --> AC1["async || {} 语法"]
     AC --> AC2[AsyncFn / AsyncFnMut / AsyncFnOnce]
@@ -1326,14 +1326,14 @@ Future trait (1.36)
   → async/await 语法糖 (1.39)
     → Future/IntoFuture in prelude (1.85)
       → AFIT: async fn in trait (1.75.0)
-        → AsyncFn traits in prelude (1.94)
-          → Async Closures: async || {} (1.96 FCP)
+        → AsyncFn traits + async closures stable (1.85.0)
+          → AFIDT: async fn in dyn trait (nightly)
             → AFIDT: async fn in dyn trait (1.97+ nightly)
               → RTN: Return Type Notation (1.97+ RFC)
-                → Gen blocks / AsyncIterator (1.98+)
+                → Gen blocks / AsyncIterator (nightly)
 ```
 
-### 06.4 Async Closures 预研深度梳理
+### 06.4 Async Closures 稳定特性梳理
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -1350,7 +1350,7 @@ let old_closure = |s: String| async move {
 };
 // 问题：s 被 move 进 Future，调用时所有权转移
 
-// ✅ 新范式 (1.96 FCP)：真正的异步闭包
+// ✅ 新范式 (1.85.0 stable)：真正的异步闭包
 // let new_closure = async |s: &str| {
 //     println!("{}", s);
 //     s.len()
@@ -1358,16 +1358,16 @@ let old_closure = |s: String| async move {
 // 优势：s 被借用而非 move，生命周期推断更精确
 ```
 
-**AsyncFn trait family** (1.94 已入 prelude):
+**AsyncFn trait family** (1.85.0 stable, Rust 2024 prelude):
 
 ```rust
-// AsyncFn / AsyncFnMut / AsyncFnOnce traits (1.94+)
-// 这些 traits 已在 Rust 1.94 的 prelude 中稳定
+// AsyncFn / AsyncFnMut / AsyncFnOnce traits (1.85.0+)
+// 这些 traits 在 Rust 1.85.0 稳定，Rust 2024 edition 默认进入 prelude
 
 // 使用场景：接受异步回调的函数
 async fn process_items<T, F>(items: Vec<T>, handler: F)
 where
-    F: AsyncFn(T) -> bool,  // 1.94+ AsyncFn trait
+    F: AsyncFn(T) -> bool,  // 1.85.0+ AsyncFn trait
 {
     for item in items {
         if handler(item).await {
@@ -1406,9 +1406,9 @@ where
 
 **权威对齐**:
 
-- 预计稳定: **TBD** (仍在 nightly 稳定化进程中)
+- 状态: **Stable since Rust 1.85.0**
 - RFC: [RFC 3668](https://rust-lang.github.io/rfcs/3668-async-closures.html)
-- AsyncFn traits: **1.94.0** 已入 prelude
+- AsyncFn traits: **1.85.0** stable, Rust 2024 prelude
 - 来源: [rust-lang/rust#132706](https://github.com/rust-lang/rust/pull/132706)
 
 ### 06.5 Return Type Notation (RTN) 预研
@@ -1484,8 +1484,8 @@ async fn migrated() {
 | Future / async/await | Rust Book Ch.17, RFC 2394 | ✅ 已引用 |
 | Tokio | tokio.rs docs | ✅ 已引用 |
 | AFIT | RFC 3185, 1.75 | ⚠️ 部分覆盖 |
-| Async Closures | RFC 3668, FCP | 🔴 **未覆盖** |
-| AsyncFn traits | 1.94, prelude | ✅ 已覆盖 (c06_async) |
+| Async Closures | RFC 3668, **1.85.0 stable** | ✅ 已覆盖 (c06_async / concept/03_advanced/24_async_closures.md) |
+| AsyncFn traits | **1.85.0 stable**, 2024 prelude | ✅ 已覆盖 (c06_async) |
 | AFIDT | rust-lang/rust#133119 | 🔴 **未覆盖** |
 | RTN | RFC 3654 | 🔴 **未覆盖** |
 

@@ -16,7 +16,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [现代Rust库形式化分析索引](#现代rust库形式化分析索引)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [嵌入式库 (15个) ✅ 100%](#嵌入式库-15个--100)
   - [应用级库 (24个) ✅ 100% 核心覆盖](#应用级库-24个--100-核心覆盖)
     - [Web/网络 (7个)](#web网络-7个)
@@ -31,7 +31,7 @@
   - [**状态**: ✅ 100% 核心库覆盖完成](#状态--100-核心库覆盖完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 嵌入式库 (15个) ✅ 100%
 >
@@ -185,7 +185,7 @@
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 

@@ -20,7 +20,6 @@
 > [tokio.rs](https://tokio.rs/) ·
 > [RFC 2394 — Async/Await](https://rust-lang.github.io/rfcs//2394-async_await.html) ·
 > [Wikipedia — Futures and Promises](https://en.wikipedia.org/wiki/Futures_and_promises)
-
 > **对应 Crate**: [`c06_async`](../../crates/c06_async/)
 > **对应练习**: [`exercises/src/async_programming/`](../../exercises/src/async_programming/)
 

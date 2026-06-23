@@ -78,7 +78,7 @@ Rust 的线程合并设计在确保安全方面独树一帜：
 - `thread::scope` 确保所有子线程在作用域结束时自动汇合，无需显式 `join`
 - 所有权系统保证合并后结果数据的安全传递，无数据竞争
 
-> **来源: [Rustonomicon - Concurrency](https://doc.rust-lang.org/nomicon/concurrency.html)** · **来源: [RFC 3151 - scoped threads](https://rust-lang.github.io/rfcs/3151-3151-scoped-threads.html)**
+> **来源: [Rustonomicon - Concurrency](https://doc.rust-lang.org/nomicon/concurrency.html)** · **来源: [RFC 3151 - scoped threads](https://rust-lang.github.io/rfcs/3151-scoped-threads.html)**
 
 ### 1.2 动机与应用场景
 >
@@ -388,7 +388,7 @@ $$
 
 ### 5.1 基础实现：thread::scope 自动汇合
 >
-> **来源: [Rust Reference - std::thread::scope](https://doc.rust-lang.org/reference/)** · **来源: [RFC 3151 - scoped threads](https://rust-lang.github.io/rfcs/3151-3151-scoped-threads.html)** · **来源: [TRPL Ch. 16 - Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)**
+> **来源: [Rust Reference - std::thread::scope](https://doc.rust-lang.org/reference/)** · **来源: [RFC 3151 - scoped threads](https://rust-lang.github.io/rfcs/3151-scoped-threads.html)** · **来源: [TRPL Ch. 16 - Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)**
 
 Rust 1.63 引入的 `thread::scope` 提供了最安全的线程合并机制：所有在作用域内生成的线程在作用域结束时自动汇合，无需显式 `join`，且允许借用非 `'static` 数据。
 
@@ -1153,6 +1153,6 @@ pub fn cascading_merge<T: Send + Clone>(
 
 > **[来源: Crossbeam Documentation - Scoped Threads]**
 
-> **来源: [RFC 3151 - scoped threads](https://rust-lang.github.io/rfcs/3151-3151-scoped-threads.html)**
+> **来源: [RFC 3151 - scoped threads](https://rust-lang.github.io/rfcs/3151-scoped-threads.html)**
 
 ---

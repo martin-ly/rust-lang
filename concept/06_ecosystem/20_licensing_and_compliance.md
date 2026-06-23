@@ -1,7 +1,7 @@
-> **内容分级**: [专家级]
-
+> **内容分级**:
+>
+> [专家级]
 > **代码状态**: ✅ 含可编译示例
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # 许可证与合规：Rust 项目的法律工程
@@ -17,7 +17,6 @@
 > -2.0 双许可到 cargo-deny 的许可证审计，揭示如何在工程实践中管理法律风险。
 > **前置概念**: [Toolchain](./01_toolchain.md) · [Cargo](./01_toolchain.md) · [Security Practices](./19_security_practices.md)
 > **后置概念**: [Cross Compilation](./17_cross_compilation.md) · [Distributed Systems](./18_distributed_systems.md)
-
 >
 > **来源**: [Cargo — Manifest: license](https://doc.rust-lang.org/cargo/reference/manifest.html#the-license-and-license-file-fields) · [Choose a License](https://choosealicense.com/)
 ---

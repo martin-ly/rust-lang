@@ -4,7 +4,6 @@
 >
 > **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **Rust安全特性的系统性对比分析**
 
 ---
@@ -14,7 +13,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [安全性分析多维矩阵](#安全性分析多维矩阵)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [矩阵1: 内存安全机制对比](#矩阵1-内存安全机制对比)
   - [矩阵2: 并发安全原语对比](#矩阵2-并发安全原语对比)
   - [矩阵3: Unsafe代码安全性](#矩阵3-unsafe代码安全性)
@@ -29,7 +28,6 @@
     - [安全优先级](#安全优先级)
   - [**覆盖维度**: 9大安全领域](#覆盖维度-9大安全领域)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引)
 
 ## 矩阵1: 内存安全机制对比
@@ -237,7 +235,7 @@
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
@@ -252,20 +250,3 @@
 > **[来源: Ferrocene Language Specification]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
->
-> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**

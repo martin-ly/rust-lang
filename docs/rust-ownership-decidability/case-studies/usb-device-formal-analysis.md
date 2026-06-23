@@ -19,28 +19,27 @@
   - [目录](#目录)
   - [1. 引言](#1-引言)
   - [2. USB状态机](#2-usb状态机)
-    - [定义 USB-STATE-1 ( 设备状态 )](#定义-usb-state-1--设备状态)
-    - [定义 USB-STATE-2 ( 枚举流程 )](#定义-usb-state-2--枚举流程)
-    - [定理 USB-T1 ( 状态安全 )](#定理-usb-t1--状态安全)
+    - [定义 USB-STATE-1 ( 设备状态 )](#定义-usb-state-1--设备状态-)
+    - [定义 USB-STATE-2 ( 枚举流程 )](#定义-usb-state-2--枚举流程-)
+    - [定理 USB-T1 ( 状态安全 )](#定理-usb-t1--状态安全-)
   - [3. 端点管理](#3-端点管理)
-    - [定义 EP-1 ( 端点类型 )](#定义-ep-1--端点类型)
-    - [定义 EP-2 ( 端点状态 )](#定义-ep-2--端点状态)
-    - [定义 EP-3 ( 端点操作 )](#定义-ep-3--端点操作)
+    - [定义 EP-1 ( 端点类型 )](#定义-ep-1--端点类型-)
+    - [定义 EP-2 ( 端点状态 )](#定义-ep-2--端点状态-)
+    - [定义 EP-3 ( 端点操作 )](#定义-ep-3--端点操作-)
   - [4. 描述符安全](#4-描述符安全)
-    - [定义 DESC-1 ( 描述符链 )](#定义-desc-1--描述符链)
-    - [定理 DESC-T1 ( 描述符完整性 )](#定理-desc-t1--描述符完整性)
+    - [定义 DESC-1 ( 描述符链 )](#定义-desc-1--描述符链-)
+    - [定理 DESC-T1 ( 描述符完整性 )](#定理-desc-t1--描述符完整性-)
   - [5. 类实现](#5-类实现)
-    - [定义 CLASS-1 ( CDC ACM )](#定义-class-1--cdc-acm)
-    - [定义 CLASS-2 ( HID )](#定义-class-2--hid)
+    - [定义 CLASS-1 ( CDC ACM )](#定义-class-1--cdc-acm-)
+    - [定义 CLASS-2 ( HID )](#定义-class-2--hid-)
   - [6. 定理与证明](#6-定理与证明)
-    - [定理 USB-T2 ( 端点隔离 )](#定理-usb-t2--端点隔离)
-    - [定理 USB-T3 ( 控制传输优先 )](#定理-usb-t3--控制传输优先)
+    - [定理 USB-T2 ( 端点隔离 )](#定理-usb-t2--端点隔离-)
+    - [定理 USB-T3 ( 控制传输优先 )](#定理-usb-t3--控制传输优先-)
   - [7. 代码示例](#7-代码示例)
     - [示例1: USB串口(CDC)](#示例1-usb串口cdc)
     - [示例2: USB HID键盘](#示例2-usb-hid键盘)
     - [示例3: 自定义USB类](#示例3-自定义usb类)
   - [**状态**: ✅ 已对齐](#状态--已对齐)
-  - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引)
 
 ---
@@ -416,7 +415,7 @@ impl<B: UsbBus> UsbClass<B> for CustomClass<'_, B> {
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
@@ -431,60 +430,3 @@ impl<B: UsbBus> UsbClass<B> for CustomClass<'_, B> {
 > **来源: [ACM - Formal Verification](https://dl.acm.org/)**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
->
-> **[来源: [Iris Project](https://iris-project.org/)]**
->
-> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
->
-> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**

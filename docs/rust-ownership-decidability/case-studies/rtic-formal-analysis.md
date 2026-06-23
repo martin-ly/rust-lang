@@ -19,28 +19,28 @@
   - [目录](#目录)
   - [1. 引言](#1-引言)
   - [2. 资源模型形式化](#2-资源模型形式化)
-    - [定义 RTIC-R1 ( 共享资源 )](#定义-rtic-r1--共享资源)
-    - [定义 RTIC-R2 ( 资源锁 )](#定义-rtic-r2--资源锁)
+    - [定义 RTIC-R1 ( 共享资源 )](#定义-rtic-r1--共享资源-)
+    - [定义 RTIC-R2 ( 资源锁 )](#定义-rtic-r2--资源锁-)
   - [3. 任务调度形式化](#3-任务调度形式化)
-    - [定义 RTIC-T1 ( 任务类型 )](#定义-rtic-t1--任务类型)
-    - [定义 RTIC-T2 ( 任务优先级 )](#定义-rtic-t2--任务优先级)
-    - [定理 SCHED-T1 ( 优先级调度 )](#定理-sched-t1--优先级调度)
+    - [定义 RTIC-T1 ( 任务类型 )](#定义-rtic-t1--任务类型-)
+    - [定义 RTIC-T2 ( 任务优先级 )](#定义-rtic-t2--任务优先级-)
+    - [定理 SCHED-T1 ( 优先级调度 )](#定理-sched-t1--优先级调度-)
   - [4. 优先级 Ceiling Protocol](#4-优先级-ceiling-protocol)
-    - [定义 PCP-1 ( 资源天花板 )](#定义-pcp-1--资源天花板)
-    - [定义 PCP-2 ( 优先级继承 )](#定义-pcp-2--优先级继承)
-    - [定理 PCP-T1 ( 无死锁 )](#定理-pcp-t1--无死锁)
-    - [定理 PCP-T2 ( 无优先级反转 )](#定理-pcp-t2--无优先级反转)
+    - [定义 PCP-1 ( 资源天花板 )](#定义-pcp-1--资源天花板-)
+    - [定义 PCP-2 ( 优先级继承 )](#定义-pcp-2--优先级继承-)
+    - [定理 PCP-T1 ( 无死锁 )](#定理-pcp-t1--无死锁-)
+    - [定理 PCP-T2 ( 无优先级反转 )](#定理-pcp-t2--无优先级反转-)
   - [5. 定理与证明](#5-定理与证明)
-    - [定理 RTIC-T1 ( 零成本抽象 )](#定理-rtic-t1--零成本抽象)
-    - [定理 RTIC-T2 ( 数据竞争自由 )](#定理-rtic-t2--数据竞争自由)
-    - [定理 RTIC-T3 ( 内存安全 )](#定理-rtic-t3--内存安全)
+    - [定理 RTIC-T1 ( 零成本抽象 )](#定理-rtic-t1--零成本抽象-)
+    - [定理 RTIC-T2 ( 数据竞争自由 )](#定理-rtic-t2--数据竞争自由-)
+    - [定理 RTIC-T3 ( 内存安全 )](#定理-rtic-t3--内存安全-)
   - [6. 代码示例](#6-代码示例)
     - [示例1: 基本结构](#示例1-基本结构)
     - [示例2: 定时器任务](#示例2-定时器任务)
     - [示例3: 中断驱动任务](#示例3-中断驱动任务)
     - [示例4: 资源锁](#示例4-资源锁)
   - [RTIC vs Embassy对比](#rtic-vs-embassy对比)
-  - **状态**: ✅ 已对齐
+  - [**状态**: ✅ 已对齐](#状态--已对齐)
   - [权威来源索引](#权威来源索引)
 
 ---
@@ -445,7 +445,7 @@ mod app {
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
@@ -460,70 +460,3 @@ mod app {
 > **来源: [ACM - Formal Verification](https://dl.acm.org/)**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
->
-> **[来源: [Iris Project](https://iris-project.org/)]**
->
-> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
->
-> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**

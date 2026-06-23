@@ -42,9 +42,9 @@ AUTHORITATIVE_VERSIONS: Dict[str, Tuple[str, str]] = {
     "expr metavariable to cfg": ("1.96.0", "宏 expr 片段传递给 cfg"),
     "never type tuple coercion": ("1.96.0", "Never 类型在 tuple 中的强制转换"),
     "if let guards": ("1.95.0", "match 守卫中的 if let"),
-    "VecDeque::truncate_front": ("1.95.0", "VecDeque 前端截断"),
-    "RefCell::try_map": ("1.95.0", "RefCell 条件映射"),
-    "int_format_into": ("1.95.0", "整数格式化到缓冲区"),
+    "VecDeque::truncate_front": ("TBD", "VecDeque 前端截断；PR #151973 FCP finished，预计 1.98+"),
+    "RefCell::try_map": ("TBD", "RefCell 条件映射；PR #152122 等待作者"),
+    "int_format_into": ("TBD", "整数格式化到缓冲区；PR #152544 已合并至 master，将进入 1.98"),
     "cfg_select": ("1.95.0", "条件编译选择宏"),
     "From<bool> for f32": ("1.68.0", "布尔到浮点转换"),
     "From<bool> for f64": ("1.68.0", "布尔到浮点转换"),
@@ -75,8 +75,9 @@ SCAN_PATTERNS: List[Tuple[str, str, int, str]] = [
     ("VecDeque::new const", r"VecDeque::new.*?const.*?1\.(\d{2})(?!\.0)\b", 1, "1.68.0"),
     ("VecDeque::new const", r"VecDeque.*?const.*?1\.(\d{2})(?!\.0)\b", 1, "1.68.0"),
 
-    # core::range
-    ("core::range", r"core::range.*?1\.(\d{2})(?!\.0)\b", 1, "1.96.0"),
+    # core::range: 仅匹配核心类型迁移（Range/RangeFrom/RangeToInclusive/RangeInclusive），
+    # 排除 1.98 才迁移的 RangeFull/RangeTo/legacy 等子特性，避免误报。
+    ("core::range", r"core::range(?:(?!RangeFull|RangeTo\b|legacy).)*?1\.(\d{2})(?!\.0)\b", 1, "1.96.0"),
     ("core::range", r"RangeIter.*?1\.(\d{2})(?!\.0)\b", 1, "1.96.0"),
 
     # async fn in trait
@@ -136,6 +137,15 @@ class Report:
 # 扫描逻辑
 # ============================================================================
 
+def normalize_version(version: str) -> str:
+    """将版本号标准化为 `major.minor` 形式，忽略补丁版本。
+
+    例如 `1.96.0` → `1.96`，`1.96` → `1.96`。
+    """
+    parts = version.split(".")
+    return ".".join(parts[:2])
+
+
 def scan_file(path: Path, report: Report, fix_suggestions: bool = False) -> None:
     """扫描单个文件中的版本声明。"""
     try:
@@ -169,7 +179,7 @@ def scan_file(path: Path, report: Report, fix_suggestions: bool = False) -> None
                 groups = match.groups()
                 if len(groups) >= group_idx:
                     claimed = f"1.{groups[group_idx - 1]}"
-                    if claimed != expected_version:
+                    if normalize_version(claimed) != normalize_version(expected_version):
                         # 判断严重程度：相差越大越严重
                         claimed_minor = int(groups[group_idx - 1])
                         expected_minor = int(expected_version.split(".")[1])

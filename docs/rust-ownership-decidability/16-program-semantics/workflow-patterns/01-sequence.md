@@ -803,7 +803,7 @@ let nested = sequence(
 在 Rust 中，顺序模式不仅是语言的基本控制流语义，更是通过所有权和移动语义在编译期获得形式化验证。Rust 编译器拒绝任何破坏顺序约束的代码，使得顺序执行的正确性从运行时检查前移至编译期保证。
 
 > 来源: [Rust Reference - Ownership](https://doc.rust-lang.org/reference/)
-> 来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)
+> 来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)
 
 ---
 
@@ -847,7 +847,7 @@ let nested = sequence(
 > **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
 > **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 > **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)**

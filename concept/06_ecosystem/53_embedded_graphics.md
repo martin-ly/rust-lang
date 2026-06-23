@@ -3,19 +3,15 @@
 > **EN**: Embedded Graphics Development with Rust
 > **Summary**: Embedded Graphics: Rust ecosystem tools, crates, and engineering practices.
 > **内容分级**: [综述级]
-
 > **代码状态**: [综述级 — 待补充代码]
-
 >
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
-
 > **来源**: [embedded-graphics](https://docs.rs/embedded-graphics/) · [lvgl-rs](https://docs.rs/lvgl/)
 
 ## 📑 目录
 
-- [Rust 嵌入式图形系统开发](#rust-嵌入式图形系统开发)
+- [Rust 嵌入式图形开发](#rust-嵌入式图形开发)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 嵌入式显示系统架构](#11-嵌入式显示系统架构)

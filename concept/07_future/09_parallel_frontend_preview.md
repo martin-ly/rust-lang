@@ -24,7 +24,7 @@
 
 > **来源**: [Rust Compiler Team — Parallel Frontend](https://github.com/rust-lang/compiler-team/issues/) ·
 > [Rust Internals — Parallel Compilation](https://internals.rust-lang.org/) ·
-> [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) ·
+> [Rust Project Goals 2026 — Parallel Frontend](https://rust-lang.github.io/rust-project-goals/2026/parallel-front-end.html) ·
 > [Cargo Parallel Compilation](https://doc.rust-lang.org/cargo/reference/profiles.html)
 
 ## 📑 目录
@@ -302,7 +302,7 @@ graph TD
 > 并行前端的稳定化路径参考 Cargo 的并行构建（已稳定）。
 > 关键挑战是**保证编译输出的确定性**和**处理边缘情况的正确性**。
 > 预期 2027 年可在 nightly 默认启用，2028+ 稳定化。
-> [来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]
+> [来源: [Rust Project Goals 2026 — Parallel Frontend](https://rust-lang.github.io/rust-project-goals/2026/parallel-front-end.html)]
 
 ---
 
@@ -322,7 +322,7 @@ graph TD
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [Rust Compiler Team](https://github.com/rust-lang/compiler-team/) | ✅ 一级 | 编译器开发团队 |
-| [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) | ✅ 一级 | 官方项目目标 |
+| [Rust Project Goals 2026 — Parallel Frontend](https://rust-lang.github.io/rust-project-goals/2026/parallel-front-end.html) | ✅ 一级 | 官方项目目标 |
 | [Salsa Documentation](https://salsa-rs.github.io/salsa/) | ✅ 一级 | 查询系统框架 |
 | [Rust Reference — Compiler](https://rustc-dev-guide.rust-lang.org/overview.html) | ✅ 一级 | 编译器架构 |
 | [Rust Internals Forum](https://internals.rust-lang.org/) | ⚠️ 二级 | 设计讨论 |

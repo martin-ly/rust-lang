@@ -20,6 +20,10 @@
   - [📚 内容](#-内容)
   - [🎯 学习路径](#-学习路径)
   - [🚀 相关层](#-相关层)
+  - [📚 模块 8: 国际化对齐](#-模块-8-国际化对齐)
+    - [8.1 官方来源](#81-官方来源)
+    - [8.2 学术/工业来源](#82-学术工业来源)
+    - [8.3 社区资源](#83-社区资源)
 
 > **Bloom 层级**: 理解
 > **Rust 宏编程：声明式宏与过程宏**
@@ -65,7 +69,6 @@
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ## 📚 模块 8: 国际化对齐
 
 > 本模块按项目模板补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
@@ -82,7 +85,7 @@
 
 | 来源 | 说明 |
 |:---|:---|
-| [RFC 1584 — Macros Literal Matcher](https://rust-lang.github.io/rfcs/1584-macros-literal-matcher.html) | 宏字面量匹配 |
+| [RFC 1584 — Macros Literal Matcher](https://rust-lang.github.io/rfcs/1584-macros.html) | 宏字面量匹配 |
 
 ### 8.3 社区资源
 
@@ -90,4 +93,3 @@
 |:---|:---|
 | [The Little Book of Rust Macros](https://veykril.github.io/tlborm/) | 宏进阶教程 |
 | [Rust Cookbook — Macros](https://rust-lang-nursery.github.io/rust-cookbook/) | 宏模式 |
-

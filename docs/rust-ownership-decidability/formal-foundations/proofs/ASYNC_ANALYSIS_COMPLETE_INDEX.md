@@ -16,10 +16,10 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Async Rust 全面形式化分析 - 完整索引](#async-rust-全面形式化分析---完整索引)
-  - [📑 目录](#目录)
-  - [📚 文档索引](#文档索引)
+  - [📑 目录](#-目录)
+  - [📚 文档索引](#-文档索引)
     - [核心文档](#核心文档)
-  - [🎯 覆盖主题全景](#覆盖主题全景)
+  - [🎯 覆盖主题全景](#-覆盖主题全景)
     - [1. 语法层面 (Syntax)](#1-语法层面-syntax)
     - [2. 编译转换 (Compilation)](#2-编译转换-compilation)
     - [3. 运行时架构 (Runtime)](#3-运行时架构-runtime)
@@ -28,26 +28,25 @@
     - [6. 执行流程 (Execution Flow)](#6-执行流程-execution-flow)
     - [7. 特性与对比 (Features \& Comparison)](#7-特性与对比-features--comparison)
     - [8. 边界情况 (Edge Cases)](#8-边界情况-edge-cases)
-  - [🧮 定理汇总](#定理汇总)
+  - [🧮 定理汇总](#-定理汇总)
     - [内存安全 (5个)](#内存安全-5个)
     - [执行正确性 (5个)](#执行正确性-5个)
     - [调度算法 (5个)](#调度算法-5个)
     - [等价性 (5个)](#等价性-5个)
     - [并发模型 (5个)](#并发模型-5个)
     - [取消安全 (3个)](#取消安全-3个)
-  - [📊 代码实现清单](#代码实现清单)
+  - [📊 代码实现清单](#-代码实现清单)
     - [核心抽象实现](#核心抽象实现)
     - [执行器实现](#执行器实现)
     - [同步原语](#同步原语)
     - [IO与Reactor](#io与reactor)
-  - [🎓 学习路径](#学习路径)
+  - [🎓 学习路径](#-学习路径)
     - [初学者路径](#初学者路径)
     - [进阶路径](#进阶路径)
     - [研究者路径](#研究者路径)
-  - [🔑 核心洞见总结](#核心洞见总结)
-  - [📈 统计信息](#统计信息)
+  - [🔑 核心洞见总结](#-核心洞见总结)
+  - [📈 统计信息](#-统计信息)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引)
 
 ## 📚 文档索引
@@ -498,7 +497,7 @@ CANCELPOINT-1:        取消只应在状态一致点发生
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
@@ -510,27 +509,6 @@ CANCELPOINT-1:        取消只应在状态一致点发生
 
 > **来源: [Tokio Documentation](https://tokio.rs/)**
 
-> **来源: [RFC 2394 - Async/Await](https://rust-lang.github.io/rfcs/2394-2394-async_await.html)**
-
----
-
-## 权威来源索引
-
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
->
-> **[来源: [Iris Project](https://iris-project.org/)]**
->
-> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
->
-> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
->
-> **[来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]**
->
-> **[来源: [Tokio Documentation](https://docs.rs/tokio/latest/tokio/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
+> **来源: [RFC 2394 - Async/Await](https://rust-lang.github.io/rfcs/2394-async_await.html)**
 
 ---

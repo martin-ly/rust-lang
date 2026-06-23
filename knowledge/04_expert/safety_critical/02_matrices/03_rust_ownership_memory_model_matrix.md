@@ -550,7 +550,7 @@ static mut BUFFER: FixedBuffer<1024> = FixedBuffer::new();
 
 | 来源 | 类型 | 说明 |
 |:---|:---|:---|
-| [TRPL Ch04 — Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html) | 权威来源 | 所有权基础 |
+| [TRPL Ch04 — Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) | 权威来源 | 所有权基础 |
 | [Rustonomicon — Ownership](https://doc.rust-lang.org/nomicon/ownership.html) | 权威来源 | 所有权高级话题 |
 
 ### 8.2 学术来源

@@ -412,7 +412,7 @@ Rust 如何表达计算的控制结构？从结构化控制到异常处理到异
 | **函数返回** | `return` / 尾表达式 | 表达式块有值 | ✅ | 返回类型检查 |
 | **闭包** | `\|x\| x + 1` | 捕获环境，匿名函数 | ✅ 单态化 | `Fn`/`FnMut`/`FnOnce` |
 
-> **来源**: [Rust Reference: Expressions](https://doc.rust-lang.org/reference/) · [RFC 243: trait-based exception handling](https://rust-lang.github.io/rfcs/0243-0243-trait-based-exception-handling.html) · [RFC 3668: AsyncFn](https://github.com/rust-lang/rfcs/pull/3668)
+> **来源**: [Rust Reference: Expressions](https://doc.rust-lang.org/reference/) · [RFC 243: trait-based exception handling](https://rust-lang.github.io/rfcs/0243-trait-based-exception-handling.html) · [RFC 3668: AsyncFn](https://github.com/rust-lang/rfcs/pull/3668)
 
 ### 5.4 刻意缺失的控制流特性
 
@@ -706,7 +706,7 @@ Rust 如何组合代码、隐藏实现细节、创建可复用抽象？从函数
 | **Type Alias** | 语义等价 | 实现细节暴露 | ✅ | 无 |
 | **Newtype** | 包装 + Deref | 完全隐藏内部 | ✅ | 无 |
 
-> **来源**: [Rust Reference: Macros](https://doc.rust-lang.org/reference/) · [Rust Reference: Items](https://doc.rust-lang.org/reference/) · [RFC 1584: macros 2.0](https://rust-lang.github.io/rfcs/1584-1584-macros-literal-matcher.html)
+> **来源**: [Rust Reference: Macros](https://doc.rust-lang.org/reference/) · [Rust Reference: Items](https://doc.rust-lang.org/reference/) · [RFC 1584: macros 2.0](https://rust-lang.github.io/rfcs/1584-macros.html)
 
 ### 8.4 元编程表达力：宏系统
 

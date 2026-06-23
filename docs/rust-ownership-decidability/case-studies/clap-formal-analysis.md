@@ -18,22 +18,22 @@
   - [目录](#目录)
   - [1. 引言](#1-引言)
   - [2. 派生宏系统](#2-派生宏系统)
-    - [定义 DERIVE-1 ( 结构体派生 )](#定义-derive-1--结构体派生)
-    - [定义 DERIVE-2 ( 属性映射 )](#定义-derive-2--属性映射)
-    - [定理 DERIVE-T1 ( 完备解析 )](#定理-derive-t1--完备解析)
+    - [定义 DERIVE-1 ( 结构体派生 )](#定义-derive-1--结构体派生-)
+    - [定义 DERIVE-2 ( 属性映射 )](#定义-derive-2--属性映射-)
+    - [定理 DERIVE-T1 ( 完备解析 )](#定理-derive-t1--完备解析-)
   - [3. 参数类型](#3-参数类型)
-    - [定义 ARG-1 ( 位置参数 )](#定义-arg-1--位置参数)
-    - [定义 ARG-2 ( 可选参数 )](#定义-arg-2--可选参数)
-    - [定理 ARG-T1 ( 类型转换安全 )](#定理-arg-t1--类型转换安全)
+    - [定义 ARG-1 ( 位置参数 )](#定义-arg-1--位置参数-)
+    - [定义 ARG-2 ( 可选参数 )](#定义-arg-2--可选参数-)
+    - [定理 ARG-T1 ( 类型转换安全 )](#定理-arg-t1--类型转换安全-)
   - [4. 验证与约束](#4-验证与约束)
-    - [定义 VALIDATE-1 ( 值验证 )](#定义-validate-1--值验证)
-    - [定义 VALIDATE-2 ( 组合约束 )](#定义-validate-2--组合约束)
+    - [定义 VALIDATE-1 ( 值验证 )](#定义-validate-1--值验证-)
+    - [定义 VALIDATE-2 ( 组合约束 )](#定义-validate-2--组合约束-)
   - [5. 子命令](#5-子命令)
-    - [定义 SUBCMD-1 ( 子命令枚举 )](#定义-subcmd-1--子命令枚举)
-    - [定理 SUBCMD-T1 ( 互斥性 )](#定理-subcmd-t1--互斥性)
+    - [定义 SUBCMD-1 ( 子命令枚举 )](#定义-subcmd-1--子命令枚举-)
+    - [定理 SUBCMD-T1 ( 互斥性 )](#定理-subcmd-t1--互斥性-)
   - [6. 定理与证明](#6-定理与证明)
-    - [定理 CLAP-T1 ( 零运行时开销 )](#定理-clap-t1--零运行时开销)
-    - [定理 CLAP-T2 ( 类型安全保证 )](#定理-clap-t2--类型安全保证)
+    - [定理 CLAP-T1 ( 零运行时开销 )](#定理-clap-t1--零运行时开销-)
+    - [定理 CLAP-T2 ( 类型安全保证 )](#定理-clap-t2--类型安全保证-)
   - [7. 代码示例](#7-代码示例)
     - [示例1: 完整CLI](#示例1-完整cli)
     - [示例2: 高级验证](#示例2-高级验证)
@@ -372,7 +372,7 @@ fn validate_host(s: &str) -> Result<String, String> {
 ## 权威来源索引
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**

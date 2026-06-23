@@ -9,7 +9,7 @@
 > **对齐日期**: 2026-05-12
 > **难度**: 中高级
 > **学习目标**: 掌握Rust类型系统最强大的应用，实现编译时状态验证
-> **来源: [Rust Reference - Types](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)** · **来源: [Rust Design Patterns Book](https://rust-lang.github.io/design-patterns/)** · **来源: [Wikipedia - Finite-state Machine](https://en.wikipedia.org/wiki/Finite_state_Machine)** · **来源: [TRPL Ch. 10](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html)** · **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
+> **来源: [Rust Reference - Types](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)** · **来源: [Rust Design Patterns Book](https://rust-unofficial.github.io/patterns/)** · **来源: [Wikipedia - Finite-state Machine](https://en.wikipedia.org/wiki/Finite_state_Machine)** · **来源: [TRPL Ch. 10](https://doc.rust-lang.org/book/ch10-00-generics.html)** · **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 
 ---
 
@@ -1522,7 +1522,7 @@ query _ = return []
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
@@ -1541,7 +1541,7 @@ query _ = return []
 > **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
 > **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
 

@@ -70,7 +70,7 @@ Rust基金会:
 │   └── https://www.rust-lang.org/governance/wg-safety-critical
 │
 ├── 安全工作组
-│   └── https://www.rust-lang.org/governance/wg-secure-code
+│   └── https://github.com/rust-secure-code/wg
 │
 └── 嵌入式工作组
     └── https://github.com/rust-embedded/wg

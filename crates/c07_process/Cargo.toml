@@ -18,7 +18,8 @@ serde = { workspace = true }
 serde_json = { workspace = true }
 nix = { workspace = true, features = ["process", "user", "signal"], optional = true }
 libc = { workspace = true }
-memmap2 = "0.9.10"
+# 2026-06-23: 0.9.10 -> 0.9.11 (cargo update)
+memmap2 = "0.9.11"
 shared_memory = "0.12.4"
 signal-hook = "0.4.4"
 common = { workspace = true, features = ["serde", "error-trait", "async"] }

@@ -205,7 +205,7 @@ if let Some(ref s) = value && let Ok(n) = s.parse::<i32>() {
 - **match guard**：需要对多个不同模式做不同处理
 - **let chains**：只需二值分支（满足/不满足）
 
-来源: [Rust Design Patterns](https://rust-lang.github.io/design-patterns/)
+来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 
 ---
 

@@ -1,5 +1,4 @@
 >
-
 > **代码状态**: ✅ 含可编译示例
 
 # 日志与可观测性：Rust 服务端监控生态
@@ -25,7 +24,6 @@
 > [OpenTelemetry [来源: [opentelemetry.io](https://opentelemetry.io/)] Rust](<https://github.com/open-telemetry/opentelemetry-rust>) ·
 > [tokio/tracing](https://github.com/tokio-rs/tracing) ·
 > [Prometheus Rust Client](https://github.com/prometheus/client_rust)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录

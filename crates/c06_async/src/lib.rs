@@ -354,6 +354,8 @@ pub mod archive;
 pub mod afit_dyn_tracking;
 /// Async Closures 实现模块 (1.85.0+ 稳定)
 pub mod async_closures_preview;
+/// Async Closures 可编译示例 (1.85.0+ stable, 对应 concept/03_advanced/24_async_closures.md)
+pub mod async_closures_stable;
 // AFIDT 跟踪模块 (rust-lang/rust#133119, nightly)
 // ============================================================================
 // 异步生态系统模块 (Async Ecosystem)

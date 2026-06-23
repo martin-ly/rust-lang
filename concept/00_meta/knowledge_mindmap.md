@@ -236,7 +236,6 @@ mindmap
 > **文档版本**: 1.1
 > **最后更新**: 2026-05-21
 > **状态**: ✅ 全局思维导图 v1.1 — 新增相关概念链接
-
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 
@@ -251,9 +250,7 @@ mindmap
 | Knowledge Mindmap 结构化定义 ⟹ 学习者认知锚点可建立 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |
 
 > **过渡**: 利用本文件的导航结构，读者可以从当前位置快速跃迁到任意概念层级，实现非线性学习。
-
 > **过渡**: Rust 知识体系全局思维导图（Knowledge Mindmap） 的维护需要与概念内容同步更新，确保元数据与实际知识体系的一致性。
-
 > **过渡**: 将 Rust 知识体系全局思维导图（Knowledge Mindmap） 作为学习起点或复习锚点，有助于建立全局视野，避免陷入局部细节而忽视整体架构。
 
 ### 反命题与边界

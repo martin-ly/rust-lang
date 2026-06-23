@@ -24,13 +24,22 @@
 ## 📑 目录
 
 - [rustc 编译器诊断与 UI Tests](#rustc-编译器诊断与-ui-tests)
+  - [📑 目录](#-目录)
   - [一、诊断的组成部分](#一诊断的组成部分)
   - [二、`Diag` 与诊断等级](#二diag-与诊断等级)
   - [三、Span 与建议（Suggestions）](#三span-与建议suggestions)
   - [四、Lint 与 Lint Pass](#四lint-与-lint-pass)
+    - [Lint 定义](#lint-定义)
+    - [Lint Pass](#lint-pass)
   - [五、Error Codes 与 `--explain`](#五error-codes-与---explain)
   - [六、UI Tests 与 `--bless`](#六ui-tests-与---bless)
+    - [UI Test 是什么](#ui-test-是什么)
+    - [`--bless`](#--bless)
   - [嵌入式测验](#嵌入式测验)
+    - [测验 1：一条 rustc 诊断至少包含哪三个核心部分？](#测验-1一条-rustc-诊断至少包含哪三个核心部分)
+    - [测验 2：`Applicability::MachineApplicable` 表示什么？](#测验-2applicabilitymachineapplicable-表示什么)
+    - [测验 3：Late lint pass 相比 Early lint pass 的主要优势是什么？](#测验-3late-lint-pass-相比-early-lint-pass-的主要优势是什么)
+    - [测验 4：`--bless` 在 UI testing 中的作用是什么？](#测验-4--bless-在-ui-testing-中的作用是什么)
   - [权威来源索引](#权威来源索引)
 
 ---

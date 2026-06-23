@@ -517,7 +517,7 @@ let pin: Pin<Box<String>> = Box::pin(String::from("hello"));
 // String 在堆上分配，Pin 保证其地址不变，直到 Box 被 drop
 ```
 
-> **[Rust Reference: Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html) · [RFC 2349](https://rust-lang.github.io/rfcs/2349-2349-pin.html)** 栈 `Pin<&mut T>` 的生命周期受借用约束，堆 `Pin<Box<T>>` 通过 `Box::pin` 获得长期地址稳定性。 ✅
+> **[Rust Reference: Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html) · [RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html)** 栈 `Pin<&mut T>` 的生命周期受借用约束，堆 `Pin<Box<T>>` 通过 `Box::pin` 获得长期地址稳定性。 ✅
 
 | 维度 | 栈 `Pin<&mut T>` | 堆 `Pin<Box<T>>` |
 |:---|:---|:---|
@@ -570,7 +570,7 @@ impl SelfReferential {
   ⟹ 自引用字段（如 ptr: *const String）始终指向有效地址
 ```
 
-> **来源: [RFC 2349](https://rust-lang.github.io/rfcs/2349-2349-pin.html)** `PhantomPinned` 是一个零大小类型，仅用于将包含它的类型标记为 `!Unpin`。这不是运行时标记，而是类型系统标记——编译器在 trait 自动推导时将 `PhantomPinned` 视为"不可安全移动"的信号。✅
+> **来源: [RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html)** `PhantomPinned` 是一个零大小类型，仅用于将包含它的类型标记为 `!Unpin`。这不是运行时标记，而是类型系统标记——编译器在 trait 自动推导时将 `PhantomPinned` 视为"不可安全移动"的信号。✅
 > **[来源: PLDI 2024 · RefinedRust]** Pin 的形式化语义对应于分离逻辑中的 "location stability"：地址一旦被分配，就在该对象的整个生命周期内保持不变。这与 Rust 的 `&mut T` 可移动形成对比——`Pin` 通过类型系统剥夺了 `&mut T` 的移动能力。
 
 ---
@@ -1518,7 +1518,7 @@ impl SelfRef {
 
 **Pin 投影的形式化保证**：
 
-> **[RFC 2349](https://rust-lang.github.io/rfcs/2349-2349-pin.html) · [Rust Reference: Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html)** Pin 投影保持 `!Unpin` 类型的地址稳定性，是自引用结构在 Safe Rust 中安全表达的基础。 ✅
+> **[RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html) · [Rust Reference: Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html)** Pin 投影保持 `!Unpin` 类型的地址稳定性，是自引用结构在 Safe Rust 中安全表达的基础。 ✅
 
 ```text
 给定: Pin<P<T>>, T: !Unpin
@@ -1535,7 +1535,7 @@ impl SelfRef {
 
 **核心问题**：投影后的类型是什么？
 
-> **[Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) · [Rust RFCs](https://github.com/rust-lang/rfcs)** Field Projection 允许所有智能指针直接访问字段而不丢失容器语义。 ✅
+> **[Rust Project Goals 2026 — Field Projections](https://rust-lang.github.io/rust-project-goals/2026/field-projections.html) · [Rust RFCs](https://github.com/rust-lang/rfcs)** Field Projection 允许所有智能指针直接访问字段而不丢失容器语义。 ✅
 
 | 容器类型 | 当前访问 | 投影后类型（提案） | 关键约束 |
 |:---|:---|:---|:---|
@@ -1604,7 +1604,7 @@ Box<MaybeUninit<T>>.field → Box<MaybeUninit<FieldType>>
 
 **关键跟踪**：
 
-- [Rust Project Goals: Beyond the &](https://rust-lang.github.io/rust-project-goals/2026/)
+- [Rust Project Goals: Beyond the &](https://rust-lang.github.io/rust-project-goals/2026/roadmap-beyond-the-ampersand.html)
 - Tracking Issue: Arbitrary Self Types v2
 - WG: Safe Pin Projection (formal verification)
 

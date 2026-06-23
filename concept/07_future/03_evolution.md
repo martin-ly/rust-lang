@@ -1269,7 +1269,7 @@ fn fixed() {
 > **关键洞察**:
 > "Beyond the `&`" 标志着 Rust 类型系统从"编译器内置规则"向"用户可扩展规则"演进。
 > 如果成功，`Pin` 将成为普通库类型（而非魔法类型），字段投影将支持用户自定义逻辑——这类似于 C++ 的 `operator->` 但更类型安全。
-> [来源: [Rust Project Goals 2026 — Beyond the &](https://rust-lang.github.io/rust-project-goals/2026/)]
+> [来源: [Rust Project Goals 2026 — Beyond the &](https://rust-lang.github.io/rust-project-goals/2026/index.html#beyond-the-)]
 
 ### 6.2 旗舰二：Flexible, fast(er) compilation（灵活快速编译）
 
@@ -1285,7 +1285,7 @@ fn fixed() {
 > **关键洞察**:
 > Cranelift backend 的成功将改变 Rust 的工具链格局——debug 构建用 Cranelift（快），release 构建用 LLVM（优）。
 > 这要求 Rust 的中间表示（MIR）成为**真正的后端无关规范**，为形式化验证工具（如 Kani、Miri）提供统一的语义锚点。
-> [来源: [Rust Project Goals 2026 — Compilation](https://rust-lang.github.io/rust-project-goals/2026/)]
+> [来源: [Rust Project Goals 2026 — Compilation](https://rust-lang.github.io/rust-project-goals/2026/index.html#flexible-faster-compilation)]
 
 ### 6.3 旗舰三：Higher-level Rust（高阶 Rust）
 
@@ -1299,7 +1299,7 @@ fn fixed() {
 > **关键洞察**:
 > Ergonomic ref-counting 是 Rust 向"更高表达力"演进的关键一步。
 > 如果编译器能自动推断"这个类型应该克隆而非移动"，则 Rust 的类型系统实际上在进行**轻量级效果推断**——这是 Effects 系统（§6.4）的简化预览。
-> [来源: [Rust Project Goals 2026 — Higher-level Rust](https://rust-lang.github.io/rust-project-goals/2026/)]
+> [来源: [Rust Project Goals 2026 — Higher-level Rust](https://rust-lang.github.io/rust-project-goals/2026/index.html#higher-level-rust)]
 
 ### 6.4 旗舰四：Unblocking Dormant Traits（释放沉睡 Trait）
 
@@ -1317,7 +1317,7 @@ fn fixed() {
 > 与第一代（基于作用域）和 NLL（基于数据流点）相比，Polonius 使用**关系代数**表达借用关系，理论上更精确但计算成本更高。
 > 其稳定化将解决当前大量 "lifetime too short" 的误报，但也可能引入新的 soundness 边界——这是形式化验证社区密切关注的焦点。
 > [来源: [Polonius README](https://github.com/rust-lang/polonius)] ·
-> [来源: [Rust Project Goals 2026 — Dormant Traits](https://rust-lang.github.io/rust-project-goals/2026/)]
+> [来源: [Rust Project Goals 2026 — Dormant Traits](https://rust-lang.github.io/rust-project-goals/2026/index.html#unblocking-dormant-traits)]
 
 ### 6.5 其他值得关注的 2026 目标
 
@@ -1401,7 +1401,7 @@ fn fixed() {
 >
 > **权威来源**:
 >
-> [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) ·
+> [Rust Project Goals 2026 — Safety-Critical Rust](https://rust-lang.github.io/rust-project-goals/2026/roadmap-safety-critical-rust.html) ·
 > [Rust Blog — Project Goals Update 2026-04](https://blog.rust-lang.org/) ·
 > [Polonius Repository](https://github.com/rust-lang/polonius) ·
 > [Cranelift Documentation](https://cranelift.dev/) ·
@@ -1841,6 +1841,7 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 **[Rust Foundation, 2025-09-03]** 在 RustConf 2025 上，Arm 宣布将其 Rust Foundation 会员级别从 Silver 提升至 Platinum。Arm 是 Rust Foundation 创始成员之一，长期贡献 Rust 项目，此次升级反映其将 Rust 视为 AI、云、嵌入式与 IoT 时代基础设施核心语言的判断。
 
 **Arm 声明要点**：
+
 - 在 AI 时代，为开发者提供稳健可靠的创新基础比以往更重要
 - 加深对 Rust Foundation 使命的支持，帮助强化、保障并扩大 Rust 的影响力
 
@@ -1864,12 +1865,14 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 **[Rust Foundation / Inside Rust Blog, 2026-03-25]** Carol Nichols 与 David Wood 发布 1–2 月董事会合并更新，披露基金会工程团队在多个关键项目上的进展。
 
 **工程与安全**：
+
 - `cargo-capslock`：已开发用于对 Rust 二进制执行静态与运行时能力分析
 - crates.io Security Tab：漏洞呈现功能已接受、合并并上线；计划补充 CVSS 评分信息
 - crates.io 前端：从 EmberJS 迁移到 Svelte
 - C++ 互操作：2026 年行动计划聚焦“C++ 内存安全子集”与问题空间映射
 
 **治理与运营**：
+
 - 新任 Infra Engineer Ubiratan Soares 于 1 月 19 日入职（Sovereign Tech Agency 资助）
 - 讨论并明确 Rust Innovation Lab 入选标准
 - 规划 End User Group，加强商业用户、基金会与 Project 之间的互惠关系
@@ -1889,6 +1892,7 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 | Project Fellowships | 10 | 支持 Rust Project 团队与工作组的常规贡献 |
 
 **代表性项目目标**：
+
 - 减少 Clippy 误报（Jason Newcomb）
 - 推进 rust-analyzer 稳定性与重构（Jiayan / roife）
 - 稳定 `adt_const_params` 与改进 `generic_const_exprs`（Boxy）

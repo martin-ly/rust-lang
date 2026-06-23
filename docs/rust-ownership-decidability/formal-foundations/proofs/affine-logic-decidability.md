@@ -611,7 +611,7 @@ struct TypeEnv {
 
 4. **Damas, L., & Milner, R.** (1982). Principal type-schemes for functional programs. *POPL*.
 
-5. **Rust Reference** (2024). Type inference. <https://doc.rust-lang.org/reference/type-inference.html>
+5. **Rust Reference** (2024). Type inference. <https://doc.rust-lang.org/reference/statements.html>
 
 ---
 
@@ -648,7 +648,7 @@ struct TypeEnv {
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 

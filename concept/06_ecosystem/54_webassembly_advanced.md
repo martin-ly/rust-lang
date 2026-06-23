@@ -3,17 +3,14 @@
 > **EN**: Advanced WebAssembly Development with Rust
 > **Summary**: Webassembly Advanced: Rust ecosystem tools, crates, and engineering practices.
 > **内容分级**: [专家级]
-
 > **代码状态**: ✅ 含可编译示例
-
 >
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
-
 > **来源**: [Rust and WebAssembly Book](https://rustwasm.github.io/book/) · [wasm-bindgen](https://docs.rs/wasm-bindgen/) · [Wasmtime Rust API](https://docs.wasmtime.dev/lang-rust.html)
 
 ## 📑 目录
 
-- [Advanced WebAssembly in Rust（高级 WebAssembly 与 Rust）](#advanced-webassembly-in-rust高级-webassembly-与-rust)
+- [Rust WebAssembly 高级开发](#rust-webassembly-高级开发)
   - [📑 目录](#-目录)
   - [一、权威定义](#一权威定义)
     - [1.1 WebAssembly 作为通用字节码](#11-webassembly-作为通用字节码)

@@ -42,7 +42,6 @@
     - [8.2 Address Sanitizer](#82-address-sanitizer)
   - [📚 延伸阅读](#-延伸阅读)
   - [📝 总结](#-总结)
-  - [**最后更新**: 2025-12-11 | **Rust 版本**: 1.92.0+](#最后更新-2025-12-11--rust-版本-1920)
 
 ## 📐 知识结构
 
@@ -550,6 +549,7 @@ cargo +nightly run
 
 **文档维护**: C06 Async Team | **质量评分**: 95/100
 **最后更新**: 2025-12-11 | **Rust 版本**: 1.92.0+
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -1034,7 +1034,7 @@ fn main() {
 
 - [rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) —— Rust 编译器开发的完整指南
 - [Rust Reference: MIR](https://doc.rust-lang.org/reference/items/functions.html) —— 中间表示的精确语义
-- [Rust Reference: Type inference](https://doc.rust-lang.org/reference/type-inference.html) —— 类型推断的算法描述
+- [Rust Reference: Type inference](https://doc.rust-lang.org/reference/statements.html) —— 类型推断的算法描述
 
 ### 学术来源（一级来源）
 >

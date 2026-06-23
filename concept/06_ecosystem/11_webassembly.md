@@ -1,5 +1,4 @@
 >
-
 > **代码状态**: ✅ 含可编译示例
 
 # WebAssembly 生态：Rust 的浏览器外运行时
@@ -18,7 +17,6 @@
 > 组件模型以及 Rust 作为 Wasm 首选语言的工程原因。
 > **前置概念**: [Toolchain](./01_toolchain.md) · [FFI](../03_advanced/05_rust_ffi.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [WASI](./08_wasi.md)
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -27,7 +25,6 @@
 > [wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/) ·
 > [Bytecode Alliance](https://bytecodealliance.org/) ·
 > [W3C WebAssembly](https://www.w3.org/wasm/)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录

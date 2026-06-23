@@ -1,7 +1,6 @@
 # Formal Ecosystem Tower（Rust 生态形式化分层塔）
 
 > **代码状态**: ✅ 含可编译示例
-
 >
 > **EN**: Formal Methods
 > **Summary**: Formal Methods. Guide to 05 Formal Ecosystem Tower.
@@ -30,7 +29,6 @@
 ---
 
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 权威定义
@@ -39,10 +37,8 @@
 
 > **[Wikipedia: Software framework](https://en.wikipedia.org/wiki/Software_framework)** A software framework is an abstraction in which software providing generic functionality can be selectively changed by additional user-written code, thus providing application-specific software.
 > **来源**: <https://en.wikipedia.org/wiki/Software_framework>
-
 > **[Wikipedia: Formal verification](https://en.wikipedia.org/wiki/Formal_verification)** Formal verification is the act of proving or disproving the correctness of intended algorithms underlying a system with respect to a certain formal specification or property, using formal methods of mathematics.
 > **来源**: <https://en.wikipedia.org/wiki/Formal_verification>
-
 > **[Wikipedia: Category theory](https://en.wikipedia.org/wiki/Category_theory)** Category theory is a general theory of mathematical structures and their relations. It was introduced by Samuel Eilenberg and Saunders Mac Lane in the mid-20th century.
 > **来源**: <https://en.wikipedia.org/wiki/Category_theory>
 

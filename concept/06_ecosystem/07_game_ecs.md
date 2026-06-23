@@ -1,5 +1,4 @@
 >
-
 > **代码状态**: ✅ 含可编译示例
 
 # Game Development & ECS Architecture（游戏开发与 ECS 架构）
@@ -11,10 +10,25 @@
 > **层级**: L6 应用主题
 > **A/S/P 标记**: **A+S+P** — 全维度
 > **双维定位**: P×Cre — 设计 ECS 游戏架构
-> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Lifetimes](../01_foundation/03_lifetimes.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Unsafe](../03_advanced/03_unsafe.md)
-> **后置概念**: [Application Domains](./04_application_domains.md) · [Formal Ecosystem Tower](./05_formal_ecosystem_tower.md)
-> **主要来源**: [Bevy Book] · [Bevy ECS Docs] · [Fyrox Docs] · [wgpu Documentation] · [Wikipedia: Entity component system](https://en.wikipedia.org/wiki/Entity_component_system) · [Data-Oriented Design Book] · [Niko Matsakis — Rayon Blog]
-
+> **前置概念**:
+>
+> [Ownership](../01_foundation/01_ownership.md) ·
+> [Borrowing](../01_foundation/02_borrowing.md) ·
+> [Lifetimes](../01_foundation/03_lifetimes.md) ·
+> [Traits](../02_intermediate/01_traits.md) ·
+> [Generics](../02_intermediate/02_generics.md) ·
+> [Concurrency](../03_advanced/01_concurrency.md) ·
+> [Unsafe](../03_advanced/03_unsafe.md)
+>
+> **后置概念**:
+>
+> [Application Domains](./04_application_domains.md) ·
+> [Formal Ecosystem Tower](./05_formal_ecosystem_tower.md)
+> **主要来源**:
+>
+> [Bevy Book] · [Bevy ECS Docs] · [Fyrox Docs] · [wgpu Documentation] ·
+> [Wikipedia: Entity component system](https://en.wikipedia.org/wiki/Entity_component_system) · [Data-Oriented Design Book] · [Niko Matsakis — Rayon Blog]
+>
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 

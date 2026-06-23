@@ -510,7 +510,7 @@ jobs:
 
 > **来源: [Rust Reference - Miri](https://doc.rust-lang.org/reference/)**
 
-> **来源: [RFC 2585 - Unsafe Code Guidelines](https://rust-lang.github.io/rfcs/2585-2585-unsafe-block-in-unsafe-fn.html)**
+> **来源: [RFC 2585 - Unsafe Code Guidelines](https://rust-lang.github.io/rfcs/2585-unsafe-block-in-unsafe-fn.html)**
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

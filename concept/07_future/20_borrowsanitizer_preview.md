@@ -30,7 +30,7 @@
 > [Rust Internals — BorrowSanitizer Discussion](https://internals.rust-lang.org/) ·
 > [Miri: An Interpreter for Rust's Mid-level IR](https://github.com/rust-lang/miri) ·
 > [AddressSanitizer Wiki](https://github.com/google/sanitizers/wiki/AddressSanitizer) ·
-> [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) ·
+> [Rust Project Goals 2026 — BorrowSanitizer](https://rust-lang.github.io/rust-project-goals/2026/borrowsanitizer.html) ·
 > [Tree Borrows Paper (POPL 2026)](https://perso.crans.org/vanille/treebor/) ·
 > [Stacked Borrows Paper](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
@@ -315,7 +315,7 @@ graph TD
 > **2026 年度目标**: BorrowSanitizer 是 Rust 2026 年 **33 个旗舰目标之一**（3.8 号目标）。核心目标是从研究原型过渡到**可用工具**。三个关键特性待实现：垃圾回收、错误报告、原子内存访问支持。
 > **上游化计划**: 采用分阶段策略——先上游化 LLVM 组件（定义外层 API、shadow memory 管理、错误报告），再通过弱符号被 Rust 运行时覆盖。LLVM 运行时单独测试时为空操作（no-op）。
 > **预测**: BorrowSanitizer 的工业化路径参考 AddressSanitizer。最大技术挑战是 **Shadow Stack 的性能优化**（当前仍与 Miri 同数量级，缺乏 GC 是主因）和 **LLVM RFC 的推进**。
-> [来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)] · [borrowsanitizer.com](https://borrowsanitizer.com/)]
+> [来源: [Rust Project Goals 2026 — BorrowSanitizer](https://rust-lang.github.io/rust-project-goals/2026/borrowsanitizer.html)] · [borrowsanitizer.com](https://borrowsanitizer.com/)
 
 ---
 
@@ -327,7 +327,7 @@ graph TD
 | [Miri GitHub](https://github.com/rust-lang/miri) | ✅ 一级 | 官方 MIR 解释器 |
 | [Tree Borrows Paper (POPL 2026)](https://perso.crans.org/vanille/treebor/) | ✅ 一级 | 形式化模型 |
 | [Stacked Borrows Paper](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) | ✅ 一级 | 前期形式化模型 |
-| [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) | ✅ 一级 | 官方项目目标 |
+| [Rust Project Goals 2026 — BorrowSanitizer](https://rust-lang.github.io/rust-project-goals/2026/borrowsanitizer.html) | ✅ 一级 | 官方项目目标 |
 | [Rust Internals Forum](https://internals.rust-lang.org/) | ⚠️ 二级 | 设计讨论 |
 | [AddressSanitizer Wiki](https://github.com/google/sanitizers/wiki) | 🔍 三级 | 对比参考 |
 

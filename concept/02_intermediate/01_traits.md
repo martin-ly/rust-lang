@@ -1,4 +1,6 @@
-> **内容分级**: [综述级]
+> **内容分级**:
+>
+> [综述级]
 > **本节关键术语**: 特征 (Trait) · 实现 (Implement) · 孤儿规则 (Orphan Rule) · 一致性 (Coherence) · 对象安全 (Object Safety) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 
@@ -363,7 +365,7 @@ graph TD
 
 impl<P₁...Pn> Trait<T₁...Tm> for Type
 
-> **来源**: [RFC 1023 §3 — Orphan rules formal definition](https://rust-lang.github.io/rfcs/1023-1023-rebalancing-coherence.html) · [Rust Reference: Orphan rules — Fundamental types](https://doc.rust-lang.org/reference/) · [Dreyer 2017 §3.2.2]
+> **来源**: [RFC 1023 §3 — Orphan rules formal definition](https://rust-lang.github.io/rfcs/1023-rebalancing-coherence.html) · [Rust Reference: Orphan rules — Fundamental types](https://doc.rust-lang.org/reference/) · [Dreyer 2017 §3.2.2]
 
 > **[来源: Pierce 2002 TAPL Ch.23; Wadler & Blott 1989]** Rust Trait 与 Haskell 类型类均可映射到 System F 的字典传递解释。
 
@@ -1377,7 +1379,7 @@ fn notify<T: Summary>(item: &T) { ... }
 ### 补充章节：`impl Trait` 在 Trait 定义中的使用（RPITIT / AFIT）
 
 > **[Rust Reference: Return Position Impl Trait In Traits](https://doc.rust-lang.org/reference/)** Rust 1.75 稳定了 RPITIT（Return Position Impl Trait In Traits），允许在 trait 方法签名中使用 `-> impl Trait`，编译器自动为每个实现者推导具体的关联类型。✅ 已验证
-> **[RFC 2289](https://rust-lang.github.io/rfcs/2289-2289-associated-type-bounds.html)** AFIT（Abstracted Function In Trait）将 `impl Trait` 从函数参数/返回位置扩展到 trait 定义内部，简化关联类型的使用。✅ 已验证
+> **[RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html)** AFIT（Abstracted Function In Trait）将 `impl Trait` 从函数参数/返回位置扩展到 trait 定义内部，简化关联类型的使用。✅ 已验证
 
 #### Rust 1.75+ AFIT 语法
 
@@ -1522,7 +1524,7 @@ trait Builder {
 
 **高阶限制**：RPITIT 目前**不支持**在 trait 定义中同时存在多个 `impl Trait` 返回类型或嵌套存在类型；每个方法只能有一个匿名的存在类型返回值。这保持了类型推断的可判定性——避免 System F_ω 中无限制存在类型导致的类型检查不可判定问题。
 
-> **[RFC 2289](https://rust-lang.github.io/rfcs/2289-2289-associated-type-bounds.html)** RPITIT 的设计刻意限制在"单个返回位置存在类型"，以平衡表达力与编译器实现复杂度。✅
+> **[RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html)** RPITIT 的设计刻意限制在"单个返回位置存在类型"，以平衡表达力与编译器实现复杂度。✅
 
 ---
 
@@ -2011,7 +2013,7 @@ RUSTFLAGS="-Znext-solver=globally" cargo +nightly check
 
 > **关键洞察**: Next solver 不是"新功能"，而是"基础设施升级"。它不会立即改变你能写的 Rust 代码，但它是 GATs、TAIT、specialization 等特性从 "能用但有 bug" 走向 "稳定且可靠" 的必要条件。这类似于 2024 Edition 的 `unsafe_op_in_unsafe_fn` ——表面上是小改动，实际上是对语言契约的深层强化。
 
-> **来源**: [Rust Project Goals 2026 — Next-generation trait solver](https://rust-lang.github.io/rust-project-goals/2026/) · [rustc-next-trait-solver 源码](https://github.com/rust-lang/rust/tree/master/compiler/rustc_next_trait_solver)
+> **来源**: [Rust Project Goals 2026 — Next-generation trait solver](https://rust-lang.github.io/rust-project-goals/2026/next-solver.html) · [rustc-next-trait-solver 源码](https://github.com/rust-lang/rust/tree/master/compiler/rustc_next_trait_solver)
 
 ---
 

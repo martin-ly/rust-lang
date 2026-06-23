@@ -1,14 +1,12 @@
 //! Async Closures 实现模块（Stable 1.85.0+）
-//! `AsyncFn` / `AsyncFnMut` / `AsyncFnOnce` traits 已进入 prelude。
-//! This module demonstrates async closures completewithout nightly feature gate
+//! `AsyncFn` / `AsyncFnMut` / `AsyncFnOnce` traits 在 Rust 2024 edition 中已进入 prelude。
+//! This module demonstrates async closures without nightly feature gate (stable since 1.85.0).
 //! # concept definition
 //!
 //! Async Closures (`async || {}`) 是 RFC 3668 定义的新语法，允许创建**真正的异步闭包**。
-//! Async Closures (`async || {}`) RFC 3668 definition ，**async **。
-//! 与旧范式 `|x| async move { ... }` 不同，async closures 可以捕获环境变量的引用，
-//! and `|x| async move {... }` ，async closures can environment variable reference ，
-//! 并在异步操作中保持这些引用有效。
-//! and in async in reference effective 。
+//! Async Closures (`async || {}`) per RFC 3668, stable since Rust 1.85.0.
+//! 与旧范式 `|x| async move { ... }` 不同，async closures 可以按使用自动推断捕获方式，
+//! 支持引用捕获，使得高阶异步回调的生命周期推断更精确。
 //!
 //! # 核心差异
 //! # core
@@ -18,19 +16,17 @@
 //! | 捕获方式 | `move`（所有权转移） | 借用（与常规闭包一致） |
 //! | way | `move`（ownership transfer ） | borrowing （and ） |
 //! | 返回类型 | `impl Future` | `impl AsyncFn`（关联类型） |
-//! | Send infer | complex （ bound） | infer |
-//! | dyn 兼容 | ❌ 不支持 | ❌ 不支持（当前限制） |
-//! | dyn | ❌ | ❌ （when before ） |
-//! | 稳定性 | 任何版本可用 | **1.85.0 稳定** |
-//! | | this | **1.85.0 ** |
+//! | Send 推断 | 复杂（需额外 bound） | 可通过 RTN 精确表达（nightly） |
+//! | dyn 兼容 | ✅ `Fn` 是 dyn-compatible | ❌ `AsyncFn` 当前不是 dyn-compatible |
+//! | 稳定性 | 任何版本可用 | **1.85.0 stable** |
 //!
 //! # 权威来源
 //! # Authoritative Sources
 //! - RFC: [RFC 3668](https://rust-lang.github.io/rfcs/3668-async-closures.html)
 //! - 跟踪: [rust-lang/rust#132706](https://github.com/rust-lang/rust/pull/132706)
 
-// 注意：async_closures feature 已在 lib.rs 中声明
-// #![feature(async_closures)]
+// async closures 自 Rust 1.85.0 起已 stable，无需 feature gate。
+// lib.rs 中的 #![feature(async_iterator, async_for_loop)] 仅用于其他 nightly 预研模块。
 
 #![allow(unexpected_cfgs)]
 
@@ -43,8 +39,8 @@
 /// # 基础语法
 /// # foundation
 ///
-/// ## 旧范式（Rust 1.75-1.95）
-/// ## （Rust 1.75-1.95）
+/// ## 旧范式（Rust 1.39-1.84）
+/// ## Old paradigm (Rust 1.39-1.84)
 /// ```ignore
 /// let old = |s: String| async move {
 ///     println!("{}", s);
@@ -93,8 +89,9 @@ impl AsyncClosureSyntaxExamples {
 
 /// # `AsyncFn` / `AsyncFnMut` / `AsyncFnOnce` Traits
 ///
-/// 这些 traits 已在 **Rust 1.94.0** 的 prelude 中稳定。
-/// definition async ：
+/// 这些 traits 随 async closures 一起在 **Rust 1.85.0** stable，
+/// 并在 Rust 2024 edition 中默认进入 prelude。
+/// Definition of `AsyncFn` trait family:
 ///
 /// ```ignore
 /// pub trait AsyncFn<Args> {
@@ -149,13 +146,13 @@ impl AsyncFnTraitExamples {
 
 /// # Async Closures 的限制
 /// `AsyncFn` trait 目前不是 dyn-compatible，因此不能构造 `Box<dyn AsyncFn(...)>`。
-    /// ```text
+/// ```text
 /// // 错误：AsyncFn 不是 dyn-compatible
 /// fn make_dyn() -> Box<dyn AsyncFn(i32) -> bool> {
 ///     Box::new(async |x| x > 0)
 /// }
 /// ```
-/// 
+///
 /// ## ❌ 与 `Fn() -> impl Future` 的互操作
 /// ## `Fn() -> impl Future` operation
 /// and async closures trait ，。
@@ -223,13 +220,13 @@ impl AsyncIteratorAdapterExamples {
 /// # Async Rust 范式演进
 /// Future trait (1.36)
 ///   → async/await 语法糖 (1.39)
-///     → Future/IntoFuture in prelude (1.85)
+///     → Future/IntoFuture in prelude (2024 edition / 1.85)
 ///       → AFIT: async fn in trait (1.75.0)
-///         → AsyncFn traits in prelude (1.94)
-///           → Async Closures: async || {} (1.96 FCP)
-///             → AFIDT: async fn in dyn trait (1.97+ nightly)
-///               → RTN: Return Type Notation (1.97+ RFC)
-///                 → Gen blocks / AsyncIterator (1.98+)
+///         → AsyncFn traits + async closures stable (1.85.0)
+///           → AFIDT: async fn in dyn trait (nightly, rust-lang/rust#133119)
+///             → RTN: Return Type Notation (nightly / RFC)
+///               → Async Drop (nightly)
+///                 → Gen blocks / AsyncIterator (nightly)
 /// ```
 pub struct AsyncEvolutionTimeline;
 

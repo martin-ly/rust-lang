@@ -859,7 +859,7 @@ async fn use_future() {
 
 > **来源: [TRPL Ch. 17 - Pin](https://doc.rust-lang.org/book/ch17-00-async-await.html)**
 
-> **来源: [RFC 2349 - Pin API](https://rust-lang.github.io/rfcs/2349-2349-pin.html)**
+> **来源: [RFC 2349 - Pin API](https://rust-lang.github.io/rfcs/2349-pin.html)**
 
 > **[来源: ACM - Safe Self-Referential Structures]**
 

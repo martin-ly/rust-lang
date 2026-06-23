@@ -9,7 +9,7 @@
 > **对齐日期**: 2026-05-12
 > **主题**: 编写地道Rust代码的模式与技巧
 > **目标**: 掌握Rust特有的编程范式，写出符合社区习惯的代码
-> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** · **来源: [Rust Design Patterns Book](https://rust-lang.github.io/design-patterns/)** · **来源: [Wikipedia - Programming Idiom](https://en.wikipedia.org/wiki/Programming_Idiom)** · **来源: [TRPL Ch. 18](https://doc.rust-lang.org/book/ch18-00-patterns.html)** · **[来源: Effective Rust - effective-rust.com]** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** · **来源: [Rust Design Patterns Book](https://rust-unofficial.github.io/patterns/)** · **来源: [Wikipedia - Programming Idiom](https://en.wikipedia.org/wiki/Programming_Idiom)** · **来源: [TRPL Ch. 18](https://doc.rust-lang.org/book/ch18-00-patterns.html)** · **[来源: Effective Rust - effective-rust.com]** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ---
 
@@ -1253,7 +1253,7 @@ thread::spawn(move || {
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 

@@ -179,6 +179,8 @@ Step 8: 04_error_handling.md（1h）— Result/Option/? 运算符
 --- 此时可写简单 Rust 程序 ---
 Step 9: 01_concurrency.md（2h）— Send/Sync  fearless 并发
 Step 10: 02_async.md（2h）— Future/Pin/async/await
+        入门首选：TRPL Ch17 Asynchronous Programming
+        https://doc.rust-lang.org/book/ch17-00-async-await.html
 Step 11: 02_patterns.md（1h）— Typestate/Builder/Newtype
 ```
 
@@ -394,9 +396,10 @@ Step 6: 02_async.md（1.5h）— 对比 Haskell 的 monad 和 Rust 的 async
 
 **突破策略**：
 
-1. 从 `02_async.md` 的状态机代码示例开始，手写一个简化版 Future
-2. 用 `println!` 在 `poll` 中打印状态，观察调度过程
-3. 关键心智模型：**async/await 是语法糖，底层是枚举状态机**。理解这一点比理解语法更重要。
+1. **首选官方入口**：先读 [TRPL Ch17 — Asynchronous Programming](https://doc.rust-lang.org/book/ch17-00-async-await.html)，建立异步编程的直觉。
+2. 从 `02_async.md` 的状态机代码示例开始，手写一个简化版 Future
+3. 用 `println!` 在 `poll` 中打印状态，观察调度过程
+4. 关键心智模型：**async/await 是语法糖，底层是枚举状态机**。理解这一点比理解语法更重要。
 
 ### 5.3 "形式化部分看不懂"
 
@@ -612,9 +615,7 @@ rustc 错误信息结构:
 | 分层路径 ⟹ 学习者按需进入 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |
 
 > **过渡**: 利用本文件的导航结构，读者可以从当前位置快速跃迁到任意概念层级，实现非线性学习。
-
 > **过渡**: Rust 知识体系学习指南（Learning Guide） 的维护需要与概念内容同步更新，确保元数据与实际知识体系的一致性。
-
 > **过渡**: 将 Rust 知识体系学习指南（Learning Guide） 作为学习起点或复习锚点，有助于建立全局视野，避免陷入局部细节而忽视整体架构。
 
 ### 反命题与边界

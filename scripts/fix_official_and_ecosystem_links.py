@@ -35,7 +35,7 @@ REPLACEMENTS = [
     ("https://doc.rust-lang.org/reference/panic-macro.html", "https://doc.rust-lang.org/reference/panic.html"),
     ("https://doc.rust-lang.org/reference/ownership.html", "https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html"),
     ("https://doc.rust-lang.org/reference/pointer-types.html", "https://doc.rust-lang.org/reference/types.html"),
-    ("https://doc.rust-lang.org/reference/type-inference.html", "https://doc.rust-lang.org/reference/types.html"),
+    ("https://doc.rust-lang.org/reference/statements.html", "https://doc.rust-lang.org/reference/types.html"),
     ("https://doc.rust-lang.org/reference/unsafe-op.html", "https://doc.rust-lang.org/reference/unsafe-blocks.html"),
     # RBE
     ("https://doc.rust-lang.org/rust-by-example/concurrency.html", "https://doc.rust-lang.org/rust-by-example/std_misc/threads.html"),
@@ -49,7 +49,7 @@ REPLACEMENTS = [
     ("https://doc.rust-lang.org/std/sync/atomic/struct.AtomicPtr.html", "https://doc.rust-lang.org/std/sync/atomic/AtomicPtr.html"),
     ("https://doc.rust-lang.org/std/sync/atomic/struct.AtomicUsize.html", "https://doc.rust-lang.org/std/sync/atomic/AtomicUsize.html"),
     # rust-lang.org double slash
-    ("https://www.rust-lang.org//users", "https://www.rust-lang.org/"),
+    ("https://www.rust-lang.org/", "https://www.rust-lang.org/"),
     # Chinese Rust book mirror no longer on GH pages
     ("https://rust-lang.github.io/rust-lang-cn/", "https://github.com/rust-lang-cn"),
     # wasm-pack docs moved under /docs

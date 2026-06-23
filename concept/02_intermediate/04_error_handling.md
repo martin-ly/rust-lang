@@ -21,7 +21,7 @@
 > **主要来源**: [TRPL: Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) ·
 > [Rust Reference: Errors](https://doc.rust-lang.org/reference/) ·
 > [Wikipedia: Exception handling](https://en.wikipedia.org/wiki/Exception_handling) ·
-> [RFC 243](https://rust-lang.github.io/rfcs/0243-0243-trait-based-exception-handling.html)
+> [RFC 243](https://rust-lang.github.io/rfcs/0243-trait-based-exception-handling.html)
 
 ---
 **变更日志**:
@@ -278,7 +278,7 @@ graph TD
 
 > **[TRPL Ch9.2](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html) · [Rust Reference: The ? operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator)** ? 运算符通过隐式调用 From::from 实现错误的自动转换与传播。 ✅ 已验证
 
-> **[RFC 243: The ? Operator](https://rust-lang.github.io/rfcs/0243-0243-trait-based-exception-handling.html)** The `?` operator was introduced in RFC 243 to provide ergonomic error propagation, later extended by [RFC 3058](https://rust-lang.github.io/rfcs//3058-try-trait-v2.html) for the general `Try` trait. ✅ 已验证
+> **[RFC 243: The ? Operator](https://rust-lang.github.io/rfcs/0243-trait-based-exception-handling.html)** The `?` operator was introduced in RFC 243 to provide ergonomic error propagation, later extended by [RFC 3058](https://rust-lang.github.io/rfcs//3058-try-trait-v2.html) for the general `Try` trait. ✅ 已验证
 
 ```text
 前提 1: ? 运算符展开为 match，Err 分支提前返回
@@ -498,7 +498,7 @@ fn maybe_port() -> Option<u16> {
 
 ### 5.5 补充：异步错误处理与 `poll_fn` / `TryFuture` 模式
 
-> **[RFC 243](https://rust-lang.github.io/rfcs/0243-0243-trait-based-exception-handling.html)** · **[futures-rs 文档]** · **[Rust Reference: Async](https://doc.rust-lang.org/reference/items/functions.html#async-functions)** 异步错误处理不是同步 `Result` 的简单平移——`Future` 的惰性求值、取消（cancellation）和 `Waker` 驱动模型引入了新的错误传播边界。✅
+> **[RFC 243](https://rust-lang.github.io/rfcs/0243-trait-based-exception-handling.html)** · **[futures-rs 文档]** · **[Rust Reference: Async](https://doc.rust-lang.org/reference/items/functions.html#async-functions)** 异步错误处理不是同步 `Result` 的简单平移——`Future` 的惰性求值、取消（cancellation）和 `Waker` 驱动模型引入了新的错误传播边界。✅
 
 #### `poll_fn`：将闭包提升为 Future
 
@@ -567,13 +567,13 @@ let result = select! {
 ```
 
 > **关键洞察**: 异步错误处理有**两个维度**：1) `Result` 维度的业务错误（IO 失败、解析错误）；2) **取消维度**的生命周期错误（Future 被 `select!` 丢弃时资源未清理）。`Drop` 实现负责后者，`?` 运算符负责前者，但两者在 `unsafe` 或 FFI 边界处可能交互产生 UB。
-> **来源**: [Tokio 文档: Cancellation Safety] · [RFC 243: ? in main](https://rust-lang.github.io/rfcs/0243-0243-trait-based-exception-handling.html) · [futures-rs: TryFutureExt]
+> **来源**: [Tokio 文档: Cancellation Safety] · [RFC 243: ? in main](https://rust-lang.github.io/rfcs/0243-trait-based-exception-handling.html) · [futures-rs: TryFutureExt]
 
 ---
 
 ## 六、反命题与边界分析（Counter-proposition & Boundary Analysis）
 
-> **[TRPL Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [RFC 243](https://rust-lang.github.io/rfcs/0243-0243-trait-based-exception-handling.html)** 反命题分析基于和类型、Monad bind 和 Rust 编译器检查的形式化语义。 ✅ 已验证
+> **[TRPL Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [RFC 243](https://rust-lang.github.io/rfcs/0243-trait-based-exception-handling.html)** 反命题分析基于和类型、Monad bind 和 Rust 编译器检查的形式化语义。 ✅ 已验证
 
 **错误处理策略决策树（Mermaid graph TD）**:
 
@@ -1033,7 +1033,7 @@ Monad 定律验证:
 | unwrap 在生产代码中需谨慎 | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | ✅ |
 | Monad 与错误处理 | [Wadler 1992 — The Essence of Functional Programming, POPL] | ✅ |
 | 代数效应与异常 | [Plotkin & Pretnar 2009 — Handlers of Algebraic Effects] | ✅ |
-| ? 运算符设计 | [RFC 243](https://rust-lang.github.io/rfcs/0243-0243-trait-based-exception-handling.html) | ✅ |
+| ? 运算符设计 | [RFC 243](https://rust-lang.github.io/rfcs/0243-trait-based-exception-handling.html) | ✅ |
 | 和类型穷尽性检查 | [类型论标准教材] · [Rust Reference: Enums](https://doc.rust-lang.org/reference/items/enumerations.html) | ✅ |
 
 ---

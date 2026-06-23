@@ -19,32 +19,31 @@
   - [目录](#目录)
   - [1. 引言](#1-引言)
   - [2. 运行时架构](#2-运行时架构)
-    - [定义 RUNTIME-1 ( 运行时配置 )](#定义-runtime-1--运行时配置)
-    - [定义 RUNTIME-2 ( 运行时类型 )](#定义-runtime-2--运行时类型)
+    - [定义 RUNTIME-1 ( 运行时配置 )](#定义-runtime-1--运行时配置-)
+    - [定义 RUNTIME-2 ( 运行时类型 )](#定义-runtime-2--运行时类型-)
   - [3. 任务调度](#3-任务调度)
-    - [定义 TASK-1 ( 任务创建 )](#定义-task-1--任务创建)
-    - [定义 TASK-2 ( 工作窃取 )](#定义-task-2--工作窃取)
-    - [定理 TASK-T1 ( 负载均衡 )](#定理-task-t1--负载均衡)
+    - [定义 TASK-1 ( 任务创建 )](#定义-task-1--任务创建-)
+    - [定义 TASK-2 ( 工作窃取 )](#定义-task-2--工作窃取-)
+    - [定理 TASK-T1 ( 负载均衡 )](#定理-task-t1--负载均衡-)
   - [4. IO驱动](#4-io驱动)
-    - [定义 IO-1 ( 异步IO操作 )](#定义-io-1--异步io操作)
-    - [定义 IO-2 ( Reactor模式 )](#定义-io-2--reactor模式)
-    - [定理 IO-T1 ( 无阻塞 )](#定理-io-t1--无阻塞)
+    - [定义 IO-1 ( 异步IO操作 )](#定义-io-1--异步io操作-)
+    - [定义 IO-2 ( Reactor模式 )](#定义-io-2--reactor模式-)
+    - [定理 IO-T1 ( 无阻塞 )](#定理-io-t1--无阻塞-)
   - [5. 时间系统](#5-时间系统)
-    - [定义 TIME-1 ( 定时器 )](#定义-time-1--定时器)
-    - [定义 TIME-2 ( Interval )](#定义-time-2--interval)
-    - [定理 TIME-T1 ( 精确性 )](#定理-time-t1--精确性)
+    - [定义 TIME-1 ( 定时器 )](#定义-time-1--定时器-)
+    - [定义 TIME-2 ( Interval )](#定义-time-2--interval-)
+    - [定理 TIME-T1 ( 精确性 )](#定理-time-t1--精确性-)
   - [6. 同步原语](#6-同步原语)
-    - [定义 SYNC-1 ( MPSC Channel )](#定义-sync-1--mpsc-channel)
-    - [定义 SYNC-2 ( Mutex )](#定义-sync-2--mutex)
-    - [定理 SYNC-T1 ( 异步安全 )](#定理-sync-t1--异步安全)
+    - [定义 SYNC-1 ( MPSC Channel )](#定义-sync-1--mpsc-channel-)
+    - [定义 SYNC-2 ( Mutex )](#定义-sync-2--mutex-)
+    - [定理 SYNC-T1 ( 异步安全 )](#定理-sync-t1--异步安全-)
   - [7. 定理与证明](#7-定理与证明)
-    - [定理 TOKIO-T1 ( Send约束传播 )](#定理-tokio-t1--send约束传播)
-    - [定理 TOKIO-T2 ( 优雅关闭 )](#定理-tokio-t2--优雅关闭)
+    - [定理 TOKIO-T1 ( Send约束传播 )](#定理-tokio-t1--send约束传播-)
+    - [定理 TOKIO-T2 ( 优雅关闭 )](#定理-tokio-t2--优雅关闭-)
   - [8. 代码示例](#8-代码示例)
     - [示例1: 并发HTTP请求](#示例1-并发http请求)
     - [示例2: 任务同步](#示例2-任务同步)
   - [**状态**: ✅ 已对齐](#状态--已对齐)
-  - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引)
 
 ---
@@ -375,7 +374,7 @@ async fn coordinated_work(n_workers: usize) {
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-00-ownership.html)**
+> **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 
@@ -390,40 +389,3 @@ async fn coordinated_work(n_workers: usize) {
 > **来源: [ACM - Formal Verification](https://dl.acm.org/)**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
->
-> **[来源: [Iris Project](https://iris-project.org/)]**
->
-> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
->
-> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**

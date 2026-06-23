@@ -17,7 +17,7 @@
 
 ## 📑 目录
 
-- [Rust for Data Science（Rust 数据科学）](#rust-for-data-sciencerust-数据科学)
+- [Rust 数据科学与科学计算](#rust-数据科学与科学计算)
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 数据科学的 Rust 定位](#11-数据科学的-rust-定位)

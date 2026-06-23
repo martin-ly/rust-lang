@@ -2,7 +2,6 @@
 >
 > **EN**: Navigation
 > **Summary**: Navigation. Core Rust concept.
-
 > **受众**: [初学者]
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)

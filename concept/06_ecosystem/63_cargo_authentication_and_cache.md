@@ -24,14 +24,27 @@
 ## 📑 目录
 
 - [Cargo 认证与构建缓存](#cargo-认证与构建缓存)
+  - [📑 目录](#-目录)
   - [一、Registry 认证概述](#一registry-认证概述)
   - [二、Credential Providers](#二credential-providers)
+    - [2.1 内置 Providers](#21-内置-providers)
+    - [2.2 推荐全局配置](#22-推荐全局配置)
   - [三、Token 的存储与使用](#三token-的存储与使用)
+    - [3.1 `cargo login`](#31-cargo-login)
+    - [3.2 环境变量](#32-环境变量)
+    - [3.3 自定义 Provider](#33-自定义-provider)
   - [四、`CARGO_HOME` 目录结构](#四cargo_home-目录结构)
   - [五、Target Dir 与 Build Dir](#五target-dir-与-build-dir)
+    - [5.1 `target/` 目录](#51-target-目录)
+    - [5.2 目录布局](#52-目录布局)
+    - [5.3 Build Dir（中间产物）](#53-build-dir中间产物)
   - [六、Dep-info 文件](#六dep-info-文件)
   - [七、共享缓存：`sccache`](#七共享缓存sccache)
   - [嵌入式测验](#嵌入式测验)
+    - [测验 1：为什么认证 registry 必须配置 credential provider？](#测验-1为什么认证-registry-必须配置-credential-provider)
+    - [测验 2：`cargo:token` provider 有什么安全注意事项？](#测验-2cargotoken-provider-有什么安全注意事项)
+    - [测验 3：`CARGO_REGISTRIES_<NAME>_TOKEN` 环境变量什么时候生效？](#测验-3cargo_registries_name_token-环境变量什么时候生效)
+    - [测验 4：`sccache` 与普通 Cargo 缓存有什么区别？](#测验-4sccache-与普通-cargo-缓存有什么区别)
   - [权威来源索引](#权威来源索引)
 
 ---

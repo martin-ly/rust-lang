@@ -9,7 +9,7 @@
 > **内容分级**: [专家级]
 > **定位**: 本文件从**纵向抽象层级**梳理 Rust 的惯用法（idioms）——从词法糖到架构模式的高效、等效、简洁表达方式，与 `02_patterns.md` 的设计模式形成互补：后者聚焦「设计模式」（面向问题），本文件聚焦「惯用法」（面向表达）。
 > **原则**: 每个惯用法必须展示「非惯用写法 → 惯用写法」的等价变换，并标注效率特征与认知负荷。
-> **对齐来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-lang.github.io/design-patterns/) · [Rust Style Guide] · [Clippy Lints] · [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **对齐来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · [Rust Style Guide] · [Clippy Lints] · [The Rust Programming Language](https://doc.rust-lang.org/book/)
 > **基准版本**: Rust 1.96.0 stable (Edition 2024)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
@@ -329,7 +329,7 @@ fn classify(value: Option<Result<i32, Error>>) -> &'static str {
 
 ### 3.3
 
-> 来源: [TRPL §6](https://doc.rust-lang.org/book/ch06-00-enums-and-pattern-matching.html) `if let` / `while let` 局部绑定
+> 来源: [TRPL §6](https://doc.rust-lang.org/book/ch06-00-enums.html) `if let` / `while let` 局部绑定
 
 > **惯用**: 当只关心一个变体时，用 `if let` 替代 `match`。
 
@@ -533,7 +533,7 @@ let first = buf.first(); // 透明调用 [T]::first
 
 ### 5.3
 
-> 来源: [TRPL §10](https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html) Trait Bound 组合
+> 来源: [TRPL §10](https://doc.rust-lang.org/book/ch10-00-generics.html) Trait Bound 组合
 
 > **惯用**: 用 `+` 组合 trait bounds 表达「能力交集」，用 `where` 子句处理复杂约束。
 
@@ -613,7 +613,7 @@ fn critical_section() {
 
 ### 6.3
 
-> 来源: [RFC 2349](https://rust-lang.github.io/rfcs/2349-2349-pin.html) Pin 不动性契约
+> 来源: [RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html) Pin 不动性契约
 
 > **惯用**: 对自引用结构和异步 Future 使用 `Pin<&mut T>`，保证内存位置稳定。
 

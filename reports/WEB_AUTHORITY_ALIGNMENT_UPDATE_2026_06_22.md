@@ -13,7 +13,7 @@
 | `concept/07_future/rust_1_97_preview.md` | 标注 beta 1.97.0 分支日期（2026-05-22），补充 releases.rs 来源 | [releases.rs 1.97.0 beta](https://releases.rs/docs/1.97.0/) |
 | `concept/07_future/rust_1_98_preview.md` | 补充 Project Goals 子页面链接（Beyond the `&`、BorrowSanitizer、Field Projections） | [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) 及子目标页 |
 | `concept/04_formal/22_safety_tags.md` | 新增 Safety Tags 研究仓库链接；补充 21 个基础标签覆盖 std 96% unsafe API 的进展说明 | [safer-rust/safety-tags](https://github.com/safer-rust/safety-tags) · [RFC #3842](https://github.com/rust-lang/rfcs/pull/3842) |
-| `concept/04_formal/23_borrow_sanitizer.md` | 补充 2026 项目目标技术路线（shadow stack、`__rust_retag` intrinsics、LLVM 上游 PR） | [BorrowSanitizer 项目主页](https://borrowsanitizer.com/) · [Project Goal](https://rust-lang.github.io/rust-project-goals/2026/goals/borrowsanitizer.html) |
+| `concept/04_formal/23_borrow_sanitizer.md` | 补充 2026 项目目标技术路线（shadow stack、`__rust_retag` intrinsics、LLVM 上游 PR） | [BorrowSanitizer 项目主页](https://borrowsanitizer.com/) · [Project Goal](https://rust-lang.github.io/rust-project-goals/2026/borrowsanitizer.html) |
 | `concept/06_ecosystem/47_formal_verification_tools.md` | Kani 0.66 能力补充：Autoharness 派生 `Arbitrary`、loop-modifies、`--prove-safety-only`；统一来源引用 | [Kani Documentation](https://model-checking.github.io/kani/) · [Kani GitHub Releases](https://github.com/model-checking/kani/releases) |
 | `reports/SEA_ORM_2_0_RELEASE_TRACKING_2026_06_22.md` | 记录第三方文章与 crates.io 索引不一致，明确以 crates.io 为准 | `cargo search sea-orm` 返回 `2.0.0-rc.41` |
 
@@ -43,7 +43,7 @@
 - **Kani**：0.66（2026-05）引入 quantifiers、autoharness、loop contracts、`--prove-safety-only`。
   - 来源: [Kani Docs](https://model-checking.github.io/kani/) · [Releases](https://github.com/model-checking/kani/releases)
 - **BorrowSanitizer**：2026 Project Goal，目标从研究原型转为可用工具。
-  - 来源: [borrowsanitizer.com](https://borrowsanitizer.com/) · [Project Goal](https://rust-lang.github.io/rust-project-goals/2026/goals/borrowsanitizer.html)
+  - 来源: [borrowsanitizer.com](https://borrowsanitizer.com/) · [Project Goal](https://rust-lang.github.io/rust-project-goals/2026/borrowsanitizer.html)
 - **Safety Tags**：RFC #3842 讨论中，研究原型提出 21 个基础标签。
   - 来源: [RFC #3842](https://github.com/rust-lang/rfcs/pull/3842) · [safer-rust/safety-tags](https://github.com/safer-rust/safety-tags)
 - **Verus / AutoVerus**：活跃开发中，用于系统级 Rust 代码的功能正确性验证。

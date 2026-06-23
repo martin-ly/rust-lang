@@ -50,7 +50,7 @@
 | 特性 | 状态 | 预计稳定版本 | 文档完成度 | 示例代码 | 迁移指南 |
 |------|------|--------------|------------|----------|----------|
 | **Generic Const Expressions** | 开发中 | 1.96+ | 📝 20% | ✅ 基础 | 📝 规划中 |
-| **Async Closures** | 开发中 | 1.96+ | 📝 30% | ✅ 基础 | 📝 规划中 |
+| **Async Closures** | ✅ 已稳定 | **1.85.0** | ✅ 完整 | ✅ 完整 | ✅ 已完成 |
 | **Impl Trait in Assoc Type** | FCP | 1.95 | 📝 40% | ✅ 完整 | 📝 规划中 |
 | **TAIT** | 不稳定 | 1.97+ | 📝 25% | ⚠️ 部分 | 📝 规划中 |
 | **Return Type Notation** | 不稳定 | TBD | 📝 10% | ❌ 无 | 📝 规划中 |
@@ -108,24 +108,14 @@ where
 ### Async Closures
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **状态**: ✅ **Stable since Rust 1.85.0**
+>
+> **正式文档已迁移**: [concept/03_advanced/24_async_closures.md](../../../concept/03_advanced/24_async_closures.md)
 
-**描述**: 原生支持异步闭包，无需 `async move` 包裹
+**描述**: 原生支持异步闭包，无需 `async move` 包裹。
 
 ```rust,ignore
-#![feature(async_closure)]
-
-use std::future::Future;
-
-// 传统方式
-async fn traditional_way() {
-    let f = || async move {
-        tokio::time::sleep(Duration::from_secs(1)).await;
-        42
-    };
-    let result = f().await;
-}
-
-// 新特性: 异步闭包
+// Rust 1.85.0+ stable，无需 feature gate
 async fn new_way() {
     let f = async || {
         tokio::time::sleep(Duration::from_secs(1)).await;

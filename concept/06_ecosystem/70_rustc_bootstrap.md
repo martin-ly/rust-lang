@@ -26,13 +26,20 @@
 ## 📑 目录
 
 - [rustc 自举（Bootstrap）](#rustc-自举bootstrap)
+  - [📑 目录](#-目录)
   - [一、为什么要自举](#一为什么要自举)
   - [二、Stage 模型](#二stage-模型)
   - [三、`x.py` / `x` 与 `bootstrap.toml`](#三xpy--x-与-bootstraptoml)
   - [四、常用命令](#四常用命令)
   - [五、`cfg(bootstrap)` 与 `RUSTC_BOOTSTRAP`](#五cfgbootstrap-与-rustc_bootstrap)
+    - [`cfg(bootstrap)`](#cfgbootstrap)
+    - [`RUSTC_BOOTSTRAP`](#rustc_bootstrap)
   - [六、Bootstrap 中的工具类型](#六bootstrap-中的工具类型)
   - [嵌入式测验](#嵌入式测验)
+    - [测验 1：日常 rustc 开发通常需要构建到哪个 stage？](#测验-1日常-rustc-开发通常需要构建到哪个-stage)
+    - [测验 2：Stage 2 编译器与 Stage 1 编译器的主要区别是什么？](#测验-2stage-2-编译器与-stage-1-编译器的主要区别是什么)
+    - [测验 3：`cfg(bootstrap)` 的典型用途是什么？](#测验-3cfgbootstrap-的典型用途是什么)
+    - [测验 4：为什么普通项目不应该设置 `RUSTC_BOOTSTRAP=1`？](#测验-4为什么普通项目不应该设置-rustc_bootstrap1)
   - [权威来源索引](#权威来源索引)
 
 ---

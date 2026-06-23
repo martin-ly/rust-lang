@@ -190,7 +190,7 @@
 | 每个引用都有生命周期 | [TRPL Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) | ✅ |
 | 生命周期确保引用在使用时有效 | [TRPL Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) | ✅ |
 | 生命周期省略规则 | [Rust Reference: Lifetime elision](https://doc.rust-lang.org/reference/lifetime-elision.html) | ✅ |
-| NLL (Non-Lexical Lifetimes) | [RFC 2094](https://rust-lang.github.io/rfcs/2094-2094-nll.html) · [Rust Reference: NLL](https://doc.rust-lang.org/reference/nll.html) | ✅ |
+| NLL (Non-Lexical Lifetimes) | [RFC 2094](https://rust-lang.github.io/rfcs/2094-nll.html) · [Rust Reference: NLL](https://doc.rust-lang.org/reference/statements.html) | ✅ |
 | 区域类型理论 (Tofte & Talpin) | [Wikipedia: Region-based memory management](https://en.wikipedia.org/wiki/Region_based_memory_management) | ✅ |
 | 生命周期子类型关系 | [Rust Reference: Subtyping](https://doc.rust-lang.org/reference/subtyping.html) | ✅ |
 | `'static` 是最长生命周期 | [TRPL Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) | ✅ |
@@ -865,7 +865,7 @@ union Value {
 }
 ```
 
-> **来源: [The Rustonomicon: Unions](https://doc.rust-lang.org/nomicon/unions.html)** `union` 的设计哲学是"零成本类型双关（type punning）"——允许在同一内存位置用不同类型视角解读位模式，但放弃了编译期变体追踪。✅
+> **来源: [The Rustonomicon: Unions](https://doc.rust-lang.org/nomicon/other-reprs.html)** `union` 的设计哲学是"零成本类型双关（type punning）"——允许在同一内存位置用不同类型视角解读位模式，但放弃了编译期变体追踪。✅
 
 ### 16.2 unsafe 读取 union field 的必要性
 
@@ -946,7 +946,7 @@ union BadUnion {
 // 编译错误: unions cannot have fields that need dropping
 ```
 
-> **来源: [The Rustonomicon: Unions](https://doc.rust-lang.org/nomicon/unions.html)** `ManuallyDrop<T>` 阻止编译器自动调用 `T::drop`，使 union 的析构语义完全由程序员控制。这是 union 实现"手动内存管理"的关键抽象。✅
+> **来源: [The Rustonomicon: Unions](https://doc.rust-lang.org/nomicon/other-reprs.html)** `ManuallyDrop<T>` 阻止编译器自动调用 `T::drop`，使 union 的析构语义完全由程序员控制。这是 union 实现"手动内存管理"的关键抽象。✅
 
 ### 16.4 union 的 impl 限制
 
@@ -1099,7 +1099,7 @@ fn risky(u: &mut DoubleFreeRisk) {
 }
 ```
 
-> **来源: [The Rustonomicon: Unions](https://doc.rust-lang.org/nomicon/unions.html)** union 的正确使用模式是：外部维护一个 tag（enum 包装）或使用 `MaybeUninit` 语义，绝不在不知道活跃变体的情况下执行 drop。✅
+> **来源: [The Rustonomicon: Unions](https://doc.rust-lang.org/nomicon/other-reprs.html)** union 的正确使用模式是：外部维护一个 tag（enum 包装）或使用 `MaybeUninit` 语义，绝不在不知道活跃变体的情况下执行 drop。✅
 
 **安全包装模式：Tagged Union**:
 

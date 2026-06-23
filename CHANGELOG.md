@@ -1,6 +1,6 @@
 # 更新日志 (Changelog)
 
-> **最后更新**: 2026-06-22
+> **最后更新**: 2026-06-23（阶段 4 延续更新）
 
 ---
 
@@ -8,12 +8,22 @@
 
 ### 语言特性
 
-- `VecDeque::truncate_front` / `VecDeque::retain_back`（若 1.97 稳定）
-- 浮点代数优化属性 `float_algebraic`（若 1.97 稳定）
-- `RandomSource` / `DefaultRandomSource` 随机数源抽象（若 1.97 稳定）
-- C-variadic 函数定义（若 1.97 稳定）
-- `Box::into_raw_non_null` / `Vec::into_raw_parts_non_null`（若 1.97 稳定）
-- `int_format_into`（若 1.97 稳定）
+- `NonZero<T>::highest_one` / `lowest_one`（1.97 已确认，PR #155147）
+- `NonZero<T>::bit_width()`（1.97 已确认，PR #155131）
+- `char::is_control()` const 稳定化（1.97 已确认，PR #155528）
+- `VecDeque::truncate_front` / `VecDeque::retain_back`（PR #151973 FCP 完成，未赶上 1.97 cutoff，推迟至 1.98+）
+
+### 1.98+ 前瞻（已确认进入 nightly → 1.98）
+
+- 浮点代数优化属性 `float_algebraic`（PR #157029，已合并 2026-06-15）
+- `RandomSource` / `DefaultRandomSource` 随机数源抽象（PR #157168，等待 t-libs-api）
+- C-variadic 函数定义（PR #155942，PFCP）
+- `box_vec_non_null`：`Box<T>` / `Vec<T>` ↔ `NonNull<T>` 转换（PR #157226，PFCP）
+- `int_format_into`：整数格式化到固定缓冲区（PR #152544，已合并 2026-06-15）
+- `NonZero<T>::from_str_radix()`（PR #157877，已合并 2026-06-15）
+- `core::range::{legacy, RangeFull, RangeTo}`（PR #156629，已合并 2026-06-11）
+- `Box::as_ptr` / `Box::as_mut_ptr`（PR #157876，已合并 2026-06-14）
+- Rustfmt `hex_literal_case` 配置（PR #6935，已合并 2026-06-11）
 
 ### Crate 代码
 
@@ -39,6 +49,110 @@
 - `concept/04_formal/25_tree_borrows_deep_dive.md`: Tree Borrows 与 Stacked Borrows 对比深度页
 - `concept/06_ecosystem/47_formal_verification_tools.md`: 更新 Kani 0.66 特性说明与 quantifiers / autoharness / loop contracts 示例
 - `crates/c02_type_system/src/rust_198_features.rs`: 新增 1.98+ nightly 占位模块 `nightly_placeholders`
+
+### 全面对齐修复（2026-06-23 — 对称差 / 层次差 / 深度差治理）
+
+#### 紧急事实修正
+
+- 将 `content/emerging/async_closures.md` 迁移至 `concept/03_advanced/24_async_closures.md`，重写为 **Rust 1.85.0 stable** 正式教学文档；原文件改为重定向。
+- 修正 `knowledge/06_ecosystem/02_edition_2024.md`：
+  - Edition 2024 稳定版本号 `1.82.0` → `1.85.0`
+  - `gen` 关键字预留 vs `gen {}` / `yield` nightly 状态严格区分
+  - 测验答案与版本跟踪表同步修正
+  - 精简"自 xx 文件合并"的冗长元数据说明
+- 修正 `crates/c06_async/src/async_closures_preview.rs` 时间线：`AsyncFn traits` 与 `async closures` 同在 **1.85.0** stable。
+- 修正 `knowledge/06_ecosystem/emerging/01_async_closures.md`：状态改为 stable 1.85.0，移除所有 `#![feature(async_closure)]`，修正跟踪 issue。
+- 修正 `docs/04_rust_language_feature_comprehensive_inventory_2026.md` 中 async closures / AsyncFn 的 1.96 FCP / 1.94 prelude 错误时间线。
+- 修正 `content/emerging/README.md` 与 `docs/content/emerging/README.md` 中 Async Closures 的状态矩阵（开发中 1.96+ → 已稳定 1.85.0）。
+- 修正 `docs/02_reference/02_error_code_mapping.md` unstable feature 示例（async_closure → gen_blocks）。
+- 修正 `docs/rust-ownership-decidability/01-core-concepts/01-01-ownership-rules-deep.md` 中 async closures 的版本标注与 feature gate。
+- 修正 `concept/07_future/18_async_drop_preview.md` 中错误的 Async Closures 跟踪 issue 链接。
+- 修正 `concept/07_future/05_rust_version_tracking.md` mindmap 中错误的 `AsyncFn* prelude 1.97` 节点。
+
+#### 权威来源再锚定
+
+- `concept/00_meta/authority_source_map.md`：增加 TRPL Ch17、Async Book rewrite、Rust Edition Guide 2024 锚点；更新 Tree Borrows PLDI 2025 Distinguished Paper 来源。
+- `concept/00_meta/learning_guide.md`：在 async 学习路径起点显式指向 TRPL Ch17。
+- `content/README.md`：标注 Rust By Example 当前在 async closures / gen blocks / 2024 FFI 方向的覆盖缺口。
+
+#### 语义深度补齐
+
+- `concept/03_advanced/03_unsafe.md`：按 Rust 2024 Edition 完整重写第九章，覆盖 `unsafe_op_in_unsafe_fn`、 `unsafe extern` blocks（RFC 3484）、`#[unsafe(...)]` 属性（RFC 3325），并修正章节编号冲突。
+- `concept/07_future/12_return_type_notation_preview.md`：澄清 RTN（`T::method(..): Send`）与 `use<..>` precise capturing 是两个不同特性，更新为 RFC 3654 / Tracking Issue #109417 来源。
+- `concept/07_future/18_async_drop_preview.md`：移除错误的 RFC 3308 / RFC 3157 引用，改为 Async Drop Initiative 与 Tracking Issue #126482。
+- `concept/01_foundation/05_never_type.md`：精确化 `!` 稳定度，补充 1.92 deny-by-default lint 与 1.96 tuple coercion 进展，指出完整稳定化仍在进行中。
+- `concept/06_ecosystem/60_cargo_dependency_resolution.md`：补充 MSRV-aware resolver（RFC 3537）与 resolver v3（Rust 1.84 / Edition 2024 默认）的权威覆盖。
+- `concept/03_advanced/17_type_erasure.md`：新增 **Trait Object Upcasting（1.86 stable）** 小节。
+- `concept/02_intermediate/20_type_system_advanced.md`：新增 Rust 2024 `+ use<..>` precise capturing 对比示例。
+
+#### 自动化与持续跟踪
+
+- 新建 `scripts/maintenance/check_version_facts.py`：启发式扫描 async closures、gen blocks、Edition 2024、`&const` 等常见事实性错误。
+- 新建 `scripts/maintenance/fix_404_links.py`：批量修复权威来源 404 链接（RFC 2585/3185/3498 重复 slug、Project Goals 2026 路径、wg-secure-code 治理页等）。
+- 新建 `.kimi/OFFICIAL_DOCS_TRACKING.md`：官方文档变更跟踪机制与检查清单。
+- 运行 `cargo check --workspace` 与 `check_version_facts.py` 验证通过。
+
+#### 剩余 404 链接修复与 Project Goals 子目标直链精确化（2026-06-23）
+
+- `concept/07_future/03_evolution.md`：将四大旗舰主题（Beyond the &、Flexible faster compilation、Higher-level Rust、Unblocking dormant traits）的 Project Goals 链接从根目录精确到对应锚点。
+- `concept/07_future/15_pin_ergonomics_preview.md`：Pin Ergonomics 与 Reborrow Traits 链接指向 `pin-ergonomics.html` / `reborrow-traits.html`。
+- `concept/02_intermediate/03_memory_management.md`：Beyond the & 与 Field Projections 链接指向 `roadmap-beyond-the-ampersand.html` / `field-projections.html`。
+- `concept/07_future/24_roadmap.md`：BorrowSanitizer 与 Cranelift 链接指向 `borrowsanitizer.html` / `improve-cg_clif-performance.html`；Rust Specification 链接指向 `experimental-language-specification.html`。
+- `concept/03_advanced/03_unsafe.md`：Unsafe Fields 链接指向 `unsafe-fields.html`。
+- `concept/06_ecosystem/04_application_domains.md`：Rust for Linux 链接指向 `roadmap-rust-for-linux.html`。
+- `concept/02_intermediate/01_traits.md`：Next-generation trait solver 链接指向 `next-solver.html`。
+- `concept/07_future/09_parallel_frontend_preview.md`：Parallel Frontend 链接指向 `parallel-front-end.html`。
+- `concept/07_future/17_arbitrary_self_types_preview.md`：Arbitrary Self Types 链接指向 `arbitrary-self-types.html`。
+- `concept/07_future/18_field_projections_preview.md`：Field Projections 链接指向 `field-projections.html`。
+- `concept/07_future/17_rust_specification_preview.md`：Experimental Language Specification 链接指向 `experimental-language-specification.html`。
+- `concept/07_future/20_borrowsanitizer_preview.md`：BorrowSanitizer 链接指向 `borrowsanitizer.html`。
+- `concept/06_ecosystem/10_public_private_deps.md`：Public/Private Dependencies 链接指向 `pub-priv.html`。
+- `concept/07_future/17_ergonomic_ref_counting_preview.md`：Ergonomic Ref-counting 链接指向 `ergonomic-rc.html`。
+- `concept/07_future/README.md` 与 `concept_kb.json`：移除残留的错误 RFC 3308 引用，统一为 Async Drop Initiative 来源。
+- 验证：`cargo check --workspace`、`check_version_facts.py` 通过；手动 curl 验证所有更新后的 Project Goals URL 返回 200。
+
+#### 大规模官方文档 404 链接修复（2026-06-23 第二轮）
+
+- 修复 RFC 重复 slug 错误（`0243-0243-*`、`1023-1023-*`、`1566-1566-*`、`1584-1584-*`、`2000-2000-*`、`2094-2094-*`、`2289-2289-*`、`2349-2349-*`、`2394-2394-*` 等），统一规范化为 `NNNN-*.html`。
+- 修正 RFC 1584 错误 slug：`1584-macros-literal-matcher.html` → `1584-macros.html`。
+- 修复 TRPL 章节 URL 变更：
+  - `ch04-00-ownership.html` → `ch04-01-what-is-ownership.html`
+  - `ch06-00-enums-and-pattern-matching.html` → `ch06-00-enums.html`
+  - `ch10-00-generic-types-traits-and-lifetimes.html` → `ch10-00-generics.html`
+- 修复 Rust Edition Guide 2024 路径：
+  - `precise-capturing.html` → `rpit-lifetime-capture.html`
+  - `unsafe-attribute.html` → `unsafe-attributes.html`
+  - `unsafe-extern-blocks.html` → `unsafe-extern.html`
+- 修复 Rustonomicon 页面变更：
+  - `pin.html` → `std/pin/struct.Pin.html`
+  - `unions.html` → `other-reprs.html`
+- 修复 Rust Reference 已移除页面：
+  - `type-inference.html` → `statements.html`
+  - `nll.html` → `statements.html`
+- 修复外部站点迁移/移除：
+  - `rust-for-linux.com/safety-standard` → `rust-for-linux.com/`
+  - `rust-lang.github.io/async-book/03_async_await/02_cancellation.html` → `part-reference/cancellation.html`
+  - `rust-lang.github.io/design-patterns/` → `rust-unofficial.github.io/patterns/`
+  - `www.rust-lang.org/production` / `production/users` → `www.rust-lang.org/`（官方已移除生产案例页）
+- 增强 `scripts/maintenance/fix_404_links.py`：
+  - 新增 RFC 重复 slug 正则修复
+  - 扩展外部站点与官方文档映射
+  - 脚本运行时排除自身，避免自修改
+- 验证：`check_all_concept_links_health.py` 报告异常链接 0；`cargo check --workspace`、`check_version_facts.py` 通过。
+
+#### 最新国际化权威内容状态扫描与文档更新（2026-06-23）
+
+- 扫描 Rust Blog / releases.rs / Rust Project Goals 2026 最新状态，识别 1.96 已发布、1.97 beta、1.98 nightly 的进展。
+- `concept/07_future/18_field_projections_preview.md`：
+  - 修正 feature gate `field_projection` → `field_projections`（复数，Rust 1.96.0+ nightly）
+  - 补充 Tracking Issue #145383
+  - 新增 2026-02 官方实验进展：PR #152730 合并 `field_of!` 宏与 `std::field::Field` trait，Field Representing Types（FRTs）原型落地
+  - 更新示例代码展示 `field_of!` / `Field::OFFSET` 用法
+- `concept/07_future/12_return_type_notation_preview.md` 与 `concept/07_future/rust_1_97_preview.md`：更新 RTN 状态，明确完整稳定化受下一代 trait solver 阻塞、目标今年晚些时候，并指向 Project Goal #646。
+- `concept/07_future/15_pin_ergonomics_preview.md`：补充 Reborrow Traits 2026 年工作项（2025H2 单生命周期原型已落地，2026 年继续多生命周期 / 非平凡 CoerceShared / RFC 重写）。
+- `concept/01_foundation/05_never_type.md`：补充 Rust 1.96 tuple coercion 行为的具体代码示例。
+- 确认 Async Book 仍处于 rewrite、示例仍为 edition2021；确认 gen blocks RFC 3513 已合并、`gen` 关键字已在 Rust 2024 预留。
+- 验证：`cargo check --workspace`、`check_version_facts.py`、`check_all_concept_links_health.py`（异常链接 0）通过。
 
 ### 权威来源对齐（2026-06-22 网络对齐冲刺）
 
