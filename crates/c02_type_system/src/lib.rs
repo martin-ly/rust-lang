@@ -12,6 +12,7 @@
 //! - `type_class`: Trait-based polymorphism (type classes)
 //! - `type_variance`: Subtyping relationships in generics
 //! - `type_operation`: Type-level computations and transformations
+//! - `type_transformation`: Mapping data between types with combinators
 //! - `advanced_pattern_matching`: Exhaustive pattern matching techniques
 //! - `r#unsafe`: Safe abstractions over unsafe operations
 //! - `rust_196_features`: Rust 1.96 stable feature demonstrations
@@ -23,6 +24,8 @@
 //! | Algebraic Data Types | `type_composition` | `enum`, `struct` |
 //! | Parametric Polymorphism | `type_class` | `trait`, `impl` |
 //! | Variance | `type_variance` | `covariant`, `contravariant`, `invariant` |
+//! | Type Conversions | `type_operation::type_conversion` | `as`, `From`, `TryFrom` |
+//! | Newtype Pattern | `type_operation::newtype` | tuple struct |
 //! | Unsafe Abstraction | `r#unsafe` | `unsafe`, `raw pointers` |
 #![allow(clippy::type_complexity)]
 #![feature(never_type)]
@@ -59,10 +62,6 @@ pub mod rust_195_features;
 pub mod rust_196_features;
 pub mod rust_197_features;
 pub mod rust_198_features;
-
-// 注意: rust_196_tuple_coercion 模块包含的内容与 Rust 实际稳定特性不符，
-// 将在后续版本中清理或重命名。当前保留仅为兼容性。
-pub mod rust_196_tuple_coercion; // 待清理: 非标准特性模块
 
 // 重新导出Rust 1.94特性
 pub use rust_194_features::*;

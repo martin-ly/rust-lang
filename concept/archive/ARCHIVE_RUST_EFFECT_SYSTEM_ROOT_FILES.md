@@ -3,11 +3,9 @@
 # 根目录级 Rust Effect System 文件归档说明
 >
 > **EN**: Archive Rust Effect System Root Files
-
 > **归档日期**: 2026-06-02
 > **归档原因**: 这些文件位于 `concept/` 根目录级别，不符合项目文件层级规范（应按层级放入 `concept/07_future/` 或对应子目录）
 > **状态**: 内容已整合至标准层级文件，原始文件保留供历史追溯
-
 >
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
 ---

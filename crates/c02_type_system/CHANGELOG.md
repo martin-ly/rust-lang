@@ -4,7 +4,41 @@
 
 ---
 
-## [v2.1.0] - 2025-10-22 (最新)
+## [v2.2.0] - 2026-06-24 (源码重构)
+
+### 类型系统源码全面补齐
+
+**完成状态**: ✅ 重构完成
+
+#### 清理
+
+- 移除 `docs/cargo_package_management/` 离题目录，迁移至项目级 `archive/`。
+- 移除 `src/rust_196_tuple_coercion.rs` 导出，文件归档为 `src/archive/rust_196_tuple_coercion_DEPRECATED.rs`。
+- 删除 `src/archive/` 中 1 行占位文件。
+- 删除 3 行 `examples/type_system_example.rs` 占位示例。
+
+#### 核心源码模块补齐
+
+- `src/type_operation/` 全部 8 个子模块：补充可运行 Rust 代码与单元测试。
+- `src/type_variance/`：`covariance`、`invariance`、`contravariance` 补全协变/不变/逆变示例与测试。
+- `src/type_decomposition/` 与 `src/type_transformation/`：清理 prose-only 注释，补充 `match` 解构与 `map`/转换示例。
+- `src/primitive_types/`：为 `mod.rs` 与 `reference_types` 添加模块文档、示例与测试。
+- `src/unsafe/`：补充裸指针与 `UnsafeCell` 示例。
+
+#### 示例与测试
+
+- 新增示例：`basic_types.rs`、`type_inference.rs`、`newtype_pattern.rs`、`phantom_types.rs`、`variance_demo.rs`。
+- 新增集成测试：`tests/type_operation_tests.rs`、`tests/type_variance_tests.rs`。
+
+#### 验证
+
+- `cargo check --workspace` 通过。
+- `cargo test --workspace` 通过。
+- `cargo clippy --workspace` 通过。
+
+---
+
+## [v2.1.0] - 2025-10-22
 
 ### 🎉 项目完成 - 全面梳理与标准化
 

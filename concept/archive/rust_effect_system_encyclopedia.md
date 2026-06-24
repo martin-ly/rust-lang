@@ -1,11 +1,12 @@
-> **Summary**: Rust Effect System Encyclopedia. Core Rust concept.
+> **Summary**:
+>
+> Rust Effect System Encyclopedia. Core Rust concept.
 > **⚠️ 历史文档提示**：本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用。
 > 其中技术观点反映了对应时间点的社区状态，可能与当前（Rust 1.96+）推荐实践不一致。
 > 学习时请以 `concept/`、`knowledge/` 及官方文档为准。
 >
 > - `async-std` 已进入维护模式，新项目建议优先考虑 Tokio / smol。
 > - `wasm32-wasi` 已重命名为 `wasm32-wasip1`；WASI Preview 2 目标为 `wasm32-wasip2`。
-
 >
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
 ---
@@ -13,7 +14,6 @@
 # Rust 效应系统（Effect System）与其语言边界的全面深化广化分析论证
 >
 > **EN**: Rust Effect System Encyclopedia
-
 > **文档性质**：百科全书级形式化分析论证
 > **对齐标准**：POPL、PLDI、ICFP、OOPSLA、SOSP、USENIX ATC、ICFP、ESOP、TACAS 国际顶会学术传统
 > **核心问题**：Rust 的类型系统是否构成效应系统？其边界在哪里？与代数效应、能力系统、所有权系统的本质差异为何？

@@ -1,4 +1,6 @@
-> **Summary**: Advanced 02 Async Original. Core Rust concept.
+> **Summary**:
+>
+> Advanced 02 Async Original. Core Rust concept.
 > **⚠️ 历史文档提示**：本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用。
 > 其中技术观点反映了对应时间点的社区状态，可能与当前（Rust 1.96+）推荐实践不一致。
 > 学习时请以 `concept/`、`knowledge/` 及官方文档为准。

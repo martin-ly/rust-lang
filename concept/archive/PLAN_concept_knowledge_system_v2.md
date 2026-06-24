@@ -3,13 +3,11 @@
 # Rust 概念知识体系 —— 可持续推进计划与任务
 >
 > **EN**: Plan Concept Knowledge System V2
-
 > **受众**: [专家]
 > **版本**：v2.0
 > **创建日期**：2026-05-12
 > **最后更新**：2026-05-21
 > **目标**：在 `concept/` 文件夹内构建全面、权威、国际化的 Rust 概念知识体系，形成可持续演进的内容生产机制。
-
 >
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
 ---

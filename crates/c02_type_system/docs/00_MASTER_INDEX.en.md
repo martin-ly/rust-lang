@@ -39,9 +39,9 @@
 
 ## Cargo Package Management
 
-Standalone Cargo documentation covering dependency management, features, workspaces:
-
-- [Cargo Package Management Index](cargo_package_management/00_INDEX.md)
+> Note: this standalone Cargo documentation has been moved to
+> `archive/cargo_package_management_from_c02/` as it is outside the
+> `c02_type_system` learning scope.
 
 ---
 

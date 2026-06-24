@@ -4,7 +4,6 @@
 > **Summary**: Ecosystem 33 Idioms Spectrum Archived. Core Rust concept.
 > **内容分级**: [综述级]
 > **归档说明**: 本文件已归档，内容已迁移至 [`03_idioms_spectrum.md`](./03_idioms_spectrum.md)。
-
 > **受众**: [进阶]
 > **Bloom 层级**: 应用
 > **状态**: 已归档（内容已迁移至主文件）
@@ -17,7 +16,6 @@
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
-
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
 
 ## 认知路径

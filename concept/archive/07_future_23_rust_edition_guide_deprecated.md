@@ -1,9 +1,10 @@
-> **Summary**: Future 23 Rust Edition Guide Deprecated. Core Rust concept.
+> **Summary**:
+>
+> Future 23 Rust Edition Guide Deprecated. Core Rust concept.
 >
 # Rust Edition 机制与迁移指南
 >
 > **EN**: Future 23 Rust Edition Guide Deprecated
-
 > **受众**: [归档]
 > **Bloom 层级**: 分析 → 应用
 > **A/S/P 标记**: **A+S** — ApplicationStructure

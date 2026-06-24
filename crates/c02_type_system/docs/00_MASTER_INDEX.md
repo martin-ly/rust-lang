@@ -70,9 +70,8 @@
 
 ## 📦 Cargo 包管理专题
 
-独立的 Cargo 包管理文档体系，涵盖依赖管理、特性系统、工作空间等：
-
-- [Cargo 包管理索引](cargo_package_management/00_INDEX.md)
+> 注：该专题文档已迁移至项目级 `archive/cargo_package_management_from_c02/`，
+> 因为它与 `c02_type_system` 的学习主线无关。
 
 ---
 

@@ -1,79 +1,85 @@
-/*
-在Rust中，**类型组合（type composition）**是指通过组合已有类型来创建新类型的过程。
-这种组合可以通过结构体、枚举、元组等方式实现。
-类型组合允许开发者构建复杂的数据结构，同时保持代码的可读性和可维护性。
+//! 类型组合：积类型（struct / tuple）与和类型（enum）。
 
-## 定义
+/// 姓名 Newtype。
+pub struct Name(pub String);
 
-- **类型组合**：
-类型组合是将多个类型组合在一起，形成一个新的复合类型。
-这种方式使得我们能够创建更复杂的数据结构，能够更好地表达程序的逻辑和数据模型。
+/// 年龄 Newtype。
+pub struct Age(pub u8);
 
-## 解释
-
-在Rust中，类型组合的主要方式包括：
-
-1. **结构体（Structs）**：通过定义结构体，可以将多个字段组合在一起，形成一个新的类型。
-2. **枚举（Enums）**：通过定义枚举，可以组合不同的变体，每个变体可以包含不同类型的数据。
-3. **元组（Tuples）**：元组允许将多个值组合在一起，形成一个单一的复合类型。
-
-类型组合使得我们能够创建更复杂的数据结构，同时保持类型安全。
-
-## 示例
-
-以下是一个使用类型组合的示例：
-
-```rust
-// 定义一个结构体来表示一个点
-struct Point {
-    x: f64,
-    y: f64,
+/// 人：两个积类型的组合。
+pub struct Person {
+    pub name: Name,
+    pub age: Age,
 }
 
-// 定义一个结构体来表示一个矩形
-struct Rectangle {
-    top_left: Point,
-    bottom_right: Point,
+impl Person {
+    /// 构造一个 [`Person`]。
+    pub fn new(name: &str, age: u8) -> Self {
+        Self {
+            name: Name(name.to_string()),
+            age: Age(age),
+        }
+    }
 }
 
-// 定义一个函数来计算矩形的面积
-fn area(rect: &Rectangle) -> f64 {
-    let width = rect.bottom_right.x - rect.top_left.x;
-    let height = rect.bottom_right.y - rect.top_left.y;
-    width * height
+/// 左或右：和类型。
+pub enum Either<L, R> {
+    Left(L),
+    Right(R),
 }
 
-fn main() {
-    let top_left = Point { x: 0.0, y: 5.0 };
-    let bottom_right = Point { x: 5.0, y: 0.0 };
-    let rect = Rectangle {
-        top_left,
-        bottom_right,
-    };
-
-    println!("Area of the rectangle: {}", area(&rect)); // 输出: Area of the rectangle: 25
+/// 可计算面积的形状接口。
+pub trait Shape {
+    /// 计算面积。
+    fn area(&self) -> f64;
 }
-```
 
-## 解释示例
+/// 圆。
+pub struct Circle(pub f64);
 
-1. **定义结构体**：
-我们定义了一个名为`Point`的结构体，表示二维空间中的一个点，包含`x`和`y`坐标。
-然后，我们定义了一个名为`Rectangle`的结构体，表示一个矩形，
-包含两个`Point`类型的字段，分别表示矩形的左上角和右下角。
+impl Shape for Circle {
+    fn area(&self) -> f64 {
+        std::f64::consts::PI * self.0 * self.0
+    }
+}
 
-2. **计算面积**：
-我们定义了一个函数`area`，接受一个`Rectangle`的引用作为参数，并计算矩形的面积。
-通过访问`Rectangle`中的`Point`字段，我们可以计算矩形的宽度和高度。
+/// 矩形。
+pub struct Rectangle(pub f64, pub f64);
 
-3. **使用组合类型**：
-在`main`函数中，我们创建了`Point`和`Rectangle`的实例，并调用`area`函数来计算矩形的面积。
-通过类型组合，我们能够清晰地表示矩形的结构和计算逻辑。
+impl Shape for Rectangle {
+    fn area(&self) -> f64 {
+        self.0 * self.1
+    }
+}
 
-## 总结
+/// 对任意形状引用切片求总面积。
+pub fn total_area(shapes: &[&dyn Shape]) -> f64 {
+    shapes.iter().map(|s| s.area()).sum()
+}
 
-类型组合在Rust中是一种强大的工具，允许开发者通过组合已有类型来创建新的复合类型。
-这种方式使得代码更加清晰、可读，并且能够更好地表达数据模型和程序逻辑。
-通过使用结构体、枚举和元组，Rust提供了灵活的方式来实现类型组合。
+#[cfg(test)]
+mod tests {
+    use super::*;
 
-*/
+    #[test]
+    fn test_person_composition() {
+        let p = Person::new("Ada", 30);
+        assert_eq!(p.name.0, "Ada");
+        assert_eq!(p.age.0, 30);
+    }
+
+    #[test]
+    fn test_sum_type() {
+        let e: Either<i32, &str> = Either::Left(42);
+        assert!(matches!(e, Either::Left(42)));
+    }
+
+    #[test]
+    fn test_total_area() {
+        let circle = Circle(1.0);
+        let rect = Rectangle(2.0, 3.0);
+        let shapes: &[&dyn Shape] = &[&circle, &rect];
+        let area = total_area(shapes);
+        assert!((area - (std::f64::consts::PI + 6.0)).abs() < 1e-10);
+    }
+}

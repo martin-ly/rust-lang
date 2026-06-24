@@ -1,11 +1,23 @@
-/*
-在 Rust 中，协变（covariance）和逆变（contravariance）是与类型系统相关的概念，
-主要涉及到类型参数和函数签名。
-逆变特性通常出现在函数参数中，而协变特性则出现在返回值中。
-
-逆变（Contravariance）
-    逆变指的是，如果类型 A 是类型 B 的子类型，那么 Fn(B) 是 Fn(A) 的超类型。
-    这意味着你可以将一个接受更广泛类型参数的函数传递给一个接受更窄类型参数的函数。
-*/
+//! 逆变（contravariance）：子类型关系在函数参数位置被反转。
 
 pub mod define;
+
+/// 期望一个能处理 `'static` 引用的函数指针。
+pub fn use_static_handler(handler: fn(&'static str)) {
+    let s: &'static str = "hello";
+    handler(s);
+}
+
+/// 这个函数可以接受任何生命周期的 `&str`，因此它的类型是 `fn(&'static str)` 的子类型。
+pub fn elided_handler(_s: &str) {}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn contravariant_function_pointer() {
+        // `fn(&str)`（即 `for<'a> fn(&'a str)`）可以赋值给 `fn(&'static str)`
+        use_static_handler(elided_handler);
+    }
+}

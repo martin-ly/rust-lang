@@ -1,4 +1,6 @@
-> **Summary**: Ecosystem Layer Index Legacy. Core Rust concept.
+> **Summary**:
+>
+> Ecosystem Layer Index Legacy. Core Rust concept.
 > **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Cargo Book](https://doc.rust-lang.org/cargo/) · [crates.io](https://crates.io/) · [Rust RFCs](https://rust-lang.github.io/rfcs/)
 > **内容分级**: [综述级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)

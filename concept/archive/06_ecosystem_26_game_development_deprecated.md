@@ -1,9 +1,10 @@
-> **Summary**: Ecosystem 26 Game Development Deprecated. Core Rust concept.
+> **Summary**:
+>
+> Ecosystem 26 Game Development Deprecated. Core Rust concept.
 >
 # Rust 游戏开发
 >
 > **EN**: Ecosystem 26 Game Development Deprecated
-
 > **受众**: [归档]
 > **Bloom 层级**: 应用 → 评价
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure

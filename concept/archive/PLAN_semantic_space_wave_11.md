@@ -3,10 +3,8 @@
 # Wave 11 计划：Rust 表征空间与语义边界全面梳理
 >
 > **EN**: Plan Semantic Space Wave 11
-
 > **受众**: [研究者]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
 
 ## 一、核心问题定义

@@ -1,4 +1,6 @@
-> **Summary**: Rust vs c++：形式系统模型 vs 机制工程模型 —— 核心论点索引. Core Rust concept.
+> **Summary**:
+>
+> Rust vs c++：形式系统模型 vs 机制工程模型 —— 核心论点索引. Core Rust concept.
 > **内容分级**: [综述级]
 > **受众**: [初学者]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -8,7 +10,6 @@
 > （L5 对比分析层，含 Wikipedia 定义、定理矩阵、反命题树、跨文件链接）。
 >
 > **状态**: v1.1（2026-05-13 重构索引）
-
 >
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
 ---
@@ -16,7 +17,6 @@
 # Rust vs C++：形式系统模型 vs 机制工程模型 —— 核心论点索引
 >
 > **EN**: Rust vs c++：形式系统模型 vs 机制工程模型 —— 核心论点索引
-
 > **定位**: 两种编程本体论的根本对比。
 > Rust 从**数学结构**出发，C++ 从**物理机器**出发。
 > 这不仅是技术选型问题，更是"软件文明在 AI 时代如何组织自身"的本体论问题。

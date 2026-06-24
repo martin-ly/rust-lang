@@ -1,12 +1,12 @@
-> **Summary**: Rust Effect System Boundary Analysis. Core Rust concept.
+> **Summary**:
+>
+> Rust Effect System Boundary Analysis. Core Rust concept.
 >
 # Rust 效应系统（Effect System）与其语言边界的分析论证
 >
 > **EN**: Rust Effect System Boundary Analysis
-
 > **文档性质**：形式化分析论证 | **对齐标准**：PLDI、POPL、ICFP 等国际顶会学术传统
 > **核心问题**：Rust 的类型系统是否构成效应系统？其边界在哪里？与代数效应、能力系统、所有权系统的本质差异为何？
-
 >
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
 ---

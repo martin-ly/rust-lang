@@ -1,12 +1,18 @@
-> **Summary**: Future Layer Index Legacy. Core Rust concept.
-> **来源**: [Rust RFCs](https://rust-lang.github.io/rfcs/) · [Rust Blog](https://blog.rust-lang.org/) · [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/)
+> **Summary**:
+>
+> Future Layer Index Legacy. Core Rust concept.
+> **来源**:
+>
+> [Rust RFCs](https://rust-lang.github.io/rfcs/) ·
+> [Rust Blog](https://blog.rust-lang.org/) ·
+> [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/)
+>
 > **内容分级**: [综述级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 
 # L7 前沿趋势层索引（Future & Trends Layer Index）
 >
 > **EN**: Future Layer Index Legacy
-
 > **受众**: [专家]
 > **定位**: Rust 在 AI 时代、形式化方法工业化、分布式系统形式化等前沿方向的**演进预测**与**需求驱动**。知识体系的"前锋"，反向约束下层设计。
 > **Bloom 层级**: 评价 → 创造

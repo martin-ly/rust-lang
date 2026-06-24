@@ -3,12 +3,10 @@
 # concept/archive/ 统一归档索引
 >
 > **EN**: Archive Index
-
 > **受众**: [维护者]
 > **内容分级**: [综述级]
 > **最后更新**: 2026-06-08
 > **状态**: 活跃维护
-
 >
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
 ---

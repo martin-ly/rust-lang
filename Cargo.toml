@@ -421,10 +421,10 @@ libc = "0.2.186"
 # rand: 随机数生成库，提供高质量的随机数生成
 # 2026-03-28: 升级到 0.10.x (重大版本更新)
 rand = "0.10.1"
-# rand_chacha: ChaCha20随机数生成器
-# 注意: rand 0.10.x 已改用 chacha20 0.10.0，不再依赖 rand_chacha。
-#       当前依赖树中无 rand_chacha 0.10.0，保留仅作记录。
-rand_chacha = "0.10.0"
+# chacha20: ChaCha20 流密码 / rand 0.10.x 的随机数生成后端
+# 注意: rand 0.10.x 已改用 chacha20 直接作为 ChaCha20 后端，不再依赖 rand_chacha。
+#       cargo update 2026-06-24: chacha20 0.10.0 -> 0.10.1
+chacha20 = "0.10.1"
 # rand_core: 随机数核心库
 rand_core = "0.10.1"
 # sha2: SHA-2哈希算法实现
@@ -690,6 +690,7 @@ const-hex = "=1.19.1"
 # 本次已升级项:
 # - hyper-rustls: 修正 Cargo.toml 中错误的 0.28.1 -> 0.27.9 (0.28.x 不存在/yanked)
 # - hyper-timeout: 修正 Cargo.toml 中错误的 0.6.1 -> 0.5.2 (0.6.x 不存在/yanked)
+# - chacha20: 0.10.0 -> 0.10.1 (cargo update 2026-06-24，rand 0.10.x 后端)
 # - h2: 0.4.14 -> 0.4.15
 # - http: 1.4.1 -> 1.4.2
 # - prost 系列: 0.14.3 -> 0.14.4
