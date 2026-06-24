@@ -145,7 +145,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示三种过程宏的**应用场景**。Derive 宏为类型自动生成 Trait 实现；Attribute 宏修改被标注的项；Function-like 宏在调用点展开。
-> **使用建议**: 80% 的过程宏需求是 Derive 宏；Attribute 宏用于框架级的代码变换；Function-like 宏用于 DSL。
+> **使用建议**: 80% 的过程宏需求是 Derive 宏（Macro）；Attribute 宏用于框架级的代码变换；Function-like 宏用于 DSL。
 > **关键洞察**: 三种宏的**编译期执行模型相同**——都是 `TokenStream → TokenStream` 的函数，区别在于调用语法和输入内容的结构。
 > [来源: [Rust Reference — Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html)]
 
@@ -388,7 +388,7 @@ graph TD
     style MANUAL fill:#fff3e0
 ```
 
-> **认知功能**: 此决策树判断是否应使用过程宏。核心原则是：**优先使用语言原生特性（泛型、Trait），过程宏是最后手段**。
+> **认知功能**: 此决策树判断是否应使用过程宏。核心原则是：**优先使用语言原生特性（泛型（Generics）、Trait），过程宏是最后手段**。
 > **使用建议**: 80% 的"重复代码"可以用泛型解决；只有当模式跨越类型边界且无法抽象为 Trait 时，才考虑过程宏。
 > **关键洞察**: 过程宏增加了**编译时间**和**调试复杂度**——只在 boilerplate 显著影响可维护性时使用。
 > [来源: [Rust API Guidelines — Macros](https://rust-lang.github.io/api-guidelines//macros.html)]
@@ -476,7 +476,7 @@ graph TD
   ✅ 将复杂逻辑移到运行时库，宏只做简单的代码生成
 ```
 
-> **陷阱总结**: 过程宏的陷阱主要与**标识符处理**、**泛型支持**、**卫生性**和**错误处理**相关。遵循最佳实践可使宏更健壮、更易维护。
+> **陷阱总结**: 过程宏的陷阱主要与**标识符处理**、**泛型支持**、**卫生性**和**错误处理（Error Handling）**相关。遵循最佳实践可使宏更健壮、更易维护。
 > [来源: [proc-macro-workshop](https://github.com/dtolnay/proc-macro-workshop)]
 
 ### 编译错误示例
@@ -637,7 +637,7 @@ pub fn derive_my_trait(input: TokenStream) -> TokenStream {
 > 但边缘情况：
 >
 > 1) `no_std` 环境中 `std` 不可用，应使用 `::core`；
-> 2) 调用者重定义了 `std` 模块；
+> 2) 调用者重定义了 `std` 模块（Module）；
 > 3) 宏生成的代码使用相对路径，可能被调用者的模块结构影响。
 >
 > `proc_macro2::Span::mixed_site()` 提供定义处解析（类似 `macro_rules!` 的 hygiene），`Span::call_site()` 提供调用处解析（可能冲突）。
@@ -662,7 +662,7 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
 ```
 
 > **修正**:
-> **过程宏**的 crate 类型限制：
+> **过程宏（Procedural Macro）**的 crate 类型限制：
 >
 > 1) `proc_macro` crate 只能在 `crate-type = ["proc-macro"]` 的 crate 中使用；
 > 2) `quote` 和 `syn` 是辅助库（非编译器内置）；
@@ -714,7 +714,7 @@ fn main() {
 - A. Derive 宏（`#[derive(Debug)]`）
 - B. Attribute 宏（`#[route("/")]`）
 - C. Function-like 宏（`sql!(SELECT * FROM users)`）
-- D. 声明宏（`macro_rules!`）
+- D. 声明宏（Declarative Macro）（`macro_rules!`）
 
 <details>
 <summary>✅ 答案</summary>

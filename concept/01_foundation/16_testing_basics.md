@@ -484,7 +484,7 @@ graph TD
 └── 缓解: 模块化，避免重复编译
 ```
 
-> **边界要点**: 测试的边界主要与**并行执行**、**异步**、**外部依赖**、**全局状态**和**编译时间**相关。
+> **边界要点**: 测试的边界主要与**并行执行**、**异步（Async）**、**外部依赖**、**全局状态**和**编译时间**相关。
 > [来源: [Cargo Book — Test Targets](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#tests)]
 
 ---
@@ -551,7 +551,7 @@ graph TD
 ## 相关概念文件
 
 - [Modules](./11_modules_and_paths.md) — 模块系统
-- [Error Handling](../02_intermediate/15_error_handling_deep_dive.md) — 错误处理
+- [Error Handling](../02_intermediate/15_error_handling_deep_dive.md) — 错误处理（Error Handling）
 - [Testing Strategies](../06_ecosystem/16_testing.md) — 测试策略
 - [Security Practices](../06_ecosystem/19_security_practices.md) — 安全实践
 
@@ -616,7 +616,7 @@ fn test_helper() {
 // 集成测试像外部 crate，只能访问公开 API
 ```
 
-> **修正**: Rust 的测试分层：1) **单元测试**（`#[cfg(test)]` 模块，在 `src/` 中，可访问私有项）；2) **集成测试**（`tests/` 目录，像外部 crate，只能访问 `pub` API）；3) **文档测试**（`/// ``` ` 中，运行示例代码）。集成测试的隔离性强制库设计者考虑 API 的测试性：私有辅助函数无法直接测试，需通过公开 API 间接测试，或暴露 `#[cfg(test)] pub` 的测试专用接口。这与 Python 的 `unittest`（可访问模块内所有名称）或 Java 的 `JUnit`（`private` 方法通过反射测试）不同——Rust 的模块可见性在测试中同样严格，促进更好的 API 设计。workaround：`pub(crate)` 或 `#[doc(hidden)] pub` 暴露内部接口供集成测试使用。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch11-03-test-organization.html)] · [来源: [Rust Reference — Test Organization](https://doc.rust-lang.org/cargo/guide/tests.html)]
+> **修正**: Rust 的测试分层：1) **单元测试**（`#[cfg(test)]` 模块（Module），在 `src/` 中，可访问私有项）；2) **集成测试**（`tests/` 目录，像外部 crate，只能访问 `pub` API）；3) **文档测试**（`/// ``` ` 中，运行示例代码）。集成测试的隔离性强制库设计者考虑 API 的测试性：私有辅助函数无法直接测试，需通过公开 API 间接测试，或暴露 `#[cfg(test)] pub` 的测试专用接口。这与 Python 的 `unittest`（可访问模块内所有名称）或 Java 的 `JUnit`（`private` 方法通过反射测试）不同——Rust 的模块可见性在测试中同样严格，促进更好的 API 设计。workaround：`pub(crate)` 或 `#[doc(hidden)] pub` 暴露内部接口供集成测试使用。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch11-03-test-organization.html)] · [来源: [Rust Reference — Test Organization](https://doc.rust-lang.org/cargo/guide/tests.html)]
 
 ### 10.5 边界测试：`#[should_panic]` 的预期消息匹配（测试失败）
 

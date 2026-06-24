@@ -534,7 +534,7 @@ graph TD
 
 - [Ownership](./01_ownership.md) — 所有权模型
 - [Type System](./04_type_system.md) — 类型系统
-- [Generics](../02_intermediate/02_generics.md) — 迭代器
+- [Generics](../02_intermediate/02_generics.md) — 迭代器（Iterator）
 - [Async](../03_advanced/02_async.md) — 异步控制流
 
 ---

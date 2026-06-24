@@ -578,7 +578,7 @@ graph TD
      let x = function_returning_result().flatten()?;
 ```
 
-> **陷阱总结**: 错误处理的陷阱主要与**unwrap**、**忽略错误**、**类型匹配**、**闭包**和**嵌套**相关。
+> **陷阱总结**: 错误处理的陷阱主要与**unwrap**、**忽略错误**、**类型匹配**、**闭包（Closures）**和**嵌套**相关。
 > [来源: [Rust By Example — Error Handling](https://doc.rust-lang.org/rust-by-example/error.html)]
 
 ---
@@ -587,7 +587,7 @@ graph TD
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
-| [TRPL Ch. 9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) | ✅ 一级 | 错误处理 |
+| [TRPL Ch. 9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) | ✅ 一级 | 错误处理（Error Handling） |
 | [std::result](https://doc.rust-lang.org/std/result/index.html) | ✅ 一级 | Result API |
 | [std::option](https://doc.rust-lang.org/std/option/index.html) | ✅ 一级 | Option API |
 | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines//dependability.html) | ✅ 一级 | 错误指南 |
@@ -753,7 +753,7 @@ fn main() {
 > 2) 编译器无法推断但开发者确知的状态；
 > 3) 与 C 代码交互（C 函数返回错误码，但 Rust 侧已处理）。
 > 风险：错误使用导致任意行为（可能读取无效内存、可能崩溃、可能静默错误）。
-> 这与 C 的 `*(int*)NULL`（同样 UB，但编译器可能不警告）或 Swift 的 `try!`（运行时 panic，非 UB）不同——Rust 的 `unwrap_unchecked` 是真正的"无安全网"操作。
+> 这与 C 的 `*(int*)NULL`（同样 UB，但编译器可能不警告）或 Swift 的 `try!`（运行时（Runtime） panic，非 UB）不同——Rust 的 `unwrap_unchecked` 是真正的"无安全网"操作。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/result/enum.Result.html)] ·
 > [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 

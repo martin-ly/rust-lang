@@ -142,6 +142,12 @@ jobs:
       - name: Run L3 core quiz tests
         run: cargo test -p exercises --test l3_core
 
+      - name: Run L3 quizzes (core + advanced)
+        run: cargo test -p exercises --test quizzes
+
+      - name: Run L3 ecosystem alignment quiz tests
+        run: cargo test -p exercises --test l3_ecosystem_alignment
+
       - name: Run L3 advanced systems quiz tests
         run: cargo test -p exercises --test l3_advanced_systems
 

@@ -455,7 +455,7 @@ mod tests {
 
 ### 测验 1：asm! 宏基本语法（记忆层）
 
-**题目**: 以下 `asm!` 宏调用中，哪个是正确的 x86_64 内联汇编？
+**题目**: 以下 `asm!` 宏调用中，哪个是正确的 x86_64 内联汇编（Inline Assembly）？
 
 - A. `asm!("mov rax, {0}", in(reg) 42)`
 - B. `unsafe { asm!("mov %rax, $0", in(reg) 42) }`

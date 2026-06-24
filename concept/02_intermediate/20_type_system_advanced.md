@@ -117,7 +117,7 @@ trait Foo {
 }
 ```
 
-> **impl Trait 洞察**: **impl Trait 是 Rust "零成本抽象"的关键**——它隐藏实现细节而不引入运行时开销。
+> **impl Trait 洞察**: **impl Trait 是 Rust "零成本抽象（Zero-Cost Abstraction）"的关键**——它隐藏实现细节而不引入运行时开销。
 > [来源: [RFC 1522 — Conservative impl Trait](https://rust-lang.github.io/rfcs//1522-conservative-impl-trait.html)]
 
 > **Rust 2024 edition 补充**: 返回位置 `impl Trait` 的生命周期捕获规则发生变化。

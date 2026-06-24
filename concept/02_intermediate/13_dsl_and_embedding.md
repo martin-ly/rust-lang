@@ -130,7 +130,7 @@ let app = Router::new()
 // - IDE 支持（如果宏生成良好）
 ```
 
-> **宏 DSL 洞察**: Rust 的**过程宏**使 DSL 可以在编译期进行**任意复杂的验证和转换**——这是其他语言难以实现的能力。
+> **宏 DSL 洞察**: Rust 的**过程宏（Procedural Macro）**使 DSL 可以在编译期进行**任意复杂的验证和转换**——这是其他语言难以实现的能力。
 > [来源: [yew — html! macro](https://yew.rs/docs/concepts/html)]
 
 ---
@@ -312,7 +312,7 @@ const fn validate_email_prefix(s: &str) -> bool {
 }
 ```
 
-> **编译期验证洞察**: Rust 的**宏 + const fn** 提供了有限的编译期计算能力——对于复杂验证，通常采用"**解析，不验证**"（parse, don't validate）策略，使用强类型替代运行时检查。
+> **编译期验证洞察**: Rust 的**宏（Macro） + const fn** 提供了有限的编译期计算能力——对于复杂验证，通常采用"**解析，不验证**"（parse, don't validate）策略，使用强类型替代运行时检查。
 > [source: [Parse Don't Validate](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/)]
 
 ---
@@ -775,7 +775,7 @@ fn main() {
 | DSL 与嵌入 式设计：Rust 中的领域特定语言 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 领域语言安全 ⟸ 宏卫生性 ⟸ 标记宏/过程宏
-> 编译期验证 ⟸ 类型状态机 ⟸ 零成本抽象
+> 编译期验证 ⟸ 类型状态机 ⟸ 零成本抽象（Zero-Cost Abstraction）
 > **过渡**: 掌握 DSL 与嵌入 式设计：Rust 中的领域特定语言 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 DSL 与嵌入 式设计：Rust 中的领域特定语言 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。

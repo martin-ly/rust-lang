@@ -504,3 +504,7 @@ pub fn run_basic_syntax_examples() {
 pub fn get_basic_syntax_info() -> &'static str {
     basic_syntax::get_basic_syntax_info()
 }
+
+// Kani 形式化验证示例（仅在 cargo kani 时编译）
+#[cfg(kani)]
+pub mod kani_examples;

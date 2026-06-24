@@ -35,7 +35,7 @@
 **变更日志**:
 
 - v4.1 (2026-05-14): 增强 §5 属性宏修改函数体——新增 `#[trace]` 完整实现（含 `proc_macro_error2` 友好错误）、AST 遍历三策略（quote 包装 / `Fold` trait / 手动 `stmts` 替换）、声明宏能力边界对比、跨层链接
-- v4.0 (2026-05-13): Phase 4 TODO 清理——新增 proc_macro2/syn/quote 最佳实践、macro_rules! 重复模式完整语法、const fn + const generics 替代宏趋势、编译期内置宏完整列表、属性宏修改函数体完整示例（#[measure_time]）、macro 关键字（声明宏 2.0）演进对比
+- v4.0 (2026-05-13): Phase 4 TODO 清理——新增 proc_macro2/syn/quote 最佳实践、macro_rules! 重复模式完整语法、const fn + const generics 替代宏趋势、编译期内置宏完整列表、属性宏修改函数体完整示例（#[measure_time]）、macro 关键字（声明宏（Declarative Macro） 2.0）演进对比
 - v1.0 (2026-05-12): 初始版本，完成权威定义、宏类型对比矩阵、卫生性分析、形式化视角、思维导图、示例反例
 - v2.0 (2026-05-13): 深度重构——增强定理一致性矩阵至11行（带⟹推理链）、新增3个反命题决策树、重写6步递进认知路径、补充章节过渡段落与层次一致性标注
 - v3.0 (2026-05-13): 深度重构——增强§2编译管道精确位置、增强§3.1卫生宏形式化（隐式gensym/对比矩阵/边界案例）、新增§5.5宏与类型系统交互边界、新增2个反命题决策树、补充章节过渡段落
@@ -87,12 +87,12 @@ Rust 宏 hygiene:
 
 ### 2.1 宏类型对比矩阵
 
-| **维度** | **macro_rules!** | **Derive 宏** | **属性宏** | **函数宏** |
+| **维度** | **macro_rules!** | **Derive 宏（Macro）** | **属性宏** | **函数宏** |
 |:---|:---|:---|:---|:---|
 | **触发方式** | `name!()` / `name![]` | `#[derive(Trait)]` | `#[attr]` | `name!()` |
 | **输入** | Token stream (模式匹配) | `struct`/`enum` 定义 | 任意 item | 任意 token stream |
 | **输出** | Token stream | 实现代码 | 修改/替换 item | Token stream |
-| **操作对象** | 语法树片段 | 数据类型定义 | 函数/模块/结构体 | 任意表达式 |
+| **操作对象** | 语法树片段 | 数据类型定义 | 函数/模块（Module）/结构体（Struct） | 任意表达式 |
 | **典型用途** | 声明式代码生成 | `Debug`、`Clone` 自动实现 | 路由注册、测试框架 | `vec!`、`format!`、`sql!` |
 | **实现复杂度** | 中（模式匹配） | 高（需解析语法树） | 高 | 高 |
 | **编译期执行** | ✅ 展开阶段 | ✅ 展开阶段 | ✅ 展开阶段 | ✅ 展开阶段 |
@@ -102,7 +102,7 @@ Rust 宏 hygiene:
 
 | **语言** | **机制** | **卫生性** | **类型安全** | **操作层面** |
 | :--- | :--- | :--- | :--- | :--- |
-| **Rust** | `macro_rules!` + 过程宏 | ✅ 完全卫生 | ✅ 展开后类型检查 | AST / Token |
+| **Rust** | `macro_rules!` + 过程宏（Procedural Macro） | ✅ 完全卫生 | ✅ 展开后类型检查 | AST / Token |
 | **C** | `#define` | ❌ 文本替换 | ❌ 无 | 文本 |
 | **C++** | 模板 + 宏 | ⚠️ 部分 | ⚠️ 复杂错误 | AST（模板） |
 | **Lisp** | 宏（代码即数据） | ✅ 符号隔离 | ⚠️ 展开后检查 | S-expression |
@@ -304,7 +304,7 @@ graph TD
 > [来源: [Rust Reference: macro keyword](https://doc.rust-lang.org/reference/macros-by-example.html)]
 > [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)]
 > 建议在犹豫"这里该写宏还是泛型"时沿树遍历，避免过度使用宏。
-> 核心洞察：宏是最后手段——仅当可变参数、DSL 或语法树操作需求超出函数/泛型/const fn 能力边界时才应选择。[来源: 💡 原创分析]
+> 核心洞察：宏是最后手段——仅当可变参数、DSL 或语法树操作需求超出函数/泛型（Generics）/const fn 能力边界时才应选择。[来源: 💡 原创分析]
 > [来源: [TRPL: Ch19.5](https://doc.rust-lang.org/book/ch19-06-macros.html)]
 
 ### 5.2 反命题决策树一："宏和函数等价"
@@ -1347,7 +1347,7 @@ fn main() {
 }
 ```
 
-> **[Rust Reference: const_eval](https://doc.rust-lang.org/reference/)** `const fn` 的能力在持续扩展（如 const trait、const mut 引用），但宏在语法级变换（DSL、可变参数）上的优势不可替代。✅ 已验证
+> **[Rust Reference: const_eval](https://doc.rust-lang.org/reference/)** `const fn` 的能力在持续扩展（如 const trait、const mut 引用（Reference）），但宏在语法级变换（DSL、可变参数）上的优势不可替代。✅ 已验证
 
 ---
 

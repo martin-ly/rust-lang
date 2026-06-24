@@ -492,7 +492,7 @@ graph TD
 
 ## 相关概念文件
 
-- [Error Handling](../02_intermediate/15_error_handling_deep_dive.md) — 错误处理
+- [Error Handling](../02_intermediate/15_error_handling_deep_dive.md) — 错误处理（Error Handling）
 - [Unsafe](../03_advanced/03_unsafe.md) — 不安全代码
 - [FFI](../03_advanced/05_rust_ffi.md) — 外部函数接口
 
@@ -555,7 +555,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: `catch_unwind` 捕获 panic 并恢复执行，但要求闭包实现 `UnwindSafe` trait。共享/可变引用（`&T`、`&mut T`）、`RefCell` 等类型不实现 `UnwindSafe`，因为 panic 可能导致它们处于不一致状态（如 `RefCell` 的借用计数未递减）。使用 `AssertUnwindSafe` 包装闭包可显式声明"我知道这是安全的"——但这是 unsafe 的契约。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: `catch_unwind` 捕获 panic 并恢复执行，但要求闭包实现 `UnwindSafe` trait。共享/可变引用（Mutable Reference）（`&T`、`&mut T`）、`RefCell` 等类型不实现 `UnwindSafe`，因为 panic 可能导致它们处于不一致状态（如 `RefCell` 的借用计数未递减）。使用 `AssertUnwindSafe` 包装闭包可显式声明"我知道这是安全的"——但这是 unsafe 的契约。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 10.2 边界测试：在 `Drop` 中 panic 导致双重 panic（运行时 abort）
 
@@ -714,7 +714,7 @@ fn compute_expensive_value() -> i32 { 42 }
 fn compute_expensive_string() -> String { String::from("expensive") }
 ```
 
-> **修正**: `assert!` 的格式参数在**断言失败时**求值，但 `compute_expensive_string()` 是否在断言通过时求值？实际上，Rust 的 `assert!` 宏展开后，格式参数在 panic 时才求值（通过 `format_args!` 的惰性），但闭包捕获可能意外触发求值。更安全的模式：`assert!(x > 0, "value is not positive")`，或延迟格式化：`assert!(x > 0, "value {x} is not positive")`（1.58+ 的捕获格式化）。`debug_assert!` 在 release 模式下完全消除（无运行时开销），适合开发期检查。这与 C 的 `assert`（宏，条件为假时打印消息并 abort）或 Java 的 `assert`（类似，但可启用/禁用）不同——Rust 的 `assert!` 是宏，可格式化消息，且 `debug_assert!` 在 release 中零成本。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html)] · [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/panic.html)]
+> **修正**: `assert!` 的格式参数在**断言失败时**求值，但 `compute_expensive_string()` 是否在断言通过时求值？实际上，Rust 的 `assert!` 宏展开后，格式参数在 panic 时才求值（通过 `format_args!` 的惰性），但闭包捕获可能意外触发求值。更安全的模式：`assert!(x > 0, "value is not positive")`，或延迟格式化：`assert!(x > 0, "value {x} is not positive")`（1.58+ 的捕获格式化）。`debug_assert!` 在 release 模式下完全消除（无运行时开销），适合开发期检查。这与 C 的 `assert`（宏（Macro），条件为假时打印消息并 abort）或 Java 的 `assert`（类似，但可启用/禁用）不同——Rust 的 `assert!` 是宏，可格式化消息，且 `debug_assert!` 在 release 中零成本。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html)] · [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/panic.html)]
 
 ## 嵌入式测验（Embedded Quiz）
 

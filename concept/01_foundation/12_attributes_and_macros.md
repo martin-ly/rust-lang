@@ -552,7 +552,7 @@ graph TD
 
 - [Type System](./04_type_system.md) — 类型系统
 - [Modules](./11_modules_and_paths.md) — 模块系统
-- [Proc Macros](../03_advanced/07_proc_macro.md) — 过程宏
+- [Proc Macros](../03_advanced/07_proc_macro.md) — 过程宏（Procedural Macro）
 - [DSL](../02_intermediate/13_dsl_and_embedding.md) — DSL 模式
 
 ---
@@ -637,7 +637,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: Rust 宏（`macro_rules!`）通过递归展开实现循环/迭代逻辑。编译器设置递归深度上限（默认 128），超过则报错。宏设计必须确保递归有终止分支（base case）。这与函数递归类似，但宏在编译期展开，其递归深度受编译器限制而非运行时栈限制。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: Rust 宏（Macro）（`macro_rules!`）通过递归展开实现循环/迭代逻辑。编译器设置递归深度上限（默认 128），超过则报错。宏设计必须确保递归有终止分支（base case）。这与函数递归类似，但宏在编译期展开，其递归深度受编译器限制而非运行时栈限制。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.3 边界测试：过程宏的 hygiene 与标识符捕获（编译错误）
 
@@ -660,7 +660,7 @@ fn fixed() {
 // mod std { /* ... */ }
 ```
 
-> **修正**: Rust 的宏 hygiene 保证宏生成的标识符不会与调用者的标识符意外冲突。`Span::mixed_site()` 和 `Span::call_site()` 控制 hygiene 级别：`mixed_site` 宏生成的标识符在宏定义处解析（防止调用者覆盖），`call_site` 在调用处解析（允许调用者覆盖）。`derive` 宏通常使用绝对路径（`::std::fmt::Debug`），因为标准库路径是稳定的。但边缘情况：`no_std` 环境中 `std` 不可用，应使用 `::core::fmt::Debug`。`proc-macro2` 和 `quote` crate 提供 `$crate` 等价的 `::my_crate` 路径处理。这与 C 的宏（无 hygiene，纯文本替换，极易冲突）或 Scheme 的 hygienic macro（类似 Rust，但基于语法对象）不同——Rust 的 hygiene 是编译期强制的，覆盖了标识符、生命周期、操作符重载。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-06-macros.html)] · [来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)]
+> **修正**: Rust 的宏 hygiene 保证宏生成的标识符不会与调用者的标识符意外冲突。`Span::mixed_site()` 和 `Span::call_site()` 控制 hygiene 级别：`mixed_site` 宏生成的标识符在宏定义处解析（防止调用者覆盖），`call_site` 在调用处解析（允许调用者覆盖）。`derive` 宏通常使用绝对路径（`::std::fmt::Debug`），因为标准库路径是稳定的。但边缘情况：`no_std` 环境中 `std` 不可用，应使用 `::core::fmt::Debug`。`proc-macro2` 和 `quote` crate 提供 `$crate` 等价的 `::my_crate` 路径处理。这与 C 的宏（无 hygiene，纯文本替换，极易冲突）或 Scheme 的 hygienic macro（类似 Rust，但基于语法对象）不同——Rust 的 hygiene 是编译期强制的，覆盖了标识符、生命周期（Lifetimes）、操作符重载。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-06-macros.html)] · [来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)]
 
 ### 10.4 边界测试：`cfg` 条件编译的互斥性（编译错误/逻辑错误）
 
@@ -679,7 +679,7 @@ fn main() {
 }
 ```
 
-> **修正**: `cfg` 条件编译根据编译目标选择代码。若所有 `cfg` 条件都不满足，函数不存在，调用点编译错误。安全模式：添加无条件的默认实现或 `_` 通配：`#[cfg(not(any(target_os = "linux", target_os = "windows")))] fn platform_specific() { panic!("unsupported") }`。`cfg` 的求值在编译期：条件为假时，代码完全被剔除（不解析、不类型检查）。这与 C 的 `#ifdef`（预处理器，条件为假时仍需语法正确）或 Java 的无条件编译（运行时 `if` 检查）不同——Rust 的 `cfg` 允许平台特定的代码使用该平台独有的 API（如 Linux 的 `epoll`、Windows 的 `IOCP`），无需在所有平台上可编译。但这也意味着跨平台代码需仔细设计 `cfg` 覆盖，防止遗漏平台。[来源: [The Rust Programming Language](https://doc.rust-lang.org/cargo/reference/config.html)] · [来源: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)]
+> **修正**: `cfg` 条件编译根据编译目标选择代码。若所有 `cfg` 条件都不满足，函数不存在，调用点编译错误。安全模式：添加无条件的默认实现或 `_` 通配：`#[cfg(not(any(target_os = "linux", target_os = "windows")))] fn platform_specific() { panic!("unsupported") }`。`cfg` 的求值在编译期：条件为假时，代码完全被剔除（不解析、不类型检查）。这与 C 的 `#ifdef`（预处理器，条件为假时仍需语法正确）或 Java 的无条件编译（运行时（Runtime） `if` 检查）不同——Rust 的 `cfg` 允许平台特定的代码使用该平台独有的 API（如 Linux 的 `epoll`、Windows 的 `IOCP`），无需在所有平台上可编译。但这也意味着跨平台代码需仔细设计 `cfg` 覆盖，防止遗漏平台。[来源: [The Rust Programming Language](https://doc.rust-lang.org/cargo/reference/config.html)] · [来源: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)]
 
 ### 10.3 边界测试：`cfg` 条件编译的互斥性（编译错误/逻辑错误）
 

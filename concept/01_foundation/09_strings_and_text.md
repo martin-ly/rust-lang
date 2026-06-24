@@ -454,7 +454,7 @@ graph TD
      // 借用而非 move
 ```
 
-> **陷阱总结**: 字符串处理的陷阱主要与**性能假设**、**编码转换**、**NUL 处理**、**API 设计**和**所有权**相关。
+> **陷阱总结**: 字符串处理的陷阱主要与**性能假设**、**编码转换**、**NUL 处理**、**API 设计**和**所有权（Ownership）**相关。
 > [来源: [Rust Compiler Error E0277](https://doc.rust-lang.org/error_codes/E0277.html)]
 
 ---
@@ -832,9 +832,9 @@ fn main() {
 <details>
 <summary>✅ 答案</summary>
 
-**运行时 panic**。
+**运行时（Runtime） panic**。
 
-字符串切片 `&s[0..10]` 的结束索引 `10` 超出了字符串长度 `5`。Rust 在运行时检查切片边界，越界触发 panic：
+字符串切片（String Slice） `&s[0..10]` 的结束索引 `10` 超出了字符串长度 `5`。Rust 在运行时检查切片边界，越界触发 panic：
 
 ```text
 thread 'main' panicked at 'byte index 10 is out of bounds of `hello`'

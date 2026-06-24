@@ -13,7 +13,7 @@
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价不同智能指针的适用场景
-> **定位**: 系统分析 Rust **智能指针**的设计——Box（独占堆分配）、Rc/Arc（引用计数共享）、RefCell/Cell（内部可变性）、以及它们的组合使用模式，揭示每种指针类型的所有权语义和适用场景。
+> **定位**: 系统分析 Rust **智能指针（Smart Pointer）**的设计——Box（独占堆分配）、Rc/Arc（引用计数共享）、RefCell/Cell（内部可变性）、以及它们的组合使用模式，揭示每种指针类型的所有权语义和适用场景。
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Memory Management](./03_memory_management.md)
 > **后置概念**: [Pin](../03_advanced/06_pin_unpin.md) · [Cow](./11_cow_and_borrowed.md)
 
@@ -108,7 +108,7 @@ graph TD
     INTERIOR --> RWLOCK --> S7
 ```
 
-> **认知功能**: 此图展示 Rust 智能指针的**三维分类**——所有权（唯一/共享）、线程安全（单线程/多线程）、可变性（外部/内部）。每种智能指针对应特定的语义组合。
+> **认知功能**: 此图展示 Rust 智能指针的**三维分类**——所有权（Ownership）（唯一/共享）、线程安全（单线程/多线程）、可变性（外部/内部）。每种智能指针对应特定的语义组合。
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 根据"是否需要共享"和"是否需要线程安全"两个维度快速定位合适的智能指针。
 > **关键洞察**: Rust 的智能指针不是 C++ 的"自动释放指针"——它们是**所有权的显式表达**，每种类型都对应一种特定的所有权语义。
@@ -411,7 +411,7 @@ graph TD
 └── 需要 Send/Sync 时，使用 Arc/Mutex 替代
 ```
 
-> **边界要点**: 智能指针的边界主要与**循环引用**、**运行时 panic**、**死锁**、**原子开销**和**Send/Sync 限制**相关。
+> **边界要点**: 智能指针的边界主要与**循环引用**、**运行时（Runtime） panic**、**死锁**、**原子开销**和**Send/Sync 限制**相关。
 > [来源: [Rustonomicon — Send and Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html)]
 
 ---

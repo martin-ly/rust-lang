@@ -1,6 +1,6 @@
 > **内容分级**: [综述级]
 
-> **本节关键术语**: 闭包类型 (Closure Type) · Fn · FnMut · FnOnce · 捕获模式 (Capture Mode) · move 闭包 — [完整对照表](../00_meta/terminology_glossary.md)
+> **本节关键术语**: 闭包类型 (Closure Type) · Fn · FnMut · FnOnce · 捕获模式 (Capture Mode) · move 闭包（Closures） — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 闭包类型系统：Fn、FnMut、FnOnce 的捕获语义
 >
@@ -92,7 +92,7 @@ impl<'a> Fn<(i32,)> for __Closure_1<'a> {
 }
 ```
 
-> **核心洞察**: 闭包的"魔法"在于编译器自动推断**捕获哪些变量**、**以什么方式捕获**（引用/移动）、以及**实现哪个 Trait**（Fn/FnMut/FnOnce）。
+> **核心洞察**: 闭包的"魔法"在于编译器自动推断**捕获哪些变量**、**以什么方式捕获**（引用（Reference）/移动）、以及**实现哪个 Trait**（Fn/FnMut/FnOnce）。
 > [来源: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html)]
 
 ---
@@ -370,7 +370,7 @@ graph TD
      // i 被复制（i32: Copy）到线程
 ```
 
-> **陷阱总结**: 闭包的大多数问题源于**生命周期**和**所有权**——这正是 Rust 的核心关注领域。`move` 关键字和正确的 Trait 约束是解决之道。
+> **陷阱总结**: 闭包的大多数问题源于**生命周期（Lifetimes）**和**所有权（Ownership）**——这正是 Rust 的核心关注领域。`move` 关键字和正确的 Trait 约束是解决之道。
 > [来源: [Rust Common Mistakes — Closures](https://doc.rust-lang.org/book/ch13-01-closures.html)]
 
 ---
@@ -478,7 +478,7 @@ fn main() {
 }
 ```
 
-> **修正**: `dyn Fn` 使用动态分发（vtable），有间接调用开销。泛型 `F: Fn` 通过单态化生成直接调用，无运行时开销。在性能关键路径上，优先使用泛型而非 trait object。这与 C++ 的模板 vs 虚函数对比一致——Rust 的零成本抽象要求显式选择静态或动态分发。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: `dyn Fn` 使用动态分发（vtable），有间接调用开销。泛型（Generics） `F: Fn` 通过单态化生成直接调用，无运行时开销。在性能关键路径上，优先使用泛型而非 trait object。这与 C++ 的模板 vs 虚函数对比一致——Rust 的零成本抽象要求显式选择静态或动态分发。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.3 边界测试：`Fn` trait 的自动实现与 `move` 闭包（编译错误）
 

@@ -4,7 +4,7 @@
 > **Summary**: Readme. Core Rust concept.
 >
 > **受众**: [进阶]
-> **定位**：在掌握 L1 基础后，理解 Rust 的模块化、泛型、内存管理和错误处理等进阶机制。本层内容对齐 TRPL 第 10-15 章、Microsoft RustTraining 进阶部分。
+> **定位**：在掌握 L1 基础后，理解 Rust 的模块化、泛型（Generics）、内存管理和错误处理等进阶机制。本层内容对齐 TRPL 第 10-15 章、Microsoft RustTraining 进阶部分。
 > **Bloom 层级**: 理解 → 应用
 > **对应 L4 形式化**: 类型约束求解 · 参数多态 · 子类型 · 存在类型
 > **来源: [TRPL Ch10](https://doc.rust-lang.org/book/ch10-00-generics.html)** ·
@@ -179,17 +179,17 @@ Trait Bounds 是 L2 的"枢纽概念"：
 | [01_traits.md](./01_traits.md) | Trait 系统 | 定义、约束、Orphan Rule、关联类型/GATs、Supertrait、Auto Trait | ✅ v1.0 | Type System, Ownership | Concurrency (Send/Sync), Async (Future) |
 | [02_generics.md](./02_generics.md) | 泛型系统 | 单态化、Trait Bounds、Const Generics、GATs、HRTB | ✅ v1.0 | Lifetimes, Type System | Async (Future), Memory (Pin) |
 | [03_memory_management.md](./03_memory_management.md) | 内存管理 | Box/Rc/Arc、RefCell/Mutex、Cell/UnsafeCell、Pin、MaybeUninit | ✅ v1.0 | Ownership, Borrowing | Concurrency (Arc), Unsafe (MaybeUninit) |
-| [04_error_handling.md](./04_error_handling.md) | 错误处理 | Result/Option、`?`、Custom Error、Error trait | ✅ v1.0 | Type System (enum), Trait | Async (异步错误传播) |
+| [04_error_handling.md](./04_error_handling.md) | 错误处理（Error Handling） | Result/Option、`?`、Custom Error、Error trait | ✅ v1.0 | Type System (enum), Trait | Async (异步错误传播) |
 | [05_assert_matches.md](./05_assert_matches.md) | 模式匹配断言 | `matches!`、`assert_matches!`、模式断言语义 | ✅ v1.0 | Type System (Pattern), Error Handling | Macros |
 | [06_range_types.md](./06_range_types.md) | 范围类型语义 | `std::ops::Range` → `core::range`、`IntoIterator` 设计 | ✅ v1.0 | Type System, Generics | Version Tracking |
-| [07_closure_types.md](./07_closure_types.md) | 闭包类型系统 | 捕获模式、Fn/FnMut/FnOnce、move 闭包、生命周期擦除 | ✅ v1.0 | Ownership, Borrowing | Async, Iterator |
+| [07_closure_types.md](./07_closure_types.md) | 闭包类型系统 | 捕获模式、Fn/FnMut/FnOnce、move 闭包（Closures）、生命周期擦除 | ✅ v1.0 | Ownership, Borrowing | Async, Iterator |
 | [08_interior_mutability.md](./08_interior_mutability.md) | 内部可变性 | Cell/RefCell/UnsafeCell、Mutex/RwLock、原子类型 | ✅ v1.0 | Ownership, Borrowing | Concurrency, Unsafe |
 | [09_serde_patterns.md](./09_serde_patterns.md) | Serde 序列化 | Serialize/Deserialize、自定义 Visitor、性能优化 | ✅ v1.0 | Trait, Generics | Application Domains |
 | [10_module_system.md](./10_module_system.md) | 模块系统 | Crate/Module/Package、可见性、use 声明、Workspace | ✅ v1.0 | Ownership, Type System | Macros, Toolchain |
 | [11_cow_and_borrowed.md](./11_cow_and_borrowed.md) | Cow 写时克隆 | Clone-on-Write、零拷贝、ToOwned、API 灵活性 | ✅ v1.0 | Ownership, Borrowing | String Patterns, Zero Cost |
-| [12_smart_pointers.md](./12_smart_pointers.md) | 智能指针 | Box/Rc/Arc/RefCell/Cell、所有权语义、组合模式 | ✅ v1.0 | Ownership, Borrowing | Pin, Concurrency |
-| [13_dsl_and_embedding.md](./13_dsl_and_embedding.md) | DSL 与嵌入 | 宏 DSL、Builder、Parser Combinator、类型安全 | ✅ v1.0 | Trait, Macros | Serde, WebAssembly |
-| [14_newtype_and_wrapper.md](./14_newtype_and_wrapper.md) | Newtype 与包装器 | 类型安全、零成本抽象、孤儿规则、单位类型 | ✅ v1.0 | Type System, Trait | Patterns, Smart Pointers |
+| [12_smart_pointers.md](./12_smart_pointers.md) | 智能指针（Smart Pointer） | Box/Rc/Arc/RefCell/Cell、所有权语义、组合模式 | ✅ v1.0 | Ownership, Borrowing | Pin, Concurrency |
+| [13_dsl_and_embedding.md](./13_dsl_and_embedding.md) | DSL 与嵌入 | 宏（Macro） DSL、Builder、Parser Combinator、类型安全 | ✅ v1.0 | Trait, Macros | Serde, WebAssembly |
+| [14_newtype_and_wrapper.md](./14_newtype_and_wrapper.md) | Newtype 与包装器 | 类型安全、零成本抽象（Zero-Cost Abstraction）、孤儿规则、单位类型 | ✅ v1.0 | Type System, Trait | Patterns, Smart Pointers |
 
 ---
 

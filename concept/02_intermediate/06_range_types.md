@@ -111,7 +111,7 @@ for i in r {
 ### 1.3 `core::range`：编译期值语义
 >
 
-Rust 1.96.0 引入 `core::range::Range`，将范围从**迭代器**重构为**纯值**：
+Rust 1.96.0 引入 `core::range::Range`，将范围从**迭代器（Iterator）**重构为**纯值**：
 
 ```rust
 // Rust 1.96+ 的新语义
@@ -436,7 +436,7 @@ where
 > **修正**:
 > `Range`（`a..b`，半开区间）、`RangeInclusive`（`a..=b`，闭区间）、`RangeFrom`（`a..`）、`RangeTo`（`..b`）是**不同的类型**。
 
-> **1.97+ 前瞻**: `core::range::RangeFull` 和 `core::range::RangeTo` 将作为 `core::ops::RangeFull` / `RangeTo` 的 re-export 进入 `core::range` 模块，同时 `core::range::legacy::*` 将成为旧范围类型的新家。这意味着未来版本将完成新旧 Range 体系的统一。当前（1.96）`core::range` 仅包含 `Range`、`RangeFrom`、`RangeInclusive` 及其迭代器。 [来源: [releases.rs — PR #156840](https://releases.rs/)]
+> **1.97+ 前瞻**: `core::range::RangeFull` 和 `core::range::RangeTo` 将作为 `core::ops::RangeFull` / `RangeTo` 的 re-export 进入 `core::range` 模块（Module），同时 `core::range::legacy::*` 将成为旧范围类型的新家。这意味着未来版本将完成新旧 Range 体系的统一。当前（1.96）`core::range` 仅包含 `Range`、`RangeFrom`、`RangeInclusive` 及其迭代器。 [来源: [releases.rs — PR #156840](https://releases.rs/)]
 > 函数参数需明确指定接受哪种范围，或使用 `RangeBounds` trait 泛化。
 > 这体现了 Rust"显式优于隐式"的设计哲学——范围语义在类型层面区分，避免 C++ 中 `for (int i = a; i <= b; i++)` 与 `i < b` 的歧义。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]

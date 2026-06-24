@@ -306,7 +306,7 @@ async/await 与 Pin 的关系:
   // 宏在栈上创建 Pin<&mut T>，生命周期受限
 ```
 
-> **最佳实践**: 绝大多数场景使用 `Box::pin` 或 `pin_mut!` 宏；手写 unsafe Pin 代码只在实现自定义 Future/Generator 时需要。
+> **最佳实践**: 绝大多数场景使用 `Box::pin` 或 `pin_mut!` 宏（Macro）；手写 unsafe Pin 代码只在实现自定义 Future/Generator 时需要。
 > [来源: [pin-project Documentation](https://docs.rs/pin-project/latest/pin_project/)]
 
 ---
@@ -761,7 +761,7 @@ Rust 的 **auto trait** 机制：
 
 - `Unpin` 是 auto trait，默认所有类型都实现 `Unpin`
 - 只有当结构体包含 `!Unpin` 的字段时，它才自动变为 `!Unpin`
-- 原始指针 `*const T` 本身实现 `Unpin`，因此 `Test` 也自动实现 `Unpin`
+- 原始指针（Raw Pointer） `*const T` 本身实现 `Unpin`，因此 `Test` 也自动实现 `Unpin`
 
 **陷阱**: 包含原始指针**不**会使类型变为 `!Unpin`。要使类型真正 `!Unpin`，需要显式声明：
 
@@ -874,7 +874,7 @@ struct ExampleFuture {
 1. 状态机一旦被 poll，内存位置不再改变
 2. 自引用字段始终有效
 
-这是 Rust async/await **零成本抽象**的安全基础。
+这是 Rust async/await **零成本抽象（Zero-Cost Abstraction）**的安全基础。
 </details>
 
 ---

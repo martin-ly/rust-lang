@@ -24,6 +24,12 @@ criterion = { workspace = true }
 [features]
 nightly = []
 
+[lints.rust]
+unsafe_code = "allow"
+missing_docs = "allow"
+# 声明 Kani 使用的 cfg 条件名，避免 unexpected_cfgs 警告
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(kani)'] }
+
 [lib]
 name = "c02_type_system"
 path = "src/lib.rs"

@@ -821,7 +821,7 @@ pub mod parser;
 pub mod evaluator;
 ```
 
-`lib.rs` 是 crate 的根模块。`mod parser;` 告诉编译器加载 `src/parser.rs` 作为 `parser` 模块，`mod evaluator;` 同理。
+`lib.rs` 是 crate 的根模块。`mod parser;` 告诉编译器加载 `src/parser.rs` 作为 `parser` 模块（Module），`mod evaluator;` 同理。
 
 `pub` 修饰使得这两个模块对外部可见。若省略 `pub`，则模块仅在 crate 内部可用。
 </details>

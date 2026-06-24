@@ -107,4 +107,8 @@ pub mod examples;
 #[cfg(test)]
 pub mod exercises;
 
+// Kani 形式化验证示例（仅在 cargo kani 时编译）
+#[cfg(kani)]
+pub mod kani_examples;
+
 // test touch

@@ -493,7 +493,7 @@ fn drop_order_nll() {
 }
 ```
 
-> **修正**: NLL 下，可变借用 `r` 的生命周期精确到其最后一次使用。`drop(r)` 显式结束借用后，`data` 才能被移动/释放。
+> **修正**: NLL 下，可变借用（Mutable Borrow） `r` 的生命周期精确到其最后一次使用。`drop(r)` 显式结束借用后，`data` 才能被移动/释放。
 
 ---
 
@@ -546,7 +546,7 @@ fn main() {
 ## 相关概念文件
 
 - [Borrowing](../01_foundation/02_borrowing.md) — 借用系统
-- [Lifetimes](../01_foundation/03_lifetimes.md) — 生命周期
+- [Lifetimes](../01_foundation/03_lifetimes.md) — 生命周期（Lifetimes）
 - [Type System](../01_foundation/04_type_system.md) — 类型系统
 - [Unsafe](./03_unsafe.md) — 不安全代码
 - [RustBelt](../04_formal/04_rustbelt.md) — 形式化验证

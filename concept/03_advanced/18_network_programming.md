@@ -15,7 +15,7 @@
 > Async Programming. Core Rust concept covering mechanism analysis, async/await patterns, network programming.
 > **受众**: [专家]
 > **Bloom 层级**: 应用 → 分析
-> **定位**: 系统分析 Rust **网络编程**的核心范式——从 Tokio 运行时下的 TCP/UDP 异步 IO，到 socket 编程的底层细节，再到 Tower 服务抽象的设计哲学，建立从"怎么写"到"为什么这样设计"的完整认知框架。
+> **定位**: 系统分析 Rust **网络编程**的核心范式——从 Tokio 运行时下的 TCP/UDP 异步（Async） IO，到 socket 编程的底层细节，再到 Tower 服务抽象的设计哲学，建立从"怎么写"到"为什么这样设计"的完整认知框架。
 > **前置概念**: [Async/Await](./02_async.md) · [Concurrency](./01_concurrency.md) · [Traits](../02_intermediate/01_traits.md)
 > **后置概念**: [Web Frameworks](../06_ecosystem/27_web_frameworks.md) · [Lock-free](./16_lock_free.md)
 
@@ -263,7 +263,7 @@ async fn fixed(stream: TcpStream) {
 > Tokio 的 `TcpStream` 提供两种分裂方式：
 > `split()`（返回 `&mut ReadHalf` / `&mut WriteHalf`，借用原流）和 `into_split()`（返回拥有所有权的 `OwnedReadHalf` / `OwnedWriteHalf`，消耗原流）。
 > `split()` 要求原流在分裂期间保持存活，且分裂引用不能跨 await 点（因 `&mut` 不能 Send）。
-> `into_split()` 将流拆分为两个独立对象，各自拥有内部 `Arc` 引用，可安全移动到不同任务。
+> `into_split()` 将流拆分为两个独立对象，各自拥有内部 `Arc` 引用（Reference），可安全移动到不同任务。
 > [来源: [Tokio Documentation](https://docs.rs/tokio/)]
 
 ### 10.2 边界测试：套接字地址类型不匹配（编译错误）

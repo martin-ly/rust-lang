@@ -36,7 +36,7 @@
 > **Bloom 层级**: 理解 → 应用 → 分析
 > **定位**:
 > 本文档为 **Brown University Interactive Book** 中「Ownership Inventory」概念清单的本地映射。
-> Inventory 题目灵感来自真实 StackOverflow 问题，重点检验所有权、借用、生命周期在**真实代码场景**中的运用。
+> Inventory 题目灵感来自真实 StackOverflow 问题，重点检验所有权、借用（Borrowing）、生命周期在**真实代码场景**中的运用。
 > **使用方式**: 先阅读对应前置概念，再尝试回答示例题，最后点击展开核对解析；亦可直接访问 Brown Book 的交互式题目获得 IDE 与可视化辅助。
 
 ---

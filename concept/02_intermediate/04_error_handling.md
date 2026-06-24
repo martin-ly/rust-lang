@@ -551,7 +551,7 @@ let result = fetch_user(id)
 | `map_err` | `Result::map_err` | `TryFutureExt::map_err` | 错误类型转换 |
 | `and_then` | `Result::and_then` | `TryFutureExt::and_then` | 顺序组合两个可能失败的 Future |
 | `try_join!` | — | `futures::try_join!` | 并行执行多个 Future，任一失败即返回 Err |
-| `try_select!` | — | `futures::future::select` + 错误处理 | 竞争执行，需手动处理取消与错误 |
+| `try_select!` | — | `futures::future::select` + 错误处理（Error Handling） | 竞争执行，需手动处理取消与错误 |
 
 #### 取消安全（Cancellation Safety）与错误处理
 
@@ -640,7 +640,7 @@ graph TD
 | **层面** | **分析** | **结果** |
 |:---|:---|:---|
 | 编译期 | #[must_use] 警告未处理 Result，但不阻止编译 | ⚠️ 弱强制 |
-| 运行时 | unwrap 导致 panic，是显式放弃安全性 | ❌ 可能崩溃 |
+| 运行时（Runtime） | unwrap 导致 panic，是显式放弃安全性 | ❌ 可能崩溃 |
 | 语义 | Result 的语义是"错误存在"，不保证"错误被正确处理" | ⚠️ 语义边界 |
 | 工程 | clippy 有 `unwrap_used` lint，anyhow/thiserror 是标准 | ✅ 可缓解 |
 
@@ -1588,7 +1588,7 @@ fn parse_port(s: &str) -> Result<u16, AppError> {
 
 | 模式 | 说明 | 来源 |
 |:---|:---|:---|
-| **Context Selector** | 每个变体生成 `VariantSnafu` 结构体，显式构造错误 | [snafu docs] |
+| **Context Selector** | 每个变体生成 `VariantSnafu` 结构体（Struct），显式构造错误 | [snafu docs] |
 | **`#[snafu(module)]`** | 将选择器放入子模块，避免命名空间污染 | [snafu guide] |
 | **`#[snafu(transparent)]`** | 委托 Display/source 给底层错误，消除冗余包装 | [snafu docs] |
 | **`#[snafu(context(false))]`** | 跳过选择器生成，直接实现 `From`（类似 `thiserror`） | [snafu docs] |
@@ -1610,8 +1610,8 @@ fn parse_port(s: &str) -> Result<u16, AppError> {
 | **Backtrace** | ✅ 自动 | ✅ `#[backtrace]` | ✅ 自动 | ✅ 彩色 backtrace | ✅ 可集成 | ✅ 可选 |
 | **自定义报告** | ❌ | ❌ | ✅ `EyreHandler` | ✅ 主题/颜色/过滤器 | ✅ `ReportHandler` | ❌ |
 | **编译时间** | 极低 | 低 | 低 | 中（额外依赖） | 中（`fancy` 依赖多） | 低 |
-| **运行时开销** | 低（窄指针） | 零成本抽象 | 低（narrow pointer） | 中（backtrace/spantrace） | 低（标注为引用） | 低（选择器零成本） |
-| **向下转型** | ✅ `downcast_ref` | ✅ `match` 枚举 | ✅ `downcast_ref` | ✅ `downcast_ref` | ✅ `match` / `downcast` | ✅ `match` 枚举 |
+| **运行时开销** | 低（窄指针） | 零成本抽象（Zero-Cost Abstraction） | 低（narrow pointer） | 中（backtrace/spantrace） | 低（标注为引用） | 低（选择器零成本） |
+| **向下转型** | ✅ `downcast_ref` | ✅ `match` 枚举（Enum） | ✅ `downcast_ref` | ✅ `downcast_ref` | ✅ `match` / `downcast` | ✅ `match` 枚举 |
 | **与 `?` 互操作** | ✅ 任意 `Error` | ✅ 需 `From` 实现 | ✅ 任意 `Error` | ✅ 任意 `Error` | ✅ 需 `Into<miette::Report>` | ✅ 需 `From` / `context` |
 
 **决策树**：
@@ -1882,7 +1882,7 @@ impl AppError {
 | `const fn` | ✅ 稳定 | 编译期错误定位 |
 | trait 方法 | ✅ 稳定 | [RFC 2091](https://rust-lang.github.io/rfcs//2091-inline-semantic.html) 最初因 MIR 传递时机限制而禁止；后实现改为 monomorphization 之后注入，解除限制 [来源: rustc-dev-guide — track_caller in traits] |
 | `async fn` | ⚠️ 部分支持 | Stable 上为 **no-op**（编译通过但 `Location::caller()` 返回 async fn 自身位置）；完整支持需 nightly `#![feature(async_fn_track_caller)]`（Tracking: [rust-lang/rust#110011]） |
-| 闭包 | ❌ 不稳定 | 需 nightly `#![feature(closure_track_caller)]`（Tracking: [rust-lang/rust#87417]） |
+| 闭包（Closures） | ❌ 不稳定 | 需 nightly `#![feature(closure_track_caller)]`（Tracking: [rust-lang/rust#87417]） |
 | `dyn Fn()` / 函数指针 | ❌ 不支持 | 动态分发无法传递隐式 `Location` 参数；通过 trait object 调用时丢失 caller 信息 |
 | `#[naked]` / 自定义 ABI | ❌ 不支持 | 与显式 ABI 冲突 |
 
@@ -2400,7 +2400,7 @@ fn main() {
 以下哪种方式最推荐实现自定义错误类型？
 
 - A. 手动实现 `std::error::Error` trait
-- B. 使用 `thiserror` derive 宏
+- B. 使用 `thiserror` derive 宏（Macro）
 - C. 使用 `String` 作为错误类型
 
 <details>

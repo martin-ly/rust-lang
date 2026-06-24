@@ -470,7 +470,7 @@ graph TD
 ## 相关概念文件
 
 - [Type System](./04_type_system.md) — 类型系统
-- [Zero Cost Abstractions](./06_zero_cost_abstractions.md) — 零成本抽象
+- [Zero Cost Abstractions](./06_zero_cost_abstractions.md) — 零成本抽象（Zero-Cost Abstraction）
 - [Collections](./08_collections.md) — 集合类型
 
 ---
@@ -651,7 +651,7 @@ fn main() {
 > 这是浮点数的常见陷阱：排序、去重、哈希时 `NaN` 破坏常规假设。
 > Rust 的 `HashMap` 和 `BTreeMap` 不直接支持 `f32`/`f64` 作为键，因为 `NaN` 使相等性不满足等价关系（反身性不成立）。
 > `ordered_float` crate 通过将 `NaN` 映射到特定值解决此问题。
-> 这与 C/C++ 的 `isnan()` 宏、Python 的 `math.isnan()`、Java 的 `Double.isNaN()` 相同——所有遵循 IEEE 754 的语言都有此问题。
+> 这与 C/C++ 的 `isnan()` 宏（Macro）、Python 的 `math.isnan()`、Java 的 `Double.isNaN()` 相同——所有遵循 IEEE 754 的语言都有此问题。
 > Rust 的类型系统不阻止 `NaN` 比较错误，但 `Hash` 限制防止 `NaN` 导致更严重的集合不一致。
 > [来源: [IEEE 754 Standard](https://ieeexplore.ieee.org/document/8766229)] ·
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.f64.html)]

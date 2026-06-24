@@ -10,7 +10,7 @@
 > **Bloom 层级**: 理解 → 分析
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价零成本抽象的设计权衡
-> **定位**: 深入分析 Rust **零成本抽象**（Zero-Cost Abstractions）的设计哲学——探讨泛型、迭代器、Trait 对象等高层抽象如何在编译期消除运行时开销，以及与 C++ "零开销原则" 的对比。
+> **定位**: 深入分析 Rust **零成本抽象（Zero-Cost Abstraction）**（Zero-Cost Abstractions）的设计哲学——探讨泛型、迭代器（Iterator）、Trait 对象等高层抽象如何在编译期消除运行时开销，以及与 C++ "零开销原则" 的对比。
 > **前置概念**: [Ownership](./01_ownership.md) · [Generics](../02_intermediate/02_generics.md) · [Traits](../02_intermediate/01_traits.md)
 > **后置概念**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md) · [Toolchain](../06_ecosystem/01_toolchain.md)
 
@@ -268,11 +268,11 @@ impl<'a> FnMut(&i32) -> i32 for __Closure_1<'a> {
 
 | 抽象层 | 机制 | 运行时开销 | 使用建议 |
 |:---|:---|:---:|:---|
-| **泛型 + monomorph** | `fn foo<T>(x: T)` | **零** | 默认选择，性能关键路径 |
+| **泛型（Generics） + monomorph** | `fn foo<T>(x: T)` | **零** | 默认选择，性能关键路径 |
 | **impl Trait** | `fn foo(x: impl Trait)` | **零** | API 简洁，仍单态化 |
 | **const 泛型** | `[T; N]` | **零** | 编译期计算数组大小 |
 | **迭代器适配器** | `.map().filter()` | **零**（Release） | 优先于手写循环 |
-| **闭包** | `\|x\| x + 1` | **零**（内联后） | 回调、适配器参数 |
+| **闭包（Closures）** | `\|x\| x + 1` | **零**（内联后） | 回调、适配器参数 |
 | **async/await** | 状态机转换 | **零**（Poll 本身） | 异步 I/O |
 | **dyn Trait** | vtable 分发 | **有**（间接调用） | 运行时多态需求 |
 | **Rc/Arc** | 引用计数 | **有**（原子操作） | 共享所有权需求 |
@@ -642,7 +642,7 @@ fn main() {
 }
 ```
 
-> **修正**: **Move 语义**：1) `String` 非 `Copy`，赋值时 move 所有权；2) move 后原变量无效；3) 解决：使用 `.clone()` 或引用 `&s`。
+> **修正**: **Move 语义**：1) `String` 非 `Copy`，赋值时 move 所有权（Ownership）；2) move 后原变量无效；3) 解决：使用 `.clone()` 或引用 `&s`。
 
 ## 实践
 
@@ -771,7 +771,7 @@ Rust 的迭代器是**零成本抽象**的典范：
 
 **B. `dyn Trait` 有运行时虚表（vtable）查找开销**。
 
-| 机制 | 编译期 | 运行时 |
+| 机制 | 编译期 | 运行时（Runtime） |
 |:---|:---|:---|
 | 泛型 `T: Trait` | 单态化，生成具体代码 | 直接函数调用，无额外开销 |
 | `dyn Trait` | 不单态化 | 通过 vtable 间接调用 |

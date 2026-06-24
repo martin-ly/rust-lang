@@ -330,7 +330,7 @@ impl Future for FetchDataFuture {
 |:---|:---|:---:|:---|
 | OS 线程 | 内核 | 高（~1μs，需切换页表） | 内核栈（MB 级） |
 | Rust async | 用户态运行时 | 低（~ns 级，状态机切换） | 状态机结构体（按需分配） |
-| Goroutine | Go 运行时 | 中（~100ns） | Go 运行时管理的轻量栈 |
+| Goroutine | Go 运行时（Runtime） | 中（~100ns） | Go 运行时管理的轻量栈 |
 
 ---
 

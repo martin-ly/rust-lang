@@ -211,7 +211,7 @@ Trait 作为逻辑命题:
   定理: "对所有满足 Monoid 的类型 T，reduce 成立"
 ```
 
-> **过渡到属性矩阵**: 从定义出发，Trait 系统并非单一概念，而是由多种子类型（自动 Trait、标记 Trait、泛型 Trait 等）构成的层次化体系。
+> **过渡到属性矩阵**: 从定义出发，Trait 系统并非单一概念，而是由多种子类型（自动 Trait、标记 Trait、泛型（Generics） Trait 等）构成的层次化体系。
 > 下一节通过属性矩阵对这些子类型进行系统分类，并与其他语言的类似机制进行正交对比。
 > 属性矩阵回答"Trait 有哪些种类"，为后续定理推理链提供概念基础。
 
@@ -228,7 +228,7 @@ Trait 作为逻辑命题:
 | **标记 Trait** | `trait Marker {}` | 空实现 | 视情况 | `Copy`、`Sized` |
 | **泛型 Trait** | `trait Add<Rhs=Self>` | `impl Add<i32> for i32` | `dyn Add<i32>` | `Add`、`Mul` |
 | **关联类型 Trait** | `trait Iterator { type Item; }` | `type Item = T;` | `dyn Iterator<Item=T>` | `Iterator`、`Future` |
-| **生命周期 Trait** | `trait Borrow<'a>` | 含生命周期参数 | 受限 | `ToOwned`、`Borrow` |
+| **生命周期（Lifetimes） Trait** | `trait Borrow<'a>` | 含生命周期参数 | 受限 | `ToOwned`、`Borrow` |
 
 > **来源: [Rust Reference: Auto Traits; Rust Reference: Special Types and Traits](https://doc.rust-lang.org/reference/)** Auto Trait 由编译器自动推导，不含关联项；`Sized` 等标记 Trait 具有类似的编译器特殊处理语义。
 
@@ -492,7 +492,7 @@ impl !Sync for RawFd {}  // 显式阻止自动 Sync
 > **⚠️ 安全边界**:
 > `unsafe impl Send/Sync` 是 Rust 并发抽象的安全根基。
 > 错误的实现会导致数据竞争、悬垂指针等未定义行为（UB）。
-> 仅在类型内部同步机制（如 Mutex、原子操作）确实保证线程安全时才应手动实现。
+> 仅在类型内部同步机制（如 Mutex、原子操作（Atomic Operations））确实保证线程安全时才应手动实现。
 > 一旦违反，整个程序的类型系统保证即告失效。
 
 ### 4.4 Trait + 泛型 ⟹ 零成本抽象
@@ -760,7 +760,7 @@ trait Convert {
 
 > **⚠️ 边界**: GATs 要求 `where Self: 'a` 等约束来确保生命周期合法；无界递归或矛盾的关联类型约束仍会导致编译错误（E0275、E0049）。
 > **过渡到反命题分析**: 示例展示了 Trait 系统的正确使用方式，但反例只是孤立场景。
-> 下一节通过系统化的反命题分析，将"定理何时成立/何时失效"形式化为可遍历的决策树，覆盖编译期、运行时、语义、工程四个层面。
+> 下一节通过系统化的反命题分析，将"定理何时成立/何时失效"形式化为可遍历的决策树，覆盖编译期、运行时（Runtime）、语义、工程四个层面。
 > 每个反命题对应定理矩阵中的一个失效条件，形成"定理—反命题—决策树"的三位一体逻辑结构。
 
 ---
@@ -824,7 +824,7 @@ impl Convert<String> for &str {
 | **类型安全** | 编译期检查重叠；Coherence 保证唯一性 | 无类型系统检查；SFINAE 复杂 |
 | **默认实现** | ✅ 支持默认 impl + 特化 impl | ✅ 支持默认模板 + 特化模板 |
 | **部分特化** | ❌ `min_specialization` 限制多参数 | ✅ 支持部分特化（`template<T> class Foo<T*>`） |
-| **零成本抽象** | 单态化后无运行时开销 | 单态化后无运行时开销 |
+| **零成本抽象（Zero-Cost Abstraction）** | 单态化后无运行时开销 | 单态化后无运行时开销 |
 | **稳定状态** | ❌ nightly only（`min_specialization`） | ✅ 稳定 20+ 年 |
 
 > **来源: [RFC 1210](https://github.com/rust-lang/rfcs/pull/1210)** Specialization 的核心约束是**永远特化（always applicable）**：特化 impl 的约束必须是默认 impl 约束的**逻辑子集**，否则编译器拒绝。
@@ -1357,7 +1357,7 @@ fn notify<T: Summary>(item: &T) { ... }
 | GATs 设计 | [RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html) | ✅ |
 | Negative impls | [RFC 683](https://github.com/rust-lang/rfcs/pull/683) | ✅ |
 
-> **过渡到相关概念链接**: 知识来源确立了单个论断的可信度，但 Trait 系统不是孤立存在的。下一节通过相关概念链接，将 Trait 与泛型、所有权、并发、异步等前置和后置概念编织成知识网络，为跨章节学习提供导航。
+> **过渡到相关概念链接**: 知识来源确立了单个论断的可信度，但 Trait 系统不是孤立存在的。下一节通过相关概念链接，将 Trait 与泛型、所有权（Ownership）、并发、异步等前置和后置概念编织成知识网络，为跨章节学习提供导航。
 
 ---
 
@@ -1407,7 +1407,7 @@ impl Drawable for Point {
 |:---|:---|:---|
 | **语法** | `type Output; fn foo() -> Self::Output;` | `fn foo() -> impl Trait;` |
 | **实现者负担** | 需显式 `type Output = T;` | 编译器自动推断 |
-| **类型可见性** | 调用方可通过 `T::Output` 引用 | 隐藏具体类型，仅知满足 Trait |
+| **类型可见性** | 调用方可通过 `T::Output` 引用（Reference） | 隐藏具体类型，仅知满足 Trait |
 | **多返回类型** | 不同实现者可返回不同类型 | 不同实现者可返回不同类型 |
 | **trait object** | ✅ 支持 `dyn Trait` | ❌ **不能用于 trait object** |
 | **生命周期表达** | 可精确标注 | 需 `impl Trait + 'a` 形式 |

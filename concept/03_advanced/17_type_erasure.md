@@ -500,7 +500,7 @@ graph TD
 └── 缓解: extern "C" 函数指针
 ```
 
-> **边界要点**: 类型擦除的边界与**对象安全**、**生命周期**、**Downcast**、**调试**和**FFI**相关。
+> **边界要点**: 类型擦除的边界与**对象安全**、**生命周期（Lifetimes）**、**Downcast**、**调试**和**FFI**相关。
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ---
@@ -567,7 +567,7 @@ graph TD
 ## 相关概念文件
 
 - [Trait](../02_intermediate/01_traits.md) — Trait
-- [Generics](../02_intermediate/02_generics.md) — 泛型
+- [Generics](../02_intermediate/02_generics.md) — 泛型（Generics）
 - [Performance](../06_ecosystem/15_performance_optimization.md) — 性能优化
 - [Type System](../01_foundation/04_type_system.md) — 类型系统
 
@@ -757,7 +757,7 @@ fn main() {
 }
 ```
 
-> **修正**: **Move 语义**：1) `String` 非 `Copy`，赋值时 move 所有权；2) move 后原变量无效；3) 解决：使用 `.clone()` 或引用 `&s`。
+> **修正**: **Move 语义**：1) `String` 非 `Copy`，赋值时 move 所有权（Ownership）；2) move 后原变量无效；3) 解决：使用 `.clone()` 或引用 `&s`。
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)

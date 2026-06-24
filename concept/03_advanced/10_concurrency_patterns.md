@@ -541,7 +541,7 @@ fn thread_spawn_lifetime() {
 }
 ```
 
-> **修正**: `thread::spawn` 要求闭包满足 `'static` 生命周期。引用栈数据必须通过 `move` 闭包转移所有权，或使用 `crossbeam::scope` 进行有界线程。
+> **修正**: `thread::spawn` 要求闭包满足 `'static` 生命周期（Lifetimes）。引用栈数据必须通过 `move` 闭包转移所有权，或使用 `crossbeam::scope` 进行有界线程。
 
 ### 4.4 边界测试：`ScopedThread` 中引用逃逸（编译错误）
 
@@ -710,7 +710,7 @@ fn main() {
 > 3) 无显式"关闭信号"——需协议层实现（发送特殊 sentinel 值）。
 > 与 `std::sync::mpsc` 的区别：`crossbeam` 支持多生产者/多消费者、无界和有界 channel、选择（`select!`）。
 > 有界 channel 的 `send` 在满时阻塞（或超时），防止无限内存增长。
-> 这与 Go 的 channel（语言原生，自动处理关闭和 range 迭代）或 Tokio 的 `mpsc`（异步，背压控制）不同——Rust 的 channel 库多样，`crossbeam` 是同步场景的性能最优选择。
+> 这与 Go 的 channel（语言原生，自动处理关闭和 range 迭代）或 Tokio 的 `mpsc`（异步（Async），背压控制）不同——Rust 的 channel 库多样，`crossbeam` 是同步场景的性能最优选择。
 > [来源: [crossbeam-channel](https://docs.rs/crossbeam-channel/)] · [来源: [Rust Atomics and Locks](https://marabos.nl/atomics/)]
 
 ### 10.4 边界测试：Send/Sync 的 auto trait 边界与线程安全（编译错误）
@@ -898,7 +898,7 @@ fn main() {
 
 **正确答案是 B**。
 
-**问题**：`move ||` 闭包会将捕获的变量**所有权移入**闭包。`Arc` 没有实现 `Copy`，所以 `data` 被移动后，主线程无法再使用。
+**问题**：`move ||` 闭包会将捕获的变量**所有权移入**闭包（Closures）。`Arc` 没有实现 `Copy`，所以 `data` 被移动后，主线程无法再使用。
 
 **修复方案**：
 

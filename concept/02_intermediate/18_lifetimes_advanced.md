@@ -657,7 +657,7 @@ fn main() {
 > `make_callback(&s)` 返回的闭包与 `s` 同生命周期，因此 `s` 释放后闭包失效。
 > 若需长生命周期的回调，必须拥有数据：`move || println!("{}", s.clone())` 或 `Arc<str>`。
 > 这是 Rust 异步和事件驱动编程的核心约束：回调、future、stream 的生命周期与捕获数据绑定。
-> 这与 C++ 的 `std::function`（可捕获引用，但悬垂是 UB）或 Java 的匿名类（捕获 final 引用，GC 管理生命周期）不同——Rust 在编译期防止了回调的悬垂引用。
+> 这与 C++ 的 `std::function`（可捕获引用，但悬垂是 UB）或 Java 的匿名类（捕获 final 引用（Reference），GC 管理生命周期）不同——Rust 在编译期防止了回调的悬垂引用。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] ·
 > [来源: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html)]
 
@@ -675,7 +675,7 @@ fn make_ref<'a>(s: &'a str) -> impl Iterator<Item = &'a char> + 'a {
 > 上述代码中，`Vec<char>` 在函数内创建，`iter()` 返回的 `&char` 与 `Vec` 同生命周期——函数返回后 `Vec` 被释放，引用悬垂。
 > 解决方案：
 >
-> 1) 返回拥有数据的类型（`Vec<char>` 本身，或 `Chars` 迭代器）；
+> 1) 返回拥有数据的类型（`Vec<char>` 本身，或 `Chars` 迭代器（Iterator））；
 > 2) 让调用者提供缓冲区；
 > 3) 使用 `unsafe` 和 `ManuallyDrop`（不推荐）。
 >
@@ -832,7 +832,7 @@ where
 
 **B. `T` 必须实现 `Trait` 且所有引用都活至少 `'static`**。
 
-`T: 'a` 是**生命周期 bound**，表示"`T` 中不包含短于 `'a` 的引用"。因此：
+`T: 'a` 是**生命周期（Lifetimes） bound**，表示"`T` 中不包含短于 `'a` 的引用"。因此：
 
 - `T: 'static` 表示 `T` 可以安全地存活整个程序运行期
 - `String: 'static`（它不含引用）

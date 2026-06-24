@@ -18,7 +18,7 @@ thiserror = { workspace = true }
 [lints.rust]
 unsafe_code = "allow"
 missing_docs = "allow"
-unexpected_cfgs = { level = "warn", check-cfg = ['cfg(polonius)'] }
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(polonius)', 'cfg(kani)'] }
 
 [dev-dependencies]
 criterion = { workspace = true }

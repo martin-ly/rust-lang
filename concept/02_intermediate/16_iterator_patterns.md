@@ -290,7 +290,7 @@ where I::Item: Clone
   └── 某些边界情况下编译器不优化
 ```
 
-> **优化洞察**: Rust 迭代器的**零成本抽象**不是口号——编译后的机器码与手写 C 循环**逐指令等价**。
+> **优化洞察**: Rust 迭代器的**零成本抽象（Zero-Cost Abstraction）**不是口号——编译后的机器码与手写 C 循环**逐指令等价**。
 > [来源: [Iterator Performance](https://doc.rust-lang.org/book/ch13-04-performance.html)]
 
 ---
@@ -451,7 +451,7 @@ graph TD
 └── 缓解: futures::stream::Stream
 ```
 
-> **边界要点**: 迭代器的边界主要与**编译时间**、**错误信息**、**递归限制**、**特殊算法**和**异步**相关。
+> **边界要点**: 迭代器的边界主要与**编译时间**、**错误信息**、**递归限制**、**特殊算法**和**异步（Async）**相关。
 > [来源: [async-iter RFC](https://rust-lang.github.io/rfcs//2996-async-iterator.html)]
 
 ---
@@ -516,7 +516,7 @@ graph TD
 ## 相关概念文件
 
 - [Trait](./01_traits.md) — Trait 系统
-- [Generics](./02_generics.md) — 泛型
+- [Generics](./02_generics.md) — 泛型（Generics）
 - [Zero Cost](../01_foundation/06_zero_cost_abstractions.md) — 零成本抽象
 - [Async](../03_advanced/02_async.md) — 异步编程
 
@@ -688,7 +688,7 @@ fn main() {
 }
 ```
 
-> **修正**: `flat_map` 要求闭包返回一个**迭代器**，然后将所有迭代器扁平化为一个。`data.iter()` 产生 `&Vec<i32>`，`v.iter()` 产生 `&i32`。`flat_map(|v| v.iter())` 返回 `Iter<&i32>`，collect 后为 `Vec<&i32>` 而非 `Vec<i32>`。修复：1) `data.into_iter().flat_map(|v| v.into_iter()).collect()`（移动所有权）；2) `data.iter().flat_map(|v| v.iter().copied()).collect()`（复制值）。`flat_map` 是 monadic `bind` 在迭代器上的实现：`Iter<Item=Iter<Item=T>>` → `Iter<Item=T>`。这与 Haskell 的 `concatMap` 或 Python 的 `itertools.chain.from_iterable` 类似——Rust 的类型系统要求迭代器元素类型精确匹配。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: `flat_map` 要求闭包返回一个**迭代器（Iterator）**，然后将所有迭代器扁平化为一个。`data.iter()` 产生 `&Vec<i32>`，`v.iter()` 产生 `&i32`。`flat_map(|v| v.iter())` 返回 `Iter<&i32>`，collect 后为 `Vec<&i32>` 而非 `Vec<i32>`。修复：1) `data.into_iter().flat_map(|v| v.into_iter()).collect()`（移动所有权）；2) `data.iter().flat_map(|v| v.iter().copied()).collect()`（复制值）。`flat_map` 是 monadic `bind` 在迭代器上的实现：`Iter<Item=Iter<Item=T>>` → `Iter<Item=T>`。这与 Haskell 的 `concatMap` 或 Python 的 `itertools.chain.from_iterable` 类似——Rust 的类型系统要求迭代器元素类型精确匹配。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.9 边界测试：const fn 中的非编译期操作
 
@@ -787,7 +787,7 @@ fn main() {}
 | 迭代器模式：Rust 的惰性计算与零成本抽象 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 惰性求值安全 ⟸ Iterator 状态机 ⟸ 借用检查
-> 适配器组合正确 ⟸ map/filter 生命周期 ⟸ 闭包捕获
+> 适配器组合正确 ⟸ map/filter 生命周期（Lifetimes） ⟸ 闭包捕获
 > **过渡**: 掌握 迭代器模式：Rust 的惰性计算与零成本抽象 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 迭代器模式：Rust 的惰性计算与零成本抽象 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。

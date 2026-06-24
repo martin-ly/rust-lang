@@ -219,7 +219,7 @@ impl Drop for CallbackHandle {
 }
 ```
 
-> **回调洞察**: Rust 闭包 → C 回调的**桥接**是 FFI 中最复杂的模式之一——它涉及生命周期、panic 安全和线程安全的多重考量。
+> **回调洞察**: Rust 闭包（Closures） → C 回调的**桥接**是 FFI 中最复杂的模式之一——它涉及生命周期、panic 安全和线程安全的多重考量。
 > [来源: [Rust FFI — Callbacks](https://doc.rust-lang.org/nomicon/ffi.html#callbacks-from-c-code-to-rust-functions)]
 
 ---
@@ -532,7 +532,7 @@ graph TD
      }
 ```
 
-> **陷阱总结**: FFI 的陷阱主要与**字符串**、**生命周期**、**调用约定**、**对齐**和 **panic** 相关。
+> **陷阱总结**: FFI 的陷阱主要与**字符串**、**生命周期（Lifetimes）**、**调用约定**、**对齐**和 **panic** 相关。
 > [来源: [Rust FFI — Common Mistakes](https://doc.rust-lang.org/nomicon/ffi.html)]
 
 ---

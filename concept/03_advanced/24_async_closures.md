@@ -34,7 +34,7 @@ fn make_callback() -> impl FnOnce() -> Pin<Box<dyn Future<Output = i32> + Send>>
 
 这种写法的问题：
 
-1. **语法冗余**：闭包 + `async move` 块两层嵌套。
+1. **语法冗余**：闭包（Closures） + `async move` 块两层嵌套。
 2. **捕获不精确**：`async move` 会强制把捕获变量 move 进 Future，无法像同步闭包那样按使用自动推断借用。
 3. **类型表达困难**：返回 `impl Fn() -> impl Future` 在 trait bound、高阶回调中非常冗长。
 

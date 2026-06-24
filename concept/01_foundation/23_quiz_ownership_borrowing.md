@@ -61,7 +61,7 @@ fn main() {
 
 **错误信息**：`borrow of moved value: s1`
 
-**解析**：`String` 未实现 `Copy` trait，赋值 `let s2 = s1` 会**移动（move）**所有权。`s1` 在移动后变为未初始化状态，不能再使用。
+**解析**：`String` 未实现 `Copy` trait，赋值 `let s2 = s1` 会**移动（move）**所有权（Ownership）。`s1` 在移动后变为未初始化状态，不能再使用。
 
 **知识点**：Rust 中每个值有且只有一个所有者。当所有者离开作用域，值被自动丢弃（drop）。[→ 所有权规则详解](./01_ownership.md)
 
@@ -199,7 +199,7 @@ fn main() {
 
 **错误信息**：`cannot borrow`s`as mutable because it is also borrowed as immutable`
 
-**解析**：Rust 的**借用规则二**规定：不可变引用（&T）和可变引用（&mut T）不能同时存在。因为不可变引用的使用者可能依赖数据不被修改。
+**解析**：Rust 的**借用规则二**规定：不可变引用（Immutable Reference）（&T）和可变引用（&mut T）不能同时存在。因为不可变引用的使用者可能依赖数据不被修改。
 
 **修改方案**——确保不可变引用不再使用后再创建可变引用：
 
@@ -429,9 +429,9 @@ shared shared
 >
 > **扩展计划**：若试点效果良好，可向以下主题推广：
 >
-> - L1: 类型系统、集合、错误处理
-> - L2: Trait、泛型、智能指针
-> - L3: 并发、异步、Unsafe
+> - L1: 类型系统、集合、错误处理（Error Handling）
+> - L2: Trait、泛型（Generics）、智能指针（Smart Pointer）
+> - L3: 并发、异步（Async）、Unsafe
 >
 > **反馈收集**：请在使用后通过本文件所在目录的 GitHub Issue 反馈体验（题目难度、解析清晰度、交互流畅度）。
 

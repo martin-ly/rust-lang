@@ -99,7 +99,7 @@ class Circle implements Drawable {
 - 抽象单位 = 接口（纯行为契约）+ 类（实现）
 - 封装 = 包级访问控制
 - 多态 = 接口实现 + 运行时动态分发
-- 类型安全 = 编译期 + 运行时（`ClassCastException`）
+- 类型安全 = 编译期 + 运行时（Runtime）（`ClassCastException`）
 
 **关键创新**: 接口与实现的**完全分离**。一个类可实现多个接口（mixin 风格的多态）。
 
@@ -425,9 +425,9 @@ impl std::fmt::Display for MyVec {
 | **行为绑定** | 独立函数 | 类成员函数 | 接口+实现 | 类型类实例 | trait impl（外部） |
 | **扩展性** | 无 | 继承（侵入式） | 实现接口（类需修改） | 类型类实例 | impl（Orphan Rule） |
 | **穷尽性检查** | 无 | `std::visit` 不强制 | `switch` 不强制 | 强制 | `match` 强制 |
-| **资源安全** | 手动 | RAII | GC | GC / 纯函数 | 所有权 + RAII |
-| **零成本抽象** | — | 虚函数有开销 | 对象头有开销 | thunk 有开销 | 单态化零开销 |
-| **模式匹配** | 无 | `std::visit` | `switch` | `case` | `match`（原生） |
+| **资源安全** | 手动 | RAII | GC | GC / 纯函数 | 所有权（Ownership） + RAII |
+| **零成本抽象（Zero-Cost Abstraction）** | — | 虚函数有开销 | 对象头有开销 | thunk 有开销 | 单态化零开销 |
+| **模式匹配（Pattern Matching）** | 无 | `std::visit` | `switch` | `case` | `match`（原生） |
 
 ---
 

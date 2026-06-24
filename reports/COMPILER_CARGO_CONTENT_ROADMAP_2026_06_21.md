@@ -111,10 +111,34 @@
 
 每个新文件必须包含：
 
-- [ ] 中文标题 + EN title/summary
-- [ ] Bloom 层级与受众标注
-- [ ] 权威来源链接（Rustc Dev Guide / Cargo Book 官方页面）
-- [ ] 至少一个可运行/可验证的代码或配置示例
-- [ ] 至少一个 `compile_fail` 或错误边界示例
-- [ ] 嵌入式测验 ≥ 3 题
-- [ ] 与相邻概念文件的前置/后置链接
+- [x] 中文标题 + EN title/summary
+- [x] Bloom 层级与受众标注
+- [x] 权威来源链接（Rustc Dev Guide / Cargo Book 官方页面）
+- [x] 至少一个可运行/可验证的代码或配置示例
+- [x] 至少一个 `compile_fail` 或错误边界示例
+- [x] 嵌入式测验 ≥ 3 题
+- [x] 与相邻概念文件的前置/后置链接
+
+## 七、执行进度（2026-06-24 更新）
+
+| 批次 | 文件 | 状态 |
+|:---|:---|:---:|
+| L2 编译器 | `concept/04_formal/19_rustc_query_system.md` | ✅ 已完成 |
+| L2 编译器 | `concept/04_formal/25_name_resolution_and_hir.md` | ✅ 已完成 |
+| L2 编译器 | `concept/04_formal/26_trait_solver_in_rustc.md` | ✅ 已完成 |
+| L2 编译器 | `concept/04_formal/27_type_checking_and_inference.md` | ✅ 已完成 |
+| L3 编译器 | `concept/06_ecosystem/67_llvm_backend_and_codegen.md` | ✅ 已完成 |
+| L3 编译器 | `concept/06_ecosystem/68_rustc_driver_and_stable_mir.md` | ✅ 已完成 |
+| L3 编译器 | `concept/06_ecosystem/69_compiler_diagnostics_and_ui_tests.md` | ✅ 已完成 |
+| L4 编译器 | `concept/06_ecosystem/70_rustc_bootstrap.md` | ✅ 已完成 |
+| L4 编译器 | `concept/06_ecosystem/71_compiler_testing.md` | ✅ 已完成 |
+| L2 Cargo | `concept/06_ecosystem/59_cargo_build_scripts.md` | ✅ 已完成 |
+| L2 Cargo | `concept/06_ecosystem/60_cargo_dependency_resolution.md` | ✅ 已完成 |
+| L2 Cargo | `concept/06_ecosystem/61_cargo_source_replacement.md` | ✅ 已完成 |
+| L3 Cargo | `concept/06_ecosystem/62_cargo_registries_and_publishing.md` | ✅ 已完成 |
+| L3 Cargo | `concept/06_ecosystem/63_cargo_authentication_and_cache.md` | ✅ 已完成 |
+| L3 Cargo | `concept/06_ecosystem/64_cargo_manifest_reference.md` | ✅ 已完成 |
+| L4 Cargo | `concept/06_ecosystem/65_cargo_profiles_and_lints.md` | ✅ 已完成 |
+| L4 Cargo | `concept/06_ecosystem/66_cargo_subcommands_and_plugins.md` | ✅ 已完成 |
+
+**结论**：路线图规划的全部 17 个编译器/Cargo 概念文件均已创建并通过质量检查清单；可进入维护阶段。

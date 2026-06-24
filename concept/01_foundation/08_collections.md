@@ -486,7 +486,7 @@ graph TD
 - [Ownership](./01_ownership.md) — 所有权模型
 - [Borrowing](./02_borrowing.md) — 借用规则
 - [Generics](../02_intermediate/02_generics.md) — 泛型系统
-- [Smart Pointers](../02_intermediate/12_smart_pointers.md) — 智能指针
+- [Smart Pointers](../02_intermediate/12_smart_pointers.md) — 智能指针（Smart Pointer）
 
 ---
 
@@ -648,9 +648,9 @@ fn main() {
 ```
 
 > **修正**:
-> `Vec::drain(range)` 返回一个迭代器，它**可变借用**原 `Vec`（`&mut self`）。
+> `Vec::drain(range)` 返回一个迭代器，它**可变借用（Mutable Borrow）**原 `Vec`（`&mut self`）。
 > 在 `drain` 迭代器存活期间，不能对原 `Vec` 进行任何操作（读、写、push、pop）。
-> `drain` 的实现：将指定范围的元素移动到迭代器中，原位置标记为空。迭代器 `drop` 时，压缩剩余元素。
+> `drain` 的实现：将指定范围的元素移动到迭代器中，原位置标记为空。迭代器（Iterator） `drop` 时，压缩剩余元素。
 > 这与 `retain`（原地过滤，不返回迭代器）或 `splice`（替换范围）不同——`drain` 是"取出并消费"的操作。
 > 常见模式：`for x in v.drain(..) { process(x); }` 完成后 `v` 为空。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/vec/struct.Vec.html)] ·
@@ -859,7 +859,7 @@ fn main() {
 
 ## 十二、延伸阅读与自测
 
-> 学完常见集合后，建议通过 **Ownership Inventory #2** 检验对「Vec/String/HashMap 与所有权、借用、迭代器」的理解：
+> 学完常见集合后，建议通过 **Ownership Inventory #2** 检验对「Vec/String/HashMap 与所有权、借用（Borrowing）、迭代器」的理解：
 >
 > - 本地映射与样题：[所有权清单自测：Brown University Ownership Inventory](./28_ownership_inventories_brown_book.md)
 > - Brown Book 交互式题目：[Ownership Inventory #2](https://rust-book.cs.brown.edu/ch08-04-inventory.html)

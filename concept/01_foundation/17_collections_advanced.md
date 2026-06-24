@@ -866,7 +866,7 @@ fn main() {
 ```
 
 > **修正**:
-> `HashMap::entry` 返回 `Entry` enum，它**可变借用**整个 map（`&mut self`）。
+> `HashMap::entry` 返回 `Entry` enum，它**可变借用（Mutable Borrow）**整个 map（`&mut self`）。
 > 在 `entry` 调用期间，不能有任何对 map 的其他借用（无论是可变还是不可变）。
 > `Entry` API 的设计：`Occupied`（键存在）和 `Vacant`（键不存在），统一了插入和更新的语义。
 > 常见模式：`map.entry(key).and_modify(|v| v.push(4)).or_insert(vec![4])`。

@@ -326,7 +326,7 @@ let ptr = &aligned as *const Aligned as *const u8;
 // ptr 是 16 字节对齐的
 ```
 
-> **指针洞察**: Rust 的**原始指针**（*const T,*mut T）是**unsafe 的入口**——它们可以指向任意地址，解引用需要 unsafe 块。
+> **指针洞察**: Rust 的**原始指针（Raw Pointer）**（*const T,*mut T）是**unsafe 的入口**——它们可以指向任意地址，解引用需要 unsafe 块。
 > [来源: [Rust Reference — Raw Pointers](https://doc.rust-lang.org/reference/types/pointer.html#raw-pointers-const-and-mut)]
 
 ---
@@ -495,7 +495,7 @@ graph TD
 
 - [Type System](./04_type_system.md) — 类型系统
 - [Traits](../02_intermediate/01_traits.md) — Trait 系统
-- [Generics](../02_intermediate/02_generics.md) — 泛型
+- [Generics](../02_intermediate/02_generics.md) — 泛型（Generics）
 - [FFI](../03_advanced/05_rust_ffi.md) — 外部函数接口
 
 ---
@@ -572,7 +572,7 @@ unsafe fn ptr_to_ref(ptr: *const i32) -> Option<&'static i32> {
 }
 ```
 
-> **修正**: 引用 → 裸指针是安全操作（隐式转换），但裸指针 → 引用必须在 `unsafe` 块中进行，且程序员必须保证指针有效、对齐、不悬垂。
+> **修正**: 引用（Reference） → 裸指针是安全操作（隐式转换），但裸指针 → 引用必须在 `unsafe` 块中进行，且程序员必须保证指针有效、对齐、不悬垂。
 > 这是 Rust 安全边界的典型设计：从安全区到 unsafe 区容易，从 unsafe 区回到安全区需要显式承诺。
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 

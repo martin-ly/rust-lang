@@ -436,7 +436,7 @@ Timely Dataflow（TD）是 DD 的底层执行引擎，核心创新是**时间戳
 ```
 
 > **关键洞察**:
-> Timely Dataflow 的时间戳机制与 Rust 的生命周期系统有深层同构：两者都追踪"资源（数据/引用）何时可被安全释放"。
+> Timely Dataflow 的时间戳机制与 Rust 的生命周期系统有深层同构：两者都追踪"资源（数据/引用（Reference））何时可被安全释放"。
 > TD 的 `epoch` 类似于所有权的 drop 时刻，而 `iteration` 类似于借用链的嵌套深度。
 > 这种同构不是巧合——Frank McSherry 选择 Rust 实现 TD 正是因为其类型系统能精确表达 TD 的并发安全约束。
 > [来源: 💡 原创分析] · [McSherry Blog] ✅
@@ -654,7 +654,7 @@ async fn fixed_stream() {
 > **修正**:
 > `stream::iter(data)` 消耗 `data` 的所有权，将其转换为流。
 > 若需在流消费后继续使用原数据，必须传递引用（`stream::iter(&data)`）。
-> 这与迭代器的所有权规则一致——`into_iter` 消耗，`iter` 借用。
+> 这与迭代器的所有权规则一致——`into_iter` 消耗，`iter` 借用（Borrowing）。
 > Rust 的流处理（`Stream` trait）与所有权系统的结合确保了内存安全：流不能产出指向已释放数据的引用。
 > [来源: [futures-rs Documentation](https://docs.rs/futures/)]
 
@@ -805,7 +805,7 @@ fn main() {
 | 流处理语义：从 Dataflow Model 到 Differential Dataflow 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 流处理一致性 ⟸ 背压控制 ⟸ 生产者-消费者协议
-> 异步流安全 ⟸ Stream/AsyncRead 生命周期 ⟸ Pin 约束
+> 异步流安全 ⟸ Stream/AsyncRead 生命周期（Lifetimes） ⟸ Pin 约束
 > **过渡**: 掌握 流处理语义：从 Dataflow Model 到 Differential Dataflow 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 流处理语义：从 Dataflow Model 到 Differential Dataflow 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。

@@ -10,7 +10,7 @@
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×App — 应用 Serde 序列化设计模式
-> **定位**: 深入分析 **Serde** —— Rust 生态中主导的序列化/反序列化框架，探讨 `Serialize [来源: [serde::Serialize](https://docs.rs/serde/latest/serde/trait.Serialize.html)]`/`Deserialize` derive 宏、自定义序列化逻辑、以及类型系统如何保障数据转换的安全性。
+> **定位**: 深入分析 **Serde** —— Rust 生态中主导的序列化/反序列化框架，探讨 `Serialize [来源: [serde::Serialize](https://docs.rs/serde/latest/serde/trait.Serialize.html)]`/`Deserialize` derive 宏（Macro）、自定义序列化逻辑、以及类型系统如何保障数据转换的安全性。
 > **前置概念**: [Traits](./01_traits.md) · [Macros](../03_advanced/04_macros.md) · [Generics](./02_generics.md)
 > **后置概念**: [Core Crates](../06_ecosystem/03_core_crates.md) · [Application Domains](../06_ecosystem/04_application_domains.md)
 
@@ -687,7 +687,7 @@ fn main() {
 > 若顺序颠倒，结果相反。这是 untagged 枚举的设计限制——无标签时无法从值本身推断变体类型。
 > 安全模式：
 >
-> 1) 使用 tagged 枚举（默认，明确标签）；
+> 1) 使用 tagged 枚举（Enum）（默认，明确标签）；
 > 2) 严格排序变体（最具体的在前）；
 > 3) 使用 `#[serde(try_from = "...")]` 自定义解析逻辑。
 > 这与 JSON Schema 的 `oneOf`（类似问题，按顺序验证）或 Protocol Buffers（有明确类型标签，无此问题）类似。
@@ -891,7 +891,7 @@ fn main() {
 | Serde 序列化模式：Rust 的类型驱动数据转换 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 序列化安全 ⟸ derive(Serialize) 完备 ⟸ 泛型约束
-> 反序列化健壮 ⟸ Deserialize 生命周期 ⟸ Visitor 模式
+> 反序列化健壮 ⟸ Deserialize 生命周期（Lifetimes） ⟸ Visitor 模式
 > **过渡**: 掌握 Serde 序列化模式：Rust 的类型驱动数据转换 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 Serde 序列化模式：Rust 的类型驱动数据转换 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。

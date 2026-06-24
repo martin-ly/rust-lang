@@ -165,7 +165,7 @@ RefCell<T> 的运行时借用规则:
 ```
 
 > **运行时洞察**:
-> RefCell 的**运行时 panic**不是 UB——它是安全的、确定性的失败模式。
+> RefCell 的**运行时（Runtime） panic**不是 UB——它是安全的、确定性的失败模式。
 > 与 C/C++ 的未定义行为不同，Rust 的运行时检查确保即使规则被违反，程序也是安全的（虽然会崩溃）。
 > [来源: [Rustonomicon — Interior Mutability](https://doc.rust-lang.org/nomicon/concurrency.html)]
 
@@ -751,7 +751,7 @@ fn main() {
 不适用场景：
 
 - 多线程共享 → 使用 `Mutex<T>`/`RwLock<T>`（需 `Send`）
-- 原子操作 → 使用 `AtomicUsize` 等（无锁，更快）
+- 原子操作（Atomic Operations） → 使用 `AtomicUsize` 等（无锁，更快）
 - 性能关键路径 → `RefCell` 有运行时开销
 
 </details>

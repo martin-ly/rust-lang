@@ -271,7 +271,7 @@ Poll 类型:
 | **适用场景** | IO 密集型 | CPU 密集型 + 阻塞 | CPU 密集型 |
 | **阻塞风险** | `.await` 不会阻塞线程 | 阻塞整个线程 | 通常无阻塞 |
 | **组合性** | ✅ `Future` 组合子 | ⚠️ 手动同步 | ✅ `rayon` 等 |
-| **错误处理** | `Result` + `?` | `Result` / panic | `Result` |
+| **错误处理（Error Handling）** | `Result` + `?` | `Result` / panic | `Result` |
 
 > **来源**: [Async Book: Execution model](https://rust-lang.github.io/async-book/02_execution/01_chapter.html) · [Tokio Documentation: Runtime internals] · [Wikipedia: Cooperative multitasking](https://en.wikipedia.org/wiki/Cooperative_multitasking)
 
@@ -292,7 +292,7 @@ Poll 类型:
 ### 2.3 运行时对比矩阵
 >
 
-| **运行时** | **调度策略** | **线程池** | **生态** | **适用场景** |
+| **运行时（Runtime）** | **调度策略** | **线程池** | **生态** | **适用场景** |
 |:---|:---|:---|:---|:---|
 | **Tokio** | 工作窃取 M:N | 多线程 | 最丰富（axum, tonic, hyper） | 生产级服务端 |
 | **Tokio** | 工作窃取 M:N | 多线程 | 中等 | 通用异步 |
@@ -635,7 +635,7 @@ async 状态机的 Pin 验证场景:
 
 ### 3.5 调度模型对比：抢占式 vs 协作式 vs 绿色线程
 
-> **章节过渡**：状态机变换展示了编译器如何将 async fn 翻译为协作式 Future，但为什么 Rust 选择这条路径而非其他？需将协作式调度置于操作系统线程与绿色线程的三维比较中，方能理解 Rust "零成本抽象"承诺的实质——它不是所有场景下的最优解，而是在延迟、吞吐量与内存约束下的刻意权衡。
+> **章节过渡**：状态机变换展示了编译器如何将 async fn 翻译为协作式 Future，但为什么 Rust 选择这条路径而非其他？需将协作式调度置于操作系统线程与绿色线程的三维比较中，方能理解 Rust "零成本抽象（Zero-Cost Abstraction）"承诺的实质——它不是所有场景下的最优解，而是在延迟、吞吐量与内存约束下的刻意权衡。
 
 | 维度 | 抢占式 (OS Threads) | 协作式 (async/await) | 绿色线程 (Go) |
 |:---|:---|:---|:---|
@@ -754,7 +754,7 @@ graph TD
 | **C2** | 未 Pin 的自引用结构被移动 ⟹ UB | 手写 Future 含自引用字段且未使用 `Pin<&mut Self>` | 内部指针悬垂，后续 `poll` 解引用无效 | 内存安全公理 | — | 编译器未生成 Pin（手写 `Future` 时遗漏） | UB（不可定义行为，可能静默崩溃） |
 | **P1** | Waker 契约 ⟹ 调度器活性 | 正确实现 `wake`/`wake_by_ref`；Waker 被传递至 Reactor | Future 在资源就绪后最终会被重新 `poll` | 活性约定（liveness guarantee） | S1 | 遗忘 wake、虚假 wake、Waker 被过早释放 | 活锁 / 饥饿 / 永久 Pending |
 | **P2** | `select!` / `drop(Future)` ⟹ 取消点 | Future 未完成时被显式丢弃或分支落选 | 部分副作用可能残留；所有权已转移者不可逆；资源由 `Drop` 释放 | 资源管理公理 + 线性类型 | — | 未按取消安全（cancellation safe）设计 | 状态不一致（如半写文件、半发消息） |
-| **A1** | AFIT/RPITIT ⟹ 异步 Trait 零成本抽象 | Trait 方法返回 `impl Future<Output = T>`（Rust 1.75+） | 调用方无需知道具体 Future 类型，无 `Box` 开销 | 存在类型（existential type）公理 | — | `dyn Trait` 类型擦除场景 | E0720 / 编译错误 / 被迫动态分发 |
+| **A1** | AFIT/RPITIT ⟹ 异步（Async） Trait 零成本抽象 | Trait 方法返回 `impl Future<Output = T>`（Rust 1.75+） | 调用方无需知道具体 Future 类型，无 `Box` 开销 | 存在类型（existential type）公理 | — | `dyn Trait` 类型擦除场景 | E0720 / 编译错误 / 被迫动态分发 |
 | **S1** | `Poll::Pending` + Waker 注册 ⟹ 协作式多任务 | 运行时正确将 Waker 注册至 epoll/kqueue/IOCP | 单线程内多 Task 并发执行，无抢占上下文切换开销 | 协程语义公理 | — | 忙等轮询（busy loop，未返回 Pending） | CPU 空转，吞吐量崩溃 |
 
 > **来源**: [Rust Reference: Async fn desugaring](https://doc.rust-lang.org/reference/items/functions.html#async-functions) · [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html) · [RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html) · [Async Book: Execution model](https://rust-lang.github.io/async-book/02_execution/01_chapter.html) · [Tokio Documentation: Runtime internals]
@@ -940,7 +940,7 @@ graph TD
 
 ## 八、示例与反例（Examples & Counter-examples）
 
-> **章节过渡**：理论最终需落地为代码。以下示例从正确用法出发，逐步深入到常见陷阱与边界极限测试，覆盖"阻塞误用→Send 约束→取消安全→生命周期"四个维度。
+> **章节过渡**：理论最终需落地为代码。以下示例从正确用法出发，逐步深入到常见陷阱与边界极限测试，覆盖"阻塞误用→Send 约束→取消安全→生命周期（Lifetimes）"四个维度。
 
 ### 8.1 正确示例：async fn + .await
 
@@ -1423,7 +1423,7 @@ impl Future for ForgetWakeFuture {
 | `wake(self)` | ✅ 是 | Waker 不再需要时，避免 clone 开销 |
 | `wake_by_ref(&self)` | ❌ 否 | Reactor 需要长期持有 Waker 时 |
 
-> **[futures-rs 文档]** `wake` 获取所有权（减少 Arc 引用计数），`wake_by_ref` 借用。在性能敏感场景中，若已拥有 Waker 所有权，优先使用 `wake`。✅ 已验证
+> **[futures-rs 文档]** `wake` 获取所有权（减少 Arc 引用计数），`wake_by_ref` 借用（Borrowing）。在性能敏感场景中，若已拥有 Waker 所有权（Ownership），优先使用 `wake`。✅ 已验证
 
 **形式化契约**
 
@@ -1803,7 +1803,7 @@ async fn pipeline() {
 
 **栈 pinning（`pin!` macro）vs 堆 pinning**
 
-> **[Rust Reference: pin_macro](https://doc.rust-lang.org/reference/)** Rust 1.68+ 引入 `std::pin::pin!` 宏，允许在栈上创建 `Pin<&mut T>`，避免 `Box::pin` 的堆分配开销。✅ 已验证
+> **[Rust Reference: pin_macro](https://doc.rust-lang.org/reference/)** Rust 1.68+ 引入 `std::pin::pin!` 宏（Macro），允许在栈上创建 `Pin<&mut T>`，避免 `Box::pin` 的堆分配开销。✅ 已验证
 
 ```rust
 // ✅ 正确: 栈 pinning（Rust 1.68+）

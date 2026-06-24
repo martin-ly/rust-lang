@@ -74,7 +74,7 @@
 
 - 变量 = 名字 + 存储位置（L-value）
 - 赋值 = 存储更新（mutation）
-- 指针/引用 = 存储地址的显式操作
+- 指针/引用（Reference） = 存储地址的显式操作
 
 ### 2.3 Rust 的所有权：存储模型的线性扩展
 
@@ -184,7 +184,7 @@ auto y = std::move(x); // y 获得资源，x 变为"有效但未指定状态"
 | :--- | :--- | :--- |
 | `let y = x;` | 调用拷贝构造函数（深拷贝） | 若 `Copy`: 位拷贝；若非 `Copy`: 移动（所有权转移） |
 | `y = x;` | 调用拷贝/移动赋值运算符 | 若 `Copy`: 位拷贝；若非 `Copy`: 编译错误（x 已移动） |
-| `&x` | 取地址（L-value → 指针） | 借用（创建 `&T` 或 `&mut T`） |
+| `&x` | 取地址（L-value → 指针） | 借用（Borrowing）（创建 `&T` 或 `&mut T`） |
 | `x` 使用后被丢弃 | 析构函数自动调用（RAII） | `drop` 自动调用（确定性析构） |
 | 空悬引用 | 运行时错误（UB） | 编译期错误（borrow checker） |
 
@@ -335,7 +335,7 @@ fn reference_vs_pointer() {
 | **变量模型** | 存储模型 | 存储模型 + RAII | 引用模型（变量 = 对象引用） | 名字-值绑定 | 存储模型 + 线性所有权 |
 | **赋值语义** | 存储更新 | 存储更新 / 移动构造 | 引用重绑定 | 名字重新绑定 | 存储更新（Copy）/ 所有权转移（Move） |
 | **别名管理** | 手动（指针） | 手动（指针/引用） | 自动（GC） | 自动（GC） | 编译器静态检查 |
-| **空悬指针** | 运行时 UB | 运行时 UB | 不可能（GC） | 不可能（GC） | 编译期错误 |
+| **空悬指针** | 运行时（Runtime） UB | 运行时 UB | 不可能（GC） | 不可能（GC） | 编译期错误 |
 | **内存泄漏** | 可能 | 可能（循环引用） | 可能（循环引用） | 可能（循环引用） | 可能（Rc 循环引用） |
 | **确定性析构** | 否（手动 free） | 是（RAII） | 否（GC） | 否（GC） | 是（drop 自动插入） |
 | **值类别** | L/R-value | L/xvalue/prvalue | 无 | 无 | place / value expression |
@@ -347,7 +347,7 @@ fn reference_vs_pointer() {
 | **论断** | **来源** | **可信度** | **Tier** |
 |:---|:---|:---:|:---:|
 | 环境模型与存储模型 | [SICP Ch.3] · [Pierce TAPL §13] | ✅ | Tier 1 |
-| Rust 所有权 = 存储模型 + 线性约束 | [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [LL87] | ✅ | Tier 1 |
+| Rust 所有权（Ownership） = 存储模型 + 线性约束 | [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [LL87] | ✅ | Tier 1 |
 | C++ 值类别体系 | [C++ Standard §7.2.1] | ✅ | Tier 1 |
 | Rust place/value expression | [Rust Reference §8.2.8](https://doc.rust-lang.org/reference/) | ✅ | Tier 1 |
 | Rust 消除 xvalue 类别 | [💡 原创分析] | ⚠️ | Tier 3 |

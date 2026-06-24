@@ -10,7 +10,7 @@
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价写时复制的性能权衡
-> **定位**: 深入分析 Rust 中 **Cow（Clone [来源: [std::clone::Clone](https://doc.rust-lang.org/std/clone/trait.Clone.html)] on Write）**类型的设计——如何在**借用**（零拷贝）和**拥有**（必要时克隆）之间自动切换，以及它在 API 设计中的广泛应用。
+> **定位**: 深入分析 Rust 中 **Cow（Clone [来源: [std::clone::Clone](https://doc.rust-lang.org/std/clone/trait.Clone.html)] on Write）**类型的设计——如何在**借用（Borrowing）**（零拷贝）和**拥有**（必要时克隆）之间自动切换，以及它在 API 设计中的广泛应用。
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Trait](./01_traits.md)
 > **后置概念**: [String Patterns](./09_serde_patterns.md) · [Zero Cost Abstractions](../01_foundation/06_zero_cost_abstractions.md)
 
@@ -132,7 +132,7 @@ graph TD
 > **认知功能**: 此图展示 Cow 的**核心机制**——只在需要修改时才克隆，否则保持零拷贝借用。
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 当 API 可能接受借用或拥有，且可能或不可能需要修改时，使用 Cow。
-> **关键洞察**: Cow 是 Rust **零成本抽象**的典范——如果不修改，它的开销与直接借用完全相同；如果需要修改，自动退化为拥有。
+> **关键洞察**: Cow 是 Rust **零成本抽象（Zero-Cost Abstraction）**的典范——如果不修改，它的开销与直接借用完全相同；如果需要修改，自动退化为拥有。
 > [来源: [std::borrow::Cow](https://doc.rust-lang.org/std/borrow/enum.Cow.html)]
 
 ---
@@ -752,7 +752,7 @@ fn main() {}
 | Cow：写时克隆与零拷贝抽象 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 写时复制安全 ⟸ CoW 借用转换 ⟸ 所有权转移
-> 零拷贝优化 ⟸ Borrowed 状态保持 ⟸ 生命周期
+> 零拷贝优化 ⟸ Borrowed 状态保持 ⟸ 生命周期（Lifetimes）
 > **过渡**: 掌握 Cow：写时克隆与零拷贝抽象 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 Cow：写时克隆与零拷贝抽象 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。

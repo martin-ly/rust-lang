@@ -174,7 +174,7 @@ fn main() {
 
 | `use` 写法 | 效果 |
 |:---|:---|
-| `use shapes::circle;` | 导入 `circle` 模块，使用 `circle::area(...)` |
+| `use shapes::circle;` | 导入 `circle` 模块（Module），使用 `circle::area(...)` |
 | `use shapes::square::area as square_area;` | 导入 `area` 函数并重命名为 `square_area` |
 | `use shapes::{circle, square};` | 同时导入多个项（嵌套路径） |
 | `use shapes::*;` | 通配导入（不推荐，除 prelude 外） |

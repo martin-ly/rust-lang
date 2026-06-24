@@ -799,7 +799,7 @@ fn main() {}
 >
 > `dyn Trait` 替代方案：
 >
-> 1) `// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]` 宏（将 `async fn` 转为返回 `Pin<Box<dyn Future>>`）；
+> 1) `// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]` 宏（Macro）（将 `async fn` 转为返回 `Pin<Box<dyn Future>>`）；
 > 2) `trait T { fn method(&self) -> impl Future<Output = i32>; }` + 手动 `Box::pin`（复杂）。
 > 这与 JavaScript 的 `async` 方法（接口中直接声明，无特殊限制）或 Kotlin 的 `suspend` 函数（类似，但编译器处理）不同
 > ——Rust 的 `async fn` in trait 是类型系统的重大扩展。
@@ -878,7 +878,7 @@ fn main() {}
 - A. 同时运行多个异步任务并等待全部完成
 - B. 同时等待多个异步操作，**其中一个**完成时立即返回
 - C. 按顺序执行多个异步操作
-- D. 创建一个新的 Tokio 运行时
+- D. 创建一个新的 Tokio 运行时（Runtime）
 
 <details>
 <summary>✅ 答案与解析</summary>

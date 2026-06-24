@@ -431,8 +431,8 @@ fn main() {
 ## 相关概念文件
 
 - [Type System](../01_foundation/04_type_system.md) — 类型系统
-- [Generics](../02_intermediate/02_generics.md) — 泛型
-- [Closures](../01_foundation/15_closure_basics.md) — 闭包
+- [Generics](../02_intermediate/02_generics.md) — 泛型（Generics）
+- [Closures](../01_foundation/15_closure_basics.md) — 闭包（Closures）
 - [Concurrency](../03_advanced/01_concurrency.md) — 并发
 - [Performance](../06_ecosystem/15_performance_optimization.md) — 性能优化
 
@@ -593,7 +593,7 @@ fn main() {
 }
 ```
 
-> **修正**: 迭代器是**一次性**的——`collect`、`fold`、`for_each` 等消耗型方法获取迭代器所有权，调用后迭代器失效。这与 C++ 的 `std::istream_iterator`（同样一次性）或 Java 的 `Iterator`（同样 `hasNext`/`next` 消耗）类似。Rust 的所有权系统显式追踪迭代器的消耗：调用 `into_iter()` 转移 `Vec` 所有权到迭代器，`collect` 转移迭代器所有权到 `Vec`。若需多次遍历，应 `clone` 底层集合（`data.clone().into_iter()`），或使用非消耗型迭代（`data.iter()` 借用）。`Iterator` trait 的 `by_ref()` 方法可借出迭代器引用，允许部分消耗后继续使用——高级但有用。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)]
+> **修正**: 迭代器是**一次性**的——`collect`、`fold`、`for_each` 等消耗型方法获取迭代器所有权，调用后迭代器失效。这与 C++ 的 `std::istream_iterator`（同样一次性）或 Java 的 `Iterator`（同样 `hasNext`/`next` 消耗）类似。Rust 的所有权系统显式追踪迭代器的消耗：调用 `into_iter()` 转移 `Vec` 所有权到迭代器，`collect` 转移迭代器所有权到 `Vec`。若需多次遍历，应 `clone` 底层集合（`data.clone().into_iter()`），或使用非消耗型迭代（`data.iter()` 借用（Borrowing））。`Iterator` trait 的 `by_ref()` 方法可借出迭代器引用，允许部分消耗后继续使用——高级但有用。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)]
 
 ### 10.6 边界测试：`Iterator::fuse` 后的重复消费（逻辑错误）
 
@@ -606,7 +606,7 @@ fn main() {
 }
 ```
 
-> **修正**: `Iterator::fuse` 在底层迭代器返回 `None` 后，后续 `next()` 始终返回 `None`。这在 `select!` 循环中防止对已完成的 future 重复 poll。但 `fuse` 不改变"迭代器是一次性的"本质：`collect` 消耗迭代器，`v2` 为空因为 `v1` 已消耗所有元素。`fuse` 不是"重置"迭代器——没有方法可重置已消耗的迭代器（除非重新创建）。这与 Python 的 `iter()`（同样一次性）或 C++ 的 `std::istream_iterator`（同样一次性）相同——迭代器的单次消费是通用设计。`fuse` 仅保证完成后的行为安全，不允许多次遍历。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)]
+> **修正**: `Iterator::fuse` 在底层迭代器返回 `None` 后，后续 `next()` 始终返回 `None`。这在 `select!` 循环中防止对已完成的 future 重复 poll。但 `fuse` 不改变"迭代器是一次性的"本质：`collect` 消耗迭代器，`v2` 为空因为 `v1` 已消耗所有元素。`fuse` 不是"重置"迭代器（Iterator）——没有方法可重置已消耗的迭代器（除非重新创建）。这与 Python 的 `iter()`（同样一次性）或 C++ 的 `std::istream_iterator`（同样一次性）相同——迭代器的单次消费是通用设计。`fuse` 仅保证完成后的行为安全，不允许多次遍历。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)]
 
 ### 10.2 边界测试：`Iterator::collect` 的目标类型推断失败（编译错误）
 
@@ -721,7 +721,7 @@ fn main() {
 | Rust 迭代器模式 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 惰性求值安全 ⟸ Iterator 状态机 ⟸ 借用检查
-> 适配器组合正确 ⟸ map/filter 生命周期 ⟸ 闭包捕获
+> 适配器组合正确 ⟸ map/filter 生命周期（Lifetimes） ⟸ 闭包捕获
 > **过渡**: 掌握 Rust 迭代器模式 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 Rust 迭代器模式 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。

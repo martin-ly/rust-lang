@@ -100,7 +100,7 @@ Option<T> 和 Result<T, E> 是 Rust 错误处理的代数数据类型:
   └── ? 运算符是 bind (>>=) 的语法糖
 ```
 
-> **认知功能**: `Result` 和 `Option` 将**错误处理**从控制流（异常）转化为**数据流**（类型）——错误成为值的一部分，而非控制流的跳转。
+> **认知功能**: `Result` 和 `Option` 将**错误处理（Error Handling）**从控制流（异常）转化为**数据流**（类型）——错误成为值的一部分，而非控制流的跳转。
 > [来源: [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)]
 
 ---
@@ -424,7 +424,7 @@ graph TD
 └── 缓解: thiserror 支持 no_std（需 alloc）
 ```
 
-> **边界要点**: 错误处理的边界主要与**panic 与 Result 混用**、**错误类型膨胀**、**异步**、**FFI** 和 **no_std** 相关。
+> **边界要点**: 错误处理的边界主要与**panic 与 Result 混用**、**错误类型膨胀**、**异步（Async）**、**FFI** 和 **no_std** 相关。
 > [来源: [Rust Error Handling Working Group](https://github.com/rust-lang/project-error-handling)]
 
 ---
@@ -507,7 +507,7 @@ graph TD
 
 - [Type System](../01_foundation/04_type_system.md) — 类型系统
 - [Traits](./01_traits.md) — Trait 系统
-- [Generics](./02_generics.md) — 泛型
+- [Generics](./02_generics.md) — 泛型（Generics）
 - [Async](../03_advanced/02_async.md) — 异步编程
 
 ---

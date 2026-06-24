@@ -1,6 +1,6 @@
 # 更新日志 (Changelog)
 
-> **最后更新**: 2026-06-24（C 类目录重复检测完成）
+> **最后更新**: 2026-06-24（D/E 工作流收尾 + L3 测验 + Kani 合约示例完成）
 
 ---
 
@@ -90,6 +90,52 @@
 - 共发现 109 对跨目录潜在相似文件（阈值 0.60），最高相似度 1.00。
 - 对 ≥0.75 抽样对进行 token-level Jaccard 复核，实际内容重叠度均 < 20%；当前无需合并/归档。
 - 更新 `reports/C_CLASS_GOVERNANCE_PLAN_2026_06_09.md`：标记阶段 2「重复检测」完成。
+
+### L3 核心与进阶测验闭环（2026-06-24）
+
+- 创建 `exercises/tests/quizzes.rs` 与 `exercises/tests/quizzes/l3_core.rs`、`exercises/tests/quizzes/l3_advanced.rs`，建立 L3 嵌入式测验目录结构。
+- `l3_core.rs` 实现 12 个测验：
+  - 基础 6 题：所有权移动/借用、可变借用独占性、共享多读者、生命周期省略、带引用结构体生命周期、切片生命周期。
+  - 进阶 6 题：泛型 trait bound、trait object `dyn`、关联类型、`Result` 组合子与 `?`、自定义错误类型、Iterator adapter 链。
+- `l3_advanced.rs` 实现 12 个测验：
+  - `tokio::select!` 竞速、`FuturesUnordered`、`std::thread::scope`、Actor 模式、CAS 循环、`fetch_add`、Barrier、Release-Acquire、Treiber 栈、异步超时、`Pin<Box<dyn Future>>`、x86_64 内联汇编 `rdtsc`。
+- CI 集成：`.github/workflows/ci.yml` 的 `quiz-tests` job 新增 `cargo test -p exercises --test quizzes` 与 `cargo test -p exercises --test l3_ecosystem_alignment`。
+- 验证：`cargo test --test quizzes` 24 passed；`cargo test -p exercises` 全量通过。
+
+### Kani 函数/循环合约示例（2026-06-24）
+
+- 新增 `crates/c01_ownership_borrow_scope/src/kani_examples.rs`：
+  - 函数合约：`increment`（`requires`/`ensures`）、`max_in_slice`（`requires` + 双重 `ensures`）。
+  - 循环合约：`sum_of_nonnegative_array_is_nonnegative`（`loop_invariant` + `kani::forall!`）。
+- 新增 `crates/c02_type_system/src/kani_examples.rs`：
+  - 泛型函数合约：`identity`、`max_of_slice`。
+  - 循环合约：`verify_count_even`（带 `enumerate` 的 `loop_invariant`）。
+- 更新 `crates/c01_ownership_borrow_scope/Cargo.toml` 与 `crates/c02_type_system/Cargo.toml`，将 `cfg(kani)` 加入 `unexpected_cfgs` 检查列表，消除常规构建警告。
+
+### 术语表与双语标注（2026-06-24）
+
+- 更新 `concept/00_meta/terminology_glossary.md` 状态为 v3.2：已覆盖 **183 个术语**，全部含英文对照，超过 150 目标。
+- 新增 `scripts/add_bilingual_annotations.py`，对 `concept/01_foundation/`、`concept/02_intermediate/`、`concept/03_advanced/` 共 88 个 Markdown 文件的关键术语进行首次出现双语标注。
+- 标注规则：跳过代码块、行内代码、Markdown 链接、标题行以及已含英文对照的术语。
+
+### 形式化工具交叉引用与 Rust for Linux 更新（2026-06-24）
+
+- 在 `concept/07_future/19_rust_for_linux.md` 新增「四、与形式化工具的交叉（2026-06 更新）」章节，关联 Safety Tags、BorrowSanitizer、Tree Borrows、AutoVerus/Verus。
+- 确认 `concept/04_formal/22_safety_tags.md`、`23_borrow_sanitizer.md`、`24_autoverus.md`、`25_tree_borrows_deep_dive.md` 的元数据头部已相互引用前置/后置概念。
+- 运行 `scripts/check_links.py`：`117,376` 总链接，`43,034` 有效，`2,496` 损坏（多为历史/外部链接）。
+
+### 编译器/Cargo 深度内容收尾（2026-06-24）
+
+- 更新 `reports/COMPILER_CARGO_CONTENT_ROADMAP_2026_06_21.md`：补充「执行进度」表，确认 17 个编译器/Cargo 概念文件均已创建并通过质量检查清单。
+- 验证关键文件非空：`concept/04_formal/19_rustc_query_system.md`、`25_name_resolution_and_hir.md`、`26_trait_solver_in_rustc.md`、`27_type_checking_and_inference.md`；`concept/06_ecosystem/59–71` Cargo/编译器深度页。
+- 确认 `concept/07_future/rust_1_98_preview.md` 与编译器/Cargo 概念页已建立交叉引用。
+
+### 质量验证与进度归档（2026-06-24）
+
+- `cargo check --workspace` 通过。
+- `cargo clippy --workspace --all-features -- -D warnings` 通过。
+- `cargo test -p exercises` 全量通过（384 个测试）。
+- 生成 `.kimi/WEEKLY_PROGRESS_2026_06_24.md`，汇总 A/B/C/D/E 工作流 Week 1 进展、关键数字、剩余阻塞项与下周计划。
 
 ### 全面对齐修复（2026-06-23 — 对称差 / 层次差 / 深度差治理）
 

@@ -10,7 +10,7 @@
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: F×App — 断言和模式匹配语法应用
-> **定位**: 将 Rust 的**模式匹配**能力从"表达式求值"扩展到"测试断言"的工程机制，实现编译期模式检查与运行时断言的统一。
+> **定位**: 将 Rust 的**模式匹配（Pattern Matching）**能力从"表达式求值"扩展到"测试断言"的工程机制，实现编译期模式检查与运行时断言的统一。
 > **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Error Handling](./04_error_handling.md)
 > **后置概念**: [Macros](../03_advanced/04_macros.md) · [Version Tracking](../07_future/05_rust_version_tracking.md)
 
@@ -70,7 +70,7 @@
 ### 1.1 `matches!`：模式匹配的布尔化
 >
 
-Rust 1.42 引入 `matches!` 宏，将模式匹配从**控制流**转化为**布尔表达式**：
+Rust 1.42 引入 `matches!` 宏（Macro），将模式匹配从**控制流**转化为**布尔表达式**：
 
 ```rust
 let x = Some(42);
@@ -584,7 +584,7 @@ fn main() {
 }
 ```
 
-> **修正**: **Move 语义**：1) `String` 非 `Copy`，赋值时 move 所有权；2) move 后原变量无效；3) 解决：使用 `.clone()` 或引用 `&s`。
+> **修正**: **Move 语义**：1) `String` 非 `Copy`，赋值时 move 所有权（Ownership）；2) move 后原变量无效；3) 解决：使用 `.clone()` 或引用 `&s`。
 
 ## 嵌入式测验（Embedded Quiz）
 

@@ -63,7 +63,7 @@ mindmap
       Trait对象[impl Trait / dyn Trait]
 ```
 
-> **认知功能**: 本 mindmap 是 L1 层的**放射式认知入口**。放射式结构（中心向外扩散）适合展示「一个核心主题的多维分解」。四个分支对应 Rust 内存安全的「四根支柱」，每根支柱下的子节点是读者需要掌握的「最小核心概念集」。建议用法：新读者将此图作为「学习进度追踪器」——掌握一个子节点后标记完成，全部标记后再进入 L2。四根支柱的依赖关系是：所有权 → 借用 → 生命周期（递进），类型系统贯穿始终（横向支撑）。 [来源: 💡 原创分析]
+> **认知功能**: 本 mindmap 是 L1 层的**放射式认知入口**。放射式结构（中心向外扩散）适合展示「一个核心主题的多维分解」。四个分支对应 Rust 内存安全的「四根支柱」，每根支柱下的子节点是读者需要掌握的「最小核心概念集」。建议用法：新读者将此图作为「学习进度追踪器」——掌握一个子节点后标记完成，全部标记后再进入 L2。四根支柱的依赖关系是：所有权（Ownership） → 借用（Borrowing） → 生命周期（Lifetimes）（递进），类型系统贯穿始终（横向支撑）。 [来源: 💡 原创分析]
 
 > **认知路径**:
 
@@ -121,7 +121,7 @@ graph TB
 | 关系 | 从 | 到 | 语义类型 | 说明 |
 |:---|:---|:---|:---|:---|
 | 1 | **Ownership** | **Borrowing** | `==>` 前提/启用 | 所有权唯一性是借用规则成立的根本前提。若无唯一 owner，则无法安全地出借引用。 |
-| 2 | **Borrowing** | **Lifetimes** | `==>` 导致/约束 | 引用（&T）必须在其指向数据的生命周期内有效，借用规则直接产生生命周期约束需求。 |
+| 2 | **Borrowing** | **Lifetimes** | `==>` 导致/约束 | 引用（Reference）（&T）必须在其指向数据的生命周期内有效，借用规则直接产生生命周期约束需求。 |
 | 3 | **Ownership** | **Type System** | `-.->` 体现/映射 | Move/Copy/Drop 在类型层面通过 trait 和编译器内建规则实现。 |
 | 4 | **Type System** | **Ownership** | `-.->` 反馈/决定 | 类型（如 `Copy` / `!Copy`）决定值在传递时是 move 还是 copy。 |
 | 5 | **Lifetimes** | **Borrowing** | `-.->` 验证/约束 | 生命周期约束的求解结果直接决定借用检查是否通过。 |
@@ -161,7 +161,7 @@ Type System（理解"类型即证明"）
 | [03_lifetimes.md](./03_lifetimes.md) | 生命周期 | 标注、Elision、NLL、`'static`、HRTB、Variance | ✅ v1.0 | Borrowing | Generics, Async |
 | [04_type_system.md](./04_type_system.md) | 类型系统基础 | 标量/复合/ADT、impl/dyn Trait、类型推断 | ✅ v1.0 | Ownership | Trait, Generics, Macros |
 | [05_reference_semantics.md](./05_reference_semantics.md) | 引用语义 | Deref/DerefMut、自动解引用、智能指针接口 | ✅ v1.0 | Borrowing, Type System | Pin, FFI |
-| [06_zero_cost_abstractions.md](./06_zero_cost_abstractions.md) | 零成本抽象 | 单态化、内联、迭代器零成本、编译期优化 | ✅ v1.0 | Type System, Generics | Ecosystem Patterns |
+| [06_zero_cost_abstractions.md](./06_zero_cost_abstractions.md) | 零成本抽象（Zero-Cost Abstraction） | 单态化、内联、迭代器零成本、编译期优化 | ✅ v1.0 | Type System, Generics | Ecosystem Patterns |
 | [07_control_flow.md](./07_control_flow.md) | 控制流 | match/if let/loop、表达式导向、穷尽性检查 | ✅ v1.0 | Ownership, Type System | Iterator, Async |
 | [08_collections.md](./08_collections.md) | 集合类型 | Vec/HashMap/BTreeMap/HashSet、Entry API、容量管理 | ✅ v1.0 | Ownership, Generics | Smart Pointers, Ecosystem |
 | [09_strings_and_text.md](./09_strings_and_text.md) | 字符串与文本 | String/str、UTF-8、格式化、OS 字符串、C 字符串 | ✅ v1.0 | Ownership, Type System | Collections, FFI |
@@ -260,9 +260,9 @@ Type System（理解"类型即证明"）
 
 掌握 L1 后可进入：
 
-- **L2 进阶**: Trait（类型系统延伸）、泛型（生命周期参数化）、内存管理（所有权进阶）、错误处理（Result 类型）
+- **L2 进阶**: Trait（类型系统延伸）、泛型（Generics）（生命周期参数化）、内存管理（所有权进阶）、错误处理（Result 类型）
 - **L4 形式化**: 线性逻辑（所有权数学根基）、区域类型（生命周期形式化）、分离逻辑（借用形式化）
-- **L5 对比**: Rust vs C++（所有权 vs 智能指针）
+- **L5 对比**: Rust vs C++（所有权 vs 智能指针（Smart Pointer））
 
 ---
 

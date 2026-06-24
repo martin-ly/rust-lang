@@ -292,7 +292,7 @@ impl Future for ForgetWakeFuture {
 | `wake(self)` | ✅ 是 | Waker 不再需要时，避免 clone 开销 |
 | `wake_by_ref(&self)` | ❌ 否 | Reactor 需要长期持有 Waker 时 |
 
-> **[futures-rs 文档]** `wake` 获取所有权（减少 Arc 引用计数），`wake_by_ref` 借用。在性能敏感场景中，若已拥有 Waker 所有权，优先使用 `wake`。✅ 已验证
+> **[futures-rs 文档]** `wake` 获取所有权（减少 Arc 引用计数），`wake_by_ref` 借用（Borrowing）。在性能敏感场景中，若已拥有 Waker 所有权（Ownership），优先使用 `wake`。✅ 已验证
 
 **形式化契约**
 
@@ -337,7 +337,7 @@ fn create_waker(task_id: u64, scheduler: Arc<Scheduler>) -> Waker {
 
 > **关键差异**: `Wake` trait 隐藏了 `RawWakerVTable` 的 unsafe 细节，但底层仍通过 vtable 实现类型擦除。`Waker::from(Arc<T>)` 在内部自动构建符合 `clone`/`wake`/`wake_by_ref`/`drop` 契约的 vtable。[来源: Rust std: std::task::Wake]
 
-**与 OS 异步 I/O 的唤醒路径**
+**与 OS 异步（Async） I/O 的唤醒路径**
 
 `Waker` 的最终消费者是 OS 异步 I/O 机制。不同 OS 的唤醒路径决定了 Reactor 如何将 I/O 就绪事件映射到 `Waker::wake()` 调用：
 
@@ -674,7 +674,7 @@ async fn pipeline() {
 
 **栈 pinning（`pin!` macro）vs 堆 pinning**
 
-> **[Rust Reference: pin_macro](https://doc.rust-lang.org/reference/)** Rust 1.68+ 引入 `std::pin::pin!` 宏，允许在栈上创建 `Pin<&mut T>`，避免 `Box::pin` 的堆分配开销。✅ 已验证
+> **[Rust Reference: pin_macro](https://doc.rust-lang.org/reference/)** Rust 1.68+ 引入 `std::pin::pin!` 宏（Macro），允许在栈上创建 `Pin<&mut T>`，避免 `Box::pin` 的堆分配开销。✅ 已验证
 
 ```rust
 // ✅ 正确: 栈 pinning（Rust 1.68+）
@@ -786,7 +786,7 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 | **场景** | **推荐** | **理由** |
 |:---|:---|:---|
 | **库内部实现** | `impl Future` / `async fn` | 最大化编译器优化，无运行时开销 |
-| **Trait 方法返回（AFIT）** | `async fn` / `→ impl Future` | 零成本抽象，调用方无感知 |
+| **Trait 方法返回（AFIT）** | `async fn` / `→ impl Future` | 零成本抽象（Zero-Cost Abstraction），调用方无感知 |
 | **动态分发需求（类型擦除）** | `Pin<Box<dyn Future>>` | 统一存储异构 Future（如任务队列） |
 | **递归 async fn** | `Pin<Box<dyn Future>>` | 打破无限递归类型 |
 | **跨 FFI / C ABI** | `Pin<Box<dyn Future>>` | 类型擦除是跨语言边界的必要条件 |

@@ -155,7 +155,7 @@ unsafe {
 }
 ```
 
-> **原始指针洞察**: 原始指针**剥离了 Rust 的安全保证**——它们可以 null、可以悬空、可以别名，但**借用检查器不验证这些**。
+> **原始指针洞察**: 原始指针（Raw Pointer）**剥离了 Rust 的安全保证**——它们可以 null、可以悬空、可以别名，但**借用检查器不验证这些**。
 > [来源: [Rust Nomicon — Raw Pointers](https://doc.rust-lang.org/nomicon/vec-raw.html)]
 
 ---
@@ -511,7 +511,7 @@ graph TD
      // COUNTER.fetch_add(1, Ordering::Relaxed);
 ```
 
-> **陷阱总结**: unsafe 的陷阱主要与**不必要使用**、**对齐**、**生命周期**、**内存泄漏**和**数据竞争**相关。
+> **陷阱总结**: unsafe 的陷阱主要与**不必要使用**、**对齐**、**生命周期（Lifetimes）**、**内存泄漏**和**数据竞争**相关。
 > [来源: [Rust Nomicon — Common Mistakes](https://doc.rust-lang.org/nomicon/)]
 
 ---

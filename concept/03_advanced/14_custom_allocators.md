@@ -410,7 +410,7 @@ graph TD
      // 或在 Cargo.toml 中选择特性
 ```
 
-> **陷阱总结**: 自定义分配器的陷阱主要与**Layout 一致性**、**ZST 处理**、**对齐假设**、**生命周期**和**全局唯一性**相关。
+> **陷阱总结**: 自定义分配器的陷阱主要与**Layout 一致性**、**ZST 处理**、**对齐假设**、**生命周期（Lifetimes）**和**全局唯一性**相关。
 > [来源: [Rust Reference — Global Allocators](https://doc.rust-lang.org/std/alloc/index.html)]
 
 ---

@@ -438,7 +438,7 @@ graph TD
 └── 缓解: 为重要闭包提供命名包装
 ```
 
-> **边界要点**: 闭包的边界主要与**大小**、**递归**、**动态分发**、**生命周期**和**调试**相关。
+> **边界要点**: 闭包的边界主要与**大小**、**递归**、**动态分发**、**生命周期（Lifetimes）**和**调试**相关。
 > [来源: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html)]
 
 ---
@@ -506,8 +506,8 @@ graph TD
 ## 相关概念文件
 
 - [Traits](../02_intermediate/01_traits.md) — Trait 系统
-- [Ownership](./01_ownership.md) — 所有权
-- [Iterator](../02_intermediate/16_iterator_patterns.md) — 迭代器
+- [Ownership](./01_ownership.md) — 所有权（Ownership）
+- [Iterator](../02_intermediate/16_iterator_patterns.md) — 迭代器（Iterator）
 - [Async](../03_advanced/02_async.md) — 异步编程
 
 ---

@@ -344,7 +344,7 @@ Square
 
 **解析**：`&dyn Drawable` 是**trait 对象**，使用**动态分发（dynamic dispatch）**。
 
-| 特性 | `impl Trait` / 泛型 | `dyn Trait` |
+| 特性 | `impl Trait` / 泛型（Generics） | `dyn Trait` |
 |:---|:---|:---|
 | 分发方式 | 静态分发（单态化） | 动态分发（虚表 vtable） |
 | 运行时开销 | 无 | 指针解引用 + 虚表查找 |

@@ -30,7 +30,7 @@
 ---
 
 > **Bloom 层级**: 应用 → 分析
-> **定位**: L3 嵌入式互动测验——验证宏系统核心概念（声明宏 `macro_rules!`、重复模式、卫生性、过程宏）的掌握程度。
+> **定位**: L3 嵌入式互动测验——验证宏系统核心概念（声明宏（Declarative Macro） `macro_rules!`、重复模式、卫生性、过程宏（Procedural Macro））的掌握程度。
 > **使用方式**: 先独立思考答案，再点击展开核对解析。
 
 ---
@@ -257,7 +257,7 @@ impl PartialEq for Point {
 | 字段类型必须已实现对应 trait | `Point<T>` 需要 `T: Debug + Clone + PartialEq` |
 | 不能自定义逻辑 | 只能生成"标准"实现 |
 
-**自定义 derive**：通过 `proc_macro_derive` 创建自己的 derive 宏。
+**自定义 derive**：通过 `proc_macro_derive` 创建自己的 derive 宏（Macro）。
 
 **知识点**：derive 宏是最常用的过程宏，消除了大量 boilerplate。理解其生成的代码有助于调试复杂的 trait 约束问题。[→ 过程宏详解](./07_proc_macro.md)
 
@@ -291,7 +291,7 @@ fn main() {
 | 类型 | 定义方式 | 用途 | 示例 |
 |:---|:---|:---|:---|
 | 派生宏 | `#[proc_macro_derive(Name)]` | 为类型自动实现 trait | `#[derive(Debug)]` |
-| 属性宏 | `#[proc_macro_attribute]` | 修改/包装函数/结构体 | `#[trace]`、`#[test]` |
+| 属性宏 | `#[proc_macro_attribute]` | 修改/包装函数/结构体（Struct） | `#[trace]`、`#[test]` |
 | 函数式宏 | `#[proc_macro]` | 像函数一样调用，操作 token | `sql!(SELECT * FROM users)` |
 
 **`#[trace]` 可能的展开**：
@@ -364,7 +364,7 @@ Value: 10
 | `tt` | 任意 token 树 | 最灵活，但限制最少 |
 | `literal` | 字面量 | `"hello"`、`42`、`3.14` |
 | `ident` | 标识符 | `foo`、`_bar` |
-| `lifetime` | 生命周期 | `'a`、`'static` |
+| `lifetime` | 生命周期（Lifetimes） | `'a`、`'static` |
 | `meta` | 属性内容 | `derive(Debug)`、`cfg(test)` |
 | `vis` | 可见性 | `pub`、`pub(crate)` |
 

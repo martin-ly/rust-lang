@@ -143,7 +143,7 @@
   └── 快速开发内部工具 → macro_rules!
 ```
 
-> **宏类型洞察**: **声明宏**适合快速代码生成，**过程宏**适合深度 AST 转换——两者是互补工具。
+> **宏类型洞察**: **声明宏（Declarative Macro）**适合快速代码生成，**过程宏（Procedural Macro）**适合深度 AST 转换——两者是互补工具。
 > [来源: [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html)]
 
 ---
@@ -426,7 +426,7 @@ graph TD
     style MACRO fill:#c8e6c9
 ```
 
-> **认知功能**: **泛型 > 宏**——当类型系统可以表达时，优先使用泛型（更好的错误信息、IDE 支持、编译速度）。
+> **认知功能**: **泛型（Generics） > 宏（Macro）**——当类型系统可以表达时，优先使用泛型（更好的错误信息、IDE 支持、编译速度）。
 > [来源: [Rust Style Guide](https://doc.rust-lang.org/nightly/style-guide/)]
 
 ---

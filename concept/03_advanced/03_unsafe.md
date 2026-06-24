@@ -236,7 +236,7 @@ Unsafe Rust = Safe Rust ∪ { 操作 O | O 需要人工证明安全性 }
 | **访问 union 字段** | `union.field` | 类型混淆 | C 互操作 | `std::mem::ManuallyDrop` |
 | **调用 extern 函数** | `extern "C"` | ABI 不匹配, UAF | 系统库调用 | `libc` crate |
 | **修改可变静态变量** | `static mut` | 数据竞争 | 全局状态（避免） | `lazy_static!` |
-| **内联汇编** | `asm!()` | 完全不受控 | 极致优化 | 极少数场景 |
+| **内联汇编（Inline Assembly）** | `asm!()` | 完全不受控 | 极致优化 | 极少数场景 |
 
 > **[Rust Reference: Behavior considered undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)** Rust 的 UB 清单包括：数据竞争、悬垂指针解引用、越界访问、类型混淆、无效枚举值、未对齐访问、读取未初始化内存等。✅ 已验证
 > **[Rustonomicon: UB](https://doc.rust-lang.org/nomicon/)** 未定义行为意味着编译器可据此做任何优化假设；触发 UB 后程序行为完全不可预测。✅ 已验证
@@ -414,7 +414,7 @@ stateDiagram-v2
 > **思维表征说明**:
 > `stateDiagram-v2` 将 Safe/Unsafe 边界建模为**状态转换系统**——Safe 是「编译器保护态」，UnsafeBlock/UnsafeFn/UnsafeTrait 是「人工证明态」，UB 是「不可恢复的错误态」。
 > 关键洞察：从 Safe 进入 Unsafe 的每次转移都必须有**显式标记**（`unsafe` 关键字），且转移条件是「程序员已验证安全契约」。
-> 这与 `graph TD` 流程图（展示知识结构）形成互补——状态机图展示的是**运行时/编码时的状态约束**。
+> 这与 `graph TD` 流程图（展示知识结构）形成互补——状态机图展示的是**运行时（Runtime）/编码时的状态约束**。
 > [来源: Rustonomicon §1; [RFC 2585](https://rust-lang.github.io/rfcs//2585-unsafe-block-in-unsafe-fn.html); Rust Reference §19]
 
 ```text
@@ -683,7 +683,7 @@ graph LR
 
 Tree Borrows 用**树形结构**替代线性栈：
 
-- **根节点（Root）**：原始指针（最初分配内存时获得）
+- **根节点（Root）**：原始指针（Raw Pointer）（最初分配内存时获得）
 - **子节点（Child）**：从父节点派生的借用分支
 - **路径兼容**：两个借用是否冲突取决于它们在树中的**路径关系**，而不仅仅是时间顺序
 
@@ -842,10 +842,10 @@ graph TD
     style A4 fill:#ff9
 ```
 
-> **认知功能**: 通过三维度对比（生命周期、对齐约束、有效值约束）建立裸指针与引用的本质差异认知。建议在将 `&T`/`&mut T` 转换为 `*const T`/`*mut T` 时，逐条核对此图中的保证缺失项。关键洞察：裸指针不仅是"没有生命周期检查的引用"，它在类型系统的所有三个核心假设（对齐、非空、有效值）上都不受保护，这是 `*ptr` 解引用比 `&*ptr` 危险得多的根本原因。[来源: 💡 原创分析]
+> **认知功能**: 通过三维度对比（生命周期（Lifetimes）、对齐约束、有效值约束）建立裸指针与引用的本质差异认知。建议在将 `&T`/`&mut T` 转换为 `*const T`/`*mut T` 时，逐条核对此图中的保证缺失项。关键洞察：裸指针不仅是"没有生命周期检查的引用"，它在类型系统的所有三个核心假设（对齐、非空、有效值）上都不受保护，这是 `*ptr` 解引用比 `&*ptr` 危险得多的根本原因。[来源: 💡 原创分析]
 > [来源: [Rustonomicon: FFI](https://doc.rust-lang.org/nomicon/ffi.html)]
 
-> **正确结论**: 裸指针 `*const T` / `*mut T` **不是**引用 `&T` / `&mut T` 的等价物。差异体现在：**生命周期追踪**、**对齐约束**、**有效值约束**（Validity Invariant）三个方面。
+> **正确结论**: 裸指针 `*const T` / `*mut T` **不是**引用（Reference） `&T` / `&mut T` 的等价物。差异体现在：**生命周期追踪**、**对齐约束**、**有效值约束**（Validity Invariant）三个方面。
 
 #### 反命题 4: "FFI 调用总是安全的"
 
@@ -1034,7 +1034,7 @@ Miri 解释执行循环:
 | **T1** | unsafe 不关闭类型系统 ⟹ 仅关闭特定检查 | `unsafe` 关键字 ⟹ 类型检查仍运行 ⟹ 仅裸指针/FFI/trait/union 等特定检查关闭 | 误以为类型系统完全失效、在 unsafe 内放松类型约束 | 泛型在 unsafe 块内、trait bound 推导 | `L3::类型保持` |
 | **T2** | FFI 边界 ⟹ 类型布局兼容性要求 | `extern "C"` ⟹ `#[repr(C)]` 保证布局一致 ⟹ ABI 调用约定匹配 ⟹ 调用行为可预期 | 布局不匹配、ABI 错误、字节序差异 | C 结构体互操作、系统 API 调用 | `L3::FFI布局` |
 | **T3** | Union 字段访问 ⟹ 程序员追踪活跃变体 | `union.field` ⟹ 编译器不检查活跃性 ⟹ 程序员保证读取的变体是最后写入的 | 读取未初始化/非活跃字段、类型混淆 | C 兼容解析、手动内存复用 | `L3::联合类型` |
-| **C1** | 未定义行为条件 ⟹ Miri 可检测子集 | UB 触发 ⟹ Miri 解释执行 MIR ⟹ 检测内存/对齐/枚举/别名违规 ⟹ 无法检测全部（停机问题不可解） | 依赖硬件行为、FFI 不透明调用、活性问题 | 测试阶段验证、CI 集成 Miri | `L3::动态验证` |
+| **C1** | 未定义行为条件 ⟹ Miri 可检测子集 | UB 触发 ⟹ Miri 解释执行 MIR ⟹ 检测内存/对齐/枚举（Enum）/别名违规 ⟹ 无法检测全部（停机问题不可解） | 依赖硬件行为、FFI 不透明调用、活性问题 | 测试阶段验证、CI 集成 Miri | `L3::动态验证` |
 | **C2** | `unsafe impl Send/Sync` ⟹ 人工证明安全性 | trait 契约 ⟹ 全局语义约束 ⟹ 人工证明线程安全/无数据竞争 ⟹ 编译器信任并开放全局使用 | 实际非线程安全、内部可变性未同步 | `Arc<T>`、自定义外部句柄、FFI 包装 | `L3::并发契约` |
 | **C3** | `static mut` 修改 ⟹ 数据竞争风险 | 可变静态变量 ⟹ 无所有权保护 ⟹ 多线程同时访问 ⟹ 数据竞争（UB） | 未同步访问、跨线程读写无原子保护 | 全局状态（应极力避免使用 `static mut`） | `L3::静态可变` |
 | **C4** | 内联汇编 `asm!` ⟹ 完全人工验证 | 汇编指令 ⟹ 编译器无分析能力 ⟹ 程序员负责所有副作用、内存模型、寄存器约定 | 任意错误（完全不受控） | 极致优化、内核代码、特殊指令 | `L3::汇编边界` |
@@ -2543,7 +2543,7 @@ fn main() {
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
-| 所有权 | [](../01_foundation/01_ownership.md) | safe 边界 |
+| 所有权（Ownership） | [](../01_foundation/01_ownership.md) | safe 边界 |
 | 借用规则 | [](../01_foundation/02_borrowing.md) | unsafe 突破 |
 | 内存管理 | [](../02_intermediate/03_memory_management.md) | 裸指针 |
 | 形式化验证 | [](../04_formal/04_rustbelt.md) | unsafe 证明边界 |
@@ -2726,7 +2726,7 @@ Gheri & Watt 提出了 **Provenance** 模型：
 | 维度 | C++ (RC11) | Java | Rust (Tree Borrows) |
 |:---|:---|:---|:---|
 | **数据竞争** | UB | 定义行为（保留因果性） | UB（但 Miri 检测） |
-| **原子操作** | `memory_order` 六级 | `volatile` + `AtomicInteger` | `Ordering` 四级 |
+| **原子操作（Atomic Operations）** | `memory_order` 六级 | `volatile` + `AtomicInteger` | `Ordering` 四级 |
 | **别名分析** | 类型基础别名规则（TBAA） | 无（GC 管理） | Tree Borrows 动态追踪 |
 | **指针 provenance** | 活跃讨论（P2188） | 无（引用不能算术） | Provenance 模型 |
 | **形式化验证** | 困难（Promising Semantics） | JMM 已形式化 | RustBelt + Stacked/Tree Borrows |

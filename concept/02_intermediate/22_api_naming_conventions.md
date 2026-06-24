@@ -321,7 +321,7 @@ where
 | `with_` | 带额外配置的构造函数 | `Self` | `Vec::with_capacity(10)` |
 | `try_` | 可能失败的构造函数/动作 | `Result<T, E>` | `Task::try_new(...)` |
 | `is_` | 状态查询 | `bool` | `is_empty()` |
-| `as_` | 廉价视图/借用 | `&U` / `&mut U` | `as_str()` |
+| `as_` | 廉价视图/借用（Borrowing） | `&U` / `&mut U` | `as_str()` |
 | `to_` | 分配式转换 | `U`（_owned_） | `to_string()` |
 | `into_` | 消耗式转换 | `U`（_owned_） | `into_inner()` |
 | `from` | 标准 `From` trait | `Self` | `String::from("x")` |

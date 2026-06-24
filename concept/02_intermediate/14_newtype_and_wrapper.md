@@ -1,6 +1,6 @@
 > **内容分级**: [综述级]
 
-> **本节关键术语**: 新类型模式 (Newtype Pattern) · 包装类型 (Wrapper Type) · 类型安全 (Type Safety) · 零成本抽象 · Deref — [完整对照表](../00_meta/terminology_glossary.md)
+> **本节关键术语**: 新类型模式 (Newtype Pattern) · 包装类型 (Wrapper Type) · 类型安全 (Type Safety) · 零成本抽象（Zero-Cost Abstraction） · Deref — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # Newtype 与包装器模式：类型安全的零成本抽象
 >

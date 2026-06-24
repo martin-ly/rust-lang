@@ -263,7 +263,7 @@ future.await;             // 执行异步操作，可能让出线程
 
 **Future 状态机**：编译器将 `async fn` 转换为状态机，`.await` 处为状态切换点。
 
-**知识点**：Rust 的 async/await 是**零成本抽象**——没有运行时分配，状态机在栈上展开。[→ Async/Await 详解](./02_async.md)
+**知识点**：Rust 的 async/await 是**零成本抽象（Zero-Cost Abstraction）**——没有运行时分配，状态机在栈上展开。[→ Async/Await 详解](./02_async.md)
 
 </details>
 
@@ -491,7 +491,7 @@ fn main() {
 `thread::spawn` 要求闭包满足 `'static`，即闭包捕获的数据必须：
 
 - 拥有所有权（`move`），或
-- 是 `'static` 生命周期（如字符串字面量 `"hello"`）
+- 是 `'static` 生命周期（Lifetimes）（如字符串字面量 `"hello"`）
 
 **对比**：
 

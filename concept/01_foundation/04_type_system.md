@@ -213,15 +213,15 @@ Rust 扩展:
 | | 字符 | `char` | 栈 | ✅ | 4 bytes |
 | **复合** | 元组 | `(T, U, ...)` | 栈（若成员全栈） | 若成员全 Copy | 成员和 |
 | | 数组 | `[T; N]` | 栈（通常） | 若 T: Copy | N × size(T) |
-| | 结构体 | `struct` | 视成员而定 | 若成员全 Copy | 成员和 + padding |
-| **引用** | 共享 | `&T` | 栈（指针大小） | ✅ | ptr 大小 |
+| | 结构体（Struct） | `struct` | 视成员而定 | 若成员全 Copy | 成员和 + padding |
+| **引用（Reference）** | 共享 | `&T` | 栈（指针大小） | ✅ | ptr 大小 |
 | | 可变 | `&mut T` | 栈（指针大小） | ✅ | ptr 大小 |
 | | 裸指针 | `*const T`, `*mut T` | 栈 | ✅ | ptr 大小 |
-| **ADT** | 枚举 | `enum` | 标签 + 最大变体 | 若变体全 Copy | tag + max variant |
+| **ADT** | 枚举（Enum） | `enum` | 标签 + 最大变体 | 若变体全 Copy | tag + max variant |
 | | Option | `Option<T>` | 同 `enum` | 若 T: Copy | 优化: 零成本空值 |
 | | Result | `Result<T, E>` | 同 `enum` | 若 T,E: Copy | tag + max(T, E) |
 | **函数** | 函数指针 | `fn(T) -> U` | 栈 | ✅ | ptr 大小 |
-| | 闭包 | `impl Fn/FnMut/FnOnce` | 视捕获而定 | 通常 ❌ | 捕获变量和 |
+| | 闭包（Closures） | `impl Fn/FnMut/FnOnce` | 视捕获而定 | 通常 ❌ | 捕获变量和 |
 | **动态** | Trait Object | `dyn Trait` | 栈（胖指针） | ❌ | 2 × ptr |
 | | Slice | `[T]` | 无法直接拥有 | N/A | 动态 |
 
@@ -235,13 +235,13 @@ Rust 扩展:
 | **代数数据类型** | ✅ `enum` | ✅ `data` | ⚠️ `variant` (C++17) | ❌ | ❌ |
 | **空安全** | ✅ `Option<T>` | ✅ `Maybe` | ❌ `nullptr` | ⚠️ `Optional` | ❌ `nil` |
 | **错误处理类型** | ✅ `Result<T,E>` | ✅ `Either` | ❌ 异常 | ⚠️ 异常/Optional | ⚠️ 多返回值 |
-| **泛型** | ✅ 单态化 | ✅ | ✅ 模板 | ⚠️ 类型擦除 | ✅ 无约束 |
+| **泛型（Generics）** | ✅ 单态化 | ✅ | ✅ 模板 | ⚠️ 类型擦除 | ✅ 无约束 |
 | **Trait/类型类** | ✅ | ✅ 类型类 | ⚠️ Concepts (C++20) | ✅ 接口 | ✅ 接口 |
 | **线性/所有权类型** | ✅ | ⚠️ 线性类型扩展 | ❌ | ❌ | ❌ |
 
 ---
 
-> **过渡**: 属性矩阵展示了类型系统的静态分类能力，接下来需要建立概念之间的关联网络——类型如何与所有权、借用、生命周期、Trait 等机制交织，形成完整的类型安全体系。
+> **过渡**: 属性矩阵展示了类型系统的静态分类能力，接下来需要建立概念之间的关联网络——类型如何与所有权、借用（Borrowing）、生命周期（Lifetimes）、Trait 等机制交织，形成完整的类型安全体系。
 
 ## 三、思维导图（Mind Map）
 
@@ -517,7 +517,7 @@ Rust 类型系统的安全性保障同样由引理、定理与推论构成严密
 | T2: 类型推断完备性 | 无显式泛型约束 | 唯一最一般类型可推断 | HM 类型推断 | — | 多态场景需标注 | E0282 |
 | T3: 类型安全定理 | 类型检查通过 + 无 unsafe | Progress + Preservation | 类型论元定理 | — | `std::mem::transmute` | — |
 | C1: 空指针消除 | T1 + L2 | null 在类型层面不可达 | 和类型 + NPO | — | `unsafe` 构造 null &T | — |
-| C2: 错误强制处理 | T1 + L1 | 错误路径不可遗漏 | 和类型穷尽性 | — | `unwrap()` 运行时 panic | — |
+| C2: 错误强制处理 | T1 + L1 | 错误路径不可遗漏 | 和类型穷尽性 | — | `unwrap()` 运行时（Runtime） panic | — |
 | C3: Never 类型完备性 | L1 | 发散函数参与任意控制流 | 空类型 (⊥) | — | 不稳定特性需 nightly | — |
 
 > **一致性检查**: L1 ⟹ L2 ⟹ T1/T2/T3 ⟹ C1/C2/C3，形成**从代数结构到运行时安全**的递进链。T1 是连接 ADT 结构与程序正确性的枢纽定理。
@@ -889,7 +889,7 @@ fn main() {
 
 | 来源 | 核心内容 | 与本文件对应 |
 |:---|:---|:---|
-| **[CMU 17-363: Programming Language Pragmatics]** | 类型系统、ADT、模式匹配 | L1 类型系统 |
+| **[CMU 17-363: Programming Language Pragmatics]** | 类型系统、ADT、模式匹配（Pattern Matching） | L1 类型系统 |
 | **[CMU 17-350: Safe Systems Programming]** | 类型安全与内存安全的关系 | T3 类型安全定理 |
 | **[Wikipedia: Type system](https://en.wikipedia.org/wiki/Type_system)** | 类型系统的通用定义 | 权威定义 §1.1 |
 | **[Wikipedia: Algebraic data type](https://en.wikipedia.org/wiki/Algebraic_data_type)** | 积类型与余积类型 | 引理 L1 |
@@ -898,7 +898,7 @@ fn main() {
 | **[Category Theory for Programmers]** | 积、余积、初始对象、终对象 | L1 ADT 完备性 |
 | **[TRPL Ch3.2](https://doc.rust-lang.org/book/ch03-02-data-types.html)** | 静态类型与类型推断 | 权威定义 §1.2 |
 | **[TRPL Ch6](https://doc.rust-lang.org/book/ch06-00-enums.html)** | enum 与模式匹配 | T1 match 穷尽性 |
-| **[TRPL Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html)** | Result<T, E> 错误处理 | 推论 C2 |
+| **[TRPL Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html)** | Result<T, E> 错误处理（Error Handling） | 推论 C2 |
 
 ---
 
@@ -1135,7 +1135,7 @@ struct Invariant<T>(PhantomData<*mut T>);    // T 不变
 | `PhantomData<*mut T>` | 不变（invariant） |
 | `PhantomData<fn() -> T>` | 协变（covariant） |
 
-> **关键洞察**: `PhantomData` 是 Rust 类型系统的"幽灵字段"——它在运行时完全不存在，但在编译期决定了：1) 类型的自动 trait 推导（Send/Sync）；2) 泛型参数的 variance；3) drop check 的行为。这是"零成本抽象"的极致体现。
+> **关键洞察**: `PhantomData` 是 Rust 类型系统的"幽灵字段"——它在运行时完全不存在，但在编译期决定了：1) 类型的自动 trait 推导（Send/Sync）；2) 泛型参数的 variance；3) drop check 的行为。这是"零成本抽象（Zero-Cost Abstraction）"的极致体现。
 > **来源**: [Rust Reference: PhantomData](https://doc.rust-lang.org/reference/special-types-and-traits.html) · [Rust Reference: Variance](https://doc.rust-lang.org/reference/) · [Rustonomicon: PhantomData](https://doc.rust-lang.org/nomicon/) · [Wikipedia: Unit type](https://en.wikipedia.org/wiki/Unit_type)
 
 ---

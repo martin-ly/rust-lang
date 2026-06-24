@@ -218,7 +218,7 @@ impl<'a, T> LendingIterator for MutWindows<'a, T> {
   └── 渐进式优化（先通用，后特化）
 ```
 
-> **特化洞察**: 特化是 Rust **"零成本抽象"承诺的技术支撑**——通用代码工作，特定类型可以优化到与手写代码等价。
+> **特化洞察**: 特化是 Rust **"零成本抽象（Zero-Cost Abstraction）"承诺的技术支撑**——通用代码工作，特定类型可以优化到与手写代码等价。
 > [来源: [Rust Tracking Issue — Specialization](https://github.com/rust-lang/rust/issues/31844)]
 
 ---

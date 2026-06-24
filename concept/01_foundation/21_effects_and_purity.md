@@ -101,7 +101,7 @@ processState :: Int -> State s Int  -- 有状态副作用
 processExcept :: Int -> Either Error Int  -- 可能抛出异常
 ```
 
-Rust 通过 **所有权 + 类型系统** 显式化副作用：
+Rust 通过 **所有权（Ownership） + 类型系统** 显式化副作用：
 
 ```rust,ignore
 // Rust: 副作用通过参数类型和返回类型显式表达
@@ -286,7 +286,7 @@ fn sum(data: &[i32]) -> i32 {
 |:---|:---|:---|
 | **核心抽象** | 存储 + 指令序列 | 表达式 + 函数应用 |
 | **状态管理** | 显式变量赋值 | 递归 + 高阶函数 |
-| **控制流** | `if/for/while/break` | 模式匹配 + 递归 + 高阶函数 |
+| **控制流** | `if/for/while/break` | 模式匹配（Pattern Matching） + 递归 + 高阶函数 |
 | **副作用** | 默认允许 | 默认禁止（Monad 显式化） |
 | **求值顺序** | 严格 + 语句顺序 | 非严格 / 惰性（Haskell） |
 | **类型系统** | 名义类型 + 子类型 | 代数数据类型 + 参数多态 |
@@ -418,7 +418,7 @@ fn closure_effect() {
 | **C++** | 无约束 | 无约束 | `try/catch/throw` | `std::thread` | RAII |
 | **Java** | 无约束 | 无约束 | `try/catch/throw` | `synchronized` | GC |
 | **Haskell** | `State` Monad | `IO` Monad | `Either` / `Maybe` | `IO` / `STM` | Monad + 惰性 |
-| **Rust** | `&mut T` / `Cell` / `RefCell` | 普通函数（无特殊标记） | `Result<T, E>` | `async` / `Send`/`Sync` | 所有权 + 借用 |
+| **Rust** | `&mut T` / `Cell` / `RefCell` | 普通函数（无特殊标记） | `Result<T, E>` | `async` / `Send`/`Sync` | 所有权 + 借用（Borrowing） |
 
 > **关键洞察**: Haskell 通过**Monad 组合子**将副作用完全显式化；Rust 通过**所有权约束**在类型层面部分显式化副作用。两者殊途同归——目标都是让副作用"可见、可追踪、可组合"。Rust 的选择更适合系统编程：零运行时开销、与命令式代码无缝集成。[来源: 💡 原创分析]
 
