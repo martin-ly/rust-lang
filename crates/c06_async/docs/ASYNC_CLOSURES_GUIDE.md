@@ -151,8 +151,9 @@ pub trait AsyncFnOnce<Args>: AsyncFnMut<Args> {
 }
 ```
 
-> **注意**: `async_call` / `async_call_mut` / `async_call_once` 方法在 **nightly** 中可用。
-> 在 **stable 1.95.0** 中，使用直接调用语法 `closure(args).await`。
+> **注意**:
+> `AsyncFn` / `AsyncFnMut` / `AsyncFnOnce` traits 及其 `async_call` / `async_call_mut` / `async_call_once` 方法自 **Rust 1.85.0 stable** 起可用；
+> 通常使用直接调用语法 `closure(args).await`。
 
 ### 自动实现规则
 
@@ -457,6 +458,6 @@ where
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.85.0+ (Edition 2024 / 2021)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

@@ -27,6 +27,7 @@
     - [代码库对齐](#代码库对齐)
     - [文档完整性](#文档完整性)
   - [4️⃣ 技术债务评估](#4️⃣-技术债务评估)
+  - [6️⃣ Nightly 预览文档更新（每 6 周）](#6️⃣-nightly-预览文档更新每-6-周)
   - [5️⃣ 归档与总结](#5️⃣-归档与总结)
     - [本季度决策记录](#本季度决策记录)
     - [下季度关注项](#下季度关注项)
@@ -155,6 +156,25 @@
 
 ---
 
+## 6️⃣ Nightly 预览文档更新（每 6 周）
+
+> **关联文件**: `concept/07_future/rust_1_98_preview.md`、`concept/07_future/rust_1_97_preview.md` 等 nightly 预览页。
+
+- [ ] 阅读 [Rust 官方博客](https://blog.rust-lang.org/) 与 [Inside Rust](https://blog.rust-lang.org/inside-rust/) 近 6 周文章
+- [ ] 检查 [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/) 状态变化
+- [ ] 核对 nightly 特性跟踪 issue / FCP / 合并 PR：Pin ergonomics、Reborrow traits、Field Projections、RTN、async drop 等
+- [ ] 更新 `concept/07_future/rust_1_98_preview.md` 中各特性状态标记（🧪 nightly / 🔄 FCP / ✅ 稳定 / ⏸️ 推迟）
+- [ ] 同步更新 `crates/c02_type_system/src/rust_198_features.rs` 中 placeholder 代码与最新 nightly API
+- [ ] 若某特性已进入 beta 或确定进入下一个稳定版本，提前起草对应 `concept/07_future/rust_X_Y_preview.md`
+- [ ] 在 Rust 新版本发布日执行 `.kimi/EXECUTION_RUST_1_97_RELEASE_2026_07_09.md`（或对应版本清单）
+
+| 特性 | 当前状态 | 新状态 | 更新日期 | 备注 |
+|------|----------|--------|----------|------|
+| | | | | |
+| | | | | |
+
+---
+
 ## 5️⃣ 归档与总结
 
 ### 本季度决策记录
@@ -189,10 +209,10 @@
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
-**文档版本**: 1.1
+**文档版本**: 1.2
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+**最后更新**: 2026-06-24
+**状态**: ✅ 已新增 Nightly 预览文档 6 周更新机制
 
 ---
 

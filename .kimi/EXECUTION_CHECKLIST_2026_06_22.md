@@ -2,7 +2,7 @@
 
 > **创建日期**: 2026-06-22
 > **执行周期**: 2026-06-23 ~ 2026-07-20（共 4 周）
-> **对应总计划**: `EXECUTION_PLAN_CONFIRMED_2026_06_03.md` Phase 2 及部分 Phase 3
+> **对应总计划**: `[历史参考] EXECUTION_PLAN_CONFIRMED_2026_06_03.md` Phase 2 及部分 Phase 3
 > **确认状态**: 已与用户对齐 5 项关键决策（优先级、1.97 执行、形式化工具、i18n、1.98 预览）
 
 ---
@@ -93,7 +93,8 @@
   - 已填充 7 个章节、状态标记、关联文档
   - 已为每个主要特性补充 nightly 代码示例
   - 已创建/更新 `crates/c02_type_system/src/rust_198_features.rs` 占位模块（含 `nightly_placeholders` 子模块）
-- [ ] **A4.4** 建立每 6 周更新 nightly 预览文档的机制（可加入 `docs/00_meta/00_quarterly_sync_checklist.md`）
+- [x] **A4.4** 建立每 6 周更新 nightly 预览文档的机制（已加入 `docs/00_meta/00_quarterly_sync_checklist.md`）
+  - 新增「6️⃣ Nightly 预览文档更新（每 6 周）」章节，含 Rust 博客/Inside Rust、Rust Project Goals、 nightly 特性状态、Placeholder 代码同步、发布日检查清单等检查项
 - [x] **A4.5** 创建 3 个 L4 形式化工具概念页
   - `concept/07_future/31_safety_tags_preview.md` — Safety Tags (RFC #3842)
   - `concept/07_future/32_borrow_sanitizer_preview.md` — BorrowSanitizer
@@ -125,8 +126,11 @@
 
 ### Week 3
 
-- [ ] **B3.1** 继续合并剩余 8 组文件对
-- [ ] **B3.2** 更新 `reports/CONTENT_OVERLAP_DETECTION_2026_06_09.md` 状态
+- [x] **B3.1** 继续合并剩余高相似文件对
+  - 2026-06-24：完成 `docs/03_guides/03_cargo_script_guide.md` 和 `docs/05_guides/05_borrowsanitizer_preview.md` 的重定向；清理 `knowledge/03_advanced/unsafe/02_inline_asm.md` 与 `knowledge/06_ecosystem/emerging/06_rust_1_97_preview.md` 的重定向标记
+  - 剩余 ~0.75 相似度对为 Rust vs X 跨语言对比等主题关联文件，无需合并
+- [x] **B3.2** 更新 `reports/CONTENT_OVERLAP_DETECTION_2026_06_09.md` 状态
+  - 已在报告顶部添加 2026-06-24 去重进度注释
 - [x] **B3.3** 对 `docs/research_notes/` 和 `docs/rust-ownership-decidability/` 启动元数据头添加
   - 已完成两目录元数据头审计：811 个 Markdown 文件中已有 808 个含 `状态` 字段
   - 已补充 3 个缺失 `状态` 的文件
@@ -134,9 +138,12 @@
 
 ### Week 4
 
-- [ ] **B4.1** 完成 C-class 元数据头添加（目标覆盖 50%）
-- [ ] **B4.2** 将完全重复文件移入 `archive/` 并加 `[ARCHIVED]` 标记
-- [ ] **B4.3** 更新 `reports/C_CLASS_GOVERNANCE_PLAN_2026_06_09.md` 进度
+- [x] **B4.1** 完成 C-class 元数据头添加（目标覆盖 50%）
+  - 2026-06-24：`scripts/add_c_class_content_grade.py` 补齐 `docs/research_notes/` 与 `docs/rust-ownership-decidability/` 中剩余 25 个缺失 `内容分级` 的文件；两目录 796 个 Markdown 文件已全部含 `内容分级` 元数据，覆盖率 **100%**
+- [x] **B4.2** 将完全重复文件移入 `archive/` 并加 `[ARCHIVED]` 标记
+  - 2026-06-24：全局精确去重扫描（SHA-256）覆盖 2,537 个 Markdown 文件，未发现完全重复文件；无需移动
+- [x] **B4.3** 更新 `reports/C_CLASS_GOVERNANCE_PLAN_2026_06_09.md` 进度
+  - 已标记阶段 1 完成，并补充阶段进度表
 
 ---
 

@@ -1,16 +1,15 @@
 # 三轨内容相似度检测报告
 
-- **扫描文件数**: 1351
+- **扫描文件数**: 1356
 - **相似度阈值**: 0.6
-- **潜在重复对**: 112
+- **潜在重复对**: 109
 
 | 相似度 | 文件1 | 文件2 | 标题1 | 标题2 |
 |:---|:---|:---|:---|:---|
-| 1.00 | `concept\06_ecosystem\09_cargo_script.md` | `docs\03_guides\03_cargo_script_guide.md` | Cargo Script | Cargo Script 单文件脚本指南 |
-| 1.00 | `concept\07_future\32_borrow_sanitizer_preview.md` | `docs\05_guides\05_borrowsanitizer_preview.md` | BorrowSanitizer 预览 | BorrowSanitizer 预览 |
-| 0.75 | `concept\03_advanced\03_unsafe.md` | `knowledge\03_advanced\unsafe\04_unsafe_rust.md` | Unsafe Rust | Unsafe Rust - 不安全 Rust |
+| 1.00 | `concept\04_formal\25_tree_borrows_deep_dive.md` | `knowledge\04_expert\miri\01_tree_borrows.md` | Tree Borrows 深度解析 | Miri Tree Borrows 深度解析 |
+| 0.75 | `concept\06_ecosystem\45_compiler_internals.md` | `knowledge\04_expert\01_compiler_internals.md` | Rust 编译器内部原理 | Rust 编译器内部原理 (Compiler Interna |
 | 0.75 | `concept\00_meta\comprehensive_rust_mapping.md` | `docs\01_learning\01_google_rust_mapping.md` | Comprehensive Rust 课程映射 | Google Rust 课程映射 |
-| 0.75 | `concept\03_advanced\03_unsafe.md` | `docs\rust-ownership-decidability\03-verification-tools\03-08-gillian-rust.md` | Unsafe Rust | Gillian-Rust: 混合方法验证 Unsafe Ru |
+| 0.75 | `concept\04_formal\25_tree_borrows_deep_dive.md` | `docs\content\academic\10_tree_borrows_guide.md` | Tree Borrows 深度解析 | Tree Borrows 详解 |
 | 0.75 | `concept\05_comparative\02_cpp_abi_object_model.md` | `docs\rust-ownership-decidability\comparative-analysis\rust-vs-cpp.md` | Rust vs C++：ABI、对象模型与内存布局 | Rust vs C++：全面对比分析 |
 | 0.75 | `concept\05_comparative\02_cpp_abi_object_model.md` | `docs\rust-ownership-decidability\comparative-analysis\rust-vs-go.md` | Rust vs C++：ABI、对象模型与内存布局 | Rust vs Go：全面对比分析 |
 | 0.75 | `concept\05_comparative\02_cpp_abi_object_model.md` | `docs\rust-ownership-decidability\comparative-analysis\rust-vs-java.md` | Rust vs C++：ABI、对象模型与内存布局 | Rust vs Java：全面对比分析 |
@@ -51,11 +50,12 @@
 | 0.75 | `concept\05_comparative\13_rust_vs_csharp.md` | `docs\rust-ownership-decidability\comparative-analysis\rust-vs-go.md` | Rust vs C#：托管与原生之路 | Rust vs Go：全面对比分析 |
 | 0.75 | `concept\05_comparative\13_rust_vs_csharp.md` | `docs\rust-ownership-decidability\comparative-analysis\rust-vs-java.md` | Rust vs C#：托管与原生之路 | Rust vs Java：全面对比分析 |
 | 0.75 | `concept\05_comparative\13_rust_vs_csharp.md` | `docs\rust-ownership-decidability\comparative-analysis\rust-vs-python.md` | Rust vs C#：托管与原生之路 | Rust vs Python：全面对比分析 |
-| 0.75 | `concept\05_comparative\14_rust_vs_elixir.md` | `docs\rust-ownership-decidability\comparative-analysis\rust-vs-cpp.md` | Rust vs Elixir | Rust vs C++：全面对比分析 |
-| 0.75 | `concept\05_comparative\14_rust_vs_elixir.md` | `docs\rust-ownership-decidability\comparative-analysis\rust-vs-go.md` | Rust vs Elixir | Rust vs Go：全面对比分析 |
-| 0.75 | `concept\05_comparative\14_rust_vs_elixir.md` | `docs\rust-ownership-decidability\comparative-analysis\rust-vs-java.md` | Rust vs Elixir | Rust vs Java：全面对比分析 |
-| 0.75 | `concept\05_comparative\14_rust_vs_elixir.md` | `docs\rust-ownership-decidability\comparative-analysis\rust-vs-python.md` | Rust vs Elixir | Rust vs Python：全面对比分析 |
 | 0.75 | `concept\06_ecosystem\27_web_frameworks.md` | `docs\rust-ownership-decidability\15-application-domains\web-development.md` | Rust Web 框架对比与选型 | Rust Web 开发 |
+| 0.75 | `concept\07_future\13_unsafe_fields_preview.md` | `docs\05_guides\05_unsafe_fields_preview.md` | Unsafe Fields 预研：字段级安全边界的精确标注 | Unsafe Fields 预览指南 |
+| 0.75 | `concept\07_future\rust_1_97_preview.md` | `docs\02_reference\quick_reference\02_rust_197_features_cheatsheet.md` | Rust 1.97 前沿特性预览 | Rust 1.97 特性速查表 |
+| 0.75 | `knowledge\03_advanced\async\02_async_closure.md` | `docs\03_guides\03_async_closures_deep_dive.md` | Async Closures 异步闭包 | Async Closures 深度指南 |
+| 0.75 | `knowledge\03_advanced\unsafe\03_maybe_uninit.md` | `docs\rust-ownership-decidability\17-unsafe-rust\06-maybe-uninit.md` | MaybeUninit | MaybeUninit 完全指南 |
+| 0.75 | `knowledge\04_expert\miri\01_tree_borrows.md` | `docs\rust-ownership-decidability\03-verification-tools\03-03-miri-deep-dive.md` | Miri Tree Borrows 深度解析 | Miri 深度解析 |
 
 ## 建议
 

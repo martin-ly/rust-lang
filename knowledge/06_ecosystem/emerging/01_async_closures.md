@@ -212,7 +212,7 @@ fn new_way() -> impl async FnOnce() -> i32 {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust,ignore
+```rust,compile_fail
 
 use std::collections::HashMap;
 
@@ -267,7 +267,7 @@ async fn example() {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust,ignore
+```rust,compile_fail
 
 use tokio::sync::mpsc;
 
@@ -310,7 +310,7 @@ async fn websocket_server() {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust,ignore
+```rust,compile_fail
 
 use std::pin::Pin;
 use std::future::Future;
@@ -450,7 +450,7 @@ pub trait AsyncFnOnce<Args>: AsyncFnMut<Args> {
 // }
 
 // ✅ 正确: Rust 1.75+ 原生支持异步 trait
-// （注：dyn Trait 仍需 async-trait 宏，见 AFIDT 1.97+）
+// （注：dyn Trait 目前仍需 async-trait 宏或 nightly AFIDT）
 trait MyTrait {
     async fn method(&self) -> i32;
 }
@@ -475,7 +475,7 @@ let f = async || {
 ---
 
 **最后更新**: 2026-05-19
-**状态**: 🧪 权威来源对齐完成 (Batch 8)
+**状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---
 

@@ -1,6 +1,6 @@
 # 更新日志 (Changelog)
 
-> **最后更新**: 2026-06-23（阶段 4 延续更新）
+> **最后更新**: 2026-06-24（C 类目录重复检测完成）
 
 ---
 
@@ -49,6 +49,47 @@
 - `concept/04_formal/25_tree_borrows_deep_dive.md`: Tree Borrows 与 Stacked Borrows 对比深度页
 - `concept/06_ecosystem/47_formal_verification_tools.md`: 更新 Kani 0.66 特性说明与 quantifiers / autoharness / loop contracts 示例
 - `crates/c02_type_system/src/rust_198_features.rs`: 新增 1.98+ nightly 占位模块 `nightly_placeholders`
+
+### 权威来源事实修正补充（2026-06-24）
+
+- 修正 `knowledge/06_ecosystem/02_edition_2024.md`：mermaid 与底部元数据 `rust-version` / 对应 Rust 版本统一为 **1.85.0+**；模块 8 官方来源指向 Rust 1.85 稳定公告。
+- 修正 `crates/c06_async/docs/ASYNC_CLOSURES_GUIDE.md`：`AsyncFn` traits 及 `async_call` 等方法自 **1.85.0 stable** 起可用；底部对应 Rust 版本改为 1.85.0+。
+- 修正 `crates/c06_async/docs/tier_04_advanced/ASYNC_CLOSURES_GUIDE.md`：决策树中 `async || {}` 标注为 **1.85.0+ stable** 而非 nightly。
+- 修正 `knowledge/06_ecosystem/emerging/01_async_closures.md`：`Box<dyn AsyncFn(...)>` 示例改为 `compile_fail` 以准确反映其非 dyn-compatible；AFIDT 说明改为“仍需 async-trait 宏或 nightly AFIDT”。
+
+### 内容去重推进（2026-06-24）
+
+- 清理残留重定向：将 `knowledge/03_advanced/unsafe/02_inline_asm.md`、`knowledge/06_ecosystem/emerging/06_rust_1_97_preview.md` 截断为纯重定向页。
+- 按 `concept/` 优先原则合并/重定向高相似文件：
+  - `docs/03_guides/03_cargo_script_guide.md` → `concept/06_ecosystem/09_cargo_script.md`
+  - `docs/05_guides/05_borrowsanitizer_preview.md` → `concept/07_future/32_borrow_sanitizer_preview.md`
+
+### C 类目录元数据补齐（2026-06-24）
+
+- 新增 `scripts/add_c_class_content_grade.py`，为 `docs/research_notes/` 和 `docs/rust-ownership-decidability/` 中缺失 `内容分级` 的 Markdown 文件补齐头部。
+- 共补齐 25 个文件：`docs/research_notes/` 1 个，`docs/rust-ownership-decidability/` 24 个。
+- 两目录 796 个 Markdown 文件已全部含 `> **内容分级**: 归档级` 元数据，覆盖率 **100%**。
+- 更新 `reports/C_CLASS_GOVERNANCE_PLAN_2026_06_09.md`：标记阶段 1 完成，补充阶段进度表。
+
+### 历史 roadmap 标记（2026-06-24）
+
+- 将以下早期执行计划文件标题添加 `[历史参考]`，并在顶部注明当前主控为 `.kimi/EXECUTION_CHECKLIST_2026_06_22.md`：
+  - `.kimi/EXECUTION_PLAN_2026_06_02.md`
+  - `.kimi/EXECUTION_PLAN_CONFIRMED_2026_05_29.md`
+  - `.kimi/EXECUTION_PLAN_CONFIRMED_2026_06_03.md`
+- 同步更新 `.kimi/EXECUTION_CHECKLIST_2026_06_22.md` 与 `.kimi/PROJECT_PENDING_PLANS_ALIGNMENT_CONFIRM_2026_06_24.md` 中对历史计划的引用说明。
+
+### 去重扫描与 Nightly 机制（2026-06-24）
+
+- 全局精确去重扫描（SHA-256）覆盖 2,537 个 Markdown 文件，未发现完全重复文件；`B4.2` 无需移动。
+- 在 `docs/00_meta/00_quarterly_sync_checklist.md` 新增「6️⃣ Nightly 预览文档更新（每 6 周）」章节，建立 nightly 预览页定期维护机制。
+
+### C 类目录重复检测（2026-06-24）
+
+- 运行 `scripts/detect_content_overlap.py` 扫描 `concept/`、`knowledge/`、`docs/`，生成 `reports/CONTENT_OVERLAP_DETECTION_2026_06_24.md`。
+- 共发现 109 对跨目录潜在相似文件（阈值 0.60），最高相似度 1.00。
+- 对 ≥0.75 抽样对进行 token-level Jaccard 复核，实际内容重叠度均 < 20%；当前无需合并/归档。
+- 更新 `reports/C_CLASS_GOVERNANCE_PLAN_2026_06_09.md`：标记阶段 2「重复检测」完成。
 
 ### 全面对齐修复（2026-06-23 — 对称差 / 层次差 / 深度差治理）
 

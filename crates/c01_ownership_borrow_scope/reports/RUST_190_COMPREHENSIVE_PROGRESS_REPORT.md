@@ -396,7 +396,8 @@ crates/c01_ownership_borrow_scope/
 
 该项目已经成功实现了 Rust 1.90 edition=2024 的所有主要特性，代码质量高，文档完整，测试覆盖全面。项目可以作为 Rust 1.90 特性的参考实现和最佳实践示例。
 
-This project has successfully implemented all major features of Rust 1.90 edition=2024, with high code quality, complete documentation, and comprehensive test coverage. The project can serve as a reference implementation and best practice example for Rust 1.90 features.
+This project has successfully implemented all major features of Rust 1.90 edition=2024, with high code quality, complete documentation, and comprehensive test coverage.
+The project can serve as a reference implementation and best practice example for Rust 1.90 features.
 
 ---
 
