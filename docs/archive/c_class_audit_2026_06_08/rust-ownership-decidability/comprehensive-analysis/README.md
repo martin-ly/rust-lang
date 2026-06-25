@@ -16,10 +16,10 @@
 
 | 文档 | 行数 | 核心内容 |
 |:---|:---:|:---|
-| [设计模式深度分析](./design-patterns-comprehensive.md) | 401 | 8个模式形式化定义与定理证明 |
+| [设计模式深度分析](../../../../rust-ownership-decidability/comprehensive-analysis/design-patterns-comprehensive.md) | 401 | 8个模式形式化定义与定理证明 |
 | 架构模型对比 (待补充) | 383 | 5种架构模型Rust适配度分析 |
-| [开源库深度分析](./open-source-analysis.md) | 469 | 8个核心库形式化评估 |
-| [完成报告](./COMPLETION_REPORT.md) | 276 | 完整统计与学习路径 |
+| [开源库深度分析](../../../../rust-ownership-decidability/comprehensive-analysis/open-source-analysis.md) | 469 | 8个核心库形式化评估 |
+| [完成报告](../../../../rust-ownership-decidability/comprehensive-analysis/COMPLETION_REPORT.md) | 276 | 完整统计与学习路径 |
 
 ### 🗺️ 可视化资源 (4类10+篇)
 >
@@ -29,51 +29,51 @@
 
 | 导图 | 文件 | 内容 |
 |:---|:---|:---|
-| 所有权系统全景 | [mindmaps/ownership-system-mindmap.md](mindmaps/ownership-system-mindmap.md) | Mermaid + 文本全景图 |
-| 借用系统深度 | [mindmaps/borrowing-system-mindmap.md](mindmaps/borrowing-system-mindmap.md) | 借用规则与生命周期 |
+| 所有权系统全景 | [mindmaps/ownership-system-mindmap.md](../../../../rust-ownership-decidability/comprehensive-analysis/mindmaps/ownership-system-mindmap.md) | Mermaid + 文本全景图 |
+| 借用系统深度 | [mindmaps/borrowing-system-mindmap.md](../../../../rust-ownership-decidability/comprehensive-analysis/mindmaps/borrowing-system-mindmap.md) | 借用规则与生命周期 |
 
 #### 多维矩阵 (Matrices)
 
 | 矩阵 | 文件 | 对比维度 |
 |:---|:---|:---|
-| 综合概念对比 | [matrices/comprehensive-comparison-matrix.md](matrices/comprehensive-comparison-matrix.md) | 10大维度50+指标 |
-| 安全性分析 | [matrices/safety-analysis-matrix.md](matrices/safety-analysis-matrix.md) | 9大安全领域 |
+| 综合概念对比 | [matrices/comprehensive-comparison-matrix.md](../../../../rust-ownership-decidability/comprehensive-analysis/matrices/comprehensive-comparison-matrix.md) | 10大维度50+指标 |
+| 安全性分析 | [matrices/safety-analysis-matrix.md](../../../../rust-ownership-decidability/comprehensive-analysis/matrices/safety-analysis-matrix.md) | 9大安全领域 |
 
 #### 决策树 (Decision Trees)
 
 | 决策树 | 文件 | 应用场景 |
 |:---|:---|:---|
-| 设计模式选择 | [decision-trees/pattern-selection.md](decision-trees/pattern-selection.md) | 对象创建/并发/错误处理 |
-| 并发模型选择 | [decision-trees/concurrency-model-selection.md](decision-trees/concurrency-model-selection.md) | 运行时/同步原语选择 |
+| 设计模式选择 | [decision-trees/pattern-selection.md](../../../../rust-ownership-decidability/comprehensive-analysis/decision-trees/pattern-selection.md) | 对象创建/并发/错误处理 |
+| 并发模型选择 | [decision-trees/concurrency-model-selection.md](../../../../rust-ownership-decidability/comprehensive-analysis/decision-trees/concurrency-model-selection.md) | 运行时/同步原语选择 |
 
 #### 应用场景树 (Scenario Trees)
 
 | 场景树 | 文件 | 覆盖领域 |
 |:---|:---|:---|
-| 应用领域解决方案 | [scenario-trees/application-domain-tree.md](scenario-trees/application-domain-tree.md) | 10大应用领域 |
-| 实时系统方案 | [scenario-trees/real-time-systems-tree.md](scenario-trees/real-time-systems-tree.md) | 硬实时/软实时 |
+| 应用领域解决方案 | [scenario-trees/application-domain-tree.md](../../../../rust-ownership-decidability/comprehensive-analysis/scenario-trees/application-domain-tree.md) | 10大应用领域 |
+| 实时系统方案 | [scenario-trees/real-time-systems-tree.md](../../../../rust-ownership-decidability/comprehensive-analysis/scenario-trees/real-time-systems-tree.md) | 硬实时/软实时 |
 
 ### 🔬 形式化基础
 
 | 类型 | 文档 | 内容 |
 |:---|:---|:---|
-| 形式化定义框架 | [formal-framework/definitions.md](formal-framework/definitions.md) | 类型系统、所有权、生命周期 |
-| 内存安全证明 | [proofs/memory-safety-proof.md](proofs/memory-safety-proof.md) | 4个引理+主定理完整证明 |
-| 权威来源对齐 | [authoritative-sources/academic-papers.md](authoritative-sources/academic-papers.md) | 15+篇学术论文 |
+| 形式化定义框架 | [formal-framework/definitions.md](../../../../rust-ownership-decidability/comprehensive-analysis/formal-framework/definitions.md) | 类型系统、所有权、生命周期 |
+| 内存安全证明 | [proofs/memory-safety-proof.md](../../../../rust-ownership-decidability/comprehensive-analysis/proofs/memory-safety-proof.md) | 4个引理+主定理完整证明 |
+| 权威来源对齐 | [authoritative-sources/academic-papers.md](../../../../rust-ownership-decidability/comprehensive-analysis/authoritative-sources/academic-papers.md) | 15+篇学术论文 |
 
 ### 📦 生产案例深度分析
 
 | 案例 | 文档 | 分析深度 |
 |:---|:---|:---:|
-| Tokio异步运行时 | [case-studies/tokio-runtime-analysis.md](case-studies/tokio-runtime-analysis.md) | 架构+性能+安全 |
-| Embassy嵌入式 | [case-studies/embassy-embedded-analysis.md](case-studies/embassy-embedded-analysis.md) | 实时+内存+模式 |
+| Tokio异步运行时 | [case-studies/tokio-runtime-analysis.md](../../../../rust-ownership-decidability/comprehensive-analysis/case-studies/tokio-runtime-analysis.md) | 架构+性能+安全 |
+| Embassy嵌入式 | [case-studies/embassy-embedded-analysis.md](../../../../rust-ownership-decidability/comprehensive-analysis/case-studies/embassy-embedded-analysis.md) | 实时+内存+模式 |
 
 ### 🚀 高级扩展
 
 | 主题 | 文档 | 内容 |
 |:---|:---|:---|
-| 高级所有权模式 | [extensions/advanced-ownership-patterns.md](extensions/advanced-ownership-patterns.md) | 自引用、递归、类型擦除 |
-| 性能优化 | [extensions/performance-optimization.md](extensions/performance-optimization.md) | 编译器、内存、并发优化 |
+| 高级所有权模式 | [extensions/advanced-ownership-patterns.md](../../../../rust-ownership-decidability/comprehensive-analysis/extensions/advanced-ownership-patterns.md) | 自引用、递归、类型擦除 |
+| 性能优化 | [extensions/performance-optimization.md](../../../../rust-ownership-decidability/comprehensive-analysis/extensions/performance-optimization.md) | 编译器、内存、并发优化 |
 | 研究前沿 | extensions/research-frontiers.md (待补充) | GATs、验证工具、路线图 |
 
 ---
@@ -97,7 +97,7 @@ Thm EMBASSY-SAFETY-1: Embassy保证嵌入式内存安全
 通过所有权系统 + HAL抽象 + 无堆可选
 ```
 
-完整12个定理及证明见 [proofs/memory-safety-proof.md](proofs/memory-safety-proof.md)
+完整12个定理及证明见 [proofs/memory-safety-proof.md](../../../../rust-ownership-decidability/comprehensive-analysis/proofs/memory-safety-proof.md)
 
 ---
 
@@ -151,9 +151,9 @@ Thm EMBASSY-SAFETY-1: Embassy保证嵌入式内存安全
 | 来源 | 类型 | 相关文档 |
 |:---|:---|:---|
 | The Rust Book | 官方文档 | 所有文档 |
-| RustBelt Paper | 学术论文 | [proofs/](proofs/memory-safety-proof.md) |
-| Tokio Docs | 项目文档 | [case-studies/](case-studies/tokio-runtime-analysis.md) |
-| Embassy Docs | 项目文档 | [case-studies/](case-studies/embassy-embedded-analysis.md) |
+| RustBelt Paper | 学术论文 | [proofs/](../../../../rust-ownership-decidability/comprehensive-analysis/proofs/memory-safety-proof.md) |
+| Tokio Docs | 项目文档 | [case-studies/](../../../../rust-ownership-decidability/comprehensive-analysis/case-studies/tokio-runtime-analysis.md) |
+| Embassy Docs | 项目文档 | [case-studies/](../../../../rust-ownership-decidability/comprehensive-analysis/case-studies/embassy-embedded-analysis.md) |
 
 ---
 

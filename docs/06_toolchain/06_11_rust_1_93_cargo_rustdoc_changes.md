@@ -1,3 +1,4 @@
+<a id="rust-193-cargo-与-rustdoc-变更详解"></a>
 ﻿# Rust 1.93 Cargo 与 Rustdoc 变更详解
 
 > **分级**: [A]
@@ -12,23 +13,22 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [Rust 1.93 Cargo 与 Rustdoc 变更详解](#rust-193-cargo-与-rustdoc-变更详解)
-  - [目录](#目录)
-  - [Cargo 变更](#cargo-变更)
-    - [CARGO\_CFG\_DEBUG\_ASSERTIONS](#cargo_cfg_debug_assertions)
-    - [cargo tree --format 长格式](#cargo-tree---format-长格式)
-    - [cargo clean --workspace](#cargo-clean---workspace)
-  - [Rustdoc 变更](#rustdoc-变更)
-    - [移除 #!\[doc(document\_private\_items)\]](#移除-docdocument_private_items)
-    - [宏搜索过滤](#宏搜索过滤)
-    - [import 搜索过滤](#import-搜索过滤)
-    - [文档属性校验](#文档属性校验)
-  - [相关文档](#相关文档)
-  - [完整代码示例](#完整代码示例)
-  - [形式化规范链接](#形式化规范链接)
-  - [Rust 1.95+ 更新](#rust-195-更新)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
-  - [权威来源索引](#权威来源索引)
+- [目录](#目录)
+- [Cargo 变更](#cargo-变更)
+  - [CARGO\_CFG\_DEBUG\_ASSERTIONS](#cargo_cfg_debug_assertions)
+  - [cargo tree --format 长格式](#cargo-tree---format-长格式)
+  - [cargo clean --workspace](#cargo-clean---workspace)
+- [Rustdoc 变更](#rustdoc-变更)
+  - [移除 #!\[doc(document\_private\_items)\]](#移除-docdocument_private_items)
+  - [宏搜索过滤](#宏搜索过滤)
+  - [import 搜索过滤](#import-搜索过滤)
+  - [文档属性校验](#文档属性校验)
+- [相关文档](#相关文档)
+- [完整代码示例](#完整代码示例)
+- [形式化规范链接](#形式化规范链接)
+- [Rust 1.95+ 更新](#rust-195-更新)
+- [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
+- [权威来源索引](#权威来源索引)
 
 ---
 

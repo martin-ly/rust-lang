@@ -19,14 +19,14 @@
 >
 > **[来源: Rust Official Docs]**
 
-- [工作流理论](./01_workflow_theory.md) - 工作流理论基础
+- [工作流理论](../../../../05_guides/workflow/01_workflow_theory.md) - 工作流理论基础
 - `05_workflow_models.md` - 工作流模型实践 (文件已重构)
 
 ## 相关链接
 >
 > **[来源: Rust Official Docs]**
 
-- [返回上级目录](../README.md)
+- [返回上级目录](../../../../05_guides/README.md)
 - [项目文档主页](../../README.md)
 
 ---

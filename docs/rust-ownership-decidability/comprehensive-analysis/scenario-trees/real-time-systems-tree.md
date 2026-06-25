@@ -496,7 +496,7 @@ fn attitude_control() {
 
 ---
 
-- [Parent README](../README.md)
+- Parent README
 
 ---
 
@@ -504,7 +504,7 @@ fn attitude_control() {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [上级目录](../README.md)
+- 上级目录
 
 ---
 

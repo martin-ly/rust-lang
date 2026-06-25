@@ -324,7 +324,7 @@ mod property_tests {
 
 ---
 
-[返回主索引](../../00_master_index.md) | [返回研究议程索引](../README.md)
+[返回主索引](../../00_master_index.md) | 返回研究议程索引
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

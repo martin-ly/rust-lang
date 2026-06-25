@@ -78,23 +78,8 @@ fn bench_data_serialization(c: &mut Criterion) {
             b.iter(|| serde_json::from_str::<TestData>(&json).unwrap())
         });
 
-        group.bench_with_input(
-            BenchmarkId::new("postcard_serialize", size),
-            size,
-            |b, _| b.iter(|| postcard::to_stdvec(&data).unwrap()),
-        );
-
-        group.bench_with_input(
-            BenchmarkId::new("postcard_deserialize", size),
-            size,
-            |b, _| {
-                let binary = postcard::to_stdvec(&data).unwrap();
-                b.iter(|| {
-                    let result: TestData = postcard::from_bytes(&binary).unwrap();
-                    result
-                })
-            },
-        );
+        // 注：postcard 已移除（避免引入 unmaintained 的 atomic-polyfill 传递依赖）
+        // 如需二进制序列化对比，可单独引入 rmp-serde 或等待 bincode 官方稳定新版
     }
 
     group.finish();

@@ -422,7 +422,7 @@ where
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-$\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\ell_2 \tau_2$ 参与类型推导；与 [type_system_foundations](./10_type_system_foundations.md) 的进展性、保持性在扩展引用与生命周期后一致。
+$\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\ell_2 \tau_2$ 参与类型推导；与 [type_system_foundations](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) 的进展性、保持性在扩展引用与生命周期后一致。
 
 ### 与借用检查器的集成
 >
@@ -435,7 +435,7 @@ $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\e
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **结构体与 HRTB**：`struct S<'a> { r: &'a T }`、`for<'a> Fn(&'a T)` 的约束与推断。
-2. **async 与 Pin**：async 块中引用的 `'a` 编译进状态机；与 Pin、[async_state_machine](../formal_methods/10_async_state_machine.md) 一致。
+2. **async 与 Pin**：async 块中引用的 `'a` 编译进状态机；与 Pin、[async_state_machine](../../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) 一致。
 3. **Trait 对象**：`dyn Trait + 'a` 的 outlives 与 vtable 不包含生命周期的分工。
 
 ---

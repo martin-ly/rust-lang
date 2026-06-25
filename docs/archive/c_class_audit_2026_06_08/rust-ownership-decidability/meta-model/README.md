@@ -53,16 +53,16 @@
 
 | 文档 | 主题 | 难度 | 关键内容 |
 |:-----|:-----|:----:|:---------|
-| [`01_abstract_syntax.md`](./01_abstract_syntax.md) | 抽象语法 | 🔴 | BNF 文法、类型语法、表达式语法 |
-| [`02_semantic_domains.md`](./02_semantic_domains.md) | 语义域 | 🔴 | 内存位置、值域、状态、堆栈模型 |
-| [`03_judgments.md`](./03_judgments.md) | 判断形式 | 🔴 | 类型判断、所有权安全、生命周期约束 |
+| [`01_abstract_syntax.md`](../../../../rust-ownership-decidability/meta-model/01_abstract_syntax.md) | 抽象语法 | 🔴 | BNF 文法、类型语法、表达式语法 |
+| [`02_semantic_domains.md`](../../../../rust-ownership-decidability/meta-model/02_semantic_domains.md) | 语义域 | 🔴 | 内存位置、值域、状态、堆栈模型 |
+| [`03_judgments.md`](../../../../rust-ownership-decidability/meta-model/03_judgments.md) | 判断形式 | 🔴 | 类型判断、所有权安全、生命周期约束 |
 
 ### Rust 1.94 对齐
 
 | 文档 | 主题 | 说明 |
 |:-----|:-----|:-----|
-| [`rust-194-alignment.md`](./rust-194-alignment.md) | Rust 1.94 对齐分析 | 元模型与现代 Rust 的差异和适配 |
-| [`RUST_194_COMPREHENSIVE_GUIDE.md`](./RUST_194_COMPREHENSIVE_GUIDE.md) | Rust 1.94 完整指南 | 新特性的形式化描述 |
+| [`rust-194-alignment.md`](../../../../rust-ownership-decidability/meta-model/rust-194-alignment.md) | Rust 1.94 对齐分析 | 元模型与现代 Rust 的差异和适配 |
+| [`RUST_194_COMPREHENSIVE_GUIDE.md`](../../../../rust-ownership-decidability/meta-model/RUST_194_COMPREHENSIVE_GUIDE.md) | Rust 1.94 完整指南 | 新特性的形式化描述 |
 
 ---
 
@@ -150,8 +150,8 @@ Stack ≜ Frame*                    调用栈
 
 ### 关联阅读
 
-- [formal-foundations/semantics/operational-semantics.md](../formal-foundations/semantics/operational-semantics.md)
-- [formal-foundations/models/ownership-types.md](../formal-foundations/models/02-02-ownership-types.md)
+- [formal-foundations/semantics/operational-semantics.md](../../../../rust-ownership-decidability/formal-foundations/semantics/operational-semantics.md)
+- [formal-foundations/models/ownership-types.md](../../../../rust-ownership-decidability/formal-foundations/models/02-02-ownership-types.md)
 - [coq-formalization/README.md](../coq-formalization/README.md)
 
 ---

@@ -19,8 +19,8 @@
 | 模式 | 文件 | 描述 | 难度 |
 |-----|------|------|------|
 | **Singleton** | 10_singleton.md (待补充) | 确保全局唯一实例 | 🟡 |
-| **Builder** | [10_builder.md](builder.md) | 逐步构建复杂对象 | 🟡 |
-| **Factory** | [factory.md](./factory.md) | 封装对象创建逻辑 | 🟢 |
+| **Builder** | [10_builder.md](../../../../../rust-ownership-decidability/11-design-patterns/creational/builder.md) | 逐步构建复杂对象 | 🟡 |
+| **Factory** | [factory.md](../../../../../rust-ownership-decidability/11-design-patterns/creational/factory.md) | 封装对象创建逻辑 | 🟢 |
 
 ---
 

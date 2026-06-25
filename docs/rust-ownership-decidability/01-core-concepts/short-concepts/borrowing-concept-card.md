@@ -53,6 +53,7 @@
     - [9.2 Java/C# 引用](#92-javac-引用)
     - [9.3 函数式语言](#93-函数式语言)
   - [总结](#总结)
+<a id="掌握借用是掌握rust的关键"></a>
   - [掌握借用是掌握Rust的关键](#掌握借用是掌握rust的关键)
   - [权威来源索引](#权威来源索引)
 
@@ -692,7 +693,7 @@ fn sum_iter(values: impl Iterator<Item = i32>) -> i32 {
 
 ---
 
-- [Parent README](../README.md)
+- Parent README
 
 ---
 

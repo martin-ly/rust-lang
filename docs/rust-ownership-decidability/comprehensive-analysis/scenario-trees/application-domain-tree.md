@@ -436,7 +436,7 @@ AI/ML
 
 ---
 
-- [Parent README](../README.md)
+- Parent README
 
 ---
 
@@ -444,7 +444,7 @@ AI/ML
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [上级目录](../README.md)
+- 上级目录
 
 ---
 

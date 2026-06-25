@@ -37,6 +37,7 @@
     - [7.1 创新点](#71-创新点)
     - [7.2 适用场景](#72-适用场景)
     - [7.3 形式化评估](#73-形式化评估)
+<a id="embassy版本-05"></a>
   - [**Embassy版本**: 0.5+](#embassy版本-05)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
@@ -625,7 +626,7 @@ impl Executor {
 
 ---
 
-- [Parent README](../README.md)
+- Parent README
 
 ---
 
@@ -633,7 +634,7 @@ impl Executor {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [上级目录](../README.md)
+- 上级目录
 
 ---
 

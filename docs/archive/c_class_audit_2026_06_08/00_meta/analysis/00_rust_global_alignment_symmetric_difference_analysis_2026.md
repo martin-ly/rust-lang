@@ -411,7 +411,7 @@
 
 ## 相关概念
 
-- [Rust 2026 项目目标月度跟踪](./00_rust_2026_project_goals_monthly_tracking.md)
+- [Rust 2026 项目目标月度跟踪](../../../../00_meta/analysis/00_rust_2026_project_goals_monthly_tracking.md)
 
 ---
 

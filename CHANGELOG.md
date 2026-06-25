@@ -1,6 +1,6 @@
 # 更新日志 (Changelog)
 
-> **最后更新**: 2026-06-25（docs/ A/B/C 价值审计收尾 + B 类过期文档复审 + 归档引用残留清理）
+> **最后更新**: 2026-06-25（docs/ A/B/C 价值审计收尾 + B 类过期文档复审 + 归档引用残留清理 + cargo audit unmaintained 依赖处理）
 
 ---
 
@@ -51,10 +51,17 @@
 
 ### 供应链与依赖跟踪（2026-06-25）
 
-- `cargo audit` 网络恢复，完整扫描 `Cargo.lock`（1016 个 crate 实例）：
+- `cargo audit` 网络恢复，完整扫描 `Cargo.lock`（1009 个 crate 实例）：
   - **0 个安全漏洞**
-  - 4 个 `unmaintained` 允许警告（`atomic-polyfill`、`bare-metal`、`instant`、`paste`）
-  - 生成 `reports/CARGO_AUDIT_2026_06_25.md` 与 `reports/SUPPLY_CHAIN_AUDIT_2026_06_25.md`
+  - `atomic-polyfill` (RUSTSEC-2023-0089) 已修复：移除 `crates/c10_networks` 的 `postcard` dev-dependency，不再进入 `Cargo.lock`
+  - 剩余 3 个 `unmaintained` 依赖（`bare-metal`、`instant`、`paste`）已通过 `.cargo/audit.toml` 显式忽略并记录 rationale
+  - 生成/更新 `reports/CARGO_AUDIT_2026_06_25.md` 与 `reports/SUPPLY_CHAIN_AUDIT_2026_06_25.md`
+- `cargo update` 刷新 8 个 crate 到最新兼容版本：
+  - `uuid` 1.23.3 → 1.23.4
+  - `wasm-bindgen` 0.2.125 → 0.2.126（含 `wasm-bindgen-macro*`、`wasm-bindgen-shared`）
+  - `js-sys` 0.3.102 → 0.3.103
+  - `wasm-bindgen-futures` 0.4.75 → 0.4.76
+  - `web-sys` 0.3.102 → 0.3.103（`crates/c12_wasm/Cargo.toml` 同步更新）
 - Sea-ORM 2.0 stable 仍未发布（最新 `2.0.0-rc.41`），更新 `reports/SEA_ORM_2_0_RELEASE_TRACKING_2026_06_22.md` 检查记录
 
 ### 语言特性

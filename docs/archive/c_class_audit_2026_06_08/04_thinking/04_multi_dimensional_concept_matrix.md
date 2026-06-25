@@ -455,9 +455,9 @@
 - [构造性语义与表达能力边界](../../../../archive/research_notes_2026_06_25/10_language_semantics_expressiveness.md) - 操作/指称/公理语义、表达能力边界论证
 - [全面系统化梳理总览](../../../../archive/research_notes_2026_06_25/10_comprehensive_systematic_overview.md) - 全局一致性、语义归纳、概念族谱、论证缺口追踪
 - [形式化论证系统梳理指南](../../../../archive/research_notes_2026_06_25/10_formal_proof_system_guide.md) - 论证缺口分析、概念-公理-定理映射
-- [知识结构框架](../07_project/07_knowledge_structure_framework.md) - 完整知识结构体系
-- [决策图网](./04_decision_graph_network.md) - 技术选型决策支持
-- [证明图网](./04_proof_graph_network.md) - 形式化证明结构
+- [知识结构框架](../../../07_project/07_knowledge_structure_framework.md) - 完整知识结构体系
+- [决策图网](../../../04_thinking/04_decision_graph_network.md) - 技术选型决策支持
+- [证明图网](../../../04_thinking/04_proof_graph_network.md) - 形式化证明结构
 - 最佳实践指南 - 开发最佳实践
 
 ---
@@ -536,7 +536,7 @@ ust
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查（已归档）
-- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
+- [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

@@ -77,7 +77,7 @@
 
 | 文档 | 路径 | 内容 |
 |:---|:---|:---|
-| Rust 1.93特性深度分析 | [10-research-frontiers/rust-1.93-features-analysis.md](10-research-frontiers/rust-1.93-features-analysis.md) | 完整的新版本特性形式化分析 |
+| Rust 1.93特性深度分析 | [10-research-frontiers/rust-1.93-features-analysis.md](../../../rust-ownership-decidability/10-research-frontiers/rust-1.93-features-analysis.md) | 完整的新版本特性形式化分析 |
 
 包含:
 
@@ -98,7 +98,7 @@
 
 | 导图 | 路径 | 内容 |
 |:---|:---|:---|
-| 所有权综合思维导图 | [visualizations/ownership-comprehensive-mindmap.md](visualizations/ownership-comprehensive-mindmap.md) | 从理论到实践的全景视图 |
+| 所有权综合思维导图 | [visualizations/ownership-comprehensive-mindmap.md](../../../rust-ownership-decidability/visualizations/ownership-comprehensive-mindmap.md) | 从理论到实践的全景视图 |
 
 包含:
 
@@ -114,7 +114,7 @@
 
 | 矩阵 | 路径 | 维度数 |
 |:---|:---|:---:|
-| 安全机制对比矩阵 | [visualizations/matrices/rust-safety-mechanisms-matrix.md](visualizations/matrices/rust-safety-mechanisms-matrix.md) | 9大维度 |
+| 安全机制对比矩阵 | [visualizations/matrices/rust-safety-mechanisms-matrix.md](../../../rust-ownership-decidability/visualizations/matrices/rust-safety-mechanisms-matrix.md) | 9大维度 |
 
 包含:
 
@@ -131,7 +131,7 @@
 
 | 决策树 | 路径 | 场景数 |
 |:---|:---|:---:|
-| 类型选择决策树 | [visualizations/decision-trees/type-selection-decision-tree.md](visualizations/decision-trees/type-selection-decision-tree.md) | 8大场景 |
+| 类型选择决策树 | [visualizations/decision-trees/type-selection-decision-tree.md](../../../rust-ownership-decidability/visualizations/decision-trees/type-selection-decision-tree.md) | 8大场景 |
 
 包含:
 
@@ -150,7 +150,7 @@
 
 | 文档 | 路径 | 内容 |
 |:---|:---|:---|
-| 所有权反例与逻辑论证 | [01-core-concepts/ownership-counterexamples.md](01-core-concepts/ownership-counterexamples.md) | 全面反例分析 |
+| 所有权反例与逻辑论证 | [01-core-concepts/ownership-counterexamples.md](../../../rust-ownership-decidability/01-core-concepts/ownership-counterexamples.md) | 全面反例分析 |
 
 包含:
 

@@ -62,7 +62,7 @@
 
 - Rust 1.95+ 迁移指南
 - [Rust 1.94 特性速查（已归档）
-- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
+- [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

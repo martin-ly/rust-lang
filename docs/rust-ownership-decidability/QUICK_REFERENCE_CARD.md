@@ -17,7 +17,7 @@
   - [📑 目录](#-目录)
   - [🎯 所有权三原则](#-所有权三原则)
   - [🔄 借用规则](#-借用规则)
-  - [⏱️ 生命周期规则](#️-生命周期规则)
+  - [⏱️ 生命周期规则](#生命周期规则)
   - [🧠 智能指针速查](#-智能指针速查)
   - [🎨 常见模式](#-常见模式)
     - [RAII 模式](#raii-模式)
@@ -32,6 +32,7 @@
   - [🆕 Rust 1.94 所有权系统更新](#-rust-194-所有权系统更新)
     - [新特性对所有权系统的影响](#新特性对所有权系统的影响)
     - [形式化更新](#形式化更新)
+<a id="最后更新-2026-03-14"></a>
   - [**最后更新**: 2026-03-14](#最后更新-2026-03-14)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
@@ -230,7 +231,7 @@ impl Sync for T where &T: Send { }
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [完整认证](FINAL_100_PERCENT_COMPLETION_CERTIFICATION.md)
+- [完整认证](../archive/c_class_audit_2026_06_08/rust-ownership-decidability/FINAL_100_PERCENT_COMPLETION_CERTIFICATION.md)
 - [知识梳理](./COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md)
 - [案例索引](case-studies/COMPLETE_DOMAIN_COVERAGE_INDEX.md)
 

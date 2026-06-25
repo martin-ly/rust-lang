@@ -50,11 +50,11 @@ let atomic = Arc::new(5);                // 多线程原子引用计数
 
 | 文档 | 描述 | 适用场景 |
 | :--- | :--- | :--- |
-| [quick_reference/](./quick_reference/README.md) | 20 个速查卡（含 AI/ML） | 快速查找语法和模式 |
-| [ALIGNMENT_GUIDE.md](./ALIGNMENT_GUIDE.md) | 对齐知识综合（内存/格式化/unsafe/缓存行） | 内存布局优化 |
-| [02_edge_cases_and_special_cases.md](./02_edge_cases_and_special_cases.md) | 边界特例 | 处理特殊情况 |
-| [02_standard_library_comprehensive_analysis_2025_12_25.md](./02_standard_library_comprehensive_analysis_2025_12_25.md) | 标准库分析 | 标准库深入理解 |
-| [02_cross_language_comparison.md](./02_cross_language_comparison.md) | 跨语言对比 | 从其他语言迁移 |
+| [quick_reference/](../../../02_reference/quick_reference/README.md) | 20 个速查卡（含 AI/ML） | 快速查找语法和模式 |
+| [ALIGNMENT_GUIDE.md](../../../02_reference/ALIGNMENT_GUIDE.md) | 对齐知识综合（内存/格式化/unsafe/缓存行） | 内存布局优化 |
+| [02_edge_cases_and_special_cases.md](../../../02_reference/02_edge_cases_and_special_cases.md) | 边界特例 | 处理特殊情况 |
+| [02_standard_library_comprehensive_analysis_2025_12_25.md](../../../02_reference/02_standard_library_comprehensive_analysis_2025_12_25.md) | 标准库分析 | 标准库深入理解 |
+| [02_cross_language_comparison.md](../../../02_reference/02_cross_language_comparison.md) | 跨语言对比 | 从其他语言迁移 |
 
 ---
 

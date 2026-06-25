@@ -48,6 +48,7 @@
     - [✅ 网络权威资源 100% 对齐](#-网络权威资源-100-对齐)
     - [✅ 高质量标准](#-高质量标准)
   - [认证签名](#认证签名)
+<a id="状态-最终认证"></a>
   - [*状态: 最终认证*](#状态-最终认证)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
@@ -393,9 +394,9 @@ Coq 证据:
 
 **相关文档**:
 
-- [持续改进行动计划](./CONTINUOUS_IMPROVEMENT_ACTION_PLAN.md)
+- [持续改进行动计划](../../../rust-ownership-decidability/CONTINUOUS_IMPROVEMENT_ACTION_PLAN.md)
 - [README](./README.md) - 项目总览
-- [FINAL_MASTER_INDEX.md](./FINAL_MASTER_INDEX.md) - 完整文档索引
+- [FINAL_MASTER_INDEX.md](../../../rust-ownership-decidability/FINAL_MASTER_INDEX.md) - 完整文档索引
 
 *报告版本: 1.0*
 *生成日期: 2026-03-13*

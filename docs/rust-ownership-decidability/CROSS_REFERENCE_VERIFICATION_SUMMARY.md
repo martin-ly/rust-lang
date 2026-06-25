@@ -38,6 +38,7 @@
     - [File Distribution](#file-distribution)
   - [Verification Tool](#verification-tool)
   - [Conclusion](#conclusion)
+<a id="completed-2026-03-06"></a>
   - [*Completed: 2026-03-06*](#completed-2026-03-06)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
@@ -159,7 +160,7 @@ Added to main README.md:
 | Index | Purpose |
 |-------|---------|
 | [FINAL_MASTER_INDEX.md](./FINAL_MASTER_INDEX.md) | Manual curated index |
-| [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md) | Auto-generated with cross-reference map |
+| [MASTER_INDEX_AUTO.md](../archive/2026_03_reorganization/MASTER_INDEX_AUTO.md) | Auto-generated with cross-reference map |
 | [CROSS_REFERENCE_VERIFICATION_REPORT.md](./CROSS_REFERENCE_VERIFICATION_REPORT.md) | Verification details |
 
 ---

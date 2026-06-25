@@ -21,13 +21,13 @@
   - [📚 完整文档清单](#-完整文档清单)
     - [🎯 核心文档 (必读)](#-核心文档-必读)
     - [🔬 形式化理论](#-形式化理论)
-    - [🗂️ 元模型](#️-元模型)
+    - [🗂️ 元模型](#元模型)
     - [📊 进度报告](#-进度报告)
   - [🎓 学习路径](#-学习路径)
     - [路径 1: 快速理解 (2小时)](#路径-1-快速理解-2小时)
     - [路径 2: 系统学习 (4小时)](#路径-2-系统学习-4小时)
     - [路径 3: 深入研究 (8小时)](#路径-3-深入研究-8小时)
-  - [🏗️ 知识结构](#️-知识结构)
+  - [🏗️ 知识结构](#知识结构)
     - [核心概念地图](#核心概念地图)
     - [形式化对应](#形式化对应)
   - [📊 统计信息](#-统计信息)
@@ -46,6 +46,7 @@
     - [对于进阶学习者](#对于进阶学习者)
     - [对于研究者](#对于研究者)
   - [🎉 项目完成](#-项目完成)
+<a id="-知识库完整欢迎使用"></a>
   - [**🎉 知识库完整，欢迎使用！🎉**](#-知识库完整欢迎使用)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
@@ -97,7 +98,7 @@
 |------|------|
 | [RUST_OWNERSHIP_DECIDABILITY_RESEARCH_PLAN.md](./RUST_OWNERSHIP_DECIDABILITY_RESEARCH_PLAN.md) | 研究计划 |
 | [theorems/decidability_theorems.md](theorems/decidability_theorems.md) | 核心定理 |
-| [coq-formalization/README.md](coq-formalization/README.md) | Coq 代码入口 |
+| [coq-formalization/README.md](../../archive/deprecated/coq_skeleton/README.md) | Coq 代码入口 |
 | [FINAL_DOCUMENTATION.md](./FINAL_DOCUMENTATION.md) | 完整技术文档 |
 
 ### 🗂️ 元模型
@@ -344,7 +345,7 @@ Rust 示例:      ~2,000 行
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. 阅读 [MASTER_COMPREHENSIVE_ANALYSIS.md](./MASTER_COMPREHENSIVE_ANALYSIS.md) 建立系统框架
-2. 研究 [coq-formalization/README.md](coq-formalization/README.md) 理解严格证明
+2. 研究 [coq-formalization/README.md](../../archive/deprecated/coq_skeleton/README.md) 理解严格证明
 3. 分析边界案例和反例
 
 ### 对于研究者

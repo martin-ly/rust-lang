@@ -51,12 +51,12 @@ fn verify_memory_safety() -> bool {
 
 | 文档 | 描述 | 用途 |
 | :--- | :--- | :--- |
-| [04_thinking_representation_methods.md](./04_thinking_representation_methods.md) | 思维表征方式 | 概念关系网络 |
-| [04_decision_graph_network.md](./04_decision_graph_network.md) | 决策图网络 | 技术选型决策 |
-| [04_proof_graph_network.md](./04_proof_graph_network.md) | 证明图网络 | 安全性验证 |
-| [04_mind_map_collection.md](./04_mind_map_collection.md) | 思维导图集合 | 概念结构学习 |
+| [04_thinking_representation_methods.md](../../../04_thinking/04_thinking_representation_methods.md) | 思维表征方式 | 概念关系网络 |
+| [04_decision_graph_network.md](../../../04_thinking/04_decision_graph_network.md) | 决策图网络 | 技术选型决策 |
+| [04_proof_graph_network.md](../../../04_thinking/04_proof_graph_network.md) | 证明图网络 | 安全性验证 |
+| [04_mind_map_collection.md](../../../04_thinking/04_mind_map_collection.md) | 思维导图集合 | 概念结构学习 |
 | [04_multi_dimensional_concept_matrix.md](./04_multi_dimensional_concept_matrix.md) | 多维概念矩阵 | 特性对比分析 |
-| [04_applications_analysis_view.md](./04_applications_analysis_view.md) | 应用分析视图 | 应用场景分析 |
+| [04_applications_analysis_view.md](../../../04_thinking/04_applications_analysis_view.md) | 应用分析视图 | 应用场景分析 |
 
 ---
 
@@ -70,10 +70,10 @@ fn verify_memory_safety() -> bool {
 
 | 场景 | 推荐文档 | 使用方式 |
 | :--- | :--- | :--- |
-| 学习 Rust 概念结构 | [04_mind_map_collection.md](./04_mind_map_collection.md) | 从上到下浏览思维导图 |
-| 技术选型决策 | [04_decision_graph_network.md](./04_decision_graph_network.md) | 跟随决策树回答问题 |
-| 验证安全性 | [04_proof_graph_network.md](./04_proof_graph_network.md) | 查看证明路径和保证 |
-| 理解特性关系 | [04_thinking_representation_methods.md](./04_thinking_representation_methods.md) | 查看概念关系网络 |
+| 学习 Rust 概念结构 | [04_mind_map_collection.md](../../../04_thinking/04_mind_map_collection.md) | 从上到下浏览思维导图 |
+| 技术选型决策 | [04_decision_graph_network.md](../../../04_thinking/04_decision_graph_network.md) | 跟随决策树回答问题 |
+| 验证安全性 | [04_proof_graph_network.md](../../../04_thinking/04_proof_graph_network.md) | 查看证明路径和保证 |
+| 理解特性关系 | [04_thinking_representation_methods.md](../../../04_thinking/04_thinking_representation_methods.md) | 查看概念关系网络 |
 | 对比分析特性 | [04_multi_dimensional_concept_matrix.md](./04_multi_dimensional_concept_matrix.md) | 查看多维对比矩阵 |
 
 ---
@@ -140,7 +140,7 @@ fn verify_memory_safety() -> bool {
 
 - Rust 1.94 迁移指南
 - Rust 1.94 特性速查（已归档）
-- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
+- [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

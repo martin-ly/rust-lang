@@ -195,7 +195,7 @@ cargo bench --package c02_type_system --bench performance_benchmarks
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [Rust性能手册](https://nnethercote.github.io/perf-book/)
-- [Rust性能优化指南](./05_advanced_topics_deep_dive.md#6-性能优化深度指南)
+- [Rust性能优化指南](../../../05_guides/05_advanced_topics_deep_dive.md#6-性能优化深度指南)
 
 ---
 
@@ -221,7 +221,7 @@ cargo bench --workspace
 
 比较不同实现的性能：
 
-- 使用 [Criterion](./05_performance_tuning_guide.md#1-使用-criterion-基准测试) 进行精确测量
+- 使用 [Criterion](../../../05_guides/05_performance_tuning_guide.md#1-使用-criterion-基准测试) 进行精确测量
 - 运行特定模块的基准测试（[运行特定模块](#运行特定模块的性能测试)）
 - 生成性能报告进行对比分析
 
@@ -232,7 +232,7 @@ cargo bench --workspace
 验证性能优化的效果：
 
 1. 建立 [性能基准](#性能基准测试文件统计)
-2. 实施优化策略（参考 [05_performance_tuning_guide.md](./05_performance_tuning_guide.md)）
+2. 实施优化策略（参考 [05_performance_tuning_guide.md](../../../05_guides/05_performance_tuning_guide.md)）
 3. 重新运行测试，对比结果
 
 ### 场景4: 发布前性能审计
@@ -259,7 +259,7 @@ cargo bench --workspace
 | :--- | :--- |
 | :--- | :--- |
 | :--- | :--- |
-| **相关指南** | [05_performance_tuning_guide.md](./05_performance_tuning_guide.md) |
+| **相关指南** | [05_performance_tuning_guide.md](../../../05_guides/05_performance_tuning_guide.md) |
 | :--- | :--- |
 | **外部工具** | [Criterion.rs](https://github.com/bheisler/criterion.rs) |
 | :--- | :--- |
@@ -329,7 +329,7 @@ cargo bench --workspace
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [05_guides 目录](./README.md)
+- [05_guides 目录](../../../05_guides/README.md)
 - [上级目录](../README.md)
 
 ---

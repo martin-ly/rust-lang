@@ -37,6 +37,7 @@
     - [7.2 SoA vs AoS](#72-soa-vs-aos)
   - [8. 所有权与FFI](#8-所有权与ffi)
     - [8.1 安全封装](#81-安全封装)
+<a id="更新日期-2026-03-05"></a>
   - [**更新日期**: 2026-03-05](#更新日期-2026-03-05)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
@@ -776,7 +777,7 @@ impl Drop for SecureContext {
 
 ---
 
-- [Parent README](../README.md)
+- Parent README
 
 ---
 
@@ -784,7 +785,7 @@ impl Drop for SecureContext {
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [上级目录](../README.md)
+- 上级目录
 
 ---
 

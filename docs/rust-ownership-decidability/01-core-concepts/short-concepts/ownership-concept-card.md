@@ -137,7 +137,7 @@ println!("{}", s1);  // 错误: 使用了已移动的值
 
 ---
 
-- [Parent README](../README.md)
+- Parent README
 
 ---
 

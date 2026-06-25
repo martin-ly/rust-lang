@@ -371,33 +371,33 @@ FAQ:                  17+ 条目      ✅
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. [README.md](./README.md) - 项目总览
-2. [COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md](./COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md) - 知识梳理
+2. [COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md](../../../rust-ownership-decidability/COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md) - 知识梳理
 3. [FINAL_EXECUTIVE_SUMMARY_V2.md](./FINAL_EXECUTIVE_SUMMARY_V2.md) - 执行摘要
-4. [INTERACTIVE_LEARNING_GUIDE.md](./INTERACTIVE_LEARNING_GUIDE.md) - 交互式学习
+4. [INTERACTIVE_LEARNING_GUIDE.md](../../../rust-ownership-decidability/INTERACTIVE_LEARNING_GUIDE.md) - 交互式学习
 
 ### 理论深入
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-1. [UNIFIED_THEORETICAL_FRAMEWORK.md](./UNIFIED_THEORETICAL_FRAMEWORK.md) - 统一理论框架
-2. [THEOREM_DEPENDENCY_GRAPH.md](./THEOREM_DEPENDENCY_GRAPH.md) - 定理依赖网络
+1. [UNIFIED_THEORETICAL_FRAMEWORK.md](../../../rust-ownership-decidability/UNIFIED_THEORETICAL_FRAMEWORK.md) - 统一理论框架
+2. [THEOREM_DEPENDENCY_GRAPH.md](../../../rust-ownership-decidability/THEOREM_DEPENDENCY_GRAPH.md) - 定理依赖网络
 3. [coq-formalization/README.md](coq-formalization/README.md) - Coq 形式化
 
 ### 实践指南
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-1. [exercises/ADVANCED_OWNERSHIP_WORKSHOP.md](exercises/ADVANCED_OWNERSHIP_WORKSHOP.md) - 高级工作坊
-2. [COMPREHENSIVE_FAQ.md](./COMPREHENSIVE_FAQ.md) - 全面 FAQ
-3. [ERROR_DIAGNOSTICS_GUIDE.md](./ERROR_DIAGNOSTICS_GUIDE.md) - 错误诊断
+1. [exercises/ADVANCED_OWNERSHIP_WORKSHOP.md](../../../rust-ownership-decidability/exercises/ADVANCED_OWNERSHIP_WORKSHOP.md) - 高级工作坊
+2. [COMPREHENSIVE_FAQ.md](../../../rust-ownership-decidability/COMPREHENSIVE_FAQ.md) - 全面 FAQ
+3. [ERROR_DIAGNOSTICS_GUIDE.md](../../../rust-ownership-decidability/ERROR_DIAGNOSTICS_GUIDE.md) - 错误诊断
 
 ### 参考资源
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-1. [case-studies/COMPLETE_DOMAIN_COVERAGE_INDEX.md](case-studies/COMPLETE_DOMAIN_COVERAGE_INDEX.md) - 领域索引
-2. [visualizations/KNOWLEDGE_GRAPH_MINDMAP.md](visualizations/KNOWLEDGE_GRAPH_MINDMAP.md) - 知识图谱
-3. [meta-model/RUST_194_COMPREHENSIVE_GUIDE.md](meta-model/RUST_194_COMPREHENSIVE_GUIDE.md) - Rust 1.94 指南
+1. [case-studies/COMPLETE_DOMAIN_COVERAGE_INDEX.md](../../../rust-ownership-decidability/case-studies/COMPLETE_DOMAIN_COVERAGE_INDEX.md) - 领域索引
+2. [visualizations/KNOWLEDGE_GRAPH_MINDMAP.md](../../../rust-ownership-decidability/visualizations/KNOWLEDGE_GRAPH_MINDMAP.md) - 知识图谱
+3. [meta-model/RUST_194_COMPREHENSIVE_GUIDE.md](../../../rust-ownership-decidability/meta-model/RUST_194_COMPREHENSIVE_GUIDE.md) - Rust 1.94 指南
 
 ---
 

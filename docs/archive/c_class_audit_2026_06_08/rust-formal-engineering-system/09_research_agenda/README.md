@@ -22,7 +22,7 @@
 
 | 子目录 | 内容 |
 | :--- | :--- |
-| [04_research_methods/](04_research_methods/README.md) | 研究方法与工具 |
+| [04_research_methods/](../../../../rust-formal-engineering-system/09_research_agenda/04_research_methods/README.md) | 研究方法与工具 |
 
 ---
 
@@ -58,7 +58,7 @@
 | :--- | :--- | :--- |
 | 本README | research_notes/10_research_roadmap.md | 索引/重定向 |
 
-[返回主索引](../00_master_index.md)
+[返回主索引](../../../../rust-formal-engineering-system/00_master_index.md)
 
 ---
 

@@ -18,9 +18,9 @@
 
 | 模式 | 文件 | 描述 | 难度 |
 |-----|------|------|------|
-| **Adapter** | [10_adapter.md](adapter.md) | 接口适配 | 🟢 |
-| **Decorator** | [10_decorator.md](decorator.md) | 动态添加功能 | 🟡 |
-| **Proxy** | [10_proxy.md](proxy.md) | 访问控制 | 🟡 |
+| **Adapter** | [10_adapter.md](../../../../../rust-ownership-decidability/11-design-patterns/structural/adapter.md) | 接口适配 | 🟢 |
+| **Decorator** | [10_decorator.md](../../../../../rust-ownership-decidability/11-design-patterns/structural/decorator.md) | 动态添加功能 | 🟡 |
+| **Proxy** | [10_proxy.md](../../../../../rust-ownership-decidability/11-design-patterns/structural/proxy.md) | 访问控制 | 🟡 |
 
 ---
 

@@ -4,7 +4,6 @@
 >
 > **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **主题**: 嵌入式图形绘制
 > **形式化框架**: 绘制原语 + 迭代器 + 零分配
 > **参考**: embedded-graphics crate (<https://github.com/embedded-graphics/embedded-graphics>)
@@ -19,27 +18,26 @@
   - [目录](#目录)
   - [1. 引言](#1-引言)
   - [2. 绘制原语](#2-绘制原语)
-    - [定义 PRIMITIVE-1 ( 基本图形 )](#定义-primitive-1--基本图形-)
-    - [定义 PRIMITIVE-2 ( 像素迭代 )](#定义-primitive-2--像素迭代-)
+    - 定义 PRIMITIVE-1 ( 基本图形 )
+    - 定义 PRIMITIVE-2 ( 像素迭代 )
   - [3. 迭代器模型](#3-迭代器模型)
-    - [定义 ITER-1 ( 惰性求值 )](#定义-iter-1--惰性求值-)
-    - [定理 ITER-T1 ( 零分配 )](#定理-iter-t1--零分配-)
+    - 定义 ITER-1 ( 惰性求值 )
+    - 定理 ITER-T1 ( 零分配 )
   - [4. 显示目标](#4-显示目标)
-    - [定义 TARGET-1 ( DrawTarget trait )](#定义-target-1--drawtarget-trait-)
-    - [定义 TARGET-2 ( 帧缓冲 )](#定义-target-2--帧缓冲-)
+    - 定义 TARGET-1 ( DrawTarget trait )
+    - 定义 TARGET-2 ( 帧缓冲 )
   - [5. 变换与样式](#5-变换与样式)
-    - [定义 STYLE-1 ( 样式属性 )](#定义-style-1--样式属性-)
-    - [定义 TRANSFORM-1 ( 仿射变换 )](#定义-transform-1--仿射变换-)
+    - 定义 STYLE-1 ( 样式属性 )
+    - 定义 TRANSFORM-1 ( 仿射变换 )
   - [6. 定理与证明](#6-定理与证明)
-    - [定理 CLIP-T1 ( 裁剪正确性 )](#定理-clip-t1--裁剪正确性-)
+    - 定理 CLIP-T1 ( 裁剪正确性 )
   - [7. 代码示例](#7-代码示例)
     - [示例1: 基本绘制](#示例1-基本绘制)
     - [示例2: 显示驱动实现](#示例2-显示驱动实现)
     - [示例3: 动画与双缓冲](#示例3-动画与双缓冲)
     - [示例4: 进度条组件](#示例4-进度条组件)
-  - [**状态**: ✅ 已对齐](#状态--已对齐)
+  - **状态**: ✅ 已对齐
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -387,40 +385,3 @@ impl ProgressBar {
 > **来源: [RTIC Book](https://rtic.rs/book/)**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
->
-> **[来源: [Iris Project](https://iris-project.org/)]**
->
-> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
->
-> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
->
-> **[来源: [Rust Embedded Book](https://docs.rust-embedded.org/book/)]**
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**

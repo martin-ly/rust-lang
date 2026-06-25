@@ -22,52 +22,52 @@
 
 | TRPL 章节 | 主题 | 本项目对应 | 补充深度 |
 |:---|:---|:---|:---:|
-| Ch.1 入门 | 安装、Hello World | [`concept/00_meta/learning_guide.md`](../../../concept/00_meta/learning_guide.md) | L0 学习路径 |
+| Ch.1 入门 | 安装、Hello World | [`concept/00_meta/learning_guide.md`](../../../../../concept/00_meta/learning_guide.md) | L0 学习路径 |
 | Ch.2 猜数游戏 | 第一个项目 | [`exercises/src/`](../../exercises/) | 练习系统 |
-| Ch.3 通用概念 | 变量、类型、函数、控制流 | [`concept/01_foundation/`](../../../concept/01_foundation/) | L1 基础层 |
-| Ch.4 所有权 | Move/Copy/Clone/Drop | [`concept/01_foundation/01_ownership.md`](../../../concept/01_foundation/01_ownership.md) | 🔬 形式化语义 |
-| Ch.5 结构体 | struct、impl、关联函数 | [`concept/01_foundation/04_type_system.md`](../../../concept/01_foundation/04_type_system.md) | 🔬 类型论差异 |
-| Ch.6 枚举与模式 | enum、`Option<T>`、`match` | [`concept/01_foundation/04_type_system.md`](../../../concept/01_foundation/04_type_system.md) §枚举 | 🔬 代数数据类型 |
+| Ch.3 通用概念 | 变量、类型、函数、控制流 | [`concept/01_foundation/`](../../../../../concept/01_foundation) | L1 基础层 |
+| Ch.4 所有权 | Move/Copy/Clone/Drop | [`concept/01_foundation/01_ownership.md`](../../../../../concept/01_foundation/01_ownership.md) | 🔬 形式化语义 |
+| Ch.5 结构体 | struct、impl、关联函数 | [`concept/01_foundation/04_type_system.md`](../../../../../concept/01_foundation/04_type_system.md) | 🔬 类型论差异 |
+| Ch.6 枚举与模式 | enum、`Option<T>`、`match` | [`concept/01_foundation/04_type_system.md`](../../../../../concept/01_foundation/04_type_system.md) §枚举 | 🔬 代数数据类型 |
 
 ### Ch.7-10: 核心进阶
 
 | TRPL 章节 | 主题 | 本项目对应 | 补充深度 |
 |:---|:---|:---|:---:|
-| Ch.7 模块系统 | `mod`、`use`、`pub`、crate | [`concept/06_ecosystem/01_toolchain.md`](../../../concept/06_ecosystem/01_toolchain.md) §Workspace | 📦 Cargo 高级特性 |
-| Ch.8 常用集合 | `Vec`、`HashMap`、`String` | [`concept/01_foundation/08_collections.md`](../../../concept/01_foundation/08_collections.md) | 🔬 内存布局分析 |
-| Ch.9 错误处理 | `Result<T,E>`、`?`、`panic!` | [`concept/02_intermediate/04_error_handling.md`](../../../concept/02_intermediate/04_error_handling.md) | 🔬 错误传播代数 |
-| Ch.10 泛型、Trait、生命周期 | `<T>`、`trait`、`'a` | [`concept/02_intermediate/02_generics.md`](../../../concept/02_intermediate/02_generics.md) · [`concept/02_intermediate/01_traits.md`](../../../concept/02_intermediate/01_traits.md) · [`concept/01_foundation/03_lifetimes.md`](../../../concept/01_foundation/03_lifetimes.md) | 🔬 单态化、GATs、HRTB |
+| Ch.7 模块系统 | `mod`、`use`、`pub`、crate | [`concept/06_ecosystem/01_toolchain.md`](../../../../../concept/06_ecosystem/01_toolchain.md) §Workspace | 📦 Cargo 高级特性 |
+| Ch.8 常用集合 | `Vec`、`HashMap`、`String` | [`concept/01_foundation/08_collections.md`](../../../../../concept/01_foundation/08_collections.md) | 🔬 内存布局分析 |
+| Ch.9 错误处理 | `Result<T,E>`、`?`、`panic!` | [`concept/02_intermediate/04_error_handling.md`](../../../../../concept/02_intermediate/04_error_handling.md) | 🔬 错误传播代数 |
+| Ch.10 泛型、Trait、生命周期 | `<T>`、`trait`、`'a` | [`concept/02_intermediate/02_generics.md`](../../../../../concept/02_intermediate/02_generics.md) · [`concept/02_intermediate/01_traits.md`](../../../../../concept/02_intermediate/01_traits.md) · [`concept/01_foundation/03_lifetimes.md`](../../../../../concept/01_foundation/03_lifetimes.md) | 🔬 单态化、GATs、HRTB |
 
 ### Ch.11-16: 高级主题
 
 | TRPL 章节 | 主题 | 本项目对应 | 补充深度 |
 |:---|:---|:---|:---:|
-| Ch.11 测试 | `#[test]`、集成测试 | [`concept/02_intermediate/05_assert_matches.md`](../../../concept/02_intermediate/05_assert_matches.md) | 🔬 `assert_matches!` (1.96.0) |
-| Ch.12 I/O 项目 | 实用项目 | [`crates/c07_process/`](../../../crates/c07_process/) | 📦 完整 crate |
-| Ch.13 闭包与迭代器 | `Fn`/`FnMut`/`FnOnce`、`Iterator` | [`concept/02_intermediate/`](../../../concept/02_intermediate/) | 🔬 迭代器组合子矩阵 |
-| Ch.14 Cargo | crates.io、Workspace | [`concept/06_ecosystem/01_toolchain.md`](../../../concept/06_ecosystem/01_toolchain.md) | 📦 17-member workspace |
-| Ch.15 智能指针 | `Box`、`Rc`、`Arc`、`RefCell` | [`concept/02_intermediate/03_memory_management.md`](../../../concept/02_intermediate/03_memory_management.md) | 🔬 内部可变性形式化 |
-| Ch.16 无畏并发 | 线程、`Send`/`Sync`、消息传递 | [`concept/03_advanced/01_concurrency.md`](../../../concept/03_advanced/01_concurrency.md) | 🔬 分离逻辑、死锁分析 |
+| Ch.11 测试 | `#[test]`、集成测试 | [`concept/02_intermediate/05_assert_matches.md`](../../../../../concept/02_intermediate/05_assert_matches.md) | 🔬 `assert_matches!` (1.96.0) |
+| Ch.12 I/O 项目 | 实用项目 | [`crates/c07_process/`](../../../../../crates/c07_process) | 📦 完整 crate |
+| Ch.13 闭包与迭代器 | `Fn`/`FnMut`/`FnOnce`、`Iterator` | [`concept/02_intermediate/`](../../../../../concept/02_intermediate) | 🔬 迭代器组合子矩阵 |
+| Ch.14 Cargo | crates.io、Workspace | [`concept/06_ecosystem/01_toolchain.md`](../../../../../concept/06_ecosystem/01_toolchain.md) | 📦 17-member workspace |
+| Ch.15 智能指针 | `Box`、`Rc`、`Arc`、`RefCell` | [`concept/02_intermediate/03_memory_management.md`](../../../../../concept/02_intermediate/03_memory_management.md) | 🔬 内部可变性形式化 |
+| Ch.16 无畏并发 | 线程、`Send`/`Sync`、消息传递 | [`concept/03_advanced/01_concurrency.md`](../../../../../concept/03_advanced/01_concurrency.md) | 🔬 分离逻辑、死锁分析 |
 
 ### Ch.17: 异步编程基础（第三版新增 ⭐）
 
 | TRPL § | 主题 | 本项目对应 | 补充深度 |
 |:---|:---|:---|:---:|
-| **17.1 Futures and the Async Syntax** | `async fn`、`.await`、`Future` trait | [`concept/03_advanced/02_async.md`](../../../concept/03_advanced/02_async.md) §一/§三 | 🔬 状态机精确推导 |
-| **17.2 Applying Concurrency with Async** | 并发 vs 异步、Tokio | [`crates/c06_async/docs/tier_02_guides/`](../../../crates/c06_async/docs/tier_02_guides/) | 📦 运行时选择指南 |
-| **17.3 Working With Any Number of Futures** | `join!`、`select!` | [`crates/c06_async/docs/README.md`](../../../crates/c06_async/docs/README.md) §5 | 📦 `tokio::join!` 示例 |
-| **17.4 Streams: Futures in Sequence** | `Stream` trait、异步迭代 | [`concept/03_advanced/02_async.md`](../../../concept/03_advanced/02_async.md) §十五 | 🔬 Stream/Dataflow 映射 |
-| **17.5 A Closer Look at the Traits for Async** | `Future`、`Stream`、`Sink` | [`concept/03_advanced/02_async.md`](../../../concept/03_advanced/02_async.md) §8.10 | 🔬 Pin LTL 形式化 |
-| **17.6 Futures, Tasks, and Threads** | 任务调度、线程池对比 | [`concept/03_advanced/02_async.md`](../../../concept/03_advanced/02_async.md) §2.1/§3.5 | 🔬 执行模型同构性矩阵 |
+| **17.1 Futures and the Async Syntax** | `async fn`、`.await`、`Future` trait | [`concept/03_advanced/02_async.md`](../../../../../concept/03_advanced/02_async.md) §一/§三 | 🔬 状态机精确推导 |
+| **17.2 Applying Concurrency with Async** | 并发 vs 异步、Tokio | [`crates/c06_async/docs/tier_02_guides/`](../../../../../crates/c06_async/docs/tier_02_guides) | 📦 运行时选择指南 |
+| **17.3 Working With Any Number of Futures** | `join!`、`select!` | [`crates/c06_async/docs/README.md`](../../../../../crates/c06_async/docs/README.md) §5 | 📦 `tokio::join!` 示例 |
+| **17.4 Streams: Futures in Sequence** | `Stream` trait、异步迭代 | [`concept/03_advanced/02_async.md`](../../../../../concept/03_advanced/02_async.md) §十五 | 🔬 Stream/Dataflow 映射 |
+| **17.5 A Closer Look at the Traits for Async** | `Future`、`Stream`、`Sink` | [`concept/03_advanced/02_async.md`](../../../../../concept/03_advanced/02_async.md) §8.10 | 🔬 Pin LTL 形式化 |
+| **17.6 Futures, Tasks, and Threads** | 任务调度、线程池对比 | [`concept/03_advanced/02_async.md`](../../../../../concept/03_advanced/02_async.md) §2.1/§3.5 | 🔬 执行模型同构性矩阵 |
 
 ### Ch.18-22: 高级特性与附录
 
 | TRPL 章节 | 主题 | 本项目对应 | 补充深度 |
 |:---|:---|:---|:---:|
-| Ch.18 OOP 特性 | trait 对象、动态分发 | [`concept/02_intermediate/01_traits.md`](../../../concept/02_intermediate/01_traits.md) §对象安全 | 🔬 存在类型形式化 |
-| Ch.19 模式与匹配 | 穷尽性、守卫、`@` 绑定 | [`concept/02_intermediate/05_assert_matches.md`](../../../concept/02_intermediate/05_assert_matches.md) | 🔬 模式匹配形式化 |
-| Ch.20 高级特性 | unsafe、trait 别名、关联类型 | [`concept/03_advanced/03_unsafe.md`](../../../concept/03_advanced/03_unsafe.md) | 🔬 Miri、FFI、repr |
-| Ch.21 多线程 Web 服务器 | 综合项目 | [`crates/c10_networks/`](../../../crates/c10_networks/) | 📦 完整网络 crate |
+| Ch.18 OOP 特性 | trait 对象、动态分发 | [`concept/02_intermediate/01_traits.md`](../../../../../concept/02_intermediate/01_traits.md) §对象安全 | 🔬 存在类型形式化 |
+| Ch.19 模式与匹配 | 穷尽性、守卫、`@` 绑定 | [`concept/02_intermediate/05_assert_matches.md`](../../../../../concept/02_intermediate/05_assert_matches.md) | 🔬 模式匹配形式化 |
+| Ch.20 高级特性 | unsafe、trait 别名、关联类型 | [`concept/03_advanced/03_unsafe.md`](../../../../../concept/03_advanced/03_unsafe.md) | 🔬 Miri、FFI、repr |
+| Ch.21 多线程 Web 服务器 | 综合项目 | [`crates/c10_networks/`](../../../../../crates/c10_networks) | 📦 完整网络 crate |
 | Ch.22 附录 | 关键字、运算符、派生宏 | [`docs/02_reference/`](../../docs/02_reference/) | 📚 速查表集合 |
 
 ---

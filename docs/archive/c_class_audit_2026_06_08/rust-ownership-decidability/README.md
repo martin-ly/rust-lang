@@ -38,15 +38,15 @@
 > **🆕 新增终极综合指南**: [ULTIMATE_COMPREHENSIVE_GUIDE.md](./ULTIMATE_COMPREHENSIVE_GUIDE.md) - **总入口，完整梳理，建议从这里开始**
 > **📚 新增文档总索引**: [DOCUMENT_INDEX_MASTER.md](./DOCUMENT_INDEX_MASTER.md) - 605 个文件的完整索引
 > **🗺️ 新增学习路线图**: [LEARNING_ROADMAP_DETAILED.md](./LEARNING_ROADMAP_DETAILED.md) - 从新手到专家的完整路径
-> **📊 新增知识矩阵**: [COMPLETE_KNOWLEDGE_MATRIX.md](./COMPLETE_KNOWLEDGE_MATRIX.md) - 多维度交叉索引
+> **📊 新增知识矩阵**: [COMPLETE_KNOWLEDGE_MATRIX.md](../../../rust-ownership-decidability/COMPLETE_KNOWLEDGE_MATRIX.md) - 多维度交叉索引
 
 根据您的背景和目标，选择合适的学习路径：
 
 | 受众 | 入门文档 | 核心文档 | 高级文档 | 综合梳理 |
 |:------:|:----------|:----------|:----------|:---------|
 | **初学者** | 概念卡片 | 核心概念 | 练习题 | [终极指南](./ULTIMATE_COMPREHENSIVE_GUIDE.md) |
-| **进阶** | 详细概念 | 设计模式 | 案例研究 | [知识梳理](./COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md) |
-| **专家** | 形式化基础 | 证明与定理 | Coq代码 | [理论框架](./UNIFIED_THEORETICAL_FRAMEWORK.md) |
+| **进阶** | 详细概念 | 设计模式 | 案例研究 | [知识梳理](../../../rust-ownership-decidability/COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md) |
+| **专家** | 形式化基础 | 证明与定理 | Coq代码 | [理论框架](../../../rust-ownership-decidability/UNIFIED_THEORETICAL_FRAMEWORK.md) |
 
 ---
 
@@ -348,13 +348,13 @@ Thm SUPERVISION-FAULT-ISOLATION: 监督树隔离故障
 | **嵌入式** | `embassy-formal-analysis.md` | 🔴 | 2.5小时 |
 | **Actor系统** | `actix-formal-analysis.md` (在actor-specialty/) | 🟡 | 2小时 |
 
-**完整案例索引**: [MODERN_CRATES_INDEX.md](case-studies/MODERN_CRATES_INDEX.md)
+**完整案例索引**: [MODERN_CRATES_INDEX.md](../../../rust-ownership-decidability/case-studies/MODERN_CRATES_INDEX.md)
 
 ---
 
 ## 🛤️ 学习路径
 
-> **🆕 推荐**: [交互式学习指南](./INTERACTIVE_LEARNING_GUIDE.md) - 问题驱动的学习体验
+> **🆕 推荐**: [交互式学习指南](../../../rust-ownership-decidability/INTERACTIVE_LEARNING_GUIDE.md) - 问题驱动的学习体验
 
 ### 🟢 路径 A: 快速入门 (4小时) → 已更新
 
@@ -496,7 +496,7 @@ Async专题:    ████████████████████ 100
 
 | 索引 | 说明 |
 |:-----|:-----|
-| [FINAL_MASTER_INDEX.md](./FINAL_MASTER_INDEX.md) | 主索引 - 完整文档导航 |
+| [FINAL_MASTER_INDEX.md](../../../rust-ownership-decidability/FINAL_MASTER_INDEX.md) | 主索引 - 完整文档导航 |
 | [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md) | 自动生成的交叉引用索引 |
 | CROSS_REFERENCE_VERIFICATION_REPORT.md (待补充) | 链接验证报告 |
 
@@ -504,12 +504,12 @@ Async专题:    ████████████████████ 100
 
 | 主题 | 入口 |
 |:-----|:-----|
-| 所有权概念 | [所有权深入](01-core-concepts/detailed-concepts/ownership-deep-dive.md) / [速查卡](01-core-concepts/short-concepts/ownership-concept-card.md) / [理论到实践](./FOUNDATIONS_TO_PRACTICE_BRIDGE.md) |
-| 借用系统 | [借用深入](01-core-concepts/detailed-concepts/borrowing-in-depth.md) / [速查卡](01-core-concepts/short-concepts/borrowing-concept-card.md) |
-| 生命周期 | [生命周期精通](01-core-concepts/detailed-concepts/lifetimes-mastery.md) / [速查卡](01-core-concepts/short-concepts/lifetime-concept-card.md) |
-| 形式化理论 | [形式化基础](00-foundations/) / [Coq代码](coq-formalization/) / [定理到编译器](./THEOREM_TO_COMPILER_BRIDGE.md) |
-| 设计模式 | [模式指南](11-design-patterns/) (已归档) / [理论到模式](./THEORY_TO_PATTERN_BRIDGE.md) |
-| 案例研究 | [案例索引](case-studies/) / [现代crate](case-studies/MODERN_CRATES_INDEX.md) |
+| 所有权概念 | [所有权深入](../../../rust-ownership-decidability/01-core-concepts/detailed-concepts/ownership-deep-dive.md) / [速查卡](../../../rust-ownership-decidability/01-core-concepts/short-concepts/ownership-concept-card.md) / [理论到实践](../../../rust-ownership-decidability/FOUNDATIONS_TO_PRACTICE_BRIDGE.md) |
+| 借用系统 | [借用深入](../../../rust-ownership-decidability/01-core-concepts/detailed-concepts/borrowing-in-depth.md) / [速查卡](../../../rust-ownership-decidability/01-core-concepts/short-concepts/borrowing-concept-card.md) |
+| 生命周期 | [生命周期精通](../../../rust-ownership-decidability/01-core-concepts/detailed-concepts/lifetimes-mastery.md) / [速查卡](../../../rust-ownership-decidability/01-core-concepts/short-concepts/lifetime-concept-card.md) |
+| 形式化理论 | [形式化基础](00-foundations/) / [Coq代码](coq-formalization/) / [定理到编译器](../../../rust-ownership-decidability/THEOREM_TO_COMPILER_BRIDGE.md) |
+| 设计模式 | [模式指南](11-design-patterns/) (已归档) / [理论到模式](../../../rust-ownership-decidability/THEORY_TO_PATTERN_BRIDGE.md) |
+| 案例研究 | [案例索引](../../../rust-ownership-decidability/case-studies) / [现代crate](../../../rust-ownership-decidability/case-studies/MODERN_CRATES_INDEX.md) |
 
 ---
 
@@ -563,8 +563,8 @@ cat coq-formalization/theories/Advanced/MetatheoryDecidability.v
 
 | 本知识库主题 | `research_notes/` 对应内容 | 说明 |
 |-------------|---------------------------|------|
-| 所有权形式化 (`01-core-concepts/`) | [`formal_methods/10_ownership_model.md`](../research_notes/formal_methods/10_ownership_model.md) | 本知识库更深入、更系统 |
-| 借用检查器证明 (`formal-foundations/proofs/`) | [`formal_methods/10_borrow_checker_proof.md`](../research_notes/formal_methods/10_borrow_checker_proof.md) | 本知识库包含完整 Coq 证明 |
+| 所有权形式化 (`01-core-concepts/`) | [`formal_methods/10_ownership_model.md`](../../../research_notes/formal_methods/10_ownership_model.md) | 本知识库更深入、更系统 |
+| 借用检查器证明 (`formal-foundations/proofs/`) | [`formal_methods/10_borrow_checker_proof.md`](../../../research_notes/formal_methods/10_borrow_checker_proof.md) | 本知识库包含完整 Coq 证明 |
 | 类型理论 (`01-core-concepts/`) | [`type_theory/`](../../../../archive/research_notes_2026_06_25/type_theory) | `research_notes/` 侧更侧重类型系统基础理论 |
 | 设计模式形式化 (`11-design-patterns/`) | [`software_design_theory/01_design_patterns_formal/`](../../../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal) | 两者互补，本知识库侧重 Rust 特定模式 |
 | 并发形式化 (`12-concurrency-patterns/`) | [`formal_methods/10_async_state_machine.md`](../../../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) | 本知识库涵盖更多并发模型 |
@@ -590,7 +590,7 @@ cat coq-formalization/theories/Advanced/MetatheoryDecidability.v
 - [x] 清晰的目录结构
 - [x] 所有文件有实质内容
 - [x] P0关键证明100%完成
-- [x] 完整的交叉引用 ([验证报告](./CROSS_REFERENCE_VERIFICATION_REPORT.md))
+- [x] 完整的交叉引用 ([验证报告](../../../rust-ownership-decidability/CROSS_REFERENCE_VERIFICATION_REPORT.md))
 - [x] 599+ 内部链接已验证
 - [x] 主索引已更新 ([MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md))
 

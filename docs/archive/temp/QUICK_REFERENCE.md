@@ -1,3 +1,4 @@
+<a id="-rust-快速参考-quick-reference"></a>
 ﻿# 🚀 Rust 快速参考 (Quick Reference)
 
 > **分级**: [C]

@@ -299,7 +299,7 @@ rust-lang/
 
 ## 相关概念
 
-- [2026 重组历史](./00_2026_reorganization.md)
+- [2026 重组历史](../../../../00_meta/history/00_2026_reorganization.md)
 
 ---
 

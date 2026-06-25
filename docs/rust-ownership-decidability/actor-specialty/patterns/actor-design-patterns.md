@@ -30,6 +30,7 @@
   - [5. 通信模式](#5-通信模式)
     - [5.1 Pub-Sub模式](#51-pub-sub模式)
     - [5.2 请求管道](#52-请求管道)
+<a id="更新日期-2026-03-05"></a>
   - [**更新日期**: 2026-03-05](#更新日期-2026-03-05)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
@@ -469,7 +470,7 @@ let stage_a = PipelineStage::new(processor_a, Some(stage_b));
 
 ---
 
-- [Parent README](../README.md)
+- Parent README
 
 ---
 
@@ -477,7 +478,7 @@ let stage_a = PipelineStage::new(processor_a, Some(stage_b));
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [上级目录](../README.md)
+- 上级目录
 
 ---
 

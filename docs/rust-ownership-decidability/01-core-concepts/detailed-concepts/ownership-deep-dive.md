@@ -61,6 +61,7 @@
     - [8.2 静态分析工具](#82-静态分析工具)
     - [8.3 所有权的未来：Polonius](#83-所有权的未来polonius)
   - [总结](#总结)
+<a id="继续学习-borrowing-in-depthmd"></a>
   - [*继续学习: borrowing-in-depth.md*](#继续学习-borrowing-in-depthmd)
   - [权威来源索引](#权威来源索引)
 

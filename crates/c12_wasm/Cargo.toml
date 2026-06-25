@@ -16,8 +16,8 @@ thiserror = { workspace = true }
 wasm-bindgen = { workspace = true }
 js-sys = { workspace = true }
 wasm-bindgen-futures = { workspace = true }
-# 2026-06-19: web-sys 0.3.99 -> 0.3.102
-web-sys = { version = "0.3.102", features = ["console", "Window", "Document", "HtmlElement", "Storage", "Performance", "Request", "RequestInit", "RequestMode", "Response", "Headers"] }
+# 2026-06-25: web-sys 0.3.102 -> 0.3.103
+web-sys = { version = "0.3.103", features = ["console", "Window", "Document", "HtmlElement", "Storage", "Performance", "Request", "RequestInit", "RequestMode", "Response", "Headers"] }
 
 [lints.rust]
 unsafe_code = "allow"

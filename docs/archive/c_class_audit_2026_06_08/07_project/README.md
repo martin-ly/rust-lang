@@ -149,18 +149,18 @@ fn main() {
 | :--- | :--- | :--- |
 | **知识结构** | 07_knowledge_structure_framework.md 07_module_knowledge_structure_guide.md | 定义知识结构体系 模块知识结构补充指南 |
 | **版本追踪** | [07_rust_release_tracking_checklist.md](./07_rust_release_tracking_checklist.md) (归档) 版本追踪文档 | 新版本发布追踪流程 各模块适配状态 |
-| **文档管理** | [07_documentation_cross_reference_guide.md](./07_documentation_cross_reference_guide.md) 07_documentation_theme_organization_plan.md (归档) | 文档交叉引用指南 文档主题重组规划 |
-| **架构** | [07_project_architecture_guide.md](./07_project_architecture_guide.md) | 项目架构设计 |
+| **文档管理** | [07_documentation_cross_reference_guide.md](../../../07_project/07_documentation_cross_reference_guide.md) 07_documentation_theme_organization_plan.md (归档) | 文档交叉引用指南 文档主题重组规划 |
+| **架构** | [07_project_architecture_guide.md](../../../07_project/07_project_architecture_guide.md) | 项目架构设计 |
 | **模板工具** | 07_one_page_summary_template.md | 一页纸总结模板 |
 
 ---
 
 ## 文档列表
 
-- [07_knowledge_structure_framework.md](./07_knowledge_structure_framework.md) - 知识结构框架
-- [07_module_knowledge_structure_guide.md](./07_module_knowledge_structure_guide.md) - 模块知识结构
-- [07_documentation_cross_reference_guide.md](./07_documentation_cross_reference_guide.md) - 文档交叉引用
-- [07_project_architecture_guide.md](./07_project_architecture_guide.md) - 项目架构
+- [07_knowledge_structure_framework.md](../../../07_project/07_knowledge_structure_framework.md) - 知识结构框架
+- [07_module_knowledge_structure_guide.md](../../../07_project/07_module_knowledge_structure_guide.md) - 模块知识结构
+- [07_documentation_cross_reference_guide.md](../../../07_project/07_documentation_cross_reference_guide.md) - 文档交叉引用
+- [07_project_architecture_guide.md](../../../07_project/07_project_architecture_guide.md) - 项目架构
 - [07_rust_release_tracking_checklist.md](./07_rust_release_tracking_checklist.md) (归档) - 版本追踪
 - ARCHIVE_COMPLETION_REPORT.md - 归档完成报告
 
@@ -206,7 +206,7 @@ fn main() {
 
 - Rust 1.95+ 迁移指南
 - [Rust 1.94 特性速查（已归档）
-- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
+- [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

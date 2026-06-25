@@ -51,6 +51,7 @@
   - [Appendix: Full Results](#appendix-full-results)
     - [Passed Checks](#passed-checks)
     - [Detailed Error Analysis](#detailed-error-analysis)
+<a id="rust-version-1940"></a>
   - [*Rust Version: 1.94.0*](#rust-version-1940)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)

@@ -23,24 +23,32 @@ ignore = [
     # RUSTSEC-2026-0119: hickory-proto - 相关 DNS 漏洞
     # 影响评估: LOW（同上，hickory-proto 0.25.2 不在实际编译依赖树中）
     "RUSTSEC-2026-0119",
+
+    # RUSTSEC-2026-0110: bare-metal 已弃用
+    # 影响评估: LOW（仅 ARM 嵌入式 target 使用，host 编译不编译）
+    # - 攻击向量: 不适用（bare-metal 是底层目标抽象库，非网络/加密组件）
+    # - 影响范围: 仅 c13_embedded 在 target_arch = "arm" 时依赖 cortex-m 0.7.7
+    # - 实际状态: cortex-m 0.7.7 是 crates.io 最新稳定版；cortex-m 0.8 尚未发布
+    # - 上游状态: 等待 rust-embedded/cortex-m 发布 0.8
+    "RUSTSEC-2026-0110",
+
+    # RUSTSEC-2024-0384: `instant` 不再维护
+    # 影响评估: LOW（仅 Linux 下 glommio 实验性模块使用）
+    # - 攻击向量: 不适用（instant 是时间工具库）
+    # - 影响范围: c06_async 的 glommio 0.9.0 -> futures-lite 1.13.0 -> fastrand 1.9.0
+    # - 实际状态: glommio 0.9.0 是 crates.io 最新版；移除 glommio 将损失 io_uring 教学内容
+    # - 上游状态: 等待 glommio 升级至 futures-lite 2.x
+    "RUSTSEC-2024-0384",
+
+    # RUSTSEC-2024-0436: paste 不再维护
+    # 影响评估: LOW（仅 dev/benchmark 传递依赖）
+    # - 攻击向量: 不适用（paste 是 proc-macro 工具）
+    # - 影响范围: candle-core 0.10.2 / libp2p 0.56.0 -> tokenizers/pulp/netlink-packet-core/macro_rules_attribute/gemm-*
+    # - 实际状态: candle-core 0.10.2 与 libp2p 0.56.0 均为当前最新稳定版
+    # - 上游状态: 等待 huggingface/candle 与 libp2p/rust-libp2p 迁移出 paste
+    "RUSTSEC-2024-0436",
 ]
 
-# 废弃依赖警告（unmaintained）
-# 以下依赖已被标记为 unmaintained，但暂无替代方案或上游未升级。
-# cargo audit 的 unmaintained 警告无法通过 ignore 完全消除，此处记录供跟踪：
-#
-# - atomic-polyfill (RUSTSEC-2023-0089): postcard 1.1.3 -> heapless 0.7.17 传递依赖
-#   影响: LOW（dev-dependency only，仅 benchmark 使用）
-#   计划: 跟踪 postcard/heapless 上游升级
-#
-# - bare-metal (RUSTSEC-2026-0110): cortex-m 0.7.7 传递依赖
-#   影响: LOW（嵌入式 target only，host 编译不使用）
-#   计划: cortex-m 0.8+ 将移除 bare-metal，但 0.8 尚未发布稳定版
-#
-# - instant (RUSTSEC-2024-0384): glommio 0.9.0 -> futures-lite 1.13.0 -> fastrand 1.9.0 传递依赖
-#   影响: LOW（glommio 实验性模块使用）
-#   计划: 跟踪 glommio/futures-lite 上游升级
-#
-# - paste: gemm 系列 -> paste 传递依赖
-#   影响: LOW（dev-dependency only，candle-core benchmark 使用）
-#   计划: gemm/candle-core 上游升级
+# 废弃依赖处理说明
+# - atomic-polyfill (RUSTSEC-2023-0089): 已修复
+#   2026-06-25 移除 c10_networks 的 postcard dev-dependency，atomic-polyfill 不再进入 Cargo.lock

@@ -21,7 +21,6 @@
   - [更新检查清单](#更新检查清单)
   - [趋势跟踪](#趋势跟踪)
     - [2026 Q2 关键里程碑](#2026-q2-关键里程碑)
-  - [*本模板基于 2026-05-08 的对称差分析报告创建。*](#本模板基于-2026-05-08-的对称差分析报告创建)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -124,6 +123,7 @@
 ---
 
 *本模板基于 2026-05-08 的对称差分析报告创建。*
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

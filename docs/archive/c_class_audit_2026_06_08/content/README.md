@@ -113,22 +113,22 @@ content/
 
 ### 前沿特性
 
-> 已迁移至 [knowledge/06_ecosystem/emerging/](../../knowledge/06_ecosystem/emerging/)
+> 已迁移至 [knowledge/06_ecosystem/emerging/](../../../../knowledge/06_ecosystem/emerging)
 
 ### 生态系统
 
-> 已迁移至 [knowledge/06_ecosystem/deep_dives/](../../knowledge/06_ecosystem/deep_dives/)
+> 已迁移至 [knowledge/06_ecosystem/deep_dives/](../../../../knowledge/06_ecosystem/deep_dives)
 
 ### 生产实践
 
-> 已迁移至 [knowledge/06_ecosystem/deployment/](../../knowledge/06_ecosystem/deployment/)
+> 已迁移至 [knowledge/06_ecosystem/deployment/](../../../../knowledge/06_ecosystem/deployment)
 
 ### 学术研究
 
-- [RustBelt 与 Tree Borrows](academic/10_tree_borrows_authoritative_guide.md)
-- [Coq 形式化验证指南](academic/10_coq_formalization_guide.md)
-- [知识表征矩阵](representations/10_knowledge_representation_matrix.md)
-- [Web 应用场景](scenarios/10_web_application_scenarios.md)
+- [RustBelt 与 Tree Borrows](../../duplicate_content_2026_06_08/10_tree_borrows_authoritative_guide.md)
+- [Coq 形式化验证指南](../../../content/academic/10_coq_formalization_guide.md)
+- [知识表征矩阵](../../../content/representations/10_knowledge_representation_matrix.md)
+- [Web 应用场景](../../../content/scenarios/10_web_application_scenarios.md)
 
 ---
 
@@ -136,9 +136,9 @@ content/
 
 ### 高优先级
 
-- [x] 补充 Sea-ORM 深度文档 → 已迁移至 [knowledge/06_ecosystem/databases/](../../knowledge/06_ecosystem/databases/)
-- [x] 添加 Tokio 运行时解析 → 已迁移至 [knowledge/06_ecosystem/deep_dives/](../../knowledge/06_ecosystem/deep_dives/)
-- [x] 创建 Kubernetes 部署指南 → 已迁移至 [knowledge/06_ecosystem/deployment/](../../knowledge/06_ecosystem/deployment/)
+- [x] 补充 Sea-ORM 深度文档 → 已迁移至 [knowledge/06_ecosystem/databases/](../../../../knowledge/06_ecosystem/databases)
+- [x] 添加 Tokio 运行时解析 → 已迁移至 [knowledge/06_ecosystem/deep_dives/](../../../../knowledge/06_ecosystem/deep_dives)
+- [x] 创建 Kubernetes 部署指南 → 已迁移至 [knowledge/06_ecosystem/deployment/](../../../../knowledge/06_ecosystem/deployment)
 - [ ] 整合 Tree Borrows 论文
 
 ### 中优先级
@@ -175,11 +175,11 @@ content/
 
 ## 相关概念
 
-- [学术对接](./academic/README.md)
-- [生态系统](./ecosystem/README.md)
-- [前沿特性](./emerging/README.md)
-- [生产实践](./production/README.md)
-- [Content Crates 映射](./10_content_crates_mapping.md)
+- [学术对接](../../../content/academic/README.md)
+- [生态系统](../../../content/ecosystem/README.md)
+- [前沿特性](../../../content/emerging/README.md)
+- [生产实践](../../../content/production/README.md)
+- [Content Crates 映射](../../../content/10_content_crates_mapping.md)
 
 ---
 

@@ -1,4 +1,6 @@
-﻿# 📦 Cargo 速查卡 {#-cargo-速查卡}
+<a id="-cargo-速查卡--cargo-速查卡"></a>
+
+# 📦 Cargo 速查卡 {#-cargo-速查卡}
 
 > **分级**: [A]
 > **快速参考** | [Cargo 官方文档](https://doc.rust-lang.org/cargo/) | [代码示例](../../../crates/README.md)

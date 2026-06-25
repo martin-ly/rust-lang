@@ -1,4 +1,6 @@
-﻿# 🧪 Rust 测试速查卡
+<a id="-rust-测试速查卡"></a>
+
+# 🧪 Rust 测试速查卡
 
 > **分级**: [A]
 > **快速参考** | [完整文档](../../rust-formal-engineering-system/05_software_engineering/07_testing/README.md) | [代码示例](../../../crates/README.md)

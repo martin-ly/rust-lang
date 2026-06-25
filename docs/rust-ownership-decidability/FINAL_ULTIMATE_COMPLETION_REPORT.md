@@ -36,11 +36,12 @@
     - [有经验的开发者](#有经验的开发者)
     - [研究者](#研究者)
   - [🎉 终极完成总结](#-终极完成总结)
-    - [项目目标完全达成 ✅](#项目目标完全达成-)
+    - [项目目标完全达成 ✅](#项目目标完全达成)
     - [核心价值](#核心价值)
     - [独特创新](#独特创新)
   - [📞 最后的话](#-最后的话)
 - [🎉 项目终极完成！🎉](#-项目终极完成)
+<a id="状态--终极完成"></a>
   - [**状态**: ✅ 终极完成](#状态--终极完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
@@ -361,9 +362,9 @@ Coq 形式化文件:       32 个文件     ✅
 
 **开始使用**:
 
-- [ULTIMATE_COMPREHENSIVE_GUIDE.md](./ULTIMATE_COMPREHENSIVE_GUIDE.md) - 从这里开始
+- [ULTIMATE_COMPREHENSIVE_GUIDE.md](../archive/c_class_audit_2026_06_08/rust-ownership-decidability/ULTIMATE_COMPREHENSIVE_GUIDE.md) - 从这里开始
 - [10_quick_reference_card.md](QUICK_REFERENCE_CARD.md) - 快速查阅
-- [DOCUMENT_INDEX_MASTER.md](./DOCUMENT_INDEX_MASTER.md) - 查找文档
+- [DOCUMENT_INDEX_MASTER.md](../archive/c_class_audit_2026_06_08/rust-ownership-decidability/DOCUMENT_INDEX_MASTER.md) - 查找文档
 
 ---
 

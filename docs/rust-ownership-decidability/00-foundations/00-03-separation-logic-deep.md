@@ -19,7 +19,7 @@
     - [2.1 Assertion Language](#21-assertion-language)
       - [2.1.1 Detailed Semantics](#211-detailed-semantics)
       - [2.1.2 The Heap Model](#212-the-heap-model)
-    - [2.2 Separating Conjunction (\*)](#22-separating-conjunction-)
+    - [2.2 Separating Conjunction (\*)](#22-separating-conjunction)
       - [2.2.1 Intuition](#221-intuition)
       - [2.2.2 Algebraic Properties](#222-algebraic-properties)
       - [2.2.3 Frame Rule](#223-frame-rule)
@@ -45,7 +45,7 @@
   - [4. RustBelt Connection](#4-rustbelt-connection)
     - [4.1 The Iris Framework](#41-the-iris-framework)
       - [4.1.1 Iris Assertion Language](#411-iris-assertion-language)
-      - [4.1.2 Later Modality (\>)](#412-later-modality-)
+      - [4.1.2 Later Modality (\>)](#412-later-modality)
       - [4.1.3 Persistent Assertions (\[\])](#413-persistent-assertions-)
     - [4.2 Lifetime Logic in RustBelt](#42-lifetime-logic-in-rustbelt)
       - [4.2.1 Ownership as Permission](#421-ownership-as-permission)
@@ -128,6 +128,7 @@
   - [Appendix C: Theorems Summary](#appendix-c-theorems-summary)
     - [Core Theorems](#core-theorems)
   - [Appendix D: Counter-Examples Index](#appendix-d-counter-examples-index)
+<a id="line-count-1700-lines"></a>
   - [*Line Count: ~1700+ lines*](#line-count-1700-lines)
   - [权威来源索引](#权威来源索引)
 

@@ -35,6 +35,7 @@
   - [🆕 Rust 1.94 所有权系统更新](#-rust-194-所有权系统更新)
     - [新特性对所有权系统的影响](#新特性对所有权系统的影响)
     - [形式化更新](#形式化更新)
+<a id="最后更新-2026-03-14"></a>
   - [**最后更新**: 2026-03-14](#最后更新-2026-03-14)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
@@ -696,7 +697,7 @@ mod tests {
 
 - [高级实践工作坊](exercises/ADVANCED_OWNERSHIP_WORKSHOP.md) - 深入复杂场景
 - [案例分析](./case-studies/README.md) - 学习生产代码
-- [Coq形式化](./coq-formalization/README.md) - 理解严格证明
+- [Coq形式化](../../archive/deprecated/coq_skeleton/README.md) - 理解严格证明
 
 ---
 

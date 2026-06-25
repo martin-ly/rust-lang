@@ -85,7 +85,6 @@ protoc-bin-vendored = "3.2.0"  # 2026-06-19: 3.1.0 -> 3.2.0
 criterion = { workspace = true }
 anyhow = { workspace = true }
 axum = { workspace = true }
-postcard = { workspace = true, features = ["use-std"] }
 ring = { workspace = true }
 
 aes-gcm = "0.10"

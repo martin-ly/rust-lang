@@ -189,9 +189,9 @@
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [Rust 概念知识体系](../concept/README.md) — 分层概念体系总览
-- [L4 形式化理论](../concept/04_formal/) — RustBelt、线性逻辑、类型论
-- [L6 生态工程](../concept/06_ecosystem/) — 工具链、设计模式、核心 crate
+- [Rust 概念知识体系](../../../concept/README.md) — 分层概念体系总览
+- [L4 形式化理论](../../../concept/04_formal) — RustBelt、线性逻辑、类型论
+- [L6 生态工程](../../../concept/06_ecosystem) — 工具链、设计模式、核心 crate
 
 **来源**: ACM POPL 2026
 **论文**: "Miri: Practical Undefined Behavior Detection for Rust"

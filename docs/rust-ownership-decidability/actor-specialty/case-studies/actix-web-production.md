@@ -36,6 +36,7 @@
     - [7.1 内存安全保证](#71-内存安全保证)
     - [7.2 并发安全保证](#72-并发安全保证)
   - [8. 与其他框架对比](#8-与其他框架对比)
+<a id="actix-web版本-4x"></a>
   - [**Actix-web版本**: 4.x](#actix-web版本-4x)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
@@ -525,7 +526,7 @@ async fn handler() -> Result<HttpResponse, AppError> {
 
 ---
 
-- [Parent README](../README.md)
+- Parent README
 
 ---
 
@@ -533,7 +534,7 @@ async fn handler() -> Result<HttpResponse, AppError> {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [上级目录](../README.md)
+- 上级目录
 
 ---
 

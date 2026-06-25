@@ -239,7 +239,7 @@ trait Service<Request> {
 ```
 
 **Actor模式**:
-> 详见 [actor-specialty/README.md](../actor-specialty/README.md)
+> 详见 actor-specialty/README.md
 
 - 消息传递
 - 状态隔离

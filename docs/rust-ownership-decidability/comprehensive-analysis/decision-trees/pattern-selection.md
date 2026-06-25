@@ -225,13 +225,13 @@ select! {
 
 ---
 
-- [Parent README](../README.md)
+- Parent README
 
 ---
 
 ## 相关概念
 
-- [上级目录](../README.md)
+- 上级目录
 
 ---
 

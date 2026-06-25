@@ -70,6 +70,7 @@
     - [Core Documentation](#core-documentation)
     - [Academic Papers](#academic-papers)
     - [Related Patterns](#related-patterns)
+<a id="document-version-100"></a>
   - [**Document Version**: 1.0.0](#document-version-100)
   - [权威来源索引](#权威来源索引)
 

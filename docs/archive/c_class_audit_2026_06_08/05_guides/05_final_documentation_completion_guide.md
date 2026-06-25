@@ -48,7 +48,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-本文档提供文档完善的最终指南。**文档完善度已达 100%**：20/20 速查卡已统一添加「📚 相关文档 + 🧩 相关示例代码」块（详见 [quick_reference/README.md](../02_reference/quick_reference/README.md)）。
+本文档提供文档完善的最终指南。**文档完善度已达 100%**：20/20 速查卡已统一添加「📚 相关文档 + 🧩 相关示例代码」块（详见 [quick_reference/README.md](../../../02_reference/quick_reference/README.md)）。
 
 ---
 
@@ -65,7 +65,7 @@
    - 主索引、FAQ、术语表全部完成
 
 2. **高级主题文档**: 100%完成
-   - [05_advanced_topics_deep_dive.md](./05_advanced_topics_deep_dive.md) - 8个高级主题
+   - [05_advanced_topics_deep_dive.md](../../../05_guides/05_advanced_topics_deep_dive.md) - 8个高级主题
 
 3. **最佳实践文档**: 100%完成
    - 10_best_practices.md - 10个最佳实践主题
@@ -74,10 +74,10 @@
    - [05_performance_testing_report.md](./05_performance_testing_report.md) - 46个基准测试文件汇总
 
 5. **文档交叉引用指南**: 100%完成
-   - [07_documentation_cross_reference_guide.md](../07_project/07_documentation_cross_reference_guide.md) - 完整的交叉引用指南
+   - [07_documentation_cross_reference_guide.md](../../../07_project/07_documentation_cross_reference_guide.md) - 完整的交叉引用指南
 
 6. **跨模块集成示例**: 100%完成
-   - [05_cross_module_integration_examples.md](./05_cross_module_integration_examples.md) - 6个完整示例
+   - [05_cross_module_integration_examples.md](../../../05_guides/05_cross_module_integration_examples.md) - 6个完整示例
 
 7. **文档测试**: 100%完成
    - 所有模块的文档测试完成
@@ -165,7 +165,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [x] 跨模块集成示例完成
-- [x] **速查卡「相关文档 + 相关示例代码」20/20 已全部补齐**（含 AI/ML、testing、cargo、modules、strings_formatting 等，2026-02-13），详见 [quick_reference/README.md](../02_reference/quick_reference/README.md)
+- [x] **速查卡「相关文档 + 相关示例代码」20/20 已全部补齐**（含 AI/ML、testing、cargo、modules、strings_formatting 等，2026-02-13），详见 [quick_reference/README.md](../../../02_reference/quick_reference/README.md)
 - [ ] 更多实战示例（可选）
 - [ ] 实际应用场景示例（可选）
 
@@ -210,8 +210,8 @@
 
 为项目贡献新文档：
 
-1. 阅读 [文档中心主索引](./README.md)
-2. 参考 [快速参考索引](../02_reference/quick_reference/README.md)
+1. 阅读 [文档中心主索引](../../../05_guides/README.md)
+2. 参考 [快速参考索引](../../../02_reference/quick_reference/README.md)
 3. 确保包含必要的交叉引用链接
 
 ### 场景4: 文档系统维护
@@ -232,10 +232,10 @@
 
 | 链接类型 | 目标文档 |
 | :--- | :--- |
-| **文档索引** | [文档中心主索引](./README.md) |
+| **文档索引** | [文档中心主索引](../../../05_guides/README.md) |
 | :--- | :--- |
 | :--- | :--- |
-| **深度文档** | [05_advanced_topics_deep_dive.md](./05_advanced_topics_deep_dive.md) |
+| **深度文档** | [05_advanced_topics_deep_dive.md](../../../05_guides/05_advanced_topics_deep_dive.md) |
 | :--- | :--- |
 | :--- | :--- |
 | :--- | :--- |
@@ -251,18 +251,18 @@
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [文档中心主索引](./README.md)
-- [快速参考索引](../02_reference/quick_reference/README.md)
-- [研究笔记索引](../research_notes/README.md)
+- [文档中心主索引](../../../05_guides/README.md)
+- [快速参考索引](../../../02_reference/quick_reference/README.md)
+- [研究笔记索引](../../../research_notes/README.md)
 
 ### 高级文档
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [高级主题深度指南](./05_advanced_topics_deep_dive.md)
+- [高级主题深度指南](../../../05_guides/05_advanced_topics_deep_dive.md)
 - 综合最佳实践指南
 - [性能测试报告](./05_performance_testing_report.md)
-- [文档交叉引用指南](../07_project/07_documentation_cross_reference_guide.md)
+- [文档交叉引用指南](../../../07_project/07_documentation_cross_reference_guide.md)
 
 ---
 
@@ -327,7 +327,7 @@
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [05_guides 目录](./README.md)
+- [05_guides 目录](../../../05_guides/README.md)
 - [上级目录](../README.md)
 
 ---

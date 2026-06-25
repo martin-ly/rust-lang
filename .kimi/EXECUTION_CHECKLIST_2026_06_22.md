@@ -46,7 +46,7 @@
 
 - [x] **A2.1** 依赖安全审计：运行 `cargo audit`（若网络恢复）或检查 `RUSTSEC` 列表
   - 2026-06-22：`cargo audit` 因网络/IO 错误不可用；使用 `scripts/supply_chain_audit.py` 手动解析 RustSec advisory-db main.zip，结果 **0 个安全公告**
-  - 2026-06-25：`cargo audit` 网络恢复，完整拉取 advisory-db 后扫描确认 **0 个安全漏洞**，4 个 `unmaintained` 允许警告
+  - 2026-06-25：`cargo audit` 网络恢复，完整拉取 advisory-db 后扫描确认 **0 个安全漏洞**；`atomic-polyfill` 已修复（移除 c10_networks 的 postcard dev-dependency），剩余 3 个 `unmaintained` 已通过 `.cargo/audit.toml` 显式忽略并记录 rationale
   - 报告：`reports/SUPPLY_CHAIN_AUDIT_2026_06_25.md`、`reports/CARGO_AUDIT_2026_06_25.md`
 - [x] **A2.2** 评估 `backoff` → `backon` / `tokio-retry` 迁移
   - 结论：`Cargo.lock` 中无 `backoff` 依赖；`c06_async` 已使用内部 `utils::backoff` 模块替代（RUSTSEC-2025-0012 已缓解）
@@ -297,7 +297,7 @@
   - 2026-06-24：`cargo clippy --workspace --all-features -- -D warnings` 通过
 - [x] 运行 `scripts/check_links.py`（或对应链接检查脚本）
   - 2026-06-24：`scripts/check_links.py` 完成，结果见 D4.3
-  - 2026-06-25：运行 `scripts/docs_value_audit.py docs --days-old 90`，A/B 类问题数为 0，C 类问题数 643
+  - 2026-06-25：运行 `scripts/docs_value_audit.py docs --days-old 90`，A/B 类问题数为 0，C 类问题数 **228**（research_notes 归档后从 643 降至 228）
 - [x] 更新本检查清单中的完成状态
   - 本轮已同步更新 A、B、C、D、E 各工作流进度
 - [x] 每周五生成简短进度摘要（可写入 `.kimi/WEEKLY_PROGRESS_2026_06_2X.md`）

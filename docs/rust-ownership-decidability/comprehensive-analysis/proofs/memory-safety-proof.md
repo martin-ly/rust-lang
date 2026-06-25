@@ -36,6 +36,7 @@
     - [推论2: 并发安全](#推论2-并发安全)
     - [推论3: Unsafe代码隔离](#推论3-unsafe代码隔离)
   - [证明可靠性分析](#证明可靠性分析)
+<a id="证明状态--完整形式化证明"></a>
   - [**证明状态**: ✅ 完整形式化证明](#证明状态--完整形式化证明)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
@@ -511,7 +512,7 @@ move(v, from, to) →
 
 ---
 
-- [Parent README](../README.md)
+- Parent README
 
 ---
 
@@ -519,7 +520,7 @@ move(v, from, to) →
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [上级目录](../README.md)
+- 上级目录
 
 ---
 

@@ -31,6 +31,7 @@
     - [5.2 技术选型速查表](#52-技术选型速查表)
   - [6. 迁移决策](#6-迁移决策)
     - [6.1 从其他语言迁移](#61-从其他语言迁移)
+<a id="覆盖框架-actix-bastion-coerce-xtra-heph-stakker"></a>
   - [**覆盖框架**: Actix, Bastion, coerce, Xtra, Heph, Stakker](#覆盖框架-actix-bastion-coerce-xtra-heph-stakker)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
@@ -361,7 +362,7 @@ Web集成
 
 ---
 
-- [Parent README](../README.md)
+- Parent README
 
 ---
 
@@ -369,7 +370,7 @@ Web集成
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [上级目录](../README.md)
+- 上级目录
 
 ---
 

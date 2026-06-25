@@ -29,7 +29,7 @@
 | - | [分层架构]
 
 > 📝 待补充 | 分层 | 企业应用 |
-| - | [清洁架构](./clean-architecture.md) | 洋葱/清洁 | 复杂业务 |
+| - | [清洁架构](../../../../rust-ownership-decidability/13-architecture-patterns/clean-architecture.md) | 洋葱/清洁 | 复杂业务 |
 | - | [六边形架构]
 
 > 📝 待补充 | 端口适配器 | 领域驱动 |

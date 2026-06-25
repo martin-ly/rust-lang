@@ -60,7 +60,7 @@ fn handle_message(msg: Message) {
 >
 > **[来源: Rust Official Docs]**
 
-- [01_learning_path_planning.md](./01_learning_path_planning.md) - 学习路径规划（四类路径、进度检查清单）
+- [01_learning_path_planning.md](../../../01_learning/01_learning_path_planning.md) - 学习路径规划（四类路径、进度检查清单）
 - [01_official_resources_mapping.md](./01_official_resources_mapping.md) - 本项目 ↔ The Rust Book / Reference / RBE
 
 ---
@@ -168,10 +168,10 @@ fn ownership_theorem() {
 
 | 资源 | 路径 | 描述 |
 | :--- | :--- | :--- |
-| 速查卡 | [../02_reference/quick_reference/](../02_reference/quick_reference/README.md) | 20个主题速查 |
-| 专题指南 | [../05_guides/](../05_guides/README.md) | 异步、线程、Unsafe 等 |
-| 工具链 | [../06_toolchain/](../06_toolchain/README.md) | 编译器、Cargo |
-| 形式化理论 | [../research_notes/](../research_notes/README.md) | 类型理论、证明 |
+| 速查卡 | [../02_reference/quick_reference/](../../../02_reference/quick_reference/README.md) | 20个主题速查 |
+| 专题指南 | [../05_guides/](../../../05_guides/README.md) | 异步、线程、Unsafe 等 |
+| 工具链 | [../06_toolchain/](../../../06_toolchain/README.md) | 编译器、Cargo |
+| 形式化理论 | [../research_notes/](../../../research_notes/README.md) | 类型理论、证明 |
 
 ### 在线学习资源1
 
@@ -193,15 +193,15 @@ fn ownership_theorem() {
 
   | C++概念 | Rust对应 | 本文档 |
 | :--- | :--- | :--- |
-  | 手动内存管理 | 所有权系统 | [formal_methods/10_ownership_model.md](../research_notes/formal_methods/10_ownership_model.md) |
-  | 智能指针 | Box/Rc/Arc | [02_reference/quick_reference/02_smart_pointers_cheatsheet.md](../02_reference/quick_reference/02_smart_pointers_cheatsheet.md) |
-  | 模板 | 泛型 | [02_reference/quick_reference/02_generics_cheatsheet.md](../02_reference/quick_reference/02_generics_cheatsheet.md) |
+  | 手动内存管理 | 所有权系统 | [formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) |
+  | 智能指针 | Box/Rc/Arc | [02_reference/quick_reference/02_smart_pointers_cheatsheet.md](../../../02_reference/quick_reference/02_smart_pointers_cheatsheet.md) |
+  | 模板 | 泛型 | [02_reference/quick_reference/02_generics_cheatsheet.md](../../../02_reference/quick_reference/02_generics_cheatsheet.md) |
 
 ##### Memory Management
 
 - **平台**: Udacity
 - **用途**: 理解内存管理与Rust所有权的关系
-- **与本文档对齐**: [formal_methods/10_ownership_model.md](../research_notes/formal_methods/10_ownership_model.md) §内存安全
+- **与本文档对齐**: [formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) §内存安全
 
 ---
 
@@ -210,7 +210,7 @@ fn ownership_theorem() {
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
 | 形式化方法概述 | 形式化验证基础理论 | [../research_notes/formal_methods/README.md](../../../../archive/research_notes_2026_06_25/formal_methods/README.md) |
-| 所有权模型形式化 | 所有权系统数学定义 | [../research_notes/formal_methods/10_ownership_model.md](../research_notes/formal_methods/10_ownership_model.md) |
+| 所有权模型形式化 | 所有权系统数学定义 | [../research_notes/formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) |
 | 类型系统形式化 | 类型理论数学定义 | [../research_notes/type_theory/10_type_system_foundations.md](../../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) |
 | 证明索引 | 形式化证明集合 | [../research_notes/10_proof_index.md](../../../../archive/research_notes_2026_06_25/10_proof_index.md) |
 
@@ -256,7 +256,7 @@ fn ownership_theorem() {
 
 - Rust 1.95+ 迁移指南
 - [Rust 1.94 特性速查（已归档）
-- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
+- [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

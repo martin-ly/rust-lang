@@ -150,9 +150,9 @@
 
 ## 相关概念
 
-- [特性跟踪模板](./00_rust_feature_tracking_template.md)
-- [概念文档模板](./00_template_concept_doc.md)
-- [决策树模板](./00_template_decision_tree.md)
+- [特性跟踪模板](../../../00_meta/00_rust_feature_tracking_template.md)
+- [概念文档模板](../../../00_meta/00_template_concept_doc.md)
+- [决策树模板](../../../00_meta/00_template_decision_tree.md)
 - [docs 总览](../README.md)
 
 ---

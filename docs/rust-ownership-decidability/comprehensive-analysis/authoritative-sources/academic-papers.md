@@ -35,6 +35,7 @@
     - [6.1 Relaxed Memory Models](#61-relaxed-memory-models)
   - [7. 论文引用图谱](#7-论文引用图谱)
   - [8. 对齐摘要](#8-对齐摘要)
+<a id="覆盖论文-15-篇核心文献"></a>
   - [**覆盖论文**: 15+ 篇核心文献](#覆盖论文-15-篇核心文献)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
@@ -661,7 +662,7 @@ Rust内存模型基于:
 
 ---
 
-- [Parent README](../README.md)
+- Parent README
 
 ---
 
@@ -669,7 +670,7 @@ Rust内存模型基于:
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [上级目录](../README.md)
+- 上级目录
 
 ---
 

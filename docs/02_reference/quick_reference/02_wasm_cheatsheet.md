@@ -1,4 +1,6 @@
-﻿# WASM 快速参考卡片
+<a id="wasm-快速参考卡片"></a>
+
+# WASM 快速参考卡片
 
 > **分级**: [A]
 > **快速参考** | [完整文档](../../../crates/c12_wasm/docs/README.md) | [代码示例](../../../crates/c12_wasm/examples/README.md)

@@ -25,7 +25,7 @@
   - [📖 如何使用本指南](#-如何使用本指南)
     - [本文档的定位](#本文档的定位)
     - [三种使用方式](#三种使用方式)
-  - [🗺️ 第一部分：全局知识架构](#️-第一部分全局知识架构)
+  - [🗺️ 第一部分：全局知识架构](#第一部分全局知识架构)
     - [1.1 四层金字塔架构](#11-四层金字塔架构)
     - [1.2 三大维度关联](#12-三大维度关联)
     - [1.3 知识模块全景图](#13-知识模块全景图)
@@ -40,7 +40,7 @@
       - [主题 3: 生命周期](#主题-3-生命周期)
       - [主题 4: 形式化证明](#主题-4-形式化证明)
       - [主题 5: 设计模式](#主题-5-设计模式)
-  - [🛤️ 第三部分：递进学习路线图](#️-第三部分递进学习路线图)
+  - [🛤️ 第三部分：递进学习路线图](#第三部分递进学习路线图)
     - [3.1 路径总览](#31-路径总览)
     - [3.2 详细路径规划](#32-详细路径规划)
       - [路径 A: 快速入门 (4小时)](#路径-a-快速入门-4小时)
@@ -74,6 +74,7 @@
     - [8.1 文档更新日志](#81-文档更新日志)
     - [8.2 如何贡献](#82-如何贡献)
   - [🎉 结语](#-结语)
+<a id="总内容-570000-行"></a>
   - [**总内容**: ~570,000+ 行](#总内容-570000-行)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
@@ -321,12 +322,12 @@
 | 文档 | 主题 | 阅读时间 | 前置知识 |
 |:-----|:-----|:--------:|:---------|
 | [README.md](./README.md) | 项目总览 | 10分钟 | 无 |
-| [概念卡片/所有权](01-core-concepts/short-concepts/ownership-concept-card.md) | 所有权基础 | 15分钟 | 无 |
-| [概念卡片/借用](01-core-concepts/short-concepts/borrowing-concept-card.md) | 借用基础 | 15分钟 | 无 |
-| [概念卡片/生命周期](01-core-concepts/short-concepts/lifetime-concept-card.md) | 生命周期基础 | 15分钟 | 无 |
-| [交互式学习指南](./INTERACTIVE_LEARNING_GUIDE.md) | 问题驱动学习 | 2小时 | 基础概念 |
-| [10_quick_reference_card.md](QUICK_REFERENCE_CARD.md) | 速查卡片 | 20分钟 | 基础概念 |
-| [全面FAQ](./COMPREHENSIVE_FAQ.md) | 常见问题 | 1小时 | 基础概念 |
+| [概念卡片/所有权](../../../rust-ownership-decidability/01-core-concepts/short-concepts/ownership-concept-card.md) | 所有权基础 | 15分钟 | 无 |
+| [概念卡片/借用](../../../rust-ownership-decidability/01-core-concepts/short-concepts/borrowing-concept-card.md) | 借用基础 | 15分钟 | 无 |
+| [概念卡片/生命周期](../../../rust-ownership-decidability/01-core-concepts/short-concepts/lifetime-concept-card.md) | 生命周期基础 | 15分钟 | 无 |
+| [交互式学习指南](../../../rust-ownership-decidability/INTERACTIVE_LEARNING_GUIDE.md) | 问题驱动学习 | 2小时 | 基础概念 |
+| [10_quick_reference_card.md](../../../rust-ownership-decidability/QUICK_REFERENCE_CARD.md) | 速查卡片 | 20分钟 | 基础概念 |
+| [全面FAQ](../../../rust-ownership-decidability/COMPREHENSIVE_FAQ.md) | 常见问题 | 1小时 | 基础概念 |
 
 #### 🟡 进阶级 (有经验的开发者)
 
@@ -334,16 +335,16 @@
 
 | 文档 | 主题 | 阅读时间 | 前置知识 |
 |:-----|:-----|:--------:|:---------|
-| [所有权深入](01-core-concepts/detailed-concepts/ownership-deep-dive.md) | 所有权深入 | 1小时 | 基础所有权 |
-| [借用深入](01-core-concepts/detailed-concepts/borrowing-in-depth.md) | 借用深入 | 1小时 | 基础借用 |
-| [生命周期精通](01-core-concepts/detailed-concepts/lifetimes-mastery.md) | 生命周期深入 | 1.5小时 | 借用系统 |
-| [内部可变性](01-core-concepts/detailed-concepts/interior-mutability.md) | RefCell/Mutex | 1小时 | 借用系统 |
-| [理论到实践桥梁](./FOUNDATIONS_TO_PRACTICE_BRIDGE.md) | 理论基础 | 2小时 | 基础概念 |
-| [理论到模式桥梁](./THEORY_TO_PATTERN_BRIDGE.md) | 设计模式理论 | 2小时 | 基础模式 |
+| [所有权深入](../../../rust-ownership-decidability/01-core-concepts/detailed-concepts/ownership-deep-dive.md) | 所有权深入 | 1小时 | 基础所有权 |
+| [借用深入](../../../rust-ownership-decidability/01-core-concepts/detailed-concepts/borrowing-in-depth.md) | 借用深入 | 1小时 | 基础借用 |
+| [生命周期精通](../../../rust-ownership-decidability/01-core-concepts/detailed-concepts/lifetimes-mastery.md) | 生命周期深入 | 1.5小时 | 借用系统 |
+| [内部可变性](../../../rust-ownership-decidability/01-core-concepts/detailed-concepts/interior-mutability.md) | RefCell/Mutex | 1小时 | 借用系统 |
+| [理论到实践桥梁](../../../rust-ownership-decidability/FOUNDATIONS_TO_PRACTICE_BRIDGE.md) | 理论基础 | 2小时 | 基础概念 |
+| [理论到模式桥梁](../../../rust-ownership-decidability/THEORY_TO_PATTERN_BRIDGE.md) | 设计模式理论 | 2小时 | 基础模式 |
 | [设计模式](11-design-patterns/) | 23 GoF模式 | 8小时 | 基础Rust |
-| [并发模式](12-concurrency-patterns/README.md) | 并发模式 | 10小时 | 所有权基础 |
-| [高级实践工作坊](exercises/ADVANCED_OWNERSHIP_WORKSHOP.md) | 高级练习 | 8小时 | 进阶概念 |
-| [案例研究索引](case-studies/COMPLETE_DOMAIN_COVERAGE_INDEX.md) | 案例分析 | 持续 | 进阶知识 |
+| [并发模式](../../../rust-ownership-decidability/12-concurrency-patterns/README.md) | 并发模式 | 10小时 | 所有权基础 |
+| [高级实践工作坊](../../../rust-ownership-decidability/exercises/ADVANCED_OWNERSHIP_WORKSHOP.md) | 高级练习 | 8小时 | 进阶概念 |
+| [案例研究索引](../../../rust-ownership-decidability/case-studies/COMPLETE_DOMAIN_COVERAGE_INDEX.md) | 案例分析 | 持续 | 进阶知识 |
 
 #### 🔴 专家级 (研究者/形式化方法)
 
@@ -351,16 +352,16 @@
 
 | 文档 | 主题 | 阅读时间 | 前置知识 |
 |:-----|:-----|:--------:|:---------|
-| [统一理论框架](./UNIFIED_THEORETICAL_FRAMEWORK.md) | 理论框架 | 8小时 | 数学基础 |
-| [定理依赖网络](./THEOREM_DEPENDENCY_GRAPH.md) | 定理依赖 | 3小时 | 形式化基础 |
-| [横向关联论证](./HORIZONTAL_CONNECTIONS.md) | 概念关联 | 4小时 | 理论基础 |
-| [内容关联分析](./CONTENT_ASSOCIATION_ANALYSIS.md) | 关联分析 | 3小时 | 全局了解 |
-| [定理到编译器桥梁](./THEOREM_TO_COMPILER_BRIDGE.md) | 编译器理论 | 2小时 | 形式化基础 |
+| [统一理论框架](../../../rust-ownership-decidability/UNIFIED_THEORETICAL_FRAMEWORK.md) | 理论框架 | 8小时 | 数学基础 |
+| [定理依赖网络](../../../rust-ownership-decidability/THEOREM_DEPENDENCY_GRAPH.md) | 定理依赖 | 3小时 | 形式化基础 |
+| [横向关联论证](../../../rust-ownership-decidability/HORIZONTAL_CONNECTIONS.md) | 概念关联 | 4小时 | 理论基础 |
+| [内容关联分析](../../../rust-ownership-decidability/CONTENT_ASSOCIATION_ANALYSIS.md) | 关联分析 | 3小时 | 全局了解 |
+| [定理到编译器桥梁](../../../rust-ownership-decidability/THEOREM_TO_COMPILER_BRIDGE.md) | 编译器理论 | 2小时 | 形式化基础 |
 | [Coq形式化](coq-formalization/README.md) | Coq证明 | 持续 | 形式化方法 |
-| [元模型](meta-model/RUST_194_COMPREHENSIVE_GUIDE.md) | 元模型定义 | 6小时 | 类型论 |
-| [线性逻辑深入](00-foundations/00-01-linear-logic-deep.md) | 线性逻辑 | 4小时 | 逻辑学 |
-| [分离逻辑深入](00-foundations/00-03-separation-logic-deep.md) | 分离逻辑 | 4小时 | 逻辑学 |
-| [研究前沿](10-research-frontiers/README.md) | 未来方向 | 持续 | 专家级 |
+| [元模型](../../../rust-ownership-decidability/meta-model/RUST_194_COMPREHENSIVE_GUIDE.md) | 元模型定义 | 6小时 | 类型论 |
+| [线性逻辑深入](../../../rust-ownership-decidability/00-foundations/00-01-linear-logic-deep.md) | 线性逻辑 | 4小时 | 逻辑学 |
+| [分离逻辑深入](../../../rust-ownership-decidability/00-foundations/00-03-separation-logic-deep.md) | 分离逻辑 | 4小时 | 逻辑学 |
+| [研究前沿](../../../rust-ownership-decidability/10-research-frontiers/README.md) | 未来方向 | 持续 | 专家级 |
 
 ### 2.2 按主题分类
 
@@ -982,9 +983,9 @@ Week 7-8: 元理论证明
 
 **开始学习**:
 
-1. 初学者: [概念卡片](01-core-concepts/short-concepts/ownership-concept-card.md)
-2. 进阶: [理论到实践桥梁](./FOUNDATIONS_TO_PRACTICE_BRIDGE.md)
-3. 专家: [统一理论框架](./UNIFIED_THEORETICAL_FRAMEWORK.md)
+1. 初学者: [概念卡片](../../../rust-ownership-decidability/01-core-concepts/short-concepts/ownership-concept-card.md)
+2. 进阶: [理论到实践桥梁](../../../rust-ownership-decidability/FOUNDATIONS_TO_PRACTICE_BRIDGE.md)
+3. 专家: [统一理论框架](../../../rust-ownership-decidability/UNIFIED_THEORETICAL_FRAMEWORK.md)
 
 ---
 

@@ -49,6 +49,7 @@
     - [演讲和会议](#演讲和会议)
     - [学术论文](#学术论文)
     - [相关项目](#相关项目)
+<a id="维护者-rust-所有权可判定性研究项目"></a>
   - [**维护者**: Rust 所有权可判定性研究项目](#维护者-rust-所有权可判定性研究项目)
   - [权威来源索引](#权威来源索引)
 
@@ -651,7 +652,7 @@ RUSTFLAGS="-Zpolonius" cargo +nightly check  # Polonius 检查
 
 ---
 
-- [Parent README](../README.md)
+- Parent README
 
 ---
 

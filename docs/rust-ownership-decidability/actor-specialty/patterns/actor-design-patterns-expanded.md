@@ -49,6 +49,7 @@
     - [8.2 定理 SAGA-CONSISTENCY](#82-定理-saga-consistency)
   - [模式组合建议](#模式组合建议)
     - [8.1 常用组合](#81-常用组合)
+<a id="覆盖模式-8个核心模式--形式化定义"></a>
   - [**覆盖模式**: 8个核心模式 + 形式化定义](#覆盖模式-8个核心模式--形式化定义)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
@@ -599,7 +600,7 @@ Step = {
 
 ---
 
-- [Parent README](../README.md)
+- Parent README
 
 ---
 
@@ -607,7 +608,7 @@ Step = {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [上级目录](../README.md)
+- 上级目录
 
 ---
 

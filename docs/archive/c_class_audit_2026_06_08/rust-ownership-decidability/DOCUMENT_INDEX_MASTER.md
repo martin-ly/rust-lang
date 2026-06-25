@@ -63,7 +63,7 @@
 |:-----|:-----|:------:|
 | [README.md](./README.md) | 项目总览 | ⭐⭐⭐ |
 | [ULTIMATE_COMPREHENSIVE_GUIDE.md](./ULTIMATE_COMPREHENSIVE_GUIDE.md) | 终极综合指南 | ⭐⭐⭐ |
-| [10_quick_reference_card.md](QUICK_REFERENCE_CARD.md) | 速查卡片 | ⭐⭐⭐ |
+| [10_quick_reference_card.md](../../../rust-ownership-decidability/QUICK_REFERENCE_CARD.md) | 速查卡片 | ⭐⭐⭐ |
 | [10_final_100_percent_completion_certification.md](FINAL_100_PERCENT_COMPLETION_CERTIFICATION.md) | 完成认证 | ⭐⭐⭐ |
 
 ### 二级索引 (综合文档)
@@ -72,11 +72,11 @@
 
 | 文档 | 作用 |
 |:-----|:-----|
-| [COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md](./COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md) | 知识梳理 |
+| [COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md](../../../rust-ownership-decidability/COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md) | 知识梳理 |
 | [FINAL_EXECUTIVE_SUMMARY_V2.md](./FINAL_EXECUTIVE_SUMMARY_V2.md) | 执行摘要 |
-| [COMPLETE_KNOWLEDGE_MATRIX.md](./COMPLETE_KNOWLEDGE_MATRIX.md) | 知识矩阵 |
+| [COMPLETE_KNOWLEDGE_MATRIX.md](../../../rust-ownership-decidability/COMPLETE_KNOWLEDGE_MATRIX.md) | 知识矩阵 |
 | [LEARNING_ROADMAP_DETAILED.md](./LEARNING_ROADMAP_DETAILED.md) | 学习路线图 |
-| [CONTENT_ASSOCIATION_ANALYSIS.md](./CONTENT_ASSOCIATION_ANALYSIS.md) | 关联分析 |
+| [CONTENT_ASSOCIATION_ANALYSIS.md](../../../rust-ownership-decidability/CONTENT_ASSOCIATION_ANALYSIS.md) | 关联分析 |
 
 ### 三级索引 (桥梁文档 - 关键创新)
 >
@@ -84,10 +84,10 @@
 
 | 文档 | 作用 |
 |:-----|:-----|
-| [FOUNDATIONS_TO_PRACTICE_BRIDGE.md](./FOUNDATIONS_TO_PRACTICE_BRIDGE.md) | 理论→实践 |
-| [THEOREM_TO_COMPILER_BRIDGE.md](./THEOREM_TO_COMPILER_BRIDGE.md) | 定理→编译器 |
-| [THEORY_TO_PATTERN_BRIDGE.md](./THEORY_TO_PATTERN_BRIDGE.md) | 理论→模式 |
-| [HORIZONTAL_CONNECTIONS.md](./HORIZONTAL_CONNECTIONS.md) | 横向关联 |
+| [FOUNDATIONS_TO_PRACTICE_BRIDGE.md](../../../rust-ownership-decidability/FOUNDATIONS_TO_PRACTICE_BRIDGE.md) | 理论→实践 |
+| [THEOREM_TO_COMPILER_BRIDGE.md](../../../rust-ownership-decidability/THEOREM_TO_COMPILER_BRIDGE.md) | 定理→编译器 |
+| [THEORY_TO_PATTERN_BRIDGE.md](../../../rust-ownership-decidability/THEORY_TO_PATTERN_BRIDGE.md) | 理论→模式 |
+| [HORIZONTAL_CONNECTIONS.md](../../../rust-ownership-decidability/HORIZONTAL_CONNECTIONS.md) | 横向关联 |
 
 ---
 

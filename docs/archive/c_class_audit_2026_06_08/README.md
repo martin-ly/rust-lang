@@ -21,10 +21,10 @@
 | 文档 | 描述 | 推荐人群 |
 |------|------|---------|
 | [10_00_master_index.md](./00_master_index.md) | 文档总索引 | 所有人 |
-| [10_2026_rust_ecosystem_comprehensive_review_with_citations.md](./10_2026_rust_ecosystem_comprehensive_review_with_citations.md) | **2026生态梳理（权威引用版）** | 所有开发者 |
-| [10_authoritative_sources_and_citations.md](./10_authoritative_sources_and_citations.md) | 学术论文引用汇总 | 研究人员 |
-| [10_migration_guide_2026.md](./10_migration_guide_2026.md) | 2026迁移指南 | 升级用户 |
-| [10_terminology_standard.md](./10_terminology_standard.md) | 术语标准 | 所有人 |
+| [10_2026_rust_ecosystem_comprehensive_review_with_citations.md](../../10_2026_rust_ecosystem_comprehensive_review_with_citations.md) | **2026生态梳理（权威引用版）** | 所有开发者 |
+| [10_authoritative_sources_and_citations.md](../../10_authoritative_sources_and_citations.md) | 学术论文引用汇总 | 研究人员 |
+| [10_migration_guide_2026.md](../../10_migration_guide_2026.md) | 2026迁移指南 | 升级用户 |
+| [10_terminology_standard.md](../../10_terminology_standard.md) | 术语标准 | 所有人 |
 
 ### 学习文档
 >
@@ -35,22 +35,22 @@
 | 学习路径指南 | 学习路线规划 | [01_learning/](01_learning/) |
 | 跨模块导航 | 模块间导航 | [01_learning/](01_learning/) |
 | 跨模块学习路线图 | 详细学习路线 | [01_learning/](01_learning/) |
-| 跨模块实战项目 | 实践项目指南 | [03_practice/](03_practice/) |
+| 跨模块实战项目 | 实践项目指南 | [03_practice/](../../03_practice) |
 
 ### 前沿特性文档 (Rust 1.95–1.96+)
 
 | 文档 | 描述 | 版本 |
 |------|------|------|
-| Miri 实战指南 | UB 检测与内存安全验证 | [05_guides/05_miri_practical_guide.md](05_guides/05_miri_practical_guide.md) |
-| Cranelift 后端指南 | 快速调试编译后端 | [06_toolchain/06_cranelift_backend_guide.md](06_toolchain/06_cranelift_backend_guide.md) |
-| TOML v1.1 Cargo 指南 | Cargo.toml 新语法 | [06_toolchain/06_toml_v11_cargo_guide.md](06_toolchain/06_toml_v11_cargo_guide.md) |
-| Polonius 下一代 Borrow Checker | 基于 Datalog 的生命周期推断 | [04_research/04_polonius_next_gen_borrow_checker.md](04_research/04_polonius_next_gen_borrow_checker.md) |
-| VerusBelt (PLDI 2026) | 形式化验证语义基础 | [04_research/04_verusbelt_pldi_2026.md](04_research/04_verusbelt_pldi_2026.md) |
-| Unsafe Fields 预览 | 更细粒度的 unsafe 声明 | [05_guides/05_unsafe_fields_preview.md](05_guides/05_unsafe_fields_preview.md) |
-| 下一代 Trait Solver | 基于逻辑编程的类型推断 | [04_research/04_next_generation_trait_solver.md](04_research/04_next_generation_trait_solver.md) |
-| C++ ↔ Rust 互操作评估 | `cxx`/`bindgen` 安全 FFI 实践 | [05_guides/05_cxx_rust_interop_evaluation.md](05_guides/05_cxx_rust_interop_evaluation.md) |
-| Rust for Linux 工具链 | 内核模块开发与工具链 | [06_toolchain/06_rust_for_linux_tooling_guide.md](06_toolchain/06_rust_for_linux_tooling_guide.md) |
-| Endangered by Language (POPL 2026) | 编译器如何"拯救"危险语言模式 | [04_research/04_endangered_by_language_saved_by_compiler_popl_2026.md](04_research/04_endangered_by_language_saved_by_compiler_popl_2026.md) |
+| Miri 实战指南 | UB 检测与内存安全验证 | [05_guides/05_miri_practical_guide.md](../../05_guides/05_miri_practical_guide.md) |
+| Cranelift 后端指南 | 快速调试编译后端 | [06_toolchain/06_cranelift_backend_guide.md](../../06_toolchain/06_cranelift_backend_guide.md) |
+| TOML v1.1 Cargo 指南 | Cargo.toml 新语法 | [06_toolchain/06_toml_v11_cargo_guide.md](../../06_toolchain/06_toml_v11_cargo_guide.md) |
+| Polonius 下一代 Borrow Checker | 基于 Datalog 的生命周期推断 | [04_research/04_polonius_next_gen_borrow_checker.md](../../04_research/04_polonius_next_gen_borrow_checker.md) |
+| VerusBelt (PLDI 2026) | 形式化验证语义基础 | [04_research/04_verusbelt_pldi_2026.md](../../04_research/04_verusbelt_pldi_2026.md) |
+| Unsafe Fields 预览 | 更细粒度的 unsafe 声明 | [05_guides/05_unsafe_fields_preview.md](../../05_guides/05_unsafe_fields_preview.md) |
+| 下一代 Trait Solver | 基于逻辑编程的类型推断 | [04_research/04_next_generation_trait_solver.md](../../04_research/04_next_generation_trait_solver.md) |
+| C++ ↔ Rust 互操作评估 | `cxx`/`bindgen` 安全 FFI 实践 | [05_guides/05_cxx_rust_interop_evaluation.md](../../05_guides/05_cxx_rust_interop_evaluation.md) |
+| Rust for Linux 工具链 | 内核模块开发与工具链 | 06_toolchain/06_rust_for_linux_tooling_guide.md |
+| Endangered by Language (POPL 2026) | 编译器如何"拯救"危险语言模式 | [04_research/04_endangered_by_language_saved_by_compiler_popl_2026.md](../../04_research/04_endangered_by_language_saved_by_compiler_popl_2026.md) |
 
 ### 子目录分类
 
@@ -58,7 +58,7 @@
 |------|---------|--------|
 | [01_learning/](01_learning/) | 学习规划 | 10 |
 | [02_reference/](02_reference/) | 参考资料 | 38 |
-| [03_practice/](03_practice/) | 实践练习 | 17 |
+| [03_practice/](../../03_practice) | 实践练习 | 17 |
 | [04_thinking/](04_thinking/) | 思维方法 | 7 |
 | [05_guides/](05_guides/) | 使用指南 | 36 |
 | [06_toolchain/](06_toolchain/) | 工具链 | 17 |
@@ -73,21 +73,21 @@
 ```
 1. [项目README](../README.md)
    ↓
-2. [10_2026_rust_ecosystem_comprehensive_review_with_citations.md](./10_2026_rust_ecosystem_comprehensive_review_with_citations.md)
+2. [10_2026_rust_ecosystem_comprehensive_review_with_citations.md](../../10_2026_rust_ecosystem_comprehensive_review_with_citations.md)
    ↓
-3. [01_learning/01_learning_path_guide_2025_10_24.md](01_learning/01_learning_path_guide_2025_10_24.md)
+3. [01_learning/01_learning_path_guide_2025_10_24.md](../../01_learning/01_learning_path_guide_2025_10_24.md)
    ↓
-4. [10_migration_guide_2026.md](./10_migration_guide_2026.md)
+4. [10_migration_guide_2026.md](../../10_migration_guide_2026.md)
 ```
 
 ### 研究人员路径
 
 ```
-1. [10_2026_rust_ecosystem_comprehensive_review_with_citations.md](./10_2026_rust_ecosystem_comprehensive_review_with_citations.md)
+1. [10_2026_rust_ecosystem_comprehensive_review_with_citations.md](../../10_2026_rust_ecosystem_comprehensive_review_with_citations.md)
    ↓
-2. [10_authoritative_sources_and_citations.md](./10_authoritative_sources_and_citations.md)
+2. [10_authoritative_sources_and_citations.md](../../10_authoritative_sources_and_citations.md)
    ↓
-3. [04_thinking/](04_thinking/) 和 [research_notes/](research_notes/)
+3. [04_thinking/](04_thinking/) 和 [research_notes/](../../research_notes)
 ```
 
 ---
@@ -136,7 +136,7 @@ docs/
 - Rust Edition Guide
 - Miri官方文档
 
-详见 [10_authoritative_sources_and_citations.md](./10_authoritative_sources_and_citations.md)
+详见 [10_authoritative_sources_and_citations.md](../../10_authoritative_sources_and_citations.md)
 
 ---
 

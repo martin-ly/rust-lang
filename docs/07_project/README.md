@@ -12,4 +12,4 @@
 
 ## 说明
 
-这些文档主要服务于项目维护者，记录各模块的完成度和对齐状态。普通学习者建议优先阅读 [concept/](/concept/) 和 [knowledge/](/knowledge/) 目录。
+这些文档主要服务于项目维护者，记录各模块的完成度和对齐状态。普通学习者建议优先阅读 [concept/](../../concept) 和 [knowledge/](../../knowledge) 目录。

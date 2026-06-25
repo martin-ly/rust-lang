@@ -31,8 +31,8 @@
 
 ## 相关文档
 
-- [学习路径规划](../01_learning_path_planning.md)
-- [MDBook 测验指南](../01_mdbook_quiz_guide.md)
+- [学习路径规划](../../../../01_learning/01_learning_path_planning.md)
+- [MDBook 测验指南](../../../../01_learning/01_mdbook_quiz_guide.md)
 
 ---
 
@@ -66,7 +66,7 @@
 
 - Rust 1.95+ 迁移指南
 - [Rust 1.94 特性速查（已归档）
-- [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
+- [性能调优指南](../../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

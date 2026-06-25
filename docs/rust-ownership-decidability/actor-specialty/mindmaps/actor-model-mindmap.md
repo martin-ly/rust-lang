@@ -16,6 +16,7 @@
   - [监督树结构图](#监督树结构图)
   - [Actor与其他模型关系](#actor与其他模型关系)
   - [分布式Actor架构](#分布式actor架构)
+<a id="更新日期-2026-03-05"></a>
   - [**更新日期**: 2026-03-05](#更新日期-2026-03-05)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
@@ -270,7 +271,7 @@ mindmap
 
 ---
 
-- [Parent README](../README.md)
+- Parent README
 
 ---
 
@@ -278,7 +279,7 @@ mindmap
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [上级目录](../README.md)
+- 上级目录
 
 ---
 

@@ -28,16 +28,16 @@
 
 | # | 文档 | 工具/主题 | 验证类型 |
 |:---:|:---|:---|:---|
-| 03-01 | [验证概述](./03-01-verification-overview.md) | 工具全景 | 综述 |
-| 03-02 | [Creusot深度分析](./03-02-creusot-deep-dive.md) | Creusot | 定理证明 |
-| 03-03 | [Miri深度解析](./03-03-miri-deep-dive.md) | Miri | 运行时检查 |
+| 03-01 | [验证概述](../../../../rust-ownership-decidability/03-verification-tools/03-01-verification-overview.md) | 工具全景 | 综述 |
+| 03-02 | [Creusot深度分析](../../../../rust-ownership-decidability/03-verification-tools/03-02-creusot-deep-dive.md) | Creusot | 定理证明 |
+| 03-03 | [Miri深度解析](../../../../rust-ownership-decidability/03-verification-tools/03-03-miri-deep-dive.md) | Miri | 运行时检查 |
 | 03-04 | Kani指南
 
 > 📝 待补充 | Kani | 模型检测 |
 | 03-05 | Prusti指南
 
 > 📝 待补充 | Prusti | 合约验证 |
-| 03-06 | [Verus指南](./03-06-verus-guide.md) | Verus | 系统代码验证 |
+| 03-06 | [Verus指南](../../../../rust-ownership-decidability/03-verification-tools/03-06-verus-guide.md) | Verus | 系统代码验证 |
 
 ---
 
@@ -68,7 +68,7 @@
 | Prusti | ⚠️ 维护模式 |
 | Verus | ✅ 推荐用于新项目 |
 
-> **注意**: 有关 Rust 1.94 的详细兼容性信息，请参阅 [验证概述](03-01-verification-overview.md)
+> **注意**: 有关 Rust 1.94 的详细兼容性信息，请参阅 [验证概述](../../../../rust-ownership-decidability/03-verification-tools/03-01-verification-overview.md)
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

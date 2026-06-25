@@ -304,9 +304,9 @@ Google 课程 Day 4 相对简洁，本项目在以下方面有显著扩展：
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [01_lfrs_certification_mapping.md](./01_lfrs_certification_mapping.md) - LFRS 认证映射
-- [05_pragmatic_guidelines_checklist.md](../05_guides/05_pragmatic_guidelines_checklist.md) - 代码审查清单
-- [exercises/README.md](../../exercises/README.md) - 练习题总入口
+- [01_lfrs_certification_mapping.md](../../../01_learning/01_lfrs_certification_mapping.md) - LFRS 认证映射
+- [05_pragmatic_guidelines_checklist.md](../../../05_guides/05_pragmatic_guidelines_checklist.md) - 代码审查清单
+- [exercises/README.md](../../../../exercises/README.md) - 练习题总入口
 
 ---
 

@@ -18,9 +18,9 @@
 
 | 模式 | 文件 | 描述 | 难度 |
 |-----|------|------|------|
-| **RAII Guard** | [raii-guard.md](./raii-guard.md) | 资源自动管理 | 🟢 |
-| **Newtype** | [newtype.md](./newtype.md) | 类型包装 | 🟢 |
-| **Type State** | [../11-03-type-state-pattern.md](../11-03-type-state-pattern.md) | 编译时状态机 | 🟡 |
+| **RAII Guard** | [raii-guard.md](../../../../../rust-ownership-decidability/11-design-patterns/rust-specific/raii-guard.md) | 资源自动管理 | 🟢 |
+| **Newtype** | [newtype.md](../../../../../rust-ownership-decidability/11-design-patterns/rust-specific/newtype.md) | 类型包装 | 🟢 |
+| **Type State** | [../11-03-type-state-pattern.md](../../../../../rust-ownership-decidability/11-design-patterns/11-03-type-state-pattern.md) | 编译时状态机 | 🟡 |
 
 ---
 

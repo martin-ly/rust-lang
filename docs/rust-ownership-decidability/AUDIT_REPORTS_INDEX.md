@@ -56,9 +56,9 @@
 | 文件 | 描述 | 优先级 |
 |-----|------|-------|
 | [PROJECT_COMPREHENSIVE_AUDIT_REPORT.md](./PROJECT_COMPREHENSIVE_AUDIT_REPORT.md) | 全面审计报告 | 必读 |
-| [COMPLETION_ROADMAP_2026_Q1.md](./COMPLETION_ROADMAP_2026_Q1.md) | 完成路线图 | 必读 |
+| [COMPLETION_ROADMAP_2026_Q1.md](../archive/c_class_audit_2026_06_08/rust-ownership-decidability/COMPLETION_ROADMAP_2026_Q1.md) | 完成路线图 | 必读 |
 | [EXECUTIVE_SUMMARY_AND_RECOMMENDATIONS.md](./EXECUTIVE_SUMMARY_AND_RECOMMENDATIONS.md) | 执行摘要与建议 | 必读 |
-| [AUTHORITY_ALIGNMENT_GAP_ANALYSIS.md](./AUTHORITY_ALIGNMENT_GAP_ANALYSIS.md) | 权威资源差距分析 | 必读 |
+| [AUTHORITY_ALIGNMENT_GAP_ANALYSIS.md](../archive/c_class_audit_2026_06_08/rust-ownership-decidability/AUTHORITY_ALIGNMENT_GAP_ANALYSIS.md) | 权威资源差距分析 | 必读 |
 
 ### 标准与模板
 >
@@ -74,7 +74,7 @@
 
 | 文件 | 描述 | 状态 |
 |-----|------|------|
-| [progress/2026-03-07_DESIGN_PATTERNS_COMPLETION_REPORT.md](progress/2026-03-07_DESIGN_PATTERNS_COMPLETION_REPORT.md) | 设计模式完成报告 | ✅ 已完成 |
+| [progress/2026-03-07_DESIGN_PATTERNS_COMPLETION_REPORT.md](../archive/c_class_audit_2026_06_08/rust-ownership-decidability/progress/2026-03-07_DESIGN_PATTERNS_COMPLETION_REPORT.md) | 设计模式完成报告 | ✅ 已完成 |
 
 ---
 
@@ -167,21 +167,21 @@
 ### 如果你是项目维护者
 
 1. **首先阅读**: [EXECUTIVE_SUMMARY_AND_RECOMMENDATIONS.md](./EXECUTIVE_SUMMARY_AND_RECOMMENDATIONS.md)
-2. **制定计划**: 参考 [COMPLETION_ROADMAP_2026_Q1.md](./COMPLETION_ROADMAP_2026_Q1.md)
+2. **制定计划**: 参考 [COMPLETION_ROADMAP_2026_Q1.md](../archive/c_class_audit_2026_06_08/rust-ownership-decidability/COMPLETION_ROADMAP_2026_Q1.md)
 3. **质量把控**: 使用 [CONTENT_TEMPLATE_L2.md](./CONTENT_TEMPLATE_L2.md)
-4. **跟踪差距**: 参考 [AUTHORITY_ALIGNMENT_GAP_ANALYSIS.md](./AUTHORITY_ALIGNMENT_GAP_ANALYSIS.md)
+4. **跟踪差距**: 参考 [AUTHORITY_ALIGNMENT_GAP_ANALYSIS.md](../archive/c_class_audit_2026_06_08/rust-ownership-decidability/AUTHORITY_ALIGNMENT_GAP_ANALYSIS.md)
 
 ### 如果你是内容贡献者
 
 1. **阅读模板**: [CONTENT_TEMPLATE_L2.md](./CONTENT_TEMPLATE_L2.md)
-2. **选择任务**: 从 [COMPLETION_ROADMAP_2026_Q1.md](./COMPLETION_ROADMAP_2026_Q1.md) 选择
+2. **选择任务**: 从 [COMPLETION_ROADMAP_2026_Q1.md](../archive/c_class_audit_2026_06_08/rust-ownership-decidability/COMPLETION_ROADMAP_2026_Q1.md) 选择
 3. **遵循标准**: 确保内容达到 L2 深度
 4. **提交审核**: 通过 PR 流程
 
 ### 如果你是读者/用户
 
 1. **了解现状**: 阅读 [PROJECT_COMPREHENSIVE_AUDIT_REPORT.md](./PROJECT_COMPREHENSIVE_AUDIT_REPORT.md)
-2. **关注进展**: 查看 [progress/](progress/README.md) 目录
+2. **关注进展**: 查看 progress/ 目录
 3. **提供反馈**: 提交 Issue 建议改进
 
 ---
@@ -222,7 +222,7 @@
 
 ### 优先级任务
 
-查看 [COMPLETION_ROADMAP_2026_Q1.md](./COMPLETION_ROADMAP_2026_Q1.md) 中的任务列表，优先选择 🔴 P0 级别任务。
+查看 [COMPLETION_ROADMAP_2026_Q1.md](../archive/c_class_audit_2026_06_08/rust-ownership-decidability/COMPLETION_ROADMAP_2026_Q1.md) 中的任务列表，优先选择 🔴 P0 级别任务。
 
 ---
 

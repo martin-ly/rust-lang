@@ -142,7 +142,7 @@ make clean
 ## 相关概念
 
 - [所有权可判定性总览](../README.md)
-- [形式化基础](../formal-foundations/README.md)
+- [形式化基础](../../../../rust-ownership-decidability/formal-foundations/README.md)
 
 ---
 

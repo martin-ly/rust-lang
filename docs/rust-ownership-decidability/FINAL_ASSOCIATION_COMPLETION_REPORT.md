@@ -372,7 +372,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md](./COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md) - 知识梳理
-- [10_final_100_percent_completion_certification.md](FINAL_100_PERCENT_COMPLETION_CERTIFICATION.md) - 完成认证
+- [10_final_100_percent_completion_certification.md](../archive/c_class_audit_2026_06_08/rust-ownership-decidability/FINAL_100_PERCENT_COMPLETION_CERTIFICATION.md) - 完成认证
 
 ---
 

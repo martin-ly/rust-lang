@@ -40,6 +40,7 @@
   - [7. coerce框架分布式特性](#7-coerce框架分布式特性)
     - [7.1 集群架构](#71-集群架构)
     - [7.2 分片配置](#72-分片配置)
+<a id="覆盖-cap定理一致性模型分布式协议sagacrdt"></a>
   - [**覆盖**: CAP定理、一致性模型、分布式协议、Saga、CRDT](#覆盖-cap定理一致性模型分布式协议sagacrdt)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
@@ -610,7 +611,7 @@ async fn handle_user_command(cmd: UserCmd, cluster: &Cluster) {
 
 ---
 
-- [Parent README](../README.md)
+- Parent README
 
 ---
 
@@ -618,7 +619,7 @@ async fn handle_user_command(cmd: UserCmd, cluster: &Cluster) {
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [上级目录](../README.md)
+- 上级目录
 
 ---
 

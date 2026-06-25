@@ -59,9 +59,9 @@
 
 ## 相关概念
 
-- [内容质量审计](./CONTENT_QUALITY_AUDIT.md)
-- [完整分析报告](./FINAL_COMPLETE_ANALYSIS_REPORT.md)
-- [完成报告 V3](./FINAL_COMPLETION_REPORT_V3.md)
+- [内容质量审计](../../../../rust-ownership-decidability/audit_reports/CONTENT_QUALITY_AUDIT.md)
+- [完整分析报告](../../../../rust-ownership-decidability/audit_reports/FINAL_COMPLETE_ANALYSIS_REPORT.md)
+- [完成报告 V3](../../../../rust-ownership-decidability/audit_reports/FINAL_COMPLETION_REPORT_V3.md)
 - [所有权可判定性总览](../README.md)
 
 ---

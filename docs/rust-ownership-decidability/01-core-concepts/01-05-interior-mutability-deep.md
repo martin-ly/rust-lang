@@ -16,15 +16,19 @@
     - [1.2 Interior Mutability: The Solution Pattern](#12-interior-mutability-the-solution-pattern)
     - [1.3 The Interior Mutability Spectrum](#13-the-interior-mutability-spectrum)
     - [1.4 Safety Through Runtime Checks](#14-safety-through-runtime-checks)
+<a id="refcell-borrow-checking-at-runtime"></a>
       - [RefCell: Borrow Checking at Runtime](#refcell-borrow-checking-at-runtime)
+<a id="mutex-synchronization-for-thread-safety"></a>
       - [Mutex: Synchronization for Thread Safety](#mutex-synchronization-for-thread-safety)
       - [AtomicUsize: Hardware Atomic Operations](#atomicusize-hardware-atomic-operations)
+<a id="2-cell-analysis"></a>
   - [2. Cell Analysis](#2-cell-analysis)
     - [2.1 Cell Semantics](#21-cell-semantics)
     - [2.2 The Copy Constraint](#22-the-copy-constraint)
     - [2.3 Cell Implementation Deep Dive](#23-cell-implementation-deep-dive)
     - [2.4 When to Use Cell](#24-when-to-use-cell)
     - [2.5 Cell Limitations](#25-cell-limitations)
+<a id="3-refcell-deep-dive"></a>
   - [3. RefCell Deep Dive](#3-refcell-deep-dive)
     - [3.1 RefCell Overview](#31-refcell-overview)
     - [3.2 Borrow State Machine](#32-borrow-state-machine)
@@ -32,11 +36,12 @@
     - [3.4 Panic Conditions](#34-panic-conditions)
     - [3.5 RefCell Memory Layout](#35-refcell-memory-layout)
     - [3.6 RefCell Best Practices](#36-refcell-best-practices)
+<a id="4-mutex-and-rwlock"></a>
   - [4. Mutex and RwLock](#4-mutex-and-rwlock)
     - [4.1 Mutex Semantics](#41-mutex-semantics)
     - [4.2 Mutex Implementation Concepts](#42-mutex-implementation-concepts)
     - [4.3 Poisoning](#43-poisoning)
-    - [4.4 RwLock](#44-rwlock)
+    - [4.4 RwLock](#44-rwlockt)
     - [4.5 Deadlock Potential](#45-deadlock-potential)
     - [4.6 Double Lock in Same Thread](#46-double-lock-in-same-thread)
   - [5. Atomic Types](#5-atomic-types)

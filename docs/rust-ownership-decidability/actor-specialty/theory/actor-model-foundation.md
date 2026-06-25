@@ -38,6 +38,7 @@
     - [6.1 Typed Actors](#61-typed-actors)
     - [6.2 流式Actor](#62-流式actor)
     - [6.3 函数式Actor](#63-函数式actor)
+<a id="状态--理论基础完成"></a>
   - [**状态**: ✅ 理论基础完成](#状态--理论基础完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
@@ -536,7 +537,7 @@ fn counter_actor() -> impl Actor<CounterMsg> {
 
 ---
 
-- [Parent README](../README.md)
+- Parent README
 
 ---
 
@@ -544,7 +545,7 @@ fn counter_actor() -> impl Actor<CounterMsg> {
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [上级目录](../README.md)
+- 上级目录
 
 ---
 

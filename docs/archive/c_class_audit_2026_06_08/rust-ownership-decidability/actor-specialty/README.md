@@ -67,23 +67,23 @@
 
 | 文档 | 行数 | 核心内容 | 难度 |
 |:---|:---:|:---|:---:|
-| **[ACTOR_MODEL_DEEP_DIVE.md](./ACTOR_MODEL_DEEP_DIVE.md)** | 1400+ | **Actor模型深度解析：形式语义、证明、反例** | 🔴 高级 |
+| **[ACTOR_MODEL_DEEP_DIVE.md](../../../../rust-ownership-decidability/actor-specialty/ACTOR_MODEL_DEEP_DIVE.md)** | 1400+ | **Actor模型深度解析：形式语义、证明、反例** | 🔴 高级 |
 
 ### 理论基础
 
 | 文档 | 行数 | 核心内容 |
 |:---|:---:|:---|
-| [theory/actor-model-foundation.md](theory/actor-model-foundation.md) | 439 | Hewitt理论、形式化语义 |
-| [formal-proofs/actor-safety-theorems.md](formal-proofs/actor-safety-theorems.md) | 387 | 11个定理完整证明 |
+| [theory/actor-model-foundation.md](../../../../rust-ownership-decidability/actor-specialty/theory/actor-model-foundation.md) | 439 | Hewitt理论、形式化语义 |
+| [formal-proofs/actor-safety-theorems.md](../../../../rust-ownership-decidability/actor-specialty/formal-proofs/actor-safety-theorems.md) | 387 | 11个定理完整证明 |
 
 ### 可视化资源
 
 | 类型 | 文档 | 内容 |
 |:---|:---|:---|
-| 思维导图 | [mindmaps/actor-model-mindmap.md](mindmaps/actor-model-mindmap.md) | Actor模型全景图 |
-| 对比矩阵 | [matrices/actor-framework-matrix.md](matrices/actor-framework-matrix.md) | 6大框架对比 |
-| 决策树 | [decision-trees/actor-framework-selection.md](decision-trees/actor-framework-selection.md) | 框架选择指南 |
-| 场景树 | [scenario-trees/actor-application-domains.md](scenario-trees/actor-application-domains.md) | 6大应用领域 |
+| 思维导图 | [mindmaps/actor-model-mindmap.md](../../../../rust-ownership-decidability/actor-specialty/mindmaps/actor-model-mindmap.md) | Actor模型全景图 |
+| 对比矩阵 | [matrices/actor-framework-matrix.md](../../../../rust-ownership-decidability/actor-specialty/matrices/actor-framework-matrix.md) | 6大框架对比 |
+| 决策树 | [decision-trees/actor-framework-selection.md](../../../../rust-ownership-decidability/actor-specialty/decision-trees/actor-framework-selection.md) | 框架选择指南 |
+| 场景树 | [scenario-trees/actor-application-domains.md](../../../../rust-ownership-decidability/actor-specialty/scenario-trees/actor-application-domains.md) | 6大应用领域 |
 
 ### Rust实现
 
@@ -95,16 +95,16 @@
 
 | 文档 | 行数 | 模式数量 |
 |:---|:---:|:---:|
-| [patterns/actor-design-patterns.md](patterns/actor-design-patterns.md) | 398 | 15+模式 |
-| [patterns/actor-design-patterns-expanded.md](patterns/actor-design-patterns-expanded.md) | 498 | 形式化定义+定理 |
+| [patterns/actor-design-patterns.md](../../../../rust-ownership-decidability/actor-specialty/patterns/actor-design-patterns.md) | 398 | 15+模式 |
+| [patterns/actor-design-patterns-expanded.md](../../../../rust-ownership-decidability/actor-specialty/patterns/actor-design-patterns-expanded.md) | 498 | 形式化定义+定理 |
 
 ### 案例研究
 
 | 文档 | 内容 |
 |:---|:---|
-| [case-studies/actix-web-production.md](case-studies/actix-web-production.md) | Actix-web生产分析 |
-| [case-studies/tokio-runtime-analysis.md](../comprehensive-analysis/case-studies/tokio-runtime-analysis.md) | Tokio分析 |
-| [case-studies/embassy-embedded-analysis.md](../comprehensive-analysis/case-studies/embassy-embedded-analysis.md) | Embassy分析 |
+| [case-studies/actix-web-production.md](../../../../rust-ownership-decidability/actor-specialty/case-studies/actix-web-production.md) | Actix-web生产分析 |
+| [case-studies/tokio-runtime-analysis.md](../../../../rust-ownership-decidability/comprehensive-analysis/case-studies/tokio-runtime-analysis.md) | Tokio分析 |
+| [case-studies/embassy-embedded-analysis.md](../../../../rust-ownership-decidability/comprehensive-analysis/case-studies/embassy-embedded-analysis.md) | Embassy分析 |
 
 ---
 
@@ -165,21 +165,21 @@ Thm RUST-ACTOR-MEMORY-SAFETY: Rust + Actor内存安全
 
 ### 初学者
 
-1. [mindmaps/actor-model-mindmap.md](mindmaps/actor-model-mindmap.md) - 概念建立
-2. [theory/actor-model-foundation.md](theory/actor-model-foundation.md) - 理论基础
-3. [decision-trees/actor-framework-selection.md](decision-trees/actor-framework-selection.md) - 选择框架
+1. [mindmaps/actor-model-mindmap.md](../../../../rust-ownership-decidability/actor-specialty/mindmaps/actor-model-mindmap.md) - 概念建立
+2. [theory/actor-model-foundation.md](../../../../rust-ownership-decidability/actor-specialty/theory/actor-model-foundation.md) - 理论基础
+3. [decision-trees/actor-framework-selection.md](../../../../rust-ownership-decidability/actor-specialty/decision-trees/actor-framework-selection.md) - 选择框架
 
 ### 进阶开发者
 
-1. [patterns/actor-design-patterns-expanded.md](patterns/actor-design-patterns-expanded.md) - 掌握模式
-2. [formal-proofs/actor-safety-theorems.md](formal-proofs/actor-safety-theorems.md) - 理解安全保证
-3. [case-studies/actix-web-production.md](case-studies/actix-web-production.md) - 生产实践
+1. [patterns/actor-design-patterns-expanded.md](../../../../rust-ownership-decidability/actor-specialty/patterns/actor-design-patterns-expanded.md) - 掌握模式
+2. [formal-proofs/actor-safety-theorems.md](../../../../rust-ownership-decidability/actor-specialty/formal-proofs/actor-safety-theorems.md) - 理解安全保证
+3. [case-studies/actix-web-production.md](../../../../rust-ownership-decidability/actor-specialty/case-studies/actix-web-production.md) - 生产实践
 
 ### 架构师
 
-1. [matrices/actor-framework-matrix.md](matrices/actor-framework-matrix.md) - 技术选型
-2. [scenario-trees/actor-application-domains.md](scenario-trees/actor-application-domains.md) - 领域映射
-3. [ACTOR_MODEL_DEEP_DIVE.md](./ACTOR_MODEL_DEEP_DIVE.md) - 形式化深度分析
+1. [matrices/actor-framework-matrix.md](../../../../rust-ownership-decidability/actor-specialty/matrices/actor-framework-matrix.md) - 技术选型
+2. [scenario-trees/actor-application-domains.md](../../../../rust-ownership-decidability/actor-specialty/scenario-trees/actor-application-domains.md) - 领域映射
+3. [ACTOR_MODEL_DEEP_DIVE.md](../../../../rust-ownership-decidability/actor-specialty/ACTOR_MODEL_DEEP_DIVE.md) - 形式化深度分析
 4. distributed/distributed-actors.md (待补充) - 分布式系统
 
 ---

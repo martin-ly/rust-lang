@@ -12,18 +12,18 @@ cargo audit
 
 - **退出码**: 0
 - **安全漏洞**: 0
-- **允许警告**: 4（均为 `unmaintained` 提示，非安全漏洞）
+- **允许警告**: 0（已清理 `atomic-polyfill`；剩余 3 个 unmaintained 警告已通过 `.cargo/audit.toml` 显式忽略并记录 rationale）
 
-## 允许警告详情
+## 已处理警告
 
-| Crate | 版本 | 类型 | ID | 影响路径 |
+| Crate | 版本 | 类型 | ID | 处理结果 |
 |:---|:---|:---|:---|:---|
-| atomic-polyfill | 1.0.3 | unmaintained | RUSTSEC-2023-0089 | heapless → postcard → c10_networks |
-| bare-metal | 0.2.5 | deprecated | RUSTSEC-2026-0110 | cortex-m → c13_embedded |
-| instant | 0.1.13 | unmaintained | RUSTSEC-2024-0384 | fastrand → futures-lite → glommio → c06_async |
-| paste | 1.0.15 | unmaintained | RUSTSEC-2024-0436 | tokenizers/pulp/netlink-packet-core/macro_rules_attribute/gemm-* → candle-core / libp2p / c08_algorithms |
+| atomic-polyfill | 1.0.3 | unmaintained | RUSTSEC-2023-0089 | ✅ 已修复：移除 `c10_networks` 的 `postcard` dev-dependency，该 crate 不再进入 `Cargo.lock` |
+| bare-metal | 0.2.5 | deprecated | RUSTSEC-2026-0110 | ⏸️ 已忽略：cortex-m 0.7.7 传递依赖，cortex-m 0.8 尚未发布 |
+| instant | 0.1.13 | unmaintained | RUSTSEC-2024-0384 | ⏸️ 已忽略：glommio 0.9.0 传递依赖，等待上游升级 |
+| paste | 1.0.15 | unmaintained | RUSTSEC-2024-0436 | ⏸️ 已忽略：candle-core 0.10.2 / libp2p 0.56.0 传递依赖，等待上游升级 |
 
-> 这些警告均为上游 crate 维护状态变化，**不涉及已知可被利用的安全漏洞**。由于它们是 transitive dependencies，当前 workspace 无法直接移除，需等待上游更新。
+> 被忽略的 3 项均为上游 crate 维护状态变化，**不涉及已知可被利用的安全漏洞**，且均为 transitive dependencies。
 
 ## 与 2026-06-22 对比
 

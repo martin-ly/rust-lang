@@ -363,7 +363,7 @@ graph BT
 - [并发编程模型](../../../../concept/03_advanced/01_concurrency.md)
 - [原子操作与内存排序](../../../../concept/03_advanced/11_atomics_and_memory_ordering.md)
 - [无锁数据结构](../../../../concept/03_advanced/16_lock_free.md)
-- [形式化操作语义](../../../../concept/04_formal/09_operational_semantics.md)
+- [形式化操作语义](../../../../concept/04_formal/17_operational_semantics.md)
 
 ---
 

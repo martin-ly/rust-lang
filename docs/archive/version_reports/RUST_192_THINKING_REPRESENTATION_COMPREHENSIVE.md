@@ -1,3 +1,4 @@
+<a id="rust-1920-思维表征方式综合文档--comprehensive-thinking-representation-methods"></a>
 ﻿# Rust 1.92.0 思维表征方式综合文档 / Comprehensive Thinking Representation Methods
 
 > **分级**: [C]
@@ -20,7 +21,7 @@
   - [📋 目录](#-目录)
   - [🆕 Rust 1.93.0 更新说明](#-rust-1930-更新说明)
   - [🎯 文档概述](#-文档概述)
-  - [🗺️ 1. 思维导图 (Mind Map)](#️-1-思维导图-mind-map)
+  - [🗺️ 1. 思维导图 (Mind Map)](#1-思维导图-mind-map)
     - [1.1 Rust 1.92.0 核心特性思维导图](#11-rust-1920-核心特性思维导图)
     - [1.2 特性应用场景思维导图](#12-特性应用场景思维导图)
     - [1.3 学习路径思维导图](#13-学习路径思维导图)

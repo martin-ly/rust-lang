@@ -37,7 +37,7 @@
     - [11 - 设计模式 (`11-design-patterns/`)](#11---设计模式-11-design-patterns)
     - [12 - 并发模式 (`12-concurrency-patterns/`)](#12---并发模式-12-concurrency-patterns)
     - [16 - 程序语义 (`16-program-semantics/`)](#16---程序语义-16-program-semantics)
-  - [🛤️ 优化学习路径](#️-优化学习路径)
+  - [🛤️ 优化学习路径](#优化学习路径)
     - [路径 A: 快速入门 (4小时) → 初学者](#路径-a-快速入门-4小时--初学者)
     - [路径 B: 系统掌握 (2周) → 进阶开发者](#路径-b-系统掌握-2周--进阶开发者)
     - [路径 C: 形式化专家 (持续) → 研究者](#路径-c-形式化专家-持续--研究者)
@@ -623,7 +623,7 @@ README.md (入口)
 |:---------|:-----|
 | [README.md](./README.md) | 主入口 |
 | [FINAL_MASTER_INDEX.md](./FINAL_MASTER_INDEX.md) | 完整主索引 |
-| [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md) | 自动交叉引用 |
+| [MASTER_INDEX_AUTO.md](../archive/2026_03_reorganization/MASTER_INDEX_AUTO.md) | 自动交叉引用 |
 | [CROSS_REFERENCE_VERIFICATION_REPORT.md](./CROSS_REFERENCE_VERIFICATION_REPORT.md) | 链接验证 |
 | [THEOREM_DEPENDENCY_GRAPH.md](./THEOREM_DEPENDENCY_GRAPH.md) | 定理依赖 |
 | [UNIFIED_THEORETICAL_FRAMEWORK.md](./UNIFIED_THEORETICAL_FRAMEWORK.md) | 理论框架 |

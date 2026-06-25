@@ -66,6 +66,7 @@
     - [学术论文](#学术论文)
     - [官方资源](#官方资源)
     - [项目内部资源](#项目内部资源)
+<a id="状态--权威指南-v10"></a>
   - [**状态**: ✅ 权威指南 v1.0](#状态--权威指南-v10)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
@@ -929,7 +930,7 @@ fn use_abstractions() {
 
 ---
 
-- [README](./README.md)
+- README
 
 ---
 
@@ -937,7 +938,7 @@ fn use_abstractions() {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [academic 目录](./README.md)
+- academic 目录
 - [上级目录](../README.md)
 
 ---

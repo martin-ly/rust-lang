@@ -21,8 +21,16 @@
     - [核心新特性概览](#核心新特性概览)
   - [📝 统一更新模板](#-统一更新模板)
     - [Rust 1.96 内容模板](#rust-196-内容模板)
-      - [迁移注意事项](#迁移注意事项)
-      - [迁移注意事项](#迁移注意事项-1)
+  - [🚀 快速导航](#-快速导航)
+    - [按主题查找](#按主题查找)
+      - [🔢 数学计算](#-数学计算)
+      - [🔄 并发编程](#-并发编程)
+      - [⚡ 异步编程](#-异步编程)
+      - [🛡️ 系统编程](#️-系统编程)
+  - [📝 历史版本模板](#-历史版本模板)
+    - [Rust 1.95+ 内容模板 (保留参考)](#rust-195-内容模板-保留参考)
+  - [🎯 批量执行脚本](#-批量执行脚本)
+    - [Rust 1.96 版本更新脚本](#rust-196-版本更新脚本)
     - [检查 1.96 特性覆盖](#检查-196-特性覆盖)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
@@ -92,108 +100,118 @@
 > **[来源: TRPL - The Rust Programming Language]**
 
 ```markdown
-### Rust 1.96 更新
+    ### Rust 1.96 更新
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+    > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-> **适用版本**: Rust 1.96.0+
+    > **适用版本**: Rust 1.96.0+
 
-#### 新增特性应用
+    #### 新增特性应用
 
-- `isqrt` 在数学计算中的应用
-- `HashMap::get_disjoint_mut` 在并发状态管理中的应用
-- `async Fn` trait 在异步抽象中的改进
-- `if let guards` 在模式匹配中的应用
+    - `isqrt` 在数学计算中的应用
+    - `HashMap::get_disjoint_mut` 在并发状态管理中的应用
+    - `async Fn` trait 在异步抽象中的改进
+    - `if let guards` 在模式匹配中的应用
 
-#### 代码示例 (Rust 1.96)
+    #### 代码示例 (Rust 1.96)
 
-```rust
-// 使用各版本特性的示例代码
-use std::collections::HashMap;
+    ```rust
+    // 使用各版本特性的示例代码
+    use std::collections::HashMap;
 
-fn demonstrate_196_features() {
-    // 整数平方根
-    let n: u64 = 1000000;
-    let sqrt = n.isqrt();
+    fn demonstrate_196_features() {
+        // 整数平方根
+        let n: u64 = 1000000;
+        let sqrt = n.isqrt();
 
-    // HashMap 并行可变访问
-    let mut map = HashMap::new();
-    map.insert("a", 1);
-    map.insert("b", 2);
-    let [Some(a), Some(b)] = map.get_disjoint_mut(["a", "b"]) else {
-        panic!("keys not found");
-    };
-    *a += 10;
-}
-```
+        // HashMap 并行可变访问
+        let mut map = HashMap::new();
+        map.insert("a", 1);
+        map.insert("b", 2);
+        let [Some(a), Some(b)] = map.get_disjoint_mut(["a", "b"]) else {
+            panic!("keys not found");
+        };
+        *a += 10;
+    }
+    ```
 
-#### 迁移注意事项
+    #### 迁移注意事项
 
-- [具体迁移点]
+    - [具体迁移点]
 
 ```
 
 ---
 
 ## 🚀 快速导航
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 按主题查找
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 🔢 数学计算
+
 - isqrt 最佳实践
-- [几何算法示例](./05_cross_module_integration_examples.md)
+- [几何算法示例](../../../05_guides/05_cross_module_integration_examples.md)
 
 #### 🔄 并发编程
-- [HashMap 新 API](./05_threads_concurrency_usage_guide.md)
+
+- [HashMap 新 API](../../../05_guides/05_threads_concurrency_usage_guide.md)
 - if let guards 指南
 
 #### ⚡ 异步编程
-- [async Fn trait 改进](./05_async_programming_usage_guide.md)
+
+- [async Fn trait 改进](../../../05_guides/05_async_programming_usage_guide.md)
 
 #### 🛡️ 系统编程
-- [高级线程控制](./05_unsafe_rust_guide.md)
+
+- 高级线程控制
 
 ---
 
 ## 📝 历史版本模板
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### Rust 1.95+ 内容模板 (保留参考)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```markdown
-### Rust 1.95+ 更新
-> **[来源: [crates.io](https://crates.io/)]**
+    ### Rust 1.95+ 更新
+    > **[来源: [crates.io](https://crates.io/)]**
 
-> **适用版本**: Rust 1.96.0+
+    > **适用版本**: Rust 1.96.0+
 
-#### 新增特性应用
+    #### 新增特性应用
 
-- `array_windows` 在[相关场景]的应用
-- `ControlFlow` 在错误处理中的改进
-- `LazyCell/LazyLock` 新方法的使用
-- `Peekable::next_if_map` 的应用
+    - `array_windows` 在[相关场景]的应用
+    - `ControlFlow` 在错误处理中的改进
+    - `LazyCell/LazyLock` 新方法的使用
+    - `Peekable::next_if_map` 的应用
 
-#### 代码示例 (Rust 1.95+)
+    #### 代码示例 (Rust 1.95+)
 
-```rust
-// 使用 1.95+ 新特性的示例代码
-```
+    ```rust
+    // 使用 1.95+ 新特性的示例代码
+    ```
 
-#### 迁移注意事项
+    #### 迁移注意事项
 
-- [具体迁移点]
+    - [具体迁移点]
 
 ```
 
 ---
 
 ## 🎯 批量执行脚本
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### Rust 1.96 版本更新脚本
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```bash
@@ -238,7 +256,7 @@ grep -r "isqrt\|get_disjoint_mut\|if let guards\|async Fn" docs/05_guides/ | wc 
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [05_guides 目录](./README.md)
+- [05_guides 目录](../../../05_guides/README.md)
 - [上级目录](../README.md)
 
 ---

@@ -27,7 +27,7 @@
     - [2. 逆变 (Contravariance)](#2-逆变-contravariance)
     - [3. 不变 (Invariance)](#3-不变-invariance)
     - [4. 型变规则](#4-型变规则)
-  - [⚠️ 反例：型变规则必要性 {#️-反例型变规则必要性}](#️-反例型变规则必要性-️-反例型变规则必要性)
+  - [⚠️ 反例：型变规则必要性 {#️-反例型变规则必要性}](#反例型变规则必要性)
     - [反例 1：`&mut T` 若协变则悬垂引用](#反例-1mut-t-若协变则悬垂引用)
     - [反例 2：函数参数若协变则悬垂](#反例-2函数参数若协变则悬垂)
     - [反例 3：`Cell<T>` 若协变则悬垂](#反例-3cellt-若协变则悬垂)
@@ -630,7 +630,7 @@ fn use_contravariant_callback() {
 
 - [型变实现](../../../crates/c02_type_system/src/README.md)
 - [型变示例](../../../crates/c02_type_system/examples/README.md)
-- [形式化工程系统 - 型变](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/06_variance.md)
+- [形式化工程系统 - 型变](../../archive/c_class_audit_2026_06_08/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/06_variance.md)
 
 ### 工具资源
 >
@@ -680,7 +680,7 @@ fn use_contravariant_callback() {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 型变参与子类型推导与类型检查；$\&'a T$ 协变、$\&'a \text{mut} T$ 不变、
-`fn(T) -> U` 逆变等与 [type_system_foundations](./10_type_system_foundations.md)
+`fn(T) -> U` 逆变等与 [type_system_foundations](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md)
 的 subtyping 及 [lifetime_formalization](./10_lifetime_formalization.md) 的 $\ell <:$ 一致。
 
 ### 组合法则：类型 + 生命周期 + 型变
