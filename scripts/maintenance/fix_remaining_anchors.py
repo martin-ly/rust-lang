@@ -70,7 +70,7 @@ def fix_anchor(source: Path, target: Path, anchor_id: str, link_text: str) -> tu
 def parse_report(report_path: Path):
     text = report_path.read_text(encoding="utf-8")
     issues = []
-    section = re.search(r"### 锚点不存在 \(\d+个\)(.*?)### 文件不存在", text, re.DOTALL)
+    section = re.search(r"### 锚点不存在 \(\d+个\)(.*?)(?=###\s+[^#]|$)", text, re.DOTALL)
     if not section:
         return issues
     for line in section.group(1).splitlines():

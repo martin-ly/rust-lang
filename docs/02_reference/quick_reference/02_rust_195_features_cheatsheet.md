@@ -20,6 +20,7 @@
     - [1. `cfg_select!` 宏](#1-cfg_select-宏)
     - [2. `if let` guards on match arms](#2-if-let-guards-on-match-arms)
     - [3. 路径段关键字重命名导入](#3-路径段关键字重命名导入)
+<a id="--remap-path-scope-稳定化"></a>
     - [4. PowerPC/PowerPC64 内联汇编稳定化](#4-powerpcpowerpc64-内联汇编稳定化)
   - [二、标准库新 API](#二标准库新-api)
     - [`core::range` 模块](#corerange-模块)

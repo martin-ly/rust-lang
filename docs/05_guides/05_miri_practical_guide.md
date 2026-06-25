@@ -20,6 +20,7 @@
 - [Miri 实战指南：Rust 未定义行为检测工具](#miri-实战指南rust-未定义行为检测工具)
   - [📑 目录](#-目录)
   - [🔬 什么是 Miri](#-什么是-miri)
+<a id="️-安装与运行"></a>
   - [⚙️ 安装与运行](#️-安装与运行)
     - [安装 Miri](#安装-miri)
     - [基本命令](#基本命令)
@@ -32,11 +33,13 @@
   - [🌲 Tree Borrows vs Stacked Borrows](#-tree-borrows-vs-stacked-borrows)
     - [Stacked Borrows (默认)](#stacked-borrows-默认)
     - [Tree Borrows (实验性，推荐)](#tree-borrows-实验性推荐)
+<a id="️-编写-miri-友好测试的实战流程"></a>
   - [✍️ 编写 Miri 友好测试的实战流程](#️-编写-miri-友好测试的实战流程)
     - [步骤 1：隔离 unsafe 代码到独立测试](#步骤-1隔离-unsafe-代码到独立测试)
     - [步骤 2：为 Miri 添加条件编译标记](#步骤-2为-miri-添加条件编译标记)
     - [步骤 3：处理 Miri 的隔离限制](#步骤-3处理-miri-的隔离限制)
     - [步骤 4：本地开发流程](#步骤-4本地开发流程)
+<a id="️-miri-的局限性"></a>
   - [⚠️ Miri 的局限性](#️-miri-的局限性)
   - [🔧 CI 集成](#-ci-集成)
     - [GitHub Actions 示例](#github-actions-示例)

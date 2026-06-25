@@ -37,6 +37,7 @@
       - [1.3.1 Box::new\_zeroed 和 Box::new\_zeroed\_slice](#131-boxnew_zeroed-和-boxnew_zeroed_slice)
       - [1.3.2 Rc::new\_zeroed 和 Arc::new\_zeroed](#132-rcnew_zeroed-和-arcnew_zeroed)
       - [1.3.3 迭代器方法特化](#133-迭代器方法特化)
+<a id="14-rust-1930-标准库新特性-"></a>
     - [1.4 Rust 1.93.0 标准库新特性 🆕](#14-rust-1930-标准库新特性-)
       - [1.4.1 MaybeUninit API 增强](#141-maybeuninit-api-增强)
       - [1.4.2 String 和 Vec 原始部分访问](#142-string-和-vec-原始部分访问)
@@ -46,6 +47,7 @@
       - [1.4.6 Duration 扩展](#146-duration-扩展)
       - [1.4.7 char 常量](#147-char-常量)
       - [1.4.8 fmt::from\_fn](#148-fmtfrom_fn)
+<a id="15-rust-1930-标准库行为变更-️"></a>
     - [1.5 Rust 1.93.0 标准库行为变更 ⚠️](#15-rust-1930-标准库行为变更-️)
       - [1.5.1 Copy 特化移除](#151-copy-特化移除)
       - [1.5.2 BTree::append 行为变更](#152-btreeappend-行为变更)

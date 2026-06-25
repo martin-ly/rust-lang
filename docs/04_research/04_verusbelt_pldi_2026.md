@@ -22,6 +22,7 @@
     - [1. 类型系统扩展的形式化](#1-类型系统扩展的形式化)
     - [2. 层叠语义 (Layered Semantics)](#2-层叠语义-layered-semantics)
     - [3. 擦除定理 (Erasure Theorem)](#3-擦除定理-erasure-theorem)
+<a id="️-与相关工作的对比"></a>
   - [⚖️ 与相关工作的对比](#️-与相关工作的对比)
     - [VerusBelt vs RefinedRust](#verusbelt-vs-refinedrust)
     - [VerusBelt vs RustBelt](#verusbelt-vs-rustbelt)

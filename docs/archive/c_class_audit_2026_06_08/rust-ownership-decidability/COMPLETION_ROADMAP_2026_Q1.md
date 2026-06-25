@@ -18,18 +18,22 @@
     - [1.1 100% 完成标准](#11-100-完成标准)
     - [1.2 优先级矩阵](#12-优先级矩阵)
   - [二、详细执行计划](#二详细执行计划)
+<a id="phase-1-关键缺失填补-week-1-4-"></a>
     - [Phase 1: 关键缺失填补 (Week 1-4) 🔴](#phase-1-关键缺失填补-week-1-4-)
       - [Week 1: Unsafe Rust 基础](#week-1-unsafe-rust-基础)
       - [Week 2: Data Layout \& 内存布局](#week-2-data-layout--内存布局)
       - [Week 3: Uninitialized Memory \& Drop](#week-3-uninitialized-memory--drop)
       - [Week 4: Panic \& Unwinding](#week-4-panic--unwinding)
+<a id="phase-2-内容扩展-week-5-8-"></a>
     - [Phase 2: 内容扩展 (Week 5-8) 🟡](#phase-2-内容扩展-week-5-8-)
       - [Week 5: 验证工具深化](#week-5-验证工具深化)
       - [Week 6: 对比研究扩展](#week-6-对比研究扩展)
       - [Week 7-8: 设计模式扩展](#week-7-8-设计模式扩展)
+<a id="phase-3-对齐优化-week-9-12-"></a>
     - [Phase 3: 对齐优化 (Week 9-12) 🟢](#phase-3-对齐优化-week-9-12-)
       - [Week 9-10: 与 The Rust Book 对齐](#week-9-10-与-the-rust-book-对齐)
       - [Week 11-12: 与 The Reference 对齐](#week-11-12-与-the-reference-对齐)
+<a id="phase-4-质量冲刺-week-13-16-"></a>
     - [Phase 4: 质量冲刺 (Week 13-16) ⭐](#phase-4-质量冲刺-week-13-16-)
       - [Week 13-14: 代码验证](#week-13-14-代码验证)
       - [Week 15: 链接检查](#week-15-链接检查)

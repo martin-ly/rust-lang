@@ -10,6 +10,7 @@
 - [Rust 思维表征方式文档 / Thinking Representation Methods Documentation](#rust-思维表征方式文档--thinking-representation-methods-documentation)
   - [📑 目录](#-目录)
   - [🎯 文档概述](#-文档概述)
+<a id="️-1-思维导图-mind-map"></a>
   - [🗺️ 1. 思维导图 (Mind Map)](#️-1-思维导图-mind-map)
     - [1.1 Rust 1.93.0 核心特性思维导图](#11-rust-1930-核心特性思维导图)
     - [1.2 所有权系统完整思维导图](#12-所有权系统完整思维导图)
