@@ -4,6 +4,7 @@
 > **目标版本**: Rust 1.97.0
 > **预计耗时**: 8 小时（可分 1-2 天完成）
 > **前置依赖**: `.kimi/plan_rust_1_97_stabilization.md` 已就绪
+> **预检记录**: 2026-06-25 预检完成，`Rust 1.97.0 stable` 尚未发布（当前最新为 beta.4），详见 `reports/RUST_1_97_RELEASE_PREFLIGHT_2026_06_25.md`
 
 ---
 

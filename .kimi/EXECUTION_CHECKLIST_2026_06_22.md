@@ -71,6 +71,7 @@
 ### Week 3（07-07 ~ 07-13）
 
 - [ ] **A3.1** 2026-07-09 当天：执行 `.kimi/EXECUTION_RUST_1_97_RELEASE_2026_07_09.md`
+  - 2026-06-25 预检：1.97.0 stable 尚未发布（当前 beta.4），前置工作已就绪；发布日清单已添加预检记录
 - [ ] **A3.2** 更新 `rust-toolchain.toml` channel 为 `1.97.0`
 - [ ] **A3.3** 激活 `crates/c08_algorithms/src/rust_197_features.rs` 中已稳定 API
 - [ ] **A3.4** 运行 `cargo test --workspace`

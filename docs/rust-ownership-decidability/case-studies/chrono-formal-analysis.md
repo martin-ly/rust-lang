@@ -12,31 +12,37 @@
 
 ## 目录
 
-> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** ·
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** ·
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** ·
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** ·
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** ·
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+>
 
 - [Chrono时间处理形式化分析](#chrono时间处理形式化分析)
   - [目录](#目录)
   - [1. 引言](#1-引言)
   - [2. 时间点](#2-时间点)
-    - [定义 TIME-1 ( NaiveDateTime )](#定义-time-1--naivedatetime)
+    - [定义 TIME-1 ( NaiveDateTime )](#定义-time-1--naivedatetime-)
     - [定义 TIME-2 ( `DateTime<Tz>` )](#定义-time-2--datetimetz-)
-    - [定理 TIME-T1 ( 有效性 )](#定理-time-t1--有效性)
+    - [定理 TIME-T1 ( 有效性 )](#定理-time-t1--有效性-)
   - [3. 持续时间](#3-持续时间)
-    - [定义 DURATION-1 ( TimeDelta )](#定义-duration-1--timedelta)
-    - [定理 DURATION-T1 ( 单调性 )](#定理-duration-t1--单调性)
+    - [定义 DURATION-1 ( TimeDelta )](#定义-duration-1--timedelta-)
+    - [定理 DURATION-T1 ( 单调性 )](#定理-duration-t1--单调性-)
   - [4. 时区处理](#4-时区处理)
-    - [定义 TZ-1 ( 时区转换 )](#定义-tz-1--时区转换)
-    - [定义 TZ-2 ( 本地时间 )](#定义-tz-2--本地时间)
-    - [定理 TZ-T1 ( 夏令时安全 )](#定理-tz-t1--夏令时安全)
+    - [定义 TZ-1 ( 时区转换 )](#定义-tz-1--时区转换-)
+    - [定义 TZ-2 ( 本地时间 )](#定义-tz-2--本地时间-)
+    - [定理 TZ-T1 ( 夏令时安全 )](#定理-tz-t1--夏令时安全-)
   - [5. 格式化](#5-格式化)
-    - [定义 FORMAT-1 ( 格式化模式 )](#定义-format-1--格式化模式)
-    - [定理 FORMAT-T1 ( 解析可逆 )](#定理-format-t1--解析可逆)
+    - [定义 FORMAT-1 ( 格式化模式 )](#定义-format-1--格式化模式-)
+    - [定理 FORMAT-T1 ( 解析可逆 )](#定理-format-t1--解析可逆-)
   - [6. 算术运算](#6-算术运算)
-    - [定义 ARITH-1 ( 日期算术 )](#定义-arith-1--日期算术)
-    - [定理 ARITH-T1 ( 溢出检查 )](#定理-arith-t1--溢出检查)
+    - [定义 ARITH-1 ( 日期算术 )](#定义-arith-1--日期算术-)
+    - [定理 ARITH-T1 ( 溢出检查 )](#定理-arith-t1--溢出检查-)
   - [7. 定理与证明](#7-定理与证明)
-    - [定理 CHRONO-T1 ( 时区安全 )](#定理-chrono-t1--时区安全)
-    - [定理 CHRONO-T2 ( 闰秒处理 )](#定理-chrono-t2--闰秒处理)
+    - [定理 CHRONO-T1 ( 时区安全 )](#定理-chrono-t1--时区安全-)
+    - [定理 CHRONO-T2 ( 闰秒处理 )](#定理-chrono-t2--闰秒处理-)
   - [8. 代码示例](#8-代码示例)
     - [示例1: 基础操作](#示例1-基础操作)
     - [示例2: 解析和格式化](#示例2-解析和格式化)
