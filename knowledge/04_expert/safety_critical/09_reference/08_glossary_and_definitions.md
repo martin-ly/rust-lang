@@ -1,4 +1,9 @@
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [ISO 26262](https://www.iso.org/standard/68383.html), [IEC 61508](https://www.iec.ch/), [DO-178C](https://www.rtca.org/)
+> **权威来源**:
+>
+> [Rust Reference](https://doc.rust-lang.org/reference/),
+> [ISO 26262](https://www.iso.org/standard/68383.html),
+> [IEC 61508](https://www.iec.ch/),
+> [DO-178C](https://www.rtca.org/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增安全关键术语标准来源标注 [来源: Authority Source Sprint Batch 8]
 >

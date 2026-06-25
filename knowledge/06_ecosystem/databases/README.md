@@ -52,7 +52,6 @@
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ## 📚 模块 8: 国际化对齐
 
 > 本模块按项目模板补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
@@ -78,4 +77,3 @@
 |:---|:---|
 | [Rust Database Drivers Working Group](https://github.com/rust-db) | 数据库驱动工作组 |
 | [Crates.io — Database](https://crates.io/categories/database) | 数据库分类索引 |
-

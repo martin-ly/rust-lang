@@ -5,7 +5,13 @@
 > **状态**: ✅ 已提炼归档
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **最后更新**: 2026-06-25
-> **权威来源**: [Rust Reference — Type System](https://doc.rust-lang.org/reference/types.html), [Rust Reference — Subtyping and Variance](https://doc.rust-lang.org/reference/subtyping.html), [TRPL — Traits](https://doc.rust-lang.org/book/ch10-02-traits.html), [RustBelt (POPL 2018)](https://plv.mpi-sws.org/rustbelt/popl18/), [TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)
+> **权威来源**:
+>
+> [Rust Reference — Type System](https://doc.rust-lang.org/reference/types.html),
+> [Rust Reference — Subtyping and Variance](https://doc.rust-lang.org/reference/subtyping.html),
+> [TRPL — Traits](https://doc.rust-lang.org/book/ch10-02-traits.html),
+> [RustBelt (POPL 2018)](https://plv.mpi-sws.org/rustbelt/popl18/),
+> [TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)
 >
 > **受众**: [专家] / [研究者]
 > **内容分级**: [研究者级]
@@ -135,7 +141,6 @@ fn identity<T>(x: T) -> T { x }
 3. **泛化**：将未受约束变量提升为多态类型变量。
 
 > Rust 的类型推导比纯 HM 更受限，但核心算法直觉一致。
-
 > **权威来源**: Damas & Milner (POPL 1982); Rust Reference — Type Inference。
 
 ---

@@ -66,7 +66,6 @@
 
 - [标准库速查](03_std_library_cheatsheet.md)
 
-
 ## 📚 模块 8: 国际化对齐
 
 > 本模块按项目模板补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
@@ -91,4 +90,3 @@
 |:---|:---|
 | [Rust Cheat Sheet](https://cheats.rs/) | 速查表 |
 | [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | 示例 |
-

@@ -110,7 +110,6 @@
 - [Cranelift 后端 (concept)](../../concept/07_future/16_cranelift_backend_preview.md) — 快速调试编译
 - [并行前端 (concept)](../../concept/07_future/09_parallel_frontend_preview.md) — SALSA 3.0 与多核编译加速
 
-
 ## 📚 模块 8: 国际化对齐
 
 > 本模块按项目模板补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
@@ -136,4 +135,3 @@
 | [lib.rs](https://lib.rs/) | 生态索引 |
 | [This Week in Rust](https://this-week-in-rust.org/) | 社区周报 |
 | [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) | 常用模式 |
-
