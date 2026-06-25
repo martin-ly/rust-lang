@@ -116,7 +116,6 @@
 
 - [NLL 与 Polonius (concept)](../../concept/03_advanced/08_nll_and_polonius.md) — 三代借用检查器演进分析
 
-
 ## 📚 模块 8: 国际化对齐
 
 > 本模块按项目模板补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
@@ -144,4 +143,3 @@
 | [Tokio Documentation](https://tokio.rs/) | 异步运行时 |
 | [Rust for Linux](https://rust-for-linux.com/) | 内核开发 |
 | [This Week in Rust](https://this-week-in-rust.org/) | 社区周报 |
-

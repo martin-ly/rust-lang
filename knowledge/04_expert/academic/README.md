@@ -47,7 +47,6 @@
 
 - [形式化验证工具链 (concept)](../../../concept/04_formal/05_verification_toolchain.md) — KVerus (arXiv 2026)、AutoVerus (OOPSLA 2025)、Vest (USENIX Security 2025)
 
-
 ## 📚 模块 8: 国际化对齐
 
 > 本模块按项目模板补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
@@ -75,4 +74,3 @@
 |:---|:---|
 | [Aeneas](https://github.com/AeneasVerif/aeneas) | Rust 形式化验证器 |
 | [Rust Formal Methods Interest Group](https://rust-formal-methods.github.io/) | 形式化社区 |
-

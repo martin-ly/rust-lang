@@ -50,7 +50,6 @@
 - [Tree Borrows (concept)](../../../concept/01_foundation/05_reference_semantics.md) — PLDI 2025 Distinguished Paper 详解
 - [形式化验证工具链 (concept)](../../../concept/04_formal/05_verification_toolchain.md) — Miri POPL 2026、KVerus、AutoVerus、Vest 2026 状态矩阵
 
-
 ## 📚 模块 8: 国际化对齐
 
 > 本模块按项目模板补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
@@ -75,4 +74,3 @@
 |:---|:---|
 | [Miri Book](https://github.com/rust-lang/miri) | Miri 文档 |
 | [Rust Internals — Miri](https://internals.rust-lang.org/) | 讨论区 |
-
