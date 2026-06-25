@@ -580,11 +580,11 @@ Coq → Iris → RustBelt → 工具开发
 
 | 需求 | 文档 |
 | :--- | :--- |
-| 查概念定义 | [形式化概念百科](./10_formal_concepts_encyclopedia.md) |
-| 查定理证明 | [定理汇编](./10_theorems_and_proof_strategies.md) |
+| 查概念定义 | [形式化概念百科](../../archive/research_notes_2026_06_25/10_formal_concepts_encyclopedia.md) |
+| 查定理证明 | [定理汇编](../../archive/research_notes_2026_06_25/10_theorems_and_proof_strategies.md) |
 | 查学习路径 | [学习路径](./10_learning_path_comprehensive.md) |
 | 查错误修复 | [反例汇编](./10_counter_examples_compendium.md) |
-| 查方法论 | [认知论证框架](./10_cognitive_argumentation_framework.md) |
+| 查方法论 | [认知论证框架](../../archive/research_notes_2026_06_25/10_cognitive_argumentation_framework.md) |
 
 **维护者**: Rust Formal Methods Research Team
 **最后更新**: 2026-02-28

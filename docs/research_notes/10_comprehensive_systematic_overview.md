@@ -4,7 +4,6 @@
 >
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -53,7 +52,6 @@
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -510,7 +508,7 @@ Axiom/规则层
 ├── 设计机制论证:   ████████████████████ 100%
 ├── 软件设计理论:   ████████████████████ 100%  (设计模式、23/43、执行模型、组合工程)
 ├── Rust 1.93 特性: ████████████████████ 100%  (92 项全覆盖)
-└── type_theory 缺口: 已声明；COH-T1 已补全；见 [00_completeness_gaps](formal_methods/00_completeness_gaps.md)
+└── type_theory 缺口: 已声明；COH-T1 已补全；见 [00_completeness_gaps](../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md)
 ```
 
 ---
@@ -527,10 +525,10 @@ Axiom/规则层
 | [UNIFIED_SYSTEMATIC_FRAMEWORK](./10_unified_systematic_framework.md) | **全局统一系统化框架**：全景思维导图、多维矩阵、全链路图、反例总索引 |
 | [DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md) | **设计机制论证**：Pin 堆/栈区分、所有权、借用、型变等理由与完整论证 |
 | [ARGUMENTATION_GAP_INDEX](./10_argumentation_gap_index.md) | **论证缺口与设计理由综合索引**：缺口追踪、设计理由矩阵、思维表征覆盖 |
-| [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./10_rust_193_language_features_comprehensive_analysis.md) | **Rust 1.93 语言特性全面分析**：92 项特性全覆盖、设计论证 |
+| [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../../archive/research_notes_2026_06_25/10_rust_193_language_features_comprehensive_analysis.md) | **Rust 1.93 语言特性全面分析**：92 项特性全覆盖、设计论证 |
 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md) | **构造性语义与表达能力边界**：操作/指称/公理语义、表达能力边界论证 |
 | [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) | 论证缺口、概念-公理-定理映射、反例索引 |
-| [PROOF_INDEX](./10_proof_index.md) | 形式化证明索引、公理编号规范 |
+| [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md) | 形式化证明索引、公理编号规范 |
 | [INDEX](./INDEX.md) | 研究笔记完整索引 |
 | [README](./README.md) | 研究笔记主入口 |
 | [KNOWLEDGE_STRUCTURE_FRAMEWORK](../07_project/07_knowledge_structure_framework.md) | 知识结构、概念定义、思维表征 |
@@ -563,7 +561,7 @@ Axiom/规则层
 - LazyCell/LazyLock 的延迟语义
 - 与现有理论框架的集成
 
-详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
+详见 [RUST_194_RESEARCH_UPDATE](../../archive/research_notes_2026_06_25/10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 
@@ -602,13 +600,14 @@ Axiom/规则层
 #### 相关文档
 
 - Rust 1.94 迁移指南
-- [Rust 1.94 特性速查
+- Rust 1.94 特性速查
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

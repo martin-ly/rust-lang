@@ -86,7 +86,7 @@
 
 1. **[10_00_organization_and_navigation.md](./10_00_organization_and_navigation.md)** - 组织架构与导航（按目标、按支柱、层级结构；首次使用必读）
 
-0a. **[10_00_comprehensive_summary.md](./10_00_comprehensive_summary.md)** - 完整总结综合 🆕
+0a. **[10_00_comprehensive_summary.md](../../archive/research_notes_2026_06_25/10_00_comprehensive_summary.md)** - 完整总结综合 🆕
 
 - 项目全貌一句话、三大支柱概览、全项目知识地图
 - 论证脉络总览、各文档职责与定位、推荐阅读路径
@@ -110,7 +110,7 @@
 - 与 Rust 1.93 完全对齐（92 项落点、重点变更在子文档体现、权威来源约定）
 - 可持续推进计划 F1–F4（格式统一→内容充分性→1.93 对齐→持续机制）
 
-0d. **[10_hierarchical_mapping_and_summary.md](./10_hierarchical_mapping_and_summary.md)** - 层次化梳理与映射总结 🆕
+0d. **[10_hierarchical_mapping_and_summary.md](../../archive/research_notes_2026_06_25/10_hierarchical_mapping_and_summary.md)** - 层次化梳理与映射总结 🆕
 
 - 按三大支柱的文档树
 - 概念族↔文档↔Def/Axiom/定理 映射表（支柱 1/2/3）
@@ -122,7 +122,7 @@
    - 研究笔记规范
    - 快速开始指南
 
-2. **[10_quick_reference.md](./10_quick_reference.md)** - 快速参考索引
+2. **[10_quick_reference.md](../../archive/research_notes_2026_06_25/10_quick_reference.md)** - 快速参考索引
    - 按研究领域查找
    - 按研究目标查找
    - 按关键词查找
@@ -142,7 +142,7 @@
    - 研究主题覆盖
    - 系统评估
 
-7. **[10_proof_index.md](./10_proof_index.md)** - 形式化证明文档索引 🆕
+7. **[10_proof_index.md](../../archive/research_notes_2026_06_25/10_proof_index.md)** - 形式化证明文档索引 🆕
    - 按研究领域分类的证明索引
    - 按证明类型分类的证明索引
    - 证明完成度统计
@@ -176,7 +176,7 @@
 7e. **[10_executable_semantics_roadmap.md](./10_executable_semantics_roadmap.md)** - 可执行语义路线图（K-Framework、PLT Redex）🆕
 7f. **AENEAS_INTEGRATION_PLAN** - Aeneas 对接调研与集成计划（已归档）
 7g. **COQ_OF_RUST_INTEGRATION_PLAN** - coq-of-rust 对接调研与集成计划（已归档）
-7h. **[10_core_theorems_full_proofs.md](./10_core_theorems_full_proofs.md)** - 核心定理完整证明（L2 级）🆕
+7h. **[10_core_theorems_full_proofs.md](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md)** - 核心定理完整证明（L2 级）🆕
 7i. **[10_core_theorems_en_summary.md](./10_core_theorems_en_summary.md)** - 核心定理英文摘要
 7j. **[10_formal_full_model_en_summary.md](./10_formal_full_model_en_summary.md)** - 形式化全模型英文摘要
 7k. **[10_formal_language_and_proofs.md](./10_formal_language_and_proofs.md)** - 形式语言与形式证明（推理规则、操作语义、判定形式）
@@ -185,7 +185,7 @@
 - 辅助引理显式编号、证明依赖 DAG、反例形式化否定
 
 7l. **[COQ_ISABELLE_PROOF_SCAFFOLDING](../archive/deprecated/README.md)** - Coq/Isabelle 证明骨架与 L3 实施指南（已归档）
-7m. **[coq_skeleton](../archive/deprecated/coq_skeleton/README.md)** - Coq 证明骨架（T-OW2/T-BR1/T-TY3）；本目录仅保留 [coq_skeleton/README.md](./coq_skeleton/README.md) 重定向（已归档）
+7m. **[coq_skeleton](../archive/deprecated/coq_skeleton/README.md)** - Coq 证明骨架（T-OW2/T-BR1/T-TY3）；本目录仅保留 [coq_skeleton/README.md](../../archive/deprecated/coq_skeleton/README.md) 重定向（已归档）
 
 1. **[10_comprehensive_systematic_overview.md](./10_comprehensive_systematic_overview.md)** - 全面系统化梳理总览
    - 五大梳理维度（概念定义、属性关系、解释论证、形式化证明、思维表征）
@@ -227,19 +227,19 @@
 
 - 安全/unsafe 定义与边界、契约体系、UB 分类、安全抽象
 
-1. **[10_rust_193_language_features_comprehensive_analysis.md](./10_rust_193_language_features_comprehensive_analysis.md)** - Rust 1.93 语言特性全面分析 🆕
-2. **[10_rust_193_counterexamples_index.md](./10_rust_193_counterexamples_index.md)** - Rust 1.93 相关反例与边界集中索引 🆕（与 FORMAT_AND_CONTENT_ALIGNMENT_PLAN F2.4 对齐）
+1. **[10_rust_193_language_features_comprehensive_analysis.md](../../archive/research_notes_2026_06_25/10_rust_193_language_features_comprehensive_analysis.md)** - Rust 1.93 语言特性全面分析 🆕
+2. **[10_rust_193_counterexamples_index.md](../../archive/research_notes_2026_06_25/10_rust_193_counterexamples_index.md)** - Rust 1.93 相关反例与边界集中索引 🆕（与 FORMAT_AND_CONTENT_ALIGNMENT_PLAN F2.4 对齐）
 
 - 92 项语言特性全覆盖（内存、类型、Trait、控制流、并发、宏、模块、常量、FFI、1.93 新增）
 - 每项含动机、设计决策、形式化引用、反例
-- 配套 [RUST_193_FEATURE_MATRIX](./10_rust_193_feature_matrix.md) 按特性族五维矩阵
+- 配套 [RUST_193_FEATURE_MATRIX](../../archive/research_notes_2026_06_25/10_rust_193_feature_matrix.md) 按特性族五维矩阵
 
 1. **[10_core_features_full_chain.md](./10_core_features_full_chain.md)** - 核心特性完整链 🆕
 
 - 13 项核心特性（所有权、借用、生命周期、Pin、Send/Sync、Future、Trait、泛型、match、for、Option/Result、闭包、?）统一链
 - 定义→概念→属性→关系→解释→示例→论证→形式化证明
 
-1. **[10_feature_template.md](./10_feature_template.md)** - 特性精简模板 🆕
+1. **[10_feature_template.md](../../archive/research_notes_2026_06_25/10_feature_template.md)** - 特性精简模板 🆕
 
 - 79 项非核心特性的「概念→形式化引用→反例」模板
 
@@ -253,7 +253,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-1. **[10_progress_tracking.md](./10_progress_tracking.md)** - 研究进展跟踪
+1. **[10_progress_tracking.md](../../archive/research_notes_2026_06_25/10_progress_tracking.md)** - 研究进展跟踪
    - 详细进展跟踪
    - 任务状态统计
    - 完成度分析
@@ -263,20 +263,20 @@
    - 四大检查维度、权威来源对齐
    - 六阶段分步推进方案（100% 完成）
 
-3. **[10_task_checklist.md](./10_task_checklist.md)** - 研究任务清单
+3. **[10_task_checklist.md](../../archive/research_notes_2026_06_25/10_task_checklist.md)** - 研究任务清单
    - 具体可执行任务
    - 任务优先级分类
    - 任务状态跟踪
    - 任务统计信息
 
-4. **[10_writing_guide.md](./10_writing_guide.md)** - 研究笔记写作指南
+4. **[10_writing_guide.md](../../archive/research_notes_2026_06_25/10_writing_guide.md)** - 研究笔记写作指南
    - 写作前准备
    - 各部分写作技巧
    - 格式规范
    - 内容组织
    - 质量检查
 
-5. **[10_statistics.md](./10_statistics.md)** - 研究笔记系统统计报告
+5. **[10_statistics.md](../../archive/research_notes_2026_06_25/10_statistics.md)** - 研究笔记系统统计报告
    - 文档统计
    - 研究笔记统计
    - 内容统计
@@ -315,7 +315,7 @@
    - 内存分析工具
    - 测试工具
 
-3. **[10_formal_verification_guide.md](./10_formal_verification_guide.md)** - 形式化工具验证指南 ✅ 100%
+3. **[10_formal_verification_guide.md](../../archive/research_notes_2026_06_25/10_formal_verification_guide.md)** - 形式化工具验证指南 ✅ 100%
    - Coq/Isabelle 验证流程
    - 六类验证（所有权、借用、生命周期、类型系统、异步状态机、Pin）框架与任务清单
 
@@ -347,18 +347,18 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-1. **[10_template.md](./10_template.md)** - 研究笔记模板
+1. **[10_template.md](../../archive/research_notes_2026_06_25/10_template.md)** - 研究笔记模板
    - 标准化的研究笔记结构
    - 格式示例
    - 快速创建指南
 
-2. **[10_contributing.md](./10_contributing.md)** - 贡献指南
+2. **[10_contributing.md](../../archive/research_notes_2026_06_25/10_contributing.md)** - 贡献指南
    - 贡献类型
    - 贡献流程
    - 质量标准
    - 检查清单
 
-3. **[10_quality_checklist.md](./10_quality_checklist.md)** - 质量检查清单
+3. **[10_quality_checklist.md](../../archive/research_notes_2026_06_25/10_quality_checklist.md)** - 质量检查清单
    - 元信息检查
    - 内容质量检查
    - 学术质量检查
@@ -381,7 +381,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**目录**: [formal_methods/](./formal_methods/README.md)
+**目录**: [formal_methods/](../../archive/research_notes_2026_06_25/formal_methods/README.md)
 
 1. **[10_ownership_model.md](./formal_methods/10_ownership_model.md)** - 所有权模型形式化
    - 研究目标: 形式化定义所有权系统，证明内存安全
@@ -423,7 +423,7 @@
    - 状态: ✅ 已完成 (100%)
    - 关键词: 安全可判定、ownership、borrow、Send、Sync、Pin、async
 
-9. **[10_formal_methods_completeness_checklist.md](./formal_methods/10_formal_methods_completeness_checklist.md)** - formal_methods 完备性检查表
+9. **[10_formal_methods_completeness_checklist.md](../../archive/research_notes_2026_06_25/formal_methods/10_formal_methods_completeness_checklist.md)** - formal_methods 完备性检查表
    - 研究目标: 六篇×六维（概念定义、属性关系、解释论证、形式证明、反例、思维表征四类）自检，确保充分完整完备
    - 状态: ✅ 六篇全覆盖
    - 关键词: 完备性、六维、formal_methods、自检
@@ -438,7 +438,7 @@
 
 **目录**: [type_theory/](./type_theory/README.md)
 
-1. **[00_completeness_gaps.md](./formal_methods/00_completeness_gaps.md)** - 类型理论完备性缺口
+1. **[00_completeness_gaps.md](../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md)** - 类型理论完备性缺口
    - 研究目标: 形式化论证不充分声明；LUB、Copy、RPITIT、组合法则等缺口索引
    - 状态: ✅ 缺口已声明；阶段 1–7 Def 占位完成
    - 关键词: 完备性、LUB、Copy、RPITIT、coherence、组合法则
@@ -565,7 +565,7 @@
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-- [类型理论完备性缺口](./formal_methods/00_completeness_gaps.md)
+- [类型理论完备性缺口](../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md)
 - [类型系统基础](./type_theory/10_type_system_foundations.md)
 - [Trait 系统形式化](./type_theory/10_trait_system_formalization.md)
 - [高级类型特性](./type_theory/10_advanced_types.md)
@@ -621,8 +621,8 @@
 
 ### 版本与特性
 
-- [Rust 1.93 语言特性全面分析](./10_rust_193_language_features_comprehensive_analysis.md)
-- [Rust 1.92 研究更新](./10_rust_192_research_update_2025_12_11.md)、[Rust 1.91 研究更新](./10_rust_191_research_update_2025_11_15.md)
+- [Rust 1.93 语言特性全面分析](../../archive/research_notes_2026_06_25/10_rust_193_language_features_comprehensive_analysis.md)
+- [Rust 1.92 研究更新](../../archive/research_notes_2026_06_25/10_rust_192_research_update_2025_12_11.md)、[Rust 1.91 研究更新](../../archive/research_notes_2026_06_25/10_rust_191_research_update_2025_11_15.md)
 
 ---
 
@@ -673,13 +673,13 @@
 ### 核心文档
 
 - [主索引](./README.md)
-- [快速参考](./10_quick_reference.md)
+- [快速参考](../../archive/research_notes_2026_06_25/10_quick_reference.md)
 - [研究路线图](./10_research_roadmap.md)
 - [系统总结](./10_system_summary.md)
 
 ### 目录索引
 
-- [形式化方法索引](./formal_methods/README.md)
+- [形式化方法索引](../../archive/research_notes_2026_06_25/formal_methods/README.md)
 - [类型理论索引](./type_theory/README.md)
 - [实验研究索引](./experiments/README.md)
 
@@ -695,7 +695,7 @@
 
 > **适用版本**: Rust 1.96.0+
 
-详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
+详见 [RUST_194_RESEARCH_UPDATE](../../archive/research_notes_2026_06_25/10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 

@@ -339,7 +339,7 @@ CQRS 使用 `tokio::sync::mpsc` 传递事件。
 | 场景 | ✅ | 典型场景、RPC、重试 |
 | 反例 | ✅ | 安全边界与 FFI |
 | 衔接 | ✅ | Send、序列化、形式化基础 |
-| 权威对应 | ✅ | [Fowler EAA](https://martinfowler.com/eaaCatalog/)、[formal_methods](../../../research_notes/formal_methods/README.md)、[04_expressiveness_boundary](../02_workflow_safe_complete_models/04_expressiveness_boundary.md) |
+| 权威对应 | ✅ | [Fowler EAA](https://martinfowler.com/eaaCatalog/)、[formal_methods](../../../../archive/research_notes_2026_06_25/formal_methods/README.md)、[04_expressiveness_boundary](../02_workflow_safe_complete_models/04_expressiveness_boundary.md) |
 
 ---
 

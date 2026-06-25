@@ -51,7 +51,7 @@
 | 子模块 | 映射目标 | 说明 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **02 所有权系统** | [research_notes/formal_methods/10_ownership_model.md](../research_notes/formal_methods/10_ownership_model.md) | 所有权形式化模型 |
-| **03 所有权与借用** | [research_notes/formal_methods/](../research_notes/formal_methods/README.md) | 借用检查器、所有权、生命周期 |
+| **03 所有权与借用** | [research_notes/formal_methods/](../../archive/research_notes_2026_06_25/formal_methods/README.md) | 借用检查器、所有权、生命周期 |
 | **02 内存安全** | [research_notes/formal_methods/10_borrow_checker_proof.md](../research_notes/formal_methods/10_borrow_checker_proof.md) | 借用检查器与内存安全 |
 | **05 Trait 系统** | [research_notes/type_theory/10_trait_system_formalization.md](../research_notes/type_theory/10_trait_system_formalization.md) | Trait 形式化 |
 | **06 生命周期管理** | research_notes/formal_methods/10_lifetime_formalization.md | 生命周期形式化 |

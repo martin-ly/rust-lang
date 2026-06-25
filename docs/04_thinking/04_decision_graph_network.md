@@ -1028,7 +1028,7 @@ graph TD
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - [04_proof_graph_network.md](./04_proof_graph_network.md) - 证明图网详细文档
-- [10_proof_index.md](../research_notes/10_proof_index.md) - 形式化证明索引
+- [10_proof_index.md](../../archive/research_notes_2026_06_25/10_proof_index.md) - 形式化证明索引
 
 ### 分布式与工作流决策树（formal_methods 独立）
 

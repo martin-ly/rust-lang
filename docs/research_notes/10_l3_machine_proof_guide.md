@@ -442,7 +442,7 @@ charon cargo --preset=aeneas
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```bash
-cd docs/research_notes/coq_skeleton
+cd archive/deprecated/coq_skeleton
 coq_makefile -f _CoqProject -o Makefile
 make
 ```

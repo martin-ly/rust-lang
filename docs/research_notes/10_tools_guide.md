@@ -189,7 +189,7 @@ cargo kani --function test_abs
 
 **说明**：Coq、Lean 为专业形式化证明语言，需额外学习成本。
 本项目已归档 Coq 骨架与 Aeneas 对接计划至 [archive/deprecated/](../archive/deprecated/README.md)。
-主路径聚焦 **数学风格形式化论证 + Rust 示例**（见 [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md)）。
+主路径聚焦 **数学风格形式化论证 + Rust 示例**（见 [CORE_THEOREMS_FULL_PROOFS](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md)）。
 若需机器可检查证明，可参考 Prusti/Kani 或国际对标 [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./10_international_formal_verification_index.md)。
 
 ---
@@ -692,7 +692,7 @@ cargo expand > expanded.rs
 
 - [研究方法论](./10_research_methodology.md) - 研究方法概述
 - [实验研究索引](./experiments/README.md) - 实验研究工具
-- [形式化方法索引](./formal_methods/README.md) - 形式化工具
+- [形式化方法索引](../../archive/research_notes_2026_06_25/formal_methods/README.md) - 形式化工具
 
 ---
 

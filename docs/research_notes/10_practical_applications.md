@@ -121,7 +121,7 @@
 
 *证明*：由 Def PA1；unsafe 块引入契约；安全抽象将 unsafe 封装，对外满足 Safe 规则；契约满足则与定理一致。∎
 
-**推论 PA-C1**：案例分析可引用 [PROOF_INDEX](./10_proof_index.md) 与 [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) 的论证链，建立与实际项目的追溯关系。
+**推论 PA-C1**：案例分析可引用 [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md) 与 [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) 的论证链，建立与实际项目的追溯关系。
 
 ---
 
@@ -1077,7 +1077,7 @@ impl<T> Drop for SafeVec<T> {
 | 组合案例 | [04_compositional_engineering](software_design_theory/04_compositional_engineering/README.md) CE-T1–T3 | 模块组合、CE-T1/T2/T3 |
 | unsafe 案例 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./10_safe_unsafe_comprehensive_analysis.md)、PA-L1 | 安全抽象、契约 |
 
-**引用**：案例分析可引用 [PROOF_INDEX](./10_proof_index.md) 建立与形式化定理的追溯关系；见 PA-T1、PA-L1、PA-C1。
+**引用**：案例分析可引用 [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md) 建立与形式化定理的追溯关系；见 PA-T1、PA-L1、PA-C1。
 
 ---
 

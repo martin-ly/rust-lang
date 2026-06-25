@@ -446,7 +446,7 @@ Pin 使用场景决策树
 | 决策树 | 本文各机制「使用场景/决策树」；[DECISION_GRAPH_NETWORK](../04_thinking/04_decision_graph_network.md) |
 | 多维矩阵 | [DESIGN_MECHANISM_RATIONALE 矩阵总览](#设计机制论证矩阵总览)；[UNIFIED_SYSTEMATIC_FRAMEWORK](./10_unified_systematic_framework.md) |
 
-*依据*：[HIERARCHICAL_MAPPING_AND_SUMMARY](./10_hierarchical_mapping_and_summary.md) § 文档↔思维表征。
+*依据*：[HIERARCHICAL_MAPPING_AND_SUMMARY](../../archive/research_notes_2026_06_25/10_hierarchical_mapping_and_summary.md) § 文档↔思维表征。
 
 ---
 
@@ -461,7 +461,7 @@ Pin 使用场景决策树
 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md) | 构造性语义、表达能力边界 |
 | [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) | 论证缺口、概念-公理-定理映射 |
 | [MIND_MAP_COLLECTION](../04_thinking/04_mind_map_collection.md) | 设计机制论证思维导图（§8） |
-| [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./10_rust_193_language_features_comprehensive_analysis.md) | **Rust 1.93 语言特性全面分析**：92 项特性全覆盖 |
+| [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../../archive/research_notes_2026_06_25/10_rust_193_language_features_comprehensive_analysis.md) | **Rust 1.93 语言特性全面分析**：92 项特性全覆盖 |
 
 ---
 

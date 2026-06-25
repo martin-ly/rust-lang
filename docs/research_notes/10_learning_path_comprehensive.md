@@ -121,19 +121,19 @@
 
 **Day 1-2: 所有权概念**
 
-- 阅读: [形式化概念百科](./10_formal_concepts_encyclopedia.md) §1.1
+- 阅读: [形式化概念百科](../../archive/research_notes_2026_06_25/10_formal_concepts_encyclopedia.md) §1.1
 - 实践: 编写Move/Copy示例代码
 - 检验: 能解释"为什么转移后原变量不能用"
 
 **Day 3-4: 借用规则**
 
-- 阅读: [形式化概念百科](./10_formal_concepts_encyclopedia.md) §1.2
+- 阅读: [形式化概念百科](../../archive/research_notes_2026_06_25/10_formal_concepts_encyclopedia.md) §1.2
 - 实践: 编写&和&mut示例
 - 检验: 能解释"为什么可变和不可变借用不能共存"
 
 **Day 5-7: 生命周期直觉**
 
-- 阅读: [形式化概念百科](./10_formal_concepts_encyclopedia.md) §1.3, §3
+- 阅读: [形式化概念百科](../../archive/research_notes_2026_06_25/10_formal_concepts_encyclopedia.md) §1.3, §3
 - 实践: 解决编译器生命周期错误
 - 检验: 能读懂简单生命周期标注
 
@@ -145,12 +145,12 @@
 
 **Day 1-2: 类型安全**
 
-- 阅读: [定理汇编](./10_theorems_and_proof_strategies.md) §3
+- 阅读: [定理汇编](../../archive/research_notes_2026_06_25/10_theorems_and_proof_strategies.md) §3
 - 理解: 什么是"良类型程序不会崩溃"
 
 **Day 3-4: Send与Sync**
 
-- 阅读: [形式化概念百科](./10_formal_concepts_encyclopedia.md) §4.1
+- 阅读: [形式化概念百科](../../archive/research_notes_2026_06_25/10_formal_concepts_encyclopedia.md) §4.1
 - 实践: 判断类型是否Send/Sync
 
 **Day 5-7: 反例学习**
@@ -212,7 +212,7 @@
 
 **主题**: 形式化方法入门
 
-- 阅读: [认知论证框架](./10_cognitive_argumentation_framework.md)
+- 阅读: [认知论证框架](../../archive/research_notes_2026_06_25/10_cognitive_argumentation_framework.md)
 - 学习: 如何阅读形式化定义
 - 理解: L1/L2/L3的区别
 
@@ -222,7 +222,7 @@
 
 **主题**: 所有权与借用的形式化
 
-- 阅读: [定理汇编](./10_theorems_and_proof_strategies.md) §1, §2
+- 阅读: [定理汇编](../../archive/research_notes_2026_06_25/10_theorems_and_proof_strategies.md) §1, §2
 - 深入: T-OW2 (所有权唯一性) 证明思路
 - 深入: T-BR1 (数据竞争自由) 证明思路
 
@@ -230,7 +230,7 @@
 
 **主题**: 类型安全的形式化
 
-- 阅读: [定理汇编](./10_theorems_and_proof_strategies.md) §3
+- 阅读: [定理汇编](../../archive/research_notes_2026_06_25/10_theorems_and_proof_strategies.md) §3
 - 理解: 进展性与保持性
 - 学习: 型变规则的形式化
 
@@ -238,7 +238,7 @@
 
 **主题**: 并发安全的形式化
 
-- 阅读: [形式化概念百科](./10_formal_concepts_encyclopedia.md) §4
+- 阅读: [形式化概念百科](../../archive/research_notes_2026_06_25/10_formal_concepts_encyclopedia.md) §4
 - 理解: Send/Sync的形式化定义
 - 学习: Future与Pin的形式化
 
@@ -326,9 +326,9 @@
 
 | 文档 | 难度 | 路径 | 说明 |
 | :--- | :--- | :--- | :--- |
-| [形式化概念百科](./10_formal_concepts_encyclopedia.md) | ⭐⭐ | 全部 | 核心概念定义 |
-| [定理汇编](./10_theorems_and_proof_strategies.md) | ⭐⭐⭐ | 进阶+专家 | 证明思路 |
-| [认知论证框架](./10_cognitive_argumentation_framework.md) | ⭐⭐ | 全部 | 方法论 |
+| [形式化概念百科](../../archive/research_notes_2026_06_25/10_formal_concepts_encyclopedia.md) | ⭐⭐ | 全部 | 核心概念定义 |
+| [定理汇编](../../archive/research_notes_2026_06_25/10_theorems_and_proof_strategies.md) | ⭐⭐⭐ | 进阶+专家 | 证明思路 |
+| [认知论证框架](../../archive/research_notes_2026_06_25/10_cognitive_argumentation_framework.md) | ⭐⭐ | 全部 | 方法论 |
 
 ### 思维导图
 >
@@ -416,7 +416,7 @@ println!("{}", x);
 
 > **适用版本**: Rust 1.96.0+
 
-详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
+详见 [RUST_194_RESEARCH_UPDATE](../../archive/research_notes_2026_06_25/10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 

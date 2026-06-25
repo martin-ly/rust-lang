@@ -14,6 +14,9 @@
 |------|------|------|
 | [tree_borrows_authoritative_guide.md](02_tree_borrows_authoritative_guide.md) | Tree Borrows 权威指南 | ⭐⭐⭐⭐⭐ |
 | [coq_formalization_guide.md](01_coq_formalization_guide.md) | Coq 形式化验证实战 | ⭐⭐⭐⭐⭐ |
+| [ownership_model_comprehensive.md](03_ownership_model_comprehensive.md) | 所有权模型综合指南 | ⭐⭐⭐⭐⭐ |
+| [borrow_checker_proof_guide.md](04_borrow_checker_proof_guide.md) | 借用检查器证明导读 | ⭐⭐⭐⭐⭐ |
+| [type_system_foundations_guide.md](05_type_system_foundations_guide.md) | Rust 类型系统基础指南 | ⭐⭐⭐⭐⭐ |
 
 ## 🎯 前置要求
 >
@@ -35,7 +38,7 @@
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-05-19
+**最后更新**: 2026-06-25
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---

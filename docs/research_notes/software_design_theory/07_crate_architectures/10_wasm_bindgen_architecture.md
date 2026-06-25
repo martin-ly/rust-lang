@@ -372,7 +372,7 @@ export async function fetch_data(url) {
 
 `wasm_bindgen_futures` crate 提供了 `JsFuture` 类型，将 JS `Promise` 转换为 Rust 的 `Future`（通过事件循环集成），使得 Rust 代码可以使用 `async/await` 语法直接等待 JS 异步操作。
 
-> 来源: wasm-bindgen-futures 文档, https: /  / [docs.rs](https://docs.rs/) / wasm-bindgen-futures / latest / wasm_bindgen_futures / 
+> 来源: wasm-bindgen-futures 文档, https: /  / [docs.rs](https://docs.rs/) / wasm-bindgen-futures / latest / wasm_bindgen_futures /
 
 ---
 
@@ -436,8 +436,8 @@ let func: &js_sys::Function = closure.as_ref().unchecked_ref();
 | `dyn_into()` | 高（运行时类型检查） | ✅ 安全 | 用户输入、不确定类型 |
 | `unchecked_ref()` | 零 | ⚠️ 信任前提 | 内部实现、已知类型 |
 
-> 来源: web-sys 文档, https: /  / [docs.rs](https://docs.rs/) / web-sys / latest / web_sys / 
-> 来源: js-sys 文档, https: /  / [docs.rs](https://docs.rs/) / js-sys / latest / js_sys / 
+> 来源: web-sys 文档, https: /  / [docs.rs](https://docs.rs/) / web-sys / latest / web_sys /
+> 来源: js-sys 文档, https: /  / [docs.rs](https://docs.rs/) / js-sys / latest / js_sys /
 
 ---
 

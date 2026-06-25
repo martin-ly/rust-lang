@@ -142,7 +142,7 @@ Proof.
 ### 步骤 1：验证骨架可编译
 
 ```bash
-cd docs/research_notes/coq_skeleton
+cd archive/deprecated/coq_skeleton
 coqc OWNERSHIP_UNIQUENESS.v
 coqc BORROW_DATARACE_FREE.v
 coqc TYPE_SAFETY.v

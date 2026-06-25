@@ -1442,7 +1442,7 @@ fn main() {
 | 形式化方法 | [../research_notes/formal_methods/10_ownership_model.md](../research_notes/formal_methods/10_ownership_model.md) | 所有权模型 |
 | 借用检查器 | [../research_notes/formal_methods/10_borrow_checker_proof.md](../research_notes/formal_methods/10_borrow_checker_proof.md) | 借用检查器证明 |
 | 类型系统 | [../research_notes/type_theory/10_type_system_foundations.md](../research_notes/type_theory/10_type_system_foundations.md) | 类型系统基础 |
-| 核心定理 | [../research_notes/10_core_theorems_full_proofs.md](../research_notes/10_core_theorems_full_proofs.md) | 完整定理证明 |
+| 核心定理 | [../research_notes/10_core_theorems_full_proofs.md](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) | 完整定理证明 |
 
 ### 项目文档
 

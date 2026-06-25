@@ -261,7 +261,7 @@
 
 5. **形式化与验证（研究者路径）**
    - [形式化证明系统指南](../research_notes/10_formal_proof_system_guide.md)
-   - [核心定理完整证明](../research_notes/10_core_theorems_full_proofs.md)
+   - [核心定理完整证明](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md)
    - [国际对标索引](../research_notes/10_international_formal_verification_index.md)
 
 **推荐资源**:
@@ -703,13 +703,13 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 ├── 分离逻辑基础
 ├── 线性类型理论
 ├── RustBelt 论文研读
-└── 阅读: [形式化方法研究](../research_notes/formal_methods/README.md)
+└── 阅读: [形式化方法研究](../../archive/research_notes_2026_06_25/formal_methods/README.md)
 
 第 5-8 周: 所有权与借用形式化
 ├── [所有权模型形式化](../research_notes/formal_methods/10_ownership_model.md)
 ├── [借用检查器证明](../research_notes/formal_methods/10_borrow_checker_proof.md)
 ├── 生命周期形式化
-└── 实践: Prusti/Kani 验证或数学风格证明（见 [CORE_THEOREMS_FULL_PROOFS](../research_notes/10_core_theorems_full_proofs.md)）
+└── 实践: Prusti/Kani 验证或数学风格证明（见 [CORE_THEOREMS_FULL_PROOFS](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md)）
 
 第 9-12 周: 并发与异步形式化
 ├── [Send/Sync 形式化](../research_notes/formal_methods/10_send_sync_formalization.md)
@@ -719,7 +719,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 
 第 13-16 周: 前沿研究
 ├── [形式化证明系统指南](../research_notes/10_formal_proof_system_guide.md)
-├── [核心定理完整证明](../research_notes/10_core_theorems_full_proofs.md)
+├── [核心定理完整证明](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md)
 ├── [国际对标索引](../research_notes/10_international_formal_verification_index.md)
 └── 研究项目: 选择一个开放问题深入研究
 ```
@@ -793,9 +793,9 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [形式化方法研究](../research_notes/formal_methods/README.md)
+- [形式化方法研究](../../archive/research_notes_2026_06_25/formal_methods/README.md)
 - [形式化证明系统指南](../research_notes/10_formal_proof_system_guide.md)
-- [证明索引](../research_notes/10_proof_index.md)
+- [证明索引](../../archive/research_notes_2026_06_25/10_proof_index.md)
 - [国际对标索引](../research_notes/10_international_formal_verification_index.md)
 
 ---

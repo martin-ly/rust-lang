@@ -283,7 +283,7 @@ assert_eq!(*data.lock().unwrap(), 10);
 | 场景 | ✅ | 典型场景、选型 |
 | 反例 | ✅ | Rc 跨线程、死锁 |
 | 衔接 | ✅ | Send/Sync、borrow、ownership |
-| 权威对应 | ✅ | [RustBelt RBRlx](https://plv.mpi-sws.org/rustbelt/rbrlx/)、[formal_methods](../../../research_notes/formal_methods/README.md) |
+| 权威对应 | ✅ | [RustBelt RBRlx](https://plv.mpi-sws.org/rustbelt/rbrlx/)、[formal_methods](../../../../archive/research_notes_2026_06_25/formal_methods/README.md) |
 
 ---
 

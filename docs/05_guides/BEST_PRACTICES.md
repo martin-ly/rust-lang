@@ -133,7 +133,7 @@
 
 本文档提供 Rust 项目开发的综合最佳实践，涵盖从代码编写到项目组织的各个方面，合并了项目级代码质量、性能、测试、文档、工具使用等主题。
 
-**形式化引用**：T-OW2、T-BR1、T-TY3、SEND-T1、SYNC-T1。综合见 [formal_methods](../research_notes/formal_methods/README.md)、[THEOREM_RUST_EXAMPLE_MAPPING](../research_notes/10_theorem_rust_example_mapping.md)。
+**形式化引用**：T-OW2、T-BR1、T-TY3、SEND-T1、SYNC-T1。综合见 [formal_methods](../../archive/research_notes_2026_06_25/formal_methods/README.md)、[THEOREM_RUST_EXAMPLE_MAPPING](../research_notes/10_theorem_rust_example_mapping.md)。
 
 ---
 

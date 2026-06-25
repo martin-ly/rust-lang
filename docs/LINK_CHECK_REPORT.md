@@ -1,6 +1,7 @@
 # 链接有效性检查报告
 
 ## 统计
+
 | 类别 | 数量 |
 |:---|:---:|
 | 总链接数 | 117376 |
@@ -553,6 +554,7 @@
 | docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md | 形式化方法研究 | `../research_notes/formal_methods/README.md` | 文件不存在: docs\archive\c_class_audit_2026_06_08\research_notes\formal_methods\README.md |
 | docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md | 类型理论研究 | `../research_notes/type_theory/README.md` | 文件不存在: docs\archive\c_class_audit_2026_06_08\research_notes\type_theory\README.md |
 | docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md | Rust 1.94 特性速查（已归档）
+
 - [性能调优指南 | `../05_guides/05_performance_tuning_guide.md` | 文件不存在: docs\archive\c_class_audit_2026_06_08\05_guides\05_performance_tuning_guide.md |
 | docs\archive\c_class_audit_2026_06_08\01_learning\README.md | 01_learning_path_planning.md | `./01_learning_path_planning.md` | 文件不存在: docs\archive\c_class_audit_2026_06_08\01_learning\01_learning_path_planning.md |
 | docs\archive\c_class_audit_2026_06_08\01_learning\README.md | 10_formal_proof_system_guide.md | `../research_notes/10_formal_proof_system_guide.md` | 文件不存在: docs\archive\c_class_audit_2026_06_08\research_notes\10_formal_proof_system_guide.md |
@@ -2532,16 +2534,19 @@
 ## 修复建议
 
 ### 1. 文件不存在问题
+
 - 检查链接路径是否正确
 - 确认目标文件是否已被移动或删除
 - 更新链接指向正确的文件位置
 
 ### 2. 锚点不存在问题
+
 - 检查锚点ID是否与目标文件中的标题匹配
 - GitHub风格锚点：将标题转换为小写，空格替换为连字符，移除标点
 - 示例：`## Hello World!` -> `#hello-world`
 
 ### 3. 同文件锚点问题
+
 - 检查文档中是否存在对应的标题
 - 可能是文档结构已更改但目录未更新
 

@@ -23,7 +23,7 @@
 **前置**: 安装 [Coq](https://coq.inria.fr/)（建议 8.18+）
 
 ```bash
-cd docs/research_notes/coq_skeleton
+cd archive/deprecated/coq_skeleton
 coqc OWNERSHIP_UNIQUENESS.v
 coqc BORROW_DATARACE_FREE.v
 coqc TYPE_SAFETY.v

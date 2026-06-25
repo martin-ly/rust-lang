@@ -20,6 +20,7 @@
 > Tree Borrows 别名规则学术引用、Miri UB 检测工具来源、
 > 跨语言 unsafe 对比（C/C++ / Haskell `unsafePerformIO`）
 > [来源: Authority Source Sprint Batch 8]
+> **研究笔记迁移补充**: 2026-06-25 补充 docs/research_notes/10_safe_unsafe_comprehensive_analysis.md 中的 UB 分类与安全抽象原则。
 > **受众**: [专家] / [研究者]
 > **内容分级**: [实验级]
 > **相关文档**: 请参阅 [docs/rust-ownership-decidability/extensions/unsafe-rust-patterns.md](../../../concept/03_advanced/03_unsafe.md)
@@ -1120,6 +1121,78 @@ fn good_slice() {
 - [内联汇编 (Inline Assembly)](02_inline_asm.md)
 - [MaybeUninit](03_maybe_uninit.md)
 - [Rust 所有权深入](../../01_fundamentals/04_ownership.md)
+
+---
+
+## 🧩 从研究笔记迁移：Unsafe 综合参考补充
+>
+> **[来源: [docs/research_notes/10_safe_unsafe_comprehensive_analysis.md](../../../docs/research_notes/10_safe_unsafe_comprehensive_analysis.md)]**
+>
+> 本节从研究笔记中萃取出与本文档互补的 UB 分类、契约体系与安全抽象设计原则，作为快速参考。
+
+### 一、UB 分类速查表
+
+源自研究笔记的 UB 可归纳为五大类。每个 `unsafe` 操作前，建议逐项核对：
+
+| 类别 | 核心风险 | 典型触发点 | 检查项 |
+|------|----------|-----------|--------|
+| **内存 UB** | 访问无效内存 | 悬垂指针、越界、双重释放、未初始化读取 | 指针非空、对齐、在分配生命周期内；读取前已初始化 |
+| **类型 UB** | 破坏类型解释 | 错误 `transmute`、无效 `union` 字段读、违反 `Pin` 约束 | 大小/对齐兼容；只读取当前活动字段；不移动未 `Unpin` 的自引用 |
+| **并发 UB** | 数据竞争或错误同步 | 错误 `Send`/`Sync` impl、原子顺序不当、跨线程共享 `!Send` | 手动 impl 前验证线程不变量；使用正确 `Ordering` |
+| **FFI UB** | 外部 ABI 违反 | `extern` 签名不匹配、调用约定错误、内存所有权约定冲突 | ABI、`repr(C)` 布局、生命周期、panic 跨越边界 |
+| **实现定义/未指定** | 平台相关行为 | 有符号溢出（release 可 wrap）、整数布局假设 | 不依赖未指定行为做安全推理 |
+
+**最小核对清单（写 `unsafe` 块前自问）**：
+
+1. 所有原始指针是否已验证**非空、对齐、在有效分配内**？
+2. 解引用/读取的内存是否**已初始化**？
+3. 是否存在与 `&mut T` / `&T` 的**活跃别名冲突**（Tree Borrows）？
+4. `transmute` / `union` 是否满足**大小、对齐、活动字段**约束？
+5. 是否手动实现了 `Send`/`Sync`？若是，是否有完整 SAFETY 论证？
+6. FFI 调用是否匹配**ABI 与生命周期约定**？
+
+### 二、安全抽象设计原则
+
+研究笔记将安全抽象定义为：**内部使用 `unsafe`，对外仅暴露 safe API，且只要调用者只使用 safe API，就不会触发 UB**。要做到这一点，需要四层封装：
+
+1. **不变式（Invariant）先于实现**
+   - 先定义并文档化类型维护的不变量，例如 `Vec` 的 `len ≤ capacity`、原始指针始终来自同一次分配。
+   - 所有 safe API 必须保持这些不变式；所有 `unsafe` 操作必须在前置条件满足时调用。
+
+2. **最小化 `unsafe` 暴露面**
+   - 将 `unsafe` 块限制在实现内部，避免公开 `pub unsafe fn` 除非确实要把证明责任转移给用户。
+   - 一个类型应只有“安全外壳”，内部“不安全核心”不直接对外。
+
+3. **SAFETY 注释即契约**
+   - 对 `unsafe fn` 使用 `# Safety` 文档块声明调用者义务。
+   - 对 `unsafe { ... }` 块使用行内 `// SAFETY: ...` 说明为何当前上下文满足前置条件。
+   - 注释应覆盖：指针有效性、初始化状态、生命周期、别名约束、线程安全、Drop 责任。
+
+4. **验证闭环**
+   - 先用常规测试验证功能正确性；
+   - 再用 `MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test` 检测内存模型违规；
+   - 对关键不变式补充 Kani / fuzz / 代码审查。
+
+### 三、FFI 边界契约直觉
+
+FFI 是 `unsafe` 最常见的“外部契约”。从形式化角度看，每次 `extern "C"` 调用都是一次**跨语言 Hoare 三元组**：Rust 侧保证参数满足 C 函数的前置条件，C 侧保证返回值满足 Rust 的后置条件。任何一边违反，都可能导致 UB。
+
+关键边界不变量：
+
+- **ABI 对齐**：参数与返回类型必须 `repr(C)` 或在 ABI 上等价；签名中的指针可空性、可变性必须显式表达。
+- **所有权转移**：C 分配的内存由谁释放？Rust 分配的内存交给 C 后是否还会被 Rust 访问？
+- **生命周期**：C 返回的指针指向的内存有效多久？Rust 引用不能跨越 C 可能释放该内存的点。
+- **Panic 与异常**：Rust panic 不可跨越 FFI 边界传播；C 的 `longjmp` 也会破坏 Rust 栈。
+
+### 四、与形式化文档的关联
+
+| 形式化主题 | 关联文档 | 在 `unsafe` 中的角色 |
+|-----------|----------|----------------------|
+| **所有权形式化** | [concept/04_formal/03_ownership_formal.md](../../../concept/04_formal/03_ownership_formal.md) | `unsafe` 中的 `Box::into_raw` / `from_raw`、`ManuallyDrop`、`MaybeUninit` 都需要显式重建所有权公理。 |
+| **分离逻辑** | [concept/04_formal/11_separation_logic.md](../../../concept/04_formal/11_separation_logic.md) | RustBelt/Iris 用分离逻辑证明 safe 抽象封装 `unsafe` 实现；不变式可视为“资源”在 safe API 边界上的转移。 |
+| **借用消毒器** | [concept/04_formal/23_borrow_sanitizer.md](../../../concept/04_formal/23_borrow_sanitizer.md) | Tree Borrows / Miri 等工具本质上是借用模型的“运行时消毒器”，帮助检测 `unsafe` 中违反别名与来源（provenance）的行为。 |
+
+> 💡 **一句话总结**：`unsafe` 不是关闭安全检查，而是把编译器的证明责任显式地交还给程序员；安全抽象的目标是用代码结构 + 文档 + 工具，把这些证明责任重新封装回 safe API 之后。
 
 ---
 

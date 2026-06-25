@@ -4,7 +4,6 @@
 >
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2026-03-08
 > **版本**: v1.0
 > **描述**: Rust 核心概念与形式化定义的完整映射矩阵
@@ -33,7 +32,6 @@
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -159,7 +157,7 @@
 - [所有权概念族谱](./10_ownership_concept_mindmap.md)
 - [分布式概念族谱](10_distributed_concept_mindmap.md)
 - [工作流概念族谱](./10_workflow_concept_mindmap.md)
-- [形式化方法索引](./formal_methods/README.md)
+- [形式化方法索引](../../archive/research_notes_2026_06_25/formal_methods/README.md)
 
 ---
 
@@ -178,7 +176,7 @@
 - LazyCell/LazyLock 的延迟语义
 - 与现有理论框架的集成
 
-详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
+详见 [RUST_194_RESEARCH_UPDATE](../../archive/research_notes_2026_06_25/10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 
@@ -219,13 +217,14 @@
 #### 相关文档
 
 - Rust 1.94 迁移指南
-- [Rust 1.94 特性速查
+- Rust 1.94 特性速查
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

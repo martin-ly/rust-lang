@@ -232,10 +232,10 @@
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) — 核心定理 T-OW2、T-BR1、T-TY3 完整证明（L2）
+- [CORE_THEOREMS_FULL_PROOFS](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) — 核心定理 T-OW2、T-BR1、T-TY3 完整证明（L2）
 - [FORMAL_LANGUAGE_AND_PROOFS](10_formal_language_and_proofs.md) — 形式语言与形式证明（推理规则、操作语义、判定形式）
 - [FORMAL_FULL_MODEL_EN_SUMMARY](./10_formal_full_model_en_summary.md) — 英文摘要
-- [PROOF_INDEX](./10_proof_index.md) — 105+ 证明索引、按深度导航
+- [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md) — 105+ 证明索引、按深度导航
 - [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./10_international_formal_verification_index.md) — 国际对标
 - [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](10_formal_proof_critical_analysis_and_plan_2026_02.md) — 批判性分析与推进计划
 
@@ -252,7 +252,7 @@
 
 > **适用版本**: Rust 1.96.0+
 
-详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
+详见 [RUST_194_RESEARCH_UPDATE](../../archive/research_notes_2026_06_25/10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 

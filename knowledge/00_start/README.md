@@ -80,7 +80,6 @@
 
 - [安装 Rust](./02_installation.md)
 
-
 ## 📚 模块 8: 国际化对齐
 
 > 本模块按项目模板补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
@@ -106,4 +105,3 @@
 | [Brown University Interactive Rust Book](https://rust-book.cs.brown.edu/) | 可视化交互式 Rust 教程 |
 | [Rustlings](https://github.com/rust-lang/rustlings) | 官方交互式练习 |
 | [This Week in Rust](https://this-week-in-rust.org/) | 社区周报 |
-

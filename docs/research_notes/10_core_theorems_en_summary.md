@@ -29,7 +29,7 @@
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
-> **Source**: [10_core_theorems_full_proofs.md](./10_core_theorems_full_proofs.md) (Chinese)
+> **Source**: [10_core_theorems_full_proofs.md](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) (Chinese)
 > **Proof depth**: L2 (full proofs; L3 machine-checkable scaffolding in progress)
 
 ---
@@ -99,8 +99,8 @@ L2-level full proofs for **ownership T2**, **borrow T1**, and **type T3**, with 
 - [FORMAL_FULL_MODEL_OVERVIEW](./10_formal_full_model_overview.md) — Unified formal system (incl. Send/Sync)
 - [send_sync_formalization](./formal_methods/10_send_sync_formalization.md) — Send/Sync Def SEND1/SYNC1, SEND-T1/SYNC-T1, SEND-SYNC-T1
 - [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./10_safe_decidable_mechanisms_overview.md) — Safe decidable mechanisms (per-mechanism sections + 4-dim tables)
-- [PROOF_INDEX](./10_proof_index.md) — 105+ proof index
-- [AENEAS_INTEGRATION_PLAN](./10_aeneas_integration_plan.md) — Safe Rust → proof assistant
+- [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md) — 105+ proof index
+- [AENEAS_INTEGRATION_PLAN](../../archive/research_notes_2026_06_25/10_aeneas_integration_plan.md) — Safe Rust → proof assistant
 
 ---
 

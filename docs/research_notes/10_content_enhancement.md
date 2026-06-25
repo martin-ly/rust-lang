@@ -215,7 +215,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**Def CE1（内容完备性）**：研究笔记 $N$ 满足**内容完备**，当且仅当 $N$ 对核心概念有 Def、对主要结论有定理及证明或证明思路、对边界有反例、与 [PROOF_INDEX](./10_proof_index.md) 衔接。
+**Def CE1（内容完备性）**：研究笔记 $N$ 满足**内容完备**，当且仅当 $N$ 对核心概念有 Def、对主要结论有定理及证明或证明思路、对边界有反例、与 [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md) 衔接。
 
 **Axiom CE1**：形式化完备（见 [BEST_PRACTICES](./10_best_practices.md) Def BP1）蕴含内容完备；Def CE1 为 Def BP1 的细化。**实质内容完备**见 [BEST_PRACTICES](./10_best_practices.md) Def BP2 与实践对照表。
 
@@ -237,9 +237,9 @@
 | **属性关系层** | 引理/定理/推论及依赖 | 本页定理与公理/引理的依赖关系 | 表格或 DAG 片段（如 A→L→T→C） |
 | **解释论证层** | 关键定理的论证块 | 陈述 → 依赖 → 证明步骤/思路 → 反例（若有） | 每定理至少「证明思路」或完整证明；注明引用链 |
 
-**可选**：文末「相关思维表征」注明本页对应的思维导图章节、矩阵位置、证明树、决策树（见 [HIERARCHICAL_MAPPING_AND_SUMMARY](./10_hierarchical_mapping_and_summary.md)）。
+**可选**：文末「相关思维表征」注明本页对应的思维导图章节、矩阵位置、证明树、决策树（见 [HIERARCHICAL_MAPPING_AND_SUMMARY](../../archive/research_notes_2026_06_25/10_hierarchical_mapping_and_summary.md)）。
 
-**检查**：见 [QUALITY_CHECKLIST](10_quality_checklist.md) 对应项。
+**检查**：见 [QUALITY_CHECKLIST](../../archive/research_notes_2026_06_25/10_quality_checklist.md) 对应项。
 
 ---
 
@@ -254,7 +254,7 @@
 | **矩阵文档**（如 01_design_patterns_formal/README §23 模式矩阵、03_execution_models/README §执行模型矩阵、formal_methods/README §六篇并表） | 每行/每格注明「详见 xx」或列「形式化文档」列链接到具体子文档 |
 | **子文档**（各模式、各执行模型、ownership/borrow/…、send_sync） | 元信息或文末注明「本概念在 矩阵文档 §节名 第 x 行/第 y 列」或「23 模式矩阵」「六篇并表」等 |
 
-**已实施**：23 模式均在元信息中含「23 模式矩阵」行号；执行模型矩阵、formal_methods **六篇并表**均含文档列。新增矩阵时按上表补全双向链接；见 [MAINTENANCE_GUIDE](./10_maintenance_guide.md) 更新流程。
+**已实施**：23 模式均在元信息中含「23 模式矩阵」行号；执行模型矩阵、formal_methods **六篇并表**均含文档列。新增矩阵时按上表补全双向链接；见 [MAINTENANCE_GUIDE](../../archive/research_notes_2026_06_25/10_maintenance_guide.md) 更新流程。
 
 ---
 
@@ -629,9 +629,9 @@ error[E0382]: borrow of moved value: `s1`
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [研究笔记主索引](./README.md)
-- [研究笔记写作指南](./10_writing_guide.md)
-- [研究笔记模板](./10_template.md)
-- [质量检查清单](./10_quality_checklist.md)
+- [研究笔记写作指南](../../archive/research_notes_2026_06_25/10_writing_guide.md)
+- [研究笔记模板](../../archive/research_notes_2026_06_25/10_template.md)
+- [质量检查清单](../../archive/research_notes_2026_06_25/10_quality_checklist.md)
 
 ### 完善工具
 >
@@ -645,7 +645,7 @@ error[E0382]: borrow of moved value: `s1`
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [研究笔记示例](./10_example.md)
+- [研究笔记示例](../../archive/research_notes_2026_06_25/10_example.md)
 - [所有权模型形式化](./formal_methods/10_ownership_model.md)
 - [类型系统基础](./type_theory/10_type_system_foundations.md)
 

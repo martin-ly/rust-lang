@@ -42,8 +42,8 @@
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 已完成
-> **用途**: 全面梳理 Rust 中「安全且编译期可判定」的机制，每项含概念定义、属性关系、解释论证、形式证明引用、反例；与 [formal_methods](formal_methods/README.md)、[type_theory](type_theory/README.md) 双向链接
-> **上位**: [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](formal_methods/10_safe_decidable_mechanisms_and_formal_methods_plan.md)、[HIERARCHICAL_MAPPING_AND_SUMMARY](./10_hierarchical_mapping_and_summary.md)
+> **用途**: 全面梳理 Rust 中「安全且编译期可判定」的机制，每项含概念定义、属性关系、解释论证、形式证明引用、反例；与 [formal_methods](../../archive/research_notes_2026_06_25/formal_methods/README.md)、[type_theory](type_theory/README.md) 双向链接
+> **上位**: [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](formal_methods/10_safe_decidable_mechanisms_and_formal_methods_plan.md)、[HIERARCHICAL_MAPPING_AND_SUMMARY](../../archive/research_notes_2026_06_25/10_hierarchical_mapping_and_summary.md)
 
 ---
 
@@ -93,7 +93,7 @@
 - **概念定义**：唯一所有者、移动语义、Copy/Clone 区分；形式化见 [ownership_model](formal_methods/10_ownership_model.md) 规则 1–3、Def 1.1–1.5。
 - **属性关系**：为借用的前提；borrow 规则 5–8 在单所有者下定义。
 - **解释论证**：无 GC 内存安全；设计理由见 [DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md)。
-- **形式证明**：定理 T2 唯一性、T3 内存安全；[PROOF_INDEX](./10_proof_index.md)。
+- **形式证明**：定理 T2 唯一性、T3 内存安全；[PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md)。
 - **反例**：使用已移动值、双重释放；[FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) 反例索引。
 
 ### 3.2 借用
@@ -105,7 +105,7 @@
 - **概念定义**：&T/&mut T、可变独占、不可变可多；[borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) 规则 5–8。
 - **属性关系**：依赖所有权；与生命周期协同；跨线程时需 Send/Sync。
 - **解释论证**：数据竞争自由；与 RustBelt/Stacked Borrows 对应。
-- **形式证明**：定理 T1 数据竞争自由；[PROOF_INDEX](./10_proof_index.md)。
+- **形式证明**：定理 T1 数据竞争自由；[PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md)。
 - **反例**：双重可变借用、悬垂引用。
 
 ### 3.3 生命周期
@@ -179,7 +179,7 @@
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - **概念定义**：穷尽匹配、IntoIterator、Result 早期返回；[borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) Def MATCH1/FOR1/QUERY1。
-- **属性关系**：控制流与借用协同；A-CF1 见 [formal_methods README](formal_methods/README.md)。
+- **属性关系**：控制流与借用协同；A-CF1 见 [formal_methods README](../../archive/research_notes_2026_06_25/formal_methods/README.md)。
 - **形式证明**：MATCH-T1、FOR-T1、QUERY-T1。
 - **反例**：非穷尽 match、迭代中修改集合、非 Result 类型 ?。
 
@@ -212,7 +212,7 @@
 | 思维导图 | [MIND_MAP_COLLECTION](../04_thinking/04_mind_map_collection.md)；安全可判定机制节点 → 本总览 §二、§三 |
 | 概念多维矩阵 | [formal_methods README §六篇并表](formal_methods/README.md#formal_methods-六篇并表)；[SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](formal_methods/10_safe_decidable_mechanisms_and_formal_methods_plan.md) §3.1 |
 | 决策树 | [06_boundary_analysis](software_design_theory/03_execution_models/06_boundary_analysis.md)；[DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md) § Send/Sync |
-| 推理证明树 | [PROOF_INDEX](./10_proof_index.md)；[PROOF_GRAPH_NETWORK](../04_thinking/04_proof_graph_network.md) |
+| 推理证明树 | [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md)；[PROOF_GRAPH_NETWORK](../04_thinking/04_proof_graph_network.md) |
 
 ---
 
@@ -220,7 +220,7 @@
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-在 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./10_rust_193_language_features_comprehensive_analysis.md) 基础上，为「并发与异步族」「Trait 与多态族」增加**可判定性、安全边界、形式化文档、思维表征**四维，便于与 formal_methods 对照。
+在 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../../archive/research_notes_2026_06_25/10_rust_193_language_features_comprehensive_analysis.md) 基础上，为「并发与异步族」「Trait 与多态族」增加**可判定性、安全边界、形式化文档、思维表征**四维，便于与 formal_methods 对照。
 
 ### 6.1 并发与异步族
 >
@@ -260,9 +260,9 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [formal_methods README](formal_methods/README.md) — 六篇并表、公理-定理索引
+- [formal_methods README](../../archive/research_notes_2026_06_25/formal_methods/README.md) — 六篇并表、公理-定理索引
 - [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](formal_methods/10_safe_decidable_mechanisms_and_formal_methods_plan.md) — 意见与建议、阶段 A–E 计划
-- [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./10_rust_193_language_features_comprehensive_analysis.md) — 92 项特性与形式化映射
+- [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../../archive/research_notes_2026_06_25/10_rust_193_language_features_comprehensive_analysis.md) — 92 项特性与形式化映射
 - [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) — 反例索引
 
 ---

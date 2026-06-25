@@ -271,7 +271,7 @@ graph LR
 
 - [验证工具对比矩阵](./10_verification_tools_matrix.md)
 - [验证工具选型决策树](10_verification_tools_decision_tree.md)
-- [形式化方法概述](./formal_methods/README.md)
+- [形式化方法概述](../../archive/research_notes_2026_06_25/formal_methods/README.md)
 
 ---
 

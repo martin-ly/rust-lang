@@ -10,7 +10,7 @@
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [10 任意循环模式 (Arbitrary Cycles)](#10-任意循环模式-arbitrary-cycles)
-  - [� 目录](#-目录)
+  - [📋 目录](#-目录)
   - [模式定义与语义](#模式定义与语义)
     - [核心语义](#核心语义)
     - [与结构化循环的区别](#与结构化循环的区别)

@@ -275,7 +275,7 @@
 
 **资源**:
 
-- 研究笔记: [形式化方法研究](./formal_methods/README.md)
+- 研究笔记: [形式化方法研究](../../archive/research_notes_2026_06_25/formal_methods/README.md)
 - 形式化系统: [所有权系统理论](../rust-formal-engineering-system/01_theoretical_foundations/02_ownership_system/README.md)
 
 ### 场景 3: 性能优化研究
@@ -306,7 +306,7 @@
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [主索引](./README.md) - 完整的研究笔记索引
-- [快速参考](./10_quick_reference.md) - 快速查找指南
+- [快速参考](../../archive/research_notes_2026_06_25/10_quick_reference.md) - 快速查找指南
 - [研究路线图](./10_research_roadmap.md) - 研究计划
 
 ### 形式化工程系统 {#形式化工程系统-1}

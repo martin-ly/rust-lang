@@ -94,8 +94,8 @@ fn handle_message(msg: Message) {
 | 主题 | 文档 | 描述 |
 | :--- | :--- | :--- |
 | 形式化分析 | [10_formal_proof_system_guide.md](../research_notes/10_formal_proof_system_guide.md) | 形式化证明系统指南 |
-| 核心定理证明 | [10_core_theorems_full_proofs.md](../research_notes/10_core_theorems_full_proofs.md) | 完整形式化证明 |
-| 证明索引 | [PROOF_INDEX](../research_notes/10_proof_index.md) | 形式化证明集合 |
+| 核心定理证明 | [10_core_theorems_full_proofs.md](../../../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) | 完整形式化证明 |
+| 证明索引 | [PROOF_INDEX](../../../../archive/research_notes_2026_06_25/10_proof_index.md) | 形式化证明集合 |
 
 ```rust
 // 形式化研究示例：所有权形式化
@@ -209,10 +209,10 @@ fn ownership_theorem() {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 形式化方法概述 | 形式化验证基础理论 | [../research_notes/formal_methods/README.md](../research_notes/formal_methods/README.md) |
+| 形式化方法概述 | 形式化验证基础理论 | [../research_notes/formal_methods/README.md](../../../../archive/research_notes_2026_06_25/formal_methods/README.md) |
 | 所有权模型形式化 | 所有权系统数学定义 | [../research_notes/formal_methods/10_ownership_model.md](../research_notes/formal_methods/10_ownership_model.md) |
 | 类型系统形式化 | 类型理论数学定义 | [../research_notes/type_theory/10_type_system_foundations.md](../research_notes/type_theory/10_type_system_foundations.md) |
-| 证明索引 | 形式化证明集合 | [../research_notes/10_proof_index.md](../research_notes/10_proof_index.md) |
+| 证明索引 | 形式化证明集合 | [../research_notes/10_proof_index.md](../../../../archive/research_notes_2026_06_25/10_proof_index.md) |
 
 ---
 

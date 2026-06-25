@@ -127,7 +127,7 @@ research_notes/
 | 10_aeneas_integration_plan.md | archive/deprecated/10_aeneas_integration_plan.md | Aeneas 对接计划 |
 | 10_coq_of_rust_integration_plan.md | archive/deprecated/10_coq_of_rust_integration_plan.md | coq-of-rust 对接计划 |
 | 10_coq_isabelle_proof_scaffolding.md | [archive/deprecated/](../archive/deprecated/README.md) | Coq/Isabelle 骨架说明 |
-| coq_skeleton/（.v 等） | [archive/deprecated/coq_skeleton/](../archive/deprecated/coq_skeleton/README.md) | Coq 证明骨架；本目录仅保留 [coq_skeleton/README.md](./coq_skeleton/README.md) 重定向 |
+| coq_skeleton/（.v 等） | [archive/deprecated/coq_skeleton/](../archive/deprecated/coq_skeleton/README.md) | Coq 证明骨架；本目录仅保留 [coq_skeleton/README.md](../../archive/deprecated/coq_skeleton/README.md) 重定向 |
 
 **引用建议**：新文档中提及 Aeneas、coq-of-rust、Coq 骨架时，链接至上述 `archive/deprecated/` 路径；INDEX/README 中已统一标注「已归档」。
 
@@ -143,8 +143,8 @@ research_notes/
 | [README](./README.md) | 主入口、研究方向、规范、目录树 | 总览、规范 |
 | [INDEX](./INDEX.md) | 完整列表、按领域/主题/证明 | 查具体文档、证明索引 |
 | [QUICK_FIND](./10_quick_find.md) | 关键词/领域/目标 | 快速定位 |
-| [QUICK_REFERENCE](./10_quick_reference.md) | 按主题快速参考 | 按主题查 |
-| [HIERARCHICAL_MAPPING_AND_SUMMARY](./10_hierarchical_mapping_and_summary.md) | 文档树、概念↔定理、文档↔思维表征 | 层次化检索、双向追溯 |
+| [QUICK_REFERENCE](../../archive/research_notes_2026_06_25/10_quick_reference.md) | 按主题快速参考 | 按主题查 |
+| [HIERARCHICAL_MAPPING_AND_SUMMARY](../../archive/research_notes_2026_06_25/10_hierarchical_mapping_and_summary.md) | 文档树、概念↔定理、文档↔思维表征 | 层次化检索、双向追溯 |
 | 本文件 | 结构梳理、归档约定、版本 | 维护与一致性检查 |
 
 ---
@@ -175,7 +175,7 @@ research_notes/
 - **决策树**：*_DECISION_TREE（DESIGN_PATTERN_SELECTION、WORKFLOW_ENGINE、DISTRIBUTED_ARCHITECTURE、ASYNC_RUNTIME、ERROR_TYPE_SELECTION、OWNERSHIP_TRANSFER、TESTING_STRATEGY、ERROR_HANDLING、SERIALIZATION、VERIFICATION_TOOLS）
 - **其他**：APPLICATION_TREES、PROOF_TECHNIQUES_MINDMAP、PROOF_STRATEGIES、FORMAL_FOUNDATIONS_INDEX、CASE_STUDIES 等
 
-完整列表以 `formal_methods/` 下实际文件为准；详见 [formal_methods/README](./formal_methods/README.md)。
+完整列表以 `formal_methods/` 下实际文件为准；详见 [formal_methods/README](../../archive/research_notes_2026_06_25/formal_methods/README.md)。
 
 ---
 

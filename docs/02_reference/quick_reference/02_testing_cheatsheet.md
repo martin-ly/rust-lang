@@ -11,7 +11,11 @@
 
 ## 📋 目录
 >
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Software Testing](https://en.wikipedia.org/wiki/Software_Testing)** · **来源: [Wikipedia - Unit Testing](https://en.wikipedia.org/wiki/Unit_Testing)** · **[来源: ACM - Test-Driven Development]** · **[来源: IEEE - Software Testing Standards]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
+> **来源: [Wikipedia - Software Testing](https://en.wikipedia.org/wiki/Software_Testing)** ·
+> **来源: [Wikipedia - Unit Testing](https://en.wikipedia.org/wiki/Unit_Testing)** ·
+> **[来源: ACM - Test-Driven Development]** ·
+> **[来源: IEEE - Software Testing Standards]**
 
 - [🧪 Rust 测试速查卡](#-rust-测试速查卡)
   - [📋 目录](#-目录)
@@ -1729,7 +1733,7 @@ fn broken_test() {
 - [完整测试文档](../../rust-formal-engineering-system/05_software_engineering/07_testing/README.md)
 - [WASM 测试策略](../../../crates/c12_wasm/docs/wasm_engineering/Testing_Strategies.md)
 - [测试研究笔记](../../research_notes/README.md)
-- [形式化方法研究](../../research_notes/formal_methods/README.md)
+- [形式化方法研究](../../../archive/research_notes_2026_06_25/formal_methods/README.md)
 
 ### 相关速查卡
 >

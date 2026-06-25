@@ -370,7 +370,7 @@ L3: 机器检查 (Coq骨架)
 - LazyCell/LazyLock 的延迟语义
 - 与现有理论框架的集成
 
-详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
+详见 [RUST_194_RESEARCH_UPDATE](../../archive/research_notes_2026_06_25/10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 

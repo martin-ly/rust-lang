@@ -460,7 +460,7 @@ Pin ──→ 自引用安全
 
 | 特性族 | 矩阵 | 决策树 | 完整链 |
 | :--- | :--- | :--- | :--- |
-| **Rust 1.93 全特性** | [RUST_193_FEATURE_MATRIX](./10_rust_193_feature_matrix.md) 五维矩阵 | RUST_193 特性覆盖 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./10_rust_193_language_features_comprehensive_analysis.md) |
+| **Rust 1.93 全特性** | [RUST_193_FEATURE_MATRIX](../../archive/research_notes_2026_06_25/10_rust_193_feature_matrix.md) 五维矩阵 | RUST_193 特性覆盖 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../../archive/research_notes_2026_06_25/10_rust_193_language_features_comprehensive_analysis.md) |
 | **内存与所有权** | 五维矩阵 § 所有权/借用 | 表达能力边界决策树 § 内存管理 | [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md) 所有权/借用 |
 | **类型系统** | 五维矩阵 § 类型安全/协变 | 表达能力边界决策树 § 类型多态 | [construction_capability](type_theory/10_construction_capability.md) |
 | **Trait 与多态** | 五维矩阵 § Trait 对象 | 思维表征选型 | [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md) Trait/泛型 |
@@ -511,7 +511,7 @@ Pin ──→ 自引用安全
 | [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./10_comprehensive_systematic_overview.md) | 全面系统化梳理总览、语义归纳、概念族谱 |
 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md) | 构造性语义形式化、表达能力边界 |
 | [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) | 论证缺口、概念-公理-定理映射、反例索引 |
-| [PROOF_INDEX](./10_proof_index.md) | 形式化证明索引、公理编号规范 |
+| [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md) | 形式化证明索引、公理编号规范 |
 | [INDEX](./INDEX.md) | 研究笔记完整索引 |
 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/04_multi_dimensional_concept_matrix.md) | 多维概念矩阵 |
 | [MIND_MAP_COLLECTION](../04_thinking/04_mind_map_collection.md) | 思维导图集合 |
@@ -520,7 +520,7 @@ Pin ──→ 自引用安全
 | [KNOWLEDGE_STRUCTURE_FRAMEWORK](../07_project/07_knowledge_structure_framework.md) | 知识结构、概念定义、思维表征 |
 | [software_design_theory](software_design_theory/README.md) | **软件设计理论**：设计模式形式化、23/43 模型、执行模型、组合工程 |
 | [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md) | 13 项核心特性完整链 |
-| [FEATURE_TEMPLATE](./10_feature_template.md) | 79 项特性精简模板 |
+| [FEATURE_TEMPLATE](../../archive/research_notes_2026_06_25/10_feature_template.md) | 79 项特性精简模板 |
 | [INCREMENTAL_UPDATE_FLOW](./10_incremental_update_flow.md) | 版本增量更新流程 |
 
 ---

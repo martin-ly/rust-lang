@@ -274,10 +274,10 @@ mod sync_impl {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 形式化方法概述 | 形式化验证基础理论 | [../../../research_notes/formal_methods/README.md](../../../research_notes/formal_methods/README.md) |
+| 形式化方法概述 | 形式化验证基础理论 | [../../../research_notes/formal_methods/README.md](../../../../archive/research_notes_2026_06_25/formal_methods/README.md) |
 | 类型系统形式化 | 类型理论数学定义 | [../../../research_notes/type_theory/10_type_system_foundations.md](../../../research_notes/type_theory/10_type_system_foundations.md) |
 | 借用检查器证明 | 借用检查器形式化 | [../../../research_notes/formal_methods/10_borrow_checker_proof.md](../../../research_notes/formal_methods/10_borrow_checker_proof.md) |
-| 证明索引 | 形式化证明集合 | [../../../research_notes/10_proof_index.md](../../../research_notes/10_proof_index.md) |
+| 证明索引 | 形式化证明集合 | [../../../research_notes/10_proof_index.md](../../../../archive/research_notes_2026_06_25/10_proof_index.md) |
 
 ## 相关研究笔记
 >

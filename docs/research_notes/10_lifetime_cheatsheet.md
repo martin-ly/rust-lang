@@ -602,7 +602,7 @@ let r = &x;  // 编译器自动推断
 
 > **适用版本**: Rust 1.96.0+
 
-详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
+详见 [RUST_194_RESEARCH_UPDATE](../../archive/research_notes_2026_06_25/10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 

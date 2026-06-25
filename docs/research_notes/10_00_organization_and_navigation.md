@@ -4,7 +4,6 @@
 >
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2026-02-14
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -43,20 +42,20 @@
 
 | 我的目标 | 入口 | 预计时间 |
 | :--- | :--- | :--- |
-| **我想理解 Rust 形式化证明** | [FORMAL_FULL_MODEL_OVERVIEW](./10_formal_full_model_overview.md) → [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) | 30min |
+| **我想理解 Rust 形式化证明** | [FORMAL_FULL_MODEL_OVERVIEW](./10_formal_full_model_overview.md) → [CORE_THEOREMS_FULL_PROOFS](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) | 30min |
 | **我想查某个概念的证明/定义** | [QUICK_FIND](./10_quick_find.md)（按关键词） | 2min |
 | **我想选设计模式/并发模型** | [software_design_theory/00_MASTER_INDEX](./software_design_theory/10_00_master_index.md) → 03_semantic_boundary_map、06_boundary_analysis | 15min |
 | **我想理解权威对齐体系** | [AUTHORITATIVE_ALIGNMENT_GUIDE](./10_authoritative_alignment_guide.md) | 10min |
 | **三大支柱** | [AUTHORITATIVE_ALIGNMENT_GUIDE](./10_authoritative_alignment_guide.md)（原 RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN 已归档） | 10min |
-| **我想看完整总结与论证脉络** | [00_COMPREHENSIVE_SUMMARY](./10_00_comprehensive_summary.md) → [ARGUMENTATION_CHAIN_AND_FLOW](10_argumentation_chain_and_flow.md) | 15min |
+| **我想看完整总结与论证脉络** | [00_COMPREHENSIVE_SUMMARY](../../archive/research_notes_2026_06_25/10_00_comprehensive_summary.md) → [ARGUMENTATION_CHAIN_AND_FLOW](10_argumentation_chain_and_flow.md) | 15min |
 | **我想看批判性意见与改进计划** | RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN | 15min |
 | **我想看格式统一与 Rust 1.93 对齐计划** | FORMAT_AND_CONTENT_ALIGNMENT_PLAN (归档) | 10min |
-| **我想看目录缺失与内容深化计划** | [00_COMPREHENSIVE_SUMMARY](./10_00_comprehensive_summary.md) | 10min |
-| **我想查层次化映射（文档树/概念↔定理/文档↔思维表征）** | [HIERARCHICAL_MAPPING_AND_SUMMARY](./10_hierarchical_mapping_and_summary.md) | 5min |
+| **我想看目录缺失与内容深化计划** | [00_COMPREHENSIVE_SUMMARY](../../archive/research_notes_2026_06_25/10_00_comprehensive_summary.md) | 10min |
+| **我想查层次化映射（文档树/概念↔定理/文档↔思维表征）** | [HIERARCHICAL_MAPPING_AND_SUMMARY](../../archive/research_notes_2026_06_25/10_hierarchical_mapping_and_summary.md) | 5min |
 | **我想看 research_notes 全面梳理（结构、归档、维护）** | [RESEARCH_NOTES_ORGANIZATION](./10_research_notes_organization.md) | 5min |
 | **我想查 Send/Sync 或安全可判定机制** | [send_sync_formalization](./formal_methods/10_send_sync_formalization.md) → [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./10_safe_decidable_mechanisms_overview.md) | 5min |
-| **我想查 formal_methods 完备性（六篇×六维）** | [FORMAL_METHODS_COMPLETENESS_CHECKLIST](./formal_methods/10_formal_methods_completeness_checklist.md) | 2min |
-| **我想贡献/维护** | [CONTRIBUTING](./10_contributing.md) → [QUALITY_CHECKLIST](./10_quality_checklist.md) | 5min |
+| **我想查 formal_methods 完备性（六篇×六维）** | [FORMAL_METHODS_COMPLETENESS_CHECKLIST](../../archive/research_notes_2026_06_25/formal_methods/10_formal_methods_completeness_checklist.md) | 2min |
+| **我想贡献/维护** | [CONTRIBUTING](../../archive/research_notes_2026_06_25/10_contributing.md) → [QUALITY_CHECKLIST](../../archive/research_notes_2026_06_25/10_quality_checklist.md) | 5min |
 
 ---
 
@@ -175,7 +174,7 @@ research_notes/
 | **Ferrocene FLS** | [spec.ferrocene.dev](https://spec.ferrocene.dev/)；当前覆盖 **Rust 2021 + rustc 1.93** | 形式化规范引用 |
 | **本项目** | **Rust 1.96.0+ (Edition 2024)** | 所有 research_notes 元信息与示例默认版本 |
 
-新文档引用 FLS 或 releases 时可直接引用本小节；详见 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./10_rust_193_language_features_comprehensive_analysis.md) § 权威来源对齐。
+新文档引用 FLS 或 releases 时可直接引用本小节；详见 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../../archive/research_notes_2026_06_25/10_rust_193_language_features_comprehensive_analysis.md) § 权威来源对齐。
 
 ---
 

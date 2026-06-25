@@ -185,8 +185,8 @@ docs/
 | 文档类型 | 文档路径 | 交叉引用链接 |
 | :--- | :--- | :--- |
 | **主索引** | `crates/c01_ownership_borrow_scope/docs/tier_01_foundations/02_主索引导航.md` | ←→ [ownership_cheatsheet](../02_reference/quick_reference/02_ownership_cheatsheet.md) ←→ [UNSAFE_RUST_GUIDE](../../concept/03_advanced/03_unsafe.md) |
-| **速查卡** | [02_ownership_cheatsheet.md](../02_reference/quick_reference/02_ownership_cheatsheet.md) | → [ownership_model](../research_notes/formal_methods/10_ownership_model.md) → [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) → [PROOF_INDEX](../research_notes/10_proof_index.md) |
-| **形式化** | [10_ownership_model.md](../research_notes/formal_methods/10_ownership_model.md) | ←→ [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) ←→ [type_system_foundations](../research_notes/type_theory/10_type_system_foundations.md) ←→ [CORE_THEOREMS](../research_notes/10_core_theorems_full_proofs.md) |
+| **速查卡** | [02_ownership_cheatsheet.md](../02_reference/quick_reference/02_ownership_cheatsheet.md) | → [ownership_model](../research_notes/formal_methods/10_ownership_model.md) → [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) → [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md) |
+| **形式化** | [10_ownership_model.md](../research_notes/formal_methods/10_ownership_model.md) | ←→ [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) ←→ [type_system_foundations](../research_notes/type_theory/10_type_system_foundations.md) ←→ [CORE_THEOREMS](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) |
 | **指南** | [05_unsafe_rust_guide.md](../../concept/03_advanced/03_unsafe.md) | ← [ownership_model](../research_notes/formal_methods/10_ownership_model.md) ← [SAFE_UNSAFE_ANALYSIS](../research_notes/10_safe_unsafe_comprehensive_analysis.md) |
 | **思维表征** | [MIND_MAP_COLLECTION](../04_thinking/04_mind_map_collection.md) §2 | ←→ [ownership_model](../research_notes/formal_methods/10_ownership_model.md) ←→ [DECISION_GRAPH_NETWORK](../04_thinking/04_decision_graph_network.md) §1 |
 
@@ -206,7 +206,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | :--- | :--- | :--- |
 | **主索引** | `crates/c02_type_system/docs/tier_01_foundations/02_主索引导航.md` | ←→ [type_system](../02_reference/quick_reference/02_type_system.md) ←→ [generics_cheatsheet](../02_reference/quick_reference/02_generics_cheatsheet.md) |
 | **速查卡** | [02_type_system.md](../02_reference/quick_reference/02_type_system.md) | → [type_system_foundations](../research_notes/type_theory/10_type_system_foundations.md) → [trait_system_formalization](../research_notes/type_theory/10_trait_system_formalization.md) → [variance_theory](../research_notes/type_theory/10_variance_theory.md) |
-| **形式化** | [10_type_system_foundations.md](../research_notes/type_theory/10_type_system_foundations.md) | ←→ [trait_system_formalization](../research_notes/type_theory/10_trait_system_formalization.md) ←→ [variance_theory](../research_notes/type_theory/10_variance_theory.md) ←→ [CORE_THEOREMS](../research_notes/10_core_theorems_full_proofs.md) |
+| **形式化** | [10_type_system_foundations.md](../research_notes/type_theory/10_type_system_foundations.md) | ←→ [trait_system_formalization](../research_notes/type_theory/10_trait_system_formalization.md) ←→ [variance_theory](../research_notes/type_theory/10_variance_theory.md) ←→ [CORE_THEOREMS](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) |
 | **指南** | [05_advanced_topics_deep_dive.md](../05_guides/05_advanced_topics_deep_dive.md) | ← [type_system_foundations](../research_notes/type_theory/10_type_system_foundations.md) ← [advanced_types](../research_notes/type_theory/10_advanced_types.md) |
 | **思维表征** | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/04_multi_dimensional_concept_matrix.md) §2 | ←→ [type_system_foundations](../research_notes/type_theory/10_type_system_foundations.md) ←→ [MIND_MAP_COLLECTION](../04_thinking/04_mind_map_collection.md) §3 |
 
@@ -217,8 +217,8 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | 文档类型 | 文档路径 | 交叉引用链接 |
 | :--- | :--- | :--- |
 | **主索引** | `crates/c03_control_fn/docs/tier_01_foundations/02_主索引导航.md` | ←→ [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) |
-| **速查卡** | [02_control_flow_functions_cheatsheet.md](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) | → [formal_methods/README](../research_notes/formal_methods/README.md) §控制流形式化 → [type_system_foundations](../research_notes/type_theory/10_type_system_foundations.md) |
-| **形式化** | [formal_methods/README.md](../research_notes/formal_methods/README.md) §A-CF1 | ←→ [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) §MATCH/FOR/QUERY |
+| **速查卡** | [02_control_flow_functions_cheatsheet.md](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) | → [formal_methods/README](../../archive/research_notes_2026_06_25/formal_methods/README.md) §控制流形式化 → [type_system_foundations](../research_notes/type_theory/10_type_system_foundations.md) |
+| **形式化** | [formal_methods/README.md](../../archive/research_notes_2026_06_25/formal_methods/README.md) §A-CF1 | ←→ [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) §MATCH/FOR/QUERY |
 | **指南** | [05_macro_system_usage_guide.md](../05_guides/05_macro_system_usage_guide.md) | ← [control_flow](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) |
 
 ### C04 - 泛型编程
@@ -458,7 +458,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | design_patterns_cheatsheet | [01_design_patterns_formal](../research_notes/software_design_theory/01_design_patterns_formal/README.md) | 模式 ↔ 形式化模式 |
 | [smart_pointers_cheatsheet](../02_reference/quick_reference/02_smart_pointers_cheatsheet.md) | [ownership_model](../research_notes/formal_methods/10_ownership_model.md) §智能指针 | 指针 ↔ 所有权模型 |
 | [error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) | [type_system_foundations](../research_notes/type_theory/10_type_system_foundations.md) §Result类型 | 错误处理 ↔ 类型系统 |
-| [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) | [formal_methods/README](../research_notes/formal_methods/README.md) §控制流形式化 | 控制流 ↔ A-CF1公理 |
+| [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) | [formal_methods/README](../../archive/research_notes_2026_06_25/formal_methods/README.md) §控制流形式化 | 控制流 ↔ A-CF1公理 |
 
 ---
 
@@ -857,10 +857,10 @@ struct LinkValidator {
 | :--- | :--- | :--- |
 | **CROSS_REFERENCE_INDEX** | 详细跨文档映射网络 | [research_notes/10_cross_reference_index.md](../research_notes/10_cross_reference_index.md) |
 | **00_MASTER_INDEX** | 文档中心主索引 | [10_00_master_index.md](../00_master_index.md) |
-| **PROOF_INDEX** | 公理-定理-证明索引 | [research_notes/10_proof_index.md](../research_notes/10_proof_index.md) |
-| **HIERARCHICAL_MAPPING** | 层次化映射与总结 | [research_notes/10_hierarchical_mapping_and_summary.md](../research_notes/10_hierarchical_mapping_and_summary.md) |
+| **PROOF_INDEX** | 公理-定理-证明索引 | [research_notes/10_proof_index.md](../../archive/research_notes_2026_06_25/10_proof_index.md) |
+| **HIERARCHICAL_MAPPING** | 层次化映射与总结 | [research_notes/10_hierarchical_mapping_and_summary.md](../../archive/research_notes_2026_06_25/10_hierarchical_mapping_and_summary.md) |
 | **ARGUMENTATION_CHAIN** | 论证脉络关系 | [research_notes/10_argumentation_chain_and_flow.md](../research_notes/10_argumentation_chain_and_flow.md) |
-| **00_COMPREHENSIVE_SUMMARY** | 完整总结综合 | [research_notes/10_00_comprehensive_summary.md](../research_notes/10_00_comprehensive_summary.md) |
+| **00_COMPREHENSIVE_SUMMARY** | 完整总结综合 | [research_notes/10_00_comprehensive_summary.md](../../archive/research_notes_2026_06_25/10_00_comprehensive_summary.md) |
 
 ### 快速入口
 >

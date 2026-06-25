@@ -115,8 +115,8 @@
 | 类型系统   | [类型系统基础](./type_theory/10_type_system_foundations.md)        | ✅ 100% |
 | 类型构造能力 | [construction_capability](./type_theory/10_construction_capability.md) | ✅ Def TCON1、矩阵、决策树 |
 | 核心特性完整链 | [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md) | ✅ 13 项 Def→示例→论证→证明 |
-| 类型理论缺口 | [完备性缺口](./formal_methods/00_completeness_gaps.md)           | ✅ 阶段 1–7 Def 占位 |
-| 形式化方法缺口 | [formal_methods 完备性缺口](./formal_methods/00_completeness_gaps.md) | ✅ Phase 1–6 100% |
+| 类型理论缺口 | [完备性缺口](../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md)           | ✅ 阶段 1–7 Def 占位 |
+| 形式化方法缺口 | [formal_methods 完备性缺口](../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md) | ✅ Phase 1–6 100% |
 | Trait      | [Trait 系统形式化](./type_theory/10_trait_system_formalization.md) | ✅ 100% |
 | 泛型       | [高级类型特性](./type_theory/10_advanced_types.md)                 | ✅ 100% |
 | GATs       | [高级类型特性](./type_theory/10_advanced_types.md)                 | ✅ 100% |
@@ -155,7 +155,7 @@
 | 并发安全    | [异步状态机形式化](./formal_methods/10_async_state_machine.md) | ✅ 100% |
 | Send/Sync   | [Send/Sync 形式化](./formal_methods/10_send_sync_formalization.md)、[异步状态机形式化](./formal_methods/10_async_state_machine.md)、[设计机制论证](./10_design_mechanism_rationale.md) §Send/Sync | ✅ Def SEND1/SYNC1、SEND-T1/SYNC-T1；六篇并表 |
 | 安全可判定机制 | [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./10_safe_decidable_mechanisms_overview.md)、[SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](./formal_methods/10_safe_decidable_mechanisms_and_formal_methods_plan.md) | ✅ 总览每机制一节；并发+Trait 族四维表；阶段 A–D 已完成 |
-| formal_methods 完备性 | [FORMAL_METHODS_COMPLETENESS_CHECKLIST](./formal_methods/10_formal_methods_completeness_checklist.md) | ✅ 六篇×六维自检（概念定义、属性关系、解释论证、形式证明、反例、思维表征四类） |
+| formal_methods 完备性 | [FORMAL_METHODS_COMPLETENESS_CHECKLIST](../../archive/research_notes_2026_06_25/formal_methods/10_formal_methods_completeness_checklist.md) | ✅ 六篇×六维自检（概念定义、属性关系、解释论证、形式证明、反例、思维表征四类） |
 
 ### 性能优化
 
@@ -213,7 +213,7 @@
 
 | 研究笔记                                                        | 研究目标                                 | 状态      | 完成度 |
 | :--- | :--- | :--- | :--- |
-| [完备性缺口](./formal_methods/00_completeness_gaps.md)             | 形式化论证不充分声明；LUB、Copy、RPITIT 等缺口 | ✅ 阶段 1–7 Def 占位 | 路线图 |
+| [完备性缺口](../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md)             | 形式化论证不充分声明；LUB、Copy、RPITIT 等缺口 | ✅ 阶段 1–7 Def 占位 | 路线图 |
 | [类型系统基础](./type_theory/10_type_system_foundations.md)        | 形式化定义 Rust 类型系统基础             | ✅ 已完成 | 100%   |
 | [Trait 系统形式化](./type_theory/10_trait_system_formalization.md) | 形式化定义 Trait 系统，理解类型理论基础  | ✅ 已完成 | 100%   |
 | [生命周期形式化](./type_theory/10_lifetime_formalization.md)       | 形式化定义生命周期系统，理解类型理论解释 | ✅ 已完成 | 100%   |
@@ -271,7 +271,7 @@
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- **完整总结综合** → [00_COMPREHENSIVE_SUMMARY](./10_00_comprehensive_summary.md)（项目全貌、三大支柱、知识地图、论证总览）
+- **完整总结综合** → [00_COMPREHENSIVE_SUMMARY](../../archive/research_notes_2026_06_25/10_00_comprehensive_summary.md)（项目全貌、三大支柱、知识地图、论证总览）
 - **论证脉络关系** → [ARGUMENTATION_CHAIN_AND_FLOW](./10_argumentation_chain_and_flow.md)（论证五步法、概念→定理 DAG、文档依赖、论证思路示例）
 
 ### 我想看批判性意见与改进计划
@@ -280,7 +280,7 @@
 
 - **批判性分析与可持续改进计划** → RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN
   （概念定义/属性关系/解释论证/多维矩阵/层次化/思维表征 缺口；建议 P0–P3；四阶段可持续推进任务与计划）
-- **层次化映射总结** → [HIERARCHICAL_MAPPING_AND_SUMMARY](./10_hierarchical_mapping_and_summary.md)（文档树、概念族↔文档↔Def/定理、文档↔思维表征、文档依赖）
+- **层次化映射总结** → [HIERARCHICAL_MAPPING_AND_SUMMARY](../../archive/research_notes_2026_06_25/10_hierarchical_mapping_and_summary.md)（文档树、概念族↔文档↔Def/定理、文档↔思维表征、文档依赖）
 
 ### 我想证明某个性质
 >
@@ -289,7 +289,7 @@
 **形式化证明体系**（2026-02-14 完成）:
 
 - **批判性分析与推进计划** → [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./10_formal_proof_critical_analysis_and_plan_2026_02.md)
-- **核心定理完整证明** → [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md)（L2 级 ownership T2、borrow T1、type T3）
+- **核心定理完整证明** → [CORE_THEOREMS_FULL_PROOFS](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md)（L2 级 ownership T2、borrow T1、type T3）
 - **Coq 证明骨架** → [archive/deprecated/coq_skeleton](../archive/deprecated/coq_skeleton/README.md)（T-OW2）、[COQ_ISABELLE_PROOF_SCAFFOLDING](../archive/deprecated/README.md)（已归档）
 - **国际对标** → [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./10_international_formal_verification_index.md)、[RUSTBELT_ALIGNMENT](./10_rustbelt_alignment.md)
 - **权威对齐指南** → [AUTHORITATIVE_ALIGNMENT_GUIDE](./10_authoritative_alignment_guide.md)（原三大支柱文档已归档至 `../archive/process_reports/2026_02/`）
@@ -302,7 +302,7 @@
 - **并发安全** → [异步状态机形式化](./formal_methods/10_async_state_machine.md)
 - **引用有效性** → 生命周期形式化
 - **内存位置稳定性** → [Pin 和自引用类型形式化](./formal_methods/10_pin_self_referential.md)
-- **形式化方法完备性** → [formal_methods 完备性缺口](./formal_methods/00_completeness_gaps.md)（Phase 1–6 100%）
+- **形式化方法完备性** → [formal_methods 完备性缺口](../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md)（Phase 1–6 100%）
 
 ### 我想理解某个概念
 >
@@ -311,8 +311,8 @@
 **类型理论研究**:
 
 - **类型系统基础** → [类型系统基础](./type_theory/10_type_system_foundations.md)
-- **类型理论缺口** → [完备性缺口](./formal_methods/00_completeness_gaps.md)（LUB、Copy、RPITIT 等；阶段 1–7 Def 占位）
-- **形式化方法缺口** → [formal_methods 完备性缺口](./formal_methods/00_completeness_gaps.md)（Phase 1–6 100%）
+- **类型理论缺口** → [完备性缺口](../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md)（LUB、Copy、RPITIT 等；阶段 1–7 Def 占位）
+- **形式化方法缺口** → [formal_methods 完备性缺口](../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md)（Phase 1–6 100%）
 - **Trait 系统** → [Trait 系统形式化](./type_theory/10_trait_system_formalization.md)
 - **生命周期** → [生命周期形式化](./type_theory/10_lifetime_formalization.md)
 - **高级类型特性** → [高级类型特性](./type_theory/10_advanced_types.md)
@@ -348,7 +348,7 @@
 - **研究方法** → [研究方法论](./10_research_methodology.md)
 - **实际应用** → [实际应用案例研究](./10_practical_applications.md)
 - **工具使用** → [研究工具使用指南](./10_tools_guide.md)
-- **写作指导** → [研究笔记写作指南](./10_writing_guide.md)
+- **写作指导** → [研究笔记写作指南](../../archive/research_notes_2026_06_25/10_writing_guide.md)
 
 ---
 
@@ -405,7 +405,7 @@
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [研究笔记主索引](./README.md)
-- [快速参考](./10_quick_reference.md)
+- [快速参考](../../archive/research_notes_2026_06_25/10_quick_reference.md)
 - [完整索引](./INDEX.md)
 - [研究路线图](./10_research_roadmap.md)
 
@@ -413,16 +413,16 @@
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [研究进展跟踪](./10_progress_tracking.md)
-- [研究任务清单](./10_task_checklist.md)
-- [系统统计报告](./10_statistics.md)
+- [研究进展跟踪](../../archive/research_notes_2026_06_25/10_progress_tracking.md)
+- [研究任务清单](../../archive/research_notes_2026_06_25/10_task_checklist.md)
+- [系统统计报告](../../archive/research_notes_2026_06_25/10_statistics.md)
 
 ### 工具和指南
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [研究工具使用指南](./10_tools_guide.md)
-- [研究笔记写作指南](./10_writing_guide.md)
+- [研究笔记写作指南](../../archive/research_notes_2026_06_25/10_writing_guide.md)
 - [研究方法论](./10_research_methodology.md)
 
 ---

@@ -93,17 +93,17 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**简短回答**: 从 [快速入门指南](./10_getting_started.md) 开始。
+**简短回答**: 从 [快速入门指南](../../archive/research_notes_2026_06_25/10_getting_started.md) 开始。
 
 **详细说明**:
 
 1. 阅读 [主索引](./README.md) 了解系统结构
 2. 查看 [系统总结](./10_system_summary.md) 了解系统概览
-3. 浏览 [快速参考](./10_quick_reference.md) 查找感兴趣的主题
+3. 浏览 [快速参考](../../archive/research_notes_2026_06_25/10_quick_reference.md) 查找感兴趣的主题
 
 **相关资源**:
 
-- [快速入门指南](./10_getting_started.md)
+- [快速入门指南](../../archive/research_notes_2026_06_25/10_getting_started.md)
 - [主索引](./README.md)
 - [系统总结](./10_system_summary.md)
 
@@ -115,7 +115,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**简短回答**: 使用 [快速参考](./10_quick_reference.md) 或 [完整索引](./INDEX.md)。
+**简短回答**: 使用 [快速参考](../../archive/research_notes_2026_06_25/10_quick_reference.md) 或 [完整索引](./INDEX.md)。
 
 **详细说明**:
 
@@ -125,7 +125,7 @@
 
 **相关资源**:
 
-- [快速参考](./10_quick_reference.md)
+- [快速参考](../../archive/research_notes_2026_06_25/10_quick_reference.md)
 - [完整索引](./INDEX.md)
 - [快速查找](./10_quick_find.md)（按「我想理解…」查找）
 
@@ -143,9 +143,9 @@
 
 - **形式化**：含 Def、Axiom、定理及证明或证明思路
 - **代码**：可运行 Rust 示例，对应某定理（如所有权移动对应 [ownership_model](./formal_methods/10_ownership_model.md) T2）
-- **衔接**：与 [PROOF_INDEX](./10_proof_index.md)、[formal_methods](./formal_methods/README.md) 有交叉引用
+- **衔接**：与 [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md)、[formal_methods](../../archive/research_notes_2026_06_25/formal_methods/README.md) 有交叉引用
 
-**相关资源**：[BEST_PRACTICES](./10_best_practices.md) Def BP2、实践对照表、[PROOF_INDEX](./10_proof_index.md)
+**相关资源**：[BEST_PRACTICES](./10_best_practices.md) Def BP2、实践对照表、[PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md)
 
 ---
 
@@ -212,8 +212,8 @@
 **相关资源**:
 
 - [工具使用指南](./10_tools_guide.md)
-- [形式化方法索引](./formal_methods/README.md)
-- [研究笔记模板](./10_template.md)
+- [形式化方法索引](../../archive/research_notes_2026_06_25/formal_methods/README.md)
+- [研究笔记模板](../../archive/research_notes_2026_06_25/10_template.md)
 
 ---
 
@@ -257,8 +257,8 @@
 
 **相关资源**:
 
-- [贡献指南](./10_contributing.md)
-- [研究笔记模板](./10_template.md)
+- [贡献指南](../../archive/research_notes_2026_06_25/10_contributing.md)
+- [研究笔记模板](../../archive/research_notes_2026_06_25/10_template.md)
 
 ---
 
@@ -270,15 +270,15 @@
 
 **详细说明**:
 
-1. 使用 [研究笔记模板](./10_template.md) 创建文件
+1. 使用 [研究笔记模板](../../archive/research_notes_2026_06_25/10_template.md) 创建文件
 2. 遵循 [研究笔记规范](./README.md#研究笔记规范)
-3. 使用 [质量检查清单](./10_quality_checklist.md) 检查质量
+3. 使用 [质量检查清单](../../archive/research_notes_2026_06_25/10_quality_checklist.md) 检查质量
 4. 请他人审查
 
 **相关资源**:
 
-- [质量检查清单](./10_quality_checklist.md)
-- [贡献指南](./10_contributing.md)
+- [质量检查清单](../../archive/research_notes_2026_06_25/10_quality_checklist.md)
+- [贡献指南](../../archive/research_notes_2026_06_25/10_contributing.md)
 
 ---
 
@@ -293,11 +293,11 @@
 1. 更新相应目录的 README.md（添加新笔记链接）
 2. 更新 [主索引](./README.md)（如需要）
 3. 更新 [完整索引](./INDEX.md)（如需要）
-4. 更新 [快速参考](./10_quick_reference.md)（如需要）
+4. 更新 [快速参考](../../archive/research_notes_2026_06_25/10_quick_reference.md)（如需要）
 
 **相关资源**:
 
-- [贡献指南](./10_contributing.md)
+- [贡献指南](../../archive/research_notes_2026_06_25/10_contributing.md)
 - [主索引](./README.md)
 
 ---
@@ -389,7 +389,7 @@
 **相关资源**:
 
 - [研究笔记规范](./README.md#研究笔记规范)
-- [研究笔记模板](./10_template.md)
+- [研究笔记模板](../../archive/research_notes_2026_06_25/10_template.md)
 
 ---
 
@@ -408,7 +408,7 @@
 
 **相关资源**:
 
-- [形式化方法研究](./formal_methods/README.md)
+- [形式化方法研究](../../archive/research_notes_2026_06_25/formal_methods/README.md)
 - [研究方法论](./10_research_methodology.md)
 
 ---
@@ -427,8 +427,8 @@
 
 **相关资源**:
 
-- [质量检查清单](./10_quality_checklist.md)
-- [贡献指南](./10_contributing.md)
+- [质量检查清单](../../archive/research_notes_2026_06_25/10_quality_checklist.md)
+- [贡献指南](../../archive/research_notes_2026_06_25/10_contributing.md)
 
 ---
 
@@ -440,10 +440,10 @@
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
-- [快速入门指南](./10_getting_started.md) - 新用户入门指南
+- [快速入门指南](../../archive/research_notes_2026_06_25/10_getting_started.md) - 新用户入门指南
 - [主索引](./README.md) - 完整的研究笔记索引
-- [快速参考](./10_quick_reference.md) - 快速查找指南
-- [贡献指南](./10_contributing.md) - 贡献流程和规范
+- [快速参考](../../archive/research_notes_2026_06_25/10_quick_reference.md) - 快速查找指南
+- [贡献指南](../../archive/research_notes_2026_06_25/10_contributing.md) - 贡献流程和规范
 
 ### 获取帮助
 
@@ -467,7 +467,7 @@
 
 > **适用版本**: Rust 1.96.0+
 
-详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
+详见 [RUST_194_RESEARCH_UPDATE](../../archive/research_notes_2026_06_25/10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 

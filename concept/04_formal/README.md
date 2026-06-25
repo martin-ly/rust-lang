@@ -184,6 +184,9 @@ graph TB
 | [06_subtype_variance.md](./06_subtype_variance.md) | 子类型与变型 | 协变/逆变/不变、生命周期子类型、类型安全边界 | ✅ v1.0 | L2 Generics, L1 Lifetimes | 编译器类型检查 |
 | [11_separation_logic.md](./11_separation_logic.md) | 分离逻辑 | * 算子、帧规则、CSL、Iris、RustBelt 应用映射 | ✅ v1.0 | L3 Concurrency, L1 Ownership | 形式化验证工具 |
 | [08_type_inference.md](./08_type_inference.md) | 类型推断 | HM 算法、统一、Rust 扩展、Trait 约束推断 | ✅ v1.0 | L2 Generics, L2 Trait | 编译器类型检查 |
+| [28_borrow_checking_decidability.md](./28_borrow_checking_decidability.md) | 借用检查可判定性 [ROD 迁移] | NLL/Polonius、区域约束、P-完全、与 rustc borrowck 映射 | ✅ 已迁移 | L1 Borrowing, L3 Unsafe | rustc_borrowck |
+| [29_type_inference_complexity.md](./29_type_inference_complexity.md) | 类型推断复杂度 [ROD 迁移] | HM 扩展、约束生成、PSPACE-完全、与 rustc typeck 映射 | ✅ 已迁移 | L2 Trait, L2 Generics | rustc_typeck |
+| [30_aeneas_symbolic_semantics.md](./30_aeneas_symbolic_semantics.md) | Aeneas 符号化语义 [ROD 迁移] | LLBC、HLPL、符号执行、模拟关系、Aeneas 工具链 | ✅ 已迁移 | L3 Unsafe, L7 Formal Methods | Aeneas, Miri |
 | [17_operational_semantics.md](./17_operational_semantics.md) | 操作语义 [教学类比] | 小步/大步语义、求值上下文、Rust 形式化 | ✅ v1.0 | L1 Ownership, L3 Unsafe | RustBelt, Miri |
 | [20_axiomatic_semantics.md](./20_axiomatic_semantics.md) | 公理语义 [教学类比] | Hoare 逻辑、wp/sp 计算、Rust 所有权公理化 | ✅ v1.0 | L4 形式化理论, L3 Unsafe | Prusti, Creusot, Kani |
 | [21_type_semantics.md](./21_type_semantics.md) | 类型语义 [教学类比] | 进步/保持定理、Rust 特有类型语义、子类型与变型 | ✅ v1.0 | L2 Type System, L4 形式化理论 | Pierce TAPL, RustBelt |
@@ -200,6 +203,9 @@ graph TB
 - [Lambda 演算与 Rust 计算模型](./14_lambda_calculus.md)
 - [航空航天认证与形式化方法 (Aerospace Certification & Formal Methods)](./16_aerospace_certification_formal_methods.md)
 - [现代 Rust 验证工具生态（2025-2026）](./22_modern_verification_tools.md)
+- [借用检查可判定性](./28_borrow_checking_decidability.md)
+- [类型推断复杂度](./29_type_inference_complexity.md)
+- [Aeneas 符号化语义](./30_aeneas_symbolic_semantics.md)
 - [通用程序语言理论基础：Rust 的 PL 基座](./23_programming_language_foundations.md)
 - [测验：形式化方法概念（嵌入式互动试点）](./24_quiz_formal_methods.md)
 

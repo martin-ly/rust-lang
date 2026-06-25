@@ -144,6 +144,18 @@
   - 2026-06-24：全局精确去重扫描（SHA-256）覆盖 2,537 个 Markdown 文件，未发现完全重复文件；无需移动
 - [x] **B4.3** 更新 `reports/C_CLASS_GOVERNANCE_PLAN_2026_06_09.md` 进度
   - 已标记阶段 1 完成，并补充阶段进度表
+- [x] **B4.4** C 类目录治理阶段 3：ROD 核心结论迁移到 `concept/04_formal/`
+  - 2026-06-25：新建 `concept/04_formal/28_borrow_checking_decidability.md`、`29_type_inference_complexity.md`、`30_aeneas_symbolic_semantics.md`
+  - 同步补充 `concept/04_formal/03_ownership_formal.md`、`08_type_inference.md`、`README.md`
+- [x] **B4.5** C 类目录治理阶段 3：批量归档 `docs/research_notes/` 低价值文件
+  - 2026-06-25：使用 `scripts/maintenance/archive_research_notes_candidates.py` 移动 37 个文件到 `archive/research_notes_2026_06_25/`
+  - 移动后运行 `scripts/maintenance/fix_archived_research_notes_links.py` 修复 131 处引用残留
+  - 生成报告：`reports/RESEARCH_NOTES_ARCHIVE_BATCH_2026_06_25.md`
+- [x] **B4.6** C 类目录治理阶段 3：精选 research_notes 内容合并到 `knowledge/`
+  - 2026-06-25：新建 `knowledge/04_expert/academic/03_ownership_model_comprehensive.md`、`04_borrow_checker_proof_guide.md`、`05_type_system_foundations_guide.md`
+  - 2026-06-25：补充 `knowledge/03_advanced/unsafe/04_unsafe_rust.md`
+  - 同步更新 `knowledge/04_expert/academic/README.md`
+- [x] **B4.7** 更新 `reports/C_CLASS_GOVERNANCE_PLAN_2026_06_09.md`：标记阶段 3 完成、阶段 4 进行中
 
 ---
 
@@ -280,6 +292,7 @@
   - 2026-06-24：`cargo clippy --workspace --all-features -- -D warnings` 通过
 - [x] 运行 `scripts/check_links.py`（或对应链接检查脚本）
   - 2026-06-24：`scripts/check_links.py` 完成，结果见 D4.3
+  - 2026-06-25：运行 `scripts/docs_value_audit.py docs --days-old 90`，A/B 类问题数为 0，C 类问题数 643
 - [x] 更新本检查清单中的完成状态
   - 本轮已同步更新 A、B、C、D、E 各工作流进度
 - [x] 每周五生成简短进度摘要（可写入 `.kimi/WEEKLY_PROGRESS_2026_06_2X.md`）

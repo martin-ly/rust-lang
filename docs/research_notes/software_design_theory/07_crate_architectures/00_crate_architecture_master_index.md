@@ -197,21 +197,23 @@ graph TD
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 技术维度 | Serde | Tower | Diesel | Bevy | Tokio |
-| :--- | :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **泛型** | `Serialize<T>` / `Deserialize<'de, T>` | `Service<Request>` | `QueryDsl<Table>` | `Query<'w, 's, Q, F>` | `Future<Output = T>` |
 | **关联类型** | `Serializer::Ok`, `Visitor::Value` | `Service::Response`, `Layer::Service` | `Backend::RawValue` | `Component::Storage` | `Stream::Item` |
 | **Trait Bound** | `T: Serialize` | `S: Service<Req>` | `T: Queryable<DB>` | `Q: WorldQuery` | `T: Send + 'static` |
 | **生命周期** | `Deserialize<'de>` 借用反序列化数据 | `Service::call` 返回自有 Future | `Query<'a, T>` 借用连接 | `Query<'w, 's>` 双生命周期 | `Pin<&mut Self>` 自引用 |
 | **宏** | `#[derive(Serialize)]` | 无（纯 trait） | `table!`, `#[derive(Queryable)]` | `#[derive(Component)]` | `select!`, `spawn!` |
 | **零成本证明** | 单态化消除虚调用 | 编译期中间件栈内联 | 类型状态消除运行时 SQL 检查 | Archetype 连续内存无 indirection | work-stealing 无全局锁 |
+
 | **技术维度** | Tonic | wasm-bindgen | Tracing | Crossbeam | Ratatui | mio |
-|:---|:---|:---|:---|:---|:---|:---|
+|:---|:---|:---|:---|:---|:---|:---|:--- |
 | **核心抽象** | `Streaming<T>` / `Response<T>` | `#[wasm_bindgen]` 生成的接口 | `Span` / `Event` / `Subscriber` | `epoch::pin` / `ArrayQueue` | `Widget::render` / `Buffer::diff` | `Poll` / `Registry` / `Token` |
 | **类型系统** | `Service::Response` | `JsValue` 跨语言表示 | `Value` trait 结构化字段 | `AtomicCell<T>` 原子类型 | `StatefulWidget::State` | `Token(usize)` 零成本映射 |
 | **零成本证明** | gRPC 编码零拷贝 | JS ↔ WASM 无额外拷贝 | 无 Subscriber 时编译期消除 | Lock-free 无内核切换 | 差分渲染仅输出变更 | 与直接 epoll 等价的系统调用数 |
 |:---|:---|:---|:---|:---|:---|
 | **核心抽象** | `Streaming<T>` / `Response<T>` | `#[wasm_bindgen]` 生成的接口 | `Span` / `Event` / `Subscriber` | `epoch::pin` / `ArrayQueue` | `Widget::render` / `Buffer::diff` |
 | **类型系统** | `Service::Response` | `JsValue` 跨语言表示 | `Value` trait 结构化字段 | `AtomicCell<T>` 原子类型 | `StatefulWidget::State` |
+
 | **零成本证明** | gRPC 编码零拷贝 | JS ↔ WASM 无额外拷贝 | 无 Subscriber 时编译期消除 | Lock-free 无内核切换 | 差分渲染仅输出变更 |
 |:---|:---|:---|:---|:---|:---|
 | **泛型** | `Streaming<T>` / `Response<T>` | `#[wasm_bindgen]` 生成的接口 | | | |

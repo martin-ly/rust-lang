@@ -13,7 +13,8 @@
 
 ## 1. 引言：Rust TUI 生态的新标杆
 
-Ratatui 是 Rust 生态中增长最快的**终端用户界面 (TUI)** 框架，年下载量超过 3000 万次 来源: [crates.io 统计, 2025](https://crates.io/)。作为 `tui-rs` 的社区复刻 (community fork)，Ratatui 在保留原有架构优势的同时，通过**去 `crossterm` 强耦合**、**引入 `Backend` trait 抽象**和**优化渲染管线**，成为 Rust CLI 工具、系统监控面板和交互式终端应用的首选框架。
+Ratatui 是 Rust 生态中增长最快的**终端用户界面 (TUI)** 框架，年下载量超过 3000 万次 来源: [crates.io 统计, 2025](https://crates.io/)。
+作为 `tui-rs` 的社区复刻 (community fork)，Ratatui 在保留原有架构优势的同时，通过**去 `crossterm` 强耦合**、**引入 `Backend` trait 抽象**和**优化渲染管线**，成为 Rust CLI 工具、系统监控面板和交互式终端应用的首选框架。
 
 Ratatui 的三大设计支柱：
 

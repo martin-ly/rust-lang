@@ -381,8 +381,8 @@
 
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
-| 22.1 Keywords | 关键字列表 | [QUICK_REFERENCE](../research_notes/10_quick_reference.md) | 快速参考 |
-| 22.2 Operators and Symbols | 运算符 | [QUICK_REFERENCE](../research_notes/10_quick_reference.md) | 运算符优先级 |
+| 22.1 Keywords | 关键字列表 | [QUICK_REFERENCE](../../../../archive/research_notes_2026_06_25/10_quick_reference.md) | 快速参考 |
+| 22.2 Operators and Symbols | 运算符 | [QUICK_REFERENCE](../../../../archive/research_notes_2026_06_25/10_quick_reference.md) | 运算符优先级 |
 | 22.3 Derivable Traits | 可派生 Trait | [type_system](../02_reference/quick_reference/02_type_system.md) § Derive | 自定义 derive |
 | 22.4 Useful Development Tools | 开发工具 | [cargo_cheatsheet](../02_reference/quick_reference/02_cargo_cheatsheet.md) § 工具 | 完整工具链 |
 | 22.5 Editions | Edition 差异 | [09_rust_1.93_compatibility_deep_dive](../06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md) | 迁移指南 |
@@ -396,7 +396,7 @@
 
 | 章节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
-| **2. Lexical Structure** | 词法结构 | [QUICK_REFERENCE](../research_notes/10_quick_reference.md) § 语法 | 快速参考 |
+| **2. Lexical Structure** | 词法结构 | [QUICK_REFERENCE](../../../../archive/research_notes_2026_06_25/10_quick_reference.md) § 语法 | 快速参考 |
 | **3. Macros** | 宏系统 | macros_cheatsheet | 宏决策树 |
 | **6. Items** | 所有 Item 类型 | 各 crate 源码示例 | 实战示例 |
 | **8. Statements and Expressions** | 语句与表达式 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) | 控制流决策树 |
@@ -539,7 +539,7 @@
 | **阶段3: 并发安全证明** | Reference Send/Sync | [send_sync_formalization](../research_notes/formal_methods/10_send_sync_formalization.md) | 数据竞争自由证明 |
 | **阶段4: 异步形式化** | Reference Coroutines | [async_state_machine](../research_notes/formal_methods/10_async_state_machine.md) | 状态机语义 |
 | **阶段5: Unsafe 深入** | Reference Unsafety | [UNSAFE_RUST_GUIDE](../05_guides/05_unsafe_rust_guide.md) + [Rustonomicon](https://doc.rust-lang.org/nomicon/) | UB 边界掌握 |
-| **阶段6: 编译器研究** | [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/) | [PROOF_INDEX](../research_notes/10_proof_index.md) | 贡献 Rust 编译器 |
+| **阶段6: 编译器研究** | [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/) | [PROOF_INDEX](../../../../archive/research_notes_2026_06_25/10_proof_index.md) | 贡献 Rust 编译器 |
 
 ---
 
@@ -556,7 +556,7 @@
 | **所有权** | Book Ch 4 | [ownership_cheatsheet](../02_reference/quick_reference/02_ownership_cheatsheet.md) | [ownership_model](../research_notes/formal_methods/10_ownership_model.md) |
 | **借用** | Book Ch 4.2 | [ownership_cheatsheet](../02_reference/quick_reference/02_ownership_cheatsheet.md) | [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) |
 | **生命周期** | Book Ch 10.3 | [type_system](../02_reference/quick_reference/02_type_system.md) | [variance_theory](../research_notes/type_theory/10_variance_theory.md) |
-| **类型系统** | Book Ch 3.2, 10 | [type_system](../02_reference/quick_reference/02_type_system.md) | [PROOF_INDEX](../research_notes/10_proof_index.md) |
+| **类型系统** | Book Ch 3.2, 10 | [type_system](../02_reference/quick_reference/02_type_system.md) | [PROOF_INDEX](../../../../archive/research_notes_2026_06_25/10_proof_index.md) |
 | **Trait** | Book Ch 10.2 | [type_system](../02_reference/quick_reference/02_type_system.md) § Traits | - |
 | **泛型** | Book Ch 10.1 | [generics_cheatsheet](../02_reference/quick_reference/02_generics_cheatsheet.md) | - |
 | **并发** | Book Ch 16 | [threads_concurrency_cheatsheet](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) | [send_sync_formalization](../research_notes/formal_methods/10_send_sync_formalization.md) |
@@ -624,7 +624,7 @@
 | **Book Ch 9** | 9.1-9.3 Error Handling | 错误传播转换树（[THINKING_REPRESENTATION_METHODS](../04_thinking/04_thinking_representation_methods.md)）；[error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) |
 | **Book Ch 11** | 11.1-11.3 Testing | [testing_cheatsheet](../02_reference/quick_reference/02_testing_cheatsheet.md)；#[test] 1.93 严格化（[09_compatibility_deep_dive](../06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md)） |
 | **Reference** | Attributes, Macros | offset_of! 类型检查（1.93）；macros_cheatsheet |
-| **Reference** | Type system, Variance | [variance_theory](../research_notes/type_theory/10_variance_theory.md)；[PROOF_INDEX](../research_notes/10_proof_index.md) |
+| **Reference** | Type system, Variance | [variance_theory](../research_notes/type_theory/10_variance_theory.md)；[PROOF_INDEX](../../../../archive/research_notes_2026_06_25/10_proof_index.md) |
 | **releases.rs** | 1.93 Language/Libraries | [09_rust_1.93_compatibility_deep_dive](../06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md)；[07_full_changelog](../06_toolchain/06_07_rust_1_93_full_changelog.md) |
 
 > 标注「本项目补充」表示官方资源未覆盖或简略，本项目提供额外深度。
@@ -766,7 +766,7 @@
 
 1. [RustBelt 论文](https://plv.mpi-sws.org/rustbelt/popl18/) - 理论基础
 2. [Ferrocene FLS](https://spec.ferrocene.dev/) - 形式化规范
-3. 本项目 [formal_methods](../research_notes/formal_methods/README.md) - 中文形式化论证
+3. 本项目 [formal_methods](../../../../archive/research_notes_2026_06_25/formal_methods/README.md) - 中文形式化论证
 
 ---
 
@@ -813,8 +813,8 @@
 
 | 资源 | 说明 | 形式化链接 |
 | :--- | :--- | :--- |
-| [FORMAL_PROOF_SYSTEM_GUIDE](../research_notes/10_formal_proof_system_guide.md) | 批判性分析与推进计划 | [formal_methods/README](../research_notes/formal_methods/README.md) |
-| [CORE_THEOREMS_FULL_PROOFS](../research_notes/10_core_theorems_full_proofs.md) | 核心定理完整证明（L2） | [ownership_model](../research_notes/formal_methods/10_ownership_model.md)、[borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) |
+| [FORMAL_PROOF_SYSTEM_GUIDE](../research_notes/10_formal_proof_system_guide.md) | 批判性分析与推进计划 | [formal_methods/README](../../../../archive/research_notes_2026_06_25/formal_methods/README.md) |
+| [CORE_THEOREMS_FULL_PROOFS](../../../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) | 核心定理完整证明（L2） | [ownership_model](../research_notes/formal_methods/10_ownership_model.md)、[borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) |
 | [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../research_notes/10_international_formal_verification_index.md) | 国际对标 | [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)、[Ferrocene FLS](https://spec.ferrocene.dev/) |
 
 ### 官方形式化资源映射
@@ -885,7 +885,7 @@
 - [文档中心](../README.md)
 - [学习路径规划](./01_learning_path_planning.md)
 - [Rustlings 映射](../../exercises/RUSTLINGS_MAPPING.md)
-- [形式化方法研究](../research_notes/formal_methods/README.md)
+- [形式化方法研究](../../../../archive/research_notes_2026_06_25/formal_methods/README.md)
 - [类型理论研究](../research_notes/type_theory/README.md)
 
 ---

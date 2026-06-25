@@ -1,4 +1,6 @@
-> **内容分级**: [专家级]
+> **内容分级**:
+>
+> [专家级]
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证>
@@ -14,14 +16,25 @@
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价技术选型的形式化论据
 > **前置概念**:
+>
 > [Ownership](../01_foundation/01_ownership.md) ·
 > [Type System](../01_foundation/04_type_system.md) ·
 > [Linear Logic](../04_formal/01_linear_logic.md)
+>
 > **后置概念**:
+>
 > [Paradigm Matrix](./03_paradigm_matrix.md) ·
 > [Safety Boundaries](./04_safety_boundaries.md)
+>
 > **主要来源**:
-> [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Wikipedia: C++](https://en.wikipedia.org/wiki/C%2B%2B) · [Wikipedia: Rust](https://en.wikipedia.org/wiki/Rust) · [Wikipedia: Linear logic](https://en.wikipedia.org/wiki/Linear_logic) · [Wikipedia: Type system](https://en.wikipedia.org/wiki/Type_system) · [Wikipedia: Resource acquisition is initialization](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization) ·
+>
+> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [Wikipedia: C++](https://en.wikipedia.org/wiki/C%2B%2B) ·
+> [Wikipedia: Rust](https://en.wikipedia.org/wiki/Rust) ·
+> [Wikipedia: Linear logic](https://en.wikipedia.org/wiki/Linear_logic) ·
+> [Wikipedia: Type system](https://en.wikipedia.org/wiki/Type_system) ·
+> [Wikipedia: Resource acquisition is initialization](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization) ·
 > [Wikipedia: Programming language](https://en.wikipedia.org/wiki/Programming_language)
 
 ---

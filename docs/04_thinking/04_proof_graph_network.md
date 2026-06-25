@@ -1364,8 +1364,8 @@ fn proof_validation_workflow() {
 
 > **来源: [ACM](https://dl.acm.org/)**
 
-- [10_proof_index.md](../research_notes/10_proof_index.md) - 形式化证明索引
-- [10_core_theorems_full_proofs.md](../research_notes/10_core_theorems_full_proofs.md) - 核心定理完整证明
+- [10_proof_index.md](../../archive/research_notes_2026_06_25/10_proof_index.md) - 形式化证明索引
+- [10_core_theorems_full_proofs.md](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) - 核心定理完整证明
 - [10_formal_language_and_proofs.md](../research_notes/10_formal_language_and_proofs.md) - 形式化语言与证明
 
 ### 理论基础
@@ -1379,8 +1379,8 @@ fn proof_validation_workflow() {
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-- [10_coq_of_rust_integration_plan.md](../research_notes/10_coq_of_rust_integration_plan.md) - Coq 证明集成
-- [10_aeneas_integration_plan.md](../research_notes/10_aeneas_integration_plan.md) - Aeneas 验证工具
+- [10_coq_of_rust_integration_plan.md](../../archive/research_notes_2026_06_25/10_coq_of_rust_integration_plan.md) - Coq 证明集成
+- [10_aeneas_integration_plan.md](../../archive/research_notes_2026_06_25/10_aeneas_integration_plan.md) - Aeneas 验证工具
 
 ### 相关文档
 

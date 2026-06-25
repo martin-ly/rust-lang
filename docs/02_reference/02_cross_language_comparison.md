@@ -649,7 +649,7 @@ $ python -m pytest
 
 - [多维概念矩阵](../04_thinking/04_multi_dimensional_concept_matrix.md)
 - [应用分析视图](../04_thinking/04_applications_analysis_view.md)
-- [形式化方法研究](../research_notes/formal_methods/README.md)
+- [形式化方法研究](../../archive/research_notes_2026_06_25/formal_methods/README.md)
 - [错误码映射](./02_error_code_mapping.md)
 
 ---

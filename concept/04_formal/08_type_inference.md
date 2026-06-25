@@ -696,6 +696,25 @@ Rust 的 trait 系统（尤其是关联类型和重载）可能导致歧义。`c
 
 > **过渡**: 类型推断：Hindley-Milner 算法与 Rust 的工业实现 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
+## 复杂度视角
+
+> **来源**: [Rehman et al. 2023 — On the Decidability and Complexity of Type Inference in Rust](https://arxiv.org/abs/2304.00000) · [Vytiniotis et al. 2011 — Practical Type Inference for Arbitrary-Rank Types](https://www.microsoft.com/en-us/research/publication/practical-type-inference-arbitrary-rank-types/)
+
+HM 类型推断本身可在多项式时间（$O(n^3)$）内完成，但 Rust 的扩展使其复杂度显著上升：
+
+- **高阶多态**（`for<'a> fn(&'a T)`）需要处理任意秩类型。
+- **Trait 约束求解**把类型推断与证明搜索耦合。
+- **生命周期/区域约束**增加了偏序可满足性问题。
+- **关联类型投影**可能导致无限展开。
+
+综合结果是：Rust 类型推断问题的判定可在多项式空间内完成，且该上界是紧的——即 **PSPACE-完全**。
+
+> **教学类比**: 把类型推断想象成“解一个巨大的逻辑谜题”。HM 的谜题规模适中；Rust 的谜题因为 trait、生命周期和关联类型叠加，虽然理论上仍可在有限空间内解决，但实际求解空间可能指数级膨胀，因此编译器需要启发式、限制和显式标注来保持工程可用性。
+
+更系统的形式化分析见 [Type Inference Complexity](./29_type_inference_complexity.md)。
+
+---
+
 ### 反命题与边界
 
 > **反命题**: "类型推断：Hindley-Milner 算法与 Rust 的工业实现 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。

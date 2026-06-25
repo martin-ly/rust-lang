@@ -196,7 +196,7 @@ fn ownership_uniqueness_theorem() {
 
 - [借用证明树](./10_proof_tree_borrow.md)
 - [类型安全证明树](./10_proof_tree_type_safety.md)
-- [核心定理完整证明](./10_core_theorems_full_proofs.md)
+- [核心定理完整证明](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md)
 
 ---
 

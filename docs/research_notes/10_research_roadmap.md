@@ -125,13 +125,13 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [x] [完备性缺口](./formal_methods/00_completeness_gaps.md) ✅ 阶段 1–7 已补全
+- [x] [完备性缺口](../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md) ✅ 阶段 1–7 已补全
   - LUB coercion、Copy 与 specialization（LUB-T1、COP-T1）— type_system_foundations 已补全
   - RPITIT、async fn in trait、coherence 定理（COH-T1、RPIT-T1、ASYNC-T1）— 已补全
   - 组合法则、三元（VAR-COM-T1）、impl/dyn 边界（DYN-T1）、const 求值失败（CONST-EVAL-T1）— 已补全
   - 低优先级扩展（offset_of!、never_type、type ascription、newtype 等）— Def 占位已补全
 
-**预期成果**: 缺口补全路线图见 [00_completeness_gaps](formal_methods/00_completeness_gaps.md)；全部缺口均有 Def 占位。
+**预期成果**: 缺口补全路线图见 [00_completeness_gaps](../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md)；全部缺口均有 Def 占位。
 
 ---
 
@@ -195,7 +195,7 @@
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-- [x] [formal_methods 完备性缺口](./formal_methods/00_completeness_gaps.md) ✅ 100%
+- [x] [formal_methods 完备性缺口](../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md) ✅ 100%
   - Phase 1–6 全部补全（RC/ARC/CELL/REFCELL/BOX、CHAN/MUTEX/RAW、UNSAFE、MATCH/FOR、MAYBEUNINIT/ATOMIC/UNION/TRANSMUTE、EXTERN/CVARIADIC/QUERY、DROP/DEREF/REPR/CONST_MUT_STATIC、SPAWN）
   - 无剩余缺口
 
@@ -413,7 +413,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [主索引](./README.md) - 完整的研究笔记索引
-- [快速参考](./10_quick_reference.md) - 快速查找指南
+- [快速参考](../../archive/research_notes_2026_06_25/10_quick_reference.md) - 快速查找指南
 - [研究方法论](./10_research_methodology.md) - 研究方法指导
 
 ---

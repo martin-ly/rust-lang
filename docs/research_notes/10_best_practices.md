@@ -92,7 +92,7 @@
 
 **Def BP1（形式化完备性）**：研究笔记 $N$ 满足**形式化完备**，当且仅当 $N$ 对核心概念有 Def/Axiom、对主要结论有定理及证明或证明思路、对边界有反例。
 
-**Axiom BP1**：形式化完备的研究笔记与 [PROOF_INDEX](./10_proof_index.md) 的论证链一致；公理→引理→定理→推论可追溯。
+**Axiom BP1**：形式化完备的研究笔记与 [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md) 的论证链一致；公理→引理→定理→推论可追溯。
 
 **定理 BP-T1（完备性蕴涵可追溯）**：若 $N$ 满足 Def BP1，则 $N$ 的核心定理可追溯至 [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) 的概念-公理-定理映射。
 
@@ -103,9 +103,9 @@
 - ✅ 核心概念：给出形式化定义（Def）或引用已有定义
 - ✅ 主要结论：用定理（T）陈述，并给出证明或证明思路
 - ✅ 边界条件：重要断言补充反例
-- ✅ 交叉引用：与 [PROOF_INDEX](./10_proof_index.md)、[FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) 衔接
+- ✅ 交叉引用：与 [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md)、[FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) 衔接
 
-**证明深度**：L1 证明思路 / L2 完整证明 / L3 机器可检查；见 [PROOF_INDEX](./10_proof_index.md) § 证明深度层次、[CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) L2 示例、[coq_skeleton](coq_skeleton/README.md) L3 骨架。
+**证明深度**：L1 证明思路 / L2 完整证明 / L3 机器可检查；见 [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md) § 证明深度层次、[CORE_THEOREMS_FULL_PROOFS](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) L2 示例、[coq_skeleton](../../archive/deprecated/coq_skeleton/README.md) L3 骨架。
 
 **引用**：[FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) 论证要素规范、
 [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./10_theoretical_and_argumentation_system_architecture.md) 论证体系五层、
@@ -119,9 +119,9 @@
 
 **Def BP2（实质内容完备）**：研究笔记 $N$ 满足**实质内容完备**，当且仅当 $N$ 含：
 形式化（Def/定理）、可运行代码、典型场景、反例或边界、
-与 [formal_methods](formal_methods/README.md)、
+与 [formal_methods](../../archive/research_notes_2026_06_25/formal_methods/README.md)、
 [type_theory](type_theory/README.md)、
-[PROOF_INDEX](./10_proof_index.md) 的交叉引用。
+[PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md) 的交叉引用。
 
 **实践对照表**：
 
@@ -131,7 +131,7 @@
 | **代码** | `let s = String::from("x"); take_ownership(s);` | 对应 T2 移动语义 |
 | **场景** | 所有权转移、借用、生命周期 | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) |
 | **反例** | 双重可变借用、悬垂引用 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./10_safe_unsafe_comprehensive_analysis.md) |
-| **衔接** | 定理引用 PROOF_INDEX | [PROOF_INDEX](./10_proof_index.md) |
+| **衔接** | 定理引用 PROOF_INDEX | [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md) |
 
 **Rust 实质示例与定理对应**：
 
@@ -171,7 +171,7 @@ fn example_anti_pattern() {
 
 **Def BP3（实质内容不足）**：研究笔记 $N$ 存在**实质内容不足**，当且仅当 $N$ 存在以下至少一项：无 Def/定理或仅占位、
 无可运行代码或代码与论点无关、无典型场景或仅泛泛描述、无反例或边界说明、
-无与 [formal_methods](formal_methods/README.md)/[type_theory](type_theory/README.md)/[PROOF_INDEX](./10_proof_index.md) 的交叉引用。
+无与 [formal_methods](../../archive/research_notes_2026_06_25/formal_methods/README.md)/[type_theory](type_theory/README.md)/[PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md) 的交叉引用。
 
 **常见无实质内容表现**：
 
@@ -185,7 +185,7 @@ fn example_anti_pattern() {
 
 **四步修复法**：
 
-1. **补形式化**：为核心概念添加 Def（含符号、前置条件、结论）；为结论添加定理及证明思路；引用 [PROOF_INDEX](./10_proof_index.md) 中已有证明。
+1. **补形式化**：为核心概念添加 Def（含符号、前置条件、结论）；为结论添加定理及证明思路；引用 [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md) 中已有证明。
 2. **补代码**：添加可运行 Rust 示例（`cargo build` 通过）；在注释中标明对应定理（如 `// 对应 ownership T2`）。
 3. **补场景与反例**：添加 1–3 个典型使用场景；添加 1–2 个反例及规避策略。
 4. **补衔接**：在相关段落增加 `文档名` 链接至 formal_methods、type_theory、practical_applications。
@@ -255,7 +255,7 @@ fn example_anti_pattern() {
 
 **最佳实践**:
 
-- ✅ 遵循 [研究笔记模板](./10_template.md)
+- ✅ 遵循 [研究笔记模板](../../archive/research_notes_2026_06_25/10_template.md)
 - ✅ 使用清晰的标题层次
 - ✅ 保持逻辑流程连贯
 
@@ -673,7 +673,7 @@ fn main() {
 
 **最佳实践**:
 
-- ✅ 阅读 [贡献指南](./10_contributing.md)
+- ✅ 阅读 [贡献指南](../../archive/research_notes_2026_06_25/10_contributing.md)
 - ✅ 遵循贡献流程
 - ✅ 使用质量检查清单
 
@@ -722,7 +722,7 @@ git commit -m "添加所有权模型形式化研究笔记
 
 **最佳实践**:
 
-- ✅ 使用 [质量检查清单](./10_quality_checklist.md)
+- ✅ 使用 [质量检查清单](../../archive/research_notes_2026_06_25/10_quality_checklist.md)
 - ✅ 逐项检查质量要求
 - ✅ 确保所有要求满足
 
@@ -756,17 +756,17 @@ git commit -m "添加所有权模型形式化研究笔记
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [研究笔记模板](./10_template.md) - 研究笔记模板
-- [贡献指南](./10_contributing.md) - 贡献流程和规范
-- [质量检查清单](./10_quality_checklist.md) - 质量检查标准
-- [维护指南](./10_maintenance_guide.md) - 系统维护指南
+- [研究笔记模板](../../archive/research_notes_2026_06_25/10_template.md) - 研究笔记模板
+- [贡献指南](../../archive/research_notes_2026_06_25/10_contributing.md) - 贡献流程和规范
+- [质量检查清单](../../archive/research_notes_2026_06_25/10_quality_checklist.md) - 质量检查标准
+- [维护指南](../../archive/research_notes_2026_06_25/10_maintenance_guide.md) - 系统维护指南
 
 ### 工具和资源
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [工具使用指南](./10_tools_guide.md) - 研究工具详细指南
-- [快速参考](./10_quick_reference.md) - 快速查找指南
+- [快速参考](../../archive/research_notes_2026_06_25/10_quick_reference.md) - 快速查找指南
 - [常见问题解答](./10_faq.md) - 常见问题解答
 
 ---
@@ -791,7 +791,7 @@ git commit -m "添加所有权模型形式化研究笔记
 - LazyCell/LazyLock 的延迟语义
 - 与现有理论框架的集成
 
-详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
+详见 [RUST_194_RESEARCH_UPDATE](../../archive/research_notes_2026_06_25/10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 

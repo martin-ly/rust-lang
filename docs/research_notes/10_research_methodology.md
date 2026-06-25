@@ -102,7 +102,7 @@
 
 **Axiom RM1**：形式化证明保证正确性；实验验证提供经验支持；二者互补，不可相互替代。见 [experiments/README](experiments/README.md) 推论 EX-C1。
 
-**定理 RM-T1（方法衔接）**：若研究 $Q$ 的形式化定理 $T$ 有证明，且实验 $E$ 验证 $T$，则 $Q$ 的结果可追溯至 [PROOF_INDEX](./10_proof_index.md) 与 [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) 的论证链。
+**定理 RM-T1（方法衔接）**：若研究 $Q$ 的形式化定理 $T$ 有证明，且实验 $E$ 验证 $T$，则 $Q$ 的结果可追溯至 [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md) 与 [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) 的论证链。
 
 *证明*：由 [experiments/README](experiments/README.md) 定理 EX-T1；实验验证与定理结论一致；形式化证明在 PROOF_INDEX 可查。∎
 
@@ -421,7 +421,7 @@ Qed.
 - **可重复性**：环境、命令、版本可复现；实验类需「数据收集执行指南」+「结果分析模板」。
 - **逻辑一致**：形式化研究中的定义、定理、证明与代码示例一致；类型/借用规则与实现对应。
 - **可验证**：形式化可用 Coq/Lean/Prusti 等验证；实验可用 `cargo bench`/`cargo test`/Valgrind 等复现。
-- **交叉引用**：与 [formal_methods](./formal_methods/README.md)、[type_theory](./type_theory/README.md)、[experiments](./experiments/README.md)、[practical_applications](./10_practical_applications.md) 的关联明确。
+- **交叉引用**：与 [formal_methods](../../archive/research_notes_2026_06_25/formal_methods/README.md)、[type_theory](./type_theory/README.md)、[experiments](./experiments/README.md)、[practical_applications](./10_practical_applications.md) 的关联明确。
 - **时效性**：注明 Rust 版本（如 1.93.1+）；若依赖未稳定特性，需标出。
 
 ### 研究模板

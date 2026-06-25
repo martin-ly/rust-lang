@@ -682,7 +682,7 @@ C6 共享借用 ⊥ C7 可变借用
 **参考文档**:
 
 - [10_concept_hierarchy_framework.md](./10_concept_hierarchy_framework.md) - 层间映射
-- [10_proof_index.md](./10_proof_index.md) - 定理索引
+- [10_proof_index.md](../../archive/research_notes_2026_06_25/10_proof_index.md) - 定理索引
 
 ---
 
@@ -711,7 +711,7 @@ C6 共享借用 ⊥ C7 可变借用
 | [CONCEPT_HIERARCHY_FRAMEWORK](./10_concept_hierarchy_framework.md) | 层次关系 | 五层概念体系 |
 | [ARGUMENTATION_CHAIN_AND_FLOW](./10_argumentation_chain_and_flow.md) | 论证关系 | 论证脉络关系 |
 | [FORMAL_FULL_MODEL_OVERVIEW](./10_formal_full_model_overview.md) | 形式化关系 | 统一形式系统 |
-| [PROOF_INDEX](./10_proof_index.md) | 证明依赖 | 定理索引 |
+| [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md) | 证明依赖 | 定理索引 |
 
 ---
 
@@ -736,7 +736,7 @@ C6 共享借用 ⊥ C7 可变借用
 - LazyCell/LazyLock 的延迟语义
 - 与现有理论框架的集成
 
-详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
+详见 [RUST_194_RESEARCH_UPDATE](../../archive/research_notes_2026_06_25/10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 

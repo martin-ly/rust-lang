@@ -596,7 +596,7 @@ async fn proxy_server() -> io::Result<()> {
 - [HTTP 指南](../../../crates/c10_networks/docs/tier_02_guides/02_HTTP客户端开发.md)
 - [TCP/UDP 指南](../../../crates/c10_networks/docs/tier_02_guides/04_TCP_UDP编程.md)
 - [WebSocket 指南](../../../crates/c10_networks/docs/tier_02_guides/03_WebSocket实时通信.md)
-- [形式化方法研究](../../research_notes/formal_methods/README.md)
+- [形式化方法研究](../../../archive/research_notes_2026_06_25/formal_methods/README.md)
 
 ### 相关速查卡
 >

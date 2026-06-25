@@ -10,7 +10,7 @@
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [08 多路合并模式 (Multi-Merge)](#08-多路合并模式-multi-merge)
-  - [📋 目录](#目录)
+  - [📋 目录](#-目录)
   - [模式定义与语义](#模式定义与语义)
     - [核心语义](#核心语义)
     - [触发计数语义](#触发计数语义)
@@ -32,7 +32,7 @@
   - [学术参考](#学术参考)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 模式定义与语义
 >

@@ -11,7 +11,11 @@
 
 ## 📋 目录 {#-目录}
 >
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Build Automation](https://en.wikipedia.org/wiki/Build_Automation)** · **来源: [Wikipedia - Package Manager](https://en.wikipedia.org/wiki/Package_Manager)** · **[来源: ACM - Dependency Management]** · **[来源: IEEE - Software Build Standards]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
+> **来源: [Wikipedia - Build Automation](https://en.wikipedia.org/wiki/Build_Automation)** ·
+> **来源: [Wikipedia - Package Manager](https://en.wikipedia.org/wiki/Package_Manager)** ·
+> **[来源: ACM - Dependency Management]** ·
+> **[来源: IEEE - Software Build Standards]**
 
 - [📦 Cargo 速查卡 {#-cargo-速查卡}](#-cargo-速查卡--cargo-速查卡)
   - [📋 目录 {#-目录}](#-目录--目录)

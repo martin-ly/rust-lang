@@ -12,7 +12,7 @@
 | 主题 | 链接 |
 | :--- | :--- |
 | 类型系统 | [type_theory/](../../research_notes/type_theory/README.md) |
-| 所有权与借用 | [formal_methods/](../../research_notes/formal_methods/README.md) |
+| 所有权与借用 | [formal_methods/](../../../archive/research_notes_2026_06_25/formal_methods/README.md) |
 | 所有权模型 | [10_ownership_model.md](../../research_notes/formal_methods/10_ownership_model.md) |
 | 借用检查器 | [10_borrow_checker_proof.md](../../research_notes/formal_methods/10_borrow_checker_proof.md) |
 | 生命周期 | 10_lifetime_formalization.md |
@@ -148,7 +148,7 @@ mindmap
 
 | 资源 | 路径 |
 | :--- | :--- |
-| 形式化证明索引 | [../../research_notes/10_proof_index.md](../../research_notes/10_proof_index.md) |
+| 形式化证明索引 | [../../research_notes/10_proof_index.md](../../../archive/research_notes_2026_06_25/10_proof_index.md) |
 | 验证工具指南 | [../../research_notes/10_tools_guide.md](../../research_notes/10_tools_guide.md) |
 | 安全/非安全分析 | [../../research_notes/10_safe_unsafe_comprehensive_analysis.md](../../research_notes/10_safe_unsafe_comprehensive_analysis.md) |
 

@@ -4,7 +4,6 @@
 >
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
@@ -255,7 +254,7 @@
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-- [CORE_THEOREMS_FULL_PROOFS](../10_core_theorems_full_proofs.md) — 类型安全 T-TY3 完整证明（L2）；[coq_skeleton](../coq_skeleton/README.md) — Coq 证明骨架
+- [CORE_THEOREMS_FULL_PROOFS](../10_core_theorems_full_proofs.md) — 类型安全 T-TY3 完整证明（L2）；[coq_skeleton](../../../archive/deprecated/coq_skeleton/README.md) — Coq 证明骨架
 - **Types and Programming Languages** (Benjamin C. Pierce)
 - **Advanced Topics in Types and Programming Languages**
 - **Category Theory for Programmers** (Bartosz Milewski)

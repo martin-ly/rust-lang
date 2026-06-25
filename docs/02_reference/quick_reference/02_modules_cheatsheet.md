@@ -1127,7 +1127,7 @@ fn main() {
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [类型系统完备性缺口](../../research_notes/formal_methods/00_completeness_gaps.md) — 模块系统与类型可见性的形式化保证
+- [类型系统完备性缺口](../../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md) — 模块系统与类型可见性的形式化保证
 - [所有权模型形式化](../../research_notes/formal_methods/10_ownership_model.md) — 跨模块边界的所有权规则
 
 ---

@@ -9,7 +9,7 @@
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 论证思路、论证脉络关系、文档依赖、推导链；解决「无论证思路、无论证脉络关系」的缺口
-> **上位文档**: [00_COMPREHENSIVE_SUMMARY](./10_00_comprehensive_summary.md)、[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./10_theoretical_and_argumentation_system_architecture.md)
+> **上位文档**: [00_COMPREHENSIVE_SUMMARY](../../archive/research_notes_2026_06_25/10_00_comprehensive_summary.md)、[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./10_theoretical_and_argumentation_system_architecture.md)
 
 ---
 
@@ -342,7 +342,7 @@ software_design_theory
 - LazyCell/LazyLock 的延迟语义
 - 与现有理论框架的集成
 
-详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
+详见 [RUST_194_RESEARCH_UPDATE](../../archive/research_notes_2026_06_25/10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 

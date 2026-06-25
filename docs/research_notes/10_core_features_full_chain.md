@@ -248,7 +248,7 @@
 | 维度 | 内容 |
 | :--- | :--- |
 | **定义** | 匿名函数；捕获环境；唯一匿名类型 |
-| **概念** | Fn/FnMut/FnOnce（[RUST_193](./10_rust_193_language_features_comprehensive_analysis.md)） |
+| **概念** | Fn/FnMut/FnOnce（[RUST_193](../../archive/research_notes_2026_06_25/10_rust_193_language_features_comprehensive_analysis.md)） |
 | **属性** | 按引用/可变/移动捕获 |
 | **关系** | 与 ownership/borrow 协同；Send 约束 |
 | **解释** | 闭包类型由使用处唯一确定 |
@@ -284,10 +284,10 @@
 | 类型 | 位置 |
 | :--- | :--- |
 | 多维矩阵 | [UNIFIED_SYSTEMATIC_FRAMEWORK](./10_unified_systematic_framework.md) 概念-公理-定理-证明方法-反例矩阵；[formal_methods/README §六篇并表](formal_methods/README.md#formal_methods-六篇并表) |
-| 证明树 | [PROOF_INDEX](./10_proof_index.md)、各特性对应 formal_methods/type_theory 文档 |
+| 证明树 | [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md)、各特性对应 formal_methods/type_theory 文档 |
 | 决策树 | [DECISION_GRAPH_NETWORK](../04_thinking/04_decision_graph_network.md)、[DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md) 选型决策树 |
 
-*依据*：[HIERARCHICAL_MAPPING_AND_SUMMARY](./10_hierarchical_mapping_and_summary.md) § 文档↔思维表征。
+*依据*：[HIERARCHICAL_MAPPING_AND_SUMMARY](../../archive/research_notes_2026_06_25/10_hierarchical_mapping_and_summary.md) § 文档↔思维表征。
 
 ---
 
@@ -297,7 +297,7 @@
 
 | 文档 | 用途 |
 | :--- | :--- |
-| [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./10_rust_193_language_features_comprehensive_analysis.md) | 92 项特性总览 |
+| [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../../archive/research_notes_2026_06_25/10_rust_193_language_features_comprehensive_analysis.md) | 92 项特性总览 |
 | [UNIFIED_SYSTEMATIC_FRAMEWORK](./10_unified_systematic_framework.md) | 全局矩阵与决策树 |
 | [DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md) | 核心机制设计论证 |
 | [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) | 反例索引 |

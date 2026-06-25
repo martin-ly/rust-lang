@@ -540,7 +540,7 @@ impl ProcessMonitor {
 - [完整文档](../../../crates/c07_process/README.md)
 - [异步IO指南](../../../crates/c07_process/docs/async_stdio_guide.md)
 - [性能优化指南](../../../crates/c07_process/docs/performance_optimization_usage_guide.md)
-- [形式化方法研究](../../research_notes/formal_methods/README.md)
+- [形式化方法研究](../../../archive/research_notes_2026_06_25/formal_methods/README.md)
 
 ### 相关速查卡
 

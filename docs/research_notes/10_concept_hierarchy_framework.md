@@ -469,9 +469,9 @@ graph BT
 | 文档 | 用途 | 层次 |
 | :--- | :--- | :--- |
 | [ARGUMENTATION_CHAIN_AND_FLOW](./10_argumentation_chain_and_flow.md) | 论证脉络关系 | L2-L3 |
-| [HIERARCHICAL_MAPPING_AND_SUMMARY](./10_hierarchical_mapping_and_summary.md) | 层次化映射 | L2-L4 |
+| [HIERARCHICAL_MAPPING_AND_SUMMARY](../../archive/research_notes_2026_06_25/10_hierarchical_mapping_and_summary.md) | 层次化映射 | L2-L4 |
 | [FORMAL_FULL_MODEL_OVERVIEW](./10_formal_full_model_overview.md) | 统一形式系统 | L1-L2 |
-| [PROOF_INDEX](./10_proof_index.md) | 定理索引 | L3-L4 |
+| [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md) | 定理索引 | L3-L4 |
 
 ---
 
@@ -496,7 +496,7 @@ graph BT
 - LazyCell/LazyLock 的延迟语义
 - 与现有理论框架的集成
 
-详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
+详见 [RUST_194_RESEARCH_UPDATE](../../archive/research_notes_2026_06_25/10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 

@@ -20,6 +20,10 @@
   - [🎯 学习路径](#-学习路径)
   - [🚀 相关层](#-相关层)
   - [相关概念](#相关概念)
+  - [📚 模块 8: 国际化对齐](#-模块-8-国际化对齐)
+    - [8.1 官方来源](#81-官方来源)
+    - [8.2 学术/工业来源](#82-学术工业来源)
+    - [8.3 社区资源](#83-社区资源)
 
 > **Bloom 层级**: 理解
 > **Rust 并发编程核心：线程、原子操作、同步原语**
@@ -73,7 +77,6 @@
 
 - [NLL 与 Polonius (concept)](../../../concept/03_advanced/08_nll_and_polonius.md) — Location-sensitive Polonius 与并发借用分析
 
-
 ## 📚 模块 8: 国际化对齐
 
 > 本模块按项目模板补充国际化权威来源：官方文档、学术论文/工业报告、社区权威资源。
@@ -99,4 +102,3 @@
 | [Rayon Documentation](https://docs.rs/rayon/latest/rayon/) | 数据并行 |
 | [Crossbeam](https://github.com/crossbeam-rs/crossbeam) | 并发原语库 |
 | [Rust Cookbook — Concurrency](https://rust-lang-nursery.github.io/rust-cookbook/concurrency.html) | 并发模式 |
-

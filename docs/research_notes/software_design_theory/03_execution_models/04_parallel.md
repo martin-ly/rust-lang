@@ -299,7 +299,7 @@ fn parallel_quicksort<T: Send + Ord>(v: &mut [T]) {
 | 场景 | ✅ | 典型场景、Rayon 调度 |
 | 反例 | ✅ | 闭包非 Send、共享可变 |
 | 衔接 | ✅ | Send、ownership、async 组合 |
-| 权威对应 | ✅ | [formal_methods](../../../research_notes/formal_methods/README.md)、[Rayon](https://github.com/rayon-rs/rayon) |
+| 权威对应 | ✅ | [formal_methods](../../../../archive/research_notes_2026_06_25/formal_methods/README.md)、[Rayon](https://github.com/rayon-rs/rayon) |
 
 ---
 

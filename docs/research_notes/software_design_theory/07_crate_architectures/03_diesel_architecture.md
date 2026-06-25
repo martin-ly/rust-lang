@@ -83,7 +83,7 @@ graph LR
 | 后端层 | 为不同数据库生成特定方言的 SQL | `Backend` trait、`Pg`、`Sqlite`、`Mysql` |
 | 运行时层 | 连接池管理、事务、结果映射 | `Connection`、`TransactionManager`、`LoadDsl` |
 
-> 来源: Diesel API 文档, https: /  / [docs.rs](https://docs.rs/) / [diesel](https://diesel.rs/) / latest / [diesel](https://diesel.rs/) / 
+> 来源: Diesel API 文档, https: /  / [docs.rs](https://docs.rs/) / [diesel](https://diesel.rs/) / latest / [diesel](https://diesel.rs/) /
 
 ---
 

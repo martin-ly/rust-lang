@@ -1,10 +1,48 @@
 # 更新日志 (Changelog)
 
-> **最后更新**: 2026-06-24（D/E 工作流收尾 + L3 测验 + Kani 合约示例完成）
+> **最后更新**: 2026-06-25（docs/ A/B/C 价值审计收尾 + B 类过期文档复审 + 归档引用残留清理）
 
 ---
 
 ## [3.1.0] - 2026-07-09 — Rust 1.97.0 稳定支持
+
+### docs/ 目录 A/B/C 价值审计收尾（2026-06-25）
+
+- 复审并更新 2 个 B 类过期文档的日期与状态：
+  - `docs/10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+  - `docs/10_terminology_standard.md`
+- 批量修复 `archive/research_notes_2026_06_25/` 移动导致的引用残留：
+  - 新增 `scripts/maintenance/fix_archived_research_notes_links.py`
+  - 第一轮回退修复 134 处；第二轮补齐 `docs/research_notes/` 内部 `./xxx.md` 形式残留 270 处，共 404 处
+- 清理 `coq_skeleton` 引用残留：
+  - 新增 `scripts/maintenance/fix_coq_skeleton_links.py`
+  - 将 `docs/research_notes/` 内 26 处指向旧 `coq_skeleton/` 的链接重定向到 `archive/deprecated/coq_skeleton/`
+  - 删除重复的 `docs/research_notes/coq_skeleton/` 目录（内容已在 `archive/deprecated/coq_skeleton/`）
+- `docs/rust-ownership-decidability/README.md` 添加归档声明，标记为历史参考/不再主动更新。
+- 当前审计结果：`docs/` A 类问题 **0**，B 类问题 **0**，C 类问题 **679**（均为研究综述类最后更新超过 90 天）。
+- 更新 `reports/C_CLASS_GOVERNANCE_PLAN_2026_06_09.md`：阶段 3「核心内容迁移与归档」标记为进行中。
+
+### C 类目录治理阶段 3 完成（2026-06-25）
+
+- **ROD 核心结论迁移到 `concept/04_formal/`**：
+  - 新建 `concept/04_formal/28_borrow_checking_decidability.md`（NLL/Polonius、P-完全、与 rustc borrowck 映射）
+  - 新建 `concept/04_formal/29_type_inference_complexity.md`（HM 扩展、PSPACE-完全、与 rustc typeck 映射）
+  - 新建 `concept/04_formal/30_aeneas_symbolic_semantics.md`（LLBC、HLPL、符号执行、Aeneas 工具链）
+  - 补充 `concept/04_formal/03_ownership_formal.md`、`08_type_inference.md`、`README.md`
+- **`docs/research_notes/` 批量归档**：
+  - 增强 `scripts/maintenance/archive_research_notes_candidates.py`：支持 `--stale-days`、黑名单类别、`--dry-run`/`--yes`
+  - 移动 37 个低价值/过时文件到 `archive/research_notes_2026_06_25/`
+  - 运行 `scripts/maintenance/fix_archived_research_notes_links.py` 修复 131 处引用残留
+  - 生成 `reports/RESEARCH_NOTES_ARCHIVE_BATCH_2026_06_25.md`
+- **精选内容合并到 `knowledge/`**：
+  - 新建 `knowledge/04_expert/academic/03_ownership_model_comprehensive.md`
+  - 新建 `knowledge/04_expert/academic/04_borrow_checker_proof_guide.md`
+  - 新建 `knowledge/04_expert/academic/05_type_system_foundations_guide.md`
+  - 补充 `knowledge/03_advanced/unsafe/04_unsafe_rust.md`（UB 分类与安全抽象原则）
+  - 更新 `knowledge/04_expert/academic/README.md`
+- **状态更新**：
+  - `reports/C_CLASS_GOVERNANCE_PLAN_2026_06_09.md`：阶段 3 完成，阶段 4 维护规则进行中
+  - `.kimi/EXECUTION_CHECKLIST_2026_06_22.md`：新增 B4.4–B4.7 完成项
 
 ### 语言特性
 

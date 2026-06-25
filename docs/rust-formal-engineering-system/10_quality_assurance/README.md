@@ -57,8 +57,8 @@
 | **测试覆盖** | 单元/集成/基准、覆盖率报告 | [TESTING_COVERAGE_GUIDE](../../05_guides/05_testing_coverage_guide.md) |
 | **性能测试** | 基准测试、性能回归、分析工具 | [PERFORMANCE_TESTING_REPORT](../../05_guides/05_performance_testing_report.md) |
 | **内存安全** | MIRI、Valgrind、无 UB 验证 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../../research_notes/10_safe_unsafe_comprehensive_analysis.md) |
-| **形式化验证** | Prusti、Kani、Creusot | [TOOLS_GUIDE](../../research_notes/10_tools_guide.md)、[FORMAL_VERIFICATION_GUIDE](../../research_notes/10_formal_verification_guide.md) |
-| **代码质量** | Clippy、rustfmt、文档 | [QUALITY_CHECKLIST](../../research_notes/10_quality_checklist.md) |
+| **形式化验证** | Prusti、Kani、Creusot | [TOOLS_GUIDE](../../research_notes/10_tools_guide.md)、[FORMAL_VERIFICATION_GUIDE](../../../archive/research_notes_2026_06_25/10_formal_verification_guide.md) |
+| **代码质量** | Clippy、rustfmt、文档 | [QUALITY_CHECKLIST](../../../archive/research_notes_2026_06_25/10_quality_checklist.md) |
 
 ---
 
@@ -294,14 +294,14 @@ mod contracts {
 
 | 文档 | 用途 | 路径 |
 | :--- | :--- | :--- |
-| **QUALITY_CHECKLIST** | 研究笔记质量检查 | [../../research_notes/10_quality_checklist.md](../../research_notes/10_quality_checklist.md) |
+| **QUALITY_CHECKLIST** | 研究笔记质量检查 | [../../research_notes/10_quality_checklist.md](../../../archive/research_notes_2026_06_25/10_quality_checklist.md) |
 | **experiments/performance_benchmarks** | 性能基准方法论 | [../../research_notes/experiments/10_performance_benchmarks.md](../../research_notes/experiments/10_performance_benchmarks.md) |
 | **SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS** | 安全边界与 UB | [../../research_notes/10_safe_unsafe_comprehensive_analysis.md](../../research_notes/10_safe_unsafe_comprehensive_analysis.md) |
-| **type_theory/00_completeness_gaps** | 类型理论完备性缺口 | [../../research_notes/formal_methods/00_completeness_gaps.md](../../research_notes/formal_methods/00_completeness_gaps.md) |
+| **type_theory/00_completeness_gaps** | 类型理论完备性缺口 | [../../research_notes/formal_methods/00_completeness_gaps.md](../../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md) |
 | **TOOLS_GUIDE** | 形式化验证工具指南 | [../../research_notes/10_tools_guide.md](../../research_notes/10_tools_guide.md) |
-| **FORMAL_VERIFICATION_GUIDE** | 形式化验证入门 | [../../research_notes/10_formal_verification_guide.md](../../research_notes/10_formal_verification_guide.md) |
-| **PROOF_INDEX** | 形式化证明索引 | [../../research_notes/10_proof_index.md](../../research_notes/10_proof_index.md) |
-| **CORE_THEOREMS_FULL_PROOFS** | 核心定理完整证明 | [../../research_notes/10_core_theorems_full_proofs.md](../../research_notes/10_core_theorems_full_proofs.md) |
+| **FORMAL_VERIFICATION_GUIDE** | 形式化验证入门 | [../../research_notes/10_formal_verification_guide.md](../../../archive/research_notes_2026_06_25/10_formal_verification_guide.md) |
+| **PROOF_INDEX** | 形式化证明索引 | [../../research_notes/10_proof_index.md](../../../archive/research_notes_2026_06_25/10_proof_index.md) |
+| **CORE_THEOREMS_FULL_PROOFS** | 核心定理完整证明 | [../../research_notes/10_core_theorems_full_proofs.md](../../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) |
 | **BEST_PRACTICES** | 工程最佳实践 | [../../research_notes/10_best_practices.md](../../research_notes/10_best_practices.md) |
 | **TESTING_COVERAGE_GUIDE** | 测试覆盖指南 | [../../05_guides/05_testing_coverage_guide.md](../../05_guides/05_testing_coverage_guide.md) |
 
@@ -311,11 +311,11 @@ mod contracts {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 形式化方法概述 | 形式化验证基础理论 | [../../research_notes/formal_methods/README.md](../../research_notes/formal_methods/README.md) |
+| 形式化方法概述 | 形式化验证基础理论 | [../../research_notes/formal_methods/README.md](../../../archive/research_notes_2026_06_25/formal_methods/README.md) |
 | 类型系统形式化 | 类型理论数学定义 | [../../research_notes/type_theory/10_type_system_foundations.md](../../research_notes/type_theory/10_type_system_foundations.md) |
 | 所有权模型形式化 | 所有权系统数学定义 | [../../research_notes/formal_methods/10_ownership_model.md](../../research_notes/formal_methods/10_ownership_model.md) |
 | 借用检查器证明 | 借用检查器形式化 | [../../research_notes/formal_methods/10_borrow_checker_proof.md](../../research_notes/formal_methods/10_borrow_checker_proof.md) |
-| 证明索引 | 形式化证明集合 | [../../research_notes/10_proof_index.md](../../research_notes/10_proof_index.md) |
+| 证明索引 | 形式化证明集合 | [../../research_notes/10_proof_index.md](../../../archive/research_notes_2026_06_25/10_proof_index.md) |
 
 ---
 

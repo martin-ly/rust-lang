@@ -246,7 +246,7 @@ fn call_fn_once<F: FnOnce()>(f: F) { f(); }
 | :--- | :--- | :--- |
 | 所有权模型 | 所有权系统的完整形式化模型 | [../../../research_notes/formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) |
 | 借用检查器 | 借用检查的形式化证明 | [../../../research_notes/formal_methods/10_borrow_checker_proof.md](../../../research_notes/formal_methods/10_borrow_checker_proof.md) |
-| 证明索引 | 所有权相关证明 | [../../../research_notes/10_proof_index.md](../../../research_notes/10_proof_index.md) |
+| 证明索引 | 所有权相关证明 | [../../../research_notes/10_proof_index.md](../../../../archive/research_notes_2026_06_25/10_proof_index.md) |
 | 工具指南 | 形式化验证工具 | [../../../research_notes/10_tools_guide.md](../../../research_notes/10_tools_guide.md) |
 
 ---
