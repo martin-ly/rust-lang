@@ -382,7 +382,7 @@ graph TD
     AC --> A2[AsyncFn Traits<br/>1.85.0 stable / 2024 prelude]
     AC --> A3[Future/IntoFuture<br/>1.85.0 入 prelude]
 
-    A1 --> B1[AFIDT<br/>async fn in dyn trait<br/>1.97+ Nightly]
+    A1 --> B1[AFIDT<br/>async fn in dyn trait<br/>🧪 实验中 / 暂无稳定时间表]
     AC --> B2[RTN<br/>Return Type Notation<br/>1.97+ 实验中]
     AC --> B3[Gen Blocks<br/>1.98+ 设计中]
 

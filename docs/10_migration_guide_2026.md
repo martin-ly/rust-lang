@@ -427,7 +427,7 @@ let wide: (i32, i32) = (narrow.0 as i32, narrow.1 as i32);
 | isqrt | 1.84 | 整数平方根运算 |
 | HashMap::get_disjoint_mut | 1.86 | 安全并行可变访问 |
 | Vec::pop_if | 1.86 | 条件弹出元素 |
-| async closures (`async \|\|`) | 1.85 (Edition 2024) | 异步闭包 |
+| async closures (`async \|\|`) | 1.85.0+（不限 Edition） | 异步闭包 |
 | PinCoerceUnsized | nightly only | Pin 类型强制转换 (实验性) |
 | 元组 coercion | 已存在 | 元组类型自动转换 |
 | WebAssembly `--allow-undefined` 移除 | 1.96 | wasm-ld 链接器行为变更 |

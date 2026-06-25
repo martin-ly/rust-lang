@@ -749,7 +749,7 @@ cargo deny check advisories
 |:---|:---|:---:|:---|:---|
 | `instant` | RUSTSEC-2024-0384 (unmaintained) | 🟡 已知 | 通过 `glommio → futures-lite → fastrand → instant` 传递引入；`glommio` 实验性模块使用 | 跟踪 `glommio`/`futures-lite` 上游升级 |
 | `backoff` | RUSTSEC-2025-0012 (unmaintained) | 🟢 **已修复** | `c06_async` 已改用内部实现，workspace 中无实际依赖 | ✅ 完成 |
-| `sea-orm` | 无 CVE | 🟡 待观察 | 使用 `2.0.0-rc.40` 预发布版，持续跟踪 stable 发布 | 等待上游 2.0.0 stable |
+| `sea-orm` | 无 CVE | 🟡 待观察 | 使用 `2.0.0-rc.41` 预发布版；crates.io 最新 stable 为 `1.1.20`，2.0 仍在 release-candidate 阶段 | 等待上游 2.0.0 stable |
 
 **检查命令**:
 

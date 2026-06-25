@@ -273,7 +273,7 @@
   - [Rust 语言规范预研：从参考文档到形式化规范](07_future/17_rust_specification_preview.md)
   - [Async Drop：异步资源的优雅销毁](07_future/18_async_drop_preview.md)
   - [Field Projections 预览：安全的字段级投影](07_future/18_field_projections_preview.md)
-  - [Rust 2024 Edition Preview](07_future/19_rust_edition_preview.md)
+  - [Rust 2024 Edition (1.85.0+ stable)](07_future/19_rust_edition_preview.md)
   - [Rust for Linux ：操作系统内核中的内存安全](07_future/19_rust_for_linux.md)
   - [BorrowSanitizer 概念预研：运行时借用检查工业化](07_future/20_borrowsanitizer_preview.md)
   - [Rust 在 AI 与机器学习中的新兴角色](07_future/21_rust_in_ai.md)

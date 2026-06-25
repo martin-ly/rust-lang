@@ -77,7 +77,7 @@ Edition 机制:
   ├── 2015 Edition: 初始版本
   ├── 2018 Edition: NLL, async/await, module 简化
   ├── 2021 Edition: 预导入 panic, disjoint capture, IntoIterator for arrays
-  └── 2024 Edition: gen blocks, never type, RPIT lifetime capture
+  └── 2024 Edition: gen blocks（nightly 预览）, never type, RPIT lifetime capture
 
   Cargo.toml 配置:
   [package]
@@ -140,10 +140,11 @@ Edition 机制:
 ```text
 2024 Edition 主要变更:
 
-  gen blocks:
+  gen blocks（nightly，feature `gen_blocks`）:
   ├── gen { yield 1; yield 2; }
   ├── 简化生成器语法
   └── 与 async {} 对称
+  └── 注意：`gen` 关键字在 Edition 2024 中已预留，但 `gen {}` / `gen fn` 仍为 nightly
 
   never type (!):
   ├── 函数永不返回: fn abort() -> !
@@ -165,7 +166,7 @@ Edition 机制:
   cargo fix --edition-idioms
 ```
 
-> **2024 洞察**: **2024 Edition 聚焦异步和类型系统完善**——gen blocks 和精确捕获是核心特性。
+> **2024 洞察**: **2024 Edition 聚焦异步和类型系统完善**——精确捕获是核心稳定特性；gen blocks 作为 `gen` 关键字预留后的 nightly 预览特性，为未来生成器语法铺路。
 > [来源: [Rust Edition 2024 Guide](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)]
 
 ---

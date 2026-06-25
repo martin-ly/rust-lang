@@ -13,7 +13,7 @@
 | 文档 | 主题 | 难度 | 状态 |
 |------|------|------|------|
 | [generic_const_exprs.md](02_generic_const_exprs.md) | 泛型常量表达式 | ⭐⭐⭐⭐ | 🧪 不稳定 |
-| [async_closures.md](01_async_closures.md) | 异步闭包 | ⭐⭐⭐⭐ | 🧪 不稳定 |
+| [async_closures.md](01_async_closures.md) | 异步闭包 | ⭐⭐⭐⭐ | ✅ Rust 1.85.0+ stable |
 | [rust_1_95.md](03_rust_1_95.md) | Rust 1.95 新特性 | ⭐⭐⭐ | ✅ 已发布 |
 | [rust_1_96.md](05_rust_1_96.md) | Rust 1.96 稳定特性 | ⭐⭐⭐ | ✅ Stable |
 

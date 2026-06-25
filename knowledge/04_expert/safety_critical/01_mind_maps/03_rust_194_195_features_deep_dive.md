@@ -476,7 +476,7 @@ impl GpioPort for PortB {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
-// 1.95 - 更完善的异步闭包
+// 异步闭包示例（自 Rust 1.85.0 起已稳定，此处展示其在异步 trait 场景中的应用）
 let future = async || {
     let data = fetch_data().await;
     process(data).await

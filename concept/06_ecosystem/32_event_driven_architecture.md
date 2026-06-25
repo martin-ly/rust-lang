@@ -210,7 +210,7 @@ pub struct OrderLineItem { pub sku: String, pub quantity: u32, pub unit_price: f
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum PaymentStatus { Approved, Declined, Pending }
 
-// dyn Trait 仍需 #[async_trait]，待 AFIDT 稳定
+// dyn Trait 仍需 #[async_trait]；AFIDT 仍为实验性，暂无稳定时间表
 #[async_trait::async_trait]
 pub trait EventHandler: Send + Sync {
     async fn handle(&self, event: &DomainEvent) -> Result<(), EventHandlerError>;
@@ -245,7 +245,7 @@ impl TypedEventBus {
 }
 
 struct EmailHandler;
-// dyn Trait 仍需 #[async_trait]，待 AFIDT 稳定
+// dyn Trait 仍需 #[async_trait]；AFIDT 仍为实验性，暂无稳定时间表
 #[async_trait::async_trait]
 impl EventHandler for EmailHandler {
     async fn handle(&self, event: &DomainEvent) -> Result<(), EventHandlerError> {

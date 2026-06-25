@@ -295,7 +295,7 @@ fn bar() -> i32                         // 效果 = {}
 | 类型论概念 | Koka 表达 | Rust 工程对应 | 差距 |
 |:---|:---|:---|:---|
 | **效果行** | `<io, async>` | `impl Future<Output = T>` + `?` 传播 | Rust 无统一语法，各效果独立实现 |
-| **行多态** | `fun map(f: a -> e b): e b` | `AsyncFn` / `~const Trait` (unstable) | 无显式效果变量 `e` |
+| **行多态** | `fun map(f: a -> e b): e b` | `AsyncFn` (1.85.0 stable) / `~const Trait` (unstable) | 无显式效果变量 `e` |
 | **效果子类型** | `<io> <: <io, async>` | 无直接对应 | Rust 未引入效果子类型关系 |
 | **效果消除** | `handle { ... }` | `block_on(future)` / `match result` | Rust 将 handler 外化到库层 |
 

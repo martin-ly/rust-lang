@@ -1,7 +1,7 @@
 # Sea-ORM 深度解析
 
 > **Bloom 层级**: 理解
-> **版本**: Sea-ORM 1.x
+> **版本**: Sea-ORM 1.x（crates.io 最新 stable 为 `1.1.20`；2.0 处于 release-candidate 阶段，本 workspace 使用 `2.0.0-rc.41`，等待上游 2.0.0 stable）
 > **Rust 版本**: 1.96.0+
 > **难度**: 中级
 > **预计阅读时间**: 40分钟

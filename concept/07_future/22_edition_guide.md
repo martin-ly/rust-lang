@@ -11,6 +11,7 @@
 > **A/S/P 标记**: **A+S** — ApplicationStructure
 > **双维定位**: C×App — 应用 Edition 指南
 > **定位**: 全面讲解 Rust **Edition 2024** 的新特性——从 gen blocks、async closures 到 never type 和 lifetime captures，揭示 Edition 机制如何在不破坏兼容性的前提下推进语言演进。
+> **注意**: Rust 2024 Edition 已在 **Rust 1.85.0** 稳定；`gen {}` blocks / `gen fn` 仍为 nightly（feature `gen_blocks`，跟踪 issue #117078），本文档将其作为前瞻特性介绍。
 > **前置概念**: [Rust Version Tracking](./05_rust_version_tracking.md) · [Async](../03_advanced/02_async.md) · [Generics](../02_intermediate/02_generics.md)
 > **后置概念**: [Evolution](./03_evolution.md) · [NLL](../03_advanced/08_nll_and_polonius.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
@@ -83,7 +84,7 @@ Rust Edition 机制:
   ├── 2015: 初始 Edition
   ├── 2018: NLL, module system 改进, async/await
   ├── 2021: disjoint capture, panic = abort, reserves
-  └── 2024: gen blocks, async closures, lifetime captures
+  └── 2024: gen blocks（nightly 预览）, async closures（1.85.0 stable）, lifetime captures
 
   选择方式:
   // Cargo.toml
@@ -113,7 +114,7 @@ Rust Edition 机制:
 Edition 2024 核心特性:
 
   语言特性:
-  ├── gen blocks: 生成器/协程语法
+  ├── gen blocks: 生成器/协程语法（nightly，feature `gen_blocks`）
   ├── async closures: 异步闭包
   ├── impl Trait lifetime captures: 精确的 impl Trait 生命周期
   ├── never type (!): 正式稳定
@@ -184,7 +185,8 @@ Edition 2024 核心特性:
 >
 
 ```rust,ignore
-// Gen Blocks: 生成器/协程 (Rust 2024)
+// Gen Blocks: 生成器/协程 (Rust 2024，nightly 预览)
+// 注意：Rust 2024 Edition 本身已在 1.85.0 稳定，但 `gen {}` / `gen fn` 仍为 nightly。
 
 // 使用 gen 关键字定义生成器
 fn fibonacci() -> impl Iterator<Item = u64> {

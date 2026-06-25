@@ -1,5 +1,6 @@
-> **内容分级**: [综述级]
-
+> **内容分级**:
+>
+> [综述级]
 > **本节关键术语**: 闭包类型 (Closure Type) · Fn · FnMut · FnOnce · 捕获模式 (Capture Mode) · move 闭包（Closures） — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 闭包类型系统：Fn、FnMut、FnOnce 的捕获语义
@@ -331,7 +332,7 @@ graph TD
 
 边界 4: 与 async 的交互
 ├── async 块本质上是特殊闭包
-├── async || {} 是异步闭包（nightly）
+├── async || {} 是异步闭包（Rust 1.85.0+ stable）
 └── 闭包 + async 的组合带来额外的 Pin 约束
 ```
 

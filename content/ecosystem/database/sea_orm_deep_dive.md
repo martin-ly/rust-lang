@@ -1,7 +1,7 @@
 # Sea-ORM 深度解析
 
 > **定位**: Rust 异步 ORM 生态标杆
-> **版本**: Sea-ORM 1.x (兼容 Rust 1.96.0+)
+> **版本**: Sea-ORM 1.x (兼容 Rust 1.96.0+)； crates.io 最新 stable 为 `1.1.20`，2.0 处于 release-candidate 阶段，本 workspace 使用 `2.0.0-rc.41`，等待上游 2.0.0 stable
 > **适用场景**: 异步数据库访问、类型安全查询、迁移管理
 
 ---

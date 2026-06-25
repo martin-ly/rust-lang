@@ -45,7 +45,7 @@
 
 ### AsyncFn* trait family 加入 prelude
 
-Rust 1.97 将 `AsyncFn`, `AsyncFnMut`, `AsyncFnOnce` 三个 trait 加入标准 prelude，
+Rust 1.85.0 将 `AsyncFn`, `AsyncFnMut`, `AsyncFnOnce` 三个 trait 加入标准 prelude（所有 Edition），
 允许像使用普通闭包一样使用异步闭包，无需显式导入。
 
 ```rust

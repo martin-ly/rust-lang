@@ -304,7 +304,7 @@ Future trait          (1.36)
     → Future/IntoFuture in prelude      (2024 edition / 1.85)
       → AFIT: async fn in trait          (1.75.0)
         → AsyncFn traits + async closures stable  (1.85.0)
-          → AFIDT: async fn in dyn trait   (nightly, rust-lang/rust#133119)
+          → AFIDT: async fn in dyn trait   (nightly 实验中，暂无稳定时间表；dyn Trait 仍需 async_trait，跟踪 rust-lang/rust#133882)
             → RTN: Return Type Notation     (nightly / RFC)
               → Async Drop                  (nightly)
                 → Gen blocks / AsyncIterator  (nightly)
@@ -313,7 +313,7 @@ Future trait          (1.36)
 > **状态标注模板**：
 >
 > - ✅ `async closures` — **stable 1.85.0**
-> - 🧪 `AFIDT` — nightly，跟踪 issue [#133119](https://github.com/rust-lang/rust/issues/133119)
+> - 🧪 `AFIDT` — nightly 实验中，暂无稳定时间表；`dyn Trait` 场景继续使用 `async_trait`，跟踪 issue [#133882](https://github.com/rust-lang/rust/issues/133882)
 > - 🧪 `RTN` — nightly / RFC 阶段
 > - 🧪 `Async Drop` — nightly，跟踪 issue [#126494](https://github.com/rust-lang/rust/issues/126494)
 > - 🧪 `Gen blocks` — nightly，需 `#![feature(gen_blocks, yield_expr)]`

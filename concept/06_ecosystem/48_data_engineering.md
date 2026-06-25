@@ -396,19 +396,19 @@ struct EtlPipeline {
     sink: Box<dyn DataSink>,
 }
 
-// dyn Trait 仍需 #[async_trait]，待 AFIDT 稳定
+// dyn Trait 仍需 #[async_trait]；AFIDT 仍为实验性，暂无稳定时间表
 #[async_trait::async_trait]
 trait DataSource: Send + Sync {
     async fn read(&self) -> mpsc::Receiver<RecordBatch>;
 }
 
-// dyn Trait 仍需 #[async_trait]，待 AFIDT 稳定
+// dyn Trait 仍需 #[async_trait]；AFIDT 仍为实验性，暂无稳定时间表
 #[async_trait::async_trait]
 trait Transform: Send + Sync {
     async fn transform(&self, input: RecordBatch) -> PolarsResult<RecordBatch>;
 }
 
-// dyn Trait 仍需 #[async_trait]，待 AFIDT 稳定
+// dyn Trait 仍需 #[async_trait]；AFIDT 仍为实验性，暂无稳定时间表
 #[async_trait::async_trait]
 trait DataSink: Send + Sync {
     async fn write(&self, rx: mpsc::Receiver<RecordBatch>);

@@ -340,9 +340,9 @@ RUSTFLAGS="-Zsanitizer=borrow" cargo +nightly test
 
 ### 4.1 Async fn in dyn Trait
 
-**状态**: 🧪 Nightly 实验性
+**状态**: 🧪 Nightly 实验性（截至 2026-06-25 仍未稳定，暂无稳定时间表）
 
-**核心突破**: 消除 `#[async_trait]` 在 `dyn Trait` 场景中的需求。
+**核心突破**: 若未来稳定，可消除 `#[async_trait]` 在 `dyn Trait` 场景中的需求。但目前仍处于早期实验阶段，需继续依赖 `async_trait`。
 
 ```rust,ignore
 #![feature(async_fn_in_dyn_trait)]
@@ -351,11 +351,13 @@ trait Service {
     async fn handle(&self, req: Request) -> Response;
 }
 
-// 无需 async_trait！
+// 仅在 nightly 实验；生产环境 dyn Trait 仍需 async_trait
 fn run_service(s: &dyn Service) {
     s.handle(req); // 编译器自动处理虚表调度
 }
 ```
+
+> **工程建议**：在 `dyn Trait` 需要异步方法的生产代码中，继续使用 `#[async_trait]`。AFIT（async fn in trait）已在 Rust 1.75+ stable，但仅适用于泛型/`impl Trait` 场景。
 
 ---
 

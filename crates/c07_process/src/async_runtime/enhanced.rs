@@ -430,13 +430,13 @@ impl EnhancedAsyncProcessManager {
         Err(ProcessError::NotFound(pid))
     }
 
-    /// 异步启动进程（使用 Rust 1.90 异步闭包特性）
-    /// async process （ Rust 1.90 async feature ）
+    /// 异步启动进程（使用 Future trait 回调模式）
+    /// async process (Future trait callback pattern)
     ///
-    /// 这个版本使用了 Rust 1.90 的新异步闭包特性
-    /// this Rust 1.90 async feature
-    /// 注意：由于异步闭包仍不稳定，这里使用 Future trait 作为替代
-    /// ：async ， Future trait as
+    /// 异步闭包自 Rust 1.85.0 起已稳定；本实现选择使用 FnOnce -> Future trait
+    /// 作为回调抽象，以兼容旧代码或未使用 async closure 语法的场景。
+    /// async closures are stable since Rust 1.85.0; this implementation uses the
+    /// FnOnce -> Future trait pattern for broader compatibility.
     pub async fn spawn_with_async_callback<F, Fut>(
         &self,
         config: ProcessConfig,

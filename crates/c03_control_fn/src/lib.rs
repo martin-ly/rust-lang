@@ -21,7 +21,7 @@
 //! - **异步Drop**: 异步资源清理支持
 //! - **async Drop**: async
 //! - **异步生成器**: 原生异步迭代器支持 (nightly)
-//! - **async **: async (nightly)
+//! - **异步闭包 (async closures)**: Rust 1.85.0 stable（非 nightly）
 //! - **Poloniusborrow checker**: 更精确borrowanalysis
 //! - **下一代特质求解器**: 更快的编译和更好的错误消息
 //! - **under trait **: and
@@ -33,7 +33,7 @@
 //! - **异步Drop**: 异步资源清理支持
 //! - **async Drop**: async
 //! - **异步生成器**: 原生异步迭代器支持
-//! - **async **: async
+//! - **异步闭包 (async closures)**: Rust 1.85.0 stable
 //! - **Poloniusborrow checker**: 更精确borrowanalysis
 //! - **下一代特质求解器**: 更快的编译和更好的错误消息
 //! - **under trait **: and

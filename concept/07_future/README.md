@@ -171,7 +171,7 @@ graph TB
 - [Arbitrary Self Types 预览：自定义方法接收器](./17_arbitrary_self_types_preview.md)
 - [Const Trait Preview](./17_const_trait_preview.md)
 - [Field Projections 预览：安全的字段级投影](./18_field_projections_preview.md)
-- [Rust 2024 Edition Preview](../../knowledge/06_ecosystem/02_edition_2024.md)
+- [Rust 2024 Edition (1.85.0+ stable)](../../knowledge/06_ecosystem/02_edition_2024.md)
 - [Rust for Linux ：操作系统内核中的内存安全](./19_rust_for_linux.md)
 - [Rust 在 AI 与机器学习中的新兴角色](./21_rust_in_ai.md)
 - [Edition 2024 完全指南：新特性与迁移策略](./22_edition_guide.md)

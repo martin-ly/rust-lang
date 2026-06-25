@@ -914,6 +914,7 @@ mod tests {
 }
 
 // ==================== Rust 2024 Edition: gen blocks 算法前瞻 (nightly-only) ====================
+// 说明: Rust 2024 Edition 本身已在 Rust 1.85.0 稳定；但 `gen {}` / `gen fn` 仍为 nightly。
 // ⚠️ 注意: 以下代码需要 nightly 编译器和 `#![feature(gen_blocks, yield_expr)]`
 // 本专题展示 `gen` 块在算法实现中的前瞻应用，stable 编译器不可用。
 

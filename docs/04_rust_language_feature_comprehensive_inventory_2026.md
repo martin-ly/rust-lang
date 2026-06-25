@@ -142,8 +142,7 @@
     - [B.2 1.95 语言特性（非 API）](#b2-195-语言特性非-api)
   - [附录 C：特性成熟度决策树](#附录-c特性成熟度决策树)
   - [附录 D：认知完备性检查表](#附录-d认知完备性检查表)
-<a id="项目-msrv-1960-edition-2024"></a>
-  - [*项目 MSRV: 1.96.0+ (Edition 2024)*](#项目-msrv-1960-edition-2024)
+  - *项目 MSRV: 1.96.0+ (Edition 2024)*
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -263,7 +262,7 @@ B = 本项目现有知识集合
 | async-std [已归档] 运行时示例 | c06_async/src/async_std/ | 2025年3月已归档 | ✅ 已有归档说明+迁移对照表 |
 | 旧 WASI 目标 | c12_wasm | `wasm32-wasip1` → `wasm32-wasip1` 已全量替换 | ✅ 代码/脚本/文档已更新 |
 | `static mut` 引用示例 | c05_threads, c13_embedded | 2024 Edition deny-by-default | ✅ 已迁移至 AtomicUsize/UnsafeCell |
-| 旧版 `async_trait` 依赖 | c10_networks | Axum 0.8+ 已不需要 | ⏳ 待评估（c10已有AFIT示例） |
+| 旧版 `async_trait` 依赖 | c10_networks | Axum 0.8+ 在泛型/`impl Trait` 场景已不需要；`dyn Trait` 仍需 `async_trait` | ⏳ 待评估（c10已有AFIT示例） |
 | 虚构 API `spawn_unchecked` | 审计报告提及 | 不存在于 stdlib | ✅ 代码中不存在，已确认 |
 | 虚构 API `PinCoerceUnsized` | docs/ 中已正确标注 | nightly-only | ✅ 已正确标注为 nightly |
 | 版本张冠李戴 | rust_196_features.rs, docs/ | `isqrt`/`get_disjoint_mut`/`pop_if` 标错 | ✅ 已修正为 1.84-1.86 |
@@ -286,7 +285,7 @@ graph TD
     Q3 -->|是| Q6{社区需求高?}
     Q3 -->|否<br/>RFC 阶段| Q7[跟踪观察<br/>P2 优先级]
 
-    Q5 -->|极高<br/>如 async closures| Q8[预研模块<br/>P1 优先级]
+    Q5 -->|极高<br/>如 async closures| Q8[重点特性模块<br/>P1 优先级]
     Q5 -->|一般| Q7
 
     Q6 -->|是| Q8
@@ -967,7 +966,7 @@ fn missing_lifetime<'a>(x: &'a str) -> impl Iterator<Item = char> + use<> {
 ```mermaid
 graph LR
     A[async fn<br/>1.39] --> B[AFIT<br/>async fn in trait<br/>1.75.0]
-    B --> C[AFIDT<br/>async fn in dyn trait<br/>1.97+ Nightly]
+    B --> C[AFIDT<br/>async fn in dyn trait<br/>🧪 实验中 / 暂无稳定时间表]
     B --> D["Async Closures<br/>async || {}<br/>1.85.0 Stable"]
     D --> E[AsyncFn traits<br/>AsyncFn/Mut/Once<br/>1.85.0 Stable / 2024 Prelude]
     C --> F[RTN<br/>Return Type Notation<br/>1.97+ RFC 3654]
@@ -988,7 +987,7 @@ graph LR
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
-**What**: 允许在 trait object (`dyn Trait`) 中使用 async fn。这是 async Rust 的最后一个主要拼图，解决了 `async_trait` 宏的大部分使用场景。
+**What**: 允许在 trait object (`dyn Trait`) 中使用 async fn。这是 async Rust 的最后一个主要拼图，理论上可消除 `async_trait` 宏在 `dyn Trait` 场景中的使用。**当前状态**：截至 2026-06-25 仍为 nightly 实验特性，尚未进入稳定化轨道；生产代码在 `dyn Trait` 场景中应继续使用 `async_trait`。
 
 **预研代码**（需要 nightly）:
 
@@ -1007,7 +1006,7 @@ impl DataSource for Database {
     }
 }
 
-// ✅ AFIDT 的关键价值：dyn Trait 现在支持 async fn
+// ✅ AFIDT 的关键价值（实验中）：dyn Trait 未来可能支持 async fn
 fn create_source() -> Box<dyn DataSource> {
     Box::new(Database)
 }
@@ -1018,9 +1017,10 @@ fn create_source() -> Box<dyn DataSource> {
 
 **权威对齐**:
 
-- 状态: **Nightly** (`#![feature(async_fn_in_dyn_trait)]`)
-- 跟踪: [rust-lang/rust#133119](https://github.com/rust-lang/rust/issues/133119)
-- 预计稳定: 1.97-1.98
+- 状态: **Nightly 实验中** (`#![feature(async_fn_in_dyn_trait)]`)
+- 跟踪: [rust-lang/rust#133882](https://github.com/rust-lang/rust/issues/133882)
+- 稳定展望: 暂无稳定时间表；仍需初始 RFC 与更多实验（`dynosaur` 等方案亦处于实验阶段）
+- 工程建议: `dyn Trait` 场景继续依赖 `async_trait`；AFIT（async fn in trait）已在 Rust 1.75+ stable，可用于泛型/`impl Trait` 场景。
 
 ### 04.6 权威来源对齐
 
@@ -1032,7 +1032,7 @@ fn create_source() -> Box<dyn DataSource> {
 | Traits | Rust Book Ch.10 | ✅ 已引用 |
 | AFIT | RFC 3185, 1.75 | ⚠️ 部分覆盖 |
 | Precise Capturing | RFC 3617, 1.82 | ⚠️ 深度不足 |
-| AFIDT | rust-lang/rust#133119 | 🔴 **未覆盖** |
+| AFIDT | rust-lang/rust#133882 | 🔴 **未覆盖** |
 | RTN | RFC 3654 | 🔴 **未覆盖** |
 
 ---
@@ -1288,7 +1288,7 @@ graph TD
     E --> E4[Embassy bare-metal]
 
     AFIT --> AFIT1[async fn in trait 1.75.0]
-    AFIT --> AFIT2[AFIDT nightly]
+    AFIT --> AFIT2[AFIDT 实验中 / 暂无稳定时间表]
     AFIT --> AFIT3[RTN 预研]
     AFIT --> AFIT4[AsyncFn traits 1.85.0 stable / 2024 prelude]
 
@@ -1331,8 +1331,7 @@ Future trait (1.36)
     → Future/IntoFuture in prelude (1.85)
       → AFIT: async fn in trait (1.75.0)
         → AsyncFn traits + async closures stable (1.85.0)
-          → AFIDT: async fn in dyn trait (nightly)
-            → AFIDT: async fn in dyn trait (1.97+ nightly)
+          → AFIDT: async fn in dyn trait (nightly 实验性，暂无稳定时间表)
               → RTN: Return Type Notation (1.97+ RFC)
                 → Gen blocks / AsyncIterator (nightly)
 ```
@@ -1490,7 +1489,7 @@ async fn migrated() {
 | AFIT | RFC 3185, 1.75 | ⚠️ 部分覆盖 |
 | Async Closures | RFC 3668, **1.85.0 stable** | ✅ 已覆盖 (c06_async / concept/03_advanced/24_async_closures.md) |
 | AsyncFn traits | **1.85.0 stable**, 2024 prelude | ✅ 已覆盖 (c06_async) |
-| AFIDT | rust-lang/rust#133119 | 🔴 **未覆盖** |
+| AFIDT | rust-lang/rust#133882 | 🔴 **未覆盖** |
 | RTN | RFC 3654 | 🔴 **未覆盖** |
 
 ---
@@ -2414,7 +2413,7 @@ docs/01_core/
 | T3.1 | Async Closures 预研模块 | c06_async | ✅ 已创建 `async_closures_preview.rs` |
 | T3.2 | AFIDT 跟踪模块 | c06_async | ✅ 已创建 `afit_dyn_tracking.rs` |
 | T3.3 | async-std [已归档] 迁移文档 | c06_async/docs | ✅ 已有归档说明+迁移对照表 |
-| T3.4 | async_trait → 原生 AFIT 迁移 | c10_networks | ⏳ 待评估（c10已有AFIT示例） |
+| T3.4 | async_trait → 原生 AFIT 迁移（仅静态分发/泛型场景；`dyn Trait` 保留 async_trait） | c10_networks | ⏳ 待评估（c10已有AFIT示例） |
 | T3.5 | Async Closures 深度指南 | c06_async/docs | ✅ 已创建 `ASYNC_CLOSURES_GUIDE.md` |
 | T3.6 | RTN 预研文档 | c06_async/docs | ✅ 已集成在 AFIDT 模块中 |
 | T3.7 | `if let` guards 在异步流中的应用 | c06_async | ✅ 已存在（rust_195_features.rs） |
@@ -2582,7 +2581,7 @@ graph TD
     Q3 -->|是| Q6{社区需求高?}
     Q3 -->|否<br/>RFC 阶段| Q7[跟踪观察<br/>P2 优先级]
 
-    Q5 -->|极高<br/>如 async closures| Q8[预研模块<br/>P1 优先级]
+    Q5 -->|极高<br/>如 async closures| Q8[重点特性模块<br/>P1 优先级]
     Q5 -->|一般| Q7
 
     Q6 -->|是| Q8

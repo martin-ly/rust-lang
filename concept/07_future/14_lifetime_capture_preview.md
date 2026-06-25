@@ -136,5 +136,5 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-作为 Rust 2024+ 的重要改进之一，已在 nightly 中实验性提供。预计在未来 1-2 个 stable 版本中逐步稳定化。
+Rust 2024 Edition（1.85.0）已稳定 lifetime capture 改进；`use<..>` 精确捕获语法自 Rust 1.82.0 起已稳定。`gen {}` / `yield`、`async_drop`、`RTN` 等仍为 nightly 特性。
 </details>

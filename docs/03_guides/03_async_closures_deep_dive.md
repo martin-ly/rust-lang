@@ -2,7 +2,7 @@
 
 > **分级**: [A]
 > **Bloom 层级**: L3 (Application) — L4 (Analysis)
-> **对应 Rust 版本**: 1.96.0+ stable
+> **对应 Rust 版本**: 1.85.0+ stable
 > **最后更新**: 2026-05-20
 >
 > **受众**: [专家] / [研究者]
@@ -51,11 +51,11 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-Rust 1.95.0 稳定了**异步闭包（Async Closures）** 和对应的 `AsyncFn` trait 家族，这是 Rust 异步编程生态的里程碑式进展。在此之前，Rust 开发者只能使用 `async move || {}` 形式的异步闭包，它们在类型系统和trait边界方面存在诸多限制。
+Rust 1.85.0 稳定了**异步闭包（Async Closures）** 和对应的 `AsyncFn` trait 家族，这是 Rust 异步编程生态的里程碑式进展。在此之前，Rust 开发者只能使用 `async move || {}` 形式的异步闭包，它们在类型系统和trait边界方面存在诸多限制。
 
 本指南深度解析异步闭包的语法、语义、类型系统以及在主流框架中的实战应用。
 
-来源: Rust 1.95 Release Notes / [RFC 3668](https://github.com/rust-lang/rfcs/pull/3668)
+来源: Rust 1.85 Release Notes / [RFC 3668](https://github.com/rust-lang/rfcs/pull/3668)
 
 ---
 
@@ -69,7 +69,7 @@ Rust 1.95.0 稳定了**异步闭包（Async Closures）** 和对应的 `AsyncFn`
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-在 Rust 1.95 之前，传递异步逻辑的唯一方式是 `impl Fn() -> impl Future`：
+在 Rust 1.85 之前，传递异步逻辑的唯一方式是 `impl Fn() -> impl Future`：
 
 ```rust
 // 旧方式：函数返回 Future
@@ -92,7 +92,7 @@ where
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
-Rust 1.95 引入了原生异步闭包语法：
+Rust 1.85 引入了原生异步闭包语法：
 
 ```rust,ignore
 let closure = async |x: i32| -> i32 {
@@ -515,10 +515,10 @@ fn handler<F>(f: F) where F: AsyncFn(i32) -> i32 {}
 
 | 特性 | 稳定版本 | 说明 |
 |------|---------|------|
-| `async \|\|` 语法 | 1.95.0 | 需要 Edition 2024 |
-| `AsyncFn` trait | 1.95.0 | 核心 trait |
-| `AsyncFnMut` | 1.95.0 | 可变版本 |
-| `AsyncFnOnce` | 1.95.0 | 消费版本 |
+| `async \|\|` 语法 | 1.85.0 | 不限 Edition，Rust 1.85.0+ 即可 |
+| `AsyncFn` trait | 1.85.0 | 核心 trait，1.85.0 起进入 prelude（所有 Edition） |
+| `AsyncFnMut` | 1.85.0 | 可变版本 |
+| `AsyncFnOnce` | 1.85.0 | 消费版本 |
 
 [来源: Rust Edition Guide 2024]
 
@@ -536,7 +536,7 @@ fn handler<F>(f: F) where F: AsyncFn(i32) -> i32 {}
 
 ---
 
-> **总结**: `AsyncFn` trait 家族将 Rust 的异步编程从"Future 类型体操"提升到了原生闭包抽象层面。在 1.95+ 项目中，优先使用 `async \|x\| {}` 语法和 `impl AsyncFn` 边界，可获得更清晰的类型签名和更好的编译器优化。
+> **总结**: `AsyncFn` trait 家族将 Rust 的异步编程从"Future 类型体操"提升到了原生闭包抽象层面。在 1.85+ 项目中，优先使用 `async \|x\| {}` 语法和 `impl AsyncFn` 边界，可获得更清晰的类型签名和更好的编译器优化。
 
 ---
 

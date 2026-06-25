@@ -30,7 +30,7 @@
    - let-else模式匹配
    - impl Trait增强
    - 常量泛型改进
-   - Edition 2024特性预览
+   - Edition 2024 特性（1.85.0+ stable；`gen {}` 仍为 nightly）
 
 4. **[04\_网络性能基准参考.md](./04_网络性能基准参考.md)** (~850 行, 50+ 基准)
    - HTTP服务器性能对比
