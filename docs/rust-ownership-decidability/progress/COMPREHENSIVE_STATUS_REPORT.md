@@ -460,7 +460,7 @@ Phase 4 (验证发布)          ░░░░░░░░░░░░░░░░
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 
@@ -468,7 +468,7 @@ Phase 4 (验证发布)          ░░░░░░░░░░░░░░░░
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [progress 目录](./README.md)
+- [progress 目录](../README.md)
 - [上级目录](../README.md)
 
 ---

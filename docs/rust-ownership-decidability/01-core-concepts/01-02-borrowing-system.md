@@ -588,7 +588,7 @@ fn concurrent_reads() {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

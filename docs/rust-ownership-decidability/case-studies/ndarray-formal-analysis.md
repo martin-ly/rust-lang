@@ -209,7 +209,7 @@ let view = a.slice(s![.., 0..2]);
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

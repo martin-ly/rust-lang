@@ -165,7 +165,7 @@ tera.render_str(&user_input, &context)?;  // SSTI风险!
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

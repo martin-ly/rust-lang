@@ -331,7 +331,7 @@ actor-specialty/
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

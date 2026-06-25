@@ -497,7 +497,7 @@ fn unsafe_attempt() {
 
 ---
 
-- [README](./README.md)
+- [README](../../README.md)
 
 ---
 
@@ -505,7 +505,7 @@ fn unsafe_attempt() {
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [00-foundations 目录](./README.md)
+- [00-foundations 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

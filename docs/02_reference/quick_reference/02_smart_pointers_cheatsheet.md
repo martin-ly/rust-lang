@@ -1374,7 +1374,7 @@ impl Unmovable {
 
 - [高级所有权与智能指针](../../../crates/c01_ownership_borrow_scope/examples/advanced_ownership_examples.rs)、[advanced_ownership_patterns.rs](../../../crates/c01_ownership_borrow_scope/examples/advanced_ownership_patterns.rs)
 - [综合所有权示例](../../../crates/c01_ownership_borrow_scope/examples/comprehensive_ownership_examples.rs)、[moving00.rs](../../../crates/c01_ownership_borrow_scope/examples/moving00.rs)～[moving06.rs](../../../crates/c01_ownership_borrow_scope/examples/moving06.rs)
-- Rust 1.91/1.92 特性演示（代码示例待补充）
+- [Rust 1.95/1.96 新特性](../../06_toolchain/06_19_rust_1_96_features.md)（详见 Rust 1.96 稳定特性全景）
 
 ---
 

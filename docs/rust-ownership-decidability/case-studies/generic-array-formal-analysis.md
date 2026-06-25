@@ -1652,7 +1652,7 @@ GenericArray 是 Rust 类型级编程的经典案例，它：
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

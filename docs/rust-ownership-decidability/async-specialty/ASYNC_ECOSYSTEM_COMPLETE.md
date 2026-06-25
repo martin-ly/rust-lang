@@ -89,7 +89,7 @@
 
 | 文档 | 页数 | 内容 |
 |:-----|:----:|:-----|
-| [README.md](./README.md) | 11 | 专题导航 |
+| [README.md](../README.md) | 11 | 专题导航 |
 | [ASYNC_ECOSYSTEM_COMPLETE.md](./ASYNC_ECOSYSTEM_COMPLETE.md) | 本文件 | 完成报告 |
 
 ### 生态总览
@@ -444,7 +444,7 @@ quinn = "0.11"
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [async-specialty 目录](./README.md)
+- [async-specialty 目录](../README.md)
 - [上级目录](../README.md)
 
 ---

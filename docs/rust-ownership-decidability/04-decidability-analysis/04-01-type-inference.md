@@ -586,7 +586,7 @@ solveTrait τ trait args = do
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

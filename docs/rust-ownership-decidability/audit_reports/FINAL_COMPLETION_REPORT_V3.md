@@ -399,7 +399,7 @@ case-studies/diesel-orm-type-safety.md
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 
@@ -407,7 +407,7 @@ case-studies/diesel-orm-type-safety.md
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [audit_reports 目录](./README.md)
+- [audit_reports 目录](../README.md)
 - [上级目录](../README.md)
 
 ---

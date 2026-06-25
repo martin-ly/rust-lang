@@ -1321,7 +1321,7 @@ Rust 所有权系统的变体代表了编程语言理论的前沿探索。从区
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

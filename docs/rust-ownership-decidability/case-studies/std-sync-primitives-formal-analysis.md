@@ -774,7 +774,7 @@ if FLAG.compare_exchange(false, true, AcqRel, Relaxed).is_ok() {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

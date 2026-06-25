@@ -156,7 +156,7 @@ retry(backoff, || charge_with_key(key)).await?;
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

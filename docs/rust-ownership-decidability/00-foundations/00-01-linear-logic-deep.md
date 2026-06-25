@@ -2926,7 +2926,7 @@ list reverse(list x);
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

@@ -317,7 +317,7 @@ fn saadc_example(p: pac::Peripherals) {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

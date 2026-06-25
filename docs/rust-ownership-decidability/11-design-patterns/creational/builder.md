@@ -330,7 +330,7 @@ pub enum ConfigError {
 
 ---
 
-- [README](./README.md)
+- [README](../../README.md)
 
 ---
 
@@ -338,7 +338,7 @@ pub enum ConfigError {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [creational 目录](./README.md)
+- [creational 目录](../../README.md)
 
 ---
 

@@ -740,7 +740,7 @@ self.ptr.store(new, Release);
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

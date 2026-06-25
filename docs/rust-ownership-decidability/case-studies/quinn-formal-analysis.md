@@ -152,7 +152,7 @@ send.write_all(b"data").await?;
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

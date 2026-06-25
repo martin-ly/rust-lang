@@ -1008,7 +1008,7 @@ fn platform_specific() {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

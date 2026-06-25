@@ -198,7 +198,7 @@ pub extern "C" fn get_name() -> *mut c_char {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

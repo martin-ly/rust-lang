@@ -3283,7 +3283,7 @@ Borrowing rules are enforced at compile time.
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

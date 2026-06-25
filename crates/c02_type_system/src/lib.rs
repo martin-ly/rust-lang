@@ -99,6 +99,10 @@ pub mod precise_capturing_guide;
 // 导出类型系统前沿概念模块
 pub mod type_system_frontier;
 
+// 形式化验证示例（Verus），仅在 cfg(verus) 下编译
+#[cfg(verus)]
+pub mod verus_examples;
+
 // 导出示例模块
 pub mod examples;
 

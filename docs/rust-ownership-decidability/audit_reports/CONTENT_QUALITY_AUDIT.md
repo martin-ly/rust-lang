@@ -288,13 +288,13 @@
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 
 ## 相关概念
 
-- [audit_reports 目录](./README.md)
+- [audit_reports 目录](../README.md)
 - [上级目录](../README.md)
 
 ---

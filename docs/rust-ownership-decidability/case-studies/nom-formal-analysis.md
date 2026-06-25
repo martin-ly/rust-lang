@@ -206,7 +206,7 @@ use nom::character::complete::take;
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

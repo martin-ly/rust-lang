@@ -501,7 +501,7 @@ let response = tokio::time::timeout(timeout, client.say_hello(request)).await??;
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

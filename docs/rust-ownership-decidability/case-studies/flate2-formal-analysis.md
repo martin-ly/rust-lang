@@ -171,7 +171,7 @@ decoder.read_to_end(&mut output)?;  // 可能OOM!
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

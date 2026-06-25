@@ -456,7 +456,7 @@ while let Some(chunk) = stream.next().await {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

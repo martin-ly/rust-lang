@@ -153,7 +153,7 @@ config.store(Arc::new(Config::new()));  // 可能死锁/性能问题
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

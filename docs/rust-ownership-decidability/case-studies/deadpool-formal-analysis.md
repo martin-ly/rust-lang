@@ -199,7 +199,7 @@ spawn_blocking(move || {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

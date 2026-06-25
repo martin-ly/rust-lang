@@ -342,13 +342,13 @@ fn swap<'a>(x: &'a mut i32, y: &'a mut i32) {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 
 ## 相关概念
 
-- [meta-model 目录](./README.md)
+- [meta-model 目录](../README.md)
 - [上级目录](../README.md)
 
 ---

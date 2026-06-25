@@ -717,7 +717,7 @@ match select(a, b).await {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

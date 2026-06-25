@@ -46,7 +46,7 @@
 
 | # | 文档 | 页数 | 核心内容 |
 |:-:|:-----|:----:|:---------|
-| 1 | [README.md](./README.md) | 3 | 主索引与导航系统 |
+| 1 | [README.md](../README.md) | 3 | 主索引与导航系统 |
 | 2 | [design-patterns-comprehensive.md](./design-patterns-comprehensive.md) | 12 | 设计模式深度分析 (8个模式形式化) |
 | 3 | architecture-models-comparison.md | 15 | 架构模型综合对比 (5种架构) |
 | 4 | [open-source-analysis.md](./open-source-analysis.md) | 18 | 开源库深度分析 (8个核心库) |

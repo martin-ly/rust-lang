@@ -522,7 +522,7 @@ buf = BytesMut::new();  // 丢弃，让GC回收
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

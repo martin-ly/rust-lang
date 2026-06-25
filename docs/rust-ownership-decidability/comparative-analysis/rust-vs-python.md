@@ -988,7 +988,7 @@ fn compute_heavy(data: Vec<f64>) -> f64 {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

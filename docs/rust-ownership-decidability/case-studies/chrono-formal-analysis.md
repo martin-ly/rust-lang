@@ -309,7 +309,7 @@ fn countdown(target: NaiveDate) -> TimeDelta {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

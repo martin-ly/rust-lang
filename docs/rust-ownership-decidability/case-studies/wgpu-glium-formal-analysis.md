@@ -164,7 +164,7 @@ encoder.copy_buffer_to_buffer(&buffer, 0, &buffer, 512, 512);
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

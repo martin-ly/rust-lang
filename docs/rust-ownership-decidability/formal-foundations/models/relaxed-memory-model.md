@@ -594,7 +594,7 @@ Thread 1 (最后一个持有者):          Thread 2 (尝试获取):
 
 ---
 
-- [README](./README.md)
+- [README](../../README.md)
 
 ---
 

@@ -1174,7 +1174,7 @@ atomic.store(value, order):
 
 ---
 
-- [README](./README.md)
+- [README](../../README.md)
 
 ---
 

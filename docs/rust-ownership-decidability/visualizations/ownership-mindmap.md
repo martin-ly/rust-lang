@@ -88,7 +88,7 @@ graph TD
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 
@@ -96,7 +96,7 @@ graph TD
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [visualizations 目录](./README.md)
+- [visualizations 目录](../README.md)
 - [上级目录](../README.md)
 
 ---

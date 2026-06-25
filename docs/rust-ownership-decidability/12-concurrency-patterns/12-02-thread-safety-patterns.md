@@ -1062,7 +1062,7 @@ pub fn benchmark_locks() {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

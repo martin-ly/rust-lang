@@ -437,7 +437,7 @@ mod app {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

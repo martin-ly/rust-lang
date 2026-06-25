@@ -195,13 +195,13 @@ impl<T> Drop for MyBox<T> {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 
 ## 相关概念
 
-- [exercises 目录](./README.md)
+- [exercises 目录](../README.md)
 - [上级目录](../README.md)
 
 ---

@@ -63,8 +63,8 @@
 - [概念矩阵](./concept-matrix.md)
 - [决策树](./decision-tree.md)
 - [知识图谱脑图](./KNOWLEDGE_GRAPH_MINDMAP.md)
-- [决策树目录](./decision-trees/README.md)
-- [矩阵目录](./matrices/README.md)
+- [类型选择决策树](./decision-trees/type-selection-decision-tree.md)
+- [Rust 安全机制矩阵](./matrices/rust-safety-mechanisms-matrix.md)
 - [所有权可判定性总览](../README.md)
 
 ---

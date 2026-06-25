@@ -394,7 +394,7 @@ let v = x.load(Ordering::Acquire);  // 读操作，同步 happens-before
 
 ---
 
-- [README](./README.md)
+- [README](../../README.md)
 
 ---
 
@@ -402,7 +402,7 @@ let v = x.load(Ordering::Acquire);  // 读操作，同步 happens-before
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [00-foundations 目录](./README.md)
+- [00-foundations 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

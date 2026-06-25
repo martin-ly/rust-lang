@@ -365,7 +365,7 @@ fn validate_host(s: &str) -> Result<String, String> {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

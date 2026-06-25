@@ -189,7 +189,7 @@ let schema = Schema::build(Query, Mutation, Subscription).finish();
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

@@ -442,7 +442,7 @@ Theorem Decidability:
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 
@@ -450,7 +450,7 @@ Theorem Decidability:
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [theorems 目录](./README.md)
+- [theorems 目录](../README.md)
 - [上级目录](../README.md)
 
 ---

@@ -679,7 +679,7 @@ Diesel无法验证所有SQL语义正确性:
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

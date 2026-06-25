@@ -1277,7 +1277,7 @@ fn demo() {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

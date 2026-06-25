@@ -1023,7 +1023,7 @@ public class HybridMemory {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

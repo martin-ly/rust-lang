@@ -188,7 +188,7 @@ c.bench_function("cached", |b| {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

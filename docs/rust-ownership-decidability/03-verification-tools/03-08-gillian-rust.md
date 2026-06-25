@@ -413,7 +413,7 @@ impl<T> Vec<T> {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

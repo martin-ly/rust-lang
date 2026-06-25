@@ -321,7 +321,7 @@ fn may_fail() -> Result<i32, Error> { ... }
 
 ---
 
-- [README](./README.md)
+- [README](../../README.md)
 
 ---
 
@@ -329,7 +329,7 @@ fn may_fail() -> Result<i32, Error> { ... }
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [00-foundations 目录](./README.md)
+- [00-foundations 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

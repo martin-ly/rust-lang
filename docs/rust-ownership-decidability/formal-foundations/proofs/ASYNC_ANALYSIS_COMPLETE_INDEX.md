@@ -488,7 +488,7 @@ CANCELPOINT-1:        取消只应在状态一致点发生
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [proofs 目录](./README.md)
+- [proofs 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

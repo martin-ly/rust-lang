@@ -1170,7 +1170,7 @@ async fn process_stream() {
 - [异步模式与综合演示](../../../crates/c06_async/examples/async_patterns_demo.rs)、[async_comprehensive_demo.rs](../../../crates/c06_async/examples/async_comprehensive_demo.rs)、[comprehensive_async_demo.rs](../../../crates/c06_async/examples/comprehensive_async_demo.rs)
 - [Tokio / smol / 运行时对比](../../../crates/c06_async/examples/tokio_patterns.rs)、[smol_patterns.rs](../../../crates/c06_async/examples/smol_patterns.rs)、[runtime_comparison_demo.rs](../../../crates/c06_async/examples/runtime_comparison_demo.rs)
 - [Stream、Actor、分布式与微服务](../../../crates/c06_async/examples/stream_processing_backpressure.rs)、[distributed_systems_demo.rs](../../../crates/c06_async/examples/distributed_systems_demo.rs)、[microservices_async_demo.rs](../../../crates/c06_async/examples/microservices_async_demo.rs)
-- Rust 1.91/1.92 特性演示（代码示例待补充）
+- [Rust 1.95/1.96 新特性](../../06_toolchain/06_19_rust_1_96_features.md)（详见 Rust 1.96 稳定特性全景）
 
 ---
 

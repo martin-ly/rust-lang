@@ -171,7 +171,7 @@ config.enable_tickets = true;
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

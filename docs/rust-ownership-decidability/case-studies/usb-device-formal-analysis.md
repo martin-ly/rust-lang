@@ -407,7 +407,7 @@ impl<B: UsbBus> UsbClass<B> for CustomClass<'_, B> {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

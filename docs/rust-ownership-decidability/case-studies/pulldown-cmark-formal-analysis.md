@@ -140,7 +140,7 @@ for event in parser {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

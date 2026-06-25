@@ -141,7 +141,7 @@ let mut limiters: HashMap<String, RateLimiter> = HashMap::new();
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

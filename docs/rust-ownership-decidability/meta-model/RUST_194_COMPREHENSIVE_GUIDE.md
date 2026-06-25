@@ -629,7 +629,7 @@ Rust 1.94 所有权形式化对齐工作已 **100% 完成**。
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

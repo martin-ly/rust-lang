@@ -288,7 +288,7 @@ MIRI_CHECK_NUMBER_VALIDITY=1 cargo miri test
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

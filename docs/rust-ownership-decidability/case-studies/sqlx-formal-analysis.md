@@ -519,7 +519,7 @@ tokio::time::sleep(Duration::from_secs(60)).await;
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

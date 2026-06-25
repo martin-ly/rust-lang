@@ -179,7 +179,7 @@ validation.validate_nbf = false;
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

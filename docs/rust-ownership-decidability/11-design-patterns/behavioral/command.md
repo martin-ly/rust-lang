@@ -248,7 +248,7 @@ Command = (execute: () → (), undo: () → ())
 
 ---
 
-- [README](./README.md)
+- [README](../../README.md)
 
 ---
 
@@ -256,7 +256,7 @@ Command = (execute: () → (), undo: () → ())
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [behavioral 目录](./README.md)
+- [behavioral 目录](../../README.md)
 
 ---
 

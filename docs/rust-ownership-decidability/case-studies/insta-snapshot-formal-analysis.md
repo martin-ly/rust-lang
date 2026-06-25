@@ -158,7 +158,7 @@ insta::assert_snapshot!(huge_json);  // 难以审查
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

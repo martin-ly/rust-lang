@@ -136,7 +136,7 @@ cache.insert(key, huge_vec);  // 需限制value大小
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

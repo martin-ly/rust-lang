@@ -201,7 +201,7 @@ while let Some(item) = stream.next().await {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

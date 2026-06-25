@@ -726,7 +726,7 @@ impl<T> Drop for LockFreeStack<T> {
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [exercises 目录](./README.md)
+- [exercises 目录](../README.md)
 - [上级目录](../README.md)
 
 ---

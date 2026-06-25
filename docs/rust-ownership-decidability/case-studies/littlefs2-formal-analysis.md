@@ -2121,7 +2121,7 @@ impl<S: Storage> ThreadSafeFS<S> {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

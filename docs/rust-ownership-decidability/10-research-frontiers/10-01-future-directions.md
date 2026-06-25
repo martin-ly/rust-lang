@@ -955,7 +955,7 @@ Rust 所有权与可判定性的研究正处于快速发展阶段。本文档详
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

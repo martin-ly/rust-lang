@@ -596,7 +596,7 @@ BorrowState := Map<Place, LoanId>
 
 ---
 
-- [README](./README.md)
+- [README](../../README.md)
 
 ---
 

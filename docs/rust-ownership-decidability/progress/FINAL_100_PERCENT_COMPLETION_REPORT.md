@@ -400,7 +400,7 @@ make
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [progress 目录](./README.md)
+- [progress 目录](../README.md)
 - [上级目录](../README.md)
 
 ---

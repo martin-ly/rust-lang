@@ -686,7 +686,7 @@ data.par_iter().for_each(|_| {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

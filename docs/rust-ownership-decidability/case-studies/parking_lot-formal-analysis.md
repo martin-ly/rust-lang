@@ -755,7 +755,7 @@ static MUTEX: Mutex<i32> = Mutex::new(0);  // ✅ 现在支持
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

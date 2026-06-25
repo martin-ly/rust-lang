@@ -343,7 +343,7 @@ fn call_python_callback(callback: &PyAny, value: i32) -> PyResult<i32> {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

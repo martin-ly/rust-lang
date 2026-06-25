@@ -276,7 +276,7 @@ for i in 0..10000 {
 - [字符串与数组](../../../crates/c12_wasm/examples/02_string_operations.rs)、[03_array_processing.rs](../../../crates/c12_wasm/examples/03_array_processing.rs)
 - [计数器与 WASI](../../../crates/c12_wasm/examples/04_counter_class.rs)、[05_wasi_file_processor.rs](../../../crates/c12_wasm/examples/05_wasi_file_processor.rs)
 - [异步 fetch、设计模式、微服务](../../../crates/c12_wasm/examples/06_async_fetch.rs)、[07_design_patterns.rs](../../../crates/c12_wasm/examples/07_design_patterns.rs)、[08_container_microservice.rs](../../../crates/c12_wasm/examples/08_container_microservice.rs)
-- [Rust 1.91/1.92 特性演示](../../../crates/c12_wasm/examples/c12_rust_191_features_demo.rs)、[rust_192_features_demo.rs](../../../crates/c12_wasm/examples/c12_rust_192_features_demo.rs)
+- [Rust 1.92 特性演示](../../../crates/c12_wasm/examples/c12_rust_192_features_demo.rs)
 
 ---
 

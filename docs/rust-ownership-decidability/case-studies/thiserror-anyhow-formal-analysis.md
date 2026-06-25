@@ -297,7 +297,7 @@ fn print_error_chain(err: &Error) {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

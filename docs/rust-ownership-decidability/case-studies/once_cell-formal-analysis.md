@@ -213,7 +213,7 @@ CLIENT.get_or_init(async {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

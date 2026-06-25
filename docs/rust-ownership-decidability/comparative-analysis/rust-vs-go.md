@@ -987,7 +987,7 @@ func ProcessData(data []byte) int {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

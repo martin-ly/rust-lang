@@ -81,7 +81,7 @@
 
 | 文档 | 页数 | 描述 |
 |:-----|:----:|:-----|
-| [README.md](./README.md) | 11页 | 专题导航与概览 |
+| [README.md](../README.md) | 11页 | 专题导航与概览 |
 
 ### 权威来源整合 (authoritative/)
 >
@@ -272,7 +272,7 @@
 
 ### 初学者
 
-1. [README.md](./README.md) - 专题概览
+1. [README.md](../README.md) - 专题概览
 2. best-practices.md - 最佳实践
 3. [http-server-patterns.md](./network/http-server-patterns.md) - 网络编程
 
@@ -343,7 +343,7 @@
 
 ## 相关概念
 
-- [async-specialty 目录](./README.md)
+- [async-specialty 目录](../README.md)
 - [上级目录](../README.md)
 
 ---

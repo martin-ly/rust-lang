@@ -524,7 +524,7 @@ Rust形式化验证研究前沿
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

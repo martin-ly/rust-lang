@@ -1910,7 +1910,7 @@ fn explicit_drop() {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

@@ -191,7 +191,7 @@
 
 ## 相关概念
 
-- [embedded 目录](./README.md)
+- [embedded 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

@@ -101,13 +101,13 @@ cargo kani --function my_function
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 
 ## 相关概念
 
-- [10-research-frontiers 目录](./README.md)
+- [10-research-frontiers 目录](../README.md)
 - [上级目录](../README.md)
 
 ---

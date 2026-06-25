@@ -355,7 +355,7 @@ async fn merged_streams() {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

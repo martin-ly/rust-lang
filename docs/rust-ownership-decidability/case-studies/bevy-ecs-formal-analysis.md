@@ -479,7 +479,7 @@ struct MyData;
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

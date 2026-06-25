@@ -474,13 +474,13 @@ Region 形成完全格:
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 
 ## 相关概念
 
-- [meta-model 目录](./README.md)
+- [meta-model 目录](../README.md)
 - [上级目录](../README.md)
 
 ---

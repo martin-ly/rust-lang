@@ -2249,7 +2249,7 @@ Remember: Runtime checks mean runtime failures. Use these types carefully and al
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

@@ -970,7 +970,7 @@ pub fn parallel_simd_matrix_multiply(a: &[f32], b: &[f32], c: &mut [f32], n: usi
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

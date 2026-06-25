@@ -274,7 +274,7 @@ impl<A: GlobalAlloc> GlobalAlloc for InstrumentedAllocator<A> {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

@@ -652,7 +652,7 @@ impl<T> Trait for T where T: OtherTrait<T> {}
 
 ---
 
-- [README](./README.md)
+- [README](../../README.md)
 
 ---
 

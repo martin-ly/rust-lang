@@ -778,7 +778,7 @@ fn fibonacci_memoized() {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

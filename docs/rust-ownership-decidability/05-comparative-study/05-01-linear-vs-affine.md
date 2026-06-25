@@ -383,7 +383,7 @@ sequent演算对比:
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

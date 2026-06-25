@@ -407,7 +407,7 @@ let n = rng.gen_range(0..100);  // 均匀
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

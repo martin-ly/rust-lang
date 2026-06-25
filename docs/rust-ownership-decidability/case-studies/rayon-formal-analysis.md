@@ -317,7 +317,7 @@ fn parallel_matmul(a: &[Vec<f64>], b: &[Vec<f64>]) -> Vec<Vec<f64>> {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

@@ -219,7 +219,7 @@ let map: IndexMap<i32, i32> = IndexMap::with_capacity(1000);
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

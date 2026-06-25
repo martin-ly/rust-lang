@@ -2152,7 +2152,7 @@ This document contains **9 theorems** about verification guarantees:
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

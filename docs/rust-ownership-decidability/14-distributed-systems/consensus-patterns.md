@@ -375,7 +375,7 @@ pub enum ConsensusError {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

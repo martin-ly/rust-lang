@@ -2708,7 +2708,7 @@ The borrowing system is the cornerstone of Rust's memory safety guarantees, enab
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

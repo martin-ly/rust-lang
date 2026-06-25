@@ -433,7 +433,7 @@
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 
@@ -441,7 +441,7 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [16-program-semantics 目录](./README.md)
+- [16-program-semantics 目录](../README.md)
 - [上级目录](../README.md)
 
 ---

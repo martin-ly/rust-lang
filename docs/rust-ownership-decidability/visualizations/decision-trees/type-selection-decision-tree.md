@@ -344,7 +344,7 @@ unsafe使用原则:
 
 ---
 
-- [README](./README.md)
+- [README](../../README.md)
 
 ---
 
@@ -352,7 +352,7 @@ unsafe使用原则:
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [decision-trees 目录](./README.md)
+- [decision-trees 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

@@ -600,7 +600,7 @@ mod tests {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

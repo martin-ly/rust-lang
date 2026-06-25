@@ -2,7 +2,7 @@
 
 > **分级**: [A]
 > **快速参考**
-> | [Cargo/包索引](../../../crates/c02_type_system/docs/cargo_package_management/00_INDEX.md)
+> | [Cargo/包索引（已归档）](../../../archive/cargo_package_management_from_c02/00_INDEX.md)
 > | [Rust 官方模块系统](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html)
 > | [代码示例](../../../crates/README.md)
 > **创建日期**: 2026-01-27
@@ -781,7 +781,7 @@ mod inner {
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [项目架构指南](../../07_project/07_project_architecture_guide.md)
-- [Cargo 包管理与模块索引（项目内）](../../../crates/c02_type_system/docs/cargo_package_management/00_INDEX.md)
+- [Cargo 包管理与模块索引（已归档）](../../../archive/cargo_package_management_from_c02/00_INDEX.md)
 - [Workspace 模块示例：控制流与函数模块 README](../../../crates/c03_control_fn/README.md)
 - [Workspace 模块示例：线程与并发模块 README](../../../crates/c05_threads/README.md)
 - [Workspace 模块示例：类型系统模块 README](../../../crates/c02_type_system/README.md)
@@ -813,7 +813,7 @@ mod inner {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [Cargo 包管理与模块索引](../../../crates/c02_type_system/docs/cargo_package_management/00_INDEX.md)
+- [Cargo 包管理与模块索引（已归档）](../../../archive/cargo_package_management_from_c02/00_INDEX.md)
 - [类型系统速查卡](./02_type_system.md) - 类型系统与模块的关系
 - [Cargo 速查卡](./02_cargo_cheatsheet.md) - Cargo 包管理
 - [字符串与格式化速查卡](02_strings_formatting_cheatsheet.md) - 模块中的字符串处理

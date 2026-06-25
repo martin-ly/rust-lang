@@ -188,7 +188,7 @@ let re = Regex::new(r".*?foo").unwrap();
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

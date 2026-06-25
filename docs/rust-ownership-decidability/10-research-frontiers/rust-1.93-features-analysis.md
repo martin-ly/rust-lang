@@ -688,7 +688,7 @@ Rust 1.93 安全改进:
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 
@@ -696,7 +696,7 @@ Rust 1.93 安全改进:
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [10-research-frontiers 目录](./README.md)
+- [10-research-frontiers 目录](../README.md)
 - [上级目录](../README.md)
 
 ---

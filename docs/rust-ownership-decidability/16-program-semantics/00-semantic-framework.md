@@ -4166,7 +4166,7 @@ docs/rust-ownership-decidability/
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

@@ -322,7 +322,7 @@ read_data_into_uninit(&mut vec);
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

@@ -1932,7 +1932,7 @@ fn panic(_info: &PanicInfo) -> ! {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

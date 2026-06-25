@@ -247,7 +247,7 @@
 ## 📚 相关资源
 
 - [现代 Crates 索引](./MODERN_CRATES_INDEX.md)
-- [案例研究主 README](./README.md)
+- [案例研究主 README](../README.md)
 - [形式化基础](../formal-foundations/README.md)
 
 ---
@@ -270,7 +270,7 @@
 
 ## 相关概念
 
-- [case-studies 目录](./README.md)
+- [case-studies 目录](../README.md)
 - [上级目录](../README.md)
 
 ---

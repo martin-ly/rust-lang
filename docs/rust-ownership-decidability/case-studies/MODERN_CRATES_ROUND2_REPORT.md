@@ -246,13 +246,13 @@ ERR-T1: 零运行时开销
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 
 ## 相关概念
 
-- [case-studies 目录](./README.md)
+- [case-studies 目录](../README.md)
 - [上级目录](../README.md)
 
 ---

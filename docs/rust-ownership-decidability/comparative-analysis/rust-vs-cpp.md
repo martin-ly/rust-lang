@@ -930,7 +930,7 @@ Rust 和 C++ 都是强大的系统编程语言。C++ 提供了更大的灵活性
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

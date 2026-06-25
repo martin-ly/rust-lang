@@ -387,7 +387,7 @@ unsafe impl<T: Sync> Sync for SafeArray<T> {}
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

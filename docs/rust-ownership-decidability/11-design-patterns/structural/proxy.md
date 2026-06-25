@@ -238,7 +238,7 @@ Proxy<T> ≈ T (在接口上)
 
 ---
 
-- [README](./README.md)
+- [README](../../README.md)
 
 ---
 
@@ -246,7 +246,7 @@ Proxy<T> ≈ T (在接口上)
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [structural 目录](./README.md)
+- [structural 目录](../../README.md)
 
 ---
 

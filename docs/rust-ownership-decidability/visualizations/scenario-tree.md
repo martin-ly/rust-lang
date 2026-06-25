@@ -157,13 +157,13 @@ CLI工具设计
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 
 ## 相关概念
 
-- [visualizations 目录](./README.md)
+- [visualizations 目录](../README.md)
 - [上级目录](../README.md)
 
 ---

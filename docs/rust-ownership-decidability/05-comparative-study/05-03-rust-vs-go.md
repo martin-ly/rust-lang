@@ -2272,7 +2272,7 @@ Go 开发者学习 Rust 路径:
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

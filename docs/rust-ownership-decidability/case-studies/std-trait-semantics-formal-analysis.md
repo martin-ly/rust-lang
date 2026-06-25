@@ -521,7 +521,7 @@ let r = &x;
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

@@ -180,7 +180,7 @@ let reader = Reader::open(path)?
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

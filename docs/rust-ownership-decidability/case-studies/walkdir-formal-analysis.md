@@ -144,7 +144,7 @@ WalkDir::new("\\\\?\\C:\\very\\long\\path...")
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

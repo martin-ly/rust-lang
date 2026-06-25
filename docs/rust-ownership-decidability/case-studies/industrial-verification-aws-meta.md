@@ -502,7 +502,7 @@ Microsoft 在 Azure 基础设施中使用 Rust 和形式化验证:
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

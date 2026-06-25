@@ -1965,7 +1965,7 @@ defmt::info!("operation took {} cycles", end - start);
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

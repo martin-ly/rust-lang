@@ -1180,7 +1180,7 @@ Rust 验证技术正在快速发展，为构建可靠的 Rust 软件提供了强
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

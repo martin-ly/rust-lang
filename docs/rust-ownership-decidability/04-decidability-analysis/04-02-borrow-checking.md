@@ -650,7 +650,7 @@ OR可通过多个约束编码，AND可直接编码。
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

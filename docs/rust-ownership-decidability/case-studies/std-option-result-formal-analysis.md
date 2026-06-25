@@ -802,7 +802,7 @@ fn do_something() -> Result<Data, MyError> {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

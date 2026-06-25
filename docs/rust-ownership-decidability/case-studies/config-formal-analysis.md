@@ -147,7 +147,7 @@ let port: u16 = cfg.get("port")?;  // 需确保格式正确
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

@@ -146,13 +146,13 @@ Newtype<T>(T)
 
 ---
 
-- [README](./README.md)
+- [README](../../README.md)
 
 ---
 
 ## 相关概念
 
-- [rust-specific 目录](./README.md)
+- [rust-specific 目录](../../README.md)
 
 ---
 

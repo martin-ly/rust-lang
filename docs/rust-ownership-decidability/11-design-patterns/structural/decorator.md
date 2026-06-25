@@ -263,7 +263,7 @@ Decorator<C: Component> = Component + AddedBehavior
 
 ---
 
-- [README](./README.md)
+- [README](../../README.md)
 
 ---
 
@@ -271,7 +271,7 @@ Decorator<C: Component> = Component + AddedBehavior
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [structural 目录](./README.md)
+- [structural 目录](../../README.md)
 
 ---
 

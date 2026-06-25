@@ -173,7 +173,7 @@ let searcher = reader.searcher();
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

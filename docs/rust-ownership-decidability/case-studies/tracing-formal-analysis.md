@@ -628,7 +628,7 @@ async fn good() {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

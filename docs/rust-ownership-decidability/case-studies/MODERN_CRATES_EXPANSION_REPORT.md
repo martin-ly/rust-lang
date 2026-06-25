@@ -215,13 +215,13 @@ Thm PYO3-T1: 无GIL时不访问Python对象
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 
 ## 相关概念
 
-- [case-studies 目录](./README.md)
+- [case-studies 目录](../README.md)
 - [上级目录](../README.md)
 
 ---

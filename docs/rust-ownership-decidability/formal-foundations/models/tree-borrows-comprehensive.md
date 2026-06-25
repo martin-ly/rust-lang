@@ -959,7 +959,7 @@ let r2 = unsafe { &mut *ptr }; // UB
 
 ---
 
-- [README](./README.md)
+- [README](../../README.md)
 
 ---
 

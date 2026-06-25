@@ -2092,7 +2092,7 @@ P * Q |= P' * Q'    if P|=P', Q|=Q' (MONO)
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

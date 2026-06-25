@@ -180,7 +180,7 @@ Rust借用检查器的可判定性:
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

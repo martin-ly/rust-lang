@@ -523,7 +523,7 @@ cargo +nightly install cargo-creusot --locked
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

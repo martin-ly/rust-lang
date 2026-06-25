@@ -368,7 +368,7 @@ Server::builder()
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

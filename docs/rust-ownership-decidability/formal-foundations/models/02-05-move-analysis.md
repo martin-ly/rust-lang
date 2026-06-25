@@ -831,7 +831,7 @@ fn process_message(msg: Message) {
 
 ---
 
-- [README](./README.md)
+- [README](../../README.md)
 
 ---
 

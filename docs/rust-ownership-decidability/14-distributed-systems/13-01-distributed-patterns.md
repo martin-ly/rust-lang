@@ -1011,7 +1011,7 @@ async fn check_external_api() -> bool {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

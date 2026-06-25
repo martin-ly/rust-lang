@@ -418,7 +418,7 @@ Send和Sync推导:
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 
@@ -426,7 +426,7 @@ Send和Sync推导:
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [visualizations 目录](./README.md)
+- [visualizations 目录](../README.md)
 - [上级目录](../README.md)
 
 ---

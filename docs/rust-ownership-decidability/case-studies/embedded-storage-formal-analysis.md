@@ -427,7 +427,7 @@ impl<F: NorFlash> ConfigStorage<F> {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

@@ -144,13 +144,13 @@
 
 ---
 
-- [README](./README.md)
+- [README](../../README.md)
 
 ---
 
 ## 相关概念
 
-- [matrices 目录](./README.md)
+- [matrices 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

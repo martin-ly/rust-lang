@@ -534,7 +534,7 @@ Request ──► Timeout ──► Compression ──► RateLimit ──► Ha
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 
@@ -542,7 +542,7 @@ Request ──► Timeout ──► Compression ──► RateLimit ──► Ha
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [audit_reports 目录](./README.md)
+- [audit_reports 目录](../README.md)
 - [上级目录](../README.md)
 
 ---

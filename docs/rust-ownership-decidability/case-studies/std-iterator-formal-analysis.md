@@ -711,7 +711,7 @@ vec.iter().map(|x| x * 2).collect::<Vec<_>>();
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

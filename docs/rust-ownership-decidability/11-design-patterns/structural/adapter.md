@@ -249,7 +249,7 @@ Adapter: Source → Target
 
 ---
 
-- [README](./README.md)
+- [README](../../README.md)
 
 ---
 
@@ -257,7 +257,7 @@ Adapter: Source → Target
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [structural 目录](./README.md)
+- [structural 目录](../../README.md)
 
 ---
 

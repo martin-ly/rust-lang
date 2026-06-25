@@ -1012,7 +1012,7 @@ proof fn good_recursion(n: nat) -> nat
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

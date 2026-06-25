@@ -224,7 +224,7 @@ socket.connect(&tcp_addr)?;  // 运行时错误
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

@@ -371,7 +371,7 @@ fn conditional_update(map: &DashMap<String, i32>, key: &str) {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

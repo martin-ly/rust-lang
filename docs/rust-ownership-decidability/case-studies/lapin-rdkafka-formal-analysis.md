@@ -170,7 +170,7 @@ channel.basic_ack(tag, opts).await?;
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

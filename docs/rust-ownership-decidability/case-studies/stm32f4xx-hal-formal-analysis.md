@@ -258,7 +258,7 @@ fn pwm_example(dp: pac::Peripherals) {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

@@ -182,7 +182,7 @@ fn prop_div(a: i32, b: i32) -> TestResult {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

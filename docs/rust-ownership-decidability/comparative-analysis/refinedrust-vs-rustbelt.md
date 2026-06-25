@@ -630,7 +630,7 @@ RefinedC (2021)
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

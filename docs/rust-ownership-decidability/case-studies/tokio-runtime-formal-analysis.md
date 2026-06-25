@@ -366,7 +366,7 @@ async fn coordinated_work(n_workers: usize) {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

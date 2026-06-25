@@ -290,7 +290,7 @@ pub async fn fetch_json(url: String) -> Result<JsValue, JsValue> {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

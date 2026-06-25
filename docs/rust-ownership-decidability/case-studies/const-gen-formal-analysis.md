@@ -131,7 +131,7 @@ struct Matrix<T, const R: usize, const C: usize, const D: usize>;
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

@@ -132,7 +132,7 @@ struct Wrapper(String);  // 编译错误!
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

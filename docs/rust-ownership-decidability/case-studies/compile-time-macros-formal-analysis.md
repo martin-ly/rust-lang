@@ -124,7 +124,7 @@ macro_rules! bad {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

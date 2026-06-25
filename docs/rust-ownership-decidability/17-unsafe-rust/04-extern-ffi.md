@@ -474,7 +474,7 @@ pub extern "C" fn increment() {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

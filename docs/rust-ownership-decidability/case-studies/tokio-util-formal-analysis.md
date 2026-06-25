@@ -231,7 +231,7 @@ spawn(async move {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

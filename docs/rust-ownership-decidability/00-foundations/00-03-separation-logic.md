@@ -757,7 +757,7 @@ fn ghost_example(x: u64) -> u64 {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

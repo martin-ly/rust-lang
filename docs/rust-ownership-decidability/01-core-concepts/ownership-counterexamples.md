@@ -568,7 +568,7 @@ fn prefer_compile_time() {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

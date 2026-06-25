@@ -134,7 +134,7 @@ watcher.watch(path, RecursiveMode::Recursive)?;
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

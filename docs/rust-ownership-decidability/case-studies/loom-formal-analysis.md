@@ -151,7 +151,7 @@ loom::model(|| {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

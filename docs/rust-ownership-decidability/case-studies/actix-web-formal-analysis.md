@@ -692,7 +692,7 @@ async fn handler(body: web::Json<Data>) -> impl Responder {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

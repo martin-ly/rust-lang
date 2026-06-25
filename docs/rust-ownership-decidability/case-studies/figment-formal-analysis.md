@@ -1881,7 +1881,7 @@ PREFIX_KEY__SUBKEY__VALUE → {"key": {"subkey": {"value": ...}}}
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

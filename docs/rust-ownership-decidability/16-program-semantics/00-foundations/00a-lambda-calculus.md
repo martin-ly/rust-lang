@@ -446,7 +446,7 @@ let y = x;  // x 被移动，不能再使用
 
 ---
 
-- [README](./README.md)
+- [README](../../README.md)
 
 ---
 
@@ -454,7 +454,7 @@ let y = x;  // x 被移动，不能再使用
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [00-foundations 目录](./README.md)
+- [00-foundations 目录](../../README.md)
 - [上级目录](../README.md)
 
 ---

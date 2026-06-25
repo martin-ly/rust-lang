@@ -527,7 +527,7 @@ Inductive eval :
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 
@@ -535,7 +535,7 @@ Inductive eval :
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [meta-model 目录](./README.md)
+- [meta-model 目录](../README.md)
 - [上级目录](../README.md)
 
 ---

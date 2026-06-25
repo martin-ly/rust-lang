@@ -1660,7 +1660,7 @@ let dev2 = RefCellDevice::new(&bus)?;
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

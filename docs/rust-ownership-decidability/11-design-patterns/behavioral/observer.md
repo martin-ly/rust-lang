@@ -239,7 +239,7 @@ Rust 特殊性:
 
 ---
 
-- [README](./README.md)
+- [README](../../README.md)
 
 ---
 
@@ -247,7 +247,7 @@ Rust 特殊性:
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [behavioral 目录](./README.md)
+- [behavioral 目录](../../README.md)
 
 ---
 

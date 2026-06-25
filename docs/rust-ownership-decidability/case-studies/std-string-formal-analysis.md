@@ -648,7 +648,7 @@ let ch = s.chars().nth(0);  // 返回 '你'
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

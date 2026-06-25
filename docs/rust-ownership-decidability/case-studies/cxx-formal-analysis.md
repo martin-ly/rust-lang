@@ -171,7 +171,7 @@ let ptr = obj.get();  // *const T
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

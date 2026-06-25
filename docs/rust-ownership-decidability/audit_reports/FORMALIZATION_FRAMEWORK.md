@@ -541,7 +541,7 @@ theorem progress {e τ} (h : ∅ ⊢ e : τ) :
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 
@@ -549,7 +549,7 @@ theorem progress {e τ} (h : ∅ ⊢ e : τ) :
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [audit_reports 目录](./README.md)
+- [audit_reports 目录](../README.md)
 - [上级目录](../README.md)
 
 ---

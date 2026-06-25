@@ -364,7 +364,7 @@ impl ProgressBar {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

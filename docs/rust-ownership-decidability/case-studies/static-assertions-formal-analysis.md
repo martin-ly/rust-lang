@@ -119,7 +119,7 @@ assert_eq_size!(usize, u64);  // 在32位平台失败
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

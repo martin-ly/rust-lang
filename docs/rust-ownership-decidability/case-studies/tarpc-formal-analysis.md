@@ -176,7 +176,7 @@ async fn long_operation(&self) -> Result<()> {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

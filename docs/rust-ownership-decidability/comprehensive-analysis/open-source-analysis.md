@@ -687,7 +687,7 @@ let users = sqlx::query_as::<_, User>(
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 
@@ -695,7 +695,7 @@ let users = sqlx::query_as::<_, User>(
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [comprehensive-analysis 目录](./README.md)
+- [comprehensive-analysis 目录](../README.md)
 - [上级目录](../README.md)
 
 ---

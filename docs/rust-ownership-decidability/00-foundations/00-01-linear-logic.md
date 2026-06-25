@@ -630,7 +630,7 @@ Rust类型系统近似于:
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

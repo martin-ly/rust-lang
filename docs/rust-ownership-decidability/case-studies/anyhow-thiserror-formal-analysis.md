@@ -273,7 +273,7 @@ fn do_work() -> Result<()> {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

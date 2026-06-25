@@ -2422,7 +2422,7 @@ This deep dive has presented a comprehensive formal analysis of the Actor model 
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

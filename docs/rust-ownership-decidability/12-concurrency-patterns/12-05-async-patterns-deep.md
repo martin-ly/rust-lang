@@ -3937,7 +3937,7 @@ async fn update_db_safe(state: &AppState) {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

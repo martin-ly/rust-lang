@@ -442,7 +442,7 @@ impl PinnedDrop for Buffer {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

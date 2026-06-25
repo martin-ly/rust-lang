@@ -371,7 +371,7 @@ impl<T: PartialEq> UniqueVec<T> {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

@@ -330,7 +330,7 @@ $$
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 
@@ -338,7 +338,7 @@ $$
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [08-advanced-topics 目录](./README.md)
+- [08-advanced-topics 目录](../README.md)
 - [上级目录](../README.md)
 
 ---

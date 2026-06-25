@@ -225,7 +225,7 @@ for i in 0..1000 {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

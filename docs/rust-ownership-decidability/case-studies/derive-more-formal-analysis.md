@@ -140,7 +140,7 @@ struct Wrapper<T: Add>(T);
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

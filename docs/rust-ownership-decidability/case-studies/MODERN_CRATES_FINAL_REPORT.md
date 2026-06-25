@@ -297,7 +297,7 @@ hyper-T2: HTTP/2多路复用
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 
@@ -305,7 +305,7 @@ hyper-T2: HTTP/2多路复用
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [case-studies 目录](./README.md)
+- [case-studies 目录](../README.md)
 - [上级目录](../README.md)
 
 ---

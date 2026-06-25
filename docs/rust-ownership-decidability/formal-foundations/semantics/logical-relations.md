@@ -919,7 +919,7 @@ Definition borrow (ℓ: lifetime) (P: iProp) : iProp :=
 
 ---
 
-- [README](./README.md)
+- [README](../../README.md)
 
 ---
 

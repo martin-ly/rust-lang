@@ -556,7 +556,7 @@ drop(b);
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 

@@ -158,7 +158,7 @@ fn set_not_serving(&self) {
 
 ---
 
-- [README](./README.md)
+- [README](../README.md)
 
 ---
 
