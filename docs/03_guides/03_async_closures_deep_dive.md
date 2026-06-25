@@ -1,8 +1,10 @@
 # Async Closures 深度指南
 
+> **版本说明**：async closures 与 `AsyncFn*` traits 自 **Rust 1.85.0** 起已 stable。本文档按 **Rust 1.96.0+** 复审，示例可直接在 stable 编译器运行。
+
 > **分级**: [A]
 > **Bloom 层级**: L3 (Application) — L4 (Analysis)
-> **对应 Rust 版本**: 1.85.0+ stable
+> **对应 Rust 版本**: 1.96.0++ stable
 > **最后更新**: 2026-05-20
 >
 > **受众**: [专家] / [研究者]

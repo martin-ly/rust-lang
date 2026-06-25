@@ -22,17 +22,29 @@
 ## 📑 目录
 
 - [Type Inference Complexity（类型推断复杂度）](#type-inference-complexity类型推断复杂度)
+  - [📑 目录](#-目录)
   - [一、HM：类型推断的黄金标准](#一hm类型推断的黄金标准)
   - [二、Rust 的四项复杂度放大器](#二rust-的四项复杂度放大器)
   - [三、约束生成与 Robinson 合一](#三约束生成与-robinson-合一)
+    - [3.1 约束生成（Constraint Generation）](#31-约束生成constraint-generation)
+    - [3.2 Robinson 合一（Robinson Unification）](#32-robinson-合一robinson-unification)
   - [四、泛化与 let-多态性](#四泛化与-let-多态性)
   - [五、Trait 约束求解：Chalk 风格直觉](#五trait-约束求解chalk-风格直觉)
   - [六、可判定性：生成与求解都会终止](#六可判定性生成与求解都会终止)
   - [七、复杂度：为什么是 PSPACE](#七复杂度为什么是-pspace)
+    - [7.1 PSPACE 上界](#71-pspace-上界)
+    - [7.2 PSPACE 下界](#72-pspace-下界)
+    - [7.3 PSPACE-完全性](#73-pspace-完全性)
   - [八、从理论到 rustc 实现](#八从理论到-rustc-实现)
   - [九、边界示例：何时需要显式标注](#九边界示例何时需要显式标注)
+    - [9.1 `collect()` 目标类型歧义](#91-collect-目标类型歧义)
+    - [9.2 高阶 trait bound 需要显式量词](#92-高阶-trait-bound-需要显式量词)
+    - [9.3 关联类型投影需要足够上下文](#93-关联类型投影需要足够上下文)
   - [十、认知路径](#十认知路径)
   - [嵌入式测验](#嵌入式测验)
+    - [测验 1：HM 类型推断为什么能保持多项式时间？](#测验-1hm-类型推断为什么能保持多项式时间)
+    - [测验 2：Rust 类型推断最坏情况下的复杂度类是什么？依据哪些来源？](#测验-2rust-类型推断最坏情况下的复杂度类是什么依据哪些来源)
+    - [测验 3：`rustc` 中哪个结构负责保存推断变量与待求解约束？](#测验-3rustc-中哪个结构负责保存推断变量与待求解约束)
   - [权威来源索引](#权威来源索引)
 
 ---
@@ -134,7 +146,7 @@ Rust 把 `T: Trait` 这类目标称为 **obligation**。Chalk 风格的求解可
 1. **候选装配（Candidate Assembly）**：收集所有可能匹配的 `impl`、where 子句、内建规则。
 2. **筛选（Winnowing）**：利用 where 子句排除不可行候选。
 3. **确认（Confirmation）**：统一目标与 `impl` 头部，递归求解 `impl` 的 where 约束。
-4. ** Fulfillment**：维护工作队列，直到所有 obligation 被证明或报出无法解决。
+4. **Fulfillment**：维护工作队列，直到所有 obligation 被证明或报出无法解决。
 
 ```text
 solve(T: Trait) =

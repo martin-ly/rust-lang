@@ -28,11 +28,45 @@ CURRENT_RUST_VERSION = "1.96.0"
 CURRENT_DATE = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
 
+def is_archived(filepath: Path) -> bool:
+    """判断文件是否属于已归档内容。
+
+    规则：
+    1. 文件自身元数据头含“已归档”/“归档级”/“ARCHIVED”。
+    2. 所在目录（直到 docs/）的 README.md 标注该目录整体已归档。
+    """
+    archived_markers = ("已归档", "归档级", "ARCHIVED")
+
+    # 检查文件自身元数据头
+    try:
+        head = filepath.read_text(encoding="utf-8")[:1500]
+        if any(m in head for m in archived_markers):
+            return True
+    except Exception:
+        pass
+
+    # 检查父目录 README
+    for parent in filepath.parents:
+        if parent == DOCS_DIR:
+            break
+        readme = parent / "README.md"
+        if readme.exists():
+            try:
+                head = readme.read_text(encoding="utf-8")[:1500]
+                if any(m in head for m in archived_markers):
+                    return True
+            except Exception:
+                pass
+    return False
+
+
 def find_md_files():
-    """查找 docs/ 中所有 Markdown 文件（排除 archive/）"""
+    """查找 docs/ 中所有 Markdown 文件（排除 archive/ 与已归档目录）"""
     files = []
     for f in DOCS_DIR.rglob("*.md"):
         if "archive" in f.parts or "temp" in f.parts or "swap" in f.parts:
+            continue
+        if is_archived(f):
             continue
         files.append(f)
     return sorted(files)
