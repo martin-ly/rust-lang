@@ -210,7 +210,7 @@ mindmap
 #### 相关文档
 
 - Rust 1.94 迁移指南
-- [Rust 1.94 特性速查
+- Rust 1.94 特性速查
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---

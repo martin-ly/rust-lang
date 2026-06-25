@@ -1,47 +1,142 @@
 # research_notes 批量归档报告
 - **归档时间**: 2026-06-25
-- **移动文件数**: 37
-- **标记但未移动文件数**: 0
+- **移动文件数**: 126
+- **标记但未移动文件数**: 6
 
 ## 已移动文件
 
-- `docs/research_notes/10_100_percent_completion_verification.md` → `archive/research_notes_2026_06_25/10_100_percent_completion_verification.md`
-- `docs/research_notes/10_actual_completion_status_2026_02_28.md` → `archive/research_notes_2026_06_25/10_actual_completion_status_2026_02_28.md`
-- `docs/research_notes/10_aeneas_integration_plan.md` → `archive/research_notes_2026_06_25/10_aeneas_integration_plan.md`
-- `docs/research_notes/10_cargo_194_features.md` → `archive/research_notes_2026_06_25/10_cargo_194_features.md`
-- `docs/research_notes/10_comprehensive_task_orchestration_100_percent.md` → `archive/research_notes_2026_06_25/10_comprehensive_task_orchestration_100_percent.md`
-- `docs/research_notes/10_comprehensive_task_orchestration_2026_03_01.md` → `archive/research_notes_2026_06_25/10_comprehensive_task_orchestration_2026_03_01.md`
-- `docs/research_notes/10_contributing.md` → `archive/research_notes_2026_06_25/10_contributing.md`
-- `docs/research_notes/10_coq_isabelle_proof_scaffolding.md` → `archive/research_notes_2026_06_25/10_coq_isabelle_proof_scaffolding.md`
-- `docs/research_notes/10_coq_of_rust_integration_plan.md` → `archive/research_notes_2026_06_25/10_coq_of_rust_integration_plan.md`
-- `docs/research_notes/10_example.md` → `archive/research_notes_2026_06_25/10_example.md`
-- `docs/research_notes/10_feature_template.md` → `archive/research_notes_2026_06_25/10_feature_template.md`
-- `docs/research_notes/10_final_100_percent_completion_certification.md` → `archive/research_notes_2026_06_25/10_final_100_percent_completion_certification.md`
-- `docs/research_notes/10_final_100_percent_completion_report.md` → `archive/research_notes_2026_06_25/10_final_100_percent_completion_report.md`
-- `docs/research_notes/10_final_100_percent_completion_report_2026_02_28.md` → `archive/research_notes_2026_06_25/10_final_100_percent_completion_report_2026_02_28.md`
-- `docs/research_notes/10_final_completion_progress_report_2026_02_28.md` → `archive/research_notes_2026_06_25/10_final_completion_progress_report_2026_02_28.md`
-- `docs/research_notes/10_final_verification_checklist.md` → `archive/research_notes_2026_06_25/10_final_verification_checklist.md`
-- `docs/research_notes/10_formal_argumentation_completion_report.md` → `archive/research_notes_2026_06_25/10_formal_argumentation_completion_report.md`
-- `docs/research_notes/10_maintenance_guide.md` → `archive/research_notes_2026_06_25/10_maintenance_guide.md`
-- `docs/research_notes/10_progress_tracking.md` → `archive/research_notes_2026_06_25/10_progress_tracking.md`
-- `docs/research_notes/10_project_completion_summary.md` → `archive/research_notes_2026_06_25/10_project_completion_summary.md`
-- `docs/research_notes/10_project_maintenance_guide.md` → `archive/research_notes_2026_06_25/10_project_maintenance_guide.md`
-- `docs/research_notes/10_quality_checklist.md` → `archive/research_notes_2026_06_25/10_quality_checklist.md`
-- `docs/research_notes/10_rust_191_research_update_2025_11_15.md` → `archive/research_notes_2026_06_25/10_rust_191_research_update_2025_11_15.md`
-- `docs/research_notes/10_rust_192_research_update_2025_12_11.md` → `archive/research_notes_2026_06_25/10_rust_192_research_update_2025_12_11.md`
-- `docs/research_notes/10_rust_193_counterexamples_index.md` → `archive/research_notes_2026_06_25/10_rust_193_counterexamples_index.md`
-- `docs/research_notes/10_rust_193_feature_matrix.md` → `archive/research_notes_2026_06_25/10_rust_193_feature_matrix.md`
-- `docs/research_notes/10_rust_194_195_feature_matrix.md` → `archive/research_notes_2026_06_25/10_rust_194_195_feature_matrix.md`
-- `docs/research_notes/10_rust_194_comprehensive_analysis.md` → `archive/research_notes_2026_06_25/10_rust_194_comprehensive_analysis.md`
-- `docs/research_notes/10_rust_194_comprehensive_semantics_framework.md` → `archive/research_notes_2026_06_25/10_rust_194_comprehensive_semantics_framework.md`
-- `docs/research_notes/10_rust_194_core_notes_index.md` → `archive/research_notes_2026_06_25/10_rust_194_core_notes_index.md`
-- `docs/research_notes/10_rust_194_deep_semantic_analysis.md` → `archive/research_notes_2026_06_25/10_rust_194_deep_semantic_analysis.md`
-- `docs/research_notes/10_rust_194_mind_representations.md` → `archive/research_notes_2026_06_25/10_rust_194_mind_representations.md`
-- `docs/research_notes/10_rust_194_research_update.md` → `archive/research_notes_2026_06_25/10_rust_194_research_update.md`
-- `docs/research_notes/10_statistics.md` → `archive/research_notes_2026_06_25/10_statistics.md`
-- `docs/research_notes/10_task_checklist.md` → `archive/research_notes_2026_06_25/10_task_checklist.md`
-- `docs/research_notes/10_template.md` → `archive/research_notes_2026_06_25/10_template.md`
-- `docs/research_notes/10_writing_guide.md` → `archive/research_notes_2026_06_25/10_writing_guide.md`
+- `docs/research_notes/10_00_organization_and_navigation.md` → `archive/research_notes_2026_06_25/10_00_organization_and_navigation.md`
+- `docs/research_notes/10_application_trees.md` → `archive/research_notes_2026_06_25/10_application_trees.md`
+- `docs/research_notes/10_argumentation_chain_and_flow.md` → `archive/research_notes_2026_06_25/10_argumentation_chain_and_flow.md`
+- `docs/research_notes/10_argumentation_gap_index.md` → `archive/research_notes_2026_06_25/10_argumentation_gap_index.md`
+- `docs/research_notes/10_authoritative_alignment_guide.md` → `archive/research_notes_2026_06_25/10_authoritative_alignment_guide.md`
+- `docs/research_notes/10_authoritative_alignment_status.md` → `archive/research_notes_2026_06_25/10_authoritative_alignment_status.md`
+- `docs/research_notes/10_authoritative_content_alignment_report.md` → `archive/research_notes_2026_06_25/10_authoritative_content_alignment_report.md`
+- `docs/research_notes/10_best_practices.md` → `archive/research_notes_2026_06_25/10_best_practices.md`
+- `docs/research_notes/10_changelog.md` → `archive/research_notes_2026_06_25/10_changelog.md`
+- `docs/research_notes/10_classification.md` → `archive/research_notes_2026_06_25/10_classification.md`
+- `docs/research_notes/10_code_doc_formal_mapping.md` → `archive/research_notes_2026_06_25/10_code_doc_formal_mapping.md`
+- `docs/research_notes/10_comprehensive_project_report.md` → `archive/research_notes_2026_06_25/10_comprehensive_project_report.md`
+- `docs/research_notes/10_comprehensive_systematic_overview.md` → `archive/research_notes_2026_06_25/10_comprehensive_systematic_overview.md`
+- `docs/research_notes/10_concept_comparison_tables.md` → `archive/research_notes_2026_06_25/10_concept_comparison_tables.md`
+- `docs/research_notes/10_concept_hierarchy_framework.md` → `archive/research_notes_2026_06_25/10_concept_hierarchy_framework.md`
+- `docs/research_notes/10_concept_relationship_network.md` → `archive/research_notes_2026_06_25/10_concept_relationship_network.md`
+- `docs/research_notes/10_concurrency_cheatsheet.md` → `archive/research_notes_2026_06_25/10_concurrency_cheatsheet.md`
+- `docs/research_notes/10_const_eval_formalization.md` → `archive/research_notes_2026_06_25/10_const_eval_formalization.md`
+- `docs/research_notes/10_content_enhancement.md` → `archive/research_notes_2026_06_25/10_content_enhancement.md`
+- `docs/research_notes/10_core_features_full_chain.md` → `archive/research_notes_2026_06_25/10_core_features_full_chain.md`
+- `docs/research_notes/10_core_theorems_en_summary.md` → `archive/research_notes_2026_06_25/10_core_theorems_en_summary.md`
+- `docs/research_notes/10_counter_examples_compendium.md` → `archive/research_notes_2026_06_25/10_counter_examples_compendium.md`
+- `docs/research_notes/10_cross_reference_index.md` → `archive/research_notes_2026_06_25/10_cross_reference_index.md`
+- `docs/research_notes/10_design_mechanism_rationale.md` → `archive/research_notes_2026_06_25/10_design_mechanism_rationale.md`
+- `docs/research_notes/10_domain_analysis_framework.md` → `archive/research_notes_2026_06_25/10_domain_analysis_framework.md`
+- `docs/research_notes/10_error_handling_cheatsheet.md` → `archive/research_notes_2026_06_25/10_error_handling_cheatsheet.md`
+- `docs/research_notes/10_executable_semantics_roadmap.md` → `archive/research_notes_2026_06_25/10_executable_semantics_roadmap.md`
+- `docs/research_notes/10_faq.md` → `archive/research_notes_2026_06_25/10_faq.md`
+- `docs/research_notes/10_formal_full_model_en_summary.md` → `archive/research_notes_2026_06_25/10_formal_full_model_en_summary.md`
+- `docs/research_notes/10_formal_full_model_overview.md` → `archive/research_notes_2026_06_25/10_formal_full_model_overview.md`
+- `docs/research_notes/10_formal_language_and_proofs.md` → `archive/research_notes_2026_06_25/10_formal_language_and_proofs.md`
+- `docs/research_notes/10_formal_proof_critical_analysis_and_plan_2026_02.md` → `archive/research_notes_2026_06_25/10_formal_proof_critical_analysis_and_plan_2026_02.md`
+- `docs/research_notes/10_formal_proof_system_guide.md` → `archive/research_notes_2026_06_25/10_formal_proof_system_guide.md`
+- `docs/research_notes/10_glossary.md` → `archive/research_notes_2026_06_25/10_glossary.md`
+- `docs/research_notes/10_incremental_update_flow.md` → `archive/research_notes_2026_06_25/10_incremental_update_flow.md`
+- `docs/research_notes/10_international_formal_verification_index.md` → `archive/research_notes_2026_06_25/10_international_formal_verification_index.md`
+- `docs/research_notes/10_interview_questions_collection.md` → `archive/research_notes_2026_06_25/10_interview_questions_collection.md`
+- `docs/research_notes/10_l3_machine_proof_guide.md` → `archive/research_notes_2026_06_25/10_l3_machine_proof_guide.md`
+- `docs/research_notes/10_language_semantics_expressiveness.md` → `archive/research_notes_2026_06_25/10_language_semantics_expressiveness.md`
+- `docs/research_notes/10_learning_path_comprehensive.md` → `archive/research_notes_2026_06_25/10_learning_path_comprehensive.md`
+- `docs/research_notes/10_lifetime_cheatsheet.md` → `archive/research_notes_2026_06_25/10_lifetime_cheatsheet.md`
+- `docs/research_notes/10_macros_cheatsheet.md` → `archive/research_notes_2026_06_25/10_macros_cheatsheet.md`
+- `docs/research_notes/10_practical_applications.md` → `archive/research_notes_2026_06_25/10_practical_applications.md`
+- `docs/research_notes/10_quick_find.md` → `archive/research_notes_2026_06_25/10_quick_find.md`
+- `docs/research_notes/10_research_methodology.md` → `archive/research_notes_2026_06_25/10_research_methodology.md`
+- `docs/research_notes/10_research_roadmap.md` → `archive/research_notes_2026_06_25/10_research_roadmap.md`
+- `docs/research_notes/10_resources.md` → `archive/research_notes_2026_06_25/10_resources.md`
+- `docs/research_notes/10_rust_book_alignment.md` → `archive/research_notes_2026_06_25/10_rust_book_alignment.md`
+- `docs/research_notes/10_rust_formal_methods_cheatsheet.md` → `archive/research_notes_2026_06_25/10_rust_formal_methods_cheatsheet.md`
+- `docs/research_notes/10_rustbelt_alignment.md` → `archive/research_notes_2026_06_25/10_rustbelt_alignment.md`
+- `docs/research_notes/10_rustsem_semantics.md` → `archive/research_notes_2026_06_25/10_rustsem_semantics.md`
+- `docs/research_notes/10_safe_decidable_mechanisms_overview.md` → `archive/research_notes_2026_06_25/10_safe_decidable_mechanisms_overview.md`
+- `docs/research_notes/10_system_integration.md` → `archive/research_notes_2026_06_25/10_system_integration.md`
+- `docs/research_notes/10_system_summary.md` → `archive/research_notes_2026_06_25/10_system_summary.md`
+- `docs/research_notes/10_theoretical_and_argumentation_system_architecture.md` → `archive/research_notes_2026_06_25/10_theoretical_and_argumentation_system_architecture.md`
+- `docs/research_notes/10_tools_guide.md` → `archive/research_notes_2026_06_25/10_tools_guide.md`
+- `docs/research_notes/10_tutorial_borrow_checker.md` → `archive/research_notes_2026_06_25/10_tutorial_borrow_checker.md`
+- `docs/research_notes/10_tutorial_concurrency_models.md` → `archive/research_notes_2026_06_25/10_tutorial_concurrency_models.md`
+- `docs/research_notes/10_tutorial_lifetimes.md` → `archive/research_notes_2026_06_25/10_tutorial_lifetimes.md`
+- `docs/research_notes/10_tutorial_ownership_safety.md` → `archive/research_notes_2026_06_25/10_tutorial_ownership_safety.md`
+- `docs/research_notes/10_tutorial_type_system.md` → `archive/research_notes_2026_06_25/10_tutorial_type_system.md`
+- `docs/research_notes/10_unified_systematic_framework.md` → `archive/research_notes_2026_06_25/10_unified_systematic_framework.md`
+- `docs/research_notes/10_user_guide.md` → `archive/research_notes_2026_06_25/10_user_guide.md`
+- `docs/research_notes/10_visualization_index.md` → `archive/research_notes_2026_06_25/10_visualization_index.md`
+- `docs/research_notes/experiments/10_compiler_optimizations.md` → `archive/research_notes_2026_06_25/experiments/10_compiler_optimizations.md`
+- `docs/research_notes/experiments/10_concurrency_performance.md` → `archive/research_notes_2026_06_25/experiments/10_concurrency_performance.md`
+- `docs/research_notes/experiments/10_macro_expansion_performance.md` → `archive/research_notes_2026_06_25/experiments/10_macro_expansion_performance.md`
+- `docs/research_notes/experiments/10_memory_analysis.md` → `archive/research_notes_2026_06_25/experiments/10_memory_analysis.md`
+- `docs/research_notes/experiments/10_performance_benchmarks.md` → `archive/research_notes_2026_06_25/experiments/10_performance_benchmarks.md`
+- `docs/research_notes/experiments/README.md` → `archive/research_notes_2026_06_25/experiments/README.md`
+- `docs/research_notes/formal_methods/10_async_state_machine.md` → `archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md`
+- `docs/research_notes/formal_methods/10_axiomatic_semantics.md` → `archive/research_notes_2026_06_25/formal_methods/10_axiomatic_semantics.md`
+- `docs/research_notes/formal_methods/10_case_studies.md` → `archive/research_notes_2026_06_25/formal_methods/10_case_studies.md`
+- `docs/research_notes/formal_methods/10_coq_formalization_guide.md` → `archive/research_notes_2026_06_25/formal_methods/10_coq_formalization_guide.md`
+- `docs/research_notes/formal_methods/10_formal_foundations_index.md` → `archive/research_notes_2026_06_25/formal_methods/10_formal_foundations_index.md`
+- `docs/research_notes/formal_methods/10_formal_methods_comparison.md` → `archive/research_notes_2026_06_25/formal_methods/10_formal_methods_comparison.md`
+- `docs/research_notes/formal_methods/10_formal_methods_completion_plan.md` → `archive/research_notes_2026_06_25/formal_methods/10_formal_methods_completion_plan.md`
+- `docs/research_notes/formal_methods/10_logical_foundations.md` → `archive/research_notes_2026_06_25/formal_methods/10_logical_foundations.md`
+- `docs/research_notes/formal_methods/10_macro_hygiene_deep_dive.md` → `archive/research_notes_2026_06_25/formal_methods/10_macro_hygiene_deep_dive.md`
+- `docs/research_notes/formal_methods/10_operational_semantics.md` → `archive/research_notes_2026_06_25/formal_methods/10_operational_semantics.md`
+- `docs/research_notes/formal_methods/10_pin_self_referential.md` → `archive/research_notes_2026_06_25/formal_methods/10_pin_self_referential.md`
+- `docs/research_notes/formal_methods/10_proof_strategies.md` → `archive/research_notes_2026_06_25/formal_methods/10_proof_strategies.md`
+- `docs/research_notes/formal_methods/10_send_sync_formalization.md` → `archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md`
+- `docs/research_notes/formal_methods/10_separation_logic.md` → `archive/research_notes_2026_06_25/formal_methods/10_separation_logic.md`
+- `docs/research_notes/formal_methods/10_slice_formalization.md` → `archive/research_notes_2026_06_25/formal_methods/10_slice_formalization.md`
+- `docs/research_notes/formal_methods/lifetime_formalization.md` → `archive/research_notes_2026_06_25/formal_methods/lifetime_formalization.md`
+- `docs/research_notes/formal_modules/10_formalization_ecology_mindmap.md` → `archive/research_notes_2026_06_25/formal_modules/10_formalization_ecology_mindmap.md`
+- `docs/research_notes/software_design_theory/01_design_patterns_formal/04_boundary_matrix.md` → `archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/04_boundary_matrix.md`
+- `docs/research_notes/software_design_theory/01_design_patterns_formal/README.md` → `archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/README.md`
+- `docs/research_notes/software_design_theory/02_workflow/README.md` → `archive/research_notes_2026_06_25/software_design_theory/02_workflow/README.md`
+- `docs/research_notes/software_design_theory/02_workflow_safe_complete_models/02_complete_43_catalog.md` → `archive/research_notes_2026_06_25/software_design_theory/02_workflow_safe_complete_models/02_complete_43_catalog.md`
+- `docs/research_notes/software_design_theory/02_workflow_safe_complete_models/04_expressiveness_boundary.md` → `archive/research_notes_2026_06_25/software_design_theory/02_workflow_safe_complete_models/04_expressiveness_boundary.md`
+- `docs/research_notes/software_design_theory/02_workflow_safe_complete_models/README.md` → `archive/research_notes_2026_06_25/software_design_theory/02_workflow_safe_complete_models/README.md`
+- `docs/research_notes/software_design_theory/03_execution_models/01_synchronous.md` → `archive/research_notes_2026_06_25/software_design_theory/03_execution_models/01_synchronous.md`
+- `docs/research_notes/software_design_theory/03_execution_models/02_async.md` → `archive/research_notes_2026_06_25/software_design_theory/03_execution_models/02_async.md`
+- `docs/research_notes/software_design_theory/03_execution_models/03_concurrent.md` → `archive/research_notes_2026_06_25/software_design_theory/03_execution_models/03_concurrent.md`
+- `docs/research_notes/software_design_theory/03_execution_models/04_parallel.md` → `archive/research_notes_2026_06_25/software_design_theory/03_execution_models/04_parallel.md`
+- `docs/research_notes/software_design_theory/03_execution_models/05_distributed.md` → `archive/research_notes_2026_06_25/software_design_theory/03_execution_models/05_distributed.md`
+- `docs/research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md` → `archive/research_notes_2026_06_25/software_design_theory/03_execution_models/06_boundary_analysis.md`
+- `docs/research_notes/software_design_theory/03_execution_models/README.md` → `archive/research_notes_2026_06_25/software_design_theory/03_execution_models/README.md`
+- `docs/research_notes/software_design_theory/04_compositional_engineering/01_formal_composition.md` → `archive/research_notes_2026_06_25/software_design_theory/04_compositional_engineering/01_formal_composition.md`
+- `docs/research_notes/software_design_theory/04_compositional_engineering/02_effectiveness_proofs.md` → `archive/research_notes_2026_06_25/software_design_theory/04_compositional_engineering/02_effectiveness_proofs.md`
+- `docs/research_notes/software_design_theory/04_compositional_engineering/03_integration_theory.md` → `archive/research_notes_2026_06_25/software_design_theory/04_compositional_engineering/03_integration_theory.md`
+- `docs/research_notes/software_design_theory/04_compositional_engineering/README.md` → `archive/research_notes_2026_06_25/software_design_theory/04_compositional_engineering/README.md`
+- `docs/research_notes/software_design_theory/05_boundary_system/10_expressive_inexpressive_matrix.md` → `archive/research_notes_2026_06_25/software_design_theory/05_boundary_system/10_expressive_inexpressive_matrix.md`
+- `docs/research_notes/software_design_theory/05_boundary_system/10_safe_unsafe_matrix.md` → `archive/research_notes_2026_06_25/software_design_theory/05_boundary_system/10_safe_unsafe_matrix.md`
+- `docs/research_notes/software_design_theory/05_boundary_system/10_supported_unsupported_matrix.md` → `archive/research_notes_2026_06_25/software_design_theory/05_boundary_system/10_supported_unsupported_matrix.md`
+- `docs/research_notes/software_design_theory/05_boundary_system/README.md` → `archive/research_notes_2026_06_25/software_design_theory/05_boundary_system/README.md`
+- `docs/research_notes/software_design_theory/05_distributed/01_saga_pattern.md` → `archive/research_notes_2026_06_25/software_design_theory/05_distributed/01_saga_pattern.md`
+- `docs/research_notes/software_design_theory/05_distributed/02_cqrs_pattern.md` → `archive/research_notes_2026_06_25/software_design_theory/05_distributed/02_cqrs_pattern.md`
+- `docs/research_notes/software_design_theory/05_distributed/03_circuit_breaker.md` → `archive/research_notes_2026_06_25/software_design_theory/05_distributed/03_circuit_breaker.md`
+- `docs/research_notes/software_design_theory/05_distributed/04_event_sourcing.md` → `archive/research_notes_2026_06_25/software_design_theory/05_distributed/04_event_sourcing.md`
+- `docs/research_notes/software_design_theory/05_distributed/05_outbox_pattern.md` → `archive/research_notes_2026_06_25/software_design_theory/05_distributed/05_outbox_pattern.md`
+- `docs/research_notes/software_design_theory/05_distributed/06_timeout_pattern.md` → `archive/research_notes_2026_06_25/software_design_theory/05_distributed/06_timeout_pattern.md`
+- `docs/research_notes/software_design_theory/05_distributed/07_retry_pattern.md` → `archive/research_notes_2026_06_25/software_design_theory/05_distributed/07_retry_pattern.md`
+- `docs/research_notes/software_design_theory/05_distributed/README.md` → `archive/research_notes_2026_06_25/software_design_theory/05_distributed/README.md`
+- `docs/research_notes/software_design_theory/06_rust_idioms.md` → `archive/research_notes_2026_06_25/software_design_theory/06_rust_idioms.md`
+- `docs/research_notes/software_design_theory/07_anti_patterns.md` → `archive/research_notes_2026_06_25/software_design_theory/07_anti_patterns.md`
+- `docs/research_notes/software_design_theory/10_00_master_index.md` → `archive/research_notes_2026_06_25/software_design_theory/10_00_master_index.md`
+- `docs/research_notes/software_design_theory/10_comprehensive_argumentation_gap_analysis_and_plan.md` → `archive/research_notes_2026_06_25/software_design_theory/10_comprehensive_argumentation_gap_analysis_and_plan.md`
+- `docs/research_notes/software_design_theory/README.md` → `archive/research_notes_2026_06_25/software_design_theory/README.md`
+- `docs/research_notes/type_theory/10_advanced_types.md` → `archive/research_notes_2026_06_25/type_theory/10_advanced_types.md`
+- `docs/research_notes/type_theory/10_const_evaluation.md` → `archive/research_notes_2026_06_25/type_theory/10_const_evaluation.md`
+- `docs/research_notes/type_theory/10_construction_capability.md` → `archive/research_notes_2026_06_25/type_theory/10_construction_capability.md`
+- `docs/research_notes/type_theory/10_trait_system_formalization.md` → `archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md`
+- `docs/research_notes/type_theory/10_type_system_foundations.md` → `archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md`
 
 ## 已标记归档但未移动（被引用）
 
+- `docs/research_notes/10_safe_unsafe_comprehensive_analysis.md`
+- `docs/research_notes/formal_methods/10_borrow_checker_proof.md`
+- `docs/research_notes/formal_methods/10_ownership_model.md`
+- `docs/research_notes/type_theory/10_lifetime_formalization.md`
+- `docs/research_notes/type_theory/10_variance_theory.md`
+- `docs/research_notes/type_theory/README.md`

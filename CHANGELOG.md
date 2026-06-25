@@ -34,6 +34,11 @@
   - 移动 37 个低价值/过时文件到 `archive/research_notes_2026_06_25/`
   - 运行 `scripts/maintenance/fix_archived_research_notes_links.py` 修复 131 处引用残留
   - 生成 `reports/RESEARCH_NOTES_ARCHIVE_BATCH_2026_06_25.md`
+  - 新增 `scripts/maintenance/archive_research_notes_peripheral.py`，归档 75 个边缘内容文件（mindmap/decision_tree/matrix/proof_tree/设计模式/执行模型/分布式模式等）
+  - 再次修复 28 处引用残留；`docs/` C 类问题数从 643 降至 542，低于 600 目标
+  - 使用 `archive_research_notes_candidates.py --stale-days 90` 再次归档 126 个超过 90 天未更新的研究笔记
+  - 增强 `fix_archived_research_notes_links.py` 处理带锚点的链接；修复 564 + 6 处引用残留
+  - `docs/` C 类问题数从 542 降至 228，文件数从 721 降至 595
 - **精选内容合并到 `knowledge/`**：
   - 新建 `knowledge/04_expert/academic/03_ownership_model_comprehensive.md`
   - 新建 `knowledge/04_expert/academic/04_borrow_checker_proof_guide.md`
@@ -43,6 +48,14 @@
 - **状态更新**：
   - `reports/C_CLASS_GOVERNANCE_PLAN_2026_06_09.md`：阶段 3 完成，阶段 4 维护规则进行中
   - `.kimi/EXECUTION_CHECKLIST_2026_06_22.md`：新增 B4.4–B4.7 完成项
+
+### 供应链与依赖跟踪（2026-06-25）
+
+- `cargo audit` 网络恢复，完整扫描 `Cargo.lock`（1016 个 crate 实例）：
+  - **0 个安全漏洞**
+  - 4 个 `unmaintained` 允许警告（`atomic-polyfill`、`bare-metal`、`instant`、`paste`）
+  - 生成 `reports/CARGO_AUDIT_2026_06_25.md` 与 `reports/SUPPLY_CHAIN_AUDIT_2026_06_25.md`
+- Sea-ORM 2.0 stable 仍未发布（最新 `2.0.0-rc.41`），更新 `reports/SEA_ORM_2_0_RELEASE_TRACKING_2026_06_22.md` 检查记录
 
 ### 语言特性
 

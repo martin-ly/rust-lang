@@ -546,9 +546,9 @@ async fn theorem_cc1_compensation_consistency() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [核心定理完整证明](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md)
-- [所有权证明树](./10_proof_tree_ownership.md)
-- [借用证明树](./10_proof_tree_borrow.md)
-- [类型安全证明树](./10_proof_tree_type_safety.md)
+- [所有权证明树](../../archive/research_notes_2026_06_25/10_proof_tree_ownership.md)
+- [借用证明树](../../archive/research_notes_2026_06_25/10_proof_tree_borrow.md)
+- [类型安全证明树](../../archive/research_notes_2026_06_25/10_proof_tree_type_safety.md)
 
 ---
 

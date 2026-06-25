@@ -509,8 +509,8 @@ impl ProcessMonitor {
 | 概念 | 形式化文档 | 描述 |
 | :--- | :--- | :--- |
 | **所有权模型** | [ownership_model](../../research_notes/formal_methods/10_ownership_model.md) | 进程资源生命周期管理 |
-| **异步状态机** | [async_state_machine](../../research_notes/formal_methods/10_async_state_machine.md) | 异步进程管理语义 |
-| **Send/Sync** | [send_sync_formalization](../../research_notes/formal_methods/10_send_sync_formalization.md) | 跨线程进程句柄安全 |
+| **异步状态机** | [async_state_machine](../../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) | 异步进程管理语义 |
+| **Send/Sync** | [send_sync_formalization](../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | 跨线程进程句柄安全 |
 
 ### 形式化定理
 

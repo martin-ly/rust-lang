@@ -10,7 +10,10 @@
 
 ## 目录
 >
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Exception Handling](https://en.wikipedia.org/wiki/Exception_Handling)** · **来源: [Wikipedia - Error Detection and Correction](https://en.wikipedia.org/wiki/Error_Detection_and_Correction)** · **[来源: ACM - Error Handling Patterns]** · **[来源: IEEE - Fault-Tolerant Software Design]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
+> **来源: [Wikipedia - Exception Handling](https://en.wikipedia.org/wiki/Exception_Handling)** ·
+> **来源: [Wikipedia - Error Detection and Correction](https://en.wikipedia.org/wiki/Error_Detection_and_Correction)** ·
+> **[来源: ACM - Error Handling Patterns]** · **[来源: IEEE - Fault-Tolerant Software Design]**
 
 - [Rust 错误处理决策树](#rust-错误处理决策树)
   - [目录](#目录)
@@ -102,7 +105,7 @@
                     └───────┬───────┘   └───────┬─────────┘
                             │                   │
             ┌───────────────▼──────────┐   ┌───▼─────────────┐
-            │ 错误传播范围？           │   │ 使用 panic!     │
+            │ 错误传播范围？            │   │ 使用 panic!     │
             │                          │   │                 │
             └─┬──────────┬──────────┬──┘   │ • 程序bug       │
               │          │          │      │ • 契约违反      │
@@ -112,11 +115,11 @@
         └────┬────┘ └───┬────┘ └─┬────┘
              │          │        │
     ┌────────▼────┐ ┌───▼────────▼──────────┐
-    │ 立即处理    │ │ 使用 Result<T, E>     │
-    │ (Option/   │ │                       │
-    │  默认值)   │ │ • 库代码: thiserror   │
+    │ 立即处理     │ │ 使用 Result<T, E>     │
+    │ (Option/    │ │                       │
+    │  默认值)     │ │ • 库代码: thiserror   │
     └─────────────┘ │ • 应用: anyhow        │
-                    │ • 跨服务: 序列化错误  │
+                    │ • 跨服务: 序列化错误   │
                     └───────────────────────┘
 ```
 
@@ -156,15 +159,15 @@
 传播范围决策流程:
 
 ┌──────────────────────────────────────────────────────────────┐
-│  错误发生在哪个边界？                                         │
+│  错误发生在哪个边界？                                          │
 └──────────────┬──────────────────┬──────────────┬─────────────┘
                │                  │              │
         ┌──────▼──────┐    ┌──────▼──────┐ ┌────▼────────┐
-        │  函数内部   │    │  模块边界   │ │  系统边界   │
+        │  函数内部    │    │  模块边界    │ │  系统边界   │
         │             │    │             │ │             │
-        │ • 局部变量  │    │ • crate边界 │ │ • 线程边界  │
-        │ • 临时计算  │    │ • 分层架构  │ │ • 进程边界  │
-        │ • 内部状态  │    │ • 库接口    │ │ • 网络边界  │
+        │ • 局部变量   │    │ • crate边界 │ │ • 线程边界  │
+        │ • 临时计算   │    │ • 分层架构  │ │ • 进程边界  │
+        │ • 内部状态   │    │ • 库接口    │ │ • 网络边界  │
         └──────┬──────┘    └──────┬──────┘ └─────┬───────┘
                │                  │              │
         ┌──────▼──────────────────▼──────────────▼───────┐

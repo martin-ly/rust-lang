@@ -273,8 +273,8 @@ print(f"结果: {counter}")
 
 **Rust 形式化定义**:
 
-- Send Trait: 跨线程转移所有权 ([Def SEND1](../research_notes/formal_methods/10_send_sync_formalization.md))
-- Sync Trait: 跨线程共享引用 ([Def SYNC1](../research_notes/formal_methods/10_send_sync_formalization.md))
+- Send Trait: 跨线程转移所有权 ([Def SEND1](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md))
+- Sync Trait: 跨线程共享引用 ([Def SYNC1](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md))
 - 数据竞争自由: $\text{DataRaceFree}(P)$ ([定理 1](../research_notes/formal_methods/10_borrow_checker_proof.md))
 
 ---
@@ -494,7 +494,7 @@ result = max_val(10, 20)
 
 | 语言 | 类型系统 | 泛型实现 | 类型安全 | 形式化证明 |
 | :--- | :--- | :--- | :--- | :--- |
-| **Rust** | 线性类型 + Trait | 单态化 | 编译期 | [类型安全定理](../research_notes/type_theory/10_type_system_foundations.md) |
+| **Rust** | 线性类型 + Trait | 单态化 | 编译期 | [类型安全定理](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) |
 | **C++** | 模板元编程 | 编译期实例化 | 编译期 | 无官方形式化 |
 | **Go** | 结构类型 | 单态化（1.18+） | 编译期 | 无官方形式化 |
 | **Python** | 动态类型 | 不适用 | 运行时 | 无形式化 |
@@ -594,9 +594,9 @@ $ python -m pytest
 | 所有权 | [ownership_model](../research_notes/formal_methods/10_ownership_model.md) | T2 唯一性, T3 内存安全 |
 | 借用 | [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) | T1 数据竞争自由 |
 | 生命周期 | lifetime_formalization | LF-T2 引用有效性 |
-| 并发 | [send_sync_formalization](../research_notes/formal_methods/10_send_sync_formalization.md) | SEND-T1, SYNC-T1 |
-| 异步 | [async_state_machine](../research_notes/formal_methods/10_async_state_machine.md) | T6.1-T6.3 |
-| 类型系统 | [type_system_foundations](../research_notes/type_theory/10_type_system_foundations.md) | T1-T3 类型安全 |
+| 并发 | [send_sync_formalization](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | SEND-T1, SYNC-T1 |
+| 异步 | [async_state_machine](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) | T6.1-T6.3 |
+| 类型系统 | [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) | T1-T3 类型安全 |
 
 ### 权威来源索引
 

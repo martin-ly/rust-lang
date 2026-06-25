@@ -562,8 +562,8 @@ async fn proxy_server() -> io::Result<()> {
 
 | 概念 | 形式化文档 | 描述 |
 | :--- | :--- | :--- |
-| **异步状态机** | [async_state_machine](../../research_notes/formal_methods/10_async_state_machine.md) | 异步网络操作的语义 |
-| **Send/Sync** | [send_sync_formalization](../../research_notes/formal_methods/10_send_sync_formalization.md) | 跨线程数据传递安全 |
+| **异步状态机** | [async_state_machine](../../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) | 异步网络操作的语义 |
+| **Send/Sync** | [send_sync_formalization](../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | 跨线程数据传递安全 |
 | **生命周期** | lifetime_formalization | 连接引用有效性 |
 | **并发安全** | [borrow_checker_proof](../../research_notes/formal_methods/10_borrow_checker_proof.md) | 并发访问数据竞争自由 |
 
@@ -573,7 +573,7 @@ async fn proxy_server() -> io::Result<()> {
 
 **定理 NET-T1（并发连接安全）**: 若异步网络操作满足 Send/Sync 约束，则跨任务连接操作数据竞争自由。
 
-*证明*: 由 [send_sync_formalization](../../research_notes/formal_methods/10_send_sync_formalization.md) 定理 SEND-T1/SYNC-T1，连接句柄满足 Send 时可跨 await 点，满足 Sync 时可多任务共享引用。∎
+*证明*: 由 [send_sync_formalization](../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) 定理 SEND-T1/SYNC-T1，连接句柄满足 Send 时可跨 await 点，满足 Sync 时可多任务共享引用。∎
 
 ---
 

@@ -7,7 +7,15 @@
 
 ## Unified Theoretical Framework for Rust Ownership System
 >
-> **来源: [Wikipedia - Type Theory](https://en.wikipedia.org/wiki/Type_Theory)** · **来源: [Wikipedia - Operational Semantics](https://en.wikipedia.org/wiki/Operational_Semantics)** · **来源: [Wikipedia - Separation Logic](https://en.wikipedia.org/wiki/Separation_Logic)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [Pierce 2002 - TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)** · **来源: [Iris Project - iris-project.org](https://iris-project.org/) · **来源: [Wikipedia - Unified Theory](https://en.wikipedia.org/wiki/Unified_Theory)** · **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)** · **[来源: ACM - Unified Program Analysis]** · **[来源: IEEE - Integrated Verification Frameworks]**
+> **来源: [Wikipedia - Type Theory](https://en.wikipedia.org/wiki/Type_Theory)** ·
+> **来源: [Wikipedia - Operational Semantics](https://en.wikipedia.org/wiki/Operational_Semantics)** ·
+> **来源: [Wikipedia - Separation Logic](https://en.wikipedia.org/wiki/Separation_Logic)** ·
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** ·
+> **来源: [Pierce 2002 - TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)** ·
+> **来源: [Iris Project - iris-project.org](https://iris-project.org/) ·
+> **来源: [Wikipedia - Unified Theory](https://en.wikipedia.org/wiki/Unified_Theory)** ·
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)** ·
+> **[来源: ACM - Unified Program Analysis]** · **[来源: IEEE - Integrated Verification Frameworks]**
 
 > **文档性质**: 形式化理论顶层框架
 > **版本**: 1.0.0
@@ -18,7 +26,13 @@
 
 ## 目录
 >
-> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** ·
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** ·
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** ·
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** ·
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** ·
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+>
 
 - [Rust 所有权系统统一理论框架](#rust-所有权系统统一理论框架)
   - [Unified Theoretical Framework for Rust Ownership System](#unified-theoretical-framework-for-rust-ownership-system)

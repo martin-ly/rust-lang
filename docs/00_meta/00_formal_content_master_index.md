@@ -74,8 +74,8 @@
 |------|------|------|
 | ⭐⭐⭐ 并发模式 | [`rust-ownership-decidability/12-concurrency-patterns/`](../rust-ownership-decidability/12-concurrency-patterns/) | 并发架构、消息传递、数据并行、锁自由模式 |
 | ⭐⭐⭐ Actor 模型 | [`rust-ownership-decidability/actor-specialty/`](../rust-ownership-decidability/actor-specialty/) | Actor 框架、分布式 Actor |
-| ⭐⭐ 异步状态机 | [`research_notes/formal_methods/10_async_state_machine.md`](../research_notes/formal_methods/10_async_state_machine.md) | 异步状态机形式化 |
-| ⭐⭐ Send/Sync | [`research_notes/formal_methods/10_send_sync_formalization.md`](../research_notes/formal_methods/10_send_sync_formalization.md) | Send/Sync 形式化 |
+| ⭐⭐ 异步状态机 | [`research_notes/formal_methods/10_async_state_machine.md`](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) | 异步状态机形式化 |
+| ⭐⭐ Send/Sync | [`research_notes/formal_methods/10_send_sync_formalization.md`](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | Send/Sync 形式化 |
 
 ### 2.4 设计模式形式化
 

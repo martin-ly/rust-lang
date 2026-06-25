@@ -1,0 +1,87 @@
+# research_notes 边缘内容归档报告
+
+- **归档时间**: 2026-06-25
+- **移动文件数**: 75
+- **标记但未移动文件数**: 1
+
+## 已移动文件
+
+- `docs/research_notes/10_concept_axiom_theorem_matrix.md`
+- `docs/research_notes/10_distributed_architecture_decision_tree.md`
+- `docs/research_notes/10_distributed_concept_mindmap.md`
+- `docs/research_notes/10_distributed_pattern_matrix.md`
+- `docs/research_notes/10_distributed_patterns_matrix.md`
+- `docs/research_notes/10_ownership_concept_mindmap.md`
+- `docs/research_notes/10_proof_techniques_mindmap.md`
+- `docs/research_notes/10_proof_tree_borrow.md`
+- `docs/research_notes/10_proof_tree_ownership.md`
+- `docs/research_notes/10_proof_tree_type_safety.md`
+- `docs/research_notes/10_verification_tools_decision_tree.md`
+- `docs/research_notes/10_verification_tools_matrix.md`
+- `docs/research_notes/10_workflow_concept_mindmap.md`
+- `docs/research_notes/10_workflow_engine_matrix.md`
+- `docs/research_notes/formal_methods/10_algorithm_selection_decision_tree.md`
+- `docs/research_notes/formal_methods/10_async_concept_mindmap.md`
+- `docs/research_notes/formal_methods/10_concurrency_safety_matrix.md`
+- `docs/research_notes/formal_methods/10_control_flow_decision_tree.md`
+- `docs/research_notes/formal_methods/10_coq_formalization_matrix.md`
+- `docs/research_notes/formal_methods/10_design_pattern_concept_mindmap.md`
+- `docs/research_notes/formal_methods/10_design_pattern_selection_decision_tree.md`
+- `docs/research_notes/formal_methods/10_error_handling_decision_tree.md`
+- `docs/research_notes/formal_methods/10_error_handling_mindmap.md`
+- `docs/research_notes/formal_methods/10_error_type_selection_decision_tree.md`
+- `docs/research_notes/formal_methods/10_five_dimensional_concept_matrix.md`
+- `docs/research_notes/formal_methods/10_formal_methods_100_percent_completion_report.md`
+- `docs/research_notes/formal_methods/10_generics_traits_mindmap.md`
+- `docs/research_notes/formal_methods/10_implementation_progress_matrix.md`
+- `docs/research_notes/formal_methods/10_learning_progression_matrix.md`
+- `docs/research_notes/formal_methods/10_macro_system_mindmap.md`
+- `docs/research_notes/formal_methods/10_memory_model_mindmap.md`
+- `docs/research_notes/formal_methods/10_ownership_transfer_decision_tree.md`
+- `docs/research_notes/formal_methods/10_paradigm_comparison_matrix.md`
+- `docs/research_notes/formal_methods/10_process_management_decision_tree.md`
+- `docs/research_notes/formal_methods/10_proof_completion_matrix.md`
+- `docs/research_notes/formal_methods/10_proof_tree_async_concurrency.md`
+- `docs/research_notes/formal_methods/10_proof_tree_send_sync.md`
+- `docs/research_notes/formal_methods/10_proof_tree_variance.md`
+- `docs/research_notes/formal_methods/10_proof_trees_additional.md`
+- `docs/research_notes/formal_methods/10_proof_trees_enhanced.md`
+- `docs/research_notes/formal_methods/10_proof_trees_visual_completion.md`
+- `docs/research_notes/formal_methods/10_proof_trees_visualization.md`
+- `docs/research_notes/formal_methods/10_reference_cycles_formalization.md`
+- `docs/research_notes/formal_methods/10_risk_assessment_matrix.md`
+- `docs/research_notes/formal_methods/10_safe_decidable_mechanisms_and_formal_methods_plan.md`
+- `docs/research_notes/formal_methods/10_serialization_decision_tree.md`
+- `docs/research_notes/formal_methods/10_testing_strategy_decision_tree.md`
+- `docs/research_notes/formal_methods/10_type_system_concept_mindmap.md`
+- `docs/research_notes/formal_methods/10_workflow_engines_matrix.md`
+- `docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_abstract_factory.md`
+- `docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_builder.md`
+- `docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_factory_method.md`
+- `docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_prototype.md`
+- `docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_singleton.md`
+- `docs/research_notes/software_design_theory/01_design_patterns_formal/01_creational/README.md`
+- `docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/10_adapter.md`
+- `docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/10_bridge.md`
+- `docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/10_composite.md`
+- `docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/10_decorator.md`
+- `docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/10_facade.md`
+- `docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/10_flyweight.md`
+- `docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/10_proxy.md`
+- `docs/research_notes/software_design_theory/01_design_patterns_formal/02_structural/README.md`
+- `docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/10_chain_of_responsibility.md`
+- `docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/10_command.md`
+- `docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/10_interpreter.md`
+- `docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/10_iterator.md`
+- `docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/10_mediator.md`
+- `docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/10_memento.md`
+- `docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/10_observer.md`
+- `docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/10_state.md`
+- `docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/10_strategy.md`
+- `docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/10_template_method.md`
+- `docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/10_visitor.md`
+- `docs/research_notes/software_design_theory/01_design_patterns_formal/03_behavioral/README.md`
+
+## 已标记归档但未移动（被引用）
+
+- `docs/research_notes/formal_methods/10_variance_concept_mindmap.md`

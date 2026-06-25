@@ -1398,9 +1398,9 @@ let map: BTreeMap<i32, &str> = [(1, "a"), (2, "b")].into_iter().collect();
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [类型系统基础](../../research_notes/type_theory/10_type_system_foundations.md) — 集合类型与类型理论
-- [构造能力理论](../../research_notes/type_theory/10_construction_capability.md) — 迭代器的表达能力
-- [泛型编程形式化](../../research_notes/type_theory/10_trait_system_formalization.md) — Iterator trait 形式化
+- [类型系统基础](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) — 集合类型与类型理论
+- [构造能力理论](../../../archive/research_notes_2026_06_25/type_theory/10_construction_capability.md) — 迭代器的表达能力
+- [泛型编程形式化](../../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md) — Iterator trait 形式化
 - [所有权模型](../../research_notes/formal_methods/10_ownership_model.md) — 集合所有权转移形式化
 - [变型理论](../../research_notes/type_theory/10_variance_theory.md) — 集合协变/逆变
 

@@ -330,14 +330,14 @@
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > 用于梳理概念定义、公理、定理、证明方法与反例的对应关系。
-> 详见 [FORMAL_PROOF_SYSTEM_GUIDE](../research_notes/10_formal_proof_system_guide.md)。
+> 详见 [FORMAL_PROOF_SYSTEM_GUIDE](../../../../archive/research_notes_2026_06_25/10_formal_proof_system_guide.md)。
 
 ### 表达能力边界矩阵（新增）
 
 > **[来源: PLDI - Programming Language Design]**
 
 > 用于论证「何者可表达、何者不可表达、边界在哪里」。
-> 详见 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../research_notes/10_language_semantics_expressiveness.md)。
+> 详见 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../../../archive/research_notes_2026_06_25/10_language_semantics_expressiveness.md)。
 
 | 维度 | 可表达 | 边界 | 不可表达 | 论证依据 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -374,7 +374,7 @@
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> 用于梳理「为何如此设计」的理由与完整论证。详见 [DESIGN_MECHANISM_RATIONALE](../research_notes/10_design_mechanism_rationale.md)。
+> 用于梳理「为何如此设计」的理由与完整论证。详见 [DESIGN_MECHANISM_RATIONALE](../../../../archive/research_notes_2026_06_25/10_design_mechanism_rationale.md)。
 
 | 机制 | 动机 | 设计决策 | 形式化文档 | 决策树/反例 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -390,7 +390,7 @@
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-> 五模型 × 三维边界。详见 [06_boundary_analysis](../research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md)。
+> 五模型 × 三维边界。详见 [06_boundary_analysis](../../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/06_boundary_analysis.md)。
 
 | 模型 | 安全 | 支持 | 表达 | 确定性 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -404,7 +404,7 @@
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-> 23 模式 × 三维边界。详见 [04_boundary_matrix](../research_notes/software_design_theory/01_design_patterns_formal/04_boundary_matrix.md)。
+> 23 模式 × 三维边界。详见 [04_boundary_matrix](../../../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/04_boundary_matrix.md)。
 
 | 模式类别 | 等价表达 | 近似表达 | 说明 |
 | :--- | :--- | :--- | :--- |
@@ -450,11 +450,11 @@
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [验证工具对比矩阵](../research_notes/10_verification_tools_matrix.md) - Kani/Prusti/Miri 等工具对比
-- [全局统一系统化框架](../research_notes/10_unified_systematic_framework.md) - 全景思维导图、多维矩阵、全链路图、反例总索引
-- [构造性语义与表达能力边界](../research_notes/10_language_semantics_expressiveness.md) - 操作/指称/公理语义、表达能力边界论证
-- [全面系统化梳理总览](../research_notes/10_comprehensive_systematic_overview.md) - 全局一致性、语义归纳、概念族谱、论证缺口追踪
-- [形式化论证系统梳理指南](../research_notes/10_formal_proof_system_guide.md) - 论证缺口分析、概念-公理-定理映射
+- [验证工具对比矩阵](../../../../archive/research_notes_2026_06_25/10_verification_tools_matrix.md) - Kani/Prusti/Miri 等工具对比
+- [全局统一系统化框架](../../../../archive/research_notes_2026_06_25/10_unified_systematic_framework.md) - 全景思维导图、多维矩阵、全链路图、反例总索引
+- [构造性语义与表达能力边界](../../../../archive/research_notes_2026_06_25/10_language_semantics_expressiveness.md) - 操作/指称/公理语义、表达能力边界论证
+- [全面系统化梳理总览](../../../../archive/research_notes_2026_06_25/10_comprehensive_systematic_overview.md) - 全局一致性、语义归纳、概念族谱、论证缺口追踪
+- [形式化论证系统梳理指南](../../../../archive/research_notes_2026_06_25/10_formal_proof_system_guide.md) - 论证缺口分析、概念-公理-定理映射
 - [知识结构框架](../07_project/07_knowledge_structure_framework.md) - 完整知识结构体系
 - [决策图网](./04_decision_graph_network.md) - 技术选型决策支持
 - [证明图网](./04_proof_graph_network.md) - 形式化证明结构

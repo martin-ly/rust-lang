@@ -106,6 +106,14 @@ def build_report(moved: list[Path], tagged: list[Path]) -> str:
     return "".join(lines)
 
 
+# 即使满足归档条件也保留的入口/导航文件
+RETAIN_PATHS = {
+    RESEARCH_NOTES / "README.md",
+    RESEARCH_NOTES / "INDEX.md",
+    RESEARCH_NOTES / "10_research_notes_organization.md",
+}
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="批量归档 docs/research_notes/ 低价值文件")
     parser.add_argument("--stale-days", type=int, default=150, help="超过多少天未更新视为陈旧（默认 150）")
@@ -120,6 +128,8 @@ def main(argv: list[str] | None = None) -> int:
     candidates_tagged = []
 
     for path in sorted(RESEARCH_NOTES.rglob("*.md")):
+        if path in RETAIN_PATHS:
+            continue
         text = path.read_text(encoding="utf-8", errors="ignore")
         rel = path.relative_to(RESEARCH_NOTES)
         blacklisted = is_blacklisted(rel)

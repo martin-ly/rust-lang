@@ -1219,7 +1219,7 @@ fn pgo_workflow() {
 
 - [所有权模型形式化](../research_notes/formal_methods/10_ownership_model.md)
 - [借用检查器证明](../research_notes/formal_methods/10_borrow_checker_proof.md)
-- [类型系统基础](../research_notes/type_theory/10_type_system_foundations.md)
+- [类型系统基础](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md)
 - 生命周期形式化
 
 ### 📦 推荐工具

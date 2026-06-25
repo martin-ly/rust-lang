@@ -11,7 +11,7 @@
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 >
-> **研究笔记写作最佳实践** → [research_notes/10_best_practices.md](../research_notes/10_best_practices.md)
+> **研究笔记写作最佳实践** → [research_notes/10_best_practices.md](../../archive/research_notes_2026_06_25/10_best_practices.md)
 
 ---
 
@@ -1413,7 +1413,7 @@ println!("运行时长: {:?}", stopped.duration());
 - [Rust 官方文档](https://doc.rust-lang.org/)
 - [Rust API 指南](https://rust-lang.github.io/api-guidelines/)
 - [Rust 性能书](https://nnethercote.github.io/perf-book/)
-- [研究笔记最佳实践](../research_notes/10_best_practices.md) - 研究笔记写作规范
+- [研究笔记最佳实践](../../archive/research_notes_2026_06_25/10_best_practices.md) - 研究笔记写作规范
 
 ### 在线课程 (Coursera)
 

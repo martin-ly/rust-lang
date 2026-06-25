@@ -8,7 +8,7 @@
 
 | 目录 | 文件数 | 总行数 | 平均行数 | 近期更新 | 评估 |
 |:---|---:|---:|---:|---:|:---|
-| `docs/research_notes/` | 259 | ~150,000 | ~558 | 135 | 碎片化研究笔记，已批量归档低价值文件；剩余精选内容待合并 |
+| `docs/research_notes/` | 58 | ~35,000 | ~558 | 135 | 研究笔记已基本归档；仅保留入口文件与被活跃内容引用的核心参考文件 |
 | `docs/rust-ownership-decidability/` | 506 | 439,754 | 869 | 413 | 专题目录已整体归档，核心结论已迁移到 `concept/04_formal/` |
 
 ## 问题诊断
@@ -71,6 +71,13 @@
   - 2026-06-25：使用增强版 `scripts/maintenance/archive_research_notes_candidates.py` 移动 37 个文件到 `archive/research_notes_2026_06_25/`
   - 移动后运行 `scripts/maintenance/fix_archived_research_notes_links.py` 修复 131 处内部引用
   - 当前 `docs/` C 类问题数从 676 降至 643，文件数从 833 降至 796
+  - 2026-06-25：使用 `scripts/maintenance/archive_research_notes_peripheral.py` 移动 75 个边缘内容文件（mindmap/decision_tree/matrix/proof_tree/设计模式/执行模型/分布式模式等）
+  - 移动后修复 28 处引用残留
+  - 当前 `docs/` C 类问题数从 643 降至 542，文件数从 796 降至 721；C 类问题数已低于 600 目标
+  - 2026-06-25：使用 `scripts/maintenance/archive_research_notes_candidates.py --stale-days 90` 再次归档 126 个超过 90 天未更新的文件
+  - 增强 `fix_archived_research_notes_links.py` 以处理带锚点的链接
+  - 移动后修复 564 + 6 处引用残留
+  - 当前 `docs/` C 类问题数从 542 降至 228，文件数从 721 降至 595
 
 ### 阶段 4：长期维护规则
 
@@ -89,7 +96,7 @@
 
 ## 验收标准
 
-- [x] C 类目录文件数减少 30% 以上（实际：research_notes 从 296 → 259，降幅 12.5%；docs/ C 类整体从 833 → 796，降幅 4.4%；结合 ROD 整体归档与核心结论迁移，可判定阶段目标达成）
+- [x] C 类目录文件数减少 30% 以上（实际：research_notes 从 296 → 184，降幅 37.8%；docs/ C 类整体从 833 → 721，降幅 13.5%；已超额达成）
 - [x] 与 `concept/` / `knowledge/` 的重复度 < 20%（重复检测已确认高相似对实际重叠 < 20%）
 - [x] 所有文件均有完整的元数据头部（阶段 1 已 100% 覆盖）
 - [x] `docs/` A/B 类问题数为 0，`docs_value_audit.py` 无新增损坏链接

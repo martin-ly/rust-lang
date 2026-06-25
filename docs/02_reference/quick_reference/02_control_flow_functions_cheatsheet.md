@@ -1081,7 +1081,7 @@ fn main() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [借用检查器证明](../../research_notes/formal_methods/10_borrow_checker_proof.md) — 控制流相关的借用规则证明
-- [Send/Sync 形式化](../../research_notes/formal_methods/10_send_sync_formalization.md) — 闭包在多线程环境下的安全性
+- [Send/Sync 形式化](../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) — 闭包在多线程环境下的安全性
 
 ---
 

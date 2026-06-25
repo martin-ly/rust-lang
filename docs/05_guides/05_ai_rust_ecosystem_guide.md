@@ -64,7 +64,7 @@
 
 本指南涵盖「AI 辅助 Rust 开发」与「用 Rust 构建 AI/ML 应用」两类场景，帮助开发者选择合适工具并规划学习路径。
 
-**形式化引用**：T-OW2、T-TY3、[type_system_foundations](../research_notes/type_theory/10_type_system_foundations.md)（张量泛型、Trait 抽象）。
+**形式化引用**：T-OW2、T-TY3、[type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md)（张量泛型、Trait 抽象）。
 
 ---
 

@@ -252,7 +252,7 @@ mod concurrency_tests {
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
 | 形式化方法概述 | 形式化验证基础理论 | [../../../research_notes/formal_methods/README.md](../../../../archive/research_notes_2026_06_25/formal_methods/README.md) |
-| 类型系统形式化 | 类型理论数学定义 | [../../../research_notes/type_theory/10_type_system_foundations.md](../../../research_notes/type_theory/10_type_system_foundations.md) |
+| 类型系统形式化 | 类型理论数学定义 | [../../../research_notes/type_theory/10_type_system_foundations.md](../../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) |
 | 所有权模型形式化 | 所有权系统数学定义 | [../../../research_notes/formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) |
 | 证明索引 | 形式化证明集合 | [../../../research_notes/10_proof_index.md](../../../../archive/research_notes_2026_06_25/10_proof_index.md) |
 
@@ -264,7 +264,7 @@ mod concurrency_tests {
 | 测试覆盖指南 | 测试覆盖率文档 | [../../../05_guides/05_testing_coverage_guide.md](../../../05_guides/05_testing_coverage_guide.md) |
 | 性能测试报告 | 性能测试指南 | [../../../05_guides/05_performance_testing_report.md](../../../05_guides/05_performance_testing_report.md) |
 | 质量保障指南 | 质量保障体系 | [../../../research_notes/10_quality_checklist.md](../../../../archive/research_notes_2026_06_25/10_quality_checklist.md) |
-| 工具指南 | 验证工具使用 | [../../../research_notes/10_tools_guide.md](../../../research_notes/10_tools_guide.md) |
+| 工具指南 | 验证工具使用 | [../../../research_notes/10_tools_guide.md](../../../../archive/research_notes_2026_06_25/10_tools_guide.md) |
 | 安全分析 | 安全边界分析 | [../../../research_notes/10_safe_unsafe_comprehensive_analysis.md](../../../research_notes/10_safe_unsafe_comprehensive_analysis.md) |
 
 ---

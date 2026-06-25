@@ -194,7 +194,7 @@ impl<T, const N: usize> Array<T, N> {
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
 | 形式化方法概述 | 形式化验证基础理论 | [../../../research_notes/formal_methods/README.md](../../../../archive/research_notes_2026_06_25/formal_methods/README.md) |
-| 类型系统形式化 | 类型理论数学定义 | [../../../research_notes/type_theory/10_type_system_foundations.md](../../../research_notes/type_theory/10_type_system_foundations.md) |
+| 类型系统形式化 | 类型理论数学定义 | [../../../research_notes/type_theory/10_type_system_foundations.md](../../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) |
 | 所有权模型形式化 | 所有权系统数学定义 | [../../../research_notes/formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) |
 | 生命周期形式化 | 生命周期理论证明 | ../../../research_notes/formal_methods/10_lifetime_formalization.md |
 | 借用检查器证明 | 借用检查器形式化 | [../../../research_notes/formal_methods/10_borrow_checker_proof.md](../../../research_notes/formal_methods/10_borrow_checker_proof.md) |
@@ -205,10 +205,10 @@ impl<T, const N: usize> Array<T, N> {
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
 | 编译器特性 | 完整编译器指南 | [../../../06_toolchain/01_compiler_features.md](../../../06_toolchain/01_compiler_features.md) |
-| 编译器优化实验 | 优化分析 | [../../../research_notes/experiments/10_compiler_optimizations.md](../../../research_notes/experiments/10_compiler_optimizations.md) |
-| 研究方法论 | 研究方法指南 | [../../../research_notes/10_research_methodology.md](../../../research_notes/10_research_methodology.md) |
-| 工具指南 | 验证工具使用 | [../../../research_notes/10_tools_guide.md](../../../research_notes/10_tools_guide.md) |
-| 最佳实践 | 工程最佳实践 | [../../../research_notes/10_best_practices.md](../../../research_notes/10_best_practices.md) |
+| 编译器优化实验 | 优化分析 | [../../../research_notes/experiments/10_compiler_optimizations.md](../../../../archive/research_notes_2026_06_25/experiments/10_compiler_optimizations.md) |
+| 研究方法论 | 研究方法指南 | [../../../research_notes/10_research_methodology.md](../../../../archive/research_notes_2026_06_25/10_research_methodology.md) |
+| 工具指南 | 验证工具使用 | [../../../research_notes/10_tools_guide.md](../../../../archive/research_notes_2026_06_25/10_tools_guide.md) |
+| 最佳实践 | 工程最佳实践 | [../../../research_notes/10_best_practices.md](../../../../archive/research_notes_2026_06_25/10_best_practices.md) |
 
 ---
 

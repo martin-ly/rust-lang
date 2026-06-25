@@ -324,7 +324,7 @@
 | 16.1 Using Threads to Run Code Simultaneously | 线程创建、join | [threads_concurrency_cheatsheet](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) § 线程 | 线程池实现 |
 | 16.2 Transfer Data Between Threads with Message Passing | Channel | [threads_concurrency_cheatsheet](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) § Channel | async-channel |
 | 16.3 Shared-State Concurrency | Mutex、Arc | [threads_concurrency_cheatsheet](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) § 同步原语 | 锁粒度优化 |
-| 16.4 Extensible Concurrency with Send and Sync | Send、Sync | [send_sync_formalization](../research_notes/formal_methods/10_send_sync_formalization.md) | 形式化证明 |
+| 16.4 Extensible Concurrency with Send and Sync | Send、Sync | [send_sync_formalization](../../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | 形式化证明 |
 
 #### 第17章：Asynchronous Programming
 
@@ -337,7 +337,7 @@
 | 17.3 Working With Any Number of Futures | 动态 Future | [async_patterns](../02_reference/quick_reference/02_async_patterns.md) § Stream | FuturesUnordered |
 | 17.4 Streams: Futures in Sequence | Stream | [async_patterns](../02_reference/quick_reference/02_async_patterns.md) § Stream | 背压处理 |
 | 17.5 A Closer Look at the Traits for Async | Async Traits | [async_patterns](../02_reference/quick_reference/02_async_patterns.md) § Traits | RPITIT 详解 |
-| 17.6 Futures, Tasks, and Threads | 运行时对比 | [async_state_machine](../research_notes/formal_methods/10_async_state_machine.md) | 调度器原理 |
+| 17.6 Futures, Tasks, and Threads | 运行时对比 | [async_state_machine](../../../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) | 调度器原理 |
 
 #### 第18章：Object Oriented Programming Features
 
@@ -403,7 +403,7 @@
 | **9. Patterns** | 模式 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) § 模式 | 穷尽性分析 |
 | **10. Type System** | 类型系统 | [type_system](../02_reference/quick_reference/02_type_system.md) | 型变理论 |
 | **10.5 Subtyping and Variance** | 子类型与型变 | [variance_theory](../research_notes/type_theory/10_variance_theory.md) | 形式化证明 |
-| **11. Special Types and Traits** | 特殊类型和 Trait | [send_sync_formalization](../research_notes/formal_methods/10_send_sync_formalization.md) | Send/Sync 形式化 |
+| **11. Special Types and Traits** | 特殊类型和 Trait | [send_sync_formalization](../../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | Send/Sync 形式化 |
 | **13. Memory Model** | 内存模型 | [ownership_model](../research_notes/formal_methods/10_ownership_model.md) | 所有权证明 |
 | **17. Unsafety** | Unsafe | [UNSAFE_RUST_GUIDE](../05_guides/05_unsafe_rust_guide.md) | UB 完整列表 |
 
@@ -465,9 +465,9 @@
 | 补充内容 | 位置 | 说明 |
 |---------|------|------|
 | **型变理论形式化** | [variance_theory](../research_notes/type_theory/10_variance_theory.md) | 官方仅提及概念，无理论深度 |
-| **Send/Sync 形式化证明** | [send_sync_formalization](../research_notes/formal_methods/10_send_sync_formalization.md) | 官方仅定义 trait，无证明 |
+| **Send/Sync 形式化证明** | [send_sync_formalization](../../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | 官方仅定义 trait，无证明 |
 | **借用检查器内部机制** | [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) | 官方无实现细节 |
-| **异步状态机形式化** | [async_state_machine](../research_notes/formal_methods/10_async_state_machine.md) | 官方无形式化模型 |
+| **异步状态机形式化** | [async_state_machine](../../../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) | 官方无形式化模型 |
 | **宏系统决策树** | macros_cheatsheet | 官方为参考文档 |
 | **错误传播转换树** | [THINKING_REPRESENTATION_METHODS](../04_thinking/04_thinking_representation_methods.md) | 官方为教程式讲解 |
 | **版本兼容性深度分析** | [09_rust_1.93_compatibility_deep_dive](../06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md) | 官方仅列变更 |
@@ -536,8 +536,8 @@
 |------|---------|-----------|------|
 | **阶段1: 形式化基础** | Reference Type System | [variance_theory](../research_notes/type_theory/10_variance_theory.md) | 理解型变理论 |
 | **阶段2: 所有权证明** | Reference Memory Model | [ownership_model](../research_notes/formal_methods/10_ownership_model.md) | 形式化所有权 |
-| **阶段3: 并发安全证明** | Reference Send/Sync | [send_sync_formalization](../research_notes/formal_methods/10_send_sync_formalization.md) | 数据竞争自由证明 |
-| **阶段4: 异步形式化** | Reference Coroutines | [async_state_machine](../research_notes/formal_methods/10_async_state_machine.md) | 状态机语义 |
+| **阶段3: 并发安全证明** | Reference Send/Sync | [send_sync_formalization](../../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | 数据竞争自由证明 |
+| **阶段4: 异步形式化** | Reference Coroutines | [async_state_machine](../../../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) | 状态机语义 |
 | **阶段5: Unsafe 深入** | Reference Unsafety | [UNSAFE_RUST_GUIDE](../05_guides/05_unsafe_rust_guide.md) + [Rustonomicon](https://doc.rust-lang.org/nomicon/) | UB 边界掌握 |
 | **阶段6: 编译器研究** | [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/) | [PROOF_INDEX](../../../../archive/research_notes_2026_06_25/10_proof_index.md) | 贡献 Rust 编译器 |
 
@@ -559,8 +559,8 @@
 | **类型系统** | Book Ch 3.2, 10 | [type_system](../02_reference/quick_reference/02_type_system.md) | [PROOF_INDEX](../../../../archive/research_notes_2026_06_25/10_proof_index.md) |
 | **Trait** | Book Ch 10.2 | [type_system](../02_reference/quick_reference/02_type_system.md) § Traits | - |
 | **泛型** | Book Ch 10.1 | [generics_cheatsheet](../02_reference/quick_reference/02_generics_cheatsheet.md) | - |
-| **并发** | Book Ch 16 | [threads_concurrency_cheatsheet](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) | [send_sync_formalization](../research_notes/formal_methods/10_send_sync_formalization.md) |
-| **异步** | Book Ch 17 | [async_patterns](../02_reference/quick_reference/02_async_patterns.md) | [async_state_machine](../research_notes/formal_methods/10_async_state_machine.md) |
+| **并发** | Book Ch 16 | [threads_concurrency_cheatsheet](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) | [send_sync_formalization](../../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) |
+| **异步** | Book Ch 17 | [async_patterns](../02_reference/quick_reference/02_async_patterns.md) | [async_state_machine](../../../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) |
 | **错误处理** | Book Ch 9 | [error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) | - |
 | **宏** | Book Ch 20.5 | macros_cheatsheet | - |
 | **Unsafe** | Book Ch 20.1 | [UNSAFE_RUST_GUIDE](../05_guides/05_unsafe_rust_guide.md) | - |
@@ -813,9 +813,9 @@
 
 | 资源 | 说明 | 形式化链接 |
 | :--- | :--- | :--- |
-| [FORMAL_PROOF_SYSTEM_GUIDE](../research_notes/10_formal_proof_system_guide.md) | 批判性分析与推进计划 | [formal_methods/README](../../../../archive/research_notes_2026_06_25/formal_methods/README.md) |
+| [FORMAL_PROOF_SYSTEM_GUIDE](../../../../archive/research_notes_2026_06_25/10_formal_proof_system_guide.md) | 批判性分析与推进计划 | [formal_methods/README](../../../../archive/research_notes_2026_06_25/formal_methods/README.md) |
 | [CORE_THEOREMS_FULL_PROOFS](../../../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) | 核心定理完整证明（L2） | [ownership_model](../research_notes/formal_methods/10_ownership_model.md)、[borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) |
-| [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../research_notes/10_international_formal_verification_index.md) | 国际对标 | [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)、[Ferrocene FLS](https://spec.ferrocene.dev/) |
+| [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../../archive/research_notes_2026_06_25/10_international_formal_verification_index.md) | 国际对标 | [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)、[Ferrocene FLS](https://spec.ferrocene.dev/) |
 
 ### 官方形式化资源映射
 >
@@ -827,7 +827,7 @@
 | [Ferrocene FLS - Ch.15 Ownership](https://spec.ferrocene.dev/ownership-and-deconstruction.html) | [ownership_model](../research_notes/formal_methods/10_ownership_model.md) |
 | [Ferrocene FLS - Ch.15 Borrowing](https://spec.ferrocene.dev/ownership-and-deconstruction.html#borrowing) | [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) |
 | [Ferrocene FLS - Ch.16 Exceptions](https://spec.ferrocene.dev/exceptions-and-errors.html) | [error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) |
-| [Ferrocene FLS - Ch.17 Concurrency](https://spec.ferrocene.dev/concurrency.html) | [send_sync_formalization](../research_notes/formal_methods/10_send_sync_formalization.md)、[async_state_machine](../research_notes/formal_methods/10_async_state_machine.md) |
+| [Ferrocene FLS - Ch.17 Concurrency](https://spec.ferrocene.dev/concurrency.html) | [send_sync_formalization](../../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md)、[async_state_machine](../../../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) |
 | [Ferrocene FLS - Ch.19 Unsafety](https://spec.ferrocene.dev/unsafety.html) | [UNSAFE_RUST_GUIDE](../05_guides/05_unsafe_rust_guide.md) |
 | [Ferrocene FLS - Ch.21 FFI](https://spec.ferrocene.dev/ffi.html) | [UNSAFE_RUST_GUIDE](../05_guides/05_unsafe_rust_guide.md) § FFI |
 | [Ferrocene FLS - Appendix C UB](https://spec.ferrocene.dev/undefined-behavior.html) | [EDGE_CASES_AND_SPECIAL_CASES](../02_reference/02_edge_cases_and_special_cases.md) |

@@ -1057,8 +1057,8 @@ mindmap
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [10_proof_index.md](../../archive/research_notes_2026_06_25/10_proof_index.md) - 形式化证明索引
-- [10_language_semantics_expressiveness.md](../research_notes/10_language_semantics_expressiveness.md) - 语言语义与表达能力
-- [10_theoretical_and_argumentation_system_architecture.md](../research_notes/10_theoretical_and_argumentation_system_architecture.md) - 理论体系架构
+- [10_language_semantics_expressiveness.md](../../archive/research_notes_2026_06_25/10_language_semantics_expressiveness.md) - 语言语义与表达能力
+- [10_theoretical_and_argumentation_system_architecture.md](../../archive/research_notes_2026_06_25/10_theoretical_and_argumentation_system_architecture.md) - 理论体系架构
 
 ### 相关文档
 >

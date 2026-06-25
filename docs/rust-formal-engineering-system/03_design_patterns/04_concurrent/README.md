@@ -462,9 +462,9 @@ async fn weighted_semaphore() {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 并发执行模型 | 并发模型理论 | [../../../research_notes/software_design_theory/03_execution_models/03_concurrent.md](../../../research_notes/software_design_theory/03_execution_models/03_concurrent.md) |
-| 并行执行模型 | 并行模型理论 | [../../../research_notes/software_design_theory/03_execution_models/04_parallel.md](../../../research_notes/software_design_theory/03_execution_models/04_parallel.md) |
-| 边界矩阵 | 并发安全边界 | [../../../research_notes/software_design_theory/01_design_patterns_formal/04_boundary_matrix.md](../../../research_notes/software_design_theory/01_design_patterns_formal/04_boundary_matrix.md) |
+| 并发执行模型 | 并发模型理论 | [../../../research_notes/software_design_theory/03_execution_models/03_concurrent.md](../../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/03_concurrent.md) |
+| 并行执行模型 | 并行模型理论 | [../../../research_notes/software_design_theory/03_execution_models/04_parallel.md](../../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/04_parallel.md) |
+| 边界矩阵 | 并发安全边界 | [../../../research_notes/software_design_theory/01_design_patterns_formal/04_boundary_matrix.md](../../../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/04_boundary_matrix.md) |
 
 ### 形式化方法
 
@@ -474,7 +474,7 @@ async fn weighted_semaphore() {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| Send/Sync 形式化 | 线程安全形式化 | [../../../research_notes/formal_methods/10_send_sync_formalization.md](../../../research_notes/formal_methods/10_send_sync_formalization.md) |
+| Send/Sync 形式化 | 线程安全形式化 | [../../../research_notes/formal_methods/10_send_sync_formalization.md](../../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) |
 | 所有权模型 | 所有权与并发 | [../../../research_notes/formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) |
 
 ### 实验分析
@@ -483,7 +483,7 @@ async fn weighted_semaphore() {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 并发性能 | 并发性能测试 | [../../../research_notes/experiments/10_concurrency_performance.md](../../../research_notes/experiments/10_concurrency_performance.md) |
+| 并发性能 | 并发性能测试 | [../../../research_notes/experiments/10_concurrency_performance.md](../../../../archive/research_notes_2026_06_25/experiments/10_concurrency_performance.md) |
 
 ---
 

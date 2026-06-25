@@ -148,7 +148,10 @@
 
 ## 00. 执行摘要与对称差总览
 >
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Programming Language Features](https://en.wikipedia.org/wiki/Programming_Language_Features)** · **来源: [Wikipedia - Language Evolution](https://en.wikipedia.org/wiki/Language_Evolution)** · **[来源: ACM - Language Feature Taxonomy]** · **[来源: IEEE - Language Standardization]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
+> **来源: [Wikipedia - Programming Language Features](https://en.wikipedia.org/wiki/Programming_Language_Features)** ·
+> **来源: [Wikipedia - Language Evolution](https://en.wikipedia.org/wiki/Language_Evolution)** ·
+> **[来源: ACM - Language Feature Taxonomy]** · **[来源: IEEE - Language Standardization]**
 
 ### 00.1 分析方法论
 

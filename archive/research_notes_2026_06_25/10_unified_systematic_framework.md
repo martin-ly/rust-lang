@@ -366,11 +366,11 @@
 | Pin | 移动未 Pin 自引用 | 位置稳定 | [pin_self_referential](formal_methods/10_pin_self_referential.md) |
 | Trait | 对象安全违规 | vtable 约束 | [trait_system_formalization](type_theory/10_trait_system_formalization.md) |
 | 类型系统 | 类型不匹配 | 类型安全 | [type_system_foundations](type_theory/10_type_system_foundations.md) |
-| 设计模式 | Singleton 全局可变未同步 | 数据竞争 | [singleton](software_design_theory/01_design_patterns_formal/01_creational/10_singleton.md) |
-| 设计模式 | Observer 共享可变无 Mutex | 数据竞争 | [observer](software_design_theory/01_design_patterns_formal/03_behavioral/10_observer.md) |
-| 设计模式 | Composite 循环引用 | 所有权无法表达 | [composite](software_design_theory/01_design_patterns_formal/02_structural/10_composite.md) |
-| 设计模式 | Builder 必填未设 | 不变式违反 | [builder](software_design_theory/01_design_patterns_formal/01_creational/10_builder.md) |
-| 设计模式 | Memento 恢复非法状态 | 不变式违反 | [memento](software_design_theory/01_design_patterns_formal/03_behavioral/10_memento.md) |
+| 设计模式 | Singleton 全局可变未同步 | 数据竞争 | [singleton](../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/01_creational/10_singleton.md) |
+| 设计模式 | Observer 共享可变无 Mutex | 数据竞争 | [observer](../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/03_behavioral/10_observer.md) |
+| 设计模式 | Composite 循环引用 | 所有权无法表达 | [composite](../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/02_structural/10_composite.md) |
+| 设计模式 | Builder 必填未设 | 不变式违反 | [builder](../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/01_creational/10_builder.md) |
+| 设计模式 | Memento 恢复非法状态 | 不变式违反 | [memento](../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/03_behavioral/10_memento.md) |
 
 ---
 

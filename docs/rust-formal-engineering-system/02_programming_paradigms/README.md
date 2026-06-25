@@ -11,9 +11,9 @@
 
 | 主题 | 链接 |
 | :--- | :--- |
-| 执行模型 | [software_design_theory/03_execution_models/](../../research_notes/software_design_theory/03_execution_models/README.md) |
-| 异步编程 | [formal_methods/10_async_state_machine.md](../../research_notes/formal_methods/10_async_state_machine.md) |
-| 并发模型 | [formal_methods/10_send_sync_formalization.md](../../research_notes/formal_methods/10_send_sync_formalization.md) |
+| 执行模型 | [software_design_theory/03_execution_models/](../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/README.md) |
+| 异步编程 | [formal_methods/10_async_state_machine.md](../../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) |
+| 并发模型 | [formal_methods/10_send_sync_formalization.md](../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) |
 
 ---
 

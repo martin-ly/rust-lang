@@ -53,10 +53,10 @@
 | **02 所有权系统** | [research_notes/formal_methods/10_ownership_model.md](../research_notes/formal_methods/10_ownership_model.md) | 所有权形式化模型 |
 | **03 所有权与借用** | [research_notes/formal_methods/](../../archive/research_notes_2026_06_25/formal_methods/README.md) | 借用检查器、所有权、生命周期 |
 | **02 内存安全** | [research_notes/formal_methods/10_borrow_checker_proof.md](../research_notes/formal_methods/10_borrow_checker_proof.md) | 借用检查器与内存安全 |
-| **05 Trait 系统** | [research_notes/type_theory/10_trait_system_formalization.md](../research_notes/type_theory/10_trait_system_formalization.md) | Trait 形式化 |
+| **05 Trait 系统** | [research_notes/type_theory/10_trait_system_formalization.md](../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md) | Trait 形式化 |
 | **06 生命周期管理** | research_notes/formal_methods/10_lifetime_formalization.md | 生命周期形式化 |
 | **08 宏系统** | [crates/c11_macro_system/docs/](../../crates/c11_macro_system/docs/README.md) | 宏系统文档 |
-| **09 形式化验证** | [research_notes/10_tools_guide.md](../research_notes/10_tools_guide.md) | Prusti、Kani、Creusot |
+| **09 形式化验证** | [research_notes/10_tools_guide.md](../../archive/research_notes_2026_06_25/10_tools_guide.md) | Prusti、Kani、Creusot |
 | **10 数学基础** | [research_notes/type_theory/](../research_notes/type_theory/README.md) | 类型理论与数学基础 |
 
 ### 类型系统子路径
@@ -79,7 +79,7 @@
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **02 异步编程** | [crates/c06_async/](../../crates/c06_async/README.md) | 异步、Future、async/await |
 | **09 Actor 模型** | [crates/c05_threads/docs/](../../crates/c05_threads/docs/README.md)、[crates/c06_async/docs/](../../crates/c06_async/docs/README.md) | 消息传递与 Actor |
-| **11 基准指南** | [research_notes/experiments/10_performance_benchmarks.md](../research_notes/experiments/10_performance_benchmarks.md) | 性能基准 |
+| **11 基准指南** | [research_notes/experiments/10_performance_benchmarks.md](../../archive/research_notes_2026_06_25/experiments/10_performance_benchmarks.md) | 性能基准 |
 
 ---
 

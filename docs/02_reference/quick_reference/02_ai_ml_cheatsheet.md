@@ -438,8 +438,8 @@ async fn stream_generate<B: Backend>(
 | 概念 | 形式化文档 | 描述 |
 | :--- | :--- | :--- |
 | **所有权与内存安全** | [ownership_model](../../research_notes/formal_methods/10_ownership_model.md) | 张量内存管理的形式化保证 |
-| **类型系统** | [type_system_foundations](../../research_notes/type_theory/10_type_system_foundations.md) | 泛型张量的类型安全 |
-| **Send/Sync** | [send_sync_formalization](../../research_notes/formal_methods/10_send_sync_formalization.md) | 多线程训练的安全性 |
+| **类型系统** | [type_system_foundations](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) | 泛型张量的类型安全 |
+| **Send/Sync** | [send_sync_formalization](../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | 多线程训练的安全性 |
 | **生命周期** | lifetime_formalization | 模型引用有效性 |
 
 ### 形式化定理

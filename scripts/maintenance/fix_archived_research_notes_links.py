@@ -37,19 +37,25 @@ def fix_file(md: Path) -> int:
         if re.match(r"^(https?://|mailto:|#|/)", target):
             continue
 
-        suffix = archived_suffix(target)
+        # Preserve anchor for the final link, but strip it when looking up archive
+        bare_target, anchor = target, ""
+        if "#" in bare_target and not bare_target.startswith("#"):
+            bare_target, anchor = bare_target.split("#", 1)
+            anchor = "#" + anchor
+
+        suffix = archived_suffix(bare_target)
         if not suffix:
-            if source_in_research_notes and not target.startswith("../"):
+            if source_in_research_notes and not bare_target.startswith("../"):
                 # Targets like ./10_proof_index.md or formal_methods/00_completeness_gaps.md
-                suffix = target.lstrip("./")
+                suffix = bare_target.lstrip("./")
             else:
                 continue
 
-        original = (md.parent / target).resolve()
+        original = (md.parent / bare_target).resolve()
         archived = (ARCHIVE_DIR / suffix).resolve()
 
         if archived.exists() and not original.exists():
-            rel = Path(os.path.relpath(archived, md.parent)).as_posix()
+            rel = Path(os.path.relpath(archived, md.parent)).as_posix() + anchor
             # Replace only this specific occurrence to avoid collisions
             old_link = f"[{text}]({target})"
             new_link = f"[{text}]({rel})"

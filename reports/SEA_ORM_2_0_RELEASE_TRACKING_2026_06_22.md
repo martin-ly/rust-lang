@@ -1,6 +1,6 @@
 # Sea-ORM 2.0 Stable 发布跟踪
 
-> **跟踪日期**: 2026-06-22
+> **跟踪日期**: 2026-06-25
 > **当前 workspace 版本**: `2.0.0-rc.41`
 > **目标版本**: `2.0.0` stable
 > **状态**: ⏳ 等待上游发布
@@ -13,6 +13,7 @@
 |:---|:---|:---|
 | 2026-06-19 | `2.0.0-rc.40` | 等待 stable |
 | 2026-06-22 | `2.0.0-rc.41` | 已升级至 rc.41，继续等待 stable |
+| 2026-06-25 | `2.0.0-rc.41` | 上游仍未发布 stable，继续跟踪 |
 
 ---
 
@@ -36,7 +37,7 @@ sea-orm = { version = "2.0.0-rc.41", features = [
 
 Sea-ORM 2.0 仍处于 release candidate 阶段，上游尚未发布 `2.0.0` stable。继续跟踪 crates.io 和 [Sea-ORM GitHub Releases](https://github.com/SeaQL/sea-orm/releases)。
 
-> **注意**: 网络上部分第三方文章声称 Sea-ORM 2.0 已于 2026-01 发布，但 crates.io 索引与 `cargo search sea-orm` 截至 2026-06-22 仍返回 `2.0.0-rc.41`。本项目以 crates.io 官方索引为最终依据，暂不升级。
+> **注意**: 网络上部分第三方文章声称 Sea-ORM 2.0 已于 2026-01 发布，但 crates.io 索引与 `cargo search sea-orm` 截至 2026-06-25 仍返回 `2.0.0-rc.41`。本项目以 crates.io 官方索引为最终依据，暂不升级。
 
 ---
 

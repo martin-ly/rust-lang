@@ -239,7 +239,7 @@ fn prevent_use_after_free() {
 | 所有权模型 | 所有权系统的形式化模型 | [../../../research_notes/formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) |
 | 安全/非安全分析 | unsafe Rust 的边界分析 | [../../../research_notes/10_safe_unsafe_comprehensive_analysis.md](../../../research_notes/10_safe_unsafe_comprehensive_analysis.md) |
 | 证明索引 | 内存安全相关证明 | [../../../research_notes/10_proof_index.md](../../../../archive/research_notes_2026_06_25/10_proof_index.md) |
-| 工具指南 | 内存安全验证工具 | [../../../research_notes/10_tools_guide.md](../../../research_notes/10_tools_guide.md) |
+| 工具指南 | 内存安全验证工具 | [../../../research_notes/10_tools_guide.md](../../../../archive/research_notes_2026_06_25/10_tools_guide.md) |
 
 ---
 

@@ -1123,10 +1123,10 @@ fn process_logs(logs: &[LogEntry]) -> String {
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [类型系统基础](../../research_notes/type_theory/10_type_system_foundations.md) — 字符串类型与类型理论
+- [类型系统基础](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) — 字符串类型与类型理论
 - [所有权模型](../../research_notes/formal_methods/10_ownership_model.md) — 字符串所有权转移形式化
 - 生命周期形式化 — 字符串生命周期
-- [构造能力理论](../../research_notes/type_theory/10_construction_capability.md) — 字符串操作表达能力
+- [构造能力理论](../../../archive/research_notes_2026_06_25/type_theory/10_construction_capability.md) — 字符串操作表达能力
 
 ### 相关速查卡
 >

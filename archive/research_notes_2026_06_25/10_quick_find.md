@@ -154,7 +154,7 @@
 | 组件成熟度 | [04_compositional_engineering](./software_design_theory/04_compositional_engineering/README.md) | ✅ Def CE-MAT1、L1–L4 |
 | 并发安全    | [异步状态机形式化](./formal_methods/10_async_state_machine.md) | ✅ 100% |
 | Send/Sync   | [Send/Sync 形式化](./formal_methods/10_send_sync_formalization.md)、[异步状态机形式化](./formal_methods/10_async_state_machine.md)、[设计机制论证](./10_design_mechanism_rationale.md) §Send/Sync | ✅ Def SEND1/SYNC1、SEND-T1/SYNC-T1；六篇并表 |
-| 安全可判定机制 | [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./10_safe_decidable_mechanisms_overview.md)、[SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](./formal_methods/10_safe_decidable_mechanisms_and_formal_methods_plan.md) | ✅ 总览每机制一节；并发+Trait 族四维表；阶段 A–D 已完成 |
+| 安全可判定机制 | [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./10_safe_decidable_mechanisms_overview.md)、[SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](../../archive/research_notes_2026_06_25/formal_methods/10_safe_decidable_mechanisms_and_formal_methods_plan.md) | ✅ 总览每机制一节；并发+Trait 族四维表；阶段 A–D 已完成 |
 | formal_methods 完备性 | [FORMAL_METHODS_COMPLETENESS_CHECKLIST](../../archive/research_notes_2026_06_25/formal_methods/10_formal_methods_completeness_checklist.md) | ✅ 六篇×六维自检（概念定义、属性关系、解释论证、形式证明、反例、思维表征四类） |
 
 ### 性能优化

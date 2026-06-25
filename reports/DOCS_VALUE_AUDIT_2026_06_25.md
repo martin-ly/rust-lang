@@ -2,7 +2,7 @@
 
 - **审计时间**: 2026-06-25
 - **当前 Rust 版本**: 1.96.0
-- **扫描文件数**: 971
+- **扫描文件数**: 770
 
 ## 文件分类统计
 
@@ -10,267 +10,16 @@
 |:---|:---:|:---:|:---|
 | A (核心参考) | 48 | 0 | 速查表、学习路径、核心参考 |
 | B (指南工具) | 127 | 0 | 指南、工具链、实践文档 |
-| C (研究综述) | 796 | 643 | 研究笔记、思考记录、大型专项 |
+| C (研究综述) | 595 | 228 | 研究笔记、思考记录、大型专项 |
 
 ## 详细问题列表
 
-### docs\research_notes\10_00_organization_and_navigation.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_application_trees.md
-
-- ⚠️ 最后更新: 2026-03-10（107 天前，建议复审）
-### docs\research_notes\10_argumentation_chain_and_flow.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_argumentation_gap_index.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_authoritative_alignment_guide.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_authoritative_alignment_status.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_authoritative_content_alignment_report.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\10_best_practices.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_changelog.md
-
-- ⚠️ 损坏链接: [formal_methods/README §formal_methods 六篇并表](formal_methods/README.md#formal_methods-六篇并表)
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_classification.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\10_code_doc_formal_mapping.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_comprehensive_project_report.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\10_comprehensive_systematic_overview.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_concept_axiom_theorem_matrix.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\10_concept_comparison_tables.md
-
-- ⚠️ 最后更新: 2026-02-24（121 天前，建议复审）
-### docs\research_notes\10_concept_hierarchy_framework.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_concept_relationship_network.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_concurrency_cheatsheet.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\10_const_eval_formalization.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\10_content_enhancement.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\10_core_features_full_chain.md
-
-- ⚠️ 损坏链接: [formal_methods/README §六篇并表](formal_methods/README.md#formal_methods-六篇并表)
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\10_core_theorems_en_summary.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\10_counter_examples_compendium.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\10_cross_reference_index.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\10_design_mechanism_rationale.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\10_distributed_architecture_decision_tree.md
-
-- ⚠️ 最后更新: 2026-03-08（109 天前，建议复审）
-### docs\research_notes\10_distributed_concept_mindmap.md
-
-- ⚠️ 最后更新: 2026-03-12（105 天前，建议复审）
-### docs\research_notes\10_distributed_pattern_matrix.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\10_distributed_patterns_matrix.md
-
-- ⚠️ 最后更新: 2026-03-12（105 天前，建议复审）
-### docs\research_notes\10_domain_analysis_framework.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_error_handling_cheatsheet.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\10_executable_semantics_roadmap.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_faq.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_formal_full_model_en_summary.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_formal_full_model_overview.md
-
-- ⚠️ 损坏链接: [formal_methods/README](./formal_methods/README.md#控制流形式化)
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_formal_language_and_proofs.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_formal_proof_critical_analysis_and_plan_2026_02.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\10_formal_proof_system_guide.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_glossary.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_incremental_update_flow.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_international_formal_verification_index.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\10_interview_questions_collection.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\10_l3_machine_proof_guide.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_language_semantics_expressiveness.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\10_learning_path_comprehensive.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\10_lifetime_cheatsheet.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\10_macros_cheatsheet.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_practical_applications.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_proof_techniques_mindmap.md
-
-- ⚠️ 最后更新: 2026-03-12（105 天前，建议复审）
-### docs\research_notes\10_proof_tree_borrow.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\10_proof_tree_ownership.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\10_proof_tree_type_safety.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\10_quick_find.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_research_methodology.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
 ### docs\research_notes\10_research_notes_organization.md
 
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_research_roadmap.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_resources.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_rust_book_alignment.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\10_rust_formal_methods_cheatsheet.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_rustbelt_alignment.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_rustsem_semantics.md
-
-- ⚠️ 最后更新: 2026-03-10（107 天前，建议复审）
-### docs\research_notes\10_safe_decidable_mechanisms_overview.md
-
-- ⚠️ 损坏链接: [formal_methods README §六篇并表](formal_methods/README.md#formal_methods-六篇并表)
 - ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
 ### docs\research_notes\10_safe_unsafe_comprehensive_analysis.md
 
 - ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_system_integration.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_system_summary.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_theoretical_and_argumentation_system_architecture.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_tools_guide.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_tutorial_borrow_checker.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_tutorial_concurrency_models.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_tutorial_lifetimes.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\10_tutorial_ownership_safety.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_tutorial_type_system.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_unified_systematic_framework.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\10_user_guide.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\10_verification_tools_decision_tree.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\10_verification_tools_matrix.md
-
-- ⚠️ 最后更新: 2026-03-12（105 天前，建议复审）
-### docs\research_notes\10_visualization_index.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\10_workflow_concept_mindmap.md
-
-- ⚠️ 最后更新: 2026-03-12（105 天前，建议复审）
-### docs\research_notes\10_workflow_engine_matrix.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
 ### docs\research_notes\INDEX.md
 
 - ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
@@ -278,566 +27,29 @@
 
 - ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
 - ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\experiments\10_compiler_optimizations.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\experiments\10_concurrency_performance.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\experiments\10_macro_expansion_performance.md
-
-- ⚠️ 损坏链接: [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../10_rust_193_language_features_comprehensive_analysis.md)
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\experiments\10_memory_analysis.md
-
-- ⚠️ 损坏链接: [formal_methods/README](../formal_methods/README.md)
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\experiments\10_performance_benchmarks.md
-
-- ⚠️ 损坏链接: [../10_core_theorems_full_proofs.md](../10_core_theorems_full_proofs.md)
-- ⚠️ 损坏链接: [../10_proof_index.md](../10_proof_index.md)
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\experiments\README.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\formal_methods\10_algorithm_selection_decision_tree.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-03-15（102 天前，建议复审）
-### docs\research_notes\formal_methods\10_async_concept_mindmap.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\formal_methods\10_async_state_machine.md
-
-- ⚠️ 损坏链接: [HIERARCHICAL_MAPPING_AND_SUMMARY](../10_hierarchical_mapping_and_summary.md)
-- ⚠️ 损坏链接: [README §formal_methods 六篇并表](README.md#formal_methods-六篇并表)
-- ⚠️ 损坏链接: [README §六篇并表](README.md#formal_methods-六篇并表)
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\formal_methods\10_axiomatic_semantics.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
 ### docs\research_notes\formal_methods\10_borrow_checker_proof.md
 
 - ⚠️ 损坏链接: [HIERARCHICAL_MAPPING_AND_SUMMARY](../10_hierarchical_mapping_and_summary.md)
 - ⚠️ 损坏链接: [README §formal_methods 六篇并表](README.md#formal_methods-六篇并表)
 - ⚠️ 损坏链接: [README §六篇并表](README.md#formal_methods-六篇并表)
+- ⚠️ 损坏链接: [send_sync_formalization](./10_send_sync_formalization.md)
+- ⚠️ 损坏链接: [send_sync_formalization](./10_send_sync_formalization.md)
+- ⚠️ 损坏链接: [type_system_foundations](../type_theory/10_type_system_foundations.md)
 - ⚠️ 最后更新: 2026-02-27（118 天前，建议复审）
-### docs\research_notes\formal_methods\10_case_studies.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\formal_methods\10_concurrency_safety_matrix.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\formal_methods\10_control_flow_decision_tree.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-03-15（102 天前，建议复审）
-### docs\research_notes\formal_methods\10_coq_formalization_guide.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\formal_methods\10_coq_formalization_matrix.md
-
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\formal_methods\10_design_pattern_concept_mindmap.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-02-26（119 天前，建议复审）
-### docs\research_notes\formal_methods\10_design_pattern_selection_decision_tree.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\formal_methods\10_error_handling_decision_tree.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\formal_methods\10_error_handling_mindmap.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\formal_methods\10_error_type_selection_decision_tree.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\formal_methods\10_five_dimensional_concept_matrix.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\formal_methods\10_formal_foundations_index.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\formal_methods\10_formal_methods_100_percent_completion_report.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\formal_methods\10_formal_methods_comparison.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\formal_methods\10_formal_methods_completion_plan.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\formal_methods\10_generics_traits_mindmap.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\formal_methods\10_implementation_progress_matrix.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\formal_methods\10_learning_progression_matrix.md
-
-- ⚠️ 损坏链接: [CONCURRENCY_CONCEPT_MINDMAP](./10_concurrency_concept_mindmap.md)
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\formal_methods\10_logical_foundations.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\formal_methods\10_macro_hygiene_deep_dive.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\formal_methods\10_macro_system_mindmap.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\formal_methods\10_memory_model_mindmap.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\formal_methods\10_operational_semantics.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
 ### docs\research_notes\formal_methods\10_ownership_model.md
 
+- ⚠️ 损坏链接: [10_pin_self_referential.md](./10_pin_self_referential.md)
+- ⚠️ 损坏链接: [10_send_sync_formalization.md](./10_send_sync_formalization.md)
+- ⚠️ 损坏链接: [10_send_sync_formalization.md](./10_send_sync_formalization.md)
+- ⚠️ 损坏链接: [10_send_sync_formalization.md](./10_send_sync_formalization.md)
 - ⚠️ 损坏链接: [HIERARCHICAL_MAPPING_AND_SUMMARY](../10_hierarchical_mapping_and_summary.md)
 - ⚠️ 损坏链接: [PROOF_INDEX](../10_proof_index.md)
 - ⚠️ 损坏链接: [README §formal_methods 六篇并表](README.md#formal_methods-六篇并表)
 - ⚠️ 损坏链接: [README §六篇并表](README.md#formal_methods-六篇并表)
 - ⚠️ 最后更新: 2026-03-11（106 天前，建议复审）
-### docs\research_notes\formal_methods\10_ownership_transfer_decision_tree.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\formal_methods\10_paradigm_comparison_matrix.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\formal_methods\10_pin_self_referential.md
-
-- ⚠️ 损坏链接: [HIERARCHICAL_MAPPING_AND_SUMMARY](../10_hierarchical_mapping_and_summary.md)
-- ⚠️ 损坏链接: [README §formal_methods 六篇并表](README.md#formal_methods-六篇并表)
-- ⚠️ 损坏链接: [README §六篇并表](README.md#formal_methods-六篇并表)
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\formal_methods\10_process_management_decision_tree.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-03-15（102 天前，建议复审）
-### docs\research_notes\formal_methods\10_proof_completion_matrix.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-27（118 天前，建议复审）
-### docs\research_notes\formal_methods\10_proof_strategies.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\formal_methods\10_proof_tree_async_concurrency.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\formal_methods\10_proof_tree_send_sync.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\formal_methods\10_proof_tree_variance.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\formal_methods\10_proof_trees_additional.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\formal_methods\10_proof_trees_enhanced.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-03-05（112 天前，建议复审）
-### docs\research_notes\formal_methods\10_proof_trees_visual_completion.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\formal_methods\10_proof_trees_visualization.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\formal_methods\10_reference_cycles_formalization.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\formal_methods\10_risk_assessment_matrix.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\formal_methods\10_safe_decidable_mechanisms_and_formal_methods_plan.md
-
-- ⚠️ 损坏链接: [00_completeness_gaps](./00_completeness_gaps.md)
-- ⚠️ 损坏链接: [00_completeness_gaps](./00_completeness_gaps.md)
-- ⚠️ 损坏链接: [00_completeness_gaps](./00_completeness_gaps.md)
-- ⚠️ 损坏链接: [FORMAL_METHODS_COMPLETENESS_CHECKLIST](./10_formal_methods_completeness_checklist.md)
-- ⚠️ 损坏链接: [HIERARCHICAL_MAPPING_AND_SUMMARY](../10_hierarchical_mapping_and_summary.md)
-- ⚠️ 损坏链接: [HIERARCHICAL_MAPPING_AND_SUMMARY](../10_hierarchical_mapping_and_summary.md)
-- ⚠️ 损坏链接: [PROOF_INDEX](../10_proof_index.md)
-- ⚠️ 损坏链接: [README §六篇并表](README.md#formal_methods-六篇并表)
-- ⚠️ 损坏链接: [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../10_rust_193_language_features_comprehensive_analysis.md)
-- ⚠️ 损坏链接: [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../10_rust_193_language_features_comprehensive_analysis.md)
-- ⚠️ 损坏链接: [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../10_rust_193_language_features_comprehensive_analysis.md)
-- ⚠️ 损坏链接: [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../10_rust_193_language_features_comprehensive_analysis.md)
-- ⚠️ 损坏链接: [formal_methods README](./README.md)
-- ⚠️ 损坏链接: [formal_methods README](./README.md)
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 损坏链接: [六篇并表](README.md#formal_methods-六篇并表)
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\formal_methods\10_send_sync_formalization.md
-
-- ⚠️ 损坏链接: [HIERARCHICAL_MAPPING_AND_SUMMARY](../10_hierarchical_mapping_and_summary.md)
-- ⚠️ 损坏链接: [PROOF_INDEX](../10_proof_index.md)
-- ⚠️ 损坏链接: [README §formal_methods 六篇并表](README.md#formal_methods-六篇并表)
-- ⚠️ 损坏链接: [README §六篇并表](README.md#formal_methods-六篇并表)
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\formal_methods\10_separation_logic.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\formal_methods\10_serialization_decision_tree.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\formal_methods\10_slice_formalization.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\formal_methods\10_testing_strategy_decision_tree.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\formal_methods\10_type_system_concept_mindmap.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
 ### docs\research_notes\formal_methods\10_variance_concept_mindmap.md
 
 - ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\formal_methods\10_workflow_engines_matrix.md
-
-- ⚠️ 损坏链接: [formal_methods 目录](./README.md)
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\formal_methods\lifetime_formalization.md
-
-- ⚠️ 损坏链接: [HIERARCHICAL_MAPPING_AND_SUMMARY](../10_hierarchical_mapping_and_summary.md)
-- ⚠️ 损坏链接: [README §formal_methods 六篇并表](README.md#formal_methods-六篇并表)
-- ⚠️ 损坏链接: [README §六篇并表](README.md#formal_methods-六篇并表)
-- ⚠️ 最后更新: 2026-02-27（118 天前，建议复审）
-### docs\research_notes\formal_modules\10_formalization_ecology_mindmap.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_abstract_factory.md
-
-- ⚠️ 损坏链接: [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md)
-- ⚠️ 损坏链接: [formal_methods](../../../formal_methods/README.md)
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_builder.md
-
-- ⚠️ 损坏链接: [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md)
-- ⚠️ 损坏链接: [formal_methods](../../../formal_methods/README.md)
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_factory_method.md
-
-- ⚠️ 损坏链接: [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md)
-- ⚠️ 损坏链接: [formal_methods](../../../formal_methods/README.md)
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_prototype.md
-
-- ⚠️ 损坏链接: [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md)
-- ⚠️ 损坏链接: [formal_methods](../../../formal_methods/README.md)
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\10_singleton.md
-
-- ⚠️ 损坏链接: [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md)
-- ⚠️ 损坏链接: [formal_methods](../../../formal_methods/README.md)
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\software_design_theory\01_design_patterns_formal\01_creational\README.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_adapter.md
-
-- ⚠️ 损坏链接: [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md)
-- ⚠️ 损坏链接: [formal_methods](../../../formal_methods/README.md)
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_bridge.md
-
-- ⚠️ 损坏链接: [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md)
-- ⚠️ 损坏链接: [formal_methods](../../../formal_methods/README.md)
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_composite.md
-
-- ⚠️ 损坏链接: [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md)
-- ⚠️ 损坏链接: [formal_methods](../../../formal_methods/README.md)
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_decorator.md
-
-- ⚠️ 损坏链接: [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md)
-- ⚠️ 损坏链接: [formal_methods](../../../formal_methods/README.md)
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_facade.md
-
-- ⚠️ 损坏链接: [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md)
-- ⚠️ 损坏链接: [formal_methods](../../../formal_methods/README.md)
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_flyweight.md
-
-- ⚠️ 损坏链接: [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md)
-- ⚠️ 损坏链接: [formal_methods](../../../formal_methods/README.md)
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\10_proxy.md
-
-- ⚠️ 损坏链接: [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md)
-- ⚠️ 损坏链接: [formal_methods](../../../formal_methods/README.md)
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\01_design_patterns_formal\02_structural\README.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_chain_of_responsibility.md
-
-- ⚠️ 损坏链接: [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md)
-- ⚠️ 损坏链接: [formal_methods](../../../formal_methods/README.md)
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_command.md
-
-- ⚠️ 损坏链接: [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md)
-- ⚠️ 损坏链接: [formal_methods](../../../formal_methods/README.md)
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_interpreter.md
-
-- ⚠️ 损坏链接: [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md)
-- ⚠️ 损坏链接: [formal_methods](../../../formal_methods/README.md)
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_iterator.md
-
-- ⚠️ 损坏链接: [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md)
-- ⚠️ 损坏链接: [formal_methods](../../../formal_methods/README.md)
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_mediator.md
-
-- ⚠️ 损坏链接: [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md)
-- ⚠️ 损坏链接: [formal_methods](../../../formal_methods/README.md)
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_memento.md
-
-- ⚠️ 损坏链接: [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md)
-- ⚠️ 损坏链接: [formal_methods](../../../formal_methods/README.md)
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_observer.md
-
-- ⚠️ 损坏链接: [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md)
-- ⚠️ 损坏链接: [formal_methods](../../../formal_methods/README.md)
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_state.md
-
-- ⚠️ 损坏链接: [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md)
-- ⚠️ 损坏链接: [formal_methods](../../../formal_methods/README.md)
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_strategy.md
-
-- ⚠️ 损坏链接: [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md)
-- ⚠️ 损坏链接: [formal_methods](../../../formal_methods/README.md)
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_template_method.md
-
-- ⚠️ 损坏链接: [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md)
-- ⚠️ 损坏链接: [formal_methods](../../../formal_methods/README.md)
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\10_visitor.md
-
-- ⚠️ 损坏链接: [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md)
-- ⚠️ 损坏链接: [formal_methods](../../../formal_methods/README.md)
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\01_design_patterns_formal\03_behavioral\README.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\01_design_patterns_formal\04_boundary_matrix.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\01_design_patterns_formal\README.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\software_design_theory\02_workflow\README.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\02_workflow_safe_complete_models\02_complete_43_catalog.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\software_design_theory\02_workflow_safe_complete_models\04_expressiveness_boundary.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\02_workflow_safe_complete_models\README.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\software_design_theory\03_execution_models\01_synchronous.md
-
-- ⚠️ 损坏链接: [formal_methods](../../formal_methods/README.md)
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\software_design_theory\03_execution_models\02_async.md
-
-- ⚠️ 损坏链接: [formal_methods](../../formal_methods/README.md)
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\software_design_theory\03_execution_models\03_concurrent.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\software_design_theory\03_execution_models\04_parallel.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\03_execution_models\05_distributed.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-27（118 天前，建议复审）
-### docs\research_notes\software_design_theory\03_execution_models\06_boundary_analysis.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\software_design_theory\03_execution_models\README.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\software_design_theory\04_compositional_engineering\01_formal_composition.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\software_design_theory\04_compositional_engineering\02_effectiveness_proofs.md
-
-- ⚠️ 损坏链接: [PROOF_INDEX](../../10_proof_index.md)
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\software_design_theory\04_compositional_engineering\03_integration_theory.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\software_design_theory\04_compositional_engineering\README.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\software_design_theory\05_boundary_system\10_expressive_inexpressive_matrix.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\software_design_theory\05_boundary_system\10_safe_unsafe_matrix.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\software_design_theory\05_boundary_system\10_supported_unsupported_matrix.md
-
-- ⚠️ 损坏链接: [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../../10_rust_193_language_features_comprehensive_analysis.md)
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\software_design_theory\05_boundary_system\README.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\software_design_theory\05_distributed\01_saga_pattern.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\05_distributed\02_cqrs_pattern.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\05_distributed\03_circuit_breaker.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\05_distributed\04_event_sourcing.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\05_distributed\05_outbox_pattern.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\05_distributed\06_timeout_pattern.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\05_distributed\07_retry_pattern.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\05_distributed\README.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\06_rust_idioms.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\07_anti_patterns.md
-
 - ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
 - ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
 - ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
@@ -860,57 +72,16 @@
 ### docs\research_notes\software_design_theory\07_crate_architectures\21_mio_architecture.md
 
 - ⚠️ 旧版本声明: '**对应 Rust 版本**: 1.85' → 建议更新为 1.96.0+
-### docs\research_notes\software_design_theory\10_00_master_index.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\software_design_theory\10_comprehensive_argumentation_gap_analysis_and_plan.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\software_design_theory\README.md
-
-- ⚠️ 损坏链接: [PROOF_INDEX](../10_proof_index.md)
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\type_theory\10_advanced_types.md
-
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\type_theory\10_const_evaluation.md
-
-- ⚠️ 最后更新: 2026-03-14（103 天前，建议复审）
-### docs\research_notes\type_theory\10_construction_capability.md
-
-- ⚠️ 损坏链接: [00_completeness_gaps](../formal_methods/00_completeness_gaps.md)
-- ⚠️ 损坏链接: [00_completeness_gaps](../formal_methods/00_completeness_gaps.md)
-- ⚠️ 损坏链接: [00_completeness_gaps](../formal_methods/00_completeness_gaps.md)
-- ⚠️ 损坏链接: [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../10_rust_193_language_features_comprehensive_analysis.md)
-- ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
-- ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
 ### docs\research_notes\type_theory\10_lifetime_formalization.md
 
+- ⚠️ 损坏链接: [async_state_machine](../formal_methods/10_async_state_machine.md)
+- ⚠️ 损坏链接: [type_system_foundations](./10_type_system_foundations.md)
 - ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
 - ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
 - ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
-### docs\research_notes\type_theory\10_trait_system_formalization.md
-
-- ⚠️ 损坏链接: [00_completeness_gaps](../formal_methods/00_completeness_gaps.md)
-- ⚠️ 损坏链接: [00_completeness_gaps](../formal_methods/00_completeness_gaps.md)
-- ⚠️ 最后更新: 2026-03-05（112 天前，建议复审）
-### docs\research_notes\type_theory\10_type_system_foundations.md
-
-- ⚠️ 损坏链接: [00_completeness_gaps](../formal_methods/00_completeness_gaps.md)
-- ⚠️ 损坏链接: [00_completeness_gaps](../formal_methods/00_completeness_gaps.md)
-- ⚠️ 损坏链接: [00_completeness_gaps](../formal_methods/00_completeness_gaps.md)
-- ⚠️ 最后更新: 2026-03-11（106 天前，建议复审）
 ### docs\research_notes\type_theory\10_variance_theory.md
 
+- ⚠️ 损坏链接: [type_system_foundations](./10_type_system_foundations.md)
 - ⚠️ 损坏链接: [形式化工程系统 - 型变](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/06_variance.md)
 - ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
 - ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
@@ -924,8 +95,22 @@
 - ⚠️ 损坏链接: [00_completeness_gaps](../formal_methods/00_completeness_gaps.md)
 - ⚠️ 损坏链接: [00_completeness_gaps](../formal_methods/00_completeness_gaps.md)
 - ⚠️ 损坏链接: [00_completeness_gaps](../formal_methods/00_completeness_gaps.md)
+- ⚠️ 损坏链接: [10_advanced_types.md](./10_advanced_types.md)
+- ⚠️ 损坏链接: [10_construction_capability.md](./10_construction_capability.md)
+- ⚠️ 损坏链接: [10_trait_system_formalization.md](./10_trait_system_formalization.md)
+- ⚠️ 损坏链接: [10_type_system_foundations.md](./10_type_system_foundations.md)
 - ⚠️ 损坏链接: [CORE_THEOREMS_FULL_PROOFS](../10_core_theorems_full_proofs.md)
+- ⚠️ 损坏链接: [FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md)
+- ⚠️ 损坏链接: [FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md)
 - ⚠️ 损坏链接: [PROOF_INDEX](../10_proof_index.md)
+- ⚠️ 损坏链接: [Trait 系统形式化](./10_trait_system_formalization.md)
+- ⚠️ 损坏链接: [advanced_types](./10_advanced_types.md)
+- ⚠️ 损坏链接: [construction_capability](./10_construction_capability.md)
+- ⚠️ 损坏链接: [trait_system_formalization](./10_trait_system_formalization.md)
+- ⚠️ 损坏链接: [type_system_foundations](./10_type_system_foundations.md)
+- ⚠️ 损坏链接: [类型构造能力](./10_construction_capability.md)
+- ⚠️ 损坏链接: [类型系统基础](./10_type_system_foundations.md)
+- ⚠️ 损坏链接: [高级类型特性](./10_advanced_types.md)
 - ⚠️ 旧版本声明: '**Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
 - ⚠️ 旧版本声明: '> **Rust 版本**: 1.93.1' → 建议更新为 1.96.0+
 - ⚠️ 最后更新: 2026-02-28（117 天前，建议复审）
@@ -1257,78 +442,63 @@
 ### docs\rust-ownership-decidability\comprehensive-analysis\case-studies\embassy-embedded-analysis.md
 
 - ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
-### docs\rust-ownership-decidability\comprehensive-analysis\case-studies\tokio-runtime-analysis.md
+- ⚠️ 损坏
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
-### docs\rust-ownership-decidability\comprehensive-analysis\decision-trees\concurrency-model-selection.md
+📄 docs\rust-ownership-decidability\comprehensive-analysis\case-studies\embassy-embedded-analysis.md
+   ⚠️ 损坏链接: [Parent README](../README.md)
+   ⚠️ 损坏链接: [上级目录](../README.md)
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
-### docs\rust-ownership-decidability\comprehensive-analysis\decision-trees\pattern-selection.md
+📄 docs\rust-ownership-decidability\comprehensive-analysis\case-studies\tokio-runtime-analysis.md
+   ⚠️ 损坏链接: [Parent README](../README.md)
+   ⚠️ 损坏链接: [上级目录](../README.md)
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
-### docs\rust-ownership-decidability\comprehensive-analysis\extensions\advanced-ownership-patterns.md
+📄 docs\rust-ownership-decidability\comprehensive-analysis\decision-trees\concurrency-model-selection.md
+   ⚠️ 损坏链接: [Parent README](../README.md)
+   ⚠️ 损坏链接: [上级目录](../README.md)
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
-### docs\rust-ownership-decidability\comprehensive-analysis\extensions\performance-optimization.md
+📄 docs\rust-ownership-decidability\comprehensive-analysis\decision-trees\pattern-selection.md
+   ⚠️ 损坏链接: [Parent README](../README.md)
+   ⚠️ 损坏链接: [上级目录](../README.md)
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
-### docs\rust-ownership-decidability\comprehensive-analysis\formal-framework\definitions.md
+📄 docs\rust-ownership-decidability\comprehensive-analysis\extensions\advanced-ownership-patterns.md
+   ⚠️ 损坏链接: [Parent README](../README.md)
+   ⚠️ 损坏链接: [上级目录](../README.md)
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
-### docs\rust-ownership-decidability\comprehensive-analysis\matrices\comprehensive-comparison-matrix.md
+📄 docs\rust-ownership-decidability\comprehensive-analysis\extensions\performance-optimization.md
+   ⚠️ 损坏链接: [Parent README](../README.md)
+   ⚠️ 损坏链接: [上级目录](../README.md)
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
-### docs\rust-ownership-decidability\comprehensive-analysis\matrices\safety-analysis-matrix.md
+📄 docs\rust-ownership-decidability\comprehensive-analysis\formal-framework\definitions.md
+   ⚠️ 损坏链接: [Parent README](../README.md)
+   ⚠️ 损坏链接: [上级目录](../README.md)
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
-### docs\rust-ownership-decidability\comprehensive-analysis\mindmaps\borrowing-system-mindmap.md
+📄 docs\rust-ownership-decidability\comprehensive-analysis\matrices\comprehensive-comparison-matrix.md
+   ⚠️ 损坏链接: [Parent README](../README.md)
+   ⚠️ 损坏链接: [上级目录](../README.md)
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
-### docs\rust-ownership-decidability\comprehensive-analysis\mindmaps\ownership-system-mindmap.md
+📄 docs\rust-ownership-decidability\comprehensive-analysis\matrices\safety-analysis-matrix.md
+   ⚠️ 损坏链接: [Parent README](../README.md)
+   ⚠️ 损坏链接: [上级目录](../README.md)
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
-### docs\rust-ownership-decidability\comprehensive-analysis\proofs\memory-safety-proof.md
+📄 docs\rust-ownership-decidability\comprehensive-analysis\mindmaps\borrowing-system-mindmap.md
+   ⚠️ 损坏链接: [Parent README](../README.md)
+   ⚠️ 损坏链接: [上级目录](../README.md)
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
-### docs\rust-ownership-decidability\comprehensive-analysis\scenario-trees\application-domain-tree.md
+📄 docs\rust-ownership-decidability\comprehensive-analysis\mindmaps\ownership-system-mindmap.md
+   ⚠️ 损坏链接: [Parent README](../README.md)
+   ⚠️ 损坏链接: [上级目录](../README.md)
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
-### docs\rust-ownership-decidability\comprehensive-analysis\scenario-trees\real-time-systems-tree.md
+📄 docs\rust-ownership-decidability\comprehensive-analysis\proofs\memory-safety-proof.md
+   ⚠️ 损坏链接: [Parent README](../README.md)
+   ⚠️ 损坏链接: [上级目录](../README.md)
 
-- ⚠️ 损坏链接: [Parent README](../README.md)
-- ⚠️ 损坏链接: [上级目录](../README.md)
-### docs\rust-ownership-decidability\formal-foundations\README.md
+📄 docs\rust-ownership-decidability\comprehensive-analysis\scenario-trees\application-domain-tree.md
+   ⚠️ 损坏链接: [Parent README](../README.md)
+   ⚠️ 损坏链接: [上级目录](../README.md)
 
-- ⚠️ 最后更新: 2026-03-07（110 天前，建议复审）
-### docs\rust-ownership-decidability\meta-model\01_abstract_syntax.md
-
-- ⚠️ 最后更新: 2026-03-05（112 天前，建议复审）
-### docs\rust-ownership-decidability\meta-model\02_semantic_domains.md
-
-- ⚠️ 最后更新: 2026-03-05（112 天前，建议复审）
-### docs\rust-ownership-decidability\meta-model\03_judgments.md
-
-- ⚠️ 最后更新: 2026-03-05（112 天前，建议复审）
-### docs\rust-ownership-decidability\progress\PROGRESS_TRACKING.md
-
-- ⚠️ 最后更新: 2026-03-11（106 天前，建议复审）
-### docs\rust-ownership-decidability\theorems\README.md
-
-- ⚠️ 最后更新: 2026-03-07（110 天前，建议复审）
-### docs\rust-ownership
+📄 docs\rust-ownership-decidability\comprehensive-analysis\scenario-trees\real-time-systems-tree.md
+   ⚠️ 损坏链接: [Parent README](../README.md)
+   ⚠️ 损坏链接: [上级目录](../README.md)
 
 📄 docs\rust-ownership-decidability\formal-foundations\README.md
    ⚠️ 最后更新: 2026-03-07（110 天前，建议复审）
@@ -1352,9 +522,9 @@
    ⚠️ 最后更新: 2026-03-05（112 天前，建议复审）
 
 === 审计摘要 ===
-总文件数: 971
-问题文件数: 333
-总问题数: 643
+总文件数: 770
+问题文件数: 133
+总问题数: 228
 
 建议优先处理:
   1. [A类] 02_reference/ 速查表中的旧版本声明

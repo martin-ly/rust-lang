@@ -1441,7 +1441,7 @@ fn main() {
 | :--- | :--- | :--- |
 | 形式化方法 | [../research_notes/formal_methods/10_ownership_model.md](../research_notes/formal_methods/10_ownership_model.md) | 所有权模型 |
 | 借用检查器 | [../research_notes/formal_methods/10_borrow_checker_proof.md](../research_notes/formal_methods/10_borrow_checker_proof.md) | 借用检查器证明 |
-| 类型系统 | [../research_notes/type_theory/10_type_system_foundations.md](../research_notes/type_theory/10_type_system_foundations.md) | 类型系统基础 |
+| 类型系统 | [../research_notes/type_theory/10_type_system_foundations.md](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) | 类型系统基础 |
 | 核心定理 | [../research_notes/10_core_theorems_full_proofs.md](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) | 完整定理证明 |
 
 ### 项目文档
@@ -1450,9 +1450,9 @@ fn main() {
 
 | 文档 | 链接 | 内容 |
 | :--- | :--- | :--- |
-| 研究笔记系统 | [../research_notes/10_system_summary.md](../research_notes/10_system_summary.md) | 系统总结 |
-| 增量更新流程 | [../research_notes/10_incremental_update_flow.md](../research_notes/10_incremental_update_flow.md) | 版本更新流程 |
-| 理论体系 | [../research_notes/10_theoretical_and_argumentation_system_architecture.md](../research_notes/10_theoretical_and_argumentation_system_architecture.md) | 理论体系架构 |
+| 研究笔记系统 | [../research_notes/10_system_summary.md](../../archive/research_notes_2026_06_25/10_system_summary.md) | 系统总结 |
+| 增量更新流程 | [../research_notes/10_incremental_update_flow.md](../../archive/research_notes_2026_06_25/10_incremental_update_flow.md) | 版本更新流程 |
+| 理论体系 | [../research_notes/10_theoretical_and_argumentation_system_architecture.md](../../archive/research_notes_2026_06_25/10_theoretical_and_argumentation_system_architecture.md) | 理论体系架构 |
 
 ---
 

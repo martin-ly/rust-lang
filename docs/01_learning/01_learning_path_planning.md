@@ -169,7 +169,7 @@
 - [线程并发使用指南](../05_guides/05_threads_concurrency_usage_guide.md)
 - [异步编程使用指南](../05_guides/05_async_programming_usage_guide.md)
 - [网络编程速查卡](../02_reference/quick_reference/02_network_programming_cheatsheet.md)
-- [Pin 与自引用结构形式化](../research_notes/formal_methods/10_pin_self_referential.md)
+- [Pin 与自引用结构形式化](../../archive/research_notes_2026_06_25/formal_methods/10_pin_self_referential.md)
 
 ---
 
@@ -260,9 +260,9 @@
    - 跟踪最新稳定版本特性，保持技术敏锐度
 
 5. **形式化与验证（研究者路径）**
-   - [形式化证明系统指南](../research_notes/10_formal_proof_system_guide.md)
+   - [形式化证明系统指南](../../archive/research_notes_2026_06_25/10_formal_proof_system_guide.md)
    - [核心定理完整证明](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md)
-   - [国际对标索引](../research_notes/10_international_formal_verification_index.md)
+   - [国际对标索引](../../archive/research_notes_2026_06_25/10_international_formal_verification_index.md)
 
 **推荐资源**:
 
@@ -712,15 +712,15 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 └── 实践: Prusti/Kani 验证或数学风格证明（见 [CORE_THEOREMS_FULL_PROOFS](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md)）
 
 第 9-12 周: 并发与异步形式化
-├── [Send/Sync 形式化](../research_notes/formal_methods/10_send_sync_formalization.md)
-├── [异步状态机形式化](../research_notes/formal_methods/10_async_state_machine.md)
-├── [Pin 和自引用类型形式化](../research_notes/formal_methods/10_pin_self_referential.md)
+├── [Send/Sync 形式化](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md)
+├── [异步状态机形式化](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md)
+├── [Pin 和自引用类型形式化](../../archive/research_notes_2026_06_25/formal_methods/10_pin_self_referential.md)
 └── 实践: 分析并发算法的安全性证明
 
 第 13-16 周: 前沿研究
-├── [形式化证明系统指南](../research_notes/10_formal_proof_system_guide.md)
+├── [形式化证明系统指南](../../archive/research_notes_2026_06_25/10_formal_proof_system_guide.md)
 ├── [核心定理完整证明](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md)
-├── [国际对标索引](../research_notes/10_international_formal_verification_index.md)
+├── [国际对标索引](../../archive/research_notes_2026_06_25/10_international_formal_verification_index.md)
 └── 研究项目: 选择一个开放问题深入研究
 ```
 
@@ -731,9 +731,9 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 | 所有权 | [ownership_model](../research_notes/formal_methods/10_ownership_model.md) | T2 唯一性, T3 内存安全 |
 | 借用 | [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) | T1 数据竞争自由 |
 | 生命周期 | lifetime_formalization | LF-T2 引用有效性 |
-| 异步 | [async_state_machine](../research_notes/formal_methods/10_async_state_machine.md) | T6.1-T6.3 状态/安全/进度 |
-| Pin | [pin_self_referential](../research_notes/formal_methods/10_pin_self_referential.md) | T1-T3 Pin 保证 |
-| Send/Sync | [send_sync_formalization](../research_notes/formal_methods/10_send_sync_formalization.md) | SEND-T1, SYNC-T1 |
+| 异步 | [async_state_machine](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) | T6.1-T6.3 状态/安全/进度 |
+| Pin | [pin_self_referential](../../archive/research_notes_2026_06_25/formal_methods/10_pin_self_referential.md) | T1-T3 Pin 保证 |
+| Send/Sync | [send_sync_formalization](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | SEND-T1, SYNC-T1 |
 
 ---
 
@@ -794,9 +794,9 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [形式化方法研究](../../archive/research_notes_2026_06_25/formal_methods/README.md)
-- [形式化证明系统指南](../research_notes/10_formal_proof_system_guide.md)
+- [形式化证明系统指南](../../archive/research_notes_2026_06_25/10_formal_proof_system_guide.md)
 - [证明索引](../../archive/research_notes_2026_06_25/10_proof_index.md)
-- [国际对标索引](../research_notes/10_international_formal_verification_index.md)
+- [国际对标索引](../../archive/research_notes_2026_06_25/10_international_formal_verification_index.md)
 
 ---
 

@@ -77,8 +77,8 @@
 
 本指南介绍 Rust 宏系统的使用，包括声明宏、过程宏、属性宏、派生宏等。
 
-**形式化引用**：COH-T1 (Trait 一致性)、[trait_system_formalization](../research_notes/type_theory/10_trait_system_formalization.md)。
-宏展开与类型检查衔接见 [type_system_foundations](../research_notes/type_theory/10_type_system_foundations.md)。
+**形式化引用**：COH-T1 (Trait 一致性)、[trait_system_formalization](../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md)。
+宏展开与类型检查衔接见 [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md)。
 
 ---
 
@@ -912,7 +912,7 @@ macro_rules! public_macro {
 - [完整文档](../../crates/c11_macro_system/README.md)
 - [声明宏指南](../../crates/c11_macro_system/docs/tier_02_guides/01_声明宏实践指南.md)
 - [过程宏指南](../../crates/c11_macro_system/docs/tier_02_guides/02_Derive宏开发指南.md)
-- [宏系统思维导图](../research_notes/formal_methods/10_macro_system_mindmap.md) - 宏扩展过程的形式化分析
+- [宏系统思维导图](../../archive/research_notes_2026_06_25/formal_methods/10_macro_system_mindmap.md) - 宏扩展过程的形式化分析
 
 ## 🆕 Rust 1.95+ 特性
 >

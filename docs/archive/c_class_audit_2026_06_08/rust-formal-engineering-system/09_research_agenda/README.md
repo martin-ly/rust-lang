@@ -10,9 +10,9 @@
 
 | 主题 | 链接 |
 | :--- | :--- |
-| 研究路线图 | [10_research_roadmap.md](../../research_notes/10_research_roadmap.md) |
+| 研究路线图 | [10_research_roadmap.md](../../../../../archive/research_notes_2026_06_25/10_research_roadmap.md) |
 | 形式化证明索引 | [10_proof_index.md](../../../../../archive/research_notes_2026_06_25/10_proof_index.md) |
-| 研究方法论 | [10_research_methodology.md](../../research_notes/10_research_methodology.md) |
+| 研究方法论 | [10_research_methodology.md](../../../../../archive/research_notes_2026_06_25/10_research_methodology.md) |
 
 ---
 

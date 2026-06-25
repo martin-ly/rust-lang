@@ -55,7 +55,7 @@
 
 本文档提供跨模块集成的实际示例，展示如何将不同的Rust模块组合使用，构建完整的应用程序。
 
-**形式化引用**：CE-T1、CE-T2、CE-T3（组合工程定理）、[04_compositional_engineering](../research_notes/software_design_theory/04_compositional_engineering/README.md)。
+**形式化引用**：CE-T1、CE-T2、CE-T3（组合工程定理）、[04_compositional_engineering](../../archive/research_notes_2026_06_25/software_design_theory/04_compositional_engineering/README.md)。
 
 ---
 

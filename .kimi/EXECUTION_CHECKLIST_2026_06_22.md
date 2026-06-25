@@ -45,16 +45,16 @@
 ### Week 2（06-30 ~ 07-06）
 
 - [x] **A2.1** 依赖安全审计：运行 `cargo audit`（若网络恢复）或检查 `RUSTSEC` 列表
-  - `cargo audit` 因网络/IO 错误仍不可用
-  - 已增强 `scripts/supply_chain_audit.py`：从 RustSec advisory-db main.zip 手动解析并匹配 Cargo.lock
-  - 结果：`reports/SUPPLY_CHAIN_AUDIT_2026_06_22.md`，**0 个安全公告**
+  - 2026-06-22：`cargo audit` 因网络/IO 错误不可用；使用 `scripts/supply_chain_audit.py` 手动解析 RustSec advisory-db main.zip，结果 **0 个安全公告**
+  - 2026-06-25：`cargo audit` 网络恢复，完整拉取 advisory-db 后扫描确认 **0 个安全漏洞**，4 个 `unmaintained` 允许警告
+  - 报告：`reports/SUPPLY_CHAIN_AUDIT_2026_06_25.md`、`reports/CARGO_AUDIT_2026_06_25.md`
 - [x] **A2.2** 评估 `backoff` → `backon` / `tokio-retry` 迁移
   - 结论：`Cargo.lock` 中无 `backoff` 依赖；`c06_async` 已使用内部 `utils::backoff` 模块替代（RUSTSEC-2025-0012 已缓解）
   - 无需额外迁移
 - [x] **A2.3** 确认 `sea-orm` 2.0 stable 是否已发布；若已发布则升级，否则记录阻塞原因
-  - 结论：截至 2026-06-22，`sea-orm` 最新版本仍为 `2.0.0-rc.41`，stable 未发布
+  - 结论：截至 2026-06-25，`sea-orm` 最新版本仍为 `2.0.0-rc.41`，stable 未发布
   - 阻塞原因：上游尚未发布 2.0.0 stable；继续保持 rc.41 并跟踪
-  - 跟踪报告：`reports/SEA_ORM_2_0_RELEASE_TRACKING_2026_06_22.md`
+  - 跟踪报告：`reports/SEA_ORM_2_0_RELEASE_TRACKING_2026_06_22.md`（已更新 2026-06-25 检查记录）
   - `Cargo.toml` 注释已更新检查日期
 - [x] **A2.4** 检查 `pingora` 残留引用并清理
   - 结论：`Cargo.lock` 中无 `pingora` 依赖；workspace 中已注释移除（RUSTSEC-2025-0037/0070）
@@ -147,10 +147,15 @@
 - [x] **B4.4** C 类目录治理阶段 3：ROD 核心结论迁移到 `concept/04_formal/`
   - 2026-06-25：新建 `concept/04_formal/28_borrow_checking_decidability.md`、`29_type_inference_complexity.md`、`30_aeneas_symbolic_semantics.md`
   - 同步补充 `concept/04_formal/03_ownership_formal.md`、`08_type_inference.md`、`README.md`
-- [x] **B4.5** C 类目录治理阶段 3：批量归档 `docs/research_notes/` 低价值文件
+- [x] **B4.5** C 类目录治理阶段 3–4：批量归档 `docs/research_notes/` 低价值与边缘内容
   - 2026-06-25：使用 `scripts/maintenance/archive_research_notes_candidates.py` 移动 37 个文件到 `archive/research_notes_2026_06_25/`
   - 移动后运行 `scripts/maintenance/fix_archived_research_notes_links.py` 修复 131 处引用残留
   - 生成报告：`reports/RESEARCH_NOTES_ARCHIVE_BATCH_2026_06_25.md`
+  - 2026-06-25：使用 `scripts/maintenance/archive_research_notes_peripheral.py` 归档 75 个边缘内容文件（mindmap/decision_tree/matrix/proof_tree/设计模式/执行模型/分布式模式等）
+  - 再次修复 28 处引用残留；`docs/` C 类问题数从 643 降至 542，低于 600 目标
+  - 2026-06-25：使用 `archive_research_notes_candidates.py --stale-days 90` 再次归档 126 个超过 90 天未更新的研究笔记
+  - 增强 `fix_archived_research_notes_links.py` 处理带锚点的链接；修复 564 + 6 处引用残留
+  - `docs/` C 类问题数从 542 降至 228，文件数从 721 降至 595
 - [x] **B4.6** C 类目录治理阶段 3：精选 research_notes 内容合并到 `knowledge/`
   - 2026-06-25：新建 `knowledge/04_expert/academic/03_ownership_model_comprehensive.md`、`04_borrow_checker_proof_guide.md`、`05_type_system_foundations_guide.md`
   - 2026-06-25：补充 `knowledge/03_advanced/unsafe/04_unsafe_rust.md`

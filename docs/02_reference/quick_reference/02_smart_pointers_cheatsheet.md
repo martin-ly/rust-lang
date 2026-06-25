@@ -1403,9 +1403,9 @@ impl Unmovable {
 
 - [所有权模型形式化](../../research_notes/formal_methods/10_ownership_model.md) — 所有权系统形式化基础
 - 生命周期形式化 — 智能指针生命周期
-- [Pin 形式化](../../research_notes/formal_methods/10_pin_self_referential.md) — 自引用结构形式化
-- [Send/Sync 形式化](../../research_notes/formal_methods/10_send_sync_formalization.md) — 线程安全 trait 形式化
-- [类型系统基础](../../research_notes/type_theory/10_type_system_foundations.md) — 智能指针类型理论
+- [Pin 形式化](../../../archive/research_notes_2026_06_25/formal_methods/10_pin_self_referential.md) — 自引用结构形式化
+- [Send/Sync 形式化](../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) — 线程安全 trait 形式化
+- [类型系统基础](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) — 智能指针类型理论
 
 ### 相关速查卡
 >

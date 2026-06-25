@@ -1711,10 +1711,10 @@ fn broken_test() {
 
 | 概念 | 形式化文档 | 描述 |
 | :--- | :--- | :--- |
-| **类型系统** | [type_system_foundations](../../research_notes/type_theory/10_type_system_foundations.md) | 测试的类型正确性 |
+| **类型系统** | [type_system_foundations](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) | 测试的类型正确性 |
 | **所有权与借用** | [borrow_checker_proof](../../research_notes/formal_methods/10_borrow_checker_proof.md) | 测试中的内存安全 |
-| **Send/Sync** | [send_sync_formalization](../../research_notes/formal_methods/10_send_sync_formalization.md) | 并发测试安全性 |
-| **反模式** | [anti_patterns](../../research_notes/software_design_theory/07_anti_patterns.md) | 测试中的常见错误模式 |
+| **Send/Sync** | [send_sync_formalization](../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | 并发测试安全性 |
+| **反模式** | [anti_patterns](../../../archive/research_notes_2026_06_25/software_design_theory/07_anti_patterns.md) | 测试中的常见错误模式 |
 
 ### 形式化定理
 >
@@ -1722,7 +1722,7 @@ fn broken_test() {
 
 **定理 TEST-T1（测试完备性）**: 若测试覆盖所有公理/定理路径，则程序满足规范。
 
-*证明*: 由 [FORMAL_PROOF_SYSTEM_GUIDE](../../research_notes/10_formal_proof_system_guide.md)，测试用例对应形式化规范的实例化，全覆盖保证所有执行路径验证。∎
+*证明*: 由 [FORMAL_PROOF_SYSTEM_GUIDE](../../../archive/research_notes_2026_06_25/10_formal_proof_system_guide.md)，测试用例对应形式化规范的实例化，全覆盖保证所有执行路径验证。∎
 
 ---
 

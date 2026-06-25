@@ -783,7 +783,7 @@ fn iterator_invalidation() {
 
 | 边界情况 | 形式化规则 | 相关文档 |
 | :--- | :--- | :--- |
-| 递归类型 | 需满足 $\text{size\_of}(T) < \infty$ | [type_system_foundations](../research_notes/type_theory/10_type_system_foundations.md) |
+| 递归类型 | 需满足 $\text{size\_of}(T) < \infty$ | [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) |
 | ZST | $\text{size\_of}(T) = 0$ | [Rust Reference](https://doc.rust-lang.org/reference/dynamically-sized-types.html) |
 | 生命周期子类型 | $\ell_2 <: \ell_1 \leftrightarrow \ell_1 \supseteq \ell_2$ | lifetime_formalization |
 
@@ -793,8 +793,8 @@ fn iterator_invalidation() {
 
 | 边界情况 | 形式化规则 | 相关文档 |
 | :--- | :--- | :--- |
-| Send 边界 | $T: \text{Send} \rightarrow \text{可以跨线程转移}$ | [send_sync_formalization](../research_notes/formal_methods/10_send_sync_formalization.md) |
-| Sync 边界 | $T: \text{Sync} \leftrightarrow \&T: \text{Send}$ | [send_sync_formalization](../research_notes/formal_methods/10_send_sync_formalization.md) |
+| Send 边界 | $T: \text{Send} \rightarrow \text{可以跨线程转移}$ | [send_sync_formalization](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) |
+| Sync 边界 | $T: \text{Sync} \leftrightarrow \&T: \text{Send}$ | [send_sync_formalization](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) |
 | 数据竞争 | $\text{DataRaceFree}(P)$ 编译期保证 | [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) |
 
 ### unsafe 边界
@@ -829,7 +829,7 @@ fn iterator_invalidation() {
 - [所有权模型形式化](../research_notes/formal_methods/10_ownership_model.md)
 - [借用检查器证明](../research_notes/formal_methods/10_borrow_checker_proof.md)
 - 生命周期形式化
-- [Send/Sync 形式化](../research_notes/formal_methods/10_send_sync_formalization.md)
+- [Send/Sync 形式化](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md)
 
 ---
 

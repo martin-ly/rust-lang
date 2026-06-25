@@ -14,7 +14,11 @@
 
 ## 概述
 >
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)** · **来源: [Wikipedia - Mathematical Logic](https://en.wikipedia.org/wiki/Mathematical_Logic)** · **[来源: ACM - Formalization Methodology]** · **[来源: IEEE - Proof Engineering Standards]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
+> **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)** ·
+> **来源: [Wikipedia - Mathematical Logic](https://en.wikipedia.org/wiki/Mathematical_Logic)** ·
+> **[来源: ACM - Formalization Methodology]** ·
+> **[来源: IEEE - Proof Engineering Standards]**
 
 Coq形式化矩阵追踪Rust核心概念在Coq证明助手中的形式化状态，为机器可检查的严格证明提供路线图。
 

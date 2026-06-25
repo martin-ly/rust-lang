@@ -64,7 +64,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**多维度分类**：见 [10_classification.md](./10_classification.md) — 按文档角色、知识层次、主题域、扩展路线。
+**多维度分类**：见 [10_classification.md](../../archive/research_notes_2026_06_25/10_classification.md) — 按文档角色、知识层次、主题域、扩展路线。
 
 | 维度 | 简要 |
 | :--- | :--- |
@@ -84,14 +84,14 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-1. **[10_00_organization_and_navigation.md](./10_00_organization_and_navigation.md)** - 组织架构与导航（按目标、按支柱、层级结构；首次使用必读）
+1. **[10_00_organization_and_navigation.md](../../archive/research_notes_2026_06_25/10_00_organization_and_navigation.md)** - 组织架构与导航（按目标、按支柱、层级结构；首次使用必读）
 
 0a. **[10_00_comprehensive_summary.md](../../archive/research_notes_2026_06_25/10_00_comprehensive_summary.md)** - 完整总结综合 🆕
 
 - 项目全貌一句话、三大支柱概览、全项目知识地图
 - 论证脉络总览、各文档职责与定位、推荐阅读路径
 
-0b. **[10_argumentation_chain_and_flow.md](./10_argumentation_chain_and_flow.md)** - 论证脉络关系与论证思路 🆕
+0b. **[10_argumentation_chain_and_flow.md](../../archive/research_notes_2026_06_25/10_argumentation_chain_and_flow.md)** - 论证脉络关系与论证思路 🆕
 
 - 论证五步法、论证流向（自上而下/自底而上）
 - 概念→公理→定理→推论 DAG、三大支柱论证衔接
@@ -128,15 +128,15 @@
    - 按关键词查找
    - 常用工具快速查找
 
-3. **[10_research_roadmap.md](./10_research_roadmap.md)** - 研究路线图
+3. **[10_research_roadmap.md](../../archive/research_notes_2026_06_25/10_research_roadmap.md)** - 研究路线图
    - 四个研究阶段
    - 研究优先级
    - 时间规划
    - 成功标准
 
-4. **[10_content_enhancement.md](./10_content_enhancement.md)** - 内容完善指南（含层次推进计划、实质内容检查清单、实质内容自检表）
-5. **[10_classification.md](./10_classification.md)** - 文档分类体系（按角色、层次、主题域、扩展路线）
-6. **[10_system_summary.md](./10_system_summary.md)** - 系统总结
+4. **[10_content_enhancement.md](../../archive/research_notes_2026_06_25/10_content_enhancement.md)** - 内容完善指南（含层次推进计划、实质内容检查清单、实质内容自检表）
+5. **[10_classification.md](../../archive/research_notes_2026_06_25/10_classification.md)** - 文档分类体系（按角色、层次、主题域、扩展路线）
+6. **[10_system_summary.md](../../archive/research_notes_2026_06_25/10_system_summary.md)** - 系统总结
    - 系统概览
    - 文档统计
    - 研究主题覆盖
@@ -148,38 +148,38 @@
    - 证明完成度统计
    - 证明方法统计
 
-7a. **[10_international_formal_verification_index.md](./10_international_formal_verification_index.md)** - 国际形式化验证对标索引 🆕
+7a. **[10_international_formal_verification_index.md](../../archive/research_notes_2026_06_25/10_international_formal_verification_index.md)** - 国际形式化验证对标索引 🆕
 
 - RustBelt、Aeneas、coq-of-rust、Crux、RustSEM、AutoVerus 等对标
 - 与本项目 PROOF_INDEX 的映射与差距
 
-7b. **[10_formal_proof_critical_analysis_and_plan_2026_02.md](./10_formal_proof_critical_analysis_and_plan_2026_02.md)** - 批判性分析与可持续推进计划 🆕
+7b. **[10_formal_proof_critical_analysis_and_plan_2026_02.md](../../archive/research_notes_2026_06_25/10_formal_proof_critical_analysis_and_plan_2026_02.md)** - 批判性分析与可持续推进计划 🆕
 
 - 现状诊断、国际差距、论证充分性缺口
 
-> **注意**: 原 RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md 已归档至 `../archive/process_reports/2026_02/`，请查阅 [10_authoritative_alignment_guide.md](./10_authoritative_alignment_guide.md) 获取最新对齐指南。
+> **注意**: 原 RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md 已归档至 `../archive/process_reports/2026_02/`，请查阅 [10_authoritative_alignment_guide.md](../../archive/research_notes_2026_06_25/10_authoritative_alignment_guide.md) 获取最新对齐指南。
 
-7b1. **[10_authoritative_alignment_guide.md](./10_authoritative_alignment_guide.md)** - 权威对齐指南 🆕
+7b1. **[10_authoritative_alignment_guide.md](../../archive/research_notes_2026_06_25/10_authoritative_alignment_guide.md)** - 权威对齐指南 🆕
 
 - 研究笔记权威来源对齐
 - 技术决策参考与最佳实践
 - 形式化验证对标与差距分析
 - 可持续推进方案与改进建议
 
-7c. **[10_formal_full_model_overview.md](./10_formal_full_model_overview.md)** - 形式化全模型入口 🆕
+7c. **[10_formal_full_model_overview.md](../../archive/research_notes_2026_06_25/10_formal_full_model_overview.md)** - 形式化全模型入口 🆕
 
 - 统一形式系统（ownership+borrow+lifetime+type+trait+async+pin）
 - 公理列表、定理依赖 DAG、与子文档映射
 - 按证明深度、按抽象层次导航
 
-7d. **[10_rustbelt_alignment.md](./10_rustbelt_alignment.md)** - RustBelt 逐章对标 🆕
-7e. **[10_executable_semantics_roadmap.md](./10_executable_semantics_roadmap.md)** - 可执行语义路线图（K-Framework、PLT Redex）🆕
+7d. **[10_rustbelt_alignment.md](../../archive/research_notes_2026_06_25/10_rustbelt_alignment.md)** - RustBelt 逐章对标 🆕
+7e. **[10_executable_semantics_roadmap.md](../../archive/research_notes_2026_06_25/10_executable_semantics_roadmap.md)** - 可执行语义路线图（K-Framework、PLT Redex）🆕
 7f. **AENEAS_INTEGRATION_PLAN** - Aeneas 对接调研与集成计划（已归档）
 7g. **COQ_OF_RUST_INTEGRATION_PLAN** - coq-of-rust 对接调研与集成计划（已归档）
 7h. **[10_core_theorems_full_proofs.md](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md)** - 核心定理完整证明（L2 级）🆕
-7i. **[10_core_theorems_en_summary.md](./10_core_theorems_en_summary.md)** - 核心定理英文摘要
-7j. **[10_formal_full_model_en_summary.md](./10_formal_full_model_en_summary.md)** - 形式化全模型英文摘要
-7k. **[10_formal_language_and_proofs.md](./10_formal_language_and_proofs.md)** - 形式语言与形式证明（推理规则、操作语义、判定形式）
+7i. **[10_core_theorems_en_summary.md](../../archive/research_notes_2026_06_25/10_core_theorems_en_summary.md)** - 核心定理英文摘要
+7j. **[10_formal_full_model_en_summary.md](../../archive/research_notes_2026_06_25/10_formal_full_model_en_summary.md)** - 形式化全模型英文摘要
+7k. **[10_formal_language_and_proofs.md](../../archive/research_notes_2026_06_25/10_formal_language_and_proofs.md)** - 形式语言与形式证明（推理规则、操作语义、判定形式）
 
 - ownership T2、borrow T1、type T3 完整证明
 - 辅助引理显式编号、证明依赖 DAG、反例形式化否定
@@ -187,7 +187,7 @@
 7l. **[COQ_ISABELLE_PROOF_SCAFFOLDING](../archive/deprecated/README.md)** - Coq/Isabelle 证明骨架与 L3 实施指南（已归档）
 7m. **[coq_skeleton](../archive/deprecated/coq_skeleton/README.md)** - Coq 证明骨架（T-OW2/T-BR1/T-TY3）；本目录仅保留 [coq_skeleton/README.md](../../archive/deprecated/coq_skeleton/README.md) 重定向（已归档）
 
-1. **[10_comprehensive_systematic_overview.md](./10_comprehensive_systematic_overview.md)** - 全面系统化梳理总览
+1. **[10_comprehensive_systematic_overview.md](../../archive/research_notes_2026_06_25/10_comprehensive_systematic_overview.md)** - 全面系统化梳理总览
    - 五大梳理维度（概念定义、属性关系、解释论证、形式化证明、思维表征）
    - 语义归纳与概念族谱
    - 全局一致性矩阵
@@ -195,7 +195,7 @@
    - 思维表征方式全索引
    - 公理-定理-证明全链路图
 
-2. **[10_unified_systematic_framework.md](./10_unified_systematic_framework.md)** - 全局统一系统化框架 🆕
+2. **[10_unified_systematic_framework.md](../../archive/research_notes_2026_06_25/10_unified_systematic_framework.md)** - 全局统一系统化框架 🆕
    - 全景思维导图：Rust 形式化知识
    - 多维概念对比矩阵总览
    - 公理-定理-证明全链路逻辑推进图
@@ -203,21 +203,21 @@
    - 反例总索引
    - 语义归纳与概念族谱统一
 
-3. **[10_language_semantics_expressiveness.md](./10_language_semantics_expressiveness.md)** - 构造性语义与表达能力边界 🆕
+3. **[10_language_semantics_expressiveness.md](../../archive/research_notes_2026_06_25/10_language_semantics_expressiveness.md)** - 构造性语义与表达能力边界 🆕
 
-4. **[10_design_mechanism_rationale.md](./10_design_mechanism_rationale.md)** - 设计机制论证 🆕
+4. **[10_design_mechanism_rationale.md](../../archive/research_notes_2026_06_25/10_design_mechanism_rationale.md)** - 设计机制论证 🆕
 
 - Pin 堆/栈区分使用场景的完整论证
 - 所有权、借用、生命周期、型变、异步等设计理由
 - 动机→设计决策→形式化→决策树→反例
 
-1. **[10_argumentation_gap_index.md](./10_argumentation_gap_index.md)** - 论证缺口与设计理由综合索引 🆕
+1. **[10_argumentation_gap_index.md](../../archive/research_notes_2026_06_25/10_argumentation_gap_index.md)** - 论证缺口与设计理由综合索引 🆕
 
 - 四维缺口分类（定义、关系、证明、设计理由）
 - 论证缺口追踪矩阵、设计理由缺口追踪矩阵
 - 思维表征覆盖矩阵
 
-1. **[10_theoretical_and_argumentation_system_architecture.md](./10_theoretical_and_argumentation_system_architecture.md)** - 理论体系与论证体系结构 🆕
+1. **[10_theoretical_and_argumentation_system_architecture.md](../../archive/research_notes_2026_06_25/10_theoretical_and_argumentation_system_architecture.md)** - 理论体系与论证体系结构 🆕
 
 - 理论体系四层架构（公理→语义→定理→边界）
 - 论证体系五层结构（概念→属性→论证→证明→表征）
@@ -234,7 +234,7 @@
 - 每项含动机、设计决策、形式化引用、反例
 - 配套 [RUST_193_FEATURE_MATRIX](../../archive/research_notes_2026_06_25/10_rust_193_feature_matrix.md) 按特性族五维矩阵
 
-1. **[10_core_features_full_chain.md](./10_core_features_full_chain.md)** - 核心特性完整链 🆕
+1. **[10_core_features_full_chain.md](../../archive/research_notes_2026_06_25/10_core_features_full_chain.md)** - 核心特性完整链 🆕
 
 - 13 项核心特性（所有权、借用、生命周期、Pin、Send/Sync、Future、Trait、泛型、match、for、Option/Result、闭包、?）统一链
 - 定义→概念→属性→关系→解释→示例→论证→形式化证明
@@ -243,7 +243,7 @@
 
 - 79 项非核心特性的「概念→形式化引用→反例」模板
 
-1. **[10_incremental_update_flow.md](./10_incremental_update_flow.md)** - 版本增量更新流程 🆕
+1. **[10_incremental_update_flow.md](../../archive/research_notes_2026_06_25/10_incremental_update_flow.md)** - 版本增量更新流程 🆕
 
 - 1.94+ 发布后：对比、更新 RUST_XXX、补新特性；检查清单
 
@@ -284,13 +284,13 @@
    - 质量统计
    - 趋势分析
 
-6. **[10_quick_find.md](./10_quick_find.md)** - 研究笔记快速查找
+6. **[10_quick_find.md](../../archive/research_notes_2026_06_25/10_quick_find.md)** - 研究笔记快速查找
    - 按关键词查找
    - 按研究领域查找
    - 按研究目标查找
    - 按优先级查找
 
-7. **[10_content_enhancement.md](./10_content_enhancement.md)** - 研究笔记内容完善指南
+7. **[10_content_enhancement.md](../../archive/research_notes_2026_06_25/10_content_enhancement.md)** - 研究笔记内容完善指南
    - 理论基础部分完善
    - 形式化定义部分完善
    - 代码示例部分完善
@@ -303,13 +303,13 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-1. **[10_research_methodology.md](./10_research_methodology.md)** - 研究方法论
+1. **[10_research_methodology.md](../../archive/research_notes_2026_06_25/10_research_methodology.md)** - 研究方法论
    - 形式化研究方法
    - 实验研究方法
    - 实证研究方法
    - 理论研究方法
 
-2. **[10_tools_guide.md](./10_tools_guide.md)** - 研究工具使用指南
+2. **[10_tools_guide.md](../../archive/research_notes_2026_06_25/10_tools_guide.md)** - 研究工具使用指南
    - 形式化验证工具
    - 性能分析工具
    - 内存分析工具
@@ -319,13 +319,13 @@
    - Coq/Isabelle 验证流程
    - 六类验证（所有权、借用、生命周期、类型系统、异步状态机、Pin）框架与任务清单
 
-4. **[10_formal_proof_system_guide.md](./10_formal_proof_system_guide.md)** - 形式化论证系统梳理指南 🆕
+4. **[10_formal_proof_system_guide.md](../../archive/research_notes_2026_06_25/10_formal_proof_system_guide.md)** - 形式化论证系统梳理指南 🆕
    - 论证缺口分析（定义、关系、证明）
    - 概念-公理-定理映射表
    - 思维表征方式索引（思维导图、矩阵、证明树、决策树、反例）
    - 证明完成度矩阵与实施路线图
 
-5. **[10_argumentation_gap_index.md](./10_argumentation_gap_index.md)** - 论证缺口与设计理由综合索引 🆕
+5. **[10_argumentation_gap_index.md](../../archive/research_notes_2026_06_25/10_argumentation_gap_index.md)** - 论证缺口与设计理由综合索引 🆕
    - 四维缺口分类、论证缺口追踪矩阵
    - 设计理由缺口追踪矩阵、思维表征覆盖矩阵
 
@@ -335,7 +335,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-1. **[10_practical_applications.md](./10_practical_applications.md)** - 实际应用案例研究
+1. **[10_practical_applications.md](../../archive/research_notes_2026_06_25/10_practical_applications.md)** - 实际应用案例研究
    - 系统编程案例
    - 网络应用案例
    - 并发系统案例
@@ -364,7 +364,7 @@
    - 学术质量检查
    - 代码质量检查
 
-4. **[10_changelog.md](./10_changelog.md)** - 更新日志
+4. **[10_changelog.md](../../archive/research_notes_2026_06_25/10_changelog.md)** - 更新日志
    - 系统变更历史
    - 版本说明
    - 未来计划
@@ -393,7 +393,7 @@
    - 状态: ✅ 已完成 (100%)
    - 关键词: 借用检查器、数据竞争、形式化证明
 
-3. **[10_async_state_machine.md](./formal_methods/10_async_state_machine.md)** - 异步状态机形式化
+3. **[10_async_state_machine.md](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md)** - 异步状态机形式化
    - 研究目标: 形式化定义 Future/Poll 状态机，证明并发安全
    - 状态: ✅ 已完成 (100%)
    - 关键词: 异步、Future、状态机、并发安全
@@ -403,22 +403,22 @@
    - 状态: ✅ 已完成 (100%)
    - 关键词: 生命周期、引用有效性、形式化语义
 
-5. **[10_pin_self_referential.md](./formal_methods/10_pin_self_referential.md)** - Pin 和自引用类型形式化
+5. **[10_pin_self_referential.md](../../archive/research_notes_2026_06_25/formal_methods/10_pin_self_referential.md)** - Pin 和自引用类型形式化
    - 研究目标: 形式化定义 Pin 类型和自引用类型，证明安全性
    - 状态: ✅ 已完成 (100%)
    - 关键词: Pin、自引用类型、内存位置稳定性
 
-6. **[10_send_sync_formalization.md](./formal_methods/10_send_sync_formalization.md)** - Send/Sync 形式化
+6. **[10_send_sync_formalization.md](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md)** - Send/Sync 形式化
    - 研究目标: Def SEND1/SYNC1、SEND-T1/SYNC-T1、与 spawn/Future/Arc 衔接、反例
    - 状态: ✅ 已完成 (100%)
    - 关键词: Send、Sync、跨线程安全、数据竞争自由
 
-7. **[10_safe_decidable_mechanisms_and_formal_methods_plan.md](./formal_methods/10_safe_decidable_mechanisms_and_formal_methods_plan.md)** - formal_methods 意见与建议、安全可判定机制梳理、完备特性对比、可持续推进计划
+7. **[10_safe_decidable_mechanisms_and_formal_methods_plan.md](../../archive/research_notes_2026_06_25/formal_methods/10_safe_decidable_mechanisms_and_formal_methods_plan.md)** - formal_methods 意见与建议、安全可判定机制梳理、完备特性对比、可持续推进计划
    - 研究目标: 阶段 A–D 已完成（Send/Sync 专篇、安全可判定总览、四维表、思维表征绑定）
    - 状态: ✅ 阶段 A–D 100% 完成
    - 关键词: Send、Sync、安全可判定、完备特性对比、思维表征
 
-8. **[10_safe_decidable_mechanisms_overview.md](./10_safe_decidable_mechanisms_overview.md)** - 安全可判定机制总览
+8. **[10_safe_decidable_mechanisms_overview.md](../../archive/research_notes_2026_06_25/10_safe_decidable_mechanisms_overview.md)** - 安全可判定机制总览
    - 研究目标: 每机制概念定义、属性关系、解释论证、形式证明、反例；并发+Trait 族四维表
    - 状态: ✅ 已完成 (100%)
    - 关键词: 安全可判定、ownership、borrow、Send、Sync、Pin、async
@@ -443,12 +443,12 @@
    - 状态: ✅ 缺口已声明；阶段 1–7 Def 占位完成
    - 关键词: 完备性、LUB、Copy、RPITIT、coherence、组合法则
 
-2. **[10_type_system_foundations.md](./type_theory/10_type_system_foundations.md)** - 类型系统基础
+2. **[10_type_system_foundations.md](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md)** - 类型系统基础
    - 研究目标: 形式化定义 Rust 类型系统基础
    - 状态: ✅ 已完成 (100%)
    - 关键词: 类型系统、类型推导、类型安全
 
-3. **[10_trait_system_formalization.md](./type_theory/10_trait_system_formalization.md)** - Trait 系统形式化
+3. **[10_trait_system_formalization.md](../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md)** - Trait 系统形式化
    - 研究目标: 形式化定义 Trait 系统，理解类型理论基础
    - 状态: ✅ 已完成 (100%)
    - 关键词: Trait、类型类、存在类型
@@ -458,7 +458,7 @@
    - 状态: ✅ 已完成 (100%)
    - 关键词: 生命周期、区域类型、约束求解
 
-5. **[10_advanced_types.md](./type_theory/10_advanced_types.md)** - 高级类型特性
+5. **[10_advanced_types.md](../../archive/research_notes_2026_06_25/type_theory/10_advanced_types.md)** - 高级类型特性
    - 研究目标: 深入分析 GATs、const 泛型和依赖类型
    - 状态: ✅ 已完成 (100%)
    - 关键词: GATs、const 泛型、依赖类型、类型族
@@ -474,29 +474,29 @@
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
-**目录**: [experiments/](./experiments/README.md)
+**目录**: [experiments/](../../archive/research_notes_2026_06_25/experiments/README.md)
 
-1. **[10_performance_benchmarks.md](./experiments/10_performance_benchmarks.md)** - 性能基准测试
+1. **[10_performance_benchmarks.md](../../archive/research_notes_2026_06_25/experiments/10_performance_benchmarks.md)** - 性能基准测试
    - 研究目标: 通过基准测试评估不同实现的性能特征
    - 状态: ✅ 已完成 (100%)
    - 关键词: 性能测试、基准测试、Criterion.rs
 
-2. **[10_memory_analysis.md](./experiments/10_memory_analysis.md)** - 内存分析
+2. **[10_memory_analysis.md](../../archive/research_notes_2026_06_25/experiments/10_memory_analysis.md)** - 内存分析
    - 研究目标: 分析内存使用模式，识别内存优化机会
    - 状态: ✅ 已完成 (100%)
    - 关键词: 内存分析、内存优化、内存泄漏
 
-3. **[10_compiler_optimizations.md](./experiments/10_compiler_optimizations.md)** - 编译器优化
+3. **[10_compiler_optimizations.md](../../archive/research_notes_2026_06_25/experiments/10_compiler_optimizations.md)** - 编译器优化
    - 研究目标: 评估编译器优化效果，了解如何编写编译器友好的代码
    - 状态: ✅ 已完成 (100%)
    - 关键词: 编译器优化、内联、循环优化
 
-4. **[10_concurrency_performance.md](./experiments/10_concurrency_performance.md)** - 并发性能研究
+4. **[10_concurrency_performance.md](../../archive/research_notes_2026_06_25/experiments/10_concurrency_performance.md)** - 并发性能研究
    - 研究目标: 评估不同并发模型的性能特征
    - 状态: ✅ 已完成 (100%)
    - 关键词: 并发性能、同步原语、性能优化
 
-5. **[10_macro_expansion_performance.md](./experiments/10_macro_expansion_performance.md)** - 宏展开性能分析
+5. **[10_macro_expansion_performance.md](../../archive/research_notes_2026_06_25/experiments/10_macro_expansion_performance.md)** - 宏展开性能分析
    - 研究目标: 分析宏展开性能，识别性能瓶颈
    - 状态: ✅ 已完成 (100%)
    - 关键词: 宏展开、编译时间、性能分析
@@ -507,30 +507,30 @@
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
-**目录**: [software_design_theory/](./software_design_theory/README.md)
+**目录**: [software_design_theory/](../../archive/research_notes_2026_06_25/software_design_theory/README.md)
 
-1. **[software_design_theory/README.md](./software_design_theory/README.md)** - 软件设计理论体系
+1. **[software_design_theory/README.md](../../archive/research_notes_2026_06_25/software_design_theory/README.md)** - 软件设计理论体系
    - 研究目标: 设计模式形式化、23/43 模型、执行模型、组合工程有效性
    - 状态: 100% 完成
    - 关键词: 设计模式、安全边界、执行模型、组合工程
 
-2. **[01_design_patterns_formal](./software_design_theory/01_design_patterns_formal/README.md)** - 设计模式形式分析
+2. **[01_design_patterns_formal](../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/README.md)** - 设计模式形式分析
    - GoF 23 种模式形式化（创建型、结构型、行为型）
    - 与 ownership、borrow、trait 衔接
 
-3. **[02_workflow_safe_complete_models](./software_design_theory/02_workflow_safe_complete_models/README.md)** - 23 安全 vs 43 完全模型
+3. **[02_workflow_safe_complete_models](../../archive/research_notes_2026_06_25/software_design_theory/02_workflow_safe_complete_models/README.md)** - 23 安全 vs 43 完全模型
    - 安全设计模型索引、语义边界
 
-4. **[03_execution_models](./software_design_theory/03_execution_models/README.md)** - 执行模型形式化
+4. **[03_execution_models](../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/README.md)** - 执行模型形式化
    - 同步、异步、并发、并行、分布式
 
-5. **[04_compositional_engineering](./software_design_theory/04_compositional_engineering/README.md)** - 组合软件工程有效性
+5. **[04_compositional_engineering](../../archive/research_notes_2026_06_25/software_design_theory/04_compositional_engineering/README.md)** - 组合软件工程有效性
    - 定理 CE-T1、CE-T2、CE-T3
 
-6. **[06_rust_idioms](./software_design_theory/06_rust_idioms.md)** - Rust 惯用模式
+6. **[06_rust_idioms](../../archive/research_notes_2026_06_25/software_design_theory/06_rust_idioms.md)** - Rust 惯用模式
    - RAII、Newtype、类型状态；与 GoF 衔接
 
-7. **[07_anti_patterns](./software_design_theory/07_anti_patterns.md)** - 反模式与边界
+7. **[07_anti_patterns](../../archive/research_notes_2026_06_25/software_design_theory/07_anti_patterns.md)** - 反模式与边界
    - 13 反例索引、反模式分类、规避策略
 
 ---
@@ -539,12 +539,12 @@
 
 > **来源: [ACM](https://dl.acm.org/)**
 
-1. **[10_practical_applications.md](./10_practical_applications.md)** - 实际应用案例研究
+1. **[10_practical_applications.md](../../archive/research_notes_2026_06_25/10_practical_applications.md)** - 实际应用案例研究
    - 研究目标: 通过分析实际应用案例，验证 Rust 理论在实际项目中的应用效果
    - 状态: ✅ 已完成 (100%)
    - 关键词: 实际应用、案例研究、最佳实践
 
-2. **[10_research_methodology.md](./10_research_methodology.md)** - 研究方法论
+2. **[10_research_methodology.md](../../archive/research_notes_2026_06_25/10_research_methodology.md)** - 研究方法论
    - 研究目标: 建立 Rust 研究的方法论体系，为研究提供系统化的方法指导
    - 状态: ✅ 已完成 (100%)
    - 关键词: 研究方法、研究工具、方法论
@@ -559,16 +559,16 @@
 
 - [所有权模型形式化](./formal_methods/10_ownership_model.md)
 - [借用检查器证明](./formal_methods/10_borrow_checker_proof.md)
-- [Pin 和自引用类型形式化](./formal_methods/10_pin_self_referential.md)
+- [Pin 和自引用类型形式化](../../archive/research_notes_2026_06_25/formal_methods/10_pin_self_referential.md)
 
 ### 类型系统
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 - [类型理论完备性缺口](../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md)
-- [类型系统基础](./type_theory/10_type_system_foundations.md)
-- [Trait 系统形式化](./type_theory/10_trait_system_formalization.md)
-- [高级类型特性](./type_theory/10_advanced_types.md)
+- [类型系统基础](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md)
+- [Trait 系统形式化](../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md)
+- [高级类型特性](../../archive/research_notes_2026_06_25/type_theory/10_advanced_types.md)
 - [型变理论](./type_theory/10_variance_theory.md)
 
 ### 生命周期
@@ -582,42 +582,42 @@
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
-- [异步状态机形式化](./formal_methods/10_async_state_machine.md)
-- [并发性能研究](./experiments/10_concurrency_performance.md)
-- [执行模型](software_design_theory/03_execution_models/README.md)（同步/异步/并发/并行/分布式）
+- [异步状态机形式化](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md)
+- [并发性能研究](../../archive/research_notes_2026_06_25/experiments/10_concurrency_performance.md)
+- [执行模型](../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/README.md)（同步/异步/并发/并行/分布式）
 
 ### 安全与 unsafe
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 - [安全与非安全全面论证](./10_safe_unsafe_comprehensive_analysis.md)
-- [05_boundary_system 三维边界](software_design_theory/05_boundary_system/README.md)
-- [07_anti_patterns 反模式](software_design_theory/07_anti_patterns.md)
+- [05_boundary_system 三维边界](../../archive/research_notes_2026_06_25/software_design_theory/05_boundary_system/README.md)
+- [07_anti_patterns 反模式](../../archive/research_notes_2026_06_25/software_design_theory/07_anti_patterns.md)
 
 ### 设计模式与工程
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-- [设计模式形式化](software_design_theory/01_design_patterns_formal/README.md)（GoF 23）
-- [23 安全 / 43 完全模型](software_design_theory/02_workflow_safe_complete_models/README.md)
-- [组合工程](software_design_theory/04_compositional_engineering/README.md)
-- [06_rust_idioms](software_design_theory/06_rust_idioms.md)、[07_anti_patterns](software_design_theory/07_anti_patterns.md)
+- [设计模式形式化](../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/README.md)（GoF 23）
+- [23 安全 / 43 完全模型](../../archive/research_notes_2026_06_25/software_design_theory/02_workflow_safe_complete_models/README.md)
+- [组合工程](../../archive/research_notes_2026_06_25/software_design_theory/04_compositional_engineering/README.md)
+- [06_rust_idioms](../../archive/research_notes_2026_06_25/software_design_theory/06_rust_idioms.md)、[07_anti_patterns](../../archive/research_notes_2026_06_25/software_design_theory/07_anti_patterns.md)
 
 ### 性能优化
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
-- [性能基准测试](./experiments/10_performance_benchmarks.md)
-- [内存分析](./experiments/10_memory_analysis.md)
-- [编译器优化](./experiments/10_compiler_optimizations.md)
-- [宏展开性能分析](./experiments/10_macro_expansion_performance.md)
+- [性能基准测试](../../archive/research_notes_2026_06_25/experiments/10_performance_benchmarks.md)
+- [内存分析](../../archive/research_notes_2026_06_25/experiments/10_memory_analysis.md)
+- [编译器优化](../../archive/research_notes_2026_06_25/experiments/10_compiler_optimizations.md)
+- [宏展开性能分析](../../archive/research_notes_2026_06_25/experiments/10_macro_expansion_performance.md)
 
 ### 实际应用 {#实际应用-1}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
-- [实际应用案例研究](./10_practical_applications.md)
-- [研究方法论](./10_research_methodology.md)
+- [实际应用案例研究](../../archive/research_notes_2026_06_25/10_practical_applications.md)
+- [研究方法论](../../archive/research_notes_2026_06_25/10_research_methodology.md)
 
 ### 版本与特性
 
@@ -674,14 +674,14 @@
 
 - [主索引](./README.md)
 - [快速参考](../../archive/research_notes_2026_06_25/10_quick_reference.md)
-- [研究路线图](./10_research_roadmap.md)
-- [系统总结](./10_system_summary.md)
+- [研究路线图](../../archive/research_notes_2026_06_25/10_research_roadmap.md)
+- [系统总结](../../archive/research_notes_2026_06_25/10_system_summary.md)
 
 ### 目录索引
 
 - [形式化方法索引](../../archive/research_notes_2026_06_25/formal_methods/README.md)
 - [类型理论索引](./type_theory/README.md)
-- [实验研究索引](./experiments/README.md)
+- [实验研究索引](../../archive/research_notes_2026_06_25/experiments/README.md)
 
 ---
 

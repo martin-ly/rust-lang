@@ -410,8 +410,8 @@ where
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 异步执行模型 | 异步模型理论 | [../../../research_notes/software_design_theory/03_execution_models/02_async.md](../../../research_notes/software_design_theory/03_execution_models/02_async.md) |
-| 并发执行模型 | 并发模型理论 | [../../../research_notes/software_design_theory/03_execution_models/03_concurrent.md](../../../research_notes/software_design_theory/03_execution_models/03_concurrent.md) |
+| 异步执行模型 | 异步模型理论 | [../../../research_notes/software_design_theory/03_execution_models/02_async.md](../../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/02_async.md) |
+| 并发执行模型 | 并发模型理论 | [../../../research_notes/software_design_theory/03_execution_models/03_concurrent.md](../../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/03_concurrent.md) |
 
 ### 形式化方法
 
@@ -419,9 +419,9 @@ where
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 异步状态机 | 异步状态机形式化 | [../../../research_notes/formal_methods/10_async_state_machine.md](../../../research_notes/formal_methods/10_async_state_machine.md) |
-| Pin 与自引用 | 自引用类型形式化 | [../../../research_notes/formal_methods/10_pin_self_referential.md](../../../research_notes/formal_methods/10_pin_self_referential.md) |
-| Send/Sync 形式化 | 线程安全 trait 形式化 | [../../../research_notes/formal_methods/10_send_sync_formalization.md](../../../research_notes/formal_methods/10_send_sync_formalization.md) |
+| 异步状态机 | 异步状态机形式化 | [../../../research_notes/formal_methods/10_async_state_machine.md](../../../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) |
+| Pin 与自引用 | 自引用类型形式化 | [../../../research_notes/formal_methods/10_pin_self_referential.md](../../../../archive/research_notes_2026_06_25/formal_methods/10_pin_self_referential.md) |
+| Send/Sync 形式化 | 线程安全 trait 形式化 | [../../../research_notes/formal_methods/10_send_sync_formalization.md](../../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) |
 
 ### 实验分析
 
@@ -429,7 +429,7 @@ where
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 并发性能 | 并发性能测试 | [../../../research_notes/experiments/10_concurrency_performance.md](../../../research_notes/experiments/10_concurrency_performance.md) |
+| 并发性能 | 并发性能测试 | [../../../research_notes/experiments/10_concurrency_performance.md](../../../../archive/research_notes_2026_06_25/experiments/10_concurrency_performance.md) |
 
 ---
 

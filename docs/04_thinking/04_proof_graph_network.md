@@ -378,7 +378,7 @@ graph TD
 
 - 所有权: [ownership_model](../research_notes/formal_methods/10_ownership_model.md) 定理 T2（唯一性）、T3（内存安全）
 - 借用: [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) 定理 T1
-- 类型: [type_system_foundations](../research_notes/type_theory/10_type_system_foundations.md) 定理 T1–T3
+- 类型: [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) 定理 T1–T3
 
 ### 内存安全定理
 
@@ -604,7 +604,7 @@ graph TD
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**形式化对应**: [type_system_foundations](../research_notes/type_theory/10_type_system_foundations.md) 定理 T1（进展性）、T2（保持性）、T3（类型安全）。
+**形式化对应**: [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) 定理 T1（进展性）、T2（保持性）、T3（类型安全）。
 
 ### 类型安全定理
 
@@ -773,7 +773,7 @@ graph TD
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**形式化对应**: [async_state_machine](../research_notes/formal_methods/10_async_state_machine.md) 定理 T6.1–T6.3、[pin_self_referential](../research_notes/formal_methods/10_pin_self_referential.md) 定理 T1–T3。
+**形式化对应**: [async_state_machine](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) 定理 T6.1–T6.3、[pin_self_referential](../../archive/research_notes_2026_06_25/formal_methods/10_pin_self_referential.md) 定理 T1–T3。
 
 ### 异步 Future 安全性证明树
 
@@ -1366,14 +1366,14 @@ fn proof_validation_workflow() {
 
 - [10_proof_index.md](../../archive/research_notes_2026_06_25/10_proof_index.md) - 形式化证明索引
 - [10_core_theorems_full_proofs.md](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) - 核心定理完整证明
-- [10_formal_language_and_proofs.md](../research_notes/10_formal_language_and_proofs.md) - 形式化语言与证明
+- [10_formal_language_and_proofs.md](../../archive/research_notes_2026_06_25/10_formal_language_and_proofs.md) - 形式化语言与证明
 
 ### 理论基础
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
-- [10_theoretical_and_argumentation_system_architecture.md](../research_notes/10_theoretical_and_argumentation_system_architecture.md) - 理论体系架构
-- [10_language_semantics_expressiveness.md](../research_notes/10_language_semantics_expressiveness.md) - 语言语义与表达能力
+- [10_theoretical_and_argumentation_system_architecture.md](../../archive/research_notes_2026_06_25/10_theoretical_and_argumentation_system_architecture.md) - 理论体系架构
+- [10_language_semantics_expressiveness.md](../../archive/research_notes_2026_06_25/10_language_semantics_expressiveness.md) - 语言语义与表达能力
 
 ### 证明工具
 

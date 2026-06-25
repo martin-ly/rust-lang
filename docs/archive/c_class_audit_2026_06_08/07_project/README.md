@@ -137,9 +137,9 @@ fn main() {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-- **综合总览**: [10_comprehensive_systematic_overview.md](../research_notes/10_comprehensive_systematic_overview.md) - 全局一致性、语义归纳、概念族谱
-- **证明系统**: [10_formal_proof_system_guide.md](../research_notes/10_formal_proof_system_guide.md) - 形式化证明系统指南
-- **权威对齐**: [10_authoritative_alignment_guide.md](../research_notes/10_authoritative_alignment_guide.md) - 权威来源对齐指南
+- **综合总览**: [10_comprehensive_systematic_overview.md](../../../../archive/research_notes_2026_06_25/10_comprehensive_systematic_overview.md) - 全局一致性、语义归纳、概念族谱
+- **证明系统**: [10_formal_proof_system_guide.md](../../../../archive/research_notes_2026_06_25/10_formal_proof_system_guide.md) - 形式化证明系统指南
+- **权威对齐**: [10_authoritative_alignment_guide.md](../../../../archive/research_notes_2026_06_25/10_authoritative_alignment_guide.md) - 权威来源对齐指南
 
 ### 文档分类
 
