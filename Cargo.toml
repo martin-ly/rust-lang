@@ -364,7 +364,7 @@ tracing-subscriber = { version = "0.3.23", features = ["env-filter", "json"] }
 log = "0.4.33"
 # env_logger: log 的简单初始化封装（仅 c06_async 示例使用）
 # 注意: 禁用 default-features 中的 humantime，避免引入 jiff -> defmt 传递依赖
-env_logger = { version = "0.11.10", default-features = false, features = ["auto-color", "regex"] }
+env_logger = { version = "0.11.11", default-features = false, features = ["auto-color", "regex"] }
 # prometheus: Prometheus指标收集库
 prometheus = "0.14.0"
 # tracing-opentelemetry: tracing与OpenTelemetry的集成 - 2025年10月最新版本
