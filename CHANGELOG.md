@@ -11,7 +11,7 @@
 - `NonZero<T>::highest_one` / `lowest_one`（1.97 已确认，PR #155147）
 - `NonZero<T>::bit_width()`（1.97 已确认，PR #155131）
 - `char::is_control()` const 稳定化（1.97 已确认，PR #155528）
-- `VecDeque::truncate_front` / `VecDeque::retain_back`（PR #151973 FCP 完成，未赶上 1.97 cutoff，推迟至 1.98+）
+- `VecDeque::truncate_front` / `VecDeque::retain_back`（PR #151973 FCP 已完成并 `to-announce`；发布日前确认是否 backport 进 1.97.0；若未进则保留等效实现并推迟至 1.98+）
 
 ### 1.98+ 前瞻（已确认进入 nightly → 1.98）
 

@@ -39,7 +39,10 @@
 
 - **Cheatsheet**: [ownership_cheatsheet](../../../docs/02_reference/quick_reference/ownership_cheatsheet.md)
 - **Examples**: `cargo run -p c01_ownership_borrow_scope --example ownership_demo`
-- **Rustlings**: [06_move_semantics](https://github.com/rust-lang/rustlings/tree/main/exercises/06_move_semantics), [16_lifetimes](https://github.com/rust-lang/rustlings/tree/main/exercises/16_lifetimes), [19_smart_pointers](https://github.com/rust-lang/rustlings/tree/main/exercises/19_smart_pointers)
+- **Rustlings**:
+- [06_move_semantics](https://github.com/rust-lang/rustlings/tree/main/exercises/06_move_semantics),
+- [16_lifetimes](https://github.com/rust-lang/rustlings/tree/main/exercises/16_lifetimes),
+- [19_smart_pointers](https://github.com/rust-lang/rustlings/tree/main/exercises/19_smart_pointers)
 
 ---
 

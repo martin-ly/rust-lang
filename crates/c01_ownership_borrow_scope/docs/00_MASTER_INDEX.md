@@ -59,7 +59,6 @@
   - [🏆 项目荣誉](#-项目荣誉)
     - [核心优势](#核心优势)
     - [适用人群](#适用人群)
-  - [END OF INDEX ✅](#end-of-index-)
 
 ## 📚 官方资源映射
 
@@ -804,6 +803,7 @@
 ---
 
 END OF INDEX ✅
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

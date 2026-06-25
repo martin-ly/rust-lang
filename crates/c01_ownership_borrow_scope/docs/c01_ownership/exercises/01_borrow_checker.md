@@ -80,6 +80,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 **难度**: 中级
 **预计时间**: 30-45 分钟
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

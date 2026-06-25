@@ -31,7 +31,6 @@
   - [📚 总结与应用](#-总结与应用)
     - [关键概念依赖链](#关键概念依赖链)
   - [🔗 相关文档](#-相关文档)
-  - [**注意**: 本文档使用 Mermaid 语法创建关系图，在支持的 Markdown 查看器中可查看完整可视化效果](#注意-本文档使用-mermaid-语法创建关系图在支持的-markdown-查看器中可查看完整可视化效果)
 
 ## 📊 文档概述
 
@@ -1245,6 +1244,7 @@ graph LR
 ---
 
 **注意**: 本文档使用 Mermaid 语法创建关系图，在支持的 Markdown 查看器中可查看完整可视化效果
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

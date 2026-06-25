@@ -44,8 +44,8 @@
   - 删除等效的 `while deque.len() > n { deque.pop_front(); }` 循环
   - 验证边界条件（空 deque、`n >= len`）
 - [ ] `VecDeque::retain_back`：
-  - **仅当 nightly/beta 已确认该方法进入 1.97 时才激活**
-  - 若未稳定，保持等效实现，并在注释中标注 "推迟至 1.98"
+  - 当前在线状态（2026-06-25）：PR #151973 已走完 FCP 并标记 `to-announce`，有较大概率进入 1.97.0；但仍需发布日核对实际 Release Notes
+  - 若 1.97 Release Notes 确认稳定：取消注释真实 API 调用；否则保持等效实现，并在注释中标注 "推迟至 1.98"
 - [ ] `float_algebraic` / `RandomSource` / `box_vec_non_null` / `int_format_into` / C-variadic：
   - 对照 1.97 Release Notes 逐条确认是否稳定
   - 稳定的取消注释并写实际调用；未稳定的保持现状并更新注释
@@ -126,7 +126,7 @@
 
 | 现象 | 应对措施 |
 |:---|:---|
-| 某特性未进入 1.97 | 保持等效实现；更新文档状态为 "推迟至 1.98" |
+| 某特性未进入 1.97（含 `retain_back`） | 保持等效实现；更新 `rust_197_features.rs` 与 `CHANGELOG.md` 状态为 "推迟至 1.98" |
 | 稳定 API 签名与 nightly 不同 | 不要直接取消注释，按实际签名重写 |
 | Windows 构建失败 | 检查 `aws-lc-rs`/`ring` 依赖是否需要 `--no-default-features` |
 | 测试超时或不稳定 | 单独运行失败测试，排除网络/文件系统依赖 |

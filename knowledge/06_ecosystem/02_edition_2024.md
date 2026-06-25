@@ -529,11 +529,13 @@ fn fibonacci() -> impl Iterator<Item = u64> {
 
 | 版本 | 发布日期 | Edition / 关键状态 |
 |------|---------|-------------------|
-| 1.82.0 | 2024-10 | Edition 2024 前置特性：`unsafe extern`、`&raw const`、`+ use<..>` 等 |
+| 1.82.0 | 2024-10 | 部分前置语言特性已 stable：`unsafe extern` blocks、`&raw const`、`+ use<..>` precise capturing 等 |
 | 1.85.0 | 2025-02 | **Edition 2024 stable**；**async closures stable** |
 | 1.86.0 | 2025-04 | trait object upcasting stable |
 | 1.96.0 | 2026-05 | `assert_matches!`、新 `core::range` 类型族 stable |
 | nightly | — | `gen blocks`、`async_drop`、`RTN`、`AFIDT` 等仍实验中 |
+
+> **注意**：**Rust 2024 Edition 整体在 1.85.0 stable**；1.82.0 仅 stable 了部分前置语言特性（如 `unsafe extern`、`&raw const`、`+ use<..>`），不等同于 Edition 2024 可用。
 
 ## 📖 延伸阅读
 >

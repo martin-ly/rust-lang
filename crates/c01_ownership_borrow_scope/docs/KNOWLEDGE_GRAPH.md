@@ -40,7 +40,6 @@
   - [📚 参考和扩展阅读](#-参考和扩展阅读)
     - [核心文档链接](#核心文档链接)
     - [实践指南](#实践指南)
-  - [**更新频率**: 随 Rust 版本更新和项目进展持续更新](#更新频率-随-rust-版本更新和项目进展持续更新)
 
 **版本**: 1.0
 **Rust 版本**: 1.93.0+
@@ -718,6 +717,7 @@ graph TB
 **注意**: 本知识图谱使用 Mermaid 语法，可在支持的 Markdown 查看器中查看完整可视化效果。
 
 **更新频率**: 随 Rust 版本更新和项目进展持续更新
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

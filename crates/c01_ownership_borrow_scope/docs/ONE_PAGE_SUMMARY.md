@@ -48,9 +48,22 @@
 
 ## 速查与练习
 
-- **速查卡**: [ownership_cheatsheet](../../../docs/02_reference/quick_reference/ownership_cheatsheet.md)
-- **RBE 练习**: [Scope](https://doc.rust-lang.org/rust-by-example/scope.html) · [Move](https://doc.rust-lang.org/rust-by-example/scope/move.html) · [Borrow](https://doc.rust-lang.org/rust-by-example/scope/borrow.html) · [Lifetime](https://doc.rust-lang.org/rust-by-example/scope/lifetime.html)
-- **Rustlings**: [06_move_semantics](https://github.com/rust-lang/rustlings/tree/main/exercises/06_move_semantics) · [16_lifetimes](https://github.com/rust-lang/rustlings/tree/main/exercises/16_lifetimes) · [19_smart_pointers](https://github.com/rust-lang/rustlings/tree/main/exercises/19_smart_pointers)
+- **速查卡**:
+-
+- [ownership_cheatsheet](../../../docs/02_reference/quick_reference/ownership_cheatsheet.md)
+-
+- **RBE 练习**:
+-
+- [Scope](https://doc.rust-lang.org/rust-by-example/scope.html) ·
+- [Move](https://doc.rust-lang.org/rust-by-example/scope/move.html) ·
+- [Borrow](https://doc.rust-lang.org/rust-by-example/scope/borrow.html) ·
+- [Lifetime](https://doc.rust-lang.org/rust-by-example/scope/lifetime.html)
+-
+- **Rustlings**:
+-
+- [06_move_semantics](https://github.com/rust-lang/rustlings/tree/main/exercises/06_move_semantics) ·
+- [16_lifetimes](https://github.com/rust-lang/rustlings/tree/main/exercises/16_lifetimes) ·
+- [19_smart_pointers](https://github.com/rust-lang/rustlings/tree/main/exercises/19_smart_pointers)
 
 ---
 

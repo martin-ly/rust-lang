@@ -163,11 +163,11 @@
 |:---|:---|:---:|:---|
 | async-std 移除 | 🟡 文档清理中 | 4-6h | 无（已确认无代码依赖） |
 | wasm32-wasi 迁移 | 🟢 基本完成 | 0.5h | 无 |
-| async_trait 清理 | 🟡 文档可推进，代码待 AFIDT | 6-10h | AFIDT 预计 1.97-1.98 稳定 |
+| async_trait 清理 | 🟡 文档可推进，代码待 AFIDT | 6-10h | AFIDT 尚无稳定时间表（2025H2 仍需 RFC 与实验）|
 
 **建议执行顺序**:
 
 1. **立即**: wasm32-wasi 确认（0.5h）
 2. **本周**: async-std 文档清理（4-6h）
-3. **1.97 发布后**: async_trait 代码侧清理（配合 AFIDT 稳定）
+3. **AFIDT 稳定后**: async_trait 代码侧清理（配合上游稳定进度，非 1.97/1.98 硬依赖）
 4. **持续**: 文档侧 async_trait 清理可与 async-std 并行
