@@ -292,6 +292,7 @@
   - [Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈](07_future/28_rust_for_webassembly.md)
   - [eBPF / Aya / Rex 的 Rust 映射](07_future/29_ebpf_rust.md)
   - [BorrowSanitizer：动态别名规则验证工具](07_future/borrow_sanitizer.md)
+  - [Rust 1.96 稳定特性](07_future/rust_1_96_stabilized.md)
   - [Rust 1.97 前沿特性预览](07_future/rust_1_97_preview.md)
 
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/)

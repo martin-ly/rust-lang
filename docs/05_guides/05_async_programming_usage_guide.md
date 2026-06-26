@@ -48,7 +48,7 @@
       - [递归遍历与短路求值](#递归遍历与短路求值)
       - [ControlFlow 与 Try  trait 集成](#controlflow-与-try--trait-集成)
       - [组合模式：ControlFlow 管道](#组合模式controlflow-管道)
-  - 🏗️ 异步编程模式（5+ 完整示例）
+  - [🏗️ 异步编程模式（5+ 完整示例）](#️-异步编程模式5-完整示例)
     - [模式 1: 取消与超时处理](#模式-1-取消与超时处理)
     - [模式 2: 限流与速率控制](#模式-2-限流与速率控制)
     - [模式 3: 重试与退避策略](#模式-3-重试与退避策略)
@@ -72,7 +72,6 @@
       - [跨平台异步运行时配置](#跨平台异步运行时配置)
       - [特性门控的异步模块加载](#特性门控的异步模块加载)
   - [🔗 形式化引用](#-形式化引用)
-  - **最后更新**: 2026-05-08
   - [思维导图：异步编程全景](#思维导图异步编程全景)
   - [决策树：运行时选择](#决策树运行时选择)
   - [权威来源索引](#权威来源索引)
@@ -83,7 +82,7 @@
 **Rust 版本**: 1.96.0+ (Edition 2024)
 **状态**: ✅ 已完成
 
-> **AFIDT 状态提示（2026-06-25）**：`async fn in dyn trait`（AFIDT）仍为 nightly 实验特性，暂无稳定时间表。生产代码中 `dyn Trait` 的异步方法请继续使用 `async-trait`；AFIT（`async fn in trait`）已在 Rust 1.75+ stable，可用于泛型/`impl Trait` 场景。
+> **AFIDT 状态提示（2026-06-26）**：`async fn in dyn trait`（AFIDT）仍为 nightly 实验特性，暂无稳定时间表。生产代码中 `dyn Trait` 的异步方法请继续使用 `async-trait`；AFIT（`async fn in trait`）已在 Rust 1.75+ stable，可用于泛型/`impl Trait` 场景。
 
 ---
 
@@ -1837,6 +1836,7 @@ async fn fetch_data(url: &str) -> Result<String, Box<dyn std::error::Error>> {
 **维护者**: Rust 学习项目团队
 **状态**: ✅ 完整实现 (Week 15 形式化引用补全 + Async Closures / `cfg_select!` 增补)
 **最后更新**: 2026-05-08
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

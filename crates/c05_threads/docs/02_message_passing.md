@@ -1,4 +1,7 @@
-> **生态状态提示**：本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
+> **生态状态提示**：
+>
+> 本文档提及 `async-std` 与/或 `wasm32-wasi`。
+> 请注意：
 >
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
@@ -576,8 +579,9 @@ mindmap
 
 ### 常用通道API
 
-| API                  | 行为       | 阻塞? | 返回类型                      |
-| :--- | :--- | :--- | :--- || `tx.send(msg)`       | 发送消息   | 可能  | `Result<(), SendError<T>>`    |
+| API  | 行为 | 阻塞? | 返回类型  |
+| :--- | :--- | :--- | :--- |
+| `tx.send(msg)`       | 发送消息   | 可能  | `Result<(), SendError<T>>`    |
 | `rx.recv()`          | 接收消息   | ✅    | `Result<T, RecvError>`        |
 | `rx.try_recv()`      | 非阻塞接收 | ❌    | `Result<T, TryRecvError>`     |
 | `rx.recv_timeout(d)` | 超时接收   | ✅    | `Result<T, RecvTimeoutError>` |
@@ -585,8 +589,9 @@ mindmap
 
 ### 错误类型速查
 
-| 错误                         | 原因         | 处理方式       |
-| :--- | :--- | :--- || `SendError`                  | 接收端已关闭 | 停止发送或重连 |
+| 错误 | 原因 | 处理方式  |
+| :--- | :--- | :--- |
+| `SendError`                  | 接收端已关闭 | 停止发送或重连 |
 | `RecvError`                  | 发送端已关闭 | 优雅退出       |
 | `TryRecvError::Empty`        | 通道暂时为空 | 稍后重试       |
 | `TryRecvError::Disconnected` | 发送端已关闭 | 优雅退出       |

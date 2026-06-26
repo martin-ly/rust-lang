@@ -1,10 +1,34 @@
 # 更新日志 (Changelog)
 
-> **最后更新**: 2026-06-25（docs/ A/B/C 价值审计收尾 + B 类过期文档复审 + 归档引用残留清理 + cargo audit unmaintained 依赖处理）
+> **最后更新**: 2026-06-26（P1 权威事实修正 + Rust 1.96 覆盖缺口回填 + workspace version 对齐 + C-class 长期维护规则落地）
 
 ---
 
 ## [3.1.0] - 2026-07-09 — Rust 1.97.0 稳定支持
+
+### P1 权威事实修正与 Rust 1.96 覆盖缺口回填（2026-06-26）
+
+- **确认主控与策略**：
+  - 继续以 `.kimi/EXECUTION_CHECKLIST_2026_06_22.md` 为唯一执行主控。
+  - 生成 `.kimi/PROJECT_PENDING_PLANS_ALIGNMENT_CONFIRM_2026_06_26.md` 与 `.kimi/EXECUTION_CHECKLIST_2026_06_26_CONFIRMED.md`。
+  - 1.97 发布日策略：若 `VecDeque::truncate_front` / `retain_back` 未进入 1.97.0，保留等效实现并标注“推迟至 1.98”。
+- **权威来源事实修正**：
+  - 全局扫描 async closures / Rust 2024 Edition / `&raw const` 术语；`content/emerging/async_closures.md`、`knowledge/06_ecosystem/02_edition_2024.md`、`concept/03_advanced/24_async_closures.md` 等关键文件已正确对齐 1.85.0 stable。
+  - 修正 `docs/04_rust_language_feature_comprehensive_inventory_2026.md` 中 "async closures 缺失" 为 "async closures 已覆盖（1.85.0+ stable）"。
+  - `&raw const` / `&raw mut` 术语已统一，无 `&const` 非官方写法残留。
+- **Rust 1.96.0 覆盖缺口回填**：
+  - 新建 `docs/06_toolchain/06_22_rust_1_96_features.md`（稳定特性综述）。
+  - 新建 `concept/07_future/rust_1_96_stabilized.md`（概念页）。
+  - 新建 `exercises/tests/l3_rust_196_alignment.rs`（10 个可运行测验，覆盖 `assert_matches!`、`core::range`、NonZero 范围迭代、`AssertUnwindSafe From`、`LazyCell`/`LazyLock From`、s390x inline asm、Cargo CVE、rustdoc lint）。
+  - 验证：`cargo test --test l3_rust_196_alignment` 10 passed。
+- **Workspace 版本号对齐**：
+  - 根 `Cargo.toml` `[workspace.package]` 补充 `version = "3.1.0"`，与 `CHANGELOG.md [3.1.0]` 对齐。
+- **C-class 长期维护规则落地**：
+  - `docs/` C-class 已实际清零（A=0 / B=0 / C=0）。
+  - 更新 `reports/C_CLASS_GOVERNANCE_PLAN_2026_06_09.md`：阶段 4 维护规则全部勾选完成。
+- **生态状态更新**：
+  - Sea-ORM 2.0 stable 仍未发布（最新 `2.0.0-rc.41`），代码侧保持现状，文档侧标注“实验性/跟踪中”。
+  - AFIDT / `dyn async Trait` 仍为实验性（tracking issue #133882），代码侧保留 `async_trait`。
 
 ### docs/ 目录 A/B/C 价值审计收尾（2026-06-25）
 

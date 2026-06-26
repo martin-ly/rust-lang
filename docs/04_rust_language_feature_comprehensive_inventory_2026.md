@@ -142,7 +142,6 @@
     - [B.2 1.95 语言特性（非 API）](#b2-195-语言特性非-api)
   - [附录 C：特性成熟度决策树](#附录-c特性成熟度决策树)
   - [附录 D：认知完备性检查表](#附录-d认知完备性检查表)
-  - *项目 MSRV: 1.96.0+ (Edition 2024)*
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -688,7 +687,7 @@ graph TD
 | if / loop / while | ✅ 完善 | 95% | — |
 | match / pattern | ✅ 完善 | 90% | — |
 | Closures | ✅ 完善 | 85% | — |
-| async fn | ✅ 完善 | 80% | async closures 缺失 |
+| async fn | ✅ 完善 | 80% | async closures 已覆盖（1.85.0+ stable） |
 | let chains | ⚠️ 部分 | 60% | 缺少深度示例 |
 | **if let guards** | 🔴 缺失 | 0% | **1.95.0 完全缺失** |
 
@@ -2617,6 +2616,7 @@ graph TD
 *生成日期: 2026-05-08*
 *对应 Rust 版本: 1.96.0 (stable) / 1.97.0 (beta) / 1.98.0 (nightly)*
 *项目 MSRV: 1.96.0+ (Edition 2024)*
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

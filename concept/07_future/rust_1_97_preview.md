@@ -340,7 +340,7 @@ RUSTFLAGS="-Zsanitizer=borrow" cargo +nightly test
 
 ### 4.1 Async fn in dyn Trait
 
-**状态**: 🧪 Nightly 实验性（截至 2026-06-25 仍未稳定，暂无稳定时间表）
+**状态**: 🧪 Nightly 实验性（截至 2026-06-26 仍未稳定，暂无稳定时间表）
 
 **核心突破**: 若未来稳定，可消除 `#[async_trait]` 在 `dyn Trait` 场景中的需求。但目前仍处于早期实验阶段，需继续依赖 `async_trait`。
 
@@ -385,7 +385,7 @@ async gen fn counter_stream(max: usize) -> impl Stream<Item = usize> {
 
 | API | 状态 | 说明 |
 |:---|:---|:---|
-| `VecDeque::truncate_front` | 🔄 FCP finished / waiting | 从头部截断双端队列（PR #151973 FCP 已完成，当前 `S-waiting-on-review` / `S-waiting-on-fcp`，已确定错过 1.97 cutoff，推迟至 1.98+） |
+| `VecDeque::truncate_front` | 🔄 FCP finished / waiting | 从头部截断双端队列（PR #151973 标签为 `finished-final-comment-period` / `disposition-merge` / `to-announce`，但截至 2026-06-26 仍列于 releases.rs Ongoing Stabilization PRs，**存在推迟至 1.98+ 风险**） |
 | `int_format_into` | 🟢 1.98 已确认 | 整数格式化到现有缓冲区（PR #152544，已合并至 master；因晚于 1.97 cutoff，将进入 1.98） |
 | `RefCell::try_map` | 🧪 Nightly | 尝试性 RefCell 映射 |
 | `String::into_raw_parts` | 🧪 Nightly | 分解 String 为原始组件 |

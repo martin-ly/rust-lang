@@ -56,7 +56,6 @@
   - [🚀 下一步行动](#-下一步行动)
     - [短期行动](#短期行动)
     - [长期行动](#长期行动)
-  - [这个项目展示了 Rust 泛型系统的强大能力，从基础概念到高级特性，为您的 Rust 学习之旅提供了坚实的基础。继续探索，继续学习，Rust 的世界等待您的发现](#这个项目展示了-rust-泛型系统的强大能力从基础概念到高级特性为您的-rust-学习之旅提供了坚实的基础继续探索继续学习rust-的世界等待您的发现)
 
 ## 🎯 演示目标
 
@@ -454,10 +453,16 @@ cargo run --bin c04_generic
 
 **🎯 恭喜！您已经成功体验了完整的 Rust Generics 项目！**
 
-这个项目展示了 Rust 泛型系统的强大能力，从基础概念到高级特性，为您的 Rust 学习之旅提供了坚实的基础。继续探索，继续学习，Rust 的世界等待您的发现
+这个项目展示了 Rust 泛型系统的强大能力，从基础概念到高级特性，为您的 Rust 学习之旅提供了坚实的基础。
+继续探索，继续学习，Rust 的世界等待您的发现
+
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**:
+>
+> [Rust Reference](https://doc.rust-lang.org/reference/),
+> [The Rust Programming Language](https://doc.rust-lang.org/book/),
+> [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 

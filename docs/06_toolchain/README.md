@@ -177,7 +177,29 @@ lto = true
 - 文档质量提升
 - 文档部署
 
-#### 4. Rust 1.91 vs 1.90 全面对比分析（对齐官方发布说明）
+#### 4. [Rust 1.96.0 稳定特性综述](./06_22_rust_1_96_features.md) 🆕
+
+> **来源: [Rust Blog](https://blog.rust-lang.org/)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+**涵盖内容**:
+
+- ✅ **`assert_matches!` / `debug_assert_matches!`** 宏稳定化
+- ✅ **`core::range` Copy-compatible range 类型**
+- ✅ **`NonZero` 整数范围迭代**
+- ✅ **`From<T>` 扩展：`AssertUnwindSafe` / `LazyCell` / `LazyLock`**
+- ✅ **s390x vector registers inline assembly**
+- ✅ **Cargo CVE-2026-5222 / 5223 修复**
+- ✅ **rustdoc 1.96 改进**
+
+**适用场景**:
+
+- 跟进 Rust 1.96.0 新特性
+- 升级项目到 1.96+
+- 学习 range 类型演进与测试断言改进
+
+#### 5. Rust 1.91 vs 1.90 全面对比分析（对齐官方发布说明）
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -189,7 +211,7 @@ lto = true
 - ✅ **新的 lint（1.91）**：`dangling_pointers_from_locals`（warn-by-default）
 - ✅ **验证建议**：工作区 `check/test/doc-test` 的最小验证命令集
 
-#### 5. [Rust 1.93 vs 1.92 全面对比分析](./06_05_rust_1_93_vs_1_92_comparison.md) 🆕
+#### 6. [Rust 1.93 vs 1.92 全面对比分析](./06_05_rust_1_93_vs_1_92_comparison.md) 🆕
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >

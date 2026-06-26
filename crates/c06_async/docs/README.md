@@ -4,7 +4,7 @@
 >
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
-> - **AFIDT（`async fn in dyn trait`）截至 2026-06-25 仍为 nightly 实验特性，暂无稳定时间表**。`dyn Trait` 场景请继续使用 **`async-trait`**；AFIT（`async fn in trait`）已在 Rust 1.75+ stable，可用于泛型/`impl Trait` 场景。
+> - **AFIDT（`async fn in dyn trait`）截至 2026-06-26 仍为 nightly 实验特性，暂无稳定时间表**。`dyn Trait` 场景请继续使用 **`async-trait`**；AFIT（`async fn in trait`）已在 Rust 1.75+ stable，可用于泛型/`impl Trait` 场景。
 
 ---
 

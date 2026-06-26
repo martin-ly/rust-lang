@@ -1,5 +1,5 @@
 use c05_threads::message_passing::{priority_channels as full, priority_channels_simple as simple};
-use criterion::{criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
 use std::hint::black_box;
 
 fn bench_simple(c: &mut Criterion) {

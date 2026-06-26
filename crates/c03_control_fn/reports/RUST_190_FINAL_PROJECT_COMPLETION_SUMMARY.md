@@ -39,7 +39,6 @@
     - [2. 教育成果](#2-教育成果)
     - [3. 研究成果](#3-研究成果)
   - [🎯 总结](#-总结)
-  - [*感谢所有为此项目贡献的开发者和研究者！*](#感谢所有为此项目贡献的开发者和研究者)
 
 ## 📋 项目概览
 
@@ -252,6 +251,7 @@ c03_control_fn/
 ---
 
 *感谢所有为此项目贡献的开发者和研究者！*
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

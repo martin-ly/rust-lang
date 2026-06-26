@@ -138,13 +138,13 @@
 ## 一、权威定义（Definition）
 
 ### 1.1 Wikipedia 对齐定义
->
 
+>
 > **[Wikipedia: Exception handling](https://en.wikipedia.org/wiki/Exception_handling)** Exception handling is the process of responding to the occurrence of exceptions – anomalous or exceptional conditions requiring special processing – during the execution of a program. Rust does not use exceptions; instead, it uses the algebraic data types `Option<T>` and `Result<T, E>` for error handling, with the `?` operator for ergonomic propagation.
 
 ### 1.2 TRPL 官方定义
->
 
+>
 > **[TRPL Ch9.0](https://doc.rust-lang.org/book/)** Rust groups errors into two major categories: recoverable and unrecoverable errors. For a recoverable error, we most likely want to report the problem to the user and retry the operation. Unrecoverable errors are always symptoms of bugs, and we want to immediately stop the program.
 
 > **[TRPL Ch9.2](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)** The `?` placed after a `Result` value is defined to work in almost the same way as the `match` expressions we defined to handle the `Result` values. If the value of the `Result` is an `Ok`, the value inside the `Ok` will get returned from this expression, and the program will continue. If the value is an `Err`, the `Err` will be returned from the whole function as if we had used the `return` keyword.
@@ -276,7 +276,8 @@ graph TD
 ### 4.2 定理：? 运算符 ⟹ 错误传播自动化
 >
 
-> **[TRPL Ch9.2](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html) · [Rust Reference: The ? operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator)** ? 运算符通过隐式调用 From::from 实现错误的自动转换与传播。 ✅ 已验证
+> **[TRPL Ch9.2](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html) ·
+> [Rust Reference: The ? operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator)** ? 运算符通过隐式调用 From::from 实现错误的自动转换与传播。 ✅ 已验证
 
 > **[RFC 243: The ? Operator](https://rust-lang.github.io/rfcs/0243-trait-based-exception-handling.html)** The `?` operator was introduced in RFC 243 to provide ergonomic error propagation, later extended by [RFC 3058](https://rust-lang.github.io/rfcs//3058-try-trait-v2.html) for the general `Try` trait. ✅ 已验证
 
@@ -296,7 +297,8 @@ graph TD
 
 ### 4.3 推论：panic ⟹ 不可恢复错误的显式边界
 
-> **[TRPL Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [Rust Reference: panic](https://doc.rust-lang.org/reference/)** panic 是 Safe Rust 中显式标记"程序进入不可能状态"的机制。 ✅ 已验证
+> **[TRPL Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) ·
+> [Rust Reference: panic](https://doc.rust-lang.org/reference/)** panic 是 Safe Rust 中显式标记"程序进入不可能状态"的机制。 ✅ 已验证
 
 > **[Wikipedia: Exception handling](https://en.wikipedia.org/wiki/Exception_handling)** Unlike Java/C++ exceptions, Rust's `panic!` is not a general recovery mechanism but an explicit boundary for unrecoverable bugs; recoverable errors use `Result<T, E>`. ✅ 已验证
 
@@ -316,7 +318,8 @@ graph TD
 
 ### 4.4 类型安全错误处理
 
-> **[Rust Reference: Enums](https://doc.rust-lang.org/reference/items/enumerations.html) · [TRPL Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html)** Result 的错误类型在编译期确定，match 穷尽性检查保证处理完备性。 ✅ 已验证
+> **[Rust Reference: Enums](https://doc.rust-lang.org/reference/items/enumerations.html) ·
+> [TRPL Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html)** Result 的错误类型在编译期确定，match 穷尽性检查保证处理完备性。 ✅ 已验证
 
 ```text
 前提: Result<T, E> 是泛型代数数据类型
@@ -330,7 +333,8 @@ graph TD
 
 ### 4.5 定理一致性矩阵
 
-> **[原创分析] · [TRPL Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [Rust Reference: The ? operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator)** 错误处理定理矩阵基于和类型、Monad bind 和 Rust 编译器检查。 💡 原创分析
+> **[原创分析] · [TRPL Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) ·
+> [Rust Reference: The ? operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator)** 错误处理定理矩阵基于和类型、Monad bind 和 Rust 编译器检查。 💡 原创分析
 
 | **定理/引理/推论** | **前提** | **结论** | **依赖的 L4 公理** | **被哪些定理依赖** | **失效条件** | **典型错误码** |
 |:---|:---|:---|:---|:---|:---|:---|
@@ -346,7 +350,6 @@ graph TD
 > **一致性检查**: Option 空值安全 ⟹ Result 显式传播 ⟹ ? 运算符合法性 ⟹ From 转换链，形成**从值到函数到控制流到类型统一**的递进链。panic 是独立维度（不可恢复边界），与 Result 形成互补。
 >
 > **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.1 "内存安全完备性"
-
 > **过渡到示例与反例**: 定理链提供了形式化保证，但工程实践中这些保证的边界在哪里？下一节通过正例展示错误处理的正确使用方式，通过反例揭示定理失效的精确条件——特别是 unwrap panic、? 类型不匹配、错误忽略等边界场景。
 
 ---
@@ -492,13 +495,16 @@ fn maybe_port() -> Option<u16> {
 }
 ```
 
-> **过渡到反命题分析**: 示例展示了错误处理的正确使用方式，但反例只是孤立场景。下一节通过系统化的反命题分析，将"错误处理定理何时成立/何时失效"形式化为可遍历的决策树，重点揭示 Result 的"强制不可忽略"边界与 ? 运算符的适用限制。
+> **过渡到反命题分析**:
+> 示例展示了错误处理的正确使用方式，但反例只是孤立场景。
+> 下一节通过系统化的反命题分析，将"错误处理定理何时成立/何时失效"形式化为可遍历的决策树，重点揭示 Result 的"强制不可忽略"边界与 ? 运算符的适用限制。
 
 ---
 
 ### 5.5 补充：异步错误处理与 `poll_fn` / `TryFuture` 模式
 
-> **[RFC 243](https://rust-lang.github.io/rfcs/0243-trait-based-exception-handling.html)** · **[futures-rs 文档]** · **[Rust Reference: Async](https://doc.rust-lang.org/reference/items/functions.html#async-functions)** 异步错误处理不是同步 `Result` 的简单平移——`Future` 的惰性求值、取消（cancellation）和 `Waker` 驱动模型引入了新的错误传播边界。✅
+> **[RFC 243](https://rust-lang.github.io/rfcs/0243-trait-based-exception-handling.html)** ·
+> **[futures-rs 文档]** · **[Rust Reference: Async](https://doc.rust-lang.org/reference/items/functions.html#async-functions)** 异步错误处理不是同步 `Result` 的简单平移——`Future` 的惰性求值、取消（cancellation）和 `Waker` 驱动模型引入了新的错误传播边界。✅
 
 #### `poll_fn`：将闭包提升为 Future
 
@@ -566,14 +572,25 @@ let result = select! {
 };
 ```
 
-> **关键洞察**: 异步错误处理有**两个维度**：1) `Result` 维度的业务错误（IO 失败、解析错误）；2) **取消维度**的生命周期错误（Future 被 `select!` 丢弃时资源未清理）。`Drop` 实现负责后者，`?` 运算符负责前者，但两者在 `unsafe` 或 FFI 边界处可能交互产生 UB。
-> **来源**: [Tokio 文档: Cancellation Safety] · [RFC 243: ? in main](https://rust-lang.github.io/rfcs/0243-trait-based-exception-handling.html) · [futures-rs: TryFutureExt]
+> **关键洞察**:
+>
+> 异步错误处理有**两个维度**：
+>
+> 1) `Result` 维度的业务错误（IO 失败、解析错误）；
+> 2) **取消维度**的生命周期错误（Future 被 `select!` 丢弃时资源未清理）。
+> `Drop` 实现负责后者，`?` 运算符负责前者，但两者在 `unsafe` 或 FFI 边界处可能交互产生 UB。
+> **来源**:
+> [Tokio 文档: Cancellation Safety] ·
+> [RFC 243: ? in main](https://rust-lang.github.io/rfcs/0243-trait-based-exception-handling.html) ·
+> [futures-rs: TryFutureExt]
 
 ---
 
 ## 六、反命题与边界分析（Counter-proposition & Boundary Analysis）
 
-> **[TRPL Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [RFC 243](https://rust-lang.github.io/rfcs/0243-trait-based-exception-handling.html)** 反命题分析基于和类型、Monad bind 和 Rust 编译器检查的形式化语义。 ✅ 已验证
+> **[TRPL Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) ·
+> [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) ·
+> [RFC 243](https://rust-lang.github.io/rfcs/0243-trait-based-exception-handling.html)** 反命题分析基于和类型、Monad bind 和 Rust 编译器检查的形式化语义。 ✅ 已验证
 
 **错误处理策略决策树（Mermaid graph TD）**:
 
@@ -606,9 +623,18 @@ graph TD
     style N fill:#f99
 ```
 
-> **认知功能**: 交互式策略选择器——将"当前函数应如何返回"这一工程决策转化为可遍历的条件判断流程。读者遇到"函数可能失败"的场景时，可沿决策节点逐层下行，最终到达对应 Rust 惯用法（Result/panic/Option）的叶子节点。核心洞察：颜色编码（绿=推荐，红=避免）将 Rust API Guidelines 的规范性建议转化为视觉即时判断。[来源: 💡 原创分析]
-
-> **思维表征说明**: 此 `graph TD` 决策树将错误处理的**策略选择**形式化为可遍历的判断流程——从「是否可能失败」开始，经过「失败类型」「调用方处理方式」等决策节点，最终到达叶子节点的具体 Rust 惯用法。与 ASCII 决策树相比，Mermaid 图的优势在于**可视化层次结构**和**颜色编码**（绿色=推荐，黄色=谨慎，红色=避免），帮助读者快速定位当前场景的正确策略。 来源: [TRPL §9](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
+> **认知功能**:
+>
+> 交互式策略选择器——将"当前函数应如何返回"这一工程决策转化为可遍历的条件判断流程。
+> 读者遇到"函数可能失败"的场景时，可沿决策节点逐层下行，最终到达对应 Rust 惯用法（Result/panic/Option）的叶子节点。
+> 核心洞察：颜色编码（绿=推荐，红=避免）将 Rust API Guidelines 的规范性建议转化为视觉即时判断。
+> [来源: 💡 原创分析]
+>
+> **思维表征说明**:
+>
+> 此 `graph TD` 决策树将错误处理的**策略选择**形式化为可遍历的判断流程——从「是否可能失败」开始，经过「失败类型」「调用方处理方式」等决策节点，最终到达叶子节点的具体 Rust 惯用法。
+> 与 ASCII 决策树相比，Mermaid 图的优势在于**可视化层次结构**和**颜色编码**（绿色=推荐，黄色=谨慎，红色=避免），帮助读者快速定位当前场景的正确策略。
+> 来源: [TRPL §9](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
 
 ### 6.1 反命题 1: "Result 消除了所有错误"
 
